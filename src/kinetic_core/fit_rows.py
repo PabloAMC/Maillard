@@ -35,7 +35,25 @@ LEDGER_CLASS_TO_METHOD = {"sida": "sida", "calibrated": "calibrated", "semi_quan
 UNITS = {"mmol_L", "umol_L", "ug_L", "ug_kg", "pH", "mmol_per_L_naoh",
          "percent_of_unheated"}   # a thiol surviving heating as % of the unheated control (Kumazawa 2003): a ratio
 ROW_FIELDS = ("pot", "species", "t_min", "value", "unit")
-POT_FIELDS = ("ledger_id", "t_c", "minutes", "initial_mmol_L", "condition_quote")
+#: Measured quantities that are not a single engine species: each needs an observation operator in the fit code
+#: (a sum, a titration, a diluted pH ...). Rows name an engine species key or one of these; nothing else (two readers
+#: once named one disulfide 'MFT-SS-FFT' and 'MFT_FFT_mixed_disulfide').
+OBSERVABLES = {
+    "pH": "the pH read at the temperature the pot states (ph_measured_at)",
+    "pH_6x_dilution_25C": "pH of a 6x dilution read at 25 C (Zhao 2017b)",
+    "FA+AA": "formic + acetic acid",
+    "TA_to_pH8.3": "titratable acid to pH 8.3",
+    "NaOH_uptake": "base added by a pH-stat",
+    "MFT_FFT_mixed_disulfide": "2-methyl-3-furyl 2-furfuryl disulfide (no engine species yet)",
+}
+
+
+def species_vocabulary() -> set:
+    """Engine species keys (trunk and sulfur lane) and the named observables."""
+    from . import species, species_sulfur
+    keys = {s.key for s in species.SPECIES} | {s.key for s in species_sulfur.SULFUR_SPECIES}
+    return keys | set(OBSERVABLES)
+POT_FIELDS = ("ledger_id", "t_c", "minutes", "initial_mmol_L", "label_ph", "buffer", "condition_quote")  # label_ph: the pH set before heating (null if none was set)
 
 
 @dataclass(frozen=True)
@@ -110,6 +128,7 @@ def load(name: str, require_verified: bool = True) -> Tuple[Dict[str, dict], Tup
         raise PermissionError(f"{name}: the table is {table.get('status', 'draft')!r}, not 'ready': its sources are still being "
                               f"read; set status: ready once every source is verified by two readers")
     ledger, verified, labs = _ledger(), _verified(), _laboratory_of()
+    vocabulary = species_vocabulary()
     pots: Dict[str, dict] = table.get("pots") or {}
     for pot_id, pot in pots.items():
         missing = [f for f in POT_FIELDS if f not in pot]
@@ -125,6 +144,9 @@ def load(name: str, require_verified: bool = True) -> Tuple[Dict[str, dict], Tup
         missing = [f for f in ROW_FIELDS if f not in raw]
         if missing:
             raise ValueError(f"{name}: a row lacks {missing}: {raw}")
+        if str(raw["species"]) not in vocabulary:
+            raise ValueError(f"{name}: species {raw['species']!r} is neither an engine species key nor a named observable "
+                             f"(fit_rows.OBSERVABLES)")
         if raw["unit"] not in UNITS:
             raise ValueError(f"{name}: unit {raw['unit']!r} not in {sorted(UNITS)}")
         pot = pots[raw["pot"]]

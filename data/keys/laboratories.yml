@@ -18,8 +18,8 @@ groups:
     strings: ["BTBU (Xie J)", "Beijing Technology and Business University (Xie)"]
     evidence: "Cao 2017, Zhao 2017b, Hou 2017, Zhao 2019: Jianchun Xie corresponding (xjchun@th.btbu.edu.cn); 'BTBU (Cao Y)' is a different group"
   jiangnan_zhang_x:
-    strings: ["Jiangnan (Zhang X / Cui H / Ho)", "Jiangnan (Zhang X. / Ho)"]
-    evidence: "Zhang Xiaoming's group at Jiangnan (Cui, Hayat, Zhai, Zhou, Deng, Kang, Feng); Ho (Rutgers) co-authors many"
+    strings: ["Jiangnan (Zhang X / Cui H / Ho)", "Jiangnan (Zhang X. / Ho)", "Zhejiang Gongshang / Jiangnan (Fu Y / Zhang X / Ho)"]
+    evidence: "Zhang Xiaoming's group at Jiangnan (Cui, Hayat, Zhai, Zhou, Deng, Feng); Ho (Rutgers) co-authors many. Zhai 2023 JAFC (Zhai Y, Cui, Hayat, Fu, Zhang X*, Ho*) belongs here"
   dfa_hofmann_schieberle:
     strings: ["DFA Garching (Hofmann / Schieberle)", "DFA Munich (Hofmann / Schieberle)"]
     evidence: "Deutsche Forschungsanstalt fuer Lebensmittelchemie (Garching, by Munich): Hofmann and Schieberle, one institute and method set"
@@ -29,3 +29,15 @@ groups:
   dalian_polytechnic_chen_d:
     strings: ["affiliation not given in dossier (Wang / Chen)"]
     evidence: "Wang 2026b p. 1: corresponding author D. Chen, School of Food Science and Technology, Dalian Polytechnic University; distinct from 'Dalian Polytechnic University (Qin, Huang)'"
+  ochanomizu_murata:
+    strings: ["Ochanomizu (Murata)"]
+    evidence: "Mikami 2017: Masatsune Murata corresponding, Ochanomizu University, Tokyo"
+  reading_mottram:
+    strings: ["Reading (Mottram / Parker / Elmore)", "Reading (Mottram)"]
+    evidence: "Desclaux 2006 (Mottram, University of Reading, School of Food Biosciences); Parker and Elmore in the same flavour group. 'Reading (Ames)' is a different group"
+  zhejiang_gongshang_zhai_fu:
+    strings: ["Zhejiang Gongshang (Fu Y / Zhai Y)"]
+    evidence: "Kang 2026: Fu Y* and Zhai Yun* (Zhang X's former student) at Zhejiang Gongshang; its own group. Its SI Figs. S3 / S4 reprint Jiangnan's Zhai 2023 Food Chem data, which must enter once, as Jiangnan's (CF-005 family), not as a second laboratory"
+  quest_givaudan:
+    strings: ["Givaudan / Quest (Weenen / Kerler)", "Givaudan / Quest (Weenen / de Roos)"]
+    evidence: "van Seeventer 2001 (Weenen, Winkel*, Kerler: Quest International, Naarden); de Roos's work from the same Quest flavour group"

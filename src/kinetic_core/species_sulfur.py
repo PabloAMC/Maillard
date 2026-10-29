@@ -459,9 +459,12 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "H2S": 34.08,
     "GSH": 307.32,    # C10H17N3O6S
     "CAMA": 253.27,   # C8H15NO6S, an isomer of TTCA (L-cysteine + D-pentose - H2O)
-    "DPO": 130.10,    # C5H8O4
-    "TDP": 130.10,
-    "DDP": 114.10,    # C5H6O3
+    # CORRECTED 2026-10-29 (sub-model 3 first reading, CF-059): 130.10 is C5H6O4, not the C5H8O4 the comment named
+    # (a pentose minus water: 132.12); 1,4-dideoxy-2,3-pentodiulose is CH3-CO-CO-CH2-CH2OH, C5H8O3 (116.12), formed
+    # from 1-deoxypentosone with cysteine as the reductant (r_dpo_ddp), not the C5H6O3 the old comment named.
+    "DPO": 132.12,    # C5H8O4
+    "TDP": 132.12,    # C5H8O4
+    "DDP": 116.12,    # C5H8O3
     "NF": 114.10,     # C5H6O3
     "PTR": 114.10,
     "FUR": 96.08,     # C5H4O2

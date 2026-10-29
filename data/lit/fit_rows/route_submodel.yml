@@ -1,0 +1,715 @@
+# KEYED FIT TABLE -- sub-model 2, the cysteine-pentose route (results/validation/kinetic_core_route_submodel_prereg.md).
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS; every row an sd as
+# printed or a read_error for a digitised point). Laboratory and quantification class come from the ledger entry.
+# First reader: agent-sm2-reader1-2026-10-29, against the PDFs (data/articles/), not the dossiers; second reader
+# pending (data/lit/source_verification/route_submodel.yml). Rows also carry their pot's ledger_id (redundant, for grep).
+# Conventions:
+#   * initial_mmol_L uses engine species keys (src/kinetic_core/species_sulfur.py): TTCA, CAMA (cysteine Amadori
+#     compound of the pentose), Cys, PENT (xylose), DPO (1-deoxypentosone = 1-DX), TDP (3-deoxypentosone = 3-DX).
+#   * label_ph: the pH the paper sets; ph_measured_at: where and when the paper's electrode read it.
+#   * sd: the printed SD (a drawn error bar read from the figure's vector paths is a printed SD); read_error: the
+#     digitisation error in dex (log10(e) x absolute / value), its absolute value in read_error_basis.
+#   * `printed` records the value as the source prints it, before unit conversion.
+#   * A pot carries ONE ledger id; one heated system whose species sit in two ledger entries (two figures) appears as
+#     two pot ids with identical conditions (named *_fig4 / *_fig5 etc.).
+#   * t = 0 points that are the charge (or a plotted 0) are the pot's initial state, not rows (a measured 0 has no
+#     log residual).
+status: draft   # first reader done for the sources below; second reader pending (fit_rows.load refuses a draft)
+pots:
+  cao2017_blank_fig5:
+    {ledger_id: cao2017_fig5_ttca_cama_glyarp, t_c: 90, minutes: 300, initial_mmol_L: {Cys: 400.0, PENT: 400.0},
+     buffer: "sodium phosphate 0.20 M (NaH2PO4 + NaOH; counter-ion by inference from the reagent list); pH not held",
+     label_ph: 5.5, ph_measured_at: "after heating and tap-water cooling (room temperature), PHSJ-5 meter; blank 5.49 at 0 h -> 4.15 at 5 h (Fig. 4c)",
+     condition_quote: "The amounts of cysteine and xylose used in the reaction models were both 2 mmol in 5 mL of phosphate buffer (0.2 M, pH 5.5). ... The vials were sealed and heated at 90 °C while stirring for 0.5, 1, 2, 3, 4, or 5 h."}
+  cao2017_blank_fig4:
+    {ledger_id: cao2017_fig4ab_cys_xyl, t_c: 90, minutes: 300, initial_mmol_L: {Cys: 400.0, PENT: 400.0},
+     buffer: "sodium phosphate 0.20 M (NaH2PO4 + NaOH; counter-ion by inference from the reagent list); pH not held",
+     label_ph: 5.5, ph_measured_at: "after heating and tap-water cooling (room temperature), PHSJ-5 meter; blank 5.49 at 0 h -> 4.15 at 5 h (Fig. 4c)",
+     same_system_as: cao2017_blank_fig5,
+     condition_quote: "The amounts of cysteine and xylose used in the reaction models were both 2 mmol in 5 mL of phosphate buffer (0.2 M, pH 5.5). ... The vials were sealed and heated at 90 °C while stirring for 0.5, 1, 2, 3, 4, or 5 h."}
+  zhai2019_70c:
+    {ledger_id: zhai2019_fig3a_ttca_cama, t_c: 70, minutes: 160, initial_mmol_L: {TTCA: 14.5, Cys: 68.1, PENT: 150.7},
+     charged_mmol_L: {Cys: 82.6, PENT: 165.2}, initial_basis: "the plotted t = 0 state: TTCA 14.5 mmol/L formed at room temperature during mixing and pH setting; Cys and PENT = charge - TTCA (34.8 mg/mL at Xyl:Cys 2:1)",
+     buffer: "none (deionized water, 80 mL); pH set with 6 M NaOH", label_ph: 7.4,
+     ph_measured_at: "set at room temperature before heating; never measured during or after heating",
+     vessel: "not stated (110 and 130 C imply a sealed vessel; headspace unknown)",
+     condition_quote: "The reaction system of Xyl and Cys was mixed in a 2:1 molar ratio and dissolved in 80 mL of deionized water. The concentration of final solution was 34.8 mg/mL. The solution pH was adjusted to pH 7.4 with NaOH (6 mol/L). ... The solution was heated at temperatures of 70 °C, 90 °C, 110 °C, and 130 °C for 0, 20, 40, 60, 80, 120, 140, and 160 min. The mixture was immediately cooled in an external ice bath"}
+  zhai2019_90c:
+    {ledger_id: zhai2019_fig3a_ttca_cama, t_c: 90, minutes: 160, initial_mmol_L: {TTCA: 14.5, Cys: 68.1, PENT: 150.7},
+     charged_mmol_L: {Cys: 82.6, PENT: 165.2}, initial_basis: "the plotted t = 0 state: TTCA 14.5 mmol/L formed at room temperature during mixing and pH setting; Cys and PENT = charge - TTCA (34.8 mg/mL at Xyl:Cys 2:1)",
+     buffer: "none (deionized water, 80 mL); pH set with 6 M NaOH", label_ph: 7.4,
+     ph_measured_at: "set at room temperature before heating; never measured during or after heating",
+     vessel: "not stated (110 and 130 C imply a sealed vessel; headspace unknown)",
+     condition_quote: "The reaction system of Xyl and Cys was mixed in a 2:1 molar ratio and dissolved in 80 mL of deionized water. The concentration of final solution was 34.8 mg/mL. The solution pH was adjusted to pH 7.4 with NaOH (6 mol/L). ... The solution was heated at temperatures of 70 °C, 90 °C, 110 °C, and 130 °C for 0, 20, 40, 60, 80, 120, 140, and 160 min. The mixture was immediately cooled in an external ice bath"}
+  zhai2019_110c:
+    {ledger_id: zhai2019_fig3a_ttca_cama, t_c: 110, minutes: 160, initial_mmol_L: {TTCA: 14.5, Cys: 68.1, PENT: 150.7},
+     charged_mmol_L: {Cys: 82.6, PENT: 165.2}, initial_basis: "the plotted t = 0 state: TTCA 14.5 mmol/L formed at room temperature during mixing and pH setting; Cys and PENT = charge - TTCA (34.8 mg/mL at Xyl:Cys 2:1)",
+     buffer: "none (deionized water, 80 mL); pH set with 6 M NaOH", label_ph: 7.4,
+     ph_measured_at: "set at room temperature before heating; never measured during or after heating",
+     vessel: "not stated (110 and 130 C imply a sealed vessel; headspace unknown)",
+     condition_quote: "The reaction system of Xyl and Cys was mixed in a 2:1 molar ratio and dissolved in 80 mL of deionized water. The concentration of final solution was 34.8 mg/mL. The solution pH was adjusted to pH 7.4 with NaOH (6 mol/L). ... The solution was heated at temperatures of 70 °C, 90 °C, 110 °C, and 130 °C for 0, 20, 40, 60, 80, 120, 140, and 160 min. The mixture was immediately cooled in an external ice bath"}
+  zhai2019_130c:
+    {ledger_id: zhai2019_fig3a_ttca_cama, t_c: 130, minutes: 160, initial_mmol_L: {TTCA: 14.5, Cys: 68.1, PENT: 150.7},
+     charged_mmol_L: {Cys: 82.6, PENT: 165.2}, initial_basis: "the plotted t = 0 state: TTCA 14.5 mmol/L formed at room temperature during mixing and pH setting; Cys and PENT = charge - TTCA (34.8 mg/mL at Xyl:Cys 2:1)",
+     buffer: "none (deionized water, 80 mL); pH set with 6 M NaOH", label_ph: 7.4,
+     ph_measured_at: "set at room temperature before heating; never measured during or after heating",
+     vessel: "not stated (110 and 130 C imply a sealed vessel; headspace unknown)",
+     condition_quote: "The reaction system of Xyl and Cys was mixed in a 2:1 molar ratio and dissolved in 80 mL of deionized water. The concentration of final solution was 34.8 mg/mL. The solution pH was adjusted to pH 7.4 with NaOH (6 mol/L). ... The solution was heated at temperatures of 70 °C, 90 °C, 110 °C, and 130 °C for 0, 20, 40, 60, 80, 120, 140, and 160 min. The mixture was immediately cooled in an external ice bath"}
+  zhai2019_ttca5_120c:
+    {ledger_id: zhai2019_fig3b_dicarbonyls_ttca, t_c: 120, minutes: 60, initial_mmol_L: {TTCA: 5.0},
+     buffer: "none (deionized water, 10 mL); pH set with 6 M NaOH", label_ph: 7.4,
+     ph_measured_at: "set at room temperature before heating; never measured during or after heating",
+     vessel: "not stated; thermostatic oil bath",
+     condition_quote: "reactants were mixed in 10 mL of deionized water in a molar ratio of Cys to TTCA of 1:1 (Cys concentration was 5 mmol/L). The solutions were adjusted to pH 7.4 with NaOH (6 mol/L) and placed at room temperature for 10 min. Then the solutions were heated in a thermostatic oil bath at 120 °C for different times (0, 10, 20, 30, 40, 50, 60 min). ... The samples without Cys addition were also prepared as a control group."}
+  zhai2019_ttca5_cys5_120c:
+    {ledger_id: zhai2019_fig3b_dicarbonyls_ttca, t_c: 120, minutes: 60, initial_mmol_L: {TTCA: 5.0, Cys: 5.0},
+     buffer: "none (deionized water, 10 mL); pH set with 6 M NaOH", label_ph: 7.4,
+     ph_measured_at: "set at room temperature before heating (then 10 min at room temperature); never measured during or after heating",
+     vessel: "not stated; thermostatic oil bath",
+     condition_quote: "reactants were mixed in 10 mL of deionized water in a molar ratio of Cys to TTCA of 1:1 (Cys concentration was 5 mmol/L). The solutions were adjusted to pH 7.4 with NaOH (6 mol/L) and placed at room temperature for 10 min. Then the solutions were heated in a thermostatic oil bath at 120 °C for different times (0, 10, 20, 30, 40, 50, 60 min)."}
+  zhai2021_ttca_ph55_100c_fig4b:
+    {ledger_id: zhai2021_fig4b_ttca_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 5.5,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph55_100c_fig4b:
+    {ledger_id: zhai2021_fig4b_ttca_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 5.5,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph6_100c_fig4b:
+    {ledger_id: zhai2021_fig4b_ttca_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 6.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph6_100c_fig4b:
+    {ledger_id: zhai2021_fig4b_ttca_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 6.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph7_100c_fig4b:
+    {ledger_id: zhai2021_fig4b_ttca_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph7_100c_fig4b:
+    {ledger_id: zhai2021_fig4b_ttca_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph8_100c_fig4b:
+    {ledger_id: zhai2021_fig4b_ttca_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 8.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph8_100c_fig4b:
+    {ledger_id: zhai2021_fig4b_ttca_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 8.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph55_100c_fig5:
+    {ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 5.5,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph55_100c_fig5:
+    {ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 5.5,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph6_100c_fig5:
+    {ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 6.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph6_100c_fig5:
+    {ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 6.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph7_100c_fig5:
+    {ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph7_100c_fig5:
+    {ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph8_100c_fig5:
+    {ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 8.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph8_100c_fig5:
+    {ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 8.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph55_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 5.5,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph55_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 5.5,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph6_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 6.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph6_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 6.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph7_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph7_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttca_ph8_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 8.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_ttcaxyl_ph8_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {TTCA: 10.0, PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 8.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath"}
+  zhai2021_xyl_ph55_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 5.5,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Figure 6. ... depletion rate of Xyl (b) in the model reaction system of TTCA−Xyl and Xyl control systems under the heat treatment of 100 °C and pH values of 5.5, 6, 7, and 8, respectively."}
+  zhai2021_xyl_ph6_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 6.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Figure 6. ... depletion rate of Xyl (b) in the model reaction system of TTCA−Xyl and Xyl control systems under the heat treatment of 100 °C and pH values of 5.5, 6, 7, and 8, respectively."}
+  zhai2021_xyl_ph7_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Figure 6. ... depletion rate of Xyl (b) in the model reaction system of TTCA−Xyl and Xyl control systems under the heat treatment of 100 °C and pH values of 5.5, 6, 7, and 8, respectively."}
+  zhai2021_xyl_ph8_100c_fig6:
+    {ledger_id: zhai2021_fig6_cys_xyl, t_c: 100, minutes: 120, initial_mmol_L: {PENT: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 8.0,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "Figure 6. ... depletion rate of Xyl (b) in the model reaction system of TTCA−Xyl and Xyl control systems under the heat treatment of 100 °C and pH values of 5.5, 6, 7, and 8, respectively."}
+  zhai2021_ttca_ph55_120c_fig3a:
+    {ledger_id: zhai2021_fig3a_ttca_tladder, t_c: 120, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 5.5,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "The aqueous solution of TTCA (pH 5.5, 10 mmol/L) without the adjustment of pH was heated under different temperatures (100, 120, and 140 °C)"}
+  zhai2021_ttca_ph55_140c_fig3a:
+    {ledger_id: zhai2021_fig3a_ttca_tladder, t_c: 140, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 2 M NaOH or HCl (pH 5.5 = TTCA's natural pH, not adjusted)", label_ph: 5.5,
+     ph_measured_at: "set at room temperature before heating; not measured during or after heating",
+     vessel: "not stated; thermostatic oil bath, ice quench",
+     condition_quote: "The aqueous solution of TTCA (pH 5.5, 10 mmol/L) without the adjustment of pH was heated under different temperatures (100, 120, and 140 °C)"}
+  kang2026_s3_ttca_120c:
+    {ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, t_c: 120, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 6 and 2 M NaOH", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating (+-0.01); not measured during or after heating",
+     vessel: "pressure-resistant bottles, magnetic stirrer (Zhai 2023 Food Chem); Kang: pressure-resistant glass vessels in an oil bath",
+     condition_quote: "Zhai 2023 Food Chem 2.3 (the original of Kang SI Fig. S3): Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 °C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer"}
+  kang2026_s3_ttca_140c:
+    {ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, t_c: 140, minutes: 120, initial_mmol_L: {TTCA: 10.0},
+     buffer: "none (water); pH set with 6 and 2 M NaOH", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating (+-0.01); not measured during or after heating",
+     vessel: "pressure-resistant bottles, magnetic stirrer (Zhai 2023 Food Chem); Kang: pressure-resistant glass vessels in an oil bath",
+     condition_quote: "Zhai 2023 Food Chem 2.3 (the original of Kang SI Fig. S3): Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 °C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer"}
+  kang2026_s4_cys_100c:
+    {ledger_id: kang2026_si_fig_s4_free_cys_depletion, t_c: 100, minutes: 120, initial_mmol_L: {Cys: 10.0},
+     buffer: "none (water); pH set with 6 M NaOH", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating (+-0.01); not measured during or after heating",
+     vessel: "not stated for this system (Zhai 2023 Food Chem's TTCA systems: pressure-resistant bottles, magnetic stirrer)",
+     condition_quote: "Kang SI Fig. S4: Depletion of Cys compound at an initial pH of 7 under different temperatures (100, 120 and 140 ℃). = Zhai 2023 Food Chem 2.4: Aqueous solution of Cys reaction system (10 mmol/L) was prepared and adjusted to pH 7 ± 0.01 with NaOH solution (6 mol/L) prior to the heating treatment at a temperatures of 100, 120, and 140 °C for different times (20, 40, 60, 80, 100, 120 min)."}
+  kang2026_s4_cys_120c:
+    {ledger_id: kang2026_si_fig_s4_free_cys_depletion, t_c: 120, minutes: 120, initial_mmol_L: {Cys: 10.0},
+     buffer: "none (water); pH set with 6 M NaOH", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating (+-0.01); not measured during or after heating",
+     vessel: "not stated for this system (Zhai 2023 Food Chem's TTCA systems: pressure-resistant bottles, magnetic stirrer)",
+     condition_quote: "Kang SI Fig. S4: Depletion of Cys compound at an initial pH of 7 under different temperatures (100, 120 and 140 ℃). = Zhai 2023 Food Chem 2.4: Aqueous solution of Cys reaction system (10 mmol/L) was prepared and adjusted to pH 7 ± 0.01 with NaOH solution (6 mol/L) prior to the heating treatment at a temperatures of 100, 120, and 140 °C for different times (20, 40, 60, 80, 100, 120 min)."}
+  kang2026_s4_cys_140c:
+    {ledger_id: kang2026_si_fig_s4_free_cys_depletion, t_c: 140, minutes: 120, initial_mmol_L: {Cys: 10.0},
+     buffer: "none (water); pH set with 6 M NaOH", label_ph: 7.0,
+     ph_measured_at: "set at room temperature before heating (+-0.01); not measured during or after heating",
+     vessel: "not stated for this system (Zhai 2023 Food Chem's TTCA systems: pressure-resistant bottles, magnetic stirrer)",
+     condition_quote: "Kang SI Fig. S4: Depletion of Cys compound at an initial pH of 7 under different temperatures (100, 120 and 140 ℃). = Zhai 2023 Food Chem 2.4: Aqueous solution of Cys reaction system (10 mmol/L) was prepared and adjusted to pH 7 ± 0.01 with NaOH solution (6 mol/L) prior to the heating treatment at a temperatures of 100, 120, and 140 °C for different times (20, 40, 60, 80, 100, 120 min)."}
+  zhao2017b_blank:
+    {ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, t_c: 90, minutes: 300, initial_mmol_L: {Cys: 400.0, PENT: 400.0},
+     buffer: "sodium phosphate 0.20 M (NaOH added dropwise to NaH2PO4), pH 5.5; pH not held", label_ph: 5.5,
+     ph_measured_at: "after heating and running-water cooling, on a 6-fold dilution (0.5 -> 3 mL) at 25 C: blank 4.51 at 0.5 h -> 4.10 at 5 h (Fig. 2c; not the pot's pH)",
+     vessel: "15 mL pressure-resistant sealed tube, 5 mL liquid (~10 mL headspace, air), Poly-BLOCK reactor; stirring not stated",
+     condition_quote: "In a 15 mL pressure-resistant sealed tube, add 5 mL buffer (NaOH added dropwise to NaH2PO4 solution, 0.2 mol/L, pH 5.5), L-cysteine 2 mmol (0.242 g), D-(+)-xylose 2 mmol (0.300 g) ... react at 90 °C for 0.5, 1, 2, 3, 4 and 5 h (translated from the Chinese; 同时做空白实验 = a blank experiment was run at the same time)"}
+  zhang2025b_blank:
+    {ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, t_c: 120, minutes: 50, initial_mmol_L: {Cys: 40.0, PENT: 40.0},
+     buffer: "phosphate 0.20 M, pH 6.5 (counter-ion not stated); pH not held", label_ph: 6.5,
+     ph_measured_at: "not measured (buffer label only)",
+     vessel: "15 mL pressure glass vial, 5 mL liquid, Poly-Block 4; no come-up time stated; ice-water quench",
+     condition_quote: "In a 15-mL pressure glass vial, 0.2 mmol of cysteine, 0.2 mmol of xylose, lysine at 0, 1, 2, 4, 6, 8, or 16 times the amount of cysteine, and 5 mL of phosphate buffer (0.2 mol/L, pH 6.5) were added. The vials were heated at 120 °C for a total of 50 mins on a Parallel Synthesis Poly-Block 4 system"}
+rows:
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: TTCA, t_min: 30, value: 355.5, unit: mmol_L, sd: 37.5, read_error: 0.006, read_error_basis: "+-5 mmol/L", printed: "0.3555 mol/L (vector), SD bar 0.0375"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: TTCA, t_min: 60, value: 337.1, unit: mmol_L, sd: 17.8, read_error: 0.006, read_error_basis: "+-5 mmol/L", printed: "0.3371 mol/L, SD bar 0.0178"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: TTCA, t_min: 120, value: 289, unit: mmol_L, read_error: 0.008, read_error_basis: "+-5 mmol/L", printed: "0.2890 mol/L, no SD bar visible"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: TTCA, t_min: 180, value: 266.9, unit: mmol_L, read_error: 0.008, read_error_basis: "+-5 mmol/L", printed: "0.2669 mol/L, no SD bar visible"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: TTCA, t_min: 240, value: 252.9, unit: mmol_L, read_error: 0.009, read_error_basis: "+-5 mmol/L", printed: "0.2529 mol/L, no SD bar visible"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: TTCA, t_min: 300, value: 236, unit: mmol_L, read_error: 0.009, read_error_basis: "+-5 mmol/L", printed: "0.2360 mol/L, no SD bar visible"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: CAMA, t_min: 30, value: 4.6, unit: mmol_L, sd: 0.3, read_error: 0.472, read_error_basis: "+-5 mmol/L", printed: "0.0046 mol/L, SD bar 0.0003 (below the lowest standard 0.05 mol/L)"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: CAMA, t_min: 60, value: 62.1, unit: mmol_L, sd: 5.3, read_error: 0.035, read_error_basis: "+-5 mmol/L", printed: "0.0621 mol/L, SD bar 0.0053"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: CAMA, t_min: 120, value: 88.6, unit: mmol_L, sd: 3.9, read_error: 0.025, read_error_basis: "+-5 mmol/L", printed: "0.0886 mol/L, SD bar 0.0039"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: CAMA, t_min: 180, value: 105.1, unit: mmol_L, sd: 2, read_error: 0.021, read_error_basis: "+-5 mmol/L", printed: "0.1051 mol/L, SD bar 0.0020"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: CAMA, t_min: 240, value: 108.6, unit: mmol_L, sd: 2.1, read_error: 0.020, read_error_basis: "+-5 mmol/L", printed: "0.1086 mol/L, SD bar 0.0021"}
+  - {pot: cao2017_blank_fig5, ledger_id: cao2017_fig5_ttca_cama_glyarp, species: CAMA, t_min: 300, value: 132.5, unit: mmol_L, sd: 4.2, read_error: 0.016, read_error_basis: "+-5 mmol/L", printed: "0.1325 mol/L, SD bar 0.0042"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: Cys, t_min: 30, value: 75.2, unit: mmol_L, sd: 5.5, read_error: 0.023, read_error_basis: "+-4 mmol/L", printed: "0.0752 mol/L, SD bar 0.0055"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: Cys, t_min: 60, value: 67.4, unit: mmol_L, sd: 1.7, read_error: 0.026, read_error_basis: "+-4 mmol/L", printed: "0.0674 mol/L, SD bar 0.0017"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: Cys, t_min: 120, value: 66.2, unit: mmol_L, sd: 1.7, read_error: 0.026, read_error_basis: "+-4 mmol/L", printed: "0.0662 mol/L, SD bar 0.0017"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: Cys, t_min: 180, value: 63.9, unit: mmol_L, sd: 1.6, read_error: 0.027, read_error_basis: "+-4 mmol/L", printed: "0.0639 mol/L, SD bar 0.0016"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: Cys, t_min: 240, value: 61.9, unit: mmol_L, sd: 1.6, read_error: 0.028, read_error_basis: "+-4 mmol/L", printed: "0.0619 mol/L, SD bar 0.0016"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: Cys, t_min: 300, value: 56.3, unit: mmol_L, sd: 3.2, read_error: 0.031, read_error_basis: "+-4 mmol/L", printed: "0.0563 mol/L, SD bar 0.0032"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: PENT, t_min: 30, value: 78.5, unit: mmol_L, sd: 16.5, read_error: 0.022, read_error_basis: "+-4 mmol/L", printed: "0.0785 mol/L xylose, SD bar 0.0165"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: PENT, t_min: 60, value: 74.9, unit: mmol_L, sd: 1.7, read_error: 0.023, read_error_basis: "+-4 mmol/L", printed: "0.0749 mol/L, SD bar 0.0017"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: PENT, t_min: 120, value: 72.2, unit: mmol_L, sd: 1.6, read_error: 0.024, read_error_basis: "+-4 mmol/L", printed: "0.0722 mol/L, SD bar 0.0016"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: PENT, t_min: 180, value: 70.3, unit: mmol_L, sd: 1.6, read_error: 0.025, read_error_basis: "+-4 mmol/L", printed: "0.0703 mol/L, SD bar 0.0016"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: PENT, t_min: 240, value: 69.4, unit: mmol_L, sd: 1.6, read_error: 0.025, read_error_basis: "+-4 mmol/L", printed: "0.0694 mol/L, SD bar 0.0016"}
+  - {pot: cao2017_blank_fig4, ledger_id: cao2017_fig4ab_cys_xyl, species: PENT, t_min: 300, value: 69, unit: mmol_L, sd: 21.5, read_error: 0.025, read_error_basis: "+-4 mmol/L", printed: "0.0690 mol/L, SD bar 0.0215"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 20, value: 41.1, unit: mmol_L, read_error: 0.0074, read_error_basis: "+-0.7 mmol/L", printed: "41.1 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 40, value: 50.5, unit: mmol_L, read_error: 0.00602, read_error_basis: "+-0.7 mmol/L", printed: "50.5 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 60, value: 55.6, unit: mmol_L, read_error: 0.00547, read_error_basis: "+-0.7 mmol/L", printed: "55.6 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 80, value: 54, unit: mmol_L, read_error: 0.00563, read_error_basis: "+-0.7 mmol/L", printed: "54.0 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 100, value: 54.1, unit: mmol_L, read_error: 0.00562, read_error_basis: "+-0.7 mmol/L", printed: "54.1 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 120, value: 53.1, unit: mmol_L, read_error: 0.00573, read_error_basis: "+-0.7 mmol/L", printed: "53.1 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 140, value: 54, unit: mmol_L, read_error: 0.00563, read_error_basis: "+-0.7 mmol/L", printed: "54.0 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 160, value: 54.3, unit: mmol_L, read_error: 0.0056, read_error_basis: "+-0.7 mmol/L", printed: "54.3 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 20, value: 48.3, unit: mmol_L, read_error: 0.00629, read_error_basis: "+-0.7 mmol/L", printed: "48.3 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 40, value: 59.2, unit: mmol_L, read_error: 0.00514, read_error_basis: "+-0.7 mmol/L", printed: "59.2 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 60, value: 57.7, unit: mmol_L, read_error: 0.00527, read_error_basis: "+-0.7 mmol/L", printed: "57.7 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 80, value: 59, unit: mmol_L, read_error: 0.00515, read_error_basis: "+-0.7 mmol/L", printed: "59.0 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 100, value: 58.3, unit: mmol_L, read_error: 0.00521, read_error_basis: "+-0.7 mmol/L", printed: "58.3 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 120, value: 59.1, unit: mmol_L, read_error: 0.00514, read_error_basis: "+-0.7 mmol/L", printed: "59.1 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 140, value: 61.9, unit: mmol_L, read_error: 0.00491, read_error_basis: "+-0.7 mmol/L", printed: "61.9 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 160, value: 63.2, unit: mmol_L, read_error: 0.00481, read_error_basis: "+-0.7 mmol/L", printed: "63.2 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 20, value: 58.5, unit: mmol_L, read_error: 0.0052, read_error_basis: "+-0.7 mmol/L", printed: "58.5 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 40, value: 55.9, unit: mmol_L, read_error: 0.00544, read_error_basis: "+-0.7 mmol/L", printed: "55.9 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 60, value: 53.9, unit: mmol_L, read_error: 0.00564, read_error_basis: "+-0.7 mmol/L", printed: "53.9 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 80, value: 52, unit: mmol_L, read_error: 0.00585, read_error_basis: "+-0.7 mmol/L", printed: "52.0 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 100, value: 52.8, unit: mmol_L, read_error: 0.00576, read_error_basis: "+-0.7 mmol/L", printed: "52.8 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 120, value: 48.7, unit: mmol_L, read_error: 0.00624, read_error_basis: "+-0.7 mmol/L", printed: "48.7 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 140, value: 42.6, unit: mmol_L, read_error: 0.00714, read_error_basis: "+-0.7 mmol/L", printed: "42.6 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 160, value: 39, unit: mmol_L, read_error: 0.0078, read_error_basis: "+-0.7 mmol/L", printed: "39.0 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 20, value: 45.7, unit: mmol_L, read_error: 0.00665, read_error_basis: "+-0.7 mmol/L", printed: "45.7 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 40, value: 42.5, unit: mmol_L, read_error: 0.00715, read_error_basis: "+-0.7 mmol/L", printed: "42.5 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 60, value: 34.5, unit: mmol_L, read_error: 0.00881, read_error_basis: "+-0.7 mmol/L", printed: "34.5 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 80, value: 32.2, unit: mmol_L, read_error: 0.00944, read_error_basis: "+-0.7 mmol/L", printed: "32.2 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 100, value: 21.2, unit: mmol_L, read_error: 0.0143, read_error_basis: "+-0.7 mmol/L", printed: "21.2 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 120, value: 15.8, unit: mmol_L, read_error: 0.0192, read_error_basis: "+-0.7 mmol/L", printed: "15.8 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 140, value: 11.3, unit: mmol_L, read_error: 0.0269, read_error_basis: "+-0.7 mmol/L", printed: "11.3 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: TTCA, t_min: 160, value: 6.9, unit: mmol_L, read_error: 0.0441, read_error_basis: "+-0.7 mmol/L", printed: "6.9 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 20, value: 0.2, unit: mmol_L, read_error: 0.651, read_error_basis: "+-0.3 mmol/L", printed: "ARP 0.2 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 40, value: 0.5, unit: mmol_L, read_error: 0.261, read_error_basis: "+-0.3 mmol/L", printed: "ARP 0.5 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 60, value: 1, unit: mmol_L, read_error: 0.13, read_error_basis: "+-0.3 mmol/L", printed: "ARP 1.0 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 80, value: 1.3, unit: mmol_L, read_error: 0.1, read_error_basis: "+-0.3 mmol/L", printed: "ARP 1.3 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 100, value: 1.6, unit: mmol_L, read_error: 0.0814, read_error_basis: "+-0.3 mmol/L", printed: "ARP 1.6 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 120, value: 1.9, unit: mmol_L, read_error: 0.0686, read_error_basis: "+-0.3 mmol/L", printed: "ARP 1.9 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 140, value: 2.1, unit: mmol_L, read_error: 0.062, read_error_basis: "+-0.3 mmol/L", printed: "ARP 2.1 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_70c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 160, value: 2.8, unit: mmol_L, read_error: 0.0465, read_error_basis: "+-0.3 mmol/L", printed: "ARP 2.8 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 20, value: 0.9, unit: mmol_L, read_error: 0.145, read_error_basis: "+-0.3 mmol/L", printed: "ARP 0.9 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 40, value: 1.4, unit: mmol_L, read_error: 0.0931, read_error_basis: "+-0.3 mmol/L", printed: "ARP 1.4 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 60, value: 1.7, unit: mmol_L, read_error: 0.0766, read_error_basis: "+-0.3 mmol/L", printed: "ARP 1.7 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 80, value: 1.9, unit: mmol_L, read_error: 0.0686, read_error_basis: "+-0.3 mmol/L", printed: "ARP 1.9 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 100, value: 2.6, unit: mmol_L, read_error: 0.0501, read_error_basis: "+-0.3 mmol/L", printed: "ARP 2.6 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 120, value: 3, unit: mmol_L, read_error: 0.0434, read_error_basis: "+-0.3 mmol/L", printed: "ARP 3.0 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 140, value: 3.4, unit: mmol_L, read_error: 0.0383, read_error_basis: "+-0.3 mmol/L", printed: "ARP 3.4 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_90c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 160, value: 3.7, unit: mmol_L, read_error: 0.0352, read_error_basis: "+-0.3 mmol/L", printed: "ARP 3.7 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 20, value: 2.3, unit: mmol_L, read_error: 0.0566, read_error_basis: "+-0.3 mmol/L", printed: "ARP 2.3 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 40, value: 3.7, unit: mmol_L, read_error: 0.0352, read_error_basis: "+-0.3 mmol/L", printed: "ARP 3.7 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 60, value: 5.6, unit: mmol_L, read_error: 0.0233, read_error_basis: "+-0.3 mmol/L", printed: "ARP 5.6 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 80, value: 5.3, unit: mmol_L, read_error: 0.0246, read_error_basis: "+-0.3 mmol/L", printed: "ARP 5.3 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 100, value: 4.8, unit: mmol_L, read_error: 0.0271, read_error_basis: "+-0.3 mmol/L", printed: "ARP 4.8 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 120, value: 4.6, unit: mmol_L, read_error: 0.0283, read_error_basis: "+-0.3 mmol/L", printed: "ARP 4.6 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 140, value: 4.2, unit: mmol_L, read_error: 0.031, read_error_basis: "+-0.3 mmol/L", printed: "ARP 4.2 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_110c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 160, value: 3.8, unit: mmol_L, read_error: 0.0343, read_error_basis: "+-0.3 mmol/L", printed: "ARP 3.8 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 20, value: 4.3, unit: mmol_L, read_error: 0.0303, read_error_basis: "+-0.3 mmol/L", printed: "ARP 4.3 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 40, value: 4.8, unit: mmol_L, read_error: 0.0271, read_error_basis: "+-0.3 mmol/L", printed: "ARP 4.8 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 60, value: 3.9, unit: mmol_L, read_error: 0.0334, read_error_basis: "+-0.3 mmol/L", printed: "ARP 3.9 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 80, value: 3.1, unit: mmol_L, read_error: 0.042, read_error_basis: "+-0.3 mmol/L", printed: "ARP 3.1 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 100, value: 1.6, unit: mmol_L, read_error: 0.0814, read_error_basis: "+-0.3 mmol/L", printed: "ARP 1.6 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_130c, ledger_id: zhai2019_fig3a_ttca_cama, species: CAMA, t_min: 120, value: 1.2, unit: mmol_L, read_error: 0.109, read_error_basis: "+-0.3 mmol/L", printed: "ARP 1.2 mmol/L (raster, dossier read)"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 10, value: 89, unit: umol_L, read_error: 0.0244, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA) 89 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 20, value: 164, unit: umol_L, read_error: 0.0132, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA) 164 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 30, value: 199, unit: umol_L, read_error: 0.0109, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA) 199 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 40, value: 205, unit: umol_L, read_error: 0.0106, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA) 205 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 50, value: 228, unit: umol_L, read_error: 0.00952, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA) 228 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 60, value: 249, unit: umol_L, read_error: 0.00872, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA) 249 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 10, value: 42, unit: umol_L, read_error: 0.0517, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA) 42 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 20, value: 68, unit: umol_L, read_error: 0.0319, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA) 68 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 30, value: 76, unit: umol_L, read_error: 0.0286, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA) 76 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 40, value: 89, unit: umol_L, read_error: 0.0244, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA) 89 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 50, value: 91, unit: umol_L, read_error: 0.0239, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA) 91 umol/L"}
+  - {pot: zhai2019_ttca5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 60, value: 98, unit: umol_L, read_error: 0.0222, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA) 98 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 10, value: 21, unit: umol_L, read_error: 0.103, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA+Cys) 21 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 20, value: 25, unit: umol_L, read_error: 0.0869, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA+Cys) 25 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 30, value: 30, unit: umol_L, read_error: 0.0724, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA+Cys) 30 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 40, value: 33, unit: umol_L, read_error: 0.0658, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA+Cys) 33 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 50, value: 49, unit: umol_L, read_error: 0.0443, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA+Cys) 49 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 60, value: 51, unit: umol_L, read_error: 0.0426, read_error_basis: "+-5 umol/L", printed: "3-DX (TTCA+Cys) 51 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 10, value: 17, unit: umol_L, read_error: 0.128, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA+Cys) 17 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 20, value: 22, unit: umol_L, read_error: 0.0987, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA+Cys) 22 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 30, value: 31, unit: umol_L, read_error: 0.07, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA+Cys) 31 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 40, value: 34, unit: umol_L, read_error: 0.0639, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA+Cys) 34 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 50, value: 41, unit: umol_L, read_error: 0.053, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA+Cys) 41 umol/L"}
+  - {pot: zhai2019_ttca5_cys5_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 60, value: 44, unit: umol_L, read_error: 0.0494, read_error_basis: "+-5 umol/L", printed: "1-DX (TTCA+Cys) 44 umol/L"}
+  - {pot: zhai2021_ttca_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 20, value: 9.81, unit: mmol_L, sd: 0.095, read_error: 0.000221, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 9.81 +- 0.095"}
+  - {pot: zhai2021_ttca_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 40, value: 9.34, unit: mmol_L, sd: 0.395, read_error: 0.000232, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 9.34 +- 0.395"}
+  - {pot: zhai2021_ttca_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 60, value: 9.1, unit: mmol_L, sd: 0.29, read_error: 0.000239, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 9.1 +- 0.29"}
+  - {pot: zhai2021_ttca_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 80, value: 8.19, unit: mmol_L, sd: 0.245, read_error: 0.000265, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 8.19 +- 0.245"}
+  - {pot: zhai2021_ttca_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 100, value: 7.68, unit: mmol_L, sd: 0.165, read_error: 0.000283, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 7.68 +- 0.165"}
+  - {pot: zhai2021_ttca_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 120, value: 6.69, unit: mmol_L, sd: 0.37, read_error: 0.000325, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 6.69 +- 0.37"}
+  - {pot: zhai2021_ttca_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 20, value: 9.78, unit: mmol_L, sd: 0.145, read_error: 0.000222, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 9.78 +- 0.145"}
+  - {pot: zhai2021_ttca_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 40, value: 9.18, unit: mmol_L, sd: 0.24, read_error: 0.000237, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 9.18 +- 0.24"}
+  - {pot: zhai2021_ttca_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 60, value: 8.79, unit: mmol_L, sd: 0.36, read_error: 0.000247, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 8.79 +- 0.36"}
+  - {pot: zhai2021_ttca_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 80, value: 7.97, unit: mmol_L, sd: 0.48, read_error: 0.000272, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 7.97 +- 0.48"}
+  - {pot: zhai2021_ttca_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 100, value: 5.98, unit: mmol_L, sd: 0.14, read_error: 0.000363, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 5.98 +- 0.14"}
+  - {pot: zhai2021_ttca_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 120, value: 4.37, unit: mmol_L, sd: 0.165, read_error: 0.000497, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 4.37 +- 0.165"}
+  - {pot: zhai2021_ttca_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 20, value: 9.14, unit: mmol_L, sd: 0.385, read_error: 0.000238, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 9.14 +- 0.385"}
+  - {pot: zhai2021_ttca_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 40, value: 8.21, unit: mmol_L, sd: 0.21, read_error: 0.000264, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 8.21 +- 0.21"}
+  - {pot: zhai2021_ttca_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 60, value: 7.02, unit: mmol_L, sd: 0.29, read_error: 0.000309, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 7.02 +- 0.29"}
+  - {pot: zhai2021_ttca_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 80, value: 5.52, unit: mmol_L, sd: 0.26, read_error: 0.000393, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 5.52 +- 0.26"}
+  - {pot: zhai2021_ttca_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 100, value: 2.08, unit: mmol_L, read_error: 0.00104, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 2.08 (no SD bar)"}
+  - {pot: zhai2021_ttca_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 120, value: 0.89, unit: mmol_L, read_error: 0.00244, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 0.89 (no SD bar)"}
+  - {pot: zhai2021_ttca_ph8_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 20, value: 7.79, unit: mmol_L, read_error: 0.000279, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 7.79 (no SD bar)"}
+  - {pot: zhai2021_ttca_ph8_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 40, value: 5.18, unit: mmol_L, read_error: 0.000419, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 5.18 (no SD bar)"}
+  - {pot: zhai2021_ttca_ph8_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 60, value: 3.79, unit: mmol_L, read_error: 0.000573, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 3.79 (no SD bar)"}
+  - {pot: zhai2021_ttca_ph8_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 80, value: 1.47, unit: mmol_L, read_error: 0.00148, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 1.47 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 20, value: 9.79, unit: mmol_L, read_error: 0.000222, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 9.79 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 40, value: 9.19, unit: mmol_L, read_error: 0.000236, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 9.19 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 60, value: 8.79, unit: mmol_L, read_error: 0.000247, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 8.79 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 80, value: 7.99, unit: mmol_L, read_error: 0.000272, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 7.99 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 100, value: 7.34, unit: mmol_L, read_error: 0.000296, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 7.34 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 120, value: 6.59, unit: mmol_L, read_error: 0.00033, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 6.59 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 20, value: 9.68, unit: mmol_L, read_error: 0.000224, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 9.68 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 40, value: 8.97, unit: mmol_L, read_error: 0.000242, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 8.97 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 60, value: 8.36, unit: mmol_L, read_error: 0.00026, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 8.36 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 80, value: 7.29, unit: mmol_L, read_error: 0.000298, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 7.29 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 100, value: 5.12, unit: mmol_L, read_error: 0.000424, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 5.12 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 120, value: 3.89, unit: mmol_L, read_error: 0.000558, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 3.89 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 20, value: 8.57, unit: mmol_L, read_error: 0.000253, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 8.57 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 40, value: 7.93, unit: mmol_L, read_error: 0.000274, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 7.93 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 60, value: 6.97, unit: mmol_L, read_error: 0.000312, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 6.97 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 80, value: 4.29, unit: mmol_L, read_error: 0.000506, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 4.29 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 20, value: 8.12, unit: mmol_L, read_error: 0.000267, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 8.12 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 40, value: 6.07, unit: mmol_L, read_error: 0.000358, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 6.07 (no SD bar)"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig4b, ledger_id: zhai2021_fig4b_ttca_ph_ladder, species: TTCA, t_min: 60, value: 2.16, unit: mmol_L, read_error: 0.00101, read_error_basis: "+-0.005 mmol/L", printed: "Fig.4b 2.16 (no SD bar)"}
+  - {pot: zhai2021_ttca_ph55_120c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 20, value: 8.77, unit: mmol_L, sd: 0.115, read_error: 0.000248, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 8.77 +- 0.115"}
+  - {pot: zhai2021_ttca_ph55_120c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 40, value: 7.27, unit: mmol_L, sd: 0.22, read_error: 0.000299, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 7.27 +- 0.22"}
+  - {pot: zhai2021_ttca_ph55_120c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 60, value: 6.18, unit: mmol_L, sd: 0.19, read_error: 0.000351, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 6.18 +- 0.19"}
+  - {pot: zhai2021_ttca_ph55_120c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 80, value: 4.59, unit: mmol_L, sd: 0.29, read_error: 0.000473, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 4.59 +- 0.29"}
+  - {pot: zhai2021_ttca_ph55_120c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 100, value: 3.17, unit: mmol_L, sd: 0.299, read_error: 0.000685, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 3.17 +- 0.299"}
+  - {pot: zhai2021_ttca_ph55_120c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 120, value: 2.47, unit: mmol_L, sd: 0.165, read_error: 0.000879, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 2.47 +- 0.165"}
+  - {pot: zhai2021_ttca_ph55_140c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 20, value: 7.59, unit: mmol_L, sd: 0.285, read_error: 0.000286, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 7.59 +- 0.285"}
+  - {pot: zhai2021_ttca_ph55_140c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 40, value: 5.87, unit: mmol_L, sd: 0.21, read_error: 0.00037, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 5.87 +- 0.21"}
+  - {pot: zhai2021_ttca_ph55_140c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 60, value: 3.98, unit: mmol_L, sd: 0.18, read_error: 0.000546, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 3.98 +- 0.18"}
+  - {pot: zhai2021_ttca_ph55_140c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 80, value: 2.29, unit: mmol_L, sd: 0.19, read_error: 0.000948, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 2.29 +- 0.19"}
+  - {pot: zhai2021_ttca_ph55_140c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 100, value: 1.2, unit: mmol_L, sd: 0.22, read_error: 0.00181, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 1.2 +- 0.22"}
+  - {pot: zhai2021_ttca_ph55_140c_fig3a, ledger_id: zhai2021_fig3a_ttca_tladder, species: TTCA, t_min: 120, value: 0.27, unit: mmol_L, sd: 0.18, read_error: 0.00804, read_error_basis: "+-0.005 mmol/L", printed: "Fig.3a 0.27 +- 0.18"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 20, value: 280, unit: umol_L, sd: 17, read_error: 0.000388, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 280 +- 17"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 40, value: 370, unit: umol_L, sd: 18, read_error: 0.000293, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 370 +- 18"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 60, value: 520, unit: umol_L, sd: 12, read_error: 0.000209, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 520 +- 12"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 80, value: 650, unit: umol_L, sd: 17, read_error: 0.000167, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 650 +- 17"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 100, value: 640, unit: umol_L, sd: 20, read_error: 0.00017, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 640 +- 20"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 120, value: 620, unit: umol_L, sd: 21, read_error: 0.000175, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 620 +- 21"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 20, value: 10, unit: umol_L, sd: 2.1, read_error: 0.00174, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 10.0 +- 2.1"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 40, value: 13, unit: umol_L, sd: 2.2, read_error: 0.00134, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 13.0 +- 2.2"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 60, value: 25, unit: umol_L, sd: 1.5, read_error: 0.000695, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 25.0 +- 1.5"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 80, value: 37, unit: umol_L, sd: 2.1, read_error: 0.00047, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 37.0 +- 2.1"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 100, value: 36, unit: umol_L, sd: 2.5, read_error: 0.000483, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 36.0 +- 2.5"}
+  - {pot: zhai2021_ttca_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 120, value: 32, unit: umol_L, sd: 2.6, read_error: 0.000543, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 32.0 +- 2.6"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 20, value: 330, unit: umol_L, sd: 14, read_error: 0.000329, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 330 +- 14"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 40, value: 480, unit: umol_L, sd: 12, read_error: 0.000226, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 480 +- 12"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 60, value: 590, unit: umol_L, sd: 10, read_error: 0.000184, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 590 +- 10"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 80, value: 750, unit: umol_L, sd: 22, read_error: 0.000145, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 750 +- 22"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 100, value: 890, unit: umol_L, sd: 22, read_error: 0.000122, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 890 +- 22"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 120, value: 930, unit: umol_L, sd: 30, read_error: 0.000117, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 930 +- 30"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 20, value: 17.2, unit: umol_L, sd: 1.8, read_error: 0.00101, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 17.2 +- 1.8"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 40, value: 21.5, unit: umol_L, sd: 1.5, read_error: 0.000808, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 21.5 +- 1.5"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 60, value: 33.7, unit: umol_L, sd: 1.2, read_error: 0.000515, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 33.7 +- 1.2"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 80, value: 49.8, unit: umol_L, sd: 2.7, read_error: 0.000349, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 49.8 +- 2.7"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 100, value: 62.8, unit: umol_L, sd: 2.7, read_error: 0.000277, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 62.8 +- 2.7"}
+  - {pot: zhai2021_ttca_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 120, value: 61.9, unit: umol_L, sd: 2.2, read_error: 0.000281, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 61.9 +- 2.2"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 20, value: 150, unit: umol_L, sd: 23, read_error: 0.000724, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 150 +- 23"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 40, value: 210, unit: umol_L, sd: 11, read_error: 0.000517, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 210 +- 11"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 60, value: 380, unit: umol_L, sd: 10, read_error: 0.000286, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 380 +- 10"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 80, value: 470, unit: umol_L, sd: 18, read_error: 0.000231, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 470 +- 18"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 100, value: 510, unit: umol_L, sd: 18, read_error: 0.000213, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 510 +- 18"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 120, value: 420, unit: umol_L, sd: 19, read_error: 0.000259, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 420 +- 19"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 20, value: 21, unit: umol_L, sd: 2.4, read_error: 0.000827, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 21.0 +- 2.4"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 40, value: 29, unit: umol_L, sd: 3.7, read_error: 0.000599, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 29.0 +- 3.7"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 60, value: 48, unit: umol_L, sd: 3.7, read_error: 0.000362, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 48.0 +- 3.7"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 80, value: 61, unit: umol_L, sd: 2.4, read_error: 0.000285, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 61.0 +- 2.4"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 100, value: 79, unit: umol_L, sd: 2.4, read_error: 0.00022, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 79.0 +- 2.4"}
+  - {pot: zhai2021_ttca_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 120, value: 69, unit: umol_L, sd: 3.7, read_error: 0.000252, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 69.0 +- 3.7"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 20, value: 62, unit: umol_L, sd: 22, read_error: 0.00175, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 62 +- 22"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 40, value: 72, unit: umol_L, sd: 24, read_error: 0.00151, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 72 +- 24"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 60, value: 86, unit: umol_L, sd: 63, read_error: 0.00126, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 86 +- 63"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 80, value: 98, unit: umol_L, sd: 16, read_error: 0.00111, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 98 +- 16"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 100, value: 107, unit: umol_L, sd: 19, read_error: 0.00101, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 107 +- 19"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 120, value: 75, unit: umol_L, sd: 23, read_error: 0.00145, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 75 +- 23"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 20, value: 32, unit: umol_L, sd: 2.8, read_error: 0.000543, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 32.0 +- 2.8"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 40, value: 52, unit: umol_L, sd: 3, read_error: 0.000334, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 52.0 +- 3.0"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 60, value: 74, unit: umol_L, sd: 7.8, read_error: 0.000235, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 74.0 +- 7.8"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 80, value: 99, unit: umol_L, sd: 2, read_error: 0.000175, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 99.0 +- 2.0"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 100, value: 117, unit: umol_L, sd: 2.3, read_error: 0.000148, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 117.0 +- 2.3"}
+  - {pot: zhai2021_ttca_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 120, value: 106, unit: umol_L, sd: 2.9, read_error: 0.000164, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 106.0 +- 2.9"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 20, value: 290, unit: umol_L, sd: 19, read_error: 0.000374, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 290 +- 19"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 40, value: 400, unit: umol_L, sd: 18, read_error: 0.000271, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 400 +- 18"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 60, value: 580, unit: umol_L, sd: 18, read_error: 0.000187, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 580 +- 18"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 80, value: 700, unit: umol_L, sd: 22, read_error: 0.000155, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 700 +- 22"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 100, value: 750, unit: umol_L, sd: 7, read_error: 0.000145, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 750 +- 7"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 120, value: 770, unit: umol_L, sd: 18, read_error: 0.000141, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 770 +- 18"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 20, value: 12, unit: umol_L, sd: 2.4, read_error: 0.00145, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 12.0 +- 2.4"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 40, value: 13, unit: umol_L, sd: 2.2, read_error: 0.00134, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 13.0 +- 2.2"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 60, value: 28, unit: umol_L, sd: 2.2, read_error: 0.00062, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 28.0 +- 2.2"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 80, value: 40, unit: umol_L, sd: 2.7, read_error: 0.000434, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 40.0 +- 2.7"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 100, value: 43, unit: umol_L, sd: 0.9, read_error: 0.000404, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 43.0 +- 0.9"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 120, value: 47, unit: umol_L, sd: 2.2, read_error: 0.00037, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 47.0 +- 2.2"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 20, value: 380, unit: umol_L, sd: 8, read_error: 0.000286, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 380 +- 8"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 40, value: 510, unit: umol_L, sd: 9, read_error: 0.000213, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 510 +- 9"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 60, value: 630, unit: umol_L, sd: 20, read_error: 0.000172, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 630 +- 20"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 80, value: 810, unit: umol_L, sd: 28, read_error: 0.000134, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 810 +- 28"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 100, value: 1030, unit: umol_L, sd: 33, read_error: 0.000105, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 1030 +- 33"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 120, value: 1090, unit: umol_L, sd: 27, read_error: 9.96e-05, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 1090 +- 27"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 20, value: 17.9, unit: umol_L, sd: 1, read_error: 0.00097, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 17.9 +- 1.0"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 40, value: 23, unit: umol_L, sd: 1.1, read_error: 0.000755, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 23.0 +- 1.1"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 60, value: 34, unit: umol_L, sd: 2.5, read_error: 0.000511, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 34.0 +- 2.5"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 80, value: 51, unit: umol_L, sd: 3.5, read_error: 0.000341, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 51.0 +- 3.5"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 100, value: 68.8, unit: umol_L, sd: 4.1, read_error: 0.000252, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 68.8 +- 4.1"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 120, value: 79, unit: umol_L, sd: 3.3, read_error: 0.00022, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 79.0 +- 3.3"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 20, value: 170, unit: umol_L, sd: 19, read_error: 0.000639, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 170 +- 19"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 40, value: 230, unit: umol_L, sd: 30, read_error: 0.000472, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 230 +- 30"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 60, value: 360, unit: umol_L, sd: 30, read_error: 0.000302, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 360 +- 30"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 80, value: 570, unit: umol_L, sd: 19, read_error: 0.00019, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 570 +- 19"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 100, value: 770, unit: umol_L, sd: 19, read_error: 0.000141, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 770 +- 19"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 120, value: 930, unit: umol_L, sd: 30, read_error: 0.000117, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 930 +- 30"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 20, value: 26, unit: umol_L, sd: 2.4, read_error: 0.000668, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 26.0 +- 2.4"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 40, value: 31, unit: umol_L, sd: 3.7, read_error: 0.00056, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 31.0 +- 3.7"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 60, value: 53, unit: umol_L, sd: 3.7, read_error: 0.000328, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 53.0 +- 3.7"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 80, value: 75, unit: umol_L, sd: 2.4, read_error: 0.000232, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 75.0 +- 2.4"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 100, value: 94, unit: umol_L, sd: 2.4, read_error: 0.000185, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 94.0 +- 2.4"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 120, value: 125, unit: umol_L, sd: 3.7, read_error: 0.000139, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 125.0 +- 3.7"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 20, value: 48, unit: umol_L, sd: 74, read_error: 0.00226, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 48 +- 74"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 40, value: 76, unit: umol_L, sd: 13, read_error: 0.00143, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 76 +- 13"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 60, value: 107, unit: umol_L, sd: 17, read_error: 0.00101, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 107 +- 17"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 80, value: 147, unit: umol_L, sd: 19, read_error: 0.000739, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 147 +- 19"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 100, value: 258, unit: umol_L, sd: 32, read_error: 0.000421, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 258 +- 32"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: TDP, t_min: 120, value: 359, unit: umol_L, sd: 9, read_error: 0.000302, read_error_basis: "+-0.25 umol/L", printed: "Fig.5a 3-DX 359 +- 9"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 20, value: 31, unit: umol_L, sd: 9.3, read_error: 0.00056, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 31.0 +- 9.3"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 40, value: 53, unit: umol_L, sd: 1.6, read_error: 0.000328, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 53.0 +- 1.6"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 60, value: 82, unit: umol_L, sd: 2.2, read_error: 0.000212, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 82.0 +- 2.2"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 80, value: 119, unit: umol_L, sd: 2.4, read_error: 0.000146, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 119.0 +- 2.4"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 100, value: 172, unit: umol_L, sd: 4, read_error: 0.000101, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 172.0 +- 4.0"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig5, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: DPO, t_min: 120, value: 187, unit: umol_L, sd: 1.2, read_error: 9.29e-05, read_error_basis: "+-0.04 umol/L", printed: "Fig.5b 1-DX 187.0 +- 1.2"}
+  - {pot: zhai2021_ttca_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 20, value: 0.05, unit: mmol_L, sd: 0.0189, read_error: 0.0434, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.05 +- 0.0189"}
+  - {pot: zhai2021_ttca_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 40, value: 0.09, unit: mmol_L, sd: 0.0176, read_error: 0.0241, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.09 +- 0.0176"}
+  - {pot: zhai2021_ttca_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 60, value: 0.13, unit: mmol_L, sd: 0.0218, read_error: 0.0167, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.13 +- 0.0218"}
+  - {pot: zhai2021_ttca_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 80, value: 0.19, unit: mmol_L, sd: 0.0168, read_error: 0.0114, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.19 +- 0.0168"}
+  - {pot: zhai2021_ttca_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 100, value: 0.26, unit: mmol_L, sd: 0.0197, read_error: 0.00835, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.26 +- 0.0197"}
+  - {pot: zhai2021_ttca_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 120, value: 0.33, unit: mmol_L, sd: 0.0211, read_error: 0.00658, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.33 +- 0.0211"}
+  - {pot: zhai2021_ttca_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 20, value: 0.08, unit: mmol_L, sd: 0.0126, read_error: 0.0271, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.08 +- 0.0126"}
+  - {pot: zhai2021_ttca_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 40, value: 0.11, unit: mmol_L, sd: 0.0217, read_error: 0.0197, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.11 +- 0.0217"}
+  - {pot: zhai2021_ttca_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 60, value: 0.18, unit: mmol_L, sd: 0.0098, read_error: 0.0121, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.18 +- 0.0098"}
+  - {pot: zhai2021_ttca_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 80, value: 0.24, unit: mmol_L, sd: 0.0118, read_error: 0.00905, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.24 +- 0.0118"}
+  - {pot: zhai2021_ttca_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 100, value: 0.31, unit: mmol_L, sd: 0.0218, read_error: 0.007, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.31 +- 0.0218"}
+  - {pot: zhai2021_ttca_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 120, value: 0.43, unit: mmol_L, sd: 0.0178, read_error: 0.00505, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.43 +- 0.0178"}
+  - {pot: zhai2021_ttca_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 20, value: 0.12, unit: mmol_L, sd: 0.0288, read_error: 0.0181, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.12 +- 0.0288"}
+  - {pot: zhai2021_ttca_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 40, value: 0.24, unit: mmol_L, sd: 0.0307, read_error: 0.00905, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.24 +- 0.0307"}
+  - {pot: zhai2021_ttca_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 60, value: 0.69, unit: mmol_L, sd: 0.0097, read_error: 0.00315, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.69 +- 0.0097"}
+  - {pot: zhai2021_ttca_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 80, value: 0.87, unit: mmol_L, sd: 0.0078, read_error: 0.0025, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.87 +- 0.0078"}
+  - {pot: zhai2021_ttca_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 100, value: 1.29, unit: mmol_L, sd: 0.0183, read_error: 0.00168, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.29 +- 0.0183"}
+  - {pot: zhai2021_ttca_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 120, value: 1.23, unit: mmol_L, sd: 0.0194, read_error: 0.00177, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.23 +- 0.0194"}
+  - {pot: zhai2021_ttca_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 20, value: 0.49, unit: mmol_L, sd: 0.0224, read_error: 0.00443, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.49 +- 0.0224"}
+  - {pot: zhai2021_ttca_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 40, value: 0.88, unit: mmol_L, sd: 0.0228, read_error: 0.00247, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.88 +- 0.0228"}
+  - {pot: zhai2021_ttca_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 60, value: 1.37, unit: mmol_L, sd: 0.0626, read_error: 0.00159, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.37 +- 0.0626"}
+  - {pot: zhai2021_ttca_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 80, value: 1.78, unit: mmol_L, sd: 0.0168, read_error: 0.00122, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.78 +- 0.0168"}
+  - {pot: zhai2021_ttca_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 100, value: 1.69, unit: mmol_L, sd: 0.0187, read_error: 0.00128, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.69 +- 0.0187"}
+  - {pot: zhai2021_ttca_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 120, value: 1.59, unit: mmol_L, sd: 0.0228, read_error: 0.00137, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.59 +- 0.0228"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 20, value: 0.078, unit: mmol_L, sd: 0.0094, read_error: 0.0278, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.078 +- 0.0094"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 40, value: 0.151, unit: mmol_L, sd: 0.0078, read_error: 0.0144, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.151 +- 0.0078"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 60, value: 0.183, unit: mmol_L, sd: 0.0179, read_error: 0.0119, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.183 +- 0.0179"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 80, value: 0.238, unit: mmol_L, sd: 0.0218, read_error: 0.00912, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.238 +- 0.0218"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 100, value: 0.299, unit: mmol_L, sd: 0.0069, read_error: 0.00726, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.299 +- 0.0069"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 120, value: 0.407, unit: mmol_L, sd: 0.0179, read_error: 0.00534, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.407 +- 0.0179"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 20, value: 0.102, unit: mmol_L, sd: 0.0078, read_error: 0.0213, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.102 +- 0.0078"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 40, value: 0.169, unit: mmol_L, sd: 0.0089, read_error: 0.0128, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.169 +- 0.0089"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 60, value: 0.218, unit: mmol_L, sd: 0.0198, read_error: 0.00996, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.218 +- 0.0198"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 80, value: 0.275, unit: mmol_L, sd: 0.0278, read_error: 0.0079, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.275 +- 0.0278"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 100, value: 0.418, unit: mmol_L, sd: 0.0327, read_error: 0.00519, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.418 +- 0.0327"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 120, value: 0.547, unit: mmol_L, sd: 0.0268, read_error: 0.00397, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.547 +- 0.0268"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 20, value: 0.148, unit: mmol_L, sd: 0.0078, read_error: 0.0147, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.148 +- 0.0078"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 40, value: 0.299, unit: mmol_L, sd: 0.0089, read_error: 0.00726, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.299 +- 0.0089"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 60, value: 0.628, unit: mmol_L, sd: 0.0198, read_error: 0.00346, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.628 +- 0.0198"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 80, value: 1.029, unit: mmol_L, sd: 0.0279, read_error: 0.00211, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.029 +- 0.0279"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 100, value: 1.398, unit: mmol_L, sd: 0.0328, read_error: 0.00155, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.398 +- 0.0328"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 120, value: 1.473, unit: mmol_L, sd: 0.0267, read_error: 0.00147, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.473 +- 0.0267"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 20, value: 0.439, unit: mmol_L, sd: 0.0742, read_error: 0.00495, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.439 +- 0.0742"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 40, value: 0.918, unit: mmol_L, sd: 0.0127, read_error: 0.00237, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 0.918 +- 0.0127"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 60, value: 1.496, unit: mmol_L, sd: 0.0172, read_error: 0.00145, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.496 +- 0.0172"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 80, value: 1.987, unit: mmol_L, sd: 0.0688, read_error: 0.00109, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 1.987 +- 0.0688"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 100, value: 2.179, unit: mmol_L, sd: 0.0319, read_error: 0.000997, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 2.179 +- 0.0319"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: Cys, t_min: 120, value: 2.148, unit: mmol_L, sd: 0.0093, read_error: 0.00101, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6a 2.148 +- 0.0093"}
+  - {pot: zhai2021_xyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 20, value: 9.994, unit: mmol_L, sd: 0.197, read_error: 0.000217, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.994 +- 0.1974"}
+  - {pot: zhai2021_xyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 40, value: 9.919, unit: mmol_L, sd: 0.0211, read_error: 0.000219, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.919 +- 0.0211"}
+  - {pot: zhai2021_xyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 60, value: 9.881, unit: mmol_L, sd: 0.0195, read_error: 0.00022, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.881 +- 0.0195"}
+  - {pot: zhai2021_xyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 80, value: 9.771, unit: mmol_L, sd: 0.0336, read_error: 0.000222, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.771 +- 0.0336"}
+  - {pot: zhai2021_xyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 100, value: 9.673, unit: mmol_L, sd: 0.0148, read_error: 0.000224, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.673 +- 0.0148"}
+  - {pot: zhai2021_xyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 120, value: 9.531, unit: mmol_L, sd: 0.015, read_error: 0.000228, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.531 +- 0.015"}
+  - {pot: zhai2021_xyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 20, value: 9.876, unit: mmol_L, sd: 0.162, read_error: 0.00022, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.876 +- 0.1624"}
+  - {pot: zhai2021_xyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 40, value: 9.82, unit: mmol_L, sd: 0.197, read_error: 0.000221, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.82 +- 0.1974"}
+  - {pot: zhai2021_xyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 60, value: 9.753, unit: mmol_L, sd: 0.127, read_error: 0.000223, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.753 +- 0.1272"}
+  - {pot: zhai2021_xyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 80, value: 9.729, unit: mmol_L, sd: 0.2, read_error: 0.000223, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.729 +- 0.1999"}
+  - {pot: zhai2021_xyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 100, value: 9.618, unit: mmol_L, sd: 0.162, read_error: 0.000226, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.618 +- 0.1624"}
+  - {pot: zhai2021_xyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 120, value: 9.401, unit: mmol_L, sd: 0.225, read_error: 0.000231, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.401 +- 0.225"}
+  - {pot: zhai2021_xyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 20, value: 9.73, unit: mmol_L, sd: 0.119, read_error: 0.000223, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.73 +- 0.1188"}
+  - {pot: zhai2021_xyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 40, value: 9.543, unit: mmol_L, sd: 0.169, read_error: 0.000228, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.543 +- 0.1687"}
+  - {pot: zhai2021_xyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 60, value: 9.499, unit: mmol_L, sd: 0.29, read_error: 0.000229, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.499 +- 0.2898"}
+  - {pot: zhai2021_xyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 80, value: 9.478, unit: mmol_L, sd: 0.236, read_error: 0.000229, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.478 +- 0.2361"}
+  - {pot: zhai2021_xyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 100, value: 9.42, unit: mmol_L, sd: 0.106, read_error: 0.000231, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.42 +- 0.1061"}
+  - {pot: zhai2021_xyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 120, value: 9.401, unit: mmol_L, sd: 0.171, read_error: 0.000231, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.401 +- 0.1711"}
+  - {pot: zhai2021_xyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 20, value: 9.543, unit: mmol_L, sd: 0.185, read_error: 0.000228, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.543 +- 0.1849"}
+  - {pot: zhai2021_xyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 40, value: 9.489, unit: mmol_L, sd: 0.123, read_error: 0.000229, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.489 +- 0.1234"}
+  - {pot: zhai2021_xyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 60, value: 9.42, unit: mmol_L, sd: 0.185, read_error: 0.000231, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.42 +- 0.1849"}
+  - {pot: zhai2021_xyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 80, value: 9.401, unit: mmol_L, sd: 0.218, read_error: 0.000231, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.401 +- 0.2185"}
+  - {pot: zhai2021_xyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 100, value: 9.378, unit: mmol_L, sd: 0.207, read_error: 0.000232, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.378 +- 0.2072"}
+  - {pot: zhai2021_xyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 120, value: 9.359, unit: mmol_L, sd: 0.122, read_error: 0.000232, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.359 +- 0.1225"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 20, value: 9.894, unit: mmol_L, sd: 0.197, read_error: 0.000219, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.894 +- 0.1974"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 40, value: 9.829, unit: mmol_L, sd: 0.0211, read_error: 0.000221, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.829 +- 0.0211"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 60, value: 9.731, unit: mmol_L, sd: 0.0197, read_error: 0.000223, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.731 +- 0.0197"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 80, value: 9.601, unit: mmol_L, sd: 0.0336, read_error: 0.000226, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.601 +- 0.0336"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 100, value: 9.473, unit: mmol_L, sd: 0.0148, read_error: 0.000229, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.473 +- 0.0148"}
+  - {pot: zhai2021_ttcaxyl_ph55_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 120, value: 9.281, unit: mmol_L, sd: 0.0148, read_error: 0.000234, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.281 +- 0.0148"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 20, value: 9.686, unit: mmol_L, sd: 0.0324, read_error: 0.000224, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.686 +- 0.0324"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 40, value: 9.53, unit: mmol_L, sd: 0.0247, read_error: 0.000228, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.53 +- 0.0247"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 60, value: 9.243, unit: mmol_L, sd: 0.0237, read_error: 0.000235, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.243 +- 0.0237"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 80, value: 9.009, unit: mmol_L, sd: 0.0197, read_error: 0.000241, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.009 +- 0.0197"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 100, value: 8.893, unit: mmol_L, sd: 0.0211, read_error: 0.000244, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 8.893 +- 0.0211"}
+  - {pot: zhai2021_ttcaxyl_ph6_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 120, value: 8.1, unit: mmol_L, sd: 0.0223, read_error: 0.000268, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 8.1 +- 0.0223"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 20, value: 9.579, unit: mmol_L, sd: 0.385, read_error: 0.000227, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.579 +- 0.3848"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 40, value: 8.997, unit: mmol_L, sd: 0.237, read_error: 0.000241, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 8.997 +- 0.2375"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 60, value: 8.479, unit: mmol_L, sd: 0.185, read_error: 0.000256, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 8.479 +- 0.1849"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 80, value: 7.583, unit: mmol_L, sd: 0.188, read_error: 0.000286, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 7.583 +- 0.1875"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 100, value: 6.847, unit: mmol_L, sd: 0.177, read_error: 0.000317, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 6.847 +- 0.1774"}
+  - {pot: zhai2021_ttcaxyl_ph7_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 120, value: 6.134, unit: mmol_L, sd: 0.223, read_error: 0.000354, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 6.134 +- 0.2225"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 20, value: 9.179, unit: mmol_L, sd: 0.0974, read_error: 0.000237, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 9.179 +- 0.0974"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 40, value: 8.389, unit: mmol_L, sd: 0.212, read_error: 0.000259, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 8.389 +- 0.2124"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 60, value: 7.543, unit: mmol_L, sd: 0.0472, read_error: 0.000288, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 7.543 +- 0.0472"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 80, value: 6.387, unit: mmol_L, sd: 0.137, read_error: 0.00034, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 6.387 +- 0.1373"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 100, value: 4.497, unit: mmol_L, sd: 0.235, read_error: 0.000483, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 4.497 +- 0.2349"}
+  - {pot: zhai2021_ttcaxyl_ph8_100c_fig6, ledger_id: zhai2021_fig6_cys_xyl, species: PENT, t_min: 120, value: 2.987, unit: mmol_L, sd: 0.125, read_error: 0.000727, read_error_basis: "+-0.005 mmol/L", printed: "Fig.6b xylose 2.987 +- 0.1249"}
+  - {pot: kang2026_s3_ttca_120c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 20, value: 0.205, unit: mmol_L, read_error: 0.0636, read_error_basis: "+-0.03 mmol/L", printed: "TTCA-120 C 0.205 mmol/L (raster, Kang SI dossier)"}
+  - {pot: kang2026_s3_ttca_120c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 40, value: 0.989, unit: mmol_L, read_error: 0.0132, read_error_basis: "+-0.03 mmol/L", printed: "0.989"}
+  - {pot: kang2026_s3_ttca_120c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 60, value: 1.219, unit: mmol_L, read_error: 0.0107, read_error_basis: "+-0.03 mmol/L", printed: "1.219"}
+  - {pot: kang2026_s3_ttca_120c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 80, value: 1.112, unit: mmol_L, read_error: 0.0117, read_error_basis: "+-0.03 mmol/L", printed: "1.112"}
+  - {pot: kang2026_s3_ttca_120c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 100, value: 0.988, unit: mmol_L, read_error: 0.0132, read_error_basis: "+-0.03 mmol/L", printed: "0.988"}
+  - {pot: kang2026_s3_ttca_120c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 120, value: 0.874, unit: mmol_L, read_error: 0.0149, read_error_basis: "+-0.03 mmol/L", printed: "0.874"}
+  - {pot: kang2026_s3_ttca_140c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 20, value: 0.5, unit: mmol_L, read_error: 0.0261, read_error_basis: "+-0.03 mmol/L", printed: "TTCA-140 C 0.500"}
+  - {pot: kang2026_s3_ttca_140c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 40, value: 1.63, unit: mmol_L, read_error: 0.00799, read_error_basis: "+-0.03 mmol/L", printed: "1.630"}
+  - {pot: kang2026_s3_ttca_140c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 60, value: 1.574, unit: mmol_L, read_error: 0.00828, read_error_basis: "+-0.03 mmol/L", printed: "1.574"}
+  - {pot: kang2026_s3_ttca_140c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 80, value: 1.619, unit: mmol_L, read_error: 0.00805, read_error_basis: "+-0.03 mmol/L", printed: "1.619"}
+  - {pot: kang2026_s3_ttca_140c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 100, value: 1.3, unit: mmol_L, read_error: 0.01, read_error_basis: "+-0.03 mmol/L", printed: "~1.30 (marker merged with the 100 C one; dossier 1.296)"}
+  - {pot: kang2026_s3_ttca_140c, ledger_id: kang2026_si_fig_s3_cys_release_from_ttca, species: Cys, t_min: 120, value: 1.088, unit: mmol_L, read_error: 0.012, read_error_basis: "+-0.03 mmol/L", printed: "1.088"}
+  - {pot: kang2026_s4_cys_100c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 20, value: 9.77, unit: mmol_L, read_error: 0.00133, read_error_basis: "+-0.03 mmol/L", printed: "100 C 9.77 mmol/L (raster, Kang SI dossier)"}
+  - {pot: kang2026_s4_cys_100c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 40, value: 9.61, unit: mmol_L, read_error: 0.00136, read_error_basis: "+-0.03 mmol/L", printed: "9.61"}
+  - {pot: kang2026_s4_cys_100c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 60, value: 9.41, unit: mmol_L, read_error: 0.00138, read_error_basis: "+-0.03 mmol/L", printed: "9.41"}
+  - {pot: kang2026_s4_cys_100c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 80, value: 9.12, unit: mmol_L, read_error: 0.00143, read_error_basis: "+-0.03 mmol/L", printed: "9.12"}
+  - {pot: kang2026_s4_cys_100c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 100, value: 8.64, unit: mmol_L, read_error: 0.00151, read_error_basis: "+-0.03 mmol/L", printed: "8.64"}
+  - {pot: kang2026_s4_cys_100c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 120, value: 8.38, unit: mmol_L, read_error: 0.00155, read_error_basis: "+-0.03 mmol/L", printed: "8.38"}
+  - {pot: kang2026_s4_cys_120c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 20, value: 8.63, unit: mmol_L, read_error: 0.00151, read_error_basis: "+-0.03 mmol/L", printed: "120 C 8.63"}
+  - {pot: kang2026_s4_cys_120c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 40, value: 7.81, unit: mmol_L, read_error: 0.00167, read_error_basis: "+-0.03 mmol/L", printed: "7.81"}
+  - {pot: kang2026_s4_cys_120c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 60, value: 7.11, unit: mmol_L, read_error: 0.00183, read_error_basis: "+-0.03 mmol/L", printed: "7.11"}
+  - {pot: kang2026_s4_cys_120c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 80, value: 6.9, unit: mmol_L, read_error: 0.00189, read_error_basis: "+-0.03 mmol/L", printed: "6.90"}
+  - {pot: kang2026_s4_cys_120c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 100, value: 6.55, unit: mmol_L, read_error: 0.00199, read_error_basis: "+-0.03 mmol/L", printed: "6.55"}
+  - {pot: kang2026_s4_cys_120c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 120, value: 6.13, unit: mmol_L, read_error: 0.00213, read_error_basis: "+-0.03 mmol/L", printed: "6.13"}
+  - {pot: kang2026_s4_cys_140c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 20, value: 7.71, unit: mmol_L, read_error: 0.00169, read_error_basis: "+-0.03 mmol/L", printed: "140 C 7.71"}
+  - {pot: kang2026_s4_cys_140c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 40, value: 6.24, unit: mmol_L, read_error: 0.00209, read_error_basis: "+-0.03 mmol/L", printed: "6.24"}
+  - {pot: kang2026_s4_cys_140c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 60, value: 5.49, unit: mmol_L, read_error: 0.00237, read_error_basis: "+-0.03 mmol/L", printed: "5.49"}
+  - {pot: kang2026_s4_cys_140c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 80, value: 4.76, unit: mmol_L, read_error: 0.00274, read_error_basis: "+-0.03 mmol/L", printed: "4.76"}
+  - {pot: kang2026_s4_cys_140c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 100, value: 3.99, unit: mmol_L, read_error: 0.00327, read_error_basis: "+-0.03 mmol/L", printed: "3.99"}
+  - {pot: kang2026_s4_cys_140c, ledger_id: kang2026_si_fig_s4_free_cys_depletion, species: Cys, t_min: 120, value: 3.74, unit: mmol_L, read_error: 0.00348, read_error_basis: "+-0.03 mmol/L", printed: "3.74"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: PENT, t_min: 30, value: 74, unit: mmol_L, read_error: 0.0235, read_error_basis: "+-4 mmol/L", printed: "Fig.2a xylose 0.074 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: PENT, t_min: 60, value: 69, unit: mmol_L, read_error: 0.0252, read_error_basis: "+-4 mmol/L", printed: "Fig.2a xylose 0.069 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: PENT, t_min: 120, value: 67, unit: mmol_L, read_error: 0.0259, read_error_basis: "+-4 mmol/L", printed: "Fig.2a xylose 0.067 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: PENT, t_min: 180, value: 65, unit: mmol_L, read_error: 0.0267, read_error_basis: "+-4 mmol/L", printed: "Fig.2a xylose 0.065 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: PENT, t_min: 240, value: 64, unit: mmol_L, read_error: 0.0271, read_error_basis: "+-4 mmol/L", printed: "Fig.2a xylose 0.064 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: PENT, t_min: 300, value: 60, unit: mmol_L, read_error: 0.029, read_error_basis: "+-4 mmol/L", printed: "Fig.2a xylose 0.06 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: Cys, t_min: 30, value: 81, unit: mmol_L, read_error: 0.0214, read_error_basis: "+-4 mmol/L", printed: "Fig.2b 0.081 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: Cys, t_min: 60, value: 80, unit: mmol_L, read_error: 0.0217, read_error_basis: "+-4 mmol/L", printed: "Fig.2b 0.08 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: Cys, t_min: 120, value: 78, unit: mmol_L, read_error: 0.0223, read_error_basis: "+-4 mmol/L", printed: "Fig.2b 0.078 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: Cys, t_min: 180, value: 70, unit: mmol_L, read_error: 0.0248, read_error_basis: "+-4 mmol/L", printed: "Fig.2b 0.07 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: Cys, t_min: 240, value: 65, unit: mmol_L, read_error: 0.0267, read_error_basis: "+-4 mmol/L", printed: "Fig.2b 0.065 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: Cys, t_min: 300, value: 62, unit: mmol_L, read_error: 0.028, read_error_basis: "+-4 mmol/L", printed: "Fig.2b 0.062 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: TTCA, t_min: 30, value: 355, unit: mmol_L, read_error: 0.00612, read_error_basis: "+-5 mmol/L", printed: "Fig.2d 0.355 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: TTCA, t_min: 60, value: 333, unit: mmol_L, read_error: 0.00652, read_error_basis: "+-5 mmol/L", printed: "Fig.2d 0.333 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: TTCA, t_min: 120, value: 327, unit: mmol_L, read_error: 0.00664, read_error_basis: "+-5 mmol/L", printed: "Fig.2d 0.327 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: TTCA, t_min: 180, value: 304, unit: mmol_L, read_error: 0.00714, read_error_basis: "+-5 mmol/L", printed: "Fig.2d 0.304 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: TTCA, t_min: 240, value: 296, unit: mmol_L, read_error: 0.00734, read_error_basis: "+-5 mmol/L", printed: "Fig.2d 0.296 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: TTCA, t_min: 300, value: 290, unit: mmol_L, read_error: 0.00749, read_error_basis: "+-5 mmol/L", printed: "Fig.2d 0.29 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: CAMA, t_min: 60, value: 37, unit: mmol_L, read_error: 0.0235, read_error_basis: "+-2 mmol/L", printed: "Fig.2e Cys-Amadori 0.037 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: CAMA, t_min: 120, value: 58, unit: mmol_L, read_error: 0.015, read_error_basis: "+-2 mmol/L", printed: "Fig.2e Cys-Amadori 0.058 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: CAMA, t_min: 180, value: 70, unit: mmol_L, read_error: 0.0124, read_error_basis: "+-2 mmol/L", printed: "Fig.2e Cys-Amadori 0.07 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: CAMA, t_min: 240, value: 79, unit: mmol_L, read_error: 0.011, read_error_basis: "+-2 mmol/L", printed: "Fig.2e Cys-Amadori 0.079 mol/L (raster, dossier read)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama, species: CAMA, t_min: 300, value: 92, unit: mmol_L, read_error: 0.00944, read_error_basis: "+-2 mmol/L", printed: "Fig.2e Cys-Amadori 0.092 mol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: TTCA, t_min: 5, value: 7.4, unit: mmol_L, read_error: 0.0176, read_error_basis: "+-0.3 mmol/L", printed: "Fig.2b blank 7.4 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: TTCA, t_min: 10, value: 11.2, unit: mmol_L, read_error: 0.0116, read_error_basis: "+-0.3 mmol/L", printed: "Fig.2b blank 11.2 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: TTCA, t_min: 15, value: 13.5, unit: mmol_L, read_error: 0.00965, read_error_basis: "+-0.3 mmol/L", printed: "Fig.2b blank 13.5 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: TTCA, t_min: 20, value: 15.1, unit: mmol_L, read_error: 0.00863, read_error_basis: "+-0.3 mmol/L", printed: "Fig.2b blank 15.1 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: TTCA, t_min: 25, value: 16.4, unit: mmol_L, read_error: 0.00794, read_error_basis: "+-0.3 mmol/L", printed: "Fig.2b blank 16.4 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: TTCA, t_min: 30, value: 17.7, unit: mmol_L, read_error: 0.00736, read_error_basis: "+-0.3 mmol/L", printed: "Fig.2b blank 17.7 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: TTCA, t_min: 40, value: 18.1, unit: mmol_L, read_error: 0.0072, read_error_basis: "+-0.3 mmol/L", printed: "Fig.2b blank 18.1 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: TTCA, t_min: 50, value: 18.2, unit: mmol_L, read_error: 0.00716, read_error_basis: "+-0.3 mmol/L", printed: "Fig.2b blank 18.2 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: CAMA, t_min: 10, value: 0.07, unit: mmol_L, read_error: 0.31, read_error_basis: "+-0.05 mmol/L", printed: "Fig.2a blank Cys-Amadori 0.07 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: CAMA, t_min: 15, value: 1.05, unit: mmol_L, read_error: 0.0207, read_error_basis: "+-0.05 mmol/L", printed: "Fig.2a blank Cys-Amadori 1.05 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: CAMA, t_min: 20, value: 1.38, unit: mmol_L, read_error: 0.0157, read_error_basis: "+-0.05 mmol/L", printed: "Fig.2a blank Cys-Amadori 1.38 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: CAMA, t_min: 25, value: 1.52, unit: mmol_L, read_error: 0.0143, read_error_basis: "+-0.05 mmol/L", printed: "Fig.2a blank Cys-Amadori 1.52 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: CAMA, t_min: 30, value: 1.6, unit: mmol_L, read_error: 0.0136, read_error_basis: "+-0.05 mmol/L", printed: "Fig.2a blank Cys-Amadori 1.6 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: CAMA, t_min: 40, value: 1.61, unit: mmol_L, read_error: 0.0135, read_error_basis: "+-0.05 mmol/L", printed: "Fig.2a blank Cys-Amadori 1.61 mmol/L (raster, dossier read)"}
+  - {pot: zhang2025b_blank, ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp, species: CAMA, t_min: 50, value: 1.61, unit: mmol_L, read_error: 0.0135, read_error_basis: "+-0.05 mmol/L", printed: "Fig.2a blank Cys-Amadori 1.61 mmol/L (raster, dossier read)"}

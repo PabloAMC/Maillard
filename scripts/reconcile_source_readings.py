@@ -65,15 +65,28 @@ def _close(a, b) -> bool:
     return math.isclose(a, b, rel_tol=REL, abs_tol=1e-9)
 
 
+def _label_ph(pot: dict):
+    """The pot's label pH; readers have written it as label_ph or ph_label (the loader requires label_ph)."""
+    return pot.get("label_ph", pot.get("ph_label"))
+
+
 def _pot_signature_match(p: dict, q: dict) -> bool:
     if p.get("ledger_id") != q.get("ledger_id"):
         return False
     if not (_close(p.get("t_c"), q.get("t_c")) and _close(p.get("minutes"), q.get("minutes"))
-            and _close(p.get("label_ph"), q.get("label_ph"))):
+            and _close(_label_ph(p), _label_ph(q))):
         return False
     a, b = p.get("initial_mmol_L") or {}, q.get("initial_mmol_L") or {}
     keys = {k for k, v in a.items() if v} | {k for k, v in b.items() if v}
     return all(_close(a.get(k, 0.0), b.get(k, 0.0)) for k in keys)
+
+
+#: names readers wrote before the loader enforced a vocabulary (fit_rows.OBSERVABLES), mapped to the vocabulary
+SPECIES_ALIASES = {"MFT-SS-FFT": "MFT_FFT_mixed_disulfide"}
+
+
+def _species(name) -> str:
+    return SPECIES_ALIASES.get(str(name), str(name))
 
 
 def _row_error(row: dict) -> float:
@@ -115,17 +128,17 @@ def reconcile(name: str) -> dict:
             if match:
                 mapping[k] = match[0]
             else:
-                problems.append(f"pot {k} ({p.get('t_c')} C, {p.get('minutes')} min, label pH {p.get('label_ph')}, "
+                problems.append(f"pot {k} ({p.get('t_c')} C, {p.get('minutes')} min, label pH {_label_ph(p)}, "
                                 f"{p.get('initial_mmol_L')}) has no matching pot in the second reading")
         for k2 in set(theirs) - set(mapping.values()):
             q = theirs[k2]
-            problems.append(f"second reader's pot {k2} ({q.get('t_c')} C, {q.get('minutes')} min, {q.get('initial_mmol_L')}) "
+            problems.append(f"second reader's pot {k2} ({q.get('t_c')} C, {q.get('minutes')} min, label pH {_label_ph(q)}, {q.get('initial_mmol_L')}) "
                             f"has no matching pot in the first reading")
-        index2 = {(r["pot"], str(r["species"]), float(r["t_min"])): r for r in rows2}
+        index2 = {(r["pot"], _species(r["species"]), float(r["t_min"])): r for r in rows2}
         for r in rows1:
             if r.get("pot") not in mapping:
                 continue
-            key = (mapping[r["pot"]], str(r["species"]), float(r["t_min"]))
+            key = (mapping[r["pot"]], _species(r["species"]), float(r["t_min"]))
             s = index2.pop(key, None)
             if s is None:
                 problems.append(f"row {r['pot']}/{r['species']}@{r['t_min']} = {r['value']} {r['unit']}: not in the second reading")

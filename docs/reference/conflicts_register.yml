@@ -1391,3 +1391,71 @@ entries:
     status: open
     remedy: "Sub-model 4 design: map RG-ARP to the species that carries its sulfur (CAMA if it is the cysteine compound) or keep Feng's rows out."
     affects: []
+
+  # ---- found by the sub-model 3 first reading (2026-10-29), recorded by the orchestrator ----
+
+  - id: CF-059
+    kind: code_mismatch
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation]
+    quantity: "molar masses of 1-/3-deoxypentosone and 1,4-dideoxypentosone in species_sulfur.MOLECULAR_WEIGHT_G_PER_MOL"
+    observation: >-
+      DPO and TDP were 130.10 g/mol (C5H6O4) though their comment named C5H8O4 (a pentose minus water: 132.12); DDP was
+      114.10 (C5H6O3) though 1,4-dideoxy-2,3-pentodiulose (CH3-CO-CO-CH2-CH2OH, formed from 1-deoxypentosone with
+      cysteine as the reductant) is C5H8O3, 116.12. Used only for ug <-> mmol conversions; no shipped benchmark reports
+      these intermediates in mass units, so no shipped number moved.
+    explanations:
+      - "A formula slip when the table was written; the comment kept the right formula for DPO."
+    tests:
+      - "Recomputed from the formulas (C 12.011, H 1.008, O 15.999), 2026-10-29."
+    status: fixed
+    remedy: "species_sulfur.py corrected on branch submodel1-ph (2026-10-29)."
+    affects:
+      - {file: src/kinetic_core/species_sulfur.py, symbol: "CF-059"}
+
+  - id: CF-060
+    kind: conflict
+    scope: sulfur_rows
+    sources: [zhou2025b, zhou2024]
+    quantity: "3-deoxyxylosone and other dicarbonyls from the Ala-xylose Amadori compound (AX-ARP 20 mM, pH 8, 120 C)"
+    observation: >-
+      For the same nominal pot, Zhou 2024 Fig. 3 prints dicarbonyls 7-24x higher than Zhou 2025b (3-DX 3.7-5.3 vs
+      0.37-0.52 mM), while the ARP's decay and the pH agree. CF-019 called zhou2025b a re-publication of zhou2024; it is
+      not a re-plot. (Sub-model 3 first reader, against the figures; to be confirmed by the second reader.)
+    explanations:
+      - "A unit or dilution slip (mM vs per-sample) in one paper."
+      - "Different derivatisation / quantification (internal standard without an authentic dicarbonyl standard, CF-062)."
+    tests: []
+    status: open
+    remedy: "Read zhou2022 (the same group's earlier method paper) to see which quantification the numbers follow; until settled, both series enter by shape only."
+    affects: []
+
+  - id: CF-061
+    kind: conflict
+    scope: sulfur_rows
+    sources: [zhai2019, zhai2021]
+    quantity: "glyoxal relative to 3-deoxyxylosone in the cysteine + xylose / TTCA systems"
+    observation: "GO / 3-DX is 0.6 in Zhai 2019 and 0.005 in Zhai 2021: same laboratory, same method. In Zhai 2021 all GO is below the paper's own LOD (1.118 mg/L)."
+    explanations:
+      - "Zhai 2019's GO is above an LOD that Zhai 2021 later raised; or a co-eluting quinoxaline in 2019."
+    tests: []
+    status: open
+    remedy: "GO rows enter neither sub-model 3 table until explained."
+    affects: []
+
+  - id: CF-062
+    kind: condition_error
+    scope: sulfur_rows
+    sources: [zhai2019, zhai2021, zhai2023foodchem, zhou2025b]
+    quantity: "the quantification class of the Jiangnan group's deoxyosone (3-DX, 1-DX) data"
+    observation: >-
+      Every Jiangnan paper quantifies the deoxyosones as quinoxalines against an internal standard with no authentic
+      deoxyosone standard (none is commercially available), yet the ledgers class them 'calibrated'; zhai2023foodchem
+      says 'external standards' for data zhai2021 quantified with diacetyl as the internal standard. Without an
+      authentic standard the absolute level carries an unknown response factor: the series are semi-quantitative.
+    explanations:
+      - "The ledgers took 'quantified with an internal standard' as calibration."
+    tests: []
+    status: open
+    remedy: "Pending the second reading: if confirmed, these series enter the sub-model 3 table as semi_quantitative (shape only, fitting.SCALE_TAU); this affects 300 of its 315 rows and the route stage's 3-DX rows."
+    affects: []

@@ -23,7 +23,7 @@ VERIFIED = """entries:
     quote: "heated at 90 C"
     checks: {{conditions: pass, units: pass, quantification: pass, duplicates: pass, values: pass}}
 """ for k in ("paper_a_fig1", "paper_b_tab2", "paper_c_ph", "paper_b_reprint"))
-POT = "{{ledger_id: {lid}, t_c: 90, minutes: 60, initial_mmol_L: {{PENT: 400, Cys: 400}}, condition_quote: \"x\"}}"
+POT = "{{ledger_id: {lid}, t_c: 90, minutes: 60, initial_mmol_L: {{PENT: 400, Cys: 400}}, label_ph: 7.0, buffer: none, condition_quote: \"x\"}}"
 
 
 def _setup(tmp_path, monkeypatch, table: str, verified: str = VERIFIED):
@@ -120,4 +120,10 @@ def test_an_unmapped_laboratory_is_refused(tmp_path, monkeypatch):
     _setup(tmp_path, monkeypatch, _table("  - {pot: a, species: TTCA, t_min: 20, value: 10.0, unit: mmol_L, sd: 1}\n"))
     (tmp_path / "labs.yml").write_text("groups: {}\n")
     with pytest.raises(KeyError, match="laboratories.yml"):
+        fit_rows.load("t")
+
+
+def test_a_species_outside_the_vocabulary_is_refused(tmp_path, monkeypatch):
+    _setup(tmp_path, monkeypatch, _table("  - {pot: a, species: MFT-SS-FFT, t_min: 20, value: 1.0, unit: ug_L, sd: 0.1}\n"))
+    with pytest.raises(ValueError, match="named observable"):
         fit_rows.load("t")
