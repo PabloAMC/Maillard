@@ -550,7 +550,8 @@
           ],
           "placement": "modelled",
           "engine_reactions": [
-            "r_cys_h2s"
+            "r_cys_h2s",
+            "r_dpo_ddp_h2s"
           ]
         },
         {
@@ -1029,7 +1030,8 @@
           ],
           "placement": "modelled",
           "engine_reactions": [
-            "r_cys_h2s"
+            "r_cys_h2s",
+            "r_dpo_ddp_h2s"
           ]
         },
         {
@@ -2034,7 +2036,8 @@
           ],
           "placement": "modelled",
           "engine_reactions": [
-            "r_cys_h2s"
+            "r_cys_h2s",
+            "r_dpo_ddp_h2s"
           ]
         },
         {
@@ -3124,7 +3127,8 @@
           ],
           "placement": "modelled",
           "engine_reactions": [
-            "r_cys_h2s"
+            "r_cys_h2s",
+            "r_dpo_ddp_h2s"
           ]
         },
         {
@@ -4699,7 +4703,8 @@
           ],
           "placement": "modelled",
           "engine_reactions": [
-            "r_cys_h2s"
+            "r_cys_h2s",
+            "r_dpo_ddp_h2s"
           ]
         },
         {

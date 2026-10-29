@@ -11,7 +11,7 @@
     ],
     "lane_networks": {
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
-      "sulfur": "FULL_REACTIONS (113 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (114 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
@@ -41,12 +41,12 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-10-28",
+    "generated_on": "2026-10-29",
     "git": {
-      "commit": "ab1fcc559752228d10e2ca3bed558a119681fe80",
-      "short": "ab1fcc55",
-      "branch": "b58-ttca-formation",
-      "dirty": true
+      "commit": "8a71b8cf0d7ef40d38e182bb743cda0529652b88",
+      "short": "8a71b8cf",
+      "branch": "sulfur-route-and-tooling",
+      "dirty": false
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [
@@ -80,43 +80,43 @@
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
-        "sha256": "4a8b51d4fd20e0972287ce5fb104960f85db554bdbcb5f72e33f03b6e1f73d28"
+        "sha256": "209b919184ef733f2fa333d93e325edcf53400e9bbdccb7cdd34f70116e7b300"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json",
-        "sha256": "8f75ba262c8f1758826eb640c195afc168fd59e64cd41be5feb0d603c15d0fb8"
+        "sha256": "aa0a88ce55d867cb2b615da8fe01b09c81d360f6732999650c5f104ce9e0c3ed"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH7.json",
-        "sha256": "4f6ad7c8c5b13a87027cfe4b0c360fed9b12c2234845b9323c400a16ba3b90ca"
+        "sha256": "900e421a1f9fde12f604feabf7bd1e401b736e583f8ae9d4f7d02f37630b571c"
       },
       {
         "path": "data/benchmarks/hofmann1998_fructose_cysteine_145C_20min_pH5.json",
-        "sha256": "e04894958074e4f6b405060fe628cde405d104bce9c086d6ab4be78f49158fbe"
+        "sha256": "fbe59d5fe3f012d14d7d60101cca781f3620158f3d5e8744040f5eb805fca873"
       },
       {
         "path": "data/benchmarks/hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json",
-        "sha256": "daa2ceb2b740bca4999afa314b70fac9c0207d94cf01dad0cc981514d9be46fc"
+        "sha256": "58812b0e8cff33700726097bbf1f7241b4167d4154258d6f2309137b9196a294"
       },
       {
         "path": "data/benchmarks/hofmann1998_glucose_cysteine_145C_20min_pH5.json",
-        "sha256": "bbe95f2aa67fc59ed06811b36e60b30711b23a9356b0abfb3a6db8f219560b02"
+        "sha256": "8814f07a3d27d1f2fee64f1ef1d3180fc334939da8264136065b9fd5f307ce75"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json",
-        "sha256": "3a4fe5e0632f7a0b3062d813a7bd8dbce6942b82fe3f36abaa20d30a11a76d8e"
+        "sha256": "5e84d125fca3ddba5562a0fbf191fef1736caafc344553af7e56ba865310da29"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_h2s_145C_20min_pH5.json",
-        "sha256": "7be03951d06fc7b390ed55d7792578673df94156fb673913b055db9a4b0ea588"
+        "sha256": "6178461ca0d6ba0d8daf8d7e04fc74bfd09a078ef03a19f811eb03ed12ea29e0"
       },
       {
         "path": "data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json",
-        "sha256": "6cb47d5c81a3ba173f06e5303b53ba3315b04e8158614d62af9677401319900c"
+        "sha256": "d5da9cb0162ef4ef95323f36df915f16db726790bc8528ebea6b0a7d3ffb6e8b"
       },
       {
         "path": "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
-        "sha256": "b866f20aa19561afa25bbe77a49d1d4d98cf1dd3c1e00113f39ec0455ee055fe"
+        "sha256": "bffb432fa07d439209759f54050e92a9289376378519e14f6e63c8c0482374ff"
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
@@ -128,7 +128,7 @@
       },
       {
         "path": "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
-        "sha256": "b37999aa49e8753c6b7af94024e152300c71c5b4a773e25d813e3ed8226c86e7"
+        "sha256": "ed985737a4d5b737fec35aa17144d9a09a2d6638d987417a292256e00925c2ee"
       },
       {
         "path": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
@@ -184,23 +184,23 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
-        "sha256": "3bd440ee7f86492ded7609ea9cdf62fa109178a2ec87c5a4e8f5f787646ad4ed"
+        "sha256": "0cf61b4440ac16a61584679e416799e04ea18afb0db243563819f396b16292f1"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7.json",
-        "sha256": "af1adbd38b4e055579bb5304860b7ad9fc16345d20c954183dcf7e78c13b61c0"
+        "sha256": "e6a86e6c56ba9e66d8e570489e48b9e746dc805bbbef53bb6f1f197841d1797e"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3.json",
-        "sha256": "63cfc172d57e28c02d11c719a8880cdad2dd01789bf34aa51a2c0f3354b379f1"
+        "sha256": "d42b4a7bc2ecbce337a26f2f8afc71e368dfb2f507332a672f02de05eb5e2b70"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json",
-        "sha256": "edd2b24080574d112ed271161472ec0f903f145946f450e65cdd890bd3c9521a"
+        "sha256": "8b102d687e68c22bdf7d38e57928a9910c433d54759c5569eac2c896b8b38ca6"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
-        "sha256": "0d216cda3fe110c1ca452e944f8846836cbe675079fad8057d9f2a5a4f203f86"
+        "sha256": "e22a60b9a78e540be1e0fee015402574e431582da8fe900bd251a98d5a52af17"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
@@ -224,7 +224,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
-        "sha256": "8c3c3b02959de5bfc9c610702529bc659cb5bd157924b11f7f7d657ea342fa69"
+        "sha256": "c0f6a346a575da3c92749d3a4d326951ecbbda96717feeb112aa4ee809a2c87d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
@@ -236,7 +236,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
-        "sha256": "f76c219e8d8ee4c90102d8c3f838fdb9f49c685b41f622c70639f770eae4814e"
+        "sha256": "bbbbc168b31eaebc461341bad8e2ae3d8e4b69393027b70114f0fdd330f6dd4c"
       }
     ]
   },
@@ -273,11 +273,11 @@
     "within_band_rate": 0.3181818181818182,
     "fold_summary": {
       "n": 66,
-      "median_fold_error": 7.870779728916462,
-      "worst_fold_error": 28681.014327158067,
+      "median_fold_error": 7.870779929437331,
+      "worst_fold_error": 28681.01424821688,
       "best_fold_error": 1.0101717815321325,
-      "median_abs_log10_error": 0.8952914455776485,
-      "geometric_mean_fold": 14.18129211909695
+      "median_abs_log10_error": 0.8952914571998088,
+      "geometric_mean_fold": 14.1812921244338
     },
     "evidence_role_totals": {
       "external_holdout": 26,
@@ -315,11 +315,11 @@
         "within_band_rate": 0.2127659574468085,
         "fold_summary": {
           "n": 47,
-          "median_fold_error": 14.29545771289258,
-          "worst_fold_error": 28681.014327158067,
+          "median_fold_error": 14.295457769960946,
+          "worst_fold_error": 28681.01424821688,
           "best_fold_error": 1.0101717815321325,
-          "median_abs_log10_error": 1.155198065185522,
-          "geometric_mean_fold": 19.410627802336744
+          "median_abs_log10_error": 1.155198066919253,
+          "geometric_mean_fold": 19.41062776652513
         }
       },
       "trust_loop": {
@@ -333,9 +333,9 @@
           "n": 15,
           "median_fold_error": 2.209926978429618,
           "worst_fold_error": 9631.58938385354,
-          "best_fold_error": 1.0572202533945545,
+          "best_fold_error": 1.057220256090717,
           "median_abs_log10_error": 0.3443779237353335,
-          "geometric_mean_fold": 5.422065289194194
+          "geometric_mean_fold": 5.422065329516425
         }
       }
     },
@@ -350,10 +350,10 @@
         "fold_summary": {
           "n": 51,
           "median_fold_error": 9.307565792209804,
-          "worst_fold_error": 28681.014327158067,
+          "worst_fold_error": 28681.01424821688,
           "best_fold_error": 1.0101717815321325,
           "median_abs_log10_error": 0.9688361147902614,
-          "geometric_mean_fold": 18.815897496543716
+          "geometric_mean_fold": 18.815897464552048
         }
       },
       "predictive": {
@@ -367,9 +367,9 @@
           "n": 15,
           "median_fold_error": 2.209926978429618,
           "worst_fold_error": 9631.58938385354,
-          "best_fold_error": 1.0572202533945545,
+          "best_fold_error": 1.057220256090717,
           "median_abs_log10_error": 0.3443779237353335,
-          "geometric_mean_fold": 5.422065289194194
+          "geometric_mean_fold": 5.422065329516425
         }
       }
     },
@@ -383,11 +383,11 @@
         "within_band_rate": 0.3333333333333333,
         "fold_summary": {
           "n": 12,
-          "median_fold_error": 7.697350087704038,
+          "median_fold_error": 7.697350087796094,
           "worst_fold_error": 9631.58938385354,
           "best_fold_error": 1.0333003055827752,
-          "median_abs_log10_error": 0.878478657520857,
-          "geometric_mean_fold": 20.30015612450391
+          "median_abs_log10_error": 0.8784786575252395,
+          "geometric_mean_fold": 20.300156124526485
         }
       },
       "lipid": {
@@ -415,11 +415,11 @@
         "within_band_rate": 0.25,
         "fold_summary": {
           "n": 40,
-          "median_fold_error": 13.648057497355655,
-          "worst_fold_error": 28681.014327158067,
-          "best_fold_error": 1.0572202533945545,
-          "median_abs_log10_error": 1.134581687463521,
-          "geometric_mean_fold": 17.256408245758504
+          "median_fold_error": 13.648057525887744,
+          "worst_fold_error": 28681.01424821688,
+          "best_fold_error": 1.057220256090717,
+          "median_abs_log10_error": 1.1345816883303166,
+          "geometric_mean_fold": 17.25640825646802
         }
       },
       "trunk": {
@@ -448,11 +448,11 @@
       "within_band_rate": 0.3181818181818182,
       "fold_summary": {
         "n": 66,
-        "median_fold_error": 7.870779728916462,
-        "worst_fold_error": 28681.014327158067,
+        "median_fold_error": 7.870779929437331,
+        "worst_fold_error": 28681.01424821688,
         "best_fold_error": 1.0101717815321325,
-        "median_abs_log10_error": 0.8952914455776485,
-        "geometric_mean_fold": 14.18129211909695
+        "median_abs_log10_error": 0.8952914571998088,
+        "geometric_mean_fold": 14.1812921244338
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
@@ -465,11 +465,11 @@
       "within_band_rate": 0.25,
       "fold_summary": {
         "n": 56,
-        "median_fold_error": 11.801511752551193,
-        "worst_fold_error": 28681.014327158067,
+        "median_fold_error": 11.801511781085374,
+        "worst_fold_error": 28681.01424821688,
         "best_fold_error": 1.0101717815321325,
-        "median_abs_log10_error": 1.0620170899878918,
-        "geometric_mean_fold": 19.205374653879
+        "median_abs_log10_error": 1.0620170908547573,
+        "geometric_mean_fold": 19.205374641908193
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -482,11 +482,11 @@
       "within_band_rate": 0.7,
       "fold_summary": {
         "n": 10,
-        "median_fold_error": 2.03617377543448,
-        "worst_fold_error": 13.000657281818732,
-        "best_fold_error": 1.0572202533945545,
-        "median_abs_log10_error": 0.3084922137222161,
-        "geometric_mean_fold": 2.5951156205188024
+        "median_fold_error": 2.036173688555539,
+        "worst_fold_error": 13.000657281814542,
+        "best_fold_error": 1.057220256090717,
+        "median_abs_log10_error": 0.30849219587935706,
+        "geometric_mean_fold": 2.5951156360227676
       },
       "definition": "literature rows the sulfur fit read; reported, never pooled"
     },
@@ -495,7 +495,7 @@
       "total": 47
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 242.8
+    "wall_seconds": 60.3
   },
   "benchmarks": [
     {
@@ -555,8 +555,8 @@
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 130.0 C: 10.5 decades of 10 C, a factor of 1.45e+03-1.02e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 130.0 C: 10.5 decades of 10 C, a factor of 139-2.78e+05 on the rate.",
             "'Soy protein isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (50) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "WATER ACTIVITY (B14/B15): a_w 0.35 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.75 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
@@ -736,14 +736,14 @@
           "target_unit": "ppb",
           "measured": 310.0,
           "measured_ppb": 310.0,
-          "predicted": 4030.2037573638067,
-          "fold_error": 13.000657281818732,
-          "abs_log10_error": 1.1139653097415199,
+          "predicted": 4030.203757362508,
+          "fold_error": 13.000657281814542,
+          "abs_log10_error": 1.11396530974138,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            576.2260902498729,
-            28187.79399389219
+            576.2260902496871,
+            28187.793993883108
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -762,8 +762,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 13.000657281818732,
-      "mean_abs_log10_error": 1.1139653097415199,
+      "max_ratio": 13.000657281814542,
+      "mean_abs_log10_error": 1.11396530974138,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -844,14 +844,14 @@
           "target_unit": "ppb",
           "measured": 5362.0,
           "measured_ppb": 5362.0,
-          "predicted": 2919.6509380647494,
-          "fold_error": 1.8365209108024838,
-          "abs_log10_error": 0.2639958776279118,
+          "predicted": 2919.6509380246657,
+          "fold_error": 1.8365209108276974,
+          "abs_log10_error": 0.2639958776338743,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            417.44267690224274,
-            20420.43631810702
+            417.44267689651167,
+            20420.43631782667
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -870,8 +870,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.8365209108024838,
-      "mean_abs_log10_error": 0.2639958776279118,
+      "max_ratio": 1.8365209108276974,
+      "mean_abs_log10_error": 0.2639958776338743,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -952,14 +952,14 @@
           "target_unit": "ppb",
           "measured": 6230.0,
           "measured_ppb": 6230.0,
-          "predicted": 1146.4759197447625,
-          "fold_error": 5.434043482908016,
-          "abs_log10_error": 0.73512310929561,
+          "predicted": 1146.475919744765,
+          "fold_error": 5.434043482908004,
+          "abs_log10_error": 0.7351231092956091,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            163.9195873392454,
-            8018.608733038858
+            163.91958733924574,
+            8018.608733038876
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -978,8 +978,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 5.434043482908016,
-      "mean_abs_log10_error": 0.73512310929561,
+      "max_ratio": 5.434043482908004,
+      "mean_abs_log10_error": 0.7351231092956091,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1142,14 +1142,14 @@
           "target_unit": "ppb",
           "measured": 11016.0,
           "measured_ppb": 11016.0,
-          "predicted": 17014.10599418542,
-          "fold_error": 1.5444903771047038,
-          "abs_log10_error": 0.1887852067887507,
+          "predicted": 17014.105990845805,
+          "fold_error": 1.5444903768015437,
+          "abs_log10_error": 0.18878520670350524,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            2432.624345161957,
-            118998.97464937335
+            2432.6243446844696,
+            118998.97462601564
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1168,8 +1168,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.5444903771047038,
-      "mean_abs_log10_error": 0.1887852067887507,
+      "max_ratio": 1.5444903768015437,
+      "mean_abs_log10_error": 0.18878520670350524,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1332,14 +1332,14 @@
           "target_unit": "ppb",
           "measured": 1016.0,
           "measured_ppb": 1016.0,
-          "predicted": 1074.1357774488674,
-          "fold_error": 1.0572202533945545,
-          "abs_log10_error": 0.024165474411660504,
+          "predicted": 1074.1357801881684,
+          "fold_error": 1.057220256090717,
+          "abs_log10_error": 0.024165475519214438,
           "within_band": true,
           "within_contract_ratio": true,
           "interval_ug_per_L": [
-            153.57661713901186,
-            7512.651925073562
+            153.57661753066867,
+            7512.651944232606
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1358,8 +1358,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.0572202533945545,
-      "mean_abs_log10_error": 0.024165474411660504,
+      "max_ratio": 1.057220256090717,
+      "mean_abs_log10_error": 0.024165475519214438,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "pass",
@@ -1437,14 +1437,14 @@
           "target_unit": "ppb",
           "measured": 4224.0,
           "measured_ppb": 4224.0,
-          "predicted": 8269.399953646607,
-          "fold_error": 1.9577177920564885,
-          "abs_log10_error": 0.291750087780759,
+          "predicted": 8269.39995364794,
+          "fold_error": 1.957717792056804,
+          "abs_log10_error": 0.291750087780829,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1182.3332741665456,
-            57837.30957041302
+            1182.3332741667364,
+            57837.309570422345
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1463,8 +1463,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.9577177920564885,
-      "mean_abs_log10_error": 0.291750087780759,
+      "max_ratio": 1.957717792056804,
+      "mean_abs_log10_error": 0.291750087780829,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1549,14 +1549,14 @@
           "target_unit": "ppb",
           "measured": 121.0,
           "measured_ppb": 121.0,
-          "predicted": 346.6167649315865,
-          "fold_error": 2.8646013630709626,
-          "abs_log10_error": 0.45706419423916117,
+          "predicted": 346.61680335656604,
+          "fold_error": 2.864601680632777,
+          "abs_log10_error": 0.4570642423838482,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            49.558194894402135,
-            2424.284863232771
+            49.55820038828708,
+            2424.285131982311
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1575,14 +1575,14 @@
           "target_unit": "ppb",
           "measured": 198.0,
           "measured_ppb": 198.0,
-          "predicted": 93.63341226749424,
-          "fold_error": 2.114629758812471,
-          "abs_log10_error": 0.32523433966367316,
+          "predicted": 93.63341996131116,
+          "fold_error": 2.114629585054274,
+          "abs_log10_error": 0.3252343039778851,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            13.387416199260482,
-            654.884838296044
+            13.38741729929867,
+            654.8848921076475
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1601,8 +1601,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 2.8646013630709626,
-      "mean_abs_log10_error": 0.39114926695141716,
+      "max_ratio": 2.864601680632777,
+      "mean_abs_log10_error": 0.3911492731808667,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1649,7 +1649,7 @@
         "vessel_mL": null,
         "headspace_mL": null,
         "status": "not_applicable",
-        "basis": "no cook"
+        "basis": "never heated"
       },
       "scale_thresholds": {
         "max_ratio": 2.0,
@@ -1663,7 +1663,7 @@
           "panel": "trust_loop",
           "compound": "hexanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -1673,7 +1673,7 @@
           "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -1691,7 +1691,7 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -1747,15 +1747,15 @@
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            3.6230382390591194,
-            34560.875923510255
+            1.0872060230134348,
+            115171.70839358751
           ],
           "measured_within_interval": true,
           "lane": "lipid",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (0) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -1778,15 +1778,15 @@
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.6599103692951521,
-            6293.005766353429
+            0.19805344475941633,
+            20968.177374018484
           ],
           "measured_within_interval": true,
           "lane": "lipid",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (0) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -1809,15 +1809,15 @@
           "within_band": true,
           "within_contract_ratio": true,
           "interval_ug_per_L": [
-            0.15981010970619292,
-            1523.9735404928028
+            0.04796248734278565,
+            5077.85129980594
           ],
           "measured_within_interval": true,
           "lane": "lipid",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (0) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "NONANAL RESTS ON A DECLARED ANCHOR, NOT A MEASURED YIELD. This matrix is 26 % oleate by fatty-acid share. The oleate -> nonanal SHARE is measured -- 15 % of the slate (Selke 1978, republished by Frankel 1981) and 10 % (Frankel 1981's own photosensitized column, the only independent determination). But Frankel 1981 prints PEAK AREAS: no internal standard, no response factors, no replicates. No absolute yield from an oleate hydroperoxide exists anywhere in the corpus, so the absolute here assumes the named-product molar yield per oleate hydroperoxide is 0.45 times the measured one per LINOLEATE hydroperoxide, banded 0.2 to 1. Read the interval, not the point. Frankel 1989's silence on nonanal remains a declared hold-out and is still honoured: nonanal from a LINOLEATE feed is exactly zero, by construction.",
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
@@ -1841,15 +1841,15 @@
           "within_band": true,
           "within_contract_ratio": true,
           "interval_ug_per_L": [
-            0.7757036249401218,
-            7387.828812432729
+            0.23293065872034785,
+            24602.882341570126
           ],
           "measured_within_interval": true,
           "lane": "lipid",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (0) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -1959,14 +1959,14 @@
           "target_unit": "ppb",
           "measured": 715.22,
           "measured_ppb": 715.22,
-          "predicted": 46.452689560711484,
-          "fold_error": 15.39674035591074,
-          "abs_log10_error": 1.1874287860777932,
+          "predicted": 46.45268582053923,
+          "fold_error": 15.396741595590642,
+          "abs_log10_error": 1.187428821045332,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            6.6416621338938375,
-            324.89643765705074
+            6.641661599135556,
+            324.89641149777657
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -1987,8 +1987,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 15.39674035591074,
-      "mean_abs_log10_error": 1.1874287860777932,
+      "max_ratio": 15.396741595590642,
+      "mean_abs_log10_error": 1.187428821045332,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2035,7 +2035,7 @@
         "vessel_mL": null,
         "headspace_mL": null,
         "status": "not_applicable",
-        "basis": "no cook"
+        "basis": "never heated"
       },
       "scale_thresholds": {
         "max_ratio": 2.0,
@@ -2049,7 +2049,7 @@
           "panel": "trust_loop",
           "compound": "hexanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -2059,7 +2059,7 @@
           "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -2077,7 +2077,7 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -2130,14 +2130,14 @@
           "target_unit": "ppb",
           "measured": 11.7,
           "measured_ppb": 11.7,
-          "predicted": 232.91571325339726,
-          "fold_error": 19.907325919093783,
-          "abs_log10_error": 1.2990129266985548,
+          "predicted": 232.9157132486124,
+          "fold_error": 19.907325918684823,
+          "abs_log10_error": 1.2990129266896329,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            33.3015695696624,
-            1629.0442216801719
+            33.30156956897827,
+            1629.044221646706
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2158,8 +2158,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 19.907325919093783,
-      "mean_abs_log10_error": 1.2990129266985548,
+      "max_ratio": 19.907325918684823,
+      "mean_abs_log10_error": 1.2990129266896329,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2219,14 +2219,14 @@
           "target_unit": "ppb",
           "measured": 8.1,
           "measured_ppb": 8.1,
-          "predicted": 1305.955240705862,
-          "fold_error": 161.2290420624521,
-          "abs_log10_error": 2.207443273644197,
+          "predicted": 1305.955247122756,
+          "fold_error": 161.22904285466123,
+          "abs_log10_error": 2.2074432757781306,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            186.72144826878537,
-            9134.028824969335
+            186.72144918625304,
+            9134.028869849964
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2245,14 +2245,14 @@
           "target_unit": "ppb",
           "measured": 116.0,
           "measured_ppb": 116.0,
-          "predicted": 129.54014944023567,
-          "fold_error": 1.1167254262089281,
-          "abs_log10_error": 0.04794640450247584,
+          "predicted": 129.54014850126148,
+          "fold_error": 1.1167254181143231,
+          "abs_log10_error": 0.04794640135448421,
           "within_band": true,
           "within_contract_ratio": true,
           "interval_ug_per_L": [
-            18.52125062062789,
-            906.0214485899392
+            18.521250486376257,
+            906.0214420226258
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -2271,14 +2271,14 @@
           "target_unit": "ppb",
           "measured": 716.0,
           "measured_ppb": 716.0,
-          "predicted": 24.137597101194398,
-          "fold_error": 29.66326751574498,
-          "abs_log10_error": 1.472218988428614,
+          "predicted": 24.13759670405366,
+          "fold_error": 29.66326800380069,
+          "abs_log10_error": 1.4722189955741485,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            3.4511191103513164,
-            168.82164167329432
+            3.4511190535693594,
+            168.82163889563793
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2297,9 +2297,9 @@
       "matched_compounds": 3,
       "total_compounds": 3,
       "coverage": 1.0,
-      "max_ratio": 161.2290420624521,
-      "mean_abs_log10_error": 1.2425362221917624,
-      "pearson_r_log10": -0.9998548050365764,
+      "max_ratio": 161.22904285466123,
+      "mean_abs_log10_error": 1.2425362242355877,
+      "pearson_r_log10": -0.9998548050355544,
       "ranking_status": "fail",
       "scale_status": "fail",
       "overall_status": "ranking-gap",
@@ -2359,14 +2359,14 @@
           "target_unit": "ppb",
           "measured": 59.1,
           "measured_ppb": 59.1,
-          "predicted": 844.8615508319515,
-          "fold_error": 14.29545771289258,
-          "abs_log10_error": 1.155198065185522,
+          "predicted": 844.8615542046919,
+          "fold_error": 14.295457769960946,
+          "abs_log10_error": 1.155198066919253,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            120.79569608579304,
-            5909.076756900448
+            120.79569656801705,
+            5909.076780489854
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2385,14 +2385,14 @@
           "target_unit": "ppb",
           "measured": 124.0,
           "measured_ppb": 124.0,
-          "predicted": 25.670764832420303,
-          "fold_error": 4.830397567406992,
-          "abs_log10_error": 0.6839828769679456,
+          "predicted": 25.670765152881717,
+          "fold_error": 4.830397507106646,
+          "abs_log10_error": 0.6839828715464233,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            3.6703266990116585,
-            179.5448256033662
+            3.670326744830242,
+            179.544827844717
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -2411,14 +2411,14 @@
           "target_unit": "ppb",
           "measured": 113.0,
           "measured_ppb": 113.0,
-          "predicted": 4.594963849634168,
-          "fold_error": 24.59214124372199,
-          "abs_log10_error": 1.3907963445112697,
+          "predicted": 4.594963993856148,
+          "fold_error": 24.592140471849284,
+          "abs_log10_error": 1.3907963308800833,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.6569737445845942,
-            32.137802999715134
+            0.6569737652050076,
+            32.13780400842331
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2437,9 +2437,9 @@
       "matched_compounds": 3,
       "total_compounds": 3,
       "coverage": 1.0,
-      "max_ratio": 24.59214124372199,
-      "mean_abs_log10_error": 1.0766590955549125,
-      "pearson_r_log10": -0.9026080573404525,
+      "max_ratio": 24.592140471849284,
+      "mean_abs_log10_error": 1.07665908978192,
+      "pearson_r_log10": -0.9026080582459126,
       "ranking_status": "fail",
       "scale_status": "fail",
       "overall_status": "ranking-gap",
@@ -2499,14 +2499,14 @@
           "target_unit": "ppb",
           "measured": 64.1,
           "measured_ppb": 64.1,
-          "predicted": 1748.8197481769012,
-          "fold_error": 27.28267937873481,
-          "abs_log10_error": 1.4358870192930266,
+          "predicted": 1748.8198103287987,
+          "fold_error": 27.282680348343195,
+          "abs_log10_error": 1.4358870347275652,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            250.040848233167,
-            12231.483508492747
+            250.0408571194534,
+            12231.483943191584
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2525,14 +2525,14 @@
           "target_unit": "ppb",
           "measured": 383.0,
           "measured_ppb": 383.0,
-          "predicted": 73.48805525675505,
-          "fold_error": 5.211731330511628,
-          "abs_log10_error": 0.7169820193422111,
+          "predicted": 73.48805571848523,
+          "fold_error": 5.211731297765985,
+          "abs_log10_error": 0.7169820166135109,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            10.507095251274668,
-            513.9854675596209
+            10.507095317291423,
+            513.9854707890247
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -2551,14 +2551,14 @@
           "target_unit": "ppb",
           "measured": 397.0,
           "measured_ppb": 397.0,
-          "predicted": 8.835422427452816,
-          "fold_error": 44.932769571545215,
-          "abs_log10_error": 1.6525631885144387,
+          "predicted": 8.835422550184978,
+          "fold_error": 44.93276894738763,
+          "abs_log10_error": 1.652563182481688,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.263261419915746,
-            61.7961478446344
+            1.2632614374636115,
+            61.796148703039854
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2577,9 +2577,9 @@
       "matched_compounds": 3,
       "total_compounds": 3,
       "coverage": 1.0,
-      "max_ratio": 44.932769571545215,
-      "mean_abs_log10_error": 1.2684774090498923,
-      "pearson_r_log10": -0.9241065198761361,
+      "max_ratio": 44.93276894738763,
+      "mean_abs_log10_error": 1.2684774112742547,
+      "pearson_r_log10": -0.9241065212169798,
       "ranking_status": "fail",
       "scale_status": "fail",
       "overall_status": "ranking-gap",
@@ -2639,14 +2639,14 @@
           "target_unit": "ppb",
           "measured": 57.1,
           "measured_ppb": 57.1,
-          "predicted": 1645.1264262771613,
-          "fold_error": 28.811320950563243,
-          "abs_log10_error": 1.4595631704077685,
+          "predicted": 1645.1264207712672,
+          "fold_error": 28.81132085413778,
+          "abs_log10_error": 1.4595631689542758,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            235.21509721396984,
-            11506.238292066246
+            235.21509642675412,
+            11506.238253557272
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2665,14 +2665,14 @@
           "target_unit": "ppb",
           "measured": 270.0,
           "measured_ppb": 270.0,
-          "predicted": 110.83672177407993,
-          "fold_error": 2.4360157507215416,
-          "abs_log10_error": 0.3866800920188579,
+          "predicted": 110.83672146422113,
+          "fold_error": 2.4360157575317483,
+          "abs_log10_error": 0.38668009323298597,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            15.847092278472548,
-            775.2071280807168
+            15.847092234169892,
+            775.207125913522
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -2691,14 +2691,14 @@
           "target_unit": "ppb",
           "measured": 575.0,
           "measured_ppb": 575.0,
-          "predicted": 16.171519447804577,
-          "fold_error": 35.55633729136449,
-          "abs_log10_error": 1.5509170173129052,
+          "predicted": 16.17151955873745,
+          "fold_error": 35.55633704745627,
+          "abs_log10_error": 1.5509170143337456,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            2.3121539221886636,
-            113.10580958346021
+            2.3121539380495033,
+            113.10581035933984
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2717,9 +2717,9 @@
       "matched_compounds": 3,
       "total_compounds": 3,
       "coverage": 1.0,
-      "max_ratio": 35.55633729136449,
-      "mean_abs_log10_error": 1.1323867599131772,
-      "pearson_r_log10": -0.9949436122719311,
+      "max_ratio": 35.55633704745627,
+      "mean_abs_log10_error": 1.1323867588403358,
+      "pearson_r_log10": -0.9949436124062947,
       "ranking_status": "fail",
       "scale_status": "fail",
       "overall_status": "ranking-gap",
@@ -2779,14 +2779,14 @@
           "target_unit": "ppb",
           "measured": 1859.0,
           "measured_ppb": 1859.0,
-          "predicted": 203.19417771604577,
-          "fold_error": 9.148884189968594,
-          "abs_log10_error": 0.9613681301660201,
+          "predicted": 203.19417771198226,
+          "fold_error": 9.148884190151556,
+          "abs_log10_error": 0.9613681301747052,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            29.052076181736723,
-            1421.1677540504033
+            29.052076181155734,
+            1421.1677540219825
           ],
           "measured_within_interval": false,
           "lane": "acrylamide",
@@ -2808,14 +2808,14 @@
           "target_unit": "ppb",
           "measured": 12280.0,
           "measured_ppb": 12280.0,
-          "predicted": 1966.1162014102997,
-          "fold_error": 6.245815985439481,
-          "abs_log10_error": 0.7955891848756937,
+          "predicted": 1966.1162014099375,
+          "fold_error": 6.245815985440632,
+          "abs_log10_error": 0.7955891848757738,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            281.10922422856527,
-            13751.284498245424
+            281.1092242285135,
+            13751.28449824289
           ],
           "measured_within_interval": true,
           "lane": "acrylamide",
@@ -2839,8 +2839,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 9.148884189968594,
-      "mean_abs_log10_error": 0.878478657520857,
+      "max_ratio": 9.148884190151556,
+      "mean_abs_log10_error": 0.8784786575252395,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3174,14 +3174,14 @@
           "target_unit": "ppb",
           "measured": 28.0,
           "measured_ppb": 28.0,
-          "predicted": 6110.035826794892,
-          "fold_error": 218.21556524267473,
-          "abs_log10_error": 2.33888572543613,
+          "predicted": 6110.035826794899,
+          "fold_error": 218.21556524267496,
+          "abs_log10_error": 2.3388857254361306,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            873.5940581980979,
-            42734.42276120833
+            873.5940581980988,
+            42734.42276120837
           ],
           "measured_within_interval": false,
           "lane": "acrylamide",
@@ -3203,8 +3203,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 218.21556524267473,
-      "mean_abs_log10_error": 2.33888572543613,
+      "max_ratio": 218.21556524267496,
+      "mean_abs_log10_error": 2.3388857254361306,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3264,14 +3264,14 @@
           "target_unit": "ppb",
           "measured": 1459.0,
           "measured_ppb": 1459.0,
-          "predicted": 3679.889173323907,
-          "fold_error": 2.5221995704756046,
-          "abs_log10_error": 0.4017794473945631,
+          "predicted": 3679.8891733115074,
+          "fold_error": 2.5221995704671056,
+          "abs_log10_error": 0.4017794473930997,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            526.1391925961273,
-            25737.64608017187
+            526.1391925943544,
+            25737.646080085146
           ],
           "measured_within_interval": true,
           "lane": "acrylamide",
@@ -3293,8 +3293,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 2.5221995704756046,
-      "mean_abs_log10_error": 0.4017794473945631,
+      "max_ratio": 2.5221995704671056,
+      "mean_abs_log10_error": 0.4017794473930997,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3354,14 +3354,14 @@
           "target_unit": "ppb",
           "measured": 832.0,
           "measured_ppb": 832.0,
-          "predicted": 3679.889173323907,
-          "fold_error": 4.422943717937388,
-          "abs_log10_error": 0.6457114129972907,
+          "predicted": 3679.8891733115074,
+          "fold_error": 4.422943717922485,
+          "abs_log10_error": 0.6457114129958273,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            526.1391925961273,
-            25737.64608017187
+            526.1391925943544,
+            25737.646080085146
           ],
           "measured_within_interval": true,
           "lane": "acrylamide",
@@ -3383,14 +3383,14 @@
           "target_unit": "ppb",
           "measured": 7000.0,
           "measured_ppb": 7000.0,
-          "predicted": 2551.248059780942,
-          "fold_error": 2.7437551488431278,
-          "abs_log10_error": 0.43834535257009105,
+          "predicted": 2551.248059781186,
+          "fold_error": 2.7437551488428658,
+          "abs_log10_error": 0.4383453525700496,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            364.76957078387255,
-            17843.776410814025
+            364.7695707839074,
+            17843.77641081573
           ],
           "measured_within_interval": true,
           "lane": "acrylamide",
@@ -3414,8 +3414,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 4.422943717937388,
-      "mean_abs_log10_error": 0.5420283827836909,
+      "max_ratio": 4.422943717922485,
+      "mean_abs_log10_error": 0.5420283827829384,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3478,9 +3478,9 @@
           "target_unit": "umol_per_mol_limiting_precursor",
           "measured": 140.58,
           "measured_ppb": null,
-          "predicted": 7004.325407821039,
-          "fold_error": 49.8244800670155,
-          "abs_log10_error": 1.6974427754065586,
+          "predicted": 7004.325407821018,
+          "fold_error": 49.82448006701535,
+          "abs_log10_error": 1.6974427754065573,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": null,
@@ -3504,8 +3504,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 49.8244800670155,
-      "mean_abs_log10_error": 1.6974427754065586,
+      "max_ratio": 49.82448006701535,
+      "mean_abs_log10_error": 1.6974427754065573,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3972,14 +3972,14 @@
           "target_unit": "ppb",
           "measured": 229.0,
           "measured_ppb": 229.0,
-          "predicted": 1523.270747310501,
-          "fold_error": 6.651837324500005,
-          "abs_log10_error": 0.8229416196912176,
+          "predicted": 1523.2707418838477,
+          "fold_error": 6.651837300802828,
+          "abs_log10_error": 0.8229416181440431,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            217.79254845637763,
-            10653.96307659554
+            217.79254768049148,
+            10653.963038640788
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -3998,14 +3998,14 @@
           "target_unit": "ppb",
           "measured": 553.0,
           "measured_ppb": 553.0,
-          "predicted": 24.707237592100633,
-          "fold_error": 22.38210556475988,
-          "abs_log10_error": 1.349900939750109,
+          "predicted": 24.707237554782857,
+          "fold_error": 22.38210559856578,
+          "abs_log10_error": 1.3499009404060667,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            3.532564549015098,
-            172.80578485188823
+            3.5325645436795177,
+            172.80578459088264
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4024,8 +4024,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 22.38210556475988,
-      "mean_abs_log10_error": 1.0864212797206632,
+      "max_ratio": 22.38210559856578,
+      "mean_abs_log10_error": 1.086421279275055,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4088,14 +4088,14 @@
           "target_unit": "ppb",
           "measured": 12.0,
           "measured_ppb": 12.0,
-          "predicted": 0.16959779504376088,
-          "fold_error": 70.75563686959298,
-          "abs_log10_error": 1.8497610443919792,
+          "predicted": 0.16959779562439883,
+          "fold_error": 70.75563662735274,
+          "abs_log10_error": 1.849761042905121,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.024248569113783345,
-            1.1861900778036365
+            0.024248569196801167,
+            1.1861900818646973
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4114,14 +4114,14 @@
           "target_unit": "ppb",
           "measured": 25.0,
           "measured_ppb": 25.0,
-          "predicted": 0.00509621752530742,
-          "fold_error": 4905.5990792881075,
-          "abs_log10_error": 3.690692051663328,
+          "predicted": 0.005096217562612314,
+          "fold_error": 4905.599043378563,
+          "abs_log10_error": 3.6906920484842427,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.0007286414475459715,
-            0.03564363947826602
+            0.0007286414528797099,
+            0.035643639739181526
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4140,8 +4140,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 4905.5990792881075,
-      "mean_abs_log10_error": 2.7702265480276536,
+      "max_ratio": 4905.599043378563,
+      "mean_abs_log10_error": 2.770226545694682,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4226,14 +4226,14 @@
           "target_unit": "ppb",
           "measured": 96.0,
           "measured_ppb": 96.0,
-          "predicted": 346.6167649315865,
-          "fold_error": 3.6105913013706927,
-          "abs_log10_error": 0.5575783315160429,
+          "predicted": 346.61680335656604,
+          "fold_error": 3.6105917016308964,
+          "abs_log10_error": 0.5575783796607299,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            49.558194894402135,
-            2424.284863232771
+            49.55820038828708,
+            2424.285131982311
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -4252,14 +4252,14 @@
           "target_unit": "ppb",
           "measured": 143.0,
           "measured_ppb": 143.0,
-          "predicted": 93.63341226749424,
-          "fold_error": 1.5272326035867847,
-          "abs_log10_error": 0.1839051868672039,
+          "predicted": 93.63341996131116,
+          "fold_error": 1.5272324780947535,
+          "abs_log10_error": 0.18390515118141587,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            13.387416199260482,
-            654.884838296044
+            13.38741729929867,
+            654.8848921076475
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -4278,8 +4278,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 3.6105913013706927,
-      "mean_abs_log10_error": 0.3707417591916234,
+      "max_ratio": 3.6105917016308964,
+      "mean_abs_log10_error": 0.37074176542107284,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4342,14 +4342,14 @@
           "target_unit": "ppb",
           "measured": 6.88,
           "measured_ppb": 6.88,
-          "predicted": 10.33444791663891,
-          "fold_error": 1.5020999878835624,
-          "abs_log10_error": 0.176698842615408,
+          "predicted": 10.3344470370659,
+          "fold_error": 1.5020998600386481,
+          "abs_log10_error": 0.17669880565226068,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.4775874562210694,
-            72.28053628369683
+            1.4775873304624358,
+            72.2805301318434
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -4368,14 +4368,14 @@
           "target_unit": "ppb",
           "measured": 1.28,
           "measured_ppb": 1.28,
-          "predicted": 299.4987213644264,
-          "fold_error": 233.9833760659581,
-          "abs_log10_error": 2.3691850029687496,
+          "predicted": 299.49868107611667,
+          "fold_error": 233.98334459071614,
+          "abs_log10_error": 2.3691849445478264,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            42.82140249890119,
-            2094.7348490332147
+            42.821396738603056,
+            2094.7345672512893
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4394,8 +4394,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 233.9833760659581,
-      "mean_abs_log10_error": 1.2729419227920789,
+      "max_ratio": 233.98334459071614,
+      "mean_abs_log10_error": 1.2729418751000434,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4458,14 +4458,14 @@
           "target_unit": "ppb",
           "measured": 3.29,
           "measured_ppb": 3.29,
-          "predicted": 12.015186836403757,
-          "fold_error": 3.6520324730710505,
-          "abs_log10_error": 0.562534630530626,
+          "predicted": 12.015187206643871,
+          "fold_error": 3.65203258560604,
+          "abs_log10_error": 0.5625346439131259,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.7178943178027746,
-            84.03585320564763
+            1.717894370738563,
+            84.0358557951574
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -4484,14 +4484,14 @@
           "target_unit": "ppb",
           "measured": 1.46,
           "measured_ppb": 1.46,
-          "predicted": 246.54230592010032,
-          "fold_error": 168.86459309595912,
-          "abs_log10_error": 2.227538597853825,
+          "predicted": 246.54231029249232,
+          "fold_error": 168.86459609074817,
+          "abs_log10_error": 2.2275386055559747,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            35.249857717976255,
-            1724.350466736862
+            35.249858343127364,
+            1724.3504973179672
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4510,8 +4510,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 168.86459309595912,
-      "mean_abs_log10_error": 1.3950366141922257,
+      "max_ratio": 168.86459609074817,
+      "mean_abs_log10_error": 1.3950366247345503,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4574,14 +4574,14 @@
           "target_unit": "ppb",
           "measured": 2.4,
           "measured_ppb": 2.4,
-          "predicted": 12.859461265417423,
-          "fold_error": 5.358108860590593,
-          "abs_log10_error": 0.729011532914131,
+          "predicted": 12.859461293680834,
+          "fold_error": 5.358108872367015,
+          "abs_log10_error": 0.7290115338686534,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.8386060690236874,
-            89.94082355258482
+            1.8386060730647027,
+            89.94082375026296
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -4600,14 +4600,14 @@
           "target_unit": "ppb",
           "measured": 1.68,
           "measured_ppb": 1.68,
-          "predicted": 167.26635837441702,
-          "fold_error": 99.56330855620061,
-          "abs_log10_error": 1.9980993200762338,
+          "predicted": 167.26634676749305,
+          "fold_error": 99.56330164731729,
+          "abs_log10_error": 1.99809928993973,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            23.91522749695156,
-            1169.8836921959128
+            23.915225837429404,
+            1169.8836110155057
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4626,8 +4626,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 99.56330855620061,
-      "mean_abs_log10_error": 1.3635554264951824,
+      "max_ratio": 99.56330164731729,
+      "mean_abs_log10_error": 1.3635554119041917,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4690,14 +4690,14 @@
           "target_unit": "ppb",
           "measured": 1.71,
           "measured_ppb": 1.71,
-          "predicted": 12.681291393120274,
-          "fold_error": 7.415959879017704,
-          "abs_log10_error": 0.8701673715722075,
+          "predicted": 12.681292014348603,
+          "fold_error": 7.415960242309125,
+          "abs_log10_error": 0.8701673928473301,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.813131890769916,
-            88.69467919895165
+            1.8131319795912244,
+            88.69468354390719
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4716,14 +4716,14 @@
           "target_unit": "ppb",
           "measured": 1.62,
           "measured_ppb": 1.62,
-          "predicted": 96.09786516381412,
-          "fold_error": 59.319669854206246,
-          "abs_log10_error": 1.7731987252812358,
+          "predicted": 96.0978747403154,
+          "fold_error": 59.31967576562679,
+          "abs_log10_error": 1.7731987685602562,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            13.739776065546813,
-            672.1215575120856
+            13.739777434765399,
+            672.1216244914399
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4742,8 +4742,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 59.319669854206246,
-      "mean_abs_log10_error": 1.3216830484267217,
+      "max_ratio": 59.31967576562679,
+      "mean_abs_log10_error": 1.3216830807037931,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4806,14 +4806,14 @@
           "target_unit": "ppb",
           "measured": 22.63,
           "measured_ppb": 22.63,
-          "predicted": 0.5097743007625314,
-          "fold_error": 44.39219467546629,
-          "abs_log10_error": 1.6473066163451118,
+          "predicted": 0.5097742997445959,
+          "fold_error": 44.392194764110215,
+          "abs_log10_error": 1.6473066172123265,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.07288595562979618,
-            3.565430890936849
+            0.07288595548425489,
+            3.5654308838172692
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4832,14 +4832,14 @@
           "target_unit": "ppb",
           "measured": 0.29,
           "measured_ppb": 0.29,
-          "predicted": 2.4144238778564135,
-          "fold_error": 8.32559957881522,
-          "abs_log10_error": 0.9204155195830895,
+          "predicted": 2.4144238888040057,
+          "fold_error": 8.325599616565537,
+          "abs_log10_error": 0.9204155215522876,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.34520687168759173,
-            16.886809446941662
+            0.34520687325284466,
+            16.88680952351061
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4858,14 +4858,14 @@
           "target_unit": "ppb",
           "measured": 18.25,
           "measured_ppb": 18.25,
-          "predicted": 0.0006363094342419775,
-          "fold_error": 28681.014327158067,
-          "abs_log10_error": 4.457594506441295,
+          "predicted": 0.0006363094359933459,
+          "fold_error": 28681.01424821688,
+          "abs_log10_error": 4.45759450524595,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            9.097755834613129e-05,
-            0.004450434848613003
+            9.097755859653652e-05,
+            0.0044504348608623125
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4884,14 +4884,14 @@
           "target_unit": "ppb",
           "measured": 114.13,
           "measured_ppb": 114.13,
-          "predicted": 0.06495568483960075,
-          "fold_error": 1757.0440567569804,
-          "abs_log10_error": 3.2447826512884443,
+          "predicted": 0.06495568477187712,
+          "fold_error": 1757.0440585888973,
+          "abs_log10_error": 3.2447826517412457,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.009287163272139083,
-            0.4543089067507838
+            0.009287163262456167,
+            0.45430890627711545
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4910,9 +4910,9 @@
       "matched_compounds": 4,
       "total_compounds": 4,
       "coverage": 1.0,
-      "max_ratio": 28681.014327158067,
-      "mean_abs_log10_error": 2.567524823414485,
-      "pearson_r_log10": -0.5111588509611981,
+      "max_ratio": 28681.01424821688,
+      "mean_abs_log10_error": 2.5675248239379527,
+      "pearson_r_log10": -0.5111588516729053,
       "ranking_status": "fail",
       "scale_status": "fail",
       "overall_status": "ranking-gap",
@@ -4959,7 +4959,7 @@
         "vessel_mL": null,
         "headspace_mL": null,
         "status": "not_applicable",
-        "basis": "no cook"
+        "basis": "never heated"
       },
       "scale_thresholds": {
         "max_ratio": 2.0,
@@ -4973,7 +4973,7 @@
           "panel": "external_matrix",
           "compound": "hexanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -4983,7 +4983,7 @@
           "panel": "external_matrix",
           "compound": "nonanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -5001,7 +5001,7 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -5057,15 +5057,15 @@
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            5.007943722576696,
-            2393.8022463077923
+            4.568869494793319,
+            2623.8497173422556
           ],
           "measured_within_interval": true,
           "lane": "lipid",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 1.16e+04-2.76e+06 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 570-1e+07 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -5181,15 +5181,15 @@
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.47073684305512703,
-            502.9874829131333
+            0.1384593487461851,
+            1710.0668315060002
           ],
           "measured_within_interval": false,
           "lane": "lipid",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 1.16e+04-2.76e+06 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 570-1e+07 on the rate.",
             "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -5212,15 +5212,15 @@
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            2.1457903699693017,
-            2300.7705206957544
+            0.6309229293495155,
+            7824.998897897473
           ],
           "measured_within_interval": true,
           "lane": "lipid",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 1.16e+04-2.76e+06 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 570-1e+07 on the rate.",
             "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -5243,15 +5243,15 @@
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.7307016900147535,
-            780.7627748777087
+            0.2149236492103752,
+            2654.45278451102
           ],
           "measured_within_interval": true,
           "lane": "lipid",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 1.16e+04-2.76e+06 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 570-1e+07 on the rate.",
             "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "NONANAL RESTS ON A DECLARED ANCHOR, NOT A MEASURED YIELD. This matrix is 27 % oleate by fatty-acid share. The oleate -> nonanal SHARE is measured -- 15 % of the slate (Selke 1978, republished by Frankel 1981) and 10 % (Frankel 1981's own photosensitized column, the only independent determination). But Frankel 1981 prints PEAK AREAS: no internal standard, no response factors, no replicates. No absolute yield from an oleate hydroperoxide exists anywhere in the corpus, so the absolute here assumes the named-product molar yield per oleate hydroperoxide is 0.45 times the measured one per LINOLEATE hydroperoxide, banded 0.2 to 1. Read the interval, not the point. Frankel 1989's silence on nonanal remains a declared hold-out and is still honoured: nonanal from a LINOLEATE feed is exactly zero, by construction.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
@@ -5330,7 +5330,7 @@
         "vessel_mL": null,
         "headspace_mL": null,
         "status": "not_applicable",
-        "basis": "no cook"
+        "basis": "never heated"
       },
       "scale_thresholds": {
         "max_ratio": 2.0,
@@ -5344,7 +5344,7 @@
           "panel": "external_matrix",
           "compound": "hexanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -5354,7 +5354,7 @@
           "panel": "external_matrix",
           "compound": "nonanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -5372,7 +5372,7 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -5445,7 +5445,7 @@
       "panel": "trust_loop",
       "compound": "hexanal",
       "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -5455,7 +5455,7 @@
       "panel": "trust_loop",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -5495,7 +5495,7 @@
       "panel": "trust_loop",
       "compound": "hexanal",
       "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -5505,7 +5505,7 @@
       "panel": "trust_loop",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -5575,7 +5575,7 @@
       "panel": "external_matrix",
       "compound": "hexanal",
       "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -5585,7 +5585,7 @@
       "panel": "external_matrix",
       "compound": "nonanal",
       "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -5635,7 +5635,7 @@
       "panel": "external_matrix",
       "compound": "hexanal",
       "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -5645,7 +5645,7 @@
       "panel": "external_matrix",
       "compound": "nonanal",
       "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false

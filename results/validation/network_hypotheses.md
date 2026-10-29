@@ -27,7 +27,7 @@
 
 | rule | reactants | products | placement | engine reaction |
 |---|---|---|---|---|
-| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s |
+| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s, r_dpo_ddp_h2s |
 | R01_amadori | PENT + Cys | O=C(O)C(CS)NCC(=O)C(O)C(O)CO | mechanism known |  |
 | R02_schiff_base | PENT + Cys | O=C(O)C(CS)N=CC(O)C(O)C(O)CO | mechanism known |  |
 | R02_schiff_base | Cys + CC=O | CC=NC(CS)C(=O)O | mechanism known |  |
@@ -59,7 +59,7 @@ Products that are not engine species: `NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O`; `NC(CSSC
 
 | rule | reactants | products | placement | engine reaction |
 |---|---|---|---|---|
-| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s |
+| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s, r_dpo_ddp_h2s |
 | R23_thiamine_ring_opening | THI | HMP | modelled | r_thi_hmp |
 | R24_hmp_to_mft | HMP | MFT | modelled | r_hmp_mft |
 | R01_amadori | PENT + Cys | O=C(O)C(CS)NCC(=O)C(O)C(O)CO | mechanism known |  |
@@ -132,7 +132,7 @@ Products that are not engine species: `CC=CCCCCC`; `CCCCCC=CCC=O`; `COC(=O)CCCCC
 
 | rule | reactants | products | placement | engine reaction |
 |---|---|---|---|---|
-| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s |
+| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s, r_dpo_ddp_h2s |
 | R02_schiff_base | DECADIENAL + Cys | CCCCCC=CC=CC=NC(CS)C(=O)O | mechanism known |  |
 | R02_schiff_base | HEXANAL + Cys | CCCCCC=NC(CS)C(=O)O | mechanism known |  |
 | R12_thiol_oxidation_to_disulfide | Cys + Cys | NC(CSSCC(N)C(=O)O)C(=O)O | mechanism known |  |
@@ -207,7 +207,7 @@ Products that are not engine species: `CCCCCCC`; `CCCCCCCC`; `COC(=O)CCCCCCCC=CC
 
 | rule | reactants | products | placement | engine reaction |
 |---|---|---|---|---|
-| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s |
+| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s, r_dpo_ddp_h2s |
 | R27_dicarbonyl_h2s_to_mercaptoketone | MGO + H2S | MP | modelled | r_mgo_mp |
 | R28_aminoketone_condensation_to_pyrazine | AKM + AKM | DMP | modelled | r_akm_dmp |
 | R02_schiff_base | MGO + Ala | CC(=O)C=NC(C)C(=O)O | mechanism known |  |
@@ -295,7 +295,7 @@ Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `
 
 | rule | reactants | products | placement | engine reaction |
 |---|---|---|---|---|
-| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s |
+| R08_cysteine_thermolysis | Cys | CC=O + AMMONIA + H2S | modelled | r_cys_h2s, r_dpo_ddp_h2s |
 | R09_furfural_h2s_to_fft | H2S + FUR | FFT | modelled | r_fur_fft, r_fur_fft_hs |
 | R10_norfuraneol_h2s_to_mft | H2S + NF | MFT | modelled | r_nf_mft |
 | R12_thiol_oxidation_to_disulfide | MFT + MFT | MFTD | modelled | ch_dimer_mft |

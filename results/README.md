@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **592**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **649**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -66,6 +66,7 @@ Tracked files: **592**. Local-only (gitignored): scratch runs under `results/qui
 | `figure_inputs.json` | The records behind every figure under docs/assets/thiol_sink/ (the three builders' inputs and each PNG's hash), with a provenance block the freshness gate re-hashes: a changed scorecard, ship rule, species table or builder fails CI until the figures are rebuilt. |
 | `gap_heatmap.png` | Heat map of the experiment-value ranking (`generate_gap_heatmap.py`). |
 | `holdout_frozen/` (2 files) | Hong 2020 hold-out rows frozen before B4; read by the B4 fit generator and `parameters_matrix.py`. |
+| `inline_coupling_panel_diff.json` | C5: every panel row under the inline pH coupling against the node fixed point (max 0.005 dex). |
 | `key_value_trace_report.md` | Where every key numeric value in the core comes from (`scripts/trace_key_values.py`). Read by people. |
 | `kinetic_core_b*_diagnosis.md` (3): `kinetic_core_b2_1_diagnosis.md`, `kinetic_core_b2_2_diagnosis.md`, `kinetic_core_b2_3_diagnosis.md` | Per-wave diagnosis notes; b2_1/b2_2 are quoted by `parameters_sulfur.py` and `panel.py`. |
 | `kinetic_core_b*_exam*.*` (27): `kinetic_core_b2_4_exam_half.json`, `kinetic_core_b2_4_exam_half.md`, `kinetic_core_b2_4_exam_measured.json`, `kinetic_core_b2_4_exam_measured.md` … | FROZEN cutover-exam scores per wave / ensemble member (the exam generator was deleted at B5b; these are history). |
@@ -73,7 +74,7 @@ Tracked files: **592**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b*_holdout_report.*` (22): `kinetic_core_b1_holdout_report.json`, `kinetic_core_b1_holdout_report.md`, `kinetic_core_b2_1_holdout_report.json`, `kinetic_core_b2_1_holdout_report.md` … | FROZEN pre-registered hold-out scores beside each fit report. Read by people and by the frozen generators' own reports. |
 | `kinetic_core_b*_laplace_covariance.json` (7): `kinetic_core_b10_laplace_covariance.json`, `kinetic_core_b47_laplace_covariance.json`, `kinetic_core_b49_laplace_covariance.json`, `kinetic_core_b51_laplace_covariance.json` … | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
 | `kinetic_core_b*_panel*.*` (10): `kinetic_core_b2_4_panel_half.json`, `kinetic_core_b2_4_panel_half.md`, `kinetic_core_b2_4_panel_measured.json`, `kinetic_core_b2_4_panel_measured.md` … | FROZEN per-wave panel scores written by the wave report generators; history. |
-| `kinetic_core_b*_prereg.md` (52): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
+| `kinetic_core_b*_prereg.md` (54): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
 | `kinetic_core_b*_profile.*` (8): `kinetic_core_b51_profile.json`, `kinetic_core_b51_profile.md`, `kinetic_core_b60_profile.json`, `kinetic_core_b60_profile.md` … | Slice profiles of the sulfur objective around a frozen optimum (`generate_kinetic_core_b8_profile.py --wave`): quadratic / asymmetric / flat / bound-limited per coordinate. Read by people. |
 | `kinetic_core_b10_members/` (2 files) | B10 optimiser members (two starts, the temperature-structure wave); read back by the B10 generator's consolidation. |
 | `kinetic_core_b10_noyil_members/` (2 files) | B10 leave-Yiltirak-out members (prereg T5); read back by `generate_kinetic_core_b10_fit.py --without-yiltirak --consolidate`. |
@@ -145,12 +146,23 @@ Tracked files: **592**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b56_structural_discrepancy.*` (2): `kinetic_core_b56_structural_discrepancy.json`, `kinetic_core_b56_structural_discrepancy.md` | B56's per-lane discrepancy variance estimated on the in-sample rows; information only, the term did not ship. |
 | `kinetic_core_b58_members/` (2 files) | B58 optimiser members (two starts, TTCA formation on); read back by the B58 generator's consolidation. |
 | `kinetic_core_b58_ship_rule.*` (2): `kinetic_core_b58_ship_rule.json`, `kinetic_core_b58_ship_rule.md` | The B58 prereg's ship rule (TTCA formation by detailed balance): DO NOT SHIP, T1 fails by ~1000x in both arms (`generate_kinetic_core_b58_ship_rule.py`). |
+| `kinetic_core_b59a_diagnosis_ramp_only_newtonian_tau4.withdrawn_first_design.json` | B59a first design's diagnosis, withdrawn after review (redox error); kept as the record. |
+| `kinetic_core_b59a_diagnosis_ramp_plus_hold.withdrawn_first_design.json` | B59a first design's diagnosis, withdrawn after review (redox error); kept as the record. |
+| `kinetic_core_b59b_anchor.json` | B59b V2 / V3: the route's formation rate anchored on Cao 2017's blank pot; de Roos's decay reproduced. |
 | `kinetic_core_b60_fit_targets.json` | Which panel rows the shipped sulfur fit read (`fit_target_ids`, leverage). Written by `generate_core_fit_targets.py --wave b60`; read by `src/kinetic_core/fit_targets.py` and `scripts/ci/fit_target_gate.py`. |
 | `kinetic_core_b60_members/` (2 files) | B60 optimiser members (two starts, the converged pH trajectory); read back by the B60 generator's consolidation. |
 | `kinetic_core_b60_verification.*` (2): `kinetic_core_b60_verification.json`, `kinetic_core_b60_verification.md` | B60's numerical verification at B51's frozen vector (prereg sec. 4): the node grid against a dense reference, the flux-budget closure, the fixed point's residual on every fit system (`generate_kinetic_core_b60_verification.py`). |
+| `kinetic_core_b64_discriminator.json` | B64 Amendment 1: Schieberle 2000's 100 C / 145 C MFT factor and 100 C shape at each reading's optimum. |
+| `kinetic_core_b64_ramp_only_members/` (2 files) | B64 refits under the linear ramp-only reading of the 145 C pots (two starts); no reading was chosen. |
+| `kinetic_core_b64_ramp_only_newtonian_tau4_members/` (1 files) | B64 refits under a Newtonian approach (tau 4 min), declared post hoc (Amendment 2); no reading was chosen. |
+| `kinetic_core_b64_ramp_only_newtonian_tau6.7_members/` (1 files) | B64 refits under a Newtonian approach (tau 6.7 min), declared post hoc (Amendment 2); no reading was chosen. |
+| `kinetic_core_b64_ramp_plus_hold_members/` (2 files) | B64 refits under the ramp + hold reading of the 145 C pots (two starts); no reading was chosen. |
+| `kinetic_core_b64_shape_sensitivity.json` | B64: the ramp's shape moved without refit (the reason Newtonian readings were refitted). |
 | `kinetic_core_b64_verification.*` (1): `kinetic_core_b64_verification.json` | B64's verification before its fit (prereg sec. 3-4): the quick setting against the careful one under each thermal reading on the inline pH coupling (V5), and B60's vector's cost under each reading (candidate C) (`generate_kinetic_core_b64_verification.py`). |
 | `kinetic_core_b8_members/` (2 files) | B8 optimiser members (two starts); read back by the B8 generator's consolidation. |
 | `kinetic_core_b9_members/` (2 files) | B9 optimiser members (two starts); read back by the B9 generator's consolidation. |
+| `kinetic_core_cysteine_route_calibration/` (22 files) | Route calibration (stage 1): fits per arm, starts, leave-one-source-out, checks; withdrawn_no_diff_step/ holds the falsely converged first fits. |
+| `kinetic_core_cysteine_route_calibration_prereg.md` | Route calibration (stage 1) pre-registration, run logs 1-5, independent review, verdict. |
 | `kinetic_core_env_b13_prereg.*` (1): `kinetic_core_env_b13_prereg.md` | Pre-registration: the whole dicarbonyl and furanic-sink block had no prior row either, so eight constants were asserted with certainty and five hydroxymethylfurfural rows were published with no interval at all. |
 | `kinetic_core_env_b18_prereg.*` (1): `kinetic_core_env_b18_prereg.md` | Pre-registration: the pyrazine step had no prior row in the envelope, so every pyrazine interval was published without that step's own spread. |
 | `kinetic_core_env_b34_prereg.*` (1): `kinetic_core_env_b34_prereg.md` | Pre-registration and outcome of ENV-B34: prior rows for the 3-deoxyglucosone limb and the amine-free sugar entries on the source's printed 95 % HPD; INSTALLED under ENV-M1 with four rows newly inside their interval, two amendments to its own reach definition recorded. |
@@ -172,6 +184,7 @@ Tracked files: **592**. Local-only (gitignored): scratch runs under `results/qui
 | `sulfur_flux_attribution.*` (2): `sulfur_flux_attribution.json`, `sulfur_flux_attribution.md` | Where the sulfur lane's carbon and sulfur go: every reaction's integrated flux in eight reference pots on the shipped calibration, ranked per species, with a closure check, half-lives and the in-situ pH (`build_sulfur_flux_attribution.py`). Read by people and `docs/guides/SULFUR_FLUX_MAP.md`. |
 | `trunk_rate_calibration_refit.*` (2): `trunk_rate_calibration_refit.json`, `trunk_rate_calibration_refit.md` | Trunk rate refit record read by `src/kinetic_core/parameters.py` (the trunk constants cite it). |
 | `wave_generators_manifest.json` | SHA-256 of every frozen wave generator; `tests/scientific/test_wave_generators_frozen.py` fails on drift. Written by `scripts/generators/build_wave_manifest.py`. |
+| `withdrawn_all_free_set/` (20 files) | B59a-r and B59b refits that freed all 23 coordinates against WAVES.md (only identified ones may move); withdrawn, kept as diagnosis. |
 
 ## `results/validation/_env_baseline`
 
