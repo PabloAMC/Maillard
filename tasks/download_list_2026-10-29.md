@@ -166,3 +166,45 @@ No Givaudan, Firmenich, IFF, Symrise or Motif patent with a printed MFT/FFT conc
 16 B7 Goncuoglu Tas 2017 S1 | 17 B5 Nguyen 2016 | 18 B8 Hamzalioglu 2026 | 19 A14 Zhou 2025 LWT | 20 A6 Zhai 2023c
 21 B11 Quan 2020 | 22 A15 Li 2016 | 23 C2 US 2022/0256899 | 24 A12 Yao 2025 | 25 B13 Mohsin 2018
 Below cut: A11, A13, A16, B6, B9, B12, B14, C3, C4.
+
+## E. Added 2026-10-29: the lipid, acrylamide, aroma and matrix ledgers
+
+Items already above are not repeated (Cai 2024 = B10, Piornos 2025 = B2, Zhou 2024 = B9, Zhou 2022 = A13,
+Goncuoglu Tas 2017 = B7, Quan 2020 = B11, Hidalgo 2016 = B12, Zhang 2022 = A11).
+
+E1. Bi 2022 Food Chem 133044 — https://doi.org/10.1016/j.foodchem.2022.133044
+  Holds: Tables S1-S4, Fig. S1. The SHIPPED pea-protein binding constants rest on Table S3, which the dossier quotes only
+  from the text. Why: an integrity check on constants the matrix layer ships. Confidence numbers 0.8.
+E2. Utz 2022 Foods 11:412 (open access) — https://doi.org/10.3390/foods11030412
+  Holds: Tables S4 (SIDA concentrations of ~27 odorants in ten pea-protein isolates) and S5 (OAVs).
+  Why: the off-flavour baseline of commercial pea isolates, by isotope dilution. Confidence 0.85.
+E3. Zamora 2015 JAFC (5b02619) — https://doi.org/10.1021/acs.jafc.5b02619
+  Holds: Supporting Figs. S1-S6 (O2, pH, dose and water series; k(T) time courses) of lipid-carbonyl Strecker degradation.
+  Why: the only simulable time courses for that cross-route, with temperature. Figures, so digitisation. Confidence 0.5.
+E4. Trikusuma 2020 Food Chem 126082 — https://doi.org/10.1016/j.foodchem.2019.126082
+  Holds: Table S1 standard-addition slopes (matrix / water response factors for meat-analogue volatiles).
+  Why: a measured matrix factor for meat analogues. Confidence 0.7.
+E5. Conti 2025b FRI 116938 — https://doi.org/10.1016/j.foodres.2025.116938
+  Holds: Supplementary Table 3, the numbers behind Fig. 2 (odorant release into saliva over time). Confidence 0.8, medium value.
+E6. Goncuoglu 2026 Food Chem X 104019 (open access) — https://doi.org/10.1016/j.fochx.2026.104019
+  Holds: Tables S3 (composition series) and S4 (screw speed and temperature series) of plant-protein extrusion volatiles.
+  Why: the extrusion process axis (semi-quantitative). Confidence 0.7 numbers, medium value.
+E7. Xin 2026b FRI 119010 — https://doi.org/10.1016/j.foodres.2026.119010
+  Holds: Tables S1, S4-S7 (protein proximate, volatiles, OAVs, taste compounds) of plant-protein reaction flavours. Confidence 0.7.
+E8. Jansson 2020 Int Dairy J 104653 — https://doi.org/10.1016/j.idairyj.2020.104653
+  Holds: Table S2 standard curves, Fig. S1 the heating/cooling profile. Why: makes its calibrated volatiles usable. Confidence 0.6.
+E9. Xiao 2025 Food Hydrocolloids 111119 — https://doi.org/10.1016/j.foodhyd.2025.111119
+  Holds: Tables S1-S4, Fig. S1 (calibrated; content not described in the dossier). Confidence 0.4.
+E10. Primary papers cited by the matrix code with no dossier: Barallat-Pérez 2023 (sealed lupin binding values) and
+  Hall & Anderson 1983 (hexanal air-water partition, 7-9x from Meynier). Why: two shipped matrix inputs without a source
+  on disk. Confidence 0.8 that each gives numbers.
+E11. Grosch 1993, the MFT contrast Cerny 2015 cites (primary not on disk). Confidence 0.5.
+Below cut (semi-quantitative relative areas, or no lane use): Singh 2021 S1, Wang 2025 S2, Wang 2026c S3, Du 2023 S1,
+Zhao 2019b S1, Wang 2020 S1, Liu 2025 S1, Yang 2024 S1-S4, Miyazaki 2023 S1-2, Xu 2024 S1, Crowther 1979 (a thesis).
+On disk, no download needed: us10039306.pdf (Impossible Foods) needs a dossier (queued, M3).
+
+## F. One ranking across all lanes (2026-10-29)
+Sulfur first (the next sub-models), then integrity of shipped constants, then the other lanes:
+1 A3 | 2 A1 | 3 A2 | 4 A5 | 5 A4 | 6 A10 | 7 E1 (shipped pea constants) | 8 E10 (two unsourced matrix inputs)
+9 B1 | 10 B4 | 11 A7 | 12 B10 | 13 A8 | 14 E2 | 15 C1 | 16 A9 | 17 E3 | 18 E4 | 19 B2 | 20 B3
+21 B7 | 22 B5 | 23 B8 | 24 E6 | 25 E7 | 26 E5 | 27 A14 | 28 A6 | 29 B11 | 30 E8. Then the rest of D and E.
