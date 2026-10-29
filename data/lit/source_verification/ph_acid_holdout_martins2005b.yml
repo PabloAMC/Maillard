@@ -1,0 +1,78 @@
+# SOURCE VERIFICATION -- sub-model 1 (pH and acid production), HOLD-OUT: Martins & van Boekel 2005, Food Chem 92:437
+# (fit table data/lit/fit_rows/ph_acid_holdout_martins2005b.yml). Format and the five checks: the header of
+# data/lit/source_verification.yml. FIRST READER: agent-m2005b-holdout-reader1-2026-10-30, against the PDF
+# (data/articles/martins2005b.pdf); the extraction dossier was opened for orientation only, every number was read from
+# the PDF's vector content stream. Second reader pending.
+# `notes` is an extra field: what was checked, what was corrected, and why rows were left out.
+
+entries:
+- ledger_id: martins2005b_fig5_phstat_timecourses
+  source_file: martins2005b.pdf
+  read_by: agent-m2005b-holdout-reader1-2026-10-30
+  second_reader: agent-m2005b-holdout-reader2-2026-10-30
+  date: 2026-10-30
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: 'Because of the observed heat-induced pH drop, an additional experiment was done at 100 °C where the pH was kept
+    constant; the initial pH was 6.8 as set at room temperature. The pH stat controller monitored the pH and, when it
+    dropped below its set point, an auto burette (ABU901 Radiometer Copenhagen) added a solution of NaOH (1 mol/l) to the
+    reaction mix. ... When the pH was kept constant, this was done at the pH the solution had at 100 °C; the corresponding
+    initial pH was 6.8 at room temperature.'
+  notes: 'CONDITIONS as the ledger: Glc 0.2 M + Gly 0.2 M in 0.1 M phosphate (counter-ion not stated), 100 C, pH held by
+    a pH-stat (1 M NaOH; Fig. 5 caption "1 N NaOH") at the pH the room-temperature pH 6.8 solution had at 100 C. The HELD
+    VALUE IS NOT PRINTED anywhere (text, captions, Table 1: "Samples heated at 100 °C, pH 6.8"); ledger flag
+    ph_hot_setpoint_value_unstated is right. Temperature monitored by a Consort R305; samples drawn through a septum with
+    a Hamilton SampleLock (10 ml) and ice-cooled. Reaction volume and heating vessel of the pH-stat run are not stated;
+    the NaOH added (dilution) is neither reported nor corrected. Plotted span 0-120 min (the axis runs to 150; ledger
+    time_min [0, 150] is the axis). UNITS: Fig. 5d y axis "Acids mmol/l". QUANTIFICATION: "The used methodology has been
+    described previously (Martins & Van Boekel, 2004)" (= Martins 2005 Food Chem 90: HPLC, external standards) ->
+    calibrated, as the ledger. No error bars, no statement of replication for this run ("one experiment was done where the
+    pH was kept constant"); every row carries a read error only. DUPLICATES: no other figure or table prints these acids
+    (Table 1 "pH constant" column holds rate constants fitted to them, not data). VALUES: Fig. 5 is vector graphics; the
+    ledger''s "terminal values only" is superseded: all 11 FA (filled diamond) and 11 AA (open square) markers read, at 0,
+    5, 10, 15, 20, 30, 60, 75, 90, 105, 120 min, one marker per time. t = 0 markers sit on the axis (left out). E.g. FA
+    0.837 / 4.493 / 8.740 and AA 1.080 / 11.770 / 27.787 mmol/L at 15 / 60 / 120 min. Coordinate quantum 0.59 pt = 0.21
+    mmol/L (max y-tick residual 0.095 mmol/L, x-tick residual 0.23 min); time snaps all within 0.3 min of the nominal
+    grid. 20 rows.'
+- ledger_id: martins2005b_fig7_ten_responses_five_ph
+  source_file: martins2005b.pdf
+  read_by: agent-m2005b-holdout-reader1-2026-10-30
+  second_reader: agent-m2005b-holdout-reader2-2026-10-30
+  date: 2026-10-30
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: 'Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set
+    to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell)
+    and heated at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating
+    times, samples were taken and immediately cooled in ice, prior to analyses. Each reaction mixture was prepared, heated
+    and analysed, at least in duplicate.'
+  notes: 'CONDITIONS as the ledger: Glc 0.2 M + Gly 0.2 M, 0.1 M phosphate (counter-ion not stated), 10 ml screw-capped
+    Schott tubes in an oil bath at 100 C, pH set at 20 C and not held ("It is therefore stressed that the initial pH values
+    reported are as measured at room temperature"; Fig. 7 caption: "The initial pH values are reported as set at room
+    temperature"). Plotted acid spans: pH 4.8 0-240, pH 5.5 0-180, pH 6.0 0-210, pH 7.5 0-120 min (with a 5 min sample);
+    the paper models only data with a pH drop of at most 1 unit (Table 2 caption). UNITS: Fig. 7g "FA mmol/l", 7h "AA
+    mmol/l". QUANTIFICATION: method of Martins & Van Boekel 2004 (HPLC, external standards) -> calibrated, as the ledger.
+    Replication: two markers per time at pH 4.8, 6.0, 7.5, three at pH 5.5 (and at pH 6.8), counted from the drawing
+    commands; no error bars in Fig. 7, so every row carries a read error only. DUPLICATES (corrected): (1) the pH 6.8
+    arm (+) is the Martins 2005 reprint the ledger flags -- not transcribed; (2) the ledger says Fig. 3 (acids at pH 5.5)
+    is a subset of Fig. 7. It is not strictly: Fig. 3 plots one mean per time with undefined error bars at 0-240 min (Fig.
+    7 stops at 180) and at 90 min lies below every Fig. 7 marker (FA 0.364 +- 0.045 vs 0.475 / 0.475 / 0.525; AA 0.217
+    +- 0.06 vs 0.359 x 3), agreeing within ~0.07 mmol/L elsewhere. Read as the same experiment summarised differently
+    (~70 %); Fig. 3 is NOT entered (its values are listed in the fit table header; the adjudicator decides on its 210 /
+    240 min means); (3) Fig. 2 (mass balance, pH 6.0 and 7.5) plots FA + AA as % of glucose -- the same acids in other
+    units, not entered. VALUES: Fig. 7 is vector graphics; every FA and AA marker of the four arms read (ledger "not
+    digitised (overlapping markers)" superseded: coincident markers are separate drawing commands). Coordinate quantum
+    0.52 pt = 0.061 mmol/L (7g) and 0.18 mmol/L (7h); y-tick residuals < 0.001 and 0.066 mmol/L. E.g. FA pH 7.5 at 120
+    min 7.586 / 7.879, AA pH 7.5 at 120 min 21.623 / 22.147, AA pH 6.0 at 210 min 6.289 x 2, FA pH 5.5 at 180 min 1.061 /
+    1.061 / 1.121 mmol/L. Left out (on the axis, < 0.5 quantum): every t = 0 marker; all 24 pH 4.8 FA markers (FA at pH 4.8
+    stays below ~0.03-0.06 mmol/L for 240 min); pH 6.0 FA 15-30 min and one 45 min replicate; AA pH 4.8 15-90 min, pH 5.5
+    15-45 min, pH 6.0 15 min, pH 7.5 one replicate at 5 and at 15 min (its partner reads 0.18 / 0.88). 108 rows: pH 4.8 AA
+    10; pH 5.5 FA 24 + AA 15; pH 6.0 FA 15 + AA 18; pH 7.5 FA 14 + AA 12.'

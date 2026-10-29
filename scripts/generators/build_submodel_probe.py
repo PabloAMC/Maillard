@@ -139,8 +139,8 @@ def run_pot(job: Dict[str, Any]) -> Dict[str, Any]:
         parameters[key] = dataclasses.replace(parameters[key], k_ref=float(k_ref))
     for key, ea in (job.get("ea") or {}).items():
         parameters[key] = dataclasses.replace(parameters[key], ea_kj_mol=float(ea))
-    clamp_label = None
-    if spec.is_clamped:
+    clamp_label = job.get("clamp_label_ph")   # a pH-stat set on the label scale and held at its hot equivalent
+    if spec.is_clamped and clamp_label is None:
         # a pH-stat holds the set pH at the reaction temperature (Davidek 2002: "measured at 90 C"); the measured
         # pH-indexed tables read the same state's pH on the 25 C label scale (design review B3)
         held, t_hot = _held(spec), job["t_c"] + CELSIUS

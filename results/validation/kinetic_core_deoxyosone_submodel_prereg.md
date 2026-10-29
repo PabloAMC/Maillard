@@ -117,6 +117,30 @@ furfural 21, norfuraneol 7. Decisions that change the fit:
    10.1007/s002170050468) would pin it.
 3. Glyoxal (44 rows) is not an engine species; furfural from the xylose-alanine ARP at 120 C is ~8x low (Zhou
    2025b, calibrated); norfuraneol (Hofmann, Mikami, Desclaux) is within 0.02-0.12 with B61 on.
-## 4. Design (step 4) -- TO DO
+## 4. Design (step 4) -- drafted 2026-10-30, before any fit; design review owed
+
+**The joint hypothesis (lead, checkpoint 2).** 1-deoxypentosone (DPO) leaves the lane mainly by
+`r_osone_decay_dpo` (DPO -> the lumped acid pool `ACID` + C4) and only ~3e-4 by `r_dpo_c2c3` (-> MGO + HA). Two
+independent misfits point the same way: pentose systems are OVER-acidified (sub-model 1: Cao / Zhao 0.8-0.9 pH units
+too acid at 0.4 M; the smoke fit pushed the acid yield per sink event toward zero) and MGO is 10^2-10^4 too LOW here.
+If DPO's branching is wrong -- fragmentation to C3 + C2 underweighted, acid formation overweighted -- both close
+together. Prediction: one shift of branching moves pH up in Cao / Zhao AND MGO up in the Jiangnan pots, with the
+1-DX shape unchanged (its total loss rate fixed). It is falsified if the MGO rows need a shift that leaves the
+pentose pH where it is, or that drives the pH above the data.
+
+**Arms (each fitted on the 135 calibrated MGO rows; the MGO sinks held at shipped values; 1-DX / 3-DX in shape only):**
+- (a) refit `k_dpo_c2c3` alone (one rate + Ea);
+- (a') the joint form: `k_dpo_c2c3` and `k_osone_decay` (DPO branch) together, DPO's total exit held -- scored on
+  the MGO rows AND the sub-model 1 pentose pH rows (Cao, Zhao, Zhou), the cross-check above;
+- (b) a base-favoured PENT / ARP -> MGO + HA step with an amine-free twin (the xylose-alone pot), parallel to (a);
+- (c) norfuraneol -> MGO (Mikami 2017's measured decay, its MGO share a lower bound) -- expected insufficient alone.
+Discriminating constraints written now: MGO must track 1-DX across Zhai 2021's pH ladder (5.5-8); the norfuraneol
+rows (Hofmann T5, Desclaux, Mikami) must not drop when DPO is diverted; Cerny's >= 93 % intact-C5 MFT at 95 C bounds
+the HA made 1:1 with MGO; Zhai 2023 JAFC's three temperatures identify the Ea. CF-060 (Zhou 2024 vs 2025b, ~10x)
+gets a per-paper scale on the Zhou calibrated rows. Glyoxal is not an engine species and stays out.
+
+**Expected result (written now):** (a') beats (a) and lifts the pentose pH by >= 0.3 units (P = 0.45); (b) is
+needed for the xylose-alone and the pH-8 pots (P = 0.35); no single arm brings every MGO data set within x3
+(P = 0.6).
 ## 5. Design review (step 5) -- TO DO
 ## Amendments
