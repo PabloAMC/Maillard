@@ -731,3 +731,163 @@ bis(2-methyl-3-furyl) disulfide an odour threshold of **0.00032 µg/L** against 
 i.e. **the dimer is 15.6× MORE potent than the monomer**, and carries a marginally *higher* OAV
 than the MFT it came from. **Mass lost to the dimer is not aroma lost.** Any objective that
 scores the dimerisation channel as a pure loss is wrong by roughly the ratio of the thresholds.
+
+## Supplementary material (read 2026-10-29)
+
+**Source:** `data/articles/zhang2024_supplementary.pdf` (15 pp., owner download 2026-10-29, not
+committed), title page *"Metabolomics reveals factors affecting the radical reaction of sulfides during
+thermal processing for meaty aroma"*, Zhang, Kuang, Wang, Cao — this paper. Read with `pdftotext -layout`.
+**Figures S1-S4 are images (pp. 3-6) and were not digitised.**
+
+**What it holds.**
+- **Fig. S1** — effect of Cys, GSH and GCys on MeSH, DMDS, DMTS (a-c), and of Cys and GSH on MFT, MMFT,
+  MFT-MFT (d-f) "in a radical reaction model" (the time courses behind sec. 3.1). **Figure only.**
+- **Fig. S2** — single-factor effects (Cys:GSH ratio, initial pH, temperature, time, second-stage
+  temperature) on DMTS and the MMFT/MFT-MFT ratio. **Figure only** (the temperature single-factor data
+  the brief wanted are here, undigitised).
+- **Fig. S3** — RSM response surfaces. **Fig. S4** — OPLS-DA of non-volatile metabolites.
+- **Table S1** single-factor levels; **Table S2** Box-Behnken levels; **Table S3** the 27-run design with
+  responses R1 (DMTS) and R2 (MMFT/MFT-MFT); **Table S4** SIM ions; **Table S5** standard curves;
+  **Table S6** zero/first/second-order fits of MMFT; **Table S7** two-stage linear regressions of MMFT.
+
+**Quantification basis** (main text sec. 2.10): HS-SPME-GC-MS/SIM, IS = IPDS, "external standard curves
+... obtained by mass ratio and peak area ratios of eight different concentrations of standard solutions
+with the internal standard ion peak" (Table S5) → **external calibration, ng/mL**, headspace (not SIDA).
+The verification test (Fig. 4c) is semi-quantitative. **No SD is printed in any SI table.**
+
+### ★ Table S6 (as printed) — "Kinetic analysis of MMFT levels in radical reaction model for150 min thermal processing."
+
+| group | zero order | R² | first order | R² | second order | R² |
+|---|---|---:|---|---:|---|---:|
+| Control group | y = 0.0047 x - 0.1177 | 0.855 | y = -0.0157 x + 0.7703 | 0.9047 | y = -0.0654 x + 3.1481 | 0.8609 |
+| Cys treatment group | y = 0.0028 x + 0.0705 | 0.9184 | y = -0.0104 x + 0.1115 | 0.8604 | y = -0.0442 x + 0.0114 | 0.7762 |
+| GSH treatment group | y = 0.0031 x + 0.0130 | 0.9886 | y = -0.0129 x + 0.1199 | 0.8928 | y = -0.0657 x - 0.4114 | 0.7317 |
+
+### ★ Table S7 (as printed) — "Regression analysis of MMFT levels in radical reaction model for150 min thermal processing."
+
+| group | duration (min) | linear regression | R² |
+|---|---|---|---:|
+| Control | 0-90 | y = 0.0013x + 0.0691 | 0.5902 |
+| Control | 90-150 | y = 0.008x - 0.5235 | 0.9951 |
+| Cys treatment | 0-90 | y = 0.0043 x - 0.0108 | 0.9848 |
+| Cys treatment | 90-150 | y = 0.0011 x + 0.2808 | 0.989 |
+| GSH treatment | 0-90 | y = 0.0033x + 0.0037 | 0.954 |
+| GSH treatment | 90-150 | y = 0.0032x + 0.0041 | 0.9992 |
+
+**Units: NOT PRINTED in the SI either.** Neither x nor y is labelled in S6 or S7. What the SI does settle,
+and what it implies (all mine):
+1. **Duration resolved: 150 min** (both titles), so the K3.3 objection ("a 90-min break cannot come from a
+   60-min run") is answered: the kinetic run is a 150-min experiment, longer than sec. 2.3's "up to 60 min".
+   It is the "radical reaction model", which the main text (sec. 3.1, Fig. S1) treats as the
+   **multi-component model**: Met 15 mg/mL + VB1 + Xyl 1:1:1, + Cys or GSH 15 mg/mL, phosphate pH 4.9 ±
+   0.1, 115 °C (sec. 2.3). **Temperature, sampling grid and n are still not restated for the 150-min run.**
+2. **Units, by internal consistency: ng·mL⁻¹·min⁻¹** (MMFT in ng/mL per sec. 2.10, x in min per the
+   "0-90 / 90-150" duration column). Check: the S7 lines give MMFT at 60 min = 0.247 (Cys), 0.202 (GSH),
+   0.147 (control), the same scale as Fig. 2e's 60-min MMFT (0.04-0.23 ng/mL). At 150 min: Cys 0.446,
+   GSH 0.484, control 0.677. The two S7 segments meet at 90 min (Cys 0.376/0.380, GSH 0.301/0.292,
+   control 0.186/0.197), so x is the same time axis in both. **Inference, strong but not printed.**
+3. **The main text's control-group arithmetic is wrong.** Text: GSH post-90 slope 0.0032 "is 4 times that
+   of the control group". SI: control post-90 slope is **0.008**, i.e. **2.5x the GSH slope, not 1/4 of
+   it**. 0.008 is the right value: it is continuous with the 0-90 segment at 90 min and it reproduces the
+   control's whole-run zero-order slope 0.0047 (a 0.0013 → 0.0008 control could not). The text appears to
+   have read 0.008 as 0.0008. Likewise "the slope in the Cys group dropped to a comparable level to that in
+   the control group" holds only against the control's **pre**-90 slope (0.0011 vs 0.0013), not its
+   post-90 slope (0.008). **The ratio "GSH/control ≈ 4x after 90 min" recorded in K3.3 is retracted: it is
+   0.4x.** Pre-90 ratios stand: Cys/control 0.0043/0.0013 = 3.3x, GSH/control 2.5x.
+4. **The control's whole-run zero-order k (0.0047) exceeds both treatments (0.0028, 0.0031)**; the text
+   reports only the treatments. Over 150 min the additives *lower* the mean MMFT rate; they raise it only
+   in the first 90 min.
+5. **The first- and second-order fits are not interpretable as printed**: all six slopes are negative
+   while MMFT rises (ln C or 1/C of a rising C cannot fall linearly from these intercepts; e.g. the
+   control's second-order line gives 1/C < 0 after 48 min). The "zero order fits better" claim is
+   therefore a comparison against mis-specified alternatives. Note also the control's best R² is the
+   first-order one (0.9047 > 0.855).
+6. The control 0-90 segment has R² = 0.5902: a near-flat, noisy first stage.
+
+### Table S5 (as printed) — standard curves (x, y not defined in the SI; per sec. 2.10, mass ratio and peak-area ratio to IPDS)
+
+| compound | standard curve | R² |
+|---|---|---:|
+| MeSH | y = 25.525 x + 0.020 | 0.990 |
+| DMDS | y = 1904.461 x - 0.375 | 0.988 |
+| DMTS | y = 58.795 x - 0.011 | 0.993 |
+| MFT | y = 849.714 x - 0.042 | 0.991 |
+| MMFT | y = 1086.841 x - 0.180 | 0.978 |
+| MFT-MFT | y = 823.302 x - 0.107 | 0.994 |
+
+No range, LOD or recovery. Slopes span 75x (MeSH 25.5 to DMDS 1904), so a response factor of 1 would
+have been badly wrong here; these really are compound-specific curves.
+
+### Table S4 (as printed) — SIM ions
+
+| compound | n ions | m/z |
+|---|---:|---|
+| MeSH | 2 | 47.00, 48.00 |
+| DMDS | 2 | 79.00, 94.00 |
+| DMTS | 2 | 79.00, 126.00 |
+| MFT | 3 | 85.00, 113.00, 114.00 |
+| MMFT | 2 | 113.00, 160.00 |
+| MFT-MFT | 2 | 113.00, 226.00 |
+| IPDS | 2 | 108.00, 150.30 |
+
+### Table S1 (as printed) — single-factor levels
+
+| factor | levels |
+|---|---|
+| concentration (mg/mL) ratio of Cys and GSH | 10:0, 1:9, 2:8, 3:7, 4:6, 5:5, 6:4, 7:3, 8:2, 9:1, 0:10 |
+| initial pH | 3, 4, 5, 6, 7, 8 |
+| initial reaction temperature (℃) | 95, 105, 115, 125, 135 |
+| reaction time (min) after addition of additives | 0, 10, 20, 30, 40, 50, 60 |
+| second stage temperature (℃) | 95, 105, 115, 125, 135 |
+
+### Table S2 (as printed) — Box-Behnken levels
+
+| variable | symbol | −1 | 0 | 1 |
+|---|---|---|---|---|
+| concentration ratio of Cys and GSH | A | 4:6 | 3:7 | 2:8 |
+| initial reaction temperature (℃) | B | 95 | 105 | 115 |
+| second reaction time (min) | C | 10 | 20 | 30 |
+| second stage temperature (℃) | D | 95 | 105 | 115 |
+
+### Table S3 (as printed) — Box-Behnken runs. R1 = DMTS (unit not printed), R2 = MMFT/MFT-MFT (ratio). "a Randomly chosen" (run order)
+
+| No. | A | B | C | D | R1 | R2 |
+|---:|---|---:|---:|---:|---:|---:|
+| 1 | 3:7 | 105 | 20 | 105 | 0.131 | 0.945 |
+| 2 | 3:7 | 95 | 20 | 115 | 0.086 | 0.503 |
+| 3 | 3:7 | 115 | 20 | 95 | 0.095 | 1.177 |
+| 4 | 2:8 | 105 | 20 | 95 | 0.082 | 1.084 |
+| 5 | 3:7 | 105 | 30 | 115 | 0.140 | 0.388 |
+| 6 | 2:8 | 115 | 20 | 105 | 0.115 | 1.271 |
+| 7 | 3:7 | 105 | 10 | 95 | 0.078 | 0.986 |
+| 8 | 3:7 | 105 | 20 | 105 | 0.134 | 1.121 |
+| 9 | 3:7 | 95 | 20 | 95 | 0.073 | 0.716 |
+| 10 | 3:7 | 115 | 20 | 115 | 0.115 | 1.019 |
+| 11 | 4:6 | 105 | 30 | 105 | 0.118 | 0.503 |
+| 12 | 3:7 | 95 | 10 | 105 | 0.067 | 0.629 |
+| 13 | 4:6 | 115 | 20 | 105 | 0.103 | 1.157 |
+| 14 | 4:6 | 105 | 20 | 95 | 0.093 | 1.262 |
+| 15 | 3:7 | 95 | 30 | 105 | 0.092 | 0.627 |
+| 16 | 3:7 | 105 | 10 | 115 | 0.104 | 0.811 |
+| 17 | 4:6 | 105 | 20 | 115 | 0.125 | 0.456 |
+| 18 | 2:8 | 95 | 20 | 105 | 0.081 | 0.651 |
+| 19 | 2:8 | 105 | 10 | 105 | 0.062 | 0.615 |
+| 20 | 3:7 | 115 | 10 | 105 | 0.089 | 1.303 |
+| 21 | 2:8 | 105 | 20 | 115 | 0.114 | 0.575 |
+| 22 | 4:6 | 105 | 10 | 105 | 0.089 | 0.757 |
+| 23 | 2:8 | 105 | 30 | 105 | 0.147 | 0.764 |
+| 24 | 3:7 | 105 | 30 | 95 | 0.108 | 0.690 |
+| 25 | 3:7 | 105 | 20 | 105 | 0.118 | 1.043 |
+| 26 | 4:6 | 95 | 20 | 105 | 0.079 | 0.752 |
+| 27 | 3:7 | 115 | 30 | 105 | 0.108 | 0.785 |
+
+Centre-point replicates (runs 1, 8, 25): R1 0.131/0.134/0.118 (CV ~7 %), R2 0.945/1.121/1.043 (CV ~9 %),
+the only replication information in the SI. pH, total additive loading and the Met:VB1:Xyl base are not
+restated (main text: 1:3:3, pH ~5). The two-stage heating is defined only by the variable names
+(initial reaction temperature B; "reaction time (min) after addition of additives" C, per Table S1;
+second-stage temperature D); the first-stage duration is not printed in the SI.
+
+**Model-usable:** partly. Table S7 gives a two-segment MMFT rate in (inferred) ng·mL⁻¹·min⁻¹ at 115 °C
+for three arms, and corrects the main text; Table S3 is a 27-run temperature/time design with responses
+but only as a DMTS level of unstated unit and an MMFT/MFT-MFT ratio. The single-factor temperature
+series (Fig. S2) and the time courses (Fig. S1) are figure-only.

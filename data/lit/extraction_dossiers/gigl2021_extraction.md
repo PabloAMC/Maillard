@@ -1113,3 +1113,95 @@ systematically compressed; (iii) **n = 15 panelists, 2 sessions, no per-attribut
    here as the source of the *"high thiol binding affinity"* claim and of the phenol/FFT conjugate
    quantification. If either carries a temperature series, it would break the three-point tie in
    §6d. **Neither is in `data/articles/`.**
+
+## Supplementary material (read 2026-10-29)
+
+**Source:** `data/articles/gigl2021_supplementary.pdf` (6 pp., owner download 2026-10-29, not committed;
+ACS stamp "jf1c06163_si_001"), read with `pdftotext -layout`; Table S2 (landscape) also checked
+against a 110 dpi render of p. 3 — the text layer matches the image cell for cell.
+
+**What it holds.**
+- **Table S1** — concentrations (µg/kg) of 25 key coffee odorants used for the **aroma reconstitution
+  model for human sensory experiments** (a recipe; source of the numbers not stated in the SI).
+- **Table S2** — "Percent of free odorant based on qHNMR data of time dependency measurements used for
+  hierarchical cluster analysis and heatmapping." **The printed numbers behind Fig. 2.** 20 odorants ×
+  10 times. **Percent free only; no mmol/L column and no SD** (the brief's "mmol/L and % free" is not
+  what the SI holds).
+- **Fig. S1** — 1H NMR excerpt of the purified HMW (>10 kDa) fraction, ultrafiltration monitoring.
+- **Fig. S2** — the four interaction scenarios (I-IV), cluster-mean % free ± SD, 5 min-96 h, RT.
+- **Fig. S3** — % free monomer and dimer (disulfide) over 96 h for (A) FFT, (B) N-acetylcysteine,
+  (C) furfuryl methyl sulfide with HMW melanoidins. **Figure only, not digitised**; the FFT → difurfuryl
+  disulfide and NAC dimer curves are here.
+
+**Conditions** (main text, sec. 1b of this dossier): one odorant at 5 mmol/L + HMW melanoidin at the
+original brew concentration (5.4 g/100 mL), H2O/D2O 9:1, phosphate, pH 5.5, RT (300 K). The SI adds
+none. **Quantification:** qHNMR, ERETIC 2/PULCON against external L-tyrosine 5.21 mmol/L → absolute
+(acetaldehyde semi-quantitative per the Fig. 2 footnote). % free = c(after melanoidin, t) / c(isomolar
+reference) × 100.
+
+### Table S2 (as printed) — percent of free odorant at incubation time (min), RT
+
+| compound | 1 | 5 | 30 | 60 | 120 | 240 | 720 | 1440 | 2880 | 5760 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| acetaldehyde | 100.0 | 97.2 | 95.2 | 95.1 | 86.3 | 62.5 | 55.9 | 53.1 | 52.4 | 47.7 |
+| propanal | 100.0 | 99.8 | 94.6 | 90.4 | 86.1 | 77.3 | 66.4 | 59.6 | 55.5 | 53.2 |
+| methylpropanal | 100.0 | 99.7 | 95.3 | 93.8 | 90.0 | 82.3 | 73.6 | 66.2 | 60.1 | 56.3 |
+| 2-methylbutanal | 100.0 | 99.4 | 94.6 | 93.5 | 90.8 | 82.9 | 71.4 | 65.6 | 59.5 | 58.0 |
+| 3-methylbutanal | 100.0 | 99.6 | 95.2 | 95.1 | 92.5 | 85.0 | 73.9 | 68.6 | 63.9 | 60.2 |
+| methional | 100.0 | 98.2 | 95.6 | 93.8 | 90.9 | 78.7 | 66.4 | 60.7 | 52.3 | 44.9 |
+| 2,3-butanedione | 100.0 | 98.0 | 96.3 | 96.4 | 96.9 | 96.1 | 96.2 | 95.8 | 96.5 | 96.6 |
+| 2,3-pentanedione | 100.0 | 99.0 | 95.0 | 96.0 | 96.0 | 96.0 | 95.0 | 95.0 | 95.0 | 95.0 |
+| 4-hydroxy-2,5-dimethyl-3(2H)-furanone | 100.0 | 98.6 | 99.2 | 99.6 | 99.5 | 99.1 | 99.6 | 99.0 | 100.0 | 98.8 |
+| 3-hydroxy-4,5-dimethyl-2(5H)-furanone | 100.0 | 98.1 | 99.1 | 99.5 | 98.8 | 99.1 | 98.0 | 98.2 | 98.1 | 98.9 |
+| 2,3-diethyl-5-methylpyrazine | 100.0 | 58.5 | 57.7 | 58.0 | 57.7 | 57.9 | 58.2 | 58.3 | 56.8 | 57.0 |
+| 3-isobutyl-2-methoxypyrazine | 100.0 | 46.0 | 46.2 | 46.0 | 46.0 | 45.1 | 46.3 | 45.7 | 46.0 | 46.0 |
+| 2-methoxyphenol | 100.0 | 61.7 | 62.6 | 61.2 | 61.3 | 61.4 | 60.6 | 61.9 | 60.5 | 57.8 |
+| 4-ethyl-2-methoxyphenol | 100.0 | 60.0 | 61.0 | 61.0 | 62.0 | 61.0 | 60.0 | 62.0 | 62.0 | 61.0 |
+| vanillin | 100.0 | 69.3 | 68.6 | 68.2 | 67.7 | 66.3 | 64.2 | 64.4 | 62.6 | 57.9 |
+| **2-furanmethanethiol (FFT)** | 100.0 | **32.3** | **32.3** | **32.2** | **32.3** | **31.3** | **27.0** | **23.3** | **15.3** | **0.0** |
+| 3-mercapto-3-methylbutanol | 100.0 | 97.3 | 95.5 | 93.6 | 87.8 | 70.4 | 50.7 | 40.5 | 30.4 | 15.9 |
+| 3-mercapto-3-methylbutyl formate | 100.0 | 98.3 | 90.6 | 87.9 | 81.3 | 61.4 | 44.6 | 31.6 | 21.2 | 6.1 |
+| **3-mercapto-2-butanone** | 100.0 | 97.5 | 94.9 | 95.2 | 89.6 | 75.4 | 61.8 | 55.2 | 41.4 | 22.5 |
+| (E)-beta-damascenone | 100.0 | 72.1 | 70.9 | 69.3 | 68.5 | 68.1 | 67.6 | 67.4 | 68.4 | 67.2 |
+
+**Checks against this dossier (mine).**
+1. **First column is printed "1" (min), not "0"** as read off the Fig. 2 axis (sec. 0b row 25, sec. 1b);
+   every row is 100.0 there, so it is the reference column. The "instantaneous" FFT drop (100 → 32.3)
+   therefore happens within the first 5 min, on the printed grid.
+2. **The sec. 5a digitisation is confirmed** (bias −1 pp, error ≤ ~3 pp): e.g. FFT 34/34/32/34/31/28/24/15/2
+   digitised vs 32.3/32.3/32.2/32.3/31.3/27.0/23.3/15.3/0.0 printed. **Use these printed values, not the
+   digitisation.**
+3. **Integrity flag ⚠[!]-1 resolved:** 3-methylbutanal at 96 h is **60.2 %** in the SI — not 58.2 or 57.0
+   (text), nor 62.9 (3.17/5.04). The digitised "≈ 60 %" was right.
+4. **⚠[!]-2:** FFT at 60 min is **32.2** in the SI (32.3 at 5, 30 and 120 min). The text's 32.3 % "at 60 min"
+   is the plateau value; both are the same plateau.
+5. **New conflict:** text p. 15340 says 3-methylbutanal is **99.4 % free at 60 min** ("in the error range");
+   the SI prints **95.1** at 60 min and **99.6** at 5 min. The text figure is not in the table at 60 min.
+6. 3-mercapto-3-methylbutyl formate 96 h = 6.1 % (matches the text 4.89 → 0.3 mmol/L); 2,3-diethyl-
+   5-methylpyrazine 58.5 % at 5 min (matches text); HDMF 98.8 % at 96 h (">96 %" ✔).
+
+### Table S1 (as printed) — aroma reconstitution model, µg/kg
+
+| compound | µg/kg | compound | µg/kg |
+|---|---:|---|---:|
+| acetaldehyde | 7380.1 | methanethiol | 69.6 |
+| 2,3-pentanedione | 3378 | 4-ethyl-2-methoxyphenol | 48.1 |
+| 4-hydroxy-2,5-dimethyl-3(2H)-furanone | 3261.3 | 2-ethyl-3,5-dimethylpyrazine | 44.9 |
+| 2,3-butanedione | 1526.8 | methional | 27.6 |
+| 4-ethenyl-2-methoxyphenol | 997.1 | 3-mercapto-2-butanone | 26.4 |
+| 2-methylbutanal | 621.7 | 2-ethyl-3,6-dimethylpyrazine | 26.1 |
+| methylpropanal | 497.7 | 2-furfurylthiol | 9.3 |
+| 3-methylbutanal | 409.5 | 2,3-diethyl-5-methylpyrazine | 6 |
+| propanal | 340.4 | 3-mercapto-3-methylbutyl formate | 4.3 |
+| 3-mercapto-3-methylbutanol | 209.1 | (E)-β-damascenone | 1.4 |
+| 4-hydroxy-3-methoxybenzaldehyde | 131.9 | 3-isobutyl-2-methoxypyrazine | 1.1 |
+| 2-methoxyphenol | 81.2 | 3-mercapto-3-methylbutyl acetate | 0.5 |
+| 3-hydroxy-4,5-dimethyl-2(5H)-furanone | 76.4 | | |
+
+A recipe, not a measurement of this paper; its origin is not stated in the SI. It does give the
+real-brew scale against the 5 mmol/L spike: **FFT 9.3 µg/kg ≈ 0.08 µmol/kg, ~60 000x below the
+assay's 5 mmol/L** (sec. 1c saturation caveat stands).
+
+**Model-usable:** yes, partly. Table S2 gives printed (not digitised) RT time courses of free FFT,
+3-mercapto-2-butanone, methional and the Strecker aldehydes against a coffee melanoidin sink, at one
+loading and one temperature; percent only. Fig. S3 (disulfide formation) is figure-only.

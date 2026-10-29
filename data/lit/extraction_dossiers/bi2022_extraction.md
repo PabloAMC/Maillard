@@ -529,3 +529,99 @@ a category error.
     strings on existing `REVERSIBLE_BINDING` rows without having `MATRIX_LOADING` entries, so a
     `pea_isolate` medium string at 10 g/L would follow that precedent; the loading itself is
     printed by this paper, which is more than either of those two has.)
+
+## Supplementary material (read 2026-10-29)
+
+**Source:** `data/articles/bi2022_supplementary.zip` (owner download, 2026-10-29; not committed). Four
+Word files, `1-s2.0-S0308814622010068-mmc1..mmc4.docx` = **Tables S1, S2, S3, S4**. Read with macOS
+`textutil`. **The zip holds no figure:** Fig. S1 (bond-disrupting-agent peak areas) and Fig. S2 (CD
+spectra) are NOT in it and remain off disk. The only images inside the docx files are three ~1.3 kB
+glyphs in the Table S3 header (the retention symbol). This closes Flag 10 for S1-S4 and Flag 6 (below).
+
+**What each table holds.**
+- **Table S1** — physicochemistry of the three odorants (log P, Henry constant, MW, vapour pressure,
+  CAS) and their concentrations *in yellow peas* (from Bi et al. 2020, not measured here).
+- **Table S2** — surface hydrophobicity of pea protein, as % of the flavour-free control, at 0/1/2 mM
+  flavour, 37 °C. Relative only; no absolute ANS/PRODAN index is printed.
+- **Table S3** — the phase-ratio-variation regressions and partition coefficients behind sec. 3.8.
+  Title: "Matrix/gas partition coefficients of flavor compounds in the solution of pea protein
+  (10 mg/mL) at 37 °C calculated by phase ratio variation method."
+- **Table S4** — qualitative key: what guanidine hydrochloride and propylene glycol do to each bond
+  type, with citations. No numbers.
+
+**Quantification basis.** S3: static-headspace GC/MS peak areas regressed as 1/A = a + b·β; K = a/b is a
+ratio, so the detector response factor cancels (no calibration needed, none used). S1 Henry
+constants are NIST WebBook values; log P from chemsrc.com; concentrations from Bi 2020. No SD on any
+S3 number (no replication spread printed).
+
+### Table S1 (as printed)
+
+| compound | log P (25 °C)^a | k°H, mol/(kg·bar) | MW, g/mol | vapour pressure 25 °C, mmHg | CAS | conc. in yellow peas^d, µg/kg |
+|---|---:|---:|---:|---:|---|---:|
+| (Z)-2-penten-1-ol (C5H10O) | 0.94 | —^b | 86.13 | 2.41 | 1576-95-0 | 901 ± 119 |
+| hexanal (C6H12O) | 1.97 | 4.7^c | 100.09 | 10.90 | 66-25-1 | 1260 ± 114 |
+| (E)-2-octenal (C8H14O) | 2.64 | 13^c | 126.20 | 0.60 | 2548-87-0 | 22.9 ± 3.54 |
+
+Footnotes: a "Hydrophobic constant was obtained from https://www.chemsrc.com"; b "Not obtained in the
+existing literature"; c "Henry's Law constant (water solution) was obtained from
+https://webbook.nist.gov/"; d "the data was obtained from our previous published study (Bi et al.,
+2020)". Note (mine): hexanal's MW is 100.16, not the printed 100.09 (typo; irrelevant to any number
+here). The hydrophobicity constants the paper's sec. 3.5 ladder argument rests on are these log P
+values: 0.94 < 1.97 < 2.64.
+
+### Table S2 (as printed) — surface hydrophobicity, % of control, 37 °C
+
+| flavour | 0 mM | 1 mM | 2 mM |
+|---|---:|---:|---:|
+| none (control) | 100% | — | — |
+| (Z)-2-penten-1-ol | — | 98.38% | 94.59% |
+| hexanal | — | 98.13% | 96.92% |
+| (E)-2-octenal | — | 89.89% | 89.26% |
+
+No SD printed.
+
+### Table S3 (as printed) — PRV, pea protein 10 mg/mL, 37 °C
+
+| compound | phase ratio β | pea: slope b ×10^8 | pea: intercept a ×10^8 | pea: R² | **K2 (matrix/gas), pea** | buffer: slope b ×10^8 | buffer: intercept a ×10^8 | buffer: R² | **K1 (matrix/gas), buffer** | retention |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| (Z)-2-penten-1-ol | 399-3 | 5.04 | 10403.73 | 0.941 | **2065.44** | 2.75 | 4017.41 | 0.972 | **1460.49** | 29.29% |
+| hexanal | 399-3 | 0.78 | 9.04 | 0.996 | **116.37** | 2.06 | 67.80 | 0.985 | **32.90** | 71.72% |
+| (E)-2-octenal | 19-4 | 3.80 | 8372.33 | 0.984 | **2203.85** | 17.46 | 7958.49 | 0.938 | **455.93** | 79.31% |
+
+K dimensionless (concentration in liquid over concentration in gas). The buffer is the 0.01 M
+potassium phosphate pH 7.6 of main-text sec. 2.3.1 (pH not restated in S3).
+
+**Checks (all mine).**
+1. **K = a/b reproduces 5 of the 6 printed K:** 10403.73/5.04 = 2064 (2065.44), 4017.41/2.75 = 1461
+   (1460.49), 8372.33/3.80 = 2203 (2203.85), 7958.49/17.46 = 455.8 (455.93), 67.80/2.06 = 32.9 (32.90).
+   **Hexanal in pea does not: 9.04/0.78 = 11.6 against the printed 116.37, a 10.0x mismatch.** The
+   printed K2 = 116.37 is the one consistent with the printed retention (1 − 32.90/116.37 = 71.73 %,
+   printed 71.72 %) and with the main-text sec. 3.8 quote, so the typo is in a or b (a dropped digit,
+   e.g. a = 90.4 or b = 0.078), not in K. Had K2 been 11.6, the retention would be −184 % (release).
+   **The shipped constant rests on K2 = 116.37, which therefore has two printed supports against one
+   inconsistent regression row; it is not independently re-derivable from the regression.**
+2. **Retention = 1 − K1/K2 holds for all three** (29.29 %, 71.73 %, 79.31 %).
+3. **(E)-2-octenal used β = 19-4 only**, i.e. the 1000-4000 µL volumes (at most 4 of the 10-point
+   ladder of sec. 2.10: β = 19, 9, 5.7, 4), not the 399-3 range of the other two. The main text never
+   says so. Its K rests on a narrow, high-volume β window where 1/A is least sensitive to K.
+4. **Loading confirmed: the S3 title prints "pea protein (10 mg/mL)".** Flag 6's inference is now a
+   quote. The `loading_inherited_not_restated` label on `kg_*_pea` / `pea_protein_1pct` in
+   `src/kinetic_core/parameters_matrix.py` is superseded (the value 10 g/L is unchanged).
+5. **Shipped per-gram constants re-derived from S3:** (116.37/32.90 − 1)/10 = 0.2537 L/g
+   (`kg_hexanal_pea` 2.537e-1), (2065.44/1460.49 − 1)/10 = 0.04142 (`kg_z_2_penten_1_ol_pea` 4.14e-2),
+   (2203.85/455.93 − 1)/10 = 0.3834 (`kg_t_2_octenal_pea` 3.834e-1). **All three match exactly, at 37 °C
+   and 10 g/L.** pH 7.6 is from the main text, not S3.
+6. The S3 title does not state the flavour dosing level; that the PRV ran at the real-pea µg/kg levels
+   rests on the main text sec. 3.8 alone (S1 merely lists the pea concentrations, citing Bi 2020).
+
+### Table S4 (as printed) — bond-disrupting reagents
+
+| reagent | hydrophobic interactions | hydrogen bonding | ionic / electrostatic | references |
+|---|---|---|---|---|
+| guanidine hydrochloride | Weaken | Inhibit | Inhibit | Léger and Arntfield (1993), Sun and Arntfield (2012), Tanford (1968) |
+| propylene glycol | Weaken | Weaken | Enhance | Ustunol et al. (1992), Utsumi and Kinsella (1985) |
+
+Qualitative literature key only; it measures nothing.
+
+**Model-usable:** partly. S3 confirms the shipped pea constants and their 10 g/L loading; S1 adds
+nothing the model uses (Henry constants are NIST values, not measured); S2 and S4 are not model inputs.

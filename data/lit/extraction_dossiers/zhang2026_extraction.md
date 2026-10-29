@@ -478,3 +478,134 @@ Every k magnitude; k18 as a barrier; the published Amadori-degradation Eₐ; k2 
 | G5 | ⚠ **The α-DC mass balance is inconsistent with equations 14–15** (§3.1b) | would need the authors' MATLAB code |
 | G6 | **k20–k22 undefined** | — |
 | G7 | ⚠ **The fructose contradiction with K5a** | needs adjudication at orchestrator level |
+
+## Supplementary material (read 2026-10-29)
+
+**Sources:** `data/articles/zhang2026_supplementary1.docx` and `zhang2026_supplementary2.docx` (owner
+downloads 2026-10-29, not committed), read with macOS `textutil`. Both title pages: *"Early reaction
+pathways in a glucose-glutathione Maillard system to form meat flavor"*, Zhang, Zhen, He, Li, Liang, Hu,
+Xie — this paper.
+
+**What they hold.**
+- **Supplementary 1 = Figs. S1-S4 only.** S1: MRM chromatograms, MS/MS and fragmentation of Cys- and
+  Gly-Amadori. S2: HPLC-ELSD of the five prepared intermediates. **S3: DFT (B3LYP/6-311G(d,p), SMD
+  methanol) conformer energies of GSH-Amadori — computed, outside this repo's evidence rules, not used.**
+  S4: HPLC of (Cys-Gly)-TTCA 0.15 mmol/L heated at 140 °C, pH 6.5, 0/10/30 min — **figure only, not
+  digitised** (a TTCA-analogue stability check).
+- **Supplementary 2 = Tables S1-S8.** S1-S5: 1H/13C NMR assignments of GSH-, (Cys-Gly)-, Cys-, Gly-Amadori
+  (keto/enol/pyranose/furanose tautomers) and (Cys-Gly)-TTCA — identity only, not transcribed.
+  **S6/S7/S8: volatiles at 130/140/150 °C, 8 times, ng/g, with GC-O odour and FD.**
+
+**Conditions** (main text sec. 1 of this dossier): GSH 60 + glucose 60 mmol/L in 0.2 mol/L sodium
+dihydrogen phosphate, pH 6.5, 15 mL pressure vial, 130/140/150 °C, 10-120 min, n = 3. The SI tables
+restate only the temperature ("in the reaction mixtures of glutathione-glucose system at 130 ℃").
+
+**Quantification basis: semi-quantitative, response factor 1.** Main text: "the reaction solutions with
+1 μL of internal standard (0.06 μg/μL 1,2-dichlorobenzene in methanol) in 15 mL headspace vials were
+first equilibrated at 50 ◦C for 10 min"; no calibration curve anywhere. "STD" in the ID column means
+identification against an authentic standard, not quantification. ng/g = IS-normalised headspace area.
+FD values are from AEDA at **120 min only** (footnote 4). RI on DB-Wax, C6-C27 alkanes.
+
+#### Table S6 — 130 °C, ng/g (mean ± SD, n = 3)
+
+| RI | compound | 10 min | 20 min | 30 min | 40 min | 50 min | 60 min | 90 min | 120 min | odour | FD | ID |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---|
+| 996 | thiophene | - | - | - | - | - | - | 0.66±0.13 | 1.01±0.35 | meaty | 0 | MS, RI, O, STD |
+| 1255 | thiazole | - | - | - | - | - | - | - | 1.05±0.21 | meaty | 2 | MS, RI, O, STD |
+| 1263 | methylpyrazine | - | - | - | - | - | - | 0.36±0.13 | 0.78±0.12 | roasted | 4 | MS, RI, O, STD |
+| 1304 | 2-methyl-3-furanthiol | - | - | - | - | - | - | 0.33±0.11 | 1.01±0.21 | meaty | 128 | MS, RI, O, STD |
+| 1354 | 2,4-dimethylthiazole | - | - | - | - | - | - | 0.34±0.21 | 1.43±0.66 | sulfury | 2 | MS, RI, O, STD |
+| 1368 | 2,4,5-trimethylthiazole | - | - | - | - | 0.56±0.12 | 1.34±0.24 | 5.45±0.78 | 7.35±0.87 | sulfury | 2 | MS, RI, O, STD |
+| 1434 | dihydro-2-methyl-3(2H)-thiophenone | - | - | - | - | - | - | - | 3.45±0.54 | meaty | 4 | MS, RI, O, STD |
+| 1468 | furfural | - | - | - | - | - | - | - | 1.12±0.23 | caramel | 4 | MS, RI, O, STD |
+| 1510 | 2-acetylfuran | 0.58±0.11 | 1.35±0.35 | 2.31±0.33 | 3.14±0.46 | 4.41±0.47 | 6.98±0.55 | 8.33±0.98 | 10.41±1.22 | - | - | MS, RI, STD |
+| 1631 | 2-acetylthiazole | - | - | - | - | - | - | - | 1.23±0.31 | roasted | 2 | MS, RI, O, STD |
+| 1669 | 2-furanmethanol | - | - | - | - | - | - | 1.01±0.23 | 2.02±0.33 | caramel | 2 | MS, RI, O, STD |
+| 1678 | 3-thiophenecarboxaldehyde | - | - | - | - | - | - | 0.33±0.12 | 0.67±0.12 | meaty | 8 | MS, RI, O, STD |
+| 1765 | 5-methyl-2-thiophenecarboxaldehyde | - | - | - | - | 0.79±0.14 | 1.44±0.34 | 2.31±0.64 | 3.14±0.53 | meaty | 2 | MS, RI, O, STD |
+| 1772 | 2-acetyl-3-methylthiophene | - | - | - | - | - | 0.47±0.11 | 1.48±0.56 | 2.31±0.87 | roasted | 2 | MS, RI, O, STD |
+| 1783 | 1-(2-thienyl)-ethanone | - | - | - | 2.01±0.56 | 7.31±0.98 | 9.27±1.02 | 12.32±1.67 | 14.31±1.98 | caramel | 4 | MS, RI, O, STD |
+| 1789 | 1-(3-thienyl)-ethanone | - | - | - | - | - | - | 1.31±0.45 | 5.10±1.33 | caramel | 4 | MS, RI, O, STD |
+| 1795 | 3-methyl-2-thiophenecarboxaldehyde | - | - | - | - | - | - | 0.74±0.21 | 1.12±0.35 | meaty | 4 | MS, RI, O, STD |
+| 1842 | thieno[3,2-b]thiophene | - | - | - | - | 0.23±0.08 | 0.67±0.12 | 2.01±0.21 | 4.22±0.87 | meaty | 2 | MS, RI, O, STD |
+| 1982 | 2-thiophenemethanol | - | - | - | - | - | - | 0.66±0.13 | 1.01±0.35 | meaty | 2 | MS, RI, O, STD |
+| | **total** | 0.58 | 1.35 | 2.31 | 5.15 | 13.30 | 20.17 | 37.64 | 62.74 | | | |
+
+#### Table S7 — 140 °C, ng/g (mean ± SD, n = 3)
+
+| RI | compound | 10 min | 20 min | 30 min | 40 min | 50 min | 60 min | 90 min | 120 min | odour | FD | ID |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---|
+| 1255 | thiazole | - | - | - | - | - | - | 1.12±0.33 | 2.15±0.98 | meaty | 2 | MS, RI, O, STD |
+| 1263 | methylpyrazine | - | - | - | - | - | - | - | 1.85±0.89 | roasted | 4 | MS, RI, O, STD |
+| 1304 | 2-methyl-3-furanthiol | - | - | - | - | - | - | 0.56±0.11 | 1.12±0.32 | meaty | 128 | MS, RI, O, STD |
+| 1354 | 2,4-dimethylthiazole | - | - | - | - | - | - | 0.55±0.15 | 1.66±0.67 | sulfury | 2 | MS, RI, O, STD |
+| 1368 | 2,4,5-trimethylthiazole | - | - | - | - | - | - | 0.56±0.13 | 2.39±0.92 | sulfury | 2 | MS, RI, O, STD |
+| 1434 | dihydro-2-methyl-3(2H)-thiophenone | - | - | - | - | 1.02±0.32 | 1.89±0.68 | 7.93±1.09 | 12.40±1.99 | meaty | 4 | MS, RI, O, STD |
+| 1468 | furfural | - | - | - | - | - | - | - | 5.43±1.00 | caramel | 2 | MS, RI, O, STD |
+| 1510 | 2-acetylfuran | - | - | - | - | - | - | - | 2.01±0.87 | - | - | MS, RI, STD |
+| 1631 | 2-acetylthiazole | 1.10±0.28 | 2.21±0.78 | 6.31±0.87 | 7.39±1.56 | 8.41±1.06 | 10.98±1.05 | 14.21±1.01 | 20.41±2.12 | roasted | 8 | MS, RI, O, STD |
+| 1669 | 2-furanmethanol | - | - | - | - | - | - | - | 2.38±0.37 | caramel | 2 | MS, RI, O, STD |
+| 1678 | 3-thiophenecarboxaldehyde | - | - | - | - | - | - | 1.67±0.54 | 3.56±0.45 | meaty | 8 | MS, RI, O, STD |
+| 1765 | 5-methyl-2-thiophenecarboxaldehyde | - | - | - | - | - | - | 0.52±0.11 | 1.03±0.11 | meaty | 2 | MS, RI, O, STD |
+| 1772 | 2-acetyl-3-methylthiophene | - | - | - | - | 1.39±0.41 | 2.65±0.45 | 3.44±0.78 | 4.14±0.45 | roasted | 2 | MS, RI, O, STD |
+| 1783 | 1-(2-thienyl)-ethanone | - | - | - | - | - | 0.47±0.11 | 1.48±0.56 | 2.31±0.87 | caramel | 4 | MS, RI, O, STD |
+| 1789 | 1-(3-thienyl)-ethanone | - | - | 1.33±0.19 | 6.22±1.01 | 11.33±1.22 | 13.22±1.01 | 17.71±1.89 | 20.22±1.26 | caramel | 8 | MS, RI, O, STD |
+| 1795 | 3-methyl-2-thiophenecarboxaldehyde | - | - | - | - | - | - | 2.78±0.34 | 18.10±1.97 | meaty | 8 | MS, RI, O, STD |
+| 1842 | thieno[3,2-b]thiophene | - | - | - | - | - | - | 1.11±0.34 | 2.02±0.45 | meaty | 2 | MS, RI, O, STD |
+| 1982 | 2-thiophenemethanol | - | - | - | - | 0.62±0.11 | 1.05±0.26 | 3.14±0.52 | 5.24±0.65 | meaty | 2 | MS, RI, O, STD |
+| | **total** | 1.10 | 2.21 | 7.64 | 13.61 | 22.77 | 30.26 | 56.78 | 108.42 | | | |
+
+#### Table S8 — 150 °C, ng/g (mean ± SD, n = 3)
+
+| RI | compound | 10 min | 20 min | 30 min | 40 min | 50 min | 60 min | 90 min | 120 min | odour | FD | ID |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---|
+| 996 | thiophene | - | - | - | - | - | - | 1.08±0.28 | 5.61±0.77 | meaty | 0 | MS, RI, O, STD |
+| 1255 | thiazole | - | - | - | - | - | - | 2.07±0.42 | 4.35±0.88 | meaty | 2 | MS, RI, O, STD |
+| 1263 | methylpyrazine | - | - | - | - | - | - | - | 3.65±0.77 | roasted | 4 | MS, RI, O, STD |
+| 1304 | 2-methyl-3-furanthiol | - | - | - | - | - | - | 0.78±0.12 | 2.32±0.45 | meaty | 128 | MS, RI, O, STD |
+| 1354 | 2,4-dimethylthiazole | - | - | - | - | - | - | 0.86±0.14 | 2.82±0.48 | sulfury | 2 | MS, RI, O, STD |
+| 1368 | 2,4,5-trimethylthiazole | - | - | - | - | - | - | 1.50±0.23 | 4.19±0.89 | sulfury | 2 | MS, RI, O, STD |
+| 1434 | dihydro-2-methyl-3(2H)-thiophenone | - | - | - | - | 1.82±0.34 | 2.82±0.58 | 13.63±3.12 | 22.41±3.98 | meaty | 4 | MS, RI, O, STD |
+| 1468 | furfural | - | - | - | - | - | - | - | 12.83±1.91 | caramel | 4 | MS, RI, O, STD |
+| 1510 | 2-acetylfuran | - | - | - | - | - | - | - | 4.07±0.91 | - | 2 | MS, RI, STD |
+| 1631 | 2-acetylthiazole | 3.10±0.58 | 5.20±0.89 | 8.33±0.99 | 10.32±1.33 | 14.44±1.78 | 15.88±1.65 | 17.91±3.22 | 24.41±5.12 | roasted | 16 | MS, RI, O, STD |
+| 1669 | 2-furanmethanol | - | - | - | - | - | - | - | 6.38±1.33 | caramel | 2 | MS, RI, O, STD |
+| 1678 | 3-thiophenecarboxaldehyde | - | - | - | - | - | - | 3.71±0.78 | 7.56±2.66 | meaty | 8 | MS, RI, O, STD |
+| 1765 | 5-methyl-2-thiophenecarboxaldehyde | - | - | - | - | - | - | 0.72±0.12 | 1.38±0.24 | meaty | 2 | MS, RI, O, STD |
+| 1772 | 2-acetyl-3-methylthiophene | - | - | - | - | 2.99±0.33 | 3.65±0.89 | 5.42±0.92 | 6.14±1.21 | roasted | 2 | MS, RI, O, STD |
+| 1783 | 1-(2-thienyl)-ethanone | - | - | - | - | 1.07±0.33 | 1.74±0.43 | 3.49±0.64 | 5.33±0.93 | caramel | 4 | MS, RI, O, STD |
+| 1789 | 1-(3-thienyl)-ethanone | - | 1.34±0.11 | 3.51±1.11 | 12.11±1.14 | 15.57±1.56 | 16.82±1.97 | 22.77±2.99 | 25.36±3.31 | caramel | 16 | MS, RI, O, STD |
+| 1795 | 3-methyl-2-thiophenecarboxaldehyde | - | - | - | - | - | - | 12.35±2.12 | 48.10±7.88 | meaty | 8 | MS, RI, O, STD |
+| 1842 | thieno[3,2-b]thiophene | - | - | - | - | - | - | 2.20±0.45 | 3.42±0.67 | meaty | 2 | MS, RI, O, STD |
+| 1982 | 2-thiophenemethanol | - | - | - | - | 1.62±0.21 | 2.05±0.56 | 7.14±1.32 | 10.84±2.35 | meaty | 2 | MS, RI, O, STD |
+| | **total** | 3.10 | 6.54 | 11.84 | 22.43 | 37.51 | 42.96 | 95.63 | 201.17 | | | |
+
+Footnotes as printed: "1 RI, linear retention index determined using C6-C27 n-alkanes on a DB-Wax
+capillary columns"; "2 Results were the means of three replicates. Note "–", not detected"; "3 Odor
+characteristics detected by the panelists in GC-O analysis"; "4 FD values in AEDA/GC-O analysis of the
+GSH-glucose reaction mixtures at the reaction time of 120 min"; "5 ... STD, identified by comparison
+... with the authentic chemicals (standards) injected."
+
+**Checks and findings (mine; parsed by script, totals recomputed).**
+1. **The printed totals equal the column sums of the means exactly** in all 24 columns.
+2. **Two copy-paste duplications, value AND SD identical:**
+   - S6 (130 °C): **thiophene = 2-thiophenemethanol**, 90/120 min = 0.66±0.13 / 1.01±0.35.
+   - **S6 2-acetyl-3-methylthiophene (130 °C) = S7 1-(2-thienyl)-ethanone (140 °C)**, 60/90/120 min =
+     0.47±0.11 / 1.48±0.56 / 2.31±0.87 — three consecutive cells, across two tables and two compounds.
+   At least one row in each pair is not a measurement; which one cannot be told. Exclude all four rows
+   (or at least the duplicated cells) from any fit.
+3. **2-Methyl-3-furanthiol** is detected only at 90 and 120 min: 130 °C 0.33±0.11 / 1.01±0.21; 140 °C
+   0.56±0.11 / 1.12±0.32; 150 °C 0.78±0.12 / 2.32±0.45 ng/g; FD 128 at every temperature (the main-text
+   "higher FD" claim). **No 2-furfurylthiol, no dimers, no H2S** anywhere in S6-S8.
+4. **The three main-text numbers (150 °C/120 min) match S8**: 3-methyl-2-thiophenecarboxaldehyde
+   48.10±7.88, dihydro-2-methyl-3(2H)-thiophenone 22.41±3.98, 2-acetylthiazole 24.41±5.12.
+5. Oddities: S7 (140 °C) has **no thiophene row** (18 rows vs 19); at 130 °C **2-acetylfuran** is the only
+   compound before 40 min and rises from 10 min (0.58 → 10.41), while at 140/150 °C it appears only at
+   120 min (2.01, 4.07) — non-monotone in temperature; the 130 °C **2-acetylthiazole** appears only at
+   120 min (1.23) while at 140/150 °C it is present from 10 min. Thiophene is listed "meaty" with **FD 0**;
+   150 °C 2-acetylfuran has FD 2 but odour "-". Several rows rise from not-detected straight to the
+   90-min column, so most compounds give at most two time points per temperature.
+
+**Model-usable:** partly. A three-temperature, eight-time sulfur-volatile series in a buffered pH 6.5
+peptide (GSH) system, semi-quantitative (ratios and within-compound temperature dependence only), with two
+duplicated rows to exclude. MFT gives two points per temperature. Figs. S1-S4 hold no model numbers.

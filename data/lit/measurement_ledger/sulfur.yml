@@ -274,7 +274,7 @@ entries:
     time_min: [120]
     species: ["cysteine"]
     kind: endpoint
-    location: "text p. 6 (curve in Fig. S2, SI not on disk)"
+    location: "text p. 6 (curve in SI Fig. S2, on disk since 2026-10-29, figure only, not digitised)"
     status: text_only
     quant_class: calibrated
     simulable: true
@@ -307,16 +307,16 @@ entries:
     medium: "unbuffered water"
     temperature_c: [100, 120, 140]
     ph: {initial: 7.0, measured_during: false, final: null}
-    time_min: [20, 120]
-    species: ["S-volatiles from dicarbonyl + Cys"]
+    time_min: [10, 20, 30, 40]
+    species: ["2-acetylthiazole", "2-thiophenecarboxaldehyde", "5-methyl-2-thiophenecarboxaldehyde", "3-thiophenethiol", "thieno[3,2-b]thiophene", "pyrazine", "methylpyrazine", "2,5-dimethylpyrazine"]
     kind: time_series
-    location: "Table S2 (SI not on disk)"
-    status: supplement_missing
+    location: "SI Table S2 (9 compounds x 3 T x 4 times); reprinted verbatim as Zhai 2023 JAFC 3c04166 SI Table S3"
+    status: digitised_in_dossier
     quant_class: semi_quantitative
     simulable: true
-    condition_quote: ""
-    flags: []
-    note: "Dicarbonyl + cysteine -> mercaptoketones/thiazoles direct model."
+    condition_quote: "The main flavor compounds (ug/L) generated from thermal treated MGO-GO-Cys model at 100, 120 and 140 C for different times, initial pH of 7.0."
+    flags: [time_grid_conflict, no_error_bars, quant_basis_conflict, "duplicate: printed again as zhai2023jafc SI Table S3"]
+    note: "Dicarbonyl + cysteine direct model (Cys + MGO -> 2-acetylthiazole route). SI read 2026-10-29: table prints 10/20/30/40 min, methods sec. 2.5 say 20-120 min (the 10-40 min grid is the JAFC validation grid). No Cys/MGO/GO measured, no SDs, no final pH. 2-methylthieno[2,3-b]thiophene not detected. f'=1 basis per main text."
   - id: zhai2023jafc_fig3_ttca_arm_volatile_grid
     dossier: zhai2023jafc_extraction.md
     paper: "Zhai et al. 2023 J Agric Food Chem 71:14300"
@@ -330,11 +330,11 @@ entries:
     kind: time_series
     location: "Fig. 3a-c columns A, C, E, G (numeric heat maps)"
     status: digitised_in_dossier
-    quant_class: calibrated
+    quant_class: semi_quantitative
     simulable: true
     condition_quote: "The flavor compounds were quantified by the corresponding calibration curves (Table S2) constructed by the standards."
-    flags: ["partial duplicate: column E (120 min) duplicate_of: zhai2023foodchem_table1_ttca_tladder", quant_basis_conflict]
-    note: "Columns A/C/G (40, 80, 180 min) unpublished elsewhere and unused; they show the Kang 'switch-on' is a hold-time artefact. Column E inherits the 2-methylthiophene 120 C slip (1.128 vs Kang 0.000). Calibration claim contradicts Food Chem f'=1 for identical numbers; Table S2 not on disk; no SDs printed; pH after heating not reported."
+    flags: ["partial duplicate: column E (120 min) duplicate_of: zhai2023foodchem_table1_ttca_tladder", quant_basis_conflict, calibration_claim_contradicted_by_si_table_s2]
+    note: "Columns A/C/G (40, 80, 180 min) unpublished elsewhere and unused; they show the Kang 'switch-on' is a hold-time artefact. Column E inherits the 2-methylthiophene 120 C slip (1.128 vs Kang 0.000). quant_class lowered calibrated -> semi_quantitative 2026-10-29 on the SI: Table S2 has curves for 31 of 39 rows, is Kang SI Table S3 verbatim, and 30 of 430 non-zero cells with a curve (all 21 2-methylthiazole cells, x-intercept +6.20 ug/L) lie below the curve's x-intercept, i.e. could not come from it; Food Chem states f'=1 for identical numbers. No SDs printed; pH after heating not reported."
   - id: zhai2023jafc_fig3_ttcacys_arm_volatile_grid
     dossier: zhai2023jafc_extraction.md
     paper: "Zhai et al. 2023 J Agric Food Chem 71:14300"
@@ -348,11 +348,11 @@ entries:
     kind: time_series
     location: "Fig. 3a-c columns B, D, F, H"
     status: digitised_in_dossier
-    quant_class: calibrated
+    quant_class: semi_quantitative
     simulable: true
     condition_quote: ""
-    flags: [quant_basis_conflict]
-    note: "Added-cysteine perturbation at 3 T x 4 times; unused. Same quantification caveats as the TTCA arm."
+    flags: [quant_basis_conflict, calibration_claim_contradicted_by_si_table_s2]
+    note: "Added-cysteine perturbation at 3 T x 4 times; unused. Same quantification caveats as the TTCA arm (quant_class lowered 2026-10-29 on SI Table S2, see that entry)."
   - id: zhai2023jafc_fig5_arp_dicarbonyls
     dossier: zhai2023jafc_extraction.md
     paper: "Zhai et al. 2023 J Agric Food Chem 71:14300"
@@ -465,20 +465,20 @@ entries:
     dossier: zhai2023jafc_extraction.md
     paper: "Zhai et al. 2023 J Agric Food Chem 71:14300"
     lab: "Zhejiang Gongshang / Jiangnan (Fu Y / Zhang X / Ho)"
-    system: "volatile calibration curves; MGO-GO-Cys thermal model flavour table"
+    system: "volatile calibration curves, y = area ratio to 1,2-dichlorobenzene IS vs x = ug/L"
     medium: "water"
     temperature_c: []
     ph: {initial: null, measured_during: false, final: null}
     time_min: []
-    species: ["calibration curves (39 volatiles)", "S-volatiles from MGO+GO+Cys"]
+    species: ["calibration curves (31 volatiles incl. MFT, FFT, furfural, 3-mercapto-2-butanone, 3-mercapto-2-pentanone)"]
     kind: other
-    location: "SI Table S2 (and the MGO-GO-Cys table; SI not on disk)"
-    status: supplement_missing
-    quant_class: unknown
+    location: "SI Table S2 (31 curves with R2). The MGO-GO-Cys table is SI Table S3 = zhai2023foodchem_tables2_mgo_go_cys, not a separate data set"
+    status: digitised_in_dossier
+    quant_class: other
     simulable: false
-    condition_quote: "the corresponding calibration curves (Table S2)"
-    flags: []
-    note: "Needed to settle calibrated vs f'=1 for the whole Zhai/Kang ladder. Paper's SI cross-reference is internally inconsistent (two objects under 'Table S2')."
+    condition_quote: "The calibration curves of volatile flavor compounds"
+    flags: ["duplicate: identical to Kang 2026 SI Table S3", no_range_lod_recovery, curve_incompatible_with_reported_values, "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "SI read 2026-10-29. Does NOT establish absolute quantification of the Zhai/Kang ladder: 8 of 39 Fig. 3 rows have no curve; 2-methylthiazole (x-intercept +6.20 ug/L) and 9 further cells are below their curve's x-intercept; slopes 0.0039-0.1216 vs the uniform ~0.056 implied by the Food Chem f'=1 formula, so identical numbers cannot come from both routes. SI numbers the MGO-GO-Cys table S3 while the main text cites it as Table S2."
   - id: zhai2023c_fig1a_total_volatiles_ttca_vs_cama
     dossier: zhai2023c_extraction.md
     paper: "Zhai et al. 2023 J Agric Food Chem 71:16260"
@@ -568,7 +568,7 @@ entries:
     simulable: true
     condition_quote: "Table S4. Volatile flavor compounds (ug/L) identified in the TTCA model reactions under elevated temperatures of 100, 120 and 140 C at an initial pH value of 7.0."
     flags: ["duplicate_of: zhai2023foodchem_table1_ttca_tladder", fit_not_forwarded_route_stage1]
-    note: "100 and 120 C columns are B2.1/B2.3 fit rows; 140 C column is a hold-out (in_model_check). Re-publication of Zhai 2023 Food Chem Table 1 TTCA columns (also Zhai 2023 JAFC Fig. 3 col E), SDs included; 2-methylthiophene 120 C printed 0.000 (corrects the parent's 1.128 slip). Kang claims Tier A calibration (Table S3) but the parent states f'=1, so treated as semi-quant. 0.000 = left-censored."
+    note: "100 and 120 C columns are B2.1/B2.3 fit rows; 140 C column is a hold-out (in_model_check). Re-publication of Zhai 2023 Food Chem Table 1 TTCA columns (also Zhai 2023 JAFC Fig. 3 col E), SDs included; 2-methylthiophene 120 C printed 0.000 (corrects the parent's 1.128 slip). Kang claims Tier A calibration (Table S3) but the parent states f'=1, so treated as semi-quant; Kang Table S3 is Zhai 2023 JAFC SI Table S2 verbatim, and 2-methylthiazole's S4 values lie below that curve's x-intercept (checked 2026-10-29). 0.000 = left-censored."
   - id: kang2026_si_table_s5_ttca_ph_ladder
     dossier: kang2026_SI_extraction.md
     paper: "Kang et al. 2026 Sustainable Food Technol 4:3239 (SI)"
@@ -1549,16 +1549,16 @@ entries:
     medium: "sodium dihydrogen phosphate 0.2 mol/L, pH 6.5"
     temperature_c: [130, 140, 150]
     ph: {initial: 6.5, measured_during: false, final: null}
-    time_min: [120]
-    species: ["MFT", "FFT", "thiophenes", "thiazoles", "GC-O FD values"]
-    kind: endpoint
-    location: "SI Tables S6-S8"
-    status: supplement_missing
+    time_min: [10, 20, 30, 40, 50, 60, 90, 120]
+    species: ["MFT", "2-acetylthiazole", "thiazoles", "thiophenes", "dihydro-2-methyl-3(2H)-thiophenone", "furfural", "2-acetylfuran", "methylpyrazine", "GC-O FD values (120 min)"]
+    kind: time_series
+    location: "SI Tables S6 (130 C, 19 compounds), S7 (140 C, 18), S8 (150 C, 19); ng/g, mean +/- SD, n = 3, 8 times"
+    status: digitised_in_dossier
     quant_class: semi_quantitative
     simulable: true
-    condition_quote: ""
-    flags: []
-    note: "Only per-compound volatile data of the paper; SI not on disk. Main text prints three ng/g values at 150 C / 120 min (text_only) and an MFT FD-value claim."
+    condition_quote: "Volatile flavor compounds detected by solid-phase micro extraction/gas chromatography-mass spectrometry (SPME/GC-MS) and gas chromatograph-olfactometry (GC-O) in the reaction mixtures of glutathione-glucose system at 130 C"
+    flags: [duplicated_rows_copy_paste, sparse_detection_most_rows_two_points, "condition_not_stated_in_si: composition, pH (from main text)"]
+    note: "SI read 2026-10-29. Single IS (1,2-dichlorobenzene), no curves: response factor 1. Totals = column sums exactly. Duplicated value+SD: S6 thiophene = S6 2-thiophenemethanol (90/120 min); S6 2-acetyl-3-methylthiophene = S7 1-(2-thienyl)-ethanone (60/90/120 min); exclude. MFT only at 90/120 min at each T (130: 0.33/1.01, 140: 0.56/1.12, 150: 0.78/2.32 ng/g), FD 128. No FFT, no dimers. Main-text 150 C values match S8."
   - id: wang2026_fig5_temperature_ladder
     dossier: wang2026_extraction.md
     paper: "Wang XL, Wei, Wei, Yang & Liu 2026 Food Res Int 230:118535"
@@ -1647,8 +1647,8 @@ entries:
     quant_class: semi_quantitative
     simulable: true
     condition_quote: "under the assumption of equal response factors among analytes"
-    flags: ["oav_not_concentration", "no_sd_printed"]
-    note: "OAVs only (concentration / literature threshold); within-compound time ratios transferable, concentrations must not be back-reconstructed. Only source with all three thiol dimers + parents vs time. Cyclohexanone IS, RF = 1."
+    flags: ["oav_not_concentration", "no_sd_printed", "duplicate: OAV = SI Table S1 conc / threshold", oav_unit_error_1e6]
+    note: "OAVs only; within-compound time ratios transferable. SI read 2026-10-29: every OAV = S1 ng/mL divided by threshold in mg/kg without conversion, so all OAVs are 1e6 too high (true MFT OAV 54-241, FFT 2-16, difurfuryl disulfide ~1-3, mixed disulfide < 0.01). Use wang2026b_tables1_22_volatiles for concentrations. Cyclohexanone IS, RF = 1."
   - id: wang2026b_fig4_sulfur_volatiles_ngml
     dossier: wang2026b_extraction.md
     paper: "Wang, Lin, Jia, Sun, Wang & Chen 2026 Food Chem 521:149913"
@@ -1665,8 +1665,8 @@ entries:
     quant_class: semi_quantitative
     simulable: true
     condition_quote: "Concentration of sulfur-containing volatile compounds with OAV > 100, ng/mL"
-    flags: ["broken_axis"]
-    note: "Figure-only with a broken y-axis; same data as SI Table S1."
+    flags: ["broken_axis", "duplicate_of: wang2026b_tables1_22_volatiles"]
+    note: "Figure-only with a broken y-axis; same data as SI Table S1 (printed, on disk since 2026-10-29). The 'OAV > 100' selection rests on the 1e6-inflated OAVs."
   - id: wang2026b_tables1_22_volatiles
     dossier: wang2026b_extraction.md
     paper: "Wang, Lin, Jia, Sun, Wang & Chen 2026 Food Chem 521:149913"
@@ -1676,15 +1676,15 @@ entries:
     temperature_c: [120]
     ph: {initial: 5.5, measured_during: false, final: null}
     time_min: [0, 60, 90, 120, 150]
-    species: ["22 volatiles incl. MFT", "FFT and three thiol dimers"]
+    species: ["MFT", "FFT", "bis(2-methyl-3-furyl) disulfide", "difurfuryl disulfide", "2-furfuryl 2-methyl-3-furyl disulfide", "3-mercapto-2-pentanone", "furfural", "2-methylfuran", "thiophenes", "22 volatiles"]
     kind: time_series
-    location: "SI Table S1"
-    status: supplement_missing
+    location: "SI Table S1 (22 compounds x 5 times: relative abundance % and semi-quantitative ng/mL, mean +/- SD, n = 3)"
+    status: digitised_in_dossier
     quant_class: semi_quantitative
     simulable: true
-    condition_quote: ""
-    flags: []
-    note: "Would give the sulfur lane's first external thiol-and-dimer time course (ng/mL, IS RF=1)."
+    condition_quote: "Semi-quantitative concentration (ng/mL) ... MRPs-0, MRPs-60, MRPs-90, MRPs-120 and MRPs-150 represented the MRPs of xylose and cysteine obtained at 0, 60, 90, 120, and 150 min"
+    flags: [rf_equal_assumed, contaminant_peaks_in_denominator]
+    note: "SI read 2026-10-29. First printed thiol-and-dimer time course in one xylose-cysteine pot: MFT 543.73 -> 2407.32, FFT 274.58 -> 2120.24, bis(2-methyl-3-furyl) disulfide 3730.50 -> 8722.94, difurfuryl disulfide 142.97 -> 480.59 (from 90 min), mixed disulfide 75.91 -> 1023.16 ng/mL (60 -> 150 min). Cyclohexanone IS, RF = 1. Exposes the 1e6 OAV unit error in main Table 1. No pH or precursor data."
   - id: du2023_table1_volatiles_c9_aldehydes
     dossier: du2023_extraction.md
     paper: "Du et al. 2023 Food Res Int 173:113337"
@@ -6148,7 +6148,7 @@ entries:
     simulable: true
     condition_quote: "The binary mixture of VB1 at 15.0 mg/mL (w/v) and Xyl in a ratio 1:1 was solubilized in pH 4.9 ± 0.1 phosphate buffered solution. The mixture was made to react for 60 min"
     flags: [condition_uncertain]
-    note: "B2.3 fit uses Fig. 1 as ratios (dimer:MFT, MMFT:MFT). Temperature NOT stated in sec. 2.2; 115 C assumed from the paper's other steps. HS-SPME external-standard curves (Table S5 not on disk); not commensurable with SIDA ppb."
+    note: "B2.3 fit uses Fig. 1 as ratios (dimer:MFT, MMFT:MFT). Temperature NOT stated in sec. 2.2; 115 C assumed from the paper's other steps. HS-SPME external-standard curves (SI Table S5, read 2026-10-29: 6 compounds, R2 0.978-0.994, no range/LOD); not commensurable with SIDA ppb."
   - id: zhang2024_fig2_met_thiamine_xylose_cys_gsh_dose
     dossier: Zhang2024_extraction.md
     paper: "Zhang, Kuang, Wang & Cao 2024 Food Res Int 182:114149"
@@ -6171,38 +6171,56 @@ entries:
     dossier: Zhang2024_extraction.md
     paper: "Zhang, Kuang, Wang & Cao 2024 Food Res Int 182:114149"
     lab: "BTBU (Cao Y)"
-    system: "methionine + thiamine + xylose (+ Cys or GSH), kinetic run beyond 90 min"
+    system: "'radical reaction model' = multi-component model: methionine + thiamine + xylose, control / + Cys / + GSH, 150-min run"
     medium: "phosphate buffer pH 4.9"
-    temperature_c: []
+    temperature_c: [115]
     ph: {initial: 4.9, measured_during: false, final: null}
-    time_min: []
+    time_min: [0, 90, 150]
     species: ["MMFT"]
     kind: rate_constant
-    location: "sec. 3.1 text (from Tables S6/S7)"
-    status: text_only
+    location: "SI Table S6 (zero-, first-, second-order fits, 3 groups) and SI Table S7 (linear fits 0-90 and 90-150 min, 3 groups); quoted in sec. 3.1 text"
+    status: digitised_in_dossier
     quant_class: calibrated
-    simulable: false
-    condition_quote: "the zero-order kinetic equations of MMFT levels in the Cys and GSH treatment groups had better-fitted data. The two groups' respective reaction rate constants were 0.0028 and 0.0031"
-    flags: [condition_uncertain]
-    note: "Units never stated; run duration and temperature of the kinetic experiment not stated (slopes quoted beyond 90 min while sec. 2.3 says up to 60 min). Slope break at 90 min."
+    simulable: true
+    condition_quote: "Kinetic analysis of MMFT levels in radical reaction model for150 min thermal processing."
+    flags: [condition_uncertain, units_not_printed, text_control_slope_misreported, first_second_order_fits_uninterpretable, no_error_bars]
+    note: "SI read 2026-10-29. Zero-order k: control 0.0047, Cys 0.0028, GSH 0.0031; two-stage slopes control 0.0013 / 0.008, Cys 0.0043 / 0.0011, GSH 0.0033 / 0.0032. Units not printed; ng/mL per min by internal consistency (segments continuous at 90 min, 60-min values match Fig. 2e scale). Run is 150 min (resolves the duration conflict); 115 C and composition inferred from sec. 2.3, not restated. Text's 'GSH post-90 slope 4x control' is wrong: SI control post-90 is 0.008 (GSH is 0.4x). First/second-order slopes are all negative for a rising product."
   - id: zhang2024_figs1_s2_tables_s2_s7_dynamic_and_temperature
     dossier: Zhang2024_extraction.md
     paper: "Zhang, Kuang, Wang & Cao 2024 Food Res Int 182:114149"
     lab: "BTBU (Cao Y)"
-    system: "methionine + thiamine + xylose +/- Cys / GSH / cystine; single-factor temperature sweep and Box-Behnken design"
+    system: "methionine + thiamine + xylose +/- Cys / GSH / cystine; time profiles and single-factor sweeps (Cys:GSH ratio, pH 3-8, 95-135 C first and second stage, 0-60 min)"
     medium: "phosphate buffer pH 4.9"
-    temperature_c: []
-    ph: {initial: 4.9, measured_during: false, final: null}
-    time_min: []
+    temperature_c: [95, 105, 115, 125, 135]
+    ph: {initial: [3, 4, 5, 6, 7, 8], measured_during: false, final: null}
+    time_min: [0, 10, 20, 30, 40, 50, 60]
     species: ["MeSH", "DMDS", "DMTS", "MFT", "MMFT", "bis(2-methyl-3-furyl) disulfide"]
     kind: time_series
-    location: "Fig. S1 (time profiles), Fig. S2 (temperature sweep), Tables S2/S3 (BBD), S5 (calibration), S6/S7 (kinetics)"
-    status: supplement_missing
+    location: "SI Fig. S1 (time profiles, radical reaction model), SI Fig. S2 (single-factor sweeps on DMTS and MMFT/MFT-MFT); levels in SI Table S1"
+    status: figure_only
     quant_class: calibrated
     simulable: false
-    condition_quote: "The dynamic analysis results (Table S6) showed that the zero-order kinetic equations of MMFT levels"
-    flags: []
-    note: "SI not on disk: six time series x three groups plus the MFT/DMTS temperature sweep; the paper's only temperature content. Highest-value retrieval for this paper."
+    condition_quote: "Effect of the concentration ratio of Cys and GSH, and reaction conditions on the DMTS concentrations and concentrations ratio of MMFT and MFT-MFT in the multi-component models."
+    flags: [no_error_bars_in_tables]
+    note: "SI read 2026-10-29: Figs. S1-S4 are images, not digitised. Fig. S2 holds the paper's only temperature sweep (95-135 C). Tables S6/S7 moved to zhang2024_text_mmft_zero_order_slopes; Box-Behnken Tables S2/S3 to zhang2024_si_table_s3_box_behnken; standard curves (Table S5, 6 compounds) transcribed in the dossier."
+  - id: zhang2024_si_table_s3_box_behnken
+    dossier: Zhang2024_extraction.md
+    paper: "Zhang, Kuang, Wang & Cao 2024 Food Res Int 182:114149"
+    lab: "BTBU (Cao Y)"
+    system: "Met:VB1:Xyl 1:3:3 + Cys/GSH at ratio 4:6, 3:7 or 2:8; two-stage heating"
+    medium: "phosphate buffer, pH not restated in SI (main text ~5)"
+    temperature_c: [95, 105, 115]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [10, 20, 30]
+    species: ["DMTS", "MMFT/MFT-MFT ratio"]
+    kind: endpoint
+    location: "SI Table S3 (27 Box-Behnken runs, R1 DMTS, R2 MMFT/MFT-MFT); levels in SI Table S2"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Box-Behnken design used for RSM and values of observed responses"
+    flags: [condition_uncertain, "condition_not_stated: ph", r1_unit_not_printed, first_stage_duration_not_stated]
+    note: "Factors: initial temperature 95-115 C, second reaction time 10-30 min, second-stage temperature 95-115 C, Cys:GSH ratio. Centre-point triplicate CV ~7 % (R1) and ~9 % (R2). Responses only as DMTS level (unit unstated) and a ratio; total additive loading not restated."
   - id: zhang2024_fig4_pork_process_flavour
     dossier: Zhang2024_extraction.md
     paper: "Zhang, Kuang, Wang & Cao 2024 Food Res Int 182:114149"
@@ -7724,15 +7742,15 @@ entries:
     temperature_c: [6, 27, 60]
     ph: {initial: 5.5, measured_during: false, final: null}
     time_min: [0, 5760]
-    species: [FFT free fraction, FFT disulfide, covalently incorporated FFT]
+    species: [FFT free fraction, FFT disulfide, covalently incorporated FFT, 3-mercapto-2-butanone free fraction, 3-mercapto-3-methylbutanol free fraction, 3-mercapto-3-methylbutyl formate free fraction]
     kind: time_series
-    location: "Table 1 (printed); Fig. 2 (percent free odorant vs time, RT, digitised [D]); Fig. 4 (FFT free fraction at 6/25/60 C vs log time, digitised [D])"
+    location: "Table 1 (printed); SI Table S2 (printed % free, 20 odorants x 10 times 1-5760 min, RT; the numbers behind Fig. 2); Fig. 4 (FFT free fraction at 6/25/60 C vs log time, digitised [D]); SI Fig. S3 (FFT, N-acetylcysteine, MeFFT monomer/dimer, figure only)"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: false
     condition_quote: "to guarantee complete re-establishment of the equilibrium z-magnetization of all excited nuclei and thus enabling quantitative measurement"
-    flags: [internal_inconsistency_printed_percentages, temperature_not_calibrated]
-    note: "coffee thiol sink (melanoidin matrix). 279/300/333 K on two instruments; no NMR temperature calibration. Dossier flags conflicting printed free-FFT percentages (32.3 % majority value). Absolute bound fractions usable; no rate constants fitted by authors."
+    flags: [internal_inconsistency_printed_percentages, temperature_not_calibrated, percent_only_no_sd]
+    note: "coffee thiol sink (melanoidin matrix). 279/300/333 K on two instruments; no NMR temperature calibration. SI Table S2 (read 2026-10-29) prints FFT % free 100/32.3/32.3/32.2/32.3/31.3/27.0/23.3/15.3/0.0 and 3-mercapto-2-butanone to 22.5 % at 96 h; replaces the Fig. 2 digitisation (which it confirms within ~3 pp). Percent only, no SD. Absolute bound fractions usable; no rate constants fitted by authors."
   - id: cerny2021_tab1_3_fig2_in_bean_ffa_to_fft
     dossier: cerny2021_extraction.md
     paper: "Cerny, Schlichtherle-Cerny, Gibe & Yuan 2021"

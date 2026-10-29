@@ -1284,3 +1284,129 @@ disulfide measurement, no thiol mass balance and no thiol-consumption experiment
     (an engine species, `ACTZ`), **2-furanthiol**, **norfuraneol** (engine `NF`), **thiophene**,
     **2-methylthiophene**, the two thieno-thiophenes, and every pyrazine. A benchmark row built on
     this paper would need at least TTCA, ARP and norfuraneol keyed.
+
+## Supplementary material (read 2026-10-29)
+
+**Source:** `data/articles/zhai2023_supplementary.pdf` (7 pp., owner download 2026-10-29, not committed;
+ACS stamp "jf3c04166_si_001"). Identity from its own title page: *"Regulated Formation of Inhibited
+Color and Enhanced Flavor Derived from Heated 2-Threityl-Thiazolidine-4-Carboxylic Acid with
+Additional Cysteine Targeting at Different Degradation Stages"*, Zhai, Cui, Hayat, Li, Wu, Fu, Zhang,
+Ho — **this paper (JAFC 10.1021/acs.jafc.3c04166)**. (The other download, `zhai2023b_supplementary.docx`,
+is the Food Chem 134420 SI; see `zhai2023foodchem_extraction.md`.) Read with `pdftotext -layout`.
+
+**What it holds.**
+- **Fig. S1** — TIC and LC-MS/MS spectra of purified ARP and TTCA (identity only).
+- **Fig. S2** — proposed pathways: (a) volatiles from Cys-Xyl, (b) the sulfur compounds. Scheme, no data.
+- **Table S1** — LC-MS/MS fragments and 13C NMR of the two intermediates; **raster image** (the text
+  layer prints only "TABLE"). Identity data, no model use; not transcribed.
+- **Table S2** — "The calibration curves of volatile flavor compounds": 31 linear curves with R².
+- **Table S3** — "The main flavor compounds (μg/L) generated from thermal treated MGO-GO-Cys model at
+  100, 120 and 140 ℃ for different times, initial pH of 7.0." 9 compounds × 3 T × 4 times.
+
+This resolves sec. 1.1's cross-reference defect: the SI numbers the MGO-GO-Cys table **S3**, while the
+main text (p. 14304) calls it "Table S2".
+
+### Table S2 (as printed). y = area(analyte)/area(IS, 1,2-dichlorobenzene); x = μg/L (per main text p. 14302)
+
+| # | compound | curve | R² |
+|---:|---|---|---:|
+| 1 | Thiophene | y = 0.0223 x + 0.0011 | 0.9991 |
+| 2 | 2-Methylthiophene | y = 0.0472 x + 0.0009 | 0.9994 |
+| 3 | Thiazole | y = 0.0601 x − 0.0012 | 0.9982 |
+| 4 | 2-Methylthiazole | y = 0.0084 x − 0.0521 | 0.9923 |
+| 5 | 3-Mercapto-2-butanone | y = 0.1216 x − 0.0007 | 0.9999 |
+| 6 | 2,5-Dimethyl-thiazole | y = 0.0637 x + 0.0012 | 0.9979 |
+| 7 | 2-Methyl-3-furanthiol | y = 0.0039 x + 0.0011 | 0.9989 |
+| 8 | 2-Ethyl-thiazole | y = 0.0629x + 0.0041 | 0.9994 |
+| 9 | 3-Mercapto-2-pentanone | y = 0.0379 x + 0.0131 | 0.9997 |
+| 10 | 2,4,5-Trimethylthiazole | y = 0.0571 x − 0.0007 | 0.9994 |
+| 11 | 4,5-Dimethyl-thiazole | y = 0.0297 x − 0.0042 | 0.9969 |
+| 12 | 2-Furfurylthiol | y = 0.0287 x − 0.0003 | 0.9992 |
+| 13 | 5-Ethyl-2,4-dimethyl-thiazole | y = 0.0184 x + 0.0008 | 0.9981 |
+| 14 | 2-Ethyl-4-methyl-thiazole | y = 0.0430 x + 0.0024 | 0.9923 |
+| 15 | 3-Thiophenethiol | y = 0.0285 x + 0.0033 | 0.9954 |
+| 16 | 2-Acetylthiazole | y = 0.0364 x − 0.0014 | 0.9967 |
+| 17 | 2-Thiophenecarboxaldehyde | y = 0.0446 x + 0.0009 | 0.9998 |
+| 18 | 5-Methyl-2-thiophenecarboxaldehyde | y = 0.0296 x − 0.0007 | 0.9999 |
+| 19 | 2-Thiophenemethanethiol | y = 0.0517 x + 0.0012 | 0.9954 |
+| 20 | 1-(3-Thienyl)-ethanone | y = 0.0728 x − 0.00012 | 0.9981 |
+| 21 | 2,5-Thiophenedicarboxaldehyde | y = 0.0423 x − 0.0031 | 0.9997 |
+| 22 | Methylpyrazine | y = 0.0398 x + 0.0012 | 0.9949 |
+| 23 | Pyrazine | y = 0.0294 x + 0.0012 | 0.9989 |
+| 24 | 3-Methyl-pyridine | y = 0.0563 x + 0.0032 | 0.9998 |
+| 25 | 2,5-Dimethyl-pyrazine | y = 0.0319 x + 0.0013 | 0.9978 |
+| 26 | Furan | y = 0.0253 x − 0.0012 | 0.9968 |
+| 27 | 2-Methyl-furan | y = 0.0336 x + 0.0021 | 0.9997 |
+| 28 | Furfural | y = 0.0347 x − 0.0012 | 0.9923 |
+| 29 | 1-(2-Furanyl)-ethanone | y = 0.0629 x + 0.0024 | 0.9948 |
+| 30 | 2(5H)-Furanone | y = 0.0598 x − 0.0011 | 0.9993 |
+| 31 | 4-Hydroxy-5-methyl-3(2H)-furanone | y = 0.0098 x + 0.0002 | 0.9971 |
+
+No calibration range, no number of levels, no LOD/LOQ, no recovery, no matrix (water vs reaction
+solution) is printed.
+
+### ★ What Table S2 says about the quantification basis (the integrity question; all checks mine)
+
+1. **It is Kang 2026 SI Table S3, verbatim.** All 31 curves, coefficients and R² are identical to the
+   last printed digit to `kang2026_SI_extraction.md` sec. 2c (machine diff of the two lists, 2026-10-29).
+   The curve list is therefore not independent evidence for Kang; it is one lab's list printed twice.
+2. **8 of the 39 Fig. 3 compounds have no curve**: 2,3-dihydro-5-methylthiophene,
+   1-(2-thienyl)-1-propanone, 2-methyl-3-[(2-methyl-3-thienyl)dithio]furan, 1,2,3-trithiolane,
+   3,3′-dithiobisthiophene, thieno[3,2-b]thiophene, 2-methylthieno[2,3-b]thiophene,
+   bis(2-furfuryl)sulfide. Those rows cannot be calibrated whatever the text says (μg/L by f′ = 1 at best).
+   The sec. 4.2 "working assumption" (shared-with-Kang rows = Tier A) is now a fact about the roster.
+3. **The printed curves cannot have produced 30 of the 430 non-zero Fig. 3 cells that have a curve.**
+   A curve with a positive x-intercept (−b/a > 0) maps any detected peak (y > 0) to x > −b/a. Yet:
+   - **2-methylthiazole**: x-intercept **+6.20 μg/L**; **all 21 non-zero cells** (0.001-2.482 μg/L,
+     incl. column E 0.142 / 0.194 / 0.254 = Kang S4) lie below it — each would need a negative area ratio;
+   - 4,5-dimethylthiazole (x-int 0.141): 0.112, 0.012, 0.027, 0.028; 2,5-thiophenedicarboxaldehyde
+     (0.073): 0.024, 0.052; 2,4,5-trimethylthiazole (0.012): 0.004; furan (0.047): 0.039;
+     2(5H)-furanone (0.018): 0.012.
+   (Script: scratchpad `scripts/zhai_curve_test.py`, run on the sec. 6 grid.)
+4. **The two stated routes cannot give the same numbers.** The Food Chem companion's
+   `Wi = f′ × Ai × ms / (As × V)` with f′ = 1, ms = 0.054 μg IS and V ≈ 3 mL implies one uniform
+   response y = x × V/ms ≈ **0.056 x** for every compound. Table S2's slopes run **0.0039 (MFT) to
+   0.1216** (3-mercapto-2-butanone), i.e. relative response factors of 0.07-2.2. For MFT, the same
+   area ratio would read **~14x higher** via its curve than via f′ = 1. Identical cells (Food Chem
+   Table 1 = this Fig. 3 col. E = Kang S4) therefore came from one route only, and the curves do not
+   say which. (V = 3 mL is my reading of "3 g sample"; with the Food Chem's 2 g NaCl added, the
+   implied slope is ~0.09. Either way it is uniform, the curves are not.)
+
+**Verdict.** Table S2 does **not** show that the ladder is externally calibrated. It shows the curves
+exist and match Kang's, but (i) 8 rows have none, (ii) 2-methylthiazole's printed values are
+impossible under its printed curve and 9 further cells are too, and (iii) the companion paper prints
+the f′ = 1 formula for the same numbers. **Keep the ladder semi-quantitative (response factor 1)**;
+ratios and Arrhenius slopes within a compound stand, absolute μg/L and cross-compound comparisons do
+not. The curves' slopes give the size of the error if they were *not* applied: MFT absolute values
+could be ~14x low, 3-mercapto-2-butanone ~2x high.
+
+### Table S3 (as printed) — MGO 10 + GO 10 + Cys 10 mmol/L, initial pH 7.0, μg/L. "-" = not detected. No SDs printed.
+
+| compound | RIa | RIb | ID | 10 min 100 | 10 min 120 | 10 min 140 | 20 min 100 | 20 min 120 | 20 min 140 | 30 min 100 | 30 min 120 | 30 min 140 | 40 min 100 | 40 min 120 | 40 min 140 |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2-Acetylthiazole | 1646 | 1643 | RI, MS | 2.197 | 4.135 | 10.178 | 5.219 | 8.237 | 16.039 | 8.221 | 12.178 | 27.018 | 11.228 | 20.213 | 32.728 |
+| 2-Thiophenecarboxaldehyde | 1674 | 1679 | RI, MS | 0.009 | 0.054 | 0.097 | 0.032 | 0.120 | 0.217 | 0.078 | 0.193 | 0.332 | 0.107 | 0.312 | 0.413 |
+| 5-Methyl-2-thiophenecarboxaldehyde | 1701 | 1785 | RI, MS | 0.178 | 0.112 | 0.278 | 0.327 | 0.576 | 0.623 | 0.627 | 0.986 | 1.213 | 0.978 | 1.213 | 1.779 |
+| 3-Thiophenethiol | 1564 | 1530 | RI, MS | 0.000 | 0.009 | 0.023 | 0.008 | 0.027 | 0.063 | 0.014 | 0.053 | 0.083 | 0.034 | 0.079 | 0.100 |
+| Thieno[3,2-b]thiophene | 1868 | 1843 | RI, MS | 0.097 | 0.178 | 0.273 | 0.117 | 0.239 | 0.534 | 0.231 | 0.430 | 0.732 | 0.391 | 0.621 | 0.852 |
+| 2-Methylthieno[2,3-b]thiophene | 1947 | - | MS | - | - | - | - | - | - | - | - | - | - | - | - |
+| Pyrazine | 1216 | 1209 | RI, MS | - | - | 0.017 | - | 0.011 | 0.017 | 0.007 | 0.020 | 0.031 | 0.019 | 0.029 | 0.048 |
+| MethylPyrazine | 1214 | 1263 | RI, MS | - | - | 0.293 | 0.021 | 0.237 | 0.478 | 0.512 | 0.736 | 0.973 | 0.939 | 1.012 | 1.301 |
+| 2,5-Dimethyl-pyrazine | 1320 | 1328 | RI, MS | - | - | 0.012 | 0.005 | 0.012 | 0.032 | 0.021 | 0.043 | 0.059 | 0.047 | 0.062 | 0.079 |
+
+Footnotes as printed: a RI on DB-WAX (30 m × 0.25 mm × 0.25 μm) vs n-alkanes; b RI from flavornet /
+NIST WebBook; c identification method; d "-" not detected.
+
+**This is the Food Chem 134420 SI Table S2, reprinted** (all 126 cells identical, machine diff). This
+JAFC paper has no methods entry for a Cys-MGO-GO pot: its validation models are ammonium sulfide +
+furfural / furan / 2-methylfuran / norfuraneol / MGO-GO, "treated at 120 °C for a defined reaction
+time (10, 20, 30, and 40 min)"; the text then cites "the Cys−MGO−GO thermal reaction model ... Table
+S2" (p. 14308). The table's 10-40 min grid matches that JAFC time grid, **not** the Food Chem methods
+(sec. 2.5: "100, 120 and 140 °C for a defined reaction time (20, 40, 60, 80, 100, 120 min)"), so
+which methods text describes this pot is unresolved. Transcribed here because it is printed here;
+the ledger carries it once, under `zhai2023foodchem_tables2_mgo_go_cys`. Note that
+the 5-methyl-2-thiophenecarboxaldehyde 100 °C/10 min cell (0.178) exceeds 120 °C/10 min (0.112),
+the only temperature inversion in the table.
+
+**Model-usable:** partly. Table S2 settles the integrity question (negatively for "absolute"); Table
+S3 is a duplicate; nothing else is numeric.

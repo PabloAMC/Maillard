@@ -348,20 +348,20 @@ entries:
     dossier: bi2022_extraction.md
     paper: "Bi, Pan, Zhang, Ma, Lao, Shen & Wu 2022 Food Chem 389:133044"
     lab: "China Agricultural University (Wu J)"
-    system: "same 3 odorants at real-pea levels (ug/kg) in pea protein solution (10 g/L inherited) and in buffer"
-    medium: "0.01 M K phosphate pH 7.6; phase-ratio variation, 10 volumes 50-5000 uL in 20 mL vial"
+    system: "same 3 odorants at real-pea levels (ug/kg) in pea protein solution (10 mg/mL, printed in Table S3 title) and in buffer"
+    medium: "0.01 M K phosphate pH 7.6; phase-ratio variation, beta 399-3 (pentenol, hexanal) or 19-4 ((E)-2-octenal) in 20 mL vial"
     temperature_c: [37]
     ph: {initial: [7.6], measured_during: false, final: null}
     time_min: [120, 120]
     species: [(Z)-2-penten-1-ol, hexanal, (E)-2-octenal]
     kind: endpoint
-    location: "sec. 3.8 text (6 matrix/gas K, 3 retention R; quoted from Table S3, not on disk)"
+    location: "SI Table S3 (slope, intercept, R2, matrix/gas K2 pea and K1 buffer, retention %); repeated in sec. 3.8 text"
     status: in_model_fit
     quant_class: calibrated
     simulable: true
-    condition_quote: "all the conditions were the same as those described in Section 2.3.1"
-    flags: [loading_inherited_not_restated, no_error_bars, table_s3_not_on_disk, octenal_quarantined, methanol_cosolvent, protein_content_not_stated, "also_relevant: lipid"]
-    note: "Sets kg_hexanal_pea, kg_z_2_penten_1_ol_pea and quarantined kg_t_2_octenal_pea (Wave B26 SHIP; MATRIX_LOADING pea_protein_1pct). First plant-protein row in REVERSIBLE_BINDING."
+    condition_quote: "Matrix/gas partition coefficients of flavor compounds in the solution of pea protein (10 mg/mL) at 37 °C calculated by phase ratio variation method."
+    flags: [no_error_bars, s3_hexanal_pea_regression_a_over_b_10x_off_printed_k, octenal_beta_19_4_only, octenal_quarantined, methanol_cosolvent, protein_content_not_stated, "also_relevant: lipid"]
+    note: "Sets kg_hexanal_pea, kg_z_2_penten_1_ol_pea and quarantined kg_t_2_octenal_pea (Wave B26 SHIP; MATRIX_LOADING pea_protein_1pct). First plant-protein row in REVERSIBLE_BINDING. SI read 2026-10-29: all three shipped K_g re-derive exactly from S3; the 10 g/L loading is now printed (S3 title), so the code's loading_inherited_not_restated label is superseded. S3 hexanal-pea a/b = 9.04/0.78 = 11.6, not the printed K2 116.37 (retention and sec. 3.8 support 116.37)."
   - id: bi2022_figs2_s1_quench_disrupting_agents
     dossier: bi2022_extraction.md
     paper: "Bi, Pan, Zhang, Ma, Lao, Shen & Wu 2022 Food Chem 389:133044"
@@ -373,13 +373,31 @@ entries:
     time_min: [60, 120]
     species: [(Z)-2-penten-1-ol, hexanal, (E)-2-octenal]
     kind: other
-    location: "Fig. 2 (Stern-Volmer, Ksv/Ka as figure labels), Fig. S1 (bond-disrupting peak areas; two quoted in text), Table S2/S4"
+    location: "Fig. 2 (Stern-Volmer, Ksv/Ka as figure labels), Fig. S1 (bond-disrupting peak areas; two quoted in text); Table S4 is a qualitative reagent key only"
     status: supplement_missing
     quant_class: semi_quantitative
     simulable: false
     condition_quote: ""
-    flags: [ksv_ka_not_printed, tables_s2_s4_not_recoverable, "also_relevant: lipid"]
-    note: "Only reversibility evidence for (E)-2-octenal (20 % recovery under propylene glycol). SI (Tables S1-S4, Figs. S1-S2) not on disk; DOI 10.1016/j.foodchem.2022.133044."
+    flags: [ksv_ka_not_printed, fig_s1_not_in_si_zip, "also_relevant: lipid"]
+    note: "Only reversibility evidence for (E)-2-octenal (20 % recovery under propylene glycol). SI zip read 2026-10-29 holds Tables S1-S4 only (no figures): Fig. S1 and Fig. S2 still off disk; Table S4 (reagent -> bond-type key) carries no numbers; Table S2 split out as bi2022_tab_s2_surface_hydrophobicity. DOI 10.1016/j.foodchem.2022.133044."
+  - id: bi2022_tab_s2_surface_hydrophobicity
+    dossier: bi2022_extraction.md
+    paper: "Bi, Pan, Zhang, Ma, Lao, Shen & Wu 2022 Food Chem 389:133044"
+    lab: "China Agricultural University (Wu J)"
+    system: "pea protein with (Z)-2-penten-1-ol, hexanal or (E)-2-octenal at 0, 1, 2 mM"
+    medium: "0.01 M K phosphate pH 7.6"
+    temperature_c: [37]
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: []
+    species: [(Z)-2-penten-1-ol, hexanal, (E)-2-octenal]
+    kind: ratio
+    location: "SI Table S2 (surface hydrophobicity, % of flavour-free control)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "Reduction in surface hydrophobicity of pea protein in the absence and presence of the selected flavor compounds at 37 °C"
+    flags: [no_error_bars, relative_index_only, "condition_not_stated: time_min"]
+    note: "Six percentages (89.26-98.38 % of control). Structural readout, not a binding or partition constant; no model input. Table S1 (log P, NIST Henry constants, pea concentrations from Bi 2020) is cited data, transcribed in the dossier, not a ledger entry."
   # ---- Xu 2022 (pea protein heated WITH the aroma, 80-120 C) ----
   - id: xu2022_figs1_2_binding_rate_heat_pea
     dossier: xu2022_extraction.md
