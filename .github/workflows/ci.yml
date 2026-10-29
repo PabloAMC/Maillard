@@ -111,6 +111,12 @@ jobs:
       - name: Conflicts register gate
         run: python scripts/ci/conflicts_register_gate.py
 
+      # 2026-10-29. Nothing enters a fit unverified against its paper; no generator sets an engine switch at import.
+      - name: Source verification gate
+        run: python scripts/ci/source_verification_gate.py
+      - name: Import-time switch gate
+        run: python scripts/ci/import_time_switch_gate.py
+
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.
   # ---------------------------------------------------------------------------

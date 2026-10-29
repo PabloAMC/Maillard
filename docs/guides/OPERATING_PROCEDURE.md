@@ -32,6 +32,31 @@ to a failure in `tasks/lessons.md`, cited in brackets. It is short on purpose; c
    fold]. Results review by an independent agent.
 8. **Decide and record.** Forward / carry as alternatives / redesign / stop, with the reason; commit at the gate.
 
+**Data guards (2026-10-29, owner: "ensure we do not make the same mistake again").**
+- Fit rows come only from keyed tables (`data/lit/fit_rows/*.yml`), one row per measurement, each pointing at its
+  measurement-ledger id. Conditions, quantification class, series, laboratory and duplicate links come from the
+  ledger, not from code. No generator types a measured value.
+- A row enters a fit only when its ledger entry is verified against the PAPER (not the dossier) by two independent
+  readers, with conditions, units, quantification, duplicates and a sample of values checked
+  (`data/lit/source_verification.yml`; `scripts/ci/source_verification_gate.py`).
+- Engine switches are set inside a function or context manager, never at import
+  (`scripts/ci/import_time_switch_gate.py`).
+- Every constant cites its evidence by a key that resolves to a dossier and ledger entry (M4 builds the reaction
+  evidence table from those keys).
+
+**A sub-model is done only when (mechanism checks; a fit to its own rows proves little):**
+1. it reproduces its OWN species, intermediates included, across laboratories, under the measurement model;
+2. the diagnostics show no structural flag (one-sign groups, trends with T / pH / time / concentration), or each
+   flag is explained by the misfit protocol;
+3. no fitted constant sits on a bound or far from an independent measurement of the same step, and leave-one-
+   laboratory-out moves no constant beyond its sigma without being reported;
+4. element balances (C, N, S) close where the source measures totals; isotope-labelling shares are reproduced
+   where they exist;
+5. one prediction OUTSIDE the fitted conditions (another laboratory, temperature, pH, concentration or time scale)
+   was frozen before it was scored, and is reported whatever it says;
+6. where the literature offers a rival mechanism, it is fitted as an arm, and the conditions where the two diverge
+   are ranked by the experiment-value tool.
+
 ## 3. When to revise the plan (triggers)
 
 Stop the step, write what changed in a few lines, update the strategy and the task list, then continue, when:
