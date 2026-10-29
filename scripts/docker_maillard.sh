@@ -111,7 +111,7 @@ are gone with it. The front door is scripts/maillard.py.)
   core-envelope [args...]            results/validation/core_prediction_uncertainty.* (~40 min at n=200)
   model-card                         Re-splice the README model card from the artifacts.
   model-card-check                   Fail if the README model card is stale.
-  gates                              Run the six CI gates (incl. artifact_freshness_gate, ~1 min).
+  gates                              Run the seven CI gates (incl. artifact_freshness_gate, ~1 min).
   data-readme                        Regenerate data/README.md (fails on undescribed files).
   keys                               Rebuild data/keys/compounds.yml and papers.yml.
   experiment-value-ranking [...]     Rank (benchmark, compound) pairs by VoI.
@@ -138,7 +138,7 @@ scientific_lane() {
 
 gates_lane() {
   local gate
-  for gate in citation_gate data_readonly_gate fit_target_gate holdout_guard schema_gate artifact_freshness_gate; do
+  for gate in citation_gate data_readonly_gate fit_target_gate holdout_guard schema_gate dossier_coverage_gate choices_register_gate conflicts_register_gate source_verification_gate import_time_switch_gate evidence_anchor_gate artifact_freshness_gate; do
     run_in_env "python scripts/ci/${gate}.py"
   done
 }

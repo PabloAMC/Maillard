@@ -411,6 +411,17 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "rather than being silently promoted to H2S.",
     ),
     Reaction(
+        "r_dpo_ddp_h2s", {"DPO": 1, "Cys": 1},
+        {"DPO": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "H2S": 1}, "k_dpo_ddp_h2s",
+        "B59a (revised 2026-10-29 after the independent review). The Strecker step's other fate: its aminoreductone "
+        "(the dicarbonyl having taken cysteine's amine and 2 H) reduces the mercaptoacetaldehyde to H2S + "
+        "acetaldehyde (Kobayasi & Fujimaki 1965, 'reductive cleavage of the C-S bond' by the enaminol) and, "
+        "oxidised back to the imine, hydrolyses to THE SAME 1-deoxyosone + NH3. Net: Cys + H2O -> H2S + CH3CHO + "
+        "CO2 + NH3, the deoxyosone a catalyst; H, O and electrons balance (the first version emitted the 2e-reduced "
+        "DDP with the H2S and counted the reduction twice). Reductant-limited by construction: one H2S per Strecker "
+        "event at most. DERIVED: STRECKER_SULFUR.h2s_share x the Strecker constant, zero when the switch is off.",
+    ),
+    Reaction(
         "r_dpo_c2c3", {"DPO": 1}, {"HA": 1, "MGO": 1}, "k_dpo_c2c3",
         "The C2+C3 retro-aldol split, as ONE step producing BOTH fragments so "
         "they arrive in the 1:1 stoichiometry the route needs.",
@@ -879,7 +890,46 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     Reaction("ch_redox_mp3p", {"NF": 1, "H2S": 1}, {"MP3P": 1, "OX": 1}, "k_redox_mp3p",
              "B27. NF + H2S -> 2-mercapto-3-pentanone + one oxidant equivalent (the dicarbonyl's "
              "reduction on the way to the mercaptoketone oxidises a thiol; Whitfield 1999 Figure 6)."),
+    # B58 (2026-10-27): the condensation r_ttca_cys reverses. Rate DERIVED, k = K x k_ttca_cys, with K
+    # measured by Cao 2017 (parameters_sulfur.TTCA_FORMATION); zero while the wave's switch is off.
+    Reaction("r_ttca_form", {"Cys": 1, "PENT": 1}, {"TTCA": 1}, "k_ttca_form",
+             "B58. Cysteine + pentose -> TTCA, the forward half of the measured TTCA equilibrium "
+             "(Cao 2017, K ~ 60 L/mol); detailed balance against r_ttca_cys."),
+    # B61 (2026-10-28): norfuraneol's hydroxide-catalysed decay, measured at pH 8 / 100 C by Mikami 2017
+    # (parameters_sulfur.NF_HYDROXIDE_DECAY); in parallel with the pH-independent r_nf_decay, zero while
+    # the wave's switch is off.
+    Reaction("r_nf_decay_oh", {"NF": 1}, {"FRAG_C": 5}, "k_nf_decay_oh",
+             "B61. Norfuraneol -> fragments through its enolate, specific-base catalysed (Mikami 2017)."),
+    # B59b (2026-10-29): DE ROOS 2005's ROUTE. TTCA is a reservoir in fast equilibrium with the open Schiff base;
+    # the Schiff base rearranges slowly to the cysteine Amadori compound, whose enolisation gives the
+    # deoxyosones and RELEASES the cysteine. All three are DERIVED rates (CYS_AMADORI_ROUTE), zero when off.
+    Reaction("r_cama_form", {"TTCA": 1}, {"CAMA": 1}, "k_cama_form",
+             "B59b. TTCA -> (Schiff base) -> cysteine Amadori compound. First order in the TTCA pool, which holds "
+             "~89 % of the cysteine within 0.5 h at 90 C (Cao 2017). Constant anchored on Cao's own blank pot."),
+    Reaction("r_cama_dpo", {"CAMA": 1}, {"DPO": 1, "Cys": 1}, "k_cama_dpo",
+             "B59b. The Amadori compound's 2,3-enolisation to the 1-deoxyosone, the amino acid released "
+             "(de Roos 2005). Share of the measured decay: Zhai 2019's fed-TTCA 3-DX / 1-DX = 2.1-2.6."),
+    Reaction("r_cama_tdp", {"CAMA": 1}, {"TDP": 1, "Cys": 1}, "k_cama_tdp",
+             "B59b. The 1,2-enolisation to the 3-deoxyosone, the amino acid released (de Roos 2005)."),
 )
+
+def inactive_reactions() -> frozenset:
+    """Reactions in the network whose wave switch is OFF: their rate is structurally zero, so nothing reading
+    the network (the hypothesis layer) may count them as modelled. B58's TTCA formation and B61's
+    hydroxide-catalysed norfuraneol decay sit in SULFUR_REACTIONS either way."""
+    from . import parameters_sulfur as _ps
+
+    off = set()
+    if not (_ps.TTCA_FORMATION.enabled or _ps.CYS_AMADORI_ROUTE.enabled):
+        off.add("r_ttca_form")
+    if not _ps.CYS_AMADORI_ROUTE.enabled:
+        off.update({"r_cama_form", "r_cama_dpo", "r_cama_tdp"})
+    else:
+        off.update({"r_pent_dpo", "r_pent_tdp"})
+    if not _ps.NF_HYDROXIDE_DECAY.enabled:
+        off.add("r_nf_decay_oh")
+    return frozenset(off)
+
 
 #: The full network: B1's trunk first, then the sulfur block.
 #: B39-B41 (2026-09-11): the fed 3-deoxy triangle (the reverse hydration and the epimer) is trunk chemistry
@@ -968,6 +1018,10 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
         "released and is exactly the nitrogen the shared basis is about -- "
         "released, then consumed by the Maillard chemistry this step is part "
         "of. " + AMINE_FATE_BASIS)},
+    "r_dpo_ddp_h2s": {"amine": -1, "basis": (
+        "as r_dpo_ddp (B59a, revised): the Strecker event whose aminoreductone reduces the mercaptoacetaldehyde to "
+        "H2S and returns as the deoxyosone; the amine leaves as NH3 either way. Carboxyl CARRIED. "
+        + AMINE_FATE_BASIS)},
     "r_arp_dpo": {"amine": -1, "basis": (
         "the Amadori's amino-acid moiety leaves in the 2,3-enolisation. "
         "Carboxyl CARRIED. " + AMINE_FATE_BASIS)},
@@ -1172,6 +1226,14 @@ def sulfur_rate_constants_at(
             continue
         if key == "k_thi_h2s":
             continue  # B50: derived below from the two thiamine steps
+        if key == "k_ttca_form":
+            continue  # B58: derived below from r_ttca_cys by detailed balance
+        if key == "k_nf_decay_oh":
+            continue  # B61: a measured constant, below
+        if key == "k_dpo_ddp_h2s":
+            continue  # B59a: a measured share of r_dpo_ddp, below
+        if key in ("k_cama_form", "k_cama_dpo", "k_cama_tdp"):
+            continue  # B59b: measured / source-anchored, below
         if key == "k_gsh_h2s":
             out[reaction.key] = glutathione_thermolysis_k(ph_table, float(temperature_k))
             continue
@@ -1225,6 +1287,41 @@ def sulfur_rate_constants_at(
     _share = thiamine_h2s_share(ph_table)
     out["r_thi_h2s"] = (_share / (1.0 - _share)) * (out["r_thi_hmp"] + out["r_thi_mesh"]) if _share > 0.0 else 0.0
 
+    # DERIVED RATE 0b (B58): TTCA formation by detailed balance with its measured equilibrium constant.
+    from . import parameters_sulfur as _ps
+
+    _ttca = _ps.TTCA_FORMATION
+    out["r_ttca_form"] = float(_ttca.k_l_per_mmol) * out["r_ttca_cys"] if _ttca.enabled else 0.0
+
+    # DERIVED RATE 0e (B59b): de Roos 2005's route through TTCA and the cysteine Amadori compound, and the
+    # direct cysteine-catalysed pentose enolisations it replaces.
+    _route = _ps.CYS_AMADORI_ROUTE
+    if _route.enabled:
+        out["r_ttca_form"] = float(_ttca.k_l_per_mmol) * out["r_ttca_cys"]
+        out["r_cama_form"] = _route.k_form(float(temperature_k))
+        _decay = _route.k_decay(float(temperature_k), float(ph))
+        out["r_cama_dpo"] = _route.dpo_share * _decay
+        out["r_cama_tdp"] = (1.0 - _route.dpo_share) * _decay
+        out["r_pent_dpo"] = 0.0
+        out["r_pent_tdp"] = 0.0
+    else:
+        out["r_cama_form"] = out["r_cama_dpo"] = out["r_cama_tdp"] = 0.0
+
+    # DERIVED RATE 0d (B59a): the Strecker sulfur released as H2S, a share of the Strecker step (Kobayasi 1965).
+    _strecker = _ps.STRECKER_SULFUR
+    if _strecker.enabled:
+        out["r_dpo_ddp_h2s"] = float(_strecker.h2s_share) * out["r_dpo_ddp"]
+        out["r_dpo_ddp"] = (1.0 - float(_strecker.h2s_share)) * out["r_dpo_ddp"]
+    else:
+        out["r_dpo_ddp_h2s"] = 0.0
+
+    # DERIVED RATE 0c (B61): norfuraneol's hydroxide-catalysed decay, Mikami 2017's measured constant.
+    _nf_oh = _ps.NF_HYDROXIDE_DECAY
+    out["r_nf_decay_oh"] = (
+        _nf_oh.k_ph5(float(temperature_k)) * ph_factor("hydroxide", ph, float(temperature_k), ionic_strength_m)
+        if _nf_oh.enabled else 0.0
+    )
+
     _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
     out["ch_thioether_release"] = out["ch_thioether_mft"] / _k_adduct
     out["ch_thioether_release_fft"] = out["ch_thioether_fft"] / _k_adduct
@@ -1252,6 +1349,35 @@ _REACTANT_LAYOUT: Tuple[Tuple[Tuple[int, int], ...], ...] = tuple(
     for r in FULL_REACTIONS
 )
 _RATE_KEY_ORDER: Tuple[str, ...] = tuple(r.key for r in FULL_REACTIONS)
+
+#: C5 (2026-10-28): the same layout as arrays, for the inline-coupled integration's vectorised rates and
+#: analytic mass-action Jacobian. Padded positions point at an appended 1.0 with exponent 0.
+_MAX_REACTANTS = max(len(layout) for layout in _REACTANT_LAYOUT)
+_R_IDX = np.full((len(_REACTANT_LAYOUT), _MAX_REACTANTS), N_SULFUR_STATE, dtype=int)
+_R_POW = np.zeros((len(_REACTANT_LAYOUT), _MAX_REACTANTS), dtype=float)
+for _j, _layout in enumerate(_REACTANT_LAYOUT):
+    for _p, (_index, _coefficient) in enumerate(_layout):
+        _R_IDX[_j, _p], _R_POW[_j, _p] = _index, float(_coefficient)
+_R_ROWS = np.repeat(np.arange(len(_REACTANT_LAYOUT)), _MAX_REACTANTS).reshape(_R_IDX.shape)
+
+
+def _rates_vectorised(y: np.ndarray, kv: np.ndarray) -> np.ndarray:
+    """``sulfur_reaction_rates`` in array form (same values to rounding)."""
+    terms = np.append(np.clip(y, 0.0, None), 1.0)[_R_IDX] ** _R_POW
+    return kv * np.prod(terms, axis=1)
+
+
+def _rate_jacobian(y: np.ndarray, kv: np.ndarray) -> np.ndarray:
+    """d(rate_j)/d(y_i) of mass action at fixed constants, shape (n_reactions, n_species)."""
+    base = np.append(np.clip(y, 0.0, None), 1.0)[_R_IDX]
+    terms = base ** _R_POW
+    out = np.zeros((len(_REACTANT_LAYOUT), N_SULFUR_STATE + 1))
+    for p in range(_MAX_REACTANTS):
+        others = np.prod(np.delete(terms, p, axis=1), axis=1)
+        power = _R_POW[:, p]
+        d = kv * power * np.where(power > 0.0, base[:, p] ** np.maximum(power - 1.0, 0.0), 0.0) * others
+        np.add.at(out, (_R_ROWS[:, p], _R_IDX[:, p]), d)
+    return out[:, :N_SULFUR_STATE]
 
 
 def rate_vector(k: Mapping[str, float]) -> np.ndarray:
@@ -1303,6 +1429,9 @@ class SulfurRun:
     #: for a clamped or prescribed-trajectory run, so that a caller cannot
     #: mistake an interpolation for a prediction.
     ph_series: Optional[np.ndarray] = None
+    #: B60: (node_times, k_nodes) -- the rate vectors the solver interpolated between, so a flux
+    #: audit (``reaction_flux_integrals``) uses exactly the constants the trajectory saw.
+    rate_nodes: Optional[Tuple[np.ndarray, np.ndarray]] = None
 
     def series(self, species_key: str) -> np.ndarray:
         return self.concentrations[:, SULFUR_INDEX[species_key]]
@@ -1354,6 +1483,102 @@ def _sulfur_extrapolation_warnings(
     return out
 
 
+#: B60 (2026-10-28): WHERE THE pH NODES SIT. "uniform" is the grid every wave through B58 ran on:
+#: ``ph_nodes`` points equally spaced in time. It is not converged. In a cysteine + pentose pot the
+#: in-situ pH falls most of its way in the first ~0.1 % of the run (Hofmann ribose pH 5, 145 C: 5.27
+#: -> 4.47 within 0.07 of 20 min), while the first uniform node sits at duration/40, so every rate
+#: constant through the transient is evaluated at the wrong pH; doubling the nodes moved that pot's MFT
+#: 39x and its final cysteine 220x. "log_and_linear" adds ``ph_nodes`` points geometrically spaced from
+#: 1e-5 x duration, which resolves the transient (41 vs 81 per family agree within 2 % on MFT and FFT
+#: in the three probe pots; results/validation/kinetic_core_b60_node_convergence.json). Frozen waves
+#: set "uniform" to reproduce their numbers. Pre-registration: kinetic_core_b60_prereg.md.
+PH_NODE_GRID: str = "log_and_linear"
+
+
+#: B60 amendment 1: HOW THE pH FIXED POINT IS ITERATED. "fixed_sweeps" is every wave through B58: plain
+#: Picard sweeps, stopped after ``ph_iterations`` whatever the residual. In the Kang TTCA pots it
+#: oscillates between two branches (final pH 5.52 / 6.55 / 5.56 / 6.37 after sweeps 2-5, residual ~1 pH)
+#: and settles only after ~20-40 sweeps. "relaxed_converged" under-relaxes each sweep by
+#: PH_FIXED_POINT_RELAXATION and iterates until the residual is below PH_FIXED_POINT_TOLERANCE (at least
+#: ``ph_iterations`` sweeps, at most PH_FIXED_POINT_MAX_SWEEPS). omega = 0.7 reached < 1e-3 pH within ~8
+#: sweeps on every probe system, where omega = 1 needed 40; the converged answer is the same for every omega
+#: tried (1.0 / 0.7 / 0.5 / 0.3), so the damping selects no branch. The tolerance is 1e-3 pH, not 1e-4: the
+#: residual floors at 3e-5 - 6e-4 pH from the ODE tolerances. A run left above PH_FIXED_POINT_FLAG is marked
+#: ``ph_fixed_point_converged = False`` in its metadata.
+PH_FIXED_POINT: str = "relaxed_converged"
+PH_FIXED_POINT_RELAXATION: float = 0.7
+PH_FIXED_POINT_TOLERANCE: float = 1e-3
+PH_FIXED_POINT_MAX_SWEEPS: int = 40
+PH_FIXED_POINT_FLAG: float = 1e-2
+
+
+class PhFixedPointNotConverged(UserWarning):
+    """The in-situ pH fixed point ended above ``PH_FIXED_POINT_FLAG``: the trajectory, and every pH-dependent
+    rate integrated on it, is not the converged answer. Never silent (2026-10-28)."""
+
+
+#: B60: HOW THE SHARE ROWS' FLUX BUDGET IS INTEGRATED. "closed" is ``reaction_flux_integrals`` on a
+#: linear-and-log output grid with the run's own node constants (closes to < 1 %; see
+#: ``sulfur_flux_budget``). "linear_rederived" is every wave through B58, which did not close; frozen
+#: waves set it, with PH_NODE_GRID = "uniform" and PH_FIXED_POINT = "fixed_sweeps", to reproduce their numbers.
+FLUX_BUDGET: str = "closed"
+
+
+def ph_node_times(duration: float, n_nodes: int) -> np.ndarray:
+    """The times at which the dynamic pH (and with it every rate constant) is evaluated."""
+    linear = np.linspace(0.0, duration, n_nodes)
+    if PH_NODE_GRID == "uniform":
+        return linear
+    if PH_NODE_GRID != "log_and_linear":
+        raise ValueError(f"unknown PH_NODE_GRID {PH_NODE_GRID!r}")
+    return np.unique(np.concatenate([linear, np.geomspace(duration * 1e-5, duration, n_nodes)]))
+
+
+#: B64: the largest temperature step between two rate nodes along a recorded profile, in kelvin. The
+#: rate vector is linear in time between nodes; across 2 K at 100 kJ/mol a rate changes by ~12 %, which
+#: the straight line follows to ~0.2 %.
+PROFILE_NODE_STEP_K: float = 2.0
+
+
+def _checked_profile(
+    temperature_profile: Optional[Tuple[Sequence[float], Sequence[float]]], duration: float
+) -> Optional[Tuple[np.ndarray, np.ndarray]]:
+    """A ``(times_min, temperatures_K)`` profile as arrays, checked; None passes through."""
+    if temperature_profile is None:
+        return None
+    times = np.asarray(temperature_profile[0], dtype=float)
+    temps = np.asarray(temperature_profile[1], dtype=float)
+    if times.ndim != 1 or times.shape != temps.shape or times.size < 2:
+        raise ValueError("a temperature profile is two 1-D arrays of equal length >= 2")
+    if times[0] != 0.0 or np.any(np.diff(times) <= 0.0):
+        raise ValueError(
+            "a temperature profile starts at t = 0 with strictly increasing times (no jumps: "
+            "the rate vector is linear in time between nodes, so a jump would be smeared)")
+    if abs(times[-1] - duration) > 1e-9 * max(1.0, duration):
+        raise ValueError(f"the profile ends at {times[-1]:g} min, the run at {duration:g} min")
+    if np.any(temps <= 0.0):
+        raise ValueError("profile temperatures are in kelvin")
+    return times, temps
+
+
+def profile_node_times(times: np.ndarray, temps: np.ndarray, duration: float) -> np.ndarray:
+    """Node times that cut every linear piece of a profile into steps of at most PROFILE_NODE_STEP_K."""
+    out = [np.array([0.0, duration])]
+    for t0, t1, c0, c1 in zip(times[:-1], times[1:], temps[:-1], temps[1:]):
+        n = max(1, int(np.ceil(abs(c1 - c0) / PROFILE_NODE_STEP_K - 1e-12)))
+        out.append(np.linspace(t0, t1, n + 1))
+    return np.unique(np.clip(np.concatenate(out), 0.0, duration))
+
+
+def rate_vector_at(node_times: np.ndarray, k_nodes: np.ndarray, t: float) -> np.ndarray:
+    """The rate vector at time ``t``: linear in time between the two nodes that bracket it."""
+    n_nodes = len(node_times)
+    lo = min(max(int(np.searchsorted(node_times, t, side="right")) - 1, 0), n_nodes - 2)
+    span = float(node_times[lo + 1] - node_times[lo])
+    w = min(max((float(t) - float(node_times[lo])) / span, 0.0), 1.0) if span > 0.0 else 0.0
+    return k_nodes[lo] * (1.0 - w) + k_nodes[lo + 1] * w
+
+
 def _solve_on_time_nodes(
     k_nodes: np.ndarray,
     node_times: np.ndarray,
@@ -1373,20 +1598,89 @@ def _solve_on_time_nodes(
     """
     from scipy.integrate import solve_ivp
 
-    n_nodes = len(node_times)
-    span = max(float(node_times[-1] - node_times[0]), 1e-12)
-
     def rhs(t: float, y: np.ndarray) -> np.ndarray:
-        position = (float(t) - node_times[0]) / span * (n_nodes - 1)
-        position = min(max(position, 0.0), float(n_nodes - 1))
-        lo = min(int(position), n_nodes - 2)
-        w = position - lo
-        k_t = k_nodes[lo] * (1.0 - w) + k_nodes[lo + 1] * w
-        return sulfur_derivatives(y, k_t)
+        return sulfur_derivatives(y, rate_vector_at(node_times, k_nodes, t))
 
     return solve_ivp(
         rhs, (0.0, duration), y0, t_eval=t_eval, method=method, rtol=rtol, atol=atol
     )
+
+
+#: C5 (2026-10-28): HOW THE DYNAMIC pH COUPLES TO THE CHEMISTRY. "fixed_point_nodes" is every wave
+#: through B63: the pH is held at time nodes, the network integrated, the pH recomputed from the states,
+#: and the sweep repeated to a fixed point (B60). "inline" solves the charge balance at every
+#: right-hand-side evaluation from the current state, so the rate constants see the pH the state
+#: implies at that instant: no node grid, no sweeps, and no way for either to be unconverged (the two
+#: defects B60 found). Same physics; the answer is the limit the node fixed point converges to.
+#: Frozen waves keep "fixed_point_nodes"; B64 runs on "inline" (kinetic_core_b64_prereg.md).
+PH_COUPLING: str = "fixed_point_nodes"
+
+#: The state keys the charge balance reads (``ph_state.titratable_inventory``).
+_TITRATABLE_KEYS = ("ACID", "FA", "AA", "Cys", "ARP", "TTCA", "CBX", "CAMA")
+
+
+def _integrate_inline_ph(parameters, y0, eval_times, duration, temperature_of, sid, drift, spec,
+                         method, rtol, atol):
+    """
+    The inline-coupled integration. Returns (solution, ph_hot, ionic, ph_cool) at ``eval_times`` and the
+    rate vectors there (for the flux audit). The pH solve is warm-started from the previous call;
+    the Jacobian is mass action at the current constants (the pH's own dependence on the state is
+    left out of it, which an implicit solver tolerates: it changes the step, not the answer).
+    """
+    from scipy.integrate import solve_ivp
+
+    from . import ph_kernel
+    from .ph_state import (solve_ph_and_ionic_strength_compiled, solve_ph_and_ionic_strength_warm,
+                           titratable_inventory)
+
+    warm_solve = solve_ph_and_ionic_strength_compiled if ph_kernel.COMPILED else solve_ph_and_ionic_strength_warm
+
+    index = [SULFUR_INDEX[k] for k in _TITRATABLE_KEYS]
+    use_label = bool(_ph.B51.label_scale_tables)
+    memo = {"ph": None, "i": 0.0, "cool": None}
+
+    def state_ph(y, temperature):
+        inventory = titratable_inventory(
+            {k: float(max(y[i], 0.0)) for k, i in zip(_TITRATABLE_KEYS, index)}, drift, spec)
+        if memo["ph"] is None:
+            from .ph_state import solve_ph_and_ionic_strength
+            ph, ionic = solve_ph_and_ionic_strength(temperature, sid, inventory)
+        else:
+            ph, ionic = warm_solve(temperature, sid, inventory, memo["ph"], memo["i"])
+        cool = None
+        if use_label:
+            guess = memo["cool"] if memo["cool"] is not None else ph
+            cool = warm_solve(LABEL_TEMPERATURE_K, sid, inventory, guess, ionic)[0]
+        memo.update(ph=ph, i=ionic, cool=cool)
+        return ph, ionic, cool
+
+    def constants(t, y):
+        temperature = temperature_of(t)
+        ph, ionic, cool = state_ph(y, temperature)
+        return rate_vector(sulfur_rate_constants_at(
+            parameters, temperature, float(ph), ph_label=cool, ionic_strength_m=float(ionic)))
+
+    def rhs(t, y):
+        return SULFUR_STOICHIOMETRY @ _rates_vectorised(y, constants(t, y))
+
+    def jac(t, y):
+        return SULFUR_STOICHIOMETRY @ _rate_jacobian(y, constants(t, y))
+
+    kwargs = {"jac": jac} if method in ("BDF", "Radau", "LSODA") else {}
+    solution = solve_ivp(rhs, (0.0, duration), y0, t_eval=eval_times, method=method,
+                         rtol=rtol, atol=atol, **kwargs)
+    if not solution.success:
+        raise RuntimeError(f"sulfur-network integration failed: {solution.message}")
+    states = np.clip(solution.y.T, 0.0, None)
+    memo.update(ph=None, i=0.0, cool=None)
+    ph_hot, ionic, ph_cool, k_rows = [], [], [], []
+    for t, y in zip(eval_times, states):
+        temperature = temperature_of(float(t))
+        p, i, c = state_ph(y, temperature)
+        ph_hot.append(p), ionic.append(i), ph_cool.append(c)
+        k_rows.append(rate_vector(sulfur_rate_constants_at(
+            parameters, temperature, float(p), ph_label=c, ionic_strength_m=float(i))))
+    return solution, np.array(ph_hot), np.array(ionic), ph_cool, np.array(k_rows)
 
 
 def integrate_sulfur(
@@ -1405,9 +1699,17 @@ def integrate_sulfur(
     ph_nodes: int = 41,
     ph_iterations: int = 3,
     sid_mmol_l: Optional[float] = None,
+    temperature_profile: Optional[Tuple[Sequence[float], Sequence[float]]] = None,
 ) -> SulfurRun:
     """
     Integrate the sulfur network at one temperature and one pH TRAJECTORY.
+
+    B64 (2026-10-28): or along a recorded TEMPERATURE PROFILE. ``temperature_profile`` is
+    ``(times_min, temperatures_K)``, piecewise linear from t = 0; the rate constants (and the
+    in-situ pH they depend on) are then evaluated at T(t) on the same time nodes the pH uses,
+    with nodes added so that no node interval spans more than ``PROFILE_NODE_STEP_K``.
+    ``temperature_k`` is kept for the run's metadata and its extrapolation warnings, and
+    should be the profile's peak. Without a profile every number is exactly what it was.
 
     THREE pH MODES, and which one is in force is always recorded in the run's
     metadata so that a number can never be mistaken for a different kind of
@@ -1435,9 +1737,11 @@ def integrate_sulfur(
 
     The dynamic mode is a fixed point. The pH feeds the rate constants, the
     rate constants make acid, the acid feeds the pH. Because the feedback is
-    weak (the sink flux that makes the acid is nearly pH-invariant in these
-    systems) it converges in two or three sweeps, and the achieved convergence
-    is reported rather than assumed.
+    weak in most pots it usually converges in a few sweeps under B60's relaxed
+    iteration (up to 10 on the fit systems), but not always: a run whose residual
+    stays above ``PH_FIXED_POINT_FLAG`` emits ``PhFixedPointNotConverged`` (and records
+    ``ph_fixed_point_converged = False``), and the headline guards fail on any scored pot
+    that does (independent review, 2026-10-28: a diagnostic nothing reads is decoration).
     """
     if method not in ("LSODA", "BDF", "Radau"):
         raise ValueError(f"method {method!r} is not a stiff-capable solver")
@@ -1453,6 +1757,17 @@ def integrate_sulfur(
     ph0 = float(ph)
     y0 = initial_sulfur_state(initial)
     t_k = float(temperature_k)
+    profile = _checked_profile(temperature_profile, duration)
+
+    def _with_profile_nodes(nodes: np.ndarray) -> np.ndarray:
+        if profile is None:
+            return nodes
+        return np.unique(np.concatenate([nodes, profile_node_times(*profile, duration)]))
+
+    def _node_temperatures(nodes: np.ndarray) -> np.ndarray:
+        if profile is None:
+            return np.full(len(nodes), t_k)
+        return np.interp(nodes, profile[0], profile[1])
 
     spec = buffer_spec if buffer_spec is not None else DEFAULT_BUFFER
     dynamic = ph_drift is not None and not spec.is_clamped
@@ -1472,8 +1787,9 @@ def integrate_sulfur(
 
     if dynamic:
         assert ph_drift is not None
-        n_nodes = max(int(ph_nodes), 5)
-        node_times = np.linspace(0.0, duration, n_nodes)
+        node_times = _with_profile_nodes(ph_node_times(duration, max(int(ph_nodes), 5)))
+        node_tk = _node_temperatures(node_times)
+        n_nodes = len(node_times)
         # every requested output time, plus the internal nodes, in one sorted
         # evaluation grid so that no extra integration is needed
         eval_times = np.unique(np.concatenate([grid, node_times]))
@@ -1491,22 +1807,53 @@ def integrate_sulfur(
         else:
             sid = strong_ion_difference(ph0, initial_map, ph_drift, spec)
 
-        def _node_state(state_map):
-            p_hot, i_hot = ph_and_ionic_strength_of_state(state_map, t_k, sid, ph_drift, spec)
+        def _node_state(state_map, temperature):
+            p_hot, i_hot = ph_and_ionic_strength_of_state(state_map, temperature, sid, ph_drift, spec)
             p_cool = (ph_of_state(state_map, LABEL_TEMPERATURE_K, sid, ph_drift, spec)
                       if _ph.B51.label_scale_tables else None)
             return p_hot, i_hot, p_cool
 
-        p0, i0, c0 = _node_state(initial_map)
-        node_ph = np.full(n_nodes, p0)
-        node_i = np.full(n_nodes, i0)
-        node_cool = [c0] * n_nodes
+        if profile is None or PH_COUPLING == "inline":
+            p0, i0, c0 = _node_state(initial_map, float(node_tk[0]))
+            node_ph = np.full(n_nodes, p0)
+            node_i = np.full(n_nodes, i0)
+            node_cool = [c0] * n_nodes
+        else:
+            # B64: the starting guess at each node is the initial state's pH at that node's T.
+            starts = [_node_state(initial_map, float(tk)) for tk in node_tk]
+            node_ph = np.array([s[0] for s in starts])
+            node_i = np.array([s[1] for s in starts])
+            node_cool = [s[2] for s in starts]
         solution = None
-        for sweep in range(max(int(ph_iterations), 1)):
+        relaxed = PH_FIXED_POINT == "relaxed_converged"
+        if not relaxed and PH_FIXED_POINT != "fixed_sweeps":
+            raise ValueError(f"unknown PH_FIXED_POINT {PH_FIXED_POINT!r}")
+        if PH_COUPLING not in ("fixed_point_nodes", "inline"):
+            raise ValueError(f"unknown PH_COUPLING {PH_COUPLING!r}")
+        min_sweeps = max(int(ph_iterations), 1)
+        max_sweeps = max(min_sweeps, PH_FIXED_POINT_MAX_SWEEPS) if relaxed else min_sweeps
+        sweeps_run = 0
+        if PH_COUPLING == "inline":
+            # The audit grid is the node grid's times; nothing is held there, it only records.
+            if profile is None:
+                def temperature_of(t):
+                    return t_k
+            else:
+                def temperature_of(t):
+                    return float(np.interp(t, profile[0], profile[1]))
+            solution, node_ph, node_i, node_cool, k_nodes = _integrate_inline_ph(
+                parameters, y0, eval_times, duration, temperature_of, sid, ph_drift, spec,
+                method, rtol, atol)
+            node_times = eval_times
+            n_nodes = len(node_times)
+            ph_convergence = 0.0
+            max_sweeps = 0
+        for sweep in range(max_sweeps):
+            sweeps_run = sweep + 1
             k_nodes = np.array([
                 rate_vector(sulfur_rate_constants_at(
-                    parameters, t_k, float(p), ph_label=c, ionic_strength_m=float(i)))
-                for p, i, c in zip(node_ph, node_i, node_cool)
+                    parameters, float(tk), float(p), ph_label=c, ionic_strength_m=float(i)))
+                for p, i, c, tk in zip(node_ph, node_i, node_cool, node_tk)
             ])
             solution = _solve_on_time_nodes(
                 k_nodes, node_times, y0, eval_times, duration, method, rtol, atol
@@ -1522,11 +1869,16 @@ def integrate_sulfur(
                 index = min(index, len(eval_times) - 1)
                 row = states[index]
                 fresh[j], node_i[j], node_cool[j] = _node_state(
-                    {k: float(row[SULFUR_INDEX[k]]) for k in SULFUR_STATE_KEYS})
+                    {k: float(row[SULFUR_INDEX[k]]) for k in SULFUR_STATE_KEYS}, float(node_tk[j]))
             ph_convergence = float(np.max(np.abs(fresh - node_ph)))
-            node_ph = fresh
-            if ph_convergence < 1e-4:
-                break
+            if relaxed:
+                node_ph = node_ph + PH_FIXED_POINT_RELAXATION * (fresh - node_ph)
+                if ph_convergence < PH_FIXED_POINT_TOLERANCE and sweeps_run >= min_sweeps:
+                    break
+            else:
+                node_ph = fresh
+                if ph_convergence < 1e-4:
+                    break
         assert solution is not None
         keep = np.searchsorted(eval_times, grid)
         keep = np.clip(keep, 0, len(eval_times) - 1)
@@ -1536,7 +1888,17 @@ def integrate_sulfur(
         ph1 = float(ph_series[-1])
     else:
         ph1 = ph0 if ph_final is None else float(ph_final)
-        if ph1 == ph0:
+        if profile is not None:
+            # B64: clamped or prescribed pH along a recorded profile; the pH, where it moves, is
+            # B2.1's straight line in time between the two measured endpoints.
+            n_nodes = max(int(ph_nodes), 5)
+            node_times = _with_profile_nodes(np.linspace(0.0, duration, n_nodes))
+            node_ph_line = ph0 + (ph1 - ph0) * node_times / duration
+            k_nodes = np.array([
+                rate_vector(sulfur_rate_constants_at(parameters, float(tk), float(p)))
+                for tk, p in zip(_node_temperatures(node_times), node_ph_line)
+            ])
+        elif ph1 == ph0:
             k_fixed = rate_vector(sulfur_rate_constants_at(parameters, t_k, ph0))
             node_times = np.array([0.0, duration])
             k_nodes = np.array([k_fixed, k_fixed])
@@ -1572,6 +1934,10 @@ def integrate_sulfur(
         "method": method,
         "temperature_C": temperature_c,
         "temperature_K": t_k,
+        "temperature_profile_K": (
+            None if profile is None
+            else [[float(a), float(b)] for a, b in zip(profile[0], profile[1])]
+        ),
         "ph_initial": ph0,
         "ph_final": ph1,
         "ph_is_clamped": (not dynamic) and ph1 == ph0,
@@ -1610,6 +1976,11 @@ def integrate_sulfur(
             "ph_final_cooled": float(ph_final_cooled),
             "ph_series": [float(v) for v in ph_series],  # type: ignore[union-attr]
             "ph_fixed_point_residual": ph_convergence,
+            "ph_fixed_point_sweeps": sweeps_run,
+            "ph_fixed_point_converged": bool(ph_convergence <= PH_FIXED_POINT_FLAG),
+            "ph_coupling": PH_COUPLING,
+            "ph_numerics_b60": {"node_grid": PH_NODE_GRID, "fixed_point": PH_FIXED_POINT,
+                                "relaxation": PH_FIXED_POINT_RELAXATION, "n_nodes": int(n_nodes)},
             "ionic_strength_M_final": float(node_i[-1]),
             "ph_state_corrections_b51": _ph.B51.as_dict(),
             "ph_drop_units_cooled": float(ph0 - ph_final_cooled),
@@ -1620,6 +1991,12 @@ def integrate_sulfur(
                 final_map, t_k, ph1, ph_drift, spec),
             "acid_pool_final_mmol_L": final_map.get("ACID", 0.0),
         })
+        if ph_convergence > PH_FIXED_POINT_FLAG:
+            import warnings
+
+            warnings.warn(
+                f"pH fixed point not converged: residual {ph_convergence:.3g} pH after {sweeps_run} sweeps "
+                f"(flag {PH_FIXED_POINT_FLAG:g})", PhFixedPointNotConverged, stacklevel=2)
     metadata.update(sulfur_registry_metadata(
         {k: v for k, v in parameters.items() if isinstance(v, SulfurParameter)}
     ))
@@ -1632,6 +2009,7 @@ def integrate_sulfur(
         ph_final=ph1,
         metadata=metadata,
         ph_series=ph_series,
+        rate_nodes=(np.asarray(node_times, dtype=float), np.asarray(k_nodes, dtype=float)),
     )
     for element in BALANCED_ELEMENTS:
         metadata[f"{element}_closure"] = run.element_closure(element)
@@ -1650,8 +2028,38 @@ def sulfur_flux_budget(
     ph_drift: Optional[PhDrift] = None,
     n_points: int = 201,
 ) -> Dict[str, float]:
-    """Time-integrated flux through every reaction, mmol/L."""
-    grid = np.linspace(0.0, float(duration_min), int(n_points))
+    """Time-integrated flux through every reaction, mmol/L.
+
+    B60: the rates are integrated on the union of a linear and a log-spaced output grid (a
+    cysteine + pentose transient lasts seconds; a linear grid of 101 points over 20 min does not see
+    it) and evaluated with the run's own node constants (``SulfurRun.rate_nodes``), so they are the
+    rates the trajectory saw -- B51's ionic strength and label-scale pH included. Before B60 the
+    budget re-derived the constants from the pH series alone and did not close (in Cao 2017's pot it
+    booked 2 575 mM of 3-deoxypentosone made from 400 mM of xylose).
+    """
+    duration = float(duration_min)
+    if FLUX_BUDGET == "linear_rederived":
+        return _legacy_flux_budget(parameters, temperature_k, initial, duration, ph, ph_final,
+                                   buffer_spec, ph_drift, n_points)
+    if FLUX_BUDGET != "closed":
+        raise ValueError(f"unknown FLUX_BUDGET {FLUX_BUDGET!r}")
+    grid = np.unique(np.concatenate([
+        np.linspace(0.0, duration, int(n_points)),
+        np.geomspace(duration * 1e-7, duration, int(n_points)),
+    ]))
+    run = integrate_sulfur(
+        parameters, temperature_k, initial, grid, ph=ph, ph_final=ph_final,
+        buffer_spec=buffer_spec, ph_drift=ph_drift,
+    )
+    return reaction_flux_integrals(run)
+
+
+def _legacy_flux_budget(parameters, temperature_k, initial, duration, ph, ph_final, buffer_spec,
+                        ph_drift, n_points) -> Dict[str, float]:
+    """The budget every wave through B58 scored its share rows on (``FLUX_BUDGET = "linear_rederived"``):
+    a linear output grid, constants re-derived from the pH series alone. Kept only so frozen waves
+    reproduce their numbers; it does not close."""
+    grid = np.linspace(0.0, duration, int(n_points))
     run = integrate_sulfur(
         parameters, temperature_k, initial, grid, ph=ph, ph_final=ph_final,
         buffer_spec=buffer_spec, ph_drift=ph_drift,
@@ -1668,6 +2076,38 @@ def sulfur_flux_budget(
         rows.append(sulfur_reaction_rates(run.concentrations[i], k_t))
     integral = np.trapezoid(np.array(rows), grid, axis=0)
     return {r.key: float(integral[j]) for j, r in enumerate(FULL_REACTIONS)}
+
+
+def reaction_flux_integrals(run: "SulfurRun") -> Dict[str, float]:
+    """Integral over the run of every reaction's rate, mmol/L, by the trapezoid rule on the run's
+    own output grid with the constants the solver used. Only as accurate as that grid is dense:
+    ``flux_closure`` says how well it closes."""
+    if run.rate_nodes is None:
+        raise ValueError("the run carries no rate nodes")
+    node_times, k_nodes = run.rate_nodes
+    rows = [
+        sulfur_reaction_rates(run.concentrations[i], rate_vector_at(node_times, k_nodes, float(t)))
+        for i, t in enumerate(run.times_min)
+    ]
+    integral = np.trapezoid(np.array(rows), run.times_min, axis=0)
+    return {r.key: float(integral[j]) for j, r in enumerate(FULL_REACTIONS)}
+
+
+def flux_closure(run: "SulfurRun", flux: Mapping[str, float], species: Sequence[str]) -> Dict[str, float]:
+    """For each species, |(final - initial) - net integrated production| over the larger of the
+    species' initial amount and its gross turnover: the relative error of the flux budget."""
+    out: Dict[str, float] = {}
+    for key in species:
+        net, gross = 0.0, 0.0
+        for rxn in FULL_REACTIONS:
+            nu = rxn.products.get(key, 0) - rxn.reactants.get(key, 0)
+            if nu:
+                net += nu * flux[rxn.key]
+                gross += abs(nu) * abs(flux[rxn.key])
+        change = run.final(key) - float(run.concentrations[0, SULFUR_INDEX[key]])
+        scale = max(float(run.concentrations[0, SULFUR_INDEX[key]]), gross, 1e-30)
+        out[key] = abs(change - net) / scale
+    return out
 
 
 # ---------------------------------------------------------------------------

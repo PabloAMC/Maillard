@@ -6,7 +6,9 @@
 text layer is clean (pypdf reports "rotated text", `pdftotext -layout` on p. 7 re-produces every row and was
 used to confirm the column order below). Figures 2 and 3 (all concentration-time data) are images: their
 axis ranges survive in the text layer, their points do not. The supplementary material (Fig. S1 pH and mass
-balance, Fig. S2 differential equations, Table S1 pairwise comparisons) is NOT on disk. Repo status before
+balance, Fig. S2 differential equations, Table S1 pairwise comparisons) was NOT on disk when this dossier
+was written; it is now (`data/articles/nguyen2016_supplementary.docx`, read 2026-10-29: see the section
+"Supplementary material" at the end, which supersedes flag 6 and the pH / mass-balance gaps). Repo status before
 this dossier: not cited anywhere in `data/lit`, `src/`, `results/` (checked by grep); Quan 2020 (this
 paper's methodological descendant) is already declared REFUSE in `k3_final_parameter_inventory.md` C.5.
 
@@ -238,3 +240,225 @@ low rate constants are apparent rate constants comprising more than one reaction
     120 C) are the safest carry-over.
 12. **Mass balance falls to ~85 % (M1) at 30 min** and exceeds 100 % (to 114 %) in between; the model was
     fitted to duplicate averages only. Expect the constants to move if refitted to the individual replicates.
+
+## Supplementary material (read 2026-10-29)
+
+**Source on disk:** `data/articles/nguyen2016_supplementary.docx` (Word file; read only,
+not modified). Read three ways in the scratchpad, never executing anything from it: `textutil -convert txt`
+(captions and Table S1); the OOXML `word/document.xml` (the equations of Fig. S2 are Office Math objects that
+`textutil` drops, linearised from the XML); and the figures. **There is no `word/charts/` part: the docx
+embeds no chart data.** Every figure is a Windows Metafile (`word/media/image1-6.wmf`, each present twice:
+the drawing and its compatibility fallback, byte-different but giving identical numbers) wrapping an
+Enhanced Metafile written by Excel. The EMF draws every marker and every stacked-area vertex as vector
+geometry, so the plotted values were **recovered from the vector coordinates** (axis calibrated on the drawn
+tick marks and their text labels; scripts in the scratchpad), not digitised from pixels. Precision: pH one
+drawing unit = 0.0005 pH, tick-calibration residual ≤ 0.0002 pH, and every recovered pH lands within 0.0005
+of a multiple of 0.01, i.e. the values below are the plotted numbers to the meter's 0.01 resolution. Mass
+balance: vertex quantum 0.006 percentage points, calibration residual ≤ 0.02 points. Times recovered within
+0.006 min of 0, 5, ..., 30 min. Panel identity from the figure group's layout (image left = (a), right = (b);
+the S1B grid (a) top-left, (b) top-right, (c) bottom-left, (d) bottom-right) and confirmed by content (M2
+panels carry series labels 7 and 8; M2 at 130 C ends lower in pH than M1, as the main text says).
+
+What the supplement holds (it has no methods text of its own; conditions and units come from the main paper):
+
+| item | what it is | numbers in the file? |
+|---|---|---|
+| Fig. S1A | pH vs heating time, M1 (a) and M2 (b), 120 and 130 C, two points per time | yes, vector-recovered (below) |
+| Fig. S1B | molar mass balance, stacked areas of each measured species as % of the t = 0 molar total, four panels | yes, vector-recovered (below) |
+| Fig. S2A / S2B | NOT figures: the ODE systems for M1 and M2 as typed equations | yes, transcribed exactly (below) |
+| Table S1 | paired t-tests of AP, CML, CEL between systems / temperatures | yes, typed table (below) |
+
+### Conditions (quoted) and measurement basis
+
+- Fig. S1A caption: "pH profile of M1 (a) and M2 (b) during heating at 120oC ([glyph]) and 130oC ([glyph])". The two
+  legend glyphs are font symbols that do not survive as text (Wingdings 2 char 0xDA; Wingdings char 0x6C,
+  the filled circle). In the drawing the
+  120 C series is Excel's star marker (blue fill) and the 130 C series a filled black circle; the assignment
+  rests on the Wingdings 0x6C = filled circle mapping and agrees with the main text (larger drop at 130 C).
+- pH method (main paper 2.3): measured "at room temperature by a pH meter" after the one-hour ice cooling
+  (Conductivity Proline Plus, QiS). So these are **cooled-sample, room-temperature readings**, not hot pH.
+  Buffer 0.1 M sodium phosphate, set to pH 6.8; sealed 6 mL tubes; the 5 min heat-up is inside the time axis.
+- Two markers per time point and no error bars. The paper says "The full experiment ... was replicated"
+  and every analysis was duplicated; which of the two the pair of points is, is not stated. No SD is printed;
+  the two values are given, and SD(n = 2) = |difference| / √2 if wanted.
+- Fig. S1B caption: "Mass balance of reactants and reaction products in M1 heated at 120oC (a), M1 heated at
+  130oC (b) and in M2 heated 120oC (c), M2 heated at 130oC (d)". Series (1) glucose, (2) fructose, (3) lysine
+  residues, (4) Amadori product, (5) CML, (6) CEL, (7) lactose, (8) lactulose. The caption prints the CML
+  band as 0.02-0.06 % (M1, both T), 0.02-0.09 % (M2 120 C), 0.02-0.11 % (M2 130 C) and the CEL band as
+  0.01-0.04 % (M1 120), 0.01-0.06 % (M1 130), 0.02-0.05 % (M2 120), 0.01-0.06 % (M2 130).
+- Mass-balance basis (main paper 2.6.2): "the percentage of total molar concentrations of reactants and
+  reaction products ... at each time point to their concentrations at t = 0 min". Units: % (axis "Percentage
+  (%)", 50-110, so the glucose/lactose band's base is clipped; the stacked tops are cumulative and exact).
+  Sugars by HPLC-ELSD (external calibration), lysine / CML / CEL by LC-MS/MS stable-isotope dilution, AP =
+  furosine × 3.1 (surrogate internal standard). One value per time (the paper fitted duplicate averages;
+  the figure presumably shows them, not stated). AP is counted once per mole although it carries both a sugar
+  and a lysine moiety, so this is a recovery of measured moles, not an element balance.
+
+### Fig. S1A — pH vs time (vector-recovered; the two duplicate values, room-temperature readings)
+
+| t (min) | M1 glucose 120 C | M1 glucose 130 C | M2 lactose 120 C | M2 lactose 130 C |
+|---:|---|---|---|---|
+| 0 | 6.82, 6.83 | 6.80, 6.81 | 6.84, 6.84 | 6.84, 6.84 |
+| 5 | 6.82, 6.83 | 6.79, 6.79 | 6.83, 6.83 | 6.81, 6.81 |
+| 10 | 6.79, 6.79 | 6.71, 6.71 | 6.80, 6.81 | 6.72, 6.73 |
+| 15 | 6.75, 6.76 | 6.62, 6.62 | 6.77, 6.78 | 6.62, 6.62 |
+| 20 | 6.72, 6.72 | 6.52, 6.54 | 6.73, 6.74 | 6.50, 6.51 |
+| 25 | 6.68, 6.68 | 6.47, 6.47 | 6.69, 6.70 | 6.40, 6.42 |
+| 30 | 6.65, 6.67 | 6.44, 6.50 | 6.65, 6.70 | 6.36, 6.39 |
+
+Drop over 30 min (means): M1 120 C −0.17 (6.825 -> 6.66); M1 130 C −0.34 (6.805 -> 6.47); M2 120 C −0.17
+(6.84 -> 6.675); M2 130 C −0.47 (6.84 -> 6.375). The drift is slow for the first 5 min (heat-up), then near
+linear at 130 C (5 -> 20 min: about −0.017 pH/min in M1, −0.020 in M2; 120 C about −0.007). t = 0 is 6.80-6.84, not exactly 6.8.
+
+### Fig. S1B — mass balance, % of the t = 0 molar total (vector-recovered from the stacked areas)
+
+Bands = differences of consecutive stacked tops. Sugars and lysine to 0.1 point; AP, CML, CEL to 0.01 point
+(quantum 0.006). "total" = top of the stack = the paper's recovery.
+
+(a) M1 glucose-casein, 120 C
+
+| t (min) | glucose | fructose | lysine | AP | CML | CEL | total |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0 | 86.3 | 0.0 | 13.3 | 0.34 | 0.02 | 0.01 | 100.0 |
+| 5 | 87.3 | 1.5 | 12.5 | 2.19 | 0.03 | 0.01 | 103.5 |
+| 10 | 87.2 | 6.7 | 10.5 | 3.32 | 0.05 | 0.02 | 107.7 |
+| 15 | 73.7 | 7.8 | 11.7 | 3.45 | 0.06 | 0.02 | 96.8 |
+| 20 | 69.3 | 10.7 | 10.7 | 3.28 | 0.07 | 0.03 | 94.1 |
+| 25 | 67.3 | 12.8 | 7.1 | 1.51 | 0.04 | 0.04 | 88.8 |
+| 30 | 63.6 | 12.9 | 7.4 | 1.49 | 0.06 | 0.02 | 85.5 |
+
+(b) M1 glucose-casein, 130 C
+
+| t (min) | glucose | fructose | lysine | AP | CML | CEL | total |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0 | 86.3 | 0.0 | 13.1 | 0.34 | 0.02 | 0.01 | 99.7 |
+| 5 | 83.7 | 4.5 | 10.9 | 0.56 | 0.03 | 0.01 | 99.8 |
+| 10 | 70.4 | 12.5 | 11.7 | 1.86 | 0.06 | 0.01 | 96.5 |
+| 15 | 61.8 | 17.5 | 10.2 | 0.91 | 0.05 | 0.04 | 90.4 |
+| 20 | 54.8 | 20.1 | 9.4 | 1.03 | 0.08 | 0.06 | 85.5 |
+| 25 | 51.0 | 21.4 | 8.5 | 0.76 | 0.08 | 0.06 | 81.8 |
+| 30 | 53.8 | 20.3 | 6.7 | 0.92 | 0.07 | 0.05 | 81.8 |
+
+(c) M2 lactose-casein, 120 C
+
+| t (min) | lactose | lactulose | lysine | AP | CML | CEL | total |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0 | 84.6 | 0.0 | 15.0 | 0.46 | 0.02 | 0.02 | 100.0 |
+| 5 | 80.5 | 1.6 | 13.7 | 2.48 | 0.04 | 0.03 | 98.4 |
+| 10 | 78.4 | 5.3 | 13.1 | 3.65 | 0.06 | 0.02 | 100.5 |
+| 15 | 86.4 | 9.3 | 11.0 | 3.76 | 0.08 | 0.02 | 110.6 |
+| 20 | 80.9 | 12.5 | 13.3 | 4.17 | 0.09 | 0.03 | 111.0 |
+| 25 | 76.1 | 14.2 | 8.5 | 1.38 | 0.09 | 0.05 | 100.4 |
+| 30 | 72.5 | 13.8 | 7.8 | 1.55 | 0.09 | 0.01 | 95.8 |
+
+(d) M2 lactose-casein, 130 C
+
+| t (min) | lactose | lactulose | lysine | AP | CML | CEL | total |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0 | 84.8 | 0.0 | 14.7 | 0.44 | 0.02 | 0.01 | 100.0 |
+| 5 | 82.7 | 5.1 | 15.3 | 0.67 | 0.04 | 0.01 | 103.8 |
+| 10 | 84.7 | 13.7 | 13.5 | 2.03 | 0.06 | 0.03 | 114.0 |
+| 15 | 71.5 | 18.3 | 11.5 | 1.31 | 0.09 | 0.04 | 102.7 |
+| 20 | 66.5 | 21.9 | 11.6 | 1.27 | 0.11 | 0.05 | 101.4 |
+| 25 | 61.4 | 22.9 | 9.9 | 0.96 | 0.11 | 0.05 | 95.4 |
+| 30 | 67.5 | 24.9 | 8.3 | 1.06 | 0.09 | 0.06 | 102.0 |
+
+Cross-checks: the CML and CEL bands fall inside the caption's printed ranges except M1 130 C CML, which
+reaches 0.08 % (caption 0.06 %), and M2 120 C CEL at 30 min, 0.01 % (caption 0.02 % floor); both are within
+two vertex quanta. Recoveries match the main text (M2 120 C ≈ 110 % at 15-20 min; M2 130 C 101-114 %; M1
+≈ 85 % and M2 ≈ 95 % at 30 min, 120 C) except **M1 120 C at 10 min: 107.7 % in the figure, "reached 104%"
+in the text**. The main text's "relative" numbers for M1 120 C ("0.25, 0.45, 0.2 and 4.5") are reproduced
+by this figure as fractional glucose loss (0.26), fractional lysine loss (0.44), fructose / initial glucose
+(0.15) and AP(30) / AP(0) (4.4): the "4.5" is a ratio to the t = 0 AP background, not to initial lysine.
+
+Inference (mine, not printed): on this molar basis, lysine / sugar at t = 0 is 0.154 (M1) and 0.176-0.177
+(M2), i.e. sugar : lysine 6.5 : 1 and 5.7 : 1, not the design's "about 10:1". With the weighed-in glucose
+150 mmol/L that would put lysine residues at ~23 mmol/L, above the 15-17 mmol/L inferred in section 2 and
+above what 30 g/L caseinate can carry (~16.8 mmol/L); with the measured t = 0 sugar below the weighed value
+(the paper says ~21 % below for lactose: 112 mmol/L -> lysine ~20 mmol/L) the gap narrows. The t = 0 sugar
+and lysine concentrations remain unprinted; do not back out an absolute lysine from this ratio alone.
+
+### Fig. S2A / S2B — the ODE systems (transcribed exactly from the typed equations)
+
+Caption: "Reaction rates derived from the kinetic model for N-carboxymethyllysine (CML) formation in M1
+system" (S2B: M2). Abbreviations as printed: Glu glucose, fru fructose, lacto lactose, lactu lactulose, lys
+lysine, AP Amadori product, GO glyoxal, MRPs advanced Maillard reaction products, CEL. Concentrations in
+mmol/L and time in min (main paper 2.6.2 and Table 1 units; the SI itself prints no units).
+
+M1 (glucose-casein):
+
+    d[glu]/dt  = -k1[glu] - k3[glu][lys] + k4[fru] - k5[glu]
+    d[fru]/dt  =  k1[glu] - k2[fru] - k4[fru]
+    d[lys]/dt  = -k3[glu][lys] - k6[lys][GO]
+    d[AP]/dt   =  k3[glu][lys] - k7[AP] - k8[AP] - k9[AP]
+    d[CEL]/dt  =  k9[AP] - k10[CEL]
+    d[CML]/dt  =  k7[AP] - k11[CML] + k6[lys][GO]
+    d[MRPs]/dt =  k8[AP]
+    d[X1]/dt   =  k2[fru]
+    d[X3]/dt   =  k11[CML]
+    d[X4]/dt   =  k10[CEL]
+    d[GO]/dt   =  k5[glu] - k6[lys][GO]
+
+M2 (lactose-casein): identical with glu -> lacto, fru -> lactu and X1 -> X2:
+
+    d[lacto]/dt = -k1[lacto] - k3[lacto][lys] + k4[lactu] - k5[lacto]
+    d[lactu]/dt =  k1[lacto] - k2[lactu] - k4[lactu]
+    d[lys]/dt   = -k3[lacto][lys] - k6[lys][GO]
+    d[AP]/dt    =  k3[lacto][lys] - k7[AP] - k8[AP] - k9[AP]
+    d[CEL]/dt   =  k9[AP] - k10[CEL]
+    d[CML]/dt   =  k7[AP] - k11[CML] + k6[lys][GO]
+    d[MRPs]/dt  =  k8[AP]
+    d[X2]/dt    =  k2[lactu]
+    d[X3]/dt    =  k11[CML]
+    d[X4]/dt    =  k10[CEL]
+    d[GO]/dt    =  k5[lacto] - k6[lys][GO]
+
+Reaction scheme (the Fig. 4 candidate network these equations encode): sugar ⇌ isomer (k1 forward, k4 back);
+isomer -> X1/X2 (k2); sugar + lys -> AP (k3, second order); sugar -> GO (k5); GO + lys -> CML (k6, second
+order); AP -> CML (k7); AP -> MRPs (k8); AP -> CEL (k9); CEL -> X4 (k10); CML -> X3 (k11). Every other step
+is first order in its one source. Table 1 then sets k4 = 0 (M1, and M2 at 120 C) and k5 = k6 = 0 (the GO
+route, dropped from Fig. 5), so the fitted model is the system above without those terms.
+
+What this settles (supersedes flag 6): **no step returns lysine.** Lysine is consumed only by k3 (and the
+zeroed k6); AP -> CML, AP -> CEL and AP -> MRPs leave d[lys]/dt untouched, so the AP's lysine is counted as
+lost into CML, CEL or MRPs. The main text's remark that the CEL route involves "release of lysine" is not in
+the equations. GO has no sink other than k6. The isomer (fructose / lactulose) does not react with lysine.
+Note for reuse: a network that writes AP -> 3-DG + lysine back (an Amadori decay that regenerates the amine)
+and gives it Nguyen's k8 is NOT Nguyen's model; the constant was fitted with the lysine kept out.
+
+### Table S1 — paired comparisons (typed table, transcribed)
+
+Title: "Comparision of the concentrations of Amadori product (AP), CML, and CEL under certain tested conditions
+using t-test with a significance value set to 0.05." Footnotes: "SME: Standard error mean"; "df: degrees of
+freedom". **Unit of the paired difference not printed** (magnitudes consistent with mmol/L, the paper's
+modelling unit; inference). df = 13 implies 14 pairs, i.e. 7 times × 2 replicates (inference).
+
+| pair | compound | system | temp. (C) | paired difference, mean | SME | t | df | p |
+|---:|---|---|---|---:|---:|---:|---:|---:|
+| 1 | AP | M1 - M2 | 120 | 0.132 | 0.135 | 0.978 | 13 | 0.346 |
+| 2 | AP | M1 - M2 | 130 | -0.065 | 0.063 | -1.038 | 13 | 0.318 |
+| 3 | CML | M1 | 120 - 130 | -0.003×10^-1 (as printed, = -0.0003) | 0.003 | -0.126 | 13 | 0.902 |
+| 4 | CML | M1 - M2 | 120 | -0.008 | 0.002 | -3.708 | 13 | 0.003 |
+| 5 | CML | M1 - M2 | 130 | -0.015 | 0.004 | -3.398 | 13 | 0.005 |
+| 6 | CEL | M1 - M2 | 120 | 0.004 | 0.001 | 2.633 | 13 | 0.021 |
+| 7 | CEL | M1 - M2 | 130 | 0.009 | 0.004 | 2.260 | 13 | 0.042 |
+
+Check: mean / SME reproduces t to the rounding of the printed SME (pair 1 0.98, pair 2 -1.03, pair 3 -0.10,
+pair 7 2.25; pairs 4-6 drift because SME 0.001-0.002 is printed to one significant figure). Reading: AP does
+not differ between the sugars; CML in M1 does not differ between 120 and 130 C; M2 has more CML and less CEL
+than M1 at both temperatures.
+
+### Supplement flags
+
+S1. pH is a cooled-sample room-temperature reading; to compare with a model's hot-solution pH, correct for
+    the phosphate pKa2 temperature coefficient (about −0.0028 /K; the hot pH is lower). Neither the SI nor the
+    main text gives the hot value.
+S2. The pH points are per replicate with no error bars; the 30 min duplicates differ by 0.06 pH (M1
+    130 C) and 0.05 (M2 120 C), larger than the early-time spread. No acid concentrations were measured in this paper,
+    so the drift is a forcing function / check for an acid-production sub-model, not a calibration of it.
+S3. The mass balance mixes external-calibration sugars, SIDA lysine / CML / CEL and furosine-derived AP; its
+    excursions to 107-114 % are measurement scatter by the authors' own reading. The bands are single values
+    per time (no SD).
+S4. Text-figure conflict: M1 120 C recovery at 10 min is 107.7 % in Fig. S1B, 104 % in the text.
+S5. Authorship: the main paper's byline is Nguyen, van der Fels-Klerx & van Boekel (three authors); the SI
+    file carries no byline. A four-author citation adding Peters does not match this paper's byline.

@@ -813,3 +813,80 @@ Fig. 2 (3-deoxy- and 1-deoxyosone time courses) and Fig. 3 (regenerative cystein
 methylglyoxal and glyoxal against time at all three temperatures, in mmol/L) are **figure-only** and
 are the single most valuable unread object left in this paper: they are fed-intermediate dicarbonyl
 time courses. Table S1 and S2 are supplementary and not on disk.
+
+## Supplementary material (read 2026-10-29)
+
+**Source:** `data/articles/zhai2023foodchem_supplementary.docx` (owner download 2026-10-29, not committed),
+read with macOS `textutil`. Identity from its own title page: *"Reduced Asynchronism between
+Regenerative Cysteine and Fragments of Deoxyosones Promoting Formation of Sulfur-containing Compounds
+through Extra-added Xylose and Elevated Temperature during Thermal Processing of
+2-Threityl-Thiazolidine-4-Carboxylic Acid"*, Zhai, Xia, Deng, Cui, Hayat, Zhang, Ho — **this paper
+(Food Chem 404:134420)**. The downloads were renamed 2026-10-29 to their dossier stems (owner: stick to the convention): this SI is
+`zhai2023foodchem_supplementary.docx` (was `zhai2023b_supplementary.docx`); the JAFC SI is
+`zhai2023jafc_supplementary.pdf` (was `zhai2023jafc_supplementary.pdf`).
+
+**What it holds.**
+- **Table S1** — ROAV of 8 heterocycles in the TTCA-Xyl system (concentration, water threshold, ROAV).
+- **Table S2** — MGO-GO-Cys model volatiles, 9 compounds × 100/120/140 °C × 10/20/30/40 min, μg/L.
+- **Table S3** — LC-MS/MS fragments and 13C NMR of TTCA (identity; embedded image, not transcribed).
+- **Fig. S1** — proposed volatile pathways from Cys-Xyl (scheme). **Fig. S2** — "Depletion of Cys
+  compound at an initial pH of 7 under different temperatures (100, 120 and 140 ℃)": **figure only,
+  not digitised** (the text's 16.2 / 38.8 / 62.2 % at 120 min, p. 6, remain the only numbers).
+  **Fig. S3** — HPLC chromatograms of Cys and TTCA. **Fig. S4** — TIC and LC-MS/MS of purified TTCA.
+
+**Quantification basis.** Volatiles: main-text sec. 2.7, single IS (1,2-dichlorobenzene) with
+"the correction factor was 1" → **semi-quantitative, response factor 1**. Neither SI table states a
+basis of its own. No SDs in either table.
+
+### Table S1 (as printed) — "The ROAV of the heterocyclic compounds in TTCA-Xyl reaction system."
+
+| compound | concentration (μg/L) | threshold in water (μg/L) | ROAV |
+|---|---:|---:|---:|
+| 3-Thiophenethiol | 11.497 | 0.6 | 195 |
+| 2-Acetylthiazole | 29.478 | 3 | 100 |
+| 2-Thiophenecarboxaldehyde | 18.541 | 5000 | 0.04 |
+| 5-Methyl-2-thiophenecarboxaldehyde* | 16.309 | - | - |
+| Thieno[3,2-b]thiophene* | 23.979 | - | - |
+| 2-Methylthieno[2,3-b] thiophene* | 11.635 | - | - |
+| 2,5-Dimethyl-pyrazine | 6.475 | 1.75 | 37.66 |
+| Furfural | 26.000 | 3000 | 0.09 |
+
+"*: The thresholds of the compounds were not retrieved." **Checks (mine):** the 8 concentrations are
+Table 1's **140 °C TTCA+Xyl column** cell for cell (the title states no temperature; the main text
+p. 6 says "under 140 ◦C"). ROAV is normalised to **2-acetylthiazole = 100**, not to the largest C/T
+(3-thiophenethiol 19.16 / 2-acetylthiazole 9.83 × 100 = 195 ✔; 2,5-DMP 3.70/9.83 × 100 = 37.66 ✔).
+Thresholds are cited, not measured. No model use beyond Table 1.
+
+### Table S2 (as printed) — "The main flavor compounds (μg/L) generated from thermal treated MGO-GO-Cys model at 100, 120 and 140 ℃ for different times, initial pH of 7.0." "-" = not detected.
+
+| compound | RIa | RIb | ID | 10 min 100 | 10 min 120 | 10 min 140 | 20 min 100 | 20 min 120 | 20 min 140 | 30 min 100 | 30 min 120 | 30 min 140 | 40 min 100 | 40 min 120 | 40 min 140 |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2-Acetylthiazole | 1646 | 1643 | RI, MS | 2.197 | 4.135 | 10.178 | 5.219 | 8.237 | 16.039 | 8.221 | 12.178 | 27.018 | 11.228 | 20.213 | 32.728 |
+| 2-Thiophenecarboxaldehyde | 1674 | 1679 | RI, MS | 0.009 | 0.054 | 0.097 | 0.032 | 0.120 | 0.217 | 0.078 | 0.193 | 0.332 | 0.107 | 0.312 | 0.413 |
+| 5-Methyl-2-thiophenecarboxaldehyde | 1701 | 1785 | RI, MS | 0.178 | 0.112 | 0.278 | 0.327 | 0.576 | 0.623 | 0.627 | 0.986 | 1.213 | 0.978 | 1.213 | 1.779 |
+| 3-Thiophenethiol | 1564 | 1530 | RI, MS | 0.000 | 0.009 | 0.023 | 0.008 | 0.027 | 0.063 | 0.014 | 0.053 | 0.083 | 0.034 | 0.079 | 0.100 |
+| Thieno[3,2-b]thiophene | 1868 | 1843 | RI, MS | 0.097 | 0.178 | 0.273 | 0.117 | 0.239 | 0.534 | 0.231 | 0.430 | 0.732 | 0.391 | 0.621 | 0.852 |
+| 2-Methylthieno[2,3-b]thiophene | 1947 | - | MS | - | - | - | - | - | - | - | - | - | - | - | - |
+| Pyrazine | 1216 | 1209 | RI, MS | - | - | 0.017 | - | 0.011 | 0.017 | 0.007 | 0.020 | 0.031 | 0.019 | 0.029 | 0.048 |
+| MethylPyrazine | 1214 | 1263 | RI, MS | - | - | 0.293 | 0.021 | 0.237 | 0.478 | 0.512 | 0.736 | 0.973 | 0.939 | 1.012 | 1.301 |
+| 2,5-Dimethyl-pyrazine | 1320 | 1328 | RI, MS | - | - | 0.012 | 0.005 | 0.012 | 0.032 | 0.021 | 0.043 | 0.059 | 0.047 | 0.062 | 0.079 |
+
+Footnotes as printed: a RI on DB-WAX vs n-alkanes; b flavornet / NIST WebBook; c identification
+method; d "-" not detected.
+
+**Conditions and conflicts (mine).**
+1. **Time grid conflict.** Methods sec. 2.5: MGO 10 + GO 10 mmol/L added to Cys 10 mmol/L, pH 7.0 ±
+   0.1, "heated under a temperature of 100, 120 and 140 ◦C for a defined reaction time (20, 40, 60,
+   80, 100, 120 min)". The table prints **10, 20, 30, 40 min**, which is the JAFC 3c04166 validation
+   grid. Which is right is not resolvable from either paper.
+2. **Duplicate.** The same table, all 126 cells, is printed as **JAFC 3c04166 SI Table S3**
+   (`zhai2023jafc_extraction.md`, Supplementary section). One data set, two SIs.
+3. **Basis.** Response factor 1 here; the JAFC reprint is covered by that paper's "calibration curves"
+   claim, which its own Table S2 does not support (see the JAFC dossier). Treat as semi-quantitative.
+4. **No cysteine, MGO or GO is measured in this pot**; only products. No pH after heating. No SDs.
+5. The only temperature inversion: 5-methyl-2-thiophenecarboxaldehyde, 10 min, 100 °C 0.178 > 120 °C 0.112.
+
+**Model-usable:** partly. Table S2 is a time-resolved dicarbonyl + Cys product series (the direct
+`r_cys_actz` route, Cys + MGO → 2-acetylthiazole, at 3 T), usable for within-compound shape and
+apparent temperature dependence only, with the time-grid conflict unresolved. Table S1 adds nothing
+new. Fig. S2 (Cys depletion) is figure-only.

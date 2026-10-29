@@ -1,0 +1,229 @@
+{
+  "artifact": "kinetic_core_b58_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b58_ship_rule",
+    "generated_on": "2026-10-27",
+    "git": {
+      "commit": "9d32beda2fdde6352ac449311939657782e44bd5",
+      "short": "9d32beda",
+      "branch": "b58-ttca-formation",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b58_ship_rule.py",
+    "inputs": [
+      {
+        "path": "src/kinetic_core/sulfur.py",
+        "sha256": "572c4b63ddc8cb469a1b58e5f578ae8da7bd0c4b0679e69ee5b2b023a847543f"
+      },
+      {
+        "path": "src/kinetic_core/parameters_sulfur.py",
+        "sha256": "5da4d69288be818e823d53215573a5612a38909d5a0eac4ba8fa4797db5c6124"
+      },
+      {
+        "path": "results/validation/kinetic_core_b51_fit_report.json",
+        "sha256": "6831994252eb8a1d45f8d9802a81b9aaffb69dbb1e3f591bb3d4e20fd55558f1"
+      },
+      {
+        "path": "results/validation/kinetic_core_b58_fit_report.json",
+        "sha256": "116b2a6400db6aa795960532e9f935d97ef6a27235d97c1f276f011c79eeffc8"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b58_prereg.md",
+  "arms": {
+    "A_refit": {
+      "T1_mechanism": {
+        "zhang2025b": {
+          "predicted_ttca_mM": 0.00048035904045455813,
+          "measured_ttca_mM": 18.0,
+          "band_mM": [
+            9.0,
+            36.0
+          ],
+          "baseline_predicted_ttca_mM": 0.0,
+          "pass": false
+        },
+        "zhai2019": {
+          "predicted_ttca_mM": 0.01907015984244474,
+          "measured_ttca_mM": 58.0,
+          "band_mM": [
+            29.0,
+            82.6
+          ],
+          "baseline_predicted_ttca_mM": 0.0,
+          "pass": false
+        },
+        "pass": false
+      },
+      "T2_holdout_sulfur": {
+        "baseline": {
+          "rows": 14,
+          "within_3x": 1,
+          "median_abs_log10": 1.6087350757219692
+        },
+        "arm": {
+          "rows": 14,
+          "within_3x": 2,
+          "median_abs_log10": 0.9866982782620719
+        },
+        "tolerance_dex": 0.2991446437905053,
+        "pass": true
+      },
+      "T3_hofmann_ph5": {
+        "baseline": {
+          "rows": 4,
+          "within_3x": 0,
+          "median_abs_log10": 1.8025431306281936
+        },
+        "arm": {
+          "rows": 4,
+          "within_3x": 0,
+          "median_abs_log10": 0.7126657879080245
+        },
+        "tolerance_dex": 0.1417645588846345,
+        "pass": true
+      },
+      "T4_directional": {
+        "baseline": {
+          "agree": 17,
+          "evaluable": 31
+        },
+        "arm": {
+          "agree": 17,
+          "evaluable": 30
+        },
+        "pass": true
+      },
+      "union_panel": {
+        "baseline": {
+          "rows": 50,
+          "within_3x": 16,
+          "median_abs_log10": 0.9484118493006441
+        },
+        "arm": {
+          "rows": 50,
+          "within_3x": 17,
+          "median_abs_log10": 0.786118168836456
+        }
+      },
+      "pass": false
+    },
+    "B_frozen_b51": {
+      "T1_mechanism": {
+        "zhang2025b": {
+          "predicted_ttca_mM": 0.0004809584198807619,
+          "measured_ttca_mM": 18.0,
+          "band_mM": [
+            9.0,
+            36.0
+          ],
+          "baseline_predicted_ttca_mM": 0.0,
+          "pass": false
+        },
+        "zhai2019": {
+          "predicted_ttca_mM": 0.019075205712023577,
+          "measured_ttca_mM": 58.0,
+          "band_mM": [
+            29.0,
+            82.6
+          ],
+          "baseline_predicted_ttca_mM": 0.0,
+          "pass": false
+        },
+        "pass": false
+      },
+      "T2_holdout_sulfur": {
+        "baseline": {
+          "rows": 14,
+          "within_3x": 1,
+          "median_abs_log10": 1.6087350757219692
+        },
+        "arm": {
+          "rows": 14,
+          "within_3x": 2,
+          "median_abs_log10": 1.0686552788467036
+        },
+        "tolerance_dex": 0.2991446437905053,
+        "pass": true
+      },
+      "T3_hofmann_ph5": {
+        "baseline": {
+          "rows": 4,
+          "within_3x": 0,
+          "median_abs_log10": 1.8025431306281936
+        },
+        "arm": {
+          "rows": 4,
+          "within_3x": 2,
+          "median_abs_log10": 0.43430791126828006
+        },
+        "tolerance_dex": 0.1417645588846345,
+        "pass": true
+      },
+      "T4_directional": {
+        "baseline": {
+          "agree": 17,
+          "evaluable": 31
+        },
+        "arm": {
+          "agree": 16,
+          "evaluable": 31
+        },
+        "pass": true
+      },
+      "union_panel": {
+        "baseline": {
+          "rows": 50,
+          "within_3x": 16,
+          "median_abs_log10": 0.9484118493006441
+        },
+        "arm": {
+          "rows": 50,
+          "within_3x": 18,
+          "median_abs_log10": 0.7642864152335509
+        }
+      },
+      "pass": false
+    }
+  },
+  "probes": {
+    "baseline": {
+      "zhang2025b": {
+        "ttca_mM": 0.0,
+        "cys_free_mM": 0.26755020302379706,
+        "ttca_share_of_cys": 0.0
+      },
+      "zhai2019": {
+        "ttca_mM": 0.0,
+        "cys_free_mM": 4.877841113267137e-18,
+        "ttca_share_of_cys": 0.0
+      }
+    },
+    "A_refit": {
+      "zhang2025b": {
+        "ttca_mM": 0.00048035904045455813,
+        "cys_free_mM": 0.27275711195170727,
+        "ttca_share_of_cys": 1.2008976011363954e-05
+      },
+      "zhai2019": {
+        "ttca_mM": 0.01907015984244474,
+        "cys_free_mM": 0.1725070554995532,
+        "ttca_share_of_cys": 0.00023087360584073536
+      }
+    },
+    "B_frozen_b51": {
+      "zhang2025b": {
+        "ttca_mM": 0.0004809584198807619,
+        "cys_free_mM": 0.2729139559134181,
+        "ttca_share_of_cys": 1.2023960497019048e-05
+      },
+      "zhai2019": {
+        "ttca_mM": 0.019075205712023577,
+        "cys_free_mM": 0.17249032464248792,
+        "ttca_share_of_cys": 0.00023093469385016438
+      }
+    }
+  },
+  "verdict": "DO NOT SHIP",
+  "rule": "SHIP (A) if (A) passes T1-T4; else SHIP (B) if (B) does; else DO NOT SHIP"
+}

@@ -86,7 +86,7 @@ def test_4_a_carried_level_declared_under_one_alias_applies_to_a_request_under_a
 def test_6_a_declared_zero_is_a_declaration():
     """A source that prints 'not detected' for the unheated control has declared a starting state."""
     kw = dict(matrix="pea protein isolate", t=40.0, m=10.0, ph=6.0,
-              vessel=type("V", (), {"closure": "no cook"})())
+              vessel=type("V", (), {"closure": "never heated"})())
     undeclared = predict(_pot({"Pea Protein Isolate": 1000.0}, **kw), ["hexanal"])
     declared0 = predict(_pot({"Pea Protein Isolate": 1000.0}, carried_volatiles={"hexanal": 0.0}, **kw), ["hexanal"])
     assert not undeclared.answered and "NEVER COOKED" in " ".join(undeclared.declaration.reasons)

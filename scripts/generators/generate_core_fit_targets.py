@@ -46,6 +46,7 @@ def main(argv=None) -> int:
     import importlib
 
     import generate_kinetic_core_b2_3_fit as B23  # noqa: E402  (installs nothing)
+    full_rows = list(B23.FIT_ROWS)  # before a wave import removes level rows (B9) and with them the pot -> bundle links
     B8 = importlib.import_module(f"generate_kinetic_core_{args.wave}_fit")  # installs / removes rows in B23
     if not Path(B8.OUT_FIT_REPORT).exists() and args.wave != "b8":
         B8 = importlib.import_module("generate_kinetic_core_b8_fit")
@@ -79,15 +80,46 @@ def main(argv=None) -> int:
                     "anchor": row.get("anchor", ""),
                 }
             )
+    # 2026-10-28 (independent review; north-star decisions): a fit row that reads NO bundle compound but reads
+    # the SAME POT as a bundle -- Hofmann's in-situ norfuraneol and furfural, MFT's and FFT's precursors in the
+    # ribose pH 5 pot -- still informs that bundle's predictions. Link it at the pot level, through the pot
+    # (`system`) -> bundle map that the full row table declares, removed level rows included.
+    pot_bundle: Dict[str, set] = {}
+    for row in full_rows + list(B23.ACTIVE_FIT_ROWS):
+        if row.get("benchmark_id") and row.get("system"):
+            pot_bundle.setdefault(str(row["system"]), set()).add(str(row["benchmark_id"]))
+    from src.kinetic_core.panel import panel_bundles
+
+    panel_ids = {Path(p).stem for p, _ in panel_bundles()[0]}
+
+    def _resolve(bundle: str) -> str:
+        """A row table written before a bundle moved to the hold-out panel names it by its old id."""
+        return bundle if bundle in panel_ids or f"mp_holdout_{bundle}" not in panel_ids else f"mp_holdout_{bundle}"
+
+    for row in B23.ACTIVE_FIT_ROWS:
+        if row.get("benchmark_id") or not row.get("system"):
+            continue
+        for bundle in sorted({_resolve(b) for b in pot_bundle.get(str(row["system"]), ())}):
+            rows.append(
+                {
+                    "id": row["id"],
+                    "benchmark_id": bundle,
+                    "compound": f"[same pot] {row.get('species', '')}",
+                    "kind": row["kind"],
+                    "anchor": row.get("anchor", ""),
+                    "pot_level": True,
+                }
+            )
     payload = {
         "artifact": "kinetic_core_fit_targets",
         "lane": "sulfur",
         "fit_report": data_paths.rel(Path(B8.OUT_FIT_REPORT)),
         "generated_by": "scripts/generators/generate_core_fit_targets.py",
         "declaration": (
-            "Level rows of the sulfur objective that are ALSO scored panel bundles, and (B10) the "
-            "within-study FOLD rows that read two bundles' values. Ratio, share and conversion rows "
-            "that read no bundle constrain nothing a bundle scores and are not listed. Leverage "
+            "Level rows of the sulfur objective that are ALSO scored panel bundles; (B10) the "
+            "within-study FOLD rows that read two bundles' values; and (2026-10-28) POT-LEVEL rows, "
+            "which read an intermediate of the same pot a bundle scores (pot_level: true), so every row "
+            "of that bundle leaves the out-of-sample count. Rows that read no bundle's pot are not listed. Leverage "
             f"is {n_free} free parameters over {n_rows} rows, below the per-row-recovery "
             "threshold: these bundles stay in the coverage counts, annotated in_core_fit."
         ),

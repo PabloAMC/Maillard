@@ -6,7 +6,8 @@ name: CI
 # -------
 #   gates       (~1 min, pip-only)  : the data-integrity gates (citation, hold-out
 #                                     isolation, fit-target circularity, benchmark
-#                                     schema). No conda, cannot flake on a solver.
+#                                     schema, dossier coverage). No conda, cannot
+#                                     flake on a solver.
 #   tests-unit  (~10 min + env)     : tests/unit.
 #   tests-full  (~25 min + env)     : tests/scientific (the headline guards pin the
 #                                     README's numbers to the artifacts), then the
@@ -94,6 +95,28 @@ jobs:
       - name: Benchmark schema + compound-key gate
         run: python scripts/ci/schema_gate.py
 
+      # 2026-10-27. Every `*_extraction.md` named in a tracked file exists, and the hand-curated
+      # data/keys/pdf_dossier_aliases.yml is coherent. The per-article half needs data/articles/,
+      # which is local only, so here it is skipped with a note; it runs on the owner's machine.
+      - name: Dossier coverage gate
+        run: python scripts/ci/dossier_coverage_gate.py
+
+      # 2026-10-28. Every non-measured number or decision is registered with its alternatives, and every
+      # entry points at code that still exists (docs/reference/choices_register.yml).
+      - name: Choices register gate
+        run: python scripts/ci/choices_register_gate.py
+
+      # 2026-10-29. Every conflict between sources, duplicate data set and condition error is registered with
+      # its sources and its resolution, and points at data and code that exist (docs/reference/conflicts_register.yml).
+      - name: Conflicts register gate
+        run: python scripts/ci/conflicts_register_gate.py
+
+      # 2026-10-29. Nothing enters a fit unverified against its paper; no generator sets an engine switch at import.
+      - name: Source verification gate
+        run: python scripts/ci/source_verification_gate.py
+      - name: Import-time switch gate
+        run: python scripts/ci/import_time_switch_gate.py
+
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.
   # ---------------------------------------------------------------------------
@@ -142,6 +165,11 @@ jobs:
         # do not add --timeout or -n here; the job-level timeout-minutes is the
         # runaway guard.
         run: python -m pytest tests/unit -q
+
+      # 2026-10-29. Every rate constant's evidence anchor resolves and every measured constant cites its paper's
+      # dossier. It imports the engine (numpy), so it runs here, not in the dependency-light gates job.
+      - name: Evidence anchor gate
+        run: python scripts/ci/evidence_anchor_gate.py
 
       # 2026-09-01: data/ is read-only at runtime. Fails if the tier above wrote,
       # rewrote or deleted anything under data/ (see scripts/ci/data_readonly_gate.py).

@@ -267,7 +267,25 @@ _AUTOCLAVE = "laboratory autoclave (200 mL; Type II; Roth, Germany), sealed"
 HOF100 = _block(100.0, 200.0, _AUTOCLAVE, "air_by_default", "unstated", None, "primary_source_pdf", _HOFMANN_NOTE_100)
 HOF50 = _block(50.0, 200.0, _AUTOCLAVE, "air_by_default", "unstated", None, "primary_source_pdf", _HOFMANN_NOTE_50)
 YIL = _block(3.0, 20.0, "20 mL Duran tube, screw cap with PTFE gasket, magnetically stirred", "air_by_default", "tap", True, "primary_source_pdf", _YILTIRAK_NOTE)
+_ZHANG2025B_NOTE = (
+    "Zhang, Tan, He, Hu, Li & Xie 2025, Food Chem. 469:142529, read from data/articles/zhang2025b.pdf on "
+    "2026-10-28, sec. 2.2 verbatim: 'In a 15-mL pressure glass vial, 0.2 mmol of cysteine, 0.2 mmol of xylose, "
+    "... and 5 mL of phosphate buffer (0.2 mol/L, pH 6.5) were added. The vials were heated at 120 C for a total "
+    "of 50 mins on a Parallel Synthesis Poly-Block 4 system'. No inert gas is mentioned (air_by_default); "
+    "stirring and water source are not stated. Dossier: zhang2025b_extraction.md."
+)
+_ZHOU2023C_NOTE = (
+    "Zhou, Xia, Cui, Hayat, Zhang & Ho 2023, J. Agric. Food Chem. 71:14312, read from data/articles/zhou2023c.pdf "
+    "on 2026-10-28, verbatim: 'All the samples were transferred to the pressure-resistant bottles and then heated "
+    "in an oil bath at a temperature of 120 C for 30, 60, 90, and 120 min separately.' Bottle volume, fill, "
+    "headspace gas, stirring and water grade are not stated; no inert gas is mentioned (air_by_default). "
+    "Dossier: zhou2023c_extraction.md."
+)
+ZHOU23C = _block(None, None, "pressure-resistant bottle, sealed, oil bath (volume and fill not stated)", "air_by_default", "unstated", None, "primary_source_pdf", _ZHOU2023C_NOTE)
 NA = lambda note, pclass="not_applicable": _block(None, None, "no cook", "not_applicable", "not_applicable", None, pclass, note)  # noqa: E731
+#: 2026-10-28 (choices register CR-01): a pot whose SOURCE states it was never heated. A value of its own, so that the
+#: never-cooked refusal reads a recorded fact and not the overloaded "no cook" plus a lipid-rate calculation.
+NEVER_HEATED = lambda note, pclass="not_applicable": _block(None, None, "never heated", "not_applicable", "not_applicable", None, pclass, note)  # noqa: E731
 
 BLOCKS: Dict[str, Dict[str, Any]] = {
     # --- trust loop (data/benchmarks/*.json) ---
@@ -282,18 +300,18 @@ BLOCKS: Dict[str, Dict[str, Any]] = {
     "hofmann1998_norfuraneol_cysteine_145C_20min_pH5": HOF50,
     "hofmann1998_norfuraneol_h2s_145C_20min_pH5": HOF50,
     "hofmann1998_ribose_cysteine_145C_20min_pH5": HOF100,
-    "pea_isolate_40C_PratapSingh2021": NA(_PRATAP_NOTE),
+    "pea_isolate_40C_PratapSingh2021": NEVER_HEATED(_PRATAP_NOTE),
     "pea_isolate_ribose_cysteine_100C_45min_Internal2026": NA(_SYNTHETIC_NOTE),
     "pea_isolate_uht_140C_Trikusuma2019": _block(None, None, "aseptic UHT line, 140 C / 6 s", "continuous_process", "unstated", None, "primary_source_pdf", _TRIKUSUMA_NOTE),
     "resconi_2023_pbma_beef_identity_benchmark": NA(_RESCONI_NOTE),
-    "soy_isolate_40C_PratapSingh2021": NA(_PRATAP_NOTE),
+    "soy_isolate_40C_PratapSingh2021": NEVER_HEATED(_PRATAP_NOTE),
     "soy_isolate_ribose_cysteine_100C_45min_Internal2026": NA(_SYNTHETIC_NOTE),
     "thiamine_cys_glucose_120C_Bolton1994": _block(33.3, 125.0, "125 mL glass vial sealed with Teflon-lined septum", "air_by_default", "distilled", None, "primary_source_pdf", _BOLTON_NOTE),
     # --- external matrix ---
-    "external_validation_bi_2020_raw_pea_hexanal": NA(_BI_RAW_NOTE, "primary_source_pdf"),
+    "external_validation_bi_2020_raw_pea_hexanal": NEVER_HEATED(_BI_RAW_NOTE, "primary_source_pdf"),
     "external_validation_bi_2020_roasted_pea_hexanal": _block(None, None, "forced-air oven, 160 C / 30 min, 500 g peas", "open", "not_applicable", None, "primary_source_pdf", _BI_ROAST_NOTE),
     "external_validation_li_2026_spi_wg_hme_control": _block(None, None, "high-moisture extruder", "continuous_process", "unstated", None, "primary_source_pdf", _LI_NOTE),
-    "external_validation_liu_2023_ppi_offnote_baseline": NA(_LIU_NOTE, "primary_source_pdf"),
+    "external_validation_liu_2023_ppi_offnote_baseline": NEVER_HEATED(_LIU_NOTE, "primary_source_pdf"),
     # --- maillard_path hold-outs ---
     "mp_holdout_fructose_asparagine_180C_Lin2022": _block(100.0, None, "not stated (dry-bath incubator)", "unstated", "distilled", None, "primary_source_pdf", _LIN_NOTE),
     "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019": _block(None, None, "sealed 10 mL glass ampoule (2 mL) or 20 mL crimp-capped headspace vial (6 mL); thesis does not say which", "air_by_default", "distilled", None, "repo_verbatim_methods_quote", _SCHIBILSKY_NOTE),
@@ -312,6 +330,11 @@ BLOCKS: Dict[str, Dict[str, Any]] = {
     "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026": YIL,
     "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026": YIL,
     "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026": YIL,
+    # 2026-10-28 (FIT_HOLDOUT_DECLARATION.md Amendment 45): five blind hold-outs
+    "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b": _block(
+        5.0, 15.0, "15 mL pressure glass vial, sealed, Poly-Block heating block", "air_by_default", "unstated", None,
+        "primary_source_pdf", _ZHANG2025B_NOTE),
+    **{f"mp_holdout_arp_glutathione_120C_{t}min_pH75_Zhou2023c": ZHOU23C for t in (30, 60, 90, 120)},
 }
 
 

@@ -358,6 +358,18 @@ BUNDLE_BASELINES = {
         "47712c8d178915737e458773de87e05d26e47836722fba2592855acebf5758d8",
     "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026":
         "18303ba16cd36934e750b0ae95c7986f782fd54575740c41fba7d65e18750d69",
+    # pinned 2026-10-28 (FIT_HOLDOUT_DECLARATION.md Amendment 45): five hold-outs added BLIND
+    # (no prediction or score run before they were frozen). First pin, not a re-pin.
+    "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b":
+        "4069aa049e86df1cc404a0c6479287420d74dae6deb8e1c34587e5c15e22c44d",
+    "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c":
+        "8695e8d48a1c84605cabc158433525a875a9d40f15c147dc7990c94eea0fa474",
+    "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c":
+        "a353415aed1c4641222984bf67919c1fae9647025410171e025880821122aed7",
+    "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c":
+        "3eb0f34d8841718fe012301f66750827951d79a1ef8c2df291918f62631eab81",
+    "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c":
+        "200c3f276a238e4d5bdb2dde3843a5eda6128eea7f695c64461ed6f667c675c3",
 }
 
 
@@ -365,19 +377,22 @@ def _hash_without_buffer(payload):
     # Amendment 9 clause 2 licensed the buffer block; Amendment 19 (2026-09-06, programme step
     # R1) licensed the vessel block under the same rule. Both are condition-record completions
     # and both are dropped before hashing, so the baselines below still prove that nothing
-    # else in a bundle moved.
+    # else in a bundle moved. Amendment 46 (2026-10-28, wave B64) licensed the heating block the same way.
     clone = json.loads(json.dumps(payload))
     conditions = clone.get("conditions")
     if isinstance(conditions, dict):
         conditions.pop("buffer", None)
         conditions.pop("vessel", None)
+        conditions.pop("heating", None)
     return hashlib.sha256(
         json.dumps(clone, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
 
 
-def test_there_are_exactly_twenty_one_frozen_bundles():
-    assert len(list(BUNDLE_DIR.rglob("*.json"))) == 21  # xylose returned after B9 (2026-09-03)
+def test_there_are_exactly_twenty_six_frozen_bundles():
+    # 21 since the xylose bundle returned after B9 (2026-09-03); 26 since 2026-10-28, when
+    # Amendment 45 added Zhang 2025b and the four Zhou 2023c time points as blind hold-outs.
+    assert len(list(BUNDLE_DIR.rglob("*.json"))) == 26
 
 
 def test_the_buffer_completion_changed_nothing_but_the_buffer():

@@ -119,6 +119,8 @@ from .sulfur import (  # noqa: F401,E402
     branch_shares,
     describe_sulfur,
     integrate_sulfur,
+    flux_closure,
+    reaction_flux_integrals,
     sulfur_flux_budget,
     validate_sulfur_balance,
 )

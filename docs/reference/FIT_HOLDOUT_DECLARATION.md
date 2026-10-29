@@ -1671,3 +1671,118 @@ added or removed by this amendment (B51's candidate refit uses B47's 52 rows, al
    Mottram pots, carried no buffer at all and now carry it.
 3. `BufferSpec` gains `pyrophosphate` and `phthalate` (GKL 2002 Tables 7.56, 7.52).
 
+
+## Amendment 45 — 2026-10-28 (blind hold-outs from the 2026-10-27/28 dossier reading)
+
+**Nothing is fitted and no constant moves.** This amendment only enlarges the out-of-sample evidence:
+five Maillard-path hold-out bundles (16 scored rows) and 27 directional claims, every one read from a
+paper whose dossier entered `data/lit/extraction_dossiers/` on 2026-10-27/28 and whose PDF was re-read
+for the quoted numbers. **They were added BLIND.** No `predict()`, no scorer (`scoring.py`,
+`directional.py`) and no envelope integration was run on any new row or arm before this amendment was
+written; the only engine call was `engine.declare_envelope`, which accepts or refuses a request without
+integrating it, to record what is expressible. The verdicts below are therefore pre-registered: the
+first scorecard that reads these rows is their test.
+
+**1. New hold-out bundles** (`data/benchmarks/external_validation/maillard_path/`, all
+`evidence_class: external_validation_only`, `maillard_path_holdout: true`, `free_precursor`):
+
+| bundle | source | rows | quantification class |
+| --- | --- | --- | --- |
+| `mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b` | Zhang C. et al. 2025, Food Chem. 469:142529 (10.1016/j.foodchem.2024.142529), Table 2 blank | MFT 22.63, FFT 0.29, bis(2-methyl-3-furyl) disulfide 18.25, 2-acetylthiazole 114.13 ng/mL | `hs_spme_gcms_semi_quantitative_internal_standard` (one IS, no response factors; "sum of both columns" footnote) |
+| `mp_holdout_arp_glutathione_120C_{30,60,90,120}min_pH75_Zhou2023c` | Zhou T. et al. 2023, JAFC 71:14312 (10.1021/acs.jafc.3c04424), Figure 1 printed heat-map cells | MFT, FFT, furfural at each time (12 rows; no SD printed, uncertainty null) | `hs_spme_gcms_internal_standard_calibration_curve` (authentic-standard curves in water + IS) |
+
+Conditions are the papers' own: Zhang, Cys + Xyl 40/40 mM in 0.2 M phosphate pH 6.5, 120 C, 50 min,
+15 mL sealed vial; Zhou, Ala-xylose ARP + glutathione 20/20 mM, unbuffered, initial pH 7.5 (NaOH),
+120 C. Buffer and vessel blocks were written by `complete_benchmark_buffer_fields.py` and
+`complete_benchmark_vessel_fields.py` (new records, `primary_source_pdf`), and their hash baselines
+pinned in `tests/unit/test_kinetic_core_b2_3.py` as first pins.
+
+**2. Fit / hold-out status of the bundles.** No core fit generator, `fit_targets.py` or
+`results/validation/kinetic_core_b51_fit_targets.json` names either paper (grep, 2026-10-28). Zhang
+2025b is fully independent. Zhou 2023c is **row-independent but same-laboratory**: the engine's `ARP`
+chemistry was fitted on the sister paper Zhou 2023 (10.1021/acs.jafc.2c08360, ARP +/- Cys, 60 min,
+pH 6/7/8, the B47 rows `zhou_arp_*`); the glutathione pots were never fitted and GSH's only engine
+step is Zheng & Ho 1994's measured constant. The same paper's ARP-alone columns and its ARP + Cys
+60-min column are **not** ingested as bundles: they are the nominal fit pots (pH 7.5 vs 7) and would
+re-score a fit system.
+
+**3. Considered and not made into bundles, with the reason.**
+- **Zhou 2022** (10.1021/acs.jafc.2c07026, ARP +/- Cys, pH 7, 30-120 min): its 60-min arm is the
+  nominal pot of the B47 fit row and the same laboratory reports it 7.8x (MFT) / 4.1x (FFT) lower
+  than Zhou 2023 (`zhou2022_extraction.md` sec. 5). A level row would test inter-paper
+  reproducibility, not the model; the TIME SHAPE, which no fit row constrains, is claimed instead.
+- **Chen 2000 / Chen & Ho 2002** (180 C): solvent extraction with an unweighted tridecane IS, and the
+  charge ("0.01 mol of L-cysteine and D-ribose") is ambiguous by 2x; levels are not benchmark quality.
+  The MFT/FFT order and the pH sign are claimed.
+- **Xu 2007/2008, Wang 2012**: headspace-equivalent or IS-equivalent amounts with response factor 1
+  (Xu's authors state they are not aqueous concentrations); directions only.
+
+**4. New directional claims** (`docs/validation/directional_claims_panel.yml`, appended; sources added
+to `sources:`). Status as declared, and the envelope verdict at declaration:
+
+| claim | source | category | fit_status | declare_envelope (2026-10-28) |
+| --- | --- | --- | --- | --- |
+| ZHA25-LYS-01 | zhang2025b | additive_amine | independent | lysine arms refused (lane conflict) |
+| ZHOU22-T-01, ZHOU22-T-02 | zhou2022 | time | fit_system_overlap | in envelope |
+| ZHOU22-CYS-01 | zhou2022 | additive_cysteine | fit_system_overlap | in envelope |
+| Z23C-GSH-01 | zhou2023c | sulfur_donor | fit_system_overlap | in envelope |
+| Z23C-T-01 | zhou2023c | time | independent | in envelope |
+| CHEN02-RANK-01, CHEN02-PH-01, CHEN02-PH-02 | chen2002 | ranking / ph | independent | in envelope |
+| CHEN00-PH-01 | chen2000 | ph | not_independent (duplicate of CHEN02-PH-01's arms) | in envelope |
+| XU07-PH-01, XU07-PH-02 | xu2007 | ph | independent | in envelope |
+| WANG12-01, WANG12-02 | wang2012 | sulfur_donor | independent | in envelope |
+| HIN92-01 | hincelin1992 | sugar_identity | independent | extrapolated (clamped pH) |
+| ZHG91-01 | zhang1991b | sulfur_donor | independent | GSH arm refused (2-acetylthiazole unreachable) |
+| ZHG91-02 | zhang1991b | sulfur_donor | independent | in envelope |
+| ZHG88-01 | zhang1988 | sulfur_donor | independent | both arms refused (no route to 2-acetylthiazole) |
+| FAR92-01, FAR92-02 | farmer1992 | lipid_lane | independent | refused (unmapped lipid, no carrier) |
+| ZHG23B-01 | zhang2023b | additive_cysteine | independent | refused (methionine chain not shipped; DMDS unreachable) |
+| MOD08-PH-01 | modi2008 | ph | independent | in envelope |
+| MOD08-AW-01, HAR84B-AW-01 | modi2008, hartman1984b | moisture_aw | independent | not evaluable (prose-only: unchargeable matrix, no sulfur a_w term) |
+| MAD95-01 | madruga1995 | ph | independent | not evaluable (real beef, no stated charge) |
+| MAR10-CYS-01, MAR10-GLY-01 | martins2010 | additive_cysteine / additive_amine | independent | not evaluable (design runs not printed) |
+
+Of the 27, 16 claims have every arm in the envelope (11 `independent`, i.e. headline candidates;
+4 `fit_system_overlap`; 1 `not_independent`), 6 are refused by the engine on at least one arm, and 5
+are prose-only. Refused and
+prose-only claims are kept with their arms or their pot description so they become evaluable when the
+missing species or term is built; they are the pre-registered tests of that future change. Two new
+categories (`sulfur_donor`, `additive_amine`) and one quote form (`verbatim_ocr_spacing_restored`) are
+defined in the panel header.
+
+**5. What this changes.** The headline counts in `results/validation/` are NOT regenerated by this
+amendment (the artifacts stay stale on purpose, so `artifact_freshness_gate` reports them); the next
+regeneration scores these rows for the first time. Panel-size pins moved with dated reasons: hold-out
+bundle count 21 -> 26 (`test_kinetic_core_b2_3.py`, `complete_benchmark_buffer_fields.py`), panel
+vessel count 39 -> 44 (`test_benchmark_vessel_block.py`).
+
+**6. A blindness breach, disclosed (aggregate only).** The unit tier's
+`test_the_readme_model_card_is_not_stale` rebuilds the model card, which re-scores the union panel
+live; running it after the bundles were added therefore scored them. Only the card's AGGREGATE lines
+were seen, never a per-row value: union rows within 3x 16/50 -> 18/66, out-of-sample 12/44 -> 14/60,
+the sulfur-lane absolute row 5/24 -> 7/40, i.e. **2 of the 16 new rows land within 3x**. This was
+seen after every row, value, role and claim above was frozen, and nothing was changed after it. The
+README is deliberately NOT regenerated here (that test stays red until the next regeneration), so the
+first published per-row score of these hold-outs remains the next scorecard's.
+
+**7. Housekeeping the gates required.** `dossier_coverage_gate` failed on the branch before this
+amendment: 33 `pending:` lines in `data/keys/pdf_dossier_aliases.yml` named PDFs that gained dossiers on
+2026-10-27/28. They are deleted, as the gate's own rule says; no alias or triage line changed.
+
+## Amendment 46 — 2026-10-28 (Wave B64: the heating block, a condition-record completion under the Amendment 9 clause 2 licence)
+
+1. **WHAT IS COMPLETED.** The 23 Hofmann & Schieberle 1998 bundles (9 top-level, the 5 maillard_path
+   hold-outs, 9 step-level-unreachable) gain ONE new key, `conditions.heating`: the thermal history the
+   source records (`time_convention: ramp_only`, 20 → 145 °C over 20 min) with its provenance class and a
+   note quoting the sources. It is written by `scripts/generators/complete_benchmark_heating_fields.py`
+   from the PDFs on disk; the per-source record is `docs/validation/thermal_history_facts.yml`. No other
+   bundle gains a block: a source that states no come-up stays isothermal, and nothing is inferred.
+2. **WHY.** Every pot was integrated isothermal from t = 0, but the anchor laboratory runs this pot "by
+   raising the temperature within 20 min from 20 to 145 °C" (Hofmann & Schieberle 1995, 1997, the same pot
+   and autoclave) and writes it "20 min at 145 °C" in 1998. The B64 pre-registration
+   (`results/validation/kinetic_core_b64_prereg.md`) sets out the readings and their probabilities.
+3. **WHAT MAY NOT MOVE.** Measured values, compound lists, `evidence_class`, roles,
+   `conditions.temp_C/ph/water_activity/time_min`, the buffer and the vessel blocks are byte-identical.
+   `tests/unit/test_kinetic_core_b2_3.py` drops `heating` alongside `buffer` and `vessel` before hashing,
+   so the pinned baselines still prove it. The engine reads the block only under
+   `panel.THERMAL_HISTORY = "as_recorded"`, which stays off until B64 ships; until then no score moves.

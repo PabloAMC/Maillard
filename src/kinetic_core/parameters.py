@@ -227,10 +227,11 @@ def _martins(
         order=order,
         evidence_class="measured_rate",
         source_anchor=f"{_MARTINS_SOURCE}, step {step}",
-        dossier_anchor=dossier or (
+        # 2026-10-29 (guard 4): the paper's own dossier first; the synthesis that transcribed it second.
+        dossier_anchor="martins2005_extraction.md (Table 2, model M4); " + (dossier or (
             "data/lit/extraction_dossiers/k3_final_parameter_inventory.md "
             "sec. A.1 line 123 ('Martins Table 2, all 10 steps')"
-        ),
+        )),
         conditions=_MARTINS_CONDITIONS,
         ph_of_measurement=6.8,
         temperature_range_c=(80.0, 120.0),

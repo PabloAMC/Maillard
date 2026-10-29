@@ -113,8 +113,9 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     # RE-PINNED 2026-10-27 (B51's buffer facts, Amendment 44): 5/8 -> 6/8, MOT-01 agrees once charged with its 0.2 M pyrophosphate; still 'caution'.
     # RE-PINNED 2026-10-27 (B51 ships; PH-04/PH-05 retired against the Cerny 2015 chapter): 6/8 -> 4/7. Below
     # the 0.60 caution rate, so the standing rule now says do-not-use for pH-direction claims.
-    assert (ph.agree, ph.evaluable) == (4, 7)
-    assert ph.verdict == dr.verdict_for(4, 7) == dr.VERDICT_DO_NOT_USE
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's blind claims scored): 4/7 -> 5/10, still under 0.60: do-not-use.
+    assert (ph.agree, ph.evaluable) == (5, 10)
+    assert ph.verdict == dr.verdict_for(5, 10) == dr.VERDICT_DO_NOT_USE
     assert dr.verdict_for(8, 10) == dr.VERDICT_CAUTION
     assert dr.wilson_lower(8, 10) < dr.COIN < dr.wilson_lower(8, 8)
     assert dr.verdict_for(8, 8) == dr.VERDICT_TRUST and dr.verdict_for(7, 7) == dr.VERDICT_TRUST
@@ -348,8 +349,19 @@ def test_the_readme_model_card_is_not_stale():
     )
 
 
-def test_the_card_states_all_three_honest_headline_sentences():
-    card = model_card.build_model_card(run_gate_checks=False)
+@pytest.fixture(scope="module")
+def card_without_gates():
+    """One card build (about 75 s) shared by the tests that only read it (2026-10-29, strategy M2:
+    three builds were a fifth of the unit tier). Switches reset first: a module fixture is set up
+    before the per-test reset."""
+    from tests.support import reset_engine_switches
+
+    reset_engine_switches()
+    return model_card.build_model_card(run_gate_checks=False)
+
+
+def test_the_card_states_all_three_honest_headline_sentences(card_without_gates):
+    card = card_without_gates
     joined = " ".join(card["headline_sentences"])
     assert "Absolute concentrations are unreliable" in joined
     # 2026-09-03 (B5): the directional panel was scored on the retired screening lane; the
@@ -463,8 +475,8 @@ def test_a_missing_artifact_is_reported_in_the_card_not_dropped_from_it(monkeypa
     assert collected["path"]
 
 
-def test_every_verdict_in_the_card_is_one_of_the_three_words():
-    card = model_card.build_model_card(run_gate_checks=False)
+def test_every_verdict_in_the_card_is_one_of_the_three_words(card_without_gates):
+    card = card_without_gates
     assert card["validity_domain"], "the card must not be empty"
     for row in card["validity_domain"]:
         assert row["verdict"] in {
@@ -474,9 +486,9 @@ def test_every_verdict_in_the_card_is_one_of_the_three_words():
         }, row
 
 
-def test_absolute_concentration_rows_are_never_trust():
+def test_absolute_concentration_rows_are_never_trust(card_without_gates):
     """No artifact state may make the card say 'trust' about an absolute ppb number."""
-    card = model_card.build_model_card(run_gate_checks=False)
+    card = card_without_gates
     absolute_rows = [
         row for row in card["validity_domain"] if row["claim_type"].startswith("Absolute")
     ]

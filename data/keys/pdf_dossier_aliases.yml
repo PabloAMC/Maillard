@@ -1,0 +1,83 @@
+# Which extraction dossier covers each file in data/articles/ whose name does not say so.
+#
+# HAND-CURATED (unlike compounds.yml and papers.yml, nothing generates this file). Read by
+# scripts/ci/dossier_coverage_gate.py and scripts/reading_audit.py.
+#
+# A file in data/articles/ (.pdf, .docx, .txt) is covered when a dossier in
+# data/lit/extraction_dossiers/ has the same stem once both are lower-cased and reduced to letters
+# and digits (`charles-bernard2005.pdf` -> `charlesbernard2005_extraction.md`). Every other file
+# needs exactly one line here, keyed by the file's stem exactly as it is spelled on disk:
+#
+#   aliases:  stem -> the dossier stem(s) that read it. A dossier stem is the file name without
+#             `_extraction.md` (or without `.md` for the few dossiers not named `*_extraction.md`).
+#             An entry here OVERRIDES a name match (see Zhou2023: the name matches the wrong paper).
+#   triaged:  stem -> why the file has no dossier and does not need one.
+#   pending:  stem -> downloaded, not yet read, no decision. This is a queue, not a waiver: the gate
+#             fails when a pending file gains a dossier of its name, so the line must then be deleted.
+#
+# Every alias below was checked on 2026-10-27 by reading the PDF's first page (or the .docx's
+# opening text) against the dossier's title, authors and DOI; the dossier names the file as its
+# source on disk unless the comment says otherwise.
+schema_version: 1
+
+aliases:
+  # renamed on download, or named after a different author / the publisher's id
+  Dashmaa2026: hwang2026                     # dossier named after the corresponding (last) author
+  Goncouglu2016: [goncuoglu2016, goncuoglutas2016, goncuoglutas2017]   # hazelnut roasting, Food Chem 2017; three readings of one paper
+  Goncouglu2026: goncuoglu2026               # pea-protein extrudates, Food Chem X 36 (2026) 104019
+  Kim2024: kim2024b                          # Food Sci Biotechnol 34 (2025) 457, online 2024
+  Kocada2016: [kocadagli2016jafc, kocadagli2016nacl]   # glucose +/- NaCl caramelisation, JAFC 2016; the nacl file records the duplicate
+  Kocadagli2016: kocadagli2016foodchem       # glucose / wheat flour, Food Chem 2016
+  Zhai2023: zhai2023foodchem                 # the two Zhai 2023 files are swapped: this one is Food Chem 404:134420
+  Zhai2023b: zhai2023jafc                    # ... and this one is JAFC 71:14300 (10.1021/acs.jafc.3c04166)
+  Zhou2023: k1_kinetic_parameters            # NOT Zhou 2023: Zhu et al., Food Chem 400:133854 (kafirin); read in k1 section 3
+  Zhou2023b: zhou2023                        # Zhou et al., JAFC 2023, 10.1021/acs.jafc.2c08360
+  brands2002: brands2002b                    # the ICS 1245 conference version; cross-checked and declared a DUPLICATE in brands2002b section 8
+  chan2005: chan1994b                        # Chan & Reineccius 1994 RSC chapter (digital edition 2005)
+  devleeschouwer2008b: devleeschouwer2007    # Biotechnol Prog 23 (2007) 722
+  hofmann1996b: [hofmann1998_reconciliation, k3_final_parameter_inventory]   # declared a duplicate of jf9705983 tables in the reconciliation; Fig. 2 / Table 4 read in k3 section B.10
+  hofmann1998: hofmann1998_reconciliation    # JAFC 46 (1998) 235, 10.1021/jf9705983
+  jf0480290: rawel2005                       # the publisher's article id
+  parker2012: parker2013                     # J Sci Food Agric 93 (2013), online 2012
+  rainercremer2000: cremer2000               # first author's given name in the file name
+  # supplementary material and text dumps, read into their paper's dossier
+  Kang2026_supplementary: kang2026_SI
+  Thong2024_Supplementary: thong2024
+  Wang2022-Supplementary: wang2022
+  Wang2022-SupplementaryFig: wang2022
+  Wang2026-supplementary: wang2026
+  Yiltirak2026-supplementary: yiltirak2026
+  Zhang2025_supplementary: zhang2025
+  brehm2020_supplementary: brehm2020
+  zhou2023b_supporting: zhou2023
+  schroen2022_fulltext: schroen2022          # a text dump of Schroen2022.pdf that predates the PDF
+  # downloaded 2026-10-29 (strategy M3), read into their dossiers' "Supplementary material (read 2026-10-29)"
+  # (bi2022_supplementary.zip and utz2022_supplementary.zip are archives, which the gate does not list)
+  cai2024_supplementary1: Cai2024
+  cai2024_supplementary2: Cai2024
+  feng2022_supplementary: feng2022
+  gigl2021_supplementary: gigl2021
+  gursulaktag2020_supplementary: gursulaktag2020
+  nguyen2016_supplementary: nguyen2016
+  piornos2025_supplementary: piornos2025
+  sen2022_supplementary: sen2022
+  trikusuma2020_supplementary: trikusuma2020
+  wang2026b_supplementary: wang2026b
+  xia2022_supplementary: xia2022
+  zamora2015_supplementary: zamora2015
+  zhai2023foodchem_supplementary: zhai2023foodchem
+  zhai2023jafc_supplementary: zhai2023jafc
+  zhang2023b_supplementary: zhang2023b
+  zhang2024_supplementary: Zhang2024
+  zhang2026_supplementary1: zhang2026
+  zhang2026_supplementary2: zhang2026
+
+triaged:
+  yang2011: "read 2026-10-09 and set aside: thiamine is held fixed in every run, so it cannot inform the thiamine row (tasks/data_restructure_plan.md, thiamine-row reading)"
+  tian2020: "Tian et al. 2020, J Dairy Sci 103:5863 (milk fan perceptual interaction); only its Table 1 unit cell was read, in tian2019_extraction.md section 2a, to resolve a unit; no other use"
+
+pending:
+  Liu2023: "Liu, Cadwallader & Drake 2023, Food Chem 406:134998 (pea-protein aroma); identified in liu2023b_extraction.md as not the LWT paper wanted, never read"
+  # downloaded 2026-10-27 23:27-23:34 from the citation-chaining and Sohail 2022 lists
+  # (docs/guides/LITERATURE_SEARCH_2026-10.md; tasks/data_restructure_plan.md 2026-10-27)
+  # downloaded 2026-10-27 23:56 onwards, while this table was being built

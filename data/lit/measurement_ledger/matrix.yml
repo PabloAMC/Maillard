@@ -1,0 +1,1414 @@
+# MEASUREMENT LEDGER -- matrix layer.
+# One entry per quantitative data set in data/lit/extraction_dossiers/*.md on how a food matrix changes
+# what is released or measured: flavour-protein binding (reversible and covalent; constants, % bound,
+# by protein, odorant, pH, heating), air-water and air-matrix partition (Henry constants, static
+# headspace K), fat/oil-water partition and emulsions, salt/sugar effects on partition, thiol loss to
+# protein, release/retention in meat analogues, plant-protein matrices and gels, paired matrix/water
+# odour thresholds, and the protein site densities and calibration facts the matrix code uses
+# (src/kinetic_core/parameters_matrix.py, matrix_oav.py, matrix_sites.py; data/species/protein_matrices.yml).
+# GC retention indices and formation kinetics are out of scope (other lanes). Thiol/disulfide binding
+# sets already indexed in sulfur.yml are NOT repeated here (sun2025, gigl2021, hofmann2001,
+# anantharamkrishnan2020/2020b sulfur rows, sun2019 FFT, kumazawa2003 coffee, hamzalioglu2018 coffee,
+# yuan2023 adduct panel); see the cross-reference notes on the entries that sit next to them.
+# Rule (2026-10-29): one entry per data set, in the ledger of the quantity it measures. Binding,
+# partition, release/retention and odour thresholds live here; formation and loss kinetics live in their
+# lane. Cross-relevance is a flag "also_relevant: <ledger>", never a second entry. The parallel lipid.yml /
+# aroma_other.yml copies were merged into these entries on 2026-10-29 (one matrix entry may lump several
+# former lane entries). A data set measuring both kinds is split, each entry listing only its own quantity.
+# Empty temperature_c / time_min lists carry the flag "condition_not_stated: <field>" (not stated or not
+# applicable, e.g. cited values).
+# "Directional claim" = a direction recorded in a code register (e.g. BINDING_AT_PROCESS_TEMPERATURE in
+# parameters_matrix.py) whose numbers no computation reads.
+# Records WHERE the data are and WHAT they are; never the values. Conditions checked against each
+# dossier's methods text, not its headings.
+# kind (this lane): endpoint = an equilibrium quantity per condition (K_aw, K_b, threshold, site density);
+#          ratio = matrix/water or % bound; time_series = release or binding vs time; rate_constant =
+#          adduct or exchange kinetics; ranking / other as in trunk.yml.
+# status:  in_model_fit (entered a frozen fit or sets a declared constant) | in_model_check (hold-out,
+#          directional claim or panel check) | digitised_in_dossier (numbers in the dossier, unused) |
+#          figure_only (only a figure, not digitised) | supplement_missing (SI not on disk) | text_only
+# "unused" here means no engine code path reads it; numbers transcribed only into
+# data/lit/binding_constants.yml or data/lit/retention_reference_payloads.json (no engine consumer) count
+# as digitised_in_dossier, and the note says so.
+lane: matrix
+built: 2026-10-29
+entries:
+  # ---- air/matrix partition: Meynier 2003 (dairy) ----
+  - id: meynier2002_tab3_air_matrix_k_30c_water_skim
+    dossier: Meynier2002_extraction.md
+    paper: "Meynier, Garillon, Lethuaut & Genot 2003 Lait 83:223 (repo key Meynier2002)"
+    lab: "INRA Nantes LEIMA (Genot)"
+    system: "5 odorants dosed at 5 levels each in ultrapure water and UHT skim milk (Lactel, <0.3 % fat; protein cited 33.9 g/L, not measured)"
+    medium: "3.000 g liquid in 22.4 mL headspace vial, static headspace GC-FID"
+    temperature_c: [30]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [30, 60]
+    species: [isoamyl acetate, amyl acetate, ethyl pentanoate, hexanal, t-2-hexenal]
+    kind: endpoint
+    location: "Table III (water and skim-milk rows, 10 K with SD; dossier sec. 5, matrix/water ratios sec. 5.1)"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "the ratio of the concentration of each aroma in the gaseous phase (ng·mL⁻¹) to its concentration in the liquid phase (ng·mL⁻¹)"
+    flags: [absolute_scale_6x_below_cited_henry, liquid_phase_calibration_of_gas_sample, skim_protein_cited_not_measured, ph_not_stated, t2_hexenal_skim_quarantined_browning, "also_relevant: lipid"]
+    note: "Water/skim ratios set kg_*_dairy (4 esters/hexanal) and unsat_penalty_dairy_headspace (t-2-hexenal 6.88x over hexanal 1.39x) in parameters_matrix.py; water hexanal column sets K_AW_HEXANAL_WATER_GUARD low end. Skim milk equilibrated 60 min, others 30 min. Absolutes not used (ratios only). Absolute K 6.24x below the paper's own Table I Henry constants; FID calibrated in cyclohexane."
+  - id: meynier2002_tab3_air_matrix_k_30c_fat_cream
+    dossier: Meynier2002_extraction.md
+    paper: "Meynier, Garillon, Lethuaut & Genot 2003 Lait 83:223 (repo key Meynier2002)"
+    lab: "INRA Nantes LEIMA (Genot)"
+    system: "same 5 odorants in anhydrous milk fat (melted 60 C 1 h, held 40 C) and full-fat cream (30 % fat)"
+    medium: "3.000 g in 22.4 mL vial, static headspace"
+    temperature_c: [30]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [30, 30]
+    species: [isoamyl acetate, amyl acetate, ethyl pentanoate, hexanal, t-2-hexenal]
+    kind: endpoint
+    location: "Table III (AMF and cream rows, 10 K with SD; dossier sec. 5); sec. 8.1 cream measured vs two-phase model eq. 4-6"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Equations (4) to (6) did not take into account the presence of an interface layer."
+    flags: [absolute_scale_6x_below_cited_henry, amf_partly_solid_at_30c, droplet_size_not_measured, "also_relevant: lipid"]
+    note: "The corpus's only measured air/fat and air/emulsion K for these odorants; fat-water partition derivable as K_water/K_amf. Two-phase emulsion model fails in both directions on two isomers (used as a design refutation in matrix_oav.py text, no number read). henry_constants.yml Kfat values are unsourced and not checked against this. Candidate for the unimplemented lipid_phase_partition term (matrix_oav.py); only the AMF contrast is quoted in a provenance field, fat/cream rows not fit."
+  - id: meynier2002_tab4_dh_affinity_four_media
+    dossier: Meynier2002_extraction.md
+    paper: "Meynier, Garillon, Lethuaut & Genot 2003 Lait 83:223 (repo key Meynier2002)"
+    lab: "INRA Nantes LEIMA (Genot)"
+    system: "5 odorants x water, skim milk, AMF, cream"
+    medium: "static headspace, van 't Hoff over 30-80 C"
+    temperature_c: [30, 40, 50, 60, 70, 80]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [30, 60]
+    species: [isoamyl acetate, amyl acetate, ethyl pentanoate, hexanal, t-2-hexenal]
+    kind: endpoint
+    location: "Table IV (20 Delta H_aff with SD; dossier sec. 6); footnotes exclude 3 rows"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: [three_rows_footnoted_unreliable, "fit_range_truncated: t-2-hexenal_skim_milk_30-60C", "also_relevant: lipid"]
+    note: "The cleanest measured temperature dependence of air/matrix partition in the corpus; the matrix layer carries no temperature dependence of partition and does not read it. henry_constants.yml delta_H_sol values are mostly 'estimated' and do not cite this. Dossier proposes 17 rows FIT-eligible; none used."
+  - id: meynier2002_figs1_4_k_vs_temperature
+    dossier: Meynier2002_extraction.md
+    paper: "Meynier, Garillon, Lethuaut & Genot 2003 Lait 83:223 (repo key Meynier2002)"
+    lab: "INRA Nantes LEIMA (Genot)"
+    system: "5 odorants x 4 media"
+    medium: "static headspace"
+    temperature_c: [30, 40, 50, 60, 70, 80]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [30, 60]
+    species: [isoamyl acetate, amyl acetate, ethyl pentanoate, hexanal, t-2-hexenal]
+    kind: endpoint
+    location: "Figs. 1-4 (K vs T, linear axes); dossier sec. 7.2 reconstructs a 120-cell grid from Tables III+IV, validated on 4 prose checkpoints"
+    status: figure_only
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: [grid_is_reconstruction_not_digitisation, derived_not_read, "also_relevant: lipid"]
+    note: "Figures not digitised; the dossier grid is derived (do not double-count with Tables III/IV). Hexanal water 30-80 C range is the k4b hold-out guard #11. Grid checked against 4 prose checkpoints (2-8 %); invalid for t-2-hexenal/skim milk above 60 C. Dossier-proposed hexanal water-column hold-out not implemented."
+  - id: meynier2002_tab1_cited_henry_logp
+    dossier: Meynier2002_extraction.md
+    paper: "Meynier, Garillon, Lethuaut & Genot 2003 Lait 83:223 (repo key Meynier2002)"
+    lab: "INRA Nantes LEIMA (Genot)"
+    system: "5 odorants, pure-compound properties"
+    medium: "cited from SRC PhysProp / EPI Suite server; UNIFAC gamma"
+    temperature_c: [25]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [isoamyl acetate, amyl acetate, ethyl pentanoate, hexanal, t-2-hexenal]
+    kind: endpoint
+    location: "Table I (Henry constant, log P, P_sat, solubility, UNIFAC gamma; dossier sec. 3)"
+    status: in_model_fit
+    quant_class: other
+    simulable: false
+    condition_quote: "All data were collected at 25 °C (298 K)."
+    flags: [cited_estimator_not_measured, "condition_not_stated: time_min"]
+    note: "Not a measurement. Its offset vs Table III (6.24x) sets K_AW_UNCERTAINTY_DECADES = 0.5 (via k4b sec. D.2) and the SOURCE_CONTRADICTIONS meynier_partition_absolute_scale note."
+  # ---- Leksrisompong 2010 (caseinate, soybean-oil emulsions) ----
+  - id: leksrisompong2010_tab5_headspace_k_8_matrices
+    dossier: leksrisompong2010_extraction.md
+    paper: "Leksrisompong, Barbano, Foegeding, Gerard & Drake 2010 J Sens Stud 25:347"
+    lab: "NC State (Drake)"
+    system: "diacetyl, delta-decalactone, furaneol in water, 1 % w/v Ca-caseinate, 10/20 % v/v soybean-oil o/w emulsions with 1 % caseinate, soybean oil"
+    medium: "10 g in 40 mL vial, static headspace GC-MS (SIM), mass-balance-corrected C_matrix"
+    temperature_c: [40]
+    ph: {initial: [5.5, 7.0], measured_during: false, final: null}
+    time_min: [30, 60]
+    species: [diacetyl, delta-decalactone, furaneol]
+    kind: endpoint
+    location: "Table 5 (24 K with SD; dossier sec. 4, E5 header resolved sec. 4.1, K_water/K_matrix sec. 4.2); Table 6 significance calls"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "sonicated 30 min at 25 °C, then incubated 40 °C for 30 min"
+    flags: [absolute_scale_6_17x_low, liquid_phase_calibration_of_gas_sample, dose_differs_by_matrix_5_50x, table1_says_w_o_text_says_o_w, thresholds_at_22c_partition_at_40c]
+    note: "K_water/K_caseinate at pH 7.0 sets kg_diacetyl/delta_decalactone/furaneol_caseinate (two negative: matrix raises volatility). Emulsion and oil rows unused (fat-water partition derivable; fat, protein and droplet size confounded by design). Condition quote is the dossier's table text, not a verbatim paper quote."
+  - id: leksrisompong2010_tab3_bet_thresholds_8_matrices
+    dossier: leksrisompong2010_extraction.md
+    paper: "Leksrisompong, Barbano, Foegeding, Gerard & Drake 2010 J Sens Stud 25:347"
+    lab: "NC State (Drake)"
+    system: "same 8 matrices; 25-panellist orthonasal thresholds"
+    medium: "15 mL in 56 mL lidded cups, ASTM E679-91, 2-3 h equilibration"
+    temperature_c: [22]
+    ph: {initial: [5.5, 7.0], measured_during: false, final: null}
+    time_min: [120, 180]
+    species: [diacetyl, delta-decalactone, furaneol]
+    kind: endpoint
+    location: "Table 3 (24 BET with SE; dossier sec. 3, ratios sec. 3.1); Table 4 significance; sec. 6 paired partition-vs-threshold analysis"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "Threshold testing was conducted in duplicate for each compound on different days."
+    flags: [paired_with_partition_same_matrices]
+    note: "Proposed HOLD-OUT but no scorer row exists; cited only as the k4b/Amendment 6 design refutation of partition-derived thresholds (3 inversions in 21, matrix_oav.py docstring)."
+  - id: leksrisompong2010_tab2_caseinate_binding_peak_areas
+    dossier: leksrisompong2010_extraction.md
+    paper: "Leksrisompong, Barbano, Foegeding, Gerard & Drake 2010 J Sens Stud 25:347"
+    lab: "NC State (Drake)"
+    system: "diacetyl 10, delta-decalactone 100, furaneol 1000 ppm in 1/2/3 % w/v Ca-caseinate"
+    medium: "10 mL in 40 mL vial, static headspace, SIM peak areas"
+    temperature_c: [40]
+    ph: {initial: [5.5, 7.0], measured_during: false, final: null}
+    time_min: [30, 60]
+    species: [diacetyl, delta-decalactone, furaneol]
+    kind: ratio
+    location: "Table 2 (18 peak areas with letters; dossier sec. 7)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "This experiment was replicated two times and all injections were done in duplicate."
+    flags: [unnormalised_peak_areas, different_oven_program_from_tab5]
+    note: "Direction only: diacetyl binds caseinate at pH 7, not at 5.5; named as corroboration in PH_ADDUCT_GATE_SOURCE (the gate itself rests on anantharamkrishnan2020). Protein-dose series (1-3 %) is the corpus's only caseinate dose-response."
+  - id: leksrisompong2010_droplet_size
+    dossier: leksrisompong2010_extraction.md
+    paper: "Leksrisompong, Barbano, Foegeding, Gerard & Drake 2010 J Sens Stud 25:347"
+    lab: "NC State (Drake)"
+    system: "10 and 20 % soybean-oil o/w emulsions, 1 % caseinate, pH 5.5/7.0"
+    medium: "Mastersizer 2000"
+    temperature_c: []
+    ph: {initial: [5.5, 7.0], measured_during: false, final: null}
+    time_min: []
+    species: [emulsion droplet size]
+    kind: endpoint
+    location: "text pp. 351-352 (dossier sec. 2.3, 4 values)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "Matrix metadata; needed only if interfacial area is ever modelled."
+  # ---- Andriot 2000 (beta-lactoglobulin, methyl ketones) ----
+  - id: andriot2000_text_kb_methyl_ketones_blg
+    dossier: andriot2000_extraction.md
+    paper: "Andriot, Harrison, Fournier & Guichard 2000 J Agric Food Chem 48:4246"
+    lab: "INRA Dijon (Guichard)"
+    system: "2-heptanone, 2-octanone, 2-nonanone 50 uL/L vs beta-lactoglobulin 0-4 %"
+    medium: "50 mM NaCl, pH 3 (HCl); 10 mL liquid in 40 mL flask; static headspace GC-FID, no IS"
+    temperature_c: [30]
+    ph: {initial: [3], measured_during: false, final: null}
+    time_min: [0.25, 45]
+    species: [2-heptanone, 2-octanone, 2-nonanone]
+    kind: endpoint
+    location: "Abstract/Results text (3 global Kb, M^-1; Fig. 4 bars repeat them); dossier sec. 3"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "For protein, four final concentrations were studied (0.5, 1, 2, 3, and 4 %)"
+    flags: [molar_basis_recovered_36800_dimer, no_uncertainty_on_kb, ph3_below_food_range, five_levels_printed_as_four, no_replicates_propagated, "also_relevant: lipid"]
+    note: "Sets kg_2_heptanone/octanone/nonanone_blg and the 2.72x/CH2 member of CHAIN_LENGTH_SLOPE. If c_b was monomer-molar all three per-gram constants double. Kb is a fitted parameter of the Harrison-Hills model (Fig. 3). Only one sample per flask; no calibration described."
+  - id: andriot2000_figs1_3_release_partition_blg
+    dossier: andriot2000_extraction.md
+    paper: "Andriot, Harrison, Fournier & Guichard 2000 J Agric Food Chem 48:4246"
+    lab: "INRA Dijon (Guichard)"
+    system: "3 methyl ketones vs BLG 0, 0.5, 1, 2, 3, 4 %"
+    medium: "50 mM NaCl pH 3, 40 mL flask, stirred"
+    temperature_c: [30]
+    ph: {initial: [3], measured_during: false, final: null}
+    time_min: [0.25, 45]
+    species: [2-heptanone, 2-octanone, 2-nonanone]
+    kind: time_series
+    location: "Fig. 1 (release vs time at 6 protein levels), Fig. 2 (gas-water K, measured, never printed), Fig. 3 (K_eff/K vs % BLG), Fig. 6 (mass transfer coefficients)"
+    status: figure_only
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: [gas_water_k_measured_never_printed, nonmonotone_nonanone_at_4pct, ph_far_from_food, "also_relevant: lipid"]
+    note: "Only numeric trace in text: retention 10-60 % (octanone) and 40-75 % (nonanone). Fig. 2 holds three measured ketone air-water K the corpus otherwise lacks. Fig. 5 Harrison-Hills fit admitted 'not ideal' (stirring)."
+  - id: andriot2000_fig7_sensory_intensity_blg
+    dossier: andriot2000_extraction.md
+    paper: "Andriot, Harrison, Fournier & Guichard 2000 J Agric Food Chem 48:4246"
+    lab: "INRA Dijon (Guichard)"
+    system: "3 ketones at 12.5/50/100 uL/L x BLG 0/0.5/1 %, 16 panellists"
+    medium: "20 mL in 60 mL brown flask, pH 3 NaCl"
+    temperature_c: [21]
+    ph: {initial: [3], measured_during: false, final: null}
+    time_min: [60, 60]
+    species: [2-heptanone, 2-octanone, 2-nonanone]
+    kind: ranking
+    location: "Fig. 7 (intensities), Table 2 (ANOVA); text significance calls"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [sensory_21c_vs_headspace_30c, different_vessels, ph_far_from_food, "also_relevant: lipid"]
+    note: "Perceptual protein effect ranks opposite to headspace retention. Table 2 ANOVA F and p digitised in the dossier; Fig. 7 intensities unread. Unused."
+  # ---- Damodaran & Kinsella 1981 (native soy, equilibrium dialysis) ----
+  - id: damodaran1981_tab1_carbonyl_soy_binding_25c
+    dossier: damodaran1981_extraction.md
+    paper: "Damodaran & Kinsella 1981 J Agric Food Chem 29:1249"
+    lab: "Cornell (Kinsella)"
+    system: "2-heptanone, 2-octanone, 2-nonanone, 5-nonanone, nonanal vs 1 % w/v native whole soy protein (lab isoelectric prep); 2-nonanone also on part-denatured and succinylated soy"
+    medium: "30 mM Tris-HCl pH 8.0 + 10 mM 2-mercaptoethanol + 0.02 % azide; equilibrium dialysis >= 18 h, isooctane extraction, GC-FID"
+    temperature_c: [25]
+    ph: {initial: [8.0], measured_during: false, final: null}
+    time_min: [1080, 1080]
+    species: [2-heptanone, 2-octanone, 2-nonanone, 5-nonanone, nonanal]
+    kind: endpoint
+    location: "Table I (7 n, K, Delta G triples on a printed 100 kDa basis; dossier sec. 3)"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "heating a 1 % solution at 90 C for 1 h"
+    flags: [k_header_damaged_in_scan_unit_inferred_m-1, n_and_k_from_one_double_reciprocal_line, mercaptoethanol_suppresses_covalent_aldehyde_chemistry, no_uncertainty_on_k, abstract_contradicts_body, succinylation_method_in_companion_paper, "also_relevant: lipid"]
+    note: "Sets kg_2_heptanone/2_octanone/2_nonanone/nonanal_soy and the 2.9x/CH2 member of CHAIN_LENGTH_SLOPE. Unused rows: 5-nonanone (keto-position control), part-denatured 2-nonanone (1.33x), succinylated (n=2). Condition quote is the denaturation arm."
+  - id: damodaran1981_text_nonanone_k_5_45c
+    dossier: damodaran1981_extraction.md
+    paper: "Damodaran & Kinsella 1981 J Agric Food Chem 29:1249"
+    lab: "Cornell (Kinsella)"
+    system: "2-nonanone vs 1 % native soy protein"
+    medium: "30 mM Tris pH 8.0 + 10 mM 2-ME; equilibrium dialysis"
+    temperature_c: [5, 25, 45]
+    ph: {initial: [8.0], measured_during: false, final: null}
+    time_min: [1080, 1080]
+    species: [2-nonanone]
+    kind: endpoint
+    location: "Results text 'Effect of Temperature' (5 C K and n printed; 45 C stated identical to 25 C); isotherms Figs. 3A/3B are damodaran1981_figs1_4_binding_isotherms"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: [n_changes_4_to_2_at_5c, reducing_thiol_in_buffer, "also_relevant: lipid"]
+    note: "The corpus's only measured temperature series for an aqueous plant-protein binding constant (flat 25-45 C, discontinuity at 5 C); not read by the matrix layer, which carries no T dependence for reversible binding."
+  - id: damodaran1981_text_arai1970_hexanal_soy
+    dossier: damodaran1981_extraction.md
+    paper: "Damodaran & Kinsella 1981 J Agric Food Chem 29:1249 (quoting Arai et al. 1970)"
+    lab: "Cornell (Kinsella); primary Arai 1970 (Tokyo)"
+    system: "hexanal and 1-hexanol on partially denatured soy protein"
+    medium: "gel filtration (Arai 1970), conditions not restated"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [hexanal, 1-hexanol]
+    kind: endpoint
+    location: "Discussion text (K and mg bound per g at saturation, quoted from Arai 1970)"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: [second_hand_primary_not_on_disk, concentrations_not_stated, ph_not_stated, "also_relevant: lipid", "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "Sets kg_hexanal_soy_denatured. Primary Arai et al. 1970 Agric Biol Chem not in corpus; 1-hexanol value unused. Damodaran's own '~40 M-1 native hexanal' is speculation, not ingested."
+  - id: damodaran1981_figs1_4_binding_isotherms
+    dossier: damodaran1981_extraction.md
+    paper: "Damodaran & Kinsella 1981 J Agric Food Chem 29:1249"
+    lab: "Cornell (Kinsella)"
+    system: "methyl ketones, 5-nonanone, nonanal with native/denatured soy 1 % w/v"
+    medium: "30 mM Tris-HCl pH 8.0, 10 mM 2-mercaptoethanol; equilibrium dialysis"
+    temperature_c: [5, 25, 45]
+    ph: {initial: [8.0], measured_during: false, final: null}
+    time_min: [1080]
+    species: [2-heptanone, 2-octanone, 2-nonanone, 5-nonanone, nonanal]
+    kind: other
+    location: "Figs. 1A/1B, 2, 3A/3B, 4 (nu vs free ligand, double-reciprocal)"
+    status: figure_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [reducing_thiol_in_buffer, "also_relevant: lipid"]
+    note: "Every measured (nu, [L]) pair; digitising would give intervals on the seven constants and test the shared n = 4 intercept (dossier flag 11)."
+  # ---- Bi 2022 (pea protein, reversible, 37 C) ----
+  - id: bi2022_tab1_tab2_klotz_thermo_pea
+    dossier: bi2022_extraction.md
+    paper: "Bi, Pan, Zhang, Ma, Lao, Shen & Wu 2022 Food Chem 389:133044"
+    lab: "China Agricultural University (Wu J)"
+    system: "(Z)-2-penten-1-ol, hexanal, (E)-2-octenal 0.05-2.5 mM vs lab pea protein isolate 10 g/L"
+    medium: "0.01 M K phosphate pH 7.6, ~1.25 % v/v methanol; 2 mL in 20 mL vial, static headspace GC/MS (SIM)"
+    temperature_c: [25, 30, 37]
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: [120, 120]
+    species: [(Z)-2-penten-1-ol, hexanal, (E)-2-octenal]
+    kind: endpoint
+    location: "Table 1 (Klotz n, K, nK with SE; high branch 0.5-2.5 mM only), Table 2 (van 't Hoff from fluorescence Ka at 25/30/37 C); Fig. 1A binding % (figure)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "at high flavor compound concentrations"
+    flags: [klotz_molar_basis_not_printed, methanol_cosolvent_unaccounted, octenal_michael_acceptor_reversibility_untested, nonmonotone_retention_two_branches, fluorescence_vs_headspace_5_56x_disagreement, protein_content_not_stated, table2_title_37c_spans_25_37c, "also_relevant: lipid"]
+    note: "Klotz K travels only as within-study ratios (no molar mass). Fig. 1A low-branch binding % and hexanal span not printed. Table 2 quenching runs at 50x lower protein; not a headspace constant. CD, surface hydrophobicity and bond-disruption results text-only (sec. 3.4-3.6)."
+  - id: bi2022_sec3_8_prv_partition_pea_buffer
+    dossier: bi2022_extraction.md
+    paper: "Bi, Pan, Zhang, Ma, Lao, Shen & Wu 2022 Food Chem 389:133044"
+    lab: "China Agricultural University (Wu J)"
+    system: "same 3 odorants at real-pea levels (ug/kg) in pea protein solution (10 mg/mL, printed in Table S3 title) and in buffer"
+    medium: "0.01 M K phosphate pH 7.6; phase-ratio variation, beta 399-3 (pentenol, hexanal) or 19-4 ((E)-2-octenal) in 20 mL vial"
+    temperature_c: [37]
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: [120, 120]
+    species: [(Z)-2-penten-1-ol, hexanal, (E)-2-octenal]
+    kind: endpoint
+    location: "SI Table S3 (slope, intercept, R2, matrix/gas K2 pea and K1 buffer, retention %); repeated in sec. 3.8 text"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Matrix/gas partition coefficients of flavor compounds in the solution of pea protein (10 mg/mL) at 37 °C calculated by phase ratio variation method."
+    flags: [no_error_bars, s3_hexanal_pea_regression_a_over_b_10x_off_printed_k, octenal_beta_19_4_only, octenal_quarantined, methanol_cosolvent, protein_content_not_stated, "also_relevant: lipid"]
+    note: "Sets kg_hexanal_pea, kg_z_2_penten_1_ol_pea and quarantined kg_t_2_octenal_pea (Wave B26 SHIP; MATRIX_LOADING pea_protein_1pct). First plant-protein row in REVERSIBLE_BINDING. SI read 2026-10-29: all three shipped K_g re-derive exactly from S3; the 10 g/L loading is now printed (S3 title), so the code's loading_inherited_not_restated label is superseded. S3 hexanal-pea a/b = 9.04/0.78 = 11.6, not the printed K2 116.37 (retention and sec. 3.8 support 116.37)."
+  - id: bi2022_figs2_s1_quench_disrupting_agents
+    dossier: bi2022_extraction.md
+    paper: "Bi, Pan, Zhang, Ma, Lao, Shen & Wu 2022 Food Chem 389:133044"
+    lab: "China Agricultural University (Wu J)"
+    system: "pea protein 0.2 mg/mL (fluorescence) or 10 g/L with 4 M GdnHCl / 80 % propylene glycol (headspace)"
+    medium: "0.01 M K phosphate pH 7.6"
+    temperature_c: [25, 30, 37]
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: [60, 120]
+    species: [(Z)-2-penten-1-ol, hexanal, (E)-2-octenal]
+    kind: other
+    location: "Fig. 2 (Stern-Volmer, Ksv/Ka as figure labels), Fig. S1 (bond-disrupting peak areas; two quoted in text); Table S4 is a qualitative reagent key only"
+    status: supplement_missing
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [ksv_ka_not_printed, fig_s1_not_in_si_zip, "also_relevant: lipid"]
+    note: "Only reversibility evidence for (E)-2-octenal (20 % recovery under propylene glycol). SI zip read 2026-10-29 holds Tables S1-S4 only (no figures): Fig. S1 and Fig. S2 still off disk; Table S4 (reagent -> bond-type key) carries no numbers; Table S2 split out as bi2022_tab_s2_surface_hydrophobicity. DOI 10.1016/j.foodchem.2022.133044."
+  - id: bi2022_tab_s2_surface_hydrophobicity
+    dossier: bi2022_extraction.md
+    paper: "Bi, Pan, Zhang, Ma, Lao, Shen & Wu 2022 Food Chem 389:133044"
+    lab: "China Agricultural University (Wu J)"
+    system: "pea protein with (Z)-2-penten-1-ol, hexanal or (E)-2-octenal at 0, 1, 2 mM"
+    medium: "0.01 M K phosphate pH 7.6"
+    temperature_c: [37]
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: []
+    species: [(Z)-2-penten-1-ol, hexanal, (E)-2-octenal]
+    kind: ratio
+    location: "SI Table S2 (surface hydrophobicity, % of flavour-free control)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "Reduction in surface hydrophobicity of pea protein in the absence and presence of the selected flavor compounds at 37 °C"
+    flags: [no_error_bars, relative_index_only, "condition_not_stated: time_min"]
+    note: "Six percentages (89.26-98.38 % of control). Structural readout, not a binding or partition constant; no model input. Table S1 (log P, NIST Henry constants, pea concentrations from Bi 2020) is cited data, transcribed in the dossier, not a ledger entry."
+  # ---- Xu 2022 (pea protein heated WITH the aroma, 80-120 C) ----
+  - id: xu2022_figs1_2_binding_rate_heat_pea
+    dossier: xu2022_extraction.md
+    paper: "Xu, Bi, Zhang, Pan, Lao, Shen & Wu 2022 Food Sci (China) 43(19):28"
+    lab: "China Agricultural University (Wu J)"
+    system: "2-methylpyrazine, MFT, (E,E)-2,4-decadienal (10 mg/L) and 5-(2-hydroxyethyl)-4-methylthiazole (55 mg/L) sealed with pea protein isolate 5 g/L, heated in the vial"
+    medium: "0.01 M K phosphate pH 7.6, ~1 % methanol; 2 mL in 20 mL capped vial; ice cool, 12 h at 25 C, HS-SPME at 50 C"
+    temperature_c: [25, 80, 90, 100, 120]
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: [5, 20]
+    species: [2-methylpyrazine, MFT, "(E,E)-2,4-decadienal", 4-methyl-5-thiazoleethanol]
+    kind: ratio
+    location: "Fig. 1 (binding rate vs heat T, 4 compounds x 5 conditions), Fig. 2 (100 C, 5-20 min); five numbers in text (dossier sec. 3)"
+    status: figure_only
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "混合后立即旋紧螺旋盖。然后在各热处理条件下处理样品"
+    flags: [mft_loss_not_separable_from_binding, dose_added_pre_cook, no_heated_protein_free_blank_stated, pyrazine_is_maillard_product, equilibrium_25c_sampling_50c, mft_decadienal_over_98pct_bound_covalent_by_authors, ph_start_only, ceiling_effect, "also_relevant: lipid", "also_relevant: sulfur"]
+    note: "The corpus's only protein-binding measurement of MFT outside sulfur.yml and only one after a 120 C cook in presence of the ligand. MFT/decadienal >98 % bound (covalent per authors) is a thiol-loss-to-protein datum the sulfur lane does not carry. Not digitised; no SI exists."
+  - id: xu2022_tab2_tab3_methylpyrazine_klotz_quench
+    dossier: xu2022_extraction.md
+    paper: "Xu, Bi, Zhang, Pan, Lao, Shen & Wu 2022 Food Sci (China) 43(19):28"
+    lab: "China Agricultural University (Wu J)"
+    system: "2-methylpyrazine vs pea protein isolate, native and 100 C / 10 min treated"
+    medium: "0.01 M K phosphate pH 7.6"
+    temperature_c: [25, 37]
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: [10, 720]
+    species: [2-methylpyrazine]
+    kind: endpoint
+    location: "Table 2 (Stern-Volmer Ksv and van 't Hoff Delta H/S/G), Table 3 (Klotz n, K)"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: [klotz_no_molar_basis, vant_hoff_three_points_12k, fluorescence_vs_headspace_12_13x, loading_5gl_vs_bi2022_10gl]
+    note: "Only pyrazine-protein binding constant in the corpus; native vs heated protein contrast. Dossier converts binding % to K_g (native ~4e-2 L/g). Derived K_g ladder quoted as a directional claim in BINDING_AT_PROCESS_TEMPERATURE; registry has no alkylpyrazine binding class (Hong 2020 2,3-dimethylpyrazine row predicts 'no_binding_constant_for_class')."
+  # ---- Guo 2019 (preheated soy isolate, esters/terpenes) ----
+  - id: guo2019_tab2_klotz_preheated_spi
+    dossier: guo2019_extraction.md
+    paper: "Guo, He, Wu, Zeng & Chen 2019 Food Chem 290:16"
+    lab: "Jiangnan (Zeng M / Chen J)"
+    system: "hexyl acetate, heptyl acetate, linalyl formate, linalyl acetate, linalool, geraniol vs lab SPI (92.1 %) native or preheated 80/90/100 C, 1 % w/v (9.21 g/L protein)"
+    medium: "unbuffered water pH 7.0-7.2, propylene glycol carrier; HS-SPME GC-MS, MW 220 kDa"
+    temperature_c: [37]
+    ph: {initial: [7.0, 7.2], measured_during: false, final: null}
+    time_min: [1440, 1440]
+    species: [hexyl acetate, heptyl acetate, linalyl formate, linalyl acetate, linalool, geraniol]
+    kind: endpoint
+    location: "Table 2 (binding %, Klotz n, K, nK with SE, primary/secondary branches; dossier sec. 3); Figs. 1-3 Klotz plots figure-only"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "1 % (W/V) in water (pH 7.0-7.2)"
+    flags: [preheat_protocol_not_reported, table_concentration_10x_methods, mw_220kda_vs_100kda_basis, propylene_glycol_cosolvent, hpac_native_row_does_not_close, relative_errors_up_to_80pct]
+    note: "HxAc/HpAc native slope is recorded as guo2019_soy_native_37C (2.86x/CH2) in CHAIN_LENGTH_SLOPE_FIVE_DETERMINATIONS, a dict no code reads (confirms the shipped 2.81; no value changed). Preheat direction (split by ligand) is a directional claim in the BINDING_AT_PROCESS_TEMPERATURE register; matrix_sites.py still charges sites once."
+  - id: guo2019_fig4_terpene_salting_out_release
+    dossier: guo2019_extraction.md
+    paper: "Guo, He, Wu, Zeng & Chen 2019 Food Chem 290:16"
+    lab: "Jiangnan (Zeng M / Chen J)"
+    system: "limonene, myrcene 0.024 mM in 1 % SPI (native, 80/90/100 C preheated)"
+    medium: "unbuffered water, ionic strength 0.03-0.04 M as NaCl"
+    temperature_c: [37]
+    ph: {initial: [7.0, 7.2], measured_during: false, final: null}
+    time_min: [1440, 1440]
+    species: [limonene, myrcene]
+    kind: ratio
+    location: "Fig. 4 (headspace release % of protein-free control, bars >100 %)"
+    status: figure_only
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [salting_out_unquantified]
+    note: "Protein raises hydrocarbon volatility (release >100 %): a measured enhancement like Leksrisompong's negative constants. Not digitised."
+  # ---- Zhou, Boatright, Johnson & Reuber 2002 (soy, 2-pentylpyridine; pH, T, NaCl) ----
+  - id: zhou2002_tab1_bound_pp_ph_t_nacl_uv
+    dossier: zhou2002_extraction.md
+    paper: "Zhou, Boatright, Johnson & Reuber 2002 J Food Sci 67:142"
+    lab: "Univ. Kentucky / Iowa State (Boatright, Johnson)"
+    system: "2-pentylpyridine 0.03 mM vs commercial SPI (Supro 500E), 7S and 11S fractions at 0.5 % w/w (5 g/L)"
+    medium: "equilibrium dialysis (3500 MWCO, 14-20 h), HS-SPME GC-MS with deuterated IS; methanol carrier"
+    temperature_c: [4, 25, 74]
+    ph: {initial: [4.5, 7, 9], measured_during: false, final: null}
+    time_min: [840, 1200]
+    species: [2-pentylpyridine]
+    kind: ratio
+    location: "Table 1 (mol bound per mol protein: pH 4.5/7/9, 4/25/74 C, NaCl 0.171/0.855/1.711 M, UV; 3 proteins; dossier sec. 3)"
+    status: in_model_check
+    quant_class: sida
+    simulable: true
+    condition_quote: "The initial concentraion [sic] of 2-pp in protein slurry was 0.03 mM"
+    flags: [treatment_blocks_differ_in_medium_25c_controls_disagree_1.54x, "74c_arm_no_synthesis_control", methanol_cosolvent_unaccounted, spi_protein_content_not_stated, documentary_check_not_executed, "also_relevant: lipid"]
+    note: "The corpus's only aqueous binding datum above 60 C (74 C bound amount, not a constant) and its only NaCl series on flavour-protein binding (salt cuts binding to 0.22-0.54x). Directional claim in the BINDING_AT_PROCESS_TEMPERATURE register of parameters_matrix.py (prose; no number enters a computation)."
+  - id: zhou2002_text_klotz_k_25c_spi_7s_11s
+    dossier: zhou2002_extraction.md
+    paper: "Zhou, Boatright, Johnson & Reuber 2002 J Food Sci 67:142"
+    lab: "Univ. Kentucky / Iowa State (Boatright, Johnson)"
+    system: "2-pentylpyridine 0.3-3.0 mM vs SPI, 7S, 11S (5 g/L)"
+    medium: "equilibrium dialysis + HS-SPME, 25 C; cited MW 100/160/320 kDa"
+    temperature_c: [25]
+    ph: {initial: [7], measured_during: false, final: null}
+    time_min: [840, 1200]
+    species: [2-pentylpyridine]
+    kind: endpoint
+    location: "p. 144 text (Klotz K and n for SPI/7S/11S; binding curves figure-only)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "the molecular weight of SPI ... hypothetical"
+    flags: [printed_k_does_not_reproduce_table1, n_without_uncertainty, "7s_only_70pct_pure", ph_not_stated, "also_relevant: lipid"]
+    note: "Dossier converts SPI K to K_g 3.21e-3 L/g on the stated 100 kDa basis (comparable to kg_2_heptanone_soy); not shipped. Condition quote abbreviated from the dossier's p. 144 quote. Fitted on a branch 10x above Table 1's dose."
+  # ---- Barallat-Perez 2024 (lupin, in vivo nose-space + in vitro binding) ----
+  - id: barallatperez2024_fig4_binding_lupin_mucin
+    dossier: barallatperez2024_extraction.md
+    paper: "Barallat-Perez, Pedrotti, Oliviero, Martins, Fogliano & de Jong 2024 J Agric Food Chem 72:8731"
+    lab: "Wageningen FQD (Fogliano / Oliviero) + Fondazione Edmund Mach"
+    system: "hexanal, nonanal, 2-nonanone 5 mg/L vs 1 % w/v lupin protein isolate (91 % protein), +- pig gastric mucin"
+    medium: "MilliQ water pH 7.0 (unbuffered); static headspace GC-MS"
+    temperature_c: [30]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [180, 180]
+    species: [hexanal, nonanal, 2-nonanone]
+    kind: ratio
+    location: "Fig. 4 (nine binding % bars, no data labels); Eq. 3 malformed as printed"
+    status: in_model_check
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "water-bath shaker at 30 C and 125 rpm for 3 h"
+    flags: [mucin_concentration_stated_two_incompatible_ways, eq3_malformed, aldehyde_covalent_share_uncontrolled, si_not_on_disk, unbuffered, holdout_sealed_not_scored, "also_relevant: lipid"]
+    note: "Declared sealed hold-out: HOLDOUT_SEALED_BINDING keys kg_*_mucin cite this paper; the lupin keys' values come from Barallat-Perez 2023 JAFC 71:20274, which has NO dossier on disk (values only in data/lit/binding_constants.yml). SI (Tables S1-S2, Figs. S1-S3) not on disk; DOI 10.1021/acs.jafc.3c08819."
+  - id: barallatperez2024_tab2_tab3_in_vivo_release_ti
+    dossier: barallatperez2024_extraction.md
+    paper: "Barallat-Perez, Pedrotti, Oliviero, Martins, Fogliano & de Jong 2024 J Agric Food Chem 72:8731"
+    lab: "Wageningen FQD (Fogliano / Oliviero) + Fondazione Edmund Mach"
+    system: "same 3 aromas +- 1 % lupin isolate, 10 subjects, nose-space PTR-ToF-MS and time-intensity"
+    medium: "MilliQ water pH 7.0, 10 mL, 3 h shaking equilibration"
+    temperature_c: [25, 30]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [180, 180]
+    species: [hexanal, nonanal, 2-nonanone]
+    kind: time_series
+    location: "Table 2 (in vivo release parameters, mean +- SE), Table 3 (Imax, decay, lingering, release); tables printed sideways, text layer scrambled"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [nonanal_2nonanone_same_mz, ptr_mass_range_misprinted, table3_duplicate_rows, panel_ten_young_women, unbuffered, blank_not_zero, no_uncertainty_on_fit_parameters, "also_relevant: lipid"]
+    note: "In-mouth release from a plant-protein matrix; no engine consumer (matrix layer is headspace/threshold only). Printed Imax_S 25.92 % for hexanal does not reproduce (19.40 %); 2-nonanone sensory a/b likely duplicated; lingering letters do not order with values."
+  # ---- Aspelund & Wilson 1983 / Crowther 1980 (dry soy IGC) ----
+  - id: aspelund1983_tab1_3_igc_soy_80_100c
+    dossier: aspelund1983_extraction.md
+    paper: "Aspelund & Wilson 1983 J Agric Food Chem 31:539"
+    lab: "Iowa State (Wilson)"
+    system: "5 homologous series (alcohols, aldehydes, 2-ketones, n-alkanes, methyl esters) on dry spray-dried soy isolate Edi-Pro A (0.2019 m2/g)"
+    medium: "inverse gas chromatography, silanized glass column packed with dry powder, infinite dilution"
+    temperature_c: [80, 90, 100]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [1-alkanols, n-alkanals, 2-alkanones, n-alkanes, methyl esters]
+    kind: endpoint
+    location: "Table I (V_S, -Delta H, -Delta G, -Delta S at 90 C), Table II (heats, 18 of 35 extrapolated), Table III (Delta G, Delta S vs T for C6 compounds)"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "20 mL/min at all three temperatures"
+    flags: [dry_powder_not_aqueous, three_points_two_days, blank_emits_volatiles_at_80_100c, table2_extrapolated_cells, low_moisture_no_aw_term, documentary_check_not_executed, "also_relevant: lipid", "condition_not_stated: time_min"]
+    note: "Recorded as aspelund1983_soy_dry_90C (2.23x/CH2) in CHAIN_LENGTH_SLOPE_FIVE_DETERMINATIONS and CHAIN_LENGTH_SLOPE_CHECKED_DRY_AT_90C (directional claim in the code registers; no code reads the numbers). The only flavour-affinity measurement above 60 C; supplies no aqueous constant. dG and dS are arithmetic from V_S and dH (two observables, not four); Table III cells re-read from page image (text layer mis-OCRs two)."
+  - id: crowther1980_tab3_4_igc_processed_soy
+    dossier: crowther1980_extraction.md
+    paper: "Crowther, Wilson & Glatz 1980 J Food Process Eng 4:99"
+    lab: "Iowa State (Wilson)"
+    system: "2-alkanones (3), 1-alkanols (3), hexanal, n-hexane on Edi-Pro A untreated, autoclaved 20 min at 100/121 C at 29/40 % moisture, or extruded at 71 C"
+    medium: "inverse gas chromatography on dried, ground powder"
+    temperature_c: [60, 70, 80]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20, 20]
+    species: [2-pentanone, 2-hexanone, 2-heptanone, 1-pentanol, 1-hexanol, 1-heptanol, hexanal, n-hexane]
+    kind: endpoint
+    location: "Table 3 (K mL/m2 at 70 C), Table 4 (heats from 60/70/80 C), Tables 5-6 (ANOVA, process contrasts), Table 2 (sample properties), Table 7"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Approximately 1.4 g of the treated samples and 0.5 g of unprocessed protein could be used while attaining reasonable flow rates"
+    flags: [text_contradicts_table3_minimum, significance_stars_backwards, control_packed_at_third_mass, injected_quantity_not_stated, disagrees_with_aspelund_2.2_5.2x, low_moisture_no_aw_term, documentary_check_not_executed, no_replicates, "also_relevant: lipid"]
+    note: "Recorded as crowther1980 dry slopes (1.90/2.15) in CHAIN_LENGTH_SLOPE dicts and as 'sites removed, not weakened' in the BINDING_AT_PROCESS_TEMPERATURE register (directional claim; no code reads the numbers). Only processing-history (autoclave/extrusion) effect on soy flavour adsorption. Table 7's Aspelund column republishes Aspelund 1983 Table I (same thesis data) plus a measured 2-pentanone the 1983 paper suppressed; do not count it twice."
+  # ---- Meynier, Rampon, Dalgalarrondo & Genot 2004 (covalent aldehyde-protein) ----
+  - id: meynier2004_fig6_residue_loss_aldehyde_protein
+    dossier: meynier2004_extraction.md
+    paper: "Meynier, Rampon, Dalgalarrondo & Genot 2004 Int Dairy J 14:681"
+    lab: "INRA Nantes BIA (Genot)"
+    system: "hexanal or t-2-hexenal 0.5-4 g/L (5-40 mM) with Na-caseinate or whey proteins 30 g/L (powder)"
+    medium: "80 mM NaCl + 0.2 g/L azide, pH 6.7 set before dosing (unbuffered), closed flasks, stirred"
+    temperature_c: [20]
+    ph: {initial: [6.7], measured_during: false, final: [6.2, 6.3]}
+    time_min: [2880, 2880]
+    species: [hexanal, t-2-hexenal, lysine residues, histidine residues]
+    kind: ratio
+    location: "Fig. 6 (40 bars, amino-acid loss after 48 h; digitised in dossier sec. 5b); sec. 8 derives bound fraction, k2 and matrix half-lives"
+    status: in_model_fit
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "Proteins (30 g L⁻¹) were solubilized"
+    flags: [powder_or_protein_basis_ambiguous, amino_acid_replication_not_stated, hexanal_signal_at_noise_floor, ph_drifts_0.4_0.5, nabh4_reduction_ambiguity, channel_disabled_in_engine, unbuffered, "also_relevant: lipid"]
+    note: "Sets matrix_sites.py BINDING_CLASSES k2 brackets (saturated_aldehyde_amine upper 2.5e-5, unsaturated_aldehyde_amine 5.3-7.9e-5 M-1 s-1 at 20 C, via k6b) and REVERSIBLE_LOG_SHIFT_CEILING 0.25 (Amendment 6 ruling 2, dossier sec. 9). k2 is derived [Z] from a 48 h endpoint, not a measured time course. Also sets COVALENT_CEILING.k2 / CovalentSinkCeiling (37-74 d); channel inert in point prediction."
+  - id: meynier2004_figs2_4_fluorescence_time_courses
+    dossier: meynier2004_extraction.md
+    paper: "Meynier, Rampon, Dalgalarrondo & Genot 2004 Int Dairy J 14:681"
+    lab: "INRA Nantes BIA (Genot)"
+    system: "same aldehyde x protein systems"
+    medium: "80 mM NaCl pH 6.7, 20 C"
+    temperature_c: [20]
+    ph: {initial: [6.7], measured_during: false, final: null}
+    time_min: [0, 2880]
+    species: ["tryptophan fluorescence", "adduct fluorophores", "UV absorbance (A280)", "turbidity (A360)", hexanal, t-2-hexenal]
+    kind: time_series
+    location: "Fig. 2 (Trp fluorescence vs time), Fig. 4 (fluorophore formation), Fig. 1 (UV), Fig. 3 spectra; digitised in dossier sec. 6"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "recorded at 20 °C in triplicate"
+    flags: [fluorescence_not_a_bound_amount, unbuffered, coarse_read, axis_scale_differs_between_panels, internal_inconsistency, "also_relevant: lipid"]
+    note: "The only time-resolved aldehyde-protein adduct signal for a food protein; arbitrary units. Fig. 5 SDS-PAGE (cross-linking) is qualitative. Hexanal gives 3.5-7x more fluorophore yet ~7x less Lys loss than t-2-hexenal: fluorescence is not a proxy for covalent extent. Fig. 1 text and digitisation disagree on baseline drift; pH falls 0.4-0.5 at 4 g/L."
+  # ---- paired matrix/water odour thresholds ----
+  - id: hong2020_tab2_paired_thresholds_soy_water
+    dossier: hong2020_extraction.md
+    paper: "Hong & Kim 2020 J Sens Stud e12567"
+    lab: "Jeonbuk National Univ. (Kim MK)"
+    system: "10 doenjang odorants in distilled water vs autoclaved whole-soybean paste (121 C 40 min, ground); composition not stated"
+    medium: "12 mL or 12 g per 70 mL lidded cup; 7-series 3-AFC, ASTM E679-91, n = 20"
+    temperature_c: [22]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 1440]
+    species: ["2,3-dimethylpyrazine", "ethyl 4-methylpentanoate", "2-pentylfuran", "4-vinylphenol", hexanal, "2-methylbutanal", "3-methylbutanal", "butyric acid", "4-ethylphenol", "dimethyl disulfide"]
+    kind: ratio
+    location: "Table 2 (10 paired BET, +- scale unstated, Z; dossier sec. 4); Table 1 dosing series"
+    status: in_model_check
+    quant_class: other
+    simulable: true
+    condition_quote: "test samples at each row were prepared as soon as the aliquots of stock solution were spiked"
+    flags: [asymmetric_equilibration_water_0h_soy_24h_4c, pm_scale_unstated, printed_z_not_paper_formula, matrix_composition_not_stated, serving_temperature_not_stated, ph_not_stated, "also_relevant: lipid"]
+    note: "B4 flagship hold-out (results/validation/holdout_frozen/hong2020_paired_thresholds.json; 0/10 within 5x). Paste loading soy_paste_hong is a declared assumption (100-200 g protein/L) because the paper prints no composition. Temperature 22 C is implied room temperature."
+  - id: vega1994_tab1_gelatin_thresholds_4_60c
+    dossier: vega1994_extraction.md
+    paper: "Vega & Brewer 1994 J Food Lipids 1:229"
+    lab: "Univ. Illinois (Brewer)"
+    system: "pentanal, hexanal, heptanal, t-2-hexenal, t-2-octenal, t,t-2,4-decadienal in 3 % w/v gelatin gel (lipid-free), dosed at 22 C, held 18 h at 4 C"
+    medium: "unbuffered gelatin in distilled water; 16 panellists, 3 replicates, 75 % detection linear fit"
+    temperature_c: [4, 22, 37, 60]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1080, 1080]
+    species: [pentanal, hexanal, heptanal, t-2-hexenal, t-2-octenal, "t,t-2,4-decadienal"]
+    kind: endpoint
+    location: "Table 1 (24 thresholds, ppb, with regression CD, and the percent-correct cells behind them; dossier sec. 3); Table 3 headspace FID area counts at 60 C / 20 min (no calibration to headspace concentration); Table 2 correlations (n = 4)"
+    status: in_model_fit
+    quant_class: other
+    simulable: false
+    condition_quote: "the concentration at which 75 % of the panellists detected a difference compared to the control was considered to be the detectable odor threshold"
+    flags: [criterion_75pct_uncorrected_for_chance, nominal_concentrations_unverified, water_reference_second_hand_guadagni, no_ph, table1_physical_constants_garbled, regression_cd_below_0.7_in_6_rows, "also_relevant: lipid", ocr_plus_minus_glyph_reconstructed, table3_peak_area_only]
+    note: "All 24 values are MATRIX_THRESHOLDS (gelatin_3pct) in matrix_oav.py and set unsat_penalty_gelatin (2.81x) in parameters_matrix.py (via k2 sec. A.2). Table 3 headspace responses unused. Percent-correct cells would allow a chance-corrected refit with intervals (dossier flag 11); Table 3 gives no partition coefficient (heavier aldehydes non-linear, r 0.59-0.78)."
+  - id: brewer1995_tab1_ground_beef_thresholds
+    dossier: brewer1995_extraction.md
+    paper: "Brewer & Vega 1995 J Food Sci 60:592"
+    lab: "Univ. Illinois (Brewer)"
+    system: "same 6 aldehydes dosed into raw lean ground beef 1:1 with water, cooked to 70 C internal, sniffed at 45 C"
+    medium: "triangle tests ASTM E-1432-91, 10 panellists"
+    temperature_c: [45, 70]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [pentanal, hexanal, heptanal, t-2-hexenal, t-2-octenal, "t,t-2,4-decadienal"]
+    kind: endpoint
+    location: "Table 1 (group geometric mean thresholds, ppm; dossier sec. 3). Tables 2-6 descriptive analysis is lipid.yml brewer1995_tab2_6_descriptive_analysis"
+    status: in_model_check
+    quant_class: other
+    simulable: false
+    condition_quote: "Samples (15 g) were placed in 25-mL amber vials and sealed. Samples were cooked in a circulating water bath to 70 C (internal temperature)"
+    flags: [dose_added_pre_cook, threshold_m_column_arithmetic_wrong, blank_not_blank_beef_oxidises, beef_composition_not_stated, holdout_not_scored_by_ruling, background_aldehydes_not_measured, "also_relevant: lipid", "condition_not_stated: time_min"]
+    note: "Declared B4 hold-out, not scored by ruling (dose_added_pre_cook); its hexanal row is the beef leg behind REVERSIBLE_LOG_SHIFT_CEILING and the excluded 2.01x unsaturation observation."
+  - id: wright2006_tab4_dmts_threshold_water_wpi
+    dossier: wright2006_extraction.md
+    paper: "Wright, Carunchia Whetstine, Miracle & Drake 2006 J Food Sci 71:C86"
+    lab: "NC State (Drake)"
+    system: "dimethyl trisulfide in water vs 10 % solids whey protein isolate; DMTS in 4 commercial WPIs"
+    medium: "orthonasal ascending 3-AFC (ASTM E679), 80 naive panellists; HS-SPME GC-MS quantification"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [dimethyl trisulfide]
+    kind: endpoint
+    location: "Table 4 (DMTS concentrations and thresholds in water and WPI; dossier sec. 3). Table 3 AEDA lipid rows are lipid.yml wright2006_tab3_aeda_wpi_lipid_aldehydes"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [pm_undefined, three_of_four_concentrations_outside_calibration, wpi_protein_content_not_stated, water_leg_143x_below_cited_literature, orthonasal_vs_retronasal, "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "Recorded in PAIRED_THRESHOLD_EVIDENCE (the only genuine paired threshold; 11 429x shift) as an unexplained residual, not shipped. Not in sulfur.yml (no formation data)."
+  - id: suppavorasatit2012_tab4_soymilk_thresholds_deamidated
+    dossier: suppavorasatit2012_extraction.md
+    paper: "Suppavorasatit, Lee & Cadwallader 2013 J Food Sci 78:C1 (repo key suppavorasatit2012)"
+    lab: "Univ. Illinois (Cadwallader)"
+    system: "vanillin and maltol in control soymilk vs protein-glutaminase deamidated soymilk (~3 % protein)"
+    medium: "orthonasal detection thresholds; 24 h at 4 C, evaluated at 25 C"
+    temperature_c: [25]
+    ph: {initial: [6.44, 6.74], measured_during: false, final: null}
+    time_min: [1440, 1440]
+    species: [vanillin, maltol]
+    kind: endpoint
+    location: "Table 4 (group BET in CSM and DSM), Table 5 (Stevens exponents), Figs. 2B/3B regressions"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [no_water_leg, dsm_thresholds_noisy, different_concentration_ladders, mechanism_misattributed, dsm_ph_not_stated, year_2012_vs_2013]
+    note: "Recorded in PAIRED_THRESHOLD_EVIDENCE as NOT a paired water/matrix threshold (retracted claim). Deamidation lowers binding of vanillin/maltol in a real soy matrix."
+  # ---- release kinetics in gels ----
+  - id: baek1999_fig3_fig4_gel_release_binding_exclusion
+    dossier: baek1999_extraction.md
+    paper: "Baek, Linforth, Blake & Taylor 1999 Chem Senses 24:155"
+    lab: "Univ. Nottingham (Taylor) + Firmenich"
+    system: "furfuryl acetate in gelatine gels (250 bloom) at 2.0-8.0 % w/w with 20.5 % sucrose + 22.5 % glucose syrup"
+    medium: "in vitro dissolution (Fig. 3) and in-nose APCI-MS during eating (Fig. 4)"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [furfuryl acetate]
+    kind: time_series
+    location: "Table 1 (gel composition), Fig. 3 and Fig. 4 (binding exclusion), Fig. 5 / Fig. 7 (time-release vs time-intensity, digitised [D] in dossier sec. 5)"
+    status: in_model_check
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [fla_dosed_in_propylene_glycol, single_compound_does_not_generalise, "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "Cited in matrix_oav.py docstring (1.5x n.s. concentration vs 3.0x P<0.001 perception) as evidence that headspace-calibrated free fraction over-predicts threshold shift; a design argument, no number computed."
+  # ---- Manitoba pea/canola series (Wang & Arntfield) ----
+  - id: wang2014_fig1_pct_bound_pea_canola_gluten
+    dossier: wang2014_extraction.md
+    paper: "Wang & Arntfield 2014 Food Chem 157:364"
+    lab: "Univ. Manitoba (Arntfield)"
+    system: "hexanal, heptanal, octanal, 2-hexanone, 2-heptanone, 2-octanone 250 ppm v/v vs salt- and alkali-extracted pea isolate, canola isolates, wheat gluten at 1 % w/v"
+    medium: "0.01 M K phosphate pH 8; 30 C / 3 h; ITEX headspace GC/MS at 40 C, no IS"
+    temperature_c: [30, 40]
+    ph: {initial: [8], measured_during: false, final: null}
+    time_min: [180, 180]
+    species: [hexanal, heptanal, octanal, 2-hexanone, 2-heptanone, 2-octanone]
+    kind: ratio
+    location: "Fig. 1 (percent bound, all proteins x ligands); no table"
+    status: figure_only
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "Preliminary testing found that 3 h was adequate to reach equilibrium"
+    flags: [ppm_is_volumetric, depletion_not_affinity, film_20um_misprint, pea_lys_cys_cited_not_measured, ph_start_only, peak_area_only, "also_relevant: lipid"]
+    note: "Single-flavour baseline of the series; pea percent-bound values exist only as bars. wang_2015_umanitoba_thesis records in binding_constants.yml (no engine consumer) carry thesis numbers. Condition quote is from the companion wang2015 dossier's verbatim methods (same procedure)."
+  - id: wang2015_figs1_4_heat_95c_binding_pea_canola
+    dossier: wang2015_extraction.md
+    paper: "Wang & Arntfield 2015 Food Hydrocoll 43:410"
+    lab: "Univ. Manitoba (Arntfield)"
+    system: "C6-C8 aldehydes/2-ketones single and in mixtures (250 ppm each) on salt-extracted pea (8.27 g protein/L) and canola isolates 1 % w/v, heated WITH flavour"
+    medium: "0.01 M K phosphate pH 8; 95 C water bath 0-60 min (canola single) or 30 min (mixtures); ITEX headspace GC/MS"
+    temperature_c: [30, 95]
+    ph: {initial: [8], measured_during: false, final: null}
+    time_min: [0, 60]
+    species: [hexanal, heptanal, octanal, 2-hexanone, 2-heptanone, 2-octanone]
+    kind: time_series
+    location: "Figs. 1-2 (pea % bound, figure-only), Figs. 3-4 (canola 95 C time course, text numbers); Table 1 (DSC of flavoured pea proteins)"
+    status: figure_only
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "For the heat treatment, reaction vials were placed into an Isotemp Water Bath 2320 (Fisher Scientific, Marietta, OH, USA) at 95 C and heated for the specified heating time. The control was not heated."
+    flags: [order_heating_vs_equilibration_not_stated, protein_free_reference_heating_not_stated, dsc_unit_j_per_k_misprint, canola_not_pea, pct_increment_ambiguous, ph_start_only, peak_area_only, heating_up_included_in_time, "also_relevant: lipid"]
+    note: "The only time course of aldehyde binding to a plant isolate at process temperature on disk (canola numbers in text; pea figure-only). Unused; matrix_sites.py brackets do not use it. Canola hexanal t1/2 < 30 s to a 67 % plateau (dossier); canola 2-octanone binding rises then is released as protein aggregates (Figs. 3-4 text values: text_only)."
+  - id: wang2015_tab1_dsc_flavoured_pea
+    dossier: wang2015_extraction.md
+    paper: "Wang & Arntfield 2015 Food Hydrocoll 43:410"
+    lab: "Univ. Manitoba (Arntfield)"
+    system: "10 % w/v pea isolate in 0.3 M NaCl with 250 ppm flavours"
+    medium: "DSC 30-120 C at 10 C/min"
+    temperature_c: [30, 120]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60, 60]
+    species: [hexanal, heptanal, octanal, "2-hexanone", "2-heptanone", "2-octanone"]
+    kind: endpoint
+    location: "Table 1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [dsc_medium_differs_from_binding_medium, ph_not_stated, "also_relevant: lipid"]
+    note: "Flavour effect on pea protein denaturation; context for heat-dependent binding. Quantity: pea isolate denaturation Td and Delta H with each flavour; aldehydes cut Delta H more than ketones, Td unchanged."
+  # ---- Heng 2005 thesis (pea vicilin / legumin) ----
+  - id: heng2005_ch6_tab1_vicilin_pct_bound_native_heated
+    dossier: heng2005_extraction.md
+    paper: "Heng 2005 PhD thesis, Wageningen University (doi 10.18174/121674)"
+    lab: "Wageningen (Voragen / Gruppen)"
+    system: "pentanal, octanal (0.1 % w/v vicilin) and 2-pentanone..2-octanone (1 % w/v vicilin), ligand 0.025 mM; native and 90 C / 30 min preheated"
+    medium: "10 mM K phosphate pH 7.6, I 0.024 M; 1 mL in 11.5 mL vial, static headspace GC-FID, 37 C 10 min"
+    temperature_c: [37, 90]
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: [10, 30]
+    species: [pentanal, octanal, 2-pentanone, 2-hexanone, 2-heptanone, 2-octanone]
+    kind: ratio
+    location: "Ch. 6 Table 1 p. 119 (% bound native and heated, nmol/mg), Figs. 1-2 pp. 118, 120; dossier sec. 2a"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "calculated as a proportion of the total volatiles added to the system"
+    flags: [loading_differs_aldehyde_1gl_ketone_10gl, no_klotz_fit, headspace_share_not_separated, lab_never_heated_isolate, ph_start_only, "also_relevant: lipid"]
+    note: "Heat pre-treatment collapses octanal binding (96 -> 32 %) and abolishes short-chain binding: a measured direction against charging sites once. Also in binding_constants.yml (heng_2005_wur_thesis), no engine consumer."
+  - id: heng2005_ch6_tab2_3_ph_lipid_octanal
+    dossier: heng2005_extraction.md
+    paper: "Heng 2005 PhD thesis, Wageningen University (doi 10.18174/121674)"
+    lab: "Wageningen (Voragen / Gruppen)"
+    system: "0.2 % w/v vicilin precipitated at pH 4.5/5.5/6.5, pellet and supernatant re-suspended at pH 7.6, +- hexane or chloroform:methanol defatting; octanal 25 uM"
+    medium: "10 mM K phosphate pH 7.6, 37 C"
+    temperature_c: [37]
+    ph: {initial: [4.5, 5.5, 6.5, 7.6], measured_during: false, final: null}
+    time_min: [10, 10]
+    species: [octanal, "fatty acids (pellet lipid)"]
+    kind: ratio
+    location: "Ch. 6 Tables 2-3 pp. 123, 125 (nmol/mg with SD, lipid and carbohydrate ug); Fig. 5a"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [galactolipid_assignment_inferred, ph_start_only, "also_relevant: lipid"]
+    note: "More than half of purified vicilin's octanal binding sits on co-purified polar lipid; a pH-history effect on binding. Unused."
+  - id: heng2005_ch7_fig1_legumin_aldehydes
+    dossier: heng2005_extraction.md
+    paper: "Heng 2005 PhD thesis, Wageningen University (doi 10.18174/121674)"
+    lab: "Wageningen (Voragen / Gruppen)"
+    system: "pentanal, hexanal, heptanal, octanal vs 0.1 % w/v legumin"
+    medium: "10 mM K phosphate pH 7.6, 37 C, static headspace"
+    temperature_c: [37]
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: [10, 10]
+    species: [pentanal, hexanal, heptanal, octanal]
+    kind: ratio
+    location: "Ch. 7 Fig. 1 p. 133 (bound vs added, read approx. in dossier sec. 2c); text p. 132 for octanal and pentanal"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: ""
+    flags: [hexanal_heptanal_graph_reads_only, coarse_read, ph_start_only, "also_relevant: lipid"]
+    note: "Pea legumin hexanal binding exists only as a graph read. Approximate reads in dossier sec. 2c give an independent unused check on kg_hexanal_pea (legumin K_eff 1.5-2.4x higher at the same buffer/pH/T)."
+  - id: heng2005_ch5_volatiles_carried_by_pea_preparations
+    dossier: heng2005_extraction.md
+    paper: "Heng 2005 PhD thesis, Wageningen University (doi 10.18174/121674)"
+    lab: "Wageningen (Voragen / Gruppen)"
+    system: "pea flour, lab isolate, legumin, vicilin (100 mg dry in 10 mL McIlvaine)"
+    medium: "dynamic headspace, N2 purge 1 h at 37 C onto Tenax, GC-FID"
+    temperature_c: [37]
+    ph: {initial: [4, 8], measured_during: false, final: null}
+    time_min: [60, 60]
+    species: [hexanal, pentanal, "2-hexenal", "2-heptenal", "2-octenal", "2-nonenal", decanal, undecanal, "2-pentylfuran", "2-decanone"]
+    kind: ranking
+    location: "Ch. 5 Tables 1-2 pp. 102, 104 (+ to +++++ bands, AU per g dry matter)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [arbitrary_units_bands_only, no_internal_standard, peak_area_only, "also_relevant: lipid"]
+    note: "Releasable volatiles carried by protein preparations; ordinal only."
+  # ---- Snel 2023 (meat-analogue isolates, Harrison-Hills partition) ----
+  - id: snel2023_tab3_aldehyde_partition_5_isolates
+    dossier: snel2023_extraction.md
+    paper: "Snel, Pascu, Bodnar, Avison, van der Goot & Beyrer 2023 LWT 185:115177"
+    lab: "HES-SO Valais / Wageningen / Firmenich"
+    system: "C4-C10 n-alkanals and trans-2-alkenals vs soy (Supro 500E), pea (Nutralys F85M), faba, chickpea and whey isolates at 5-50 g isolate/kg"
+    medium: "demineralised water (unbuffered); static headspace APCI-TOF-MS; Harrison & Hills partition model"
+    temperature_c: [21]
+    ph: {initial: [6.4, 7.5], measured_during: false, final: null}
+    time_min: [1440]
+    species: [butanal, hexanal, octanal, decanal, trans-2-butenal, trans-2-hexenal, trans-2-octenal, trans-2-decenal]
+    kind: endpoint
+    location: "Table 3 p. 6 (K_ald, K_alk with fit +- , n = 3; header unit off by 10x, dossier sec. 2.2); Table 1 isolate composition; sec. 2.3 derived total K_p"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: [header_unit_10x_contradicted_by_own_arithmetic, dispersion_ph_not_reported, unbuffered, si_not_on_disk, "also_relevant: lipid", "republished_in: snel2023b_extraction.md Table 6.3"]
+    note: "Per-gram constants on five meat-analogue isolates incl. the commercial pea isolate behind sagesser rows; recorded in binding_constants.yml (snel_2023 records), no engine consumer. Isolate pH listed as a powder property (6.4-7.5), not the dispersion pH. Equilibrated 24 h at 21 C. PPI hexanal K_p 0.053 L/g vs shipped kg_hexanal_pea 0.254 (Bi); C6-C10 slope 2.7-3.4/CH2 corroborates 2.81. The thesis (snel2023b_extraction.md, Table 6.3 pp. 134-135) repeats the same 40 K values (Ratio column differs in 10 cells by 1-3 units); its Table 7.1 RHC was computed on the wrong header unit (2-9x)."
+  - id: snel2023b_ch5_ketone_ester_ap_isolates
+    dossier: snel2023b_extraction.md
+    paper: "Snel 2023 PhD thesis, Wageningen University (doi 10.18174/633616), Ch. 5 = Snel et al. 2023 Heliyon 9:e16503"
+    lab: "Wageningen / HES-SO Valais"
+    system: "2-ketones and ethyl esters vs soy, pea, whey isolates"
+    medium: "demineralised water, static headspace APCI-TOF-MS, Harrison-Hills a_p = K/P_ow"
+    temperature_c: [21]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1440]
+    species: [2-ketones, ethyl esters]
+    kind: endpoint
+    location: "Ch. 5 Table 5.3 p. 111 (a_p '10^-5 L/g'), Table A.2 pp. 118-119 ('10^-4 L/g'), Fig. 5.2a raw headspace % (read approx.); dossier sec. 2.1 settles the unit"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: [unit_printed_two_ways_1e-5_and_1e-4, heliyon_paper_itself_has_no_dossier, unbuffered, coarse_read, "also_relevant: lipid"]
+    note: "a_p records in binding_constants.yml (snel_2023_heliyon) have no engine consumer; the registry refuses log-P terms (k4b guard #4), which is exactly what a_p x P_ow is. Ch. 7 extrapolation to extrusion is text only. Text 'hexanone 93-100 %' contradicts Fig. 5.2a (~76 %)."
+  # ---- phenolic-protein binding (non-volatile ligand on the same sites) ----
+  - id: rawel2005_tab1_hd_phenolic_protein_kd
+    dossier: rawel2005_extraction.md
+    paper: "Rawel, Meidtner & Kroll 2005 J Agric Food Chem 53:4228"
+    lab: "Univ. Potsdam (Kroll)"
+    system: "chlorogenic, caffeic, ferulic, gallic acids, quercetin and others (0.03-0.5 mM) vs BSA, HSA, soy glycinin, lysozyme (45-181 uM)"
+    medium: "0.05 M Hepes or Na-acetate pH 7/6/4.8/3.5; Hummel-Dreyer size-exclusion, column 25 C"
+    temperature_c: [25]
+    ph: {initial: [3.5, 4.8, 6, 7], measured_during: false, final: null}
+    time_min: []
+    species: [chlorogenic acid, caffeic acid, ferulic acid, gallic acid, quercetin]
+    kind: endpoint
+    location: "Table 1 (K_D and n, one-site model; dossier sec. 3); Table 4 (Delta G, not reproducible)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "most likely the result of binding of gallic acid to the Hepes"
+    flags: [kd_header_backwards, site_count_missing_key_rows, table4_dg_not_reproducible, si_parts_i_iv_not_on_disk, authors_say_error_bars_too_small, "condition_not_stated: time_min"]
+    note: "Only protein-binding constant for a keyed non-volatile (chlorogenic acid) in the corpus; phenolics bind 2-3 orders harder than volatiles on the same sites (competition). Unused. SI not on disk; DOI 10.1021/jf0480290."
+  - id: rawel2005_tab2_3_quercetin_fluorescence_conditions
+    dossier: rawel2005_extraction.md
+    paper: "Rawel, Meidtner & Kroll 2005 J Agric Food Chem 53:4228"
+    lab: "Univ. Potsdam (Kroll)"
+    system: "quercetin vs BSA, HSA, soy glycinin, lysozyme, trypsin; pH, buffer and protein pre-heating conditions"
+    medium: "Hepes / acetate / phosphate; fluorescence enhancement (ex 370 nm); CD in 0.1 M phosphate"
+    temperature_c: [25]
+    ph: {initial: [3.5, 4.8, 6, 7, 7.4], measured_during: false, final: null}
+    time_min: []
+    species: [quercetin]
+    kind: endpoint
+    location: "Table 2 (K_D by condition; 'temperature' rows are pre-heated protein, not binding at T), Table 3 (secondary structure)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [temperature_rows_are_preheat_not_binding_temperature, trypsin_concentration_typo, "condition_not_stated: time_min"]
+    note: "pH and protein-preheat dependence of phenolic binding; unused."
+  # ---- free vs bound hexanal in soy (reversible release on heating) ----
+  - id: shi2022_tab2_hexanal_release_heated_spi_hydrolysates
+    dossier: shi2022_extraction.md
+    paper: "Shi, Hao, Wang, Chen, Zuo, Wan & Guo 2022 J Food Process Preserv 46:e16555"
+    lab: "China Agricultural University (Guo S)"
+    system: "acidic soy protein isolate hydrolysates (0-1.7 % protease) 30 mg/mL protein; also 7S/11S fractions, soymilk, fermented soymilk"
+    medium: "pH 4.5; headspace hexanal before and after 95 C / 5 min"
+    temperature_c: [95]
+    ph: {initial: [4.5], measured_during: false, final: null}
+    time_min: [5, 10]
+    species: [hexanal]
+    kind: endpoint
+    location: "Table 2 (before / after 95 C / released, ug/L, n = 3; the one consistent table); Table 1 rows 1, 3, 4; Fig. 4 7S/11S text values"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "blanched with 300 ml of NaHCO₃ solution (0.04 mol/L) at 80 °C for 3 min to deactivate lipoxygenases"
+    flags: [table1_row2_dropped_digits, table1_letters_defective, abstract_5x_claim_unsupported, fig4_axis_broken, ph_start_only, hold_time_5_or_10_min_not_stated_per_table, "also_relevant: lipid", table1_not_transcribed_in_dossier, fig4_no_sd]
+    note: "Heating RAISES free hexanal (bound -> released), opposite to matrix_sites.py's one-way covalent binding. Recorded in kinetic_core_b45_prereg.md sec. 3(a) as a documented mechanism the model lacks; refused as a constant, not scored. Row 1 (0 % protease) is the B45 completeness probe P1 (kinetic_core_b45_probe.json). Fig. 4: 11S releases far more hexanal than 7S on heating (text values; also cited in probe P1). Table 1 values not transcribed (row 2 corrupt); the hexanal off-note sits in the whey fraction."
+  # ---- covalent flavour-protein adducts (Reineccius, BLG); sulfur rows of the same papers are in sulfur.yml ----
+  - id: anantharamkrishnan2020_ph_t_aw_adduct_directions
+    dossier: anantharamkrishnan2020_extraction.md
+    paper: "Anantharamkrishnan & Reineccius 2020 J Agric Food Chem (ASAP; doi 10.1021/acs.jafc.0c06752)"
+    lab: "Univ. Minnesota (Reineccius)"
+    system: "benzaldehyde, citral, allyl isothiocyanate (+ DMTS pH/T, DMDS a_w) vs 1 wt % single-variant BLG A; a_w arm on freeze-dried powder"
+    medium: "doubly distilled water, pH set with 0.5 M HCl/NaOH; intact-protein ESI-MS"
+    temperature_c: [4, 20, 45]
+    ph: {initial: [3, 7, 8], measured_during: false, final: null}
+    time_min: []
+    species: [benzaldehyde, citral, allyl isothiocyanate]
+    kind: ranking
+    location: "sec. 4.1-4.3 of dossier (pH 3 < 7 < 8; 4 < 20 <= 45 C; a_w 0.11-0.75, only AITC responds); deconvoluted mass spectra figures; adduct inventory sec. 3"
+    status: in_model_fit
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [no_fittable_yield_or_rate, cross_linking_destroys_signal_45c, dmts_and_dmds_swap_between_arms, "condition_not_stated: time_min"]
+    note: "Sets PH_ADDUCT_GATE_BELOW = 3.0 (benzaldehyde Schiff base absent at pH 3) in parameters_matrix.py, used by matrix_oav.covalent_channel_state. The DMTS/DMDS adduct rows are sulfur.yml anantharamkrishnan2020_ms_blg_dmts_adducts (not repeated)."
+  - id: anantharamkrishnan2020b_sec5c_timescale_brackets
+    dossier: anantharamkrishnan2020b_extraction.md
+    paper: "Anantharamkrishnan, Hoye & Reineccius 2020 J Agric Food Chem (doi 10.1021/acs.jafc.0c01925)"
+    lab: "Univ. Minnesota (Reineccius)"
+    system: "flavour compounds at 12 ppth w/w vs 1 wt % BLG (enals ~122 mM; n-propanethiol ~158 mM; hexanal in panel)"
+    medium: "doubly distilled water, pH not stated (isolate pH 6.7), closed vessel, ambient; UPLC-ESI-qTOF"
+    temperature_c: [20]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [10, 2880]
+    species: [2-alkenals, n-propanethiol, hexanal, FFT]
+    kind: rate_constant
+    location: "dossier sec. 5c (two timescale brackets: enal adducts at 10 min; propanethiol 2:1 adduct 6 h vs 24 h) and sec. 6 (derived covalent hexanal bracket); Table 2 verdicts are anantharamkrishnan2020b_tab2_adduct_reactivity_verdict"
+    status: in_model_fit
+    quant_class: other
+    simulable: true
+    condition_quote: "reaction at ambient temperature"
+    flags: [temperature_not_numeric_ambient, reaction_ph_not_stated, replication_not_stated, molar_ratio_inconsistent_with_dose, dose_far_above_food_levels, derived_by_dossier, assumption_dominated, "also_relevant: lipid", "also_relevant: sulfur"]
+    note: "Sets PROTEIN_DISULFIDE_EXCHANGE_BRACKET (3.0e-6 to 1.22e-5 L/(mmol min)) in parameters_sulfur.py and the BLG hexanal bracket (1e-6 to 1e-5 M-1 s-1) inside matrix_sites.py saturated_aldehyde_amine; the 32-of-47 NO_ADDUCT gate. The 47-compound Tables 1-2 are sulfur.yml anantharamkrishnan2020b_tab1_tab2_blg_reactivity_panel (not repeated). Table 2 vs text conflict on DMDS carried in SOURCE_CONTRADICTIONS. The hexanal bracket conflicts with the parameters_lipid (37, 74) d bracket (meynier2004)."
+  - id: anantharamkrishnan2020b_tab2_adduct_reactivity_verdict
+    dossier: anantharamkrishnan2020b_extraction.md
+    paper: "Anantharamkrishnan, Hoye & Reineccius 2020 J Agric Food Chem (Just Accepted, doi 10.1021/acs.jafc.0c01925)"
+    lab: "University of Minnesota (Reineccius)"
+    system: "beta-lactoglobulin variant B 1 wt % (0.55 mM) + one flavour compound at 12 ppth (hexanal 120 mM) per vial; 47 compounds"
+    medium: "doubly distilled water, unbuffered, closed vessel"
+    temperature_c: []
+    ph: {initial: [], measured_during: false, final: null}
+    time_min: [10, 1440]
+    species: [hexanal, trans-2-hexenal, cis-3-hexenal, "trans,trans-2,4-heptadienal", 2-heptanone, 2-nonanone]
+    kind: ranking
+    location: "Table 2 (24 h binary verdict) + results-text aldehyde ladder (dossier secs. 4, 5a)"
+    status: in_model_fit
+    quant_class: other
+    simulable: false
+    condition_quote: "Aroma compounds analyzed and their reactivity with BLG (24 h reaction time)"
+    flags: [ph_not_stated, condition_uncertain, no_replicates, saturating_dose, mixed_lipid_nonlipid, internal_inconsistency, documentary_check_not_executed, "also_relevant: lipid", "also_relevant: sulfur"]
+    note: "Binary/ordinal only (MS peak presence). Sets ADDUCT_POSITIVE_CLASSES and UNSATURATION_ORDINAL_GATES G-1/G-2 in parameters_matrix.py. Ambient T never given. '2-nonenone' in Table 1 = 2-nonanone. Table-vs-text conflict on DMDS (non-lipid)."
+  - id: shepelev2024_figs2_4_14c_covalent_time_courses
+    dossier: shepelev2024_extraction.md
+    paper: "Shepelev & Reineccius 2024 J Agric Food Chem 72:10579"
+    lab: "Univ. Minnesota (Reineccius)"
+    system: "14C-decanal, 14C-2-undecanone, 14C-2-phenylethyl isothiocyanate, 14C-n-decane vs BLG 1.0 mg/mL powder (90 % protein), dosed mol-to-mol vs lysine"
+    medium: "double-distilled water + 0.5 mg/mL azide, unbuffered, pH never stated; 1.5 mL in 2 mL crimp vial; extraction + scintillation counting"
+    temperature_c: [25, 45, 65]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 40320]
+    species: [decanal, 2-undecanone, 2-phenylethyl isothiocyanate, n-decane]
+    kind: time_series
+    location: "Fig. 3 (decanal, digitised dossier sec. 4b), Fig. 4 (PEITC, sec. 7a), Fig. 2 (2-undecanone negative control); Ea derived sec. 6"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "The amount of C¹⁴-labeled flavor compound per sample was calculated on a mol-to-mol flavor compound-to-lysine basis in the protein isolate."
+    flags: [ph_never_stated_unbuffered, text_headline_contradicted_by_own_figure, molar_basis_pm40pct, ea_derived_three_points, channel_disabled_in_engine, coarse_read, "also_relevant: lipid"]
+    note: "Sets the 15-20 kJ/mol Ea band of matrix_sites.py aldehyde-amine classes and the COVALENT_CEILING retirement (Amendment 17 clause 6). The only temperature-resolved quantitative aldehyde-protein covalent dataset; no hexanal (decanal stands in). Also in parameters_lipid CovalentSinkCeiling. Fig. 2 2-undecanone read is low-confidence (<= 0.9 % reacted)."
+  # ---- release from plant-protein powders and beverages ----
+  - id: fischer2021_tab3_4_release_ph_pea_isolate
+    dossier: fischer2021_extraction.md
+    paper: "Fischer, Cachon & Cayot 2021 Food Res Int 150:110760"
+    lab: "AgroSup Dijon PAM (Cayot)"
+    system: "commercial Roquette pea protein isolate (two lots) 10 % w/v suspension; 9 beany volatiles"
+    medium: "distilled water (pH 6.5), 0.1 M HCl (pH 4.5) or 1 M HCl (pH 2.0); 2 mL in 20 mL vial; HS-SPME 40 C 30 + 60 min; external calibration in water"
+    temperature_c: [40]
+    ph: {initial: [2.0, 4.5, 6.5], measured_during: false, final: null}
+    time_min: [90, 90]
+    species: [hexanal, "1-hexanol", "1-octen-3-ol", "2-pentylfuran", nonanal, "(E)-2-nonenal", "3-octen-2-one", "2-ethylfuran", "3-methylbutanal", benzaldehyde, "2,5-dimethylpyrazine", "other beany volatiles (Table 3, 39 compounds)"]
+    kind: endpoint
+    location: "Table 3 (PPI1 areas vs extraction pH), Table 4 (ug/g isolate, both lots), Table 2 (calibration, LOD/LOQ)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "Distilled water was used for extraction at neutral pH (6.5), 0.1 M HCl for extraction at pH 4.5, and 1 M HCl ... for extraction at pH 2.0."
+    flags: [external_calibration_in_water_no_is, residual_lox_during_90min_uncontrolled, one_table3_cell_unreadable, octenol_arithmetic_does_not_close, lots_unprovenanced, unbuffered, ph_not_measured, lox_not_inactivated, lot_assignment_inferred, "also_relevant: lipid", "also_relevant: aroma_other"]
+    note: "Protein denaturation by acid releases bound volatiles (release pH, not process pH): a protein-bound reservoir measurement. Transcribed in data/lit/retention_reference_payloads.json (no engine consumer). Non-lipid rows: 3-methylbutanal (PPI2 only), benzaldehyde, and a pyrazine null (< 0.5 ug/g)."
+  - id: trikusuma2020_tab_s1_standard_addition_slopes
+    dossier: trikusuma2020_extraction.md
+    paper: "Trikusuma, Paravisini & Peterson 2020 Food Chem 312:126082"
+    lab: "Ohio State (Peterson)"
+    system: "commercial pea protein isolate (80 % protein, 8 % fat) 3 % w/w beverage with carrageenan, pH 7.1: non-UHT, UHT 140 C / 6 s, UHT aged 7 weeks at 5 C"
+    medium: "dynamic headspace GC/MS-QQQ with five-point standard addition in the beverage matrix (slopes vs water)"
+    temperature_c: []
+    ph: {initial: [7.1], measured_during: false, final: null}
+    time_min: []
+    species: [hexanal, "2-pentylfuran", nonanal, "1-octen-3-ol", "(E,E)-2,4-decadienal", "other Table 2 odorants quantified by standard addition"]
+    kind: ratio
+    location: 'SI ''Figure S1'' (not a Table S1): 20 standard-addition charts in the non-UHT beverage, data read from the charts'' embedded numeric caches and transcribed with OLS fits in dossier ''Supplementary material''. Table 2 concentrations are indexed in lipid.yml (trikusuma2020_tab2_*) and aroma_other.yml (trikusuma2020_tab2_pea_isolate_uht_maillard_odorants)'
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: 'Standard addition curves built in non-UHT beverages for selected aroma compounds (Ai: peak area of target compound; AISTD: peak area of internal standard).'
+    flags: [si_read_2026-10-29, no_water_reference_curves_no_matrix_factor, slopes_are_area_ratio_vs_4_heptanone, trendline_equations_not_stored_ols_refit, isolate_fat_8pct, 'condition_not_stated: temperature_c', 'condition_not_stated: time_min', 'also_relevant: lipid', 'also_relevant: aroma_other']
+    note: Beverage-only curves (no water curves), so no matrix/water suppression factor can be formed; the entry's intended use is not served. The curves' x-intercepts reproduce Table 2's non-UHT column (14/20 within 2 %; sulfurol +32 %, hexanal +8 %), validating it. DOI 10.1016/j.foodchem.2019.126082.
+  - id: tian2020b_tab2_yogurt_matrix_thresholds
+    dossier: tian2020b_extraction.md
+    paper: "Tian, Yu, Yu & Chen 2020 J Dairy Sci 103:7957"
+    lab: "Shanghai Institute of Technology (Chen C)"
+    system: "diacetyl, acetaldehyde, acetoin in a set-yogurt model (12 % skim powder, 0.170 % fat, 2.34 % protein, 1 % starch, 0.1 % pectin, pasteurised 95 C 5 min)"
+    medium: "pH 4.6 (lactic acid), stored 4 C; 3-AFC thresholds"
+    temperature_c: []
+    ph: {initial: [4.6], measured_during: false, final: null}
+    time_min: []
+    species: [diacetyl, acetaldehyde, acetoin]
+    kind: endpoint
+    location: "Table 2 (thresholds mg/L, with paired literature water values; dossier sec. 2); Table 1 dosing; Table 3, Figs. 1-2 synergy"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "1,810- and 139-fold higher"
+    flags: [water_leg_literature_not_same_panel, authors_name_method_confound, "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "Fully specified matrix; 500x intra-class spread refutes a uniform factor. Cited in matrix_oav.py only as corroboration of the Tian milk-unit resolution."
+  - id: k2_sec_a4_tian2020_milk_thresholds
+    dossier: k2_matrix_and_thresholds.md
+    paper: "Tian et al. 2020 (fresh milk thresholds), held second-hand in the K2 synthesis; units settled via tian2019"
+    lab: "Shanghai Institute of Technology (Chen C)"
+    system: "propanoic, butanoic, octanoic acids, octanal, nonanal, 2-nonanone, ethyl hexanoate in a fresh milk solution (fat, protein, pH not stated)"
+    medium: "10 mL covered brown bottle, 3-AFC ISO 13301, 15 panellists"
+    temperature_c: [20]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [propanoic acid, butanoic acid, octanoic acid, octanal, nonanal, 2-nonanone, ethyl hexanoate]
+    kind: endpoint
+    location: "k2 sec. A.4 (Tian 2020 Table 1, units cell printed '?/kg'); unit resolved in tian2019_extraction.md and matrix_oav.py"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "a fresh milk solution matrix"
+    flags: [primary_paper_has_no_dossier, units_printed_as_question_mark, sds_implausibly_small, milk_composition_not_stated, "condition_not_stated: time_min"]
+    note: "Proposed HOLD-OUT (k6b sec. 7b); deliberately not tabulated in MATRIX_THRESHOLDS. The Tian 2020 milk PDF has no per-paper dossier."
+  - id: starkenmann2008_saliva_thiol_quench
+    dossier: starkenmann2008_extraction.md
+    paper: "Starkenmann, Le Calve, Niclass, Cayeux, Beccucci & Troccaz 2008 J Agric Food Chem 56:9575"
+    lab: "Firmenich (Starkenmann)"
+    system: "free thiols released from cysteine-S-conjugates; detection in water vs crude human saliva (protein 0.59 mg/mL, pH 7.6)"
+    medium: "HPLC-fluorescence (Acrylodan) LOD in water and saliva"
+    temperature_c: []
+    ph: {initial: [7.6], measured_during: false, final: null}
+    time_min: []
+    species: [3-sulfanylhexan-1-ol, free thiols]
+    kind: ratio
+    location: "text p. 9578 (LOD water vs saliva); k2 sec. A.7 derives the same-method saliva/water quench"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [paper_3e6_factor_is_cross_modality, saliva_protein_literature_range_typo, "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "The only measured thiol quench by a biological protein matrix outside sulfur.yml; analytical, not sensory. The 3-sulfanylhexan-1-ol water threshold in matrix_oav.py WATER_THRESHOLDS is a reference input from this paper; the quench is unused."
+  # ---- meat-analogue process retention ----
+  - id: guo2020_tab1_2_hme_meat_analogue_retention
+    dossier: guo2020_extraction.md
+    paper: "Guo, Teng, Huang, Lv, Lv, Babich, Yu, Li, Wang & Jiang 2020 Food Hydrocoll 105:105752"
+    lab: "Northeast Agricultural University (Jiang L / Wang Z)"
+    system: "SPI + 0-40 % wheat gluten at 50-80 % material moisture, high-moisture twin-screw extrusion to 150 C; 16-compound spice flavouring dosed as beta-cyclodextrin inclusion powder"
+    medium: "extruded meat analogue; headspace GC-MS retention vs unextruded"
+    temperature_c: [150]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [p-anisaldehyde, p-isopropylbenzaldehyde, maltol, eugenol, anethole, estragole, terpenes, esters, total_flavour_retention]
+    kind: ratio
+    location: "Table 1 (retention vs gluten), Table 2 (retention vs moisture), Tables 3-6 (LF-NMR T2, secondary structure)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "quantified as 'the ratio of volatile flavor substances to the area of the TMP peak'"
+    flags: [retention_formula_not_printed, feed_rate_stated_two_ways_3.3x, cyclodextrin_carrier_uncontrolled, ofat_no_replication_stated, tables1_2_shared_sample_disagree, supplier_coauthors, barrel_temperature_not_product_temperature, residence_time_not_reported, "also_relevant: aroma_other", "condition_not_stated: time_min"]
+    note: "The corpus's only volatile retention through high-moisture extrusion of a meat analogue. Not the 'Guo 2020' binding paper Bi 2022 cites (that one is not on disk). None of the 16 compounds is keyed. Retention formula inferred as extrudate/raw ratio; aromatic aldehydes retain 8-21 %; total falls 2.3x from 50 to 80 % moisture."
+  # ---- measurement calibration facts the matrix code uses ----
+  - id: xin2026b_same_lab_hs_spme_reproducibility
+    dossier: Xin2026b_extraction.md
+    paper: "Xin, Cui, Liu, Nie, Huang & Qin 2026 (Xin2026b) vs Xin et al. 2026 Food Hydrocoll 182:113124 (xin2026)"
+    lab: "Dalian Polytechnic University (Qin L / Huang X)"
+    system: "nominally identical HME plant-protein base (SPI:NPI:WG 70:20:10, ~65 % moisture, same extruder settings) in two papers"
+    medium: "HS-SPME GC-MS, 2 g sample + cyclohexanone IS (single-IS semi-quantification)"
+    temperature_c: [140]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [hexanal, "2-pentylfuran", nonanal, "2-heptanone"]
+    kind: ratio
+    location: "Xin2026b dossier sec. 2 / sec. 6 (cross-paper comparison); k3 inventory line 100; companion xin2026_extraction.md Figs. 6-7 (figure-only)"
+    status: in_model_fit
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "The final product has a moisture content of around 65 %."
+    flags: [calibration_fact_not_dataset, figure_only_in_companion, coarse_read, "derived_from: lipid:xin2026_fig6_7_volatile_heatmap_bars", "also_relevant: lipid", "condition_not_stated: time_min"]
+    note: "Sets HS_SPME_SAME_SAMPLE_DISPERSION = (10, 23) in parameters_matrix.py, consumed by matrix_oav.py and uncertainty.py interval widths. Also the protein-source effect at constant process (12.4x total aldehydes) in Xin2026b p. 9."
+  - id: k4b_sec_d2_hexanal_kaw_literature_range
+    dossier: k4b_paired_thresholds_and_browning.md
+    paper: "K4b synthesis: EPI-Suite (via Meynier Table I), Meynier 2003 measured, Hall & Anderson 1983 (via Meynier)"
+    lab: "synthesis"
+    system: "hexanal in water (Hall & Anderson with ammonium sulphate salting-out)"
+    medium: "static headspace (Meynier), salted headspace (Hall & Anderson), estimator (EPI)"
+    temperature_c: [25, 30]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [hexanal]
+    kind: endpoint
+    location: "k4b sec. D.2 table (three K_aw values, 9.5x spread)"
+    status: in_model_fit
+    quant_class: other
+    simulable: true
+    condition_quote: ""
+    flags: [hall_anderson_second_hand_not_on_disk, hall_anderson_salted_medium, estimator_value_not_measured, "condition_not_stated: time_min"]
+    note: "Sets K_AW_UNCERTAINTY_DECADES = 0.5 and K_AW_HEXANAL_WATER_GUARD (1.9e-3, 1.8e-2). Hall & Anderson 1983 LWT 16:362 (aldehyde K_aw vs T incl. di-unsaturated) is the highest-value missing primary on partition."
+  # ---- protein reactive-site densities behind data/species/protein_matrices.yml (matrix_sites.py) ----
+  - id: gao2020_tab2_pea_isolate_free_sh_ss
+    dossier: gao2020_extraction.md
+    paper: "Gao, Shen, Lan, Cui, Ohm, Chen & Rao 2020 Food Res Int 131:109045"
+    lab: "North Dakota State Univ. / USDA-ARS Fargo (Rao)"
+    system: "yellow pea protein isolate, alkaline extraction at pH 8.5 / 9.0 / 9.5 then isoelectric precipitation (83-85 % protein)"
+    medium: "Ellman's DTNB in 8 M urea; per g isolate powder"
+    temperature_c: []
+    ph: {initial: [8.5, 9.0, 9.5], measured_during: false, final: null}
+    time_min: []
+    species: [protein free thiol, protein disulfide, total SH]
+    kind: endpoint
+    location: "Table 2 (exposed free SH, total SH, S-S, umol/g isolate, with letters; dossier sec. 3); Table 1 proximate for the protein-basis conversion"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [per_g_powder_converted_to_protein_by_dossier, "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "Sets pea_isolate free_thiol (0.0159) and disulfide (0.0257 mmol/g protein) central values and the band tops in protein_matrices.yml, which charges PROT_SS (sulfur lane thiol-to-protein exchange) via matrix_sites.py. The extraction-pH axis is a preparation variable, not a cooking one. Gao's volatile/LOX data sit in lipid.yml and aroma_other.yml."
+  - id: ruan2014_text_soy_free_sh_ss_native_heated
+    dossier: ruan2014_extraction.md
+    paper: "Ruan, Chen, Kong & Hua 2014 Food Chem 156:14"
+    lab: "Jiangnan (Hua Y)"
+    system: "laboratory soy protein, DTT-reduced to 7.5-75.9 umol SH/g, 22.5 mg/mL, unheated and heated 100 C / 30 min"
+    medium: "4,4'-dithiodipyridine in 2 % SDS"
+    temperature_c: [100]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 30]
+    species: [protein free thiol, protein disulfide]
+    kind: endpoint
+    location: "text values only, sec. 3.1.1 (Fig. 1a) and sec. 3.2.3 (Fig. 3a); dossier sec. 3; intermediate DTT levels figure-only"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "increased from 0.75 ± 0.1 to 50.2 ± 0.3"
+    flags: [unheated_ss_not_printed_inferred_from_half_cystine, intermediate_levels_figure_only]
+    note: "Native free SH 7.5 umol/g enters soy_isolate free_thiol mean and the S-S (~53, inferred) the disulfide mean in protein_matrices.yml; the 100 C / 30 min values are the heated_reference note (heating not modelled: soy loses 90 % of free SH)."
+  - id: shimada1988_text_spi_sh_half_cystine_gels
+    dossier: shimada1988_extraction.md
+    paper: "Shimada & Cheftel 1988 J Agric Food Chem 36:147"
+    lab: "USTL Montpellier (Cheftel)"
+    system: "commercial soy protein isolate, unheated and heat-set gels 0.9-18.2 % protein, 80-130 C / 30-60 min, pH 6.7-10"
+    medium: "Ellman's DTNB in 6 M urea + 0.5 % SDS; half-cystine by DTT + gel filtration and by amino-acid analysis"
+    temperature_c: [80, 130]
+    ph: {initial: [6.7, 10], measured_during: false, final: null}
+    time_min: [30, 60]
+    species: [protein free thiol, total SH, half-cystine]
+    kind: endpoint
+    location: "Results text (unheated SH 8.0, half-cystine ~100 / 104.0; dossier sec. 3.1); heated series Figs. (figure-only, text statements sec. 3.3); sec. 3.2 cited 11S literature values"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "initial 8 µmol/g of protein"
+    flags: [heated_curves_figure_only, ss_derived_not_measured]
+    note: "Enters soy_isolate free_thiol mean and derived S-S (46 umol/g) in protein_matrices.yml. The only soy SH/S-S series across 80-130 C (figure-only): sites change during the cook, which matrix_sites.py does not model."
+  - id: chihi2016_tab1_pea_globulin_blg_sh_ss
+    dossier: chihi2016_extraction.md
+    paper: "Chihi, Mession, Sok & Saurel 2016 J Agric Food Chem (doi 10.1021/acs.jafc.6b00087)"
+    lab: "AgroSup Dijon PAM (Saurel)"
+    system: "pea globulins (94 % protein), beta-lactoglobulin and their mixtures, 2 wt %, native and 85 C / 60 min"
+    medium: "Ellman's in 1.5 M GdnCl; pH 7.2"
+    temperature_c: [85]
+    ph: {initial: [7.2], measured_during: false, final: null}
+    time_min: [0, 60]
+    species: [protein free thiol, protein disulfide, surface hydrophobicity]
+    kind: endpoint
+    location: "Table 1 (H0, SH, S-S of unheated and heated pea globulin, BLG and mixtures); Tables 2-3 (DLS, SEC)"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [globulin_fraction_not_whole_isolate]
+    note: "Sets the LOW end of pea_isolate free_thiol and disulfide bands and the heated_reference note in protein_matrices.yml. Only paper titrating pea globulin and BLG under one protocol (BLG cross-check of the sequence-based blg entry)."
+  - id: chen2022_fig6a_pea_isolate_sh_heated
+    dossier: chen2022_extraction.md
+    paper: "Chen, Wang, Zhang, Yang, Du, Yu & Xie 2022 Innov Food Sci Emerg Technol 77:102959"
+    lab: "Northeast Agricultural University (Yu D / Xie F)"
+    system: "lab pea protein isolate (87.4 % protein), 1 %, pH 7, conventional or ohmic heating at 95 C"
+    medium: "SH in native buffer and in 8 M urea"
+    temperature_c: [95]
+    ph: {initial: [7], measured_during: false, final: null}
+    time_min: [0, 15]
+    species: [protein free thiol]
+    kind: endpoint
+    location: "Fig. 6a (SH, figure-only except text values); Table 1 secondary structure; Table 2 gel texture"
+    status: figure_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [native_value_figure_bounded]
+    note: "Cited in protein_matrices.yml pea_isolate as lying inside the band (does not set a value) and in heated_reference."
+  - id: vega1994_text_guadagni_water_paraffin_thresholds
+    dossier: vega1994_extraction.md
+    paper: "Vega & Brewer 1994 J Food Lipids 1:229 (quoting Guadagni et al. 1963 / 1972)"
+    lab: "Univ. Illinois (Brewer); primary USDA Albany (Guadagni, Buttery)"
+    system: "pentanal, hexanal, heptanal, t-2-hexenal, t-2-octenal, t,t-2,4-decadienal thresholds in water and paraffin oil"
+    medium: "classical dilution (Guadagni), second-hand"
+    temperature_c: [22]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [pentanal, hexanal, heptanal, t-2-hexenal, t-2-octenal, "t,t-2,4-decadienal"]
+    kind: endpoint
+    location: "running text pp. 234-235 (dossier 'Numbers printed in the running text (and NOT measured here)'); k2 sec. A.3"
+    status: in_model_fit
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [second_hand_primary_not_on_disk, vega_miscites_1972_venue, "condition_not_stated: time_min"]
+    note: "Water values are WATER_THRESHOLDS reference inputs and the denominator of every gelatin/water ratio; paraffin-oil values are MATRIX_THRESHOLDS (paraffin_oil) in matrix_oav.py. Primaries Guadagni 1963 / Guadagni, Buttery & Turnbaugh 1972 JSFA 23:1435 are not on disk."
+  # ---- release from meat-analogue matrices during oral processing ----
+  - id: conti2025b_fig2_sodium_glutamate_saliva_release
+    dossier: conti2025b_extraction.md
+    paper: "Conti, Septier, Gourrat, Laboure & Salles 2025 Food Res Int 218:116938 (Part II)"
+    lab: "Unesp Sao Jose do Rio Preto / CSGA Dijon (Salles)"
+    system: "textured soy protein concentrate + 1.5 % thiamine extruded at 30 %/180 C, 34 %/160 C, 38 %/140 C, hydrated, salted, MSG, +- oil; 8 panellists"
+    medium: "saliva collected at 1/3, 2/3, 3/3 of mastication time; ion chromatography"
+    temperature_c: [140, 160, 180]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [sodium, glutamic acid]
+    kind: time_series
+    location: "Fig. 2A/B (release into saliva, figure-only); Supplementary Table 3 (the numeric values) not on disk; significance contrasts in text sec. 3.1"
+    status: supplement_missing
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [numbers_only_in_si, figure_only_in_article, "condition_not_stated: time_min"]
+    note: "The corpus's only in-mouth release-kinetics measurement from a meat analogue (taste compounds, not odorants); the extrusion condition and oil change release. SI Tables 1-3 not on disk; DOI 10.1016/j.foodres.2025.116938. Volatile Table 2 of this paper sits in sulfur/lipid/aroma_other ledgers."
+  - id: conti2025_figs_bolus_properties_texture
+    dossier: conti2025_extraction.md
+    paper: "Conti, Septier, Gourrat, Laboure & Salles 2025 Food Res Int 208:116169 (Part I)"
+    lab: "Unesp Sao Jose do Rio Preto / CSGA Dijon (Salles)"
+    system: "same six textured soy protein products (3 extrusion conditions x +- oil); 8 panellists"
+    medium: "texture profile analysis; in-vivo mastication: bolus moisture, saliva uptake, particle geometry at 1/3, 2/3, 3/3"
+    temperature_c: [140, 160, 180]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [bolus moisture, particle area, texture parameters]
+    kind: other
+    location: "Table 1 (salivary flux, carrot bolus), Table 2 (mastication times), Table 3 (bolus moisture, n = 24), Table 4 (GLM significance); bolus figures, PCA, MFA figure-only; Supplementary Table 1 not on disk"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "In Part II, the focus will be on the release of sodium and glutamic acid from the products to the saliva and on their sensory aspects."
+    flags: [no_volatile_measured, si_table1_not_on_disk, "condition_not_stated: time_min"]
+    note: "Matrix-physics covariates (bolus surface, saliva uptake) for any future release model of a meat analogue; no engine consumer."
+  # ---- matrix-to-vapour release during cooking ----
+  - id: lee2024_fig4c_matrix_vapour_transport_constants
+    dossier: lee2024_extraction.md
+    paper: "Lee et al. 2024 Food Res Int 183:114183 (SayFood model cake, volatile half)"
+    lab: "INRAE / AgroParisTech SayFood"
+    system: "model sponge cakes with glucose or glucose + leucine; 10 volatile markers (furfural, 5-HMF, 5-methylfurfural, acetic acid, 3-methylbutanal, pyrazines)"
+    medium: "oven at 140/170/200 C, fan 25/50 Hz, on-line trapping of oven vapour (0.05 L/min air), TD-GC-MS with isotope standard addition"
+    temperature_c: [140, 170, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 120]
+    species: [furfural, 5-HMF, 5-methylfurfural, acetic acid, 3-methylbutanal, alkylpyrazines]
+    kind: rate_constant
+    location: "Fig. 4C (k_a appearance and k_d disappearance constants, reparameterised Arrhenius, printed in-figure, not typed); Figs. 1-3 vapour time courses; Table 1 markers incl. log P"
+    status: figure_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "It should be noted that ka finally expresses several contributions: – one linked to the partition between the matrix and the vapor that could resemble a partition coefficient …"
+    flags: [transport_constant_not_chemistry, t_ref_not_stated, kd_mechanism_unidentified, si_figs_s1_s4_not_on_disk, "also_relevant: trunk"]
+    note: "The corpus's only fitted matrix-to-vapour release rates at baking temperature (lumping matrix/vapour partition, water evaporation flux and a first-order term). Must not enter any chemistry lane (research_round3_channels.md A.3.4); unused by the matrix layer, which has no evaporation term. Condition quote is from research_round3_channels.md's verbatim citation, reproduced in the lee2024 dossier sec. 2 paraphrase."
+
+  - id: feng2022_tab_s2_s3_oav_cited_thresholds
+    dossier: feng2022_extraction.md
+    paper: Feng et al. 2022 J Agric Food Chem 70:9095
+    lab: Jiangnan (Zhang X / Cui H / Ho)
+    system: RG-ARP 20 mM alone and + GSH 20 mM (OAVs of the Table 1/2 volatiles)
+    medium: unbuffered water, pH 7.0; thresholds 'in water' cited from literature
+    temperature_c: [100, 120]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [30, 120]
+    species: [MFT, FFT, furfural, 2-methylthiophene, thiazole, thiophene, 2-thiophenecarboxaldehyde, 2(5H)-furanone, methylpyrazine, furans]
+    kind: other
+    location: SI Tables S2 and S3 (thresholds in water, ug/L, and OAVs; transcribed in dossier 'Supplementary material' S-c)
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: The OAVs of Volatile Compounds in the RG-ARP Model Reactions at Different Temperatures (100 C and 120 C)
+    flags: [thresholds_cited_not_measured, oav_is_arithmetic_on_tables_1_2, 2_5h_furanone_threshold_0_04_implausible, 'also_relevant: sulfur']
+    note: 'Thresholds used: MFT 0.007, FFT 0.036, thiazole 38, 2-methylthiophene 885 ug/L etc.; sources not given in the SI. No new measurement. Do not import the 2(5H)-furanone threshold.'
+
+  - id: barallatperez2023_text_pooled_percent_bound
+    dossier: barallatperez2023_extraction.md
+    paper: Barallat-Perez, Janssen, Martins, Fogliano & Oliviero 2023 J Agric Food Chem 71:20274
+    lab: Wageningen FQD (Oliviero / Fogliano)
+    system: 'commercial PPI, SPI, LPI (and WPI) 1 % w/v isolate + one flavour at 5 mg/L: heptanal, trans-2-heptenal, cis-4-heptenal, octanal, 2-octanone, 2-octanol'
+    medium: 50 mM sodium phosphate pH 7.0, 20 mL vial (2 mL), held 3 h (30/70/90 C, which one for these figures not stated); static HS GC-MS after 14 min at 40 C
+    temperature_c: [40]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [180]
+    species: [heptanal, trans-2-heptenal, cis-4-heptenal, octanal, 2-octanone, 2-octanol]
+    kind: endpoint
+    location: 'Results text (pooled PPI/SPI/LPI ranges: 13.73-54.60, 18.19-54.60, 14.73-52.76, 28.85-57.7, 17.53-23.30 %); per-protein values in Figs. 1-2 (figure-only); dossier sec. 3'
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: a final protein solution of 1 wv% and 5 mg/L flavor concentration was obtained
+    flags: [percent_bound_eq1_not_a_constant, pooled_range_endpoints, isolate_powder_basis, hold_temperature_not_stated, 2_octanone_14_73_vs_17_53_internal_inconsistency, 'also_in_binding_constants_yml: barallat2023_*']
+    note: Records already in data/lit/binding_constants.yml (barallat2023_octanal/2octanone/heptanal/trans2heptenal/cis4heptenal_plant_isolates_pooled) match the text. No nonanal, no mucin, no K anywhere in the paper.
+
+  - id: barallatperez2023_figs3_4_lupin_ketones_hexanal_storage
+    dossier: barallatperez2023_extraction.md
+    paper: Barallat-Perez, Janssen, Martins, Fogliano & Oliviero 2023 J Agric Food Chem 71:20274
+    lab: Wageningen FQD (Oliviero / Fogliano)
+    system: PPI, SPI, LPI native and defatted (DPPI, DSPI, DLPI) with 2-heptanone, 2-octanone, 2-nonanone, 2-decanone (Fig. 3); PPI, SPI, LPI, WPI with hexanal stored after 5 / 70 / 90 C (Fig. 4)
+    medium: 1 % w/v isolate, 5 mg/L flavour, 50 mM phosphate pH 7.0; Fig. 4 samples held 3 h then stored at 5 C and measured weekly
+    temperature_c: [5, 70, 90]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: []
+    species: [hexanal, 2-heptanone, 2-octanone, 2-nonanone, 2-decanone]
+    kind: endpoint
+    location: Figs. 3 and 4 (bar charts, per protein incl. lupin; not digitised); text gives only fat-effect differences (e.g. LPI vs DLPI 2-decanone +8.34 +/- 10.45 %) and the hexanal ordering SPI > LPI > PPI ~ WPI
+    status: figure_only
+    quant_class: other
+    simulable: false
+    condition_quote: 'hexanal at 5 mg/L and protein isolates at 1%wv: pea (PPI), soy (SPI), lupin (LPI), and whey (WPI) during storage at 5 C (A), 70 C (B), and 90 C (C)'
+    flags: [percent_bound_eq1_not_a_constant, isolate_powder_basis, storage_weeks_not_numbered_in_text, 'condition_not_stated: time_min', cited_by_parameters_matrix_holdout_sealed_binding_wrongly]
+    note: The only lupin binding numbers in the paper, and they are bars. HOLDOUT_SEALED_BINDING (parameters_matrix.py:609-615) cites this paper for kg_ (L/g) lupin constants incl. nonanal, which the paper never measures; see dossier sec. 5.
+
+  - id: barallatperez2023_tab1_tab2_h0_sulfhydryl_isolates
+    dossier: barallatperez2023_extraction.md
+    paper: Barallat-Perez, Janssen, Martins, Fogliano & Oliviero 2023 J Agric Food Chem 71:20274
+    lab: Wageningen FQD (Oliviero / Fogliano)
+    system: commercial PPI (AGT FYPP-85-C-EU), SPI (Supro XT219D IP), LPI (ProLupin 10600), WPI (BiPro); non-heated and heated
+    medium: 'H0: 10 mM phosphate pH 7.0, 8-ANS fluorescence; -SH: Ellman, Tris-glycine-EDTA pH 8.0 +/- 8 M urea'
+    temperature_c: [5, 70, 90]
+    ph: {initial: [7.0, 8.0], measured_during: false, final: null}
+    time_min: []
+    species: [surface_hydrophobicity_H0, exposed_sulfhydryl, total_sulfhydryl]
+    kind: other
+    location: Table 1 (H0 with 95 % CI at 5/70/90 C) and Table 2 (exposed and total -SH, umol/g, NH vs H); transcribed in dossier sec. 3
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: The exposed -SH contents (umol -SH/g) were calculated by eq 2
+    flags: [protein_site_density_candidate, lupin_not_in_protein_matrices_yml, h0_90c_text_percentages_relative_to_70c, 'condition_not_stated: time_min', 'also_relevant: sulfur']
+    note: 'Measured thiol densities of four commercial isolates (e.g. LPI total -SH 11.42 -> 10.26 umol/g on heating; SPI 15.62 -> 11.54). Basis: per g isolate. Candidate input for matrix_sites thiol densities; unused.'

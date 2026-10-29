@@ -53,6 +53,16 @@ from src import data_paths  # noqa: E402
 B8 = None  # bound in main() to the wave's fit module
 OUT = data_paths.VALIDATION_DIR / "kinetic_core_b8_profile.json"
 KS = (-3, -2, -1, 0, 1, 2, 3)
+#: 2026-10-28 (B60): the DATA-ADMISSIBLE interval of every coordinate the Laplace leaves unidentified.
+#: The envelope used to draw those flat across the optimiser's declared box ([-10, 0.5] for a
+#: log10 k), and the rows reject part of it: B60's k_thiol_decay is flat to -2.5 and then rises
+#: by 714 at the box's top. The walk goes from the optimum to each bound in WALK_POINTS equal steps
+#: and stops at the first point whose cost rise exceeds 0.5 * ADMISSIBLE_DELTA_CHI2 * chi2_red: the
+#: 95 % one-parameter chi-square, halved because the cost is 0.5 r.r, and scaled by the reduced
+#: chi-square exactly as the Laplace covariance is. The edge is interpolated linearly inside that
+#: step. Still a SLICE: re-optimising the others could only widen it.
+ADMISSIBLE_DELTA_CHI2 = 3.84
+WALK_POINTS = 12
 
 
 def _cost(x: np.ndarray) -> float:
@@ -71,6 +81,33 @@ def _slice(args):
         x[i] = value
         points.append({"k": k, "value": value, "clipped": bool(clipped), "cost": _cost(x)})
     return j, key, kind, sigma, points
+
+
+def _walk(args):
+    j, i, x_opt, lo, hi = args
+    points: List[Dict[str, Any]] = []
+    for side, end in (("down", lo), ("up", hi)):
+        for value in np.linspace(float(x_opt[i]), end, WALK_POINTS + 1)[1:]:
+            x = x_opt.copy()
+            x[i] = float(value)
+            points.append({"side": side, "value": float(value), "cost": _cost(x)})
+    return j, points
+
+
+def admissible_band(centre: float, lo: float, hi: float, points: List[Dict[str, Any]], cost0: float,
+                    threshold: float) -> List[float]:
+    """The contiguous interval around ``centre`` whose slice cost rise stays within ``threshold``."""
+    band = []
+    for side, end in (("down", lo), ("up", hi)):
+        edge, prev_v, prev_rise = end, centre, 0.0
+        for p in (q for q in points if q["side"] == side):
+            rise = p["cost"] - cost0
+            if rise > threshold:
+                edge = prev_v + (p["value"] - prev_v) * (threshold - prev_rise) / max(rise - prev_rise, 1e-12)
+                break
+            prev_v, prev_rise = p["value"], max(rise, 0.0)
+        band.append(float(edge))
+    return band
 
 
 def main(argv=None) -> int:
@@ -99,15 +136,19 @@ def main(argv=None) -> int:
     tasks = []
     for j, i in enumerate(idx):
         lo, hi = float(lower[i]), float(upper[i])
-        sigma = float(lap["sigma"][j])
+        sigma = float("nan") if lap["sigma"][j] is None else float(lap["sigma"][j])
         if not (np.isfinite(sigma) and lap["identified"][j]):
             sigma = 0.1 * (hi - lo)
         tasks.append((j, i, keys[j], lap["coordinates"][j]["kind"], x_opt, lo, hi, sigma, jtj_diag[j]))
+    walks = [(j, i, x_opt, float(lower[i]), float(upper[i])) for j, i in enumerate(idx) if not lap["identified"][j]]
     if args.workers > 1:
         with multiprocessing.get_context("fork").Pool(args.workers) as pool:
             results = pool.map(_slice, tasks, chunksize=1)
+            walked = dict(pool.map(_walk, walks, chunksize=1))
     else:
         results = [_slice(t) for t in tasks]
+        walked = dict(_walk(w) for w in walks)
+    threshold = 0.5 * ADMISSIBLE_DELTA_CHI2 * float(lap.get("reduced_chi_square") or 1.0)
 
     rows = []
     verdict_counts: Dict[str, int] = {}
@@ -143,12 +184,19 @@ def main(argv=None) -> int:
                 "verdict": verdict,
             }
         )
+        if j in walked:
+            i = idx[j]
+            rows[-1]["box_walk"] = walked[j]
+            rows[-1]["admissible_band"] = admissible_band(
+                float(x_opt[i]), float(lower[i]), float(upper[i]), walked[j], cost0, threshold)
+            rows[-1]["declared_band"] = [float(lower[i]), float(upper[i])]
     payload = {
         "artifact": "kinetic_core_b8_profile",
         "generated_on": time.strftime("%Y-%m-%d"),
         "method": "slice profile (other coordinates fixed at the optimum), quick pH fixed point, k in -3..3",
         "cost_at_optimum": cost0,
-        "n_evaluations": len(KS) * len(keys),
+        "n_evaluations": len(KS) * len(keys) + 2 * WALK_POINTS * len(walks),
+        "admissible_threshold_cost_rise": threshold,
         "wall_seconds": round(time.time() - t0, 1),
         "verdict_counts": dict(sorted(verdict_counts.items())),
         "rows": rows,
@@ -157,7 +205,9 @@ def main(argv=None) -> int:
             "means the Gaussian over-states one side; 'flat' means the data do not constrain it "
             "within 3 sigma; 'bound_limited' means the declared band, not the data, ends the slice; "
             "'shifted' means the frozen vector is not at the slice minimum (quick vs careful "
-            "integration, or a converged-on-a-bound optimum)."
+            "integration, or a converged-on-a-bound optimum). For every coordinate the Laplace leaves "
+            "unidentified, 'admissible_band' is the slice interval whose cost rise stays within "
+            "'admissible_threshold_cost_rise'; the envelope draws such a coordinate flat across it."
         ),
     }
     payload["wave"] = wave
@@ -174,6 +224,12 @@ def main(argv=None) -> int:
             f"{r['quadratic_prediction']['2']:.3f} | {'-' if r['asymmetry_2sigma'] is None else f'{r['asymmetry_2sigma']:.2f}'} | "
             f"{r['slice_min_k']} | **{r['verdict']}** |"
         )
+    walked_rows = [r for r in rows if "admissible_band" in r]
+    if walked_rows:
+        md += ["", f"## Data-admissible bands of the unidentified coordinates (slice cost rise <= {threshold:.2f})", "",
+               "| coordinate | declared band | admissible band |", "|---|---|---|"]
+        md += [f"| {r['key']} | [{r['declared_band'][0]:.4g}, {r['declared_band'][1]:.4g}] | "
+               f"[{r['admissible_band'][0]:.4g}, {r['admissible_band'][1]:.4g}] |" for r in walked_rows]
     out.with_suffix(".md").write_text("\n".join(md) + "\n", encoding="utf-8")
     print(f"wrote {out}: {payload['verdict_counts']} wall={payload['wall_seconds']}s")
     return 0

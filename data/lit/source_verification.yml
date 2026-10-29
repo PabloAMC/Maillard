@@ -1,0 +1,20 @@
+# SOURCE VERIFICATION: which measurement-ledger entries were checked against the paper itself, by whom, and how.
+#
+# Owner, 2026-10-29: guard against the error class that cost the most this week. Rows entered fits on the strength
+# of a dossier's summary: a pH 5.5 run labelled pH 7, a semi-quantitative ladder treated as calibrated, one data set
+# counted three times. A dossier is a reading of a paper, not the paper. An entry here records that the PAPER (or its
+# supplement) was read for this data set, and what was checked.
+#
+# Rules (scripts/ci/source_verification_gate.py):
+#   * every `ledger_id` exists in a measurement ledger; every `source_file` names a file the owner holds
+#     (data/articles/ is not in git, so the gate checks the name's form, not the file);
+#   * every row of a keyed fit table (data/lit/fit_rows/*.yml) points at a ledger id verified here, with every
+#     check passed; a row whose entry is unverified cannot enter a fit;
+#   * `second_reader` names a reading independent of the one that wrote the dossier (another agent or person, given
+#     the paper and not the dossier's conclusions).
+# checks: conditions (T, time, pH and where it was measured, buffer and strength, concentrations, vessel),
+#         units, quantification (sida / calibrated / semi_quantitative / relative, and the evidence), duplicates
+#         (the ledger's `same_data_as` or the conflicts register's duplicate entries), values (a sample of
+#         transcribed numbers against the table or figure).
+
+entries: []

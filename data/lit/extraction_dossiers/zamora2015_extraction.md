@@ -208,3 +208,36 @@ products would take the PEA/PAC split from here.
 9. **Amine → aldehyde conversion** (ref 14, pH ≥ 6 inhibited) is part of the measured PEA/PAC and
    is not separable here.
 10. Registry gaps: 2-phenylethylamine and all lipid carbonyls have no `compounds.yml` rows.
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+Source: `data/articles/zamora2015_supplementary.pdf` (7 pp.: title page + Figs. S1–S6, one per page; no tables). Read with
+`pdftotext -layout`; Fig. S5 checked on a 110-dpi render. **Figures only — described, not digitised.**
+
+⚠️ **Text-layer unit artefact, not a paper error:** `pdftotext` renders the axis labels as "nmol/mol Phe", "DD (mol)" and
+"Water added (L)"; the raster shows **nmol/µmol Phe**, **µmol** and **µL** (the µ glyph is dropped by the text layer).
+Units therefore agree with main Table 1 (nmol/µmol Phe = 0.1 mol %).
+
+Common conditions (captions, verbatim fragments): *"Equimolecular mixtures of both compounds (10 µmol of each) were heated"*
+— phenylalanine + 2,4-decadienal (DD), the sand system of §2; products PEA (2-phenylethylamine), PAC (phenylacetaldehyde),
+BZA (benzaldehyde).
+
+| fig. | variable swept | conditions (from caption) | y-axes (nmol/µmol Phe) | content |
+|---|---|---|---|---|
+| S1 | O2, 0–100 % | *"heated for 1 h at 140 ºC in: (A) sodium citrate buffer, pH 3; and (B) sodium phosphate buffer, pH 6"* | PEA 0–36 (left), PAC & BZA 0–300 (A) / 0–150 (B) (right) | PEA falls with O2 (to ~0 at pH 6 above ~20 %); PAC and BZA rise steeply to ~20 % O2 |
+| S2 | pH 2.15–9 | *"heated under nitrogen for 1 h at 140 ºC. Open symbols correspond to sodium citrate buffers (pH 2.15–6) and closed symbols correspond to sodium phosphate (pH 6–8) and sodium borate (pH 9) buffers"* | PEA, PAC, BZA on one axis 0–30 | the pH series of §3 "Numbers in the text"; **the atmosphere is stated: nitrogen** (closes the ledger's "pH-series atmosphere unstated") |
+| S3 | DD amount 0–10 µmol (Phe fixed 10 µmol) | *"heated under nitrogen for 1 h at 140 ºC in: (A) ... pH 3; and (B) ... pH 6"* | PEA 0–30; PAC & BZA 0–30 (A), 0–12 (B) | dose series |
+| S4 | water added 0–200 µL | *"heated under nitrogen for 1 h at 140 ºC in: (A) ... pH 3; and (B) ... pH 6"* | PEA 0–40; PAC & BZA 0–40 (A), 0–9 (B) | water series |
+| S5 | time 0–30 min, **100, 120, 140, 160 °C** | *"heated under nitrogen ... in sodium citrate buffer, pH 3"* | PEA 0–40; PAC 0–44 | linear (zero-order) time courses with fitted lines; the 140 and 160 °C PEA series stop at 15 and 10 min |
+| S6 | time 0–30 min, **100, 120, 140, 160, 170 °C** | *"heated under nitrogen ... in sodium phosphate buffer, pH 6"* | PEA 0–60; PAC 0–8 | as S5 |
+
+**What this settles.**
+- The **k(T) behind the printed Ea** (PEA 51/65, PAC 74/40 kJ/mol at pH 3/6) are the **slopes of Figs. S5/S6**; no
+  numeric k is printed anywhere (main text or SI). **pH 3 has four temperatures (no 170 °C); pH 6 has five.** The
+  kinetics window is **0–30 min**, not the 1 h of the sweeps.
+- The O2, pH, dose and water sweeps exist only as these figures; their endpoints remain text-quoted (§3).
+- Digitising S5/S6 (~6 points × 9 series) would let the repo re-derive the four Ea and their uncertainty; not done here.
+
+**Model use.** Partly / figure-only: no table; the k(T) series are recoverable only by digitising Figs. S5–S6.

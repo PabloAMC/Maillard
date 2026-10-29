@@ -1,0 +1,3727 @@
+{
+  "artifact": "sulfur_flux_attribution",
+  "provenance": {
+    "artifact": "sulfur_flux_attribution",
+    "generated_on": "2026-10-29",
+    "git": {
+      "commit": "157e38dc56819be52104abf7cec5a5217acfdf33",
+      "short": "157e38dc",
+      "branch": "sulfur-route-and-tooling",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_sulfur_flux_attribution.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b60_fit_report.json",
+        "sha256": "8e33492dea4c5d84c36eac4f1f9f4c9a87143597367574b58ff0af5a183215c3"
+      },
+      {
+        "path": "src/kinetic_core/sulfur.py",
+        "sha256": "e09d1511c5b0bee93d2b6d16b61fab588c3fb8088c1b6537bda9f0d5691138a1"
+      }
+    ]
+  },
+  "calibration": "results/validation/kinetic_core_b60_fit_report.json",
+  "ph_numerics": {
+    "node_grid": "log_and_linear",
+    "fixed_point": "relaxed_converged"
+  },
+  "pots": {
+    "hofmann1998_ribose_cys_ph5_145C_20min": {
+      "measured_in_the_corpus": "thiol yields only (hofmann1998_reconciliation.md); no cysteine or sugar time course",
+      "temperature_C": 145.0,
+      "minutes": 20.0,
+      "label_ph": 5.0,
+      "charged_mmol_L": {
+        "Cys": 33.0,
+        "PENT": 100.0
+      },
+      "final_mmol_L": {
+        "Cys": 2.304357963973415,
+        "PENT": 0.0,
+        "TTCA": 0.0,
+        "DPO": 0.0,
+        "TDP": 15.222019633937313,
+        "DDP": 7.653679788438279,
+        "NF": 8.202131223641262,
+        "FUR": 0.014365310077371567,
+        "H2S": 0.06314445197452227,
+        "MFT": 0.0008201946387641132,
+        "FFT": 0.0030362368899488966
+      },
+      "half_time_min": {
+        "Cys": 0.04036732727363128,
+        "PENT": 0.037241742733257394
+      },
+      "ph_in_situ": {
+        "start": 5.267625433858484,
+        "at_0.1_percent_of_run": 4.893317378455059,
+        "end": 4.473543349024066
+      },
+      "closure_relative_error": {
+        "Cys": 0.00023647773329926736,
+        "PENT": 0.00026056583174030996,
+        "H2S": 9.533868096292853e-06,
+        "MFT": 7.551607686403913e-08,
+        "FFT": 3.6686895906842987e-06
+      },
+      "fixed_point_residual_pH": 0.0007560781643070058,
+      "species": {
+        "Cys": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 30.70344580122546,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 30.172270654301194,
+                "share": 0.9826998197413053
+              },
+              {
+                "reaction": "r_cys_thermal",
+                "mmol_L": 0.402636984110011,
+                "share": 0.013113739308502652
+              },
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.12841901940870337,
+                "share": 0.004182560493049865
+              },
+              {
+                "reaction": "r_cys_actz",
+                "mmol_L": 0.00011914340555058031,
+                "share": 3.880457142234666e-06
+              }
+            ]
+          }
+        },
+        "PENT": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 100.02606337439884,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 60.201736850827416,
+                "share": 0.6018605033519268
+              },
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 39.77229519421717,
+                "share": 0.39761931893039676
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.048864540056655394,
+                "share": 0.0004885180762713293
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.003166789297603016,
+                "share": 3.1659641405157404e-05
+              }
+            ]
+          }
+        },
+        "TTCA": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 0,
+            "top": []
+          }
+        },
+        "DPO": {
+          "made": {
+            "total_mmol_L": 39.775461983514774,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 39.77229519421717,
+                "share": 0.9999203833434062
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.003166789297603016,
+                "share": 7.961665659384458e-05
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 39.774917846247526,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 30.172270654301194,
+                "share": 0.7585753104741542
+              },
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 9.362067443238894,
+                "share": 0.2353761604091443
+              },
+              {
+                "reaction": "r_osone_decay_dpo",
+                "mmol_L": 0.23710302635419736,
+                "share": 0.0059611191975489225
+              },
+              {
+                "reaction": "r_dpo_c2c3",
+                "mmol_L": 0.003321958088991495,
+                "share": 8.351891767150181e-05
+              },
+              {
+                "reaction": "r_dpo_ptr",
+                "mmol_L": 0.0001547642642506543,
+                "share": 3.8910014811068975e-06
+              }
+            ]
+          }
+        },
+        "TDP": {
+          "made": {
+            "total_mmol_L": 60.25060139088407,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 60.201736850827416,
+                "share": 0.9991889783848025
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.048864540056655394,
+                "share": 0.0008110216151974975
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 45.01315542606829,
+            "top": [
+              {
+                "reaction": "r_osone_decay_tdp",
+                "mmol_L": 44.80332381064235,
+                "share": 0.9953384379868553
+              },
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.20983161542594295,
+                "share": 0.004661562013144807
+              }
+            ]
+          }
+        },
+        "DDP": {
+          "made": {
+            "total_mmol_L": 30.172270654301194,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 30.172270654301194,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 22.51081195924682,
+            "top": [
+              {
+                "reaction": "r_osone_decay_ddp",
+                "mmol_L": 22.510808321297137,
+                "share": 0.9999998383910057
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 3.525546385995332e-06,
+                "share": 1.566156917119613e-07
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 1.1240329591001742e-07,
+                "share": 4.9933026011460795e-09
+              }
+            ]
+          }
+        },
+        "NF": {
+          "made": {
+            "total_mmol_L": 9.362067443238894,
+            "top": [
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 9.362067443238894,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 1.1576980408858404,
+            "top": [
+              {
+                "reaction": "r_nf_decay",
+                "mmol_L": 1.1402363508062388,
+                "share": 0.9849168872513248
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.01624937039463398,
+                "share": 0.014035931495746841
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.0012123196849675856,
+                "share": 0.0010471812529283975
+              }
+            ]
+          }
+        },
+        "FUR": {
+          "made": {
+            "total_mmol_L": 0.20983161542594295,
+            "top": [
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.20983161542594295,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.19546401865499294,
+            "top": [
+              {
+                "reaction": "r_fur_decay",
+                "mmol_L": 0.1858227844856528,
+                "share": 0.9506751460668699
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.009169099633235575,
+                "share": 0.04690939895909768
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.0004721345361045797,
+                "share": 0.0024154549740324775
+              }
+            ]
+          }
+        },
+        "H2S": {
+          "made": {
+            "total_mmol_L": 0.12841901940870337,
+            "top": [
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.12841901940870337,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.0652727208026786,
+            "top": [
+              {
+                "reaction": "r_h2s_loss",
+                "mmol_L": 0.03816596879790116,
+                "share": 0.5847154573696727
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.01624937039463398,
+                "share": 0.24894581066654656
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.009169099633235575,
+                "share": 0.14047368518548567
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.0012123196849675856,
+                "share": 0.018573144646941632
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.0004721345361045797,
+                "share": 0.007233259626664815
+              }
+            ]
+          }
+        },
+        "MFT": {
+          "made": {
+            "total_mmol_L": 0.016253008345097998,
+            "top": [
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.01624937039463398,
+                "share": 0.9997761675631506
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 3.525546385995332e-06,
+                "share": 0.00021691654314929686
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 1.1240329591001742e-07,
+                "share": 6.915845579068992e-06
+              },
+              {
+                "reaction": "r_ha_mp_mft",
+                "mmol_L": 7.821121676989781e-13,
+                "share": 4.812107094837416e-11
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.015432811313545094,
+            "top": [
+              {
+                "reaction": "ch_mft_decay",
+                "mmol_L": 0.015266543258274869,
+                "share": 0.9892263274725394
+              },
+              {
+                "reaction": "ch_thiolate_loss_mft",
+                "mmol_L": 0.00014518898482965997,
+                "share": 0.009407811828958881
+              },
+              {
+                "reaction": "ch_dimer_mft",
+                "mmol_L": 2.1079070440564768e-05,
+                "share": 0.0013658606985017731
+              }
+            ]
+          }
+        },
+        "FFT": {
+          "made": {
+            "total_mmol_L": 0.009641234169340155,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.009169099633235575,
+                "share": 0.9510296578413163
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.0004721345361045797,
+                "share": 0.04897034215868367
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.0066050568819901265,
+            "top": [
+              {
+                "reaction": "ch_fft_decay",
+                "mmol_L": 0.006072137694795226,
+                "share": 0.9193164878491811
+              },
+              {
+                "reaction": "ch_thiolate_loss_fft",
+                "mmol_L": 0.0005294617740235937,
+                "share": 0.08016006273424628
+              },
+              {
+                "reaction": "ch_dimer_fft",
+                "mmol_L": 3.4574131713068688e-06,
+                "share": 0.0005234494165726455
+              }
+            ]
+          }
+        }
+      },
+      "evidence_grounding": {
+        "bounded": 5.516487640948373e-16,
+        "fitted": 0.9993863521306128,
+        "measured": 0.0006136478693866075
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
+      }
+    },
+    "hofmann1998_ribose_cys_ph3_145C_20min": {
+      "measured_in_the_corpus": "MFT 553 / FFT 229 ppb (the pH 3 arm of the sweep; MFT 553 -> 198 -> 25 and FFT 229 -> 121 -> 12 ppb at pH 3 / 5 / 7)",
+      "temperature_C": 145.0,
+      "minutes": 20.0,
+      "label_ph": 3.0,
+      "charged_mmol_L": {
+        "Cys": 33.0,
+        "PENT": 100.0
+      },
+      "final_mmol_L": {
+        "Cys": 26.914590307556217,
+        "PENT": 0.0,
+        "TTCA": 0.0,
+        "DPO": 0.0,
+        "TDP": 24.98076120653071,
+        "DDP": 0.045809998369343026,
+        "NF": 0.14909435601280238,
+        "FUR": 0.020321463842570737,
+        "H2S": 0.9013976411537317,
+        "MFT": 0.00021642639764175595,
+        "FFT": 0.013343296617763206
+      },
+      "half_time_min": {
+        "Cys": null,
+        "PENT": 0.0034556519610157294
+      },
+      "ph_in_situ": {
+        "start": 3.709078521002084,
+        "at_0.1_percent_of_run": 3.7090294811047655,
+        "end": 3.695580237925798
+      },
+      "closure_relative_error": {
+        "Cys": 1.3588556397544604e-06,
+        "PENT": 0.00027056673526970815,
+        "H2S": 1.009772585804765e-06,
+        "MFT": 2.888185735704456e-07,
+        "FFT": 3.831775535462497e-06
+      },
+      "fixed_point_residual_pH": 0.00036740647256383596,
+      "species": {
+        "Cys": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 6.0854545346798945,
+            "top": [
+              {
+                "reaction": "r_cys_thermal",
+                "mmol_L": 4.4778775648487255,
+                "share": 0.735832884681024
+              },
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 1.4281962874850773,
+                "share": 0.2346901582036391
+              },
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 0.17936056157628585,
+                "share": 0.029473650744433758
+              },
+              {
+                "reaction": "r_cys_actz",
+                "mmol_L": 2.012076980610385e-05,
+                "share": 3.306370903182212e-06
+              }
+            ]
+          }
+        },
+        "PENT": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 100.02706399614407,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 99.66606882720632,
+                "share": 0.9963910250434656
+              },
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 0.35804601719232776,
+                "share": 0.0035794914185037965
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.002769657154361542,
+                "share": 2.7689077772674696e-05
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.00017949459105298885,
+                "share": 1.7944602578748905e-06
+              }
+            ]
+          }
+        },
+        "TTCA": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 0,
+            "top": []
+          }
+        },
+        "DPO": {
+          "made": {
+            "total_mmol_L": 0.35822551178338075,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 0.35804601719232776,
+                "share": 0.9994989340927747
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.00017949459105298885,
+                "share": 0.0005010659072253049
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.3582172284306716,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 0.17936056157628585,
+                "share": 0.500703336805027
+              },
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 0.17437568456831712,
+                "share": 0.4867875432241119
+              },
+              {
+                "reaction": "r_osone_decay_dpo",
+                "mmol_L": 0.004416225666435623,
+                "share": 0.012328345249565035
+              },
+              {
+                "reaction": "r_dpo_c2c3",
+                "mmol_L": 6.187401654465624e-05,
+                "share": 0.00017272764019676728
+              },
+              {
+                "reaction": "r_dpo_ptr",
+                "mmol_L": 2.8826030883711863e-06,
+                "share": 8.04708109936448e-06
+              }
+            ]
+          }
+        },
+        "TDP": {
+          "made": {
+            "total_mmol_L": 99.66883848436068,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 99.66606882720632,
+                "share": 0.9999722114033185
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.002769657154361542,
+                "share": 2.7788596681560974e-05
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 74.66130946450137,
+            "top": [
+              {
+                "reaction": "r_osone_decay_tdp",
+                "mmol_L": 74.31327114045,
+                "share": 0.9953384379868552
+              },
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.34803832405136825,
+                "share": 0.004661562013144804
+              }
+            ]
+          }
+        },
+        "DDP": {
+          "made": {
+            "total_mmol_L": 0.17936056157628585,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 0.17936056157628585,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.13350598097534994,
+            "top": [
+              {
+                "reaction": "r_osone_decay_ddp",
+                "mmol_L": 0.1335057211141929,
+                "share": 0.9999980535616821
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 2.5847589348990326e-07,
+                "share": 1.9360622767726587e-06
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 1.3852635501477172e-09,
+                "share": 1.0376041133344335e-08
+              }
+            ]
+          }
+        },
+        "NF": {
+          "made": {
+            "total_mmol_L": 0.17437568456831712,
+            "top": [
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 0.17437568456831712,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.025238114869113457,
+            "top": [
+              {
+                "reaction": "r_nf_decay",
+                "mmol_L": 0.021122900669531066,
+                "share": 0.8369444698653539
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.0038295055906637223,
+                "share": 0.1517350091527752
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.0002857086089186678,
+                "share": 0.011320520981870938
+              }
+            ]
+          }
+        },
+        "FUR": {
+          "made": {
+            "total_mmol_L": 0.34803832405136825,
+            "top": [
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.34803832405136825,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.3277122368370712,
+            "top": [
+              {
+                "reaction": "r_fur_decay",
+                "mmol_L": 0.28916734066858096,
+                "share": 0.8823818831408069
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.029512626258955277,
+                "share": 0.09005652808023791
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.009032269909534915,
+                "share": 0.027561588778955155
+              }
+            ]
+          }
+        },
+        "H2S": {
+          "made": {
+            "total_mmol_L": 1.4281962874850773,
+            "top": [
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 1.4281962874850773,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.5267966722330496,
+            "top": [
+              {
+                "reaction": "r_h2s_loss",
+                "mmol_L": 0.48413627030397566,
+                "share": 0.9190192266244965
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.029512626258955277,
+                "share": 0.05602280313171604
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.009032269909534915,
+                "share": 0.017145647240419788
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.0038295055906637223,
+                "share": 0.007269418719808441
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.0002857086089186678,
+                "share": 0.0005423508233405718
+              }
+            ]
+          }
+        },
+        "MFT": {
+          "made": {
+            "total_mmol_L": 0.0038297654518232066,
+            "top": [
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.0038295055906637223,
+                "share": 0.9999321469779929
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 2.5847589348990326e-07,
+                "share": 6.749131160678591e-05
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 1.3852635501477172e-09,
+                "share": 3.6170976201381877e-07
+              },
+              {
+                "reaction": "r_ha_mp_mft",
+                "mmol_L": 2.4440191962050465e-15,
+                "share": 6.381641975075893e-13
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.003613341203888898,
+            "top": [
+              {
+                "reaction": "ch_mft_decay",
+                "mmol_L": 0.0036073223482702447,
+                "share": 0.998334268678481
+              },
+              {
+                "reaction": "ch_thiolate_loss_mft",
+                "mmol_L": 5.806232096921542e-06,
+                "share": 0.0016068873016122922
+              },
+              {
+                "reaction": "ch_dimer_mft",
+                "mmol_L": 2.126235217315039e-07,
+                "share": 5.8844019906746005e-05
+              }
+            ]
+          }
+        },
+        "FFT": {
+          "made": {
+            "total_mmol_L": 0.03854489616849019,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.029512626258955277,
+                "share": 0.7656688483462918
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.009032269909534915,
+                "share": 0.23433115165370833
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.025201843813925713,
+            "top": [
+              {
+                "reaction": "ch_fft_decay",
+                "mmol_L": 0.024825397288957572,
+                "share": 0.9850627387524666
+              },
+              {
+                "reaction": "ch_thiolate_loss_fft",
+                "mmol_L": 0.00036632163440630604,
+                "share": 0.01453550927110693
+              },
+              {
+                "reaction": "ch_dimer_fft",
+                "mmol_L": 1.0124890561835273e-05,
+                "share": 0.00040175197642644664
+              }
+            ]
+          }
+        }
+      },
+      "evidence_grounding": {
+        "bounded": 1.517743152284465e-19,
+        "fitted": 0.9921507025859613,
+        "measured": 0.007849297414038779
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
+      }
+    },
+    "hofmann1998_ribose_cys_ph7_145C_20min": {
+      "measured_in_the_corpus": "MFT 25 / FFT 12 ppb (the pH 7 arm of the sweep)",
+      "temperature_C": 145.0,
+      "minutes": 20.0,
+      "label_ph": 7.0,
+      "charged_mmol_L": {
+        "Cys": 33.0,
+        "PENT": 100.0
+      },
+      "final_mmol_L": {
+        "Cys": 0.0,
+        "PENT": 45.80481554208862,
+        "TTCA": 0.0,
+        "DPO": 0.0060125636427961196,
+        "TDP": 2.9319454920321943,
+        "DDP": 8.324106342344821,
+        "NF": 13.47098633948504,
+        "FUR": 0.0023054205162715232,
+        "H2S": 3.0826524562396395e-05,
+        "MFT": 4.4641008782518516e-08,
+        "FFT": 1.4856148880903892e-06
+      },
+      "half_time_min": {
+        "Cys": 0.00023228972276806878,
+        "PENT": 5.5
+      },
+      "ph_in_situ": {
+        "start": 7.242723255883902,
+        "at_0.1_percent_of_run": 7.221562557083052,
+        "end": 7.221554735785164
+      },
+      "closure_relative_error": {
+        "Cys": 0.0002704721429066289,
+        "PENT": 0.00013090521844461023,
+        "H2S": 0.0001509375193690737,
+        "MFT": 3.0472144086997318e-06,
+        "FFT": 5.634715757558904e-07
+      },
+      "fixed_point_residual_pH": 0.0005762174036352263,
+      "species": {
+        "Cys": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 33.00892799548999,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 33.00869126918047,
+                "share": 0.9999928284157076
+              },
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.00016117518475893466,
+                "share": 4.882775495797865e-06
+              },
+              {
+                "reaction": "r_cys_thermal",
+                "mmol_L": 7.555109036079917e-05,
+                "share": 2.288807754408799e-06
+              },
+              {
+                "reaction": "r_cys_actz",
+                "mmol_L": 3.440141726007204e-11,
+                "share": 1.042185231364445e-12
+              }
+            ]
+          }
+        },
+        "PENT": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 54.20827497975584,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 48.36432145190711,
+                "share": 0.89219443839467
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 5.487010455592122,
+                "share": 0.10122090137790317
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.3555994994828221,
+                "share": 0.006559874845964407
+              },
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 0.0013435727737895061,
+                "share": 2.478538146235543e-05
+              }
+            ]
+          }
+        },
+        "TTCA": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 0,
+            "top": []
+          }
+        },
+        "DPO": {
+          "made": {
+            "total_mmol_L": 48.71992095138993,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 48.36432145190711,
+                "share": 0.9927011478561795
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.3555994994828221,
+                "share": 0.007298852143820591
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 48.7131513379006,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 33.00869126918047,
+                "share": 0.6776135471140934
+              },
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 15.311008660853407,
+                "share": 0.3143095496870654
+              },
+              {
+                "reaction": "r_osone_decay_dpo",
+                "mmol_L": 0.38776547082507834,
+                "share": 0.007960180365571683
+              },
+              {
+                "reaction": "r_dpo_c2c3",
+                "mmol_L": 0.005432830876290335,
+                "share": 0.0001115269845427429
+              },
+              {
+                "reaction": "r_dpo_ptr",
+                "mmol_L": 0.0002531061653527878,
+                "share": 5.195848726704364e-06
+              }
+            ]
+          }
+        },
+        "TDP": {
+          "made": {
+            "total_mmol_L": 5.488354028365912,
+            "top": [
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 5.487010455592122,
+                "share": 0.9997551956803724
+              },
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 0.0013435727737895061,
+                "share": 0.0002448043196275984
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 2.5563985392734874,
+            "top": [
+              {
+                "reaction": "r_osone_decay_tdp",
+                "mmol_L": 2.544481728952351,
+                "share": 0.9953384379868552
+              },
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.01191681032113615,
+                "share": 0.004661562013144802
+              }
+            ]
+          }
+        },
+        "DDP": {
+          "made": {
+            "total_mmol_L": 33.00869126918047,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 33.00869126918047,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 24.67572505195648,
+            "top": [
+              {
+                "reaction": "r_osone_decay_ddp",
+                "mmol_L": 24.675725029640457,
+                "share": 0.9999999990956285
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 2.0997430195126832e-08,
+                "share": 8.509346797678796e-10
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 1.3185926272518657e-09,
+                "share": 5.343683415484148e-11
+              }
+            ]
+          }
+        },
+        "NF": {
+          "made": {
+            "total_mmol_L": 15.311008660853407,
+            "top": [
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 15.311008660853407,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 1.836694774998655,
+            "top": [
+              {
+                "reaction": "r_nf_decay",
+                "mmol_L": 1.8366877299467095,
+                "share": 0.9999961642772432
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 6.5559323291582826e-06,
+                "share": 3.569418511120381e-06
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 4.891196165101029e-07,
+                "share": 2.6630424563082947e-07
+              }
+            ]
+          }
+        },
+        "FUR": {
+          "made": {
+            "total_mmol_L": 0.01191681032113615,
+            "top": [
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.01191681032113615,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.009611416410753056,
+            "top": [
+              {
+                "reaction": "r_fur_decay",
+                "mmol_L": 0.009566938476845713,
+                "share": 0.9953723850880519
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 4.447335544830518e-05,
+                "share": 0.004627138555619055
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 4.578459037145875e-09,
+                "share": 4.76356328919803e-07
+              }
+            ]
+          }
+        },
+        "H2S": {
+          "made": {
+            "total_mmol_L": 0.00016117518475893466,
+            "top": [
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.00016117518475893466,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.00013030466495107695,
+            "top": [
+              {
+                "reaction": "r_h2s_loss",
+                "mmol_L": 7.875926900174678e-05,
+                "share": 0.6044240168325289
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 4.447335544830518e-05,
+                "share": 0.34130286482838323
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 6.5559323291582826e-06,
+                "share": 0.05031233787078702
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 4.891196165101029e-07,
+                "share": 0.003753661595260181
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 2.0997430195126832e-08,
+                "share": 0.00016114104742919483
+              }
+            ]
+          }
+        },
+        "MFT": {
+          "made": {
+            "total_mmol_L": 6.578248352898706e-06,
+            "top": [
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 6.5559323291582826e-06,
+                "share": 0.9966076039481558
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 2.0997430195126832e-08,
+                "share": 0.0031919485353383336
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 1.3185926272518657e-09,
+                "share": 0.00020044737694812443
+              },
+              {
+                "reaction": "r_ha_mp_mft",
+                "mmol_L": 9.180451539077443e-16,
+                "share": 1.3955769144885015e-10
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 6.533567389602333e-06,
+            "top": [
+              {
+                "reaction": "ch_mft_decay",
+                "mmol_L": 3.423955262408168e-06,
+                "share": 0.5240560107877862
+              },
+              {
+                "reaction": "ch_thiolate_loss_mft",
+                "mmol_L": 3.1095072717184104e-06,
+                "share": 0.47592794047964526
+              },
+              {
+                "reaction": "ch_dimer_mft",
+                "mmol_L": 1.0485547575460424e-10,
+                "share": 1.6048732568592406e-05
+              }
+            ]
+          }
+        },
+        "FFT": {
+          "made": {
+            "total_mmol_L": 4.447793390734233e-05,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 4.447335544830518e-05,
+                "share": 0.9998970622365984
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 4.578459037145875e-09,
+                "share": 0.00010293776340159703
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 4.299236830628096e-05,
+            "top": [
+              {
+                "reaction": "ch_thiolate_loss_fft",
+                "mmol_L": 3.8385383921342714e-05,
+                "share": 0.8928418096877629
+              },
+              {
+                "reaction": "ch_fft_decay",
+                "mmol_L": 4.606808687869252e-06,
+                "share": 0.10715410360857514
+              },
+              {
+                "reaction": "ch_dimer_fft",
+                "mmol_L": 1.75697068994105e-10,
+                "share": 4.0867036619714805e-06
+              }
+            ]
+          }
+        }
+      },
+      "evidence_grounding": {
+        "bounded": 2.3658798989344033e-15,
+        "fitted": 0.9999987790090631,
+        "measured": 1.2209909345357403e-06
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
+      }
+    },
+    "cao2017_xylose_cys_90C_300min": {
+      "measured_in_the_corpus": "free Cys + TTCA + Cys-Amadori = 0.425 M of 0.40 at 5 h: no measurable cysteine destroyed; pH 5.49 -> 4.67 (0.5 h) -> 4.15 (cao2017_extraction.md Figs. 4-5)",
+      "temperature_C": 90.0,
+      "minutes": 300.0,
+      "label_ph": 5.5,
+      "charged_mmol_L": {
+        "Cys": 400.0,
+        "PENT": 400.0
+      },
+      "final_mmol_L": {
+        "Cys": 266.46734868573856,
+        "PENT": 0.0,
+        "TTCA": 0.0,
+        "DPO": 0.0,
+        "TDP": 310.4154090461428,
+        "DDP": 69.42822244047599,
+        "NF": 2.7887791260377357,
+        "FUR": 1.4339336654626336,
+        "H2S": 0.24242396275315564,
+        "MFT": 0.005586397938661672,
+        "FFT": 0.2303831886904428
+      },
+      "half_time_min": {
+        "Cys": null,
+        "PENT": 0.030698789768422653
+      },
+      "ph_in_situ": {
+        "start": 5.276647236663848,
+        "at_0.1_percent_of_run": 3.9069601826758915,
+        "end": 3.5537456190677434
+      },
+      "closure_relative_error": {
+        "Cys": 4.6687710464752285e-05,
+        "PENT": 0.00025971842989234994,
+        "H2S": 1.9757089390187655e-06,
+        "MFT": 2.131251254355517e-06,
+        "FFT": 4.0759309735265045e-06
+      },
+      "fixed_point_residual_pH": 0.0006306467882302158,
+      "species": {
+        "Cys": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 133.55132639844734,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 72.26162269702299,
+                "share": 0.5410775365976679
+              },
+              {
+                "reaction": "r_cys_thermal",
+                "mmol_L": 60.58711078771856,
+                "share": 0.45366161775854097
+              },
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.7020671302341153,
+                "share": 0.005256908704444566
+              },
+              {
+                "reaction": "r_cys_actz",
+                "mmol_L": 0.0005257834716791477,
+                "share": 3.9369393465287245e-06
+              }
+            ]
+          }
+        },
+        "PENT": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 400.1039143604315,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 325.01039573684716,
+                "share": 0.8123149613679193
+              },
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 75.08844221330845,
+                "share": 0.18767235090248438
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.0047674440831763105,
+                "share": 1.1915514725211071e-05
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.0003089661927037266,
+                "share": 7.722148712231694e-07
+              }
+            ]
+          }
+        },
+        "TTCA": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 0,
+            "top": []
+          }
+        },
+        "DPO": {
+          "made": {
+            "total_mmol_L": 75.08875117950116,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 75.08844221330845,
+                "share": 0.9999958853198668
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.0003089661927037266,
+                "share": 4.114680133181823e-06
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 75.08928135444805,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 72.26162269702299,
+                "share": 0.9623427124827909
+              },
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 2.8243644950564066,
+                "share": 0.03761341757586418
+              },
+              {
+                "reaction": "r_osone_decay_dpo",
+                "mmol_L": 0.002245298831497658,
+                "share": 2.990172220318704e-05
+              },
+              {
+                "reaction": "r_dpo_c2c3",
+                "mmol_L": 0.0010021739896126068,
+                "share": 1.3346432027788228e-05
+              },
+              {
+                "reaction": "r_dpo_ptr",
+                "mmol_L": 4.6689547549537184e-05,
+                "share": 6.21787114050885e-07
+              }
+            ]
+          }
+        },
+        "TDP": {
+          "made": {
+            "total_mmol_L": 325.01516318093036,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 325.01039573684716,
+                "share": 0.9999853316256493
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.0047674440831763105,
+                "share": 1.4668374350652545e-05
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 14.514725434161845,
+            "top": [
+              {
+                "reaction": "r_osone_decay_tdp",
+                "mmol_L": 12.630272346860227,
+                "share": 0.870169567047657
+              },
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 1.8844530873016165,
+                "share": 0.12983043295234298
+              }
+            ]
+          }
+        },
+        "DDP": {
+          "made": {
+            "total_mmol_L": 72.26162269702299,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 72.26162269702299,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 2.8147318982308644,
+            "top": [
+              {
+                "reaction": "r_osone_decay_ddp",
+                "mmol_L": 2.8146561148779288,
+                "share": 0.9999730761736195
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 7.546010624535217e-05,
+                "share": 2.6808985357639532e-05
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 3.2324669030605174e-07,
+                "share": 1.1484102287298519e-07
+              }
+            ]
+          }
+        },
+        "NF": {
+          "made": {
+            "total_mmol_L": 2.8243644950564066,
+            "top": [
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 2.8243644950564066,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.03483754067556405,
+            "top": [
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.022498072164972398,
+                "share": 0.6457996669309417
+              },
+              {
+                "reaction": "r_nf_decay",
+                "mmol_L": 0.01066095081439683,
+                "share": 0.30601904174810757
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.0016785176961948204,
+                "share": 0.04818129132095068
+              }
+            ]
+          }
+        },
+        "FUR": {
+          "made": {
+            "total_mmol_L": 1.8844530873016165,
+            "top": [
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 1.8844530873016165,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.4505181708326619,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.19589405992072567,
+                "share": 0.4348194425957739
+              },
+              {
+                "reaction": "r_fur_decay",
+                "mmol_L": 0.17584721153382069,
+                "share": 0.3903221288695511
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.0787768993781155,
+                "share": 0.17485842853467495
+              }
+            ]
+          }
+        },
+        "H2S": {
+          "made": {
+            "total_mmol_L": 0.7020671302341153,
+            "top": [
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.7020671302341153,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.45964087228407446,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.19589405992072567,
+                "share": 0.4261893833489554
+              },
+              {
+                "reaction": "r_h2s_loss",
+                "mmol_L": 0.1607175293560678,
+                "share": 0.34965891644365915
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.0787768993781155,
+                "share": 0.17138793377240952
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.022498072164972398,
+                "share": 0.048947066115277466
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.0016785176961948204,
+                "share": 0.0036518025210722266
+              }
+            ]
+          }
+        },
+        "MFT": {
+          "made": {
+            "total_mmol_L": 0.022573855517929932,
+            "top": [
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.022498072164972398,
+                "share": 0.9966428706475355
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 7.546010624535217e-05,
+                "share": 0.003342809835272305
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 3.2324669030605174e-07,
+                "share": 1.4319516223061842e-05
+              },
+              {
+                "reaction": "r_ha_mp_mft",
+                "mmol_L": 2.18748523891348e-14,
+                "share": 9.690348364177343e-13
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.016987541894546116,
+            "top": [
+              {
+                "reaction": "ch_mft_decay",
+                "mmol_L": 0.016958629440868383,
+                "share": 0.9982980201692974
+              },
+              {
+                "reaction": "ch_thiolate_loss_mft",
+                "mmol_L": 2.0809104537516217e-05,
+                "share": 0.001224962661854981
+              },
+              {
+                "reaction": "ch_dimer_mft",
+                "mmol_L": 8.103349140218537e-06,
+                "share": 0.00047701716884772675
+              }
+            ]
+          }
+        },
+        "FFT": {
+          "made": {
+            "total_mmol_L": 0.27467095929884117,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.19589405992072567,
+                "share": 0.7131953826527162
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.0787768993781155,
+                "share": 0.28680461734728374
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.04428907066746378,
+            "top": [
+              {
+                "reaction": "ch_fft_decay",
+                "mmol_L": 0.04375428701221821,
+                "share": 0.9879251551864592
+              },
+              {
+                "reaction": "ch_thiolate_loss_fft",
+                "mmol_L": 0.00046969267422400867,
+                "share": 0.010605159854236013
+              },
+              {
+                "reaction": "ch_dimer_fft",
+                "mmol_L": 6.509098102155944e-05,
+                "share": 0.0014696849593048118
+              }
+            ]
+          }
+        }
+      },
+      "evidence_grounding": {
+        "bounded": 2.671427262228927e-17,
+        "fitted": 0.9987339195288961,
+        "measured": 0.0012660804711038462
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
+      }
+    },
+    "zhang2025b_xylose_cys_ph65_120C_50min": {
+      "measured_in_the_corpus": "free Cys 1.0 + TTCA 18.2 + Cys-Amadori 1.6 = 20.8 of 40 mM at 50 min: ~48 % destroyed, xylose likewise (zhang2025b_extraction.md sec. 3.4)",
+      "temperature_C": 120.0,
+      "minutes": 50.0,
+      "label_ph": 6.5,
+      "charged_mmol_L": {
+        "Cys": 40.0,
+        "PENT": 40.0
+      },
+      "final_mmol_L": {
+        "Cys": 0.37094638468434843,
+        "PENT": 0.0,
+        "TTCA": 0.0,
+        "DPO": 0.0,
+        "TDP": 0.038580875437607486,
+        "DDP": 30.832317593704783,
+        "NF": 0.38341128423609255,
+        "FUR": 6.612686452730295e-05,
+        "H2S": 0.009311233249368726,
+        "MFT": 4.46543710357915e-06,
+        "FFT": 2.1149473447827662e-05
+      },
+      "half_time_min": {
+        "Cys": 0.008994354575643945,
+        "PENT": 0.005116464961403773
+      },
+      "ph_in_situ": {
+        "start": 6.535127346869558,
+        "at_0.1_percent_of_run": 6.279925841360459,
+        "end": 6.212663690339942
+      },
+      "closure_relative_error": {
+        "Cys": 0.0002652917723724002,
+        "PENT": 0.00026867290604142523,
+        "H2S": 1.7725415457043887e-05,
+        "MFT": 1.1396793037274647e-08,
+        "FFT": 1.8980632260279156e-06
+      },
+      "fixed_point_residual_pH": 0.0007386606937274109,
+      "species": {
+        "Cys": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 39.639665286210544,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 39.5657766860405,
+                "share": 0.9981359933380732
+              },
+              {
+                "reaction": "r_cys_thermal",
+                "mmol_L": 0.06037336117230805,
+                "share": 0.0015230542623504478
+              },
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.013514728169862263,
+                "share": 0.0003409395127905793
+              },
+              {
+                "reaction": "r_cys_actz",
+                "mmol_L": 5.108278736379529e-07,
+                "share": 1.2886785747296777e-08
+              }
+            ]
+          }
+        },
+        "PENT": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 40.010749804422844,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 39.96083662744498,
+                "share": 0.9987525058335112
+              },
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 0.047137824134735426,
+                "share": 0.001178128986963517
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.0026064361963724905,
+                "share": 6.514339793963e-05
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.00016891664675422054,
+                "share": 4.221781585696459e-06
+              }
+            ]
+          }
+        },
+        "TTCA": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 0,
+            "top": []
+          }
+        },
+        "DPO": {
+          "made": {
+            "total_mmol_L": 39.96100554409174,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 39.96083662744498,
+                "share": 0.999995772963056
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.00016891664675422054,
+                "share": 4.227036943998897e-06
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 39.960977009172986,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 39.5657766860405,
+                "share": 0.9901103438226305
+              },
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 0.39272896481494346,
+                "share": 0.009827811885700219
+              },
+              {
+                "reaction": "r_osone_decay_dpo",
+                "mmol_L": 0.0023255134409658662,
+                "share": 5.819460921668777e-05
+              },
+              {
+                "reaction": "r_dpo_c2c3",
+                "mmol_L": 0.00013935267710450374,
+                "share": 3.4872189704599946e-06
+              },
+              {
+                "reaction": "r_dpo_ptr",
+                "mmol_L": 6.4921994696161165e-06,
+                "share": 1.6246348201461245e-07
+              }
+            ]
+          }
+        },
+        "TDP": {
+          "made": {
+            "total_mmol_L": 0.04974426033110792,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 0.047137824134735426,
+                "share": 0.947603277664126
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.0026064361963724905,
+                "share": 0.052396722335873946
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.011150173593288615,
+            "top": [
+              {
+                "reaction": "r_osone_decay_tdp",
+                "mmol_L": 0.01093121176605067,
+                "share": 0.9803624736955001
+              },
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.00021896182723794453,
+                "share": 0.019637526304499827
+              }
+            ]
+          }
+        },
+        "DDP": {
+          "made": {
+            "total_mmol_L": 39.5657766860405,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 39.5657766860405,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 8.72284759151416,
+            "top": [
+              {
+                "reaction": "r_osone_decay_ddp",
+                "mmol_L": 8.722846237825541,
+                "share": 0.9999998448111578
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 8.498887026801491e-07,
+                "share": 9.74324833448822e-08
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 5.037999166424855e-07,
+                "share": 5.7756358959268836e-08
+              }
+            ]
+          }
+        },
+        "NF": {
+          "made": {
+            "total_mmol_L": 0.39272896481494346,
+            "top": [
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 0.39272896481494346,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.009220349765603738,
+            "top": [
+              {
+                "reaction": "r_nf_decay",
+                "mmol_L": 0.00917422512942718,
+                "share": 0.9949975177353223
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 4.292232276108089e-05,
+                "share": 0.004655172943785868
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 3.202313415476968e-06,
+                "share": 0.0003473093208918289
+              }
+            ]
+          }
+        },
+        "FUR": {
+          "made": {
+            "total_mmol_L": 0.00021896182723794453,
+            "top": [
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.00021896182723794453,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.00015283425082651228,
+            "top": [
+              {
+                "reaction": "r_fur_decay",
+                "mmol_L": 7.725892350645926e-05,
+                "share": 0.5055079151999684
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 7.550193804779917e-05,
+                "share": 0.4940118961521535
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 7.338927225385842e-08,
+                "share": 0.00048018864787818577
+              }
+            ]
+          }
+        },
+        "H2S": {
+          "made": {
+            "total_mmol_L": 0.013514728169862263,
+            "top": [
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.013514728169862263,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.004203180863194898,
+            "top": [
+              {
+                "reaction": "r_h2s_loss",
+                "mmol_L": 0.004080126873595925,
+                "share": 0.970723603479333
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 7.550193804779917e-05,
+                "share": 0.017963047631124076
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 4.292232276108089e-05,
+                "share": 0.010211866716688231
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 3.202313415476968e-06,
+                "share": 0.0007618785676148239
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 8.498887026801491e-07,
+                "share": 0.00020220131617989346
+              }
+            ]
+          }
+        },
+        "MFT": {
+          "made": {
+            "total_mmol_L": 4.427601138045228e-05,
+            "top": [
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 4.292232276108089e-05,
+                "share": 0.9694261389595487
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 8.498887026801491e-07,
+                "share": 0.01919524085801849
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 5.037999166424855e-07,
+                "share": 0.01137862018133168
+              },
+              {
+                "reaction": "r_ha_mp_mft",
+                "mmol_L": 4.875219057590598e-17,
+                "share": 1.1010971642633085e-12
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 3.981057331855573e-05,
+            "top": [
+              {
+                "reaction": "ch_mft_decay",
+                "mmol_L": 2.846611474467837e-05,
+                "share": 0.7150390555016273
+              },
+              {
+                "reaction": "ch_thiolate_loss_mft",
+                "mmol_L": 1.1338835467829126e-05,
+                "share": 0.2848196979505464
+              },
+              {
+                "reaction": "ch_dimer_mft",
+                "mmol_L": 5.623106048230467e-09,
+                "share": 0.0001412465478262664
+              }
+            ]
+          }
+        },
+        "FFT": {
+          "made": {
+            "total_mmol_L": 7.557532732005303e-05,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 7.550193804779917e-05,
+                "share": 0.9990289255123823
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 7.338927225385842e-08,
+                "share": 0.0009710744876176731
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 5.442610062315507e-05,
+            "top": [
+              {
+                "reaction": "ch_thiolate_loss_fft",
+                "mmol_L": 4.273125075224322e-05,
+                "share": 0.7851242375071716
+              },
+              {
+                "reaction": "ch_fft_decay",
+                "mmol_L": 1.1693769293824503e-05,
+                "share": 0.21485590846920788
+              },
+              {
+                "reaction": "ch_dimer_fft",
+                "mmol_L": 1.0805770873427853e-09,
+                "share": 1.9854023620480795e-05
+              }
+            ]
+          }
+        }
+      },
+      "evidence_grounding": {
+        "bounded": 3.910671674293477e-18,
+        "fitted": 0.9998477955833885,
+        "measured": 0.00015220441661144903
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
+      }
+    },
+    "zhai2019_xylose_cys_unbuffered_90C_160min": {
+      "measured_in_the_corpus": "TTCA plateau 54-63 mM (65-77 % of the cysteine) at 70-90 C (zhai2019_extraction.md)",
+      "temperature_C": 90.0,
+      "minutes": 160.0,
+      "label_ph": 7.4,
+      "charged_mmol_L": {
+        "Cys": 82.6,
+        "PENT": 165.2
+      },
+      "final_mmol_L": {
+        "Cys": 42.14482364738523,
+        "PENT": 0.0,
+        "TTCA": 0.0,
+        "DPO": 4.378630983071321e-24,
+        "TDP": 118.74869367169107,
+        "DDP": 34.773055008574296,
+        "NF": 7.981217571727367,
+        "FUR": 0.35417933662341405,
+        "H2S": 0.0381932517732876,
+        "MFT": 0.001824302653551951,
+        "FFT": 0.0039401818157107915
+      },
+      "half_time_min": {
+        "Cys": null,
+        "PENT": 0.14425138201695334
+      },
+      "ph_in_situ": {
+        "start": 6.325252610724419,
+        "at_0.1_percent_of_run": 4.374219130427693,
+        "end": 3.698233874973075
+      },
+      "closure_relative_error": {
+        "Cys": 0.00010627484588019233,
+        "PENT": 0.00026561502533261976,
+        "H2S": 1.3095234523530548e-06,
+        "MFT": 2.573428974135304e-06,
+        "FFT": 2.417204496236596e-06
+      },
+      "fixed_point_residual_pH": 0.0008106274382218004,
+      "species": {
+        "Cys": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 40.46395465488447,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 35.52317602559377,
+                "share": 0.8778967930487662
+              },
+              {
+                "reaction": "r_cys_thermal",
+                "mmol_L": 4.883777293892856,
+                "share": 0.12069451282126048
+              },
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.05662691067854693,
+                "share": 0.0013994408396686803
+              },
+              {
+                "reaction": "r_cys_actz",
+                "mmol_L": 0.00037442471929574546,
+                "share": 9.253290304647672e-06
+              }
+            ]
+          }
+        },
+        "PENT": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 165.24389126036317,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 121.69777031244712,
+                "share": 0.7364736413807668
+              },
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 43.535860009221324,
+                "share": 0.2634642628974703
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.009636425901271135,
+                "share": 5.831638209298579e-05
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.0006245127934471071,
+                "share": 3.7793396698889536e-06
+              }
+            ]
+          }
+        },
+        "TTCA": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 0,
+            "top": []
+          }
+        },
+        "DPO": {
+          "made": {
+            "total_mmol_L": 43.536484522014774,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 43.535860009221324,
+                "share": 0.9999856554152153
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.0006245127934471071,
+                "share": 1.4344584784545805e-05
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 43.535805677949575,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 35.52317602559377,
+                "share": 0.8159531096856646
+              },
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 8.003295108737715,
+                "share": 0.18383247959027205
+              },
+              {
+                "reaction": "r_osone_decay_dpo",
+                "mmol_L": 0.0063624185855731125,
+                "share": 0.0001461422037905597
+              },
+              {
+                "reaction": "r_dpo_c2c3",
+                "mmol_L": 0.002839822623181129,
+                "share": 6.522958697924061e-05
+              },
+              {
+                "reaction": "r_dpo_ptr",
+                "mmol_L": 0.00013230240933365258,
+                "share": 3.038933293490474e-06
+              }
+            ]
+          }
+        },
+        "TDP": {
+          "made": {
+            "total_mmol_L": 121.7074067383484,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 121.69777031244712,
+                "share": 0.9999208230118485
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.009636425901271135,
+                "share": 7.917698815149287e-05
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 2.92613503233727,
+            "top": [
+              {
+                "reaction": "r_osone_decay_tdp",
+                "mmol_L": 2.546233654211904,
+                "share": 0.870169567047657
+              },
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.37990137812536595,
+                "share": 0.129830432952343
+              }
+            ]
+          }
+        },
+        "DDP": {
+          "made": {
+            "total_mmol_L": 35.52317602559377,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 35.52317602559377,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.7413469093917646,
+            "top": [
+              {
+                "reaction": "r_osone_decay_ddp",
+                "mmol_L": 0.7413445874646816,
+                "share": 0.9999968679614717
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 2.312139486243909e-06,
+                "share": 3.118836076541946e-06
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 9.787596829807303e-09,
+                "share": 1.3202451788512211e-08
+              }
+            ]
+          }
+        },
+        "NF": {
+          "made": {
+            "total_mmol_L": 8.003295108737715,
+            "top": [
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 8.003295108737715,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.02021731752774632,
+            "top": [
+              {
+                "reaction": "r_nf_decay",
+                "mmol_L": 0.015970521871342947,
+                "share": 0.7899426741171248
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.003951951689477915,
+                "share": 0.19547359257993757
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.00029484396692545847,
+                "share": 0.01458373330293762
+              }
+            ]
+          }
+        },
+        "FUR": {
+          "made": {
+            "total_mmol_L": 0.37990137812536595,
+            "top": [
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.37990137812536595,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.025722185768683594,
+            "top": [
+              {
+                "reaction": "r_fur_decay",
+                "mmol_L": 0.02145688990281005,
+                "share": 0.8341783274473321
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.003059019249614253,
+                "share": 0.11892532295364132
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.0012062766162592926,
+                "share": 0.046896349599026596
+              }
+            ]
+          }
+        },
+        "H2S": {
+          "made": {
+            "total_mmol_L": 0.05662691067854693,
+            "top": [
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.05662691067854693,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.018433560611811825,
+            "top": [
+              {
+                "reaction": "r_h2s_loss",
+                "mmol_L": 0.00991913512924374,
+                "share": 0.5381019618579698
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.003951951689477915,
+                "share": 0.21438894919441612
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.003059019249614253,
+                "share": 0.16594836526884013
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.0012062766162592926,
+                "share": 0.06543915425033711
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.00029484396692545847,
+                "share": 0.015994954698905477
+              }
+            ]
+          }
+        },
+        "MFT": {
+          "made": {
+            "total_mmol_L": 0.003954273616587225,
+            "top": [
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.003951951689477915,
+                "share": 0.9994128056542243
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 2.312139486243909e-06,
+                "share": 0.0005847191445086249
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 9.787596829807303e-09,
+                "share": 2.4751946321444962e-06
+              },
+              {
+                "reaction": "r_ha_mp_mft",
+                "mmol_L": 2.6235901810092503e-14,
+                "share": 6.634822056834715e-12
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.0021299866204468544,
+            "top": [
+              {
+                "reaction": "ch_mft_decay",
+                "mmol_L": 0.0021270628178534927,
+                "share": 0.9986273141036218
+              },
+              {
+                "reaction": "ch_thiolate_loss_mft",
+                "mmol_L": 2.6400806594903395e-06,
+                "share": 0.0012394822738071808
+              },
+              {
+                "reaction": "ch_dimer_mft",
+                "mmol_L": 2.837219338715668e-07,
+                "share": 0.0001332036225711334
+              }
+            ]
+          }
+        },
+        "FFT": {
+          "made": {
+            "total_mmol_L": 0.004265295865873545,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.003059019249614253,
+                "share": 0.7171880558367214
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.0012062766162592926,
+                "share": 0.2828119441632787
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.0003251029542300854,
+            "top": [
+              {
+                "reaction": "ch_fft_decay",
+                "mmol_L": 0.00032148709288626825,
+                "share": 0.9888777961049899
+              },
+              {
+                "reaction": "ch_thiolate_loss_fft",
+                "mmol_L": 3.607743095051424e-06,
+                "share": 0.011097232578508386
+              },
+              {
+                "reaction": "ch_dimer_fft",
+                "mmol_L": 8.118248765681666e-09,
+                "share": 2.497131650159085e-05
+              }
+            ]
+          }
+        }
+      },
+      "evidence_grounding": {
+        "bounded": 9.620284096599669e-16,
+        "fitted": 0.9997395849046502,
+        "measured": 0.0002604150953488991
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
+      }
+    },
+    "yiltirak_ribose_cys_120C_60min": {
+      "measured_in_the_corpus": "thiol yields only",
+      "temperature_C": 120.0,
+      "minutes": 60.0,
+      "label_ph": 5.5,
+      "charged_mmol_L": {
+        "Cys": 25.0,
+        "PENT": 25.0
+      },
+      "final_mmol_L": {
+        "Cys": 3.199822156401203,
+        "PENT": 2.0318333992903507e-22,
+        "TTCA": 0.0,
+        "DPO": 0.0,
+        "TDP": 1.763387301427801,
+        "DDP": 15.708714346685733,
+        "NF": 1.401926550948061,
+        "FUR": 0.004180607441964167,
+        "H2S": 0.028687804477238406,
+        "MFT": 0.00011264419493413485,
+        "FFT": 0.0014651922456858186
+      },
+      "half_time_min": {
+        "Cys": 0.13126569743697344,
+        "PENT": 0.06355522351063742
+      },
+      "ph_in_situ": {
+        "start": 5.64901129482314,
+        "at_0.1_percent_of_run": 5.507254604665786,
+        "end": 5.1557187243888665
+      },
+      "closure_relative_error": {
+        "Cys": 0.00021626262184270217,
+        "PENT": 0.0002581842706377372,
+        "H2S": 6.358690286668373e-06,
+        "MFT": 4.562227654081526e-07,
+        "FFT": 3.20349545518723e-06
+      },
+      "fixed_point_residual_pH": 0.00046129852612519784,
+      "species": {
+        "Cys": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 21.805584409144867,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 21.166170134563973,
+                "share": 0.9706765816231582
+              },
+              {
+                "reaction": "r_cys_thermal",
+                "mmol_L": 0.5919116736994331,
+                "share": 0.027144958034291254
+              },
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.04748637162232321,
+                "share": 0.0021777160717787636
+              },
+              {
+                "reaction": "r_cys_actz",
+                "mmol_L": 1.6229259136022638e-05,
+                "share": 7.44270771721045e-07
+              }
+            ]
+          }
+        },
+        "PENT": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 25.006456273674253,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 22.618286272373982,
+                "share": 0.904497863465187
+              },
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 2.377224494593332,
+                "share": 0.09506442930484213
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.010279328965055163,
+                "share": 0.000411067000160147
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.000666177741882659,
+                "share": 2.664022981073024e-05
+              }
+            ]
+          }
+        },
+        "TTCA": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 0,
+            "top": []
+          }
+        },
+        "DPO": {
+          "made": {
+            "total_mmol_L": 22.618952450115867,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 22.618286272373982,
+                "share": 0.9999705478074923
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.000666177741882659,
+                "share": 2.9452192507670553e-05
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 22.618847838977036,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 21.166170134563973,
+                "share": 0.9357757868678973
+              },
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 1.4435934832792094,
+                "share": 0.06382259138732937
+              },
+              {
+                "reaction": "r_osone_decay_dpo",
+                "mmol_L": 0.008548124404927502,
+                "share": 0.0003779204168922028
+              },
+              {
+                "reaction": "r_dpo_c2c3",
+                "mmol_L": 0.0005122326962574957,
+                "share": 2.2646277118271733e-05
+              },
+              {
+                "reaction": "r_dpo_ptr",
+                "mmol_L": 2.386403266920421e-05,
+                "share": 1.0550507629341517e-06
+              }
+            ]
+          }
+        },
+        "TDP": {
+          "made": {
+            "total_mmol_L": 2.3875038235583874,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 2.377224494593332,
+                "share": 0.9956945287946242
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.010279328965055163,
+                "share": 0.004305471205375759
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.6235157964302193,
+            "top": [
+              {
+                "reaction": "r_osone_decay_tdp",
+                "mmol_L": 0.6112714885765497,
+                "share": 0.9803624736955002
+              },
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.012244307853669568,
+                "share": 0.019637526304499792
+              }
+            ]
+          }
+        },
+        "DDP": {
+          "made": {
+            "total_mmol_L": 21.166170134563973,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 21.166170134563973,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 5.452047374222359,
+            "top": [
+              {
+                "reaction": "r_osone_decay_ddp",
+                "mmol_L": 5.45204546535332,
+                "share": 0.999999649880328
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 1.660072513226709e-06,
+                "share": 3.0448607638217555e-07
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 2.487965259770629e-07,
+                "share": 4.5633595766865365e-08
+              }
+            ]
+          }
+        },
+        "NF": {
+          "made": {
+            "total_mmol_L": 1.4435934832792094,
+            "top": [
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 1.4435934832792094,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.041319265880405236,
+            "top": [
+              {
+                "reaction": "r_nf_decay",
+                "mmol_L": 0.040245144993186835,
+                "share": 0.9740043569426585
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.0009995474702310663,
+                "share": 0.024190833233198365
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 7.457341698733372e-05,
+                "share": 0.0018048098241430408
+              }
+            ]
+          }
+        },
+        "FUR": {
+          "made": {
+            "total_mmol_L": 0.012244307853669568,
+            "top": [
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.012244307853669568,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.008063682577960439,
+            "top": [
+              {
+                "reaction": "r_fur_decay",
+                "mmol_L": 0.005471381081057798,
+                "share": 0.678521386247533
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.002564165655493356,
+                "share": 0.3179894087723273
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 2.8135841409285708e-05,
+                "share": 0.0034892049801397507
+              }
+            ]
+          }
+        },
+        "H2S": {
+          "made": {
+            "total_mmol_L": 0.04748637162232321,
+            "top": [
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.04748637162232321,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.018798145662368586,
+            "top": [
+              {
+                "reaction": "r_h2s_loss",
+                "mmol_L": 0.015129807940435395,
+                "share": 0.8048564051040034
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.002564165655493356,
+                "share": 0.13640524451443517
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.0009995474702310663,
+                "share": 0.05317266331391552
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 7.457341698733372e-05,
+                "share": 0.003967062407470323
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 2.8135841409285708e-05,
+                "share": 0.0014967349394259648
+              }
+            ]
+          }
+        },
+        "MFT": {
+          "made": {
+            "total_mmol_L": 0.0010014563392745015,
+            "top": [
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.0009995474702310663,
+                "share": 0.9980939068748438
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 1.660072513226709e-06,
+                "share": 0.0016576584001947979
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 2.487965259770629e-07,
+                "share": 0.0002484347207361051
+              },
+              {
+                "reaction": "r_ha_mp_mft",
+                "mmol_L": 4.231413569714171e-15,
+                "share": 4.2252601574019605e-12
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.000888813006724275,
+            "top": [
+              {
+                "reaction": "ch_mft_decay",
+                "mmol_L": 0.0008511376511483068,
+                "share": 0.9576116063885913
+              },
+              {
+                "reaction": "ch_thiolate_loss_mft",
+                "mmol_L": 3.7203741653493796e-05,
+                "share": 0.041857782651728265
+              },
+              {
+                "reaction": "ch_dimer_mft",
+                "mmol_L": 4.71613922474435e-07,
+                "share": 0.0005306109596804514
+              }
+            ]
+          }
+        },
+        "FFT": {
+          "made": {
+            "total_mmol_L": 0.002592301496902642,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.002564165655493356,
+                "share": 0.9891463853865364
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 2.8135841409285708e-05,
+                "share": 0.010853614613463456
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.0011271211663704212,
+            "top": [
+              {
+                "reaction": "ch_fft_decay",
+                "mmol_L": 0.000804960989161815,
+                "share": 0.7141743169937683
+              },
+              {
+                "reaction": "ch_thiolate_loss_fft",
+                "mmol_L": 0.0003216405553468349,
+                "share": 0.28536466614551165
+              },
+              {
+                "reaction": "ch_dimer_fft",
+                "mmol_L": 5.196218617712977e-07,
+                "share": 0.00046101686072012535
+              }
+            ]
+          }
+        }
+      },
+      "evidence_grounding": {
+        "bounded": 8.473873120562478e-17,
+        "fitted": 0.9991272048887484,
+        "measured": 0.0008727951112515639
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
+      }
+    },
+    "food_like_unbuffered_ribose_cys_140C_30min": {
+      "measured_in_the_corpus": "a constructed reference, no measurement",
+      "temperature_C": 140.0,
+      "minutes": 30.0,
+      "label_ph": 6.0,
+      "charged_mmol_L": {
+        "Cys": 10.0,
+        "PENT": 10.0
+      },
+      "final_mmol_L": {
+        "Cys": 7.559966698200973,
+        "PENT": 0.0,
+        "TTCA": 0.0,
+        "DPO": 5.644713404250325e-38,
+        "TDP": 2.5685922859199892,
+        "DDP": 0.13447782802519828,
+        "NF": 0.44433224608817257,
+        "FUR": 0.0032393755381422895,
+        "H2S": 0.22994609395554838,
+        "MFT": 0.00018810618160207168,
+        "FFT": 0.0005243843529942686
+      },
+      "half_time_min": {
+        "Cys": null,
+        "PENT": 0.09820220846365162
+      },
+      "ph_in_situ": {
+        "start": 4.701435144525021,
+        "at_0.1_percent_of_run": 4.661440045391375,
+        "end": 3.72126900321322
+      },
+      "closure_relative_error": {
+        "Cys": 1.1273588506632847e-05,
+        "PENT": 0.0002536373938507843,
+        "H2S": 1.3111803064666308e-06,
+        "MFT": 2.427183824625655e-07,
+        "FFT": 5.5206295871585595e-06
+      },
+      "fixed_point_residual_pH": 0.000537303601778838,
+      "species": {
+        "Cys": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 2.4401460376840935,
+            "top": [
+              {
+                "reaction": "r_cys_thermal",
+                "mmol_L": 1.5852947826447215,
+                "share": 0.6496720926380707
+              },
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 0.46581585014360016,
+                "share": 0.19089670984843968
+              },
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.38901488688664204,
+                "share": 0.1594227889966169
+              },
+              {
+                "reaction": "r_cys_actz",
+                "mmol_L": 2.0518009129902366e-05,
+                "share": 8.408516872775247e-06
+              }
+            ]
+          }
+        },
+        "PENT": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 10.002537017420995,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 9.017005625508448,
+                "share": 0.9014718575701256
+              },
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 0.9798158058043531,
+                "share": 0.09795672878769152
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.005367717676970302,
+                "share": 0.0005366356223047788
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.00034786843122385793,
+                "share": 3.4778019878155936e-05
+              }
+            ]
+          }
+        },
+        "TTCA": {
+          "made": {
+            "total_mmol_L": 0,
+            "top": []
+          },
+          "used": {
+            "total_mmol_L": 0,
+            "top": []
+          }
+        },
+        "DPO": {
+          "made": {
+            "total_mmol_L": 0.9801636742355769,
+            "top": [
+              {
+                "reaction": "r_pent_dpo",
+                "mmol_L": 0.9798158058043531,
+                "share": 0.9996450914879139
+              },
+              {
+                "reaction": "r_pent_thermal_dpo",
+                "mmol_L": 0.00034786843122385793,
+                "share": 0.0003549085120861658
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.9801457767715239,
+            "top": [
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 0.5044538053235762,
+                "share": 0.5146722225189636
+              },
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 0.46581585014360016,
+                "share": 0.4752516015300689
+              },
+              {
+                "reaction": "r_osone_decay_dpo",
+                "mmol_L": 0.009688785992806667,
+                "share": 0.009885045900743766
+              },
+              {
+                "reaction": "r_dpo_c2c3",
+                "mmol_L": 0.0001789961895999164,
+                "share": 0.00018262200770737102
+              },
+              {
+                "reaction": "r_dpo_ptr",
+                "mmol_L": 8.339121941033198e-06,
+                "share": 8.50804251639099e-06
+              }
+            ]
+          }
+        },
+        "TDP": {
+          "made": {
+            "total_mmol_L": 9.022373343185418,
+            "top": [
+              {
+                "reaction": "r_pent_tdp",
+                "mmol_L": 9.017005625508448,
+                "share": 0.9994050658875667
+              },
+              {
+                "reaction": "r_pent_caramel",
+                "mmol_L": 0.005367717676970302,
+                "share": 0.0005949341124333466
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 6.4515022046632025,
+            "top": [
+              {
+                "reaction": "r_osone_decay_tdp",
+                "mmol_L": 6.411904944542105,
+                "share": 0.9938623193692042
+              },
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.03959726012109795,
+                "share": 0.0061376806307958335
+              }
+            ]
+          }
+        },
+        "DDP": {
+          "made": {
+            "total_mmol_L": 0.46581585014360016,
+            "top": [
+              {
+                "reaction": "r_dpo_ddp",
+                "mmol_L": 0.46581585014360016,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.3312252083712331,
+            "top": [
+              {
+                "reaction": "r_osone_decay_ddp",
+                "mmol_L": 0.33122497745965396,
+                "share": 0.9999993028562643
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 2.2966321226282496e-07,
+                "share": 6.93374798953772e-07
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 1.2483668649230303e-09,
+                "share": 3.768936763786035e-09
+              }
+            ]
+          }
+        },
+        "NF": {
+          "made": {
+            "total_mmol_L": 0.5044538053235762,
+            "top": [
+              {
+                "reaction": "r_dpo_nf",
+                "mmol_L": 0.5044538053235762,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.0599989084879033,
+            "top": [
+              {
+                "reaction": "r_nf_decay",
+                "mmol_L": 0.0561557259021387,
+                "share": 0.9359457916382022
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.003576360423625217,
+                "share": 0.059607091424775945
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.00026682216213938,
+                "share": 0.00444711693702187
+              }
+            ]
+          }
+        },
+        "FUR": {
+          "made": {
+            "total_mmol_L": 0.03959726012109795,
+            "top": [
+              {
+                "reaction": "r_tdp_fur",
+                "mmol_L": 0.03959726012109795,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.036357455573569356,
+            "top": [
+              {
+                "reaction": "r_fur_decay",
+                "mmol_L": 0.03469106737925634,
+                "share": 0.9541665342630736
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.0012678757310981422,
+                "share": 0.034872509945933765
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.00039851246321487207,
+                "share": 0.010960955790992623
+              }
+            ]
+          }
+        },
+        "H2S": {
+          "made": {
+            "total_mmol_L": 0.38901488688664204,
+            "top": [
+              {
+                "reaction": "r_cys_h2s",
+                "mmol_L": 0.38901488688664204,
+                "share": 1.0
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.15906807429550865,
+            "top": [
+              {
+                "reaction": "r_h2s_loss",
+                "mmol_L": 0.15355824208551586,
+                "share": 0.9653617972406147
+              },
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.003576360423625217,
+                "share": 0.0224832068877708
+              },
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.0012678757310981422,
+                "share": 0.007970648646583516
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.00039851246321487207,
+                "share": 0.0025052950755821415
+              },
+              {
+                "reaction": "r_nf_mp3p",
+                "mmol_L": 0.00026682216213938,
+                "share": 0.0016774086397984
+              }
+            ]
+          }
+        },
+        "MFT": {
+          "made": {
+            "total_mmol_L": 0.0035765913352125696,
+            "top": [
+              {
+                "reaction": "r_nf_mft",
+                "mmol_L": 0.003576360423625217,
+                "share": 0.9999354380845586
+              },
+              {
+                "reaction": "r_ddp_mft",
+                "mmol_L": 2.2966321226282496e-07,
+                "share": 6.42128749800752e-05
+              },
+              {
+                "reaction": "r_ddp_mft_hs",
+                "mmol_L": 1.2483668649230303e-09,
+                "share": 3.490381617358684e-07
+              },
+              {
+                "reaction": "r_ha_mp_mft",
+                "mmol_L": 8.224613577717849e-15,
+                "share": 2.299567606940207e-12
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.0033884868441630073,
+            "top": [
+              {
+                "reaction": "ch_mft_decay",
+                "mmol_L": 0.0033832577442889865,
+                "share": 0.9984568038435715
+              },
+              {
+                "reaction": "ch_thiolate_loss_mft",
+                "mmol_L": 5.085607994054882e-06,
+                "share": 0.0015008492663370755
+              },
+              {
+                "reaction": "ch_dimer_mft",
+                "mmol_L": 1.4349187996587843e-07,
+                "share": 4.2346890091386045e-05
+              }
+            ]
+          }
+        },
+        "FFT": {
+          "made": {
+            "total_mmol_L": 0.0016663881943130142,
+            "top": [
+              {
+                "reaction": "r_fur_fft_hs",
+                "mmol_L": 0.0012678757310981422,
+                "share": 0.7608525645015368
+              },
+              {
+                "reaction": "r_fur_fft",
+                "mmol_L": 0.00039851246321487207,
+                "share": 0.23914743549846315
+              }
+            ]
+          },
+          "used": {
+            "total_mmol_L": 0.0011420193454965027,
+            "top": [
+              {
+                "reaction": "ch_fft_decay",
+                "mmol_L": 0.0011268316665100338,
+                "share": 0.9867010317764224
+              },
+              {
+                "reaction": "ch_thiolate_loss_fft",
+                "mmol_L": 1.5172176191782374e-05,
+                "share": 0.013285393326840833
+              },
+              {
+                "reaction": "ch_dimer_fft",
+                "mmol_L": 1.5502794686424195e-08,
+                "share": 1.3574896736696017e-05
+              }
+            ]
+          }
+        }
+      },
+      "evidence_grounding": {
+        "bounded": 1.8021260777875246e-17,
+        "fitted": 0.9805437191789477,
+        "measured": 0.019456280821052326
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
+      }
+    }
+  }
+}

@@ -49,7 +49,7 @@ src/            Runtime package. Import as `from src.<module> import ...`; never
 
 scripts/        maillard.py (the front door); docker_maillard.sh (every command runs through it);
                 generators/ (the artifacts under results/, the frozen fit waves listed in
-                generators/WAVES.md, the figures and the generated documents); ci/ (the six gates).
+                generators/WAVES.md, the figures and the generated documents); ci/ (the seven gates).
 
 data/           Curated inputs only, read-only at runtime (scripts/ci/data_readonly_gate.py).
                 Map of every file: data/README.md (generated). keys/ (compound and paper identity),
@@ -91,7 +91,7 @@ analysis only.
 ./scripts/docker_maillard.sh status            # runtime, env, interpreter
 ./scripts/docker_maillard.sh run "<cmd>"       # any command in the env
 ./scripts/docker_maillard.sh shell             # interactive shell
-./scripts/docker_maillard.sh gates             # the six gates
+./scripts/docker_maillard.sh gates             # the seven gates
 ```
 
 Dependencies: everything in `environment.yml` and `pyproject.toml` has an importer under

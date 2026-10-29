@@ -49,8 +49,28 @@ def tracked_scores():
 
 
 @pytest.fixture(scope="module")
-def live_scores():
-    return scoring.score_panel()
+def live_scores_and_warnings():
+    import warnings
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        scores = scoring.score_panel()
+    return scores, caught
+
+
+@pytest.fixture(scope="module")
+def live_scores(live_scores_and_warnings):
+    return live_scores_and_warnings[0]
+
+
+def test_every_scored_pot_has_a_converged_ph_trajectory(live_scores_and_warnings):
+    """2026-10-28 (independent review): B60 converged the pH fixed point, but its convergence flag was
+    written and never read. A scored pot whose trajectory did not converge is published on a wrong pH."""
+    from src.kinetic_core.sulfur import PhFixedPointNotConverged
+
+    _, caught = live_scores_and_warnings
+    bad = [str(w.message) for w in caught if issubclass(w.category, PhFixedPointNotConverged)]
+    assert not bad, bad[:5]
 
 
 # --------------------------------------------------------------------------------------
@@ -91,7 +111,8 @@ def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     external matrix bundles. 8 bundles are refused whole (H2S / hydroxyacetaldehyde /
     mercapto-2-propanone precursors, CML/CEL/furosine targets, 2-pentylfuran)."""
     s = tracked_scores["summary"]
-    assert s["panel_benchmark_count"] == 37
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 37 -> 42 bundles.
+    assert s["panel_benchmark_count"] == 42
     # RE-PINNED BY WAVE B31 (2026-09-10): 27 -> 23 scored bundles. Four pots were found never to
     # have been cooked -- their "40 C for 10 min" is the HS-SPME incubation of the measurement --
     # and every lipid row in them is refused, which empties them. No bundle left the PANEL.
@@ -99,7 +120,8 @@ def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     # (hydrogen sulfide, furfural, glycolaldehyde, mercapto-2-propanone, glutathione) map the fed-intermediate
     # pots (norfuraneol + H2S, furfural + H2S, the three C2 + C3 recombination pots), which had been refused
     # for UNMAPPED PRECURSORS. Most of their rows are rows the sulfur fit read (in_core_fit 1 -> 6).
-    assert s["scored_benchmark_count"] == 28
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 28 -> 33.
+    assert s["scored_benchmark_count"] == 33
     # RE-PINNED BY WAVE B28 (2026-09-09): 39 -> 42 rows. Three nonanal rows left the refused list
     # and joined the scored one, because the oleate branch fraction the lane needed was measured in
     # 1978 and read this week. The BENCHMARK and ANSWERED counts do not move: no new pot entered,
@@ -120,7 +142,8 @@ def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     # RE-PINNED BY WAVE B35 (2026-09-11): 44 -> 45. Eight measurements were added from papers on
     # disk; FIVE of them became refusals rather than rows, so the scored count rises by one.
     # RE-PINNED 2026-10-27 (precursor aliases, B48, B49, B50): 45 -> 50 rows, 32 -> 27 refused: the same five rows.
-    assert s["matched_compound_count"] == 50
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 50 -> 66 rows.
+    assert s["matched_compound_count"] == 66
     # RE-PINNED BY WAVE B28: 25 -> 22 refused. Exactly the three nonanal rows above; the four
     # 2-pentylfuran rows stay refused, and their REASON changed rather than their status. That
     # matters and is asserted elsewhere: the branch fraction those rows were missing is measured
@@ -134,7 +157,7 @@ def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     # 2026-09-03: the xylose pH-5 bundle left the hold-out (the B2-B8 fit had read it) and
     # returned once wave B9 removed the Hofmann level rows from the objective.
     assert {k: v["benchmarks"] for k, v in s["by_panel"].items()} == {
-        "trust_loop": 16, "maillard_path_holdout": 17, "external_matrix": 4,
+        "trust_loop": 16, "maillard_path_holdout": 22, "external_matrix": 4,
     }
 
 
@@ -145,7 +168,8 @@ def test_core_evidence_roles_are_40_predictive_and_the_legacy_split_is_kept_besi
     core fit record that names it is the laundering route this guard blocks."""
     s = tracked_scores["summary"]
     # RE-PINNED 2026-09-03: the 21 physically separated hold-out bundles carry their own role.
-    assert s["evidence_role_totals"] == {"external_holdout": 21, "predictive": 16}
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): the five Amendment-45 bundles are hold-outs.
+    assert s["evidence_role_totals"] == {"external_holdout": 26, "predictive": 16}
 
 
 def test_within_3x_and_out_of_sample_counts(tracked_scores):
@@ -195,21 +219,29 @@ def test_within_3x_and_out_of_sample_counts(tracked_scores):
     # RE-PINNED 2026-10-27 (B51 SHIPS under the acceptance rule, WAVES.md): 18/50 -> 16/50, out of sample 14/44 -> 12/44, and the fall is REPORTED, not a veto:
     # the corrected speciation puts the Hofmann ribose/xylose pH 5 pots ~100x low, exposing the
     # thiolate-acting thiol sink (named in the model card's exposed-assumptions list).
-    assert (s["within_band_count"], s["matched_compound_count"]) == (16, 50)
-    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (16, 50)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (12, 44)
-    assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (4, 6)
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 16/50 -> 21/66, out of sample 12/44 -> 17/60. On the 50 rows both scored: 16 -> 19
+    # (the Hofmann ribose/xylose pH 5 pots, ~100x low under B51's unconverged pH, land at 1.5-3.6x). The 16 blind
+    # rows score 2/16. Against the typical-yield baseline (null_model_baselines.md) the engine ties overall.
+    assert (s["within_band_count"], s["matched_compound_count"]) == (21, 66)
+    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (21, 66)
+    # RE-PINNED 2026-10-29 (the pot-level fit-target rule of the 2026-10-28 review, regenerated at Phase 0's close): a row the fit
+    # reads at the POT level (Hofmann's in-situ furfural / norfuraneol) takes that pot's MFT and FFT rows out of sample.
+    # out of sample 17/60 -> 14/56; read by a fit 4/6 -> 7/10. Against the typical-yield baseline the engine now trails out of
+    # sample (8 vs 15 of 40, null_model_baselines.md).
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (14, 56)
+    assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (7, 10)
     # RE-PINNED BY WAVE B34: 3/26 -> 5/31. All five new rows are in a maillard_path hold-out bundle,
     # and two of them (3-deoxyglucosone, methylglyoxal) land inside the band.
     # RE-PINNED BY WAVE B41: 5/31 -> 7/31 (the two HMF rows above are both hold-outs).
-    assert s["holdout_within_band"] == {"hits": 7, "total": 31}
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 7/31 -> 10/47.
+    assert s["holdout_within_band"] == {"hits": 10, "total": 47}
     readme = _doc_text(README)
-    _assert_quoted(readme, "16 of 50", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "12 of 44", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "21 of 66", "README.md", "the core's within-3x count")
+    _assert_quoted(readme, "14 of 56", "README.md", "the core's out-of-sample count")
     # 2026-09-11 (review of PR #16): the BADGE on line 6 had said 3/38 through three re-pins of the
     # body text below it, because nothing asserted it. The most visible number on the page is now
     # pinned to the same artifact as the table.
-    _assert_quoted(readme, "out--of--sample-12%2F44%20rows%20within%203x", "README.md", "the out-of-sample badge")
+    _assert_quoted(readme, "out--of--sample-14%2F56%20rows%20within%203x", "README.md", "the out-of-sample badge")
     # The subtraction has to be VISIBLE on the page that carries the rate, not only in the wave.
     _assert_quoted(readme, "never cooked", "README.md", "why the denominator fell")
 
@@ -224,13 +256,17 @@ def test_no_core_benchmark_is_strict_ready_since_bolton_1994_was_read(tracked_sc
     # RE-PINNED 2026-09-04: the full text of Bolton 1994 replaced the assumed loadings (glucose
     # 10 -> 51.5 mM, thiamine 1 -> 13.7 mM, pH 5.0 -> 5.65); the core overpredicts MFT 20x and
     # no benchmark is strict-ready. The pass had rested on inputs nobody had read.
-    assert s["strict_ready"] == []
-    assert s["predictive_passes"] == []
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): one strict-ready bundle, and it is NOT evidence: the fed
+    # norfuraneol + cysteine pot is a row the sulfur fit read (asserted below). Anything else here needs a reading.
+    assert s["strict_ready"] == ["hofmann1998_norfuraneol_cysteine_145C_20min_pH5"]
+    assert s["predictive_passes"] == ["hofmann1998_norfuraneol_cysteine_145C_20min_pH5"]
+    nf = next(b for b in tracked_scores["benchmarks"] if b["benchmark_id"] == "hofmann1998_norfuraneol_cysteine_145C_20min_pH5")
+    assert all(r["in_core_fit"] for r in nf["compounds"])
     bolton = next(b for b in tracked_scores["benchmarks"] if b["benchmark_id"] == "thiamine_cys_glucose_120C_Bolton1994")
     assert bolton["scale_thresholds"]["max_ratio"] == pytest.approx(3.0)
     assert not any(r["in_core_fit"] for r in bolton["compounds"])
     readme = _doc_text(README)
-    _assert_quoted(readme, "0 of 37", "README.md", "the core strict-ready count")
+    _assert_quoted(readme, "1 of 42", "README.md", "the core strict-ready count")
     _assert_quoted(readme, "thiamine_cys_glucose_120C_Bolton1994", "README.md", "the benchmark that lost its pass")
     _assert_quoted(_doc_text(AUDIT), "strict-ready 0/37", "AUDIT.md", "the core strict-ready count")
 
@@ -244,10 +280,15 @@ def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_f
         if b["benchmark_id"] == "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5"
     )
     assert xyl["panel"] == "maillard_path_holdout"
-    assert xyl["fit_target_of"]["core"] == []
-    assert not any(r["in_core_fit"] for r in xyl["compounds"])
-    for bid in ("hofmann1998_ribose_cysteine_145C_20min_pH5", "hofmann1998_glucose_cysteine_145C_20min_pH5",
-                "hofmann1998_fructose_cysteine_145C_20min_pH5"):
+    # RE-PINNED 2026-10-29. B9's point stands: no Hofmann pH-5 LEVEL row is a fit row. But since the 2026-10-28 review
+    # (src/kinetic_core/fit_targets.py, the pot-level rule) a fit row on an intermediate of the SAME pot (in-situ furfural
+    # and norfuraneol) makes that pot's rows in-sample too, so the ribose and xylose pots now name the fit-target record
+    # at the pot level and leave the out-of-sample count. Glucose and fructose pots have no fitted intermediate.
+    from src.kinetic_core import fit_targets
+    for bid in ("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", "hofmann1998_ribose_cysteine_145C_20min_pH5"):
+        rows = [c for target in fit_targets.core_fit_targets(bid) for _, c in target.rows]
+        assert rows and all(c.startswith("[same pot]") for c in rows), (bid, rows)
+    for bid in ("hofmann1998_glucose_cysteine_145C_20min_pH5", "hofmann1998_fructose_cysteine_145C_20min_pH5"):
         b = next(x for x in tracked_scores["benchmarks"] if x["benchmark_id"] == bid)
         assert b["fit_target_of"]["core"] == [] and not any(r["in_core_fit"] for r in b["compounds"]), bid
 
@@ -320,9 +361,15 @@ def test_core_envelope_coverage_and_widths():
     # rows those constants reach move.
     # RE-PINNED 2026-10-27: 17/44 (1 n.e.) -> 19/48 (2 n.e.). The four new evaluable rows are the
     # fed-intermediate rows above, which the out-of-sample count excludes (still 17/43).
+    # RE-PINNED BY WAVE B55 (2026-10-28): 19/48 -> 22/48. The 31 sulfur constants known at 145 C only
+    # now draw their barrier from the measured barriers of their class (kinetic_core_b55_b56_ship_rule.md);
+    # every 145 C and non-sulfur row is bit-identical, the off-145 C sulfur rows widen (median +0.70 dex)
+    # and three of them (Yiltirak 100 C FFT, 110 C MFT, Bolton 120 C MFT) move inside.
     # RE-PINNED 2026-10-27 (B51 SHIPS under the acceptance rule, WAVES.md): 19/48 -> 20/48; sampled from B51's Laplace covariance (17/23 identified,
     # PSD by construction since the eigen-pseudo-inverse fix).
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (20, 48, 2)
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 20/48 -> 36/65, mostly WIDTH: B60's Laplace null-space
+    # correction plus the data-admissible flat draws; median width 1.01 -> 1.87 dex.
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (36, 65, 1)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
@@ -342,26 +389,31 @@ def test_core_envelope_coverage_and_widths():
     # RE-PINNED BY WAVE B41: 0.9874 -> 1.0095 dex; the same caution -- the 3,4-DGE and HMF rows now carry
     # the fit's own width where they carried a printed band.
     # RE-PINNED 2026-10-27: 1.0095 -> 0.9793 dex over a changed row set (four more rows); not a narrowing.
+    # RE-PINNED BY WAVE B55 (2026-10-28): 0.9793 -> 1.1418 dex over the SAME row set -- a real widening,
+    # all of it on the sulfur rows away from 145 C.
     # RE-PINNED 2026-10-27 (B51 SHIPS under the acceptance rule, WAVES.md): 0.9793 -> 1.0095 dex (B51's covariance).
-    assert lit["median_ci_width_log10"] == pytest.approx(1.0095, abs=5e-4)
+    assert lit["median_ci_width_log10"] == pytest.approx(1.8694, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (18, 43)
+    # RE-PINNED 2026-10-29 (the pot-level fit-target rule; regenerated at Phase 0's close): out of sample 33/59 -> 29/55.
+    assert (oos["hits"], oos["total"]) == (29, 55)
     assert s["unsampled_lanes"] == []
     # RE-PINNED 2026-10-27 (B51 SHIPS under the acceptance rule, WAVES.md): B9's 20/23 (chi2_red 1.21) -> B51's 17/23 (1.41).
-    assert s["sulfur_laplace"]["identified"] == 17 and s["sulfur_laplace"]["free"] == 23
-    assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.408, abs=0.01)
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): B51's 17/23 (1.41) -> B60's 16/23 (1.87), null-space corrected.
+    assert s["sulfur_laplace"]["identified"] == 16 and s["sulfur_laplace"]["free"] == 23
+    assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.871, abs=0.01)
     assert s["observable_multiplier_policy"]["rows_by_family"] == {
         # RE-PINNED BY WAVE B31: headspace 11 -> 8. The three that left are the hexanal and
         # nonanal rows in the pots nobody heated -- headspace-quantified, and refused now.
         # B34: extraction 31 -> 36, the five new LC-MS/MS rows.
         # B35: headspace 8 -> 9, the decadienal row.
         # 2026-10-27: extraction 36 -> 41, the five fed-intermediate rows.
-        "headspace": 9, "extraction": 41, "undeclared": 0,
+        # 2026-10-28: headspace 9 -> 25, Amendment 45's sixteen HS-SPME rows.
+        "headspace": 25, "extraction": 41, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "20 of 48", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "18 of 43", "README.md", "the core envelope's out-of-sample coverage")
-    _assert_quoted(readme, "17 of 23", "README.md", "the identified sulfur coordinates")
+    _assert_quoted(readme, "36 of 65", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "29 of 55", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "16 of 23", "README.md", "the identified sulfur coordinates")
 
 
 # --------------------------------------------------------------------------------------
@@ -412,7 +464,8 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-09-07 (B16 reads): DIC-03, RIB-T-01/02, HEX-T-01, SCH-T-01, 78 -> 83.
     # RE-PINNED 2026-09-07 (Wang 2022 read): WANG22-T-01..04 (a third lab, 100 and 140 C shapes), 83 -> 87.
     # RE-PINNED 2026-09-07 (thiol pH reads): WHI-PH-01, CER07-PH-01/02, MOT02-PH-01/02, 87 -> 92.
-    assert payload["panel"]["claims"] == 92
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 92 -> 119 claims (Amendment 45).
+    assert payload["panel"]["claims"] == 119
     # RE-PINNED 2026-09-03 (step 5): comparisons that move an axis the lane has no term for
     # are REFUSED by the engine (water activity everywhere; pH on trunk / acrylamide / lipid),
     # so those claims are not evaluable instead of identical-prediction misses: 18/30 -> 18/27.
@@ -445,24 +498,27 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-10-27 (B51 SHIPS under the acceptance rule, WAVES.md), and the Cerny 2015 chapter read in full: PH-04 and PH-05 RETIRED (their quotes are
     # not in the chapter; PH-05 had been an agree); under B51 SUG-09 and one pH claim flip to disagree, one
     # temperature claim flips to agree and one time claim becomes evaluable and agrees: 18/31 -> 17/31.
-    assert s["headline"] == [17, 31]
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 17/31 -> 21/38.
+    # RE-PINNED 2026-10-29 (the noise-aware rule, B60 lineage: a claim whose measured contrast is within the source's noise is not
+    # evaluable): 21/38 -> 20/33; excluding pH / aw 15/27 -> 14/22; not evaluable 37 -> 42.
+    assert s["headline"] == [20, 33]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (12, 23)
-    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (5, 8)
-    assert ind["total"]["not_evaluable"] == 22
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (14, 22)
+    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (6, 11)
+    assert ind["total"]["not_evaluable"] == 42
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
-    assert cats["sugar_identity"] == (3, 10)  # B15/B16: DIC-01 and DIC-03 miss; B51: SUG-09 flips (the hexose entry)
-    assert cats["temperature"] == (6, 9)      # 2026-10-27 audit: TEMP-03 retired; WANG22 shapes retired; B51 +1
-    assert cats["ph"] == (4, 7)               # B51 + PH-04/PH-05 retired (Cerny 2015 read in full); MOT-01 agrees with its pyrophosphate: MOT02-PH-01/02 and PH-03 not independent; arms of PH-01/02 set to Meynier & Mottram 1995
+    assert cats["sugar_identity"] == (4, 8)  # 2026-10-29: noise-aware rule (DIC-03 and two more not evaluable)  # was (5, 11):  # 2026-10-28: B60 + Amendment 45  # B15/B16: DIC-01 and DIC-03 miss; B51: SUG-09 flips (the hexose entry)
+    assert cats["temperature"] == (5, 8)  # 2026-10-29: noise-aware rule (was (5, 9))     # 2026-10-27 audit: TEMP-03 retired; WANG22 shapes retired; B51 +1
+    assert cats["ph"] == (5, 10)               # B51 + PH-04/PH-05 retired (Cerny 2015 read in full); MOT-01 agrees with its pyrophosphate: MOT02-PH-01/02 and PH-03 not independent; arms of PH-01/02 set to Meynier & Mottram 1995
     assert cats["moisture_aw"] == (1, 1)      # 2026-10-27 audit: AW-01 retired (source mismatch)
     assert cats["additive_cysteine"] == (1, 1)  # 2026-10-27 audit: CYS-01 tautology, CYS-02 retired
-    assert cats["time"] == (2, 2)             # 2026-10-27 audit: TIME-01 and the WANG22 time shapes retired; B51 +1
+    assert cats["time"] == (2, 3)             # 2026-10-27 audit: TIME-01 and the WANG22 time shapes retired; B51 +1
     readme = _doc_text(README)
-    _assert_quoted(readme, "17 of 31", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "12 of 23", "README.md", "the directional count excluding pH and water activity")
-    _assert_quoted(readme, "5 of 8", "README.md", "the directional count on pH and water activity")
+    _assert_quoted(readme, "20 of 33", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "14 of 22", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "6 of 11", "README.md", "the directional count on pH and water activity")
 
 
 def test_directional_scorecard_is_not_stale():

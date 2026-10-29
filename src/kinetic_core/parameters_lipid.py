@@ -310,8 +310,14 @@ class Q10Assumption:
     """
 
     default: float = math.sqrt(2.0 * 3.0)   # 2.449...
-    lo: float = 2.0
-    hi: float = 3.0
+    #: 2026-10-28 (kind 1, D6): the band now contains the corpus's measured Q10s for lipid oxidation, which
+    #: the old 2.0-3.0 excluded: Tazi 2009 Table 1 (almond paste, 60-120 C) 1.6 at aw 0.72 to 3.3 at aw
+    #: 0.38; Frankel 1993 Table 3 (n-6 oils, hexanal, 130-160 C) 113.8-122.2 kJ/mol = Q10 2.15-2.27 at
+    #: 145 C. The centre is unchanged: the two measurements disagree (moist matrix vs bulk oil), and which
+    #: transfers to a hot protein pot is an open hypothesis, not a choice made on scores
+    #: (kinetic_core_b37_prereg.md P2-P3).
+    lo: float = 1.6
+    hi: float = 3.3
     reference_temperature_c: float = 25.0
     source: str = (
         "Schroen & Berton-Carabin (2022) sec. 3.2.2 and sec. 4.2, twice, "
@@ -328,11 +334,13 @@ class Q10Assumption:
         "25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by "
         "visual agreement, with NO standard error anywhere in the source, in a "
         "rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all "
-        "secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE "
-        "(declared gap: research_round3_channels.md sec. F.3, re-affirming k3 "
-        "sec. C.9). The Q10 applied here is the authors' own stated 2-3, but "
+        "secondary products. Its temperature dependence is measured only in OTHER "
+        "matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, "
+        "falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol "
+        "for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band "
+        "(1.6-3.3) spans both; the centre is the authors' own stated 2-3, but "
         "they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of "
-        "10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; "
+        "10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; "
         "the ABSOLUTE RATE is not. Ratios between formulations at a common rate "
         "assumption are first-class; absolute ppb inherits this band."
     )

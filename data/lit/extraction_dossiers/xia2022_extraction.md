@@ -231,3 +231,35 @@ integrated.
 10. **SI not on disk** (Figure S5 has the 120 C deoxyglucosone points and the Arrhenius plot).
 11. Registry gap: glyoxal, methylglyoxal, 3-deoxyglucosone and 1-deoxyglucosone have no molecule
     row in `compounds.yml`.
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+Source: `data/articles/xia2022_supplementary.pdf` (11 pp.). Read with `pdftotext -layout`; Fig. S5 (p. 11) viewed as a 100-dpi
+render. **No tables; five figures — described, not digitised.**
+
+- **Fig. S1** — TIC of the OPD-derivatised reaction solutions (Gly / DiGly / TriGly, **130 °C, 45 min**) and MS/MS spectra
+  (5 V and 20 V) of 1-DG-quinoxaline (t_R 4.61 min) and 3-DG-quinoxaline (4.76 min) with structures; identification only. The
+  caption labels both the Gly and TriGly chromatograms "(C)" (a typo). No 1-DG standard is used (consistent with §"1-DG on the
+  3-DG calibration").
+- **Figs. S2–S4** — ¹H and ¹³C NMR of purified G-ARP, DiG-ARP, TriG-ARP. Structural only.
+- **Fig. S5** — caption verbatim: *"The scatter plots for the formation of 1-DG and 3-DG and the fitting curves under the
+  pseudo-first order fit model in glucose and Gly (A, D), DiGly (B, E), or TriGly (C, F) systems at 120-130 °C; the scatter plot
+  of ln k versus 1/T and the fitting curve for Amadori compounds (G)."*
+  - Panels A–F: 1-DG (A–C) and 3-DG (D–F), **mmol/L vs time (min)**, **both 120 °C (squares) and 130 °C (circles)** — so S5
+    holds the 130 °C points too, not only 120 °C as this dossier assumed. 4–9 points per series (single symbols, no error
+    bars); straight fitted lines. Time windows: Gly 1-DG to 60 min (120 °C) / 45 min (130 °C); Gly 3-DG to 80 / 45 min; DiGly to
+    45 / 35 min; TriGly to 60 / 45 min (3-DG) and 35 / 30 min (1-DG). y-axis maxima: 1-DG 0.6 (Gly, TriGly) and ~1.2 (DiGly);
+    3-DG 3 (Gly), 12 (DiGly), 9 (TriGly) mmol/L.
+  - ⚠️ **"Pseudo-first order" in the caption, but the fitted lines are straight concentration-vs-time lines, and Table 2's k are
+    in mmol L⁻¹ min⁻¹** — i.e. zero-order (initial-slope) rates, as Flag 1 already reads them. By eye the Gly 3-DG lines agree
+    with Table 2 (≈ 0.013 at 120 °C, ≈ 0.036 at 130 °C mmol L⁻¹ min⁻¹).
+  - ⚠️ The Gly 1-DG and 3-DG panels use **different sampling times for the same pot** (e.g. 120 °C: 1-DG at ~10/15/25/45/60 min,
+    3-DG at ~5/10/15/40/60/80 min) — either separate runs or points dropped per analyte; not explained.
+  - Panel G: ln k (ARP formation) vs 1/T for G, Di, Tri, six points each over 1/T ≈ 0.00249–0.00268 K⁻¹ (100–130 °C), with
+    fitted lines — the plot behind the printed Arrhenius equations (Table 1). G-ARP points span ln k ≈ −0.8 to −2.8, matching
+    Table 1 (ln 0.430 = −0.84; ln 0.0604 = −2.81).
+
+**Model use.** No new numbers (figure-only). It confirms Table 1/2 are zero-order slopes over short windows and that 1-DG is
+quantified without its own standard; digitising Fig. S5 A–F would give the 1-DG/3-DG time courses at 120 and 130 °C.

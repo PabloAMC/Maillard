@@ -198,3 +198,133 @@
   same check against its cited table as a rate constant gets against its paper. Any temperature
   extrapolation over more than ~50 K carries the source's dCp, or a measured high-temperature
   correlation, or says why not.
+
+## A misfit was blamed on a mechanism before the paths and the numerics were checked (2026-10-28, B60)
+
+- **What happened.** After B51, the Hofmann ribose/xylose pH 5 rows sat ~100x low and the record blamed
+  "the thiolate-acting thiol sink". A flux attribution two days later showed that sink takes 0–4 % of MFT's
+  loss in those pots. The real causes were (1) a pH trajectory solved on 41 uniform nodes that missed a
+  transient lasting seconds, and a pH fixed point that oscillated ~1 pH unit and was stopped after 2–4
+  sweeps without checking its residual (MFT moved 39x when both were fixed); and (2) a trunk that destroys
+  cysteine in ~1 s where three measured pots say hours, because endpoint fit rows constrain branch ratios
+  but not timescales. The residual `ph_fixed_point_residual` had been written to every run's metadata and
+  read by nobody.
+- **Rule.** Before attributing a misfit to a mechanism: (a) show the numerics converged at the speed of
+  the fastest transient (refine the grid, iterate the fixed point to tolerance); (b) run
+  `build_sulfur_flux_attribution.py` and confirm the blamed channel actually carries the flux; (c) compare
+  the intermediates' lifetimes with any time course in the corpus. A diagnostic a code writes must be
+  asserted somewhere, or it is decoration.
+- **Confirmed by the result.** On B60's converged numerics those four rows went from 37–118x off to
+  1.5–3.6x with no change to the sink, and the B51 model-card entry was withdrawn. Two more things showed
+  up. First, B51's reported fit cost (20.4) was itself flattered by the unconverged numerics: the same
+  vector costs 33.2 integrated correctly. A fit's cost is only as good as the integrator inside its
+  objective. Second, a legacy switch must cover EVERY numerical change: the closed flux budget also moved
+  a frozen wave's share rows (4.6e-5 relative). Run the frozen-wave tests before declaring a numerics
+  correction backward-compatible.
+
+## A pseudo-inverse reported "identified" for directions the data never saw (2026-10-28, B60)
+
+- **What happened.** The Laplace covariance drops JᵀJ's near-null eigen-directions (to keep it PSD) and
+  then reads σ off the diagonal. A dropped direction contributes ZERO variance, so a constant with an
+  exactly zero Jacobian column (`k_glc_ha`: no fit row contains glucose) came out σ = 1e-9 and
+  "IDENTIFIED". `k_thiol_decay` and `k_dimer_decay` did the same, in B51 and in B60. The envelope sampled
+  "identified" constants from the covariance, so it pinned all three at the optimum.
+- **Rule.** Truncating a pseudo-inverse is a statement that those directions have INFINITE variance, and
+  the output must say so: record each coordinate's weight in the dropped subspace and mark it
+  unidentified. More generally, a sigma far below the step used to differentiate (1e-9 against a 0.05
+  step) is a red flag, not a precision.
+
+
+## The flat-draw box and the flux-less barrier (2026-10-28, B60 envelope and the B62 design)
+
+- **What happened (1).** After the Laplace fix, three unidentified coordinates were drawn flat across the
+  optimiser's box [-10, 0.5]. The fit rows reject the top 1.5-2 decades of that box (slice cost +714 at
+  the top of `k_thiol_decay`), and those draws put 6-9 dex intervals on rows the coordinates were fitted
+  on. Coverage rose from 20/50 to 38/66, mostly bought with width.
+- **Rule (1).** An optimiser bound is not a prior. Draw an unidentified coordinate over the range the data
+  ADMIT: the profile's walk to each bound, cut at the same Δχ² the Laplace uses. Before reporting a
+  coverage gain, look at the widths that bought it.
+- **What happened (2).** I told Pablo that three sources put furfural FORMATION at ~128 kJ/mol. Two of
+  them (Garrett 1969, Danon 2014) measure amine-free, acid-catalysed pentose -> furfural, a route that
+  carries ~0 flux in every pot we score. The flux attribution showed that `r_pent_tdp` (amine-catalysed)
+  makes 95-100 % of the 3-deoxyosone. Pablo approved the wave on that claim; I caught it afterwards and
+  corrected it.
+- **Rule (2).** Before mapping a literature barrier or rate onto an engine step, check that the step
+  carries the flux in the pots it will be scored on (`sulfur_flux_attribution.md`). Also check that the
+  measured system's catalysis regime is the operative one. A barrier for an idle route says nothing about
+  the busy one.
+- **And (3), compute.** I ran 12+ processes on 10 cores (load ~170). Every job ran at ~50 % and the user
+  had no CPU left. Cap my parallel work at about half the cores, nice it, and stop superseded probes.
+  `scipy.optimize.least_squares`' `max_nfev` does not count finite-difference Jacobian evaluations, so
+  budget a k-parameter refit at ~(k+1) x max_nfev integrations.
+
+## 2026-10-29 — an independent review failed B59a and corrected B64 (lessons from my own errors)
+- **Check a new reaction's REDOX, not only C/N/S.** `r_dpo_ddp_h2s` balanced carbon, nitrogen and sulfur but emitted
+  the 2e-reduced DDP together with H2S, double-counting the enaminol's reducing equivalents. For any step that moves
+  sulfur between oxidation states, write the half-reactions and check H and electrons before running anything.
+- **A yield is not a bound on a branching share** unless every unit of product is known to come from the branch.
+  Ask what else makes the product (a blank?) and whether the yield scales with a co-reactant: if it does, a fixed
+  share is the wrong functional form.
+- **Read the source's numbers, not its prose.** Schieberle 2000's "a factor of 13" is 7.9x on its own tables. A
+  discriminator taken from a sentence must be recomputed from the tables, with the discrepancy as its uncertainty.
+- **Amendments after results are selection.** Refitting a variant because a sweep lowered its cost, or carrying "the
+  best-fitting" baselines forward, is choosing on scores. Run every pre-registered alternative, or declare the
+  selection as post hoc in the record.
+- **"V1-V5 PASS" must name what it covers.** A verification run on two readings does not certify a third.
+- **Pre-register the mechanical ship rule with the audit**, and make the engine check (item 4) a non-tautological
+  reproduction of the source pot.
+
+## 2026-10-29 (later) — 15 refits launched before the cheap question was asked (owner: "get clarity before expensive runs")
+- **Before any refit, run the change at the incumbent's constants with NO refit** and score it row by row and on
+  every hold-out. Five minutes on one core showed what hours of refits would have buried: which rows the change
+  breaks, why (a flux budget), and that the change already moves the hold-outs the right way. A refit is for
+  rebalancing a change you understand, never for discovering what it does.
+- **"Refit only the coordinates the data identify" (WAVES.md) applies to every kind-2 refit**, and the identified set
+  is a property of the rows AND the structure: after a structural change it must be re-derived, not inherited.
+- **List every direct measurement of each NEW species before writing audit item 5.** B59b's audit missed Zhai 2019
+  Fig. 3A (the route's own intermediates at four temperatures), which contradicts the transferred formation barrier.
+  Grep the dossiers for the species' names (TTCA, Cys-Amadori, ARP), not only for the step's name.
+- **When a fit moves a constant a long way, ask which measurement in the objective sees that constant.** If none
+  does, the move is compensation, and the fix is data that see it, not a bound.
+- **Check the record for the same idea before proposing it.** "Add Schieberle's 100 °C series as fit rows" was B16
+  (2026-09-07), and it failed for reasons that changed the plan.
+- **Copy the codebase's optimiser settings, and restart-check every fit.** The route calibration's first fits left
+  `least_squares` at its default finite-difference step (~1e-8, below the ODE noise at rtol 1e-7) and reported a
+  convergence that a restart from the other arm's optimum disproved (8.27 → 4.45). Every fit here uses
+  `diff_step = 3e-2`. "Converged" means two starts agree, not that the optimiser's status flag says so.
+- **Background agents must save as they go.** Two agents (a digitisation, a literature search) were lost when the
+  session ended mid-task with nothing written. Every long agent gets an output file it appends to after each unit
+  of work.
+- **Question inherited rules on their merits** (owner, 2026-10-29). "Rates, fed yields and ratios fit; levels
+  validate" encoded a real worry (calibration leaking into constants) with the wrong remedy (excluding data by
+  type); the right tool was a measurement model. A written rule is evidence of someone's reasoning, not proof of it.
+- **scipy's `diff_step` is RELATIVE** (3 % of the coordinate's value). At a coordinate near zero the step collapses
+  to machine epsilon and the Jacobian column is the ODE integrator's noise; across units it is inconsistent (3 kJ/mol
+  on an Ea of 100, 0.018 dex on a log10 k of -0.6). Every fit copying B8's setting shares this for coordinates near
+  zero (B60's acid yield sits at 7.5e-5). `src/kinetic_core/fitting.py` uses an absolute step per coordinate kind.
+  Found by writing a test with a known answer on a rough objective, which is the point of shared, tested tooling.
+- **A parameter shift measured in the full fit's sigmas can hide a tension**, because the tension inflates the full
+  fit's chi-square and so its sigmas. Leave-one-group-out also needs the predictive check: the held-out group's
+  residuals under the model fitted without it, against that fit's own scatter (an F test).
+- **A dossier's summary label is not the source.** Zhai 2021's kinetic rows were run at pH 5.5 but labelled pH 7 in
+  the dossier heading; B16 and stage 1 both inherited it. Before a row enters a fit, its conditions are checked
+  against the paper's own text (the measurement index should carry the quoted condition, not the summary).
+- **Generators set engine switches AT IMPORT, and a test that imports one leaks them to every later test**
+  (2026-10-29). `generate_kinetic_core_b64_fit` sets `sulfur.PH_COUPLING = "inline"` at import; the route-calibration
+  test imported it, and B2.4's frozen-objective test then ran under the inline coupling: over an hour of a unit tier
+  that takes minutes, and a check of the wrong configuration had it finished. The B2.3 row splicing leaked the same way
+  (cost 22.56 -> 23.44). Guards now: `tests/conftest.py` resets every `src.kinetic_core` UPPERCASE global to its
+  pre-collection value before each test, and `tests/support.wave_generator` restores every generator module's
+  namespace on exit. Rules: a test imports a wave generator only through `wave_generator`; a new generator sets its
+  switches inside a context (as the route calibration's `installed()` does), not at import. Found by pairing each
+  earlier test file with the slow one (a bisection that took one minute); "probably slow" was the wrong first guess.
+- **A test that is slow in the suite and fast alone is test pollution, not slowness.** Time it alone first.
+- **A phase that regenerates headline artifacts is not closed on the unit tier** (2026-10-29). Phase 0 was declared
+  closed on 1091 unit tests and the gates; CI's scientific tier then failed five headline guards (pinned 17/60, 33/59,
+  21/38, 17 bundles, "no Hofmann pot in the fit") that the regeneration had legitimately moved. The guards were right
+  to fail, but the prose in README had also gone stale, and a merge was delayed. Rule: after regenerating any
+  scorecard, envelope or baseline, run `tests/scientific/test_core_headline_guards.py` (about 10 min) before calling it
+  done, and re-pin with the reason in the same commit.
+- **Local checks must be case-exact** (2026-10-29). macOS folds case and CI's Linux does not: `xin2026b` and
+  `zhang2024_extraction.md` passed every local gate and failed CI. Gates match names against directory listings or
+  git's tracked paths, never `Path.exists()`.

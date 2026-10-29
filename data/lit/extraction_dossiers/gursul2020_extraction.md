@@ -430,3 +430,13 @@ concentrations, because every concentration-time datum is in a figure.
     measured in this paper**, and the file has no entry for HMF or for any alpha-dicarbonyl. The
     file is about off-flavour in plant-based meat alternatives; this paper is about browning
     chemistry in acidic beverages. There is no overlap and no action.
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+The SI (`data/articles/gursulaktag2020_supplementary.docx`) was read on 2026-10-29 and transcribed into the
+fuller duplicate dossier, `gursulaktag2020_extraction.md`, section "Supplementary material (read
+2026-10-29)": Table S1 (4 °C arm), S2 (amino acids), S3 (Brix, pH — 3.34–3.54, not 3.4 for all three),
+S4 (rejected 22-step model's constants), and a data-integrity flag on the orange-juice 4 °C sugar rows.
+This dossier is the known duplicate; nothing further is recorded here.

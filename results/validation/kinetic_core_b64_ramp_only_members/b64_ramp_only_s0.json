@@ -1,0 +1,471 @@
+{
+  "wave": "B64",
+  "weight_tag": "half",
+  "ph_endpoint_weight_E": 0.7,
+  "sigma_ph_units": 0.5,
+  "start": 0,
+  "arm": "incumbent",
+  "seed": null,
+  "start_is_b2_4_half_vector": true,
+  "start_cost": 50.542821274065666,
+  "cost": 45.42676468525009,
+  "sum_r2_level_shared_with_b2_4": 83.71565202355123,
+  "sum_r2_level_all_b8_rows": 88.84614255280977,
+  "n_rows": 52,
+  "n_free": 23,
+  "evals": 600,
+  "eval_budget": 600,
+  "budget_exhausted": true,
+  "nfev": 600,
+  "status": -9,
+  "converged": false,
+  "seconds": 8159.3,
+  "x_full": [
+    -0.5446463072676107,
+    -0.5022095511358302,
+    -3.0155236916597783,
+    -2.548603752094275,
+    -1.6147774113240274,
+    0.43445392481376577,
+    -4.347247153178998,
+    0.04172302756946337,
+    -3.680319734281469,
+    -6.540581367427349,
+    -1.8455544779876791,
+    -2.644455319171183,
+    -3.8028532935573898,
+    -3.357237733029061,
+    -3.8696667868173487,
+    -8.589075847746692,
+    -2.5882946400737175,
+    -3.273029275775544,
+    -2.6086953372771946,
+    -3.4372110320564206,
+    -2.9736755938616524,
+    0.49999999999061245,
+    -2.5309426238174986,
+    -1.9837700999787538,
+    0.13411252144508923,
+    -0.7033256900925582,
+    -7.107990612524538,
+    -2.181605124250818,
+    -0.08986182025728881,
+    -1.3506222526942775,
+    -1.9527131658191228,
+    -7.600552024161773,
+    -1.3745569682960848,
+    -3.437313963933767,
+    -4.922868997756941,
+    -4.353715425211875,
+    -1.2902512237780432,
+    -7.69250097808771,
+    -0.009550422129148002,
+    -0.5786517733288119,
+    -2.8385228334022305,
+    -1.9948506889927506,
+    -1.5853157567617335,
+    64.0822869313293,
+    101.5244853623679,
+    130.64372936560582,
+    0.07737299815036705,
+    6.900513828702572
+  ],
+  "parameters": {
+    "k_pent_dpo": -0.5446463072676107,
+    "k_pent_tdp": -0.5022095511358302,
+    "k_dpo_c2c3": -3.0155236916597783,
+    "k_arp_dpo": -2.548603752094275,
+    "k_arp_tdp": -1.6147774113240274,
+    "k_dpo_nf": 0.43445392481376577,
+    "k_dpo_ptr": -4.347247153178998,
+    "k_dpo_ddp": 0.04172302756946337,
+    "k_tdp_fur": -3.680319734281469,
+    "k_ddp_mft": -6.540581367427349,
+    "k_fur_fft": -1.8455544779876791,
+    "k_nf_mft": -2.644455319171183,
+    "k_nf_mp3p": -3.8028532935573898,
+    "k_mgo_mp": -3.357237733029061,
+    "k_ha_mp_mft": -3.8696667868173487,
+    "k_glc_ha": -8.589075847746692,
+    "k_thi_hmp": -2.5882946400737175,
+    "k_thi_mesh": -3.273029275775544,
+    "k_hmp_mft": -2.6086953372771946,
+    "k_hmp_mp2p": -3.4372110320564206,
+    "k_cys_actz": -2.9736755938616524,
+    "k_dimer_mft": 0.49999999999061245,
+    "k_dimer_fft": -2.5309426238174986,
+    "k_mmft": -1.9837700999787538,
+    "k_mft_decay": 0.13411252144508923,
+    "k_fft_decay": -0.7033256900925582,
+    "k_dimer_decay": -7.107990612524538,
+    "k_nf_decay": -2.181605124250818,
+    "k_fur_decay": -0.08986182025728881,
+    "k_h2s_loss": -1.3506222526942775,
+    "k_osone_decay": -1.9527131658191228,
+    "k_thiol_decay": -7.600552024161773,
+    "k_pent_caramel": -1.3745569682960848,
+    "k_pent_thermal": -3.437313963933767,
+    "k_glc_fur": -4.922868997756941,
+    "k_arp_tdp_th": -4.353715425211875,
+    "k_arp_dpo_th": -1.2902512237780432,
+    "k_ddp_mft_hs": -7.69250097808771,
+    "k_fur_fft_hs": -0.009550422129148002,
+    "k_ttca_cys": -0.5786517733288119,
+    "k_ttca_deg": -2.8385228334022305,
+    "k_cys_thermal": -1.9948506889927506,
+    "k_thiolate_loss": -1.5853157567617335,
+    "Ea_lumped_formation": 64.0822869313293,
+    "Ea_decay_thiol_sink": 101.5244853623679,
+    "Ea_decay_carbonyl_sink": 130.64372936560582,
+    "ph_acid_yield_per_sink_event": 0.07737299815036705,
+    "ph_arp_secondary_ammonium_pKa": 6.900513828702572
+  },
+  "ph_endpoint_miss_pH_units": {
+    "zhou_final_pH_from_pH6": -0.002101888675242858,
+    "zhou_final_pH_from_pH7": 0.707899646293372,
+    "zhou_final_pH_from_pH8": 0.026839844714849903
+  },
+  "residuals": [
+    0.07775692018572122,
+    0.9728615799944976,
+    -0.8098830947299086,
+    -1.80223180625673,
+    -0.3533307954214289,
+    4.584990494856729,
+    2.4620028527327498,
+    -1.706617671319879,
+    -0.1300133556098097,
+    2.0199412902713894,
+    -0.6435058902900452,
+    -1.7120815616818617,
+    0.06314083752703596,
+    -0.06413104893115512,
+    -1.9176243509924644,
+    -1.511517943199905,
+    -0.8123491098717366,
+    -2.3952696811054297,
+    -0.452558354662011,
+    -1.6282417485034386,
+    -0.8121272278725349,
+    -0.8537285285463105,
+    -0.0658580673014234,
+    0.36262673902831616,
+    0.41646245536051735,
+    -2.028007532751469,
+    0.35847767191577706,
+    1.0181880706034887,
+    -0.44129954101045715,
+    1.7690980305635489,
+    2.5727841491946504,
+    0.7471470105766559,
+    1.011195345827452,
+    1.3592731612234517,
+    0.07517830994049526,
+    1.3632758752802105,
+    0.06113477836428285,
+    -0.0283776335653858,
+    0.08448719067442022,
+    -0.7181957178692735,
+    -0.6631889983733771,
+    -0.7335853110603869,
+    -0.9348460610372786,
+    -1.1453177863810438,
+    0.41168467366070616,
+    -0.004203777350485716,
+    1.415799292586744,
+    0.053679689429699806,
+    0.20065361326660883,
+    0.03582700743443794,
+    2.1431629840610475,
+    0.7041288987326353
+  ],
+  "residual_by_row": {
+    "hofmann_ribose_NF_insitu": 0.07775692018572122,
+    "hofmann_ribose_FUR_insitu": 0.9728615799944976,
+    "fed_ribose_h2s_FFT": -0.8098830947299086,
+    "fed_ribose_h2s_MFT": -1.80223180625673,
+    "fed_tdp_h2s_FFT": -0.3533307954214289,
+    "fed_furfural_h2s_FFT": 4.584990494856729,
+    "fed_nf_h2s_MFT": 2.4620028527327498,
+    "fed_nf_cys_MFT": -1.706617671319879,
+    "fed_c2c3_MFT": -0.1300133556098097,
+    "fed_c2c3_MFT_pH3": 2.0199412902713894,
+    "fed_c2c3_MFT_pH7": -0.6435058902900452,
+    "fed_thiamine_MFT": -1.7120815616818617,
+    "fed_mgo_h2s_1to1_MP": 0.06314083752703596,
+    "fed_mgo_h2s_1to2_MP": -0.06413104893115512,
+    "zhou_pH7_MFT": -1.9176243509924644,
+    "zhou_pH7_FFT": -1.511517943199905,
+    "zhou_pH7_MFT_over_FFT": -0.8123491098717366,
+    "zhou_pH7_dimer_over_MFT": -2.3952696811054297,
+    "zhou_pH7_ACTZ": -0.452558354662011,
+    "zhou_pH7_FUR_arp_alone": -1.6282417485034386,
+    "whitfield_nf_cys_MFT": -0.8121272278725349,
+    "whitfield_nf_h2s_MFT": -0.8537285285463105,
+    "whitfield_mercaptoketone_over_MFT": -0.0658580673014234,
+    "vanseeventer_cys_conversion": 0.36262673902831616,
+    "vanseeventer_ribose_conversion": 0.41646245536051735,
+    "zhang_fig1_cys_dimer_over_MFT": -2.028007532751469,
+    "zhang_fig1_gcys_dimer_over_MFT": 0.35847767191577706,
+    "zhang_fig1_cys_MMFT_over_MFT": 1.0181880706034887,
+    "cerny_ternary_thiamine_share": -0.44129954101045715,
+    "kang_100C_MFT": 1.7690980305635489,
+    "kang_120C_MFT": 2.5727841491946504,
+    "kang_100C_FFT": 0.7471470105766559,
+    "kang_120C_FFT": 1.011195345827452,
+    "kang_100C_FUR": 1.3592731612234517,
+    "kang_120C_FUR": 0.07517830994049526,
+    "kang_100C_MFT_over_FFT": 1.3632758752802105,
+    "kang_100C_cys_conversion": 0.06113477836428285,
+    "kang_120C_cys_conversion": -0.0283776335653858,
+    "kang_free_cys_yield_ceiling": 0.08448719067442022,
+    "kumazawa_FFT_retention_pH3_0": -0.7181957178692735,
+    "kumazawa_FFT_retention_pH4_0": -0.6631889983733771,
+    "kumazawa_FFT_retention_pH5_0": -0.7335853110603869,
+    "kumazawa_FFT_retention_pH5_4": -0.9348460610372786,
+    "kumazawa_FFT_retention_pH6_0": -1.1453177863810438,
+    "kumazawa_FFT_retention_pH6_4": 0.41168467366070616,
+    "zhou_final_pH_from_pH6": -0.004203777350485716,
+    "zhou_final_pH_from_pH7": 1.415799292586744,
+    "zhou_final_pH_from_pH8": 0.053679689429699806,
+    "feng_ARP_conversion_100C": 0.20065361326660883,
+    "feng_ARP_conversion_120C": 0.03582700743443794,
+    "zhai_MFT_fold_120_over_100": 2.1431629840610475,
+    "zhai_FFT_fold_120_over_100": 0.7041288987326353
+  },
+  "row_ids": [
+    "hofmann_ribose_NF_insitu",
+    "hofmann_ribose_FUR_insitu",
+    "fed_ribose_h2s_FFT",
+    "fed_ribose_h2s_MFT",
+    "fed_tdp_h2s_FFT",
+    "fed_furfural_h2s_FFT",
+    "fed_nf_h2s_MFT",
+    "fed_nf_cys_MFT",
+    "fed_c2c3_MFT",
+    "fed_c2c3_MFT_pH3",
+    "fed_c2c3_MFT_pH7",
+    "fed_thiamine_MFT",
+    "fed_mgo_h2s_1to1_MP",
+    "fed_mgo_h2s_1to2_MP",
+    "zhou_pH7_MFT",
+    "zhou_pH7_FFT",
+    "zhou_pH7_MFT_over_FFT",
+    "zhou_pH7_dimer_over_MFT",
+    "zhou_pH7_ACTZ",
+    "zhou_pH7_FUR_arp_alone",
+    "whitfield_nf_cys_MFT",
+    "whitfield_nf_h2s_MFT",
+    "whitfield_mercaptoketone_over_MFT",
+    "vanseeventer_cys_conversion",
+    "vanseeventer_ribose_conversion",
+    "zhang_fig1_cys_dimer_over_MFT",
+    "zhang_fig1_gcys_dimer_over_MFT",
+    "zhang_fig1_cys_MMFT_over_MFT",
+    "cerny_ternary_thiamine_share",
+    "kang_100C_MFT",
+    "kang_120C_MFT",
+    "kang_100C_FFT",
+    "kang_120C_FFT",
+    "kang_100C_FUR",
+    "kang_120C_FUR",
+    "kang_100C_MFT_over_FFT",
+    "kang_100C_cys_conversion",
+    "kang_120C_cys_conversion",
+    "kang_free_cys_yield_ceiling",
+    "kumazawa_FFT_retention_pH3_0",
+    "kumazawa_FFT_retention_pH4_0",
+    "kumazawa_FFT_retention_pH5_0",
+    "kumazawa_FFT_retention_pH5_4",
+    "kumazawa_FFT_retention_pH6_0",
+    "kumazawa_FFT_retention_pH6_4",
+    "zhou_final_pH_from_pH6",
+    "zhou_final_pH_from_pH7",
+    "zhou_final_pH_from_pH8",
+    "feng_ARP_conversion_100C",
+    "feng_ARP_conversion_120C",
+    "zhai_MFT_fold_120_over_100",
+    "zhai_FFT_fold_120_over_100"
+  ],
+  "thermal_history_b64": {
+    "reading": "ramp_only",
+    "profiles_c": {
+      "hofmann_pentose_pH5": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "hofmann_glucose_pH5": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "hofmann_fructose_pH5": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_ribose_h2s": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_tdp_h2s": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_furfural_h2s": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_nf_h2s": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_nf_cys": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_c2c3": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_c2c3_pH3": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_c2c3_pH7": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_thiamine": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_mgo_h2s_1to1": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "fed_mgo_h2s_1to2": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          20.0,
+          145.0
+        ]
+      ],
+      "vanseeventer_130C": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          10.0,
+          130.0
+        ],
+        [
+          30.0,
+          130.0
+        ]
+      ]
+    },
+    "profile_node_step_k": 2.0,
+    "ph_coupling": "inline"
+  },
+  "ph_state_corrections_b51": {
+    "heat_capacity": true,
+    "ionic_strength": true,
+    "cysteine_gkl": true,
+    "h2s_suleimenov": true,
+    "label_scale_tables": true,
+    "sid_across_segments": true
+  },
+  "removed_row_ids": [
+    "hofmann_ribose_FFT",
+    "hofmann_ribose_MFT",
+    "hofmann_xylose_FFT",
+    "hofmann_xylose_MFT",
+    "hofmann_glucose_FFT",
+    "hofmann_glucose_MFT",
+    "hofmann_fructose_FFT",
+    "hofmann_fructose_MFT",
+    "cerny_isomer_split",
+    "yaghmur_fft_share_ceiling"
+  ]
+}

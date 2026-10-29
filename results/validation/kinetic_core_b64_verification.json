@@ -1,0 +1,28 @@
+{
+  "artifact": "kinetic_core_b64_verification",
+  "prereg": "results/validation/kinetic_core_b64_prereg.md",
+  "quick_setting": {
+    "ph_nodes": 17,
+    "rtol": 1e-05,
+    "max_dex_vs_careful_81": 0.007552093399241632
+  },
+  "cost_isothermal_b60_vector": 27.084304316944106,
+  "readings": {
+    "ramp_only": {
+      "v5_max_dex_quick_vs_careful": 0.00012650557328221888,
+      "v5_worst_row": "cerny_ternary_thiamine_share",
+      "v5_rows_over_tol": [],
+      "v5_pass": true,
+      "wall_seconds_quick_objective": 9.633136999997078,
+      "cost_b60_vector": 50.54282127406566
+    },
+    "ramp_plus_hold": {
+      "v5_max_dex_quick_vs_careful": 0.00012650557328221888,
+      "v5_worst_row": "cerny_ternary_thiamine_share",
+      "v5_rows_over_tol": [],
+      "v5_pass": true,
+      "wall_seconds_quick_objective": 10.49951449999935,
+      "cost_b60_vector": 26.426454413007228
+    }
+  }
+}

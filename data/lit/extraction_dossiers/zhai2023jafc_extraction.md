@@ -952,3 +952,461 @@ does not survive the time axis either.
 | G5 | **No measured pH after heating** in an unbuffered pot that the B2.2 diagnosis shows is the model's weakest state variable | not obtainable from this paper |
 | G6 | **The 90/100/110/130/150 °C rungs exist only for A₄₂₀** — the volatile ladder cannot be extended | would require new experiments |
 | G7 | ★ **The independence of the corpus's sulfur ladder is now a live question.** Before any further weighting, someone should check whether Kang 2026 cites this paper as the source of Table S4 | read Kang's reference list against §7 |
+
+---
+
+# APPENDIX A. THE PRINTED-RECORD READING (merged from `zhai2023b`, 2026-10-27)
+
+Until 2026-10-27 this paper had **two dossiers**: this file (wave K6a, named by paper identity) and a
+second one written from the same PDF (`data/articles/Zhai2023b.pdf`) under its file stem,
+`zhai2023b`. They are the same paper (DOI `10.1021/acs.jafc.3c04166`), so the second file was
+deleted and its content that this file did not already carry is kept below, unchanged except for
+heading levels. Dropped as duplicates of §1, §3 and §4 above: its identity table (except the two rows
+below) and its methods section; two methods points not stated above are kept here: the Methods say every
+experiment was "performed three times" yet no SD is attached to any number printed in the running
+text, and the 90-150 °C browning ladder spans the sulfur lane's 95-145 °C window, the widest such
+coverage in the TTCA corpus. **Inside this appendix "section n" and "Flags n" mean A.n and A.5 item n.**
+It reads the paper differently from §6 in one respect: it treats every figure-borne value as
+`figure_only` and types only what the running text prints, so its numbers are the printed record and
+§6-§11 are the digitisation.
+
+| field | value |
+|---|---|
+| Abbreviations as the paper defines them | **TTCA** 2-threityl-thiazolidine-4-carboxylic acid; **ARP** Amadori rearrangement product; **1-DX** 1-deoxy-2,3-pentodiulose; **3-DX** 3-deoxypentose-2-ulose; **GO** glyoxal; **MGO** methylglyoxal; **MRI** Maillard reaction intermediate |
+| Direct predecessors by the same group | ref 12 = Zhai et al., JAFC 2019, 67:8632 ("Interaction of added L-cysteine with TTCA ... affecting its Maillard browning") — **the parent of this paper**; ref 13 = Zhai et al., JAFC 2020, 68:10884 (TTCA <-> ARP transformation, `zhai2020_extraction.md`); ref 14 = Zhai et al., JAFC 2021, 69:10648 (TTCA + extra **xylose**, `zhai2021_extraction.md`); ref 37 = Zhai et al., Food Chem. 2023, 404:134420 (`zhai2023foodchem_extraction.md`) |
+
+## A.1 Why it matters (the engine's `r_ttca_cys`)
+
+The engine gives TTCA two fates and both are one-way:
+
+| row in `sulfur.py` (lines 550-583) | rate key | order | what this paper bears on |
+|---|---|---|---|
+| `r_ttca_cys`: TTCA -> Cys + PENT (ring-opening / retro-condensation) | `k_ttca_cys` (fitted on Kang 2026's free-cysteine readings) | 1 | **directly, and adversely** — see below |
+| `r_ttca_deg`: TTCA -> 1-deoxypentosone + fragments, no free cysteine released | `k_ttca_deg` (fitted) | 1 | indirectly, through the deoxyosone time courses |
+
+**The B16 diagnosis is the reason to read this paper.** `results/validation/kinetic_core_b16_prereg.md`
+records that the shipped lane consumes TTCA about **18x faster** than Zhai 2021 measured at 120-140 °C,
+and localises the fault precisely: *"the RING-OPENING step `r_ttca_cys` (TTCA -> Cys + pentose, fitted
+on Kang 2026's free-cysteine readings) runs about ten times too fast, and the released pentose is then
+eaten by the sugar trunk. The fitted `k_ttca_deg` is not the issue; `k_ttca_cys` is."* Probed on the
+shipped B9 lane, TTCA 10 mM at pH 7 after 60 min leaves 1.58 / 0.05 / 0.00 mM at 100 / 120 / 140 °C
+against Zhai 2021's measured 8.71 / 6.07 / 4.46 mM.
+
+**What this paper adds to that diagnosis is the missing half of a mass-action argument.** Zhai 2021
+pushed on the *xylose* side and found that extra xylose **accelerates** TTCA degradation, by trapping
+the released cysteine and pulling the ring-opening forward. This paper pushes on the *cysteine* side
+and finds the mirror image: added free cysteine **delays and suppresses** every downstream marker —
+"At 120 or higher temperature (140 °C), 3-DX was undetectable before the reaction period of 40-60 min
+in the TTCA-Cys model, confirming that the degradation pathway of TTCA to form downstream products was
+blocked", and "ARP was not observed at the early stage, which could confirm the phenomenon of Cys
+blocking the reaction process through its action on the targeted TTCA **to make it convert back to Cys
+and Xyl**." Two perturbations, opposite directions, same conclusion: **`r_ttca_cys` is an equilibrium,
+and the engine has no reverse for it.** A one-way ring-opening fitted against a free-cysteine reading
+in a pot where the reverse is active will come out too fast, which is exactly the B16 residual. This
+is a **structural** finding — the paper supplies no equilibrium constant and no reverse rate — but it
+is the first evidence in the corpus that the fault B16 localised has a named mechanism rather than a
+bad fit.
+
+**Second, the two furan-to-thiol edges are validated qualitatively in the same pot type.** Figure 6's
+validation models charge ammonium sulfide (10 mmol/L) against furfural, furan, 2-methylfuran and
+**4-hydroxy-5-methyl-3(2H)-furanone** — which is **norfuraneol**, the engine's `NF` — at pH 7.0 and
+**120 °C**, and report that the four furanoids "were rapidly consumed in their respective thermal
+reaction models and were all exhausted after 20 min", giving respectively 2-furfurylthiol,
+2-methylthiophene, thiophene and **2-methyl-3-furanthiol**. Two of those four are engine reactions:
+
+- `r_fur_fft`: FUR + H2S -> FFT (`k_fur_fft`, `neutral_h2s`) — panel (a);
+- `r_nf_mft`: NF + H2S -> MFT (`k_nf_mft`, `neutral_h2s`) — panel (b).
+
+The other two products, thiophene and 2-methylthiophene, are compounds the module **declares out of
+scope**. The paper's mechanistic claim for all four is the same: "the oxygen atoms on the ring or the
+side chain of the ring in the furans were replaced by sulfur atoms."
+
+**Third, it says how small the volatile lane is.** The total quantified volatile pool at 180 min is
+**87.262 µg/L** at 140 °C with added cysteine, against a 10 mmol/L TTCA charge. On a rough molar basis
+that is of order **0.008 mol %** of the charged intermediate (section 3, arithmetic 4, mine). The
+aroma channel is a trace branch off a pot whose carbon overwhelmingly goes to browning — a useful
+calibration for how much flux the sulfur lane's product steps should be expected to carry.
+
+What this paper does NOT give: any rate constant; any activation energy; any TTCA concentration at any
+time (it measures TTCA's *products*, never TTCA itself); any thiol dosing experiment; any disulfide
+measurement; any measurement of any thiol **consumption** channel; any pH-resolved volatile data (the
+pH ladder is browning-only); any error bar on the printed volatile totals; and any of its Supporting
+Information.
+
+## A.3 Quantities printed in the running text
+
+**There is no table in the main text of this paper.** Tables S1 and S2 are in the Supporting
+Information, which is not on disk. What follows is therefore the complete set of quantities printed in
+the **running text**; every figure-borne value is left in its figure per the house rule.
+
+#### A.3.1 Quantitative results printed in the running text
+
+| quantity | value | conditions | where |
+|---|---|---|---|
+| **total volatile flavour, TTCA-Cys model, at the "later reaction period"** | **29.565 / 63.249 / 87.262** µg/L | 100 / 120 / 140 °C, pH 7.0, Cys : TTCA 1 : 1 | Results, "Additional Cys as the Inhibitor..." |
+| **total volatile flavour, TTCA model (no added Cys)** | **13.749 / 39.168 / 63.035** µg/L | same temperatures, pH 7.0 | same paragraph |
+| number of **types** of sulfur-containing volatiles at the later period, **100 °C** | **27** (TTCA-Cys) against **19** (TTCA) | 100 °C, pH 7.0 | same paragraph |
+| number of pyrazine species detected in the TTCA-Cys model | **four kinds** | (temperature not restated — see Flags 4) | same paragraph |
+| **total pyrazine content at 180 min** | **1.203** µg/L (TTCA-Cys) against **0.739** µg/L (TTCA) | 180 min, pH 7.0 | same paragraph |
+| optimal added-Cys loading for colour inhibition | **1 mol/mol TTCA** ("the Cys addition of **2 mol/mol** TTCA presented the best color-inhibiting effect, but the browning index ... did not show a significant downward trend compared to that with the Cys addition of **1 mol/mol** TTCA. Therefore, **1 mol/mol TTCA was determined as the optimal amount**") | 120 °C, pH 7, 120 min | Results, first section |
+| threshold above which Cys blocks melanoidin formation | **≥ 0.5 mol/mol TTCA** | 120 °C, pH 7, 120 min | same |
+| the loading at which colour inhibition **reverses** | **10 mol/mol TTCA** ("the color inhibition effect showed a downward trend instead") | same | same |
+| the loading at which added Cys **increases** colour slightly | **1 : 10 Cys : TTCA** ("revealed a little bit increase compared to the TTCA model") | same | same |
+| pH range over which TTCA browning barely moves | **5.5-7.5** ("a small fluctuation trend") | 120 °C, 120 min | Results, first section |
+| pH range over which TTCA browning rises significantly | **7.5-8.5** | same | same |
+| the four validation furanoids at 120 °C | "rapidly consumed ... and were **all exhausted after 20 min**" | (NH4)2S 10 mmol/L, equimolar substrate, pH 7.0, 120 °C | Results, "Model Reaction Systems..." |
+| 3-DX detectability in the TTCA-Cys model | **undetectable before 40-60 min** | 120 and 140 °C, pH 7.0, 1 : 1 | Results, "Dynamic Formation..." |
+| ARP in the TTCA-Cys model at 100 °C | "slightly higher than that in the TTCA reaction model during the **initial 60 min**" | 100 °C | same |
+| TTCA synthesis charge | Cys + Xyl **0.0827 mol/L**, equimolar, pH **7.4 ± 0.01**, **90 °C / 40 min** | — | Methods |
+| reaction charge | TTCA **10 mmol/L** | — | Methods |
+| validation charge | (NH4)2S **10 mmol/L**, equimolar substrate | pH 7.0 ± 0.1 | Methods |
+| internal standard | 1,2-dichlorobenzene, **0.018 µg/µL**, **3 µL** into **3 g** of sample | — | Methods |
+
+#### A.3.2 Products named as increasing with added cysteine (presence and direction only, no numbers printed)
+
+At 100 °C, "the contents of **2-furanthiol, 2-methyl-3-furanthiol, 2-acetylthiazole, and thiophene**
+exhibited a substantial increase"; **thiophene[3,2-b]thiophene** and
+**2-methylthiophene[2,3-b]thiophene** "were not found in the TTCA reaction model, but additional Cys
+could significantly promote their generation." Furfural is named as the dominant oxygen heterocycle
+("furfural exhibited the highest concentration") and its **suppression** by added Cys is the paper's
+central flavour observation: "As the temperature increased to 120 or 140 °C, only a small amount of
+furans could be detected at 40 or 80 min and not even detected as the time extended to 180 min ...
+these furans were captured by a large number of active H2S generated from Cys degradation."
+
+#### A.3.3 The validation-model product pairs, as the text states them
+
+| substrate | product named | engine reaction, if any |
+|---|---|---|
+| furfural | **2-furfurylthiol** | **`r_fur_fft`** (FUR + H2S -> FFT) |
+| **4-hydroxy-5-methyl-3(2H)-furanone** (= norfuraneol, engine `NF`) | **2-methyl-3-furanthiol** | **`r_nf_mft`** (NF + H2S -> MFT) |
+| 2-methylfuran | 2-methylthiophene | none — **out of the module's declared scope** |
+| furan | thiophene | none — **out of scope** |
+| MGO + GO | "a large amount of **thiazoles** and **thiophenes** and a small amount of nitrogen-containing flavor substances" | partially `r_cys_actz` (Cys + MGO -> 2-acetylthiazole) |
+
+#### Arithmetic on the printed numbers (all mine)
+
+**1. What added cysteine does to the total volatile pool, and how it fades with temperature.**
+TTCA-Cys / TTCA at 180 min: 29.565/13.749 = **2.15** (100 °C); 63.249/39.168 = **1.61** (120 °C);
+87.262/63.035 = **1.38** (140 °C). **The cysteine boost shrinks monotonically as temperature rises** —
+which is the arithmetic form of the paper's own claim that at high temperature the TTCA pot generates
+its own sulfide fast enough that an external cysteine supply matters less.
+
+**2. Temperature response of each arm.** TTCA alone: ×2.85 over 100 -> 120 °C, ×1.61 over
+120 -> 140 °C, **×4.58 overall**. TTCA + Cys: ×2.14, ×1.38, **×2.95 overall**. **The added-cysteine
+arm is the flatter of the two in temperature**, so the two curves converge; extrapolating either fold
+outside 100-140 °C is not supported by anything here.
+
+**3. Pyrazines.** 1.203/0.739 = **×1.63** with added cysteine. As a share of the total volatile pool
+at 180 min (using the 100 °C totals, on the reading that the pyrazine sentence sits in the 100 °C
+paragraph — Flags 4): **4.1 %** (TTCA-Cys) against **5.4 %** (TTCA). So added cysteine raises the
+pyrazines in absolute terms while *lowering* their share, because it raises the sulfur compounds more.
+
+**4. The whole volatile pool is a trace branch (order of magnitude, mine).** TTCA is
+cysteine + xylose − water = 121.16 + 150.13 − 18.02 = **253.27 g/mol**, so 10 mmol/L is **2.53 g/L**.
+Taking a representative volatile molar mass of ~114 g/mol (both MFT and FFT are C5H6OS = 114.17), the
+largest printed total, 87.262 µg/L, is ~**0.77 µmol/L** against 10 000 µmol/L of charged TTCA, i.e.
+**~0.008 mol %**. Even at ×10 for the molar-mass assumption and the compounds outside the calibrated
+set, the quantified aroma pool is **well under a tenth of a mole percent** of the intermediate. The
+carbon is in the browning. **Assumptions declared: one representative molar mass; the sum covers only
+the calibrated compounds; HS-SPME quantification against one internal standard.**
+
+**5. A bound on the furanoid consumption rate at 120 °C (mine, and weak).** "All exhausted after
+20 min" on a 10/20/30/40 min sampling grid means only *below the detection limit at the 20 min
+sample*. If "exhausted" is taken as ≥ 95 % consumed, the pseudo-first-order constant is
+≥ ln(20)/20 min = **0.15 min⁻¹** against 10 mmol/L sulfide; at ≥ 99 % it is ≥ 0.23 min⁻¹. **This is
+not a measurement**: the detection limit is not stated, the disappearance includes every non-thiol
+route, the sulfide activity of (NH4)2S at pH 7 and 120 °C is not stated, and the substrate is at
+10 mmol/L rather than at the µg/L levels of the Maillard pot. Recorded as a floor, class
+`derived_assumption`. For scale, Yaghmur 2005 measures furfural in water with cysteine at 65 °C with a
+half-life of 5.5 h; this is the same direction, 55 °C hotter, with a sulfide charge.
+
+## A.4 Kinetic numbers the repository can use
+
+**There is no rate constant and no activation energy in this paper.** The usable content is (a) three
+pairs of printed volatile totals and their ratios, (b) a set of directional and threshold statements
+about the added-cysteine perturbation, and (c) the qualitative validation of two engine edges.
+
+**Registry mapping (`data/keys/compounds.yml`, 75 ids).** Keyed: `2_methyl_3_furanthiol`,
+`2_furfurylthiol`, `furfural`, `hydrogen_sulfide`. **Not keyed:** TTCA, the xylose-cysteine ARP,
+cysteine, xylose, 3-DX, 1-DX, methylglyoxal, glyoxal, 2-acetylthiazole, 2-furanthiol, thiophene,
+2-methylthiophene, thieno-thiophenes, 4-hydroxy-5-methyl-3(2H)-furanone (norfuraneol), or any
+pyrazine.
+
+Every row below shares: **purified TTCA 10 mmol/L in unbuffered water**, ± L-cysteine, ice-quenched in
+pressure-resistant stirred bottles, triplicate, ANOVA at p < 0.05. Unless stated otherwise the
+condition is **pH 7.0, Cys : TTCA = 1 : 1**.
+
+| step / observable | quantity | value | unit | conditions | reaction order as fitted | source location | evidence class |
+|---|---|---|---|---|---|---|---|
+| total volatiles, TTCA-Cys | sum over calibrated compounds at the later period | **29.565 / 63.249 / 87.262** | µg/L | 100 / 120 / 140 °C, pH 7, 1 : 1 | **nothing is fitted in this paper** | Results text, p. 14306 | **level_only** (an HS-SPME sum against one internal standard; see Flags 3 on its five-figure precision) |
+| total volatiles, TTCA alone | same | **13.749 / 39.168 / 63.035** | µg/L | same temperatures | — | same | **level_only** |
+| effect of added cysteine on the volatile pool | ratio TTCA-Cys / TTCA | **2.15 / 1.61 / 1.38** at 100 / 120 / 140 °C | — | as above | — | derived from the printed totals (mine) | **within_study_ratio** — the strongest quantitative statement in the paper |
+| temperature response, TTCA alone | fold 100 -> 120 -> 140 °C | 2.85 / 1.61 (4.58 overall) | — | as above | — | derived (mine) | **within_study_ratio** |
+| temperature response, TTCA + Cys | fold 100 -> 120 -> 140 °C | 2.14 / 1.38 (2.95 overall) | — | as above | — | derived (mine) | **within_study_ratio** |
+| total pyrazines at 180 min | TTCA-Cys vs TTCA | **1.203** vs **0.739** (ratio 1.63) | µg/L | pH 7, 1 : 1, 180 min, temperature not restated (Flags 4) | — | Results text | **level_only** / the ratio **within_study_ratio** |
+| sulfur-compound diversity | number of species detected | **27** vs **19** | count | 100 °C, later period | — | Results text | **level_only** — a count of detections, **not an amount** |
+| optimal colour-inhibiting Cys loading | Cys : TTCA | **1 : 1** (2 : 1 best but not significantly better; ≥ 0.5 : 1 blocks melanoidins; 10 : 1 reverses; 0.1 : 1 slightly increases colour) | mol/mol | 120 °C, pH 7, 120 min | — | Results, Fig. 1a discussion | **threshold** (a dose-response threshold set stated in words) |
+| pH response of TTCA browning | flat 5.5-7.5, rises 7.5-8.5 | — | — | 120 °C, 120 min | — | Results, Fig. 1c discussion | **level_only** (direction only; **all values are in the figure**) |
+| **`r_ttca_cys` is reversible** | added free cysteine delays ARP, 3-DX, 1-DX, MGO and GO and "make[s] it convert back to Cys and Xyl" | — | — | 100-140 °C, pH 7, 1 : 1 | — | Results, "Dynamic Formation...", Fig. 5 | **threshold** (a presence/absence and delay result) — **structural, and the most useful line in the paper for this engine** |
+| 3-DX suppression | undetectable before **40-60 min** in the TTCA-Cys model | min | | 120 and 140 °C | — | Results text | **threshold** |
+| **`r_fur_fft` validated** | furfural + (NH4)2S gives 2-furfurylthiol; furfural exhausted by 20 min | — | — | 10 mmol/L each, pH 7.0, **120 °C** | — | Results, Fig. 6a | **threshold** |
+| **`r_nf_mft` validated** | 4-hydroxy-5-methyl-3(2H)-furanone (norfuraneol) + (NH4)2S gives 2-methyl-3-furanthiol; substrate exhausted by 20 min | — | — | as above | — | Results, Fig. 6b | **threshold** |
+| furanoid consumption floor | pseudo-first-order k | **≥ 0.15** (at ≥95 % consumed) | min⁻¹ | (NH4)2S 10 mmol/L, pH 7.0, 120 °C | first order in the furanoid, assumed | derived from "exhausted after 20 min" (mine) | **derived_assumption** — a floor with an undefined detection limit; **do not fit against it** |
+| volatile pool as a share of charged TTCA | ~0.008 | mol % | 140 °C, 180 min, pH 7, 1 : 1 | — | derived (mine, one molar-mass assumption) | **derived_assumption** |
+| Figs. 1a-c, 2a-c, 3a-d, 4a-c, 5a-e, 6 — every browning value, every volatile concentration, every ARP / 3-DX / 1-DX / MGO / GO time course, every validation-model bar | — | — | — | — | Figs. 1-6 | **figure_only** — digitised in §6-§11 of this file and marked `[D]` there; **not typed as numbers here** |
+
+#### What is new here, against `zhai2021_extraction.md`
+
+Read side by side, the two papers are the same pot with the opposite perturbation, and only one of
+them has kinetics.
+
+| axis | **Zhai 2021** (`zhai2021_extraction.md`) | **this paper (2023 JAFC)** |
+|---|---|---|
+| perturbation | extra **xylose** (10 mmol/L) | extra **cysteine** (0.1 / 0.5 / 1 / 2 / 10 mol/mol) |
+| direction of the effect | **accelerates** TTCA degradation and **deepens** browning, by trapping released cysteine | **retards** the downstream path and **lightens** browning, by pushing the ring-closure back |
+| TTCA measured directly? | **yes** — TTCA remaining against time | **no.** TTCA itself is never quantified in this paper; only its products |
+| rate constants | **three**, zero-order, c = c0 − kt at pH 7: 0.0271 / 0.0651 / 0.0813 mmol L⁻¹ min⁻¹ at 100 / 120 / 140 °C, R² 0.9516 / 0.9949 / 0.9802 | **none** |
+| activation energy | printed **80.99 kJ/mol**, which the 2021 dossier flags as **not reproducible** from the three printed k (re-derivation gives ~35 kJ/mol) | **none** |
+| temperature grid | 100 / 120 / 140 °C | **90-150 °C in 10 °C steps — but for browning only**; everything else is 100 / 120 / 140 °C |
+| pH grid | 5.5 / 6 / 7 / 8 | **5.5 / 6 / 6.5 / 7 / 7.5 / 8 / 8.5 — browning only, at 120 °C** |
+| time grid | 20-120 min | **20-180 min** |
+| volatiles | not quantified | **quantified**, 39 compounds by HS-SPME-GC-MS against 1,2-dichlorobenzene, at three temperatures |
+| dicarbonyls | 3-DX, 1-DX, MGO, GO against time at **100 °C** and four pH values | the same four **plus ARP**, against time, at **three temperatures**, ± cysteine |
+| isotope work | **yes** — ¹³C₅-xylose tracer, and an LC-MS/MS fragment table | **none** |
+| mechanism validation | none | **yes** — five ammonium-sulfide models at 120 °C, including furfural -> FFT and norfuraneol -> MFT |
+| what it gives the fit | **three measured rates on `k_ttca_deg`'s species** — declared FIT rows in B16/B17/B25 (TTCA remaining after 60 min: 8.71 / 6.07 / 4.46 mmol/L) | **no row.** Its contribution is **structural**: the reverse of `r_ttca_cys` exists and matters |
+
+**In one sentence:** Zhai 2021 gives the fit its numbers on this step; this paper gives the fit its
+diagnosis of why those numbers are missed.
+
+#### Can any of this be put on the same basis as the sulfur lane's constants?
+
+**(a) The reversibility finding — yes, as a structural change, not a number.** The engine's
+`r_ttca_cys` has no reverse. Adding one would need an equilibrium constant, and **this paper supplies
+none** — it supplies only the sign of the effect and the delay times. The honest use is to record the
+reverse as a declared missing edge against the B16 residual, in the way `THIOL_CHANNELS` records the
+thioether channel's reversibility with Stack 2018's K, and to say plainly that the K for this one does
+not exist in the corpus.
+
+**(b) The two validated edges — yes, as confirmation, not as rates.** `r_fur_fft` and `r_nf_mft` are
+demonstrated in isolation at 120 °C, which is inside the module's window and is a cleaner
+demonstration than any in-pot inference. But the loading is 10 mmol/L against a Maillard pot's µg/L,
+the sulfide source is ammonium sulfide rather than cysteine-derived H2S, and the branch fractions are
+figure-borne. Confirmation of topology; no constant.
+
+**(c) The volatile totals — usable only as within-study ratios.** The 2.15 / 1.61 / 1.38 boost and the
+2.85 / 1.61 temperature folds are dimensionless and internally consistent. The absolute µg/L values
+depend on calibration curves that are in an SI not on disk, on a single internal standard, and on an
+HS-SPME step whose partition behaviour differs per compound. **Never score an absolute level from this
+paper.**
+
+**(d) What cannot be used at all.** The browning ladders (all figure-borne, and on an unstated dilution
+basis), the pH ladders (figure-borne, browning only), the ARP and dicarbonyl time courses
+(figure-borne), and every validation-model amount (figure-borne). Nothing here bears on any entry in
+`NO_MEASURED_RATE` — `k_oligomer` remains the sole entry and this paper adds nothing to it — and
+nothing here bears on **any** of the six channels in `THIOL_CHANNELS`: there is no thiol dosing, no
+disulfide measurement, no thiol mass balance and no thiol-consumption experiment anywhere in the paper.
+
+## A.5 Flags
+
+1. *(Retired at the merge: it recorded that this record and the K6a dossier above were two
+   files for one paper. They are now one file.)*
+2. **"Seven temperatures" applies to browning only.** The 90-150 °C ladder (Fig. 1b) and the pH
+   5.5-8.5 ladder (Fig. 1c) are **A420 measurements**. Every volatile, ARP and dicarbonyl measurement
+   is at **100, 120 and 140 °C, pH 7.0, Cys : TTCA 1 : 1**. There is **no seven-rung MFT or FFT ladder
+   in this paper**.
+3. **The volatile totals are printed to five significant figures with no error bar.** 29.565, 63.249,
+   87.262, 13.749, 39.168, 63.035, 1.203 and 0.739 µg/L are sums over a calibrated compound set,
+   obtained by HS-SPME against a single internal standard, in triplicate — and **not one of them
+   carries an SD**, although the Methods promise "mean ± standard deviation". Three decimals on a
+   headspace sum is precision the method cannot support. Use the ratios; treat the absolutes as
+   one- or two-figure quantities.
+4. **The pyrazine sentence's temperature is ambiguous.** "It is worth noting that four kinds of
+   pyrazines could be detected in the TTCA-Cys reaction model, the total content of which increased to
+   1.203 µg/L compared with that of 0.739 µg/L in the TTCA system at the final reaction stage
+   (180 min)" sits in the paragraph that opens "At 100 °C, the types of sulfur-containing flavor
+   compounds increased to 27...". **My reading is that it is the 100 °C figure**, and my share
+   calculation in section 3 says so explicitly, but the sentence does not restate the temperature.
+5. **Two chromatographic methods are unreproducible as printed.** "The linear gradient elution process
+   is not shown here" appears for the ARP HPLC-ELSD method, and "Linear gradient elution process is not
+   presented here" for the dicarbonyl HPLC-DAD method. The **GC oven programme** is likewise not
+   printed and is deferred to ref 14 (Zhai 2021). Three of the paper's four quantitative methods cannot
+   be reproduced from this paper alone.
+6. **The retention-index alkane set is stated inconsistently.** Materials says "The n-alkanes
+   (**C6-C27**) for retention indices"; Methods says "The calculation of the retention index (RIX) of
+   target compounds was performed through **C7-C30** n-alkane standards". One of the two is wrong. No
+   retention index is printed in the paper, so nothing downstream depends on it, but it is a sign of
+   the level of proof-reading.
+7. **TTCA itself is never measured.** The paper infers what happens to TTCA entirely from ARP, 3-DX,
+   1-DX, MGO, GO and the volatiles. Anyone hoping this paper would supply a second temperature series
+   on `k_ttca_deg` or `k_ttca_cys` — the very thing B16 needs — will not find one. **Zhai 2021 remains
+   the only direct TTCA time series in the corpus.**
+8. **No purity figure and no equilibrium constant.** The TTCA purity is deferred to ref 13 (Zhai 2021
+   states 98 %) and the reverse reaction that this paper's whole argument rests on — cysteine plus
+   pentose closing back to TTCA — is **never quantified**: no K, no reverse rate, no measurement of
+   TTCA re-formation. The finding is a sign, not a size.
+9. **The validation models are three orders of magnitude above the pot.** 10 mmol/L furanoid against
+   10 mmol/L ammonium sulfide, versus a Maillard pot whose entire volatile pool is under 0.1 mg/L.
+   Ammonium sulfide is also a sulfide *source* whose free-H2S activity at pH 7 and 120 °C the paper
+   does not state, so even the *order* in sulfide is unconstrained. **Read Fig. 6 as topology.**
+10. **Two of the four validation products are out of the module's scope.** Thiophene and
+    2-methylthiophene, from furan and 2-methylfuran, have no species in `species_sulfur.py`, and the
+    module declares thiophenes out of scope (see the B8 panel's `zhai_13C_exogenous_carbon_threshold`
+    note). This paper says the O -> S substitution runs on **four** furanoids of which the engine
+    models two — so the engine's furan-to-thiol chemistry is a subset of a broader class, and the
+    sulfide that goes to the thiophenes is, in the engine, unaccounted.
+11. **Nothing here touches any thiol-consumption channel.** No thiol is dosed, no disulfide is
+    measured, no thiol mass balance is attempted, and the paper reports thiols only as they rise. The
+    lane's central defect — the thiol sink, INTRODUCTION section 7 — gets **no evidence** from this
+    paper in either direction. That is worth recording as a negative so nobody looks again.
+12. **Unbuffered pH, set once.** The reaction solutions are aqueous and pH-adjusted; no buffer is named
+    in the reaction section, and pH is not re-measured after heating. In a pot generating H2S, NH3, CO2
+    and carboxylic acids from 10 mmol/L of an amino-acid-derived intermediate, the drift is not
+    negligible, and the pH ladder's labels are therefore initial values.
+13. **What this paper does not contain**: any rate constant; any activation energy; any TTCA
+    concentration; any equilibrium constant for the ring-opening; any SD on any printed number; any
+    volatile data outside 100/120/140 °C; any volatile data at any pH other than 7.0; any thiol
+    consumption measurement; any isotope tracing; any of its Supporting Information (Fig. S1,
+    Table S1, Table S2, Fig. S2, the MGO-GO-Cys flavour table).
+14. **What to request from the authors**: (i) **TTCA remaining against time in the added-cysteine
+    arm** — the one measurement that would turn this paper's structural finding into a number for
+    `k_ttca_cys` and its missing reverse; (ii) the equilibrium position of TTCA <-> Cys + xylose at
+    100-140 °C, or any measurement of TTCA re-formation from a Cys + Xyl charge at reaction
+    temperature; (iii) the Supporting Information, in particular **Table S2's calibration curves**,
+    without which the µg/L totals cannot be checked; (iv) the numeric data behind Figs. 3 and 5 (the
+    39-compound × 4-time × 3-temperature × 2-system grid, and the five ARP/dicarbonyl series); (v) the
+    two omitted HPLC gradients and the GC oven programme; (vi) the SDs the Methods promise; (vii) the
+    detection limits behind "exhausted after 20 min" in Fig. 6.
+15. **Registry gaps against `data/keys/compounds.yml`**: `2_methyl_3_furanthiol`, `2_furfurylthiol`,
+    `furfural` and `hydrogen_sulfide` are present. **Absent: TTCA itself** — the subject of the paper
+    and a species the engine carries (`species_sulfur.py`) — together with the xylose-cysteine **ARP**,
+    **cysteine**, **xylose**, **3-DX**, **1-DX**, **methylglyoxal**, **glyoxal**, **2-acetylthiazole**
+    (an engine species, `ACTZ`), **2-furanthiol**, **norfuraneol** (engine `NF`), **thiophene**,
+    **2-methylthiophene**, the two thieno-thiophenes, and every pyrazine. A benchmark row built on
+    this paper would need at least TTCA, ARP and norfuraneol keyed.
+
+## Supplementary material (read 2026-10-29)
+
+**Source:** `data/articles/zhai2023jafc_supplementary.pdf` (7 pp., owner download 2026-10-29, not committed;
+ACS stamp "jf3c04166_si_001"). Identity from its own title page: *"Regulated Formation of Inhibited
+Color and Enhanced Flavor Derived from Heated 2-Threityl-Thiazolidine-4-Carboxylic Acid with
+Additional Cysteine Targeting at Different Degradation Stages"*, Zhai, Cui, Hayat, Li, Wu, Fu, Zhang,
+Ho — **this paper (JAFC 10.1021/acs.jafc.3c04166)**. (The other download, `zhai2023foodchem_supplementary.docx`,
+is the Food Chem 134420 SI; see `zhai2023foodchem_extraction.md`.) Read with `pdftotext -layout`.
+
+**What it holds.**
+- **Fig. S1** — TIC and LC-MS/MS spectra of purified ARP and TTCA (identity only).
+- **Fig. S2** — proposed pathways: (a) volatiles from Cys-Xyl, (b) the sulfur compounds. Scheme, no data.
+- **Table S1** — LC-MS/MS fragments and 13C NMR of the two intermediates; **raster image** (the text
+  layer prints only "TABLE"). Identity data, no model use; not transcribed.
+- **Table S2** — "The calibration curves of volatile flavor compounds": 31 linear curves with R².
+- **Table S3** — "The main flavor compounds (μg/L) generated from thermal treated MGO-GO-Cys model at
+  100, 120 and 140 ℃ for different times, initial pH of 7.0." 9 compounds × 3 T × 4 times.
+
+This resolves sec. 1.1's cross-reference defect: the SI numbers the MGO-GO-Cys table **S3**, while the
+main text (p. 14304) calls it "Table S2".
+
+### Table S2 (as printed). y = area(analyte)/area(IS, 1,2-dichlorobenzene); x = μg/L (per main text p. 14302)
+
+| # | compound | curve | R² |
+|---:|---|---|---:|
+| 1 | Thiophene | y = 0.0223 x + 0.0011 | 0.9991 |
+| 2 | 2-Methylthiophene | y = 0.0472 x + 0.0009 | 0.9994 |
+| 3 | Thiazole | y = 0.0601 x − 0.0012 | 0.9982 |
+| 4 | 2-Methylthiazole | y = 0.0084 x − 0.0521 | 0.9923 |
+| 5 | 3-Mercapto-2-butanone | y = 0.1216 x − 0.0007 | 0.9999 |
+| 6 | 2,5-Dimethyl-thiazole | y = 0.0637 x + 0.0012 | 0.9979 |
+| 7 | 2-Methyl-3-furanthiol | y = 0.0039 x + 0.0011 | 0.9989 |
+| 8 | 2-Ethyl-thiazole | y = 0.0629x + 0.0041 | 0.9994 |
+| 9 | 3-Mercapto-2-pentanone | y = 0.0379 x + 0.0131 | 0.9997 |
+| 10 | 2,4,5-Trimethylthiazole | y = 0.0571 x − 0.0007 | 0.9994 |
+| 11 | 4,5-Dimethyl-thiazole | y = 0.0297 x − 0.0042 | 0.9969 |
+| 12 | 2-Furfurylthiol | y = 0.0287 x − 0.0003 | 0.9992 |
+| 13 | 5-Ethyl-2,4-dimethyl-thiazole | y = 0.0184 x + 0.0008 | 0.9981 |
+| 14 | 2-Ethyl-4-methyl-thiazole | y = 0.0430 x + 0.0024 | 0.9923 |
+| 15 | 3-Thiophenethiol | y = 0.0285 x + 0.0033 | 0.9954 |
+| 16 | 2-Acetylthiazole | y = 0.0364 x − 0.0014 | 0.9967 |
+| 17 | 2-Thiophenecarboxaldehyde | y = 0.0446 x + 0.0009 | 0.9998 |
+| 18 | 5-Methyl-2-thiophenecarboxaldehyde | y = 0.0296 x − 0.0007 | 0.9999 |
+| 19 | 2-Thiophenemethanethiol | y = 0.0517 x + 0.0012 | 0.9954 |
+| 20 | 1-(3-Thienyl)-ethanone | y = 0.0728 x − 0.00012 | 0.9981 |
+| 21 | 2,5-Thiophenedicarboxaldehyde | y = 0.0423 x − 0.0031 | 0.9997 |
+| 22 | Methylpyrazine | y = 0.0398 x + 0.0012 | 0.9949 |
+| 23 | Pyrazine | y = 0.0294 x + 0.0012 | 0.9989 |
+| 24 | 3-Methyl-pyridine | y = 0.0563 x + 0.0032 | 0.9998 |
+| 25 | 2,5-Dimethyl-pyrazine | y = 0.0319 x + 0.0013 | 0.9978 |
+| 26 | Furan | y = 0.0253 x − 0.0012 | 0.9968 |
+| 27 | 2-Methyl-furan | y = 0.0336 x + 0.0021 | 0.9997 |
+| 28 | Furfural | y = 0.0347 x − 0.0012 | 0.9923 |
+| 29 | 1-(2-Furanyl)-ethanone | y = 0.0629 x + 0.0024 | 0.9948 |
+| 30 | 2(5H)-Furanone | y = 0.0598 x − 0.0011 | 0.9993 |
+| 31 | 4-Hydroxy-5-methyl-3(2H)-furanone | y = 0.0098 x + 0.0002 | 0.9971 |
+
+No calibration range, no number of levels, no LOD/LOQ, no recovery, no matrix (water vs reaction
+solution) is printed.
+
+### ★ What Table S2 says about the quantification basis (the integrity question; all checks mine)
+
+1. **It is Kang 2026 SI Table S3, verbatim.** All 31 curves, coefficients and R² are identical to the
+   last printed digit to `kang2026_SI_extraction.md` sec. 2c (machine diff of the two lists, 2026-10-29).
+   The curve list is therefore not independent evidence for Kang; it is one lab's list printed twice.
+2. **8 of the 39 Fig. 3 compounds have no curve**: 2,3-dihydro-5-methylthiophene,
+   1-(2-thienyl)-1-propanone, 2-methyl-3-[(2-methyl-3-thienyl)dithio]furan, 1,2,3-trithiolane,
+   3,3′-dithiobisthiophene, thieno[3,2-b]thiophene, 2-methylthieno[2,3-b]thiophene,
+   bis(2-furfuryl)sulfide. Those rows cannot be calibrated whatever the text says (μg/L by f′ = 1 at best).
+   The sec. 4.2 "working assumption" (shared-with-Kang rows = Tier A) is now a fact about the roster.
+3. **The printed curves cannot have produced 30 of the 430 non-zero Fig. 3 cells that have a curve.**
+   A curve with a positive x-intercept (−b/a > 0) maps any detected peak (y > 0) to x > −b/a. Yet:
+   - **2-methylthiazole**: x-intercept **+6.20 μg/L**; **all 21 non-zero cells** (0.001-2.482 μg/L,
+     incl. column E 0.142 / 0.194 / 0.254 = Kang S4) lie below it — each would need a negative area ratio;
+   - 4,5-dimethylthiazole (x-int 0.141): 0.112, 0.012, 0.027, 0.028; 2,5-thiophenedicarboxaldehyde
+     (0.073): 0.024, 0.052; 2,4,5-trimethylthiazole (0.012): 0.004; furan (0.047): 0.039;
+     2(5H)-furanone (0.018): 0.012.
+   (Script: scratchpad `scripts/zhai_curve_test.py`, run on the sec. 6 grid.)
+4. **The two stated routes cannot give the same numbers.** The Food Chem companion's
+   `Wi = f′ × Ai × ms / (As × V)` with f′ = 1, ms = 0.054 μg IS and V ≈ 3 mL implies one uniform
+   response y = x × V/ms ≈ **0.056 x** for every compound. Table S2's slopes run **0.0039 (MFT) to
+   0.1216** (3-mercapto-2-butanone), i.e. relative response factors of 0.07-2.2. For MFT, the same
+   area ratio would read **~14x higher** via its curve than via f′ = 1. Identical cells (Food Chem
+   Table 1 = this Fig. 3 col. E = Kang S4) therefore came from one route only, and the curves do not
+   say which. (V = 3 mL is my reading of "3 g sample"; with the Food Chem's 2 g NaCl added, the
+   implied slope is ~0.09. Either way it is uniform, the curves are not.)
+
+**Verdict.** Table S2 does **not** show that the ladder is externally calibrated. It shows the curves
+exist and match Kang's, but (i) 8 rows have none, (ii) 2-methylthiazole's printed values are
+impossible under its printed curve and 9 further cells are too, and (iii) the companion paper prints
+the f′ = 1 formula for the same numbers. **Keep the ladder semi-quantitative (response factor 1)**;
+ratios and Arrhenius slopes within a compound stand, absolute μg/L and cross-compound comparisons do
+not. The curves' slopes give the size of the error if they were *not* applied: MFT absolute values
+could be ~14x low, 3-mercapto-2-butanone ~2x high.
+
+### Table S3 (as printed) — MGO 10 + GO 10 + Cys 10 mmol/L, initial pH 7.0, μg/L. "-" = not detected. No SDs printed.
+
+| compound | RIa | RIb | ID | 10 min 100 | 10 min 120 | 10 min 140 | 20 min 100 | 20 min 120 | 20 min 140 | 30 min 100 | 30 min 120 | 30 min 140 | 40 min 100 | 40 min 120 | 40 min 140 |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2-Acetylthiazole | 1646 | 1643 | RI, MS | 2.197 | 4.135 | 10.178 | 5.219 | 8.237 | 16.039 | 8.221 | 12.178 | 27.018 | 11.228 | 20.213 | 32.728 |
+| 2-Thiophenecarboxaldehyde | 1674 | 1679 | RI, MS | 0.009 | 0.054 | 0.097 | 0.032 | 0.120 | 0.217 | 0.078 | 0.193 | 0.332 | 0.107 | 0.312 | 0.413 |
+| 5-Methyl-2-thiophenecarboxaldehyde | 1701 | 1785 | RI, MS | 0.178 | 0.112 | 0.278 | 0.327 | 0.576 | 0.623 | 0.627 | 0.986 | 1.213 | 0.978 | 1.213 | 1.779 |
+| 3-Thiophenethiol | 1564 | 1530 | RI, MS | 0.000 | 0.009 | 0.023 | 0.008 | 0.027 | 0.063 | 0.014 | 0.053 | 0.083 | 0.034 | 0.079 | 0.100 |
+| Thieno[3,2-b]thiophene | 1868 | 1843 | RI, MS | 0.097 | 0.178 | 0.273 | 0.117 | 0.239 | 0.534 | 0.231 | 0.430 | 0.732 | 0.391 | 0.621 | 0.852 |
+| 2-Methylthieno[2,3-b]thiophene | 1947 | - | MS | - | - | - | - | - | - | - | - | - | - | - | - |
+| Pyrazine | 1216 | 1209 | RI, MS | - | - | 0.017 | - | 0.011 | 0.017 | 0.007 | 0.020 | 0.031 | 0.019 | 0.029 | 0.048 |
+| MethylPyrazine | 1214 | 1263 | RI, MS | - | - | 0.293 | 0.021 | 0.237 | 0.478 | 0.512 | 0.736 | 0.973 | 0.939 | 1.012 | 1.301 |
+| 2,5-Dimethyl-pyrazine | 1320 | 1328 | RI, MS | - | - | 0.012 | 0.005 | 0.012 | 0.032 | 0.021 | 0.043 | 0.059 | 0.047 | 0.062 | 0.079 |
+
+Footnotes as printed: a RI on DB-WAX (30 m × 0.25 mm × 0.25 μm) vs n-alkanes; b RI from flavornet /
+NIST WebBook; c identification method; d "-" not detected.
+
+**This is the Food Chem 134420 SI Table S2, reprinted** (all 126 cells identical, machine diff). This
+JAFC paper has no methods entry for a Cys-MGO-GO pot: its validation models are ammonium sulfide +
+furfural / furan / 2-methylfuran / norfuraneol / MGO-GO, "treated at 120 °C for a defined reaction
+time (10, 20, 30, and 40 min)"; the text then cites "the Cys−MGO−GO thermal reaction model ... Table
+S2" (p. 14308). The table's 10-40 min grid matches that JAFC time grid, **not** the Food Chem methods
+(sec. 2.5: "100, 120 and 140 °C for a defined reaction time (20, 40, 60, 80, 100, 120 min)"), so
+which methods text describes this pot is unresolved. Transcribed here because it is printed here;
+the ledger carries it once, under `zhai2023foodchem_tables2_mgo_go_cys`. Note that
+the 5-methyl-2-thiophenecarboxaldehyde 100 °C/10 min cell (0.178) exceeds 120 °C/10 min (0.112),
+the only temperature inversion in the table.
+
+**Model-usable:** partly. Table S2 settles the integrity question (negatively for "absolute"); Table
+S3 is a duplicate; nothing else is numeric.

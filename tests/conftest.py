@@ -12,6 +12,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.support import reset_engine_switches
 from tests.support import wave_generator as _wave_generator
 
 TESTS_DIR = Path(__file__).resolve().parent
@@ -27,6 +28,14 @@ def pytest_collection_modifyitems(config, items):
             continue
         if relative.parts[:1] == ("scientific",):
             item.add_marker(pytest.mark.scientific_regression)
+
+
+@pytest.fixture(autouse=True)
+def _pristine_engine_switches():
+    """Each test starts from the engine's shipped switches, whatever an earlier test imported
+    (``tests.support.reset_engine_switches``; why: its docstring)."""
+    reset_engine_switches()
+    yield
 
 
 @pytest.fixture

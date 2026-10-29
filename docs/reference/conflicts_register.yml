@@ -1,0 +1,1282 @@
+# The register of conflicts: every place where sources disagree with each other, with themselves, or with how
+# the model uses them (strategy 2026-10-29, M5; owner item 5: "track and resolve the apparent conflicts
+# between papers").
+#
+# Why it exists: conflicts were handled case by case and forgotten; the same data set was counted two or three
+# times; rows ran at conditions the paper did not use. Each entry is worked through the misfit protocol
+# (docs/guides/OPERATING_PROCEDURE.md sec. 4): integrity first, then conditions, then measurement, then
+# mechanism; an explanation counts only when a test outside the conflict supports it.
+#
+# kind:
+#   conflict           -- two or more sources measure the same quantity and disagree beyond their errors
+#   duplicate          -- one data set published (or reprinted) more than once; it must be counted once
+#   condition_error    -- the model (a row, a pot, a constant) uses conditions the source does not state
+#   code_mismatch      -- the code's number or citation does not match its source
+#   self_contradiction -- a source disagrees with itself (methods vs captions, text vs table)
+# status:
+#   open               -- recorded; not yet worked
+#   explained          -- an explanation is supported by a test outside the conflict (`tests` says which)
+#   duplicate_confirmed / error_confirmed -- verified against the source text; `remedy` says what changes
+#   fixed              -- the remedy is in the code or the curated data (`remedy` names the commit or file)
+#   not_an_error       -- checked against the source; the model's use is right
+# scope:
+#   sulfur_rows        -- touches a row, pot or constant of a current sulfur-lane fit or check (resolve first)
+#   other_lane         -- touches the trunk, lipid, acrylamide, aroma or matrix layer (Phase 4 unless urgent)
+#   corpus             -- touches no model use yet
+# `sources` are dossier stems in data/lit/extraction_dossiers/ (without _extraction.md); `affects` lists ledger
+# ids (data/lit/measurement_ledger/*.yml) and/or {file, symbol} pairs. Checked by
+# scripts/ci/conflicts_register_gate.py (structure only; it does not judge an entry).
+
+# Populated 2026-10-29 (M5). CF-001..CF-017: the sulfur lane, verified against the PDFs (text layers via pdftotext,
+# read in data/articles/) and the code; CF-018 onwards: the other lanes and the corpus, recorded from STRATEGY sec. 8
+# and the dossiers / ledgers, NOT re-verified against the PDFs unless the entry says so.
+# For the M6 measurement model: every `duplicate_confirmed` entry names its ORIGINAL first in `sources`; the
+# copy -> original map for fitting.count_once is listed in its `remedy`.
+
+entries:
+
+  # ===================================================================================================================
+  # SULFUR LANE (scope sulfur_rows unless stated): resolve first
+  # ===================================================================================================================
+
+  - id: CF-001
+    kind: condition_error
+    scope: sulfur_rows
+    sources: [meynier1995]
+    quantity: "MFT, FFT and furfural fold change pH 4.5 -> 6.5 in the cysteine + ribose pot (Table 3)"
+    observation: >-
+      The B2.3 hold-out (section 9, "MEYNIER 1995, directional") integrates Meynier's three pH-fold rows on the
+      Hofmann pot: {"PENT": 100, "Cys": 33}, 145 C, 20 min, default buffer BUFFER_HOFMANN (0.5 M orthophosphate).
+      The paper, p. 362 (Preparation of the reaction mixtures): "an aqueous solution containing the amino acid
+      (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed
+      in 50 ml volumetric flasks ... The final volumes were then adjusted to 50 ml with pyrophosphate buffer ...
+      heated in sealed glass ampoules at 140 C under pressure for 1 h". So the pot is cysteine 50 / ribose 35 mM,
+      0.2 M pyrophosphate, 140 C, 60 min. Every element of the simulated pot differs (concentrations 2x and 0.35x,
+      buffer species and strength, temperature, time). The same rows also ran this way in the closed B2.1 / B2.2
+      hold-outs. The directional claim PH-01 (results/validation/core_directional_scores.json) already runs the
+      right pot (50 / 35 mM, 140 C, 60 min, pyrophosphate 0.2 M), so the two checks of one table disagree on its
+      conditions. Second defect in the same rows: the furfural target "15-49x (midpoint 25x)" does not reproduce
+      the table; the verified cysteine-pot fall is > 39x (meynier1995 dossier, Flags 2; 15x and 49x are the glycine
+      and methionine pots).
+    explanations:
+      - "Copy-paste of the Hofmann pot when the rows were written (B2.1); no source states the Hofmann conditions for Meynier."
+    tests:
+      - "meynier1995.pdf p. 362 methods re-read 2026-10-29 (quoted above); the 2x make-up is explicit."
+      - "Table 3 re-read: MFT 15.2 at pH 4.5, not detected (<0.1) at 6.5, so > 152x stands; the dossier's raster re-read gives furfural > 39x in the cysteine pot."
+    status: error_confirmed
+    remedy: >-
+      scripts/generators/generate_kinetic_core_b2_3_holdout.py section 9 (and any successor hold-out): run m45 / m65
+      as run(p, {"PENT": 35.0, "Cys": 50.0, "OX": OX_AMBIENT}, 140.0, 60.0, ph=4.5 / 6.5,
+      buffer=BufferSpec(kind="pyrophosphate", pyrophosphate_mol_l=0.2, declared=True, source="Meynier & Mottram 1995
+      p. 362")); change the FUR row's observed fold from 25 (label "15-49x") to the censored "> 39" (score as a lower
+      bound). MFT > 152 and FFT 6.1 stay. The closed B2.1 / B2.2 artefacts are frozen evidence: annotate, do not
+      regenerate.
+    affects:
+      - meynier1995_table3_cys_ribose_ph_ladder
+      - {file: scripts/generators/generate_kinetic_core_b2_3_holdout.py, symbol: "9. MEYNIER 1995, directional"}
+
+  - id: CF-002
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [kang2026_SI, kang2026]
+    quantity: "temperature of Kang 2026 SI Table S5 (TTCA pH ladder 5.5 / 7 / 8)"
+    observation: >-
+      Table S5's caption and Fig. 1b's caption say 120 C ("under different pH values of 5.5, 7 and 8 at the
+      temperature of 120 C"; Fig. 1 legend "(b) effect of pH (5.5, 7, and 8) at 120 C"). But S5's pH 7 column equals
+      Table S4's 100 C column mean for mean (MFT 1.237, FFT 3.734, 2-acetylthiazole 3.079, sulfur total 13.978,
+      grand total 17.359), not S4's 120 C column (MFT 1.388, FFT 4.107, total 42.024), and its SDs differ (MFT +-0.061
+      in S5 vs +-0.142 in S4). The 120 C column of S4 is independently anchored by the main paper's Table 1 control
+      row (MFT 1.388, FFT 4.107; kang2026_SI dossier sec. 3). So S5's pH 7 column is a 100 C result, and the
+      temperature of its pH 5.5 and 8 columns is unknown (100 or 120 C). The methods (sec. 2.4) state all three pH
+      values and all three temperatures without saying which combinations were run. No current fit or check reads
+      S5; it touches the fit because the B2.3 fit cites it as the reason to discard S4's SDs.
+    explanations:
+      - "The pH series was run at 100 C and the caption is wrong (then S5 pH 5.5 / 8 are 100 C data)."
+      - "The pH series was run at 120 C and the pH 7 column was pasted from the wrong S4 column (then pH 5.5 / 8 are 120 C data and the pH 7 anchor is lost)."
+    tests:
+      - "Kang2026_supplementary.pdf Tables S4 and S5 compared cell by cell 2026-10-29 (text layer; matches the dossier's 600-dpi raster read)."
+    status: error_confirmed
+    remedy: >-
+      No model change now (S5 is unused). Ledger kang2026_si_table_s5_ttca_ph_ladder keeps temperature
+      100_or_120_C_UNRESOLVED; if S5 ever enters, use only within-table pH ratios relative to the pH 7 column, run at
+      100 C with a 120 C sensitivity arm, and count its pH 7 column as a copy of zhai2023foodchem Table 1 100 C (CF-005).
+      Ask the corresponding author (Jiangnan) which temperature the pH series used.
+    affects:
+      - kang2026_si_table_s5_ttca_ph_ladder
+      - kang2026_si_table_s4_ttca_tladder
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "The SDs are NOT used"}
+
+  - id: CF-003
+    kind: code_mismatch
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation]
+    quantity: "table citations of the Hofmann & Schieberle 1998 fed-precursor fit rows"
+    observation: >-
+      The values in the B2.3 fit rows are right; five table labels are wrong, and the module docstring claims a table
+      that no row reads. Against hofmann1998.pdf: ribose + H2S -> MFT 15.1 ug, 0.01 % is Table 4 ("Generation of MFT
+      from Ribose or NF in the Presence of Hydrogen Sulfide"), coded "T6" (row fed_ribose_h2s_MFT; system anchor
+      "T3/T6"); NF + cysteine -> MFT 50.8 ug is Table 10 only, coded "T4" (fed_nf_cys); the C2 + C3 pH ladder (15.5 ug
+      at pH 3.0, 311.5 at 7.0) is Table 8 expts 1 and 3, coded "T10 pH ladder" (fed_c2c3_MFT_pH3 / _pH7); thiamin -> MFT
+      8.2 ug is Table 10, coded "T8" (fed_thiamine_MFT). C2 + C3 at pH 5 (268.1 ug) is printed in both Table 8 expt 2
+      and Table 10 (coded T10: acceptable, counted once). The docstring lists "Hofmann 1998 Tables 3/4/6/7/8/10" as
+      FIT; Table 6 (furan-2-aldehyde and NF from hydroxyacetaldehyde + 2-oxopropanal, pH 3/5/7) has no system and no
+      row (no HA + MGO pot exists in SYSTEMS). The "T3/T6" string is repeated in src/kinetic_core/sulfur.py and
+      parameters_sulfur.py. The benchmark JSONs (hofmann1998_c2c3_recombination_*, _norfuraneol_cysteine_*) quote
+      the right tables (8 and 10).
+    explanations:
+      - "Table numbers transcribed from an earlier inventory, not from the PDF."
+    tests:
+      - "hofmann1998.pdf Tables 3, 4, 6, 8 and 10 read 2026-10-29 (p. 237-240); every coded value matches its printed cell."
+    status: error_confirmed
+    remedy: >-
+      Labels only, no number moves. generate_kinetic_core_b2_3_fit.py: docstring "Tables 3/4/6/7/8/10" ->
+      "Tables 3/4/7/8/10 (Table 6 is not read)"; SYSTEMS fed_ribose_h2s anchor "T3/T6" -> "T3/T4", fed_nf_cys "T4" ->
+      "T10", fed_c2c3 "T10" -> "T8 expt 2 (= T10)", fed_c2c3_pH3 / _pH7 "T10 pH ladder" -> "T8 expts 1 / 3",
+      fed_thiamine "T8" -> "T10"; the same five changes in the FIT_ROWS anchors (fed_ribose_h2s_MFT, fed_nf_cys_MFT,
+      fed_c2c3_MFT, fed_c2c3_MFT_pH3, fed_c2c3_MFT_pH7, fed_thiamine_MFT); "T3/T6" -> "T3/T4" in src/kinetic_core/sulfur.py
+      and src/kinetic_core/parameters_sulfur.py. These files are hashed by the freshness gate: batch the edit with the
+      next regeneration.
+    affects:
+      - hofmann1998_t4_mft_ribose_nf_h2s
+      - hofmann1998_t6_c2c3_fa_nf
+      - hofmann1998_t8_c2c3_mft_fft_ph
+      - hofmann1998_t10_mft_routes
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "Hofmann 1998 Tables 3/4/6/7/8/10"}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "Hofmann 1998 T6: ribose + H2S"}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "Hofmann 1998 T4: norfuraneol + cysteine"}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "Hofmann 1998 T10 pH ladder"}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "Hofmann 1998 T8: thiamin"}
+      - {file: src/kinetic_core/sulfur.py, symbol: "Hofmann 1998 T3/T6"}
+      - {file: src/kinetic_core/parameters_sulfur.py, symbol: "Hofmann 1998 T3/T6"}
+
+  - id: CF-004
+    kind: condition_error
+    scope: sulfur_rows
+    sources: [zhai2023foodchem, zhai2023jafc, kang2026_SI]
+    quantity: "quantification class of the TTCA temperature ladder (Zhai 2023 Food Chem Table 1 and its reprints, incl. Kang SI Table S4)"
+    observation: >-
+      The B2.1 / B2.3 fit enters Kang S4's 100 and 120 C MFT, FFT and furfural as absolute levels ("Tier A, R^2
+      0.9989"). The original's methods (Zhai 2023 Food Chem p. 3, sec. 2.7) state: "The detected compounds were
+      quantified by the comparison of peak areas and the correction factor was 1", with Wi = f' x Ai x ms / (As x V).
+      The JAFC companion's SI Table S2 (read 2026-10-29) prints 31 calibration curves that are digit for digit Kang SI
+      Table S3; 8 of the 39 compounds have no curve; and 30 of 430 non-zero cells lie below their own curve's zero-
+      response point, so the curves cannot have produced them: 2-methylthiazole y = 0.0084 x - 0.0521 has its
+      x-intercept at +6.20 ug/L, yet Kang S4 prints 0.142 / 0.194 / 0.254. So the numbers came from f' = 1 (single
+      internal standard, 1,2-dichlorobenzene): semi-quantitative. The B8 wave (Amendment 17) already called the ladder
+      semi-quant but kept the six level rows in the objective at sigma_log 0.4; every later objective (B9, the B47
+      52 rows, B58-B64) inherits them. Other absolute uses: the B2.3 hold-out's kang_140C_MFT / FFT / FUR level rows
+      (PASS_BAND_LEVEL), and the cross-compound ratio row kang_100C_MFT_over_FFT, which is not response-factor-free
+      under f' = 1 (the printed slopes differ 7.4x between MFT 0.0039 and FFT 0.0287). No data/ benchmark file
+      carries the ladder (grep for Kang / 10.1016/j.foodchem.2022.134420 in data/benchmarks: none).
+    explanations:
+      - "The JAFC paper and Kang copied a calibration list from another project; the ladder itself was computed with f' = 1 (supported by the 2-methylthiazole cells)."
+    tests:
+      - "zhai2023jafc dossier 'Supplementary material (read 2026-10-29)' sec. 'What Table S2 says' items 1-4, checked against Kang2026_supplementary.pdf Table S3 (identical) and Table S4 (2-methylthiazole 0.142 / 0.194 / 0.254) on 2026-10-29."
+      - "zhai2023foodchem dossier sec. 2.1 quote of the f' = 1 formula."
+    status: error_confirmed
+    remedy: >-
+      Every fit and check row from the ladder enters the M6 measurement model as method class semi_quantitative
+      (src/kinetic_core/fitting.py MeasurementModel, SCALE_TAU["semi_quantitative"] = inf), one series per compound
+      per source table, so only within-compound shape counts. Concretely: (1) generate_kinetic_core_b2_3_fit.py FIT_ROWS
+      kang_100C_MFT, kang_120C_MFT, kang_100C_FFT, kang_120C_FFT, kang_100C_FUR, kang_120C_FUR -> method
+      semi_quantitative, series "zhai2023foodchem_table1/<species>", anchors re-cited to Zhai 2023 Food Chem Table 1;
+      drop "Tier A". (2) kang_100C_MFT_over_FFT: remove (cross-compound, RF-dependent). (3) B8's
+      zhai_MFT_fold_120_over_100 / zhai_FFT_fold_120_over_100 duplicate (1) once the levels are scale-free: keep one
+      form only (CF-005). (4) generate_kinetic_core_b2_3_holdout.py kang_140C_MFT / _FFT / _FUR: score as 140/120 ratios
+      within compound, not levels. (5) No data/ file to change; ledger already semi_quantitative.
+    affects:
+      - kang2026_si_table_s4_ttca_tladder
+      - zhai2023foodchem_table1_ttca_tladder
+      - zhai2023jafc_fig3_ttca_arm_volatile_grid
+      - zhai2023jafc_tables2_calibration_and_mgo_go_cys
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "Tier A, R^2 0.9989"}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "kang_100C_MFT_over_FFT"}
+      - {file: scripts/generators/generate_kinetic_core_b8_fit.py, symbol: "zhai_MFT_fold_120_over_100"}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_holdout.py, symbol: "kang_140C_"}
+      - {file: src/kinetic_core/fitting.py, symbol: "class MeasurementModel"}
+
+  - id: CF-005
+    kind: duplicate
+    scope: sulfur_rows
+    sources: [zhai2023foodchem, kang2026_SI, kang2026, zhai2023jafc]
+    quantity: "the sulfur temperature ladder (TTCA 10 mM, pH 7, 120 min, 100 / 120 / 140 C) and the free-cysteine depletion ladder"
+    observation: >-
+      ORIGINAL: Zhai 2023 Food Chem 404:134420 Table 1 (TTCA columns). Copies: Kang 2026 SI Table S4 (same means,
+      SDs included; 2-methylthiophene at 120 C printed 0.000 where the parent prints 1.128); Kang SI Table S5 pH 7
+      column (= the 100 C column, CF-002); Kang Fig. 1a/b (class totals of S4 / S5; Fig. 1a's 120 / 140 C sulfur
+      group is corrupted with the pH-series totals); Zhai 2023 JAFC Fig. 3 column E (120 min). Second family: Kang SI
+      Fig. S4 (free cysteine 10 mM, pH 7, 100/120/140 C) is the experiment of Zhai 2023 Food Chem p. 6 / SI Fig. S2
+      (Ea 54.7 there, 55.1 from Kang's curve). Third: Zhai 2023 JAFC SI Table S3 (MGO + GO + Cys) = Zhai 2023 Food
+      Chem SI Table S2, all 126 cells (not read by the model). Fourth, not on the strategy list: the route-calibration
+      prereg identifies Kang SI Fig. S3 (free Cys released from TTCA) as Zhai 2022 (no dossier on disk). WHAT THE
+      MODEL READS: the B47 52-row objective (and B58-B64) reads the ladder's 100 / 120 C MFT and FFT cells TWICE: as
+      the four level rows kang_{100,120}C_{MFT,FFT} and again as B8's two cross_system_ratio rows
+      zhai_{MFT,FFT}_fold_120_over_100 (sigma 0.15), whose targets are 1.388/1.237 and 4.107/3.734 of the same cells;
+      plus kang_100C/120C_FUR and kang_100C_MFT_over_FFT. Kang Fig. S4: once in the objective (kang_100C/120C_cys_conversion)
+      and once in route-calibration stage 1 (rows "kang_s4", not forwarded). The 140 C column: B2.3 hold-out
+      (kang_140C_*, kang_switch_on_*, kang_140C_cys_conversion) and the B10 ship rule T4 (KANG_OBSERVED_FOLD). Zhai
+      JAFC Fig. 3, Kang S5 and Kang Fig. 1: not read. Food Chem p. 6 text: not read.
+    explanations:
+      - "Same laboratory (Jiangnan, Zhang X / Cui H / Ho) re-publishing one experiment in three papers over 3.5 years."
+    tests:
+      - "Kang2026_supplementary.pdf Table S4 vs the zhai2023foodchem dossier's Table 1 transcription and the zhai2023jafc dossier's col. E check (sums 13.978 / 17.359 identical), 2026-10-29."
+      - "52-row objective listed by importing generate_kinetic_core_b47_fit (B23.ACTIVE_FIT_ROWS) 2026-10-29: 6 level rows + 1 ratio + 2 fold rows on the ladder."
+    status: duplicate_confirmed
+    remedy: >-
+      Count once. copy_of map for fitting.count_once: kang2026_si_table_s4_ttca_tladder -> zhai2023foodchem_table1_ttca_tladder;
+      kang2026_si_table_s5_ttca_ph_ladder (pH 7 column) -> zhai2023foodchem_table1_ttca_tladder;
+      kang2026_fig1ab_class_totals -> kang2026_si_table_s4_ttca_tladder; zhai2023jafc_fig3_ttca_arm_volatile_grid
+      (col. E) -> zhai2023foodchem_table1_ttca_tladder; kang2026_si_fig_s4_free_cys_depletion ->
+      zhai2023foodchem_p6_cys_alone_conversion (Kang's curve stands in: the original is text-only);
+      zhai2023jafc_tables2_calibration_and_mgo_go_cys (MGO-GO-Cys table) -> zhai2023foodchem_tables2_mgo_go_cys. In the
+      objective keep EITHER the scale-free level rows (CF-004) OR the two B8 fold rows, not both; re-cite the anchors
+      to Zhai 2023 Food Chem. Note for M6: the 120-min fold is itself unstable over hold time (CF-017).
+    affects:
+      - zhai2023foodchem_table1_ttca_tladder
+      - kang2026_si_table_s4_ttca_tladder
+      - kang2026_si_table_s5_ttca_ph_ladder
+      - kang2026_fig1ab_class_totals
+      - zhai2023jafc_fig3_ttca_arm_volatile_grid
+      - kang2026_si_fig_s4_free_cys_depletion
+      - zhai2023foodchem_p6_cys_alone_conversion
+      - zhai2023foodchem_tables2_mgo_go_cys
+      - zhai2023jafc_tables2_calibration_and_mgo_go_cys
+      - kang2026_si_fig_s3_cys_release_from_ttca
+      - {file: scripts/generators/generate_kinetic_core_b8_fit.py, symbol: "zhai_FFT_fold_120_over_100"}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "kang_120C_cys_conversion"}
+      - {file: scripts/generators/generate_kinetic_core_cysteine_route_calibration.py, symbol: "kang_s4"}
+      - {file: scripts/generators/generate_kinetic_core_b10_ship_rule.py, symbol: "KANG_OBSERVED_FOLD"}
+
+  - id: CF-006
+    kind: duplicate
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation, schieberle1996, schieberle1998, schieberle2000, hofmann2001, hofmann2002, hofmann1998c, hofmann1998b, schieberle2005]
+    quantity: "Munich (Hofmann / Schieberle) data sets printed more than once"
+    observation: >-
+      (a) Hofmann & Schieberle 1998 Tables 1 / 2 (ribose / rhamnose / glucose + cysteine, 145 C, 20 min, SIDA) are
+      reprinted in Schieberle 1996 Table 3 (x10, per 100 mmol; Schieberle 2000 Table III reprints that), Schieberle
+      1998 Table IV (aqueous column II: FFT 121, MFT 198 ug/100 mmol = 12.1 / 19.8 per pot) and Table VI (rhamnose).
+      The model reads the Hofmann 1998 copy only: the pH 5 rows as panel benchmarks data/benchmarks/hofmann1998_*_
+      cysteine_145C_20min_pH5.json and the frozen mp_holdout bundles (pH 3 / 7, xylose pH 5); the pH 3 / 7 ribose rows
+      also as the B2.3 hold-out "Hofmann pH axis" rows, which the generator itself declares SHARED_WITH_CUTOVER_EXAM
+      (one measurement in two scorecards, already disclosed). Schieberle 1996 / 1998 / 2000 Table III: not read.
+      Schieberle 2000 Table IV (100 C time course) is new data (B16 rows), not a copy. (b) hofmann2001 and hofmann2002
+      are two dossiers of one paper (hofmann2001.pdf, JAFC 2002 50:319); the model reads it once for each use:
+      k_thioether from Table 2 (parameters_sulfur.py) and the 80 C brew hold-out from Fig. 1. (c) hofmann1998c
+      Table 5 = Schieberle 1998 Table VII (pyrazines, ribose / glucose / rhamnose dry 180 C: 11 / 15 / 12, 3 / 2 / 1,
+      5 / ~0.1 / ~0.1, ~0.1 / ~0.1 / 3; units printed "mg" in one and "ng" in the other); not read. (d) Schieberle
+      2005 Table 2 = Hofmann 1998b Table 4 (ATHP from 1-pyrroline + hydroxy-2-propanone, pH 3 / 5 / 7 / 9: <0.1 / 0.9
+      / 10.8 / 38.4 ug); read once, as ATHP_PH_SOURCE (parameters_proline.py, cites Schieberle 2005) by the unshipped
+      B24b; Schieberle 2005 Table 4 = Hofmann 1998b (dossier) not read.
+    explanations:
+      - "Same laboratory re-publishing its SIDA data in symposium volumes."
+    tests:
+      - "Spot checks 2026-10-29 against the PDFs: schieberle1998 Table IV (FFT 121, MFT 198 per 100 mmol = Hofmann 1998 T1 x10) and Table VII vs hofmann1998c Table 5 (all cells equal); schieberle2005 Table 2 vs hofmann1998b Table 4 (equal; pH 9 row lost by OCR in 2005)."
+      - "grep of generators and src/kinetic_core for the Schieberle 1996 / 1998 / 2000 Table III copies: none read."
+    status: duplicate_confirmed
+    remedy: >-
+      No double count in a current fit. copy_of: schieberle1996_t3_ribose_pot_levels (MFT/FFT cells) ->
+      hofmann1998_t1_cys_carbohydrates; schieberle1998_t4_ribose_aqueous (FFT/MFT) -> hofmann1998_t1_cys_carbohydrates;
+      schieberle1998_t6_rhamnose_aqueous -> hofmann1998_t2_ph_ladder; hofmann2002_claim_check_duplicate ->
+      hofmann2001 entries (change its ledger status from in_model_fit to a duplicate marker so the lookup does not count
+      it); hofmann1998c_tab5_pyrazines_sida_dry -> schieberle1998 Table VII (no ledger entry); schieberle2005_table2_athp_
+      ph_ladder -> hofmann1998b_tab4_pyrroline_acetol_athp_ph (re-cite ATHP_PH_SOURCE to the 1998b original; keep the
+      2005 raster for the pH 9 row). The panel / exam sharing of the Hofmann pH 3 / 7 rows stays declared.
+    affects:
+      - hofmann1998_t1_cys_carbohydrates
+      - hofmann1998_t2_ph_ladder
+      - schieberle1996_t3_ribose_pot_levels
+      - schieberle1998_t4_ribose_aqueous
+      - schieberle1998_t6_rhamnose_aqueous
+      - hofmann2002_claim_check_duplicate
+      - hofmann2001_t2_model_electrophile_binding
+      - hofmann2001_coffee_brew_matrix
+      - hofmann1998c_tab5_pyrazines_sida_dry
+      - schieberle2005_table2_athp_ph_ladder
+      - hofmann1998b_tab4_pyrroline_acetol_athp_ph
+      - {file: src/kinetic_core/parameters_proline.py, symbol: ATHP_PH_SOURCE}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_holdout.py, symbol: SHARED_WITH_CUTOVER_EXAM}
+
+  - id: CF-007
+    kind: duplicate
+    scope: sulfur_rows
+    sources: [cerny2007b, cerny2007]
+    quantity: "MFT isotopomer split (unlabelled : 13C5) in the cysteine 0.1 / thiamin 0.1 / xylose 0.3 M ternary, pH 5, 145 C"
+    observation: >-
+      Cerny 2007 (JAFC 55:1552) Table 5 column A (xylose 0.3, cysteine 0.1, thiamin 0.1 m): MFT 54:46, 3-mercapto-2-
+      pentanone 60:40. Cerny 2007b (LWT 40:1309) Table 3 prints the same 54 : 46 and 60 : 40 for the same composition
+      (cerny2007 cites it as ref. 9). The model reads it TWICE: as fit row cerny_ternary_thiamine_share (target 0.54,
+      B2.3 / B47 objective) and as hold-out rows cerny2007_2x_xylose_share (0.46) and cerny2007_branch_responsiveness
+      (0.46 / 0.15) in the B2.3 hold-out, which the generator calls "the single highest-value hold-out row". The 2x arm
+      of that hold-out is therefore a fit row re-scored; only column B (85:15, the 1x arm) is held out. (The B2.3 fit
+      docstring already removed the Table 4 / Table 5 overlap; this one it missed.) Both papers' prose say "54 %
+      labelled" where the tables say 46 % labelled (already handled in the fit row).
+    explanations:
+      - "Cerny 2007 Table 5 col. A re-prints the 2007b experiment as the reference arm of a concentration contrast."
+    tests:
+      - "cerny2007.pdf Table 5 and cerny2007b.pdf Table 3 / p. 1311 text read 2026-10-29: 54:46 and 60:40 in both."
+    status: duplicate_confirmed
+    remedy: >-
+      copy_of: cerny2007_t5_concentration_pair (column A) -> cerny2007b_t2t3_ternary_carbon_origin. In
+      generate_kinetic_core_b2_3_holdout.py section 12, drop cerny2007_2x_xylose_share as a hold-out (it is the fit
+      row) and re-declare cerny2007_branch_responsiveness as "1x arm predicted given the fitted 2x arm", or score only
+      cerny2007_1x_xylose_share; say in the hold-out report that the pair is half fit.
+    affects:
+      - cerny2007_t5_concentration_pair
+      - cerny2007b_t2t3_ternary_carbon_origin
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: cerny_ternary_thiamine_share}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_holdout.py, symbol: cerny2007_2x_xylose_share}
+      - {file: scripts/generators/generate_kinetic_core_b2_3_holdout.py, symbol: cerny2007_branch_responsiveness}
+
+  - id: CF-008
+    kind: duplicate
+    scope: corpus
+    sources: [xu2008, xu2007, zhang1988, zhang1989, zhang1991b, us9943096, ep2943072b2]
+    quantity: "sulfur-lane volatile tables printed twice (not read by any current fit or check)"
+    observation: >-
+      (a) Xu 2007 Table 1 pH 5.6 columns = Xu 2008 Table 2 1:1 columns (e.g. MFT 16.62 / 34.42 in both; a few last-
+      digit differences); Xu 2007's pH 7.0 / 8.0 arms are new. (b) Zhang 1991b Table 2 class totals: the Cys and GSH
+      columns are Zhang 1988 Table 1's sums (the Cys column omits 57.1 mg/mol), the CD / GD columns are Zhang 1989
+      Table I's sums without its duplicated butylbenzene row; only CG / GG are new. (c) EP 2943072 B2 tables match US
+      9,943,096 cell for cell apart from two typos (presence lists, no quantities). None of these is read by a fit or
+      a check (ledger: digitised_in_dossier).
+    explanations:
+      - "Same-lab re-publication (Xu; Ho / Zhang) and a patent family (Impossible Foods)."
+    tests:
+      - "xu2007.pdf / xu2008.pdf MFT and FFT rows compared 2026-10-29; (b) and (c) from the ledger notes, not re-checked against the PDFs."
+    status: duplicate_confirmed
+    remedy: >-
+      copy_of: xu2007_table1_ph_axis_volatiles (pH 5.6 columns) -> xu2008_table2_ratio_series_volatiles;
+      zhang1991b_table2_class_totals_six_systems (Cys, GSH columns) -> zhang1988_table1_cys_gsh_thermolysis_volatiles,
+      (CD, GD columns) -> zhang1989_table1_decadienal_cys_gsh_volatiles; ep2943072b2_tabs_heme_thiamine_presence ->
+      us9943096_tabs_heme_sugar_cys_thiamine_presence. Nothing to change in code.
+    affects:
+      - xu2007_table1_ph_axis_volatiles
+      - xu2008_table2_ratio_series_volatiles
+      - zhang1991b_table2_class_totals_six_systems
+      - zhang1988_table1_cys_gsh_thermolysis_volatiles
+      - zhang1989_table1_decadienal_cys_gsh_volatiles
+      - ep2943072b2_tabs_heme_thiamine_presence
+      - us9943096_tabs_heme_sugar_cys_thiamine_presence
+
+  - id: CF-009
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [zhang2025b]
+    quantity: "MFT, FFT, bis(2-methyl-3-furyl) disulfide, 2-acetylthiazole in the cysteine + xylose blank (40 / 40 mM, 0.2 M phosphate pH 6.5, 120 C, 50 min)"
+    observation: >-
+      The shipped hold-out bundle mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json scores Table 2's
+      blank column (MFT 22.63, FFT 0.29, disulfide 18.25, 2-acetylthiazole 114.13 ng/mL) as levels. Methods sec. 2.3:
+      GC-MS "with a DB-Wax ... or HP-5 MS" column; Table 2 footnote: "The concentrations were the sums detected from
+      both the DB-WAX and HP-5 MS capillary columns." Every scored compound carries a retention index on both columns
+      (MFT 1328 / 865), i.e. it was detected on both. If two injections of the same extract were summed, each level is
+      up to 2x (0.3 dex) high. The bundle already declares the footnote and the semi-quantitative class
+      (single internal standard, no response factors).
+    explanations:
+      - "Two injections summed (double count, up to 2x high)."
+      - "Each compound quantified on whichever column resolved it, the table being the union ('sum' loosely worded)."
+    tests:
+      - "zhang2025b.pdf methods and Table 2 footnote re-read 2026-10-29 (quoted above). Not decidable from the text."
+    status: open
+    remedy: >-
+      Pending: score the bundle as semi-quantitative shape only (within-paper ratios) or carry an explicit factor 0.5-1
+      on its levels in the measurement model; ask the corresponding author (Xie J, BTBU) what was summed.
+    affects:
+      - zhang2025b_table2_volatiles_50min
+      - {file: data/benchmarks/external_validation/maillard_path/mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json, symbol: "sums detected from both"}
+
+  - id: CF-010
+    kind: condition_error
+    scope: sulfur_rows
+    sources: [zhai2021]
+    quantity: "pH of Zhai 2021's TTCA zero-order degradation series (Fig. 3a; 100 / 120 / 140 C)"
+    observation: >-
+      The three TTCA rows were entered as pH 7 pots following the dossier heading; the paper ran them at TTCA's
+      natural pH 5.5, unadjusted ("The aqueous solution of TTCA (pH 5.5, 10 mmol/L) without the adjustment of pH was
+      heated under different temperatures"); Fig. 3a's points coincide with Fig. 4b's pH 5.5 series. At pH 7 TTCA at
+      100 C falls to 0.89 mmol/L by 120 min against 7.08 on the pH 5.5 line (about tenfold faster loss). Code still
+      carrying ph=7.0: B16 (B16_SYSTEMS zhai2021_ttca_*, inherited by B17 / B17a / B25, all DO NOT SHIP) and route-
+      calibration stage 1 (constants not forwarded).
+    explanations:
+      - "The dossier heading said pH 7; the methods text was not re-read."
+    tests:
+      - "zhai2021 dossier sec. 2 'Correction 2026-10-29' note and sec. 5 (Fig. 4b digitised); route-calibration prereg run log 5."
+    status: fixed
+    remedy: >-
+      Fixed in the curated data: data/lit/extraction_dossiers/zhai2021_extraction.md sec. 2, correction note dated
+      2026-10-29 (commit 0b874db, "Zhai 2021 digitised and corrected"). The code rows in the closed B16 wave and the
+      unforwarded stage 1 stay at pH 7 by decision (prereg run log 5: "recorded here, not re-run"). Stage 1b must enter
+      pH 5.5 (Fig. 3a) and the Fig. 4b pH 5.5 / 6 / 7 / 8 series; any re-use of B16's rows must change ph=7.0 to 5.5.
+    affects:
+      - zhai2021_fig3a_ttca_tladder
+      - {file: scripts/generators/generate_kinetic_core_b16_fit.py, symbol: ZHAI_TTCA_K}
+      - {file: scripts/generators/generate_kinetic_core_cysteine_route_calibration.py, symbol: "zhai2021_ttca_"}
+
+  - id: CF-011
+    kind: conflict
+    scope: sulfur_rows
+    sources: [cao2017, zhai2019, zhai2021, zhang2025b, kang2026_SI]
+    quantity: "cysteine-route formation rate TTCA -> Cys-Amadori (k_form at 90 C) and the TTCA equilibrium K"
+    observation: >-
+      In route-calibration stage 1 the Xie laboratory's pots (Cao 2017: Cys + Xyl 0.40 M, 0.2 M phosphate pH 5.5, 90 C;
+      Zhang 2025b blank: 40 mM, 0.2 M phosphate pH 6.5, 120 C) form the Amadori compound faster than the Jiangnan
+      water pots (Zhai 2019 Fig. 3A: 165 / 82.6 mM, unbuffered, pH 7.4 start). Leaving Zhai 2019 out moves k_form
+      10^-2.919 -> 10^-2.648, x1.87 (the earlier "~5x" was a shift in sigmas, not a fold); the residual gap at the joint
+      fit is 3-6x (Cao's Cys-Amadori -0.33 to -0.57 dex, Zhai 2019's at 90 C +0.14 to +0.27). The Jiangnan pots also
+      want K above Cao's measured band (K on its upper bound 0.075).
+    explanations:
+      - "Phosphate catalysis of the Amadori step: every Xie pot is in 0.2 M phosphate, every Jiangnan pot in water."
+      - "pH: Cao's blank falls 5.49 -> 4.67 (0.5 h) -> 4.15 (5 h), Zhai 2019's starts at 7.4 and falls to 4.9 (90 C); thiazolidine K rises ~20x from pH 5.6 to 7.5 (Kallen 1971, formaldehyde analogue)."
+      - "Concentration (0.4 M vs 0.08 M) and laboratory (method, calibration)."
+      - "The Zhai 2021 rows run at the wrong pH (CF-010) bias k_ttca_deg and the ring opening that both arms share."
+    tests:
+      - "results/validation/kinetic_core_cysteine_route_calibration_prereg.md: leave-one-source-out refits, review items 4, 5, 8 and sec. 6 verdict (constants not forwarded; stage 1b to include pH laws and phosphate catalysis)."
+      - "docs/guides/LITERATURE_SEARCH_2026-10-29_phosphate_thiazolidine.md: no direct measurement of phosphate catalysis of TTCA -> Cys-Amadori, nor K(pH) for a cysteine-sugar thiazolidine at 60-140 C; nearest anchors Davidek 2002 (x1.3-3.5, degradation, 90 C), Munanairi 2007 (~10-12x per equivalent, 37 C, A280), Kim 1986 (thiazolidine k1 ~10x per pH unit 5.5-8, 25 C)."
+    status: open
+    remedy: >-
+      No test outside the conflict supports one explanation yet. Stage 1b (pre-registered separately) carries phosphate
+      catalysis as a declared assumption with a band, pH laws for K and the ring kinetics, Zhai 2021 Fig. 4b at its
+      real pH, and Cao's pH trajectory as rows; the explanation that also predicts Zhang 2025b (phosphate, pH 6.5) and
+      Zhai 2021's pH series wins. The deciding experiment: one pot, phosphate 0 / 0.2 M at fixed pH (experiment brief).
+    affects:
+      - cao2017_fig5_ttca_cama_glyarp
+      - cao2017_fig4ab_cys_xyl
+      - zhai2019_fig3a_ttca_cama
+      - zhang2025b_fig2abc_ttca_cama_lysarp
+      - {file: results/validation/kinetic_core_cysteine_route_calibration_prereg.md, symbol: "×1.87"}
+
+  - id: CF-012
+    kind: conflict
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation, zhou2023, meynier1995, li2011, hou2017, cerny2007]
+    quantity: "pH direction of MFT formation from pentose / ARP + cysteine"
+    observation: >-
+      Hofmann 1998 Table 2 (ribose + cysteine, 0.5 M phosphate, 145 C, 20 min): MFT 55.3 / 19.8 / 2.5 ug at pH 3 / 5 /
+      7, FFT 22.9 / 12.1 / 1.2 - highest at pH 3. Meynier 1995 (pyrophosphate, 140 C, 1 h): MFT falls > 152x from pH
+      4.5 to 6.5. Zhou 2023 (ARP + Cys, unbuffered, 120 C, 60 min): MFT rises to a pH 7 maximum; the B2.3 hold-out
+      records the Hofmann pH 3 / 7 rows as a "PRE-REGISTERED FAILURE" because "this module carries Zhou's" shape, with
+      absolute levels 64x apart at pH 7. Li 2011 (95 C) and Hou 2017 (90 C) put the MFT optimum at pH 5.5-7 (plan,
+      B59b open question). Cerny 2007's isotopomer study finds MFT peak areas roughly constant over pH 4-7 with
+      thiamin present.
+    explanations:
+      - "A temperature-dependent pH law (low-pH optimum at 140-145 C, near-neutral at 90-120 C)."
+      - "Feed: free sugar (Hofmann, Meynier) vs Amadori compound (Zhou) - different rate-limiting steps with opposite pH dependence."
+      - "Buffer: buffered (Hofmann, Meynier) vs unbuffered pots whose pH collapses during heating (Zhou's pH 8 pot ends at 5.07)."
+    tests: []
+    status: open
+    remedy: >-
+      Pending. B59b's pre-registration must state which explanation it tests (plan, 'Open question for B59b'); Zhai
+      2021 Fig. 4b / 5 and Kang S5 (CF-002, temperature unresolved) are the in-corpus pH series on purified TTCA.
+    affects:
+      - hofmann1998_t2_ph_ladder
+      - zhou2023_table1_ph6_ph8_arp_cys_volatiles
+      - meynier1995_table3_cys_ribose_ph_ladder
+      - {file: scripts/generators/generate_kinetic_core_b2_3_holdout.py, symbol: "PRE-REGISTERED FAILURE"}
+      - {file: tasks/data_restructure_plan.md, symbol: "the MFT pH optimum may depend on temperature"}
+
+  - id: CF-013
+    kind: conflict
+    scope: sulfur_rows
+    sources: [schieberle2000, us10076126, wang2022, zhai2023jafc]
+    quantity: "time course of MFT and FFT in heated cysteine + pentose pots (rising vs peaking and falling)"
+    observation: >-
+      Rising: Schieberle 2000 Table IV (ribose + cysteine, 0.5 M phosphate pH 5, 100 C): MFT 4.5 / 13.8 / 156 / 179 ug
+      at 30 / 60 / 360 / 720 min, still rising at 12 h; US 10,076,126 (xylose + Cys 0.25 M, phosphate pH 5.5, 110 C):
+      MFT rises with upward curvature through 4 h (~15 -> 124 -> 575 -> 1855 ng/g). Falling: Wang 2022 (Cys + Xyl 0.4
+      M, 0.2 M phosphate pH 5.5; the grid pot carries 1 % methyl linoleate, CF-028): rising at 100-110 C, but at
+      120-140 C "their levels tended to first increase and then decrease", MFT and FFT at 140 C "began to decrease at 60
+      min ... due to the poor stability of sulfur-containing compounds" (wang2022 dossier sec. 3.3); Zhai 2023 JAFC Fig.
+      3 (TTCA 10 mM, pH 7 water): FFT at 140 C peaks at 80 min and falls 2.5x by 180 min. The model's sinks are too
+      strong at both ends (B16 prereg addendum).
+    explanations:
+      - "Temperature: below ~110 C formation outlasts the sink for hours; at 120-140 C the precursors are exhausted within the window and the sink wins."
+      - "Precursor supply: fed TTCA / ARP pots (Zhai, Zhou) run out; free-sugar pots at high loading (Schieberle, Nestle) do not."
+      - "Wang 2022's lipid co-substrate as an extra thiol sink."
+    tests: []
+    status: open
+    remedy: >-
+      Pending: the B59b hold-outs declared in the plan (US 10,076,126 shape, Schieberle 2000 100 C) test the first two
+      explanations; enter Wang 2022 only with its lipid charge.
+    affects:
+      - schieberle2000_t4_100c_time_course
+      - us10076126_fig1_mft_time_course
+      - wang2022_fig3_thiol_trends_5t_6t_ml1pct
+      - zhai2023jafc_fig3_ttca_arm_volatile_grid
+      - {file: results/validation/kinetic_core_b16_prereg.md, symbol: "both thiols fall three decades"}
+
+  - id: CF-014
+    kind: conflict
+    scope: sulfur_rows
+    sources: [zhou2022, zhou2023]
+    quantity: "MFT and FFT in AX-ARP 20 + Cys 20 mM, pH 7, 120 C, 60 min (same lab, same nominal pot)"
+    observation: >-
+      zhou2022 dossier sec. 5: Zhou 2022 Table 1 at 60 min vs Zhou 2023 Table 1 (pH 7): MFT 202.87 vs 1588.57 ug/L
+      (x7.8), FFT 187.13 vs 757.97 (x4.1), bis(2-methyl-3-furyl) disulfide x2.7; 2-acetylthiazole x1.4 and
+      methylpyrazine x0.92 agree. Published two months apart, same AX-ARP preparation and HS-SPME method. The
+      objective carries Zhou 2023's pH 7 levels as fit rows zhou_pH7_MFT / zhou_pH7_FFT at sigma_log 0.5 (x3.2),
+      narrower than the 4-8x between-paper spread of the same laboratory.
+    explanations:
+      - "An unstated pot variable (fill volume / headspace, ARP purity, final pH)."
+      - "A changed HS-SPME calibration (Table S1 of both papers; not on disk)."
+    tests: []
+    status: open
+    remedy: >-
+      Pending: in M6, treat the two Zhou tables as one laboratory with a between-paper scale term, or widen zhou_pH7_MFT
+      / _FFT to the observed reproducibility (>= 0.9 dex); download both Table S1s.
+    affects:
+      - zhou2022_table1_arp_cys_volatiles_timecourse
+      - zhou2023_table1_ph7_arp_cys_volatiles
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: zhou_arp_cys_pH7}
+
+  - id: CF-015
+    kind: conflict
+    scope: sulfur_rows
+    sources: [us10076126, us8920862, schieberle2000, hofmann1998_reconciliation]
+    quantity: "MFT / FFT ratio and MFT time shape in buffered cysteine + xylose pots (Nestle patents vs each other and the papers)"
+    observation: >-
+      US 10,076,126 (xylose + Cys 1:1, 0.23-0.25 mol/kg, phosphate pH 5.5, 110 C, 4 h, isotope dilution): MFT/FFT 3.6
+      (2.9-4.4) at 4 h; MFT(t)/MFT(4 h) 0.008 / 0.067 / 0.31 / 1 at 0.5 / 1 / 2 / 4 h (a lag, then acceleration). US
+      8,920,862 (xylose : Cys 3:1, 95 C, 6 h, buffer arm): MFT/FFT 0.50 - a 7x disagreement between the two patents;
+      its structured-lipid arm raises MFT 10.1x and FFT 7.4x over buffer. Hofmann 1998 (145 C, 20 min, pH 5): MFT/FFT
+      19.8/12.1 = 1.6. Schieberle 2000 (100 C) rises for 12 h without the patent's lag. The shipped B60 constants give
+      the Nestle curve 0.42 / 0.80 / 1.05 / 1 (front-loaded).
+    explanations:
+      - "Different temperature, xylose:cysteine ratio and concentration between the two patents."
+      - "Patent analytics (single runs, not peer reviewed)."
+    tests: []
+    status: open
+    remedy: >-
+      Pending: report the patents' MFT/FFT, do not fit it (us10076126 / us8920862 dossiers); the US 10,076,126 shape and
+      the US 8,920,862 level are B59b hold-outs (plan).
+    affects:
+      - us10076126_fig1_mft_time_course
+      - us10076126_fig2_fft_time_course
+      - us8920862_ex5_buffer_6h_endpoint
+      - us8920862_ex5_structured_lipid_arm
+
+  - id: CF-016
+    kind: conflict
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation, schieberle1998]
+    quantity: "furan-2-aldehyde formed in the ribose 10 mmol + cysteine 3.3 mmol pot, 145 C, 20 min (Munich, same run)"
+    observation: >-
+      NOT ON THE STRATEGY LIST. Hofmann 1998 Table 5: furan-2-aldehyde 67.5 ug per 100 mL pot (with FFT 12.1, MFT
+      19.8). Schieberle 1998 Table IV, aqueous column II, the same pot ("based on 10 mmol of ribose"; FFT 121, MFT 198
+      ug / 100 mmol, i.e. the Hofmann thiols x10 exactly): furan-2-aldehyde 52 ug / 100 mmol ribose = 5.2 ug per pot,
+      13x below. The thiols of the two prints agree; the furfural does not. Hofmann's 67.5 is a fit row of the current
+      52-row objective (hofmann_ribose_FUR_insitu, sigma_log 0.5).
+    explanations:
+      - "A typo or unit slip in one print (67.5 vs 6.75 would leave a 1.3x residual)."
+      - "Different workups: SIDA for furfural in Hofmann 1998 vs a purge-and-trap / AEDA quantification in the 1998 chapter."
+    tests:
+      - "hofmann1998.pdf Table 5 and schieberle1998.pdf Table IV read 2026-10-29 (both quoted above); schieberle1998 ledger note already flags the 13-fold gap."
+    status: open
+    remedy: >-
+      Pending: until resolved, widen hofmann_ribose_FUR_insitu to cover both prints (target geometric mean, sigma >= 0.6
+      dex) or carry it as a two-valued choice (choices register); check Hofmann 1995 / Schieberle 1996 Table 3 for a
+      third print of the furfural level.
+    affects:
+      - hofmann1998_t5_fa_nf_pairs
+      - schieberle1998_t4_ribose_aqueous
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: hofmann_ribose_FUR_insitu}
+
+  - id: CF-017
+    kind: conflict
+    scope: sulfur_rows
+    sources: [zhai2023jafc, kang2026_SI, zhai2023foodchem]
+    quantity: "the 120 -> 140 C 'switch-on' of MFT and FFT in the TTCA ladder (and the 100 -> 120 C fold)"
+    observation: >-
+      NOT ON THE STRATEGY LIST. The B2.3 hold-out scores kang_switch_on_MFT / _FFT (MFT 4.26x, FFT 2.79x from 120 to 140
+      C at 120 min) and the B10 ship rule T4 gates on the direction of the same fold; B8's zhai_*_fold_120_over_100 fit
+      rows (sigma 0.15) use the 120-min slice's low leg (1.12x, 1.10x). Zhai 2023 JAFC Fig. 3 prints the same
+      experiment at 40 / 80 / 120 / 180 min (zhai2023jafc dossier sec. 8): MFT 100 -> 120 C fold 5.54 / 1.84 / 1.12 /
+      2.69x and 120 -> 140 C 2.61 / 3.25 / 4.26 / 1.62x; FFT at 140 C peaks at 80 min (12.439) and falls to 4.906 at
+      180 min. The 'flat low leg, then jump' appears at 120 min only: a fixed-time slice across curves whose maxima
+      move earlier with temperature, not an activation-energy feature.
+    explanations:
+      - "Hold-time artefact: the 140 C curve passes its maximum inside the window (dossier sec. 8.3)."
+    tests:
+      - "zhai2023jafc dossier sec. 8.2 tables (digitised from the numeric heat map); 120-min column identical to Kang S4."
+    status: open
+    remedy: >-
+      Pending (proposed): retire kang_switch_on_* as scored rows and B10's T4 as a gate; replace the single-slice folds
+      by the four-time grid of Zhai 2023 JAFC Fig. 3 (columns A / C / E / G, semi-quantitative, one series per compound,
+      CF-004) so the model sees the time axis it must reproduce.
+    affects:
+      - zhai2023jafc_fig3_ttca_arm_volatile_grid
+      - kang2026_si_table_s4_ttca_tladder
+      - {file: scripts/generators/generate_kinetic_core_b2_3_holdout.py, symbol: "kang_switch_on_"}
+      - {file: scripts/generators/generate_kinetic_core_b10_ship_rule.py, symbol: KANG_OBSERVED_FOLD}
+      - {file: scripts/generators/generate_kinetic_core_b8_fit.py, symbol: zhai_MFT_fold_120_over_100}
+
+  # ===================================================================================================================
+  # OTHER LANES AND THE CORPUS (recorded from STRATEGY_2026-10-29 sec. 8 and the ledgers / dossiers; status open
+  # unless a check is named)
+  # ===================================================================================================================
+
+  # ---- trunk -------------------------------------------------------------------------------------------------------
+
+  - id: CF-018
+    kind: duplicate
+    scope: other_lane
+    sources: [kocadagli2016jafc, kocadagli2016nacl, goncuoglutas2017, goncuoglu2016, goncuoglutas2016, gursulaktag2020, gursul2020, huang2017, huang2016, wedzicha1991, edwards1992, martins2003b, martins2003, wedzicha1992, cammerer1994]
+    quantity: "trunk data sets printed more than once (originals named first in each pair)"
+    observation: >-
+      From the trunk ledger (STRATEGY sec. 8): kocadagli2016nacl = kocadagli2016jafc; goncuoglu2016 and
+      goncuoglutas2016 = goncuoglutas2017 (hazelnut roasting, 26 steps x 3 T); gursul2020 = gursulaktag2020 (fruit-juice
+      storage); huang2016 = huang2017 (Leu / Ile -> methylbutanal constants); edwards1992 Table 1 rows = wedzicha1991
+      (3-DG activation, k1 / k2); martins2003 Figs. 4-7 = martins2003b (and martins2003 Table 3's constants are fitted
+      to the same data); cammerer1994's 90 C row = wedzicha1992. Ledger statuses show where a double count can occur:
+      all three hazelnut copies are in_model_check; gursul2020 and gursulaktag2020 are both in_model_check;
+      martins2003 Table 3 is in_model_fit while martins2003b is digitised; edwards1992 / wedzicha1991 also have sulfur-
+      ledger entries (digitised). schieberle2005 = hofmann1998b is entered in CF-006.
+    explanations:
+      - "Same-laboratory re-publication (thesis chapters, conference papers, companion papers)."
+    tests: []
+    status: open
+    remedy: >-
+      Verify each pair against the PDFs; then copy_of: kocadagli2016nacl_* -> kocadagli2016jafc_*;
+      goncuoglu2016_hazelnut_roasting_matrix, goncuoglutas2016_hazelnut_roasting_matrix ->
+      goncuoglutas2017_hazelnut_roasting_matrix; gursul2020_fruit_juice_storage_matrix ->
+      gursulaktag2020_fruit_juice_storage_matrix; huang2016_* -> huang2017_*; edwards1992 Table 1 -> wedzicha1991 Table
+      1; martins2003_figs4_7 -> martins2003b figures; cammerer1994 90 C row -> wedzicha1992; and score each hazelnut and
+      juice check once.
+    affects:
+      - kocadagli2016nacl_fig3_fig4_time_courses
+      - kocadagli2016jafc_tab1_tab2_glucose_rate_constants
+      - goncuoglu2016_hazelnut_roasting_matrix
+      - goncuoglutas2016_hazelnut_roasting_matrix
+      - goncuoglutas2017_hazelnut_roasting_matrix
+      - gursul2020_fruit_juice_storage_matrix
+      - gursulaktag2020_fruit_juice_storage_matrix
+      - huang2016_tab1_tab2_leu_ile_methylbutanal_constants
+      - huang2017_tab1_tab2_leu_ile_methylbutanal_constants
+      - edwards1992_table1_3dg_activation_four_nucleophiles
+      - wedzicha1991_table1_3dg_activation_glycine_catalysis
+      - martins2003_tab3_dfg_rate_constants
+      - martins2003_figs4_7_m2_fit_timecourses
+      - cammerer1994_table3_melanoidin_composition_conditions
+      - wedzicha1992_table3_melanoidin_yield_e1pc
+
+  - id: CF-019
+    kind: duplicate
+    scope: other_lane
+    sources: [zhou2024, zhou2025b, leahy1989, leahy1989a, mikami2017, nakamura2020, lee2022, lee2024]
+    quantity: "same-laboratory re-publications in the trunk (overlap partial or uncertain)"
+    observation: >-
+      From the trunk ledger: zhou2025b re-publishes zhou2024 (AX-ARP / alanine pyrazine series; zhou2024 Table 2 is
+      in_model_fit, zhou2025b digitised / figure-only); leahy1989a re-publishes leahy1989 (lysine + glucose pyrazine
+      rates; BOTH Table I entries are in_model_fit); nakamura2020 re-publishes mikami2017 (norfuraneol alone; uncertain;
+      mikami2017 Fig. 6B in_model_fit, nakamura2020 digitised); lee2024 re-publishes lee2022 (cake / oven series, both
+      figure-only). The overlap at the level of individual cells is not established.
+    explanations:
+      - "Same laboratory reusing control arms or reference series in later papers."
+    tests: []
+    status: open
+    remedy: >-
+      Pending: compare the cells of each pair; first the leahy1989 / leahy1989a pair, since both are read by a fit.
+    affects:
+      - zhou2024_table2_fed_dicarbonyl_pyrazine_rates
+      - zhou2025b_figs1_3_axarp_xylose_120c
+      - leahy1989_tab1_lys_glc_pyrazine_rates
+      - leahy1989a_tab1_lys_glc_pyrazine_rates_ph_ladder
+      - mikami2017_fig6b_norfuraneol_decay_ph8
+      - nakamura2020_fig3_norfuraneol_alone_fragments
+      - lee2022_fig3_glucose_fructose_nh2_cake
+      - lee2024_fig2_fig3_oven_vapour_volatiles
+
+  - id: CF-020
+    kind: self_contradiction
+    scope: corpus
+    sources: [cremer2000, weenen2001, hofmann2000, ge1997, kim1996, agcam2022, xia2022]
+    quantity: "trunk papers that contradict themselves (none read by a current fit)"
+    observation: >-
+      From the dossiers: cremer2000 - methods "70 to 110 C", figures 80 / 90 / 100 / 110 C (Flag 3). weenen2001 -
+      glucose + Phe at pH 3.2 is 0.006 % in Table II entry 3 and 0.03 % elsewhere (5-fold). hofmann2000 - Experimental
+      says "0.5 mmol/L" buffer (twice), table footnotes 0.5 mol/L (Tables 1, 2, 3, 5) or 0.1 mol/L (Table 4). ge1997 -
+      a rate constant that falls with a 14 C rise; Table 2's R2 (0.6046 at 54 C) below the stated 0.714 threshold;
+      Table 1's K and Table 2's k1 mutually inconsistent at 68 and 81 C. kim1996 - Fig. 4 caption 1 % glucose, text p.
+      61 10 %. agcam2022 - methods 0-90 min, results prose 0-120 min; three t1/2 values inconsistent with their own k.
+      xia2022 - "pseudo-first-order" in words, zero-order units (mmol L-1 min-1) in Table 1. Ledger statuses:
+      digitised / figure-only / text-only for all.
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: carry each as condition_uncertain in its ledger entry; resolve only if the paper is ever entered as a row."
+    affects:
+      - cremer2000_text_strecker_ea_four_aldehydes
+      - weenen2001_tab2_pac_arp_vs_glc_phe_ph
+      - hofmann2000_table2_glucose_aa_strecker
+      - ge1997_tables1_3_schiff_amadori_constants
+      - kim1996_beef_extract_markers
+      - agcam2022_tab1_hmf_first_order_formation
+      - xia2022_table1_arp_formation_rates
+
+  - id: CF-021
+    kind: code_mismatch
+    scope: other_lane
+    sources: [yu2018]
+    quantity: "citation of Yu, Seow, Ong & Zhou 2018"
+    observation: >-
+      src/kinetic_core/parameters.py (two places) cites "Food Chem. 268:2"; the paper on disk is Food Chemistry 269
+      (2018) 628-637, DOI 10.1016/j.foodchem.2018.07.053 (yu2018 dossier sec. 0, from the accepted manuscript and the
+      published version). The value used (Table 1 step 5, thermal arm) is not in question.
+    explanations: []
+    tests:
+      - "yu2018 dossier identity table read 2026-10-29."
+    status: error_confirmed
+    remedy: "src/kinetic_core/parameters.py: 'Food Chem. 268:2' -> 'Food Chem. 269:628' in both strings (citation only; no number moves)."
+    affects:
+      - {file: src/kinetic_core/parameters.py, symbol: "Food Chem. 268:2"}
+
+  # ---- lipid -------------------------------------------------------------------------------------------------------
+
+  - id: CF-022
+    kind: condition_error
+    scope: other_lane
+    sources: [bi2020]
+    quantity: "headspace extraction conditions of the raw-pea hexanal hold-out"
+    observation: >-
+      STRATEGY sec. 8 names this "Bi 2022"; the ledger and the benchmark show it is Bi 2020 (raw vs roasted pea flour).
+      external_validation_bi_2020_raw_pea_hexanal.json encodes temp_C 40, time_min 10, ph 6.0; the paper's HS-SPME
+      equilibrates 50 C / 20 min and extracts 50 C / 50 min (bi2020 dossier, Extraction) and prints no pH. The raw
+      bundle is refused, the roasted one scored.
+    explanations: []
+    tests:
+      - "bi2020 dossier extraction paragraph and the benchmark JSON fields compared 2026-10-29."
+    status: error_confirmed
+    remedy: >-
+      data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json (and the roasted twin if it
+      carries the same): temp_C 50, time_min 70 (20 equilibration + 50 extraction) as the headspace step, ph null with
+      a declared assumption; correct the STRATEGY's "Bi 2022" to Bi 2020.
+    affects:
+      - bi2020_tab4_hexanal_raw_roasted
+      - {file: data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json, symbol: "\"temp_C\": 40.0"}
+
+  - id: CF-023
+    kind: condition_error
+    scope: other_lane
+    sources: [madruga1995]
+    quantity: "unit of madruga1995's lipid-volatile table (beef, pH series)"
+    observation: "Lipid ledger: the printed unit should read ng/kg, not mg/kg (unit misprint; flag unit_misprint_mg_for_ng). Not read by a fit."
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: verify on the PDF; carry ng/kg in the ledger and any future row."
+    affects:
+      - madruga1995_tab2_lipid_volatiles_vs_ph_beef
+
+  - id: CF-024
+    kind: code_mismatch
+    scope: corpus
+    sources: [mottram1995b, mottram1995c]
+    quantity: "file stems and DOIs of two Mottram 1995 lecithin papers"
+    observation: "Lipid ledger: the file stems and DOIs of mottram1995b and mottram1995c are swapped (flag stem_doi_swapped). Both digitised only."
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: verify the two first pages; swap the DOIs in data/keys/papers.yml and the dossier headers (or rename the files)."
+    affects:
+      - mottram1995b_tab1_lecithin_low_moisture_volatiles
+      - mottram1995c_tab1_lecithin_cellulose_volatiles
+
+  - id: CF-025
+    kind: condition_error
+    scope: other_lane
+    sources: [li2020]
+    quantity: "reaction temperature of Li 2020's SPI emulsion series"
+    observation: "Lipid ledger: the 70-120 C in Li 2020 is a protein pre-heat; every reaction ran at 37 C (flag protein_preheat_not_reaction_temperature). The row was evaluated and refused in B45."
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: any row from li2020 runs at 37 C with the pre-heat as a protein-state input."
+    affects:
+      - li2020_fig5b_hexanal_spi_emulsion_21d
+
+  - id: CF-026
+    kind: self_contradiction
+    scope: other_lane
+    sources: [zamora2007]
+    quantity: "reaction medium of Zamora 2007 (decadienal -> hexanal)"
+    observation: "Lipid ledger: the methods say buffer, the figure captions say acetonitrile / buffer 2:1. zamora2007's 9-14 % decadienal -> hexanal share is an in_model_check."
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: verify on the PDF; record the medium as unresolved on the check and its condition_uncertain flag."
+    affects:
+      - zamora2007_text_decadienal_to_hexanal_share
+
+  - id: CF-027
+    kind: code_mismatch
+    scope: other_lane
+    sources: [xin2026, Xin2026b, tian2019]
+    quantity: "nonanal odour threshold in water"
+    observation: >-
+      src/kinetic_core/matrix_oav.py gives the nonanal water threshold (1.1 ug/kg) two sources: the ThresholdRecord says
+      "recovered from Xin 2026's own OAV arithmetic (k2 sec. A.6)", while a later note in the same module says "k2 sec.
+      A.4 recovered nonanal's aqueous threshold as ~1.1 ug/kg from Xin2026b" and compares it with Tian's own 1.10. Xin
+      2026 and Xin 2026b are different papers (same material, CF-029).
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: read the ThresholdRecord and its provenance strings; keep one source and name the other as a check."
+    affects:
+      - xin2026_oav_backsolved_thresholds
+      - xin2026b_oav_thresholds_printed_and_backsolved
+      - tian2019_sec2c_tian2020_milk_thresholds_octanal_nonanal
+      - {file: src/kinetic_core/matrix_oav.py, symbol: "ThresholdRecord(\"nonanal\""}
+
+  - id: CF-028
+    kind: condition_error
+    scope: other_lane
+    sources: [wang2022]
+    quantity: "composition of Wang 2022's temperature x time grid (Fig. 3)"
+    observation: >-
+      The T x t grid of Wang 2022 is the pot with 1 % methyl linoleate, not the plain Cys + Xyl pot (lipid ledger; the
+      sulfur ledger's wang2022_fig3_thiol_trends_5t_6t_ml1pct carries the same). Used in the B16 prereg addendum as a
+      third laboratory's thiol time course (CF-013); flagged retired_check.
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: any row from Fig. 3 charges the 1 % methyl linoleate."
+    affects:
+      - wang2022_fig3_ml1pct_temperature_time_grid
+      - wang2022_fig3_thiol_trends_5t_6t_ml1pct
+
+  - id: CF-029
+    kind: duplicate
+    scope: other_lane
+    sources: [selke1978, frankel1981, aspelund1983, crowther1980, snel2023b, snel2023, zamora2015, hidalgo2016, xin2026, Xin2026b]
+    quantity: "lipid-lane data sets printed more than once (originals first)"
+    observation: >-
+      From the lipid ledger: Frankel 1981's autoxidised-oleate column ("Data from ref. 21") = Selke 1978 Table I (BOTH
+      entries in_model_fit: FRANKEL1981_OLEATE_SLATE in B28, the Selke slate in B6); crowther1980 Table 7 = aspelund1983
+      (both in_model_check in matrix.yml); snel2023 is republished in snel2023b (thesis); hidalgo2016's control repeats
+      zamora2015 Table 1; the Xin 2026b ENPI arm = the Xin 2026 control.
+    explanations: []
+    tests: []
+    status: open
+    remedy: >-
+      Pending: verify; then copy_of: frankel1981_tab2_oleate_lOOH_volatile_slates (auto column) ->
+      selke1978_tab1_oleate_lOOH_slate (only the photo column is independent); crowther1980 Table 7 -> aspelund1983;
+      snel2023b -> snel2023; hidalgo2016 control -> zamora2015 Table 1; Xin2026b ENPI arm -> xin2026 control. First check
+      whether B6 and B28 both score the oleate slate.
+    affects:
+      - selke1978_tab1_oleate_lOOH_slate
+      - frankel1981_tab2_oleate_lOOH_volatile_slates
+      - aspelund1983_tab1_3_igc_soy_80_100c
+      - crowther1980_tab3_4_igc_processed_soy
+      - snel2023_fig2_3_rhc_vs_protein
+      - snel2023b_fig6_2_raw_rhc_aldehydes
+      - hidalgo2016_tab1_phe_decadienal_second_amino_acid
+      - zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl
+      - xin2026b_text_individual_lipid_volatiles
+
+  - id: CF-030
+    kind: conflict
+    scope: other_lane
+    sources: [frankel1993, tazi2009]
+    quantity: "activation energy of hexanal / lipid-oxidation volatile formation"
+    observation: "114-122 kJ/mol in bulk oil (Frankel 1993) vs 61-65 kJ/mol in a moist paste (Tazi 2009). Both in_model_fit."
+    explanations:
+      - "Matrix (bulk oil vs aqueous paste, water activity) and marker (individual volatiles vs CL / TBARS)."
+      - "Window-dependent Ea (Frankel's 30 C windows)."
+    tests: []
+    status: open
+    remedy: "Pending."
+    affects:
+      - frankel1993_tab3_individual_volatile_ea
+      - tazi2009_tab1_q10_cl_tbars
+
+  - id: CF-031
+    kind: conflict
+    scope: other_lane
+    sources: [farmer1992, elmore1997, xu2011, yiltirak2026, us8920862, du2025]
+    quantity: "effect of lipid on meaty thiols (MFT, FFT) in cysteine + sugar pots"
+    observation: >-
+      Lipid lowers the thiols in some studies (Farmer 1992, Elmore 1997, Xu 2011) and raises them in emulsions or
+      structured lipid (Yiltirak 2026, US 8,920,862: MFT x10.1, FFT x7.4 over buffer; du2025). Touches the sulfur lane's
+      thiol sinks (CF-013).
+    explanations:
+      - "Lipid aldehydes as thiol sinks vs an oil phase protecting thiols from aqueous oxidation / binding."
+    tests: []
+    status: open
+    remedy: "Pending (lipid x sulfur sub-model)."
+    affects:
+      - farmer1992_tab1_lipid_volatiles_pm_cys_rib
+      - xu2011_table1_lard_vs_no_lard_sulfur_volatiles
+      - yiltirak2026_tables3_oil_emulsion_vs_buffer_thiols
+      - us8920862_ex5_structured_lipid_arm
+      - du2025_tab1_fatty_acid_gsh_glc_volatiles
+
+  - id: CF-032
+    kind: conflict
+    scope: other_lane
+    sources: [snel2023, bi2022, heng2005]
+    quantity: "hexanal binding to pea protein"
+    observation: "Pea hexanal binding is 5x lower in Snel 2023 than in Bi 2022; Heng 2005's legumin is 1.5-2.4x higher (STRATEGY sec. 8). Bi 2022's PRV pair is the shipped kg_hexanal_pea."
+    explanations:
+      - "Method (PRV static headspace vs other headspace routes), protein preparation and loading basis (powder vs protein)."
+    tests: []
+    status: open
+    remedy: "Pending."
+    affects:
+      - snel2023_tab3_aldehyde_partition_5_isolates
+      - bi2022_sec3_8_prv_partition_pea_buffer
+      - heng2005_ch7_fig1_legumin_aldehydes
+
+  - id: CF-033
+    kind: conflict
+    scope: other_lane
+    sources: [wang2026, wang2012, xu2013]
+    quantity: "lipid-type volatiles in lipid-free pots"
+    observation: "Lipid-oxidation volatiles are reported in pots with no lipid charged (Wang 2026, Wang 2012, Xu 2013); all digitised only."
+    explanations:
+      - "Contamination / carry-over, sugar-derived routes to the same aldehydes, or misidentification."
+    tests: []
+    status: open
+    remedy: "Pending."
+    affects:
+      - wang2026_tables2_ph_series_lipid_type_volatiles
+      - wang2012_table2_lipid_type_volatiles_no_lipid
+      - xu2013_table2_lipid_type_volatiles_peptide_xylose
+
+  # ---- acrylamide and aroma ----------------------------------------------------------------------------------------
+
+  - id: CF-034
+    kind: code_mismatch
+    scope: other_lane
+    sources: [knol2010]
+    quantity: "sugar in the B3 Knol 2010 molar-yield hold-out"
+    observation: >-
+      generate_kinetic_core_b3_holdout.py section 4 runs observe(p, {"Asn": 100, "Glc": 100}, 160 C, ...) for
+      "knol2010_molar_yield_on_asparagine"; Knol 2010 is "equimolar fructose + asparagine 0.1 mol/L in 0.1 M phosphate
+      initial pH 5.5" (knol2010 dossier title). The pot also lacks the buffer.
+    explanations: []
+    tests:
+      - "Code read and knol2010 dossier header compared 2026-10-29 (PDF not re-read)."
+    status: error_confirmed
+    remedy: "generate_kinetic_core_b3_holdout.py section 4: {\"Asn\": 100, \"Fru\": 100} with 0.1 M phosphate, initial pH 5.5 (or 5.3, CF-037); re-score the row."
+    affects:
+      - knol2010_text_acrylamide_molar_yield
+      - {file: scripts/generators/generate_kinetic_core_b3_holdout.py, symbol: knol2010_molar_yield_on_asparagine}
+
+  - id: CF-035
+    kind: code_mismatch
+    scope: other_lane
+    sources: [knol2005]
+    quantity: "pot of the B3 Knol 2005 fit system"
+    observation: >-
+      generate_kinetic_core_b3_fit.py system "knol2005": Asn and Glc at KNOL_LOADING_MMOL_L (100), ph None, no buffer.
+      Knol 2005 methods: "Equimolar solutions of glucose and asparagine (0.2 M) were prepared in phosphate buffer (0.1
+      M, pH 6.8)" (knol2005 dossier). STRATEGY sec. 8 says "0.2 M phosphate"; the dossier says 0.2 M reactants in 0.1
+      M phosphate.
+    explanations: []
+    tests:
+      - "Code read and knol2005 dossier methods quote compared 2026-10-29 (PDF not re-read)."
+    status: error_confirmed
+    remedy: "generate_kinetic_core_b3_fit.py SYSTEMS['knol2005']: Asn 200, Glc 200 mmol/L, phosphate 0.1 M, ph 6.8; correct the STRATEGY wording."
+    affects:
+      - knol2005_tab1_acrylamide_k4_k6_ea
+      - {file: scripts/generators/generate_kinetic_core_b3_fit.py, symbol: "Knol 2005 Table 1: aqueous asparagine/glucose"}
+
+  - id: CF-036
+    kind: code_mismatch
+    scope: other_lane
+    sources: [devleeschouwer2009b]
+    quantity: "whether the acrylamide fit reads De Vleeschouwer 2009 Part I"
+    observation: >-
+      src/kinetic_core/parameters_acrylamide.py _DV1_SOURCE = "De Vleeschouwer et al. 2009 Part I, Food Chem 114:116-126,
+      Table 3 p. 124, GLUCOSE column", which is devleeschouwer2009b.pdf (Food Chemistry 114 (2009) 116-126); the
+      dossier says the B3 fit "does not read this paper". The code is right; the dossier is stale.
+    explanations: []
+    tests:
+      - "parameters_acrylamide.py and devleeschouwer2009b dossier lines 3 and 70 read 2026-10-29."
+    status: error_confirmed
+    remedy: "devleeschouwer2009b_extraction.md sec. on model use: state that _DV1_SOURCE reads Table 3 glucose column (ledger already in_model_fit)."
+    affects:
+      - devleeschouwer2009b_tab3_glucose_acrylamide_rows
+      - {file: src/kinetic_core/parameters_acrylamide.py, symbol: _DV1_SOURCE}
+
+  - id: CF-037
+    kind: condition_error
+    scope: other_lane
+    sources: [knol2010]
+    quantity: "initial pH of Knol 2010's fructose + asparagine pot"
+    observation: "Dossier heading pH 5.5 vs methods pH 5.3 (ledger flag condition_error_in_dossier_heading); measured at room temperature."
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: read the methods; correct the dossier heading and use the methods value in any row (CF-034)."
+    affects:
+      - knol2010_tab2_acrylamide_asn_steps
+      - knol2010_tab2_fru_asn_rate_constants_ea
+
+  - id: CF-038
+    kind: condition_error
+    scope: corpus
+    sources: [meynier1995]
+    quantity: "concentrations of Meynier 1995's glycine and lysine pots"
+    observation: >-
+      The dossier title says 100 / 70 mM; the methods make up 25 mL to 50 mL, so the pots are 50 / 35 mM (verified on
+      p. 362 for CF-001). Aroma ledger entries for Tables 1-2 carry the flag; digitised only.
+    explanations: []
+    tests:
+      - "meynier1995.pdf p. 362 read 2026-10-29."
+    status: error_confirmed
+    remedy: "meynier1995_extraction.md title / heading: 100 / 70 mM stock, 50 / 35 mM in the pot."
+    affects:
+      - meynier1995_table1_gly_ribose_ph_ladder
+      - meynier1995_table2_lys_ribose_ph_ladder
+
+  - id: CF-039
+    kind: conflict
+    scope: other_lane
+    sources: [gokmen2012, claeys2005, devleeschouwer2009]
+    quantity: "activation energy of acrylamide formation"
+    observation: "84 kJ/mol (Gokmen 2012, silica-supported melt) vs 159-168 kJ/mol (Claeys 2005, De Vleeschouwer). Claeys is in_model_fit; Gokmen text-only."
+    explanations:
+      - "Matrix and moisture (low-moisture silica melt vs aqueous / a_w 0.92 powders); apparent vs elementary barriers."
+    tests: []
+    status: open
+    remedy: "Pending."
+    affects:
+      - gokmen2012_fig2b_fig3_acrylamide_temperature_ea
+      - claeys2005_tab2_acrylamide_kf_ke_five_systems
+
+  - id: CF-040
+    kind: duplicate
+    scope: other_lane
+    sources: [devleeschouwer2008, devleeschouwer2009b]
+    quantity: "the a_w 0.92 asparagine + glucose constants (Leuven)"
+    observation: >-
+      De Vleeschouwer 2009 Part I reprints the 2008 a_w 0.92 column in different k units (STRATEGY sec. 8). Both are
+      in_model_fit in the acrylamide ledger (devleeschouwer2008 Table 2; devleeschouwer2009b Table 3 glucose column,
+      read via _DV1_SOURCE), so the same constants may enter twice.
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: verify the unit conversion; then copy_of devleeschouwer2009b_tab3_glucose_acrylamide_rows -> devleeschouwer2008_tab2_aw_multiresponse_constants, and remove one from the fit."
+    affects:
+      - devleeschouwer2008_tab2_aw_multiresponse_constants
+      - devleeschouwer2009b_tab3_glucose_acrylamide_rows
+
+  - id: CF-041
+    kind: conflict
+    scope: other_lane
+    sources: [joo2022, kim2024b]
+    quantity: "IMP content of cultured / cultivated meat"
+    observation: "About four decades apart between joo2022 and kim2024b; both in_model_check (precursor composition)."
+    explanations:
+      - "Units / basis (per g protein, per kg wet), cell line and harvest state."
+    tests: []
+    status: open
+    remedy: "Pending."
+    affects:
+      - joo2022_tab1_fig2_cultured_meat_aa_nucleotides
+      - kim2024b_tab4_cultivated_pig_free_aa_nucleotides
+
+  # ---- matrix ------------------------------------------------------------------------------------------------------
+
+  - id: CF-042
+    kind: self_contradiction
+    scope: other_lane
+    sources: [Meynier2002, leksrisompong2010]
+    quantity: "air-water partition coefficients from static headspace vs the papers' own Henry constants"
+    observation: "Meynier's air-water K is 6.2x below its own (cited) Henry constants; Leksrisompong's 6-17x low (matrix ledger). Both papers' within-run ratios are what the registry uses."
+    explanations:
+      - "Absolute static-headspace scale offset (the registry's stated reason for using within-run ratios)."
+    tests: []
+    status: open
+    remedy: "Pending: keep ratio-only use; record the offset as a measurement-class property in M6."
+    affects:
+      - meynier2002_tab3_air_matrix_k_30c_water_skim
+      - meynier2002_tab1_cited_henry_logp
+      - leksrisompong2010_tab5_headspace_k_8_matrices
+
+  - id: CF-043
+    kind: conflict
+    scope: other_lane
+    sources: [Meynier2002]
+    quantity: "hexanal air-water K"
+    observation: "Hall & Anderson 1983 vs Meynier 2002: 7-9x. Hall & Anderson 1983 has no dossier (cited in the matrix layer only); nearest dossier Meynier2002."
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: Hall & Anderson 1983 is on the M3 download list; write its dossier first."
+    affects:
+      - meynier2002_tab3_air_matrix_k_30c_water_skim
+
+  - id: CF-044
+    kind: code_mismatch
+    scope: other_lane
+    sources: [andriot2000]
+    quantity: "molar basis of beta-lactoglobulin binding constants"
+    observation: "Andriot 2000 uses the 36.8 kDa dimer; data/species/protein_matrices.yml carries the monomer (a 2x risk on any per-mole constant)."
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: check which basis the shipped constant was converted on; state the basis in protein_matrices.yml."
+    affects:
+      - andriot2000_text_kb_methyl_ketones_blg
+
+  - id: CF-045
+    kind: conflict
+    scope: other_lane
+    sources: [guo2019, damodaran1981]
+    quantity: "molar mass used for soy protein binding constants"
+    observation: "Guo 2019 converts on 220 kDa, Damodaran 1981 on 100 kDa (matrix ledger)."
+    explanations:
+      - "Different assumed subunit / aggregate (glycinin vs a generic soy protein)."
+    tests: []
+    status: open
+    remedy: "Pending: convert both to a per-gram basis before comparing."
+    affects:
+      - guo2019_tab2_klotz_preheated_spi
+      - damodaran1981_tab1_carbonyl_soy_binding_25c
+
+  - id: CF-046
+    kind: self_contradiction
+    scope: other_lane
+    sources: [snel2023]
+    quantity: "unit in the header of Snel 2023 Table 3 (aldehyde partition, 5 isolates)"
+    observation: "Matrix ledger: the table header unit is off by 10x."
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: verify against the text values; record the corrected unit in the ledger."
+    affects:
+      - snel2023_tab3_aldehyde_partition_5_isolates
+
+  - id: CF-047
+    kind: condition_error
+    scope: other_lane
+    sources: [hong2020]
+    quantity: "equilibration of Hong 2020's paired thresholds (water vs soy)"
+    observation: "Water samples equilibrated 0 h, soy samples 24 h at 4 C (matrix ledger); the paired-threshold check (in_model_check) treats the pair as like for like."
+    explanations: []
+    tests: []
+    status: open
+    remedy: "Pending: carry the equilibration difference as a condition of the check, or score soy only against a 24 h water arm if one exists."
+    affects:
+      - hong2020_tab2_paired_thresholds_soy_water
+
+  - id: CF-048
+    kind: code_mismatch
+    scope: other_lane
+    sources: [gorissen2018]
+    quantity: "ledger status of Gorissen 2018 (protein isolate amino-acid composition)"
+    observation: "STRATEGY sec. 8: aroma_other's gorissen2018 feeds data/species/protein_matrices.yml, so it is in_model_fit, not digitised."
+    explanations: []
+    tests:
+      - "aroma_other.yml read 2026-10-29: gorissen2018_tab1_amino_acid_composition_protein_isolates is now in_model_fit."
+    status: fixed
+    remedy: "Fixed in data/lit/measurement_ledger/aroma_other.yml (status in_model_fit, 2026-10-29, ledger agent's working-tree edit)."
+    affects:
+      - gorissen2018_tab1_amino_acid_composition_protein_isolates
+
+  - id: CF-049
+    kind: code_mismatch
+    scope: other_lane
+    sources: [bi2022]
+    quantity: "provenance notes of the shipped pea K_g values (protein loading)"
+    observation: >-
+      The shipped K_g values reproduce Bi 2022 SI Table S3 exactly: (116.37/32.90 - 1)/10 = 0.2537 L/g hexanal,
+      (2065.44/1460.49 - 1)/10 = 0.0414 (Z)-2-penten-1-ol, (2203.85/455.93 - 1)/10 = 0.3834 (E)-2-octenal. Table S3's
+      title states the loading: "Matrix/gas partition coefficients of flavor compounds in the solution of pea protein (10
+      mg/mL) at 37 C calculated by phase ratio variation method" (bi2022 dossier, Supplementary material read
+      2026-10-29). The provenance notes still say the loading is inherited and not restated (parameters_matrix.py
+      MATRIX_LOADING['pea_protein_1pct'] note, kg_* provenance loading_inherited_not_restated: True, and "10 g/L,
+      inherited"), and binding_constants.yml says Table S3 is not held.
+    explanations: []
+    tests:
+      - "Arithmetic above, and the bi2022 dossier's Table S3 transcription, checked 2026-10-29."
+    status: error_confirmed
+    remedy: >-
+      Notes only, no number moves. src/kinetic_core/parameters_matrix.py: the pea_protein_1pct note (~l. 266-277) ->
+      "10 g/L printed in SI Table S3's title"; kg_hexanal_pea / kg_z_2_penten_1_ol_pea / kg_t_2_octenal_pea sources ->
+      "Table S3 (10 mg/mL, 37 C)"; provenance loading_inherited_not_restated -> False (~l. 489, 504). data/lit/
+      binding_constants.yml (~l. 504, 513): location -> SI Table S3 (on disk as bi2022_supplementary.zip); the
+      arithmetic check can cite S3 directly. The powder-vs-protein basis caveat stays.
+    affects:
+      - bi2022_sec3_8_prv_partition_pea_buffer
+      - {file: src/kinetic_core/parameters_matrix.py, symbol: "does NOT restate the loading"}
+      - {file: src/kinetic_core/parameters_matrix.py, symbol: loading_inherited_not_restated}
+      - {file: data/lit/binding_constants.yml, symbol: "which this PDF does not contain"}
+
+  - id: CF-050
+    kind: self_contradiction
+    scope: other_lane
+    sources: [bi2022]
+    quantity: "hexanal pea-matrix/gas K2 in Bi 2022 SI Table S3 (regression vs printed K)"
+    observation: >-
+      K = a/b reproduces five of the six printed partition coefficients, but hexanal in pea gives 9.04 / 0.78 = 11.6
+      against the printed K2 = 116.37 (10.0x). The printed 116.37 agrees with the printed retention (1 - 32.90/116.37 =
+      71.73 %, printed 71.72 %) and with the main text sec. 3.8; K2 = 11.6 would mean -184 % retention. The model
+      uses 116.37.
+    explanations:
+      - "A dropped digit in a or b of the regression (e.g. a = 90.4), not in K."
+    tests:
+      - "bi2022 dossier Supplementary material, Table S3 checks item 1 (arithmetic re-done 2026-10-29)."
+    status: not_an_error
+    remedy: "None for the model (it uses the printed K2, which the retention and the main text confirm); keep the ledger flag s3_hexanal_pea_regression_a_over_b_10x_off_printed_k."
+    affects:
+      - bi2022_sec3_8_prv_partition_pea_buffer
+
+  - id: CF-051
+    kind: code_mismatch
+    scope: other_lane
+    sources: [barallatperez2023, barallatperez2024]
+    quantity: "the 'sealed' lupin and mucin binding constants of the matrix layer's Module 6 hold-out"
+    observation: >-
+      src/kinetic_core/parameters_matrix.py HOLDOUT_SEALED_BINDING names six binding constants (hexanal, nonanal,
+      2-nonanone on lupin and on mucin) as a sealed hold-out, citing Barallat-Perez 2023 (JAFC 71:20274) for lupin and
+      Barallat-Perez 2024 for mucin. The 2023 paper (read in full 2026-10-29, dossier barallatperez2023) reports only
+      percent bound on an isolate-powder basis (its eq. 1), lupin values only as bars, no per-gram constant, and never
+      measures nonanal; it has no mucin. The 2024 paper prints no binding values. The "headspace-derived lupin value"
+      for hexanal cited in a soy note (~l. 441) has no source. data/lit/binding_constants.yml (~l. 620) carries 14.73 %
+      for 2-octanone against the paper's 17.53-23.30 %, and (~l. 600) a 30 C hold that the paper does not state;
+      process_state_calibrations.json and benchmark_intake_registry.json describe Ka values, a logP model and MFT /
+      pyrazine data the paper does not contain. (Reported by the 2026-10-29 reading of the downloads; line numbers
+      from that reading, not re-checked here.)
+    explanations:
+      - "The hold-out was declared from a citation before the paper was on disk, and later notes inherited the claim."
+    tests:
+      - "barallatperez2023.pdf read in full 2026-10-29 into dossier barallatperez2023 (Full text section)."
+    status: error_confirmed
+    remedy: >-
+      The six 'sealed' constants do not exist in the cited papers: retire HOLDOUT_SEALED_BINDING as a hold-out (it
+      cannot be scored), or re-derive a percent-bound check from the 2023 bars on the powder basis, declared as
+      such. Correct binding_constants.yml's 2-octanone value and the 30 C note, and strike the false descriptions in
+      process_state_calibrations.json and benchmark_intake_registry.json. Phase 4 (matrix layer); no sulfur row
+      depends on it.
+    affects:
+      - barallatperez2023_text_pooled_percent_bound
+      - barallatperez2023_figs3_4_lupin_ketones_hexanal_storage
+      - {file: src/kinetic_core/parameters_matrix.py, symbol: HOLDOUT_SEALED_BINDING}
+
+  - id: CF-052
+    kind: code_mismatch
+    scope: other_lane
+    sources: [nguyen2016]
+    quantity: "the fate of lysine in the Amadori product's breakdown (B20 glycation arm, k_flp_decay)"
+    observation: >-
+      src/kinetic_core/parameters_glycation.py makes the bound Amadori compound decay to 3-deoxyglucosone AND
+      returns the lysine (k_flp_decay, "the dominant loss"), and B20 fits it against Nguyen 2016's rate constants.
+      Nguyen's ODE system (SI Fig. S2, typed equations, read 2026-10-29 into the nguyen2016 dossier) returns no
+      lysine from any step: AP -> CML / MRPs / CEL (k7 / k8 / k9), with k8 to unspecified MRPs. So the constant the
+      arm fits was estimated under a scheme in which that lysine is consumed, and the arm releases it again. Also from
+      the SI: the t = 0 sugar : lysine ratio is about 6:1, not the stated 10:1, and the 10-min recovery in M1 at
+      120 C plots as 107.7 % where the text says 104 %.
+    explanations:
+      - "B20 chose the lysine-returning route on chemistry (Amadori degradation to 3-DG frees the amine) without checking which scheme the fitted constants belong to."
+    tests:
+      - "nguyen2016 dossier 'Supplementary material (read 2026-10-29)': Fig. S2A/B equations transcribed."
+    status: error_confirmed
+    remedy: >-
+      Phase 4 (glycation arm): either refit k_flp_decay under the lysine-returning scheme against Nguyen's measured
+      time courses (Figs. 2-3, mass balance Fig. S1B), not against his constants, or adopt his scheme (no lysine
+      return) with his constants. The choice is a mechanism question the S1B lysine balance can test.
+    affects:
+      - nguyen2016_table1_m1_glucose_casein_constants
+      - {file: src/kinetic_core/parameters_glycation.py, symbol: k_flp_decay}

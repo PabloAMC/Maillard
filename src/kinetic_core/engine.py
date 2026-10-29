@@ -91,6 +91,7 @@ from .species_sulfur import (
     mmol_per_litre_to_ug_per_litre,
 )
 from .ph_state import BUFFER_ABSENT_WARNING, DEFAULT_BUFFER, BufferSpec, PhDrift
+from . import sulfur as _sulfur_mod
 from .sulfur import integrate_sulfur
 
 CELSIUS = 273.15
@@ -119,6 +120,12 @@ _B1_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b1_fit_report.json"
 #: ships even where it scores worse, and where it scores worse the B8 hold-out
 #: report says so. (It does score worse on the hold-out panel: 12/32 -> 8/30.)
 _B2_FIT_REPORT_CANDIDATES = (
+    # 2026-10-28: B60 SHIPS (kind 1, a numerical correction): B51's objective refitted on a converged pH
+    # trajectory (log-and-linear pH nodes, under-relaxed fixed point iterated to 1e-3 pH, closed flux
+    # budget). B51's reported cost was flattered by the unconverged numerics; the Kang / Zhai thiol rows it
+    # now over-predicts are the trunk-timescale defect (docs/guides/SULFUR_FLUX_MAP.md, B59); see
+    # kinetic_core_b60_prereg.md sec. 6.
+    data_paths.VALIDATION_DIR / "kinetic_core_b60_fit_report.json",
     # 2026-10-27: B51 SHIPS under the correctness rule (scripts/generators/WAVES.md, "How a change is
     # accepted"): the pH state on GKL / Suleimenov & Seward constants, refitted on B47's corrected rows.
     # It scores worse on the Hofmann pH 5 pots (~100x low), and the record says so and names the
@@ -547,28 +554,9 @@ _PRECURSOR_LANE: Mapping[str, str] = {
     "Ala": ACRYLAMIDE,
 }
 
-#: B31 (2026-09-10). THE LINE BETWEEN A COOK AND A HEADSPACE INCUBATION, expressed
-#: as the fraction of the hydroperoxide pool that decomposes over the whole thermal
-#: program. It is NOT a fitted quantity and NOT a tuned one.
-#:
-#: What it separates, computed on the panel's own conditions with the lane's own
-#: anchored decomposition constant:
-#:
-#:     40 C, 10 min  (the four HS-SPME incubations)      3.826e-3
-#:     140 C, 6 s    (Trikusuma UHT, the mildest cook)   0.2578
-#:     160 C, 25 s   (Li 2026 extrusion)                 0.9994
-#:     160 C, 30 min (Bi 2020 roasted pea)               1.000
-#:
-#: The gap between the first row and the second is a factor of 67 and NOTHING IN THE
-#: PANEL LIES INSIDE IT. Thresholds of 0.01, 0.05 and 0.10 all give the identical
-#: verdict on every row, which is what a threshold that is not doing any fitting looks
-#: like. The verdict also survives the Q10 band end to end: at q10 = 2.0, the corner
-#: that slows the hot pots most, the two sides are 2.824e-3 and 2.855e-2 -- still on
-#: opposite sides of the line.
-#:
-#: The 1 % figure is chosen as the round number at the bottom of that empty gap, and
-#: it is used ONLY to refuse, never to scale anything.
-UNCOOKED_LOOH_CONVERSION_LIMIT = 0.01
+#: B31 (2026-09-10) refused a never-cooked pot when its decomposition extent fell below 1 %; that
+#: threshold depended on the lipid lane's unmeasured temperature law and was retired on 2026-10-28
+#: (choices register CR-01). The refusal now reads `closure: "never heated"` alone.
 
 #: B6. A LIPID CARRIER is not a precursor species: it is a matrix declaration
 #: that resolves to a hydroperoxide pool through
@@ -702,9 +690,18 @@ class ThermalProgram:
     ingests (isothermal holds, extrusion zones, an autoclave ramp) is expressed
     as segments. A finer ramp is expressed as more segments; nothing is
     interpolated behind the caller's back.
+
+    B64 (2026-10-28): a pot whose source records a heat-up or a cool-down is a
+    PROFILE, piecewise-linear breakpoints ``((t_min, T_C), ...)`` from t = 0
+    (``from_profile``). ``segments`` is then its staircase -- steps of at most
+    ``RAMP_STEP_K`` at their mid temperature -- which every integrator that runs
+    at one temperature reads; the sulfur lane integrates the profile itself, its
+    rate constants evaluated at T(t) on its pH nodes. ``profile`` is None for
+    every program built from holds, so those run exactly as before.
     """
 
     segments: Tuple[Tuple[float, float], ...]
+    profile: Optional[Tuple[Tuple[float, float], ...]] = None
 
     def __post_init__(self) -> None:
         if not self.segments:
@@ -717,23 +714,71 @@ class ThermalProgram:
     def isothermal(cls, temperature_c: float, time_min: float) -> "ThermalProgram":
         return cls(((float(time_min), float(temperature_c)),))
 
+    @classmethod
+    def from_profile(
+        cls, points: Sequence[Tuple[float, float]], max_step_k: float = None
+    ) -> "ThermalProgram":
+        """
+        A piecewise-linear T(t) through ``points`` (``(t_min, T_C)``, the first at t = 0,
+        times non-decreasing; two points at one time are a jump). The staircase steps by at
+        most ``max_step_k`` (default ``RAMP_STEP_K``): at 2 K and 100 kJ/mol the midpoint
+        rule is exact to ~4e-4 of each step's rate integral.
+        """
+        step_k = RAMP_STEP_K if max_step_k is None else float(max_step_k)
+        profile = tuple((float(t), float(c)) for t, c in points)
+        if len(profile) < 2 or profile[0][0] != 0.0:
+            raise ValueError("a profile needs at least two points, the first at t = 0")
+        if any(b[0] < a[0] for a, b in zip(profile, profile[1:])):
+            raise ValueError("profile times must be non-decreasing")
+        steps = []
+        for (t0, c0), (t1, c1) in zip(profile, profile[1:]):
+            duration = t1 - t0
+            if duration <= 0.0:
+                continue
+            n = max(1, int(math.ceil(abs(c1 - c0) / step_k - 1e-12)))
+            for i in range(n):
+                steps.append((duration / n, c0 + (c1 - c0) * (i + 0.5) / n))
+        if not steps:
+            raise ValueError("a profile needs a positive duration")
+        return cls(tuple(steps), profile)
+
+    def temperature_c_at(self, t_min) -> np.ndarray:
+        """T(t) in C: the profile's linear interpolation, or the staircase where there is none."""
+        t = np.asarray(t_min, dtype=float)
+        if self.profile is not None:
+            times, temps = zip(*self.profile)
+            return np.interp(t, np.array(times), np.array(temps))
+        edges = np.cumsum([0.0] + [float(d) for d, _ in self.segments])
+        index = np.clip(np.searchsorted(edges, t, side="right") - 1, 0, len(self.segments) - 1)
+        return np.array([float(c) for _, c in self.segments])[index]
+
     @property
     def total_minutes(self) -> float:
         return float(sum(d for d, _ in self.segments))
 
     @property
     def peak_temperature_c(self) -> float:
+        if self.profile is not None:
+            return float(max(c for _, c in self.profile))
         return float(max(t for _, t in self.segments))
 
     @property
     def min_temperature_c(self) -> float:
+        if self.profile is not None:
+            return float(min(c for _, c in self.profile))
         return float(min(t for _, t in self.segments))
 
     def describe(self) -> str:
+        if self.profile is not None:
+            return "profile " + " -> ".join(f"{c:.0f} C at {t:g} min" for t, c in self.profile)
         if len(self.segments) == 1:
             d, t = self.segments[0]
             return f"isothermal {t:.1f} C for {d:g} min"
         return " -> ".join(f"{t:.1f} C x {d:g} min" for d, t in self.segments)
+
+
+#: B64: the staircase step of a profile's ramps, in kelvin (``ThermalProgram.from_profile``).
+RAMP_STEP_K: float = 2.0
 
 
 @dataclass(frozen=True)
@@ -1325,22 +1370,14 @@ def declare_envelope(
         # heated is not being tested on its chemistry, and scoring the miss as a chemistry
         # failure -- 3357x, 6078x, 3717x, 33392x -- misreports what is wrong.
         #
-        # TWO INDEPENDENT DECLARATIONS HAVE TO AGREE before a row is refused, because
-        # either alone is unsafe:
-        #   1. the bundle's vessel says `closure: "no cook"`. This is a datum the bundles
-        #      recorded months before this wave and it owes nothing to any prediction --
-        #      but the string is OVERLOADED. Three hot bundles carry it meaning "no vessel
-        #      to record" (a synthetic snapshot; two commercial products whose conditions
-        #      block is a proxy operating point). It cannot be the whole rule.
-        #   2. the thermal load cannot form what was measured: the fraction of the
-        #      hydroperoxide pool that decomposes over the program is below 1 %. The four
-        #      unheated pots sit at 3.8e-3; the coldest real cook in the panel (140 C for
-        #      6 s) sits at 0.258, sixty-seven times higher. NOTHING IN THE PANEL LIES
-        #      BETWEEN THEM, which is why the threshold is not a tuned knob: 0.01, 0.05 and
-        #      0.10 all refuse the same seven rows. The verdict also survives the Q10 band
-        #      -- at the worst corner (q10 = 2.0, which slows the hot pots most) the two
-        #      sides are still 2.8e-3 and 2.9e-2, on opposite sides of the line.
-        # The three hot "no cook" bundles fail clause 2 and are untouched.
+        # THE RULE READS A RECORDED FACT AND NOTHING ELSE (2026-10-28, choices register CR-01). B31 refused a
+        # row when two declarations agreed: `closure: "no cook"` and a computed decomposition extent
+        # below 1 %. The string was overloaded (three hot bundles carry it meaning "no vessel to
+        # record"), and the extent depended on the lipid lane's temperature law, which is not
+        # measured for this matrix: at the measured Q10 of 1.6 (Tazi 2009) the 6 s UHT cook fell
+        # below the line too. The four pots now carry `closure: "never heated"`, a value of their
+        # own, written from each source's statement that nobody heated the material
+        # (`complete_benchmark_vessel_fields.NEVER_HEATED`). No model quantity enters the refusal.
         #
         # THE REFUSAL IS CONDITIONAL AND NAMES ITS OWN CURE. Declare what the pot started
         # with (`conditions.carried_volatiles`, this wave's other half) and the row is
@@ -1357,45 +1394,34 @@ def declare_envelope(
         if carriers and lipid_targets:
             vessel = getattr(spec.process, "vessel", None)
             closure = _norm(str(getattr(vessel, "closure", "") or ""))
-            if closure == "no cook":
-                from .parameters_lipid import k_looh_decomp_per_min
-
-                exponent = sum(
-                    k_looh_decomp_per_min(float(temperature_c)) * float(duration)
-                    for duration, temperature_c in spec.process.thermal.segments
+            if closure == "never heated":
+                # A compound counts as declared when its SPECIES was declared, under any of
+                # the names the alias table accepts, and a declared 0.0 counts (2026-09-11:
+                # this compared raw strings and dropped zeros, so a level declared under one
+                # spelling and requested under another read as undeclared).
+                carried_declared = set(_carried_by_species(
+                    getattr(spec.process, "carried_volatiles", None) or {}
+                ))
+                undeclared = sorted(
+                    {
+                        name for name, key in mapped_targets.items()
+                        if _TARGET_LANE.get(key) == LIPID and key not in carried_declared
+                    }
                 )
-                extent = 1.0 - math.exp(-exponent)
-                if extent < UNCOOKED_LOOH_CONVERSION_LIMIT:
-                    # A compound counts as declared when its SPECIES was declared, under any of
-                    # the names the alias table accepts, and a declared 0.0 counts (2026-09-11:
-                    # this compared raw strings and dropped zeros, so a level declared under one
-                    # spelling and requested under another read as undeclared).
-                    carried_declared = set(_carried_by_species(
-                        getattr(spec.process, "carried_volatiles", None) or {}
-                    ))
-                    undeclared = sorted(
-                        {
-                            name for name, key in mapped_targets.items()
-                            if _TARGET_LANE.get(key) == LIPID and key not in carried_declared
-                        }
+                if undeclared:
+                    reasons.append(
+                        "THIS POT WAS NEVER COOKED, so what it measures is what the raw "
+                        "material ARRIVED WITH, and this lane models FORMATION. The "
+                        "bundle's source says so, recorded as closure = 'never heated' "
+                        "(its timed block is the headspace incubation of the measurement, "
+                        "not a cook). There is no thermal step here to model, so "
+                        + ", ".join(undeclared)
+                        + " is refused rather than answered with a formation from zero. "
+                        "THE CURE IS A DECLARED STARTING STATE: put the level the source "
+                        "prints for the unheated material in conditions.carried_volatiles "
+                        "and the row is answered. Only a level the source PRINTS may go "
+                        "there; nothing may be inferred from another paper's isolate."
                     )
-                    if undeclared:
-                        reasons.append(
-                            "THIS POT WAS NEVER COOKED, so what it measures is what the raw "
-                            "material ARRIVED WITH, and this lane models FORMATION. The "
-                            "bundle's own vessel says so (closure = 'no cook'), and the "
-                            "physics agrees: over this thermal program only "
-                            f"{100.0 * extent:.2f} % of the hydroperoxide pool decomposes, "
-                            f"against {100.0 * UNCOOKED_LOOH_CONVERSION_LIMIT:.0f} % taken as "
-                            "the floor for a cook and 25.8 % for the mildest real cook in the "
-                            "panel. There is no thermal step here to model, so "
-                            + ", ".join(undeclared)
-                            + " is refused rather than answered with a formation from zero. "
-                            "THE CURE IS A DECLARED STARTING STATE: put the level the source "
-                            "prints for the unheated material in conditions.carried_volatiles "
-                            "and the row is answered. Only a level the source PRINTS may go "
-                            "there; nothing may be inferred from another paper's isolate."
-                        )
 
     if lipid_targets and LIPID not in lanes and not lane_reasons:
         reasons.append(
@@ -1881,6 +1907,20 @@ def core_parameters(
                 pick("decay_Ea_kJ_mol"),
             )
         )
+        # B55 (2026-10-28): a Monte-Carlo draw's barrier for a constant known at 145 C only. k_ref stays
+        # the fitted value at T_ref (418.15 K), so k(145 C) is unchanged; only the slope away from it
+        # moves. A key carrying a MEASURED barrier is refused: a draw never overwrites a measurement.
+        single_t = override.get("single_temperature_ea_kj_mol") or {}
+        if single_t:
+            from dataclasses import replace as _replace
+
+            from .parameters_sulfur import measured_ea_overrides
+
+            measured = measured_ea_overrides()
+            for key, ea in single_t.items():
+                if key in measured:
+                    raise ValueError(f"{key!r} carries a measured barrier; a B55 draw may not replace it")
+                parameters[key] = _replace(parameters[key], ea_kj_mol=float(ea))
         # B11: the oxygen consumers from the report's "oxygen" block (or a draw's), else the
         # inert zero defaults MEASURED_SULFUR already carries.
         oxygen: Dict[str, float] = {}
@@ -2538,7 +2578,20 @@ def _integrate_program(
             state["LYSP"] = float(charged.amine) * available_fraction(charged.amine_band)
 
     sulfur_sid: Optional[float] = None  # B51: the pot's SID, carried across its segments
-    for index, (duration, temperature_c) in enumerate(process.thermal.segments):
+    thermal = process.thermal
+    if lane == SULFUR and thermal.profile is not None:
+        # B64: a recorded heat-up is ONE integration whose rate constants follow T(t) on the pH
+        # nodes, not a chain of pH fixed points, one per staircase step (the cost and the
+        # re-titration at every boundary would both be artefacts of the discretisation).
+        segment_list = [(thermal.total_minutes, thermal.peak_temperature_c)]
+        profile_k = (
+            np.array([t for t, _ in thermal.profile]),
+            np.array([c for _, c in thermal.profile]) + CELSIUS,
+        )
+    else:
+        segment_list = list(thermal.segments)
+        profile_k = None
+    for index, (duration, temperature_c) in enumerate(segment_list):
         grid = np.array([0.0, float(duration)])
         if lane == SULFUR:
             run = integrate_sulfur(
@@ -2567,6 +2620,7 @@ def _integrate_program(
                 rtol=1e-8,
                 atol=1e-14,
                 sid_mmol_l=sulfur_sid,
+                temperature_profile=profile_k,
             )
             if sulfur_sid is None:
                 sulfur_sid = run.metadata.get("strong_ion_difference_mmol_L")
@@ -3111,7 +3165,8 @@ def engine_metadata() -> Dict[str, Any]:
         "lane_networks": {
             TRUNK: f"REACTIONS ({len(REACTIONS)} steps), no pH term, no a_w term",
             SULFUR: (
-                f"FULL_REACTIONS ({len(FULL_REACTIONS)} steps) = trunk + sulfur, "
+                # active steps only: a wave's switched-off step has a structurally zero rate (sulfur.inactive_reactions)
+                f"FULL_REACTIONS ({len(FULL_REACTIONS) - len(_sulfur_mod.inactive_reactions())} steps) = trunk + sulfur, "
                 "pH trajectory"
             ),
             ACRYLAMIDE: (

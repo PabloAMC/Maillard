@@ -779,10 +779,14 @@ def _b50_acid_base_constants():
     switches off and restores them afterwards."""
     from src.kinetic_core import ph_state
 
-    saved = ph_state.B51
+    from src.kinetic_core import sulfur as _sulfur
+
+    saved = ph_state.B51, _sulfur.PH_NODE_GRID, _sulfur.PH_FIXED_POINT, _sulfur.FLUX_BUDGET
     ph_state.B51 = ph_state.PhStateCorrections()
+    # B60: the pH numerics and flux budget every wave through B58 ran on
+    _sulfur.PH_NODE_GRID, _sulfur.PH_FIXED_POINT, _sulfur.FLUX_BUDGET = "uniform", "fixed_sweeps", "linear_rederived"
     yield
-    ph_state.B51 = saved
+    ph_state.B51, _sulfur.PH_NODE_GRID, _sulfur.PH_FIXED_POINT, _sulfur.FLUX_BUDGET = saved
 
 
 @pytest.mark.parametrize("relative", RUNTIME_FILES + (FIT_FILE,))
@@ -861,7 +865,9 @@ def test_network_shape_is_pinned():
     # B11 (2026-09-07): + OXR (headspace reservoir) and OXV (dissolved-oxygen vacancy)
     # B39 (2026-09-11): + DGAL, 3-deoxygalactosone, the fed triangle's epimer.
     # 2026-10-27: + SHET (B49, norfuraneol's heterocycles) and GSH (glutathione, a measured H2S source).
-    assert described["n_species"] == 60
+    # 2026-10-29: + CAMA (the cysteine Amadori compound of de Roos's route, B59b), appended last and
+    # inert while CYS_AMADORI_ROUTE is off, which it is in the shipped model.
+    assert described["n_species"] == 61
     # B7 adds ELEVEN steps to the TRUNK -- the furanic channel hangs there
     # because all four of its parents (Fru, 3-DG, 1-DG, MGO) are trunk species.
     # 15 through B6.

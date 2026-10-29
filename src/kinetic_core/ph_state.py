@@ -104,6 +104,8 @@ import math
 from dataclasses import dataclass, field
 from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
+import numpy as np
+
 R_KJ = 8.314462618e-3
 
 PKA_REFERENCE_T_K = 298.15
@@ -661,6 +663,11 @@ def titratable_inventory(
     ttca = float(concentrations.get("TTCA", 0.0))
     if ttca > 0.0:
         out.append((TTCA_GROUP, ttca))
+    # B59b: the cysteine Amadori compound, titrated as the pentose Amadori compound the drift already calibrates
+    # (its carboxyl and secondary ammonium; its thiol, pKa ~8.3, is a declared omission like ARP's).
+    cama = float(concentrations.get("CAMA", 0.0))
+    if cama > 0.0:
+        out.append((drift.arp_group(), cama))
 
     # -- B2.3: the carboxyl centres the sinks CARRY OUT of a consumed --------
     #    molecule. FULL STRENGTH: a carboxyl carried out of a molecule that
@@ -765,9 +772,45 @@ def solve_ph_and_ionic_strength(
     return ph, ionic_strength_of(ph, temperature_k, sid_mmol_l, inventory, ionic)
 
 
+def _residual_at_fixed_conditions(temperature_k, sid_mmol_l, inventory, ionic_strength_m):
+    """
+    ``_charge_residual`` as a function of pH alone, for one (T, SID, inventory, I). C5 (2026-10-28):
+    the profile of a sulfur run put ~90 % of its time in the bisection recomputing each group's pKa
+    (van 't Hoff, dCp, Davies) at every trial pH. Those do not depend on the pH, so they are computed
+    once here. The arithmetic per trial pH is ``_charge_residual``'s, operation for operation, so the
+    result is bit-identical (tests/unit/test_kinetic_core_b64_thermal_profile.py checks it).
+    """
+    inv_gamma = 10.0 ** davies_term(ionic_strength_m, temperature_k)
+    pkw = pkw_at(temperature_k)
+    groups = [
+        (float(concentration), float(group.z_max), group.pkas_at(temperature_k, ionic_strength_m))
+        for group, concentration in inventory if concentration > 0.0
+    ]
+    sid = float(sid_mmol_l)
+
+    def residual(ph: float) -> float:
+        ph = float(ph)
+        total = sid + 1000.0 * 10.0 ** (-ph) * inv_gamma - 1000.0 * 10.0 ** (ph - pkw) * inv_gamma
+        for concentration, z_max, pkas in groups:
+            log_w = [0.0]
+            running = 0.0
+            for pka in pkas:
+                running += ph - pka
+                log_w.append(running)
+            top = max(log_w)
+            weights = [10.0 ** (value - top) for value in log_w]
+            norm = sum(weights)
+            weights = [w / norm for w in weights]
+            total += concentration * (z_max - sum(i * w for i, w in enumerate(weights)))
+        return total
+
+    return residual
+
+
 def _bisect_ph(temperature_k, sid_mmol_l, inventory, ionic, lo, hi, tol, max_iter) -> float:
-    f_lo = _charge_residual(lo, temperature_k, sid_mmol_l, inventory, ionic)
-    f_hi = _charge_residual(hi, temperature_k, sid_mmol_l, inventory, ionic)
+    residual = _residual_at_fixed_conditions(temperature_k, sid_mmol_l, inventory, ionic)
+    f_lo = residual(lo)
+    f_hi = residual(hi)
     if f_lo < 0.0:
         return lo
     if f_hi > 0.0:
@@ -776,7 +819,7 @@ def _bisect_ph(temperature_k, sid_mmol_l, inventory, ionic, lo, hi, tol, max_ite
         mid = 0.5 * (lo + hi)
         if hi - lo < tol:
             return mid
-        if _charge_residual(mid, temperature_k, sid_mmol_l, inventory, ionic) > 0.0:
+        if residual(mid) > 0.0:
             lo = mid
         else:
             hi = mid
@@ -831,6 +874,89 @@ def ph_of_state(
     """The pH of one state, at one temperature, at the conserved SID."""
     inventory = titratable_inventory(concentrations, drift, buffer_spec)
     return solve_ph(temperature_k, sid_mmol_l, inventory)
+
+
+def solve_ph_and_ionic_strength_warm(
+    temperature_k: float,
+    sid_mmol_l: float,
+    inventory: Sequence[Tuple[TitratableGroup, float]],
+    ph_guess: float,
+    ionic_guess: float = 0.0,
+    *,
+    tol: float = 1e-10,
+) -> Tuple[float, float]:
+    """
+    ``solve_ph_and_ionic_strength`` from a guess: Brent's method on the same monotone residual in a
+    bracket grown from ``ph_guess``, and the ionic-strength sweeps started from ``ionic_guess``. Same
+    root, same I fixed point, to ``tol`` pH and ``IONIC_STRENGTH_TOL_M`` (C5, 2026-10-28: the
+    inline-coupled sulfur integration calls this at every right-hand-side evaluation, where the
+    previous call's answer is within ~1e-3 pH, so a 6-10 evaluation bracketed solve replaces a
+    ~34-step bisection over (-1, 15)).
+    """
+    from scipy.optimize import brentq
+
+    def root(ionic: float, guess: float) -> float:
+        f = _residual_at_fixed_conditions(temperature_k, sid_mmol_l, inventory, ionic)
+        step = 0.05
+        lo, hi = max(guess - step, -1.0), min(guess + step, 15.0)
+        f_lo, f_hi = f(lo), f(hi)
+        while f_lo < 0.0 and lo > -1.0:
+            lo, step = max(lo - 4.0 * step, -1.0), 4.0 * step
+            f_lo = f(lo)
+        while f_hi > 0.0 and hi < 15.0:
+            hi, step = min(hi + 4.0 * step, 15.0), 4.0 * step
+            f_hi = f(hi)
+        if f_lo < 0.0:
+            return lo
+        if f_hi > 0.0:
+            return hi
+        return brentq(f, lo, hi, xtol=tol, rtol=8.9e-16)
+
+    if not B51.ionic_strength:
+        ph = root(0.0, ph_guess)
+        return ph, ionic_strength_of(ph, temperature_k, sid_mmol_l, inventory, 0.0)
+    ionic = float(ionic_guess)
+    ph = root(ionic, ph_guess)
+    for _ in range(IONIC_STRENGTH_SWEEPS):
+        fresh = ionic_strength_of(ph, temperature_k, sid_mmol_l, inventory, ionic)
+        ph = root(fresh, ph)
+        moved, ionic = abs(fresh - ionic), fresh
+        if moved < IONIC_STRENGTH_TOL_M:
+            break
+    return ph, ionic_strength_of(ph, temperature_k, sid_mmol_l, inventory, ionic)
+
+
+def solve_ph_and_ionic_strength_compiled(
+    temperature_k: float,
+    sid_mmol_l: float,
+    inventory: Sequence[Tuple[TitratableGroup, float]],
+    ph_guess: float,
+    ionic_guess: float = 0.0,
+    *,
+    tol: float = 1e-10,
+) -> Tuple[float, float]:
+    """
+    ``solve_ph_and_ionic_strength_warm`` through ``ph_kernel`` (numba when installed): the same residual,
+    the same Davies activity and the same I fixed point, with each group's pK at this temperature computed
+    here (``pk_at``), so the physics keeps one definition. Agrees with the Python solve to ``tol``
+    (tests/unit/test_kinetic_core_b64_thermal_profile.py).
+    """
+    from . import ph_kernel
+
+    groups = [(g, c) for g, c in inventory if c > 0.0]
+    width = max((len(g.pkas) for g, _ in groups), default=1)
+    pk = np.zeros((len(groups), width))
+    npk = np.zeros(len(groups), dtype=np.int64)
+    zmax = np.zeros(len(groups))
+    conc = np.zeros(len(groups))
+    for row, (group, concentration) in enumerate(groups):
+        cps = group.delta_cp_j_mol_k or (0.0,) * len(group.pkas)
+        for i, (pka, dh, cp) in enumerate(zip(group.pkas, group.delta_h_kj_mol, cps)):
+            pk[row, i] = pk_at(pka, dh, cp, temperature_k)
+        npk[row], zmax[row], conc[row] = len(group.pkas), float(group.z_max), float(concentration)
+    return ph_kernel.solve(pk, npk, zmax, conc, float(sid_mmol_l), pkw_at(temperature_k),
+                           davies_a(temperature_k), bool(B51.ionic_strength), float(ph_guess),
+                           float(ionic_guess), float(tol), IONIC_STRENGTH_TOL_M, IONIC_STRENGTH_SWEEPS)
 
 
 def ph_and_ionic_strength_of_state(
@@ -908,6 +1034,7 @@ TITRATABLE_CENTRES: Mapping[str, Mapping[str, int]] = {
     "Cys": {"carboxyl": 1, "amine": 1},   # CYSTEINE: pKa 1.92 / 8.33 / 10.28
     "ARP": {"carboxyl": 1, "amine": 1},   # drift.arp_group(): 3.00 / calibrated
     "TTCA": {"carboxyl": 1, "amine": 1},  # TTCA_GROUP: 1.80 / 6.24 (ring NH+)
+    "CAMA": {"carboxyl": 1, "amine": 1},  # B59b: drift.arp_group() as the declared Amadori analogue
     "FA": {"carboxyl": 1},                # FORMIC
     "AA": {"carboxyl": 1},                # ACETIC
     "ACID": {"carboxyl": 1},              # ORGANIC_ACID_MIX, scaled by the yield

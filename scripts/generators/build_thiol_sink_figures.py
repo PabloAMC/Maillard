@@ -186,16 +186,22 @@ def fig_ttca() -> None:
 def fig_dicarbonyls(scores) -> None:
     dic = next(c for c in scores["claims"] if c["claim_id"] == "DIC-03")
     order = dic["observables"]                     # 3-deoxyglucosone, glucosone, glyoxal, methylglyoxal
-    model = dict(zip(order, dic["values_ug_per_l"]))
     measured = {"3-deoxyglucosone": 52.2, "glucosone": 7.5, "glyoxal": 5.6, "methylglyoxal": 2.6}   # leitzen2021_extraction.md, ug/mL
     names = ["glucosone", "glyoxal", "methylglyoxal"]
     m_rel = [measured[n] / measured["3-deoxyglucosone"] for n in names]
-    mod_rel = [model[n] / model["3-deoxyglucosone"] for n in names]
     fig, ax = plt.subplots(figsize=(5.8, 3.6))
     x = range(3)
     w = 0.34
     ax.bar([i - w / 2 for i in x], m_rel, w, color=MEASURED, label="measured (Leitzen 2021, 121 °C)")
-    ax.bar([i + w / 2 for i in x], mod_rel, w, color=SHIPPED, label="model (sugar lane)")
+    # 2026-10-29: the noise-aware directional rule marks DIC-03 not evaluable (glucosone vs glyoxal is 1.34x, within
+    # noise), so the scorecard no longer carries model values for it; the figure says so instead of failing.
+    if "values_ug_per_l" in dic:
+        model = dict(zip(order, dic["values_ug_per_l"]))
+        mod_rel = [model[n] / model["3-deoxyglucosone"] for n in names]
+        ax.bar([i + w / 2 for i in x], mod_rel, w, color=SHIPPED, label="model (sugar lane)")
+    else:
+        ax.text(0.5, 0.06, "model not scored: " + dic.get("reason", dic.get("status", "")).split(";")[0][:70],
+                transform=ax.transAxes, ha="center", fontsize=7, color="#5B6460")
     ax.axhline(1.0, color="#D6DBD8", lw=0.8)
     ax.set_yscale("log")
     ax.set_ylim(1e-4, 100)

@@ -1,0 +1,26 @@
+{
+  "artifact": "kinetic_core_b64_shape_sensitivity",
+  "prereg": "results/validation/kinetic_core_b64_prereg.md",
+  "by_reading": {
+    "ramp_only": {
+      "member_cost": 45.42676468525009,
+      "cost_by_shape": {
+        "linear (fitted)": 45.42676468525009,
+        "newtonian tau=20/3": 39.70855642321637,
+        "newtonian tau=20/5": 33.40291043798054,
+        "linear + cool 10 min": 41.72399019313242,
+        "linear + cool 20 min": 40.7082974442556
+      }
+    },
+    "ramp_plus_hold": {
+      "member_cost": 25.96722829357356,
+      "cost_by_shape": {
+        "linear (fitted)": 25.967228293573562,
+        "newtonian tau=20/3": 27.946069620451624,
+        "newtonian tau=20/5": 26.501234392474796,
+        "linear + cool 10 min": 26.79306320219251,
+        "linear + cool 20 min": 27.674719138543225
+      }
+    }
+  }
+}

@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -62,7 +63,7 @@ def _live_fit_targets() -> Dict:
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp) / "fit_targets.json"
         subprocess.run(
-            [sys.executable, "scripts/generators/generate_core_fit_targets.py", "--wave", "b51", "--output", str(out)],
+            [sys.executable, "scripts/generators/generate_core_fit_targets.py", "--wave", "b60", "--output", str(out)],
             cwd=str(ROOT), check=True, capture_output=True, text=True, timeout=600,
         )
         return json.loads(out.read_text(encoding="utf-8"))
@@ -92,7 +93,7 @@ def _live_hypotheses() -> Dict:
 REGENERATE: Dict[str, Callable[[], Dict]] = {
     "results/validation/core_panel_scores.json": _live_scorecard,
     "results/validation/core_directional_scores.json": _live_directional,
-    "results/validation/kinetic_core_b51_fit_targets.json": _live_fit_targets,
+    "results/validation/kinetic_core_b60_fit_targets.json": _live_fit_targets,
     "results/validation/experiment_value_ranking.json": _live_ranking,
     "results/validation/data_wishlist.json": _live_wishlist,
     "results/validation/network_hypotheses.json": _live_hypotheses,
@@ -129,7 +130,25 @@ def check_runners(failures: List[str]) -> None:
             print(f"  [check] {relative}: current")
 
 
+#: 2026-10-29 (owner: "Yes, exempt them"). A wave's record -- its ship rule, fit report, verification, identifiability
+#: or discrepancy study -- states what was true at the commit that wrote it, and that commit pins it. Re-running it
+#: because an engine file it hashed has since changed (switched-off code included) can only re-confirm history, at
+#: hours of compute: regenerating 11 such records cost about three hours on 2026-10-29. So a FROZEN record's inputs
+#: are not re-hashed; it must carry the commit it was written at. The LIVE artifacts (scorecards, the envelope, flux
+#: attribution, baselines, contrasts, the choice sweep, the wishlist, figures) are still re-hashed and, where cheap,
+#: regenerated: they describe the model as it is.
+FROZEN_RECORD_GENERATOR = re.compile(
+    r"scripts/generators/generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
+    r"structural_discrepancy)\.py$")
+
+
+def is_frozen_record(relative: str, payload: Dict) -> bool:
+    generated_by = str((payload.get("provenance") or {}).get("generated_by") or "")
+    return relative not in REGENERATE and bool(FROZEN_RECORD_GENERATOR.search(generated_by))
+
+
 def check_input_hashes(failures: List[str]) -> None:
+    frozen = 0
     for path in sorted(data_paths.VALIDATION_DIR.glob("*.json")):
         try:
             payload = data_access.load_json(path)
@@ -137,11 +156,18 @@ def check_input_hashes(failures: List[str]) -> None:
             continue
         if not isinstance(payload, dict) or "provenance" not in payload:
             continue
+        if is_frozen_record(data_paths.rel(path), payload):
+            git = payload["provenance"].get("git") or {}
+            if not (git.get("head") or git.get("commit")):
+                failures.append(f"{data_paths.rel(path)}: a frozen record must carry the commit it was written at")
+            frozen += 1
+            continue
         stale = provenance.stale_inputs(payload)
         if stale:
             failures.append(f"{data_paths.rel(path)}: stale inputs:\n      " + "\n      ".join(stale))
         else:
             print(f"  [inputs] {data_paths.rel(path)}: {len(payload['provenance'].get('inputs', []))} inputs current")
+    print(f"  [inputs] {frozen} frozen wave records pinned by their commit (not re-hashed)")
 
 
 def main(argv=None) -> int:

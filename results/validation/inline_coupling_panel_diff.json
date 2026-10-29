@@ -1,0 +1,10 @@
+{
+  "artifact": "inline_coupling_panel_diff",
+  "tolerance_dex": 0.03,
+  "rows": 66,
+  "max_dex": 0.005003826643107504,
+  "worst_row": "hofmann1998_ribose_cysteine_145C_20min_pH5 | 2-Furfurylthiol (FFT)",
+  "rows_over_tolerance": [],
+  "missing_in_one": [],
+  "pass": true
+}

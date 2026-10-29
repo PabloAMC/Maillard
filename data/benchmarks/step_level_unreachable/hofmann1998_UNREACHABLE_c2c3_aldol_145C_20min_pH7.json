@@ -31,7 +31,14 @@
     "temp_C": 145.0,
     "ph": 7.0,
     "water_activity": 0.98,
-    "time_min": 20.0
+    "time_min": 20.0,
+    "heating": {
+      "time_convention": "ramp_only",
+      "start_C": 20.0,
+      "ramp_min": 20.0,
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "B64 (2026-10-28). Hofmann & Schieberle 1998 (p. 236) writes 'thermally treated for 20 min at 145 °C in a laboratory autoclave (200 mL; Type II; Roth, Germany)'. The same laboratory runs the same pot in the same autoclave 'by raising the temperature within 20 min from 20 to 145 °C' (Hofmann & Schieberle 1995, p. 2; 1997, p. 901, where the Results call that pot 'thermally treated for 20 min at 145 °C'). No paper states a hold. Read as a ramp with no hold (p ~ 0.8; ramp + 20 min hold ~ 0.12, carried as B64's alternative). Cooling ('after cooling of the reaction mixtures to 20 °C') is unstated in rate and omitted. Record: docs/validation/thermal_history_facts.yml."
+    }
   },
   "condition_provenance": {
     "status": "FULLY_STATED_IN_SOURCE for T, t, pH, volume and moles.",

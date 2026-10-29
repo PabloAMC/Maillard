@@ -817,3 +817,62 @@ it, so no disjointness violation is created.
    Fitting the 100 and 140 °C constants and *also* fitting the Ea double-counts the same three
    numbers. Fit one, derive the other.
 3. Table 2 must never be used to re-scale k₆/k₇ (see the ★★ row above).
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+Sources: `data/articles/cai2024_supplementary1.docx` (Figs. S1, S2 as embedded images, captions only as text)
+and `data/articles/cai2024_supplementary2.docx` (Tables S1, S2). Read with `textutil`; Fig. S2 viewed.
+
+**Table S1** — *"Observed concentrations of glucose, proline, methylglyoxal, glyoxal, and 2-acetyl-1-pyrroline
+in the glucose/proline model system."* Footnote: *"Values are given as means ± standard deviation (n = 3). n.d.
+means not detected due to the concentration of compounds in the model system being below the detection limit."*
+Conditions as §2.1 (glucose 0.1 M + proline 0.2 M nominal, 20 mM phosphate pH 9.0 nominal, sealed, 100/120/140 °C,
+2–30 min). Units: glucose and proline **mmol/L**; MGO, GO, 2-AP **μmol/L**. Quantification: external calibration
+throughout (§2.4); 2-AP by 5-point external HS-SPME curve, no internal standard. Significance letters (between
+temperatures at each time) dropped. The t = 0 column is shared by the three temperatures.
+
+| t (min) | Glc 100 (mM) | Glc 120 | Glc 140 | Pro 100 (mM) | Pro 120 | Pro 140 | MGO 100 (µM) | MGO 120 | MGO 140 | GO 100 (µM) | GO 120 | GO 140 | 2-AP 100 (µM) | 2-AP 120 | 2-AP 140 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | 100.84 ± 4.60 | 100.84 ± 4.60 | 100.84 ± 4.6 | 232.99 ± 1.82 | 232.99 ± 1.82 | 232.99 ± 1.82 | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. |
+| 2 | 99.97 ± 10.12 | 80.63 ± 1.84 | 47.00 ± 1.21 | 224.29 ± 13.88 | 214.26 ± 9.75 | 202.7 ± 3.09 | 11.54 ± 1.86 | 45.34 ± 8.67 | 199.9 ± 38.35 | 52.13 ± 5.51 | 282.27 ± 9.92 | 256.97 ± 61.57 | 0.72 ± 0.29 | 3.99 ± 0.69 | 2.43 ± 0.45 |
+| 5 | 97.06 ± 2.98 | 67.51 ± 1.43 | 34.78 ± 0.32 | 211.17 ± 15.36 | 210.78 ± 13.11 | 190.08 ± 3.57 | 19.79 ± 1.82 | 94.28 ± 3.51 | 272.98 ± 1.73 | 84.53 ± 1.73 | 229.96 ± 0.95 | 122.88 ± 2.02 | 2.60 ± 0.64 | 6.19 ± 0.68 | 0.83 ± 0.22 |
+| 10 | 91.62 ± 1.45 | 56.41 ± 0.75 | 27.94 ± 0.58 | 201.28 ± 0.36 | 196.02 ± 3.52 | 180.82 ± 12.43 | 24.94 ± 3.12 | 123.07 ± 13.13 | 296.43 ± 1.08 | 124.73 ± 20.10 | 201.66 ± 13.06 | 73.73 ± 2.60 | 6.57 ± 0.62 | 5.07 ± 1.34 | 0.72 ± 0.24 |
+| 15 | 89.40 ± 1.01 | 48.97 ± 2.11 | 24.07 ± 0.60 | 206.48 ± 3.85 | 198.89 ± 13.30 | 177.69 ± 9.35 | 37.38 ± 1.99 | 128.4 ± 7.41 | 337.57 ± 2.45 | 164.29 ± 4.99 | 168.56 ± 24.75 | 59.66 ± 6.76 | 6.64 ± 1.03 | 4.09 ± 0.19 | 0.85 ± 0.60 |
+| 20 | 84.07 ± 1.18 | 43.81 ± 1.07 | 21.33 ± 0.22 | 197.82 ± 9.8 | 198.33 ± 15.5 | 169.36 ± 4.41 | 49.14 ± 4.51 | 161.86 ± 13.91 | 306.69 ± 1.73 | 158.52 ± 3.75 | 130.01 ± 3.98 | 50.89 ± 2.02 | 9.95 ± 1.28 | 2.64 ± 1.16 | 0.63 ± 0.24 |
+| 25 | 84.07 ± 2.54 | 40.95 ± 0.70 | 19.87 ± 0.42 | 204.46 ± 0.97 | 197.69 ± 9.96 | 181.31 ± 3.80 | 56.71 ± 9.84 | 183.36 ± 0.22 | 316.80 ± 0.43 | 137.07 ± 8.13 | 97.90 ± 9.37 | 46.61 ± 0.87 | 8.40 ± 1.48 | 1.56 ± 0.58 | 0.48 ± 0.16 |
+| 30 | 80.13 ± 0.55 | 38.08 ± 0.53 | 18.85 ± 0.36 | 188.08 ± 0.95 | 193.63 ± 1.33 | 162.44 ± 8.31 | 61.58 ± 11.44 | 205.88 ± 16.47 | 272.83 ± 30.55 | 126.87 ± 20.42 | 84.54 ± 4.61 | 34.58 ± 0.58 | 7.36 ± 2.29 | 1.14 ± 0.22 | 0.40 ± 0.15 |
+
+Table S2 Relative root mean square error and coefficient of determination for the fitting performance of multi-response kinetic modeling.
+| Compound | 100 °C RRMSE | 100 °C R² | 120 °C RRMSE | 120 °C R² | 140 °C RRMSE | 140 °C R² |
+|---|---|---|---|---|---|---|
+| Glucose | 3.60% | 0.80 | 15.47% | 0.80 | 42.82% | 0.62 |
+| Proline | 4.66% | 0.48 | 5.00% | 0.32 | 9.03% | 0.42 |
+| Methylglyoxal | 9.12% | 0.98 | 14.77% | 0.93 | 6.59% | 0.97 |
+| Glyoxal | 20.93% | 0.83 | 15.86% | 0.92 | 55.27% | 0.64 |
+| 2-Acetyl-1-pyrroline | 17.22% | 0.93 | 26.95% | 0.82 | 57.34% | 0.54 |
+
+**Checks `[D]`.**
+- ★ **The proline inconsistency of §2.1 is confirmed numerically:** t = 0 proline is **232.99 ± 1.82 mmol/L**, not
+  the 200 mmol/L of the Methods (+16.5 %). Glucose t = 0 is 100.84 ± 4.60 (matches 0.1 M). Use 233 mM as the
+  measured initial proline, or treat the proline calibration as biased by +16 %.
+- **The §5 digitisation of Fig. 3 agrees with Table S1** to within its stated uncertainty in every cell spot-checked
+  (glucose 120 °C 2–30 min: 80/68/57/49/44/42/39 vs 80.63/67.51/56.41/48.97/43.81/40.95/38.08; 2-AP 100 °C:
+  0.7/2.6/6.6/6.65/9.95/8.4/7.4 vs 0.72/2.60/6.57/6.64/9.95/8.40/7.36). **Table S1 supersedes the digitisation.**
+- Glucose 100 °C at 20 and 25 min are both printed 84.07 (SD 1.18 vs 2.54) — a duplicated mean; as printed.
+- Fit quality is poor where the authors concede it: glucose 140 °C RRMSE 42.8 %, GO 140 °C 55.3 %, 2-AP 140 °C 57.3 %.
+  The 140 °C 2-AP series (peak 2.43 at 2 min, then ~0.4–0.9) is essentially un-fitted.
+
+**Table S2** (above) — RRMSE and R² per response and temperature; the R² values equal those printed on the Fig. 3
+panels (§5.6), and the RRMSE values, "never reported" in the main text, are now in hand.
+
+**Figures.**
+- **Fig. S1** — mass balance of reactants and products at 100, 120 and 140 °C (A–C); images only, not digitised.
+- **Fig. S2** — selected-ion chromatogram (m/z 122) of 2,3,5-trimethylpyrazine: a standard at **1.36 μmol/kg**, and
+  cooked rice dosed with 50 vs 0.05 μmol/kg methylglyoxal. The 50 μmol/kg trace has a visibly larger peak than the
+  0.05 μmol/kg trace; **no concentration is printed** for either rice sample. Qualitative only.
+
+**Model use.** **Yes** for Table S1: a numeric, SD-bearing glucose/proline/MGO/GO/2-AP time series at three
+temperatures (105 cells) replaces the digitised Fig. 3; note the measured 233 mM initial proline and the nominal,
+unmeasured pH. Fig. S2: no (directional only).

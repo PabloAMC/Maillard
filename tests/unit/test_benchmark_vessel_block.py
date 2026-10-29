@@ -25,7 +25,8 @@ PANEL = list(_panel_paths())
 
 
 def test_the_panel_is_the_size_the_completion_script_declares():
-    assert len(PANEL) == 39
+    # 39 until 2026-10-28; Amendment 45 added five maillard_path hold-outs (Zhang 2025b, Zhou 2023c x4).
+    assert len(PANEL) == 44
 
 
 @pytest.mark.parametrize("path", PANEL, ids=lambda p: p.stem)

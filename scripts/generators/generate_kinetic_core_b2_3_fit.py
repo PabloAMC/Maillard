@@ -211,7 +211,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from src import data_paths  # noqa: E402
-from src.kinetic_core import operative_parameters  # noqa: E402
+from src.kinetic_core import operative_parameters, parallel  # noqa: E402
 from src.kinetic_core.ph_state import (  # noqa: E402
     ACID_YIELD_BOUNDS,
     ARP_AMINE_PKA_BOUNDS,
@@ -895,9 +895,14 @@ PH_NODES_CAREFUL, PH_ITERS_CAREFUL = 41, 4
 
 def run_systems(parameters: Mapping[str, Any], quick: bool,
                 drift: PhDrift = None) -> Dict[str, Any]:
-    """Integrate every system once and cache what the rows need."""
-    out: Dict[str, Any] = {}
-    for name, spec in SYSTEMS.items():
+    """Integrate every system once and cache what the rows need.
+
+    2026-10-29 (strategy M2): the systems are independent, so ``parallel.map_ordered`` integrates
+    them in forked workers when ``MAILLARD_WORKERS`` > 1; the default is the serial loop, and either
+    way the runs are bit-identical (tests/unit/test_parallel.py)."""
+
+    def integrate_one(name: str):
+        spec = SYSTEMS[name]
         minutes = float(spec["minutes"])
         # B2.1: a system carrying a TRANSIENT-INTERMEDIATE row needs its whole
         # trajectory, not just the endpoint, because the quantity measured is a
@@ -921,8 +926,11 @@ def run_systems(parameters: Mapping[str, Any], quick: bool,
             rtol=1e-5 if quick else 1e-8,
             atol=1e-14,
         )
-        out[name] = {"run": run, "spec": spec}
-    return out
+        return run
+
+    names = list(SYSTEMS)
+    runs = parallel.map_ordered(integrate_one, names)
+    return {name: {"run": run, "spec": SYSTEMS[name]} for name, run in zip(names, runs)}
 
 
 def _needs_flux(rows) -> set:
@@ -934,10 +942,10 @@ def observables(
 ) -> Tuple[Dict[str, float], Dict[str, Any]]:
     """Predicted value of every active fit row."""
     cache = run_systems(parameters, quick, drift)
-    fluxes: Dict[str, Dict[str, float]] = {}
-    for name in _needs_flux(ACTIVE_FIT_ROWS):
+
+    def budget_of(name: str) -> Dict[str, float]:
         spec = SYSTEMS[name]
-        fluxes[name] = sulfur_flux_budget(
+        return sulfur_flux_budget(
             parameters,
             float(spec["t_c"]) + CELSIUS,
             spec["initial"],
@@ -947,6 +955,11 @@ def observables(
             ph_drift=drift,
             n_points=21 if quick else 101,
         )
+
+    # 2026-10-29 (M2): each budget re-integrates its pot, a fifth of an evaluation; same workers.
+    flux_names = sorted(_needs_flux(ACTIVE_FIT_ROWS))
+    fluxes: Dict[str, Dict[str, float]] = dict(
+        zip(flux_names, parallel.map_ordered(budget_of, flux_names)))
 
     predicted: Dict[str, float] = {}
     for row in ACTIVE_FIT_ROWS:

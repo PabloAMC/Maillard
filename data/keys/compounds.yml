@@ -228,6 +228,21 @@ compounds:
   - athp
   seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_acetylthiazole
+  display_name: 2-Acetylthiazole
+  kind: molecule
+  smiles: CC(=O)c1nccs1
+  inchikey: MOMFXATYAINJML-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)c1nccs1
+  cas: 24295-03-2
+  aliases:
+  - 1-(1,3-thiazol-2-yl)ethanone
+  - actz
+  seen_in:
+  - benchmarks:holdout_targets
+  - benchmarks:reference_volatiles
+  identity_source: structure entered by hand 2026-10-27 (standard chemical identity, not a measurement)
+  identity_note: engine species ACTZ
 - id: 2_ethyl_3_5_dimethylpyrazine
   display_name: 2-Ethyl-3,5-dimethylpyrazine
   kind: molecule
@@ -658,6 +673,7 @@ compounds:
   - bis2methyl3furyldisulfide
   - mft disulfide
   seen_in:
+  - benchmarks:holdout_targets
   - benchmarks:reference_volatiles
   - flavor:sulfur_reference_anchors
   - panel:alias
@@ -715,6 +731,19 @@ compounds:
   - safety:analyte
   - species:toxic_markers.yml
   identity_source: data/species/toxic_markers.yml
+- id: cysteine
+  display_name: L-Cysteine
+  kind: molecule
+  smiles: N[C@@H](CS)C(=O)O
+  inchikey: XUJNEKJLAYXESH-REOHCLBHSA-N
+  canonical_smiles: N[C@@H](CS)C(=O)O
+  cas: 52-90-4
+  aliases:
+  - cys
+  - cysteine
+  seen_in: []
+  identity_source: structure entered by hand 2026-10-27 (standard chemical identity, not a measurement)
+  identity_note: engine species Cys
 - id: dimethyl_disulfide
   display_name: Dimethyl disulfide
   kind: molecule
@@ -837,6 +866,20 @@ compounds:
   seen_in:
   - benchmarks:holdout_targets
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: glutathione
+  display_name: Glutathione (GSH)
+  kind: molecule
+  smiles: N[C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)O)C(=O)O
+  inchikey: RWSXRVCMGQZWBV-WDSKDSINSA-N
+  canonical_smiles: N[C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)O)C(=O)O
+  cas: 70-18-8
+  aliases:
+  - gsh
+  - l-glutathione
+  - reduced glutathione
+  seen_in: []
+  identity_source: structure entered by hand 2026-10-27 (standard chemical identity, not a measurement)
+  identity_note: engine species GSH
 - id: glyoxal
   display_name: Glyoxal
   kind: molecule
@@ -1200,6 +1243,18 @@ compounds:
   - safety:analyte
   - species:toxic_markers.yml
   identity_source: data/species/toxic_markers.yml
+- id: ribose
+  display_name: D-Ribose
+  kind: molecule
+  smiles: O=C[C@H](O)[C@H](O)[C@H](O)CO
+  inchikey: PYMYPHUHKUWMLA-LMVFSUKVSA-N
+  canonical_smiles: O=C[C@H](O)[C@H](O)[C@H](O)CO
+  cas: 50-69-1
+  aliases:
+  - ribose
+  seen_in: []
+  identity_source: structure entered by hand 2026-10-27 (standard chemical identity, not a measurement)
+  identity_note: open-chain (aldehydo) form; the engine lumps it with xylose as PENT
 - id: tetramethylpyrazine
   display_name: Tetramethylpyrazine
   kind: molecule
@@ -1224,6 +1279,31 @@ compounds:
   aliases: []
   seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: ttca
+  display_name: 2-Threityl-thiazolidine-4-carboxylic acid (TTCA)
+  kind: molecule
+  smiles: OC(=O)C1CSC(N1)C(O)C(O)C(O)CO
+  inchikey: AGZXTDUDXXPCMJ-UHFFFAOYSA-N
+  canonical_smiles: O=C(O)C1CSC(C(O)C(O)C(O)CO)N1
+  aliases:
+  - 2-(1,2,3,4-tetrahydroxybutyl)thiazolidine-4-carboxylic acid
+  - 2-(tetrahydroxybutyl)thiazolidine-4-carboxylic acid
+  seen_in: []
+  identity_source: structure entered by hand 2026-10-27 (standard chemical identity, not a measurement)
+  identity_note: the cysteine-xylose thiazolidine (engine species TTCA); stereocentres omitted, so identity is at
+    constitution level only
+- id: xylose
+  display_name: D-Xylose
+  kind: molecule
+  smiles: O=C[C@H](O)[C@@H](O)[C@H](O)CO
+  inchikey: PYMYPHUHKUWMLA-VPENINKCSA-N
+  canonical_smiles: O=C[C@H](O)[C@@H](O)[C@H](O)CO
+  cas: 58-86-6
+  aliases:
+  - xylose
+  seen_in: []
+  identity_source: structure entered by hand 2026-10-27 (standard chemical identity, not a measurement)
+  identity_note: open-chain (aldehydo) form; the engine lumps it with ribose as PENT
 - id: caramelization_severity
   display_name: Caramelization severity
   kind: process_lever

@@ -296,17 +296,40 @@ def buffer_from_bundle(bench: Mapping[str, Any]):
         f"to water, which is the defect this whole block exists to remove.")
 
 
+#: B64 (2026-10-28): how a bundle's thermal history is read. "isothermal" is every wave through B63: a
+#: hold at ``temp_C`` for ``time_min`` from t = 0. "as_recorded" reads ``conditions.heating``
+#: (``thermal_history.py``) where the bundle carries one. Off until B64's refit ships, because the
+#: frozen constants were fitted on the isothermal reading (kinetic_core_b64_prereg.md).
+THERMAL_HISTORY: str = "isothermal"
+
+
+def bundle_thermal_program(bench: Mapping[str, Any]):
+    """The bundle's ``ThermalProgram`` under ``THERMAL_HISTORY``."""
+    from src.kinetic_core.engine import ThermalProgram
+    from src.kinetic_core.thermal_history import thermal_program
+
+    conditions = bench.get("conditions") or {}
+    temp_c = float(conditions.get("temp_C", 0.0))
+    time_min = float(conditions.get("time_min", 0.0))
+    if THERMAL_HISTORY == "isothermal":
+        return ThermalProgram.isothermal(temp_c, time_min)
+    if THERMAL_HISTORY != "as_recorded":
+        raise ValueError(f"unknown THERMAL_HISTORY {THERMAL_HISTORY!r}")
+    return thermal_program(conditions.get("heating"), temp_c, time_min)
+
+
 def core_spec(bench: Mapping[str, Any], *, use_buffer: bool = True):
     """
-    A bundle as a ``FormulationSpec``: precursors in mM, an isothermal hold,
-    the declared pH and water activity, the protein type as the matrix
+    A bundle as a ``FormulationSpec``: precursors in mM, its thermal history
+    (an isothermal hold unless ``THERMAL_HISTORY`` reads a recorded one), the
+    declared pH and water activity, the protein type as the matrix
     descriptor, and -- unless ``use_buffer=False`` -- the completed buffer.
 
     ``use_buffer=False`` reproduces every pre-B2.3 number exactly: no buffer
     supplied means the engine's declared default, which is unbuffered plus an
     extrapolation warning.
     """
-    from src.kinetic_core.engine import FormulationSpec, ProcessSpec, ThermalProgram
+    from src.kinetic_core.engine import FormulationSpec, ProcessSpec
 
     conditions = bench.get("conditions") or {}
     return FormulationSpec(
@@ -320,10 +343,7 @@ def core_spec(bench: Mapping[str, Any], *, use_buffer: bool = True):
             for name, data in (bench.get("precursors") or {}).items()
         },
         process=ProcessSpec(
-            thermal=ThermalProgram.isothermal(
-                float(conditions.get("temp_C", 0.0)),
-                float(conditions.get("time_min", 0.0)),
-            ),
+            thermal=bundle_thermal_program(bench),
             ph=float(conditions.get("ph", 7.0)),
             water_activity=(
                 float(conditions["water_activity"])

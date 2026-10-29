@@ -65,6 +65,8 @@ GATES = (
     "scripts/ci/holdout_guard.py",
     "scripts/ci/citation_gate.py",
     "scripts/ci/fit_target_gate.py",
+    "scripts/ci/dossier_coverage_gate.py",
+    "scripts/ci/choices_register_gate.py",
 )
 
 README_BEGIN = "<!-- BEGIN GENERATED: model-card -->"
@@ -98,6 +100,60 @@ def _read_json(path: Path) -> Optional[Dict[str, Any]]:
         return json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return None
+
+
+#: North star C2 / decision D7 (owner, 2026-10-28): the usefulness bar, checked at the designed-data checkpoint.
+USEFULNESS_OOS_WITHIN_3X = 0.40
+USEFULNESS_DIRECTIONAL = 0.65
+#: Independent evaluable claims needed to tell 65 % from 50 % (one-sided alpha 0.05, power 0.80): n =
+#: ((1.645 sqrt(.25) + 0.842 sqrt(.65 x .35)) / 0.15)^2 = 66.6.
+USEFULNESS_MIN_CLAIMS = 67
+
+
+def collect_usefulness_bar(card: Mapping[str, Any]) -> Dict[str, Any]:
+    """Where the model stands against the declared bar, from the card's own numbers and two tracked artifacts."""
+    panel = card.get("core_panel") or {}
+    directional = card.get("directional") or {}
+    null = _read_json(data_paths.VALIDATION_DIR / "null_model_baselines.json") or {}
+    contrasts = _read_json(data_paths.VALIDATION_DIR / "contrast_scores.json") or {}
+    oos = null.get("scores", {}).get("out_of_sample", {})
+    agree, evaluable = (directional.get("headline") or (None, None))[:2]
+    c = contrasts.get("scores", {}).get("out_of_sample", {})
+    return {
+        "oos_within_3x": (panel.get("out_of_sample_within_band"), panel.get("out_of_sample_rows")),
+        "baseline_oos": ({k: oos[k]["within_3x"] for k in ("engine", "constant")} if oos else None),
+        "baseline_oos_median": ({k: oos[k]["median_fold"] for k in ("engine", "constant")} if oos else None),
+        "directional": (agree, evaluable),
+        "contrasts_oos": ({"pairs": c.get("pairs"), "studies": c.get("studies"),
+                           "engine_dex": c["engine"]["median_error_dex"],
+                           "no_change_dex": c["no_change"]["median_error_dex"]} if c.get("pairs") else None),
+    }
+
+
+def _usefulness_lines(bar: Mapping[str, Any]) -> List[str]:
+    hits, rows = bar.get("oos_within_3x") or (None, None)
+    lines = [f"**Usefulness bar** (owner, 2026-10-28; checked once the designed data are in): out of sample "
+             f">= {USEFULNESS_OOS_WITHIN_3X:.0%} within 3x AND beating the typical-yield baseline; >= "
+             f"{USEFULNESS_DIRECTIONAL:.0%} on independent directional claims, judged on >= {USEFULNESS_MIN_CLAIMS} "
+             "of them (fewer cannot tell 65 % from chance)."]
+    if hits is not None and rows:
+        base = bar.get("baseline_oos")
+        med = bar.get("baseline_oos_median")
+        beat = (f"; the typical-yield baseline lands {base['constant']} on its rows against the engine's "
+                f"{base['engine']} (median {med['constant']:.1f}x vs {med['engine']:.1f}x)" if base else "")
+        lines.append(f"- Out of sample: {hits}/{rows} within 3x ({hits / rows:.0%}){beat}. "
+                     f"**{'MET' if hits / rows >= USEFULNESS_OOS_WITHIN_3X and base and base['engine'] > base['constant'] else 'NOT MET'}.**")
+    agree, evaluable = bar.get("directional") or (None, None)
+    if evaluable:
+        verdict = ("NOT ESTABLISHED (too few claims)" if evaluable < USEFULNESS_MIN_CLAIMS
+                   else ("MET" if agree / evaluable >= USEFULNESS_DIRECTIONAL else "NOT MET"))
+        lines.append(f"- Directional: {agree}/{evaluable} ({agree / evaluable:.0%}). **{verdict}.**")
+    c = bar.get("contrasts_oos")
+    if c:
+        lines.append(f"- Within-study contrasts out of sample (a diagnostic, not part of the bar): median error "
+                     f"{c['engine_dex']:.2f} dex against {c['no_change_dex']:.2f} for predicting no change, "
+                     f"{c['pairs']} pairs in {c['studies']} studies (`results/validation/contrast_scores.md`).")
+    return lines
 
 
 def collect_directional() -> Dict[str, Any]:
@@ -366,28 +422,32 @@ def run_gates(gates: Tuple[str, ...] = GATES) -> List[Dict[str, Any]]:
 #: the change itself, and every row it made worse is named here with the assumption it exposes, until the
 #: wave that fixes that assumption removes the entry. Declared, not computed: the ROWS are declared; their
 #: current fold errors are read live from the scorecard.
+#: 2026-10-28: B51's entry for the Hofmann ribose / xylose pH 5 pots ("~100x low", blamed on the
+#: thiolate-acting thiol sink) LEFT: on B60's converged pH trajectory those rows are 1.5-3.6x, so the
+#: miss was the unconverged numerics, not the sink (kinetic_core_b60_prereg.md sec. 6; tasks/lessons.md).
+#: B51.1's SUG-09 entry left too: on B60 the claim agrees again (ribose 60 vs glucose 32 ug/L FFT). The
+#: hexose entry it named is still unidentified; the scorecard keeps that row not evaluable.
 KNOWN_EXPOSED_ASSUMPTIONS: Tuple[Dict[str, Any], ...] = (
     {
-        "wave": "B51 (the pH state on GKL / Suleimenov & Seward constants)",
-        "rows": (
-            ("hofmann1998_ribose_cysteine_145C_20min_pH5", "2-Furfurylthiol (FFT)"),
-            ("hofmann1998_ribose_cysteine_145C_20min_pH5", "2-Methyl-3-furanthiol (MFT)"),
-            ("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", "2-Furfurylthiol (FFT)"),
-            ("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", "2-Methyl-3-furanthiol (MFT)"),
-        ),
+        "wave": "B60 (the pH trajectory converged: log-and-linear nodes, relaxed fixed point, closed flux budget)",
+        "rows": (),
+        "fit_rows": ("kang_120C_MFT", "kang_100C_MFT", "zhai_MFT_fold_120_over_100", "kang_100C_MFT_over_FFT"),
         "assumption": (
-            "the unidentified thiol sink is declared to act through the THIOLATE, with cysteine's thiol pK "
-            "standing in for MFT and FFT (neither is measured); under correct speciation it destroys the "
-            "thiols above pH ~5, so these buffered pH 5 pots are predicted ~100x low"
+            "the cysteine-catalysed pentose trunk (r_pent_dpo / r_pent_tdp, one shared Ea of 64 kJ/mol) destroys "
+            "cysteine and pentose in seconds where Cao 2017 and Zhang 2025b measure hours, so on a converged "
+            "trajectory the 100-120 C cysteine + pentose pots over-make MFT (fit rows up to +2.5 sigma; the old "
+            "oscillating pH hid it). B59 replaces the trunk with de Roos's Cys-Amadori network"
         ),
     },
     {
-        "wave": "B51 (the 25 C scale for the measured pH tables)",
+        "wave": "B60 (the pH trajectory converged)",
         "rows": (),
-        "claims": ("SUG-09",),
+        "claims": ("YIL-02", "CER07-PH-02"),
         "assumption": (
-            "the hexose entry to the thiols (r_glc_c2c3 / r_glc_fur, unidentified since B9) makes FFT from "
-            "a hexose that the paper does not detect; faster cysteine thermolysis in unbuffered pots feeds it"
+            "the furfural branch's temperature and pH dependence (TDP -> furfural -> + H2S -> FFT) is not measured: "
+            "the model's FFT/MFT is 6-60x the measured ratio and the excess grows as the temperature falls, so FFT "
+            "no longer rises from 100 C / 4 h to 120 C / 1 h, and furfural no longer falls monotonically from pH 4 "
+            "to 6 (docs/guides/SULFUR_FLUX_MAP.md sec. 5)"
         ),
     },
 )
@@ -426,6 +486,7 @@ def build_model_card(*, run_gate_checks: bool = True) -> Dict[str, Any]:
         "gates": run_gates() if run_gate_checks else [],
     }
     card["headline_sentences"] = _headline_sentences(card)
+    card["usefulness_bar"] = collect_usefulness_bar(card)
     card["validity_domain"] = _validity_domain(card)
     return card
 
@@ -698,6 +759,9 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
     lines.append("")
     for sentence in card.get("headline_sentences", []):
         lines.append(f"1. {sentence}" if False else f"- {sentence}")
+    if card.get("usefulness_bar"):
+        lines.append("")
+        lines.extend(_usefulness_lines(card["usefulness_bar"]))
     exposed = card.get("exposed_assumptions") or []
     if exposed:
         lines.append("")
@@ -708,6 +772,7 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
         for entry in exposed:
             named = [f"{r['benchmark']} {r['compound']} ({_fold(r['fold_error'])})" for r in entry["rows"]]
             named += [f"claim {c}" for c in entry.get("claims", ())]
+            named += [f"fit row {r}" for r in entry.get("fit_rows", ())]
             lines.append(f"- {entry['wave']}: {'; '.join(named)}. Exposes: {entry['assumption']}.")
     lines.append("")
     lines.append("| Claim type | System class | Measured | Verdict |")

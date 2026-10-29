@@ -1,0 +1,1059 @@
+# MEASUREMENT LEDGER -- acrylamide lane.
+# One entry per quantitative data set in data/lit/extraction_dossiers/*.md that bears on the acrylamide lane:
+# acrylamide formation / elimination, asparagine and reducing-sugar loss in acrylamide systems, 3-aminopropionamide
+# and the decarboxylated Amadori / Schiff-base intermediates, asparaginase, acrylamide in fried, baked, roasted or
+# extruded foods (incl. extruder residence time for the extrusion row), inhibitor / pH / water-activity studies.
+# Trunk species of the same pots live in trunk.yml, thiol-acrylamide adducts in sulfur.yml.
+# Records WHERE the data are and WHAT they are; never the values. Conditions checked against each
+# dossier's methods text, not its headings.
+# status:  in_model_fit (entered a frozen fit or sets a declared constant) | in_model_check (hold-out,
+#          directional claim, panel check, or fit row of a wave that did not ship) |
+#          digitised_in_dossier (numbers in the dossier, unused) |
+#          figure_only (only a figure, not digitised) | supplement_missing (SI not on disk) | text_only
+lane: acrylamide
+built: 2026-10-29
+entries:
+  - id: knol2005_tab1_acrylamide_k4_k6_ea
+    dossier: knol2005_extraction.md
+    paper: "Knol, van Loon, Linssen, Ruck, van Boekel & Voragen 2005 J Agric Food Chem 53:6133"
+    lab: "Wageningen (van Boekel)"
+    system: "D-glucose 0.2 M + L-asparagine 0.2 M"
+    medium: "0.1 M phosphate buffer, closed screw-capped glass tubes, oil bath"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: [6.8], measured_during: false, final: null}
+    time_min: [0, 45]
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 1, acrylamide rows k4 (Schiff base -> acrylamide) and k6 (acrylamide -> Product X) x 5 T + Ea, 95% HPD (dossier sec. 3-4)"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Equimolar solutions of glucose and asparagine (0.2 M) were prepared in phosphate buffer (0.1 M, pH 6.8)."
+    flags: [ph_start_only, "complements: knol2005_tab1_glc_asn_rate_constants_ea", no_heatup_correction, model_condition_mismatch]
+    note: "B3 FIT rows: k6 at 5 T (knol2005_k6_*) and Ea(k4)=formation barrier. B3 runs this pot at 100 mM Asn/Glc, pH None (parameters_acrylamide calls Knol 'unbuffered'); paper is 0.2 M in 0.1 M phosphate pH 6.8. HPLC-UV external std."
+  - id: knol2005_fig2d_acrylamide_timecourse
+    dossier: knol2005_extraction.md
+    paper: "Knol, van Loon, Linssen, Ruck, van Boekel & Voragen 2005 J Agric Food Chem 53:6133"
+    lab: "Wageningen (van Boekel)"
+    system: "D-glucose 0.2 M + L-asparagine 0.2 M"
+    medium: "0.1 M phosphate buffer, closed screw-capped glass tubes, oil bath"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: [6.8], measured_during: false, final: null}
+    time_min: [0, 45]
+    species: [acrylamide]
+    kind: time_series
+    location: "Fig. 2D (data, triplicate means +- SD) and Fig. 3D (fit); not digitised; text gives only curve shapes"
+    status: figure_only
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Samples (10 mL) were heated in hermetically closed screw-capped glass tubes (Schott, 16 x 160 mm) at 120, 140, 160, 180, and 200 C in an oil bath."
+    flags: [ph_start_only, "complements: knol2005_figs2_3_glc_asn_timecourses", no_heatup_correction]
+    note: "5 T x 8 times (0,1,2,4,9,15,30,45 min), triplicate; plateau at 140-160 C, rise-then-fall at 180-200 C. Only aqueous non-Leuven acrylamide time course in the corpus; digitising would let B3 score levels, not just k6. HPLC-UV LOD 10 ug/kg."
+  - id: knol2009_fig2_tab1_crisp_acrylamide_frying
+    dossier: knol2009_extraction.md
+    paper: "Knol, Viklund, Linssen, Sjoholm, Skog & van Boekel 2009 Food Chem 113:103"
+    lab: "Wageningen (van Boekel) / Lund (Skog)"
+    system: "potato crisps, 3 cold-sweetened genotypes (Hulda, Lady Rosetta, SW 91 102), 1.5 mm slices"
+    medium: "deep-fried in rapeseed oil, 180 C falling to held 160 C"
+    temperature_c: [160, 180]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1, 12]
+    species: [acrylamide, asparagine, glucose, fructose, sucrose, water content]
+    kind: time_series
+    location: "Fig. 2 (acrylamide vs frying time), Figs. 1 and 3 (oil/surface T, water content); Table 1 precursors (mg/g dm, re-typed)"
+    status: figure_only
+    quant_class: unknown
+    simulable: false
+    condition_quote: "After about 1.5-2.0 min, the oil reached a temperature of 160 C, and the thermostat setting was then changed to keep the temperature constant at 160 C"
+    flags: [matrix_food, low_moisture_no_aw_term, heating_up_included_in_time]
+    note: "12 frying times, duplicates at 2-4 min; acrylamide by LC-MS/MS (IS not stated in dossier), per kg dm. Table 1 now gives the precursor charge the B3 hold-out said was missing; a_w falls below the 0.34 window during frying. T and moisture histories figure-only."
+  - id: knol2009_tab2_empirical_curve_parameters
+    dossier: knol2009_extraction.md
+    paper: "Knol, Viklund, Linssen, Sjoholm, Skog & van Boekel 2009 Food Chem 113:103"
+    lab: "Wageningen (van Boekel) / Lund (Skog)"
+    system: "potato crisps, 4 genotypes (incl. Bintje from Knol 2008)"
+    medium: "deep-fried in rapeseed oil, 180 C falling to held 160 C"
+    temperature_c: [160, 180]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1, 12]
+    species: [acrylamide]
+    kind: other
+    location: "Table 2 (Logistic-Fermi / Logistic-Exponential / empirical parameters with SD; re-typed from rotated table) and Table 3 (AICc)"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "Frying times 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 8 and 12 min; duplicate experiments at 2, 2.5, 3 and 4 min"
+    flags: [matrix_food, low_moisture_no_aw_term, status_uncertain, not_rate_constants]
+    note: "Empirical shape parameters, not rate constants; scale a (ug/kg dm) is B3 hold-out row knol2009_real_food_band, declared but scored UNSCOREABLE (no precursor charge transcribed then). Bintje row from Knol 2008 (not on disk)."
+  - id: knol2010_tab2_acrylamide_asn_steps
+    dossier: knol2010_extraction.md
+    paper: "Knol, Linssen & van Boekel 2010 Food Chem 120:1047"
+    lab: "Wageningen (van Boekel)"
+    system: "D-fructose 0.1 M + L-asparagine 0.1 M"
+    medium: "0.1 M phosphate buffer, closed stainless-steel tubes, heating block"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: [5.3], measured_during: true, final: null}
+    time_min: [0, 64]
+    species: [acrylamide, asparagine]
+    kind: rate_constant
+    location: "Table 2, acrylamide-side rows k2 (Fru+Asn), k3 (Schiff base -> acrylamide), k8 (Asn -> X2) x 5 T + Ea, 95% HPD (dossier sec. 3-4)"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "dissolving the reactants lowered the initial pH of the buffer already from 5.5 to 5.3"
+    flags: [ph_measured_room_temperature, no_heatup_correction, condition_error_in_dossier_heading, "complements: knol2010_tab2_fru_asn_rate_constants_ea"]
+    note: "B3 hold-out: knol2010_formation_barrier_ceiling (Ea k2 93, DIAGNOSTIC, fails) and knol2010_table2_seven_steps declared UNSCOREABLE because 'not transcribed' -- the dossier now re-types all 7 steps. Ea(k3) 35 +-27 weak; acrylamide elimination deleted by the fit."
+  - id: knol2010_text_acrylamide_molar_yield
+    dossier: knol2010_extraction.md
+    paper: "Knol, Linssen & van Boekel 2010 Food Chem 120:1047"
+    lab: "Wageningen (van Boekel)"
+    system: "D-fructose 0.1 M + L-asparagine 0.1 M"
+    medium: "0.1 M phosphate buffer, closed stainless-steel tubes, heating block"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: [5.3], measured_during: true, final: null}
+    time_min: [0, 64]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Results 3.1 and Conclusions (maximum yield as % of initial asparagine; also quotes Knol 2005's glucose yield)"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "reaching almost 3 % of the initial asparagine concentration"
+    flags: [ph_measured_room_temperature, model_condition_mismatch, condition_uncertain]
+    note: "B3 GATING hold-out knol2010_molar_yield_on_asparagine (fails, 3.8x low) -- but the scorer runs Asn+GLUCOSE 0.1 M at 160 C while the paper's pot is FRUCTOSE, pH 5.3, max over all T. Temperature of the maximum not stated in text."
+  - id: knol2010_fig2d_acrylamide_timecourse
+    dossier: knol2010_extraction.md
+    paper: "Knol, Linssen & van Boekel 2010 Food Chem 120:1047"
+    lab: "Wageningen (van Boekel)"
+    system: "D-fructose 0.1 M + L-asparagine 0.1 M"
+    medium: "0.1 M phosphate buffer, closed stainless-steel tubes, heating block"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: [5.3], measured_during: true, final: null}
+    time_min: [0, 64]
+    species: [acrylamide]
+    kind: time_series
+    location: "Fig. 2D (data) and Fig. 5 (fits); Fig. 1 heat-up profile; not digitised"
+    status: figure_only
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Samples (10 ml) were heated in hermetically closed screw-capped stainless steel tubes ... at 120, 140, 160, 180 and 200 C in a heating block"
+    flags: [ph_measured_room_temperature, no_heatup_correction, "complements: knol2010_fig2_fru_asn_timecourses_ph"]
+    note: "5 T x 8 times (0-64 min), duplicate/triplicate; acrylamide rises then slow decrease/plateau at 160-200 C. Digitising this with the Fig. 2G pH trajectory would give a fructose acrylamide level series for the hold-out instead of a one-number yield."
+  - id: claeys2005_tab2_acrylamide_kf_ke_five_systems
+    dossier: claeys2005_extraction.md
+    paper: "Claeys, De Vleeschouwer & Hendrickx 2005 Biotechnol Prog 21:1525"
+    lab: "Leuven (Hendrickx)"
+    system: "L-asparagine 10 mM + D-glucose 10 mM, control or + 10 mM Gln / Cys / Lys / Ala"
+    medium: "0.05 M citrate buffer, airtight inox tubes 8 x 100 mm, oil bath; in-tube T logged"
+    temperature_c: [140, 160, 180, 200]
+    ph: {initial: [6.0], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 2 (k_Fref, k_Eref at Tref 160 C, Ea_F, Ea_E, SE, 5 systems; dossier sec. 3)"
+    status: in_model_fit
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "0.0 1M L-asparagine ... and 0.01 M D-glucose ... dissolved in a 0.05 M citrate buffer pH 6, to which 0.01 M L-glutamine ..., L-cysteine ..., L-lysine ..., or L-alanine ... was added"
+    flags: [ph_start_only, "complements: claeys2005_tables1_2_acrylamide_cys_competitor"]
+    note: "20 B3 FIT rows (claeys_{control,gln,cys,lys,ala}_{kF,kE,EaF,EaE}); cys row is the parameter-free prediction. The sulfur entry for the cys row says digitised_in_dossier but it is a B3 fit row. GC-MS, methacrylamide + butyramide IS; k_F/k_E correlation 0.94-0.98."
+  - id: claeys2005_tab1_relative_acrylamide_competitors
+    dossier: claeys2005_extraction.md
+    paper: "Claeys, De Vleeschouwer & Hendrickx 2005 Biotechnol Prog 21:1525"
+    lab: "Leuven (Hendrickx)"
+    system: "L-asparagine 10 mM + D-glucose 10 mM + 10 mM Gln / Lys / Ala"
+    medium: "0.05 M citrate buffer, airtight inox tubes, oil bath"
+    temperature_c: [140, 160, 180, 200]
+    ph: {initial: [6.0], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: ratio
+    location: "Table 1 (acrylamide % of control per T, mean of nine sampling times; Gln/Lys/Ala columns; dossier sec. 3)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Average percentage of nine samples taken after different treatment times at the temperature in concern."
+    flags: [ph_start_only, "complements: claeys2005_tables1_2_acrylamide_cys_competitor"]
+    note: "Time-averaged relative yields; dossier shows Table 1 is not reproduced by Table 2 alone (k_F/k_E correlation). Not a B3 row; could score competitor direction (Gln up to 3.2x, Lys down) without absolute levels."
+  - id: claeys2005_figs1_3_acrylamide_timecourses
+    dossier: claeys2005_extraction.md
+    paper: "Claeys, De Vleeschouwer & Hendrickx 2005 Biotechnol Prog 21:1525"
+    lab: "Leuven (Hendrickx)"
+    system: "L-asparagine 10 mM + D-glucose 10 mM, control or + 10 mM Gln / Cys / Lys / Ala"
+    medium: "0.05 M citrate buffer, airtight inox tubes, oil bath; in-tube T logged every 2 s"
+    temperature_c: [140, 160, 180, 200]
+    ph: {initial: [6.0], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: time_series
+    location: "Fig. 1 (relative acrylamide vs time, 160 C), Figs. 2a-e (acrylamide vs time, 4 T x 5 systems, with fits), Fig. 3 (Arrhenius); not digitised"
+    status: figure_only
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Samples were heated in airtight reactor tubes (custom-made, inox, 8 mm x 100 mm) to avoid as much as possible side phenomena"
+    flags: [ph_start_only]
+    note: "The only absolute acrylamide levels of the paper (35 points per system, ~9 times x 4 T); sampling times only on axes. Digitising would give B3 levels instead of correlated lumped constants. Companion Claeys 2005b (JAFC 53:9999) not on disk."
+  - id: devleeschouwer2006_tab1_ph_kinetics_phosphate
+    dossier: devleeschouwer2006_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2006 J Agric Food Chem 54:7847"
+    lab: "Leuven (Hendrickx)"
+    system: "L-asparagine 0.1 M + D-glucose 0.1 M"
+    medium: "0.05 M phosphate buffer, closed reactor tubes, oil bath"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: [4, 6, 8], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 1 phosphate rows (k_Fref, k_Eref at 160 C, Ea_F, Ea_E, SE) and the ln-linear pH slopes (text / Fig. 6)"
+    status: in_model_fit
+    quant_class: unknown
+    simulable: true
+    condition_quote: "0.1 M L-asparagine + 0.1 M D-glucose in 0.05 M citrate or phosphate buffer, initial pH 4, 6 or 8 measured at room temperature after dissolving"
+    flags: [ph_start_only, ph_measured_room_temperature]
+    note: "B15 declared constants: pH slopes 0.235/0.149 decades per unit on k_asn_glc / k_acr_dp (acrylamide_conditions.py KF/KE_PH_2006); directional claim fit_adjacent. Absolute k not transplanted. Barriers also shift with pH (not modelled). LC-MS/MS; IS not stated in dossier."
+  - id: devleeschouwer2006_tab1_ph_kinetics_citrate
+    dossier: devleeschouwer2006_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2006 J Agric Food Chem 54:7847"
+    lab: "Leuven (Hendrickx)"
+    system: "L-asparagine 0.1 M + D-glucose 0.1 M"
+    medium: "0.05 M citrate buffer, closed reactor tubes, oil bath"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: [4, 6, 6.96], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 1 citrate rows (k_Fref, k_Eref, Ea_F, Ea_E, SE; dossier sec. 3)"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: true
+    condition_quote: "initial pH 4, 6 or 8 measured at room temperature after dissolving (unchanged, except citrate pH 8 -> 6.96)"
+    flags: [ph_start_only, ph_measured_room_temperature]
+    note: "Not taken by B15 (no log-linear pH relation; authors invoke phosphate catalysis). Phosphate vs citrate at equal pH 6 differs ~2.4x in k_F: a buffer-catalysis data set for the acrylamide lane, unused."
+  - id: devleeschouwer2006_tab3_ph_kinetics_potato
+    dossier: devleeschouwer2006_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2006 J Agric Food Chem 54:7847"
+    lab: "Leuven (Hendrickx)"
+    system: "Asn + Glc in 20 % lyophilised potato matrix"
+    medium: "phosphate buffer, closed reactor tubes, oil bath"
+    temperature_c: [140, 160, 180, 200]
+    ph: {initial: [4, 6, 8], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 3 (k_Fref, k_Eref, Ea, SE per initial pH) and the potato pH slopes"
+    status: in_model_fit
+    quant_class: unknown
+    simulable: false
+    condition_quote: "Potato-based variant: 20 % lyophilised potato matrix, phosphate only, 140-200 C."
+    flags: [matrix_food, ph_start_only, concentrations_not_stated]
+    note: "Only the potato slopes enter, as the lower edge of the declared B15 pH-exponent bands (LN_SLOPE_*_POTATO); the potato k values themselves are unused. Matrix not representable; precursor loading not given in dossier."
+  - id: devleeschouwer2006_tab2_ph_drift
+    dossier: devleeschouwer2006_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2006 J Agric Food Chem 54:7847"
+    lab: "Leuven (Hendrickx)"
+    system: "L-asparagine 0.1 M + D-glucose 0.1 M"
+    medium: "0.05 M phosphate or citrate buffer, closed reactor tubes"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: [4, 6, 8], measured_during: false, final: null}
+    time_min: []
+    species: [pH]
+    kind: other
+    location: "Table 2 (pH change after heating vs initial, 5 T x 6 buffer/pH arms; dossier sec. 5)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "pH drifts during heating ... at initial pH 8 the pH falls by up to 2.25 units; at pH 4 it rises by up to 1.2"
+    flags: [ph_measured_room_temperature, condition_uncertain]
+    note: "Final (room-T) pH shift per T and arm; heating time behind each value not stated in dossier. Could test a pH-trajectory model of the Asn/Glc pot; currently only cited as a caveat in acrylamide_conditions.py."
+  - id: devleeschouwer2006_figs_acrylamide_timecourses
+    dossier: devleeschouwer2006_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2006 J Agric Food Chem 54:7847"
+    lab: "Leuven (Hendrickx)"
+    system: "L-asparagine 0.1 M + D-glucose 0.1 M; and potato-matrix variant"
+    medium: "0.05 M phosphate or citrate buffer, closed reactor tubes, oil bath"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: [4, 6, 8], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: time_series
+    location: "figures behind Tables 1 and 3 (not inventoried by the dossier; Fig. 6 = ln k vs pH)"
+    status: figure_only
+    quant_class: unknown
+    simulable: true
+    condition_quote: "Heated in closed reactor tubes in an oil bath at 120 / 140 / 160 / 180 / 200 C for variable times; two tubes per point"
+    flags: [ph_start_only, figure_numbers_not_recorded_in_dossier, status_uncertain]
+    note: "Acrylamide concentration-time data (6 buffer/pH arms x 5 T, duplicates) behind the lumped constants; dossier records neither figure numbers nor sampling times. Would allow scoring acrylamide levels vs pH."
+  - id: devleeschouwer2007_tab2_aw_kinetics
+    dossier: devleeschouwer2007_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2007 Biotechnol Prog 23:722"
+    lab: "Leuven (Hendrickx)"
+    system: "equimolar L-asparagine + D-glucose freeze-dried powders at a_w 0.34/0.59/0.73/0.82/0.88/0.92"
+    medium: "low-moisture powder equilibrated over saturated salts at 4 C; closed reactor tubes, oil bath"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 2 (Scheme 2: k_Fref, k_Eref, k_Mref at 160 C, Ea_F/E/M, SE per a_w; dossier sec. 3); Table 1 salts / isotherm"
+    status: in_model_fit
+    quant_class: unknown
+    simulable: false
+    condition_quote: "Equimolar Asn-Glc freeze-dried powders, dried over P2O5 then equilibrated over saturated salts"
+    flags: [concentrations_not_stated]
+    note: "B15 declared constants: KF_2007/KE_2007 set the flat formation window down to a_w 0.34 and the dry-side elimination multiplier (acrylamide_conditions.py). k_M and Ea-vs-a_w unused. Powder loading not in dossier; no pH. PDF filed as devleeschouwer2008b.pdf."
+  - id: devleeschouwer2007_figs_acrylamide_timecourses
+    dossier: devleeschouwer2007_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2007 Biotechnol Prog 23:722"
+    lab: "Leuven (Hendrickx)"
+    system: "equimolar L-asparagine + D-glucose freeze-dried powders at six a_w (0.34-0.92)"
+    medium: "low-moisture powder; closed reactor tubes, oil bath"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: time_series
+    location: "figures behind Table 2 (not inventoried by the dossier)"
+    status: figure_only
+    quant_class: unknown
+    simulable: false
+    condition_quote: "heated in closed reactor tubes in an oil bath at 120 / 140 / 160 / 180 / 200 C"
+    flags: [figure_numbers_not_recorded_in_dossier, concentrations_not_stated, status_uncertain]
+    note: "Acrylamide (and possibly reactant) time courses for 6 a_w x 5 T behind the lumped constants; dossier records no figure list, times or loadings. Dry-side (a_w < 0.88) level data the lane only uses as ratios."
+  - id: devleeschouwer2008_tab2_aw_multiresponse_constants
+    dossier: devleeschouwer2008_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008 J Agric Food Chem 56:6460"
+    lab: "Leuven (Hendrickx)"
+    system: "equimolar L-asparagine + D-glucose freeze-dried powder, ~50 mg, a_w 0.88/0.92/0.96/0.99"
+    medium: "low-moisture powder equilibrated at 4 C over saturated salts; closed Inox tubes 8 x 100 mm, oil bath, logged T profile"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide, asparagine, glucose, aspartic acid, melanoidins (A470)]
+    kind: rate_constant
+    location: "Table 2 (k_F, k_E, k_INT, k_M, k_B, k_C, k_Asp, k_X at 160 C + Ea, 95% HPD, per a_w; dossier sec. 3); Table 1 salts and water contents"
+    status: in_model_fit
+    quant_class: unknown
+    simulable: false
+    condition_quote: "Equimolar L-asparagine + D-glucose, freeze-dried, equilibrated at 4 C over saturated salts (Table 1: KCl 88 %, Sr(NO3)2 92 %, KNO3 96 %, K2SO4 99 % ERH)"
+    flags: [concentrations_not_stated]
+    note: "The a_w 0.92 column IS the shipped k_int1_acr / k_asn_glc / k_Asp (reprinted as Part I glucose column, cited from there); B14 flat a_w term + band from KF_TABLE. Directional claim on this paper RETIRED 2026-10-27: Results show significant k_F/k_E drop at 0.99, contrary to abstract."
+  - id: devleeschouwer2008_tab3_aw_potato_constants
+    dossier: devleeschouwer2008_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008 J Agric Food Chem 56:6460"
+    lab: "Leuven (Hendrickx)"
+    system: "10 % equimolar Asn + Glc mixture in potato powder, a_w 0.88-0.99"
+    medium: "potato-based low-moisture powder; closed Inox tubes, oil bath"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide, asparagine, glucose, aspartic acid, melanoidins (A470)]
+    kind: rate_constant
+    location: "Table 3 (same parameter set as Table 2, potato-based system, per a_w; dossier sec. 4)"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "potato-based, 10 % equimolar mixture in potato powder, glucose initially 5.27 g/kg dw"
+    flags: [matrix_food]
+    note: "Not taken (potato matrix not represented). Matrix leaves k_F/k_E unchanged within HPD per authors; a ready matrix-transfer check for the lane's powder constants."
+  - id: devleeschouwer2008_figs_multiresponse_timecourses
+    dossier: devleeschouwer2008_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008 J Agric Food Chem 56:6460"
+    lab: "Leuven (Hendrickx)"
+    system: "equimolar Asn + Glc powder (basic and potato-based), a_w 0.88-0.99"
+    medium: "low-moisture powder; closed Inox tubes, oil bath, logged T profile"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide, asparagine, glucose, aspartic acid, melanoidins (A470)]
+    kind: time_series
+    location: "figures behind Tables 2-3 (not inventoried by the dossier)"
+    status: figure_only
+    quant_class: unknown
+    simulable: false
+    condition_quote: "Responses fitted together: acrylamide, glucose, asparagine, aspartic acid, browning (470 nm)"
+    flags: [figure_numbers_not_recorded_in_dossier, concentrations_not_stated, status_uncertain]
+    note: "Five-response time courses at 4 a_w x 5 T x 2 systems behind the multiresponse fit; dossier gives no figure list or times. The data the shipped acrylamide constants were fitted to."
+  - id: devleeschouwer2009b_tab3_glucose_acrylamide_rows
+    dossier: devleeschouwer2009b_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2009 Food Chem 114:116 (Part I, type of sugar)"
+    lab: "Leuven (Hendrickx)"
+    system: "equimolar L-asparagine + D-glucose, low moisture (14.5 % moisture), initial a_w 0.92 at 4 C"
+    medium: "freeze-dried powder, closed tubes, logged T profile"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 3 glucose column, acrylamide rows (k_F, k_E, Ea_F, Ea_E at Tref 160 C, 95% HPD; dossier sec. 2)"
+    status: in_model_fit
+    quant_class: unknown
+    simulable: false
+    condition_quote: "equimolar asparagine-sugar, sugar = glucose, fructose or sucrose; equilibrated at initial a_w 0.92 (at 4 C)"
+    flags: [concentrations_not_stated, "complements: devleeschouwer2009b_tab3_sugar_asn_constants", "same_lab_republication_of: devleeschouwer2008", unit_conflict_between_dossiers]
+    note: "Dossier says the B3 fit does NOT read this paper: wrong. _DV1_SOURCE: k_F operative (k_int1_acr), k_E/Ea_E are B3 fit rows (dv1_glucose). Column identical to DV2008 Table 2 a_w 0.92. k_F unit here 1e-3 /mM/min vs DV2008 dossier 1e-3 /min."
+  - id: devleeschouwer2009b_tab3_fructose_sucrose_acrylamide_rows
+    dossier: devleeschouwer2009b_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2009 Food Chem 114:116 (Part I, type of sugar)"
+    lab: "Leuven (Hendrickx)"
+    system: "equimolar L-asparagine + D-fructose or sucrose, low moisture (12.6 / 17.8 % moisture), initial a_w 0.92"
+    medium: "freeze-dried powder, closed tubes, logged T profile"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 3 fructose and sucrose columns, acrylamide rows (k_F, k_E, Ea; dossier sec. 2)"
+    status: in_model_check
+    quant_class: unknown
+    simulable: false
+    condition_quote: "initial moisture (Table 1): glucose 14.53 +- 0.08 %, fructose 12.60 +- 0.12 %, sucrose 17.79 +- 0.28 %"
+    flags: [concentrations_not_stated, "complements: devleeschouwer2009b_tab3_sugar_asn_constants"]
+    note: "B3 hold-out: dv1_fructose_over_glucose_acrylamide (DIAGNOSTIC; fructose k_F HPD spans zero) and dv1_sucrose_system (declared, UNSCOREABLE: no sucrose species). Sucrose k_E 7x glucose."
+  - id: devleeschouwer2009b_tab2_relative_max_acrylamide_yield
+    dossier: devleeschouwer2009b_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2009 Food Chem 114:116 (Part I, type of sugar)"
+    lab: "Leuven (Hendrickx)"
+    system: "equimolar L-asparagine + glucose / fructose / sucrose, low moisture, initial a_w 0.92"
+    medium: "freeze-dried powder, closed tubes"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: ratio
+    location: "Table 2 (relative maximum acrylamide yield per mol initial Asn, glucose = 100, 5 T; dossier sec. 1)"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "relative maximum acrylamide yield per mol initial asparagine (%), glucose = 100"
+    flags: [concentrations_not_stated]
+    note: "Fructose and sucrose above glucose at every T (sucrose 2.2x at 120 C to 1.16x at 200 C). Not used by B3 (hold-out uses the k_F ratio instead); a direct peak-ratio check for the fructose route."
+  - id: devleeschouwer2009b_figs_acrylamide_timecourses
+    dossier: devleeschouwer2009b_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2009 Food Chem 114:116 (Part I, type of sugar)"
+    lab: "Leuven (Hendrickx)"
+    system: "equimolar L-asparagine + glucose / fructose / sucrose, low moisture, initial a_w 0.92"
+    medium: "freeze-dried powder, closed tubes, logged T profile"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: time_series
+    location: "figures (images; not inventoried or digitised by the dossier)"
+    status: figure_only
+    quant_class: unknown
+    simulable: false
+    condition_quote: ""
+    flags: [figure_numbers_not_recorded_in_dossier, concentrations_not_stated, "complements: devleeschouwer2009b_figs_sugar_asn_timecourses"]
+    note: "Acrylamide (GC-MS CI) time courses for 3 sugars x 5 T behind Tables 2-3; only source of absolute levels (B3 reports 'no absolute acrylamide printed'). Peak-yield levels would make the fructose hold-out scoreable."
+  - id: devleeschouwer2009_tab2_tab3_glutamine_column
+    dossier: devleeschouwer2009_extraction.md
+    paper: "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2009 Food Chem 114:535 (Part II, competitive reactions)"
+    lab: "Leuven (Hendrickx)"
+    system: "equimolar L-asparagine + D-glucose + L-glutamine, freeze-dried, a_w 0.92 at 4 C (9.58 % moisture), 1.15 g portions"
+    medium: "low-moisture powder in sealed inox tubes 8 x 100 mm, oil bath, 4 s in-tube T log"
+    temperature_c: [120, 140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 130]
+    species: [acrylamide, glutamic acid]
+    kind: rate_constant
+    location: "Table 3 Gln column (k_F, k_E, k_INT2, k_Glu + Ea, 95% HPD; half fixed from Part I) and Table 2 Gln column (relative max acrylamide yield, 5 T)"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Model systems composed of three equimolar parts of reactants... the third part contained either L-glutamine or L-cysteine."
+    flags: [concentrations_not_stated, "complements: devleeschouwer2009_table3_cys_acrylamide_kinetics"]
+    note: "B3 pre-registered FAIL hold-out rows (Gln promotion at 120/200 C from Table 2; k_F ratio from Table 3). Loading only derivable from Table 1 moisture (dossier: ~2 mol/kg). Table 2 repeats 132.4 at 160 and 180 C (possible misprint)."
+  - id: gokmen2012_fig2a_acrylamide_asn_glc_hmf_180c
+    dossier: gokmen2012_extraction.md
+    paper: "Gokmen, Kocadagli, Goncuoglu & Atac Mogol 2012 Food Chem 132:168"
+    lab: "Hacettepe (Gokmen)"
+    system: "L-asparagine 0.01 mmol alone, + D-glucose 0.01 mmol, or + HMF 0.01 mmol (0.1 mL solution)"
+    medium: "on 500 mg silica gel, screw-capped glass tube, oil bath"
+    temperature_c: [180]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [5, 60]
+    species: [acrylamide]
+    kind: time_series
+    location: "Fig. 2a (not digitised); text p. 171 gives three endpoint amounts and the HMF/GLC ratios at 10/30/60 min (dossier sec. 3.2)"
+    status: figure_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "0.01 mmol of ASN alone, a binary mixture of GLC and ASN (0.01 mmol each), or a binary mixture of HMF and ASN (0.01 mmol each) was transferred to a glass tube containing 50 mg of silica gel"
+    flags: [low_moisture_no_aw_term, concentrations_not_stated, ph_not_measured]
+    note: "Triplicate means. Fed-HMF route: ~7 mol% acrylamide on charge at 60 min vs ~1.6 mol% apparent max for glucose. Silica-supported melt with no defined a_w or concentration. Unused by any wave (only the HMF-loss text value is used, trunk)."
+  - id: gokmen2012_fig2b_fig3_acrylamide_temperature_ea
+    dossier: gokmen2012_extraction.md
+    paper: "Gokmen, Kocadagli, Goncuoglu & Atac Mogol 2012 Food Chem 132:168"
+    lab: "Hacettepe (Gokmen)"
+    system: "L-asparagine + D-glucose or + HMF, 0.01 mmol each"
+    medium: "on 500 mg silica gel, screw-capped glass tube, oil bath"
+    temperature_c: [90, 120, 150, 180]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [5, 60]
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Fig. 2b (acrylamide at 60 min vs T), Fig. 3 (Arrhenius plots) figure-only; Ea for both systems and the ~120 C crossover in text p. 171 (dossier sec. 3.3)"
+    status: text_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The reactions were performed in an oil bath at 90, 120, 150, and 180 C for 5, 10, 20, 30, and 60 min"
+    flags: [low_moisture_no_aw_term, concentrations_not_stated]
+    note: "Two Ea values printed; no k, pre-exponential or R2. 4 T x 5 times acquired, figures show only 60-min slice and Arrhenius lines. Glc-route Ea far below Leuven's ~160-170 kJ/mol: conflicts_with claeys2005 on the formation barrier (different medium)."
+  - id: gokmen2012_fig6_3apa_asn_glc_hmf
+    dossier: gokmen2012_extraction.md
+    paper: "Gokmen, Kocadagli, Goncuoglu & Atac Mogol 2012 Food Chem 132:168"
+    lab: "Hacettepe (Gokmen)"
+    system: "L-asparagine + D-glucose or + HMF, 0.01 mmol each"
+    medium: "on 500 mg silica gel, screw-capped glass tube, oil bath"
+    temperature_c: [180]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [5, 30]
+    species: [3-aminopropionamide]
+    kind: time_series
+    location: "Fig. 6 (not digitised); text p. 172-173 gives HMF/GLC ratios at 5 and 30 min and the fall from 5 to 30 min"
+    status: figure_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Increasing the heating time from 5 to 30 min at 180 C significantly decreased the amount of 3-APA"
+    flags: [low_moisture_no_aw_term, concentrations_not_stated]
+    note: "No absolute 3-APA printed. One of very few 3-APA time data in the corpus (rises by 5 min then falls while acrylamide rises). Asn/Glc time courses measured but 'data not shown'."
+  - id: quan2020_fig2_acrylamide_asn_mix_130c
+    dossier: quan2020_extraction.md
+    paper: "Quan, Li, Jiao, Xue, Liu, Wang, He, Qin, Zeng & Chen 2020 Food Chem 332:127387 (pre-proof)"
+    lab: "Jiangnan (Zeng / Chen J.)"
+    system: "Asn 200 mM + glucose 100 mM (Asn/Glu); Lys 100 + Asn 200 + Trp 5 + glucose 100 mM (Mix/Glu)"
+    medium: "0.1 M phosphate, 10 mL sealed glass vials, stirred oil bath, 5 min pre-heat"
+    temperature_c: [100, 130]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [3, 21]
+    species: [acrylamide]
+    kind: time_series
+    location: "Figs. 1-2 (images; acrylamide panel not identified by the dossier); text sec. 3.2 gives the 130 C maxima and 'none at 100 C, appears after 6 min'"
+    status: figure_only
+    quant_class: sida
+    simulable: true
+    condition_quote: "Asn-glucose (Asn/Glu; 200 mmol/100 mmol) ... were prepared in phosphate buffer"
+    flags: [ph_start_only, concentration_basis_inferred, heating_up_excluded_preheat_5min]
+    note: "13C3-acrylamide SIDA; 7 times x 2 T, triplicate. Aqueous pH 7 Asn/Glc pot with acrylamide levels at 130 C, below the B3 window (140-200 C); unused. Asn loss: covered by quan2020_fig1_glucose_aminoacid_loss (trunk)."
+  - id: quan2020_table1_acrylamide_k5_k8
+    dossier: quan2020_extraction.md
+    paper: "Quan, Li, Jiao, Xue, Liu, Wang, He, Qin, Zeng & Chen 2020 Food Chem 332:127387 (pre-proof)"
+    lab: "Jiangnan (Zeng / Chen J.)"
+    system: "Asn/Glu and Mix/Glu pots (glucose 100 mM)"
+    medium: "0.1 M phosphate"
+    temperature_c: [130]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [3, 21]
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 1, k5 (acrylamide from Asn) and k8 (acrylamide via acrolein) columns (re-typed, dossier sec. 3)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "the experiments were performed at only one or two temperatures; hence, specific activation energies cannot be estimated"
+    flags: [refused_no_units_no_orders, "complements: quan2020_table1_unitless_constants"]
+    note: "Refused in parameters_acrylamide.py (Quan 2020, all 88 constants): no units, no rate laws, ambiguous prefixes, single-response fits. Only 130 C (zero at 100 C)."
+  - id: zamora2010_figs2_3_butylamine_forward_reverse
+    dossier: zamora2010_extraction.md
+    paper: "Zamora, Delgado & Hidalgo 2010 J Agric Food Chem 58:1708"
+    lab: "Seville (Zamora / Hidalgo)"
+    system: "acrylamide 0.2 umol + butylamine 20 umol (forward); 3-(butylamino)propanamide 0.2 umol alone (reverse)"
+    medium: "300 mg silica gel + 30 uL 0.3 M phosphate + 180 uL water, a_w 0.95 measured, heater block under N2"
+    temperature_c: [120, 140, 160, 180]
+    ph: {initial: [7], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide, 3-(butylamino)propanamide]
+    kind: time_series
+    location: "Fig. 2A/2B (acrylamide loss / release vs time, 4 T; not digitised), Fig. 3A Arrhenius; Ea 44 (fwd) and 52 (rev) kJ/mol printed in text (dossier sec. 3)"
+    status: figure_only
+    quant_class: sida
+    simulable: false
+    condition_quote: "Acrylamide disappearance increased linearly as a function of time at the four assayed temperatures"
+    flags: [silica_supported, status_uncertain]
+    note: "Only matched forward/reverse Ea pair in the corpus (bare integers, no SE). Cited only as corroboration in parameters_matrix.py lipid-aldehyde binding source_anchor (not a constant). Rates (slopes) figure-only. Aza-Michael acrylamide sink absent from the B3 lane."
+  - id: zamora2010_figs3b_4_glycine_michael
+    dossier: zamora2010_extraction.md
+    paper: "Zamora, Delgado & Hidalgo 2010 J Agric Food Chem 58:1708"
+    lab: "Seville (Zamora / Hidalgo)"
+    system: "acrylamide 0.2 umol + glycine 20 or 50 umol"
+    medium: "300 mg silica gel, 0.3 M phosphate, a_w 0.95, heater block under N2"
+    temperature_c: [120, 140, 160, 180]
+    ph: {initial: [7], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: time_series
+    location: "Fig. 4A/4B (acrylamide loss vs time, 2 glycine doses x 4 T; not digitised), Fig. 3B Arrhenius; Ea 52 kJ/mol in text"
+    status: figure_only
+    quant_class: sida
+    simulable: false
+    condition_quote: "When 50 umol of glycine was employed, reaction rates were slightly higher (Figure 4B). However, the same activation energies for both reactions were determined"
+    flags: [silica_supported]
+    note: "Glycine mono-adduct could not be synthesised; reverse shown only for the bis-adduct (Fig. 5, figure-only, no Ea). Amino-acid scavenging of acrylamide: B3 carries Lys/Ala/Gln scavenging as FITTED channels with no measured Ea."
+  - id: zamora2010_tab1_ph_buffer_series
+    dossier: zamora2010_extraction.md
+    paper: "Zamora, Delgado & Hidalgo 2010 J Agric Food Chem 58:1708"
+    lab: "Seville (Zamora / Hidalgo)"
+    system: "acrylamide 0.2 umol + butylamine or glycine 20 umol; 3-(butylamino)propanamide alone"
+    medium: "300 mg silica gel, 0.3 M citrate (pH 2.15-6) or phosphate (pH 6-8), a_w 0.95, N2"
+    temperature_c: [180]
+    ph: {initial: [2.15, 3, 4, 5, 6, 6.5, 7, 8], measured_during: false, final: null}
+    time_min: [10]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Table 1 (acrylamide disappearance % and formation % from compound 3, 9 pH/buffer rows; dossier sec. 6)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Samples were heated for 10 min at 180 C."
+    flags: [silica_supported]
+    note: "pH 6 measured in both buffers: reverse reaction 2.2x apart (citrate vs phosphate). Reverse far more pH-sensitive than forward. Unused."
+  - id: zamora2010_tab2_storage_reheat_glycine
+    dossier: zamora2010_extraction.md
+    paper: "Zamora, Delgado & Hidalgo 2010 J Agric Food Chem 58:1708"
+    lab: "Seville (Zamora / Hidalgo)"
+    system: "acrylamide 0.2 umol + glycine 20 umol"
+    medium: "silica gel model system (as standard), stored then reheated"
+    temperature_c: [37, 60, 180]
+    ph: {initial: [7], measured_during: false, final: null}
+    time_min: [0, 40320]
+    species: [acrylamide]
+    kind: time_series
+    location: "Table 2 (acrylamide disappearance % after 0-28 d storage at 37 / 60 C, with and without reheating 20 min at 180 C; dossier sec. 5)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Values are acrylamide disappearance (%) in a model system containing 0.2 umol of acrylamide and 20 umol of glycine."
+    flags: [silica_supported, condition_uncertain]
+    note: "Storage pH taken as the standard pH 7 (not restated in dossier). Shows ~90 % reversible / ~10 % irreversible acrylamide loss over 28 d and release on reheating. Cited in parameters_matrix.py comments only."
+  - id: zamora2010_fig1_nucleophile_dose_response
+    dossier: zamora2010_extraction.md
+    paper: "Zamora, Delgado & Hidalgo 2010 J Agric Food Chem 58:1708"
+    lab: "Seville (Zamora / Hidalgo)"
+    system: "acrylamide 0.2 umol + butylamine or glycine 0-50 umol"
+    medium: "300 mg silica gel, buffered, a_w 0.95, heater block under N2"
+    temperature_c: [180]
+    ph: {initial: [7], measured_during: false, final: null}
+    time_min: [10]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Fig. 1 (acrylamide remaining vs amine dose; not digitised); text gives ~12 umol butylamine for half-loss and glycine linear to 15 umol then saturating"
+    status: figure_only
+    quant_class: sida
+    simulable: false
+    condition_quote: "heater block, under nitrogen, 180 C, 10 min, unless otherwise indicated"
+    flags: [silica_supported, condition_uncertain]
+    note: "Dose-response of acrylamide scavenging by amines; blank without amine unchanged. pH for Fig. 1 not restated in dossier (standard pH 7 assumed)."
+  - id: zamora2010_figs6_7_lysine_polylysine_reactivity
+    dossier: zamora2010_extraction.md
+    paper: "Zamora, Delgado & Hidalgo 2010 J Agric Food Chem 58:1708"
+    lab: "Seville (Zamora / Hidalgo)"
+    system: "acrylamide 0.2 umol + butylamine / glycine / lysine 20 umol (Fig. 6); + 2 mg lysine or poly-L-lysine MW 4200 / 68300 (Fig. 7)"
+    medium: "300 mg silica gel, phosphate, a_w 0.95, heater block under N2"
+    temperature_c: [180]
+    ph: {initial: [7], measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: time_series
+    location: "Figs. 6-7 (acrylamide vs heating time per nucleophile; not digitised); text gives rank orders and ln(MW) correlation"
+    status: figure_only
+    quant_class: sida
+    simulable: false
+    condition_quote: "reactivity was inversely proportional to the molecular weight. The most reactive was lysine"
+    flags: [silica_supported]
+    note: "Lys > butylamine > Gly (butylamine rank time-dependent); free Lys > polyLys 4.2k > 68.3k at equal mass (r 0.989, p 0.095, 3 points): a free- vs protein-bound acrylamide-scavenging penalty. Time axes not in dossier."
+  - id: goncuoglu2026_fig1_acrylamide_extrudates
+    dossier: goncuoglu2026_extraction.md
+    paper: "Goncuoglu Tas, Balagiannis, Ghawi, Gokmen & Parker 2026 Food Chem X 36:104019"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "twin-screw extrudates of cornmeal + pea protein isolate (0-70% PPI), 19 formulations/process settings; raw-material Asn and sugars"
+    medium: "extruder melt, feed moisture 15-17% (feed pre-dried 24 h at 70 C), 400-500 rpm, barrel set-points to 145-160 C"
+    temperature_c: [145, 150, 155, 160]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide, asparagine, reducing_sugar, total_sugar]
+    kind: endpoint
+    location: "Fig. 1a-b (E1-E19 acrylamide bars, undigitised); E1/E2 and raw-material levels in Results 3.2 text; Asn/sugar profile Table S2 (absent)"
+    status: figure_only
+    quant_class: sida
+    simulable: false
+    condition_quote: "Barrel profile 40-60-80-100-120-140-145-145 C (T1), screw speed 400 rpm, dry feed rate 3.4 kg/h"
+    flags: [matrix_food, status_uncertain, barrel_temperature_not_product_temperature, residence_time_not_reported, low_moisture_no_aw_term, no_replicates, supplement_missing_s2]
+    note: "Acrylamide by d3-IDA UPLC-MS/MS. Only 2 extrudates + 2 raw materials as text numbers; 17 bars figure-only. Melt T in garbled Tables 1/3. Was directional claim ACR-01, RETIRED 2026-10-27 (inverted composition). Results (max at 15%) vs Conclusions (peak 30%) disagree."
+  - id: kocadagli2021_fig4_acrylamide_potato_dough
+    dossier: kocadagli2021_extraction.md
+    paper: "Kocadagli, Methven, Kant & Parker 2021 Food Chem 339:128024"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "low-acrylamide potato-flake dough (flake Glc, Fru, Asn printed) with added amino acids, 2,3-pentanedione, 3,4-hexanedione or whey protein hydrolysate"
+    medium: "baked dough sheets (pH 5.92), open mesh mat, full convection; main bake 160 C 6 min + 130 C 10 min; lower 140/110 C and higher 160/140 C preliminary bakes"
+    temperature_c: [160, 130, 140, 110]
+    ph: {initial: [5.92], measured_during: false, final: null}
+    time_min: [14, 23]
+    species: [acrylamide, asparagine, glucose, fructose]
+    kind: endpoint
+    location: "Fig. 4 (bars per recipe, undigitised); control and bake-ladder values and % changes in Sec. 3.2/3.7 text; flake sugars/Asn Sec. 3.1; flake amino acids Table S1 (absent)"
+    status: text_only
+    quant_class: sida
+    simulable: false
+    condition_quote: "Main condition: 160 C for 6 min then 130 C for 10 min, full convection"
+    flags: [matrix_food, open_system, low_moisture_no_aw_term, supplement_missing_s1]
+    note: "Two control sets + 3-bake ladder (lower/main/higher) as text numbers; recipe effects as % of control (all aa x2 lowers Asn share -> -42%; HD +33% impurity artefact). Other recipe bars figure-only. Dough moisture and bake water loss not given."
+  - id: rydberg2003_fig4_acrylamide_ph_naoh_potato
+    dossier: rydberg2003_extraction.md
+    paper: "Rydberg, Eriksson, Tareke, Karlsson, Ehrenberg & Tornqvist 2003 J Agric Food Chem 51:7012"
+    lab: "Stockholm University (Tornqvist)"
+    system: "homogenised potato (Frieslander batch 1 inferred; endogenous Asn 17.0 mM, Glc 21 mM, Fru 2.8 mM), pH raised with NaOH"
+    medium: "frozen ~45 g homogenate cubes in GC oven, 70 C -> 40 C/min ramp, held 25 min"
+    temperature_c: [160, 180]
+    ph: {initial: [5.73, 9.67], measured_during: false, final: null}
+    time_min: [25]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Fig. 4 (12 + 7 points, digitised dossier sec. 2.1) + printed quadratic fits"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "pH 'was measured at ambient temperature prior to heating'; raised with NaOH"
+    flags: [matrix_food, ph_start_only, ph_measured_room_temperature, heating_up_included_in_time, open_system, no_replicates, low_moisture_no_aw_term, condition_uncertain]
+    note: "Net acrylamide maximum near pH 7.7 (180 C) / 8.0 (160 C); the deciding test for acrylamide speciation named in plan sec. 7; not yet scored. Printed 160 C coefficients too coarse (use points). Cultivar of Fig. 4 inferred, not printed. pH ranges 5.73-9.67 (180) / 5.82-9.66 (160)."
+  - id: rydberg2003_tab2_fig5_acrylamide_hcl_spike_loss
+    dossier: rydberg2003_extraction.md
+    paper: "Rydberg, Eriksson, Tareke, Karlsson, Ehrenberg & Tornqvist 2003 J Agric Food Chem 51:7012"
+    lab: "Stockholm University (Tornqvist)"
+    system: "homogenised potato (Frieslander batch 2), acidified with HCl to pH 4.78 / 2.96; +/- 1000 ug/kg acrylamide spike (180 C only)"
+    medium: "frozen ~45 g homogenate cubes in GC oven, 40 C/min ramp, 25 min"
+    temperature_c: [120, 140, 160, 180]
+    ph: {initial: [2.96, 4.78, 5.72], measured_during: false, final: null}
+    time_min: [25]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Table 2 (printed, 180 C formation + spike loss) and Fig. 5 (temperature x pH grid, digitised dossier sec. 2.2)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "pH of original 5.72, acidified with HCl, 25 min"
+    flags: [matrix_food, ph_start_only, ph_measured_room_temperature, heating_up_included_in_time, open_system, no_replicates, low_moisture_no_aw_term]
+    note: "4 T x 3 pH net contents; Table 2 = Fig. 5 180 C column. Spike loss faster at LOW pH (47% at pH 3 vs 22% at 5.7) -- opposite sign to the model's elimination pH factor (record, do not tune). Batch effect ~2x vs Fig. 4 at 160 C."
+  - id: rydberg2003_tab3_acrylamide_citric_acid
+    dossier: rydberg2003_extraction.md
+    paper: "Rydberg, Eriksson, Tareke, Karlsson, Ehrenberg & Tornqvist 2003 J Agric Food Chem 51:7012"
+    lab: "Stockholm University (Tornqvist)"
+    system: "homogenised potato cv. Rosor + citric acid 6.5-104 mmol/kg"
+    medium: "frozen homogenate cubes in GC oven, 40 C/min ramp, 25 min"
+    temperature_c: [180]
+    ph: {initial: [4.54, 5.75], measured_during: false, final: null}
+    time_min: [25]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Table 3 (printed, 4 rows; dossier sec. 2.3)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "citric acid ... effects resembled those of HCl acidification"
+    flags: [matrix_food, ph_start_only, ph_measured_room_temperature, open_system, no_replicates]
+    note: "Single samples; control level (cv. Rosor) differs from other cultivars. Companion to the HCl series."
+  - id: rydberg2003_text_acrylamide_ascorbic_microwave
+    dossier: rydberg2003_extraction.md
+    paper: "Rydberg, Eriksson, Tareke, Karlsson, Ehrenberg & Tornqvist 2003 J Agric Food Chem 51:7012"
+    lab: "Stockholm University (Tornqvist)"
+    system: "30 g potato + ascorbic acid 0.30 / 1.7 / 8.3 wt %"
+    medium: "microwave 3 min at 750 W"
+    temperature_c: []
+    ph: {initial: [3.35, 4.10, 5.19], measured_during: false, final: null}
+    time_min: [3]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Results text (dossier sec. 2.4)"
+    status: text_only
+    quant_class: sida
+    simulable: false
+    condition_quote: "30 g potato with 0.30, 1.7 or 8.3 wt % ascorbic acid, microwave 3 min at 750 W"
+    flags: [matrix_food, ph_start_only, open_system, no_replicates]
+    note: "3 values, lowest below the test LOD (50 ug/kg); no temperature. Authors: drop not explained by pH alone (water binding)."
+  - id: rydberg2003_fig1_acrylamide_time_course_200c
+    dossier: rydberg2003_extraction.md
+    paper: "Rydberg, Eriksson, Tareke, Karlsson, Ehrenberg & Tornqvist 2003 J Agric Food Chem 51:7012"
+    lab: "Stockholm University (Tornqvist)"
+    system: "commercial frozen pre-fried potato strips, 30 g"
+    medium: "GC oven, 70 C -> 40 C/min -> 200 C, held 1 s to 60 min"
+    temperature_c: [200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 60]
+    species: [acrylamide, weight_loss]
+    kind: time_series
+    location: "Fig. 1 (8 times, corrected/uncorrected + weight loss; digitised dossier sec. 3.1, +/-70 ug/kg)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "30 g commercial frozen pre-fried potato strips, 70 C -> 40 C/min -> 200 C, held 1 s, 4, 8, 12, 16, 20, 24 or 60 min"
+    flags: [matrix_food, heating_up_included_in_time, open_system, no_replicates, low_moisture_no_aw_term, concentrations_not_stated]
+    note: "Formation-then-elimination shape: peak ~20 min, -76% by 60 min; with weight loss (drying) series. Pre-fried product carries factory acrylamide load. Good shape check for formation/elimination balance."
+  - id: rydberg2003_fig2_acrylamide_temperature_15min
+    dossier: rydberg2003_extraction.md
+    paper: "Rydberg, Eriksson, Tareke, Karlsson, Ehrenberg & Tornqvist 2003 J Agric Food Chem 51:7012"
+    lab: "Stockholm University (Tornqvist)"
+    system: "pre-fried potato strips (French fries)"
+    medium: "oven, 15 min at 100-220 C"
+    temperature_c: [100, 120, 140, 160, 180, 200, 220]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [15]
+    species: [acrylamide, weight_loss]
+    kind: endpoint
+    location: "Fig. 2 (8 points, digitised dossier sec. 3.2, +/-30 ug/kg)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "French fries; data from Tareke et al. 2002, ref 2"
+    flags: [matrix_food, open_system, no_replicates, secondary_source, condition_uncertain]
+    note: "Re-plot of Tareke 2002 data (no dossier on disk); unheated control ~160 ug/kg is factory load. Oven conditions not restated."
+  - id: rydberg2003_fig3_acrylamide_fish_admixture
+    dossier: rydberg2003_extraction.md
+    paper: "Rydberg, Eriksson, Tareke, Karlsson, Ehrenberg & Tornqvist 2003 J Agric Food Chem 51:7012"
+    lab: "Stockholm University (Tornqvist)"
+    system: "grated potato + minced cod 0-100 % (60 g patty)"
+    medium: "frying pan (conditions per Tareke 2002, not restated); inset oven 180 C 25 min program"
+    temperature_c: [180]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [25]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Fig. 3 (7 pan + 3 oven points, digitised dossier sec. 3.3)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Grated potato + minced cod, 0-60 g fish in a 60 g patty"
+    flags: [matrix_food, open_system, no_replicates, condition_uncertain]
+    note: "~-70% vs additive (dilution) expectation at 50% fish: amine/protein suppression directional test. Pan temperature and time not restated."
+  - id: rydberg2003_tab1_acrylamide_amino_acid_sugar_additions
+    dossier: rydberg2003_extraction.md
+    paper: "Rydberg, Eriksson, Tareke, Karlsson, Ehrenberg & Tornqvist 2003 J Agric Food Chem 51:7012"
+    lab: "Stockholm University (Tornqvist)"
+    system: "homogenised potato (Frieslander batch 1; Asn 17.0, Glc 21, Fru 2.8 mM) + Gln, Gly, GABA, Lys, Glu, Ala, Asn, Fru, Glc, G6P (35/140 mmol/kg) or glyceraldehyde (15/45)"
+    medium: "frozen homogenate cubes in GC oven, 40 C/min ramp, 25 min; weight loss 66.6 %"
+    temperature_c: [180]
+    ph: {initial: [5.56, 6.16], measured_during: false, final: null}
+    time_min: [25]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Table 1 (printed, 3 controls + 21 rows; dossier sec. 3.4)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Single samples; corrected for weight loss (66.6 +/- 1.6 %)"
+    flags: [matrix_food, ph_start_only, ph_measured_room_temperature, open_system, no_replicates, low_moisture_no_aw_term, "conflicts_with: claeys2005"]
+    note: "Asn and sugar saturation; competing amines suppress 43-92 %. Directional tests for a competitive-amine term. Claeys 2005 dossier quotes Rydberg's lysine effect as -57 % 'pH not stated'; Table 1 prints -43/-88 % with pH."
+  - id: rydberg2003_tab4_acrylamide_antioxidants_citrate
+    dossier: rydberg2003_extraction.md
+    paper: "Rydberg, Eriksson, Tareke, Karlsson, Ehrenberg & Tornqvist 2003 J Agric Food Chem 51:7012"
+    lab: "Stockholm University (Tornqvist)"
+    system: "homogenised potato cv. Ukama + sodium ascorbate, ascorbyl palmitate, benzoyl peroxide, H2O2, trisodium citrate (1-162 mmol/kg)"
+    medium: "frozen homogenate cubes in GC oven, 40 C/min ramp, 25 min; weight loss per row"
+    temperature_c: [180]
+    ph: {initial: [5.57, 6.53], measured_during: false, final: null}
+    time_min: [25]
+    species: [acrylamide, weight_loss]
+    kind: endpoint
+    location: "Table 4 (printed, 4 controls + 19 rows; dossier sec. 3.5)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Single samples ... corrected for weight loss"
+    flags: [matrix_food, ph_start_only, ph_measured_room_temperature, open_system, no_replicates]
+    note: "Antioxidants/radical initiators minor; ascorbate and trisodium citrate at 123 mM cut 46-53 % attributed to water binding. Citrate raises pH yet lowers acrylamide (opposite to NaOH series)."
+  - id: ma2024_fig2d_acrylamide_spi_extrusion_barrel_temperature
+    dossier: ma2024_extraction.md
+    paper: "Ma, Fu, Cheng & Liu 2024 Int J Mol Sci 25:8668"
+    lab: "unknown (Liu B.)"
+    system: "soy protein isolate : corn starch 9:1 meat analogue, three barrel-temperature arms + unextruded control"
+    medium: "pilot twin-screw extruder, 10 zones (last five to 130 / 150 / 170 C), 150 rpm, 6.0 kg/h feed + 2.57 kg/h water, 30 % moisture"
+    temperature_c: [130, 150, 170]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: endpoint
+    location: "Fig. 2D (4 bars, read in dossier sec. 3); no table"
+    status: in_model_fit
+    quant_class: sida
+    simulable: false
+    condition_quote: "(1) 110, 120, 130, 130 and 130 C; (2) 120, 140, 150, 150 and 150 C; (3) 120, 140, 170, 170 and 170 C"
+    flags: [matrix_food, barrel_temperature_not_product_temperature, residence_time_not_reported, low_moisture_no_aw_term, status_uncertain]
+    note: "130 C arm = B3 FIT row acrylamide_spi_extrusion_130C_ACSRef3 (25 s hold assumed; Unlu 2002 / Yu 2012 RTDs bracket it). 150/170 C arms and the ~38 ug/kg unextruded control are read but unused; formed amount ~112 not 150 (named, not applied)."
+  - id: ma2024_fig2abc_acrylamide_spi_extrusion_process_series
+    dossier: ma2024_extraction.md
+    paper: "Ma, Fu, Cheng & Liu 2024 Int J Mol Sci 25:8668"
+    lab: "unknown (Liu B.)"
+    system: "soy protein isolate : corn starch 9:1 meat analogue; single-factor series over moisture (20-60 %), screw speed (120-180 rpm), feed rate (4-8 kg/h)"
+    medium: "pilot twin-screw extruder, 10 zones, last five to 150 C (base arm)"
+    temperature_c: [150]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: endpoint
+    location: "Fig. 2A-C (bars, not digitised; shape in dossier sec. 3 prose)"
+    status: figure_only
+    quant_class: sida
+    simulable: false
+    condition_quote: "Figure 2A-C: moisture bell-shaped with a maximum at 40 %; screw speed a weak effect; feed rate rising 4 -> 8 kg/h"
+    flags: [matrix_food, barrel_temperature_not_product_temperature, residence_time_not_reported, low_moisture_no_aw_term]
+    note: "~11 bars across three process axes; moisture maximum at 40 %, lowest at 20 % moisture. Directional tests for the extrusion row once a thermal history exists."
+  - id: lin2021_text_acrylamide_glucose_asparagine_180c
+    dossier: lin2021_extraction.md
+    paper: "Lin, Chan, Kao & Sung 2021 Polymers 13:1901 (10.3390/polym13121901)"
+    lab: "NTOU (Sung)"
+    system: "glucose 0.5 g (27.75 mM) + asparagine 0.5 g (33.3 mM) in 100 mL"
+    medium: "1% acetic acid or distilled water, pH set to 6.0 with NaOH before heating; vessel and closure not stated"
+    temperature_c: [180]
+    ph: {initial: [6.0], measured_during: false, final: null}
+    time_min: [10, 30]
+    species: [acrylamide]
+    kind: time_series
+    location: "sec. 3.3 prose citing Fig. 3B (acetate 10/20/30 min) and Fig. 3A,B (water 30 min) (dossier sec. 2)"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "pH set to 5.8 with 1 N NaOH then 6.0 with 0.001 N NaOH, topped up to 100 mL, heated at 180 C for 10, 20 and 30 min, cooled in tap water"
+    flags: [ph_start_only, vessel_not_stated, acetic_acid_w_v_or_v_v_ambiguous, text_quoted_figure_sourced]
+    note: "Hold-outs mp_holdout_glucose_asparagine_180C_10min/30min/30min_water_Chang2021 (B36; 'Chang' = method ref). 20 min acetate value printed but not bundled. HPLC-UV. Lin 2022 is the fructose twin."
+  - id: lin2021_fig3_acrylamide_time_courses_chitosan_hmf
+    dossier: lin2021_extraction.md
+    paper: "Lin, Chan, Kao & Sung 2021 Polymers 13:1901 (10.3390/polym13121901)"
+    lab: "NTOU (Sung)"
+    system: "glucose + asparagine 0.5 % each, +/- chitosan 0.5 % or HMF 0.5 %; glucose-only arm"
+    medium: "1% acetic acid or water, pH 6.0 start; vessel not stated"
+    temperature_c: [180]
+    ph: {initial: [6.0], measured_during: false, final: null}
+    time_min: [0, 30]
+    species: [acrylamide]
+    kind: time_series
+    location: "Fig. 3 (acrylamide, all arms; not digitised)"
+    status: figure_only
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "heated at 180 C for 10, 20 and 30 min, cooled in tap water"
+    flags: [ph_start_only, vessel_not_stated]
+    note: "Water-arm 10/20 min and the chitosan / added-HMF arms only as bars. Fed-HMF arm bears on the HMF -> acrylamide route. Sugar/Asn/pH/browning figures already in trunk lin2021_figs_time_courses."
+  - id: lin2022_text_acrylamide_fructose_asparagine_180c
+    dossier: lin2022_extraction.md
+    paper: "Lin, Ting, Ndraha, Hsiao & Sung 2022 Polymers 14:1565 (10.3390/polym14081565)"
+    lab: "NTOU (Sung)"
+    system: "fructose 0.5% (27.75 mM) + asparagine 0.5% (33.3 mM)"
+    medium: "water or 1% acetic acid, pH 5.8 -> 6.0 with NaOH; tube in dry-bath incubator, size and closure not printed"
+    temperature_c: [180]
+    ph: {initial: [6.0], measured_during: false, final: null}
+    time_min: [30]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Results prose (dossier sec. 2)"
+    status: in_model_check
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "placed in a dry-bath incubator (DB200-2, Yisheng ...) at 180 C for 10, 20 and 30 min"
+    flags: [ph_start_only, vessel_not_stated, text_quoted_figure_sourced]
+    note: "Water arm scored in mp_holdout_fructose_asparagine_180C_Lin2022 (B36). Acetic-acid arm (5x higher) printed but not bundled."
+  - id: lin2022_figs_acrylamide_asparagine_sugar_time_courses
+    dossier: lin2022_extraction.md
+    paper: "Lin, Ting, Ndraha, Hsiao & Sung 2022 Polymers 14:1565 (10.3390/polym14081565)"
+    lab: "NTOU (Sung)"
+    system: "fructose + asparagine 0.5 % each, +/- chitosan 0.5 %; fructose-only arm"
+    medium: "water or 1% acetic acid, pH 6.0 start; dry-bath tube"
+    temperature_c: [180]
+    ph: {initial: [6.0], measured_during: true, final: null}
+    time_min: [0, 30]
+    species: [acrylamide, asparagine, reducing_sugar, pH, browning]
+    kind: time_series
+    location: "Figs. 3 ff. (acrylamide, reducing sugar, asparagine, pH, browning; figure numbers not given in dossier; not digitised)"
+    status: figure_only
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "180 C for 10, 20 and 30 min"
+    flags: [ph_start_only, vessel_not_stated, status_uncertain]
+    note: "3 times per arm; Asn and sugar loss plus pH drift in an acrylamide pot would constrain the lane's precursor balance. HMF figure in trunk lin2022_text_hmf_fructose_asparagine_180c."
+  - id: ye2024_fig1_tab1_acrylamide_glucose_asparagine_tea_inhibitors
+    dossier: ye2024_extraction.md
+    paper: "Ye, Xu, Xie, Peng, Li, Hou, Cai, Song, Peng & Li 2024 Foods 13:2836"
+    lab: "Anhui Agricultural University (Li D.)"
+    system: "equimolar glucose + asparagine (molarity not stated; bundle assumes 0.2 M), +/- 26 tea components at 0.1-10 g/mol Asn"
+    medium: "0.1 M phosphate buffer pH 6.86, 4 mL in 25 mL thick-walled pressure tube, oil bath"
+    temperature_c: [180]
+    ph: {initial: [6.86], measured_during: false, final: null}
+    time_min: [30]
+    species: [acrylamide]
+    kind: endpoint
+    location: "control: sec. 3.1 text with Fig. 1; 26 inhibitors: Table 1 (not transcribed in dossier)"
+    status: in_model_check
+    quant_class: sida
+    simulable: true
+    condition_quote: "an equimolar solution of glucose and asparagine ... in phosphate buffer (0.1 M, pH 6.86) ... 180 C and kept for 30 min"
+    flags: [ph_start_only, concentrations_not_stated]
+    note: "Control scored in mp_holdout_glucose_asparagine_180C_Ye2024 (umol/mol Asn). Table 1 inhibitor screen untranscribed (inhibitors not in model). Molarity assumed from Knol 2005 method."
+  - id: unlu2002_tab5_twin_screw_rtd_cornmeal
+    dossier: unlu2002_extraction.md
+    paper: "Unlu & Faller 2002 J Food Eng 53:115"
+    lab: "unknown (Faller)"
+    system: "degermed yellow cornmeal, 25 % moisture (wet basis); KCl tracer residence time distribution"
+    medium: "WP ZSK-30 co-rotating twin-screw extruder, L/D 38.7, five zones 40/80/100/120/140 C; 3 feed rates x 3 screw speeds, two replications"
+    temperature_c: [40, 80, 100, 120, 140]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [residence_time]
+    kind: other
+    location: "Table 5 (9 cells: GMRT, +/-1 SD limits, spread, barrel fill; transcribed dossier sec. 2); marginal means Tables 3-4; process regressions Tables 7-8 (not taken)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "3 x 3 factorial, two replications: feed rate 8.55 / 14.3 / 20.0 kg/h x screw speed 150 / 250 / 350 rpm"
+    flags: [matrix_food, status_uncertain]
+    note: "Thermal-history input for the B3 extrusion fit row (Ma 2024): 150 rpm / 8.55 kg/h cell matches Ma's pot; ~37 s at 130 C (equal-zone assumption) vs bundle's 25 s. Cited in the bundle's provenance note (B45) but the 25 s was not changed. Different feed (starch meal vs 90 % SPI)."
+  - id: yu2012_tab1_twin_screw_rtd_spi_corn_flour
+    dossier: yu2012_extraction.md
+    paper: "Yu, Meng, Ramaswamy & Boye 2014 J Food Process Preserv (10.1111/jfpp.12005)"
+    lab: "McGill (Ramaswamy)"
+    system: "corn flour : soy protein isolate 4:1 (20 % SPI); tracer residence time distribution"
+    medium: "co-rotating twin-screw extruder; screw speed 75/100/125 rpm x feed moisture 25/30/35 % x die 3/5 mm (barrel temperatures not given in dossier)"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [residence_time]
+    kind: other
+    location: "Table 1 (18 runs: FPRT, ECT, tm, tv; transcribed dossier sec. 2)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "higher screw speed, higher initial moisture content and larger die diameter resulted in a shorter mean residence time"
+    flags: [matrix_food]
+    note: "Thermal-history input for the B3 extrusion fit row (Ma 2024, 30 % moisture, 150 rpm): runs 3/6 give tm 40-44 s at 125 rpm vs bundle's unsourced 25 s. Noted in WAVES B37; nothing changed. Stem says 2012, paper is 2014 per reading list."
+  - id: k6b_sec1a_hidalgo2011_ea_acrylamide_cysteine
+    dossier: k6b_adduct_kinetics_synthesis.md
+    paper: "Hidalgo et al. 2011 (as quoted by Hamzalioglu & Gokmen 2018; synthesis Wave K6b 2026-08-30)"
+    lab: "Seville (Zamora / Hidalgo)"
+    system: "acrylamide + cysteine (thia-Michael addition, acrylamide elimination)"
+    medium: "not stated (secondary quote)"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide, cysteine]
+    kind: rate_constant
+    location: "k6b sec. 1a Ea ladder row (one Ea value; via hamzalioglu2018 sec. 9 S9)"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: "acrylamide + cysteine | Cys | activated alkene | -- | -- | Hidalgo 2011, via hamzalioglu2018 | [C]"
+    flags: [secondary_source, concentrations_not_stated, condition_uncertain]
+    note: "Primary (Hidalgo 2011) not on disk; T range unknown. Same reaction class as hidalgo2010 thiol 28-30 kJ/mol and De Vleeschouwer 2009 II Ea_E2. The k6b Asn-decarboxylation Ea (81) is indexed under hidalgo2015; all other k6b rows re-tabulate dossiered papers."
+  - id: research_round3_a32_ma2022_acrylamide_first_order_glucose_asparagine_linoleic
+    dossier: research_round3_channels.md
+    paper: "Ma et al. 2022 Front Nutr 9:940202 (10.3389/fnut.2022.940202), as read by round-3 research 2026-08-29"
+    lab: "unknown (Ma et al.)"
+    system: "glucose 60 mg + asparagine 50 mg + linoleic acid 16 mg in 2 mL (approx. 0.17 M Glc, 0.19 M Asn)"
+    medium: "0.1 M phosphate buffer pH 7.4, sealed tubes"
+    temperature_c: [160, 180, 200]
+    ph: {initial: [7.4], measured_during: false, final: null}
+    time_min: [1, 15]
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 3 (first-order formation k at 3 T + Ea; transcribed in round-3 sec. A.3.2 from the Frontiers HTML); time courses in the paper's figures (not on disk)"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: true
+    condition_quote: "Glucose (60 mg) + asparagine (50 mg) + linoleic acid (16 mg) in 2 mL 0.1 M phosphate buffer pH 7.4, sealed tubes, 160 / 180 / 200 C, 1-15 min"
+    flags: [secondary_source, ph_start_only, status_uncertain]
+    note: "Primary not on disk (no dossier; PDF absent). Per-compound exponential fits; acrylamide k moves only 1.4x over 40 C -> plateau-limited, Ea (~13 kJ/mol) REFUSED by round 3. Lipid co-reactant (linoleic acid) not in the acrylamide lane. Underlying time courses worth retrieving."
