@@ -114,7 +114,12 @@ def strip_volatile(value: Any) -> Any:
 #: Cross-architecture floating-point reproducibility measured 2026-09-03: the same scorecard on
 #: linux/arm64 vs linux/amd64 differs by at most 7e-8 relative over 49 rows. 1e-6 is a decision-safe
 #: tolerance (the 3x band is six orders away) that still catches any real parameter or data change.
-FLOAT_REL_TOL = 1e-6
+#: Raised to 1e-5 on 2026-10-29: since 2026-09-14 the artifacts are generated natively on macOS/arm64,
+#: not in the linux container, and B60's converged pH fixed point amplifies the libm/BLAS differences:
+#: a directional log10 step came out -2.0234185 here and -2.0234152 on the x86 CI runner (1.6e-6
+#: relative), which failed PR #27's freshness check. 1e-5 is still five orders below the 3x band (the
+#: B2.4 test's cross-platform tolerance is 1e-5 for the same reason).
+FLOAT_REL_TOL = 1e-5
 
 
 #: Absolute floor for float comparison: differences below it are numerical noise around zero
