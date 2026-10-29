@@ -46,6 +46,21 @@ B8_RELATIVE_DIFF_STEP = 3e-2  # recorded for the comparison test only
 #: checks these equal B8's.
 THRESHOLDS: Dict[str, float] = {"Ea": 60.0, "log10k": 3.0, "acid_yield": 0.5, "pka": 1.5}
 STEPS: Dict[str, float] = {"Ea": 2.0, "log10k": 0.05, "acid_yield": 0.01, "pka": 0.1}
+#: Kinds B8 did not have (sub-model 1, 2026-10-29; design review S3), kept apart so the table above stays B8's: a pH
+#: slope in decades per pH unit (identified within half the width of Martins 2003's measured band, 0.37-0.92) and a
+#: log10 offset of a rate constant from its tabulated value.
+EXTRA_THRESHOLDS: Dict[str, float] = {"ph_slope": 0.25, "log10_offset": 0.5}
+EXTRA_STEPS: Dict[str, float] = {"ph_slope": 0.05, "log10_offset": 0.05}
+
+
+def _threshold(kind: str) -> float:
+    return THRESHOLDS[kind] if kind in THRESHOLDS else EXTRA_THRESHOLDS[kind]
+
+
+def _step(kind: str) -> float:
+    return STEPS[kind] if kind in STEPS else EXTRA_STEPS[kind]
+
+
 NULL_WEIGHT_TOL = 1e-6
 #: On a bound when within this fraction of the band width of it (B8).
 BOUND_FRACTION = 1e-3
@@ -69,10 +84,13 @@ class Problem:
     #: degrees of freedom the residuals have already spent on nuisance parameters for these rows (a
     #: ``MeasurementModel``'s scale-free series: one each); subtracted wherever a reduced chi-square is formed
     nuisance_dof: Callable[[Tuple[Any, ...]], int] = field(default=lambda rows: 0)
+    #: optional: residuals at many points in one call (a caller that can flatten points x work items over the
+    #: workers; sub-model 1's fit runs every pot of every Jacobian point in one pool). Must equal [residuals(x, rows)].
+    evaluate_many: Optional[Callable[[Sequence[np.ndarray], Tuple[Any, ...]], List[np.ndarray]]] = None
 
     def __post_init__(self):
         assert len(self.keys) == len(self.kinds) == len(self.lower) == len(self.upper), "keys, kinds and bounds must align"
-        assert all(k in THRESHOLDS for k in self.kinds), f"unknown coordinate kind in {self.kinds}"
+        assert all(k in THRESHOLDS or k in EXTRA_THRESHOLDS for k in self.kinds), f"unknown coordinate kind in {self.kinds}"
         assert np.all(np.asarray(self.lower) < np.asarray(self.upper)), "every band must have positive width"
 
     def evaluate(self, theta: np.ndarray, rows: Optional[Tuple[Any, ...]] = None) -> np.ndarray:
@@ -144,6 +162,14 @@ def _evaluate_all(problem: Problem, points: Sequence[np.ndarray], rows) -> List[
     (2026-10-29, strategy M2). The points of a finite-difference Jacobian are equal-sized, independent
     objective evaluations: the coarsest grain, so it scales where pot-level parallelism stalls on the
     slowest pot. Bit-identical to the serial loop (tests/unit/test_fitting.py)."""
+    if problem.evaluate_many is not None:
+        rows_ = problem.rows if rows is None else rows
+        try:
+            values = problem.evaluate_many([np.asarray(x, dtype=float) for x in points], rows_)
+        except Exception:
+            values = None
+        if values is not None:
+            return [np.where(np.isfinite(r), r, problem.failed_residual) for r in map(np.asarray, values)]
     return parallel.map_ordered(lambda x: problem.evaluate(x, rows), points)
 
 
@@ -153,7 +179,7 @@ def _forward_jacobian(problem: Problem, theta, lower, upper, f_many) -> np.ndarr
     theta = np.asarray(theta, dtype=float)
     steps, points = [], [theta]
     for j, kind in enumerate(problem.kinds):
-        h = STEPS[kind] if theta[j] + STEPS[kind] <= upper[j] else -STEPS[kind]
+        h = _step(kind) if theta[j] + _step(kind) <= upper[j] else -_step(kind)
         x = theta.copy()
         x[j] += h
         steps.append(h)
@@ -178,7 +204,7 @@ def laplace(problem: Problem, theta: np.ndarray, rows: Optional[Tuple[Any, ...]]
     # coordinate the step up and / or down that its bounds allow.
     points, plan = [theta], []
     for j, kind in enumerate(problem.kinds):
-        h = STEPS[kind]
+        h = _step(kind)
         up, down = theta[j] + h <= upper[j], theta[j] - h >= lower[j]
         xp, xm = theta.copy(), theta.copy()
         xp[j] += h
@@ -219,7 +245,7 @@ def identification(problem: Problem, theta, sigma, upper: Optional[np.ndarray] =
     for key, kind, t, s, lo, hi in zip(problem.keys, problem.kinds, theta, sigma, problem.lower, upper):
         width = hi - lo
         on = (t - lo) <= BOUND_FRACTION * width or (hi - t) <= BOUND_FRACTION * width
-        ok = bool(np.isfinite(s) and s <= THRESHOLDS[kind])
+        ok = bool(np.isfinite(s) and s <= _threshold(kind))
         at_bound[key], identified[key] = bool(on), bool(ok and not (on and s > 0.1 * width))
     return {"at_bound": at_bound, "identified": identified}
 
@@ -406,7 +432,8 @@ def estimate_series_noise(model: "MeasurementModel", raw_residuals: np.ndarray, 
 
 def fit_with_series_noise(make_problem: Callable[["MeasurementModel"], "Problem"], model: "MeasurementModel",
                           raw_residuals: Callable[[np.ndarray, Tuple[Any, ...]], np.ndarray], start: np.ndarray,
-                          budget: int = 1200, rounds: int = 4, tol: float = 0.05) -> Tuple["Fit", "MeasurementModel"]:
+                          budget: int = 1200, rounds: int = 4, tol: float = 0.05,
+                          estimator: Optional[Callable[..., Dict[str, float]]] = None) -> Tuple["Fit", "MeasurementModel"]:
     """Fit, estimate each series' extra noise from the residuals, refit with it, until the noise estimates move by
     less than ``tol`` (relative) or ``rounds`` is reached. ``make_problem(model)`` builds the Problem whose residuals
     are ``model.whiten(raw_residuals(theta, rows), rows)``. Returns the last fit and the model carrying its noise."""
@@ -419,7 +446,8 @@ def fit_with_series_noise(make_problem: Callable[["MeasurementModel"], "Problem"
         problem = make_problem(current)
         f_ = fit(problem, theta, budget=budget)
         theta = f_.theta
-        new = estimate_series_noise(current, raw_residuals(theta, problem.rows), problem.rows, len(problem.keys))
+        new = (estimator or estimate_series_noise)(current, raw_residuals(theta, problem.rows), problem.rows,
+                                                   len(problem.keys))
         moved = max((abs(new.get(k, 0.0) - noise.get(k, 0.0)) / max(new.get(k, 0.0), noise.get(k, 0.0), 1e-12)
                      for k in set(new) | set(noise)), default=0.0)
         noise = new

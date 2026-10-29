@@ -334,3 +334,10 @@
 - **Verification is scoped to the table that reads the source** (2026-10-29). Keyed by ledger id alone, one
   sub-model's verified reading cleared another sub-model's pending rows under the same id. A permission check keyed
   coarser than the thing it protects leaks across users of the key.
+- **Read a function's sign convention from its code, not from memory** (2026-10-29). The sub-model 1 probe report
+  and prereg said "residual = measured minus predicted"; `fit_rows.residual` returns predicted minus measured. The
+  findings were stated from the numbers and stood, but a reader acting on the label would have read every bias
+  backwards. Labels that describe a computation are written next to the line that computes it.
+- **Pin BLAS / numba threads to one per worker** when forking `MAILLARD_WORKERS` processes beside another parallel
+  job (2026-10-29): the probe batch next to the unit tier drove the load average to ~250 and the probes to ~7 % CPU
+  each. `OMP_NUM_THREADS=OPENBLAS_NUM_THREADS=MKL_NUM_THREADS=NUMBA_NUM_THREADS=1`.

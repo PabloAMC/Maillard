@@ -73,7 +73,34 @@ zhai2023foodchem_fig2 (3-DX / 1-DX semi-quantitative); Kang S3 / S4 re-labelled 
 (the loader also refuses the string "Zhejiang Gongshang (Fu Y / Zhai Y)", absent from `data/keys/laboratories.yml`);
 zhai2021_fig6's conditions in the ledger. Left out pending a digitisation: Zhai 2023 Food Chem Figs. 2-3 at 120 / 140 °C
 (TTCA+Xyl Cys, 3-DX, 1-DX: 60 points with SD bars), Zhai 2021 Fig. 7a (13C5-TTCA, no ledger entry).
-## 3. Cheap probe (step 3) -- TO DO
+## 3. Cheap probe (step 3) -- done 2026-10-29, nothing refitted
+
+`scripts/generators/build_submodel_probe.py --table route_submodel` runs every pot of the READY table on the sulfur lane at the shipped constants and predicts each row in its printed unit (molar masses for ug/L; semi-quantitative series compared in shape only, their scale removed). Two arms: shipped, and with the four pre-registered steps that ship OFF switched on, nothing refitted (B58 TTCA equilibrium, B59b cysteine Amadori route, B59a Strecker sulfur, B61 norfuraneol hydroxide decay). Residual = predicted minus measured (dex). Artifacts: `kinetic_core_route_submodel_probe{,_with_b58_with_b59b_with_b59a_with_b61}.{json,md}`.
+
+| data set (species) | n | shipped RMS | switches on: mean / RMS |
+| --- | --- | --- | --- |
+| Cao 2017 (TTCA, CAMA, Cys, PENT) | 24 | CAMA never formed | -0.16..+0.13 / 0.03-0.31 |
+| Zhao 2017b, same pot (TTCA, CAMA, Cys, PENT) | 23 | Cys +0.61 | -0.20..+0.19 / 0.07-0.22 |
+| Zhai 2019 T-ladder (TTCA / CAMA) | 32 / 29 | 3.37 / never formed | -0.29 / 0.53 ; +0.71 / 0.78 |
+| Zhai 2021 Fig. 4b pH ladder (TTCA) | 41 | 0.71 | -0.35 / 0.41 |
+| Zhai 2021 Fig. 3a T-ladder pH 5.5 (TTCA) | 12 | 4.93 | -1.12 / 1.16 |
+| Zhai 2021 Fig. 6 (Cys / PENT) | 48 / 48 | 1.20 / 1.13 | +1.07 / 1.15 ; +0.10 / 0.17 |
+| Zhang 2025b (TTCA, CAMA, PENT, Cys) | 31 | PENT 10.0 | -0.10..+0.66 / 0.25-0.79 |
+| Zhai 2023 Food Chem / JAFC (Cys / CAMA) | 24 / 45 | 0.40 / never formed | +0.43 / 0.65 ; -0.32 / 0.83 |
+
+**Findings.**
+1. **The shipped route is wrong because two measured steps ship off.** Without B58 (TTCA <-> Cys + pentose at its
+   measured equilibrium) a charged TTCA can only decay (Zhai 2021 Fig. 3a: 4.9 dex), and without B59b the cysteine
+   Amadori compound is never formed (92 rows predicted zero). With both on, and nothing refitted, the route lands
+   within ~x3 on most rows of five papers from two laboratories. This is independent evidence for B58 / B59b; the
+   evidence audit for switching them on belongs to Phase 3's single regeneration (strategy sec. 7.6), and this probe
+   is its input.
+2. **Open misfits with the switches on:** TTCA at 120-140 C, pH 5.5 decays ~13x too fast (Zhai 2021 Fig. 3a); free
+   cysteine in Zhai 2021 Fig. 6 is lost ~12x too slowly (+1.07: the model keeps too much); the cysteine Amadori
+   compound is ~5x too high in Zhai 2019 and Zhang 2025b and ~2x low in Zhai 2023 JAFC.
+3. **Decision:** sub-model 2's fit is deprioritised. Its remaining misses are factor 2-13, while sub-model 3's
+   methylglyoxal miss is 10^2-10^4 on calibrated data from seven papers (a missing route) and feeds the MFT path;
+   that comes first (tasks/overnight_log_2026-10-29.md, checkpoint 1).
 ## 4. Design (step 4) -- TO DO
 ## 5. Design review (step 5) -- TO DO
 ## Amendments

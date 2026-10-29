@@ -48,3 +48,12 @@ def test_a_diluted_buffer_divides_every_molarity():
 
 def test_formic_plus_acetic_counts_the_lumped_pool_at_the_calibrated_yield():
     assert obs.formic_plus_acetic({"FA": 1.0, "AA": 2.0, "ACID": 10.0}, DRIFT) == pytest.approx(7.0)
+
+
+def test_amounts_convert_to_the_printed_unit():
+    assert obs.amount_in("umol_L", "MGO", 0.5) == pytest.approx(500.0)
+    assert obs.amount_in("ug_L", "MFT", 1e-3) == pytest.approx(114.16)     # 1 umol/L of MFT is 114.16 ug/L
+    assert obs.amount_in("ug_kg", "FUR", 1.0) == pytest.approx(96080.0)
+    assert obs.amount_in("percent_of_unheated", "FFT", 0.25, 1.0) == pytest.approx(25.0)
+    with pytest.raises(ValueError):
+        obs.amount_in("percent_of_unheated", "FFT", 0.25, 0.0)

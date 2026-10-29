@@ -91,7 +91,7 @@ Three arms, ~40 s each on 8 cores:
 | Zhao 2017b, same pot, 6x diluted (pH) | 18 | 0.77 | 0.77 | 0.77 |
 | Zhou 2023 ARP +/- Cys, final pH | 6 | 0.98 | 0.98 | 0.98 |
 
-RMS residual: pH units for pH, dex (log10 measured / predicted) for amounts. Artifacts:
+RMS residual: pH units for pH, dex (log10 predicted / measured) for amounts; a negative mean is a model below the data. Artifacts:
 `kinetic_core_ph_acid_submodel_probe{,_trunk_ph_dynamic,_trunk_ph_dynamic_without_k_aa_frag}.{json,md}`.
 
 **Findings.**
@@ -166,5 +166,47 @@ pH-stat data fail worst, because the failure is in the acid supply's pH dependen
   also requires the fit to hold with Wageningen left out.
 - **Duplicates:** Martins 2003 Part II replots the 2003b acids (CF-018), and the trunk's measured acid constants come
   from those data; the rival arm must not count them twice.
-## 5. Design review (step 5) -- TO DO
+## 5. Design review (step 5) -- done 2026-10-29, before any fit
+
+An independent reviewer (read-only, the prereg, the fit script, the probe, the engine changes, the table) raised
+seven BLOCKING issues, nine SHOULD-FIX and notes. Every blocking one is addressed below; the fit as first written was
+not run (a two-iteration smoke test checked mechanics only and was deleted).
+
+| # | issue | response |
+| --- | --- | --- |
+| B1 | priors from Martins 2003 Table 3 are fitted to the 2003b rows in this table: data used twice | priors dropped; slopes FLAT in [0, 1.5] |
+| B2 | Martins 2005's trunk constants average the drift from pH 6.8 ("concealed in the rate constants"); sloping them along the drift counts it twice | a free log10 offset per sloped step (the constant-pH value at the reference is fitted, not the tabulated one) |
+| B3 | a pH-stat run (Davidek, held at 90 C) handed the pH tables its hot set-point, drifting pots their 25 C pH | `integrate_sulfur(clamp_ph_label=...)`: the held state's 25 C pH, computed from the SID that holds the set-point hot |
+| B4 | glycine, DFG and the Schiff base not in the charge balance (the module's own gap list: "a defect the day the trunk gets a pH state") | `ph_state.TRUNK_SOLUTES_IN_BALANCE` (OFF by default): glycine at GKL's constants; AMA and SB as the Amadori-compound class (as ARP and CAMA) |
+| B5 | Davidek's NaOH uptake counts acids the lane cannot make (NaOH / (FA+AA) = 2.2 at pH 5 to 1.1 at pH 8) | NaOH uptake diagnostic only (reported at the optimum, not fitted) |
+| B6 | Zhao 2017b's hexanal / decadienal pots were fitted as blanks (the aldehyde binds cysteine) | excluded, as heptenal |
+| B7 | uncentred per-series noise turned bias into noise; leave-one-out kept the held-out lab's noise: done-tests pass by construction | noise per data set x observable from scatter WITHIN each series around its own mean; re-estimated on the kept rows in each fold; done-tests on RAW residuals against the tolerances below |
+| S1 | one shared Amadori slope cannot fit the pattern | per-step slopes for k_ama_tdg and k_ama_odg (k_ama_mgo tied to k_ama_odg: no row here sees MGO), the formic exit separate |
+| S3 | slopes could not fail identification (log10k threshold 3) | new kinds in `fitting`: ph_slope (0.25 dec / pH), log10_offset (0.5 dex); B8's table untouched |
+| S4 | k_aa_frag's Ea pinned at its bound; A/B compared by laboratory | Ea free in arm A (20-160 kJ/mol); A vs B read per data set |
+| S5 | done-test 2 needs buffer / sugar / amine attributes | added to the diagnostics; phosphate catalysis (Davidek pH 5: 3.3 vs 11 mmol/L) pre-registered as an expected flag; done-test 4 (carbon) cannot be run on this table and is stated as not run; done-test 6's pathway-yield rival deferred to the pentose block's follow-up |
+| S6 | one start | two starts (`fitting.two_starts`, the second on the other side of every band) |
+| S7 | inline vs fixed point not checked at the fitted settings | re-checked with both switches on: max 7e-4 over 409 rows; the optimum is re-scored on the fixed point |
+| S8 | failures silent | failed pot runs counted and reported |
+| S9 | thread oversubscription | BLAS / numba threads pinned to 1, niced, 9 workers (owner: the machine is free overnight) |
+
+**Declared before the fit (done-test 1 and 5, raw residuals):** a data set x observable passes when its RMS raw
+residual is within 0.30 pH units (pH, diluted pH) or 0.30 dex (x2) for amounts. Done-test 1 passes when at least
+three of four laboratories pass on every data set they hold, in their leave-one-laboratory-out fold.
+
+**Hold-outs (done-test 5), one per block, from data not looked at:**
+- hexose block: Martins 2005b Fig. 5 (constant pH, pH-stat) and Fig. 7 at initial pH 4.8 / 5.5 / 6.0 / 7.5 (formic
+  and acetic acid, 100 C). Being read now by two readers; the fitted model's curves on a dense time grid are frozen
+  to a file before their rows are compared. The pH-stat series tests B2 directly (a constant-pH reference).
+  DISCLOSURE: the second reader's report quoted four hold-out values (pH 7.5 and the pH-stat, formic and acetic acid
+  at 120 min) to the lead before the predictions were frozen. No design choice depended on them: the fit's code and
+  this section were committed before the fits started, and the frozen curves come mechanically from the fitted
+  vectors.
+- pentose block: none unseen that the lane can simulate (Chen 2000 / 2002's oven heating has no stated internal
+  temperature). The BTBU (Cao, Zhao) fold is reported as "seen at the probe", not as a blind test.
+
+**Expected result (written now):** arm B (no acetic-acid sink) wins on the DFG data and loses less than 0.1 dex on
+Martins 2005 once the reference offsets are free (P = 0.55); the Amadori slopes land inside Martins' 0.37-0.92 band
+(P = 0.6); the pentose acid yield stays poorly identified or on a bound (P = 0.6), which would send the 0.4 M
+over-acidification to the mechanism step; done-test 1 passes (P = 0.3).
 ## Amendments

@@ -69,3 +69,25 @@ def formic_plus_acetic(state: Mapping[str, float], drift: PhDrift) -> float:
     """Formic + acetic acid, mmol/L: the trunk's measured pools (FA, AA) plus the lumped organic-acid pool at the
     calibrated yield (``ACID``, the pentose sink's acid, which the charge balance counts at the same yield)."""
     return float(state.get("FA", 0.0) + state.get("AA", 0.0) + float(drift.acid_yield) * state.get("ACID", 0.0))
+
+
+#: Mass per kilogram is read as mass per litre: the pots are dilute aqueous solutions (density 1.00-1.05 kg/L, under
+#: 0.02 dex); a matrix of another density is not a fit-table pot.
+_PER_LITRE = {"mmol_L": 1.0, "umol_L": 1e3}
+_MASS_PER_LITRE = ("ug_L", "ug_kg")
+
+
+def amount_in(unit: str, species: str, mmol_l: float, initial_mmol_l: float = 0.0) -> float:
+    """A predicted concentration (mmol/L) in the unit a row was printed in: mmol/L or umol/L; ug/L or ug/kg through the
+    engine's molar mass (``species_sulfur.MOLECULAR_WEIGHT_G_PER_MOL``); percent of the unheated amount."""
+    if unit in _PER_LITRE:
+        return float(mmol_l) * _PER_LITRE[unit]
+    if unit in _MASS_PER_LITRE:
+        from .species_sulfur import MOLECULAR_WEIGHT_G_PER_MOL
+
+        return float(mmol_l) * float(MOLECULAR_WEIGHT_G_PER_MOL[species]) * 1e3
+    if unit == "percent_of_unheated":
+        if initial_mmol_l <= 0.0:
+            raise ValueError(f"{species}: a percent of the unheated amount needs a charged amount")
+        return 100.0 * float(mmol_l) / float(initial_mmol_l)
+    raise KeyError(f"no conversion to {unit!r}")

@@ -1195,6 +1195,9 @@ SULFUR_STOICHIOMETRY: np.ndarray = sulfur_stoichiometric_matrix()
 #: the same at pH 5 and pH 8 (Davidek 2002's pH-stat measures 3 vs 79 mmol/L). The no-refit probe that found it:
 #: results/validation/kinetic_core_ph_acid_submodel_probe*.md. The evidence audit decides whether it ships.
 TRUNK_PH_TERMS: bool = False
+#: Slopes (decades per pH unit) that replace the measured ones, by parameter key: set by a fit at run time (sub-model
+#: 1, scripts/generators/fit_ph_acid_submodel.py), empty otherwise.
+TRUNK_PH_EXPONENT_OVERRIDE: Dict[str, float] = {}
 
 
 def _trunk_ph_exponents() -> Dict[str, float]:
@@ -1203,6 +1206,7 @@ def _trunk_ph_exponents() -> Dict[str, float]:
     out = {key: float(_tc.PH_EXPONENT_DECADES_PER_UNIT) for key in _tc.PH_STEPS}
     if _tc.THREE_DEOXY_EXIT_PH_TERM:
         out.update({key: float(exponent) for key, (exponent, _band, _source) in _tc.THREE_DEOXY_EXIT_PH.items()})
+    out.update({key: float(v) for key, v in TRUNK_PH_EXPONENT_OVERRIDE.items() if key in out})
     return out
 
 
@@ -1658,13 +1662,15 @@ def _integrate_inline_ph(parameters, y0, eval_times, duration, temperature_of, s
 
     warm_solve = solve_ph_and_ionic_strength_compiled if ph_kernel.COMPILED else solve_ph_and_ionic_strength_warm
 
-    index = [SULFUR_INDEX[k] for k in _TITRATABLE_KEYS]
+    # sub-model 1 (design review B4): the trunk's solutes join the balance when ph_state says so
+    keys = _TITRATABLE_KEYS + (("Gly", "AMA", "SB") if _ph.TRUNK_SOLUTES_IN_BALANCE else ())
+    index = [SULFUR_INDEX[k] for k in keys]
     use_label = bool(_ph.B51.label_scale_tables)
     memo = {"ph": None, "i": 0.0, "cool": None}
 
     def state_ph(y, temperature):
         inventory = titratable_inventory(
-            {k: float(max(y[i], 0.0)) for k, i in zip(_TITRATABLE_KEYS, index)}, drift, spec)
+            {k: float(max(y[i], 0.0)) for k, i in zip(keys, index)}, drift, spec)
         if memo["ph"] is None:
             from .ph_state import solve_ph_and_ionic_strength
             ph, ionic = solve_ph_and_ionic_strength(temperature, sid, inventory)
@@ -1723,9 +1729,14 @@ def integrate_sulfur(
     ph_iterations: int = 3,
     sid_mmol_l: Optional[float] = None,
     temperature_profile: Optional[Tuple[Sequence[float], Sequence[float]]] = None,
+    clamp_ph_label: Optional[float] = None,
 ) -> SulfurRun:
     """
     Integrate the sulfur network at one temperature and one pH TRAJECTORY.
+
+    ``clamp_ph_label`` (sub-model 1, 2026-10-29; design review B3): for a CLAMPED run whose pH was held at the reaction
+    temperature (a pH-stat read hot), the held state's pH on the 25 C label scale, which the measured pH-indexed
+    tables read under B51. Without it a clamped run hands those tables the in-situ set-point, as before.
 
     B64 (2026-10-28): or along a recorded TEMPERATURE PROFILE. ``temperature_profile`` is
     ``(times_min, temperatures_K)``, piecewise linear from t = 0; the rate constants (and the
@@ -1922,7 +1933,7 @@ def integrate_sulfur(
                 for tk, p in zip(_node_temperatures(node_times), node_ph_line)
             ])
         elif ph1 == ph0:
-            k_fixed = rate_vector(sulfur_rate_constants_at(parameters, t_k, ph0))
+            k_fixed = rate_vector(sulfur_rate_constants_at(parameters, t_k, ph0, ph_label=clamp_ph_label))
             node_times = np.array([0.0, duration])
             k_nodes = np.array([k_fixed, k_fixed])
         else:

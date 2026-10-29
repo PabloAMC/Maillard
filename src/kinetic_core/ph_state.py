@@ -416,6 +416,14 @@ TTCA_GROUP = TitratableGroup(
     "ammonium (-57) [GKL Table 7.31].",
     (-139.0, -57.0))
 
+#: Sub-model 1 (2026-10-29): glycine, the trunk's amine, for the charge balance once the trunk's steps run under a
+#: pH that moves (sulfur.TRUNK_PH_TERMS). Goldberg, Kishore & Lennen 2002 values, the source the module's other
+#: amino acids cite.
+GLYCINE = TitratableGroup(
+    "glycine", "glycine (COOH / NH3+)", (2.351, 9.780), (4.0, 44.2), 1.0,
+    "pK 2.351 / 9.780, dH_ion 4.0 / 44.2 kJ/mol, dCp -139 / -57 J/(K mol) [GKL]",
+    (-139.0, -57.0))
+
 #: --- the BUFFERS ----------------------------------------------------------
 PHOSPHATE = TitratableGroup(
     "phosphate", "orthophosphate (H3PO4)",
@@ -627,6 +635,11 @@ class PhDrift:
 _ACID_POOL_KEYS = ("ACID",)
 
 
+#: Sub-model 1 (2026-10-29), pre-registered with the switch OFF: glycine, the Amadori compound and the Schiff base of
+#: the trunk in the charge balance (results/validation/kinetic_core_ph_acid_submodel_prereg.md sec. 5, review B4).
+TRUNK_SOLUTES_IN_BALANCE: bool = False
+
+
 def titratable_inventory(
     concentrations: Mapping[str, float], drift: PhDrift, buffer_spec: BufferSpec
 ) -> Tuple[Tuple[TitratableGroup, float], ...]:
@@ -668,6 +681,19 @@ def titratable_inventory(
     cama = float(concentrations.get("CAMA", 0.0))
     if cama > 0.0:
         out.append((drift.arp_group(), cama))
+    # Sub-model 1 (2026-10-29, design review B4): the trunk's solutes, once the trunk runs under a moving pH.
+    # Glycine at its measured constants; its Amadori compound (AMA, N-(1-deoxy-D-fructos-1-yl)glycine) and its Schiff
+    # base (SB) titrated as the Amadori-compound class the drift already calibrates for the pentose ARP and the
+    # cysteine Amadori compound (a carboxyl and a secondary-amine nitrogen). Off by default: every shipped number is
+    # unchanged, and UNTRACKED_TITRATABLE still describes the shipped balance.
+    if TRUNK_SOLUTES_IN_BALANCE:
+        gly = float(concentrations.get("Gly", 0.0))
+        if gly > 0.0:
+            out.append((GLYCINE, gly))
+        for key in ("AMA", "SB"):
+            amount = float(concentrations.get(key, 0.0))
+            if amount > 0.0:
+                out.append((drift.arp_group(), amount))
 
     # -- B2.3: the carboxyl centres the sinks CARRY OUT of a consumed --------
     #    molecule. FULL STRENGTH: a carboxyl carried out of a molecule that

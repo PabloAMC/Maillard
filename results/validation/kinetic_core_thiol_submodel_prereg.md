@@ -112,7 +112,30 @@ Two rows enter the table once double-read: Li 2022's two free-cysteine H2S point
 replicated pair, if Met is carried). Expected result for the H2S arm revised from ~85 % "stays the weakest link" to
 ~70 %: the sink's existence has a lead, its rate does not.
 
-## 3. Cheap probe (step 3) -- TO DO
+## 3. Cheap probe (step 3) -- done 2026-10-29, nothing refitted
+
+`scripts/generators/build_submodel_probe.py --table thiol_submodel` runs every pot of the READY table on the sulfur lane at the shipped constants and predicts each row in its printed unit (molar masses for ug/L; semi-quantitative series compared in shape only, their scale removed). Two arms: shipped, and with the four pre-registered steps that ship OFF switched on, nothing refitted (B58 TTCA equilibrium, B59b cysteine Amadori route, B59a Strecker sulfur, B61 norfuraneol hydroxide decay). Residual = predicted minus measured (dex). Artifacts: `kinetic_core_thiol_submodel_probe{,_with_b58_with_b59b_with_b59a_with_b61}.{json,md}`.
+
+**Findings.**
+1. **Hexose + cysteine makes no MFT and no norfuraneol** (Hofmann 1998 T1 / T2 / T5: glucose, fructose; predicted
+   exactly 0 against 19-25 ug/L MFT and 135 ug/L norfuraneol). **Corrected 2026-10-29 (literature check):** the lane
+   DOES run the trunk's amine-free hexose steps (r_glc_tdg, r_fru_odg, r_tdg_mgo), so glucose + Cys makes MGO and
+   1-mercapto-2-propanone; MFT is zero because hexose hydroxyacetaldehyde comes only from r_glc_c2c3 (at its band
+   floor) and there is no hexose -> C5 entry. Labelling on disk (Du 2023: Cys + [13C6]glucose, MFT 0 : 5 = 52 : 48,
+   mixed isotopomers < 1 %; Zhao 2019b with GSH: 50 : 47) says hexose MFT keeps an intact glucose C5: the missing
+   step is a hexose -> C5 entry (C-6 or C-1 loss), not more C2 + C3. Candidate: ODG or Glc -> DPO (+ C1); falsified
+   if it predicts the ribose NF / MFT ratio (~10^3) against Hofmann's 7 for glucose, in which case the entry is at
+   1,4-dideoxypentosone (bypassing NF). Hofmann T9's mercaptopropanone from glucose + Cys (pH 3 / 5 / 7) is not yet
+   a fit row and tests the existing hexose -> MGO flux.
+2. **The pH direction of the thiols is wrong at pH 7** (ribose + Cys, Hofmann T2): MFT 46x low, FFT 46x high; at
+   pH 3 both within 2x. CF-012 / CF-017 (conflict analyses) already point here.
+3. **MFT at 100 C is 10-60x low early** (Schieberle 2000, isotope dilution), and FFT's shape is wrong (too low
+   before 1 h, 3-5x high at 6-12 h).
+4. The fed-precursor pots (H2S + furfural / norfuraneol / C2 + C3, Hofmann T3 / T4 / T8 / T10) are within 0.03-0.8
+   dex: they were B2.3's fit data, so this is in-sample. Semi-quantitative Jiangnan series are within 0.2-0.8 dex
+   in shape. Yiltirak 2026's buffered arm: FFT ~120x high.
+5. **Order:** the thiol constants are not fitted before the two missing routes (finding 1 here, finding 2 of the
+   deoxyosone probe) are defined, because a thiol fit would absorb them (the k_aa_frag lesson).
 ## 4. Design (step 4) -- TO DO
 ## 5. Design review (step 5) -- TO DO
 ## Amendments

@@ -93,7 +93,30 @@ furfural 21, norfuraneol 7. Decisions that change the fit:
   Meynier's and Cerny's furfural / MFT ratios side with Schieberle. Until settled, Hofmann's furfural row enters with
   the conflict's width, not its printed 10 %.
 
-## 3. Cheap probe (step 3) -- TO DO
+## 3. Cheap probe (step 3) -- done 2026-10-29, nothing refitted
+
+`scripts/generators/build_submodel_probe.py --table deoxyosone_submodel` runs every pot of the READY table on the sulfur lane at the shipped constants and predicts each row in its printed unit (molar masses for ug/L; semi-quantitative series compared in shape only, their scale removed). Two arms: shipped, and with the four pre-registered steps that ship OFF switched on, nothing refitted (B58 TTCA equilibrium, B59b cysteine Amadori route, B59a Strecker sulfur, B61 norfuraneol hydroxide decay). Residual = predicted minus measured (dex). Artifacts: `kinetic_core_deoxyosone_submodel_probe{,_with_b58_with_b59b_with_b59a_with_b61}.{json,md}`.
+
+**Findings.**
+1. **Deoxyosone SHAPES are right; their levels are unknowable here.** 3-DX and 1-DX are semi-quantitative (CF-062)
+   and compared in shape only: 3-DX within 0.02-0.40 dex RMS across eight data sets; 1-DX within 0.10-0.41 with the
+   route switches on (it was 0.7-2.5 shipped: B59b's route through the cysteine Amadori compound is what gives 1-DX
+   its time course).
+2. **Methylglyoxal is 10^2-10^4 too low in every pentose system, on calibrated data:** Zhai 2021 Fig. 5 (-3.9 dex
+   mean with the switches on), Zhai 2023 Food Chem (-4.1), Zhai 2023 JAFC (-4.3), Zhou 2022 (-2.1), Zhou 2023c
+   (-1.9), Zhou 2024 (-2.8), Zhou 2025b (-1.8; xylose alone -3.1). **Corrected 2026-10-29 (literature check):** the
+   pentose C2 + C3 step EXISTS (`r_dpo_c2c3`, 1-deoxypentosone -> hydroxyacetaldehyde + MGO) but ships at log10 k
+   -3.0 at 145 C against k_dpo_nf +0.43, i.e. ~3e-4 of 1-DX's exits; B2.3 / B60 fitted it on MFT rows only and no
+   MGO row ever touched it. So this is a branching constant (and possibly its parent), not a missing node. The pH
+   ladder (Zhai 2021 Fig. 5: MGO 13 -> 57 uM with 1-DX 25 -> 74 while 3-DX falls 520 -> 86) says MGO tracks the
+   1-deoxy branch. 1-deoxypentos-2,3-diulose has no direct retro-aldol to C3 + C2 (its retro-aldol gives C4 + HCHO),
+   so the parent is open. Design: three pre-registered single-step topologies -- (a) refit `r_dpo_c2c3`, (b) a
+   base-favoured PENT / ARP -> MGO + HA step with an amine-free twin, (c) norfuraneol -> MGO (Mikami 2017) -- fitted
+   on the 135 calibrated MGO rows with the MGO sinks held, judged against the 1-DX pH trend, the norfuraneol rows
+   and Cerny's >= 93 % intact-C5 MFT labelling. Glycolaldehyde (HA) has no rows anywhere: Hofmann 1999 (doi
+   10.1007/s002170050468) would pin it.
+3. Glyoxal (44 rows) is not an engine species; furfural from the xylose-alanine ARP at 120 C is ~8x low (Zhou
+   2025b, calibrated); norfuraneol (Hofmann, Mikami, Desclaux) is within 0.02-0.12 with B61 on.
 ## 4. Design (step 4) -- TO DO
 ## 5. Design review (step 5) -- TO DO
 ## Amendments

@@ -314,3 +314,24 @@ def test_fit_with_series_noise_recovers_the_rate_when_one_series_states_a_tiny_e
     assert mm.extra_noise["vector"] == pytest.approx(0.05, rel=0.5)
     # the honest series' TOTAL error stays near its true 0.05 (12 points: the moment estimate fluctuates ~40 %)
     assert math.sqrt(0.05 ** 2 + mm.extra_noise.get("table", 0.0) ** 2) < 0.08
+
+
+def test_evaluate_many_is_used_for_batches_and_must_match_the_single_evaluation():
+    # sub-model 1 (2026-10-29): a flattened batch evaluation feeds the Jacobian; non-finite values become the
+    # failed residual exactly as in the single-point path
+    calls = []
+
+    def residuals(theta, rows):
+        return np.array([theta[0] - 1.0, theta[1] + 2.0])
+
+    def many(points, rows):
+        calls.append(len(points))
+        out = [residuals(x, rows) for x in points]
+        out[-1] = np.array([np.nan, 0.0])
+        return out
+
+    problem = fitting.Problem(keys=("a", "b"), kinds=("ph_slope", "log10_offset"), lower=np.array([0.0, -3.0]),
+                              upper=np.array([2.0, 3.0]), rows=(1, 2), residuals=residuals, evaluate_many=many)
+    values = fitting._evaluate_all(problem, [np.array([0.5, 0.0]), np.array([1.0, 1.0])], None)
+    assert calls == [2] and np.allclose(values[0], [-0.5, 2.0]) and values[1][0] == problem.failed_residual
+    assert fitting._step("ph_slope") == 0.05 and fitting._threshold("log10_offset") == 0.5
