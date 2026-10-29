@@ -1254,3 +1254,29 @@ entries:
       - barallatperez2023_text_pooled_percent_bound
       - barallatperez2023_figs3_4_lupin_ketones_hexanal_storage
       - {file: src/kinetic_core/parameters_matrix.py, symbol: HOLDOUT_SEALED_BINDING}
+
+  - id: CF-052
+    kind: code_mismatch
+    scope: other_lane
+    sources: [nguyen2016]
+    quantity: "the fate of lysine in the Amadori product's breakdown (B20 glycation arm, k_flp_decay)"
+    observation: >-
+      src/kinetic_core/parameters_glycation.py makes the bound Amadori compound decay to 3-deoxyglucosone AND
+      returns the lysine (k_flp_decay, "the dominant loss"), and B20 fits it against Nguyen 2016's rate constants.
+      Nguyen's ODE system (SI Fig. S2, typed equations, read 2026-10-29 into the nguyen2016 dossier) returns no
+      lysine from any step: AP -> CML / MRPs / CEL (k7 / k8 / k9), with k8 to unspecified MRPs. So the constant the
+      arm fits was estimated under a scheme in which that lysine is consumed, and the arm releases it again. Also from
+      the SI: the t = 0 sugar : lysine ratio is about 6:1, not the stated 10:1, and the 10-min recovery in M1 at
+      120 C plots as 107.7 % where the text says 104 %.
+    explanations:
+      - "B20 chose the lysine-returning route on chemistry (Amadori degradation to 3-DG frees the amine) without checking which scheme the fitted constants belong to."
+    tests:
+      - "nguyen2016 dossier 'Supplementary material (read 2026-10-29)': Fig. S2A/B equations transcribed."
+    status: error_confirmed
+    remedy: >-
+      Phase 4 (glycation arm): either refit k_flp_decay under the lysine-returning scheme against Nguyen's measured
+      time courses (Figs. 2-3, mass balance Fig. S1B), not against his constants, or adopt his scheme (no lysine
+      return) with his constants. The choice is a mechanism question the S1B lysine balance can test.
+    affects:
+      - nguyen2016_table1_m1_glucose_casein_constants
+      - {file: src/kinetic_core/parameters_glycation.py, symbol: k_flp_decay}

@@ -5820,17 +5820,17 @@ entries:
     system: "sodium caseinate 30 g/L (~15-17 mM lysine residues, inferred) + glucose 150 mM (M1)"
     medium: "0.1 M sodium phosphate pH 6.8; 6 mL in sealed screw-cap tubes with air headspace, unstirred; 5 min heat-up"
     temperature_c: [120, 130]
-    ph: {initial: [6.8], measured_during: false, final: null}
+    ph: {initial: [6.8], measured_during: true, final: [6.47, 6.66]}
     time_min: [0, 30]
     species: [glucose, fructose, protein-bound_lysine, fructosyl-lysine, CML, CEL]
     kind: rate_constant
-    location: "Table 1, M1 columns (k1-k11 with 95 % HPD)"
+    location: "Table 1, M1 columns (k1-k11 with 95 % HPD); rate laws in SI Fig. S2A (dossier 'Supplementary material')"
     status: in_model_fit
     quant_class: sida
     simulable: true
     condition_quote: "0.1 M sodium phosphate (NaH2PO4/Na2HPO4), pH 6.8"
-    flags: [ph_start_only]
-    note: "B20 glycation fit rows: k3, k7, k8, k9, k11 at both T (k1/k2 sugar isomerisation constants not in B20). Lysine/CML/CEL by SIDA, AP = furosine x 3.1 (surrogate IS). Q10 0.3-2.9, no Ea. pH fell (Fig. S1, not on disk). k1 120 C HPD typo."
+    flags: [ph_measured_room_temperature, no_lysine_regeneration_in_source_odes]
+    note: "B20 glycation fit rows: k3, k7, k8, k9, k11 at both T (k1/k2 sugar isomerisation constants not in B20). Lysine/CML/CEL by SIDA, AP = furosine x 3.1 (surrogate IS). Q10 0.3-2.9, no Ea. pH drifted 6.8 -> 6.66 (120 C) / 6.47 (130 C) at 30 min (SI Fig. S1A, room-T readings). SI ODEs: every step first order in its source except k3, k6 (second order); NO step returns lysine, so B20's k_flp_decay (AP -> 3-DG + lysine back) is not the step Nguyen's k8 (AP -> MRPs) was fitted as. k1 120 C HPD typo."
   - id: nguyen2016_table1_m2_lactose_casein_constants
     dossier: nguyen2016_extraction.md
     paper: "Nguyen, van der Fels-Klerx & van Boekel 2016 Food Chem 192:125"
@@ -5838,17 +5838,17 @@ entries:
     system: "sodium caseinate 30 g/L + lactose monohydrate 142 mM (M2)"
     medium: "0.1 M sodium phosphate pH 6.8; sealed tubes, air headspace"
     temperature_c: [120, 130]
-    ph: {initial: [6.8], measured_during: false, final: null}
+    ph: {initial: [6.8], measured_during: true, final: [6.38, 6.68]}
     time_min: [0, 30]
     species: [lactose, lactulose, protein-bound_lysine, lactulosyl-lysine, CML, CEL]
     kind: rate_constant
-    location: "Table 1, M2 columns"
+    location: "Table 1, M2 columns; rate laws in SI Fig. S2B (dossier 'Supplementary material')"
     status: digitised_in_dossier
     quant_class: sida
     simulable: false
     condition_quote: "0.1 M sodium phosphate (NaH2PO4/Na2HPO4), pH 6.8"
-    flags: [ph_start_only]
-    note: "Lactose/lactulose network (disaccharide not in the core); galactose/tagatose undetected (LOD). Measured t=0 lactose 21 % below weighed. k3 equal to M1 within HPD."
+    flags: [ph_measured_room_temperature, no_lysine_regeneration_in_source_odes]
+    note: "Lactose/lactulose network (disaccharide not in the core); galactose/tagatose undetected (LOD). Measured t=0 lactose 21 % below weighed. k3 equal to M1 within HPD. pH 6.84 -> 6.68 (120 C) / 6.38 (130 C) at 30 min (SI Fig. S1A). SI ODEs as M1 with lactose/lactulose/X2; no step returns lysine."
   - id: nguyen2016_fig2_m1_time_courses
     dossier: nguyen2016_extraction.md
     paper: "Nguyen, van der Fels-Klerx & van Boekel 2016 Food Chem 192:125"
@@ -5856,7 +5856,7 @@ entries:
     system: "sodium caseinate 30 g/L + glucose 150 mM (M1)"
     medium: "0.1 M phosphate pH 6.8, sealed tubes"
     temperature_c: [120, 130]
-    ph: {initial: [6.8], measured_during: false, final: null}
+    ph: {initial: [6.8], measured_during: true, final: [6.47, 6.66]}
     time_min: [0, 30]
     species: [glucose, fructose, protein-bound_lysine, fructosyl-lysine, CML, CEL]
     kind: time_series
@@ -5865,8 +5865,8 @@ entries:
     quant_class: sida
     simulable: true
     condition_quote: ""
-    flags: [ph_start_only]
-    note: "6 panels x 2 T x 7 points, duplicates with error bars; only ranges and t=0 fractions in text. Would give glucose loss, fructose formation and bound-lysine loss at 120-130 C with protein amine."
+    flags: [ph_measured_room_temperature]
+    note: "6 panels x 2 T x 7 points, duplicates with error bars; only ranges and t=0 fractions in text. Would give glucose loss, fructose formation and bound-lysine loss at 120-130 C with protein amine. The same six species as % of the t=0 molar total are numeric in SI Fig. S1B (nguyen2016_figs1b_m1_mass_balance); absolute mmol/L still needs this figure or the unprinted t=0 totals."
   - id: nguyen2016_fig3_m2_time_courses
     dossier: nguyen2016_extraction.md
     paper: "Nguyen, van der Fels-Klerx & van Boekel 2016 Food Chem 192:125"
@@ -5874,7 +5874,7 @@ entries:
     system: "sodium caseinate 30 g/L + lactose 142 mM (M2)"
     medium: "0.1 M phosphate pH 6.8, sealed tubes"
     temperature_c: [120, 130]
-    ph: {initial: [6.8], measured_during: false, final: null}
+    ph: {initial: [6.8], measured_during: true, final: [6.38, 6.68]}
     time_min: [0, 30]
     species: [lactose, lactulose, protein-bound_lysine, lactulosyl-lysine, CML, CEL]
     kind: time_series
@@ -5883,26 +5883,80 @@ entries:
     quant_class: sida
     simulable: false
     condition_quote: ""
-    flags: [ph_start_only]
-    note: "Disaccharide system; same design as Fig. 2."
+    flags: [ph_measured_room_temperature]
+    note: "Disaccharide system; same design as Fig. 2. Relative (% of t=0 molar total) values numeric in SI Fig. S1B (nguyen2016_figs1b_m2_mass_balance)."
   - id: nguyen2016_figs1_ph_mass_balance
     dossier: nguyen2016_extraction.md
     paper: "Nguyen, van der Fels-Klerx & van Boekel 2016 Food Chem 192:125"
     lab: "Wageningen (van Boekel)"
-    system: "M1 and M2 casein-sugar systems"
-    medium: "0.1 M phosphate, initial pH 6.8"
+    system: "sodium caseinate 30 g/L + glucose 150 mM (M1) or lactose 142 mM (M2)"
+    medium: "0.1 M sodium phosphate, initial pH 6.8; 6 mL sealed tubes, air headspace; 5 min heat-up inside the time axis"
     temperature_c: [120, 130]
-    ph: {initial: [6.8], measured_during: true, final: null}
+    ph: {initial: [6.8], measured_during: true, final: [6.38, 6.68]}
     time_min: [0, 30]
     species: [pH]
     kind: time_series
-    location: "Supplementary Fig. S1A (pH) and S1 mass balance; Table S1"
-    status: supplement_missing
-    quant_class: unknown
+    location: "SI Fig. S1A(a) M1, S1A(b) M2 (dossier 'Supplementary material', pH table; values recovered from the figure's vector EMF, not raster-digitised)"
+    status: digitised_in_dossier
+    quant_class: calibrated
     simulable: true
+    condition_quote: "The pH of M1 and M2, at every 5 min of heating, was determined at room temperature by a pH meter"
+    flags: [ph_measured_room_temperature, no_error_bars, replicate_type_unstated, no_acids_measured]
+    note: "4 curves (2 systems x 2 T) x 7 times x 2 points, 0.01 pH resolution. 30-min drop (means): M1 -0.17 (120) / -0.34 (130); M2 -0.17 / -0.47. t=0 6.80-6.84. Cooled samples read at room T (hot pH lower). Id kept from before the SI arrived: the mass balance and Table S1 now have their own entries."
+  - id: nguyen2016_figs1b_m1_mass_balance
+    dossier: nguyen2016_extraction.md
+    paper: "Nguyen, van der Fels-Klerx & van Boekel 2016 Food Chem 192:125"
+    lab: "Wageningen (van Boekel)"
+    system: "sodium caseinate 30 g/L + glucose 150 mM (M1)"
+    medium: "0.1 M sodium phosphate pH 6.8; 6 mL sealed tubes, air headspace; 5 min heat-up"
+    temperature_c: [120, 130]
+    ph: {initial: [6.8], measured_during: true, final: [6.47, 6.66]}
+    time_min: [0, 30]
+    species: [glucose, fructose, protein-bound_lysine, fructosyl-lysine, CML, CEL]
+    kind: time_series
+    location: "SI Fig. S1B(a) 120 C, S1B(b) 130 C (dossier 'Supplementary material', mass-balance tables; vector-recovered stacked areas)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "the percentage of total molar concentrations of reactants and reaction products measured in 1 l of a model system at each time point to their concentrations at t = 0 min"
+    flags: [relative_units_percent_of_t0_molar_total, mixed_quantification_sida_and_external, single_value_per_time_no_sd, text_figure_recovery_conflict]
+    note: "Each species as % of the summed t=0 molar concentration; 7 times x 2 T. Recovery 85.5 % (120) / 81.8 % (130) at 30 min. Figure gives 107.7 % at 10 min (120 C), text says 104 %. Lysine/glucose at t=0 = 0.154 (molar), sugar:lysine 6.5:1 vs design ~10:1; absolute lysine not printed."
+  - id: nguyen2016_figs1b_m2_mass_balance
+    dossier: nguyen2016_extraction.md
+    paper: "Nguyen, van der Fels-Klerx & van Boekel 2016 Food Chem 192:125"
+    lab: "Wageningen (van Boekel)"
+    system: "sodium caseinate 30 g/L + lactose monohydrate 142 mM (M2)"
+    medium: "0.1 M sodium phosphate pH 6.8; 6 mL sealed tubes, air headspace; 5 min heat-up"
+    temperature_c: [120, 130]
+    ph: {initial: [6.8], measured_during: true, final: [6.38, 6.68]}
+    time_min: [0, 30]
+    species: [lactose, lactulose, protein-bound_lysine, lactulosyl-lysine, CML, CEL]
+    kind: time_series
+    location: "SI Fig. S1B(c) 120 C, S1B(d) 130 C (dossier 'Supplementary material', mass-balance tables; vector-recovered stacked areas)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "the percentage of total molar concentrations of reactants and reaction products measured in 1 l of a model system at each time point to their concentrations at t = 0 min"
+    flags: [relative_units_percent_of_t0_molar_total, mixed_quantification_sida_and_external, single_value_per_time_no_sd]
+    note: "Disaccharide system (not in the core). Recovery 95.8 % (120) / 102.0 % (130) at 30 min, up to 114 % at 10 min (130 C). Galactose/tagatose not detected, so absent from the balance."
+  - id: nguyen2016_tables1_pairwise_ttests
+    dossier: nguyen2016_extraction.md
+    paper: "Nguyen, van der Fels-Klerx & van Boekel 2016 Food Chem 192:125"
+    lab: "Wageningen (van Boekel)"
+    system: "M1 (glucose) vs M2 (lactose) casein systems; M1 120 vs 130 C"
+    medium: "0.1 M sodium phosphate pH 6.8; sealed tubes"
+    temperature_c: [120, 130]
+    ph: {initial: [6.8], measured_during: true, final: [6.38, 6.68]}
+    time_min: [0, 30]
+    species: [fructosyl-lysine, CML, CEL]
+    kind: other
+    location: "SI Table S1 (7 paired t-tests: mean difference, SEM, t, df 13, p; dossier 'Supplementary material')"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
     condition_quote: ""
-    flags: []
-    note: "pH drift in 0.1 M phosphate during casein-glucose heating (more at 130 C); not on disk. Fig. S2 ODEs also missing (lysine regeneration unknown)."
+    flags: [unit_not_printed]
+    note: "AP M1 vs M2 not different; CML M1 120 vs 130 not different (p 0.90); M2 > M1 in CML and < M1 in CEL at both T (p 0.003-0.042). Paired difference unit not printed (mmol/L by inference). A directional check, not a data series."
   - id: mundt2004_table1_melanoidin_cn
     dossier: mundt2004_extraction.md
     paper: "Mundt & Wedzicha 2004 J Agric Food Chem 52:4256"
