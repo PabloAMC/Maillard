@@ -17,6 +17,7 @@ basmati steam volatile oil; found-versus-added recovery plot; two basic-fraction
 | Title | "Quantitative Analysis of 2-Acetyl-1-pyrroline in Rice" |
 | Authors | Ron G. Buttery, Louisa C. Ling and Thomas R. Mon (Western Regional Research Center, ARS, USDA, Albany CA) |
 | Venue | J. Agric. Food Chem. 1986, 34 (1), 112-114. Received for review June 10 1985; accepted October 30 1985. "This article not subject to U.S. Copyright" |
+| DOI | 10.1021/jf00067a031 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27) |
 | Registry number printed | 2-acetyl-1-pyrroline **99583-29-6** — **different from the 85213-22-5 printed in Buttery 1983 and stored in `data/species/desirable_targets.yml`**; see flag 5 |
 | Naming | "AP" = 2-acetyl-1-pyrroline; "TMP" = collidine (2,4,6-trimethylpyridine), the internal standard. "ppb = parts per billion (10^9)", footnote a of Table I |
 | Predecessor | Buttery, Ling, Juliano & Turnbaugh 1983, JAFC 31:823 (`buttery1983_extraction.md`), on disk — the method here is built on its isolation step and explicitly corrects its numbers |

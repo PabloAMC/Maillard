@@ -15,7 +15,7 @@ text layer.
 | Title | "Interaction of Lipid in the Maillard Reaction between Cysteine and Ribose: the Effect of a Triglyceride and Three Phospholipids on the Volatile Products" |
 | Authors | Linda J. Farmer (formerly Salter), Donald S. Mottram (AFRC Institute of Food Research, Bristol) |
 | Venue | J. Sci. Food Agric. 53 (1990) 505-525; received 11 Dec 1989, accepted 27 May 1990 |
-| DOI | not printed on the scan |
+| DOI | 10.1002/jsfa.2740530409 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27). As recorded before: not printed on the scan |
 | Companions | Farmer, Mottram, Whitfield 1989 (JSFA 49, 347-368): identifications for cysteine + ribose + PC; Farmer & Mottram 1992 (JSFA 60, 489-497, cited here as "to be published"): the four lipids heated alone and with cysteine + ribose, the source of the 2,4-decadienal proportions quoted in §4; Whitfield 1988 (`whitfield1988_extraction.md`): the ng-scale predecessor |
 | Lipid labels | BTG = beef subcutaneous triglyceride (Florisil-cleaned); BPL = beef M. semimembranosus phospholipid (silicic acid column; 1-3 % triglyceride carried, 3-10 % of the phospholipid lost); PC = Sigma egg phosphatidylcholine type III-E (c. 99 %); PE = Sigma egg phosphatidylethanolamine type III (c. 98 %) |
 

@@ -1,5 +1,7 @@
 # Apriyantono & Ames 1993 (`10.1002/jsfa.2740610416`) — single-paper extraction, Wave K5b, 2026-08-29
 
+**DOI:** 10.1002/jsfa.2740610416 (as given in this dossier's title line; Crossref-verified on title, first author, year and journal, 2026-10-27)
+
 > Apriyantono, A.*; Ames, J. M.‡
 > "**Xylose−Lysine Model Systems: The Effect of pH on the Volatile Reaction Products**"
 > *J. Sci. Food Agric.* **1993**, 61 (4), 477−484.

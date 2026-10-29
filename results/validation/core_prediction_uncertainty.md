@@ -3,9 +3,9 @@
 n_samples = 200, seed = 0, CI level = 90 %.
 
 * benchmarks with an envelope: **28** of 37 on the panel; matched rows **50**; refused rows 27
-* mixed-population coverage: 19/50 (0.380)
-* **honest literature coverage: 19/48 (0.396)**, median CI width 0.979 log10; 2 not evaluable; 0 fitted rows excluded
-* out-of-sample literature coverage: 17/43 (1 not evaluable); rows the core fit read: {'hits': 2, 'total': 5, 'not_evaluable': 1}
+* mixed-population coverage: 20/50 (0.400)
+* **honest literature coverage: 20/48 (0.417)**, median CI width 1.009 log10; 2 not evaluable; 0 fitted rows excluded
+* out-of-sample literature coverage: 18/43 (1 not evaluable); rows the core fit read: {'hits': 2, 'total': 5, 'not_evaluable': 1}
 * sampled priors 66, fixed 45; lanes with NO sampled fit uncertainty: none
 * observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 9, extraction 41, undeclared 0
 
@@ -14,28 +14,28 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | panel | hits | total | rate | median width (log10) | not evaluable |
 |---|---|---|---|---|---|
 | external_matrix | 3 | 4 | 0.750 | 2.186 | 0 |
-| maillard_path_holdout | 9 | 30 | 0.300 | 0.965 | 1 |
-| trust_loop | 7 | 14 | 0.500 | 1.084 | 1 |
+| maillard_path_holdout | 10 | 30 | 0.333 | 0.970 | 1 |
+| trust_loop | 7 | 14 | 0.500 | 1.072 | 1 |
 
 ## Rows
 
 | benchmark | panel | compound | unit | measured | point | p5 | p50 | p95 | inside | width | obs bands | lane | role |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | acrylamide | ppb | 150.000 | 0.016 | 0.00741 | 0.016 | 0.025 | no | 0.536 | no (extraction) | acrylamide | predictive |
-| hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 310.000 | 4.07e+03 | 4.06e+03 | 4.07e+03 | 4.08e+03 | no | 0.00232 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 5.36e+03 | 3.6e+03 | 3.35e+03 | 3.62e+03 | 3.88e+03 | no | 0.064 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 6.23e+03 | 1.34e+03 | 563.333 | 1.39e+03 | 1.9e+03 | no | 0.528 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 1.1e+04 | 1.42e+04 | 502.609 | 8.63e+03 | 6.23e+04 | yes | 2.093 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 2.21e+03 | 1.5e+03 | 2.08e+03 | 2.63e+03 | no | 0.244 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 4.22e+03 | 5.84e+03 | 2.92e+03 | 5.3e+03 | 7.64e+03 | yes | 0.418 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 191.058 | 28.346 | 228.194 | 1.72e+03 | yes | 1.784 | no (extraction) | sulfur | predictive |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 546.398 | 315.691 | 507.486 | 749.568 | no | 0.376 | no (extraction) | sulfur | predictive |
+| hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 310.000 | 4.03e+03 | 4.02e+03 | 4.03e+03 | 4.07e+03 | no | 0.0057 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 5.36e+03 | 2.92e+03 | 2.67e+03 | 2.98e+03 | 3.47e+03 | no | 0.115 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 6.23e+03 | 1.15e+03 | 720.737 | 1.21e+03 | 1.68e+03 | no | 0.368 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 1.1e+04 | 1.79e+04 | 135.278 | 7.12e+03 | 4.77e+04 | yes | 2.547 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 1.48e+03 | 902.083 | 1.45e+03 | 2.12e+03 | yes | 0.371 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 4.22e+03 | 8.7e+03 | 5.07e+03 | 7.78e+03 | 9.18e+03 | no | 0.257 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 2.565 | 0.203 | 1.854 | 10.145 | no | 1.698 | no (extraction) | sulfur | predictive |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 1.675 | 0.898 | 1.476 | 1.872 | no | 0.319 | no (extraction) | sulfur | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 353.858 | 67.930 | 363.927 | 2.25e+03 | yes | 1.521 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 12.355 | 69.268 | 414.631 | yes | 1.526 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.463 | 17.466 | 166.040 | yes | 1.829 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | (E,E)-2,4-decadienal | ppb | 46.900 | 75.702 | 3.163 | 69.137 | 1.24e+03 | yes | 2.593 | yes (headspace) | lipid | predictive |
-| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.664 | 1.483 | 9.627 | 71.258 | no | 1.682 | yes (headspace) | sulfur | predictive |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 48.366 | 95.838 | 214.196 | no | 0.646 | no (extraction) | sulfur | predictive |
+| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 55.309 | 2.490 | 43.189 | 3.37e+03 | yes | 3.132 | yes (headspace) | sulfur | predictive |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.817 | 49.860 | 110.479 | 209.304 | no | 0.623 | no (extraction) | sulfur | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 68.996 | 199.516 | 565.424 | no | 0.914 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.97e+03 | 1.1e+03 | 1.88e+03 | 2.73e+03 | no | 0.395 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |
@@ -53,20 +53,20 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glucosone | ppb | 7.5e+03 | 119.059 | 118.920 | 119.086 | 119.141 | no | 0.000807 | no (extraction) | trunk | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glyoxal | ppb | 5.6e+03 | 160.794 | 168.424 | 200.190 | 205.037 | no | 0.085 | no (extraction) | trunk | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | methylglyoxal | ppb | 2.6e+03 | 2.57e+03 | 622.049 | 1.72e+03 | 5.59e+03 | yes | 0.953 | no (extraction) | trunk | external_holdout |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 229.000 | 1.13e+03 | 60.498 | 1.12e+03 | 1.03e+04 | yes | 2.230 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_FFT) |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 23.470 | 11.825 | 22.139 | 39.184 | no | 0.520 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_MFT) |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.090 | 0.004 | 0.083 | 0.581 | no | 2.162 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_FFT) |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 25.000 | 0.178 | 0.037 | 0.145 | 0.256 | no | 0.843 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_MFT) |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 191.058 | 28.346 | 228.194 | 1.72e+03 | yes | 1.784 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 546.398 | 315.691 | 507.486 | 749.568 | no | 0.376 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 64.086 | 1.619 | 8.364 | 56.308 | yes | 1.541 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 610.255 | 21.817 | 170.799 | 879.927 | no | 1.606 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 96.892 | 6.269 | 21.556 | 86.507 | no | 1.140 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.460 | 535.496 | 32.374 | 250.504 | 1.07e+03 | no | 1.521 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 2.400 | 134.513 | 20.389 | 48.791 | 137.521 | no | 0.829 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 363.445 | 47.165 | 256.477 | 1.21e+03 | no | 1.408 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 170.534 | 51.181 | 94.363 | 202.903 | no | 0.598 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 211.740 | 47.750 | 209.981 | 1e+03 | no | 1.323 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 229.000 | 2.53e+03 | 144.051 | 1.43e+03 | 1.01e+04 | yes | 1.848 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_FFT) |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 41.322 | 18.964 | 42.261 | 94.388 | no | 0.697 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_MFT) |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.183 | 0.00482 | 0.094 | 0.366 | no | 1.880 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_FFT) |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 25.000 | 0.00529 | 2.15e-05 | 0.00478 | 0.021 | no | 2.989 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_MFT) |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 2.565 | 0.203 | 1.854 | 10.145 | no | 1.698 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 1.675 | 0.898 | 1.476 | 1.872 | no | 0.319 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 9.798 | 0.336 | 1.901 | 10.704 | yes | 1.503 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 178.092 | 5.688 | 39.818 | 170.171 | no | 1.476 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 11.280 | 0.856 | 3.174 | 13.292 | yes | 1.191 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.460 | 156.412 | 6.619 | 39.547 | 177.880 | no | 1.429 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 2.400 | 12.261 | 1.955 | 4.851 | 15.879 | yes | 0.910 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 114.942 | 6.767 | 36.199 | 163.448 | no | 1.383 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 12.567 | 3.275 | 7.346 | 19.641 | no | 0.778 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 71.403 | 4.690 | 30.451 | 137.209 | no | 1.466 | no (extraction) | sulfur | external_holdout |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 109.490 | 9.240 | 109.689 | 1.6e+03 | yes | 2.237 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 1.115 | 13.019 | 171.111 | no | 2.186 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 70.264 | 5.084 | 59.299 | 779.558 | yes | 2.186 | yes (headspace) | lipid | external_holdout |
@@ -136,36 +136,36 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | b8.k_pent_dpo.log10_k_ref_145C | sulfur | fitted_rate | fixed | -0.545 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_pent_tdp.log10_k_ref_145C | sulfur | fitted_rate | fixed | -0.502 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_dpo_c2c3.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.016 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_arp_dpo.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.310 | 1.805 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_arp_tdp.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.727 | 0.607 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_arp_dpo.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -2.664 | 3.372 | [-10.000, 0.500] | yes | unidentified_in_the_fit: sampled across its declared band |
+| b8.k_arp_tdp.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.968 | 0.783 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_dpo_nf.log10_k_ref_145C | sulfur | fitted_rate | fixed | 0.434 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_dpo_ptr.log10_k_ref_145C | sulfur | fitted_rate | fixed | -4.347 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_dpo_ddp.log10_k_ref_145C | sulfur | fitted_rate | fixed | 0.042 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_tdp_fur.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.037 | 0.340 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_tdp_fur.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.309 | 0.369 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_ddp_mft.log10_k_ref_145C | sulfur | fitted_rate | fixed | -6.541 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_fur_fft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -0.631 | 1.028 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_nf_mft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.025 | 0.165 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_nf_mp3p.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.868 | 0.348 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_mgo_mp.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.981 | 0.320 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_fur_fft.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -1.480 | 7.578 | [-10.000, 0.500] | yes | unidentified_in_the_fit: sampled across its declared band |
+| b8.k_nf_mft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.435 | 0.214 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_nf_mp3p.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.617 | 0.487 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_mgo_mp.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.946 | 0.346 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_ha_mp_mft.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.870 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_glc_ha.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -8.589 | 1.37e-11 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_glc_ha.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -8.589 | 1.22e-10 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_thi_hmp.log10_k_ref_145C | sulfur | fitted_rate | fixed | -2.588 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_thi_mesh.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.273 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_hmp_mft.log10_k_ref_145C | sulfur | fitted_rate | fixed | -2.609 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_hmp_mp2p.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.437 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_cys_actz.log10_k_ref_145C | sulfur | fitted_rate | fixed | -2.974 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_dimer_mft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | 0.500 | 0.354 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_dimer_fft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | 0.500 | 0.549 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_dimer_mft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | 0.500 | 0.374 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_dimer_fft.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -0.913 | 14.282 | [-10.000, 0.500] | yes | unidentified_in_the_fit: sampled across its declared band |
 | b8.k_mmft.log10_k_ref_145C | sulfur | fitted_rate | fixed | -1.984 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_mft_decay.log10_k_ref_145C | sulfur | fitted_rate | fixed | 0.134 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_fft_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -0.651 | 0.107 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_dimer_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -9.710 | 1.2e-05 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_fft_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -0.829 | 0.260 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_dimer_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -9.217 | 0.00362 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_nf_decay.log10_k_ref_145C | sulfur | fitted_rate | fixed | -2.182 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_fur_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | 0.470 | 0.437 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_fur_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -0.513 | 0.646 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_h2s_loss.log10_k_ref_145C | sulfur | fitted_rate | fixed | -1.351 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_osone_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.187 | 0.449 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_thiol_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -9.166 | 9.89e-05 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_pent_caramel.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.535 | 0.653 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_osone_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.062 | 0.412 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_thiol_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -8.023 | 3.34e-05 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_pent_caramel.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.231 | 0.770 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_pent_thermal.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.437 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_glc_fur.log10_k_ref_145C | sulfur | fitted_rate | fixed | -4.923 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_arp_tdp_th.log10_k_ref_145C | sulfur | fitted_rate | fixed | -4.354 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
@@ -173,14 +173,14 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | b8.k_ddp_mft_hs.log10_k_ref_145C | sulfur | fitted_rate | fixed | -7.693 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_fur_fft_hs.log10_k_ref_145C | sulfur | fitted_rate | fixed | -0.00955 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_ttca_cys.log10_k_ref_145C | sulfur | fitted_rate | fixed | -0.579 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_ttca_deg.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.698 | 0.408 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_cys_thermal.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.066 | 0.275 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_thiolate_loss.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.832 | 0.661 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_ttca_deg.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.529 | 0.280 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_cys_thermal.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.287 | 0.317 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_thiolate_loss.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.557 | 0.395 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.lumped_formation_Ea_kJ_mol | sulfur | fitted_ea | fixed | 64.082 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.decay_Ea_kJ_mol.thiol_sink | sulfur | fitted_ea | uniform_band | 102.000 | 29.240 | [7.000, 102.000] | yes | unidentified_in_the_fit: sampled across its declared band |
-| b8.decay_Ea_kJ_mol.carbonyl_sink | sulfur | fitted_ea | uniform_band | 174.922 | 60.566 | [126.889, 222.954] | yes | unidentified_in_the_fit: declared band capped by the prefactor prior |
-| b8.ph_drift.acid_yield_per_sink_event | sulfur | fitted_ph_drift | fixed | 0.000359 | 0.340 | [0.000, 1.000] | no | unidentified_in_the_fit: its bound is DEFINITIONAL (the quantity is a fraction), not a measurement of where the value li |
-| b8.ph_drift.arp_secondary_ammonium_pKa | sulfur | fitted_ph_drift | normal | 7.062 | 0.482 | [5.000, 11.000] | yes | laplace_covariance_at_b8_optimum |
+| b8.decay_Ea_kJ_mol.thiol_sink | sulfur | fitted_ea | uniform_band | 102.000 | 30.273 | [7.000, 102.000] | yes | unidentified_in_the_fit: sampled across its declared band |
+| b8.decay_Ea_kJ_mol.carbonyl_sink | sulfur | fitted_ea | uniform_band | 150.269 | 75.580 | [102.237, 198.301] | yes | unidentified_in_the_fit: declared band capped by the prefactor prior |
+| b8.ph_drift.acid_yield_per_sink_event | sulfur | fitted_ph_drift | fixed | 6.91e-05 | 0.137 | [0.000, 1.000] | no | unidentified_in_the_fit: its bound is DEFINITIONAL (the quantity is a fraction), not a measurement of where the value li |
+| b8.ph_drift.arp_secondary_ammonium_pKa | sulfur | fitted_ph_drift | normal | 7.144 | 0.519 | [5.000, 11.000] | yes | laplace_covariance_at_b8_optimum |
 | b13.k_da_sink.log10_k_100C | trunk | fitted_rate | uniform_band | - | - | [-12.000, -1.940] | yes | two_laboratories_disagree: flat across the disagreement |
 | b13.k_go_sink.ea_kj_mol | trunk | fitted_ea | uniform_band | 0.000 | - | [0.000, 150.800] | yes | two_laboratories_disagree: flat across the disagreement |
 | b13.k_odg_da.log10_k_100C | trunk | fitted_rate | uniform_band | -5.640 | - | [-4.630, -1.960] | yes | two_laboratories_disagree: flat across the disagreement |

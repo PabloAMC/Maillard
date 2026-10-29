@@ -170,9 +170,12 @@ class PhStateCorrections:
         return {k: bool(getattr(self, k)) for k in self.__dataclass_fields__}
 
 
-B51 = PhStateCorrections()
 #: The shipped-candidate configuration: every correction on.
 B51_ALL_ON = PhStateCorrections(True, True, True, True, True, True)
+#: SHIPPED 2026-10-27 under the correctness rule (WAVES.md): every correction is a measured constant or a
+#: bug fix, verified against its source and the module's invariants, so it ships on that ground and its
+#: score is reported as diagnosis. ``PhStateCorrections()`` (all off) remains B50's physics, bit for bit.
+B51 = B51_ALL_ON
 
 
 def pk_at(pk_25c: float, delta_h_kj_mol: float, delta_cp_j_mol_k: float,

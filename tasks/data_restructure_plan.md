@@ -2738,8 +2738,15 @@ each wave's pre-registration). Order and status:
 - [x] **B51 — the pH state against its thermodynamic sources: DO NOT SHIP** (2026-10-27; verdict and
   diagnosis in the prereg §6). The refit fits better and fixes Yiltirak but loses Hofmann pH 5 ~100x,
   because the thiolate-acting thiol sink destroys thiols above pH ~5 once speciation is correct. Switches
-  stay off; the buffer facts ship. Follow-ups: (1) a wave for the 25 °C table scale + SID carry alone;
-  (2) the thiolate assignment of the thiol sink (MFT/FFT thiol pK unmeasured).
+  stay off; the buffer facts ship. Follow-ups: (1) a wave for the 25 °C table scale + SID carry alone —
+  **B51.1, DO NOT SHIP** (fit 18.74 → 15.47, hold-outs fine, but SUG-09 flips through the hexose route to
+  FFT); (2) the thiolate assignment of the thiol sink (MFT/FFT thiol pK unmeasured).
+- [ ] **B52 and B53 deferred (2026-10-27): no blind test is left in the corpus.** Martins 2005 publishes
+  only rate constants, which a reading agent has already compared at step level (mixed: the slope wins
+  on DFG → 3-DG); Davidek's water series is seen; Davidek's phosphate series is B53's fit source, and
+  B53's hold-out (Mottram & Nobrega 2002) is a sulfur-lane pot whose fit pots all sit in 0.5 M phosphate,
+  so the buffer term means a sulfur refit. Each needs a new measurement: the WUR dough data (with pH), or
+  a Davidek-style DFG degradation in water vs phosphate at 120–145 °C.
   Original entry (prereg `results/validation/kinetic_core_b51_prereg.md`):
   Six switches in `ph_state.B51`: GKL 2002 ionisation heat capacities; GKL cysteine constants (the B2
   pair 26 / 43 kJ/mol was cited to GKL and is not in it: GKL Table 7.23 is 36.1 / 34.1); Suleimenov &
@@ -2799,3 +2806,101 @@ each wave's pre-registration). Order and status:
 - Backlog, not started: volatile stripping during open or vented processing (Henry's constants already
   in the corpus); protein-thiol binding as a candidate identity of the thiol sink in matrices; a helper
   that builds heat-up ramps from a process description.
+
+### Reading list from the WUR collaboration (Bei Wang, 2026-10-27): overlap with the corpus
+
+24 unique papers (26 entries, two duplicated), on volatile formation from amino acids, sugars, thiamine and
+glutathione. Matched by DOI, then by first author + year with each candidate PDF's first-page DOI checked.
+**8 of 24 were already known to the corpus (33 %); 5 had been read.**
+
+| status | papers |
+| --- | --- |
+| read (dossier) | Cerny & Briffod 2007 JAFC (`cerny2007`); Meynier & Mottram 1995 (`meynier1995`); Hou 2017 (`hou2017`); Liu 2023 LWT (`liu2023b`); Wang 2026 FRI (`wang2026`) |
+| PDF on disk, unread | Wang, Yang & Song 2012 (`wang2012.pdf`, glutathione–xylose); Cerny 2007 LWT (`cerny2007b.pdf`, carbon origin) — dossiers being written 2026-10-27 |
+| cited, not on disk | Cerny 2015 (book chapter; quoted by claims PH-01/PH-02) |
+| not in the corpus | priority A (quantitative, could anchor or test a step): Zheng et al. 1997 (furaneol + cysteine / glutathione / H2S, 10.1021/jf960624h); Cerny & Guntz-Dubini 2013 (cysteine-S-conjugates, 10.1016/j.foodchem.2013.04.043; read 2026-10-27: identification only, formed from furfuryl alcohol not from free thiols, so it neither identifies nor bounds the thiol sink); Modi, Linforth & Taylor 2008 (pH AND water activity on meaty aroma, the a_w axis the sulfur lane refuses, 10.3923/ajft.2008.68.78); Farmer, Mottram & Whitfield 1989 (cysteine–ribose–phospholipid, 10.1002/jsfa.2740490311); Martins et al. 2010 (precursor synergy/competition, 10.1021/bk-2010-1042.ch008); Cha, Debnath & Lee 2019 (α-dicarbonyls and volatiles, 10.1038/s41598-019-41824-8). Priority B (Xie / Ho labs, ARP and TTCA intermediates): Cao 2017 (10.1016/j.foodres.2017.06.012); Zhao 2019 (10.1016/j.foodchem.2018.08.096); Zhai 2019 (10.1021/acs.jafc.9b04374); Zhai 2023 (10.1021/acs.jafc.3c06506); Zhang 2025 lysine (10.1016/j.foodchem.2024.142529); Du 2025 (10.1016/j.foodres.2024.115645); Xu 2013 peptide–xylose (10.1016/j.foodres.2013.07.066). Priority C (reviews / identification only): Sun 2022, Sohail 2022, Garbusov 1976, Cerny 2015 |
+- **2026-10-27, read:** `wang2012` (glutathione–xylose; directional tests only, no rates; MFT essentially all
+  thiamine-derived) and `cerny2007b` (Cerny 2007 LWT, carbon origin). `cerny2007b` had been USED since wave
+  B2 (the 54:46 MFT carbon split is a fit row; two hold-outs) with no dossier: `k3_final_parameter_inventory.md`
+  cites a `cerny2007b_extraction.md` that was never on disk. The read confirms the rows in use and finds three
+  network gaps: (1) 3-mercapto-2-pentanone has no sugar + H2S route (the model makes it only from thiamine;
+  the paper: >95 % xylose carbon without thiamine); (2) the methylthio methyl of 2-methyl-3-(methylthio)furan
+  is 64–70 % xylose carbon, not thiamine; (3) at pH 5 without cysteine, thiamine supplies FFT's sulfur, while
+  B50's H2S share is zero below pH 6.25.
+
+### PDFs on disk without an extraction record (2026-10-27, owner: "why do we have unread papers on disk?")
+
+Of 339 PDFs in `data/articles/`, 13 had no dossier of the same stem. Eleven were read under a different
+dossier name (e.g. `Dashmaa2026.pdf` → `hwang2026`, `jf0480290.pdf` → `rawel2005`, `Kocada2016.pdf` →
+`kocadagli2016*`); `us10039306` (patent) and `yang2011` were triaged in this plan without a dossier. Two were
+genuinely unread (`wang2012`, `cerny2007b`), and one of those was in use. Cause: nothing checks that a PDF
+on disk has a record, or that a dossier a file cites exists. **Proposed gate:** every PDF maps to at least
+one dossier (a small alias table for the renamed ones) or to a triage line that says why not, and every
+`*_extraction.md` named in code, data or another dossier exists.
+- **2026-10-27, from `sohail2022` (review) — candidate primary papers quantifying meaty thiols in cooked
+  meats, not in the corpus:** Fan et al. 2018 JAFC 10.1021/acs.jafc.8b03297 (stewed chicken broth; top);
+  Guth & Grosch 1994 JAFC 10.1021/jf00048a039 (stewed beef juice; quantities unverified); Liu et al. 2019 JAFC
+  10.1021/acs.jafc.9b01564; Du et al. 2020 FFJ 10.1002/ffj.3621; Gąsior et al. 2021 JAFC
+  10.1021/acs.jafc.1c01475; Qi et al. 2022 Food Chem 10.1016/j.foodchem.2021.131111; Zhao et al. 2017 Food Chem
+  10.1016/j.foodchem.2017.01.011. Sohail's thresholds are all copied from van Gemert 2011 and six disagree
+  with the model's by 10–1000x (flagged in the dossier, not acted on). Merge into the citation-chaining
+  search's ranked list (`docs/guides/LITERATURE_SEARCH_2026-10.md`).
+- **2026-10-27, network gaps found by reading Bei Wang's list (each a candidate kind-3 wave, pre-registered):**
+  (a) **no forward Cys + pentose → TTCA step** (`sulfur.py` has only `r_ttca_cys` and `r_ttca_deg`): Zhang
+  2025b (`zhang2025b`, cysteine–xylose 40/40 mM, 0.2 M phosphate pH 6.5, 120 °C) puts ~45 % of the cysteine
+  in TTCA (Fig. 2, digitised), so the model treats all cysteine in a cysteine–pentose pot as free;
+  (b) **glutathione glycation**: Du 2025 (`du2025`) measures GSH loss 0.12–0.22 min⁻¹ at 145 °C in a
+  glucose pot, 25–170x the model's Zheng & Ho thermolysis, the only route GSH has in the model;
+  (c) the three Cerny 2007 LWT gaps above (sugar route to 3-mercapto-2-pentanone, methylthio carbon,
+  thiamine sulfur to FFT at pH 5). Sun 2022's candidate list independently names four of the citation
+  search's top class-A picks (Zhao 2018, Zhang 2020, Sun 2019, Wang 2019).
+- **2026-10-27, the rest of Bei Wang's list read** (`zheng1997`, `cerny2013`, `cerny2015`, `modi2008`,
+  `farmer1989`, `martins2010`, `cha2019`, plus the Xie/Ho-lab and review dossiers). Acted on: directional
+  claims **PH-04 and PH-05 RETIRED** (kind-1 source corrections: the Cerny 2015 chapter, now on disk, does
+  not say either; PH-05 had counted as an agree); the "bound-thiol sink" label on Cerny & Guntz-Dubini 2013
+  corrected. Recorded for waves: Modi 2008 gives the first a_w data for sulfur volatiles (MFT ×77 from a_w 0.6
+  to 0.9, peak areas; a directional hold-out — a trunk-style multiplier would get its sign wrong) and an
+  aqueous pH series rising 4 → 6.5 with thiamine present (opposite to Meynier's thiamine-free pot);
+  Farmer 1989 confirms 3-mercapto-2-pentanone forms strongly with no thiamine (gap (c) above); Zheng 1997:
+  glutathione acts like cysteine only as an H2S donor, no thiols from DMHF; Martins 2010: cysteine lowers HMF
+  and furfural, glycine raises MFT and FFT (directional checks); Cha 2019: absolute GO/MGO/DA on a 100–160 °C ×
+  pH 3–9 grid (dicarbonyl hold-out candidates, lysine not glycine). PH-01/PH-02: the chapter's primary is the
+  Farmer & Mottram 1990 BOOK chapter, not `farmer1990.pdf` (JSFA 53:505), so the 2026-10-27 audit's "no pH
+  series" reason is unfounded; the arms stay on Meynier & Mottram 1995, which does measure the series.
+- **2026-10-27, TOP CANDIDATE WAVE — TTCA formation as a measured equilibrium.** Cao 2017 (`cao2017`, Cys + Xyl
+  0.40 M each, 0.2 M phosphate pH 5.5 → 4.15, 90 °C, 0.5–5 h) gives [TTCA]/([Cys][Xyl]) = 58–65 L/mol at all six
+  times: an apparent K ≈ 60 L/mol (45–75) at pH ~4.5, TTCA holding ~89 % of the cysteine by 0.5 h, ring-opening
+  ≥ ~7e-3 min⁻¹ (~10x the net TTCA loss: the quantitative form of B16's `k_ttca_cys` diagnosis). Zhai 2019
+  (`zhai2019`) adds a 70–130 °C TTCA formation series (pH 7.4, lower bound K ≥ 20–41 L/mol) and a fed-TTCA
+  series with 3-DX/1-DX = 2.1–2.6 (the engine's `r_ttca_deg` makes only 1-DX). Design: Cys + PENT ⇌ TTCA with
+  K measured, plus a Cys-Amadori species distinct from the alanine `ARP` (never map these papers' "ARP" onto
+  it). A new mechanism, so a kind-3 wave with a pre-registered hold-out (Zhai 2019's series or Zhang 2025b's
+  ~45 % TTCA at pH 6.5). Missing from `data/keys/compounds.yml`: TTCA, Cys-Amadori, cysteine, xylose.
+- **2026-10-27, CANDIDATE WAVE — glutathione's measured fate** (replaces "GSH → H2S only"). Zhou 2023c
+  (`zhou2023c`, GSH 20 mM unbuffered pH 7.5 → 120 °C) measures GSH loss k ≈ 8.2e-3 min⁻¹ alone and 1.6e-2 with
+  the Ala–xylose ARP, ~7–14x the Zheng & Ho H2S constant there, with products pyroglutamic acid 4.7 mM, Cys-Gly
+  2.3 mM, Glu 0.8, Gly 0.85, free Cys ~0.05 mM (81 % of the Cys moiety unaccounted: likely GSSG, unmeasured).
+  Wang 2020: the GSH-Amadori compound is minor and transient (0.3 %, t½ ~10 min at 140 °C); Cys-Gly
+  thiazolidines form within 10 min; (E)-2-heptenal binds ~6 % of GSH reversibly. Sun 2019b: GSH–xylose ARP
+  yield 7–9 % in water. Design: GSH → Cys-Gly + pGlu (measured), Cys-Gly → Cys, plus a declared oxidation sink;
+  hold-outs: Zhou 2023c's ARP + GSH vs ARP + Cys MFT/FFT ratios (18x / 1.3x at 60 min), Wang 2012, Zheng 1997.
+  Lipid × sulfur: the SIGN of the lipid effect on MFT is not established (Zhao 2019b and Zhang 2021 lower it
+  38–64 %; Du 2025 raises it 19–30 %).
+- **2026-10-27, target levels in real cooked meat** (what an analogue must reach): Guth & Grosch 1994 (`guth1994`,
+  stewed beef juice, stable-isotope dilution, µg/kg): FFT 0.5, methional 13, methanethiol 300, hexanal 72,
+  2-acetyl-2-thiazoline 1.0 (MFT not screened). Fan 2018 (`fan2018`, stewed chicken broth, internal standard):
+  MFT 1.07–1.48, FFT 2.71, MFT disulfide 1.62, methional 118–158, hexanal 107–141 µg/kg, with raw-meat
+  precursor contents. Band: FFT 0.5–3, methional 13–160, hexanal 70–140, MFT ~1–1.5 µg/kg. Zhou 2022
+  (`zhou2022`): time-resolved ARP ± Cys at 120 °C (MFT 63 → 345, FFT 75 → 419 µg/L), but at the identical
+  condition Zhou 2023 reports MFT 7.8x / FFT 4.1x higher — any band on these two needs ≥ 4–8x width.
+  Hofmann 1997 and Du 2024: no new quantitative rows (Du 2024's thiazolidines are lipid-aldehyde adducts).
+- **2026-10-27, a candidate MEASURED cysteine sink** (the model's sulfur budget): Liu 2022 (`liu2022`, Gly–ribose
+  ARP + Cys, pH 7.5, 120 °C): 26.7 mM of 40 mM cysteine vanishes with ~1.4 mM methylglyoxal consumed, ≥150x the
+  Zheng & Ho thermolysis there, and `r_cys_actz` cannot fit cysteine loss and 2-acetylthiazole together (10³–10⁴);
+  Zhou 2022 (`zhou2022`): cysteine first-order 4.2e-4 s⁻¹ with ARP present, 10x cysteine alone. Xu 2008
+  (`xu2008`): tripling cysteine switches MFT/FFT on >230x where Cao's K predicts free cysteine x4.3, so something
+  consumes sulfur when cysteine is the minor partner. Madruga 1995 (`madruga1995`, real beef, pH 5.8 → 4.4 after
+  cooking): MFT rises ≥65x as pH falls (Meynier's sign), FFT is U-shaped — one pH factor cannot fit both thiols.
+  Elmore 2002 (`elmore2002`): methyl linoleate cuts MFT 14x and linolenate >80x, FFT barely — an MFT-selective
+  lipid coupling. Shu 1985: no H2S measured, cannot test the thermolysis pH law. Registry gaps: ACTZ
+  (2-acetylthiazole) not in `data/keys/compounds.yml`.

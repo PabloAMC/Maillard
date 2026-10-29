@@ -87,7 +87,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.002322111603612683,
+          "ci_width_log10": 0.005704580151278508,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -97,12 +97,12 @@
           "measured_ppb": 310.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 4072.4493437653396,
-          "predicted_p5": 4062.1156457074053,
-          "predicted_p50": 4073.1671391862264,
-          "predicted_p95": 4083.8933769444634,
-          "predicted_point": 4072.31212082039,
-          "predicted_std": 17.124338003076005,
+          "predicted_mean": 4037.1723520440823,
+          "predicted_p5": 4016.0055956087413,
+          "predicted_p50": 4033.899638657098,
+          "predicted_p95": 4069.104932382777,
+          "predicted_point": 4030.355288537154,
+          "predicted_std": 17.695221734004168,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -112,10 +112,10 @@
       "execution_path": "free_precursor",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ]
       },
       "fitted_row": false,
@@ -133,7 +133,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.06428159327749003,
+          "ci_width_log10": 0.11485515782910762,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -143,12 +143,12 @@
           "measured_ppb": 5362.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 3610.077211445326,
-          "predicted_p5": 3345.1236233122822,
-          "predicted_p50": 3617.8159396015417,
-          "predicted_p95": 3878.767656860396,
-          "predicted_point": 3596.9016689605396,
-          "predicted_std": 240.9505863054403,
+          "predicted_mean": 2994.7910091679782,
+          "predicted_p5": 2665.8870376324144,
+          "predicted_p50": 2976.4320222846154,
+          "predicted_p95": 3472.9369652294235,
+          "predicted_point": 2922.336461209064,
+          "predicted_std": 252.29770625708582,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -158,10 +158,10 @@
       "execution_path": "free_precursor",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ]
       },
       "fitted_row": false,
@@ -179,7 +179,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.5279520542160124,
+          "ci_width_log10": 0.36770449060167315,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -189,12 +189,12 @@
           "measured_ppb": 6230.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1299.7904085373293,
-          "predicted_p5": 563.3326598730613,
-          "predicted_p50": 1393.586785846228,
-          "predicted_p95": 1899.8398148183328,
-          "predicted_point": 1339.6379568473355,
-          "predicted_std": 380.23237078305254,
+          "predicted_mean": 1175.6173922296555,
+          "predicted_p5": 720.7365330635039,
+          "predicted_p50": 1206.35863148018,
+          "predicted_p95": 1680.6645008521766,
+          "predicted_point": 1152.1377353380751,
+          "predicted_std": 299.14828577403244,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -204,10 +204,10 @@
       "execution_path": "free_precursor",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ]
       },
       "fitted_row": false,
@@ -263,7 +263,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.093204010170157,
+          "ci_width_log10": 2.5469782954275555,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -273,12 +273,12 @@
           "measured_ppb": 11016.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 15724.603066766611,
-          "predicted_p5": 502.60899763521354,
-          "predicted_p50": 8629.34578630202,
-          "predicted_p95": 62292.28604092832,
-          "predicted_point": 14175.899583348384,
-          "predicted_std": 19491.52116866621,
+          "predicted_mean": 13448.422411243242,
+          "predicted_p5": 135.27833220338601,
+          "predicted_p50": 7119.417307293632,
+          "predicted_p95": 47665.76151826773,
+          "predicted_point": 17856.374243169477,
+          "predicted_std": 17215.734867731386,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -288,10 +288,10 @@
       "execution_path": "free_precursor",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ]
       },
       "fitted_row": false,
@@ -347,22 +347,22 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.24386816285690963,
+          "ci_width_log10": 0.3706067138807349,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
-          "inside_ci": false,
+          "inside_ci": true,
           "lane": "sulfur",
           "measured": 1016.0,
           "measured_ppb": 1016.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 2068.3919063285416,
-          "predicted_p5": 1500.1443663370417,
-          "predicted_p50": 2080.8555965648775,
-          "predicted_p95": 2630.275370055602,
-          "predicted_point": 2213.021790704355,
-          "predicted_std": 350.9964102146577,
+          "predicted_mean": 1460.2991023599252,
+          "predicted_p5": 902.0826358580705,
+          "predicted_p50": 1453.1438413690144,
+          "predicted_p95": 2117.644414440756,
+          "predicted_point": 1483.2830050961472,
+          "predicted_std": 364.51915074132114,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -372,10 +372,10 @@
       "execution_path": "free_precursor",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ]
       },
       "fitted_row": false,
@@ -393,22 +393,22 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.4182309761731554,
+          "ci_width_log10": 0.257453278486283,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
-          "inside_ci": true,
+          "inside_ci": false,
           "lane": "sulfur",
           "measured": 4224.0,
           "measured_ppb": 4224.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 5248.63074539804,
-          "predicted_p5": 2916.075258216985,
-          "predicted_p50": 5303.35625844513,
-          "predicted_p95": 7638.880291201709,
-          "predicted_point": 5838.499333851746,
-          "predicted_std": 1440.8262280923516,
+          "predicted_mean": 7496.222226627744,
+          "predicted_p5": 5072.398864532862,
+          "predicted_p50": 7778.582707459604,
+          "predicted_p95": 9176.28038507915,
+          "predicted_point": 8700.381813889859,
+          "predicted_std": 1310.306638166155,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -418,10 +418,10 @@
       "execution_path": "free_precursor",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b9_fit_targets.json"
+          "kinetic_core_b51_fit_targets.json"
         ]
       },
       "fitted_row": false,
@@ -439,27 +439,27 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.783559671959059,
+          "ci_width_log10": 1.6978478876825418,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
-          "inside_ci": true,
+          "inside_ci": false,
           "lane": "sulfur",
           "measured": 121.0,
           "measured_ppb": 121.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 435.8597971203588,
-          "predicted_p5": 28.345770371858013,
-          "predicted_p50": 228.1943021002534,
-          "predicted_p95": 1722.0586418856228,
-          "predicted_point": 191.0584187276661,
-          "predicted_std": 633.1441890028493,
+          "predicted_mean": 3.209891674947032,
+          "predicted_p5": 0.2034251536096588,
+          "predicted_p50": 1.8544191734469955,
+          "predicted_p95": 10.145011421132661,
+          "predicted_point": 2.5645144899325207,
+          "predicted_std": 3.5825721168691285,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.37554869620675624,
+          "ci_width_log10": 0.31890107469431317,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -469,12 +469,12 @@
           "measured_ppb": 198.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 510.9067967351636,
-          "predicted_p5": 315.6910945101783,
-          "predicted_p50": 507.4856000703506,
-          "predicted_p95": 749.5679816027794,
-          "predicted_point": 546.3981501553859,
-          "predicted_std": 135.77485287607584,
+          "predicted_mean": 1.4523638140916941,
+          "predicted_p5": 0.898111640285432,
+          "predicted_p50": 1.475554165643108,
+          "predicted_p95": 1.8716791391804524,
+          "predicted_point": 1.6750585396329571,
+          "predicted_std": 0.339645705515338,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -666,22 +666,22 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.6816190089400151,
+          "ci_width_log10": 3.1318650437944484,
           "compound": "furfural",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
-          "inside_ci": false,
+          "inside_ci": true,
           "lane": "sulfur",
           "measured": 715.22,
           "measured_ppb": 715.22,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 21.61357819186727,
-          "predicted_p5": 1.4832606234913412,
-          "predicted_p50": 9.627383388811474,
-          "predicted_p95": 71.2584672381578,
-          "predicted_point": 7.664427563223355,
-          "predicted_std": 37.880720419513224,
+          "predicted_mean": 803.9623633396891,
+          "predicted_p5": 2.4902139804042354,
+          "predicted_p50": 43.18875565152857,
+          "predicted_p95": 3373.6630982708207,
+          "predicted_point": 55.30864868632143,
+          "predicted_std": 3513.5407740739556,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -746,7 +746,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.6462756736678236,
+          "ci_width_log10": 0.6230265062880238,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -756,12 +756,12 @@
           "measured_ppb": 11.7,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 113.28155980528584,
-          "predicted_p5": 48.36552212638803,
-          "predicted_p50": 95.83768766720411,
-          "predicted_p95": 214.19609758075285,
-          "predicted_point": 235.96951546777137,
-          "predicted_std": 55.50795687541955,
+          "predicted_mean": 118.71829323223454,
+          "predicted_p5": 49.85996904621643,
+          "predicted_p50": 110.4790636300179,
+          "predicted_p95": 209.3044735733232,
+          "predicted_point": 235.81693749255635,
+          "predicted_std": 52.6658539224048,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1398,7 +1398,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.229657472083975,
+          "ci_width_log10": 1.8475467271070334,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1408,17 +1408,17 @@
           "measured_ppb": 229.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 2608.67801098856,
-          "predicted_p5": 60.49847516475274,
-          "predicted_p50": 1121.1218680004777,
-          "predicted_p95": 10266.01514661015,
-          "predicted_point": 1129.4936682330172,
-          "predicted_std": 3857.615211525476,
+          "predicted_mean": 3076.2716482642722,
+          "predicted_p5": 144.05113379925922,
+          "predicted_p50": 1433.3231972767164,
+          "predicted_p95": 10140.594299229502,
+          "predicted_point": 2532.469851247565,
+          "predicted_std": 4380.295274970515,
           "shared_with": "hofmann_ribose_pH3_FFT",
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.5202928918498495,
+          "ci_width_log10": 0.6969780221659435,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1428,12 +1428,12 @@
           "measured_ppb": 553.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 23.224141569530556,
-          "predicted_p5": 11.825451047372498,
-          "predicted_p50": 22.138654833088097,
-          "predicted_p95": 39.184165895453646,
-          "predicted_point": 23.469566346792206,
-          "predicted_std": 8.67369830899789,
+          "predicted_mean": 46.238032791184594,
+          "predicted_p5": 18.96442445200053,
+          "predicted_p50": 42.26070180535291,
+          "predicted_p95": 94.38819673622794,
+          "predicted_point": 41.32159187676484,
+          "predicted_std": 24.52476360305403,
           "shared_with": "hofmann_ribose_pH3_MFT",
           "target_unit": "ppb"
         }
@@ -1460,7 +1460,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.162194109901277,
+          "ci_width_log10": 1.8804061669057706,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1470,17 +1470,17 @@
           "measured_ppb": 12.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 0.1601978691366205,
-          "predicted_p5": 0.003998573754237239,
-          "predicted_p50": 0.08295682830311399,
-          "predicted_p95": 0.5808971168353502,
-          "predicted_point": 0.08979930018383174,
-          "predicted_std": 0.2403917281568699,
+          "predicted_mean": 0.1257733500575999,
+          "predicted_p5": 0.004816228112856823,
+          "predicted_p50": 0.0941663701689042,
+          "predicted_p95": 0.3656901101601867,
+          "predicted_point": 0.18304770112394114,
+          "predicted_std": 0.12075077582672096,
           "shared_with": "hofmann_ribose_pH7_FFT",
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.8430235862174742,
+          "ci_width_log10": 2.98923570758906,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1490,12 +1490,12 @@
           "measured_ppb": 25.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 0.14467201797506285,
-          "predicted_p5": 0.03679960257720336,
-          "predicted_p50": 0.14462146648993612,
-          "predicted_p95": 0.25636971151470345,
-          "predicted_point": 0.17814277261732847,
-          "predicted_std": 0.0689862931964331,
+          "predicted_mean": 0.007609563798056923,
+          "predicted_p5": 2.1473538437167176e-05,
+          "predicted_p50": 0.004778982277605516,
+          "predicted_p95": 0.02094784354186022,
+          "predicted_point": 0.005293740477640356,
+          "predicted_std": 0.007979521248201902,
           "shared_with": "hofmann_ribose_pH7_MFT",
           "target_unit": "ppb"
         }
@@ -1522,27 +1522,27 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.783559671959059,
+          "ci_width_log10": 1.6978478876825418,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
-          "inside_ci": true,
+          "inside_ci": false,
           "lane": "sulfur",
           "measured": 96.0,
           "measured_ppb": 96.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 435.8597971203588,
-          "predicted_p5": 28.345770371858013,
-          "predicted_p50": 228.1943021002534,
-          "predicted_p95": 1722.0586418856228,
-          "predicted_point": 191.0584187276661,
-          "predicted_std": 633.1441890028493,
+          "predicted_mean": 3.209891674947032,
+          "predicted_p5": 0.2034251536096588,
+          "predicted_p50": 1.8544191734469955,
+          "predicted_p95": 10.145011421132661,
+          "predicted_point": 2.5645144899325207,
+          "predicted_std": 3.5825721168691285,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.37554869620675624,
+          "ci_width_log10": 0.31890107469431317,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1552,12 +1552,12 @@
           "measured_ppb": 143.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 510.9067967351636,
-          "predicted_p5": 315.6910945101783,
-          "predicted_p50": 507.4856000703506,
-          "predicted_p95": 749.5679816027794,
-          "predicted_point": 546.3981501553859,
-          "predicted_std": 135.77485287607584,
+          "predicted_mean": 1.4523638140916941,
+          "predicted_p5": 0.898111640285432,
+          "predicted_p50": 1.475554165643108,
+          "predicted_p95": 1.8716791391804524,
+          "predicted_point": 1.6750585396329571,
+          "predicted_std": 0.339645705515338,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1584,7 +1584,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.5414306322355766,
+          "ci_width_log10": 1.5033842598323275,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1594,17 +1594,17 @@
           "measured_ppb": 6.88,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 16.34583897285502,
-          "predicted_p5": 1.6186119927487228,
-          "predicted_p50": 8.363776661169855,
-          "predicted_p95": 56.3084258078166,
-          "predicted_point": 64.08639808800353,
-          "predicted_std": 20.856133934892593,
+          "predicted_mean": 3.561269338851172,
+          "predicted_p5": 0.3358549581696164,
+          "predicted_p50": 1.9006560325847677,
+          "predicted_p95": 10.7037516488394,
+          "predicted_point": 9.797953404262481,
+          "predicted_std": 4.539183220785617,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.6056428512113243,
+          "ci_width_log10": 1.475922546666111,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1614,12 +1614,12 @@
           "measured_ppb": 1.28,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 259.05873969292065,
-          "predicted_p5": 21.81744956398682,
-          "predicted_p50": 170.79922395020847,
-          "predicted_p95": 879.9273807582089,
-          "predicted_point": 610.2552464588841,
-          "predicted_std": 283.17894310855695,
+          "predicted_mean": 63.999589210352134,
+          "predicted_p5": 5.688058753533199,
+          "predicted_p50": 39.818163631250755,
+          "predicted_p95": 170.1714190220508,
+          "predicted_point": 178.09189812223195,
+          "predicted_std": 65.9582581459315,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1646,27 +1646,27 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.1398766137295753,
+          "ci_width_log10": 1.1909472384752136,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
-          "inside_ci": false,
+          "inside_ci": true,
           "lane": "sulfur",
           "measured": 3.29,
           "measured_ppb": 3.29,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 31.69444668071679,
-          "predicted_p5": 6.268665858707723,
-          "predicted_p50": 21.555594448225616,
-          "predicted_p95": 86.50709631741883,
-          "predicted_point": 96.89165073527211,
-          "predicted_std": 30.71469544008571,
+          "predicted_mean": 5.1189981490974095,
+          "predicted_p5": 0.8563027659245456,
+          "predicted_p50": 3.17355915985841,
+          "predicted_p95": 13.291518047412156,
+          "predicted_point": 11.280258751181687,
+          "predicted_std": 5.437790408486668,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.5207417663138973,
+          "ci_width_log10": 1.4293597555517608,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1676,12 +1676,12 @@
           "measured_ppb": 1.46,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 338.6460149443947,
-          "predicted_p5": 32.3744895306479,
-          "predicted_p50": 250.50381267373695,
-          "predicted_p95": 1073.8526560636506,
-          "predicted_point": 535.4957580664627,
-          "predicted_std": 351.32877828428263,
+          "predicted_mean": 65.35207867481158,
+          "predicted_p5": 6.618607682012362,
+          "predicted_p50": 39.54733542384628,
+          "predicted_p95": 177.87970256842925,
+          "predicted_point": 156.41214463978585,
+          "predicted_std": 63.60728239091504,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1708,27 +1708,27 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.8289804148849271,
+          "ci_width_log10": 0.9095757823838966,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
-          "inside_ci": false,
+          "inside_ci": true,
           "lane": "sulfur",
           "measured": 2.4,
           "measured_ppb": 2.4,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 60.098004217108574,
-          "predicted_p5": 20.388596100202296,
-          "predicted_p50": 48.79066914725774,
-          "predicted_p95": 137.52059332728973,
-          "predicted_point": 134.51295872785641,
-          "predicted_std": 41.89279383170847,
+          "predicted_mean": 7.074414306223911,
+          "predicted_p5": 1.9554584180708336,
+          "predicted_p50": 4.851023862664027,
+          "predicted_p95": 15.879044569531047,
+          "predicted_point": 12.26087164681334,
+          "predicted_std": 6.125328325394058,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.4078310098269993,
+          "ci_width_log10": 1.382973341020319,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1738,12 +1738,12 @@
           "measured_ppb": 1.68,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 354.57263809392447,
-          "predicted_p5": 47.16480733098533,
-          "predicted_p50": 256.477464588793,
-          "predicted_p95": 1206.282630858345,
-          "predicted_point": 363.444679163718,
-          "predicted_std": 362.85714161260347,
+          "predicted_mean": 58.02325526983341,
+          "predicted_p5": 6.767152799460567,
+          "predicted_p50": 36.19857193916304,
+          "predicted_p95": 163.44789199162912,
+          "predicted_point": 114.94178284370822,
+          "predicted_std": 55.69063236439225,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1770,7 +1770,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.5981764174540491,
+          "ci_width_log10": 0.7779455121838872,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1780,17 +1780,17 @@
           "measured_ppb": 1.71,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 107.05296986524554,
-          "predicted_p5": 51.181457295791674,
-          "predicted_p50": 94.36328262035366,
-          "predicted_p95": 202.90327873544203,
-          "predicted_point": 170.5336107852122,
-          "predicted_std": 52.752893773607205,
+          "predicted_mean": 9.401427861526365,
+          "predicted_p5": 3.275079083456378,
+          "predicted_p50": 7.345889344187867,
+          "predicted_p95": 19.64116769174596,
+          "predicted_point": 12.566660916937044,
+          "predicted_std": 6.561519570569332,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.3225548950812474,
+          "ci_width_log10": 1.4661845169966077,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1800,12 +1800,12 @@
           "measured_ppb": 1.62,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 293.1963998792553,
-          "predicted_p5": 47.75001021222792,
-          "predicted_p50": 209.9810552109946,
-          "predicted_p95": 1003.5253875057266,
-          "predicted_point": 211.73993849121825,
-          "predicted_std": 302.8235271760111,
+          "predicted_mean": 45.14743315138794,
+          "predicted_p5": 4.690258636347243,
+          "predicted_p50": 30.451014132710334,
+          "predicted_p95": 137.20859233722422,
+          "predicted_point": 71.40343258953904,
+          "predicted_std": 44.27873115144158,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -2086,7 +2086,7 @@
     "network_ph": 6.8,
     "parameters_from": [
       "results/validation/kinetic_core_b1_fit_report.json",
-      "results/validation/kinetic_core_b9_fit_report.json",
+      "results/validation/kinetic_core_b51_fit_report.json",
       "results/validation/kinetic_core_b3_fit_report.json"
     ],
     "unrepresented_compounds": [
@@ -2389,7 +2389,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2402,7 +2402,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2415,7 +2415,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2423,15 +2423,15 @@
         -10.0,
         0.5
       ],
-      "centre": -2.309800292550346,
-      "distribution": "normal_log10",
+      "centre": -2.664207787636937,
+      "distribution": "uniform_band",
       "key": "b8.k_arp_dpo.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
-      "reason": "laplace_covariance_at_b8_optimum",
+      "reason": "unidentified_in_the_fit: sampled across its declared band",
       "sampled": true,
-      "sigma": 1.805127546899361,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 3.3723715579318205,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: flat direction; band = the coordinate's declared bounds",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2439,15 +2439,15 @@
         -10.0,
         0.5
       ],
-      "centre": -1.726679494015763,
+      "centre": -1.9675255284964992,
       "distribution": "normal_log10",
       "key": "b8.k_arp_tdp.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.6067227708213283,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.7828922414472423,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2460,7 +2460,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2473,7 +2473,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2486,7 +2486,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2494,15 +2494,15 @@
         -10.0,
         0.5
       ],
-      "centre": -3.036775946705196,
+      "centre": -3.3090706870232984,
       "distribution": "normal_log10",
       "key": "b8.k_tdp_fur.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.34006525506117447,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.3685860118389766,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2515,7 +2515,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2523,15 +2523,15 @@
         -10.0,
         0.5
       ],
-      "centre": -0.6311161311460204,
-      "distribution": "normal_log10",
+      "centre": -1.4798433768679926,
+      "distribution": "uniform_band",
       "key": "b8.k_fur_fft.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
-      "reason": "laplace_covariance_at_b8_optimum",
+      "reason": "unidentified_in_the_fit: sampled across its declared band",
       "sampled": true,
-      "sigma": 1.02830242946914,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 7.5776886960404495,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: flat direction; band = the coordinate's declared bounds",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2539,15 +2539,15 @@
         -10.0,
         0.5
       ],
-      "centre": -2.0246976531089222,
+      "centre": -2.4346898331123756,
       "distribution": "normal_log10",
       "key": "b8.k_nf_mft.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.16511633901984668,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.21410954104413765,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2555,15 +2555,15 @@
         -10.0,
         0.5
       ],
-      "centre": -2.8681706124816815,
+      "centre": -3.616837374758443,
       "distribution": "normal_log10",
       "key": "b8.k_nf_mp3p.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.34837652973817823,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.4869986502111621,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2571,15 +2571,15 @@
         -10.0,
         0.5
       ],
-      "centre": -3.98088714011877,
+      "centre": -3.946236899205796,
       "distribution": "normal_log10",
       "key": "b8.k_mgo_mp.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.3202692712863992,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.3455699859688514,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2592,7 +2592,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2607,8 +2607,8 @@
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 1.3681277353677636e-11,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 1.2161930560422483e-10,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2621,7 +2621,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2634,7 +2634,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2647,7 +2647,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2660,7 +2660,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2673,7 +2673,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2681,15 +2681,15 @@
         -10.0,
         0.5
       ],
-      "centre": 0.4999999999977239,
+      "centre": 0.4999999999932271,
       "distribution": "normal_log10",
       "key": "b8.k_dimer_mft.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.354419327470044,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.3741714747984317,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2697,15 +2697,15 @@
         -10.0,
         0.5
       ],
-      "centre": 0.49999999737257855,
-      "distribution": "normal_log10",
+      "centre": -0.9131967793420259,
+      "distribution": "uniform_band",
       "key": "b8.k_dimer_fft.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
-      "reason": "laplace_covariance_at_b8_optimum",
+      "reason": "unidentified_in_the_fit: sampled across its declared band",
       "sampled": true,
-      "sigma": 0.5493346621718865,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 14.282025733870679,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: flat direction; band = the coordinate's declared bounds",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2718,7 +2718,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2731,7 +2731,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2739,15 +2739,15 @@
         -10.0,
         0.5
       ],
-      "centre": -0.6513682926639731,
+      "centre": -0.8286311786472114,
       "distribution": "normal_log10",
       "key": "b8.k_fft_decay.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.10687865277784232,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.2601627033439535,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2755,15 +2755,15 @@
         -10.0,
         0.5
       ],
-      "centre": -9.70973788050852,
+      "centre": -9.217000271352141,
       "distribution": "normal_log10",
       "key": "b8.k_dimer_decay.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 1.2022208485890091e-05,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.0036200088132730354,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2776,7 +2776,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2784,15 +2784,15 @@
         -10.0,
         0.5
       ],
-      "centre": 0.4700476884172956,
+      "centre": -0.5129181687571805,
       "distribution": "normal_log10",
       "key": "b8.k_fur_decay.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.4373472219905324,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.6459459922552941,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2805,7 +2805,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2813,15 +2813,15 @@
         -10.0,
         0.5
       ],
-      "centre": -1.1869450426304384,
+      "centre": -1.0623648593706043,
       "distribution": "normal_log10",
       "key": "b8.k_osone_decay.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.44932077431890416,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.41212203858755514,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2829,15 +2829,15 @@
         -10.0,
         0.5
       ],
-      "centre": -9.166403803266467,
+      "centre": -8.022826971749788,
       "distribution": "normal_log10",
       "key": "b8.k_thiol_decay.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 9.890665132424999e-05,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 3.342328850773657e-05,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2845,15 +2845,15 @@
         -10.0,
         0.5
       ],
-      "centre": -2.534762816786632,
+      "centre": -2.231443354978007,
       "distribution": "normal_log10",
       "key": "b8.k_pent_caramel.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.6525987843495092,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.7700311880443744,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2866,7 +2866,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2879,7 +2879,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2892,7 +2892,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2905,7 +2905,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2918,7 +2918,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2931,7 +2931,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2944,7 +2944,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2952,15 +2952,15 @@
         -10.0,
         0.5
       ],
-      "centre": -1.697597816800862,
+      "centre": -1.5285670915189715,
       "distribution": "normal_log10",
       "key": "b8.k_ttca_deg.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.4081453946493267,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.2804296436745612,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2968,15 +2968,15 @@
         -10.0,
         0.5
       ],
-      "centre": -2.066359667088082,
+      "centre": -2.2870955528884944,
       "distribution": "normal_log10",
       "key": "b8.k_cys_thermal.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.27492395681583914,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.31697666098929306,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -2984,15 +2984,15 @@
         -10.0,
         0.5
       ],
-      "centre": -1.8324679217979647,
+      "centre": -1.5565930931925123,
       "distribution": "normal_log10",
       "key": "b8.k_thiolate_loss.log10_k_ref_145C",
       "kind": "fitted_rate",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.6607558126963899,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.3951527278396934,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "log10(k at 145 C)"
     },
     {
@@ -3005,7 +3005,7 @@
       "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
       "sampled": false,
       "sigma": null,
-      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.lumped_formation_Ea_kJ_mol",
+      "source": "results/validation/kinetic_core_b51_fit_report.json: frozen_parameters.lumped_formation_Ea_kJ_mol",
       "unit": "kJ/mol"
     },
     {
@@ -3013,31 +3013,31 @@
         7.0,
         102.0
       ],
-      "centre": 101.99999523142152,
+      "centre": 101.99999877656572,
       "distribution": "uniform_band",
       "key": "b8.decay_Ea_kJ_mol.thiol_sink",
       "kind": "fitted_ea",
       "lane": "sulfur",
       "reason": "unidentified_in_the_fit: sampled across its declared band",
       "sampled": true,
-      "sigma": 29.239590640517058,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: flat direction; band = the coordinate's declared bounds",
+      "sigma": 30.272788063993563,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: flat direction; band = the coordinate's declared bounds",
       "unit": "kJ/mol"
     },
     {
       "band": [
-        126.8894862102488,
-        222.9540512992763
+        102.23662651131386,
+        198.30119160034135
       ],
-      "centre": 174.92176875476255,
+      "centre": 150.2689090558276,
       "distribution": "uniform_band",
       "key": "b8.decay_Ea_kJ_mol.carbonyl_sink",
       "kind": "fitted_ea",
       "lane": "sulfur",
       "reason": "unidentified_in_the_fit: declared band capped by the prefactor prior",
       "sampled": true,
-      "sigma": 60.565697843281875,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: flat direction; band = the coordinate's declared bounds",
+      "sigma": 75.57952219310421,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: flat direction; band = the coordinate's declared bounds",
       "unit": "kJ/mol"
     },
     {
@@ -3045,15 +3045,15 @@
         0.0,
         1.0
       ],
-      "centre": 0.00035866464307272216,
+      "centre": 6.906837979091945e-05,
       "distribution": "fixed",
       "key": "b8.ph_drift.acid_yield_per_sink_event",
       "kind": "fitted_ph_drift",
       "lane": "sulfur",
       "reason": "unidentified_in_the_fit: its bound is DEFINITIONAL (the quantity is a fraction), not a measurement of where the value lies, so a flat draw over it would assert more than anyone knows; still fixed, and a recorded gap",
       "sampled": false,
-      "sigma": 0.3398326678072241,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: flat direction with a definitional bound",
+      "sigma": 0.13727990149389788,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: flat direction with a definitional bound",
       "unit": "mol acid per sink event"
     },
     {
@@ -3061,15 +3061,15 @@
         5.0,
         11.0
       ],
-      "centre": 7.06178000599881,
+      "centre": 7.14411477494431,
       "distribution": "normal",
       "key": "b8.ph_drift.arp_secondary_ammonium_pKa",
       "kind": "fitted_ph_drift",
       "lane": "sulfur",
       "reason": "laplace_covariance_at_b8_optimum",
       "sampled": true,
-      "sigma": 0.48213270985193796,
-      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "sigma": 0.5193648832828912,
+      "source": "results/validation/kinetic_core_b51_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
       "unit": "pKa"
     },
     {
@@ -3757,10 +3757,10 @@
     "generated_by": "src/kinetic_core/uncertainty.py",
     "generated_on": "2026-10-27",
     "git": {
-      "branch": "b51-ph-state-everywhere",
-      "commit": "8185d698495879807f6571e39417f3a3c937ccb0",
+      "branch": "b51-shipped-under-correctness-rule",
+      "commit": "a8d081edd0b6f487eab746cdff8bacdf3ee80311",
       "dirty": true,
-      "short": "8185d698"
+      "short": "a8d081ed"
     },
     "inputs": [
       {
@@ -3768,8 +3768,8 @@
         "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
       },
       {
-        "path": "results/validation/kinetic_core_b9_fit_report.json",
-        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+        "path": "results/validation/kinetic_core_b51_fit_report.json",
+        "sha256": "6831994252eb8a1d45f8d9802a81b9aaffb69dbb1e3f591bb3d4e20fd55558f1"
       },
       {
         "path": "results/validation/kinetic_core_b3_fit_report.json",
@@ -3784,8 +3784,8 @@
         "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
       },
       {
-        "path": "results/validation/kinetic_core_b9_laplace_covariance.json",
-        "sha256": "219cf3a887b27f44b0ced51f273458e5e622e867ced4d74efce4a2587e9a8379"
+        "path": "results/validation/kinetic_core_b51_laplace_covariance.json",
+        "sha256": "cc5b69ebfaf21c4361d3ed1781b89792dc48748f56729313585350215e84fd76"
       },
       {
         "path": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
@@ -4171,18 +4171,18 @@
   ],
   "summary": {
     "benchmark_count": 28,
-    "ci_coverage_hits": 19,
-    "ci_coverage_rate": 0.38,
+    "ci_coverage_hits": 20,
+    "ci_coverage_rate": 0.4,
     "ci_level_pct": 90,
     "fixed_prior_count": 45,
     "honest_literature_coverage": {
       "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator; computed identically across the trust-loop, maillard_path hold-out and external-matrix panels. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim. The SULFUR lane's identified coordinates are sampled jointly from the shipped wave's Laplace covariance (see priors[]); UNIDENTIFIED ones are drawn uniformly across their declared bands (2026-09-04), narrowed for an activation energy to the prefactor prior and skipped where the bound is definitional rather than measured. THIS DOES NOT CLOSE THE COVERAGE GAP and is not meant to: widening the parameter priors all the way to uncapped moves coverage from 19 % to 21 % against a nominal 90 %. What is left is model-structure error -- systematic per-lane offsets a draw around a wrong centre cannot reproduce -- not parameter uncertainty.",
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
-      "hits": 19,
-      "median_ci_width_log10": 0.9793151880814256,
+      "hits": 20,
+      "median_ci_width_log10": 1.009477907072482,
       "not_evaluable": 2,
-      "rate": 0.3958333333333333,
+      "rate": 0.4166666666666667,
       "total": 48
     },
     "matched_compound_count": 50,
@@ -4198,7 +4198,7 @@
     },
     "out_of_sample_literature_coverage": {
       "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
-      "hits": 17,
+      "hits": 18,
       "not_evaluable": 1,
       "rows_the_core_fit_read": {
         "hits": 2,
@@ -4217,16 +4217,16 @@
         "total": 4
       },
       "maillard_path_holdout": {
-        "ci_coverage_rate": 0.3,
-        "hits": 9,
-        "median_ci_width_log10": 0.9648898379368858,
+        "ci_coverage_rate": 0.3333333333333333,
+        "hits": 10,
+        "median_ci_width_log10": 0.9699777610302908,
         "not_evaluable": 1,
         "total": 30
       },
       "trust_loop": {
         "ci_coverage_rate": 0.5,
         "hits": 7,
-        "median_ci_width_log10": 1.0836567380911988,
+        "median_ci_width_log10": 1.072032154401299,
         "not_evaluable": 1,
         "total": 14
       }
@@ -4237,8 +4237,8 @@
         "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
       },
       {
-        "report": "results/validation/kinetic_core_b9_fit_report.json",
-        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+        "report": "results/validation/kinetic_core_b51_fit_report.json",
+        "sha256": "6831994252eb8a1d45f8d9802a81b9aaffb69dbb1e3f591bb3d4e20fd55558f1"
       },
       {
         "report": "results/validation/kinetic_core_b3_fit_report.json",
@@ -4262,9 +4262,9 @@
     },
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.3958333333333333,
-        "hits": 19,
-        "median_ci_width_log10": 0.9793151880814256,
+        "ci_coverage_rate": 0.4166666666666667,
+        "hits": 20,
+        "median_ci_width_log10": 1.009477907072482,
         "not_evaluable": 2,
         "total": 48
       },
@@ -4278,7 +4278,7 @@
       "in_core_fit": {
         "ci_coverage_rate": 0.4,
         "hits": 2,
-        "median_ci_width_log10": 0.4182309761731554,
+        "median_ci_width_log10": 0.36770449060167315,
         "not_evaluable": 1,
         "total": 5
       },
@@ -4292,12 +4292,12 @@
     },
     "sulfur_laplace": {
       "free": 23,
-      "identified": 20,
-      "path": "results/validation/kinetic_core_b9_laplace_covariance.json",
-      "reduced_chi_square": 1.2090479619053558
+      "identified": 17,
+      "path": "results/validation/kinetic_core_b51_laplace_covariance.json",
+      "reduced_chi_square": 1.4076181020494194
     },
     "unsampled_lanes": [],
-    "wall_seconds": 628.4,
+    "wall_seconds": 1669.0,
     "workers": 1
   }
 }

@@ -1,5 +1,7 @@
 # Poisson et al. 2019 (`10.1021/acs.jafc.9b00770`) — single-paper extraction, Wave K5b, 2026-08-29
 
+**DOI:** 10.1021/acs.jafc.9b00770 (as given in this dossier's title line; Crossref-verified on title, first author, year and journal, 2026-10-27)
+
 > Poisson, L.†; Schaerer, A.†; Spreng, S.†; Mestdagh, F.‡; Blank, I.§; Davidek, T.*,†
 > "**Generation of α-Diketones and 4-Hydroxy-2,5-dimethyl-3(2H)-furanone upon Coffee Roasting —
 > Impact of Roast Degree on Reaction Pathways**"

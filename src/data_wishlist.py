@@ -21,8 +21,11 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, Set, Tuple
 from src import data_access, data_paths, provenance
 from src.directional_reliability import COIN, MIN_EVALUABLE_FOR_TRUST, TRUST_MIN_RATE, VERDICT_TRUST, verdict_for, wilson_lower
 
-PROFILE_PATH = data_paths.VALIDATION_DIR / "kinetic_core_b9_profile.json"
-LAPLACE_PATH = data_paths.VALIDATION_DIR / "kinetic_core_b9_laplace_covariance.json"
+# The shipped sulfur wave's slice profile and Laplace covariance, named after the fit report the engine reads.
+from src.kinetic_core.engine import _B2_FIT_REPORT as _SHIPPED_FIT  # noqa: E402
+
+PROFILE_PATH = data_paths.VALIDATION_DIR / _SHIPPED_FIT.name.replace("_fit_report.json", "_profile.json")
+LAPLACE_PATH = data_paths.VALIDATION_DIR / _SHIPPED_FIT.name.replace("_fit_report.json", "_laplace_covariance.json")
 RANKING_PATH = data_paths.VALIDATION_DIR / "experiment_value_ranking.json"
 SULFUR_MODULE = data_paths.REPO_ROOT / "src" / "kinetic_core" / "sulfur.py"
 OUTPUT_JSON = data_paths.VALIDATION_DIR / "data_wishlist.json"

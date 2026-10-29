@@ -38,7 +38,9 @@ B37_SOURCES = {
     "zhang2012": "data/articles/zhang2012.pdf",
     "moisio2015": "data/articles/moisio2015.pdf",
     "wang2026b": "data/articles/Wang2026b.pdf",
-    "zhai2023c": "data/articles/Zhai2023c.pdf",
+    # 2026-10-27: Zhai2023c.pdf was a byte-identical copy of Zhai2023.pdf, deleted; its B37 reading now lives
+    # in zhai2023foodchem_extraction.md, and the name zhai2023c belongs to a different Zhai 2023 paper.
+    "zhai2023foodchem": "data/articles/Zhai2023.pdf",
     "hernandez2023": "data/articles/hernandez2023.pdf",
 }
 

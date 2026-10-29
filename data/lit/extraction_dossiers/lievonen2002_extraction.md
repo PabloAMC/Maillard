@@ -17,6 +17,7 @@ constants exist.
 | Authors | **S. M. Lievonen and Y. H. Roos** |
 | Title | **"Nonenzymatic Browning in Amorphous Food Models: Effects of Glass Transition and Water"** |
 | Venue | ***Journal of Food Science* Vol. 67, Nr. 6, 2002, pp. 2100–2106** — section *JFS: Food Chemistry and Toxicology* |
+| DOI | 10.1111/j.1365-2621.2002.tb09508.x (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27) |
 | MS | **MS 20010534**; submitted 9/26/01, accepted 12/13/01, received 12/27/01 |
 | Affiliations | S. Lievonen — **Dept. of Food Technology, P.O. Box 27, FIN-00014 University of Helsinki**; Y. H. Roos — **Dept. of Food Science, Food Technology and Nutrition, University College Cork, Ireland** |
 | Funding | **EC FAIR CT96-1085**, *"Enhancement of Quality of Food and Related Systems by Control of Molecular Mobility"*; **Academy of Finland 35764**; **Tiura Foundation** |

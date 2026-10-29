@@ -14,7 +14,7 @@ check. No figures in the paper.
 | Title | "Effect of Phospholipid on the Formation of Volatile Heterocyclic Compounds in Heated Aqueous Solutions of Amino Acids and Ribose" |
 | Authors | Frank B. Whitfield (CSIRO, on leave), Donald S. Mottram, Susan Brock, David J. Puckey, Linda J. Salter (AFRC Institute of Food Research, Bristol) |
 | Venue | J. Sci. Food Agric. 42 (1988) 261-272; received 12 March 1987, accepted 25 June 1987 |
-| DOI | not printed on the scan |
+| DOI | 10.1002/jsfa.2740420309 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27). As recorded before: not printed on the scan |
 | Companions | Salter, Mottram, Whitfield 1988 (JSFA 46, 227-242: glycine + ribose + PC identifications); Farmer, Mottram, Whitfield 1989 (JSFA 49, 347-368: cysteine + ribose + PC identifications); Farmer & Mottram 1990 (`farmer1990_extraction.md`: the same cysteine pot with four lipids, relative areas) |
 | Correction to carry | the row printed as "2-heptylthiophene" (622.2 ng) was re-identified as **2-pentylthiapyran** by Farmer & Mottram 1990 ("in our previous paper this compound was incorrectly identified as 2-heptylthiophene") |
 

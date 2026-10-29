@@ -24,8 +24,8 @@ paper).*
 
 | piece | status |
 | --- | --- |
-| pH as a computed state (charge balance, conserved strong-ion difference, two pH scales) | in the engine since wave B2.2, sulfur lane only |
-| heat capacities of ionisation, corrected cysteine and H2S constants, Davies activities, 25 °C scale for measured pH tables, SID carried across heating segments | **wave B51: written and tested, DID NOT SHIP** (2026-10-27, `results/validation/kinetic_core_b51_ship_rule.md`). The switches are in the code and off. With correct speciation the refit fits its own rows better and the Yiltirak hold-outs improve ~10x, but the Hofmann pH 5 pots fall ~100x too low: the unidentified thiol sink is declared to act through the thiolate, and correct speciation makes it destroy the thiols above pH ~5. §9 explains why correct physics can still fail to ship. |
+| pH as a computed state (charge balance, conserved strong-ion difference, two pH scales) | in the engine since wave B2.2, sulfur lane only; on GKL / Suleimenov constants since B51 |
+| heat capacities of ionisation, corrected cysteine and H2S constants, Davies activities, 25 °C scale for measured pH tables, SID carried across heating segments | **wave B51: SHIPPED 2026-10-27** under the correctness rule (§9), with its refit. It first failed its pre-registered score test (the Hofmann pH 5 pots fall ~100x low); the owner then changed the rule so that corrections ship on verification of the change itself, and the rows it made worse are named in the model card with the assumption they expose (the thiolate-acting thiol sink). |
 | speciation on the trunk lane's Amadori steps | planned, wave B52 |
 | general buffer catalysis | planned, wave B53 |
 | water activity: concentration basis and a glass-transition gate | planned, wave B54 |
@@ -409,13 +409,22 @@ same procedure (`scripts/generators/WAVES.md`):
    and the directional claims panel. A change that makes them worse does not ship, however correct
    it is in principle, and the record says which test failed and why.
 
-B51 is the worked example. Every one of its six corrections is a measured constant replacing an error,
-and it still did not ship: refitted, the model predicted two out-of-sample pots ~100x too low, because
-the corrected speciation exposed a wrong structural assumption (the thiol sink acting through the
-thiolate) that the old, wrong constants had been compensating for. Correct physics on a wrong structure
-can predict worse than wrong physics tuned around it; the hold-outs are what tell the two apart, and the
-record of which correction exposed what (the per-switch attribution) is what makes the next wave
-targeted rather than blind.
+B51 is the worked example, and it changed the procedure. Every one of its six corrections is a measured
+constant replacing an error, and refitted, the model predicted two out-of-sample pots ~100x too low,
+because the corrected speciation exposed a wrong structural assumption (the thiol sink acting through the
+thiolate) that the old, wrong constants had been compensating for. Under a pure score gate it would not
+have shipped, and the model would have kept constants known to be wrong because they cancel an error
+elsewhere. Since 2026-10-27 the rule (`scripts/generators/WAVES.md`, "How a change is accepted") accepts
+a change by kind:
+
+- a **correction** (a measured constant replacing a wrong one, a data fix, a scale or unit error, a bug)
+  ships on verification of the change itself — against its source, a derivation or limiting case, and the
+  code's invariants — and a score that falls is reported and diagnosed, not used as a veto; the rows it
+  made worse are listed in the model card with the assumption they expose;
+- a **refit** after a correction ships with it;
+- a **modelling choice** with real alternatives still needs a pre-registered hold-out test.
+
+The per-switch attribution is what makes the next wave targeted: it names which correction exposed what.
 
 Data corrections are different: a buffer a paper states (the nine trust-loop Hofmann bundles' 0.5 M
 phosphate, Mottram's pyrophosphate) is a fact, applied to every arm, under a dated amendment to

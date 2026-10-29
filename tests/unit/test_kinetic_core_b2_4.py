@@ -46,6 +46,19 @@ from pathlib import Path
 
 import pytest
 
+
+@pytest.fixture(autouse=True)
+def _b50_acid_base_constants():
+    """2026-10-27: B51 ships with corrected acid-base constants (ph_state.B51). This file records an
+    earlier wave's physics, which is B51's all-off configuration bit for bit, so it runs with the
+    switches off and restores them afterwards."""
+    from src.kinetic_core import ph_state
+
+    saved = ph_state.B51
+    ph_state.B51 = ph_state.PhStateCorrections()
+    yield
+    ph_state.B51 = saved
+
 ROOT = Path(__file__).resolve().parents[2]
 B23_FIT_REPORT = ROOT / "results/validation/kinetic_core_b2_3_fit_report.json"
 ENSEMBLE = ROOT / "results/validation/kinetic_core_b2_4_ensemble.json"

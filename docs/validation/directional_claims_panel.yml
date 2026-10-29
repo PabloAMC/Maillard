@@ -524,7 +524,9 @@ panel:
     claim_type: monotonic_direction
     category: ph
     observables: ["2,5-Dimethylpyrazine"]
-    conditions:
+    evaluable: false
+    conditions: {}
+    retired_conditions:
       series:
         - label: "pH 4.5"
           system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 30}
@@ -536,16 +538,27 @@ panel:
     source:
       ref: cerny2015
       quote: "Higher pH produced more thiazoles (e.g. 2-acetylthiazole). ... At pH 4.5, sulfur compounds dominated the volatile fraction, whereas with pH 6.5 nitrogen compounds prevailed. ... In the same reaction at pH 7.1, heterocyclic compounds (thiazoles, thiazolines, pyrazines and others) dominate."
-    fit_status: independent
+    fit_status: retired
+    retired_from_fit_status: independent
     fit_note: "2,5-dimethylpyrazine is not a fitted observable in any live fit record."
     model_scope_note: "Expressible: 2,5-dimethylpyrazine is the model's only nitrogen-heterocycle observable, so it is the available proxy for 'nitrogen compounds'."
+    audit_2026_10_27: >-
+      RETIRED - SOURCE MISMATCH (checked against data/articles/cerny2015.pdf, dossier
+      cerny2015_extraction.md). The quote is three sentences spliced out of order from three
+      different systems (cysteine/ribose, norfuraneol, DMHF + cysteine); the chapter never says
+      pyrazines rise with pH in cysteine/ribose, and the arms (10 : 10 mM, 140 C, 30 min) are not a pot
+      any source describes. The direction itself is measured in Meynier & Mottram 1995 Table 3
+      (dimethylpyrazine nd to pH 5.5, then 0.3 / 1.5 at pH 6.0 / 6.5); a re-sourced claim on that pot
+      belongs in a new row. Was independent (not evaluable).
 
   - claim_id: PH-05
     statement: "Furfural/HMF (acid-catalysed sugar dehydration) should NOT rise with pH the way nitrogen heterocycles do; sugar dehydration to furfural is favoured under acidic conditions."
     claim_type: monotonic_direction
     category: ph
     observables: ["Furfural"]
-    conditions:
+    evaluable: false
+    conditions: {}
+    retired_conditions:
       series:
         - label: "pH 4.0"
           system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 4.0, water_activity: 0.98, time_min: 30}
@@ -557,9 +570,16 @@ panel:
     source:
       ref: cerny2015
       quote: "At pH 4.5, sulfur compounds dominated the volatile fraction, whereas with pH 6.5 nitrogen compounds prevailed."
-    fit_status: independent
+    fit_status: retired
+    retired_from_fit_status: independent
     fit_note: "Weakest-sourced row in the panel: the quote establishes the sulfur/nitrogen shift, and the furfural direction is the standard acid-catalysis corollary rather than a quoted measurement. Flagged as such; treat its outcome as indicative only."
     model_scope_note: "Expressible."
+    audit_2026_10_27: >-
+      RETIRED - SOURCE MISMATCH (checked against data/articles/cerny2015.pdf, dossier
+      cerny2015_extraction.md). The chapter says nothing about furfural against pH anywhere; the quote
+      is about the sulfur/nitrogen shift and the furfural direction was the row author's own corollary
+      (its fit_note already called it the weakest-sourced row). The arms (10 : 10 mM, 140 C, 30 min)
+      are not a pot any source describes. Was independent (agree).
 
   # =====================================================================
   # TEMPERATURE DIRECTION

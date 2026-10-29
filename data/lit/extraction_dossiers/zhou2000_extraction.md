@@ -15,6 +15,7 @@ text and no readable values.
 | Title | "Precursors for Formation of 2-Pentyl Pyridine in Processing of Soybean Protein Isolates" |
 | Authors | A. Zhou, W. L. Boatright (Animal Science Dept., University of Kentucky) |
 | Venue | J. Food Sci. 65(7), 2000, 1155-1159 (MS 19991220) |
+| DOI | 10.1111/j.1365-2621.2000.tb10257.x (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27) |
 | Naming | 2-pp = 2-pentyl pyridine; SPI = soybean protein isolate; Stage I / II / III = sampling points of Figure 1 (after the pH 9 extraction; after the pH 4.5 precipitation; after lyophilisation, in that order as far as the text allows; Figure 1 not readable) |
 | Companions | Boatright & Crum 1997 (2-pp has the largest flavour value of any SPI volatile); Zhou & Boatright 1999, J. Food Sci. 64, 852 (pH effect during SPI processing; 2-pp does not rise without the alkaline extraction); Boatright et al. 1998 (pro-oxidants FeCl3, CuCl2, UV raise 2-pp); Buttery 1977 (the Schiff-base / dihydropyridine mechanism they test) |
 

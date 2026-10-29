@@ -1,5 +1,7 @@
 # Blank & Fay 1996 (10.1021/jf950439o) — single-paper extraction, 2026-08-29
 
+**DOI:** 10.1021/jf950439o (as given in this dossier's title line; Crossref-verified on title, first author, year and journal, 2026-10-27)
+
 > Blank, I.\*; Fay, L. B.
 > "**Formation of 4-Hydroxy-2,5-dimethyl-3(2H)-furanone and 4-Hydroxy-2(or 5)-ethyl-5(or 2)-methyl-3(2H)-furanone through Maillard Reaction Based on Pentose Sugars**"
 > *J. Agric. Food Chem.* **1996**, 44 (2), 531−536. Nestlé Research Center, Nestec Ltd.,

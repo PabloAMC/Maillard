@@ -1,5 +1,7 @@
 # Zhou, Xia, Cui, Zhai, Zhang, Hayat, Zhang & Ho 2023 (10.1021/acs.jafc.2c08360) — Wave K3 extraction 2026-08-28
 
+**DOI:** 10.1021/acs.jafc.2c08360 (as given in this dossier's title line; Crossref-verified on title, first author, year and journal, 2026-10-27)
+
 **THE CORRECT PAPER HAS ARRIVED.** Source PDF: `data/articles/Zhou2023b.pdf` (10 pp.)
 **plus** `data/articles/zhou2023b_supporting.pdf` (9 pp., the Supporting Information).
 

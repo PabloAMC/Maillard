@@ -1,5 +1,7 @@
 # Shu & Ho 1988 (JAFC 36:801−803) — single-paper extraction, Wave K5b, 2026-08-29
 
+**DOI:** 10.1021/jf00082a032 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27)
+
 > Shu, C.-K.*,†; Ho, C.-T.
 > "**Effect of pH on the Volatile Formation from the Reaction between Cysteine and
 > 2,5-Dimethyl-4-hydroxy-3(2H)-furanone**"

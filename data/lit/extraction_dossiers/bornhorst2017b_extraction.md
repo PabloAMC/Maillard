@@ -33,6 +33,7 @@ corrections to the registry entry fall out of that reading and are recorded in F
 | Title | "Thermal pasteurization process evaluation using mashed potato model food with Maillard reaction products" |
 | Authors | Ellen R. Bornhorst, Juming Tang (corresponding, jtang@wsu.edu), Shyam S. Sablani, Gustavo V. Barbosa-Cánovas — Department of Biological Systems Engineering, Washington State University, Pullman, WA 99164-6120, USA. **Identical author list and address to Part I** |
 | Venue | LWT — Food Science and Technology. Accepted manuscript, © 2017 published by Elsevier under the Elsevier user licence. **Article id S0023643817302384**; the manuscript carries no volume, page or DOI |
+| DOI | 10.1016/j.lwt.2017.04.019 (not printed in the accepted manuscript; Crossref match on title, first author, year and journal (LWT 82, 454-463), 2026-10-27) |
 | Which of the pair | **PART II.** Part I is `bornhorst2017.pdf`, article id **S0023643816305825**, "Development of model food systems for thermal pasteurization applications based on Maillard reaction products", © 2016 |
 | Keywords | quality; kinetics; chemical marker; microwave-assisted pasteurization |
 | The marker | **M-2 = 4-hydroxy-5-methyl-3(2H)-furanone = norfuraneol**, registry id `norfuraneol`, engine species **`NF`** on the sulfur lane |

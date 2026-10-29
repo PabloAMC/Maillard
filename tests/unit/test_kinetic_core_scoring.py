@@ -98,7 +98,8 @@ _bundle_path = data_paths.bundle_path  # panel-wide resolver (2026-09-03)
 
 def _fit_target_record():
     paths = fit_targets.record_paths()
-    assert [p.name for p in paths] == ["kinetic_core_b9_fit_targets.json"]
+    # RE-PINNED 2026-10-27: B51 ships (WAVES.md acceptance rule); its record replaced B9's.
+    assert [p.name for p in paths] == ["kinetic_core_b51_fit_targets.json"]
     return json.loads(paths[0].read_text())
 
 
@@ -122,7 +123,7 @@ def test_sulfur_fit_leverage_is_read_from_the_record_and_is_low():
     record = _fit_target_record()
     lev = record["fit_leverage"]
     assert lev["free_parameters"] < lev["fitted_rows"]
-    report = json.loads((data_paths.VALIDATION_DIR / "kinetic_core_b9_fit_report.json").read_text())
+    report = json.loads((data_paths.VALIDATION_DIR / "kinetic_core_b51_fit_report.json").read_text())
     assert lev["free_parameters"] == report["free_set"]["n_free"]
     targets = fit_targets.core_fit_targets("hofmann1998_c2c3_recombination_145C_20min_pH5")
     assert len(targets) == 1 and targets[0].leverage_class == "global_low_leverage"

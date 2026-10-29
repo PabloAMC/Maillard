@@ -14,7 +14,7 @@ layer is unsafe for this file and must not be used by any downstream wave.
 | title | "Mechanism and speed of reactions between haemoglobin and glucose; consequences for the measurement of glycosylated haemoglobins in patient material" |
 | venue | *Clinica Chimica Acta*, Elsevier Biomedical Press; article code CCA 2312 |
 | volume/pages/year | **125 (1982) 341–350** |
-| DOI | none printed; PII 0009-8981(82)90265-0. Article code `0009-8981/82/0000-0000/$02.75` |
+| DOI | 10.1016/0009-8981(82)90265-0 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27; consistent with the printed PII). As recorded before: none printed; PII 0009-8981(82)90265-0. Article code `0009-8981/82/0000-0000/$02.75` |
 | received/revision | "(Received April 20th; revision July 12th, 1982)" |
 | affiliation | Department of Clinical Chemistry, Winterswijkse Ziekenhuizen, Postbus 9005, 7100 GG Winterswijk (The Netherlands) |
 | PDF character | **OCR scan** (Acrobat 3.0 Capture), no page-count metadata, image-backed with a poor text layer |

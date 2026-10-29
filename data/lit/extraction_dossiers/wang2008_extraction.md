@@ -1,5 +1,7 @@
 # Wang & Ho 2008 (`10.1021/jf8012025`) — single-paper extraction, Wave K5b, 2026-08-29
 
+**DOI:** 10.1021/jf8012025 (as given in this dossier's title line; Crossref-verified on title, first author, year and journal, 2026-10-27)
+
 > Wang, Y.; Ho, C.-T.*
 > "**Formation of 2,5-Dimethyl-4-hydroxy-3(2H)-furanone through Methylglyoxal: A Maillard Reaction
 > Intermediate**"

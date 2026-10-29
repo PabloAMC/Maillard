@@ -4,16 +4,16 @@
     "artifact": "kinetic_core_b51_ship_rule",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "9bb998ef61abb4818979a2450b70908889efa8a2",
-      "short": "9bb998ef",
-      "branch": "b51-ph-state-everywhere",
+      "commit": "218ab84483b8c89b0a5216aee1097cd65e637e56",
+      "short": "218ab844",
+      "branch": "b51-shipped-under-correctness-rule",
       "dirty": true
     },
     "generated_by": "scripts/generators/generate_kinetic_core_b51_ship_rule.py",
     "inputs": [
       {
         "path": "src/kinetic_core/ph_state.py",
-        "sha256": "8b7833b67034ff956eea2615eb6cc7ab20d8154b75c68803422b65577ba7524e"
+        "sha256": "0c9b806e96e26f0383dabf40939f645dc2c6abe89de809911c72b78aaa0c398e"
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
@@ -81,27 +81,27 @@
       },
       "T4_directional": {
         "baseline": {
-          "agree": 18,
-          "evaluable": 31
+          "agree": 17,
+          "evaluable": 30
         },
         "arm": {
-          "agree": 18,
-          "evaluable": 32
+          "agree": 17,
+          "evaluable": 31
         },
         "pass": true
       },
       "T5_directional_ph": {
         "baseline": {
-          "agree": 6,
-          "evaluable": 8,
+          "agree": 5,
+          "evaluable": 7,
           "misses": [
             "HOX-03",
             "CER07-PH-01"
           ]
         },
         "arm": {
-          "agree": 5,
-          "evaluable": 8,
+          "agree": 4,
+          "evaluable": 7,
           "misses": [
             "PH-07",
             "HOX-03",
@@ -152,27 +152,27 @@
       },
       "T4_directional": {
         "baseline": {
-          "agree": 18,
-          "evaluable": 31
+          "agree": 17,
+          "evaluable": 30
         },
         "arm": {
-          "agree": 17,
-          "evaluable": 31
+          "agree": 16,
+          "evaluable": 30
         },
         "pass": false
       },
       "T5_directional_ph": {
         "baseline": {
-          "agree": 6,
-          "evaluable": 8,
+          "agree": 5,
+          "evaluable": 7,
           "misses": [
             "HOX-03",
             "CER07-PH-01"
           ]
         },
         "arm": {
-          "agree": 5,
-          "evaluable": 8,
+          "agree": 4,
+          "evaluable": 7,
           "misses": [
             "PH-07",
             "HOX-03",
@@ -196,7 +196,7 @@
     }
   },
   "laplace_A": {
-    "identified": 15,
+    "identified": 17,
     "free": 23
   },
   "rows_moved_over_0_05_dex": [

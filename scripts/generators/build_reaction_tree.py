@@ -69,6 +69,13 @@ NODE_EDGE = {"good": "#178F6E", "mid": "#D9822B", "bad": "#B23A3A", "none": "#9A
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9, "figure.dpi": 150})
 
 
+
+def _shipped_fit() -> Path:
+    """The sulfur fit report the engine reads (B51 since 2026-10-27)."""
+    from src.kinetic_core.engine import _B2_FIT_REPORT
+
+    return Path(_B2_FIT_REPORT)
+
 def _read(p: Path):
     return json.loads(p.read_text(encoding="utf-8"))
 
@@ -81,9 +88,11 @@ def constant_status(lane: str) -> Dict[str, str]:
     priors = _read(V / "core_prediction_uncertainty.json")["priors"]
     fit_free, identified = set(), {}
     if lane == SULFUR:
-        rep = _read(V / "kinetic_core_b9_fit_report.json")
+        from src.kinetic_core.engine import _B2_FIT_REPORT  # the shipped sulfur wave
+
+        rep = _read(_B2_FIT_REPORT)
         fit_free = set(rep["free_set"]["keys"])
-        lap = _read(V / "kinetic_core_b9_laplace_covariance.json")
+        lap = _read(V / _B2_FIT_REPORT.name.replace("_fit_report.json", "_laplace_covariance.json"))
         identified = {(c["key"] or c["block"]): bool(i) for c, i in zip(lap["coordinates"], lap["identified"])}
     reason: Dict[str, Dict[str, str]] = defaultdict(dict)      # key -> {coordinate kind: reason}
     for p in priors:
@@ -440,8 +449,8 @@ def main() -> int:
     from figure_manifest import ENGINE_SOURCES, record
 
     record("scripts/generators/build_reaction_tree.py",
-           [V / "core_panel_scores.json", V / "core_prediction_uncertainty.json", V / "kinetic_core_b9_fit_report.json",
-            V / "kinetic_core_b9_laplace_covariance.json", ROOT / "scripts" / "generators" / "build_reaction_tree.py", *ENGINE_SOURCES],
+           [V / "core_panel_scores.json", V / "core_prediction_uncertainty.json", _shipped_fit(),
+            V / _shipped_fit().name.replace("_fit_report.json", "_laplace_covariance.json"), ROOT / "scripts" / "generators" / "build_reaction_tree.py", *ENGINE_SOURCES],
            ["10_tree_sugar.png", "11_tree_sulfur.png", "12_tree_acrylamide.png", "13_steps_by_status.png",
             "14_fat_path.png"])
     print("wrote 3 trees + summary:", {k: dict(v) for k, v in counts.items()})

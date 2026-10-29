@@ -183,7 +183,14 @@ def main(argv=None) -> int:
     dof = max(n_rows - n_free, 1)
     chi2_red = float(r0 @ r0) / dof
     jtj = jac.T @ jac
-    cov = np.linalg.pinv(jtj) * chi2_red
+    # 2026-10-27 (a correction under WAVES.md's acceptance rule): `np.linalg.pinv` on a JtJ that is singular
+    # to machine precision (condition ~1e16) can return a matrix with LARGE negative eigenvalues (-0.86 on
+    # B51's), which no covariance can have, and the envelope's Cholesky then fails. The pseudo-inverse is
+    # taken on JtJ's own eigenbasis instead, dropping every direction below a relative tolerance of 1e-12:
+    # positive semi-definite by construction, identical to pinv wherever pinv was well defined.
+    w, v = np.linalg.eigh(0.5 * (jtj + jtj.T))
+    keep = w > 1e-12 * float(np.max(w))
+    cov = (v[:, keep] / w[keep]) @ v[:, keep].T * chi2_red
     sigmas = np.sqrt(np.clip(np.diag(cov), 0.0, None))
     eig = np.linalg.eigvalsh(jtj)
     # A coordinate is IDENTIFIED when its sigma is below the kind's threshold AND the

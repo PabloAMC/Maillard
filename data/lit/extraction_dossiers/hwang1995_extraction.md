@@ -19,6 +19,7 @@ numbers in section 4.
 | Title | "Relative Reactivities of Amino Acids in Pyrazine Formation" |
 | Authors | Hui-Ing Hwang, Thomas G. Hartman, Chi-Tang Ho (Dept. of Food Science and Center for Advanced Food Technology, Rutgers, New Brunswick NJ) |
 | Venue | J. Agric. Food Chem. 1995, 43, 179-184; received 21 June 1994, accepted 21 October 1994 |
+| DOI | 10.1021/jf00049a033 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27) |
 | Article id | JF940332L (no DOI printed) |
 | Naming | ctrl = glycine only; Gln / Lys / Asn / Phe / Glu / Asp / Ile / Arg each mean **labelled glycine PLUS that amino acid** in the same pot. "Ref" in Figures 1-4 is the same pot as "ctrl" in Table 1 |
 | Companion | `hwang1995b_extraction.md` — same pots, same nine systems, the pyridines / pyrroles / oxazoles from the identical experiment (JAFC 1995, 43, 2917-2921) |

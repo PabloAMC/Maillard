@@ -24,7 +24,7 @@ these four pages (flags 1-3).
 | Title | "Modelling the formation of Maillard reaction intermediates for the generation of flavour" |
 | Authors | Guillaume Desclaux (a), Tahir I. Malik (b), Chris Winkel (c), D. Leo Pyle (a), Donald S. Mottram (a) — (a) University of Reading, School of Food Biosciences; (b) ICI Strategic Technology Group, Wilton Centre, Redcar; (c) Quest Foods, Bussum, NL |
 | Venue | W. L. P. Bredie and M. A. Petersen (eds), *Flavour Science: Recent Advances and Trends*, Developments in Food Science 43, Elsevier, 2006, pp. 367-370 (conference paper, 11th Weurman Flavour Research Symposium) |
-| DOI | not printed on the pages; the PDF metadata carries PII S0167-4501(06)80087-7 |
+| DOI | 10.1016/S0167-4501(06)80087-7 (not printed on the pages; Crossref match on title, first author, year and book, consistent with the PII in the PDF metadata, 2026-10-27). As recorded before: not printed on the pages; the PDF metadata carries PII S0167-4501(06)80087-7 |
 | PDF on disk | `desclaux2006.pdf`, 4 scanned pages (CCITT bitmaps + OCR layer) |
 | Tables / figures | 0 tables; Figure 1 (network diagram), Figure 2 (three panels of model-vs-data at 100 C, pH 6: xylose; nor-HDF; 3-deoxyosone + hydroxyacetone) |
 | Systems in THIS paper | xylose + glycine only, pH 6 only, 80 / 100 / 120 C (results shown for 100 C only) |

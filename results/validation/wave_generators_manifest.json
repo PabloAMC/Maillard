@@ -66,6 +66,7 @@
     "scripts/generators/generate_kinetic_core_b4_fit.py": "45e9bd8395b4519c2fbc3762ff8f3b49c34a3f056962e6d2946cc076c4db64bf",
     "scripts/generators/generate_kinetic_core_b4_holdout.py": "9638f8897c8075af6f3c6f2095866c0413301bfcc361d21a94bffa16626e5cf5",
     "scripts/generators/generate_kinetic_core_b50_ship_rule.py": "5134d9980ab8c49e69b1eab80e3cc56adef5875d7fc48558fd7ebed4626e6b4c",
+    "scripts/generators/generate_kinetic_core_b51_1_ship_rule.py": "2cca444499f2ad606a73d2444719c699aa0cb15ff94e038020b88def208b9f86",
     "scripts/generators/generate_kinetic_core_b51_fit.py": "c5d22200ed93d05b02af80473589d70784f66671f216c35728476d4d024fbe15",
     "scripts/generators/generate_kinetic_core_b51_ship_rule.py": "cb861e223836bd5bb82415c4e5b8d8c471610c73fa03d00dc5a40de8f68afc92",
     "scripts/generators/generate_kinetic_core_b6_fit.py": "a2a1a2b676ae466eb854f27c0a832b1ba8b7ba2565bc1cc02ac0ed5fdf607338",

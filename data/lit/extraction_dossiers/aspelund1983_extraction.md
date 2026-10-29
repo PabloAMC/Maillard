@@ -21,7 +21,7 @@ Repo status before this dossier: Aspelund 1983 has **no extraction dossier**, an
 | Title | "Adsorption of Off-flavor Compounds onto Soy Protein: A Thermodynamic Study" |
 | Authors | Thomas G. Aspelund* and Lester A. Wilson — Department of Food Technology, Iowa State University, Ames, Iowa 50011 |
 | Venue | J. Agric. Food Chem. 1983, **31** (3), **539-545** |
-| DOI | **NO DOI IS PRINTED IN THE PDF.** This is a 1983 ACS article; the footer carries only the CODEN-era line `0021-8561/83/1431-0539$01.50/0` and "© 1983 American Chemical Society". Nothing DOI-shaped appears anywhere in the seven pages. |
+| DOI | 10.1021/jf00117a019 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27). As recorded before: **NO DOI IS PRINTED IN THE PDF.** This is a 1983 ACS article; the footer carries only the CODEN-era line `0021-8561/83/1431-0539$01.50/0` and "© 1983 American Chemical Society". Nothing DOI-shaped appears anywhere in the seven pages. |
 | Dates | Received for review 14 July 1982; revised manuscript received 30 December 1982; accepted 10 January 1983 |
 | Funding / provenance | Iowa State University Research Foundation and the Iowa Agriculture and Home Economics Station (Journal Paper No. J-10721, Project 2164, contributing to North Central Regional Research Project NC-136). Portions presented at the World Soybean Research Conference-II, 26-29 March 1979, Raleigh NC (p. 545) |
 | Protein | **Edi-Pro A**, Ralston Purina — a **spray-dried isoelectric soy protein isolate**, used as **dry GC column packing**. Surface area **0.2019 ± 0.0011 m^2/g** by Micromeritics, "no difference in surface area for samples degassed at 30 or 100 C" (p. 540) |

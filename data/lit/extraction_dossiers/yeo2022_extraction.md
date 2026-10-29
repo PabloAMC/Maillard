@@ -27,7 +27,7 @@ this work it is misattributed; its DOI and authorship need checking before it is
 | Degree | PhD thesis, Department of Food and Nutritional Sciences, University of Reading, October 2022 (declaration dated 6 October 2022) |
 | Supervisors | Jane K. Parker, Dimitrios P. Balagiannis, Jean H. Koek (Unilever) |
 | Funding | Unilever and the Graduate School (p. iv) |
-| DOI | none printed |
+| DOI | 10.48683/1926.00111736 (not printed in the thesis; DataCite (University of Reading repository) match on title, author, year and institution, 2026-10-27). As recorded before: none printed |
 
 ## 1. Methods
 

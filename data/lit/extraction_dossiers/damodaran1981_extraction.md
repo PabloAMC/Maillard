@@ -30,7 +30,7 @@ disk**. This file closes that loop.
 | Title | "Interaction of Carbonyls with Soy Protein: Thermodynamic Effects" |
 | Authors | Srinivasan Damodaran (corresponding) and John E. Kinsella — Institute of Food Science, Stocking Hall, Cornell University, Ithaca, New York 14853 |
 | Venue | J. Agric. Food Chem. **1981**, **29** (6), 1249-1253. Received for review 14 May 1981; accepted 20 August 1981. Supported in part by NSF grant CPE 80-18394 |
-| DOI / article ID | none printed; the ACS code line reads `0021-8561/81/1429-1249$01.25/0` |
+| DOI / article ID | 10.1021/jf00108a037 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27). As recorded before: none printed; the ACS code line reads `0021-8561/81/1429-1249$01.25/0` |
 | Protein | **whole soy protein**, prepared in-house from **defatted, low-heat-treated soy flour** (Central Soya, Chicago; lot 878, code 3040) by isoelectric precipitation. **Not a commercial isolate** |
 | Method | **equilibrium dialysis** (Spectrapor-2 membrane, matched acrylic half-cells), free ligand extracted into isooctane and quantified by **GC-FID** |
 | Basis | **"the number of moles of ligand bound per 100 000 g of soy protein"** — the 100 kDa basis is stated in the Methods, in the Figure 1 legend and again in the Discussion. **It is printed, not inferred** |

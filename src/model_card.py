@@ -362,6 +362,52 @@ def run_gates(gates: Tuple[str, ...] = GATES) -> List[Dict[str, Any]]:
     return results
 
 
+#: 2026-10-27 (the acceptance rule, scripts/generators/WAVES.md): a CORRECTION ships on verification of
+#: the change itself, and every row it made worse is named here with the assumption it exposes, until the
+#: wave that fixes that assumption removes the entry. Declared, not computed: the ROWS are declared; their
+#: current fold errors are read live from the scorecard.
+KNOWN_EXPOSED_ASSUMPTIONS: Tuple[Dict[str, Any], ...] = (
+    {
+        "wave": "B51 (the pH state on GKL / Suleimenov & Seward constants)",
+        "rows": (
+            ("hofmann1998_ribose_cysteine_145C_20min_pH5", "2-Furfurylthiol (FFT)"),
+            ("hofmann1998_ribose_cysteine_145C_20min_pH5", "2-Methyl-3-furanthiol (MFT)"),
+            ("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", "2-Furfurylthiol (FFT)"),
+            ("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", "2-Methyl-3-furanthiol (MFT)"),
+        ),
+        "assumption": (
+            "the unidentified thiol sink is declared to act through the THIOLATE, with cysteine's thiol pK "
+            "standing in for MFT and FFT (neither is measured); under correct speciation it destroys the "
+            "thiols above pH ~5, so these buffered pH 5 pots are predicted ~100x low"
+        ),
+    },
+    {
+        "wave": "B51 (the 25 C scale for the measured pH tables)",
+        "rows": (),
+        "claims": ("SUG-09",),
+        "assumption": (
+            "the hexose entry to the thiols (r_glc_c2c3 / r_glc_fur, unidentified since B9) makes FFT from "
+            "a hexose that the paper does not detect; faster cysteine thermolysis in unbuffered pots feeds it"
+        ),
+    },
+)
+
+
+def collect_exposed_assumptions() -> List[Dict[str, Any]]:
+    """The declared entries, each row's current fold error read from the tracked scorecard."""
+    scores = _read_json(data_paths.CORE_PANEL_SCORES)
+    folds: Dict[Tuple[str, str], Any] = {}
+    if isinstance(scores, Mapping):
+        for bench in scores.get("benchmarks") or []:
+            for row in bench.get("compounds") or []:
+                folds[(str(bench.get("benchmark_id")), str(row.get("compound")))] = row.get("fold_error")
+    out = []
+    for entry in KNOWN_EXPOSED_ASSUMPTIONS:
+        out.append({**entry, "rows": [{"benchmark": b, "compound": c, "fold_error": folds.get((b, c))}
+                                       for b, c in entry["rows"]]})
+    return out
+
+
 def build_model_card(*, run_gate_checks: bool = True) -> Dict[str, Any]:
     card = {
         "artifact": "maillard_model_card",
@@ -376,6 +422,7 @@ def build_model_card(*, run_gate_checks: bool = True) -> Dict[str, Any]:
         "directional": collect_directional(),
         "no_verifiable_source": collect_no_verifiable_source_census(),
         "sulfur_anchor": collect_sulfur_anchor_status(),
+        "exposed_assumptions": collect_exposed_assumptions(),
         "gates": run_gates() if run_gate_checks else [],
     }
     card["headline_sentences"] = _headline_sentences(card)
@@ -651,6 +698,17 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
     lines.append("")
     for sentence in card.get("headline_sentences", []):
         lines.append(f"1. {sentence}" if False else f"- {sentence}")
+    exposed = card.get("exposed_assumptions") or []
+    if exposed:
+        lines.append("")
+        lines.append(
+            "**Correct changes that made rows worse, and the assumption each exposes** (accepted under the "
+            "correctness rule, `scripts/generators/WAVES.md`; an entry leaves when its assumption is fixed):"
+        )
+        for entry in exposed:
+            named = [f"{r['benchmark']} {r['compound']} ({_fold(r['fold_error'])})" for r in entry["rows"]]
+            named += [f"claim {c}" for c in entry.get("claims", ())]
+            lines.append(f"- {entry['wave']}: {'; '.join(named)}. Exposes: {entry['assumption']}.")
     lines.append("")
     lines.append("| Claim type | System class | Measured | Verdict |")
     lines.append("|---|---|---|---|")

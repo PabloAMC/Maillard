@@ -21,6 +21,7 @@ not overturn that verdict; it adds the levels B18 section 6 and Programme 7 aske
 | Title | "Simultaneous generation of acrylamide, β-carboline heterocyclic amines and advanced glycation end products in an aqueous Maillard reaction model system" |
 | Authors | Wei Quan, Yong Li, Ye Jiao, Chaoyi Xue, Guoping Liu, Zhaojun Wang, Zhiyong He, Fan Qin, Maomao Zeng (corresponding), Jie Chen (corresponding); Jiangnan University, Wuxi |
 | Venue | Food Chemistry, accepted 17 Jun 2020 (received 28 Mar, revised 14 Jun 2020); journal pre-proof |
+| DOI | 10.1016/j.foodchem.2020.127387 (printed in the pre-proof, as the source line below records; Crossref-verified on title, first author, year and journal, 2026-10-27) |
 | Systems | Lys/Glu, Asn/Glu, Trp/Glu, Mix/Glu (Lys + Asn + Trp + Glu) |
 | Naming | "MRHPs" = Maillard reaction harmful products; "HAs" = β-carboline heterocyclic amines (harmane, norharmane); "Mel" = melanoidins (A470 / 282 L mol^-1 cm^-1); GO glyoxal; MGO methylglyoxal; AP Amadori product (not measured) |
 | Lineage | model system "as previously described (Nguyen et al., 2016; Yu et al., 2020)"; CML/CEL method Jiao 2017 / Yu 2018; dicarbonyls Scheijen & Schalkwijk 2014 / Jiao 2019; fitting Origin 9.0 + SAS 8.0 non-linear least squares (not Athena; no HPD) |

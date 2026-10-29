@@ -114,3 +114,25 @@ constant B47 and B49 ended at.
 2. The thiolate assignment of the thiol sink itself: with FFT's thiol pK nearer 9.4 (benzylic) the
    thiolate route would be ~100x weaker for FFT, and MFT's (heteroaryl, nearer 7) stronger. Neither pK is
    measured; the thiol-sink experiment in `docs/guides/EXPERIMENTS.md` would decide it.
+
+## 7. Re-decision under the changed acceptance rule (2026-10-27, owner decision)
+
+The verdict above was correct under the rule this file pre-registered, and it is kept. On the same day the
+owner changed how changes are accepted (`scripts/generators/WAVES.md`, "How a change is accepted"):
+corrections ship on verification of the change itself, and their scores are reported as diagnosis rather
+than used as a veto. Under that rule **B51 SHIPS**, candidate (A):
+
+- **Kind 1, the six switches, each verified independently of the model's scores:** GKL Table 7.23 (cysteine)
+  and Tables 7.2 / 7.22 / 7.51 / 7.52 / 7.56 (dCp) checked against the PDF by the `goldberg2002` dossier's
+  audit; Suleimenov & Seward's Eq. 22 checked against their Table 2 (within 0.023 everywhere); the dCp law
+  checked against the tabulated pKw (0.04 / 0.11 units at 100 / 150 °C); all-off reproducing B50 bit for
+  bit and the ionic-strength fixed point converged (`tests/unit/test_kinetic_core_b51.py`); the SID carry a
+  bug fix; the 25 °C scale the one printed by the sources of the three tables.
+- **Kind 2, the refit (A):** cost 20.41 on B47's 52 corrected rows, Laplace 15/23 identified, profile
+  4 quadratic / 10 asymmetric / 1 flat / 8 bound-limited. (B), the old constants under the new physics, is
+  not a candidate under the rule: constants calibrated on the old errors do not ship with the new physics.
+- **Recorded worse, with the assumption each exposes:** the Hofmann ribose and xylose pH 5 pots (~100x low;
+  T3 3/4 → 0/4) and the union panel (18/50 → 16/50) expose the thiol sink declared to act through the
+  THIOLATE with cysteine's thiol pK standing in for MFT and FFT; SUG-09 exposes the hexose entry to the
+  thiols. Recorded better: every Yiltirak hold-out row (MFT 120 °C 56x → 5.1x), hold-out sulfur median
+  1.87 → 1.61 dex. These two assumptions are the next waves.

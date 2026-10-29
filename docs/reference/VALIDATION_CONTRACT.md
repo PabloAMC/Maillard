@@ -135,6 +135,16 @@ The explicit strict gate for free-amino-acid benchmarks is:
 MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientific/test_benchmarks.py -q
 ```
 
+### Acceptance of changes (2026-10-27)
+
+A change to the model is accepted by KIND (the full rule: `scripts/generators/WAVES.md`, "How a change is
+accepted"). **Corrections** (a measured constant replacing a wrong one, a data record fixed against its
+source, a unit or scale error, a bug) are accepted on verification of the change itself, and their effect
+on the scores is reported and diagnosed, never used as a veto. **Modelling choices** with real
+alternatives are accepted only by a pre-registered hold-out test. Every headline number in this document
+is therefore a measurement of the model as it is, including where a correct change made a row worse; such
+rows are named in the model card with the assumption they expose.
+
 ## 2. Current Validated Envelope
 
 > **Provenance audit (2026-08-26).** An adversarial citation audit found that the

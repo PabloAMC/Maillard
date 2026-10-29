@@ -119,6 +119,11 @@ _B1_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b1_fit_report.json"
 #: ships even where it scores worse, and where it scores worse the B8 hold-out
 #: report says so. (It does score worse on the hold-out panel: 12/32 -> 8/30.)
 _B2_FIT_REPORT_CANDIDATES = (
+    # 2026-10-27: B51 SHIPS under the correctness rule (scripts/generators/WAVES.md, "How a change is
+    # accepted"): the pH state on GKL / Suleimenov & Seward constants, refitted on B47's corrected rows.
+    # It scores worse on the Hofmann pH 5 pots (~100x low), and the record says so and names the
+    # assumption that exposes (the thiolate-acting thiol sink); see kinetic_core_b51_prereg.md sec. 7.
+    data_paths.VALIDATION_DIR / "kinetic_core_b51_fit_report.json",
     data_paths.VALIDATION_DIR / "kinetic_core_b9_fit_report.json",  # 2026-09-03: fit/validate split
     data_paths.VALIDATION_DIR / "kinetic_core_b8_fit_report.json",
     data_paths.VALIDATION_DIR / "kinetic_core_b2_3_fit_report.json",
