@@ -203,7 +203,7 @@ E10. Primary papers cited by the matrix code with no dossier:
   - Hall G. & Anderson J. 1983, "Volatile fat oxidation products. II. Influence of temperature on volatility of
     saturated, mono- and diunsaturated aldehydes in liquid media", Lebensm.-Wiss. u.-Technol. 16:362-366 (as cited
     in Meynier 2002, ref. 16; checked against the PDF). No DOI: LWT's 1983 volume predates DOIs, so it needs a
-    library or interlibrary-loan copy. Part I (odour thresholds) is the paper just before it in the same volume.
+    library or interlibrary-loan copy.
   Confidence 0.8 that each gives numbers.
 E11. Grosch 1993, the MFT contrast Cerny 2015 cites (primary not on disk). Confidence 0.5.
 Below cut (semi-quantitative relative areas, or no lane use): Singh 2021 S1, Wang 2025 S2, Wang 2026c S3, Du 2023 S1,
