@@ -62,9 +62,21 @@ def wave_generator(name: str) -> Iterator[object]:
     snapshot = (b23.ACTIVE_FIT_ROWS, b23.FIT_ROWS, dict(b23.SYSTEMS), b23.build_parameters)
     for module in SPLICING_WAVE_MODULES:
         sys.modules.pop(module, None)
+    # 2026-10-29: the list above is not the whole set. B10, B11 and B17 also rebind B8's keys, and the
+    # later waves chain-import them (B64 -> B60 -> ... -> B2.3). So every generator module already
+    # loaded gets its namespace back on exit, and every one loaded inside is dropped.
+    generators_before = {key: dict(vars(module)) for key, module in sys.modules.items()
+                         if key.startswith("generate_")}
     try:
         yield importlib.import_module(name)
     finally:
+        for key in [key for key in sys.modules if key.startswith("generate_")]:
+            if key in generators_before:
+                namespace = vars(sys.modules[key])
+                namespace.clear()
+                namespace.update(generators_before[key])
+            else:
+                sys.modules.pop(key)
         b23.ACTIVE_FIT_ROWS, b23.FIT_ROWS = snapshot[0], snapshot[1]
         b23.SYSTEMS.clear()
         b23.SYSTEMS.update(snapshot[2])

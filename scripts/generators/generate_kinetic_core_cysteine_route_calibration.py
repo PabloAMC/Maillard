@@ -122,15 +122,18 @@ UPPER = np.array([START[0] + 3, EA_BAND[1], START[2] + 3, math.log10(0.075), STA
 
 @contextlib.contextmanager
 def installed(theta: np.ndarray, arm: str):
-    """The route on with ``theta``'s constants, restored afterwards (module switches are process-global)."""
-    saved = (ps.CYS_AMADORI_ROUTE, ps.TTCA_FORMATION)
+    """The route on with ``theta``'s constants, restored afterwards (module switches are process-global).
+    The inline pH coupling is set here, not inherited from importing B64, so the calibration's
+    configuration does not depend on what else was imported."""
+    saved = (ps.CYS_AMADORI_ROUTE, ps.TTCA_FORMATION, sulfur.PH_COUPLING)
+    sulfur.PH_COUPLING = "inline"
     ps.CYS_AMADORI_ROUTE = dataclasses.replace(_ROUTE0, k_form_ref_per_min=10.0 ** theta[4], ea_form_kj_mol=theta[5],
                                                ea_decay_kj_mol=theta[6], above_measured_ph=arm)
     ps.TTCA_FORMATION = dataclasses.replace(_TTCA0, k_l_per_mmol=10.0 ** theta[3])
     try:
         yield
     finally:
-        ps.CYS_AMADORI_ROUTE, ps.TTCA_FORMATION = saved
+        ps.CYS_AMADORI_ROUTE, ps.TTCA_FORMATION, sulfur.PH_COUPLING = saved
 
 
 def overridden(parameters: dict, theta: np.ndarray) -> dict:

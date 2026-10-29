@@ -100,6 +100,7 @@ species:
   DMHFS: {kind: molecule, smiles: "CC1SC(C)=C(O)C1=O", note: "2,5-dimethyl-4-hydroxy-3(2H)-thiophenone"}
   GSH: {kind: molecule, smiles: "N[C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)O)C(=O)O", note: "glutathione (gamma-Glu-Cys-Gly); 2026-10-27, a measured H2S source"}
   SHET: {kind: lump, note: "B49: norfuraneol's sulfur heterocycles (dithiolanones, thiophenones, thiophenes, trithiolanes), lumped as one C5/S1 pool; no single structure"}
+  CAMA: {kind: molecule, smiles: "OC(=O)C(CS)NCC(=O)C(O)C(O)CO", note: "B59b, 2026-10-29: the cysteine Amadori compound N-(1-deoxy-D-pentulos-1-yl)-L-cysteine, open-chain keto form (C8H15NO6S, an isomer of TTCA); inert while CYS_AMADORI_ROUTE is off"}
   # ---- acrylamide: asparagine + sugar ----
   Asn:   {kind: molecule, smiles: "NC(CC(N)=O)C(=O)O"}
   SBA:   {kind: molecule, smiles: "OCC(O)C(O)C(O)C(O)C=NC(CC(N)=O)C(=O)O", note: "Schiff base of asparagine and glucose"}

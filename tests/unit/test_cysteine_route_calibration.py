@@ -37,8 +37,11 @@ def test_above_measured_ph_alternatives():
 
 @pytest.fixture(scope="module")
 def calib():
-    import generate_kinetic_core_cysteine_route_calibration as C
-    return C
+    # Through wave_generator: importing it pulls in B64 -> B60 -> B2.3, which splice B2.3's tables;
+    # imported bare, they stayed spliced for every later test (B2.4's control cost moved 22.56 -> 26.13).
+    from tests.support import wave_generator
+    with wave_generator("generate_kinetic_core_cysteine_route_calibration") as C:
+        yield C
 
 
 def test_rows_are_unique_and_counted(calib):
