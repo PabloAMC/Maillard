@@ -41,7 +41,7 @@ What the literature cannot give, ranked by the flux it decides:
 | ribose | HPAEC-PAD | trunk timescale |
 | TTCA, Cys-Amadori compound | LC-MS/MS with synthesised standards (Cao 2017; Zhai 2019 routes) | the de Roos route |
 | norfuraneol, furfural | HPLC-DAD (280 nm) or LC-MS | the MFT and FFT precursors |
-| H2S | headspace, ³⁴S-sulfide SIDA (Li, Schieberle & Steinhaus 2016) or methylene blue | sulfur supply |
+| H2S | ³⁴S-sulfide SIDA after in-vial derivatisation (Li, Schieberle & Steinhaus 2017, Eur Food Res Technol 243:69; NOT headspace: cool the sealed vial, add the ³⁴S standard and 3-buten-2-one through the septum before opening, ~30 % of H2S sits in the headspace at pH 5; 1-10 mL aliquots cover ~0.01-0.9 mmol/L; validated at pH 7.4 only; one day per batch; `li2016b_extraction.md`) or methylene blue | sulfur supply |
 | MFT, FFT, bis(2-methyl-3-furyl) disulfide | SIDA GC-MS with labelled standards | the observables, quantified |
 | pH | after cooling, at 25 °C | the pH trajectory |
 

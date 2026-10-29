@@ -8100,3 +8100,40 @@ entries:
     condition_quote: "cysteine and glucose alone or in the presence of iron salts such as ferrous glucanate produced a sulfurous, odor but addition of heme proteins reduced the sulfurous odor"
     flags: [patent_not_peer_reviewed, presence_only, conditions_not_stated, "same_data_as: us9943096_tabs_heme_sugar_cys_thiamine_presence"]
     note: "matrix (heme formulation). Same paragraph as US 9,943,096 cols 15-16 and EP 2 943 072 [0053], which point to the family's Tables 8-9 (150 C / 3 min, pH 6). Adds no data."
+
+  - id: li2016b_text_h2s_thiol_sida_method_validation
+    dossier: li2016b_extraction.md
+    paper: "Li, Schieberle & Steinhaus 2017 Eur Food Res Technol 243:69 (10.1007/s00217-016-2723-z; online 2016)"
+    lab: "DFA Freising (Steinhaus / Schieberle)"
+    system: "method validation: Na2S / Na2(34S) (0.6 umol standard per workup), NaSMe / NaSCD3, EtSH / d5-EtSH, PrSH / d7-PrSH in buffer, derivatised with 3-buten-2-one (200 uL, overnight, ambient)"
+    medium: "phosphate buffer (Ph. Eur. 5.0, molarity not printed) pH 7.4 (H2S), pH 9.0 (MeSH), water (EtSH, PrSH); 20-mL septum crimp vial"
+    temperature_c: []
+    ph: {initial: 7.4, measured_during: false, final: null}
+    time_min: []
+    species: [H2S, methanethiol, ethanethiol, propane-1-thiol]
+    kind: other
+    location: "Materials and methods (syntheses, workup, calibration m/b/R2); Results text (34S stock 0.30 umol/mL, calibration window 2-200 ug H2S per workup); dossier secs. 2-5"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Into a 20-mL septum-sealed crimp-top vial, phosphate buffer at pH 7.4 (8 mL), an aliquot of the sodium (34S) sulphide stock solution (2 mL ...) ... was homogenised by magnetic stirring at ambient temperature for 30 min, then 3-buten-2-one (200 uL) was added and stirring was continued overnight"
+    flags: [no_lod_loq_stated, no_recovery_experiment, method_paper, "cited_by: docs/guides/DESIGNED_TIMECOURSE_PROTOCOL_DRAFT.md (H2S row)"]
+    note: "The H2S method of the designed experiment. NOT a headspace method (the protocol draft's H2S row says headspace): in-solution derivatisation of total sulphide to 4,4'-sulphanediyldibutan-2-one, DCM extraction, SAFE 40 C, heart-cut GC-GC-MS(CI), m/z 105/107. Calibration 1:10-10:1, m 0.9113 b -0.0311 R2 1.000; demonstrated floor ~2 ug (0.06 umol) H2S per workup; projected (untested) ~8 ug/kg at 50 g. No heated-system data; validated in durian only at pH 7.4."
+  - id: li2016b_tab1_durian_h2s_thiols
+    dossier: li2016b_extraction.md
+    paper: "Li, Schieberle & Steinhaus 2017 Eur Food Res Technol 243:69 (10.1007/s00217-016-2723-z; online 2016)"
+    lab: "DFA Freising (Steinhaus / Schieberle)"
+    system: "raw durian pulp (Durio zibethinus 'Monthong', tree-ripened, Thailand), 1-10 g (~4 g optimum for H2S) per workup"
+    medium: "fresh fruit pulp homogenised in phosphate buffer pH 7.4 (H2S), pH 9.0 (MeSH), water (EtSH, PrSH)"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [H2S, methanethiol, ethanethiol, propane-1-thiol]
+    kind: endpoint
+    location: "Table 1 (conc. ug/kg, CV %, odour threshold, OAV); dossier sec. 6a"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Tree-ripened fruits of Durio zibethinus L. 'Monthong' were purchased from a local internet fruit shop in Germany ... Only fruits of optimum eating ripeness were used"
+    flags: [matrix_food, unheated_sample]
+    note: "Not Maillard: raw fruit, enzymatic/biological origin. H2S 3340 ug/kg CV 6 % (98 umol/kg), MeSH 26,700 (13 %), EtSH 45,400 (20 %), PrSH 3070 (22 %); OAV 330 / 45,000 / 480,000 / 6300; triplicate workups. Useful only as the method's demonstrated precision at ~0.1 mmol/kg H2S, which is the level the model predicts for the Hofmann pH 5 pot (0.063 mM)."
