@@ -93,10 +93,13 @@ def _ledger() -> Dict[str, dict]:
     return out
 
 
-def _verified() -> Dict[str, bool]:
+def _verified(name: str) -> Dict[str, bool]:
+    """Which ledger ids the table ``name`` may cite: verified in ITS OWN file (``source_verification/<name>.yml``) or
+    the shared one. Scoped per table (route adjudication, 2026-10-29): two sub-models read different rows under one
+    ledger id, so one sub-model's verified reading must not clear the other's rows, still pending."""
     checks = ("conditions", "units", "quantification", "duplicates", "values")
     out = {}
-    files = [data_paths.SOURCE_VERIFICATION, *sorted(data_paths.SOURCE_VERIFICATION_DIR.glob("*.yml"))]
+    files = [data_paths.SOURCE_VERIFICATION, data_paths.SOURCE_VERIFICATION_DIR / f"{name}.yml"]
     entries = [e for f in files for e in (data_access.load_yaml(f, missing_ok=True) or {}).get("entries") or []]
     for entry in entries:
         c = entry.get("checks") or {}
@@ -127,7 +130,7 @@ def load(name: str, require_verified: bool = True) -> Tuple[Dict[str, dict], Tup
     if require_verified and table.get("status", "draft") != "ready":
         raise PermissionError(f"{name}: the table is {table.get('status', 'draft')!r}, not 'ready': its sources are still being "
                               f"read; set status: ready once every source is verified by two readers")
-    ledger, verified, labs = _ledger(), _verified(), _laboratory_of()
+    ledger, verified, labs = _ledger(), _verified(name), _laboratory_of()
     vocabulary = species_vocabulary()
     pots: Dict[str, dict] = table.get("pots") or {}
     for pot_id, pot in pots.items():
@@ -138,7 +141,7 @@ def load(name: str, require_verified: bool = True) -> Tuple[Dict[str, dict], Tup
             raise KeyError(f"{name}: pot {pot_id} cites {pot['ledger_id']!r}, which is in no measurement ledger")
         if require_verified and not verified.get(pot["ledger_id"], False):
             raise PermissionError(f"{name}: pot {pot_id}'s source {pot['ledger_id']} is not verified against its paper "
-                                  f"by two readers (data/lit/source_verification.yml)")
+                                  f"by two readers (data/lit/source_verification/{name}.yml)")
     rows: List[FitRow] = []
     for raw in table.get("rows") or []:
         missing = [f for f in ROW_FIELDS if f not in raw]

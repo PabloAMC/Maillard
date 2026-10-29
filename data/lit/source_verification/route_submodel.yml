@@ -12,12 +12,20 @@
 #         units, quantification (sida / calibrated / semi_quantitative / relative, and the evidence), duplicates
 #         (the ledger's `same_data_as` or the conflicts register's duplicate entries), values (a sample of
 #         transcribed numbers against the table or figure).
+# ADJUDICATED 2026-10-29 (agent-route-adjudicator-2026-10-29) against the second, independent reading
+# (data/lit/source_verification/second/route_submodel.yml; reconciliation in
+# results/validation/source_reading_reconciliation_route_submodel.md). second_reader = agent-sm2-reader2 where both
+# readings agree; = the adjudicator where they disagreed or one reader alone chose the data set (what was checked is in
+# the entry's quote, after '|| ADJUDICATOR'). Excluded data sets carry a failed check with the reason. The dicarbonyl
+# and alanine-ARP entries (zhai2019_fig3b, zhai2021_fig5, zhai2023foodchem_fig2, zhou2025b_figs1_3) were REMOVED from
+# this file: they are sub-model 3's (data/lit/source_verification/deoxyosone_submodel.yml), and an entry here would
+# override that file's (the loader and the gate key verification by ledger id, the last file read wins).
 
 entries:
   - ledger_id: cao2017_fig5_ttca_cama_glyarp
     source_file: cao2017.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-sm2-reader2-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
@@ -46,7 +54,7 @@ entries:
   - ledger_id: cao2017_fig4ab_cys_xyl
     source_file: cao2017.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-sm2-reader2-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
@@ -69,7 +77,7 @@ entries:
   - ledger_id: zhai2019_fig3a_ttca_cama
     source_file: zhai2019.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
@@ -77,7 +85,7 @@ entries:
       quantification: pass
       duplicates: pass
       values: pass
-    quote: "The reaction system of Xyl and Cys was mixed in a 2:1 molar ratio and dissolved in 80 mL of deionized water. The concentration of final solution was 34.8 mg/mL. The solution pH was adjusted to pH 7.4 with NaOH (6 mol/L). ... The solution was heated at temperatures of 70 °C, 90 °C, 110 °C, and 130 °C for 0, 20, 40, 60, 80, 120, 140, and 160 min."
+    quote: "The reaction system of Xyl and Cys was mixed in a 2:1 molar ratio and dissolved in 80 mL of deionized water. The concentration of final solution was 34.8 mg/mL. The solution pH was adjusted to pH 7.4 with NaOH (6 mol/L). ... The solution was heated at temperatures of 70 °C, 90 °C, 110 °C, and 130 °C for 0, 20, 40, 60, 80, 120, 140, and 160 min. || ADJUDICATOR 2026-10-29: readings agree on all 61 values (both re-read the dossier digitisation on the 600 dpi raster); they differed only on the initial state. Pots start from the t = 0 state of Fig. 3A (orchestrator decision): TTCA 14.5 measured, Cys 68.1 / PENT 150.7 = charge minus TTCA (not measured); the 70 C 20-min ARP 0.2 (< its +-0.3 read error) is left out; t = 0 is not a row"
     notes: >-
       Conditions: 34.8 mg/mL at Xyl:Cys 2:1 -> Cys 82.6, Xyl 165.2 mmol/L; unbuffered water; pH 7.4 set at room
       temperature with NaOH, never re-measured; ice-bath quench; vessel not stated (oil bath is named only for the
@@ -92,34 +100,10 @@ entries:
       against the render (+-0.5 mmol/L): TTCA 90 C 40 min 59.2, 110 C 20 min 58.5, 130 C 100 / 160 min 21.2 / 6.9,
       ARP 110 C 60 min 5.6, ARP 130 C 20 min 4.3 -- all as the dossier. Read errors are the dossier's (+-0.7 TTCA,
       +-0.3 ARP). Left out: the two plotted ARP zeros at 130 C, 140 and 160 min (no log residual; below detection).
-  - ledger_id: zhai2019_fig3b_dicarbonyls_ttca
-    source_file: zhai2019.pdf
-    read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
-    date: 2026-10-29
-    checks:
-      conditions: pass
-      units: pass
-      quantification: corrected
-      duplicates: pass
-      values: pass
-    quote: "The α-dicarbonyl compounds were derivatized with o-phenylenediamine (OPD) for detection by HPLC-DAD with an internal standard. ... Hexanedione as an internal standard (960 ppm, 40 μL) was mixed with 2 mL of sample and 2 mL of derivatization reagent."
-    notes: >-
-      Conditions: TTCA 5 mmol/L alone (control) and TTCA 5 + Cys 5 mmol/L, 10 mL deionized water, pH 7.4 (6 M NaOH)
-      at room temperature, 10 min at room temperature, thermostatic oil bath 120 C, 0-60 min, ice-bath quench; pH
-      not re-measured. Units: axis "Concentration (µmol/L)". QUANTIFICATION CORRECTED: the ledger says calibrated,
-      but the paper names only an internal standard (3,4-hexanedione) and no authentic 1-DX / 3-DX standard, no
-      calibration curve and no response factor ("similar as described by Daglia et al. and Feng et al., with some
-      modifications"); the absolute scale and the 3-DX/1-DX ratio rest on an unstated response factor, so the class
-      is semi_quantitative (as CF-004 reads an internal standard without a stated factor). The ledger entry must be
-      changed before this table is ready (the loader takes the class from the ledger; a row cannot override it);
-      reported as a new conflict, not edited here. Duplicates: none. Values: 600 dpi raster, no error bars; checked
-      by eye: 3-DX (TTCA) 10 / 60 min 89 / 249, 1-DX (TTCA) 60 min 98, 3-DX (TTCA+Cys) 50 min 49 -- as the dossier.
-      Read error the dossier's +-5 µmol/L. Glyoxal (same panel) is not a route species and is not transcribed.
   - ledger_id: zhai2021_fig3a_ttca_tladder
     source_file: zhai2021.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
@@ -127,7 +111,7 @@ entries:
       quantification: pass
       duplicates: pass
       values: pass
-    quote: "The aqueous solution of TTCA (pH 5.5, 10 mmol/L) without the adjustment of pH was heated under different temperatures (100, 120, and 140 °C) ... Figure 3. Effect of different temperatures (100, 120, and 140 °C) on the concentrations of TTCA (a) and A420 (b) during heat treatment, under the natural pH of 5.5."
+    quote: "The aqueous solution of TTCA (pH 5.5, 10 mmol/L) without the adjustment of pH was heated under different temperatures (100, 120, and 140 °C) ... Figure 3. Effect of different temperatures (100, 120, and 140 °C) on the concentrations of TTCA (a) and A420 (b) during heat treatment, under the natural pH of 5.5. || ADJUDICATOR 2026-10-29: 120 / 140 C means and SD bars identical in both readings; the 100 C series (= Fig. 4b pH 5.5, identical means, different drawn SDs) is entered once, in Fig. 4b (orchestrator decision)"
     notes: >-
       Conditions: purified TTCA (98 %) 10 mmol/L in water, natural pH 5.5 (not adjusted; the ledger is right since
       CF-010), thermostatic oil bath 100 / 120 / 140 C, 20-120 min, ice quench; vessel not stated; pH not
@@ -141,7 +125,7 @@ entries:
   - ledger_id: zhai2021_fig4b_ttca_ph_ladder
     source_file: zhai2021.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
@@ -149,7 +133,7 @@ entries:
       quantification: pass
       duplicates: pass
       values: pass
-    quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min)."
+    quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). || ADJUDICATOR 2026-10-29: re-read from the vector paths (page 4): all means agree with both readings; the pH 5.5 TTCA-alone SDs are Fig. 4b's own bars (0.095 / 0.395 / 0.29 / 0.245 / 0.165 / 0.37), the first reader's; the second reader's smaller SDs are Fig. 3a's bars for the same means"
     notes: >-
       Conditions: TTCA 10 mmol/L +- Xyl 10 mmol/L, unbuffered water, pH 5.5 / 6 / 7 / 8 set at room temperature with
       2 M NaOH or HCl (strength of the resulting solution not stated; the added Na+ / Cl- is unknown), oil bath, Fig.
@@ -161,34 +145,10 @@ entries:
       mmol/L, the dossier's), i.e. ~1e-3 dex or less: such rows will dominate a fit unless the measurement model
       adds its per-series scale (flagged in the report). Left out: the 7 plotted zeros (TTCA < LOD; pH 8 at 100 /
       120, +Xyl pH 7 at 100 / 120, +Xyl pH 8 at 80-120).
-  - ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
-    source_file: zhai2021.pdf
-    read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
-    date: 2026-10-29
-    checks:
-      conditions: pass
-      units: pass
-      quantification: corrected
-      duplicates: pass
-      values: pass
-    quote: "The resulting quinoxalines, 3-DX quinoxaline (3-DXqx) and 1-DX quinoxaline (1-DXqx), were quantitated using diacetyl as an internal standard, and MGO quinoxaline (MGOqx) and GO quinoxaline (GOqx) were detected using external standards."
-    notes: >-
-      Conditions as Fig. 4b (same heated systems, 100 C). Units: axes "Concentration (mmol/L)"; rows in umol/L
-      (x 1000). QUANTIFICATION CORRECTED for the rows transcribed (3-DX, 1-DX): no authentic 3-DX / 1-DX standard;
-      their scale rests on diacetyl-quinoxaline's response factor -> semi_quantitative (MGO / GO, externally
-      calibrated, are not route species and are not transcribed). The ledger's single class 'calibrated' is right
-      for MGO / GO only; the entry must be split or re-classed before the table is ready (new conflict, reported).
-      Duplicates: none. Values: vector, read here at 60 and 120 min for all 16 series: 3-DX 520 / 590 / 380 / 86 /
-      580 / 630 / 360 / 107 (60 min) and 620 / 930 / 420 / 75 / 770 / 1090 / 930 / 359 (120 min); 1-DX 25 / 33.7 /
-      48 / 74 / 28 / 34 / 53 / 82 and 32 / 61.9 / 69 / 106 / 47 / 79 / 125 / 187 umol/L -- identical to the dossier
-      sec. 5.2. SDs are the dossier's vector reads (n = 3 per the methods); where two bars coincide (120 min, 3-DX
-      930) the larger, 30, is taken; +Xyl pH 8 3-DX at 20 min keeps 74 (> mean; only the upper half is drawn). 1-DX
-      SDs are suspiciously repetitive (dossier flag). Read errors the dossier's (+-0.25 / +-0.04 umol/L).
   - ledger_id: zhai2021_fig6_cys_xyl
     source_file: zhai2021.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: corrected
@@ -196,7 +156,7 @@ entries:
       quantification: pass
       duplicates: pass
       values: pass
-    quote: "Figure 6. Concentration of Cys (a) decomposed from the thermal degradation of TTCA with or without the addition of Xyl at 100 °C and pH values of 5.5, 6, 7, and 8; depletion rate of Xyl (b) in the model reaction system of TTCA−Xyl and Xyl control systems under the heat treatment of 100 °C and pH values of 5.5, 6, 7, and 8, respectively."
+    quote: "Figure 6. Concentration of Cys (a) decomposed from the thermal degradation of TTCA with or without the addition of Xyl at 100 °C and pH values of 5.5, 6, 7, and 8; depletion rate of Xyl (b) in the model reaction system of TTCA−Xyl and Xyl control systems under the heat treatment of 100 °C and pH values of 5.5, 6, 7, and 8, respectively. || ADJUDICATOR 2026-10-29: re-read from the vector paths (page 7; half-bar joints = means, cap centres = SD; legend draw order, checked on the markers): all 48 Cys and 48 Xyl means match the first reader to <= 0.001 mmol/L; the second reader's TTCA-Xyl pH 7 Xyl series is offset +0.018 and some of its SDs are missing or misread (Cys pH 6 80 min 0.018 vs 0.0118): the first reader's rows kept. The four xylose-alone controls are INCLUDED (the second reader left them out): their contrast with TTCA-Xyl at the same pH separates the pentose's own loss from the cysteine-driven loss that the frame tests (r_pent_tdp / r_pent_dpo)"
     notes: >-
       CONDITIONS CORRECTED: the ledger records none (temperature [], pH null, empty quote, figure_only). From the
       caption and methods: the Fig. 4b systems (TTCA 10 mmol/L +- Xyl 10 mmol/L, water, pH 5.5 / 6 / 7 / 8, 100 C,
@@ -222,15 +182,15 @@ entries:
   - ledger_id: kang2026_si_fig_s3_cys_release_from_ttca
     source_file: Kang2026_supplementary.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: corrected
       units: pass
       quantification: pass
-      duplicates: corrected
+      duplicates: fail
       values: pass
-    quote: "Figure S3. The release of Cys during the degradation of TTCA."
+    quote: "Figure S3. The release of Cys during the degradation of TTCA. || ADJUDICATOR 2026-10-29: FAIL (duplicates): a reprint of Zhai 2023 Food Chem Fig. 3a's TTCA arm (and Zhai 2021 Fig. 6a pH 7 at 100 C), confirmed value by value; not in the fit table, the original is"
     notes: >-
       Kang states no conditions for this figure (caption above; main text cites it as "Fig. S2") and no analytical
       method for Cys. DUPLICATE (new, checked by eye on both rasters): the three curves are the TTCA-alone series of
@@ -249,15 +209,15 @@ entries:
   - ledger_id: kang2026_si_fig_s4_free_cys_depletion
     source_file: Kang2026_supplementary.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: corrected
       units: pass
       quantification: pass
-      duplicates: pass
+      duplicates: fail
       values: pass
-    quote: "Figure S4. Depletion of Cys compound at an initial pH of 7 under different temperatures (100, 120 and 140 ℃)."
+    quote: "Figure S4. Depletion of Cys compound at an initial pH of 7 under different temperatures (100, 120 and 140 ℃). || ADJUDICATOR 2026-10-29: FAIL (duplicates): a reprint of Zhai 2023 Food Chem SI Fig. S2 (orchestrator decision); and a cysteine-alone system (no pentose, no TTCA): outside this table's inclusion rule"
     notes: >-
       The figure is Zhai 2023 Food Chem SI Fig. S2 (identical image and caption, checked in
       zhai2023foodchem_supplementary.docx, media/image3.png), which resolves the ledger's "system identity inferred,
@@ -274,7 +234,7 @@ entries:
   - ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go
     source_file: Zhai2023.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
@@ -282,7 +242,7 @@ entries:
       quantification: pass
       duplicates: corrected
       values: pass
-    quote: "Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 °C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer (DF-101S)."
+    quote: "Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 °C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer (DF-101S). || ADJUDICATOR 2026-10-29: Cys (Fig. 3a) at 120 / 140 C, both arms, INCLUDED (24 rows, the second reader's raster transcription): re-read on the 300 ppi image (page 8; axes on the tick rows, marker centroids): all within the stated read errors (e.g. +Xyl-140 60 min 2.035 vs 2.047; 80 min +Xyl-120 / +Xyl-140 ~1.83 / ~1.78 vs 1.82 / 1.79); TTCA-alone values equal Kang SI Fig. S3 as the first reader read it (0.205 / 0.989 / 1.219 ... vs 0.20 / 0.99 / 1.228): the copy is confirmed and Kang's rows are dropped. 100 C = Zhai 2021 Fig. 6a pH 7, not entered here"
     notes: >-
       Conditions as the ledger (TTCA 10 mmol/L +- Xyl 10 mmol/L, water, pH 7.00 +- 0.01 set at room temperature,
       pressure-resistant bottles, stirred, 100 / 120 / 140 C, 20-120 min, ice water quench; pH not re-measured).
@@ -295,33 +255,11 @@ entries:
       TTCA-alone 120 / 140 C curves enter through Kang S3 (same numbers), the 100 C curves through Zhai 2021 Fig. 6a;
       the TTCA+Xyl 120 / 140 C Cys curves (12 points, SD bars drawn) are left out pending a digitisation. DA / MGO /
       GO (Fig. 3b-d) are not route species.
-  - ledger_id: zhai2023foodchem_fig2_deoxyosones
-    source_file: Zhai2023.pdf
-    read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
-    date: 2026-10-29
-    checks:
-      conditions: pass
-      units: pass
-      quantification: corrected
-      duplicates: corrected
-      values: pass
-    quote: "The derivatization and detection of dicarbonyls were carried out following our previous published study which referring to Feng et al. (2018) with some modifications (Zhai et al., 2021). ... Thereinto, external standards were used to quantify the α-dicarbonyls."
-    notes: >-
-      Conditions as Fig. 3 (same systems). Units: axes "3-DX Concentration (mmol/L)", "1-DX Concentration (mmol/L)".
-      DUPLICATES (new): the 100 C series are Zhai 2021 Fig. 5a / 5b's pH 7 series (TTCA: 3-DX 0.15 / 0.21 / 0.38 /
-      0.47 / 0.51 / 0.42, 1-DX 0.021 / 0.029 / 0.048 / 0.061 / 0.079 / 0.069 mmol/L; TTCA+Xyl 3-DX 0.17 ... 0.93).
-      QUANTIFICATION CORRECTED: this paper says external standards; the method it cites (Zhai 2021) and the identical
-      100 C numbers used diacetyl as an internal standard for 3-DX and 1-DX with no authentic standard -> treat as
-      semi_quantitative (the ledger says calibrated; new conflict, reported). Values: raster, checked by eye at the
-      100 C points above (identical to Zhai 2021's vector values) and 140 C TTCA+Xyl 3-DX peak ~1.12 at 60 min.
-      NOT TRANSCRIBED: no digitisation with a read error exists (dossier: peaks only); the 100 C series enter through
-      Zhai 2021 Fig. 5; the 120 / 140 C series (4 series x 6 times x 2 species = 48 points, SD bars drawn) are left
-      out pending a digitisation.
+      ADJUDICATED 2026-10-29: the 'NOT TRANSCRIBED' above is superseded; the Cys rows at 120 / 140 C now enter from this, the original (verification of the second reader's digitisation in the quote). DA / MGO / GO stay out (sub-model 3; that reading is in deoxyosone_submodel.yml).
   - ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama
     source_file: zhao2017b.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-sm2-reader2-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
@@ -347,7 +285,7 @@ entries:
   - ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp
     source_file: zhang2025b.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-sm2-reader2-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
@@ -371,15 +309,15 @@ entries:
   - ledger_id: deroos2005_fig4_xylulose_cysteine_ph_stability
     source_file: deroos2005.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
-      conditions: pass
-      units: pass
-      quantification: corrected
+      conditions: fail
+      units: fail
+      quantification: fail
       duplicates: pass
       values: pass
-    quote: "Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer."
+    quote: "Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer. || ADJUDICATOR 2026-10-29: FAIL: a drawn curve with no points, % left after 2 h with no starting concentration and no assay (both readers); not a fit row (orchestrator decision)"
     notes: >-
       Scanned chapter (600 dpi page images); Fig. 4 on p. 127. Conditions: purified D-xylulose-L-cysteine (the
       pentose Cys-Amadori, species CAMA) in boiling (~100 C) 0.5 M phosphate, pH 3-6, 2 h; starting concentration,
@@ -394,7 +332,7 @@ entries:
   - ledger_id: du2024_fig2_cama_aldehyde_thiazolidines
     source_file: du2024.pdf
     read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: fail
@@ -402,7 +340,7 @@ entries:
       quantification: pass
       duplicates: pass
       values: pass
-    quote: "Based on our previous study, to study the influence of the number and position of the unsaturated bond in aliphatic aldehydes on the Maillard reaction system of “cysteine-glucose”, the conditions of the meat flavorings system were designed (Du et al., 2019)."
+    quote: "Based on our previous study, to study the influence of the number and position of the unsaturated bond in aliphatic aldehydes on the Maillard reaction system of “cysteine-glucose”, the conditions of the meat flavorings system were designed (Du et al., 2019). || ADJUDICATOR 2026-10-29: FAIL confirmed: glucose Cys-Amadori, conditions not stated (orchestrator decision)"
     notes: >-
       FAIL, nothing transcribed. (1) Conditions: the heated systems of Fig. 2 (M, A-D) have no stated charge,
       temperature, time base or volume; they are delegated to Du 2019, which (ledger) is a youtiao aroma paper. (2)
@@ -410,26 +348,47 @@ entries:
       pentose CAMA of this sub-model. (3) Units: the ledger records the plotted levels as inconsistent with any stated
       charge (17.5-49 mM if g/L); with no charge stated the axis unit cannot be checked. Quantification as the ledger
       (UPLC-MS/MS MRM, external standards of the synthesized compounds).
-  - ledger_id: zhou2025b_figs1_3_axarp_xylose_120c
-    source_file: Zhou2025b.pdf
-    read_by: "agent-sm2-reader1-2026-10-29"
-    second_reader: "pending"
+  - ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    source_file: Zhai2023b.pdf
+    read_by: "agent-sm2-reader2-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Figure 5. Time course levels of downstream products including ARP (a), 3-DX (b), 1-DX (c), MGO (d), and GO (e) generated from TTCA reaction models with and without the addition of Cys under different temperatures (100, 120, and 140 °C), initial pH of 7.0, and TTCA−Cys molar ratio of 1:1. || ADJUDICATOR 2026-10-29: one-sided (second reader); verified as second reader: panel a re-digitised from the vector paths (page 7; error-bar joints; series by draw order = legend T-100, T+C-100, T-120, T+C-120, T-140, T+C-140, checked on the markers: squares 100 C, diamonds 120 C, triangles 140 C, dashed TTCA / solid TTCA+Cys): all 45 means within 0.002 mmol/L of the second reader's; included"
+    notes: >-
+      Conditions CORRECTED (the ledger's condition_quote is empty): purified TTCA 10 mmol/L +- Cys 10 mmol/L (1:1),
+      water, initial pH 7.0 (the agent is not stated for the models; the paper's TTCA preparation uses 2 / 6 M NaOH),
+      100 / 120 / 140 C, 20-180 min, pressure-resistant bottles with a collector-type magnetic stirrer (DF-101S),
+      ice-bath quench; pH never re-measured. Units: axis "Cncentration (mmol/L)" [sic]. Quantification: "HPLC-ELSD was
+      employed to quantify the ARP compound using external standards" (in-lab ARP, the 1-amino-1-deoxyxylose derivative
+      of Cys = species CAMA) -> calibrated; no LOD printed. Duplicates: none found (Kang 2026 SI and this paper's SI
+      checked; Zhai 2021 / Zhai 2023 Food Chem did not measure ARP). Values: vector; plotted zeros left out (TTCA+Cys at
+      20 min, TTCA-120 at 180, TTCA-140 at 140-180, TTCA+Cys-120 at 180, TTCA+Cys-140 at 160-180). SD bars from the paths
+      (n = 3, "mean +- standard deviation"). Panels b-e (dicarbonyls) belong to sub-model 3, not transcribed here.
+  - ledger_id: zhang2025b_fig2dh_rate_fits
+    source_file: zhang2025b.pdf
+    read_by: "agent-sm2-reader2-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
-      units: pass
-      quantification: corrected
+      units: corrected
+      quantification: pass
       duplicates: pass
       values: pass
-    quote: "The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted to 8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil bath and heated at 120 °C for predetermined durations of 30, 60, 90, and 120 min."
+    quote: "Ln (C/C0) of xylose and cysteine with reaction times along with the fitted linear equations, where the slopes indicated reaction rate constants. Note. C0 and C are the concentration of original reaction solution and that at certain reaction time, respectively. Means ± standard deviations were used to plot the figures (n = 3). || ADJUDICATOR 2026-10-29: one-sided (second reader); verified as second reader: the blank (black) markers of Fig. 2g / 2h re-read on the 300 ppi image (page 7; centroids of the black markers, axis from the 0 / -10 labels): xylose -0.78 / -1.24 / -1.57 / -1.86 / -2.16 / -2.44 / -3.16 at 5-40 min vs the second reader's -0.77 / -1.23 / -1.56 / -1.82 / -2.18 / -2.44 / -3.13 (within the +-0.08 read error); included"
     notes: >-
-      Conditions as the ledger (AX-ARP = the ALANINE Amadori compound of xylose, engine ARP; 20 mmol/L +- Xyl 20
-      mmol/L, water, pH 8 set before heating, pressure-resistant flask, oil bath 120 C, 30-120 min, ice quench; pH
-      measured after heating, Fig. 3d). Units: mmol/L / ug/L as plotted. Quantification: AX-ARP by UPLC-MS/MS MRM,
-      "Pure AX-ARP was used as the external standard" -> calibrated; 3-DX / 1-DX by OPD with "3,4-hexanedione ... as
-      the internal standard" and no authentic standard -> semi_quantitative for the deoxyosones (corrected; the
-      ledger's single class 'calibrated' fits AX-ARP only). Duplicates: the AX-ARP-alone arm repeats Zhou 2024's design
-      (CF-019; re-measured or re-plotted not stated). Values: figures are vector; not digitised by the dossier
-      (axis labels only). NOT TRANSCRIBED: no digitisation with an error exists, and the chemistry (alanine Amadori
-      at pH 8) is outside this sub-model's route; it is the trunk's ARP -> deoxyosone step. A vector digitisation is
-      feasible (SD bars drawn) if the owner wants it as an analogue for the CAMA -> DPO / TDP split.
+      Same heated system as Fig. 2a-c (Cys 40 + Xyl 40 mmol/L, 0.2 M phosphate pH 6.5, 120 C, 15 mL pressure vial, no
+      come-up time). Units CORRECTED: ln(C/C0) converted with C0 = the 40 mmol/L charge (the caption defines C0 as "the
+      concentration of original reaction solution"); the row keeps the read ln value. Quantification: HPLC-ELSD external
+      standards; the printed Cys and Xyl calibrations are identical (one misprinted; the ln ratio does not depend on the
+      slope). Duplicates: none. The printed blank fits (Xyl y = -0.073x - 0.324; Cys y = -0.059x - 0.760) do not
+      reproduce the plotted points (least squares on the points: k_Xyl ~0.061 /min) and imply C/C0 = 0.72 / 0.47 at
+      t = 0, while the plotted t = 0 point is ln 0: the points, not the fits, are transcribed. Closure (ledger flag
+      half_of_reactants_unaccounted): at 50 min Cys 0.8 + TTCA 18.2 + Cys-Amadori 1.6 = 21 of 40 mmol/L; at 5 min Cys
+      20.3 + TTCA 7.4 = 28 of 40. The fit will see it; not corrected here.

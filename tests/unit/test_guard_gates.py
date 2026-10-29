@@ -68,7 +68,7 @@ def test_an_unverified_row_cannot_enter_a_fit(tmp_path, monkeypatch):
     monkeypatch.setattr(verification_gate, "VERIFICATION", verification)
     monkeypatch.setattr(verification_gate, "FIT_ROWS", fit_rows)
     problems, _ = verification_gate.check()
-    assert problems == ["rows.yml is ready but its source 'b' is not verified by two readers"]
+    assert problems == ["rows.yml is ready but its source 'b' is not verified by two readers in source_verification/rows.yml"]
 
 
 def test_a_failed_check_or_a_single_reader_is_refused(tmp_path, monkeypatch):
@@ -143,4 +143,4 @@ def test_a_pending_second_reader_is_not_a_verification(tmp_path, monkeypatch):
     monkeypatch.setattr(verification_gate, "VERIFICATION_DIR", tmp_path / "none")
     monkeypatch.setattr(verification_gate, "FIT_ROWS", fit_rows)
     problems, _ = verification_gate.check()
-    assert problems == ["rows.yml is ready but its source 'a' is not verified by two readers"]
+    assert problems == ["rows.yml is ready but its source 'a' is not verified by two readers in source_verification/rows.yml"]

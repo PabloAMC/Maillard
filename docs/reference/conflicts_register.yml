@@ -1466,3 +1466,33 @@ entries:
     status: open
     remedy: "Pending the second reading: if confirmed, these series enter the sub-model 3 table as semi_quantitative (shape only, fitting.SCALE_TAU); this affects 300 of its 315 rows and the route stage's 3-DX rows."
     affects: []
+  - id: CF-063
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [zhang2025b]
+    quantity: "TTCA / CAMA / Lys-ARP decay in Zhang 2025b Figs. 2d-h: printed first-order fits vs the plotted points"
+    observation: >-
+      The printed rate fits do not reproduce the plotted points: extrapolated to t = 0 they imply C/C0 of 0.72 and 0.47,
+      not 1, and at 50 min only about half the charged reactants are accounted for by the measured species (route
+      adjudication, 2026-10-29).
+    explanations:
+      - "The fits were made over a later window (an induction or heat-up period excluded) and the intercept was not reported."
+      - "An unmeasured sink (oligomers, bound forms) takes up the missing half, so the mass balance is open, not wrong."
+    tests: []
+    status: open
+    remedy: "The route table uses the points (Figs. 2a-c, 2g/h converted with C0 = 40 mM), never the printed constants; the sub-model 2 probe reports this pot's mass balance separately."
+    affects: []
+  - id: CF-064
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [zhai2021]
+    quantity: "error bars of the TTCA series in Zhai 2021 Figs. 3a, 4b and 6"
+    observation: >-
+      The same means carry different SD bars in Figs. 3a and 4b, and in Fig. 6 the pH 5.5 xylose-alone control and the
+      TTCA + xylose series carry the same set of SDs (route adjudication, 2026-10-29).
+    explanations:
+      - "The bars were copied between panels when the figures were assembled, so the printed SD is not the series' own scatter."
+    tests: []
+    status: open
+    remedy: "These rows' printed SDs are not trusted as their own: the sub-model 2 fit estimates a per-series noise scale (fitting.fit_with_series_noise) rather than weighting by the bars."
+    affects: []

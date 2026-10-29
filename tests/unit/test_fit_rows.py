@@ -127,3 +127,18 @@ def test_a_species_outside_the_vocabulary_is_refused(tmp_path, monkeypatch):
     _setup(tmp_path, monkeypatch, _table("  - {pot: a, species: MFT-SS-FFT, t_min: 20, value: 1.0, unit: ug_L, sd: 0.1}\n"))
     with pytest.raises(ValueError, match="named observable"):
         fit_rows.load("t")
+
+
+def test_verification_is_scoped_to_the_table_that_reads_the_source(tmp_path, monkeypatch):
+    # route adjudication, 2026-10-29: two sub-models read different rows under one ledger id; a reading verified for
+    # one table must not clear the other's, still pending
+    _setup(tmp_path, monkeypatch, _table("  - {pot: a, species: TTCA, t_min: 20, value: 10.0, unit: mmol_L, sd: 1}\n"),
+           verified="entries: []\n")
+    vdir = tmp_path / "verification_dir"
+    vdir.mkdir()
+    monkeypatch.setattr(data_paths, "SOURCE_VERIFICATION_DIR", vdir)
+    (vdir / "other.yml").write_text(VERIFIED)
+    with pytest.raises(PermissionError, match="not verified"):
+        fit_rows.load("t")
+    (vdir / "t.yml").write_text(VERIFIED)
+    assert len(fit_rows.load("t")[1]) == 1
