@@ -40,7 +40,7 @@ def _setup(tmp_path, monkeypatch, table: str, verified: str = VERIFIED):
 
 
 def _table(rows: str, pots: str = "") -> str:
-    return ("pots:\n"
+    return ("status: ready\npots:\n"
             f"  a: {POT.format(lid='paper_a_fig1')}\n"
             f"  b: {POT.format(lid='paper_b_tab2')}\n"
             f"  c: {POT.format(lid='paper_c_ph')}\n" + pots + "rows:\n" + rows)
@@ -102,3 +102,11 @@ def test_residuals_are_log_ratios_for_amounts_and_differences_for_ph():
     assert fit_rows.residual(amount, 100.0) == pytest.approx(1.0)
     assert fit_rows.residual(ph, 5.3) == pytest.approx(-0.2)
     assert isinstance(fit_rows.measurement_model(), fitting.MeasurementModel)
+
+
+def test_a_draft_table_is_refused_for_fitting(tmp_path, monkeypatch):
+    _setup(tmp_path, monkeypatch, _table("  - {pot: a, species: TTCA, t_min: 20, value: 10.0, unit: mmol_L, sd: 1}\n")
+           .replace("status: ready", "status: draft"))
+    with pytest.raises(PermissionError, match="not 'ready'"):
+        fit_rows.load("t")
+    assert len(fit_rows.load("t", require_verified=False)[1]) == 1

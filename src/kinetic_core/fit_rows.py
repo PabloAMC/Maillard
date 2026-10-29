@@ -68,10 +68,13 @@ def _ledger() -> Dict[str, dict]:
 def _verified() -> Dict[str, bool]:
     checks = ("conditions", "units", "quantification", "duplicates", "values")
     out = {}
-    for entry in (data_access.load_yaml(data_paths.SOURCE_VERIFICATION, missing_ok=True) or {}).get("entries") or []:
+    files = [data_paths.SOURCE_VERIFICATION, *sorted(data_paths.SOURCE_VERIFICATION_DIR.glob("*.yml"))]
+    entries = [e for f in files for e in (data_access.load_yaml(f, missing_ok=True) or {}).get("entries") or []]
+    for entry in entries:
         c = entry.get("checks") or {}
+        second = str(entry.get("second_reader") or "").strip()
         out[entry["ledger_id"]] = all(c.get(k) in ("pass", "corrected") for k in checks) and \
-            entry.get("second_reader") not in (None, "", entry.get("read_by"))
+            second not in ("", "pending", str(entry.get("read_by") or "").strip())
     return out
 
 
@@ -93,6 +96,9 @@ def _sigma(row: Mapping[str, Any]) -> float:
 def load(name: str, require_verified: bool = True) -> Tuple[Dict[str, dict], Tuple[FitRow, ...]]:
     """(pots, rows) of ``data/lit/fit_rows/<name>.yml``; duplicates of an original that is present are dropped."""
     table = data_access.load_yaml(FIT_ROWS_DIR / f"{name}.yml")
+    if require_verified and table.get("status", "draft") != "ready":
+        raise PermissionError(f"{name}: the table is {table.get('status', 'draft')!r}, not 'ready': its sources are still being "
+                              f"read; set status: ready once every source is verified by two readers")
     ledger, verified = _ledger(), _verified()
     pots: Dict[str, dict] = table.get("pots") or {}
     for pot_id, pot in pots.items():

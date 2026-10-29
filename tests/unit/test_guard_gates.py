@@ -14,6 +14,12 @@ import import_time_switch_gate as switch_gate  # noqa: E402
 import source_verification_gate as verification_gate  # noqa: E402
 
 
+@pytest.fixture(autouse=True)
+def _no_real_verification_files(tmp_path, monkeypatch):
+    """The gate also reads data/lit/source_verification/*.yml; the synthetic cases below must not see real entries."""
+    monkeypatch.setattr(verification_gate, "VERIFICATION_DIR", tmp_path / "no_such_dir")
+
+
 @pytest.mark.parametrize("code, expected", [
     ("import x\nsulfur.PH_COUPLING = 'inline'\n", ["sulfur.PH_COUPLING"]),
     ("if True:\n    ps.ROUTE = 1\n", ["ps.ROUTE"]),
@@ -57,23 +63,23 @@ GOOD = """entries:
 
 
 def test_an_unverified_row_cannot_enter_a_fit(tmp_path, monkeypatch):
-    ledgers, verification, fit_rows = _write(tmp_path, LEDGER, GOOD, "rows:\n  - {ledger_id: a}\n  - {ledger_id: b}\n")
+    ledgers, verification, fit_rows = _write(tmp_path, LEDGER, GOOD, "status: ready\npots:\n  pa: {ledger_id: a}\n  pb: {ledger_id: b}\nrows: [{pot: pa}, {pot: pb}]\n")
     monkeypatch.setattr(verification_gate, "LEDGERS", ledgers)
     monkeypatch.setattr(verification_gate, "VERIFICATION", verification)
     monkeypatch.setattr(verification_gate, "FIT_ROWS", fit_rows)
     problems, _ = verification_gate.check()
-    assert problems == ["rows.yml: row of 'b' enters a fit but its source is not verified"]
+    assert problems == ["rows.yml is ready but its source 'b' is not verified by two readers"]
 
 
 def test_a_failed_check_or_a_single_reader_is_refused(tmp_path, monkeypatch):
     bad = GOOD.replace("values: pass", "values: fail").replace("agent-2", "agent-1")
-    ledgers, verification, fit_rows = _write(tmp_path, LEDGER, bad, "rows:\n  - {ledger_id: a}\n")
+    ledgers, verification, fit_rows = _write(tmp_path, LEDGER, bad, "status: ready\npots:\n  pa: {ledger_id: a}\nrows: [{pot: pa}]\n")
     monkeypatch.setattr(verification_gate, "LEDGERS", ledgers)
     monkeypatch.setattr(verification_gate, "VERIFICATION", verification)
     monkeypatch.setattr(verification_gate, "FIT_ROWS", fit_rows)
     problems, _ = verification_gate.check()
     assert any("second reader must differ" in p for p in problems)
-    assert any("not verified" in p for p in problems)
+    assert any("not verified by two readers" in p for p in problems)
 
 
 def test_the_debt_is_reported_not_failed(tmp_path, monkeypatch):
@@ -127,3 +133,14 @@ def test_unpinned_constants_gate_passes_on_the_repository():
     import unpinned_constants_gate as gate
 
     assert gate.check() == []
+
+
+def test_a_pending_second_reader_is_not_a_verification(tmp_path, monkeypatch):
+    pending = GOOD.replace("second_reader: agent-2", "second_reader: pending")
+    ledgers, verification, fit_rows = _write(tmp_path, LEDGER, pending, "status: ready\npots:\n  pa: {ledger_id: a}\nrows: [{pot: pa}]\n")
+    monkeypatch.setattr(verification_gate, "LEDGERS", ledgers)
+    monkeypatch.setattr(verification_gate, "VERIFICATION", verification)
+    monkeypatch.setattr(verification_gate, "VERIFICATION_DIR", tmp_path / "none")
+    monkeypatch.setattr(verification_gate, "FIT_ROWS", fit_rows)
+    problems, _ = verification_gate.check()
+    assert problems == ["rows.yml is ready but its source 'a' is not verified by two readers"]
