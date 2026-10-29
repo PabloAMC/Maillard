@@ -309,3 +309,13 @@
 - **A dossier's summary label is not the source.** Zhai 2021's kinetic rows were run at pH 5.5 but labelled pH 7 in
   the dossier heading; B16 and stage 1 both inherited it. Before a row enters a fit, its conditions are checked
   against the paper's own text (the measurement index should carry the quoted condition, not the summary).
+- **Generators set engine switches AT IMPORT, and a test that imports one leaks them to every later test**
+  (2026-10-29). `generate_kinetic_core_b64_fit` sets `sulfur.PH_COUPLING = "inline"` at import; the route-calibration
+  test imported it, and B2.4's frozen-objective test then ran under the inline coupling: over an hour of a unit tier
+  that takes minutes, and a check of the wrong configuration had it finished. The B2.3 row splicing leaked the same way
+  (cost 22.56 -> 23.44). Guards now: `tests/conftest.py` resets every `src.kinetic_core` UPPERCASE global to its
+  pre-collection value before each test, and `tests/support.wave_generator` restores every generator module's
+  namespace on exit. Rules: a test imports a wave generator only through `wave_generator`; a new generator sets its
+  switches inside a context (as the route calibration's `installed()` does), not at import. Found by pairing each
+  earlier test file with the slow one (a bisection that took one minute); "probably slow" was the wrong first guess.
+- **A test that is slow in the suite and fast alone is test pollution, not slowness.** Time it alone first.
