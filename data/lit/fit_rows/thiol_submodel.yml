@@ -21,6 +21,10 @@
 #   * `printed` records the value as the source prints it where a conversion was made; ng/mL = ug/L and ng/g = ug/kg
 #     are relabels. ND / zero cells (left-censored, no LOD printed) are not rows.
 #   * A cell printed in two places enters ONCE (count once): see the notes of the Zhai pots.
+# Hofmann 1998 Table 9 (1-mercapto-2-propanone from glucose + cysteine, pH 3 / 5 / 7) added 2026-10-30 after two
+# readings (data/lit/fit_rows/thiol_hofmann_t9.yml, second/; reconciliation
+# results/validation/source_reading_reconciliation_thiol_hofmann_t9.md): it tests the hexose -> MGO -> MP flux in a
+# cysteine pot (thiol prereg sec. 3). Separate _mp pots (same recipe; the paper does not say the same vessels).
 status: ready   # adjudicated 2026-10-29; every source verified by two readers (source_verification/thiol_submodel.yml)
 pots:
   # ---- DFA Garching (Hofmann / Schieberle): isotope dilution, 145 C endpoints and a 100 C time course ----
@@ -364,6 +368,24 @@ pots:
      buffer: "McIlvaine-type citric acid / Na2HPO4, mixing ratio not printed", label_ph: 6.0,
      vessel: "can, not deoxidised (air headspace); retort; can volume not stated",
      condition_quote: "At a concentration of 1 ppm, 2-furfurylthiol was dissolved in citric/Na2HPO4 buffer solutions ... Half of each solution was canned without the deoxidization process and treated by heat processing [Table 2: 121 °C, 10 min and 123 °C, 20 min; pH 6.8 and 6.0]"}
+  hofmann1998_cys_glucose_ph3_mp:
+    {ledger_id: hofmann1998_t9_m2p_glucose_cys, t_c: 145, minutes: 20, initial_mmol_L: {Cys: 33.0, Glc: 100.0},
+     buffer: "phosphate 0.5 M (counter-ion not stated), pH not held", label_ph: 3.0, carbohydrate: glucose,
+     same_system_as: "hofmann1998_cys_glucose_ph3 (Table 2 recipe; same vessel not stated)",
+     vessel: "laboratory autoclave 200 mL, 100 mL aqueous fill; come-up time not stated",
+     condition_quote: "A solution (100 mL) of glucose (10.0 mmol) and cysteine (3.3 mmol) was reacted in a laboratory autoclave. ... the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 °C in a laboratory autoclave (200 mL; Type II; Roth, Germany)."}
+  hofmann1998_cys_glucose_ph5_mp:
+    {ledger_id: hofmann1998_t9_m2p_glucose_cys, t_c: 145, minutes: 20, initial_mmol_L: {Cys: 33.0, Glc: 100.0},
+     buffer: "phosphate 0.5 M (counter-ion not stated), pH not held", label_ph: 5.0, carbohydrate: glucose,
+     same_system_as: "hofmann1998_cys_glucose_ph5 (Table 1 recipe; same vessel not stated)",
+     vessel: "laboratory autoclave 200 mL, 100 mL aqueous fill; come-up time not stated",
+     condition_quote: "A solution (100 mL) of glucose (10.0 mmol) and cysteine (3.3 mmol) was reacted in a laboratory autoclave. ... the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 °C in a laboratory autoclave (200 mL; Type II; Roth, Germany)."}
+  hofmann1998_cys_glucose_ph7_mp:
+    {ledger_id: hofmann1998_t9_m2p_glucose_cys, t_c: 145, minutes: 20, initial_mmol_L: {Cys: 33.0, Glc: 100.0},
+     buffer: "phosphate 0.5 M (counter-ion not stated), pH not held", label_ph: 7.0, carbohydrate: glucose,
+     same_system_as: "hofmann1998_cys_glucose_ph7 (Table 2 recipe; same vessel not stated)",
+     vessel: "laboratory autoclave 200 mL, 100 mL aqueous fill; come-up time not stated",
+     condition_quote: "A solution (100 mL) of glucose (10.0 mmol) and cysteine (3.3 mmol) was reacted in a laboratory autoclave. ... the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 °C in a laboratory autoclave (200 mL; Type II; Roth, Germany)."}
 rows:
   # hofmann1998 (SIDA for FFT / MFT; FA and NF by internal standards with measured MS response factors). Printed ug per
   # pot / fill volume = ug/L (x10 for 100 mL, x20 for 50 mL). sd = 10 % (the footnote's bound).
@@ -633,3 +655,7 @@ rows:
   - {pot: kumazawa2003_fft_t2_ph60_121C_10min, species: FFT, t_min: 10, value: 48.3, unit: percent_of_unheated, read_error: 0.00045}
   - {pot: kumazawa2003_fft_t2_ph68_123C_20min, species: FFT, t_min: 20, value: 5.3, unit: percent_of_unheated, read_error: 0.0041}
   - {pot: kumazawa2003_fft_t2_ph60_123C_20min, species: FFT, t_min: 20, value: 43.4, unit: percent_of_unheated, read_error: 0.0005}
+  # Printed µg per 100 mL pot x 10 = µg/L; sd = 10 % (Table 1 footnote b's bound, cited by Table 9 footnote b).
+  - {pot: hofmann1998_cys_glucose_ph3_mp, species: MP, t_min: 20, value: 114.0, unit: ug_L, sd: 11.4, printed: "11.4 µg per 100 mL", method: calibrated, method_basis: "[13C4]mercapto-2-butanone (a labelled HOMOLOGUE, not an isotopologue) as internal standard with a measured MS response factor of 1.08 for mercapto-2-propanone: calibrated, not SIDA"}
+  - {pot: hofmann1998_cys_glucose_ph5_mp, species: MP, t_min: 20, value: 596.0, unit: ug_L, sd: 59.6, printed: "59.6 µg per 100 mL", method: calibrated, method_basis: "[13C4]mercapto-2-butanone (a labelled HOMOLOGUE, not an isotopologue) as internal standard with a measured MS response factor of 1.08 for mercapto-2-propanone: calibrated, not SIDA"}
+  - {pot: hofmann1998_cys_glucose_ph7_mp, species: MP, t_min: 20, value: 265.0, unit: ug_L, sd: 26.5, printed: "26.5 µg per 100 mL", method: calibrated, method_basis: "[13C4]mercapto-2-butanone (a labelled HOMOLOGUE, not an isotopologue) as internal standard with a measured MS response factor of 1.08 for mercapto-2-propanone: calibrated, not SIDA"}

@@ -1,0 +1,45 @@
+# FIT ROWS, Hofmann & Schieberle 1998 Table 9 (1-mercapto-2-propanone from glucose + cysteine at pH 3 / 5 / 7):
+# the INDEPENDENT SECOND READING (agent-hofmann-t9-reader2-2026-10-30).
+# Format: src/kinetic_core/fit_rows.py. Values are transcribed from the paper (J Agric Food Chem 1998, 46, 235-241,
+# p. 240, Table 9), read on the 300 dpi page image and the text layer (they agree); not from a dossier.
+# Unit conversion: the table prints "amount (ug)" per 100 mL pot (footnote a: "A solution (100 mL) ..."), so
+# ug per pot x 10 = ug/L. The pot fill is 100 mL in a 200 mL autoclave (Model Experiments).
+# Errors: `read_error` (dex) is half the last printed digit (0.05 ug per pot); no SD is printed. Footnote b of Table 1
+# (which Table 9 cites) says the values are means of triplicates that "differed by not more than 10%": a bound on
+# replicate scatter (~0.04 dex if read as +-10 %), NOT entered as `sd`; the measurement model must add it.
+# Table 9 has only one compound column (mercapto-2-propanone = engine key MP); no other engine species in it.
+# Pot `minutes` = the single sampling time (endpoint, 20 min at 145 C).
+status: draft
+pots:
+  hofmann1998_glc_cys_ph3_145C:
+    ledger_id: hofmann1998_t9_m2p_glucose_cys
+    t_c: 145
+    minutes: 20
+    initial_mmol_L: {Glc: 100.0, Cys: 33.0}
+    buffer: {kind: phosphate, mol_L: 0.5}
+    label_ph: 3.0
+    vessel: "laboratory autoclave (200 mL; Type II; Roth), 100 mL fill (~100 mL headspace); pH not measured during or after heating"
+    condition_quote: "A solution (100 mL) of glucose (10.0 mmol) and cysteine (3.3 mmol) was reacted in a laboratory autoclave. [Model Experiments:] the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 °C in a laboratory autoclave (200 mL; Type II; Roth, Germany)."
+  hofmann1998_glc_cys_ph5_145C:
+    ledger_id: hofmann1998_t9_m2p_glucose_cys
+    t_c: 145
+    minutes: 20
+    initial_mmol_L: {Glc: 100.0, Cys: 33.0}
+    buffer: {kind: phosphate, mol_L: 0.5}
+    label_ph: 5.0
+    vessel: "laboratory autoclave (200 mL; Type II; Roth), 100 mL fill (~100 mL headspace); pH not measured during or after heating"
+    condition_quote: "A solution (100 mL) of glucose (10.0 mmol) and cysteine (3.3 mmol) was reacted in a laboratory autoclave. [Model Experiments:] the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 °C in a laboratory autoclave (200 mL; Type II; Roth, Germany)."
+  hofmann1998_glc_cys_ph7_145C:
+    ledger_id: hofmann1998_t9_m2p_glucose_cys
+    t_c: 145
+    minutes: 20
+    initial_mmol_L: {Glc: 100.0, Cys: 33.0}
+    buffer: {kind: phosphate, mol_L: 0.5}
+    label_ph: 7.0
+    vessel: "laboratory autoclave (200 mL; Type II; Roth), 100 mL fill (~100 mL headspace); pH not measured during or after heating"
+    condition_quote: "A solution (100 mL) of glucose (10.0 mmol) and cysteine (3.3 mmol) was reacted in a laboratory autoclave. [Model Experiments:] the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 °C in a laboratory autoclave (200 mL; Type II; Roth, Germany)."
+rows:
+  # Hofmann & Schieberle 1998 Table 9, ug per 100 mL pot x 10 = ug/L; mean of triplicates (spread <= 10 %, no SD)
+  - {pot: hofmann1998_glc_cys_ph3_145C, species: MP, t_min: 20, value: 114.0, unit: ug_L, read_error: 0.0019, ug_per_pot: 11.4, method: calibrated, method_basis: "ledger class unknown; the paper quantifies mercapto-2-propanone against a labelled HOMOLOGUE ([13C4]mercapto-2-butanone, added after cooling, before ether extraction; ion-trap CI mass chromatography) with an MS response factor of 1.08 'calculated from mixtures containing known amounts of the analyte and the labeled standard': a calibrated internal-standard assay, not SIDA (the standard is not an isotopologue of the analyte)"}
+  - {pot: hofmann1998_glc_cys_ph5_145C, species: MP, t_min: 20, value: 596.0, unit: ug_L, read_error: 0.0004, ug_per_pot: 59.6, method: calibrated, method_basis: "ledger class unknown; the paper quantifies mercapto-2-propanone against a labelled HOMOLOGUE ([13C4]mercapto-2-butanone, added after cooling, before ether extraction; ion-trap CI mass chromatography) with an MS response factor of 1.08 'calculated from mixtures containing known amounts of the analyte and the labeled standard': a calibrated internal-standard assay, not SIDA (the standard is not an isotopologue of the analyte)"}
+  - {pot: hofmann1998_glc_cys_ph7_145C, species: MP, t_min: 20, value: 265.0, unit: ug_L, read_error: 0.0008, ug_per_pot: 26.5, method: calibrated, method_basis: "ledger class unknown; the paper quantifies mercapto-2-propanone against a labelled HOMOLOGUE ([13C4]mercapto-2-butanone, added after cooling, before ether extraction; ion-trap CI mass chromatography) with an MS response factor of 1.08 'calculated from mixtures containing known amounts of the analyte and the labeled standard': a calibrated internal-standard assay, not SIDA (the standard is not an isotopologue of the analyte)"}

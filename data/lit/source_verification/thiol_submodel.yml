@@ -903,3 +903,39 @@ entries:
     note for the rival arms: the 32 % plateau within 5 min is fast reversible binding, the later fall is covalent incorporation
     plus difurfuryl disulfide ("these additional signals could be identified as difurfuryldithiol, the dimer of FFT"); no
     disulfide is formed in the aqueous reference. Needs a melanoidin species the engine lacks (Phase 4 matrix layer).'
+- ledger_id: hofmann1998_t9_m2p_glucose_cys
+  source_file: hofmann1998.pdf
+  read_by: agent-hofmann-t9-reader1-2026-10-30
+  second_reader: agent-hofmann-t9-reader2-2026-10-30
+  date: '2026-10-30'
+  checks:
+    conditions: pass
+    units: pass
+    quantification: corrected
+    duplicates: pass
+    values: pass
+  quote: 'Table 9. Formation of Mercapto-2-propanone from Glucose and Cysteine ... pH 3.0 11.4; 5.0 59.6; 7.0 26.5 [amount
+    (µg)] ... a A solution (100 mL) of glucose (10.0 mmol) and cysteine (3.3 mmol) was reacted in a laboratory autoclave.
+    b See footnote b in Table 1.'
+  notes: 'Table number verified: Table 9 on p. 240 (PDF page 6), left column; Table 7 is MP from 2-oxopropanal + H2S
+    and Table 8 is FFT / MFT from hydroxyacetaldehyde + MP, both fed-precursor pots, not this one. Table 9 has ONE
+    carbohydrate (glucose) and ONE compound (mercapto-2-propanone = 1-mercapto-2-propanone, engine key MP); no other rows
+    exist, so nothing else to transcribe. Conditions: footnote a gives 100 mL, glucose 10.0 mmol, cysteine 3.3 mmol =
+    Glc 100 mM, Cys 33 mM; no pH in the footnote, the pH is the table''s own column; Experimental "Model Experiments"
+    (p. 236): "dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145
+    °C in a laboratory autoclave (200 mL; Type II; Roth, Germany)" -- the only aqueous arm, so 145 C / 20 min applies
+    (the dry arm is 180 C / 6 min and is marked by a "c" footnote elsewhere; Table 9 has none). Same recipe as the
+    glucose rows of Tables 1 and 2 (hofmann1998_cys_glucose_ph3 / ph5 / ph7). Units: "amount (µg)" per pot of 100 mL
+    -> x10 = µg/L (114, 596, 265 µg/L = 1.26, 6.61, 2.94 umol/L at M = 90.14 g/mol; 0.0038 / 0.020 / 0.0089 % of the
+    3.3 mmol cysteine). Error: footnote b -> Table 1 footnote b "Data are mean values of triplicates and differed by not
+    more than 10%" -> sd 10 %. Quantification CORRECTED: the ledger says quant_class unknown; the paper states it
+    ("Quantitation of Mercapto-2-propanone and NF", p. 236): "certain amounts of the labeled homologues
+    [13C4]mercapto-2-butanone and [13C2]-4-hydroxy-2,5-dimethyl-3(2H)-furanone were added to the reaction mixtures ... MS
+    response factors for mercapto-2-propanone (1.08) and NF (0.98) were calculated from mixtures containing known amounts
+    of the analyte and the labeled standard" -> calibrated (a labelled homologue, not the isotopologue: not SIDA); rows
+    carry method calibrated + method_basis; the ledger owner should set quant_class: calibrated. Duplicates: Table 9 is
+    not reprinted in hofmann1996b (which reprints Tables 2, 8 and 10) nor elsewhere in this paper; the text (p. 240) only
+    restates the maximum at pH 5.0. Not in thiol_submodel.yml (no MP row there). Values: the text layer (pdftotext
+    -layout and raw) reads 11.4 / 59.6 / 26.5 µg at pH 3.0 / 5.0 / 7.0. SAME READER''S CHECK (not an independent second
+    reading): the rendered page at 300 dpi (pdftoppm -r 300, left-column crop) shows the same three numbers, the same
+    header "amount b (µg)" and the same footnotes.'

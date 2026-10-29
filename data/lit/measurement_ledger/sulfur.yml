@@ -2324,11 +2324,11 @@ entries:
     temperature_c: [145]
     ph: {initial: [3.0, 5.0, 7.0], measured_during: false, final: null}
     time_min: [20]
-    species: ["mercapto-2-propanone"]
+    species: ["mercapto-2-propanone (MP)"]
     kind: endpoint
     location: "Table 9"
     status: digitised_in_dossier
-    quant_class: unknown
+    quant_class: calibrated   # 2026-10-30, two readers: [13C4]mercapto-2-butanone (a labelled homologue, MS response factor 1.08), not an isotopologue
     simulable: true
     condition_quote: "A solution (100 mL) of glucose (10.0 mmol) and cysteine (3.3 mmol) was reacted in a laboratory autoclave."
     flags: []
