@@ -1,0 +1,147 @@
+"""
+src/kinetic_core/fit_rows.py -- FIT ROWS AS DATA, KEYED TO THE MEASUREMENT INDEX (2026-10-29, guard 1).
+
+WHY THIS EXISTS
+===============
+Until now every wave generator typed its own rows: values, pots, pH, laboratory, copied from a dossier's summary. That
+is how a pH 5.5 run entered fits as pH 7, a semi-quantitative ladder as calibrated data, one data set two or three
+times, and a hold-out's pot with the wrong concentrations, buffer, temperature and time (conflicts register CF-001,
+CF-004, CF-005, ...). Here a fit's data are a table in ``data/lit/fit_rows/<name>.yml``:
+
+* ``pots``: each heated system, with its ledger id, the numeric conditions the engine integrates (temperature, time,
+  initial mmol/L, buffer, label pH) and the sentence of the paper that states them;
+* ``rows``: one per measurement (pot, species, time, value, unit, its error).
+
+What a row may NOT state is read from the ledger entry instead: the laboratory (the leave-one-out group) and the
+quantification class (which sets the measurement model's treatment of the series' calibration). A table may name a
+method class only where the ledger says ``other`` or ``unknown``, and must then say why (``method_basis``). A row whose
+ledger entry is not verified against its paper by two readers is refused (``source_verification_gate`` checks the same
+in CI). A ledger entry marked as a copy of another (``same_data_as`` in its flags, or a confirmed duplicate in the
+conflicts register) is dropped when its original is present (``fitting.count_once``).
+"""
+from __future__ import annotations
+
+import math
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any, Dict, List, Mapping, Optional, Tuple
+
+from src import data_access, data_paths
+
+from . import fitting
+
+FIT_ROWS_DIR: Path = data_paths.LIT_DIR / "fit_rows"
+LEDGER_CLASS_TO_METHOD = {"sida": "sida", "calibrated": "calibrated", "semi_quantitative": "semi_quantitative"}
+UNITS = {"mmol_L", "umol_L", "ug_L", "ug_kg", "pH", "mmol_per_L_naoh"}
+ROW_FIELDS = ("pot", "species", "t_min", "value", "unit")
+POT_FIELDS = ("ledger_id", "t_c", "minutes", "initial_mmol_L", "condition_quote")
+
+
+@dataclass(frozen=True)
+class FitRow:
+    table: str
+    pot: str
+    ledger_id: str
+    laboratory: str
+    method: str
+    species: str
+    t_min: float
+    value: float
+    unit: str
+    sigma: float          # in the residual's units: dex for a concentration, pH units for a pH
+    series: str
+    raw: Mapping[str, Any] = field(default_factory=dict)
+
+    @property
+    def log_scale(self) -> bool:
+        return self.unit != "pH"
+
+
+def _ledger() -> Dict[str, dict]:
+    out = {}
+    for path in sorted(data_paths.MEASUREMENT_LEDGER_DIR.glob("*.yml")):
+        for entry in (data_access.load_yaml(path) or {}).get("entries") or []:
+            out[entry["id"]] = entry
+    return out
+
+
+def _verified() -> Dict[str, bool]:
+    checks = ("conditions", "units", "quantification", "duplicates", "values")
+    out = {}
+    for entry in (data_access.load_yaml(data_paths.SOURCE_VERIFICATION, missing_ok=True) or {}).get("entries") or []:
+        c = entry.get("checks") or {}
+        out[entry["ledger_id"]] = all(c.get(k) in ("pass", "corrected") for k in checks) and \
+            entry.get("second_reader") not in (None, "", entry.get("read_by"))
+    return out
+
+
+def _sigma(row: Mapping[str, Any]) -> float:
+    """A row's error in residual units: the reported SD (as dex for a concentration) and the read error of a
+    digitised point, added in quadrature. A row with neither is refused: an error is a property of the data."""
+    unit, value = row["unit"], float(row["value"])
+    parts = []
+    if row.get("sd") is not None:
+        sd = float(row["sd"])
+        parts.append(sd if unit == "pH" else math.log10(math.e) * sd / value if value > 0 else float("inf"))
+    if row.get("read_error") is not None:
+        parts.append(float(row["read_error"]))
+    if not parts:
+        raise ValueError(f"row {row.get('pot')}/{row.get('species')}@{row.get('t_min')}: no sd and no read_error")
+    return math.sqrt(sum(p * p for p in parts))
+
+
+def load(name: str, require_verified: bool = True) -> Tuple[Dict[str, dict], Tuple[FitRow, ...]]:
+    """(pots, rows) of ``data/lit/fit_rows/<name>.yml``; duplicates of an original that is present are dropped."""
+    table = data_access.load_yaml(FIT_ROWS_DIR / f"{name}.yml")
+    ledger, verified = _ledger(), _verified()
+    pots: Dict[str, dict] = table.get("pots") or {}
+    for pot_id, pot in pots.items():
+        missing = [f for f in POT_FIELDS if f not in pot]
+        if missing:
+            raise ValueError(f"{name}: pot {pot_id} lacks {missing}")
+        if pot["ledger_id"] not in ledger:
+            raise KeyError(f"{name}: pot {pot_id} cites {pot['ledger_id']!r}, which is in no measurement ledger")
+        if require_verified and not verified.get(pot["ledger_id"], False):
+            raise PermissionError(f"{name}: pot {pot_id}'s source {pot['ledger_id']} is not verified against its paper "
+                                  f"by two readers (data/lit/source_verification.yml)")
+    rows: List[FitRow] = []
+    for raw in table.get("rows") or []:
+        missing = [f for f in ROW_FIELDS if f not in raw]
+        if missing:
+            raise ValueError(f"{name}: a row lacks {missing}: {raw}")
+        if raw["unit"] not in UNITS:
+            raise ValueError(f"{name}: unit {raw['unit']!r} not in {sorted(UNITS)}")
+        pot = pots[raw["pot"]]
+        entry = ledger[pot["ledger_id"]]
+        ledger_class = str(entry.get("quant_class"))
+        if raw["unit"] == "pH":
+            method = "calibrated"     # a glass electrode reads pH on an absolute scale; its error is the row's sigma
+        elif ledger_class in LEDGER_CLASS_TO_METHOD:
+            if raw.get("method") not in (None, LEDGER_CLASS_TO_METHOD[ledger_class]):
+                raise ValueError(f"{name}: row says method {raw['method']!r} but the ledger says {ledger_class!r}")
+            method = LEDGER_CLASS_TO_METHOD[ledger_class]
+        else:
+            if raw.get("method") not in fitting.SCALE_TAU or not str(raw.get("method_basis") or "").strip():
+                raise ValueError(f"{name}: the ledger's class is {ledger_class!r}, so the row must name a method class "
+                                 f"from {sorted(fitting.SCALE_TAU)} and say why (method_basis)")
+            method = raw["method"]
+        rows.append(FitRow(table=name, pot=raw["pot"], ledger_id=pot["ledger_id"], laboratory=str(entry.get("lab")),
+                           method=method, species=str(raw["species"]), t_min=float(raw["t_min"]),
+                           value=float(raw["value"]), unit=raw["unit"], sigma=_sigma(raw),
+                           series=f"{pot['ledger_id']}|{raw['pot']}|{raw['species']}", raw=raw))
+    copy_of = {e["id"]: flag.split(":", 1)[1].strip() for e in ledger.values() for flag in e.get("flags") or []
+               if isinstance(flag, str) and flag.startswith("same_data_as:")}
+    kept, _dropped = fitting.count_once(rows, lambda r: r.ledger_id, copy_of)
+    return pots, kept
+
+
+def measurement_model() -> fitting.MeasurementModel:
+    """The measurement model for FitRow rows: series and method from the table and the ledger, sigma from the row."""
+    return fitting.MeasurementModel(series_of=lambda r: r.series, sigma_of=lambda r: r.sigma, method_of=lambda r: r.method)
+
+
+def residual(row: FitRow, predicted: float) -> float:
+    """The row's residual in its own units (before whitening): log10 ratio for a concentration, difference for pH."""
+    if not row.log_scale:
+        return float(predicted) - row.value
+    return math.log10(max(float(predicted), 1e-30) / row.value) if row.value > 0 else float("nan")
