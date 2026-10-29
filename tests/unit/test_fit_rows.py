@@ -12,7 +12,7 @@ LEDGER = """entries:
   - {id: paper_a_fig1, lab: "Lab A", quant_class: calibrated, flags: []}
   - {id: paper_b_tab2, lab: "Lab B", quant_class: semi_quantitative, flags: []}
   - {id: paper_c_ph, lab: "Lab C", quant_class: other, flags: []}
-  - {id: paper_b_reprint, lab: "Lab B", quant_class: semi_quantitative, flags: ["same_data_as: paper_b_tab2"]}
+  - {id: paper_b_reprint, lab: "Lab B", quant_class: semi_quantitative, flags: ["duplicate_of: paper_b_tab2"]}
 """
 VERIFIED = """entries:
 """ + "".join(f"""  - ledger_id: {k}
@@ -27,6 +27,10 @@ POT = "{{ledger_id: {lid}, t_c: 90, minutes: 60, initial_mmol_L: {{PENT: 400, Cy
 
 
 def _setup(tmp_path, monkeypatch, table: str, verified: str = VERIFIED):
+    (tmp_path / "labs.yml").write_text("groups:\n" + "".join(
+        f"  lab_{x.lower()}: {{strings: [\"Lab {x}\"], evidence: test}}\n" for x in "ABC"))
+    monkeypatch.setattr(fit_rows, "LABORATORIES", tmp_path / "labs.yml")
+    monkeypatch.setattr(data_paths, "SOURCE_VERIFICATION_DIR", tmp_path / "no_dir")
     ledgers = tmp_path / "ledger"
     ledgers.mkdir()
     (ledgers / "sulfur.yml").write_text(LEDGER)
@@ -53,8 +57,8 @@ def test_laboratory_and_method_come_from_the_ledger(tmp_path, monkeypatch):
         "  - {pot: c, species: pH, t_min: 20, value: 5.5, unit: pH, sd: 0.05}\n"))
     _, rows = fit_rows.load("t")
     by_pot = {r.pot: r for r in rows}
-    assert (by_pot["a"].laboratory, by_pot["a"].method) == ("Lab A", "calibrated")
-    assert (by_pot["b"].laboratory, by_pot["b"].method) == ("Lab B", "semi_quantitative")
+    assert (by_pot["a"].laboratory, by_pot["a"].method) == ("lab_a", "calibrated")
+    assert (by_pot["b"].laboratory, by_pot["b"].method) == ("lab_b", "semi_quantitative")
     assert by_pot["c"].method == "calibrated" and not by_pot["c"].log_scale
     assert by_pot["a"].sigma == pytest.approx(math.log10(math.e) * 0.1)      # 10 % SD as dex
     assert by_pot["c"].sigma == pytest.approx(0.05)                            # pH units
@@ -110,3 +114,10 @@ def test_a_draft_table_is_refused_for_fitting(tmp_path, monkeypatch):
     with pytest.raises(PermissionError, match="not 'ready'"):
         fit_rows.load("t")
     assert len(fit_rows.load("t", require_verified=False)[1]) == 1
+
+
+def test_an_unmapped_laboratory_is_refused(tmp_path, monkeypatch):
+    _setup(tmp_path, monkeypatch, _table("  - {pot: a, species: TTCA, t_min: 20, value: 10.0, unit: mmol_L, sd: 1}\n"))
+    (tmp_path / "labs.yml").write_text("groups: {}\n")
+    with pytest.raises(KeyError, match="laboratories.yml"):
+        fit_rows.load("t")

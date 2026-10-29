@@ -1,0 +1,666 @@
+# KEYED FIT TABLE -- sub-model 1, pH and acid production (results/validation/kinetic_core_ph_acid_submodel_prereg.md).
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS; every row an sd as
+# printed or a read_error for a digitised point). Laboratory and quantification class come from the ledger entry.
+# First reader: agent-reader1-2026-10-29, against the PDFs (data/articles/), not the dossiers; second reader pending
+# (data/lit/source_verification/ph_acid_submodel.yml). Rows also carry their pot's ledger_id (redundant, for grep).
+# Conventions:
+#   * initial_mmol_L uses engine species keys (src/kinetic_core/species.py): Glc, Fru, Gly, AMA (= DFG), PENT,
+#     Cys, ARP, MARP, TTCA, LYSP.
+#   * label_ph: the pH the paper sets or holds; ph_measured_at: where and when the paper's electrode read it.
+#   * species "FA+AA" is the SUM of formic and acetic acid as the paper prints it (Davidek Table 5); the model's FA + AA.
+#   * `printed` records the value as the source prints it, before any unit conversion.
+status: draft   # first reader done for the sources below; second reader pending (fit_rows.load refuses a draft)
+pots:
+  davidek2002_water_ph5:
+    {ledger_id: davidek2002_tab5_acids_naoh_uptake, t_c: 90, minutes: 420, initial_mmol_L: {AMA: 100.0},
+     buffer: none (water; pH-stat with 3 M NaOH), label_ph: 5.0, ph_measured_at: "hot (90 C electrode, pH-stat, held)",
+     condition_quote: "Solutions of DFG (15 mmol) in water (150 mL) or in a phosphate buffer (150 mL, 100 mmol/L) were heated at 90 °C for 7 h. Experiments were performed at constant pH (5, 6, 7, or 8), measured at 90 °C, using a pH-stat device"}
+  davidek2002_water_ph6:
+    {ledger_id: davidek2002_tab5_acids_naoh_uptake, t_c: 90, minutes: 420, initial_mmol_L: {AMA: 100.0},
+     buffer: none (water; pH-stat with 3 M NaOH), label_ph: 6.0, ph_measured_at: "hot (90 C electrode, pH-stat, held)",
+     condition_quote: "Solutions of DFG (15 mmol) in water (150 mL) or in a phosphate buffer (150 mL, 100 mmol/L) were heated at 90 °C for 7 h. Experiments were performed at constant pH (5, 6, 7, or 8), measured at 90 °C, using a pH-stat device"}
+  davidek2002_water_ph7:
+    {ledger_id: davidek2002_tab5_acids_naoh_uptake, t_c: 90, minutes: 420, initial_mmol_L: {AMA: 100.0},
+     buffer: none (water; pH-stat with 3 M NaOH), label_ph: 7.0, ph_measured_at: "hot (90 C electrode, pH-stat, held)",
+     condition_quote: "Solutions of DFG (15 mmol) in water (150 mL) or in a phosphate buffer (150 mL, 100 mmol/L) were heated at 90 °C for 7 h. Experiments were performed at constant pH (5, 6, 7, or 8), measured at 90 °C, using a pH-stat device"}
+  davidek2002_water_ph8:
+    {ledger_id: davidek2002_tab5_acids_naoh_uptake, t_c: 90, minutes: 420, initial_mmol_L: {AMA: 100.0},
+     buffer: none (water; pH-stat with 3 M NaOH), label_ph: 8.0, ph_measured_at: "hot (90 C electrode, pH-stat, held)",
+     condition_quote: "Solutions of DFG (15 mmol) in water (150 mL) or in a phosphate buffer (150 mL, 100 mmol/L) were heated at 90 °C for 7 h. Experiments were performed at constant pH (5, 6, 7, or 8), measured at 90 °C, using a pH-stat device"}
+  davidek2002_phosphate_ph5:
+    {ledger_id: davidek2002_tab5_acids_naoh_uptake, t_c: 90, minutes: 420, initial_mmol_L: {AMA: 100.0},
+     buffer: phosphate 0.10 M (counter-ion not stated; pH-stat with 3 M NaOH), label_ph: 5.0, ph_measured_at: "hot (90 C electrode, pH-stat, held)",
+     condition_quote: "Solutions of DFG (15 mmol) in water (150 mL) or in a phosphate buffer (150 mL, 100 mmol/L) were heated at 90 °C for 7 h. Experiments were performed at constant pH (5, 6, 7, or 8), measured at 90 °C, using a pH-stat device"}
+  davidek2002_phosphate_ph6:
+    {ledger_id: davidek2002_tab5_acids_naoh_uptake, t_c: 90, minutes: 420, initial_mmol_L: {AMA: 100.0},
+     buffer: phosphate 0.10 M (counter-ion not stated; pH-stat with 3 M NaOH), label_ph: 6.0, ph_measured_at: "hot (90 C electrode, pH-stat, held)",
+     condition_quote: "Solutions of DFG (15 mmol) in water (150 mL) or in a phosphate buffer (150 mL, 100 mmol/L) were heated at 90 °C for 7 h. Experiments were performed at constant pH (5, 6, 7, or 8), measured at 90 °C, using a pH-stat device"}
+  davidek2002_phosphate_ph7:
+    {ledger_id: davidek2002_tab5_acids_naoh_uptake, t_c: 90, minutes: 420, initial_mmol_L: {AMA: 100.0},
+     buffer: phosphate 0.10 M (counter-ion not stated; pH-stat with 3 M NaOH), label_ph: 7.0, ph_measured_at: "hot (90 C electrode, pH-stat, held)",
+     condition_quote: "Solutions of DFG (15 mmol) in water (150 mL) or in a phosphate buffer (150 mL, 100 mmol/L) were heated at 90 °C for 7 h. Experiments were performed at constant pH (5, 6, 7, or 8), measured at 90 °C, using a pH-stat device"}
+  davidek2002_phosphate_ph8:
+    {ledger_id: davidek2002_tab5_acids_naoh_uptake, t_c: 90, minutes: 420, initial_mmol_L: {AMA: 100.0},
+     buffer: phosphate 0.10 M (counter-ion not stated; pH-stat with 3 M NaOH), label_ph: 8.0, ph_measured_at: "hot (90 C electrode, pH-stat, held)",
+     condition_quote: "Solutions of DFG (15 mmol) in water (150 mL) or in a phosphate buffer (150 mL, 100 mmol/L) were heated at 90 °C for 7 h. Experiments were performed at constant pH (5, 6, 7, or 8), measured at 90 °C, using a pH-stat device"}
+  martins2003b_100c_ph68:
+    {ledger_id: "martins2003b_fig6_organic_acids",
+     t_c: 100,
+     minutes: 180,
+     initial_mmol_L: {AMA: 10.0},
+     buffer: "potassium phosphate 0.10 M (K2HPO4/KH2PO4); pH not held",
+     label_ph: 6.8,
+     ph_measured_at: "not stated (samples ice-cooled before analyses; temperature of pH setting and reading not stated)",
+     condition_quote: "Compound 1 (0.237 g, 10 mmol) was dissolved in phosphate buffer (100 mL, 0.1 M K2HPO4/KH2PO4, pH 6.8 and 5.5) and heated at 100 °C for a maximum of 4 h and at 120 °C for a maximum of 3 h, in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm)."}
+  martins2003b_100c_ph55:
+    {ledger_id: "martins2003b_fig6_organic_acids",
+     t_c: 100,
+     minutes: 180,
+     initial_mmol_L: {AMA: 10.0},
+     buffer: "potassium phosphate 0.10 M (K2HPO4/KH2PO4); pH not held",
+     label_ph: 5.5,
+     ph_measured_at: "not stated (samples ice-cooled before analyses; temperature of pH setting and reading not stated)",
+     condition_quote: "Compound 1 (0.237 g, 10 mmol) was dissolved in phosphate buffer (100 mL, 0.1 M K2HPO4/KH2PO4, pH 6.8 and 5.5) and heated at 100 °C for a maximum of 4 h and at 120 °C for a maximum of 3 h, in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm)."}
+  martins2003b_120c_ph68:
+    {ledger_id: "martins2003b_fig6_organic_acids",
+     t_c: 120,
+     minutes: 120,
+     initial_mmol_L: {AMA: 10.0},
+     buffer: "potassium phosphate 0.10 M (K2HPO4/KH2PO4); pH not held",
+     label_ph: 6.8,
+     ph_measured_at: "not stated (samples ice-cooled before analyses; temperature of pH setting and reading not stated)",
+     condition_quote: "Compound 1 (0.237 g, 10 mmol) was dissolved in phosphate buffer (100 mL, 0.1 M K2HPO4/KH2PO4, pH 6.8 and 5.5) and heated at 100 °C for a maximum of 4 h and at 120 °C for a maximum of 3 h, in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm)."}
+  martins2003b_120c_ph55:
+    {ledger_id: "martins2003b_fig6_organic_acids",
+     t_c: 120,
+     minutes: 120,
+     initial_mmol_L: {AMA: 10.0},
+     buffer: "potassium phosphate 0.10 M (K2HPO4/KH2PO4); pH not held",
+     label_ph: 5.5,
+     ph_measured_at: "not stated (samples ice-cooled before analyses; temperature of pH setting and reading not stated)",
+     condition_quote: "Compound 1 (0.237 g, 10 mmol) was dissolved in phosphate buffer (100 mL, 0.1 M K2HPO4/KH2PO4, pH 6.8 and 5.5) and heated at 100 °C for a maximum of 4 h and at 120 °C for a maximum of 3 h, in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm)."}
+  martins2003b_100c_ph68_drift:  # same heated system as martins2003b_100c_ph68
+    {ledger_id: "martins2003b_fig7_ph_drift",
+     t_c: 100,
+     minutes: 180,
+     initial_mmol_L: {AMA: 10.0},
+     buffer: "potassium phosphate 0.10 M (K2HPO4/KH2PO4); pH not held",
+     label_ph: 6.8,
+     ph_measured_at: "not stated (samples ice-cooled before analyses; temperature of pH setting and reading not stated)",
+     condition_quote: "Compound 1 (0.237 g, 10 mmol) was dissolved in phosphate buffer (100 mL, 0.1 M K2HPO4/KH2PO4, pH 6.8 and 5.5) and heated at 100 °C for a maximum of 4 h and at 120 °C for a maximum of 3 h, in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm)."}
+  martins2003b_120c_ph68_drift:  # same heated system as martins2003b_120c_ph68
+    {ledger_id: "martins2003b_fig7_ph_drift",
+     t_c: 120,
+     minutes: 120,
+     initial_mmol_L: {AMA: 10.0},
+     buffer: "potassium phosphate 0.10 M (K2HPO4/KH2PO4); pH not held",
+     label_ph: 6.8,
+     ph_measured_at: "not stated (samples ice-cooled before analyses; temperature of pH setting and reading not stated)",
+     condition_quote: "Compound 1 (0.237 g, 10 mmol) was dissolved in phosphate buffer (100 mL, 0.1 M K2HPO4/KH2PO4, pH 6.8 and 5.5) and heated at 100 °C for a maximum of 4 h and at 120 °C for a maximum of 3 h, in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm)."}
+  martins2005b_ph48:
+    {ledger_id: "martins2005b_fig4_ph_drift_ladder",
+     t_c: 100,
+     minutes: 240,
+     initial_mmol_L: {Glc: 200.0, Gly: 200.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated); pH not held",
+     label_ph: 4.8,
+     ph_t0_plotted: 4.8,
+     ph_measured_at: "not stated (initial pH set at 20 C; samples ice-cooled before analyses)",
+     condition_quote: "Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell) and heated at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice, prior to analyses."}
+  martins2005b_ph55:
+    {ledger_id: "martins2005b_fig4_ph_drift_ladder",
+     t_c: 100,
+     minutes: 240,
+     initial_mmol_L: {Glc: 200.0, Gly: 200.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated); pH not held",
+     label_ph: 5.5,
+     ph_t0_plotted: 5.53,
+     ph_measured_at: "not stated (initial pH set at 20 C; samples ice-cooled before analyses)",
+     condition_quote: "Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell) and heated at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice, prior to analyses."}
+  martins2005b_ph60:
+    {ledger_id: "martins2005b_fig4_ph_drift_ladder",
+     t_c: 100,
+     minutes: 240,
+     initial_mmol_L: {Glc: 200.0, Gly: 200.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated); pH not held",
+     label_ph: 6.0,
+     ph_t0_plotted: 6.0,
+     ph_measured_at: "not stated (initial pH set at 20 C; samples ice-cooled before analyses)",
+     condition_quote: "Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell) and heated at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice, prior to analyses."}
+  martins2005b_ph68:
+    {ledger_id: "martins2005b_fig4_ph_drift_ladder",
+     t_c: 100,
+     minutes: 240,
+     initial_mmol_L: {Glc: 200.0, Gly: 200.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated); pH not held",
+     label_ph: 6.8,
+     ph_t0_plotted: 6.76,
+     ph_measured_at: "not stated (initial pH set at 20 C; samples ice-cooled before analyses)",
+     condition_quote: "Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell) and heated at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice, prior to analyses."}
+  martins2005b_ph75:
+    {ledger_id: "martins2005b_fig4_ph_drift_ladder",
+     t_c: 100,
+     minutes: 240,
+     initial_mmol_L: {Glc: 200.0, Gly: 200.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated); pH not held",
+     label_ph: 7.5,
+     ph_t0_plotted: 7.52,
+     ph_measured_at: "not stated (initial pH set at 20 C; samples ice-cooled before analyses)",
+     condition_quote: "Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell) and heated at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice, prior to analyses."}
+  brands2001_glucose_casein:
+    {ledger_id: "brands2001_fig3_ph_titratable_acid",
+     t_c: 120,
+     minutes: 40,
+     initial_mmol_L: {Glc: 150.0, LYSP: 15.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated) + sodium caseinate 3 % w/w; pH not held",
+     label_ph: 6.8,
+     ph_t0_plotted: 6.72,
+     ph_measured_at: "not stated (samples ice-cooled before analysis)",
+     heat_up: "reported times include a ~2-3 min heat-up",
+     amine_note: "LYSP from the stated sugar : lysine-residue ratio 10:1",
+     condition_quote: "Sodium caseinate (3% w/w) and sugar (150 mM monosaccharide) were dissolved in a phosphate buffer (0.1 M; pH 6.8) to give a molar ratio of sugar to lysine residues of 10:1. The samples were heated for various times (0-40 min) at 120 °C in an oil bath in screw-capped glass tubes (Schott, 16 × 160 mm). ... The reported heating times include the heating-up period of ∼2-3 min. After a given heating time, samples were cooled in ice water, prior to analysis."}
+  brands2001_fructose_casein:
+    {ledger_id: "brands2001_fig3_ph_titratable_acid",
+     t_c: 120,
+     minutes: 40,
+     initial_mmol_L: {Fru: 150.0, LYSP: 15.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated) + sodium caseinate 3 % w/w; pH not held",
+     label_ph: 6.8,
+     ph_t0_plotted: 6.7,
+     ph_measured_at: "not stated (samples ice-cooled before analysis)",
+     heat_up: "reported times include a ~2-3 min heat-up",
+     amine_note: "LYSP from the stated sugar : lysine-residue ratio 10:1",
+     condition_quote: "Sodium caseinate (3% w/w) and sugar (150 mM monosaccharide) were dissolved in a phosphate buffer (0.1 M; pH 6.8) to give a molar ratio of sugar to lysine residues of 10:1. The samples were heated for various times (0-40 min) at 120 °C in an oil bath in screw-capped glass tubes (Schott, 16 × 160 mm). ... The reported heating times include the heating-up period of ∼2-3 min. After a given heating time, samples were cooled in ice water, prior to analysis."}
+
+  nguyen2016_m1_glucose_120c:
+    {ledger_id: "nguyen2016_figs1_ph_mass_balance",
+     t_c: 120,
+     minutes: 30,
+     initial_mmol_L: {Glc: 149.9, LYSP: 15.0},
+     buffer: "sodium phosphate 0.10 M (NaH2PO4/Na2HPO4) + sodium caseinate 30 g/L; pH not held",
+     label_ph: 6.8,
+     ph_t0_measured: "6.82 / 6.83",
+     ph_measured_at: "cooled 25 C (room temperature, after 1 h on ice)",
+     heat_up: "5 min heat-up inside the time axis",
+     amine_note: "LYSP from the stated sugar : lysine ratio 'about 10:1'; the SI's t = 0 balance implies ~6:1 (CF-052). 'Lac' (lactose) is not an engine species.",
+     condition_quote: "Model system M1 consisted of 30 g of sodium caseinate and 27 g of D-glucose in 1 l phosphate buffer (0.1 M, pH = 6.8). Model system M2 consisted of 30 g of sodium caseinate and 51.3 g of lactose monohydrate in 1 l phosphate buffer (0.1 M, pH = 6.8). ... aliquots (6 ml) ... screw-capped glass reaction tubes (1.2 × 10 cm) with headspace of 1.2 × 3.5 cm. They were heated at either 120 °C or 130 °C for 30 min using heating blocks ... the heating up period was 5 min ... The pH of M1 and M2, at every 5 min of heating, was determined at room temperature by a pH meter ... after the one-hour cooling period"}
+  nguyen2016_m1_glucose_130c:
+    {ledger_id: "nguyen2016_figs1_ph_mass_balance",
+     t_c: 130,
+     minutes: 30,
+     initial_mmol_L: {Glc: 149.9, LYSP: 15.0},
+     buffer: "sodium phosphate 0.10 M (NaH2PO4/Na2HPO4) + sodium caseinate 30 g/L; pH not held",
+     label_ph: 6.8,
+     ph_t0_measured: "6.80 / 6.81",
+     ph_measured_at: "cooled 25 C (room temperature, after 1 h on ice)",
+     heat_up: "5 min heat-up inside the time axis",
+     amine_note: "LYSP from the stated sugar : lysine ratio 'about 10:1'; the SI's t = 0 balance implies ~6:1 (CF-052). 'Lac' (lactose) is not an engine species.",
+     condition_quote: "Model system M1 consisted of 30 g of sodium caseinate and 27 g of D-glucose in 1 l phosphate buffer (0.1 M, pH = 6.8). Model system M2 consisted of 30 g of sodium caseinate and 51.3 g of lactose monohydrate in 1 l phosphate buffer (0.1 M, pH = 6.8). ... aliquots (6 ml) ... screw-capped glass reaction tubes (1.2 × 10 cm) with headspace of 1.2 × 3.5 cm. They were heated at either 120 °C or 130 °C for 30 min using heating blocks ... the heating up period was 5 min ... The pH of M1 and M2, at every 5 min of heating, was determined at room temperature by a pH meter ... after the one-hour cooling period"}
+  nguyen2016_m2_lactose_120c:
+    {ledger_id: "nguyen2016_figs1_ph_mass_balance",
+     t_c: 120,
+     minutes: 30,
+     initial_mmol_L: {Lac: 142.4, LYSP: 14.2},
+     buffer: "sodium phosphate 0.10 M (NaH2PO4/Na2HPO4) + sodium caseinate 30 g/L; pH not held",
+     label_ph: 6.8,
+     ph_t0_measured: "6.84 / 6.84",
+     ph_measured_at: "cooled 25 C (room temperature, after 1 h on ice)",
+     heat_up: "5 min heat-up inside the time axis",
+     amine_note: "LYSP from the stated sugar : lysine ratio 'about 10:1'; the SI's t = 0 balance implies ~6:1 (CF-052). 'Lac' (lactose) is not an engine species.",
+     condition_quote: "Model system M1 consisted of 30 g of sodium caseinate and 27 g of D-glucose in 1 l phosphate buffer (0.1 M, pH = 6.8). Model system M2 consisted of 30 g of sodium caseinate and 51.3 g of lactose monohydrate in 1 l phosphate buffer (0.1 M, pH = 6.8). ... aliquots (6 ml) ... screw-capped glass reaction tubes (1.2 × 10 cm) with headspace of 1.2 × 3.5 cm. They were heated at either 120 °C or 130 °C for 30 min using heating blocks ... the heating up period was 5 min ... The pH of M1 and M2, at every 5 min of heating, was determined at room temperature by a pH meter ... after the one-hour cooling period"}
+  nguyen2016_m2_lactose_130c:
+    {ledger_id: "nguyen2016_figs1_ph_mass_balance",
+     t_c: 130,
+     minutes: 30,
+     initial_mmol_L: {Lac: 142.4, LYSP: 14.2},
+     buffer: "sodium phosphate 0.10 M (NaH2PO4/Na2HPO4) + sodium caseinate 30 g/L; pH not held",
+     label_ph: 6.8,
+     ph_t0_measured: "6.84 / 6.84",
+     ph_measured_at: "cooled 25 C (room temperature, after 1 h on ice)",
+     heat_up: "5 min heat-up inside the time axis",
+     amine_note: "LYSP from the stated sugar : lysine ratio 'about 10:1'; the SI's t = 0 balance implies ~6:1 (CF-052). 'Lac' (lactose) is not an engine species.",
+     condition_quote: "Model system M1 consisted of 30 g of sodium caseinate and 27 g of D-glucose in 1 l phosphate buffer (0.1 M, pH = 6.8). Model system M2 consisted of 30 g of sodium caseinate and 51.3 g of lactose monohydrate in 1 l phosphate buffer (0.1 M, pH = 6.8). ... aliquots (6 ml) ... screw-capped glass reaction tubes (1.2 × 10 cm) with headspace of 1.2 × 3.5 cm. They were heated at either 120 °C or 130 °C for 30 min using heating blocks ... the heating up period was 5 min ... The pH of M1 and M2, at every 5 min of heating, was determined at room temperature by a pH meter ... after the one-hour cooling period"}
+
+  cao2017_blank:
+    {ledger_id: "cao2017_fig4c_ph",
+     t_c: 90,
+     minutes: 300,
+     initial_mmol_L: {Cys: 400.0, PENT: 400.0},
+     buffer: "sodium phosphate 0.20 M; pH not held",
+     label_ph: 5.5,
+     ph_t0_plotted: 5.5,
+     ph_measured_at: "not stated (vials cooled under tap water, then PHSJ-5 meter)",
+     vessel: "sealed 15 mL vial, 5 mL liquid, stirred; one vial per time",
+     condition_quote: "The amounts of cysteine and xylose used in the reaction models were both 2 mmol in 5 mL of phosphate buffer (0.2 M, pH 5.5). The glycine was added in the reaction systems at 0, 1, 8, 12, 16, or 24 times of the cysteine concentration (mol/L). The vials were sealed and heated at 90 °C while stirring for 0.5, 1, 2, 3, 4, or 5 h. At the end time, the vials were removed and cooled immediately by a stream of tap water."}
+  cao2017_gly_x1:
+    {ledger_id: "cao2017_fig4c_ph",
+     t_c: 90,
+     minutes: 300,
+     initial_mmol_L: {Cys: 400.0, PENT: 400.0, Gly: 400.0},
+     buffer: "sodium phosphate 0.20 M; pH not held",
+     label_ph: 5.5,
+     ph_t0_plotted: 5.43,
+     ph_measured_at: "not stated (vials cooled under tap water, then PHSJ-5 meter)",
+     vessel: "sealed 15 mL vial, 5 mL liquid, stirred; one vial per time",
+     condition_quote: "The amounts of cysteine and xylose used in the reaction models were both 2 mmol in 5 mL of phosphate buffer (0.2 M, pH 5.5). The glycine was added in the reaction systems at 0, 1, 8, 12, 16, or 24 times of the cysteine concentration (mol/L). The vials were sealed and heated at 90 °C while stirring for 0.5, 1, 2, 3, 4, or 5 h. At the end time, the vials were removed and cooled immediately by a stream of tap water."}
+
+  zhao2017b_blank:
+    {ledger_id: "zhao2017b_fig2c_ph_diluted",
+     t_c: 90,
+     minutes: 300,
+     initial_mmol_L: {Cys: 400.0, PENT: 400.0},
+     buffer: "sodium phosphate 0.20 M (NaH2PO4 titrated with NaOH); pH not held",
+     label_ph: 5.5,
+     ph_t0_plotted: 5.5,
+     ph_measured_at: "cooled 25 C, AFTER a 6x dilution in water (0.5 mL to 3 mL): not the pot pH",
+     vessel: "sealed 15 mL pressure tube, 5 mL liquid",
+     condition_quote: "在15 mL耐压密封管中，加入5 mL缓冲溶液（氢氧化钠滴加到磷酸二氢钠溶液中配制，0.2 mol/L，pH 5.5）、L-半胱氨酸2 mmol（0.242 g）、D-（＋）-木糖2 mmol（0.300 g）。... 90 ℃分别反应0.5、1、2、3、4 h和5 h。到达反应时间后，迅速水流冷却。... 取0.5 mL反应溶液稀释至3 mL，在室温（25 ℃）条件下，测定溶液的pH值。"}
+
+  deng2021_marp_phosphate:
+    {ledger_id: "deng2021_fig6_phosphate_arm_ph_trajectory",
+     t_c: 100,
+     minutes: 240,
+     initial_mmol_L: {MARP: 200.0},
+     buffer: "sodium phosphate 0.10 M (Na2HPO4 / NaH2PO4 listed); pH not held",
+     label_ph: 7.5,
+     ph_t0_plotted: 7.51,
+     ph_measured_at: "not stated (reactions terminated in ice water; meter and temperature not stated)",
+     vessel: "sealed vials, continuous stirring",
+     amine_note: "MG-ARP = N-(1-deoxy-D-fructos-1-yl)-methionine, engine key MARP; the paper calls this buffered arm 'unbuffered models' (typo)",
+     condition_quote: "Aqueous MG-ARP solutions (0.2 mol/L) with or without Met (0.1 mol/L) were prepared. ... The solutions were transferred to sealed vials and thermally treated ... for a defined reaction time (0, 30, 60, 120, 180, and 240 min) under continuous stirring. Meanwhile, solutions of MG-ARP (0.2 mol/L) with or without Met (0.1 mol/L) in a phosphate buffer (0.1 mol/L, pH 7.5) were prepared and heated at 100 °C for a defined reaction time as unbuffered models. The reactions were immediately terminated in ice water"}
+  deng2021_marp_met_phosphate:
+    {ledger_id: "deng2021_fig6_phosphate_arm_ph_trajectory",
+     t_c: 100,
+     minutes: 240,
+     initial_mmol_L: {MARP: 200.0, MET: 100.0},
+     buffer: "sodium phosphate 0.10 M (Na2HPO4 / NaH2PO4 listed); pH not held",
+     label_ph: 7.5,
+     ph_t0_plotted: 7.51,
+     ph_measured_at: "not stated (reactions terminated in ice water; meter and temperature not stated)",
+     vessel: "sealed vials, continuous stirring",
+     amine_note: "MG-ARP = N-(1-deoxy-D-fructos-1-yl)-methionine, engine key MARP; the paper calls this buffered arm 'unbuffered models' (typo)",
+     condition_quote: "Aqueous MG-ARP solutions (0.2 mol/L) with or without Met (0.1 mol/L) were prepared. ... The solutions were transferred to sealed vials and thermally treated ... for a defined reaction time (0, 30, 60, 120, 180, and 240 min) under continuous stirring. Meanwhile, solutions of MG-ARP (0.2 mol/L) with or without Met (0.1 mol/L) in a phosphate buffer (0.1 mol/L, pH 7.5) were prepared and heated at 100 °C for a defined reaction time as unbuffered models. The reactions were immediately terminated in ice water"}
+
+  zhang2025_diarp_120c:
+    {ledger_id: "zhang2025_fig3_diarp_120c_dicarbonyls_ph",
+     t_c: 120,
+     minutes: 120,
+     initial_mmol_L: {diXulLysARP: 20.0},
+     buffer: "none (water; pH set with HCl)",
+     label_ph: 7.5,
+     ph_measured_at: "not stated (ice-bath cooled; meter and temperature not stated)",
+     vessel: "sealed vials, stirred oil bath (sec. 2.4 wording)",
+     amine_note: "diXulLysARP = Nα,Nε-di(1-deoxy-D-xylulos-1-yl)lysine: NOT an engine species (engine ARP is the mono-glycated alanine ARP)",
+     condition_quote: "Aqueous solutions of Nα,Nε-di-Xul-Lys ARP (20 mmol/L) and Nα,Nε-di-Xul-Lys ARP (20 mmol/L)/Xyl (20 mmol/L) were prepared, and the pH of these mixtures was set to 7.5 ± 0.01 by adding HCl (1.0 mol/L and 6.0 mol/L). The reaction was carried out at 100, 120 and 140 °C for 30, 60, 90 and 120 min and then the reacted mixture was cooled in an ice bath for subsequent analysis."}
+  zhang2025_diarp_xyl_120c:
+    {ledger_id: "zhang2025_fig3_diarp_120c_dicarbonyls_ph",
+     t_c: 120,
+     minutes: 120,
+     initial_mmol_L: {diXulLysARP: 20.0, PENT: 20.0},
+     buffer: "none (water; pH set with HCl)",
+     label_ph: 7.5,
+     ph_measured_at: "not stated (ice-bath cooled; meter and temperature not stated)",
+     vessel: "sealed vials, stirred oil bath (sec. 2.4 wording)",
+     amine_note: "diXulLysARP = Nα,Nε-di(1-deoxy-D-xylulos-1-yl)lysine: NOT an engine species (engine ARP is the mono-glycated alanine ARP)",
+     condition_quote: "Aqueous solutions of Nα,Nε-di-Xul-Lys ARP (20 mmol/L) and Nα,Nε-di-Xul-Lys ARP (20 mmol/L)/Xyl (20 mmol/L) were prepared, and the pH of these mixtures was set to 7.5 ± 0.01 by adding HCl (1.0 mol/L and 6.0 mol/L). The reaction was carried out at 100, 120 and 140 °C for 30, 60, 90 and 120 min and then the reacted mixture was cooled in an ice bath for subsequent analysis."}
+
+  zhou2023_arp_ph6:
+    {ledger_id: "zhou2023_fig2_final_ph",
+     t_c: 120,
+     minutes: 60,
+     initial_mmol_L: {ARP: 20.0},
+     buffer: "none (water; pH set with 3 M NaOH)",
+     label_ph: 6.0,
+     ph_measured_at: "not stated (ice-bath cooled; Mettler-Toledo meter, temperature not stated)",
+     vessel: "not stated",
+     amine_note: "ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine, the engine's ARP",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath"}
+  zhou2023_arp_ph7:
+    {ledger_id: "zhou2023_fig2_final_ph",
+     t_c: 120,
+     minutes: 60,
+     initial_mmol_L: {ARP: 20.0},
+     buffer: "none (water; pH set with 3 M NaOH)",
+     label_ph: 7.0,
+     ph_measured_at: "not stated (ice-bath cooled; Mettler-Toledo meter, temperature not stated)",
+     vessel: "not stated",
+     amine_note: "ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine, the engine's ARP",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath"}
+  zhou2023_arp_ph8:
+    {ledger_id: "zhou2023_fig2_final_ph",
+     t_c: 120,
+     minutes: 60,
+     initial_mmol_L: {ARP: 20.0},
+     buffer: "none (water; pH set with 3 M NaOH)",
+     label_ph: 8.0,
+     ph_measured_at: "not stated (ice-bath cooled; Mettler-Toledo meter, temperature not stated)",
+     vessel: "not stated",
+     amine_note: "ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine, the engine's ARP",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath"}
+  zhou2023_arp_cys_ph6:
+    {ledger_id: "zhou2023_fig2_final_ph",
+     t_c: 120,
+     minutes: 60,
+     initial_mmol_L: {ARP: 20.0, Cys: 20.0},
+     buffer: "none (water; pH set with 3 M NaOH)",
+     label_ph: 6.0,
+     ph_measured_at: "not stated (ice-bath cooled; Mettler-Toledo meter, temperature not stated)",
+     vessel: "not stated",
+     amine_note: "ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine, the engine's ARP",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath"}
+  zhou2023_arp_cys_ph7:
+    {ledger_id: "zhou2023_fig2_final_ph",
+     t_c: 120,
+     minutes: 60,
+     initial_mmol_L: {ARP: 20.0, Cys: 20.0},
+     buffer: "none (water; pH set with 3 M NaOH)",
+     label_ph: 7.0,
+     ph_measured_at: "not stated (ice-bath cooled; Mettler-Toledo meter, temperature not stated)",
+     vessel: "not stated",
+     amine_note: "ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine, the engine's ARP",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath"}
+  zhou2023_arp_cys_ph8:
+    {ledger_id: "zhou2023_fig2_final_ph",
+     t_c: 120,
+     minutes: 60,
+     initial_mmol_L: {ARP: 20.0, Cys: 20.0},
+     buffer: "none (water; pH set with 3 M NaOH)",
+     label_ph: 8.0,
+     ph_measured_at: "not stated (ice-bath cooled; Mettler-Toledo meter, temperature not stated)",
+     vessel: "not stated",
+     amine_note: "ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine, the engine's ARP",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath"}
+rows:
+  - {pot: davidek2002_water_ph5, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 420, value: 3.333, unit: mmol_L, sd: 0.333, printed: "0.5 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 120, value: 6.000, unit: mmol_L, sd: 0.600, printed: "0.9 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 180, value: 11.333, unit: mmol_L, sd: 1.133, printed: "1.7 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 240, value: 16.000, unit: mmol_L, sd: 1.600, printed: "2.4 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 300, value: 20.000, unit: mmol_L, sd: 2.000, printed: "3.0 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 360, value: 24.667, unit: mmol_L, sd: 2.467, printed: "3.7 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 420, value: 27.333, unit: mmol_L, sd: 2.733, printed: "4.1 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 60, value: 18.000, unit: mmol_L, sd: 1.800, printed: "2.7 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 120, value: 33.333, unit: mmol_L, sd: 3.333, printed: "5.0 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 180, value: 43.333, unit: mmol_L, sd: 4.333, printed: "6.5 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 240, value: 49.333, unit: mmol_L, sd: 4.933, printed: "7.4 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 300, value: 54.000, unit: mmol_L, sd: 5.400, printed: "8.1 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 360, value: 58.000, unit: mmol_L, sd: 5.800, printed: "8.7 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 420, value: 59.333, unit: mmol_L, sd: 5.933, printed: "8.9 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 60, value: 44.000, unit: mmol_L, sd: 4.400, printed: "6.6 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 120, value: 64.667, unit: mmol_L, sd: 6.467, printed: "9.7 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 180, value: 72.667, unit: mmol_L, sd: 7.267, printed: "10.9 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 240, value: 76.667, unit: mmol_L, sd: 7.667, printed: "11.5 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 300, value: 78.000, unit: mmol_L, sd: 7.800, printed: "11.7 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 360, value: 78.000, unit: mmol_L, sd: 7.800, printed: "11.7 mmol per 150 mL"}
+  - {pot: davidek2002_water_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 420, value: 78.667, unit: mmol_L, sd: 7.867, printed: "11.8 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph5, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 240, value: 3.333, unit: mmol_L, sd: 0.333, printed: "0.5 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph5, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 300, value: 6.000, unit: mmol_L, sd: 0.600, printed: "0.9 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph5, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 360, value: 8.667, unit: mmol_L, sd: 0.867, printed: "1.3 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph5, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 420, value: 11.333, unit: mmol_L, sd: 1.133, printed: "1.7 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 60, value: 11.333, unit: mmol_L, sd: 1.133, printed: "1.7 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 120, value: 26.667, unit: mmol_L, sd: 2.667, printed: "4.0 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 180, value: 38.000, unit: mmol_L, sd: 3.800, printed: "5.7 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 240, value: 46.000, unit: mmol_L, sd: 4.600, printed: "6.9 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 300, value: 52.000, unit: mmol_L, sd: 5.200, printed: "7.8 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 360, value: 55.333, unit: mmol_L, sd: 5.533, printed: "8.3 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph6, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 420, value: 58.000, unit: mmol_L, sd: 5.800, printed: "8.7 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 60, value: 40.667, unit: mmol_L, sd: 4.067, printed: "6.1 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 120, value: 61.333, unit: mmol_L, sd: 6.133, printed: "9.2 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 180, value: 70.667, unit: mmol_L, sd: 7.067, printed: "10.6 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 240, value: 72.667, unit: mmol_L, sd: 7.267, printed: "10.9 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 300, value: 74.667, unit: mmol_L, sd: 7.467, printed: "11.2 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 360, value: 76.667, unit: mmol_L, sd: 7.667, printed: "11.5 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph7, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 420, value: 78.000, unit: mmol_L, sd: 7.800, printed: "11.7 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 60, value: 52.000, unit: mmol_L, sd: 5.200, printed: "7.8 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 120, value: 70.000, unit: mmol_L, sd: 7.000, printed: "10.5 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 180, value: 76.667, unit: mmol_L, sd: 7.667, printed: "11.5 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 240, value: 79.333, unit: mmol_L, sd: 7.933, printed: "11.9 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 300, value: 78.667, unit: mmol_L, sd: 7.867, printed: "11.8 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 360, value: 82.667, unit: mmol_L, sd: 8.267, printed: "12.4 mmol per 150 mL"}
+  - {pot: davidek2002_phosphate_ph8, ledger_id: davidek2002_tab5_acids_naoh_uptake, species: FA+AA, t_min: 420, value: 79.333, unit: mmol_L, sd: 7.933, printed: "11.9 mmol per 150 mL"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 15, value: 1.47, unit: mmol_L, read_error: 0.015, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 30, value: 2.56, unit: mmol_L, read_error: 0.008, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 45, value: 3.48, unit: mmol_L, read_error: 0.006, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 60, value: 4.06, unit: mmol_L, read_error: 0.005, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 90, value: 4.64, unit: mmol_L, read_error: 0.005, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 120, value: 4.92, unit: mmol_L, read_error: 0.004, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 150, value: 4.72, unit: mmol_L, read_error: 0.005, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 180, value: 4.82, unit: mmol_L, read_error: 0.004, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 15, value: 0.3, unit: mmol_L, read_error: 0.067, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 30, value: 0.64, unit: mmol_L, read_error: 0.033, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 45, value: 0.98, unit: mmol_L, read_error: 0.022, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 60, value: 1.45, unit: mmol_L, read_error: 0.015, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 90, value: 2.0, unit: mmol_L, read_error: 0.011, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 120, value: 1.9, unit: mmol_L, read_error: 0.011, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 150, value: 1.96, unit: mmol_L, read_error: 0.011, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 180, value: 1.96, unit: mmol_L, read_error: 0.011, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 30, value: 0.1, unit: mmol_L, read_error: 0.301, read_error_basis: "+-0.1 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 45, value: 0.16, unit: mmol_L, read_error: 0.211, read_error_basis: "+-0.1 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 60, value: 0.2, unit: mmol_L, read_error: 0.176, read_error_basis: "+-0.1 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 75, value: 0.23, unit: mmol_L, read_error: 0.157, read_error_basis: "+-0.1 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 90, value: 0.26, unit: mmol_L, read_error: 0.141, read_error_basis: "+-0.1 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 120, value: 0.37, unit: mmol_L, read_error: 0.055, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 180, value: 0.51, unit: mmol_L, read_error: 0.041, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 120, value: 0.04, unit: mmol_L, read_error: 0.352, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 180, value: 0.05, unit: mmol_L, read_error: 0.301, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 5, value: 1.86, unit: mmol_L, read_error: 0.012, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 10, value: 3.53, unit: mmol_L, read_error: 0.006, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 15, value: 4.39, unit: mmol_L, read_error: 0.005, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 30, value: 4.94, unit: mmol_L, read_error: 0.004, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 45, value: 5.06, unit: mmol_L, read_error: 0.004, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 60, value: 5.18, unit: mmol_L, read_error: 0.004, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 90, value: 5.38, unit: mmol_L, read_error: 0.004, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 120, value: 5.58, unit: mmol_L, read_error: 0.004, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 5, value: 1.0, unit: mmol_L, read_error: 0.021, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 10, value: 2.21, unit: mmol_L, read_error: 0.010, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 15, value: 2.68, unit: mmol_L, read_error: 0.008, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 30, value: 3.07, unit: mmol_L, read_error: 0.007, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 45, value: 2.92, unit: mmol_L, read_error: 0.007, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 60, value: 3.08, unit: mmol_L, read_error: 0.007, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 90, value: 3.12, unit: mmol_L, read_error: 0.007, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph68, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 120, value: 2.92, unit: mmol_L, read_error: 0.007, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 10, value: 0.11, unit: mmol_L, read_error: 0.163, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 15, value: 0.29, unit: mmol_L, read_error: 0.069, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 60, value: 1.3, unit: mmol_L, read_error: 0.016, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 90, value: 1.42, unit: mmol_L, read_error: 0.015, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 120, value: 1.62, unit: mmol_L, read_error: 0.013, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 30, value: 0.82, unit: mmol_L, read_error: 0.050, read_error_basis: "+-0.1 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: AA, t_min: 45, value: 1.07, unit: mmol_L, read_error: 0.039, read_error_basis: "+-0.1 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 30, value: 0.61, unit: mmol_L, read_error: 0.066, read_error_basis: "+-0.1 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 45, value: 0.82, unit: mmol_L, read_error: 0.050, read_error_basis: "+-0.1 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 60, value: 0.92, unit: mmol_L, read_error: 0.023, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 90, value: 0.92, unit: mmol_L, read_error: 0.023, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_120c_ph55, ledger_id: martins2003b_fig6_organic_acids, species: FA, t_min: 120, value: 1.0, unit: mmol_L, read_error: 0.021, read_error_basis: "+-0.05 mmol/L, 600 dpi raster blob centre"}
+  - {pot: martins2003b_100c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 15, value: 6.766, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_100c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 30, value: 6.730, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_100c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 45, value: 6.705, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_100c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 60, value: 6.695, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_100c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 90, value: 6.665, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_100c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 120, value: 6.646, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_100c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 150, value: 6.639, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_100c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 180, value: 6.625, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_120c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 5, value: 6.749, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_120c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 10, value: 6.726, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_120c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 15, value: 6.646, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_120c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 30, value: 6.625, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_120c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 45, value: 6.616, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_120c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 60, value: 6.595, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_120c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 90, value: 6.599, unit: pH, read_error: 0.005}
+  - {pot: martins2003b_120c_ph68_drift, ledger_id: martins2003b_fig7_ph_drift, species: pH, t_min: 120, value: 6.590, unit: pH, read_error: 0.005}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 15, value: 4.796, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 30, value: 4.796, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 45, value: 4.796, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 60, value: 4.777, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 75, value: 4.777, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 90, value: 4.758, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 120, value: 4.737, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 150, value: 4.737, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 180, value: 4.737, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 210, value: 4.716, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph48, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 240, value: 4.716, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 15, value: 5.460, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 30, value: 5.460, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 45, value: 5.460, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 60, value: 5.439, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 90, value: 5.401, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 120, value: 5.322, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 150, value: 5.262, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 180, value: 5.222, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 210, value: 5.143, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph55, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 240, value: 5.084, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 15, value: 6.003, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 30, value: 5.984, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 45, value: 5.965, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 60, value: 5.924, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 75, value: 5.905, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 90, value: 5.845, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 120, value: 5.686, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 150, value: 5.629, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 180, value: 5.509, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 210, value: 5.410, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph60, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 240, value: 5.331, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 15, value: 6.656, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 30, value: 6.577, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 45, value: 6.520, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 60, value: 6.361, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 90, value: 6.162, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 120, value: 5.984, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 150, value: 5.845, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 180, value: 5.746, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 210, value: 5.607, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph68, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 240, value: 5.509, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 5, value: 7.341, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 15, value: 7.220, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 30, value: 7.063, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 45, value: 6.865, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 60, value: 6.726, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 90, value: 6.469, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 120, value: 6.292, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 150, value: 6.133, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 180, value: 5.994, unit: pH, read_error: 0.01}
+  - {pot: martins2005b_ph75, ledger_id: martins2005b_fig4_ph_drift_ladder, species: pH, t_min: 240, value: 5.756, unit: pH, read_error: 0.01}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 2, value: 6.715, unit: pH, read_error: 0.01}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 5, value: 6.705, unit: pH, read_error: 0.01}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 10, value: 6.674, unit: pH, read_error: 0.01}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 15, value: 6.612, unit: pH, read_error: 0.01}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 20, value: 6.582, unit: pH, read_error: 0.01}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 30, value: 6.532, unit: pH, read_error: 0.01}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 40, value: 6.454, unit: pH, read_error: 0.01}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 10, value: 2.95, unit: mmol_per_L_naoh, read_error: 0.028, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 15, value: 7.18, unit: mmol_per_L_naoh, read_error: 0.012, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 20, value: 9.15, unit: mmol_per_L_naoh, read_error: 0.009, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 30, value: 14.11, unit: mmol_per_L_naoh, read_error: 0.006, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 40, value: 17.21, unit: mmol_per_L_naoh, read_error: 0.005, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 10, value: 1.5, unit: mmol_L, read_error: 0.054, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 15, value: 2.5, unit: mmol_L, read_error: 0.033, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 20, value: 3.22, unit: mmol_L, read_error: 0.026, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 30, value: 6.32, unit: mmol_L, read_error: 0.014, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_glucose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 40, value: 8.48, unit: mmol_L, read_error: 0.010, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 2, value: 6.660, unit: pH, read_error: 0.01}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 5, value: 6.654, unit: pH, read_error: 0.01}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 10, value: 6.616, unit: pH, read_error: 0.01}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 15, value: 6.551, unit: pH, read_error: 0.01}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 20, value: 6.496, unit: pH, read_error: 0.01}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 30, value: 6.385, unit: pH, read_error: 0.01}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: pH, t_min: 40, value: 6.295, unit: pH, read_error: 0.01}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 5, value: 2.83, unit: mmol_per_L_naoh, read_error: 0.030, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 10, value: 5.31, unit: mmol_per_L_naoh, read_error: 0.016, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 15, value: 9.73, unit: mmol_per_L_naoh, read_error: 0.009, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 20, value: 13.2, unit: mmol_per_L_naoh, read_error: 0.007, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 30, value: 21.11, unit: mmol_per_L_naoh, read_error: 0.004, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: TA_to_pH8.3, t_min: 40, value: 25.13, unit: mmol_per_L_naoh, read_error: 0.003, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 5, value: 1.14, unit: mmol_L, read_error: 0.070, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 10, value: 2.42, unit: mmol_L, read_error: 0.034, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 15, value: 3.78, unit: mmol_L, read_error: 0.022, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 20, value: 4.96, unit: mmol_L, read_error: 0.017, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 30, value: 8.12, unit: mmol_L, read_error: 0.011, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: brands2001_fructose_casein, ledger_id: brands2001_fig3_ph_titratable_acid, species: FA+AA, t_min: 40, value: 10.77, unit: mmol_L, read_error: 0.008, read_error_basis: "+-0.2 mmol/L, 300 dpi raster blob centre"}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 5, value: 6.82, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 5, value: 6.83, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 10, value: 6.79, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 10, value: 6.79, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 15, value: 6.75, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 15, value: 6.76, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 20, value: 6.72, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 20, value: 6.72, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 25, value: 6.68, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 25, value: 6.68, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 30, value: 6.65, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 30, value: 6.67, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 5, value: 6.79, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 5, value: 6.79, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 10, value: 6.71, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 10, value: 6.71, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 15, value: 6.62, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 15, value: 6.62, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 20, value: 6.52, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 20, value: 6.54, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 25, value: 6.47, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 25, value: 6.47, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 30, value: 6.44, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m1_glucose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 30, value: 6.50, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 5, value: 6.83, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 5, value: 6.83, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 10, value: 6.80, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 10, value: 6.81, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 15, value: 6.77, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 15, value: 6.78, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 20, value: 6.73, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 20, value: 6.74, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 25, value: 6.69, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 25, value: 6.70, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 30, value: 6.65, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_120c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 30, value: 6.70, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 5, value: 6.81, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 5, value: 6.81, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 10, value: 6.72, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 10, value: 6.73, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 15, value: 6.62, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 15, value: 6.62, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 20, value: 6.50, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 20, value: 6.51, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 25, value: 6.40, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 25, value: 6.42, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 30, value: 6.36, unit: pH, read_error: 0.005, replicate: 1}
+  - {pot: nguyen2016_m2_lactose_130c, ledger_id: nguyen2016_figs1_ph_mass_balance, species: pH, t_min: 30, value: 6.39, unit: pH, read_error: 0.005, replicate: 2}
+  - {pot: cao2017_blank, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 30, value: 4.679, unit: pH, sd: 0.012, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_blank, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 60, value: 4.559, unit: pH, sd: 0.024, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_blank, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 120, value: 4.482, unit: pH, sd: 0.060, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_blank, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 180, value: 4.324, unit: pH, sd: 0.021, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_blank, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 240, value: 4.253, unit: pH, sd: 0.023, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_blank, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 300, value: 4.148, unit: pH, sd: 0.040, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_gly_x1, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 30, value: 4.609, unit: pH, sd: 0.020, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_gly_x1, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 60, value: 4.539, unit: pH, sd: 0.033, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_gly_x1, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 120, value: 4.428, unit: pH, sd: 0.012, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_gly_x1, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 180, value: 4.309, unit: pH, sd: 0.023, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_gly_x1, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 240, value: 4.184, unit: pH, sd: 0.000, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: cao2017_gly_x1, ledger_id: cao2017_fig4c_ph, species: pH, t_min: 300, value: 4.136, unit: pH, sd: 0.049, read_error: 0.005, sd_basis: "error bar half-length, caption: means +- SD, n = 3 (vector)"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2c_ph_diluted, species: pH_6x_dilution_25C, t_min: 30, value: 4.499, unit: pH, read_error: 0.01, note: "pH of a 6x water dilution read at 25 C; a fit must dilute the model state before comparing"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2c_ph_diluted, species: pH_6x_dilution_25C, t_min: 60, value: 4.468, unit: pH, read_error: 0.01, note: "pH of a 6x water dilution read at 25 C; a fit must dilute the model state before comparing"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2c_ph_diluted, species: pH_6x_dilution_25C, t_min: 120, value: 4.409, unit: pH, read_error: 0.01, note: "pH of a 6x water dilution read at 25 C; a fit must dilute the model state before comparing"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2c_ph_diluted, species: pH_6x_dilution_25C, t_min: 180, value: 4.289, unit: pH, read_error: 0.01, note: "pH of a 6x water dilution read at 25 C; a fit must dilute the model state before comparing"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2c_ph_diluted, species: pH_6x_dilution_25C, t_min: 240, value: 4.240, unit: pH, read_error: 0.01, note: "pH of a 6x water dilution read at 25 C; a fit must dilute the model state before comparing"}
+  - {pot: zhao2017b_blank, ledger_id: zhao2017b_fig2c_ph_diluted, species: pH_6x_dilution_25C, t_min: 300, value: 4.103, unit: pH, read_error: 0.01, note: "pH of a 6x water dilution read at 25 C; a fit must dilute the model state before comparing"}
+  - {pot: deng2021_marp_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 30, value: 7.292, unit: pH, sd: 0.023, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: deng2021_marp_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 60, value: 6.814, unit: pH, sd: 0.043, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: deng2021_marp_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 120, value: 6.250, unit: pH, sd: 0.065, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: deng2021_marp_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 180, value: 5.923, unit: pH, sd: 0.120, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: deng2021_marp_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 240, value: 5.619, unit: pH, sd: 0.087, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: deng2021_marp_met_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 30, value: 7.315, unit: pH, sd: 0.033, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: deng2021_marp_met_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 60, value: 6.901, unit: pH, sd: 0.055, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: deng2021_marp_met_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 120, value: 6.206, unit: pH, sd: 0.065, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: deng2021_marp_met_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 180, value: 6.032, unit: pH, sd: 0.065, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: deng2021_marp_met_phosphate, ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory, species: pH, t_min: 240, value: 5.662, unit: pH, sd: 0.120, read_error: 0.01, sd_basis: "error bar half-length; methods: triplicate, mean +- SD (vector)"}
+  - {pot: zhang2025_diarp_120c, ledger_id: zhang2025_fig3_diarp_120c_dicarbonyls_ph, species: pH, t_min: 30, value: 6.632, unit: pH, read_error: 0.02, read_error_basis: "300 dpi JPEG, marker centre by colour"}
+  - {pot: zhang2025_diarp_120c, ledger_id: zhang2025_fig3_diarp_120c_dicarbonyls_ph, species: pH, t_min: 60, value: 5.854, unit: pH, read_error: 0.02, read_error_basis: "300 dpi JPEG, marker centre by colour"}
+  - {pot: zhang2025_diarp_120c, ledger_id: zhang2025_fig3_diarp_120c_dicarbonyls_ph, species: pH, t_min: 90, value: 5.314, unit: pH, read_error: 0.02, read_error_basis: "300 dpi JPEG, marker centre by colour"}
+  - {pot: zhang2025_diarp_120c, ledger_id: zhang2025_fig3_diarp_120c_dicarbonyls_ph, species: pH, t_min: 120, value: 4.823, unit: pH, read_error: 0.02, read_error_basis: "300 dpi JPEG, marker centre by colour"}
+  - {pot: zhang2025_diarp_xyl_120c, ledger_id: zhang2025_fig3_diarp_120c_dicarbonyls_ph, species: pH, t_min: 30, value: 6.994, unit: pH, read_error: 0.02, read_error_basis: "300 dpi JPEG, marker centre by colour"}
+  - {pot: zhang2025_diarp_xyl_120c, ledger_id: zhang2025_fig3_diarp_120c_dicarbonyls_ph, species: pH, t_min: 60, value: 6.162, unit: pH, read_error: 0.02, read_error_basis: "300 dpi JPEG, marker centre by colour"}
+  - {pot: zhang2025_diarp_xyl_120c, ledger_id: zhang2025_fig3_diarp_120c_dicarbonyls_ph, species: pH, t_min: 90, value: 5.11, unit: pH, read_error: 0.04, read_error_basis: "300 dpi JPEG, marker centre by colour"}
+  - {pot: zhang2025_diarp_xyl_120c, ledger_id: zhang2025_fig3_diarp_120c_dicarbonyls_ph, species: pH, t_min: 120, value: 4.432, unit: pH, read_error: 0.02, read_error_basis: "300 dpi JPEG, marker centre by colour"}
+  - {pot: zhou2023_arp_ph6, ledger_id: zhou2023_fig2_final_ph, species: pH, t_min: 60, value: 3.982, unit: pH, sd: 0.023, read_error: 0.02, sd_basis: "error-bar cap (mean +- SD, n = 3), 600 dpi raster"}
+  - {pot: zhou2023_arp_ph7, ledger_id: zhou2023_fig2_final_ph, species: pH, t_min: 60, value: 4.114, unit: pH, sd: 0.066, read_error: 0.02, sd_basis: "error-bar cap (mean +- SD, n = 3), 600 dpi raster"}
+  - {pot: zhou2023_arp_ph8, ledger_id: zhou2023_fig2_final_ph, species: pH, t_min: 60, value: 4.953, unit: pH, sd: 0.188, read_error: 0.02, sd_basis: "error-bar cap (mean +- SD, n = 3), 600 dpi raster"}
+  - {pot: zhou2023_arp_cys_ph6, ledger_id: zhou2023_fig2_final_ph, species: pH, t_min: 60, value: 3.227, unit: pH, sd: 0.062, read_error: 0.02, sd_basis: "error-bar cap (mean +- SD, n = 3), 600 dpi raster"}
+  - {pot: zhou2023_arp_cys_ph7, ledger_id: zhou2023_fig2_final_ph, species: pH, t_min: 60, value: 3.428, unit: pH, sd: 0.106, read_error: 0.02, sd_basis: "error-bar cap (mean +- SD, n = 3), 600 dpi raster"}
+  - {pot: zhou2023_arp_cys_ph8, ledger_id: zhou2023_fig2_final_ph, species: pH, t_min: 60, value: 5.047, unit: pH, sd: 0.184, read_error: 0.02, sd_basis: "error-bar cap (mean +- SD, n = 3), 600 dpi raster"}

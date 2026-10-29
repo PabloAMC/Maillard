@@ -1,0 +1,386 @@
+# SOURCE VERIFICATION -- sub-model 1, pH and acid production (fit table data/lit/fit_rows/ph_acid_submodel.yml).
+# Format and the five checks: the header of data/lit/source_verification.yml. One file per sub-model so parallel
+# readers never edit the same file. First reader: agent-reader1-2026-10-29, against the PDFs / SI (not the
+# dossiers). second_reader "pending" = NOT verified (the loader and the gate refuse it until a second reader signs).
+# `notes` is an extra field: what was checked, what was corrected, and why rows were left out.
+
+entries:
+  - ledger_id: davidek2002_tab5_acids_naoh_uptake
+    source_file: davidek2002.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Solutions of DFG (15 mmol) in water (150 mL) or in a phosphate buffer (150 mL, 100 mmol/L) were heated at 90 °C for 7 h. Experiments were performed at constant pH (5, 6, 7, or 8), measured at 90 °C, using a pH-stat device (Metrohm, Herisau, Switzerland) filled with a NaOH solution (3 mol/L)"
+    notes: >-
+      Conditions as the ledger states (DFG 0.1 M, 90 C, 7 h, water or 0.1 M phosphate, counter-ion not stated; pH held
+      by a pH-stat whose electrode reads at 90 C). Units: Table 5 prints mmol per whole 150 mL reactor ("sum of acetic
+      and formic acid (mmol)", "NaOH added (mmol)"); the fit table divides by 0.150 L (NaOH volume <= 4.4 mL and the
+      1 mL aliquots not corrected, as in the paper). Quantification: "Acetic acid ... and formic acid ... were quantified
+      on the basis of calibration curves by comparing the peak areas with those of standard solutions containing known
+      amounts of pure compounds. All samples were analyzed in duplicate." (HPAEC-conductivity) -> calibrated.
+      Error: none printed for Table 5; Fig. 5 caption (same acid measurements): "The coefficient of variation was lower
+      than 10% for concentrations above 3 mmol/L." Acid-sum rows >= 3 mmol/L carry sd = 10 % (the stated bound, applied
+      to the sum; second reader to confirm); rows below it are left out. NaOH uptake has NO stated error (pH-stat
+      burette), so its 49 values are NOT transcribed (owner decision needed). Duplicates: none in the register or
+      ledgers; WITHIN the paper, Table 5's acid sums are the sums of Fig. 5 A + B (ledger davidek2002_fig3_5_time_courses)
+      and of Table 4's yields -- count once if Fig. 5 is ever fitted. Values: all 112 cells of Table 5 compared with
+      the dossier's transcription (identical), e.g. water pH 7 acids 2.7 / 5.0 / 8.9 at 1 / 2 / 7 h, NaOH 13.1 at 7 h
+      pH 8; phosphate pH 7 NaOH "Data not available" (ledger flag right).
+  - ledger_id: martins2003b_fig6_organic_acids
+    source_file: martins2003b.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: corrected
+    quote: "Compound 1 (0.237 g, 10 mmol) was dissolved in phosphate buffer (100 mL, 0.1 M K2HPO4/KH2PO4, pH 6.8 and 5.5) and heated at 100 °C for a maximum of 4 h and at 120 °C for a maximum of 3 h, in an oil bath, in screw-capped glass tubes"
+    notes: >-
+      Conditions: DFG 0.237 g (1.0 mmol) in 100 mL = 10 mmol/L ("10 mmol" is a misprint for the concentration),
+      0.1 M potassium phosphate, 100 / 120 C, sealed screw-cap tubes, ice-cooled at sampling, "at least duplicate".
+      Correction: the ledger's "pH set at room temperature" is NOT stated in this paper (it is in Martins 2005b);
+      the pots say "not stated". Plotted span is 0-180 min at 100 C and 0-120 min at 120 C (ledger: 0-180 for both).
+      Units: y axis "Organic Acids mmol/l". Quantification: "Diluted samples (1:10) were analysed by HPLC, using an
+      ion-exchange column (ION-300 ...) ... organic acids by their absorbance at 210 nm ... All compounds were
+      quantified by external standards." -> calibrated. Error bars drawn, definition unstated: not used as sd.
+      Duplicates: CF-018 (open) -- Martins 2003 Part II Figs. 4-7 replot these acid data and its Table 3 constants
+      (martins2003_tab3_dfg_rate_constants, in_model_fit; the trunk's 3-DG -> FA and 1-DG -> AA steps) are fitted to
+      them. This entry is the ORIGINAL; a fit using these rows together with the Part II constants uses the data
+      twice. Values: the dossier's digitisation FAILS the check: 120 C pH 6.8 AA at 5 / 10 / 15 min dossier 1.3 /
+      2.9 / 3.9 vs 1.86 / 3.53 / 4.39 read here; 100 C pH 6.8 AA 45 / 60 min 3.2 / 3.7 vs 3.48 / 4.06; FA 90 min 1.75
+      vs 2.00; the 100 C pH 5.5 series is put on the wrong time grid (the figure has points at 75 min and none at
+      150). Rows re-digitised from the 600 dpi embedded raster (pdfimages; marker bounding-box centres, axes
+      calibrated on all tick marks): read error +-0.05 mmol/L, +-0.10 where open markers overlap; overlapping
+      near-zero points (pH 5.5, <= 15 min at 100 C) and t = 0 left out.
+  - ledger_id: martins2003b_fig7_ph_drift
+    source_file: martins2003b.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: corrected
+    quote: "In the present study the reaction pH was not kept constant. As the reaction proceeded a pH drop was observed at both studied initial pHs. In Fig. 7 the results are shown for initial pH 6.8. After 120 min at 120 °C the pH drop was more significant than at 100 °C after 180 min, 0.21 and 0.19, respectively."
+    notes: >-
+      Conditions as Fig. 6 (same heated systems, pH 6.8 only); where and at what temperature pH was read is not stated
+      (ledger flag right). Units pH. Quantification: glass electrode (meter not named) -> treated as calibrated pH.
+      Duplicates: none found (Part II does not replot pH). Values: dossier 120 C 15 min 6.70 vs 6.646 read here
+      (0.05 pH, five times its stated read error), 30 min 6.65 vs 6.625; the dossier lists 5 and 10 min points for
+      100 C that the figure does not have. Re-digitised from the 600 dpi raster, read error +-0.005 pH; checks
+      against the printed drops: 120 C 6.80 -> 6.590 (printed 0.21), 100 C 6.81 -> 6.625 (printed 0.19). The pH 5.5
+      drops (text: 0.8 at 120 C / 120 min and 0.9 at 100 C / 180 min, "respectively") have no stated error and are
+      NOT transcribed (owner decision: they are the only low-buffer-capacity points of this paper).
+  - ledger_id: martins2005b_fig4_ph_drift_ladder
+    source_file: martins2005b.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: corrected
+    quote: "Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C."
+    notes: >-
+      Conditions as the ledger (0.2 M Glc + 0.2 M Gly, 0.1 M phosphate, counter-ion not stated, 10 mL screw-capped tubes,
+      oil bath 100 C, samples ice-cooled; "It is therefore stressed that the initial pH values reported are as measured
+      at room temperature"). Where the drifting pH of Fig. 4 was read is not stated. Plotted span 0-240 min. Units pH.
+      Quantification: glass electrode; "at least in duplicate"; error bars drawn, undefined. Duplicates: no other paper
+      prints these pH curves (Martins 2005 Food Chem 90 has the 100 C pH 6.8 run's species, no pH series); within this
+      paper Tables 1 (drift column), 2 (pH 6.8) and 4 (1:1) print one experiment's constants three times (checked
+      Table 1 vs Table 2 pH 6.8: identical). Values: Fig. 4 is VECTOR graphics; markers read exactly from the PDF
+      paths (pdftocairo -svg; axes calibrated on the tick paths; coordinate quantisation 0.6 pt = 0.019 pH, so read
+      error +-0.01 pH). The dossier's "indicative" read (+-0.15) is off by more than its stated error at late times:
+      pH 6.8 at 120 / 180 / 240 min 6.2 / 6.0 / 5.9 vs 5.984 / 5.746 / 5.509; pH 7.5 at 240 min 6.1 vs 5.756; pH 6.0 at
+      240 min 5.55 vs 5.331. t = 0 plotted values (4.80 / 5.53 / 6.00 / 6.76 / 7.52) are kept on the pots, not as rows.
+  - ledger_id: martins2005b_tab1_phstat_vs_drift_constants
+    source_file: martins2005b.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "When the pH was kept constant, this was done at the pH the solution had at 100 °C; the corresponding initial pH was 6.8 at room temperature. ... an auto burette (ABU901 Radiometer Copenhagen) added a solution of NaOH (1 mol/l) to the reaction mix."
+    notes: >-
+      Conditions as the ledger; the pH-stat set point at 100 C is not printed (ledger flag right); NaOH consumption not
+      reported. Units: k1 l mol-1 min-1, k2-k10 min-1, +- 95 % HPD (Table 1 title). The text layer drops minus signs
+      in exponents (dossier noted; sign read from the layout: e.g. k4 6.5e-3 drift vs 1.3e-2 constant pH). Duplicates:
+      the drift column is printed again as Table 2's pH 6.8 column and Table 4's 1:1 column (k2..k10 identical,
+      checked); count once. Values: k4 / k5 / k8 drift 6.5e-3 / 4.1e-3 / 1.3 and constant-pH 1.3e-2 / 1.3e-1 / 8.7e-1
+      match the dossier. NO ROWS: these are fitted rate constants, not measurements, and fit_rows has no unit for
+      them; they belong to a check of the trunk's constants (done-test item 3), not to this table.
+  - ledger_id: brands2001_fig3_ph_titratable_acid
+    source_file: brands2001.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Sodium caseinate (3% w/w) and sugar (150 mM monosaccharide) were dissolved in a phosphate buffer (0.1 M; pH 6.8) to give a molar ratio of sugar to lysine residues of 10:1. The samples were heated for various times (0-40 min) at 120 °C ... The reported heating times include the heating-up period of ∼2-3 min."
+    notes: >-
+      Conditions as the ledger (abstract says "pH 6.7"; plotted t = 0 pH 6.72 glucose / 6.70 fructose, kept on the
+      pots). Where pH was read is not stated; samples ice-cooled. Units: Fig. 3 left axis pH, right axis "mmol/l".
+      Quantification: titratable acid "Samples of 15 mL of reaction mixture were titrated with 0.1 N NaOH to pH 8.3.
+      From the difference in added NaOH between the heated and unheated sample the total amount of acid formed was
+      calculated." (absolute; unit mmol_per_L_naoh); HPLC acids (ION-300, UV 210 nm) reported in mmol/l but the
+      paper does not state the calibration method (ledger 'calibrated' is an inference; second reader to confirm).
+      The HPLC series is formic + acetic ("the total amount of acetic and formic acid found by HPLC"), species FA+AA.
+      Duplicates: none for the pH and titration series; the HPLC sum is the sum of Figs. 1-2's formic and acetic acid
+      (brands2001_fig1/fig2), which Brands 2002c Fig. 2 and the Brands thesis (data/lit/timeseries/
+      brands_sugar_casein_120C_pH68.yml) replot -- count once if those are ever fitted. Values: re-digitised from
+      the 300 dpi raster (blob centres; both y axes calibrated on their ticks) and compared with the dossier: all
+      within 0.2 mmol/L and 0.01 pH (e.g. glucose titration 14.11 vs 14.2 at 30 min; fructose pH 6.295 vs 6.30 at 40
+      min). The dossier omits the 2-min pH points (6.715 / 6.660), added here. Read error +-0.01 pH, +-0.2 mmol/L;
+      the 5-min markers of the glucose system overlap at the axis and are left out.
+  - ledger_id: nguyen2016_figs1_ph_mass_balance
+    source_file: nguyen2016_supplementary.docx
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The pH of M1 and M2, at every 5 min of heating, was determined at room temperature by a pH meter (Conductivity Proline Plus, QiS, The Netherlands) after the one-hour cooling period (and before freezing)."
+    notes: >-
+      Conditions from the main paper (nguyen2016.pdf sec. 2.2-2.3): M1 30 g/L sodium caseinate + 27 g/L glucose
+      (149.9 mM), M2 30 g/L caseinate + 51.3 g/L lactose monohydrate (142.4 mM), 0.1 M sodium phosphate pH 6.8, 6 mL
+      in sealed tubes with air headspace, heating blocks at 120 / 130 C for 30 min, 5 min heat-up inside the time
+      axis, aliquots ice-cooled 1 h, pH read at room temperature (cooled samples: ph_measured_at "cooled 25 C").
+      Sugar : lysine "about 10:1" (CF-052 notes the SI's t = 0 balance implies ~6:1; LYSP is approximate). Units
+      pH. Quantification: pH meter; "The full experiment (two model solutions at two temperatures) was
+      replicated" -- the two markers per time are the two replicates (no SD printed); each is its own row.
+      Duplicates: none (CF-052 concerns the rate constants, not the pH). Values: independently recovered from the
+      EMF inside the SI's WMF figures (image1 = M1, image2 = M2: M2 ends lower at 130 C, as the text says;
+      circles = 130 C, larger drop), axes calibrated on the drawn ticks; all 56 values (t = 0..30) equal the
+      dossier's to 0.01 (e.g. M1 130 C 30 min 6.50 / 6.44; M2 130 C 25 min 6.42 / 6.40). Coincident pairs confirmed by
+      doubled marker records. Read error 0.005 pH (the meter's 0.01 display). t = 0 pairs kept on the pots.
+  - ledger_id: cao2017_fig4c_ph
+    source_file: cao2017.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The amounts of cysteine and xylose used in the reaction models were both 2 mmol in 5 mL of phosphate buffer (0.2 M, pH 5.5). The glycine was added in the reaction systems at 0, 1, 8, 12, 16, or 24 times of the cysteine concentration (mol/L). The vials were sealed and heated at 90 °C while stirring for 0.5, 1, 2, 3, 4, or 5 h."
+    notes: >-
+      Conditions: Cys = Xyl = 0.40 mol/L, 0.2 M sodium phosphate pH 5.5, sealed stirred vials (one per time), 90 C,
+      cooled under tap water; "The pH was determined by a PHSJ-5 pH meter" (temperature and dilution not stated:
+      ph_measured_at "not stated"). The ledger's condition_quote is a paraphrase, not the paper's text. Correction:
+      the glycine arms x8 / x12 / x16 / x24 are 3.2 / 4.8 / 6.4 / 9.6 mol/L glycine as printed (9.6 M = 720 g/L,
+      far above glycine's ~250 g/L solubility at 25 C): their composition is unknowable, so ONLY the blank and the
+      x1 arm (0.4 M glycine) are transcribed (CF-053). Units pH. Quantification: pH meter; caption "Means ±
+      standard deviations were used to plot the figures (n=3)" -> the error bars are SDs. Duplicates: Zhao 2017b
+      (same laboratory, same Cys + Xyl 0.40 M / 0.2 M phosphate pH 5.5 / 90 C blank) is a SIBLING run, not a
+      reprint: its blank (6x-diluted pH) reads 4.50 / 4.10 at 0.5 / 5 h vs Cao's 4.68 / 4.15. Values: Fig. 4c is
+      vector; markers and error bars read from the PDF paths (axes on the tick paths; bars matched to markers by
+      position): blank 4.679 / 4.559 / 4.482 / 4.324 / 4.253 / 4.148 at 0.5-5 h vs the dossier's 4.67 / 4.56 /
+      4.49 / 4.33 / 4.26 / 4.15 (within its +-0.03); x24 4.429 ... 4.031 vs 4.43 ... 4.03. SDs (0.000-0.060 pH) as
+      drawn; read error 0.005 pH added. The x8 (triangle) series has no error bars drawn.
+  - ledger_id: zhao2017b_fig2c_ph_diluted
+    source_file: zhao2017b.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "取0.5 mL反应溶液稀释至3 mL，在室温（25 ℃）条件下，测定溶液的pH值。 (0.5 mL of reaction solution was diluted to 3 mL and its pH measured at room temperature, 25 C.)"
+    notes: >-
+      Conditions as the ledger: 5 mL 0.2 mol/L phosphate (NaH2PO4 titrated with NaOH to pH 5.5) + 2 mmol Cys + 2
+      mmol Xyl (0.40 M each) in a sealed 15 mL tube, 90 C, 0.5-5 h, water-cooled; triplicate, means plotted, no error
+      bars or SD for pH. The observable is the pH of a 6x water dilution at 25 C, NOT the pot pH (ledger flag
+      right): the rows carry species "pH_6x_dilution_25C" so no fit can take them as pot pH; a fit must dilute the
+      model state (charge balance at 1/6 concentration, 25 C) first. Only the blank arm is transcribed (the
+      aldehyde arms add hexanal / heptenal / decadienal, outside this sub-model). Duplicates: sibling of Cao 2017's
+      blank (see that entry), different numbers. Values: Fig. 2c is vector; blank (down-triangle) read from the
+      paths, axis on its tick path: 4.499 / 4.468 / 4.409 / 4.289 / 4.240 / 4.103 vs the dossier's 4.51 / 4.47 /
+      4.43 / 4.28 / 4.24 / 4.10. No SD printed: read error 0.01 pH only.
+  - ledger_id: deng2021_fig6_phosphate_arm_ph_trajectory
+    source_file: deng2021.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Meanwhile, solutions of MG-ARP (0.2 mol/L) with or without Met (0.1 mol/L) in a phosphate buffer (0.1 mol/L, pH 7.5) were prepared and heated at 100 °C for a defined reaction time as unbuffered models."
+    notes: >-
+      Conditions as the ledger: MG-ARP (methionine-glucose Amadori compound, engine MARP; purified, freeze-dried)
+      0.2 M +- Met 0.1 M in 0.1 M sodium phosphate pH 7.5, sealed stirred vials, 100 C, 0-240 min, terminated in ice
+      water; the paper's "as unbuffered models" contradicts its own "in a phosphate buffer" and the Fig. 6 caption
+      ("in phosphate buffer at 100 °C and initial pH of 7.5") -- a typo (ledger flag right). How and at what
+      temperature pH was read is not stated. The ledger's condition_quote is empty; quote above. Units pH (right
+      axis of Fig. 6a). Quantification: "All experiments were carried out in triplicate, and the results were
+      presented as mean values ± standard deviation" -> bars are SDs. Duplicates: none; Deng 2022 (Food Chem
+      382:132500, same group) has its own pH series (ledger deng2022_fig1_ph_a420, not in this table) for a
+      different design. Values: Fig. 6a is vector; markers and I-beam error bars read from the PDF paths, right
+      axis on its tick path: MA 7.29 / 6.81 / 6.25 / 5.92 / 5.62 and MAM 7.32 / 6.90 / 6.21 / 6.03 / 5.66 at 30-240
+      min vs the dossier's merged "both" 7.3 / 6.9 / 6.2 / 5.95 / 5.6 (within its coarse read). SD from the bar
+      half-lengths (0.023-0.120 pH); read error 0.01 pH.
+  - ledger_id: zhang2025_fig3_diarp_120c_dicarbonyls_ph
+    source_file: Zhang2025.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Aqueous solutions of Nα,Nε-di-Xul-Lys ARP (20 mmol/L) and Nα,Nε-di-Xul-Lys ARP (20 mmol/L)/Xyl (20 mmol/L) were prepared, and the pH of these mixtures was set to 7.5 ± 0.01 by adding HCl (1.0 mol/L and 6.0 mol/L)."
+    notes: >-
+      Conditions as the ledger (20 mM di-ARP of lysine +- 20 mM xylose, water, pH set to 7.5 with HCl -- the ledger
+      does not say which reagent; it is HCl, not NaOH -- 120 C, 30-120 min, ice-bath cooled; sec. 2.4 describes
+      sealed vials in a stirred oil bath). Where pH was read is not stated. Units pH (Fig. 3F, "pH values").
+      Quantification: pH meter (not named); error bars drawn, the figure does not define them (the tables say
+      mean +- SD, n = 3), so rows carry a read error only. Duplicates: none found. Values: Fig. 3 is a 300 dpi JPEG;
+      markers located by colour (black squares di-ARP, red circles + xylose), axes on the tick marks: 6.63 / 5.85 /
+      5.31 / 4.82 and 6.99 / 6.16 / 4.43 vs the dossier's 6.62 / 5.86 / 5.31 / 4.82 and 7.00 / 6.16 / 4.43; the
+      +xylose 90-min marker sits under a black error bar and was read by eye (5.11, read error 0.04). NOT
+      SIMULABLE YET: the di-glycated lysine ARP is not an engine species (pots use the key diXulLysARP).
+  - ledger_id: zhou2023_fig2_final_ph
+    source_file: Zhou2023b.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Figure 2. Final pH value of thermally treated ARP with or without Cys at 120 °C for 60 min under different initial pH values (6, 7, and 8) (the concentrations of ARP and Cys were both 20 mmol/L)."
+    notes: >-
+      The paper is data/articles/Zhou2023b.pdf (JAFC 71:2472); data/articles/Zhou2023.pdf is an unrelated kafirin /
+      baijiu paper. Conditions as the ledger: Ala-Xyl ARP (the engine's ARP) 20 mM +- Cys 20 mM in water, pH set to
+      6 / 7 / 8 with 3 M NaOH, 120 C, 1 h, ice-bath cooled; "A pH meter (Mettler-Toledo, Shanghai, China) was used
+      to determine the pH value" (temperature not stated); vessel not stated. Units pH. Quantification: "Each
+      experiment was repeated three times and the results are shown as mean values ± standard deviation" -> bars
+      are SDs. Duplicates: none for the final pH (Zhou 2022, the sibling run of the volatiles, prints no final pH).
+      Values: Fig. 2 is a 600 dpi raster bar chart; bar tops and error caps located on the pixel grid, axis on
+      its ticks: ARP 3.98 / 4.11 / 4.95, ARP + Cys 3.23 / 3.43 / 5.05 vs the ledger's 3.99 / 4.13 / 4.99 and 3.22 /
+      3.42 / 5.07 (within its +-0.06). SD from the upper cap (lower caps of the pH 8 bars are hidden in the
+      hatching); read error 0.02 pH.
+  - ledger_id: kang2026_text_final_ph
+    source_file: Kang2026.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: fail
+      units: pass
+      quantification: pass
+      duplicates: corrected
+      values: pass
+    quote: "Post-reaction, the system pH dropped (to 5.1, 4.9, and 4.7, respectively), due to organic acid formation from accelerated TTCA degradation at a higher initial pH."
+    notes: >-
+      Values as the ledger (5.5 -> 5.1, 7 -> 4.9, 8 -> 4.7). Conditions FAIL: methods give TTCA 10 mM, pH set
+      with 6 M NaOH, "treated at different temperatures (100 °C, 120 °C, and 140 °C) for 120 minutes"; which
+      temperature the pH ladder ran at is unresolved (CF-002: the SI's pH 7 column reproduces the 100 C column, not
+      120 C). Duplicates corrected: the pH 7 -> 4.9 value is the same number Zhai 2023 Food Chem p. 5 prints
+      (zhai2023foodchem_p5_ph_drift; same laboratory, the CF-005 family of reprints) -- count once. No error is
+      printed (one decimal, no SD). NOT transcribed (temperature unknown; no error).
+  - ledger_id: zhai2023foodchem_p5_ph_drift
+    source_file: Zhai2023.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: fail
+      units: pass
+      quantification: fail
+      duplicates: corrected
+      values: pass
+    quote: "3-DX ... was the dominant compound in the reaction system compared with 1-DX demonstrated by the rapid decrease of pH from 7.0 to 4.9, which was beneficial to the 1,2-enolization"
+    notes: >-
+      A sentence of discussion: no temperature, time, system (TTCA alone or + xylose) or method is attached to the
+      number, and no pH measurement appears in the methods (pH is only "adjusted to pH 7 ± 0.01" before heating).
+      Same value as Kang 2026's pH 7 endpoint (kang2026_text_final_ph; CF-005 family). NOT transcribed.
+  - ledger_id: chen2000_table4_final_ph
+    source_file: chen2000.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "A total of 0.01 mol of L-cysteine and D-ribose, with or without an equal mol of urea, was dissolved in 100 mL of distilled water. The solutions were adjusted to pH 5.0 or pH 8.5 prior to thermal reactions in 150-mL Hoke stainless steel cylinders ... heated at 180 °C in an oven for 2 h."
+    notes: >-
+      Values as the ledger (Table 4: 5 -> 3.86, 8.5 -> 6.05; + urea 5 -> 7.43, 8.5 -> 8.35). Conditions as the
+      ledger, with its uncertainty: "A total of 0.01 mol of L-cysteine and D-ribose" is either 0.05 or 0.10 M each;
+      the pH reagent and the pH-reading temperature are not stated; 100 mL in a 150 mL steel cylinder. Single
+      values, no replicate or error: NOT transcribed (no error; concentration ambiguous). Duplicates: the same
+      nominal control pot as Chen & Ho 2002 Table 1 gives a different final pH (8.5 -> 6.05 here, 4.96 there):
+      a conflict, not a reprint (CF-054).
+  - ledger_id: chen2002_table1_final_ph
+    source_file: chen2002.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "A mixture of 0.01 mol of L-cysteine and D-ribose, with or without equal mol of carnosine, was dissolved in 100 mL of distilled water. The solutions were adjusted to pH 5.0 or 8.5 prior to thermal reaction in 150-mL Hoke stainless steel cylinders"
+    notes: >-
+      Values as the ledger (Table 1: 5 -> 4.01, 8.5 -> 4.96; + carnosine 5 -> 4.18, 8.5 -> 6.92); 180 C, 2 h.
+      Same concentration ambiguity as Chen 2000; no error printed: NOT transcribed. Conflicts with Chen 2000's
+      control pot at initial pH 8.5 by 1.1 pH units (CF-054).
+  - ledger_id: xu2008_table1_ph_norfuraneol_ratio_series
+    source_file: xu2008.pdf
+    read_by: "agent-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Pyrophosphate buffer (0.2 M, pH 5.6) was prepared by mixing appropriate volumes of 0.2 M sodium pyrophosphate dibasic and 0.2 M sodium pyrophosphate tetrabasic."
+    notes: >-
+      Values as the ledger (Table 1 final pH 5.5-5.7 for every arm, initial 5.6, conventional and SC-CO2); 140 C,
+      1 h, 300 mL stirred steel vessel; 0.2 M pyrophosphate holds the pH. Table footnote: quantities are "the mean
+      of duplicate experiments and standard error" -- but the pH row carries no error and is printed to 0.1. NOT
+      transcribed (no error; and a 0.1-unit drift in a 0.2 M buffer constrains little). Duplicates: CF-008 concerns
+      Xu 2007 / 2008 volatiles, not this pH row.

@@ -1,0 +1,22 @@
+# Which research GROUP produced each ledger entry: the leave-one-laboratory-out unit of the fitting module.
+#
+# HAND-CURATED (2026-10-29). The ledgers' `lab` field is free text and spells one group several ways ("Jiangnan
+# (Zhang X / Cui H / Ho)" and "Jiangnan (Zhang X. / Ho)"), so leave-one-out would split one laboratory in two. A
+# laboratory here is a group with shared methods, instruments and calibrations, not an institution: two groups in one
+# university stay apart. src/kinetic_core/fit_rows.py maps every ledger `lab` string of a fit table through `groups`
+# and refuses a table whose laboratory is not mapped, so a new source must be placed here, with its evidence, before
+# it can be fitted. Add a string only after checking the paper's authors (corresponding author first).
+
+groups:
+  wageningen_van_boekel:
+    strings: ["Wageningen (van Boekel)"]
+    evidence: "Martins, Brands, Nguyen papers; van Boekel corresponding or senior author"
+  nestle_blank:
+    strings: ["Nestle Research (Blank)"]
+    evidence: "Davidek 2002 (Blank, Nestle Research Center)"
+  btbu_xie:
+    strings: ["BTBU (Xie J)", "Beijing Technology and Business University (Xie)"]
+    evidence: "Cao 2017, Zhao 2017b, Hou 2017, Zhao 2019: Jianchun Xie corresponding (xjchun@th.btbu.edu.cn); 'BTBU (Cao Y)' is a different group"
+  jiangnan_zhang_x:
+    strings: ["Jiangnan (Zhang X / Cui H / Ho)", "Jiangnan (Zhang X. / Ho)"]
+    evidence: "Zhang Xiaoming's group at Jiangnan (Cui, Hayat, Zhai, Zhou, Deng, Kang, Feng); Ho (Rutgers) co-authors many"

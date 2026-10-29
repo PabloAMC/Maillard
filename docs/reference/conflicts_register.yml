@@ -1280,3 +1280,49 @@ entries:
     affects:
       - nguyen2016_table1_m1_glucose_casein_constants
       - {file: src/kinetic_core/parameters_glycation.py, symbol: k_flp_decay}
+
+  - id: CF-053
+    kind: self_contradiction
+    scope: corpus
+    sources: [cao2017]
+    quantity: "glycine concentration of Cao 2017's glycine arms (Figs. 3-5, Table 1)"
+    observation: >-
+      Methods: "The glycine was added in the reaction systems at 0, 1, 8, 12, 16, or 24 times of the cysteine
+      concentration (mol/L)" with cysteine at 0.40 mol/L, i.e. 0.4 / 3.2 / 4.8 / 6.4 / 9.6 mol/L glycine. 9.6 mol/L
+      is 720 g/L; glycine dissolves to ~250 g/L at 25 C, so the x8-x24 arms cannot have been the stated solutions
+      (the cao2017 dossier's Flag 1 says the same). Read against the PDF 2026-10-29 (sub-model 1 first reader).
+    explanations:
+      - "The multiplier may refer to something else (mmol added, or a ratio to another species); not decidable from the text."
+    tests: []
+    status: open
+    remedy: >-
+      Use only the blank and x1 (0.4 mol/L glycine) arms as fit or check rows; the x8-x24 arms stay out of every
+      fit until the composition is resolved (authors or a sibling paper).
+    affects:
+      - cao2017_fig4c_ph
+      - cao2017_fig4ab_cys_xyl
+      - cao2017_fig5_ttca_cama_glyarp
+      - cao2017_fig3_a294_a420
+      - cao2017_table1_volatiles_3h
+
+  - id: CF-054
+    kind: conflict
+    scope: corpus
+    sources: [chen2000, chen2002]
+    quantity: "final pH of ribose + cysteine (0.01 mol, 100 mL water), 180 C, 2 h, initial pH 8.5 (Hoke cylinder)"
+    observation: >-
+      Same laboratory (Ho, Rutgers), same printed recipe and conditions, control pot without additive: Chen et al.
+      2000 Table 4 prints 8.5 -> 6.05, Chen & Ho 2002 Table 1 prints 8.5 -> 4.96 (1.1 pH units apart); at initial
+      pH 5 the two agree within 0.15 (3.86 vs 4.01). Neither prints replicates or errors. Read against both PDFs
+      2026-10-29 (sub-model 1 first reader).
+    explanations:
+      - "Run-to-run spread of an unbuffered drift at 180 C (the alkaline start makes the end pH sensitive to how much acid forms before the base is consumed)."
+      - "Different pH adjustment or reading (reagent and reading temperature are not stated in either paper)."
+    tests: []
+    status: open
+    remedy: >-
+      Neither enters a fit (no error, concentration ambiguous). If an unbuffered 180 C endpoint is ever used, use
+      the two as one condition with the spread as its error, not as two independent rows.
+    affects:
+      - chen2000_table4_final_ph
+      - chen2002_table1_final_ph

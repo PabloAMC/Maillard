@@ -57,6 +57,15 @@ class FitRow:
         return self.unit != "pH"
 
 
+LABORATORIES: Path = data_paths.KEYS_DIR / "laboratories.yml"
+
+
+def _laboratory_of() -> Dict[str, str]:
+    """ledger lab string -> laboratory group key (data/keys/laboratories.yml)."""
+    groups = (data_access.load_yaml(LABORATORIES, missing_ok=True) or {}).get("groups") or {}
+    return {s: key for key, g in groups.items() for s in g.get("strings") or []}
+
+
 def _ledger() -> Dict[str, dict]:
     out = {}
     for path in sorted(data_paths.MEASUREMENT_LEDGER_DIR.glob("*.yml")):
@@ -99,7 +108,7 @@ def load(name: str, require_verified: bool = True) -> Tuple[Dict[str, dict], Tup
     if require_verified and table.get("status", "draft") != "ready":
         raise PermissionError(f"{name}: the table is {table.get('status', 'draft')!r}, not 'ready': its sources are still being "
                               f"read; set status: ready once every source is verified by two readers")
-    ledger, verified = _ledger(), _verified()
+    ledger, verified, labs = _ledger(), _verified(), _laboratory_of()
     pots: Dict[str, dict] = table.get("pots") or {}
     for pot_id, pot in pots.items():
         missing = [f for f in POT_FIELDS if f not in pot]
@@ -131,14 +140,33 @@ def load(name: str, require_verified: bool = True) -> Tuple[Dict[str, dict], Tup
                 raise ValueError(f"{name}: the ledger's class is {ledger_class!r}, so the row must name a method class "
                                  f"from {sorted(fitting.SCALE_TAU)} and say why (method_basis)")
             method = raw["method"]
-        rows.append(FitRow(table=name, pot=raw["pot"], ledger_id=pot["ledger_id"], laboratory=str(entry.get("lab")),
+        lab_text = str(entry.get("lab"))
+        if lab_text not in labs:
+            raise KeyError(f"{name}: laboratory {lab_text!r} of {pot['ledger_id']} is not in data/keys/laboratories.yml; "
+                           f"place it in a group (check the paper's authors) before fitting it")
+        rows.append(FitRow(table=name, pot=raw["pot"], ledger_id=pot["ledger_id"], laboratory=labs[lab_text],
                            method=method, species=str(raw["species"]), t_min=float(raw["t_min"]),
                            value=float(raw["value"]), unit=raw["unit"], sigma=_sigma(raw),
                            series=f"{pot['ledger_id']}|{raw['pot']}|{raw['species']}", raw=raw))
-    copy_of = {e["id"]: flag.split(":", 1)[1].strip() for e in ledger.values() for flag in e.get("flags") or []
-               if isinstance(flag, str) and flag.startswith("same_data_as:")}
-    kept, _dropped = fitting.count_once(rows, lambda r: r.ledger_id, copy_of)
-    return pots, kept
+    return pots, tuple(_drop_copies(rows, ledger))
+
+
+def _drop_copies(rows: List[FitRow], ledger: Dict[str, dict]) -> List[FitRow]:
+    """A row whose ledger entry is flagged a copy (``duplicate_of: <ledger id or paper stem>``, or the older
+    ``same_data_as:``) is dropped when its original is among the rows: the original ledger id itself, or any entry
+    of the original paper. The ledgers write ``duplicate_of``; reading only ``same_data_as`` (the first version)
+    dropped nothing (first reader, sub-model 1, 2026-10-29)."""
+    present_ids = {r.ledger_id for r in rows}
+    present_papers = {str(ledger[i].get("dossier", "")).replace("_extraction.md", "") for i in present_ids}
+    def original_present(entry_id: str) -> bool:
+        for flag in ledger[entry_id].get("flags") or []:
+            if isinstance(flag, str) and flag.split(":", 1)[0].strip() in ("duplicate_of", "same_data_as") and ":" in flag:
+                target = flag.split(":", 1)[1].strip()
+                if target != entry_id and (target in present_ids or target in present_papers - {
+                        str(ledger[entry_id].get("dossier", "")).replace("_extraction.md", "")}):
+                    return True
+        return False
+    return [r for r in rows if not original_present(r.ledger_id)]
 
 
 def measurement_model() -> fitting.MeasurementModel:
