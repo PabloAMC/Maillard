@@ -2,18 +2,18 @@
   "artifact": "null_model_baselines",
   "provenance": {
     "artifact": "null_model_baselines",
-    "generated_on": "2026-10-28",
+    "generated_on": "2026-10-29",
     "git": {
-      "commit": "4a72c92d730b8bb95bb4c4f716581c206ba72bcc",
-      "short": "4a72c92d",
-      "branch": "b58-ttca-formation",
+      "commit": "157e38dc56819be52104abf7cec5a5217acfdf33",
+      "short": "157e38dc",
+      "branch": "sulfur-route-and-tooling",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_null_model_baselines.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "cceb4033cc55999301bdefb59eb7e4fefc23205eb8a7e24d42d1e31299d5fc7b"
+        "sha256": "246d7e6f4ff966ffe6e7370cbcca928c2f17cd936ea4e94d87acf53607f230bd"
       }
     ]
   },
@@ -30,8 +30,8 @@
       "engine": {
         "rows": 50,
         "within_3x": 15,
-        "median_fold": 7.857627660131293,
-        "median_abs_log10": 0.8952914455776485
+        "median_fold": 7.857627870409372,
+        "median_abs_log10": 0.8952914571998088
       },
       "constant": {
         "rows": 50,
@@ -42,16 +42,16 @@
     },
     "out_of_sample": {
       "engine": {
-        "rows": 44,
-        "within_3x": 11,
-        "median_fold": 8.879977171454103,
-        "median_abs_log10": 0.9484118493006441
+        "rows": 40,
+        "within_3x": 8,
+        "median_fold": 11.534986507303264,
+        "median_abs_log10": 1.0620170908547573
       },
       "constant": {
-        "rows": 44,
+        "rows": 40,
         "within_3x": 15,
-        "median_fold": 10.428390128008889,
-        "median_abs_log10": 1.0182172698373197
+        "median_fold": 8.111783610640062,
+        "median_abs_log10": 0.9091163569352161
       }
     }
   },
@@ -60,8 +60,8 @@
       "engine": {
         "rows": 9,
         "within_3x": 4,
-        "median_fold": 4.422943717937388,
-        "median_abs_log10": 0.6457114129972907
+        "median_fold": 4.422943717922484,
+        "median_abs_log10": 0.6457114129958273
       },
       "constant": {
         "rows": 9,
@@ -88,8 +88,8 @@
       "engine": {
         "rows": 38,
         "within_3x": 10,
-        "median_fold": 10.403762145965809,
-        "median_abs_log10": 1.0171904146623048
+        "median_fold": 10.403762169550738,
+        "median_abs_log10": 1.0171904156468337
       },
       "constant": {
         "rows": 38,
@@ -130,7 +130,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 310.0,
-      "engine": 4030.2037573638067,
+      "engine": 4030.203757362508,
       "constant": 9.573478991463865,
       "out_of_sample": false
     },
@@ -140,7 +140,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 5362.0,
-      "engine": 2919.6509380647494,
+      "engine": 2919.6509380246657,
       "constant": 9.573478991463865,
       "out_of_sample": false
     },
@@ -150,7 +150,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 6230.0,
-      "engine": 1146.4759197447625,
+      "engine": 1146.475919744765,
       "constant": 9.573478991463865,
       "out_of_sample": false
     },
@@ -160,7 +160,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 11016.0,
-      "engine": 17014.10599418542,
+      "engine": 17014.105990845805,
       "constant": 1.3439999999999996,
       "out_of_sample": false
     },
@@ -170,7 +170,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 1016.0,
-      "engine": 1074.1357774488674,
+      "engine": 1074.1357801881684,
       "constant": 9.573478991463865,
       "out_of_sample": false
     },
@@ -180,7 +180,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 4224.0,
-      "engine": 8269.399953646607,
+      "engine": 8269.39995364794,
       "constant": 9.573478991463865,
       "out_of_sample": false
     },
@@ -190,9 +190,9 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 121.0,
-      "engine": 346.6167649315865,
+      "engine": 346.61680335656604,
       "constant": 2.2175999999999996,
-      "out_of_sample": true
+      "out_of_sample": false
     },
     {
       "benchmark": "hofmann1998_ribose_cysteine_145C_20min_pH5",
@@ -200,9 +200,9 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 198.0,
-      "engine": 93.63341226749424,
+      "engine": 93.63341996131116,
       "constant": 15.79624033591538,
-      "out_of_sample": true
+      "out_of_sample": false
     },
     {
       "benchmark": "resconi_2023_pbma_beef_identity_benchmark",
@@ -210,7 +210,7 @@
       "compound": "Furfural",
       "lane": "sulfur",
       "measured": 715.22,
-      "engine": 46.452689560711484,
+      "engine": 46.45268582053923,
       "constant": 238.89066536807172,
       "out_of_sample": true
     },
@@ -220,7 +220,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 11.7,
-      "engine": 232.91571325339726,
+      "engine": 232.9157132486124,
       "constant": 32.31335550124747,
       "out_of_sample": true
     },
@@ -230,7 +230,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 8.1,
-      "engine": 1305.955240705862,
+      "engine": 1305.955247122756,
       "constant": 86.66666666666666,
       "out_of_sample": true
     },
@@ -240,7 +240,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 116.0,
-      "engine": 129.54014944023567,
+      "engine": 129.54014850126148,
       "constant": 3.126426946938862,
       "out_of_sample": true
     },
@@ -250,7 +250,7 @@
       "compound": "Furfural",
       "lane": "sulfur",
       "measured": 716.0,
-      "engine": 24.137597101194398,
+      "engine": 24.13759670405366,
       "constant": 1430.44,
       "out_of_sample": true
     },
@@ -260,7 +260,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 59.1,
-      "engine": 844.8615508319515,
+      "engine": 844.8615542046919,
       "constant": 86.66666666666666,
       "out_of_sample": true
     },
@@ -270,7 +270,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 124.0,
-      "engine": 25.670764832420303,
+      "engine": 25.670765152881717,
       "constant": 3.126426946938862,
       "out_of_sample": true
     },
@@ -280,7 +280,7 @@
       "compound": "Furfural",
       "lane": "sulfur",
       "measured": 113.0,
-      "engine": 4.594963849634168,
+      "engine": 4.594963993856148,
       "constant": 1430.44,
       "out_of_sample": true
     },
@@ -290,7 +290,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 64.1,
-      "engine": 1748.8197481769012,
+      "engine": 1748.8198103287987,
       "constant": 86.66666666666666,
       "out_of_sample": true
     },
@@ -300,7 +300,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 383.0,
-      "engine": 73.48805525675505,
+      "engine": 73.48805571848523,
       "constant": 3.126426946938862,
       "out_of_sample": true
     },
@@ -310,7 +310,7 @@
       "compound": "Furfural",
       "lane": "sulfur",
       "measured": 397.0,
-      "engine": 8.835422427452816,
+      "engine": 8.835422550184978,
       "constant": 1430.44,
       "out_of_sample": true
     },
@@ -320,7 +320,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 57.1,
-      "engine": 1645.1264262771613,
+      "engine": 1645.1264207712672,
       "constant": 86.66666666666666,
       "out_of_sample": true
     },
@@ -330,7 +330,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 270.0,
-      "engine": 110.83672177407993,
+      "engine": 110.83672146422113,
       "constant": 3.126426946938862,
       "out_of_sample": true
     },
@@ -340,7 +340,7 @@
       "compound": "Furfural",
       "lane": "sulfur",
       "measured": 575.0,
-      "engine": 16.171519447804577,
+      "engine": 16.17151955873745,
       "constant": 1430.44,
       "out_of_sample": true
     },
@@ -350,7 +350,7 @@
       "compound": "Acrylamide",
       "lane": "acrylamide",
       "measured": 1859.0,
-      "engine": 203.19417771604577,
+      "engine": 203.19417771198226,
       "constant": 287.15351792576547,
       "out_of_sample": true
     },
@@ -360,7 +360,7 @@
       "compound": "5-Hydroxymethylfurfural (HMF)",
       "lane": "acrylamide",
       "measured": 12280.0,
-      "engine": 1966.1162014102997,
+      "engine": 1966.1162014099375,
       "constant": 6669.80594770193,
       "out_of_sample": true
     },
@@ -410,7 +410,7 @@
       "compound": "Acrylamide",
       "lane": "acrylamide",
       "measured": 28.0,
-      "engine": 6110.035826794892,
+      "engine": 6110.035826794899,
       "constant": 429.23208008189295,
       "out_of_sample": true
     },
@@ -420,7 +420,7 @@
       "compound": "Acrylamide",
       "lane": "acrylamide",
       "measured": 1459.0,
-      "engine": 3679.889173323907,
+      "engine": 3679.8891733115074,
       "constant": 429.23208008189295,
       "out_of_sample": true
     },
@@ -430,7 +430,7 @@
       "compound": "Acrylamide",
       "lane": "acrylamide",
       "measured": 832.0,
-      "engine": 3679.889173323907,
+      "engine": 3679.8891733115074,
       "constant": 429.23208008189295,
       "out_of_sample": true
     },
@@ -440,7 +440,7 @@
       "compound": "5-Hydroxymethylfurfural (HMF)",
       "lane": "acrylamide",
       "measured": 7000.0,
-      "engine": 2551.248059780942,
+      "engine": 2551.248059781186,
       "constant": 8425.620160307477,
       "out_of_sample": true
     },
@@ -510,7 +510,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 229.0,
-      "engine": 1523.270747310501,
+      "engine": 1523.2707418838477,
       "constant": 2.2175999999999996,
       "out_of_sample": true
     },
@@ -520,7 +520,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 553.0,
-      "engine": 24.707237592100633,
+      "engine": 24.707237554782857,
       "constant": 15.79624033591538,
       "out_of_sample": true
     },
@@ -530,7 +530,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 12.0,
-      "engine": 0.16959779504376088,
+      "engine": 0.16959779562439883,
       "constant": 2.2175999999999996,
       "out_of_sample": true
     },
@@ -540,7 +540,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 25.0,
-      "engine": 0.00509621752530742,
+      "engine": 0.005096217562612314,
       "constant": 15.79624033591538,
       "out_of_sample": true
     },
@@ -550,9 +550,9 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 96.0,
-      "engine": 346.6167649315865,
+      "engine": 346.61680335656604,
       "constant": 2.2175999999999996,
-      "out_of_sample": true
+      "out_of_sample": false
     },
     {
       "benchmark": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -560,9 +560,9 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 143.0,
-      "engine": 93.63341226749424,
+      "engine": 93.63341996131116,
       "constant": 15.79624033591538,
-      "out_of_sample": true
+      "out_of_sample": false
     },
     {
       "benchmark": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -570,7 +570,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 6.88,
-      "engine": 10.33444791663891,
+      "engine": 10.3344470370659,
       "constant": 108.33333333333333,
       "out_of_sample": true
     },
@@ -580,7 +580,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 1.28,
-      "engine": 299.4987213644264,
+      "engine": 299.49868107611667,
       "constant": 149.91664350564952,
       "out_of_sample": true
     },
@@ -590,7 +590,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 3.29,
-      "engine": 12.015186836403757,
+      "engine": 12.015187206643871,
       "constant": 108.33333333333333,
       "out_of_sample": true
     },
@@ -600,7 +600,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 1.46,
-      "engine": 246.54230592010032,
+      "engine": 246.54231029249232,
       "constant": 149.91664350564952,
       "out_of_sample": true
     },
@@ -610,7 +610,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 2.4,
-      "engine": 12.859461265417423,
+      "engine": 12.859461293680834,
       "constant": 108.33333333333333,
       "out_of_sample": true
     },
@@ -620,7 +620,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 1.68,
-      "engine": 167.26635837441702,
+      "engine": 167.26634676749305,
       "constant": 149.91664350564952,
       "out_of_sample": true
     },
@@ -630,7 +630,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 1.71,
-      "engine": 12.681291393120274,
+      "engine": 12.681292014348603,
       "constant": 108.33333333333333,
       "out_of_sample": true
     },
@@ -640,7 +640,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 1.62,
-      "engine": 96.09786516381412,
+      "engine": 96.0978747403154,
       "constant": 149.91664350564952,
       "out_of_sample": true
     },
@@ -650,7 +650,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lane": "sulfur",
       "measured": 22.63,
-      "engine": 0.5097743007625314,
+      "engine": 0.5097742997445959,
       "constant": 123.09849714760942,
       "out_of_sample": true
     },
@@ -660,7 +660,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lane": "sulfur",
       "measured": 0.29,
-      "engine": 2.4144238778564135,
+      "engine": 2.4144238888040057,
       "constant": 146.66666666666663,
       "out_of_sample": true
     },
@@ -670,7 +670,7 @@
       "compound": "Bis(2-methyl-3-furyl) disulfide",
       "lane": "sulfur",
       "measured": 18.25,
-      "engine": 0.0006363094342419775,
+      "engine": 0.0006363094359933459,
       "constant": null,
       "out_of_sample": true
     },
@@ -680,7 +680,7 @@
       "compound": "2-Acetylthiazole",
       "lane": "sulfur",
       "measured": 114.13,
-      "engine": 0.06495568483960075,
+      "engine": 0.06495568477187712,
       "constant": null,
       "out_of_sample": true
     },

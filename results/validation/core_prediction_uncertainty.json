@@ -87,7 +87,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.12453487498831074,
+          "ci_width_log10": 0.12453487498558433,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -97,12 +97,12 @@
           "measured_ppb": 310.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 3887.02768139895,
-          "predicted_p5": 3052.7521660118014,
-          "predicted_p50": 4029.7905060095195,
-          "predicted_p95": 4066.5528702931115,
-          "predicted_point": 4030.2037573638067,
-          "predicted_std": 392.5652786563824,
+          "predicted_mean": 3887.0276813282308,
+          "predicted_p5": 3052.7521660117973,
+          "predicted_p50": 4029.790505857933,
+          "predicted_p95": 4066.5528702675774,
+          "predicted_point": 4030.203757362508,
+          "predicted_std": 392.565278630186,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -133,7 +133,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.21347666748271468,
+          "ci_width_log10": 0.21347666748271688,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -143,12 +143,12 @@
           "measured_ppb": 5362.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 2903.181050701697,
-          "predicted_p5": 2110.3908217395715,
-          "predicted_p50": 2958.699034256205,
-          "predicted_p95": 3450.1625509723694,
-          "predicted_point": 2919.6509380647494,
-          "predicted_std": 392.16016376435203,
+          "predicted_mean": 2903.181050674761,
+          "predicted_p5": 2110.390821739567,
+          "predicted_p50": 2958.6990342911067,
+          "predicted_p95": 3450.1625509723794,
+          "predicted_point": 2919.6509380246657,
+          "predicted_std": 392.1601634629879,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -179,7 +179,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.5102966649614044,
+          "ci_width_log10": 0.5102966648157877,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -189,12 +189,12 @@
           "measured_ppb": 6230.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1174.0183923603115,
-          "predicted_p5": 537.2113829418477,
-          "predicted_p50": 1178.6967662497636,
-          "predicted_p95": 1739.5698474938872,
-          "predicted_point": 1146.4759197447625,
-          "predicted_std": 348.60476923558065,
+          "predicted_mean": 1174.0183923735797,
+          "predicted_p5": 537.2113829418448,
+          "predicted_p50": 1178.696766185014,
+          "predicted_p95": 1739.5698469106094,
+          "predicted_point": 1146.475919744765,
+          "predicted_std": 348.6047692482962,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -263,7 +263,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 3.771817092550059,
+          "ci_width_log10": 3.7718170937389695,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -273,12 +273,12 @@
           "measured_ppb": 11016.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 15231.471865613235,
-          "predicted_p5": 9.260700394836828,
-          "predicted_p50": 7073.639712917724,
-          "predicted_p95": 54759.683148208176,
-          "predicted_point": 17014.10599418542,
-          "predicted_std": 23374.817716064783,
+          "predicted_mean": 15231.471870327354,
+          "predicted_p5": 9.26070039483525,
+          "predicted_p50": 7073.639712917745,
+          "predicted_p95": 54759.68329810715,
+          "predicted_point": 17014.105990845805,
+          "predicted_std": 23374.81772186392,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -347,7 +347,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.5984962489502775,
+          "ci_width_log10": 0.598496248139727,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -357,12 +357,12 @@
           "measured_ppb": 1016.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1079.661269486146,
-          "predicted_p5": 471.4813578524047,
-          "predicted_p50": 1067.6874019603551,
-          "predicted_p95": 1870.5131881761781,
-          "predicted_point": 1074.1357774488674,
-          "predicted_std": 426.6513350086411,
+          "predicted_mean": 1079.6612693909758,
+          "predicted_p5": 471.481360596753,
+          "predicted_p50": 1067.6874200778955,
+          "predicted_p95": 1870.5131955728075,
+          "predicted_point": 1074.1357801881684,
+          "predicted_std": 426.6513347779577,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -393,7 +393,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.3855791120203573,
+          "ci_width_log10": 0.3855791120205521,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": true,
@@ -403,12 +403,12 @@
           "measured_ppb": 4224.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 6819.138222735619,
-          "predicted_p5": 3731.418002474159,
-          "predicted_p50": 7074.028798163885,
-          "predicted_p95": 9066.778675217533,
-          "predicted_point": 8269.399953646607,
-          "predicted_std": 1694.1285805762243,
+          "predicted_mean": 6819.138222480343,
+          "predicted_p5": 3731.4180024725274,
+          "predicted_p50": 7074.028798281504,
+          "predicted_p95": 9066.778675217636,
+          "predicted_point": 8269.39995364794,
+          "predicted_std": 1694.1285807218735,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -439,42 +439,42 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.8693793417285811,
+          "ci_width_log10": 1.8693792573471626,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
-          "in_core_fit": false,
+          "in_core_fit": true,
           "inside_ci": true,
           "lane": "sulfur",
           "measured": 121.0,
           "measured_ppb": 121.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 346.3626582960697,
-          "predicted_p5": 16.4471554153847,
-          "predicted_p50": 177.97566426059842,
-          "predicted_p95": 1217.5032746411666,
-          "predicted_point": 346.6167649315865,
-          "predicted_std": 438.1736949198976,
+          "predicted_mean": 346.3626506688256,
+          "predicted_p5": 16.447154740131317,
+          "predicted_p50": 177.97566995041709,
+          "predicted_p95": 1217.5029881001801,
+          "predicted_point": 346.61680335656604,
+          "predicted_std": 438.1736829738136,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.7718615769038617,
+          "ci_width_log10": 0.7718616062695719,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
-          "in_core_fit": false,
+          "in_core_fit": true,
           "inside_ci": true,
           "lane": "sulfur",
           "measured": 198.0,
           "measured_ppb": 198.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 104.7487630092153,
-          "predicted_p5": 37.1265780934926,
-          "predicted_p50": 95.92126049016005,
-          "predicted_p95": 219.5566014439528,
-          "predicted_point": 93.63341226749424,
-          "predicted_std": 60.74062208570467,
+          "predicted_mean": 104.74876175773794,
+          "predicted_p5": 37.126575803167,
+          "predicted_p50": 95.9212672973722,
+          "predicted_p95": 219.5566027453515,
+          "predicted_point": 93.63341996131116,
+          "predicted_std": 60.740621074575685,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -483,8 +483,12 @@
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
-        "core": [],
-        "index": []
+        "core": [
+          "kinetic_core_b60_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b60_fit_targets.json"
+        ]
       },
       "fitted_row": false,
       "matched_compounds": 2,
@@ -520,7 +524,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "trust_loop",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         },
         {
           "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -528,7 +532,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "trust_loop",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         }
       ],
       "signal_origin": "external_literature"
@@ -539,7 +543,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.521037802514574,
+          "ci_width_log10": 1.5349747465055124,
           "compound": "hexanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -549,17 +553,17 @@
           "measured_ppb": 782.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 603.3213512172729,
-          "predicted_p5": 67.92965641856013,
-          "predicted_p50": 363.92669717154786,
-          "predicted_p95": 2254.743899151277,
+          "predicted_mean": 604.2712444477884,
+          "predicted_p5": 66.62996829519291,
+          "predicted_p50": 370.53252930021654,
+          "predicted_p95": 2283.727876220135,
           "predicted_point": 353.8578458170107,
-          "predicted_std": 695.8839773905772,
+          "predicted_std": 694.9815169184741,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.5258112411863085,
+          "ci_width_log10": 1.5426162764006963,
           "compound": "2-pentylfuran",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -569,17 +573,17 @@
           "measured_ppb": 163.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 111.57411622994245,
-          "predicted_p5": 12.355226966313847,
-          "predicted_p50": 69.26769465487835,
-          "predicted_p95": 414.6311908472232,
+          "predicted_mean": 111.78122439776078,
+          "predicted_p5": 12.069524543842096,
+          "predicted_p50": 68.93118173385011,
+          "predicted_p95": 421.02359827508644,
           "predicted_point": 64.44237549354317,
-          "predicted_std": 129.185782860512,
+          "predicted_std": 129.27052481085013,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.8288327306405687,
+          "ci_width_log10": 1.8678995784233976,
           "compound": "nonanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -589,17 +593,17 @@
           "measured_ppb": 24.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 38.91360377811246,
-          "predicted_p5": 2.4625168354100886,
-          "predicted_p50": 17.465808414998037,
-          "predicted_p95": 166.03969958795585,
+          "predicted_mean": 39.21615028172536,
+          "predicted_p5": 2.1270813072291537,
+          "predicted_p50": 16.258568907304102,
+          "predicted_p95": 156.9219403092103,
           "predicted_point": 15.605972532831462,
-          "predicted_std": 59.787700753782666,
+          "predicted_std": 65.79258479013448,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.5926215259361447,
+          "ci_width_log10": 3.452406722619723,
           "compound": "(E,E)-2,4-decadienal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -609,12 +613,12 @@
           "measured_ppb": 46.9,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 265.89684350761837,
-          "predicted_p5": 3.1634192293859944,
-          "predicted_p50": 69.1366517957583,
-          "predicted_p95": 1238.1642952199804,
+          "predicted_mean": 268.85830825032673,
+          "predicted_p5": 0.5028307824112885,
+          "predicted_p50": 49.524384145230115,
+          "predicted_p95": 1425.0450016310308,
           "predicted_point": 75.70182025711894,
-          "predicted_std": 524.111367701128,
+          "predicted_std": 601.2805411264801,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -666,7 +670,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 11.80893969798267,
+          "ci_width_log10": 11.80884780765327,
           "compound": "furfural",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -676,12 +680,12 @@
           "measured_ppb": 715.22,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 1493.6963823702126,
-          "predicted_p5": 1.6651047536524463e-08,
-          "predicted_p50": 24.151611261393704,
-          "predicted_p95": 10724.603841387674,
-          "predicted_point": 46.452689560711484,
-          "predicted_std": 5041.083634484516,
+          "predicted_mean": 1493.6963830314612,
+          "predicted_p5": 1.6654571067540744e-08,
+          "predicted_p50": 24.15161062982937,
+          "predicted_p95": 10724.603868006643,
+          "predicted_point": 46.45268582053923,
+          "predicted_std": 5041.083652882333,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -727,7 +731,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "trust_loop",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         },
         {
           "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -735,7 +739,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "trust_loop",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         }
       ],
       "signal_origin": "external_literature"
@@ -746,7 +750,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.2974780550432028,
+          "ci_width_log10": 1.2974780550227984,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -756,12 +760,12 @@
           "measured_ppb": 11.7,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 115.75285800664432,
-          "predicted_p5": 19.570223879081514,
-          "predicted_p50": 82.88230422696573,
-          "predicted_p95": 388.2163740581196,
-          "predicted_point": 232.91571325339726,
-          "predicted_std": 109.78473399710758,
+          "predicted_mean": 115.75285800494873,
+          "predicted_p5": 19.570223877411138,
+          "predicted_p50": 82.88230423097369,
+          "predicted_p95": 388.2163740067447,
+          "predicted_point": 232.9157132486124,
+          "predicted_std": 109.78473399246316,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -788,7 +792,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.3084199388005553,
+          "ci_width_log10": 2.3084199373810836,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -798,17 +802,17 @@
           "measured_ppb": 8.1,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 945.8966876404686,
-          "predicted_p5": 18.898544006401366,
-          "predicted_p50": 322.5413363763059,
-          "predicted_p95": 3844.574535504654,
-          "predicted_point": 1305.955240705862,
-          "predicted_std": 1895.837169119257,
+          "predicted_mean": 945.8966930561568,
+          "predicted_p5": 18.898544007104853,
+          "predicted_p50": 322.5413384658138,
+          "predicted_p95": 3844.574523081949,
+          "predicted_point": 1305.955247122756,
+          "predicted_std": 1895.837213442618,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 4.5171152942837685,
+          "ci_width_log10": 4.5171152959487735,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -818,17 +822,17 @@
           "measured_ppb": 116.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 131.4745179667999,
-          "predicted_p5": 0.018926500416083195,
-          "predicted_p50": 5.192905361943687,
-          "predicted_p95": 622.5663066515049,
-          "predicted_point": 129.54014944023567,
-          "predicted_std": 443.8611460995119,
+          "predicted_mean": 131.4745186874575,
+          "predicted_p5": 0.018926500200444972,
+          "predicted_p50": 5.192905120703691,
+          "predicted_p95": 622.5663019451285,
+          "predicted_point": 129.54014850126148,
+          "predicted_std": 443.86114966315307,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 4.562357057405095,
+          "ci_width_log10": 4.5623570528714605,
           "compound": "Furfural",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -838,12 +842,12 @@
           "measured_ppb": 716.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 100.83692630260833,
-          "predicted_p5": 0.010586462087345396,
-          "predicted_p50": 4.736469049365338,
-          "predicted_p95": 386.46298495478345,
-          "predicted_point": 24.137597101194398,
-          "predicted_std": 462.5422392494402,
+          "predicted_mean": 100.83692616150368,
+          "predicted_p5": 0.010586462205999665,
+          "predicted_p50": 4.736468961468281,
+          "predicted_p95": 386.4629852519866,
+          "predicted_point": 24.13759670405366,
+          "predicted_std": 462.54223791250246,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -870,7 +874,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.137479518650318,
+          "ci_width_log10": 2.1374795443267463,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -880,17 +884,17 @@
           "measured_ppb": 59.1,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 461.2583519870866,
-          "predicted_p5": 12.449493337837938,
-          "predicted_p50": 188.36229800999774,
-          "predicted_p95": 1708.5637811964777,
-          "predicted_point": 844.8615508319515,
-          "predicted_std": 842.6235557896273,
+          "predicted_mean": 461.25835346638473,
+          "predicted_p5": 12.449492879362772,
+          "predicted_p50": 188.36229553342633,
+          "predicted_p95": 1708.563819289501,
+          "predicted_point": 844.8615542046919,
+          "predicted_std": 842.6235541082665,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 3.8883589637472995,
+          "ci_width_log10": 3.8883590337506395,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -900,17 +904,17 @@
           "measured_ppb": 124.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 42.870216269791726,
-          "predicted_p5": 0.024038561217027146,
-          "predicted_p50": 1.9273992813498735,
-          "predicted_p95": 185.894882384619,
-          "predicted_point": 25.670764832420303,
-          "predicted_std": 172.88114977082992,
+          "predicted_mean": 42.870216331121235,
+          "predicted_p5": 0.02403855727497674,
+          "predicted_p50": 1.9273993089831205,
+          "predicted_p95": 185.8948818641165,
+          "predicted_point": 25.670765152881717,
+          "predicted_std": 172.88115090948202,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 3.399553586486086,
+          "ci_width_log10": 3.3995535715349896,
           "compound": "Furfural",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -920,12 +924,12 @@
           "measured_ppb": 113.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 24.625254949250813,
-          "predicted_p5": 0.027800223406188308,
-          "predicted_p50": 1.7265986509113143,
-          "predicted_p95": 69.75926120034748,
-          "predicted_point": 4.594963849634168,
-          "predicted_std": 112.20718333242297,
+          "predicted_mean": 24.62525461149617,
+          "predicted_p5": 0.027800221896556523,
+          "predicted_p50": 1.726598602523732,
+          "predicted_p95": 69.75925501067555,
+          "predicted_point": 4.594963993856148,
+          "predicted_std": 112.2071821295359,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -952,7 +956,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.3329052988819647,
+          "ci_width_log10": 2.332905307813224,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -962,17 +966,17 @@
           "measured_ppb": 64.1,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 853.1920386988047,
-          "predicted_p5": 18.27793617303423,
-          "predicted_p50": 324.85491676421697,
-          "predicted_p95": 3933.9827866513247,
-          "predicted_point": 1748.8197481769012,
-          "predicted_std": 1751.9746200296108,
+          "predicted_mean": 853.1920393747532,
+          "predicted_p5": 18.27793625683664,
+          "predicted_p50": 324.8549128535835,
+          "predicted_p95": 3933.982885590519,
+          "predicted_point": 1748.8198103287987,
+          "predicted_std": 1751.974617257795,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 4.257835648266749,
+          "ci_width_log10": 4.257835633914714,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -982,17 +986,17 @@
           "measured_ppb": 383.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 92.13012875757907,
-          "predicted_p5": 0.024604078775104087,
-          "predicted_p50": 4.560447408557613,
-          "predicted_p95": 445.4949210104414,
-          "predicted_point": 73.48805525675505,
-          "predicted_std": 333.70113135306184,
+          "predicted_mean": 92.1301280765404,
+          "predicted_p5": 0.024604079679354088,
+          "predicted_p50": 4.560447122505626,
+          "predicted_p95": 445.49492266111275,
+          "predicted_point": 73.48805571848523,
+          "predicted_std": 333.7011258441881,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 3.8141365671862717,
+          "ci_width_log10": 3.81413657756079,
           "compound": "Furfural",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1002,12 +1006,12 @@
           "measured_ppb": 397.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 49.82108133159941,
-          "predicted_p5": 0.029878367770155158,
-          "predicted_p50": 3.386253972359599,
-          "predicted_p95": 194.75716130728202,
-          "predicted_point": 8.835422427452816,
-          "predicted_std": 209.93392389771347,
+          "predicted_mean": 49.82108145399213,
+          "predicted_p5": 0.0298783672697416,
+          "predicted_p50": 3.3862539953573343,
+          "predicted_p95": 194.75716269781975,
+          "predicted_point": 8.835422550184978,
+          "predicted_std": 209.9339238670587,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1034,7 +1038,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.2822275811405692,
+          "ci_width_log10": 2.282227573138739,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1044,17 +1048,17 @@
           "measured_ppb": 57.1,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 966.5388395505154,
-          "predicted_p5": 20.615055665414896,
-          "predicted_p50": 348.92607555530105,
-          "predicted_p95": 3948.317720165639,
-          "predicted_point": 1645.1264262771613,
-          "predicted_std": 2006.0565192112608,
+          "predicted_mean": 966.5388372325797,
+          "predicted_p5": 20.615055870702825,
+          "predicted_p50": 348.9260750836693,
+          "predicted_p95": 3948.3176867362604,
+          "predicted_point": 1645.1264207712672,
+          "predicted_std": 2006.0564852540422,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 4.386545395710585,
+          "ci_width_log10": 4.386545424045636,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1064,17 +1068,17 @@
           "measured_ppb": 270.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 120.38478644562251,
-          "predicted_p5": 0.02367055141751412,
-          "predicted_p50": 4.762258592069878,
-          "predicted_p95": 576.4395505254407,
-          "predicted_point": 110.83672177407993,
-          "predicted_std": 416.0720813014474,
+          "predicted_mean": 120.38478670239896,
+          "predicted_p5": 0.023670551123622707,
+          "predicted_p50": 4.762258789346279,
+          "predicted_p95": 576.4395809775649,
+          "predicted_point": 110.83672146422113,
+          "predicted_std": 416.0720830817924,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 4.190437059179228,
+          "ci_width_log10": 4.190437072929711,
           "compound": "Furfural",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1084,12 +1088,12 @@
           "measured_ppb": 575.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 76.08580611736143,
-          "predicted_p5": 0.021002468977282022,
-          "predicted_p50": 4.111525140128133,
-          "predicted_p95": 325.61725518792105,
-          "predicted_point": 16.171519447804577,
-          "predicted_std": 323.0128472542803,
+          "predicted_mean": 76.0858068011914,
+          "predicted_p5": 0.021002469465386038,
+          "predicted_p50": 4.111525131456114,
+          "predicted_p95": 325.61727306495186,
+          "predicted_point": 16.17151955873745,
+          "predicted_std": 323.0128506817753,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1116,7 +1120,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.913547585355217,
+          "ci_width_log10": 0.9135475852523478,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1126,17 +1130,17 @@
           "measured_ppb": 1859.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 252.8717735403448,
-          "predicted_p5": 68.99642636937232,
-          "predicted_p50": 199.51640551913698,
-          "predicted_p95": 565.423927119263,
-          "predicted_point": 203.19417771604577,
-          "predicted_std": 187.80251483121623,
+          "predicted_mean": 252.87177353954723,
+          "predicted_p5": 68.99642636755819,
+          "predicted_p50": 199.51640551914625,
+          "predicted_p95": 565.4239269704673,
+          "predicted_point": 203.19417771198226,
+          "predicted_std": 187.80251483158838,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.3949269400679631,
+          "ci_width_log10": 0.39492694006795837,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1146,12 +1150,12 @@
           "measured_ppb": 12280.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1882.755890259698,
-          "predicted_p5": 1097.6294424845153,
-          "predicted_p50": 1876.3011265804425,
+          "predicted_mean": 1882.7558902586293,
+          "predicted_p5": 1097.6294424845273,
+          "predicted_p50": 1876.301126578936,
           "predicted_p95": 2725.1015325514268,
-          "predicted_point": 1966.1162014102997,
-          "predicted_std": 510.5582219097795,
+          "predicted_point": 1966.1162014099375,
+          "predicted_std": 510.558221905174,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1178,7 +1182,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9602845809667468,
+          "ci_width_log10": 0.960284580966747,
           "compound": "DMHF",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1188,12 +1192,12 @@
           "measured_ppb": 1153.17,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 26.610405934082532,
+          "predicted_mean": 26.610405934082536,
           "predicted_p5": 6.595085391034242,
           "predicted_p50": 21.186878775760153,
-          "predicted_p95": 60.18731977106657,
+          "predicted_p95": 60.18731977106658,
           "predicted_point": 21.840611810701176,
-          "predicted_std": 19.43464255809128,
+          "predicted_std": 19.434642558091284,
           "shared_with": null,
           "target_unit": "ppb"
         },
@@ -1208,12 +1212,12 @@
           "measured_ppb": 57253.94,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 46564.620756565004,
+          "predicted_mean": 46564.62075656462,
           "predicted_p5": 8909.304380242253,
           "predicted_p50": 32997.468749921114,
           "predicted_p95": 159472.3283582639,
           "predicted_point": 55408.80970485064,
-          "predicted_std": 42608.43606789,
+          "predicted_std": 42608.436067890056,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1249,7 +1253,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9602845809667468,
+          "ci_width_log10": 0.960284580966747,
           "compound": "DMHF",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1259,12 +1263,12 @@
           "measured_ppb": 5893.98,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 26.610405934082532,
+          "predicted_mean": 26.610405934082536,
           "predicted_p5": 6.595085391034242,
           "predicted_p50": 21.186878775760153,
-          "predicted_p95": 60.18731977106657,
+          "predicted_p95": 60.18731977106658,
           "predicted_point": 21.840611810701176,
-          "predicted_std": 19.43464255809128,
+          "predicted_std": 19.434642558091284,
           "shared_with": null,
           "target_unit": "ppb"
         },
@@ -1279,12 +1283,12 @@
           "measured_ppb": 100635.78,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 46564.620756565004,
+          "predicted_mean": 46564.62075656462,
           "predicted_p5": 8909.304380242253,
           "predicted_p50": 32997.468749921114,
           "predicted_p95": 159472.3283582639,
           "predicted_point": 55408.80970485064,
-          "predicted_std": 42608.43606789,
+          "predicted_std": 42608.436067890056,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1320,7 +1324,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.8645689202111596,
+          "ci_width_log10": 0.864568920211155,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1330,12 +1334,12 @@
           "measured_ppb": 28.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 6583.10463383134,
+          "predicted_mean": 6583.104633822664,
           "predicted_p5": 1942.6639376283867,
-          "predicted_p50": 5676.189208037922,
-          "predicted_p95": 14222.19400301265,
-          "predicted_point": 6110.035826794892,
-          "predicted_std": 3879.5639487382505,
+          "predicted_p50": 5676.189208037918,
+          "predicted_p95": 14222.194003012499,
+          "predicted_point": 6110.035826794899,
+          "predicted_std": 3879.563948726715,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1362,7 +1366,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9147267009792087,
+          "ci_width_log10": 0.9147267009670085,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1372,12 +1376,12 @@
           "measured_ppb": 1459.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 4572.897029230875,
-          "predicted_p5": 1250.5335647401794,
-          "predicted_p50": 3618.529080876151,
-          "predicted_p95": 10275.951688750709,
-          "predicted_point": 3679.889173323907,
-          "predicted_std": 3396.7014425903567,
+          "predicted_mean": 4572.897029093272,
+          "predicted_p5": 1250.5335647734698,
+          "predicted_p50": 3618.5290808761597,
+          "predicted_p95": 10275.951688735593,
+          "predicted_point": 3679.8891733115074,
+          "predicted_std": 3396.7014417500463,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1404,7 +1408,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9147267009792087,
+          "ci_width_log10": 0.9147267009670085,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1414,17 +1418,17 @@
           "measured_ppb": 832.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 4572.897029230875,
-          "predicted_p5": 1250.5335647401794,
-          "predicted_p50": 3618.529080876151,
-          "predicted_p95": 10275.951688750709,
-          "predicted_point": 3679.889173323907,
-          "predicted_std": 3396.7014425903567,
+          "predicted_mean": 4572.897029093272,
+          "predicted_p5": 1250.5335647734698,
+          "predicted_p50": 3618.5290808761597,
+          "predicted_p95": 10275.951688735593,
+          "predicted_point": 3679.8891733115074,
+          "predicted_std": 3396.7014417500463,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.0307858651356698,
+          "ci_width_log10": 1.0307858651356716,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1434,12 +1438,12 @@
           "measured_ppb": 7000.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 3369.213604229923,
-          "predicted_p5": 1122.8145238203865,
-          "predicted_p50": 2177.063935932172,
-          "predicted_p95": 12052.964760749228,
-          "predicted_point": 2551.248059780942,
-          "predicted_std": 3133.066530303545,
+          "predicted_mean": 3369.2136042206675,
+          "predicted_p5": 1122.8145238203815,
+          "predicted_p50": 2177.063935932194,
+          "predicted_p95": 12052.964760749224,
+          "predicted_point": 2551.248059781186,
+          "predicted_std": 3133.0665303126375,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1466,7 +1470,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9022436288572515,
+          "ci_width_log10": 0.9022436288572244,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1476,12 +1480,12 @@
           "measured_ppb": null,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 8372.557498478105,
-          "predicted_p5": 2428.887369358052,
-          "predicted_p50": 6840.250389860722,
-          "predicted_p95": 19393.26827775336,
-          "predicted_point": 7004.325407821039,
-          "predicted_std": 6142.31751774733,
+          "predicted_mean": 8372.557498523964,
+          "predicted_p5": 2428.8873693582773,
+          "predicted_p50": 6840.250389860721,
+          "predicted_p95": 19393.26827775395,
+          "predicted_point": 7004.325407821018,
+          "predicted_std": 6142.317517786763,
           "shared_with": null,
           "target_unit": "umol_per_mol_limiting_precursor"
         }
@@ -1508,7 +1512,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.970460427153557,
+          "ci_width_log10": 0.9704604244386704,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1518,17 +1522,17 @@
           "measured_ppb": 17400.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1705.020262866988,
-          "predicted_p5": 471.65763275594645,
-          "predicted_p50": 1317.1818691758103,
-          "predicted_p95": 4406.4342485610605,
+          "predicted_mean": 1705.020262557432,
+          "predicted_p5": 471.6576347670619,
+          "predicted_p50": 1317.1818699874407,
+          "predicted_p95": 4406.434239804037,
           "predicted_point": 1869.446898195805,
-          "predicted_std": 1274.5800181363943,
+          "predicted_std": 1274.5800175370002,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.9694950949070246,
+          "ci_width_log10": 0.9694950949501407,
           "compound": "3-deoxyglucosone",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1538,17 +1542,17 @@
           "measured_ppb": 52200.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 61345.05963442312,
-          "predicted_p5": 16801.917409988408,
-          "predicted_p50": 48506.15738395149,
-          "predicted_p95": 156622.42377349094,
+          "predicted_mean": 61345.05963465598,
+          "predicted_p5": 16801.917410023354,
+          "predicted_p50": 48506.157380715784,
+          "predicted_p95": 156622.42378936597,
           "predicted_point": 66358.981544688,
-          "predicted_std": 43951.06841024581,
+          "predicted_std": 43951.068410069834,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.9881699490092942,
+          "ci_width_log10": 0.9881699485579657,
           "compound": "3,4-dideoxyglucosone",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1558,17 +1562,17 @@
           "measured_ppb": 55500.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 7727.592866659434,
-          "predicted_p5": 2099.728853014359,
-          "predicted_p50": 5792.900486100639,
-          "predicted_p95": 20433.04846278057,
+          "predicted_mean": 7727.59286710167,
+          "predicted_p5": 2099.728855343834,
+          "predicted_p50": 5792.900518703623,
+          "predicted_p95": 20433.04846421486,
           "predicted_point": 8373.284934196285,
-          "predicted_std": 5638.798019867637,
+          "predicted_std": 5638.798021724334,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.0008070639531448883,
+          "ci_width_log10": 0.0008070620894389917,
           "compound": "glucosone",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1578,17 +1582,17 @@
           "measured_ppb": 7500.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 119.06657841929702,
-          "predicted_p5": 118.92018785294823,
-          "predicted_p50": 119.08596837787084,
-          "predicted_p95": 119.14138668018235,
+          "predicted_mean": 119.06657844756154,
+          "predicted_p5": 118.92018702858276,
+          "predicted_p50": 119.08596523227831,
+          "predicted_p95": 119.14138534300716,
           "predicted_point": 119.05906453604986,
-          "predicted_std": 0.07017059245911597,
+          "predicted_std": 0.07017066344316993,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.08542930805142812,
+          "ci_width_log10": 0.08542930965621058,
           "compound": "glyoxal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1598,17 +1602,17 @@
           "measured_ppb": 5600.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 195.15735930752055,
-          "predicted_p5": 168.4236116499153,
-          "predicted_p50": 200.18995847155557,
-          "predicted_p95": 205.0370213738806,
+          "predicted_mean": 195.15735929680795,
+          "predicted_p5": 168.42361169149427,
+          "predicted_p50": 200.18995830023027,
+          "predicted_p95": 205.03702218214053,
           "predicted_point": 160.79393493253662,
-          "predicted_std": 11.097881657805717,
+          "predicted_std": 11.097881683652487,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.9534399004783891,
+          "ci_width_log10": 0.953439901350585,
           "compound": "methylglyoxal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1618,12 +1622,12 @@
           "measured_ppb": 2600.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 2222.043926120483,
-          "predicted_p5": 622.0493535798429,
-          "predicted_p50": 1717.0527125532053,
-          "predicted_p95": 5588.107389613279,
+          "predicted_mean": 2222.0439261380934,
+          "predicted_p5": 622.0493523232954,
+          "predicted_p50": 1717.0527115997538,
+          "predicted_p95": 5588.107389547857,
           "predicted_point": 2573.819668627614,
-          "predicted_std": 1579.2716802475377,
+          "predicted_std": 1579.2716802599189,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1726,7 +1730,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.081254612217028,
+          "ci_width_log10": 2.08125461165956,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1736,17 +1740,17 @@
           "measured_ppb": 229.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1811.9783610322409,
-          "predicted_p5": 56.23450808375183,
-          "predicted_p50": 710.5904545103587,
-          "predicted_p95": 6780.434308090448,
-          "predicted_point": 1523.270747310501,
-          "predicted_std": 3342.0156097179092,
+          "predicted_mean": 1811.9783627029444,
+          "predicted_p5": 56.234508131223905,
+          "predicted_p50": 710.5904663295307,
+          "predicted_p95": 6780.434305110867,
+          "predicted_point": 1523.2707418838477,
+          "predicted_std": 3342.0156083095776,
           "shared_with": "hofmann_ribose_pH3_FFT",
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.8987733036710632,
+          "ci_width_log10": 0.8987733058360288,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1756,12 +1760,12 @@
           "measured_ppb": 553.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 29.579104917441875,
-          "predicted_p5": 8.919860243684477,
-          "predicted_p50": 25.378308620101,
-          "predicted_p95": 70.65312142864411,
-          "predicted_point": 24.707237592100633,
-          "predicted_std": 20.759945625937213,
+          "predicted_mean": 29.579104929698346,
+          "predicted_p5": 8.919860233329922,
+          "predicted_p50": 25.378308656611424,
+          "predicted_p95": 70.65312169883398,
+          "predicted_point": 24.707237554782857,
+          "predicted_std": 20.759945646422537,
           "shared_with": "hofmann_ribose_pH3_MFT",
           "target_unit": "ppb"
         }
@@ -1788,7 +1792,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.01219973601162,
+          "ci_width_log10": 2.0121997350808463,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1798,17 +1802,17 @@
           "measured_ppb": 12.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 0.10801353795778298,
-          "predicted_p5": 0.003192800151872938,
-          "predicted_p50": 0.0745098976170934,
-          "predicted_p95": 0.3283760477086783,
-          "predicted_point": 0.16959779504376088,
-          "predicted_std": 0.11431496913005228,
+          "predicted_mean": 0.10801353833134582,
+          "predicted_p5": 0.00319280002454663,
+          "predicted_p50": 0.07450989848383996,
+          "predicted_p95": 0.32837603390953435,
+          "predicted_point": 0.16959779562439883,
+          "predicted_std": 0.11431497367727732,
           "shared_with": "hofmann_ribose_pH7_FFT",
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.8089000003040883,
+          "ci_width_log10": 2.808899968740431,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1818,12 +1822,12 @@
           "measured_ppb": 25.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 0.0067298115227248075,
-          "predicted_p5": 3.2796910161493796e-05,
-          "predicted_p50": 0.004293098927220235,
-          "predicted_p95": 0.02112189748808654,
-          "predicted_point": 0.00509621752530742,
-          "predicted_std": 0.007474560545892399,
+          "predicted_mean": 0.0067298115566361725,
+          "predicted_p5": 3.279691078729418e-05,
+          "predicted_p50": 0.004293098785557212,
+          "predicted_p95": 0.021121896356017706,
+          "predicted_point": 0.005096217562612314,
+          "predicted_std": 0.007474560576672563,
           "shared_with": "hofmann_ribose_pH7_MFT",
           "target_unit": "ppb"
         }
@@ -1850,42 +1854,42 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.8693793417285811,
+          "ci_width_log10": 1.8693792573471626,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
-          "in_core_fit": false,
+          "in_core_fit": true,
           "inside_ci": true,
           "lane": "sulfur",
           "measured": 96.0,
           "measured_ppb": 96.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 346.3626582960697,
-          "predicted_p5": 16.4471554153847,
-          "predicted_p50": 177.97566426059842,
-          "predicted_p95": 1217.5032746411666,
-          "predicted_point": 346.6167649315865,
-          "predicted_std": 438.1736949198976,
+          "predicted_mean": 346.3626506688256,
+          "predicted_p5": 16.447154740131317,
+          "predicted_p50": 177.97566995041709,
+          "predicted_p95": 1217.5029881001801,
+          "predicted_point": 346.61680335656604,
+          "predicted_std": 438.1736829738136,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.7718615769038617,
+          "ci_width_log10": 0.7718616062695719,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
-          "in_core_fit": false,
+          "in_core_fit": true,
           "inside_ci": true,
           "lane": "sulfur",
           "measured": 143.0,
           "measured_ppb": 143.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 104.7487630092153,
-          "predicted_p5": 37.1265780934926,
-          "predicted_p50": 95.92126049016005,
-          "predicted_p95": 219.5566014439528,
-          "predicted_point": 93.63341226749424,
-          "predicted_std": 60.74062208570467,
+          "predicted_mean": 104.74876175773794,
+          "predicted_p5": 37.126575803167,
+          "predicted_p50": 95.9212672973722,
+          "predicted_p95": 219.5566027453515,
+          "predicted_point": 93.63341996131116,
+          "predicted_std": 60.740621074575685,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1894,8 +1898,12 @@
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
-        "core": [],
-        "index": []
+        "core": [
+          "kinetic_core_b60_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b60_fit_targets.json"
+        ]
       },
       "fitted_row": false,
       "matched_compounds": 2,
@@ -1912,7 +1920,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.6360346616915677,
+          "ci_width_log10": 2.636034734679415,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1922,17 +1930,17 @@
           "measured_ppb": 6.88,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 17.13857530728355,
-          "predicted_p5": 0.19403451633213298,
-          "predicted_p50": 3.568654550471674,
-          "predicted_p95": 83.92931026820152,
-          "predicted_point": 10.33444791663891,
-          "predicted_std": 34.26639061443918,
+          "predicted_mean": 17.138575402340063,
+          "predicted_p5": 0.19403449604822273,
+          "predicted_p50": 3.5686545800315375,
+          "predicted_p95": 83.92931559965037,
+          "predicted_point": 10.3344470370659,
+          "predicted_std": 34.26639069920225,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 3.1938248171583385,
+          "ci_width_log10": 3.1938248291378417,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1942,12 +1950,12 @@
           "measured_ppb": 1.28,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 102.4668165553988,
-          "predicted_p5": 0.2705973026960504,
-          "predicted_p50": 12.620984939343057,
-          "predicted_p95": 422.812949914669,
-          "predicted_point": 299.4987213644264,
-          "predicted_std": 267.340817933389,
+          "predicted_mean": 102.4668157238532,
+          "predicted_p5": 0.270597300643225,
+          "predicted_p50": 12.620984506886735,
+          "predicted_p95": 422.8129583698925,
+          "predicted_point": 299.49868107611667,
+          "predicted_std": 267.3408144773944,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1974,7 +1982,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.1081088558294616,
+          "ci_width_log10": 2.1081088595812245,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1984,17 +1992,17 @@
           "measured_ppb": 3.29,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 15.69266137305661,
-          "predicted_p5": 0.595669852094444,
-          "predicted_p50": 5.518567974973772,
-          "predicted_p95": 76.40371502751624,
-          "predicted_point": 12.015186836403757,
-          "predicted_std": 25.406360848317135,
+          "predicted_mean": 15.692661334268156,
+          "predicted_p5": 0.5956698470089532,
+          "predicted_p50": 5.518568053182287,
+          "predicted_p95": 76.40371503525763,
+          "predicted_point": 12.015187206643871,
+          "predicted_std": 25.40636064869492,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.77193641131374,
+          "ci_width_log10": 2.7719364245956877,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -2004,12 +2012,12 @@
           "measured_ppb": 1.46,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 90.0612948298708,
-          "predicted_p5": 0.6206383295643582,
-          "predicted_p50": 19.016801437900998,
-          "predicted_p95": 367.09207151444303,
-          "predicted_point": 246.54230592010032,
-          "predicted_std": 218.5623974485294,
+          "predicted_mean": 90.06129479637976,
+          "predicted_p5": 0.6206383138364673,
+          "predicted_p50": 19.016801370936815,
+          "predicted_p95": 367.09207343849727,
+          "predicted_point": 246.54231029249232,
+          "predicted_std": 218.56239572259236,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -2036,7 +2044,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.5739178369638618,
+          "ci_width_log10": 1.573917814373042,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -2046,17 +2054,17 @@
           "measured_ppb": 2.4,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 14.064858355518265,
-          "predicted_p5": 1.3893133645968663,
-          "predicted_p50": 7.672264072782317,
-          "predicted_p95": 52.085645459171126,
-          "predicted_point": 12.859461265417423,
-          "predicted_std": 17.112093248085444,
+          "predicted_mean": 14.064858365161276,
+          "predicted_p5": 1.3893134535687377,
+          "predicted_p50": 7.672264346973642,
+          "predicted_p95": 52.085646085391026,
+          "predicted_point": 12.859461293680834,
+          "predicted_std": 17.112092890090388,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.2361815738659465,
+          "ci_width_log10": 2.23618154711253,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -2066,12 +2074,12 @@
           "measured_ppb": 1.68,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 63.5720942884446,
-          "predicted_p5": 1.6581572724043725,
-          "predicted_p50": 23.994593886947108,
-          "predicted_p95": 285.6322848086159,
-          "predicted_point": 167.26635837441702,
-          "predicted_std": 113.79251048283622,
+          "predicted_mean": 63.57209464670074,
+          "predicted_p5": 1.658157335544285,
+          "predicted_p50": 23.994598912157986,
+          "predicted_p95": 285.6322780895001,
+          "predicted_point": 167.26634676749305,
+          "predicted_std": 113.79250775951431,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -2098,7 +2106,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.1452112691854963,
+          "ci_width_log10": 1.1452112629385955,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -2108,17 +2116,17 @@
           "measured_ppb": 1.71,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 13.06538345111985,
-          "predicted_p5": 2.5270288136527546,
-          "predicted_p50": 9.590361479268186,
-          "predicted_p95": 35.303800725200055,
-          "predicted_point": 12.681291393120274,
-          "predicted_std": 11.526453872249734,
+          "predicted_mean": 13.065383488526649,
+          "predicted_p5": 2.5270289563582327,
+          "predicted_p50": 9.590361576084026,
+          "predicted_p95": 35.303802211053174,
+          "predicted_point": 12.681292014348603,
+          "predicted_std": 11.526454000708142,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.8009658744445343,
+          "ci_width_log10": 1.8009658578384977,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -2128,12 +2136,12 @@
           "measured_ppb": 1.62,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 41.58627972102528,
-          "predicted_p5": 2.625706307862465,
-          "predicted_p50": 23.393734646840127,
-          "predicted_p95": 166.03973131675704,
-          "predicted_point": 96.09786516381412,
-          "predicted_std": 55.685172295016976,
+          "predicted_mean": 41.58627970391496,
+          "predicted_p5": 2.6257065730311444,
+          "predicted_p50": 23.393737293981076,
+          "predicted_p95": 166.03974173619036,
+          "predicted_point": 96.0978747403154,
+          "predicted_std": 55.68517211128967,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -2160,7 +2168,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.1731368791967958,
+          "ci_width_log10": 2.1731368807625127,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -2170,17 +2178,17 @@
           "measured_ppb": 22.63,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 1.0160453387218973,
-          "predicted_p5": 0.022507218951667563,
-          "predicted_p50": 0.3359553570193123,
-          "predicted_p95": 3.353194267234251,
-          "predicted_point": 0.5097743007625314,
-          "predicted_std": 2.6481835712086284,
+          "predicted_mean": 1.0160453390998327,
+          "predicted_p5": 0.02250721860779517,
+          "predicted_p50": 0.33595535229560813,
+          "predicted_p95": 3.3531942280920126,
+          "predicted_point": 0.5097742997445959,
+          "predicted_std": 2.6481834775793582,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.6538735091769583,
+          "ci_width_log10": 2.65387340572683,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -2190,17 +2198,17 @@
           "measured_ppb": 0.29,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 1.5223746615985212,
-          "predicted_p5": 0.013975867262996891,
-          "predicted_p50": 0.4055176568243274,
-          "predicted_p95": 6.298719616280049,
-          "predicted_point": 2.4144238778564135,
-          "predicted_std": 3.677295484510137,
+          "predicted_mean": 1.5223746638336575,
+          "predicted_p5": 0.013975868384265434,
+          "predicted_p50": 0.40551770469656606,
+          "predicted_p95": 6.298718621247323,
+          "predicted_point": 2.4144238888040057,
+          "predicted_std": 3.6772954046705824,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 3.577262800839767,
+          "ci_width_log10": 3.577262734307023,
           "compound": "Bis(2-methyl-3-furyl) disulfide",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -2210,17 +2218,17 @@
           "measured_ppb": 18.25,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 0.003963821669027418,
-          "predicted_p5": 2.914197432731923e-06,
-          "predicted_p50": 0.00019529000172891086,
-          "predicted_p95": 0.011009859379692195,
-          "predicted_point": 0.0006363094342419775,
-          "predicted_std": 0.01844852245919561,
+          "predicted_mean": 0.0039638215841531635,
+          "predicted_p5": 2.9141978656071483e-06,
+          "predicted_p50": 0.0001952900269838426,
+          "predicted_p95": 0.011009859328417072,
+          "predicted_point": 0.0006363094359933459,
+          "predicted_std": 0.018448521060120477,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.9994652298618523,
+          "ci_width_log10": 1.9994652444923506,
           "compound": "2-Acetylthiazole",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -2230,12 +2238,12 @@
           "measured_ppb": 114.13,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 0.1220628233461952,
-          "predicted_p5": 0.0045522677487107675,
-          "predicted_p50": 0.04902558883055311,
-          "predicted_p95": 0.45466657464862775,
-          "predicted_point": 0.06495568483960075,
-          "predicted_std": 0.27620348096362296,
+          "predicted_mean": 0.1220628224065727,
+          "predicted_p5": 0.004552268289753977,
+          "predicted_p50": 0.04902559117723297,
+          "predicted_p95": 0.45466664400316287,
+          "predicted_point": 0.06495568477187712,
+          "predicted_std": 0.2762034644215473,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -2281,7 +2289,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "external_matrix",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         },
         {
           "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
@@ -2289,7 +2297,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "external_matrix",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         }
       ],
       "signal_origin": "external_literature"
@@ -2300,7 +2308,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.237364570380778,
+          "ci_width_log10": 2.213664646648351,
           "compound": "hexanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -2310,12 +2318,12 @@
           "measured_ppb": 324.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 288.4848285356458,
-          "predicted_p5": 9.239726789462761,
-          "predicted_p50": 109.68906953074493,
-          "predicted_p95": 1595.9662390814685,
+          "predicted_mean": 286.16377426313375,
+          "predicted_p5": 9.227638517281003,
+          "predicted_p50": 105.94214183945367,
+          "predicted_p95": 1509.229271723317,
           "predicted_point": 109.48984853623236,
-          "predicted_std": 500.16894664365975,
+          "predicted_std": 497.600272431418,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -2367,7 +2375,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.1858155498925895,
+          "ci_width_log10": 2.7429759675821193,
           "compound": "2-pentylfuran",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -2377,17 +2385,17 @@
           "measured_ppb": 5625.8,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 36.47505106316241,
-          "predicted_p5": 1.1154839756827362,
-          "predicted_p50": 13.018881752236128,
-          "predicted_p95": 171.11137681091438,
+          "predicted_mean": 28.389123667932626,
+          "predicted_p5": 0.2729303921263844,
+          "predicted_p50": 7.776027505744938,
+          "predicted_p95": 151.01770524069443,
           "predicted_point": 15.387486467996423,
-          "predicted_std": 65.97397172225031,
+          "predicted_std": 56.08569672220636,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.185617303140786,
+          "ci_width_log10": 2.7449488107649658,
           "compound": "hexanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -2397,17 +2405,17 @@
           "measured_ppb": 605.6,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 166.49860845983528,
-          "predicted_p5": 5.084300338193507,
-          "predicted_p50": 59.299104720332686,
-          "predicted_p95": 779.5581212674081,
+          "predicted_mean": 129.5994591513624,
+          "predicted_p5": 1.2420930740593907,
+          "predicted_p50": 35.47146886709869,
+          "predicted_p95": 690.4034468234443,
           "predicted_point": 70.26358393092545,
-          "predicted_std": 301.11351050037973,
+          "predicted_std": 255.94273329756876,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.1858155498925895,
+          "ci_width_log10": 2.7429759675821193,
           "compound": "nonanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -2417,12 +2425,12 @@
           "measured_ppb": 74.37,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 56.61843097355777,
-          "predicted_p5": 1.731511009263191,
-          "predicted_p50": 20.208570964451013,
-          "predicted_p95": 265.6077892799317,
+          "predicted_mean": 44.067042867445416,
+          "predicted_p5": 0.4236564478123579,
+          "predicted_p50": 12.070345722617748,
+          "predicted_p95": 234.41736942736514,
           "predicted_point": 23.885239774885036,
-          "predicted_std": 102.40815722339457,
+          "predicted_std": 87.05907341901387,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -2477,7 +2485,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "external_matrix",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         },
         {
           "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
@@ -2485,7 +2493,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "external_matrix",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         }
       ],
       "signal_origin": "external_literature"
@@ -3536,8 +3544,8 @@
     },
     {
       "band": [
-        -4.63,
-        -1.96
+        -5.640268012936541,
+        -2.9722011029718454
       ],
       "centre": -5.640268012936541,
       "distribution": "uniform_band",
@@ -3547,7 +3555,7 @@
       "reason": "two_laboratories_disagree: flat across the disagreement",
       "sampled": true,
       "sigma": null,
-      "source": "ENV-B13 declared band: the 466x disagreement at 160 C, expressed at 100 C on the shipped barrier. The two credible intervals do not come within two decades of each other.",
+      "source": "ENV-B13 declared band: the 466x disagreement at 160 C, expressed at 100 C on the shipped barrier: from the shipped value to the second laboratory's. The two credible intervals do not come within two decades of each other.",
       "unit": "log10(k at 100 C)"
     },
     {
@@ -3879,8 +3887,8 @@
     },
     {
       "band": [
-        2.0,
-        3.0
+        1.6,
+        3.3
       ],
       "centre": 2.449489742783178,
       "distribution": "uniform",
@@ -4681,12 +4689,12 @@
   "provenance": {
     "artifact": "core_prediction_uncertainty",
     "generated_by": "src/kinetic_core/uncertainty.py",
-    "generated_on": "2026-10-28",
+    "generated_on": "2026-10-29",
     "git": {
-      "branch": "b58-ttca-formation",
-      "commit": "4a72c92d730b8bb95bb4c4f716581c206ba72bcc",
-      "dirty": true,
-      "short": "4a72c92d"
+      "branch": "sulfur-route-and-tooling",
+      "commit": "157e38dc56819be52104abf7cec5a5217acfdf33",
+      "dirty": false,
+      "short": "157e38dc"
     },
     "inputs": [
       {
@@ -4723,43 +4731,43 @@
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
-        "sha256": "4a8b51d4fd20e0972287ce5fb104960f85db554bdbcb5f72e33f03b6e1f73d28"
+        "sha256": "209b919184ef733f2fa333d93e325edcf53400e9bbdccb7cdd34f70116e7b300"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json",
-        "sha256": "8f75ba262c8f1758826eb640c195afc168fd59e64cd41be5feb0d603c15d0fb8"
+        "sha256": "aa0a88ce55d867cb2b615da8fe01b09c81d360f6732999650c5f104ce9e0c3ed"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH7.json",
-        "sha256": "4f6ad7c8c5b13a87027cfe4b0c360fed9b12c2234845b9323c400a16ba3b90ca"
+        "sha256": "900e421a1f9fde12f604feabf7bd1e401b736e583f8ae9d4f7d02f37630b571c"
       },
       {
         "path": "data/benchmarks/hofmann1998_fructose_cysteine_145C_20min_pH5.json",
-        "sha256": "e04894958074e4f6b405060fe628cde405d104bce9c086d6ab4be78f49158fbe"
+        "sha256": "fbe59d5fe3f012d14d7d60101cca781f3620158f3d5e8744040f5eb805fca873"
       },
       {
         "path": "data/benchmarks/hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json",
-        "sha256": "daa2ceb2b740bca4999afa314b70fac9c0207d94cf01dad0cc981514d9be46fc"
+        "sha256": "58812b0e8cff33700726097bbf1f7241b4167d4154258d6f2309137b9196a294"
       },
       {
         "path": "data/benchmarks/hofmann1998_glucose_cysteine_145C_20min_pH5.json",
-        "sha256": "bbe95f2aa67fc59ed06811b36e60b30711b23a9356b0abfb3a6db8f219560b02"
+        "sha256": "8814f07a3d27d1f2fee64f1ef1d3180fc334939da8264136065b9fd5f307ce75"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json",
-        "sha256": "3a4fe5e0632f7a0b3062d813a7bd8dbce6942b82fe3f36abaa20d30a11a76d8e"
+        "sha256": "5e84d125fca3ddba5562a0fbf191fef1736caafc344553af7e56ba865310da29"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_h2s_145C_20min_pH5.json",
-        "sha256": "7be03951d06fc7b390ed55d7792578673df94156fb673913b055db9a4b0ea588"
+        "sha256": "6178461ca0d6ba0d8daf8d7e04fc74bfd09a078ef03a19f811eb03ed12ea29e0"
       },
       {
         "path": "data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json",
-        "sha256": "6cb47d5c81a3ba173f06e5303b53ba3315b04e8158614d62af9677401319900c"
+        "sha256": "d5da9cb0162ef4ef95323f36df915f16db726790bc8528ebea6b0a7d3ffb6e8b"
       },
       {
         "path": "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
-        "sha256": "b866f20aa19561afa25bbe77a49d1d4d98cf1dd3c1e00113f39ec0455ee055fe"
+        "sha256": "bffb432fa07d439209759f54050e92a9289376378519e14f6e63c8c0482374ff"
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
@@ -4771,7 +4779,7 @@
       },
       {
         "path": "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
-        "sha256": "b37999aa49e8753c6b7af94024e152300c71c5b4a773e25d813e3ed8226c86e7"
+        "sha256": "ed985737a4d5b737fec35aa17144d9a09a2d6638d987417a292256e00925c2ee"
       },
       {
         "path": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
@@ -4827,23 +4835,23 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
-        "sha256": "3bd440ee7f86492ded7609ea9cdf62fa109178a2ec87c5a4e8f5f787646ad4ed"
+        "sha256": "0cf61b4440ac16a61584679e416799e04ea18afb0db243563819f396b16292f1"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7.json",
-        "sha256": "af1adbd38b4e055579bb5304860b7ad9fc16345d20c954183dcf7e78c13b61c0"
+        "sha256": "e6a86e6c56ba9e66d8e570489e48b9e746dc805bbbef53bb6f1f197841d1797e"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3.json",
-        "sha256": "63cfc172d57e28c02d11c719a8880cdad2dd01789bf34aa51a2c0f3354b379f1"
+        "sha256": "d42b4a7bc2ecbce337a26f2f8afc71e368dfb2f507332a672f02de05eb5e2b70"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json",
-        "sha256": "edd2b24080574d112ed271161472ec0f903f145946f450e65cdd890bd3c9521a"
+        "sha256": "8b102d687e68c22bdf7d38e57928a9910c433d54759c5569eac2c896b8b38ca6"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
-        "sha256": "0d216cda3fe110c1ca452e944f8846836cbe675079fad8057d9f2a5a4f203f86"
+        "sha256": "e22a60b9a78e540be1e0fee015402574e431582da8fe900bd251a98d5a52af17"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
@@ -4867,7 +4875,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
-        "sha256": "8c3c3b02959de5bfc9c610702529bc659cb5bd157924b11f7f7d657ea342fa69"
+        "sha256": "c0f6a346a575da3c92749d3a4d326951ecbbda96717feeb112aa4ee809a2c87d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
@@ -4879,7 +4887,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
-        "sha256": "f76c219e8d8ee4c90102d8c3f838fdb9f49c685b41f622c70639f770eae4814e"
+        "sha256": "bbbbc168b31eaebc461341bad8e2ae3d8e4b69393027b70114f0fdd330f6dd4c"
       }
     ]
   },
@@ -4938,7 +4946,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -4946,7 +4954,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -4978,7 +4986,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -4986,7 +4994,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
@@ -5042,7 +5050,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "external_matrix",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
@@ -5050,7 +5058,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "external_matrix",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
       "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -5090,7 +5098,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "external_matrix",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
@@ -5098,7 +5106,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "external_matrix",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     }
   ],
   "skipped_bundles": [
@@ -5126,7 +5134,7 @@
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
       "hits": 36,
-      "median_ci_width_log10": 1.8693793417285811,
+      "median_ci_width_log10": 1.8693792573471626,
       "not_evaluable": 1,
       "rate": 0.5538461538461539,
       "total": 65
@@ -5144,35 +5152,35 @@
     },
     "out_of_sample_literature_coverage": {
       "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
-      "hits": 33,
+      "hits": 29,
       "not_evaluable": 1,
       "rows_the_core_fit_read": {
-        "hits": 3,
+        "hits": 7,
         "not_evaluable": 0,
-        "total": 6
+        "total": 10
       },
-      "total": 59
+      "total": 55
     },
     "panel_benchmark_count": 42,
     "panel_split": {
       "external_matrix": {
         "ci_coverage_rate": 0.75,
         "hits": 3,
-        "median_ci_width_log10": 2.1858155498925895,
+        "median_ci_width_log10": 2.7429759675821193,
         "not_evaluable": 0,
         "total": 4
       },
       "maillard_path_holdout": {
         "ci_coverage_rate": 0.5,
         "hits": 23,
-        "median_ci_width_log10": 2.005832482936736,
+        "median_ci_width_log10": 2.0058324897865987,
         "not_evaluable": 1,
         "total": 46
       },
       "trust_loop": {
         "ci_coverage_rate": 0.6666666666666666,
         "hits": 10,
-        "median_ci_width_log10": 1.2974780550432028,
+        "median_ci_width_log10": 1.2974780550227984,
         "not_evaluable": 0,
         "total": 15
       }
@@ -5210,7 +5218,7 @@
       "external_literature": {
         "ci_coverage_rate": 0.5538461538461539,
         "hits": 36,
-        "median_ci_width_log10": 1.8693793417285811,
+        "median_ci_width_log10": 1.8693792573471626,
         "not_evaluable": 1,
         "total": 65
       },
@@ -5222,11 +5230,11 @@
         "total": 0
       },
       "in_core_fit": {
-        "ci_coverage_rate": 0.5,
-        "hits": 3,
-        "median_ci_width_log10": 0.4479378884908808,
+        "ci_coverage_rate": 0.7,
+        "hits": 7,
+        "median_ci_width_log10": 0.6851789272046495,
         "not_evaluable": 0,
-        "total": 6
+        "total": 10
       },
       "internal_synthetic": {
         "ci_coverage_rate": null,
@@ -5254,7 +5262,7 @@
       "reduced_chi_square": 1.8711697851956615
     },
     "unsampled_lanes": [],
-    "wall_seconds": 5142.2,
+    "wall_seconds": 3795.0,
     "workers": 6
   }
 }

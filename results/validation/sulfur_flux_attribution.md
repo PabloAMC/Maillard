@@ -119,7 +119,7 @@ Evidence grounding of the flux: bounded 0%, fitted 100%, measured 0% (step grade
 | --- | --- | --- | --- |
 | Cys | 42.1 | — | r_dpo_ddp [f] 88%, r_cys_thermal [f] 12%, r_cys_h2s [m] 0% |
 | PENT | 0 | — | r_pent_tdp [f] 74%, r_pent_dpo [f] 26%, r_pent_caramel [f] 0% |
-| DPO | 4.15e-24 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_ddp [f] 82%, r_dpo_nf [f] 18%, r_osone_decay_dpo [f] 0% |
+| DPO | 4.38e-24 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_ddp [f] 82%, r_dpo_nf [f] 18%, r_osone_decay_dpo [f] 0% |
 | TDP | 119 | r_pent_tdp [f] 100%, r_pent_caramel [f] 0% | r_osone_decay_tdp [f] 87%, r_tdp_fur [f] 13% |
 | DDP | 34.8 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% |
 | NF | 7.98 | r_dpo_nf [f] 100% | r_nf_decay [f] 79%, r_nf_mft [f] 20%, r_nf_mp3p [f] 1% |
@@ -139,7 +139,7 @@ Evidence grounding of the flux: bounded 0%, fitted 100%, measured 0% (step grade
 | species | final mM | made by (share) | used by (share) |
 | --- | --- | --- | --- |
 | Cys | 3.2 | — | r_dpo_ddp [f] 97%, r_cys_thermal [f] 3%, r_cys_h2s [m] 0% |
-| PENT | 1.23e-23 | — | r_pent_dpo [f] 90%, r_pent_tdp [f] 10%, r_pent_caramel [f] 0% |
+| PENT | 2.03e-22 | — | r_pent_dpo [f] 90%, r_pent_tdp [f] 10%, r_pent_caramel [f] 0% |
 | DPO | 0 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_ddp [f] 94%, r_dpo_nf [f] 6%, r_osone_decay_dpo [f] 0% |
 | TDP | 1.76 | r_pent_tdp [f] 100%, r_pent_caramel [f] 0% | r_osone_decay_tdp [f] 98%, r_tdp_fur [f] 2% |
 | DDP | 15.7 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% |
@@ -161,7 +161,7 @@ Evidence grounding of the flux: bounded 0%, fitted 98%, measured 2% (step grades
 | --- | --- | --- | --- |
 | Cys | 7.56 | — | r_cys_thermal [f] 65%, r_dpo_ddp [f] 19%, r_cys_h2s [m] 16% |
 | PENT | 0 | — | r_pent_tdp [f] 90%, r_pent_dpo [f] 10%, r_pent_caramel [f] 0% |
-| DPO | 5.68e-38 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_nf [f] 51%, r_dpo_ddp [f] 48%, r_osone_decay_dpo [f] 1% |
+| DPO | 5.64e-38 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_nf [f] 51%, r_dpo_ddp [f] 48%, r_osone_decay_dpo [f] 1% |
 | TDP | 2.57 | r_pent_tdp [f] 100%, r_pent_caramel [f] 0% | r_osone_decay_tdp [f] 99%, r_tdp_fur [f] 1% |
 | DDP | 0.134 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% |
 | NF | 0.444 | r_dpo_nf [f] 100% | r_nf_decay [f] 94%, r_nf_mft [f] 6%, r_nf_mp3p [f] 0% |

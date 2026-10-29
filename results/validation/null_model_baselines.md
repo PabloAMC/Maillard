@@ -27,8 +27,8 @@ which the engine never read. That asymmetry favours the baseline, so a win for t
 
 | model | rows | within 3x | median fold |
 | --- | --- | --- | --- |
-| engine | 44 | 11 | 8.88x |
-| typical yield | 44 | 15 | 10.43x |
+| engine | 40 | 8 | 11.53x |
+| typical yield | 40 | 15 | 8.11x |
 
 ## By lane (all ppb rows)
 

@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **590**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **594**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -62,6 +62,8 @@ Literature-derived constants, priors, reference payloads and the intake registri
 | `reaction_rules.yml` | The hypothesis layer's reaction rules: one SMIRKS per literature-described transformation with its dossier anchor, conditions and positive/negative controls (`src/network_hypotheses`); the engine never reads it. |
 | `retention_reference_payloads.json` | Volatile retention/release records per protein, incl. withdrawn (`unsourced_withdrawn`) rows; `src/headspace.py`, `literature_runtime`. |
 | `safety_reference_payloads.json` | 43 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`. |
+
+1 files covered by the directory description above: `source_verification.yml`
 
 ## `data/protocols`
 
@@ -126,7 +128,7 @@ Verified rows the network cannot execute (see README there); kept off the panel 
 
 Per-paper extraction records (verbatim quotes, digitised tables, unit reconciliations) cited as provenance strings by `src/kinetic_core/`. `k*_` and `research_round*` files are cross-paper syntheses.
 
-444 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `almhofer2022_extraction.md`, `ames2001_extraction.md`, `amranihemaimi1995_extraction.md`, `anantharamkrishnan2020_extraction.md` …
+447 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `almhofer2022_extraction.md`, `ames2001_extraction.md`, `amranihemaimi1995_extraction.md`, `anantharamkrishnan2020_extraction.md` …
 
 ## `data/lit/measurement_ledger`
 

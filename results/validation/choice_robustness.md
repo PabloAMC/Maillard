@@ -25,6 +25,11 @@ sweeps them. Writes results/validation/choice_robustness.{json,md}.
 | CR-08 | not_applicable |
 | CR-09 | not_applicable |
 | CR-10 | harmless |
+| CR-11 | untested |
+| CR-12 | untested |
+| CR-13 | untested |
+| CR-14 | untested |
+| CR-15 | untested |
 
 ## CR-05
 

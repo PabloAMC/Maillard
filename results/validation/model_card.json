@@ -6,10 +6,10 @@
     "literature_hits": 36,
     "literature_not_evaluable": 1,
     "literature_total": 65,
-    "median_ci_width_log10": 1.8693793417285811,
+    "median_ci_width_log10": 1.8693792573471626,
     "n_samples": 200,
-    "out_of_sample_hits": 33,
-    "out_of_sample_total": 59,
+    "out_of_sample_hits": 29,
+    "out_of_sample_total": 55,
     "path": "results/validation/core_prediction_uncertainty.json",
     "seed": 0,
     "unsampled_lanes": []
@@ -201,7 +201,7 @@
   ],
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
-    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 21/66 rows within 3x (median fold error 7.87x, worst 2.87e+04x); out of sample -- every row a core fit read removed -- 14/56 (median 11.8x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 36/65 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 33/59 out of sample.",
+    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 21/66 rows within 3x (median fold error 7.87x, worst 2.87e+04x); out of sample -- every row a core fit read removed -- 14/56 (median 11.8x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 36/65 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 29/55 out of sample.",
     "**Directional and ranking claims are the product, and on the kinetic core they score 20/33 on strictly independent literature claims** (42 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 14/22 once pH and water activity are set aside, and 6/11 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model lands 5 of its 7 scored anchor rows within 3x (0 of the 0 that no core fit read; the rest are fed-intermediate rows the sulfur fit read, which are not evidence).** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998, two values derived inside the repository, never measured) was deleted on 2026-10-27. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
@@ -330,14 +330,14 @@
   "usefulness_bar": {
     "baseline_oos": {
       "constant": 15,
-      "engine": 11
+      "engine": 8
     },
     "baseline_oos_median": {
-      "constant": 10.428390128008889,
-      "engine": 8.879977171454103
+      "constant": 8.111783610640062,
+      "engine": 11.534986507303264
     },
     "contrasts_oos": {
-      "engine_dex": 0.30763274104158156,
+      "engine_dex": 0.3076327489342042,
       "no_change_dex": 0.2841997875578205,
       "pairs": 37,
       "studies": 5
@@ -383,7 +383,7 @@
     {
       "basis": "results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty",
       "claim_type": "Absolute concentration interval (90% CI)",
-      "evidence": "36/65 evaluable literature rows inside; 33/59 out of sample; 1 not evaluable",
+      "evidence": "36/65 evaluable literature rows inside; 29/55 out of sample; 1 not evaluable",
       "system_class": "every lane with sampled uncertainty",
       "verdict": "do-not-use"
     },
