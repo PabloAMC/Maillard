@@ -367,6 +367,13 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
     Species("GSH", "glutathione (gamma-glutamyl-cysteinyl-glycine)", 10, 3, "reactant", True, sulfur=1,
             note=("2026-10-27. A sulfide source only: H2S release measured by Zheng & Ho 1994 (Table III). "
                   "Its amine, its peptide release and its charge are not modelled.")),
+    Species("CAMA", "cysteine Amadori compound (N-(1-deoxy-D-pentulos-1-yl)-L-cysteine)", 8, 1, "intermediate", True,
+            sulfur=1,
+            note=("B59b (2026-10-29). The slow gate of de Roos 2005's pathway: the cysteine-pentose Schiff base "
+                  "(in fast equilibrium with TTCA) rearranges to it, and its enolisation gives the deoxyosones AND "
+                  "RELEASES THE CYSTEINE. Measured over 0.5-5 h at 90 C by Cao 2017 and Zhao 2017 (0.006 -> 0.133 "
+                  "mol/L from 0.4 M Cys + Xyl). Distinct from ARP, the alanine Amadori compound of Zhou 2023. "
+                  "Appended last, so every existing index is unchanged.")),
 )
 
 #: The concatenated table. B1's entries first, in B1's order, so trunk indices
@@ -451,6 +458,7 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "THI": 337.27,    # thiamine hydrochloride, as Zhang 2024 weighs it
     "H2S": 34.08,
     "GSH": 307.32,    # C10H17N3O6S
+    "CAMA": 253.27,   # C8H15NO6S, an isomer of TTCA (L-cysteine + D-pentose - H2O)
     "DPO": 130.10,    # C5H8O4
     "TDP": 130.10,
     "DDP": 114.10,    # C5H6O3

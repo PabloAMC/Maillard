@@ -66,6 +66,7 @@ GATES = (
     "scripts/ci/citation_gate.py",
     "scripts/ci/fit_target_gate.py",
     "scripts/ci/dossier_coverage_gate.py",
+    "scripts/ci/choices_register_gate.py",
 )
 
 README_BEGIN = "<!-- BEGIN GENERATED: model-card -->"
@@ -99,6 +100,60 @@ def _read_json(path: Path) -> Optional[Dict[str, Any]]:
         return json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return None
+
+
+#: North star C2 / decision D7 (owner, 2026-10-28): the usefulness bar, checked at the designed-data checkpoint.
+USEFULNESS_OOS_WITHIN_3X = 0.40
+USEFULNESS_DIRECTIONAL = 0.65
+#: Independent evaluable claims needed to tell 65 % from 50 % (one-sided alpha 0.05, power 0.80): n =
+#: ((1.645 sqrt(.25) + 0.842 sqrt(.65 x .35)) / 0.15)^2 = 66.6.
+USEFULNESS_MIN_CLAIMS = 67
+
+
+def collect_usefulness_bar(card: Mapping[str, Any]) -> Dict[str, Any]:
+    """Where the model stands against the declared bar, from the card's own numbers and two tracked artifacts."""
+    panel = card.get("core_panel") or {}
+    directional = card.get("directional") or {}
+    null = _read_json(data_paths.VALIDATION_DIR / "null_model_baselines.json") or {}
+    contrasts = _read_json(data_paths.VALIDATION_DIR / "contrast_scores.json") or {}
+    oos = null.get("scores", {}).get("out_of_sample", {})
+    agree, evaluable = (directional.get("headline") or (None, None))[:2]
+    c = contrasts.get("scores", {}).get("out_of_sample", {})
+    return {
+        "oos_within_3x": (panel.get("out_of_sample_within_band"), panel.get("out_of_sample_rows")),
+        "baseline_oos": ({k: oos[k]["within_3x"] for k in ("engine", "constant")} if oos else None),
+        "baseline_oos_median": ({k: oos[k]["median_fold"] for k in ("engine", "constant")} if oos else None),
+        "directional": (agree, evaluable),
+        "contrasts_oos": ({"pairs": c.get("pairs"), "studies": c.get("studies"),
+                           "engine_dex": c["engine"]["median_error_dex"],
+                           "no_change_dex": c["no_change"]["median_error_dex"]} if c.get("pairs") else None),
+    }
+
+
+def _usefulness_lines(bar: Mapping[str, Any]) -> List[str]:
+    hits, rows = bar.get("oos_within_3x") or (None, None)
+    lines = [f"**Usefulness bar** (owner, 2026-10-28; checked once the designed data are in): out of sample "
+             f">= {USEFULNESS_OOS_WITHIN_3X:.0%} within 3x AND beating the typical-yield baseline; >= "
+             f"{USEFULNESS_DIRECTIONAL:.0%} on independent directional claims, judged on >= {USEFULNESS_MIN_CLAIMS} "
+             "of them (fewer cannot tell 65 % from chance)."]
+    if hits is not None and rows:
+        base = bar.get("baseline_oos")
+        med = bar.get("baseline_oos_median")
+        beat = (f"; the typical-yield baseline lands {base['constant']} on its rows against the engine's "
+                f"{base['engine']} (median {med['constant']:.1f}x vs {med['engine']:.1f}x)" if base else "")
+        lines.append(f"- Out of sample: {hits}/{rows} within 3x ({hits / rows:.0%}){beat}. "
+                     f"**{'MET' if hits / rows >= USEFULNESS_OOS_WITHIN_3X and base and base['engine'] > base['constant'] else 'NOT MET'}.**")
+    agree, evaluable = bar.get("directional") or (None, None)
+    if evaluable:
+        verdict = ("NOT ESTABLISHED (too few claims)" if evaluable < USEFULNESS_MIN_CLAIMS
+                   else ("MET" if agree / evaluable >= USEFULNESS_DIRECTIONAL else "NOT MET"))
+        lines.append(f"- Directional: {agree}/{evaluable} ({agree / evaluable:.0%}). **{verdict}.**")
+    c = bar.get("contrasts_oos")
+    if c:
+        lines.append(f"- Within-study contrasts out of sample (a diagnostic, not part of the bar): median error "
+                     f"{c['engine_dex']:.2f} dex against {c['no_change_dex']:.2f} for predicting no change, "
+                     f"{c['pairs']} pairs in {c['studies']} studies (`results/validation/contrast_scores.md`).")
+    return lines
 
 
 def collect_directional() -> Dict[str, Any]:
@@ -431,6 +486,7 @@ def build_model_card(*, run_gate_checks: bool = True) -> Dict[str, Any]:
         "gates": run_gates() if run_gate_checks else [],
     }
     card["headline_sentences"] = _headline_sentences(card)
+    card["usefulness_bar"] = collect_usefulness_bar(card)
     card["validity_domain"] = _validity_domain(card)
     return card
 
@@ -703,6 +759,9 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
     lines.append("")
     for sentence in card.get("headline_sentences", []):
         lines.append(f"1. {sentence}" if False else f"- {sentence}")
+    if card.get("usefulness_bar"):
+        lines.append("")
+        lines.extend(_usefulness_lines(card["usefulness_bar"]))
     exposed = card.get("exposed_assumptions") or []
     if exposed:
         lines.append("")

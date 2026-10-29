@@ -1,0 +1,229 @@
+# The register of choices: every number or decision in the model that is NOT a measurement.
+#
+# Owner, 2026-10-28: "I am worried about these and other arbitrary decisions ... I'd prefer to avoid arbitrary
+# choices." Each entry answers three questions in order, and its `kind` records which answer applied:
+#   fact         -- the question is answered by something a source records. Record the fact and read it.
+#                   No number decides it.
+#   alternatives -- the evidence offers two or more measured or stated readings and does not settle between
+#                   them. Every alternative is carried and the headlines are reported under each; a
+#                   measurement, not a score, retires one.
+#   cutoff       -- the physics or the statistics needs a number that no source supplies (a tolerance, a
+#                   reporting band). It is swept, and `sensitivity` says whether any headline depends on it.
+#   policy       -- an owner decision about what the product claims (a usefulness bar). Not a model choice;
+#                   recorded so it is visible.
+# `sensitivity.status`: untested | harmless (no headline moves across the alternatives) | moves_headline
+# (a headline moves: the result is reported as unresolved, with every value) | not_applicable (fact, policy).
+# Checked by scripts/ci/choices_register_gate.py; swept by scripts/generators/build_choice_robustness.py
+# (results/validation/choice_robustness.md).
+
+entries:
+  - id: CR-01
+    what: which pots count as never cooked (their lipid rows refused)
+    where: {file: src/kinetic_core/engine.py, symbol: 'closure == "never heated"'}
+    kind: fact
+    current: the four bundles whose source states the material was never heated carry closure 'never heated'
+    basis: >-
+      Each source's own words (Pratap-Singh 2021 x2, Bi 2020 raw, Liu 2023 baseline), quoted in the vessel
+      provenance notes. Replaced on 2026-10-28 a rule that needed a 1 % decomposition threshold and the lipid
+      lane's unmeasured temperature law (B31); the same rows are refused.
+    alternatives: []
+    decided_by: owner, 2026-10-28 ("avoid arbitrary choices")
+    sensitivity: {status: not_applicable}
+
+  - id: CR-02
+    what: the lipid lane's temperature law (hydroperoxide decomposition, 25 C anchor to cooking temperature)
+    where: {file: src/kinetic_core/parameters_lipid.py, symbol: Q10_ASSUMPTION}
+    kind: alternatives
+    current: point Q10 2.449 (the anchor authors' prose 2-3); envelope band 1.6-3.3
+    basis: >-
+      Two measurements in other matrices, which disagree: Tazi 2009 (almond paste, 60-120 C) Q10 1.6-1.9 once
+      moist (aw 0.57-0.72), 2.4-3.3 when dry (aw 0.38); Frankel 1993 (bulk n-6 oils, hexanal, 130-160 C)
+      113.8-122.2 kJ/mol, about Q10 3.2 averaged from the 25 C anchor. Which transfers to a hot, moist
+      protein pot is not measured.
+    alternatives:
+      - {name: moist_matrix, value: 1.6, source: "Tazi 2009 Table 1, aw 0.72"}
+      - {name: centre, value: 2.449, source: "Schroen & Berton-Carabin 2022 prose (current point)"}
+      - {name: bulk_oil, value: 3.3, source: "Frankel 1993 Table 3 read from the 25 C anchor; Tazi aw 0.38"}
+    decided_by: open
+    sensitivity:
+      status: moves_headline
+      result: "out of sample within 3x 12 / 14 / 13 of 56 (moist / centre / bulk oil); lipid lane 3 / 5 / 4; median fold 21.1x / 11.8x / 11.8x (results/validation/choice_robustness.md)"
+      remedy: "unresolved; lipid answers are reported under both measured laws and the matrix's own Q10 is routed to the experiment ranking. The point stays at the centre only as a declared placeholder, never quoted alone"
+
+  - id: CR-03
+    what: what Hofmann & Schieberle 1998's "20 min at 145 C" means as a thermal history
+    where: {file: scripts/generators/generate_kinetic_core_b64_fit.py, symbol: READINGS}
+    kind: alternatives
+    current: both readings refitted (B64); until B64 ships, the engine runs the isothermal reading
+    basis: >-
+      The same laboratory, pot and autoclave are run "by raising the temperature within 20 min from 20 to
+      145 C" (Hofmann 1995, 1997); 1998 writes "20 min at 145 C"; no paper states a hold. A measurement that
+      can discriminate: Schieberle 2000 Table IV, the same charge in the same autoclave at 100 C over 6 h.
+    alternatives:
+      - {name: ramp_only, source: "Hofmann 1995 p. 2; 1997 p. 901"}
+      - {name: ramp_plus_hold, source: "Hofmann 1998 p. 236 read literally"}
+      - {name: isothermal, source: "every wave through B63 (no source states it)"}
+    decided_by: open (B64 verdict and its independent review, 2026-10-29)
+    sensitivity:
+      status: moves_headline
+      result: "fit cost 25.95 (ramp + hold) / 30.87 and 38.69 (Newtonian ramp only, tau 4 and 6.7 min) / 45.4 (linear ramp only); 100 C-6 h / 145 C MFT factor 0.2 / 0.4 / 0.9 / 2.1 against a measured 7.9-13x (results/validation/kinetic_core_b64_discriminator.json)"
+      remedy: "unresolved; the model-free evidence favours ramp only (four Munich papers, the hardware); the 1997 'heating conditions' chapter (Wartburg symposium) could settle it. Every later wave runs on every reading"
+
+  - id: CR-04
+    what: the shape of a stated heat-up and whether the cool-down is integrated
+    where: {file: src/kinetic_core/thermal_history.py, symbol: profile_points}
+    kind: alternatives
+    current: linear ramp; cool-down omitted unless the source states its rate
+    basis: >-
+      Sources state the ramp's ends and duration, not its shape; a vessel in a bath approaches its target
+      exponentially (Newtonian), which spends more time near the top. Cooling is "after cooling" with no rate.
+    alternatives:
+      - {name: linear_no_cooling, source: current}
+      - {name: newtonian_no_cooling, source: "lumped-capacitance heating reaching the target at the stated time"}
+      - {name: linear_with_cooling, source: "a cool-down of the same duration as the ramp"}
+    decided_by: open
+    sensitivity:
+      status: moves_headline
+      result: "at the ramp-only optimum, no refit: linear 45.4, Newtonian tau 20/3 39.7, tau 20/5 33.4, + 10 / 20 min cool 41.7 / 40.7 (kinetic_core_b64_shape_sensitivity.json); the tau values are themselves chosen (a Newtonian approach never reaches 145 C)"
+      remedy: "unresolved; a logged heating curve of one Hofmann-protocol run retires it"
+
+  - id: CR-05
+    what: the 3x band that defines "within" on the scorecard
+    where: {file: src/kinetic_core/scoring.py, symbol: PASS_BAND_LEVEL}
+    kind: cutoff
+    current: 3.0
+    basis: a reporting convention; no source supplies it. The median fold error is reported beside it.
+    alternatives:
+      - {name: twofold, value: 2.0}
+      - {name: threefold, value: 3.0}
+      - {name: fivefold, value: 5.0}
+    decided_by: convention (pre-dates the register)
+    sensitivity:
+      status: moves_headline
+      result: "out of sample within 2x / 3x / 5x: 8 / 14 / 18 of 56; median 11.8x either way"
+      remedy: "a cut-off on a continuous error moves its count by construction; report the whole curve (within 2x, 3x, 5x, 10x) and the median, and treat the 3x count as one point of it, not as the headline"
+
+  - id: CR-06
+    what: the measured effect a directional claim or a contrast must exceed to count
+    where: {file: src/kinetic_core/directional.py, symbol: MEASUREMENT_NOISE_FOLD}
+    kind: cutoff
+    current: 1.4 (fold)
+    basis: >-
+      Should be each method's replicate scatter; the corpus reports CVs of ~10-25 % for HS-SPME and SIDA
+      (e.g. Mottram & Nobrega 2002: mean CV 22 %). 1.4 is about two such CVs. To be replaced by the method's
+      own scatter where the bundle records it (C3).
+    alternatives:
+      - {name: one_cv, value: 1.2}
+      - {name: two_cv, value: 1.4}
+      - {name: twofold, value: 2.0}
+    decided_by: convention
+    sensitivity:
+      status: moves_headline
+      result: "out-of-sample contrast signs 13/29, 12/25, 9/18 (1.2x, 1.4x, 2x): 45 %, 48 %, 50 %, chance at every threshold"
+      remedy: "replace the constant by each row's own replicate scatter where the bundle records it (C3); until then report all three. The conclusion (chance-level) does not move"
+
+  - id: CR-07
+    what: the shared activation energy of the 30 single-temperature sulfur constants (point)
+    where: {file: src/kinetic_core/parameters_sulfur.py, symbol: LUMPED_FORMATION_EA_BOUNDS}
+    kind: alternatives
+    current: the fitted lumped 64.08 kJ/mol (unidentified by the fit); the envelope draws the measured class
+    basis: B63 pre-registration; the point and the interval disagree until B63 or a measurement settles it.
+    alternatives:
+      - {name: fitted_lumped, value: 64.08, source: "B2.3 fit, unidentified"}
+      - {name: class_median, value: 102, source: "ea_class_prior (carbohydrate 103.7, sulfur 100.9)"}
+    decided_by: open (B63)
+    sensitivity: {status: untested}
+
+  - id: CR-08
+    what: the directional verdict thresholds (trust / caution / do-not-use)
+    where: {file: src/directional_reliability.py, symbol: TRUST_MIN_RATE}
+    kind: policy
+    current: trust >= 80 % on >= 3 claims (Wilson bound above 0.5); caution >= 60 %
+    basis: owner policy for how the model card labels an axis
+    alternatives: []
+    decided_by: owner
+    sensitivity: {status: not_applicable}
+
+  - id: CR-09
+    what: the usefulness bar and its power condition
+    where: {file: src/model_card.py, symbol: USEFULNESS_MIN_CLAIMS}
+    kind: policy
+    current: out of sample >= 40 % within 3x and beating the typical-yield baseline; directional >= 65 % on >= 67 claims
+    basis: owner decisions of 2026-10-28 (north star C2, D7); 67 is the sample size for 80 % power against 50 %
+    alternatives: []
+    decided_by: owner
+    sensitivity: {status: not_applicable}
+
+  - id: CR-10
+    what: the numerical resolution of profiles and of the inline pH solve
+    where: {file: src/kinetic_core/sulfur.py, symbol: PROFILE_NODE_STEP_K}
+    kind: cutoff
+    current: 2 K staircase and node step; Brent tolerance 1e-10 pH
+    basis: numerical, verified by convergence (tests/unit/test_kinetic_core_b64_thermal_profile.py; B64 V5 0.0001 dex)
+    alternatives:
+      - {name: two_kelvin, value: 2.0}
+      - {name: half_kelvin, value: 0.5}
+    decided_by: verification
+    sensitivity: {status: harmless, note: "0.25 K staircase agrees within 1 %; quick vs careful 0.0001 dex"}
+
+  - id: CR-11
+    what: the share of Strecker events whose aminoreductone reduces mercaptoacetaldehyde to H2S (B59a-r)
+    where: {file: src/kinetic_core/parameters_sulfur.py, symbol: STRECKER_SULFUR}
+    kind: alternatives
+    current: off (0, the pre-B59a network); B59a-r runs at both transferred values
+    basis: >-
+      Not measured. Kobayasi & Fujimaki 1965 (100 C, 1 h): H2S 4.2 % / 8.0 % of the cysteine charged with 1 / 2
+      equivalents of glucosamine as reductant, carried as an ORDER-OF-MAGNITUDE transfer with unknown direction of
+      risk (no blank; glucosamine is not a deoxyosone), not as a bound. The step is reductant-limited by
+      construction (the deoxyosone is regenerated; at most one H2S per Strecker event).
+    alternatives:
+      - {name: one_equivalent, value: 0.042, source: "Kobayasi 1965, 10 mmol glucosamine"}
+      - {name: two_equivalents, value: 0.080, source: "Kobayasi 1965, 20 mmol glucosamine"}
+    decided_by: "B59a-r ship rule (kinetic_core_b59a_prereg.md): a share is chosen only if a fit-row measurement identifies it by profile; otherwise both are carried"
+    sensitivity: {status: untested}
+
+  - id: CR-12
+    what: the 1-deoxyosone share of the cysteine Amadori compound's decay (B59b)
+    where: {file: src/kinetic_core/parameters_sulfur.py, symbol: dpo_share}
+    kind: alternatives
+    current: 0.30 (the centre), with the route off by default
+    basis: >-
+      Zhai 2019, fed TTCA at 70-130 C: 3-deoxyxylosone / 1-deoxyxylosone = 2.1-2.6, so DPO / (DPO + TDP) =
+      0.28-0.32. Both ends are measured; the centre is not a choice between them.
+    alternatives:
+      - {name: low_ratio_end, value: 0.32, source: "Zhai 2019, ratio 2.1"}
+      - {name: high_ratio_end, value: 0.28, source: "Zhai 2019, ratio 2.6"}
+    decided_by: "B59b prereg sec. 2: both ends run as a sensitivity once the route's verdict is in"
+    sensitivity: {status: untested}
+
+  - id: CR-13
+    what: the TTCA equilibrium constant held at Cao's 90 C / pH 5.5 value at every temperature and pH
+    where: {file: src/kinetic_core/parameters_sulfur.py, symbol: k_l_per_mmol}
+    kind: alternatives
+    current: 0.060 L/mmol (Cao 2017, band 0.045-0.075), temperature- and pH-independent
+    basis: >-
+      Cao 2017 measures [TTCA]/([Cys][Xyl]) = 58.5-64.6 L/mol at 90 C, pH 5.5 -> 4.15. Nothing in the corpus
+      measures K at another temperature or pH; it should rise with pH through the free amine. Zhang 2025b's blank
+      (120 C, pH 6.5, 40 + 40 mM) reaches TTCA 18.2 mM, which K = 0.060 reproduces at equilibrium (21 mM); its
+      free-cysteine peak (1.0 mM) does not close the balance and is flagged in its dossier, so it is no test of K.
+    alternatives:
+      - {name: band_low, value: 0.045, source: "Cao 2017 band"}
+      - {name: band_high, value: 0.075, source: "Cao 2017 band"}
+    decided_by: "declared assumption (B58 prereg); a measured K at another T or pH would replace it"
+    sensitivity: {status: untested}
+
+  - id: CR-14
+    what: the cysteine Amadori compound's decay above pH 6, outside de Roos's measured pH profile (B59b)
+    where: {file: src/kinetic_core/parameters_sulfur.py, symbol: above_measured_ph}
+    kind: alternatives
+    current: extend_last_slope, with the route off by default
+    basis: >-
+      de Roos 2005 Fig. 4 measures the decay at pH 3-6 only (U-shaped, minimum at pH 5, rising 0.61 decades per
+      unit between pH 5.5 and 6). The Zhai 2019 and Kang 2026 pots start at pH 7-7.4. Amadori enolisation is base
+      catalysed, which favours extending the rise; nothing on disk measures it above pH 6. At pH 7.4 the two
+      readings differ 7x (0.106 vs 0.0143 1/min at ~100 C).
+    alternatives:
+      - {name: extend_last_slope, value: "+0.61 decades per pH unit above 6", source: "de Roos 2005 Fig. 4, pH 5.5-6"}
+      - {name: flat, value: "1.43e-2 1/min above pH 6", source: "de Roos 2005 Fig. 4, pH 6"}
+    decided_by: "route calibration (stage 1): both arms run; one is preferred only if the direct-species likelihood separates them by more than the chi-square(1) 95 % threshold scaled by the reduced chi-square"
+    sensitivity: {status: untested}

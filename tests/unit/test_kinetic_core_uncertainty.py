@@ -388,6 +388,8 @@ def test_declared_bands_are_uniform_over_the_declared_band():
 
 
 def test_sample_draws_is_deterministic_and_seed_sensitive():
+    from src.kinetic_core.parameters_lipid import Q10_ASSUMPTION
+
     a = unc.sample_draws(6, seed=3)
     b = unc.sample_draws(6, seed=3)
     c = unc.sample_draws(6, seed=4)
@@ -395,7 +397,7 @@ def test_sample_draws_is_deterministic_and_seed_sensitive():
     assert [d.coordinates for d in a] != [d.coordinates for d in c]
     assert [d.index for d in a] == list(range(6))
     for d in a:
-        assert 2.0 <= d.core.q10 <= 3.0
+        assert Q10_ASSUMPTION.lo <= d.core.q10 <= Q10_ASSUMPTION.hi
         assert -50.0 <= d.core.furanone_partition_ea_kj_mol <= 50.0
         assert 10 ** -0.5 <= d.k_aw_multiplier <= 10 ** 0.5
         assert 23 ** -0.5 <= d.hs_spme_multiplier <= 23 ** 0.5

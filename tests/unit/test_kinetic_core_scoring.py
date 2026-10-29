@@ -113,6 +113,11 @@ def test_the_generated_fit_target_record_names_real_rows_of_real_bundles():
     for row in record["rows"]:
         bench = panel.load_bundle(_bundle_path(row["benchmark_id"]))
         targets = panel.bundle_targets(bench)
+        if row.get("pot_level"):
+            # 2026-10-28 (independent review): a row on an intermediate of the same POT names the bundle, not
+            # one of its compounds; it takes every row of that bundle out of the out-of-sample count.
+            assert row["compound"].startswith("[same pot] "), row
+            continue
         assert row["compound"] in targets, (row["id"], row["benchmark_id"], sorted(targets))
         if row["kind"] == "conc":
             measured = panel.measured_value(bench, row["compound"], targets[row["compound"]])
@@ -129,13 +134,15 @@ def test_sulfur_fit_leverage_is_read_from_the_record_and_is_low():
     assert len(targets) == 1 and targets[0].leverage_class == "global_low_leverage"
 
 
-def test_in_core_fit_flags_only_the_step_level_bundles_after_b9():
-    # B9 (2026-09-03) removed the Hofmann Table 1 level rows from the objective
-    assert not fit_targets.in_core_fit("hofmann1998_ribose_cysteine_145C_20min_pH5", MFT)
-    assert not fit_targets.in_core_fit("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", FFT)
+def test_in_core_fit_flags_the_step_level_bundles_and_the_pots_the_fit_read():
+    # B9 (2026-09-03) removed the Hofmann Table 1 level rows from the objective. 2026-10-28 (the "same pot"
+    # correction): the fit still reads that pot's in-situ norfuraneol and furfural, so EVERY row of the ribose
+    # pH 5 bundle and of its xylose twin is in the fit; the pH 7 hold-out pot is read by no fit row.
+    assert fit_targets.in_core_fit("hofmann1998_ribose_cysteine_145C_20min_pH5", MFT)
+    assert fit_targets.in_core_fit("hofmann1998_ribose_cysteine_145C_20min_pH5", "furfural")
+    assert fit_targets.in_core_fit("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", FFT)
     assert fit_targets.in_core_fit("hofmann1998_c2c3_recombination_145C_20min_pH5", MFT)
     assert not fit_targets.in_core_fit("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7", MFT)
-    assert not fit_targets.in_core_fit("hofmann1998_ribose_cysteine_145C_20min_pH5", "furfural")
 
 
 def test_core_evidence_role_ignores_legacy_fit_declarations_but_reports_them(small):
@@ -146,8 +153,8 @@ def test_core_evidence_role_ignores_legacy_fit_declarations_but_reports_them(sma
     assert not trik["fit_target_of"]["core"]
     hof = by_id["hofmann1998_ribose_cysteine_145C_20min_pH5"]
     assert hof["evidence_role"] == "predictive"
-    assert hof["fit_target_of"]["core"] == []  # B9: the level rows left the objective
-    assert not any(r["in_core_fit"] for r in hof["compounds"])
+    # B9 took the level rows out; the same-pot rows (in-situ NF and furfural, 2026-10-28) keep the bundle in the fit
+    assert hof["fit_target_of"]["core"] and all(r["in_core_fit"] for r in hof["compounds"])
 
 
 # ---------------------------------------------------------------------------
@@ -222,10 +229,12 @@ def test_coverage_splits_are_consistent(small):
     assert s["honest_literature"]["within_band"] == (
         s["out_of_sample"]["within_band"] + s["in_core_fit"]["within_band"]
     )
-    # B9 (2026-09-03): no Hofmann level row is a fit row any more. 2026-10-27: hydrogen sulfide became
-    # chargeable, so the small panel's fed norfuraneol + H2S bundle -- a declared fit target (Wave X) --
-    # is now scored, and it is the in-fit split's one row.
-    assert s["in_core_fit"]["rows"] == 1
+    # The in-fit split is exactly the rows the fit-target record names, directly or through their pot
+    # (2026-10-28): derived from the record, not pinned as a count.
+    expected = sum(1 for b in small["benchmarks"]
+                   if b["signal_origin"] == "external_literature" and b["evidence_role"] != "fit_recovery"
+                   for r in b["compounds"] if fit_targets.in_core_fit(b["benchmark_id"], r["compound"]))
+    assert s["in_core_fit"]["rows"] == expected >= 1
 
 
 def test_markdown_renders(small):

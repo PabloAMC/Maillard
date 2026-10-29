@@ -324,7 +324,7 @@ def test_every_lipid_prediction_is_declared_extrapolated_and_carries_the_warning
     blob = " ".join(run.declaration.warnings)
     assert "ASSUMPTION, NOT A MEASUREMENT" in blob
     assert "hand-fitted" in blob
-    assert "TEMPERATURE DEPENDENCE IS MEASURED NOWHERE" in blob
+    assert "measured only in OTHER" in blob
     assert "25 C" in blob
 
 
@@ -337,7 +337,8 @@ def test_no_q10_is_baked_into_the_stored_rate_constant():
     # at the anchor temperature, no factor at all
     assert math.isclose(k_looh_decomp_per_min(25.0), 6.0e-3 / 60.0, rel_tol=1e-12)
     # and the band is a band, not a point
-    assert Q10_ASSUMPTION.lo == 2.0 and Q10_ASSUMPTION.hi == 3.0
+    # 2026-10-28: widened to the measured Q10s (Tazi 2009 1.6-3.3; Frankel 1993 2.15-2.27 at 145 C)
+    assert Q10_ASSUMPTION.lo == 1.6 and Q10_ASSUMPTION.hi == 3.3
     assert Q10_ASSUMPTION.lo < Q10_ASSUMPTION.default < Q10_ASSUMPTION.hi
 
 
@@ -345,8 +346,8 @@ def test_the_extrapolation_span_is_reported_honestly():
     assert math.isclose(Q10_ASSUMPTION.decades_of_extrapolation(140.0), 11.5)
     lo = Q10_ASSUMPTION.factor(140.0, Q10_ASSUMPTION.lo)
     hi = Q10_ASSUMPTION.factor(140.0, Q10_ASSUMPTION.hi)
-    assert 2.8e3 < lo < 3.0e3
-    assert 3.0e5 < hi < 3.2e5
+    assert 2.2e2 < lo < 2.3e2   # 1.6 ** 11.5
+    assert 9.0e5 < hi < 9.4e5   # 3.3 ** 11.5
 
 
 def test_an_absolute_carries_the_declared_assumption_band(frozen):

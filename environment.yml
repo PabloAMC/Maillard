@@ -16,6 +16,7 @@ dependencies:
   - coverage
   - numpy>=2.0
   - scipy
+  - numba        # optional: compiles the charge balance (src/kinetic_core/ph_kernel.py); results are identical without it
   - matplotlib
   - networkx
   - pyyaml

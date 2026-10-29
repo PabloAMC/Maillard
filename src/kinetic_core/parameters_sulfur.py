@@ -468,6 +468,99 @@ class NfHydroxideDecay:
 
 NF_HYDROXIDE_DECAY = NfHydroxideDecay()
 
+
+@dataclass(frozen=True)
+class StreckerSulfur:
+    """
+    B59a (2026-10-28): WHERE THE STRECKER SULFUR GOES. ``r_dpo_ddp`` (the 1-deoxyosone + cysteine Strecker step)
+    sent cysteine's sulfur, as mercaptoacetaldehyde, to the inert FRAG_S. Kobayasi & Fujimaki 1965 boil cysteine
+    with carbonyls and recover H2S and acetaldehyde, released by REDUCTIVE cleavage of the C-S bond by the
+    enaminol the same Strecker step makes; with glucosamine as the reductant (100 C, 1 h) H2S is 4.2 % and 8.0 %
+    of the cysteine charged (10 and 20 mmol reductant on 10 mmol cysteine). Those are yields per cysteine
+    CHARGED, so they are LOWER BOUNDS on the share of Strecker-processed sulfur released (a cysteine that never
+    reacted contributes to the denominator). ``h2s_share`` is therefore a registered ALTERNATIVE, not a fitted
+    number: the wave is run at each measured bound (choices register CR-11). Off: exactly the pre-B59a network.
+    """
+
+    enabled: bool = False
+    h2s_share: float = 0.042
+    alternatives: Tuple[float, ...] = (0.042, 0.080)
+    source: str = ("Kobayasi & Fujimaki 1965, Agric. Biol. Chem. 29:698 (10.1080/00021369.1965.10858450), p. 698-699: "
+                   "cysteine 10 mmol + glucosamine 10 / 20 mmol, 100 C, 1 h -> H2S 0.42 / 0.80 mmol")
+
+
+STRECKER_SULFUR = StreckerSulfur()
+
+
+@dataclass(frozen=True)
+class CysAmadoriRoute:
+    """
+    B59b (2026-10-29): de Roos 2005's cysteine-pentose pathway, every constant measured or anchored on its source.
+
+    * Formation, TTCA -> cysteine Amadori compound, first order in TTCA: ``k_form_ref_per_min`` at 90 C is
+      ANCHORED on Cao 2017's blank pot (0.4 M Cys + Xyl, 0.2 M phosphate pH 5.5, 90 C, Cys-Amadori 0.006 -> 0.133
+      mol/L over 0.5-5 h) by reproducing that pot in the engine (generate_kinetic_core_b59b_anchor.py); its barrier is
+      Zhang 2026's Cys + glucose -> Cys-Amadori, 100.9 kJ/mol (measured, the hexose analogue: a declared transfer).
+    * Decay, cysteine Amadori compound -> deoxyosones + free cysteine: de Roos 2005 Fig. 4, purified pentose
+      Cys-Amadori in boiling 0.5 M phosphate (~100 C), % left after 2 h at pH 3-6, read as first-order constants
+      (``decay_ph_table``): U-shaped, slowest at pH 5 (4.5e-3 1/min), 5.6e-3 at pH 3, 1.43e-2 at pH 6. Interpolated
+      log-linearly in pH; held at the pH 3 value below 3; above pH 6 (outside the figure) ``above_measured_ph`` says
+      how it is extended (register CR-14). Barrier Zhang 2026's Cys-Amadori -> alpha-dicarbonyl 85.7 kJ/mol
+      (measured, glucose system: a declared transfer). B59b first used only the pH 5 and 6 points and extended their
+      slope downward, 3.5x too slow at pH 4 (kinetic_core_b59b_prereg.md Amendment 4).
+    * Split: Zhai 2019's fed TTCA gives 3-deoxyxylosone / 1-deoxyxylosone = 2.1-2.6, so the 1-deoxyosone (DPO) share
+      is 1 / (1 + ratio) = 0.28-0.32; ``dpo_share`` is the centre of that measured range (register CR-12).
+    Enabling it also enables TTCA formation by detailed balance (Cao's K) and retires the direct cysteine-catalysed
+    pentose enolisations r_pent_dpo / r_pent_tdp, which it replaces. Off: the pre-B59b network exactly.
+    """
+
+    enabled: bool = False
+    #: V2 anchor (generate_kinetic_core_b59b_anchor.py), re-run 2026-10-29 after the decay's pH profile was corrected
+    #: (2.73e-3 before): Cao's blank Cys-Amadori series within +-0.09 dex at 1-5 h; TTCA -0.08 to -0.26 dex and free Cys
+    #: within 0.05 dex as checks (not fitted).
+    k_form_ref_per_min: float = 3.29e-3
+    t_form_ref_c: float = 90.0
+    ea_form_kj_mol: float = 100.9
+    #: (pH, k 1/min at ~100 C): de Roos 2005 Fig. 4, -ln(% left after 2 h)/120 (deroos2005_extraction.md sec. 3.6)
+    decay_ph_table: Tuple[Tuple[float, float], ...] = (
+        (3.0, 5.6e-3), (3.5, 5.3e-3), (4.0, 5.1e-3), (4.5, 4.8e-3), (5.0, 4.5e-3), (5.25, 5.1e-3), (5.5, 7.0e-3),
+        (6.0, 1.43e-2))
+    #: "extend_last_slope" (the measured 5.5 -> 6 slope, base-catalysed enolisation continuing) or "flat"
+    above_measured_ph: str = "extend_last_slope"
+    t_decay_ref_c: float = 100.0
+    ea_decay_kj_mol: float = 85.7
+    dpo_share: float = 0.30
+    dpo_share_alternatives: Tuple[float, ...] = (0.28, 0.32)
+    source: str = ("de Roos 2005 (deroos2005_extraction.md, Fig. 4); Cao 2017 (cao2017_extraction.md, Figs. 4-5); "
+                   "Zhai 2019 (zhai2019_extraction.md); Zhang 2026 (ZHANG_EA_* in this module)")
+
+    def k_form(self, temperature_k: float) -> float:
+        t_ref = self.t_form_ref_c + 273.15
+        return self.k_form_ref_per_min * math.exp(-self.ea_form_kj_mol / R_KJ * (1.0 / float(temperature_k) - 1.0 / t_ref))
+
+    def k_decay_at_ref(self, ph: float) -> float:
+        """The decay constant at ~100 C and ``ph``, from de Roos's measured pH profile."""
+        phs = [p for p, _ in self.decay_ph_table]
+        logs = [math.log10(k) for _, k in self.decay_ph_table]
+        ph = float(ph)
+        if ph > phs[-1]:
+            if self.above_measured_ph == "flat":
+                return 10.0 ** logs[-1]
+            slope = (logs[-1] - logs[-2]) / (phs[-1] - phs[-2])
+            return 10.0 ** (logs[-1] + slope * (ph - phs[-1]))
+        if ph <= phs[0]:
+            return 10.0 ** logs[0]  # below pH 3: held at the pH 3 value
+        i = next(j for j in range(1, len(phs)) if ph <= phs[j])
+        w = (ph - phs[i - 1]) / (phs[i] - phs[i - 1])
+        return 10.0 ** (logs[i - 1] + w * (logs[i] - logs[i - 1]))
+
+    def k_decay(self, temperature_k: float, ph: float) -> float:
+        t_ref = self.t_decay_ref_c + 273.15
+        return self.k_decay_at_ref(ph) * math.exp(-self.ea_decay_kj_mol / R_KJ * (1.0 / float(temperature_k) - 1.0 / t_ref))
+
+
+CYS_AMADORI_ROUTE = CysAmadoriRoute()
+
 THIAMINE_H2S_SHARE_FLOOR_PH: float = 6.25
 
 

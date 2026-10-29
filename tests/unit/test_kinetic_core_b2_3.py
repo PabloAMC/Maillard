@@ -377,12 +377,13 @@ def _hash_without_buffer(payload):
     # Amendment 9 clause 2 licensed the buffer block; Amendment 19 (2026-09-06, programme step
     # R1) licensed the vessel block under the same rule. Both are condition-record completions
     # and both are dropped before hashing, so the baselines below still prove that nothing
-    # else in a bundle moved.
+    # else in a bundle moved. Amendment 46 (2026-10-28, wave B64) licensed the heating block the same way.
     clone = json.loads(json.dumps(payload))
     conditions = clone.get("conditions")
     if isinstance(conditions, dict):
         conditions.pop("buffer", None)
         conditions.pop("vessel", None)
+        conditions.pop("heating", None)
     return hashlib.sha256(
         json.dumps(clone, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()

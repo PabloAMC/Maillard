@@ -26,6 +26,8 @@ artifacts:
 	./scripts/docker_maillard.sh core-directional
 	./scripts/docker_maillard.sh run "python scripts/generators/build_sulfur_flux_attribution.py"
 	./scripts/docker_maillard.sh run "python scripts/generators/build_null_model_baselines.py"
+	./scripts/docker_maillard.sh run "python scripts/generators/build_contrast_scores.py"
+	./scripts/docker_maillard.sh run "python scripts/generators/build_choice_robustness.py"
 	./scripts/docker_maillard.sh experiment-value-ranking
 	./scripts/docker_maillard.sh wishlist
 	./scripts/docker_maillard.sh run "python scripts/generators/generate_gap_heatmap.py"

@@ -8,14 +8,12 @@ rather than answered with a formation from zero.
 from __future__ import annotations
 
 import json
-import math
 
 import pytest
 
 from src import data_paths
 from src.kinetic_core import panel
-from src.kinetic_core.engine import UNCOOKED_LOOH_CONVERSION_LIMIT, predict
-from src.kinetic_core.parameters_lipid import Q10_ASSUMPTION, k_looh_decomp_per_min
+from src.kinetic_core.engine import predict
 
 BENCH = data_paths.BENCHMARKS_DIR
 TRIKUSUMA = BENCH / "pea_isolate_uht_140C_Trikusuma2019.json"
@@ -33,12 +31,6 @@ HOT_NO_COOK = (
     BENCH / "resconi_2023_pbma_beef_identity_benchmark.json",
     BENCH / "cml_cel_commercial_pbma_Foods2023.json",
 )
-
-
-def _extent(bench_path, q10=None):
-    cond = json.loads(bench_path.read_text())["conditions"]
-    k = k_looh_decomp_per_min(float(cond["temp_C"]), q10)
-    return 1.0 - math.exp(-k * float(cond["time_min"]))
 
 
 # --------------------------------------------------------------------------
@@ -101,22 +93,19 @@ def test_only_the_three_declared_rows_moved_and_all_three_improved():
 # the refused half (T3)
 # --------------------------------------------------------------------------
 
-def test_the_threshold_sits_in_an_empty_gap_and_survives_the_q10_band():
-    """Not a tuned knob: nothing in the panel lies between the two sides."""
-    cold = max(_extent(p) for p in UNCOOKED)
-    warm = _extent(TRIKUSUMA)  # 140 C for 6 s, the mildest real cook on the panel
-    assert cold < UNCOOKED_LOOH_CONVERSION_LIMIT < warm
-    assert warm / cold > 50.0
-    for q10 in (Q10_ASSUMPTION.lo, Q10_ASSUMPTION.hi):
-        assert max(_extent(p, q10) for p in UNCOOKED) < UNCOOKED_LOOH_CONVERSION_LIMIT
-        assert _extent(TRIKUSUMA, q10) > UNCOOKED_LOOH_CONVERSION_LIMIT
+def test_the_refusal_reads_a_recorded_fact_not_a_model_quantity():
+    """CR-01 (2026-10-28): exactly the pots whose source says nobody heated them carry 'never heated'."""
+    for path in UNCOOKED:
+        assert json.loads(path.read_text())["conditions"]["vessel"]["closure"] == "never heated"
+    for path in HOT_NO_COOK + (TRIKUSUMA,):
+        assert json.loads(path.read_text())["conditions"]["vessel"]["closure"] != "never heated"
 
 
 def test_every_refused_pot_says_in_its_own_provenance_that_nobody_heated_it():
     """The refusal rests on a datum the bundles recorded, not on the size of the miss."""
     for path in UNCOOKED:
         vessel = json.loads(path.read_text())["conditions"]["vessel"]
-        assert vessel["closure"] == "no cook"
+        assert vessel["closure"] == "never heated"
         note = vessel["provenance_note"].lower()
         assert "never heated" in note or "unheated" in note
 
@@ -136,10 +125,9 @@ def test_an_uncooked_pot_refuses_its_lipid_rows_and_names_the_cure(path):
 
 @pytest.mark.parametrize("path", HOT_NO_COOK, ids=lambda p: p.stem)
 def test_the_no_cook_string_alone_refuses_nothing(path):
-    """`closure: "no cook"` is overloaded; clause 2 is what keeps these three answerable."""
+    """`closure: "no cook"` is overloaded ("no vessel to record"); it refuses nothing."""
     bench = json.loads(path.read_text())
     assert bench["conditions"]["vessel"]["closure"] == "no cook"
-    assert _extent(path) > UNCOOKED_LOOH_CONVERSION_LIMIT
     for compound in panel.bundle_targets(bench):
         run = predict(panel.core_spec(bench), [compound])
         assert "NEVER COOKED" not in " ".join(run.declaration.reasons)

@@ -101,6 +101,11 @@ jobs:
       - name: Dossier coverage gate
         run: python scripts/ci/dossier_coverage_gate.py
 
+      # 2026-10-28. Every non-measured number or decision is registered with its alternatives, and every
+      # entry points at code that still exists (docs/reference/choices_register.yml).
+      - name: Choices register gate
+        run: python scripts/ci/choices_register_gate.py
+
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.
   # ---------------------------------------------------------------------------
