@@ -88,8 +88,14 @@ def core_fit_targets(benchmark_id: str) -> Tuple[CoreFitTarget, ...]:
 
 
 def in_core_fit(benchmark_id: str, compound: str) -> bool:
-    """True when THIS (benchmark, compound) level row was a row of a core fit."""
-    return any(c == compound for target in core_fit_targets(benchmark_id) for _, c in target.rows)
+    """True when a core fit read THIS (benchmark, compound) row, or read anything from the same POT.
+
+    2026-10-28 (independent review): a fit row on an intermediate of the same pot (Hofmann's in-situ
+    norfuraneol and furfural, the MFT and FFT precursors of the ribose pH 5 pot) informs every row of that
+    bundle, so none of them is out of sample. Pot-level rows carry the compound label ``[same pot] ...``.
+    """
+    return any(c == compound or c.startswith("[same pot]")
+               for target in core_fit_targets(benchmark_id) for _, c in target.rows)
 
 
 #: The ONE evidence-role vocabulary (2026-09-03). What kind of claim a core score supports:

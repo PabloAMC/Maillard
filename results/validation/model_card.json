@@ -195,9 +195,9 @@
       "status": "PASS"
     },
     {
-      "detail": "dossier_coverage_gate: note -- 32 lines in data/keys/pdf_dossier_aliases.yml",
+      "detail": "dossier_coverage_gate: PASS (every cited dossier exists; the article table is coherent)",
       "gate": "scripts/ci/dossier_coverage_gate.py",
-      "status": "FAIL"
+      "status": "PASS"
     }
   ],
   "generated_by": "scripts/generators/generate_model_card.py",

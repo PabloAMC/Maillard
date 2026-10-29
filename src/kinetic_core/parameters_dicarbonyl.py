@@ -98,6 +98,12 @@ _BARRIER_DRAW_ANCHOR_T_K: Mapping[str, float] = {"k_go_sink": 433.15}
 
 DISPUTED_SINK_KEYS: Tuple[str, ...] = ("k_da_sink", "k_go_sink", "k_odg_da", "k_hmf_self")
 
+
+def _odg_da_at_100c(k_per_min: float, t_c: float, ea_kj_mol: float = 150.8) -> float:
+    """log10 k at 100 C of a k_odg_da reading, carried on the shipped barrier (computed, never typed)."""
+    r_kj = 8.314462618e-3
+    return math.log10(k_per_min * math.exp(-ea_kj_mol / r_kj * (1.0 / 373.15 - 1.0 / (t_c + 273.15))))
+
 #: (log10 k at 100 C lo, hi) and (Ea lo, hi) for each. `None` means "not in dispute, do not sample".
 #: Every endpoint below is traceable to a printed number; see SECOND_LABORATORY_2016 for the sources.
 DISPUTED_SINK_BANDS: Mapping[str, Mapping[str, object]] = {
@@ -120,10 +126,16 @@ DISPUTED_SINK_BANDS: Mapping[str, Mapping[str, object]] = {
                  "this band does not pretend to be one; it is the honest width of not knowing.",
     },
     "k_odg_da": {
-        "log10_k_100C": (-4.63, -1.96),
+        # CORRECTED 2026-10-28 (found by the independent review: Steinhagen's glyoxal point sat OUTSIDE its own
+        # 90 % interval). The band was (-4.63, -1.96): the right width (466x = 2.67 dex) shifted up by 1.01 dex,
+        # so it EXCLUDED the shipped value and every draw ran >= 10x faster than the point. Recomputed: shipped
+        # 12.2e-3 /min at 180 C on Ea 150.8 -> 2.29e-6 /min at 100 C (log10 -5.640); Goncuoglu Tas 2016's
+        # 895e-3 /min at 160 C on the same barrier -> 1.07e-3 /min at 100 C (log10 -2.972).
+        "log10_k_100C": (_odg_da_at_100c(12.2e-3, 180.0), _odg_da_at_100c(895e-3, 160.0)),
         "ea_kj_mol": None,
-        "basis": "the 466x disagreement at 160 C, expressed at 100 C on the shipped barrier. The "
-                 "two credible intervals do not come within two decades of each other.",
+        "basis": "the 466x disagreement at 160 C, expressed at 100 C on the shipped barrier: from the shipped "
+                 "value to the second laboratory's. The two credible intervals do not come within two decades "
+                 "of each other.",
     },
     "k_hmf_self": {
         "log10_k_100C": (-6.05, -0.96),

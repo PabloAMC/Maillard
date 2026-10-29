@@ -4,8 +4,8 @@
     "artifact": "sulfur_flux_attribution",
     "generated_on": "2026-10-28",
     "git": {
-      "commit": "1562c0ef151f8868c47c03b148d319ec76994ca4",
-      "short": "1562c0ef",
+      "commit": "ab1fcc559752228d10e2ca3bed558a119681fe80",
+      "short": "ab1fcc55",
       "branch": "b58-ttca-formation",
       "dirty": true
     },
@@ -28,7 +28,7 @@
   },
   "pots": {
     "hofmann1998_ribose_cys_ph5_145C_20min": {
-      "measured_in_the_corpus": "thiol yields only (hofmann1998_extraction.md); no cysteine or sugar time course",
+      "measured_in_the_corpus": "thiol yields only (hofmann1998_reconciliation.md); no cysteine or sugar time course",
       "temperature_C": 145.0,
       "minutes": 20.0,
       "label_ph": 5.0,

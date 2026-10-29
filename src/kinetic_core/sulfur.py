@@ -1427,6 +1427,11 @@ PH_FIXED_POINT_MAX_SWEEPS: int = 40
 PH_FIXED_POINT_FLAG: float = 1e-2
 
 
+class PhFixedPointNotConverged(UserWarning):
+    """The in-situ pH fixed point ended above ``PH_FIXED_POINT_FLAG``: the trajectory, and every pH-dependent
+    rate integrated on it, is not the converged answer. Never silent (2026-10-28)."""
+
+
 #: B60: HOW THE SHARE ROWS' FLUX BUDGET IS INTEGRATED. "closed" is ``reaction_flux_integrals`` on a
 #: linear-and-log output grid with the run's own node constants (closes to < 1 %; see
 #: ``sulfur_flux_budget``). "linear_rederived" is every wave through B58, which did not close; frozen
@@ -1526,9 +1531,11 @@ def integrate_sulfur(
 
     The dynamic mode is a fixed point. The pH feeds the rate constants, the
     rate constants make acid, the acid feeds the pH. Because the feedback is
-    weak (the sink flux that makes the acid is nearly pH-invariant in these
-    systems) it converges in two or three sweeps, and the achieved convergence
-    is reported rather than assumed.
+    weak in most pots it usually converges in a few sweeps under B60's relaxed
+    iteration (up to 10 on the fit systems), but not always: a run whose residual
+    stays above ``PH_FIXED_POINT_FLAG`` emits ``PhFixedPointNotConverged`` (and records
+    ``ph_fixed_point_converged = False``), and the headline guards fail on any scored pot
+    that does (independent review, 2026-10-28: a diagnostic nothing reads is decoration).
     """
     if method not in ("LSODA", "BDF", "Radau"):
         raise ValueError(f"method {method!r} is not a stiff-capable solver")
@@ -1727,6 +1734,12 @@ def integrate_sulfur(
                 final_map, t_k, ph1, ph_drift, spec),
             "acid_pool_final_mmol_L": final_map.get("ACID", 0.0),
         })
+        if ph_convergence > PH_FIXED_POINT_FLAG:
+            import warnings
+
+            warnings.warn(
+                f"pH fixed point not converged: residual {ph_convergence:.3g} pH after {sweeps_run} sweeps "
+                f"(flag {PH_FIXED_POINT_FLAG:g})", PhFixedPointNotConverged, stacklevel=2)
     metadata.update(sulfur_registry_metadata(
         {k: v for k, v in parameters.items() if isinstance(v, SulfurParameter)}
     ))

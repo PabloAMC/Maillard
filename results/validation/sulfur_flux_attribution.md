@@ -4,7 +4,7 @@
 
 ## hofmann1998_ribose_cys_ph5_145C_20min
 
-Measured: thiol yields only (hofmann1998_extraction.md); no cysteine or sugar time course.
+Measured: thiol yields only (hofmann1998_reconciliation.md); no cysteine or sugar time course.
 
 Half-life of the charged cysteine / pentose: 0.04036732727363128 / 0.037241742733257394 min of 20; in-situ pH 5.27 -> 4.89 (0.1 % of the run) -> 4.47.
 
