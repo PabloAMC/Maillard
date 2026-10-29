@@ -328,3 +328,9 @@
 - **Local checks must be case-exact** (2026-10-29). macOS folds case and CI's Linux does not: `xin2026b` and
   `zhang2024_extraction.md` passed every local gate and failed CI. Gates match names against directory listings or
   git's tracked paths, never `Path.exists()`.
+- **Never brief an agent with `python -I -c 'from src ...'`** (2026-10-29). `-I` drops the working directory from
+  `sys.path`, so every such check fails with `No module named src` before reading anything; three adjudicators hit it.
+  `-I` is for scripts that read untrusted downloads, not for repo imports.
+- **Verification is scoped to the table that reads the source** (2026-10-29). Keyed by ledger id alone, one
+  sub-model's verified reading cleared another sub-model's pending rows under the same id. A permission check keyed
+  coarser than the thing it protects leaks across users of the key.

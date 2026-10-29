@@ -8137,3 +8137,219 @@ entries:
     condition_quote: "Tree-ripened fruits of Durio zibethinus L. 'Monthong' were purchased from a local internet fruit shop in Germany ... Only fruits of optimum eating ripeness were used"
     flags: [matrix_food, unheated_sample]
     note: "Not Maillard: raw fruit, enzymatic/biological origin. H2S 3340 ug/kg CV 6 % (98 umol/kg), MeSH 26,700 (13 %), EtSH 45,400 (20 %), PrSH 3070 (22 %); OAV 330 / 45,000 / 480,000 / 6300; triplicate workups. Useful only as the method's demonstrated precision at ~0.1 mmol/kg H2S, which is the level the model predicts for the Hofmann pH 5 pot (0.063 mM)."
+  - id: li2022_table1_h2s_gcfpd_cys_whey
+    dossier: li2022_extraction.md
+    paper: "Li, Paulsen, Akillioglu, Nielsen, Engholm-Keller & Lund 2022 Food Chem Mol Sci 5:100120"
+    lab: "Copenhagen (Lund) / Arla Foods Ingredients"
+    system: "free L-cysteine 5.7 mM (and Cys 5.7 + Met 3.6 mM; Met 3.6 mM; alpha-LA, beta-LG, whey model, 3% WPI), 1 mL in a sealed crimp vial (silicone/PTFE septum), aluminium block"
+    medium: "10 mM phosphate buffer pH 7.0"
+    temperature_c: [80, 90, 160]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [10, 120, 2.67]
+    species: [H2S]
+    kind: endpoint
+    location: "Table 1 (uM, mean +/- SD; Cys row 90 C 10 min, 90 C 120 min, 160 C 160 s); text sec. 3.1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Cys (0.69 mg/mL) ... prepared in 10 mM phosphate buffer (pH 7.0) for GC-FPD analysis ... One milliliter of each untreated protein or amino acid sample in phosphate buffer was transferred to a sealed glass vial ... heated ... in the preheated aluminum block and stored at 10 C before analysis"
+    flags: [condition_uncertain, ph_start_only]
+    note: "Static headspace GC-FPD, 250 uL injected after 5 min at 32 C (sampled cold, external Na2S standards in pH 7 buffer; levels/range not stated); LOD 1.3 uM; LOQ, recovery not stated. Cys 3.8 +/- 0.3 (90 C 10 min), 10.7 (90 C 120 min, n = 1), 44.8 (160 C 160 s, n = 1); Cys+Met twin 4.3 +/- 0.6, 11.6 +/- 0.8. Vial volume, headspace gas (air presumed), storage time, heat-up profile not stated. Zheng & Ho k (pH 7) matches 10 min (1.1-1.5x) but predicts 31-41 uM at 120 min (measured 0.26-0.34x). Protein arms are matrix (protein-bound Cys)."
+  - id: li2022_table3_free_thiol_dtnb
+    dossier: li2022_extraction.md
+    paper: "Li, Paulsen, Akillioglu, Nielsen, Engholm-Keller & Lund 2022 Food Chem Mol Sci 5:100120"
+    lab: "Copenhagen (Lund) / Arla Foods Ingredients"
+    system: "alpha-LA 0.17 or 1.11 mM, beta-LG 0.87 mM, whey model, 3% WPI; 200 uL in PCR tubes, thermal cycler (UHT-like in sealed vials)"
+    medium: "55 mM HEPES pH 7.0"
+    temperature_c: [70, 80, 90, 160]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [10, 120, 2.67]
+    species: [protein free thiol]
+    kind: endpoint
+    location: "Table 3 (mM, n = 3, LOD 0.003 mM)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Samples (200 uL) in HEPES buffer were heated at 60, 70, 80, 90 C for 10 min or 90 C for 120 min in polymerase chain reaction (PCR) tubes ... in a thermal cycler"
+    flags: [matrix_food]
+    note: "DTNB with Cys standards 0.1-1.0 mM. Free-cysteine arm NOT measured (no residual Cys data for the H2S vials). beta-LG thiol 0.78 -> 0.48 mM at 90 C 120 min (loss >> H2S formed), rises to 1.20 mM after UHT-like (disulfide cleavage)."
+  - id: li2022_table4_lanthionine_lcms
+    dossier: li2022_extraction.md
+    paper: "Li, Paulsen, Akillioglu, Nielsen, Engholm-Keller & Lund 2022 Food Chem Mol Sci 5:100120"
+    lab: "Copenhagen (Lund) / Arla Foods Ingredients"
+    system: "alpha-LA 0.17 mM, beta-LG 0.87 mM, whey model, 3% WPI (no free-amino-acid arm)"
+    medium: "55 mM HEPES pH 7.0"
+    temperature_c: [80, 90, 160]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [10, 120, 2.67]
+    species: [lanthionine (acid hydrolysate)]
+    kind: endpoint
+    location: "Table 4 (uM, LOD 0.4 uM)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [matrix_food]
+    note: "LC-MS (HILIC) with lysine-d4 IS, external LAN 10-4,000 ng/mL. Co-product of beta-elimination (DHA + Cys); uM level vs mM thiol changes. alpha-LA values from a pool of five heatings."
+  - id: li2022_table5_extent_h2s_disulfide_cleavage
+    dossier: li2022_extraction.md
+    paper: "Li, Paulsen, Akillioglu, Nielsen, Engholm-Keller & Lund 2022 Food Chem Mol Sci 5:100120"
+    lab: "Copenhagen (Lund) / Arla Foods Ingredients"
+    system: "alpha-LA, conc. alpha-LA, beta-LG, whey model, 3% WPI"
+    medium: "10 mM phosphate (H2S) and 55 mM HEPES (thiol), pH 7.0"
+    temperature_c: [80, 90, 160]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [10, 120, 2.67]
+    species: [Cys converted to H2S (%), disulfide cleavage (%)]
+    kind: ratio
+    location: "Table 5a-b (Eqs. 1-3)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [matrix_food]
+    note: "Derived by the authors from Tables 1 and 3 (different vessels and buffers for the two inputs). H2S < 5% of Cys reactions except conc. alpha-LA (8-29%)."
+  - id: li2022_table2_dha_persulfide_relative
+    dossier: li2022_extraction.md
+    paper: "Li, Paulsen, Akillioglu, Nielsen, Engholm-Keller & Lund 2022 Food Chem Mol Sci 5:100120"
+    lab: "Copenhagen (Lund) / Arla Foods Ingredients"
+    system: "alpha-LA, beta-LG, whey model, 3% WPI, site-specific peptides"
+    medium: "55 mM HEPES pH 7.0"
+    temperature_c: [80, 90, 160]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [10, 120, 2.67]
+    species: [peptide-bound dehydroalanine, peptide-bound persulfide]
+    kind: other
+    location: "Table 2 (relative peak areas, % of the residue's maximum; n = 3)"
+    status: figure_only
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [matrix_food, relative_area_percent]
+    note: "Relative LC-MS/MS signals only; dossier transcribes beta-LG Cys66 and Cys160 DHA rows, not the full table."
+  - id: obata1960_table1_h2s_from_cys_cystine_mercaptals
+    dossier: obata1960_extraction.md
+    paper: "Obata & Mizutani 1960 Bull Agric Chem Soc Japan 24:562 (Part IV)"
+    lab: "Hokkaido Univ. (Mizutani / Obata)"
+    system: "cystine, free cysteine, djenkolic acid, cysteine mercaptals (acetaldehyde, n-butyraldehyde, benzaldehyde, furfural), mercaptoles (pyruvic, levulinic acid); 32 mg S in 100 mL water (10 mM S), CO2 sweep"
+    medium: "unbuffered water; hydrochlorides neutralised with 6 N NaOH (end point not stated); pH not reported"
+    temperature_c: [120]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60, 180, 360]
+    species: ["H2S (cumulative, methylene blue)"]
+    kind: time_series
+    location: "Table I (ug H2S at 1/3/6 h, p. 564)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "in the present paper 100 ml of water were added in order to dissolve cystine completely ... Carbon dioxide gas current was used as a carrier of hydrogen sulfide. After heating for one, three and six hours respectively on the oil bath (120 C)"
+    flags: [condition_uncertain, open_system_product_stripping, unbuffered, ph_not_measured, no_replicates]
+    note: "120 C is the oil bath; open gas-swept flask so liquid <= ~100 C (as mizutani1960). Single determinations; recovery 95 +/- 5% from Part III. Free cysteine 0.15/0.55/1.32% of S, matches Zheng & Ho k at 100 C pH 5 within 0.9-1.3x. 10x dilution vs Part III raised cysteine H2S 1.1-1.5x. Cystine 0.40x cysteine at 1 h, 1.33-1.47x at 3-6 h. Acid workup (20 mL 6 N HCl) included."
+  - id: cuevasanta2015_table1_hs_symmetric_disulfide_k
+    dossier: cuevasanta2015_extraction.md
+    paper: "Cuevasanta et al. 2015 J Biol Chem 290:26866"
+    lab: "Montevideo (Alvarez) / Erlangen (Filipovic)"
+    system: "Na2S 30-500 uM with excess DTNB, cystine dimethyl ester, cystine, GSSG, homocystine or hydroxyethyl disulfide; sealed cuvettes / closed vials, minimal headspace"
+    medium: "100 mM phosphate pH 7.4, 0.1 mM DTPA (also borate pH 9.5)"
+    temperature_c: [25]
+    ph: {initial: 7.4, measured_during: false, final: null}
+    time_min: []
+    species: [HS- + RSSR -> RSS- + RSH second-order k]
+    kind: rate_constant
+    location: "Table 1 (k at pH 7.4 and pH-independent); text p. 26869 (prior cystine values at pH 10 / 0.1 M NaOH); Fig. 3A Bronsted plot"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Reactions were initiated by the addition of low amounts (30-500 uM) of Na2S to disulfides in pseudo-first order excess in borate (100 mM, pH 9.5, 0.1 mM DTPA) or phosphate (100 mM, pH 7.4, 0.1 mM DTPA) buffer using sealed quartz cuvettes with minimal head space ... at 25 C"
+    flags: []
+    note: "HS- + cystine (6 +/- 1)e-1 M-1 s-1 at pH 7.4, (9 +/- 2)e-1 pH-independent (pKa H2S 7). 25 C only, no Ea; reverse rate / equilibrium not measured. Paper's DFT barriers and reaction energies are excluded by the no-DFT policy. No cystine species in the engine."
+  - id: cuevasanta2015_table2_hs_hsa_mixed_disulfide_k
+    dossier: cuevasanta2015_extraction.md
+    paper: "Cuevasanta et al. 2015 J Biol Chem 290:26866"
+    lab: "Montevideo (Alvarez) / Erlangen (Filipovic)"
+    system: "Na2S with mixed disulfides of human serum albumin Cys-34 (HSA-TNB, -CysOMe, -Cys, -GSH, -Hcy, -beta-mercaptoethanol)"
+    medium: "100 mM phosphate pH 7.4, 0.1 mM DTPA"
+    temperature_c: [25]
+    ph: {initial: 7.4, measured_during: false, final: null}
+    time_min: []
+    species: [HS- + protein mixed disulfide second-order k]
+    kind: rate_constant
+    location: "Table 2; Figs. 2A-B (methylene blue initial rates, H2S electrode)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: []
+    note: "Protein-disulfide analogue of the PROT_SS channel: HSA-Cys 3.0 +/- 1.1 M-1 s-1 at pH 7.4. 25 C only."
+  - id: cuevasanta2015_text_hs_sulfenic_persulfide_k
+    dossier: cuevasanta2015_extraction.md
+    paper: "Cuevasanta et al. 2015 J Biol Chem 290:26866"
+    lab: "Montevideo (Alvarez) / Erlangen (Filipovic)"
+    system: "HSA sulfenic acid (~0.5-6 uM) + Na2S; HSA persulfide + peroxynitrite or 4,4'-dithiodipyridine"
+    medium: "100 mM phosphate pH 7.4, 0.1 mM DTPA"
+    temperature_c: [20, 25]
+    ph: {initial: 7.4, measured_during: false, final: null}
+    time_min: []
+    species: [HS- + RSOH k, RSSH nucleophilicity k]
+    kind: rate_constant
+    location: "Text pp. 26875-26877; Figs. 10, 12, 13"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: []
+    note: "HS- + HSA-SOH (2.7 +/- 0.8)e2 at pH 7.4, (4 +/- 1)e2 pH-independent, (4.7 +/- 0.2)e2 by DTDPy amplitudes. HSA-SSH + ONOO- (1.2 +/- 0.4)e4 at 20 C; + DTDPy (1.7 +/- 0.1)e4 at 25 C (20x HSA-SH)."
+  - id: cuevasanta2015_figs1_2_h2s_decay_timecourses
+    dossier: cuevasanta2015_extraction.md
+    paper: "Cuevasanta et al. 2015 J Biol Chem 290:26866"
+    lab: "Montevideo (Alvarez) / Erlangen (Filipovic)"
+    system: "Na2S 250 uM + GSSG 2.0/5.25/10.5 mM; Na2S 476 uM + HSA-Cys 470 uM; Na2S 10 uM + HSA-TNB 34.5-344.7 uM"
+    medium: "100 mM phosphate or 0.2 M tris pH 7.4, 0.1 mM DTPA"
+    temperature_c: [25]
+    ph: {initial: 7.4, measured_during: false, final: null}
+    time_min: []
+    species: ["H2S (methylene blue, electrode)"]
+    kind: time_series
+    location: "Figs. 1A-B, 2A-B"
+    status: figure_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: []
+    note: "Raw decay curves behind Tables 1-2; not digitised. Low value."
+  - id: suleimenov1994_appendixA_table2_h2s_henry_water
+    dossier: suleimenov1994_extraction.md
+    paper: "Suleimenov & Krupp 1994 Geochim Cosmochim Acta 58:2433"
+    lab: "BGR Hannover (Krupp)"
+    system: "H2S 0.0072-0.030 mol + degassed water 1.0-1.67 mol in a 50.8-58.5 mL titanium bellows, vapour-liquid equilibrium, P-V-T-X"
+    medium: "pure water (and NaCl 0-2.5 molal); saturation pressure, 2.2-139 bar"
+    temperature_c: [20, 321]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [H2S Henry constant]
+    kind: other
+    location: "Appendix A (46 pure-water points, log KH +/- sigma); Table 2 (skeleton log KH, 0-365 C, mu 0-3); correlation in abstract and p. 2437; Fig. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Hydrogen sulfide solutions in equilibrium with their vapor phase were contained in a pressurized titanium bellows of known total volume"
+    flags: []
+    note: "Table 2 / Appendix A / Fig. 3 are bar per MOLE FRACTION; the 5-term correlation is bar/molality (factor 55.5). log KH 3.141 (90 C), 3.239 (120 C), 3.287 (145 C) -> c_gas/c_aq 0.86, 1.01, 1.09 (dossier). Appendix A 40.4 C x = 0.000102 is a print/OCR error. Engine carries no H2S headspace (only OXR for O2)."
+  - id: suleimenov1994_appendixB_nacl_salting_out
+    dossier: suleimenov1994_extraction.md
+    paper: "Suleimenov & Krupp 1994 Geochim Cosmochim Acta 58:2433"
+    lab: "BGR Hannover (Krupp)"
+    system: "H2S in NaCl solutions up to 2.5 molal, titanium bellows"
+    medium: "aqueous NaCl, saturation pressure"
+    temperature_c: [20, 320]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [H2S apparent Henry constant, Setchenov coefficient]
+    kind: other
+    location: "Appendix B (primary data), Table 1 (activity coefficients), Fig. 9 and p. 2441 polynomial b(T, mu)"
+    status: figure_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: []
+    note: "Not transcribed beyond the Setchenov polynomial coefficients; salting-out nearly T-independent below ~250 C. Only relevant to brined matrices."

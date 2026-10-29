@@ -1188,6 +1188,24 @@ SULFUR_STOICHIOMETRY: np.ndarray = sulfur_stoichiometric_matrix()
 # ---------------------------------------------------------------------------
 
 
+#: Sub-model 1 (2026-10-29), pre-registered with the switch OFF: the trunk's MEASURED pH terms (Martins & van Boekel
+#: 2003 Part II Table 3, ``trunk_conditions``: the three Amadori-decay steps and the 3-DG -> formic acid exit) applied
+#: inside the sulfur lane at the pH the lane computes, on the label scale the table was measured on. The trunk lane
+#: applies them at the declared pH; the sulfur lane, the one lane whose pH moves, never did -- so its acid supply was
+#: the same at pH 5 and pH 8 (Davidek 2002's pH-stat measures 3 vs 79 mmol/L). The no-refit probe that found it:
+#: results/validation/kinetic_core_ph_acid_submodel_probe*.md. The evidence audit decides whether it ships.
+TRUNK_PH_TERMS: bool = False
+
+
+def _trunk_ph_exponents() -> Dict[str, float]:
+    from . import trunk_conditions as _tc
+
+    out = {key: float(_tc.PH_EXPONENT_DECADES_PER_UNIT) for key in _tc.PH_STEPS}
+    if _tc.THREE_DEOXY_EXIT_PH_TERM:
+        out.update({key: float(exponent) for key, (exponent, _band, _source) in _tc.THREE_DEOXY_EXIT_PH.items()})
+    return out
+
+
 def sulfur_rate_constants_at(
     parameters: Mapping[str, Any],
     temperature_k: float,
@@ -1214,6 +1232,7 @@ def sulfur_rate_constants_at(
     # B51: the MEASURED pH-indexed tables were measured on 25 C labels; under B51 they read the
     # cooled pH of the state (``ph_label``), every speciation factor reads the in-situ pH.
     ph_table = float(ph_label) if (ph_label is not None and _ph.B51.label_scale_tables) else ph
+    trunk_ph = _trunk_ph_exponents() if TRUNK_PH_TERMS else {}
     for reaction in FULL_REACTIONS:
         key = reaction.parameter_key
         if key is None:
@@ -1268,6 +1287,10 @@ def sulfur_rate_constants_at(
         value *= ph_factor(
             REACTION_PH_FACTOR.get(reaction.key, ""), ph, float(temperature_k), ionic_strength_m
         )
+        if key in trunk_ph:
+            from .trunk_conditions import REFERENCE_PH as _TRUNK_REFERENCE_PH
+
+            value *= 10.0 ** (trunk_ph[key] * (ph_table - _TRUNK_REFERENCE_PH))
         out[reaction.key] = value
 
     # DERIVED RATE 1: the reverse of the thioether conjugation. Stack 2018

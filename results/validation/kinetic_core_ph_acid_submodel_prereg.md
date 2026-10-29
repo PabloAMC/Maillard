@@ -65,8 +65,91 @@ Lookups still TO DO (step 2): the conflicts register for every source above; ear
 pH-endpoint weighting, B51, B60) and what they found; Knol 2010 Fig. 2 and Hou 2017 (figure-only pH series:
 digitise only if the done-test needs them).
 
-## 3. Cheap probe (step 3) -- TO DO
-## 4. Design (step 4) -- decisions taken from the first reading (2026-10-29); the rest TO DO
+## 3. Cheap probe (step 3) -- done 2026-10-29, nothing refitted
+
+`scripts/generators/build_ph_acid_submodel_probe.py` runs every pot of the READY table (41 pots, 396 rows) once on
+the sulfur lane at the shipped constants, on the pot's measured times, and predicts each row by its observation
+operator (`src/kinetic_core/observations.py`, tested against hand calculations in `tests/unit/test_observations.py`):
+cooled-sample pH, pH after Zhao's 6x dilution, the pH-stat's NaOH uptake at 90 C, titratable acid to pH 8.3 relative to
+the unheated sample, formic + acetic acid. 7 pots are skipped (lactose, the di-ARP, heptenal, and Deng's methionine ARP,
+which the sulfur lane does not carry); 325 rows are scored; t = 0 pH rows are the charge balance's input and are not.
+Three arms, ~40 s each on 8 cores:
+
+| data set (observable) | n | shipped | + trunk pH terms in the lane | + and `k_aa_frag` off |
+| --- | --- | --- | --- | --- |
+| Davidek 2002, pH-stat 5-8 (FA+AA) | 53 | 0.61 | 0.36 | 0.31 |
+| Davidek 2002 (NaOH uptake) | 49 | 0.50 | 0.52 | **0.26** |
+| Martins 2003b DFG (acetic) | 32 | 0.80 | 0.51 | 0.49 |
+| Martins 2003b DFG (formic) | 23 | 0.57 | 0.51 | 0.53 |
+| Martins 2003b DFG (pH) | 16 | 0.10 | 0.10 | 0.06 |
+| Martins 2005b Glc + Gly pH ladder 4.8-7.5 (pH) | 52 | 0.75 | 0.44 | **0.38** |
+| Brands 2001 sugar + caseinate (pH) | 14 | 0.19 | 0.19 | 0.18 |
+| Brands 2001 (titratable acid) | 13 | 0.66 | 0.66 | 0.64 |
+| Brands 2001 (FA+AA) | 13 | 0.43 | 0.43 | 0.43 |
+| Nguyen 2016 glucose + caseinate (pH) | 24 | 0.06 | 0.06 | 0.06 |
+| Cao 2017 Cys + xylose 0.4 M (pH) | 12 | 0.93 | 0.93 | 0.93 |
+| Zhao 2017b, same pot, 6x diluted (pH) | 18 | 0.77 | 0.77 | 0.77 |
+| Zhou 2023 ARP +/- Cys, final pH | 6 | 0.98 | 0.98 | 0.98 |
+
+RMS residual: pH units for pH, dex (log10 measured / predicted) for amounts. Artifacts:
+`kinetic_core_ph_acid_submodel_probe{,_trunk_ph_dynamic,_trunk_ph_dynamic_without_k_aa_frag}.{json,md}`.
+
+**Findings.**
+
+1. **The sulfur lane's acid supply has no pH dependence.** Shipped, Davidek's DFG makes 20.0 mmol/L of formic +
+   acetic acid at every pH from 5 to 8; the paper measures 3.3 to 79 (water) and 11 to 79 (phosphate). The trunk lane
+   carries Martins 2003 Table 3's measured pH terms on the three Amadori-decay steps and the 3-DG -> formic exit
+   (`trunk_conditions`, B12 / B40), but the sulfur lane -- the one lane whose pH moves -- never applied them.
+   `sulfur.TRUNK_PH_TERMS` (new, OFF) applies them at the lane's computed pH on the label scale; it halves the Davidek
+   and Martins 2005b errors with no constant refitted. This is a code-path omission, not a missing measurement.
+2. **The fitted acetic-acid sink `k_aa_frag` is contradicted by two data sets and required by one.** B1 fitted it
+   (t1/2 = 59 min at 100 C, Ea at its 20 kJ/mol lower bound) on Martins 2005's glucose + glycine acids. In DFG systems,
+   where the precursor runs out, it makes acetic acid peak and fall (Martins 2003b 100 C: predicted 4.6 -> 0.84 mmol/L
+   from 45 to 180 min against a measured plateau at 4.8; Davidek pH 8: 60 -> 32 against 44 -> 79). Acetic acid is
+   thermally stable at these temperatures; no chemistry the corpus documents removes it. Switched off, Davidek's
+   NaOH-uptake error halves (0.52 -> 0.26 dex). But on its own fit data (Martins 2005, Glc + Gly 200 mM, 80-120 C)
+   the sink is doing work: without it acetic acid at 100 C / 120 min is 16.8 mmol/L (with the dynamic pH terms;
+   19.0 without them) against 11.6 measured. The dynamic pH feedback explains about a third of what the sink absorbs.
+   So the sink is a surrogate for something else in the glucose system -- candidates, each with a direction: the
+   1-deoxyglucosone supply runs too long (1-DG captured by glycine / melanoidin, which only the glucose system has in
+   excess: predicts the excess grows with glycine); the acetic-acid yield of the 1-DG exit is lower than 1 (predicts a
+   constant ratio at all times, not a late excess); a reading error at late times in Fig. 5.10 (predicts nothing
+   systematic across temperatures). It goes into the fit as a rival arm (section 4), not deleted on this probe.
+3. **Pentose + cysteine at 0.4 M is over-acidified by 0.8-0.9 pH units, in two papers of one laboratory, unchanged by
+   either arm.** Cao 2017 and Zhao 2017b (same pot; Zhao reads a 6x dilution) measure 4.7 -> 4.15 over 5 h at 90 C;
+   the lane goes to 3.6 in 30 min and 3.4 by 5 h. The two papers agree with each other through the dilution operator
+   (diluted vs undiluted within 0.2 units in both data and model), so it is the acid supply, not the observation. The
+   lumped pentose acid pool (`ACID`, yield per sink event, B2.2) was calibrated on Zhou's 20 mM pots; at 400 mM it
+   produces too much acid too fast. A yield that is not proportional to concentration, or acid made by a step with a
+   different order, are the candidates.
+4. **Zhou 2023's six final-pH endpoints -- B2.2's own calibration anchors -- are missed by up to 2.1 units**: ARP alone
+   at pH 8 ends at 7.10 predicted vs 4.95 measured, at pH 6 at 3.19 vs 3.98. Two constants cannot carry the pH and
+   cysteine dependence of the pentose acid supply.
+5. **Casein systems: pH right, titratable acid low by 3x.** Nguyen's pH is within 0.06; Brands' titratable acid is
+   under-predicted 2-6x while its pH is within 0.2. The lane carries neither the caseinate's titratable groups nor its
+   lysine (LYSP is a trunk species), and the amine-free sugar loss (`k_glc_frag`) makes no acid. The pH agreement is
+   therefore partly cancellation (too little acid, too little buffer); not fitted here (section 4).
+6. **What holds:** the charge balance and the observation operators. Nguyen's and Martins 2003b's drifts are within
+   0.06-0.10 pH units; the pH-stat's base uptake matches the measured acids where the acids match.
+
+**Against the expected result** (written before the probe): the shipped machinery fails the done-test, as expected
+(P = 0.70 that it would). The expectation that "pH should be right in pH-stat and buffered systems" was WRONG: the
+pH-stat data fail worst, because the failure is in the acid supply's pH dependence, not in the charge balance.
+
+## 4a. Design (step 4) -- from the probe (2026-10-29)
+
+- **Arm A (base):** `TRUNK_PH_TERMS` on, the trunk's three Amadori pH slopes and the 3-DG -> formic slope fitted with
+  Martins 2003 Table 3's values and bands as priors (`trunk_conditions.PH_EXPONENT_BAND`); `k_aa_frag` kept.
+- **Arm B (rival):** as A with `k_aa_frag` off. The two are compared by the evidence audit and leave-one-laboratory-
+  out, and the glucose-system excess (finding 2) is tested by its candidates' directions, not absorbed.
+- **Data to add before the fit:** Martins 2005's glucose + glycine formic and acetic acid at 80 / 100 / 120 C
+  (`data/lit/timeseries/martins2005_glucose_glycine_80_100_120C_pH68.yml`, B1's fit data) as keyed rows, two-reader
+  verified, so both arms are judged on the data the sink came from.
+- **Pentose acid supply (finding 3-4):** the acid yield per sink event and the ARP pKa (B2.2) refitted on Cao, Zhao and
+  Zhou together, with a concentration-order rival; if neither closes Cao at 0.4 M and Zhou at 20 mM, the supply's form
+  is wrong and the misfit protocol's mechanism step applies.
+- **Casein systems** stay diagnostic until the lane carries protein-bound lysine and the caseinate's buffer.
+## 4b. Design (step 4) -- decisions taken from the first reading (2026-10-29)
 
 - **Rows without a printed error** (Davidek 2002's NaOH uptake, 49 values; Chen 2000 / 2002 and Xu 2008 final pH):
   no error is invented. Proposed: each such series gets its own noise scale, estimated from the data with the other
