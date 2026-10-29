@@ -519,7 +519,7 @@
             "Cys"
           ],
           "products": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "placement": "mechanism_known",
           "engine_reactions": []
@@ -610,7 +610,7 @@
           "rule": "R03_enolisation_1_2",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "products": [
             "Cys",
@@ -623,7 +623,7 @@
           "rule": "R04_enolisation_2_3",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "products": [
             "DPO",
@@ -637,7 +637,7 @@
           "depth": 2,
           "reactants": [
             "Cys",
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "products": [
             "NC(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)C(=O)O"
@@ -662,8 +662,8 @@
           "rule": "R12_thiol_oxidation_to_disulfide",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA",
+            "CAMA"
           ],
           "products": [
             "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)NCC(=O)C(O)C(O)CO"
@@ -675,7 +675,7 @@
           "rule": "R12_thiol_oxidation_to_disulfide",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "CAMA",
             "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
           ],
           "products": [
@@ -702,7 +702,7 @@
           "depth": 2,
           "reactants": [
             "PENT",
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "products": [
             "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)NCC(=O)C(O)C(O)CO"
@@ -740,7 +740,7 @@
           "rule": "R14_hemithioacetal",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "CAMA",
             "CC=O"
           ],
           "products": [
@@ -779,7 +779,7 @@
           "rule": "R36_hydroxyketone_h2s_to_mercaptoketone",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "CAMA",
             "H2S"
           ],
           "products": [
@@ -835,12 +835,6 @@
           "id": null
         },
         {
-          "smiles": "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
-        {
           "smiles": "CC=O",
           "first_depth": 1,
           "kind": "registry",
@@ -851,6 +845,12 @@
           "first_depth": 1,
           "kind": "species",
           "id": "AMMONIA"
+        },
+        {
+          "smiles": "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "CAMA"
         },
         {
           "smiles": "O=C(O)C1CSC(C(O)C(O)C(O)CO)N1",
@@ -974,9 +974,9 @@
           "proposed": 6
         },
         "products": {
-          "new": 19,
-          "registry": 1,
-          "species": 5
+          "species": 6,
+          "new": 18,
+          "registry": 1
         }
       }
     },
@@ -999,7 +999,7 @@
             "Cys"
           ],
           "products": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "placement": "mechanism_known",
           "engine_reactions": []
@@ -1104,7 +1104,7 @@
           "rule": "R03_enolisation_1_2",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "products": [
             "Cys",
@@ -1117,7 +1117,7 @@
           "rule": "R04_enolisation_2_3",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "products": [
             "DPO",
@@ -1131,7 +1131,7 @@
           "depth": 2,
           "reactants": [
             "Cys",
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "products": [
             "NC(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)C(=O)O"
@@ -1169,8 +1169,8 @@
           "rule": "R12_thiol_oxidation_to_disulfide",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA",
+            "CAMA"
           ],
           "products": [
             "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)NCC(=O)C(O)C(O)CO"
@@ -1182,7 +1182,7 @@
           "rule": "R12_thiol_oxidation_to_disulfide",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "CAMA",
             "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
           ],
           "products": [
@@ -1195,7 +1195,7 @@
           "rule": "R12_thiol_oxidation_to_disulfide",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "CAMA",
             "HMP"
           ],
           "products": [
@@ -1248,7 +1248,7 @@
           "depth": 2,
           "reactants": [
             "PENT",
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "products": [
             "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)NCC(=O)C(O)C(O)CO"
@@ -1299,7 +1299,7 @@
           "rule": "R14_hemithioacetal",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "CAMA",
             "CC=O"
           ],
           "products": [
@@ -1365,7 +1365,7 @@
           "rule": "R36_hydroxyketone_h2s_to_mercaptoketone",
           "depth": 2,
           "reactants": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "CAMA",
             "H2S"
           ],
           "products": [
@@ -1421,12 +1421,6 @@
           "id": null
         },
         {
-          "smiles": "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
-        {
           "smiles": "CC=O",
           "first_depth": 1,
           "kind": "registry",
@@ -1443,6 +1437,12 @@
           "first_depth": 1,
           "kind": "species",
           "id": "AMMONIA"
+        },
+        {
+          "smiles": "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "CAMA"
         },
         {
           "smiles": "O=C(O)C1CSC(C(O)C(O)C(O)CO)N1",
@@ -1608,9 +1608,9 @@
           "proposed": 8
         },
         "products": {
-          "new": 25,
-          "registry": 1,
-          "species": 7
+          "species": 8,
+          "new": 24,
+          "registry": 1
         }
       }
     },
@@ -4566,7 +4566,7 @@
             "PENT"
           ],
           "products": [
-            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+            "CAMA"
           ],
           "placement": "mechanism_known",
           "engine_reactions": []
@@ -5780,12 +5780,6 @@
           "id": null
         },
         {
-          "smiles": "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
-        {
           "smiles": "O=C(O)C1CSC(c2ccc(CO)o2)N1",
           "first_depth": 1,
           "kind": "new",
@@ -5900,6 +5894,12 @@
           "id": "ACRCYS"
         },
         {
+          "smiles": "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "CAMA"
+        },
+        {
           "smiles": "O=C(O)C1CSC(C(O)C(O)C(O)CO)N1",
           "first_depth": 1,
           "kind": "species",
@@ -5919,8 +5919,8 @@
           "proposed": 28
         },
         "products": {
-          "new": 58,
-          "species": 11,
+          "species": 12,
+          "new": 57,
           "registry": 1
         }
       }
@@ -5935,8 +5935,8 @@
       "proposed": 72
     },
     "products_by_kind": {
-      "species": 69,
-      "new": 203,
+      "species": 72,
+      "new": 200,
       "registry": 8
     }
   }
