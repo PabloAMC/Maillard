@@ -877,6 +877,8 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
 
 ### North star: the best Maillard model possible, and how we converge on it (2026-10-28)
 
+**The order of work since 2026-10-29: [docs/guides/STRATEGY_2026-10-29.md](../docs/guides/STRATEGY_2026-10-29.md)** (consolidate → data → sub-models bottom-up on their own species → one joint fit → the other lanes).
+
 Owner, 2026-10-28: *"I want to be ambitious and aim to have the best model possible. I am not sure if we are
 succeeding. I'd do all the steps you had previously planned, but I want to keep in mind what would be the best way
 to do things so we slowly converge there."* Every wave below is judged against this section as well as its own
@@ -952,6 +954,219 @@ them"), after an independent first-time review of the repository:**
   1-1.4 dex above their envelope medians). The evidence favours the class. Moving the point there is a refit of
   every off-145 °C prediction, so it is a wave (candidate B63), held with B59 until the WUR protocol exists. The
   README states the incoherence until then.
+
+**Decisions revised after the second review (owner, 2026-10-28 afternoon: "Plan thoughtfully and execute").**
+The review found the epistemics sound and the architecture the bottleneck: too many constants for endpoint
+data, lanes that each carry their own sugar chemistry, and pot INPUTS audited less than parameters (the pH
+trajectory in B60, the thermal history now). Agreed, with the owner's amendments:
+- **D1 Thermal history as recorded (B64), first.** Every pot was integrated isothermal from t = 0. Hofmann &
+  Schieberle 1995 and 1997 (same pot, same 200 mL Roth autoclave) state "raising the temperature within 20 min
+  from 20 to 145 °C"; the 1998 paper behind the fit's 145 °C rows writes "20 min at 145 °C". At the B60 constants
+  the reading moves the anchor fit rows by up to 1.9 dex (furfural + H2S → FFT). Kind 1 data correction + kind 2
+  refit, before B63. Prereg `results/validation/kinetic_core_b64_prereg.md`.
+- **D2 B59 straight after B64, on the literature alone.** Owner: operate as if the WUR protocol did not exist.
+  B59's fit rows are Cao 2017's time courses; nothing waits for designed data.
+- **D3 B59's trunk is the shared trunk** (pentoses and hexoses, any amine including cysteine, asparagine and bound
+  lysine), so the next rebuild is the last one. Lane composition stays off until it is verified.
+- **D4 No laboratory terms. Measurement-method terms only** (owner: "predictions should be lab independent ... I am
+  not sure the lab is by itself a good characterization"). C3 becomes a method model (calibrated SIDA / calibrated
+  HS-SPME / semi-quantitative HS-SPME / HPLC) with one error scale, and where the residuals demand it one offset,
+  per method class, pooled across laboratories. Within-study CONTRASTS (predicted vs measured log-ratio) are added
+  to the scorecard as a diagnostic, because they cancel what no model can know; nothing is fitted per laboratory.
+- **D5 B52 / B53 unblocked.** "No blind hold-out left" stopped being a reason on 2026-10-28 (scores diagnose); each
+  ships on its evidence audit (Martins 2005b pH exponents, Davidek 2002 phosphate catalysis).
+- **D6 Harvest before mining.** No further sulfur literature rounds. Measured constants on disk enter on their
+  audits: Lau 2003 / Pandit 2006 norfuraneol formation barriers; Frankel 1993 hexanal Ea (113.8-122.2 kJ/mol,
+  130-160 °C) replacing the Q10 stretched from 40 to 180 °C; Brands 2002c and Hamzalıoğlu 2026 glycation barriers;
+  Balagiannis 2009 / Chan 1994b Strecker kinetics when the Strecker aldehydes are built.
+- **D7 The usefulness bar carries its power.** Directional ≥ 65 % is judged on ≥ 67 independent evaluable claims
+  (80 % power against 50 % at one-sided 0.05), or on designed data; below that the verdict is "not established".
+- **D8 Scope: whatever helps design better alternative-protein flavours and odours** (owner). Desirable notes
+  (meaty thiols, Strecker aldehydes, pyrazines, furanones) and off-notes (lipid aldehydes, the matrix that holds
+  them back) both count; IMP and ribose 5-phosphate (yeast extract, Mottram & Nobrega 2002) join the wishlist.
+  Regimes the physics does not carry (crust, grill) stay refused by name.
+- **Engineering order:** C5 (speed) before the B64 refit, which it gates; C7 opportunistically. Compute niced,
+  ≤ ~5 cores including other jobs.
+
+**Execution queue for D1-D8, in priority order (2026-10-28; owner: "implement it systematically and
+prioritized appropriately"). Priority = flux the change grounds × how sure the evidence is ÷ cost.**
+- [x] **C5 speed, before B64** (worktree `.claude/worktrees/b64-thermal-history`): the pH bisection's pKa
+  precomputed (bit-identical, 2.5×); `sulfur.PH_COUPLING = "inline"` (the charge balance at every
+  right-hand-side call, warm-started Brent) with a vectorised right-hand side and an analytic mass-action
+  Jacobian: within 0.002 dex of the converged node fixed point on five probe pots, 1.6-14× faster; one
+  objective evaluation 27 s → 7.5 s with ramps. B61's in-flight fit (old numerics, isothermal anchors) was
+  stopped by the owner; B61 reruns on B64.
+- [x] **Register of choices** (owner 2026-10-28: "avoid arbitrary choices") — `docs/reference/choices_register.yml`
+  (CR-01..CR-11), `scripts/ci/choices_register_gate.py` (CI, gates lane, model card), sweep
+  `build_choice_robustness.py`: the lipid Q10 law, the 3x band and the contrast noise cut-off MOVE headlines
+  (reported unresolved); the never-cooked refusal now reads `closure: "never heated"` (a recorded fact), the 1 %
+  threshold and its Q10 dependence deleted.
+- [x] **numba** — `src/kinetic_core/ph_kernel.py` (compiled charge balance, Python fallback; agrees to 1e-8 pH);
+  inline sulfur run 0.6 → 0.17 s (B60's fixed point: 8.5 s). Declared in `environment.yml`.
+- [ ] **D1 B64 status (evening 2026-10-28):** ramp + hold 25.95 (two starts agree); ramp only linear 45.4/46.0
+  (two starts agree: a real floor); the shape sweep moves ramp only to 33.4 without refit, so Newtonian ramps are
+  refitted (Amendment 2; running). Discriminator (Schieberle 2000, 100 °C 6 h / 145 °C MFT = 13x): ramp only
+  2.1x, ramp + hold 0.2x — neither reproduces it, because at 100 °C the model stops making MFT within an hour
+  (the thiol / trunk-timescale problem): no reading is chosen, all are reported.
+- [ ] **B59a** (Strecker sulfur → H2S, Kobayasi 1965 share 0.042 / 0.080, both lower bounds) — prereg written
+  before any number; switch `STRECKER_SULFUR`, reaction `r_dpo_ddp_h2s`; candidate B at the ramp + hold optimum
+  53.8 / 68.4 (from 26.0); refits running on that baseline; the Newtonian baseline follows B64.
+- [ ] **B59a FAILED independent review (2026-10-29)** — redox error (the H2S channel emitted the 2e-reduced DDP) and
+  a yield read as a lower bound on a fixed share; redesign as a reductant-limited, redox-balanced step (Kobayasi's
+  H2S scales ~1.9x with the reductant; add Wedzicha 1991, thiol persisting 25 h at 55 °C). Switch OFF. B64: PASS WITH
+  CHANGES (discriminator 7.9-13x from the tables, verdict ground restated, Newtonian refits declared post hoc).
+  Inline pH coupling: full-panel diff 66 rows, max 0.005 dex (B60's tolerance 0.03) — ships as kind 1.
+- [ ] **Open question for B59b (from the 2026-10-29 searches): the MFT pH optimum may depend on temperature.**
+  Hofmann 1998 (145 °C) has MFT highest at pH 3; Li 2011 (Da-Yeh MSc, 95 °C) and Hou 2017 (Food Science, 90 °C) put it
+  at pH 5.5-7. If both hold, the model's pH 3 deficit is a temperature-dependent pH law (or a Hofmann-specific
+  feature), not necessarily a missing low-pH route. B59b's pre-registration must state which it tests.
+- [ ] **B59b hold-outs, declared 2026-10-29 BEFORE B59b exists (shape tests, scored as ratios to the 4 h value):**
+  US 10,076,126 (Nestec, xylose + Cys 0.25 M, phosphate pH 5.5, 110 °C, isotope dilution; dossier
+  `us10076126_extraction.md`): MFT(t)/MFT(4 h) = 0.008 / 0.067 / 0.31 / 1 at 0.5 / 1 / 2 / 4 h — a LAG then acceleration.
+  The shipped B60 constants give 0.42 / 0.80 / 1.05 / 1 (front-loaded, plateau by 2 h; recorded as the baseline).
+  Second: Schieberle 2000 at 100 °C (MFT still rising at 12 h). Third, a level check: US 8,920,862 (95 °C, 6 h, MFT 9.4
+  and FFT 18.9 umol/mol xylose; ×2 band). The two patents disagree on MFT/FFT by 7× (3.6 vs 0.50): reported, not fitted.
+- [ ] **THE SULFUR LANE, REVISED UNDERSTANDING (2026-10-29, owner: "revise our understanding, then proceed; let's do
+  this modeling correctly").** From probes at B60's constants with no refit (`kinetic_core_b59b_prereg.md`
+  Amendment 3), the B16 record and the dossiers. Confidence in brackets.
+  1. *The shipped lane stands on a step with no measured basis* [high]. `r_pent_dpo` / `r_pent_tdp` (free pentose
+     enolised with cysteine as an instant catalyst) carry 74 % of the reference-pot flux and 9.4 of ~10 mM in Kang's
+     fed-TTCA pots. Five laboratories measure cysteine and its intermediates living for hours (Cao 2017, Zhao 2017,
+     Zhai 2019/2021, Li 2011, Zhang 2025b). Hence: B60 fails every slow cook (Schieberle 100 °C 6 h / 145 °C factor
+     0.37 vs 7.9-13; Nestlé 110 °C MFT front-loaded 50×); its 145 °C fit is right, if at all, for the wrong
+     reason; and its Laplace "identified" set is identification CONDITIONAL ON THAT STRUCTURE, so it cannot be
+     inherited by a refit of a corrected structure.
+  2. *De Roos's route is the right mechanism* [moderately high]. With it on and nothing refitted, the 100 °C MFT
+     rise is sustained for hours (6.1 / 84 / 73 vs measured 3.1 / 35 / 40 over 30 min), the Nestlé curve gains its
+     lag (0.056 at 30 min vs 0.008; off 0.43), Zhang 2025b's TTCA is within 0.4 dex, Hofmann pH 7 MFT −3.7 → −1.6
+     dex. This is the formation-side failure B16 diagnosed in September, now addressed.
+  3. *Three of its constants as transferred are wrong or under-specified* [high for formation, medium otherwise].
+     (a) Formation TTCA → Cys-Amadori: 2-5× too fast at 90-130 °C against Zhai 2019 Fig. 3A (an in-regime series
+     missed in the B59b audit). The glucose barrier (100.9 kJ/mol) is too steep for pentose; Zhai's initial slopes
+     suggest ~55-60 (rough). (b) Cys-Amadori decay: de Roos measured pH 5-6 at ~100 °C only. Zhai 2019 at 110-130 °C
+     needs it 4-30× faster than the extrapolated law if the pot turns acidic, and about as fast if it stays near
+     7.4. (c) K: Cao 0.060 L/mmol (90 °C, pH ~4.5); Zhai's plateau implies ≥ 0.019-0.025 at pH 7.4 (a lower bound:
+     free cysteine is inferred by balance).
+  4. *One mis-set constant explains three contradictions in the fed-TTCA pots* [high]. `k_ttca_cys`, fitted on
+     Kang's free cysteine under the old structure, opens the ring ~10× too fast against Zhai 2021's direct TTCA
+     stability (B16 found the same). With the route on it floods Kang's pot with free cysteine (63 % vs a measured
+     12 % ceiling), which keeps the pH near 7.3 (Kang measured 7.0 → 4.9) and diverts DPO into the cysteine Strecker
+     step instead of norfuraneol (NF peak 0.016 vs 1.46 mM), collapsing MFT 260×. The 27 → 121 cost jump is this.
+  5. *The heating history and the route are entangled* [high]. With the route on, the Schieberle factor spans
+     0.32 / 0.32 / 1.3 / 6.3 / 35 across the isothermal / ramp + hold / Newtonian τ 4 / τ 6.7 / linear-ramp readings
+     of the 145 °C pot (measured 7.9-13); with it off, 0.16-1.25, never reaching it. B64's "no reading can be
+     chosen" was reached on the wrong structure. With the route, the factor becomes a measurement of the heat-up.
+  6. *The pH of unbuffered pots is controlled by an unidentified constant* [high].
+     `ph_acid_yield_per_sink_event` is bound-limited in B60. Measured endpoints exist: Kang 5.5 / 7 / 8 → 5.1 / 4.9 /
+     4.7 (fed TTCA, 120 °C, 2 h); Zhou 2023 (in the fit). Every pH-dependent rate in an unbuffered pot (the
+     Amadori decay, the thiolate sink, NF formation) inherits it.
+  7. *My process errors today* (lessons): the refits freed unidentified coordinates against WAVES.md; the B59b
+     audit missed Zhai 2019 Fig. 3A; I launched 15 refits before a five-minute no-refit comparison would have shown
+     they were the wrong experiment.
+  **What follows.** Fix the route's constants on the data that measure its own species, before any flavour-level
+  refit (stage 1); then refit the flavour lane jointly, re-deriving which constants the data identify, with the
+  heating reading treated as a discrete alternative that the Schieberle factor may now settle (stage 2). Each stage
+  is pre-registered before its numbers exist; each gets an independent review.
+- [ ] **HOW WE WORK, reviewed on the merits (owner 2026-10-29: "proactively consider how to improve how we do
+  things"; "reason if the rule makes sense, after all you or a less capable model wrote it").** Each item: the
+  problem, its evidence, the proposal, my odds that it pays.
+  1. *Data, not statistics, is the binding constraint, and much of it is sitting unused.* 61 of 444 dossiers flag
+     quantitative figures nobody digitised; 73 mention measured pH changes. Zhai 2021 Figs. 4b and 5 (TTCA loss and
+     dicarbonyls vs pH) were read, judged "figure only", and left. Proposal: a ranked digitisation backlog for the
+     sulfur lane (inventory running 2026-10-29), digitised in batches by agents, each with its read error; author
+     requests for raw data where the figure is too coarse. Odds this is the highest-value lever on accuracy: ~60 %.
+  2. *Audits miss direct measurements because finding them is manual.* B59b's audit missed Zhai 2019 Fig. 3A;
+     stage 1 missed Zhai 2021 Fig. 4b, Kallen 1971's K(pH) and Davidek 2002's phosphate catalysis. Proposal: a
+     generated measurement index (species and step → every dossier passage that measures it, with conditions and
+     method class), queried for every evidence audit (item 5 becomes a lookup). ~80 % it prevents a repeat.
+  3. *Every fit re-implements the optimiser and its diagnostics.* 18 generators call least_squares themselves and
+     49 carry their own identification logic; both of today's fit bugs (no `diff_step`, an absolute bound
+     tolerance) are that failure class. Proposal: one tested fitting module (codebase optimiser settings, a
+     two-start convergence criterion, B8's identification rule, Laplace, leave-one-group-out, and later the
+     series-scale measurement model and the importance-sampled posterior), used by every new wave. ~85 %.
+     **BUILT 2026-10-29: `src/kinetic_core/fitting.py` + `tests/unit/test_fitting.py` (11 tests on a known-answer
+     problem with a rough objective).** Writing the tests found two more defects in the inherited practice: (a)
+     scipy's `diff_step` is relative, so B8's 3e-2 gives a machine-epsilon step at any coordinate near zero (the
+     module uses absolute per-kind steps; an audit of shipped fits with coordinates near zero, e.g. B60's acid
+     yield at 7.5e-5, is owed); (b) leave-one-out shifts in the full fit's sigmas hide tensions that inflate the
+     chi-square (the module adds a predictive F check). The route calibration now runs on it.
+  4. *Review comes too late.* Today's independent review found design gaps (no pH law, an undeclared buffer
+     transfer) after the compute, and the first 15 refits were launched before a 5-minute no-refit probe. Proposal:
+     two reviews per wave, one on the pre-registration (design, missed measurements, transfers) before any fit,
+     one on the results; and a no-refit probe as the first step of any structural change. ~85 %.
+  5. *Claims typed by hand drift from the numbers* ("~5×" was a 5-sigma shift; a sign misread). Proposal: run-log
+     numbers printed by the generator from its JSON (a summary function per generator), and prose only interprets
+     them. ~70 %.
+  6. *Contradictory data were handled case by case.* Proposal (owner agreed 2026-10-29): verify readings, tabulate
+     differences, test each explanation on data outside the conflict, model conditions as chemistry, and only then
+     a between-lab error with its spread learned across all conflicts; rank by value of information. Applied to
+     Cao vs Zhai, it turned a "lab confound" into pH and phosphate chemistry the corpus measures.
+  7. *Fit vs test by observation type was the wrong cut* (owner agreed): every simulable datum enters through a
+     method-class measurement model; accuracy by leave-one-laboratory-out; confirmation only by blind prospective
+     tests. Posterior by importance sampling from the Laplace fit if efficient (owner: yes).
+  8. *Background agents lose work when a session ends* (two lost 2026-10-29). Proposal: every long agent writes
+     its findings to a file incrementally. Adopted.
+  9. *Kept, on the merits:* pre-registration before results (it is what stops selection on scores; its failures
+     today were of content, fixed by items 2 and 4, not of the practice); the choices register; kind-1 corrections
+     shipping on verification.
+- [ ] **Stage 1 (route calibration) RUN 2026-10-29** (`kinetic_core_cysteine_route_calibration_prereg.md`, run logs
+  1-3): converged from two starts per arm after a false convergence was caught (missing `diff_step`); cost 20.3 →
+  2.33 on 121 species rows from three labs; the two CR-14 arms identical. Source tension: the Amadori formation is ~5×
+  faster in the Xie lab's phosphate pots than in Jiangnan's water (phosphate catalysis or calibration, confounded).
+  Checks point at `k_dpo_ddp` (1-DX 3-120× low in Zhai Fig. 3B; the cysteine pool lost 10× too fast at 90 °C) and at
+  the pH drift (no organic acid is made: B60's acid yield 7.5e-5). Independent review running.
+- [ ] **Stage 2 design inputs (owner 2026-10-29: "fit with the most data we have"; "if it is efficient" a full
+  posterior).** (a) Every simulable aqueous measurement from every lab, through a measurement model: a scale per
+  series shrunk towards its method class (SIDA, calibrated HPLC/LC-MS, semi-quantitative SPME), integrated out in
+  closed form; a discrepancy error per observable class from the residuals. (b) Latent conditions with priors from
+  facts where unmeasured: the heat-up per vessel type (replacing B64's five global readings), the pH of unbuffered
+  pots computed by the model. (c) The pH mechanism from measured organic-acid yields: Davidek 2002 (Amadori
+  compound at 90 °C, pH 5-8, pH-stat: acetic up to 0.64, formic up to 0.14 mol/mol, NaOH uptake), Brands & van
+  Boekel 2001/2002c (sugars at 90-130 °C, pH 6.8); Cao's, Kang's and Zhou's pH trajectories as rows. (d) Zhai 2019
+  Fig. 3B dicarbonyls and Zhao 2017's cysteine pool as rows (they bear directly on `k_dpo_ddp`). (e) Accuracy by
+  leave-one-laboratory-out (one Gauss-Newton step from the optimum, verified exactly on 2-3 labs); confirmation only
+  by blind prospective tests (WUR). (f) Posterior at the final optimum by importance sampling from the Laplace fit
+  (2-5 thousand runs), effective sample size reported, adaptive MCMC on misbehaving directions as the fallback; the
+  priors listed in the choices register. First step: a data inventory of the sulfur lane (every measurement with its
+  conditions, method class, lab, series; simulable or not).
+- [ ] **D1 B64** — prereg, Amendment 46, heating blocks on 23 bundles, V1-V5 PASS, candidate C recorded
+  (B60's vector: cost 27.08 isothermal → 50.54 ramp only → 26.43 ramp + hold). Refit `ramp_only` running;
+  then `ramp_plus_hold`, the ship rule, the independent review, the switches (`panel.THERMAL_HISTORY`,
+  `sulfur.PH_COUPLING`), and one regeneration of every artifact (scorecards, envelope, directional, null
+  baseline, contrasts, model card, README).
+- [x] **D6 (lipid, kind 1)** — `Q10_ASSUMPTION` band 2.0-3.0 → 1.6-3.3, which now contains the measured
+  values (Tazi 2009 almond paste 1.6-3.3; Frankel 1993 n-6 oils 2.15-2.27 at 145 °C); centre unchanged; the
+  warning no longer says the dependence is "measured nowhere". Moves the envelope, not the point. **Open
+  hypothesis, not decided on scores:** which law transfers to a hot moist protein pot (Tazi's moist-matrix
+  Q10 ≤ 1.6 at aw > 0.72 vs Frankel's bulk-oil 114-122 kJ/mol); routed to the experiment ranking. The
+  uncooked-pot refusal no longer survives the band's low corner (recorded in `engine.py`).
+- [x] **D4 diagnostic** — `build_contrast_scores.py` → `results/validation/contrast_scores.md`. On the shipped
+  B60 engine, out of sample: median error 0.31 dex against 0.28 for predicting no change, signs 12/25 on
+  resolved pairs (37 pairs, 5 studies). The engine does not yet predict within-study ratios better than "no
+  change"; re-run after every wave.
+- [x] **D7** — the model card prints the usefulness bar, the 67-claim power condition and the contrast
+  diagnostic (`model_card.collect_usefulness_bar`); spliced into the README at the B64 regeneration.
+- [ ] **B65 harvest (D6, kind 3 by audit, after B64):** measured overrides for norfuraneol formation
+  (`r_dpo_nf`: Lau 2003 81.5 ± 3.2, Pandit 2006 93.0 ± 6.4 kJ/mol, ribose + amine, 116-131 °C) and the B62
+  furfural pair, into `ea_class_prior` as step measurements; aqueous glycation barriers for the trunk's
+  bound-lysine arm (Hamzalıoğlu 2026: CML 75.4 ± 17.6, CEL 61.5 ± 19.9, lysine loss 23.4 kJ/mol; Brands
+  2002c Table 6) replacing the dry-sesame and declared-zero ones.
+- [ ] **B52 / B53 (D5)** — trunk pH by DFG speciation (Martins 2005b exponents, Mossine 1994 pKa) and
+  phosphate catalysis as per-step third-order terms (Davidek 2002; Potman 1989, Bell 1997 bands). Each on its
+  audit; no blind hold-out needed.
+- [ ] **B59 as the shared trunk (D2, D3)** — PENT + Cys ⇌ TTCA (Cao 2017 K), Schiff base → Cys-Amadori →
+  deoxyosones + Cys released, the Strecker sulfur to H2S + acetaldehyde (Kobayasi 1965 band), on Cao 2017's
+  time courses as fit rows; written sugar- and amine-generic so the trunk and acrylamide lanes can later run
+  on it. Two sub-waves (B59a Strecker sulfur, B59b TTCA / Cys-Amadori), as approved.
+- [ ] **C3 measurement model (D4)** — one error scale per quantification class (SIDA / calibrated HS-SPME /
+  semi-quantitative HS-SPME / HPLC), pooled across laboratories, and a class offset only if the pooled
+  residuals demand it (the shipped sulfur split: extraction +0.8 dex, headspace −0.7 dex out of sample, to be
+  tested for confounding with laboratory first). No laboratory term.
+- [ ] **numba** for the charge balance (~80 % of an inline run): after the envelope job ends, with numpy and
+  scipy frozen in `environment.yml`.
+- [ ] **D8** — `maillard wishlist` gains IMP / ribose 5-phosphate (Mottram & Nobrega 2002: R5P makes
+  norfuraneol with no amine; IMP 10-100× less reactive; IMP hydrolysis kinetics missing: Matoba 1988 PDF) and
+  the Strecker aldehydes (Balagiannis 2009, Chan 1994b on disk) as the largest unmodelled aroma family.
 
 **0. Grounding comes first (owner, 2026-10-28: "scientifically grounded", not "improves a number").** The flux
 attribution grades every step by evidence class. On B60, 98-100 % of every reference pot's flux runs on FITTED

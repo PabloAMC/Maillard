@@ -257,3 +257,55 @@
   had no CPU left. Cap my parallel work at about half the cores, nice it, and stop superseded probes.
   `scipy.optimize.least_squares`' `max_nfev` does not count finite-difference Jacobian evaluations, so
   budget a k-parameter refit at ~(k+1) x max_nfev integrations.
+
+## 2026-10-29 — an independent review failed B59a and corrected B64 (lessons from my own errors)
+- **Check a new reaction's REDOX, not only C/N/S.** `r_dpo_ddp_h2s` balanced carbon, nitrogen and sulfur but emitted
+  the 2e-reduced DDP together with H2S, double-counting the enaminol's reducing equivalents. For any step that moves
+  sulfur between oxidation states, write the half-reactions and check H and electrons before running anything.
+- **A yield is not a bound on a branching share** unless every unit of product is known to come from the branch.
+  Ask what else makes the product (a blank?) and whether the yield scales with a co-reactant: if it does, a fixed
+  share is the wrong functional form.
+- **Read the source's numbers, not its prose.** Schieberle 2000's "a factor of 13" is 7.9x on its own tables. A
+  discriminator taken from a sentence must be recomputed from the tables, with the discrepancy as its uncertainty.
+- **Amendments after results are selection.** Refitting a variant because a sweep lowered its cost, or carrying "the
+  best-fitting" baselines forward, is choosing on scores. Run every pre-registered alternative, or declare the
+  selection as post hoc in the record.
+- **"V1-V5 PASS" must name what it covers.** A verification run on two readings does not certify a third.
+- **Pre-register the mechanical ship rule with the audit**, and make the engine check (item 4) a non-tautological
+  reproduction of the source pot.
+
+## 2026-10-29 (later) — 15 refits launched before the cheap question was asked (owner: "get clarity before expensive runs")
+- **Before any refit, run the change at the incumbent's constants with NO refit** and score it row by row and on
+  every hold-out. Five minutes on one core showed what hours of refits would have buried: which rows the change
+  breaks, why (a flux budget), and that the change already moves the hold-outs the right way. A refit is for
+  rebalancing a change you understand, never for discovering what it does.
+- **"Refit only the coordinates the data identify" (WAVES.md) applies to every kind-2 refit**, and the identified set
+  is a property of the rows AND the structure: after a structural change it must be re-derived, not inherited.
+- **List every direct measurement of each NEW species before writing audit item 5.** B59b's audit missed Zhai 2019
+  Fig. 3A (the route's own intermediates at four temperatures), which contradicts the transferred formation barrier.
+  Grep the dossiers for the species' names (TTCA, Cys-Amadori, ARP), not only for the step's name.
+- **When a fit moves a constant a long way, ask which measurement in the objective sees that constant.** If none
+  does, the move is compensation, and the fix is data that see it, not a bound.
+- **Check the record for the same idea before proposing it.** "Add Schieberle's 100 °C series as fit rows" was B16
+  (2026-09-07), and it failed for reasons that changed the plan.
+- **Copy the codebase's optimiser settings, and restart-check every fit.** The route calibration's first fits left
+  `least_squares` at its default finite-difference step (~1e-8, below the ODE noise at rtol 1e-7) and reported a
+  convergence that a restart from the other arm's optimum disproved (8.27 → 4.45). Every fit here uses
+  `diff_step = 3e-2`. "Converged" means two starts agree, not that the optimiser's status flag says so.
+- **Background agents must save as they go.** Two agents (a digitisation, a literature search) were lost when the
+  session ended mid-task with nothing written. Every long agent gets an output file it appends to after each unit
+  of work.
+- **Question inherited rules on their merits** (owner, 2026-10-29). "Rates, fed yields and ratios fit; levels
+  validate" encoded a real worry (calibration leaking into constants) with the wrong remedy (excluding data by
+  type); the right tool was a measurement model. A written rule is evidence of someone's reasoning, not proof of it.
+- **scipy's `diff_step` is RELATIVE** (3 % of the coordinate's value). At a coordinate near zero the step collapses
+  to machine epsilon and the Jacobian column is the ODE integrator's noise; across units it is inconsistent (3 kJ/mol
+  on an Ea of 100, 0.018 dex on a log10 k of -0.6). Every fit copying B8's setting shares this for coordinates near
+  zero (B60's acid yield sits at 7.5e-5). `src/kinetic_core/fitting.py` uses an absolute step per coordinate kind.
+  Found by writing a test with a known answer on a rough objective, which is the point of shared, tested tooling.
+- **A parameter shift measured in the full fit's sigmas can hide a tension**, because the tension inflates the full
+  fit's chi-square and so its sigmas. Leave-one-group-out also needs the predictive check: the held-out group's
+  residuals under the model fitted without it, against that fit's own scatter (an F test).
+- **A dossier's summary label is not the source.** Zhai 2021's kinetic rows were run at pH 5.5 but labelled pH 7 in
+  the dossier heading; B16 and stage 1 both inherited it. Before a row enters a fit, its conditions are checked
+  against the paper's own text (the measurement index should carry the quoted condition, not the summary).
