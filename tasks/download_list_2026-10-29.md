@@ -195,9 +195,16 @@ E8. Jansson 2020 Int Dairy J 104653 — https://doi.org/10.1016/j.idairyj.2020.1
   Holds: Table S2 standard curves, Fig. S1 the heating/cooling profile. Why: makes its calibrated volatiles usable. Confidence 0.6.
 E9. Xiao 2025 Food Hydrocolloids 111119 — https://doi.org/10.1016/j.foodhyd.2025.111119
   Holds: Tables S1-S4, Fig. S1 (calibrated; content not described in the dossier). Confidence 0.4.
-E10. Primary papers cited by the matrix code with no dossier: Barallat-Pérez 2023 (sealed lupin binding values) and
-  Hall & Anderson 1983 (hexanal air-water partition, 7-9x from Meynier). Why: two shipped matrix inputs without a source
-  on disk. Confidence 0.8 that each gives numbers.
+E10. Primary papers cited by the matrix code with no dossier:
+  - Barallat-Pérez, Janssen, Martins, Fogliano & Oliviero 2023, JAFC 71(50):20274-20284, "Unraveling the Role of
+    Flavor Structure and Physicochemical Properties in the Binding Phenomenon with Commercial Food Protein Isolates"
+    (whey, pea, soy, lupin) -- https://doi.org/10.1021/acs.jafc.3c05991 (open access, PMC10739987). The code's
+    "sealed lupin" values cite it. (The 2024 lupin in-mouth paper, 10.1021/acs.jafc.3c08819, is on disk.)
+  - Hall G. & Anderson J. 1983, "Volatile fat oxidation products. II. Influence of temperature on volatility of
+    saturated, mono- and diunsaturated aldehydes in liquid media", Lebensm.-Wiss. u.-Technol. 16:362-366 (as cited
+    in Meynier 2002, ref. 16; checked against the PDF). No DOI: LWT's 1983 volume predates DOIs, so it needs a
+    library or interlibrary-loan copy. Part I (odour thresholds) is the paper just before it in the same volume.
+  Confidence 0.8 that each gives numbers.
 E11. Grosch 1993, the MFT contrast Cerny 2015 cites (primary not on disk). Confidence 0.5.
 Below cut (semi-quantitative relative areas, or no lane use): Singh 2021 S1, Wang 2025 S2, Wang 2026c S3, Du 2023 S1,
 Zhao 2019b S1, Wang 2020 S1, Liu 2025 S1, Yang 2024 S1-S4, Miyazaki 2023 S1-2, Xu 2024 S1, Crowther 1979 (a thesis).
