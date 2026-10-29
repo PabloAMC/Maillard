@@ -30,6 +30,8 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
+from . import parallel
+
 #: B8's optimiser settings (generate_kinetic_core_b8_fit.py, fit_member): trust-region reflective, Jacobian
 #: scaling, tolerances. B8 also passes ``diff_step = 3e-2``, which scipy reads as a RELATIVE step: 3 % of the
 #: coordinate's value. At a coordinate near zero (a log10 k of -0.02) that step collapses to machine epsilon and the
@@ -116,8 +118,12 @@ def fit(problem: Problem, start: np.ndarray, budget: int = 1200, rows: Optional[
         count["n"] += 1
         return problem.evaluate(theta, rows)
 
+    def f_many(points):
+        count["n"] += len(points)  # counted here: a forked worker's increments do not come back
+        return _evaluate_all(problem, points, rows)
+
     def jac(theta):
-        return _forward_jacobian(problem, theta, lower, upper, f)
+        return _forward_jacobian(problem, theta, lower, upper, f_many)
 
     t0 = time.time()
     r0 = f(start)
@@ -129,16 +135,30 @@ def fit(problem: Problem, start: np.ndarray, budget: int = 1200, rows: Optional[
                seconds=round(time.time() - t0, 1), residuals=r)
 
 
-def _forward_jacobian(problem: Problem, theta, lower, upper, f) -> np.ndarray:
-    """Forward differences with B8's absolute step per coordinate kind, stepping inward at an upper bound."""
+def _evaluate_all(problem: Problem, points: Sequence[np.ndarray], rows) -> List[np.ndarray]:
+    """``problem.evaluate`` at every point, in parallel processes when ``MAILLARD_WORKERS`` > 1
+    (2026-10-29, strategy M2). The points of a finite-difference Jacobian are equal-sized, independent
+    objective evaluations: the coarsest grain, so it scales where pot-level parallelism stalls on the
+    slowest pot. Bit-identical to the serial loop (tests/unit/test_fitting.py)."""
+    return parallel.map_ordered(lambda x: problem.evaluate(x, rows), points)
+
+
+def _forward_jacobian(problem: Problem, theta, lower, upper, f_many) -> np.ndarray:
+    """Forward differences with B8's absolute step per coordinate kind, stepping inward at an upper bound.
+    ``f_many`` evaluates a list of points (the centre first)."""
     theta = np.asarray(theta, dtype=float)
-    r0 = f(theta)
-    jac = np.zeros((len(r0), len(theta)))
+    steps, points = [], [theta]
     for j, kind in enumerate(problem.kinds):
         h = STEPS[kind] if theta[j] + STEPS[kind] <= upper[j] else -STEPS[kind]
         x = theta.copy()
         x[j] += h
-        jac[:, j] = (f(x) - r0) / h
+        steps.append(h)
+        points.append(x)
+    values = f_many(points)
+    r0 = values[0]
+    jac = np.zeros((len(r0), len(theta)))
+    for j, (h, r) in enumerate(zip(steps, values[1:])):
+        jac[:, j] = (r - r0) / h
     return jac
 
 
@@ -150,20 +170,27 @@ def laplace(problem: Problem, theta: np.ndarray, rows: Optional[Tuple[Any, ...]]
     upper = np.asarray(problem.upper if upper is None else upper, dtype=float)
     lower = np.asarray(problem.lower, dtype=float)
     theta = np.asarray(theta, dtype=float)
-    r0 = problem.evaluate(theta, rows)
-    jac = np.zeros((len(r0), len(theta)))
+    # Every point the differences need, evaluated in one batch (parallel when asked): the centre, then per
+    # coordinate the step up and / or down that its bounds allow.
+    points, plan = [theta], []
     for j, kind in enumerate(problem.kinds):
         h = STEPS[kind]
         up, down = theta[j] + h <= upper[j], theta[j] - h >= lower[j]
         xp, xm = theta.copy(), theta.copy()
         xp[j] += h
         xm[j] -= h
-        if up and down:
-            jac[:, j] = (problem.evaluate(xp, rows) - problem.evaluate(xm, rows)) / (2 * h)
-        elif up:
-            jac[:, j] = (problem.evaluate(xp, rows) - r0) / h
+        plan.append((h, len(points) if up else None, len(points) + up if (down or not up) else None))
+        points += ([xp] if up else []) + ([xm] if (down or not up) else [])
+    values = _evaluate_all(problem, points, rows)
+    r0 = values[0]
+    jac = np.zeros((len(r0), len(theta)))
+    for j, (h, i_up, i_down) in enumerate(plan):
+        if i_up is not None and i_down is not None:
+            jac[:, j] = (values[i_up] - values[i_down]) / (2 * h)
+        elif i_up is not None:
+            jac[:, j] = (values[i_up] - r0) / h
         else:
-            jac[:, j] = (r0 - problem.evaluate(xm, rows)) / h
+            jac[:, j] = (r0 - values[i_down]) / h
     chi2_red = float(r0 @ r0) / max(len(r0) - len(theta), 1)
     jtj = jac.T @ jac
     w, v = np.linalg.eigh(0.5 * (jtj + jtj.T))

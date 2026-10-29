@@ -136,3 +136,19 @@ def test_failed_evaluation_is_a_bad_point_not_a_crash():
 def test_cost_drop_threshold():
     assert fitting.cost_drop_is_significant(0.080, 0.0412)  # 0.5 x 3.84 x 0.0412 = 0.0791
     assert not fitting.cost_drop_is_significant(0.078, 0.0412)
+
+
+def test_parallel_jacobians_change_nothing(monkeypatch):
+    """Strategy M2: the Jacobian's points evaluated by forked workers give the same fit, bit for bit, with the
+    same evaluation count, and the same Laplace (one coordinate pinned at its upper bound: the one-sided branch)."""
+    p = _problem(upper=(3.0, -2.0, 135.0))
+    start = np.array([0.5, -2.5, 80.0])
+    runs = {}
+    for workers in ("1", "3"):
+        monkeypatch.setenv("MAILLARD_WORKERS", workers)
+        f = fitting.fit(p, start, budget=400)
+        runs[workers] = (f, fitting.laplace(p, f.theta))
+    (f1, l1), (f3, l3) = runs["1"], runs["3"]
+    assert np.array_equal(f1.theta, f3.theta) and f1.evaluations == f3.evaluations
+    assert np.array_equal(f1.residuals, f3.residuals)
+    assert l1["sigma"] == l3["sigma"] and l1["chi2_red"] == l3["chi2_red"]

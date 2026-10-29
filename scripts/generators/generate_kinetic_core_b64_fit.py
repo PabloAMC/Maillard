@@ -37,7 +37,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
 import generate_kinetic_core_b60_fit as B60  # noqa: E402  (B51's rows and physics, B60's numerics and quick setting)
 from generate_kinetic_core_b8_laplace import frozen_vector  # noqa: E402
 from src import data_paths  # noqa: E402
-from src.kinetic_core import ph_state, sulfur  # noqa: E402
+from src.kinetic_core import parallel, ph_state, sulfur  # noqa: E402
 
 B51, B9, B23, B8 = B60.B51, B60.B9, B60.B23, B60.B8
 CELSIUS = 273.15
@@ -106,14 +106,16 @@ def install_reading(reading: str) -> Dict[str, tuple]:
 
 
 def _run_systems_with_profiles(parameters: Mapping[str, Any], quick: bool, drift=None) -> Dict[str, Any]:
-    """``B23.run_systems`` with each system's recorded profile passed to the integrator."""
-    out: Dict[str, Any] = {}
-    for name, spec in B23.SYSTEMS.items():
+    """``B23.run_systems`` with each system's recorded profile passed to the integrator; the
+    systems run through ``parallel.map_ordered`` (serial unless ``MAILLARD_WORKERS`` > 1)."""
+
+    def integrate_one(name: str):
+        spec = B23.SYSTEMS[name]
         minutes = float(spec["minutes"])
         points = int(spec.get("grid_points", 0))
         grid = np.linspace(0.0, minutes, points) if points >= 3 else np.array([0.0, minutes])
         profile = spec.get("profile_c")
-        run = B23.integrate_sulfur(
+        return B23.integrate_sulfur(
             parameters, float(spec["t_c"]) + CELSIUS, spec["initial"], grid,
             ph=float(spec["ph"]), buffer_spec=spec.get("buffer"), ph_drift=drift,
             ph_nodes=B23.PH_NODES_QUICK if quick else B23.PH_NODES_CAREFUL,
@@ -124,8 +126,10 @@ def _run_systems_with_profiles(parameters: Mapping[str, Any], quick: bool, drift
                 else (np.array([t for t, _ in profile]), np.array([c for _, c in profile]) + CELSIUS)
             ),
         )
-        out[name] = {"run": run, "spec": spec}
-    return out
+
+    names = list(B23.SYSTEMS)
+    runs = parallel.map_ordered(integrate_one, names)
+    return {name: {"run": run, "spec": B23.SYSTEMS[name]} for name, run in zip(names, runs)}
 
 
 def incumbent_vector() -> np.ndarray:
