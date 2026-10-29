@@ -227,3 +227,21 @@ entries:
       - {name: flat, value: "1.43e-2 1/min above pH 6", source: "de Roos 2005 Fig. 4, pH 6"}
     decided_by: "route calibration (stage 1): both arms run; one is preferred only if the direct-species likelihood separates them by more than the chi-square(1) 95 % threshold scaled by the reduced chi-square"
     sensitivity: {status: untested}
+
+  - id: CR-15
+    what: whether calibrated (externally calibrated, isotope dilution) series are read as absolute in a fit
+    where: {file: src/kinetic_core/fitting.py, symbol: SCALE_TAU}
+    kind: alternatives
+    current: absolute (tau = 0); semi-quantitative and relative series are read by shape only (tau = inf)
+    basis: >-
+      The measurement model integrates out a calibration offset per series with prior sd tau (dex). For a
+      semi-quantitative series (response factor taken as 1) the offset is unknown, and tau = inf is exact: only
+      the series' shape counts. For calibrated data no source states the between-laboratory calibration spread,
+      so the two limits are carried: absolute (each laboratory's calibration trusted) and shape-only (every series
+      read by its within-study contrasts, the strategy's primary target). A finite value would be a number no
+      source supplies; Phase 3's per-observable discrepancy term is where one would be estimated from the data.
+    alternatives:
+      - {name: absolute, value: "tau = 0 for sida and calibrated", source: "each paper's own calibration"}
+      - {name: shape_only, value: "tau = inf for every series", source: "strategy sec. 7 decision 2 (relative accuracy primary)"}
+    decided_by: "owner 2026-10-29 (strategy M6); a fit reports its constants under both until the data separate them"
+    sensitivity: {status: untested}

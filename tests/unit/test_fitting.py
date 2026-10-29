@@ -152,3 +152,111 @@ def test_parallel_jacobians_change_nothing(monkeypatch):
     assert np.array_equal(f1.theta, f3.theta) and f1.evaluations == f3.evaluations
     assert np.array_equal(f1.residuals, f3.residuals)
     assert l1["sigma"] == l3["sigma"] and l1["chi2_red"] == l3["chi2_red"]
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The measurement model (M6) and the diagnostics (M7)
+# ---------------------------------------------------------------------------------------------------------------------
+
+def _mm(tau_semi=float("inf")):
+    return fitting.MeasurementModel(series_of=lambda row: row["series"], sigma_of=lambda row: row["sigma"],
+                                    method_of=lambda row: row["method"],
+                                    scale_tau={**fitting.SCALE_TAU, "semi_quantitative": tau_semi})
+
+
+def _series_rows(n=6, method="semi_quantitative", name="s", sigmas=None):
+    sigmas = sigmas if sigmas is not None else [0.05 + 0.02 * i for i in range(n)]
+    return [{"series": name, "sigma": s, "method": method} for s in sigmas]
+
+
+@pytest.mark.parametrize("tau", [0.3, 2.0])
+def test_whitening_is_the_exact_marginal_likelihood(tau):
+    """z.z equals r' (D + tau^2 11')^-1 r for a series with a shared, integrated-out offset."""
+    rows = _series_rows()
+    sig = np.array([r["sigma"] for r in rows])
+    r = np.random.default_rng(1).normal(size=len(rows)) * 0.1
+    z = _mm(tau).whiten(r, rows)
+    cov = np.diag(sig ** 2) + tau ** 2 * np.ones((len(rows), len(rows)))
+    assert z @ z == pytest.approx(float(r @ np.linalg.solve(cov, r)), rel=1e-10)
+
+
+def test_whitened_series_have_identity_covariance():
+    rng = np.random.default_rng(3)
+    rows = _series_rows(n=4)
+    sig = np.array([r["sigma"] for r in rows])
+    tau = 0.5
+    draws = np.array([_mm(tau).whiten(rng.normal(0.0, tau) + rng.normal(size=4) * sig, rows) for _ in range(40000)])
+    assert np.allclose(np.cov(draws.T), np.eye(4), atol=0.03)
+
+
+def test_a_scale_free_series_sees_only_its_shape():
+    rows = _series_rows() + _series_rows(name="abs", method="sida")
+    r = np.random.default_rng(2).normal(size=len(rows)) * 0.1
+    shifted = r.copy()
+    shifted[:6] += 0.7  # an unknown response factor of 10^0.7 on the semi-quantitative series only
+    mm = _mm()
+    assert np.allclose(mm.whiten(r, rows), mm.whiten(shifted, rows))
+    assert mm.nuisance_dof(rows) == 1
+    shifted[6:] += 0.7  # the same shift on the absolute series is seen
+    assert not np.allclose(mm.whiten(r, rows)[6:], mm.whiten(shifted, rows)[6:])
+
+
+def test_a_series_cannot_mix_method_classes():
+    rows = _series_rows(n=2) + [{"series": "s", "sigma": 0.1, "method": "sida"}]
+    with pytest.raises(ValueError, match="mixes method classes"):
+        _mm().whiten(np.zeros(3), rows)
+
+
+def test_a_fit_recovers_the_rate_from_a_series_with_an_unknown_scale():
+    """Two series of one decay: an absolute one and a semi-quantitative one read 5x high. With the measurement model
+    the rate is recovered; treating the semi-quantitative series as absolute biases it."""
+    times = np.linspace(10.0, 200.0, 8)
+    true_a, true_lk = 1.0, -2.0
+    rows = []
+    for name, method, factor in (("abs", "sida", 1.0), ("semi", "semi_quantitative", 5.0)):
+        for t in times:
+            y = factor * 10.0 ** true_a * math.exp(-(10.0 ** true_lk) * t)
+            rows.append({"series": name, "sigma": 0.03, "method": method, "t": float(t), "y": y})
+    rows = tuple(rows)
+
+    def raw(theta, rows_):
+        a, lk = theta
+        return np.array([a - (10.0 ** lk) * row["t"] / math.log(10.0) - math.log10(row["y"]) for row in rows_])
+
+    def problem(mm):
+        return fitting.Problem(keys=("log10_A", "log10_k"), kinds=("log10k", "log10k"), lower=np.array([-2.0, -5.0]),
+                               upper=np.array([3.0, 0.0]), rows=rows,
+                               residuals=lambda theta, rows_: mm.whiten(raw(theta, rows_), rows_),
+                               nuisance_dof=mm.nuisance_dof)
+
+    honest = fitting.fit(problem(_mm()), np.array([0.5, -2.5]), budget=600)
+    naive = fitting.fit(problem(_mm(tau_semi=0.0)), np.array([0.5, -2.5]), budget=600)
+    assert honest.theta[1] == pytest.approx(true_lk, abs=1e-3)
+    assert honest.theta[0] == pytest.approx(true_a, abs=1e-3)
+    assert abs(naive.theta[0] - true_a) > 0.2  # the absolute level is dragged toward the 5x series
+    lap = fitting.laplace(problem(_mm()), honest.theta)
+    assert np.isfinite(lap["chi2_red"])  # 16 rows - 2 constants - 1 scale-free series
+
+
+def test_duplicates_are_counted_once():
+    rows = [{"ds": "zhai2023_table1", "v": 1}, {"ds": "kang2026_s4", "v": 1}, {"ds": "other", "v": 2}]
+    kept, dropped = fitting.count_once(rows, lambda r: r["ds"], {"kang2026_s4": "zhai2023_table1"})
+    assert [r["ds"] for r in kept] == ["zhai2023_table1", "other"]
+    assert [r["ds"] for r in dropped] == ["kang2026_s4"]
+    kept, dropped = fitting.count_once(rows[1:], lambda r: r["ds"], {"kang2026_s4": "zhai2023_table1"})
+    assert [r["ds"] for r in kept] == ["kang2026_s4", "other"] and not dropped  # the copy stands in for its original
+
+
+def test_diagnostics_flag_a_biased_laboratory_and_a_trend():
+    rows = tuple({"lab": lab, "T": t} for lab in ("A", "B") for t in (90.0, 100.0, 110.0, 120.0, 130.0, 140.0))
+
+    def residuals(theta, rows_):
+        return np.array([(3.0 if row["lab"] == "B" else 0.0) + 0.05 * (row["T"] - 115.0) for row in rows_])
+
+    p = fitting.Problem(keys=("x",), kinds=("log10k",), lower=np.array([-1.0]), upper=np.array([1.0]), rows=rows,
+                        residuals=residuals)
+    report = fitting.diagnostics(p, np.array([0.0]), {"lab": lambda r: r["lab"], "T": lambda r: r["T"]})
+    assert any(f.startswith("lab=B") for f in report["flags"])
+    assert not any(f.startswith("lab=A") for f in report["flags"])
+    assert report["trends"]["T"]["rho"] > 0
+    assert "| B | 6 |" in fitting.diagnostics_markdown(report)

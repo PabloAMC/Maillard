@@ -24,9 +24,10 @@ use. Nothing here knows chemistry.
 """
 from __future__ import annotations
 
+import math
 import time
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
@@ -65,6 +66,9 @@ class Problem:
     group_of: Callable[[Any], str] = field(default=lambda row: "all")
     #: what a failed evaluation (an integration error) returns per row: a bad point, not a crash of the fit
     failed_residual: float = 25.0
+    #: degrees of freedom the residuals have already spent on nuisance parameters for these rows (a
+    #: ``MeasurementModel``'s scale-free series: one each); subtracted wherever a reduced chi-square is formed
+    nuisance_dof: Callable[[Tuple[Any, ...]], int] = field(default=lambda rows: 0)
 
     def __post_init__(self):
         assert len(self.keys) == len(self.kinds) == len(self.lower) == len(self.upper), "keys, kinds and bounds must align"
@@ -191,7 +195,7 @@ def laplace(problem: Problem, theta: np.ndarray, rows: Optional[Tuple[Any, ...]]
             jac[:, j] = (values[i_up] - r0) / h
         else:
             jac[:, j] = (r0 - values[i_down]) / h
-    chi2_red = float(r0 @ r0) / max(len(r0) - len(theta), 1)
+    chi2_red = float(r0 @ r0) / max(len(r0) - len(theta) - problem.nuisance_dof(problem.rows if rows is None else rows), 1)
     jtj = jac.T @ jac
     w, v = np.linalg.eigh(0.5 * (jtj + jtj.T))
     keep = w > 1e-12 * float(np.max(w)) if np.max(w) > 0 else np.zeros_like(w, dtype=bool)
@@ -268,13 +272,14 @@ def predictive_check(problem: Problem, f_: Fit, held: Tuple[Any, ...], kept: Tup
     from scipy.stats import f as f_dist
 
     r_held = problem.evaluate(f_.theta, held)
-    dof = max(len(kept) - len(problem.keys), 1)
+    dof = max(len(kept) - len(problem.keys) - problem.nuisance_dof(kept), 1)
     chi2_red = float(f_.residuals @ f_.residuals) / dof
-    ms_held = float(r_held @ r_held) / max(len(held), 1)
+    n_held = max(len(held) - problem.nuisance_dof(held), 1)
+    ms_held = float(r_held @ r_held) / n_held
     stat = ms_held / chi2_red if chi2_red > 0 else np.inf
     return {"rms_held_out": float(np.sqrt(ms_held)), "rms_in_sample": float(np.sqrt(chi2_red)), "F": stat,
-            "p": float(f_dist.sf(stat, len(held), dof)),
-            "tension": bool(stat > f_dist.ppf(level, len(held), dof))}
+            "p": float(f_dist.sf(stat, n_held, dof)),
+            "tension": bool(stat > f_dist.ppf(level, n_held, dof))}
 
 
 def cost_drop_is_significant(cost_drop: float, chi2_red: float, df: int = 1, level: float = 0.95) -> bool:
@@ -295,3 +300,138 @@ def summary_lines(problem: Problem, f_: Fit, lap: Dict[str, Any]) -> List[str]:
         tag = "on bound" if lap["at_bound"][k] else ("identified" if lap["identified"][k] else "UNIDENTIFIED")
         lines.append(f"  {k:34s} {f_.theta[problem.keys.index(k)]:10.4g} +- {s:.3g}  [{tag}]")
     return lines
+
+
+# =====================================================================================================================
+# THE MEASUREMENT MODEL (strategy M6, 2026-10-29) AND THE DIAGNOSTICS (M7)
+# =====================================================================================================================
+# A measured series is the truth times a calibration factor the paper may not pin down: semi-quantitative headspace
+# work (response factor taken as 1) is off by an unknown factor that is SHARED by the whole series. In log space that
+# is an additive offset s ~ N(0, tau^2) per series. Integrating it out exactly gives, per series, the covariance
+# D + tau^2 11^T (D = diag(sigma_i^2)), and least squares on WHITENED residuals is then the exact marginal likelihood:
+#     u = r / sigma;   z = u - c w^ (w^ . u),   w = 1 / sigma,   w^ = w / |w|,   c = 1 - 1 / sqrt(1 + tau^2 |w|^2)
+# (Cov z = I; tests/unit/test_fitting.py checks it on simulated series.) The two limits need no number:
+#   tau = 0    absolute data (isotope dilution, external calibration): z = u, the level counts;
+#   tau = inf  a series whose level is unknown: c = 1, the weighted mean is projected out and only the series' SHAPE
+#              (its within-study contrasts) counts, at the cost of one degree of freedom (``nuisance_dof``).
+# A finite tau for calibrated data from different laboratories is a choice no source supplies; it belongs in the
+# choices register as a swept cutoff, not here.
+SCALE_TAU: Dict[str, float] = {
+    "sida": 0.0,
+    "calibrated": 0.0,
+    "semi_quantitative": float("inf"),
+    "relative": float("inf"),  # a series reported only relative to its own reference (percent of maximum, ...)
+}
+
+
+@dataclass(frozen=True)
+class MeasurementModel:
+    """How rows are measured: which series each belongs to, its error (dex) and its method class (a ``SCALE_TAU``
+    key). Every row of one series must share a method class."""
+
+    series_of: Callable[[Any], str]
+    sigma_of: Callable[[Any], float]
+    method_of: Callable[[Any], str]
+    scale_tau: Mapping[str, float] = field(default_factory=lambda: dict(SCALE_TAU))
+
+    def _series(self, rows: Sequence[Any]) -> Dict[str, List[int]]:
+        out: Dict[str, List[int]] = {}
+        for i, row in enumerate(rows):
+            out.setdefault(self.series_of(row), []).append(i)
+        for name, idx in out.items():
+            methods = {self.method_of(rows[i]) for i in idx}
+            if len(methods) != 1:
+                raise ValueError(f"series {name!r} mixes method classes {sorted(methods)}")
+            (method,) = methods
+            if method not in self.scale_tau:
+                raise KeyError(f"series {name!r}: unknown method class {method!r}")
+        return out
+
+    def whiten(self, log_residuals: np.ndarray, rows: Sequence[Any]) -> np.ndarray:
+        """Residuals in dex -> whitened residuals, each series' calibration offset integrated out."""
+        r = np.asarray(log_residuals, dtype=float)
+        sigma = np.array([float(self.sigma_of(row)) for row in rows])
+        z = r / sigma
+        for idx in self._series(rows).values():
+            tau = float(self.scale_tau[self.method_of(rows[idx[0]])])
+            if tau == 0.0:
+                continue
+            w = 1.0 / sigma[idx]
+            norm2 = float(w @ w)
+            c = 1.0 if math.isinf(tau) else 1.0 - 1.0 / math.sqrt(1.0 + tau * tau * norm2)
+            w_hat = w / math.sqrt(norm2)
+            z[idx] = z[idx] - c * w_hat * float(w_hat @ z[idx])
+        return z
+
+    def nuisance_dof(self, rows: Sequence[Any]) -> int:
+        """One degree of freedom per scale-free series present in ``rows``."""
+        return sum(1 for idx in self._series(rows).values()
+                   if math.isinf(float(self.scale_tau[self.method_of(rows[idx[0]])])))
+
+
+def count_once(rows: Sequence[Any], dataset_of: Callable[[Any], str], copy_of: Mapping[str, str]
+               ) -> Tuple[Tuple[Any, ...], Tuple[Any, ...]]:
+    """Duplicates counted once: drop the rows of a data set that is a confirmed copy (``copy_of[copy] = original``)
+    when the original's rows are present; a copy whose original is absent stands in for it. Returns (kept,
+    dropped). The copies come from the conflicts register's confirmed duplicates."""
+    present = {dataset_of(row) for row in rows}
+    kept, dropped = [], []
+    for row in rows:
+        original = copy_of.get(dataset_of(row))
+        (dropped if original is not None and original in present else kept).append(row)
+    return tuple(kept), tuple(dropped)
+
+
+#: Reporting thresholds of the diagnostics (they flag, they never decide): a group's mean whitened residual more
+#: than this many standard errors from zero; a rank correlation with a condition below this p.
+DIAGNOSTIC_MEAN_SE = 2.5
+DIAGNOSTIC_TREND_P = 0.01
+
+
+def diagnostics(problem: Problem, theta: np.ndarray, attributes: Mapping[str, Callable[[Any], Any]],
+                rows: Optional[Tuple[Any, ...]] = None) -> Dict[str, Any]:
+    """The residuals at ``theta`` broken down by each named row attribute (series, laboratory, species, temperature,
+    pH, time ...): per group the count, mean, RMS and share positive; per numeric attribute the rank correlation of
+    residual with it. Flags the patterns the misfit protocol calls structural (docs/guides/OPERATING_PROCEDURE.md
+    sec. 4): a group whose residuals share a sign beyond chance, and a residual trend with a condition."""
+    from scipy.stats import spearmanr
+
+    rows = problem.rows if rows is None else rows
+    r = problem.evaluate(theta, rows)
+    out: Dict[str, Any] = {"n": len(r), "rms": float(np.sqrt(np.mean(r ** 2))) if len(r) else float("nan"),
+                           "by": {}, "trends": {}, "flags": []}
+    for name, get in attributes.items():
+        values = [get(row) for row in rows]
+        groups: Dict[Any, List[int]] = {}
+        for i, v in enumerate(values):
+            groups.setdefault(v, []).append(i)
+        table = {}
+        for v, idx in sorted(groups.items(), key=lambda kv: str(kv[0])):
+            g = r[idx]
+            mean = float(np.mean(g))
+            table[str(v)] = {"n": len(idx), "mean": mean, "rms": float(np.sqrt(np.mean(g ** 2))),
+                             "share_positive": float(np.mean(g > 0))}
+            if len(idx) >= 3 and abs(mean) * math.sqrt(len(idx)) > DIAGNOSTIC_MEAN_SE:
+                out["flags"].append(f"{name}={v}: mean residual {mean:+.2f} over {len(idx)} rows (one sign)")
+        out["by"][name] = table
+        numeric = [v for v in values if isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v)]
+        if len(numeric) == len(values) and len(set(numeric)) >= 3:
+            rho, p = spearmanr(numeric, r)
+            out["trends"][name] = {"rho": float(rho), "p": float(p)}
+            if p < DIAGNOSTIC_TREND_P:
+                out["flags"].append(f"residual trends with {name}: rank correlation {rho:+.2f} (p = {p:.2g})")
+    return out
+
+
+def diagnostics_markdown(report: Dict[str, Any], title: str = "Residual diagnostics") -> str:
+    """``diagnostics``' report as markdown: the flags first, then one table per attribute."""
+    lines = [f"## {title}", "", f"{report['n']} rows, RMS whitened residual {report['rms']:.3g}.", ""]
+    lines += (["**Flags**", ""] + [f"- {f}" for f in report["flags"]] + [""]) if report["flags"] else ["No flags.", ""]
+    for name, table in report["by"].items():
+        trend = report["trends"].get(name)
+        lines.append(f"### By {name}" + (f" (rank correlation {trend['rho']:+.2f}, p = {trend['p']:.2g})" if trend else ""))
+        lines += ["", "| group | n | mean | RMS | share > 0 |", "|---|---|---|---|---|"]
+        lines += [f"| {g} | {t['n']} | {t['mean']:+.2f} | {t['rms']:.2f} | {t['share_positive']:.2f} |"
+                  for g, t in table.items()]
+        lines.append("")
+    return "\n".join(lines)
