@@ -1,0 +1,1274 @@
+{
+ "arm": "extend_last_slope",
+ "leave_out": null,
+ "n_rows": 121,
+ "keys": [
+  "log10_k_ttca_cys_145C",
+  "ea_ttca_ring_kj_mol",
+  "log10_k_ttca_deg_145C",
+  "log10_K_ttca_l_per_mmol",
+  "log10_k_cama_form_90C",
+  "ea_cama_form_kj_mol",
+  "ea_cama_decay_kj_mol",
+  "log10_k_cys_thermal_145C"
+ ],
+ "start": [
+  -0.8789435250621129,
+  60.35577431959136,
+  -1.6382246822738287,
+  -1.1608918526308154,
+  -3.146668795559941,
+  69.89358516635167,
+  124.49957615875871,
+  -1.8909324629004167
+ ],
+ "theta": [
+  -1.9629277558362621,
+  42.8790028335277,
+  -1.9116159983103718,
+  -1.1249387366083001,
+  -2.918809620066173,
+  42.48457827027282,
+  123.40376590240349,
+  -2.3215082596318233
+ ],
+ "start_cost": 6.387749988449178,
+ "cost": 2.3268403794926424,
+ "status": 3,
+ "converged": true,
+ "evaluations": 100,
+ "seconds": 326.1,
+ "by_source": {
+  "cao2017": {
+   "n": 24,
+   "sum_sq": 1.569388176155513,
+   "rms_dex": 0.2557169802857834
+  },
+  "kang_s3": {
+   "n": 18,
+   "sum_sq": 0.8436364450781959,
+   "rms_dex": 0.21649178135262573
+  },
+  "kang_s4": {
+   "n": 12,
+   "sum_sq": 0.04387671423883246,
+   "rms_dex": 0.06046811435158234
+  },
+  "zhai2019": {
+   "n": 64,
+   "sum_sq": 2.0501147816283805,
+   "rms_dex": 0.17897777365623768
+  },
+  "zhai2021": {
+   "n": 3,
+   "sum_sq": 0.14666464188436373,
+   "rms_dex": 0.22110679311467246
+  }
+ },
+ "laplace": {
+  "sigma_common_dex": 0.20293598883944036,
+  "sigma": {
+   "log10_k_ttca_cys_145C": 0.1574840661586647,
+   "ea_ttca_ring_kj_mol": 10.029371481648901,
+   "log10_k_ttca_deg_145C": 0.13221309424846972,
+   "log10_K_ttca_l_per_mmol": 0.1057447182856904,
+   "log10_k_cama_form_90C": 0.05313344221342044,
+   "ea_cama_form_kj_mol": 8.564374214361603,
+   "ea_cama_decay_kj_mol": 15.381524055187574,
+   "log10_k_cys_thermal_145C": 0.5505810152527396
+  },
+  "at_bound": {
+   "log10_k_ttca_cys_145C": false,
+   "ea_ttca_ring_kj_mol": false,
+   "log10_k_ttca_deg_145C": false,
+   "log10_K_ttca_l_per_mmol": true,
+   "log10_k_cama_form_90C": false,
+   "ea_cama_form_kj_mol": false,
+   "ea_cama_decay_kj_mol": false,
+   "log10_k_cys_thermal_145C": false
+  },
+  "identified": {
+   "log10_k_ttca_cys_145C": true,
+   "ea_ttca_ring_kj_mol": true,
+   "log10_k_ttca_deg_145C": true,
+   "log10_K_ttca_l_per_mmol": false,
+   "log10_k_cama_form_90C": true,
+   "ea_cama_form_kj_mol": true,
+   "ea_cama_decay_kj_mol": true,
+   "log10_k_cys_thermal_145C": true
+  },
+  "correlation": [
+   [
+    1.0,
+    0.826,
+    0.854,
+    0.119,
+    -0.246,
+    -0.561,
+    -0.582,
+    -0.145
+   ],
+   [
+    0.826,
+    1.0,
+    0.804,
+    0.504,
+    -0.119,
+    -0.451,
+    -0.382,
+    -0.101
+   ],
+   [
+    0.854,
+    0.804,
+    1.0,
+    0.25,
+    -0.134,
+    -0.446,
+    -0.496,
+    -0.413
+   ],
+   [
+    0.119,
+    0.504,
+    0.25,
+    1.0,
+    -0.205,
+    0.043,
+    0.097,
+    -0.04
+   ],
+   [
+    -0.246,
+    -0.119,
+    -0.134,
+    -0.205,
+    1.0,
+    0.009,
+    0.292,
+    0.084
+   ],
+   [
+    -0.561,
+    -0.451,
+    -0.446,
+    0.043,
+    0.009,
+    1.0,
+    0.754,
+    0.188
+   ],
+   [
+    -0.582,
+    -0.382,
+    -0.496,
+    0.097,
+    0.292,
+    0.754,
+    1.0,
+    0.171
+   ],
+   [
+    -0.145,
+    -0.101,
+    -0.413,
+    -0.04,
+    0.084,
+    0.188,
+    0.171,
+    1.0
+   ]
+  ]
+ },
+ "residuals": [
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "TTCA",
+   "minutes": 30.0,
+   "measured": 356.0,
+   "floor": 5.0,
+   "residual_dex": -0.2063201089789585
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "TTCA",
+   "minutes": 60.0,
+   "measured": 338.0,
+   "floor": 5.0,
+   "residual_dex": -0.13340137996960483
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "TTCA",
+   "minutes": 120.0,
+   "measured": 290.0,
+   "floor": 5.0,
+   "residual_dex": -0.10205436932434155
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "TTCA",
+   "minutes": 180.0,
+   "measured": 268.0,
+   "floor": 5.0,
+   "residual_dex": -0.1377591895355685
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "TTCA",
+   "minutes": 240.0,
+   "measured": 254.0,
+   "floor": 5.0,
+   "residual_dex": -0.19083260770761615
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "TTCA",
+   "minutes": 300.0,
+   "measured": 236.0,
+   "floor": 5.0,
+   "residual_dex": -0.23502658547597624
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "CAMA",
+   "minutes": 30.0,
+   "measured": 6.0,
+   "floor": 5.0,
+   "residual_dex": -0.030902623731843305
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "CAMA",
+   "minutes": 60.0,
+   "measured": 63.0,
+   "floor": 5.0,
+   "residual_dex": -0.568225724184929
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "CAMA",
+   "minutes": 120.0,
+   "measured": 90.0,
+   "floor": 5.0,
+   "residual_dex": -0.4516302954993433
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "CAMA",
+   "minutes": 180.0,
+   "measured": 106.0,
+   "floor": 5.0,
+   "residual_dex": -0.3902418586143851
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "CAMA",
+   "minutes": 240.0,
+   "measured": 109.0,
+   "floor": 5.0,
+   "residual_dex": -0.32998206698921256
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "CAMA",
+   "minutes": 300.0,
+   "measured": 133.0,
+   "floor": 5.0,
+   "residual_dex": -0.371835917921117
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "Cys",
+   "minutes": 30.0,
+   "measured": 76.0,
+   "floor": 4.0,
+   "residual_dex": 0.3015329168519873
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "Cys",
+   "minutes": 60.0,
+   "measured": 68.0,
+   "floor": 4.0,
+   "residual_dex": 0.1358420886438185
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "Cys",
+   "minutes": 120.0,
+   "measured": 66.0,
+   "floor": 4.0,
+   "residual_dex": -0.10335933398924756
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "Cys",
+   "minutes": 180.0,
+   "measured": 64.0,
+   "floor": 4.0,
+   "residual_dex": -0.22735254539254623
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "Cys",
+   "minutes": 240.0,
+   "measured": 62.0,
+   "floor": 4.0,
+   "residual_dex": -0.2884184199372012
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "Cys",
+   "minutes": 300.0,
+   "measured": 56.0,
+   "floor": 4.0,
+   "residual_dex": -0.2884065621915081
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "PENT",
+   "minutes": 30.0,
+   "measured": 80.0,
+   "floor": 4.0,
+   "residual_dex": 0.3011763706888917
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "PENT",
+   "minutes": 60.0,
+   "measured": 77.0,
+   "floor": 4.0,
+   "residual_dex": 0.15834458526686
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "PENT",
+   "minutes": 120.0,
+   "measured": 73.0,
+   "floor": 4.0,
+   "residual_dex": 0.06189867637237923
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "PENT",
+   "minutes": 180.0,
+   "measured": 71.0,
+   "floor": 4.0,
+   "residual_dex": 0.03975219028576045
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "PENT",
+   "minutes": 240.0,
+   "measured": 70.0,
+   "floor": 4.0,
+   "residual_dex": 0.030560998570299952
+  },
+  {
+   "source": "cao2017",
+   "pot": "cao_blank_90C",
+   "species": "PENT",
+   "minutes": 300.0,
+   "measured": 69.0,
+   "floor": 4.0,
+   "residual_dex": 0.022268667077640476
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "TTCA",
+   "minutes": 20.0,
+   "measured": 41.1,
+   "floor": 0.7,
+   "residual_dex": -0.23267910112061485
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "TTCA",
+   "minutes": 40.0,
+   "measured": 50.5,
+   "floor": 0.7,
+   "residual_dex": -0.21270676042355585
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "TTCA",
+   "minutes": 60.0,
+   "measured": 55.6,
+   "floor": 0.7,
+   "residual_dex": -0.1876928818839006
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "TTCA",
+   "minutes": 80.0,
+   "measured": 54.0,
+   "floor": 0.7,
+   "residual_dex": -0.13166216854313997
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "TTCA",
+   "minutes": 100.0,
+   "measured": 54.1,
+   "floor": 0.7,
+   "residual_dex": -0.10302886550403512
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "TTCA",
+   "minutes": 120.0,
+   "measured": 53.1,
+   "floor": 0.7,
+   "residual_dex": -0.07506386698009264
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "TTCA",
+   "minutes": 140.0,
+   "measured": 54.0,
+   "floor": 0.7,
+   "residual_dex": -0.06902394414531393
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "TTCA",
+   "minutes": 160.0,
+   "measured": 54.3,
+   "floor": 0.7,
+   "residual_dex": -0.06313105571434789
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "CAMA",
+   "minutes": 20.0,
+   "measured": 0.2,
+   "floor": 0.3,
+   "residual_dex": 0.003945758797376923
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "CAMA",
+   "minutes": 40.0,
+   "measured": 0.5,
+   "floor": 0.3,
+   "residual_dex": -0.003527961577328022
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "CAMA",
+   "minutes": 60.0,
+   "measured": 1.0,
+   "floor": 0.3,
+   "residual_dex": -0.05492957487877761
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "CAMA",
+   "minutes": 80.0,
+   "measured": 1.3,
+   "floor": 0.3,
+   "residual_dex": -0.01536917020800463
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "CAMA",
+   "minutes": 100.0,
+   "measured": 1.6,
+   "floor": 0.3,
+   "residual_dex": 0.01734052039790485
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "CAMA",
+   "minutes": 120.0,
+   "measured": 1.9,
+   "floor": 0.3,
+   "residual_dex": 0.04407756681045709
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "CAMA",
+   "minutes": 140.0,
+   "measured": 2.1,
+   "floor": 0.3,
+   "residual_dex": 0.08360563511049852
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_70C",
+   "species": "CAMA",
+   "minutes": 160.0,
+   "measured": 2.8,
+   "floor": 0.3,
+   "residual_dex": 0.03943661340989399
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "TTCA",
+   "minutes": 20.0,
+   "measured": 48.3,
+   "floor": 0.7,
+   "residual_dex": -0.17192552410210285
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "TTCA",
+   "minutes": 40.0,
+   "measured": 59.2,
+   "floor": 0.7,
+   "residual_dex": -0.15378109577480278
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "TTCA",
+   "minutes": 60.0,
+   "measured": 57.7,
+   "floor": 0.7,
+   "residual_dex": -0.10017229842749434
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "TTCA",
+   "minutes": 80.0,
+   "measured": 59.0,
+   "floor": 0.7,
+   "residual_dex": -0.09509590476249234
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "TTCA",
+   "minutes": 100.0,
+   "measured": 58.3,
+   "floor": 0.7,
+   "residual_dex": -0.09046713980111828
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "TTCA",
+   "minutes": 120.0,
+   "measured": 59.1,
+   "floor": 0.7,
+   "residual_dex": -0.10587885714164909
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "TTCA",
+   "minutes": 140.0,
+   "measured": 61.9,
+   "floor": 0.7,
+   "residual_dex": -0.14105772172802633
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "TTCA",
+   "minutes": 160.0,
+   "measured": 63.2,
+   "floor": 0.7,
+   "residual_dex": -0.16902119591957135
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "CAMA",
+   "minutes": 20.0,
+   "measured": 0.9,
+   "floor": 0.3,
+   "residual_dex": -0.13618074116897733
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "CAMA",
+   "minutes": 40.0,
+   "measured": 1.4,
+   "floor": 0.3,
+   "residual_dex": 0.011716313014313652
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "CAMA",
+   "minutes": 60.0,
+   "measured": 1.7,
+   "floor": 0.3,
+   "residual_dex": 0.1370588109979774
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "CAMA",
+   "minutes": 80.0,
+   "measured": 1.9,
+   "floor": 0.3,
+   "residual_dex": 0.23429123044275194
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "CAMA",
+   "minutes": 100.0,
+   "measured": 2.6,
+   "floor": 0.3,
+   "residual_dex": 0.21770982153156604
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "CAMA",
+   "minutes": 120.0,
+   "measured": 3.0,
+   "floor": 0.3,
+   "residual_dex": 0.2415022433680416
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "CAMA",
+   "minutes": 140.0,
+   "measured": 3.4,
+   "floor": 0.3,
+   "residual_dex": 0.25512677618467267
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_90C",
+   "species": "CAMA",
+   "minutes": 160.0,
+   "measured": 3.7,
+   "floor": 0.3,
+   "residual_dex": 0.27233376445617336
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "TTCA",
+   "minutes": 20.0,
+   "measured": 58.5,
+   "floor": 0.7,
+   "residual_dex": -0.14429310564880388
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "TTCA",
+   "minutes": 40.0,
+   "measured": 55.9,
+   "floor": 0.7,
+   "residual_dex": -0.07278734374143414
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "TTCA",
+   "minutes": 60.0,
+   "measured": 53.9,
+   "floor": 0.7,
+   "residual_dex": -0.06992308236763736
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "TTCA",
+   "minutes": 80.0,
+   "measured": 52.0,
+   "floor": 0.7,
+   "residual_dex": -0.08891187335116507
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "TTCA",
+   "minutes": 100.0,
+   "measured": 52.8,
+   "floor": 0.7,
+   "residual_dex": -0.1377330102203077
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "TTCA",
+   "minutes": 120.0,
+   "measured": 48.7,
+   "floor": 0.7,
+   "residual_dex": -0.14769013477112675
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "TTCA",
+   "minutes": 140.0,
+   "measured": 42.6,
+   "floor": 0.7,
+   "residual_dex": -0.13486745127821487
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "TTCA",
+   "minutes": 160.0,
+   "measured": 39.0,
+   "floor": 0.7,
+   "residual_dex": -0.14035629801064595
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "CAMA",
+   "minutes": 20.0,
+   "measured": 2.3,
+   "floor": 0.3,
+   "residual_dex": -0.1835083349772467
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "CAMA",
+   "minutes": 40.0,
+   "measured": 3.7,
+   "floor": 0.3,
+   "residual_dex": -0.07455646890209265
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "CAMA",
+   "minutes": 60.0,
+   "measured": 5.6,
+   "floor": 0.3,
+   "residual_dex": -0.10083211435692592
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "CAMA",
+   "minutes": 80.0,
+   "measured": 5.3,
+   "floor": 0.3,
+   "residual_dex": -0.004622853363841673
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "CAMA",
+   "minutes": 100.0,
+   "measured": 4.8,
+   "floor": 0.3,
+   "residual_dex": 0.07188466557285461
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "CAMA",
+   "minutes": 120.0,
+   "measured": 4.6,
+   "floor": 0.3,
+   "residual_dex": 0.10230683188762377
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "CAMA",
+   "minutes": 140.0,
+   "measured": 4.2,
+   "floor": 0.3,
+   "residual_dex": 0.13759483679733145
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_110C",
+   "species": "CAMA",
+   "minutes": 160.0,
+   "measured": 3.8,
+   "floor": 0.3,
+   "residual_dex": 0.16644858942346524
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "TTCA",
+   "minutes": 20.0,
+   "measured": 45.7,
+   "floor": 0.7,
+   "residual_dex": 0.008995499919829893
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "TTCA",
+   "minutes": 40.0,
+   "measured": 42.5,
+   "floor": 0.7,
+   "residual_dex": 0.003640622511023131
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "TTCA",
+   "minutes": 60.0,
+   "measured": 34.5,
+   "floor": 0.7,
+   "residual_dex": 0.01674073929065808
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "TTCA",
+   "minutes": 80.0,
+   "measured": 32.2,
+   "floor": 0.7,
+   "residual_dex": -0.03532039893638478
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "TTCA",
+   "minutes": 100.0,
+   "measured": 21.2,
+   "floor": 0.7,
+   "residual_dex": 0.060599535483637966
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "TTCA",
+   "minutes": 120.0,
+   "measured": 15.8,
+   "floor": 0.7,
+   "residual_dex": 0.10455709651792634
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "TTCA",
+   "minutes": 140.0,
+   "measured": 11.3,
+   "floor": 0.7,
+   "residual_dex": 0.1659101085699928
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "TTCA",
+   "minutes": 160.0,
+   "measured": 6.9,
+   "floor": 0.7,
+   "residual_dex": 0.2893777007945397
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "CAMA",
+   "minutes": 20.0,
+   "measured": 4.3,
+   "floor": 0.3,
+   "residual_dex": -0.33721369280494007
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "CAMA",
+   "minutes": 40.0,
+   "measured": 4.8,
+   "floor": 0.3,
+   "residual_dex": -0.31165779624121065
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "CAMA",
+   "minutes": 60.0,
+   "measured": 3.9,
+   "floor": 0.3,
+   "residual_dex": -0.27067721456001537
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "CAMA",
+   "minutes": 80.0,
+   "measured": 3.1,
+   "floor": 0.3,
+   "residual_dex": -0.24555629411761246
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "CAMA",
+   "minutes": 100.0,
+   "measured": 1.6,
+   "floor": 0.3,
+   "residual_dex": -0.062065909866953956
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "CAMA",
+   "minutes": 120.0,
+   "measured": 1.2,
+   "floor": 0.3,
+   "residual_dex": -0.026102489606909828
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "CAMA",
+   "minutes": 140.0,
+   "measured": 0.0,
+   "floor": 0.3,
+   "residual_dex": 0.6099660834366026
+  },
+  {
+   "source": "zhai2019",
+   "pot": "zhai2019_130C",
+   "species": "CAMA",
+   "minutes": 160.0,
+   "measured": 0.0,
+   "floor": 0.3,
+   "residual_dex": 0.5512223530312483
+  },
+  {
+   "source": "zhai2021",
+   "pot": "zhai2021_ttca_100C",
+   "species": "TTCA",
+   "minutes": 60.0,
+   "measured": 8.705,
+   "floor": 0.0,
+   "residual_dex": -0.12166385054804288
+  },
+  {
+   "source": "zhai2021",
+   "pot": "zhai2021_ttca_120C",
+   "species": "TTCA",
+   "minutes": 60.0,
+   "measured": 6.065799999999999,
+   "floor": 0.0,
+   "residual_dex": -0.14805502243516067
+  },
+  {
+   "source": "zhai2021",
+   "pot": "zhai2021_ttca_140C",
+   "species": "TTCA",
+   "minutes": 60.0,
+   "measured": 4.4595,
+   "floor": 0.0,
+   "residual_dex": -0.3315754208108787
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_100C",
+   "species": "Cys",
+   "minutes": 20.0,
+   "measured": 0.121,
+   "floor": 0.03,
+   "residual_dex": 0.3767832182433083
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_100C",
+   "species": "Cys",
+   "minutes": 40.0,
+   "measured": 0.242,
+   "floor": 0.03,
+   "residual_dex": 0.31294764391265206
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_100C",
+   "species": "Cys",
+   "minutes": 60.0,
+   "measured": 0.693,
+   "floor": 0.03,
+   "residual_dex": 0.0012802192133192247
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_100C",
+   "species": "Cys",
+   "minutes": 80.0,
+   "measured": 0.872,
+   "floor": 0.03,
+   "residual_dex": -0.012171300286397988
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_100C",
+   "species": "Cys",
+   "minutes": 100.0,
+   "measured": 1.3,
+   "floor": 0.03,
+   "residual_dex": -0.1151809148795563
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_100C",
+   "species": "Cys",
+   "minutes": 120.0,
+   "measured": 1.233,
+   "floor": 0.03,
+   "residual_dex": -0.03910523632021753
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_120C",
+   "species": "Cys",
+   "minutes": 20.0,
+   "measured": 0.205,
+   "floor": 0.03,
+   "residual_dex": 0.4981369953039228
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_120C",
+   "species": "Cys",
+   "minutes": 40.0,
+   "measured": 0.989,
+   "floor": 0.03,
+   "residual_dex": 0.06369386323760219
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_120C",
+   "species": "Cys",
+   "minutes": 60.0,
+   "measured": 1.219,
+   "floor": 0.03,
+   "residual_dex": 0.052565392417646246
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_120C",
+   "species": "Cys",
+   "minutes": 80.0,
+   "measured": 1.112,
+   "floor": 0.03,
+   "residual_dex": 0.1171121806075269
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_120C",
+   "species": "Cys",
+   "minutes": 100.0,
+   "measured": 0.988,
+   "floor": 0.03,
+   "residual_dex": 0.1715093609210764
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_120C",
+   "species": "Cys",
+   "minutes": 120.0,
+   "measured": 0.874,
+   "floor": 0.03,
+   "residual_dex": 0.21661401536647445
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_140C",
+   "species": "Cys",
+   "minutes": 20.0,
+   "measured": 0.5,
+   "floor": 0.03,
+   "residual_dex": 0.35429549346631817
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_140C",
+   "species": "Cys",
+   "minutes": 40.0,
+   "measured": 1.63,
+   "floor": 0.03,
+   "residual_dex": -0.11106995205001415
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_140C",
+   "species": "Cys",
+   "minutes": 60.0,
+   "measured": 1.574,
+   "floor": 0.03,
+   "residual_dex": -0.13737056159785813
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_140C",
+   "species": "Cys",
+   "minutes": 80.0,
+   "measured": 1.619,
+   "floor": 0.03,
+   "residual_dex": -0.20469614530159128
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_140C",
+   "species": "Cys",
+   "minutes": 100.0,
+   "measured": 1.3,
+   "floor": 0.03,
+   "residual_dex": -0.16260957995094585
+  },
+  {
+   "source": "kang_s3",
+   "pot": "kang_ttca_140C",
+   "species": "Cys",
+   "minutes": 120.0,
+   "measured": 1.088,
+   "floor": 0.03,
+   "residual_dex": -0.136752483824317
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_100C",
+   "species": "Cys",
+   "minutes": 20.0,
+   "measured": 9.77,
+   "floor": 0.03,
+   "residual_dex": 0.0027492724760161003
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_100C",
+   "species": "Cys",
+   "minutes": 40.0,
+   "measured": 9.61,
+   "floor": 0.03,
+   "residual_dex": 0.0028320718223508066
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_100C",
+   "species": "Cys",
+   "minutes": 60.0,
+   "measured": 9.41,
+   "floor": 0.03,
+   "residual_dex": 0.005276386851271226
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_100C",
+   "species": "Cys",
+   "minutes": 80.0,
+   "measured": 9.12,
+   "floor": 0.03,
+   "residual_dex": 0.01246642977110503
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_100C",
+   "species": "Cys",
+   "minutes": 100.0,
+   "measured": 8.64,
+   "floor": 0.03,
+   "residual_dex": 0.029541571220399576
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_100C",
+   "species": "Cys",
+   "minutes": 120.0,
+   "measured": 8.38,
+   "floor": 0.03,
+   "residual_dex": 0.03643811667220063
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_120C",
+   "species": "Cys",
+   "minutes": 20.0,
+   "measured": 8.63,
+   "floor": 0.03,
+   "residual_dex": 0.04109936463874704
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_120C",
+   "species": "Cys",
+   "minutes": 40.0,
+   "measured": 7.81,
+   "floor": 0.03,
+   "residual_dex": 0.06729680219670676
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_120C",
+   "species": "Cys",
+   "minutes": 60.0,
+   "measured": 7.11,
+   "floor": 0.03,
+   "residual_dex": 0.0909580832829978
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_120C",
+   "species": "Cys",
+   "minutes": 80.0,
+   "measured": 6.9,
+   "floor": 0.03,
+   "residual_dex": 0.08696875441181773
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_120C",
+   "species": "Cys",
+   "minutes": 100.0,
+   "measured": 6.55,
+   "floor": 0.03,
+   "residual_dex": 0.09252414296797963
+  },
+  {
+   "source": "kang_s4",
+   "pot": "kang_freecys_120C",
+   "species": "Cys",
+   "minutes": 120.0,
+   "measured": 6.13,
+   "floor": 0.03,
+   "residual_dex": 0.10421981890513334
+  }
+ ]
+}

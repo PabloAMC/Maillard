@@ -48,8 +48,10 @@ def _study(bench: Dict[str, Any], bench_file: str) -> str:
     return citation[:40] or Path(bench_file).stem
 
 
-def _rows() -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
-    scores = json.loads(SCORES.read_text(encoding="utf-8"))
+def _rows(scores: Optional[Dict[str, Any]] = None) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
+    """The scored ppb rows of ``scores`` (default: the tracked scorecard)."""
+    if scores is None:
+        scores = json.loads(SCORES.read_text(encoding="utf-8"))
     rows, excluded = [], defaultdict(int)
     for b in scores["benchmarks"]:
         if not b["compounds"]:

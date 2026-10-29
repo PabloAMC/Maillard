@@ -1,0 +1,897 @@
+{
+  "artifact": "contrast_scores",
+  "provenance": {
+    "artifact": "contrast_scores",
+    "generated_on": "2026-10-28",
+    "git": {
+      "commit": "8209567718c0454745727f2bade50cc589794cb0",
+      "short": "82095677",
+      "branch": "HEAD",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_contrast_scores.py",
+    "inputs": [
+      {
+        "path": "results/validation/core_panel_scores.json",
+        "sha256": "5f765b17f67e3c53bd6cf84571acd2d334af18eeba0178e75b738006805d7de1"
+      }
+    ]
+  },
+  "definition": "Within-study contrasts: how well the engine predicts the RATIO between two pots of one study (D4, 2026-10-28).\n\nOwner, 2026-10-28: \"when we make predictions, those should be lab independent ... we want general\npredictions\". A ratio between two pots of one study cancels everything the study holds fixed, its\ncalibration and its unreported conditions included, so it tests the chemistry with the laboratory\nremoved. It is a DIAGNOSTIC: nothing is fitted on it and no laboratory term exists anywhere.\n\nFor every pair of scored ppb rows of the same compound in the same study: measured m = log10(a / b) and\npredicted p = log10(engine a / engine b). Reported: the median |p - m| (dex), the share within 3x, the\nsign agreement on pairs whose measured effect clears the measurement noise (|m| > log10 1.4, the\ndirectional panel's MEASUREMENT_NOISE_FOLD), and the same numbers for the no-change baseline (p = 0).\nPairs from one study share rows, so they are not independent; the study count is printed beside them.",
+  "scores": {
+    "all_pairs": {
+      "pairs": 81,
+      "studies": 5,
+      "resolved_pairs": 65,
+      "engine": {
+        "median_error_dex": 0.552312690298723,
+        "within_3x": 39,
+        "sign_agreement_on_resolved": 45
+      },
+      "no_change": {
+        "median_error_dex": 0.6045923278433575,
+        "within_3x": 35,
+        "sign_agreement_on_resolved": 0
+      }
+    },
+    "out_of_sample": {
+      "pairs": 37,
+      "studies": 5,
+      "resolved_pairs": 25,
+      "engine": {
+        "median_error_dex": 0.30763274104158156,
+        "within_3x": 24,
+        "sign_agreement_on_resolved": 12
+      },
+      "no_change": {
+        "median_error_dex": 0.2841997875578205,
+        "within_3x": 23,
+        "sign_agreement_on_resolved": 0
+      }
+    }
+  },
+  "by_lane": {
+    "acrylamide": {
+      "pairs": 5,
+      "studies": 2,
+      "resolved_pairs": 5,
+      "engine": {
+        "median_error_dex": 0.7085153222422491,
+        "within_3x": 2,
+        "sign_agreement_on_resolved": 0
+      },
+      "no_change": {
+        "median_error_dex": 0.7085153222422491,
+        "within_3x": 2,
+        "sign_agreement_on_resolved": 0
+      }
+    },
+    "sulfur": {
+      "pairs": 76,
+      "studies": 3,
+      "resolved_pairs": 60,
+      "engine": {
+        "median_error_dex": 0.5517653063635646,
+        "within_3x": 37,
+        "sign_agreement_on_resolved": 45
+      },
+      "no_change": {
+        "median_error_dex": 0.595990710841497,
+        "within_3x": 33,
+        "sign_agreement_on_resolved": 0
+      }
+    }
+  },
+  "pairs": [
+    {
+      "study": "Schibilsky, S. Bildung fluechtiger Verbi",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "lane": "acrylamide",
+      "a": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+      "b": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+      "measured_dex": -0.24494703849362548,
+      "engine_dex": 0.0,
+      "out_of_sample": true
+    },
+    {
+      "study": "Schibilsky, S. Bildung fluechtiger Verbi",
+      "compound": "DMHF",
+      "lane": "acrylamide",
+      "a": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+      "b": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+      "measured_dex": -0.7085153222422491,
+      "engine_dex": 0.0,
+      "out_of_sample": true
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+      "b": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "measured_dex": 1.959238556932417,
+      "engine_dex": 1.6909595694820068,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "measured_dex": 1.6821884449089792,
+      "engine_dex": 1.0480320320065124,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 2.9628426812012423,
+      "engine_dex": 5.001388932381972,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 2.059752694209299,
+      "engine_dex": 1.6909595694820068,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "measured_dex": -0.2770501120234379,
+      "engine_dex": -0.6429275374754942,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 1.0036041242688252,
+      "engine_dex": 3.3104293628999657,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 0.10051413727688169,
+      "engine_dex": 0.0,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 1.280654236292263,
+      "engine_dex": 3.95335690037546,
+      "out_of_sample": true
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 0.37756424930031957,
+      "engine_dex": 0.6429275374754942,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": -0.9030899869919435,
+      "engine_dex": -3.3104293628999657,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "b": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "measured_dex": -1.2379651158125882,
+      "engine_dex": 0.1399960715568436,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "b": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "measured_dex": -1.3031263528248969,
+      "engine_dex": 0.5459620662122329,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "b": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "measured_dex": -0.5155320141136277,
+      "engine_dex": 0.5742678212162315,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "b": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "measured_dex": -1.1343622156914832,
+      "engine_dex": -0.31214699373072236,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "b": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "measured_dex": 0.1946965035727416,
+      "engine_dex": 1.6338961529779346,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "measured_dex": -0.25136343747042555,
+      "engine_dex": 2.212502812021203,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 1.0934216851622351,
+      "engine_dex": 5.898079046567083,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 0.3360256563692109,
+      "engine_dex": 1.6338961529779346,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "b": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "measured_dex": -0.06516123701230883,
+      "engine_dex": 0.40596599465538924,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "b": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "measured_dex": 0.7224331016989604,
+      "engine_dex": 0.4342717496593879,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "b": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "measured_dex": 0.10360290012110496,
+      "engine_dex": -0.4521430652875659,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "b": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "measured_dex": 1.4326616193853297,
+      "engine_dex": 1.493900081421091,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "measured_dex": 0.9866016783421625,
+      "engine_dex": 2.0725067404643593,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 2.331386800974823,
+      "engine_dex": 5.75808297501024,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 1.573990772181799,
+      "engine_dex": 1.493900081421091,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "b": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "measured_dex": 0.7875943387112692,
+      "engine_dex": 0.028305755003998703,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "b": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "measured_dex": 0.16876413713341376,
+      "engine_dex": -0.8581090599429552,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "b": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "measured_dex": 1.4978228563976386,
+      "engine_dex": 1.0879340867657017,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "measured_dex": 1.0517629153544714,
+      "engine_dex": 1.6665407458089703,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 2.396548037987132,
+      "engine_dex": 5.35211698035485,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 1.6391520091941079,
+      "engine_dex": 1.0879340867657017,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "b": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "measured_dex": -0.6188302015778554,
+      "engine_dex": -0.8864148149469538,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "b": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "measured_dex": 0.7102285176863694,
+      "engine_dex": 1.059628331761703,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "measured_dex": 0.2641685766432022,
+      "engine_dex": 1.6382349908049716,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 1.6089536992758628,
+      "engine_dex": 5.323811225350852,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 0.8515576704828387,
+      "engine_dex": 1.059628331761703,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "b": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "measured_dex": 1.3290587192642247,
+      "engine_dex": 1.946043146708657,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "measured_dex": 0.8829987782210575,
+      "engine_dex": 2.5246498057519253,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 2.2277839008537184,
+      "engine_dex": 6.210226040297806,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 1.470387872060694,
+      "engine_dex": 1.946043146708657,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "measured_dex": -0.4460599410431672,
+      "engine_dex": 0.5786066590432686,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 0.8987251815894935,
+      "engine_dex": 4.264182893589148,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 0.1413291527964693,
+      "engine_dex": 0.0,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "b": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "measured_dex": 1.3447851226326606,
+      "engine_dex": 3.68557623454588,
+      "out_of_sample": true
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": 0.5873890938396364,
+      "engine_dex": -0.5786066590432685,
+      "out_of_sample": false
+    },
+    {
+      "study": "hofmann_schieberle_1998_free_mft_fft",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "b": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "measured_dex": -0.7573960287930243,
+      "engine_dex": -4.264182893589148,
+      "out_of_sample": false
+    },
+    {
+      "study": "lin2021",
+      "compound": "Acrylamide",
+      "lane": "acrylamide",
+      "a": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+      "b": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+      "measured_dex": -1.7168972605512325,
+      "engine_dex": 0.2202090174903348,
+      "out_of_sample": true
+    },
+    {
+      "study": "lin2021",
+      "compound": "Acrylamide",
+      "lane": "acrylamide",
+      "a": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+      "b": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "measured_dex": -1.4729652949485048,
+      "engine_dex": 0.2202090174903348,
+      "out_of_sample": true
+    },
+    {
+      "study": "lin2021",
+      "compound": "Acrylamide",
+      "lane": "acrylamide",
+      "a": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+      "b": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "measured_dex": 0.24393196560272765,
+      "engine_dex": 0.0,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "measured_dex": -0.0571428861365687,
+      "engine_dex": 0.0845035189783554,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "measured_dex": -0.11809931207799444,
+      "engine_dex": 0.25298637081452124,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "measured_dex": -0.1023050448947626,
+      "engine_dex": 0.4936812327927511,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "measured_dex": -0.060956425941425744,
+      "engine_dex": 0.16848285183616588,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "measured_dex": -0.0451621587581939,
+      "engine_dex": 0.4091777138143957,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "measured_dex": 0.015794267183231885,
+      "engine_dex": 0.2406948619782298,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "measured_dex": 0.320392540285537,
+      "engine_dex": -0.06544324762968096,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "measured_dex": 0.4573771965239053,
+      "engine_dex": -0.09493549377481769,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "measured_dex": 0.6045923278433575,
+      "engine_dex": -0.08887620111344204,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "measured_dex": 0.13698465623836828,
+      "engine_dex": -0.02949224614513668,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "measured_dex": 0.2841997875578205,
+      "engine_dex": -0.02343295348376106,
+      "out_of_sample": true
+    },
+    {
+      "study": "yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "b": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "measured_dex": 0.14721513131945216,
+      "engine_dex": 0.006059292661375615,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "measured_dex": -0.028963695935316617,
+      "engine_dex": 0.7029655855351048,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "measured_dex": -0.5187407847417043,
+      "engine_dex": 0.24618763910298266,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "measured_dex": -0.36690577493206883,
+      "engine_dex": 0.06772072158926493,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "measured_dex": -0.48977708880638765,
+      "engine_dex": -0.4567779464321222,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "measured_dex": -0.33794207899675227,
+      "engine_dex": -0.6352448639458399,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "measured_dex": 0.15183500980963544,
+      "engine_dex": -0.17846691751371768,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "measured_dex": -0.8631024620026057,
+      "engine_dex": 0.18914274645606943,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "measured_dex": -0.8983730106401677,
+      "engine_dex": -0.1268167562889971,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "measured_dex": -0.8481510893671984,
+      "engine_dex": -0.10027098613076972,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "measured_dex": -0.03527054863756202,
+      "engine_dex": -0.31595950274506657,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "measured_dex": 0.014951372635407327,
+      "engine_dex": -0.28941373258683917,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "measured_dex": 0.05022192127296932,
+      "engine_dex": 0.026545770158227365,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "Furfural",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "measured_dex": 0.8018345788244359,
+      "engine_dex": 0.7204119349070914,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "Furfural",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "measured_dex": 0.2561225155447405,
+      "engine_dex": 0.4364667156305651,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "Furfural",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "measured_dex": 0.09524517761822507,
+      "engine_dex": 0.17394320650251618,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "Furfural",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "measured_dex": -0.5457120632796953,
+      "engine_dex": -0.28394521927652633,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "Furfural",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "measured_dex": -0.7065894012062108,
+      "engine_dex": -0.5464687284045753,
+      "out_of_sample": true
+    },
+    {
+      "study": "zhou2023c",
+      "compound": "Furfural",
+      "lane": "sulfur",
+      "a": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "b": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "measured_dex": -0.16087733792651546,
+      "engine_dex": -0.2625235091280489,
+      "out_of_sample": true
+    }
+  ]
+}

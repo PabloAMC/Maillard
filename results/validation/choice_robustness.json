@@ -1,0 +1,171 @@
+{
+  "artifact": "choice_robustness",
+  "provenance": {
+    "artifact": "choice_robustness",
+    "generated_on": "2026-10-28",
+    "git": {
+      "commit": "8209567718c0454745727f2bade50cc589794cb0",
+      "short": "82095677",
+      "branch": "HEAD",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_choice_robustness.py",
+    "inputs": [
+      {
+        "path": "docs/reference/choices_register.yml",
+        "sha256": "f4acb94bb1c9ff83ffbac54d656fdea290867bd626f774e027adb4158230b2e8"
+      },
+      {
+        "path": "results/validation/core_panel_scores.json",
+        "sha256": "5f765b17f67e3c53bd6cf84571acd2d334af18eeba0178e75b738006805d7de1"
+      }
+    ]
+  },
+  "definition": "Sweep the registered choices and report whether any headline depends on them (2026-10-28).\n\nFor each entry of `docs/reference/choices_register.yml` that can be swept on the shipped engine, the headlines\nare recomputed under every alternative: the out-of-sample rows within the band and their median fold error,\nthe same per lane, and the within-study contrast diagnostic. A choice MOVES A HEADLINE when any of those\ninteger counts differs between its alternatives; no tolerance is needed, so no new number is introduced.\nEntries that need a refit (the thermal readings, the shared barrier) are listed as pending with the wave that\nsweeps them. Writes results/validation/choice_robustness.{json,md}.",
+  "verdicts": {
+    "CR-01": "not_applicable",
+    "CR-02": "moves_headline",
+    "CR-03": "pending: B64 (both readings refitted)",
+    "CR-04": "pending: B64 sensitivity (refit constants, rescored)",
+    "CR-05": "moves_headline",
+    "CR-06": "moves_headline",
+    "CR-07": "pending: B63",
+    "CR-08": "not_applicable",
+    "CR-09": "not_applicable",
+    "CR-10": "harmless"
+  },
+  "sweeps": {
+    "CR-05": {
+      "twofold": {
+        "oos_rows": 56,
+        "oos_within": 8,
+        "oos_median_fold": 11.801511752551193,
+        "by_lane_within": {
+          "acrylamide": 2,
+          "lipid": 2,
+          "sulfur": 2,
+          "trunk": 2
+        },
+        "contrast_median_dex": 0.30763274104158156,
+        "contrast_signs": 12,
+        "contrast_resolved": 25
+      },
+      "threefold": {
+        "oos_rows": 56,
+        "oos_within": 14,
+        "oos_median_fold": 11.801511752551193,
+        "by_lane_within": {
+          "acrylamide": 4,
+          "lipid": 5,
+          "sulfur": 3,
+          "trunk": 2
+        },
+        "contrast_median_dex": 0.30763274104158156,
+        "contrast_signs": 12,
+        "contrast_resolved": 25
+      },
+      "fivefold": {
+        "oos_rows": 56,
+        "oos_within": 18,
+        "oos_median_fold": 11.801511752551193,
+        "by_lane_within": {
+          "acrylamide": 5,
+          "lipid": 6,
+          "sulfur": 5,
+          "trunk": 2
+        },
+        "contrast_median_dex": 0.30763274104158156,
+        "contrast_signs": 12,
+        "contrast_resolved": 25
+      }
+    },
+    "CR-06": {
+      "one_cv": {
+        "oos_rows": 56,
+        "oos_within": 14,
+        "oos_median_fold": 11.801511752551193,
+        "by_lane_within": {
+          "acrylamide": 4,
+          "lipid": 5,
+          "sulfur": 3,
+          "trunk": 2
+        },
+        "contrast_median_dex": 0.30763274104158156,
+        "contrast_signs": 13,
+        "contrast_resolved": 29
+      },
+      "two_cv": {
+        "oos_rows": 56,
+        "oos_within": 14,
+        "oos_median_fold": 11.801511752551193,
+        "by_lane_within": {
+          "acrylamide": 4,
+          "lipid": 5,
+          "sulfur": 3,
+          "trunk": 2
+        },
+        "contrast_median_dex": 0.30763274104158156,
+        "contrast_signs": 12,
+        "contrast_resolved": 25
+      },
+      "twofold": {
+        "oos_rows": 56,
+        "oos_within": 14,
+        "oos_median_fold": 11.801511752551193,
+        "by_lane_within": {
+          "acrylamide": 4,
+          "lipid": 5,
+          "sulfur": 3,
+          "trunk": 2
+        },
+        "contrast_median_dex": 0.30763274104158156,
+        "contrast_signs": 9,
+        "contrast_resolved": 18
+      }
+    },
+    "CR-02": {
+      "moist_matrix": {
+        "oos_rows": 56,
+        "oos_within": 12,
+        "oos_median_fold": 21.14471574192683,
+        "by_lane_within": {
+          "acrylamide": 4,
+          "lipid": 3,
+          "sulfur": 3,
+          "trunk": 2
+        },
+        "contrast_median_dex": 0.30763274104158156,
+        "contrast_signs": 12,
+        "contrast_resolved": 25
+      },
+      "centre": {
+        "oos_rows": 56,
+        "oos_within": 14,
+        "oos_median_fold": 11.801511752551193,
+        "by_lane_within": {
+          "acrylamide": 4,
+          "lipid": 5,
+          "sulfur": 3,
+          "trunk": 2
+        },
+        "contrast_median_dex": 0.30763274104158156,
+        "contrast_signs": 12,
+        "contrast_resolved": 25
+      },
+      "bulk_oil": {
+        "oos_rows": 56,
+        "oos_within": 13,
+        "oos_median_fold": 11.801511752551193,
+        "by_lane_within": {
+          "acrylamide": 4,
+          "lipid": 4,
+          "sulfur": 3,
+          "trunk": 2
+        },
+        "contrast_median_dex": 0.30763274104158156,
+        "contrast_signs": 12,
+        "contrast_resolved": 25
+      }
+    }
+  }
+}

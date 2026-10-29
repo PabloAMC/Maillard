@@ -1,0 +1,258 @@
+{
+  "artifact": "kinetic_core_b59_holdout_diagnosis",
+  "reading": "isothermal",
+  "measured": {
+    "hofmann_ppb": {
+      "3.0": {
+        "MFT": 553.0,
+        "FFT": 229.0
+      },
+      "5.0": {
+        "MFT": 198.0,
+        "FFT": 121.0
+      },
+      "7.0": {
+        "MFT": 25.0,
+        "FFT": 12.0
+      }
+    },
+    "schieberle_factor": [
+      7.9,
+      13.0
+    ],
+    "schieberle_mft_ug": {
+      "30.0": 4.5,
+      "60.0": 13.8,
+      "360.0": 156.0,
+      "720.0": 179.0
+    },
+    "nestle_mft_ng_g": {
+      "30.0": 15.0,
+      "60.0": 124.0,
+      "120.0": 575.0,
+      "240.0": 1855.0
+    },
+    "li2011": "not evaluable: no hexose species in the sulfur lane",
+    "zhang2025b_mM": {
+      "TTCA": {
+        "10.0": 11.2,
+        "20.0": 15.1,
+        "30.0": 17.7,
+        "50.0": 18.2
+      },
+      "CAMA": {
+        "10.0": 0.07,
+        "20.0": 1.38,
+        "30.0": 1.6,
+        "50.0": 1.61
+      }
+    },
+    "zhang2025b_free_cys_fraction_50min": 0.024
+  },
+  "arms": {
+    "baseline (switches off)": {
+      "member": "results/validation/kinetic_core_b60_fit_report.json",
+      "cost": 27.08412839665565,
+      "optimiser_status": "B60 shipped optimum",
+      "converged": null,
+      "hofmann_pH_sweep_log10_pred_over_meas": {
+        "3.0": {
+          "MFT": -1.3498525286144347,
+          "FFT": 0.8228085395388295
+        },
+        "5.0": {
+          "MFT": -0.32131307441614276,
+          "FFT": 0.4621061099748978
+        },
+        "7.0": {
+          "MFT": -3.6895202400138483,
+          "FFT": -1.8491183730675866
+        }
+      },
+      "hofmann_h2s_made_mM": {
+        "3.0": 0.9014071437856112,
+        "5.0": 0.06391953501675601,
+        "7.0": 3.086727422905844e-05
+      },
+      "schieberle_mft_100C_6h_over_145C": 0.37346450912906065,
+      "schieberle_mft_shape_over_30min": {
+        "60.0": 2.443935974819424,
+        "360.0": 2.7896429143230304,
+        "720.0": 1.51082895672272
+      },
+      "nestle_mft_shape_over_4h": {
+        "30.0": 0.43146686247408006,
+        "60.0": 0.8108501999365592,
+        "120.0": 1.04867336380343
+      },
+      "zhang2025b_blank_log10_pred_over_meas": {
+        "TTCA": {
+          "10.0": null,
+          "20.0": null,
+          "30.0": null,
+          "50.0": null
+        },
+        "CAMA": {
+          "10.0": null,
+          "20.0": null,
+          "30.0": null,
+          "50.0": null
+        }
+      },
+      "zhang2025b_free_cys_fraction_50min": 0.009286674443847247
+    },
+    "B59a-r share 0.042": {
+      "member": "results/validation/kinetic_core_b59a_isothermal_share0.042_members/b59a_isothermal_share0.042_s0.json",
+      "cost": 35.955939216512554,
+      "optimiser_status": -9,
+      "converged": false,
+      "hofmann_pH_sweep_log10_pred_over_meas": {
+        "3.0": {
+          "MFT": -1.7032387039151655,
+          "FFT": 1.0705719004873324
+        },
+        "5.0": {
+          "MFT": 0.17642482645833704,
+          "FFT": 1.4614536826989923
+        },
+        "7.0": {
+          "MFT": 0.31569632322191565,
+          "FFT": 1.0739863150416504
+        }
+      },
+      "hofmann_h2s_made_mM": {
+        "3.0": 0.8993174369061117,
+        "5.0": 0.42342028842427815,
+        "7.0": 0.5400181288850968
+      },
+      "schieberle_mft_100C_6h_over_145C": 0.00804167960039143,
+      "schieberle_mft_shape_over_30min": {
+        "60.0": 0.7621711145306937,
+        "360.0": 0.006051716073137336,
+        "720.0": 0.0017959748980468403
+      },
+      "nestle_mft_shape_over_4h": {
+        "30.0": 5.596297119071371,
+        "60.0": 4.106676953397545,
+        "120.0": 2.239481801311439
+      },
+      "zhang2025b_blank_log10_pred_over_meas": {
+        "TTCA": {
+          "10.0": null,
+          "20.0": null,
+          "30.0": null,
+          "50.0": null
+        },
+        "CAMA": {
+          "10.0": null,
+          "20.0": null,
+          "30.0": null,
+          "50.0": null
+        }
+      },
+      "zhang2025b_free_cys_fraction_50min": 2.9909153666895324e-05
+    },
+    "B59a-r share 0.08": {
+      "member": "results/validation/kinetic_core_b59a_isothermal_share0.08_members/b59a_isothermal_share0.08_s0.json",
+      "cost": 39.81055885236201,
+      "optimiser_status": -9,
+      "converged": false,
+      "hofmann_pH_sweep_log10_pred_over_meas": {
+        "3.0": {
+          "MFT": -1.8762336229391008,
+          "FFT": 1.6179368304823982
+        },
+        "5.0": {
+          "MFT": 0.3375389521013606,
+          "FFT": 1.7359582333716244
+        },
+        "7.0": {
+          "MFT": 0.4914876196545325,
+          "FFT": 1.1499441409002231
+        }
+      },
+      "hofmann_h2s_made_mM": {
+        "3.0": 0.8058274751391966,
+        "5.0": 0.7950030181415616,
+        "7.0": 1.0453501113581938
+      },
+      "schieberle_mft_100C_6h_over_145C": 0.003993016567006831,
+      "schieberle_mft_shape_over_30min": {
+        "60.0": 0.76653797925517,
+        "360.0": 0.004501706689010235,
+        "720.0": 0.0007700673276612264
+      },
+      "nestle_mft_shape_over_4h": {
+        "30.0": 9.822753557691556,
+        "60.0": 6.811410738844086,
+        "120.0": 3.2305325919037595
+      },
+      "zhang2025b_blank_log10_pred_over_meas": {
+        "TTCA": {
+          "10.0": null,
+          "20.0": null,
+          "30.0": null,
+          "50.0": null
+        },
+        "CAMA": {
+          "10.0": null,
+          "20.0": null,
+          "30.0": null,
+          "50.0": null
+        }
+      },
+      "zhang2025b_free_cys_fraction_50min": 3.5565429800767706e-06
+    },
+    "B59b": {
+      "member": "results/validation/kinetic_core_b59b_isothermal_members/b59b_isothermal_s0.json",
+      "cost": 35.99138990653606,
+      "optimiser_status": 3,
+      "converged": true,
+      "hofmann_pH_sweep_log10_pred_over_meas": {
+        "3.0": {
+          "MFT": -0.5966757100539893,
+          "FFT": 0.23339235509524042
+        },
+        "5.0": {
+          "MFT": -0.2117020817167436,
+          "FFT": 0.584823360446283
+        },
+        "7.0": {
+          "MFT": -1.5370653193399524,
+          "FFT": 0.9252560383907643
+        }
+      },
+      "hofmann_h2s_made_mM": {
+        "3.0": 0.028917716660691425,
+        "5.0": 0.03699447589273505,
+        "7.0": 0.2511501185340984
+      },
+      "schieberle_mft_100C_6h_over_145C": 0.0756324257653505,
+      "schieberle_mft_shape_over_30min": {
+        "60.0": 3.7118688122624683,
+        "360.0": 0.8670525851835239,
+        "720.0": 0.4980581684582624
+      },
+      "nestle_mft_shape_over_4h": {
+        "30.0": 5.982152809946731,
+        "60.0": 4.824874171385379,
+        "120.0": 1.0996276930915179
+      },
+      "zhang2025b_blank_log10_pred_over_meas": {
+        "TTCA": {
+          "10.0": -0.08798691829239567,
+          "20.0": -0.5524503628453078,
+          "30.0": -0.9290456537631068,
+          "50.0": -1.4112330726242595
+        },
+        "CAMA": {
+          "10.0": 1.5193542569019587,
+          "20.0": 0.25384902132755033,
+          "30.0": 0.05650737853968396,
+          "50.0": -0.31381185040977305
+        }
+      },
+      "zhang2025b_free_cys_fraction_50min": 0.08304242224535106
+    }
+  }
+}
