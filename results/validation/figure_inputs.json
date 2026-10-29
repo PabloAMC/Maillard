@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "6dc493e2c1764de12f1717371891971a328e5821a204fee6f7ca0d70ece94ef9",
+        "17_papers_by_weight.png": "060f99494fb5f9edf47f8da3869372b9ae959475d66c10f01b5cd40afffb6f92",
         "18_lab_spread.png": "8cc189939db766fe9b7b9f8784e5b732efebf988a53487016965978be4f6f643",
         "19_what_papers_report.png": "a65f39e4b3b5e91c8eef5e193b2909c46a076b769a897a62745627b9ff9fa5b5",
         "20_one_number.png": "dbdca9d8ec4931132e3fa835d594146279974e9ecac3016227b7bc8ea1a0fbe3",
@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-10-29",
     "git": {
-      "commit": "91ca4bd63601aed17dc816d2b20755dc75dc7105",
-      "short": "91ca4bd6",
+      "commit": "86701968543f853f92e905cc9e091a6bf2e5107b",
+      "short": "86701968",
       "branch": "sulfur-route-and-tooling",
       "dirty": true
     },
@@ -139,7 +139,7 @@
     "inputs": [
       {
         "path": "data/keys/papers.yml",
-        "sha256": "48e46d3162b7e5f21f052df3f448f1e1f13f4628e04aea3de9c36a10f925c530"
+        "sha256": "4d0a8288f65321802fdd6f0c18af1464b28296bb858c200e2999e71363838965"
       },
       {
         "path": "data/lit/reaction_rules.yml",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "6dc493e2c1764de12f1717371891971a328e5821a204fee6f7ca0d70ece94ef9"
+        "sha256": "060f99494fb5f9edf47f8da3869372b9ae959475d66c10f01b5cd40afffb6f92"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
