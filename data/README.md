@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **614**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **616**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -170,8 +170,8 @@ Free-precursor hold-out bundles: the network's out-of-sample test, hand-authored
 
 ## `data/lit/fit_rows/second`
 
-3 files covered by the directory description above: `ph_acid_submodel.yml`, `route_submodel.yml`, `thiol_submodel.yml`
+4 files covered by the directory description above: `deoxyosone_submodel.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `thiol_submodel.yml`
 
 ## `data/lit/source_verification/second`
 
-3 files covered by the directory description above: `ph_acid_submodel.yml`, `route_submodel.yml`, `thiol_submodel.yml`
+4 files covered by the directory description above: `deoxyosone_submodel.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `thiol_submodel.yml`

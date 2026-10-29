@@ -28,7 +28,7 @@ upstream supply it predicts are inputs here); everything before the fit runs now
 
 **Budget.** See the strategy's "Next steps" in hours.
 
-## 2. Data (step 2) -- first reader done 2026-10-29; second reader pending
+## 2. Data (step 2) -- first reading (2026-10-29); adjudicated table below
 
 First reader: agent-sm3-reader1-2026-10-29, against the PDFs. Per-check verdicts and quotes:
 `data/lit/source_verification/deoxyosone_submodel.yml`. Rows: `data/lit/fit_rows/deoxyosone_submodel.yml` (status:
@@ -64,6 +64,25 @@ source: Zhang 2025 Tables 1-3 / S2-S4 (di-xylulosyl-lysine ARP 20 mM +- xylose 2
 authentic standard, ug/L +- SD), a lysine system; the engine has no 2,3-pentanedione species. Desclaux 2006 names
 pentanedione among its measured dicarbonyls but does not show it. 3-DX / 1-DX absolute levels rest on an assumed
 internal-standard response in every Jiangnan paper.
+## Data after adjudication (2026-10-29: two readers, reconciled, adjudicated; table READY)
+
+The paragraphs above describe the first reading. The adjudicated table holds **56 pots, 483 rows**: Jiangnan 52 pots
+(284 semi-quantitative, 180 calibrated), Reading 1 (8 semi-quantitative), Ochanomizu 1 (5 calibrated), Dalian 1
+(4 semi-quantitative), Garching 1 (2 calibrated). By species: 3-DX (TDP) 146, MGO 135, 1-DX (DPO) 130, GO 44,
+furfural 21, norfuraneol 7. Decisions that change the fit:
+
+- **CF-062 fixed:** every 3-DX / 1-DX series from the eight Jiangnan papers is semi-quantitative (internal standard,
+  no authentic deoxyosone standard) and enters shape-only (`fitting.SCALE_TAU`); MGO and GO there are calibrated
+  (purchased standards). Seven mixed figures were split into calibrated and semi-quantitative ledger ids.
+- **GO from Zhai 2021 / 2023 excluded:** every plotted value is below the paper's own LOQ (CF-061).
+- **Counted once:** the Zhai 2021 -> 2023 Food Chem -> 2023 JAFC triple print, by transcription (CF-066); the JAFC
+  3-DX 140 C / 120 min point is a copy slip and is dropped.
+- **CF-060 open:** Zhou 2024 vs Zhou 2025b, same nominal pot, every dicarbonyl ~10x apart; 3-DX spans ~10x across
+  four Zhou papers. Until the laboratory answers, the Zhou calibrated rows get a per-paper scale in the fit.
+- **Double use to avoid:** Hofmann 1998's rows are also B2.3 fit rows and Mikami 2017's norfuraneol decay is B61's
+  measured constant; the sub-model 3 fit frees neither alongside those.
+- 1,4-dideoxypentosone and pentanetrione: nothing measures either (only presence in Nedvidek 1992).
+
 ## Targets from the conflict analyses (2026-10-29, docs/reference/conflict_analyses/)
 
 - **Norfuraneol at low pH (CF-012):** the shipped engine's norfuraneol at pH 3 is 55x below its pH 5 value, while

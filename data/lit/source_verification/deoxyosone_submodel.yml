@@ -3,6 +3,9 @@
 # readers never edit the same file. First reader: agent-sm3-reader1-2026-10-29, against the PDFs (data/articles/), not
 # the dossiers. second_reader "pending" = NOT verified (the loader and the gate refuse it until a second reader signs).
 # `notes` is an extra field: what was checked, what was corrected, and why rows were left out.
+# ADJUDICATED 2026-10-29 by agent-sm3-adjudicator-2026-10-29: `adjudication` records the decision per ledger id; sources only the second
+# reader chose are copied here from second/ with the adjudicator as second_reader (checked row by row against the
+# paper); hofmann1998 / mikami2017 were second-read by the adjudicator; deoxyosone splits carry `split_note`.
 # Digitisation: embedded rasters extracted with pdfimages (native resolution), axes calibrated on the tick marks found
 # in the pixels, marker centres from morphological opening (bbox centre), overlapped markers from the dashed-line
 # centres either side of the marker. Scripts and images: the first reader's scratchpad (sm3_reader1, sm3_scripts).
@@ -11,7 +14,7 @@ entries:
   - ledger_id: zhai2019_fig3b_dicarbonyls_ttca
     source_file: zhai2019.pdf
     read_by: "agent-sm3-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: agent-sm3-reader2-2026-10-29
     date: 2026-10-29
     checks:
       conditions: pass
@@ -38,10 +41,14 @@ entries:
       markers overlap at 10-40 min; read from the dashed-line centres either side of each marker: 3-DX at 30 min 25.3
       (dossier 30) and 40 min 31.6 (dossier 33), within the dossier's +-5. Read error +-2 umol/L for clean markers,
       +-4 umol/L for overlapped ones (expressed in the rows as dex).
+    adjudication: >-
+      Both readings agree (36 rows). Quantification: hexanedione IS, no dicarbonyl standard in the Chemicals list -> 
+      whole ledger entry semi_quantitative (CF-062). GO kept: 55-149 umol/L, above the LOD the later method paper 
+      prints (CF-061 stays open on the GO/3-DX contrast).
   - ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
     source_file: zhai2021.pdf
     read_by: "agent-sm3-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: agent-sm3-reader2-2026-10-29
     date: 2026-10-29
     checks:
       conditions: pass
@@ -73,10 +80,18 @@ entries:
       the larger SD is taken; t = 0 (plotted 0, not a measurement) left out. 3-DX +Xyl pH 8 20 min is 48 +- 74
       (only the upper bar half drawn). The dossier's flag that the 1-DX SDs repeat (2.4 at eight points) is
       confirmed visually and recorded, not corrected.
+    adjudication: >-
+      Unit disagreement only: Fig. 5 y axes read 'Concentration (mmol/L)'; the first reading had converted to umol/L 
+      (x 1000), the second kept mmol/L; both readings agree within error once harmonised; rows now in mmol_L as the 
+      axis prints. GO: the first reader's exclusion upheld -- 'GO (LOD = 1.118 mg/L, LOQ = 2.691 mg/L ...)' (p. 10650) 
+      vs plotted GO 1.1-4.8 umol/L (0.06-0.28 mg/L as GO): every point below the LOD on either basis (CF-061); the 
+      second reader's 48 GO rows moved to adjudication_excluded. MGO stays calibrated (external standards); 3-DX / 
+      1-DX split to zhai2021_fig5ab_deoxyosones_ph_ladder (diacetyl IS, semi_quantitative). The pH 7 series are the 
+      first print of a series reprinted in Zhai 2023 Food Chem and JAFC (CF-066): counted here.
   - ledger_id: zhai2023foodchem_fig2_deoxyosones
     source_file: Zhai2023.pdf
     read_by: "agent-sm3-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: agent-sm3-reader2-2026-10-29
     date: 2026-10-29
     checks:
       conditions: corrected
@@ -106,10 +121,19 @@ entries:
       at 20 min in both panels (four markers and two 100 C markers stacked within 0.05 mmol/L; identity unresolvable).
       Error bars are mostly hidden by the markers; the two visible beyond them (+Xyl-120 60 min: 3-DX +-69, 1-DX +-8
       umol/L) are carried as sd.
+    adjudication: >-
+      Unit disagreement (umol vs mmol/L) resolved to the axis unit 'mmol/L' (p. 5 raster). TTCA-alone 120 / 140 C arms 
+      removed from the first reading: identical to the JAFC Fig. 5 vector values for the same series (first 
+      reader's raster read of Food Chem vs the JAFC SVG: 33 of 34 points within the first reading's read errors, at 
+      most 3 %), counted once under zhai2023jafc_fig5bc_deoxyosones; the one exception, TTCA-140 3-DX at 120 min 
+      (0.626 here, 0.420 in JAFC with T-100's error bar), is CF-066. Re-read on the 300 ppi raster: TTCA+Xyl-120 3-DX 
+      at 40 min caps at rows 512 / 529 -> 0.391 mmol/L (readings 0.394 / 0.386); at 120 min caps 371.5 / 386.5 -> 
+      0.814 (first reading confirmed; second 0.803 corrected). Ledger class -> semi_quantitative (no 3-DX / 1-DX 
+      standard; CF-062).
   - ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go
     source_file: Zhai2023.pdf
     read_by: "agent-sm3-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: agent-sm3-reader2-2026-10-29
     date: 2026-10-29
     checks:
       conditions: pass
@@ -132,10 +156,14 @@ entries:
       1 px = 0.22 umol/L); peaks agree with the dossier's (0.072 / 0.082 vs 71.7 / 79.3 umol/L read here). Read
       error +-1 umol/L clean, +-2 where two markers coincide (20 min: TTCA and +Xyl arms share one marker at each
       temperature, 32.2 and 40.9 umol/L).
+    adjudication: >-
+      Unit disagreement resolved to the axis unit (mmol/L); TTCA-alone arms removed (JAFC reprint, CF-066). GO rows of 
+      the second reading excluded (2.0-9.7 umol/L, below the method's GO LOD/LOQ, CF-061). MGO calibrated (purchased 
+      standard).
   - ledger_id: hofmann1998_t5_fa_nf_pairs
     source_file: hofmann1998.pdf
     read_by: "agent-sm3-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-sm3-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
@@ -164,17 +192,26 @@ entries:
       against schieberle1998.pdf Table IV (column II, footnote d: same pot): furan-2-aldehyde 52 ug / 100 mmol ribose
       = 5.2 ug per pot; its OAV column (52 / 12000 -> "<1") is internally consistent with the 52, so the 13x gap is
       not a misprint in the Schieberle concentration column alone. The FUR row carries a flag.
+    adjudication: >-
+      Second reading by the adjudicator against hofmann1998.pdf: Table 5 ribose FA 67.5 ug and NF 54530.0 ug per 100 
+      mL pot (rows 675 and 545300 ug/L, correct); conditions 'cysteine (3.3 mmol) and the corresponding carbohydrate 
+      (10.0 mmol)' in 100 mL, pH 5.0, 0.5 mol/L phosphate, 20 min 145 C autoclave (Experimental) -> PENT 100, Cys 33 
+      mM, correct. Quantification confirmed: furfural vs 5-methylfurfural IS with 'An MS response factor of 0.95 ... 
+      calculated from mixtures containing known amounts'; NF vs [13C2]-HDMF with response factor 0.98 -> calibrated 
+      (rows name it; ledger 'unknown'). SD: footnote b 'differed by not more than 10%' taken as sd -- accepted as a 
+      bound. Both rows are also B2.3 fit rows (in_model_fit): a sub-model 3 fit must not run beside the shipped B2.3 
+      constants. FUR row carries CF-016.
   - ledger_id: mikami2017_fig6b_norfuraneol_decay_ph8
     source_file: mikami2017.pdf
     read_by: "agent-sm3-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: "agent-sm3-adjudicator-2026-10-29"
     date: 2026-10-29
     checks:
       conditions: pass
       units: pass
       quantification: pass
       duplicates: pass
-      values: pass
+      values: corrected
     quote: "A solution of 0.2 M phosphate buffer (pH 8.0) containing 1.8 mM HMFO was heated at 100℃ for 0.5, 1, 3, and 6 h, and then reacted with the same amount of 1.8 mM OPD solution for 5 h at 20℃."
     notes: >-
       Conditions as the ledger: pure norfuraneol (HMFO, isolated and identified by X-ray in this paper) 1.8 mM
@@ -194,10 +231,19 @@ entries:
       Left out: NF at 3 and 6 h (plotted on zero; not log-scorable, below detection), MGO at 6 h (zero), the
       diacetyl series (DA is a trunk-only key, not a sub-model 3 species; available 0.030 / 0.063 / 0.094 / 0.046 mM).
       t = 0 NF is kept on the pot (initial_mmol_L), not as a row.
+    adjudication: >-
+      Second reading by the adjudicator on the 350 ppi raster (p. 6, image 0): right axis 0 at the x-axis line (row 
+      754), 0.5 mM per 144.2 px; NF 1.724 / 0.635 / 0.255 mM at 0 / 0.5 / 1 h (first reading 1.721 / 0.634 / 0.253: 
+      agree); MGO-quinoxaline (left axis, 3849 px per mM) 10.7 / 3.9 umol/L at 0.5 / 1 h (agree), and at 3 h the red 
+      square spans rows 728-760 (centre 744, bottom half behind the HMFO diamond) -> 2.6 umol/L, not 4.0 (corrected; 
+      dossier ~3). Conditions quote and pure-compound calibration confirmed. In scope: direct evidence for k_nf_decay 
+      (the second reader excluded it as 'outside this brief'; the pre-registration names k_nf_decay as a constant to 
+      pin). Also B61's declared measured constant: fitting k_nf_decay on these rows while B61 is enabled uses them 
+      twice.
   - ledger_id: zhou2025b_figs1_3_axarp_xylose_120c
     source_file: Zhou2025b.pdf
     read_by: "agent-sm3-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: agent-sm3-reader2-2026-10-29
     date: 2026-10-29
     checks:
       conditions: pass
@@ -228,10 +274,16 @@ entries:
       where hidden the row carries the read error only and an sd_note. AX-ARP-Xyl MGO markers are partly hidden
       behind the AX-ARP ones (centre from the visible bottom edge, +-5 umol/L). Not transcribed: pyrazines (Fig.
       1a-d, not sub-model 3), AX-ARP / Ala / A420 / pH (Fig. 3).
+    adjudication: >-
+      Unit disagreement only (Fig. 2b-e axis 'mmol/L'; rows now mmol_L). 40 rows agree. Quantification: furfural 
+      calibrated (curve printed), GO / MGO calibrated (40 % standards purchased; IS 3,4-hexanedione), 3-DX / 1-DX 
+      semi_quantitative (no standard) -> split to zhou2025b_fig2bc_deoxyxylosones_axarp_xylose. Not a re-plot of Zhou 
+      2024: same nominal pot, dicarbonyls ~10x lower (CF-060, confirmed by both readers and by the adjudicator's 
+      vector read of Zhou 2024 Fig. 3).
   - ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls
     source_file: Zhou2025b.pdf
     read_by: "agent-sm3-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: agent-sm3-reader2-2026-10-29
     date: 2026-10-29
     checks:
       conditions: corrected
@@ -250,10 +302,13 @@ entries:
       render of the vector figure, 1 px = 1.03 umol/L: GO 65.7 / 76.0 / 93.5 / 115.5, 3-DX 43.1 / 49.8 / 79.6 / 88.3,
       MGO 19.5 / 21.6 / 30.8 / 32.9 umol/L at 30 / 60 / 90 / 120 min; SD bars hidden in the markers. No 1-DX in this
       panel.
+    adjudication: >-
+      Unit disagreement only (axis mmol/L). 12 rows agree. GO / MGO calibrated; 3-DX split to 
+      zhou2025b_fig2a_deoxyxylosone_xylose_alone (semi_quantitative).
   - ledger_id: desclaux2006_fig2_xylose_glycine_100c
     source_file: desclaux2006.pdf
     read_by: "agent-sm3-reader1-2026-10-29"
-    second_reader: "pending"
+    second_reader: agent-sm3-reader2-2026-10-29
     date: 2026-10-29
     checks:
       conditions: pass
@@ -280,3 +335,560 @@ entries:
       5.50x10-04/min for the formation of 3-deoxyosone") are model outputs, not transcribed. Not transcribed: xylose
       (not a sub-model 3 species) and hydroxyacetone (not an engine species). A new laboratory (Reading) for the
       leave-one-laboratory-out test.
+    adjudication: >-
+      The ~1e5 gap is a unit choice, not a reading error: the axis (p. 370 scan) reads 'umol per mmol initial sugar', 
+      a molar yield (a concentration once multiplied by the 240 mmol/kg sugar), not a peak area; the first reading 
+      converted it to ug/kg exactly (x 0.24 x MW), the second to mmol/kg written as mmol_L. Values agree (NF 13.4 / 
+      19.9 / 25.6 / 27.3; 3-DO 3.9 / 2.9 / 1.7 / 1.3). Rows kept in ug_kg (mass basis, no density assumed); the second 
+      reading converted to match. Method: no calibration or standard stated ('solvent extraction followed by GC or 
+      GC-MS') -> rows name semi_quantitative with method_basis (ledger 'unknown').
+  - ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    source_file: zhai2021.pdf
+    read_by: agent-sm3-reader1-2026-10-29
+    second_reader: agent-sm3-reader2-2026-10-29
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: corrected
+    quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted
+      to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and
+      140 °C for various durations (20, 40, 60, 80, 100, and 120 min).
+    notes: 'Conditions as the ledger: TTCA 10 mmol/L +- xylose 10 mmol/L, unbuffered water, pH set with 2 M NaOH / HCl (pH
+      5.5 is "the natural pH (5.5) of the TTCA solution", not adjusted); never re-measured; 100 C only in Fig. 5; vessel and
+      heat-up not stated; triplicates, error bars = SD. Units: all four y axes "Concentration (mmol/L)"; rows in umol/L (x
+      1000). Quantification: "3-DX quinoxaline (3-DXqx) and 1-DX quinoxaline (1-DXqx), were quantitated using diacetyl as
+      an internal standard, and MGO quinoxaline (MGOqx) and GO quinoxaline (GOqx) were detected using external standards."
+      3-DX and 1-DX have no authentic standard (diacetyl-quinoxaline response assumed): semi_quantitative in fact, ''calibrated''
+      in the ledger (NEW CONFLICT, reported). MGO / GO are calibrated against commercial 40 % solutions. Stated limits: "MGOqx
+      (LOD = 0.605 mg/L, LOQ = 2.405 mg/L ...) and GO (LOD = 1.118 mg/L, LOQ = 2.691 mg/L ...)". Every GO mean in Fig. 5d
+      (1.10-4.79 umol/L = 0.06-0.28 mg/L as GO, 0.14-0.62 mg/L as GOqx) lies BELOW the stated GO LOD on either basis: Fig.
+      5d is not transcribed (correction; NEW CONFLICT with Zhai 2019 Fig. 3B, where the same lab and method report GO 55-149
+      umol/L from 5 mM TTCA at 120 C, GO/3-DX 0.6 vs 0.005 here). MGO rows below the LOQ (16.7 umol/L as MGOqx; 10 of 48)
+      are transcribed with a `flag`. Duplicates: none in the register; Fig. 3a / 4b (TTCA) are other ledger entries, not replotted
+      here. Values: Fig. 5 is vector graphics; the dossier read the paths (pdftocairo -svg). Sample check against a 600 dpi
+      render of page 5 (my pixel calibration on the 0 and top ticks): 3-DX +Xyl pH 6 120 min 1.093 vs dossier 1.09 mmol/L;
+      TTCA pH 6 120 min 0.929 vs 0.93; TTCA pH 5.5 120 min 0.623 vs 0.62; TTCA pH 7 120 min 0.421 vs 0.42; +Xyl pH 8 100 min
+      0.260 vs 0.258; MGO +Xyl pH 8 80 min 0.0675 vs 0.0672; TTCA pH 8 60 min 0.0575 vs 0.0574; +Xyl pH 7 120 min 0.0424 vs
+      0.0425: all agree. Rows = the dossier''s path reads (3-DX, 1-DX, MGO; 48 each), errors = the drawn SDs; where two series
+      share a mean and their bars cannot be assigned (3 cells) the larger SD is taken; t = 0 (plotted 0, not a measurement)
+      left out. 3-DX +Xyl pH 8 20 min is 48 +- 74 (only the upper bar half drawn). The dossier''s flag that the 1-DX SDs repeat
+      (2.4 at eight points) is confirmed visually and recorded, not corrected.'
+    split_note: 'Split from zhai2021_fig5_dicarbonyls_ph_ladder by the adjudicator (CF-062): the 3-DX / 1-DX (deoxypentosone)
+      rows of the same reading, under their own ledger id so the loader assigns them semi_quantitative; the checks are the
+      parent''s.'
+  - ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose
+    source_file: Zhou2025b.pdf
+    read_by: agent-sm3-reader1-2026-10-29
+    second_reader: agent-sm3-reader2-2026-10-29
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: corrected
+      values: corrected
+    quote: The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted to
+      8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil bath
+      and heated at 120 °C for predetermined durations of 30, 60, 90, and 120 min.
+    notes: 'Conditions as the ledger: AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine, purified in-house) 20 mM +- xylose 20 mM,
+      water, no buffer, pH 8 initial (base not stated), pressure-resistant flask, oil bath 120 C, 30-120 min; pH measured
+      after heating with a Mettler-Toledo meter (Fig. 3d: 8 -> ~4.5 AX-ARP, ~4.25 +Xyl at 120 min, read at 100 dpi only; not
+      transcribed here, it belongs to the pH sub-model). Units: Fig. 1e "Concentration of 2-furfural (ug/L)"; Fig. 2b-e "(mmol/L)".
+      Quantification: furfural by "a combined internal and external standard method" with a printed standard curve ("2-furfural
+      (y = 8.9 x 10-3 x + 2.9 x 10-1, R2 = 0.9988)") -> calibrated. Dicarbonyls: OPD, "10 uL of 3,4-hexanedione (86 mmol/L)
+      as the internal standard"; GO and MGO standards (40 % solutions) listed, no 1-DX / 3-DX standard: 3-DX / 1-DX are semi_quantitative
+      in fact (ledger ''calibrated''; same issue as the Zhai papers). Duplicates (correction): CF-019 calls this a re-publication
+      of Zhou 2024. It is not a re-plot: Zhou 2024 Fig. 3 (same lab, same nominal pot: Ala-ARP 20 mM, pH 8.0, 120 C, 0-120
+      min) prints 3-DX ~3.7 / 4.6 / 4.9 / 5.3, 1-DX ~3.0 / 2.9 / 2.7 / 2.1, GO ~1.0 / 2.5 / 3.9 / 4.9, MGO ~0.5 / 0.95 / 1.05
+      / 1.05 mmol/L (read at 100 dpi) against 0.37 / 0.52 / 0.55 / 0.52, 0.29 / 0.17 / 0.12 / 0.09, 0.15 / 0.19 / 0.26 / 0.31,
+      0.08 / 0.08 / 0.07 / 0.09 here: 7-24x lower, ratio not constant, while ARP decay (20 -> ~4-5 -> ~1 mM) and pH (8 ->
+      ~4.1-4.5) agree. NEW CONFLICT (reported); the AX-ARP-alone rows carry a flag. Values: the ledger''s ''figure_only''
+      superseded. Figs. 1 and 2 are vector graphics; read from a 600 dpi render (axis ticks located in the pixels; 1 px =
+      1.03 umol/L in 2b-d, 0.77 in 2e, 3.15 ug/L in 1e). Text check: "at 120 min, the concentration of GO in the AX-ARP-Xyl
+      model was 0.36 mmol/L higher than that in the AX-ARP model" vs 0.677 - 0.314 = 0.363 read. Error bars (SD of triplicates)
+      read where they clear the marker; where hidden the row carries the read error only and an sd_note. AX-ARP-Xyl MGO markers
+      are partly hidden behind the AX-ARP ones (centre from the visible bottom edge, +-5 umol/L). Not transcribed: pyrazines
+      (Fig. 1a-d, not sub-model 3), AX-ARP / Ala / A420 / pH (Fig. 3).'
+    split_note: 'Split from zhou2025b_figs1_3_axarp_xylose_120c by the adjudicator (CF-062): the 3-DX / 1-DX (deoxypentosone)
+      rows of the same reading, under their own ledger id so the loader assigns them semi_quantitative; the checks are the
+      parent''s.'
+  - ledger_id: zhou2025b_fig2a_deoxyxylosone_xylose_alone
+    source_file: Zhou2025b.pdf
+    read_by: agent-sm3-reader1-2026-10-29
+    second_reader: agent-sm3-reader2-2026-10-29
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: corrected
+    quote: the thermal degradation of xylose alone under identical reaction conditions was studied, focusing on its role in
+      generating α-dicarbonyl compounds.
+    notes: 'Conditions: "identical reaction conditions" to the AX-ARP-Xyl pot, so xylose 20 mM, pH 8 initial, 120 C, pressure
+      flask; the xylose concentration is not printed for this arm (ledger: "presumably 20 mM"); checked against the text:
+      "Only 1.1 % of the initial Xyl was converted into alpha-dicarbonyl compounds after 120 min" vs (115.5 + 88.3 + 32.9)
+      / 20000 = 1.18 % read here; "the degradation of Xyl itself contributed only 0.12 mmol/L" (GO) vs 0.1155 read. pH not
+      reported after heating. Units: "Concentration (mmol/L)". Quantification as the AX-ARP entry (3-DX semi_quantitative
+      in fact; GO / MGO calibrated). Duplicates: none found. Values: 600 dpi render of the vector figure, 1 px = 1.03 umol/L:
+      GO 65.7 / 76.0 / 93.5 / 115.5, 3-DX 43.1 / 49.8 / 79.6 / 88.3, MGO 19.5 / 21.6 / 30.8 / 32.9 umol/L at 30 / 60 / 90
+      / 120 min; SD bars hidden in the markers. No 1-DX in this panel.'
+    split_note: 'Split from zhou2025b_fig2a_xylose_alone_dicarbonyls by the adjudicator (CF-062): the 3-DX / 1-DX (deoxypentosone)
+      rows of the same reading, under their own ledger id so the loader assigns them semi_quantitative; the checks are the
+      parent''s.'
+  - ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse
+    source_file: zhou2022.pdf
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: corrected
+      values: pass
+    quote: Table 1. Main Volatile Compounds Produced from Thermal Treatment of AX-ARP with and without Addition of Cys for
+      30, 60, 90, and 120 min (the Reaction Temperature Was 120 C; Initial pH Was 7.0) ... concentration (ug/L) ... Results
+      were expressed as means +/- standard deviation (n = 3)
+    check_notes:
+      conditions: 'p. 15203 methods: AX-ARP 20 mM +/- Cys 20 mM, deionized water, initial pH 7 (3 M NaOH), pressure-resistant
+        bottle, oil bath 120 C, 30/60/90/120 min, ice-bath quench. Matches the ledger. Fill volume / headspace and final pH
+        not stated (the ledger, citing the sibling paper Zhou 2023, gives final pH 4.13 / 3.42 at 60 min; not re-read here).'
+      units: 'Table 1 header: concentration (ug/L), mean +/- SD, n = 3.'
+      quantification: 'calibrated: furfural identified ''MS, RI, S'' (authentic standard); ''Chemical standards were diluted
+        to different concentrations and then were added with a fixed concentration of internal standard (1,2-dichlorobenzene)
+        to draw the calibration equations'' (HS-SPME, Table S1 not on disk). External calibration with an IS, not SIDA; the
+        SPME matrix match is not stated.'
+      duplicates: 'The same Table 1 has two ledger entries: this one (sulfur) and zhou2022_table1_furans_butanedione_pyrazines
+        (trunk). Counted once here, under this id; the trunk entry should carry same_data_as: zhou2022_table1_arp_cys_volatiles_timecourse.
+        CF-014 (sibling run, Zhou 2023 Table 1 at 60 min) is a separate run, not a duplicate; Zhou 2023''s furfural at 60
+        min is an endpoint and is not transcribed here.'
+      values: 'All 8 furfural cells transcribed from the text layer and checked against the table layout: ARP 442.78 +/- 27.70,
+        828.66 +/- 91.83, 1046.54 +/- 85.39, 1261.12 +/- 118.93; ARP + Cys 252.49 +/- 18.08, 434.91 +/- 13.71, 524.77 +/-
+        38.71, 510.92 +/- 36.03 ug/L.'
+    species_used:
+    - FUR
+    adjudication: 'Adjudicator''s check against zhou2022.pdf Table 1 (text layer): furfural ARP 442.78 +- 27.70, 828.66 +-
+      91.83, 1046.54 +- 85.39, 1261.12 +- 118.93; ARP+Cys 252.49 +- 18.08, 434.91 +- 13.71, 524.77 +- 38.71, 510.92 +- 36.03
+      ug/L: all 8 rows correct. Conditions (p. 15203: AX-ARP 20 mM +- Cys 20 mM, pH 7 with 3 M NaOH, pressure bottle, 120
+      C, 30-120 min) correct. Calibrated (authentic standard, IS-based curves). Counted once (the trunk twin carries same_table_as).'
+  - ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls
+    source_file: zhou2022.pdf
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: corrected
+      values: pass
+    quote: Quantitation of glyoxal (GO) quinoxaline, methylglyoxal (MGO) quinoxaline, and 2,3-butanedione quinoxaline was
+      performed using the external standard, while quantitation of 3-deoxypentosone quinoxaline and 1-deoxypentosone quinoxaline
+      was performed based on the internal standard because of the lack of standards.
+    check_notes:
+      conditions: 'Fig. 1 caption: ''the initial concentration of Cys and AX-ARP was 20 mmol/L; initial pH was 7.0; the heat
+        treatment was at 120 C for 0-120 min''; methods as for Table 1 (same pots). n = 3 (''All experiments were carried
+        out three times'').'
+      units: Panels c-f y-axes 'Concentration of 3-DP / 1-DP / GO / MGO (mmol/L)'.
+      quantification: 'GO and MGO: calibrated (external quinoxaline standards, curves printed). 3-DP and 1-DP: semi_quantitative,
+        NOT calibrated as the sulfur ledger entry says: OPD derivatives quantified against 3,4-hexanedione IS (8.6 mmol/L,
+        100 uL) with no authentic standard, i.e. an assumed response factor. The trunk twin entry''s note says the same. The
+        ledger class should be split (GO/MGO calibrated, DP semi_quantitative); the loader takes the class from the ledger,
+        so the DP rows carry quant_note until the ledger is split.'
+      duplicates: 'Same figure under two ledger ids: this one (sulfur) and zhou2022_fig1_axarp_dicarbonyl_timecourses (trunk).
+        Counted once here. Within the figure, legend symbols differ between panel (a) (square = with Cys) and panels (c)-(f)
+        (square = without Cys); each panel is self-consistent with the text (''the addition of Cys ... inhibition of deoxypentosone
+        formation (Figure 1c,d)''), so it is not a swap of data.'
+      values: 'Digitised from the embedded 300 ppi raster (pdfimages, 1250x1681 px) by pixel analysis: axes from tick rows/columns,
+        marker centres from wide dark runs, SD from error-bar extents where they exceed the marker (otherwise SD hidden by
+        the marker and only a 2-px read error is used). Sample: 3-DP without Cys 4.31 / 6.07 / 5.90 / 5.76 mM; 1-DP without
+        Cys peak 0.82 mM at 30 min; MGO without Cys 0.27 mM at 120 min; consistent with the text (Cys cuts 3-DP 5-8x).'
+    species_used:
+    - TDP
+    - DPO
+    - GO
+    - MGO
+    digitisation:
+      image: zhou2022.pdf p. 4 embedded raster 1250x1681 px
+      read_error_px: 2
+      axes:
+        c: x 0/120 min at px 93/509.5; y 0/8 mM at px 973/642
+        d: x 0/120 at 703.5/1121; y 0/1.0 mM at 964.5/632.5
+        e: x 0/120 at 93/511; y 0/2.0 mM at 1538/1206
+        f: x 0/120 at 703/1120.5; y 0/0.5 mM at 1538/1206
+    adjudication: 'Adjudicator''s independent pixel read of the 300 ppi raster (p. 4; axes from the tick rows: 3-DP 0-8 mM
+      at 973 / 642, 1-DP 0-1.0 at 964 / 632.5, GO 0-2.0 and MGO 0-0.5 at 1537.5 / 1206; marker cores by 7x7 erosion): 3-DP
+      4.31 / 6.07 / 5.90 / 5.76 and 1.64 / 1.17 / 0.77 / 0.68; 1-DP 0.824 / 0.605 / 0.324 / 0.258 and 0.238 / 0.180 / 0.118
+      / 0.085; GO 0.468 / 0.744 / 0.829 / 1.114 and 0.250 / 0.335 / 0.288 / 0.348; MGO 0.094 / 0.140 / 0.182 / 0.272 and 0.011
+      / 0.017 / 0.022 / 0.035 mM: all 32 rows within their read errors; SDs spot-checked on the bars. GO / MGO calibrated
+      (''external standard''); 3-DP / 1-DP split to zhou2022_fig1cd_deoxypentosones_arp_cys (''based on the internal standard
+      because of the lack of standards''). The trunk twin entry carries duplicate_of.'
+  - ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys
+    source_file: zhou2022.pdf
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: corrected
+      values: pass
+    quote: Quantitation of glyoxal (GO) quinoxaline, methylglyoxal (MGO) quinoxaline, and 2,3-butanedione quinoxaline was
+      performed using the external standard, while quantitation of 3-deoxypentosone quinoxaline and 1-deoxypentosone quinoxaline
+      was performed based on the internal standard because of the lack of standards.
+    check_notes:
+      conditions: 'Fig. 1 caption: ''the initial concentration of Cys and AX-ARP was 20 mmol/L; initial pH was 7.0; the heat
+        treatment was at 120 C for 0-120 min''; methods as for Table 1 (same pots). n = 3 (''All experiments were carried
+        out three times'').'
+      units: Panels c-f y-axes 'Concentration of 3-DP / 1-DP / GO / MGO (mmol/L)'.
+      quantification: 'GO and MGO: calibrated (external quinoxaline standards, curves printed). 3-DP and 1-DP: semi_quantitative,
+        NOT calibrated as the sulfur ledger entry says: OPD derivatives quantified against 3,4-hexanedione IS (8.6 mmol/L,
+        100 uL) with no authentic standard, i.e. an assumed response factor. The trunk twin entry''s note says the same. The
+        ledger class should be split (GO/MGO calibrated, DP semi_quantitative); the loader takes the class from the ledger,
+        so the DP rows carry quant_note until the ledger is split.'
+      duplicates: 'Same figure under two ledger ids: this one (sulfur) and zhou2022_fig1_axarp_dicarbonyl_timecourses (trunk).
+        Counted once here. Within the figure, legend symbols differ between panel (a) (square = with Cys) and panels (c)-(f)
+        (square = without Cys); each panel is self-consistent with the text (''the addition of Cys ... inhibition of deoxypentosone
+        formation (Figure 1c,d)''), so it is not a swap of data.'
+      values: 'Digitised from the embedded 300 ppi raster (pdfimages, 1250x1681 px) by pixel analysis: axes from tick rows/columns,
+        marker centres from wide dark runs, SD from error-bar extents where they exceed the marker (otherwise SD hidden by
+        the marker and only a 2-px read error is used). Sample: 3-DP without Cys 4.31 / 6.07 / 5.90 / 5.76 mM; 1-DP without
+        Cys peak 0.82 mM at 30 min; MGO without Cys 0.27 mM at 120 min; consistent with the text (Cys cuts 3-DP 5-8x).'
+    species_used:
+    - TDP
+    - DPO
+    - GO
+    - MGO
+    digitisation:
+      image: zhou2022.pdf p. 4 embedded raster 1250x1681 px
+      read_error_px: 2
+      axes:
+        c: x 0/120 min at px 93/509.5; y 0/8 mM at px 973/642
+        d: x 0/120 at 703.5/1121; y 0/1.0 mM at 964.5/632.5
+        e: x 0/120 at 93/511; y 0/2.0 mM at 1538/1206
+        f: x 0/120 at 703/1120.5; y 0/0.5 mM at 1538/1206
+    adjudication: 'Adjudicator''s independent pixel read of the 300 ppi raster (p. 4; axes from the tick rows: 3-DP 0-8 mM
+      at 973 / 642, 1-DP 0-1.0 at 964 / 632.5, GO 0-2.0 and MGO 0-0.5 at 1537.5 / 1206; marker cores by 7x7 erosion): 3-DP
+      4.31 / 6.07 / 5.90 / 5.76 and 1.64 / 1.17 / 0.77 / 0.68; 1-DP 0.824 / 0.605 / 0.324 / 0.258 and 0.238 / 0.180 / 0.118
+      / 0.085; GO 0.468 / 0.744 / 0.829 / 1.114 and 0.250 / 0.335 / 0.288 / 0.348; MGO 0.094 / 0.140 / 0.182 / 0.272 and 0.011
+      / 0.017 / 0.022 / 0.035 mM: all 32 rows within their read errors; SDs spot-checked on the bars. GO / MGO calibrated
+      (''external standard''); 3-DP / 1-DP split to zhou2022_fig1cd_deoxypentosones_arp_cys (''based on the internal standard
+      because of the lack of standards''). The trunk twin entry carries duplicate_of.'
+    split_note: 'Split from zhou2022_fig1_arp_cys_ala_dicarbonyls by the adjudicator (CF-062): the 3-DX / 1-DX (deoxypentosone)
+      rows of the same reading, under their own ledger id so the loader assigns them semi_quantitative; the checks are the
+      parent''s.'
+  - ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    source_file: Zhai2023b.pdf
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: corrected
+      values: corrected
+    quote: Purity or standards of these alpha-dicarbonyls (quinoxaline derivatives) were used as external standards for the
+      quantitation. [Chemicals:] ... standard methylglyoxal (40% aqueous solution) and glyoxal (40% aqueous solution) were
+      purchased from Sigma-Aldrich
+    check_notes:
+      conditions: 'Methods p. 14301 and Fig. 5 caption (quoted in the pots): TTCA 10 mM +/- Cys 10 mM (1:1), initial pH 7.0,
+        100 / 120 / 140 C, 20-180 min, stirred pressure-resistant bottles, unbuffered (NaOH). The ledger''s ''condition_uncertain''
+        flag: fill volume, headspace and final pH are not stated; the nominal conditions agree with the ledger.'
+      units: Fig. 5 y-axes 'Concentration (mmol/L)' for all panels (GO peaks at ~0.006 mmol/L).
+      quantification: 'MGO and GO calibrated (purchased standards, external calibration). 1-DX and 3-DX: no standard is purchased
+        or synthesised in the Chemicals section; ''purity or standards ... were used'' does not say how the DX quinoxalines
+        were calibrated, so DX are semi_quantitative at best (ledger says calibrated for the whole entry).'
+      duplicates: 'The TTCA-alone arm (dashed) of panels b-e at 20-120 min is a re-plot of Zhai 2023 Food Chem 404:134420
+        Figs. 2-3 TTCA arm (TTCA 10 mM, pH 7, 100/120/140 C, published online first): 3-DX 0.15 / 0.21 / 0.38 / 0.47 / 0.51
+        / 0.42 mM at 100 C and the 120 / 140 C points match to the plotted digit. Counted once, here (vector values with SDs,
+        extended to 180 min); the Food Chem TTCA arm is not transcribed (see that entry). Further, the 100 C TTCA-alone series
+        (20-120 min) is itself Zhai 2021 JAFC 69:10648 Fig. 5 ''TTCA-7'' (pH 7, 100 C): identical means for 3-DX, 1-DX, MGO
+        and GO, but DIFFERENT error bars (e.g. 3-DX SD 0.017 / 0.021 / 0.034 here vs 0.023 / 0.011 / 0.010 in 2021). Those
+        6 x 4 points are counted once under zhai2021_fig5_dicarbonyls_ph_ladder (first print); only T-100 at 140-180 min,
+        T-120, T-140 and the T+C arm are rows here. Triple print; no register entry yet.'
+      values: 'Extracted from the vector page (pdftocairo -svg p. 7): 6 series x 10 times per panel, legend order verified
+        on a 500-dpi render (squares 100 C, diamonds 120 C, triangles 140 C; dashed T, solid T+C) and against the text (''At
+        120 C or higher temperature (140 C), 3-DX was undetectable before the reaction period of 40-60 min in the TTCA-Cys
+        model''). Sample: 3-DX T-140 0.32 / 0.49 / 0.70 / 0.81 / 0.79 mM; 1-DX T-140 peak 0.112 mM at 80 min; MGO T-140 peak
+        0.072 at 60 min. CORRECTION: 3-DX T-140 at 120 min is 0.420 here, identical to T-100''s 0.420, but ~0.61 in the Food
+        Chem print of the same series; the point is dropped as a self-contradiction between prints. Zero-plotted points (undetected)
+        are not rows; they are listed under below_detection.'
+    species_used:
+    - TDP
+    - DPO
+    - MGO
+    - GO
+    digitisation:
+      method: vector (SVG) coordinates, error-bar ends
+      read_error: 0.1 pt in axis units
+    adjudication: 'Adjudicator''s independent extraction of Fig. 5 from the page vectors (pdftocairo -svg p. 7; error-bar
+      paths give mean and SD, series identified by line style and marker shape against the legend): all 140 of the second
+      reading''s rows reproduce to < 0.0006 mM in mean and SD. Exclusions confirmed: T-100 20-120 min = Zhai 2021 Fig. 5 pH
+      7 (first print; counted there); T-140 3-DX at 120 min printed with exactly T-100''s mean and error bar (0.420 +- 0.024)
+      while Food Chem prints ~0.63 -> dropped (CF-066). GO (all <= 5.7 umol/L) excluded: below the method''s LOD (CF-061).
+      MGO calibrated; 3-DX / 1-DX split to zhai2023jafc_fig5bc_deoxyosones (semi_quantitative). The TTCA-alone 120 / 140 C
+      arms are also Food Chem Figs. 2-3 (counted here, CF-066).'
+  - ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    source_file: Zhai2023b.pdf
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: corrected
+      values: corrected
+    quote: Purity or standards of these alpha-dicarbonyls (quinoxaline derivatives) were used as external standards for the
+      quantitation. [Chemicals:] ... standard methylglyoxal (40% aqueous solution) and glyoxal (40% aqueous solution) were
+      purchased from Sigma-Aldrich
+    check_notes:
+      conditions: 'Methods p. 14301 and Fig. 5 caption (quoted in the pots): TTCA 10 mM +/- Cys 10 mM (1:1), initial pH 7.0,
+        100 / 120 / 140 C, 20-180 min, stirred pressure-resistant bottles, unbuffered (NaOH). The ledger''s ''condition_uncertain''
+        flag: fill volume, headspace and final pH are not stated; the nominal conditions agree with the ledger.'
+      units: Fig. 5 y-axes 'Concentration (mmol/L)' for all panels (GO peaks at ~0.006 mmol/L).
+      quantification: 'MGO and GO calibrated (purchased standards, external calibration). 1-DX and 3-DX: no standard is purchased
+        or synthesised in the Chemicals section; ''purity or standards ... were used'' does not say how the DX quinoxalines
+        were calibrated, so DX are semi_quantitative at best (ledger says calibrated for the whole entry).'
+      duplicates: 'The TTCA-alone arm (dashed) of panels b-e at 20-120 min is a re-plot of Zhai 2023 Food Chem 404:134420
+        Figs. 2-3 TTCA arm (TTCA 10 mM, pH 7, 100/120/140 C, published online first): 3-DX 0.15 / 0.21 / 0.38 / 0.47 / 0.51
+        / 0.42 mM at 100 C and the 120 / 140 C points match to the plotted digit. Counted once, here (vector values with SDs,
+        extended to 180 min); the Food Chem TTCA arm is not transcribed (see that entry). Further, the 100 C TTCA-alone series
+        (20-120 min) is itself Zhai 2021 JAFC 69:10648 Fig. 5 ''TTCA-7'' (pH 7, 100 C): identical means for 3-DX, 1-DX, MGO
+        and GO, but DIFFERENT error bars (e.g. 3-DX SD 0.017 / 0.021 / 0.034 here vs 0.023 / 0.011 / 0.010 in 2021). Those
+        6 x 4 points are counted once under zhai2021_fig5_dicarbonyls_ph_ladder (first print); only T-100 at 140-180 min,
+        T-120, T-140 and the T+C arm are rows here. Triple print; no register entry yet.'
+      values: 'Extracted from the vector page (pdftocairo -svg p. 7): 6 series x 10 times per panel, legend order verified
+        on a 500-dpi render (squares 100 C, diamonds 120 C, triangles 140 C; dashed T, solid T+C) and against the text (''At
+        120 C or higher temperature (140 C), 3-DX was undetectable before the reaction period of 40-60 min in the TTCA-Cys
+        model''). Sample: 3-DX T-140 0.32 / 0.49 / 0.70 / 0.81 / 0.79 mM; 1-DX T-140 peak 0.112 mM at 80 min; MGO T-140 peak
+        0.072 at 60 min. CORRECTION: 3-DX T-140 at 120 min is 0.420 here, identical to T-100''s 0.420, but ~0.61 in the Food
+        Chem print of the same series; the point is dropped as a self-contradiction between prints. Zero-plotted points (undetected)
+        are not rows; they are listed under below_detection.'
+    species_used:
+    - TDP
+    - DPO
+    - MGO
+    - GO
+    digitisation:
+      method: vector (SVG) coordinates, error-bar ends
+      read_error: 0.1 pt in axis units
+    adjudication: 'Adjudicator''s independent extraction of Fig. 5 from the page vectors (pdftocairo -svg p. 7; error-bar
+      paths give mean and SD, series identified by line style and marker shape against the legend): all 140 of the second
+      reading''s rows reproduce to < 0.0006 mM in mean and SD. Exclusions confirmed: T-100 20-120 min = Zhai 2021 Fig. 5 pH
+      7 (first print; counted there); T-140 3-DX at 120 min printed with exactly T-100''s mean and error bar (0.420 +- 0.024)
+      while Food Chem prints ~0.63 -> dropped (CF-066). GO (all <= 5.7 umol/L) excluded: below the method''s LOD (CF-061).
+      MGO calibrated; 3-DX / 1-DX split to zhai2023jafc_fig5bc_deoxyosones (semi_quantitative). The TTCA-alone 120 / 140 C
+      arms are also Food Chem Figs. 2-3 (counted here, CF-066).'
+    split_note: 'Split from zhai2023jafc_fig5_arp_dicarbonyls by the adjudicator (CF-062): the 3-DX / 1-DX (deoxypentosone)
+      rows of the same reading, under their own ledger id so the loader assigns them semi_quantitative; the checks are the
+      parent''s.'
+  - ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh
+    source_file: zhou2023c.pdf
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: pass
+    quote: 3-deoxypentosone, 1-deoxypentosone, GO, and MGO should be derivatized to their corresponding quinoxalines using
+      OPD. The specific derivatization steps and quantitative analysis of the alpha-dicarbonyl compounds were performed following
+      our previously published study.15
+    check_notes:
+      conditions: 'Methods p. 14313 (quoted in the pot): AX-ARP 20 mM +/- GSH 20 mM, pH 7.5 (3 M NaOH), pressure-resistant
+        bottles, oil bath 120 C, 30-120 min. Only the ARP-alone arm is in scope (pentose + Ala); the GSH arm is not transcribed.
+        Matches the ledger (its condition_quote is empty).'
+      units: Fig. 4 y-axes 'Concentration of 3-deoxypentosone / 1-deoxypentosone / GO / MGO (mmol/L)'.
+      quantification: 'Method by citation only (ref. 15); the laboratory''s stated method elsewhere (Zhou 2022) is 3,4-hexanedione
+        IS for the deoxypentosones (3,4-hexanedione is in this paper''s Chemicals list) and external standards for GO / MGO.
+        DX semi_quantitative; ledger says calibrated. Across this laboratory''s AX-ARP-alone pots at 120 C the 3-deoxypentosone
+        scale varies ~10x between papers: Zhou 2022 (pH 7) 4.3-6.1 mM, Zhou 2023c (pH 7.5) 0.64-1.13, Zhou 2024 (pH 8) 3.7-5.3,
+        Zhou 2025b (pH 8) 0.37-0.55; GO and 1-DP vary less. Consistent with an internal-standard response factor that is not
+        transferable: treat each paper''s DX as its own scale.'
+      duplicates: Not a re-plot of Zhou 2022's ARP-alone arm (pH 7.5 vs 7; 3-DP 0.64-1.13 vs 4.3-6.1 mM).
+      values: 600-dpi render, orange mask (ARP alone = 'Without addition of GSH'); marker, line and error bar merge at this
+        size, so centres of the merged runs are taken and no SD is read; read error 6 px. 3-DP 0.64 / 0.92 / 1.06 / 1.13;
+        1-DP 0.43 / 0.30 / 0.23 / 0.19; GO 0.70 / 1.07 / 1.31 / 1.40; MGO 0.067 / 0.083 / 0.101 / 0.111 mM.
+    species_used:
+    - TDP
+    - DPO
+    - GO
+    - MGO
+    adjudication: 'Adjudicator''s read of a 300 dpi render of p. 5 (orange ''Without addition of GSH'' mask, axes from the
+      tick rows): 3-DP 0.638 / 0.915 / 1.062 / 1.136, 1-DP 0.431 / 0.305 / 0.228 / 0.185, GO 0.701 / 1.067 / 1.310 / 1.401,
+      MGO 0.0670 / 0.0830 / 0.1009 / 0.1116 mM: all 16 rows agree. Conditions (AX-ARP 20 mM, pH 7.5, 120 C) correct. GO /
+      MGO calibrated (standards purchased); 3-DP / 1-DP split to zhou2023c_fig4ab_deoxypentosones_arp_gsh (no deoxypentosone
+      standard).'
+  - ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh
+    source_file: zhou2023c.pdf
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: pass
+    quote: 3-deoxypentosone, 1-deoxypentosone, GO, and MGO should be derivatized to their corresponding quinoxalines using
+      OPD. The specific derivatization steps and quantitative analysis of the alpha-dicarbonyl compounds were performed following
+      our previously published study.15
+    check_notes:
+      conditions: 'Methods p. 14313 (quoted in the pot): AX-ARP 20 mM +/- GSH 20 mM, pH 7.5 (3 M NaOH), pressure-resistant
+        bottles, oil bath 120 C, 30-120 min. Only the ARP-alone arm is in scope (pentose + Ala); the GSH arm is not transcribed.
+        Matches the ledger (its condition_quote is empty).'
+      units: Fig. 4 y-axes 'Concentration of 3-deoxypentosone / 1-deoxypentosone / GO / MGO (mmol/L)'.
+      quantification: 'Method by citation only (ref. 15); the laboratory''s stated method elsewhere (Zhou 2022) is 3,4-hexanedione
+        IS for the deoxypentosones (3,4-hexanedione is in this paper''s Chemicals list) and external standards for GO / MGO.
+        DX semi_quantitative; ledger says calibrated. Across this laboratory''s AX-ARP-alone pots at 120 C the 3-deoxypentosone
+        scale varies ~10x between papers: Zhou 2022 (pH 7) 4.3-6.1 mM, Zhou 2023c (pH 7.5) 0.64-1.13, Zhou 2024 (pH 8) 3.7-5.3,
+        Zhou 2025b (pH 8) 0.37-0.55; GO and 1-DP vary less. Consistent with an internal-standard response factor that is not
+        transferable: treat each paper''s DX as its own scale.'
+      duplicates: Not a re-plot of Zhou 2022's ARP-alone arm (pH 7.5 vs 7; 3-DP 0.64-1.13 vs 4.3-6.1 mM).
+      values: 600-dpi render, orange mask (ARP alone = 'Without addition of GSH'); marker, line and error bar merge at this
+        size, so centres of the merged runs are taken and no SD is read; read error 6 px. 3-DP 0.64 / 0.92 / 1.06 / 1.13;
+        1-DP 0.43 / 0.30 / 0.23 / 0.19; GO 0.70 / 1.07 / 1.31 / 1.40; MGO 0.067 / 0.083 / 0.101 / 0.111 mM.
+    species_used:
+    - TDP
+    - DPO
+    - GO
+    - MGO
+    adjudication: 'Adjudicator''s read of a 300 dpi render of p. 5 (orange ''Without addition of GSH'' mask, axes from the
+      tick rows): 3-DP 0.638 / 0.915 / 1.062 / 1.136, 1-DP 0.431 / 0.305 / 0.228 / 0.185, GO 0.701 / 1.067 / 1.310 / 1.401,
+      MGO 0.0670 / 0.0830 / 0.1009 / 0.1116 mM: all 16 rows agree. Conditions (AX-ARP 20 mM, pH 7.5, 120 C) correct. GO /
+      MGO calibrated (standards purchased); 3-DP / 1-DP split to zhou2023c_fig4ab_deoxypentosones_arp_gsh (no deoxypentosone
+      standard).'
+    split_note: 'Split from zhou2023c_fig4_dicarbonyls_arp_gsh by the adjudicator (CF-062): the 3-DX / 1-DX (deoxypentosone)
+      rows of the same reading, under their own ledger id so the loader assigns them semi_quantitative; the checks are the
+      parent''s.'
+  - ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph
+    source_file: Zhou2024.pdf
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: pass
+    quote: For alpha-dicarbonyls, including glyoxal (GO), methylglyoxal (MGO), 3-deoxyxylosone (3-DX), and 1-deoxyxylosone
+      (1-DX), the detection method was conducted following the procedure reported by Zhou et al.20
+    check_notes:
+      conditions: 'Methods p. 18631 (quoted in the pots): Ala-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine) 20 mM +/- Ala 20 mM,
+        pH 8.0 +/- 0.02, oil bath 120 C, 30-120 min; pH measured by meter (Fig. 3b, transcribed into the pots: 8.0 -> 4.1
+        / 4.2). Matches the ledger (figure_only status there).'
+      units: Fig. 3c-f y-axes 'Concentration of 3-DX / 1-DX / GO / MGO (mmol/L)'.
+      quantification: The method is only cited (ref. 20, another Zhou 2024 JAFC paper, not on disk). The laboratory's stated
+        method in Zhou 2022 and Zhou 2025b is 3,4-hexanedione IS for the deoxyosones; so 3-DX / 1-DX semi_quantitative; GO
+        / MGO method not stated here (ledger 'calibrated' unverifiable from this paper; external standards in Zhou 2022).
+      duplicates: 'Not a re-plot of Zhou 2025b (values differ ~10x). CONFLICT (not a duplicate): Zhou 2025b Fig. 2b-e AX-ARP-alone
+        arm (same laboratory, same nominal pot: AX-ARP 20 mM, pH 8, 120 C, 30-120 min) is ~10x lower for every dicarbonyl
+        (3-DX 0.37-0.55 vs 3.7-5.3 mM; 1-DX 0.29 -> 0.09 vs 3.05 -> 2.14; GO 0.15-0.31 vs 1.0-4.9; MGO ~0.08 vs 0.47-1.05).
+        A scale error in one paper is likely; nothing in either text decides it. Zhou 2022 (pH 7) 3-DP 4.3-6.1 mM sits with
+        Zhou 2024. Needs a conflicts-register entry; both kept as rows here with this note.'
+      values: 'Extracted from the vector page (pdftocairo -svg p. 6): coloured markers (green ARP, red ARP + Ala) and coloured
+        error-bar caps; axes from tick paths. Sample: 3-DX ARP 3.67 / 4.67 / 4.96 / 5.29 mM; GO ARP 1.01 -> 4.86; MGO ARP
+        + Ala 0.65 -> 0.81. Legend markers excluded.'
+    species_used:
+    - TDP
+    - DPO
+    - GO
+    - MGO
+    conflict_note: 'CONFLICT (not a duplicate): Zhou 2025b Fig. 2b-e AX-ARP-alone arm (same laboratory, same nominal pot:
+      AX-ARP 20 mM, pH 8, 120 C, 30-120 min) is ~10x lower for every dicarbonyl (3-DX 0.37-0.55 vs 3.7-5.3 mM; 1-DX 0.29 ->
+      0.09 vs 3.05 -> 2.14; GO 0.15-0.31 vs 1.0-4.9; MGO ~0.08 vs 0.47-1.05). A scale error in one paper is likely; nothing
+      in either text decides it. Zhou 2022 (pH 7) 3-DP 4.3-6.1 mM sits with Zhou 2024. Needs a conflicts-register entry; both
+      kept as rows here with this note.'
+    adjudication: 'Adjudicator''s independent extraction of Fig. 3c-f from the page vectors (pdftocairo -svg p. 6; coloured
+      marker paths and half-error-bar paths): 3-DX 3.671 / 4.670 / 4.960 / 5.293 and 2.573 / 3.423 / 3.600 / 3.720; 1-DX 3.054
+      / 2.891 / 2.749 / 2.140 and 2.360 / 2.246 / 2.098 / 1.184; GO 1.012 / 2.532 / 3.898 / 4.860 and 1.776 / 1.337 / 1.366
+      / 0.849; MGO 0.469 / 0.946 / 1.088 / 1.047 and 0.648 / 0.712 / 0.787 / 0.806 mM, SDs where drawn: all 32 rows agree.
+      The +Ala arm''s alanine is entered as the engine''s amine-pool key Gly. GO / MGO calibrated; 3-DX / 1-DX split to zhou2024_fig3cd_deoxyxylosones_arp_ala.
+      CF-060: ~10x Zhou 2025b''s same nominal pot.'
+  - ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala
+    source_file: Zhou2024.pdf
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: pass
+    quote: For alpha-dicarbonyls, including glyoxal (GO), methylglyoxal (MGO), 3-deoxyxylosone (3-DX), and 1-deoxyxylosone
+      (1-DX), the detection method was conducted following the procedure reported by Zhou et al.20
+    check_notes:
+      conditions: 'Methods p. 18631 (quoted in the pots): Ala-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine) 20 mM +/- Ala 20 mM,
+        pH 8.0 +/- 0.02, oil bath 120 C, 30-120 min; pH measured by meter (Fig. 3b, transcribed into the pots: 8.0 -> 4.1
+        / 4.2). Matches the ledger (figure_only status there).'
+      units: Fig. 3c-f y-axes 'Concentration of 3-DX / 1-DX / GO / MGO (mmol/L)'.
+      quantification: The method is only cited (ref. 20, another Zhou 2024 JAFC paper, not on disk). The laboratory's stated
+        method in Zhou 2022 and Zhou 2025b is 3,4-hexanedione IS for the deoxyosones; so 3-DX / 1-DX semi_quantitative; GO
+        / MGO method not stated here (ledger 'calibrated' unverifiable from this paper; external standards in Zhou 2022).
+      duplicates: 'Not a re-plot of Zhou 2025b (values differ ~10x). CONFLICT (not a duplicate): Zhou 2025b Fig. 2b-e AX-ARP-alone
+        arm (same laboratory, same nominal pot: AX-ARP 20 mM, pH 8, 120 C, 30-120 min) is ~10x lower for every dicarbonyl
+        (3-DX 0.37-0.55 vs 3.7-5.3 mM; 1-DX 0.29 -> 0.09 vs 3.05 -> 2.14; GO 0.15-0.31 vs 1.0-4.9; MGO ~0.08 vs 0.47-1.05).
+        A scale error in one paper is likely; nothing in either text decides it. Zhou 2022 (pH 7) 3-DP 4.3-6.1 mM sits with
+        Zhou 2024. Needs a conflicts-register entry; both kept as rows here with this note.'
+      values: 'Extracted from the vector page (pdftocairo -svg p. 6): coloured markers (green ARP, red ARP + Ala) and coloured
+        error-bar caps; axes from tick paths. Sample: 3-DX ARP 3.67 / 4.67 / 4.96 / 5.29 mM; GO ARP 1.01 -> 4.86; MGO ARP
+        + Ala 0.65 -> 0.81. Legend markers excluded.'
+    species_used:
+    - TDP
+    - DPO
+    - GO
+    - MGO
+    conflict_note: 'CONFLICT (not a duplicate): Zhou 2025b Fig. 2b-e AX-ARP-alone arm (same laboratory, same nominal pot:
+      AX-ARP 20 mM, pH 8, 120 C, 30-120 min) is ~10x lower for every dicarbonyl (3-DX 0.37-0.55 vs 3.7-5.3 mM; 1-DX 0.29 ->
+      0.09 vs 3.05 -> 2.14; GO 0.15-0.31 vs 1.0-4.9; MGO ~0.08 vs 0.47-1.05). A scale error in one paper is likely; nothing
+      in either text decides it. Zhou 2022 (pH 7) 3-DP 4.3-6.1 mM sits with Zhou 2024. Needs a conflicts-register entry; both
+      kept as rows here with this note.'
+    adjudication: 'Adjudicator''s independent extraction of Fig. 3c-f from the page vectors (pdftocairo -svg p. 6; coloured
+      marker paths and half-error-bar paths): 3-DX 3.671 / 4.670 / 4.960 / 5.293 and 2.573 / 3.423 / 3.600 / 3.720; 1-DX 3.054
+      / 2.891 / 2.749 / 2.140 and 2.360 / 2.246 / 2.098 / 1.184; GO 1.012 / 2.532 / 3.898 / 4.860 and 1.776 / 1.337 / 1.366
+      / 0.849; MGO 0.469 / 0.946 / 1.088 / 1.047 and 0.648 / 0.712 / 0.787 / 0.806 mM, SDs where drawn: all 32 rows agree.
+      The +Ala arm''s alanine is entered as the engine''s amine-pool key Gly. GO / MGO calibrated; 3-DX / 1-DX split to zhou2024_fig3cd_deoxyxylosones_arp_ala.
+      CF-060: ~10x Zhou 2025b''s same nominal pot.'
+    split_note: 'Split from zhou2024_fig3_fig4_axarp_dicarbonyls_ph by the adjudicator (CF-062): the 3-DX / 1-DX (deoxypentosone)
+      rows of the same reading, under their own ledger id so the loader assigns them semi_quantitative; the checks are the
+      parent''s.'
+  - ledger_id: wang2026b_tables1_22_volatiles
+    source_file: wang2026b_supplementary.docx
+    read_by: agent-sm3-reader2-2026-10-29
+    second_reader: agent-sm3-adjudicator-2026-10-29
+    date: '2026-10-29'
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: VOCs were semi-quantified using cyclohexanone as an internal standard based on peak area ratios under the assumption
+      of equal response factors among analytes.
+    check_notes:
+      conditions: 'Main paper sec. 2.2 (Wang2026b.pdf, quoted in the pot): xylose 2.0 mmol + cysteine 2.0 mmol in 10 mL 0.2
+        M NaH2PO4 pH 5.5 (i.e. 200 mM each), 15 mL pressure-resistant vessel, stirred oil bath 120 C, 0 / 60 / 90 / 120 /
+        150 min. The ledger gives masses only; the mM values are computed here.'
+      units: SI Table S1 header 'Semi-quantitative concentration (ng/mL)' = ug/L.
+      quantification: semi_quantitative (cyclohexanone IS, response factor 1), as the ledger says.
+      duplicates: Main Table 1 gives OAVs derived from the same data (a different ledger entry, wang2026b_table1_oav_thiols_dimers);
+        only S1 concentrations are rows here.
+      values: 'Furfural row read from the docx XML: MRPs-0 ND; 255.22 +/- 5.35, 391.50 +/- 27.60 (printed ''27.60b.'', a stray
+        full stop), 413.05 +/- 6.92, 423.35 +/- 19.61 ng/mL at 60 / 90 / 120 / 150 min (n = 3).'
+    species_used:
+    - FUR
+    adjudication: 'Adjudicator''s check of wang2026b_supplementary.docx Table S1 (XML): furfural ND / 255.22 +- 5.35 / 391.50
+      +- 27.60 / 413.05 +- 6.92 / 423.35 +- 19.61 ng/mL at 0-150 min: 4 rows correct; Wang2026b.pdf sec. 2.2: xylose 0.300
+      g + cysteine 0.242 g in 10 mL 0.2 M NaH2PO4 pH 5.5, 15 mL pressure vessel, 120 C -> 199.8 / 199.7 mM, correct. Semi-quantitative
+      (''semi-quantified using cyclohexanone ... equal response factors''), as the ledger.'

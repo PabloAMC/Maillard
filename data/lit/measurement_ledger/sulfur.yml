@@ -42,11 +42,11 @@ entries:
     kind: time_series
     location: "Fig. 3B"
     status: in_model_check
-    quant_class: calibrated
+    quant_class: semi_quantitative
     simulable: true
     condition_quote: "Cys : TTCA = 1 : 1, Cys 5 mmol/L ... 10 mL deionized water, pH 7.4 (NaOH 6 M), 10 min at room temperature, then 120 C oil bath, 0-60 min"
     flags: []
-    note: "Pre-declared check of the cysteine-route calibration (1-DX, 3-DX of the TTCA-alone arm). OPD-HPLC-DAD with hexanedione internal standard (Zhai 2023b/d use external standards for the same method). Condition quote is the dossier's paraphrase of methods. TTCA itself not plotted vs time in these pots."
+    note: "Pre-declared check of the cysteine-route calibration (1-DX, 3-DX of the TTCA-alone arm). OPD-HPLC-DAD with hexanedione internal standard (Zhai 2023b/d use external standards for the same method). Condition quote is the dossier's paraphrase of methods. TTCA itself not plotted vs time in these pots. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): semi_quantitative. 1-DX, 3-DX and GO are all quantified as OPD quinoxalines against the hexanedione internal standard ('Hexanedione as an internal standard (960 ppm, 40 uL)'); the Chemicals list names no dicarbonyl standard, so the absolute scale rests on an assumed response factor."
   - id: zhai2019_fig1a_a420_twostep
     dossier: zhai2019_extraction.md
     paper: "Zhai et al. 2019 J Agric Food Chem 67:8632"
@@ -110,15 +110,33 @@ entries:
     temperature_c: [100]
     ph: {initial: [5.5, 6, 7, 8], measured_during: false, final: null}
     time_min: [0, 20, 40, 60, 80, 100, 120]
-    species: ["3-DX", "1-DX", "methylglyoxal", "glyoxal"]
+    species: ["methylglyoxal", "glyoxal"]
     kind: time_series
-    location: "Fig. 5a-d"
+    location: "Fig. 5c-d (MGO, GO); 3-DX / 1-DX (Fig. 5a-b) split to zhai2021_fig5ab_deoxyosones_ph_ladder"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: true
     condition_quote: "3-DX quinoxaline (3-DXqx) and 1-DX quinoxaline (1-DXqx), were quantitated using diacetyl as an internal standard, and MGO quinoxaline (MGOqx) and GO quinoxaline (GOqx) were detected using external standards."
-    flags: []
-    note: "3-DX/1-DX absolute scale rests on diacetyl-quinoxaline response factor (no authentic standard); MGO/GO externally calibrated. Gives TTCA carbon branching to 3-DX vs pH (5-19 % molar of TTCA lost). Some SDs repetitive."
+    flags: ["reprinted_in: zhai2023foodchem, zhai2023jafc (the pH 7 arms at 100 C; counted here, CF-066)", "below_lod: glyoxal (every GO mean below the paper's own GO LOD; CF-061)"]
+    note: "3-DX/1-DX absolute scale rests on diacetyl-quinoxaline response factor (no authentic standard); MGO/GO externally calibrated. Gives TTCA carbon branching to 3-DX vs pH (5-19 % molar of TTCA lost). Some SDs repetitive. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): MGO / GO keep 'calibrated' (external standards, purchased 40 % solutions). GO rows are not transcribed (below the LOD 1.118 mg/L the paper prints). The deoxyosones moved to their own entry."
+  - id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    dossier: zhai2021_extraction.md
+    paper: "Zhai et al. 2021 J Agric Food Chem 69:10648"
+    lab: "Jiangnan (Zhang X / Cui H / Ho)"
+    system: "purified TTCA 10 mM +/- xylose 10 mM, water"
+    medium: "unbuffered water, pH set with 2 M NaOH or HCl"
+    temperature_c: [100]
+    ph: {initial: [5.5, 6, 7, 8], measured_during: false, final: null}
+    time_min: [0, 20, 40, 60, 80, 100, 120]
+    species: ["3-DX", "1-DX"]
+    kind: time_series
+    location: "Fig. 5a-b"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "3-DX quinoxaline (3-DXqx) and 1-DX quinoxaline (1-DXqx), were quantitated using diacetyl as an internal standard, and MGO quinoxaline (MGOqx) and GO quinoxaline (GOqx) were detected using external standards."
+    flags: ["split_from: zhai2021_fig5_dicarbonyls_ph_ladder", "reprinted_in: zhai2023foodchem, zhai2023jafc (the pH 7 arms at 100 C; counted here, CF-066)"]
+    note: "ADJUDICATION 2026-10-29 (sub-model 3, CF-062): the 3-DX / 1-DX panels of Fig. 5, split from zhai2021_fig5_dicarbonyls_ph_ladder so the loader assigns their class: 'quantitated using diacetyl as an internal standard' with no authentic 3-DX / 1-DX standard, so semi_quantitative. The 1-DX SDs repeat across points (CF-064 family)."
   - id: zhai2021_fig4a_a420_ph_ladder
     dossier: zhai2021_extraction.md
     paper: "Zhai et al. 2021 J Agric Food Chem 69:10648"
@@ -240,11 +258,11 @@ entries:
     kind: time_series
     location: "Fig. 2a-b"
     status: figure_only
-    quant_class: calibrated
+    quant_class: semi_quantitative
     simulable: true
     condition_quote: ""
-    flags: []
-    note: "Dossier read peak values and peak times only (+/-10-15 %); 120 vs 140 C glyphs not resolved. External-standard OPD-HPLC. Full curves unread: route species x 3 T x +/-Xyl."
+    flags: ["arm_reprint_of: zhai2021 (100 C TTCA and TTCA+Xyl arms = Zhai 2021 Fig. 5 pH 7; not transcribed here, CF-066)", "arm_reprinted_in: zhai2023jafc (TTCA-alone arm 20-120 min; counted under zhai2023jafc_fig5bc_deoxyosones, CF-066)"]
+    note: "Dossier read peak values and peak times only (+/-10-15 %); 120 vs 140 C glyphs not resolved. External-standard OPD-HPLC. Full curves unread: route species x 3 T x +/-Xyl. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): semi_quantitative: 'external standards were used to quantify the alpha-dicarbonyls', but the Chemicals list has no 3-DX / 1-DX standard and the method paper (Zhai 2021) used diacetyl as internal standard. Only the 120 / 140 C TTCA+Xyl arms enter the sub-model 3 table; the TTCA-alone 140 C 3-DX at 120 min reads ~0.63 mM here and 0.42 mM in the JAFC reprint (CF-066)."
   - id: zhai2023foodchem_fig3_cys_da_mgo_go
     dossier: zhai2023foodchem_extraction.md
     paper: "Zhai et al. 2023 Food Chem 404:134420 (online Sep 2022)"
@@ -261,8 +279,8 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "the temperature-dependent DA content curves (Fig. 3b) proved that an elevated temperature could significantly promote the generation of DA, however, a sharp consumption of DA appeared when it rapidly reached to its maximum."
-    flags: []
-    note: "Only peak values/times read by dossier. Regenerated free Cys from TTCA at 3 T (cf. Kang SI Fig. S3, which is in the route calibration; possible re-plot, unverified). Highest-value unread object in this paper per dossier."
+    flags: ["arm_reprint_of: zhai2021 (100 C arms; CF-066)", "arm_reprinted_in: zhai2023jafc (TTCA-alone MGO / GO 20-120 min; CF-066)", "below_lod: glyoxal (CF-061)"]
+    note: "Only peak values/times read by dossier. Regenerated free Cys from TTCA at 3 T (cf. Kang SI Fig. S3, which is in the route calibration; possible re-plot, unverified). Highest-value unread object in this paper per dossier. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): MGO calibrated (purchased standard). In sub-model 3 only the 120 / 140 C TTCA+Xyl MGO rows enter; GO is below the method's LOD (CF-061)."
   - id: zhai2023foodchem_p6_cys_alone_conversion
     dossier: zhai2023foodchem_extraction.md
     paper: "Zhai et al. 2023 Food Chem 404:134420 (online Sep 2022)"
@@ -362,15 +380,33 @@ entries:
     temperature_c: [100, 120, 140]
     ph: {initial: 7.0, measured_during: false, final: null}
     time_min: [0, 20, 40, 60, 80, 100, 120, 140, 160, 180]
-    species: ["Cys-Amadori", "3-DX", "1-DX", "methylglyoxal", "glyoxal"]
+    species: ["Cys-Amadori", "methylglyoxal", "glyoxal"]
     kind: time_series
-    location: "Fig. 5a-e"
+    location: "Fig. 5a, d, e (ARP, MGO, GO); 3-DX / 1-DX (Fig. 5b-c) split to zhai2023jafc_fig5bc_deoxyosones"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: true
     condition_quote: ""
-    flags: [condition_uncertain]
-    note: "3-DX (panel b) digitised marker-by-marker (+/-0.02 mM); ARP, 1-DX, MGO, GO peak values/times only (+/-10-15 %), ARP series-to-temperature assignment inferred. 'ARP' is the Cys-Amadori. External-standard HPLC-ELSD / OPD-HPLC."
+    flags: [condition_uncertain, "arm_reprint_of: zhai2023foodchem (TTCA-alone 100-140 C, 20-120 min) and zhai2021 (100 C TTCA-alone = Fig. 5 pH 7); CF-066", "below_lod: glyoxal (CF-061)"]
+    note: "3-DX (panel b) digitised marker-by-marker (+/-0.02 mM); ARP, 1-DX, MGO, GO peak values/times only (+/-10-15 %), ARP series-to-temperature assignment inferred. 'ARP' is the Cys-Amadori. External-standard HPLC-ELSD / OPD-HPLC. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): ARP / MGO / GO keep 'calibrated' (external standards; MGO, GO purchased). In sub-model 3: MGO rows only (T-100 from 140 min, all of T-120 / T-140 / T+C); GO below the Zhai 2021 LOD (CF-061)."
+  - id: zhai2023jafc_fig5bc_deoxyosones
+    dossier: zhai2023jafc_extraction.md
+    paper: "Zhai et al. 2023 J Agric Food Chem 71:14300"
+    lab: "Zhejiang Gongshang / Jiangnan (Fu Y / Zhang X / Ho)"
+    system: "purified TTCA 10 mM +/- cysteine 10 mM, water"
+    medium: "unbuffered water, pH set with NaOH"
+    temperature_c: [100, 120, 140]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [0, 20, 40, 60, 80, 100, 120, 140, 160, 180]
+    species: ["3-DX", "1-DX"]
+    kind: time_series
+    location: "Fig. 5b-c"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: ""
+    flags: ["split_from: zhai2023jafc_fig5_arp_dicarbonyls", condition_uncertain, "arm_reprint_of: zhai2023foodchem (TTCA-alone 20-120 min) and zhai2021 (100 C TTCA-alone 20-120 min); CF-066", "self_contradiction: T-140 3-DX at 120 min printed with T-100's mean and error bar (0.420 +- 0.024), Food Chem ~0.63 (CF-066)"]
+    note: "ADJUDICATION 2026-10-29 (sub-model 3, CF-062): 3-DX / 1-DX panels of Fig. 5, split from zhai2023jafc_fig5_arp_dicarbonyls: 'Purity or standards of these alpha-dicarbonyls (quinoxaline derivatives) were used as external standards' names no 3-DX / 1-DX standard, so semi_quantitative. Vector figure; T-100 20-120 min not transcribed (Zhai 2021 first print), T-140 3-DX 120 min dropped (CF-066)."
   - id: zhai2023jafc_fig6_sulfide_furanoids
     dossier: zhai2023jafc_extraction.md
     paper: "Zhai et al. 2023 J Agric Food Chem 71:14300"
@@ -748,7 +784,7 @@ entries:
     simulable: true
     condition_quote: "Main Volatile Compounds Produced from Thermal Treatment of AX-ARP with and without Addition of Cys for 30, 60, 90, and 120 min (the Reaction Temperature Was 120 C; Initial pH Was 7.0)"
     flags: []
-    note: "HS-SPME external calibration with IS (Table S1 not on disk). Sibling run of Zhou 2023 Table 1 pH 7 (same lab, nominal condition): MFT 7.8x and FFT 4.1x lower at 60 min - between-paper reproducibility factor 4-8 for thiols. Volume/headspace and final pH not stated. Only fed-ARP + Cys thiol time course; unused."
+    note: "HS-SPME external calibration with IS (Table S1 not on disk). Sibling run of Zhou 2023 Table 1 pH 7 (same lab, nominal condition): MFT 7.8x and FFT 4.1x lower at 60 min - between-paper reproducibility factor 4-8 for thiols. Volume/headspace and final pH not stated. Only fed-ARP + Cys thiol time course; unused. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): furfural calibrated (authentic standard, IS-based calibration curves); counted once, here (zhou2022_table1_furans_butanedione_pyrazines is the same table)."
   - id: zhou2022_fig1_arp_cys_ala_dicarbonyls
     dossier: zhou2022_extraction.md
     paper: "Zhou et al. 2022 J Agric Food Chem 70:15202"
@@ -758,15 +794,33 @@ entries:
     temperature_c: [120]
     ph: {initial: 7.0, measured_during: false, final: null}
     time_min: [0, 30, 60, 90, 120]
-    species: ["Ala-Xyl ARP", "cysteine", "alanine", "3-DP", "1-DP", "glyoxal", "methylglyoxal"]
+    species: ["Ala-Xyl ARP", "cysteine", "alanine", "glyoxal", "methylglyoxal"]
     kind: time_series
-    location: "Fig. 1a-f"
+    location: "Fig. 1a-b, e-f; 3-DP / 1-DP (Fig. 1c-d) split to zhou2022_fig1cd_deoxypentosones_arp_cys"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: true
     condition_quote: "the content of AX-ARP in the AX-ARP/Cys model decreased somewhat more slowly"
     flags: []
-    note: "Read off 200 dpi raster (+/-2-3 % FS). Cys as % of initial; Cys alone arm (74 % left at 120 min) gives a free-Cys thermolysis rate at 120 C pH 7. 3-DP/1-DP via 3,4-hexanedione IS (no standards); GO/MGO external. Legend symbols swapped between panels (a) and (c)-(f)."
+    note: "Read off 200 dpi raster (+/-2-3 % FS). Cys as % of initial; Cys alone arm (74 % left at 120 min) gives a free-Cys thermolysis rate at 120 C pH 7. 3-DP/1-DP via 3,4-hexanedione IS (no standards); GO/MGO external. Legend symbols swapped between panels (a) and (c)-(f). ADJUDICATION 2026-10-29 (sub-model 3, CF-062): GO / MGO calibrated ('Quantitation of glyoxal (GO) quinoxaline, methylglyoxal (MGO) quinoxaline ... was performed using the external standard'); the deoxypentosones moved to their own entry."
+  - id: zhou2022_fig1cd_deoxypentosones_arp_cys
+    dossier: zhou2022_extraction.md
+    paper: "Zhou et al. 2022 J Agric Food Chem 70:15202"
+    lab: "Jiangnan (Zhang X / Cui H / Ho)"
+    system: "AX-ARP 20 mM +/- cysteine 20 mM; and cysteine heated alone"
+    medium: "unbuffered water, initial pH set with 3 M NaOH"
+    temperature_c: [120]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [0, 30, 60, 90, 120]
+    species: ["3-DP", "1-DP"]
+    kind: time_series
+    location: "Fig. 1c-d"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "the content of AX-ARP in the AX-ARP/Cys model decreased somewhat more slowly"
+    flags: ["split_from: zhou2022_fig1_arp_cys_ala_dicarbonyls", legend_symbols_swapped_between_panels]
+    note: "ADJUDICATION 2026-10-29 (sub-model 3, CF-062): 3-DP / 1-DP panels of Fig. 1, split from zhou2022_fig1_arp_cys_ala_dicarbonyls: 'quantitation of 3-deoxypentosone quinoxaline and 1-deoxypentosone quinoxaline was performed based on the internal standard because of the lack of standards' -> semi_quantitative. 3-DP 4.3-6.1 mM in the ARP-alone arm (CF-060 scale spread)."
   - id: zhou2022_table3_cys_dose_ph7_ph8_trimethylthiazole
     dossier: zhou2022_extraction.md
     paper: "Zhou et al. 2022 J Agric Food Chem 70:15202"
@@ -956,15 +1010,33 @@ entries:
     temperature_c: [120]
     ph: {initial: 7.5, measured_during: false, final: null}
     time_min: [30, 60, 90, 120]
-    species: ["3-DP", "1-DP", "glyoxal", "methylglyoxal"]
+    species: ["glyoxal", "methylglyoxal"]
     kind: time_series
-    location: "Fig. 4"
+    location: "Fig. 4c-d; 3-DP / 1-DP (Fig. 4a-b) split to zhou2023c_fig4ab_deoxypentosones_arp_gsh"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: true
     condition_quote: ""
     flags: []
-    note: "OPD-HPLC-DAD; read +/-0.02 mM."
+    note: "OPD-HPLC-DAD; read +/-0.02 mM. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): GO / MGO calibrated (GO, MGO 40 % standards purchased; method by citation to the group's paper). Only the ARP-alone arm enters sub-model 3."
+  - id: zhou2023c_fig4ab_deoxypentosones_arp_gsh
+    dossier: zhou2023c_extraction.md
+    paper: "Zhou et al. 2023 J Agric Food Chem 71:14312"
+    lab: "Jiangnan (Zhang X / Cui H / Ho)"
+    system: "Ala-xylose ARP 20 mM +/- glutathione 20 mM"
+    medium: "unbuffered water, initial pH 7.5"
+    temperature_c: [120]
+    ph: {initial: 7.5, measured_during: false, final: null}
+    time_min: [30, 60, 90, 120]
+    species: ["3-DP", "1-DP"]
+    kind: time_series
+    location: "Fig. 4a-b"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: ""
+    flags: ["split_from: zhou2023c_fig4_dicarbonyls_arp_gsh"]
+    note: "ADJUDICATION 2026-10-29 (sub-model 3, CF-062): 3-DP / 1-DP panels of Fig. 4, split from zhou2023c_fig4_dicarbonyls_arp_gsh: method by citation; the Chemicals list has 3,4-hexanedione and GO / MGO standards but no deoxypentosone standard -> semi_quantitative. 3-DP 0.64-1.13 mM (CF-060 scale spread)."
   - id: zhou2023c_fig5_predegraded_gsh_and_amino_acids
     dossier: zhou2023c_extraction.md
     paper: "Zhou et al. 2023 J Agric Food Chem 71:14312"
@@ -1684,7 +1756,7 @@ entries:
     simulable: true
     condition_quote: "Semi-quantitative concentration (ng/mL) ... MRPs-0, MRPs-60, MRPs-90, MRPs-120 and MRPs-150 represented the MRPs of xylose and cysteine obtained at 0, 60, 90, 120, and 150 min"
     flags: [rf_equal_assumed, contaminant_peaks_in_denominator]
-    note: "SI read 2026-10-29. First printed thiol-and-dimer time course in one xylose-cysteine pot: MFT 543.73 -> 2407.32, FFT 274.58 -> 2120.24, bis(2-methyl-3-furyl) disulfide 3730.50 -> 8722.94, difurfuryl disulfide 142.97 -> 480.59 (from 90 min), mixed disulfide 75.91 -> 1023.16 ng/mL (60 -> 150 min). Cyclohexanone IS, RF = 1. Exposes the 1e6 OAV unit error in main Table 1. No pH or precursor data."
+    note: "SI read 2026-10-29. First printed thiol-and-dimer time course in one xylose-cysteine pot: MFT 543.73 -> 2407.32, FFT 274.58 -> 2120.24, bis(2-methyl-3-furyl) disulfide 3730.50 -> 8722.94, difurfuryl disulfide 142.97 -> 480.59 (from 90 min), mixed disulfide 75.91 -> 1023.16 ng/mL (60 -> 150 min). Cyclohexanone IS, RF = 1. Exposes the 1e6 OAV unit error in main Table 1. No pH or precursor data. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): semi_quantitative confirmed (cyclohexanone IS, response factor 1)."
   - id: du2023_table1_volatiles_c9_aldehydes
     dossier: du2023_extraction.md
     paper: "Du et al. 2023 Food Res Int 173:113337"

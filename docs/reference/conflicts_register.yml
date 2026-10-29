@@ -1424,19 +1424,29 @@ entries:
   - id: CF-060
     kind: conflict
     scope: sulfur_rows
-    sources: [zhou2025b, zhou2024]
-    quantity: "3-deoxyxylosone and other dicarbonyls from the Ala-xylose Amadori compound (AX-ARP 20 mM, pH 8, 120 C)"
+    sources: [zhou2025b, zhou2024, zhou2022, zhou2023c]
+    quantity: "3-deoxyxylosone and other dicarbonyls from the Ala-xylose Amadori compound (AX-ARP 20 mM, pH 7-8, 120 C)"
     observation: >-
       For the same nominal pot, Zhou 2024 Fig. 3 prints dicarbonyls 7-24x higher than Zhou 2025b (3-DX 3.7-5.3 vs
       0.37-0.52 mM), while the ARP's decay and the pH agree. CF-019 called zhou2025b a re-publication of zhou2024; it is
-      not a re-plot. (Sub-model 3 first reader, against the figures; to be confirmed by the second reader.)
+      not a re-plot. Confirmed by both sub-model 3 readers and the adjudicator (Zhou 2024 Fig. 3 read from the page
+      vectors, Zhou 2025b Fig. 2 at 600 dpi), and every dicarbonyl differs, not 3-DX alone: 1-DX 3.05 -> 2.14 vs
+      0.29 -> 0.09, GO 1.0 -> 4.9 vs 0.15 -> 0.31, MGO 0.47 -> 1.05 vs ~0.08 mM. Across the laboratory's four AX-ARP-alone
+      pots at 120 C the 3-deoxypentosone scale spans ~10x: Zhou 2022 (pH 7) 4.3-6.1 mM, Zhou 2023c (pH 7.5) 0.64-1.13,
+      Zhou 2024 (pH 8) 3.7-5.3, Zhou 2025b (pH 8) 0.37-0.55 (adjudication, sub-model 3, 2026-10-29). The two pH 8 pots
+      are the cleanest contrast: a pH 7 -> 8 step cannot explain Zhou 2024 vs Zhou 2025b.
     explanations:
-      - "A unit or dilution slip (mM vs per-sample) in one paper."
-      - "Different derivatisation / quantification (internal standard without an authentic dicarbonyl standard, CF-062)."
+      - "A unit or dilution slip (mM vs per-sample) in one paper; predicts a constant ratio across species and times (it is not constant: 7-24x)."
+      - "Different derivatisation / quantification (internal standard without an authentic dicarbonyl standard, CF-062); predicts the spread is confined to 3-DX / 1-DX, but GO and MGO, which have purchased standards, differ ~10x too."
+      - "Different ARP batches (in-house synthesis, purity not stated): the ARP decay curves agree, so the batch would have to differ in a co-purified catalyst, not in the ARP itself."
     tests: []
     status: open
-    remedy: "Read zhou2022 (the same group's earlier method paper) to see which quantification the numbers follow; until settled, both series enter by shape only."
-    affects: []
+    remedy: >-
+      Not settled by the papers. In the sub-model 3 table all four papers' 3-DX / 1-DX enter as semi_quantitative (their own
+      ledger ids, shape only); their GO / MGO stay calibrated, so the fit must report the Zhou 2024 vs 2025b GO / MGO
+      residuals per paper (a per-paper scale on these calibrated rows is the honest fallback). Ask the authors (Zhang X,
+      Jiangnan) which print is right; until then no absolute dicarbonyl level from this laboratory constrains a constant.
+    affects: [zhou2024_fig3_fig4_axarp_dicarbonyls_ph, zhou2024_fig3cd_deoxyxylosones_arp_ala, zhou2025b_figs1_3_axarp_xylose_120c, zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, zhou2022_fig1cd_deoxypentosones_arp_cys, zhou2023c_fig4ab_deoxypentosones_arp_gsh]
 
   - id: CF-061
     kind: conflict
@@ -1446,10 +1456,16 @@ entries:
     observation: "GO / 3-DX is 0.6 in Zhai 2019 and 0.005 in Zhai 2021: same laboratory, same method. In Zhai 2021 all GO is below the paper's own LOD (1.118 mg/L)."
     explanations:
       - "Zhai 2019's GO is above an LOD that Zhai 2021 later raised; or a co-eluting quinoxaline in 2019."
+      - "Quantification: Zhai 2019 names no GO standard (hexanedione internal standard, assumed response factor), Zhai 2021 calibrates GO against a purchased standard; predicts the 2019 GO level is off by a response-factor ratio while its time shape is sound (adjudication, 2026-10-29)."
     tests: []
     status: open
-    remedy: "GO rows enter neither sub-model 3 table until explained."
-    affects: []
+    remedy: >-
+      Adjudication (sub-model 3, 2026-10-29): the GO rows of Zhai 2021 Fig. 5d, Zhai 2023 Food Chem Fig. 3d and Zhai 2023 JAFC
+      Fig. 5e (all <= 9.7 umol/L, below the LOD / LOQ Zhai 2021 prints for the method: 1.118 / 2.691 mg/L = 19 / 46 umol/L as
+      GO, 8.6 / 21 as GO-quinoxaline) enter no table (the second reading's 90 GO rows are in its adjudication_excluded list).
+      Zhai 2019's GO (55-149 umol/L) enters shape-only: its ledger entry is semi_quantitative (CF-062), so its level does not
+      contradict the calibrated rows.
+    affects: [zhai2021_fig5_dicarbonyls_ph_ladder, zhai2023foodchem_fig3_cys_da_mgo_go, zhai2023jafc_fig5_arp_dicarbonyls, zhai2019_fig3b_dicarbonyls_ttca]
 
   - id: CF-062
     kind: condition_error
@@ -1464,9 +1480,25 @@ entries:
     explanations:
       - "The ledgers took 'quantified with an internal standard' as calibration."
     tests: []
-    status: open
-    remedy: "Pending the second reading: if confirmed, these series enter the sub-model 3 table as semi_quantitative (shape only, fitting.SCALE_TAU); this affects 300 of its 315 rows and the route stage's 3-DX rows."
-    affects: []
+    status: fixed
+    remedy: >-
+      Confirmed by the second reader and decided per source by the adjudicator from each methods section (2026-10-29).
+      semi_quantitative: every 3-DX / 1-DX (3-DP / 1-DP) series of Zhai 2019, Zhai 2021, Zhai 2023 Food Chem, Zhai 2023
+      JAFC, Zhou 2022, Zhou 2023c, Zhou 2024, Zhou 2025b (internal standard -- diacetyl or 3,4-hexanedione -- and no
+      authentic deoxyosone standard; Zhou 2022: 'based on the internal standard because of the lack of standards'), and
+      Zhai 2019's GO (no GO standard in that paper). calibrated: MGO / GO of Zhai 2021 / 2023 and Zhou 2022-2025b (purchased
+      40 % standards, external or IS curves), Zhou 2025b furfural (curve printed), Zhou 2022 furfural. Ledger edits
+      (measurement_ledger/sulfur.yml, trunk.yml): zhai2019_fig3b_dicarbonyls_ttca and zhai2023foodchem_fig2_deoxyosones
+      -> semi_quantitative; seven mixed figures split, the calibrated species keeping the old id and the deoxyosones a new
+      semi_quantitative id: zhai2021_fig5ab_deoxyosones_ph_ladder, zhai2023jafc_fig5bc_deoxyosones,
+      zhou2022_fig1cd_deoxypentosones_arp_cys, zhou2023c_fig4ab_deoxypentosones_arp_gsh, zhou2024_fig3cd_deoxyxylosones_arp_ala,
+      zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, zhou2025b_fig2a_deoxyxylosone_xylose_alone. The old ids keep
+      'calibrated' because other tables read their calibrated species (route_submodel reads zhai2023jafc Fig. 5a ARP and
+      zhai2023foodchem Fig. 3a Cys). Desclaux 2006 (no calibration stated) and Hofmann 1998 (IS with measured response
+      factors) stay 'unknown' in the ledger; their rows name semi_quantitative / calibrated with method_basis.
+      Not done: the trunk twin zhou2022_fig1_axarp_dicarbonyl_timecourses still lists 3-DP / 1-DP under 'calibrated'
+      (it is flagged duplicate_of the sulfur entry, so a table holding both drops it).
+    affects: [zhai2019_fig3b_dicarbonyls_ttca, zhai2023foodchem_fig2_deoxyosones, zhai2021_fig5ab_deoxyosones_ph_ladder, zhai2023jafc_fig5bc_deoxyosones, zhou2022_fig1cd_deoxypentosones_arp_cys, zhou2023c_fig4ab_deoxypentosones_arp_gsh, zhou2024_fig3cd_deoxyxylosones_arp_ala, zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, zhou2025b_fig2a_deoxyxylosone_xylose_alone]
   - id: CF-063
     kind: self_contradiction
     scope: sulfur_rows
@@ -1514,3 +1546,32 @@ entries:
     status: open
     remedy: "Sub-model 4 fits Zhai's thiol rows shape-only (semi_quantitative, SCALE_TAU = inf), so only the isotope-dilution rows set the absolute yield; the probe reports the two laboratories' residual levels separately."
     affects: []
+  - id: CF-066
+    kind: duplicate
+    scope: sulfur_rows
+    sources: [zhai2021, zhai2023foodchem, zhai2023jafc]
+    quantity: "TTCA 10 mM (+/- xylose 10 mM) pH 7 dicarbonyl time courses (3-DX, 1-DX, MGO, GO), 100 / 120 / 140 C, 20-120 min"
+    observation: >-
+      One data set printed three times. ORIGINAL of the 100 C arms: Zhai 2021 JAFC Fig. 5 'TTCA-7' and 'TTCA-Xyl-7'
+      (vector; means identical to the plotted digit in all four species). Copies: Zhai 2023 Food Chem Figs. 2-3 (100 C
+      TTCA and TTCA + Xyl arms) and Zhai 2023 JAFC Fig. 5 (T-100 C, 20-120 min), the JAFC print with different SD bars for
+      the same means. Second family: the TTCA-alone 120 / 140 C arms of Food Chem Figs. 2-3 (online Sep 2022) are JAFC
+      Fig. 5's T-120 / T-140 at 20-120 min (the first reader's raster read of Food Chem matches the adjudicator's vector
+      read of JAFC in 33 of 34 points within read error). The exception: T-140 3-DX at 120 min is ~0.63 mM in Food Chem
+      but 0.420 +- 0.024 in JAFC -- exactly T-100's mean AND error bar at 120 min, i.e. a cell copied within the JAFC
+      figure (sub-model 3 adjudication, 2026-10-29).
+    explanations:
+      - "The group reuses control arms across papers without saying so; the JAFC T-140 120-min point is a copy-paste slip in the figure source."
+    tests: []
+    status: duplicate_confirmed
+    remedy: >-
+      Counted once in data/lit/fit_rows/deoxyosone_submodel.yml by transcription, not by flag: the 100 C arms under Zhai
+      2021 (zhai2021_fig5ab_deoxyosones_ph_ladder / zhai2021_fig5_dicarbonyls_ph_ladder, pH 7 pots); the TTCA-alone 120 /
+      140 C arms and T-100 from 140 min under JAFC (zhai2023jafc_fig5bc_deoxyosones / zhai2023jafc_fig5_arp_dicarbonyls,
+      vector values with SDs, to 180 min); Food Chem contributes only its TTCA + Xyl 120 / 140 C arms. The JAFC T-140 3-DX
+      120-min point is dropped (the Food Chem value 0.626 is the likelier truth but cannot be attached to the JAFC series).
+      The ledgers carry non-dropping flags (arm_reprint_of / reprinted_in): duplicate_of would make fit_rows._drop_copies
+      drop whole entries, and each of these entries also holds arms printed nowhere else. Copy -> original map for
+      count_once: zhai2023foodchem (100 C arms) -> zhai2021; zhai2023jafc (T-100 20-120) -> zhai2021; zhai2023foodchem
+      (TTCA-alone 120 / 140 C) -> zhai2023jafc (counted there).
+    affects: [zhai2021_fig5ab_deoxyosones_ph_ladder, zhai2021_fig5_dicarbonyls_ph_ladder, zhai2023foodchem_fig2_deoxyosones, zhai2023foodchem_fig3_cys_da_mgo_go, zhai2023jafc_fig5_arp_dicarbonyls, zhai2023jafc_fig5bc_deoxyosones]
