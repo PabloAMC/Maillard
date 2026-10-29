@@ -32,7 +32,8 @@ from . import fitting
 
 FIT_ROWS_DIR: Path = data_paths.LIT_DIR / "fit_rows"
 LEDGER_CLASS_TO_METHOD = {"sida": "sida", "calibrated": "calibrated", "semi_quantitative": "semi_quantitative"}
-UNITS = {"mmol_L", "umol_L", "ug_L", "ug_kg", "pH", "mmol_per_L_naoh"}
+UNITS = {"mmol_L", "umol_L", "ug_L", "ug_kg", "pH", "mmol_per_L_naoh",
+         "percent_of_unheated"}   # a thiol surviving heating as % of the unheated control (Kumazawa 2003): a ratio
 ROW_FIELDS = ("pot", "species", "t_min", "value", "unit")
 POT_FIELDS = ("ledger_id", "t_c", "minutes", "initial_mmol_L", "condition_quote")
 

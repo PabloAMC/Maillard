@@ -20,3 +20,12 @@ groups:
   jiangnan_zhang_x:
     strings: ["Jiangnan (Zhang X / Cui H / Ho)", "Jiangnan (Zhang X. / Ho)"]
     evidence: "Zhang Xiaoming's group at Jiangnan (Cui, Hayat, Zhai, Zhou, Deng, Kang, Feng); Ho (Rutgers) co-authors many"
+  dfa_hofmann_schieberle:
+    strings: ["DFA Garching (Hofmann / Schieberle)", "DFA Munich (Hofmann / Schieberle)"]
+    evidence: "Deutsche Forschungsanstalt fuer Lebensmittelchemie (Garching, by Munich): Hofmann and Schieberle, one institute and method set"
+  ogawa_kumazawa:
+    strings: ["Ogawa & Co. (Kumazawa / Masuda)"]
+    evidence: "Kumazawa 2003: Ogawa & Co. (Kumazawa, Masuda)"
+  dalian_polytechnic_chen_d:
+    strings: ["affiliation not given in dossier (Wang / Chen)"]
+    evidence: "Wang 2026b p. 1: corresponding author D. Chen, School of Food Science and Technology, Dalian Polytechnic University; distinct from 'Dalian Polytechnic University (Qin, Huang)'"

@@ -1326,3 +1326,68 @@ entries:
     affects:
       - chen2000_table4_final_ph
       - chen2002_table1_final_ph
+
+  # ---- found by the sub-model 4 first reading (2026-10-29), recorded by the orchestrator ----
+
+  - id: CF-055
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [schieberle2000]
+    quantity: "the fold increase of MFT over the 145 C run that Schieberle 2000's text states ('by a factor of 13')"
+    observation: >-
+      The text (p. 141) says MFT rose 'by a factor of 13'; the paper's own Table IV gives 156 / 19.8 = 7.9 at 6 h. 13 is
+      156 / 12.1, where 12.1 is an FFT cell: a column slip in the text. The B16 fit uses the text's x13 as a cross-system
+      MFT ratio row (FACTOR_13_SIGMA = 0.15). (First reader of sub-model 4, against the PDF; to be confirmed by the
+      second reader.)
+    explanations:
+      - "The authors divided by the wrong column when writing the text."
+    tests:
+      - "Table IV recomputed against the text's sentence (first reader, 2026-10-29)."
+    status: open
+    remedy: >-
+      Pending the second reading: if confirmed, the row's target becomes the table's 7.9 (or the row is dropped as a
+      within-paper inconsistency), applied when the row migrates into the thiol sub-model's keyed table; B16's frozen
+      record is annotated, not rerun.
+    affects:
+      - {file: scripts/generators/generate_kinetic_core_b16_fit.py, symbol: FACTOR_13_SIGMA}
+
+  - id: CF-056
+    kind: self_contradiction
+    scope: corpus
+    sources: [kang2026_SI]
+    quantity: "the SD of MFT in the cell shared by Kang 2026 SI Tables S4 and S5"
+    observation: "S5 prints MFT 1.237 +- 0.061 where S4 prints +- 0.142 for the same cell (the CF-002 family)."
+    explanations:
+      - "A transcription error in one table."
+    tests: []
+    status: open
+    remedy: ""
+    affects: []
+
+  - id: CF-057
+    kind: self_contradiction
+    scope: corpus
+    sources: [zhai2023foodchem]
+    quantity: "furfural at 140 C in the TTCA + xylose arm of Zhai 2023 Food Chem Table 1"
+    observation: "Printed '26 +- 0.725': the value lacks the decimals its SD implies (likely 2.6 or 0.26)."
+    explanations:
+      - "A dropped decimal point in the value."
+    tests: []
+    status: open
+    remedy: ""
+    affects: []
+
+  - id: CF-058
+    kind: code_mismatch
+    scope: sulfur_rows
+    sources: [feng2022]
+    quantity: "the identity of Feng 2022's RG-ARP against the engine's ARP species"
+    observation: >-
+      Feng 2022's RG-ARP is an Amadori compound that carries sulfur; the engine's ARP is the alanine-xylose Amadori
+      compound and carries none. Feng's pots cannot be simulated with ARP as their precursor without misplacing sulfur.
+    explanations:
+      - "The engine has no sulfur-bearing Amadori species other than CAMA (the cysteine Amadori compound)."
+    tests: []
+    status: open
+    remedy: "Sub-model 4 design: map RG-ARP to the species that carries its sulfur (CAMA if it is the cysteine compound) or keep Feng's rows out."
+    affects: []

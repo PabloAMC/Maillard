@@ -1,0 +1,549 @@
+# SOURCE VERIFICATION -- sub-model 4, thiol formation and loss (fit table data/lit/fit_rows/thiol_submodel.yml;
+# frame: results/validation/kinetic_core_thiol_submodel_prereg.md).
+# Format and the five checks: the header of data/lit/source_verification.yml. One file per sub-model so parallel
+# readers never edit the same file. First reader: agent-sm4-reader1-2026-10-29, against the PDFs / SI (not the
+# dossiers). second_reader "pending" = NOT verified (the loader and the gate refuse it until a second reader signs).
+# `notes` is an extra field: what was checked, what was corrected, and why rows were left out.
+# Quantification matters most here: SIDA (isotope dilution) and external calibration give absolute levels;
+# a single internal standard with response factor 1 ("semi_quantitative") gives within-compound shape only.
+
+entries:
+  - ledger_id: wang2026b_tables1_22_volatiles
+    source_file: wang2026b_supplementary.docx
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "VOCs were semi-quantified using cyclohexanone as an internal standard based on peak area ratios under the assumption of equal response factors among analytes."
+    notes: >-
+      Conditions (Wang2026b.pdf sec. 2.2): "D-Xylose (0.300 g) and L-cysteine (0.242 g) were dissolved at a 1:1 M ratio
+      in 10 mL of 0.2 mol/L sodium dihydrogen phosphate buffer (pH 5.5) ... transferred into a 15 mL pressure-resistant
+      thick-walled container and heated in a thermostatic magnetic stirring oil bath ... at 120 C for 60, 90, 120, or
+      150 min. Then the MRPs were cooled immediately" = xylose 200 mM + cysteine 200 mM (2.0 mmol each in 10 mL),
+      fill 10 of 15 mL (5 mL air headspace, not purged), stirred. Label pH 5.5; temperature of pH setting not stated;
+      pH falls with time (Fig. 1A, not transcribed here). Each time point is a separate pot (one vessel per time).
+      Units: SI Table S1 "Semi-quantitative concentration (ng/mL)" = ug/L exactly (relabel, no conversion).
+      Quantification: HS-SPME (3 mL in 20 mL vial, 20 uL of 100 ug/mL cyclohexanone IS, 60 C), C = A_TC x M_IS /
+      (A_IS x V_S): response factor 1 -> semi_quantitative (ledger agrees). Errors: mean +/- SD, "three independent
+      replicates, which referred to independently prepared reaction batches" (sec. 2.6). Duplicates: main Table 1
+      (OAVs = S1 / threshold) and Fig. 4A (plot of S1) are copies of this table within the paper (count once; this is
+      the original numbers). No other paper prints these data. Values: all thiol / disulfide / furfural cells read from
+      the docx and equal to the ledger note: MFT 543.73 +/- 124.61, 1830.61 +/- 191.56, 1877.38 +/- 47.22,
+      2407.32 +/- 420.60 at 60 / 90 / 120 / 150 min; FFT 274.58 +/- 7.72 ... 2120.24 +/- 93.03; bis(2-methyl-3-furyl)
+      disulfide 3730.50 ... 8722.94; difurfuryl disulfide ND at 60, 142.97 / 266.02 / 480.59 at 90-150 (its
+      relative-abundance cell at 60 min is blank, not shifted); furfural 255.22 ... 423.35. MRPs-0 cells are "ND"
+      (left-censored, no LOD printed): not transcribed. The mixed disulfide (2-furfuryl 2-methyl-3-furyl disulfide)
+      is transcribed under a species name the engine does not carry (see the fit table header). Laboratory: the
+      ledger's lab field says "affiliation not given in dossier"; the paper gives "SKL of Marine Food Processing &
+      Safety Control ... Dalian Polytechnic University" (Lin S / Chen D) -- the ledger owner should set it, since the
+      leave-one-laboratory-out groups read it.
+  - ledger_id: wang2026b_table1_oav_thiols_dimers
+    source_file: Wang2026b.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: fail
+      quantification: pass
+      duplicates: fail
+      values: pass
+    quote: "2-Methyl-3-furanthiol 0.00001 – 54,373,000.00 183,061,000.00 187,738,000.00 240,732,000.00"
+    notes: >-
+      FAIL, no rows. Table 1 prints OAVs = SI Table S1 ng/mL divided by a threshold in mg/kg with no unit conversion
+      (543.73 / 0.00001 = 54,373,000; true OAV 54.4): every OAV is 1e6 too high (ledger flag right). It is the same
+      measurement as wang2026b_tables1_22_volatiles (a copy), so even corrected it adds nothing. Fig. 4A
+      (wang2026b_fig4_sulfur_volatiles_ngml) is the same data again, figure only: not read for rows.
+  - ledger_id: zhang2026_tables6_s8_volatiles
+    source_file: zhang2026_supplementary2.docx
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "the reaction solutions with 1 μL of internal standard (0.06 μg/μL 1,2-dichlorobenzene in methanol) in 15 mL headspace vials were first equilibrated at 50 °C for 10 min"
+    notes: >-
+      Conditions (Zhang2026.pdf sec. 2.2): "In a 15 mL pressure glass vial, 0.3 mmol (0.092 g) of GSH, 0.3 mmol (0.054 g)
+      of glucose, and 5 mL of sodium dihydrogen phosphate buffer solution (0.2 mol/L) were added, which was adjusted to
+      pH 6.5 using 1 mol/L NaOH solution ... heated at 130, 140, or 150 C for 10, 20, 30, 40, 50, 60, 90, or 120 min
+      ... rapidly cooled in ice-water. The samples were performed in triplicate." = GSH 60 mM + glucose 60 mM, 5 mL in
+      a 15 mL vial (10 mL air headspace), one vial per time, HEL PolyBlock heater. pH set before heating, temperature
+      of setting not stated, not followed. Units: S6-S8 "Concentration (ng/g)" = ug/kg (relabel). Quantification: one
+      internal standard, no calibration curve for any volatile (the paper prints external curves only for the LC-MS
+      non-volatiles, Table 1), no response-factor statement -> response factor 1, semi_quantitative (ledger agrees;
+      the "STD" identification column means identification by authentic standard, not quantification). Errors:
+      footnote 2 "Results were the means of three replicates"; cells print mean +/- SD. Duplicates: the ledger's
+      within-SI copy-paste rows (thiophene / 2-thiophenemethanol; 2-acetyl-3-methylthiophene / 1-(2-thienyl)-ethanone)
+      do not touch MFT or furfural; no other paper prints these data. Values: MFT 130 C 0.33 +/- 0.11 / 1.01 +/- 0.21,
+      140 C 0.56 +/- 0.11 / 1.12 +/- 0.32, 150 C 0.78 +/- 0.12 / 2.32 +/- 0.45 at 90 / 120 min, "-" (not detected) at
+      10-60 min; furfural 120 min only, 1.12 +/- 0.23 / 5.43 +/- 1.00 / 12.83 +/- 1.91 at 130 / 140 / 150 C; all equal
+      to the ledger note. No FFT, no disulfides, no H2S in this paper. Not-detected cells (no LOD printed) are not rows.
+  - ledger_id: feng2022_table1_rgarp_volatiles
+    source_file: feng2022.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The quantification of volatile compounds was achieved by the limit of detection (LOD), the limit of quantitation (LOQ), and the calibration curves established through the available standard compounds (Table S1). x and y represent the concentration (μg/L) and the peak area ratio of the volatile standard compound to the internal standard, respectively."
+    notes: >-
+      Conditions: "The solutions of the RG-ARP (20 mmol/L) ... were prepared and adjusted to pH 7.0 with NaOH (6 mol/L).
+      Then, the solutions were injected into the pressure-resistant glass bottle and thermally stirred in an oil bath at
+      100 and 120 C for different times (30, 60, 90, and 120 min). All reaction products were immediately transferred
+      to ice water". Unbuffered water; reaction volume, fill and headspace not stated; pH never re-measured (ledger
+      right). Table 1 has 120 C at 30-120 min and 100 C at 120 min only. Units: "Volatile Compounds (μg/L)". Quantification:
+      per-compound external curves (area ratio to 1,2-dichlorobenzene IS, 2 uL of 0.018 ug/uL in 3 mL; HS-SPME 60 C,
+      20 min); SI Table S1 prints MFT y = 0.0170 x - 0.0012 (LOD 0.042 ug/L), FFT y = 0.0251 x - 0.0004, furfural
+      y = 0.0531 x + 0.0018: calibrated (ledger agrees). These curves are NOT the copied Jiangnan list of CF-004 (Kang S3
+      MFT slope 0.0039, FFT 0.0287). Matrix of the calibration not stated; no partition correction (HS-SPME of an
+      aqueous pot calibrated with standards: absolute in ug/L if the standards were spiked in water). Norfuraneol
+      excluded: its curve (y = 0.0025 x - 0.0633) has an x-intercept of 25.3 ug/L and Table 1 prints 22.45 (30 min) and
+      8.82 (100 C) below it, so the curve cannot have produced them (ledger flag right); no NF rows from this paper.
+      Errors: "All experiments were executed in triplicate ... mean value ± standard deviation". Duplicates: Fig. 2g
+      plots the sulfur subtotal of this table (same data, not read); SI Table S2 OAVs = Table 1 / threshold (MFT
+      4.45 / 0.007 = 636, printed 6.4 x 10^2); no other paper prints them. Values: MFT 4.45 / 5.95 / 6.62 / 7.22 at
+      30-120 min and 4.39 at 100 C; FFT 6.04 ... 10.46 and 5.05; furfural 27.20 ... 74.25 and 9.28, all with SD;
+      checked cell by cell against the layout text.
+  - ledger_id: feng2022_table2_rgarp_gsh_volatiles
+    source_file: feng2022.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The solutions of the RG-ARP (20 mmol/L) with or without GSH, Cys, Glu, or Gly (20 mmol/L), Rib with GSH (20 mmol/L), and GSH (20 mmol/L) were prepared and adjusted to pH 7.0 with NaOH (6 mol/L)."
+    notes: >-
+      Same methods as Table 1 (one experiment design, the ARP + GSH arm). Correction: the ledger's condition_quote is
+      empty; the pots carry the methods sentence above. Units ug/L; calibrated as Table 1 (same SI Table S1 curves).
+      Values: MFT 11.27 / 21.88 / 28.63 / 32.15 at 30-120 min (120 C) and 9.51 (100 C); FFT 14.31 / 30.45 / 39.35 /
+      44.63 and 10.92 +/- 2.04; furfural 26.37 ... 44.06 and 6.97. Norfuraneol excluded as in Table 1 (all five cells,
+      9.21 ... 21.89 and 6.95, below the curve's 25.3 ug/L x-intercept). Duplicates: Fig. 2g subtotal and SI Table S3
+      OAVs are copies within the paper; the text's "x1.98" sulfur:furan ratio does not follow from the table (1.61;
+      ledger right), immaterial to the rows. Mapping caveat for both tables: RG-ARP is the ribose-GLUTATHIONE Amadori
+      compound (its GSH moiety carries a thiol); the engine has no such species (its ARP is the sulfur-free alanine
+      ARP), so these pots cannot be simulated as written until one is added or a mapping is declared.
+  - ledger_id: hofmann1998_t1_cys_carbohydrates
+    source_file: hofmann1998.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "the internal standards [2H2]-2-furfurylthiol and [2H3]-2-methyl-3-furanthiol (10 µg each dissolved in 0.5 mL of pentane) were added to the aqueous reaction mixtures and, after equilibration for 10 min, the analyte and the labeled standard were isolated by extraction with diethyl ether"
+    notes: >-
+      Conditions: Table 1 footnote a "A solution (100 mL) of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0
+      mmol) was reacted at pH 5.0 in a laboratory autoclave"; methods "phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or
+      7.0 and thermally treated for 20 min at 145 C in a laboratory autoclave (200 mL; Type II; Roth, Germany)" = Cys
+      33 mM + sugar 100 mM, 100 mL in a 200 mL autoclave; come-up time and temperature of pH setting not stated.
+      Units: "amount (µg)" per 100 mL pot -> ug/L x 10. Quantification: SIDA with deuterated isotopologues of both
+      thiols, cooled to 20 C before the standards (so loss on cooling is inside the result) -> sida (ledger agrees).
+      Error: footnote b "Data are mean values of triplicates and differed by not more than 10%": sd = 10 % (the bound;
+      second reader to confirm). Duplicates (CF-006): reprinted x10 in Schieberle 1996 Table 3, Schieberle 1998
+      Table IV (ribose: FFT 121, MFT 198 per 100 mmol) and Schieberle 2000 Table III; this is the original, the reprints
+      are not read. Within the paper: Table 2's pH 5.0 column and Table 5's FFT / MFT columns repeat these cells
+      (not transcribed twice). Values: ribose 12.1 / 19.8, xylose 9.6 / 14.3, fructose 3.2 / 2.5, glucose 2.8 / 1.9
+      (FFT / MFT, µg). Glucose-6-phosphate, rhamnose and maltose rows not transcribed: no engine species.
+  - ledger_id: hofmann1998_t2_ph_ladder
+    source_file: hofmann1998.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "A solution (100 mL) of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0 mmol) was reacted in a laboratory autoclave."
+    notes: >-
+      Same pots as Table 1 at label pH 3.0 and 7.0 (0.5 M phosphate, 145 C, 20 min); the 5.0 column repeats Table 1
+      exactly (ribose 12.1 / 19.8, glucose 2.8 / 1.9) and the "5.0c" column is the dry silica-gel run at 180 C / 6 min
+      (not aqueous; not transcribed). SIDA, µg per 100 mL, sd 10 % as Table 1. Values: ribose FFT 22.9 / 1.2 and MFT
+      55.3 / 2.5 at pH 3 / 7; glucose FFT 0.7 / 0.6, MFT 0.3 / 0.4. Rhamnose rows: no engine species. Duplicates:
+      Schieberle 1998 Table VI reprints the rhamnose rows (CF-006); the model already shares the ribose / glucose
+      pH 3 / 7 cells between the frozen hold-out bundles and the B2.3 exam (declared) -- a fit on these rows must
+      not also score them as hold-outs.
+  - ledger_id: hofmann1998_t3_fft_c5_h2s
+    source_file: hofmann1998.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "An aqueous solution (50 mL) of hydrogen sulfide (1 mmol) and the precursor (1 mmol) was reacted at pH 5.0 in a laboratory autoclave."
+    notes: >-
+      H2S 20 mM (from sodium hydrosulfide hydrate, chemicals list) + ribose, 3-deoxyribosulose or furan-2-aldehyde
+      20 mM, 50 mL, 0.5 M phosphate pH 5.0, 145 C, 20 min. SIDA; µg per 50 mL -> ug/L x 20; sd 10 %. Values: FFT 9.2 /
+      78.6 / 550.8 µg (0.008 / 0.08 / 0.48 mol %; 550.8 µg / 114.16 = 4.82 umol of 1 mmol = 0.48 %, consistent).
+      No duplicate elsewhere. The FUR + H2S row is the only direct measurement of the r_fur_fft_hs step.
+  - ledger_id: hofmann1998_t4_mft_ribose_nf_h2s
+    source_file: hofmann1998.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "An aqueous solution (50 mL) of hydrogen sulfide (1 mmol) and the precursor was heated at pH 5.0 in a laboratory autoclave."
+    notes: >-
+      H2S 20 mM + ribose or NF ("precursor (1 mmol)") 20 mM, 50 mL, pH 5.0, 145 C, 20 min. SIDA, sd 10 %. Values: MFT
+      15.1 (0.01 mol %) and 211.2 µg (0.19 %; 211.2 / 114.16 = 1.85 umol, consistent). Duplicate within the paper: the
+      NF/H2S row is reprinted in Table 10 (211.2) -- transcribed once, here. The ribose + H2S pot is probably the same
+      heated system as Table 3's ribose row (FFT 9.2), not stated.
+  - ledger_id: hofmann1998_t5_fa_nf_pairs
+    source_file: hofmann1998.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: pass
+    quote: "certain amounts of the labeled homologues [13C4]mercapto-2-butanone and [13C2]-4-hydroxy-2,5-dimethyl-3(2H)-furanone were added to the reaction mixtures ... MS response factors for mercapto-2-propanone (1.08) and NF (0.98) were calculated from mixtures containing known amounts of the analyte and the labeled standard."
+    notes: >-
+      Correction: the ledger's quant_class is "unknown" ("Quantitation method for FA and NF not stated in the dossier");
+      the paper states both. NF: a 13C-labelled HOMOLOGUE (furaneol) with a measured response factor 0.98 -> calibrated
+      (not SIDA: the standard is not the analyte's isotopologue). Furfural: "5-methylfurfural were added to the
+      reaction mixtures as the internal standard ... An MS response factor of 0.95 was calculated from mixtures
+      containing known amounts of furan-2-aldehyde and 5-methylfurfural" -> calibrated. Rows name method calibrated
+      with method_basis, as the loader requires for a ledger class of unknown (the ledger should be set to calibrated
+      by its owner). Conditions = Table 1 pots (100 mL, Cys 33 mM + sugar 100 mM, pH 5). Values: ribose FA 67.5,
+      NF 54530.0 µg; glucose FA 6.9, NF 13.5 µg; FFT / MFT columns = Table 1 (not transcribed twice). Rhamnose: no
+      engine species. sd 10 % (Table 1 footnote b).
+  - ledger_id: hofmann1998_t8_c2c3_mft_fft_ph
+    source_file: hofmann1998.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "An aqueous solution (50 mL) of hydroxyacetaldehyde (1 mmol) and mercapto-2-propanone (1 mmol) was reacted in a laboratory autoclave."
+    notes: >-
+      HA 20 mM + MP 20 mM, 50 mL, 0.5 M phosphate pH 3.0 / 5.0 / 7.0 (expts 1-3), 145 C, 20 min; expt 4 is dry silica
+      gel at 180 C / 6 min (not transcribed). SIDA, sd 10 %. Values: FFT 26.1 / 40.5 / 58.2, MFT 15.5 / 268.1 / 311.5
+      µg. Duplicate within the paper: expt 2 MFT = Table 10 row 1 (268.1; printed 0.23 vs 0.24 mol %) -- transcribed
+      once, here (ledger flag right).
+  - ledger_id: hofmann1998_t10_mft_routes
+    source_file: hofmann1998.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "An aqueous solution (50 mL) of the precursors was reacted at pH 5.0 in a laboratory autoclave."
+    notes: >-
+      "precursor (1.0 mmol) each" in 50 mL: 20 mM each, pH 5.0, 145 C, 20 min. SIDA, sd 10 %. Rows: NF/cysteine 50.8
+      µg and thiamin 8.2 µg only; the hydroxyacetaldehyde/mercapto-2-propanone (268.1) and NF/H2S (211.2) rows are
+      Table 8 expt 2 and Table 4 again (not transcribed twice).
+  - ledger_id: schieberle2000_t4_100c_time_course
+    source_file: schieberle2000.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: pass
+    quote: "Ribose (10 mmol) and cysteine (3.3 mmol) were reacted in phosphate buffer (100 mL; 0.5 mol/L; pH 5.0) at 100°C in a laboratory autoclave."
+    notes: >-
+      NO ROWS: the table prints no error, no replicate count and no range, and the paper gives none for it; no row can
+      carry an sd or a read error (rule: never invent one). Owner decision needed (e.g. borrow the 10 % triplicate bound
+      of Hofmann 1998, same laboratory and method, as a declared assumption). Conditions: corrected -- the ledger's
+      condition_quote is empty; the footnote above gives Rib 100 mM + Cys 33 mM, 0.5 M phosphate pH 5.0, 100 mL,
+      autoclave, 100 C, 30 / 60 / 360 / 720 min (one vessel per time or sampling not stated). Units "Amount (µg)
+      formed" per 100 mL (OCR "jug"). Quantification: corrected -- Table IV's method is NOT stated ("Data from
+      reference 16" = "Hofmann, T.; Schieberle, P. to be submitted for publication"); SIDA is an inference from the same
+      laboratory's Tables III and VI ("quantified by stable isotope dilution analyses"); keep sida only as inferred.
+      Duplicates: not a reprint (unpublished data, first printed here; CF-006 right). Values: MFT 4.5 / 13.8 / 156 / 179,
+      FFT 2.0 / 3.1 / 110 / 132, 3-mercapto-2-pentanone 2.1 / 10.5 / 79 / 85, furaneol <0.1 / 1.5 / 17.1 / 25.6 µg.
+      NEW INCONSISTENCY: the text's "by a factor of 13 higher yields of e.g., 2-methyl-3-furanthiol were obtained than
+      in the mixture reacted for 20 min at 145°C (cf. Tables III and IV)" does not follow from the tables: Table III
+      MFT 198 µg per 100 mmol ribose = 19.8 per 10 mmol, so 156 / 19.8 = 7.9 at 6 h (9.0 at 12 h); 13 is 156 / 12.1,
+      i.e. MFT at 100 C over FFT at 145 C (a column slip). The B16 fit row using "x13" (ledger note) carries it.
+  - ledger_id: kumazawa2003_fig3_fft_survival_ph_grid
+    source_file: kumazawa2003.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: pass
+    quote: "Quantification of 2-furfurylthiol was performed by GC, and the residual ratios (percent) were calculated from the measured values of 2-furfurylthiol in the thermally treated and nontreated solutions."
+    notes: >-
+      Conditions as the ledger: FFT 1 ppm (8.76 uM) in McIlvaine-type citrate/phosphate at pH 3.0-7.0 (cold buffer pH),
+      canned "without the deoxidization process" (air), 121 C / 10 min, cooled to ~10 C; retort come-up, F0 and the
+      can's headspace not stated (ledger flag condition_uncertain right). Units: y axis "Residual ratio (%)".
+      Quantification: corrected -- the ledger's semi_quantitative is too weak for this quantity: the residual ratio
+      divides the same analyte, extracted and measured by the same GC-FID / methyl octanoate procedure, in the heated
+      and unheated halves of one solution, so the response factor cancels; the series is an absolute fraction of a known
+      initial (1 ppm), i.e. method class "relative" (or calibrated fraction), not RF-1 levels. No n, no error bars.
+      Values: re-checked against the page image (100 dpi render) and against Table 3's printed FFT / IS area ratios
+      (0.46 / 0.44 / 0.41 / 0.37 / 0.21 / 0.05 / <0.01, i.e. 95.7 / 89.1 / 80.4 / 45.7 / 10.9 % of the pH 3 value):
+      the dossier's reads 99.5 / 96.2 / 89.1 / 79.5 / 45.1 / 11.3 / 0.1 % agree within its +-1.5 pp. pH 7.0 (0.1 %)
+      left out: below the read error (censored). Duplicates: Table 2's pH 6.0 / 121 C cell (48.3 %) is a SEPARATE
+      experiment ("the following model experiment was done" for Table 2, then "an additional experiment focused on the
+      effect of pH" for Fig. 3), so the 3.2 pp gap is run-to-run scatter, not a duplicate. Rows carry unit
+      percent_of_unheated, which fit_rows.UNITS lacks.
+  - ledger_id: kumazawa2003_t2_fft_survival_t_time_ph
+    source_file: kumazawa2003.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: pass
+      values: pass
+    quote: "Residual Ratios of 2-Furfurylthiol after Heating of Model Solutions at Different Temperatures and pH Values ... 6.8 5.5 5.3 ... 6.0 48.3 43.4 ... Residual ratios are denoted by percentage."
+    notes: >-
+      NO ROWS: four printed cells (pH 6.8: 5.5 / 5.3 %, pH 6.0: 48.3 / 43.4 % at 121 C / 10 min and 123 C / 20 min)
+      with no error, no n; a printed number has no read error, so none can carry an sigma. Owner decision: the paper
+      itself shows the run-to-run scatter (pH 6.0 at 121 C: 48.3 here vs 45.1 in Fig. 3; pH 6.8 / 123 C: 5.3 here vs
+      3.6 % "in our previous study"), which could be declared as the error. Same quantification correction as Fig. 3
+      (heated / unheated ratio, RF-free). The only temperature / time contrast in the paper.
+  - ledger_id: kumazawa2003_t3_fft_products_ph_grid
+    source_file: kumazawa2003.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: fail
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Relative amounts of compounds are shown as the ratio of the peak area of each compound to the peak area of an internal standard (methyl octanoate) on the GC."
+    notes: >-
+      NO ROWS. Dimensionless GC-FID area ratios to the IS (no unit the loader has, no response factor for the disulfide,
+      furfural or furfuryl alcohol: semi_quantitative across compounds), no error, no n. Values read: FFT 0.46 / 0.44 /
+      0.41 / 0.37 / 0.21 / 0.05 / <0.01, difurfuryl disulfide <0.01 / 0.01 / 0.03 / 0.07 / 0.13 / 0.14 / 0.17 at pH 3.0 ...
+      7.0. Shape evidence only: the disulfide rises as FFT falls with pH (oxidation, the rival arm's dimerisation
+      sink), but the authors note the volatile products account for less than the FFT lost ("the total amount of the
+      volatile degradation products ... was less than the amount of 2-furfurylthiol lost").
+  - ledger_id: gigl2021_fig2_fig4_coffee_melanoidin_fft_binding
+    source_file: gigl2021_supplementary.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "For each analyte, the percentage of the free odorant was calculated at each incubation time (min) from their respective qHNMR concentration (mmol/L) in relation to the initial concentration before incubation."
+    notes: >-
+      NO ROWS: SI Table S2 prints percentages with no SD, no n and no range (the paper's only SDs are for the sensory
+      profiles); a printed value has no read error, so no row can carry a sigma. Owner decision needed. Conditions:
+      NMR tube, 600 uL = NMR buffer 60 uL (potassium phosphate, pD set with DCl, "adjusted to 5.5") + HMW coffee fraction
+      >10 kDa 150 uL ("concentration x 4", i.e. 1x brew loading) + odorant stock (5 mmol/L final), H2O/D2O 9:1, RT
+      (spectra at 300 K) for the S2 time series; 279 / 333 K only for Fig. 4 (four odorants, figure, not read here).
+      Units: percent of the initial qHNMR concentration (unit missing from fit_rows.UNITS; a percent of a printed 5 mmol/L
+      initial could be converted to mmol_L, but the initial per odorant is not printed for FFT). Quantification:
+      qHNMR (ERETIC 2 / PULCON, full relaxation) is an absolute method -> calibrated (ledger agrees); acetaldehyde
+      alone "determined semiquantitatively" (Fig. 2 caption). Values: FFT ("2-furanmethanethiol") 100.0 / 32.3 / 32.3 /
+      32.2 / 32.3 / 31.3 / 27.0 / 23.3 / 15.3 / 0.0 % at 1 / 5 / 30 / 60 / 120 / 240 / 720 / 1440 / 2880 / 5760 min
+      (raw text layer; equals the ledger). The 1-min column is 100.0 for all 20 odorants: it is the reference, not a
+      measurement. Cross-check: 3-mercapto-3-methylbutyl formate 6.1 % at 96 h = text "from the initial 4.89 to 0.3
+      mmol/L" (6.1 %). Duplicates: Fig. 2 heat map = this table (same data). Mechanism note for the rival arms: the
+      32 % plateau within 5 min is fast reversible binding, the later fall is covalent incorporation plus
+      difurfuryl disulfide ("these additional signals could be identified as difurfuryldithiol, the dimer of FFT");
+      no disulfide is formed in the aqueous reference. Needs a melanoidin species the engine lacks (Phase 4 matrix layer).
+  - ledger_id: zhang2024_fig1_thiamine_xylose_redox_series
+    source_file: Zhang2024.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: fail
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The binary mixture of VB1 at 15.0 mg/mL (w/v) and Xyl in a ratio 1:1 was solubilized in pH 4.9 ± 0.1 phosphate buffered solution. The mixture was made to react for 60 min, then immediately cooled in ice water."
+    notes: >-
+      NO ROWS: the heating TEMPERATURE of this experiment is not stated (sec. 2.2 above; the treatments are "prepared at
+      the same thermal procedure"); 115 C is the ledger's inference from secs. 2.3 / 2.6, not the paper's statement.
+      Buffer molarity and vessel also not stated. Owner decision: accept 115 C as a declared assumption (then the rows
+      below can be transcribed) or leave out. Units: Fig. 1a "Concentration (ng/mL)" (= ug/L). Quantification: "The
+      concentrations (ng/mL) of identified each above-mentioned individual volatile were through construction of
+      standard curves (Table S5). The corresponding external standard curves were obtained by mass ratio and peak area
+      ratios of eight different concentrations of standard solutions with the internal standard ion peak" -> calibrated
+      (ledger right); SI Table S5 prints MFT y = 849.714 x - 0.042, MFT-MFT y = 823.302 x - 0.107 (x = mass ratio to
+      the IPDS internal standard; R2 0.991 / 0.994). The "semiquantitative" sentence of sec. 2.10 applies only to the
+      flavouring verification test (Fig. 4c). Values: re-checked on a 110 dpi render of p. 4: MFT ~0.07 / 1.34 / 1.05 /
+      2.01 and MFT-MFT ~0.04 / 0.11 / 0.07 / 1.09 ng/mL (control / Cys / GSH / cystine) agree with the dossier; panel
+      (b) is panel (a) normalised (not independent). Error bars drawn, definition not stated ("All analyses were
+      repeated in triplicate"). Cystine has no engine species. "Units missing" (brief) applies to the companion entry
+      zhang2024_text_mmft_zero_order_slopes (SI Tables S6 / S7: slopes 0.0028 / 0.0031 and 0.0043 / 0.0033 with no
+      unit for y), not to Fig. 1. Not read for rows: Fig. 2 (zhang2024_fig2_met_thiamine_xylose_cys_gsh_dose): its
+      sec. 2.6 gives only the ratio "Met, VB1 and Xyl (1:3:3, w/w)" and the Cys / GSH dose, no absolute Met / VB1 / Xyl
+      concentration (the ledger's 5 mg/mL Met is a dossier derivation), so its conditions fail the same check.
+  - ledger_id: zhai2023foodchem_table1_ttca_tladder
+    source_file: Zhai2023.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The detected compounds were quantified by the comparison of peak areas and the correction factor was 1."
+    notes: >-
+      Conditions (sec. 2.3): "Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10
+      mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2
+      mol/L) prior to the heat treatment under 100, 120, and 140 C for varying times (20, 40, 60, 80, 100, 120 min) ...
+      pressure resistant bottles in the collector-type magnetic stirrer"; unbuffered water, volume / fill / headspace
+      not stated, pH not followed. Table 1 = 120 min at 100 / 120 / 140 C. Units "Volatile flavor compounds (μg/L)".
+      Quantification: single 1,2-dichlorobenzene IS, Wi = f' x Ai x ms / (As x V) with f' = 1 -> semi_quantitative
+      (CF-004 right): within-compound shape only, levels and cross-compound ratios carry no information. Errors:
+      "Samples were prepared and detected in triplicate ... mean values ± standard deviation (SD)". Duplicates (CF-005):
+      THIS is the original; Kang 2026 SI Table S4 reprints the TTCA columns (checked here: MFT 1.237 +/- 0.142 /
+      1.388 +/- 0.256 / 5.907 +/- 0.085, FFT 3.734 / 4.107 / 11.439, furfural 3.381 / 5.793 / 11.039 identical), Zhai
+      2023 JAFC Fig. 3 col. E and Kang Fig. 1 again; Fig. 1a's T-120 column is this 100 C column. Count once: rows
+      from this entry only. Values: MFT, FFT, furfural cells read from the text layer (layout and raw), sd lines
+      matched to their cells by column position.
+  - ledger_id: zhai2023foodchem_table1_ttcaxyl_tladder
+    source_file: Zhai2023.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The detected compounds were quantified by the comparison of peak areas and the correction factor was 1."
+    notes: >-
+      Same table and methods as the TTCA columns (TTCA 10 + xylose 10 mM). Semi-quantitative, f' = 1. Values: MFT
+      1.729 +/- 0.152 / 2.498 +/- 0.13 / 3.238 +/- 0.735, FFT 4.736 +/- 0.639 / 6.398 +/- 0.266 / 6.123 +/- 0.235,
+      furfural 4.128 +/- 0.139 / 8.497 +/- 0.514 / "26 ± 0.725a" at 100 / 120 / 140 C (the 140 C furfural is printed
+      without decimals, unlike every other cell; transcribed as printed, flagged). Not reprinted elsewhere (ledger
+      right). Note for CF-013: in the +Xyl arm MFT and FFT at 140 C are BELOW the TTCA-alone arm (3.24 vs 5.91; 6.12 vs
+      11.44) while furfural is 2.4x higher -- within-compound, so usable as shape.
+  - ledger_id: kang2026_si_table_s4_ttca_tladder
+    source_file: Kang2026_supplementary.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: corrected
+      duplicates: fail
+      values: pass
+    quote: "Table S4. Volatile flavor compounds (μg/L) identified in the TTCA model reactions under elevated temperatures of 100, 120 and 140 ℃ at an initial pH value of 7.0."
+    notes: >-
+      NO ROWS: a reprint of zhai2023foodchem_table1_ttca_tladder (CF-005; MFT 1.237±0.142bc / 1.388±0.256b /
+      5.907±0.085a, FFT 3.734 / 4.107 / 11.439, furfural 3.381 / 5.793 / 11.039 identical to the original). Kang's
+      Table S3 calibration curves (MFT y = 0.0039 x + 0.0011) do not make it calibrated: the parent states f' = 1
+      (CF-004) -> semi_quantitative. Side observation: Kang SI Table S5's pH-7 column (CF-002: the same 100 C cells)
+      prints MFT 1.237±0.061 where S4 prints 1.237±0.142 -- same mean, different SD.
+  - ledger_id: zhai2023foodchem_fig1a_100c_timecourse_grid
+    source_file: Zhai2023.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: fail
+    quote: "Fig. 1. Heat map of volatile compounds derived from TTCA (T) and TTCA-Xyl (T-X) model reactions under 100 °C (a)"
+    notes: >-
+      NO ROWS. The only 20-120 min thiol time course at 100 C in this laboratory, but (1) the cell numbers are not in
+      the PDF's text layer and the embedded raster (pdfimages, page 4) carries only colours, so the dossier's numbers
+      could not be checked against the paper here (values: fail = not verified); (2) no SD for the heat-map cells, so
+      no row could carry an error. Semi-quantitative (f' = 1, same methods). Duplicate: its T-120 column = Table 1's
+      100 C TTCA column (ledger flag partial_duplicate right). A second reader with a vector / high-resolution read
+      of the cells could recover it as shape data if an error can be assigned.
+  - ledger_id: zheng1994_table1_cysteine_h2s_release_k
+    source_file: zheng1994.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "0.1M cysteine or glutathione solutions were prepared in 0.1M citrate-phosphate or 0.1M phosphate-sodium hydroxide buffer with pH values of 3.0, 5.0, 7.0, and 9.0. Ten mL of the solution were then transferred into a reaction vessel (Kimax brand glass test tube with a PTFE-coated liner screw). The headspace of the tubes was flushed with nitrogen to expel the oxygen."
+    notes: >-
+      NO ROWS: Table I prints fitted first-order rate constants (min-1), half-lives and R2, not measurements; fit_rows has
+      no unit for a rate constant (as for Martins 2005b Table 1 in sub-model 1). They belong to the done-test's
+      "consistent with independent measurements of the same step" check (k_cys_h2s, already a fixed measured parameter).
+      Conditions: glycerine bath 80 / 90 / 100 / 110 C, "Two tubes were withdrawn from the bath at 10 minute intervals
+      for the first 30 minutes and at 30 minutes intervals thereafter", ice-quenched; buffer pH nominal (room
+      temperature). Quantification: Orion sulfide / silver ISE after dilution in SAOB (2 N NaOH, EDTA, ascorbate),
+      "A standardized Na2S solution in sulfur antioxidation buffer ... was used to established a standard curve" ->
+      calibrated (ledger right). Caveat for the H2S budget: the electrode reads sulfide in the LIQUID after cooling;
+      H2S in the tube headspace (volume not stated) is not counted, so the release is a lower bound. Values (sample):
+      80 C pH 3.0 k = 1.87e-6 min-1 (t1/2 6171.2 h; ln2 / k = 6177 h, consistent), 100 C pH 7.0 2.30e-4 (50.3 h; 50.2),
+      100 C pH 9.0 4.53e-4 (25.5 h). The OCR drops exponent signs (e.g. "1.33 x 10" at 90 C pH 9); the half-life column
+      fixes them. Duplicates: Table V's Ea are derived from Table I (not independent).
+  - ledger_id: zheng1994_figs1_4_cysteine_ln_ct_c0
+    source_file: zheng1994.pdf
+    read_by: "agent-sm4-reader1-2026-10-29"
+    second_reader: "pending"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: fail
+      quantification: pass
+      duplicates: pass
+      values: fail
+    quote: "Experimental data on the release of H2S from cysteine solution at different temperatures and pHs were fitted with zero-order, first-order and second-order methods. As shown in Figures 1 to 4, the reaction followed first-order kinetics."
+    notes: >-
+      NO ROWS: the raw H2S time courses behind Table I are plotted only as ln(Ct/C0) of cysteine (C back-computed as
+      C0 - H2S), not as H2S concentrations, and are not digitised anywhere (dossier: "did not tabulate points"); no unit
+      in fit_rows for a log ratio. A digitisation (read error stated) converted back to H2S mmol/L would give the only
+      measured H2S time series (16 series, <= 12 % conversion) for the H2S-supply arm.
