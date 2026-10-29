@@ -66,6 +66,22 @@ pH-endpoint weighting, B51, B60) and what they found; Knol 2010 Fig. 2 and Hou 2
 digitise only if the done-test needs them).
 
 ## 3. Cheap probe (step 3) -- TO DO
-## 4. Design (step 4) -- TO DO
+## 4. Design (step 4) -- decisions taken from the first reading (2026-10-29); the rest TO DO
+
+- **Rows without a printed error** (Davidek 2002's NaOH uptake, 49 values; Chen 2000 / 2002 and Xu 2008 final pH):
+  no error is invented. Proposed: each such series gets its own noise scale, estimated from the data with the other
+  constants (profiled in the likelihood), so it weighs as much as its own scatter allows. To be built in
+  `fitting.py` and tested on synthetic data before use; until then these rows stay out.
+- **Observation operators** the fit must compute, not approximate: the sum of formic + acetic acid (`FA+AA`); titratable
+  acid to pH 8.3 (`TA_to_pH8.3`, a titration of the predicted state); the pH of a 6x dilution read at 25 C
+  (`pH_6x_dilution_25C`, Zhao 2017b: the charge balance at the diluted composition). Each is a function of the
+  predicted state, written once, tested against a hand calculation.
+- **Out of scope here:** lactose (Nguyen 2016's M2 arm) and the di-ARP of lysine (Zhang 2025) are not engine species;
+  their rows are kept in the table and reported, not fitted.
+- **Laboratories** (leave-one-out groups) from `data/keys/laboratories.yml`: Wageningen (205 rows), Nestle (46),
+  BTBU Xie group (18), Jiangnan Zhang X group (24). Wageningen dominates; the done-test's "three of four" therefore
+  also requires the fit to hold with Wageningen left out.
+- **Duplicates:** Martins 2003 Part II replots the 2003b acids (CF-018), and the trunk's measured acid constants come
+  from those data; the rival arm must not count them twice.
 ## 5. Design review (step 5) -- TO DO
 ## Amendments
