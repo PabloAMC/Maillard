@@ -224,8 +224,12 @@ def test_within_3x_and_out_of_sample_counts(tracked_scores):
     # rows score 2/16. Against the typical-yield baseline (null_model_baselines.md) the engine ties overall.
     assert (s["within_band_count"], s["matched_compound_count"]) == (21, 66)
     assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (21, 66)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (17, 60)
-    assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (4, 6)
+    # RE-PINNED 2026-10-29 (the pot-level fit-target rule of the 2026-10-28 review, regenerated at Phase 0's close): a row the fit
+    # reads at the POT level (Hofmann's in-situ furfural / norfuraneol) takes that pot's MFT and FFT rows out of sample.
+    # out of sample 17/60 -> 14/56; read by a fit 4/6 -> 7/10. Against the typical-yield baseline the engine now trails out of
+    # sample (8 vs 15 of 40, null_model_baselines.md).
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (14, 56)
+    assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (7, 10)
     # RE-PINNED BY WAVE B34: 3/26 -> 5/31. All five new rows are in a maillard_path hold-out bundle,
     # and two of them (3-deoxyglucosone, methylglyoxal) land inside the band.
     # RE-PINNED BY WAVE B41: 5/31 -> 7/31 (the two HMF rows above are both hold-outs).
@@ -233,11 +237,11 @@ def test_within_3x_and_out_of_sample_counts(tracked_scores):
     assert s["holdout_within_band"] == {"hits": 10, "total": 47}
     readme = _doc_text(README)
     _assert_quoted(readme, "21 of 66", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "17 of 60", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "14 of 56", "README.md", "the core's out-of-sample count")
     # 2026-09-11 (review of PR #16): the BADGE on line 6 had said 3/38 through three re-pins of the
     # body text below it, because nothing asserted it. The most visible number on the page is now
     # pinned to the same artifact as the table.
-    _assert_quoted(readme, "out--of--sample-17%2F60%20rows%20within%203x", "README.md", "the out-of-sample badge")
+    _assert_quoted(readme, "out--of--sample-14%2F56%20rows%20within%203x", "README.md", "the out-of-sample badge")
     # The subtraction has to be VISIBLE on the page that carries the rate, not only in the wave.
     _assert_quoted(readme, "never cooked", "README.md", "why the denominator fell")
 
@@ -276,10 +280,15 @@ def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_f
         if b["benchmark_id"] == "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5"
     )
     assert xyl["panel"] == "maillard_path_holdout"
-    assert xyl["fit_target_of"]["core"] == []
-    assert not any(r["in_core_fit"] for r in xyl["compounds"])
-    for bid in ("hofmann1998_ribose_cysteine_145C_20min_pH5", "hofmann1998_glucose_cysteine_145C_20min_pH5",
-                "hofmann1998_fructose_cysteine_145C_20min_pH5"):
+    # RE-PINNED 2026-10-29. B9's point stands: no Hofmann pH-5 LEVEL row is a fit row. But since the 2026-10-28 review
+    # (src/kinetic_core/fit_targets.py, the pot-level rule) a fit row on an intermediate of the SAME pot (in-situ furfural
+    # and norfuraneol) makes that pot's rows in-sample too, so the ribose and xylose pots now name the fit-target record
+    # at the pot level and leave the out-of-sample count. Glucose and fructose pots have no fitted intermediate.
+    from src.kinetic_core import fit_targets
+    for bid in ("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", "hofmann1998_ribose_cysteine_145C_20min_pH5"):
+        rows = [c for target in fit_targets.core_fit_targets(bid) for _, c in target.rows]
+        assert rows and all(c.startswith("[same pot]") for c in rows), (bid, rows)
+    for bid in ("hofmann1998_glucose_cysteine_145C_20min_pH5", "hofmann1998_fructose_cysteine_145C_20min_pH5"):
         b = next(x for x in tracked_scores["benchmarks"] if x["benchmark_id"] == bid)
         assert b["fit_target_of"]["core"] == [] and not any(r["in_core_fit"] for r in b["compounds"]), bid
 
@@ -385,7 +394,8 @@ def test_core_envelope_coverage_and_widths():
     # RE-PINNED 2026-10-27 (B51 SHIPS under the acceptance rule, WAVES.md): 0.9793 -> 1.0095 dex (B51's covariance).
     assert lit["median_ci_width_log10"] == pytest.approx(1.8694, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (33, 59)
+    # RE-PINNED 2026-10-29 (the pot-level fit-target rule; regenerated at Phase 0's close): out of sample 33/59 -> 29/55.
+    assert (oos["hits"], oos["total"]) == (29, 55)
     assert s["unsampled_lanes"] == []
     # RE-PINNED 2026-10-27 (B51 SHIPS under the acceptance rule, WAVES.md): B9's 20/23 (chi2_red 1.21) -> B51's 17/23 (1.41).
     # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): B51's 17/23 (1.41) -> B60's 16/23 (1.87), null-space corrected.
@@ -402,7 +412,7 @@ def test_core_envelope_coverage_and_widths():
     }
     readme = _doc_text(README)
     _assert_quoted(readme, "36 of 65", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "33 of 59", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "29 of 55", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "16 of 23", "README.md", "the identified sulfur coordinates")
 
 
@@ -489,23 +499,25 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # not in the chapter; PH-05 had been an agree); under B51 SUG-09 and one pH claim flip to disagree, one
     # temperature claim flips to agree and one time claim becomes evaluable and agrees: 18/31 -> 17/31.
     # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 17/31 -> 21/38.
-    assert s["headline"] == [21, 38]
+    # RE-PINNED 2026-10-29 (the noise-aware rule, B60 lineage: a claim whose measured contrast is within the source's noise is not
+    # evaluable): 21/38 -> 20/33; excluding pH / aw 15/27 -> 14/22; not evaluable 37 -> 42.
+    assert s["headline"] == [20, 33]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (15, 27)
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (14, 22)
     assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (6, 11)
-    assert ind["total"]["not_evaluable"] == 37
+    assert ind["total"]["not_evaluable"] == 42
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
-    assert cats["sugar_identity"] == (5, 11)  # 2026-10-28: B60 + Amendment 45  # B15/B16: DIC-01 and DIC-03 miss; B51: SUG-09 flips (the hexose entry)
-    assert cats["temperature"] == (5, 9)      # 2026-10-27 audit: TEMP-03 retired; WANG22 shapes retired; B51 +1
+    assert cats["sugar_identity"] == (4, 8)  # 2026-10-29: noise-aware rule (DIC-03 and two more not evaluable)  # was (5, 11):  # 2026-10-28: B60 + Amendment 45  # B15/B16: DIC-01 and DIC-03 miss; B51: SUG-09 flips (the hexose entry)
+    assert cats["temperature"] == (5, 8)  # 2026-10-29: noise-aware rule (was (5, 9))     # 2026-10-27 audit: TEMP-03 retired; WANG22 shapes retired; B51 +1
     assert cats["ph"] == (5, 10)               # B51 + PH-04/PH-05 retired (Cerny 2015 read in full); MOT-01 agrees with its pyrophosphate: MOT02-PH-01/02 and PH-03 not independent; arms of PH-01/02 set to Meynier & Mottram 1995
     assert cats["moisture_aw"] == (1, 1)      # 2026-10-27 audit: AW-01 retired (source mismatch)
     assert cats["additive_cysteine"] == (1, 1)  # 2026-10-27 audit: CYS-01 tautology, CYS-02 retired
     assert cats["time"] == (2, 3)             # 2026-10-27 audit: TIME-01 and the WANG22 time shapes retired; B51 +1
     readme = _doc_text(README)
-    _assert_quoted(readme, "21 of 38", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "15 of 27", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "20 of 33", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "14 of 22", "README.md", "the directional count excluding pH and water activity")
     _assert_quoted(readme, "6 of 11", "README.md", "the directional count on pH and water activity")
 
 

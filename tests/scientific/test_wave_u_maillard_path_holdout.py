@@ -48,7 +48,9 @@ FROZEN_JSON = ROOT / "results" / "validation" / "maillard_path_holdout_frozen_pr
 # (access_route: owner-provided PDF, dual-read verification).
 # 2026-09-03: 17 -> 16 -> 17. The xylose pH-5 bundle left when the B2-B8 sulfur fit was found to have
 # read it, and returned once wave B9 removed those rows from the objective (see its hold_out_history).
-EXPECTED_BUNDLE_COUNT = 17
+# 2026-10-29: 17 -> 22. Amendment 45 (2026-10-28) ADDED five blind hold-out bundles (Zhou 2023c, Zhang 2025b),
+# scored for the first time on B60 (README: 2 of 16 rows within 3x). Nothing was removed.
+EXPECTED_BUNDLE_COUNT = 22
 
 
 def _bundles() -> list[tuple[Path, dict]]:

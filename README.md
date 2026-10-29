@@ -3,7 +3,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Out of sample: 17/60 rows within 3x](https://img.shields.io/badge/out--of--sample-17%2F60%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
+[![Out of sample: 14/56 rows within 3x](https://img.shields.io/badge/out--of--sample-14%2F56%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
 [![Strict-ready: 0/37 benchmarks](https://img.shields.io/badge/strict--ready-0%2F37-red.svg)](results/validation/core_panel_scores.md)
 
 **Maillard** is a kinetic model of the Maillard reaction for alternative-protein scientists.
@@ -207,12 +207,12 @@ of this, and most of that fall is the refusals, not the fix.
 | | kinetic core |
 | --- | --- |
 | rows within 3x of the measurement | **21 of 66** (median fold error 7.9x, geometric mean 14x); six rows are fed-intermediate pots the sulfur fit read, scoreable since the precursor aliases of 2026-10-27 |
-| **out of sample** — every row a core fit read removed | **17 of 60** (median 8.9x). B60 (2026-10-28) converged the pH trajectory and refitted: the Hofmann ribose/xylose pH 5 pots went from ~100x low to 1.5-3.6x, so B51's "thiolate sink" diagnosis was a numerical artefact and is withdrawn. The 16 new rows are Amendment 45's blind hold-outs (Zhou 2023c, Zhang 2025b), scored for the first time on B60: **2 of 16 within 3x**. Six scored rows are fit rows (4 of 6 within 3x, which is not evidence). **Against a no-chemistry baseline** (a compound's typical yield in the other studies, `results/validation/null_model_baselines.md`), the engine ties on all ppb rows (15 vs 15) and trails out of sample (11 vs 15 of 44); it wins only the sulfur lane |
+| **out of sample** — every row a core fit read removed | **14 of 56** (median 11.8x). Since the 2026-10-28 review a row the fit reads at the POT level (an intermediate of the same pot: Hofmann's in-situ furfural and norfuraneol) also leaves this count, which took the Hofmann ribose/xylose pH 5 MFT and FFT rows out of it (17/60 -> 14/56). B60 (2026-10-28) converged the pH trajectory and refitted: the Hofmann ribose/xylose pH 5 pots went from ~100x low to 1.5-3.6x, so B51's "thiolate sink" diagnosis was a numerical artefact and is withdrawn. The 16 new rows are Amendment 45's blind hold-outs (Zhou 2023c, Zhang 2025b), scored for the first time on B60: **2 of 16 within 3x**. Ten scored rows are read by a fit, directly or at the pot level (7 of 10 within 3x, which is not evidence). **Against a no-chemistry baseline** (a compound's typical yield in the other studies, `results/validation/null_model_baselines.md`), the engine ties on all ppb rows (15 vs 15 of 50) and trails out of sample (8 vs 15 of 40; median fold 11.5x vs 8.1x) |
 | by lane, within 3x | acrylamide 4/12 · sulfur 10/40 · lipid 5/8 · trunk 2/6 |
 | rows refused rather than answered | **27**: 8 in pots nobody heated, 8 that need the unidentified hexose entry, 2 lane conflicts, 2 compounds a pot has no precursor for, 7 targets a lane does not carry — every refusal names its cure |
 | strict-ready (passes its own contract; PRIMARY; free precursor) | **1 of 42**, and it is not evidence: `hofmann1998_norfuraneol_cysteine_145C_20min_pH5` (1.06x) is a row the sulfur fit read. `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
-| literature rows inside the 90% Monte-Carlo interval | **36 of 65** (median width 1.87 dex); **33 of 59** out of sample; 1 row not evaluable. Coverage rose because the intervals WIDENED, not because predictions improved: B60 found three sulfur constants the fit cannot see that the envelope had been pinning (a Laplace defect), and these are now drawn over the range the data admit. The widest interval, Resconi's furfural at 150 °C (11.8 dex), is a structural artefact: a first-order furfural sink with nothing forming it |
-| direction / ranking skill (119-claim literature panel) | **21 of 38** strictly independent evaluable claims (55 %, not distinguishable from chance); **15 of 27** with pH and water activity set aside, **6 of 11** on pH and water activity; 37 independent claims not evaluable; 27 claims added blind by Amendment 45; 17 retired against their papers on 2026-10-27 |
+| literature rows inside the 90% Monte-Carlo interval | **36 of 65** (median width 1.87 dex); **29 of 55** out of sample (the pot-level rule above); 1 row not evaluable. Coverage rose because the intervals WIDENED, not because predictions improved: B60 found three sulfur constants the fit cannot see that the envelope had been pinning (a Laplace defect), and these are now drawn over the range the data admit. The widest interval, Resconi's furfural at 150 °C (11.8 dex), is a structural artefact: a first-order furfural sink with nothing forming it |
+| direction / ranking skill (119-claim literature panel) | **20 of 33** strictly independent evaluable claims (61 %, not distinguishable from chance); **14 of 22** with pH and water activity set aside, **6 of 11** on pH and water activity; 42 independent claims not evaluable, five of them since the noise-aware rule (a claim whose measured contrast is within the source's noise cannot be scored); 27 claims added blind by Amendment 45; 17 retired against their papers on 2026-10-27 |
 
 Three things a reader must know, all declared in code and printed on every row they touch:
 
@@ -251,7 +251,7 @@ Three things a reader must know, all declared in code and printed on every row t
   every panel bundle declares its class (`benchmark.schema.json` enum, `schema_gate`); eleven say
   `undeclared` with the reason in a `quantification_note`, get the bands by default, and say so.
 
-**Directional and ranking claims are the product, and the core scores 21 of 38 on them** (55 %, which is not
+**Directional and ranking claims are the product, and the core scores 20 of 33 on them** (61 %, which is not
 distinguishable from chance; 25 of 43 before the 2026-10-27 audit checked every claim against its paper: 15 retired,
 4 not independent, several arms reset to the paper's pot. Amendment 45 then added 27 claims blind on 2026-10-28).
 [`core_directional_scores.md`](results/validation/core_directional_scores.md) runs every claim of

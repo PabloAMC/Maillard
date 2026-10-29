@@ -319,3 +319,12 @@
   switches inside a context (as the route calibration's `installed()` does), not at import. Found by pairing each
   earlier test file with the slow one (a bisection that took one minute); "probably slow" was the wrong first guess.
 - **A test that is slow in the suite and fast alone is test pollution, not slowness.** Time it alone first.
+- **A phase that regenerates headline artifacts is not closed on the unit tier** (2026-10-29). Phase 0 was declared
+  closed on 1091 unit tests and the gates; CI's scientific tier then failed five headline guards (pinned 17/60, 33/59,
+  21/38, 17 bundles, "no Hofmann pot in the fit") that the regeneration had legitimately moved. The guards were right
+  to fail, but the prose in README had also gone stale, and a merge was delayed. Rule: after regenerating any
+  scorecard, envelope or baseline, run `tests/scientific/test_core_headline_guards.py` (about 10 min) before calling it
+  done, and re-pin with the reason in the same commit.
+- **Local checks must be case-exact** (2026-10-29). macOS folds case and CI's Linux does not: `xin2026b` and
+  `zhang2024_extraction.md` passed every local gate and failed CI. Gates match names against directory listings or
+  git's tracked paths, never `Path.exists()`.

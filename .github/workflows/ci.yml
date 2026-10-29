@@ -116,8 +116,6 @@ jobs:
         run: python scripts/ci/source_verification_gate.py
       - name: Import-time switch gate
         run: python scripts/ci/import_time_switch_gate.py
-      - name: Evidence anchor gate
-        run: python scripts/ci/evidence_anchor_gate.py
 
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.
@@ -167,6 +165,11 @@ jobs:
         # do not add --timeout or -n here; the job-level timeout-minutes is the
         # runaway guard.
         run: python -m pytest tests/unit -q
+
+      # 2026-10-29. Every rate constant's evidence anchor resolves and every measured constant cites its paper's
+      # dossier. It imports the engine (numpy), so it runs here, not in the dependency-light gates job.
+      - name: Evidence anchor gate
+        run: python scripts/ci/evidence_anchor_gate.py
 
       # 2026-09-01: data/ is read-only at runtime. Fails if the tier above wrote,
       # rewrote or deleted anything under data/ (see scripts/ci/data_readonly_gate.py).
