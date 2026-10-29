@@ -88,6 +88,30 @@ the H2S arm rests on Zheng & Ho's constants and Hofmann's fed-H2S pots.
 - **FFT across sources (CF-015):** MFT agrees across sources, FFT does not (the 3:1 xylose recipe favours FFT; one
   patent's standards were heated). FFT rows from the two patents enter with that width.
 
+## H2S literature read (2026-10-29: four dossiers, 12 ledger entries)
+
+The heated-system H2S search (2026-10-29) found no H2S time series in a Maillard pot; the four papers it recommended
+are now read (`data/lit/extraction_dossiers/{li2022,obata1960,cuevasanta2015,suleimenov1994}_extraction.md`):
+
+- **Li 2022** (free cysteine 5.7 mM, sealed 1 mL vial, headspace GC-FPD against Na2S standards, read cold): H2S
+  3.8 +/- 0.3 uM at 90 C / 10 min, 10.7 uM at 120 min (single measurement). With no sink the shipped `k_cys_h2s`
+  predicts 2.6 and 31 uM: the 10-min point agrees (1.5x), the 120-min point is 0.26-0.34x. A cold, sealed read against
+  external standards rules out headspace partitioning as the cause, and storage loss would hit both times alike, so
+  the data imply a time-dependent loss: a first-order sink of ~0.025 /min at 90 C, about 10x the shipped
+  `k_h2s_loss`. One unreplicated point carries this; it is a lead for the probe, not a constant.
+- **Obata 1960** agrees with `k_cys_h2s` within 0.9-1.3x (liquid near 100 C), and shows cystine itself releasing H2S
+  (0.4x cysteine at 1 h, 1.3-1.5x at 3-6 h).
+- **Cuevasanta 2015:** HS- + cystine at 0.6 M-1 s-1 (25 C, pH 7.4; pH dependence only through HS-). A real sink only
+  where cysteine is oxidised (air headspace); negligible under N2 (Zheng & Ho's pots). No temperature dependence and
+  no reverse rate measured.
+- **Suleimenov & Krupp 1994:** H2S's Henry constant (gas/liquid ~0.9-1.1 by concentration at 90-145 C). The engine
+  has no H2S headspace: in a 15 mL vial with 5 mL liquid at 120 C, ~31 % of total sulfide at pH 7 would sit in the gas.
+  This is a mechanism the lane lacks, with a measured constant, for the design step.
+
+Two rows enter the table once double-read: Li 2022's two free-cysteine H2S points (and the Cys + Met arm's
+replicated pair, if Met is carried). Expected result for the H2S arm revised from ~85 % "stays the weakest link" to
+~70 %: the sink's existence has a lead, its rate does not.
+
 ## 3. Cheap probe (step 3) -- TO DO
 ## 4. Design (step 4) -- TO DO
 ## 5. Design review (step 5) -- TO DO
