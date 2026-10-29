@@ -41,18 +41,18 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-10-28",
+    "generated_on": "2026-10-29",
     "git": {
-      "commit": "587d96a2541044221a9cf9934751372d00600698",
-      "short": "587d96a2",
-      "branch": "b58-ttca-formation",
-      "dirty": true
+      "commit": "c3f8d6eaa716e905f9ba7a378913b1ca4cd23a21",
+      "short": "c3f8d6ea",
+      "branch": "sulfur-route-and-tooling",
+      "dirty": false
     },
     "generated_by": "src/kinetic_core/directional.py",
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "1cb4378971cabfd3f861ce513e9c3ea0ed522f4365c88122c065ca4384fe8095"
+        "sha256": "d30ddd05c14554e7ba873b08375cea260b31b63c667e45bf6510a046bfbe08e8"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -78,7 +78,7 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "1cb4378971cabfd3f861ce513e9c3ea0ed522f4365c88122c065ca4384fe8095",
+    "sha256": "d30ddd05c14554e7ba873b08375cea260b31b63c667e45bf6510a046bfbe08e8",
     "claims": 119,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",
@@ -86,8 +86,8 @@
   },
   "summary": {
     "headline": [
-      21,
-      38
+      20,
+      33
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -156,13 +156,11 @@
         },
         "ranking": {
           "agree": 0,
-          "evaluable": 1,
-          "not_evaluable": 3,
-          "misses": [
-            "MOT-03"
-          ],
+          "evaluable": 0,
+          "not_evaluable": 4,
+          "misses": [],
           "mechanism_absent": 0,
-          "rate": 0.0
+          "rate": null
         },
         "scope": {
           "agree": 0,
@@ -173,19 +171,17 @@
           "rate": null
         },
         "sugar_identity": {
-          "agree": 5,
-          "evaluable": 11,
-          "not_evaluable": 5,
+          "agree": 4,
+          "evaluable": 8,
+          "not_evaluable": 8,
           "misses": [
             "SUG-03",
             "SUG-12",
-            "HOF-02",
             "HOF-03",
-            "DIC-01",
-            "DIC-03"
+            "DIC-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.45454545454545453
+          "rate": 0.5
         },
         "sulfur_donor": {
           "agree": 2,
@@ -197,16 +193,15 @@
         },
         "temperature": {
           "agree": 5,
-          "evaluable": 9,
-          "not_evaluable": 2,
+          "evaluable": 8,
+          "not_evaluable": 3,
           "misses": [
             "TEMP-01",
             "TEMP-05",
-            "YIL-01",
-            "YIL-02"
+            "YIL-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.5555555555555556
+          "rate": 0.625
         },
         "time": {
           "agree": 2,
@@ -220,30 +215,26 @@
         }
       },
       "total": {
-        "agree": 21,
-        "evaluable": 38,
-        "not_evaluable": 37,
+        "agree": 20,
+        "evaluable": 33,
+        "not_evaluable": 42,
         "misses": [
           "SUG-03",
           "TEMP-01",
           "SUG-12",
           "PH-07",
           "TEMP-05",
-          "HOF-02",
           "HOF-03",
-          "MOT-03",
           "HOX-03",
           "YIL-01",
-          "YIL-02",
           "DIC-01",
-          "DIC-03",
           "CER07-PH-01",
           "CER07-PH-02",
           "Z23C-T-01",
           "MOD08-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5526315789473685
+        "rate": 0.6060606060606061
       },
       "ph_aw": {
         "agree": 6,
@@ -260,25 +251,21 @@
         "rate": 0.5454545454545454
       },
       "excluding_ph_aw": {
-        "agree": 15,
-        "evaluable": 27,
-        "not_evaluable": 29,
+        "agree": 14,
+        "evaluable": 22,
+        "not_evaluable": 34,
         "misses": [
           "SUG-03",
           "TEMP-01",
           "SUG-12",
           "TEMP-05",
-          "HOF-02",
           "HOF-03",
-          "MOT-03",
           "YIL-01",
-          "YIL-02",
           "DIC-01",
-          "DIC-03",
           "Z23C-T-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5555555555555556
+        "rate": 0.6363636363636364
       }
     },
     "all_claims": {
@@ -356,15 +343,14 @@
         },
         "ranking": {
           "agree": 1,
-          "evaluable": 4,
-          "not_evaluable": 3,
+          "evaluable": 3,
+          "not_evaluable": 4,
           "misses": [
             "PROC-05",
-            "MOT-03",
             "HOX-01"
           ],
           "mechanism_absent": 1,
-          "rate": 0.25
+          "rate": 0.3333333333333333
         },
         "scope": {
           "agree": 0,
@@ -375,21 +361,19 @@
           "rate": null
         },
         "sugar_identity": {
-          "agree": 7,
-          "evaluable": 15,
-          "not_evaluable": 7,
+          "agree": 6,
+          "evaluable": 12,
+          "not_evaluable": 10,
           "misses": [
             "SUG-02",
             "SUG-03",
             "SUG-04",
             "SUG-12",
-            "HOF-02",
             "HOF-03",
-            "DIC-01",
-            "DIC-03"
+            "DIC-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.4666666666666667
+          "rate": 0.5
         },
         "sulfur_donor": {
           "agree": 2,
@@ -403,16 +387,15 @@
         },
         "temperature": {
           "agree": 5,
-          "evaluable": 9,
-          "not_evaluable": 4,
+          "evaluable": 8,
+          "not_evaluable": 5,
           "misses": [
             "TEMP-01",
             "TEMP-05",
-            "YIL-01",
-            "YIL-02"
+            "YIL-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.5555555555555556
+          "rate": 0.625
         },
         "time": {
           "agree": 3,
@@ -428,9 +411,9 @@
         }
       },
       "total": {
-        "agree": 31,
-        "evaluable": 61,
-        "not_evaluable": 58,
+        "agree": 30,
+        "evaluable": 56,
+        "not_evaluable": 63,
         "misses": [
           "SUG-02",
           "SUG-03",
@@ -444,15 +427,11 @@
           "SUG-12",
           "PH-07",
           "TEMP-05",
-          "HOF-02",
           "HOF-03",
-          "MOT-03",
           "HOX-01",
           "HOX-03",
           "YIL-01",
-          "YIL-02",
           "DIC-01",
-          "DIC-03",
           "SCH-T-01",
           "WHI-PH-01",
           "CER07-PH-01",
@@ -464,7 +443,7 @@
           "MOD08-PH-01"
         ],
         "mechanism_absent": 3,
-        "rate": 0.5081967213114754
+        "rate": 0.5357142857142857
       },
       "ph_aw": {
         "agree": 11,
@@ -483,9 +462,9 @@
         "rate": 0.6111111111111112
       },
       "excluding_ph_aw": {
-        "agree": 20,
-        "evaluable": 43,
-        "not_evaluable": 44,
+        "agree": 19,
+        "evaluable": 38,
+        "not_evaluable": 49,
         "misses": [
           "SUG-02",
           "SUG-03",
@@ -497,14 +476,10 @@
           "LIP-01",
           "SUG-12",
           "TEMP-05",
-          "HOF-02",
           "HOF-03",
-          "MOT-03",
           "HOX-01",
           "YIL-01",
-          "YIL-02",
           "DIC-01",
-          "DIC-03",
           "SCH-T-01",
           "ZHOU22-T-01",
           "ZHOU22-CYS-01",
@@ -512,15 +487,21 @@
           "Z23C-T-01"
         ],
         "mechanism_absent": 3,
-        "rate": 0.46511627906976744
+        "rate": 0.5
       }
     },
     "not_evaluable_reasons": {
       "the claim carries no runnable conditions (prose-only)": 39,
-      "a predicted concentration is zero; no direction is defined": 7,
+      "a predicted concentration is zero; no direction is defined": 6,
       "refused by the engine": 3,
+      "the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos": 1,
       "arm 'hydrolysate + xylose (no cysteine), 120 C' refused": 1,
+      "the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine ": 1,
+      "the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine ": 1,
+      "the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cyste": 1,
+      "the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, a": 1,
+      "the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methyl": 1,
       "arm 'lysine 1x (40 mM)' refused": 1,
       "a predicted concentration is zero; no ranking is defined": 1,
       "arm 'glucose + glutathione' refused": 1,
@@ -529,7 +510,7 @@
       "arm 'egg PC alone' refused": 1,
       "arm 'methionine alone' refused": 1
     },
-    "wall_seconds": 467.4
+    "wall_seconds": 394.7
   },
   "claims": [
     {
@@ -549,7 +530,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        93.63341226749424,
+        93.63341996131116,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -578,7 +559,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 93.63341226749424
+          "value_ug_per_l": 93.63341996131116
         },
         {
           "label": "cysteine + D-glucose",
@@ -626,10 +607,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        346.6167649315865,
-        746.3570243921143
+        346.61680335656604,
+        746.3570296391862
       ],
-      "log10_ratio_B_over_A": 0.33309706001094846,
+      "log10_ratio_B_over_A": 0.3330970149194576,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -654,7 +635,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 346.6167649315865
+          "value_ug_per_l": 346.61680335656604
         },
         {
           "label": "cysteine + D-glucose",
@@ -681,7 +662,7 @@
           "warnings": [
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
           ],
-          "value_ug_per_l": 746.3570243921143
+          "value_ug_per_l": 746.3570296391862
         }
       ]
     },
@@ -702,8 +683,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        55.80687613919003,
-        55.80687613919003
+        55.806876032349926,
+        55.806876032349926
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -728,7 +709,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 55.80687613919003
+          "value_ug_per_l": 55.806876032349926
         },
         {
           "label": "MFT in cysteine + glucose",
@@ -751,7 +732,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 55.80687613919003
+          "value_ug_per_l": 55.806876032349926
         }
       ]
     },
@@ -772,8 +753,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        93.63341226749424,
-        93.63341226749424
+        93.63341996131116,
+        93.63341996131116
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -800,7 +781,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 93.63341226749424
+          "value_ug_per_l": 93.63341996131116
         },
         {
           "label": "FFT in cysteine + ribose",
@@ -825,7 +806,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 93.63341226749424
+          "value_ug_per_l": 93.63341996131116
         }
       ]
     },
@@ -846,10 +827,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1380.218975244647,
-        624.8485341835774
+        1380.21899223386,
+        624.8485187256689
       ],
-      "log10_ratio_B_over_A": -0.344173238430272,
+      "log10_ratio_B_over_A": -0.3441732545198923,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -874,7 +855,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1380.218975244647
+          "value_ug_per_l": 1380.21899223386
         },
         {
           "label": "cysteine + D-glucose",
@@ -899,7 +880,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 624.8485341835774
+          "value_ug_per_l": 624.8485187256689
         }
       ]
     },
@@ -935,10 +916,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        100.13880548191875,
-        7.208247269918005
+        100.1388055619451,
+        7.208247207495292
       ],
-      "log10_ratio_B_over_A": -1.1427727304023252,
+      "log10_ratio_B_over_A": -1.142772734510341,
       "arms": [
         {
           "label": "pH 4.5",
@@ -963,7 +944,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 100.13880548191875
+          "value_ug_per_l": 100.1388055619451
         },
         {
           "label": "pH 6.5",
@@ -988,7 +969,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 7.208247269918005
+          "value_ug_per_l": 7.208247207495292
         }
       ]
     },
@@ -1009,10 +990,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        3.899250215015602,
-        1.8507901548556223
+        3.8992502295311455,
+        1.850790166531835
       ],
-      "log10_ratio_B_over_A": -0.32362392413758095,
+      "log10_ratio_B_over_A": -0.3236239230144425,
       "arms": [
         {
           "label": "pH 4.5",
@@ -1037,7 +1018,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 3.899250215015602
+          "value_ug_per_l": 3.8992502295311455
         },
         {
           "label": "pH 6.5",
@@ -1062,7 +1043,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1.8507901548556223
+          "value_ug_per_l": 1.850790166531835
         }
       ]
     },
@@ -1083,13 +1064,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        3991.7172201862404,
-        12.148562579775747,
-        112.8291700204335
+        3991.7170674795525,
+        12.148558851512409,
+        112.82916997569289
       ],
       "log10_steps": [
-        -2.5166348724008185,
-        0.967896498283305
+        -2.5166349890668283,
+        0.9678966313914237
       ],
       "arms": [
         {
@@ -1116,7 +1097,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 3991.7172201862404
+          "value_ug_per_l": 3991.7170674795525
         },
         {
           "label": "pH 5.5",
@@ -1142,7 +1123,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 12.148562579775747
+          "value_ug_per_l": 12.148558851512409
         },
         {
           "label": "pH 7.0",
@@ -1168,7 +1149,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 112.8291700204335
+          "value_ug_per_l": 112.82916997569289
         }
       ]
     },
@@ -1221,11 +1202,11 @@
       "values_ug_per_l": [
         13.564316192459103,
         356.5811126239919,
-        1038.049354842882
+        1038.0493548428756
       ],
       "log10_steps": [
         1.4197604308609677,
-        0.4640596671099642
+        0.46405966710996155
       ],
       "arms": [
         {
@@ -1295,7 +1276,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 1038.049354842882
+          "value_ug_per_l": 1038.0493548428756
         }
       ]
     },
@@ -1433,7 +1414,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        52.285714574127034,
+        52.28571528211001,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -1461,7 +1442,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 52.285714574127034
+          "value_ug_per_l": 52.28571528211001
         },
         {
           "label": "glycine + glucose (no cysteine)",
@@ -1592,8 +1573,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.02-5.99 on the rate.",
             "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
@@ -1618,8 +1599,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.02-5.99 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
@@ -1668,8 +1649,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.02-5.99 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
@@ -1694,8 +1675,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.02-5.99 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
@@ -1736,8 +1717,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.16 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -1761,7 +1742,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
             "the lipid lane's rate anchor was measured at 25 C and this program peaks at 25.0 C: 0.0 decades of 10 C, a factor of 1-1 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "temperature program spans 25.0-25.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
@@ -1803,8 +1784,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.16 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -1828,7 +1809,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
             "the lipid lane's rate anchor was measured at 25 C and this program peaks at 25.0 C: 0.0 decades of 10 C, a factor of 1-1 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "temperature program spans 25.0-25.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
@@ -1870,8 +1851,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "NONANAL RESTS ON A DECLARED ANCHOR, NOT A MEASURED YIELD. This matrix is 26 % oleate by fatty-acid share. The oleate -> nonanal SHARE is measured -- 15 % of the slate (Selke 1978, republished by Frankel 1981) and 10 % (Frankel 1981's own photosensitized column, the only independent determination). But Frankel 1981 prints PEAK AREAS: no internal standard, no response factors, no replicates. No absolute yield from an oleate hydroperoxide exists anywhere in the corpus, so the absolute here assumes the named-product molar yield per oleate hydroperoxide is 0.45 times the measured one per LINOLEATE hydroperoxide, banded 0.2 to 1. Read the interval, not the point. Frankel 1989's silence on nonanal remains a declared hold-out and is still honoured: nonanal from a LINOLEATE feed is exactly zero, by construction.",
             "pH 7.16 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
@@ -1896,7 +1877,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
             "the lipid lane's rate anchor was measured at 25 C and this program peaks at 25.0 C: 0.0 decades of 10 C, a factor of 1-1 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "NONANAL RESTS ON A DECLARED ANCHOR, NOT A MEASURED YIELD. This matrix is 26 % oleate by fatty-acid share. The oleate -> nonanal SHARE is measured -- 15 % of the slate (Selke 1978, republished by Frankel 1981) and 10 % (Frankel 1981's own photosensitized column, the only independent determination). But Frankel 1981 prints PEAK AREAS: no internal standard, no response factors, no replicates. No absolute yield from an oleate hydroperoxide exists anywhere in the corpus, so the absolute here assumes the named-product molar yield per oleate hydroperoxide is 0.45 times the measured one per LINOLEATE hydroperoxide, banded 0.2 to 1. Read the interval, not the point. Frankel 1989's silence on nonanal remains a declared hold-out and is still honoured: nonanal from a LINOLEATE feed is exactly zero, by construction.",
@@ -1962,8 +1943,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.16 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -1987,8 +1968,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.16 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -2051,8 +2032,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -2076,8 +2057,8 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
@@ -2132,10 +2113,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2396.4912898200805,
-        419.91579153946776
+        2396.4913292835163,
+        419.915794443189
       ],
-      "log10_ratio_B_over_A": -0.7564136476474799,
+      "log10_ratio_B_over_A": -0.756413651795932,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2157,7 +2138,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2396.4912898200805
+          "value_ug_per_l": 2396.4913292835163
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2179,7 +2160,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 419.91579153946776
+          "value_ug_per_l": 419.915794443189
         }
       ]
     },
@@ -2200,7 +2181,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        17.71983687324454,
+        17.719836645583246,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -2226,7 +2207,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 17.71983687324454
+          "value_ug_per_l": 17.719836645583246
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2270,10 +2251,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        59.964456496986216,
-        32.00800410016174
+        59.96445772811702,
+        32.00800410762972
       ],
-      "log10_ratio_B_over_A": -0.27263530769352223,
+      "log10_ratio_B_over_A": -0.2726353165086982,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2295,7 +2276,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 59.964456496986216
+          "value_ug_per_l": 59.96445772811702
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2318,7 +2299,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 32.00800410016174
+          "value_ug_per_l": 32.00800410762972
         }
       ]
     },
@@ -2439,62 +2420,9 @@
       "fit_status": "independent",
       "statement": "For FURFURAL the sugar ordering INVERTS relative to HMF: glucose gives more furfural than fructose (333 vs 276 ppb) in roasted sunflower seed. The source explicitly flags this as contested.",
       "source": "laemont2023",
-      "status": "agree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        17.52922540269233,
-        3.4157990955093105
-      ],
-      "log10_ratio_B_over_A": -0.7102704063237415,
-      "arms": [
-        {
-          "label": "glycine + D-glucose, 165 C 8 min",
-          "spec": {
-            "name": "glycine + D-glucose, 165 C 8 min",
-            "precursors": {
-              "Glycine": 10.0,
-              "D-Glucose": 10.0
-            },
-            "temp_C": 165.0,
-            "time_min": 8.0,
-            "ph": 6.0,
-            "aw": 0.3
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
-          "value_ug_per_l": 17.52922540269233
-        },
-        {
-          "label": "glycine + D-fructose, 165 C 8 min",
-          "spec": {
-            "name": "glycine + D-fructose, 165 C 8 min",
-            "precursors": {
-              "Glycine": 10.0,
-              "D-Fructose": 10.0
-            },
-            "temp_C": 165.0,
-            "time_min": 8.0,
-            "ph": 6.0,
-            "aw": 0.3
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
-          "value_ug_per_l": 3.4157990955093105
-        }
-      ]
+      "status": "not_evaluable",
+      "reason": "the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructose, 165 C 8 min 276) is within measurement noise (< 1.4x); no model, however good, can be scored on it",
+      "arms": []
     },
     {
       "claim_id": "PH-06",
@@ -2625,13 +2553,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        18.745930532407325,
-        17.516424751261294,
-        17.389713132951073
+        18.74593076618243,
+        17.51642455876771,
+        17.389713289104062
       ],
       "log10_steps": [
-        -0.029461535567146372,
-        -0.0031530499608687463
+        -0.029461545755708567,
+        -0.0031530412884692694
       ],
       "arms": [
         {
@@ -2654,7 +2582,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 18.745930532407325
+          "value_ug_per_l": 18.74593076618243
         },
         {
           "label": "pH 7",
@@ -2676,7 +2604,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 17.516424751261294
+          "value_ug_per_l": 17.51642455876771
         },
         {
           "label": "pH 9",
@@ -2698,7 +2626,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 17.389713132951073
+          "value_ug_per_l": 17.389713289104062
         }
       ]
     },
@@ -2901,10 +2829,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        17.516424751261294,
-        0.000550840534476431
+        17.51642455876771,
+        0.0005508405344764228
       ],
-      "log10_ratio_B_over_A": -4.50241957673187,
+      "log10_ratio_B_over_A": -4.502419571959276,
       "arms": [
         {
           "label": "roasted, 165 C 8 min",
@@ -2926,7 +2854,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 17.516424751261294
+          "value_ug_per_l": 17.51642455876771
         },
         {
           "label": "raw, 25 C",
@@ -2949,7 +2877,7 @@
             "temperature program spans 25.0-25.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.000550840534476431
+          "value_ug_per_l": 0.0005508405344764228
         }
       ]
     },
@@ -3074,7 +3002,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        104.04383363074786,
+        104.04383337362684,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -3101,7 +3029,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 104.04383363074786
+          "value_ug_per_l": 104.04383337362684
         },
         {
           "label": "hydrolysate + xylose, no cysteine",
@@ -3252,12 +3180,12 @@
       "lane": "acrylamide",
       "values_ug_per_l": [
         7.639498358442173,
-        935.1132648590047,
-        4.372780675596631
+        935.1132648590216,
+        4.3727806861405325
       ],
       "log10_steps": [
-        2.087799375724559,
-        -2.3301065225385345
+        2.087799375724567,
+        -2.3301065214913463
       ],
       "arms": [
         {
@@ -3304,7 +3232,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 935.1132648590047
+          "value_ug_per_l": 935.1132648590216
         },
         {
           "label": "210 C",
@@ -3328,7 +3256,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 4.372780675596631
+          "value_ug_per_l": 4.3727806861405325
         }
       ]
     },
@@ -3465,63 +3393,8 @@
       "statement": "With cysteine at 145 C / 20 min / pH 5.0, FRUCTOSE is at least as effective as GLUCOSE for both thiols - the two hexoses measure within 1.3x of each other, with fructose slightly ahead on both.",
       "source": "hofmann1998",
       "status": "not_evaluable",
-      "reason": "a predicted concentration is zero; no direction is defined",
-      "arms": [
-        {
-          "label": "cysteine + D-fructose, 145 C 20 min pH 5.0",
-          "spec": {
-            "name": "cysteine + D-fructose, 145 C 20 min pH 5.0",
-            "precursors": {
-              "L-Cysteine": 33.0,
-              "D-Fructose": 100.0
-            },
-            "temp_C": 145.0,
-            "time_min": 20.0,
-            "ph": 5.0,
-            "aw": 0.98,
-            "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.5,
-              "source": "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"
-            }
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
-          ],
-          "value_ug_per_l": 0.0
-        },
-        {
-          "label": "cysteine + D-glucose, 145 C 20 min pH 5.0",
-          "spec": {
-            "name": "cysteine + D-glucose, 145 C 20 min pH 5.0",
-            "precursors": {
-              "L-Cysteine": 33.0,
-              "D-Glucose": 100.0
-            },
-            "temp_C": 145.0,
-            "time_min": 20.0,
-            "ph": 5.0,
-            "aw": 0.98,
-            "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.5,
-              "source": "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"
-            }
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
-          ],
-          "value_ug_per_l": 0.0
-        }
-      ]
+      "reason": "the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine + D-glucose, 145 C 20 min pH 5.0 1.9) is within measurement noise (< 1.4x); no model, however good, can be scored on it",
+      "arms": []
     },
     {
       "claim_id": "HOF-02",
@@ -3534,72 +3407,9 @@
       "fit_status": "independent",
       "statement": "Same claim as HOF-01 for FFT: fructose is at least as effective as glucose (3.2 vs 2.8 ug).",
       "source": "hofmann1998",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        542.6014847493832,
-        746.3570243921143
-      ],
-      "log10_ratio_B_over_A": 0.13846564675620196,
-      "arms": [
-        {
-          "label": "cysteine + D-fructose, 145 C 20 min pH 5.0",
-          "spec": {
-            "name": "cysteine + D-fructose, 145 C 20 min pH 5.0",
-            "precursors": {
-              "L-Cysteine": 33.0,
-              "D-Fructose": 100.0
-            },
-            "temp_C": 145.0,
-            "time_min": 20.0,
-            "ph": 5.0,
-            "aw": 0.98,
-            "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.5,
-              "source": "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"
-            }
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
-          ],
-          "value_ug_per_l": 542.6014847493832
-        },
-        {
-          "label": "cysteine + D-glucose, 145 C 20 min pH 5.0",
-          "spec": {
-            "name": "cysteine + D-glucose, 145 C 20 min pH 5.0",
-            "precursors": {
-              "L-Cysteine": 33.0,
-              "D-Glucose": 100.0
-            },
-            "temp_C": 145.0,
-            "time_min": 20.0,
-            "ph": 5.0,
-            "aw": 0.98,
-            "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.5,
-              "source": "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"
-            }
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
-          ],
-          "value_ug_per_l": 746.3570243921143
-        }
-      ]
+      "status": "not_evaluable",
+      "reason": "the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine + D-glucose, 145 C 20 min pH 5.0 2.8) is within measurement noise (< 1.4x); no model, however good, can be scored on it",
+      "arms": []
     },
     {
       "claim_id": "HOF-03",
@@ -3618,10 +3428,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        0.7401659893338126,
-        1.1956735293209713
+        0.7401659723933,
+        1.195673638044881
       ],
-      "log10_ratio_B_over_A": 0.2082834892646521,
+      "log10_ratio_B_over_A": 0.2082835386954191,
       "arms": [
         {
           "label": "cysteine + D-ribose, dry-heated 180 C 6 min",
@@ -3643,7 +3453,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.7401659893338126
+          "value_ug_per_l": 0.7401659723933
         },
         {
           "label": "cysteine + D-glucose, dry-heated 180 C 6 min",
@@ -3666,7 +3476,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1.1956735293209713
+          "value_ug_per_l": 1.195673638044881
         }
       ]
     },
@@ -3703,10 +3513,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        97.02229244385656,
-        45.461270850074115
+        97.02229029278088,
+        45.46127370751524
       ],
-      "log10_ratio_B_over_A": -0.3292299598541647,
+      "log10_ratio_B_over_A": -0.3292299229281262,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -3731,7 +3541,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 97.02229244385656
+          "value_ug_per_l": 97.02229029278088
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -3756,7 +3566,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 45.461270850074115
+          "value_ug_per_l": 45.46127370751524
         }
       ]
     },
@@ -3777,10 +3587,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2119.363986254135,
-        214.76884488074404
+        2119.3641300940862,
+        214.76885892096806
       ],
-      "log10_ratio_B_over_A": -0.9942342688990616,
+      "log10_ratio_B_over_A": -0.9942342699829483,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -3805,7 +3615,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2119.363986254135
+          "value_ug_per_l": 2119.3641300940862
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -3830,7 +3640,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 214.76884488074404
+          "value_ug_per_l": 214.76885892096806
         }
       ]
     },
@@ -3845,68 +3655,9 @@
       "fit_status": "independent",
       "statement": "In phosphate-buffered cysteine/ribose at pH 5.6 / 140 C, MFT exceeds FFT in the headspace (2230 vs 1750 ng/mmol sugar).",
       "source": "mottram2002",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": true,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        45.461270850074115,
-        45.461270850074115
-      ],
-      "log10_ratio_B_over_A": 0.0,
-      "arms": [
-        {
-          "label": "MFT, cysteine + ribose, phosphate pH 5.6",
-          "spec": {
-            "name": "MFT, cysteine + ribose, phosphate pH 5.6",
-            "precursors": {
-              "L-Cysteine": 50.0,
-              "D-Ribose": 50.0
-            },
-            "temp_C": 140.0,
-            "time_min": 30.0,
-            "ph": 5.6,
-            "aw": 0.98,
-            "buffer": {
-              "kind": "pyrophosphate",
-              "pyrophosphate_mol_l": 0.2,
-              "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
-            }
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
-          "warnings": [],
-          "value_ug_per_l": 45.461270850074115
-        },
-        {
-          "label": "FFT, cysteine + ribose, phosphate pH 5.6",
-          "spec": {
-            "name": "FFT, cysteine + ribose, phosphate pH 5.6",
-            "precursors": {
-              "L-Cysteine": 50.0,
-              "D-Ribose": 50.0
-            },
-            "temp_C": 140.0,
-            "time_min": 30.0,
-            "ph": 5.6,
-            "aw": 0.98,
-            "buffer": {
-              "kind": "pyrophosphate",
-              "pyrophosphate_mol_l": 0.2,
-              "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
-            }
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
-          "warnings": [],
-          "value_ug_per_l": 45.461270850074115
-        }
-      ]
+      "status": "not_evaluable",
+      "reason": "the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cysteine + ribose, phosphate pH 5.6 1750) is within measurement noise (< 1.4x); no model, however good, can be scored on it",
+      "arms": []
     },
     {
       "claim_id": "MOT-04",
@@ -3970,10 +3721,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        3540.390874184058,
-        8464.552841961502
+        3540.3908741840605,
+        8464.552841960776
       ],
-      "log10_ratio_B_over_A": 0.37855280789209883,
+      "log10_ratio_B_over_A": 0.37855280789206125,
       "arms": [
         {
           "label": "hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 min pH 5.0",
@@ -3995,7 +3746,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 3540.390874184058
+          "value_ug_per_l": 3540.3908741840605
         },
         {
           "label": "norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0",
@@ -4017,7 +3768,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 8464.552841961502
+          "value_ug_per_l": 8464.552841960776
         }
       ]
     },
@@ -4038,10 +3789,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        8464.552841961502,
-        1276.6198182819617
+        8464.552841960776,
+        1276.6198234335693
       ],
-      "log10_ratio_B_over_A": -0.8215424383737409,
+      "log10_ratio_B_over_A": -0.8215424366211733,
       "arms": [
         {
           "label": "norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0",
@@ -4063,7 +3814,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 8464.552841961502
+          "value_ug_per_l": 8464.552841960776
         },
         {
           "label": "norfuraneol + cysteine, 1 mmol each in 50 mL, 145 C 20 min pH 5.0",
@@ -4085,7 +3836,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1276.6198182819617
+          "value_ug_per_l": 1276.6198234335693
         }
       ]
     },
@@ -4106,10 +3857,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2462.43266191463,
-        4081.979727145006
+        2462.4326619145904,
+        4081.9797274101165
       ],
-      "log10_ratio_B_over_A": 0.21950648044923074,
+      "log10_ratio_B_over_A": 0.21950648047744362,
       "arms": [
         {
           "label": "hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0",
@@ -4131,7 +3882,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2462.43266191463
+          "value_ug_per_l": 2462.4326619145904
         },
         {
           "label": "hydroxyacetaldehyde + mercapto-2-propanone at pH 3.0",
@@ -4153,7 +3904,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 4081.979727145006
+          "value_ug_per_l": 4081.9797274101165
         }
       ]
     },
@@ -4234,15 +3985,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        10.33444791663891,
-        12.015186836403757,
-        12.859461265417423,
-        12.681291393120274
+        10.3344470370659,
+        12.015187206643871,
+        12.859461293680834,
+        12.681292014348603
       ],
       "log10_steps": [
-        0.06544324762968094,
-        0.02949224614513669,
-        -0.006059292661375643
+        0.06544329797532814,
+        0.029492233717159234,
+        -0.006059272340775459
       ],
       "arms": [
         {
@@ -4268,7 +4019,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 10.33444791663891
+          "value_ug_per_l": 10.3344470370659
         },
         {
           "label": "110 C / 2 h",
@@ -4293,7 +4044,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 12.015186836403757
+          "value_ug_per_l": 12.015187206643871
         },
         {
           "label": "120 C / 1 h",
@@ -4318,7 +4069,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 12.859461265417423
+          "value_ug_per_l": 12.859461293680834
         },
         {
           "label": "130 C / 0.5 h",
@@ -4343,7 +4094,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 12.681291393120274
+          "value_ug_per_l": 12.681292014348603
         }
       ]
     },
@@ -4358,68 +4109,9 @@
       "fit_status": "independent",
       "statement": "In the same ladder FFT does the opposite: 1.68 ug/L at 120 C / 1 h exceeds 1.28 ug/L at 100 C / 4 h (Tukey a vs c).",
       "source": "yiltirak2026",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        167.26635837441702,
-        299.4987213644264
-      ],
-      "log10_ratio_B_over_A": 0.25298637081452124,
-      "arms": [
-        {
-          "label": "120 C / 1 h",
-          "spec": {
-            "name": "120 C / 1 h",
-            "precursors": {
-              "D-Ribose": 25.0,
-              "L-Cysteine": 25.0
-            },
-            "temp_C": 120.0,
-            "time_min": 60.0,
-            "ph": 5.5,
-            "aw": 0.98,
-            "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.5,
-              "source": "Yiltirak 2026 sec. 2.3: ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5)"
-            }
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
-          "warnings": [],
-          "value_ug_per_l": 167.26635837441702
-        },
-        {
-          "label": "100 C / 4 h",
-          "spec": {
-            "name": "100 C / 4 h",
-            "precursors": {
-              "D-Ribose": 25.0,
-              "L-Cysteine": 25.0
-            },
-            "temp_C": 100.0,
-            "time_min": 240.0,
-            "ph": 5.5,
-            "aw": 0.98,
-            "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.5,
-              "source": "Yiltirak 2026 sec. 2.3: ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5)"
-            }
-          },
-          "answered": true,
-          "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
-          "warnings": [],
-          "value_ug_per_l": 299.4987213644264
-        }
-      ]
+      "status": "not_evaluable",
+      "reason": "the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement noise (< 1.4x); no model, however good, can be scored on it",
+      "arms": []
     },
     {
       "claim_id": "WANG-01",
@@ -4438,17 +4130,17 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        7.110839691704988,
-        62.69707722914046,
-        197.95101433127064,
-        404.4888424862137,
-        674.7135677639193
+        7.110839680973431,
+        62.697077204025035,
+        197.9510141589793,
+        404.48884278092476,
+        674.7135682389917
       ],
       "log10_steps": [
-        0.9453264077271272,
-        0.4993104358354514,
-        0.3103488149488072,
-        0.22221289700379895
+        0.9453264082085857,
+        0.49931043563142424,
+        0.31034881564323313,
+        0.22221289699316246
       ],
       "arms": [
         {
@@ -4473,7 +4165,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 7.110839691704988
+          "value_ug_per_l": 7.110839680973431
         },
         {
           "label": "95 C / 90 min",
@@ -4497,7 +4189,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 62.69707722914046
+          "value_ug_per_l": 62.697077204025035
         },
         {
           "label": "105 C / 100 min",
@@ -4521,7 +4213,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 197.95101433127064
+          "value_ug_per_l": 197.9510141589793
         },
         {
           "label": "115 C / 110 min",
@@ -4545,7 +4237,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 404.4888424862137
+          "value_ug_per_l": 404.48884278092476
         },
         {
           "label": "125 C / 120 min",
@@ -4569,7 +4261,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 674.7135677639193
+          "value_ug_per_l": 674.7135682389917
         }
       ],
       "unstated_input_sweep": {
@@ -4603,17 +4295,17 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        49.51998101735484,
-        1822.7299652809133,
-        20584.81934997783,
-        45568.16029998203,
-        27552.53803964679
+        49.51998083557252,
+        1822.7299572474437,
+        20584.819381344958,
+        45568.16025680493,
+        27552.53804192273
       ],
       "log10_steps": [
-        1.565941863809627,
-        1.052824726689193,
-        0.34511443535600517,
-        -0.2184998847280382
+        1.5659418634897713,
+        1.0528247292650728,
+        0.34511443428272154,
+        -0.21849988428065772
       ],
       "arms": [
         {
@@ -4638,7 +4330,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 49.51998101735484
+          "value_ug_per_l": 49.51998083557252
         },
         {
           "label": "95 C / 90 min",
@@ -4662,7 +4354,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1822.7299652809133
+          "value_ug_per_l": 1822.7299572474437
         },
         {
           "label": "105 C / 100 min",
@@ -4686,7 +4378,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 20584.81934997783
+          "value_ug_per_l": 20584.819381344958
         },
         {
           "label": "115 C / 110 min",
@@ -4710,7 +4402,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 45568.16029998203
+          "value_ug_per_l": 45568.16025680493
         },
         {
           "label": "125 C / 120 min",
@@ -4734,7 +4426,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 27552.53803964679
+          "value_ug_per_l": 27552.53804192273
         }
       ],
       "unstated_input_sweep": {
@@ -5045,120 +4737,9 @@
       "fit_status": "independent",
       "statement": "In 10 % glucose autoclaved alone in water at 121 C for 18 min, the dicarbonyls rank 3-deoxyglucosone (52 ug/mL) > glucosone (7.5) > glyoxal (5.6) > methylglyoxal (2.6).",
       "source": "leitzen2021",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "trunk",
-      "values_ug_per_l": [
-        65473.069478563615,
-        119.05906453604986,
-        160.79393493253662,
-        2549.9851902328087
-      ],
-      "log10_steps": [
-        -2.7403002358791566,
-        0.13050719743312705,
-        1.2002679948031056
-      ],
-      "predicted_order": [
-        "3-deoxyglucosone",
-        "methylglyoxal",
-        "glyoxal",
-        "glucosone"
-      ],
-      "arms": [
-        {
-          "label": "10 % glucose, 121 C, 18 min :: 3-deoxyglucosone",
-          "spec": {
-            "name": "10 % glucose, 121 C, 18 min :: 3-deoxyglucosone",
-            "precursors": {
-              "D-Glucose": 555.0
-            },
-            "temp_C": 121.0,
-            "time_min": 18.0,
-            "ph": 5.0,
-            "aw": 0.99
-          },
-          "answered": true,
-          "lane": "trunk",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
-          ],
-          "value_ug_per_l": 65473.069478563615
-        },
-        {
-          "label": "10 % glucose, 121 C, 18 min :: glucosone",
-          "spec": {
-            "name": "10 % glucose, 121 C, 18 min :: glucosone",
-            "precursors": {
-              "D-Glucose": 555.0
-            },
-            "temp_C": 121.0,
-            "time_min": 18.0,
-            "ph": 5.0,
-            "aw": 0.99
-          },
-          "answered": true,
-          "lane": "trunk",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
-            "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
-          ],
-          "value_ug_per_l": 119.05906453604986
-        },
-        {
-          "label": "10 % glucose, 121 C, 18 min :: glyoxal",
-          "spec": {
-            "name": "10 % glucose, 121 C, 18 min :: glyoxal",
-            "precursors": {
-              "D-Glucose": 555.0
-            },
-            "temp_C": 121.0,
-            "time_min": 18.0,
-            "ph": 5.0,
-            "aw": 0.99
-          },
-          "answered": true,
-          "lane": "trunk",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
-            "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
-          ],
-          "value_ug_per_l": 160.79393493253662
-        },
-        {
-          "label": "10 % glucose, 121 C, 18 min :: methylglyoxal",
-          "spec": {
-            "name": "10 % glucose, 121 C, 18 min :: methylglyoxal",
-            "precursors": {
-              "D-Glucose": 555.0
-            },
-            "temp_C": 121.0,
-            "time_min": 18.0,
-            "ph": 5.0,
-            "aw": 0.99
-          },
-          "answered": true,
-          "lane": "trunk",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
-          "warnings": [
-            "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
-          ],
-          "value_ug_per_l": 2549.9851902328087
-        }
-      ]
+      "status": "not_evaluable",
+      "reason": "the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methylglyoxal 2.6) is within measurement noise (< 1.4x); no model, however good, can be scored on it",
+      "arms": []
     },
     {
       "claim_id": "RIB-T-01",
@@ -5177,13 +4758,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2.0635886743414193,
-        0.030990814354466132,
-        0.0013249697428816287
+        2.0635886855195533,
+        0.03099081592152575,
+        0.0013249699511902993
       ],
       "log10_steps": [
-        -1.8233901471865872,
-        -1.3690270276677272
+        -1.8233901275788647,
+        -1.3690269813491884
       ],
       "arms": [
         {
@@ -5209,7 +4790,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2.0635886743414193
+          "value_ug_per_l": 2.0635886855195533
         },
         {
           "label": "40 min",
@@ -5234,7 +4815,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.030990814354466132
+          "value_ug_per_l": 0.03099081592152575
         },
         {
           "label": "60 min",
@@ -5259,7 +4840,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.0013249697428816287
+          "value_ug_per_l": 0.0013249699511902993
         }
       ]
     },
@@ -5300,7 +4881,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.007265360008950726
+          "value_ug_per_l": 0.0072653605039576874
         },
         {
           "label": "60 min",
@@ -5364,7 +4945,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1.6143525835143369
+          "value_ug_per_l": 1.614352653913228
         },
         {
           "label": "60 min",
@@ -5408,15 +4989,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        12.616604795462266,
-        30.818639814779036,
-        35.19668009084262,
-        19.05185266481146
+        12.616605057305254,
+        30.818638636383607,
+        35.19667662571395,
+        19.051852645629083
       ],
       "log10_steps": [
-        0.3878709677912121,
-        0.05768823364703644,
-        -0.26656448651237924
+        0.38787094217205415,
+        0.05768820749643134,
+        -0.2665644441931638
       ],
       "arms": [
         {
@@ -5442,7 +5023,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 12.616604795462266
+          "value_ug_per_l": 12.616605057305254
         },
         {
           "label": "60 min",
@@ -5467,7 +5048,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 30.818639814779036
+          "value_ug_per_l": 30.818638636383607
         },
         {
           "label": "360 min",
@@ -5492,7 +5073,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 35.19668009084262
+          "value_ug_per_l": 35.19667662571395
         },
         {
           "label": "720 min",
@@ -5517,7 +5098,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 19.05185266481146
+          "value_ug_per_l": 19.051852645629083
         }
       ]
     },
@@ -5598,10 +5179,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        3499.7694624757887,
-        3640.625980106523
+        3499.7694496485133,
+        3640.6258995120047
       ],
-      "log10_ratio_B_over_A": 0.01713662660195937,
+      "log10_ratio_B_over_A": 0.01713661857951226,
       "arms": [
         {
           "label": "pH 4.5",
@@ -5626,7 +5207,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 3499.7694624757887
+          "value_ug_per_l": 3499.7694496485133
         },
         {
           "label": "pH 6.5",
@@ -5651,7 +5232,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 3640.625980106523
+          "value_ug_per_l": 3640.6258995120047
         }
       ]
     },
@@ -5672,15 +5253,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        3991.7172201862404,
-        1178.444105725817,
-        1.1019070207170734,
-        112.8291700204335
+        3991.7170674795525,
+        1178.4438613985187,
+        1.1019069954259357,
+        112.82916997569289
       ],
       "log10_steps": [
-        -0.5298507790550354,
-        -3.0291640383664005,
-        2.010276443303922
+        -0.5298508524831758,
+        -3.0291639582919316,
+        2.010276453099703
       ],
       "arms": [
         {
@@ -5707,7 +5288,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 3991.7172201862404
+          "value_ug_per_l": 3991.7170674795525
         },
         {
           "label": "pH 5",
@@ -5733,7 +5314,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1178.444105725817
+          "value_ug_per_l": 1178.4438613985187
         },
         {
           "label": "pH 6",
@@ -5759,7 +5340,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1.1019070207170734
+          "value_ug_per_l": 1.1019069954259357
         },
         {
           "label": "pH 7",
@@ -5785,7 +5366,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 112.8291700204335
+          "value_ug_per_l": 112.82916997569289
         }
       ]
     },
@@ -5806,13 +5387,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1876.3882573664332,
-        2069.2135987003085,
-        339.5379592921233
+        1876.3882596291178,
+        2069.213605054368,
+        339.5379597344533
       ],
       "log10_steps": [
-        0.04248261747034466,
-        -0.7849169897851827
+        0.04248261828025544,
+        -0.7849169905530239
       ],
       "arms": [
         {
@@ -5839,7 +5420,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1876.3882573664332
+          "value_ug_per_l": 1876.3882596291178
         },
         {
           "label": "pH 5",
@@ -5865,7 +5446,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2069.2135987003085
+          "value_ug_per_l": 2069.213605054368
         },
         {
           "label": "pH 6",
@@ -5891,7 +5472,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 339.5379592921233
+          "value_ug_per_l": 339.5379597344533
         }
       ]
     },
@@ -5912,10 +5493,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        97.02229244385656,
-        45.461270850074115
+        97.02229029278088,
+        45.46127370751524
       ],
-      "log10_ratio_B_over_A": -0.3292299598541647,
+      "log10_ratio_B_over_A": -0.3292299229281262,
       "arms": [
         {
           "label": "pH 4.2",
@@ -5940,7 +5521,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 97.02229244385656
+          "value_ug_per_l": 97.02229029278088
         },
         {
           "label": "pH 5.6",
@@ -5965,7 +5546,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 45.461270850074115
+          "value_ug_per_l": 45.46127370751524
         }
       ]
     },
@@ -5986,10 +5567,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2119.363986254135,
-        214.76884488074404
+        2119.3641300940862,
+        214.76885892096806
       ],
-      "log10_ratio_B_over_A": -0.9942342688990616,
+      "log10_ratio_B_over_A": -0.9942342699829483,
       "arms": [
         {
           "label": "pH 4.2",
@@ -6014,7 +5595,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2119.363986254135
+          "value_ug_per_l": 2119.3641300940862
         },
         {
           "label": "pH 5.6",
@@ -6039,7 +5620,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 214.76884488074404
+          "value_ug_per_l": 214.76885892096806
         }
       ]
     },
@@ -6080,7 +5661,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.5097743007625314
+          "value_ug_per_l": 0.5097742997445959
         },
         {
           "label": "lysine 1x (40 mM)",
@@ -6157,15 +5738,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        75.76126242585742,
-        170.23869405580828,
-        192.45590306568036,
-        177.5306402267338
+        75.76126222664362,
+        170.23869697069372,
+        192.45590372909317,
+        177.5306400591049
       ],
       "log10_steps": [
-        0.3516110762487853,
-        0.05327295740200257,
-        -0.03505791717944699
+        0.35161108482689946,
+        0.05327295146291535,
+        -0.035057919086570875
       ],
       "arms": [
         {
@@ -6190,7 +5771,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 75.76126242585742
+          "value_ug_per_l": 75.76126222664362
         },
         {
           "label": "60 min",
@@ -6214,7 +5795,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 170.23869405580828
+          "value_ug_per_l": 170.23869697069372
         },
         {
           "label": "90 min",
@@ -6238,7 +5819,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 192.45590306568036
+          "value_ug_per_l": 192.45590372909317
         },
         {
           "label": "120 min",
@@ -6262,7 +5843,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 177.5306402267338
+          "value_ug_per_l": 177.5306400591049
         }
       ]
     },
@@ -6283,15 +5864,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        38.20274581909665,
-        130.64733383641996,
-        215.21377388262525,
-        259.76993195564023
+        38.20274538873608,
+        130.64733234132004,
+        215.2137739080746,
+        259.76993192349977
       ],
       "log10_steps": [
-        0.5340059724495043,
-        0.21676951177461215,
-        0.08171881746708491
+        0.5340059723719347,
+        0.21676951679594056,
+        0.0817188173619951
       ],
       "arms": [
         {
@@ -6316,7 +5897,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 38.20274581909665
+          "value_ug_per_l": 38.20274538873608
         },
         {
           "label": "60 min",
@@ -6340,7 +5921,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 130.64733383641996
+          "value_ug_per_l": 130.64733234132004
         },
         {
           "label": "90 min",
@@ -6364,7 +5945,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 215.21377388262525
+          "value_ug_per_l": 215.2137739080746
         },
         {
           "label": "120 min",
@@ -6388,7 +5969,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 259.76993195564023
+          "value_ug_per_l": 259.76993192349977
         }
       ]
     },
@@ -6409,10 +5990,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        533.7984351777766,
-        797.6114637672988
+        533.7984828823836,
+        797.6114639448535
       ],
-      "log10_ratio_B_over_A": 0.17441409097296073,
+      "log10_ratio_B_over_A": 0.1744140522575224,
       "arms": [
         {
           "label": "ARP alone, 120 min",
@@ -6435,7 +6016,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 533.7984351777766
+          "value_ug_per_l": 533.7984828823836
         },
         {
           "label": "ARP + cysteine, 120 min",
@@ -6459,7 +6040,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 797.6114637672988
+          "value_ug_per_l": 797.6114639448535
         }
       ]
     },
@@ -6480,10 +6061,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        134.29821785610278,
-        1748.8197481769012
+        134.2982187623873,
+        1748.8198103287987
       ],
-      "log10_ratio_B_over_A": 1.1146747992138348,
+      "log10_ratio_B_over_A": 1.1146748117176244,
       "arms": [
         {
           "label": "ARP + cysteine 20 mM",
@@ -6507,7 +6088,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 134.29821785610278
+          "value_ug_per_l": 134.2982187623873
         },
         {
           "label": "ARP + glutathione 20 mM",
@@ -6531,7 +6112,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1748.8197481769012
+          "value_ug_per_l": 1748.8198103287987
         }
       ]
     },
@@ -6552,15 +6133,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        25.670764832420303,
-        73.48805525675505,
-        110.83672177407993,
-        129.54014944023567
+        25.670765152881717,
+        73.48805571848523,
+        110.83672146422113,
+        129.54014850126148
       ],
       "log10_steps": [
-        0.4567779464321222,
-        0.17846691751371768,
-        0.06772072158926493
+        0.45677794373930014,
+        0.1784669135708895,
+        0.06772071965540137
       ],
       "arms": [
         {
@@ -6585,7 +6166,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 25.670764832420303
+          "value_ug_per_l": 25.670765152881717
         },
         {
           "label": "60 min",
@@ -6609,7 +6190,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 73.48805525675505
+          "value_ug_per_l": 73.48805571848523
         },
         {
           "label": "90 min",
@@ -6633,7 +6214,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 110.83672177407993
+          "value_ug_per_l": 110.83672146422113
         },
         {
           "label": "120 min",
@@ -6657,7 +6238,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 129.54014944023567
+          "value_ug_per_l": 129.54014850126148
         }
       ]
     },
@@ -6935,13 +6516,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        45.46825806930772,
-        0.20353370508984991,
-        0.003263229806528453
+        45.468256707883356,
+        0.20353370608553978,
+        0.00326323010824503
       ],
       "log10_steps": [
-        -2.349071977816385,
-        -1.794988679289386
+        -2.3490719626880328,
+        -1.794988641259315
       ],
       "arms": [
         {
@@ -6967,7 +6548,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 45.46825806930772
+          "value_ug_per_l": 45.468256707883356
         },
         {
           "label": "initial pH 7.0",
@@ -6992,7 +6573,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.20353370508984991
+          "value_ug_per_l": 0.20353370608553978
         },
         {
           "label": "initial pH 8.0",
@@ -7017,7 +6598,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.003263229806528453
+          "value_ug_per_l": 0.00326323010824503
         }
       ]
     },
@@ -7038,10 +6619,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        72.46269570585267,
-        0.040410539347343594
+        72.46269316615137,
+        0.04041053914839855
       ],
-      "log10_ratio_B_over_A": -3.2536198394351117,
+      "log10_ratio_B_over_A": -3.2536198263518603,
       "arms": [
         {
           "label": "initial pH 5.6",
@@ -7066,7 +6647,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 72.46269570585267
+          "value_ug_per_l": 72.46269316615137
         },
         {
           "label": "initial pH 7.0",
@@ -7091,7 +6672,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.040410539347343594
+          "value_ug_per_l": 0.04041053914839855
         }
       ]
     },
@@ -7112,10 +6693,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        72.42046020565571,
-        42.33532236996487
+        72.42046007287766,
+        42.33532235953236
       ],
-      "log10_ratio_B_over_A": -0.23315840913896246,
+      "log10_ratio_B_over_A": -0.23315840844973396,
       "arms": [
         {
           "label": "pot C: xylose + thiamine + cysteine + glycine",
@@ -7141,7 +6722,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 72.42046020565571
+          "value_ug_per_l": 72.42046007287766
         },
         {
           "label": "pot A: xylose + thiamine + glutathione",
@@ -7166,7 +6747,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 42.33532236996487
+          "value_ug_per_l": 42.33532235953236
         }
       ]
     },
@@ -7187,10 +6768,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        170.2329127878473,
-        130.946559088493
+        170.23291936846022,
+        130.9465593916735
       ],
-      "log10_ratio_B_over_A": -0.11394943939110654,
+      "log10_ratio_B_over_A": -0.11394945517390001,
       "arms": [
         {
           "label": "pot C: xylose + thiamine + cysteine + glycine",
@@ -7216,7 +6797,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 170.2329127878473
+          "value_ug_per_l": 170.23291936846022
         },
         {
           "label": "pot A: xylose + thiamine + glutathione",
@@ -7241,7 +6822,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 130.946559088493
+          "value_ug_per_l": 130.9465593916735
         }
       ]
     },
@@ -7262,10 +6843,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1208.3989272430292,
-        682.2657849881411
+        1208.3989273150316,
+        682.2657849881496
       ],
-      "log10_ratio_B_over_A": -0.24825673870554668,
+      "log10_ratio_B_over_A": -0.24825673873141882,
       "arms": [
         {
           "label": "thiamine HCl 0.05 mol + xylose 1 mol in 250 mL",
@@ -7291,7 +6872,7 @@
           "warnings": [
             "the buffer spec CLAMPS the pH. The dynamic pH state is switched off for this run and the declared pH is held for the whole hold, which is an assumption about the experiment, not a prediction about it."
           ],
-          "value_ug_per_l": 1208.3989272430292
+          "value_ug_per_l": 1208.3989273150316
         },
         {
           "label": "thiamine HCl alone",
@@ -7316,7 +6897,7 @@
           "warnings": [
             "the buffer spec CLAMPS the pH. The dynamic pH state is switched off for this run and the declared pH is held for the whole hold, which is an assumption about the experiment, not a prediction about it."
           ],
-          "value_ug_per_l": 682.2657849881411
+          "value_ug_per_l": 682.2657849881496
         }
       ]
     },
@@ -7356,7 +6937,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 5523.007712978032
+          "value_ug_per_l": 5523.007717239661
         },
         {
           "label": "glucose + glutathione",
@@ -7555,8 +7136,8 @@
             "The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPUT (an oxidation-state proxy): there is no route that makes a lipid aldehyde from a sugar or an amino acid. Name a carrier (frankel_pure_hydroperoxide, pea_protein_isolate, soy_protein_isolate) or supply a peroxide value."
           ],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "pH 5.6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "value_ug_per_l": null
@@ -7588,8 +7169,8 @@
             "The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPUT (an oxidation-state proxy): there is no route that makes a lipid aldehyde from a sugar or an amino acid. Name a carrier (frankel_pure_hydroperoxide, pea_protein_isolate, soy_protein_isolate) or supply a peroxide value."
           ],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "pH 5.6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "value_ug_per_l": null
@@ -7635,8 +7216,8 @@
             "The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPUT (an oxidation-state proxy): there is no route that makes a lipid aldehyde from a sugar or an amino acid. Name a carrier (frankel_pure_hydroperoxide, pea_protein_isolate, soy_protein_isolate) or supply a peroxide value."
           ],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "pH 5.6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "value_ug_per_l": null
@@ -7668,8 +7249,8 @@
             "The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPUT (an oxidation-state proxy): there is no route that makes a lipid aldehyde from a sugar or an amino acid. Name a carrier (frankel_pure_hydroperoxide, pea_protein_isolate, soy_protein_isolate) or supply a peroxide value."
           ],
           "warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 223-9.18e+05 on the rate.",
             "pH 5.6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "value_ug_per_l": null
@@ -7772,10 +7353,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        209.09245713606774,
-        344.6253108305238
+        209.09245679796928,
+        344.6253112028723
       ],
-      "log10_ratio_B_over_A": 0.2170088045895091,
+      "log10_ratio_B_over_A": 0.21700880576098597,
       "arms": [
         {
           "label": "pH 6.5",
@@ -7801,7 +7382,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 209.09245713606774
+          "value_ug_per_l": 209.09245679796928
         },
         {
           "label": "pH 4.0",
@@ -7827,7 +7408,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 344.6253108305238
+          "value_ug_per_l": 344.6253112028723
         }
       ]
     },

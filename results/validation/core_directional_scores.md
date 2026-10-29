@@ -2,11 +2,11 @@
 
 Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 21/38 (55%)**; 37 independent claims not evaluable
-* independent, excluding pH and water activity: 15/27 (56%); pH and water activity alone: 6/11 (55%)
-* all claims (independent + fit-adjacent + fit-system overlap): 31/61 (51%); 58 not evaluable
+* **headline (strictly independent, evaluable): 20/33 (61%)**; 42 independent claims not evaluable
+* independent, excluding pH and water activity: 14/22 (64%); pH and water activity alone: 6/11 (55%)
+* all claims (independent + fit-adjacent + fit-system overlap): 30/56 (54%); 63 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 3
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (39); a predicted concentration is zero; no direction is defined (7); refused by the engine (3); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, a (1); arm 'lysine 1x (40 mM)' refused (1); a predicted concentration is zero; no ranking is defined (1); arm 'glucose + glutathione' refused (1); arm 'cysteine alone' refused (1); arm 'beef triglyceride alone' refused (1); arm 'egg PC alone' refused (1); arm 'methionine alone' refused (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (39); a predicted concentration is zero; no direction is defined (6); refused by the engine (3); the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine  (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine  (1); the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cyste (1); the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, a (1); the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methyl (1); arm 'lysine 1x (40 mM)' refused (1); a predicted concentration is zero; no ranking is defined (1); arm 'glucose + glutathione' refused (1); arm 'cysteine alone' refused (1); arm 'beef triglyceride alone' refused (1); arm 'egg PC alone' refused (1); arm 'methionine alone' refused (1)
 
 ## Per category (strictly independent claims)
 
@@ -19,11 +19,11 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | moisture_aw | 1 | 1 | 1.00 | 3 | - |
 | ph | 5 | 10 | 0.50 | 5 | PH-07, HOX-03, CER07-PH-01, CER07-PH-02, MOD08-PH-01 |
 | process_heating | 0 | 0 | - | 1 | - |
-| ranking | 0 | 1 | 0.00 | 3 | MOT-03 |
+| ranking | 0 | 0 | - | 4 | - |
 | scope | 0 | 0 | - | 3 | - |
-| sugar_identity | 5 | 11 | 0.45 | 5 | SUG-03, SUG-12, HOF-02, HOF-03, DIC-01, DIC-03 |
+| sugar_identity | 4 | 8 | 0.50 | 8 | SUG-03, SUG-12, HOF-03, DIC-01 |
 | sulfur_donor | 2 | 2 | 1.00 | 3 | - |
-| temperature | 5 | 9 | 0.56 | 2 | TEMP-01, TEMP-05, YIL-01, YIL-02 |
+| temperature | 5 | 8 | 0.62 | 3 | TEMP-01, TEMP-05, YIL-01 |
 | time | 2 | 3 | 0.67 | 2 | Z23C-T-01 |
 
 ## Per category (all claims)
@@ -37,11 +37,11 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | moisture_aw | 1 | 1 | 1.00 | 6 |
 | ph | 10 | 17 | 0.59 | 8 |
 | process_heating | 0 | 0 | - | 4 |
-| ranking | 1 | 4 | 0.25 | 3 |
+| ranking | 1 | 3 | 0.33 | 4 |
 | scope | 0 | 0 | - | 3 |
-| sugar_identity | 7 | 15 | 0.47 | 7 |
+| sugar_identity | 6 | 12 | 0.50 | 10 |
 | sulfur_donor | 2 | 3 | 0.67 | 3 |
-| temperature | 5 | 9 | 0.56 | 4 |
+| temperature | 5 | 8 | 0.62 | 5 |
 | time | 3 | 6 | 0.50 | 7 |
 
 ## Claims
@@ -86,7 +86,7 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | SUG-10 | sugar_identity | retired | 2,5-Dimethylpyrazine | decreasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | SUG-11 | sugar_identity | independent | FFT | A<B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | SUG-12 | sugar_identity | independent | HMF | A>B | **disagree** | trunk | 948, 1.54e+03 |  |
-| SUG-13 | sugar_identity | independent | Furfural | A>B | **agree** | sulfur | 17.5, 3.42 |  |
+| SUG-13 | sugar_identity | independent | Furfural | A>B | **not_evaluable** | - | - | the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructose, 165 C 8 min 276) is within measurement noise (< 1.4x); no model, however good |
 | PH-06 | ph | independent | 2,5-Dimethylpyrazine | increasing | **agree** | trunk | 0.000311, 6.92, 21.8 |  |
 | PH-07 | ph | independent | Furfural | flat | **disagree** | sulfur | 18.7, 17.5, 17.4 |  |
 | TEMP-04 | temperature | independent | 2,5-Dimethylpyrazine | A>B | **agree** | trunk | 0.0016, 4.37e-06 |  |
@@ -100,13 +100,13 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | ACR-02 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 7.64, 935, 4.37 |  |
 | TIME-02 | time | independent | HMF | increasing | **agree** | trunk | 53.2, 1.1e+03, 1.54e+03 |  |
 | SCOPE-03 | scope | independent | 2-Pentylfuran | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| HOF-01 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
-| HOF-02 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 543, 746 |  |
+| HOF-01 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine + D-glucose, 145 C 20 min pH 5.0 1.9) is within measurement noise (< 1.4x); no m |
+| HOF-02 | sugar_identity | independent | FFT | A>B | **not_evaluable** | - | - | the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine + D-glucose, 145 C 20 min pH 5.0 2.8) is within measurement noise (< 1.4x); no m |
 | HOF-03 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 0.74, 1.2 |  |
 | HOF-04 | moisture_aw | independent | MFT, FFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MOT-01 | ph | independent | MFT | A>B | **agree** | sulfur | 97, 45.5 |  |
 | MOT-02 | ph | independent | FFT | A>B | **agree** | sulfur | 2.12e+03, 215 |  |
-| MOT-03 | ranking | independent | MFT | A>B | **disagree** | sulfur | 45.5, 45.5 | identical predictions |
+| MOT-03 | ranking | independent | MFT | A>B | **not_evaluable** | - | - | the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cysteine + ribose, phosphate pH 5.6 1750) is within measurement noise (< 1.4x); no mo |
 | MOT-04 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MOT-05 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MOT-06 | ph | independent | MFT | A<B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -118,7 +118,7 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | HOX-06 | additive_cysteine | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | HOX-07 | ranking | independent | FFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | YIL-01 | temperature | independent | MFT | decreasing | **disagree** | sulfur | 10.3, 12, 12.9, 12.7 |  |
-| YIL-02 | temperature | independent | FFT | A>B | **disagree** | sulfur | 167, 299 |  |
+| YIL-02 | temperature | independent | FFT | A>B | **not_evaluable** | - | - | the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement noise (< 1.4x); no model, however good, can be scored on it |
 | WANG-01 | temperature | independent | MFT | peak | **not_evaluable** | sulfur | 7.11, 62.7, 198, 404, 675 | the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, agree at ph 9); the source does not state it |
 | WANG-02 | temperature | independent | FFT | peak | **agree** | sulfur | 49.5, 1.82e+03, 2.06e+04, 4.56e+04, 2.76e+04 |  |
 | MENG-01 | temperature | independent | MFT, FFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -126,7 +126,7 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | PH-ACR-01 | ph | fit_adjacent | Acrylamide | A>B | **agree** | acrylamide | 5.31e+04, 2.73e+04 |  |
 | DIC-01 | sugar_identity | independent | 3-deoxyglucosone, glucosone, methylglyoxal, glyoxal, diacetyl | ranking | **disagree** | trunk | 1.54e+04, 12, 978, 38.1, 0.0285 |  |
 | DIC-02 | sugar_identity | independent | glucosone, glyoxal, methylglyoxal, diacetyl | ranking | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| DIC-03 | sugar_identity | independent | 3-deoxyglucosone, glucosone, glyoxal, methylglyoxal | ranking | **disagree** | trunk | 6.55e+04, 119, 161, 2.55e+03 |  |
+| DIC-03 | sugar_identity | independent | 3-deoxyglucosone, glucosone, glyoxal, methylglyoxal | ranking | **not_evaluable** | - | - | the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methylglyoxal 2.6) is within measurement noise (< 1.4x); no model, however good, can b |
 | RIB-T-01 | time | independent | MFT | decreasing | **agree** | sulfur | 2.06, 0.031, 0.00132 |  |
 | RIB-T-02 | time | independent | FFT | flat | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
 | HEX-T-01 | time | independent | FFT | increasing | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
