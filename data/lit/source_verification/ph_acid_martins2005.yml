@@ -1,0 +1,66 @@
+# SOURCE VERIFICATION -- sub-model 1 (pH and acid production), Martins & van Boekel 2005 Food Chem 90:257
+# (fit table data/lit/fit_rows/ph_acid_martins2005.yml). Format and the five checks: the header of
+# data/lit/source_verification.yml. FIRST READER: agent-m2005-reader1-2026-10-29, against the PDF
+# (data/articles/martins2005.pdf), not the dossier or the existing timeseries files (not opened). Second reader pending.
+# `notes` is an extra field: what was checked, what was corrected, and why rows were left out.
+
+entries:
+- ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  source_file: martins2005.pdf
+  read_by: agent-m2005-reader1-2026-10-29
+  second_reader: agent-m2005-reader2-2026-10-29
+  date: 2026-10-29
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: 'Equimolar solutions of D-glucose and glycine (0.2 mol L−1) were prepared in phosphate buffer (10 mL, 0.1 mol L−1,
+    pH 6.8), filtered (0.2 µm, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 °C in an oil bath, in
+    screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately
+    cooled in ice water, prior to analyses. ... Each reaction mixture was prepared, heated and analysed at least in
+    duplicate.'
+  notes: 'SOURCE: data/articles/martins2005.pdf (13 pp., the journal paper). data/articles/martins2003.pdf is NOT the
+    Wageningen thesis: it is Martins & van Boekel 2003 Carbohydr Res 338:1665 (DFG degradation Part II); thesis Figs.
+    5.9 / 5.10 were not available and not read. All figures in martins2005.pdf are vector graphics; every value is a
+    marker centre read from the content stream (pdftocairo -svg; x = spoke origin of the x / + markers, diamond = top-vertex
+    x and side-vertex y, which coincide with the error-bar origins in Fig. 1c), axes calibrated on the tick paths.
+    CONDITIONS as the ledger: Glc 0.2 M + Gly 0.2 M, 0.1 M phosphate (counter-ion not stated), pH 6.8 before heating
+    and not controlled ("the effect of a non-constant pH, if any, is concealed in the rate constants", p. 267), 10 mL
+    screw-capped Schott tubes in an oil bath, 80-120 C, samples cooled in ice water. The temperature at which pH was set
+    or read is not stated in this paper (Martins 2005b: initial pH set at 20 C). Printed acid spans: 80 C 0-180 min,
+    100 C 0-150 min (Figs. 6c/7c; Fig. 8d to 120) and 0-240 min (Fig. 1c), 120 C 0-30 min; 90 and 110 C acids are not
+    printed (Fig. 8 shows 80/100/120 C "as example"). UNITS: axes "Acids mmol/l" (Fig. 1c), "mmol/L" (Figs. 6c, 7c),
+    "Acids mmol/L" (Fig. 8d); pH axis Fig. 1c. QUANTIFICATION: "The used methodology has been described previously
+    (Martins et al., 2003a)" = martins2003b.pdf sec. 2.7: HPLC, ION-300 ion-exchange column, 2.5 mmol/L H2SO4, UV 210
+    nm, "All compounds were quantified by external standards" -> calibrated, as the ledger. pH: electrode, method not
+    described. Figs. 6-8 plot three markers per time (triplicates); Fig. 1 plots "averages of duplicates" with error bars
+    the caption does not define (recorded as bar_half_length_undefined, not sd). DUPLICATES (corrected): (1) the paper
+    holds TWO 100 C run sets, which the ledger lumps: Fig. 1 (means of duplicates; 0, 15, 30, 60, ..., 240 min; never
+    45 min) and Figs. 6c / 7c / 8d (triplicates; 0, 15, 30, 45, 60, 90, 120, 150 min). Their acids differ beyond read
+    error (AA at 60 / 90 / 120 / 150 min: Fig. 1c 7.32 / 10.85 / 13.41 / 15.24 vs Fig. 7c 5.39-6.18 / 9.33-9.59 /
+    11.04-12.09 / 12.75-13.40; FA agrees), so Fig. 1c is not a subset of the Fig. 6-8 replicates; each set is a pot of
+    its own. Figs. 6c, 7c and 8d replot ONE data set (100 C taken once, from Fig. 7c). (2) The Fig. 6-8 100 C set is the
+    pH 6.8 "control" of Martins 2005b: its Fig. 7h AA (+) read here at 15-150 min matches replicate by replicate (120
+    min: 12.04 / 10.99 / 11.68 vs 12.09 / 11.04 / 11.69) -- ledger martins2005b_fig7_ten_responses_five_ph should carry
+    duplicate_of: martins2005_glc_gly_multiresponse_timecourses for its pH 6.8 series (not in a fit table yet). (3) pH:
+    the 2005b Fig. 4 pH 6.8 series (ph_acid_submodel.yml, martins2005b_ph68) and this Fig. 1c pH series are judged NOT
+    the same series: 2005b samples 0, 15, 30, 45, 60, 90, ..., 240 min (the Fig. 6-8 grid, with 45 min) while Fig. 1
+    never has 45 min; the error bars differ (Fig. 1c +-0.055-0.09 pH at 90-210 min, 2005b +-0.02-0.04); means agree
+    within 0.036 pH at all ten shared times (Fig. 1c 6.726 / 6.652 / 6.561 / 6.360 / 6.195 / 5.994 / 5.866 / 5.738 /
+    5.628 / 5.500 vs 2005b vector read 6.754 / 6.653 / 6.574 / 6.358 / 6.159 / 5.981 / 5.842 / 5.743 / 5.604 / 5.506 at
+    0 / 15 / 30 / 60 / 90 / 120 / 150 / 180 / 210 / 240 min). Most likely the pH of two run sets of one system, so the
+    Fig. 1c pH rows ARE entered (confidence ~75 %); if the second reader or the thesis shows 2005b Fig. 4 pools the
+    Fig. 1 runs, drop the 10 Fig. 1c pH rows (keep its acids). VALUES: 121 rows. Fig. 8d: 66 x + 66 diamond markers
+    = 3 replicates x (9 times at 80 C + 7 at 100 C + 6 at 120 C); 80 C FA rows 9, AA 12; 120 C FA 15, AA 15 (5, 10, 15,
+    20, 30 min); 100 C (Fig. 7c) FA 21, AA 21; Fig. 1c FA 9, AA 9, pH 10. Read errors: Fig. 8d one coordinate quantum
+    (0.618 pt = 0.135 mmol/L); Fig. 7c max(0.13 mmol/L, the cross-figure spread at that time: FA 30 min 0.52, FA 45 min
+    0.38, AA 15 min 0.15, AA 90 min 0.16, AA 120 min 0.14 mmol/L -- Fig. 8d plots the early 100 C FA lower than Figs.
+    6c / 7c, unexplained); Fig. 1c half a quantum (0.061 mmol/L; pH +-0.01). LEFT OUT: t = 0 acid markers (all 0 except
+    one 120 C AA replicate at 0.135); 80 C FA at 15 / 30 / 45 / 60 / 90 min and AA at 15 / 30 / 45 / 60 min, all three
+    replicates plotted on the axis (0.000, no LOD stated; a zero has no log residual). Dossier checks: "acetic acid ~ 17
+    mmol/L, formic ~ 3.5 mmol/L, pH 6.8 -> ~5.5 at 4 h, 100 C" agrees with Fig. 1c (17.56 / 3.66 / 5.50); text p. 260 "25%
+    of the degraded D-glucose was transformed into acetic acid whereas only 5% was formic acid" is of the order of Fig. 1c
+    (17.56 and 3.66 mmol/L against a glucose loss of roughly 60-80 mmol/L in Fig. 1a, not digitised). Scratch scripts and raw marker dumps: first reader''s session scratchpad (not in
+    the repo).'

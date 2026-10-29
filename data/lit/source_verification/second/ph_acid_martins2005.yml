@@ -1,0 +1,73 @@
+# Second reader, Martins & van Boekel 2005 (Food Chem 90:257), formic and acetic acid (and the pH question), sub-model 1.
+# Independent of the first reading (data/lit/timeseries/martins2005_*.yml, data/lit/fit_rows/ph_acid_martins2005.yml and
+# data/lit/source_verification/ph_acid_martins2005.yml not opened). Rows: data/lit/fit_rows/second/ph_acid_martins2005.yml.
+reader: agent-m2005-reader2-2026-10-29
+role: independent second reader, sub-model 1 (pH and acid production), Martins 2005 glucose/glycine time courses
+entries:
+- ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  source_file: martins2005.pdf
+  read_by: agent-m2005-reader2-2026-10-29
+  second_reader: self
+  date: '2026-10-29'
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: 'Equimolar solutions of D-glucose and glycine (0.2 mol L-1) were prepared in phosphate buffer (10 mL, 0.1 mol L-1,
+    pH 6.8), filtered (0.2 um, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 C in an oil bath, in screw-capped
+    glass tubes (Schott, 16 x 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water,
+    prior to analyses. [...] Each reaction mixture was prepared, heated and analysed at least in duplicate. / Fig. 1 text: "In
+    Fig. 1 the decrease of reactants and formation of reaction products is shown as averages of duplicates at 100 C." / Fig. 8
+    caption: "Kinetic model validation. Simulations (drawn lines) based on the kinetic model of Scheme 4 for glucose/glycine
+    system heated at 80 C (- - -), 100 C (- - -) and 120 C (---). [...] (d) formic acid (x), acetic acid (filled diamond)"'
+  notes: 'Source: martins2005.pdf (the journal paper). martins2003.pdf on disk is NOT the 2003 Wageningen thesis: it is Martins
+    & van Boekel 2003, Carbohydr. Res. 338:1665 (DFG degradation, Part II), so thesis Figs. 5.9/5.10 could not be checked. All
+    acid figures in martins2005.pdf are vector (the only raster on the paper is Fig. 5): values are exact marker coordinates
+    from pdftocairo -svg (diamond = top-vertex x, side-vertex y; x = shared start of the four strokes; Fig. 1c = the error-bar
+    path, whose first point per bar is the data point), calibrated by a least-squares fit on the printed ticks (max tick
+    residual 0.07 mmol/L), zero anchored on the 0 tick. Coordinates snap to a 0.62-0.64 pt grid (0.12-0.14 mmol/L).
+    Conditions: glucose 0.2 M + glycine 0.2 M, 0.1 M phosphate (counter-ion not stated in this paper), initial pH 6.8, pH not
+    held, 10 mL screw-cap tubes in an oil bath, 80-120 C; temperature at which the pH was set or read is not stated here
+    (2005b, same lab and recipe: set at 20 C, reported as measured at room temperature). 90 and 110 C acid series are not
+    printed (Fig. 8 shows 80/100/120 C only; Figs. 2-4 show 90/110 C for fructose, DFG and melanoidins, not acids).
+    Units: y axes "Acids mmol/l" (Fig. 1c), "mmol/L" (Figs. 6c, 7c), "Acids mmol/L" (Fig. 8d). Quantification: methods by
+    reference to Martins et al. 2003a (HPLC, external standards per the companion DFG papers) -> calibrated, as the ledger
+    says. Error bars: Fig. 1c bars are not defined (averages of duplicates; SD or range not stated) -> recorded as
+    bar_half_length_undefined, not sd; Figs. 6-8 have no bars but three markers per time (replicates). What was read:
+    80 C Fig. 8d (0-180 min, 9 times x 3), 120 C Fig. 8d (0, 5, 10, 15, 20, 30 min x 3), 100 C Figs. 6c/7c (0-150 min, 8 times
+    x 3) and Fig. 8d (0-120 min), 100 C Fig. 1c means (0, 15, 30, 60, ..., 240 min) with the pH trajectory. Rows: 80 C AA 12,
+    FA 9; 100 C replicates AA 21, FA 21; 100 C Fig. 1c means AA 9, FA 9; 120 C AA 15, FA 15 (111). Not transcribed: t = 0
+    (zero), 80 C AA <= 60 min and FA <= 90 min (on the zero axis). Values sample: 120 C 30 min AA 17.58 / 18.25 / 17.30, FA 4.06
+    / 4.19 / 3.51; 100 C 120 min AA 12.07 / 10.98 / 11.76 (Fig. 6c/7c/8d mean); 80 C 180 min AA 1.22 x3; Fig. 1c 240 min AA 17.60,
+    FA 3.67. Read error: 100 C replicate rows = max deviation of the 2-3 renderings from their mean (floor 0.07 mmol/L);
+    single-rendering rows (80, 120 C, Fig. 1c) = 0.15 mmol/L, from the cross-rendering scatter (rms 0.064, max 0.29 mmol/L,
+    largest for FA at 30-45 min where Fig. 8d reads 0.1-0.35 lower than Figs. 6c/7c). pH (Fig. 1c, read for the duplicates
+    check only, error-bar centres): 0 6.73, 15 6.66, 30 6.57, 60 6.36, 90 6.20, 120 6.00, 150 5.87, 180 5.74, 210 5.63, 240 5.51.'
+  duplicates_evidence:
+  - 'pH: Fig. 1c pH (100 C) vs Martins 2005b (martins2005b.pdf) Fig. 4 pH 6.8 (asterisks, vector read the same way): 2005b
+    0 6.76, 15 6.66, 30 6.58, 45 6.52, 60 6.36, 90 6.16, 120 5.98, 150 5.85, 180 5.75, 210 5.61, 240 5.51; the 10 shared times
+    agree within 0.04 pH (mean |diff| 0.015, at the read resolution of 0.02-0.03 pH); same lab, recipe, buffer and 0-240 min
+    grid (2005b adds a 45 min point). Judged the same experiment -> no pH rows entered here; the pH series belongs to
+    martins2005b_fig4_ph_drift_ladder (the 2005 paper is the earlier publication: received Jan 2004 vs May 2004).'
+  - 'Acids, within this paper: Figs. 6c, 7c and 8d (100 C) plot one data set three times (same three values per time, same
+    marker order, agreement within 0.3 mmol/L, typically < 0.1); entered once (pot martins2005_100c_replicates, mean of the
+    renderings).'
+  - 'Acids, across papers: Martins 2005b Fig. 7g/h, pH 6.8 (+) series (100 C, 0-150 min, three markers per time) is the same
+    100 C replicate data (e.g. AA 120 min 12.04 / 10.99 / 11.68 vs 12.07 / 10.98 / 11.76 here; 150 min 13.41 / 12.72 / 13.08 vs
+    13.44 / 12.73 / 13.05). martins2005b_fig7_ten_responses_five_ph pH 6.8 acids must not be fitted alongside these rows.'
+  - 'NOT a duplicate: Fig. 1c acids (averages of duplicates) differ from the Figs. 6-8 replicates: different time grid (no
+    45 min, to 240 min) and AA 15-30 % higher at shared times (60 min 7.33 vs 5.32 / 6.19 / 5.53; 120 min 13.45 vs 12.07 / 10.98
+    / 11.76) while FA agrees (120 min 2.32 vs 2.18 / 2.44 / 2.44). Kept as a separate pot (martins2005_100c_fig1_means): a
+    second sample set at 100 C, or the same runs analysed/averaged differently -- the paper does not say. Its acids are the
+    samples whose pH 2005b Fig. 4 prints, so this pot is the one that couples acid to pH.'
+  corrections_vs_ledger:
+  - 'Location: the multi-temperature acid read is Fig. 8d (80/100/120 C); 100 C also in Figs. 6c and 7c (to 150 min, the same
+    data) and in Fig. 1c (means to 240 min, a different sample set). The ledger points the reader at thesis Figs. 5.9/5.10;
+    the thesis is not on disk (martins2003.pdf is Carbohydr. Res. 338:1665).'
+  - 'Flags: add the cross-paper copies -- Fig. 1c pH = martins2005b_fig4_ph_drift_ladder (pH 6.8); Figs. 6-8 100 C acids =
+    martins2005b_fig7_ten_responses_five_ph (pH 6.8 series). Neither carries a duplicate_of flag.'
+  - 'Replicates: Figs. 6-8 print three markers per time, though the methods say "at least in duplicate" and Fig. 1 "averages
+    of duplicates". Replicate index in the rows = drawing order within a time point, not a run identity across times.'
+  - 'Pots: two 100 C pots (replicates and Fig. 1c means) rather than one, for the reason above; the adjudicator may merge.'

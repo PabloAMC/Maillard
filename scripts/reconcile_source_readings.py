@@ -10,7 +10,8 @@ same names under second/. This script compares them, per ledger id:
   * verdicts    -- both readers' five checks must be pass / corrected;
   * pots        -- matched across readers by their numeric conditions (the two name pots differently): temperature,
                    time, initial mmol/L, label pH must agree to 1 %;
-  * rows        -- matched by (pot, species, time); values must agree within the larger of the two rows' errors
+  * rows        -- matched by (pot, species, time), replicates paired in sorted order; values must agree within the
+                   larger of the two rows' errors
                    (dex for amounts, pH units for pH), or to 1 % where both transcribe a printed number exactly.
 It writes results/validation/source_reading_reconciliation_<name>.md. With --promote it records the second reader in
 the first reader's verification entry for every ledger id that agrees on all four, which makes that source verified;
@@ -134,19 +135,27 @@ def reconcile(name: str) -> dict:
             q = theirs[k2]
             problems.append(f"second reader's pot {k2} ({q.get('t_c')} C, {q.get('minutes')} min, label pH {_label_ph(q)}, {q.get('initial_mmol_L')}) "
                             f"has no matching pot in the first reading")
-        index2 = {(r["pot"], _species(r["species"]), float(r["t_min"])): r for r in rows2}
+        # replicates share (pot, species, time); their drawing order is not a run identity, so each reading's
+        # replicates are paired in sorted order and compared as multisets
+        groups1: Dict[tuple, list] = {}
+        groups2: Dict[tuple, list] = {}
         for r in rows1:
-            if r.get("pot") not in mapping:
+            if r.get("pot") in mapping:
+                groups1.setdefault((mapping[r["pot"]], _species(r["species"]), float(r["t_min"])), []).append(r)
+        for s_ in rows2:
+            if s_.get("pot") in mapping.values():
+                groups2.setdefault((s_["pot"], _species(s_["species"]), float(s_["t_min"])), []).append(s_)
+        for key in sorted(set(groups1) | set(groups2), key=str):
+            mine_rows = sorted(groups1.get(key, []), key=lambda r: float(r["value"]))
+            their_rows = sorted(groups2.get(key, []), key=lambda r: float(r["value"]))
+            pot, species, t = key
+            if len(mine_rows) != len(their_rows):
+                problems.append(f"{pot}/{species}@{t:g}: {len(mine_rows)} row(s) in the first reading, {len(their_rows)} in the second "
+                                f"({[r['value'] for r in mine_rows]} vs {[r['value'] for r in their_rows]})")
                 continue
-            key = (mapping[r["pot"]], _species(r["species"]), float(r["t_min"]))
-            s = index2.pop(key, None)
-            if s is None:
-                problems.append(f"row {r['pot']}/{r['species']}@{r['t_min']} = {r['value']} {r['unit']}: not in the second reading")
-            elif not _rows_agree(r, s):
-                problems.append(f"row {r['pot']}/{r['species']}@{r['t_min']}: {r['value']} vs {s['value']} {r['unit']}")
-        for (pot, species, t), s in index2.items():
-            if pot in mapping.values():
-                problems.append(f"second reader's row {pot}/{species}@{t} = {s['value']} {s['unit']}: not in the first reading")
+            for r, s_ in zip(mine_rows, their_rows):
+                if not _rows_agree(r, s_):
+                    problems.append(f"row {r['pot']}/{r['species']}@{r['t_min']}: {r['value']} vs {s_['value']} {r['unit']}")
         if problems:
             out["disagree"][lid] = problems
         else:

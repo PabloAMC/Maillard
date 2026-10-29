@@ -1,0 +1,1293 @@
+name: ph_acid_martins2005
+status: draft
+reader: agent-m2005-reader2-2026-10-29
+note: 'Second reader''s independent transcription of Martins & van Boekel 2005 Food Chem 90:257 (martins2005.pdf; martins2003.pdf
+  is the Carbohydr. Res. 338:1665 DFG paper, not the thesis). Figures are vector: values are the exact marker/error-bar coordinates
+  of pdftocairo -svg output, calibrated on the printed ticks (least squares, max tick residual 0.07 mmol/L), zero anchored on the
+  0 tick. Concentrations mmol/L; read_error in dex; sd none (no figure defines its bars). Times are the nominal sampling times
+  (marker x within 1.3 min). Points on the zero axis are not transcribed (no log residual): every t = 0 point (all at zero except
+  one 120 C AA marker one grid step up, 0.135 mmol/L), 80 C AA to 60 min and 80 C FA to 90 min. Replicate index = drawing order
+  within a time point (the three markers of one time are drawn consecutively), not a run identity across times. pH: Fig. 1c prints
+  the 100 C trajectory, but it is the Martins 2005b Fig. 4 pH 6.8 series (same values at 10 shared times, within 0.04 pH), so no
+  pH rows here.'
+pots:
+  martins2005_80c:
+    ledger_id: martins2005_glc_gly_multiresponse_timecourses
+    t_c: 80
+    minutes: 180
+    initial_mmol_L:
+      Glc: 200.0
+      Gly: 200.0
+    buffer: phosphate 0.1 mol/L (counter-ion not stated here); pH not held
+    label_ph: 6.8
+    ph_measured_at: not stated in this paper (samples cooled in ice water before analyses); the companion paper (Martins & van
+      Boekel 2005b, same lab and recipe) states the initial pH was set at 20 C and reports pH "as measured at room temperature"
+    ph_control: none (drifting; Fig. 1c shows 6.73 -> 5.50 over 240 min at 100 C)
+    vessel: screw-capped glass tubes 16 x 160 mm, 10 mL, oil bath
+    source_figure: Fig. 8d (80 C, dashed), three markers per time
+    condition_quote: Equimolar solutions of D-glucose and glycine (0.2 mol L-1) were prepared in phosphate buffer (10 mL, 0.1 mol
+      L-1, pH 6.8), filtered (0.2 um, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 C in an oil bath, in screw-capped
+      glass tubes (Schott, 16 x 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water,
+      prior to analyses.
+  martins2005_100c_replicates:
+    ledger_id: martins2005_glc_gly_multiresponse_timecourses
+    t_c: 100
+    minutes: 150
+    initial_mmol_L:
+      Glc: 200.0
+      Gly: 200.0
+    buffer: phosphate 0.1 mol/L (counter-ion not stated here); pH not held
+    label_ph: 6.8
+    ph_measured_at: not stated in this paper (samples cooled in ice water before analyses); the companion paper (Martins & van
+      Boekel 2005b, same lab and recipe) states the initial pH was set at 20 C and reports pH "as measured at room temperature"
+    ph_control: none (drifting; Fig. 1c shows 6.73 -> 5.50 over 240 min at 100 C)
+    vessel: screw-capped glass tubes 16 x 160 mm, 10 mL, oil bath
+    source_figure: 'Figs. 6c and 7c (0-150 min) and Fig. 8d (100 C, dotted, 0-120 min): one data set plotted three times, three
+      markers per time'
+    condition_quote: Equimolar solutions of D-glucose and glycine (0.2 mol L-1) were prepared in phosphate buffer (10 mL, 0.1 mol
+      L-1, pH 6.8), filtered (0.2 um, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 C in an oil bath, in screw-capped
+      glass tubes (Schott, 16 x 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water,
+      prior to analyses.
+  martins2005_100c_fig1_means:
+    ledger_id: martins2005_glc_gly_multiresponse_timecourses
+    t_c: 100
+    minutes: 240
+    initial_mmol_L:
+      Glc: 200.0
+      Gly: 200.0
+    buffer: phosphate 0.1 mol/L (counter-ion not stated here); pH not held
+    label_ph: 6.8
+    ph_measured_at: not stated in this paper (samples cooled in ice water before analyses); the companion paper (Martins & van
+      Boekel 2005b, same lab and recipe) states the initial pH was set at 20 C and reports pH "as measured at room temperature"
+    ph_control: none (drifting; Fig. 1c shows 6.73 -> 5.50 over 240 min at 100 C)
+    vessel: screw-capped glass tubes 16 x 160 mm, 10 mL, oil bath
+    source_figure: 'Fig. 1c: averages of duplicates, 0-240 min, with error bars (undefined) and pH'
+    condition_quote: Equimolar solutions of D-glucose and glycine (0.2 mol L-1) were prepared in phosphate buffer (10 mL, 0.1 mol
+      L-1, pH 6.8), filtered (0.2 um, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 C in an oil bath, in screw-capped
+      glass tubes (Schott, 16 x 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water,
+      prior to analyses.
+    note: 'Fig. 1c acids are NOT the samples of Figs. 6-8: different time grid (no 45 min; to 240 min) and AA 15-30 % higher at
+      shared times (60 min: 7.36 vs 5.32/6.19/5.53; 120 min: 13.47 vs 12.07/10.98/11.76) while FA agrees; text: "shown as averages
+      of duplicates". Kept as its own pot; the adjudicator may merge. Its pH series is the 2005b Fig. 4 pH 6.8 series (not entered).'
+  martins2005_120c:
+    ledger_id: martins2005_glc_gly_multiresponse_timecourses
+    t_c: 120
+    minutes: 30
+    initial_mmol_L:
+      Glc: 200.0
+      Gly: 200.0
+    buffer: phosphate 0.1 mol/L (counter-ion not stated here); pH not held
+    label_ph: 6.8
+    ph_measured_at: not stated in this paper (samples cooled in ice water before analyses); the companion paper (Martins & van
+      Boekel 2005b, same lab and recipe) states the initial pH was set at 20 C and reports pH "as measured at room temperature"
+    ph_control: none (drifting; Fig. 1c shows 6.73 -> 5.50 over 240 min at 100 C)
+    vessel: screw-capped glass tubes 16 x 160 mm, 10 mL, oil bath
+    source_figure: Fig. 8d (120 C, solid), three markers per time
+    condition_quote: Equimolar solutions of D-glucose and glycine (0.2 mol L-1) were prepared in phosphate buffer (10 mL, 0.1 mol
+      L-1, pH 6.8), filtered (0.2 um, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 C in an oil bath, in screw-capped
+      glass tubes (Schott, 16 x 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water,
+      prior to analyses.
+rows:
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 120
+  value: 0.136
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.4808
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.14 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 120
+  value: 0.136
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.4808
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.14 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 120
+  value: 0.136
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.4808
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.14 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 150
+  value: 0.405
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1607
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.41 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 150
+  value: 0.405
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.1607
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.41 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 150
+  value: 0.405
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.1607
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.41 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 180
+  value: 0.811
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0803
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.81 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 180
+  value: 0.675
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0964
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.68 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 180
+  value: 0.675
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0964
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.68 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 5
+  value: 0.405
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1607
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.41 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 5
+  value: 0.27
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.2408
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.27 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 5
+  value: 0.27
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.2408
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.27 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 10
+  value: 1.488
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0438
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 1.49 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 10
+  value: 1.488
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0438
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 1.49 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 10
+  value: 1.488
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0438
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 1.49 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 15
+  value: 2.704
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0241
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 2.70 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 15
+  value: 2.704
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0241
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 2.70 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 15
+  value: 2.569
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0254
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 2.57 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 20
+  value: 3.11
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.021
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 3.11 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 20
+  value: 3.514
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0185
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 3.51 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 20
+  value: 3.651
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0178
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 3.65 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 30
+  value: 4.056
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0161
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 4.06 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 30
+  value: 4.192
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0155
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 4.19 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 30
+  value: 3.514
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0185
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 3.51 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 15
+  value: 0.262
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1161
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.25 / 0.26 / 0.27 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 15
+  value: 0.217
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.1628
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.25 / 0.26 / 0.14 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 15
+  value: 0.217
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.1628
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.25 / 0.26 / 0.14 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 30
+  value: 0.391
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1492
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.38 / 0.53 / 0.27 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 30
+  value: 0.391
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.1492
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.38 / 0.53 / 0.27 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 30
+  value: 0.563
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.2256
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.63 / 0.79 / 0.27 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 45
+  value: 0.739
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1165
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.76 / 0.92 / 0.54 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 45
+  value: 0.825
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0789
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.88 / 0.92 / 0.68 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 45
+  value: 0.869
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0968
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.88 / 1.05 / 0.68 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 60
+  value: 1.132
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0268
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 1.13 / 1.18 / 1.08 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 60
+  value: 1.002
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0304
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 1.01 / 1.05 / 0.95 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 60
+  value: 1.263
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0241
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 1.26 / 1.31 / 1.22 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 90
+  value: 1.873
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0162
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 1.89 / 1.84 / 1.89 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 90
+  value: 1.786
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.017
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 1.76 / 1.84 / 1.76 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 90
+  value: 2.004
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0152
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 2.01 / 1.97 / 2.03 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 120
+  value: 2.179
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.014
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 2.14 / 2.23 / 2.16 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 120
+  value: 2.441
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0125
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 2.39 / 2.50 / 2.43 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 120
+  value: 2.441
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0125
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 2.39 / 2.50 / 2.43 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 150
+  value: 2.764
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.011
+  read_error_basis: max deviation of the 2 renderings (Figs. 6c/7c) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c vector marker centres, 2.77 / 2.76 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 150
+  value: 2.83
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0107
+  read_error_basis: max deviation of the 2 renderings (Figs. 6c/7c) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c vector marker centres, 2.77 / 2.89 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 150
+  value: 2.764
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.011
+  read_error_basis: max deviation of the 2 renderings (Figs. 6c/7c) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c vector marker centres, 2.77 / 2.76 mmol/L
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 15
+  value: 0.123
+  unit: mmol_L
+  read_error: 0.5283
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 0.12 mmol/L
+  bar_half_length_undefined: 0.061
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 30
+  value: 0.489
+  unit: mmol_L
+  read_error: 0.1331
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 0.49 mmol/L
+  bar_half_length_undefined: 0.183
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 60
+  value: 0.978
+  unit: mmol_L
+  read_error: 0.0666
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 0.98 mmol/L
+  bar_half_length_undefined: 0.244
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 90
+  value: 1.833
+  unit: mmol_L
+  read_error: 0.0355
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 1.83 mmol/L
+  bar_half_length_undefined: 0.122
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 120
+  value: 2.322
+  unit: mmol_L
+  read_error: 0.0281
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 2.32 mmol/L
+  bar_half_length_undefined: 0.122
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 150
+  value: 2.69
+  unit: mmol_L
+  read_error: 0.0242
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 2.69 mmol/L
+  bar_half_length_undefined: 0.0
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 180
+  value: 3.056
+  unit: mmol_L
+  read_error: 0.0213
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 3.06 mmol/L
+  bar_half_length_undefined: 0.061
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 210
+  value: 3.423
+  unit: mmol_L
+  read_error: 0.019
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 3.42 mmol/L
+  bar_half_length_undefined: 0.122
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: FA
+  t_min: 240
+  value: 3.667
+  unit: mmol_L
+  read_error: 0.0178
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 3.67 mmol/L
+  bar_half_length_undefined: 0.122
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 90
+  value: 0.136
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.4808
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.14 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 90
+  value: 0.136
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.4808
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.14 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 90
+  value: 0.136
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.4808
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.14 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 120
+  value: 0.54
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1205
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.54 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 120
+  value: 0.54
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.1205
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.54 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 120
+  value: 0.405
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.1607
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.41 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 150
+  value: 0.811
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0803
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.81 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 150
+  value: 0.675
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0964
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.68 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 150
+  value: 0.811
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0803
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 0.81 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 180
+  value: 1.217
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0536
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 1.22 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 180
+  value: 1.217
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0536
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 1.22 mmol/L
+- pot: martins2005_80c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 180
+  value: 1.217
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0536
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 1.22 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 5
+  value: 1.217
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0536
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 1.22 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 5
+  value: 1.217
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0536
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 1.22 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 5
+  value: 1.353
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0482
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 1.35 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 10
+  value: 6.218
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0105
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 6.22 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 10
+  value: 6.489
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.01
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 6.49 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 10
+  value: 5.949
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.011
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 5.95 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 15
+  value: 11.22
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0058
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 11.22 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 15
+  value: 11.491
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0057
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 11.49 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 15
+  value: 9.463
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0069
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 9.46 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 20
+  value: 14.194
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0046
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 14.19 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 20
+  value: 12.438
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0052
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 12.44 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 20
+  value: 12.438
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0052
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 12.44 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 30
+  value: 17.575
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0037
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 17.58 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 30
+  value: 18.252
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0036
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 18.25 mmol/L
+- pot: martins2005_120c
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 30
+  value: 17.305
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0038
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector coordinates snap to a 0.618 pt grid = 0.135 mmol/L, cross-rendering
+    scatter at 100 C rms 0.064, max 0.29), in dex
+  source_value: Fig. 8d vector marker centre, 17.30 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 15
+  value: 0.436
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.089
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.38 / 0.53 / 0.41 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 15
+  value: 0.481
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0934
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.38 / 0.53 / 0.54 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 15
+  value: 0.393
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0774
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 0.38 / 0.39 / 0.41 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 30
+  value: 1.786
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.017
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 1.76 / 1.84 / 1.76 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 30
+  value: 2.004
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0152
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 2.01 / 1.97 / 2.03 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 30
+  value: 1.873
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0162
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 1.89 / 1.84 / 1.89 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 45
+  value: 4.098
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.01
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 4.03 / 4.07 / 4.19 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 45
+  value: 3.921
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0078
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 3.90 / 3.94 / 3.92 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 45
+  value: 4.445
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0068
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 4.41 / 4.47 / 4.46 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 60
+  value: 5.315
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0058
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 5.29 / 5.39 / 5.27 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 60
+  value: 6.187
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0049
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 6.17 / 6.18 / 6.22 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 60
+  value: 5.533
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0055
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 5.54 / 5.52 / 5.54 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 90
+  value: 9.627
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0032
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 9.69 / 9.59 / 9.60 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 90
+  value: 9.369
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0044
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 9.31 / 9.33 / 9.46 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 90
+  value: 9.585
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0032
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 9.57 / 9.59 / 9.60 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 120
+  value: 12.068
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0025
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 12.08 / 12.09 / 12.03 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 120
+  value: 10.979
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0028
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 10.95 / 11.04 / 10.95 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 120
+  value: 11.763
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0026
+  read_error_basis: max deviation of the 3 renderings (Figs. 6c/7c/8d) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c/8d vector marker centres, 11.83 / 11.69 / 11.76 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 150
+  value: 13.435
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0023
+  read_error_basis: max deviation of the 2 renderings (Figs. 6c/7c) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c vector marker centres, 13.47 / 13.40 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 150
+  value: 12.729
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0024
+  read_error_basis: max deviation of the 2 renderings (Figs. 6c/7c) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c vector marker centres, 12.71 / 12.74 mmol/L
+- pot: martins2005_100c_replicates
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 150
+  value: 13.05
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0023
+  read_error_basis: max deviation of the 2 renderings (Figs. 6c/7c) from their mean, floor 0.07 mmol/L (half the 0.618 pt grid),
+    in dex
+  source_value: Figs. 6c/7c vector marker centres, 13.09 / 13.01 mmol/L
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 15
+  value: 0.734
+  unit: mmol_L
+  read_error: 0.0887
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 0.73 mmol/L
+  bar_half_length_undefined: 0.244
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 30
+  value: 2.69
+  unit: mmol_L
+  read_error: 0.0242
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 2.69 mmol/L
+  bar_half_length_undefined: 0.489
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 60
+  value: 7.334
+  unit: mmol_L
+  read_error: 0.0089
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 7.33 mmol/L
+  bar_half_length_undefined: 0.672
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 90
+  value: 10.879
+  unit: mmol_L
+  read_error: 0.006
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 10.88 mmol/L
+  bar_half_length_undefined: 0.55
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 120
+  value: 13.446
+  unit: mmol_L
+  read_error: 0.0048
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 13.45 mmol/L
+  bar_half_length_undefined: 0.55
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 150
+  value: 15.28
+  unit: mmol_L
+  read_error: 0.0043
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 15.28 mmol/L
+  bar_half_length_undefined: 0.611
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 180
+  value: 16.38
+  unit: mmol_L
+  read_error: 0.004
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 16.38 mmol/L
+  bar_half_length_undefined: 0.55
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 210
+  value: 16.991
+  unit: mmol_L
+  read_error: 0.0038
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 16.99 mmol/L
+  bar_half_length_undefined: 0.55
+- pot: martins2005_100c_fig1_means
+  ledger_id: martins2005_glc_gly_multiresponse_timecourses
+  species: AA
+  t_min: 240
+  value: 17.603
+  unit: mmol_L
+  read_error: 0.0037
+  read_error_basis: +-0.15 mmol/L abs (one rendering; vector grid 0.64 pt = 0.122 mmol/L), in dex; error bar not used (undefined)
+  source_value: Fig. 1c error-bar centre (mean of duplicates), 17.60 mmol/L
+  bar_half_length_undefined: 0.856

@@ -1,0 +1,197 @@
+# ADJUDICATED 2026-10-29 (lead): the readers agree on every acid value (replicates paired in sorted order). Fig. 1c's
+# pH is counted once: it is the series already in ph_acid_submodel.yml as martins2005b_ph68 (same laboratory, recipe
+# and time grid; the means agree within 0.04 pH at all ten shared times, the read resolution). Reader 1 entered it
+# (~75 % that it is a separate run set), reader 2 did not; a likely duplicate would double its weight, dropping it
+# loses nothing the table lacks. The two 100 C pots stay apart: their acetic acid differs 15-30 % (same recipe), a
+# between-run-set spread both readers measured.
+# KEYED FIT TABLE -- sub-model 1 (pH and acid production): Martins & van Boekel 2005, Food Chem 90:257
+# (doi 10.1016/j.foodchem.2004.04.006), ledger martins2005_glc_gly_multiresponse_timecourses.
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS). Laboratory and
+# quantification class come from the ledger entry (calibrated: HPLC ION-300, UV 210 nm, external standards, method of
+# Martins, Marcelis & van Boekel 2003a = data/articles/martins2003b.pdf sec. 2.7).
+# DRAFT, FIRST READER (agent-m2005-reader1-2026-10-29), read from data/articles/martins2005.pdf (the journal paper; its
+# figures are vector graphics, read from the content stream via pdftocairo -svg, axes calibrated on their tick paths).
+# data/articles/martins2003.pdf is NOT the thesis: it is Martins & van Boekel 2003, Carbohydr Res 338:1665 (DFG Part II);
+# the thesis (Figs. 5.9 / 5.10) is not on disk and was not read.
+# Verification: data/lit/source_verification/ph_acid_martins2005.yml.
+#
+# WHAT THE PAPER PRINTS (formic acid FA, acetic acid AA, pH; glucose, DFG, deoxyosones, melanoidins not transcribed):
+#   * Fig. 8d: FA (x) and AA (filled diamond), every replicate, at 80 C (0-180 min), 100 C (0-120 min), 120 C (0-30 min);
+#     three markers per time point (triplicates), temperatures told apart by the panel's time span and line style;
+#   * Figs. 6c and 7c: the same 100 C replicates (0-150 min); this table takes 100 C from Fig. 7c (it adds 150 min) and
+#     uses Figs. 6c / 8d as a check: replicate values agree within one coordinate quantum (median |diff| 0.06 mmol/L)
+#     except FA at 30 / 45 min (Fig. 8d lower by up to 0.52 / 0.38 mmol/L) -- that spread is those rows' read error;
+#   * Fig. 1c: FA, AA and pH at 100 C, "averages of duplicates", 0-240 min, with error bars the caption does not define
+#     (kept as bar_half_length_undefined, NOT used as sd). Its acids are NOT the Fig. 6-8 replicates (AA 10.85 vs
+#     9.33-9.59 mmol/L at 90 min, 15.24 vs 12.7-13.4 at 150; no 45 min sample): a second 100 C run set, so its own pot.
+#   * 90 and 110 C acids are not printed (Fig. 8 shows 80 / 100 / 120 C only).
+# Rows left out (listed in the verification notes): t = 0 acid markers (0 by construction; one 120 C AA replicate is
+# plotted at 0.135); 80 C FA 15-90 min and AA 15-60 min, every replicate plotted ON the axis (0.000; no LOD is stated,
+# a zero has no log residual).
+# Count-once notes:
+#   * pot martins2005_glc_gly_100c (Figs. 6c / 7c / 8d) is the SAME data as Martins 2005b Fig. 7g/h pH 6.8 (+)
+#     (ledger martins2005b_fig7_ten_responses_five_ph; 2005b: "The glucose/glycine equimolar system at 100 C and pH 6.8
+#     was used as control"): AA at 120 min 12.04 / 10.99 / 11.68 (2005b) vs 12.09 / 11.04 / 11.69 here. Not in any fit
+#     table yet; if 2005b Fig. 7 is ever transcribed, count once.
+#   * Fig. 1c pH (pot martins2005_glc_gly_100c_fig1) vs Martins 2005b Fig. 4 pH 6.8 (martins2005b_ph68 in
+#     ph_acid_submodel.yml): judged NOT the same series (different sampling grid -- 2005b has 45 min, Fig. 1 never does --
+#     and different error bars, e.g. 120 min +-0.08 here vs +-0.02 there), most likely the pH of a different run set
+#     (Fig. 1 set vs the Fig. 6-8 / 2005b-control set); means agree within 0.036 pH. Entered; see the verification notes.
+# Conventions as data/lit/fit_rows/ph_acid_submodel.yml: replicates are separate rows (`replicate:` k = the k-th marker
+# drawn at that time, i.e. the figure's data-row order; identity of a physical replicate across times is not
+# guaranteed); read_error of a concentration is in dex (log10(e) x absolute error / value), of a pH in pH units.
+status: merged   # verified by two readers and merged into ph_acid_submodel.yml (2026-10-29); kept as the first reading
+pots:
+  martins2005_glc_gly_80c:
+    {ledger_id: martins2005_glc_gly_multiresponse_timecourses,
+     t_c: 80,
+     minutes: 180,
+     initial_mmol_L: {Glc: 200.0, Gly: 200.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated); pH not held",
+     label_ph: 6.8,
+     ph_measured_at: "not stated (initial pH 6.8 set before heating, temperature not stated in this paper; samples cooled in ice water before analyses; companion paper Martins 2005b: initial pH set at 20 C)",
+     source_figure: "Fig. 8d (replicates, triplicate markers)",
+     condition_quote: "Equimolar solutions of D-glucose and glycine (0.2 mol L−1) were prepared in phosphate buffer (10 mL, 0.1 mol L−1, pH 6.8), filtered (0.2 µm, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water, prior to analyses."}
+  martins2005_glc_gly_100c:
+    {ledger_id: martins2005_glc_gly_multiresponse_timecourses,
+     t_c: 100,
+     minutes: 150,
+     initial_mmol_L: {Glc: 200.0, Gly: 200.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated); pH not held",
+     label_ph: 6.8,
+     ph_measured_at: "not stated (initial pH 6.8 set before heating, temperature not stated in this paper; samples cooled in ice water before analyses; companion paper Martins 2005b: initial pH set at 20 C)",
+     source_figure: "Fig. 7c (replicates; same data in Figs. 6c and 8d, and in Martins 2005b Fig. 7g/h pH 6.8)",
+     condition_quote: "Equimolar solutions of D-glucose and glycine (0.2 mol L−1) were prepared in phosphate buffer (10 mL, 0.1 mol L−1, pH 6.8), filtered (0.2 µm, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water, prior to analyses."}
+  martins2005_glc_gly_100c_fig1:  # a second 100 C run set (Fig. 1: means of duplicates, 0-240 min, with pH)
+    {ledger_id: martins2005_glc_gly_multiresponse_timecourses,
+     t_c: 100,
+     minutes: 240,
+     initial_mmol_L: {Glc: 200.0, Gly: 200.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated); pH not held",
+     label_ph: 6.8,
+     ph_t0_plotted: 6.726,
+     ph_measured_at: "not stated (initial pH 6.8 set before heating, temperature not stated in this paper; samples cooled in ice water before analyses; companion paper Martins 2005b: initial pH set at 20 C)",
+     source_figure: "Fig. 1c (averages of duplicates; error bars undefined)",
+     condition_quote: "Equimolar solutions of D-glucose and glycine (0.2 mol L−1) were prepared in phosphate buffer (10 mL, 0.1 mol L−1, pH 6.8), filtered (0.2 µm, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water, prior to analyses."}
+  martins2005_glc_gly_120c:
+    {ledger_id: martins2005_glc_gly_multiresponse_timecourses,
+     t_c: 120,
+     minutes: 30,
+     initial_mmol_L: {Glc: 200.0, Gly: 200.0},
+     buffer: "phosphate 0.10 M (counter-ion not stated); pH not held",
+     label_ph: 6.8,
+     ph_measured_at: "not stated (initial pH 6.8 set before heating, temperature not stated in this paper; samples cooled in ice water before analyses; companion paper Martins 2005b: initial pH set at 20 C)",
+     source_figure: "Fig. 8d (replicates, triplicate markers)",
+     condition_quote: "Equimolar solutions of D-glucose and glycine (0.2 mol L−1) were prepared in phosphate buffer (10 mL, 0.1 mol L−1, pH 6.8), filtered (0.2 µm, Schleicher & Schuell) and heated at 80, 90, 100, 110 and 120 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water, prior to analyses."}
+rows:
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 120, value: 0.135, unit: mmol_L, read_error: 0.4337, replicate: 1, read_error_basis: 'Fig. 8d vector marker centre (pdftocairo -svg); coordinate quantum 0.618 pt = 0.135 mmol/L taken as the absolute read error, in dex'}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 120, value: 0.135, unit: mmol_L, read_error: 0.4337, replicate: 2}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 120, value: 0.135, unit: mmol_L, read_error: 0.4337, replicate: 3}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 150, value: 0.407, unit: mmol_L, read_error: 0.1442, replicate: 1}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 150, value: 0.407, unit: mmol_L, read_error: 0.1442, replicate: 2}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 150, value: 0.407, unit: mmol_L, read_error: 0.1442, replicate: 3}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 180, value: 0.813, unit: mmol_L, read_error: 0.0721, replicate: 1}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 180, value: 0.677, unit: mmol_L, read_error: 0.0866, replicate: 2}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 180, value: 0.677, unit: mmol_L, read_error: 0.0866, replicate: 3}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 90, value: 0.135, unit: mmol_L, read_error: 0.4337, replicate: 1, read_error_basis: 'Fig. 8d vector marker centre (pdftocairo -svg); coordinate quantum 0.618 pt = 0.135 mmol/L taken as the absolute read error, in dex'}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 90, value: 0.135, unit: mmol_L, read_error: 0.4337, replicate: 2}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 90, value: 0.135, unit: mmol_L, read_error: 0.4337, replicate: 3}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 120, value: 0.542, unit: mmol_L, read_error: 0.1082, replicate: 1}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 120, value: 0.542, unit: mmol_L, read_error: 0.1082, replicate: 2}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 120, value: 0.407, unit: mmol_L, read_error: 0.1442, replicate: 3}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 150, value: 0.813, unit: mmol_L, read_error: 0.0721, replicate: 1}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 150, value: 0.677, unit: mmol_L, read_error: 0.0866, replicate: 2}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 150, value: 0.813, unit: mmol_L, read_error: 0.0721, replicate: 3}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 180, value: 1.219, unit: mmol_L, read_error: 0.0481, replicate: 1}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 180, value: 1.219, unit: mmol_L, read_error: 0.0481, replicate: 2}
+  - {pot: martins2005_glc_gly_80c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 180, value: 1.219, unit: mmol_L, read_error: 0.0481, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 15, value: 0.263, unit: mmol_L, read_error: 0.2148, replicate: 1, read_error_basis: 'Fig. 7c vector marker centre; absolute read error = max(one coordinate quantum 0.13 mmol/L, the largest difference between this time''s replicates as replotted in Figs. 6c / 8d), in dex'}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 15, value: 0.263, unit: mmol_L, read_error: 0.2148, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 15, value: 0.263, unit: mmol_L, read_error: 0.2148, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 30, value: 0.526, unit: mmol_L, read_error: 0.428, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 30, value: 0.526, unit: mmol_L, read_error: 0.428, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 30, value: 0.789, unit: mmol_L, read_error: 0.2853, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 45, value: 0.92, unit: mmol_L, read_error: 0.1784, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 45, value: 0.92, unit: mmol_L, read_error: 0.1784, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 45, value: 1.052, unit: mmol_L, read_error: 0.156, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 60, value: 1.183, unit: mmol_L, read_error: 0.0477, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 60, value: 1.052, unit: mmol_L, read_error: 0.0537, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 60, value: 1.314, unit: mmol_L, read_error: 0.043, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 90, value: 1.839, unit: mmol_L, read_error: 0.0307, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 90, value: 1.839, unit: mmol_L, read_error: 0.0307, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 90, value: 1.971, unit: mmol_L, read_error: 0.0286, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 120, value: 2.234, unit: mmol_L, read_error: 0.0253, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 120, value: 2.497, unit: mmol_L, read_error: 0.0226, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 120, value: 2.497, unit: mmol_L, read_error: 0.0226, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 150, value: 2.759, unit: mmol_L, read_error: 0.0205, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 150, value: 2.891, unit: mmol_L, read_error: 0.0195, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 150, value: 2.759, unit: mmol_L, read_error: 0.0205, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 15, value: 0.526, unit: mmol_L, read_error: 0.1222, replicate: 1, read_error_basis: 'Fig. 7c vector marker centre; absolute read error = max(one coordinate quantum 0.13 mmol/L, the largest difference between this time''s replicates as replotted in Figs. 6c / 8d), in dex'}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 15, value: 0.526, unit: mmol_L, read_error: 0.1222, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 15, value: 0.395, unit: mmol_L, read_error: 0.1627, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 30, value: 1.839, unit: mmol_L, read_error: 0.0307, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 30, value: 1.971, unit: mmol_L, read_error: 0.0286, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 30, value: 1.839, unit: mmol_L, read_error: 0.0307, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 45, value: 4.073, unit: mmol_L, read_error: 0.0139, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 45, value: 3.942, unit: mmol_L, read_error: 0.0143, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 45, value: 4.467, unit: mmol_L, read_error: 0.0126, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 60, value: 5.387, unit: mmol_L, read_error: 0.0105, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 60, value: 6.176, unit: mmol_L, read_error: 0.0091, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 60, value: 5.519, unit: mmol_L, read_error: 0.0102, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 90, value: 9.591, unit: mmol_L, read_error: 0.007, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 90, value: 9.328, unit: mmol_L, read_error: 0.0072, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 90, value: 9.591, unit: mmol_L, read_error: 0.007, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 120, value: 12.088, unit: mmol_L, read_error: 0.005, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 120, value: 11.037, unit: mmol_L, read_error: 0.0055, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 120, value: 11.693, unit: mmol_L, read_error: 0.0052, replicate: 3}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 150, value: 13.402, unit: mmol_L, read_error: 0.0042, replicate: 1}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 150, value: 12.745, unit: mmol_L, read_error: 0.0044, replicate: 2}
+  - {pot: martins2005_glc_gly_100c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 150, value: 13.008, unit: mmol_L, read_error: 0.0043, replicate: 3}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 15, value: 0.122, unit: mmol_L, read_error: 0.2171, read_error_basis: 'Fig. 1c vector path (diamond centre = error-bar origin); half a coordinate quantum, 0.32 pt = 0.061 mmol/L, in dex', bar_half_length_undefined: 0.061}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 30, value: 0.488, unit: mmol_L, read_error: 0.0543, bar_half_length_undefined: 0.183}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 60, value: 0.975, unit: mmol_L, read_error: 0.0272, bar_half_length_undefined: 0.244}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 90, value: 1.829, unit: mmol_L, read_error: 0.0145, bar_half_length_undefined: 0.122}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 120, value: 2.316, unit: mmol_L, read_error: 0.0114, bar_half_length_undefined: 0.122}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 150, value: 2.683, unit: mmol_L, read_error: 0.0099, bar_half_length_undefined: 0.0}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 180, value: 3.049, unit: mmol_L, read_error: 0.0087, bar_half_length_undefined: 0.061}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 210, value: 3.414, unit: mmol_L, read_error: 0.0078, bar_half_length_undefined: 0.122}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 240, value: 3.658, unit: mmol_L, read_error: 0.0072, bar_half_length_undefined: 0.122}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 15, value: 0.732, unit: mmol_L, read_error: 0.0362, read_error_basis: 'Fig. 1c vector path (diamond centre = error-bar origin); half a coordinate quantum, 0.32 pt = 0.061 mmol/L, in dex', bar_half_length_undefined: 0.244}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 30, value: 2.683, unit: mmol_L, read_error: 0.0099, bar_half_length_undefined: 0.488}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 60, value: 7.317, unit: mmol_L, read_error: 0.0036, bar_half_length_undefined: 0.67}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 90, value: 10.853, unit: mmol_L, read_error: 0.0024, bar_half_length_undefined: 0.549}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 120, value: 13.414, unit: mmol_L, read_error: 0.002, bar_half_length_undefined: 0.549}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 150, value: 15.244, unit: mmol_L, read_error: 0.0017, bar_half_length_undefined: 0.609}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 180, value: 16.341, unit: mmol_L, read_error: 0.0016, bar_half_length_undefined: 0.549}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 210, value: 16.95, unit: mmol_L, read_error: 0.0016, bar_half_length_undefined: 0.549}
+  - {pot: martins2005_glc_gly_100c_fig1, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 240, value: 17.561, unit: mmol_L, read_error: 0.0015, bar_half_length_undefined: 0.854}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 5, value: 0.407, unit: mmol_L, read_error: 0.1442, replicate: 1, read_error_basis: 'Fig. 8d vector marker centre (pdftocairo -svg); coordinate quantum 0.618 pt = 0.135 mmol/L taken as the absolute read error, in dex'}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 5, value: 0.271, unit: mmol_L, read_error: 0.2167, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 5, value: 0.271, unit: mmol_L, read_error: 0.2167, replicate: 3}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 10, value: 1.49, unit: mmol_L, read_error: 0.0393, replicate: 1}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 10, value: 1.49, unit: mmol_L, read_error: 0.0393, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 10, value: 1.49, unit: mmol_L, read_error: 0.0393, replicate: 3}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 15, value: 2.71, unit: mmol_L, read_error: 0.0216, replicate: 1}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 15, value: 2.71, unit: mmol_L, read_error: 0.0216, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 15, value: 2.574, unit: mmol_L, read_error: 0.0228, replicate: 3}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 20, value: 3.116, unit: mmol_L, read_error: 0.0188, replicate: 1}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 20, value: 3.522, unit: mmol_L, read_error: 0.0166, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 20, value: 3.658, unit: mmol_L, read_error: 0.016, replicate: 3}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 30, value: 4.065, unit: mmol_L, read_error: 0.0144, replicate: 1}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 30, value: 4.2, unit: mmol_L, read_error: 0.014, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: FA, t_min: 30, value: 3.522, unit: mmol_L, read_error: 0.0166, replicate: 3}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 5, value: 1.219, unit: mmol_L, read_error: 0.0481, replicate: 1, read_error_basis: 'Fig. 8d vector marker centre (pdftocairo -svg); coordinate quantum 0.618 pt = 0.135 mmol/L taken as the absolute read error, in dex'}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 5, value: 1.219, unit: mmol_L, read_error: 0.0481, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 5, value: 1.355, unit: mmol_L, read_error: 0.0433, replicate: 3}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 10, value: 6.232, unit: mmol_L, read_error: 0.0094, replicate: 1}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 10, value: 6.503, unit: mmol_L, read_error: 0.009, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 10, value: 5.962, unit: mmol_L, read_error: 0.0098, replicate: 3}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 15, value: 11.245, unit: mmol_L, read_error: 0.0052, replicate: 1}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 15, value: 11.516, unit: mmol_L, read_error: 0.0051, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 15, value: 9.484, unit: mmol_L, read_error: 0.0062, replicate: 3}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 20, value: 14.225, unit: mmol_L, read_error: 0.0041, replicate: 1}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 20, value: 12.465, unit: mmol_L, read_error: 0.0047, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 20, value: 12.465, unit: mmol_L, read_error: 0.0047, replicate: 3}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 30, value: 17.613, unit: mmol_L, read_error: 0.0033, replicate: 1}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 30, value: 18.29, unit: mmol_L, read_error: 0.0032, replicate: 2}
+  - {pot: martins2005_glc_gly_120c, ledger_id: martins2005_glc_gly_multiresponse_timecourses, species: AA, t_min: 30, value: 17.342, unit: mmol_L, read_error: 0.0034, replicate: 3}

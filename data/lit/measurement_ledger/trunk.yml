@@ -568,7 +568,7 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "glucose/glycine aqueous system heated at 100 C and initial pH 4.8; pH 5.5; pH 6.0; pH 6.8 and pH 7.5 ... The initial pH values are reported as set at room temperature."
-    flags: [ph_start_only, ph_set_at_room_temperature, caption_typo_panel_e]
+    flags: [ph_start_only, ph_set_at_room_temperature, caption_typo_panel_e, "arm_reprint_of: martins2005_glc_gly_multiresponse_timecourses (the pH 6.8 arm = Martins 2005 Figs. 6-8 at 100 C, replicate by replicate; both readers 2026-10-29)"]
     note: "Central data figure: 10 responses x 5 pH, not digitised (overlapping markers); suppressed zeros on Glu/Gly panels. Thesis vector PDF could allow a content-stream read as for martins2005 timeseries."
   - id: martins2005b_figs8_9_molar_ratio_timecourses
     dossier: martins2005b_extraction.md
