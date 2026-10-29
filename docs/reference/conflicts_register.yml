@@ -1379,6 +1379,7 @@ entries:
     observation: "Printed '26 +- 0.725': the value lacks the decimals its SD implies (likely 2.6 or 0.26)."
     explanations:
       - "A dropped decimal point in the value."
+      - "A real value: the significance letter 'a' ranks the 26 +- 0.725 cell highest in its row (thiol adjudication, 2026-10-29), which argues against a dropped decimal; the SD is then implausibly small (3 %) for this group's furfural."
     tests: []
     status: open
     remedy: ""
@@ -1495,4 +1496,21 @@ entries:
     tests: []
     status: open
     remedy: "These rows' printed SDs are not trusted as their own: the sub-model 2 fit estimates a per-series noise scale (fitting.fit_with_series_noise) rather than weighting by the bars."
+    affects: []
+  - id: CF-065
+    kind: conflict
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation, zhai2023foodchem]
+    quantity: "molar yield of FFT from furfural + H2S and of MFT from norfuraneol + H2S"
+    observation: >-
+      FFT from furfural + H2S is 0.48 mol % in Hofmann & Schieberle (pH 5, 145 C, 20 min, isotope dilution) but about
+      23 % in Zhai 2023 Food Chem Fig. 6 (pH 7, 120 C, 20 min); MFT from norfuraneol is 0.19 % against about 34 %. A
+      50-180x gap at milder temperature (thiol adjudication, 2026-10-29).
+    explanations:
+      - "pH: at pH 7 a larger share of the sulfide is HS-, the nucleophile; predicts the gap shrinks at matched pH."
+      - "Quantification: Zhai's thiols are semi-quantitative (no authentic-standard response factor); predicts the gap is a scale factor common to all of Zhai's thiol rows."
+      - "A co-reactant: ammonium or the amine in Zhai's system opens a route Hofmann's binary system lacks; predicts the gap depends on the amine charge."
+    tests: []
+    status: open
+    remedy: "Sub-model 4 fits Zhai's thiol rows shape-only (semi_quantitative, SCALE_TAU = inf), so only the isotope-dilution rows set the absolute yield; the probe reports the two laboratories' residual levels separately."
     affects: []

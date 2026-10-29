@@ -12,8 +12,8 @@ groups:
     strings: ["Wageningen (van Boekel)"]
     evidence: "Martins, Brands, Nguyen papers; van Boekel corresponding or senior author"
   nestle_blank:
-    strings: ["Nestle Research (Blank)"]
-    evidence: "Davidek 2002 (Blank, Nestle Research Center)"
+    strings: ["Nestle Research (Blank)", "Nestle (Kraehenbuehl / Davidek / Belrhlid)"]
+    evidence: "Davidek 2002 (Blank, Nestle Research Center); US 10,076,126 (Kraehenbuehl, Davidek, Viton, Oertling, Belrhlid; Nestec, Lausanne): Davidek in both, same Nestle Research Center flavour group -- merged as one laboratory, the conservative choice for leave-one-out (thiol adjudicator, 2026-10-29)"
   btbu_xie:
     strings: ["BTBU (Xie J)", "Beijing Technology and Business University (Xie)"]
     evidence: "Cao 2017, Zhao 2017b, Hou 2017, Zhao 2019: Jianchun Xie corresponding (xjchun@th.btbu.edu.cn); 'BTBU (Cao Y)' is a different group"
@@ -33,8 +33,8 @@ groups:
     strings: ["Ochanomizu (Murata)"]
     evidence: "Mikami 2017: Masatsune Murata corresponding, Ochanomizu University, Tokyo"
   reading_mottram:
-    strings: ["Reading (Mottram / Parker / Elmore)", "Reading (Mottram)"]
-    evidence: "Desclaux 2006 (Mottram, University of Reading, School of Food Biosciences); Parker and Elmore in the same flavour group. 'Reading (Ames)' is a different group"
+    strings: ["Reading (Mottram / Parker / Elmore)", "Reading (Mottram)", "Reading (Elmore)"]
+    evidence: "Desclaux 2006 (Mottram, University of Reading, School of Food Biosciences); Parker and Elmore in the same flavour group; Yiltirak 2026 (Yiltirak, Balagiannis, Koek, Koch, Elmore*; University of Reading, Food and Nutritional Sciences). 'Reading (Ames)' is a different group"
   zhejiang_gongshang_zhai_fu:
     strings: ["Zhejiang Gongshang (Fu Y / Zhai Y)"]
     evidence: "Kang 2026: Fu Y* and Zhai Yun* (Zhang X's former student) at Zhejiang Gongshang; its own group. Its SI Figs. S3 / S4 reprint Jiangnan's Zhai 2023 Food Chem data, which must enter once, as Jiangnan's (CF-005 family), not as a second laboratory"
