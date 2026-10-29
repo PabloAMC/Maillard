@@ -1,0 +1,30 @@
+# The register of conflicts: every place where sources disagree with each other, with themselves, or with how
+# the model uses them (strategy 2026-10-29, M5; owner item 5: "track and resolve the apparent conflicts
+# between papers").
+#
+# Why it exists: conflicts were handled case by case and forgotten; the same data set was counted two or three
+# times; rows ran at conditions the paper did not use. Each entry is worked through the misfit protocol
+# (docs/guides/OPERATING_PROCEDURE.md sec. 4): integrity first, then conditions, then measurement, then
+# mechanism; an explanation counts only when a test outside the conflict supports it.
+#
+# kind:
+#   conflict           -- two or more sources measure the same quantity and disagree beyond their errors
+#   duplicate          -- one data set published (or reprinted) more than once; it must be counted once
+#   condition_error    -- the model (a row, a pot, a constant) uses conditions the source does not state
+#   code_mismatch      -- the code's number or citation does not match its source
+#   self_contradiction -- a source disagrees with itself (methods vs captions, text vs table)
+# status:
+#   open               -- recorded; not yet worked
+#   explained          -- an explanation is supported by a test outside the conflict (`tests` says which)
+#   duplicate_confirmed / error_confirmed -- verified against the source text; `remedy` says what changes
+#   fixed              -- the remedy is in the code or the curated data (`remedy` names the commit or file)
+#   not_an_error       -- checked against the source; the model's use is right
+# scope:
+#   sulfur_rows        -- touches a row, pot or constant of a current sulfur-lane fit or check (resolve first)
+#   other_lane         -- touches the trunk, lipid, acrylamide, aroma or matrix layer (Phase 4 unless urgent)
+#   corpus             -- touches no model use yet
+# `sources` are dossier stems in data/lit/extraction_dossiers/ (without _extraction.md); `affects` lists ledger
+# ids (data/lit/measurement_ledger/*.yml) and/or {file, symbol} pairs. Checked by
+# scripts/ci/conflicts_register_gate.py (structure only; it does not judge an entry).
+
+entries: []

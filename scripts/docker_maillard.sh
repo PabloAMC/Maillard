@@ -138,7 +138,7 @@ scientific_lane() {
 
 gates_lane() {
   local gate
-  for gate in citation_gate data_readonly_gate fit_target_gate holdout_guard schema_gate dossier_coverage_gate choices_register_gate artifact_freshness_gate; do
+  for gate in citation_gate data_readonly_gate fit_target_gate holdout_guard schema_gate dossier_coverage_gate choices_register_gate conflicts_register_gate artifact_freshness_gate; do
     run_in_env "python scripts/ci/${gate}.py"
   done
 }
