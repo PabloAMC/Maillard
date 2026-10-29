@@ -632,3 +632,129 @@ There is no heating step anywhere in this paper. It is a starting-state decode.
     `https://www.mdpi.com/article/10.3390/foods11030412/s1` — **S4 and S5 are freely downloadable
     and should be fetched before this dossier is used for anything quantitative about the ten-lot
     spread.**
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+Source: `data/articles/utz2022_supplementary.zip` → `foods-1571349-supplementary.pdf` (11 pp.; unzipped to a scratch
+directory, read with `pdftotext -layout`). Contents: Table S1 (MRM transitions of the 3-NPH-tagged odorants),
+Table S2 (MRM transitions of eight pyrazines — **no LOQs**, so the "pyrazines below LOQ" negative of §4 still has no
+number), Table S3 (internal standards and IS calibration curves), **Table S4 (concentrations, ten isolates)**,
+**Table S5 (OAVs, ten isolates)**, and the R script of the OAV heat map.
+
+**Quantification basis.** Stable-isotope dilution with 3-NPH derivatisation and UHPLC-MS/MS (Table S3). ⚠️ Only part of it
+is true SIDA (analyte's own isotopologue): 3-methylbutanal (d2), hexanal (d12), acetaldehyde (d3), diacetyl (d6), acetic
+acid (¹³C2), butyric acid (¹³C4), hexanoic acid (d3), octanoic acid (d15), vanillin (d3). The rest use a **surrogate
+labelled IS** with its own calibration curve (e.g. (E,E)-2,4-decadienal, (E,E)-2,4-nonadienal, (E)-2-undecenal,
+(E)-2-dodecenal and 2-undecanone on decanal-d2; heptanal, (E)-2-octenal and **methional on hexanal-d12**; benzaldehyde,
+phenylacetaldehyde and 4-ethylbenzaldehyde on phenylacetic acid-¹³C2; acetoin, 2,3-octanedione and (E,E)-3,5-octadien-2-one
+on diacetyl-d6). Calibration R² 0.9931 (acetoin) to 0.99996. Acetoin's curve has a large negative intercept
+(y = 1.23169x − 0.52823).
+
+### Table S4 — *"Concentrations in mg/kg (±RSD) of the quantified odorants in different pea protein samples by means of
+3-NPH-UHPLC-MS/MS."* n = 3 replicate workups. Units **mg/kg powder** (C column matches main Table 3 in μg/kg ÷ 1000).
+
+Isolates: A Nutralys F85F (Roquette); B Prestige (Parrheim Foods); C Nutralys S85F (Roquette); D Bio Erbsenprotein
+(Golden Peanut); E Bio Erbsen Protein (Piowald); F Erbsenproteinisolat 1501018 (Döhler); G Pea Pro (LSP Sports
+Nutrition); H Empro E86HV (Emsland-Stärke); I Empro E86 (Emsland-Stärke); J Pisane C9 (Cosucra).
+
+| odorant (mg/kg) | A | B | C | D | E | F | G | H | I | J |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 3-methylbutanal (no RSD printed) | 7.1 | 0.8 | 5.1 | 43.5 | 21.9 | 19.0 | 9.1 | 29.1 | 19.2 | 9.4 |
+| hexanal | 10.2 (7.8 %) | 3.0 (4.2 %) | 14.9 (12.8 %) | 138.0 (2.9 %) | 43.4 (8.2 %) | 33.9 (5.8 %) | 11.6 (8.6 %) | 83.4 (3.5 %) | 43.3 (7.4 %) | 14.2 (10.6 %) |
+| acetaldehyde | 79.7 (8.8 %) | 47.5 (5.3 %) | 72.2 (5.9 %) | 131.5 (3.0 %) | 80.5 (4.2 %) | 158.4 (3.1 %) | 82.5 (4.9 %) | 117.2 (6.9 %) | 93.2 (11.0 %) | 253.6 (13.0 %) |
+| (E,E)-2,4-decadienal | 0.1 (4.9 %) | 0.1 (7.2 %) | 0.1 (9.7 %) | 0.2 (6.9 %) | 0.5 (7.7 %) | 0.1 (1.5 %) | 0.1 (4.0 %) | 0.1 (7.6 %) | 0.1 (9.7 %) | 0.1 (2.1 %) |
+| phenylacetaldehyde | 3.1 (12.1 %) | 5.9 (2.2 %) | 6.1 (5.0 %) | 1.2 (3.9 %) | 8.8 (10.3 %) | 10.6 (2.3 %) | 7.1 (11.9 %) | 5.9 (6.4 %) | 2.0 (5.3 %) | 9.6 (11.7 %) |
+| (E,E)-2,4-nonadienal | 0.04 (3.9 %) | 0.04 (7.9 %) | 0.1 (12.5 %) | 0.2 (4.7 %) | 0.1 (9.8 %) | 0.1 (8.6 %) | 0.04 (3.0 %) | 0.1 (6.5 %) | 0.1 (8.7 %) | 0.04 (3.4 %) |
+| (E,Z)-2,6-nonadienal | nd | nd | nd | nd | nd | nd | nd | nd | nd | nd |
+| (E)-2-octenal | 0.3 (7.4 %) | 0.1 (14.8 %) | 0.9 (0.8 %) | 6.8 (1.9 %) | 2.0 (4.6 %) | 1.3 (8.7 %) | 0.4 (5.7 %) | 0.8 (8.7 %) | 0.9 (4.9 %) | 0.2 (12.9 %) |
+| diacetyl | 0.2 (6.0 %) | 0.1 (1.0 %) | 0.3 (8.0 %) | 0.5 (5.5 %) | 0.3 (9.8 %) | 0.5 (7.1 %) | 0.4 (5.3 %) | 0.3 (8.1 %) | 0.5 (9.3 %) | 0.7 (6.9 %) |
+| benzaldehyde | 20.3 (9.4 %) | 15.2 (9.6 %) | 37.2 (21.1 %) | 142.8 (10.6 %) | 36.1 (1.9 %) | 146.9 (11.9 %) | 48.8 (8.5 %) | 59.8 (12.1 %) | 35.5 (10.5 %) | 26.2 (8.5 %) |
+| 4-ethylbenzaldehyde | nd | nd | nd | nd | nd | nd | nd | nd | nd | nd |
+| heptanal | 0.7 (5.5 %) | 0.1 (2.8 %) | 1.3 (9.8 %) | 5.8 (14.2 %) | 2.8 (13.5 %) | 1.7 (3.7 %) | 0.8 (3.1 %) | 1.9 (10.3 %) | 1.7 (15.4 %) | 0.6 (4.6 %) |
+| 2-methylbutanal | 0.4 (5.4 %) | 0.3 (6.4 %) | 0.3 (2.9 %) | 0.5 (0.8 %) | 1.5 (5.6 %) | 0.8 (4.1 %) | 0.4 (2.9 %) | 0.6 (4.6 %) | 0.4 (6.4 %) | 0.5 (3.1 %) |
+| (E)-2-undecenal | 0.1 (11.7 %) | 0.1 (11.5 %) | 0.1 (6.5 %) | 1.6 (11.5 %) | 0.6 (12.7 %) | 0.1 (3.9 %) | 0.1 (8.1 %) | 0.2 (6.7 %) | 0.2 (6.4 %) | 0.1 (1.9 %) |
+| nonanoic acid | 0.7 (1.3 %) | 1.3 (5.6 %) | 2.8 (6.0 %) | 5.9 (4.2 %) | 3.1 (5.7 %) | 1.7 (2.9 %) | 1.4 (7.4 %) | 2.2 (2.2 %) | 2.5 (2.7 %) | 0.5 (7.1 %) |
+| methional | 0.03 (5.6 %) | 0.1 (7.1 %) | 0.04 (4.7 %) | 0.03 (10.4 %) | 0.1 (13.1 %) | 0.02 (1.5 %) | 0.04 (2.4 %) | 0.02 (0.6 %) | 0.02 (3.1 %) | 0.03 (8.1 %) |
+| acetic acid | 267.9 (2.9 %) | 13.7 (4.2 %) | 262.0 (4.0 %) | 148.4 (6.5 %) | 176.9 (4.5 %) | 111.3 (5.9 %) | 212.4 (2.3 %) | 243.9 (3.2 %) | 239.2 (1.0 %) | 126.6 (3.2 %) |
+| 3-methylbutanoic acid | 18.6 (5.5 %) | 6.4 (5.7 %) | 23.3 (6.1 %) | 3.1 (4.8 %) | 8.2 (3.4 %) | 8.9 (1.0 %) | 19.8 (2.0 %) | 14.4 (7.0 %) | 11.1 (6.6 %) | 17.0 (3.9 %) |
+| decanoic acid | 0.04 (7.3 %) | 0.1 (1.2 %) | 0.1 (5.5 %) | 0.1 (8.8 %) | 1.0 (7.3 %) | 0.3 (5.0 %) | 0.3 (6.7 %) | 0.9 (6.7 %) | 0.2 (6.5 %) | 0.3 (7.1 %) |
+| vanillin | 0.5 (12.2 %) | 0.4 (13.6 %) | 0.6 (3.2 %) | 1.8 (11.5 %) | 0.7 (11.2 %) | 0.4 (7.3 %) | 0.7 (6.8 %) | 0.4 (12.8 %) | 0.5 (10.7 %) | 1.3 (3.8 %) |
+| (E,E)-3,5-octadien-2-one | 0.1 (12.4 %) | 0.04 (4.2 %) | 0.2 (7.9 %) | 1.1 (13.8 %) | 0.5 (14.6 %) | 0.5 (8.1 %) | 0.1 (3.1 %) | 0.1 (11.6 %) | 0.1 (20.1 %) | 0.2 (7.5 %) |
+| hexanoic acid | 21.5 (7.9 %) | 7.7 (5.3 %) | 36.8 (5.4 %) | 734.2 (5.8 %) | 111.3 (4.7 %) | 55.8 (7.6 %) | 26.0 (7.3 %) | 72.2 (5.4 %) | 42.8 (6.3 %) | 6.8 (6.4 %) |
+| octanoic acid | 0.3 (2.9 %) | 0.4 (2.8 %) | 1.5 (3.1 %) | 7.3 (8.2 %) | 4.8 (1.2 %) | 3.6 (4.0 %) | 0.5 (5.6 %) | 1.4 (5.1 %) | 1.7 (4.4 %) | 2.0 (6.4 %) |
+| phenylacetic acid | 0.4 (12.4 %) | nd | 0.5 (11.8 %) | 1.9 (7.5 %) | 3.9 (6.2 %) | 1.2 (5.6 %) | 0.5 (12.6 %) | 1.1 (9.0 %) | 0.8 (6.9 %) | 0.6 (2.3 %) |
+| γ-octalactone | 0.02 (9.2 %) | 0.03 (10.1 %) | 0.05 (10.5 %) | 4.3 (11.8 %) | 0.5 (8.9 %) | 0.1 (3.5 %) | 0.01 (20.0 %) | 0.2 (7.3 %) | 0.3 (1.1 %) | 0.01 (3.4 %) |
+| 2-methylbutanoic acid | 16.7 (10.7 %) | 13.0 (9.2 %) | 21.4 (4.7 %) | 9.1 (6.6 %) | 5.5 (9.8 %) | 32.2 (3.8 %) | 29.0 (9.8 %) | 13.2 (3.6 %) | 3.3 (8.4 %) | 25.6 (7.9 %) |
+| 2,3-octanedione | 0.1 (2.9 %) | 0.05 (7.6 %) | 0.1 (8.9 %) | 0.7 (9.3 %) | 0.2 (7.1 %) | 0.2 (3.1 %) | 0.1 (5.3 %) | 0.2 (8.1 %) | 0.1 (11.4 %) | 0.1 (2.1 %) |
+| 2-undecanone | 0.1 (8.1 %) | 0.1 (0.2 %) | 0.1 (6.5 %) | 0.7 (9.0 %) | 0.1 (1.6 %) | 0.2 (5.3 %) | 0.1 (7.9 %) | 0.1 (3.9 %) | 0.1 (6.4 %) | 0.1 (3.7 %) |
+| (E)-2-dodecenal | 0.1 (10.2 %) | nd | nd | 8.8 (9.7 %) | 1.4 (9.3 %) | 0.2 (5.6 %) | nd | 0.2 (11.7 %) | 0.3 (10.1 %) | nd |
+| acetoin | 1.0 (1.1 %) | 1.0 (1.9 %) | 1.0 (0.7 %) | 1.1 (1.9 %) | 1.0 (1.6 %) | 1.0 (1.2 %) | 1.0 (0.2 %) | 1.0 (0.8 %) | 1.0 (0.3 %) | 1.0 (2.5 %) |
+| butyric acid | nd | nd | nd | 19.6 (5.2 %) | 40.2 (1.9 %) | 8.8 (4.8 %) | 1.7 (1.8 %) | 5.2 (5.9 %) | 3.3 (1.2 %) | 5.0 (2.5 %) |
+| pentanoic acid | 0.9 (11.0 %) | nd | 2.7 (8.4 %) | 59.0 (3.9 %) | 34.3 (7.1 %) | 5.8 (6.9 %) | nd | 7.0 (13.5 %) | 4.4 (4.0 %) | nd |
+| heptanoic acid | 2.2 (3.9 %) | nd | 2.8 (6.8 %) | 39.9 (5.3 %) | 14.7 (8.0 %) | 4.6 (8.0 %) | 2.4 (4.0 %) | 6.3 (5.3 %) | 5.4 (1.9 %) | 0.6 (6.9 %) |
+| dodecanoic acid | 0.03 (9.3 %) | 0.3 (10.2 %) | 0.3 (12.3 %) | 0.4 (4.5 %) | 0.8 (4.4 %) | 0.3 (6.4 %) | 0.3 (4.5 %) | 0.4 (9.0 %) | 0.3 (5.9 %) | 0.03 (6.3 %) |
+| tetradecanoic acid | 1.2 (8.6 %) | 5.6 (7.0 %) | 2.0 (8.6 %) | 4.0 (10.1 %) | 7.7 (8.6 %) | 3.7 (8.8 %) | 2.2 (9.6 %) | 3.5 (3.1 %) | 3.1 (4.0 %) | 1.6 (9.0 %) |
+
+Transcription notes: the (E)-2-dodecenal and pentanoic-acid rows are typeset with their "nd" cells and RSDs on staggered
+lines; the column assignment above was resolved against the Table S5 OAV row (OAV 0 ⇔ nd) and is consistent. Values
+are printed to one significant decimal, so sub-0.1 mg/kg levels (decadienal, nonadienal, methional) carry large rounding
+error — prefer main Table 3 (μg/kg, isolate C) where it exists.
+
+### Table S5 — OAVs (concentration ÷ odour threshold **in water**), ten isolates
+
+| odorant | A | B | C | D | E | F | G | H | I | J |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 3-methylbutanal | 14240 | 1536 | 10186 | 87052 | 43773 | 38096 | 18140 | 58160 | 38426 | 18708 |
+| hexanal | 4261 | 1268 | 6202 | 57493 | 18087 | 14115 | 4827 | 34763 | 18034 | 5932 |
+| acetaldehyde | 4980 | 2966 | 4512 | 8219 | 5029 | 9898 | 5159 | 7325 | 5825 | 15851 |
+| (E,E)-2,4-decadienal | 2036 | 2345 | 3736 | 6779 | 18081 | 3086 | 2787 | 2599 | 2471 | 5455 |
+| phenylacetaldehyde | 602 | 1143 | 1173 | 222 | 1689 | 2040 | 1368 | 1130 | 385 | 1850 |
+| (E,E)-2,4-nonadienal | 943 | 784 | 1156 | 5354 | 2574 | 1345 | 966 | 2077 | 2329 | 865 |
+| (E)-2-octenal | 195 | 67 | 533 | 4017 | 1185 | 746 | 244 | 469 | 530 | 127 |
+| diacetyl | 233 | 91 | 329 | 550 | 280 | 552 | 367 | 301 | 473 | 704 |
+| benzaldehyde | 136 | 101 | 248 | 952 | 241 | 979 | 325 | 398 | 236 | 175 |
+| heptanal | 113 | 22 | 217 | 949 | 464 | 274 | 133 | 310 | 281 | 96 |
+| 2-methylbutanal | 261 | 205 | 178 | 334 | 973 | 512 | 296 | 405 | 294 | 360 |
+| (E)-2-undecenal | 156 | 169 | 157 | 2091 | 732 | 127 | 135 | 195 | 242 | 98 |
+| nonanoic acid | 27 | 49 | 107 | 226 | 119 | 65 | 54 | 86 | 96 | 19 |
+| methional | 67 | 156 | 85 | 69 | 250 | 54 | 88 | 54 | 51 | 66 |
+| acetic acid | 48 | 2.5 | 47 | 27 | 32 | 20 | 38 | 44 | 43 | 23 |
+| 3-methylbutanoic acid | 38 | 13 | 48 | 6 | 17 | 18 | 41 | 29 | 23 | 35 |
+| decanoic acid | 13 | 35 | 15 | 15 | 281 | 83 | 72 | 252 | 59 | 97 |
+| vanillin | 9 | 7 | 11 | 33 | 13 | 8 | 13 | 8 | 10 | 24 |
+| (E,E)-3,5-octadien-2-one | 5 | 1.3 | 9 | 40 | 17 | 17 | 5 | 4.3 | 5 | 6 |
+| hexanoic acid | 4.5 | 1.6 | 8 | 153 | 23 | 12 | 5 | 15 | 9 | 1.4 |
+| octanoic acid | 1.7 | 2.0 | 8 | 38 | 25 | 19 | 2.7 | 7 | 9 | 11 |
+| phenylacetic acid | 6 | 0 | 8 | 28 | 57 | 18 | 8 | 16 | 12 | 10 |
+| γ-octalactone | 2.9 | 4.3 | 7 | 663 | 74 | 16 | 1.8 | 28 | 42 | 1.6 |
+| 2-methylbutanoic acid | 5 | 4.2 | 7 | 2.9 | 1.8 | 10 | 9 | 4.3 | 1.1 | 8 |
+| 2,3-octanedione | 2.0 | 1.6 | 4.8 | 24 | 8 | 7 | 2.6 | 8 | 4.2 | 2.2 |
+| 2-undecanone | 3.1 | 3.4 | 2.8 | 3.1 | 6 | 7 | 2.7 | 3.9 | 3.4 | 6 |
+| (E)-2-dodecenal | 408 | 0 | 0 | 43868 | 6991 | 794 | 0 | 1193 | 1621 | 0 |
+| acetoin | 1.6 | 1.8 | 1.7 | 1.8 | 1.7 | 1.7 | 1.7 | 1.7 | 1.7 | 1.7 |
+| butyric acid | 0 | 0 | 0 | 8 | 17 | 3.7 | 0.7 | 2.2 | 1.4 | 2.1 |
+| pentanoic acid | 0.1 | 0 | 0.2 | 5 | 3.1 | 0.5 | 0 | 0.6 | 0.4 | 0 |
+| heptanoic acid | 0.7 | 0 | 0.9 | 1.3 | 4.9 | 1.5 | 0.8 | 2.1 | 1.8 | 0.2 |
+| dodecanoic acid | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| tetradecanoic acid | 0.1 | 0.6 | 0.2 | 0.4 | 0.8 | 0.4 | 0.2 | 0.4 | 0.3 | 0.2 |
+
+The thresholds themselves are not printed. Implied water thresholds `[D]` (S4 ÷ S5, coarse because S4 is rounded):
+3-methylbutanal ≈ 0.5 μg/kg; hexanal ≈ 2.4; acetaldehyde ≈ 16; **(E)-2-dodecenal ≈ 0.20 μg/kg** (8.8 mg/kg / 43868 —
+the threshold §4 records as "never printed"); γ-octalactone ≈ 6.5; hexanoic acid ≈ 4.8 mg/kg.
+
+**Checks `[D]` and surprises.**
+- **Acetoin = 1.0 mg/kg (RSD 0.2–2.5 %) in all ten isolates**, with OAV 1.6–1.8 everywhere, while every other odorant
+  varies 2- to 100-fold between isolates. That uniformity, with a curve whose intercept (−0.528) is half the slope, reads
+  as a floor/placeholder value, not a measurement. **Do not use the acetoin row.**
+- Hexanoic acid in isolate D, 734 mg/kg (OAV 153), and (E)-2-dodecenal in D, 8.8 mg/kg (OAV 43 868), make D the outlier
+  isolate on the lipid-oxidation axis (hexanal 138 mg/kg, (E)-2-octenal 6.8, γ-octalactone 4.3).
+- Isolate C column reproduces main Table 3 (3-methylbutanal 5.1, hexanal 14.9, acetaldehyde 72.2 mg/kg; OAV 10186 / 6202 /
+  4512 / 3736 / 1173 / 1156), so the two are on the same basis.
+- Dodecanoic-acid OAV is 0 in every isolate although it is quantified (0.03–0.8 mg/kg) — its threshold is high enough that
+  OAV < 0.05 rounds to 0.
+
+**Model use.** **Yes** — Table S4 is a ten-isolate, SD-bearing (RSD) level table for the lipid-oxidation aldehydes,
+Strecker aldehydes and acids in unheated commercial pea-protein isolates: the between-supplier spread of the starting
+state (hexanal 3.0–138 mg/kg, 46-fold). Table S5 adds no measurement (water-threshold OAVs).

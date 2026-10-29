@@ -994,13 +994,13 @@ entries:
     time_min: [30, 60, 90, 120]
     species: ["MFT", "FFT", "furfural", "3-(methylthio)-2-butanone", "thiophenes", "thiazoles", "furans"]
     kind: time_series
-    location: "Table 1 (120 C at 30-120 min; 100 C at 120 min only)"
+    location: Table 1 (120 C at 30-120 min; 100 C at 120 min only); SI Table S1 calibration curves / LOD / LOQ (transcribed, dossier 'Supplementary material' S-b); SI Table S2 OAVs
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: true
     condition_quote: "The solutions of the RG-ARP (20 mmol/L) with or without GSH, Cys, Glu, or Gly (20 mmol/L), Rib with GSH (20 mmol/L), and GSH (20 mmol/L) were prepared and adjusted to pH 7.0 with NaOH (6 mol/L). Then, the solutions were injected into the pressure-resistant glass bottle and thermally stirred in an oil bath at 100 and 120 C for different times (30, 60, 90, and 120 min)."
-    flags: []
-    note: "Second (independent) 100->120 C sulfur span at pH 7 / 120 min, tests Kang's low leg. External calibration curves (Table S1, not on disk). Reaction volume not stated; final pH never measured. Unused."
+    flags: [si_read_2026-10-29, norfuraneol_curve_x_intercept_25ugL_rows_unusable, nd_cells_bounded_by_si_lod]
+    note: 'Second (independent) 100->120 C sulfur span at pH 7 / 120 min, tests Kang''s low leg. Externally calibrated: per-compound authentic-standard curves, area ratio to 1,2-dichlorobenzene IS (SI Table S1; matrix and range of calibration not stated); HS-SPME operational, no partition correction. Norfuraneol curve impossible (x-intercept 25.3 ug/L, 2 of 5 cells below). Reaction volume not stated; final pH never measured. Unused.'
   - id: feng2022_table2_rgarp_gsh_volatiles
     dossier: feng2022_extraction.md
     paper: "Feng et al. 2022 J Agric Food Chem 70:9095"
@@ -1012,13 +1012,13 @@ entries:
     time_min: [30, 60, 90, 120]
     species: ["MFT", "FFT", "furfural", "3-(methylthio)-2-butanone", "2-methyl-2-thiazoline", "thiophenes", "thiazoles", "furans"]
     kind: time_series
-    location: "Table 2"
+    location: Table 2; SI Table S1 calibration curves / LOD / LOQ; SI Table S3 OAVs
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: true
     condition_quote: ""
-    flags: []
-    note: "Text's sulfur:furan ratio x1.98 not reproducible from the table (1.61). 2-methyl-2-thiazoline RI suspect. Same caveats as Table 1."
+    flags: [si_read_2026-10-29, norfuraneol_curve_x_intercept_25ugL_rows_unusable, nd_cells_bounded_by_si_lod]
+    note: Text's sulfur:furan ratio x1.98 not reproducible from the table (1.61). 2-methyl-2-thiazoline RI suspect. Externally calibrated as Table 1; all 5 norfuraneol cells lie below that curve's 25.3 ug/L x-intercept. Thiophene 0.04 and methylpyrazine 0.04 ug/L sit at LOQ.
   - id: feng2022_table3_pyrazines_arms
     dossier: feng2022_extraction.md
     paper: "Feng et al. 2022 J Agric Food Chem 70:9095"
@@ -1102,13 +1102,13 @@ entries:
     time_min: [30, 120]
     species: ["cysteine", "glutathione", "3-(methylthio)-2-butanone", "thiazoles", "total volatiles (Rib+GSH)"]
     kind: endpoint
-    location: "text p. 9102-9103 ('data not shown'); SI Fig. S2, S3, Table S1 (not on disk)"
-    status: supplement_missing
+    location: text p. 9102-9103 ('data not shown'); SI Fig. S2 (total volatiles, ARP vs Rib+GSH, 120 C only) and Fig. S3 (total thiazoles, ARP+Cys / ARP+GSH, 100 and 120 C, 120 min) - figure-only, described in dossier 'Supplementary material' S-d
+    status: figure_only
     quant_class: calibrated
     simulable: true
     condition_quote: ""
-    flags: []
-    note: "ARP + Cys arm volatiles (thiazoles x2.48 vs GSH arm, 3-(methylthio)-2-butanone 36.41 ug/L) and reacted Cys (9.15 / 25.84 mM at 100 / 120 C) printed only as text, several marked 'data not shown'; curves in SI not on disk."
+    flags: [si_read_2026-10-29, rib_gsh_comparator_120c_only, fig_s3_gsh_120c_bar_above_table2_thiazole_sum]
+    note: ARP + Cys arm volatiles (thiazoles x2.48 vs GSH arm, 3-(methylthio)-2-butanone 36.41 ug/L) and reacted Cys (9.15 / 25.84 mM at 100 / 120 C) printed only as text. SI Fig. S2 has no 100 C Rib+GSH series. Fig. S3 GSH-120 C bar reads ~3 ug/L by eye vs 2.39 summed from Table 2 (not digitised).
   - id: cao2017_fig5_ttca_cama_glyarp
     dossier: cao2017_extraction.md
     paper: "Cao et al. 2017 Food Res Int 99:444"
@@ -1498,13 +1498,13 @@ entries:
     time_min: [30]
     species: ["pH", "A420"]
     kind: endpoint
-    location: "Table S1"
-    status: supplement_missing
+    location: Table S1 cited by the main text (sec. 2, 3.1, 3.3) but no supplementary material found at the publisher (owner, 2026-10-29); text sec. 3.1 gives direction only
+    status: text_only
     quant_class: other
     simulable: true
-    condition_quote: ""
-    flags: []
-    note: "Measured final pH and A420 after heating, in Table S1 (not on disk)."
+    condition_quote: from systems (a) to (c), greater dosage of Gly-Amadori compounds used resulted in greater absorbance at 420 nm and drop in the values of pH of the reaction solution
+    flags: [si_not_found_at_publisher_2026-10-29, direction_only_no_values]
+    note: 'Final pH and A420 (and sensory scores) were measured but no values exist on disk or, per the owner, at the publisher. Text: A420 rises and pH falls with Gly-Amadori dose (a -> c); sensory score rises then falls. Directional only.'
   - id: zhang2026_fig3_gsh_glucose_nonvolatiles
     dossier: zhang2026_extraction.md
     paper: "Zhang C, Zhen, He, Li, Liang, Hu & Xie 2026 Food Chem 510:148681"
@@ -6345,8 +6345,8 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "Met 2.5 mg/mL in sodium phosphate pH 4.9, 0.01 M; 30-mL sealed pressure vials; 115 °C, 60 min"
-    flags: [internal_inconsistency]
-    note: "Absolute ng/mL not consistent across figures (Met-alone 60 min: DMDS 0.10 here vs 0.52-0.76 in Figs. 2/3/5; methional 0.024 vs 17.7); DMTS ~1.1 ng/mL floor even unheated. Use directions/within-figure ratios. Met loss ~3.2e-3 /min with no product balance. Quote is the dossier's methods-table rendering."
+    flags: [internal_inconsistency, dmts_floor_is_calibration_intercept_1_10_ngml]
+    note: 'Absolute ng/mL not consistent across figures (Met-alone 60 min: DMDS 0.10 here vs 0.52-0.76 in Figs. 2/3/5; methional 0.024 vs 17.7). DMTS ~1.1 ng/mL floor even unheated = x-intercept of the SI Table S2 DMTS curve (11.058/10.029 = 1.10 ng/mL): printed 1.1 means not detected; net DMTS = printed - 1.10. Use directions/within-figure ratios. Met loss ~3.2e-3 /min with no product balance.'
   - id: zhang2023b_fig2ab_methionine_lipids
     dossier: zhang2023b_extraction.md
     paper: "Zhang, Wang & Cao 2023 Food Res Int 172:113200"
@@ -6363,7 +6363,7 @@ entries:
     quant_class: calibrated
     simulable: false
     condition_quote: ""
-    flags: [internal_inconsistency]
+    flags: [internal_inconsistency, dmts_floor_is_calibration_intercept_1_10_ngml]
     note: "oil-water arm; lipid not modelled in this lane."
   - id: zhang2023b_fig2cd_methionine_amino_acids
     dossier: zhang2023b_extraction.md
@@ -6381,7 +6381,7 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: ""
-    flags: [internal_inconsistency]
+    flags: [internal_inconsistency, dmts_floor_is_calibration_intercept_1_10_ngml]
     note: "Cys arm suppresses DMDS. Absolute scale suspect (see fig1a entry)."
   - id: zhang2023b_fig2ej_methionine_sugar_amino_acid
     dossier: zhang2023b_extraction.md
@@ -6399,7 +6399,7 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "Met/Cys/various reducing sugars ... in a ratio of 1:1:7.5"
-    flags: [condition_uncertain, internal_inconsistency]
+    flags: [condition_uncertain, internal_inconsistency, dmts_floor_is_calibration_intercept_1_10_ngml]
     note: "Which component carries the 7.5 is ambiguous across sections (elsewhere 'Xyl:Cys:Met = 1:1:7.5'). DMTS forms without cysteine in Met + sugar pots (against strict no-DMTS rule of methionine lane)."
   - id: zhang2023b_fig3_initial_ph_3_8_dmds_dmts
     dossier: zhang2023b_extraction.md
@@ -6417,8 +6417,8 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: ""
-    flags: [internal_inconsistency]
-    note: "pH axis of the methionine lane with and without cysteine-derived intermediates. Final pH measured with hand-held meter after reaction but values in SI (Fig. S2, not on disk)."
+    flags: [internal_inconsistency, dmts_floor_is_calibration_intercept_1_10_ngml, final_ph_not_reported]
+    note: 'pH axis of the methionine lane with and without cysteine-derived intermediates. Final pH said to be measured after reaction, but SI Fig. S2 holds the final pH of the amino-acid / MRP groups at the nominal 4.9 start, NOT of this pH 3-8 series: no final pH for it anywhere (SI read 2026-10-29).'
   - id: zhang2023b_fig5_preheated_met_plus_xylcys_or_ttca
     dossier: zhang2023b_extraction.md
     paper: "Zhang, Wang & Cao 2023 Food Res Int 172:113200"
@@ -6435,26 +6435,26 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "Xyl:Cys:Met = 1:1:7.5, w/w"
-    flags: [internal_inconsistency]
+    flags: [internal_inconsistency, dmts_floor_is_calibration_intercept_1_10_ngml]
     note: "TTCA keeps MeSH high (490-790 ng/mL) and DMDS low: MeSH->DMDS oxidation blocked. Two-stage protocol."
   - id: zhang2023b_tables3_figs1_s2_storage_met_ph
     dossier: zhang2023b_extraction.md
     paper: "Zhang, Wang & Cao 2023 Food Res Int 172:113200"
     lab: "BTBU (Cao Y)"
-    system: "Xyl-Cys-Met in several proportions stored at 50 C; methionine residuals; post-reaction pH values"
-    medium: "phosphate pH 4.9"
-    temperature_c: [115, 50]
+    system: Xyl:Cys:Met 2:2:0, 2:0:2, 2:1:2 and 2:2:2 (groups I-IV), stored
+    medium: phosphate pH 4.9 (main text; not restated in the SI)
+    temperature_c: [50]
     ph: {initial: 4.9, measured_during: false, final: null}
-    time_min: [1440, 80640]
-    species: ["FFT", "difurfuryl disulfide", "DMDS", "DMTS", "methional", "furfuryl methyl sulfide", "methionine", "pH"]
+    time_min: [1440, 40320, 80640]
+    species: [DMDS, DMTS, dimethyl tetrasulfide, methional, FFT, difurfuryl disulfide, furfuryl methyl sulfide, 3-methylthiophene, 2-thiophenethiol, 2-thiophenecarboxaldehyde, 2-thiophenemethanethiol, 4-methyl-5-thiazoleethanol]
     kind: time_series
-    location: "Table S3 (storage volatiles), Fig. S1 (Met residuals), Fig. S2 (pH values)"
-    status: supplement_missing
-    quant_class: calibrated
+    location: SI Table S3 (12 VSCs x 4 groups x day 1/28/56, ng/mL +/- SD, n = 3; transcribed in dossier 'Supplementary material'); Figs. S1-S2 in a separate entry
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
     simulable: false
-    condition_quote: ""
-    flags: []
-    note: "SI not on disk. Text: FFT decays to undetectable in storage in all systems. Measured final pH of the pH-3-8 series lives in Fig. S2."
+    condition_quote: Values (semi-quantitative data) represent triplicate means +/-SD.
+    flags: [si_read_2026-10-29, semi_quant_by_author_label, not_on_table_s2_curves_dmts_below_curve_intercept, fft_in_cys_free_group_ii]
+    note: FFT and difurfuryl disulfide only at day 1, gone by day 28. DMDS/DMTS grow most in the Cys-free Xyl+Met group; methional ends 4x higher in the Cys-containing groups III/IV. Directional/ratio use only.
   - id: qi2022_table2_stewed_goat_mesh_dmts
     dossier: qi2022_extraction.md
     paper: "Qi, Wang, Zhan & Tian 2022 (stewed mutton with thyme)"
@@ -7821,7 +7821,7 @@ entries:
     quant_class: calibrated
     simulable: false
     condition_quote: ""
-    flags: [ea_fixed_not_estimated]
+    flags: [ea_fixed_not_estimated, si_fig_s1_methional_65c_replicate2_copy_of_replicate1]
     note: "matrix (malt). Multi-response fit inside a cereal matrix; all Ea fixed, no confidence intervals; dossier calls them moisture-confounded. Methional is the only sulfur species. Fig. 1 points not tabulated."
   - id: martins2010_tab1_tab2to7_thiol_design_effects
     dossier: martins2010_extraction.md
@@ -7967,3 +7967,79 @@ entries:
     condition_quote: ""
     flags: []
     note: "matrix (potato dough). Bake 160 C 6 min + 130 C 10 min (lower bake 140/110 C in Fig. S1). Methional relative to control only (e.g. 499 % with 4x Met+Ile+Leu+Val); absolute amounts in SI Tables S2-S3, not on disk. Not in the inventory file; added by the merge pass."
+
+  - id: us9005689_ex4_fft_single_vs_multistep
+    dossier: us9005689_extraction.md
+    paper: Nestec patent US 9,005,689 B2 (2015), Example 4
+    lab: Nestle Research / TU Munich (Davidek, Blank, Hofmann, Schieberle)
+    system: glucose + glutamic acid + cysteine, each 0.4 mol/L (single step); or Glc/Glu 0.8 M (pH 7, 30 min) and Cys 0.8 M (pH 9, 6 h) pre-reacted then mixed 1:1
+    medium: 0.5 mol/L phosphate buffer, pH 7 (step 3 re-adjusted to pH 7)
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [30, 120]
+    species: [FFT]
+    kind: endpoint
+    location: col. 5 text and Fig. 2 bar labels (0.4 / 2.3 single step, 14 / 23 multi step, ug/mol Cys); dossier sec. 3
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: true
+    condition_quote: heating of all three precursors (each 0.4 mol/L) in phosphate buffer (0.5 mol/L; pH 7) at 100 C for 2 hours
+    flags: [patent_not_peer_reviewed, analytical_method_not_stated, no_replicates, yield_per_mol_cys_charged]
+    note: Single-step arm is a simulable two-point FFT time course (30 min, 2 h) in a Glc/Glu/Cys pot; multi-step arm needs the unreported step-2 composition. Yields ~1e-8 to 1e-7 mol/mol.
+
+  - id: us9005689_ex5_2at_adht_single_vs_multistep
+    dossier: us9005689_extraction.md
+    paper: Nestec patent US 9,005,689 B2 (2015), Example 5
+    lab: Nestle Research / TU Munich (Davidek, Blank, Hofmann, Schieberle)
+    system: glucose + glutamic acid + cysteine, each 0.4 mol/L (single step); or Glc/Glu 0.8 M (pH 7, 30 min) and Cys 0.8 M (pH 3, 6 h) pre-reacted then mixed 1:1
+    medium: 0.5 mol/L phosphate buffer, pH 7 (step 2 at pH 3)
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [30]
+    species: [2-acetyl-2-thiazoline, '5-acetyl-2,3-dihydro-1,4-thiazine']
+    kind: endpoint
+    location: col. 6 text and Fig. 8 bar labels (2-AT 17 / 37, ADHT 29 / 114 ug/mol Cys); dossier sec. 3
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: true
+    condition_quote: Single step reaction of glucose with glutamic acid and cysteine (each 0.4 mol/L) at pH 7 (phosphate buffer, 0.5 mol/L) yielded 17 ug 2-AT and 29 ug ADHT per mol of cysteine after 30 minutes at 100 C
+    flags: [patent_not_peer_reviewed, analytical_method_not_stated, no_replicates, yield_per_mol_cys_charged]
+    note: Cysteamine-route odorants; single-step 30 min point simulable if the model carries cysteamine + methylglyoxal / 2,3-butanedione.
+
+  - id: us9005689_figs1_7_h2s_cysteamine_vs_ph
+    dossier: us9005689_extraction.md
+    paper: Nestec patent US 9,005,689 B2 (2015), Figs. 1 and 7
+    lab: Nestle Research / TU Munich (Davidek, Blank, Hofmann, Schieberle)
+    system: glucose + cysteine ('Glc/Cys system'); concentrations not printed for the figures
+    medium: buffer at pH 3, 5, 7, 9 (identity not printed for the figures)
+    temperature_c: [100]
+    ph: {initial: [3, 5, 7, 9], measured_during: false, final: null}
+    time_min: [120, 300, 360]
+    species: [hydrogen sulfide, cysteamine]
+    kind: endpoint
+    location: 'Fig. 1 (H2S, mmol/mol Cys, 2 h and 5 h) and Fig. 7 (cysteamine, mmol/mol Cys, 6 h); text: about 4x more H2S at pH 9 than pH 3 after 5 h; dossier sec. 4'
+    status: figure_only
+    quant_class: unknown
+    simulable: false
+    condition_quote: about 4x more hydrogensulfide was formed in glucose/cysteine after 5 hours at 100 C at pH 9 compared to pH 3
+    flags: [patent_not_peer_reviewed, analytical_method_not_stated, glc_cys_not_cys_alone, concentrations_not_printed, directional_ph_selectivity]
+    note: 'Directional: H2S rises and cysteamine falls monotonically with pH (3 to 9) at 100 C; H2S at percent-level yield (mmol/mol). Bar charts not digitised.'
+
+  - id: zhang2023b_figs1_s2_met_residual_final_ph
+    dossier: zhang2023b_extraction.md
+    paper: Zhang, Wang & Cao 2023 Food Res Int 172:113200
+    lab: BTBU (Cao Y)
+    system: methionine 2.5 mg/mL with lipids, 16 amino acids, sugars, cysteine or Cys-sugar MRIs (TTCA, ARP, HRP)
+    medium: 0.01 M phosphate pH 4.9 (nominal start)
+    temperature_c: [115]
+    ph: {initial: 4.9, measured_during: false, final: [4.3, 5.2]}
+    time_min: [60]
+    species: [methionine, pH]
+    kind: endpoint
+    location: SI Fig. S1 (Met remaining, % of unheated) and Fig. S2 (final pH bars, ~20 groups per panel); described in dossier 'Supplementary material', not digitised
+    status: figure_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: Effect of free amino acids (a) and Maillard reaction products (b-d) on pH in model.
+    flags: [si_read_2026-10-29, final_ph_range_read_from_axis_only, not_the_initial_ph_3_8_series, 'also_relevant: aroma_other']
+    note: Final pH ~4.3-5.2 against 4.9 start; cysteine-containing groups lowest. Base pot 115 C, 60 min (main-text methods).

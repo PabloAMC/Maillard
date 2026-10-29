@@ -510,3 +510,63 @@ carried lipid-oxidation load of this isolate is probably at the high end of the 
     clearest registry action this dossier supports. The same file also has no entry for
     (E,E)-2,4-decadienal, (E,E)-2,4-nonadienal or (E)-2-octenal, three lipid-oxidation aldehydes
     this paper shows rising by 43x to 782x across a six-second cook.
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+Source: `data/articles/trikusuma2020_supplementary.docx`. It holds **one item, "Figure S1"** (not a Table S1 as the main
+text and Flags 8a call it): *"Standard addition curves built in non-UHT beverages for selected aroma compounds (Ai: peak area
+of target compound; AISTD: peak area of internal standard). Values are represented as average of triplicate +/- standard
+deviation."* Twenty Word-native charts, one per odorant (all of Table 2 except 2-acetyl-1-pyrroline, which is SIDA).
+
+**How the numbers were obtained.** The charts are Office charts whose data are stored as numeric caches inside the .docx;
+the values below were **read from those caches** (exact as stored, not digitised from an image), with the chart XML unzipped
+to a scratch directory and parsed. x = concentration added (mg/L), y = peak-area ratio to the internal standard
+(4-heptanone, DHS-GC/MS-QQQ), ± SD (n = 3). Each chart carries a linear trendline; its equation is **not stored** in the
+file, so slope, intercept and R² below are my OLS fits to the stored means `[D]`. "intercept/slope" is the standard-addition
+estimate of the native concentration in the non-UHT beverage.
+
+| # | compound | x unit | points: added (mg/L) → Ai/AISTD ± SD | n | slope | intercept | R² | intercept/slope (mg/L) |
+|---|---|---|---|---|---|---|---|---|
+| 1 | 1-pentanol | Concentration added (mg/L) | 0 → 1.661 ± 0.081; 0.04587 → 4.841 ± 0.28; 0.09173 → 8.261 ± 0.86; 0.1835 → 13.72 ± 0.78; 0.3211 → 20.6 ± 1.2 | 5 | 58.76 | 2.27 | 0.993 | 0.03864 |
+| 2 | Hexanal | Concentration added (mg/L) | 0 → 1.317 ± 0.17; 0.4454 → 4.247 ± 0.34; 0.6681 → 4.814 ± 0.67; 0.8909 → 5.682 ± 0.8; 1.114 → 6.61 ± 0.1 | 5 | 4.623 | 1.651 | 0.972 | 0.3571 |
+| 3 | Isovaleric Acid | Concentration added (mg/L) | 0 → 385.3 ± 72; 0.63 → 591.8 ± 73; 0.945 → 639.7 ± 87; 1.26 → 864 ± 1.6e+02; 1.89 → 1060 ± 2.1e+02 | 5 | 364.4 | 363.8 | 0.975 | 0.9982 |
+| 4 | 2-Heptanone | Concentration added (mg/L) | 0 → 2.286 ± 0; 0.02457 → 4.832 ± 0.44; 0.0351 → 5.273 ± 0.12; 0.04914 → 6.796 ± 0.46; 0.0702 → 8.814 ± 0.46 | 5 | 91.71 | 2.317 | 0.994 | 0.02527 |
+| 5 | Heptanal | Concentration added (mg/L) | 0 → 0.5967 ± 0.056; 0.02099 → 2.143 ± 0.3; 0.02998 → 2.924 ± 0.19; 0.04198 → 3.289 ± 0.15; 0.05997 → 5.346 ± 0.45 | 5 | 76.19 | 0.5293 | 0.977 | 0.006947 |
+| 6 | 2, 5-Dimethyl pyrazine | Concentration added (mg/L) | 0 → 3.45 ± 0.2; 0.0004585 → 4.453 ± 0.08; 0.000917 → 5.281 ± 0.45; 0.001834 → 6.499 ± 0.12; 0.00321 → 8.413 ± 0.29 | 5 | 1503 | 3.689 | 0.992 | 0.002454 |
+| 7 | Methional | Concentation aded (mg/L) | 0 → 0.1649 ± 0.015; 0.0005688 → 0.3021 ± 0.025; 0.0009954 → 0.4006 ± 0.031; 0.001422 → 0.4625 ± 0.053; 0.002844 → 0.9105 ± 0.12 | 5 | 260.5 | 0.1444 | 0.988 | 0.0005545 |
+| 8 | 1-Octen-3-ol | Concentration added (mg/L) | 0 → 5.434 ± 0.24; 0.002925 → 9.054 ± 0.37; 0.005849 → 12.05 ± 1; 0.0117 → 15.99 ± 0.71; 0.02047 → 23.8 ± 2.7 | 5 | 865.7 | 6.176 | 0.993 | 0.007134 |
+| 9 | 2 - Pentyl furan  | Concentration added (mg/L) | 0 → 21.99 ± 1; 0.03361 → 27.83 ± 3.2; 0.06723 → 32.73 ± 4; 0.2353 → 90.26 ± 9.8; 0.2689 → 101.4 ± 13 | 5 | 307 | 17.68 | 0.991 | 0.0576 |
+| 10 | (E)-2-Octenal  | Concentration added (mg/L) | 0 → 0.06865 ± 0.012; 0.001508 → 0.2122 ± 0.032; 0.00754 → 0.6457 ± 0.092; 0.02639 → 3.567 ± 0.36; 0.0377 → 4.082 ± 0.51 | 5 | 115.4 | 0.02683 | 0.974 | 0.0002325 |
+| 11 | Nonanal | Concentration added (mg/L) | 0 → 3.542 ± 0.35; 0.02219 → 14.5 ± 0.88; 0.04438 → 17.66 ± 2.3; 0.1109 → 47.1 ± 6.2; 0.1553 → 65.62 ± 1.9 | 5 | 396.9 | 3.268 | 0.994 | 0.008236 |
+| 12 | Maltol | Concentration added (mg/L) | 0 → 179 ± 24; 2 → 245.4 ± 7.1; 4 → 483 ± 53; 6 → 761.3 ± 90; 8 → 847.2 ± 1.1e+02 | 5 | 92.61 | 132.8 | 0.961 | 1.434 |
+| 13 | Octanoic Acid | Concentration added (mg/L) | 0 → 116.2 ± 8.3; 0.3433 → 165.8 ± 33; 0.515 → 177.1 ± 31; 0.6867 → 194.2 ± 50; 1.03 → 241.7 ± 66 | 5 | 117.9 | 118.3 | 0.990 | 1.003 |
+| 14 | IBMP | Concentration added (mg/L) | 0 → 0.5412 ± 0.54; 0.000184 → 4.471 ± 0.75; 0.000322 → 6.75 ± 0.89; 0.00046 → 8.535 ± 1.2; 0.000644 → 13.29 ± 0.77 | 5 | 1.9e+04 | 0.5972 | 0.989 | 3.143e-05 |
+| 15 | (E,E)-2,4-Nonadienal | Concentration added (mg/L) | 0 → 0.5367 ± 0.042; 0.00197 → 1.039 ± 0.2; 0.003447 → 2.477 ± 0.49; 0.004925 → 3.452 ± 0.1; 0.006895 → 4.029 ± 0.084 | 5 | 554.6 | 0.3949 | 0.957 | 0.0007121 |
+| 16 | Sulfurol | Concentration added (mg/L) | 0 → 39.88 ± 9.5; 0.2667 → 159.1 ± 40; 0.5333 → 273.3 ± 38; 0.8 → 303.1 ± 62; 1.067 → 445 ± 1.4e+02 | 5 | 357.9 | 53.21 | 0.973 | 0.1487 |
+| 17 | (E,E)-2,4-Decadienal | Concentration added (mg/L) | 0 → 1.058 ± 0.048; 0.005538 → 3.411 ± 0.41; 0.007911 → 4.706 ± 0.48; 0.01582 → 9.491 ± 1.6; 0.0712 → 45.67 ± 2.4 | 5 | 637.9 | 0.04911 | 0.999 | 7.699e-05 |
+| 18 | p-Vinylguaiacol | Concentration added (mg/L) | 0 → 0.5061 ± 0.088; 0.01683 → 0.8519 ± 0.18; 0.05891 → 1.143 ± 0.31; 0.1052 → 2.386 ± 0.042; 0.2104 → 3.664 ± 0.37 | 5 | 15.26 | 0.5158 | 0.977 | 0.0338 |
+| 19 | 4-Hydroxybenzaldehyde | Concentration added (mg/L) | 0 → 0.0312 ± 0.0033; 0.001582 → 0.03745 ± 0.0073; 0.003164 → 0.0585 ± 0.0034; 0.005538 → 0.08936 ± 0.013; 0.007911 → 0.1125 ± 0.02 | 5 | 10.92 | 0.02607 | 0.985 | 0.002388 |
+| 20 | gamma-Nonalactone | Concentration added (mg/L) | 0 → 6.675 ± 0.84; 0.003164 → 12.15 ± 1.2; 0.005538 → 16.69 ± 1.1; 0.01108 → 24.03 ± 0.84; 0.01582 → 33.61 ± 3.4 | 5 | 1657 | 6.833 | 0.995 | 0.004124 |
+
+(Chart 2, hexanal, stores a duplicate unlinked series; the trendline series is used. Axis-title typos as stored:
+"Concentation aded", "RAtio".)
+
+**Checks `[D]`.** The standard-addition x-intercepts (× 1000, μg/L) reproduce the **non-UHT column of main Table 2** for 14 of
+20 compounds to ≤ 2 % (1-pentanol 38.6 vs 38.6; heptanal 6.95 vs 6.95; methional 0.55 vs 0.55; 1-octen-3-ol 7.13 vs 7.13;
+nonanal 8.24 vs 8.24; IBMP 0.031 vs 0.031; (E,E)-2,4-nonadienal 0.71 vs 0.71; p-vinylguaiacol 33.8 vs 33.8; γ-nonalactone
+4.12 vs 4.12; isovaleric acid 998 vs 1010; octanoic acid 1003 vs 1010; maltol 1434 vs 1440; 2,5-dimethylpyrazine 2.45 vs
+2.46; 2-heptanone 25.3 vs 26.8 (6 %)). Larger gaps: hexanal 357 vs 331 (+8 %), 2-pentylfuran 57.6 vs 59.4, 4-hydroxybenzaldehyde
+2.39 vs 2.30, (E)-2-octenal 0.23 vs 0.31, (E,E)-2,4-decadienal 0.077 vs 0.06, **sulfurol 149 vs 113 (+32 %)** — probably
+per-replicate regressions averaged in the paper; the hexanal curve is visibly non-linear (unspiked point below the line).
+So Figure S1 is the calibration behind Table 2's control column, and it confirms that column.
+
+⚠️ **What it does NOT give: a matrix/water factor.** Only beverage curves exist — **no curves in water** — so the slopes cannot
+be turned into a matrix suppression of hexanal or other lipid aldehydes (the purpose the matrix ledger entry recorded).
+Slopes are area-ratio sensitivities relative to 4-heptanone within one matrix; they are not partition coefficients. No curves
+are given for the UHT or aged beverages, so their Table 2 columns presumably reuse the non-UHT curves (not stated) — i.e.
+assume UHT does not change the matrix response.
+
+**Model use.** Partly: it validates the Table 2 non-UHT concentrations (and their quantification basis) but supplies no
+matrix-vs-water number.

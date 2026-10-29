@@ -12,6 +12,7 @@ counts:
   cited_only_from_code_or_dossier: 366
 dossiers_without_printed_doi:
 - data/lit/extraction_dossiers/Zhang2024_extraction.md
+- data/lit/extraction_dossiers/barallatperez2023_extraction.md
 - data/lit/extraction_dossiers/ep2943072b2_extraction.md
 - data/lit/extraction_dossiers/friedman1990_extraction.md
 - data/lit/extraction_dossiers/k1_kinetic_parameters.md
@@ -34,6 +35,7 @@ dossiers_without_printed_doi:
 - data/lit/extraction_dossiers/us3904655_extraction.md
 - data/lit/extraction_dossiers/us5760005_extraction.md
 - data/lit/extraction_dossiers/us8920862_extraction.md
+- data/lit/extraction_dossiers/us9005689_extraction.md
 - data/lit/extraction_dossiers/us9943096_extraction.md
 dossiers_sharing_a_doi:
   10.1016/j.foodchem.2016.11.159:

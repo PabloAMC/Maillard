@@ -1662,43 +1662,115 @@ entries:
     time_min: [5, 60]
     species: [sucrose, glucose, total_amino_acids, bound_lysine, furosine_FL, 1-DG, 3-DG, glucosone, glyoxal, methylglyoxal, diacetyl, HMF]
     kind: rate_constant
-    location: "Table 2 (24 constants, 5 matrices x 2 T, +/- HPD, transcribed sec. 3); Table 1 envelope; text sec. 3.2 maxima; time courses in absent SI Figs. S1-S5"
+    location: "Table 2 (24 constants, 5 matrices x 2 T, +/- HPD, transcribed sec. 3); Table 1 envelope; text sec. 3.2 maxima; SI Figs. S1-S5 (per-replicate time courses, figure-only, separate entry)"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: false
     condition_quote: "30 g on an aluminium plate, conventional oven (Memmert UN 55), 160 and 180 C, 5 to 60 min ... triplicate"
-    flags: [matrix_food, ph_raw_sample_only, fl_is_furosine_x2_2, printed_sign_error_eq4_eq27, supplement_missing_time_courses]
+    flags: [matrix_food, ph_raw_sample_only, fl_is_furosine_x2_2, printed_sign_error_eq4_eq27, si_read_2026-10-29]
     note: "Matrix (one entry). ~230 rate-constant cells, two networks (pumpkin separate); ~12 ind and ~40 HPD>=estimate cells. No Ea. Named in B12 prereg as a low-moisture validation set but no data enter the core. CML/CEL also measured."
+  - id: sen2022_figs_s1_s5_replicate_time_courses
+    dossier: sen2022_extraction.md
+    paper: "Sen & Gokmen 2022 Food Chem 395:133583"
+    lab: "Hacettepe (Gokmen)"
+    system: "sunflower, pumpkin, flax seeds, peanut, almond; 30 g roasted on aluminium plate"
+    medium: "low-moisture nut/seed matrices, oven; raw pH 6.62-7.14 and a_w 0.43-0.62 (Table 1)"
+    temperature_c: [160, 180]
+    ph: {initial: [6.62, 7.14], measured_during: false, final: null}
+    time_min: [0, 60]
+    species: [sucrose, bound_lysine, total_amino_acids, fructosyllysine, HMF, 3-DG, diacetyl, methylglyoxal, glyoxal, CML, CEL]
+    kind: time_series
+    location: "SI Figs. S1-S5 (one per matrix; replicate points + model lines, umol/kg; described in dossier 'Supplementary material', not digitised)"
+    status: figure_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Kinetic model fits (lines) to the obtained experimental data (symbols) of reactants and products during roasting"
+    flags: [matrix_food, ph_raw_sample_only, si_read_2026-10-29]
+    note: "The per-sample sugar / 3-DG / HMF time courses exist only as figures (no SI table). Panel list from Fig. S2 (sunflower); pumpkin has its own network. Digitising would give a low-moisture trunk check."
   - id: gursulaktag2020_fruit_juice_storage_matrix
     dossier: gursulaktag2020_extraction.md
     paper: "Gursul Aktag & Gokmen 2020 Food Chem 320:126620"
     lab: "Hacettepe (Gokmen)"
     system: "laboratory-made apple juice, orange juice, peach nectar (15-16 Brix), pasteurised 90 C x 10 min"
-    medium: "fruit juices, pH 3.4 constant over storage (Table S3), falcon tubes"
+    medium: "fruit juices, pH 3.36-3.53 measured and constant over storage (SI Table S3), falcon tubes"
     temperature_c: [4, 27, 37]
-    ph: {initial: [3.4], measured_during: true, final: [3.4]}
+    ph: {initial: [3.36, 3.53], measured_during: true, final: [3.34, 3.53]}
     time_min: [0, 241920]
     species: [sucrose, glucose, fructose, glucosone, 3-DG, 1-DG, threosone, glyoxal, methylglyoxal, HMF]
     kind: rate_constant
-    location: "Table 1 (15 steps x 3 juices x 27/37 C, x10^-3 week^-1); text sec. 3.1 maxima (dossier sec. 6); Fig. 4a-c time courses figure-only; 4 C data and pH in absent SI"
+    location: "Table 1 (15 steps x 3 juices x 27/37 C, x10^-3 week^-1); text sec. 3.1 maxima (dossier sec. 6); Fig. 4a-c time courses figure-only; SI Tables S1-S4 in separate entries"
     status: in_model_check
     quant_class: calibrated
     simulable: false
     condition_quote: "there was no accumulation of HMF at 27 C"
-    flags: [matrix_food, table2_ea_refused_entirely, 21_cells_fixed, supplement_missing_s1_s4]
+    flags: [matrix_food, table2_ea_refused_entirely, 21_cells_fixed, si_read_2026-10-29, ph_3_4_is_nominal_si_gives_per_juice]
     note: "Matrix (one entry). 27 C zero-HMF row is B7 hold-out H2 (FAIL); 37 C maxima reported unscored. 48 estimated k cells usable; Table 2 Ea not reproducible. Amino acids flat (Maillard absent, measured). 1-DG not detected."
+  - id: gursulaktag2020_tab_s1_4c_null_arm
+    dossier: gursulaktag2020_extraction.md
+    paper: "Gursul Aktag & Gokmen 2020 Food Chem 320:126620"
+    lab: "Hacettepe (Gokmen)"
+    system: "laboratory-made apple juice, orange juice, peach nectar (15-16 Brix), pasteurised 90 C x 10 min"
+    medium: "fruit juices, pH 3.36-3.53 (SI Table S3), falcon tubes"
+    temperature_c: [4]
+    ph: {initial: [3.36, 3.53], measured_during: false, final: null}
+    time_min: [0, 241920]
+    species: [sucrose, glucose, fructose, HMF, 3-DG, glucosone, glyoxal, threosone, methylglyoxal]
+    kind: time_series
+    location: "SI Table S1 (mmol/L, mean +/- SD, every 2 weeks; transcribed in dossier 'Supplementary material')"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "there were no significant changes in concentrations of reactants and reaction products in the samples stored at 4 C (Table S1)"
+    flags: [matrix_food, null_result_hmf_nd_all_cells, oj_4c_sugar_rows_scaled_template_not_independent, threosone_semi_quant_on_glucosone]
+    note: "A low-temperature 'nothing happens' arm (HMF nd throughout). Orange-juice sugar rows weeks 2-22 are a template row times round factors (identical CV and Glc/Fru ratio): do not use them as data. Apple and peach rows look ordinary."
+  - id: gursulaktag2020_tab_s2_s3_amino_acids_ph_brix
+    dossier: gursulaktag2020_extraction.md
+    paper: "Gursul Aktag & Gokmen 2020 Food Chem 320:126620"
+    lab: "Hacettepe (Gokmen)"
+    system: "laboratory-made apple juice, orange juice, peach nectar"
+    medium: "fruit juices, falcon tubes"
+    temperature_c: [27, 37]
+    ph: {initial: [3.36, 3.53], measured_during: true, final: [3.34, 3.53]}
+    time_min: [0, 241920]
+    species: [free_amino_acids_21_individual, pH, Brix]
+    kind: endpoint
+    location: "SI Table S2 (amino acids mg/L at week 0 and 24 only) and Table S3 (Brix, pH every 2 weeks); transcribed in dossier 'Supplementary material'"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "the concentrations of free amino acids remained relatively stable in all samples during storage at all temperatures (Table S2)"
+    flags: ["complements: gursulaktag2020_fruit_juice_storage_matrix", matrix_food, maillard_off_control_measured, ph_3_4_is_nominal_si_gives_per_juice]
+    note: "Measured amine-off control (no amino-acid loss over 24 weeks at 27/37 C). pH constant within +/-0.05; apple and peach ~3.5, orange ~3.4."
+  - id: gursulaktag2020_tab_s4_comprehensive_model_constants
+    dossier: gursulaktag2020_extraction.md
+    paper: "Gursul Aktag & Gokmen 2020 Food Chem 320:126620"
+    lab: "Hacettepe (Gokmen)"
+    system: "laboratory-made apple juice, orange juice, peach nectar"
+    medium: "fruit juices, pH 3.36-3.53"
+    temperature_c: [27, 37]
+    ph: {initial: [3.36, 3.53], measured_during: true, final: [3.34, 3.53]}
+    time_min: [0, 241920]
+    species: [sucrose, glucose, fructose, "1,2-enediol", 3-DG, glucosone, threosone, glyoxal, methylglyoxal, HMF]
+    kind: rate_constant
+    location: "SI Table S4 (22 steps x 3 juices x 27/37 C, week^-1 x 10^3, +/- 95 % HPD; transcribed in dossier 'Supplementary material')"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "the confidence intervals of rate constants were not well estimated for comprehensive model (Table S4 and Fig. S2-S4)"
+    flags: [rejected_model_by_authors, 64_of_132_cells_ind_lb_or_fixed, do_not_use_values]
+    note: "Constants of the comprehensive Fig. 2 network the authors abandoned for the 15-step model of main Table 1. Its complete column header confirms the column order recovered for main Table 1. Record only."
   - id: gursul2020_fruit_juice_storage_matrix
     dossier: gursul2020_extraction.md
     paper: "Gursul Aktag & Gokmen 2020 Food Chem 320:126620"
     lab: "Hacettepe (Gokmen)"
     system: "laboratory-made apple juice, orange juice, peach nectar"
-    medium: "fruit juices, pH 3.4, stored 24 weeks"
+    medium: "fruit juices, pH 3.34-3.54 (SI Table S3), stored 24 weeks"
     temperature_c: [4, 27, 37]
-    ph: {initial: [3.4], measured_during: true, final: [3.4]}
+    ph: {initial: [3.36, 3.53], measured_during: true, final: [3.34, 3.53]}
     time_min: [0, 241920]
     species: [sucrose, glucose, fructose, glucosone, 3-DG, 1-DG, threosone, glyoxal, methylglyoxal, HMF]
     kind: rate_constant
-    location: "Table 1 (column order recovered), Table 2; Fig. 4a-c figure-only; SI absent"
+    location: "Table 1 (column order recovered), Table 2; Fig. 4a-c figure-only; SI read 2026-10-29, transcribed in gursulaktag2020 dossier"
     status: in_model_check
     quant_class: calibrated
     simulable: false
@@ -2180,18 +2252,18 @@ entries:
     lab: "Jiangnan (Zhang X. / Ho)"
     system: "glucose 0.2 M + glycine / diglycine / triglycine 0.2 M"
     medium: "Milli-Q water, unbuffered, pH set with 6 M NaOH at 25 C"
-    temperature_c: [120]
+    temperature_c: [120, 130]
     ph: {initial: [7.5], measured_during: false, final: null}
     time_min: [5, 80]
     species: ["1-DG", "3-DG"]
     kind: time_series
-    location: "Fig. S5 (Supporting Information, not on disk)"
-    status: supplement_missing
+    location: "SI Fig. S5 A-F (1-DG, 3-DG vs time at 120 and 130 C, three peptide systems) and S5 G (Arrhenius plot); described in dossier 'Supplementary material', not digitised"
+    status: figure_only
     quant_class: calibrated
     simulable: true
     condition_quote: "the 120-130 C deoxyglucosone scatter plots, the Arrhenius plot"
-    flags: [ph_start_only, unbuffered]
-    note: "120 C 1-DG / 3-DG time points behind Table 2; also the Arrhenius plot of Table 1."
+    flags: [ph_start_only, unbuffered, si_read_2026-10-29, caption_says_pseudo_first_order_but_zero_order_lines, 1dg_no_own_standard]
+    note: "120 and 130 C 1-DG / 3-DG points behind Table 2 (4-9 single points per series, straight-line fits), plus the ln k vs 1/T plot behind Table 1. Id keeps '120c' for continuity; S5 also holds 130 C."
   - id: xia2022_fig5_dicarbonyls_browning_130c
     dossier: xia2022_extraction.md
     paper: "Xia, Zhai, Cui, Zhang, Hayat, Zhang & Ho 2022 J Agric Food Chem 70:14907"
@@ -4184,13 +4256,13 @@ entries:
     time_min: [0, 30]
     species: [glucose, proline, methylglyoxal, glyoxal, 2-acetyl-1-pyrroline]
     kind: time_series
-    location: "Fig. 3A-E (105 points digitised in dossier sec. 5); numeric Table S1 not on disk"
+    location: "SI Table S1 (numeric means +/- SD, n = 3, 5 species x 3 T x 8 times; transcribed in dossier 'Supplementary material'); Fig. 3A-E (digitised, dossier sec. 5, superseded); SI Table S2 RRMSE/R2"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: true
     condition_quote: "Proline (0.2 mol/L) and glucose (0.1 mol/L) were dissolved in the phosphate buffer (20 mmol/L, pH = 9.0) ... sealed and heated at 100, 120, and 140 C for 2, 5, 10, 15, 20, 25, and 30 min"
-    flags: [ph_start_only, condition_uncertain]
-    note: "5 species x 3 T x 7 times, n=3. Proline t=0 reads ~232 vs 200 mM stated. pH 9 phosphate unbuffered in practice; come-up time not reported. Glucose ELSD, Pro LC-MS/MS, GO/MGO OPD-HPLC, 2-AP external SPME (weak). Rare glucose+amine dicarbonyl series at 3 T."
+    flags: [ph_start_only, condition_uncertain, si_read_2026-10-29, initial_proline_measured_233mM_not_200]
+    note: "5 species x 3 T x 7 times, n=3, now numeric (SI Table S1). Proline t=0 is 232.99 +/- 1.82 mM vs 200 mM stated (confirmed). pH 9 phosphate unbuffered in practice; come-up time not reported. Glucose ELSD, Pro LC-MS/MS, GO/MGO OPD-HPLC, 2-AP external SPME (weak). Rare glucose+amine dicarbonyl series at 3 T."
   - id: cai2024_table1_multiresponse_constants
     dossier: Cai2024_extraction.md
     paper: "Cai, Pan, Zhang, Yuan, Lao & Wu 2024 Food Res Int 191:114591"
@@ -5283,13 +5355,31 @@ entries:
     time_min: []
     species: [3-methylbutanal, 2-methylbutanal, phenylacetaldehyde, diacetyl, acetic acid, acetaldehyde, pyrazines]
     kind: endpoint
-    location: "Table 3 (27 odorants in isolate C, SIDA, transcribed); Tables S4-S5 (all ten isolates) not on disk"
+    location: "Table 3 (27 odorants in isolate C, SIDA, transcribed); SI Tables S4-S5 (all ten isolates, mg/kg +/- RSD and OAV) transcribed in dossier 'Supplementary material'"
     status: digitised_in_dossier
     quant_class: sida
     simulable: false
     condition_quote: "3-NPH derivatisation + UHPLC-MS/MS stable-isotope dilution"
-    flags: [matrix_food, no_thermal_conditions]
+    flags: [matrix_food, no_thermal_conditions, si_read_2026-10-29, acetoin_row_uniform_1_0_placeholder, pyrazine_loq_not_in_si]
     note: "Matrix entry. Endpoint levels in a processed ingredient, no time/temperature; some analytes use a non-identical labelled IS (e.g. phenylacetaldehyde vs phenylacetic acid-13C2). Useful only as a precursor-state/background level for plant-protein matrices. Lipid aldehydes belong to another lane."
+  - id: us9005689_fig6_methylglyoxal_butanedione_vs_ph
+    dossier: us9005689_extraction.md
+    paper: "Nestec patent US 9,005,689 B2 (2015), Fig. 6"
+    lab: "Nestle Research / TU Munich (Davidek, Blank, Hofmann, Schieberle)"
+    system: "glucose + glutamic acid ('Glc/Glu system'); concentrations not printed for the figure (examples use 0.8 mol/L each)"
+    medium: "buffer at pH 3, 5, 7, 9 (identity not printed for the figure)"
+    temperature_c: [100]
+    ph: {initial: [3, 5, 7, 9], measured_during: false, final: null}
+    time_min: [30]
+    species: [methylglyoxal, "2,3-butanedione"]
+    kind: endpoint
+    location: "Fig. 6 (c in mmol/mol Glc, bar chart; described in dossier sec. 4, not digitised)"
+    status: figure_only
+    quant_class: unknown
+    simulable: false
+    condition_quote: "yield of Sugar fragments generally reaches the maximum under neutral or slightly alkaline conditions"
+    flags: [patent_not_peer_reviewed, analytical_method_not_stated, concentrations_not_printed, "also_relevant: sulfur"]
+    note: "Directional: MGO maximal at pH 7, 2,3-butanedione at pH 5, both near zero at pH 3 (100 C, 30 min). mmol/mol glucose scale."
   - id: almhofer2022_fig2_furfural_loss_arrhenius_water
     dossier: almhofer2022_extraction.md
     paper: "Almhofer, Bischof, Madera & Paulik 2022 Can J Chem Eng 101:2033"
@@ -5378,7 +5468,7 @@ entries:
     quant_class: calibrated
     simulable: false
     condition_quote: "the temperature was increased to the curing temperature (65 C, 78 C or 90 C) in 10 min and kept constant for 8.4 h"
-    flags: [matrix_food, low_moisture_no_aw_term]
+    flags: [matrix_food, low_moisture_no_aw_term, si_fig_s1_data_read_2026-10-29, sugars_erratic_bimodal_in_si]
     note: "Matrix entry. 12 runs x 8 points; ARPs by LC-MS/MS without IS, aldehydes matrix-matched SPME. All four Ea fixed (no intervals), moisture-confounded. Int1 dicarbonyl pool unmeasured. Methional = sulfur lane. Time courses not digitised."
   - id: hemmler2018_fig1b_a294_browning_ribose_aa
     dossier: hemmler2018_extraction.md

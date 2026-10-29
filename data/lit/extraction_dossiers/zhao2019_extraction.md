@@ -238,3 +238,20 @@ TTCA 30 mM) is the closest to a TTCA + Cys + Gly pot but still carries glycine.
 8. **What to request:** Table S1 (pH and A420 after heating — would give a measured pH for each
    pot), the LC-MS data for [¹³C₅]-Gly-Amadori and residual TTCA, and the "0.90 mmol" and "8 : 1"
    arms mentioned as "data not shown".
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+**No supplementary material exists to read.** The owner searched the publisher's page for Zhao et al. 2019 Food Chem
+(10.1016/j.foodchem.2018.08.096) on 2026-10-29 and found no supplementary file. The main text nevertheless cites a
+**"Table S1"** four times (sec. 2: the six systems' compositions; sec. 3.1: compositions, A420, pH; sec. 3.3: sensory) — and
+this dossier (§2, §4, §8) and the sulfur ledger (`zhao2019_tables1_ph_a420`) recorded it as an on-line table "not on disk".
+It should now be treated as **not available at all**.
+
+What the main text supports instead (sec. 3.1, verbatim): *"Table S1 illustrates that from systems (a) to (c), greater dosage
+of Gly-Amadori compounds used resulted in greater absorbance at 420 nm and drop in the values of pH of the reaction
+solution"*, and the sensory score *"first increased and then went down with the increase in the Gly-Amadori concentration"*.
+**Direction only, no values**: the ledger status moves from `supplement_missing` to `text_only` with the flag
+`si_not_found_at_publisher_2026-10-29` (change sent as a patch, since sulfur.yml was being edited by another agent).
+The system compositions are fully given in the main-text methods (§2 here), so nothing else depends on Table S1.

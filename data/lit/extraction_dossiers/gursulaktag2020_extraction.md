@@ -457,3 +457,161 @@ absolute HMF anchor in the whole K5a cluster.
 | HMF LOD/LOQ "10 mg/L and 30 µg/L" | `[M]` | **REFUSE — internally impossible** |
 | threosone concentrations | `[M]` | **`absolute_concentration: false`** |
 | S1–S11 | `[M]`/`[F]` | **STRUCTURAL** — S1, S4, S6 and S11 are the highest-value |
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+Source: `data/articles/gorsul2020_supplementary.docx` (owner's download; the file name misspells the
+author). Four tables, four figures. **Duplicate dossier:** `gursul2020_extraction.md` covers the same
+paper; this (fuller) dossier carries the SI, and the other now points here.
+
+**What it holds.**
+- **Table S1** — the **4 °C arm**: sucrose, glucose, fructose, HMF, 3-DG, glucosone, glyoxal, threosone,
+  methylglyoxal, **mmol/L**, mean ± SD, every 2 weeks for 24 weeks, all three juices. HMF is "nd" in every
+  cell; GO, threosone and MGO are nd in apple and orange; in peach GO 0.02 and threosone 0.01–0.02 mmol/L.
+  Quantification basis: as main-text §2.2 (sugars HPLC-RID, dicarbonyls LC-MS quinoxalines, external
+  calibration; threosone semi-quantified on the glucosone curve).
+- **Table S2** — individual free amino acids, **mg/L**, mean ± SD, at week 0 and after 24 weeks at 27 and
+  37 °C only (no intermediate times; no 4 °C). External calibration (UPLC-TQD HILIC).
+- **Table S3** — °Brix and pH, mean ± SD, every 2 weeks at 27 and 37 °C. ⚠️ **pH is 3.49–3.54 (apple),
+  3.34–3.41 (orange) and 3.49–3.53 (peach), not "3.4" for all three** as the main text and §2 of this
+  dossier say; constant over storage within ±0.05, as claimed.
+- **Table S4** — the **comprehensive (22-step, Fig. 2) model's** rate constants, week⁻¹ × 10³, ± 95 % HPD,
+  per juice × 27/37 °C — the model the authors rejected for poorly estimated intervals before simplifying to
+  the 15-step Fig. 3 network of main Table 1. Its column header is complete ("37 °C | 27 °C" for each juice),
+  confirming the column order this dossier recovered for main Table 1 (§4). Footnote: *"ind, indeterminate,
+  which means a large uncertainty in the estimated parameter within 95% confidence interval. LB, lower bound."*
+- **Figs. S1–S4** — mass balance (S1) and comprehensive-model fits over observed points (S2–S4, 27/37 °C);
+  embedded images not extractable as text; not digitised.
+
+⚠️⚠️ **DATA-INTEGRITY FLAG — the orange-juice 4 °C sugar rows of Table S1 are not independent
+measurements.** For weeks 2–12, glucose and fructose (means *and* SDs) are the week-2 row multiplied by
+exactly 1.00, 0.99, 0.98, 0.985, 0.975, 0.97; for weeks 14–22 they are the week-14 row multiplied by exactly
+1.00, 0.99, 0.985, 0.98, 0.975, and sucrose falls by exactly 0.50 mmol/L per step with a constant SD of 0.27.
+The CV is therefore identical across rows (glucose 2.032 % weeks 2–12; 2.66 % weeks 14–22) and the
+glucose/fructose ratio is constant (1.0118; 1.0068). Checked arithmetically (2026-10-29). Apple and peach
+rows show ordinary scatter. **Do not use the orange 4 °C sugar rows as data**; the 4 °C arm was not used
+by the paper's kinetics either.
+
+**Transcription notes.** Significance letters dropped; "nd" = not detectable; Table S2 SDs merged from the
+source's separate SD rows. Table S4 is transcribed as printed (including "FUR" for fructose in step 1 and
+"G" = glucosone, "T" = threosone, P1–P8 = unspecified products).
+
+Table S1. Changes in the concentrations of reactants and reaction products (mmol/L) in apple juice, orange juice and peach nectar during storage at 4 °C
+|  | Time (week) | Sucrose | Glucose | Fructose | HMF | 3-DG | Glucosone | Glyoxal | Threosone | Methylglyoxal |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Apple Juice | 0 | 135.82 ± 0.66 | 86.28 ± 0.39 | 419.12 ± 0.04 | nd* | 0.10 ± 0.00 | 0.06 ± 0.00 | nd | nd | nd |
+|  | 2 | 129.68 ± 6.51 | 80.16 ± 4.10 | 418.82 ± 0.82 | nd | 0.08 ± 0.01 | 0.05 ± 0.01 | nd | nd | nd |
+|  | 4 | 121.81 ± 4.99 | 79.43 ± 4.10 | 414.73 ± 0.03 | nd | 0.08 ± 0.02 | 0.05 ± 0.02 | nd | nd | nd |
+|  | 6 | 120.62 ± 4.99 | 82.03 ± 0.72 | 407.31 ± 5.38 | nd | 0.12 ± 0.04 | 0.06 ± 0.01 | nd | nd | nd |
+|  | 8 | 127.54 ± 3.37 | 77.56 ± 4.77 | 415.24 ± 3.33 | nd | 0.13 ± 0.03 | 0.06 ± 0.00 | nd | nd | nd |
+|  | 10 | 122.07 ± 1.69 | 78.30 ± 4.08 | 414.49 ± 3.13 | nd | 0.11 ± 0.01 | 0.07 ± 0.02 | nd | nd | nd |
+|  | 12 | 119.42 ± 3.42 | 81.29 ± 0.71 | 410.55 ± 0.09 | nd | 0.11 ± 0.02 | 0.07 ± 0.01 | nd | nd | nd |
+|  | 14 | 123.27 ± 1.71 | 79.03 ± 4.08 | 417.41 ± 1.32 | nd | 0.12 ± 0.02 | 0.06 ± 0.01 | nd | nd | nd |
+|  | 16 | 124.46 ± 1.72 | 79.77 ± 4.07 | 421.84 ± 2.45 | nd | 0.11 ± 0.02 | 0.07 ± 0.00 | nd | nd | nd |
+|  | 18 | 121.56 ± 3.43 | 77.22 ± 4.12 | 415.80 ± 2.54 | nd | 0.12 ± 0.01 | 0.06 ± 0.01 | nd | nd | nd |
+|  | 20 | 121.54 ± 5.25 | 79.82 ± 0.70 | 415.04 ± 2.55 | nd | 0.11 ± 0.01 | 0.07 ± 0.01 | nd | nd | nd |
+|  | 22 | 121.22 ± 3.40 | 79.06 ± 4.10 | 416.02 ± 2.51 | nd | 0.13 ± 0.02 | 0.08 ± 0.00 | nd | nd | nd |
+|  | 24 | 120.59 ± 4.38 | 76.79 ± 4.24 | 415.68 ± 2.39 | nd | 0.13 ± 0.03 | 0.09 ± 0.01 | nd | nd | nd |
+| Orange Juice | 0 | 117.01 ± 0.19 | 193.87 ± 0.17 | 179.62 ± 1.08 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 2 | 112.79 ± 0.90 | 196.88 ± 4.00 | 194.58 ± 2.26 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 4 | 111.76 ± 0.89 | 194.91 ± 3.96 | 192.63 ± 2.24 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 6 | 107.40 ± 5.50 | 192.95 ± 3.92 | 190.69 ± 2.21 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 8 | 111.25 ± 0.89 | 193.93 ± 3.94 | 191.66 ± 2.23 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 10 | 110.22 ± 0.88 | 191.96 ± 3.90 | 189.71 ± 2.20 | nd | 0.01 ± 0.01 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 12 | 109.71 ± 0.87 | 190.98 ± 3.88 | 188.74 ± 2.19 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 14 | 110.28 ± 0.27 | 201.15 ± 5.36 | 199.80 ± 6.49 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 16 | 109.28 ± 0.27 | 199.14 ± 5.30 | 197.80 ± 6.43 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 18 | 108.78 ± 0.27 | 198.13 ± 5.28 | 196.80 ± 6.40 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 20 | 108.28 ± 0.27 | 197.13 ± 5.25 | 195.80 ± 6.36 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+|  | 22 | 107.78 ± 0.27 | 196.12 ± 5.22 | 194.80 ± 6.33 | nd | 0.01 ± 0.00 | 0.01 ± 0.01 | nd | nd | nd |
+|  | 24 | 109.15 ± 0.72 | 193.62 ± 1.49 | 193.56 ± 0.68 | nd | 0.01 ± 0.00 | 0.00 ± 0.00 | nd | nd | nd |
+| Peach Nectar | 0 | 366.89 ± 4.65 | 50.12 ± 0.07 | 45.12 ± 0.75 | nd | 0.01 ± 0.00 | 0.04 ± 0.00 | 0.02 ± 0.00 | 0.01 ± 0.00 | nd |
+|  | 2 | 367.65 ± 4.15 | 58.73 ± 0.47 | 50.94 ± 3.46 | nd | 0.01 ± 0.00 | 0.04 ± 0.00 | 0.02 ± 0.00 | 0.01 ± 0.00 | nd |
+|  | 4 | 363.91 ± 11.14 | 44.61 ± 0.65 | 48.42 ± 2.56 | nd | 0.01 ± 0.00 | 0.05 ± 0.00 | 0.02 ± 0.00 | 0.02 ± 0.00 | nd |
+|  | 6 | 364.43 ± 5.31 | 53.58 ± 0.73 | 52.29 ± 0.32 | nd | 0.01 ± 0.00 | 0.04 ± 0.00 | 0.02 ± 0.00 | 0.01 ± 0.00 | nd |
+|  | 8 | 384.57 ± 0.55 | 55.39 ± 2.50 | 51.18 ± 0.10 | nd | 0.01 ± 0.00 | 0.05 ± 0.00 | 0.02 ± 0.00 | 0.01 ± 0.00 | nd |
+|  | 10 | 369.23 ± 7.38 | 59.12 ± 3.91 | 50.39 ± 0.42 | nd | 0.01 ± 0.00 | 0.05 ± 0.00 | 0.02 ± 0.00 | 0.01 ± 0.00 | nd |
+|  | 12 | 345.81 ± 0.59 | 60.58 ± 8.94 | 49.94 ± 1.24 | nd | 0.01 ± 0.00 | 0.04 ± 0.00 | 0.03 ± 0.00 | 0.02 ± 0.00 | nd |
+|  | 14 | 356.86 ± 2.73 | 59.85 ± 4.54 | 53.39 ± 1.19 | nd | 0.01 ± 0.00 | 0.04 ± 0.00 | 0.03 ± 0.00 | 0.02 ± 0.00 | nd |
+|  | 16 | 372.34 ± 11.02 | 55.70 ± 2.85 | 49.53 ± 1.64 | nd | 0.01 ± 0.00 | 0.04 ± 0.00 | 0.02 ± 0.00 | 0.02 ± 0.00 | nd |
+|  | 18 | 388.80 ± 2.06 | 59.42 ± 1.40 | 46.36 ± 0.40 | nd | 0.00 ± 0.00 | 0.04 ± 0.00 | 0.02 ± 0.00 | 0.02 ± 0.00 | nd |
+|  | 20 | 371.45 ± 13.95 | 56.01 ± 2.14 | 49.07 ± 2.27 | nd | 0.01 ± 0.00 | 0.05 ± 0.00 | 0.02 ± 0.00 | 0.02 ± 0.00 | nd |
+|  | 22 | 370.71 ± 9.71 | 61.71 ± 1.61 | 51.13 ± 3.24 | nd | 0.01 ± 0.00 | 0.06 ± 0.00 | 0.02 ± 0.00 | 0.02 ± 0.00 | nd |
+|  | 24 | 368.20 ± 2.68 | 58.96 ± 5.57 | 52.92 ± 2.87 | nd | 0.01 ± 0.00 | 0.06 ± 0.00 | 0.02 ± 0.00 | 0.02 ± 0.00 | nd |
+
+Table S2. Changes in the concentrations of individual free amino acids (mg/L) in apple juice, orange juice and peach nectar during storage at 27 °C and 37 °C for 24 weeks
+|  | T, time | Ala | Arg | Asn | Asp | Cys | Gaba | Gln | Glu | Gly | His | Leu | Ile | Lys | Met | Phe | Pro | Ser | Thr | Trp | Tyr | Val |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Apple Juice | 0 | 14.95 ± 2.33 | 1.23 ± 0.53 | 122.31 ± 15.01 | 24.77 ± 3.27 | nd | 6.95 ± 0.81 | 1.86 ± 0.19 | 18.45 ± 2.49 | 1.17 ± 0.02 | 0.67 ± 0.07 | 2.01 ± 0.30 | 3.82 ± 0.51 | 1.62 ± 0.15 | nd | 1.29 ± 0.17 | 0.24 ± 0.09 | 5.38 ± 0.80 | 3.79 ± 0.62 | nd | 0.27 ± 0.04 | 0.59 ± 0.01 |
+|  | 27 °C, 24 wk | 15.93 ± 0.87 | 1.02 ± 0.09 | 129.37 ± 10.39 | 28.40 ± 2.23 | nd | 7.16 ± 0.17 | 2.22 ± 0.31 | 19.33 ± 1.65 | 1.36 ± 0.28 | 0.61 ± 0.04 | 2.18 ± 0.11 | 4.04 ± 0.15 | 1.66 ± 0.13 | nd | 1.33 ± 0.08 | 0.22 ± 0.01 | 6.03 ± 0.46 | 3.84 ± 0.25 | nd | 0.32 ± 0.02 | 0.79 ± 0.02 |
+|  | 37 °C, 24 wk | 13.72 ± 0.84 | 0.95 ± 0.04 | 116.08 ± 6.09 | 31.59 ± 2.26 | nd | 5.49 ± 0.23 | 2.28 ± 1.02 | 16.79 ± 0.81 | 1.54 ± 0.07 | 0.60 ± 0.01 | 1.82 ± 0.12 | 3.50 ± 0.18 | 1.65 ± 0.09 | nd | 1.29 ± 0.23 | 0.81 ± 0.03 | 4.94 ± 0.34 | 3.13 ± 0.47 | nd | 0.35 ± 0.03 | 0.66 ± 0.05 |
+| Orange Juice | 0 | 99.5 ± 8.4 | 179.1 ± 18.7 | 401.7 ± 36.0 | 202.6 ± 17.6 | nd | 96.0 ± 5.5 | 29.1 ± 2.5 | 194.3 ± 16.5 | 12.4 ± 0.9 | 4.7 ± 0.4 | 5.4 ± 0.6 | 10.3 ± 0.9 | 26.6 ± 2.1 | nd | 8.0 ± 0.8 | 69.9 ± 5.1 | 123.6 ± 10.4 | 16.1 ± 1.5 | nd | 1.9 ± 0.3 | 4.6 ± 0.3 |
+|  | 27 °C, 24 wk | 86.4 ± 4.4 | 169.3 ± 5.7 | 308.6 ± 12.8 | 203.2 ± 8.8 | nd | 85.8 ± 1.6 | 32.7 ± 10.8 | 159.9 ± 10.9 | 10.3 ± 0.6 | 3.6 ± 0.2 | 5.3 ± 0.0 | 8.2 ± 0.7 | 24.0 ± 0.8 | nd | 7.1 ± 0.3 | 54.8 ± 3.6 | 86.7 ± 5.1 | 13.1 ± 0.8 | nd | 1.9 ± 0.1 | 3.9 ± 0.1 |
+|  | 37 °C, 24 wk | 96.3 ± 3.7 | 178.9 ± 6.0 | 402.1 ± 16.3 | 233.7 ± 7.6 | nd | 95.8 ± 0.2 | 33.7 ± 6.5 | 136.1 ± 4.3 | 13.4 ± 1.0 | 3.0 ± 0.1 | 6.6 ± 0.3 | 9.3 ± 0.0 | 26.8 ± 0.4 | nd | 7.5 ± 0.1 | 106.1 ± 7.1 | 107.3 ± 1.8 | 14.0 ± 0.1 | nd | 2.3 ± 0.1 | 4.3 ± 0.1 |
+| Peach Nectar | 0 | 86.10 ± 3.78 | 7.57 ± 0.39 | 287.06 ± 2.90 | 65.41 ± 0.51 | 29.42 ± 2.41 | nd | 54.44 ± 2.76 | 46.93 ± 1.08 | 10.59 ± 1.58 | 16.70 ± 0.86 | 18.46 ± 0.74 | 18.92 ± 0.14 | 8.51 ± 0.48 | 2.84 ± 0.01 | 31.60 ± 1.05 | 12.16 ± 0.59 | 118.13 ± 6.41 | 41.06 ± 1.15 | 5.39 ± 0.14 | nd | 18.52 ± 0.28 |
+|  | 27 °C, 24 wk | 98.12 ± 5.42 | 7.82 ± 0.46 | 318.98 ± 16.80 | 138.28 ± 5.10 | 37.55 ± 1.58 | nd | 53.40 ± 0.24 | 56.90 ± 0.41 | 11.22 ± 0.08 | 16.78 ± 0.22 | 23.07 ± 0.35 | 21.67 ± 0.04 | 9.74 ± 0.17 | 2.57 ± 0.00 | 36.50 ± 0.29 | 12.54 ± 0.88 | 130.37 ± 5.47 | 48.13 ± 0.67 | 4.05 ± 0.04 | nd | 21.20 ± 0.57 |
+|  | 37 °C, 24 wk | 98.40 ± 6.95 | 7.86 ± 0.28 | 289.14 ± 19.98 | 237.24 ± 3.12 | 43.16 ± 3.50 | nd | 53.17 ± 0.18 | 44.83 ± 2.90 | 11.75 ± 0.49 | 15.10 ± 0.33 | 21.47 ± 1.36 | 20.76 ± 2.07 | 10.48 ± 0.35 | 2.53 ± 0.00 | 32.95 ± 2.08 | 12.56 ± 0.54 | 127.62 ± 7.37 | 45.09 ± 2.96 | 4.15 ± 0.99 | nd | 20.68 ± 1.00 |
+
+Table S3. Changes in Brix and pH values of apple juice, orange juice and peach nectar during storage at 27 °C and 37 °C for different times
+| T (°C) | week | AJ Brix | AJ pH | OJ Brix | OJ pH | PN Brix | PN pH |
+|---|---|---|---|---|---|---|---|
+| 27 | 0 | 15.00 ± 0.20 | 3.53 ± 0.02 | 11.75 ± 0.25 | 3.36 ± 0.00 | 16.17 ± 0.45 | 3.52 ± 0.02 |
+| 27 | 2 | 14.85 ± 0.25 | 3.49 ± 0.01 | 11.05 ± 0.15 | 3.39 ± 0.02 | 16.13 ± 0.34 | 3.51 ± 0.02 |
+| 27 | 4 | 14.95 ± 0.05 | 3.51 ± 0.01 | 11.65 ± 0.35 | 3.38 ± 0.04 | 15.87 ± 0.25 | 3.53 ± 0.01 |
+| 27 | 6 | 14.85 ± 0.25 | 3.54 ± 0.01 | 11.00 ± 0.20 | 3.37 ± 0.02 | 16.60 ± 0.16 | 3.51 ± 0.02 |
+| 27 | 8 | 15.05 ± 0.15 | 3.51 ± 0.01 | 11.85 ± 0.25 | 3.39 ± 0.01 | 16.03 ± 0.12 | 3.51 ± 0.02 |
+| 27 | 10 | 14.75 ± 0.25 | 3.54 ± 0.01 | 11.20 ± 0.30 | 3.38 ± 0.02 | 16.83 ± 0.09 | 3.52 ± 0.02 |
+| 27 | 12 | 15.00 ± 0.20 | 3.53 ± 0.02 | 11.05 ± 0.15 | 3.39 ± 0.03 | 16.03 ± 0.12 | 3.49 ± 0.01 |
+| 27 | 14 | 15.10 ± 0.30 | 3.52 ± 0.02 | 11.65 ± 0.35 | 3.35 ± 0.02 | 16.03 ± 0.12 | 3.52 ± 0.02 |
+| 27 | 16 | 15.00 ± 0.10 | 3.53 ± 0.02 | 11.00 ± 0.20 | 3.41 ± 0.01 | 16.83 ± 0.09 | 3.51 ± 0.02 |
+| 27 | 18 | 14.85 ± 0.35 | 3.50 ± 0.00 | 11.85 ± 0.25 | 3.38 ± 0.02 | 16.03 ± 0.12 | 3.52 ± 0.02 |
+| 27 | 20 | 15.05 ± 0.15 | 3.50 ± 0.02 | 11.20 ± 0.30 | 3.39 ± 0.01 | 15.90 ± 0.08 | 3.52 ± 0.02 |
+| 27 | 22 | 14.90 ± 0.30 | 3.52 ± 0.02 | 11.35 ± 0.05 | 3.34 ± 0.02 | 16.00 ± 0.43 | 3.51 ± 0.02 |
+| 27 | 24 | 15.00 ± 0.10 | 3.52 ± 0.02 | 10.55 ± 0.35 | 3.36 ± 0.02 | 16.27 ± 0.41 | 3.52 ± 0.02 |
+| 37 | 0 | 15.00 ± 0.20 | 3.53 ± 0.02 | 11.75 ± 0.25 | 3.36 ± 0.00 | 16.17 ± 0.45 | 3.52 ± 0.02 |
+| 37 | 2 | 14.85 ± 0.35 | 3.53 ± 0.02 | 11.70 ± 0.10 | 3.38 ± 0.02 | 16.20 ± 0.36 | 3.53 ± 0.01 |
+| 37 | 4 | 15.05 ± 0.15 | 3.51 ± 0.01 | 11.85 ± 0.25 | 3.39 ± 0.03 | 16.23 ± 0.29 | 3.51 ± 0.02 |
+| 37 | 6 | 15.55 ± 0.25 | 3.54 ± 0.01 | 11.20 ± 0.30 | 3.35 ± 0.02 | 16.20 ± 0.16 | 3.53 ± 0.01 |
+| 37 | 8 | 14.90 ± 0.30 | 3.51 ± 0.01 | 11.35 ± 0.05 | 3.41 ± 0.01 | 16.27 ± 0.33 | 3.51 ± 0.02 |
+| 37 | 10 | 15.35 ± 0.55 | 3.51 ± 0.02 | 10.55 ± 0.35 | 3.38 ± 0.02 | 15.93 ± 0.05 | 3.51 ± 0.02 |
+| 37 | 12 | 15.00 ± 0.10 | 3.53 ± 0.02 | 11.70 ± 0.10 | 3.39 ± 0.01 | 16.27 ± 0.33 | 3.50 ± 0.02 |
+| 37 | 14 | 14.90 ± 0.30 | 3.52 ± 0.02 | 10.75 ± 0.55 | 3.34 ± 0.02 | 16.40 ± 0.16 | 3.51 ± 0.02 |
+| 37 | 16 | 14.75 ± 0.25 | 3.53 ± 0.00 | 11.35 ± 0.45 | 3.34 ± 0.00 | 16.20 ± 0.36 | 3.53 ± 0.01 |
+| 37 | 18 | 15.00 ± 0.20 | 3.52 ± 0.02 | 11.85 ± 0.25 | 3.41 ± 0.01 | 15.97 ± 0.17 | 3.51 ± 0.02 |
+| 37 | 20 | 15.10 ± 0.30 | 3.53 ± 0.00 | 11.25 ± 0.35 | 3.38 ± 0.02 | 16.13 ± 0.34 | 3.52 ± 0.02 |
+| 37 | 22 | 15.00 ± 0.10 | 3.52 ± 0.02 | 11.45 ± 0.05 | 3.39 ± 0.01 | 15.87 ± 0.25 | 3.52 ± 0.02 |
+| 37 | 24 | 14.90 ± 0.20 | 3.53 ± 0.00 | 10.75 ± 0.55 | 3.40 ± 0.04 | 16.60 ± 0.16 | 3.52 ± 0.01 |
+
+Table S4. Estimated reaction rate constants (k, week-1 x 103) with 95% highest posterior density (HPD) intervals according to the comprehensive kinetic model shown in Figure 2 for sugar degradation reactions in apple juice, orange juice and peach nectar during storage at different temperatures
+| # | Reaction step | AJ 37 °C k | HPD | AJ 27 °C k | HPD | OJ 37 °C k | HPD | OJ 27 °C k | HPD | PN 37 °C k | HPD | PN 27 °C k | HPD |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | SUC→FUR + GLU | 122.77 | ± 9.796 | 37.49 | ± 3.198 | 138.47 | ± 9.644 | 50.57 | ± 3.297 | 147.77 | ± 14.63 | 40.70 | ± 3.513 |
+| 2 | GLU→1,2-ED | 174.35 | ± 58.71 | 0.00 | LB | 0.40 | ind* | 37.68 | ± 9.852 | 3509.45 | ind* | 0.90 | ind* |
+| 3 | 1,2-ED→GLU | 237.45 | ± 100.4 | 31.66 | ± 45.06 | 3279.00 | ind* | 94.25 | ± 32.11 | 2053.58 | ± 399.9 | 215.45 | ± 230.8 |
+| 4 | 1,2-ED→FRU | 0.00 | LB | 113.40 | ind* | 0.00 | LB | 18.83 | ± 44.09 | 1613.91 | ind* | 203.38 | ind* |
+| 5 | FRU→1,2-ED | 12.53 | ± 3.872 | 0.30 | ind* | 4.60 | ind* | 12.94 | ± 11.72 | 2500.60 | ± 457 | 0.00 | LB |
+| 6 | 1,2-ED→3-DG | 1.74 | ± 1.337 | 48.09 | ± 19.37 | 218.33 | ± 28.59 | 0.64 | ± 0.4568 | 0.56 | ± 0.5605 | 39.32 | ± 13.58 |
+| 7 | 1,2-ED→G | 3.30 | ± 1.818 | 227.25 | ± 220.8 | 645.16 | ± 214.5 | 1.38 | ± 0.5055 | 0.05 | ± 0.01058 | 9.23 | ± 6.787 |
+| 8 | 3-DG→MGO | 9.65 | ± 4.168 | 3.82 | ± 2.683 | 85.42 | ± 19.88 | 189.71 | ± 177.9 | 0.00 | fixed | 0.00 | fixed |
+| 9 | FRU→FFC | 1.00 | ± 0.0294 | 0.00 | fixed | 0.50 | ind* | 0.00 | fixed | 0.90 | ind* | 0.00 | fixed |
+| 10 | FFC→FRU | 0.00 | LB | 0.00 | fixed | 39.57 | ± 17.93 | 0.00 | fixed | 70.10 | ind* | 0.00 | fixed |
+| 11 | FFC→HMF | 1.00 | ind* | 0.00 | fixed | 1.62 | ind* | 0.00 | fixed | 4.67 | ± 0.5938 | 0.00 | fixed |
+| 12 | G→T | 0.00 | fixed | 0.00 | fixed | 0.00 | fixed | 0.00 | fixed | 80.23 | ± 28.79 | 29.81 | ± 1.171 |
+| 13 | G→GO | 17.42 | ± 8.925 | 15.14 | ± 1.427 | 13.21 | ± 3.364 | 59.29 | ± 51.71 | 23.33 | ± 1.708 | 20.61 | ± 16.6 |
+| 14 | G→P1 | 0.00 | LB | 22.78 | ± 5.007 | 15.59 | ± 1.322 | 0.00 | LB | 9.13 | ± 20.83 | 63.98 | ± 8.777 |
+| 15 | FRU→P2 | 0.00 | LB | 0.00 | LB | 0.02 | ± 0.9873 | 0.00 | LB | 0.37 | ind* | 40.41 | ± 5.597 |
+| 16 | T→P3 | 0.00 | fixed | 0.00 | fixed | 0.00 | fixed | 0.00 | fixed | 172.33 | ± 84.93 | 0.00 | LB |
+| 17 | GO→P4 | 86.95 | ± 93.81 | 0.00 | LB | 47.32 | ± 33.12 | 706.67 | ± 696.9 | 0.00 | LB | 24.64 | ± 26.02 |
+| 18 | G→P5 | 129.44 | ± 130.1 | 612.73 | ± 735.1 | 186.60 | ± 85.56 | 0.00 | LB | 0.00 | LB | 0.00 | LB |
+| 19 | 3-DG→P6 | 359.01 | ± 340.1 | 135.57 | ± 90.58 | 0.00 | LB | 0.00 | LB | 699.09 | ± 742.7 | 122.48 | ± 66.97 |
+| 20 | MGO→P7 | 113.72 | ± 85.8 | 11.21 | ± 90.98 | 1171.07 | ± 294.3 | 1511.32 | ± 1487 | 0.00 | fixed | 0.00 | fixed |
+| 21 | HMF→P8 | 0.00 | LB | 0.00 | fixed | 58.20 | ind* | 0.00 | fixed | 53.90 | ± 20.04 | 0.00 | fixed |
+| 22 | 3-DG→HMF | 0.00 | LB | 0.00 | fixed | 0.06 | ± 0.3547 | 0.00 | fixed | 0.00 | LB | 0.00 | fixed |
+
+**Model use.** Partly. Table S1 gives a **4 °C null arm** (no HMF, flat sugars and dicarbonyls over 24 weeks
+in apple and peach) usable as a low-temperature "nothing happens" check; Table S3 replaces the nominal
+pH 3.4 with measured per-juice values; Table S2 confirms flat amino acids (the measured Maillard-off
+control, §2.1). Table S4 constants are those of a rejected over-parameterised model — record only, **not
+for use** (64 of 132 k cells carry `ind`, LB or fixed, and many HPDs approach or exceed the estimate).

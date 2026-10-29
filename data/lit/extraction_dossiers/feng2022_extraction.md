@@ -1263,3 +1263,111 @@ is **not in `data/articles/`.** It would close, in order of value to the repo:
   FFT : MFT branching ratio (≈ 1.15 in ribose–GSH, ≈ 3.0 in xylose–Cys).**
 - **A clean demonstration, from the 1-DO pool's Eₐ of −138 kJ mol⁻¹, that a fixed-time pool
   concentration is not a rate — worth citing whenever a yield ladder is read as a barrier.**
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+Source: `data/articles/feng2022_supplementary.pdf` (owner's download, 10 pp.; read with `pdftotext -layout`;
+Figs. S2, S3 viewed as 90 dpi renders). It closes §11a items 1–4.
+
+### S-a. ★ The ladder question: externally calibrated (absolute), not semi-quantitative
+
+**Answer: the RG-ARP 100/120 °C, pH 7, 120 min ladder (Tables 1–3) is externally calibrated.** Every one
+of the 18 volatiles reported in Tables 1–3 has its own authentic-standard curve in Table S1, expressed as
+peak-area ratio (analyte / 1,2-dichlorobenzene IS) versus concentration. Evidence:
+- Main text, p. 9098: *"The quantification of volatile compounds was achieved by the limit of detection
+  (LOD), the limit of quantitation (LOQ), and the calibration curves established through the available
+  standard compounds (Table S1). x and y represent the concentration (μg/L) and the peak area ratio of the
+  volatile standard compound to the internal standard, respectively."*
+- SI Table S1 title: *"The Calibration Curves, LOD, and LOQ of Volatile Compounds"* — 18 rows, which are
+  exactly the 18 compounds of Tables 1–3 (7 furans, 9 sulfur volatiles, pyrazine, methylpyrazine); every
+  row in Tables 1–3 is also marked "S" (authenticated by standard).
+- **No response factor is assumed equal to 1.** The SI does not state the calibration matrix (water vs
+  reaction matrix), the calibrated range, or the number of levels; and the numbers remain HS-SPME
+  operational concentrations with no partition or recovery correction (§2c, point 1, stands).
+
+### S-b. Table S1 — calibration curves, LOD, LOQ (transcribed; x = μg/L, y = area ratio to IS)
+
+| compound | curve | LOD (μg/L) | LOQ (μg/L) | R² |
+|---|---|---|---|---|
+| furan | y = 0.0245x + 0.0013 | 0.0314 | 0.1170 | 0.9990 |
+| furfural | y = 0.0531x + 0.0018 | 0.0115 | 0.0462 | 0.9993 |
+| 2-methylfuran | y = 0.0711x − 0.0002 | 0.0136 | 0.0447 | 0.9994 |
+| 4-hydroxy-5-methyl-3(2H)-furanone | y = 0.0025x − 0.0633 | 3.5317 | 5.8642 | 0.9910 |
+| 1-(2-furanyl)-ethanone | y = 0.1836x − 0.0002 | 0.0049 | 0.0161 | 0.9998 |
+| 1-(2-furanyl)-1-propanone | y = 0.1611x + 0.0007 | 0.0040 | 0.0145 | 0.9967 |
+| 2(5H)-furanone | y = 0.0023x + 0.0005 | 0.1028 | 0.3934 | 0.9978 |
+| thiophene | y = 0.0751x + 0.0069 | 0.0097 | 0.0343 | 0.9994 |
+| 2-methylthiophene | y = 0.0482x + 0.0144 | 0.0244 | 0.0818 | 0.9997 |
+| 2-thiophenecarboxaldehyde | y = 0.0370x − 0.0002 | 0.0116 | 0.0381 | 0.9992 |
+| thiazole | y = 0.0290x − 0.0036 | 0.0382 | 0.1248 | 0.9987 |
+| 4-methyl-5-ethylthiazole | y = 0.0195x − 0.0004 | 0.0198 | 0.0612 | 0.9999 |
+| 2-methyl-2-thiazoline | y = 0.0541x + 0.0011 | 0.0210 | 0.0704 | 0.9999 |
+| 2-methyl-3-furanthiol (MFT) | y = 0.0170x − 0.0012 | 0.0419 | 0.1368 | 0.9966 |
+| 2-furfurylthiol (FFT) | y = 0.0251x − 0.0004 | 0.0260 | 0.0829 | 0.9964 |
+| 3-(methylthio)-2-butanone | y = 0.0335x + 0.0004 | 0.0307 | 0.1050 | 0.9953 |
+| pyrazine | y = 0.0185x − 0.0001 | 0.0214 | 0.0588 | 0.9999 |
+| methylpyrazine | y = 0.0409x − 0.0007 | 0.0186 | 0.0342 | 0.9999 |
+
+**Screens run on Table S1 (2026-10-29) `[D]`:**
+1. ⚠️ **Impossible curve — 4-hydroxy-5-methyl-3(2H)-furanone (norfuraneol).** Its x-intercept is
+   0.0633 / 0.0025 = **25.3 μg/L**: a zero area ratio already reads 25.3 μg/L, so any reported value below
+   that needs a negative peak area. **7 of the 10 printed cells are below it** (Table 1: 22.45 at 120 °C/30 min,
+   8.82 at 100 °C; Table 2: 9.21, 11.47, 18.25, 21.89 and 6.95). The LOD (3.53 μg/L) is also incompatible with
+   that intercept. Either the intercept sign or a unit is misprinted. **Do not use the norfuraneol rows as
+   absolute concentrations**; within-row ratios are also suspect because the intercept does not cancel.
+   The same screen on the other 17 curves passes (x-intercepts ≤ 0.13 μg/L).
+2. **Trace cells against LOQ.** At or just above LOQ: thiophene 0.04 (LOQ 0.034), methylpyrazine 0.04 (0.034),
+   2-thiophenecarboxaldehyde 0.05 at 100 °C (0.038), thiazole 0.14 (0.125), furan 0.14 (0.117), norfuraneol
+   6.95 (5.86). This rescues nothing and refuses nothing outright, but the 2-thiophenecarboxaldehyde fold-change
+   (§11a item 1(iii)) rests on a 100 °C cell 1.3 × LOQ — keep it flagged.
+3. **"Not detected" cells become bounds.** Each "–" in Tables 1–3 is now < LOD of its row (e.g. MFT < 0.042,
+   thiazole < 0.038 μg/L) — usable as one-sided upper limits for the seven 100 °C blanks of §3a.
+
+### S-c. Tables S2 and S3 — OAVs (odour thresholds in water, μg/L, as the paper used them)
+
+Thresholds (μg/L, water, literature-cited, not measured here): furan 4500; furfural 3000; 2-methylfuran 3500;
+4-hydroxy-5-methyl-3(2H)-furanone 8520; 1-(2-furanyl)-ethanone 10000; 2(5H)-furanone **0.04**; thiophene 84;
+2-methylthiophene 885; 2-thiophenecarboxaldehyde 5000; thiazole 38; **MFT 0.007; FFT 0.036**; methylpyrazine
+60; "NF" (not found) for 1-(2-furanyl)-1-propanone, 4-methyl-5-ethylthiazole, 2-methyl-2-thiazoline,
+3-(methylthio)-2-butanone.
+
+OAVs (= Table 1/2 concentration ÷ threshold), columns 120 °C 30/60/90/120 min, then 100 °C 120 min:
+
+| compound | Table S2 (ARP) | Table S3 (ARP + GSH) |
+|---|---|---|
+| furan | – / – / – / 0.0001 / – | – / – / 3.1×10⁻⁵ / – / – |
+| furfural | 0.0091 / 0.0177 / 0.0237 / 0.0248 / 0.0031 | 0.0088 / 0.0126 / 0.0133 / 0.0147 / 0.0023 |
+| 2-methylfuran | 0.0002 / 0.0003 / 0.0004 / 0.0006 / 0.0002 | 0.0002 / 0.0004 / 0.0006 / 0.0013 / 0.0004 |
+| 4-hydroxy-5-methyl-3(2H)-furanone | 0.0026 / 0.0037 / 0.0046 / 0.0049 / 0.0010 | 0.0011 / 0.0013 / 0.0021 / 0.0026 / 0.0008 |
+| 1-(2-furanyl)-ethanone | 3.0×10⁻⁶ / 1.8×10⁻⁵ / 5.0×10⁻⁵ / 7.1×10⁻⁵ / – | – / 1.0×10⁻⁵ / 1.7×10⁻⁵ / 3.2×10⁻⁵ / – |
+| 2(5H)-furanone | (not in S2) | – / – / – / 6.7×10¹ / – |
+| thiophene | (not in S2) | – / – / – / 0.0005 / – |
+| 2-methylthiophene | 0.0001 / 0.0005 / 0.0011 / 0.0015 / 0.0014 | 0.0004 / 0.0019 / 0.0025 / 0.0041 / 0.0016 |
+| 2-thiophenecarboxaldehyde | – / 4.2×10⁻⁵ / 5.6×10⁻⁵ / 7.4×10⁻⁵ / – | 2.4×10⁻⁵ / 9.0×10⁻⁵ / 0.0002 / 0.0002 / 1.0×10⁻⁵ |
+| thiazole | – / 0.0037 / 0.0055 / 0.0076 / – | – / 0.0047 / 0.0068 / 0.0097 / – |
+| **MFT** | **6.4×10² / 8.5×10² / 9.5×10² / 1.0×10³ / 6.3×10²** | **1.6×10³ / 3.1×10³ / 4.1×10³ / 4.6×10³ / 1.4×10³** |
+| **FFT** | **1.7×10² / 2.3×10² / 2.7×10² / 2.9×10² / 1.4×10²** | **4.0×10² / 8.5×10² / 1.1×10³ / 1.2×10³ / 3.0×10²** |
+| methylpyrazine | (not in S2) | – / – / – / 0.0007 / – |
+
+Notes: "–" not detected; "/" not available (NF rows). Spot checks `[D]`: MFT 7.22/0.007 = 1031 ✔; FFT 10.46/0.036
+= 291 ✔; 2(5H)-furanone 2.69/0.04 = 67 ✔ — the OAVs are pure arithmetic on main Tables 1/2 and add no
+measurement. ⚠️ The 0.04 μg/L threshold for 2(5H)-furanone is implausibly low for a lactone (it makes a
+furan the second-most potent odorant in the arm); cited without source in the SI — do not import it.
+
+### S-d. Figures
+
+- **Fig. S1** — ¹H/¹³C NMR spectra of purified RG-ARP and the five isomeric forms (1 keto, 2 enol, 3′-α/β,
+  3-α/β); chemical shifts printed as text, as already summarised in §1. Structural only.
+- **Fig. S2** — total volatiles vs time (30/60/90/120 min), **120 °C only**: ARP-120 °C (≈ 67 → 150 μg/L, = the
+  Table 1 totals) and Rib + GSH-120 °C (≈ 23 → 71 μg/L, matching the text's 23.06 → 70.84). **No 100 °C
+  comparator** — so §11a item 3's hoped-for two-temperature Rib + GSH ladder does not exist. Not digitised.
+- **Fig. S3** — bar chart, total thiazoles (μg/L) after 120 min: ARP + Cys and ARP + GSH at 100 and 120 °C, with
+  significance letters (Cys-120 > GSH-120 > Cys-100 > GSH-100). Not digitised. By eye the ARP + GSH-120 °C bar
+  sits near 3 μg/L, somewhat above the 2.39 μg/L sum of the three thiazoles in main Table 2 (0.37 + 1.30 + 0.72);
+  the GSH-100 °C bar matches Table 2's 0.29. Worth a check if the thiazole sum is ever used.
+
+**Model use.** Partly: Table S1 makes the ladder's quantification auditable (absolute, IS-normalised, LOD
+bounds for the blanks) and catches one impossible curve; the OAV tables give literature thresholds only
+(no new measurement); Figs. S2/S3 add a 120 °C-only Rib + GSH total and an ARP + Cys thiazole bar (figure-only).

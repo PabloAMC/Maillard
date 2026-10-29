@@ -1054,14 +1054,13 @@ entries:
     time_min: []
     species: [hexanal, "2-pentylfuran", nonanal, "1-octen-3-ol", "(E,E)-2,4-decadienal", "other Table 2 odorants quantified by standard addition"]
     kind: ratio
-    location: "Supplementary Table S1 (standard-addition curves; not on disk; dossier Flags 8a). Table 2 concentrations are indexed in lipid.yml (trikusuma2020_tab2_*) and aroma_other.yml (trikusuma2020_tab2_pea_isolate_uht_maillard_odorants)"
-    status: supplement_missing
+    location: 'SI ''Figure S1'' (not a Table S1): 20 standard-addition charts in the non-UHT beverage, data read from the charts'' embedded numeric caches and transcribed with OLS fits in dossier ''Supplementary material''. Table 2 concentrations are indexed in lipid.yml (trikusuma2020_tab2_*) and aroma_other.yml (trikusuma2020_tab2_pea_isolate_uht_maillard_odorants)'
+    status: digitised_in_dossier
     quant_class: calibrated
     simulable: false
-    condition_quote: ""
-    flags: [standard_addition_slopes_si_missing, isolate_fat_8pct, "condition_not_stated: temperature_c", "condition_not_stated: time_min", "also_relevant: lipid", "also_relevant: aroma_other"]
-    note: "Split 2026-10-29: only the matrix quantity (standard-addition slope in the beverage vs water, a matrix/water factor per odorant) is indexed here; slopes would give matrix suppression of lipid aldehydes in a 2.4 % pea-protein dispersion. DOI 10.1016/j.foodchem.2019.126082."
-  # ---- dairy matrix thresholds (Tian) and saliva ----
+    condition_quote: 'Standard addition curves built in non-UHT beverages for selected aroma compounds (Ai: peak area of target compound; AISTD: peak area of internal standard).'
+    flags: [si_read_2026-10-29, no_water_reference_curves_no_matrix_factor, slopes_are_area_ratio_vs_4_heptanone, trendline_equations_not_stored_ols_refit, isolate_fat_8pct, 'condition_not_stated: temperature_c', 'condition_not_stated: time_min', 'also_relevant: lipid', 'also_relevant: aroma_other']
+    note: Beverage-only curves (no water curves), so no matrix/water suppression factor can be formed; the entry's intended use is not served. The curves' x-intercepts reproduce Table 2's non-UHT column (14/20 within 2 %; sulfurol +32 %, hexanal +8 %), validating it. DOI 10.1016/j.foodchem.2019.126082.
   - id: tian2020b_tab2_yogurt_matrix_thresholds
     dossier: tian2020b_extraction.md
     paper: "Tian, Yu, Yu & Chen 2020 J Dairy Sci 103:7957"
@@ -1337,3 +1336,79 @@ entries:
     condition_quote: "It should be noted that ka finally expresses several contributions: – one linked to the partition between the matrix and the vapor that could resemble a partition coefficient …"
     flags: [transport_constant_not_chemistry, t_ref_not_stated, kd_mechanism_unidentified, si_figs_s1_s4_not_on_disk, "also_relevant: trunk"]
     note: "The corpus's only fitted matrix-to-vapour release rates at baking temperature (lumping matrix/vapour partition, water evaporation flux and a first-order term). Must not enter any chemistry lane (research_round3_channels.md A.3.4); unused by the matrix layer, which has no evaporation term. Condition quote is from research_round3_channels.md's verbatim citation, reproduced in the lee2024 dossier sec. 2 paraphrase."
+
+  - id: feng2022_tab_s2_s3_oav_cited_thresholds
+    dossier: feng2022_extraction.md
+    paper: Feng et al. 2022 J Agric Food Chem 70:9095
+    lab: Jiangnan (Zhang X / Cui H / Ho)
+    system: RG-ARP 20 mM alone and + GSH 20 mM (OAVs of the Table 1/2 volatiles)
+    medium: unbuffered water, pH 7.0; thresholds 'in water' cited from literature
+    temperature_c: [100, 120]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [30, 120]
+    species: [MFT, FFT, furfural, 2-methylthiophene, thiazole, thiophene, 2-thiophenecarboxaldehyde, 2(5H)-furanone, methylpyrazine, furans]
+    kind: other
+    location: SI Tables S2 and S3 (thresholds in water, ug/L, and OAVs; transcribed in dossier 'Supplementary material' S-c)
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: The OAVs of Volatile Compounds in the RG-ARP Model Reactions at Different Temperatures (100 C and 120 C)
+    flags: [thresholds_cited_not_measured, oav_is_arithmetic_on_tables_1_2, 2_5h_furanone_threshold_0_04_implausible, 'also_relevant: sulfur']
+    note: 'Thresholds used: MFT 0.007, FFT 0.036, thiazole 38, 2-methylthiophene 885 ug/L etc.; sources not given in the SI. No new measurement. Do not import the 2(5H)-furanone threshold.'
+
+  - id: barallatperez2023_text_pooled_percent_bound
+    dossier: barallatperez2023_extraction.md
+    paper: Barallat-Perez, Janssen, Martins, Fogliano & Oliviero 2023 J Agric Food Chem 71:20274
+    lab: Wageningen FQD (Oliviero / Fogliano)
+    system: 'commercial PPI, SPI, LPI (and WPI) 1 % w/v isolate + one flavour at 5 mg/L: heptanal, trans-2-heptenal, cis-4-heptenal, octanal, 2-octanone, 2-octanol'
+    medium: 50 mM sodium phosphate pH 7.0, 20 mL vial (2 mL), held 3 h (30/70/90 C, which one for these figures not stated); static HS GC-MS after 14 min at 40 C
+    temperature_c: [40]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [180]
+    species: [heptanal, trans-2-heptenal, cis-4-heptenal, octanal, 2-octanone, 2-octanol]
+    kind: endpoint
+    location: 'Results text (pooled PPI/SPI/LPI ranges: 13.73-54.60, 18.19-54.60, 14.73-52.76, 28.85-57.7, 17.53-23.30 %); per-protein values in Figs. 1-2 (figure-only); dossier sec. 3'
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: a final protein solution of 1 wv% and 5 mg/L flavor concentration was obtained
+    flags: [percent_bound_eq1_not_a_constant, pooled_range_endpoints, isolate_powder_basis, hold_temperature_not_stated, 2_octanone_14_73_vs_17_53_internal_inconsistency, 'also_in_binding_constants_yml: barallat2023_*']
+    note: Records already in data/lit/binding_constants.yml (barallat2023_octanal/2octanone/heptanal/trans2heptenal/cis4heptenal_plant_isolates_pooled) match the text. No nonanal, no mucin, no K anywhere in the paper.
+
+  - id: barallatperez2023_figs3_4_lupin_ketones_hexanal_storage
+    dossier: barallatperez2023_extraction.md
+    paper: Barallat-Perez, Janssen, Martins, Fogliano & Oliviero 2023 J Agric Food Chem 71:20274
+    lab: Wageningen FQD (Oliviero / Fogliano)
+    system: PPI, SPI, LPI native and defatted (DPPI, DSPI, DLPI) with 2-heptanone, 2-octanone, 2-nonanone, 2-decanone (Fig. 3); PPI, SPI, LPI, WPI with hexanal stored after 5 / 70 / 90 C (Fig. 4)
+    medium: 1 % w/v isolate, 5 mg/L flavour, 50 mM phosphate pH 7.0; Fig. 4 samples held 3 h then stored at 5 C and measured weekly
+    temperature_c: [5, 70, 90]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: []
+    species: [hexanal, 2-heptanone, 2-octanone, 2-nonanone, 2-decanone]
+    kind: endpoint
+    location: Figs. 3 and 4 (bar charts, per protein incl. lupin; not digitised); text gives only fat-effect differences (e.g. LPI vs DLPI 2-decanone +8.34 +/- 10.45 %) and the hexanal ordering SPI > LPI > PPI ~ WPI
+    status: figure_only
+    quant_class: other
+    simulable: false
+    condition_quote: 'hexanal at 5 mg/L and protein isolates at 1%wv: pea (PPI), soy (SPI), lupin (LPI), and whey (WPI) during storage at 5 C (A), 70 C (B), and 90 C (C)'
+    flags: [percent_bound_eq1_not_a_constant, isolate_powder_basis, storage_weeks_not_numbered_in_text, 'condition_not_stated: time_min', cited_by_parameters_matrix_holdout_sealed_binding_wrongly]
+    note: The only lupin binding numbers in the paper, and they are bars. HOLDOUT_SEALED_BINDING (parameters_matrix.py:609-615) cites this paper for kg_ (L/g) lupin constants incl. nonanal, which the paper never measures; see dossier sec. 5.
+
+  - id: barallatperez2023_tab1_tab2_h0_sulfhydryl_isolates
+    dossier: barallatperez2023_extraction.md
+    paper: Barallat-Perez, Janssen, Martins, Fogliano & Oliviero 2023 J Agric Food Chem 71:20274
+    lab: Wageningen FQD (Oliviero / Fogliano)
+    system: commercial PPI (AGT FYPP-85-C-EU), SPI (Supro XT219D IP), LPI (ProLupin 10600), WPI (BiPro); non-heated and heated
+    medium: 'H0: 10 mM phosphate pH 7.0, 8-ANS fluorescence; -SH: Ellman, Tris-glycine-EDTA pH 8.0 +/- 8 M urea'
+    temperature_c: [5, 70, 90]
+    ph: {initial: [7.0, 8.0], measured_during: false, final: null}
+    time_min: []
+    species: [surface_hydrophobicity_H0, exposed_sulfhydryl, total_sulfhydryl]
+    kind: other
+    location: Table 1 (H0 with 95 % CI at 5/70/90 C) and Table 2 (exposed and total -SH, umol/g, NH vs H); transcribed in dossier sec. 3
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: The exposed -SH contents (umol -SH/g) were calculated by eq 2
+    flags: [protein_site_density_candidate, lupin_not_in_protein_matrices_yml, h0_90c_text_percentages_relative_to_70c, 'condition_not_stated: time_min', 'also_relevant: sulfur']
+    note: 'Measured thiol densities of four commercial isolates (e.g. LPI total -SH 11.42 -> 10.26 umol/g on heating; SPI 15.62 -> 11.54). Basis: per g isolate. Candidate input for matrix_sites thiol densities; unused.'

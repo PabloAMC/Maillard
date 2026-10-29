@@ -241,3 +241,79 @@ because sugar + methionine pots do not carry H2S.
 6. [!] HS-SPME on 10 mL aqueous at 45 °C with an IS calibration curve (Table S2, not available): no
    matrix-matched or isotope correction; MeSH by SPME is particularly lossy.
 7. Figure read-offs are mine; bar values ±3 % of axis span, Fig. 1a ±0.005 ng/mL / ±0.3 mM.
+
+---
+
+## Supplementary material (read 2026-10-29)
+
+Source: `data/articles/zhang2023b_supplementary.pdf` (8 pp.; Appendix A = Figs. S1, S2; Appendix B = Tables S1–S3). Read
+with `pdftotext -layout`; Fig. S2 viewed as a 70-dpi render.
+
+### Table S2 — standard curves (verbatim)
+
+| compound | curve | concentration unit | R² |
+|---|---|---|---|
+| Met | y = 97013410.21x − 1436267.69 | mM | 0.996 |
+| MTP (methional) | y = 0.0288x + 0.0092 | ng/mL | 0.996 |
+| MeSH | y = 0.0471x + 0.3938 | ng/mL | 0.990 |
+| DMDS | y = 6.617x − 0.4799 | ng/mL | 0.999 |
+| DMTS | y = 10.029x − 11.058 | ng/mL | 0.998 |
+
+y = peak-area ratio to IPDS for the volatiles (main-text method); peak area for Met. No ranges, levels or LODs printed.
+
+★ **The DMTS floor of flag 2 is the calibration intercept.** The DMTS curve's x-intercept is 11.058 / 10.029 =
+**1.103 ng/mL** `[D]`: a zero peak-area ratio already reads 1.10 ng/mL. That is exactly the ≈1.10–1.18 ng/mL "floor" seen
+in unheated Met and in every suppressed system (§3 tables). **Every main-text DMTS value ≈ 1.1 ng/mL means "not
+detected"; net DMTS = printed − 1.10.** The other intercepts: DMDS 0.073 ng/mL (negligible); MeSH −8.4 ng/mL and MTP
+−0.32 ng/mL (positive y-intercepts: a real zero reads negative, so small MeSH/MTP values are compressed toward zero).
+
+### Table S3 — *"Semi-quantitative analysis of volatile compound in Xyl-Cys-Met model system during storage"*
+
+Footnotes (verbatim excerpts): *"Concentrations (ng/mL) of volatiles compounds in various model stored for 1, 28 and 56 days
+(i.e., 0, 1 and 2 months). Values (semi-quantitative data) represent triplicate means ±SD."* *"Groups Ⅰ-Ⅳ are various
+Xyl:Cys:Met systems. The proportions of Xyl:Cys:Met in various systems (i.e., groups Ⅰ-Ⅳ) are 2:2:0、2:0:2、2:1:2 and
+2:2:2, respectively."* *"-, not detected."* RI on DB-WAX. Storage temperature (50 °C) and pH (4.9) are from the main text,
+not restated in the SI. ⚠️ **Semi-quantitative by the authors' own label** — and not on the Table S2 curves: DMTS 0.75 and
+0.89 ng/mL (day 28) lie below the 1.10 ng/mL x-intercept of the DMTS curve, so Table S3 uses a different (presumably
+single-IS, RF = 1) basis.
+
+Groups: Ⅰ = Xyl:Cys 2:2 (no Met); Ⅱ = Xyl:Met 2:2 (no Cys); Ⅲ = Xyl:Cys:Met 2:1:2; Ⅳ = 2:2:2. Units ng/mL, mean ± SD (n = 3).
+
+| compound | RI | ID | d1 Ⅰ | d1 Ⅱ | d1 Ⅲ | d1 Ⅳ | d28 Ⅰ | d28 Ⅱ | d28 Ⅲ | d28 Ⅳ | d56 Ⅰ | d56 Ⅱ | d56 Ⅲ | d56 Ⅳ |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| dimethyl disulfide | 1054 | MS,RI,O,std | – | 0.54 ± 0.09 | – | – | – | 17.41 ± 0.43 | 1.26 ± 0.11 | 3.58 ± 0.23 | – | 59.92 ± 15.66 | 7.88 ± 1.23 | 18.28 ± 1.17 |
+| 3-methylthiophene | 1068 | MS,RI,O,std | – | – | – | – | 0.09 ± 0.00 | – | – | 0.07 ± 0.00 | 0.2 ± 0.04 | – | – | – |
+| dimethyl trisulfide | 1359 | MS,RI,O,std | – | 1.46 ± 0.06 | – | – | – | 16.81 ± 0.04 | 0.75 ± 0.02 | 0.89 ± 0.15 | – | 24.66 ± 3.8 | 5.3 ± 0.42 | 15 ± 2.81 |
+| furfuryl mercaptan (FFT) | 1413 | MS,RI,O,std | 0.85 ± 0.04 | 0.23 ± 0.05 | – | 0.05 ± 0.00 | – | – | – | – | – | – | – | – |
+| methional | 1439 | MS,RI,O,std | – | 2.1 ± 0.07 | – | – | – | 12 ± 0 | 6.96 ± 0.1 | 6.8 ± 0.04 | – | 20.54 ± 0.87 | 81.04 ± 3.11 | 86.26 ± 1.59 |
+| furfuryl methyl sulfide | 1475 | MS,RI,O,std | – | – | – | – | – | – | – | – | – | – | – | 0.36 ± 0.04 |
+| 2-thiophenethiol | 1545 | MS,RI | – | – | – | – | – | – | – | – | 2.44 ± 0.12 | – | – | – |
+| 2-thiophenecarboxaldehyde | 1668 | MS,RI,O,std | – | – | – | – | – | – | – | 0.26 ± 0.00 | – | – | 5.51 ± 0.12 | 9.98 ± 0.47 |
+| dimethyl tetrasulphide | 1711 | MS,RI | – | – | – | – | – | 0.38 ± 0.12 | – | – | – | – | – | – |
+| 2-thiophenemethanethiol | 1720 | MS,RI | – | – | – | – | – | – | – | – | – | – | 5.54 ± 0.04 | – |
+| 4-methyl-5-thiazoleethanol | 2293 | MS,RI,O,std | – | – | – | – | 0.13 ± 0.01 | – | – | 0.07 ± 0.00 | 0.1 ± 0.01 | – | – | – |
+| difurfuryl disulfide | 2531 | MS,RI,O,std | 0.61 ± 0.00 | – | – | – | – | – | – | – | – | – | – | – |
+
+Column placement was read from the `-layout` text (the 14-column table survives intact); cells with "-" kept as not
+detected. ⚠️ **Surprises.** (i) **FFT is detected in group Ⅱ (Xyl + Met, no cysteine) at day 1 (0.23 ng/mL)** — FFT
+needs a sulfur donor; Met-derived H2S/MeSH is possible but the paper does not discuss it. (ii) Methional in the
+cysteine-containing groups Ⅲ/Ⅳ (81–86 ng/mL at day 56) ends **4× above** the cysteine-free group Ⅱ (20.5) — the opposite
+of the main text's "cysteine suppresses Met volatiles" (which concerned DMDS/DMTS, and holds here for those). (iii) The
+§3 text summary ("Xyl+Cys gives only 2-furfurylthiol and difurfuryl disulfide" at day 1) matches.
+
+### Table S1 — purified MRIs (structural)
+XC TTCA (2-threityl-thiazolidine-4-carboxylic acid) 99.23 %, GC ARP (Glc/Cys Amadori) 99.45 %, FC HRP (Fru/Cys Heyns)
+96.70 % (purity = % peak area); MS/MS ions ([M+H]⁺ 254 for TTCA, 284 for ARP/HRP) and ¹³C NMR shifts printed. Identity only.
+
+### Figures (described, not digitised)
+- **Fig. S1** — Met remaining (% of unheated Met solution = 100 %) with lipids (a), free amino acids (b) and Maillard reaction
+  products (c–e) — the methionine-loss counterpart of main Figs. 2–5. Bar charts.
+- **Fig. S2** — *"Effect of free amino acids (a) and Maillard reaction products (b-d) on pH in model."* Final pH bars for
+  ~20 groups per panel (Met alone; Met + each amino acid; Met + sugar ± Cys / MRIs), y-axis 4.0–5.4 (panel a 4.7–5.2).
+  Final pH spans ≈4.3–5.2 against the nominal 4.9 start; the lowest bars are cysteine-containing groups, consistent with
+  the main text. ⚠️ **Fig. S2 is NOT the final pH of the initial-pH 3–8 series** — that series (main Fig. 3) has no measured
+  final pH anywhere; the ledger note saying it "lives in Fig. S2" was wrong.
+
+**Model use.** Partly. Table S2 explains the DMTS floor (calibration intercept, 1.10 ng/mL) — usable as a correction to
+every main-text DMTS number. Table S3 is a usable but **semi-quantitative** 56-day, 50 °C storage set (12 VSCs × 4 recipes
+× 3 times) — directional/ratio use only. Figs. S1/S2 are figure-only.

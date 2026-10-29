@@ -352,7 +352,7 @@ entries:
     time_min: [5, 5760]
     species: [3-methylbutanal, 2-methylbutanal, methylpropanal, methional, acetaldehyde, propanal, "2,3-diethyl-5-methylpyrazine", 3-isobutyl-2-methoxypyrazine, guaiacol, vanillin, HDMF, sotolon, "2,3-butanedione", "2,3-pentanedione", beta-damascenone]
     kind: time_series
-    location: "Fig. 2 (heat map, 19 non-FFT odorants x 10 times at 300 K, digitised dossier sec. 5a); Fig. 4B-D (pyrazine, 3-methylbutanal, HDMF at 279/300/333 K, digitised sec. 5b)"
+    location: "SI Table S2 (printed % free, 19 non-FFT odorants x 10 times 1-5760 min at RT, supersedes the Fig. 2 digitisation of dossier sec. 5a); Fig. 4B-D (pyrazine, 3-methylbutanal, HDMF at 279/300/333 K, digitised sec. 5b)"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: false
@@ -908,15 +908,15 @@ entries:
     temperature_c: [65, 78, 90]
     ph: {initial: null, measured_during: false, final: null}
     time_min: [0, 504]
-    species: ["3-methylbutanal", "2-methylbutanal", "2-methylpropanal", phenylacetaldehyde, methional, leucine, isoleucine, valine, phenylalanine, methionine, Amadori compounds]
+    species: ["3-methylbutanal", "2-methylbutanal", "2-methylpropanal", phenylacetaldehyde, methional, leucine, isoleucine, valine, phenylalanine, methionine, glucose, fructose, FruLeu, FruIle, FruVal, FruPhe, Amadori compounds pooled]
     kind: time_series
-    location: "Supplementary Fig. S1 (full concentration data, panels a-s, all 12 runs); Table S1 (pre-kiln moisture); Table S3 (ANOVA)"
-    status: supplement_missing
+    location: "SI Fig. S1 panels a-s (19 species x 12 runs x 8 times, mmol/kg; read from the charts' embedded numeric caches, transcribed in dossier 'Supplementary material'); Table S1 (pre-kiln moisture); Table S3 (ANOVA)"
+    status: digitised_in_dossier
     quant_class: calibrated
     simulable: false
     condition_quote: "the temperature was increased to the curing temperature (65 C, 78 C or 90 C) in 10 min and kept constant for 8.4 h ... samples were taken every 72 min"
-    flags: [matrix_food, low_moisture_no_aw_term, "complements: piornos2025_malt_kilning_amadori_strecker_multiresponse"]
-    note: "SI not on disk (DOI 10.1016/j.foodchem.2024.141532). Per-run data behind the fit: 12 runs x 8 points; main-text Fig. 1 shows one run per T. Aldehydes by SPME with matrix-matched calibration in freeze-dried malt; Strecker amino acids loss as well."
+    flags: [matrix_food, low_moisture_no_aw_term, si_read_2026-10-29, aldehyde_65c_replicate2_copy_of_replicate1, aa_90w2_last_two_points_duplicated, sugars_erratic_bimodal, variety_labels_conflict_main_text, "complements: piornos2025_malt_kilning_amadori_strecker_multiresponse"]
+    note: "Per-run data behind the fit, single values (no SD). Aldehydes by SPME with matrix-matched calibration in freeze-dried malt. 65 C aldehyde replicates are copies (2 independent runs, not 4); amino acids 90W2 at 7.2/8.4 h repeat 4.8/6.0 h; glucose/fructose scatter +/-50 % without trend. ARPs and 78/90 C aldehydes smooth and usable."
   - id: weerawatanakorn2015_text_2ap_athp_popcorn_storage_loss
     dossier: weerawatanakorn2015_extraction.md
     paper: "Weerawatanakorn, Wu, Pan & Ho 2015 J Food Drug Anal 23:176 (review), citing Schieberle 1995 J Agric Food Chem 43:2442"
@@ -1108,12 +1108,12 @@ entries:
     time_min: [15]
     species: ["2,3,5-trimethylpyrazine"]
     kind: endpoint
-    location: "Figure S2 (supplement not on disk; one directional sentence quoted in dossier sec. 7)"
-    status: supplement_missing
+    location: "SI Figure S2 (m/z 122 selected-ion chromatogram: TMP standard 1.36 umol/kg vs rice + 50 or 0.05 umol/kg MGO; no concentrations printed; described in dossier 'Supplementary material')"
+    status: figure_only
     quant_class: unknown
     simulable: false
     condition_quote: "the aluminum box was heated in an electric steamer (100 ± 3 ◦C) for 15 min, followed by insulating for 20 min"
-    flags: [matrix_food, concentrations_not_stated]
+    flags: [matrix_food, concentrations_not_stated, si_read_2026-10-29, chromatogram_only_qualitative]
     note: "Only pyrazine data in the paper; 2-AP rows of Table 3 covered by cai2024_table3_cooked_rice. SI DOI = article DOI 10.1016/j.foodres.2024.114591. Text: 50 umol/kg MGO rice had more trimethylpyrazine."
   - id: blank2003_tab5_ap_athp_ph_ladder_2h
     dossier: blank2003_extraction.md
@@ -1432,7 +1432,7 @@ entries:
     time_min: [0.1]
     species: [methional, "2,5-dimethylpyrazine", 2-isobutyl-3-methoxypyrazine, 2-acetyl-1-pyrroline]
     kind: endpoint
-    location: "Table 2 (21 odorants x 3 states, n = 3; dossier sec. 3); standard-addition curves in Table S1 (not on disk)"
+    location: "Table 2 (21 odorants x 3 states, n = 3; dossier sec. 3); standard-addition curves in SI Figure S1 (non-UHT beverage only; read 2026-10-29, they reproduce the non-UHT column)"
     status: in_model_check
     quant_class: calibrated
     simulable: false
@@ -1486,13 +1486,31 @@ entries:
     time_min: [5, 60]
     species: [CML, CEL]
     kind: rate_constant
-    location: "Table 2 CML/CEL rows (FL -> CML, GO + bLys -> CML, MGO + bLys -> CEL; transcribed dossier sec. 3); text sec. 3.2 maxima; time courses in absent SI Figs. S1-S5"
+    location: "Table 2 CML/CEL rows (FL -> CML, GO + bLys -> CML, MGO + bLys -> CEL; transcribed dossier sec. 3); text sec. 3.2 maxima; time courses in SI Figs. S1-S5 (figure-only)"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: false
     condition_quote: "30 g on an aluminium plate, conventional oven (Memmert UN 55), 160 and 180 C, 5 to 60 min ... triplicate"
-    flags: ["complements: sen2022_roasted_nuts_seeds_matrix", matrix_food, low_moisture_no_aw_term, supplement_missing]
+    flags: ["complements: sen2022_roasted_nuts_seeds_matrix", matrix_food, low_moisture_no_aw_term, cml_cel_time_courses_figure_only_si]
     note: "The trunk entry lists the same table but not CML/CEL. CML/CEL matrix-matched calibration with raw sample as blank; FL = furosine x 2.2 (borrowed). Many HPD intervals span zero. CEL > CML in every matrix. B20 does not use it."
+  - id: sen2022_tabs_s1_s5_free_aa_bound_lysine
+    dossier: sen2022_extraction.md
+    paper: "Sen & Gokmen 2022 Food Chem 395:133583"
+    lab: "Hacettepe (Gokmen)"
+    system: "sunflower, pumpkin, flax seeds, peanut, almond; 30 g roasted on aluminium plate"
+    medium: "low-moisture nut/seed matrices, oven; raw pH and a_w measured (Table 1)"
+    temperature_c: [160, 180]
+    ph: {initial: [6.62, 7.14], measured_during: false, final: null}
+    time_min: [0, 60]
+    species: [free_amino_acids_19_20_individual, bound_lysine]
+    kind: time_series
+    location: "SI Tables S1-S5 (mg/kg sample, mean +/- SD, per matrix x T x time; transcribed in dossier 'Supplementary material')"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Quantification was performed by means of external calibration curves built for all amino acids in a range between 1 and 100 umol/L"
+    flags: ["complements: sen2022_roasted_nuts_seeds_matrix", matrix_food, no_gly_row_peanut_almond, decimal_commas_normalised, si_read_2026-10-29]
+    note: "HILIC LC-MS/MS; bLys after 8 N HCl hydrolysis. Several AAs rise above raw at the first 160 C point (release). Amine-depletion side of the Table 2 networks."
   - id: pereyragonzales2010_fig2_malec2002_model_lysine_k_vs_aw
     dossier: pereyragonzales2010_extraction.md
     paper: "Pereyra Gonzales, Naranjo, Leiva & Malec 2010 (Fig. 2 re-plots Malec, Pereyra Gonzales, Naranjo & Vigo 2002 Food Res Int 35:849)"

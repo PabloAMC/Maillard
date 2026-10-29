@@ -1470,19 +1470,19 @@ entries:
     paper: "Zamora, Leon & Hidalgo 2015 J Agric Food Chem 63 (accepted MS; doi 10.1021/acs.jafc.5b02619)"
     lab: "Instituto de la Grasa, CSIC Seville (Hidalgo)"
     system: "phenylalanine + 2,4-decadienal 0-10 umol on sand; O2 0-100 %, pH 2.15-9, water 0-200 uL, T 100-170 C"
-    medium: "600 mg sand + 30 uL 0.3 M buffer + 80 uL water; closed tubes, N2 (kinetics) or controlled O2"
+    medium: "600 mg sand + 30 uL 0.3 M buffer + 80 uL water; closed tubes, N2 (kinetics, pH, dose and water series, per SI captions) or controlled O2"
     temperature_c: [100, 120, 140, 160, 170]
     ph: {initial: [2.15, 9], measured_during: false, final: null}
     time_min: [0, 60]
     species: [2-phenylethylamine, phenylacetaldehyde, benzaldehyde]
     kind: time_series
-    location: "Figs. 2-4 (main text, not read) and Supporting Figs. S1-S6 (O2, pH, dose, water series; k(T) time courses) (dossier sec. 2, 3)"
-    status: supplement_missing
+    location: "Figs. 2-4 (main text, not read) and SI Figs. S1-S6 (O2, pH, dose, water sweeps at 140 C 1 h; S5 pH 3 at 100-160 C and S6 pH 6 at 100-170 C, 0-30 min; described in dossier 'Supplementary material', not digitised)"
+    status: figure_only
     quant_class: calibrated
     simulable: true
     condition_quote: "The amount of 2-phenylethylamine formed increased linearly (r > 0.98, p < 0.01) as a function of time at the different assayed temperatures"
-    flags: [supplement_missing, low_moisture_no_aw_term, ph_start_only, condition_uncertain]
-    note: "SI not on disk (DOI 10.1021/acs.jafc.5b02619). Holds the zero-order k(T) at 5 T x 2 pH behind the printed Ea, plus O2/pH/dose/water sweeps whose endpoints are only quoted in text. pH-series atmosphere unstated (dossier reads N2)."
+    flags: [si_read_2026-10-29, low_moisture_no_aw_term, ph_start_only, k_values_only_as_figure_slopes, ph3_series_has_no_170c]
+    note: "SI = six figures, no tables. Zero-order k(T) behind the printed Ea are the slopes of Figs. S5 (pH 3: 100/120/140/160 C) and S6 (pH 6: 100-170 C), 0-30 min, N2; never printed as numbers. Sweeps: O2 (S1), pH under N2 (S2), DD dose (S3), water (S4). pdftotext drops the mu glyph (axes read nmol/mol); raster shows nmol/umol Phe."
   # ---- zamora2020 ----
   - id: zamora2020_tab2_pyridines_from_lipid_carbonyls_glutamine
     dossier: zamora2020_extraction.md
@@ -3125,7 +3125,7 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "Met 2.5 mg/mL + 0.94 % (w/w) tallow or soybean oil, same buffer and heating"
-    flags: [internal_inconsistency, coarse_read, "also_in_sulfur_ledger: zhang2023b_fig2ab_methionine_lipids", supplement_missing]
+    flags: [internal_inconsistency, coarse_read, "also_in_sulfur_ledger: zhang2023b_fig2ab_methionine_lipids", dmts_floor_is_calibration_intercept_1_10_ngml, si_read_2026-10-29]
     note: "Lipid-vs-no-lipid on the methionine polysulfide route: soybean oil > tallow > none for DMDS (1.44/0.96/0.76 ng/mL). Absolute scale inconsistent across figures; use within-figure ratios. Calibration curves in Table S2 (SI not on disk)."
   # ---- wang2026 ----
   - id: wang2026_tables2_ph_series_lipid_type_volatiles
@@ -3843,13 +3843,13 @@ entries:
     time_min: []
     species: [hexanal, "(E,E)-2,4-decadienal", "(E,E)-2,4-nonadienal", "(E)-2-octenal", heptanal, "(E)-2-dodecenal", nonanoic acid]
     kind: endpoint
-    location: "Tables S4 (concentrations) and S5 (OAVs), Fig. 5 heat map (figure-only); dossier sec. 3, Flags 18"
-    status: supplement_missing
-    quant_class: sida
+    location: "SI Table S4 (mg/kg +/- RSD, n = 3, 35 odorants x 10 isolates) and S5 (OAVs), transcribed in dossier 'Supplementary material'; Fig. 5 heat map (figure-only)"
+    status: digitised_in_dossier
+    quant_class: calibrated
     simulable: false
     condition_quote: ""
-    flags: [supplement_missing, matrix_food, "also_relevant: matrix"]
-    note: "Ten-isolate population of carried-in lipid aldehyde levels (between-supplier spread), the band the matrix lane lacks. Free at https://www.mdpi.com/article/10.3390/foods11030412/s1 (DOI 10.3390/foods11030412)."
+    flags: [si_read_2026-10-29, matrix_food, hexanal_only_true_sida_other_aldehydes_surrogate_is, values_rounded_to_0_1_mg_per_kg, "also_relevant: matrix"]
+    note: "Ten-isolate population of carried-in lipid aldehyde levels (between-supplier spread; hexanal 3.0-138 mg/kg), the band the matrix lane lacks. Hexanal on hexanal-d12 (SIDA); decadienal, nonadienal, undecenal, dodecenal on decanal-d2, heptanal and 2-octenal on hexanal-d12 (surrogate IS, own curves, SI Table S3). Isolate D is the oxidised outlier."
   - id: utz2022_tab2_recovery_lod
     dossier: utz2022_extraction.md
     paper: "Utz, Spaccasassi, Kreissl, Stark, Tanger, Kulozik, Hofmann & Dawid 2022 Foods 11:412"
