@@ -103,3 +103,27 @@ def test_every_maillard_constant_cites_a_resolvable_source():
 
     problems, n = evidence_anchor_gate.check()
     assert problems == [] and n > 100
+
+
+def test_unpinned_constants_gate_catches_a_silent_omission_and_a_stale_entry(tmp_path, monkeypatch):
+    import json as _json
+
+    import unpinned_constants_gate as gate
+
+    table = tmp_path / "table.json"
+    register = tmp_path / "register.yml"
+    table.write_text(_json.dumps({"summary": {"unpinned_constants_that_matter": ["k_a", "k_b"],
+                                              "unpinned_and_rate_not_sampled": ["k_a", "k_b"]}}))
+    register.write_text("entries:\n  - {key: k_a, planned_test: sub-model 2}\n  - {key: k_old, planned_test: done}\n")
+    monkeypatch.setattr(gate, "TABLE", table)
+    monkeypatch.setattr(gate, "REGISTER", register)
+    problems = gate.check()
+    assert any(p.startswith("k_b:") and "not in" in p for p in problems)
+    assert any(p.startswith("k_old:") and "only shrinks" in p for p in problems)
+    assert gate.check.__module__ == "unpinned_constants_gate"
+
+
+def test_unpinned_constants_gate_passes_on_the_repository():
+    import unpinned_constants_gate as gate
+
+    assert gate.check() == []
