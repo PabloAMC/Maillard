@@ -1,0 +1,25 @@
+# Unpinned constants that matter: fitted, NOT identified, on a sulfur-lane step that carries > 1 % of a pot's reaction
+# flux or of an odorant-path species' formation or loss, and whose RATE the uncertainty envelope does not sample.
+#
+# Why this exists (owner, 2026-10-29: "How can we prevent this from happening in the future?"): the ten constants that
+# carry most of the lane's flux were fitted in B2.3, which reported each one unidentified, then frozen by every later
+# wave; the status was lost on the way, and the envelope holds their rates fixed ("source uncertainty unrecorded"), so
+# the 90 % intervals omit the uncertainty of the lane's backbone. The generated table
+# (results/validation/sulfur_reaction_evidence.json, "constants") now carries each constant's status forward, and
+# scripts/ci/unpinned_constants_gate.py fails when an unpinned constant that matters is neither sampled nor listed here.
+# This list may only SHRINK: an entry is removed when its sub-model pins the constant (identified, or measured) or the
+# envelope samples it; the gate fails on an entry that is no longer unpinned.
+#
+# planned_test: the sub-model whose own-species data must pin it (docs/guides/STRATEGY_2026-10-29.md, Phase 2).
+
+entries:
+  - {key: k_pent_tdp,   last_fit: B2.3, planned_test: "sub-model 2 (route): de Roos's measured route replaces the 'cysteine as catalyst' step; Zhai 2019 / Cao 2017 / Kang intermediates"}
+  - {key: k_pent_dpo,   last_fit: B2.3, planned_test: "sub-model 2 (route), as k_pent_tdp"}
+  - {key: k_dpo_ddp,    last_fit: B2.3, planned_test: "sub-model 3 (deoxyosones): Zhai 2019 Fig. 3B, Zhai 2021 Fig. 5; its product DDP is measured by no one (say so if it stays unpinned)"}
+  - {key: k_dpo_nf,     last_fit: B2.3, planned_test: "sub-model 3 (deoxyosones): norfuraneol time courses"}
+  - {key: k_nf_decay,   last_fit: B2.3, planned_test: "sub-model 3: norfuraneol loss (Mikami 2017; B61's hydroxide decay)"}
+  - {key: k_ddp_mft,    last_fit: B2.3, planned_test: "sub-model 4 (thiols): MFT formation over time (Wang 2026b, Zhang 2026, Feng 2022)"}
+  - {key: k_ddp_mft_hs, last_fit: B2.3, planned_test: "sub-model 4 (thiols), as k_ddp_mft"}
+  - {key: k_fur_fft_hs, last_fit: B2.3, planned_test: "sub-model 4 (thiols): FFT from furfural + H2S (fed arm A of the designed protocol if the literature cannot)"}
+  - {key: k_mft_decay,  last_fit: B2.3, planned_test: "sub-model 4 (thiols): MFT loss (Schieberle 100 C series, Kumazawa survival, Wang 2026b)"}
+  - {key: k_h2s_loss,   last_fit: B2.3, planned_test: "sub-model 4 (thiols): H2S supply and loss (Li, Schieberle & Steinhaus 2016; Zheng & Ho)"}

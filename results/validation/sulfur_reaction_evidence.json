@@ -1,0 +1,6485 @@
+{
+  "artifact": "sulfur_reaction_evidence",
+  "provenance": {
+    "artifact": "sulfur_reaction_evidence",
+    "generated_on": "2026-10-29",
+    "git": {
+      "commit": "9c438367648818146068966b150958b7dd1ae109",
+      "short": "9c438367",
+      "branch": "m4-reaction-evidence",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
+    "inputs": [
+      {
+        "path": "results/validation/sulfur_flux_attribution.json",
+        "sha256": "86040965af1fd60a00304672f532e6dd661c5a5b5a239ce1f8d110a2d1da95bc"
+      },
+      {
+        "path": "results/validation/kinetic_core_b60_laplace_covariance.json",
+        "sha256": "d7ae785c0a7da868fa818389c94c9d7007ffaf1663cb2836af24638306532dd7"
+      },
+      {
+        "path": "results/validation/kinetic_core_b2_3_fit_report.json",
+        "sha256": "be1f6893bfa93ef52f9be2efc1a023bc9f4b6acdcfb7a3581011ae1b99f83ac8"
+      },
+      {
+        "path": "results/validation/core_prediction_uncertainty.json",
+        "sha256": "95d426cb6c214123e2d2534fc0dad728818550e9f34828c3ffe59dd218eca5ae"
+      },
+      {
+        "path": "docs/reference/conflicts_register.yml",
+        "sha256": "19fa11ea89ff1d589b37dcf1c4974fedd85a3579f1bdae68b3bed905ca74f2a7"
+      },
+      {
+        "path": "src/kinetic_core/sulfur.py",
+        "sha256": "e09d1511c5b0bee93d2b6d16b61fab588c3fb8088c1b6537bda9f0d5691138a1"
+      },
+      {
+        "path": "src/kinetic_core/parameters_sulfur.py",
+        "sha256": "4a2fc0739e427d59f9ab67148317a7d53d56c95077143d2c28e98f20d3d52f75"
+      },
+      {
+        "path": "src/kinetic_core/parameters.py",
+        "sha256": "e19d346a4337e967543064d473651bb7b8450e32a29714046358b2ca249284e8"
+      },
+      {
+        "path": "data/lit/measurement_ledger/acrylamide.yml",
+        "sha256": "ef9631929204566dabaa3b51717d94bbc57c0d381a1712a1a227e4d3345d1df6"
+      },
+      {
+        "path": "data/lit/measurement_ledger/aroma_other.yml",
+        "sha256": "2ed2bcfbc4bae577cf024dbc73094bf4f3f4e4f7cfc57050122ceb36ccb8c5e0"
+      },
+      {
+        "path": "data/lit/measurement_ledger/lipid.yml",
+        "sha256": "331b519df0fe942793c1b38d0e2437a9ba32ac496dc43e12f371edee534bab58"
+      },
+      {
+        "path": "data/lit/measurement_ledger/matrix.yml",
+        "sha256": "c1b99a1aabba9072f03127e317c897edf985f4af60bdce5e84917eab22a501d9"
+      },
+      {
+        "path": "data/lit/measurement_ledger/sulfur.yml",
+        "sha256": "948a88b92ff5549e7b81238c0c47e4cdd1004e3cccd8f211bfe7d41265e2936d"
+      },
+      {
+        "path": "data/lit/measurement_ledger/trunk.yml",
+        "sha256": "f4da7d1297c3005d7548b7cac22c013ff610307bc09cbb1b95d3ef6ff4d19ee3"
+      }
+    ]
+  },
+  "summary": {
+    "steps": 119,
+    "carrying_more_than_1_percent": 10,
+    "by_grade_among_carrying": {
+      "fitted": 9,
+      "measured": 1
+    },
+    "unclear_among_carrying": 6,
+    "on_the_odorant_path": 16,
+    "odorant_path_species": [
+      "MFT",
+      "FFT",
+      "MFTD",
+      "FFTD",
+      "H2S",
+      "NF",
+      "FUR"
+    ],
+    "steps_that_matter": 23,
+    "mft_fft_formation_on_unpinned_steps": {
+      "hofmann1998_ribose_cys_ph5_145C_20min": {
+        "MFT": 0.0,
+        "FFT": 1.0
+      },
+      "hofmann1998_ribose_cys_ph3_145C_20min": {
+        "MFT": 0.0,
+        "FFT": 1.0
+      },
+      "hofmann1998_ribose_cys_ph7_145C_20min": {
+        "MFT": 0.003,
+        "FFT": 1.0
+      },
+      "cao2017_xylose_cys_90C_300min": {
+        "MFT": 0.003,
+        "FFT": 1.0
+      },
+      "zhang2025b_xylose_cys_ph65_120C_50min": {
+        "MFT": 0.031,
+        "FFT": 1.0
+      },
+      "zhai2019_xylose_cys_unbuffered_90C_160min": {
+        "MFT": 0.001,
+        "FFT": 1.0
+      },
+      "yiltirak_ribose_cys_120C_60min": {
+        "MFT": 0.002,
+        "FFT": 1.0
+      },
+      "food_like_unbuffered_ribose_cys_140C_30min": {
+        "MFT": 0.0,
+        "FFT": 1.0
+      }
+    },
+    "unpinned_constants_that_matter": [
+      "k_ddp_mft",
+      "k_ddp_mft_hs",
+      "k_dpo_ddp",
+      "k_dpo_nf",
+      "k_fur_fft",
+      "k_fur_fft_hs",
+      "k_h2s_loss",
+      "k_mft_decay",
+      "k_nf_decay",
+      "k_pent_dpo",
+      "k_pent_tdp"
+    ],
+    "unpinned_and_rate_not_sampled": [
+      "k_ddp_mft",
+      "k_ddp_mft_hs",
+      "k_dpo_ddp",
+      "k_dpo_nf",
+      "k_fur_fft_hs",
+      "k_h2s_loss",
+      "k_mft_decay",
+      "k_nf_decay",
+      "k_pent_dpo",
+      "k_pent_tdp"
+    ],
+    "unclear_among_steps_that_matter": 12,
+    "threshold": 0.01
+  },
+  "constants": {
+    "k_pent_tdp": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_pent_tdp"
+      ],
+      "max_flux_share": 0.5861110672008492,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_pent_dpo": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_pent_dpo"
+      ],
+      "max_flux_share": 0.45004351916962587,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_dpo_ddp": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_dpo_ddp"
+      ],
+      "max_flux_share": 0.4455943088597869,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_osone_decay": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "r_osone_decay_tdp",
+        "r_osone_decay_ddp",
+        "r_osone_decay_dpo",
+        "r_ptr_decay",
+        "r_arp_decay"
+      ],
+      "max_flux_share": 0.40842212803860944,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_dpo_nf": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_dpo_nf"
+      ],
+      "max_flux_share": 0.11598933670503443,
+      "max_odorant_path_share": 1.0,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_cys_thermal": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "r_cys_thermal"
+      ],
+      "max_flux_share": 0.1092604317529523,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_pent_caramel": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_pent_caramel"
+      ],
+      "max_flux_share": 0.04156713103199599,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_cys_h2s": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_cys_h2s"
+      ],
+      "max_flux_share": 0.019456280821052323,
+      "max_odorant_path_share": 1.0,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_nf_decay": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false
+      },
+      "steps": [
+        "r_nf_decay"
+      ],
+      "max_flux_share": 0.013913922736878656,
+      "max_odorant_path_share": 0.9999961642772432,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_h2s_loss": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_h2s_loss"
+      ],
+      "max_flux_share": 0.007680097551828477,
+      "max_odorant_path_share": 0.970723603479333,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_tdp_fur": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_tdp_fur"
+      ],
+      "max_flux_share": 0.0033983491745986204,
+      "max_odorant_path_share": 1.0,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_pent_thermal": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_pent_thermal_dpo"
+      ],
+      "max_flux_share": 0.002693862369963274,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_fur_decay": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "r_fur_decay"
+      ],
+      "max_flux_share": 0.0017350470937363906,
+      "max_odorant_path_share": 0.9953723850880519,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_fur_fft_hs": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_fur_fft_hs"
+      ],
+      "max_flux_share": 0.00035326770473953403,
+      "max_odorant_path_share": 0.9998970622365984,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_nf_mft": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_nf_mft"
+      ],
+      "max_flux_share": 0.00017886892009771874,
+      "max_odorant_path_share": 0.9999354380845586,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_mft_decay": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false
+      },
+      "steps": [
+        "ch_mft_decay"
+      ],
+      "max_flux_share": 0.00016921103788521073,
+      "max_odorant_path_share": 0.9986273141036218,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_fur_fft": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "unidentified"
+      },
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_fur_fft"
+      ],
+      "max_flux_share": 0.00014206318681161668,
+      "max_odorant_path_share": 0.28680461734728374,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_fft_decay": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "ch_fft_decay"
+      ],
+      "max_flux_share": 0.00013643917747877218,
+      "max_odorant_path_share": 0.9888777961049899,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_dpo_c2c3": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_dpo_c2c3"
+      ],
+      "max_flux_share": 4.115669083139448e-05,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_mgo_mel": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_mgo_mel"
+      ],
+      "max_flux_share": 2.4099892053074492e-05,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_nf_mp3p": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_nf_mp3p"
+      ],
+      "max_flux_share": 1.334490553153788e-05,
+      "max_odorant_path_share": 0.04818129132095068,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_thiolate_loss": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "ch_thiolate_loss_fft",
+        "ch_thiolate_loss_mft"
+      ],
+      "max_flux_share": 5.911723610295525e-06,
+      "max_odorant_path_share": 0.8928418096877629,
+      "matters": true,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_dpo_ptr": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_dpo_ptr"
+      ],
+      "max_flux_share": 1.9174188249455464e-06,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_cys_actz": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_cys_actz"
+      ],
+      "max_flux_share": 1.7218994963348116e-06,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_ddp_mft": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_ddp_mft"
+      ],
+      "max_flux_share": 1.3608181148261837e-07,
+      "max_odorant_path_share": 0.01137862018133168,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_dimer_fft": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "unidentified"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "ch_dimer_fft"
+      ],
+      "max_flux_share": 5.86912678057627e-08,
+      "max_odorant_path_share": 0.0014696849593048118,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_dimer_mft": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "on a bound"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "ch_dimer_mft"
+      ],
+      "max_flux_share": 5.03629708592298e-08,
+      "max_odorant_path_share": 0.0013658606985017731,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_ddp_mft_hs": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_ddp_mft_hs"
+      ],
+      "max_flux_share": 9.571543914923726e-09,
+      "max_odorant_path_share": 0.01919524085801849,
+      "matters": true,
+      "unpinned": true,
+      "unpinned_and_matters": true
+    },
+    "k_mgo_mp": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_mgo_mp"
+      ],
+      "max_flux_share": 1.5263511408218773e-09,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_thiol_decay": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "unidentified"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "r_mp3p_decay",
+        "ch_actz_decay",
+        "r_mp_decay",
+        "r_mp2p_decay",
+        "r_hmp_decay",
+        "ch_mesh_decay"
+      ],
+      "max_flux_share": 2.587839063245462e-12,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_ha_mp_mft": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_ha_mp_mft"
+      ],
+      "max_flux_share": 3.737308286106504e-15,
+      "max_odorant_path_share": 1.3955769144885015e-10,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_mgo_dmhf": {
+      "grade": "bounded",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_mgo_dmhf"
+      ],
+      "max_flux_share": 2.365879898934402e-15,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_dimer_decay": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "unidentified"
+      },
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "ch_mftd_decay",
+        "ch_fftd_decay",
+        "ch_mmft_decay"
+      ],
+      "max_flux_share": 2.416155070292628e-16,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_schiff": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_schiff"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_glc_fru": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_glc_fru"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_fru_glc": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_fru_glc"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_ama_tdg": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_ama_tdg"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_tdg_fa": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_tdg_fa"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_ama_mgo": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_ama_mgo"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_ama_odg": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_ama_odg"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_odg_aa": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_odg_aa"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_tdg_mel": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_tdg_mel"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_fru_acids": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_fru_acids"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_glc_frag": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_glc_frag"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_fa_frag": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_fa_frag"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_aa_frag": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_aa_frag"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_glc_tdg": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_glc_tdg"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_tdg_ddg": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_tdg_ddg"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_ddg_hmf": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": false
+      },
+      "steps": [
+        "r_ddg_hmf"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_fru_int": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_fru_int"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_int_hmf": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_int_hmf"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_fru_odg": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_fru_odg"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_tdg_mgo": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_tdg_mgo"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_hmf_self": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "r_hmf_self"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_odg_af": {
+      "grade": "bounded",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_odg_af"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_af_dmhf": {
+      "grade": "bounded",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_af_dmhf"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_ddg_tdg": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_ddg_tdg"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_ddg_dgal": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_ddg_dgal"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_dgal_ddg": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_dgal_ddg"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_gsh_h2s": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_gsh_h2s"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_arp_dpo": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "r_arp_dpo"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_arp_tdp": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "r_arp_tdp"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_arp_tdp_th": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_arp_tdp_thermal"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_arp_dpo_th": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_arp_dpo_thermal"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_glc_ha": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "unidentified"
+      },
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_glc_c2c3"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_glc_fur": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_glc_fur"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_nf_shet": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_nf_shet"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_thi_hmp": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_thi_hmp"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_thi_mesh": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_thi_mesh"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_hmp_mft": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_hmp_mft"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_hmp_mp2p": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_hmp_mp2p"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_ttca_cys": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "r_ttca_cys"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_ttca_deg": {
+      "grade": "fitted",
+      "identification": {
+        "log10k": "identified"
+      },
+      "envelope_samples": {
+        "log10k": true,
+        "Ea": true
+      },
+      "steps": [
+        "r_ttca_deg"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_thioether": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "ch_thioether_mft",
+        "ch_thioether_fft"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_protein_ss": {
+      "grade": "bounded",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "ch_protein_ss_fft",
+        "ch_protein_ss_mft"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_mmft": {
+      "grade": "fitted",
+      "identification": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "envelope_samples": {
+        "log10k": false,
+        "Ea": true
+      },
+      "steps": [
+        "ch_mmft"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_dpo_af": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {
+        "log10k": true
+      },
+      "steps": [
+        "r_dpo_af"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_hmf_cys": {
+      "grade": "measured",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_hmf_cys"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_dmhf_h2s": {
+      "grade": "structural",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "r_dmhf_h2s"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_ox_supply": {
+      "grade": "structural",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "ox_supply"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": false,
+      "unpinned_and_matters": false
+    },
+    "k_cys_ox": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "ch_cys_ox"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_red_ox": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "ch_red_ox_dpo",
+        "ch_red_ox_nf"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_dimer_release": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "ch_dimer_release_mft",
+        "ch_dimer_release_fft"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_mele_site": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "ch_mele_from_dpo",
+        "ch_mele_from_tdp",
+        "ch_mele_from_ddp"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_add": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "ch_add_mft_dpo",
+        "ch_add_mft_tdp",
+        "ch_add_fft_dpo",
+        "ch_add_fft_tdp"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    },
+    "k_redox_mp3p": {
+      "grade": "fitted",
+      "identification": null,
+      "envelope_samples": {},
+      "steps": [
+        "ch_redox_mp3p"
+      ],
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "unpinned": true,
+      "unpinned_and_matters": false
+    }
+  },
+  "steps": [
+    {
+      "reaction": "r_pent_tdp",
+      "equation": "PENT + Cys -> TDP + Cys",
+      "parameter": "k_pent_tdp",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.5861110672008492,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "where": {
+        "share": 0.5861110672008492,
+        "pot": "cao2017_xylose_cys_90C_300min",
+        "species_share": 0.9999853316256493,
+        "species": "TDP made",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "PENT": {
+          "data_sets": 40,
+          "time_series": 19,
+          "used_by_the_model": 5
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "PENT",
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "r_pent_dpo",
+      "equation": "PENT + Cys -> DPO + Cys",
+      "parameter": "k_pent_dpo",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.45004351916962587,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "where": {
+        "share": 0.45004351916962587,
+        "pot": "zhang2025b_xylose_cys_ph65_120C_50min",
+        "species_share": 0.9999958853198668,
+        "species": "DPO made",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "PENT": {
+          "data_sets": 40,
+          "time_series": 19,
+          "used_by_the_model": 5
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "DPO",
+        "PENT"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "r_dpo_ddp",
+      "equation": "DPO + Cys -> DDP + CBX + FRAG_C + FRAG_N + FRAG_S",
+      "parameter": "k_dpo_ddp",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.4455943088597869,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "where": {
+        "share": 0.4455943088597869,
+        "pot": "zhang2025b_xylose_cys_ph65_120C_50min",
+        "species_share": 1.0,
+        "species": "DDP made",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "DDP": {
+          "data_sets": 1,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "r_osone_decay_tdp",
+      "equation": "TDP -> ACID + FRAG_C",
+      "parameter": "k_osone_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.40842212803860944,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "where": {
+        "share": 0.40842212803860944,
+        "pot": "hofmann1998_ribose_cys_ph3_145C_20min",
+        "species_share": 0.9953384379868553,
+        "species": "TDP used",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "ACID": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_osone_decay_ddp",
+      "equation": "DDP -> ACID + FRAG_C",
+      "parameter": "k_osone_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.18693222911052051,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "where": {
+        "share": 0.18693222911052051,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 0.9999999990956285,
+        "species": "DDP used",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "ACID": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DDP": {
+          "data_sets": 1,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "no species of the step is measured over time in the corpus"
+      ]
+    },
+    {
+      "reaction": "r_dpo_nf",
+      "equation": "DPO -> NF",
+      "parameter": "k_dpo_nf",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.11598933670503443,
+      "max_odorant_path_share": 1.0,
+      "matters": true,
+      "where": {
+        "share": 0.11598933670503443,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 1.0,
+        "species": "NF made",
+        "odorant_share": 1.0,
+        "odorant": "NF made (hofmann1998)"
+      },
+      "ledger": {
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "NF": {
+          "data_sets": 32,
+          "time_series": 9,
+          "used_by_the_model": 7
+        }
+      },
+      "species_measured_over_time": [
+        "DPO",
+        "NF"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "r_cys_thermal",
+      "equation": "Cys -> CBX + FRAG_C + FRAG_N + FRAG_S",
+      "parameter": "k_cys_thermal",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.1092604317529523,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "where": {
+        "share": 0.1092604317529523,
+        "pot": "cao2017_xylose_cys_90C_300min",
+        "species_share": 0.735832884681024,
+        "species": "Cys used",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "Cys"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_pent_caramel",
+      "equation": "PENT -> TDP",
+      "parameter": "k_pent_caramel",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.04156713103199599,
+      "max_odorant_path_share": 0.0,
+      "matters": true,
+      "where": {
+        "share": 0.04156713103199599,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 0.9997551956803724,
+        "species": "TDP made",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "PENT": {
+          "data_sets": 40,
+          "time_series": 19,
+          "used_by_the_model": 5
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "PENT",
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_cys_h2s",
+      "equation": "Cys -> H2S + CBX + FRAG_C + FRAG_N",
+      "parameter": "k_cys_h2s",
+      "grade": "measured",
+      "source": "Zheng & Ho 1994, ACS Symp. Ser. 564:138-146, doi 10.1021/bk-1994-0564.ch011, Table I (16 rate constants) and Table V p. 145 (4 activation energies), aqueous 0.1",
+      "dossiers": [
+        "zheng1994"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.019456280821052323,
+      "max_odorant_path_share": 1.0,
+      "matters": true,
+      "where": {
+        "share": 0.019456280821052323,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 1.0,
+        "species": "H2S made",
+        "odorant_share": 1.0,
+        "odorant": "H2S made (hofmann1998)"
+      },
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "H2S"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_nf_decay",
+      "equation": "NF -> FRAG_C",
+      "parameter": "k_nf_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.013913922736878656,
+      "max_odorant_path_share": 0.9999961642772432,
+      "matters": true,
+      "where": {
+        "share": 0.013913922736878656,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 0.9999961642772432,
+        "species": "NF used",
+        "odorant_share": 0.9999961642772432,
+        "odorant": "NF used (hofmann1998)"
+      },
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "NF": {
+          "data_sets": 32,
+          "time_series": 9,
+          "used_by_the_model": 7
+        }
+      },
+      "species_measured_over_time": [
+        "NF"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "r_h2s_loss",
+      "equation": "H2S -> FRAG_S",
+      "parameter": "k_h2s_loss",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.007680097551828477,
+      "max_odorant_path_share": 0.970723603479333,
+      "matters": true,
+      "where": {
+        "share": 0.007680097551828477,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 0.970723603479333,
+        "species": "H2S used",
+        "odorant_share": 0.970723603479333,
+        "odorant": "H2S used (zhang2025b)"
+      },
+      "ledger": {
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "H2S"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "r_tdp_fur",
+      "equation": "TDP -> FUR",
+      "parameter": "k_tdp_fur",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.0033983491745986204,
+      "max_odorant_path_share": 1.0,
+      "matters": true,
+      "where": {
+        "share": 0.0033983491745986204,
+        "pot": "cao2017_xylose_cys_90C_300min",
+        "species_share": 1.0,
+        "species": "FUR made",
+        "odorant_share": 1.0,
+        "odorant": "FUR made (hofmann1998)"
+      },
+      "ledger": {
+        "FUR": {
+          "data_sets": 110,
+          "time_series": 29,
+          "used_by_the_model": 13
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "FUR",
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_osone_decay_dpo",
+      "equation": "DPO -> ACID + FRAG_C",
+      "parameter": "k_osone_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.0029375373467791705,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 0.0029375373467791705,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 0.012328345249565035,
+        "species": "DPO used",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "ACID": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_pent_thermal_dpo",
+      "equation": "PENT -> DPO",
+      "parameter": "k_pent_thermal",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.002693862369963274,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 0.002693862369963274,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 0.007298852143820591,
+        "species": "DPO made",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "PENT": {
+          "data_sets": 40,
+          "time_series": 19,
+          "used_by_the_model": 5
+        }
+      },
+      "species_measured_over_time": [
+        "DPO",
+        "PENT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_fur_decay",
+      "equation": "FUR -> FRAG_C",
+      "parameter": "k_fur_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.0017350470937363906,
+      "max_odorant_path_share": 0.9953723850880519,
+      "matters": true,
+      "where": {
+        "share": 0.0017350470937363906,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 0.9953723850880519,
+        "species": "FUR used",
+        "odorant_share": 0.9953723850880519,
+        "odorant": "FUR used (hofmann1998)"
+      },
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FUR": {
+          "data_sets": 110,
+          "time_series": 29,
+          "used_by_the_model": 13
+        }
+      },
+      "species_measured_over_time": [
+        "FUR"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_fur_fft_hs",
+      "equation": "FUR + H2S -> FFT",
+      "parameter": "k_fur_fft_hs",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.00035326770473953403,
+      "max_odorant_path_share": 0.9998970622365984,
+      "matters": true,
+      "where": {
+        "share": 0.00035326770473953403,
+        "pot": "cao2017_xylose_cys_90C_300min",
+        "species_share": 0.9998970622365984,
+        "species": "FFT made",
+        "odorant_share": 0.9998970622365984,
+        "odorant": "FFT made (hofmann1998)"
+      },
+      "ledger": {
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "FUR": {
+          "data_sets": 110,
+          "time_series": 29,
+          "used_by_the_model": 13
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "FFT",
+        "FUR",
+        "H2S"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "r_nf_mft",
+      "equation": "NF + H2S -> MFT",
+      "parameter": "k_nf_mft",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.00017886892009771874,
+      "max_odorant_path_share": 0.9999354380845586,
+      "matters": true,
+      "where": {
+        "share": 0.00017886892009771874,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 0.9999354380845586,
+        "species": "MFT made",
+        "odorant_share": 0.9999354380845586,
+        "odorant": "MFT made (food)"
+      },
+      "ledger": {
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        },
+        "NF": {
+          "data_sets": 32,
+          "time_series": 9,
+          "used_by_the_model": 7
+        }
+      },
+      "species_measured_over_time": [
+        "H2S",
+        "MFT",
+        "NF"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_mft_decay",
+      "equation": "MFT -> FRAG_C + FRAG_S",
+      "parameter": "k_mft_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.00016921103788521073,
+      "max_odorant_path_share": 0.9986273141036218,
+      "matters": true,
+      "where": {
+        "share": 0.00016921103788521073,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 0.9986273141036218,
+        "species": "MFT used",
+        "odorant_share": 0.9986273141036218,
+        "odorant": "MFT used (zhai2019)"
+      },
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        }
+      },
+      "species_measured_over_time": [
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "r_fur_fft",
+      "equation": "FUR + H2S -> FFT",
+      "parameter": "k_fur_fft",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 0.00014206318681161668,
+      "max_odorant_path_share": 0.28680461734728374,
+      "matters": true,
+      "where": {
+        "share": 0.00014206318681161668,
+        "pot": "cao2017_xylose_cys_90C_300min",
+        "species_share": 0.28680461734728374,
+        "species": "FFT made",
+        "odorant_share": 0.28680461734728374,
+        "odorant": "FFT made (cao2017)"
+      },
+      "ledger": {
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "FUR": {
+          "data_sets": 110,
+          "time_series": 29,
+          "used_by_the_model": 13
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "FFT",
+        "FUR",
+        "H2S"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, log10k unidentified"
+      ]
+    },
+    {
+      "reaction": "ch_fft_decay",
+      "equation": "FFT -> FRAG_C + FRAG_S",
+      "parameter": "k_fft_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.00013643917747877218,
+      "max_odorant_path_share": 0.9888777961049899,
+      "matters": true,
+      "where": {
+        "share": 0.00013643917747877218,
+        "pot": "hofmann1998_ribose_cys_ph3_145C_20min",
+        "species_share": 0.9888777961049899,
+        "species": "FFT used",
+        "odorant_share": 0.9888777961049899,
+        "odorant": "FFT used (zhai2019)"
+      },
+      "ledger": {
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "FFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_dpo_c2c3",
+      "equation": "DPO -> HA + MGO",
+      "parameter": "k_dpo_c2c3",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 4.115669083139448e-05,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 4.115669083139448e-05,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 0.00018262200770737102,
+        "species": "DPO used",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "HA": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MGO": {
+          "data_sets": 94,
+          "time_series": 55,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "DPO",
+        "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_mgo_mel",
+      "equation": "MGO -> MEL_C",
+      "parameter": "k_mgo_mel",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of data/lit/timeseries/martins2005_glucose_glycine_80_100_120C_pH68.yml (the nine non-brownin",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 2.4099892053074492e-05,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 2.4099892053074492e-05,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 0.0,
+        "species": null,
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "MEL_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MGO": {
+          "data_sets": 94,
+          "time_series": 55,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_nf_mp3p",
+      "equation": "NF + H2S -> MP3P",
+      "parameter": "k_nf_mp3p",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 1.334490553153788e-05,
+      "max_odorant_path_share": 0.04818129132095068,
+      "matters": true,
+      "where": {
+        "share": 1.334490553153788e-05,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 0.04818129132095068,
+        "species": "NF used",
+        "odorant_share": 0.04818129132095068,
+        "odorant": "NF used (cao2017)"
+      },
+      "ledger": {
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        },
+        "MP3P": {
+          "data_sets": 12,
+          "time_series": 0,
+          "used_by_the_model": 5
+        },
+        "NF": {
+          "data_sets": 32,
+          "time_series": 9,
+          "used_by_the_model": 7
+        }
+      },
+      "species_measured_over_time": [
+        "H2S",
+        "NF"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_thiolate_loss_fft",
+      "equation": "FFT -> FRAG_C + FRAG_S",
+      "parameter": "k_thiolate_loss",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 5.911723610295525e-06,
+      "max_odorant_path_share": 0.8928418096877629,
+      "matters": true,
+      "where": {
+        "share": 5.911723610295525e-06,
+        "pot": "yiltirak_ribose_cys_120C_60min",
+        "species_share": 0.8928418096877629,
+        "species": "FFT used",
+        "odorant_share": 0.8928418096877629,
+        "odorant": "FFT used (hofmann1998)"
+      },
+      "ledger": {
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "FFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_dpo_ptr",
+      "equation": "DPO -> PTR",
+      "parameter": "k_dpo_ptr",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 1.9174188249455464e-06,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 1.9174188249455464e-06,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 8.50804251639099e-06,
+        "species": "DPO used",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "PTR": {
+          "data_sets": 1,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_cys_actz",
+      "equation": "Cys + MGO -> ACTZ + CBX",
+      "parameter": "k_cys_actz",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 1.7218994963348116e-06,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 1.7218994963348116e-06,
+        "pot": "zhai2019_xylose_cys_unbuffered_90C_160min",
+        "species_share": 9.253290304647672e-06,
+        "species": "Cys used",
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "ACTZ": {
+          "data_sets": 27,
+          "time_series": 7,
+          "used_by_the_model": 0
+        },
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "MGO": {
+          "data_sets": 94,
+          "time_series": 55,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "ACTZ",
+        "Cys",
+        "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ptr_decay",
+      "equation": "PTR -> ACID + FRAG_C",
+      "parameter": "k_osone_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 1.4091511873586277e-06,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 1.4091511873586277e-06,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 0.0,
+        "species": null,
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "ACID": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "PTR": {
+          "data_sets": 1,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_thiolate_loss_mft",
+      "equation": "MFT -> FRAG_C + FRAG_S",
+      "parameter": "k_thiolate_loss",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 6.937828337995164e-07,
+      "max_odorant_path_share": 0.47592794047964526,
+      "matters": true,
+      "where": {
+        "share": 6.937828337995164e-07,
+        "pot": "hofmann1998_ribose_cys_ph5_145C_20min",
+        "species_share": 0.47592794047964526,
+        "species": "MFT used",
+        "odorant_share": 0.47592794047964526,
+        "odorant": "MFT used (hofmann1998)"
+      },
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        }
+      },
+      "species_measured_over_time": [
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ddp_mft",
+      "equation": "DDP + H2S -> MFT",
+      "parameter": "k_ddp_mft",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 1.3608181148261837e-07,
+      "max_odorant_path_share": 0.01137862018133168,
+      "matters": true,
+      "where": {
+        "share": 1.3608181148261837e-07,
+        "pot": "cao2017_xylose_cys_90C_300min",
+        "species_share": 0.01137862018133168,
+        "species": "MFT made",
+        "odorant_share": 0.01137862018133168,
+        "odorant": "MFT made (zhang2025b)"
+      },
+      "ledger": {
+        "DDP": {
+          "data_sets": 1,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        }
+      },
+      "species_measured_over_time": [
+        "H2S",
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "ch_dimer_fft",
+      "equation": "FFT + OX -> FFTD + OXV",
+      "parameter": "k_dimer_fft",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 5.86912678057627e-08,
+      "max_odorant_path_share": 0.0014696849593048118,
+      "matters": false,
+      "where": {
+        "share": 5.86912678057627e-08,
+        "pot": "cao2017_xylose_cys_90C_300min",
+        "species_share": 0.0014696849593048118,
+        "species": "FFT used",
+        "odorant_share": 0.0014696849593048118,
+        "odorant": "FFT used (cao2017)"
+      },
+      "ledger": {
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "FFTD": {
+          "data_sets": 13,
+          "time_series": 8,
+          "used_by_the_model": 1
+        },
+        "OX": {
+          "data_sets": 4,
+          "time_series": 2,
+          "used_by_the_model": 0
+        },
+        "OXV": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "FFT",
+        "FFTD",
+        "OX"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_dimer_mft",
+      "equation": "MFT + OX -> MFTD + OXV",
+      "parameter": "k_dimer_mft",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "on a bound"
+      },
+      "max_flux_share": 5.03629708592298e-08,
+      "max_odorant_path_share": 0.0013658606985017731,
+      "matters": false,
+      "where": {
+        "share": 5.03629708592298e-08,
+        "pot": "hofmann1998_ribose_cys_ph5_145C_20min",
+        "species_share": 0.0013658606985017731,
+        "species": "MFT used",
+        "odorant_share": 0.0013658606985017731,
+        "odorant": "MFT used (hofmann1998)"
+      },
+      "ledger": {
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        },
+        "MFTD": {
+          "data_sets": 38,
+          "time_series": 9,
+          "used_by_the_model": 7
+        },
+        "OX": {
+          "data_sets": 4,
+          "time_series": 2,
+          "used_by_the_model": 0
+        },
+        "OXV": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "MFT",
+        "MFTD",
+        "OX"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ddp_mft_hs",
+      "equation": "DDP + H2S -> MFT",
+      "parameter": "k_ddp_mft_hs",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 9.571543914923726e-09,
+      "max_odorant_path_share": 0.01919524085801849,
+      "matters": true,
+      "where": {
+        "share": 9.571543914923726e-09,
+        "pot": "zhang2025b_xylose_cys_ph65_120C_50min",
+        "species_share": 0.01919524085801849,
+        "species": "MFT made",
+        "odorant_share": 0.01919524085801849,
+        "odorant": "MFT made (zhang2025b)"
+      },
+      "ledger": {
+        "DDP": {
+          "data_sets": 1,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        }
+      },
+      "species_measured_over_time": [
+        "H2S",
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": true,
+      "why_unclear": [
+        "fitted, B2.3 log10k unidentified, frozen since"
+      ]
+    },
+    {
+      "reaction": "r_mgo_mp",
+      "equation": "MGO + H2S -> MP",
+      "parameter": "k_mgo_mp",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 1.5263511408218773e-09,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 1.5263511408218773e-09,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 0.0,
+        "species": null,
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        },
+        "MGO": {
+          "data_sets": 94,
+          "time_series": 55,
+          "used_by_the_model": 17
+        },
+        "MP": {
+          "data_sets": 2,
+          "time_series": 0,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "H2S",
+        "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_mp3p_decay",
+      "equation": "MP3P -> FRAG_C + FRAG_S",
+      "parameter": "k_thiol_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 2.587839063245462e-12,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 2.587839063245462e-12,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 0.0,
+        "species": null,
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MP3P": {
+          "data_sets": 12,
+          "time_series": 0,
+          "used_by_the_model": 5
+        }
+      },
+      "species_measured_over_time": [],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_actz_decay",
+      "equation": "ACTZ -> FRAG_C + FRAG_N + FRAG_S",
+      "parameter": "k_thiol_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 3.305086042914628e-13,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 3.305086042914628e-13,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 0.0,
+        "species": null,
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "ACTZ": {
+          "data_sets": 27,
+          "time_series": 7,
+          "used_by_the_model": 0
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "ACTZ"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ha_mp_mft",
+      "equation": "HA + MP -> MFT",
+      "parameter": "k_ha_mp_mft",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 3.737308286106504e-15,
+      "max_odorant_path_share": 1.3955769144885015e-10,
+      "matters": false,
+      "where": {
+        "share": 3.737308286106504e-15,
+        "pot": "hofmann1998_ribose_cys_ph5_145C_20min",
+        "species_share": 1.3955769144885015e-10,
+        "species": "MFT made",
+        "odorant_share": 1.3955769144885015e-10,
+        "odorant": "MFT made (hofmann1998)"
+      },
+      "ledger": {
+        "HA": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        },
+        "MP": {
+          "data_sets": 2,
+          "time_series": 0,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_mgo_dmhf",
+      "equation": "MGO -> DMHF",
+      "parameter": "k_mgo_dmhf",
+      "grade": "bounded",
+      "source": "Wang & Ho 2008, JAFC 56:7405-7409, Figure 1, MG-alone arm: 13 mg DMHF per mol MG from 1.4 M MG in 0.5 M phosphate at pH 5, 120 C, 60 min",
+      "dossiers": [
+        "wang2008"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 2.365879898934402e-15,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 2.365879898934402e-15,
+        "pot": "hofmann1998_ribose_cys_ph7_145C_20min",
+        "species_share": 0.0,
+        "species": null,
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "DMHF": {
+          "data_sets": 65,
+          "time_series": 11,
+          "used_by_the_model": 14
+        },
+        "MGO": {
+          "data_sets": 94,
+          "time_series": 55,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "DMHF",
+        "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_mp_decay",
+      "equation": "MP -> FRAG_C + FRAG_S",
+      "parameter": "k_thiol_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 3.6353944915268405e-16,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 3.6353944915268405e-16,
+        "pot": "food_like_unbuffered_ribose_cys_140C_30min",
+        "species_share": 0.0,
+        "species": null,
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MP": {
+          "data_sets": 2,
+          "time_series": 0,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_mftd_decay",
+      "equation": "MFTD -> FRAG_C + FRAG_S",
+      "parameter": "k_dimer_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 2.416155070292628e-16,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 2.416155070292628e-16,
+        "pot": "hofmann1998_ribose_cys_ph5_145C_20min",
+        "species_share": 0.0,
+        "species": null,
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MFTD": {
+          "data_sets": 38,
+          "time_series": 9,
+          "used_by_the_model": 7
+        }
+      },
+      "species_measured_over_time": [
+        "MFTD"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_fftd_decay",
+      "equation": "FFTD -> FRAG_C + FRAG_S",
+      "parameter": "k_dimer_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 1.4194092277591022e-16,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": {
+        "share": 1.4194092277591022e-16,
+        "pot": "cao2017_xylose_cys_90C_300min",
+        "species_share": 0.0,
+        "species": null,
+        "odorant_share": 0.0,
+        "odorant": null
+      },
+      "ledger": {
+        "FFTD": {
+          "data_sets": 13,
+          "time_series": 8,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "FFTD"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_schiff",
+      "equation": "Glc + Gly -> SB",
+      "parameter": "k_schiff",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 1",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Glc": {
+          "data_sets": 99,
+          "time_series": 50,
+          "used_by_the_model": 22
+        },
+        "Gly": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "SB": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "Glc"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_amadori",
+      "equation": "SB -> AMA",
+      "parameter": null,
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AMA": {
+          "data_sets": 28,
+          "time_series": 15,
+          "used_by_the_model": 3
+        },
+        "SB": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "AMA"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_glc_fru",
+      "equation": "Glc -> Fru",
+      "parameter": "k_glc_fru",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 2",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Fru": {
+          "data_sets": 60,
+          "time_series": 28,
+          "used_by_the_model": 16
+        },
+        "Glc": {
+          "data_sets": 99,
+          "time_series": 50,
+          "used_by_the_model": 22
+        }
+      },
+      "species_measured_over_time": [
+        "Fru",
+        "Glc"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_fru_glc",
+      "equation": "Fru -> Glc",
+      "parameter": "k_fru_glc",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 3",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Fru": {
+          "data_sets": 60,
+          "time_series": 28,
+          "used_by_the_model": 16
+        },
+        "Glc": {
+          "data_sets": 99,
+          "time_series": 50,
+          "used_by_the_model": 22
+        }
+      },
+      "species_measured_over_time": [
+        "Fru",
+        "Glc"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ama_tdg",
+      "equation": "AMA -> TDG + Gly",
+      "parameter": "k_ama_tdg",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 4",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AMA": {
+          "data_sets": 28,
+          "time_series": 15,
+          "used_by_the_model": 3
+        },
+        "Gly": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDG": {
+          "data_sets": 62,
+          "time_series": 29,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "AMA",
+        "TDG"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_tdg_fa",
+      "equation": "TDG -> FA + FRAG_C",
+      "parameter": "k_tdg_fa",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 5",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FA": {
+          "data_sets": 28,
+          "time_series": 17,
+          "used_by_the_model": 4
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDG": {
+          "data_sets": 62,
+          "time_series": 29,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "FA",
+        "TDG"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ama_mgo",
+      "equation": "AMA -> MGO + Gly + FRAG_C",
+      "parameter": "k_ama_mgo",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 6",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AMA": {
+          "data_sets": 28,
+          "time_series": 15,
+          "used_by_the_model": 3
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Gly": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MGO": {
+          "data_sets": 94,
+          "time_series": 55,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "AMA",
+        "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ama_odg",
+      "equation": "AMA -> ODG + Gly",
+      "parameter": "k_ama_odg",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 7",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AMA": {
+          "data_sets": 28,
+          "time_series": 15,
+          "used_by_the_model": 3
+        },
+        "Gly": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "ODG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "AMA"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_odg_aa",
+      "equation": "ODG -> AA + FRAG_C",
+      "parameter": "k_odg_aa",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 8",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AA": {
+          "data_sets": 40,
+          "time_series": 20,
+          "used_by_the_model": 5
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "ODG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "AA"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_tdg_mel",
+      "equation": "TDG + Gly -> MEL_C + MEL_N",
+      "parameter": "k_tdg_mel",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 9",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Gly": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MEL_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MEL_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDG": {
+          "data_sets": 62,
+          "time_series": 29,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "TDG"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_fru_acids",
+      "equation": "Fru -> FA + AA + FRAG_C",
+      "parameter": "k_fru_acids",
+      "grade": "measured",
+      "source": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 10",
+      "dossiers": [
+        "martins2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AA": {
+          "data_sets": 40,
+          "time_series": 20,
+          "used_by_the_model": 5
+        },
+        "FA": {
+          "data_sets": 28,
+          "time_series": 17,
+          "used_by_the_model": 4
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Fru": {
+          "data_sets": 60,
+          "time_series": 28,
+          "used_by_the_model": 16
+        }
+      },
+      "species_measured_over_time": [
+        "AA",
+        "FA",
+        "Fru"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_glc_frag",
+      "equation": "Glc -> FRAG_C",
+      "parameter": "k_glc_frag",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of data/lit/timeseries/martins2005_glucose_glycine_80_100_120C_pH68.yml (the nine non-brownin",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Glc": {
+          "data_sets": 99,
+          "time_series": 50,
+          "used_by_the_model": 22
+        }
+      },
+      "species_measured_over_time": [
+        "Glc"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_fa_frag",
+      "equation": "FA -> FRAG_C",
+      "parameter": "k_fa_frag",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of data/lit/timeseries/martins2005_glucose_glycine_80_100_120C_pH68.yml (the nine non-brownin",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FA": {
+          "data_sets": 28,
+          "time_series": 17,
+          "used_by_the_model": 4
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "FA"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_aa_frag",
+      "equation": "AA -> FRAG_C",
+      "parameter": "k_aa_frag",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of data/lit/timeseries/martins2005_glucose_glycine_80_100_120C_pH68.yml (the nine non-brownin",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AA": {
+          "data_sets": 40,
+          "time_series": 20,
+          "used_by_the_model": 5
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "AA"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_glc_tdg",
+      "equation": "Glc -> TDG",
+      "parameter": "k_glc_tdg",
+      "grade": "measured",
+      "source": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 3",
+      "dossiers": [
+        "kocadagli2016jafc"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Glc": {
+          "data_sets": 99,
+          "time_series": 50,
+          "used_by_the_model": 22
+        },
+        "TDG": {
+          "data_sets": 62,
+          "time_series": 29,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "Glc",
+        "TDG"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_tdg_ddg",
+      "equation": "TDG -> DDG",
+      "parameter": "k_tdg_ddg",
+      "grade": "fitted",
+      "source": "Mittelmaier, Funfrocken, Fenn, Berlich & Pischetsrieder 2011, Anal. Bioanal. Chem. 399:1689 (fed 3-DG / 3,4-DGE / 3-DGal, ~200 uM, PD model pH 5, 120 C, 0-120 m",
+      "dossiers": [
+        "kocadagli2016jafc"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DDG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDG": {
+          "data_sets": 62,
+          "time_series": 29,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "TDG"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ddg_hmf",
+      "equation": "DDG -> HMF",
+      "parameter": "k_ddg_hmf",
+      "grade": "fitted",
+      "source": "Mittelmaier, Funfrocken, Fenn, Berlich & Pischetsrieder 2011, Anal. Bioanal. Chem. 399:1689 (fed 3-DG / 3,4-DGE / 3-DGal, ~200 uM, PD model pH 5, 120 C, 0-120 m",
+      "dossiers": [
+        "kocadagli2016jafc"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DDG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "HMF": {
+          "data_sets": 50,
+          "time_series": 15,
+          "used_by_the_model": 16
+        }
+      },
+      "species_measured_over_time": [
+        "HMF"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_fru_int",
+      "equation": "Fru -> INT",
+      "parameter": "k_fru_int",
+      "grade": "measured",
+      "source": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 6",
+      "dossiers": [
+        "kocadagli2016jafc"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Fru": {
+          "data_sets": 60,
+          "time_series": 28,
+          "used_by_the_model": 16
+        },
+        "INT": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "Fru"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_int_hmf",
+      "equation": "INT -> HMF",
+      "parameter": "k_int_hmf",
+      "grade": "measured",
+      "source": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 7",
+      "dossiers": [
+        "kocadagli2016jafc"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "HMF": {
+          "data_sets": 50,
+          "time_series": 15,
+          "used_by_the_model": 16
+        },
+        "INT": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "HMF"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_fru_odg",
+      "equation": "Fru -> ODG",
+      "parameter": "k_fru_odg",
+      "grade": "measured",
+      "source": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 8",
+      "dossiers": [
+        "kocadagli2016jafc"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Fru": {
+          "data_sets": 60,
+          "time_series": 28,
+          "used_by_the_model": 16
+        },
+        "ODG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "Fru"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_tdg_mgo",
+      "equation": "TDG -> MGO + FRAG_C",
+      "parameter": "k_tdg_mgo",
+      "grade": "measured",
+      "source": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 11",
+      "dossiers": [
+        "kocadagli2016jafc"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MGO": {
+          "data_sets": 94,
+          "time_series": 55,
+          "used_by_the_model": 17
+        },
+        "TDG": {
+          "data_sets": 62,
+          "time_series": 29,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "MGO",
+        "TDG"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_hmf_self",
+      "equation": "HMF -> FRAG_C",
+      "parameter": "k_hmf_self",
+      "grade": "measured",
+      "source": "Hamzalioglu & Gokmen 2018, sec. 3.1, model-free control: HMF alone, no amino acid, 0.9 % lost in 7 days at 5 C and pH 3.5",
+      "dossiers": [
+        "hamzalioglu2018"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "HMF": {
+          "data_sets": 50,
+          "time_series": 15,
+          "used_by_the_model": 16
+        }
+      },
+      "species_measured_over_time": [
+        "HMF"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_odg_af",
+      "equation": "ODG -> AF",
+      "parameter": "k_odg_af",
+      "grade": "bounded",
+      "source": "DERIVED, not measured. The pentose edge's PSEUDO-FIRST-ORDER constant at Blank 1997's 1 M amine loading, transferred to the hexose series. Structure from Wang &",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AF": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "ODG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_af_dmhf",
+      "equation": "AF -> DMHF",
+      "parameter": "k_af_dmhf",
+      "grade": "bounded",
+      "source": "DECLARED, UNCONSTRAINED. Route from Hofmann & Schieberle 2001 via Wang & Ho 2008 (ref 17) and Poisson 2019 (ref 19); NO rate, conversion or time course is publi",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AF": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DMHF": {
+          "data_sets": 65,
+          "time_series": 11,
+          "used_by_the_model": 14
+        }
+      },
+      "species_measured_over_time": [
+        "DMHF"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ddg_tdg",
+      "equation": "DDG -> TDG",
+      "parameter": "k_ddg_tdg",
+      "grade": "fitted",
+      "source": "Mittelmaier, Funfrocken, Fenn, Berlich & Pischetsrieder 2011, Anal. Bioanal. Chem. 399:1689 (fed 3-DG / 3,4-DGE / 3-DGal, ~200 uM, PD model pH 5, 120 C, 0-120 m",
+      "dossiers": [
+        "mittelmaier2010"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DDG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDG": {
+          "data_sets": 62,
+          "time_series": 29,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "TDG"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ddg_dgal",
+      "equation": "DDG -> DGAL",
+      "parameter": "k_ddg_dgal",
+      "grade": "fitted",
+      "source": "Mittelmaier, Funfrocken, Fenn, Berlich & Pischetsrieder 2011, Anal. Bioanal. Chem. 399:1689 (fed 3-DG / 3,4-DGE / 3-DGal, ~200 uM, PD model pH 5, 120 C, 0-120 m",
+      "dossiers": [
+        "mittelmaier2010"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DDG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DGAL": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_dgal_ddg",
+      "equation": "DGAL -> DDG",
+      "parameter": "k_dgal_ddg",
+      "grade": "fitted",
+      "source": "Mittelmaier, Funfrocken, Fenn, Berlich & Pischetsrieder 2011, Anal. Bioanal. Chem. 399:1689 (fed 3-DG / 3,4-DGE / 3-DGal, ~200 uM, PD model pH 5, 120 C, 0-120 m",
+      "dossiers": [
+        "mittelmaier2010"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DDG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DGAL": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_gsh_h2s",
+      "equation": "GSH -> H2S + FRAG_C + FRAG_N",
+      "parameter": "k_gsh_h2s",
+      "grade": "measured",
+      "source": "Zheng & Ho 1994, ACS Symp. Ser. 564:138-146, doi 10.1021/bk-1994-0564.ch011, Table III (16 first-order constants, 0.1 M glutathione, 80-110 C, pH 3/5/7/9); (ln ",
+      "dossiers": [
+        "zheng1994"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "GSH": {
+          "data_sets": 36,
+          "time_series": 25,
+          "used_by_the_model": 0
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "GSH",
+        "H2S"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_arp_dpo",
+      "equation": "ARP -> DPO + CBX + FRAG_C + FRAG_N",
+      "parameter": "k_arp_dpo",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "ARP": {
+          "data_sets": 36,
+          "time_series": 29,
+          "used_by_the_model": 0
+        },
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "ARP",
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_arp_tdp",
+      "equation": "ARP -> TDP + CBX + FRAG_C + FRAG_N",
+      "parameter": "k_arp_tdp",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "ARP": {
+          "data_sets": 36,
+          "time_series": 29,
+          "used_by_the_model": 0
+        },
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "ARP",
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_arp_tdp_thermal",
+      "equation": "ARP -> TDP + CBX + FRAG_C + FRAG_N",
+      "parameter": "k_arp_tdp_th",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "ARP": {
+          "data_sets": 36,
+          "time_series": 29,
+          "used_by_the_model": 0
+        },
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "ARP",
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_arp_dpo_thermal",
+      "equation": "ARP -> DPO + CBX + FRAG_C + FRAG_N",
+      "parameter": "k_arp_dpo_th",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "ARP": {
+          "data_sets": 36,
+          "time_series": 29,
+          "used_by_the_model": 0
+        },
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "ARP",
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_dpo_ddp_h2s",
+      "equation": "DPO + Cys -> DPO + CBX + FRAG_C + FRAG_N + H2S",
+      "parameter": "k_dpo_ddp_h2s",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "DPO",
+        "H2S"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_glc_c2c3",
+      "equation": "Glc -> HA + MGO + FRAG_C",
+      "parameter": "k_glc_ha",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Glc": {
+          "data_sets": 99,
+          "time_series": 50,
+          "used_by_the_model": 22
+        },
+        "HA": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MGO": {
+          "data_sets": 94,
+          "time_series": 55,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "Glc",
+        "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_glc_fur",
+      "equation": "Glc -> FUR + FRAG_C",
+      "parameter": "k_glc_fur",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FUR": {
+          "data_sets": 110,
+          "time_series": 29,
+          "used_by_the_model": 13
+        },
+        "Glc": {
+          "data_sets": 99,
+          "time_series": 50,
+          "used_by_the_model": 22
+        }
+      },
+      "species_measured_over_time": [
+        "FUR",
+        "Glc"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_arp_decay",
+      "equation": "ARP -> ACID + CBX + FRAG_C + FRAG_N",
+      "parameter": "k_osone_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "ACID": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "ARP": {
+          "data_sets": 36,
+          "time_series": 29,
+          "used_by_the_model": 0
+        },
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "ARP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_nf_shet",
+      "equation": "NF + H2S -> SHET",
+      "parameter": "k_nf_shet",
+      "grade": "fitted",
+      "source": "B49 (kinetic_core_b49_prereg.md): Whitfield & Mottram 1999 Table 2, fed norfuraneol + H2S or cysteine at pH 4.5, the heterocycle classes against MFT; pH 6.5 twi",
+      "dossiers": [
+        "whitfield1999",
+        "whitfield2001"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        },
+        "NF": {
+          "data_sets": 32,
+          "time_series": 9,
+          "used_by_the_model": 7
+        },
+        "SHET": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "H2S",
+        "NF"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_mp2p_decay",
+      "equation": "MP2P -> FRAG_C + FRAG_S",
+      "parameter": "k_thiol_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MP2P": {
+          "data_sets": 39,
+          "time_series": 6,
+          "used_by_the_model": 11
+        }
+      },
+      "species_measured_over_time": [
+        "MP2P"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_hmp_decay",
+      "equation": "HMP -> FRAG_C + FRAG_S",
+      "parameter": "k_thiol_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "HMP": {
+          "data_sets": 5,
+          "time_series": 1,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "HMP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_thi_hmp",
+      "equation": "THI -> HMP + FRAG_C + FRAG_N",
+      "parameter": "k_thi_hmp",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "HMP": {
+          "data_sets": 5,
+          "time_series": 1,
+          "used_by_the_model": 0
+        },
+        "THI": {
+          "data_sets": 16,
+          "time_series": 4,
+          "used_by_the_model": 2
+        }
+      },
+      "species_measured_over_time": [
+        "HMP",
+        "THI"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_thi_h2s",
+      "equation": "THI -> H2S + FRAG_C + FRAG_N",
+      "parameter": "k_thi_h2s",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        },
+        "THI": {
+          "data_sets": 16,
+          "time_series": 4,
+          "used_by_the_model": 2
+        }
+      },
+      "species_measured_over_time": [
+        "H2S",
+        "THI"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_thi_mesh",
+      "equation": "THI -> MESH + FRAG_C + FRAG_N",
+      "parameter": "k_thi_mesh",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MESH": {
+          "data_sets": 18,
+          "time_series": 6,
+          "used_by_the_model": 4
+        },
+        "THI": {
+          "data_sets": 16,
+          "time_series": 4,
+          "used_by_the_model": 2
+        }
+      },
+      "species_measured_over_time": [
+        "MESH",
+        "THI"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_hmp_mft",
+      "equation": "HMP -> MFT",
+      "parameter": "k_hmp_mft",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "HMP": {
+          "data_sets": 5,
+          "time_series": 1,
+          "used_by_the_model": 0
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        }
+      },
+      "species_measured_over_time": [
+        "HMP",
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_hmp_mp2p",
+      "equation": "HMP -> MP2P",
+      "parameter": "k_hmp_mp2p",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "HMP": {
+          "data_sets": 5,
+          "time_series": 1,
+          "used_by_the_model": 0
+        },
+        "MP2P": {
+          "data_sets": 39,
+          "time_series": 6,
+          "used_by_the_model": 11
+        }
+      },
+      "species_measured_over_time": [
+        "HMP",
+        "MP2P"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ttca_cys",
+      "equation": "TTCA -> Cys + PENT",
+      "parameter": "k_ttca_cys",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "PENT": {
+          "data_sets": 40,
+          "time_series": 19,
+          "used_by_the_model": 5
+        },
+        "TTCA": {
+          "data_sets": 25,
+          "time_series": 18,
+          "used_by_the_model": 4
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "PENT",
+        "TTCA"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ttca_deg",
+      "equation": "TTCA -> DPO + CBX + FRAG_C + FRAG_N + FRAG_S",
+      "parameter": "k_ttca_deg",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "identified"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TTCA": {
+          "data_sets": 25,
+          "time_series": 18,
+          "used_by_the_model": 4
+        }
+      },
+      "species_measured_over_time": [
+        "DPO",
+        "TTCA"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_thioether_mft",
+      "equation": "MFT + MELE -> BND",
+      "parameter": "k_thioether",
+      "grade": "measured",
+      "source": "Hofmann & Schieberle 2002 Fig. 6 (9.4e-4 /s, 30 C, SIDA) and Table 2 (9.8e-4 /s); Charles-Bernard, Roberts & Kraehenbuehl 2005 Table 2 (>7.7e-4 /s, 25 C) as the",
+      "dossiers": [
+        "hofmann2002",
+        "hofmann2001",
+        "charlesbernard2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "BND": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MELE": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        }
+      },
+      "species_measured_over_time": [
+        "MFT"
+      ],
+      "conflicts": [
+        "CF-006"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-006"
+      ]
+    },
+    {
+      "reaction": "ch_thioether_fft",
+      "equation": "FFT + MELE -> BND_F",
+      "parameter": "k_thioether",
+      "grade": "measured",
+      "source": "Hofmann & Schieberle 2002 Fig. 6 (9.4e-4 /s, 30 C, SIDA) and Table 2 (9.8e-4 /s); Charles-Bernard, Roberts & Kraehenbuehl 2005 Table 2 (>7.7e-4 /s, 25 C) as the",
+      "dossiers": [
+        "hofmann2002",
+        "hofmann2001",
+        "charlesbernard2005"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "BND_F": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "MELE": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "FFT"
+      ],
+      "conflicts": [
+        "CF-006"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-006"
+      ]
+    },
+    {
+      "reaction": "ch_thioether_release",
+      "equation": "BND -> MFT + MELE",
+      "parameter": null,
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "BND": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MELE": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        }
+      },
+      "species_measured_over_time": [
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_thioether_release_fft",
+      "equation": "BND_F -> FFT + MELE",
+      "parameter": null,
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "BND_F": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "MELE": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "FFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_protein_ss_fft",
+      "equation": "FFT + PROT_SS -> PRB",
+      "parameter": "k_protein_ss",
+      "grade": "bounded",
+      "source": "Anantharamkrishnan & Reineccius 2020b (the parent adduct survey), Fig. 7c: 2-furfurylthiol forms BOTH 1:1 (+114 Da) and 2:1 (+228 Da) adducts with beta-lactoglo",
+      "dossiers": [
+        "anantharamkrishnan2020b"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "PRB": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "PROT_SS": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "FFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_protein_ss_mft",
+      "equation": "MFT + PROT_SS -> PRB",
+      "parameter": "k_protein_ss",
+      "grade": "bounded",
+      "source": "Anantharamkrishnan & Reineccius 2020b (the parent adduct survey), Fig. 7c: 2-furfurylthiol forms BOTH 1:1 (+114 Da) and 2:1 (+228 Da) adducts with beta-lactoglo",
+      "dossiers": [
+        "anantharamkrishnan2020b"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        },
+        "PRB": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "PROT_SS": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_oligomer_mft",
+      "equation": "MFT -> OLG",
+      "parameter": "k_oligomer",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        },
+        "OLG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_oligomer_fft",
+      "equation": "FFT -> OLG",
+      "parameter": "k_oligomer",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "OLG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "FFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_mmft",
+      "equation": "MFT + MESH -> MMFT",
+      "parameter": "k_mmft",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "B2.3 log10k": "unidentified, frozen since"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "MESH": {
+          "data_sets": 18,
+          "time_series": 6,
+          "used_by_the_model": 4
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        },
+        "MMFT": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "MESH",
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_mmft_decay",
+      "equation": "MMFT -> FRAG_C + FRAG_S",
+      "parameter": "k_dimer_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MMFT": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_mesh_decay",
+      "equation": "MESH -> FRAG_C + FRAG_S",
+      "parameter": "k_thiol_decay",
+      "grade": "fitted",
+      "source": "ESTIMATED IN THIS MODULE by least squares on the declared FIT rows of FIT_HOLDOUT_DECLARATION.md D.3/D.4 only. No literature rate constant exists for this step.",
+      "dossiers": [],
+      "identification_b60": {
+        "log10k": "unidentified"
+      },
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MESH": {
+          "data_sets": 18,
+          "time_series": 6,
+          "used_by_the_model": 4
+        }
+      },
+      "species_measured_over_time": [
+        "MESH"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_dpo_af",
+      "equation": "DPO + Gly -> AF + FRAG_C + FRAG_N",
+      "parameter": "k_dpo_af",
+      "grade": "fitted",
+      "source": "FITTED -- the only fitted constant in the furanic channel. Calibrated on Blank, Fay, Lakner & Schlosser 1997, JAFC 45:2642-2648 (article ID JF960997I), Table 1 ",
+      "dossiers": [
+        "blank1997"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AF": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Gly": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_hmf_cys",
+      "equation": "HMF + Cys -> HMFAD + CBX + FRAG_N",
+      "parameter": "k_hmf_cys",
+      "grade": "measured",
+      "source": "Hamzalioglu & Gokmen 2018, Food Chem. 240:354-360, doi 10.1016/j.foodchem.2017.07.131, Table 1 HIGH-MOISTURE arm, second-order constant derived as k = k'/[AA] w",
+      "dossiers": [
+        "hamzalioglu2018"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "HMF": {
+          "data_sets": 50,
+          "time_series": 15,
+          "used_by_the_model": 16
+        },
+        "HMFAD": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "HMF"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_dmhf_h2s",
+      "equation": "DMHF + H2S -> DMHFS",
+      "parameter": "k_dmhf_h2s",
+      "grade": "structural",
+      "source": "Shu & Ho 1988, JAFC 36:801-803, Table I -- STRUCTURE ONLY. The paper reports a GC area percent and no consumption of any kind",
+      "dossiers": [
+        "shu1988"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DMHF": {
+          "data_sets": 65,
+          "time_series": 11,
+          "used_by_the_model": 14
+        },
+        "DMHFS": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "DMHF",
+        "H2S"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ox_supply",
+      "equation": "OXR + OXV -> OX",
+      "parameter": "k_ox_supply",
+      "grade": "structural",
+      "source": "B11 (kinetic_core_b11_prereg.md sec. 3): oxygen as a two-pool state; no literature rate constant exists for either consumer",
+      "dossiers": [
+        "bagiyan2004",
+        "yiltirak2026"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "OX": {
+          "data_sets": 4,
+          "time_series": 2,
+          "used_by_the_model": 0
+        },
+        "OXR": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "OXV": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "OX"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_cys_ox",
+      "equation": "Cys + OX -> CBX + FRAG_C + FRAG_N + FRAG_S + OXV",
+      "parameter": "k_cys_ox",
+      "grade": "fitted",
+      "source": "B11 (kinetic_core_b11_prereg.md sec. 3): oxygen as a two-pool state; no literature rate constant exists for either consumer",
+      "dossiers": [
+        "bagiyan2004",
+        "yiltirak2026"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "OX": {
+          "data_sets": 4,
+          "time_series": 2,
+          "used_by_the_model": 0
+        },
+        "OXV": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "OX"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_red_ox_dpo",
+      "equation": "DPO + OX -> FRAG_C + OXV",
+      "parameter": "k_red_ox",
+      "grade": "fitted",
+      "source": "B11 (kinetic_core_b11_prereg.md sec. 3): oxygen as a two-pool state; no literature rate constant exists for either consumer",
+      "dossiers": [
+        "bagiyan2004",
+        "yiltirak2026"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "OX": {
+          "data_sets": 4,
+          "time_series": 2,
+          "used_by_the_model": 0
+        },
+        "OXV": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO",
+        "OX"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_red_ox_nf",
+      "equation": "NF + OX -> FRAG_C + OXV",
+      "parameter": "k_red_ox",
+      "grade": "fitted",
+      "source": "B11 (kinetic_core_b11_prereg.md sec. 3): oxygen as a two-pool state; no literature rate constant exists for either consumer",
+      "dossiers": [
+        "bagiyan2004",
+        "yiltirak2026"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "NF": {
+          "data_sets": 32,
+          "time_series": 9,
+          "used_by_the_model": 7
+        },
+        "OX": {
+          "data_sets": 4,
+          "time_series": 2,
+          "used_by_the_model": 0
+        },
+        "OXV": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "NF",
+        "OX"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_dimer_release_mft",
+      "equation": "MFTD -> MFT",
+      "parameter": "k_dimer_release",
+      "grade": "fitted",
+      "source": "B17 (kinetic_core_b17_prereg.md sec. 2): the disulfide made reversible; barrier shared with the dimerisation, Zhang et al. 2026, Food Chem., Table 2 step k17 (z",
+      "dossiers": [
+        "kumazawa2003",
+        "zhou2023",
+        "Zhang2024"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        },
+        "MFTD": {
+          "data_sets": 38,
+          "time_series": 9,
+          "used_by_the_model": 7
+        }
+      },
+      "species_measured_over_time": [
+        "MFT",
+        "MFTD"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_dimer_release_fft",
+      "equation": "FFTD -> FFT",
+      "parameter": "k_dimer_release",
+      "grade": "fitted",
+      "source": "B17 (kinetic_core_b17_prereg.md sec. 2): the disulfide made reversible; barrier shared with the dimerisation, Zhang et al. 2026, Food Chem., Table 2 step k17 (z",
+      "dossiers": [
+        "kumazawa2003",
+        "zhou2023",
+        "Zhang2024"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "FFTD": {
+          "data_sets": 13,
+          "time_series": 8,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "FFT",
+        "FFTD"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_mele_from_dpo",
+      "equation": "DPO -> FRAG_C + MELE",
+      "parameter": "k_mele_site",
+      "grade": "fitted",
+      "source": "B17 variant (a) (kinetic_core_b17_prereg.md sec. 2): the thioether sink's site pool made by the pot itself at a fitted yield per osone decayed; Hofmann & Schieb",
+      "dossiers": [
+        "hofmann2002",
+        "farmer1990",
+        "whitfield1988"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MELE": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_mele_from_tdp",
+      "equation": "TDP -> FRAG_C + MELE",
+      "parameter": "k_mele_site",
+      "grade": "fitted",
+      "source": "B17 variant (a) (kinetic_core_b17_prereg.md sec. 2): the thioether sink's site pool made by the pot itself at a fitted yield per osone decayed; Hofmann & Schieb",
+      "dossiers": [
+        "hofmann2002",
+        "farmer1990",
+        "whitfield1988"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MELE": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_mele_from_ddp",
+      "equation": "DDP -> FRAG_C + MELE",
+      "parameter": "k_mele_site",
+      "grade": "fitted",
+      "source": "B17 variant (a) (kinetic_core_b17_prereg.md sec. 2): the thioether sink's site pool made by the pot itself at a fitted yield per osone decayed; Hofmann & Schieb",
+      "dossiers": [
+        "hofmann2002",
+        "farmer1990",
+        "whitfield1988"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DDP": {
+          "data_sets": 1,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MELE": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_add_mft_dpo",
+      "equation": "MFT + DPO -> OLG + FRAG_C",
+      "parameter": "k_add",
+      "grade": "fitted",
+      "source": "B25 (kinetic_core_b25_prereg.md sec. 2): the third sink structure, after B17's reversible disulfide and saturable thioether were refused; the lipid papers' quen",
+      "dossiers": [
+        "farmer1990",
+        "whitfield1988",
+        "schieberle2000"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        },
+        "OLG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO",
+        "MFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_add_mft_tdp",
+      "equation": "MFT + TDP -> OLG + FRAG_C",
+      "parameter": "k_add",
+      "grade": "fitted",
+      "source": "B25 (kinetic_core_b25_prereg.md sec. 2): the third sink structure, after B17's reversible disulfide and saturable thioether were refused; the lipid papers' quen",
+      "dossiers": [
+        "farmer1990",
+        "whitfield1988",
+        "schieberle2000"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MFT": {
+          "data_sets": 166,
+          "time_series": 28,
+          "used_by_the_model": 31
+        },
+        "OLG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "MFT",
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_add_fft_dpo",
+      "equation": "FFT + DPO -> OLG + FRAG_C",
+      "parameter": "k_add",
+      "grade": "fitted",
+      "source": "B25 (kinetic_core_b25_prereg.md sec. 2): the third sink structure, after B17's reversible disulfide and saturable thioether were refused; the lipid papers' quen",
+      "dossiers": [
+        "farmer1990",
+        "whitfield1988",
+        "schieberle2000"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        },
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "OLG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO",
+        "FFT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_add_fft_tdp",
+      "equation": "FFT + TDP -> OLG + FRAG_C",
+      "parameter": "k_add",
+      "grade": "fitted",
+      "source": "B25 (kinetic_core_b25_prereg.md sec. 2): the third sink structure, after B17's reversible disulfide and saturable thioether were refused; the lipid papers' quen",
+      "dossiers": [
+        "farmer1990",
+        "whitfield1988",
+        "schieberle2000"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FFT": {
+          "data_sets": 161,
+          "time_series": 31,
+          "used_by_the_model": 30
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "OLG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "FFT",
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "ch_redox_mp3p",
+      "equation": "NF + H2S -> MP3P + OX",
+      "parameter": "k_redox_mp3p",
+      "grade": "fitted",
+      "source": "Whitfield & Mottram 1999 J. Agric. Food Chem. 47:1626, p. 1631 and Figure 6 ('Proposed redox reaction between thiols and alpha-dicarbonyl compounds'): aerial ox",
+      "dossiers": [
+        "whitfield1999",
+        "luo2024"
+      ],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "H2S": {
+          "data_sets": 26,
+          "time_series": 10,
+          "used_by_the_model": 1
+        },
+        "MP3P": {
+          "data_sets": 12,
+          "time_series": 0,
+          "used_by_the_model": 5
+        },
+        "NF": {
+          "data_sets": 32,
+          "time_series": 9,
+          "used_by_the_model": 7
+        },
+        "OX": {
+          "data_sets": 4,
+          "time_series": 2,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "H2S",
+        "NF",
+        "OX"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_ttca_form",
+      "equation": "Cys + PENT -> TTCA",
+      "parameter": "k_ttca_form",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "PENT": {
+          "data_sets": 40,
+          "time_series": 19,
+          "used_by_the_model": 5
+        },
+        "TTCA": {
+          "data_sets": 25,
+          "time_series": 18,
+          "used_by_the_model": 4
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "PENT",
+        "TTCA"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_nf_decay_oh",
+      "equation": "NF -> FRAG_C",
+      "parameter": "k_nf_decay_oh",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "NF": {
+          "data_sets": 32,
+          "time_series": 9,
+          "used_by_the_model": 7
+        }
+      },
+      "species_measured_over_time": [
+        "NF"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_cama_form",
+      "equation": "TTCA -> CAMA",
+      "parameter": "k_cama_form",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CAMA": {
+          "data_sets": 23,
+          "time_series": 14,
+          "used_by_the_model": 3
+        },
+        "TTCA": {
+          "data_sets": 25,
+          "time_series": 18,
+          "used_by_the_model": 4
+        }
+      },
+      "species_measured_over_time": [
+        "CAMA",
+        "TTCA"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_cama_dpo",
+      "equation": "CAMA -> DPO + Cys",
+      "parameter": "k_cama_dpo",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CAMA": {
+          "data_sets": 23,
+          "time_series": 14,
+          "used_by_the_model": 3
+        },
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "DPO": {
+          "data_sets": 12,
+          "time_series": 7,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "CAMA",
+        "Cys",
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_cama_tdp",
+      "equation": "CAMA -> TDP + Cys",
+      "parameter": "k_cama_tdp",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CAMA": {
+          "data_sets": 23,
+          "time_series": 14,
+          "used_by_the_model": 3
+        },
+        "Cys": {
+          "data_sets": 96,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "TDP": {
+          "data_sets": 19,
+          "time_series": 13,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "CAMA",
+        "Cys",
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    }
+  ]
+}

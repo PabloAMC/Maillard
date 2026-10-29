@@ -178,6 +178,9 @@ def main() -> int:
             "species": {k: _ranked(flux, k) for k in TRACK},
             "evidence_grounding": _grounding(flux, parameters),
             "grade_of_reaction": {rxn.key: _grade(rxn, parameters) for rxn in sulfur.FULL_REACTIONS if flux.get(rxn.key, 0.0) > 0},
+            # 2026-10-29 (strategy M4): every step's integrated flux, so a step's share of the pot's total reaction flux
+            # can be read (build_sulfur_reaction_evidence.py); the top lists above rank only within one species.
+            "reaction_flux_mmol_L": {rxn.key: float(flux[rxn.key]) for rxn in sulfur.FULL_REACTIONS if flux.get(rxn.key, 0.0) > 0},
         }
         print(f"  {name}: Cys t1/2 {pots[name]['half_time_min']['Cys']}, closure {max(closure.values()):.1e}", flush=True)
 
