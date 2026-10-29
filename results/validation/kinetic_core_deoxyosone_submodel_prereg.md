@@ -64,6 +64,16 @@ source: Zhang 2025 Tables 1-3 / S2-S4 (di-xylulosyl-lysine ARP 20 mM +- xylose 2
 authentic standard, ug/L +- SD), a lysine system; the engine has no 2,3-pentanedione species. Desclaux 2006 names
 pentanedione among its measured dicarbonyls but does not show it. 3-DX / 1-DX absolute levels rest on an assumed
 internal-standard response in every Jiangnan paper.
+## Targets from the conflict analyses (2026-10-29, docs/reference/conflict_analyses/)
+
+- **Norfuraneol at low pH (CF-012):** the shipped engine's norfuraneol at pH 3 is 55x below its pH 5 value, while
+  three buffered laboratories see MFT (made from norfuraneol) fall only gently with pH. A no-refit probe must check
+  norfuraneol's pH dependence first; the measurement that settles it is a norfuraneol pH series at 140 C (the designed
+  protocol's pH 4 cell).
+- **Furfural (CF-016):** Hofmann 1998's furfural (internal standard) is 13x Schieberle 1998's for the same run;
+  Meynier's and Cerny's furfural / MFT ratios side with Schieberle. Until settled, Hofmann's furfural row enters with
+  the conflict's width, not its printed 10 %.
+
 ## 3. Cheap probe (step 3) -- TO DO
 ## 4. Design (step 4) -- TO DO
 ## 5. Design review (step 5) -- TO DO

@@ -430,6 +430,7 @@ entries:
       - "Concentration (0.4 M vs 0.08 M) and laboratory (method, calibration)."
       - "The Zhai 2021 rows run at the wrong pH (CF-010) bias k_ttca_deg and the ring opening that both arms share."
     tests:
+      - "root-cause analysis 2026-10-29 (docs/reference/conflict_analyses/CF-011.md): most likely dihydrogen-phosphate catalysis of the Amadori step, Zhai's water ladder holding the formation barrier near its floor (0.45); the register's 'Zhai 2019 pH 7.4 -> 4.9' is Zhai 2023 Food Chem's, and '3.8 at 130 C' has no source on disk. Settled by the designed protocol's buffer arm C."
       - "results/validation/kinetic_core_cysteine_route_calibration_prereg.md: leave-one-source-out refits, review items 4, 5, 8 and sec. 6 verdict (constants not forwarded; stage 1b to include pH laws and phosphate catalysis)."
       - "docs/guides/LITERATURE_SEARCH_2026-10-29_phosphate_thiazolidine.md: no direct measurement of phosphate catalysis of TTCA -> Cys-Amadori, nor K(pH) for a cysteine-sugar thiazolidine at 60-140 C; nearest anchors Davidek 2002 (x1.3-3.5, degradation, 90 C), Munanairi 2007 (~10-12x per equivalent, 37 C, A280), Kim 1986 (thiazolidine k1 ~10x per pH unit 5.5-8, 25 C)."
     status: open
@@ -462,8 +463,9 @@ entries:
       - "A temperature-dependent pH law (low-pH optimum at 140-145 C, near-neutral at 90-120 C)."
       - "Feed: free sugar (Hofmann, Meynier) vs Amadori compound (Zhou) - different rate-limiting steps with opposite pH dependence."
       - "Buffer: buffered (Hofmann, Meynier) vs unbuffered pots whose pH collapses during heating (Zhou's pH 8 pot ends at 5.07)."
-    tests: []
-    status: open
+    tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-012.md): a source conflict, not chemistry: Zhou's pots start unbuffered at pH 6-8, fall to 3.2-5.1 and are fed the Amadori compound (0.70); three buffered laboratories agree MFT falls with pH, and the engine reproduces Zhou's pattern with no temperature term. The real misfit is the model's norfuraneol at pH 3, 55x below pH 5 (sub-model 3)."
+    status: explained
     remedy: >-
       Pending. B59b's pre-registration must state which explanation it tests (plan, 'Open question for B59b'); Zhai
       2021 Fig. 4b / 5 and Kang S5 (CF-002, temperature unresolved) are the in-corpus pH series on purified TTCA.
@@ -492,8 +494,9 @@ entries:
       - "Temperature: below ~110 C formation outlasts the sink for hours; at 120-140 C the precursors are exhausted within the window and the sink wins."
       - "Precursor supply: fed TTCA / ARP pots (Zhai, Zhou) run out; free-sugar pots at high loading (Schieberle, Nestle) do not."
       - "Wang 2022's lipid co-substrate as an extra thiol sink."
-    tests: []
-    status: open
+    tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-013.md): temperature plus precursor supply (0.75): within both 'falling' laboratories the lower temperatures rise. US 10,076,126's labelled standards, added before heating, survived it: the engine's MFT sink is at least 5x too fast (sub-model 4, k_mft_decay)."
+    status: explained
     remedy: >-
       Pending: the B59b hold-outs declared in the plan (US 10,076,126 shape, Schieberle 2000 100 C) test the first two
       explanations; enter Wang 2022 only with its lipid charge.
@@ -518,7 +521,8 @@ entries:
     explanations:
       - "An unstated pot variable (fill volume / headspace, ARP purity, final pH)."
       - "A changed HS-SPME calibration (Table S1 of both papers; not on disk)."
-    tests: []
+    tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-014.md): Zhou 2022 is the outlier, a thiol-specific measurement or handling loss (0.65); Zhou 2023c (MFT 1150 ug/L) agrees with Zhou 2023. Test: both papers' Table S1 calibrations."
     status: open
     remedy: >-
       Pending: in M6, treat the two Zhou tables as one laboratory with a between-paper scale term, or widen zhou_pH7_MFT
@@ -543,7 +547,8 @@ entries:
     explanations:
       - "Different temperature, xylose:cysteine ratio and concentration between the two patents."
       - "Patent analytics (single runs, not peer reviewed)."
-    tests: []
+    tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-015.md): two opposite displacements: US 8,920,862's concentrated 3:1 xylose recipe favours FFT (0.40); US 10,076,126's standards went through the heating (0.25). MFT agrees across sources; FFT differs."
     status: open
     remedy: >-
       Pending: report the patents' MFT/FFT, do not fit it (us10076126 / us8920862 dossiers); the US 10,076,126 shape and
@@ -569,6 +574,7 @@ entries:
       - "A typo or unit slip in one print (67.5 vs 6.75 would leave a 1.3x residual)."
       - "Different workups: SIDA for furfural in Hofmann 1998 vs a purge-and-trap / AEDA quantification in the 1998 chapter."
     tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-016.md): unresolved: Schieberle under-recovered 0.35, a 10x slip 0.25, Hofmann high 0.25; Hofmann's furfural is internal-standard (5-methylfurfural), not SIDA; Meynier's and Cerny's furfural / MFT ratios side with Schieberle. Test: three vials of Hofmann's exact pot."
       - "hofmann1998.pdf Table 5 and schieberle1998.pdf Table IV read 2026-10-29 (both quoted above); schieberle1998 ledger note already flags the 13-fold gap."
     status: open
     remedy: >-
@@ -596,8 +602,9 @@ entries:
     explanations:
       - "Hold-time artefact: the 140 C curve passes its maximum inside the window (dossier sec. 8.3)."
     tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-017.md): holds, corrected: the flat low leg is the 100 C curve plateauing; the JAFC grid at 100 C 40/80/120 min reprints Food Chem Fig. 1a. Slice-free test: measured thiols order 100 < 120 < 140 C in 16 / 16 comparisons; the engine gets 140 >= 120 C in 1 / 8 (a structural misfit for sub-model 4)."
       - "zhai2023jafc dossier sec. 8.2 tables (digitised from the numeric heat map); 120-min column identical to Kang S4."
-    status: open
+    status: error_confirmed
     remedy: >-
       Pending (proposed): retire kang_switch_on_* as scored rows and B10's T4 as a gate; replace the single-slice folds
       by the four-time grid of Zhai 2023 JAFC Fig. 3 (columns A / C / E / G, semi-quantitative, one series per compound,

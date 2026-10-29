@@ -77,6 +77,17 @@ the H2S arm rests on Zheng & Ho's constants and Hofmann's fed-H2S pots.
 - Feng 2022's RG-ARP carries sulfur, the engine's ARP does not (CF-058): map it before its rows enter.
 - Schieberle 2000's "factor of 13" is likely a column slip for 7.9 (CF-055), which the B16 row used.
 
+## Targets from the conflict analyses (2026-10-29, docs/reference/conflict_analyses/)
+
+- **Temperature ordering (CF-017):** measured thiols order 100 < 120 < 140 C in 16 of 16 comparisons; the shipped
+  engine gets 140 >= 120 C in only 1 of 8. A structural misfit (loss outrunning formation at high temperature): the
+  first thing the no-refit probe reports, and a done-test item.
+- **The MFT sink (CF-013):** US 10,076,126 added its labelled standards before heating and they survived, which
+  bounds the real MFT loss: the engine's sink (k_mft_decay, unpinned since B2.3) is at least 5x too fast. A rival arm
+  with the sink capped by that bound.
+- **FFT across sources (CF-015):** MFT agrees across sources, FFT does not (the 3:1 xylose recipe favours FFT; one
+  patent's standards were heated). FFT rows from the two patents enter with that width.
+
 ## 3. Cheap probe (step 3) -- TO DO
 ## 4. Design (step 4) -- TO DO
 ## 5. Design review (step 5) -- TO DO

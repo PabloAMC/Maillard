@@ -64,6 +64,16 @@ its own reactivity checked in a sugar-free blank). Analytes as the core, TTCA an
 pH × 7 times × 2 ≈ 110 vials; if the budget is tight, pH 6 only (~55 vials). It also gives the pH trajectory of an
 unbuffered pot, which no paper on disk reports.
 
+**Cells added by the conflict analyses (2026-10-29, `docs/reference/conflict_analyses/`):** each settles a recorded
+conflict the literature cannot.
+- **pH 4 cell** at 140 C in the core (norfuraneol and MFT vs pH; CF-012: the model's norfuraneol at pH 3 is 55x below
+  pH 5).
+- **Standards before vs after heating**, in sister vials at the centre point: labelled MFT / FFT added before heating
+  in one vial, after it in the other (CF-013, CF-015: the thiols' loss during heating, which bounds the sink).
+- **A 3:1 xylose : cysteine cell** at the centre point (CF-015: the recipe that favours FFT).
+- **Hofmann's exact pot in triplicate** (ribose 100 / cysteine 33 mmol/L, 0.5 M phosphate pH 5, 145 C ramp; CF-016:
+  furfural 13x apart between two papers on the same run).
+
 ## What we would do with it
 
 The core's time courses become FIT rows for the trunk (B59b): the first rows in the corpus that constrain
