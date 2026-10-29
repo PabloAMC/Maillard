@@ -333,6 +333,15 @@ class MeasurementModel:
     sigma_of: Callable[[Any], float]
     method_of: Callable[[Any], str]
     scale_tau: Mapping[str, float] = field(default_factory=lambda: dict(SCALE_TAU))
+    #: extra noise per series (same units as sigma), added in quadrature to each row's own error; estimated from the
+    #: data by ``estimate_series_noise`` (2026-10-29: rows with no printed error, or a vector-read error far below the
+    #: series' real scatter, must not be given an invented floor)
+    extra_noise: Mapping[str, float] = field(default_factory=dict)
+
+    def sigma(self, row: Any) -> float:
+        """The row's error with its series' extra noise added in quadrature."""
+        s, e = float(self.sigma_of(row)), float(self.extra_noise.get(self.series_of(row), 0.0))
+        return math.sqrt(s * s + e * e)
 
     def _series(self, rows: Sequence[Any]) -> Dict[str, List[int]]:
         out: Dict[str, List[int]] = {}
@@ -350,7 +359,7 @@ class MeasurementModel:
     def whiten(self, log_residuals: np.ndarray, rows: Sequence[Any]) -> np.ndarray:
         """Residuals in dex -> whitened residuals, each series' calibration offset integrated out."""
         r = np.asarray(log_residuals, dtype=float)
-        sigma = np.array([float(self.sigma_of(row)) for row in rows])
+        sigma = np.array([self.sigma(row) for row in rows])
         z = r / sigma
         for idx in self._series(rows).values():
             tau = float(self.scale_tau[self.method_of(rows[idx[0]])])
@@ -367,6 +376,58 @@ class MeasurementModel:
         """One degree of freedom per scale-free series present in ``rows``."""
         return sum(1 for idx in self._series(rows).values()
                    if math.isinf(float(self.scale_tau[self.method_of(rows[idx[0]])])))
+
+
+def estimate_series_noise(model: "MeasurementModel", raw_residuals: np.ndarray, rows: Sequence[Any],
+                          n_constants: int = 0) -> Dict[str, float]:
+    """Each series' extra noise from its own scatter around the current fit, by moments:
+        s_k^2 = max(0, sum_i (r_i - m_k)^2 * n/(n - 1 - p_k) / n  -  mean_i sigma_i^2)
+    where r are the raw residuals (dex or pH), m_k the series' mean residual if its calibration is free (tau > 0; the
+    shape is all that is fitted) and 0 otherwise, and p_k the constants charged to the series (``n_constants`` spread
+    over all rows). A series of one or two rows gets none (its scatter cannot be read). Iterate with the fit
+    (``fit_with_series_noise``): the residuals move as the weights change."""
+    r = np.asarray(raw_residuals, dtype=float)
+    out: Dict[str, float] = {}
+    n_total = max(len(rows), 1)
+    for name, idx in model._series(rows).items():
+        n = len(idx)
+        tau = float(model.scale_tau[model.method_of(rows[idx[0]])])
+        if n < 3:
+            continue
+        ri = r[idx]
+        centred = ri - (float(np.mean(ri)) if tau > 0 else 0.0)
+        lost = (1 if tau > 0 else 0) + n_constants * n / n_total
+        dof = max(n - lost, 1.0)
+        s2 = float(np.sum(centred ** 2)) / dof - float(np.mean([float(model.sigma_of(rows[i])) ** 2 for i in idx]))
+        if s2 > 0:
+            out[name] = math.sqrt(s2)
+    return out
+
+
+def fit_with_series_noise(make_problem: Callable[["MeasurementModel"], "Problem"], model: "MeasurementModel",
+                          raw_residuals: Callable[[np.ndarray, Tuple[Any, ...]], np.ndarray], start: np.ndarray,
+                          budget: int = 1200, rounds: int = 4, tol: float = 0.05) -> Tuple["Fit", "MeasurementModel"]:
+    """Fit, estimate each series' extra noise from the residuals, refit with it, until the noise estimates move by
+    less than ``tol`` (relative) or ``rounds`` is reached. ``make_problem(model)`` builds the Problem whose residuals
+    are ``model.whiten(raw_residuals(theta, rows), rows)``. Returns the last fit and the model carrying its noise."""
+    theta = np.asarray(start, dtype=float)
+    noise: Dict[str, float] = dict(model.extra_noise)
+    f_ = None
+    for _ in range(max(1, rounds)):
+        current = MeasurementModel(series_of=model.series_of, sigma_of=model.sigma_of, method_of=model.method_of,
+                                   scale_tau=model.scale_tau, extra_noise=noise)
+        problem = make_problem(current)
+        f_ = fit(problem, theta, budget=budget)
+        theta = f_.theta
+        new = estimate_series_noise(current, raw_residuals(theta, problem.rows), problem.rows, len(problem.keys))
+        moved = max((abs(new.get(k, 0.0) - noise.get(k, 0.0)) / max(new.get(k, 0.0), noise.get(k, 0.0), 1e-12)
+                     for k in set(new) | set(noise)), default=0.0)
+        noise = new
+        if moved < tol:
+            break
+    final = MeasurementModel(series_of=model.series_of, sigma_of=model.sigma_of, method_of=model.method_of,
+                             scale_tau=model.scale_tau, extra_noise=noise)
+    return f_, final
 
 
 def count_once(rows: Sequence[Any], dataset_of: Callable[[Any], str], copy_of: Mapping[str, str]

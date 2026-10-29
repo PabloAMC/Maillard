@@ -260,3 +260,57 @@ def test_diagnostics_flag_a_biased_laboratory_and_a_trend():
     assert not any(f.startswith("lab=A") for f in report["flags"])
     assert report["trends"]["T"]["rho"] > 0
     assert "| B | 6 |" in fitting.diagnostics_markdown(report)
+
+
+def test_series_noise_is_estimated_where_the_stated_error_is_too_small():
+    """A series whose stated error (0.001 dex, a vector read) is far below its real scatter (0.1 dex) gets an extra
+    noise near 0.1; a series whose stated error is honest gets none or little; a two-point series gets none."""
+    rng = np.random.default_rng(5)
+    rows = ([{"series": "tiny", "sigma": 0.001, "method": "calibrated"} for _ in range(40)]
+            + [{"series": "honest", "sigma": 0.1, "method": "calibrated"} for _ in range(40)]
+            + [{"series": "pair", "sigma": 0.001, "method": "calibrated"} for _ in range(2)])
+    r = np.concatenate([rng.normal(0, 0.1, 40), rng.normal(0, 0.1, 40), rng.normal(0, 0.1, 2)])
+    mm = _mm()
+    noise = fitting.estimate_series_noise(mm, r, rows)
+    assert noise["tiny"] == pytest.approx(0.1, rel=0.25)
+    assert noise.get("honest", 0.0) < 0.05
+    assert "pair" not in noise
+    with_noise = fitting.MeasurementModel(series_of=mm.series_of, sigma_of=mm.sigma_of, method_of=mm.method_of,
+                                          extra_noise=noise)
+    z = with_noise.whiten(r, rows)
+    assert float(np.mean(z[:40] ** 2)) == pytest.approx(1.0, rel=0.35)   # the tiny series is no longer 10^4 x over-weighted
+
+
+def test_a_scale_free_series_noise_ignores_its_offset():
+    rows = [{"series": "semi", "sigma": 0.01, "method": "semi_quantitative"} for _ in range(30)]
+    r = 0.7 + np.random.default_rng(6).normal(0, 0.05, 30)   # a response factor of 10^0.7 plus 0.05 dex of scatter
+    noise = fitting.estimate_series_noise(_mm(), r, rows)
+    assert noise["semi"] == pytest.approx(0.05, rel=0.3)
+
+
+def test_fit_with_series_noise_recovers_the_rate_when_one_series_states_a_tiny_error():
+    """Two series of one decay, both with 0.05 dex real scatter; one states 0.0005 dex (a vector read). Without the
+    noise term that series dominates; with it the rate is recovered and both series carry their real scatter."""
+    rng = np.random.default_rng(9)
+    times = np.linspace(10.0, 200.0, 12)
+    rows = []
+    for name, stated in (("vector", 0.0005), ("table", 0.05)):
+        for t in times:
+            y = 10.0 * math.exp(-0.01 * t) * 10.0 ** rng.normal(0, 0.05)
+            rows.append({"series": name, "sigma": stated, "method": "calibrated", "t": float(t), "y": y})
+    rows = tuple(rows)
+
+    def raw(theta, rows_):
+        a, lk = theta
+        return np.array([a - (10.0 ** lk) * r["t"] / math.log(10.0) - math.log10(r["y"]) for r in rows_])
+
+    def make(mm):
+        return fitting.Problem(keys=("log10_A", "log10_k"), kinds=("log10k", "log10k"), lower=np.array([-2.0, -5.0]),
+                               upper=np.array([3.0, 0.0]), rows=rows,
+                               residuals=lambda th, rr: mm.whiten(raw(th, rr), rr), nuisance_dof=mm.nuisance_dof)
+
+    f_, mm = fitting.fit_with_series_noise(make, _mm(), raw, np.array([0.5, -2.5]), budget=600)
+    assert f_.theta[1] == pytest.approx(-2.0, abs=0.05)
+    assert mm.extra_noise["vector"] == pytest.approx(0.05, rel=0.5)
+    # the honest series' TOTAL error stays near its true 0.05 (12 points: the moment estimate fluctuates ~40 %)
+    assert math.sqrt(0.05 ** 2 + mm.extra_noise.get("table", 0.0) ** 2) < 0.08
