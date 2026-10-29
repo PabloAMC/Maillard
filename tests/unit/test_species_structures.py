@@ -91,11 +91,11 @@ def test_molecule_atom_counts_match_the_engine(table, registry):
 #: not silently corrected here, since the engine converts mmol/L to ug/L with these numbers):
 #:   SBA        Asn + Glc - 2 H2O in the engine; the Schiff base is Asn + Glc - H2O (294.26)
 #:   THI        the engine reports thiamine as its hydrochloride (337.27); the cation is 265.36
-#:   DPO, TDP   130.10 in the engine; C5H8O4 is 132.11
 #:   LOOH_*     310.47 (the hydroxide, C19H34O3); the hydroperoxide C19H34O4 is 326.48
 #: Recorded in the backlog (tasks/data_restructure_plan.md section 7); each correction moves a reported
 #: concentration, so it is a change of its own with the guards re-pinned.
-KNOWN_MASS_DISAGREEMENTS = {"SBA", "THI", "DPO", "TDP", "LOOH_13_ct", "LOOH_13_tt", "LOOH_9_ct", "LOOH_9_tt"}
+#: (DPO and TDP, 130.10 in the engine against C5H8O4's 132.11, were corrected 2026-10-29: CF-059.)
+KNOWN_MASS_DISAGREEMENTS = {"SBA", "THI", "LOOH_13_ct", "LOOH_13_tt", "LOOH_9_ct", "LOOH_9_tt"}
 
 
 def test_molecule_masses_match_the_engine_where_declared(table, registry):

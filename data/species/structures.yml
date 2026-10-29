@@ -66,7 +66,7 @@ species:
   ARP:   {kind: molecule, smiles: "OCC(O)C(O)C(=O)CNC(C)C(=O)O", note: "N-(1-deoxy-D-xylulos-1-yl)-alanine, open chain"}
   DPO:   {kind: molecule, smiles: "CC(=O)C(=O)C(O)CO", note: "1-deoxypentosone"}
   TDP:   {kind: molecule, smiles: "OCC(O)CC(=O)C=O", note: "3-deoxypentosone"}
-  DDP:   {kind: molecule, smiles: "CC(=O)C(=O)CC=O", note: "1,4-dideoxypentosone (1,4-dideoxy-2,3-pentodiulose)"}
+  DDP:   {kind: molecule, smiles: "CC(=O)C(=O)CCO", note: "1,4-dideoxypentosone (1,4-dideoxy-2,3-pentodiulose, C5H8O3: C5 stays CH2OH; + H2S - 2 H2O = MFT; CF-059)"}
   NF:    {kind: molecule, registry_id: norfuraneol}
   PTR:   {kind: molecule, smiles: "CC(=O)C(=O)C(C)=O", note: "2,3,4-pentanetrione"}
   FUR:   {kind: molecule, registry_id: furfural}
