@@ -34,3 +34,27 @@ and hydroxyacetaldehyde and (2) the hexose + cysteine route, probed against the 
 hexose pots before any thiol-constant fit. Sub-model 2's fit is deprioritised: with the pre-registered switches on it
 is already within ~x3 on most rows; its open items are TTCA at 120-140 C pH 5.5 (-1.1 dex) and cysteine loss in
 Zhai 2021 Fig. 6 (+1.1 dex).
+
+## Checkpoint 2 -- 00:05
+
+**Done.** The design review of sub-model 1 found seven blocking flaws (double-counted priors and drift, glycine
+missing from the charge balance, noise that hid misfit, a pH-stat on the wrong pH scale ...); all fixed and the
+fixes, tolerances and hold-outs pre-registered (prereg sec. 5) before the fit started at 23:33 (arm B running, 28
+min in; arm A after; ~1.5 h each). Hold-out for sub-model 1 (Martins 2005b pH-stat and drift acids) read by two
+readers and verified; the frozen-prediction script is ready. Hofmann 1998 Table 9 (mercaptopropanone from glucose +
+cysteine) read by two readers into the thiol table. Literature agent: the pentose C2 + C3 step EXISTS (branching
+constant never fitted to MGO); hexose MFT keeps an intact C5 (labelling); ranked download list for the morning.
+The sub-model 3 design review overturned my "DPO -> acid" joint hypothesis (the acid yield is 7.5e-5; the acid in
+pentose pots is cysteine's carboxyl carried out by the Strecker step r_dpo_ddp) and found that per-pot scales hid a
+3-4 decade, pH-dependent 1-deoxypentosone level misfit; revised design recorded (prereg sec. 5).
+
+**Does it serve the goal?** Yes, and the review changed what "next" means. The constant that couples sub-models 2-4
+is `k_dpo_ddp` (cysteine Strecker by 1-deoxypentosone): it sets cysteine loss (route), the 1-DX level and MGO
+(deoxyosones), the intact-C5 MFT route (thiols), and the pentose pots' acidity (sub-model 1's pentose block, which
+its own parameters cannot fix). That is the single highest-leverage constant for MFT, the purpose's lead odorant.
+Sub-model 3's step 0 (shared per-figure scales; an HA sink; Mikami's NF -> MGO share; the engine state named) comes
+next, then its arms with `k_dpo_ddp` free -- after sub-model 1 has fixed the pH machinery they run under.
+
+**Lesson recorded for myself:** two of tonight's design drafts (sub-model 1's fit, sub-model 3's hypothesis) were
+wrong in ways an independent reviewer found in ~15 minutes each; the review step paid for itself both times. Keep it
+before every fit.

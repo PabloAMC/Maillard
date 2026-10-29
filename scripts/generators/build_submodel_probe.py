@@ -205,6 +205,8 @@ def main(argv=None) -> int:
                         help="glycine, the Amadori compound and the Schiff base in the charge balance (design review B4)")
     parser.add_argument("--without", action="append", default=[])
     parser.add_argument("--switch-on", action="append", default=[], choices=SWITCHES)
+    parser.add_argument("--scale-group", choices=("series", "figure"), default="series")
+    parser.add_argument("--scale-tau", type=float, default=float("inf"))
     parser.add_argument("--ph-coupling", choices=("fixed_point_nodes", "inline"), default=sulfur.PH_COUPLING,
                         help="the shipped coupling by default; 'inline' to check it against the shipped one on this table")
     args = parser.parse_args(argv)
@@ -214,6 +216,7 @@ def main(argv=None) -> int:
         setattr(parameters_sulfur, name, dataclasses.replace(getattr(parameters_sulfur, name), enabled=True))
     sulfur.TRUNK_PH_TERMS = bool(args.trunk_ph_dynamic)   # set here, never at import; the workers fork after it
     arm = "_".join(["trunk_ph_dynamic"] * args.trunk_ph_dynamic + ["trunk_solutes"] * args.trunk_solutes_in_balance
+                   + ([f"figure_scale_tau{args.scale_tau:g}"] if args.scale_group == "figure" else [])
                    + [f"with_{SWITCHES[n]}" for n in args.switch_on]
                    + [f"without_{k}" for k in args.without] + (["inline"] if args.ph_coupling == "inline" else [])) or None
     out_json = data_paths.VALIDATION_DIR / f"kinetic_core_{args.table}_probe{'_' + arm if arm else ''}.json"
@@ -248,19 +251,30 @@ def main(argv=None) -> int:
         records.append(record)
         if not record["input_row"]:
             scored.append((row, record))
-    # semi-quantitative series: their unknown scale integrated out, i.e. the series' mean log residual removed; a
-    # one-row series then carries no information and leaves the summaries
+    # semi-quantitative series: their unknown scale estimated and removed. Per series (ledger|pot|species, tau = inf)
+    # by default: the series' mean log residual. With --scale-group figure, one scale per (ledger id, species) across
+    # the figure's pots -- keeping the cross-pot contrasts (pH, temperature, +/- cysteine) -- shrunk toward 0 by a
+    # prior of width --scale-tau dex: the posterior mean of the offset, tau^2 S / (1 + tau^2 W), S = sum r / s^2,
+    # W = sum 1 / s^2 (sub-model 3 design review, B2).
+    def group_of(row):
+        return row.series if args.scale_group == "series" else f"{row.ledger_id}|{row.species}"
+
     by_series: Dict[str, list] = {}
     for row, record in scored:
         if row.method in SHAPE_ONLY:
-            by_series.setdefault(row.series, []).append(record)
+            by_series.setdefault(group_of(row), []).append(record)
     for series in by_series.values():
-        offset = float(np.mean([r["residual"] for r in series]))
+        if math.isinf(args.scale_tau):
+            offset = float(np.mean([r["residual"] for r in series]))
+        else:
+            w = np.array([1.0 / r["sigma"] ** 2 for r in series])
+            ssum = float(np.sum(w * np.array([r["residual"] for r in series])))
+            offset = args.scale_tau ** 2 * ssum / (1.0 + args.scale_tau ** 2 * float(np.sum(w)))
         for r in series:
             r["scale_offset_dex"] = round(offset, 4)
             r["residual"] = round(r["residual"] - offset, 4)
             r["z"] = round(r["residual"] / r["sigma"], 3)
-    scored = [(row, rec) for row, rec in scored if not (row.method in SHAPE_ONLY and len(by_series[row.series]) < 2)]
+    scored = [(row, rec) for row, rec in scored if not (row.method in SHAPE_ONLY and len(by_series[group_of(row)]) < 2)]
     attributes = {"laboratory": lambda r: r.laboratory, "data_set": lambda r: by_pot[r.pot]["ledger_id"],
                   "observable": lambda r: r.species, "temperature_C": lambda r: by_pot[r.pot]["t_c"],
                   "label_pH": lambda r: by_pot[r.pot]["label_ph"], "time_min": lambda r: r.t_min}
@@ -299,10 +313,11 @@ def markdown(report: Dict[str, Any]) -> str:
     arm = "the shipped engine" if report["arm"] == "shipped" else "the shipped engine with " + " and ".join(
         "the trunk's measured pH terms applied at the lane's computed pH" if part == "trunk_ph_dynamic"
         else "glycine, the Amadori compound and the Schiff base in the charge balance" if part == "trunk_solutes"
+        else f"semi-quantitative scales shared per figure (tau {part.split('tau')[1]} dex)" if part.startswith("figure_scale")
         else "the inline pH coupling" if part == "inline"
         else f"{part[5:].upper()} switched on" if part.startswith("with_")
         else f"`{part[8:]}` switched off"
-        for part in re.findall(r"trunk_ph_dynamic|trunk_solutes|inline|with_b[0-9]+[a-z]?|without_k_[a-z_]+?(?=_without_|_inline|$)", report["arm"]))
+        for part in re.findall(r"trunk_ph_dynamic|trunk_solutes|figure_scale_tau[0-9.inf]+|inline|with_b[0-9]+[a-z]?|without_k_[a-z_]+?(?=_without_|_inline|$)", report["arm"]))
     lines = [f"# No-refit probe of `{report['table']}`: {arm} against its verified rows", "",
              f"*Generated by `scripts/generators/build_submodel_probe.py --table {report['table']}`. Shipped constants, "
              f"pH coupling `{report.get('ph_coupling', 'fixed_point_nodes')}`, "

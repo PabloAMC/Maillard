@@ -117,7 +117,7 @@ furfural 21, norfuraneol 7. Decisions that change the fit:
    10.1007/s002170050468) would pin it.
 3. Glyoxal (44 rows) is not an engine species; furfural from the xylose-alanine ARP at 120 C is ~8x low (Zhou
    2025b, calibrated); norfuraneol (Hofmann, Mikami, Desclaux) is within 0.02-0.12 with B61 on.
-## 4. Design (step 4) -- drafted 2026-10-30, before any fit; design review owed
+## 4. Design (step 4) -- first draft 2026-10-30, SUPERSEDED by sec. 5 (kept as written)
 
 **The joint hypothesis (lead, checkpoint 2).** 1-deoxypentosone (DPO) leaves the lane mainly by
 `r_osone_decay_dpo` (DPO -> the lumped acid pool `ACID` + C4) and only ~3e-4 by `r_dpo_c2c3` (-> MGO + HA). Two
@@ -142,5 +142,65 @@ gets a per-paper scale on the Zhou calibrated rows. Glyoxal is not an engine spe
 **Expected result (written now):** (a') beats (a) and lifts the pentose pH by >= 0.3 units (P = 0.45); (b) is
 needed for the xylose-alone and the pH-8 pots (P = 0.35); no single arm brings every MGO data set within x3
 (P = 0.6).
-## 5. Design review (step 5) -- TO DO
+## 5. Design review (step 5) -- done 2026-10-30, before any fit; the design above is superseded
+
+An independent reviewer (read-only; two small diagnostics at the shipped B60 constants with B58 / B59a / B59b / B61
+on) found the drafted design unworkable. Recorded as found, then the revised design.
+
+**BLOCKING**
+1. **The joint "DPO -> acid" hypothesis is false in the shipped engine.** The lumped acid pool enters the balance at
+   the yield 7.5e-5 per sink event; in Cao's pot it adds ~1e-4 mM of acid, while the carried carboxyls (CBX) hold
+   ~70 mM. `k_osone_decay` = 0 leaves Cao's 5 h pH at 3.96; `k_dpo_c2c3` x 1000 moves it +0.01. DPO leaves mainly by
+   the cysteine Strecker step `r_dpo_ddp` (11.4 L/mmol/min x [Cys] x a base factor at 100 C, pH 7), not by the acid
+   sink (4.7e-4 /min) -- the draft's premise was wrong. The coupling that EXISTS is `r_dpo_ddp`: it destroys
+   cysteine's amine and carries its carboxyl into CBX; switched off, Cao's 5 h pH goes 3.96 -> 4.20 (data 4.15). This
+   is also why sub-model 1's acid yield cannot close the pentose over-acidification (its fit's pentose block is
+   expected to fail for a reason outside its parameters).
+2. **Per-pot scales hid the largest misfit.** Shape-only per series (ledger|pot|species) gave every pot its own
+   scale and discarded all cross-pot contrasts. The hidden 1-DX offsets on Zhai 2021's ladder run -0.5 dex (pH 5.5)
+   to -4.0 dex (pH 8): no response factor moves 3.5 decades with pH; the model's 1-DX collapses at high pH. With
+   `k_dpo_ddp` x 1e-3, 1-DX at pH 7 / 8 goes -3.4 / -4.2 -> -0.8 / -1.4 dex and MGO -4.9 / -5.8 -> -2.7 / -3.1:
+   about half the MGO gap is a PARENT deficit, not a branch. Probe finding 1 above ("shapes are right") holds only
+   within each pot.
+3. **The textbook MGO route is missing from the rivals:** 3-deoxypentosone's C3-C4 retro-aldol (MGO + glycolaldehyde,
+   base-catalysed; the hexose analogue `r_tdg_mgo` is in the engine). DPO -> MGO + HA has no documented direct
+   mechanism (reviewer ~70 %); the note citing Hofmann T10 for it cites the downstream recombination, not the split.
+4. **Glycolaldehyde has no sink but MFT formation.** Raising C3 + C2 flux 10^2-10^4 would over-produce fragment-route
+   MFT or force B2.3's `k_ha_mp_mft` / `k_mgo_mp` down: an HA sink with a declared band (Hofmann 1999 would pin it)
+   is needed, or MFT stays out of the arm comparison.
+5. **Cerny 2003 is a declared hold-out** (FIT_HOLDOUT_DECLARATION.md) with no rows here: Cerny 2004's in-situ
+   branching (declared FIT) is the constraint; Cerny 2003 is scored once, after freezing.
+
+**SHOULD-FIX (adopted):** production, not sinks, is short (~10^4; `r_mgo_mel`, B1-fitted, dominates the sink and
+agrees with the decline phases; its band is propagated); the pH-tracking constraint written as a statistic (predicted
+d log MGO / dpH at 120 min vs measured 0.13 / 0.16 dex per pH unit); the ladder numbers in sec. 3 to be recomputed
+from the table; furfural added as a falsifier; leave-one-laboratory-out CANNOT be run for MGO (132 / 135 rows
+Jiangnan) -- declared not run, leave-one-paper-out instead, and a search for a second laboratory's pentose MGO time
+course; CF-060: each Zhou paper's MGO its own scale, Zhai absolute, plus a sensitivity with Zhai free; possible OPD
+derivatisation artefact (4-12 h at room temperature with mM ARP present) to check against any unheated control;
+the engine state named and frozen (route switches, sub-model 1's switches) and the winner re-scored in the other;
+SDs of 1-3 % get the per-data-set noise; information counted by pots (~30), not rows.
+
+**Revised design (supersedes sec. 4):**
+- Step 0 (before any fit): scales shared per (ledger id, species) across a figure's pots with a finite tau of 0.3
+  dex for the semi-quantitative quinoxalines (choices register: tau 0.15 / 0.3 / inf); an HA sink with a declared
+  band; Mikami's measured NF -> MGO share (>= 0.6 mol %) inside B61's decay in every arm; the engine state named;
+  then re-probe.
+- Arms: A0 null; A1 `k_dpo_c2c3` alone (expected to fail or to starve NF and DDP); A2 `k_dpo_ddp` + `k_dpo_c2c3`
+  (the parent arm; cross-check, unfitted, that Cao / Zhao's pH rises >= 0.2 at 5 h); A3 3-DX -> MGO + HA (rate, Ea,
+  hydroxide factor); A4 PENT / ARP / CAMA -> MGO + HA, base-catalysed, with an amine-free twin.
+- Each scored on: the MGO data sets; the 1-DX / 3-DX contrasts across pots; the pH-slope statistic; the +/- Cys and
+  +/- Ala ratios; furfural; the norfuraneol rows; every re-scored B60 fit row and hold-out (the constants they move
+  were frozen there).
+- Done-test tolerances (declared now): Zhai MGO absolute |mean| <= 0.3 dex and RMS <= 0.4 per data set with no
+  one-sign flag in any pH or temperature bin; Zhou MGO in shape RMS <= 0.3; 1-DX / 3-DX per figure RMS <= 0.35;
+  pH slope within +/- 0.1 dex per pH unit; +/- Cys ratio within x2; B60 fit rows no more than 10 % worse (whitened
+  RMS); Cerny 2003 fragment-route share <= 7 % (scored once); constants off their bounds with profile intervals
+  under 1 dex. Hold-outs: Zhai 2023 JAFC's 140 C pots and the Zhou 2023 2-acetylthiazole pair.
+- Expected (revised): an arm with parent freedom (A2 or A3) beats A1 (P = 0.75); the `k_dpo_ddp` arm lifts Cao by
+  >= 0.2 pH (P = 0.6); some arm brings every Zhai MGO set within x3 (P = 0.4).
+
+**Cross-sub-model consequence.** `k_dpo_ddp` sits on the intact-C5 MFT route (DDP) and on cysteine's loss: lowering
+it moves sub-model 2 (cysteine) and sub-model 4 (MFT) too. Sub-models 2-4 are coupled through this one constant;
+it is fitted here, and the route and thiol tables are re-scored with it before either is fitted.
 ## Amendments

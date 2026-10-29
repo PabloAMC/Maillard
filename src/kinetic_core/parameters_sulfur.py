@@ -453,6 +453,11 @@ class NfHydroxideDecay:
     ea_kj_mol: float = 103.7
     source: str = ("Mikami, Nakamura, Yamada & Murata 2017, Food Sci. Technol. Res. 23:283 (10.3136/fstr.23.283), "
                    "Fig. 6B: norfuraneol 1.7-1.8 mM alone, 0.2 M phosphate pH 8.0, 100 C, k = 0.032 1/min")
+    #: Sub-model 3 (2026-10-30; design review): the share of this decay that gives methylglyoxal (r_nf_decay_oh_mgo).
+    #: Mikami Fig. 6B prints MGO-quinoxaline peaking at 0.6 mol % of the norfuraneol at 0.5 h -- a transient, so a
+    #: LOWER bound on the formation share (MGO is itself consumed); the share is fitted on Mikami's own MGO rows.
+    #: 0 = exactly B61 as shipped.
+    mgo_share: float = 0.0
 
     @property
     def log10_k_anchor_ph5(self) -> float:
@@ -467,6 +472,30 @@ class NfHydroxideDecay:
 
 
 NF_HYDROXIDE_DECAY = NfHydroxideDecay()
+
+
+@dataclass(frozen=True)
+class PentoseMgoRoutes:
+    """
+    Sub-model 3 (2026-10-30), the design review's rival arms for methylglyoxal in pentose systems, OFF by default
+    (rates zero): A3, 3-deoxypentosone's C3-C4 retro-aldol to methylglyoxal + glycolaldehyde (``r_tdp_mgo``; the
+    hexose analogue r_tdg_mgo is Martins' measured step); A4, a lumped amine-free pentose fragmentation via the
+    ketose / triose route (``r_pent_mgo``). Both base-favoured (the engine's "base" pH factor, 1 at pH 5); constants
+    at 100 C and pH 5 with an Arrhenius Ea, FITTED on the calibrated Jiangnan MGO rows when an arm is run
+    (results/validation/kinetic_core_deoxyosone_submodel_prereg.md sec. 5). No literature rate exists for either.
+    """
+
+    k_tdp_mgo_100c_ph5: float = 0.0
+    ea_tdp_mgo_kj_mol: float = 100.0
+    k_pent_mgo_100c_ph5: float = 0.0
+    ea_pent_mgo_kj_mol: float = 100.0
+
+    @staticmethod
+    def k_at(k_100: float, ea: float, temperature_k: float) -> float:
+        return float(k_100) * math.exp(-float(ea) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+PENTOSE_MGO_ROUTES = PentoseMgoRoutes()
 
 
 @dataclass(frozen=True)

@@ -900,6 +900,17 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     # the wave's switch is off.
     Reaction("r_nf_decay_oh", {"NF": 1}, {"FRAG_C": 5}, "k_nf_decay_oh",
              "B61. Norfuraneol -> fragments through its enolate, specific-base catalysed (Mikami 2017)."),
+    # Sub-model 3 (2026-10-30): three steps that are ZERO unless their constants are set (design review of the
+    # deoxyosone sub-model): the methylglyoxal share of B61's decay, and the two rival methylglyoxal routes.
+    Reaction("r_nf_decay_oh_mgo", {"NF": 1}, {"MGO": 1, "FRAG_C": 2}, "k_nf_decay_oh_mgo",
+             "Sub-model 3. The methylglyoxal share of B61's decay (Mikami 2017 Fig. 6B, >= 0.6 mol % as a transient; "
+             "NF_HYDROXIDE_DECAY.mgo_share)."),
+    Reaction("r_tdp_mgo", {"TDP": 1}, {"MGO": 1, "HA": 1}, "k_tdp_mgo",
+             "Sub-model 3 arm A3. 3-Deoxypentosone C3-C4 retro-aldol to methylglyoxal + glycolaldehyde, base-favoured "
+             "(PENTOSE_MGO_ROUTES; fitted)."),
+    Reaction("r_pent_mgo", {"PENT": 1}, {"MGO": 1, "HA": 1}, "k_pent_mgo",
+             "Sub-model 3 arm A4. Lumped amine-free pentose fragmentation to methylglyoxal + glycolaldehyde via the "
+             "ketose / triose route, base-favoured (PENTOSE_MGO_ROUTES; fitted)."),
     # B59b (2026-10-29): DE ROOS 2005's ROUTE. TTCA is a reservoir in fast equilibrium with the open Schiff base;
     # the Schiff base rearranges slowly to the cysteine Amadori compound, whose enolisation gives the
     # deoxyosones and RELEASES the cysteine. All three are DERIVED rates (CYS_AMADORI_ROUTE), zero when off.
@@ -928,6 +939,12 @@ def inactive_reactions() -> frozenset:
         off.update({"r_pent_dpo", "r_pent_tdp"})
     if not _ps.NF_HYDROXIDE_DECAY.enabled:
         off.add("r_nf_decay_oh")
+    if not (_ps.NF_HYDROXIDE_DECAY.enabled and _ps.NF_HYDROXIDE_DECAY.mgo_share > 0.0):
+        off.add("r_nf_decay_oh_mgo")
+    if _ps.PENTOSE_MGO_ROUTES.k_tdp_mgo_100c_ph5 <= 0.0:
+        off.add("r_tdp_mgo")
+    if _ps.PENTOSE_MGO_ROUTES.k_pent_mgo_100c_ph5 <= 0.0:
+        off.add("r_pent_mgo")
     return frozenset(off)
 
 
@@ -1251,8 +1268,8 @@ def sulfur_rate_constants_at(
             continue  # B50: derived below from the two thiamine steps
         if key == "k_ttca_form":
             continue  # B58: derived below from r_ttca_cys by detailed balance
-        if key == "k_nf_decay_oh":
-            continue  # B61: a measured constant, below
+        if key in ("k_nf_decay_oh", "k_nf_decay_oh_mgo", "k_tdp_mgo", "k_pent_mgo"):
+            continue  # B61 and sub-model 3: derived below
         if key == "k_dpo_ddp_h2s":
             continue  # B59a: a measured share of r_dpo_ddp, below
         if key in ("k_cama_form", "k_cama_dpo", "k_cama_tdp"):
@@ -1348,6 +1365,15 @@ def sulfur_rate_constants_at(
         _nf_oh.k_ph5(float(temperature_k)) * ph_factor("hydroxide", ph, float(temperature_k), ionic_strength_m)
         if _nf_oh.enabled else 0.0
     )
+    # Sub-model 3: the methylglyoxal share of that decay (zero unless NF_HYDROXIDE_DECAY.mgo_share is set)
+    _share = float(getattr(_nf_oh, "mgo_share", 0.0))
+    out["r_nf_decay_oh_mgo"] = _share * out["r_nf_decay_oh"]
+    out["r_nf_decay_oh"] = (1.0 - _share) * out["r_nf_decay_oh"]
+    # Sub-model 3's rival methylglyoxal routes (zero unless PENTOSE_MGO_ROUTES' constants are set)
+    _mgo = _ps.PENTOSE_MGO_ROUTES
+    _base = ph_factor("base", ph, float(temperature_k), ionic_strength_m)
+    out["r_tdp_mgo"] = _mgo.k_at(_mgo.k_tdp_mgo_100c_ph5, _mgo.ea_tdp_mgo_kj_mol, temperature_k) * _base
+    out["r_pent_mgo"] = _mgo.k_at(_mgo.k_pent_mgo_100c_ph5, _mgo.ea_pent_mgo_kj_mol, temperature_k) * _base
 
     _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
     out["ch_thioether_release"] = out["ch_thioether_mft"] / _k_adduct
