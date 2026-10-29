@@ -816,13 +816,14 @@ time courses. Table S1 and S2 are supplementary and not on disk.
 
 ## Supplementary material (read 2026-10-29)
 
-**Source:** `data/articles/zhai2023b_supplementary.docx` (owner download 2026-10-29, not committed),
+**Source:** `data/articles/zhai2023foodchem_supplementary.docx` (owner download 2026-10-29, not committed),
 read with macOS `textutil`. Identity from its own title page: *"Reduced Asynchronism between
 Regenerative Cysteine and Fragments of Deoxyosones Promoting Formation of Sulfur-containing Compounds
 through Extra-added Xylose and Elevated Temperature during Thermal Processing of
 2-Threityl-Thiazolidine-4-Carboxylic Acid"*, Zhai, Xia, Deng, Cui, Hayat, Zhang, Ho — **this paper
-(Food Chem 404:134420)**. Note the file-stem swap again: `zhai2023b_supplementary` is the Food Chem SI,
-`zhai2023_supplementary.pdf` the JAFC SI (as with the main PDFs, sec. 0).
+(Food Chem 404:134420)**. The downloads were renamed 2026-10-29 to their dossier stems (owner: stick to the convention): this SI is
+`zhai2023foodchem_supplementary.docx` (was `zhai2023b_supplementary.docx`); the JAFC SI is
+`zhai2023jafc_supplementary.pdf` (was `zhai2023jafc_supplementary.pdf`).
 
 **What it holds.**
 - **Table S1** — ROAV of 8 heterocycles in the TTCA-Xyl system (concentration, water threshold, ROAV).

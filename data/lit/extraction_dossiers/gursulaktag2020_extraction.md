@@ -462,7 +462,7 @@ absolute HMF anchor in the whole K5a cluster.
 
 ## Supplementary material (read 2026-10-29)
 
-Source: `data/articles/gorsul2020_supplementary.docx` (owner's download; the file name misspells the
+Source: `data/articles/gursulaktag2020_supplementary.docx` (owner's download; the file name misspells the
 author). Four tables, four figures. **Duplicate dossier:** `gursul2020_extraction.md` covers the same
 paper; this (fuller) dossier carries the SI, and the other now points here.
 

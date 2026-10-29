@@ -83,3 +83,23 @@ def test_the_debt_is_reported_not_failed(tmp_path, monkeypatch):
     monkeypatch.setattr(verification_gate, "FIT_ROWS", fit_rows)
     problems, notes = verification_gate.check()
     assert problems == [] and "1 in_model_fit entries of earlier waves unverified" in notes[0]
+
+
+def test_anchor_tokens_and_resolution():
+    from src import evidence_anchors as ea
+
+    text = "martins2005_extraction.md (Table 2); data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.1"
+    assert ea.anchor_tokens(text) == ["martins2005_extraction.md",
+                                      "data/lit/extraction_dossiers/k3_final_parameter_inventory.md"]
+    assert ea.resolve("martins2005_extraction.md") is not None
+    assert ea.resolve("FIT_HOLDOUT_DECLARATION.md") is not None      # a uniquely named tracked file
+    assert ea.resolve("no_such_paper2099_extraction.md") is None
+    assert ea.dossier_stems(text) == ["martins2005"]
+
+
+def test_every_maillard_constant_cites_a_resolvable_source():
+    sys.path.insert(0, str(ROOT / "scripts" / "ci"))
+    import evidence_anchor_gate
+
+    problems, n = evidence_anchor_gate.check()
+    assert problems == [] and n > 100

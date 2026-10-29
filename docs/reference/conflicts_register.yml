@@ -1242,7 +1242,7 @@ entries:
     explanations:
       - "The hold-out was declared from a citation before the paper was on disk, and later notes inherited the claim."
     tests:
-      - "barallat2023.pdf read in full 2026-10-29 into dossier barallatperez2023 (Full text section)."
+      - "barallatperez2023.pdf read in full 2026-10-29 into dossier barallatperez2023 (Full text section)."
     status: error_confirmed
     remedy: >-
       The six 'sealed' constants do not exist in the cited papers: retire HOLDOUT_SEALED_BINDING as a hold-out (it

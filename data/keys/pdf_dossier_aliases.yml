@@ -51,6 +51,26 @@ aliases:
   brehm2020_supplementary: brehm2020
   zhou2023b_supporting: zhou2023
   schroen2022_fulltext: schroen2022          # a text dump of Schroen2022.pdf that predates the PDF
+  # downloaded 2026-10-29 (strategy M3), read into their dossiers' "Supplementary material (read 2026-10-29)"
+  # (bi2022_supplementary.zip and utz2022_supplementary.zip are archives, which the gate does not list)
+  cai2024_supplementary1: Cai2024
+  cai2024_supplementary2: Cai2024
+  feng2022_supplementary: feng2022
+  gigl2021_supplementary: gigl2021
+  gursulaktag2020_supplementary: gursulaktag2020
+  nguyen2016_supplementary: nguyen2016
+  piornos2025_supplementary: piornos2025
+  sen2022_supplementary: sen2022
+  trikusuma2020_supplementary: trikusuma2020
+  wang2026b_supplementary: wang2026b
+  xia2022_supplementary: xia2022
+  zamora2015_supplementary: zamora2015
+  zhai2023foodchem_supplementary: zhai2023foodchem
+  zhai2023jafc_supplementary: zhai2023jafc
+  zhang2023b_supplementary: zhang2023b
+  zhang2024_supplementary: Zhang2024
+  zhang2026_supplementary1: zhang2026
+  zhang2026_supplementary2: zhang2026
 
 triaged:
   yang2011: "read 2026-10-09 and set aside: thiamine is held fixed in every run, so it cannot inform the thiamine row (tasks/data_restructure_plan.md, thiamine-row reading)"

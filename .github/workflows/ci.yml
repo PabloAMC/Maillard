@@ -116,6 +116,8 @@ jobs:
         run: python scripts/ci/source_verification_gate.py
       - name: Import-time switch gate
         run: python scripts/ci/import_time_switch_gate.py
+      - name: Evidence anchor gate
+        run: python scripts/ci/evidence_anchor_gate.py
 
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.

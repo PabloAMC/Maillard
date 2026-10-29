@@ -353,7 +353,7 @@ constant, which is what makes `rank` useful.
 
 **Provenance census (recounted at generation time, not copied).** **0 records** carry `source_status: no_verifiable_source` — the figure the provenance note above quotes, reproduced here by recount; an unsourced record is deleted, not flagged. No narrower marker (`value_status`, `value_anchor_status`, a DOI lookup's `status`) carries it either.
 
-**Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS · `dossier_coverage_gate.py` PASS · `choices_register_gate.py` PASS.
+**Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS · `dossier_coverage_gate.py` FAIL · `choices_register_gate.py` PASS.
 
 **How to use this model in one line:** compare two formulations and read the ratio (`python scripts/maillard.py compare`), never quote the absolute number, and treat pH and moisture directions as caution-only: declared terms exist on the sulfur lane (pH) the trunk (water activity, Amadori-decay pH) and the acrylamide lane (pH and water activity inside measured windows), none on lipid.
 

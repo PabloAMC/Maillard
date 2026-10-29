@@ -49,6 +49,10 @@ BENCHMARKS_DIR: Path = DATA_ROOT / "benchmarks"
 PROTOCOLS_DIR: Path = DATA_ROOT / "protocols"
 TIMESERIES_DIR: Path = LIT_DIR / "timeseries"
 EXTRACTION_DOSSIERS_DIR: Path = LIT_DIR / "extraction_dossiers"
+#: 2026-10-29 (strategy M3 / M5 / guards): the measurement index, the source-verification record, the conflicts register.
+MEASUREMENT_LEDGER_DIR: Path = LIT_DIR / "measurement_ledger"
+SOURCE_VERIFICATION: Path = LIT_DIR / "source_verification.yml"
+CONFLICTS_REGISTER: Path = DOCS_ROOT / "reference" / "conflicts_register.yml"
 # LLM research dumps kept only so citation_gate can detect laundered citations. Not
 # provenance; nothing loads them as inputs.
 RESEARCH_CORPUS_DIR: Path = DATA_ROOT / "research_corpus"

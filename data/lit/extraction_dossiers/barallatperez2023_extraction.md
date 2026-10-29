@@ -2,7 +2,7 @@
 
 ### THE "SEALED LUPIN" PARENT STUDY, READ IN FULL — and it is not the parent of the sealed keys either: it prints **no binding constant (only % bound, eq 1)**, **never measures nonanal** and **has no mucin arm**, while `HOLDOUT_SEALED_BINDING` registers `kg_*` (L/g) constants for hexanal, nonanal and 2-nonanone on lupin and on mucin. Its lupin numbers are bars in Figs. 3–4; its printed numbers are pooled PPI/SPI/LPI ranges, fat contents, H0 (Table 1) and –SH (Table 2).
 
-**Source on disk:** `data/articles/barallat2023.pdf` (11 pp., J. Agric. Food Chem. 2023, 71, 20274−20284, CC-BY 4.0;
+**Source on disk:** `data/articles/barallatperez2023.pdf` (11 pp., J. Agric. Food Chem. 2023, 71, 20274−20284, CC-BY 4.0;
 DOI 10.1021/acs.jafc.3c05991; PMCID PMC10739987). Read from the `pdftotext -layout` text layer on 2026-10-29. Tables 1 and 2
 came through the text layer intact. Figures 1–4 are bar charts (images): **every per-protein binding percentage is
 figure-only** and is not digitised here. Supporting Information (Tables S1–S4, Figure S1) is **not on disk**.
@@ -160,5 +160,5 @@ rules), or a figure-read of 2024 Fig. 4.
 
 ## Full text (read 2026-10-29)
 
-New dossier, written from the full paper `data/articles/barallat2023.pdf` on 2026-10-29. Sections 0–5b above are the reading;
+New dossier, written from the full paper `data/articles/barallatperez2023.pdf` on 2026-10-29. Sections 0–5b above are the reading;
 the figures were not digitised.

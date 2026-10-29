@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "06ea56aed26e70e0e34f75fc9bab2eb9374902bcc74b1c7b73c51b0eef76a601",
+        "17_papers_by_weight.png": "6dc493e2c1764de12f1717371891971a328e5821a204fee6f7ca0d70ece94ef9",
         "18_lab_spread.png": "8cc189939db766fe9b7b9f8784e5b732efebf988a53487016965978be4f6f643",
         "19_what_papers_report.png": "a65f39e4b3b5e91c8eef5e193b2909c46a076b769a897a62745627b9ff9fa5b5",
         "20_one_number.png": "dbdca9d8ec4931132e3fa835d594146279974e9ecac3016227b7bc8ea1a0fbe3",
@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-10-29",
     "git": {
-      "commit": "157e38dc56819be52104abf7cec5a5217acfdf33",
-      "short": "157e38dc",
+      "commit": "91ca4bd63601aed17dc816d2b20755dc75dc7105",
+      "short": "91ca4bd6",
       "branch": "sulfur-route-and-tooling",
       "dirty": true
     },
@@ -239,11 +239,11 @@
       },
       {
         "path": "src/kinetic_core/parameters.py",
-        "sha256": "5a4822241642e22a7a368ef7bbc3c3d6061bdd6b4ef6b314b8f6103505d2ebc9"
+        "sha256": "e19d346a4337e967543064d473651bb7b8450e32a29714046358b2ca249284e8"
       },
       {
         "path": "src/kinetic_core/parameters_acrylamide.py",
-        "sha256": "bcfbe60057eef98b33ccf6c75b2d130f72de7180284f9326dc9b16dda86aee46"
+        "sha256": "c1a4256d364484866c96cc01c7cf38a0b1e24ea63c2d944c554c3fc4da30c774"
       },
       {
         "path": "src/kinetic_core/parameters_dicarbonyl.py",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "06ea56aed26e70e0e34f75fc9bab2eb9374902bcc74b1c7b73c51b0eef76a601"
+        "sha256": "6dc493e2c1764de12f1717371891971a328e5821a204fee6f7ca0d70ece94ef9"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",

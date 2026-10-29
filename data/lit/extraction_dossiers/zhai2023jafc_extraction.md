@@ -1287,11 +1287,11 @@ disulfide measurement, no thiol mass balance and no thiol-consumption experiment
 
 ## Supplementary material (read 2026-10-29)
 
-**Source:** `data/articles/zhai2023_supplementary.pdf` (7 pp., owner download 2026-10-29, not committed;
+**Source:** `data/articles/zhai2023jafc_supplementary.pdf` (7 pp., owner download 2026-10-29, not committed;
 ACS stamp "jf3c04166_si_001"). Identity from its own title page: *"Regulated Formation of Inhibited
 Color and Enhanced Flavor Derived from Heated 2-Threityl-Thiazolidine-4-Carboxylic Acid with
 Additional Cysteine Targeting at Different Degradation Stages"*, Zhai, Cui, Hayat, Li, Wu, Fu, Zhang,
-Ho — **this paper (JAFC 10.1021/acs.jafc.3c04166)**. (The other download, `zhai2023b_supplementary.docx`,
+Ho — **this paper (JAFC 10.1021/acs.jafc.3c04166)**. (The other download, `zhai2023foodchem_supplementary.docx`,
 is the Food Chem 134420 SI; see `zhai2023foodchem_extraction.md`.) Read with `pdftotext -layout`.
 
 **What it holds.**

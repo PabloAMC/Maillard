@@ -229,6 +229,17 @@ _DV2_CONDITIONS = (
 )
 
 
+
+def _paper_dossier(source: str) -> str:
+    """2026-10-29 (guard 4): the paper's own dossier, cited before the synthesis that transcribed it. Part I
+    (Food Chem 114:116) is devleeschouwer2009b; Part II (Food Chem 114:535) is devleeschouwer2009."""
+    if source.startswith(_DV1_SOURCE):
+        return "devleeschouwer2009b_extraction.md (Part I, Table 3); "
+    if source.startswith(_DV2_SOURCE):
+        return "devleeschouwer2009_extraction.md (Part II, Table 3); "
+    return ""
+
+
 def _measured(
     key: str,
     transformation: str,
@@ -257,7 +268,7 @@ def _measured(
         order=order,
         evidence_class="measured_rate",
         source_anchor=source,
-        dossier_anchor=dossier,
+        dossier_anchor=_paper_dossier(source) + dossier,
         conditions=conditions,
         ph_of_measurement=ph,
         aw_of_measurement=aw,
