@@ -53,7 +53,6 @@ aliases:
   schroen2022_fulltext: schroen2022          # a text dump of Schroen2022.pdf that predates the PDF
 
 triaged:
-  us10039306: "Impossible Foods patent US 10,039,306 B2; downloaded for the presence list only, no dossier (tasks/data_restructure_plan.md, the patents line of the thiamine-row reading)"
   yang2011: "read 2026-10-09 and set aside: thiamine is held fixed in every run, so it cannot inform the thiamine row (tasks/data_restructure_plan.md, thiamine-row reading)"
   tian2020: "Tian et al. 2020, J Dairy Sci 103:5863 (milk fan perceptual interaction); only its Table 1 unit cell was read, in tian2019_extraction.md section 2a, to resolve a unit; no other use"
 

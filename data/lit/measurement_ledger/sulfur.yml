@@ -8043,3 +8043,60 @@ entries:
     condition_quote: Effect of free amino acids (a) and Maillard reaction products (b-d) on pH in model.
     flags: [si_read_2026-10-29, final_ph_range_read_from_axis_only, not_the_initial_ph_3_8_series, 'also_relevant: aroma_other']
     note: Final pH ~4.3-5.2 against 4.9 start; cysteine-containing groups lowest. Base pot 115 C, 60 min (main-text methods).
+
+  - id: us10039306_ex33_tab10_replica_legh_mix2_presence
+    dossier: us10039306_extraction.md
+    paper: "US 10,039,306 B2 (Impossible Foods, Vrljic et al.) 2018, Example 33"
+    lab: "Impossible Foods"
+    system: "plant-protein replica burger with 1 % leghemoglobin + precursor mix 2 (cysteine 0.83, methionine 0.67, thiamine 0.50, glucose 5.55, ribose 6.66, sucrose/fructose/xylose 2.00 mM each, maltodextrin 0.5 %, 9 amino acids, IMP+GMP, lactate, creatine; Table 8); 3 g in a closed GC-MS vial"
+    medium: "solid replica (muscle, adipose, connective tissue replicas); pH not stated for Example 33 (precursor concentrate set to 5.5-6.0)"
+    temperature_c: [150]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [3]
+    species: [thiazole, 2-acetylthiazole, 4-methyl-5-thiazoleethanol, thiophene, 2-thiophenecarboxaldehyde, methyl-thiirane, methional, dimethyl sulfide, dimethyl trisulfide, carbon disulfide]
+    kind: other
+    location: "Table 10 (Example 33, PDF p. 60, col 85; 135 names, text says 136; presence only, filtered to compounds also found in beef); recipes Table 8"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "All samples were cooked at 150 C for 3 mins, cooled to 50 C to extract for 12 minutes using GCMS (SPME fiber sampling of headspace)."
+    flags: [patent_not_peer_reviewed, presence_only, single_arm_no_heme_free_or_no_precursor_gcms, list_filtered_to_beef_shared_compounds, ph_not_stated, "also_relevant: aroma_other"]
+    note: "matrix (heme replica). New data, not in US 9,943,096 / EP 2 943 072; only the GC-MS protocol is the family's Example 11. No MFT, FFT, furyl disulfide or H2S listed (absence means not found in both replica and beef). Sensory Tables 8-9 (767/804/929 arms) not indexed."
+
+  - id: us10039306_ex16_particle_size_replica_volatiles_text
+    dossier: us10039306_extraction.md
+    paper: "US 10,039,306 B2 (Impossible Foods, Vrljic et al.) 2018, Example 16"
+    lab: "Impossible Foods"
+    system: "moong-bean muscle replica with leghemoglobin 6.5 mg/ml + adipose replica (70 % v/v fat, 4.2 % moong 8S) + connective replica, lean:fat 85/15, coarse / fine / blended vs single tissues; also 80/20 ground beef fine vs very fine; no sugar, cysteine or thiamine added"
+    medium: "solid replicas built in 20 mM phosphate pH 7.3-7.4, 400 mM NaCl; cooking pH not stated"
+    temperature_c: [150]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [10]
+    species: [4-methylthiazole]
+    kind: other
+    location: "text cols 72-73 (PDF pp. 53-54); no table"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: "Meat, muscle and fat tissue samples were cooked in sealed glass vials at 150 C for 10 min. Aroma profiles of the samples were analyzed by a panel of testers, and by GC-MS."
+    flags: [patent_not_peer_reviewed, presence_only, no_added_sugar_or_sulfur_precursor, gcms_method_cross_reference_broken, "also_relevant: aroma_other"]
+    note: "matrix (heme replica). 4-methylthiazole appears in mixed replicas but not single tissues; levels said to depend on particle size, none printed. Not in the family patents."
+
+  - id: us10039306_col52_heme_cys_glucose_sulfurous_text
+    dossier: us10039306_extraction.md
+    paper: "US 10,039,306 B2 (Impossible Foods, Vrljic et al.) 2018, description col 52"
+    lab: "Impossible Foods"
+    system: "heme proteins (A. aeolicus, M. infernorum, Glycine max, Hordeum vulgare, Vigna radiata) heated with cysteine and glucose; cysteine + glucose alone or with ferrous gluconate"
+    medium: "not stated in this patent"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [thiazole, 5-methyl-2-thiophenecarboxaldehyde, 3-methyl-2-thiophenecarboxaldehyde, 3-thiophenemethanol]
+    kind: other
+    location: "description col 52 (PDF p. 43); no table in this patent"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: "cysteine and glucose alone or in the presence of iron salts such as ferrous glucanate produced a sulfurous, odor but addition of heme proteins reduced the sulfurous odor"
+    flags: [patent_not_peer_reviewed, presence_only, conditions_not_stated, "same_data_as: us9943096_tabs_heme_sugar_cys_thiamine_presence"]
+    note: "matrix (heme formulation). Same paragraph as US 9,943,096 cols 15-16 and EP 2 943 072 [0053], which point to the family's Tables 8-9 (150 C / 3 min, pH 6). Adds no data."
