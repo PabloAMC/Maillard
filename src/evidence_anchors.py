@@ -28,24 +28,30 @@ def anchor_tokens(text: Optional[str]) -> List[str]:
 
 
 @functools.lru_cache(maxsize=1)
-def _tracked_by_name() -> Dict[str, List[str]]:
-    out: Dict[str, List[str]] = {}
+def _tracked() -> frozenset:
+    """Every tracked path, as git spells it (empty outside a git checkout)."""
     try:
-        files = subprocess.run(["git", "ls-files"], cwd=data_paths.REPO_ROOT, capture_output=True, text=True,
-                               check=True).stdout.split()
-    except Exception:  # noqa: BLE001 - outside a git checkout: path and dossier resolution only
-        files = []
-    for f in files:
-        out.setdefault(Path(f).name, []).append(f)
-    return out
+        return frozenset(subprocess.run(["git", "ls-files"], cwd=data_paths.REPO_ROOT, capture_output=True,
+                                        text=True, check=True).stdout.split())
+    except Exception:  # noqa: BLE001
+        return frozenset()
+
+
+@functools.lru_cache(maxsize=1)
+def _dossier_names() -> frozenset:
+    return frozenset(p.name for p in data_paths.EXTRACTION_DOSSIERS_DIR.iterdir())
 
 
 def resolve(token: str) -> Optional[Path]:
-    """The file a token names: a repository path, a dossier, or the one tracked file with that name."""
-    for candidate in (data_paths.REPO_ROOT / token, data_paths.EXTRACTION_DOSSIERS_DIR / token):
-        if candidate.is_file():
-            return candidate
-    named = _tracked_by_name().get(Path(token).name, [])
+    """The file a token names: a tracked repository path, a dossier, or the one tracked file with that name.
+    Names are matched exactly, never through the file system: macOS folds case and CI's Linux does not, which
+    let a mis-cased name pass locally and fail in CI on 2026-10-29."""
+    if "/" in token:
+        rel = token[2:] if token.startswith("./") else token
+        return data_paths.REPO_ROOT / rel if rel in _tracked() else None
+    if token in _dossier_names():
+        return data_paths.EXTRACTION_DOSSIERS_DIR / token
+    named = [f for f in _tracked() if f.rsplit("/", 1)[-1] == token]
     return data_paths.REPO_ROOT / named[0] if len(named) == 1 else None
 
 

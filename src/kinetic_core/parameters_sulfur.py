@@ -1267,7 +1267,7 @@ def dimer_release_parameters(k_dimer_release: float = 0.0) -> Dict[str, SulfurPa
                            "the dimerisation, " + ZHANG_DISULFIDE_ANCHOR),
             dossier_anchor=("results/validation/kinetic_core_b17_prereg.md; kumazawa2003_extraction.md (the apparent loss "
                             "rate halves when the cook doubles); zhou2023_extraction.md sec. 2.1 (dimer 6.5-9.6 % of MFT); "
-                            "zhang2024_extraction.md (dimer share follows the oxidant)"),
+                            "Zhang2024_extraction.md (dimer share follows the oxidant)"),
             conditions="aqueous, pH 4.5-7, 100-145 C; the reducing partner is not tracked (pseudo-first order)",
             ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
             channel="fitted_release", flags=("b17_dimer_release", "fitted_here", "no_literature_value",

@@ -39,6 +39,7 @@ def check() -> list:
     problems = []
     entries = (yaml.safe_load(REGISTER.read_text(encoding="utf-8")) or {}).get("entries") or []
     ledger_ids = _ledger_ids()
+    dossier_names = {p.name for p in DOSSIERS.iterdir()}
     seen = set()
     for entry in entries:
         key = entry.get("id", "?")
@@ -55,8 +56,10 @@ def check() -> list:
         if not entry["sources"]:
             problems.append(f"{key}: no sources")
         for stem in entry["sources"] or []:
-            if not (DOSSIERS / f"{stem}_extraction.md").exists() and not (DOSSIERS / f"{stem}.md").exists():
-                problems.append(f"{key}: source {stem!r} has no dossier")
+            # exact names, not Path.exists(): macOS disks are case-insensitive, CI's Linux is not (2026-10-29,
+            # 'xin2026b' passed locally and failed in CI against Xin2026b_extraction.md)
+            if f"{stem}_extraction.md" not in dossier_names and f"{stem}.md" not in dossier_names:
+                problems.append(f"{key}: source {stem!r} has no dossier (names are case-sensitive)")
         for item in entry["affects"] or []:
             if isinstance(item, str):
                 if item not in ledger_ids:

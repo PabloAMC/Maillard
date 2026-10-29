@@ -809,7 +809,7 @@ entries:
   - id: CF-027
     kind: code_mismatch
     scope: other_lane
-    sources: [xin2026, xin2026b, tian2019]
+    sources: [xin2026, Xin2026b, tian2019]
     quantity: "nonanal odour threshold in water"
     observation: >-
       src/kinetic_core/matrix_oav.py gives the nonanal water threshold (1.1 ug/kg) two sources: the ThresholdRecord says
@@ -846,7 +846,7 @@ entries:
   - id: CF-029
     kind: duplicate
     scope: other_lane
-    sources: [selke1978, frankel1981, aspelund1983, crowther1980, snel2023b, snel2023, zamora2015, hidalgo2016, xin2026, xin2026b]
+    sources: [selke1978, frankel1981, aspelund1983, crowther1980, snel2023b, snel2023, zamora2015, hidalgo2016, xin2026, Xin2026b]
     quantity: "lipid-lane data sets printed more than once (originals first)"
     observation: >-
       From the lipid ledger: Frankel 1981's autoxidised-oleate column ("Data from ref. 21") = Selke 1978 Table I (BOTH
@@ -859,7 +859,7 @@ entries:
     remedy: >-
       Pending: verify; then copy_of: frankel1981_tab2_oleate_lOOH_volatile_slates (auto column) ->
       selke1978_tab1_oleate_lOOH_slate (only the photo column is independent); crowther1980 Table 7 -> aspelund1983;
-      snel2023b -> snel2023; hidalgo2016 control -> zamora2015 Table 1; xin2026b ENPI arm -> xin2026 control. First check
+      snel2023b -> snel2023; hidalgo2016 control -> zamora2015 Table 1; Xin2026b ENPI arm -> xin2026 control. First check
       whether B6 and B28 both score the oleate slate.
     affects:
       - selke1978_tab1_oleate_lOOH_slate
