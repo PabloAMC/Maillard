@@ -1768,3 +1768,21 @@ first published per-row score of these hold-outs remains the next scorecard's.
 **7. Housekeeping the gates required.** `dossier_coverage_gate` failed on the branch before this
 amendment: 33 `pending:` lines in `data/keys/pdf_dossier_aliases.yml` named PDFs that gained dossiers on
 2026-10-27/28. They are deleted, as the gate's own rule says; no alias or triage line changed.
+
+## Amendment 46 — 2026-10-28 (Wave B64: the heating block, a condition-record completion under the Amendment 9 clause 2 licence)
+
+1. **WHAT IS COMPLETED.** The 23 Hofmann & Schieberle 1998 bundles (9 top-level, the 5 maillard_path
+   hold-outs, 9 step-level-unreachable) gain ONE new key, `conditions.heating`: the thermal history the
+   source records (`time_convention: ramp_only`, 20 → 145 °C over 20 min) with its provenance class and a
+   note quoting the sources. It is written by `scripts/generators/complete_benchmark_heating_fields.py`
+   from the PDFs on disk; the per-source record is `docs/validation/thermal_history_facts.yml`. No other
+   bundle gains a block: a source that states no come-up stays isothermal, and nothing is inferred.
+2. **WHY.** Every pot was integrated isothermal from t = 0, but the anchor laboratory runs this pot "by
+   raising the temperature within 20 min from 20 to 145 °C" (Hofmann & Schieberle 1995, 1997, the same pot
+   and autoclave) and writes it "20 min at 145 °C" in 1998. The B64 pre-registration
+   (`results/validation/kinetic_core_b64_prereg.md`) sets out the readings and their probabilities.
+3. **WHAT MAY NOT MOVE.** Measured values, compound lists, `evidence_class`, roles,
+   `conditions.temp_C/ph/water_activity/time_min`, the buffer and the vessel blocks are byte-identical.
+   `tests/unit/test_kinetic_core_b2_3.py` drops `heating` alongside `buffer` and `vessel` before hashing,
+   so the pinned baselines still prove it. The engine reads the block only under
+   `panel.THERMAL_HISTORY = "as_recorded"`, which stays off until B64 ships; until then no score moves.

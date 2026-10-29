@@ -16,7 +16,7 @@
     "vessel": {
       "fill_mL": null,
       "vessel_mL": null,
-      "closure": "no cook",
+      "closure": "never heated",
       "atmosphere": "not_applicable",
       "water_source": "not_applicable",
       "stirred": null,

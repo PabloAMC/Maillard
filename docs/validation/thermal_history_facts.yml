@@ -1,0 +1,949 @@
+# heating_facts.yml -- the thermal history of every fitted and scored pot, as the sources state it.
+#
+# Read-only curation, 2026-10-28, for wave B64 (thermal programme). Nothing in the repository was
+# edited. Every quote below was read with `pdftotext -q` from data/articles/<stem>.pdf unless
+# `read_in` says otherwise ("dossier" = data/lit/extraction_dossiers/*, "bundle" = a benchmark
+# bundle's own content_verification / provenance note). Quotes are verbatim except for pdftotext
+# artefacts, which are marked [sic] or normalised and flagged (e.g. Cerny's LWT PDF prints "1C" for
+# "°C"; Hofmann 1995's OCR prints "Model 11" for "Model II" and "mol&" for "mol/L").
+#
+# Page convention: "PDF p. N" is the N-th page of the file on disk; the printed journal page is
+# given where the PDF prints it.
+#
+# time_convention vocabulary (from the request):
+#   ramp_only            the stated time IS the heat-up (Hofmann 1995)
+#   hold_after_reaching  time counted after the sample reached temperature
+#   includes_come_up     time from insertion; come-up inside it
+#   ramp_plus_hold       both stated
+#   unstated
+# Where the source itself is silent but a sibling paper (same lab, same apparatus) decides it, the
+# record carries `time_convention: unstated` plus `best_reading:` with the sibling cited.
+#
+# come_up_estimate fields are MY engineering estimates (inference, not in any source); they are
+# there so a reader can rank pots by how wrong isothermal integration is. Treat them as low
+# confidence and never as data.
+#
+# Dose arithmetic used in the notes (my derivation -- please re-check): for a linear ramp at rate
+# beta (K/min) ending at T_max, the time-equivalent at T_max of an Arrhenius step with barrier Ea is
+#   t_eq ~= R*T_max^2 / (Ea*beta)        (valid when Ea*(T_max-T_0)/(R*T_max^2) >> 1)
+# Hofmann ramp 20 -> 145 C in 20 min: beta = 6.25 K/min, T_max = 418.15 K, R*T_max^2 = 1.454e6 J/mol
+#   Ea =  80 kJ/mol -> t_eq = 2.9 min;  Ea = 100 -> 2.3 min;  Ea = 120 -> 1.9 min.
+# So "isothermal 20 min at 145 C" carries ~7-10x the dose of "ramp only", while "ramp + 20 min
+# hold" carries only ~1.1x the isothermal dose. The decision that matters is ramp-only vs not.
+
+meta:
+  generated: "2026-10-28"
+  for: "B64 thermal-history wave (worktree b64-thermal-history)"
+  pdf_root: "/Users/pabloantoniomorenocasares/Developer/Maillard/data/articles (main checkout; the worktree has no PDFs)"
+  fit_system_list_source: >-
+    scripts/generators/generate_kinetic_core_b2_3_fit.py SYSTEMS (35 systems) +
+    scripts/generators/generate_kinetic_core_b8_fit.py B8_SYSTEMS (feng_arp_100, feng_arp_120) = 37.
+    Every one is integrated isothermally at t_c for `minutes` from t = 0.
+
+# =====================================================================================================
+# 1. THE HOFMANN-LAB AUTOCLAVE: every Hofmann/Schieberle paper on disk, its heating wording verbatim
+# =====================================================================================================
+hofmann_lab_autoclave:
+  question: "Hofmann & Schieberle 1998 anchor pots: 'ramp only' (20 -> 145 C within 20 min, then cool) or 'ramp + 20 min hold' or isothermal 20 min?"
+  verdict: ramp_only
+  probabilities:
+    ramp_only_20_to_145C_in_20min: 0.80
+    ramp_then_20min_hold_at_145C: 0.12
+    isothermal_20min_at_145C_instant_come_up: 0.03
+    other_or_mixed: 0.05   # e.g. ramp + short undeclared dwell, or a different programme for the 50 mL fed pots
+  what_no_paper_states:
+    - "No Hofmann/Schieberle paper on disk states a hold at 145 C after a ramp."
+    - "No paper states a come-up time separate from the 20-min ramp; the ramp is the only time ever given."
+    - "No paper states how the Roth autoclave is heated (no oil bath, heating jacket, or oven is named)."
+    - "No paper states a cooling method or duration: only 'After cooling' (1995, 1997, Schieberle 2000) and 'After cooling of the reaction mixtures to 20 °C' (1998)."
+  deciding_evidence:
+    - id: E1_same_apparatus_same_pot
+      text: >-
+        1995 (ribose) and 1997 (glucose, rhamnose) describe the SAME charge (Cys 3.3 mmol + sugar
+        10 mmol in 100 mL 0.5 M phosphate pH 5.0) in the SAME vessel (Roth Model II, 200 mL) and give
+        the ramp as the whole thermal description, followed directly by 'After cooling'. 1998 uses the
+        same charge and the same autoclave ('200 mL; Type II; Roth, Germany') and cites 1995/1997 as the
+        processed flavours 'manufactured by heating ribose ... and glucose or rhamnose ... in the
+        presence of cysteine' (1998, PDF p. 1 = p. 235).
+    - id: E2_self_paraphrase_1997
+      text: >-
+        Hofmann 1997 paraphrases ITS OWN ramp, in its own Results, with the exact words the 1998 Methods
+        use: Methods 'by raising the temperature within 20 min from 20 to 145 °C'; Results 'A solution of
+        glucose and cysteine was thermally treated for 20 min at 145 °C'. The lab's 'thermally treated for
+        20 min at 145 °C' is demonstrably the 20-min ramp.
+    - id: E3_same_numbers_cited_to_ramp_papers
+      text: >-
+        Schieberle 2000 (ACS Symp. Ser. 756) Table III prints, for 'a thermally treated (145°C; 20 min)
+        aqueous cysteine/ribose' pot, 2-furfurylthiol 121 and 2-methyl-3-furanthiol 198 ug/L -- exactly
+        Hofmann 1998 Table 1's 12.1 and 19.8 ug per 100 mL. Its Experimental 2.1 says the model 'was
+        reacted for 20 min ... at 145°C in an autoclave' and that details 'are reported elsewhere (4, 5)';
+        refs 4 and 5 are Hofmann & Schieberle 1995 (JAFC 43:2187) and 1997 (JAFC 45:898), the two ramp
+        papers. (Strictly, the sentence says isolation/GC-O/sensory details are elsewhere; the heating
+        is restated in the same shorthand.)
+    - id: E4_compression_in_1995
+      text: >-
+        Within Hofmann 1995 itself the ramp is compressed to 'reacted for 20 min' (Table 1 footnote) and
+        '(145 °C; 20 min)' (abstract). Every later '145 °C / 20 min' in this lab is the same compression.
+    - id: E5_dose_consistency_check_INFERENCE
+      text: >-
+        Schieberle 2000 Table IV (same charge, 'in a laboratory autoclave' at 100 C) gives MFT 4.5, 13.8,
+        156, 179 ug after 30, 60, 360, 720 min. The 145 C / 20 min pot gave 19.8 ug. By the ramp
+        arithmetic above, ramp-only is worth ~1.9-2.9 min at 145 C, i.e. ~45-125 min at 100 C for
+        Ea 80-120 kJ/mol -> expected ~10-45 ug, bracketing 19.8. A 20-min hold (~22 min at 145 C) is
+        worth ~350-1400 min at 100 C -> expected >= 150 ug. The measured 19.8 ug sits with ramp-only.
+        Caveats: MFT is an intermediate (its loss may have a higher barrier), the 100 C autoclave runs
+        have their own come-up, and Ea is not measured. Supporting, not decisive. My derivation.
+  against_ramp_only:
+    - "Read alone, 1998's Methods sentence ('thermally treated for 20 min at 145 °C') is the normal way to write an isothermal hold; a reviewer-facing quantitative paper might have changed protocol. Nothing positive supports a change, and E3 says the 1998 numbers were still being cited to the 1995/1997 procedure in 2000."
+    - "The fed-precursor pots are 50 mL in the same 200 mL autoclave. If the ramp was a fixed programme, it is the same 20 min; if it was 'heat at full power', 50 mL would come up faster. Unstated; this is the 'other_or_mixed' mass."
+  cooling_note: >-
+    Unstated in every paper. A 200 mL bench autoclave cooled passively spends minutes above 100 C, so
+    some dose accrues after the 20-min mark; nothing on disk bounds it.
+
+  papers:
+    - source_id: hofmann1995_extraction
+      pdf: hofmann1995.pdf
+      citation: "Hofmann & Schieberle 1995, J. Agric. Food Chem. 43:2187-2194"
+      uses_roth_autoclave: true
+      pot: "L-cysteine 3.3 mmol + D-ribose 10 mmol, phosphate buffer 100 mL, 0.5 mol/L, pH 5.0"
+      apparatus: autoclave
+      vessel: "laboratory autoclave, Model II, Roth, Karlsruhe (volume not printed here; 200 mL in 1997)"
+      fill_mL: 100
+      time_convention: ramp_only
+      ramp_min: 20
+      ramp_from_C: 20
+      ramp_to_C: 145
+      hold_min: null
+      come_up_min: null
+      cooling: {method: "'After cooling' (unspecified)", time_min: null}
+      quotes:
+        - text: "were allowed to react in a laboratory autoclave (Model II; Roth, Karlsruhe, Germany) by raising the temperature within 20 min from 20 to 145 °C."
+          location: "Experimental Procedures, 'Model Reaction', PDF p. 2 (p. 2188); OCR prints 'Model 11'"
+          read_in: pdf
+        - text: "After cooling, the dark yellow reaction mixture was extracted five times with diethyl ether"
+          location: "'Isolation of the Volatile Reaction Products', PDF p. 2 (p. 2188) -- the very next sentence; no hold in between"
+          read_in: pdf
+        - text: "A mixture of ribose (10 mmol) and cysteine (3.3 mmol) was reacted for 20 min in phosphate buffer (100 mL; 0.5 mol/L; pH 5.0)."
+          location: "Table 1 footnote a, PDF p. 3 (p. 2189)"
+          read_in: pdf
+        - text: "a thermally treated solution (145 °C; 20 min) of cysteine/ribose"
+          location: "Abstract, PDF p. 1 (p. 2187)"
+          read_in: pdf
+      confidence: high
+      notes: "The dossier (hofmann1995_extraction.md Flags 2) already reads the 20 min as the ramp."
+
+    - source_id: hofmann1995b (no dossier of this name; JAFC 43:2946, 2-acetyl-2-thiazoline)
+      pdf: hofmann1995b.pdf
+      uses_roth_autoclave: "a 'laboratory autoclave', make not named"
+      apparatus: autoclave
+      fill_mL: 50
+      time_convention: unstated
+      quotes:
+        - text: "The reaction was performed in sodium/potassium phosphate buffer (50 mL; pH 5.0; 0.5 mol/L) at 145 °C in a laboratory autoclave."
+          location: "Table 4 footnote b (the 20-min AT-degradation row), PDF p. 2 (p. 2947)"
+          read_in: pdf
+        - text: "At the end of the reaction times detailed in Tables 3-5, the mixtures were cooled to room temperature."
+          location: "Quantification of 2-Acetyl-2-thiazoline, PDF p. 2"
+          read_in: pdf
+      confidence: high
+      notes: "'Heating was performed in sunflower oil at 100 °C' in the same table refers to the reaction MEDIUM of another row, not to how the autoclave is heated."
+
+    - source_id: hofmann1996_extraction
+      pdf: hofmann1996.pdf
+      uses_roth_autoclave: false
+      notes: "MFT stability study (JAFC 44:251); no autoclave pot, no heating wording relevant to the anchor."
+
+    - source_id: "hofmann1998_reconciliation (hofmann1996b.pdf is aliased to it)"
+      pdf: hofmann1996b.pdf
+      citation: "Hofmann & Schieberle, in Flavour Science: Recent Developments (RSC 1996)"
+      uses_roth_autoclave: "'an autoclave', make not named"
+      time_convention: unstated
+      quotes:
+        - text: "Cysteine (3.33 mmol) and the carbohydrate (10.0 mmol) were dissolved in phosphate buffer (100 ml; 0.5 mol l-1) and heated for 20 min at 145 °C in an autoclave."
+          location: "Table 1 footnote, PDF p. 2; OCR prints 0.5 mol T ), normalised"
+          read_in: pdf
+        - text: "Hydroxyacetaldehyde (1 mmol) was reacted with mercapto-2-propanone (1 mmol) in phosphate buffer (50 ml; 0.5 mol l-1; pH 5.0) in an autoclave for 20 min at 145 °C"
+          location: "Table 2 footnote a, PDF p. 2"
+          read_in: pdf
+      confidence: high
+      notes: "Prints the 1998 numbers (MFT ribose 55.3 / 19.8 / 2.5 ug at pH 3/5/7; C2+C3 268.1 ug) in the same shorthand; adds nothing on ramp vs hold."
+
+    - source_id: hofmann1997_extraction
+      pdf: hofmann1997.pdf
+      citation: "Hofmann & Schieberle 1997, J. Agric. Food Chem. 45:898-906"
+      uses_roth_autoclave: true
+      pot: "L-cysteine 3.3 mmol + D-glucose or L-rhamnose 10 mmol, phosphate buffer 100 mL, 0.5 M, pH 5.0"
+      apparatus: autoclave
+      vessel: "laboratory autoclave, model II, 200 mL total volume, Roth, Karlsruhe"
+      vessel_mL: 200
+      fill_mL: 100
+      time_convention: ramp_only
+      ramp_min: 20
+      ramp_from_C: 20
+      ramp_to_C: 145
+      hold_min: null
+      cooling: {method: "'after cooling' (unspecified)", time_min: null}
+      quotes:
+        - text: "allowed to react in a laboratory autoclave (model II, 200 mL total volume; Roth, Karlsruhe, Germany) by raising the temperature within 20 min from 20 to 145 °C."
+          location: "Experimental Procedures, 'Model Reaction', PDF p. 4 (p. 901)"
+          read_in: pdf
+        - text: "A solution of glucose and cysteine was thermally treated for 20 min at 145 °C, and, after cooling, the overall odor was characterized by a six-membered sensory panel."
+          location: "Results, 'Glucose/Cysteine', PDF p. 4 (p. 901) -- the same page as the ramp sentence"
+          read_in: pdf
+        - text: "heated in a laboratory autoclave for 45 min at 150 °C"
+          location: "synthesis of a reference compound, Experimental -- the only other autoclave use; also time-only wording"
+          read_in: pdf
+      confidence: high
+      notes: "THE KEY PAPER: it shows the lab writing 'thermally treated for 20 min at 145 °C' for a pot whose Methods say it is a 20-min ramp."
+
+    - source_id: hofmann1998_reconciliation
+      pdf: hofmann1998.pdf
+      citation: "Hofmann & Schieberle 1998, J. Agric. Food Chem. 46:235-241 (10.1021/jf9705983)"
+      uses_roth_autoclave: true
+      see: "sources -> hofmann1998_reconciliation below for the full record"
+
+    - source_id: hofmann1998b_extraction
+      pdf: hofmann1998b.pdf
+      uses_roth_autoclave: false
+      notes: "JAFC 46:2270 (proline / pyrrolines): refluxed buffers, 'heated for 30 min at 100 °C in a closed vessel', dry heating 160-180 °C in closed glass vials. No autoclave."
+
+    - source_id: hofmann1998c_extraction
+      pdf: hofmann1998c.pdf
+      uses_roth_autoclave: false
+      notes: "Z Lebensm Unters Forsch A 207:229 -- dry-heated on silica 'for 6 min at 180 °C in a closed vessel'. No autoclave."
+
+    - source_id: hofmann2000_extraction
+      pdf: hofmann2000.pdf
+      uses_roth_autoclave: false
+      notes: "JAFC 48:434 -- refluxed 30-60 min; aliquots 'rapidly cooled to room temperature'. No autoclave."
+
+    - source_id: hofmann2000b_extraction
+      pdf: hofmann2000b.pdf
+      uses_roth_autoclave: false
+      notes: "JAFC 48:4301 -- 'refluxed for 30 min'. No autoclave."
+
+    - source_id: hofmann2001_extraction
+      pdf: hofmann2001.pdf
+      uses_roth_autoclave: false
+      notes: "File is JAFC 2002, 50:319 (coffee melanoidins / FFT binding); dry heating 5 min at 230 °C in an open beaker. No autoclave."
+
+    - source_id: schieberle1996_extraction
+      pdf: schieberle1996.pdf
+      citation: "Schieberle & Hofmann, in Flavour Science: Recent Developments (RSC 1996) p. 175"
+      uses_roth_autoclave: "vessel not named"
+      time_convention: unstated
+      quotes:
+        - text: "L-Cysteine (3.3 mmol) and ribose (10 mmol) were dissolved in phosphate buffer (100 ml; pH 5.0; 0.5 mol l-1) and reacted for 20 min at 145 °C."
+          location: "Experimental, PDF p. 1; OCR unit string normalised to mol l-1"
+          read_in: pdf
+      confidence: high
+
+    - source_id: schieberle1998_extraction
+      pdf: schieberle1998.pdf
+      citation: "Schieberle & Hofmann, ACS Symp. Ser. 705 (1998) pp. 320-330"
+      uses_roth_autoclave: "vessel not named"
+      time_convention: unstated
+      quotes:
+        - text: "Cysteine (3.33 mmol) and ribose (10 mmol) were dissolved in phosphate buffer (100 mL; 0.5 mol/L; pH 5.0) and reacted for 20 min at 145°C."
+          location: "table footnote d, PDF p. 6"
+          read_in: pdf
+      confidence: high
+
+    - source_id: schieberle2000_extraction
+      pdf: schieberle2000.pdf
+      citation: "Schieberle & Hofmann, in Flavor Chemistry: Industrial and Academic Research, ACS Symp. Ser. 756 (2000), ch. 10"
+      uses_roth_autoclave: "'an autoclave' / 'a laboratory autoclave', make not named"
+      time_convention: unstated
+      quotes:
+        - text: "Cysteine (3.3 mmol), dissolved in phosphate buffer (100 mL; pH 5.0; 0.5 mol/L) was reacted for 20 min in the presence of either rhamnose or ribose (10 mmol) at 145°C in an autoclave."
+          location: "2. Experimental Section, 2.1, PDF p. 3 (p. 135)"
+          read_in: pdf
+        - text: "Details on the isolation of the volatile fraction, GC/Olfactometry and the sensory evaluation are reported elsewhere (4, 5)."
+          location: "2.1, PDF p. 3; refs 4 = Hofmann & Schieberle JAFC 1995, 43, 2187; 5 = Hofmann & Schieberle JAFC 1997, 45, 898 (Literature Cited)"
+          read_in: pdf
+        - text: "Concentrations, odor thresholds and odor activity values of key odorants in a thermally treated (145°C; 20 min) aqueous cysteine/ribose (A) or cysteine/rhamnose mixture (B)"
+          location: "Table III title, PDF p. 8 (p. 140): FFT 121, MFT 198 ug/L in (A) = Hofmann 1998 Table 1"
+          read_in: pdf
+        - text: "Ribose (10 mmol) and cysteine (3.3 mmol) were reacted in phosphate buffer (100 mL; 0.5 mol/L; pH 5.0) at 100°C in a laboratory autoclave."
+          location: "Table IV footnote, PDF p. 9 (p. 141): 30/60/360/720 min time course"
+          read_in: pdf
+        - text: "thermally treated for 20 min at 145°C in a laboratory autoclave. After cooling, isotopically labeled internal standards were added"
+          location: "2.2 Yeast extracts, PDF p. 3"
+          read_in: pdf
+      confidence: high
+      notes: "E3 and E5 above come from this chapter."
+
+# =====================================================================================================
+# 2. THE 37 SULFUR FIT SYSTEMS, by source
+# =====================================================================================================
+sources:
+  - source_id: hofmann1998_reconciliation
+    pdf: hofmann1998.pdf
+    role: "sulfur fit anchor (14 systems) + 9 scored bundles + 5 hold-outs + 9 step-level-unreachable bundles"
+    pots:
+      fit_systems_100mL: [hofmann_pentose_pH5, hofmann_glucose_pH5, hofmann_fructose_pH5]
+      fit_systems_50mL: [fed_ribose_h2s, fed_tdp_h2s, fed_furfural_h2s, fed_nf_h2s, fed_nf_cys, fed_c2c3, fed_c2c3_pH3, fed_c2c3_pH7, fed_thiamine, fed_mgo_h2s_1to1, fed_mgo_h2s_1to2]
+      benchmarks_100mL: [hofmann1998_ribose_cysteine_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_fructose_cysteine_145C_20min_pH5, mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3, mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7, mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3, mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7, mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5]
+      benchmarks_50mL: [hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_h2s_145C_20min_pH5]
+      step_level_unreachable_50mL: [hofmann1998_UNREACHABLE_3deoxyribosulose_h2s_145C_20min_pH5, hofmann1998_UNREACHABLE_c2c3_aldol_145C_20min_pH3, hofmann1998_UNREACHABLE_c2c3_aldol_145C_20min_pH5, hofmann1998_UNREACHABLE_c2c3_aldol_145C_20min_pH7, hofmann1998_UNREACHABLE_oxopropanal_h2s_1to1_145C_20min_pH5, hofmann1998_UNREACHABLE_oxopropanal_h2s_1to2_145C_20min_pH5, hofmann1998_UNREACHABLE_ribose_h2s_145C_20min_pH5_FFT, hofmann1998_UNREACHABLE_ribose_h2s_145C_20min_pH5_MFT, hofmann1998_UNREACHABLE_thiamin_145C_20min_pH5]
+    apparatus: autoclave
+    vessel: "laboratory autoclave, 200 mL, Type II, Roth (Germany); steel presumed, wall not stated"
+    vessel_mL: 200
+    fill_mL: {sugar_cysteine_pots: 100, fed_precursor_pots: 50}
+    time_convention: unstated
+    time_convention_as_printed: "'thermally treated for 20 min at 145 °C' -- reads as a hold if read alone"
+    best_reading: "ramp_only, 20 -> 145 C within 20 min (p = 0.80; see hofmann_lab_autoclave)"
+    ramp_min: "20 (from hofmann1995 / hofmann1997, same apparatus and charge)"
+    ramp_from_C: "20 (from hofmann1995 / hofmann1997)"
+    hold_min: "none stated (p = 0.12 that there was a 20-min hold)"
+    come_up_min: null
+    cooling: {method: "'After cooling of the reaction mixtures to 20 °C' -- method unstated", time_min: null}
+    quotes:
+      - text: "the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 °C in a laboratory autoclave (200 mL; Type II; Roth, Germany)."
+        location: "Experimental Procedures, 'Model Experiments', PDF p. 2 (p. 236)"
+        read_in: pdf
+      - text: "After cooling of the reaction mixtures to 20 °C, the internal standards [2H2]2-furfurylthiol and [2H3]-2-methyl-3-furanthiol (10 µg each dissolved in 0.5 mL of pentane) were added"
+        location: "Quantitation of FFT and MFT by SIDA, PDF p. 2 (p. 236)"
+        read_in: pdf
+      - text: "A solution (100 mL) of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0 mmol) was reacted at pH 5.0 in a laboratory autoclave."
+        location: "Table 1 footnote a (also Table 2, 5, 9 footnotes), PDF p. 3 (p. 237)"
+        read_in: pdf
+      - text: "An aqueous solution (50 mL) of hydrogen sulfide (1 mmol) and the precursor (1 mmol) was reacted at pH 5.0 in a laboratory autoclave."
+        location: "Table 3 footnote a, PDF p. 3; Table 4 ('was heated at pH 5.0 in a laboratory autoclave'), Table 6, 7, 8, 10 footnotes carry the same 50 mL / 'laboratory autoclave' wording (PDF pp. 3, 5, 6) -- none gives a time or temperature"
+        read_in: pdf
+      - text: "processed flavors manufactured by heating ribose (Hofmann and Schieberle, 1995) and glucose or rhamnose (Hofmann and Schieberle, 1997) in the presence of cysteine."
+        location: "Introduction, PDF p. 1 (p. 235)"
+        read_in: pdf
+    confidence: "high for the wording (verbatim in PDF); medium for the ramp-only reading (sibling-decided)"
+    notes: >-
+      Bundles quote the Methods sentence verbatim (conditions.vessel.provenance_note) and carry
+      time_min 20 at temp_C 145 with no programme. Dry-heated arm (silica, 6 min at 180 C) is a different
+      pot and is not in the fit. Dose arithmetic: under ramp-only the isothermal 20-min integration
+      over-doses by ~7-10x for Ea 80-120 kJ/mol (header). The 50 mL fed pots may have ramped faster than
+      the 100 mL pots if the autoclave was not programme-controlled -- unstated.
+
+  - source_id: cerny2007b_extraction
+    pdf: cerny2007b.pdf
+    citation: "Cerny 2007 (with Briffod), LWT 40:1309-1315"
+    pots: {fit_systems: [cerny_ternary]}
+    apparatus: heating block
+    vessel: "2 mL septum-closed Teflon (PTFE) vial (Infochroma), stirred, in a heated metal block (Reacti-Therm stirring/heating module, Pierce)"
+    vessel_mL: 2
+    fill_mL: 1.0
+    vessel_material: "PTFE (chosen over glass because of vapour pressure)"
+    time_convention: unstated
+    best_reading: "includes_come_up (time in the block; nothing says otherwise) -- inference"
+    hold_min: null
+    come_up_min: null
+    come_up_estimate: "several minutes (thick PTFE wall is a poor conductor): perhaps 3-6 min of a 20-min run (my estimate)"
+    cooling: {method: unstated, time_min: null}
+    quotes:
+      - text: "The solution was heated while stirring in a 2 ml septum-closed Teflon vial (Infochroma, Zug, Switzerland) at 145 [°C] during 20 min using a heated metal block (Reactitherm, stirring/heating module, Pierce Chemical Co., Rockford, USA)."
+        location: "2.2 Model reactions, PDF p. 2 (p. 1310); PDF prints '145 1C'"
+        read_in: pdf
+      - text: "Due to the vapor pressure at the reaction temperature, septum closed Teflon vials were used in order to avoid possible breakage of glass. Vials were weighed before and after the reaction, and no leakages were detected."
+        location: "3.1, PDF pp. 2-3"
+        read_in: pdf
+    confidence: high
+    notes: >-
+      Sibling cerny2007.pdf (Cerny & Briffod, JAFC 55:1552, same lab and set-up): 'The mixtures were
+      heated while stirring in Teflon vials ... in a heated metal block (Reactitherm ...) for 20 min at
+      145 °C.' Also no come-up or cooling. Dossier: 'come-up time not stated'.
+
+  - source_id: vanseeventer2001_extraction
+    pdf: vanseeventer2001.pdf
+    citation: "van Seeventer, Weenen, Winkel & Kerler 2001, J. Agric. Food Chem. 49:4292-4295"
+    pots: {fit_systems: [vanseeventer_130C]}
+    apparatus: autoclave
+    vessel: "2-L autoclave"
+    vessel_mL: 2000
+    fill_mL: 1800
+    time_convention: ramp_plus_hold
+    ramp_min: 10
+    ramp_from_C: "room temperature"
+    hold_min: 20
+    come_up_min: 10
+    cooling: {method: "rapid cooling with tap water", time_min: null}
+    quotes:
+      - text: "A solution of 180 mmol D-ribose and 60 mmol L-cysteine in 1800 mL of phosphate buffer (0.5 M, pH 5.0) was heated in a 2-L autoclave from room temperature to 130 °C in 10 min and was kept at 130 °C for 20 min, followed by rapid cooling with tap water."
+        location: "Materials and Methods, 'Preparation of the Aqueous Model Process Flavoring', PDF p. 1 (p. 4292); 41 words"
+        read_in: pdf
+      - text: "According to the procedure of Hofmann and Schieberle (2), a phosphate-buffered (0.5 M, pH 5.0) solution of D-ribose (100 mM) and L-cysteine (33 mM) was heated in an autoclave from room temperature to 130 °C in 10 min"
+        location: "Table footnote a, PDF p. 2 (p. 4293)"
+        read_in: pdf
+    confidence: high
+    notes: >-
+      The fit integrates 20 min isothermal at 130 C: right hold, missing the ramp. Ramp dose ~1.3 min
+      at 130 C for Ea 100 kJ/mol (beta ~10.5 K/min; my arithmetic) -> ~6 % under-dose; rapid
+      tap-water cooling of 1.8 L still takes minutes. Isothermal is a fair approximation here.
+
+  - source_id: zhou2023_extraction
+    pdf: Zhou2023b.pdf   # aliased: Zhou2023b -> zhou2023 (Zhou2023.pdf is a different paper)
+    citation: "Zhou et al. 2023, J. Agric. Food Chem. 71:2472-2481 (10.1021/acs.jafc.2c08360)"
+    pots: {fit_systems: [zhou_arp_cys_pH7, zhou_arp_pH7, zhou_drift_pH6, zhou_drift_pH7, zhou_drift_pH8]}
+    apparatus: unstated
+    vessel: unstated
+    fill_mL: null
+    time_convention: unstated
+    hold_min: 60
+    cooling: {method: "ice bath", time_min: null}
+    quotes:
+      - text: "The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath for the further analysis"
+        location: "Materials and Methods, ARP +/- Cys system, PDF p. 2 (p. 2473)"
+        read_in: pdf
+    confidence: high
+    notes: >-
+      Same Jiangnan group as zhou2023c and feng2022, which both state 'pressure-resistant' glass
+      bottles in an oil bath at 120 C with ice-water quench (records below); the most likely set-up
+      here too (inference). Come-up in an oil bath for a ~10-50 mL bottle: ~2-5 min of 60 (estimate).
+
+  - source_id: whitfield1999_extraction
+    pdf: whitfield1999.pdf
+    citation: "Whitfield & Mottram 1999, J. Agric. Food Chem. 47:1626-1634"
+    pots: {fit_systems: [whitfield_nf_cys, whitfield_nf_h2s]}
+    apparatus: oven
+    vessel: "5 mL glass ampules, flame sealed"
+    vessel_mL: 5
+    fill_mL: 2
+    vessel_material: glass
+    time_convention: unstated
+    best_reading: "includes_come_up (ampules into an oven 'controlled at 140 °C, for 60 min') -- inference"
+    hold_min: null
+    come_up_estimate: "an air oven heats a 2 mL ampule slowly: ~5-10 min of the 60 (my estimate)"
+    cooling: {method: "'After cooling' (unspecified)", time_min: null}
+    quotes:
+      - text: "mixing equal quantities (1 mL each) of the solutions of HMF (containing 11.4 mg) with those of either cysteine (12.1 mg) or the hydrogen sulfide (∼6.6 mg) in 5 mL glass ampules. The ampules were flame sealed and were then heated in an oven, controlled at 140 °C, for 60 min."
+        location: "Experimental Procedures, Reaction Mixtures, PDF p. 1 (p. 1626)"
+        read_in: pdf
+      - text: "After cooling, each reaction mixture was transferred to a 250 mL conical flask"
+        location: "Isolation of Volatile Reaction Products, PDF p. 2 (p. 1627)"
+        read_in: pdf
+    confidence: high
+    notes: "A 2x concentration, 10 mL-each run is also described (larger ampule, longer come-up). whitfield2001 (companion) uses the same method."
+
+  - source_id: Zhang2024_extraction
+    pdf: Zhang2024.pdf
+    citation: "Zhang et al. 2024, Food Res. Int. 182:114149 (VB1-Xyl + Cys / GSH / GCys)"
+    pots: {fit_systems: [zhang_fig1_cys, zhang_fig1_gcys]}
+    apparatus: unstated
+    vessel: unstated
+    fill_mL: null
+    time_convention: unstated
+    hold_min: 60
+    cooling: {method: "ice water ('immediately cooled in ice water')", time_min: null}
+    quotes:
+      - text: "The mixture solutions were incubated for up to 60 min at 115 ◦C. Subsequently, mixtures were cooled with ice water preparing for further analysis."
+        location: "2.3 (Cys / GSH / GCys treatment groups), PDF p. 2"
+        read_in: pdf
+      - text: "The mixture was made to react for 60 min, then immediately cooled in ice water."
+        location: "2.2 Preparation of MFT, PDF p. 2"
+        read_in: pdf
+    confidence: high
+    notes: >-
+      Same group (Zeyu Zhang, Bei Wang, Yanping Cao) on disk: Zhang2023.pdf (JAFC 71:130x) 'immediately
+      heated at 115 °C for 60 min in an oil bath ... rapidly cooled in an ice bath'; zhang2023b.pdf
+      'sealed into 30 mL pressure glass vials ... 60 min thermal treatment at 115℃ ... promptly cooled';
+      zhang2022.pdf 'thermostatic oil bath ... 50 mL screw-sealed tube ... cooled in ice water'. Most
+      likely an oil bath with pressure vials here (inference). Minor come-up relative to 60 min.
+
+  - source_id: kang2026_extraction (+ kang2026_SI_extraction)
+    pdf: Kang2026.pdf (+ Kang2026_supplementary.pdf)
+    citation: "Kang et al. 2026, Sustainable Food Technol. 4:3239-3252"
+    pots: {fit_systems: [kang_ttca_100, kang_ttca_120, kang_freecys_100, kang_freecys_120]}
+    apparatus: oil bath
+    vessel: "high-temperature/high-pressure-resistant glass reaction vessels (volume not stated)"
+    fill_mL: null
+    vessel_material: glass
+    time_convention: unstated
+    hold_min: 120
+    cooling: {method: "ice bath ('immediately transferred')", time_min: null}
+    quotes:
+      - text: "The prepared samples were then treated at different temperatures (100 °C, 120 °C, and 140 °C) for 120 minutes."
+        location: "2.4, TTCA ladder (10 mmol/L), PDF p. 2 (p. 3240)"
+        read_in: pdf
+      - text: "Using high-temperature/high-pressure-resistant glass reaction vessels set in an oil bath, the aforementioned thermal reactions were carried out. Following this, all the mixtures were immediately transferred to an ice bath to halt the reactions."
+        location: "2.4, PDF p. 3 (p. 3241)"
+        read_in: pdf
+    confidence: high
+    notes: "The free-cysteine control (SI Fig. S4) is a figure; its heating is not separately described -- assumed the same oil bath (inference). Come-up minor vs 120 min."
+
+  - source_id: kumazawa2003_extraction
+    pdf: kumazawa2003.pdf
+    citation: "Kumazawa & Masuda 2003, J. Agric. Food Chem. 51:2674-2678"
+    pots: {fit_systems: [kumazawa_pH3_0, kumazawa_pH4_0, kumazawa_pH5_0, kumazawa_pH5_4, kumazawa_pH6_0, kumazawa_pH6_4]}
+    apparatus: retort
+    vessel: "can (size not stated), canned without deoxidisation, in a retort pasteurizer (Nissen PRS-02-IIVC)"
+    fill_mL: null
+    vessel_material: "metal can (presumed; 'canned')"
+    time_convention: unstated
+    best_reading: "hold_after_reaching (retort practice: '121 °C, 10 min' is the sterilisation hold after come-up) -- inference"
+    hold_min: 10
+    come_up_min: null
+    come_up_estimate: "retort come-up for cans is typically 5-15 min (my estimate) -- comparable to the 10-min hold"
+    cooling: {method: "immediate cooling to ~10 °C in tap water", time_min: null}
+    quotes:
+      - text: "Half of each solution was canned without the deoxidization process and treated by heat processing (121 °C, 10 min; the instrument was described above), followed by immediate cooling to ∼10 °C in tap water"
+        location: "Thermal Stability of 2-Furfurylthiol in Aqueous Solution, PDF p. 2 (p. 2675)"
+        read_in: pdf
+      - text: "The canned coffee drink was sterilized at 121 °C for 10 min followed by immediate cooling to ∼10 °C in tap water. Sterilization was performed in a retort pasteurizer (model PRS-02-IIVC; supplied from Nissen, Japan)."
+        location: "Materials and Methods, PDF p. 1 (p. 2674)"
+        read_in: pdf
+      - text: "Residual Ratios of 2-Furfurylthiol after Heating of Model Solutions at Different Temperatures and pH Values ... 121 °C, 10 min ... 123 °C, 20 min"
+        location: "Table 2, PDF p. 4 (p. 2677): pH 6.8 -> 6.0 vs 5.5 %; pH 6.0 -> 48.3 vs 43.4 %"
+        read_in: pdf
+    confidence: high
+    notes: >-
+      Dossier: 'no F0 value, no come-up time, no come-down time'. Table 2 shows doubling the hold (and
+      +2 C) barely changes survival at pH 6.0 (48.3 -> 43.4 %), which is what a large non-hold dose
+      (come-up + cool-down) or a saturating loss would produce -- consistent with the parameters_sulfur
+      note that 'the apparent loss rate halves when the cook doubles'. The isothermal 10-min integration
+      is likely wrong by a factor comparable to 2.
+
+  - source_id: feng2022_extraction
+    pdf: feng2022.pdf
+    citation: "Feng et al. 2022, J. Agric. Food Chem. 70:9095-9105"
+    pots: {fit_systems: [feng_arp_100, feng_arp_120]}
+    apparatus: oil bath
+    vessel: "pressure-resistant glass bottle (volume not stated), stirred"
+    fill_mL: null
+    vessel_material: glass
+    time_convention: unstated
+    hold_min: "30, 60, 90, 120 (fit uses 120)"
+    cooling: {method: "ice water ('immediately transferred')", time_min: null}
+    quotes:
+      - text: "the solutions were injected into the pressure-resistant glass bottle and thermally stirred in an oil bath at 100 and 120 °C for different times (30, 60, 90, and 120 min). All reaction products were immediately transferred to ice water to stop the reaction."
+        location: "Model Maillard Reaction of the RG-ARP, PDF p. 3"
+        read_in: pdf
+    confidence: high
+    notes: "Come-up minor vs 120 min (a few min; estimate)."
+
+# =====================================================================================================
+# 3. SCORED PANEL BUNDLES (non-Hofmann), grouped by source paper
+# =====================================================================================================
+  - source_id: zhou2023c_extraction
+    pdf: zhou2023c.pdf
+    citation: "Zhou, Xia, Cui, Hayat, Zhang & Ho 2023, J. Agric. Food Chem. 71:14312"
+    pots: {benchmarks: [mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c, mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c, mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c, mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c]}
+    apparatus: oil bath
+    vessel: "pressure-resistant bottles (volume, fill not stated)"
+    time_convention: unstated
+    hold_min: "30, 60, 90, 120"
+    cooling: {method: "bottles immersed in ice water", time_min: null}
+    quotes:
+      - text: "All the samples were transferred to the pressure-resistant bottles and then heated in an oil bath at a temperature of 120 °C for 30, 60, 90, and 120 min separately. After the reaction was terminated, the pressure-resistant bottles were immersed in the ice wa[ter]"
+        location: "Thermal Treatment of Reaction Systems, PDF p. 2"
+        read_in: pdf
+    confidence: high
+    notes: "Come-up a few min: matters most for the 30-min bundle (~10 %; estimate)."
+
+  - source_id: lin2022_extraction
+    pdf: lin2022.pdf
+    citation: "Lin, Ting, Ndraha, Hsiao & Sung 2022, Polymers 14:1565"
+    pots: {benchmarks: [mp_holdout_fructose_asparagine_180C_Lin2022]}
+    apparatus: heating block   # 'dry-bath incubator'
+    vessel: "not named; closure not stated"
+    fill_mL: "100 (the solution volume; whether all 100 mL went into one tube is not stated)"
+    time_convention: unstated
+    hold_min: "10, 20, 30 (bundle: 30)"
+    cooling: {method: "immediately cooled in tap water", time_min: null}
+    quotes:
+      - text: "Each solution was topped up with distilled water to 100 mL. Thereafter, each solution was placed in a dry-bath incubator (DB200-2, Yisheng Technology Idea Strategy Co. Ltd., New Taipei, Taiwan) maintained at 180 ◦C for 10, 20, and 30 min and then immediately cooled in ta[p water]"
+        location: "2.2, PDF pp. 2-3"
+        read_in: pdf
+    confidence: high
+    notes: >-
+      An aqueous charge in a dry block set to 180 C: the liquid needs minutes to come up, and if the tube
+      is not pressure-sealed it cannot exceed ~100 C at all. The block set-point is not the sample
+      temperature. Isothermal 180 C is clearly wrong; by how much is unknowable from the print.
+
+  - source_id: lin2021_extraction
+    pdf: lin2021.pdf
+    citation: "Lin, Chan, Kao & Sung 2021, Polymers 13:1901 (bundles named 'Chang2021')"
+    pots: {benchmarks: [mp_holdout_glucose_asparagine_180C_10min_Chang2021, mp_holdout_glucose_asparagine_180C_30min_Chang2021, mp_holdout_glucose_asparagine_180C_30min_water_Chang2021]}
+    apparatus: unstated
+    vessel: unstated
+    fill_mL: "100 (solution volume)"
+    time_convention: unstated
+    hold_min: "10, 20, 30"
+    cooling: {method: "cooling in tap water", time_min: null}
+    quotes:
+      - text: "topped up with distilled water to 100 mL. Each solution was heated at 180 ◦C for 10, 20, and 30 min, followed by cooling in tap water."
+        location: "2.2, PDF p. 2"
+        read_in: pdf
+    confidence: high
+    notes: "Same lab as lin2022 (presumably the same dry-bath incubator; inference). Same objection; the 10-min bundle is the worst case on the panel."
+
+  - source_id: ye2024_extraction
+    pdf: ye2024.pdf
+    citation: "Ye et al. 2024, Foods 13:2836"
+    pots: {benchmarks: [mp_holdout_glucose_asparagine_180C_Ye2024]}
+    apparatus: oil bath
+    vessel: "25 mL thick-walled pressurized glass tube"
+    vessel_mL: 25
+    fill_mL: 4
+    vessel_material: "thick-walled glass"
+    time_convention: unstated
+    hold_min: 30
+    come_up_estimate: "1-3 min (thick glass, 4 mL; estimate)"
+    cooling: {method: "'allowed to cool to room temperature' (passive, in air)", time_min: null}
+    quotes:
+      - text: "4 mL of the solution was transferred to a 25 mL thick-walled pressurized glass tube in an oil bath (DF-1015, Shanghai Lichen Instrument Technology, Shanghai, China) at 180 ◦C and kept for 30 min. The sample was then allowed to cool to room temperature"
+        location: "2.2 Glc-Asn Thermal Model Reaction, PDF p. 3"
+        read_in: pdf
+    confidence: high
+    notes: "Passive air cooling of a thick-walled tube from 180 C adds minutes above 120 C; with the come-up, the non-isothermal part is perhaps 10-25 % of the dose (estimate)."
+
+  - source_id: leitzen2021_extraction
+    pdf: Leitzen2021.pdf
+    citation: "Leitzen et al. 2021, Pharmaceuticals 14:1121 (bundle named 'Steinhagen2021')"
+    pots: {benchmarks: [mp_holdout_glucose_only_autoclave_121C_Steinhagen2021]}
+    apparatus: autoclave
+    vessel: "225 mL PP bottles (Kautex), Varioklav EC (Thermo Scientific) steam autoclave"
+    vessel_mL: 225
+    fill_mL: 200
+    vessel_material: polypropylene
+    time_convention: hold_after_reaching
+    hold_min: 18
+    come_up_min: null
+    come_up_lethality: "heating + cooling phases worth F0 = 12 min at 121 C (scheme B 30 min = scheme A 18 min + heat-up/cool-down F0), z = 10 C basis"
+    cooling: {method: "unstated ('processed after cooling'; 'cooled down to room temperature')", time_min: null}
+    quotes:
+      - text: "the calculated F0 time of scheme A was set as the holding time in the autoclave. Since the heating and cooling phases were added to the holding time, the autoclaving times for scheme B were significantly longer than for scheme A."
+        location: "Discussion / Methods 4.2.2 area, PDF p. 11"
+        read_in: pdf
+      - text: "For the calculations of the F0 times of scheme B, the F0 times for heating up and cooling down the glucose solutions were added to the F0 times from A."
+        location: "4.2.2, PDF p. 15"
+        read_in: pdf
+      - text: "The final containers to be sterilized were 225 mL PP bottles (Kautex™), each filled with 200 mL glucose solution."
+        location: "4.2.1 Preparation of Glucose Solutions, PDF p. 14"
+        read_in: pdf
+    confidence: high
+    notes: >-
+      The bundle reads F0 = 18 min as the 121 C hold, which is right for scheme A -- but the pot also
+      had a heating and a cooling phase whose lethality (z = 10 C) the source itself puts at 12 min
+      of F0. For chemistry (z ~ 25-35 C for Ea ~ 80-120 kJ/mol) the come-up/cool-down share is LARGER
+      than for spores. 200 mL in PP in a steam autoclave: come-up of tens of minutes (estimate).
+      Isothermal 18 min is clearly wrong.
+
+  - source_id: yiltirak2026_extraction
+    pdf: Yiltirak2026.pdf
+    citation: "Yiltirak et al. 2026, Food Res. Int. 231:118600"
+    pots: {benchmarks: [mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026, mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026, mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026, mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026]}
+    apparatus: heating block
+    vessel: "20-mL Duran tubes, PTFE-lined screw caps, PTFE stir bar, RS900 reaction station"
+    vessel_mL: 20
+    fill_mL: 3
+    vessel_material: "borosilicate glass"
+    time_convention: unstated
+    hold_min: "240, 120, 60, 30"
+    come_up_estimate: "~2-5 min (3 mL, stirred, block; estimate) -- ~10-15 % of the 130 C / 30 min run, small for the others"
+    cooling: {method: "ice bath ('cooled immediately to room temperature')", time_min: null}
+    quotes:
+      - text: "transferred to 20-mL Duran tubes with screw-caps lined with PTFE gaskets ... heated at 100 ◦C/4 h, 110 ◦C/2 h, 120 ◦C/1 h and 130 ◦C/0.5 h in a heating block equipped with a magnetic stirrer (RS900 reaction station"
+        location: "2.4, PDF p. 3"
+        read_in: pdf
+      - text: "After heating, the tubes were cooled immediately to room temperature in an ice bath to stop the thermal reaction."
+        location: "2.4, PDF p. 3"
+        read_in: pdf
+    confidence: high
+
+  - source_id: zhang2025b_extraction
+    pdf: zhang2025b.pdf
+    citation: "Zhang, Tan, He, Hu, Li & Xie 2025, Food Chem. 469:142529"
+    pots: {benchmarks: [mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b]}
+    apparatus: heating block
+    vessel: "15-mL pressure glass vial on a Parallel Synthesis Poly-Block 4 (HEL)"
+    vessel_mL: 15
+    fill_mL: 5
+    vessel_material: glass
+    time_convention: unstated
+    best_reading: "'for a total of 50 mins' suggests block time including come-up (low confidence)"
+    hold_min: null
+    cooling: {method: "cooled rapidly with ice water", time_min: null}
+    quotes:
+      - text: "The vials were heated at 120 ◦C for a total of 50 mins on a Parallel Synthesis Poly-Block 4 system (HEL Co. Ltd., United Kingdom)."
+        location: "2.2, PDF p. 2"
+        read_in: pdf
+      - text: "Prior to analysis, the heated solutions were cooled rapidly with ice water to end the reaction."
+        location: "2.2, PDF p. 2"
+        read_in: pdf
+    confidence: high
+
+  - source_id: bolton1993_extraction
+    pdf: bolton1993.pdf
+    citation: "Bolton, Reineccius & Liardon 1994, ACS Symp. Ser. 543, ch. 22"
+    pots: {benchmarks: [thiamine_cys_glucose_120C_Bolton1994]}
+    apparatus: unstated
+    vessel: "125 mL glass vials, Teflon-lined septa, aluminium crimp caps"
+    vessel_mL: 125
+    fill_mL: "33.3 g (10 g solids + 23.3 g water; 30 % solids)"
+    vessel_material: glass
+    time_convention: unstated
+    hold_min: 60
+    cooling: {method: "none stated -- 'Post processing, samples were immediately diluted to 10% solids with distilled water'", time_min: null}
+    quotes:
+      - text: "were thermally processed at 120°C for one hour in 125 m L glass vials sealed with Teflon-lined septa and aluminum crimp caps. Post processing, samples were immediately diluted to 10% solids with distilled water."
+        location: "Process, PDF p. 5"
+        read_in: pdf
+    confidence: high
+    notes: "33 g of a 30 %-solids slurry in a 125 mL vial: come-up could be 5-20 min depending on the (unstated) heating medium (estimate). Unknown, potentially large."
+
+  - source_id: schibilsky2019 (SOURCE NOT ON DISK)
+    pots: {benchmarks: [mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019, mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019]}
+    apparatus: "heating block (Behr thermoblock) or oven (Heraeus UT 6 with aluminium block) -- the thesis gives both"
+    vessel: "sealed 10 mL glass ampoule (2 mL) or 20 mL crimp-capped headspace vial (6 mL)"
+    fill_mL: "2 or 6"
+    time_convention: unstated
+    hold_min: 120
+    cooling: {method: unstated, time_min: null}
+    quotes:
+      - text: "Die Thermolysen erfolgten in abgeschmolzenen 10 mL Glasspiessampullen (Neolab) oder in 20 mL Headspace-Vials mit Boerdelkappe (Amchro) in einem Thermoblock (Behr Labortechnik, behrotest ET 2) bzw. in einem Umlufttrockenschrank (Heraeus UT 6) mit Aluminiumblock"
+        location: "thesis 5.1.6, quoted in bundle content_verification.quoted_method"
+        read_in: bundle
+    confidence: medium
+    notes: "Come-up minor vs 120 min."
+
+  - source_id: bi2020_extraction
+    pdf: bi2020.pdf
+    pots: {benchmarks: [external_validation_bi_2020_roasted_pea_hexanal], no_cook: [external_validation_bi_2020_raw_pea_hexanal]}
+    apparatus: oven
+    vessel: "500 g of whole peas in a forced-air oven (open)"
+    fill_mL: null
+    time_convention: unstated
+    hold_min: 30
+    cooling: {method: unstated, time_min: null}
+    quotes:
+      - text: "The roasted peas (500 g) were prepared using an Isotemp forced-air oven (Haier Co., Ltd., Qingdao, China) at 160 °C for 30 min."
+        location: "Materials and Methods (sample preparation), PDF p. 2"
+        read_in: pdf
+    confidence: high
+    notes: "Air temperature, not product temperature: 500 g of peas lag the oven for most of 30 min and the core never reaches 160 C. Isothermal 160 C / 30 min is clearly wrong. The raw-pea bundle is no-cook (its 40 C / 10 min is a proxy)."
+
+  - source_id: trikusuma2020_extraction
+    pdf: trikusuma2020.pdf
+    citation: "Trikusuma, Paravisini & Peterson 2020, Food Chem. 312:126082"
+    pots: {benchmarks: [pea_isolate_uht_140C_Trikusuma2019]}
+    apparatus: "UHT indirect tubular heat exchanger (MicroThermics HTST/UHT)"
+    vessel: "continuous line; filled into 500 mL bottles after processing"
+    time_convention: hold_after_reaching
+    ramp_from_C: 80   # preheat
+    hold_min: 0.1     # 6 s
+    come_up_min: null
+    come_up_estimate: "the 80 -> 140 C heating section and the 140 -> 10 C cooler of an indirect tubular lab unit typically take tens of seconds each (my estimate) -- longer than the 6 s hold"
+    cooling: {method: "rapidly cooled to 10 °C (tubular cooler)", time_min: null}
+    quotes:
+      - text: "the samples were first homogenized at 17.2 MPa, preheated to 80 °C, then processed at a final temperature and pressure of 140 °C and 0.55 MPa for 6 s to ensure sterilization, rapidly cooled to 10 °C"
+        location: "2.2 Preparation of pea protein beverages, PDF p. 2"
+        read_in: pdf
+    confidence: "high (wording); low (come-up estimate)"
+    notes: "Isothermal 6 s at 140 C ignores the preheat at 80 C and both ramps; clearly wrong in kind, magnitude unstated."
+
+  - source_id: ma2024_extraction
+    pdf: Ma2024.pdf
+    pots: {benchmarks: [acrylamide_spi_extrusion_130C_ACSRef3]}
+    apparatus: extruder
+    vessel: "pilot twin-screw extruder, ten zones: 80, 80, 85, 90, 100, then 110, 120, 130, 130, 130 C (bundle note)"
+    time_convention: unstated
+    hold_min: "0.4167 (25 s) is the bundle's ASSUMPTION; the paper prints no residence time"
+    cooling: {method: unstated, time_min: null}
+    quotes:
+      - text: "THE PAPER PRINTS NO RESIDENCE TIME: the 25 s below is not in the source and is an assumption"
+        location: "bundle conditions.vessel.provenance_note (B36 reading of Ma2024.pdf sec. 3.2)"
+        read_in: bundle
+    confidence: medium
+    notes: "A zone profile (80 -> 130 C) with a residence-time distribution (Unlu 2002 bracket: ~37 s at 130 C, GMRT 123 s whole barrel). Not an isothermal pot."
+
+  - source_id: li2026_extraction
+    pdf: li2026.pdf
+    pots: {benchmarks: [external_validation_li_2026_spi_wg_hme_control]}
+    apparatus: extruder
+    vessel: "CLEXTRAL Ev025 twin-screw, six zones 30, 90, 120, 140, 150, 160 C, cooling die"
+    time_convention: unstated
+    hold_min: "0.4167 (25 s) is the bundle's assumption; no residence time printed"
+    cooling: {method: "cooling die (product to 60 C)", time_min: null}
+    quotes:
+      - text: "temperature profile set at 30, 90, 120, 140, 150, and 160 ◦C from zone I to VI, respectively. A cooling die with dimensions of 30 mm × 4 mm was affixed to the extruder outlet to reduce the product’s temperature to 60 ◦C."
+        location: "2.3, PDF p. 3"
+        read_in: pdf
+    confidence: high
+    notes: "Zone profile, not isothermal."
+
+  - source_id: no_cook_bundles
+    pots:
+      benchmarks: [cml_cel_commercial_pbma_Foods2023, external_validation_liu_2023_ppi_offnote_baseline, pea_isolate_40C_PratapSingh2021, soy_isolate_40C_PratapSingh2021, resconi_2023_pbma_beef_identity_benchmark, external_validation_bi_2020_raw_pea_hexanal]
+      not_scored_synthetic: [pea_isolate_ribose_cysteine_100C_45min_Internal2026, soy_isolate_ribose_cysteine_100C_45min_Internal2026]
+    apparatus: "not applicable"
+    time_convention: "not applicable"
+    notes: >-
+      Commercial products (Fu 2023 CML/CEL; Hernandez 2023 PBMA, cooked on a 200 C skillet to 71 C core,
+      no time printed) or unheated powders whose 40 C / 10 min is the HS-SPME incubation (Singh 2021,
+      Liu 2023). Their temp_C / time_min are proxies, so no thermal programme can be built from
+      evidence. _Internal2026 snapshots are legacy-model output and not scored (panel.is_scored_bundle).
+    read_in: bundle
+
+# =====================================================================================================
+# 4. TRUNK AND ACRYLAMIDE FIT SOURCES (lower priority)
+# =====================================================================================================
+  - source_id: martins2005_extraction
+    pdf: martins2005.pdf
+    citation: "Martins & van Boekel 2005, Food Chem. 90:257-269 (glucose + glycine kinetic model)"
+    apparatus: oil bath
+    vessel: "screw-capped glass tubes (Schott, 16 x 160 mm)"
+    fill_mL: 10
+    vessel_material: glass
+    time_convention: unstated
+    best_reading: "includes_come_up, ~2-3 min (sibling brands2001: same Wageningen lab, same Schott 16 x 160 mm tubes, same oil bath)"
+    come_up_min: "2-3 (from sibling brands2001, at 120 C)"
+    cooling: {method: "immediately cooled in ice water", time_min: null}
+    quotes:
+      - text: "heated at 80, 90, 100, 110 and 120 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken and immediately cooled in ice water, prior to analyses."
+        location: "2.1 Preparation of reaction mixtures, PDF p. 3"
+        read_in: pdf
+      - text: "The drop in temperature upon cooling was such that the reaction virtually stops by this procedure."
+        location: "2.1 Preparation of reaction mixtures, PDF p. 3"
+        read_in: pdf
+      - text: "The reported heating times include the heating-up period of ∼2-3 min. After a given heating time, samples were cooled in ice water"
+        location: "SIBLING brands2001.pdf (Brands & van Boekel 2001, JAFC 49:4667), Heating Experiments, PDF p. 2 -- 120 C, same tubes, oil bath"
+        read_in: pdf
+    confidence: "high (wording); medium (sibling transfer)"
+    notes: "martins2005b (pH series, 100 C) uses the same tubes; its pH-stat runs used a septum-sampled vessel with the temperature monitored by a Consort R305."
+
+  - source_id: blank1997_extraction
+    pdf: blank1997.pdf
+    citation: "Blank et al. 1997, J. Agric. Food Chem. 45:2642-2648"
+    apparatus: "unstated here; oil bath per the cited procedure (Blank & Fay 1996)"
+    vessel: "15 mL Pyrex tube, screw cap (blank1996)"
+    fill_mL: "5 (blank1996)"
+    time_convention: unstated
+    hold_min: 60
+    cooling: {method: "'cooled rapidly' (1997); 'rapid cooling with tap water' (1996)", time_min: null}
+    quotes:
+      - text: "The precursors were allowed to react in water and phosphate- and malonate-buffered solutions (0.2 M, Na2HPO4, Na2H2C3O4) at different pHs (5, 6, 7) at 90 °C for 1 h. After the reaction mixture was cooled rapidly"
+        location: "Quantification Experiments, PDF p. 3 ('as recently described (Blank and Fay, 1996)')"
+        read_in: pdf
+      - text: "The tube was sealed with a screw cap and heated at 90 °C for 1 h in an oil bath while stirring with a magnetic stirrer. The reaction was stopped by rapid cooling with tap water."
+        location: "SIBLING blank1996.pdf (JAFC 44:531), sample preparation"
+        read_in: pdf
+    confidence: high
+
+  - source_id: kocadagli2016jafc_extraction (and kocadagli2016nacl)
+    pdf: Kocada2016.pdf
+    citation: "Kocadağlı & Gökmen 2016, JAFC (glucose +/- NaCl caramelisation)"
+    apparatus: oil bath
+    vessel: "glass tubes, PTFE-sealed screw caps; 0.5 mL of 0.1 M solution freeze-dried in the tube"
+    time_convention: unstated
+    hold_min: "up to 30 (160, 180, 200 C)"
+    cooling: {method: "'After cooling the tubes to room temperature' (unspecified)", time_min: null}
+    quotes:
+      - text: "The tubes were screwed with PTFE sealed caps and heated in an oil bath (Memmert, Germany) at 160, 180 and 200 °C for up to 30 min in duplicates. After cooling the tubes to room temperature"
+        location: "manuscript lines 125-128, PDF p. 8"
+        read_in: pdf
+    confidence: high
+    notes: "Dry solid in a glass tube: come-up probably 1-2 min (estimate) against sampling times of minutes -- relevant at early points."
+
+  - source_id: kocadagli2016foodchem_extraction
+    pdf: Kocadagli2016.pdf
+    citation: "Kocadağlı & Gökmen 2016, Food Chem. (glucose / wheat flour, 10.1016/j.foodchem.2016.05.150)"
+    apparatus: "not recoverable here -- the accepted-manuscript PDF uses a custom font encoding pdftotext cannot read"
+    vessel: "glass tube, PTFE-sealed screw cap, 100 mg ground dough (dossier sec. 1)"
+    time_convention: unstated
+    hold_min: "up to 20 (160, 180, 200 C)"
+    quotes: []
+    confidence: low
+    notes: "Dossier records no heating medium; presumably the same oil bath as the JAFC paper (inference). Needs a raster read if it matters."
+
+  - source_id: knol2005_extraction
+    pdf: knol2005.pdf
+    citation: "Knol et al. 2005, J. Agric. Food Chem. 53:6133-6139 (glucose + asparagine)"
+    apparatus: oil bath
+    vessel: "hermetically closed screw-capped glass tubes (Schott, 16 x 160 mm), immersed up to the cap"
+    fill_mL: 10
+    vessel_material: glass
+    time_convention: unstated
+    best_reading: "includes_come_up (time from immersion; same Wageningen tubes as brands2001's 2-3 min heating-up period; the claeys2005 dossier notes Knol makes no heat-up correction)"
+    come_up_estimate: "2-4 min at 160-200 C (estimate) -- comparable to the 1, 2, 4 min sampling points"
+    cooling: {method: "immediately cooled in ice", time_min: null}
+    quotes:
+      - text: "Samples (10 mL) were heated in hermetically closed screw-capped glass tubes (Schott, 16 × 160 mm) at 120, 140, 160, 180, and 200 °C in an oil bath. The tubes were immersed in the oil up to the cap."
+        location: "Preparation of Reaction Mixtures, PDF p. 2"
+        read_in: pdf
+      - text: "At predetermined heating times (0, 1, 2, 4, 9, 15, 30, and 45 min), samples were taken and immediately cooled in ice"
+        location: "same paragraph"
+        read_in: pdf
+    confidence: high
+
+  - source_id: claeys2005_extraction
+    pdf: claeys2005.pdf
+    citation: "Claeys, De Vleeschouwer & Hendrickx 2005, Biotechnol. Prog. 21:1525-1530"
+    apparatus: oil bath
+    vessel: "custom tight inox reactor tubes, 8 mm x 100 mm"
+    vessel_material: "stainless steel"
+    time_convention: includes_come_up
+    come_up_min: "measured (thermocouple, every 2 s) and integrated in the fit; profile not tabulated"
+    cooling: {method: "immediately cooled in ice water", time_min: null}
+    quotes:
+      - text: "After heating in a thermostated oil bath at temperatures between 140 and 200 °C, samples were immediately cooled in ice water to stop any further reaction. Since samples went trough [sic] a heating and cooling phase, the temperature of the samples"
+        location: "Materials and Methods, PDF p. 1"
+        read_in: pdf
+      - text: "was registered at regular time intervals (2 s) using thermocouples (type T, Thermo Electric) connected to a datalogger (Ellab, TM 9616)."
+        location: "same paragraph"
+        read_in: pdf
+    confidence: high
+    notes: "Published k and Ea are already fitted on the measured non-isothermal profile; re-integrating these pots isothermally would double-count nothing but would misplace the come-up."
+
+  - source_id: devleeschouwer2006_extraction (+ devleeschouwer2007 = devleeschouwer2008b.pdf, devleeschouwer2008, devleeschouwer2009, devleeschouwer2009b)
+    pdf: [devleeschouwer2006.pdf, devleeschouwer2008b.pdf, devleeschouwer2008.pdf, devleeschouwer2009.pdf, devleeschouwer2009b.pdf]
+    apparatus: oil bath
+    vessel: "hermetically closed custom stainless-steel (inox) reactor tubes, 8 mm x 100 mm; Grant UH2D thermostated oil bath"
+    vessel_material: "stainless steel"
+    time_convention: includes_come_up
+    come_up_min: "measured (type-T thermocouples, every 4 s); 2006 Figure 1 shows a typical profile; profiles 'inputted in the kinetic data analysis'"
+    cooling: {method: "immediately cooled in ice water (cool-down also logged)", time_min: null}
+    quotes:
+      - text: "Heat treatment was performed in a thermostated oil bath (UH2D, Grant Instruments Ltd., Cambridge, England) at 120, 140, 160, 180, and 200 °C."
+        location: "devleeschouwer2006, Heat Treatment, PDF p. 2 (p. 7848)"
+        read_in: pdf
+      - text: "During the reaction and subsequent cooling phase, the temperature of the samples was registered within the closed reactor tubes at regular time intervals (4 s) using the[rmocouples]"
+        location: "devleeschouwer2006, PDF p. 2; 'An example of a typical temperature profile is given in Figure 1'"
+        read_in: pdf
+      - text: "The registered temperature-time profiles were inputted in the kinetic data analysis."
+        location: "devleeschouwer2009 (Food Chem. 114:535), 2.3 Heat treatment"
+        read_in: pdf
+    confidence: high
+    notes: "Same rig in all five papers. Fig. 1 (2006) would give a digitisable come-up curve if a programme for these tubes is wanted."
+
+# =====================================================================================================
+# 5. OTHER COME-UP STATEMENTS FOUND IN A CORPUS-WIDE SCAN (not fit/panel pots; for calibrating estimates)
+# =====================================================================================================
+corpus_scan:
+  method: "all 431 PDFs in data/articles, pdftotext | grep for 'Roth, Karlsruhe|Germany', 'raising the temperature', 'come-up', 'heating-up time/period', 'heat-up time', 'warm-up time'"
+  roth_autoclave_hits: [hofmann1995.pdf, hofmann1997.pdf, hofmann1998.pdf]   # no other paper on disk uses the Roth autoclave
+  come_up_statements:
+    - {pdf: brands2001.pdf, text: "The reported heating times include the heating-up period of ∼2-3 min.", note: "Schott 16x160 tubes, oil bath, 120 C (Wageningen)"}
+    - {pdf: agcam2022.pdf, text: "Come-up time for the target temperature was not included into the treatment times.", note: "thermocouple in a representative tube, oil bath 90-120 C"}
+    - {pdf: pandit2006.pdf, text: "The come-up time for the capillary tube, filled with mashed potato, to reach the set temperature level, was between 12 and 14 s.", note: "capillary in oil bath"}
+    - {pdf: kim1996.pdf, text: "come-up time about 45 sec", note: "microwave, ham cylinder, 121 C"}
+    - {pdf: Chen2022.pdf, text: "The heating treatment time included approximately 5 min of come-up time and 10 min of holding time.", note: "water bath, 95 C"}
+    - {pdf: jousse2002.pdf, text: "the maximum temperature is not attained immediately, which results in an additional “lag phase” at short time, which is particularly apparent at 140 °C.", note: "fit corrected with a temperature-rise equation"}
+    - {pdf: nguyen2016.pdf, text: "fit of the kinetic model ... heated at 120 °C and 130 °C, respectively, including the heating-up time.", note: "figure captions"}
+
+# 2026-10-28, added after the B64 verdict (owner's download): a fourth Munich-laboratory paper with the ramp wording.
+added_after_b64_verdict:
+  - source_id: engel2004_extraction
+    pdf: engel2004.pdf
+    citation: "Engel & Schieberle 2004, Czech J. Food Sci. 22:S120-S122 (10.17221/10632-CJFS)"
+    pots: {fit_systems: [], benchmarks: []}
+    apparatus: autoclave
+    vessel: "laboratory autoclave (type not stated)"
+    fill_mL: 7
+    time_convention: ramp_only
+    ramp_min: 20
+    ramp_from_C: 20
+    hold_min: null
+    cooling: {method: unstated, time_min: null}
+    quotes:
+      - text: "reacted with 2-13C-fructose (0.7 mmol) in a laboratory autoclave by raising the temperature within 20 min from 20°C to 145°C."
+        location: "Experimental, Model reactions, p. S120"
+        read_in: pdf
+    confidence: high
+    notes: "Same laboratory as Hofmann 1995-1998; supports the ramp-only reading of Hofmann 1998's '20 min at 145 °C' without settling it."
