@@ -160,6 +160,27 @@ def _drift(job: Dict[str, Any]):
     return job.get("drift") or engine.core_ph_drift()
 
 
+class PotTimeout(RuntimeError):
+    """A pot integration over its wall-clock limit (a stiff corner of parameter space)."""
+
+
+def run_pot_limited(job: Dict[str, Any], seconds: int = 120) -> Dict[str, Any]:
+    """``run_pot`` under a wall-clock limit (2026-10-30: one stiff pot stalled a fit's pool for an hour). Unix
+    alarm, so it works in forked workers; on time-out it raises PotTimeout, which a fit counts as a failed run."""
+    import signal
+
+    def _alarm(signum, frame):
+        raise PotTimeout(f"pot {job.get('pot')} exceeded {seconds} s")
+
+    previous = signal.signal(signal.SIGALRM, _alarm)
+    signal.alarm(int(seconds))
+    try:
+        return run_pot(job)
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, previous)
+
+
 def predict(row, job: Dict[str, Any], result: Dict[str, Any]) -> float:
     """The row's observable from the predicted state, by its observation operator."""
     drift, spec = _drift(job), buffer_of({"buffer": job["buffer"]}, job["label_ph"])

@@ -98,12 +98,14 @@ def install(job: Dict[str, Any]) -> None:
 def run_task(job: Dict[str, Any]):
     install(job)
     try:
-        return probe.run_pot(job)
+        return probe.run_pot_limited(job, POT_SECONDS)
     except Exception as exc:  # noqa: BLE001 - counted; its rows become failed residuals
         return {"failed": f"{type(exc).__name__}: {exc}"}
 
 
 FAILURES: List[str] = []
+#: wall-clock limit per pot integration (normal pots take 1-3 s; a stiff corner of parameter space can hang)
+POT_SECONDS = 120
 
 
 def make_raw_many(jobs_by_pot, keys):
