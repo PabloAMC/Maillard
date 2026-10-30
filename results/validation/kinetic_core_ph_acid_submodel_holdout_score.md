@@ -4,6 +4,15 @@
 
 | arm | run | species | n | mean | RMS | within |
 |---|---|---|---|---|---|---|
+| A | phstat_6.8 | FA | 10 | -0.59 | 0.67 | NO |
+| A | phstat_6.8 | AA | 10 | -0.17 | 0.29 | yes |
+| A | drift_4.8 | AA | 10 | -0.21 | 0.23 | yes |
+| A | drift_5.5 | FA | 24 | -0.34 | 0.34 | NO |
+| A | drift_5.5 | AA | 15 | -0.16 | 0.17 | yes |
+| A | drift_6.0 | FA | 15 | -0.19 | 0.27 | yes |
+| A | drift_6.0 | AA | 18 | -0.19 | 0.21 | yes |
+| A | drift_7.5 | FA | 14 | -0.42 | 0.46 | NO |
+| A | drift_7.5 | AA | 12 | -0.02 | 0.13 | yes |
 | B | phstat_6.8 | FA | 10 | -0.53 | 0.69 | NO |
 | B | phstat_6.8 | AA | 10 | -0.17 | 0.27 | yes |
 | B | drift_4.8 | AA | 10 | -0.11 | 0.14 | yes |
