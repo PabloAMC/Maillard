@@ -8,12 +8,19 @@ H2S that MFT (from norfuraneol) and FFT (from furfural) need: the cysteine Strec
 constants are fitted together on the deoxyosone and thiol tables, with the H2S loss free. Engine state as sub-model 3
 (route switches B58 / B59b / B59a / B61 on, sub-model 1's off, inline coupling).
 
-Coordinates: log10 multipliers on the shipped k_ref of k_dpo_ddp, k_dpo_c2c3, k_dpo_nf, k_nf_mft, k_fur_fft and
-k_h2s_loss, and the norfuraneol -> MGO share. Rows: both tables less glyoxal, the hexose + cysteine pots (MFT is
-structurally zero until the hexose -> C5 entry exists) and the hold-out (Zhai 2023 JAFC's 140 C pots, both tables).
+After its design review (thiol prereg sec. 5): coordinates are log10 multipliers on the shipped k_ref of k_dpo_ddp
+(down to 10^-8), k_dpo_c2c3, k_dpo_nf, k_nf_mft, BOTH FFT branches together (k_fur_fft, k_fur_fft_hs), k_h2s_loss and
+k_mft_decay (``--mft-decay-cap``: the CF-013-capped rival, at most 1/5 of the shipped loss), and the norfuraneol ->
+MGO share. The B59a Strecker H2S share is held at a registered CR-11 alternative (``--strecker-share``).
+Rows: both tables, deduplicated; OUT as declared hold-outs (FIT_HOLDOUT_DECLARATION): every Zhai 140 C pot, Yiltirak,
+Hofmann T1 and T2 pH 3 / 7; SCORE-ONLY (no coordinate moves them): Kumazawa survival, Hofmann T8 and the T10
+thiamine pot; dropped: glyoxal and the hexose + cysteine pots. Thiols semi-quantitative per figure with tau = inf
+(CR-15), Zhou's thiols and MGO a per-paper scale (CF-014, CF-060), the quinoxalines tau 0.3 (CR-16). Extra noise
+per data set x observable from within-series scatter, with a declared 0.10 dex floor where it cannot be estimated.
+2-Acetylthiazole in Zhou 2023's ARP + Cys pot (11.70 ug/L) is scored as a falsifier, not fitted.
 
-    python scripts/generators/fit_joint_deoxyosone_thiol.py [--budget N] [--rounds N] [--lopo]
-Writes results/validation/kinetic_core_joint_deoxyosone_thiol_fit.{json,md}.
+    python scripts/generators/fit_joint_deoxyosone_thiol.py --strecker-share 0.042|0.080 [--mft-decay-cap] [--lopo]
+Writes results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s<share>[_capped].{json,md}.
 """
 from __future__ import annotations
 
@@ -40,33 +47,54 @@ import fit_deoxyosone_submodel as sm3  # noqa: E402
 from fit_ph_acid_submodel import pooled_noise, raw_table  # noqa: E402
 
 TABLES = ("deoxyosone_submodel", "thiol_submodel")
-MULTIPLIED = ("k_dpo_ddp", "k_dpo_c2c3", "k_dpo_nf", "k_nf_mft", "k_fur_fft", "k_h2s_loss")
-START = {"k_dpo_ddp": -1.0, "k_dpo_c2c3": 1.5, "k_dpo_nf": 0.0, "k_nf_mft": 0.0, "k_fur_fft": 0.0, "k_h2s_loss": 0.0}
+#: coordinate -> the parameter keys its multiplier moves
+MULTIPLIED = {"k_dpo_ddp": ("k_dpo_ddp",), "k_dpo_c2c3": ("k_dpo_c2c3",), "k_dpo_nf": ("k_dpo_nf",),
+              "k_nf_mft": ("k_nf_mft",), "fft_formation": ("k_fur_fft", "k_fur_fft_hs"), "k_h2s_loss": ("k_h2s_loss",),
+              "k_mft_decay": ("k_mft_decay",)}
+START = {"k_dpo_ddp": -1.0, "k_dpo_c2c3": 1.5, "k_dpo_nf": 0.0, "k_nf_mft": 0.0, "fft_formation": 0.0,
+         "k_h2s_loss": 0.0, "k_mft_decay": -0.3}
+LOWER = {"k_dpo_ddp": -8.0}
+#: declared hold-outs (FIT_HOLDOUT_DECLARATION.md) and score-only rows (design review B3, S3)
+HOLDOUT_LEDGER_PREFIXES = ("yiltirak2026", "hofmann1998_t1_", )
+HOLDOUT_POTS = ("hofmann1998_cys_ribose_ph3", "hofmann1998_cys_ribose_ph7")
+SCORE_ONLY_LEDGER_PREFIXES = ("kumazawa2003", "hofmann1998_t8_")
+SCORE_ONLY_POTS = ("hofmann1998_thiamin_ph5",)
+NOISE_FLOOR_DEX = 0.10
+#: the falsifier (design review B4): Zhou 2023 Table 1, ARP + Cys 20 + 20 mM, 120 C, 60 min, pH 7, unbuffered
+ACTZ_FALSIFIER = {"pot": "zhou2023_arp_cys_ph7_actz", "ledger_id": "zhou2023 T1 (B60 fit row zhou_pH7_ACTZ)",
+                  "t_c": 120.0, "label_ph": 7.0, "charge": {"ARP": 20.0, "Cys": 20.0}, "dropped": [], "times": [0.0, 60.0],
+                  "buffer": "none (water)", "notes": [], "measured_ug_l": 11.70}
 HEXOSES = ("Glc", "Fru")
 OUT = data_paths.VALIDATION_DIR / "kinetic_core_joint_deoxyosone_thiol_fit"
 POT_SECONDS = 120
 FAILURES: List[str] = []
 
 
-def coordinates():
+def coordinates(mft_decay_cap: bool):
     keys = ["mgo_share_nf"] + [f"offset_{k}" for k in MULTIPLIED]
     kinds = ["acid_yield"] + ["log10_offset"] * len(MULTIPLIED)
-    lower = [0.0] + [-4.0] * len(MULTIPLIED)
-    upper = [1.0] + [3.0] * len(MULTIPLIED)
-    start = [0.0142] + [START[k] for k in MULTIPLIED]
+    lower = [0.0] + [LOWER.get(k, -4.0) for k in MULTIPLIED]
+    upper = [1.0] + [math.log10(0.2) if (k == "k_mft_decay" and mft_decay_cap) else 3.0 for k in MULTIPLIED]
+    start = [0.0142] + [min(START[k], u) for k, u in zip(MULTIPLIED, upper[1:])]
     return tuple(keys), tuple(kinds), np.array(lower), np.array(upper), np.array(start, dtype=float)
 
 
 def trial(theta, keys) -> Dict[str, Any]:
     t = dict(zip(keys, map(float, theta)))
     base = engine.core_parameters(engine.SULFUR)
-    k_ref = {k: base[k].k_ref * 10.0 ** t[f"offset_{k}"] for k in MULTIPLIED}
+    k_ref = {key: base[key].k_ref * 10.0 ** t[f"offset_{name}"] for name, keys_ in MULTIPLIED.items() for key in keys_}
     routes = {"k_tdp_mgo_100c_ph5": 0.0, "ea_tdp_mgo_kj_mol": 100.0, "k_pent_mgo_100c_ph5": 0.0, "ea_pent_mgo_kj_mol": 100.0}
     return {"k_ref": k_ref, "routes": routes, "mgo_share": t["mgo_share_nf"]}
 
 
+STRECKER_SHARE = 0.042
+
+
 def run_task(job):
     sm3.install(job)
+    import dataclasses as _dc
+    from src.kinetic_core import parameters_sulfur as _ps
+    _ps.STRECKER_SULFUR = _dc.replace(_ps.STRECKER_SULFUR, h2s_share=float(job.get("strecker_share", STRECKER_SHARE)))
     try:
         return probe.run_pot_limited(job, POT_SECONDS)
     except Exception as exc:  # noqa: BLE001 - counted; its rows become failed residuals
@@ -75,6 +103,36 @@ def run_task(job):
 
 def key_of(row) -> str:
     return f"{row.table}:{row.pot}"
+
+
+def method_of(row) -> str:
+    """The quinoxalines (deoxyosone table) keep sub-model 3's per-figure tau 0.3 (CR-16); the thiol table's
+    semi-quantitative rows are per-figure tau = inf (CR-15, CF-065); Zhou's thiols and MGO a per-paper scale."""
+    if row.ledger_id.startswith("zhou") and row.species in ("MFT", "FFT", "MFTD", "FFTD", "FUR", "MGO"):
+        return "zhou_free"
+    if row.method in ("semi_quantitative", "relative"):
+        return "semi_figure" if row.table == "deoxyosone_submodel" else "zhou_free"
+    return row.method
+
+
+def noise_with_floor(model, raw_residuals, rows, n_constants=0):
+    """pooled_noise, and NOISE_FLOOR_DEX (declared; CF-016 / CF-055 between-run scatter) for every series whose
+    noise cannot be estimated (design review S1: Garching's 10 % sd would otherwise dominate the cost)."""
+    out = pooled_noise(model, raw_residuals, rows, n_constants)
+    for row in rows:
+        out.setdefault(model.series_of(row), NOISE_FLOOR_DEX)
+    return out
+
+
+def dedupe(rows):
+    """Rows printed in both tables (design review B7) counted once: by (ledger id, species, time, value)."""
+    seen, out = set(), []
+    for r in rows:
+        k = (r.ledger_id, r.species, float(r.t_min), round(float(r.value), 6))
+        if k not in seen:
+            seen.add(k)
+            out.append(r)
+    return tuple(out)
 
 
 def make_raw_many(jobs, keys):
@@ -100,12 +158,31 @@ def make_raw_many(jobs, keys):
     return raw_many
 
 
+def actz_falsifier(theta, start, keys) -> Dict[str, float]:
+    """2-Acetylthiazole in Zhou 2023's ARP + Cys pot at the optimum and at the start (design review B4)."""
+    from src.kinetic_core.observations import amount_in
+
+    out = {}
+    for label, x in (("start", start), ("optimum", theta)):
+        job = dict(ACTZ_FALSIFIER, **trial(x, keys), strecker_share=STRECKER_SHARE)
+        res = run_task(job)
+        out[f"{label}_ug_l"] = float("nan") if "failed" in res else amount_in("ug_L", "ACTZ", res["states"][-1]["ACTZ"])
+    out["log10_ratio"] = math.log10(max(out["optimum_ug_l"], 1e-30) / ACTZ_FALSIFIER["measured_ug_l"])
+    return out
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     parser.add_argument("--budget", type=int, default=200)
     parser.add_argument("--rounds", type=int, default=2)
     parser.add_argument("--lopo", action="store_true")
+    parser.add_argument("--strecker-share", type=float, choices=(0.042, 0.080), default=0.042)
+    parser.add_argument("--mft-decay-cap", action="store_true")
     args = parser.parse_args(argv)
+    global STRECKER_SHARE, OUT
+    STRECKER_SHARE = float(args.strecker_share)
+    OUT = data_paths.VALIDATION_DIR / (f"kinetic_core_joint_deoxyosone_thiol_fit_s{args.strecker_share:.3f}"
+                                       + ("_capped" if args.mft_decay_cap else ""))
     t0 = time.time()
     sulfur.PH_COUPLING = "inline"
     predictable = set(sulfur.SULFUR_STATE_KEYS)
@@ -118,18 +195,27 @@ def main(argv=None) -> int:
             jobs[f"{table}:{j['pot']}"] = j
             pots_all[f"{table}:{j['pot']}"] = pots[j["pot"]]
         rows_all += [r for r in rows if r.species in predictable]
-    holdout = tuple(r for r in rows_all if key_of(r) in jobs and r.ledger_id.startswith(sm3.HOLDOUT_LEDGER_PREFIX)
-                    and sm3.HOLDOUT_POTS_SUBSTRING in r.pot)
-    data = tuple(r for r in rows_all if key_of(r) in jobs and r not in holdout)
-    keys, kinds, lower, upper, start = coordinates()
+    rows_all = list(dedupe(r for r in rows_all if key_of(r) in jobs))
+
+    def is_holdout(r):
+        return ((r.ledger_id.startswith("zhai2023") and float(pots_all[key_of(r)]["t_c"]) >= 140.0)
+                or r.ledger_id.startswith(HOLDOUT_LEDGER_PREFIXES) or r.pot in HOLDOUT_POTS)
+
+    def is_score_only(r):
+        return r.ledger_id.startswith(SCORE_ONLY_LEDGER_PREFIXES) or r.pot in SCORE_ONLY_POTS
+
+    holdout = tuple(r for r in rows_all if is_holdout(r))
+    score_only = tuple(r for r in rows_all if not is_holdout(r) and is_score_only(r))
+    data = tuple(r for r in rows_all if not is_holdout(r) and not is_score_only(r))
+    keys, kinds, lower, upper, start = coordinates(args.mft_decay_cap)
     raw_many = make_raw_many(jobs, keys)
 
     def raw(theta, rows):
         return raw_many([theta], rows)[0]
 
     model = fitting.MeasurementModel(
-        series_of=lambda r: f"{r.ledger_id}|{r.species}" if sm3.method_of(r) in ("semi_figure", "zhou_free") else r.series,
-        sigma_of=lambda r: r.sigma, method_of=sm3.method_of, scale_tau=sm3.SCALE_TAU)
+        series_of=lambda r: f"{r.ledger_id}|{r.species}" if method_of(r) in ("semi_figure", "zhou_free") else r.series,
+        sigma_of=lambda r: r.sigma, method_of=method_of, scale_tau=sm3.SCALE_TAU)
 
     def make_problem(m, rows=data):
         return fitting.Problem(keys=keys, kinds=kinds, lower=lower, upper=upper, rows=rows,
@@ -139,7 +225,7 @@ def main(argv=None) -> int:
 
     raw_start = raw(start, data)
     best, final_model = fitting.fit_with_series_noise(make_problem, model, raw, start, budget=args.budget,
-                                                      rounds=args.rounds, estimator=pooled_noise)
+                                                      rounds=args.rounds, estimator=noise_with_floor)
     problem = make_problem(final_model)
     lap = fitting.laplace(problem, best.theta)
     raw_best = raw(best.theta, data)
@@ -155,7 +241,11 @@ def main(argv=None) -> int:
         "fit": best.as_dict(keys), "laplace": lap, "series_extra_noise": dict(final_model.extra_noise),
         "failed_pot_runs": len(FAILURES), "failures_sample": FAILURES[:10],
         "raw_at_start": raw_table(data, raw_start), "raw_at_optimum": raw_table(data, raw_best),
+        "strecker_share": STRECKER_SHARE, "mft_decay_cap": bool(args.mft_decay_cap),
         "holdout_raw_at_optimum": raw_table(holdout, raw(best.theta, holdout)) if holdout else {},
+        "holdout_raw_at_start": raw_table(holdout, raw(start, holdout)) if holdout else {},
+        "score_only_raw_at_optimum": raw_table(score_only, raw(best.theta, score_only)) if score_only else {},
+        "actz_falsifier": actz_falsifier(best.theta, start, keys),
         "diagnostics_whitened": fitting.diagnostics(problem, best.theta, {
             "paper": sm3.paper_of, "data_set": lambda r: r.ledger_id, "observable": lambda r: r.species,
             "temperature_C": lambda r: float(pots_all[key_of(r)]["t_c"]),
@@ -170,7 +260,7 @@ def main(argv=None) -> int:
             kept = tuple(r for r in data if sm3.paper_of(r) != paper)
             held = tuple(r for r in data if sm3.paper_of(r) == paper)
             f_, _m = fitting.fit_with_series_noise(lambda mm: make_problem(mm, kept), model, raw, best.theta,
-                                                   budget=args.budget // 2, rounds=1, estimator=pooled_noise)
+                                                   budget=args.budget // 2, rounds=1, estimator=noise_with_floor)
             out[paper] = {"rows_held": len(held), "theta": dict(zip(keys, map(float, f_.theta))),
                           "shift_sigma": dict(zip(keys, map(float, (f_.theta - best.theta) / sig))),
                           "held_out_raw": raw_table(held, raw(f_.theta, held))}
@@ -189,9 +279,18 @@ def main(argv=None) -> int:
               "| data set \\| observable | n | start mean / RMS | optimum mean / RMS |", "|---|---|---|---|"]
     lines += [f"| {k} | {v['n']} | {report['raw_at_start'][k]['mean']:+.2f} / {report['raw_at_start'][k]['rms']:.2f} | "
               f"{v['mean']:+.2f} / {v['rms']:.2f} |" for k, v in report["raw_at_optimum"].items()]
+    fa = report["actz_falsifier"]
+    lines += ["", "## Falsifier: 2-acetylthiazole, Zhou 2023 ARP + Cys pH 7 (measured 11.70 ug/L; not fitted)", "",
+              f"- predicted at the start {fa['start_ug_l']:.4g} ug/L, at the optimum {fa['optimum_ug_l']:.4g} ug/L "
+              f"(log10 ratio at the optimum {fa['log10_ratio']:+.2f})"]
     if report["holdout_raw_at_optimum"]:
-        lines += ["", "## Hold-out (Zhai 2023 JAFC, 140 C), at the optimum", ""]
-        lines += [f"- {k}: n {v['n']}, mean {v['mean']:+.2f}, RMS {v['rms']:.2f}" for k, v in report["holdout_raw_at_optimum"].items()]
+        lines += ["", "## Declared hold-outs (every Zhai 140 C pot, Yiltirak, Hofmann T1 / T2 pH 3 / 7), scored once", "",
+                  "| data set \\| observable | n | start mean / RMS | optimum mean / RMS |", "|---|---|---|---|"]
+        lines += [f"| {k} | {v['n']} | {report['holdout_raw_at_start'][k]['mean']:+.2f} / {report['holdout_raw_at_start'][k]['rms']:.2f} | "
+                  f"{v['mean']:+.2f} / {v['rms']:.2f} |" for k, v in report["holdout_raw_at_optimum"].items()]
+    if report["score_only_raw_at_optimum"]:
+        lines += ["", "## Score-only rows at the optimum", ""]
+        lines += [f"- {k}: n {v['n']}, mean {v['mean']:+.2f}, RMS {v['rms']:.2f}" for k, v in report["score_only_raw_at_optimum"].items()]
     if "leave_one_paper_out" in report:
         lines += ["", "## Leave one paper out", ""]
         for paper, res in report["leave_one_paper_out"].items():

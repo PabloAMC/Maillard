@@ -6281,3 +6281,165 @@ entries:
     condition_quote: "300 mg amino acid + 36 uL water (12 % moisture level) in an enclosed Parr vessel"
     flags: [ph_not_measured]
     note: "Borderline trunk: pyrazines from hydroxy-amino-acid fragmentation without sugar (aminoacetone / aminoacetaldehyde). FID with hexadecane IS, RF assumed 1; no replicates. 300 C arms are pyrolysis. Useful for aldehyde-addition / cross-condensation ratios only. Condition quote is dossier paraphrase."
+  - id: hofmann1999_fig10_xylose_ala_c2_c4_fragments
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "xylose 6 mmol + L-alanine 6 mmol in 4 mL buffer (~1.2-1.5 M each, final volume not stated)"
+    medium: "0.5 M phosphate pH 7.0, refluxed open to air; derivatisation after cooling (no trapping agent in the pot)"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 180]
+    species: ["glyoxal", "methylglyoxal", "diacetyl", "glycolaldehyde", "hydroxyacetone", "acetoin", "furfural"]
+    kind: time_series
+    location: "Fig. 10 (dossier sec. 4.2 digitisation, 5-180 min); text p. 118 (glyoxal 59 ug/mmol at 5 min, methylglyoxal 120 ug/mmol at 180 min); Table 3 back-calculation for 5 and 60 min (sec. 4.6)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine"
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, concentration_basis_inferred, internal_inconsistency]
+    note: "THE ONLY GLYCOLALDEHYDE (engine HA) TIME COURSE IN THE CORPUS; methylglyoxal from a pentose by a non-Jiangnan lab. ug per mmol starting xylose; MGO 0.35 -> 1.67 umol/mmol (5 -> 180 min), glycolaldehyde peak 0.12-0.13 umol/mmol at 10 min then ~0.05 plateau. GO/MGO/glycolaldehyde/hydroxyacetone use 13C4 labelled HOMOLOGUES (Rf 0.96-0.99) -> calibrated; isotopologue SIDA only for diacetyl and acetoin. Simulable with declared assumptions: reflux ~100-103 C (not stated), molarity from 6 mmol in ~4.6-5 mL. Diacetyl series disagrees 1.4-3.6x with Table 3 (internal_inconsistency). OPD (2 umol) may be limiting in early samples rich in osones."
+  - id: hofmann1999_fig9_glucose_ala_c2_c4_fragments
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "glucose 6 mmol + L-alanine 6 mmol in 4 mL buffer (~1.2-1.5 M each)"
+    medium: "0.5 M phosphate pH 7.0, refluxed open to air; derivatisation after cooling"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 180]
+    species: ["glyoxal", "methylglyoxal", "diacetyl", "glycolaldehyde", "hydroxyacetone", "acetoin", "HMF"]
+    kind: time_series
+    location: "Fig. 9 (dossier sec. 4.3 digitisation); text p. 117 (glyoxal 98 ug/mmol at 10 min; 180-min ratios); Table 2 back-calculation (sec. 4.6)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine"
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, concentration_basis_inferred, internal_inconsistency]
+    note: "Hexose twin of the xylose pot: MGO 0.18 -> 1.62 umol/mmol (10 -> 180 min), glycolaldehyde rising to ~0.30 umol/mmol, hydroxyacetone ~2.9 umol/mmol at 180 min. 0-20 ug/mmol cluster at 10-40 min read +-1. Diacetyl disagrees ~2x with Table 2."
+  - id: hofmann1999_fig5_xylose_ala_deoxypentosones
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "xylose 6 mmol + L-alanine 6 mmol in 4 mL buffer (~1.2-1.5 M each)"
+    medium: "0.5 M phosphate pH 7.0, refluxed; OPD derivatisation after cooling, RP-HPLC-UV 320 nm, synthesised quinoxaline external standards"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 120]
+    species: ["3-deoxypentosone", "1-deoxypentosone", "2-pentosulose"]
+    kind: time_series
+    location: "Fig. 5 (dossier sec. 4.4 digitisation, +-10 ug/mmol); text p. 116-117 (maxima 1260 / 610 / ~200 ug/mmol at 10 min); Table 3 back-calculation"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine"
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, concentration_basis_inferred]
+    note: "Peak at 10 min (3-DP 9.5, 1-DP 4.7 umol/mmol), then a flat plateau from 40 min (4.6 and 1.5 umol/mmol). 1-deoxypentosone is the engine's DPO. Post-heating derivatisation (2 mmol OPD per quarter, not limiting)."
+  - id: hofmann1999_fig4_glucose_ala_deoxyhexosones
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "glucose 6 mmol + L-alanine 6 mmol in 4 mL buffer (~1.2-1.5 M each)"
+    medium: "0.5 M phosphate pH 7.0, refluxed; OPD derivatisation after cooling, RP-HPLC-UV 320 nm, external standards"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 120]
+    species: ["3-deoxyglucosone", "1-deoxyglucosone", "glucosone"]
+    kind: time_series
+    location: "Fig. 4 (dossier sec. 4.5 digitisation, +-8 ug/mmol); text p. 116 (maxima 1000 / 290 ug/mmol at 40 min, glucosone ~50 at 20 min)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine"
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, concentration_basis_inferred]
+    note: "3-DG peak 6.1 umol/mmol at 40 min; 1-DG 1.7; glucosone 0.29 at 20 min."
+  - id: hofmann1999_tab2_3_browning_activity_products
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "xylose or glucose 6 mmol + L-alanine 6 mmol in 4 mL buffer (the Fig. 4/5/9/10 pots)"
+    medium: "0.5 M phosphate pH 7.0, refluxed"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 10, 60, 120]
+    species: ["3-deoxypentosone", "3-deoxyglucosone", "glyoxal", "methylglyoxal", "glycolaldehyde", "2-pentosulose", "glucosone", "diacetyl", "furfural", "hydroxyacetone", "acetoin", "HMF"]
+    kind: other
+    location: "Tables 2 (glucose) and 3 (xylose): printed concentration (umol/mmol) x CD factor; dossier sec. 4.6 back-calculates concentrations with the Table 1 CD factors"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: ["duplicate_of: hofmann1999_fig10_xylose_ala_c2_c4_fragments", "duplicate_of: hofmann1999_fig9_glucose_ala_c2_c4_fragments", "duplicate_of: hofmann1999_fig5_xylose_ala_deoxypentosones", "duplicate_of: hofmann1999_fig4_glucose_ala_deoxyhexosones", internal_inconsistency]
+    note: "Printed-number route to the figure values at 5/10/60/120 min (BPA / CD). Reconciles with Figs. 4/5/9/10 within ~15 % for MGO, glycolaldehyde, glyoxal, furfural, 3-DP, 3-DG; supplies glycolaldehyde (xylose) at 5 min = 0.066 and MGO (xylose) at 60 min = 1.08 umol/mmol, which the figure lacks. Diacetyl does NOT reconcile (1.4-3.6x). Same pots as the figure entries, not independent data."
+  - id: hofmann1999_tab1_browning_ability_cd
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "each carbonyl 1 mmol + L-alanine 1 mmol in 5 mL buffer"
+    medium: "0.5 M phosphate pH 7.0, refluxed 15 min; colour-dilution factor by visual triangle test"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [15]
+    species: ["glycolaldehyde", "furfural", "methylglyoxal", "3-deoxypentosone", "3-deoxyglucosone", "glyoxal", "2-pentosulose", "glucosone", "diacetyl", "acetoin", "HMF", "hydroxyacetone"]
+    kind: ranking
+    location: "Table 1 (CD factors 1024 ... 1), partly from Hofmann, Bors & Stettmeier 1999 JAFC 47:379"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "Mixtures of carbohydrate degradation products (1 mmol) and L-alanine (1 mmol), dissolved in 5 ml phosphate buffer (0.5 mol/l, pH 7.0), were refluxed for 15 min"
+    flags: [ph_start_only, no_replicates]
+    note: "Visual colour-dilution thresholds, a ranking of browning ability: glycolaldehyde = furfural 1024 > MGO = 3-DP 256 > 3-DG = GO = osuloses 128 > DA 64 > acetoin 8 > HMF 2 > hydroxyacetone 1. No absorbance; not an engine observable. Qualitative support for a fast glycolaldehyde sink."
+  - id: weenen1998_fig1_dicarbonyls_sugars_alanine_opd_trapped
+    dossier: weenen1998_extraction.md
+    paper: "Weenen 1998 Food Chem 62:393"
+    lab: "Quest International (Weenen)"
+    system: "glucose, fructose, xylose, 3-deoxyglucosone or N-fructosylalanine 0.55 M + L-alanine 0.6 M, 1,2-diaminobenzene in the pot"
+    medium: "0.33 M phosphate pH 8, 30 mL, + n-butanol 15 mL with 4-methylquinoline IS (biphasic); 1 h"
+    temperature_c: [100]
+    ph: {initial: 8.0, measured_during: false, final: null}
+    time_min: [60]
+    species: ["glyoxal", "methylglyoxal", "diacetyl", "2,3-pentanedione"]
+    kind: endpoint
+    location: "Fig. 1 (bars, ug; dossier sec. 4 digitisation +-2 ug)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "Various carbohydrates (0.55 M) and the Amadori rearrangement product of glucose and alanine (0.55 M) were reacted with cyclohexyl amine (0.6 M), alanine (0.6 M) and without amine/amino acid, in an aqueous phosphate buffer solution (30 ml, 0.33 M, pH 8) and n-butanol (15 ml)"
+    flags: [trapping_agent_in_pot, secondary_source, primary_not_on_disk, ph_start_only, no_replicates, condition_uncertain]
+    note: "Summary of Weenen & Apeldoorn 1996 (RSC chapter, not on disk). Xylose + Ala: MGO ~82, GO ~27, DA ~28, 2,3-pentanedione ~42 ug. 'ug' basis not stated; as whole-pot yields MGO would be ~16x below hofmann1999 -> use only ratios (MGO xylose/glucose 1.9; xylose with/without Ala 4.8). Not simulable: in-situ OPD and a water/butanol two-phase pot."
+  - id: weenen1998_fig2_dicarbonyls_sugars_no_amine_opd_trapped
+    dossier: weenen1998_extraction.md
+    paper: "Weenen 1998 Food Chem 62:393"
+    lab: "Quest International (Weenen)"
+    system: "glucose, fructose, xylose, 3-deoxyglucosone or N-fructosylalanine 0.55 M, no added amine, 1,2-diaminobenzene in the pot"
+    medium: "0.33 M phosphate pH 8, 30 mL, + n-butanol 15 mL (biphasic); 1 h"
+    temperature_c: [100]
+    ph: {initial: 8.0, measured_during: false, final: null}
+    time_min: [60]
+    species: ["glyoxal", "methylglyoxal", "diacetyl", "2,3-pentanedione"]
+    kind: endpoint
+    location: "Fig. 2 (bars, ug; dossier sec. 4 digitisation +-2 ug)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [trapping_agent_in_pot, secondary_source, primary_not_on_disk, ph_start_only, no_replicates, condition_uncertain]
+    note: "Sugars alone give only GO and MGO (xylose: GO ~62, MGO ~17 ug); diacetyl and 2,3-pentanedione need an amine. 3-deoxyglucosone gives MGO ~57 ug with or without alanine. Ratios only."
+  - id: smuda2013_text_cited_fragment_yields
+    dossier: smuda2013_extraction.md
+    paper: "Smuda & Glomb 2013 J Agric Food Chem 61:10198 (review)"
+    lab: "Halle (Glomb)"
+    system: "cited: synthesised 3-deoxyglucosone 50 uM (Thornalley 1999); synthesised maltosone (Smuda & Glomb 2011)"
+    medium: "not given in the review"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: ["methylglyoxal", "3-deoxypentosone"]
+    kind: ratio
+    location: "p. C text and Table 1 row 3 (0.09 uM MGO from 50 uM 3-DG = 0.18 mol %); p. H text and Table 4 row 3 (maltosone -> 16 mol % 3-deoxypentosone)"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [secondary_source, cited_not_primary, primary_not_on_disk, "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "Review with no own measurements. Its mechanistic verdict (retro-aldol of dicarbonyls 'largely hypothetical'; 1-deoxyglucosone -> MGO + glyceraldehyde 'disproven by Voigt'; beta-dicarbonyl cleavage dominant) is in the dossier and bears on the engine's r_dpo_c2c3. Primaries for numbers: Voigt 2010 JAFC 58:5685, Thornalley 1999 Biochem J 344:109, Smuda & Glomb 2011 JAFC 59:13254."

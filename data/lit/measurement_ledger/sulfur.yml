@@ -8425,3 +8425,39 @@ entries:
     condition_quote: ""
     flags: []
     note: "Not transcribed beyond the Setchenov polynomial coefficients; salting-out nearly T-independent below ~250 C. Only relevant to brined matrices."
+  - id: feng2021_table2_go_mgo_da_temperature_time_ladders
+    dossier: feng2021_extraction.md
+    paper: "Feng, Zhou, Wang, Wang & Xia 2021 Food Biosci 41:100951"
+    lab: "Jiangnan (Xia S)"
+    system: "corn peptide hydrolysate 40 g + xylose 4 g (26.6 mmol) + L-cysteine 6.4 g (52.8 mmol); molarity not stated (~0.55-0.6 M xylose if 40 g hydrolysate ~ 40 mL)"
+    medium: "aqueous enzymatic corn-gluten hydrolysate, pH adjusted to 7.4, oil bath with stirring, vessel not stated; OPD derivatisation after heating"
+    temperature_c: [100, 110, 120, 130, 140]
+    ph: {initial: 7.4, measured_during: false, final: null}
+    time_min: [60, 90, 120, 150, 180]
+    species: ["glyoxal", "methylglyoxal", "diacetyl"]
+    kind: time_series
+    location: "Table 2 (printed means, RSD %, n = 3): 100-140 C x 120 min and 120 C x 60/90/120/150/180 min; calibration Table 1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The mixture was composed of corn peptide hydrolysate (40 g), xylose (4 g) and cysteine (6.4 g), and mixed by magnetic stirring. The pH was adjusted to 7.4 and heated in an oil bath at 100, 110, 120, 130 and 140 °C for 120 min while stirring."
+    flags: [matrix_food, concentrations_not_stated, vessel_not_stated, ph_start_only, condition_uncertain, concentration_basis_inferred]
+    note: "Printed table, not figure-only. MGO 120 C: 2.49/2.62/3.63/3.74/4.11 ug/mL (60-180 min); 120 min: 1.66-4.34 ug/mL (100-140 C) = 23-60 uM as free MGO, or half if the unit is quinoxaline mass (calibration footnote says x is quinoxaline concentration); MRP 2 mL diluted ~2x in derivatisation, basis not stated. Same institution as the Zhang/Cui/Ho rows but a different group (Xia). Not simulable until xylose/cysteine molarity and peptide nitrogen are fixed by declared assumption."
+  - id: feng2021_fig1_browning_a420_a294_ladders
+    dossier: feng2021_extraction.md
+    paper: "Feng, Zhou, Wang, Wang & Xia 2021 Food Biosci 41:100951"
+    lab: "Jiangnan (Xia S)"
+    system: "corn peptide hydrolysate 40 g + xylose 4 g + L-cysteine 6.4 g (as Table 2)"
+    medium: "as Table 2; absorbance dilution not stated"
+    temperature_c: [100, 110, 120, 130, 140]
+    ph: {initial: 7.4, measured_during: false, final: null}
+    time_min: [60, 90, 120, 150, 180]
+    species: ["A420", "A294"]
+    kind: time_series
+    location: "Fig. 1A-D (300 dpi raster; dossier sec. 4.3, +-0.01 A); text p. 3-4 quotes several values"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [matrix_food, concentrations_not_stated, vessel_not_stated, internal_inconsistency]
+    note: "A420 0.14-1.27 (100-140 C, 120 min), 0.21-0.57 (60-180 min, 120 C). Text says 0.29 at 120 C but both panels show 0.37. Dilution before reading not stated."
