@@ -908,6 +908,19 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     Reaction("r_tdp_mgo", {"TDP": 1}, {"MGO": 1, "HA": 1}, "k_tdp_mgo",
              "Sub-model 3 arm A3. 3-Deoxypentosone C3-C4 retro-aldol to methylglyoxal + glycolaldehyde, base-favoured "
              "(PENTOSE_MGO_ROUTES; fitted)."),
+    Reaction("r_mgo_cys_strecker", {"MGO": 1, "Cys": 1}, {"CBX": 1, "FRAG_C": 5, "FRAG_N": 1, "FRAG_S": 1},
+             "k_mgo_cys_strecker",
+             "Joint fit (review B5). Methylglyoxal + cysteine Strecker: aminoacetone + mercaptoacetaldehyde + CO2; the "
+             "carboxyl CARRIED (CBX), the amine into the aminoketone (FRAG_N), the sulfur in the Strecker aldehyde "
+             "(FRAG_S). MGO_CYSTEINE_STRECKER; zero unless set."),
+    Reaction("r_mgo_cys_h2s", {"MGO": 1, "Cys": 1}, {"MGO": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "H2S": 1},
+             "k_mgo_cys_h2s",
+             "Joint fit (review B5). The same event's B59a fate: the aminoreductone reduces the mercaptoacetaldehyde to "
+             "H2S + acetaldehyde and returns as the dicarbonyl (Kobayasi & Fujimaki 1965); STRECKER_SULFUR.h2s_share "
+             "of the MGO Strecker constant. Zero unless set."),
+    Reaction("r_odg_dpo", {"ODG": 1}, {"DPO": 1, "FRAG_C": 1}, "k_odg_dpo",
+             "Sub-model 4. Hexose -> C5 entry: 1-deoxyglucosone -> 1-deoxypentosone + C1 (C-6 loss); labelling says "
+             "hexose MFT keeps an intact C5 (Du 2023, Zhao 2019b). HEXOSE_C5_ENTRY; zero unless set."),
     Reaction("r_pent_mgo", {"PENT": 1}, {"MGO": 1, "HA": 1}, "k_pent_mgo",
              "Sub-model 3 arm A4. Lumped amine-free pentose fragmentation to methylglyoxal + glycolaldehyde via the "
              "ketose / triose route, base-favoured (PENTOSE_MGO_ROUTES; fitted)."),
@@ -945,6 +958,10 @@ def inactive_reactions() -> frozenset:
         off.add("r_tdp_mgo")
     if _ps.PENTOSE_MGO_ROUTES.k_pent_mgo_100c_ph5 <= 0.0:
         off.add("r_pent_mgo")
+    if _ps.MGO_CYSTEINE_STRECKER.k_l_per_mmol_min_100c_ph5 <= 0.0:
+        off.update({"r_mgo_cys_strecker", "r_mgo_cys_h2s"})
+    if _ps.HEXOSE_C5_ENTRY.k_per_min_100c <= 0.0:
+        off.add("r_odg_dpo")
     return frozenset(off)
 
 
@@ -1035,6 +1052,12 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
         "released and is exactly the nitrogen the shared basis is about -- "
         "released, then consumed by the Maillard chemistry this step is part "
         "of. " + AMINE_FATE_BASIS)},
+    "r_mgo_cys_strecker": {"amine": -1, "basis": (
+        "methylglyoxal Strecker of cysteine (joint fit, review B5): the amine leaves in aminoacetone, the carboxyl as "
+        "CO2 (CARRIED). " + AMINE_FATE_BASIS)},
+    "r_mgo_cys_h2s": {"amine": -1, "basis": (
+        "as r_mgo_cys_strecker, the B59a fate: H2S + acetaldehyde, the dicarbonyl returned; the amine leaves as NH3. "
+        "Carboxyl CARRIED. " + AMINE_FATE_BASIS)},
     "r_dpo_ddp_h2s": {"amine": -1, "basis": (
         "as r_dpo_ddp (B59a, revised): the Strecker event whose aminoreductone reduces the mercaptoacetaldehyde to "
         "H2S and returns as the deoxyosone; the amine leaves as NH3 either way. Carboxyl CARRIED. "
@@ -1270,7 +1293,8 @@ def sulfur_rate_constants_at(
             continue  # B50: derived below from the two thiamine steps
         if key == "k_ttca_form":
             continue  # B58: derived below from r_ttca_cys by detailed balance
-        if key in ("k_nf_decay_oh", "k_nf_decay_oh_mgo", "k_tdp_mgo", "k_pent_mgo"):
+        if key in ("k_nf_decay_oh", "k_nf_decay_oh_mgo", "k_tdp_mgo", "k_pent_mgo", "k_mgo_cys_strecker",
+                   "k_mgo_cys_h2s", "k_odg_dpo"):
             continue  # B61 and sub-model 3: derived below
         if key == "k_dpo_ddp_h2s":
             continue  # B59a: a measured share of r_dpo_ddp, below
@@ -1379,6 +1403,13 @@ def sulfur_rate_constants_at(
     _base = ph_factor("base", ph, float(temperature_k), ionic_strength_m)
     out["r_tdp_mgo"] = _mgo.k_at(_mgo.k_tdp_mgo_100c_ph5, _mgo.ea_tdp_mgo_kj_mol, temperature_k) * _base
     out["r_pent_mgo"] = _mgo.k_at(_mgo.k_pent_mgo_100c_ph5, _mgo.ea_pent_mgo_kj_mol, temperature_k) * _base
+    # the methylglyoxal Strecker of cysteine and its B59a H2S share (zero unless MGO_CYSTEINE_STRECKER is set)
+    _mgo_strecker = _ps.MGO_CYSTEINE_STRECKER.k_at(temperature_k) * ph_factor("base", ph, float(temperature_k), ionic_strength_m)
+    _share_h2s = float(_ps.STRECKER_SULFUR.h2s_share) if _ps.STRECKER_SULFUR.enabled else 0.0
+    out["r_mgo_cys_h2s"] = _share_h2s * _mgo_strecker
+    out["r_mgo_cys_strecker"] = (1.0 - _share_h2s) * _mgo_strecker
+    # the hexose -> C5 entry (zero unless HEXOSE_C5_ENTRY is set)
+    out["r_odg_dpo"] = _ps.HEXOSE_C5_ENTRY.k_at(temperature_k)
 
     _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
     out["ch_thioether_release"] = out["ch_thioether_mft"] / _k_adduct

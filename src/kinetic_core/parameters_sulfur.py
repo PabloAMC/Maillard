@@ -499,6 +499,49 @@ PENTOSE_MGO_ROUTES = PentoseMgoRoutes()
 
 
 @dataclass(frozen=True)
+class MgoCysteineStrecker:
+    """
+    Sub-model 3 + 4 (2026-10-30; the joint fit's design review, B5), OFF by default (rate 0): the Strecker
+    degradation of cysteine by METHYLGLYOXAL -- the textbook Strecker reagent -- which the lane lacked: B59a's
+    Strecker sulfur rides only on 1-deoxypentosone + cysteine, so moving 1-deoxypentosone flux to MGO deleted H2S
+    that should follow it. Second order, L/(mmol min) at 100 C and pH 5 (the "base" pH factor, as r_dpo_ddp), with
+    an Arrhenius Ea; FITTED (no measured constant exists). Its H2S branch is B59a's registered share (CR-11) of it.
+    """
+
+    k_l_per_mmol_min_100c_ph5: float = 0.0
+    ea_kj_mol: float = 64.08
+
+    def k_at(self, temperature_k: float) -> float:
+        return float(self.k_l_per_mmol_min_100c_ph5) * math.exp(
+            -float(self.ea_kj_mol) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+MGO_CYSTEINE_STRECKER = MgoCysteineStrecker()
+
+
+@dataclass(frozen=True)
+class HexoseC5Entry:
+    """
+    Sub-model 4 (2026-10-30), OFF by default (rate 0): a hexose -> C5 entry, 1-deoxyglucosone -> 1-deoxypentosone +
+    C1 (the C-6 loss). The thiol probe found glucose + cysteine makes NO MFT in the lane (Hofmann 1998 measures
+    19-25 ug/L); labelling (Du 2023: Cys + [13C6]glucose, MFT 0 : 5 = 52 : 48, mixed isotopomers < 1 %; Zhao 2019b)
+    says hexose MFT keeps an intact glucose C5, so the entry is to a C5 dicarbonyl, not to C2 + C3. First order,
+    1/min at 100 C, Ea declared; FITTED. Falsified if it predicts the ribose norfuraneol / MFT ratio (~10^3) against
+    Hofmann's 7 for glucose (then the entry belongs at 1,4-dideoxypentosone).
+    """
+
+    k_per_min_100c: float = 0.0
+    ea_kj_mol: float = 100.0
+
+    def k_at(self, temperature_k: float) -> float:
+        return float(self.k_per_min_100c) * math.exp(
+            -float(self.ea_kj_mol) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+HEXOSE_C5_ENTRY = HexoseC5Entry()
+
+
+@dataclass(frozen=True)
 class StreckerSulfur:
     """
     B59a (2026-10-28): WHERE THE STRECKER SULFUR GOES. ``r_dpo_ddp`` (the 1-deoxyosone + cysteine Strecker step)
