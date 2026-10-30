@@ -224,3 +224,14 @@ for the other measured tables). Effect at the start vector: Davidek FA+AA +0.35 
 0.31); NaOH uptake -0.14 -> -0.49 (diagnostic; it counts acids the lane cannot make, B5). Arm B's first result is
 kept as `kinetic_core_ph_acid_submodel_fit_B_superseded_amendment1.{json,md}` (slopes on their 1.5 bound, acid
 yield on its bound); both arms are re-run. Nothing else in sec. 5 changes; the tolerances stand.
+
+**Amendment 2 (2026-10-30, 02:20; after arm B's re-run, before arm C runs): arm C.** Arm B (re-run) puts two of three
+Amadori-decay slopes on their 1.5 bound (Martins measured <= 0.92) and leaves a residual trend with pH (rank
+correlation +0.40, p = 2e-13: too low at pH 5-5.5, too high at 7-7.5) that differs between the DFG pots (pH-stat,
+Martins 2003b) and the glucose + glycine pots (the ladder). Martins 2005b's Table 3 (fitted on the ladder) finds the
+ladder's pH dependence on the GLUCOSE-CONSUMING steps -- the condensation (pD 0.50 +/- 0.14), glucose -> fructose
+(0.88 +/- 0.27), the sugar's acids (0.54 +/- 0.36) -- which the lane leaves pH-independent; the DFG pots start after
+those steps and cannot see them. Arm C = arm B + a free slope and reference offset on `k_schiff` and one shared free
+slope and offset on `k_glc_fru` and `k_fru_acids` (12 constants; Table 3's values as starts only, never priors: it is
+fitted on the ladder, review B1). Prediction written now: arm C brings the Amadori slopes inside 0.2-1.0 (P = 0.5),
+removes the pH trend (P = 0.5), and does not change the pentose block (P = 0.95). Same tolerances and hold-outs.

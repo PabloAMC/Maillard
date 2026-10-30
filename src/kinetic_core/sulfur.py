@@ -1223,7 +1223,9 @@ def _trunk_ph_exponents() -> Dict[str, float]:
     out = {key: float(_tc.PH_EXPONENT_DECADES_PER_UNIT) for key in _tc.PH_STEPS}
     if _tc.THREE_DEOXY_EXIT_PH_TERM:
         out.update({key: float(exponent) for key, (exponent, _band, _source) in _tc.THREE_DEOXY_EXIT_PH.items()})
-    out.update({key: float(v) for key, v in TRUNK_PH_EXPONENT_OVERRIDE.items() if key in out})
+    # a fit's trial slopes; a key the measured table does not slope (sub-model 1 arm C: the condensation and the
+    # amine-free glucose steps) gains one only through this override
+    out.update({key: float(v) for key, v in TRUNK_PH_EXPONENT_OVERRIDE.items()})
     return out
 
 

@@ -28,9 +28,10 @@ def test_on_it_scales_each_step_by_its_measured_slope(monkeypatch):
 
 def test_a_fit_overrides_a_slope_by_key_and_nothing_else(monkeypatch):
     monkeypatch.setattr(sulfur, "TRUNK_PH_TERMS", True)
-    monkeypatch.setattr(sulfur, "TRUNK_PH_EXPONENT_OVERRIDE", {"k_ama_odg": 0.2, "not_a_step": 9.0})
+    monkeypatch.setattr(sulfur, "TRUNK_PH_EXPONENT_OVERRIDE", {"k_ama_odg": 0.2, "k_schiff": 0.5, "not_a_step": 9.0})
     at_ref, low = _k(trunk_conditions.REFERENCE_PH), _k(5.5)
     assert low["r_ama_odg"] / at_ref["r_ama_odg"] == pytest.approx(10 ** (0.2 * (5.5 - 6.8)))
+    assert low["r_schiff"] / at_ref["r_schiff"] == pytest.approx(10 ** (0.5 * (5.5 - 6.8)))   # arm C: a new slope
     assert low["r_ama_tdg"] / at_ref["r_ama_tdg"] == pytest.approx(10 ** (trunk_conditions.PH_EXPONENT_DECADES_PER_UNIT * (5.5 - 6.8)))
 
 
