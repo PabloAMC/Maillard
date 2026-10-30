@@ -241,4 +241,10 @@ glucose rows' zero MFT is untouched (the missing hexose -> C5 entry). **Verdict:
 `k_dpo_ddp` must be fitted JOINTLY with the steps it feeds (k_ddp_mft, the DDP and NF exits; sub-models 3 + 4 on
 the deoxyosone and thiol tables together), with the MGO rows and the MFT rows both in the cost. That is the next fit.
 
+**Caveat found by the joint-fit review (2026-10-30, 07:00).** The A2 / A3 "hold-out" (Zhai 2023 JAFC 140 C) was not
+out-of-condition in temperature: Zhai 2023 Food Chem's 140 C pots -- the same vessels, reprinted -- were fit rows, and
+FIT_HOLDOUT_DECLARATION.md holds every Zhai 140 C pot out. And A2's methylglyoxal predicts 2-acetylthiazole ~2000x
+above Zhou 2023's measured 11.7 ug/L (through `k_cys_actz`, fitted at an MGO 10^3 too low): A2 is falsified as it
+stands unless that step moves with it. Both enter the joint fit's design (thiol prereg sec. 5).
+
 ## Amendments

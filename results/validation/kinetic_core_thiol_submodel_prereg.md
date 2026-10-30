@@ -170,5 +170,43 @@ scored once, after the fit. Leave-one-paper-out on the winner.
 **Expected (written now):** the joint fit keeps Zhai's MGO within tolerance AND brings Schieberle's MFT within x3
 (P = 0.35); `k_dpo_ddp` comes off its bound once the H2S budget can move (P = 0.5); `k_h2s_loss` rises (Li 2022's
 single point suggested ~10x faster at 90 C; P = 0.6 that it moves up by > x3).
-## 5. Design review (step 5) -- TO DO
+## 5. Design review of the joint fit (step 5) -- done 2026-10-30, before any fit; sec. 4 is superseded where noted
+
+An independent reviewer (read-only; flux budgets of the null engine and of sub-model 3's A2, closing within 1e-4)
+found 7 BLOCKING, 6 SHOULD-FIX, 4 NOTE.
+
+**The H2S explanation is half right.** In Schieberle 2000 the B59a Strecker share supplies 82 % of the H2S; A2 removes
+it (supply / 4) and FFT / MFT fall -- as sec. 4 says. In Zhou 2022, Yiltirak and Zhai, A2 RAISES MFT: 1-DX no longer
+drained by cysteine goes to norfuraneol (NF x3 to x30, MFT x2.6 to x47). The DDP route carries < 0.1 % of MFT
+everywhere (`k_ddp_mft` 10^-6.5, frozen in B60).
+
+**BLOCKING, and the response:**
+1. FFT forms 89-99.5 % through `r_fur_fft_hs`, not `k_fur_fft` -> one common multiplier on both FFT branches.
+2. `ch_mft_decay` destroys 80-99 % of the MFT formed (MFT ~ formation / k_mft_decay); CF-013: the shipped loss is
+   >= 5x too fast -> `k_mft_decay` free (rate; Ea held), plus the CF-013-capped rival arm.
+3. Declared hold-outs were fit rows (Hofmann T2 pH 3 / 7 and T1 xylose; Yiltirak; every Zhai 140 C pot, Food Chem
+   AND JAFC, in both tables; the Hofmann T1 level rows are validation-only since B9) -> all held out. This also
+   weakens sub-model 3's A2 / A3 "140 C hold-out": the Food Chem 140 C pots of the same vessels were fit rows there
+   (recorded in that prereg).
+4. A2's MGO destroys 2-acetylthiazole's credibility: Zhou 2022 ACTZ predicted ~20,600 ug/L against 11.7 measured
+   (Zhou 2023 pH 7, B60 fit row) -- `k_cys_actz` was fitted at an MGO 10^3 too low -> ACTZ scored as a FALSIFIER of
+   every arm (the row is not yet in a two-reader keyed table; freeing `k_cys_actz` waits for it).
+5. Strecker H2S is attached only to 1-DX + Cys (B59a); moving 1-DX flux to MGO deletes H2S that should follow ->
+   pre-registered as a topology caveat; an MGO + Cys Strecker-H2S arm is owed (needs a network step).
+6. tau 0.3 for the Jiangnan thiols contradicts CR-15 / CF-065 (semi-quantitative = tau inf) -> thiols tau inf per
+   figure (keeps the cross-pot contrasts); the deoxyosone quinoxalines' tau 0.3 gets its choices-register entry.
+7. Ten rows sit in both tables (Hofmann T5 FUR / NF, Zhou 2022 FUR, Wang 2026b FUR) -> deduplicated.
+SHOULD-FIX adopted: a declared between-run noise floor of 0.10 dex where a series has too few rows to estimate its
+own (Garching sd 10 % would otherwise dominate; CF-016 / CF-055); Zhou thiols get the per-paper scale Zhou MGO has
+(CF-014: 7.8x within-lab reproducibility); rows the coordinates cannot move are score-only (Kumazawa survival,
+Hofmann T8 C2 + C3, T10 thiamine, T9 glucose, Zhang 2026); `k_dpo_ddp`'s bound widened to 10^-8; the B60 rows and
+declared hold-outs re-scored before any acceptance. The B59a share is run at BOTH CR-11 alternatives (0.042, 0.080).
+NOT adopted tonight: returning Hofmann T1 ribose pH 5 to the fit (an owner decision); the glycolaldehyde sink (no
+data until Hofmann 1999 is read).
+
+**Expected results, revised by the reviewer's flux arguments:** `k_h2s_loss` up by > x3: P ~ 0.25 (the fit must
+replace lost Strecker H2S, which pushes it DOWN; a fall against Li 2022's "x10 faster" would flag a missing H2S
+source); `k_dpo_ddp` off its bound: ~0.3; Schieberle MFT within x3 with `k_mft_decay` free: ~0.45. Expected failures
+written now: 3-DX (no coordinate touches it), Hofmann T8, Hofmann pH 7 MFT (no HS- route for norfuraneol), CF-017's
+temperature ordering (every Ea held).
 ## Amendments
