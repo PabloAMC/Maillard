@@ -58,3 +58,24 @@ next, then its arms with `k_dpo_ddp` free -- after sub-model 1 has fixed the pH 
 **Lesson recorded for myself:** two of tonight's design drafts (sub-model 1's fit, sub-model 3's hypothesis) were
 wrong in ways an independent reviewer found in ~15 minutes each; the review step paid for itself both times. Keep it
 before every fit.
+
+## Checkpoint 3 -- 01:10
+
+**What happened.** Sub-model 1 arm B finished (47 min) and FAILED in a telling way: all three pH slopes on their
+1.5 bound, the acid yield on its bound, 6 / 10 data sets outside tolerance. Its diagnostics traced it to two flaws in
+MY implementation of the review's fixes: DFG titrated with the calibrated pentose-ARP pKa (coupling the two blocks;
+Davidek's NaOH diagnostic at -22 dex) and the trunk slopes on the label scale (importing an unbuffered DFG pH-stat's
+own thermal shift into slopes measured in phosphate). Fixed with DFG's measured pKa (Mossine 1994, 8.18) and in-situ
+slopes; the start's Davidek acids back to +0.16 dex. Recorded as Amendment 1 (prereg), the failed fit kept as
+superseded, arm A stopped, both arms re-run (night queue: sub-model 1 B, A; then sub-model 3 A2, A3, A4, A1; ETA
+~06:30-07:00). Sub-model 3 per-figure probe: the 1-deoxypentosone misfit across Zhai 2021's ladder is 2.05 dex RMS
+once pots share a scale (0.41 when each pot had its own).
+
+**Does it serve the goal?** Yes. The arm-B failure cost ~50 min of compute and found a real coupling error before it
+could bias a shipped constant; this is the misfit protocol working. Risk to watch: if the re-run still puts the
+slopes on a bound, the pH dependence of the trunk's acid supply is not a slope on these three steps, and the
+mechanism step applies (e.g. phosphate catalysis, which Davidek's pH-5 water / phosphate contrast shows and the lane
+lacks) -- pre-registered as an expected flag.
+
+**Process note for the morning.** Three design flaws tonight (two reviewer-found, one fit-found), all mine, all
+caught before shipping. The pattern: every "fix" I write gets the same scrutiny as the original design.

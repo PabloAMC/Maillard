@@ -211,7 +211,7 @@ Martins 2005 once the reference offsets are free (P = 0.55); the Amadori slopes 
 over-acidification to the mechanism step; done-test 1 passes (P = 0.3).
 ## Amendments
 
-**Amendment 1 (2026-10-30, 01:20; after arm B's first fit, before arm A's).** Arm B's diagnostics showed two flaws
+**Amendment 1 (2026-10-30, 01:05; after arm B's first fit, before arm A's).** Arm B's diagnostics showed two flaws
 in my implementation of review items B3 / B4, not in the chemistry: (i) DFG (AMA) and the Schiff base were titrated
 as the pentose-ARP class, whose amine pKa is a CALIBRATED constant the fit also moves for Zhou's pentose pots (arm B
 put it at 5.8): the pentose and hexose blocks were coupled through a number neither measures, and Davidek's
