@@ -209,6 +209,36 @@ three of four laboratories pass on every data set they hold, in their leave-one-
 Martins 2005 once the reference offsets are free (P = 0.55); the Amadori slopes land inside Martins' 0.37-0.92 band
 (P = 0.6); the pentose acid yield stays poorly identified or on a bound (P = 0.6), which would send the 0.4 M
 over-acidification to the mechanism step; done-test 1 passes (P = 0.3).
+## Results (2026-10-30, overnight; arm A still running at 04:20)
+
+Fits: `kinetic_core_ph_acid_submodel_fit_{B,C}.md` (arm B's pre-amendment run kept as `..._B_superseded_amendment1`).
+Hold-out (frozen per arm, committed before scoring): `kinetic_core_ph_acid_submodel_holdout_score.md`.
+
+| | arm B (sink off) | arm C (+ glucose-step slopes) |
+| --- | --- | --- |
+| constants on a bound | 2 Amadori slopes (1.5), acid yield (1) | condensation slope (1.5), acid yield (1) |
+| Amadori slopes vs Martins' 0.37-0.92 | outside | inside (0.68 / 0.90 / 0.79) |
+| residual trend with pH (in-sample) | rho +0.40, p 2e-13 | rho 0.005, p 0.92 |
+| done-test 1 in-sample (10 data set x observable) | 4 within | 4 within |
+| leave-one-laboratory-out | 0 of 4 laboratories pass | Nestle 1/1, Wageningen 3/6, others 0 |
+| HOLD-OUT acetic (5 runs) | 5 within (RMS 0.07-0.27) | 1 within; pH 4.8 -2.34 dex, 5.5 -1.42 |
+| HOLD-OUT formic (4 runs) | 0 within (x2 to x10 low, worst at low pH) | 1 within (pH 7.5); pH 5.5 -1.94 dex |
+| pentose block (Cao, Zhao, Zhou) | unchanged, outside | unchanged, outside |
+
+**Reading.** Against the expected result (sec. 5): arm C did bring the Amadori slopes inside the measured band and
+remove the pH trend (both predicted at P = 0.5), and the pentose block did not move (P = 0.95) -- but only by putting
+the condensation slope on its bound, three times Martins' measured 0.50, and the hold-out rejects that: the
+low-pH drifting runs lose 10-200x of their acid. The in-sample ladder rows are pH only; a pH can be reproduced by
+"less acid made" or "less glucose consumed", and only acid amounts across pH separate them. Arm B transfers acetic
+acid to every hold-out run, including the constant-pH mode the fit never saw, and fails formic acid at low pH (its
+formic-exit slope sits on the bound). The done-test fails for both arms; no switch is proposed to ship.
+
+**What it changes (next round, owner's call).** (1) The hold-out is spent for B and C: Martins 2005b Fig. 7's acids
+(formic and acetic at four pH) become FIT data for the next round, which needs a new hold-out (candidates: Knol
+2010; Brands 2002's ladder if read). (2) The condensation's pH dependence must be identified from acid amounts, not
+from pH. (3) The 3-DG -> formic exit is not a single pH-sloped step on this evidence (Martins 2005b's own Table 3
+gives it pD 0.09 +/- 1.10): literature first. (4) The pentose block waits for sub-model 3's `k_dpo_ddp`.
+
 ## Amendments
 
 **Amendment 1 (2026-10-30, 01:05; after arm B's first fit, before arm A's).** Arm B's diagnostics showed two flaws
