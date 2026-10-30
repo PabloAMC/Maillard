@@ -231,4 +231,14 @@ remains over-predicted in Zhai's pots and the hold-out's 1-DX at 140 C is 47x lo
 held Ea of the carbonyl family does not carry. Expected result (sec. 5): A2 or A3 beats A1 -- A1 not run; A2 lifts
 Cao's pH -- being checked; some arm brings every Zhai MGO set within x3 -- yes (A2, P was 0.4).
 
+**Cross-checks of A2, unfitted (2026-10-30, 06:00; `kinetic_core_{thiol,route,ph_acid}_submodel_probe_sm3{A2,null}_*`).**
+Route table: unchanged (cysteine, TTCA, CAMA within 0.0-0.1 dex of the switches-on probe). Sub-model 1's pentose
+pots: Cao's pH -0.20 (null, route switches on) -> -0.03 / RMS 0.07; Zhao +0.11 / 0.15 -- both within tolerance (the
+review's prediction held); Zhou's ARP endpoints worse (+0.39 -> +0.81). Thiol table: A2 harms the MFT data it feeds
+through DDP -- Schieberle 2000 MFT -1.24 -> -1.55 dex and FFT -0.16 -> -0.67; Yiltirak MFT +0.53 -> +1.51; Zhou
+2022 MFT +0.15 -> +0.64; Hofmann's norfuraneol +0.02 -> +0.27 (1-DX no longer drained by cysteine goes to NF). The
+glucose rows' zero MFT is untouched (the missing hexose -> C5 entry). **Verdict: A2 is not accepted alone.**
+`k_dpo_ddp` must be fitted JOINTLY with the steps it feeds (k_ddp_mft, the DDP and NF exits; sub-models 3 + 4 on
+the deoxyosone and thiol tables together), with the MGO rows and the MFT rows both in the cost. That is the next fit.
+
 ## Amendments

@@ -239,6 +239,12 @@ formic-exit slope sits on the bound). Arm A (the acetic-acid sink refitted, ~5x 
 from pH. (3) The 3-DG -> formic exit is not a single pH-sloped step on this evidence (Martins 2005b's own Table 3
 gives it pD 0.09 +/- 1.10): literature first. (4) The pentose block waits for sub-model 3's `k_dpo_ddp`.
 
+**Correction found by the sub-model 3 cross-check (06:00).** Sub-model 1's arms ran in the SHIPPED engine state, with
+the route switches B58 / B59b off. With them on and nothing else changed, Cao's pentose pH residual is -0.20 (not
+-0.93) and Zhao's -0.07; with sub-model 3's A2 constants added, -0.03 and +0.11 -- within tolerance. The pentose
+block's failure above is therefore mostly the route switches being off, not sub-model 1's machinery. Next round: fit
+sub-model 1 in the named state "route switches on" (the state sub-models 2-4 use), and re-score.
+
 ## Amendments
 
 **Amendment 1 (2026-10-30, 01:05; after arm B's first fit, before arm A's).** Arm B's diagnostics showed two flaws
