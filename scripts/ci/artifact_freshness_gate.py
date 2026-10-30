@@ -137,9 +137,11 @@ def check_runners(failures: List[str]) -> None:
 #: are not re-hashed; it must carry the commit it was written at. The LIVE artifacts (scorecards, the envelope, flux
 #: attribution, baselines, contrasts, the choice sweep, the wishlist, figures) are still re-hashed and, where cheap,
 #: regenerated: they describe the model as it is.
+#: 2026-10-30: the Phase 2 sub-model records (each fit arm, each no-refit probe, each frozen hold-out prediction) are
+#: records of the same kind -- run at a commit, quoted by number in their pre-registration -- and are pinned likewise.
 FROZEN_RECORD_GENERATOR = re.compile(
-    r"scripts/generators/generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
-    r"structural_discrepancy)\.py$")
+    r"scripts/generators/(generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
+    r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout)\.py$")
 
 
 def is_frozen_record(relative: str, payload: Dict) -> bool:

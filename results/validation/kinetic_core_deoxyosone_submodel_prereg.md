@@ -247,4 +247,22 @@ FIT_HOLDOUT_DECLARATION.md holds every Zhai 140 C pot out. And A2's methylglyoxa
 above Zhou 2023's measured 11.7 ug/L (through `k_cys_actz`, fitted at an MGO 10^3 too low): A2 is falsified as it
 stands unless that step moves with it. Both enter the joint fit's design (thiol prereg sec. 5).
 
+**What the four new papers say about the methylglyoxal step (2026-10-30, dossiers hofmann1999 / feng2021 /
+weenen1998 / smuda2013).**
+- *A second laboratory's pentose MGO, at last:* Hofmann 1999 (Garching; xylose + alanine 1.5 M each, 0.5 M phosphate
+  pH 7, reflux, 5-180 min; labelled-homologue standards, calibrated) -- MGO 0.35 -> 1.67 umol / mmol xylose (0.17 mol %
+  at 180 min). Simulable only with a declared reflux temperature (~100-103 C) and the concentration (solid volume).
+- *Glycolaldehyde is far below 1:1 with MGO:* GA : MGO molar 0.19-0.20 at 5-10 min, 0.03 at 180 min. A step making
+  both 1:1 (`r_dpo_c2c3`, A2's mechanism) needs glycolaldehyde consumed ~5-30x faster than formed, and the lane has
+  no glycolaldehyde sink -- so A2's 1:1 split is contradicted unless such a sink exists (it plausibly does:
+  glycolaldehyde is the most reactive C2 in the Maillard network), or MGO comes with a different partner.
+- *The mechanism itself is doubtful:* Smuda & Glomb 2013 call retro-aldol cleavage of dicarbonyls "largely
+  hypothetical" and list the hexose analogue (1-deoxyglucosone -> MGO + glyceraldehyde) as disproven (Voigt); the
+  admissible cleavages of 1-deoxypentosone give acetic acid + a C3 enediol, or hydroxyacetone + glycolic acid. Weenen
+  1998 (review) draws MGO from both deoxyosones by retro-aldolisation, the 1-deoxy path at neutral / alkaline pH.
+- *Consequence for the design:* the A2 arm's "DPO -> MGO + HA" is a lumped net step at best. Its successor should
+  (i) score Hofmann 1999's xylose MGO and glycolaldehyde as the second laboratory's rows (two-reader entry owed), and
+  (ii) carry a declared glycolaldehyde sink, or replace the split by the beta-cleavage products with MGO from the
+  C3 enediol. Feng 2021 is Jiangnan (Xia group), not independent, and not simulable as printed.
+
 ## Amendments

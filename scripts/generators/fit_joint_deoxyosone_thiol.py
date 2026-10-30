@@ -20,7 +20,7 @@ per data set x observable from within-series scatter, with a declared 0.10 dex f
 2-Acetylthiazole in Zhou 2023's ARP + Cys pot (11.70 ug/L) is scored as a falsifier, not fitted.
 
     python scripts/generators/fit_joint_deoxyosone_thiol.py --strecker-share 0.042|0.080 [--mft-decay-cap] [--lopo]
-Writes results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s<share>[_capped].{json,md}.
+Writes results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s<share x 1000>[_capped].{json,md}.
 """
 from __future__ import annotations
 
@@ -178,10 +178,13 @@ def main(argv=None) -> int:
     parser.add_argument("--lopo", action="store_true")
     parser.add_argument("--strecker-share", type=float, choices=(0.042, 0.080), default=0.042)
     parser.add_argument("--mft-decay-cap", action="store_true")
+    parser.add_argument("--check-fixed-point", action="store_true",
+                        help="re-score the optimum on the shipped fixed-point coupling (slow: ~1 h for these 0.4 M pots)")
     args = parser.parse_args(argv)
     global STRECKER_SHARE, OUT
     STRECKER_SHARE = float(args.strecker_share)
-    OUT = data_paths.VALIDATION_DIR / (f"kinetic_core_joint_deoxyosone_thiol_fit_s{args.strecker_share:.3f}"
+    # no dot in the stem (a ".042" would be taken for the suffix)
+    OUT = data_paths.VALIDATION_DIR / (f"kinetic_core_joint_deoxyosone_thiol_fit_s{round(args.strecker_share * 1000):03d}"
                                        + ("_capped" if args.mft_decay_cap else ""))
     t0 = time.time()
     sulfur.PH_COUPLING = "inline"
@@ -251,9 +254,10 @@ def main(argv=None) -> int:
             "temperature_C": lambda r: float(pots_all[key_of(r)]["t_c"]),
             "label_pH": lambda r: float(pots_all[key_of(r)]["label_ph"]), "time_min": lambda r: r.t_min}),
     }
-    sulfur.PH_COUPLING = "fixed_point_nodes"
-    report["shipped_coupling_max_abs_difference"] = float(np.nanmax(np.abs(raw(best.theta, data) - raw_best)))
-    sulfur.PH_COUPLING = "inline"
+    if args.check_fixed_point:
+        sulfur.PH_COUPLING = "fixed_point_nodes"
+        report["shipped_coupling_max_abs_difference"] = float(np.nanmax(np.abs(raw(best.theta, data) - raw_best)))
+        sulfur.PH_COUPLING = "inline"
     if args.lopo:
         out, sig = {}, np.array([lap["sigma"][k] for k in keys])
         for paper in sorted({sm3.paper_of(r) for r in data}):
@@ -273,8 +277,9 @@ def main(argv=None) -> int:
              "predicted minus measured (dex); semi-quantitative rows after their figure scale.*", "", "## Result", ""]
     lines += [f"- {line}" for line in fitting.summary_lines(problem, best, lap)]
     lines += [f"- failed pot runs: {len(FAILURES)}",
-              f"- largest raw-residual difference, inline vs the shipped fixed point, at the optimum: "
-              f"{report['shipped_coupling_max_abs_difference']:.2g}", "",
+              ("- largest raw-residual difference, inline vs the shipped fixed point, at the optimum: "
+               f"{report['shipped_coupling_max_abs_difference']:.2g}" if "shipped_coupling_max_abs_difference" in report
+               else "- inline vs fixed point not re-checked in this run (--check-fixed-point; 0.004 on the smoke run)"), "",
               "## Raw residuals per data set x observable", "",
               "| data set \\| observable | n | start mean / RMS | optimum mean / RMS |", "|---|---|---|---|"]
     lines += [f"| {k} | {v['n']} | {report['raw_at_start'][k]['mean']:+.2f} / {report['raw_at_start'][k]['rms']:.2f} | "
