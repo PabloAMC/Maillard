@@ -1,0 +1,62 @@
+# KEYED FIT TABLE -- Zhou et al. 2023 (J Agric Food Chem 71:2472; PDF data/articles/Zhou2023b.pdf), Table 1:
+# 2-acetylthiazole (engine ACTZ) from the alanine-xylose Amadori compound (engine ARP) with and without cysteine at
+# initial pH 6 / 7 / 8, 120 C, 60 min. For sub-model 4 (the cysteine + C3-fragment route to 2-acetylthiazole).
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS; every row an sd as
+# printed or a read_error in dex). Laboratory and quantification class come from the ledger entry.
+# FIRST READER: agent-sm34-reader1-2026-10-30, against the PDF and its supplement (zhou2023b_supporting.pdf), not the
+# dossier. Second reader: pending (data/lit/source_verification/thiol_zhou2023_actz.yml).
+# NOTE ON THE FILE: the ledger's dossier is zhou2023_extraction.md, but data/articles/Zhou2023.pdf is a different paper
+# (Zhu et al., Food Chem 400:133854, kafirin / Baijiu odorants); this Table 1 is in Zhou2023b.pdf.
+# Conventions:
+#   * initial_mmol_L in engine keys: ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine (the purified Amadori compound fed as a
+#     reactant), Cys.
+#   * one pot per Table 1 column; label_ph = the initial pH set with 3 M NaOH (none of the pots is buffered; the pH is
+#     not followed during heating; Fig. 2 prints the final pH, not re-read here).
+#   * errors: `sd` = the printed SD (n = 3, Table 1 footnote), in ug/L. The printed Duncan letters are kept in `printed`.
+#   * ND cells (no LOD printed) are not rows: 2-acetylthiazole is ND in all three ARP-alone columns. Their pots are
+#     kept, with no rows, so the record of what was heated is complete.
+#   * The pH 7 columns belong to ledger zhou2023_table1_ph7_arp_cys_volatiles, the pH 6 / 8 columns to
+#     zhou2023_table1_ph6_ph8_arp_cys_volatiles (the ledger splits Table 1 by column).
+status: ready   # two readers agree (2026-10-30); 2-acetylthiazole, Zhou 2023 Table 1
+pots:
+  zhou2023_arp_cys_120c_ph6:
+    {ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0, Cys: 20.0},
+     buffer: "none (deionized water; initial pH set with 3 M NaOH)", label_ph: 6.0,
+     ph_measured_at: "before heating only (temperature not stated); final pH in Fig. 2 (not re-read here)",
+     vessel: "not stated (water at 120 C needs a closed vessel; fill and headspace not stated); cooled in an ice bath after heating",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath for the further analysis of fast gas-phase electronic nose and headspace solid-phase microextraction-gas chromatography−mass spectrometry (HS/SPME-GC/MS)."}
+  zhou2023_arp_cys_120c_ph7:
+    {ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0, Cys: 20.0},
+     buffer: "none (deionized water; initial pH set with 3 M NaOH)", label_ph: 7.0,
+     ph_measured_at: "before heating only (temperature not stated); final pH in Fig. 2 (not re-read here)",
+     vessel: "not stated (water at 120 C needs a closed vessel; fill and headspace not stated); cooled in an ice bath after heating",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath for the further analysis of fast gas-phase electronic nose and headspace solid-phase microextraction-gas chromatography−mass spectrometry (HS/SPME-GC/MS)."}
+  zhou2023_arp_cys_120c_ph8:
+    {ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0, Cys: 20.0},
+     buffer: "none (deionized water; initial pH set with 3 M NaOH)", label_ph: 8.0,
+     ph_measured_at: "before heating only (temperature not stated); final pH in Fig. 2 (not re-read here)",
+     vessel: "not stated (water at 120 C needs a closed vessel; fill and headspace not stated); cooled in an ice bath after heating",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath for the further analysis of fast gas-phase electronic nose and headspace solid-phase microextraction-gas chromatography−mass spectrometry (HS/SPME-GC/MS)."}
+  # ---- ARP alone: 2-acetylthiazole ND at every pH (no rows) ----
+  zhou2023_arp_120c_ph6:
+    {ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0},
+     buffer: "none (deionized water; initial pH set with 3 M NaOH)", label_ph: 6.0,
+     ph_measured_at: "before heating only (temperature not stated)",
+     rows_note: "2-acetylthiazole printed ND (no LOD printed): no row",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h"}
+  zhou2023_arp_120c_ph7:
+    {ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0},
+     buffer: "none (deionized water; initial pH set with 3 M NaOH)", label_ph: 7.0,
+     ph_measured_at: "before heating only (temperature not stated)",
+     rows_note: "2-acetylthiazole printed ND (no LOD printed): no row",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h"}
+  zhou2023_arp_120c_ph8:
+    {ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0},
+     buffer: "none (deionized water; initial pH set with 3 M NaOH)", label_ph: 8.0,
+     ph_measured_at: "before heating only (temperature not stated)",
+     rows_note: "2-acetylthiazole printed ND (no LOD printed): no row",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h"}
+rows:
+  - {pot: zhou2023_arp_cys_120c_ph6, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: ACTZ, t_min: 60, value: 2.43, unit: ug_L, sd: 0.08, printed: 'Table 1, 2-acetylthiazole, pH 6 ARP + Cys: 2.43 +- 0.08b ug/L (n = 3); SI Table S2 OAV 0.243 (threshold 10 ug/L)'}
+  - {pot: zhou2023_arp_cys_120c_ph7, ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, species: ACTZ, t_min: 60, value: 11.70, unit: ug_L, sd: 2.14, printed: 'Table 1, 2-acetylthiazole, pH 7 ARP + Cys: 11.70 +- 2.14b ug/L (n = 3); SI Table S2 OAV 1.17'}
+  - {pot: zhou2023_arp_cys_120c_ph8, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: ACTZ, t_min: 60, value: 582.34, unit: ug_L, sd: 14.57, printed: 'Table 1, 2-acetylthiazole, pH 8 ARP + Cys: 582.34 +- 14.57c ug/L (n = 3); SI Table S2 OAV 58.234; text "increased significantly (582.34 ug/L)"'}

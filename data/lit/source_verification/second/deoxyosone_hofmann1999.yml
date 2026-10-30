@@ -1,0 +1,54 @@
+# Second, independent reading of Hofmann 1999 Eur Food Res Technol 209:113 (hofmann1999.pdf), xylose + L-alanine pot,
+# MGO and glycolaldehyde, by agent-sm34-reader2-2026-10-30. Read from the paper only (no dossier, no first reader's file).
+entries:
+- ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments
+  source_file: hofmann1999.pdf
+  read_by: agent-sm34-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks:
+    conditions: pass
+    units: corrected
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: Fig. 10 Time course of the formation of carbohydrate degradation product in a thermally treated aqueous of xylose
+    and L-alanine ... 2-oxopropanal (O), ... glycolaldehyde (filled square) ... [y-axis] Amount (ug / mmol xylose)
+  check_notes:
+    conditions: 'p. 115 Maillard reaction mixtures (quoted in the pot): 6 mmol xylose + 6 mmol L-alanine, 4 mL 0.5 M phosphate
+      pH 7.0, refluxed for the times of the figures; matches the ledger. Temperature, final volume, final pH, replicate count
+      and heat-up time are not stated; t_c 100 C and the 4.94 mL volume are declared assumptions (see the pot). Buffer counter-ion
+      not stated.'
+    units: 'Fig. 10 y-axis ''Amount (ug / mmol xylose)''; Eq. 1 p. 118 ''BPA = concentration (umol/mmol) x browning ability
+      (CD factor)''; Table 1 CD factors 2-oxopropanal 256, glycolaldehyde 1024 (powers of two, exact). Back-calculation verified
+      on glyoxal: Table 3 5 min 133/128 = 1.039 umol/mmol = 60.3 ug/mmol vs text p. 118 ''59 ug/mmol xylose'' at 5 min; and
+      3-deoxypentosone 10 min 2438/256 x 132.1 = 1258 vs text p. 116 ''1260''. Loader has no per-mmol-sugar unit: converted
+      to mmol_L on a declared 4.94 mL volume basis (the same basis as the pot''s PENT). Note pdftotext renders ''ug'' as ''mg'';
+      the page image reads ug.'
+    quantification: 'calibrated, as the ledger says. MGO: OPD derivatisation of a quarter of the cooled pot, GC-MS-CI of
+      2-methylquinoxaline against [13C4]-butane-2,3-dione (as its 2,3-dimethylquinoxaline) with a measured response factor
+      Rf 0.97 (a labelled homologue, not an isotopologue: the paper calls it SIDA). Glycolaldehyde: O-ethyloxime, GC-MS-CI
+      against [13C4]-3-hydroxy-2-butanone, Rf 0.96 (same caveat). CAVEAT for MGO: only 2 mL x 1 mmol/L = 2 umol OPD per quarter-pot
+      (read on the page image), while the quarter-pot holds far more alpha-dicarbonyl than that early on (3-DP ~9.5 umol/mmol
+      x 1.5 mmol = ~14 umol at 10 min) -> derivatisation likely incomplete; MGO could be biased low at 5-40 min. Not corrected.'
+    duplicates: 'Table 3 (ledger hofmann1999_tab2_3_browning_activity_products) prints the same pots at 5 / 10 / 60 / 120
+      min. Each time is entered ONCE under this id: Table 3 where it has the time (printed numbers), Fig. 10 elsewhere. The
+      text values (MGO 120 ug/mmol at 180 min, p. 118) are the figure point, not a second row. Fig. 9 / Table 2 are the glucose
+      pot (not transcribed). tab2_3 should carry same_data_as this id.'
+    values: 'Fig. 10 digitised on the embedded 400 ppi raster (pdfimages p. 6, img 2, 1355x1087, inverted stencil): y ticks
+      10-60 at rows 864.5 / 747 / 628.5 / 510.5 / 393.5 / 273.5 (fit 11.81 px per ug/mmol, zero at row 982.9; x-axis line row
+      984), upper segment 100 / 120 at rows 91.3 / 24.1 (3.36 px per unit); the printed 70 tick at row ~152.5 is 3 px off the
+      lower fit. x ticks 5.95 px/min, t0 at col 143.5; marker times read as nominal. Open circles (MGO) by ring-template fit
+      (r 6.5-7 px): 5 min (168,690) 24.80; 10 (204,487) 41.99; 20 (267,334) 54.95; 40 (377,186) 67.48; 120 (871,51) 112.0;
+      180 (1233,23) 120.3 ug/mmol. Filled squares (HA) by 9x9 erosion: 10 min (198.7,899.4) 7.07; 20 (260.1,923.9) 5.00; 40
+      (382.1,944.6) 3.25; 60 (504.4,945.4) 3.18; 80 (623.4,946.0) 3.13; 120 (858.6,948.5) 2.92; 180 (1217.1,950.6) 2.74 ug/mmol.
+      Table 3 (xylose; its header says ''Hexose degradation product'', a misprint): 2-oxopropanal 89 / 148 / 276 / 386, glycolaldehyde
+      68 / 137 / 60 / 58 at 5 / 10 / 60 / 120 min. Agreement: MGO fig/table 0.99 / 1.01 / 1.03; HA fig/table 0.88 / 0.90 /
+      0.86 -> a systematic 12 % (0.055 dex) internal inconsistency for glycolaldehyde, flagged on the HA rows (source_disagreement_dex),
+      not resolved. Fig. 10 lacks HA at 5 min and MGO at 60 / 80 min (axis break).'
+    laboratory: 'The ledger lab string ''DFA Garching (Hofmann)'' is NOT in data/keys/laboratories.yml (which has ''DFA Garching
+      (Hofmann / Schieberle)'' / ''DFA Munich (Hofmann / Schieberle)''): fit_rows.load will raise KeyError until the ledger
+      string or the key file is aligned.'
+  species_used:
+  - MGO
+  - HA

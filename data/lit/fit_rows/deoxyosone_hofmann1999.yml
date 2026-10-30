@@ -1,0 +1,65 @@
+# ADJUDICATED 2026-10-30 (lead): two readers agree within error except where Table 3 and Fig. 10 both print a point;
+# the printed table value is taken there (MGO 120 min; glycolaldehyde 10 / 60 / 120 min, whose two prints disagree by
+# 0.05-0.07 dex -- CF-067 -- and carry that as their error). The pot is engine_species_missing: alanine is the amine and
+# the lane has no xylose + alanine -> Amadori step; verified data for when it does, NOT a fit row today.
+# KEYED FIT TABLE -- Hofmann 1999 (Eur Food Res Technol 209:113, DFA Garching), the xylose + L-alanine pot: methylglyoxal
+# (MGO) and glycolaldehyde (engine HA) time courses, for sub-models 3 + 4 (the C3 / C2 fragments of the pentose).
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS; every row an sd as
+# printed or a read_error in dex). Laboratory and quantification class come from the ledger entry.
+# FIRST READER: agent-sm34-reader1-2026-10-30, against the PDF (data/articles/hofmann1999.pdf), not the dossier.
+# Second reader: pending (data/lit/source_verification/deoxyosone_hofmann1999.yml).
+# Conventions:
+#   * Source of every value: Fig. 10 (400 ppi CCITT raster, page 118), digitised; where Fig. 10 has no point (MGO at
+#     60 min sits inside the axis break 70-100 ug/mmol; glycolaldehyde has no 5-min marker) the value is Table 3's
+#     relative browning activity divided by the Table 1 colour-dilution factor (Eq. 1: BPA = concentration (umol/mmol)
+#     x CD factor; CD 256 for 2-oxopropanal, 1024 for glycolaldehyde). Table 3 is the same pot (ledger
+#     hofmann1999_tab2_3_browning_activity_products is flagged duplicate_of the figure entries): each (species, time)
+#     enters ONCE. The table-derived rows sit under the figure's ledger id, whose ledger `location` names the Table 3
+#     back-calculation for 5 and 60 min. Where both exist, the figure is used and the Table 3 number is kept in
+#     `table3_check`.
+#   * Units: the paper prints ug per mmol of starting xylose. Converted to mmol/L on a stated basis: 6 mmol xylose +
+#     6 mmol L-alanine dissolved in 4 mL buffer; final volume 4.000 + 6 mmol x 95.6 mL/mol (D-xylose, apparent molar
+#     volume in water) + 6 mmol x 60.4 mL/mol (L-alanine) = 4.94 mL -> 1215.6 mmol/L each.
+#     value (mmol/L) = printed (ug/mmol xylose) / MW (MGO 72.06, glycolaldehyde 60.05) x 1215.6 / 1000.
+#     The basis is a declared assumption (the paper states neither the final volume nor any evaporation under reflux):
+#     ignoring the solids' volume gives 1500 mmol/L (+23 %); the conversion is a common scale on every row and on the
+#     pot's initial_mmol_L, so value / PENT0 is exactly the printed ratio. `printed` keeps the ug/mmol value.
+#   * read_error (dex) = transcription error only: the digitising error of a marker (lower scale 11.81 px per ug/mmol,
+#     six ticks 10-60, linear to 1 px; upper scale above the break 3.35 px per ug/mmol, two ticks 100 / 120) or half
+#     the last printed digit of a Table 3 BPA. No replicate scatter is printed (no n, no SD, no error bars).
+#   * Rows carry their pot's ledger_id (redundant, for grep).
+status: ready   # two readers; adjudicated 2026-10-30 (see header)
+pots:
+  hofmann1999_xyl_ala_reflux:
+    {ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments,
+     engine_species_missing: true,   # L-alanine (the amine) is not an engine species: kept, reported, not fitted until it is
+     t_c: 100,
+     t_c_basis: "declared ~100 C: the paper says only 'refluxed'. Reflux of this solution sits at its boiling point: ideal ebullioscopy for ~1.6 mol/kg xylose + ~1.6 mol/kg alanine + 0.5 M phosphate (~1.4 osmol/kg) gives +2-3 K; Garching (~480 m a.s.l.) lowers water's boiling point by ~1.6 K; so ~100-102 C, not measured",
+     minutes: 180,
+     initial_mmol_L: {PENT: 1215.6, Ala: 1215.6},
+     concentration_basis: "6 mmol each in 4 mL buffer + the solutes' volume (xylose 95.6, alanine 60.4 mL/mol) = 4.94 mL; 1500 mmol/L if the solids' volume is ignored; reflux evaporation not stated",
+     amine_note: "Ala = L-alanine, the amine. Not an engine key: the sulfur lane's pentose enolisation is written with Cys as the amine (r_pent_dpo / r_pent_tdp), the trunk's amine is Gly; only the amine-free steps (r_pent_caramel, r_pent_thermal_dpo, r_pent_mgo) act without one. A pentose + alanine pot is therefore outside the engine's chemistry until an alanine (or generic amino acid) key exists.",
+     buffer: "phosphate 0.5 M (counter-ion not stated), pH 7.0 as prepared; pH not held, not re-measured",
+     label_ph: 7.0,
+     ph_measured_at: "the buffer's stated pH before the reactants were dissolved; the pot's pH never reported (start or end)",
+     vessel: "reflux apparatus, volume not stated; one pot per reaction time is implied ('for the reaction times given in Figs. 3-6') but not stated; heat-up and the definition of t = 0 not stated",
+     workup: "rapid cooling (on ice, Results), then derivatisation: a quarter of the mixture + 2 mL 1,2-diaminobenzene (methanolic, printed '1 mmol/l') for the dicarbonyls; the hydroxycarbonyls with 4 mmol ethoxamine in 'the reacted Maillard mixtures' (how the mixture was split between the methods is not stated)",
+     condition_quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine for the reaction times given in Figs. 3–6."}
+rows:
+  # ---- methylglyoxal (2-oxopropanal, open circles in Fig. 10) ----
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: MGO, t_min: 5, value: 0.4189, unit: mmol_L, printed: 'Fig. 10 (digitised): 24.8 ug/mmol xylose (0.345 umol/mmol)', read_error: 0.004, read_error_basis: '+-0.2 ug/mmol (2.4 px), ring centre, lower scale', table3_check: 'BPA 89 / CD 256 = 0.348 umol/mmol = 25.05 ug/mmol (figure / table 0.99)'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: MGO, t_min: 10, value: 0.7077, unit: mmol_L, printed: 'Fig. 10 (digitised): 42.0 ug/mmol xylose (0.582 umol/mmol)', read_error: 0.002, read_error_basis: '+-0.2 ug/mmol (2.4 px), ring centre, lower scale', table3_check: 'BPA 148 / CD 256 = 0.578 umol/mmol = 41.66 ug/mmol (figure / table 1.01)'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: MGO, t_min: 20, value: 0.9273, unit: mmol_L, printed: 'Fig. 10 (digitised): 55.0 ug/mmol xylose (0.763 umol/mmol)', read_error: 0.002, read_error_basis: '+-0.2 ug/mmol (2.4 px), ring centre, lower scale'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: MGO, t_min: 40, value: 1.139, unit: mmol_L, printed: 'Fig. 10 (digitised): 67.5 ug/mmol xylose (0.937 umol/mmol)', read_error: 0.001, read_error_basis: '+-0.2 ug/mmol (2.4 px), ring centre, lower scale'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: MGO, t_min: 60, value: 1.3105, unit: mmol_L, source: table3, printed: 'Table 3 (xylose), 2-oxopropanal 60 min: BPA 276 / CD 256 (Table 1) = 1.078 umol/mmol = 77.7 ug/mmol xylose; the Fig. 10 point lies inside the axis break (70-100)', read_error: 0.001, read_error_basis: 'half the last printed digit of the BPA: +-0.5 / 256 umol/mmol = +-0.14 ug/mmol'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: MGO, t_min: 120, value: 1.8314, unit: mmol_L, source: table3, printed_figure: 'Fig. 10 (digitised, upper scale above the break): 111.9 ug/mmol xylose (1.553 umol/mmol)', read_error: 0.001, read_error_basis: 'ADJUDICATED (lead, 2026-10-30): the printed Table 3 value (BPA 386 / CD 256) over the figure read (figure / table 1.03); half the last printed digit', table3_check: 'BPA 386 / CD 256 = 1.508 umol/mmol = 108.65 ug/mmol (figure / table 1.03)'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: MGO, t_min: 180, value: 2.029, unit: mmol_L, printed: 'Fig. 10 (digitised, upper scale): 120.3 ug/mmol xylose (1.669 umol/mmol); text p. 118: "reaching a yield of about 0.2% (120 ug/mmol xylose) after a reaction time of 180 min"', read_error: 0.004, read_error_basis: '+-1.0 ug/mmol on the compressed upper scale (3.35 px per ug/mmol); nominal 180 min'}
+  # ---- glycolaldehyde (hydroxyacetaldehyde, engine HA; filled squares in Fig. 10) ----
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: HA, t_min: 5, value: 0.0807, unit: mmol_L, source: table3, printed: 'Table 3 (xylose), glycolaldehyde 5 min: BPA 68 / CD 1024 (Table 1) = 0.0664 umol/mmol = 3.99 ug/mmol xylose; Fig. 10 has no 5-min glycolaldehyde marker', read_error: 0.003, read_error_basis: 'half the last printed digit of the BPA: +-0.5 / 1024 umol/mmol = +-0.03 ug/mmol', scale_note: 'where both exist the figure reads 0.86-0.90 x the Table 3 value for glycolaldehyde (10, 60, 120 min); this table-derived point may sit ~12 % high relative to the figure series'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: HA, t_min: 10, value: 0.1625, unit: mmol_L, source: table3, printed_figure: 'Fig. 10 (digitised): 7.1 ug/mmol xylose (0.118 umol/mmol); text: maximum after 10 min', read_error: 0.066, read_error_basis: 'ADJUDICATED (lead, 2026-10-30): the printed Table 3 value (BPA / CD) taken over the figure read; the paper prints this point twice and the two disagree (Fig. 10 / Table 3 = 0.86-0.90, CF-067): the error covers both prints (log10(1 / 0.86))', table3_check: 'BPA 137 / CD 1024 = 0.134 umol/mmol = 8.03 ug/mmol (figure / table 0.88)'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: HA, t_min: 20, value: 0.1010, unit: mmol_L, printed: 'Fig. 10 (digitised): 5.0 ug/mmol xylose (0.083 umol/mmol)', read_error: 0.017, read_error_basis: '+-0.2 ug/mmol (2.4 px), filled-square centre, lower scale'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: HA, t_min: 40, value: 0.0658, unit: mmol_L, printed: 'Fig. 10 (digitised): 3.25 ug/mmol xylose (0.054 umol/mmol)', read_error: 0.026, read_error_basis: '+-0.2 ug/mmol (2.4 px), filled-square centre, lower scale'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: HA, t_min: 60, value: 0.0712, unit: mmol_L, source: table3, printed_figure: 'Fig. 10 (digitised): 3.17 ug/mmol xylose (0.053 umol/mmol)', read_error: 0.066, read_error_basis: 'ADJUDICATED (lead, 2026-10-30): the printed Table 3 value (BPA / CD) taken over the figure read; the paper prints this point twice and the two disagree (Fig. 10 / Table 3 = 0.86-0.90, CF-067): the error covers both prints (log10(1 / 0.86))', table3_check: 'BPA 60 / CD 1024 = 0.0586 umol/mmol = 3.52 ug/mmol (figure / table 0.90)'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: HA, t_min: 80, value: 0.0633, unit: mmol_L, printed: 'Fig. 10 (digitised): 3.12 ug/mmol xylose (0.052 umol/mmol)', read_error: 0.027, read_error_basis: '+-0.2 ug/mmol (2.4 px), filled-square centre, lower scale'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: HA, t_min: 120, value: 0.0688, unit: mmol_L, source: table3, printed_figure: 'Fig. 10 (digitised): 2.91 ug/mmol xylose (0.0485 umol/mmol)', read_error: 0.066, read_error_basis: 'ADJUDICATED (lead, 2026-10-30): the printed Table 3 value (BPA / CD) taken over the figure read; the paper prints this point twice and the two disagree (Fig. 10 / Table 3 = 0.86-0.90, CF-067): the error covers both prints (log10(1 / 0.86))', table3_check: 'BPA 58 / CD 1024 = 0.0566 umol/mmol = 3.40 ug/mmol (figure / table 0.86)'}
+  - {pot: hofmann1999_xyl_ala_reflux, ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments, species: HA, t_min: 180, value: 0.0555, unit: mmol_L, printed: 'Fig. 10 (digitised): 2.74 ug/mmol xylose (0.0457 umol/mmol)', read_error: 0.031, read_error_basis: '+-0.2 ug/mmol (2.4 px), filled-square centre, lower scale'}

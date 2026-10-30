@@ -21,7 +21,7 @@ groups:
     strings: ["Jiangnan (Zhang X / Cui H / Ho)", "Jiangnan (Zhang X. / Ho)", "Zhejiang Gongshang / Jiangnan (Fu Y / Zhang X / Ho)"]
     evidence: "Zhang Xiaoming's group at Jiangnan (Cui, Hayat, Zhai, Zhou, Deng, Feng); Ho (Rutgers) co-authors many. Zhai 2023 JAFC (Zhai Y, Cui, Hayat, Fu, Zhang X*, Ho*) belongs here"
   dfa_hofmann_schieberle:
-    strings: ["DFA Garching (Hofmann / Schieberle)", "DFA Munich (Hofmann / Schieberle)"]
+    strings: ["DFA Garching (Hofmann / Schieberle)", "DFA Munich (Hofmann / Schieberle)", "DFA Garching (Hofmann)"]
     evidence: "Deutsche Forschungsanstalt fuer Lebensmittelchemie (Garching, by Munich): Hofmann and Schieberle, one institute and method set"
   ogawa_kumazawa:
     strings: ["Ogawa & Co. (Kumazawa / Masuda)"]

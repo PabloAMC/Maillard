@@ -1575,3 +1575,21 @@ entries:
       count_once: zhai2023foodchem (100 C arms) -> zhai2021; zhai2023jafc (T-100 20-120) -> zhai2021; zhai2023foodchem
       (TTCA-alone 120 / 140 C) -> zhai2023jafc (counted there).
     affects: [zhai2021_fig5ab_deoxyosones_ph_ladder, zhai2021_fig5_dicarbonyls_ph_ladder, zhai2023foodchem_fig2_deoxyosones, zhai2023foodchem_fig3_cys_da_mgo_go, zhai2023jafc_fig5_arp_dicarbonyls, zhai2023jafc_fig5bc_deoxyosones]
+  - id: CF-067
+    kind: self_contradiction
+    scope: corpus
+    sources: [hofmann1999]
+    quantity: "glycolaldehyde from xylose + L-alanine (pH 7, reflux): Hofmann 1999 Fig. 10 vs Table 3 (browning activity / colour-dilution factor)"
+    observation: >-
+      Where the paper prints a point twice, its figure reads 0.86-0.90x its table for glycolaldehyde (10, 60, 120 min),
+      while methylglyoxal agrees (0.99-1.03) and glyoxal at 10 min agrees exactly -- so it is not a reading error (two
+      independent readers, 2026-10-30). Also: the derivatising reagent is printed as 2 umol per quarter pot (2 mL of
+      1 mmol/L OPD), below the dicarbonyl it must trap (MGO alone 2.5 umol at 180 min): a misprint for 1 mol/L, or
+      OPD-limited (then early dicarbonyl values are lower bounds).
+    explanations:
+      - "The figure was drawn from a different analysis or replicate set than the table."
+      - "A transcription slip in Table 3's glycolaldehyde colour-dilution factor."
+    tests: []
+    status: open
+    remedy: "The keyed table takes the printed table value where both exist and carries the disagreement as the row's error (0.066 dex)."
+    affects: []

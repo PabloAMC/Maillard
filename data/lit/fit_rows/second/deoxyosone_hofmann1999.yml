@@ -1,0 +1,211 @@
+# Draft fit table, Hofmann 1999 Eur Food Res Technol 209:113 (hofmann1999.pdf), xylose + L-alanine pot:
+# methylglyoxal (MGO) and glycolaldehyde (HA). SECOND, independent reader (agent-sm34-reader2-2026-10-30); read from the
+# paper only (no dossier, no first reader's file). status: draft.
+#
+# Units. The paper prints amounts per mmol starting xylose: Fig. 10 in ug/mmol xylose; Table 3 as "relative browning
+# activity" = concentration (umol/mmol, Eq. 1, p. 118) x CD factor (Table 1: 2-oxopropanal 256, glycolaldehyde 1024).
+# Rows are in mmol/L on a DECLARED volume basis (the pot's): 6 mmol xylose + 6 mmol L-alanine dissolved in 4 mL buffer,
+# final volume 4.94 mL from the partial molar volumes (xylose ~95.5, L-alanine ~60.5 cm3/mol, 25 C):
+#   c [mmol/L] = (umol per mmol xylose) x 6 / 4.94 = (umol/mmol) x 1.21457.
+# The same factor sets the pot's PENT, so yields per xylose are invariant to it; a 4.0 mL basis would shift every row
+# and the initial PENT by +0.09 dex together. Each row keeps the printed number (value_as_printed, unit_as_printed).
+#
+# Each value once. Table 3 (printed integers) is used at 5 / 10 / 60 / 120 min; Fig. 10 only at the times Table 3 lacks
+# (MGO 20 / 40 / 180, HA 20 / 40 / 80 / 180). Fig. 10 has no HA point at 5 min and no MGO point at 60 / 80 min (axis
+# break 70-100), so Table 3 is the only source there.
+# Errors: no SD, no replicates printed. read_error (dex) = transcription only: half the last printed digit of the Table 3
+# integer, or 2 px on the Fig. 10 raster (4 px for MGO 40 min, see read_error_basis). It does NOT cover replicate or method
+# scatter; the measurement model must add it (fitting.estimate_series_noise).
+# CROSS-CHECK (overlap times, Fig. 10 / Table 3): MGO 0.99, 1.01, 1.03 (5, 10, 120 min) -> consistent. HA 0.88, 0.90, 0.86
+# (10, 60, 120 min) -> Fig. 10 sits 0.04-0.07 dex BELOW Table 3, systematically; the HA series mixes both sources, so the
+# HA rows carry source_disagreement_dex for the adjudicator.
+status: draft
+submodel: deoxyosone_submodel
+read_by: agent-sm34-reader2-2026-10-30
+pots:
+  hofmann1999_xyl_ala_reflux:
+    ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments
+    t_c: 100
+    t_c_basis: 'Declared, not stated: "refluxed" (p. 115). An open reflux of this solution boils ~1.5-2.5 K above 100 C
+      (xylose ~1.5 + alanine ~1.5 mol/kg water, 0.5 M phosphate; 0.512 K kg/mol), i.e. ~101.5-102.5 C at 1 atm; heat-up
+      time to reflux not stated (matters for the 5 min point).'
+    minutes: 180
+    initial_mmol_L:
+      PENT: 1214.6
+      Ala: 1214.6   # adjudicated 2026-10-30: alanine is the amine; recorded as charged (not an engine species)
+    engine_species_missing: true   # adjudicated: the lane has no xylose + alanine -> ARP condensation
+    amino_acid_not_engine_species:
+      L-alanine_mmol_L: 1214.6
+      note: L-alanine 6 mmol, same volume basis. Alanine is not an engine species key (the engine's amino acid is Gly);
+        recorded here, mapping left to the adjudicator.
+    volume_basis: '6 mmol xylose + 6 mmol L-alanine in 4 mL buffer; final volume not stated; declared 4.94 mL (4 mL + 0.573
+      mL xylose + 0.363 mL alanine from partial molar volumes at 25 C). Range 4.0-5.0 mL -> -0.005 / +0.09 dex.'
+    label_ph: 7.0
+    ph_measured_during: false
+    buffer: phosphate 0.5 M (counter-ion not stated)
+    condition_quote: Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed
+      in the presence of 6 mmol L-alanine for the reaction times given in Figs. 3-6.
+    note: 'Open reflux (air). Whether each time is a separate pot is not stated (wording suggests one pot per reaction time).
+      Dicarbonyls: a quarter of the pot, derivatised AFTER cooling with 2 mL of 1 mmol/L 1,2-diaminobenzene (= 2 umol OPD,
+      read on the page image) against ~1.5 mmol xylose worth of mixture that holds >10 umol of alpha-dicarbonyls at 5-20 min
+      (3-deoxypentosone alone ~9.5 umol/mmol at 10 min, p. 116) -> OPD likely limiting; the [13C4]-butane-2,3-dione IS
+      competes for the same OPD, which only partly compensates. Glycolaldehyde: 4 mmol ethoxamine (in excess).'
+rows:
+- pot: hofmann1999_xyl_ala_reflux
+  species: MGO
+  t_min: 5
+  value: 0.4223
+  unit: mmol_L
+  read_error: 0.0024
+  read_error_basis: Table 3 integer 89 +/- 0.5
+  value_as_printed: 89
+  unit_as_printed: relative browning activity (umol/mmol xylose x CD 256) -> 0.3477 umol/mmol = 25.05 ug/mmol
+  source: Table 3 (2-oxopropanal, 5 min)
+- pot: hofmann1999_xyl_ala_reflux
+  species: MGO
+  t_min: 10
+  value: 0.7022
+  unit: mmol_L
+  read_error: 0.0015
+  read_error_basis: Table 3 integer 148 +/- 0.5
+  value_as_printed: 148
+  unit_as_printed: relative browning activity (umol/mmol xylose x CD 256) -> 0.5781 umol/mmol = 41.66 ug/mmol
+  source: Table 3 (2-oxopropanal, 10 min)
+- pot: hofmann1999_xyl_ala_reflux
+  species: MGO
+  t_min: 20
+  value: 0.9262
+  unit: mmol_L
+  read_error: 0.0013
+  read_error_basis: 2 px on the 400 ppi raster (lower y segment 11.81 px per ug/mmol); open-circle centre by ring fit
+  value_as_printed: 54.95
+  unit_as_printed: ug/mmol xylose (Fig. 10, digitised) -> 0.7625 umol/mmol
+  source: Fig. 10 (open circles)
+- pot: hofmann1999_xyl_ala_reflux
+  species: MGO
+  t_min: 40
+  value: 1.1374
+  unit: mmol_L
+  read_error: 0.0022
+  read_error_basis: 4 px (the printed 70 tick sits 3 px off the 10-60 tick line; this point is next to it)
+  value_as_printed: 67.48
+  unit_as_printed: ug/mmol xylose (Fig. 10, digitised) -> 0.9364 umol/mmol
+  source: Fig. 10 (open circles)
+- pot: hofmann1999_xyl_ala_reflux
+  species: MGO
+  t_min: 60
+  value: 1.3095
+  unit: mmol_L
+  read_error: 0.0008
+  read_error_basis: Table 3 integer 276 +/- 0.5
+  value_as_printed: 276
+  unit_as_printed: relative browning activity (umol/mmol xylose x CD 256) -> 1.0781 umol/mmol = 77.69 ug/mmol
+  source: Table 3 (2-oxopropanal, 60 min); not plotted in Fig. 10 (axis break 70-100)
+- pot: hofmann1999_xyl_ala_reflux
+  species: MGO
+  t_min: 120
+  value: 1.8314
+  unit: mmol_L
+  read_error: 0.0006
+  read_error_basis: Table 3 integer 386 +/- 0.5
+  value_as_printed: 386
+  unit_as_printed: relative browning activity (umol/mmol xylose x CD 256) -> 1.5078 umol/mmol = 108.65 ug/mmol
+  source: Table 3 (2-oxopropanal, 120 min); Fig. 10 reads 112.0 ug/mmol (+0.013 dex)
+- pot: hofmann1999_xyl_ala_reflux
+  species: MGO
+  t_min: 180
+  value: 2.0281
+  unit: mmol_L
+  read_error: 0.0021
+  read_error_basis: 2 px on the upper y segment (100-120 at 3.36 px per ug/mmol)
+  value_as_printed: 120.33
+  unit_as_printed: ug/mmol xylose (Fig. 10, digitised) -> 1.6698 umol/mmol
+  source: Fig. 10 (open circles); text p. 118 'about 0.2% (120 ug/mmol xylose) after a reaction time of 180 min' (same value)
+- pot: hofmann1999_xyl_ala_reflux
+  species: HA
+  t_min: 5
+  value: 0.0807
+  unit: mmol_L
+  read_error: 0.0032
+  read_error_basis: Table 3 integer 68 +/- 0.5
+  value_as_printed: 68
+  unit_as_printed: relative browning activity (umol/mmol xylose x CD 1024) -> 0.06641 umol/mmol = 3.99 ug/mmol
+  source: Table 3 (glycolaldehyde, 5 min); no HA marker at 5 min in Fig. 10
+  source_disagreement_dex: 0.055
+- pot: hofmann1999_xyl_ala_reflux
+  species: HA
+  t_min: 10
+  value: 0.1625
+  unit: mmol_L
+  read_error: 0.0016
+  read_error_basis: Table 3 integer 137 +/- 0.5
+  value_as_printed: 137
+  unit_as_printed: relative browning activity (umol/mmol xylose x CD 1024) -> 0.13379 umol/mmol = 8.03 ug/mmol
+  source: Table 3 (glycolaldehyde, 10 min); Fig. 10 reads 7.07 ug/mmol (-0.055 dex)
+  source_disagreement_dex: 0.055
+- pot: hofmann1999_xyl_ala_reflux
+  species: HA
+  t_min: 20
+  value: 0.1011
+  unit: mmol_L
+  read_error: 0.0147
+  read_error_basis: 2 px on the 400 ppi raster (11.81 px per ug/mmol); filled-square centre by 9x9 erosion
+  value_as_printed: 5.0
+  unit_as_printed: ug/mmol xylose (Fig. 10, digitised) -> 0.0833 umol/mmol
+  source: Fig. 10 (filled squares)
+  source_disagreement_dex: 0.055
+- pot: hofmann1999_xyl_ala_reflux
+  species: HA
+  t_min: 40
+  value: 0.0657
+  unit: mmol_L
+  read_error: 0.0227
+  read_error_basis: 2 px on the 400 ppi raster; filled-square centre by 9x9 erosion
+  value_as_printed: 3.25
+  unit_as_printed: ug/mmol xylose (Fig. 10, digitised) -> 0.0541 umol/mmol
+  source: Fig. 10 (filled squares)
+  source_disagreement_dex: 0.055
+- pot: hofmann1999_xyl_ala_reflux
+  species: HA
+  t_min: 60
+  value: 0.0712
+  unit: mmol_L
+  read_error: 0.0036
+  read_error_basis: Table 3 integer 60 +/- 0.5
+  value_as_printed: 60
+  unit_as_printed: relative browning activity (umol/mmol xylose x CD 1024) -> 0.05859 umol/mmol = 3.52 ug/mmol
+  source: Table 3 (glycolaldehyde, 60 min); Fig. 10 reads 3.18 ug/mmol (-0.044 dex)
+  source_disagreement_dex: 0.055
+- pot: hofmann1999_xyl_ala_reflux
+  species: HA
+  t_min: 80
+  value: 0.0633
+  unit: mmol_L
+  read_error: 0.0235
+  read_error_basis: 2 px on the 400 ppi raster; filled-square centre by 9x9 erosion
+  value_as_printed: 3.13
+  unit_as_printed: ug/mmol xylose (Fig. 10, digitised) -> 0.0521 umol/mmol
+  source: Fig. 10 (filled squares)
+  source_disagreement_dex: 0.055
+- pot: hofmann1999_xyl_ala_reflux
+  species: HA
+  t_min: 120
+  value: 0.0688
+  unit: mmol_L
+  read_error: 0.0037
+  read_error_basis: Table 3 integer 58 +/- 0.5
+  value_as_printed: 58
+  unit_as_printed: relative browning activity (umol/mmol xylose x CD 1024) -> 0.05664 umol/mmol = 3.40 ug/mmol
+  source: Table 3 (glycolaldehyde, 120 min); Fig. 10 reads 2.92 ug/mmol (-0.067 dex)
+  source_disagreement_dex: 0.055
+- pot: hofmann1999_xyl_ala_reflux
+  species: HA
+  t_min: 180
+  value: 0.0554
+  unit: mmol_L
+  read_error: 0.0269
+  read_error_basis: 2 px on the 400 ppi raster; filled-square centre by 9x9 erosion
+  value_as_printed: 2.74
+  unit_as_printed: ug/mmol xylose (Fig. 10, digitised) -> 0.0456 umol/mmol
+  source: Fig. 10 (filled squares)
+  source_disagreement_dex: 0.055
