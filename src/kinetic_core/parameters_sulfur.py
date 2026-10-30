@@ -499,6 +499,43 @@ PENTOSE_MGO_ROUTES = PentoseMgoRoutes()
 
 
 @dataclass(frozen=True)
+class PentoseAmineEntry:
+    """
+    Pentose + amine entry and the pentose acetic-acid step (2026-10-30; kinetic_core_pentose_amine_entry_prereg.md),
+    OFF by default (rates zero). ``r_pent_amine``: PENT + Gly -> PAMA, second order, L/(mmol min) at 100 C and pH 6,
+    times 10^(entry_ph_slope (pH - 6)) on the in-situ pH; PAMA's two enolisations run at ARP's derived rates (a
+    declared assumption: the Amadori compound's breakdown does not depend on its amino acid) and return the amino
+    acid. ``r_dpo_aa``: 1-deoxypentosone -> acetic acid + C3 (hydrolytic beta-cleavage of the 2,4-diulose, Davidek
+    2008), first order, 1/min at 100 C and pH 6, times 10^(aa_ph_slope (pH - 6)). Every constant FITTED (Davidek 2008,
+    Desclaux 2006); Ea of the entry at Martins 2003's hexose condensation (declared transfer), of the cleavage at the
+    carbonyl family's.
+    """
+
+    k_entry_l_per_mmol_min_100c_ph6: float = 0.0
+    entry_ph_slope: float = 0.0
+    ea_entry_kj_mol: float = 64.08
+    k_dpo_aa_per_min_100c_ph6: float = 0.0
+    aa_ph_slope: float = 0.0
+    ea_dpo_aa_kj_mol: float = 64.08
+    #: PAMA's enolisations as multiples of ARP's derived rates. The probe (2026-10-30) found ARP's 4.2x (to 1-DP) and
+    #: 9.1x (to 3-DP) slower than Desclaux 2006's MEASURED glycine-xylose constants (2.79e-2 / 5.50e-4 per min, pH 6,
+    #: 100 C): the prereg's declared alternative (> x3) puts PAMA on Desclaux's level, ARP's pH and T dependence.
+    pama_dpo_factor: float = 1.0
+    pama_tdp_factor: float = 1.0
+
+    @property
+    def enabled(self) -> bool:
+        return self.k_entry_l_per_mmol_min_100c_ph6 > 0.0
+
+    @staticmethod
+    def k_at(k_100: float, ea: float, temperature_k: float) -> float:
+        return float(k_100) * math.exp(-float(ea) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+PENTOSE_AMINE_ENTRY = PentoseAmineEntry()
+
+
+@dataclass(frozen=True)
 class MgoCysteineStrecker:
     """
     Sub-model 3 + 4 (2026-10-30; the joint fit's design review, B5), OFF by default (rate 0): the Strecker

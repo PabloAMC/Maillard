@@ -208,6 +208,7 @@ def test_the_untracked_list_is_pinned_so_nothing_joins_silently():
         "LYSP", "FLP", "CML", "CEL",   # B20 (2026-09-09): the glycation arm, zero without a protein loading
         "MET", "MSH",                  # B22 (2026-09-09): the methionine chain
         "PRO", "PYRL", "AP",           # B24 (2026-09-09): proline's odorant
+        "PAMA",                        # 2026-10-30: the pentose + amine entry's Amadori compound, as AMA
     }
     for key, reason in PH.UNTRACKED_TITRATABLE.items():
         assert len(reason) > 60, f"{key}: a gap needs a stated reason"

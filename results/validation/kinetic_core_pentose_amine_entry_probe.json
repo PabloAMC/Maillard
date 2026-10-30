@@ -1,0 +1,671 @@
+{
+ "artifact": "kinetic_core_pentose_amine_entry_probe",
+ "provenance": {
+  "artifact": "kinetic_core_pentose_amine_entry_probe",
+  "generated_on": "2026-10-30",
+  "git": {
+   "commit": "5c73ca98a33dbd8f4a39dcf98edc9643af7f0ec7",
+   "short": "5c73ca98",
+   "branch": "submodel1-ph",
+   "dirty": true
+  },
+  "generated_by": "scripts/generators/probe_pentose_amine_entry.py",
+  "inputs": [
+   {
+    "path": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042.json",
+    "sha256": "081c498ded922f83f1319994699f2d3ab8fe5d95c395e1b4130338d1a24f6144"
+   },
+   {
+    "path": "src/kinetic_core/sulfur.py",
+    "sha256": "4f8420df63355375cd886f481fd40c1d28b96fde636336a4f31a107b57fe9a0f"
+   },
+   {
+    "path": "src/kinetic_core/parameters_sulfur.py",
+    "sha256": "74dcc8e197c7f322c1d778e1a9ea592e1d85948fd77ea1554b3d6c5969877adc"
+   },
+   {
+    "path": "data/lit/fit_rows/ph_acid_davidek_acids.yml",
+    "sha256": "af52f68f8e9ab8dd68b83d46c05fb8e28a2ece13fe9639d91f83e79e17aa1338"
+   },
+   {
+    "path": "data/lit/fit_rows/deoxyosone_submodel.yml",
+    "sha256": "4af9c953a653ef5ed8377a0b34efe81774111bf3a47706f5799cc182f5775853"
+   },
+   {
+    "path": "data/lit/fit_rows/ph_acid_submodel.yml",
+    "sha256": "27db4b0c5a7e4c594d29fb4e3395d15121aac0a7c84b36f06c3641891a3574c9"
+   }
+  ]
+ },
+ "base_fit": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042.json",
+ "ph_slopes": 0.3,
+ "pama_factors": {
+  "pama_dpo_factor": 4.139022442570774,
+  "pama_tdp_factor": 9.13331167984854
+ },
+ "grid": {
+  "off": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": 1.0380896025749504,
+    "rms": 1.136526961389018
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": -0.9910050711429549,
+    "rms": 0.9983114915171494
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.2414893933913436,
+    "rms": 1.3056736274335443
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.8211956097396712,
+    "rms": 1.3625022783748033
+   }
+  },
+  "entry 3e-05 / aa 0.01": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -1.0201281368978512,
+    "rms": 1.0992103222911047
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": 0.6912581887939153,
+    "rms": 0.7755762832936259
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 0.88725787539969,
+    "rms": 0.9113602483614079
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.1765376527365827,
+    "rms": 1.2334594472328024
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.7894700224163632,
+    "rms": 1.3149797406241455
+   }
+  },
+  "entry 3e-05 / aa 0.03": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.6460243115495659,
+    "rms": 0.7453959682458247
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": 0.7031710801675227,
+    "rms": 0.7907842161553957
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 0.848855335525976,
+    "rms": 0.8729990921153542
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.1781914295573757,
+    "rms": 1.2353714996292888
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.7381211356533072,
+    "rms": 1.2391710937890488
+   }
+  },
+  "entry 3e-05 / aa 0.1": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.33536011585892955,
+    "rms": 0.46712722794628136
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": 0.7203785432954324,
+    "rms": 0.809505548663191
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 0.7384218501124035,
+    "rms": 0.763670392515255
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.1825695415365074,
+    "rms": 1.2404278300523954
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.6126518613000711,
+    "rms": 1.0594864459432443
+   }
+  },
+  "entry 3e-05 / aa 0.3": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.16172455439686917,
+    "rms": 0.33783832482577475
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": 0.7363317098737688,
+    "rms": 0.8243241501084059
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 0.528345618474749,
+    "rms": 0.5601036250896374
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.1892897975065908,
+    "rms": 1.2481860228510078
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.4191176253644129,
+    "rms": 0.8041288735785307
+   }
+  },
+  "entry 7e-05 / aa 0.01": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.9314455339119011,
+    "rms": 1.0519861690330283
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": 0.2542933564534626,
+    "rms": 0.5541313968507097
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 1.1352533041462247,
+    "rms": 1.1479531337182685
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.1162939178067965,
+    "rms": 1.1674767483189508
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.7894700224163632,
+    "rms": 1.3149797406241455
+   }
+  },
+  "entry 7e-05 / aa 0.03": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.5603245341668107,
+    "rms": 0.7271387897823216
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": 0.2917345364962993,
+    "rms": 0.5809461572853498
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 1.0954932791684466,
+    "rms": 1.1079905402927048
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.1218143767513324,
+    "rms": 1.1737600016183942
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.7381211356533072,
+    "rms": 1.2391710937890488
+   }
+  },
+  "entry 7e-05 / aa 0.1": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.2502861399738807,
+    "rms": 0.5002859568166426
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": 0.34528204901621856,
+    "rms": 0.6009501253483286
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 0.9834509200122514,
+    "rms": 0.9959958607991595
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.1369298201299713,
+    "rms": 1.1909591988929853
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.6126518613000711,
+    "rms": 1.0594864459432443
+   }
+  },
+  "entry 7e-05 / aa 0.3": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.07447142163002074,
+    "rms": 0.42056719734244347
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": 0.39614670077562436,
+    "rms": 0.6082977090981807
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 0.7754603915116381,
+    "rms": 0.7901416819109802
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.161861984847695,
+    "rms": 1.2193676066943433
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.4191176253644129,
+    "rms": 0.8041288735785307
+   }
+  },
+  "entry 0.0002 / aa 0.01": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.8865817331259453,
+    "rms": 1.0585779088769878
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": -1.1287142294564518,
+    "rms": 1.9407865352640417
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 1.343848918160532,
+    "rms": 1.3480121286632896
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.006013689153113,
+    "rms": 1.0491624588867643
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.7894700224163632,
+    "rms": 1.3149797406241455
+   }
+  },
+  "entry 0.0002 / aa 0.03": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.5177159134062383,
+    "rms": 0.7646621887976464
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": -0.9957143513127292,
+    "rms": 1.8484891184823908
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 1.3035957425540337,
+    "rms": 1.3076335191453552
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.022163696143188,
+    "rms": 1.066996555332855
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.7381211356533072,
+    "rms": 1.2391710937890488
+   }
+  },
+  "entry 0.0002 / aa 0.1": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.21034180732093022,
+    "rms": 0.5843023390153551
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": -0.8061665686049599,
+    "rms": 1.6743456497875915
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 1.1925569034023185,
+    "rms": 1.19655795323742
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.0683036711966543,
+    "rms": 1.1179602953879024
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.6126518613000711,
+    "rms": 1.0594864459432443
+   }
+  },
+  "entry 0.0002 / aa 0.3": {
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | AA": {
+    "n": 11,
+    "mean": -0.035759917294654615,
+    "rms": 0.5339410674593227
+   },
+   "davidek2008_fig1_xylose_gly_acetic_residual_xylose | PENT": {
+    "n": 8,
+    "mean": -0.627548222913784,
+    "rms": 1.4718892891322415
+   },
+   "davidek2006a_tab1_glc_gly_acetic_ph | AA": {
+    "n": 13,
+    "mean": -0.11061379015426163,
+    "rms": 0.763465914943494
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | AA": {
+    "n": 3,
+    "mean": NaN,
+    "rms": NaN
+   },
+   "davidek2006a_text_3dg_gly_acetic_formic | FA": {
+    "n": 3,
+    "mean": 1.1602537443392018,
+    "rms": 1.1663885557296527
+   },
+   "davidek2006b_tab1_glc_gly_acetic_atmosphere | AA": {
+    "n": 3,
+    "mean": -1.2875962162077823,
+    "rms": 1.2877054277508055
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | NF": {
+    "n": 4,
+    "mean": 0.9918981954928869,
+    "rms": 0.9967050404736754
+   },
+   "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+    "n": 4,
+    "mean": 1.14943300143244,
+    "rms": 1.2075903126671443
+   },
+   "zhou2023_fig2_final_ph | pH": {
+    "n": 6,
+    "mean": 0.4191176253644129,
+    "rms": 0.8041288735785307
+   }
+  }
+ },
+ "desclaux_constant_check": {
+  "r_pama_dpo": {
+   "lane": 0.006740722087670327,
+   "desclaux": 0.0279,
+   "log10_ratio": -0.6168977812348315
+  },
+  "r_pama_tdp": {
+   "lane": 6.0219120870856e-05,
+   "desclaux": 0.00055,
+   "log10_ratio": -0.9606282784656772
+  }
+ }
+}

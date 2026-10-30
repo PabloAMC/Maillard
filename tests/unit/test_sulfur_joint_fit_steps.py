@@ -8,7 +8,8 @@ import pytest
 
 from src.kinetic_core import engine, parameters_sulfur as ps, sulfur
 
-STEPS = ("r_mgo_cys_strecker", "r_mgo_cys_h2s", "r_odg_dpo", "r_nf_decay_oh_mgo", "r_tdp_mgo", "r_pent_mgo")
+STEPS = ("r_mgo_cys_strecker", "r_mgo_cys_h2s", "r_odg_dpo", "r_nf_decay_oh_mgo", "r_tdp_mgo", "r_pent_mgo",
+         "r_pent_amine", "r_pama_dpo", "r_pama_tdp", "r_dpo_aa")
 
 
 def _k(**kw) -> dict:
@@ -37,7 +38,19 @@ def test_the_hexose_c5_entry_scales_with_its_constant(monkeypatch):
     assert "r_odg_dpo" not in sulfur.inactive_reactions()
 
 
-@pytest.mark.parametrize("key", ["r_mgo_cys_strecker", "r_mgo_cys_h2s", "r_odg_dpo"])
+def test_the_pentose_amine_entry_runs_at_arps_rates_with_its_ph_slopes(monkeypatch):
+    monkeypatch.setattr(ps, "PENTOSE_AMINE_ENTRY", ps.PentoseAmineEntry(
+        k_entry_l_per_mmol_min_100c_ph6=1e-4, entry_ph_slope=0.5, k_dpo_aa_per_min_100c_ph6=1e-2, aa_ph_slope=0.3))
+    k6, k8 = _k(), sulfur.sulfur_rate_constants_at(engine.core_parameters(engine.SULFUR), 393.15, 8.0, ph_label=8.0)
+    assert k6["r_pama_dpo"] == pytest.approx(k6["r_arp_dpo"] + k6["r_arp_dpo_thermal"])
+    assert k6["r_pama_tdp"] == pytest.approx(k6["r_arp_tdp"] + k6["r_arp_tdp_thermal"])
+    assert k8["r_pent_amine"] / k6["r_pent_amine"] == pytest.approx(10.0 ** (0.5 * 2.0), rel=1e-6)
+    assert k8["r_dpo_aa"] / k6["r_dpo_aa"] == pytest.approx(10.0 ** (0.3 * 2.0), rel=1e-6)
+    assert not {"r_pent_amine", "r_pama_dpo", "r_pama_tdp", "r_dpo_aa"} & set(sulfur.inactive_reactions())
+
+
+@pytest.mark.parametrize("key", ["r_mgo_cys_strecker", "r_mgo_cys_h2s", "r_odg_dpo", "r_pent_amine", "r_pama_dpo",
+                                 "r_pama_tdp", "r_dpo_aa"])
 def test_the_new_steps_conserve_carbon_nitrogen_and_sulfur(key):
     from src.kinetic_core.sulfur import FULL_REACTIONS
 

@@ -935,6 +935,20 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
              "(de Roos 2005). Share of the measured decay: Zhai 2019's fed-TTCA 3-DX / 1-DX = 2.1-2.6."),
     Reaction("r_cama_tdp", {"CAMA": 1}, {"TDP": 1, "Cys": 1}, "k_cama_tdp",
              "B59b. The 1,2-enolisation to the 3-deoxyosone, the amino acid released (de Roos 2005)."),
+    # Pentose + amine entry (2026-10-30): zero unless PENTOSE_AMINE_ENTRY is set.
+    Reaction("r_pent_amine", {"PENT": 1, "Gly": 1}, {"PAMA": 1}, "k_pent_amine",
+             "Pentose + amine entry. Free pentose + a non-sulfur amino acid -> its Amadori compound (via the "
+             "glycosylamine, lumped). Fitted on Davidek 2008's xylose decay (pH 6 / 8); in-situ pH slope."),
+    Reaction("r_pama_dpo", {"PAMA": 1}, {"DPO": 1, "Gly": 1}, "k_pama_dpo",
+             "Pentose + amine entry. 2,3-enolisation to 1-deoxypentosone, the amino acid released; ARP's derived rate "
+             "(r_arp_dpo + r_arp_dpo_thermal), declared."),
+    Reaction("r_pama_tdp", {"PAMA": 1}, {"TDP": 1, "Gly": 1}, "k_pama_tdp",
+             "Pentose + amine entry. 1,2-enolisation to 3-deoxypentosone, the amino acid released; ARP's derived rate "
+             "(r_arp_tdp + r_arp_tdp_thermal), declared."),
+    Reaction("r_dpo_aa", {"DPO": 1}, {"AA": 1, "FRAG_C": 3}, "k_dpo_aa",
+             "Pentose acetic acid. Hydrolytic beta-cleavage of 1-deoxypento-2,4-diulose (the 1-deoxypentosone "
+             "tautomer) between C-2 and C-3: acetic acid (C-1/C-2, 77-89 % of the label; Davidek 2008) + "
+             "hydroxyacetone (C3). Base-favoured; fitted with an in-situ pH slope."),
 )
 
 def inactive_reactions() -> frozenset:
@@ -962,6 +976,10 @@ def inactive_reactions() -> frozenset:
         off.update({"r_mgo_cys_strecker", "r_mgo_cys_h2s"})
     if _ps.HEXOSE_C5_ENTRY.k_per_min_100c <= 0.0:
         off.add("r_odg_dpo")
+    if not _ps.PENTOSE_AMINE_ENTRY.enabled:
+        off.update({"r_pent_amine", "r_pama_dpo", "r_pama_tdp"})
+    if _ps.PENTOSE_AMINE_ENTRY.k_dpo_aa_per_min_100c_ph6 <= 0.0:
+        off.add("r_dpo_aa")
     return frozenset(off)
 
 
@@ -1071,6 +1089,9 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
         "as r_arp_dpo, uncatalysed. " + AMINE_FATE_BASIS)},
     "r_arp_tdp_thermal": {"amine": -1, "basis": (
         "as r_arp_tdp, uncatalysed. " + AMINE_FATE_BASIS)},
+    "r_dpo_aa": {"carboxyl": +1, "basis": (
+        "Pentose acetic acid (2026-10-30): 1-deoxypentosone -> ACETIC ACID + hydroxyacetone, a neutral dicarbonyl "
+        "giving one neutral acid (Davidek 2008, isotope dilution); as the trunk's r_odg_aa.")},
     "r_ttca_deg": {"amine": -1, "basis": (
         "TTCA's thiazolidine ring opens and its nitrogen leaves with the C2S1 "
         "residue. Carboxyl CARRIED (CBX, at FULL strength -- B2.2 put it in "
@@ -1293,6 +1314,8 @@ def sulfur_rate_constants_at(
             continue  # B50: derived below from the two thiamine steps
         if key == "k_ttca_form":
             continue  # B58: derived below from r_ttca_cys by detailed balance
+        if key in ("k_pent_amine", "k_pama_dpo", "k_pama_tdp", "k_dpo_aa"):
+            continue  # the pentose + amine entry: derived below
         if key in ("k_nf_decay_oh", "k_nf_decay_oh_mgo", "k_tdp_mgo", "k_pent_mgo", "k_mgo_cys_strecker",
                    "k_mgo_cys_h2s", "k_odg_dpo"):
             continue  # B61 and sub-model 3: derived below
@@ -1410,6 +1433,18 @@ def sulfur_rate_constants_at(
     out["r_mgo_cys_strecker"] = (1.0 - _share_h2s) * _mgo_strecker
     # the hexose -> C5 entry (zero unless HEXOSE_C5_ENTRY is set)
     out["r_odg_dpo"] = _ps.HEXOSE_C5_ENTRY.k_at(temperature_k)
+    # the pentose + amine entry and the pentose acetic acid (zero unless PENTOSE_AMINE_ENTRY is set); the slopes act
+    # on the in-situ pH, about pH 6
+    _ent = _ps.PENTOSE_AMINE_ENTRY
+    if _ent.enabled:
+        out["r_pent_amine"] = (_ent.k_at(_ent.k_entry_l_per_mmol_min_100c_ph6, _ent.ea_entry_kj_mol, temperature_k)
+                               * 10.0 ** (float(_ent.entry_ph_slope) * (float(ph) - 6.0)))
+        out["r_pama_dpo"] = float(_ent.pama_dpo_factor) * (out["r_arp_dpo"] + out["r_arp_dpo_thermal"])
+        out["r_pama_tdp"] = float(_ent.pama_tdp_factor) * (out["r_arp_tdp"] + out["r_arp_tdp_thermal"])
+    else:
+        out["r_pent_amine"] = out["r_pama_dpo"] = out["r_pama_tdp"] = 0.0
+    out["r_dpo_aa"] = (_ent.k_at(_ent.k_dpo_aa_per_min_100c_ph6, _ent.ea_dpo_aa_kj_mol, temperature_k)
+                       * 10.0 ** (float(_ent.aa_ph_slope) * (float(ph) - 6.0)))
 
     _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
     out["ch_thioether_release"] = out["ch_thioether_mft"] / _k_adduct
@@ -1706,6 +1741,8 @@ PH_COUPLING: str = "fixed_point_nodes"
 
 #: The state keys the charge balance reads (``ph_state.titratable_inventory``).
 _TITRATABLE_KEYS = ("ACID", "FA", "AA", "Cys", "ARP", "TTCA", "CBX", "CAMA")
+#: the trunk's solutes, in the balance only when ph_state.TRUNK_SOLUTES_IN_BALANCE (PAMA: the pentose + amine entry)
+_TRUNK_SOLUTE_KEYS = ("Gly", "AMA", "SB", "PAMA")
 
 
 def _integrate_inline_ph(parameters, y0, eval_times, duration, temperature_of, sid, drift, spec,
@@ -1725,7 +1762,7 @@ def _integrate_inline_ph(parameters, y0, eval_times, duration, temperature_of, s
     warm_solve = solve_ph_and_ionic_strength_compiled if ph_kernel.COMPILED else solve_ph_and_ionic_strength_warm
 
     # sub-model 1 (design review B4): the trunk's solutes join the balance when ph_state says so
-    keys = _TITRATABLE_KEYS + (("Gly", "AMA", "SB") if _ph.TRUNK_SOLUTES_IN_BALANCE else ())
+    keys = _TITRATABLE_KEYS + (_TRUNK_SOLUTE_KEYS if _ph.TRUNK_SOLUTES_IN_BALANCE else ())
     index = [SULFUR_INDEX[k] for k in keys]
     use_label = bool(_ph.B51.label_scale_tables)
     memo = {"ph": None, "i": 0.0, "cool": None}

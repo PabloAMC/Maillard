@@ -700,7 +700,7 @@ def titratable_inventory(
         gly = float(concentrations.get("Gly", 0.0))
         if gly > 0.0:
             out.append((GLYCINE, gly))
-        for key in ("AMA", "SB"):
+        for key in ("AMA", "SB", "PAMA"):   # PAMA: the pentose + amine entry's Amadori compound, as DFG
             amount = float(concentrations.get(key, 0.0))
             if amount > 0.0:
                 out.append((DFG_GROUP, amount))
@@ -1111,6 +1111,11 @@ UNTRACKED_TITRATABLE: Mapping[str, str] = {
         "the Schiff base still carries glycine's carboxyl and its imine "
         "nitrogen; both are invisible to the balance for the same trunk-lane "
         "reason as Gly, and become defects the day the trunk gets a pH state."
+    ),
+    "PAMA": (
+        "the pentose + amine entry's Amadori compound (2026-10-30): glycine's carboxyl and the secondary ammonium, "
+        "invisible exactly when Gly is (both join the balance together under TRUNK_SOLUTES_IN_BALANCE, PAMA as "
+        "Mossine's DFG), so its formation and breakdown move no centre in either mode."
     ),
     "AMA": (
         "the Amadori compound still carries glycine's carboxyl and its "
