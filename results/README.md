@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **723**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **724**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -187,7 +187,7 @@ Tracked files: **723**. Local-only (gitignored): scratch runs under `results/qui
 | `network_hypotheses_prereg.md` | Pre-registration of the hypothesis layer: what runs, what counts as success, and the outcome. |
 | `null_model_baselines.*` (2): `null_model_baselines.json`, `null_model_baselines.md` | Does the mechanism pay for itself? The engine against a no-chemistry baseline (a compound's typical yield per limiting precursor in the OTHER studies, leave-one-study-out) on the scorecard's own ppb rows (`build_null_model_baselines.py`; north star C1). Re-run after every shipped wave. |
 | `prefactor_audit.*` (2): `prefactor_audit.json`, `prefactor_audit.md` | Arrhenius prefactor audit (`generate_prefactor_audit.py`); cited by `parameters.py` and pinned by the B8 test. |
-| `source_reading_reconciliation_*.md` (10): `source_reading_reconciliation_deoxyosone_hofmann1999.md`, `source_reading_reconciliation_deoxyosone_submodel.md`, `source_reading_reconciliation_ph_acid_holdout_martins2005b.md`, `source_reading_reconciliation_ph_acid_martins2005.md` … | Two independent readings of a sub-model's sources compared per ledger id (inventory, verdicts, pots, rows); what agrees is promoted to verified, the rest goes to an adjudicator. Written by `scripts/reconcile_source_readings.py <table>`. |
+| `source_reading_reconciliation_*.md` (11): `source_reading_reconciliation_deoxyosone_hofmann1999.md`, `source_reading_reconciliation_deoxyosone_submodel.md`, `source_reading_reconciliation_ph_acid_davidek_acids.md`, `source_reading_reconciliation_ph_acid_holdout_martins2005b.md` … | Two independent readings of a sub-model's sources compared per ledger id (inventory, verdicts, pots, rows); what agrees is promoted to verified, the rest goes to an adjudicator. Written by `scripts/reconcile_source_readings.py <table>`. |
 | `sulfur_flux_attribution.*` (2): `sulfur_flux_attribution.json`, `sulfur_flux_attribution.md` | Where the sulfur lane's carbon and sulfur go: every reaction's integrated flux in eight reference pots on the shipped calibration, ranked per species, with a closure check, half-lives and the in-situ pH (`build_sulfur_flux_attribution.py`). Read by people and `docs/guides/SULFUR_FLUX_MAP.md`. |
 | `sulfur_reaction_evidence.*` (2): `sulfur_reaction_evidence.json`, `sulfur_reaction_evidence.md` | What each sulfur-lane step rests on (strategy M4): its constant's evidence class, sources and identification (B60, or B2.3 for a constant frozen since), its share of the reference pots' flux and of the odorant-path species, the corpus's direct measurements of its species, and the conflicts naming it; the unclear steps the sub-models must test, the unpinned constants that matter, and the share of MFT and FFT formation on unpinned steps (`build_sulfur_reaction_evidence.py`; `unpinned_constants_gate.py` reads it). |
 | `trunk_rate_calibration_refit.*` (2): `trunk_rate_calibration_refit.json`, `trunk_rate_calibration_refit.md` | Trunk rate refit record read by `src/kinetic_core/parameters.py` (the trunk constants cite it). |

@@ -1,0 +1,108 @@
+# SOURCE VERIFICATION -- sub-model 1 (pH and acid production): Davidek 2008 / 2006a / 2006b acids (fit table
+# data/lit/fit_rows/ph_acid_davidek_acids.yml). Format and the five checks: the header of data/lit/source_verification.yml.
+# FIRST READER: agent-davidek-reader1-2026-10-30, against the PDFs in data/articles (no dossier). Second reader pending.
+# `notes` is an extra field: what was checked, what was left out and why. Novotny 2008 has no keyed rows (last block).
+
+entries:
+- ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose
+  source_file: davidek2008.pdf
+  read_by: agent-davidek-reader1-2026-10-30
+  second_reader: agent-davidek-reader2-2026-10-30
+  date: 2026-10-30
+  checks:
+    conditions: pass
+    units: pass
+    quantification: corrected
+    duplicates: pass
+    values: pass
+  quote: 'A solution of glycine (0.35 mmol) and D-xylose (0.35 mmol) in phosphate buffer (3.5 mL, 0.2 mol/L) was
+    dispatched (0.4 mL/vial) into 1.5 mL screw-cap vials (Infochroma, Zug, Switzerland) and thermally treated in a
+    silicone bath (90 C, 15 h or 120 C, 4 h). The experiments were performed at pH 6.0 and pH 8.0.'
+  notes: 'CONDITIONS: xylose + glycine 0.1 M each (Results: "equimolar concentrations of glycine and unlabeled or
+    13C-labeled xylose (0.1 mol/L)"), 0.2 M Na phosphate, pH 6.0 / 8.0 set before heating (when / at what temperature
+    not stated; not held), 120 C, 0-240 min (Fig. 1 caption: "in phosphate buffer at 120 C at pH 6.0 (squares) and pH
+    8.0 (triangles)"). UNITS: left axis "Residual xylose (%)", right axis "Acetic acid (mol%)"; converted x 1.00
+    mmol/L per % (100 mmol/L xylose). QUANTIFICATION: acetic acid SIDA (SPME-GC/MS, [2H3]acetic acid). CORRECTED:
+    the xylose method is NOT described anywhere in the paper; the ledger class sida applies to acetic acid, so the
+    xylose rows inherit a class the paper does not support -- adjudicator should consider splitting xylose to class
+    other / calibrated. DUPLICATES: text and abstract "16 mol% and 28 mol%" = after 4 h at pH 6.0 / 8.0, 120 C =
+    the 240-min markers (end labels 16 / 28; read 16.15 / 27.60): counted once. VALUES: Fig. 1 is a 909-ppi raster
+    (2550 x 2510 px); gridlines at 0/25/50/75/100 % (= 0/15/30/45/60 mol%) located to 1 px, x from 8 ticks
+    (residual < 0.3 min). Sampling differs by pH: pH 6.0 at 0, 15, 30, 60, 120, 240 min; pH 8.0 at 0, 10, 20, 30, 60,
+    120, 240 min. Read: AA pH 6.0 8.69/11.25/13.51/14.74/16.15; AA pH 8.0 17.69/22.38/24.12/26.90/26.91/27.60; xylose
+    pH 6.0 42.08/26.26/13.33/7.35/2.47 %; xylose pH 8.0 14.59/3.42/1.40 % (10/20/30 min). Left out: t = 0 (acid 0;
+    xylose 100 % by definition), pH 8.0 xylose 60/120/240 min (on the axis; 60 min labelled "0"). No error bars, no n.
+    ISOTOPE NOTES (not rows): Fig. 3 (120 C, pH 6.0) singly labelled acetic acid from [1-13C] 85.2 %, [2-13C] 84.5 %,
+    [5-13C] 10.5 % at 240 min (end labels); text: 85-89 % from C-1 / C-2 vs 8-11 % from C-5; Fig. 4 bars (90 C 16 h
+    / 120 C 4 h, pH 6 / 8): C-1 ~85/87/82/77, C-2 ~86/87/83/79, C-5 ~10/9/13/15 %. CONTRADICTIONS: abstract C-1/C-2
+    77-87 % and C-4/C-5 9-15 % vs text 85-89 % / 8-11 % (different condition sets); Methods 90 C 15 h vs Fig. 4 legend
+    "90 C, 16h"; text "1-deoxypento-2,4-diulose" vs Fig. 2 caption "1-deoxypento-2,3-diulose". 22 rows.'
+- ledger_id: davidek2006a_tab1_glc_gly_acetic_ph
+  source_file: davidek2006.pdf
+  read_by: agent-davidek-reader1-2026-10-30
+  second_reader: agent-davidek-reader2-2026-10-30
+  date: 2026-10-30
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: 'A solution of glycine (0.35 mmol) and D-glucose or various 13C-labeled glucose isotopomers (0.35 mmol) in a
+    phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL) into screw-cap vials (1.5 mL, Infochroma, Zug,
+    Switzerland) and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). Experiments were performed at
+    pH 4, pH 6, and pH 8.'
+  notes: 'Table 1 "Formation of Acetic Acid from Glucose/Glycine in Phosphate-Buffered (0.2 mol/L) Model Systems at 120
+    C"; glucose / glycine 0.1 mol/L (Results). Units mol% -> x 1.00 mmol/L. SIDA (SPME GC-MS, [2H3]acetic acid). Printed
+    +- kept as sd (not defined; at least duplicate preparations x 2 injections; footnote CV < 10 %). ND = "not
+    determined" (footnote b): pH 4 at 15 / 30 min, pH 6 at 15 / 480 min, pH 8 at 480 min -> no rows. The pH 4 arm runs
+    to 480 min although Methods say 4 h at 120 C (noted, kept). Text "about 1, 17, and 38 mol %" after 4 h = the
+    240-min cells (counted once). Table 2 (label shares at 90 / 120 C, pH 6 / 8: C-1 67-70 %, C-2 69-71 %, C-3 4-9 %,
+    C-4 5-11 %, C-5 19-25 %, C-6 19-24 %) is not a row. 13 rows.'
+- ledger_id: davidek2006a_text_3dg_gly_acetic_formic
+  source_file: davidek2006.pdf
+  read_by: agent-davidek-reader1-2026-10-30
+  second_reader: agent-davidek-reader2-2026-10-30
+  date: 2026-10-30
+  checks:
+    conditions: pass
+    units: pass
+    quantification: corrected
+    duplicates: pass
+    values: pass
+  quote: 'A solution of glycine (0.05 mmol) and 2 (0.05 mmol) in a phosphate buffer (0.5 mL, 0.2 mol/L) was placed into
+    screw-cap vials (1.5 mL) and thermally treated in a silicone bath (120 C, 4 h). The experiments were performed at
+    pH 4, pH 6, and pH 8.'
+  notes: 'Results p. 6670: "only small amounts of acetic acid were detected, i.e., 0.8, 1.5, and 2.4 mol % at pH 4, 6,
+    and 8 ... the quantities of formic acid were also very low, resulting in 0.9, 1.5, and 1.7 mol %". 3-DG (TDG) and
+    glycine 0.1 M each; mol% x 1.00 mmol/L. CORRECTED quantification: formic acid used [2H3]acetic acid as internal
+    standard ("[2H3]Acetic acid was used as internal standard for the quantification of formic acid"), so it is not a
+    SIDA: ledger class other; AA rows method sida, FA rows semi_quantitative (no response-factor calibration
+    described). No sd printed: read_error = half the last digit. 6 rows.'
+- ledger_id: davidek2006b_tab1_glc_gly_acetic_atmosphere
+  source_file: davidek2006b.pdf
+  read_by: agent-davidek-reader1-2026-10-30
+  second_reader: agent-davidek-reader2-2026-10-30
+  date: 2026-10-30
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: 'A solution of glycine (0.3 mmol) and glucose (0.3 mmol) in phosphate buffer (3 mL, 0.2 mol/L, pH 8) was placed
+    in a flask (10 mL) under argon. The solution was degassed by three cycles of vacuum and argon. Finally, the
+    solution was bubbled with argon (10 min) and heated in a silicone bath (90 C, 15 h).'
+  notes: 'Table 1 (mmol/L, as printed): argon 30.5 +- 0.4, air 32.3 +- 3.3, 18O2 22.9 +- 0.3 unlabelled + 10.6 +- 0.2
+    labelled = 33.5 +- 0.5 total; footnote CV <= 10 %; "at least in duplicate", each injected twice; +- undefined.
+    SIDA (ether extract, [2H3]acetic acid 600 ug). Three pots (atmosphere is a condition the engine does not carry;
+    argon is the cleanest anoxic reference). Text "about 32 mol %" / "30-33 mol %" = same table. Aldonic acids (0.7 /
+    2.2 / 5.1 mmol/L) and the pH 10 17O NMR runs (no amounts) not keyed. 3 rows.'
+# NOVOTNY, CEJPEK & VELISEK 2008 (Czech J Food Sci 26:117; novotny2008.pdf), read, NO ROWS, no ledger entry:
+# sugars (Glc, Fru, Ara, dihydroxyacetone, glyceraldehyde) 5 mmol in 50 mL (0.1 M), refluxed 1 h, NO amine, three
+# models: (1) + K2S2O8 5 mmol in water (oxidant), (2) + K2S2O8 in 0.3 M NaOH, (3) 0.05 M NaOH; 3 determinations each.
+# No near-neutral, oxidant-free condition -> nothing simulable. Yields % (n/n), formic / acetic: Table 1 (K2S2O8/H2O)
+# Glc 9.93/0.79, Fru 7.59/1.68, Ara 18.04/0.52, Dha 10.66/2.39, Gla 11.63/2.57; Table 2 (K2S2O8/0.3 M NaOH) 20.64/1.53,
+# 13.50/1.81, 15.64/1.21, 8.76/1.97, 10.11/2.56; Table 3 (0.05 M NaOH) 5.32/11.48, 5.91/12.06, 5.65/12.45 (arabinose,
+# the only pentose), 6.47/7.81, 6.69/10.64. Useful only as an alkaline, amine-free ceiling: arabinose gives ~12 mol %
+# acetic and ~6 mol % formic acid in 0.05 M NaOH at reflux.

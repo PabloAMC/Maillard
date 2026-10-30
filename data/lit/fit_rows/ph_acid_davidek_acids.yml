@@ -1,0 +1,212 @@
+# KEYED FIT TABLE -- sub-model 1 (pH and acid production): MEASURED acetic / formic acid (and the sugar consumed) in
+# Nestle (Davidek / Blank) aqueous phosphate systems, for the missing pentose -> acetic / formic acid route.
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS). Laboratory and
+# quantification class from the ledger entries (data/lit/measurement_ledger/trunk.yml, davidek2008_* / davidek2006a_* /
+# davidek2006b_*): SIDA ([2H3]acetic acid, SPME or ether extract GC-MS) for acetic acid.
+# DRAFT, FIRST READER (agent-davidek-reader1-2026-10-30), read from the PDFs in data/articles (davidek2008.pdf,
+# davidek2006.pdf, davidek2006b.pdf, novotny2008.pdf); no dossier used. Verification:
+# data/lit/source_verification/ph_acid_davidek_acids.yml.
+#
+# UNITS. Every source prints yields relative to the precursor (mol%, mol/mol, % residual). value (mmol/L) = printed
+# fraction x the precursor's initial mmol/L, so value / precursor0 is the printed number exactly:
+#   * Davidek 2008 Fig. 1: xylose 0.1 mol/L (0.35 mmol in 3.5 mL; Results: "(0.1 mol/L)") -> 1 mol% acetic acid =
+#     1 % residual xylose = 1.00 mmol/L. Unambiguous.
+#   * Davidek 2006a Table 1 (glucose 0.1 M), 3-DG text (0.05 mmol in 0.5 mL = 0.1 M), Fig. 5 (pentanediones 0.5 mmol
+#     in 5 mL = 0.1 M): 1 mol% = 1.00 mmol/L. Fig. 3 (1-DG, no amine): mol/mol x 10 mmol/L NOMINAL 1-DG (0.1 mmol in
+#     2 mL, diluted 5x; deprotection yield / resin losses not reported): a declared common scale, as hofmann1999.
+#   * Davidek 2006b Table 1 prints mmol/L directly.
+# ERRORS. Printed +- is kept as `sd` (undefined in the papers: "prepared at least in duplicate and injected twice");
+# digitised points carry `read_error` (dex) only; text values carry half the last printed digit. Every paper states
+# GC-MS CV < 10 % (Davidek 2006a/b), not used as a row error.
+# ND / ZEROS. Davidek 2006a Table 1 "ND" = NOT DETERMINED (footnote b), not "not detected": no row. Davidek 2008
+# Fig. 1 pH 8.0 residual xylose at 60, 120, 240 min sits on the x-axis (60 min printed "0"): left out (no log
+# residual). t = 0 markers (acids 0, xylose 100 % by construction) left out.
+# DUPLICATES (counted once): Davidek 2008 text/abstract "16 mol% and 28 mol%" (pH 6.0 / 8.0, 120 C, after 4 h) are the
+# Fig. 1 240-min markers (end labels 16 / 28; digitised 16.15 / 27.60). Davidek 2006a text "about 1, 17 and 38 mol %"
+# after 4 h = Table 1 240-min cells; abstract "85 mol %" = Fig. 3 end labels (0.84). Davidek 2006b "about 32 mol %" /
+# "30-33 mol %" = its Table 1.
+# NOT KEYED: Davidek 2008 90 C / 15 h runs (Methods; Fig. 4 legend says 16 h): only 13C-label shares printed, no
+# amounts. Davidek 2006a: DFG (Amadori) "about 4, 28 and 56 mol %" at pH 4 / 6 / 8 after 4 h at 120 C -- no method,
+# concentration or amine stated for that run (not simulable as printed; adjudicator's call); Table 2 / Fig. 3-4 of
+# 2008 = isotopomer shares (see verification notes); Fig. 5 acetone / propanoic acid (open markers; no engine species).
+# Davidek 2006b: aldonic acids (~0.7 / 2.2 / 5.1 mmol/L, no engine species), 17O / 18O NMR / MS runs at pH 10 (NaOH,
+# unbuffered). Novotny 2008: no near-neutral condition (persulfate oxidant or 0.05-0.3 M NaOH, reflux 1 h, no amine).
+# Pots marked engine_species_missing (2,3- / 2,4-pentanedione) are verified data for later, NOT fit rows today.
+# ADJUDICATION (2026-10-30): Davidek 2006a Fig. 3 (1-deoxyglucosone, no amine; its pH 6.5 / 7 markers overlap and
+# the two readers assigned them differently, |diff| <= 0.44 mmol/L; the precursor concentration is not printed, so
+# the rows rest on a nominal 10 mmol/L) and Fig. 5 (2,3- / 2,4-pentanedione + glycine: no engine species) are
+# dropped from the verified table; both readings remain in git history (commit of 2026-10-30).
+# ADJUDICATION NOTES (2026-10-30, both readers): (1) Davidek 2008 never says how residual xylose was measured: the
+# PENT rows carry no stated quantification class beyond the paper's; read them as the paper's, not as SIDA.
+# (2) The 16 / 28 mol% of the abstract are Fig. 1's 240-min points (counted once). (3) The papers' +- is undefined;
+# kept as sd. (4) Davidek 2006a Table 1 prints a 480-min pH 4 value although Methods say 4 h; kept as printed.
+# (5) Formic acid (3-DG text) was quantified against [2H3]acetic acid: semi-quantitative, not isotope dilution.
+# (6) Novotny 2008: every condition is persulfate or 0.05 - 0.3 M NaOH without amine: notes only, no rows.
+status: ready   # two readers agree (2026-10-30): Davidek 2008 Fig. 1, Davidek 2006a Table 1 and 3-DG text, Davidek 2006b Table 1
+pots:
+  davidek2008_xyl_gly_120c_ph60:
+    {ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose,
+     t_c: 120,
+     minutes: 240,
+     initial_mmol_L: {PENT: 100.0, Gly: 100.0},
+     buffer: "sodium phosphate 0.2 M (NaH2PO4 / Na2HPO4); pH not held",
+     label_ph: 6.0,
+     ph_measured_at: "not stated (pH set before heating; never re-measured)",
+     vessel: "0.4 mL in 1.5 mL screw-cap vials, silicone bath; one vial per time implied",
+     source_figure: "Fig. 1, pH 6.0: acetic acid filled squares (solid line, right axis mol%), residual xylose open squares (dotted line, left axis %)",
+     condition_quote: "A solution of glycine (0.35 mmol) and D-xylose (0.35 mmol) in phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL/vial) into 1.5 mL screw-cap vials (Infochroma, Zug, Switzerland) and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). The experiments were performed at pH 6.0 and pH 8.0."}
+  davidek2008_xyl_gly_120c_ph80:
+    {ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose,
+     t_c: 120,
+     minutes: 240,
+     initial_mmol_L: {PENT: 100.0, Gly: 100.0},
+     buffer: "sodium phosphate 0.2 M (NaH2PO4 / Na2HPO4); pH not held",
+     label_ph: 8.0,
+     ph_measured_at: "not stated (pH set before heating; never re-measured)",
+     vessel: "0.4 mL in 1.5 mL screw-cap vials, silicone bath; one vial per time implied",
+     source_figure: "Fig. 1, pH 8.0: acetic acid filled triangles (solid line, right axis mol%), residual xylose open triangles (dotted line, left axis %)",
+     condition_quote: "A solution of glycine (0.35 mmol) and D-xylose (0.35 mmol) in phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL/vial) into 1.5 mL screw-cap vials (Infochroma, Zug, Switzerland) and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). The experiments were performed at pH 6.0 and pH 8.0."}
+  davidek2006a_glc_gly_120c_ph4:
+    {ledger_id: davidek2006a_tab1_glc_gly_acetic_ph,
+     t_c: 120,
+     minutes: 480,
+     initial_mmol_L: {Glc: 100.0, Gly: 100.0},
+     buffer: "phosphate 0.2 M (mono/disodium); pH not held",
+     label_ph: 4.0,
+     ph_measured_at: "not stated",
+     vessel: "0.4 mL in 1.5 mL screw-cap vials, silicone bath",
+     source_table: "Table 1 (acetic acid mol%; footnote: CV < 10 %; ND = not determined)",
+     condition_quote: "A solution of glycine (0.35 mmol) and D-glucose or various 13C-labeled glucose isotopomers (0.35 mmol) in a phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL) into screw-cap vials (1.5 mL, Infochroma, Zug, Switzerland) and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). Experiments were performed at pH 4, pH 6, and pH 8."}
+  davidek2006a_glc_gly_120c_ph6:
+    {ledger_id: davidek2006a_tab1_glc_gly_acetic_ph,
+     t_c: 120,
+     minutes: 240,
+     initial_mmol_L: {Glc: 100.0, Gly: 100.0},
+     buffer: "phosphate 0.2 M (mono/disodium); pH not held",
+     label_ph: 6.0,
+     ph_measured_at: "not stated",
+     vessel: "0.4 mL in 1.5 mL screw-cap vials, silicone bath",
+     source_table: "Table 1 (acetic acid mol%; footnote: CV < 10 %; ND = not determined)",
+     condition_quote: "A solution of glycine (0.35 mmol) and D-glucose or various 13C-labeled glucose isotopomers (0.35 mmol) in a phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL) into screw-cap vials (1.5 mL, Infochroma, Zug, Switzerland) and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). Experiments were performed at pH 4, pH 6, and pH 8."}
+  davidek2006a_glc_gly_120c_ph8:
+    {ledger_id: davidek2006a_tab1_glc_gly_acetic_ph,
+     t_c: 120,
+     minutes: 240,
+     initial_mmol_L: {Glc: 100.0, Gly: 100.0},
+     buffer: "phosphate 0.2 M (mono/disodium); pH not held",
+     label_ph: 8.0,
+     ph_measured_at: "not stated",
+     vessel: "0.4 mL in 1.5 mL screw-cap vials, silicone bath",
+     source_table: "Table 1 (acetic acid mol%; footnote: CV < 10 %; ND = not determined)",
+     condition_quote: "A solution of glycine (0.35 mmol) and D-glucose or various 13C-labeled glucose isotopomers (0.35 mmol) in a phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL) into screw-cap vials (1.5 mL, Infochroma, Zug, Switzerland) and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). Experiments were performed at pH 4, pH 6, and pH 8."}
+  davidek2006a_3dg_gly_120c_ph4:
+    {ledger_id: davidek2006a_text_3dg_gly_acetic_formic,
+     t_c: 120,
+     minutes: 240,
+     initial_mmol_L: {TDG: 100.0, Gly: 100.0},
+     buffer: "phosphate 0.2 M; pH not held",
+     label_ph: 4.0,
+     ph_measured_at: "not stated",
+     vessel: "0.5 mL in a 1.5 mL screw-cap vial, silicone bath",
+     source_text: "p. 6670: acetic acid 0.8, 1.5, 2.4 mol % and formic acid 0.9, 1.5, 1.7 mol % at pH 4, 6, 8",
+     condition_quote: "A solution of glycine (0.05 mmol) and 2 (0.05 mmol) in a phosphate buffer (0.5 mL, 0.2 mol/L) was placed into screw-cap vials (1.5 mL) and thermally treated in a silicone bath (120 C, 4 h). The experiments were performed at pH 4, pH 6, and pH 8."}
+  davidek2006a_3dg_gly_120c_ph6:
+    {ledger_id: davidek2006a_text_3dg_gly_acetic_formic,
+     t_c: 120,
+     minutes: 240,
+     initial_mmol_L: {TDG: 100.0, Gly: 100.0},
+     buffer: "phosphate 0.2 M; pH not held",
+     label_ph: 6.0,
+     ph_measured_at: "not stated",
+     vessel: "0.5 mL in a 1.5 mL screw-cap vial, silicone bath",
+     source_text: "p. 6670: acetic acid 0.8, 1.5, 2.4 mol % and formic acid 0.9, 1.5, 1.7 mol % at pH 4, 6, 8",
+     condition_quote: "A solution of glycine (0.05 mmol) and 2 (0.05 mmol) in a phosphate buffer (0.5 mL, 0.2 mol/L) was placed into screw-cap vials (1.5 mL) and thermally treated in a silicone bath (120 C, 4 h). The experiments were performed at pH 4, pH 6, and pH 8."}
+  davidek2006a_3dg_gly_120c_ph8:
+    {ledger_id: davidek2006a_text_3dg_gly_acetic_formic,
+     t_c: 120,
+     minutes: 240,
+     initial_mmol_L: {TDG: 100.0, Gly: 100.0},
+     buffer: "phosphate 0.2 M; pH not held",
+     label_ph: 8.0,
+     ph_measured_at: "not stated",
+     vessel: "0.5 mL in a 1.5 mL screw-cap vial, silicone bath",
+     source_text: "p. 6670: acetic acid 0.8, 1.5, 2.4 mol % and formic acid 0.9, 1.5, 1.7 mol % at pH 4, 6, 8",
+     condition_quote: "A solution of glycine (0.05 mmol) and 2 (0.05 mmol) in a phosphate buffer (0.5 mL, 0.2 mol/L) was placed into screw-cap vials (1.5 mL) and thermally treated in a silicone bath (120 C, 4 h). The experiments were performed at pH 4, pH 6, and pH 8."}
+  davidek2006b_glc_gly_90c_ph8_argon:
+    {ledger_id: davidek2006b_tab1_glc_gly_acetic_atmosphere,
+     t_c: 90,
+     minutes: 900,
+     initial_mmol_L: {Glc: 100.0, Gly: 100.0},
+     buffer: "phosphate 0.2 M pH 8; pH not held",
+     label_ph: 8.0,
+     ph_measured_at: "not stated",
+     atmosphere: "argon (degassed, 3 vacuum/argon cycles, 10 min Ar bubbling)",
+     vessel: "3 mL in a 10 mL flask, silicone bath",
+     source_table: "Table 1 (acetic acid mmol/L; CV <= 10 %)",
+     condition_quote: "A solution of glycine (0.3 mmol) and glucose (0.3 mmol) in phosphate buffer (3 mL, 0.2 mol/L, pH 8) was placed in a flask (10 mL) under argon. The solution was degassed by three cycles of vacuum and argon. Finally, the solution was bubbled with argon (10 min) and heated in a silicone bath (90 C, 15 h). Similar experiments were performed replacing argon by 18O-dioxygen or air ... All experiments were performed at atmospheric pressure. Each sample was prepared at least in duplicate."}
+  davidek2006b_glc_gly_90c_ph8_air:
+    {ledger_id: davidek2006b_tab1_glc_gly_acetic_atmosphere,
+     t_c: 90,
+     minutes: 900,
+     initial_mmol_L: {Glc: 100.0, Gly: 100.0},
+     buffer: "phosphate 0.2 M pH 8; pH not held",
+     label_ph: 8.0,
+     ph_measured_at: "not stated",
+     atmosphere: "air",
+     vessel: "3 mL in a 10 mL flask, silicone bath",
+     source_table: "Table 1 (acetic acid mmol/L; CV <= 10 %)",
+     condition_quote: "A solution of glycine (0.3 mmol) and glucose (0.3 mmol) in phosphate buffer (3 mL, 0.2 mol/L, pH 8) was placed in a flask (10 mL) under argon. The solution was degassed by three cycles of vacuum and argon. Finally, the solution was bubbled with argon (10 min) and heated in a silicone bath (90 C, 15 h). Similar experiments were performed replacing argon by 18O-dioxygen or air ... All experiments were performed at atmospheric pressure. Each sample was prepared at least in duplicate."}
+  davidek2006b_glc_gly_90c_ph8_o2_18:
+    {ledger_id: davidek2006b_tab1_glc_gly_acetic_atmosphere,
+     t_c: 90,
+     minutes: 900,
+     initial_mmol_L: {Glc: 100.0, Gly: 100.0},
+     buffer: "phosphate 0.2 M pH 8; pH not held",
+     label_ph: 8.0,
+     ph_measured_at: "not stated",
+     atmosphere: "18O-dioxygen (93-94 %)",
+     vessel: "3 mL in a 10 mL flask, silicone bath",
+     source_table: "Table 1 (acetic acid mmol/L; CV <= 10 %)",
+     condition_quote: "A solution of glycine (0.3 mmol) and glucose (0.3 mmol) in phosphate buffer (3 mL, 0.2 mol/L, pH 8) was placed in a flask (10 mL) under argon. The solution was degassed by three cycles of vacuum and argon. Finally, the solution was bubbled with argon (10 min) and heated in a silicone bath (90 C, 15 h). Similar experiments were performed replacing argon by 18O-dioxygen or air ... All experiments were performed at atmospheric pressure. Each sample was prepared at least in duplicate."}
+rows:
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 15, value: 8.69, unit: mmol_L, printed: 'Fig. 1 (digitised): 8.69 mol% acetic acid', read_error: 0.0081, read_error_basis: 'Fig. 1 raster (909 ppi) marker bbox centre; y by piecewise interpolation between the five gridlines (552-559 px apart), t snapped to the sampling grid (fit of 8 x-ticks, residual < 0.3 min, every |snap| < 0.9 min); absolute read error 4 px = 0.108 mol% (acetic acid) / 0.18 % (xylose); 1 mol% = 1 % = 1.00 mmol/L (100 mmol/L xylose); in dex', note: 'overlaps the pH 8 xylose 10 min / pH 6 acetic acid 15 min marker: read error x1.5'}
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 30, value: 11.25, unit: mmol_L, printed: 'Fig. 1 (digitised): 11.25 mol% acetic acid', read_error: 0.0042}
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 60, value: 13.51, unit: mmol_L, printed: 'Fig. 1 (digitised): 13.51 mol% acetic acid', read_error: 0.0035}
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 120, value: 14.74, unit: mmol_L, printed: 'Fig. 1 (digitised): 14.74 mol% acetic acid', read_error: 0.0032}
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 240, value: 16.15, unit: mmol_L, printed: 'Fig. 1 (digitised): 16.15 mol% acetic acid', read_error: 0.0029, duplicate_text: 'text and abstract 16 mol% (pH 6.0, 4 h, 120 C) = this marker (end label 16); counted once'}
+  - {pot: davidek2008_xyl_gly_120c_ph80, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 10, value: 17.69, unit: mmol_L, printed: 'Fig. 1 (digitised): 17.69 mol% acetic acid', read_error: 0.0027}
+  - {pot: davidek2008_xyl_gly_120c_ph80, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 20, value: 22.38, unit: mmol_L, printed: 'Fig. 1 (digitised): 22.38 mol% acetic acid', read_error: 0.0021}
+  - {pot: davidek2008_xyl_gly_120c_ph80, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 30, value: 24.12, unit: mmol_L, printed: 'Fig. 1 (digitised): 24.12 mol% acetic acid', read_error: 0.0019}
+  - {pot: davidek2008_xyl_gly_120c_ph80, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 60, value: 26.9, unit: mmol_L, printed: 'Fig. 1 (digitised): 26.90 mol% acetic acid', read_error: 0.0017}
+  - {pot: davidek2008_xyl_gly_120c_ph80, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 120, value: 26.91, unit: mmol_L, printed: 'Fig. 1 (digitised): 26.91 mol% acetic acid', read_error: 0.0017}
+  - {pot: davidek2008_xyl_gly_120c_ph80, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: AA, t_min: 240, value: 27.6, unit: mmol_L, printed: 'Fig. 1 (digitised): 27.60 mol% acetic acid', read_error: 0.0017, duplicate_text: 'text and abstract 28 mol% (pH 8.0, 4 h, 120 C) = this marker (end label 28); counted once'}
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: PENT, t_min: 15, value: 42.08, unit: mmol_L, printed: 'Fig. 1 (digitised): 42.08 % residual xylose', read_error: 0.0019}
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: PENT, t_min: 30, value: 26.26, unit: mmol_L, printed: 'Fig. 1 (digitised): 26.26 % residual xylose', read_error: 0.003}
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: PENT, t_min: 60, value: 13.33, unit: mmol_L, printed: 'Fig. 1 (digitised): 13.33 % residual xylose', read_error: 0.0059}
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: PENT, t_min: 120, value: 7.35, unit: mmol_L, printed: 'Fig. 1 (digitised): 7.35 % residual xylose', read_error: 0.0107}
+  - {pot: davidek2008_xyl_gly_120c_ph60, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: PENT, t_min: 240, value: 2.47, unit: mmol_L, printed: 'Fig. 1 (digitised): 2.47 % residual xylose', read_error: 0.0318}
+  - {pot: davidek2008_xyl_gly_120c_ph80, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: PENT, t_min: 10, value: 14.59, unit: mmol_L, printed: 'Fig. 1 (digitised): 14.59 % residual xylose', read_error: 0.0081, note: 'overlaps the pH 8 xylose 10 min / pH 6 acetic acid 15 min marker: read error x1.5'}
+  - {pot: davidek2008_xyl_gly_120c_ph80, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: PENT, t_min: 20, value: 3.42, unit: mmol_L, printed: 'Fig. 1 (digitised): 3.42 % residual xylose', read_error: 0.023}
+  - {pot: davidek2008_xyl_gly_120c_ph80, ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose, species: PENT, t_min: 30, value: 1.4, unit: mmol_L, printed: 'Fig. 1 (digitised): 1.40 % residual xylose', read_error: 0.1117, note: 'triangle base merged with a dash of the dotted line; apex-based centre 1.40, bbox centre 1.13: read error 8 px'}
+  - {pot: davidek2006a_glc_gly_120c_ph4, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 60, value: 0.28, unit: mmol_L, printed: 'Table 1: 0.28 +- 0.02 mol%', sd: 0.02, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined', sd_basis: 'printed +- in mol% = mmol/L (100 mmol/L glucose); footnote: variation coefficients < 10 %'}
+  - {pot: davidek2006a_glc_gly_120c_ph4, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 120, value: 0.48, unit: mmol_L, printed: 'Table 1: 0.48 +- 0.04 mol%', sd: 0.04, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined'}
+  - {pot: davidek2006a_glc_gly_120c_ph4, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 240, value: 1.0, unit: mmol_L, printed: 'Table 1: 1.0 +- 0.01 mol%', sd: 0.01, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined', duplicate_text: 'text about 1 mol% after 4 h = this cell; counted once'}
+  - {pot: davidek2006a_glc_gly_120c_ph4, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 480, value: 1.69, unit: mmol_L, printed: 'Table 1: 1.69 +- 0.17 mol%', sd: 0.17, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined'}
+  - {pot: davidek2006a_glc_gly_120c_ph6, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 30, value: 9.7, unit: mmol_L, printed: 'Table 1: 9.7 +- 0.1 mol%', sd: 0.1, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined'}
+  - {pot: davidek2006a_glc_gly_120c_ph6, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 60, value: 12.6, unit: mmol_L, printed: 'Table 1: 12.6 +- 0.1 mol%', sd: 0.1, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined'}
+  - {pot: davidek2006a_glc_gly_120c_ph6, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 120, value: 15.1, unit: mmol_L, printed: 'Table 1: 15.1 +- 0.1 mol%', sd: 0.1, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined'}
+  - {pot: davidek2006a_glc_gly_120c_ph6, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 240, value: 16.9, unit: mmol_L, printed: 'Table 1: 16.9 +- 0.2 mol%', sd: 0.2, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined', duplicate_text: 'text about 17 mol% after 4 h = this cell; counted once'}
+  - {pot: davidek2006a_glc_gly_120c_ph8, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 15, value: 21.4, unit: mmol_L, printed: 'Table 1: 21.4 +- 0.1 mol%', sd: 0.1, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined'}
+  - {pot: davidek2006a_glc_gly_120c_ph8, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 30, value: 28.3, unit: mmol_L, printed: 'Table 1: 28.3 +- 0.2 mol%', sd: 0.2, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined'}
+  - {pot: davidek2006a_glc_gly_120c_ph8, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 60, value: 33.0, unit: mmol_L, printed: 'Table 1: 33.0 +- 0.1 mol%', sd: 0.1, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined'}
+  - {pot: davidek2006a_glc_gly_120c_ph8, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 120, value: 37.0, unit: mmol_L, printed: 'Table 1: 37.0 +- 0.2 mol%', sd: 0.2, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined'}
+  - {pot: davidek2006a_glc_gly_120c_ph8, ledger_id: davidek2006a_tab1_glc_gly_acetic_ph, species: AA, t_min: 240, value: 38.4, unit: mmol_L, printed: 'Table 1: 38.4 +- 0.4 mol%', sd: 0.4, n: '>= 2 preparations x 2 injections (Methods); the +- is not defined', duplicate_text: 'text about 38 mol% after 4 h = this cell; counted once'}
+  - {pot: davidek2006a_3dg_gly_120c_ph4, ledger_id: davidek2006a_text_3dg_gly_acetic_formic, species: AA, t_min: 240, value: 0.8, unit: mmol_L, printed: 'text: 0.8 mol %', read_error: 0.0271, read_error_basis: 'rounding: half the last printed digit (0.05 mol% = 0.05 mmol/L); no sd printed; GC-MS CV < 10 % stated for the paper''s data', method: sida, method_basis: 'SIDA with [2H3]acetic acid (Methods)'}
+  - {pot: davidek2006a_3dg_gly_120c_ph4, ledger_id: davidek2006a_text_3dg_gly_acetic_formic, species: FA, t_min: 240, value: 0.9, unit: mmol_L, printed: 'text: 0.9 mol %', read_error: 0.0241, read_error_basis: 'rounding: half the last printed digit (0.05 mol% = 0.05 mmol/L); no sd printed; GC-MS CV < 10 % stated for the paper''s data', method: semi_quantitative, method_basis: 'formic acid quantified against [2H3]acetic acid, not its own isotopologue; no response-factor calibration described'}
+  - {pot: davidek2006a_3dg_gly_120c_ph6, ledger_id: davidek2006a_text_3dg_gly_acetic_formic, species: AA, t_min: 240, value: 1.5, unit: mmol_L, printed: 'text: 1.5 mol %', read_error: 0.0145, read_error_basis: 'rounding: half the last printed digit (0.05 mol% = 0.05 mmol/L); no sd printed; GC-MS CV < 10 % stated for the paper''s data', method: sida, method_basis: 'SIDA with [2H3]acetic acid (Methods)'}
+  - {pot: davidek2006a_3dg_gly_120c_ph6, ledger_id: davidek2006a_text_3dg_gly_acetic_formic, species: FA, t_min: 240, value: 1.5, unit: mmol_L, printed: 'text: 1.5 mol %', read_error: 0.0145, read_error_basis: 'rounding: half the last printed digit (0.05 mol% = 0.05 mmol/L); no sd printed; GC-MS CV < 10 % stated for the paper''s data', method: semi_quantitative, method_basis: 'formic acid quantified against [2H3]acetic acid, not its own isotopologue; no response-factor calibration described'}
+  - {pot: davidek2006a_3dg_gly_120c_ph8, ledger_id: davidek2006a_text_3dg_gly_acetic_formic, species: AA, t_min: 240, value: 2.4, unit: mmol_L, printed: 'text: 2.4 mol %', read_error: 0.009, read_error_basis: 'rounding: half the last printed digit (0.05 mol% = 0.05 mmol/L); no sd printed; GC-MS CV < 10 % stated for the paper''s data', method: sida, method_basis: 'SIDA with [2H3]acetic acid (Methods)'}
+  - {pot: davidek2006a_3dg_gly_120c_ph8, ledger_id: davidek2006a_text_3dg_gly_acetic_formic, species: FA, t_min: 240, value: 1.7, unit: mmol_L, printed: 'text: 1.7 mol %', read_error: 0.0128, read_error_basis: 'rounding: half the last printed digit (0.05 mol% = 0.05 mmol/L); no sd printed; GC-MS CV < 10 % stated for the paper''s data', method: semi_quantitative, method_basis: 'formic acid quantified against [2H3]acetic acid, not its own isotopologue; no response-factor calibration described'}
+  - {pot: davidek2006b_glc_gly_90c_ph8_argon, ledger_id: davidek2006b_tab1_glc_gly_acetic_atmosphere, species: AA, t_min: 900, value: 30.5, unit: mmol_L, printed: 'Table 1 total: 30.5 +- 0.4 mmol/L', sd: 0.4, n: '>= 2 preparations, each injected twice; the +- is not defined; CV <= 10 %'}
+  - {pot: davidek2006b_glc_gly_90c_ph8_air, ledger_id: davidek2006b_tab1_glc_gly_acetic_atmosphere, species: AA, t_min: 900, value: 32.3, unit: mmol_L, printed: 'Table 1 total: 32.3 +- 3.3 mmol/L', sd: 3.3, n: '>= 2 preparations, each injected twice; the +- is not defined; CV <= 10 %'}
+  - {pot: davidek2006b_glc_gly_90c_ph8_o2_18, ledger_id: davidek2006b_tab1_glc_gly_acetic_atmosphere, species: AA, t_min: 900, value: 33.5, unit: mmol_L, printed: 'Table 1 total: 33.5 +- 0.5 mmol/L (total = 22.9 +- 0.3 unlabelled + 10.6 +- 0.2 mono-18O-labelled)', sd: 0.5, n: '>= 2 preparations, each injected twice; the +- is not defined; CV <= 10 %'}

@@ -6443,3 +6443,111 @@ entries:
     condition_quote: ""
     flags: [secondary_source, cited_not_primary, primary_not_on_disk, "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
     note: "Review with no own measurements. Its mechanistic verdict (retro-aldol of dicarbonyls 'largely hypothetical'; 1-deoxyglucosone -> MGO + glyceraldehyde 'disproven by Voigt'; beta-dicarbonyl cleavage dominant) is in the dossier and bears on the engine's r_dpo_c2c3. Primaries for numbers: Voigt 2010 JAFC 58:5685, Thornalley 1999 Biochem J 344:109, Smuda & Glomb 2011 JAFC 59:13254."
+  - id: davidek2008_fig1_xylose_gly_acetic_residual_xylose
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Gouezec, Devaud & Blank 2008 Ann N Y Acad Sci 1126:241"
+    lab: "Nestle Research (Blank)"
+    system: "D-xylose 0.1 M + glycine 0.1 M (0.35 mmol each in 3.5 mL)"
+    medium: "0.2 M sodium phosphate, pH 6.0 or 8.0 (not held); 0.4 mL in 1.5 mL screw-cap vials, silicone bath"
+    temperature_c: [120]
+    ph: {initial: [6.0, 8.0], measured_during: false, final: null}
+    time_min: [0, 240]
+    species: [acetic acid, xylose]
+    kind: time_series
+    location: "Fig. 1 (acetic acid mol% right axis, residual xylose % left axis; raster 909 ppi); text 16 / 28 mol% = the 240 min markers"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of glycine (0.35 mmol) and D-xylose (0.35 mmol) in phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL/vial) into 1.5 mL screw-cap vials ... and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). The experiments were performed at pH 6.0 and pH 8.0."
+    flags: [ph_start_only, no_error_bars, "xylose_method_not_stated", "methods_90C_15h_vs_fig4_16h"]
+    note: "Digitised by reader 1 (fit table ph_acid_davidek_acids). Xylose quantification method not described (only acetic acid SIDA); 90 C runs report only label percentages (Fig. 4), no amounts."
+  - id: davidek2006a_tab1_glc_gly_acetic_ph
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Devaud, Robert & Blank 2006 J Agric Food Chem 54:6667"
+    lab: "Nestle Research (Blank)"
+    system: "D-glucose 0.1 M + glycine 0.1 M (0.35 mmol each in 3.5 mL)"
+    medium: "0.2 M sodium phosphate, pH 4, 6 or 8 (not held); 0.4 mL in 1.5 mL screw-cap vials, silicone bath"
+    temperature_c: [120]
+    ph: {initial: [4, 6, 8], measured_during: false, final: null}
+    time_min: [15, 480]
+    species: [acetic acid]
+    kind: time_series
+    location: "Table 1 (mol%, mean +- printed, CV < 10%); text 'about 1, 17 and 38 mol%' after 4 h = Table 1 240 min"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of glycine (0.35 mmol) and D-glucose ... (0.35 mmol) in a phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL) into screw-cap vials (1.5 mL ...) and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). Experiments were performed at pH 4, pH 6, and pH 8."
+    flags: [ph_start_only, "ND_means_not_determined"]
+    note: "Each sample prepared at least in duplicate and injected twice; the +- is not defined. 120 C table runs to 480 min at pH 4 although the method says 4 h."
+  - id: davidek2006a_text_3dg_gly_acetic_formic
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Devaud, Robert & Blank 2006 J Agric Food Chem 54:6667"
+    lab: "Nestle Research (Blank)"
+    system: "3-deoxy-D-erythro-hexos-2-ulose (3-DG) 0.1 M + glycine 0.1 M (0.05 mmol each in 0.5 mL)"
+    medium: "0.2 M sodium phosphate, pH 4, 6 or 8 (not held); 1.5 mL screw-cap vials, silicone bath"
+    temperature_c: [120]
+    ph: {initial: [4, 6, 8], measured_during: false, final: null}
+    time_min: [240]
+    species: [acetic acid, formic acid]
+    kind: endpoint
+    location: "Results text p. 6670 (mol% after 4 h)"
+    status: text_only
+    quant_class: other
+    simulable: true
+    condition_quote: "A solution of glycine (0.05 mmol) and 2 (0.05 mmol) in a phosphate buffer (0.5 mL, 0.2 mol/L) was placed into screw-cap vials (1.5 mL) and thermally treated in a silicone bath (120 C, 4 h). The experiments were performed at pH 4, pH 6, and pH 8."
+    flags: [ph_start_only, no_sd, "formic_acid_quantified_against_d3_acetic_acid"]
+    note: "Acetic acid by SIDA; formic acid with [2H3]acetic acid as internal standard (not its own isotopologue): mixed class 'other', each row names its method."
+  - id: davidek2006a_fig3_1dg_acetic_ph
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Devaud, Robert & Blank 2006 J Agric Food Chem 54:6667"
+    lab: "Nestle Research (Blank)"
+    system: "1-deoxy-D-erythro-2,3-hexodiulose (1-DG) ~10 mM nominal (0.1 mmol protected precursor in 2 mL water, deprotected on Dowex H+, diluted 5x with buffer), no amine"
+    medium: "phosphate (0.2 M stock, ~0.16 M after dilution), pH 5, 6, 6.5, 7, 8; 0.5 mL in 1.5 mL screw-cap vials"
+    temperature_c: [120]
+    ph: {initial: [5, 6, 6.5, 7, 8], measured_during: false, final: null}
+    time_min: [0, 60]
+    species: [acetic acid]
+    kind: time_series
+    location: "Fig. 3 (mol/mol 1-DG; 600 ppi stencil raster; end labels 0.84 / 0.82 / 0.80 / 0.56 / 0.20)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "After 2.5 h, the resin was filtered off and the solution of 1 was diluted five times with phosphate buffer (0.2 mol/L). The solution was dispatched (0.5 mL) into a screw-cap vial (1.5 mL, Infochroma) and thermally treated in a silicone bath for a defined period of time (120 C, up to 60 min). The experiments were performed at pH 5, pH 6, pH 6.5, pH 7, and pH 8."
+    flags: [ph_start_only, "initial_concentration_nominal", "overlapping_markers_ph65_7_8", "acetic_acid_present_at_t0"]
+    note: "NOT KEYED (adjudication 2026-10-30: readers split on the overlapping pH 6.5 / 7 markers; precursor concentration unprinted). pH 6.5 / 7 / 8 curves overlap; markers assigned by tracing their connecting lines (dotted = pH 6.5). One t = 0 marker cluster sits at ~0.02 mol/mol (unassigned)."
+  - id: davidek2006a_fig5_pentanediones_gly_acetic
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Devaud, Robert & Blank 2006 J Agric Food Chem 54:6667"
+    lab: "Nestle Research (Blank)"
+    system: "2,4-pentanedione or 2,3-pentanedione 0.1 M + glycine 0.1 M (0.5 mmol each in 5 mL)"
+    medium: "0.2 M phosphate, pH 6, 8 or 10 (not held); 0.4 mL in 1.5 mL screw-cap vials"
+    temperature_c: [120]
+    ph: {initial: [6, 8, 10], measured_during: false, final: null}
+    time_min: [0, 240]
+    species: [acetic acid, acetone, propanoic acid]
+    kind: time_series
+    location: "Fig. 5A (2,4-pentanedione) and 5B (2,3-pentanedione), mol%; 600 ppi stencil raster"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "A solution of glycine (0.5 mmol) and 2,3-pentanedione (0.5 mmol) or 2,4-pentanedione (0.5 mmol) in a phosphate buffer (5 mL, 0.2 mol/L) was dispatched (0.4 mL) into screw-cap vials (1.5 mL, Infochroma) and thermally treated at 120 C in a silicone bath for a defined period of time (10-240 min). The experiments were performed at pH 6, pH 8, and pH 10."
+    flags: [ph_start_only, "engine_species_missing: 2,4-pentanedione, 2,3-pentanedione", "open_markers_occlude_filled"]
+    note: "NOT KEYED (adjudication 2026-10-30: precursors have no engine species). Model beta-/alpha-dicarbonyls, not engine species: kept for when they are. Acetone and propanoic acid (open markers) not keyed."
+  - id: davidek2006b_tab1_glc_gly_acetic_atmosphere
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Robert, Devaud, Vera & Blank 2006 J Agric Food Chem 54:6677"
+    lab: "Nestle Research (Blank)"
+    system: "D-glucose 0.1 M + glycine 0.1 M (0.3 mmol each in 3 mL)"
+    medium: "0.2 M phosphate pH 8 (not held), 10 mL flask, under argon (degassed), air or 18O2, atmospheric pressure"
+    temperature_c: [90]
+    ph: {initial: [8], measured_during: false, final: null}
+    time_min: [900]
+    species: [acetic acid]
+    kind: endpoint
+    location: "Table 1 (mmol/L, mean +- printed, CV <= 10%)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of glycine (0.3 mmol) and glucose (0.3 mmol) in phosphate buffer (3 mL, 0.2 mol/L, pH 8) was placed in a flask (10 mL) under argon. ... heated in a silicone bath (90 C, 15 h). Similar experiments were performed replacing argon by 18O-dioxygen or air ... Each sample was prepared at least in duplicate."
+    flags: [ph_start_only, "atmosphere_is_a_condition"]
+    note: "18O2 total 33.5 = 22.9 unlabelled + 10.6 mono-18O; text 'about 32 mol %' / '30-33 mol %' is the same table."
