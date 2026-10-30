@@ -26,19 +26,19 @@ arm (thiol prereg R2c) waits on (2).
 
 ## 2. What changes (switch on)
 
-- **New species `GARP`**: the pentose Amadori compound of a non-sulfur amino acid formed in the pot. `ARP` stays the
+- **New species `PAMA`**: the pentose Amadori compound of a non-sulfur amino acid formed in the pot. `ARP` stays the
   fed alanine-xylose compound of Zhou's pots, unchanged.
-- **`r_pent_amine`: PENT + Gly -> GARP**, second order. `Gly` stands for the free non-sulfur alpha-amino acid
+- **`r_pent_amine`: PENT + Gly -> PAMA**, second order. `Gly` stands for the free non-sulfur alpha-amino acid
   (glycine; alanine only in a declared sensitivity arm, sec. 4). Rate: fitted (`k_pent_amine`, at 100 C / pH 6), with
   a pH slope (`ph_slope`, decades per pH unit on the in-situ pH, as sub-model 1) and Ea held at the hexose
   condensation's measured value (Martins 2003; a declared hexose -> pentose transfer, band +-15 kJ/mol).
-- **`GARP` breakdown**: the four `ARP` steps (`r_arp_dpo`, `r_arp_tdp` and their thermal twins) with ARP's shipped
+- **`PAMA` breakdown**: the four `ARP` steps (`r_arp_dpo`, `r_arp_tdp` and their thermal twins) with ARP's shipped
   constants, releasing the amino acid as `Gly` (not CBX + FRAG_N: the amine is regenerated). Declared assumption: an
   Amadori compound's breakdown rate does not depend on which amino acid it carries, within the band between
   Desclaux 2006's measured glycine-xylose constants (ARP -> 1-DP 2.79e-2 /min, -> 3-DP 5.50e-4 /min, pH 6, 100 C) and
   ARP's shipped ones (checked numerically in the probe, sec. 3; if they differ by > x3, that is a finding and the
-  measured Desclaux constants are used for `GARP`).
-- **`r_dpo_aa`: DPO -> AA + C3 fragment** (hydroxyacetone, FRAG_C 3), hydrolytic beta-cleavage of the 2,4-diulose,
+  measured Desclaux constants are used for `PAMA`).
+- **`r_dpo_aa`: DPO -> AA + C3 fragment** (a triose C3H6O3, FRAG_C 3; corrected after the design review: acetol is the partner of the C-4 attack's glycolic acid), hydrolytic beta-cleavage of the 2,4-diulose,
   base-catalysed (HO- attack): fitted rate at 100 C / pH 6 with its own pH slope; Ea held at the carbonyl family's.
   The minor C-3 / C-4 cleavage (9 - 15 % of acetic acid) and the parallel glycolic acid (C-4 attack; "must be
   formed", not measured) are left out and declared.
@@ -107,3 +107,51 @@ only); no amino-acid-specific condensation rates (glycine stands for all); no pr
   layer. The fit is a JOINT-fit arm: the s042 coordinates plus the four entry coordinates (entry rate and slope,
   acetic rate and slope), on the joint fit's rows plus Davidek 2008 (19 rows) and the Desclaux pot (already in);
   scored as sec. 3 step 4. Done-tests unchanged (sec. 4), the thiol re-score now read on the joint fit's own tables.
+
+## 8. Design review (step 2) -- done 2026-10-30, before any fit; secs. 2-5 and 7 superseded where noted
+
+An independent reviewer (read-only; one diagnostic run at entry 7e-5, acetic 0.3, slopes 0.3) found 2 BLOCKING,
+5 SHOULD-FIX, 2 NOTE. With the switch off nothing numeric changes (the probe's "off" row reproduces s042), and the
+titratable bookkeeping is right in both balance modes.
+
+**BLOCKING, and the response:**
+1. **The trunk destroys acetic acid.** `r_aa_frag` runs at 0.0164 /min at 120 C (Ea 20 kJ/mol on its lower bound,
+   fitted on Martins 2005): in Davidek's pots the probe's acetic acid peaks (18.7 mM at 60 min, pH 6; 46.6 at 30 min,
+   pH 8) and falls to 4.0 / 2.2 by 240 min, where Davidek measures a plateau (26.9 -> 27.6 mol% from 60 to 240 min at
+   pH 8; "formation almost stopped when no more xylose was available"). The data cap the loss at ~4e-4 /min, >= 40x
+   below the shipped rate; acetic acid does not degrade in water at 120 C, so the fitted step absorbs some other
+   deficiency of the Martins fit. -> `k_aa_frag` is a coordinate of the arm (log10 multiplier, -6 to +0.5);
+   Martins 2005's and Davidek 2006a / b's hexose acetic acid are re-scored at the optimum; recorded as CF-069.
+2. **The balance mode was undeclared.** With glycine (0.1 M, amine pKa ~8 at 120 C) out of the balance the pH 8
+   pot starts at in-situ pH 8.16, with it in at 7.54, and both slopes act on that pH. -> the arm runs with
+   `TRUNK_SOLUTES_IN_BALANCE` ON (glycine is a real buffer here); OFF is a sensitivity run.
+
+**SHOULD-FIX, adopted:**
+3. Ea: the entry at `k_schiff`'s measured 96.8 kJ/mol (Martins' hexose condensation, the declared transfer, band
+   +-15) and the cleavage at `r_odg_aa`'s 76.0 (the measured hexose analogue), not the lane's lumped 64.08.
+4. **Davidek's pH 6 xylose decays as if glycine were used 1 : 1** (second-order k 0.92 - 1.08e-3 L/(mmol min) at
+   15 - 120 min), while the entry regenerates glycine fully; pH 8 looks first order. Heat-up would give a lag, not
+   a fast start; a reversible glycosylamine is unlikely (acetic acid per xylose consumed stays ~constant). ->
+   `amine_return` (the share of PAMA's enolisations that returns the amino acid) is a coordinate in [0, 1]; the
+   entry slope is reported with it free and at 1.
+5. The PAMA factors are frozen in `PentoseAmineEntry` (4.139 / 9.133) with a unit test pinning PAMA at Desclaux's
+   constants (100 C, pH 6). TRANSFER RESTRICTION, recorded: Desclaux's constants are fitted constants of Desclaux's
+   own network in 0.5 M phosphate; ARP's come from Zhou's unbuffered pots, so the x4 / x9 gap may be phosphate
+   catalysis, not the amino acid. Every row the entry is fitted on is a high-phosphate pot.
+6. The censored xylose (pH 8, 60 - 240 min, on the axis) is scored as an upper limit (<= 0.5 mmol/L), not fitted.
+7. Identifiability: Laplace |corr| > 0.9 between two coordinates = not identified (listed in the report). Davidek
+   2008's norfuraneol is a sanity bound (<= 5 mol%; Desclaux ~2.7 %; the reviewer's diagnostic reached 25 - 27 %).
+   Hold-out: Cao 2017's cysteine + xylose + glycine pot (7 pH rows, `ph_acid_submodel`); Zhou 2023's final pH is
+   score-only (B60 fitted the ARP amine pKa and the acid yield on it); Zhou 2024's pH trajectory and Desclaux's 80 /
+   120 C runs are not keyed (a later reading). Acceptance thresholds read against the round-1 spread (three runs,
+   constants within 0.2 dex).
+
+**NOTE:** the cleavage's C3 partner is a triose (C3H6O3), not acetol (corrected; FRAG_C counts carbon only, so no
+number moved); at 120 C glycine's amine pKa is ~8, so the free-amine contrast from pH 6 to 8 is ~25 - 50x, not 100x.
+The species is `PAMA` (the design's draft name GARP replaced). R2b's 2-acetylthiazole multiplier now starts at its
+R2b optimum (10^-3) in every arm that carries it.
+
+**The arm (E):** s042's eight coordinates + R2b's `k_cys_actz` + `k_aa_frag` + the five entry coordinates (15);
+rows: the joint fit's + Davidek 2008's 19 (absolute, isotope dilution); hold-out Cao 2017 glycine pot; score-only
+Zhou 2023 final pH, Zhou 2023 2-acetylthiazole pH 6 / 8. Done-tests as sec. 4, plus the sanity bound and the
+censored rows above.

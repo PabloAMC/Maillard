@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-30",
     "git": {
-      "commit": "5204e7c70732b3245885fa467a0c8b37e8a406e1",
-      "short": "5204e7c7",
+      "commit": "338bbad7a4346c8f49a331f65d86151d7496a84f",
+      "short": "338bbad7",
       "branch": "submodel1-ph",
       "dirty": true
     },
@@ -29,15 +29,15 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "b12fc056ab4f84566aa86b35b3c90d1c7c9b491e7100276cf43449c93c7a4dfc"
+        "sha256": "6a8219f2402d6043516f489366fdec0861234cf1d65e348d6889052f0a4d2711"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "ae30cceb4193c373ab868bd14486fd548de8fa77c1accb2c62484e68d4cf423f"
+        "sha256": "86b5a087d74498b0a1fb9369a7fb179acaec9043697e4aa01b239b84d6c2f74c"
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "21ed9b8f7d517839c33b00796509513fcd3a5dba51ffd8a819d4c577cd368651"
+        "sha256": "ae5b5209e4836e52a77e9a05f303a94cbd8d693a4354c542ffe2fc388ddd5470"
       },
       {
         "path": "src/kinetic_core/parameters.py",
@@ -70,7 +70,7 @@
     ]
   },
   "summary": {
-    "steps": 125,
+    "steps": 131,
     "carrying_more_than_1_percent": 10,
     "by_grade_among_carrying": {
       "fitted": 9,
@@ -6733,6 +6733,233 @@
         "CAMA",
         "Cys",
         "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_pent_amine",
+      "equation": "PENT + Gly -> PAMA",
+      "parameter": "k_pent_amine",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Gly": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "PAMA": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "PENT": {
+          "data_sets": 41,
+          "time_series": 20,
+          "used_by_the_model": 5
+        }
+      },
+      "species_measured_over_time": [
+        "PENT"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_pama_dpo",
+      "equation": "PAMA -> DPO + Gly",
+      "parameter": "k_pama_dpo",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DPO": {
+          "data_sets": 13,
+          "time_series": 8,
+          "used_by_the_model": 1
+        },
+        "Gly": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "PAMA": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_pama_tdp",
+      "equation": "PAMA -> TDP + Gly",
+      "parameter": "k_pama_tdp",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "Gly": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "PAMA": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDP": {
+          "data_sets": 23,
+          "time_series": 14,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_pama_dpo_n",
+      "equation": "PAMA -> DPO + FRAG_C + FRAG_N",
+      "parameter": "k_pama_dpo_n",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DPO": {
+          "data_sets": 13,
+          "time_series": 8,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "PAMA": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_pama_tdp_n",
+      "equation": "PAMA -> TDP + FRAG_C + FRAG_N",
+      "parameter": "k_pama_tdp_n",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "PAMA": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDP": {
+          "data_sets": 23,
+          "time_series": 14,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_dpo_aa",
+      "equation": "DPO -> AA + FRAG_C",
+      "parameter": "k_dpo_aa",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "AA": {
+          "data_sets": 46,
+          "time_series": 24,
+          "used_by_the_model": 5
+        },
+        "DPO": {
+          "data_sets": 13,
+          "time_series": 8,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "AA",
+        "DPO"
       ],
       "conflicts": [],
       "unclear": false,

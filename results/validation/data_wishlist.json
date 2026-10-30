@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-10-30",
     "git": {
-      "commit": "3adf98cef5f801d65d146a94eb91babcb3c4ea1e",
-      "short": "3adf98ce",
+      "commit": "338bbad7a4346c8f49a331f65d86151d7496a84f",
+      "short": "338bbad7",
       "branch": "submodel1-ph",
       "dirty": true
     },
@@ -37,7 +37,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "ae30cceb4193c373ab868bd14486fd548de8fa77c1accb2c62484e68d4cf423f"
+        "sha256": "86b5a087d74498b0a1fb9369a7fb179acaec9043697e4aa01b239b84d6c2f74c"
       }
     ]
   },

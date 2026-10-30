@@ -57,9 +57,26 @@ LOWER = {"k_dpo_ddp": -8.0}
 #: round-2 arms (thiol prereg sec. 6): R2a frees the methylglyoxal Strecker of cysteine (log10 of its k at 100 C /
 #: pH 5, L/(mmol min)); R2b frees k_cys_actz on Zhou 2023's pH 7 row and scores pH 6 / 8
 ARMS = {"none": frozenset(), "R2a": frozenset({"mgo_strecker"}), "R2b": frozenset({"actz"}),
-        "R2ab": frozenset({"mgo_strecker", "actz"})}
-ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",)}
-ARM_LOWER, ARM_UPPER, ARM_START = {"k_cys_actz": -6.0}, {"k_cys_actz": 1.0}, {"k_cys_actz": 0.0}
+        "R2ab": frozenset({"mgo_strecker", "actz"}),
+        # the pentose + amine entry (kinetic_core_pentose_amine_entry_prereg.md secs. 7-8) on top of R2b
+        "E": frozenset({"actz", "entry"})}
+ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",)}
+ARM_LOWER, ARM_UPPER, ARM_START = ({"k_cys_actz": -6.0, "k_aa_frag": -6.0}, {"k_cys_actz": 1.0, "k_aa_frag": 0.5},
+                                   {"k_cys_actz": -3.0, "k_aa_frag": -1.5})
+#: the entry's own coordinates: (key, kind, lower, upper, start). Rates as log10 of k at 100 C / pH 6 (entry
+#: L/(mmol min), acetic 1/min); slopes in decades per in-situ pH unit; amine_return a share in [0, 1]
+ENTRY_COORDINATES = (("log10_k_pent_amine", "log10_offset", -7.0, -2.0, -4.15),
+                     ("entry_ph_slope", "ph_slope", -0.5, 1.5, 0.3),
+                     ("log10_k_dpo_aa", "log10_offset", -4.0, 0.5, -0.5),
+                     ("aa_ph_slope", "ph_slope", -0.5, 1.5, 0.3),
+                     ("amine_return", "acid_yield", 0.0, 1.0, 0.5))
+ENTRY_TABLE = "ph_acid_davidek_acids"
+ENTRY_FIT_PREFIX = "davidek2008"
+#: scored with the entry (prereg sec. 8): Cao 2017's cysteine + xylose + glycine pot (a hold-out) and Zhou 2023's
+#: final pH (score-only: B60 fitted the ARP amine pKa and the acid yield on those endpoints)
+ENTRY_PH_TABLE = "ph_acid_submodel"
+ENTRY_PH_HOLDOUT_POTS = ("cao2017_gly_x1",)
+ENTRY_PH_SCORE_PREFIX = "zhou2023"
 MGO_STRECKER_BOUNDS, MGO_STRECKER_START = (-6.0, 0.0), -3.0
 ACTZ_TABLE = "thiol_zhou2023_actz"
 ACTZ_FIT_PH = 7.0
@@ -89,9 +106,14 @@ def coordinates(mft_decay_cap: bool, arms=frozenset()):
     upper = [1.0] + [math.log10(0.2) if (k == "k_mft_decay" and mft_decay_cap) else 3.0 for k in MULTIPLIED]
     start = [0.0142] + [min(START[k], u) for k, u in zip(MULTIPLIED, upper[1:])]
     if "actz" in arms:
-        for k in ARM_MULTIPLIED:
+        for k in ("k_cys_actz",):
             keys.append(f"offset_{k}"); kinds.append("log10_offset")
             lower.append(ARM_LOWER[k]); upper.append(ARM_UPPER[k]); start.append(ARM_START[k])
+    if "entry" in arms:
+        keys.append("offset_k_aa_frag"); kinds.append("log10_offset")
+        lower.append(ARM_LOWER["k_aa_frag"]); upper.append(ARM_UPPER["k_aa_frag"]); start.append(ARM_START["k_aa_frag"])
+        for key, kind, lo, hi, st in ENTRY_COORDINATES:
+            keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
     if "mgo_strecker" in arms:
         keys.append("log10_k_mgo_cys_strecker"); kinds.append("log10_offset")
         lower.append(MGO_STRECKER_BOUNDS[0]); upper.append(MGO_STRECKER_BOUNDS[1]); start.append(MGO_STRECKER_START)
@@ -108,6 +130,11 @@ def trial(theta, keys) -> Dict[str, Any]:
     out = {"k_ref": k_ref, "routes": routes, "mgo_share": t["mgo_share_nf"]}
     if "log10_k_mgo_cys_strecker" in t:
         out["mgo_strecker_k"] = 10.0 ** t["log10_k_mgo_cys_strecker"]
+    if "log10_k_pent_amine" in t:
+        out["entry"] = {"k_entry_l_per_mmol_min_100c_ph6": 10.0 ** t["log10_k_pent_amine"],
+                        "entry_ph_slope": t["entry_ph_slope"], "k_dpo_aa_per_min_100c_ph6": 10.0 ** t["log10_k_dpo_aa"],
+                        "aa_ph_slope": t["aa_ph_slope"], "amine_return": t["amine_return"]}
+        out["trunk_solutes"] = True     # design review B2: glycine (0.1 M, amine pKa ~8 at 120 C) in the balance
     return out
 
 
@@ -122,6 +149,10 @@ def run_task(job):
     # set on every task (a worker runs many): R2a's trial value, else the shipped 0
     _ps.MGO_CYSTEINE_STRECKER = _dc.replace(_ps.MGO_CYSTEINE_STRECKER,
                                             k_l_per_mmol_min_100c_ph5=float(job.get("mgo_strecker_k", 0.0)))
+    # the entry arm's trial values, else the shipped (off) entry; the trunk solutes in the balance with it
+    _ps.PENTOSE_AMINE_ENTRY = _ps.PentoseAmineEntry(**job.get("entry", {}))
+    from src.kinetic_core import ph_state as _ph
+    _ph.TRUNK_SOLUTES_IN_BALANCE = bool(job.get("trunk_solutes", False))
     try:
         return probe.run_pot_limited(job, POT_SECONDS)
     except Exception as exc:  # noqa: BLE001 - counted; its rows become failed residuals
@@ -224,6 +255,34 @@ def scale_label(model, rows) -> Dict[str, str]:
     return out
 
 
+def entry_checks(theta, keys, jobs) -> Dict[str, Any]:
+    """Prereg sec. 8 (design review S6, S7): Davidek 2008's norfuraneol as a sanity bound (<= 5 mol%; Desclaux's ~2.7
+    %) and the censored xylose at pH 8 (60 - 240 min, on the axis: <= 0.5 mmol/L)."""
+    out = {}
+    for key, job in jobs.items():
+        if not key.split(":")[1].startswith(ENTRY_FIT_PREFIX):
+            continue
+        j = dict(job, **trial(theta, keys), times=sorted({*job["times"], 60.0, 120.0, 240.0}))
+        res = run_task(j)
+        if "failed" in res:
+            out[key] = {"failed": res["failed"]}
+            continue
+        states = dict(zip(j["times"], res["states"]))
+        out[key] = {"nf_max_mol_percent": 100.0 * max(s["NF"] for s in res["states"]) / j["charge"]["PENT"],
+                    "xylose_mmol_l": {f"{t:g}": states[t]["PENT"] for t in (60.0, 120.0, 240.0)},
+                    "acetic_mmol_l": {f"{t:g}": states[t]["AA"] for t in (60.0, 120.0, 240.0)}}
+    return out
+
+
+def high_correlations(lap, keys, cutoff: float = 0.9) -> List[str]:
+    """Pairs of coordinates whose Laplace correlation exceeds the declared cutoff (prereg sec. 8: not identified)."""
+    corr = lap.get("correlation")
+    if not corr:
+        return []
+    return [f"{keys[i]} x {keys[j]}: {corr[i][j]:+.2f}" for i in range(len(keys)) for j in range(i + 1, len(keys))
+            if corr[i][j] is not None and abs(corr[i][j]) > cutoff]
+
+
 def actz_falsifier(theta, start, keys) -> Dict[str, float]:
     """2-Acetylthiazole in Zhou 2023's ARP + Cys pot at the optimum and at the start (design review B4)."""
     from src.kinetic_core.observations import amount_in
@@ -263,21 +322,34 @@ def main(argv=None) -> int:
     sulfur.PH_COUPLING = "inline"
     predictable = set(sulfur.SULFUR_STATE_KEYS)
     jobs, rows_all, pots_all = {}, [], {}
-    for table in TABLES + ((ACTZ_TABLE,) if "actz" in arms else ()):
+    extra = ((ACTZ_TABLE,) if "actz" in arms else ()) + ((ENTRY_TABLE, ENTRY_PH_TABLE) if "entry" in arms else ())
+
+    def wanted(table, pot):
+        if table == ENTRY_TABLE:
+            return pot.startswith(ENTRY_FIT_PREFIX)
+        if table == ENTRY_PH_TABLE:
+            return pot in ENTRY_PH_HOLDOUT_POTS or pot.startswith(ENTRY_PH_SCORE_PREFIX)
+        return True
+
+    for table in TABLES + extra:
         pots, rows = fit_rows.load(table)
         for j in probe.plan(pots, rows):
-            if "skip" in j or any(pots[j["pot"]]["initial_mmol_L"].get(h) for h in HEXOSES):
+            if "skip" in j or any(pots[j["pot"]]["initial_mmol_L"].get(h) for h in HEXOSES) or not wanted(table, j["pot"]):
                 continue
             jobs[f"{table}:{j['pot']}"] = j
             pots_all[f"{table}:{j['pot']}"] = pots[j["pot"]]
-        rows_all += [r for r in rows if r.species in predictable]
+        rows_all += [r for r in rows if r.species in predictable or (table == ENTRY_PH_TABLE and r.species == "pH")]
     rows_all = list(dedupe(r for r in rows_all if key_of(r) in jobs))
 
     def is_holdout(r):
+        if r.table == ENTRY_PH_TABLE:
+            return r.pot in ENTRY_PH_HOLDOUT_POTS
         return ((r.ledger_id.startswith("zhai2023") and float(pots_all[key_of(r)]["t_c"]) >= 140.0)
                 or r.ledger_id.startswith(HOLDOUT_LEDGER_PREFIXES) or r.pot in HOLDOUT_POTS)
 
     def is_score_only(r):
+        if r.table == ENTRY_PH_TABLE:
+            return True
         if r.table == ACTZ_TABLE:   # R2b: pH 7 fitted, pH 6 / 8 scored (a test of the step's pH structure)
             return float(pots_all[key_of(r)]["label_ph"]) != ACTZ_FIT_PH
         return r.ledger_id.startswith(SCORE_ONLY_LEDGER_PREFIXES) or r.pot in SCORE_ONLY_POTS
@@ -331,6 +403,8 @@ def main(argv=None) -> int:
         "holdout_raw_at_start": raw_table(holdout, raw(start, holdout)) if holdout else {},
         "score_only_raw_at_optimum": raw_table(score_only, raw(best.theta, score_only)) if score_only else {},
         "actz_falsifier": actz_falsifier(best.theta, start, keys),
+        "entry_checks": entry_checks(best.theta, keys, jobs) if "entry" in arms else None,
+        "high_correlations": high_correlations(lap, keys),
         "diagnostics_whitened": fitting.diagnostics(problem, best.theta, {
             "paper": sm3.paper_of, "data_set": lambda r: r.ledger_id, "observable": lambda r: r.species,
             "temperature_C": lambda r: float(pots_all[key_of(r)]["t_c"]),
@@ -382,6 +456,12 @@ def main(argv=None) -> int:
         lines += [f"| {k} | {v['n']} | {report['scale_of'][k]} | {_mr(report['holdout_raw_at_start'][k])} | {_mr(v)} | "
                   f"{_mr(report['holdout_after_scale_at_optimum'].get(k)) or 'not scored (no fitted scale)'} |"
                   for k, v in report["holdout_raw_at_optimum"].items()]
+    if report.get("entry_checks"):
+        lines += ["", "## Entry checks (Davidek 2008 pots at the optimum)", ""]
+        lines += [f"- {k}: {v}" for k, v in report["entry_checks"].items()]
+    if report.get("high_correlations"):
+        lines += ["", "## Laplace correlations above 0.9 (declared: not identified)", ""]
+        lines += [f"- {c}" for c in report["high_correlations"]]
     if report["score_only_raw_at_optimum"]:
         lines += ["", "## Score-only rows at the optimum", ""]
         lines += [f"- {k}: n {v['n']}, mean {v['mean']:+.2f}, RMS {v['rms']:.2f}" for k, v in report["score_only_raw_at_optimum"].items()]

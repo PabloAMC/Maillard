@@ -945,10 +945,16 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     Reaction("r_pama_tdp", {"PAMA": 1}, {"TDP": 1, "Gly": 1}, "k_pama_tdp",
              "Pentose + amine entry. 1,2-enolisation to 3-deoxypentosone, the amino acid released; ARP's derived rate "
              "(r_arp_tdp + r_arp_tdp_thermal), declared."),
+    Reaction("r_pama_dpo_n", {"PAMA": 1}, {"DPO": 1, "FRAG_C": 2, "FRAG_N": 1}, "k_pama_dpo_n",
+             "Pentose + amine entry. As r_pama_dpo, the amino acid NOT returned (left in a fragment): the "
+             "(1 - amine_return) share (design review S4)."),
+    Reaction("r_pama_tdp_n", {"PAMA": 1}, {"TDP": 1, "FRAG_C": 2, "FRAG_N": 1}, "k_pama_tdp_n",
+             "Pentose + amine entry. As r_pama_tdp, the amino acid not returned: the (1 - amine_return) share."),
     Reaction("r_dpo_aa", {"DPO": 1}, {"AA": 1, "FRAG_C": 3}, "k_dpo_aa",
              "Pentose acetic acid. Hydrolytic beta-cleavage of 1-deoxypento-2,4-diulose (the 1-deoxypentosone "
-             "tautomer) between C-2 and C-3: acetic acid (C-1/C-2, 77-89 % of the label; Davidek 2008) + "
-             "hydroxyacetone (C3). Base-favoured; fitted with an in-situ pH slope."),
+             "tautomer), HO- at C-2: acetic acid (C-1/C-2, 77-89 % of the label; Davidek 2008) + a triose C3H6O3 "
+             "(glyceraldehyde / dihydroxyacetone; acetol is the partner of the C-4 attack's glycolic acid, not of "
+             "this one). Base-favoured; fitted with an in-situ pH slope."),
 )
 
 def inactive_reactions() -> frozenset:
@@ -977,7 +983,9 @@ def inactive_reactions() -> frozenset:
     if _ps.HEXOSE_C5_ENTRY.k_per_min_100c <= 0.0:
         off.add("r_odg_dpo")
     if not _ps.PENTOSE_AMINE_ENTRY.enabled:
-        off.update({"r_pent_amine", "r_pama_dpo", "r_pama_tdp"})
+        off.update({"r_pent_amine", "r_pama_dpo", "r_pama_tdp", "r_pama_dpo_n", "r_pama_tdp_n"})
+    elif _ps.PENTOSE_AMINE_ENTRY.amine_return >= 1.0:
+        off.update({"r_pama_dpo_n", "r_pama_tdp_n"})
     if _ps.PENTOSE_AMINE_ENTRY.k_dpo_aa_per_min_100c_ph6 <= 0.0:
         off.add("r_dpo_aa")
     return frozenset(off)
@@ -1314,7 +1322,7 @@ def sulfur_rate_constants_at(
             continue  # B50: derived below from the two thiamine steps
         if key == "k_ttca_form":
             continue  # B58: derived below from r_ttca_cys by detailed balance
-        if key in ("k_pent_amine", "k_pama_dpo", "k_pama_tdp", "k_dpo_aa"):
+        if key in ("k_pent_amine", "k_pama_dpo", "k_pama_tdp", "k_pama_dpo_n", "k_pama_tdp_n", "k_dpo_aa"):
             continue  # the pentose + amine entry: derived below
         if key in ("k_nf_decay_oh", "k_nf_decay_oh_mgo", "k_tdp_mgo", "k_pent_mgo", "k_mgo_cys_strecker",
                    "k_mgo_cys_h2s", "k_odg_dpo"):
@@ -1439,10 +1447,14 @@ def sulfur_rate_constants_at(
     if _ent.enabled:
         out["r_pent_amine"] = (_ent.k_at(_ent.k_entry_l_per_mmol_min_100c_ph6, _ent.ea_entry_kj_mol, temperature_k)
                                * 10.0 ** (float(_ent.entry_ph_slope) * (float(ph) - 6.0)))
-        out["r_pama_dpo"] = float(_ent.pama_dpo_factor) * (out["r_arp_dpo"] + out["r_arp_dpo_thermal"])
-        out["r_pama_tdp"] = float(_ent.pama_tdp_factor) * (out["r_arp_tdp"] + out["r_arp_tdp_thermal"])
+        _ret = min(max(float(_ent.amine_return), 0.0), 1.0)
+        _dpo = float(_ent.pama_dpo_factor) * (out["r_arp_dpo"] + out["r_arp_dpo_thermal"])
+        _tdp = float(_ent.pama_tdp_factor) * (out["r_arp_tdp"] + out["r_arp_tdp_thermal"])
+        out["r_pama_dpo"], out["r_pama_dpo_n"] = _ret * _dpo, (1.0 - _ret) * _dpo
+        out["r_pama_tdp"], out["r_pama_tdp_n"] = _ret * _tdp, (1.0 - _ret) * _tdp
     else:
-        out["r_pent_amine"] = out["r_pama_dpo"] = out["r_pama_tdp"] = 0.0
+        for _key in ("r_pent_amine", "r_pama_dpo", "r_pama_tdp", "r_pama_dpo_n", "r_pama_tdp_n"):
+            out[_key] = 0.0
     out["r_dpo_aa"] = (_ent.k_at(_ent.k_dpo_aa_per_min_100c_ph6, _ent.ea_dpo_aa_kj_mol, temperature_k)
                        * 10.0 ** (float(_ent.aa_ph_slope) * (float(ph) - 6.0)))
 

@@ -1615,3 +1615,22 @@ entries:
     status: open
     remedy: "Both stay as data: Schieberle in the joint fit, Yiltirak a declared hold-out. Neither is down-weighted; the spread is reported as between-laboratory error if the thiol layer ships as a declared limitation (thiol prereg sec. 6)."
     affects: [schieberle2000_t4_100c_time_course, yiltirak2026_tables3_buffer_arm_mft_fft]
+  - id: CF-069
+    kind: conflict
+    scope: corpus
+    sources: [martins2005, davidek2008]
+    quantity: "loss of acetic acid in heated sugar + glycine solutions (the trunk's r_aa_frag)"
+    observation: >-
+      The trunk's acetic-acid loss, fitted on Martins 2005's glucose + glycine acids, runs at 0.0164 /min at 120 C
+      (Ea 20 kJ/mol on its lower bound). Davidek 2008 (xylose + glycine, 0.2 M phosphate, isotope dilution) measures
+      acetic acid on a plateau from 60 to 240 min at pH 8 (26.9 -> 27.6 mol%) -- a loss of at most ~4e-4 /min, >= 40x
+      slower. Acetic acid is thermally stable in water at 120 C, so the fitted loss stands in for another deficiency
+      of the Martins fit (a missing late acid sink, or the acid budget's split between formic and acetic).
+    explanations:
+      - "The Martins fit used r_aa_frag to absorb a late fall in measured acetic acid that has another cause (volatilisation, a sampling or derivatisation artefact, a pH-dependent extraction)."
+      - "Glucose and xylose systems differ in a late acetic-acid consumer the lane lacks."
+    tests:
+      - "The pentose + amine entry arm (E) frees k_aa_frag on Davidek 2008 and re-scores Martins 2005 and Davidek 2006a / b at its optimum."
+    status: open
+    remedy: "k_aa_frag is a coordinate of arm E; nothing shipped changes until a fit and its audit decide."
+    affects: [davidek2008_fig1_xylose_gly_acetic_residual_xylose]

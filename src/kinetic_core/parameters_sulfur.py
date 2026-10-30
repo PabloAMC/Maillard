@@ -506,22 +506,30 @@ class PentoseAmineEntry:
     times 10^(entry_ph_slope (pH - 6)) on the in-situ pH; PAMA's two enolisations run at ARP's derived rates (a
     declared assumption: the Amadori compound's breakdown does not depend on its amino acid) and return the amino
     acid. ``r_dpo_aa``: 1-deoxypentosone -> acetic acid + C3 (hydrolytic beta-cleavage of the 2,4-diulose, Davidek
-    2008), first order, 1/min at 100 C and pH 6, times 10^(aa_ph_slope (pH - 6)). Every constant FITTED (Davidek 2008,
-    Desclaux 2006); Ea of the entry at Martins 2003's hexose condensation (declared transfer), of the cleavage at the
-    carbonyl family's.
+    2008), first order, 1/min at 100 C and pH 6, times 10^(aa_ph_slope (pH - 6)). Every rate FITTED (Davidek 2008,
+    Desclaux 2006). Ea (design review S3): the entry at Martins 2003's measured hexose condensation (k_schiff, 96.8
+    kJ/mol; a declared hexose -> pentose transfer, band +-15), the cleavage at the measured hexose analogue's
+    (r_odg_aa, Martins 2005, 76.0). ``amine_return``: the fraction of PAMA's enolisations that returns the amino
+    acid; the rest leaves it in a fragment (design review S4: Davidek's pH 6 xylose decays as if glycine were used
+    1 : 1). Fitted in [0, 1]; 1 means fully catalytic.
     """
 
     k_entry_l_per_mmol_min_100c_ph6: float = 0.0
     entry_ph_slope: float = 0.0
-    ea_entry_kj_mol: float = 64.08
+    ea_entry_kj_mol: float = 96.8
     k_dpo_aa_per_min_100c_ph6: float = 0.0
     aa_ph_slope: float = 0.0
-    ea_dpo_aa_kj_mol: float = 64.08
+    ea_dpo_aa_kj_mol: float = 76.0
     #: PAMA's enolisations as multiples of ARP's derived rates. The probe (2026-10-30) found ARP's 4.2x (to 1-DP) and
     #: 9.1x (to 3-DP) slower than Desclaux 2006's MEASURED glycine-xylose constants (2.79e-2 / 5.50e-4 per min, pH 6,
     #: 100 C): the prereg's declared alternative (> x3) puts PAMA on Desclaux's level, ARP's pH and T dependence.
-    pama_dpo_factor: float = 1.0
-    pama_tdp_factor: float = 1.0
+    #: Frozen from the probe (design review S5: never left to a generator to remember); pinned by a unit test at
+    #: Desclaux's conditions. TRANSFER RESTRICTION: Desclaux's constants are fitted constants of Desclaux's own
+    #: network in 0.5 M phosphate; ARP's come from Zhou's unbuffered pots -- the gap may be phosphate catalysis, not
+    #: the amino acid. Every row the entry is fitted on is a high-phosphate pot.
+    pama_dpo_factor: float = 4.139022442570774
+    pama_tdp_factor: float = 9.13331167984854
+    amine_return: float = 1.0
 
     @property
     def enabled(self) -> bool:
