@@ -210,3 +210,17 @@ Martins 2005 once the reference offsets are free (P = 0.55); the Amadori slopes 
 (P = 0.6); the pentose acid yield stays poorly identified or on a bound (P = 0.6), which would send the 0.4 M
 over-acidification to the mechanism step; done-test 1 passes (P = 0.3).
 ## Amendments
+
+**Amendment 1 (2026-10-30, 01:20; after arm B's first fit, before arm A's).** Arm B's diagnostics showed two flaws
+in my implementation of review items B3 / B4, not in the chemistry: (i) DFG (AMA) and the Schiff base were titrated
+as the pentose-ARP class, whose amine pKa is a CALIBRATED constant the fit also moves for Zhou's pentose pots (arm B
+put it at 5.8): the pentose and hexose blocks were coupled through a number neither measures, and Davidek's
+pH-stat pots then saw a distorted pH (their NaOH-uptake diagnostic fell to -22 dex). Fixed with DFG's MEASURED
+constants (Mossine 1994: amine 8.18, carboxyl 2.20; glycine's enthalpies carried as the class value, declared).
+(ii) The trunk slopes read the label-scale pH (review B3). Martins' slopes were measured in 0.1 M phosphate, whose
+label sits within ~0.1-0.3 of the in-situ pH, so they are in-situ slopes; on the label scale an unbuffered DFG
+pH-stat imports its own ~1-unit thermal shift. The trunk slopes now read the in-situ pH (B3's label conversion stays
+for the other measured tables). Effect at the start vector: Davidek FA+AA +0.35 -> +0.16 dex mean (RMS 0.58 ->
+0.31); NaOH uptake -0.14 -> -0.49 (diagnostic; it counts acids the lane cannot make, B5). Arm B's first result is
+kept as `kinetic_core_ph_acid_submodel_fit_B_superseded_amendment1.{json,md}` (slopes on their 1.5 bound, acid
+yield on its bound); both arms are re-run. Nothing else in sec. 5 changes; the tolerances stand.

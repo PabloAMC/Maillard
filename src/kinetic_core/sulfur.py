@@ -1207,7 +1207,7 @@ SULFUR_STOICHIOMETRY: np.ndarray = sulfur_stoichiometric_matrix()
 
 #: Sub-model 1 (2026-10-29), pre-registered with the switch OFF: the trunk's MEASURED pH terms (Martins & van Boekel
 #: 2003 Part II Table 3, ``trunk_conditions``: the three Amadori-decay steps and the 3-DG -> formic acid exit) applied
-#: inside the sulfur lane at the pH the lane computes, on the label scale the table was measured on. The trunk lane
+#: inside the sulfur lane at the pH the lane computes (in situ: Amendment 1, see the evaluation). The trunk lane
 #: applies them at the declared pH; the sulfur lane, the one lane whose pH moves, never did -- so its acid supply was
 #: the same at pH 5 and pH 8 (Davidek 2002's pH-stat measures 3 vs 79 mmol/L). The no-refit probe that found it:
 #: results/validation/kinetic_core_ph_acid_submodel_probe*.md. The evidence audit decides whether it ships.
@@ -1311,7 +1311,10 @@ def sulfur_rate_constants_at(
         if key in trunk_ph:
             from .trunk_conditions import REFERENCE_PH as _TRUNK_REFERENCE_PH
 
-            value *= 10.0 ** (trunk_ph[key] * (ph_table - _TRUNK_REFERENCE_PH))
+            # Amendment 1 (2026-10-30): on the IN-SITU pH. Martins' slopes were measured in 0.1 M phosphate, whose
+            # label sits within ~0.1-0.3 of the in-situ pH, so they are in-situ slopes; reading them on the label
+            # scale imports a system's own thermal shift (Davidek's DFG-water pH-stat: ~1 unit) they never contained.
+            value *= 10.0 ** (trunk_ph[key] * (ph - _TRUNK_REFERENCE_PH))
         out[reaction.key] = value
 
     # DERIVED RATE 1: the reverse of the thioether conjugation. Stack 2018

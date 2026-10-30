@@ -423,6 +423,16 @@ GLYCINE = TitratableGroup(
     "glycine", "glycine (COOH / NH3+)", (2.351, 9.780), (4.0, 44.2), 1.0,
     "pK 2.351 / 9.780, dH_ion 4.0 / 44.2 kJ/mol, dCp -139 / -57 J/(K mol) [GKL]",
     (-139.0, -57.0))
+#: Sub-model 1, Amendment 1 (2026-10-30): the glucose-glycine Amadori compound (DFG, engine AMA) at its MEASURED
+#: constants -- Mossine, Glinsky & Feather 1994 (mossine1994_extraction.md): amine pKa 8.18 +/- 0.01, carboxyl 2.20,
+#: 25 C, I = 0.2 M. No ionisation enthalpy is printed: glycine's (GKL 4.0 / 44.2 kJ/mol, dCp -139 / -57) is carried as
+#: the class value, declared. Before the amendment AMA was titrated as the pentose-ARP class, whose amine pKa is a
+#: calibrated constant shared with the pentose block -- a coupling the data do not support (arm B's diagnostics).
+DFG_GROUP = TitratableGroup(
+    "dfg", "N-(1-deoxy-D-fructos-1-yl)glycine (COOH / secondary NH2+)", (2.20, 8.18), (4.0, 44.2), 1.0,
+    "pK 2.20 / 8.18 [Mossine 1994, 25 C]; dH_ion 4.0 / 44.2 kJ/mol and dCp -139 / -57 J/(K mol): glycine's [GKL], "
+    "carried as the class value (Mossine prints no enthalpy)",
+    (-139.0, -57.0))
 
 #: --- the BUFFERS ----------------------------------------------------------
 PHOSPHATE = TitratableGroup(
@@ -682,10 +692,10 @@ def titratable_inventory(
     if cama > 0.0:
         out.append((drift.arp_group(), cama))
     # Sub-model 1 (2026-10-29, design review B4): the trunk's solutes, once the trunk runs under a moving pH.
-    # Glycine at its measured constants; its Amadori compound (AMA, N-(1-deoxy-D-fructos-1-yl)glycine) and its Schiff
-    # base (SB) titrated as the Amadori-compound class the drift already calibrates for the pentose ARP and the
-    # cysteine Amadori compound (a carboxyl and a secondary-amine nitrogen). Off by default: every shipped number is
-    # unchanged, and UNTRACKED_TITRATABLE still describes the shipped balance.
+    # Glycine and its Amadori compound (AMA = DFG) at their measured constants (Amendment 1: DFG at Mossine 1994's,
+    # no longer the calibrated pentose-ARP class); the Schiff base (SB, glycosylamine) carried as DFG, declared --
+    # a carboxyl and a secondary-amine nitrogen, no measured pKa. Off by default: every shipped number is unchanged,
+    # and UNTRACKED_TITRATABLE still describes the shipped balance.
     if TRUNK_SOLUTES_IN_BALANCE:
         gly = float(concentrations.get("Gly", 0.0))
         if gly > 0.0:
@@ -693,7 +703,7 @@ def titratable_inventory(
         for key in ("AMA", "SB"):
             amount = float(concentrations.get(key, 0.0))
             if amount > 0.0:
-                out.append((drift.arp_group(), amount))
+                out.append((DFG_GROUP, amount))
 
     # -- B2.3: the carboxyl centres the sinks CARRY OUT of a consumed --------
     #    molecule. FULL STRENGTH: a carboxyl carried out of a molecule that

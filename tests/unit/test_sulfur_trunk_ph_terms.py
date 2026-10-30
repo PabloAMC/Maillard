@@ -15,7 +15,7 @@ def test_off_by_default_and_then_the_lane_is_ph_blind_on_the_amadori_steps():
     assert _k(5.5)["r_ama_odg"] == _k(6.8)["r_ama_odg"]
 
 
-def test_on_it_scales_each_step_by_its_measured_slope_on_the_label_scale(monkeypatch):
+def test_on_it_scales_each_step_by_its_measured_slope(monkeypatch):
     monkeypatch.setattr(sulfur, "TRUNK_PH_TERMS", True)
     slope = trunk_conditions.PH_EXPONENT_DECADES_PER_UNIT
     exit_slope = trunk_conditions.THREE_DEOXY_EXIT_PH["k_tdg_fa"][0]
@@ -45,7 +45,7 @@ def test_trunk_solutes_enter_the_balance_only_when_switched_on(monkeypatch):
     groups = {}
     for g, c in ph_state.titratable_inventory(state, drift, spec):
         groups[g.key] = groups.get(g.key, 0.0) + c
-    assert groups["glycine"] == 200.0 and groups["arp"] == 11.0
+    assert groups["glycine"] == 200.0 and groups["dfg"] == 11.0   # Amendment 1: DFG at Mossine's measured pKa
     # 200 mM glycine buffers like ~0.1 M phosphate near its carboxyl pKa (the review's sizing): capacity > 50 mM/pH
     assert ph_state.buffer_capacity_mmol_per_ph(state, 298.15, 2.4, drift, spec) > 50.0
 
