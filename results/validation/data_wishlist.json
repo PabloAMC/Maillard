@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-10-30",
     "git": {
-      "commit": "2360c53c82d3157666c49421b65a14173c1cfed3",
-      "short": "2360c53c",
+      "commit": "3adf98cef5f801d65d146a94eb91babcb3c4ea1e",
+      "short": "3adf98ce",
       "branch": "submodel1-ph",
       "dirty": true
     },
@@ -37,7 +37,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "3a67aa9e0828af888f06a5613798d5d5ac5fedfd5cfde7720fe226657cac904f"
+        "sha256": "ae30cceb4193c373ab868bd14486fd548de8fa77c1accb2c62484e68d4cf423f"
       }
     ]
   },
@@ -268,7 +268,8 @@
         "MFT",
         "FFT",
         "MFTD",
-        "ACTZ"
+        "ACTZ",
+        "H2S"
       ],
       "unlocks_from_charges": [
         "glucose"
@@ -746,7 +747,7 @@
     },
     {
       "if_measured": "k_glc_ha",
-      "you_could_predict": "absolute MFT, FFT, MFTD, ACTZ from charges containing glucose, as a fitted value instead of a band artefact; 8 panel rows now NOT EVALUABLE would return to the scorecard"
+      "you_could_predict": "absolute MFT, FFT, MFTD, ACTZ, H2S from charges containing glucose, as a fitted value instead of a band artefact; 8 panel rows now NOT EVALUABLE would return to the scorecard"
     },
     {
       "if_measured": "k_ttca_deg",

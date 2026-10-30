@@ -141,7 +141,7 @@ def check_runners(failures: List[str]) -> None:
 #: records of the same kind -- run at a commit, quoted by number in their pre-registration -- and are pinned likewise.
 FROZEN_RECORD_GENERATOR = re.compile(
     r"scripts/generators/(generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
-    r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout)\.py$")
+    r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout|diagnose_\w+)\.py$")
 
 
 #: 2026-10-30 (owner: "I am not sure regenerating the figure is needed until we have the engine finished"; strategy

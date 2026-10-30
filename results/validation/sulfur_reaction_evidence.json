@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-30",
     "git": {
-      "commit": "2360c53c82d3157666c49421b65a14173c1cfed3",
-      "short": "2360c53c",
+      "commit": "3adf98cef5f801d65d146a94eb91babcb3c4ea1e",
+      "short": "3adf98ce",
       "branch": "submodel1-ph",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/sulfur_flux_attribution.json",
-        "sha256": "58490e7c0a5275b9d1091cea090e7b3052ee26822af6eabbc8609db526e47e5c"
+        "sha256": "4b799b533e379ede271c052bfa490d60e11b35d418181a4f8ddc5754854c7d72"
       },
       {
         "path": "results/validation/kinetic_core_b60_laplace_covariance.json",
@@ -29,15 +29,15 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "c8a13be67258c6d6bf4b161ac02f225c5c572abd947ca5ddadfef59c2074fd7a"
+        "sha256": "8e3679827bbcdc01fbbfcf61c56c12812869ca4cec78d5f39a137656ed87e6c0"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "3a67aa9e0828af888f06a5613798d5d5ac5fedfd5cfde7720fe226657cac904f"
+        "sha256": "ae30cceb4193c373ab868bd14486fd548de8fa77c1accb2c62484e68d4cf423f"
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "bb04690a8393ebf22724cc29a9f12e30cfc7784e604355cff5c83d1826bda083"
+        "sha256": "21ed9b8f7d517839c33b00796509513fcd3a5dba51ffd8a819d4c577cd368651"
       },
       {
         "path": "src/kinetic_core/parameters.py",
@@ -70,7 +70,7 @@
     ]
   },
   "summary": {
-    "steps": 122,
+    "steps": 125,
     "carrying_more_than_1_percent": 10,
     "by_grade_among_carrying": {
       "fitted": 9,
@@ -6446,6 +6446,147 @@
         "HA",
         "MGO",
         "TDP"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_mgo_cys_strecker",
+      "equation": "MGO + Cys -> CBX + FRAG_C + FRAG_N + FRAG_S",
+      "parameter": "k_mgo_cys_strecker",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 97,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "MGO": {
+          "data_sets": 102,
+          "time_series": 58,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_mgo_cys_h2s",
+      "equation": "MGO + Cys -> MGO + CBX + FRAG_C + FRAG_N + H2S",
+      "parameter": "k_mgo_cys_h2s",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 97,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "H2S": {
+          "data_sets": 34,
+          "time_series": 12,
+          "used_by_the_model": 1
+        },
+        "MGO": {
+          "data_sets": 102,
+          "time_series": 58,
+          "used_by_the_model": 17
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "H2S",
+        "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_odg_dpo",
+      "equation": "ODG -> DPO + FRAG_C",
+      "parameter": "k_odg_dpo",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "DPO": {
+          "data_sets": 13,
+          "time_series": 8,
+          "used_by_the_model": 1
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "ODG": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        }
+      },
+      "species_measured_over_time": [
+        "DPO"
       ],
       "conflicts": [],
       "unclear": false,
