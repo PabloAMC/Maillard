@@ -101,3 +101,10 @@ supply's pH dependence transfers to a mode the fit never saw for acetic acid and
 the step to look at. Watch item: if arm C also leaves the formic slope on its bound, the 3-DG -> formic exit is not
 a single pH-sloped step (Martins 2005b's Table 3 gives it pD 0.09 +/- 1.10 -- unidentified there too), and that
 step goes to the literature.
+
+## Checkpoint 5 -- 04:05
+
+Arm C running for 1 h (12 constants: ~13 Jacobian points per iteration, all nine workers busy, no straggler since
+the time limit). No new result; the plan stands (arm C's frozen hold-out decides whether the formic-slope problem is
+the missing glucose-step slopes or the formic exit itself). Arm A and sub-model 3 follow; ETA for sub-model 3's
+first two arms slips to ~08:00.
