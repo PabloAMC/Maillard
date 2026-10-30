@@ -209,4 +209,66 @@ replace lost Strecker H2S, which pushes it DOWN; a fall against Li 2022's "x10 f
 source); `k_dpo_ddp` off its bound: ~0.3; Schieberle MFT within x3 with `k_mft_decay` free: ~0.45. Expected failures
 written now: 3-DX (no coordinate touches it), Hofmann T8, Hofmann pH 7 MFT (no HS- route for norfuraneol), CF-017's
 temperature ordering (every Ea held).
+## 6. Round 1 read, and the round-2 design (2026-10-30, before any round-2 fit)
+
+**How round 1 must be read (a correction).** The first report's residual tables are raw, BEFORE each semi-
+quantitative series' free scale, although its header said "after". For a scale-free series only the scatter around
+its fitted offset counts. Read that way (s042, the first run), the Jiangnan thiol figures fit in shape (sd 0.1 - 0.3
+dex: Zhai JAFC Fig. 3 MFT 0.23 / FFT 0.17 - 0.20; Food Chem Fig. 1a MFT 0.27, FFT 0.73; Wang 2026b 0.1 - 0.2; Zhou
+2022 MFT 0.47, FFT 0.20), and the misses are in the ABSOLUTE rows: Garching's fed-precursor pots fit (Hofmann T3 /
+T4 / T5 / T10 within 0.24), Schieberle 2000 (100 C time course) is under (MFT -0.85 at every time; FFT -1.2 to -3.1,
+worst early), Yiltirak 2026 (hold-out) is over (MFT +2.35, FFT +1.9), and the Hofmann pH ladder (hold-out) has the
+WRONG pH DIRECTION: measured MFT / FFT fall x22 / x19 from pH 3 to 7; predicted MFT is flat and FFT rises x180.
+2-Acetylthiazole (falsifier) is x1000 high. The report generator now prints, per series, its scale class and the
+residual after the fitted offset; hold-out rows of a scaled series take the offset fitted on that series' fit rows.
+The four Feng 2022 pots (RG-ARP, precursor mapping unresolved, CF-058) were scored as constant 25-dex failures; they
+are now skipped by the probe planner (the optimum is unaffected: no coordinate moves them). The s042 and capped runs
+are repeated with both fixes so the three round-1 runs compare on one footing.
+
+**Flux diagnosis at the s042 optimum** (`kinetic_core_thiol_flux_diagnosis_s042.md`; every budget closes to 1e-4):
+1. H2S comes 100 % from cysteine thermolysis (`r_cys_h2s`, MEASURED, Zheng & Ho 1994, rising with pH). The B59a
+   Strecker H2S is gone: `k_dpo_ddp` went to its 10^-8 bound (1-DX carbon routed to MGO), and `k_h2s_loss` fell to
+   its lower bound -- the review's predicted signature of a missing H2S source (sec. 5, B5).
+2. MFT is all `r_nf_mft` and sits at formation / decay (`ch_mft_decay` takes 92 - 99 %); FFT is all `r_fur_fft_hs`,
+   lost to `ch_fft_decay` at pH 5 and to the thiolate loss at pH 7.
+3. Furfural comes only from 3-DX (`r_tdp_fur`), and the model makes LESS of it at pH 3 than at pH 7 (0.060 vs 0.130
+   mmol/L, Hofmann 145 C), while H2S rises x15 from pH 5 to 7: the inverted pH direction is the carbonyl supply and
+   the thiol loss, not the measured H2S release.
+4. 2-Acetylthiazole has one source, `r_cys_actz` (Cys + MGO): 0.089 mmol/L (~11 mg/L) in Zhou 2023's pot against
+   11.7 ug/L. Its constant was fitted (B60) when MGO was 10^3 too low.
+5. Schieberle 2000 vs Yiltirak 2026 (both SIDA, ribose + cysteine, 0.5 M phosphate, 100 C): measured MFT ~800 ug/L
+   (Schieberle, 4 h, interpolated) vs 6.9 ug/L (Yiltirak, 4 h) -- x120, where 4x less ribose and pH 5.5 vs 5 explain
+   about x10 and the model predicts Yiltirak HIGHER. Yiltirak's units and SIDA are verified by two readers (SI Table
+   S3, ug/L; labelled standards added after heating; 3 mL under 17 mL air). A between-laboratory conflict, recorded
+   as CF-068; the headspace oxygen (about 50 mM-equivalent O2 against 25 mM cysteine) is a candidate, not a finding:
+   the shipped oxygen consumers are off (`k_cys_ox` = `k_red_ox` = 0) and no measured cysteine autoxidation rate is
+   in the corpus.
+6. Zhou 2023's final pH (ledger `zhou2023_fig2_final_ph`): ARP + Cys started at pH 6 / 7 / 8 ends at 3.22 / 3.42 /
+   5.07; the lane ends the pH 7 pot at 4.54. The ARP + cysteine pots acidify ~1 pH unit more than the lane says.
+
+**Round-2 arms (each on the s042 engine state, the same rows plus what is named; independent design review before
+any of them runs):**
+- **R2a, the H2S source follows the carbon:** `MGO_CYSTEINE_STRECKER` on, its rate a coordinate (log10 of k at
+  100 C / pH 5, flat prior, bounds 10^-6 to 10^0 L/(mmol min); Ea held at 64.08), its H2S share CR-11's (0.042 /
+  0.080 with the run). Expected: `k_h2s_loss` comes off its lower bound (P 0.5); Schieberle MFT within x3 (P 0.4);
+  the pH direction NOT fixed (the step carries the "base" pH factor; P 0.8 it stays inverted).
+- **R2b, 2-acetylthiazole fitted:** `k_cys_actz` a coordinate (log10 multiplier, -6 to +1), fitted on the Zhou 2023
+  pH 7 row (absolute, the paper's per-paper scale not applied: one row cannot carry a scale; CF-014's x7.8 within-lab
+  reproducibility as its noise floor, 0.9 dex); pH 6 and 8 SCORED, not fitted -- a test of the step's pH structure
+  (measured x240 from pH 6 to 8). A leaf (ACTZ takes < 2 % of the cysteine anywhere), so R2b rides with R2a without
+  confounding it. Expected: the pH 7 row within x3 after the fit (P 0.9); pH 6 and 8 within x3 unfitted (P 0.2).
+- **R2c, the pH of the thiol layer (after the two-reader Zhou 2023 pH table exists):** fit rows Zhou 2023 MFT / FFT /
+  MFTD / furfural at initial pH 6 / 7 / 8 (per-paper scale, tau inf: the pH contrast counts) and its final pH (pH
+  rows: absolute); coordinates two `ph_slope`s, on furfural formation (`r_tdp_fur`) and on the thiol assembly steps
+  (`r_nf_mft`, `r_fur_fft_hs` together), sign free, applied as in sub-model 1 (10^(slope (pH_in_situ - 5)));
+  the Hofmann pH ladder stays a hold-out. Expected: both slopes negative (P 0.65); the hold-out ladder's direction
+  right for FFT (P 0.45) and MFT (P 0.35).
+- **Not this round:** the headspace-oxygen arm (no measured rate); the hexose -> C5 entry (Hofmann T1 / T2 / T5 /
+  T9 glucose rows are out until it is designed); the glycolaldehyde sink (Hofmann 1999's alanine pots are not
+  simulable, CF-067).
+
+**Stop rule (owner, 2026-10-30: "you decide on the priorities").** If R2a - R2c leave the absolute MFT / FFT rows
+outside x3 in more than one laboratory, the thiol layer ships as a declared limitation with its between-lab spread as
+the error, and effort moves to the lanes not yet built from data (pyrazines, lipid aldehydes, Strecker aldehydes).
+
 ## Amendments

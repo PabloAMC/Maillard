@@ -108,6 +108,8 @@ def plan(pots: Dict[str, dict], rows) -> List[Dict[str, Any]]:
                "charge": carried, "dropped": dropped, "times": times, "buffer": pot.get("buffer")}
         if pot.get("engine_species_missing"):
             job["skip"] = "engine_species_missing: " + ", ".join(dropped)
+        elif str(pot.get("engine_precursor_mapping", "")).startswith("unresolved"):
+            job["skip"] = "engine_precursor_mapping " + pot["engine_precursor_mapping"]
         elif not carried:
             job["skip"] = "no reactant the sulfur lane carries (" + ", ".join(dropped) + ")"
         else:
@@ -127,11 +129,20 @@ def plan(pots: Dict[str, dict], rows) -> List[Dict[str, Any]]:
 
 def run_pot(job: Dict[str, Any]) -> Dict[str, Any]:
     """Integrate one pot on its time grid; return the state at every grid time and the pot's SID."""
+    start = time.time()
+    run = integrate_pot(job)
+    states = [{k: float(run.series(k)[i]) for k in SULFUR_STATE_KEYS} for i in range(len(job["times"]))]
+    return {"states": states, "sid": run.metadata.get("strong_ion_difference_mmol_L"),
+            "converged": run.metadata.get("ph_fixed_point_converged"), "seconds": time.time() - start,
+            "ph_in_situ": None if run.ph_series is None else [float(v) for v in run.ph_series]}
+
+
+def integrate_pot(job: Dict[str, Any]):
+    """The sulfur lane's run for one pot on its time grid, with the job's trial constants and switches."""
     spec = buffer_of({"buffer": job["buffer"]}, job["label_ph"])
     state0 = dict(job["charge"])
     state0.setdefault("OX", engine.OX_AMBIENT_MMOL_L)
     state0.setdefault("OXR", engine.OX_RESERVOIR_DEFAULT_UNITS)
-    start = time.time()
     parameters = engine.core_parameters(engine.SULFUR)
     for key in job.get("without", ()):
         parameters[key] = dataclasses.replace(parameters[key], k_ref=0.0)
@@ -146,13 +157,9 @@ def run_pot(job: Dict[str, Any]) -> Dict[str, Any]:
         held, t_hot = _held(spec), job["t_c"] + CELSIUS
         sid = ph_state.strong_ion_difference(job["label_ph"], state0, _drift(job), held, label_temperature_k=t_hot)
         clamp_label = observations.ph_cooled(state0, sid, _drift(job), held)
-    run = integrate_sulfur(parameters, job["t_c"] + CELSIUS, state0, np.array(job["times"]),
-                           ph=job["label_ph"], buffer_spec=spec, ph_drift=_drift(job), rtol=1e-8, atol=1e-14,
-                           clamp_ph_label=clamp_label)
-    states = [{k: float(run.series(k)[i]) for k in SULFUR_STATE_KEYS} for i in range(len(job["times"]))]
-    return {"states": states, "sid": run.metadata.get("strong_ion_difference_mmol_L"),
-            "converged": run.metadata.get("ph_fixed_point_converged"), "seconds": time.time() - start,
-            "ph_in_situ": None if run.ph_series is None else [float(v) for v in run.ph_series]}
+    return integrate_sulfur(parameters, job["t_c"] + CELSIUS, state0, np.array(job["times"]),
+                            ph=job["label_ph"], buffer_spec=spec, ph_drift=_drift(job), rtol=1e-8, atol=1e-14,
+                            clamp_ph_label=clamp_label)
 
 
 def _drift(job: Dict[str, Any]):

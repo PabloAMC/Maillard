@@ -1593,3 +1593,25 @@ entries:
     status: open
     remedy: "The keyed table takes the printed table value where both exist and carries the disagreement as the row's error (0.066 dex)."
     affects: []
+  - id: CF-068
+    kind: between_laboratory
+    scope: corpus
+    sources: [schieberle2000, yiltirak2026]
+    quantity: "MFT and FFT from ribose + cysteine in 0.5 M phosphate at pH 5 - 5.5, 100 C, 4 h (both SIDA)"
+    observation: >-
+      Schieberle 2000 Table IV (ribose 100 / cysteine 33 mM, pH 5, closed autoclave): MFT 138 ug/L at 1 h and 1560 at
+      6 h (about 800 at 4 h, interpolated), FFT 31 -> 1100. Yiltirak 2026 SI Table S3 (ribose 25 / cysteine 25 mM,
+      K phosphate pH 5.5, 3 mL in a 20 mL tube under air): MFT 6.88, FFT 1.28 ug/L at 4 h. A x120 gap in MFT where
+      the 4x lower ribose and the 0.5 pH unit explain about x10 (Hofmann 1998's pH ladder: MFT falls x22 from pH 3 to
+      7). The joint thiol fit's lane predicts the Yiltirak pot HIGHER than Schieberle's (s042: x3.7 at 100 C), so no
+      lane chemistry reconciles them. Units and quantification of both verified by two readers.
+    explanations:
+      - "Headspace oxygen: 17 mL air over 3 mL (about 50 mM-equivalent O2 against 25 mM cysteine) oxidises cysteine and the thiols during heating; the lane's oxygen consumers are off and no measured cysteine autoxidation rate is in the corpus."
+      - "Free-thiol losses between heating and analysis in Yiltirak (labelled standards added to a 30 uL aliquot after heating, extraction into 1 M NaOH): thiols bound as disulfides or adducts are not counted."
+      - "Garching's 100 C time course over-reads (CF-055 records an internal text vs table inconsistency in the same laboratory's tables)."
+    tests:
+      - "Any third laboratory's SIDA ribose + cysteine pot at 100 - 120 C with the vessel headspace stated."
+      - "An oxygen-consumer arm with a measured cysteine autoxidation rate: does it move Yiltirak down without moving Schieberle?"
+    status: open
+    remedy: "Both stay as data: Schieberle in the joint fit, Yiltirak a declared hold-out. Neither is down-weighted; the spread is reported as between-laboratory error if the thiol layer ships as a declared limitation (thiol prereg sec. 6)."
+    affects: [kinetic_core_thiol_submodel_prereg]

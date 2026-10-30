@@ -1,0 +1,99 @@
+# ADJUDICATION (2026-10-30): both readers transcribed Fig. 2's six final-pH bars (agreeing within 0.01 pH); they
+# are dropped here because the same six values are already rows of ph_acid_submodel.yml (one measurement, one row).
+# KEYED FIT TABLE -- Zhou et al. 2023 (J Agric Food Chem 71:2472; PDF data/articles/Zhou2023b.pdf), Table 1 and Fig. 2:
+# 2-methyl-3-furanthiol (MFT), 2-furfurylthiol (FFT), bis(2-methyl-3-furyl) disulfide (MFTD) and 2-furfural (FUR) from
+# the alanine-xylose Amadori compound (engine ARP) with and without cysteine at initial pH 6 / 7 / 8, 120 C, 60 min,
+# and the final pH of the six pots (Fig. 2). 2-acetylthiazole of the same table is in thiol_zhou2023_actz.yml.
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS; every row an sd as
+# printed or a read_error). Laboratory and quantification class come from the ledger entry.
+# FIRST READER: agent-zhou2023ph-reader1-2026-10-30, against the PDF and its supplement (zhou2023b_supporting.pdf), not
+# the dossier. Second reader: pending (data/lit/source_verification/thiol_zhou2023_ph_series.yml).
+# NOTE ON THE FILE: the ledger's dossier is zhou2023_extraction.md, but data/articles/Zhou2023.pdf is a different paper
+# (Zhu et al., Food Chem 400:133854); this Table 1 and Fig. 2 are in Zhou2023b.pdf.
+# Conventions:
+#   * pot ids, conditions and ledger ids as thiol_zhou2023_actz.yml (one pot per Table 1 column). initial_mmol_L in
+#     engine keys: ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine (the purified Amadori compound fed as a reactant), Cys.
+#   * label_ph = the initial pH set with 3 M NaOH (no pot is buffered; the pH is not followed during heating).
+#   * concentration errors: `sd` = the printed SD (n = 3, Table 1 footnote a), in ug/L; the printed Duncan letters are
+#     kept in `printed` (they look unreliable: see the verification file).
+#   * ND cells (Table 1 footnote e 'ND: not detected'; no LOD printed) are not rows; each pot's rows_note lists them.
+#   * final pH rows (species pH, t_min 60): Fig. 2 is a bar chart with no printed numbers; values DIGITISED from the
+#     embedded 600 dpi raster (1333 x 755 px; 106.1 px per pH unit from the 0/2/4/6 tick centres), bar value = centre
+#     of the bar's top outline; sd = half the drawn error bar (Statistical Analysis: 'results are shown as mean
+#     values +- standard deviation', three repeats; Fig. 2's legend does not say what the bars are); read_error 0.02 pH.
+#   * LEDGER IDS: the pH 7 columns belong to zhou2023_table1_ph7_arp_cys_volatiles, the pH 6 / 8 columns to
+#     zhou2023_table1_ph6_ph8_arp_cys_volatiles; the final-pH rows name zhou2023_fig2_final_ph in their own
+#     `ledger_id`. fit_rows.load (and the source-verification gate) take the ledger entry from the POT, not the row,
+#     so a pH row is gated and labelled by its pot's Table 1 entry; the row's ledger_id is a record only.
+#   * The same six Fig. 2 values are already rows of ph_acid_submodel.yml (pots zhou2023_arp_ph6 ... _cys_ph8, ledger
+#     zhou2023_fig2_final_ph): a fit that loads both tables counts each final pH twice.
+# ADJUDICATION NOTES (2026-10-30, both readers): (1) the printed Duncan letters contradict the SDs (furfural
+# 1339 / 473 / 437 all 'c'; MFT 697 and 1589 both 'c'): kept in `printed`, not used. (2) The MFT disulfide's
+# calibration line (SI Table S1) crosses zero response near 34 ug/L, close to the 50 - 103 ug/L cells: those rows
+# depend on the intercept and are not used for fitting until a reason to trust them is found. (3) The text's
+# 'furan only detected at pH 8' contradicts Table 1 (not transcribed). (4) Quantification: internal-standard
+# calibration curves (1,2-dichlorobenzene), not isotope dilution.
+status: ready   # two readers agree (2026-10-30): MFT / FFT / MFTD / furfural, Zhou 2023 Table 1
+pots:
+  zhou2023_arp_cys_120c_ph6:
+    {ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0, Cys: 20.0},
+     buffer: "none (aqueous solution; water grade not stated for this step, deionized for the ARP synthesis and the Cys + MGO model; initial pH set with 3 M NaOH)", label_ph: 6.0,
+     ph_measured_at: "initial pH set before heating; final pH (Fig. 2) after 60 min at 120 C, presumably after the ice-bath cooling (timing not stated); Mettler-Toledo pH meter, reading temperature not stated",
+     vessel: "not stated (water at 120 C needs a closed vessel; fill and headspace not stated); cooled in an ice bath after heating",
+     rows_note: "printed: MFT, FFT, MFTD, FUR (and the pH, Fig. 2); no ND among the four engine species",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath for the further analysis of fast gas-phase electronic nose and headspace solid-phase microextraction-gas chromatography−mass spectrometry (HS/SPME-GC/MS)."}
+  zhou2023_arp_cys_120c_ph7:
+    {ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0, Cys: 20.0},
+     buffer: "none (aqueous solution; water grade not stated for this step, deionized for the ARP synthesis and the Cys + MGO model; initial pH set with 3 M NaOH)", label_ph: 7.0,
+     ph_measured_at: "initial pH set before heating; final pH (Fig. 2) after 60 min at 120 C, presumably after the ice-bath cooling (timing not stated); Mettler-Toledo pH meter, reading temperature not stated",
+     vessel: "not stated (water at 120 C needs a closed vessel; fill and headspace not stated); cooled in an ice bath after heating",
+     rows_note: "printed: MFT, FFT, MFTD, FUR (and the pH, Fig. 2); no ND among the four engine species",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath for the further analysis of fast gas-phase electronic nose and headspace solid-phase microextraction-gas chromatography−mass spectrometry (HS/SPME-GC/MS)."}
+  zhou2023_arp_cys_120c_ph8:
+    {ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0, Cys: 20.0},
+     buffer: "none (aqueous solution; water grade not stated for this step, deionized for the ARP synthesis and the Cys + MGO model; initial pH set with 3 M NaOH)", label_ph: 8.0,
+     ph_measured_at: "initial pH set before heating; final pH (Fig. 2) after 60 min at 120 C, presumably after the ice-bath cooling (timing not stated); Mettler-Toledo pH meter, reading temperature not stated",
+     vessel: "not stated (water at 120 C needs a closed vessel; fill and headspace not stated); cooled in an ice bath after heating",
+     rows_note: "printed: MFT, FFT, MFTD, FUR (and the pH, Fig. 2); no ND among the four engine species",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath for the further analysis of fast gas-phase electronic nose and headspace solid-phase microextraction-gas chromatography−mass spectrometry (HS/SPME-GC/MS)."}
+  # ---- ARP alone: MFT, FFT, MFTD ND at every pH; furfural printed ----
+  zhou2023_arp_120c_ph6:
+    {ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0},
+     buffer: "none (aqueous solution; water grade not stated for this step; initial pH set with 3 M NaOH)", label_ph: 6.0,
+     ph_measured_at: "initial pH set before heating; final pH (Fig. 2) after 60 min at 120 C, presumably after the ice-bath cooling (timing not stated); Mettler-Toledo pH meter, reading temperature not stated",
+     vessel: "not stated (water at 120 C needs a closed vessel; fill and headspace not stated); cooled in an ice bath after heating",
+     rows_note: "2-methyl-3-furanthiol, 2-furfurylthiol, bis(2-methyl-3-furyl) disulfide printed ND (no LOD printed): no rows",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h"}
+  zhou2023_arp_120c_ph7:
+    {ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0},
+     buffer: "none (aqueous solution; water grade not stated for this step; initial pH set with 3 M NaOH)", label_ph: 7.0,
+     ph_measured_at: "initial pH set before heating; final pH (Fig. 2) after 60 min at 120 C, presumably after the ice-bath cooling (timing not stated); Mettler-Toledo pH meter, reading temperature not stated",
+     vessel: "not stated (water at 120 C needs a closed vessel; fill and headspace not stated); cooled in an ice bath after heating",
+     rows_note: "2-methyl-3-furanthiol, 2-furfurylthiol, bis(2-methyl-3-furyl) disulfide printed ND (no LOD printed): no rows",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h"}
+  zhou2023_arp_120c_ph8:
+    {ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, t_c: 120, minutes: 60, initial_mmol_L: {ARP: 20.0},
+     buffer: "none (aqueous solution; water grade not stated for this step; initial pH set with 3 M NaOH)", label_ph: 8.0,
+     ph_measured_at: "initial pH set before heating; final pH (Fig. 2) after 60 min at 120 C, presumably after the ice-bath cooling (timing not stated); Mettler-Toledo pH meter, reading temperature not stated",
+     vessel: "not stated (water at 120 C needs a closed vessel; fill and headspace not stated); cooled in an ice bath after heating",
+     rows_note: "2-methyl-3-furanthiol, 2-furfurylthiol, bis(2-methyl-3-furyl) disulfide printed ND (no LOD printed): no rows",
+     condition_quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h"}
+rows:
+  # ---- ARP + Cys: thiols, disulfide, furfural (Table 1, ug/L, mean +- SD, n = 3) ----
+  - {pot: zhou2023_arp_cys_120c_ph6, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: MFT, t_min: 60, value: 696.99, unit: ug_L, sd: 17.44, printed: 'Table 1, 2-methyl-3-furanthiol, pH 6 ARP + Cys: 696.99 +- 17.44c ug/L (n = 3); SI Table S2 OAV 1.39 x 10^5 (threshold 0.005 ug/L)'}
+  - {pot: zhou2023_arp_cys_120c_ph7, ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, species: MFT, t_min: 60, value: 1588.57, unit: ug_L, sd: 21.24, printed: 'Table 1, 2-methyl-3-furanthiol, pH 7 ARP + Cys: 1588.57 +- 21.24c ug/L (n = 3); SI Table S2 OAV 3.18 x 10^5'}
+  - {pot: zhou2023_arp_cys_120c_ph8, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: MFT, t_min: 60, value: 525.62, unit: ug_L, sd: 16.88, printed: 'Table 1, 2-methyl-3-furanthiol, pH 8 ARP + Cys: 525.62 +- 16.88b ug/L (n = 3); SI Table S2 OAV 1.05 x 10^5'}
+  - {pot: zhou2023_arp_cys_120c_ph6, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: FFT, t_min: 60, value: 813.65, unit: ug_L, sd: 13.37, printed: 'Table 1, 2-furfurylthiol, pH 6 ARP + Cys: 813.65 +- 13.37c ug/L (n = 3); SI Table S2 OAV 1.36 x 10^5 (threshold 0.006 ug/L)'}
+  - {pot: zhou2023_arp_cys_120c_ph7, ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, species: FFT, t_min: 60, value: 757.965, unit: ug_L, sd: 13.03, printed: 'Table 1, 2-furfurylthiol, pH 7 ARP + Cys: 757.965 +- 13.03c ug/L (n = 3; printed with three decimals, every other cell two); SI Table S2 OAV 1.26 x 10^5'}
+  - {pot: zhou2023_arp_cys_120c_ph8, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: FFT, t_min: 60, value: 325.22, unit: ug_L, sd: 14.61, printed: 'Table 1, 2-furfurylthiol, pH 8 ARP + Cys: 325.22 +- 14.61b ug/L (n = 3); SI Table S2 OAV 5.42 x 10^4'}
+  - {pot: zhou2023_arp_cys_120c_ph6, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: MFTD, t_min: 60, value: 59.70, unit: ug_L, sd: 2.75, printed: 'Table 1, bis(2-methyl-3-furyl)disulfide, pH 6 ARP + Cys: 59.70 +- 2.75c ug/L (n = 3); SI Table S2 OAV 1.87 x 10^5 (threshold 0.00032 ug/L)'}
+  - {pot: zhou2023_arp_cys_120c_ph7, ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, species: MFTD, t_min: 60, value: 102.59, unit: ug_L, sd: 4.17, printed: 'Table 1, bis(2-methyl-3-furyl)disulfide, pH 7 ARP + Cys: 102.59 +- 4.17c ug/L (n = 3); SI Table S2 OAV 3.21 x 10^5'}
+  - {pot: zhou2023_arp_cys_120c_ph8, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: MFTD, t_min: 60, value: 50.07, unit: ug_L, sd: 2.15, printed: 'Table 1, bis(2-methyl-3-furyl)disulfide, pH 8 ARP + Cys: 50.07 +- 2.15b ug/L (n = 3); SI Table S2 OAV 1.56 x 10^5'}
+  - {pot: zhou2023_arp_cys_120c_ph6, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: FUR, t_min: 60, value: 608.41, unit: ug_L, sd: 22.97, printed: 'Table 1, 2-furfural, pH 6 ARP + Cys: 608.41 +- 22.97d ug/L (n = 3); SI Table S2 OAV 0.20 (threshold 3000 ug/L)'}
+  - {pot: zhou2023_arp_cys_120c_ph7, ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, species: FUR, t_min: 60, value: 473.07, unit: ug_L, sd: 14.04, printed: 'Table 1, 2-furfural, pH 7 ARP + Cys: 473.07 +- 14.04c ug/L (n = 3); SI Table S2 OAV 0.16'}
+  - {pot: zhou2023_arp_cys_120c_ph8, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: FUR, t_min: 60, value: 224.98, unit: ug_L, sd: 23.14, printed: 'Table 1, 2-furfural, pH 8 ARP + Cys: 224.98 +- 23.14b ug/L (n = 3); SI Table S2 OAV 0.07'}
+  # ---- ARP alone: furfural (Table 1) ----
+  - {pot: zhou2023_arp_120c_ph6, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: FUR, t_min: 60, value: 1606.92, unit: ug_L, sd: 41.62, printed: 'Table 1, 2-furfural, pH 6 ARP: 1606.92 +- 41.62e ug/L (n = 3); SI Table S2 OAV 0.54'}
+  - {pot: zhou2023_arp_120c_ph7, ledger_id: zhou2023_table1_ph7_arp_cys_volatiles, species: FUR, t_min: 60, value: 1339.37, unit: ug_L, sd: 83.04, printed: 'Table 1, 2-furfural, pH 7 ARP: 1339.37 +- 83.04c ug/L (n = 3); SI Table S2 OAV 0.45'}
+  - {pot: zhou2023_arp_120c_ph8, ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles, species: FUR, t_min: 60, value: 436.63, unit: ug_L, sd: 19.93, printed: 'Table 1, 2-furfural, pH 8 ARP: 436.63 +- 19.93c ug/L (n = 3); SI Table S2 OAV 0.15'}
+  # (the six Fig. 2 final-pH rows were dropped at adjudication: they are rows of ph_acid_submodel.yml)

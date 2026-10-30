@@ -398,6 +398,23 @@ class MeasurementModel:
             z[idx] = z[idx] - c * w_hat * float(w_hat @ z[idx])
         return z
 
+    def offsets(self, log_residuals: np.ndarray, rows: Sequence[Any]) -> Dict[str, float]:
+        """Each series' calibration offset (dex), the posterior mean under its N(0, tau^2) prior:
+        tau^2 S / (1 + tau^2 W), S = sum r / sigma^2, W = sum 1 / sigma^2 (tau = inf: the weighted mean; 0: none).
+        Subtracting it gives the residual a reader should judge a semi-quantitative series by."""
+        r = np.asarray(log_residuals, dtype=float)
+        sigma = np.array([self.sigma(row) for row in rows])
+        out: Dict[str, float] = {}
+        for name, idx in self._series(rows).items():
+            tau = float(self.scale_tau[self.method_of(rows[idx[0]])])
+            ok = [i for i in idx if np.isfinite(r[i])]
+            if tau == 0.0 or not ok:
+                out[name] = 0.0
+                continue
+            s, w = float(np.sum(r[ok] / sigma[ok] ** 2)), float(np.sum(1.0 / sigma[ok] ** 2))
+            out[name] = s / w if math.isinf(tau) else tau * tau * s / (1.0 + tau * tau * w)
+        return out
+
     def nuisance_dof(self, rows: Sequence[Any]) -> int:
         """One degree of freedom per scale-free series present in ``rows``."""
         return sum(1 for idx in self._series(rows).values()

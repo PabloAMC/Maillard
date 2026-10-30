@@ -201,6 +201,19 @@ def test_a_scale_free_series_sees_only_its_shape():
     assert not np.allclose(mm.whiten(r, rows)[6:], mm.whiten(shifted, rows)[6:])
 
 
+def test_series_offsets_are_the_posterior_mean_of_the_scale():
+    rows = _series_rows() + _series_rows(name="abs", method="sida")
+    sig = np.array([r["sigma"] for r in rows[:6]])
+    r = np.random.default_rng(4).normal(size=len(rows)) * 0.1 + 0.7
+    weighted_mean = float(np.sum(r[:6] / sig ** 2) / np.sum(1 / sig ** 2))
+    free = _mm().offsets(r, rows)
+    assert free["s"] == pytest.approx(weighted_mean) and free["abs"] == 0.0
+    shrunk = _mm(0.3).offsets(r, rows)["s"]
+    assert 0.0 < shrunk < weighted_mean
+    # the residual a reader judges a scale-free series by has no weighted mean left
+    assert float(np.sum((r[:6] - free["s"]) / sig ** 2)) == pytest.approx(0.0, abs=1e-9)
+
+
 def test_a_series_cannot_mix_method_classes():
     rows = _series_rows(n=2) + [{"series": "s", "sigma": 0.1, "method": "sida"}]
     with pytest.raises(ValueError, match="mixes method classes"):
