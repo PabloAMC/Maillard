@@ -77,7 +77,7 @@ def freeze(arm: str) -> int:
                "curves": {run: {"FA": [s["FA"] for s in res["states"]], "AA": [s["AA"] for s in res["states"]],
                                 "held_hot_pH": jobs[run]["label_ph"] if run.startswith("phstat") else None}
                           for run, res in results.items()}}
-    out.write_text(json.dumps(payload, indent=1) + "\n", encoding="utf-8")
+    out.write_text(provenance.dumps_compact(payload) + "\n", encoding="utf-8")
     print(f"froze arm {arm} -> {data_paths.rel(out)}")
     return 0
 

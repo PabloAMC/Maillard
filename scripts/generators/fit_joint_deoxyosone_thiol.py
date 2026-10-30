@@ -59,8 +59,17 @@ LOWER = {"k_dpo_ddp": -8.0}
 ARMS = {"none": frozenset(), "R2a": frozenset({"mgo_strecker"}), "R2b": frozenset({"actz"}),
         "R2ab": frozenset({"mgo_strecker", "actz"}),
         # the pentose + amine entry (kinetic_core_pentose_amine_entry_prereg.md secs. 7-8) on top of R2b
-        "E": frozenset({"actz", "entry"})}
-ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",)}
+        "E": frozenset({"actz", "entry"}),
+        # round 3 (thiol prereg sec. 9): MFT through the intact C5 skeleton, on R2b's state or on arm E's
+        "R3": frozenset({"actz", "ddp"}), "R3E": frozenset({"actz", "entry", "ddp"})}
+#: round 3: one multiplier on both DDP -> MFT branches
+DDP_COORDINATE = ("offset_ddp_mft", ("k_ddp_mft", "k_ddp_mft_hs"), -2.0, 7.0, 4.5)
+#: Cerny & Davidek 2003 (hold-out, sec. 9): pot D norfuraneol 72.5 + [13C5]ribose 72.5 + cysteine 48.3 umol in a
+#: ~0.5 g charge (nominal mmol/L), pot C ribose 145 + cysteine 48.3 umol; 0.5 M K phosphate, pH 5.00, 95 C, 4 h
+CERNY_POTS = {"cerny2003_potD_nf_ribose_cys": {"NF": 145.0, "PENT": 145.0, "Cys": 96.6},
+              "cerny2003_potC_ribose_cys": {"PENT": 290.0, "Cys": 96.6}}
+CERNY_NF_SHARE_PASS = 0.15
+ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",), "ddp_mft": ("k_ddp_mft", "k_ddp_mft_hs")}
 ARM_LOWER, ARM_UPPER, ARM_START = ({"k_cys_actz": -6.0, "k_aa_frag": -6.0}, {"k_cys_actz": 1.0, "k_aa_frag": 0.5},
                                    {"k_cys_actz": -3.0, "k_aa_frag": -1.5})
 #: the entry's own coordinates: (key, kind, lower, upper, start). Rates as log10 of k at 100 C / pH 6 (entry
@@ -114,6 +123,9 @@ def coordinates(mft_decay_cap: bool, arms=frozenset()):
         lower.append(ARM_LOWER["k_aa_frag"]); upper.append(ARM_UPPER["k_aa_frag"]); start.append(ARM_START["k_aa_frag"])
         for key, kind, lo, hi, st in ENTRY_COORDINATES:
             keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
+    if "ddp" in arms:
+        key, _, lo, hi, st = DDP_COORDINATE
+        keys.append(key); kinds.append("log10_offset"); lower.append(lo); upper.append(hi); start.append(st)
     if "mgo_strecker" in arms:
         keys.append("log10_k_mgo_cys_strecker"); kinds.append("log10_offset")
         lower.append(MGO_STRECKER_BOUNDS[0]); upper.append(MGO_STRECKER_BOUNDS[1]); start.append(MGO_STRECKER_START)
@@ -142,17 +154,7 @@ STRECKER_SHARE = 0.042
 
 
 def run_task(job):
-    sm3.install(job)
-    import dataclasses as _dc
-    from src.kinetic_core import parameters_sulfur as _ps
-    _ps.STRECKER_SULFUR = _dc.replace(_ps.STRECKER_SULFUR, h2s_share=float(job.get("strecker_share", STRECKER_SHARE)))
-    # set on every task (a worker runs many): R2a's trial value, else the shipped 0
-    _ps.MGO_CYSTEINE_STRECKER = _dc.replace(_ps.MGO_CYSTEINE_STRECKER,
-                                            k_l_per_mmol_min_100c_ph5=float(job.get("mgo_strecker_k", 0.0)))
-    # the entry arm's trial values, else the shipped (off) entry; the trunk solutes in the balance with it
-    _ps.PENTOSE_AMINE_ENTRY = _ps.PentoseAmineEntry(**job.get("entry", {}))
-    from src.kinetic_core import ph_state as _ph
-    _ph.TRUNK_SOLUTES_IN_BALANCE = bool(job.get("trunk_solutes", False))
+    install(job)   # every switch set on every task: a worker runs many
     try:
         return probe.run_pot_limited(job, POT_SECONDS)
     except Exception as exc:  # noqa: BLE001 - counted; its rows become failed residuals
@@ -253,6 +255,46 @@ def scale_label(model, rows) -> Dict[str, str]:
         tau = float(model.scale_tau[model.method_of(r)])
         out[f"{r.ledger_id} | {r.species}"] = "absolute" if tau == 0 else ("free" if math.isinf(tau) else f"tau {tau:g}")
     return out
+
+
+def cerny_route_checks(theta, keys) -> Dict[str, Any]:
+    """Round 3's hold-out (thiol prereg sec. 9), scored once at the optimum: in Cerny 2003's pot D the share of MFT
+    formed through free norfuraneol (r_nf_mft; measured unlabelled share 0.07, pass <= 0.15), with the fed share of
+    the norfuraneol pool; in pot C the C2 + C3 route's share (Cerny 2004: "not relevant")."""
+    import numpy as np
+    from build_sulfur_flux_attribution import _ranked
+
+    out = {}
+    for pot, charge in CERNY_POTS.items():
+        job = dict(trial(theta, keys), pot=pot, ledger_id="cerny2003 (hold-out)", t_c=95.0, label_ph=5.0,
+                   charge=charge, dropped=[], notes=[], buffer="potassium phosphate 0.5 M",
+                   strecker_share=STRECKER_SHARE,
+                   times=sorted({0.0, *np.geomspace(1e-5, 240.0, 300).tolist(), *np.linspace(0.0, 240.0, 121).tolist()}))
+        install(job)
+        run = probe.integrate_pot(job)
+        made = _ranked(sulfur.reaction_flux_integrals(run), "MFT")["made"]
+        share = {t["reaction"]: t["share"] for t in made["top"]}
+        nf = run.series("NF")
+        out[pot] = {"mft_made_mmol_L": made["total_mmol_L"], "share_by_step": share,
+                    "nf_route_share": share.get("r_nf_mft", 0.0),
+                    "c2_c3_route_share": share.get("r_ha_mp_mft", 0.0),
+                    "nf_pool_fed_share_at_end": (float(nf[-1]) / float(nf[0])) if nf[0] > 0 else None}
+    d = out["cerny2003_potD_nf_ribose_cys"]["nf_route_share"]
+    out["verdict"] = f"pot D norfuraneol share {d:.3f} vs measured 0.07: " + ("PASS" if d <= CERNY_NF_SHARE_PASS else "FAIL")
+    return out
+
+
+def install(job) -> None:
+    """The engine state a job runs in, set in whichever process runs it (every switch set, none left over)."""
+    sm3.install(job)
+    import dataclasses as _dc
+    from src.kinetic_core import parameters_sulfur as _ps
+    from src.kinetic_core import ph_state as _ph
+    _ps.STRECKER_SULFUR = _dc.replace(_ps.STRECKER_SULFUR, h2s_share=float(job.get("strecker_share", STRECKER_SHARE)))
+    _ps.MGO_CYSTEINE_STRECKER = _dc.replace(_ps.MGO_CYSTEINE_STRECKER,
+                                            k_l_per_mmol_min_100c_ph5=float(job.get("mgo_strecker_k", 0.0)))
+    _ps.PENTOSE_AMINE_ENTRY = _ps.PentoseAmineEntry(**job.get("entry", {}))
+    _ph.TRUNK_SOLUTES_IN_BALANCE = bool(job.get("trunk_solutes", False))
 
 
 def entry_checks(theta, keys, jobs) -> Dict[str, Any]:
@@ -404,6 +446,7 @@ def main(argv=None) -> int:
         "score_only_raw_at_optimum": raw_table(score_only, raw(best.theta, score_only)) if score_only else {},
         "actz_falsifier": actz_falsifier(best.theta, start, keys),
         "entry_checks": entry_checks(best.theta, keys, jobs) if "entry" in arms else None,
+        "cerny_route_checks": cerny_route_checks(best.theta, keys),
         "high_correlations": high_correlations(lap, keys),
         "diagnostics_whitened": fitting.diagnostics(problem, best.theta, {
             "paper": sm3.paper_of, "data_set": lambda r: r.ledger_id, "observable": lambda r: r.species,
@@ -426,7 +469,7 @@ def main(argv=None) -> int:
                           "held_out_raw": raw_table(held, raw(f_.theta, held))}
         report["leave_one_paper_out"] = out
     report["wall_seconds"] = round(time.time() - t0, 1)
-    OUT.with_suffix(".json").write_text(json.dumps(report, indent=1, default=float) + "\n", encoding="utf-8")
+    OUT.with_suffix(".json").write_text(provenance.dumps_compact(report, default=float) + "\n", encoding="utf-8")
     lines = ["# Joint sub-model 3 + 4 fit (deoxyosones + thiols)", "",
              "*Generated by `scripts/generators/fit_joint_deoxyosone_thiol.py`; thiol prereg sec. 4. "
              f"{report['rows']} rows on {report['pots']} pots; engine state: {report['engine_state']}. Raw residual = "
@@ -459,6 +502,13 @@ def main(argv=None) -> int:
     if report.get("entry_checks"):
         lines += ["", "## Entry checks (Davidek 2008 pots at the optimum)", ""]
         lines += [f"- {k}: {v}" for k, v in report["entry_checks"].items()]
+    cr = report.get("cerny_route_checks") or {}
+    if cr:
+        lines += ["", "## Hold-out: Cerny 2003 MFT routes (95 C, pH 5; measured norfuraneol share 0.07)", "",
+                  f"- {cr.get('verdict')}"]
+        lines += [f"- {k}: norfuraneol route {v['nf_route_share']:.3f}, C2 + C3 route {v['c2_c3_route_share']:.3f}, "
+                  f"MFT made {v['mft_made_mmol_L']:.3g} mmol/L, steps {v['share_by_step']}"
+                  for k, v in cr.items() if isinstance(v, dict)]
     if report.get("high_correlations"):
         lines += ["", "## Laplace correlations above 0.9 (declared: not identified)", ""]
         lines += [f"- {c}" for c in report["high_correlations"]]

@@ -301,7 +301,7 @@ def main(argv=None) -> int:
                                                                args.budget)
     report["wall_seconds"] = round(time.time() - t0, 1)
     out = data_paths.VALIDATION_DIR / f"kinetic_core_ph_acid_submodel_fit_{args.arm}.json"
-    out.write_text(json.dumps(report, indent=1, default=float) + "\n", encoding="utf-8")
+    out.write_text(provenance.dumps_compact(report, default=float) + "\n", encoding="utf-8")
     out.with_suffix(".md").write_text(markdown(report, problem, best, lap), encoding="utf-8")
     print(f"arm {args.arm}: cost {best.start_cost:.4g} -> {best.cost:.4g}; two starts converged {starts['converged']}; "
           f"{len(FAILURES)} failed pot runs; {report['wall_seconds']} s -> {data_paths.rel(out.with_suffix('.md'))}")

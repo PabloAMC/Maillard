@@ -3,66 +3,24 @@
  "provenance": {
   "artifact": "kinetic_core_ph_acid_submodel_fit_C",
   "generated_on": "2026-10-30",
-  "git": {
-   "commit": "930144a65237a1ba3003b169c08edb8a32052cd0",
-   "short": "930144a6",
-   "branch": "submodel1-ph",
-   "dirty": false
-  },
+  "git": {"commit": "930144a65237a1ba3003b169c08edb8a32052cd0", "short": "930144a6", "branch": "submodel1-ph", "dirty": false},
   "generated_by": "scripts/generators/fit_ph_acid_submodel.py",
   "inputs": [
-   {
-    "path": "data/lit/fit_rows/ph_acid_submodel.yml",
-    "sha256": "27db4b0c5a7e4c594d29fb4e3395d15121aac0a7c84b36f06c3641891a3574c9"
-   },
-   {
-    "path": "src/kinetic_core/sulfur.py",
-    "sha256": "3a67aa9e0828af888f06a5613798d5d5ac5fedfd5cfde7720fe226657cac904f"
-   },
-   {
-    "path": "src/kinetic_core/ph_state.py",
-    "sha256": "1432efea79d51c13387e9a6344eba25b8953f19ad3d5ac69c9f8350aeaf95944"
-   },
-   {
-    "path": "src/kinetic_core/observations.py",
-    "sha256": "d53acf404b40dd6d887c96d3cf635e15a278bc4ed1a53a46eb8e9e083c8edd1c"
-   },
-   {
-    "path": "src/kinetic_core/trunk_conditions.py",
-    "sha256": "a448ce7e6a76493959c1eac16bffd1b5bd20c867b4790dec6ffb384debdf9f00"
-   },
-   {
-    "path": "src/kinetic_core/parameters.py",
-    "sha256": "e19d346a4337e967543064d473651bb7b8450e32a29714046358b2ca249284e8"
-   },
-   {
-    "path": "src/kinetic_core/fitting.py",
-    "sha256": "53270d23485666fff91b7d5312761c36f7a0665e73cda609ad151678405b4f0b"
-   },
-   {
-    "path": "scripts/generators/build_submodel_probe.py",
-    "sha256": "989d04257383631cac7284c3ea26621e9c61fc809c015df5b564007266738785"
-   }
+   {"path": "data/lit/fit_rows/ph_acid_submodel.yml", "sha256": "27db4b0c5a7e4c594d29fb4e3395d15121aac0a7c84b36f06c3641891a3574c9"},
+   {"path": "src/kinetic_core/sulfur.py", "sha256": "3a67aa9e0828af888f06a5613798d5d5ac5fedfd5cfde7720fe226657cac904f"},
+   {"path": "src/kinetic_core/ph_state.py", "sha256": "1432efea79d51c13387e9a6344eba25b8953f19ad3d5ac69c9f8350aeaf95944"},
+   {"path": "src/kinetic_core/observations.py", "sha256": "d53acf404b40dd6d887c96d3cf635e15a278bc4ed1a53a46eb8e9e083c8edd1c"},
+   {"path": "src/kinetic_core/trunk_conditions.py", "sha256": "a448ce7e6a76493959c1eac16bffd1b5bd20c867b4790dec6ffb384debdf9f00"},
+   {"path": "src/kinetic_core/parameters.py", "sha256": "e19d346a4337e967543064d473651bb7b8450e32a29714046358b2ca249284e8"},
+   {"path": "src/kinetic_core/fitting.py", "sha256": "53270d23485666fff91b7d5312761c36f7a0665e73cda609ad151678405b4f0b"},
+   {"path": "scripts/generators/build_submodel_probe.py", "sha256": "989d04257383631cac7284c3ea26621e9c61fc809c015df5b564007266738785"}
   ]
  },
  "arm": "C",
  "ph_coupling": "inline",
  "rows": 311,
  "pots": 32,
- "start": {
-  "slope_ama_tdg": 0.69,
-  "offset_ama_tdg": 0.0,
-  "slope_ama_odg": 0.69,
-  "offset_ama_odg": 0.0,
-  "slope_tdg_fa": 0.77,
-  "offset_tdg_fa": 0.0,
-  "slope_schiff": 0.5,
-  "offset_schiff": 0.0,
-  "slope_sugar": 0.7,
-  "offset_sugar": 0.0,
-  "acid_yield": 7.50328133349608e-05,
-  "arp_amine_pka": 7.0679258095802675
- },
+ "start": {"slope_ama_tdg": 0.69, "offset_ama_tdg": 0.0, "slope_ama_odg": 0.69, "offset_ama_odg": 0.0, "slope_tdg_fa": 0.77, "offset_tdg_fa": 0.0, "slope_schiff": 0.5, "offset_schiff": 0.0, "slope_sugar": 0.7, "offset_sugar": 0.0, "acid_yield": 7.50328133349608e-05, "arp_amine_pka": 7.0679258095802675},
  "fit": {
   "theta": {
    "slope_ama_tdg": 0.6750845169318285,
@@ -104,16 +62,8 @@
   "converged": true,
   "cost_agreement": true,
   "disagreeing": [],
-  "unidentified": [
-   "slope_ama_tdg",
-   "slope_schiff",
-   "slope_sugar",
-   "acid_yield"
-  ],
-  "costs": [
-   6088.153058953701,
-   6089.960271266342
-  ],
+  "unidentified": ["slope_ama_tdg", "slope_schiff", "slope_sugar", "acid_yield"],
+  "costs": [6088.153058953701, 6089.960271266342],
   "thetas": [
    {
     "slope_ama_tdg": 0.6750845169318285,
@@ -162,203 +112,21 @@
    "acid_yield": 0.8027653574117081,
    "arp_amine_pka": 0.19728585487267805
   },
-  "at_bound": {
-   "slope_ama_tdg": false,
-   "offset_ama_tdg": false,
-   "slope_ama_odg": false,
-   "offset_ama_odg": false,
-   "slope_tdg_fa": false,
-   "offset_tdg_fa": false,
-   "slope_schiff": true,
-   "offset_schiff": false,
-   "slope_sugar": false,
-   "offset_sugar": false,
-   "acid_yield": true,
-   "arp_amine_pka": false
-  },
-  "identified": {
-   "slope_ama_tdg": false,
-   "offset_ama_tdg": true,
-   "slope_ama_odg": true,
-   "offset_ama_odg": true,
-   "slope_tdg_fa": true,
-   "offset_tdg_fa": true,
-   "slope_schiff": false,
-   "offset_schiff": true,
-   "slope_sugar": false,
-   "offset_sugar": true,
-   "acid_yield": false,
-   "arp_amine_pka": true
-  },
+  "at_bound": {"slope_ama_tdg": false, "offset_ama_tdg": false, "slope_ama_odg": false, "offset_ama_odg": false, "slope_tdg_fa": false, "offset_tdg_fa": false, "slope_schiff": true, "offset_schiff": false, "slope_sugar": false, "offset_sugar": false, "acid_yield": true, "arp_amine_pka": false},
+  "identified": {"slope_ama_tdg": false, "offset_ama_tdg": true, "slope_ama_odg": true, "offset_ama_odg": true, "slope_tdg_fa": true, "offset_tdg_fa": true, "slope_schiff": false, "offset_schiff": true, "slope_sugar": false, "offset_sugar": true, "acid_yield": false, "arp_amine_pka": true},
   "correlation": [
-   [
-    1.0,
-    0.425,
-    0.715,
-    0.331,
-    -0.876,
-    -0.318,
-    0.079,
-    -0.054,
-    -0.107,
-    -0.097,
-    0.0,
-    0.0
-   ],
-   [
-    0.425,
-    1.0,
-    0.48,
-    0.864,
-    -0.332,
-    -0.708,
-    -0.805,
-    -0.767,
-    -0.005,
-    -0.14,
-    0.0,
-    0.0
-   ],
-   [
-    0.715,
-    0.48,
-    1.0,
-    0.528,
-    -0.354,
-    -0.186,
-    -0.249,
-    -0.311,
-    -0.089,
-    -0.118,
-    0.0,
-    0.0
-   ],
-   [
-    0.331,
-    0.864,
-    0.528,
-    1.0,
-    -0.129,
-    -0.268,
-    -0.725,
-    -0.923,
-    -0.066,
-    -0.202,
-    0.0,
-    0.0
-   ],
-   [
-    -0.876,
-    -0.332,
-    -0.354,
-    -0.129,
-    1.0,
-    0.43,
-    -0.177,
-    -0.102,
-    0.068,
-    0.048,
-    0.0,
-    0.0
-   ],
-   [
-    -0.318,
-    -0.708,
-    -0.186,
-    -0.268,
-    0.43,
-    1.0,
-    0.551,
-    0.199,
-    -0.086,
-    -0.02,
-    0.0,
-    0.0
-   ],
-   [
-    0.079,
-    -0.805,
-    -0.249,
-    -0.725,
-    -0.177,
-    0.551,
-    1.0,
-    0.845,
-    -0.143,
-    -0.001,
-    0.0,
-    0.0
-   ],
-   [
-    -0.054,
-    -0.767,
-    -0.311,
-    -0.923,
-    -0.102,
-    0.199,
-    0.845,
-    1.0,
-    -0.006,
-    0.134,
-    0.0,
-    0.0
-   ],
-   [
-    -0.107,
-    -0.005,
-    -0.089,
-    -0.066,
-    0.068,
-    -0.086,
-    -0.143,
-    -0.006,
-    1.0,
-    0.973,
-    0.0,
-    0.0
-   ],
-   [
-    -0.097,
-    -0.14,
-    -0.118,
-    -0.202,
-    0.048,
-    -0.02,
-    -0.001,
-    0.134,
-    0.973,
-    1.0,
-    0.0,
-    0.0
-   ],
-   [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    1.0,
-    -0.685
-   ],
-   [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    -0.685,
-    1.0
-   ]
+   [1.0, 0.425, 0.715, 0.331, -0.876, -0.318, 0.079, -0.054, -0.107, -0.097, 0.0, 0.0],
+   [0.425, 1.0, 0.48, 0.864, -0.332, -0.708, -0.805, -0.767, -0.005, -0.14, 0.0, 0.0],
+   [0.715, 0.48, 1.0, 0.528, -0.354, -0.186, -0.249, -0.311, -0.089, -0.118, 0.0, 0.0],
+   [0.331, 0.864, 0.528, 1.0, -0.129, -0.268, -0.725, -0.923, -0.066, -0.202, 0.0, 0.0],
+   [-0.876, -0.332, -0.354, -0.129, 1.0, 0.43, -0.177, -0.102, 0.068, 0.048, 0.0, 0.0],
+   [-0.318, -0.708, -0.186, -0.268, 0.43, 1.0, 0.551, 0.199, -0.086, -0.02, 0.0, 0.0],
+   [0.079, -0.805, -0.249, -0.725, -0.177, 0.551, 1.0, 0.845, -0.143, -0.001, 0.0, 0.0],
+   [-0.054, -0.767, -0.311, -0.923, -0.102, 0.199, 0.845, 1.0, -0.006, 0.134, 0.0, 0.0],
+   [-0.107, -0.005, -0.089, -0.066, 0.068, -0.086, -0.143, -0.006, 1.0, 0.973, 0.0, 0.0],
+   [-0.097, -0.14, -0.118, -0.202, 0.048, -0.02, -0.001, 0.134, 0.973, 1.0, 0.0, 0.0],
+   [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, -0.685],
+   [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.685, 1.0]
   ]
  },
  "series_extra_noise": {
@@ -388,565 +156,113 @@
  "failed_pot_runs": 0,
  "failures_sample": [],
  "raw_at_start": {
-  "cao2017_fig4c_ph | pH": {
-   "n": 12,
-   "mean": -0.7897925316821782,
-   "rms": 0.8131510531349362,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "davidek2002_tab5_acids_naoh_uptake | FA+AA": {
-   "n": 53,
-   "mean": 0.15878042538121728,
-   "rms": 0.31290435479798745,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "martins2003b_fig6_organic_acids | AA": {
-   "n": 32,
-   "mean": 0.3352112558957191,
-   "rms": 0.5010096589004989,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "martins2003b_fig6_organic_acids | FA": {
-   "n": 23,
-   "mean": -0.2487357177999041,
-   "rms": 0.4729341410127422,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "martins2003b_fig7_ph_drift | pH": {
-   "n": 16,
-   "mean": 0.053475002327002585,
-   "rms": 0.06663930078083331,
-   "tolerance": 0.3,
-   "within": true
-  },
-  "martins2005_glc_gly_multiresponse_timecourses | AA": {
-   "n": 57,
-   "mean": -0.020596905541241353,
-   "rms": 0.14294652517684933,
-   "tolerance": 0.3,
-   "within": true
-  },
-  "martins2005_glc_gly_multiresponse_timecourses | FA": {
-   "n": 54,
-   "mean": -0.5042364510176016,
-   "rms": 0.5675873179061336,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "martins2005b_fig4_ph_drift_ladder | pH": {
-   "n": 52,
-   "mean": 0.22453924667677622,
-   "rms": 0.3433530279083829,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "zhao2017b_fig2c_ph_diluted | pH_6x_dilution_25C": {
-   "n": 6,
-   "mean": -0.8176846790735919,
-   "rms": 0.8206950963415067,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "zhou2023_fig2_final_ph | pH": {
-   "n": 6,
-   "mean": 0.39440538410966597,
-   "rms": 0.981395896545999,
-   "tolerance": 0.3,
-   "within": false
-  }
+  "cao2017_fig4c_ph | pH": {"n": 12, "mean": -0.7897925316821782, "rms": 0.8131510531349362, "tolerance": 0.3, "within": false},
+  "davidek2002_tab5_acids_naoh_uptake | FA+AA": {"n": 53, "mean": 0.15878042538121728, "rms": 0.31290435479798745, "tolerance": 0.3, "within": false},
+  "martins2003b_fig6_organic_acids | AA": {"n": 32, "mean": 0.3352112558957191, "rms": 0.5010096589004989, "tolerance": 0.3, "within": false},
+  "martins2003b_fig6_organic_acids | FA": {"n": 23, "mean": -0.2487357177999041, "rms": 0.4729341410127422, "tolerance": 0.3, "within": false},
+  "martins2003b_fig7_ph_drift | pH": {"n": 16, "mean": 0.053475002327002585, "rms": 0.06663930078083331, "tolerance": 0.3, "within": true},
+  "martins2005_glc_gly_multiresponse_timecourses | AA": {"n": 57, "mean": -0.020596905541241353, "rms": 0.14294652517684933, "tolerance": 0.3, "within": true},
+  "martins2005_glc_gly_multiresponse_timecourses | FA": {"n": 54, "mean": -0.5042364510176016, "rms": 0.5675873179061336, "tolerance": 0.3, "within": false},
+  "martins2005b_fig4_ph_drift_ladder | pH": {"n": 52, "mean": 0.22453924667677622, "rms": 0.3433530279083829, "tolerance": 0.3, "within": false},
+  "zhao2017b_fig2c_ph_diluted | pH_6x_dilution_25C": {"n": 6, "mean": -0.8176846790735919, "rms": 0.8206950963415067, "tolerance": 0.3, "within": false},
+  "zhou2023_fig2_final_ph | pH": {"n": 6, "mean": 0.39440538410966597, "rms": 0.981395896545999, "tolerance": 0.3, "within": false}
  },
  "raw_at_optimum": {
-  "cao2017_fig4c_ph | pH": {
-   "n": 12,
-   "mean": -0.812256367923692,
-   "rms": 0.8338905156420644,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "davidek2002_tab5_acids_naoh_uptake | FA+AA": {
-   "n": 53,
-   "mean": 0.1539919347381823,
-   "rms": 0.2964152615428812,
-   "tolerance": 0.3,
-   "within": true
-  },
-  "martins2003b_fig6_organic_acids | AA": {
-   "n": 32,
-   "mean": 0.25415228303772497,
-   "rms": 0.45249066658930487,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "martins2003b_fig6_organic_acids | FA": {
-   "n": 23,
-   "mean": 0.10003884089663305,
-   "rms": 0.4093958267845734,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "martins2003b_fig7_ph_drift | pH": {
-   "n": 16,
-   "mean": 0.04637636422365904,
-   "rms": 0.06555565813399052,
-   "tolerance": 0.3,
-   "within": true
-  },
-  "martins2005_glc_gly_multiresponse_timecourses | AA": {
-   "n": 57,
-   "mean": 0.1359603154127696,
-   "rms": 0.2412432636003895,
-   "tolerance": 0.3,
-   "within": true
-  },
-  "martins2005_glc_gly_multiresponse_timecourses | FA": {
-   "n": 54,
-   "mean": 0.11138663108031037,
-   "rms": 0.23207138735584673,
-   "tolerance": 0.3,
-   "within": true
-  },
-  "martins2005b_fig4_ph_drift_ladder | pH": {
-   "n": 52,
-   "mean": 0.24655473128190403,
-   "rms": 0.349209414340062,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "zhao2017b_fig2c_ph_diluted | pH_6x_dilution_25C": {
-   "n": 6,
-   "mean": -0.8409984534904359,
-   "rms": 0.8432594314523346,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "zhou2023_fig2_final_ph | pH": {
-   "n": 6,
-   "mean": 0.46937230852991346,
-   "rms": 0.7374185544820027,
-   "tolerance": 0.3,
-   "within": false
-  }
+  "cao2017_fig4c_ph | pH": {"n": 12, "mean": -0.812256367923692, "rms": 0.8338905156420644, "tolerance": 0.3, "within": false},
+  "davidek2002_tab5_acids_naoh_uptake | FA+AA": {"n": 53, "mean": 0.1539919347381823, "rms": 0.2964152615428812, "tolerance": 0.3, "within": true},
+  "martins2003b_fig6_organic_acids | AA": {"n": 32, "mean": 0.25415228303772497, "rms": 0.45249066658930487, "tolerance": 0.3, "within": false},
+  "martins2003b_fig6_organic_acids | FA": {"n": 23, "mean": 0.10003884089663305, "rms": 0.4093958267845734, "tolerance": 0.3, "within": false},
+  "martins2003b_fig7_ph_drift | pH": {"n": 16, "mean": 0.04637636422365904, "rms": 0.06555565813399052, "tolerance": 0.3, "within": true},
+  "martins2005_glc_gly_multiresponse_timecourses | AA": {"n": 57, "mean": 0.1359603154127696, "rms": 0.2412432636003895, "tolerance": 0.3, "within": true},
+  "martins2005_glc_gly_multiresponse_timecourses | FA": {"n": 54, "mean": 0.11138663108031037, "rms": 0.23207138735584673, "tolerance": 0.3, "within": true},
+  "martins2005b_fig4_ph_drift_ladder | pH": {"n": 52, "mean": 0.24655473128190403, "rms": 0.349209414340062, "tolerance": 0.3, "within": false},
+  "zhao2017b_fig2c_ph_diluted | pH_6x_dilution_25C": {"n": 6, "mean": -0.8409984534904359, "rms": 0.8432594314523346, "tolerance": 0.3, "within": false},
+  "zhou2023_fig2_final_ph | pH": {"n": 6, "mean": 0.46937230852991346, "rms": 0.7374185544820027, "tolerance": 0.3, "within": false}
  },
  "diagnostic_rows_at_optimum": {
-  "brands2001_fig3_ph_titratable_acid | FA+AA": {
-   "n": 13,
-   "mean": 0.7220057583847492,
-   "rms": 0.7463505739067913,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "brands2001_fig3_ph_titratable_acid | TA_to_pH8.3": {
-   "n": 13,
-   "mean": 0.3270485391866048,
-   "rms": 0.36800795719114326,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "brands2001_fig3_ph_titratable_acid | pH": {
-   "n": 14,
-   "mean": -0.07933429090731911,
-   "rms": 0.12151218195225223,
-   "tolerance": 0.3,
-   "within": true
-  },
-  "davidek2002_tab5_acids_naoh_uptake | NaOH_uptake": {
-   "n": 49,
-   "mean": -0.5306573691352179,
-   "rms": 0.6457087562601029,
-   "tolerance": 0.3,
-   "within": false
-  },
-  "nguyen2016_figs1_ph_mass_balance | pH": {
-   "n": 24,
-   "mean": -0.40901216503543153,
-   "rms": 0.48898050941659793,
-   "tolerance": 0.3,
-   "within": false
-  }
+  "brands2001_fig3_ph_titratable_acid | FA+AA": {"n": 13, "mean": 0.7220057583847492, "rms": 0.7463505739067913, "tolerance": 0.3, "within": false},
+  "brands2001_fig3_ph_titratable_acid | TA_to_pH8.3": {"n": 13, "mean": 0.3270485391866048, "rms": 0.36800795719114326, "tolerance": 0.3, "within": false},
+  "brands2001_fig3_ph_titratable_acid | pH": {"n": 14, "mean": -0.07933429090731911, "rms": 0.12151218195225223, "tolerance": 0.3, "within": true},
+  "davidek2002_tab5_acids_naoh_uptake | NaOH_uptake": {"n": 49, "mean": -0.5306573691352179, "rms": 0.6457087562601029, "tolerance": 0.3, "within": false},
+  "nguyen2016_figs1_ph_mass_balance | pH": {"n": 24, "mean": -0.40901216503543153, "rms": 0.48898050941659793, "tolerance": 0.3, "within": false}
  },
  "diagnostics_whitened": {
   "n": 311,
   "rms": 6.25716466971122,
   "by": {
    "laboratory": {
-    "btbu_xie": {
-     "n": 18,
-     "mean": -8.788532499107362,
-     "rms": 9.218500184995229,
-     "share_positive": 0.0
-    },
-    "jiangnan_zhang_x": {
-     "n": 6,
-     "mean": 3.7227347542947515,
-     "rms": 8.642972530839229,
-     "share_positive": 0.6666666666666666
-    },
-    "nestle_blank": {
-     "n": 53,
-     "mean": 0.9721376810007035,
-     "rms": 1.8452784357318344,
-     "share_positive": 0.6792452830188679
-    },
-    "wageningen_van_boekel": {
-     "n": 234,
-     "mean": 1.5182378057215475,
-     "rms": 6.543078507850596,
-     "share_positive": 0.7777777777777778
-    }
+    "btbu_xie": {"n": 18, "mean": -8.788532499107362, "rms": 9.218500184995229, "share_positive": 0.0},
+    "jiangnan_zhang_x": {"n": 6, "mean": 3.7227347542947515, "rms": 8.642972530839229, "share_positive": 0.6666666666666666},
+    "nestle_blank": {"n": 53, "mean": 0.9721376810007035, "rms": 1.8452784357318344, "share_positive": 0.6792452830188679},
+    "wageningen_van_boekel": {"n": 234, "mean": 1.5182378057215475, "rms": 6.543078507850596, "share_positive": 0.7777777777777778}
    },
    "data_set": {
-    "cao2017_fig4c_ph": {
-     "n": 12,
-     "mean": -7.108061499732417,
-     "rms": 7.29855322251806,
-     "share_positive": 0.0
-    },
-    "davidek2002_tab5_acids_naoh_uptake": {
-     "n": 53,
-     "mean": 0.9721376810007035,
-     "rms": 1.8452784357318344,
-     "share_positive": 0.6792452830188679
-    },
-    "martins2003b_fig6_organic_acids": {
-     "n": 55,
-     "mean": 0.4336452885792721,
-     "rms": 10.13007824770339,
-     "share_positive": 0.5454545454545454
-    },
-    "martins2003b_fig7_ph_drift": {
-     "n": 16,
-     "mean": 1.0747640186788658,
-     "rms": 1.5192407546963707,
-     "share_positive": 0.75
-    },
-    "martins2005_glc_gly_multiresponse_timecourses": {
-     "n": 111,
-     "mean": 2.2876306271579887,
-     "rms": 6.148893808767472,
-     "share_positive": 0.8018018018018018
-    },
-    "martins2005b_fig4_ph_drift_ladder": {
-     "n": 52,
-     "mean": 1.159498687568917,
-     "rms": 1.642263587921382,
-     "share_positive": 0.9807692307692307
-    },
-    "zhao2017b_fig2c_ph_diluted": {
-     "n": 6,
-     "mean": -12.149474497857247,
-     "rms": 12.182137690012116,
-     "share_positive": 0.0
-    },
-    "zhou2023_fig2_final_ph": {
-     "n": 6,
-     "mean": 3.7227347542947515,
-     "rms": 8.642972530839229,
-     "share_positive": 0.6666666666666666
-    }
+    "cao2017_fig4c_ph": {"n": 12, "mean": -7.108061499732417, "rms": 7.29855322251806, "share_positive": 0.0},
+    "davidek2002_tab5_acids_naoh_uptake": {"n": 53, "mean": 0.9721376810007035, "rms": 1.8452784357318344, "share_positive": 0.6792452830188679},
+    "martins2003b_fig6_organic_acids": {"n": 55, "mean": 0.4336452885792721, "rms": 10.13007824770339, "share_positive": 0.5454545454545454},
+    "martins2003b_fig7_ph_drift": {"n": 16, "mean": 1.0747640186788658, "rms": 1.5192407546963707, "share_positive": 0.75},
+    "martins2005_glc_gly_multiresponse_timecourses": {"n": 111, "mean": 2.2876306271579887, "rms": 6.148893808767472, "share_positive": 0.8018018018018018},
+    "martins2005b_fig4_ph_drift_ladder": {"n": 52, "mean": 1.159498687568917, "rms": 1.642263587921382, "share_positive": 0.9807692307692307},
+    "zhao2017b_fig2c_ph_diluted": {"n": 6, "mean": -12.149474497857247, "rms": 12.182137690012116, "share_positive": 0.0},
+    "zhou2023_fig2_final_ph": {"n": 6, "mean": 3.7227347542947515, "rms": 8.642972530839229, "share_positive": 0.6666666666666666}
    },
    "observable": {
-    "AA": {
-     "n": 89,
-     "mean": 1.5462155126933494,
-     "rms": 6.127918870879596,
-     "share_positive": 0.7191011235955056
-    },
-    "FA": {
-     "n": 77,
-     "mean": 1.820315712424526,
-     "rms": 9.186898041027224,
-     "share_positive": 0.7142857142857143
-    },
-    "FA+AA": {
-     "n": 53,
-     "mean": 0.9721376810007035,
-     "rms": 1.8452784357318344,
-     "share_positive": 0.6792452830188679
-    },
-    "pH": {
-     "n": 86,
-     "mean": 0.1689514718770351,
-     "rms": 3.8346756605258507,
-     "share_positive": 0.7790697674418605
-    },
-    "pH_6x_dilution_25C": {
-     "n": 6,
-     "mean": -12.149474497857247,
-     "rms": 12.182137690012116,
-     "share_positive": 0.0
-    }
+    "AA": {"n": 89, "mean": 1.5462155126933494, "rms": 6.127918870879596, "share_positive": 0.7191011235955056},
+    "FA": {"n": 77, "mean": 1.820315712424526, "rms": 9.186898041027224, "share_positive": 0.7142857142857143},
+    "FA+AA": {"n": 53, "mean": 0.9721376810007035, "rms": 1.8452784357318344, "share_positive": 0.6792452830188679},
+    "pH": {"n": 86, "mean": 0.1689514718770351, "rms": 3.8346756605258507, "share_positive": 0.7790697674418605},
+    "pH_6x_dilution_25C": {"n": 6, "mean": -12.149474497857247, "rms": 12.182137690012116, "share_positive": 0.0}
    },
    "temperature_C": {
-    "100.0": {
-     "n": 146,
-     "mean": 2.939675533670656,
-     "rms": 6.378533312146241,
-     "share_positive": 0.863013698630137
-    },
-    "120.0": {
-     "n": 73,
-     "mean": -1.7239384027345535,
-     "rms": 7.5859317334185095,
-     "share_positive": 0.5342465753424658
-    },
-    "80.0": {
-     "n": 21,
-     "mean": 3.5361395499198713,
-     "rms": 3.9351304249170638,
-     "share_positive": 1.0
-    },
-    "90.0": {
-     "n": 71,
-     "mean": -1.5023984209985242,
-     "rms": 4.907770792366213,
-     "share_positive": 0.5070422535211268
-    }
+    "100.0": {"n": 146, "mean": 2.939675533670656, "rms": 6.378533312146241, "share_positive": 0.863013698630137},
+    "120.0": {"n": 73, "mean": -1.7239384027345535, "rms": 7.5859317334185095, "share_positive": 0.5342465753424658},
+    "80.0": {"n": 21, "mean": 3.5361395499198713, "rms": 3.9351304249170638, "share_positive": 1.0},
+    "90.0": {"n": 71, "mean": -1.5023984209985242, "rms": 4.907770792366213, "share_positive": 0.5070422535211268}
    },
    "label_pH": {
-    "4.8": {
-     "n": 11,
-     "mean": 0.19220121338797613,
-     "rms": 0.23711511739314559,
-     "share_positive": 1.0
-    },
-    "5.0": {
-     "n": 11,
-     "mean": 2.3158060953223143,
-     "rms": 2.7626004612954174,
-     "share_positive": 0.9090909090909091
-    },
-    "5.5": {
-     "n": 51,
-     "mean": -2.7631790478262133,
-     "rms": 6.615437598310904,
-     "share_positive": 0.5490196078431373
-    },
-    "6.0": {
-     "n": 27,
-     "mean": 0.7275995557152855,
-     "rms": 2.803335434158346,
-     "share_positive": 0.7037037037037037
-    },
-    "6.8": {
-     "n": 169,
-     "mean": 1.822123296421873,
-     "rms": 7.398347322041279,
-     "share_positive": 0.727810650887574
-    },
-    "7.0": {
-     "n": 16,
-     "mean": 1.9755847090133627,
-     "rms": 4.440907879050181,
-     "share_positive": 0.6875
-    },
-    "7.5": {
-     "n": 10,
-     "mean": 1.6339365070755032,
-     "rms": 2.0618896689658683,
-     "share_positive": 1.0
-    },
-    "8.0": {
-     "n": 16,
-     "mean": 0.5459420439038146,
-     "rms": 1.5656357024737382,
-     "share_positive": 0.625
-    }
+    "4.8": {"n": 11, "mean": 0.19220121338797613, "rms": 0.23711511739314559, "share_positive": 1.0},
+    "5.0": {"n": 11, "mean": 2.3158060953223143, "rms": 2.7626004612954174, "share_positive": 0.9090909090909091},
+    "5.5": {"n": 51, "mean": -2.7631790478262133, "rms": 6.615437598310904, "share_positive": 0.5490196078431373},
+    "6.0": {"n": 27, "mean": 0.7275995557152855, "rms": 2.803335434158346, "share_positive": 0.7037037037037037},
+    "6.8": {"n": 169, "mean": 1.822123296421873, "rms": 7.398347322041279, "share_positive": 0.727810650887574},
+    "7.0": {"n": 16, "mean": 1.9755847090133627, "rms": 4.440907879050181, "share_positive": 0.6875},
+    "7.5": {"n": 10, "mean": 1.6339365070755032, "rms": 2.0618896689658683, "share_positive": 1.0},
+    "8.0": {"n": 16, "mean": 0.5459420439038146, "rms": 1.5656357024737382, "share_positive": 0.625}
    },
    "time_min": {
-    "10.0": {
-     "n": 10,
-     "mean": -1.0606507612890197,
-     "rms": 5.549908499782616,
-     "share_positive": 0.6
-    },
-    "120.0": {
-     "n": 39,
-     "mean": 0.8508243100386915,
-     "rms": 6.595978443519763,
-     "share_positive": 0.7692307692307693
-    },
-    "15.0": {
-     "n": 27,
-     "mean": -1.0399895016358442,
-     "rms": 5.529861194886802,
-     "share_positive": 0.5555555555555556
-    },
-    "150.0": {
-     "n": 22,
-     "mean": 4.3091425830149275,
-     "rms": 7.510438286639249,
-     "share_positive": 0.9090909090909091
-    },
-    "180.0": {
-     "n": 29,
-     "mean": 2.132635832676715,
-     "rms": 6.123117935381489,
-     "share_positive": 0.7586206896551724
-    },
-    "20.0": {
-     "n": 6,
-     "mean": -1.2564420261616769,
-     "rms": 5.670787022974,
-     "share_positive": 0.6666666666666666
-    },
-    "210.0": {
-     "n": 6,
-     "mean": 4.661704325902582,
-     "rms": 6.0318684018915665,
-     "share_positive": 1.0
-    },
-    "240.0": {
-     "n": 18,
-     "mean": 1.4586096402644348,
-     "rms": 6.6131672349872135,
-     "share_positive": 0.6666666666666666
-    },
-    "30.0": {
-     "n": 31,
-     "mean": -0.4250550597259543,
-     "rms": 6.910428473609007,
-     "share_positive": 0.6451612903225806
-    },
-    "300.0": {
-     "n": 11,
-     "mean": -1.478316417577637,
-     "rms": 4.225765197781648,
-     "share_positive": 0.45454545454545453
-    },
-    "360.0": {
-     "n": 8,
-     "mean": 0.531959530599363,
-     "rms": 1.6262816642450426,
-     "share_positive": 0.625
-    },
-    "420.0": {
-     "n": 8,
-     "mean": 0.31136521190288696,
-     "rms": 1.2947275795303126,
-     "share_positive": 0.375
-    },
-    "45.0": {
-     "n": 20,
-     "mean": 1.0461449231895146,
-     "rms": 6.077505910298917,
-     "share_positive": 0.75
-    },
-    "5.0": {
-     "n": 11,
-     "mean": 1.7484068586835264,
-     "rms": 3.381499540005573,
-     "share_positive": 0.8181818181818182
-    },
-    "60.0": {
-     "n": 37,
-     "mean": 0.9078970869716024,
-     "rms": 7.4863427755886836,
-     "share_positive": 0.7297297297297297
-    },
-    "75.0": {
-     "n": 3,
-     "mean": 1.3063089397996024,
-     "rms": 1.9890828468861013,
-     "share_positive": 1.0
-    },
-    "90.0": {
-     "n": 25,
-     "mean": 0.7251526600115793,
-     "rms": 6.805196985359265,
-     "share_positive": 0.8
-    }
+    "10.0": {"n": 10, "mean": -1.0606507612890197, "rms": 5.549908499782616, "share_positive": 0.6},
+    "120.0": {"n": 39, "mean": 0.8508243100386915, "rms": 6.595978443519763, "share_positive": 0.7692307692307693},
+    "15.0": {"n": 27, "mean": -1.0399895016358442, "rms": 5.529861194886802, "share_positive": 0.5555555555555556},
+    "150.0": {"n": 22, "mean": 4.3091425830149275, "rms": 7.510438286639249, "share_positive": 0.9090909090909091},
+    "180.0": {"n": 29, "mean": 2.132635832676715, "rms": 6.123117935381489, "share_positive": 0.7586206896551724},
+    "20.0": {"n": 6, "mean": -1.2564420261616769, "rms": 5.670787022974, "share_positive": 0.6666666666666666},
+    "210.0": {"n": 6, "mean": 4.661704325902582, "rms": 6.0318684018915665, "share_positive": 1.0},
+    "240.0": {"n": 18, "mean": 1.4586096402644348, "rms": 6.6131672349872135, "share_positive": 0.6666666666666666},
+    "30.0": {"n": 31, "mean": -0.4250550597259543, "rms": 6.910428473609007, "share_positive": 0.6451612903225806},
+    "300.0": {"n": 11, "mean": -1.478316417577637, "rms": 4.225765197781648, "share_positive": 0.45454545454545453},
+    "360.0": {"n": 8, "mean": 0.531959530599363, "rms": 1.6262816642450426, "share_positive": 0.625},
+    "420.0": {"n": 8, "mean": 0.31136521190288696, "rms": 1.2947275795303126, "share_positive": 0.375},
+    "45.0": {"n": 20, "mean": 1.0461449231895146, "rms": 6.077505910298917, "share_positive": 0.75},
+    "5.0": {"n": 11, "mean": 1.7484068586835264, "rms": 3.381499540005573, "share_positive": 0.8181818181818182},
+    "60.0": {"n": 37, "mean": 0.9078970869716024, "rms": 7.4863427755886836, "share_positive": 0.7297297297297297},
+    "75.0": {"n": 3, "mean": 1.3063089397996024, "rms": 1.9890828468861013, "share_positive": 1.0},
+    "90.0": {"n": 25, "mean": 0.7251526600115793, "rms": 6.805196985359265, "share_positive": 0.8}
    },
    "sugar": {
-    "AMA": {
-     "n": 124,
-     "mean": 0.7465323569657991,
-     "rms": 6.875279439522921,
-     "share_positive": 0.6290322580645161
-    },
-    "ARP": {
-     "n": 6,
-     "mean": 3.7227347542947515,
-     "rms": 8.642972530839229,
-     "share_positive": 0.6666666666666666
-    },
-    "Glc": {
-     "n": 163,
-     "mean": 1.9277357752645419,
-     "rms": 5.158252008661014,
-     "share_positive": 0.8588957055214724
-    },
-    "PENT": {
-     "n": 18,
-     "mean": -8.788532499107362,
-     "rms": 9.218500184995229,
-     "share_positive": 0.0
-    }
+    "AMA": {"n": 124, "mean": 0.7465323569657991, "rms": 6.875279439522921, "share_positive": 0.6290322580645161},
+    "ARP": {"n": 6, "mean": 3.7227347542947515, "rms": 8.642972530839229, "share_positive": 0.6666666666666666},
+    "Glc": {"n": 163, "mean": 1.9277357752645419, "rms": 5.158252008661014, "share_positive": 0.8588957055214724},
+    "PENT": {"n": 18, "mean": -8.788532499107362, "rms": 9.218500184995229, "share_positive": 0.0}
    },
    "amine": {
-    "Cys": {
-     "n": 15,
-     "mean": -7.461194745319413,
-     "rms": 9.704803060811004,
-     "share_positive": 0.13333333333333333
-    },
-    "Gly": {
-     "n": 163,
-     "mean": 1.9277357752645419,
-     "rms": 5.158252008661014,
-     "share_positive": 0.8588957055214724
-    },
-    "Gly+Cys": {
-     "n": 6,
-     "mean": -5.768635679522646,
-     "rms": 5.849984009928858,
-     "share_positive": 0.0
-    },
-    "none": {
-     "n": 127,
-     "mean": 0.8129336304135607,
-     "rms": 6.9989826632726855,
-     "share_positive": 0.6299212598425197
-    }
+    "Cys": {"n": 15, "mean": -7.461194745319413, "rms": 9.704803060811004, "share_positive": 0.13333333333333333},
+    "Gly": {"n": 163, "mean": 1.9277357752645419, "rms": 5.158252008661014, "share_positive": 0.8588957055214724},
+    "Gly+Cys": {"n": 6, "mean": -5.768635679522646, "rms": 5.849984009928858, "share_positive": 0.0},
+    "none": {"n": 127, "mean": 0.8129336304135607, "rms": 6.9989826632726855, "share_positive": 0.6299212598425197}
    },
-   "buffer": {
-    "clamped": {
-     "n": 53,
-     "mean": 0.9721376810007035,
-     "rms": 1.8452784357318344,
-     "share_positive": 0.6792452830188679
-    },
-    "none": {
-     "n": 6,
-     "mean": 3.7227347542947515,
-     "rms": 8.642972530839229,
-     "share_positive": 0.6666666666666666
-    },
-    "phosphate": {
-     "n": 252,
-     "mean": 0.782039926805197,
-     "rms": 6.769338110392698,
-     "share_positive": 0.7222222222222222
-    }
-   }
+   "buffer": {"clamped": {"n": 53, "mean": 0.9721376810007035, "rms": 1.8452784357318344, "share_positive": 0.6792452830188679}, "none": {"n": 6, "mean": 3.7227347542947515, "rms": 8.642972530839229, "share_positive": 0.6666666666666666}, "phosphate": {"n": 252, "mean": 0.782039926805197, "rms": 6.769338110392698, "share_positive": 0.7222222222222222}}
   },
-  "trends": {
-   "temperature_C": {
-    "rho": -0.04669948989796022,
-    "p": 0.41182510135092193
-   },
-   "label_pH": {
-    "rho": 0.10058485604273362,
-    "p": 0.07652996106092427
-   },
-   "time_min": {
-    "rho": 0.10898743224829834,
-    "p": 0.05485817507787671
-   }
-  },
+  "trends": {"temperature_C": {"rho": -0.04669948989796022, "p": 0.41182510135092193}, "label_pH": {"rho": 0.10058485604273362, "p": 0.07652996106092427}, "time_min": {"rho": 0.10898743224829834, "p": 0.05485817507787671}},
   "flags": [
    "laboratory=btbu_xie: mean residual -8.79 over 18 rows (one sign)",
    "laboratory=jiangnan_zhang_x: mean residual +3.72 over 6 rows (one sign)",
@@ -1005,386 +321,79 @@
   "rms": 0.37430686506586136,
   "by": {
    "laboratory": {
-    "btbu_xie": {
-     "n": 18,
-     "mean": -0.8218370631126066,
-     "rms": 0.8370251395844075,
-     "share_positive": 0.0
-    },
-    "jiangnan_zhang_x": {
-     "n": 6,
-     "mean": 0.46937230852991346,
-     "rms": 0.7374185544820027,
-     "share_positive": 0.6666666666666666
-    },
-    "nestle_blank": {
-     "n": 53,
-     "mean": 0.1539919347381823,
-     "rms": 0.2964152615428812,
-     "share_positive": 0.6792452830188679
-    },
-    "wageningen_van_boekel": {
-     "n": 234,
-     "mean": 0.1613728645680852,
-     "rms": 0.3138024859379573,
-     "share_positive": 0.7777777777777778
-    }
+    "btbu_xie": {"n": 18, "mean": -0.8218370631126066, "rms": 0.8370251395844075, "share_positive": 0.0},
+    "jiangnan_zhang_x": {"n": 6, "mean": 0.46937230852991346, "rms": 0.7374185544820027, "share_positive": 0.6666666666666666},
+    "nestle_blank": {"n": 53, "mean": 0.1539919347381823, "rms": 0.2964152615428812, "share_positive": 0.6792452830188679},
+    "wageningen_van_boekel": {"n": 234, "mean": 0.1613728645680852, "rms": 0.3138024859379573, "share_positive": 0.7777777777777778}
    },
    "data_set": {
-    "cao2017_fig4c_ph": {
-     "n": 12,
-     "mean": -0.812256367923692,
-     "rms": 0.8338905156420644,
-     "share_positive": 0.0
-    },
-    "davidek2002_tab5_acids_naoh_uptake": {
-     "n": 53,
-     "mean": 0.1539919347381823,
-     "rms": 0.2964152615428812,
-     "share_positive": 0.6792452830188679
-    },
-    "martins2003b_fig6_organic_acids": {
-     "n": 55,
-     "mean": 0.1897048435969047,
-     "rms": 0.43498889005566427,
-     "share_positive": 0.5454545454545454
-    },
-    "martins2003b_fig7_ph_drift": {
-     "n": 16,
-     "mean": 0.04637636422365904,
-     "rms": 0.06555565813399052,
-     "share_positive": 0.75
-    },
-    "martins2005_glc_gly_multiresponse_timecourses": {
-     "n": 111,
-     "mean": 0.12400555006184344,
-     "rms": 0.23682564297706946,
-     "share_positive": 0.8018018018018018
-    },
-    "martins2005b_fig4_ph_drift_ladder": {
-     "n": 52,
-     "mean": 0.24655473128190403,
-     "rms": 0.349209414340062,
-     "share_positive": 0.9807692307692307
-    },
-    "zhao2017b_fig2c_ph_diluted": {
-     "n": 6,
-     "mean": -0.8409984534904359,
-     "rms": 0.8432594314523346,
-     "share_positive": 0.0
-    },
-    "zhou2023_fig2_final_ph": {
-     "n": 6,
-     "mean": 0.46937230852991346,
-     "rms": 0.7374185544820027,
-     "share_positive": 0.6666666666666666
-    }
+    "cao2017_fig4c_ph": {"n": 12, "mean": -0.812256367923692, "rms": 0.8338905156420644, "share_positive": 0.0},
+    "davidek2002_tab5_acids_naoh_uptake": {"n": 53, "mean": 0.1539919347381823, "rms": 0.2964152615428812, "share_positive": 0.6792452830188679},
+    "martins2003b_fig6_organic_acids": {"n": 55, "mean": 0.1897048435969047, "rms": 0.43498889005566427, "share_positive": 0.5454545454545454},
+    "martins2003b_fig7_ph_drift": {"n": 16, "mean": 0.04637636422365904, "rms": 0.06555565813399052, "share_positive": 0.75},
+    "martins2005_glc_gly_multiresponse_timecourses": {"n": 111, "mean": 0.12400555006184344, "rms": 0.23682564297706946, "share_positive": 0.8018018018018018},
+    "martins2005b_fig4_ph_drift_ladder": {"n": 52, "mean": 0.24655473128190403, "rms": 0.349209414340062, "share_positive": 0.9807692307692307},
+    "zhao2017b_fig2c_ph_diluted": {"n": 6, "mean": -0.8409984534904359, "rms": 0.8432594314523346, "share_positive": 0.0},
+    "zhou2023_fig2_final_ph": {"n": 6, "mean": 0.46937230852991346, "rms": 0.7374185544820027, "share_positive": 0.6666666666666666}
    },
    "observable": {
-    "AA": {
-     "n": 89,
-     "mean": 0.1784563037723041,
-     "rms": 0.3330018980353876,
-     "share_positive": 0.7191011235955056
-    },
-    "FA": {
-     "n": 77,
-     "mean": 0.10799703141505608,
-     "rms": 0.2963675904060722,
-     "share_positive": 0.7142857142857143
-    },
-    "FA+AA": {
-     "n": 53,
-     "mean": 0.1539919347381823,
-     "rms": 0.2964152615428812,
-     "share_positive": 0.6792452830188679
-    },
-    "pH": {
-     "n": 86,
-     "mean": 0.07711657314340387,
-     "rms": 0.45771440959055515,
-     "share_positive": 0.7790697674418605
-    },
-    "pH_6x_dilution_25C": {
-     "n": 6,
-     "mean": -0.8409984534904359,
-     "rms": 0.8432594314523346,
-     "share_positive": 0.0
-    }
+    "AA": {"n": 89, "mean": 0.1784563037723041, "rms": 0.3330018980353876, "share_positive": 0.7191011235955056},
+    "FA": {"n": 77, "mean": 0.10799703141505608, "rms": 0.2963675904060722, "share_positive": 0.7142857142857143},
+    "FA+AA": {"n": 53, "mean": 0.1539919347381823, "rms": 0.2964152615428812, "share_positive": 0.6792452830188679},
+    "pH": {"n": 86, "mean": 0.07711657314340387, "rms": 0.45771440959055515, "share_positive": 0.7790697674418605},
+    "pH_6x_dilution_25C": {"n": 6, "mean": -0.8409984534904359, "rms": 0.8432594314523346, "share_positive": 0.0}
    },
    "temperature_C": {
-    "100.0": {
-     "n": 146,
-     "mean": 0.17271941048869577,
-     "rms": 0.3139796224324748,
-     "share_positive": 0.863013698630137
-    },
-    "120.0": {
-     "n": 73,
-     "mean": 0.07864109550663365,
-     "rms": 0.3090104012819659,
-     "share_positive": 0.5342465753424658
-    },
-    "80.0": {
-     "n": 21,
-     "mean": 0.45807858365607534,
-     "rms": 0.48508393263611865,
-     "share_positive": 1.0
-    },
-    "90.0": {
-     "n": 71,
-     "mean": -0.09340133232258113,
-     "rms": 0.49316005890920805,
-     "share_positive": 0.5070422535211268
-    }
+    "100.0": {"n": 146, "mean": 0.17271941048869577, "rms": 0.3139796224324748, "share_positive": 0.863013698630137},
+    "120.0": {"n": 73, "mean": 0.07864109550663365, "rms": 0.3090104012819659, "share_positive": 0.5342465753424658},
+    "80.0": {"n": 21, "mean": 0.45807858365607534, "rms": 0.48508393263611865, "share_positive": 1.0},
+    "90.0": {"n": 71, "mean": -0.09340133232258113, "rms": 0.49316005890920805, "share_positive": 0.5070422535211268}
    },
    "label_pH": {
-    "4.8": {
-     "n": 11,
-     "mean": 0.04086948870833609,
-     "rms": 0.05041993982271701,
-     "share_positive": 1.0
-    },
-    "5.0": {
-     "n": 11,
-     "mean": 0.39686722110218275,
-     "rms": 0.48419372846496617,
-     "share_positive": 0.9090909090909091
-    },
-    "5.5": {
-     "n": 51,
-     "mean": -0.06604396593751487,
-     "rms": 0.657580092712702,
-     "share_positive": 0.5490196078431373
-    },
-    "6.0": {
-     "n": 27,
-     "mean": 0.16614025516827835,
-     "rms": 0.3165045501740106,
-     "share_positive": 0.7037037037037037
-    },
-    "6.8": {
-     "n": 169,
-     "mean": 0.11801808878966857,
-     "rms": 0.25097604198754353,
-     "share_positive": 0.727810650887574
-    },
-    "7.0": {
-     "n": 16,
-     "mean": 0.1949636238269365,
-     "rms": 0.38064279747350954,
-     "share_positive": 0.6875
-    },
-    "7.5": {
-     "n": 10,
-     "mean": 0.34743875155076387,
-     "rms": 0.43843831710641584,
-     "share_positive": 1.0
-    },
-    "8.0": {
-     "n": 16,
-     "mean": 0.09215491427309894,
-     "rms": 0.2875160232503475,
-     "share_positive": 0.625
-    }
+    "4.8": {"n": 11, "mean": 0.04086948870833609, "rms": 0.05041993982271701, "share_positive": 1.0},
+    "5.0": {"n": 11, "mean": 0.39686722110218275, "rms": 0.48419372846496617, "share_positive": 0.9090909090909091},
+    "5.5": {"n": 51, "mean": -0.06604396593751487, "rms": 0.657580092712702, "share_positive": 0.5490196078431373},
+    "6.0": {"n": 27, "mean": 0.16614025516827835, "rms": 0.3165045501740106, "share_positive": 0.7037037037037037},
+    "6.8": {"n": 169, "mean": 0.11801808878966857, "rms": 0.25097604198754353, "share_positive": 0.727810650887574},
+    "7.0": {"n": 16, "mean": 0.1949636238269365, "rms": 0.38064279747350954, "share_positive": 0.6875},
+    "7.5": {"n": 10, "mean": 0.34743875155076387, "rms": 0.43843831710641584, "share_positive": 1.0},
+    "8.0": {"n": 16, "mean": 0.09215491427309894, "rms": 0.2875160232503475, "share_positive": 0.625}
    },
    "time_min": {
-    "10.0": {
-     "n": 10,
-     "mean": 0.07963419940586232,
-     "rms": 0.2867008779402486,
-     "share_positive": 0.6
-    },
-    "120.0": {
-     "n": 39,
-     "mean": 0.1398246095294435,
-     "rms": 0.427056082041073,
-     "share_positive": 0.7692307692307693
-    },
-    "15.0": {
-     "n": 27,
-     "mean": 0.0670042421444584,
-     "rms": 0.29722379462644244,
-     "share_positive": 0.5555555555555556
-    },
-    "150.0": {
-     "n": 22,
-     "mean": 0.2189881180779828,
-     "rms": 0.29775759845838584,
-     "share_positive": 0.9090909090909091
-    },
-    "180.0": {
-     "n": 29,
-     "mean": 0.17944438236429405,
-     "rms": 0.46790814670334324,
-     "share_positive": 0.7586206896551724
-    },
-    "20.0": {
-     "n": 6,
-     "mean": 0.005992483922341787,
-     "rms": 0.03668089649918222,
-     "share_positive": 0.6666666666666666
-    },
-    "210.0": {
-     "n": 6,
-     "mean": 0.30693806581882155,
-     "rms": 0.4168791640442713,
-     "share_positive": 1.0
-    },
-    "240.0": {
-     "n": 18,
-     "mean": 0.1035387163368897,
-     "rms": 0.4947845038069729,
-     "share_positive": 0.6666666666666666
-    },
-    "30.0": {
-     "n": 31,
-     "mean": -0.02694960404615121,
-     "rms": 0.35282180832345833,
-     "share_positive": 0.6451612903225806
-    },
-    "300.0": {
-     "n": 11,
-     "mean": -0.11227315529142912,
-     "rms": 0.41845822244162334,
-     "share_positive": 0.45454545454545453
-    },
-    "360.0": {
-     "n": 8,
-     "mean": 0.08203069807381219,
-     "rms": 0.2480226785884327,
-     "share_positive": 0.625
-    },
-    "420.0": {
-     "n": 8,
-     "mean": 0.04708362993195592,
-     "rms": 0.19157092763792524,
-     "share_positive": 0.375
-    },
-    "45.0": {
-     "n": 20,
-     "mean": 0.07623978130414108,
-     "rms": 0.21011247247663142,
-     "share_positive": 0.75
-    },
-    "5.0": {
-     "n": 11,
-     "mean": 0.23834875404440156,
-     "rms": 0.3557207175665864,
-     "share_positive": 0.8181818181818182
-    },
-    "60.0": {
-     "n": 37,
-     "mean": 0.11062929353532212,
-     "rms": 0.45541023953574233,
-     "share_positive": 0.7297297297297297
-    },
-    "75.0": {
-     "n": 3,
-     "mean": 0.246180026912595,
-     "rms": 0.36867415502363077,
-     "share_positive": 1.0
-    },
-    "90.0": {
-     "n": 25,
-     "mean": 0.16734157321136162,
-     "rms": 0.32053575509480603,
-     "share_positive": 0.8
-    }
+    "10.0": {"n": 10, "mean": 0.07963419940586232, "rms": 0.2867008779402486, "share_positive": 0.6},
+    "120.0": {"n": 39, "mean": 0.1398246095294435, "rms": 0.427056082041073, "share_positive": 0.7692307692307693},
+    "15.0": {"n": 27, "mean": 0.0670042421444584, "rms": 0.29722379462644244, "share_positive": 0.5555555555555556},
+    "150.0": {"n": 22, "mean": 0.2189881180779828, "rms": 0.29775759845838584, "share_positive": 0.9090909090909091},
+    "180.0": {"n": 29, "mean": 0.17944438236429405, "rms": 0.46790814670334324, "share_positive": 0.7586206896551724},
+    "20.0": {"n": 6, "mean": 0.005992483922341787, "rms": 0.03668089649918222, "share_positive": 0.6666666666666666},
+    "210.0": {"n": 6, "mean": 0.30693806581882155, "rms": 0.4168791640442713, "share_positive": 1.0},
+    "240.0": {"n": 18, "mean": 0.1035387163368897, "rms": 0.4947845038069729, "share_positive": 0.6666666666666666},
+    "30.0": {"n": 31, "mean": -0.02694960404615121, "rms": 0.35282180832345833, "share_positive": 0.6451612903225806},
+    "300.0": {"n": 11, "mean": -0.11227315529142912, "rms": 0.41845822244162334, "share_positive": 0.45454545454545453},
+    "360.0": {"n": 8, "mean": 0.08203069807381219, "rms": 0.2480226785884327, "share_positive": 0.625},
+    "420.0": {"n": 8, "mean": 0.04708362993195592, "rms": 0.19157092763792524, "share_positive": 0.375},
+    "45.0": {"n": 20, "mean": 0.07623978130414108, "rms": 0.21011247247663142, "share_positive": 0.75},
+    "5.0": {"n": 11, "mean": 0.23834875404440156, "rms": 0.3557207175665864, "share_positive": 0.8181818181818182},
+    "60.0": {"n": 37, "mean": 0.11062929353532212, "rms": 0.45541023953574233, "share_positive": 0.7297297297297297},
+    "75.0": {"n": 3, "mean": 0.246180026912595, "rms": 0.36867415502363077, "share_positive": 1.0},
+    "90.0": {"n": 25, "mean": 0.16734157321136162, "rms": 0.32053575509480603, "share_positive": 0.8}
    },
    "sugar": {
-    "AMA": {
-     "n": 124,
-     "mean": 0.1559464577946126,
-     "rms": 0.3493345112215518,
-     "share_positive": 0.6290322580645161
-    },
-    "ARP": {
-     "n": 6,
-     "mean": 0.46937230852991346,
-     "rms": 0.7374185544820027,
-     "share_positive": 0.6666666666666666
-    },
-    "Glc": {
-     "n": 163,
-     "mean": 0.16310099437744563,
-     "rms": 0.2776638292425502,
-     "share_positive": 0.8588957055214724
-    },
-    "PENT": {
-     "n": 18,
-     "mean": -0.8218370631126066,
-     "rms": 0.8370251395844075,
-     "share_positive": 0.0
-    }
+    "AMA": {"n": 124, "mean": 0.1559464577946126, "rms": 0.3493345112215518, "share_positive": 0.6290322580645161},
+    "ARP": {"n": 6, "mean": 0.46937230852991346, "rms": 0.7374185544820027, "share_positive": 0.6666666666666666},
+    "Glc": {"n": 163, "mean": 0.16310099437744563, "rms": 0.2776638292425502, "share_positive": 0.8588957055214724},
+    "PENT": {"n": 18, "mean": -0.8218370631126066, "rms": 0.8370251395844075, "share_positive": 0.0}
    },
    "amine": {
-    "Cys": {
-     "n": 15,
-     "mean": -0.6581405001518628,
-     "rms": 0.852261760812715,
-     "share_positive": 0.13333333333333333
-    },
-    "Gly": {
-     "n": 163,
-     "mean": 0.16310099437744563,
-     "rms": 0.2776638292425502,
-     "share_positive": 0.8588957055214724
-    },
-    "Gly+Cys": {
-     "n": 6,
-     "mean": -0.6535081054580708,
-     "rms": 0.6617300060550747,
-     "share_positive": 0.0
-    },
-    "none": {
-     "n": 127,
-     "mean": 0.1665644379268574,
-     "rms": 0.3710321368515666,
-     "share_positive": 0.6299212598425197
-    }
+    "Cys": {"n": 15, "mean": -0.6581405001518628, "rms": 0.852261760812715, "share_positive": 0.13333333333333333},
+    "Gly": {"n": 163, "mean": 0.16310099437744563, "rms": 0.2776638292425502, "share_positive": 0.8588957055214724},
+    "Gly+Cys": {"n": 6, "mean": -0.6535081054580708, "rms": 0.6617300060550747, "share_positive": 0.0},
+    "none": {"n": 127, "mean": 0.1665644379268574, "rms": 0.3710321368515666, "share_positive": 0.6299212598425197}
    },
-   "buffer": {
-    "clamped": {
-     "n": 53,
-     "mean": 0.1539919347381823,
-     "rms": 0.2964152615428812,
-     "share_positive": 0.6792452830188679
-    },
-    "none": {
-     "n": 6,
-     "mean": 0.46937230852991346,
-     "rms": 0.7374185544820027,
-     "share_positive": 0.6666666666666666
-    },
-    "phosphate": {
-     "n": 252,
-     "mean": 0.09114358401946437,
-     "rms": 0.3761408443130276,
-     "share_positive": 0.7222222222222222
-    }
-   }
+   "buffer": {"clamped": {"n": 53, "mean": 0.1539919347381823, "rms": 0.2964152615428812, "share_positive": 0.6792452830188679}, "none": {"n": 6, "mean": 0.46937230852991346, "rms": 0.7374185544820027, "share_positive": 0.6666666666666666}, "phosphate": {"n": 252, "mean": 0.09114358401946437, "rms": 0.3761408443130276, "share_positive": 0.7222222222222222}}
   },
-  "trends": {
-   "temperature_C": {
-    "rho": -0.12458119084941639,
-    "p": 0.028039648614640665
-   },
-   "label_pH": {
-    "rho": 0.0053979830307776646,
-    "p": 0.9244642868000279
-   },
-   "time_min": {
-    "rho": 0.1015982603460396,
-    "p": 0.0735951308250484
-   }
-  },
-  "flags": [
-   "laboratory=btbu_xie: mean residual -0.82 over 18 rows (one sign)",
-   "data_set=cao2017_fig4c_ph: mean residual -0.81 over 12 rows (one sign)",
-   "sugar=PENT: mean residual -0.82 over 18 rows (one sign)",
-   "amine=Cys: mean residual -0.66 over 15 rows (one sign)"
-  ]
+  "trends": {"temperature_C": {"rho": -0.12458119084941639, "p": 0.028039648614640665}, "label_pH": {"rho": 0.0053979830307776646, "p": 0.9244642868000279}, "time_min": {"rho": 0.1015982603460396, "p": 0.0735951308250484}},
+  "flags": ["laboratory=btbu_xie: mean residual -0.82 over 18 rows (one sign)", "data_set=cao2017_fig4c_ph: mean residual -0.81 over 12 rows (one sign)", "sugar=PENT: mean residual -0.82 over 18 rows (one sign)", "amine=Cys: mean residual -0.66 over 15 rows (one sign)"]
  },
  "shipped_coupling_max_abs_difference": 0.0015546714439937936,
  "leave_one_laboratory_out": {
@@ -1419,25 +428,8 @@
     "acid_yield": 2.447906770569204e-14,
     "arp_amine_pka": -2.0123311628004942e-08
    },
-   "beyond_2_sigma": [
-    "offset_ama_tdg"
-   ],
-   "held_out_raw": {
-    "cao2017_fig4c_ph | pH": {
-     "n": 12,
-     "mean": -0.812256367923692,
-     "rms": 0.8338905156420644,
-     "tolerance": 0.3,
-     "within": false
-    },
-    "zhao2017b_fig2c_ph_diluted | pH_6x_dilution_25C": {
-     "n": 6,
-     "mean": -0.8409984534904359,
-     "rms": 0.8432594314523346,
-     "tolerance": 0.3,
-     "within": false
-    }
-   }
+   "beyond_2_sigma": ["offset_ama_tdg"],
+   "held_out_raw": {"cao2017_fig4c_ph | pH": {"n": 12, "mean": -0.812256367923692, "rms": 0.8338905156420644, "tolerance": 0.3, "within": false}, "zhao2017b_fig2c_ph_diluted | pH_6x_dilution_25C": {"n": 6, "mean": -0.8409984534904359, "rms": 0.8432594314523346, "tolerance": 0.3, "within": false}}
   },
   "jiangnan_zhang_x": {
    "rows_kept": 305,
@@ -1470,18 +462,8 @@
     "acid_yield": -1.2456940126104512,
     "arp_amine_pka": 0.0
    },
-   "beyond_2_sigma": [
-    "offset_tdg_fa"
-   ],
-   "held_out_raw": {
-    "zhou2023_fig2_final_ph | pH": {
-     "n": 6,
-     "mean": 0.9419190955311061,
-     "rms": 1.284698438991662,
-     "tolerance": 0.3,
-     "within": false
-    }
-   }
+   "beyond_2_sigma": ["offset_tdg_fa"],
+   "held_out_raw": {"zhou2023_fig2_final_ph | pH": {"n": 6, "mean": 0.9419190955311061, "rms": 1.284698438991662, "tolerance": 0.3, "within": false}}
   },
   "nestle_blank": {
    "rows_kept": 258,
@@ -1514,21 +496,8 @@
     "acid_yield": -2.9147557836729624e-10,
     "arp_amine_pka": 0.0021482660053727654
    },
-   "beyond_2_sigma": [
-    "offset_ama_tdg",
-    "offset_ama_odg",
-    "offset_tdg_fa",
-    "offset_schiff"
-   ],
-   "held_out_raw": {
-    "davidek2002_tab5_acids_naoh_uptake | FA+AA": {
-     "n": 53,
-     "mean": 0.008354449369168812,
-     "rms": 0.2169410424457132,
-     "tolerance": 0.3,
-     "within": true
-    }
-   }
+   "beyond_2_sigma": ["offset_ama_tdg", "offset_ama_odg", "offset_tdg_fa", "offset_schiff"],
+   "held_out_raw": {"davidek2002_tab5_acids_naoh_uptake | FA+AA": {"n": 53, "mean": 0.008354449369168812, "rms": 0.2169410424457132, "tolerance": 0.3, "within": true}}
   },
   "wageningen_van_boekel": {
    "rows_kept": 77,
@@ -1561,53 +530,14 @@
     "acid_yield": -2.250414631113112e-12,
     "arp_amine_pka": 3.3105030259057183e-07
    },
-   "beyond_2_sigma": [
-    "offset_ama_odg",
-    "slope_tdg_fa"
-   ],
+   "beyond_2_sigma": ["offset_ama_odg", "slope_tdg_fa"],
    "held_out_raw": {
-    "martins2003b_fig6_organic_acids | AA": {
-     "n": 32,
-     "mean": -0.1955726857895908,
-     "rms": 0.2870396903487811,
-     "tolerance": 0.3,
-     "within": true
-    },
-    "martins2003b_fig6_organic_acids | FA": {
-     "n": 23,
-     "mean": 0.28097564312630124,
-     "rms": 0.4514532260846677,
-     "tolerance": 0.3,
-     "within": false
-    },
-    "martins2003b_fig7_ph_drift | pH": {
-     "n": 16,
-     "mean": 0.057856009841896594,
-     "rms": 0.06746526419079037,
-     "tolerance": 0.3,
-     "within": true
-    },
-    "martins2005_glc_gly_multiresponse_timecourses | AA": {
-     "n": 57,
-     "mean": -0.2783782043132106,
-     "rms": 0.3109841071539169,
-     "tolerance": 0.3,
-     "within": false
-    },
-    "martins2005_glc_gly_multiresponse_timecourses | FA": {
-     "n": 54,
-     "mean": 0.1470047028386178,
-     "rms": 0.25458963521730293,
-     "tolerance": 0.3,
-     "within": true
-    },
-    "martins2005b_fig4_ph_drift_ladder | pH": {
-     "n": 52,
-     "mean": 0.28522260999106436,
-     "rms": 0.4028473617602965,
-     "tolerance": 0.3,
-     "within": false
-    }
+    "martins2003b_fig6_organic_acids | AA": {"n": 32, "mean": -0.1955726857895908, "rms": 0.2870396903487811, "tolerance": 0.3, "within": true},
+    "martins2003b_fig6_organic_acids | FA": {"n": 23, "mean": 0.28097564312630124, "rms": 0.4514532260846677, "tolerance": 0.3, "within": false},
+    "martins2003b_fig7_ph_drift | pH": {"n": 16, "mean": 0.057856009841896594, "rms": 0.06746526419079037, "tolerance": 0.3, "within": true},
+    "martins2005_glc_gly_multiresponse_timecourses | AA": {"n": 57, "mean": -0.2783782043132106, "rms": 0.3109841071539169, "tolerance": 0.3, "within": false},
+    "martins2005_glc_gly_multiresponse_timecourses | FA": {"n": 54, "mean": 0.1470047028386178, "rms": 0.25458963521730293, "tolerance": 0.3, "within": true},
+    "martins2005b_fig4_ph_drift_ladder | pH": {"n": 52, "mean": 0.28522260999106436, "rms": 0.4028473617602965, "tolerance": 0.3, "within": false}
    }
   }
  },

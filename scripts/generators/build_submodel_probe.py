@@ -340,7 +340,7 @@ def main(argv=None) -> int:
         "rows": records,
         "wall_seconds": round(time.time() - start, 1),
     }
-    out_json.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+    out_json.write_text(provenance.dumps_compact(report) + "\n", encoding="utf-8")
     out_md.write_text(markdown(report), encoding="utf-8")
     print(f"{len(scored)} rows scored on {len(results)} pots ({len(report['skipped'])} skipped) in {report['wall_seconds']} s "
           f"-> {data_paths.rel(out_md)}")

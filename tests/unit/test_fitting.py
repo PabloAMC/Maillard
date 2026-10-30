@@ -348,3 +348,68 @@ def test_evaluate_many_is_used_for_batches_and_must_match_the_single_evaluation(
     values = fitting._evaluate_all(problem, [np.array([0.5, 0.0]), np.array([1.0, 1.0])], None)
     assert calls == [2] and np.allclose(values[0], [-0.5, 2.0]) and values[1][0] == problem.failed_residual
     assert fitting._step("ph_slope") == 0.05 and fitting._threshold("log10_offset") == 0.5
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The acceptance protocol's measurement pieces (2026-10-30, STRATEGY sec. 9): the between-paper error of an absolute
+# method class, the log predictive density and the interval coverage
+# ---------------------------------------------------------------------------------------------------------------------
+
+def _abs_rows(n_papers=40, per=5, sigma=0.05):
+    return [{"series": f"p{g}|pot{i}", "paper": f"p{g}", "sigma": sigma, "method": "sida"}
+            for g in range(n_papers) for i in range(per)]
+
+
+def _between_model(tau=0.0):
+    return fitting.MeasurementModel(series_of=lambda row: row["series"], sigma_of=lambda row: row["sigma"],
+                                    method_of=lambda row: row["method"], level_of=lambda row: row["paper"],
+                                    between_tau={"sida": tau} if tau else {})
+
+
+def test_the_between_paper_error_is_recovered_from_paper_offsets():
+    rng = np.random.default_rng(7)
+    rows = _abs_rows()
+    offsets = {f"p{g}": rng.normal(0.0, 0.4) for g in range(40)}
+    r = np.array([offsets[row["paper"]] + rng.normal(0.0, row["sigma"]) for row in rows])
+    tau = fitting.estimate_between_tau(_between_model(), r, rows)["sida"]
+    assert tau == pytest.approx(0.4, rel=0.25)
+
+
+def test_no_between_term_leaves_absolute_rows_exactly_as_before():
+    rows = _abs_rows(n_papers=3)
+    r = np.random.default_rng(1).normal(size=len(rows)) * 0.1
+    plain = fitting.MeasurementModel(series_of=lambda row: row["series"], sigma_of=lambda row: row["sigma"],
+                                     method_of=lambda row: row["method"])
+    assert np.allclose(plain.whiten(r, rows), _between_model().whiten(r, rows))
+
+
+def test_log_density_is_the_exact_gaussian_with_a_shared_paper_offset():
+    from scipy.stats import multivariate_normal
+
+    rows = _abs_rows(n_papers=1, per=4)
+    r = np.random.default_rng(3).normal(size=4) * 0.2
+    tau = 0.3
+    cov = np.diag([row["sigma"] ** 2 for row in rows]) + tau ** 2 * np.ones((4, 4))
+    assert _between_model(tau).log_density(r, rows) == pytest.approx(
+        float(multivariate_normal(np.zeros(4), cov).logpdf(r)), rel=1e-9)
+
+
+def test_ninety_percent_intervals_cover_about_ninety_percent():
+    rng = np.random.default_rng(11)
+    rows = _abs_rows(n_papers=200, per=3)
+    offsets = {f"p{g}": rng.normal(0.0, 0.3) for g in range(200)}
+    r = np.array([offsets[row["paper"]] + rng.normal(0.0, row["sigma"]) for row in rows])
+    inside, scored = _between_model(0.3).coverage(r, rows, level=0.90)
+    assert scored == len(rows) and 0.86 <= inside / scored <= 0.94
+
+
+def test_compact_json_round_trips_and_writes_a_row_per_line():
+    import json
+
+    from src.provenance import dumps_compact
+
+    payload = {"rows": [{"pot": f"p{i}", "measured": 1.5, "predicted": None, "flags": [1, 2]} for i in range(50)],
+               "meta": {"n": 50}}
+    text = dumps_compact(payload)
+    assert json.loads(text) == payload
+    assert len(text.splitlines()) <= 50 + 6

@@ -359,4 +359,49 @@ slow in a ribose + cysteine pot at 100 C (norfuraneol is the only MFT parent the
 route split and the intact-C5 DDP route, frozen at 10^-6.5, are the candidates). This is a new structural lead for
 round 3; it does not change round 2's order (R2b, then R2a + R2b).
 
+## 9. Round 2 read, and the round-3 design: MFT through the intact C5 skeleton (2026-10-30, before any round-3 fit)
+
+**Round 2.** R2b (`k_cys_actz` free on Zhou 2023 pH 7): x10^-3.06 +- 0.39, nothing else moved (every round-1
+constant within 0.03 dex) -- accepted as a record; its pH 6 / 8 test fails (about +0.6 / -1.5 dex: the step's pH
+dependence is too weak). R2a + R2b: the MGO + cysteine Strecker rate goes to its lower bound (10^-6): the data reject
+the step, as the review's ceiling argument (sec. 7, item 5) predicted. Reduced chi-square 5.48 / 5.33. Owner,
+2026-10-30: "take the wisest decision to make the model sound and as accurate as possible (mechanism wise)".
+
+**Why round 3 is this.** The lane makes 100 % of its MFT from free norfuraneol + H2S (`r_nf_mft`); the intact-C5 route
+(1-deoxypentosone + cysteine -> 1,4-dideoxypentosone, DDP -> + H2S -> MFT) is frozen at k_ddp_mft 2.9e-7, ~7500x
+below k_nf_mft, because B60 fitted it there and every round since held it fixed (sec. 4). The labelling evidence says
+the opposite. Cerny & Davidek 2003 (ribose + cysteine, 0.5 M K phosphate, pH 5.00, 95 C, 4 h): MFT keeps the intact
+ribose skeleton (95 % unlabelled + 13C5, the 1-4 label channels at the isotopic-impurity level), and in pot D, where
+unlabelled norfuraneol and [13C5]ribose compete at equal charge for the same cysteine, only 7 % of the MFT is
+unlabelled: free norfuraneol supplies ~7 %, the ribose ~93 % by another route ("only to a small extent from
+4-hydroxy-5-methyl-3(2H)-furanone"). Cerny 2004 adds that the C2 + C3 route (hydroxyacetaldehyde + mercapto-
+propanone) "was not relevant" at 95 C. A route through accumulating norfuraneol must start slowly, which is the
+shape of the round-1 miss in Schieberle 2000 (-2.4 dex at 30 min, -0.7 at 12 h; sec. 8). The hold-out
+declaration already names Cerny 2003's ceiling a HOLD-OUT to be "evaluated at Cerny's conditions".
+
+**Arm R3.** On the engine state round 2 and arm E leave (E's entry coordinates if E passes its done-tests, else
+R2b's state): one new coordinate, a log10 multiplier on BOTH DDP -> MFT branches (`k_ddp_mft`, `k_ddp_mft_hs`;
+-2 to +7, start +3), with `k_dpo_ddp` (already a coordinate, on its 10^-8 bound while DDP was a dead end) free to
+come back. Rows unchanged.
+
+**Hold-out (scored once, after the fit): Cerny 2003 pot D.** Norfuraneol 72.5 umol + ribose 72.5 umol + cysteine
+48.3 umol in a ~0.5 g charge (nominal 145 / 145 / 97 mmol/L: "dissolved to a total amount of 500 mg"), 0.5 M K
+phosphate pH 5.00, 95 C, 4 h. Observation operator: the share of MFT formed through `r_nf_mft` (integrated flux) --
+an upper bound on the unlabelled share, since in-situ norfuraneol from the labelled ribose also feeds that step
+(reported alongside: the fed share of the norfuraneol pool). Pass: <= 0.15 (the measured 0.07 plus the nominal-
+concentration and approximation slack). Also reported: the C2 + C3 route's share of MFT (`r_ha_mp_mft`) in Cerny's
+ribose + cysteine pot (Cerny 2004: "not relevant"), and Schieberle's MFT at 30 / 60 min (the lag).
+
+**Done-tests:** sec. 4's, plus the hold-out above; leave-one-paper-out on R3's optimum before any acceptance.
+**Expected (written now):** the DDP multiplier moves up by >= 10^3 (P 0.6); `k_dpo_ddp` comes off its bound (P 0.55);
+Cerny pot D's norfuraneol share <= 0.15 (P 0.45); Schieberle MFT within x3 at every time (P 0.3); `k_nf_mft` falls
+(P 0.6). If the fit keeps the DDP route near zero, the evidence and the fit rows disagree about MFT's mechanism, and
+the next step is the rows that pin `k_nf_mft` (Hofmann T4 / T10, fed norfuraneol at 145 C), not a new coordinate.
+
+**Dry check (no fit, R2b's optimum):** the hold-out scorer reports pot D's norfuraneol share 1.000 at the R2b
+optimum, and still 1.000 with the DDP multiplier at +3 -- because `k_dpo_ddp` sits at 10^-8 there and no DDP forms. With
+`k_dpo_ddp` at its shipped value: share 0.98 / 0.35 at DDP x10^3 / x10^5; with `k_dpo_ddp` at 10^-1: 0.65 at x10^5.
+The two steps only matter together (a flat start would strand the optimiser), so R3 starts at `k_dpo_ddp` 10^-1
+(sec. 4's start) and the DDP multiplier at +4.5.
+
 ## Amendments

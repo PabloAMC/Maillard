@@ -363,6 +363,32 @@ class MeasurementModel:
     #: data by ``estimate_series_noise`` (2026-10-29: rows with no printed error, or a vector-read error far below the
     #: series' real scatter, must not be given an invented floor)
     extra_noise: Mapping[str, float] = field(default_factory=dict)
+    #: 2026-10-30 (acceptance protocol, STRATEGY sec. 9): the BETWEEN-PAPER error of an absolute method class. Rows of
+    #: an absolute class (scale_tau 0) share a level offset per ``level_of`` group (a paper x species), N(0, tau^2)
+    #: with one tau per method class pooled across laboratories, integrated out like a calibration scale. Empty (the
+    #: default): absolute rows carry no level term, exactly as before. ``level_of`` defaults to ``series_of``.
+    level_of: Optional[Callable[[Any], str]] = None
+    between_tau: Mapping[str, float] = field(default_factory=dict)
+
+    def tau(self, method: str) -> float:
+        """The level offset's prior width for a method class: its calibration scale, else its between-paper error."""
+        t = float(self.scale_tau[method])
+        return t if t > 0.0 else float(self.between_tau.get(method, 0.0))
+
+    def level_key(self, row: Any) -> str:
+        return (self.level_of or self.series_of)(row)
+
+    def _levels(self, rows: Sequence[Any]) -> Dict[str, List[int]]:
+        out: Dict[str, List[int]] = {}
+        for i, row in enumerate(rows):
+            out.setdefault(self.level_key(row), []).append(i)
+        for name, idx in out.items():
+            methods = {self.method_of(rows[i]) for i in idx}
+            if len(methods) != 1:
+                raise ValueError(f"level group {name!r} mixes method classes {sorted(methods)}")
+            if next(iter(methods)) not in self.scale_tau:
+                raise KeyError(f"level group {name!r}: unknown method class {next(iter(methods))!r}")
+        return out
 
     def sigma(self, row: Any) -> float:
         """The row's error with its series' extra noise added in quadrature."""
@@ -387,8 +413,9 @@ class MeasurementModel:
         r = np.asarray(log_residuals, dtype=float)
         sigma = np.array([self.sigma(row) for row in rows])
         z = r / sigma
-        for idx in self._series(rows).values():
-            tau = float(self.scale_tau[self.method_of(rows[idx[0]])])
+        self._series(rows)   # validates the noise series
+        for idx in self._levels(rows).values():
+            tau = self.tau(self.method_of(rows[idx[0]]))
             if tau == 0.0:
                 continue
             w = 1.0 / sigma[idx]
@@ -405,8 +432,8 @@ class MeasurementModel:
         r = np.asarray(log_residuals, dtype=float)
         sigma = np.array([self.sigma(row) for row in rows])
         out: Dict[str, float] = {}
-        for name, idx in self._series(rows).items():
-            tau = float(self.scale_tau[self.method_of(rows[idx[0]])])
+        for name, idx in self._levels(rows).items():
+            tau = self.tau(self.method_of(rows[idx[0]]))
             ok = [i for i in idx if np.isfinite(r[i])]
             if tau == 0.0 or not ok:
                 out[name] = 0.0
@@ -417,8 +444,78 @@ class MeasurementModel:
 
     def nuisance_dof(self, rows: Sequence[Any]) -> int:
         """One degree of freedom per scale-free series present in ``rows``."""
-        return sum(1 for idx in self._series(rows).values()
-                   if math.isinf(float(self.scale_tau[self.method_of(rows[idx[0]])])))
+        return sum(1 for idx in self._levels(rows).values() if math.isinf(self.tau(self.method_of(rows[idx[0]]))))
+
+    def log_density(self, log_residuals: np.ndarray, rows: Sequence[Any]) -> float:
+        """The rows' log predictive density under this model (natural log): per level group a Gaussian with covariance
+        D + tau^2 11^T. A scale-free group (tau inf) counts its shape only: one dimension fewer, and its log-determinant
+        taken on the projected space (an improper level prior's constant dropped -- equal across arms on the same rows,
+        so paired differences are exact)."""
+        r = np.asarray(log_residuals, dtype=float)
+        z = self.whiten(r, rows)
+        sigma = np.array([self.sigma(row) for row in rows])
+        total = 0.0
+        for idx in self._levels(rows).values():
+            tau = self.tau(self.method_of(rows[idx[0]]))
+            w2 = float(np.sum(1.0 / sigma[idx] ** 2))
+            logdet = float(np.sum(2.0 * np.log(sigma[idx])))
+            n_eff = len(idx)
+            if math.isinf(tau):
+                logdet += math.log(w2)
+                n_eff -= 1
+            elif tau > 0.0:
+                logdet += math.log(1.0 + tau * tau * w2)
+            total += -0.5 * (float(z[idx] @ z[idx]) + logdet + n_eff * math.log(2.0 * math.pi))
+        return total
+
+    def coverage(self, log_residuals: np.ndarray, rows: Sequence[Any], level: float = 0.90) -> Tuple[int, int]:
+        """How many rows fall inside their central ``level`` predictive interval, of how many scored: marginal variance
+        sigma_i^2 + tau^2 for a finite level term; a scale-free group's rows centred on its weighted mean (variance
+        sigma_i^2 (1 - w_i^2 / sum w^2)); single-row scale-free groups carry no information and are not scored."""
+        from scipy.stats import norm
+
+        q = float(norm.ppf(0.5 + level / 2.0))
+        r = np.asarray(log_residuals, dtype=float)
+        sigma = np.array([self.sigma(row) for row in rows])
+        inside = scored = 0
+        for idx in self._levels(rows).values():
+            tau = self.tau(self.method_of(rows[idx[0]]))
+            s = sigma[idx]
+            if math.isinf(tau):
+                if len(idx) < 2:
+                    continue
+                w = 1.0 / s ** 2
+                centred = r[idx] - float(np.sum(w * r[idx]) / np.sum(w))
+                var = s ** 2 * (1.0 - w / np.sum(w))
+            else:
+                centred, var = r[idx], s ** 2 + tau * tau
+            ok = np.isfinite(centred)
+            inside += int(np.sum(np.abs(centred[ok]) <= q * np.sqrt(var[ok])))
+            scored += int(np.sum(ok))
+        return inside, scored
+
+
+def estimate_between_tau(model: "MeasurementModel", raw_residuals: np.ndarray, rows: Sequence[Any]
+                         ) -> Dict[str, float]:
+    """Each absolute method class's between-paper error, by moments over its level groups (a paper x species):
+        tau^2 = max(0, mean_g (m_g^2 - v_g)),   m_g = the group's precision-weighted mean residual, v_g = 1 / sum w
+    pooled across laboratories (D4: no laboratory terms). A class with fewer than two groups gets none. It absorbs
+    whatever is shared within a paper's series -- calibration, unstated conditions, the model's own structural error
+    for that system -- which is what a prediction for a new laboratory must carry."""
+    r = np.asarray(raw_residuals, dtype=float)
+    sigma = np.array([model.sigma(row) for row in rows])
+    per_class: Dict[str, List[float]] = {}
+    for idx in model._levels(rows).values():
+        method = model.method_of(rows[idx[0]])
+        if float(model.scale_tau[method]) > 0.0:
+            continue
+        ok = [i for i in idx if np.isfinite(r[i])]
+        if not ok:
+            continue
+        w = 1.0 / sigma[ok] ** 2
+        m = float(np.sum(w * r[ok]) / np.sum(w))
+        per_class.setdefault(method, []).append(m * m - 1.0 / float(np.sum(w)))
+    return {k: math.sqrt(max(0.0, float(np.mean(v)))) for k, v in per_class.items() if len(v) >= 2}
 
 
 def estimate_series_noise(model: "MeasurementModel", raw_residuals: np.ndarray, rows: Sequence[Any],
@@ -434,7 +531,7 @@ def estimate_series_noise(model: "MeasurementModel", raw_residuals: np.ndarray, 
     n_total = max(len(rows), 1)
     for name, idx in model._series(rows).items():
         n = len(idx)
-        tau = float(model.scale_tau[model.method_of(rows[idx[0]])])
+        tau = model.tau(model.method_of(rows[idx[0]]))
         if n < 3:
             continue
         ri = r[idx]
@@ -450,29 +547,38 @@ def estimate_series_noise(model: "MeasurementModel", raw_residuals: np.ndarray, 
 def fit_with_series_noise(make_problem: Callable[["MeasurementModel"], "Problem"], model: "MeasurementModel",
                           raw_residuals: Callable[[np.ndarray, Tuple[Any, ...]], np.ndarray], start: np.ndarray,
                           budget: int = 1200, rounds: int = 4, tol: float = 0.05,
-                          estimator: Optional[Callable[..., Dict[str, float]]] = None) -> Tuple["Fit", "MeasurementModel"]:
+                          estimator: Optional[Callable[..., Dict[str, float]]] = None,
+                          between: bool = False) -> Tuple["Fit", "MeasurementModel"]:
     """Fit, estimate each series' extra noise from the residuals, refit with it, until the noise estimates move by
     less than ``tol`` (relative) or ``rounds`` is reached. ``make_problem(model)`` builds the Problem whose residuals
     are ``model.whiten(raw_residuals(theta, rows), rows)``. Returns the last fit and the model carrying its noise."""
     theta = np.asarray(start, dtype=float)
     noise: Dict[str, float] = dict(model.extra_noise)
+    taus: Dict[str, float] = dict(model.between_tau)
+
+    def build(noise_, taus_):
+        return MeasurementModel(series_of=model.series_of, sigma_of=model.sigma_of, method_of=model.method_of,
+                                scale_tau=model.scale_tau, extra_noise=noise_, level_of=model.level_of,
+                                between_tau=taus_)
+
+    def rel(a, b):
+        return max((abs(a.get(k, 0.0) - b.get(k, 0.0)) / max(a.get(k, 0.0), b.get(k, 0.0), 1e-12)
+                    for k in set(a) | set(b)), default=0.0)
+
     f_ = None
     for _ in range(max(1, rounds)):
-        current = MeasurementModel(series_of=model.series_of, sigma_of=model.sigma_of, method_of=model.method_of,
-                                   scale_tau=model.scale_tau, extra_noise=noise)
+        current = build(noise, taus)
         problem = make_problem(current)
         f_ = fit(problem, theta, budget=budget)
         theta = f_.theta
-        new = (estimator or estimate_series_noise)(current, raw_residuals(theta, problem.rows), problem.rows,
-                                                   len(problem.keys))
-        moved = max((abs(new.get(k, 0.0) - noise.get(k, 0.0)) / max(new.get(k, 0.0), noise.get(k, 0.0), 1e-12)
-                     for k in set(new) | set(noise)), default=0.0)
-        noise = new
+        raw_now = raw_residuals(theta, problem.rows)
+        new = (estimator or estimate_series_noise)(current, raw_now, problem.rows, len(problem.keys))
+        new_taus = estimate_between_tau(build(new, taus), raw_now, problem.rows) if between else taus
+        moved = max(rel(new, noise), rel(new_taus, taus))
+        noise, taus = new, new_taus
         if moved < tol:
             break
-    final = MeasurementModel(series_of=model.series_of, sigma_of=model.sigma_of, method_of=model.method_of,
-                             scale_tau=model.scale_tau, extra_noise=noise)
-    return f_, final
+    return f_, build(noise, taus)
 
 
 def count_once(rows: Sequence[Any], dataset_of: Callable[[Any], str], copy_of: Mapping[str, str]

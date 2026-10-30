@@ -141,3 +141,26 @@ pH-dependent odorant step (thiols, thiazoles, pyrazines), and product formulatio
 supply is now the gating item for the thiol pH arm, so it goes to the literature (search running) while the cheap,
 independent thiol arms (R2b, then R2a + R2b) run on the corrected round 1. Duplicate supplements removed (verified
 identical but for the download-date watermark).
+
+## Checkpoint 8 -- 12:00 (owner: "take a step back and review where we are")
+
+**Against the north star** (leave-one-lab-out error, interval coverage, evidence grounding, blind tests): nothing
+has shipped and no lane has a passing leave-one-lab-out; coverage is a Phase 3 number; grounding improved (Desclaux's
+measured enolisations, Davidek's isotope-dilution acids, the frozen-factor tests); WUR still has no data. The gains
+of the last day are diagnostic and structural, not scored accuracy.
+
+**What moved:** the measurement model (scales per figure; residuals read after the scale) took the joint fit from
+chi2 21.8 to 5.4 and turned two "failures" into fits; round 1 is robust across three runs; MFT decay is x8 slower
+than shipped (CF-013 independently); 2-acetylthiazole's constant is fixed by its own data (x10^-3). Four structural
+gaps found, each by evidence, not by score: no pentose + amino-acid entry (built, switch off); a fitted acetic-acid
+sink that the isotope-dilution data rule out (CF-069); the pH of unbuffered near-neutral pots (no pentose acid
+route); and a missing EARLY MFT source (Schieberle's MFT is late, not low).
+
+**What worries me:** (1) the sub-model sequence has eroded into a growing joint fit (8 -> 15 coordinates), the
+pattern the strategy's diagnosis 3 warns about; the coupling is real (the 1-deoxypentosone pool feeds norfuraneol,
+MGO and acetic acid), so the guard is not to un-join it but to require leave-one-paper-out and profile checks before
+any acceptance. (2) Between-laboratory spread for absolute thiols is 10-100x (CF-014, CF-068): that bounds what
+"lab-independent" can mean for MFT / FFT, and the honest product may be the spread itself. (3) Sub-model 1 failed and
+the sequence went on (owner's call to run the joint fits); today's findings are exactly the foundation it was meant
+to give, so the pentose entry is the right next step. (4) The other odorant lanes (Strecker aldehydes, pyrazines,
+lipid aldehydes) have had no Phase 2 time.
