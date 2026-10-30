@@ -63,8 +63,9 @@ ARM_LOWER, ARM_UPPER, ARM_START = {"k_cys_actz": -6.0}, {"k_cys_actz": 1.0}, {"k
 MGO_STRECKER_BOUNDS, MGO_STRECKER_START = (-6.0, 0.0), -3.0
 ACTZ_TABLE = "thiol_zhou2023_actz"
 ACTZ_FIT_PH = 7.0
-#: CF-014: the Jiangnan laboratory's within-lab reproducibility of a nominally identical pot (x7.8)
-ACTZ_FLOOR_DEX = 0.9
+#: CF-014: 2-acetylthiazole in the same nominal pot, Zhou 2022 vs Zhou 2023, agrees to x1.4 (MFT's x7.8 is not
+#: its spread; round-2 design review B3)
+ACTZ_FLOOR_DEX = 0.15
 #: declared hold-outs (FIT_HOLDOUT_DECLARATION.md) and score-only rows (design review B3, S3)
 HOLDOUT_LEDGER_PREFIXES = ("yiltirak2026", "hofmann1998_t1_", )
 HOLDOUT_POTS = ("hofmann1998_cys_ribose_ph3", "hofmann1998_cys_ribose_ph7")
@@ -139,6 +140,20 @@ def method_of(row) -> str:
     if row.method in ("semi_quantitative", "relative"):
         return "semi_figure" if row.table == "deoxyosone_submodel" else "zhou_free"
     return row.method
+
+
+def series_of(row) -> str:
+    """A scaled row's calibration series (thiol prereg sec. 5, B6: one scale PER FIGURE): paper x figure x species;
+    Zhou's thiols and MGO one per paper x species (CF-014, CF-060). Round 1 keyed it by ledger id, which splits a
+    figure's arms (Zhai JAFC Fig. 3: TTCA vs TTCA + Cys) and Zhou 2023's pH 7 column from its pH 6 / 8 columns
+    (round-2 design review B2). Absolute rows keep their own series."""
+    method = method_of(row)
+    if method not in ("semi_figure", "zhou_free"):
+        return row.series
+    paper = sm3.paper_of(row)
+    if method == "zhou_free" and row.ledger_id.startswith("zhou"):
+        return f"{paper}|{row.species}"
+    return f"{paper}|{row.ledger_id.split('_')[1]}|{row.species}"
 
 
 def noise_with_floor(model, raw_residuals, rows, n_constants=0):
@@ -277,7 +292,7 @@ def main(argv=None) -> int:
         return raw_many([theta], rows)[0]
 
     model = fitting.MeasurementModel(
-        series_of=lambda r: f"{r.ledger_id}|{r.species}" if method_of(r) in ("semi_figure", "zhou_free") else r.series,
+        series_of=series_of,
         sigma_of=lambda r: r.sigma, method_of=method_of, scale_tau=sm3.SCALE_TAU)
 
     def make_problem(m, rows=data):

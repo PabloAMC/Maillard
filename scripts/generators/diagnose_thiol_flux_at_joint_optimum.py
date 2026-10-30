@@ -43,7 +43,7 @@ POTS = (
     ("thiol_submodel", "schieberle2000_rib_cys_ph5_100C", "absolute, under-predicted (MFT -0.85, FFT -2.0)"),
     ("thiol_submodel", "yiltirak2026_rib_cys_ph55_buffer_100C", "absolute hold-out, over-predicted (MFT +2.35, FFT +1.9)"),
     ("thiol_submodel", "yiltirak2026_rib_cys_ph55_buffer_130C", "the same, short hot end of the equal-cook series"),
-    ("thiol_submodel", "hofmann1998_cys_xylose_ph5", "absolute, Garching 145 C 20 min: the control that fits"),
+    ("thiol_submodel", "hofmann1998_cys_xylose_ph5", "absolute hold-out (Hofmann T1), Garching 145 C 20 min: off by MFT +0.72, FFT -0.68 at s042"),
     ("thiol_submodel", "hofmann1998_cys_ribose_ph3", "absolute hold-out, pH ladder low end"),
     ("thiol_submodel", "hofmann1998_cys_ribose_ph7", "absolute hold-out, pH ladder high end"),
     ("thiol_submodel", "zhai2023jafc_ttcacys_ph7_120C", "semi-quantitative, shape fits (sd 0.2)"),

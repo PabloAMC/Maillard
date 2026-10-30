@@ -123,3 +123,21 @@ in-sample improvement that would have damaged predictions at low pH, the regime 
 Arm A (the acetic-acid sink, 50 min in) finishes ~05:30; then sub-model 3's A2 and A3 (the k_dpo_ddp parent arm and
 the 3-deoxypentosone route), which matter more for MFT than A4 / A1. Adjustment: after A3, run the scientific tier
 and the gates (PR prerequisite) instead of A4 / A1, so the branch is reviewable when the owner wakes.
+
+## Checkpoint 7 -- 09:10 (owner awake: "you decide on the priorities, be thoughtful")
+
+**Results since 6.** The first joint deoxyosone + thiol fit (s042) closes the dicarbonyls. Its report printed raw
+residuals before each semi-quantitative scale; read after the scale, the Jiangnan thiol figures fit in shape and the
+misses are absolute: Schieberle under, Yiltirak over (CF-068, x120 between laboratories), the Hofmann pH ladder
+inverted, 2-acetylthiazole x1000. Flux diagnosis: H2S only from (measured) cysteine thermolysis, the Strecker H2S
+gone. The round-2 design review then found that round 1 keyed scales by ledger instead of by figure (an
+implementation deviation from the reviewed design: all three round-1 runs repeated, queue running), that
+2-acetylthiazole is not a leaf, and -- the big one -- that the lane's final pH in Zhou 2023's unbuffered ARP pots is
+right at pH 6 and 1 / 2.2 units too high at pH 7 / 8. Probe: the lane makes the same ~3.5 mM net acid at every
+initial pH and has NO pentose route to formic or acetic acid; the real pots make more acid at higher pH.
+
+**Does the plan still serve the goal?** Re-ordered. The pH of near-neutral unbuffered pots is upstream of every
+pH-dependent odorant step (thiols, thiazoles, pyrazines), and product formulations run at pH 5.5 - 7: the pentose acid
+supply is now the gating item for the thiol pH arm, so it goes to the literature (search running) while the cheap,
+independent thiol arms (R2b, then R2a + R2b) run on the corrected round 1. Duplicate supplements removed (verified
+identical but for the download-date watermark).

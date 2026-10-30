@@ -271,4 +271,54 @@ any of them runs):**
 outside x3 in more than one laboratory, the thiol layer ships as a declared limitation with its between-lab spread as
 the error, and effort moves to the lanes not yet built from data (pyrazines, lipid aldehydes, Strecker aldehydes).
 
+## 7. Design review of round 2 (step 5) -- done 2026-10-30, before any round-2 fit; sec. 6 is superseded where noted
+
+An independent reviewer (read-only; it re-derived the sec. 6 numbers from the s042 JSON -- all confirmed -- and ran
+the Zhou 2023 pH-series pots at the s042 optimum) found 3 BLOCKING, 3 SHOULD-FIX, 1 NOTE.
+
+**BLOCKING, and the response:**
+1. **R2c would fit on the wrong pH.** On the cooled scale the lane's final pH in Zhou 2023's pots is right at
+   initial pH 6 and wrong above it: ARP + Cys 3.22 / 4.38 / 7.24 (lane) vs 3.23 / 3.43 / 5.05 (measured) at pH
+   6 / 7 / 8; ARP alone 3.19 / 4.55 / 7.10 vs 3.98 / 4.10 / 4.96. The lane's furfural falls 2.66 dex from pH 6 to
+   8 where the measurement falls 0.43, so a slope fitted on these rows would come out POSITIVE for the wrong reason,
+   and the disulfide residual swings by 3.7 dex through thiolate dimerisation at the wrong pH. -> R2c is DEFERRED
+   until the in-situ pH of unbuffered near-neutral ARP / cysteine pots is right (sub-model 1's acid supply), and the
+   disulfide rows are out of it (they also sit near their calibration's zero point; table adjudication note 2).
+2. **The scale key threw the contrasts away.** Round 1 keyed each semi-quantitative scale by ledger id, not by
+   figure as sec. 5 (B6) declared: Zhai JAFC Fig. 3's TTCA and TTCA + Cys arms got separate scales (fitted offsets
+   MFT +1.44 vs +2.67 -- a 1.2 dex error in the cysteine-addition contrast, hidden), single-row series carried
+   nothing, and Zhou 2023's pH 7 column would have been scaled apart from pH 6 / 8. -> Fixed: paper x figure x
+   species (Zhou's thiols and MGO: paper x species). All three round-1 runs are repeated with it (an implementation
+   deviation from sec. 5 corrected, not a new choice); the first s042 report stays as the superseded record.
+3. **R2b is not a leaf.** `r_cys_actz` takes 12 - 24 % of the methylglyoxal consumed (Zhou 2023 15.6 %, Zhou 2022
+   14.8 %, Zhai TTCA + Cys 12.3 %, Hofmann pH 7 24.2 %) and shares R2a's MGO x Cys rate law. CF-014's x7.8 is MFT's
+   reproducibility; 2-acetylthiazole itself reproduces to x1.4 between the two Zhou papers. -> floor 0.15 dex;
+   R2b runs ALONE first, then R2a + R2b, and the report gives their correlation. "pH 7 within x3, P 0.9" is
+   withdrawn as a test (one constant on one row); the test is pH 6 / 8, and it reads the pH model as much as the step.
+
+**SHOULD-FIX, adopted:**
+4. Sec. 6 flux claim 3 is wrong for FFT: from pH 3 to 7 (Hofmann, 145 C) FFT formation rises x1600 = furfural
+   x2.2 x measured H2S x15 x ~50 from the HS- branch (its constant 43x the neutral one, tied to it by one multiplier
+   in round 1); the furfural pH direction comes from the cysteine-Amadori decay (de Roos's curve extended above pH 6,
+   CR-14), not `r_tdp_fur`. Every Garching ribose / xylose pot is under on FFT at acid pH while fed furfural + H2S
+   (T3) fits. -> the replacement for R2c, when the pH is right: the HS- / neutral FFT ratio free (two multipliers)
+   and the CR-14 alternatives, not one shared slope (Hofmann needs ~-0.34 dex / pH for MFT, ~-0.9 for FFT).
+5. R2a's ceiling: its extra H2S is at most share / (1 - share) x the MGO consumed -- in Schieberle x1.7 (s042) or
+   x2.4 (s080) the cysteine H2S, where MFT within x3 needs x2.3. -> expected "Schieberle MFT within x3" lowered to
+   P 0.2; success is read on the Strecker share of Schieberle's H2S budget with `k_mft_decay` within 1 sigma of its
+   round-1 value; `k_h2s_loss` is a flat direction (Laplace sigma inf), so "off its bound" is dropped as a test. The
+   capped round-1 run is read before R2a runs.
+6. The stop rule degenerates to "Garching fails" (the only absolute fit laboratory; Yiltirak is a hold-out in CF-068).
+   -> rows that count: absolute MFT / FFT, fit rows and declared hold-outs separately; US 10,076,126 (Nestle, SIDA,
+   110 C) scored at bracketing buffer strengths as a third laboratory; shape criteria as sec. 4.
+
+**NOTE:** the Hofmann pH ladder is no longer blind for a pH structure chosen after seeing it; Meynier & Mottram 1995
+(CF-012) is the candidate blind pH hold-out if it can be keyed. The MGO Strecker step's Ea (64.08) is the carbonyl
+family's, not a measured value for this step. The diagnosis mislabelled Hofmann xylose pH 5 (a hold-out, off by
+MFT +0.72 / FFT -0.68) as "the control that fits"; corrected. `ch_mft_decay` takes 92 - 99 % of MFT only at
+pH <= 5.5 (47 % at Hofmann pH 7, 71 % in the Zhai pot).
+
+**Order now:** (1) round 1 repeated with figure scales (s042, capped, s080); (2) R2b alone, then R2a + R2b, on the
+round-1 winner; (3) in parallel, the in-situ pH of unbuffered near-neutral pots (sub-model 1), which gates R2c.
+
 ## Amendments
