@@ -108,3 +108,18 @@ Arm C running for 1 h (12 constants: ~13 Jacobian points per iteration, all nine
 the time limit). No new result; the plan stands (arm C's frozen hold-out decides whether the formic-slope problem is
 the missing glucose-step slopes or the formic exit itself). Arm A and sub-model 3 follow; ETA for sub-model 3's
 first two arms slips to ~08:00.
+
+## Checkpoint 6 -- 05:05
+
+**Results since 4.** Arm C (the glucose-consuming steps sloped): in-sample it did what Amendment 2 predicted
+(Amadori slopes inside Martins' band, the pH trend gone, Davidek within tolerance, leave-one-out better) -- by putting
+the condensation slope on its bound (3x Martins' 0.50). The frozen hold-out rejected it: the low-pH drifting runs lose
+10-200x of their acid. Arm B transfers acetic acid to all five hold-out runs. Sub-model 1's done-test fails for both;
+nothing ships; the results and the next round's requirements (acid amounts across pH as fit data, a fresh hold-out,
+the formic exit to the literature) are in its prereg.
+
+**Does the plan still serve the goal?** Yes, with one adjustment. The hold-out did exactly its job -- it stopped an
+in-sample improvement that would have damaged predictions at low pH, the regime of acidic meat-flavour processing.
+Arm A (the acetic-acid sink, 50 min in) finishes ~05:30; then sub-model 3's A2 and A3 (the k_dpo_ddp parent arm and
+the 3-deoxypentosone route), which matter more for MFT than A4 / A1. Adjustment: after A3, run the scientific tier
+and the gates (PR prerequisite) instead of A4 / A1, so the branch is reviewable when the owner wakes.
