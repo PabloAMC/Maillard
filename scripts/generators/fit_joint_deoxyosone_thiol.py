@@ -61,14 +61,26 @@ ARMS = {"none": frozenset(), "R2a": frozenset({"mgo_strecker"}), "R2b": frozense
         # the pentose + amine entry (kinetic_core_pentose_amine_entry_prereg.md secs. 7-8) on top of R2b
         "E": frozenset({"actz", "entry"}),
         # round 3 (thiol prereg sec. 9): MFT through the intact C5 skeleton, on R2b's state or on arm E's
-        "R3": frozenset({"actz", "ddp"}), "R3E": frozenset({"actz", "entry", "ddp"})}
-#: round 3: one multiplier on both DDP -> MFT branches
-DDP_COORDINATE = ("offset_ddp_mft", ("k_ddp_mft", "k_ddp_mft_hs"), -2.0, 7.0, 4.5)
+        "R3": frozenset({"actz", "ddp"}), "R3E": frozenset({"actz", "entry", "ddp"}),
+        # round 3 after its review (sec. 10): the DDP-forming step's pH law as the rival structures
+        "R3n": frozenset({"actz", "ddp", "ddp_law_none"}), "R3s": frozenset({"actz", "ddp", "ddp_law_slope"}),
+        "R3En": frozenset({"actz", "entry", "ddp", "ddp_law_none"}),
+        "R3Es": frozenset({"actz", "entry", "ddp", "ddp_law_slope"})}
+#: round 3 (review B2): the DDP route's PRODUCT (log10 multiplier of k_dpo_ddp x both DDP -> MFT branches) is the
+#: coordinate; the DDP -> MFT multiplier is the product less k_dpo_ddp's own offset
+DDP_COORDINATE = ("offset_ddp_route", ("k_ddp_mft", "k_ddp_mft_hs"), -4.0, 8.0, 5.5)
+DDP_SLOPE_COORDINATE = ("ddp_ph_slope", "ph_slope", -1.0, 2.0, 0.0)
 #: Cerny & Davidek 2003 (hold-out, sec. 9): pot D norfuraneol 72.5 + [13C5]ribose 72.5 + cysteine 48.3 umol in a
 #: ~0.5 g charge (nominal mmol/L), pot C ribose 145 + cysteine 48.3 umol; 0.5 M K phosphate, pH 5.00, 95 C, 4 h
 CERNY_POTS = {"cerny2003_potD_nf_ribose_cys": {"NF": 145.0, "PENT": 145.0, "Cys": 96.6},
               "cerny2003_potC_ribose_cys": {"PENT": 290.0, "Cys": 96.6}}
-CERNY_NF_SHARE_PASS = 0.15
+#: review of round 3 (sec. 10, item 3): the exact tracer share is scored two-sided; a share of 0 is no pass either
+CERNY_NF_SHARE_BAND = (0.03, 0.15)
+#: pot C's 2-mercapto-3-pentanone, a blind companion: Cerny 2003 finds none from ribose; in the lane it comes only
+#: from norfuraneol (r_nf_mp3p). Declared: MP3P / MFT made in pot C <= 0.1 ("not detected" beside a detected MFT)
+CERNY_MP3P_RATIO_MAX = 0.1
+#: a pH law set by the arm rather than fitted (R3n): read by trial() in the main process, carried in every job
+DDP_LAW_STATIC: Dict[str, Any] = {}
 ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",), "ddp_mft": ("k_ddp_mft", "k_ddp_mft_hs")}
 ARM_LOWER, ARM_UPPER, ARM_START = ({"k_cys_actz": -6.0, "k_aa_frag": -6.0}, {"k_cys_actz": 1.0, "k_aa_frag": 0.5},
                                    {"k_cys_actz": -3.0, "k_aa_frag": -1.5})
@@ -126,6 +138,9 @@ def coordinates(mft_decay_cap: bool, arms=frozenset()):
     if "ddp" in arms:
         key, _, lo, hi, st = DDP_COORDINATE
         keys.append(key); kinds.append("log10_offset"); lower.append(lo); upper.append(hi); start.append(st)
+    if "ddp_law_slope" in arms:
+        key, kind, lo, hi, st = DDP_SLOPE_COORDINATE
+        keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
     if "mgo_strecker" in arms:
         keys.append("log10_k_mgo_cys_strecker"); kinds.append("log10_offset")
         lower.append(MGO_STRECKER_BOUNDS[0]); upper.append(MGO_STRECKER_BOUNDS[1]); start.append(MGO_STRECKER_START)
@@ -136,12 +151,20 @@ def trial(theta, keys) -> Dict[str, Any]:
     t = dict(zip(keys, map(float, theta)))
     base = engine.core_parameters(engine.SULFUR)
     multiplied = {**MULTIPLIED, **ARM_MULTIPLIED}
-    k_ref = {key: base[key].k_ref * 10.0 ** v for coord, v in t.items() if coord.startswith("offset_")
+    k_ref = {key: base[key].k_ref * 10.0 ** v for coord, v in t.items()
+             if coord.startswith("offset_") and coord != DDP_COORDINATE[0]
              for key in multiplied[coord[len("offset_"):]]}
+    if DDP_COORDINATE[0] in t:   # the route product less the forming step's own offset
+        for key in DDP_COORDINATE[1]:
+            k_ref[key] = base[key].k_ref * 10.0 ** (t[DDP_COORDINATE[0]] - t["offset_k_dpo_ddp"])
     routes = {"k_tdp_mgo_100c_ph5": 0.0, "ea_tdp_mgo_kj_mol": 100.0, "k_pent_mgo_100c_ph5": 0.0, "ea_pent_mgo_kj_mol": 100.0}
     out = {"k_ref": k_ref, "routes": routes, "mgo_share": t["mgo_share_nf"]}
     if "log10_k_mgo_cys_strecker" in t:
         out["mgo_strecker_k"] = 10.0 ** t["log10_k_mgo_cys_strecker"]
+    if "ddp_ph_slope" in t:
+        out["ddp_law"] = {"law": "slope", "slope": t["ddp_ph_slope"]}
+    elif DDP_LAW_STATIC:
+        out["ddp_law"] = dict(DDP_LAW_STATIC)
     if "log10_k_pent_amine" in t:
         out["entry"] = {"k_entry_l_per_mmol_min_100c_ph6": 10.0 ** t["log10_k_pent_amine"],
                         "entry_ph_slope": t["entry_ph_slope"], "k_dpo_aa_per_min_100c_ph6": 10.0 ** t["log10_k_dpo_aa"],
@@ -272,16 +295,49 @@ def cerny_route_checks(theta, keys) -> Dict[str, Any]:
                    times=sorted({0.0, *np.geomspace(1e-5, 240.0, 300).tolist(), *np.linspace(0.0, 240.0, 121).tolist()}))
         install(job)
         run = probe.integrate_pot(job)
-        made = _ranked(sulfur.reaction_flux_integrals(run), "MFT")["made"]
+        flux = sulfur.reaction_flux_integrals(run)
+        made = _ranked(flux, "MFT")["made"]
         share = {t["reaction"]: t["share"] for t in made["top"]}
-        nf = run.series("NF")
+        tracer = fed_norfuraneol_tracer(run) if charge.get("NF") else None
         out[pot] = {"mft_made_mmol_L": made["total_mmol_L"], "share_by_step": share,
-                    "nf_route_share": share.get("r_nf_mft", 0.0),
+                    "nf_route_flux_share": share.get("r_nf_mft", 0.0),
                     "c2_c3_route_share": share.get("r_ha_mp_mft", 0.0),
-                    "nf_pool_fed_share_at_end": (float(nf[-1]) / float(nf[0])) if nf[0] > 0 else None}
-    d = out["cerny2003_potD_nf_ribose_cys"]["nf_route_share"]
-    out["verdict"] = f"pot D norfuraneol share {d:.3f} vs measured 0.07: " + ("PASS" if d <= CERNY_NF_SHARE_PASS else "FAIL")
+                    "mp3p_over_mft": (_ranked(flux, "MP3P")["made"]["total_mmol_L"] / made["total_mmol_L"]
+                                      if made["total_mmol_L"] > 0 else None),
+                    **(tracer or {})}
+    d, c = out["cerny2003_potD_nf_ribose_cys"], out["cerny2003_potC_ribose_cys"]
+    lo, hi = CERNY_NF_SHARE_BAND
+    out["verdict"] = (f"pot D unlabelled (fed-norfuraneol) MFT share {d['fed_nf_mft_share']:.3f} vs measured 0.07: "
+                      + ("PASS" if lo <= d["fed_nf_mft_share"] <= hi else "FAIL")
+                      + f"; pot C MP3P / MFT {c['mp3p_over_mft']:.3g} (blind; <= {CERNY_MP3P_RATIO_MAX}): "
+                      + ("PASS" if (c["mp3p_over_mft"] or 0.0) <= CERNY_MP3P_RATIO_MAX else "FAIL"))
     return out
+
+
+def fed_norfuraneol_tracer(run) -> Dict[str, float]:
+    """The exact unlabelled share of Cerny's pot D (review of round 3, item 3): the fed norfuraneol is a tracer pool
+    lost at the pool's per-molecule rate and never replenished, so its fraction f(t) of the norfuraneol pool obeys
+    d ln f / dt = -(production of NF) / NF; MFT from fed norfuraneol is the integral of r_nf_mft x f, over all MFT
+    formation."""
+    import numpy as np
+
+    node_times, k_nodes = run.rate_nodes
+    times = np.asarray(run.times_min, dtype=float)
+    keys = [r.key for r in sulfur.FULL_REACTIONS]
+    nu_nf = np.array([r.products.get("NF", 0) - r.reactants.get("NF", 0) for r in sulfur.FULL_REACTIONS], float)
+    nu_mft = np.array([r.products.get("MFT", 0) for r in sulfur.FULL_REACTIONS], float)
+    i_nf_mft = keys.index("r_nf_mft")
+    nf = run.series("NF")
+    rates = np.array([sulfur.sulfur_reaction_rates(run.concentrations[i], sulfur.rate_vector_at(node_times, k_nodes, t))
+                      for i, t in enumerate(times)])
+    production = rates @ np.where(nu_nf > 0, nu_nf, 0.0)
+    g = np.where(nf > 0, production / np.maximum(nf, 1e-300), 0.0)
+    log_f = np.concatenate([[0.0], np.cumsum(0.5 * (g[1:] + g[:-1]) * np.diff(times))])
+    f = np.exp(-log_f)
+    from_fed = float(np.trapezoid(rates[:, i_nf_mft] * f, times))
+    total = float(np.trapezoid(rates @ nu_mft, times))
+    return {"fed_nf_mft_share": from_fed / total if total > 0 else float("nan"),
+            "fed_fraction_of_nf_pool_at_end": float(f[-1])}
 
 
 def install(job) -> None:
@@ -294,6 +350,7 @@ def install(job) -> None:
     _ps.MGO_CYSTEINE_STRECKER = _dc.replace(_ps.MGO_CYSTEINE_STRECKER,
                                             k_l_per_mmol_min_100c_ph5=float(job.get("mgo_strecker_k", 0.0)))
     _ps.PENTOSE_AMINE_ENTRY = _ps.PentoseAmineEntry(**job.get("entry", {}))
+    _ps.DDP_FORMATION_PH = _ps.DdpFormationPh(**job.get("ddp_law", {"law": "base"}))
     _ph.TRUNK_SOLUTES_IN_BALANCE = bool(job.get("trunk_solutes", False))
 
 
@@ -360,6 +417,8 @@ def main(argv=None) -> int:
                                        + ("_capped" if args.mft_decay_cap else "")
                                        + ("" if args.arm == "none" else f"_{args.arm.lower()}"))
     arms = ARMS[args.arm]
+    global DDP_LAW_STATIC
+    DDP_LAW_STATIC = {"law": "none"} if "ddp_law_none" in arms else {}
     t0 = time.time()
     sulfur.PH_COUPLING = "inline"
     predictable = set(sulfur.SULFUR_STATE_KEYS)
@@ -504,10 +563,11 @@ def main(argv=None) -> int:
         lines += [f"- {k}: {v}" for k, v in report["entry_checks"].items()]
     cr = report.get("cerny_route_checks") or {}
     if cr:
-        lines += ["", "## Hold-out: Cerny 2003 MFT routes (95 C, pH 5; measured norfuraneol share 0.07)", "",
+        lines += ["", "## Hold-out: Cerny 2003 MFT routes (95 C, pH 5; measured unlabelled MFT 0.07)", "",
                   f"- {cr.get('verdict')}"]
-        lines += [f"- {k}: norfuraneol route {v['nf_route_share']:.3f}, C2 + C3 route {v['c2_c3_route_share']:.3f}, "
-                  f"MFT made {v['mft_made_mmol_L']:.3g} mmol/L, steps {v['share_by_step']}"
+        lines += [f"- {k}: norfuraneol-route flux share {v['nf_route_flux_share']:.3f}, C2 + C3 route "
+                  f"{v['c2_c3_route_share']:.3f}, MFT made {v['mft_made_mmol_L']:.3g} mmol/L, steps {v['share_by_step']}"
+                  + (f", fed-norfuraneol share {v['fed_nf_mft_share']:.3f}" if "fed_nf_mft_share" in v else "")
                   for k, v in cr.items() if isinstance(v, dict)]
     if report.get("high_correlations"):
         lines += ["", "## Laplace correlations above 0.9 (declared: not identified)", ""]

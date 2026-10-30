@@ -1411,6 +1411,13 @@ def sulfur_rate_constants_at(
     else:
         out["r_cama_form"] = out["r_cama_dpo"] = out["r_cama_tdp"] = 0.0
 
+    # Round 3 (2026-10-30): the DDP-forming step's pH law, when a rival to the shipped "base" factor is set
+    _law = _ps.DDP_FORMATION_PH
+    if _law.law != "base":
+        _b = ph_factor("base", ph, float(temperature_k), ionic_strength_m)
+        _alt = 1.0 if _law.law == "none" else 10.0 ** (float(_law.slope) * (float(ph) - 5.0))
+        out["r_dpo_ddp"] = out["r_dpo_ddp"] / _b * _alt if _b > 0.0 else 0.0
+
     # DERIVED RATE 0d (B59a): the Strecker sulfur released as H2S, a share of the Strecker step (Kobayasi 1965).
     _strecker = _ps.STRECKER_SULFUR
     if _strecker.enabled:

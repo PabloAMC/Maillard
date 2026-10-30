@@ -86,3 +86,19 @@ def total_element_of(species: str, element: str) -> float:
     y = np.zeros(N_SULFUR_STATE)
     y[SULFUR_INDEX[species]] = 1.0
     return float(total_element(y, element))
+
+
+def test_the_ddp_forming_steps_ph_law_rivals(monkeypatch):
+    """Round 3: "base" (shipped) carries the free-amine factor; "none" removes it; "slope" applies its own."""
+    def k(ph):
+        return sulfur.sulfur_rate_constants_at(engine.core_parameters(engine.SULFUR), 373.15, ph, ph_label=ph)
+
+    def total(kk):
+        return kk["r_dpo_ddp"] + kk["r_dpo_ddp_h2s"]
+
+    base_ratio = total(k(7.0)) / total(k(5.0))
+    assert base_ratio > 10.0                      # the free-amine factor rises steeply with pH
+    monkeypatch.setattr(ps, "DDP_FORMATION_PH", ps.DdpFormationPh(law="none"))
+    assert total(k(7.0)) / total(k(5.0)) == pytest.approx(1.0, rel=0.05)   # only the Arrhenius / ionic terms remain
+    monkeypatch.setattr(ps, "DDP_FORMATION_PH", ps.DdpFormationPh(law="slope", slope=0.5))
+    assert total(k(7.0)) / total(k(5.0)) == pytest.approx(10.0, rel=0.05)

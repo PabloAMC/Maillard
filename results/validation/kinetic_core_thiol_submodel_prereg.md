@@ -404,4 +404,47 @@ optimum, and still 1.000 with the DDP multiplier at +3 -- because `k_dpo_ddp` si
 The two steps only matter together (a flat start would strand the optimiser), so R3 starts at `k_dpo_ddp` 10^-1
 (sec. 4's start) and the DDP multiplier at +4.5.
 
+## 10. Design review of round 3 (step 5) -- done 2026-10-30, before any round-3 fit; sec. 9 superseded where noted
+
+An independent reviewer (one diagnostic with an exact fed-norfuraneol tracer at R2b's optimum) found 2 BLOCKING,
+4 SHOULD-FIX, 2 NOTE. Judged under the acceptance protocol adopted the same day (STRATEGY sec. 9: mechanism
+signatures lead; done-tests diagnose).
+
+**BLOCKING, and the response:**
+1. **The DDP-forming step's pH law forbids a pass.** `r_dpo_ddp` carries the engine's "base" (free-amine) factor:
+   x0.29 / 1.43 / 143 / 1401 at pH 4.3 / 5 / 7 / 8 against pH 5 (95 - 100 C). Cerny's pot ends at pH 4.3, Zhai
+   2021's 5.5 - 8 ladder (47 DPO + 48 MGO rows) holds `k_dpo_ddp` at 10^-8, and pot D needs ~10^-1. The law is an
+   unmeasured assumption (Cerny's route is a proposal; DDP was never detected). -> R3 becomes a contest of the
+   step's pH law, rival structures judged by the protocol: "base" (shipped), "none", and a free slope
+   (`parameters_sulfur.DDP_FORMATION_PH`; arms R3 / R3n / R3s, and with the entry R3E / R3En / R3Es). The fallback
+   in sec. 9 ("the rows that pin k_nf_mft") is withdrawn; the expected pass for R3 as designed is cut to ~0.15.
+2. **One coordinate moved a ridge.** Pot D's share depends on the product of `k_dpo_ddp` and the DDP -> MFT rate
+   until DDP -> MFT saturates; (-1, +4.5) and (-3, +6.5) give the same share. -> the coordinate is now the route
+   PRODUCT (`offset_ddp_route`, start +5.5) with `k_dpo_ddp` (start -1); a second start at the ridge's other end
+   (-3, +3.5) for the winner; the H2S budget at the optimum is reported, with B59a's share at 0 as a sensitivity.
+
+**SHOULD-FIX, adopted:**
+3. The observation operator is now the exact tracer (the fed norfuraneol as a pool never replenished: its fraction f
+   of the pool obeys d ln f / dt = -production / NF; MFT from fed norfuraneol = integral of r_nf_mft x f over all
+   MFT formation), scored two-sided in [0.03, 0.15] (measured 0.07). The flux share stays as a check (it was 0.087
+   vs the tracer's 0.085 at R3's start). The "fed share" bug (NF[-1] / NF[0]) is gone.
+4. Pot D was seen at design (the arm was chosen from it and dry-checked on it): recorded in
+   `FIT_HOLDOUT_DECLARATION.md`. Blind companion added: pot C's 2-mercapto-3-pentanone (Cerny: none from ribose;
+   in the lane only from norfuraneol): MP3P / MFT made <= 0.1.
+5. **Correction of the record (secs. 4 and 9):** B60 did not fit `k_ddp_mft` -- its report lists it frozen. The
+   10^-6.54 is B2.3's value, and the constant wandered across waves (B2 -4.62, B2.1 -2.35, B2.2 -5.83, B2.3 -6.54),
+   flagged UNIDENTIFIED each time (B38: sigma 800 dex): a numerical leftover, not evidence against Cerny.
+6. R3 and R3E both run whatever arm E's verdict (E's thiol rows could fail for the same missing route); E itself is
+   judged on its own mechanism signatures (acetic-acid plateau, xylose decay, acetic pH effect), not on the thiols.
+
+**NOTE (declared limitations):** the two DDP -> MFT branches keep B2.3's unidentified HS- / neutral ratio (0.07,
+against the lane's own note that HS- is the better nucleophile and FFT's 43); a sensitivity at 43 follows the
+winner. Every formation step shares Ea 64.08 and the DDP and norfuraneol decays share 143.5, so the lane's route mix
+barely moves with temperature: a pass at 95 C carries to 145 C, where Hofmann T10 measures the C2 + C3 route as the
+strongest -- the temperature dependence of the route mix is not representable yet, and is recorded as such.
+
+**Dry check (no fit, R2b's optimum):** at (`k_dpo_ddp` 10^-1, route +5.5) the tracer share is 0.085 ("base") and
+0.042 ("none"), pot C MP3P / MFT 0.002 / 0.0005; at the ridge's far end (10^-3, +3.5) 0.81 / 0.58. What decides
+between the laws is whether Zhai's pH ladder lets `k_dpo_ddp` sit near 10^-1 -- the question the rival fits answer.
+
 ## Amendments

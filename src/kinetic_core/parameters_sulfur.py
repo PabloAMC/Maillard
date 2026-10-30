@@ -544,6 +544,22 @@ PENTOSE_AMINE_ENTRY = PentoseAmineEntry()
 
 
 @dataclass(frozen=True)
+class DdpFormationPh:
+    """
+    Round 3 (thiol prereg secs. 9-10, 2026-10-30): the pH law of r_dpo_ddp, 1-deoxypentosone + cysteine ->
+    1,4-dideoxypentosone (the intact-C5 MFT route's first step; Cerny 2003's proposal, DDP never detected). Shipped:
+    the engine's "base" (free-amine) factor -- x143 at pH 7, x0.29 at pH 4.3 against pH 5 -- which nothing measured
+    supports. Rivals: "none" (pH-independent) and "slope" (10^(slope (pH - 5)) on the in-situ pH, the slope fitted).
+    """
+
+    law: str = "base"
+    slope: float = 0.0
+
+
+DDP_FORMATION_PH = DdpFormationPh()
+
+
+@dataclass(frozen=True)
 class MgoCysteineStrecker:
     """
     Sub-model 3 + 4 (2026-10-30; the joint fit's design review, B5), OFF by default (rate 0): the Strecker

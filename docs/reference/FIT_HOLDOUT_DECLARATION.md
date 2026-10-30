@@ -40,7 +40,7 @@ Rules (all verified at declaration time):
 | **Zhou 2023 §A.3.3 cross-system pair (582 vs 665 µg/L)** | **HOLD-OUT (new)** | a *derived consistency* test, not a level; it scores the ARP → MGO flux with no free downstream parameter |
 | Whitfield 1999 (fed NF, pH 4.5, 140 °C) | **FIT** | the only independent replication of the Hofmann NF chemistry; needed to pin the NF channel |
 | Whitfield 2001 (fed NF, **pH 6.5**) | **HOLD-OUT** | the ≥150× pH collapse is the sharpest single pH prediction the model can be asked to make ⚠️ its H₂S column should NOT carry a standalone row (Methods omits HMF — likely a typo) |
-| Cerny 2003 T2/T3 (isotope, 95 °C / 4 h) | **HOLD-OUT** | 95 °C is 50 °C below the fit panel and the route mix is measured to change there; the NF ≤ 7 % ceiling must be **evaluated at Cerny's conditions** |
+| Cerny 2003 T2/T3 (isotope, 95 °C / 4 h) | **HOLD-OUT** | 95 °C is 50 °C below the fit panel and the route mix is measured to change there; the NF ≤ 7 % ceiling must be **evaluated at Cerny's conditions** | **2026-10-30: pot D SEEN AT DESIGN** (round 3 was chosen from it and dry-checked on it; thiol prereg sec. 10); blind companion: pot C 2-mercapto-3-pentanone (none from ribose) |
 | Cerny 2004 (in-situ branching 54:46 etc.) | **FIT** | pure ratios, free of the fed-precursor artefact; they identify topology, not magnitude |
 | van Seeventer 2001 precursor conversion (55 % / 75 %) | **FIT** | a *reactant*-side constraint; it cannot be traded against any product-side residual, so it adds information without competing |
 | Meynier 1995 (~20 directional rows) | **HOLD-OUT** | directional only, and the pH axis again; excellent as a shape test, useless as a level |
