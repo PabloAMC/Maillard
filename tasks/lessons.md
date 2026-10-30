@@ -344,3 +344,8 @@
 - **A wait loop must not match itself** (2026-10-30). `until ! pgrep -f "pytest tests/unit"; do ...` never ends: the
   loop's own shell command line contains the pattern. Three such loops ran ~8 h. Wait on a PID (`wait`, `kill -0
   $PID`), on a log line, or on a pattern the waiter cannot contain (`pgrep -f "[p]ytest tests/unit"`).
+- **Before a push, run every CI gate, not only the one that failed last** (2026-10-30). A fix for the freshness gate
+  was pushed after the unit tier and that gate passed locally; the data-integrity tier then failed on a register entry
+  added the same morning (CF-068: a kind outside the enum, a document name where ledger ids belong). Run
+  `./scripts/docker_maillard.sh gates` (or every step of `.github/workflows/ci.yml`'s data-integrity job) before a
+  push that touches `docs/reference/*_register.yml`, `data/`, or the generators.

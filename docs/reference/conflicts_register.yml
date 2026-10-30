@@ -1594,7 +1594,7 @@ entries:
     remedy: "The keyed table takes the printed table value where both exist and carries the disagreement as the row's error (0.066 dex)."
     affects: []
   - id: CF-068
-    kind: between_laboratory
+    kind: conflict
     scope: corpus
     sources: [schieberle2000, yiltirak2026]
     quantity: "MFT and FFT from ribose + cysteine in 0.5 M phosphate at pH 5 - 5.5, 100 C, 4 h (both SIDA)"
@@ -1614,4 +1614,4 @@ entries:
       - "An oxygen-consumer arm with a measured cysteine autoxidation rate: does it move Yiltirak down without moving Schieberle?"
     status: open
     remedy: "Both stay as data: Schieberle in the joint fit, Yiltirak a declared hold-out. Neither is down-weighted; the spread is reported as between-laboratory error if the thiol layer ships as a declared limitation (thiol prereg sec. 6)."
-    affects: [kinetic_core_thiol_submodel_prereg]
+    affects: [schieberle2000_t4_100c_time_course, yiltirak2026_tables3_buffer_arm_mft_fft]
