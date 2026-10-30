@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-30",
     "git": {
-      "commit": "bdf09d6cdf3af98f9fb395eb83bdb21da55fd9b9",
-      "short": "bdf09d6c",
+      "commit": "5204e7c70732b3245885fa467a0c8b37e8a406e1",
+      "short": "5204e7c7",
       "branch": "submodel1-ph",
       "dirty": true
     },
@@ -65,7 +65,7 @@
       },
       {
         "path": "data/lit/measurement_ledger/trunk.yml",
-        "sha256": "eee8c70a41748ad4b7564070f678655335fd462d56f63b1f00907c578a9087e3"
+        "sha256": "1881f374c3a32db435662fd6b43bb186215503f21961a854e6d5b0e533976547"
       }
     ]
   },
@@ -1550,8 +1550,8 @@
           "used_by_the_model": 15
         },
         "PENT": {
-          "data_sets": 40,
-          "time_series": 19,
+          "data_sets": 41,
+          "time_series": 20,
           "used_by_the_model": 5
         },
         "TDP": {
@@ -1604,8 +1604,8 @@
           "used_by_the_model": 1
         },
         "PENT": {
-          "data_sets": 40,
-          "time_series": 19,
+          "data_sets": 41,
+          "time_series": 20,
           "used_by_the_model": 5
         }
       },
@@ -1899,8 +1899,8 @@
       },
       "ledger": {
         "PENT": {
-          "data_sets": 40,
-          "time_series": 19,
+          "data_sets": 41,
+          "time_series": 20,
           "used_by_the_model": 5
         },
         "TDP": {
@@ -2171,8 +2171,8 @@
           "used_by_the_model": 1
         },
         "PENT": {
-          "data_sets": 40,
-          "time_series": 19,
+          "data_sets": 41,
+          "time_series": 20,
           "used_by_the_model": 5
         }
       },
@@ -3568,7 +3568,7 @@
       "where": null,
       "ledger": {
         "FA": {
-          "data_sets": 28,
+          "data_sets": 29,
           "time_series": 17,
           "used_by_the_model": 4
         },
@@ -3689,8 +3689,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 40,
-          "time_series": 20,
+          "data_sets": 46,
+          "time_series": 24,
           "used_by_the_model": 5
         },
         "FRAG_C": {
@@ -3770,12 +3770,12 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 40,
-          "time_series": 20,
+          "data_sets": 46,
+          "time_series": 24,
           "used_by_the_model": 5
         },
         "FA": {
-          "data_sets": 28,
+          "data_sets": 29,
           "time_series": 17,
           "used_by_the_model": 4
         },
@@ -3844,7 +3844,7 @@
       "where": null,
       "ledger": {
         "FA": {
-          "data_sets": 28,
+          "data_sets": 29,
           "time_series": 17,
           "used_by_the_model": 4
         },
@@ -3875,8 +3875,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 40,
-          "time_series": 20,
+          "data_sets": 46,
+          "time_series": 24,
           "used_by_the_model": 5
         },
         "FRAG_C": {
@@ -5078,8 +5078,8 @@
           "used_by_the_model": 15
         },
         "PENT": {
-          "data_sets": 40,
-          "time_series": 19,
+          "data_sets": 41,
+          "time_series": 20,
           "used_by_the_model": 5
         },
         "TTCA": {
@@ -6326,8 +6326,8 @@
           "used_by_the_model": 15
         },
         "PENT": {
-          "data_sets": 40,
-          "time_series": 19,
+          "data_sets": 41,
+          "time_series": 20,
           "used_by_the_model": 5
         },
         "TTCA": {
@@ -6616,8 +6616,8 @@
           "used_by_the_model": 17
         },
         "PENT": {
-          "data_sets": 40,
-          "time_series": 19,
+          "data_sets": 41,
+          "time_series": 20,
           "used_by_the_model": 5
         }
       },

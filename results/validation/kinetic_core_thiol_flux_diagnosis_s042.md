@@ -4,247 +4,247 @@
 
 ## schieberle2000_rib_cys_ph5_100C
 
-absolute, under-predicted (MFT -0.85, FFT -2.0). 100 C, label pH 5, 720 min, charge {'PENT': 100.0, 'Cys': 33.0}; half-times (min) {'Cys': 4.867797422822266, 'PENT': 240.0}; in-situ pH {'start': 5.098697430919856, 'end': 4.575289557455043}.
+absolute, under-predicted (MFT -0.85, FFT -2.0). 100 C, label pH 5, 720 min, charge {'PENT': 100.0, 'Cys': 33.0}; half-times (min) {'Cys': 4.867797422822266, 'PENT': 240.0}; in-situ pH {'start': 5.098697430919856, 'end': 4.575317848520318}.
 
 | species | t (min) | measured | predicted | log10 ratio |
 |---|---|---|---|---|
-| MFT | 30 | 45 ug_L | 4.62 | -0.99 |
-| MFT | 60 | 138 ug_L | 27.2 | -0.71 |
-| MFT | 360 | 1.56e+03 ug_L | 210 | -0.87 |
-| MFT | 720 | 1.79e+03 ug_L | 268 | -0.82 |
-| FFT | 30 | 20 ug_L | 0.0167 | -3.08 |
-| FFT | 60 | 31 ug_L | 0.193 | -2.21 |
-| FFT | 360 | 1.1e+03 ug_L | 33.6 | -1.52 |
-| FFT | 720 | 1.32e+03 ug_L | 77.1 | -1.23 |
+| MFT | 30 | 45 ug_L | 0.171 | -2.42 |
+| MFT | 60 | 138 ug_L | 1.29 | -2.03 |
+| MFT | 360 | 1.56e+03 ug_L | 105 | -1.17 |
+| MFT | 720 | 1.79e+03 ug_L | 365 | -0.69 |
+| FFT | 30 | 20 ug_L | 0.0172 | -3.07 |
+| FFT | 60 | 31 ug_L | 0.194 | -2.20 |
+| FFT | 360 | 1.1e+03 ug_L | 79.3 | -1.14 |
+| FFT | 720 | 1.32e+03 ug_L | 437 | -0.48 |
 
 - H2S made 0.0963 mmol/L: r_cys_h2s 100%, r_dpo_ddp_h2s 0%
-- H2S used 0.0916 mmol/L: r_nf_mft 97%, r_fur_fft_hs 2%, r_nf_mp3p 1%, r_fur_fft 0%
-- NF made 17.4 mmol/L: r_dpo_nf 100%
-- NF used 0.442 mmol/L: r_nf_decay 65%, r_nf_mft 20%, r_nf_decay_oh 15%, r_nf_decay_oh_mgo 0%
+- H2S used 0.067 mmol/L: r_h2s_loss 73%, r_nf_mft 11%, r_fur_fft_hs 11%, r_nf_mp3p 4%
+- NF made 17.5 mmol/L: r_dpo_nf 100%
+- NF used 0.368 mmol/L: r_nf_decay 79%, r_nf_decay_oh 18%, r_nf_mft 2%, r_nf_mp3p 1%
 - FUR made 0.585 mmol/L: r_tdp_fur 100%
-- FUR used 0.254 mmol/L: r_fur_decay 99%, r_fur_fft_hs 1%, r_fur_fft 0%
-- MFT made 0.0892 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
-- MFT used 0.0868 mmol/L: ch_mft_decay 99%, ch_thiolate_loss_mft 1%, ch_dimer_mft 0%
-- FFT made 0.00169 mmol/L: r_fur_fft_hs 96%, r_fur_fft 4%
-- FFT used 0.00102 mmol/L: ch_fft_decay 90%, ch_thiolate_loss_fft 10%, ch_dimer_fft 0%
-- ACTZ made 0.037 mmol/L: r_cys_actz 100%
-- ACTZ used 8.47e-09 mmol/L: ch_actz_decay 100%
+- FUR used 0.258 mmol/L: r_fur_decay 97%, r_fur_fft_hs 3%, r_fur_fft 0%
+- MFT made 0.00766 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
+- MFT used 0.00447 mmol/L: ch_mft_decay 89%, ch_thiolate_loss_mft 9%, ch_dimer_mft 2%
+- FFT made 0.00781 mmol/L: r_fur_fft_hs 96%, r_fur_fft 4%
+- FFT used 0.00398 mmol/L: ch_fft_decay 90%, ch_thiolate_loss_fft 10%, ch_dimer_fft 0%
+- ACTZ made 0.0354 mmol/L: r_cys_actz 100%
+- ACTZ used 8.14e-09 mmol/L: ch_actz_decay 100%
 - Cys made 244 mmol/L: r_ttca_cys 82%, r_cama_tdp 13%, r_cama_dpo 5%
 - Cys used 270 mmol/L: r_ttca_form 98%, r_cys_thermal 2%, r_cys_h2s 0%, r_cys_actz 0%
-- final (mmol/L): Cys 7.29, PENT 14.8, ARP 0, TTCA 5.19, H2S 0.00473, NF 17, FUR 0.331, DPO 0.145, MGO 0.0767, MFT 0.00235, FFT 0.000675, MFTD 5.72e-05, FFTD 2.59e-08, ACTZ 0.037, OX 1
+- final (mmol/L): Cys 7.29, PENT 14.8, ARP 0, TTCA 5.19, H2S 0.0293, NF 17.2, FUR 0.327, DPO 0.0995, MGO 0.073, MFT 0.0032, FFT 0.00383, MFTD 4.19e-05, FFTD 5.24e-07, ACTZ 0.0354, OX 1
 
 ## yiltirak2026_rib_cys_ph55_buffer_100C
 
-absolute hold-out, over-predicted (MFT +2.35, FFT +1.9). 100 C, label pH 5.5, 240 min, charge {'PENT': 25.0, 'Cys': 25.0}; half-times (min) {'Cys': 59.36692779932699, 'PENT': 58.0}; in-situ pH {'start': 5.57550140330568, 'end': 5.361352047650137}.
+absolute hold-out, over-predicted (MFT +2.35, FFT +1.9). 100 C, label pH 5.5, 240 min, charge {'PENT': 25.0, 'Cys': 25.0}; half-times (min) {'Cys': 59.36692779932699, 'PENT': 58.0}; in-situ pH {'start': 5.57550140330568, 'end': 5.361357569182292}.
 
 | species | t (min) | measured | predicted | log10 ratio |
 |---|---|---|---|---|
-| MFT | 240 | 6.88 ug_L | 553 | +1.91 |
-| FFT | 240 | 1.28 ug_L | 118 | +1.97 |
+| MFT | 240 | 6.88 ug_L | 59.1 | +0.93 |
+| FFT | 240 | 1.28 ug_L | 118 | +1.96 |
 
 - H2S made 0.12 mmol/L: r_cys_h2s 100%, r_dpo_ddp_h2s 0%
-- H2S used 0.0391 mmol/L: r_nf_mft 95%, r_fur_fft_hs 4%, r_nf_mp3p 1%, r_fur_fft 0%
-- NF made 2.53 mmol/L: r_dpo_nf 100%
-- NF used 0.0657 mmol/L: r_nf_mft 57%, r_nf_decay_oh 24%, r_nf_decay 18%, r_nf_mp3p 0%
+- H2S used 0.0415 mmol/L: r_h2s_loss 94%, r_fur_fft_hs 3%, r_nf_mft 2%, r_nf_mp3p 1%
+- NF made 2.57 mmol/L: r_dpo_nf 100%
+- NF used 0.0301 mmol/L: r_nf_decay_oh 55%, r_nf_decay 41%, r_nf_mft 3%, r_nf_mp3p 1%
 - FUR made 0.0207 mmol/L: r_tdp_fur 100%
-- FUR used 0.00474 mmol/L: r_fur_decay 69%, r_fur_fft_hs 30%, r_fur_fft 0%
-- MFT made 0.0374 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
-- MFT used 0.0325 mmol/L: ch_mft_decay 95%, ch_thiolate_loss_mft 4%, ch_dimer_mft 1%
-- FFT made 0.00145 mmol/L: r_fur_fft_hs 99%, r_fur_fft 1%
-- FFT used 0.000418 mmol/L: ch_fft_decay 62%, ch_thiolate_loss_fft 38%, ch_dimer_fft 0%
-- ACTZ made 0.0101 mmol/L: r_cys_actz 100%
-- ACTZ used 6.79e-10 mmol/L: ch_actz_decay 100%
+- FUR used 0.00473 mmol/L: r_fur_decay 70%, r_fur_fft_hs 30%, r_fur_fft 0%
+- MFT made 0.000787 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
+- MFT used 0.000269 mmol/L: ch_mft_decay 63%, ch_thiolate_loss_mft 36%, ch_dimer_mft 1%
+- FFT made 0.00143 mmol/L: r_fur_fft_hs 99%, r_fur_fft 1%
+- FFT used 0.000404 mmol/L: ch_fft_decay 62%, ch_thiolate_loss_fft 38%, ch_dimer_fft 0%
+- ACTZ made 0.0098 mmol/L: r_cys_actz 100%
+- ACTZ used 6.65e-10 mmol/L: ch_actz_decay 100%
 - Cys made 47.5 mmol/L: r_ttca_cys 87%, r_cama_tdp 9%, r_cama_dpo 4%
 - Cys used 61.5 mmol/L: r_ttca_form 94%, r_cys_thermal 5%, r_cys_h2s 0%, r_cys_actz 0%
-- final (mmol/L): Cys 11.1, PENT 6.8, ARP 0, TTCA 3.82, H2S 0.0806, NF 2.47, FUR 0.0159, DPO 0.0917, MGO 0.0457, MFT 0.00484, FFT 0.00104, MFTD 0.000197, FFTD 5.68e-08, ACTZ 0.0101, OX 1
+- final (mmol/L): Cys 11.1, PENT 6.8, ARP 0, TTCA 3.82, H2S 0.0783, NF 2.54, FUR 0.0159, DPO 0.0627, MGO 0.0436, MFT 0.000518, FFT 0.00103, MFTD 1.6e-06, FFTD 5.39e-08, ACTZ 0.0098, OX 1
 
 ## yiltirak2026_rib_cys_ph55_buffer_130C
 
-the same, short hot end of the equal-cook series. 130 C, label pH 5.5, 30 min, charge {'PENT': 25.0, 'Cys': 25.0}; half-times (min) {'Cys': 12.699537984264639, 'PENT': 9.0}; in-situ pH {'start': 5.687611103523523, 'end': 5.472364811785535}.
+the same, short hot end of the equal-cook series. 130 C, label pH 5.5, 30 min, charge {'PENT': 25.0, 'Cys': 25.0}; half-times (min) {'Cys': 12.699537984264639, 'PENT': 9.0}; in-situ pH {'start': 5.687611103523523, 'end': 5.472366847656684}.
 
 | species | t (min) | measured | predicted | log10 ratio |
 |---|---|---|---|---|
-| MFT | 30 | 1.71 ug_L | 809 | +2.67 |
+| MFT | 30 | 1.71 ug_L | 97.2 | +1.75 |
 | FFT | 30 | 1.62 ug_L | 103 | +1.80 |
 
 - H2S made 0.413 mmol/L: r_cys_h2s 100%, r_dpo_ddp_h2s 0%
-- H2S used 0.0713 mmol/L: r_nf_mft 97%, r_fur_fft_hs 2%, r_nf_mp3p 1%, r_mgo_mp 0%
-- NF made 2.38 mmol/L: r_dpo_nf 100%
-- NF used 0.134 mmol/L: r_nf_mft 52%, r_nf_decay 29%, r_nf_decay_oh 19%, r_nf_mp3p 0%
+- H2S used 0.09 mmol/L: r_h2s_loss 96%, r_nf_mft 2%, r_fur_fft_hs 2%, r_nf_mp3p 1%
+- NF made 2.45 mmol/L: r_dpo_nf 100%
+- NF used 0.0706 mmol/L: r_nf_decay 59%, r_nf_decay_oh 38%, r_nf_mft 2%, r_nf_mp3p 1%
 - FUR made 0.0113 mmol/L: r_tdp_fur 100%
 - FUR used 0.00611 mmol/L: r_fur_decay 76%, r_fur_fft_hs 24%, r_fur_fft 0%
-- MFT made 0.0692 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
-- MFT used 0.0621 mmol/L: ch_mft_decay 92%, ch_thiolate_loss_mft 4%, ch_dimer_mft 3%
-- FFT made 0.00148 mmol/L: r_fur_fft_hs 99%, r_fur_fft 1%
-- FFT used 0.000581 mmol/L: ch_fft_decay 56%, ch_thiolate_loss_fft 44%, ch_dimer_fft 0%
-- ACTZ made 0.0125 mmol/L: r_cys_actz 100%
-- ACTZ used 9.13e-10 mmol/L: ch_actz_decay 100%
+- MFT made 0.00152 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
+- MFT used 0.000668 mmol/L: ch_mft_decay 56%, ch_thiolate_loss_mft 40%, ch_dimer_mft 4%
+- FFT made 0.00147 mmol/L: r_fur_fft_hs 99%, r_fur_fft 1%
+- FFT used 0.000574 mmol/L: ch_fft_decay 56%, ch_thiolate_loss_fft 44%, ch_dimer_fft 0%
+- ACTZ made 0.0124 mmol/L: r_cys_actz 100%
+- ACTZ used 9.21e-10 mmol/L: ch_actz_decay 100%
 - Cys made 28.2 mmol/L: r_ttca_cys 73%, r_cama_tdp 19%, r_cama_dpo 8%
 - Cys used 40.5 mmol/L: r_ttca_form 95%, r_cys_thermal 4%, r_cys_h2s 1%, r_cys_actz 0%
-- final (mmol/L): Cys 12.7, PENT 6.22, ARP 0, TTCA 3.22, H2S 0.342, NF 2.24, FUR 0.0052, DPO 0.171, MGO 0.135, MFT 0.00709, FFT 0.000901, MFTD 0.00108, FFTD 1.32e-07, ACTZ 0.0125, OX 0.999
+- final (mmol/L): Cys 12.7, PENT 6.22, ARP 0, TTCA 3.22, H2S 0.323, NF 2.38, FUR 0.0052, DPO 0.117, MGO 0.132, MFT 0.000852, FFT 0.000899, MFTD 1.22e-05, FFTD 1.29e-07, ACTZ 0.0124, OX 1
 
 ## hofmann1998_cys_xylose_ph5
 
-absolute, Garching 145 C 20 min: the control that fits. 145 C, label pH 5, 20 min, charge {'Cys': 33.0, 'PENT': 100.0}; half-times (min) {'Cys': 0.5466340270884466, 'PENT': 12.666666666666666}; in-situ pH {'start': 5.267625433858484, 'end': 4.6231527782511}.
+absolute hold-out (Hofmann T1), Garching 145 C 20 min: off by MFT +0.72, FFT -0.68 at s042. 145 C, label pH 5, 20 min, charge {'Cys': 33.0, 'PENT': 100.0}; half-times (min) {'Cys': 0.5466340270884466, 'PENT': 12.666666666666666}; in-situ pH {'start': 5.267625433858484, 'end': 4.623154885461574}.
 
 | species | t (min) | measured | predicted | log10 ratio |
 |---|---|---|---|---|
-| FFT | 20 | 96 ug_L | 20 | -0.68 |
-| MFT | 20 | 143 ug_L | 745 | +0.72 |
+| FFT | 20 | 96 ug_L | 32.5 | -0.47 |
+| MFT | 20 | 143 ug_L | 290 | +0.31 |
 
 - H2S made 0.268 mmol/L: r_cys_h2s 100%, r_dpo_ddp_h2s 0%
-- H2S used 0.171 mmol/L: r_nf_mft 99%, r_nf_mp3p 1%, r_fur_fft_hs 0%, r_mgo_mp 0%
-- NF made 9.07 mmol/L: r_dpo_nf 100%
-- NF used 0.694 mmol/L: r_nf_decay 71%, r_nf_mft 24%, r_nf_decay_oh 4%, r_nf_mp3p 0%
+- H2S used 0.081 mmol/L: r_h2s_loss 90%, r_nf_mft 7%, r_nf_mp3p 2%, r_fur_fft_hs 1%
+- NF made 9.37 mmol/L: r_dpo_nf 100%
+- NF used 0.562 mmol/L: r_nf_decay 93%, r_nf_decay_oh 5%, r_nf_mft 1%, r_nf_mp3p 0%
 - FUR made 0.0568 mmol/L: r_tdp_fur 100%
 - FUR used 0.0447 mmol/L: r_fur_decay 99%, r_fur_fft_hs 1%, r_fur_fft 0%
-- MFT made 0.169 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
-- MFT used 0.162 mmol/L: ch_mft_decay 99%, ch_dimer_mft 1%, ch_thiolate_loss_mft 1%
-- FFT made 0.00039 mmol/L: r_fur_fft_hs 96%, r_fur_fft 4%
-- FFT used 0.000216 mmol/L: ch_fft_decay 89%, ch_thiolate_loss_fft 11%, ch_dimer_fft 0%
-- ACTZ made 0.0277 mmol/L: r_cys_actz 100%
-- ACTZ used 4.05e-09 mmol/L: ch_actz_decay 100%
+- MFT made 0.00542 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
+- MFT used 0.00288 mmol/L: ch_mft_decay 87%, ch_thiolate_loss_mft 9%, ch_dimer_mft 3%
+- FFT made 0.000568 mmol/L: r_fur_fft_hs 96%, r_fur_fft 4%
+- FFT used 0.000283 mmol/L: ch_fft_decay 89%, ch_thiolate_loss_fft 11%, ch_dimer_fft 0%
+- ACTZ made 0.0274 mmol/L: r_cys_actz 100%
+- ACTZ used 4.06e-09 mmol/L: ch_actz_decay 100%
 - Cys made 80.5 mmol/L: r_ttca_cys 62%, r_cama_tdp 27%, r_cama_dpo 12%
 - Cys used 108 mmol/L: r_ttca_form 99%, r_cys_thermal 1%, r_cys_h2s 0%, r_cys_actz 0%
-- final (mmol/L): Cys 5.49, PENT 36, ARP 0, TTCA 6.02, H2S 0.097, NF 8.37, FUR 0.0121, DPO 0.426, MGO 0.547, MFT 0.00652, FFT 0.000175, MFTD 0.000625, FFTD 3.37e-09, ACTZ 0.0277, OX 0.999
+- final (mmol/L): Cys 5.5, PENT 36, ARP 0, TTCA 6.02, H2S 0.187, NF 8.81, FUR 0.0121, DPO 0.296, MGO 0.534, MFT 0.00254, FFT 0.000285, MFTD 4.72e-05, FFTD 6.49e-09, ACTZ 0.0274, OX 1
 
 ## hofmann1998_cys_ribose_ph3
 
-absolute hold-out, pH ladder low end. 145 C, label pH 3, 20 min, charge {'Cys': 33.0, 'PENT': 100.0}; half-times (min) {'Cys': 0.5466340270884466, 'PENT': 12.166666666666666}; in-situ pH {'start': 3.709078521002084, 'end': 3.7394977304153043}.
+absolute hold-out, pH ladder low end. 145 C, label pH 3, 20 min, charge {'Cys': 33.0, 'PENT': 100.0}; half-times (min) {'Cys': 0.5466340270884466, 'PENT': 12.166666666666666}; in-situ pH {'start': 3.709078521002084, 'end': 3.739498337171961}.
 
 | species | t (min) | measured | predicted | log10 ratio |
 |---|---|---|---|---|
-| FFT | 20 | 229 ug_L | 3.75 | -1.79 |
-| MFT | 20 | 553 ug_L | 809 | +0.16 |
+| FFT | 20 | 229 ug_L | 6.33 | -1.56 |
+| MFT | 20 | 553 ug_L | 349 | -0.20 |
 
 - H2S made 0.279 mmol/L: r_cys_h2s 100%, r_dpo_ddp_h2s 0%
-- H2S used 0.183 mmol/L: r_nf_mft 99%, r_nf_mp3p 1%, r_mgo_mp 0%, r_fur_fft_hs 0%
-- NF made 9.6 mmol/L: r_dpo_nf 100%
-- NF used 0.712 mmol/L: r_nf_decay 74%, r_nf_mft 26%, r_nf_decay_oh 1%, r_nf_mp3p 0%
+- H2S used 0.0834 mmol/L: r_h2s_loss 90%, r_nf_mft 7%, r_nf_mp3p 3%, r_mgo_mp 0%
+- NF made 9.92 mmol/L: r_dpo_nf 100%
+- NF used 0.568 mmol/L: r_nf_decay 98%, r_nf_mft 1%, r_nf_decay_oh 1%, r_nf_mp3p 0%
 - FUR made 0.0596 mmol/L: r_tdp_fur 100%
 - FUR used 0.0468 mmol/L: r_fur_decay 100%, r_fur_fft_hs 0%, r_fur_fft 0%
-- MFT made 0.182 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
-- MFT used 0.175 mmol/L: ch_mft_decay 100%, ch_dimer_mft 0%, ch_thiolate_loss_mft 0%
-- FFT made 6.99e-05 mmol/L: r_fur_fft_hs 78%, r_fur_fft 22%
-- FFT used 3.71e-05 mmol/L: ch_fft_decay 98%, ch_thiolate_loss_fft 2%, ch_dimer_fft 0%
-- ACTZ made 0.0313 mmol/L: r_cys_actz 100%
-- ACTZ used 4.53e-09 mmol/L: ch_actz_decay 100%
+- MFT made 0.00606 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
+- MFT used 0.003 mmol/L: ch_mft_decay 98%, ch_thiolate_loss_mft 1%, ch_dimer_mft 1%
+- FFT made 0.000105 mmol/L: r_fur_fft_hs 78%, r_fur_fft 22%
+- FFT used 4.99e-05 mmol/L: ch_fft_decay 98%, ch_thiolate_loss_fft 2%, ch_dimer_fft 0%
+- ACTZ made 0.031 mmol/L: r_cys_actz 100%
+- ACTZ used 4.54e-09 mmol/L: ch_actz_decay 100%
 - Cys made 83.7 mmol/L: r_ttca_cys 61%, r_cama_tdp 28%, r_cama_dpo 12%
 - Cys used 111 mmol/L: r_ttca_form 99%, r_cys_thermal 1%, r_cys_h2s 0%, r_cys_actz 0%
-- final (mmol/L): Cys 5.97, PENT 34.6, ARP 0, TTCA 6.3, H2S 0.096, NF 8.89, FUR 0.0128, DPO 0.448, MGO 0.577, MFT 0.00708, FFT 3.28e-05, MFTD 0.000101, FFTD 1.62e-11, ACTZ 0.0313, OX 1
+- final (mmol/L): Cys 5.97, PENT 34.6, ARP 0, TTCA 6.3, H2S 0.196, NF 9.35, FUR 0.0128, DPO 0.311, MGO 0.563, MFT 0.00306, FFT 5.55e-05, MFTD 8.88e-06, FFTD 3.3e-11, ACTZ 0.031, OX 1
 
 ## hofmann1998_cys_ribose_ph7
 
-absolute hold-out, pH ladder high end. 145 C, label pH 7, 20 min, charge {'Cys': 33.0, 'PENT': 100.0}; half-times (min) {'Cys': 0.5466340270884466, 'PENT': 6.333333333333333}; in-situ pH {'start': 7.242723255883902, 'end': 7.23224862222561}.
+absolute hold-out, pH ladder high end. 145 C, label pH 7, 20 min, charge {'Cys': 33.0, 'PENT': 100.0}; half-times (min) {'Cys': 0.5466340270884466, 'PENT': 6.333333333333333}; in-situ pH {'start': 7.242723255883902, 'end': 7.23224779204466}.
 
 | species | t (min) | measured | predicted | log10 ratio |
 |---|---|---|---|---|
-| FFT | 20 | 12 ug_L | 678 | +1.75 |
-| MFT | 20 | 25 ug_L | 837 | +1.52 |
+| FFT | 20 | 12 ug_L | 673 | +1.75 |
+| MFT | 20 | 25 ug_L | 61 | +0.39 |
 
 - H2S made 4.14 mmol/L: r_cys_h2s 100%, r_dpo_ddp_h2s 0%
-- H2S used 0.557 mmol/L: r_nf_mft 79%, r_fur_fft_hs 20%, r_nf_mp3p 1%, r_mgo_mp 0%
-- NF made 20.3 mmol/L: r_dpo_nf 100%
-- NF used 15.6 mmol/L: r_nf_decay_oh 92%, r_nf_decay 4%, r_nf_mft 3%, r_nf_decay_oh_mgo 1%
+- H2S used 1.06 mmol/L: r_h2s_loss 88%, r_fur_fft_hs 10%, r_nf_mft 1%, r_nf_mp3p 0%
+- NF made 20.9 mmol/L: r_dpo_nf 100%
+- NF used 15.9 mmol/L: r_nf_decay_oh 95%, r_nf_decay 4%, r_nf_decay_oh_mgo 2%, r_nf_mft 0%
 - FUR made 0.13 mmol/L: r_tdp_fur 100%
-- FUR used 0.129 mmol/L: r_fur_fft_hs 87%, r_fur_decay 13%, r_fur_fft 0%
-- MFT made 0.442 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft_hs 0%, r_ddp_mft 0%
-- MFT used 0.434 mmol/L: ch_mft_decay 47%, ch_dimer_mft 29%, ch_thiolate_loss_mft 24%
+- FUR used 0.129 mmol/L: r_fur_fft_hs 86%, r_fur_decay 14%, r_fur_fft 0%
+- MFT made 0.0092 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft_hs 0%, r_ddp_mft 0%
+- MFT used 0.00867 mmol/L: ch_thiolate_loss_mft 82%, ch_mft_decay 11%, ch_dimer_mft 7%
 - FFT made 0.111 mmol/L: r_fur_fft_hs 100%, r_fur_fft 0%
 - FFT used 0.105 mmol/L: ch_thiolate_loss_fft 88%, ch_fft_decay 11%, ch_dimer_fft 1%
-- ACTZ made 0.216 mmol/L: r_cys_actz 100%
-- ACTZ used 3.38e-08 mmol/L: ch_actz_decay 100%
+- ACTZ made 0.218 mmol/L: r_cys_actz 100%
+- ACTZ used 3.43e-08 mmol/L: ch_actz_decay 100%
 - Cys made 146 mmol/L: r_ttca_cys 50%, r_cama_tdp 35%, r_cama_dpo 15%
 - Cys used 162 mmol/L: r_ttca_form 96%, r_cys_h2s 3%, r_cys_thermal 1%, r_cys_actz 0%
-- final (mmol/L): Cys 16.5, PENT 12.3, ARP 0, TTCA 7.19, H2S 3.59, NF 4.73, FUR 0.00175, DPO 0.508, MGO 1.14, MFT 0.00733, FFT 0.00594, MFTD 0.0632, FFTD 0.00055, ACTZ 0.216, OX 0.936
+- final (mmol/L): Cys 16.5, PENT 12.3, ARP 0, TTCA 7.19, H2S 3.08, NF 4.97, FUR 0.00188, DPO 0.347, MGO 1.15, MFT 0.000534, FFT 0.00589, MFTD 0.000324, FFTD 0.000561, ACTZ 0.218, OX 0.999
 
 ## zhai2023jafc_ttcacys_ph7_120C
 
-semi-quantitative, shape fits (sd 0.2). 120 C, label pH 7, 180 min, charge {'TTCA': 10.0, 'Cys': 10.0}; half-times (min) {'Cys': None, 'TTCA': 6.435848888111195}; in-situ pH {'start': 5.449389164801687, 'end': 5.427561186580035}.
+semi-quantitative, shape fits (sd 0.2). 120 C, label pH 7, 180 min, charge {'TTCA': 10.0, 'Cys': 10.0}; half-times (min) {'Cys': None, 'TTCA': 6.435848888111195}; in-situ pH {'start': 5.449389164801687, 'end': 5.42765647699128}.
 
 | species | t (min) | measured | predicted | log10 ratio |
 |---|---|---|---|---|
-| MFT | 40 | 1.1 ug_L | 675 | +2.79 |
-| MFT | 80 | 1.74 ug_L | 1.64e+03 | +2.97 |
-| MFT | 120 | 4.08 ug_L | 2.47e+03 | +2.78 |
-| MFT | 180 | 5.03 ug_L | 2.16e+03 | +2.63 |
-| FFT | 40 | 2.06 ug_L | 196 | +1.98 |
-| FFT | 80 | 5.07 ug_L | 380 | +1.87 |
-| FFT | 120 | 11.6 ug_L | 540 | +1.67 |
-| FFT | 180 | 12.9 ug_L | 708 | +1.74 |
+| MFT | 40 | 1.1 ug_L | 46.9 | +1.63 |
+| MFT | 80 | 1.74 ug_L | 165 | +1.98 |
+| MFT | 120 | 4.08 ug_L | 362 | +1.95 |
+| MFT | 180 | 5.03 ug_L | 686 | +2.13 |
+| FFT | 40 | 2.06 ug_L | 193 | +1.97 |
+| FFT | 80 | 5.07 ug_L | 375 | +1.87 |
+| FFT | 120 | 11.6 ug_L | 528 | +1.66 |
+| FFT | 180 | 12.9 ug_L | 649 | +1.70 |
 
 - H2S made 3.4 mmol/L: r_cys_h2s 100%, r_dpo_ddp_h2s 0%
-- H2S used 1.46 mmol/L: r_nf_mft 96%, r_fur_fft_hs 3%, r_nf_mp3p 1%, r_h2s_loss 0%
-- NF made 2.7 mmol/L: r_dpo_nf 100%
-- NF used 1.99 mmol/L: r_nf_mft 70%, r_nf_decay_oh 24%, r_nf_decay 5%, r_nf_mp3p 1%
+- H2S used 2.13 mmol/L: r_h2s_loss 95%, r_fur_fft_hs 2%, r_nf_mft 2%, r_nf_mp3p 1%
+- NF made 2.73 mmol/L: r_dpo_nf 100%
+- NF used 0.783 mmol/L: r_nf_decay_oh 75%, r_nf_decay 17%, r_nf_mft 5%, r_nf_mp3p 2%
 - FUR made 0.0605 mmol/L: r_tdp_fur 100%
-- FUR used 0.0576 mmol/L: r_fur_fft_hs 88%, r_fur_decay 12%, r_fur_fft 0%
-- MFT made 1.4 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
-- MFT used 1.38 mmol/L: ch_mft_decay 71%, ch_dimer_mft 20%, ch_thiolate_loss_mft 9%
-- FFT made 0.0506 mmol/L: r_fur_fft_hs 100%, r_fur_fft 0%
-- FFT used 0.0444 mmol/L: ch_thiolate_loss_fft 67%, ch_fft_decay 33%, ch_dimer_fft 0%
-- ACTZ made 0.0298 mmol/L: r_cys_actz 100%
-- ACTZ used 1.28e-08 mmol/L: ch_actz_decay 100%
+- FUR used 0.057 mmol/L: r_fur_fft_hs 86%, r_fur_decay 14%, r_fur_fft 0%
+- MFT made 0.0391 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
+- MFT used 0.0331 mmol/L: ch_thiolate_loss_mft 47%, ch_mft_decay 32%, ch_dimer_mft 21%
+- FFT made 0.049 mmol/L: r_fur_fft_hs 100%, r_fur_fft 0%
+- FFT used 0.0433 mmol/L: ch_thiolate_loss_fft 67%, ch_fft_decay 33%, ch_dimer_fft 0%
+- ACTZ made 0.029 mmol/L: r_cys_actz 100%
+- ACTZ used 1.25e-08 mmol/L: ch_actz_decay 100%
 - Cys made 25.6 mmol/L: r_ttca_cys 67%, r_cama_tdp 23%, r_cama_dpo 10%
 - Cys used 26 mmol/L: r_ttca_form 63%, r_cys_thermal 24%, r_cys_h2s 13%, r_cys_actz 0%
-- final (mmol/L): Cys 9.62, PENT 0.262, ARP 0, TTCA 0.114, H2S 1.94, NF 0.713, FUR 0.00284, DPO 0.00501, MGO 0.00935, MFT 0.0189, FFT 0.0062, MFTD 0.136, FFTD 8.51e-05, ACTZ 0.0298, OX 0.864
+- final (mmol/L): Cys 9.62, PENT 0.262, ARP 0, TTCA 0.114, H2S 1.27, NF 1.94, FUR 0.00351, DPO 0.00341, MGO 0.00923, MFT 0.00601, FFT 0.00568, MFTD 0.00343, FFTD 8.69e-05, ACTZ 0.029, OX 0.996
 
 ## zhou2022_axarp_cys_ph7_120C
 
-semi-quantitative, Zhou ARP + Cys. 120 C, label pH 7, 120 min, charge {'ARP': 20.0, 'Cys': 20.0}; half-times (min) {'Cys': None, 'ARP': 29.68346389966349}; in-situ pH {'start': 5.246660141739994, 'end': 4.273709116177635}.
+semi-quantitative, Zhou ARP + Cys. 120 C, label pH 7, 120 min, charge {'ARP': 20.0, 'Cys': 20.0}; half-times (min) {'Cys': None, 'ARP': 29.68346389966349}; in-situ pH {'start': 5.246660141739994, 'end': 4.2738896868657195}.
 
 | species | t (min) | measured | predicted | log10 ratio |
 |---|---|---|---|---|
-| MFT | 30 | 63.3 ug_L | 3.24e+03 | +1.71 |
-| MFT | 60 | 203 ug_L | 2.28e+03 | +1.05 |
-| MFT | 90 | 263 ug_L | 1.29e+03 | +0.69 |
-| MFT | 120 | 345 ug_L | 969 | +0.45 |
-| FFT | 30 | 74.5 ug_L | 4.28 | -1.24 |
-| FFT | 60 | 187 ug_L | 9.46 | -1.30 |
-| FFT | 90 | 306 ug_L | 9.09 | -1.53 |
-| FFT | 120 | 419 ug_L | 7.57 | -1.74 |
-| MFTD | 30 | 34.7 ug_L | 552 | +1.20 |
-| MFTD | 60 | 37.6 ug_L | 1.43e+03 | +1.58 |
-| MFTD | 90 | 40.7 ug_L | 1.61e+03 | +1.60 |
-| MFTD | 120 | 43.7 ug_L | 1.66e+03 | +1.58 |
-| FUR | 30 | 252 ug_L | 88 | -0.46 |
-| FUR | 60 | 435 ug_L | 287 | -0.18 |
-| FUR | 90 | 525 ug_L | 493 | -0.03 |
-| FUR | 120 | 511 ug_L | 627 | +0.09 |
+| MFT | 30 | 63.3 ug_L | 432 | +0.83 |
+| MFT | 60 | 203 ug_L | 1.24e+03 | +0.79 |
+| MFT | 90 | 263 ug_L | 1.75e+03 | +0.82 |
+| MFT | 120 | 345 ug_L | 1.97e+03 | +0.76 |
+| FFT | 30 | 74.5 ug_L | 5.25 | -1.15 |
+| FFT | 60 | 187 ug_L | 18.6 | -1.00 |
+| FFT | 90 | 306 ug_L | 29.3 | -1.02 |
+| FFT | 120 | 419 ug_L | 34.9 | -1.08 |
+| MFTD | 30 | 34.7 ug_L | 5.34 | -0.81 |
+| MFTD | 60 | 37.6 ug_L | 73.3 | +0.29 |
+| MFTD | 90 | 40.7 ug_L | 203 | +0.70 |
+| MFTD | 120 | 43.7 ug_L | 352 | +0.91 |
+| FUR | 30 | 252 ug_L | 87.2 | -0.46 |
+| FUR | 60 | 435 ug_L | 279 | -0.19 |
+| FUR | 90 | 525 ug_L | 477 | -0.04 |
+| FUR | 120 | 511 ug_L | 605 | +0.07 |
 
 - H2S made 0.818 mmol/L: r_cys_h2s 100%, r_dpo_ddp_h2s 0%
-- H2S used 0.767 mmol/L: r_nf_mft 99%, r_nf_mp3p 1%, r_fur_fft_hs 0%, r_mgo_mp 0%
-- NF made 11.3 mmol/L: r_dpo_nf 100%
-- NF used 1.24 mmol/L: r_nf_mft 61%, r_nf_decay 34%, r_nf_decay_oh 4%, r_nf_mp3p 0%
+- H2S used 0.475 mmol/L: r_h2s_loss 85%, r_nf_mft 11%, r_nf_mp3p 4%, r_fur_fft_hs 0%
+- NF made 11.4 mmol/L: r_dpo_nf 100%
+- NF used 0.575 mmol/L: r_nf_decay 79%, r_nf_mft 9%, r_nf_decay_oh 9%, r_nf_mp3p 3%
 - FUR made 0.0169 mmol/L: r_tdp_fur 100%
-- FUR used 0.0104 mmol/L: r_fur_decay 98%, r_fur_fft_hs 2%, r_fur_fft 0%
-- MFT made 0.76 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
-- MFT used 0.752 mmol/L: ch_mft_decay 97%, ch_dimer_mft 2%, ch_thiolate_loss_mft 1%
-- FFT made 0.000241 mmol/L: r_fur_fft_hs 95%, r_fur_fft 5%
-- FFT used 0.000175 mmol/L: ch_fft_decay 93%, ch_thiolate_loss_fft 7%, ch_dimer_fft 0%
-- ACTZ made 0.14 mmol/L: r_cys_actz 100%
-- ACTZ used 3.63e-08 mmol/L: ch_actz_decay 100%
+- FUR used 0.0106 mmol/L: r_fur_decay 93%, r_fur_fft_hs 7%, r_fur_fft 0%
+- MFT made 0.0515 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
+- MFT used 0.0343 mmol/L: ch_mft_decay 86%, ch_dimer_mft 9%, ch_thiolate_loss_mft 5%
+- FFT made 0.000762 mmol/L: r_fur_fft_hs 93%, r_fur_fft 7%
+- FFT used 0.000456 mmol/L: ch_fft_decay 94%, ch_thiolate_loss_fft 6%, ch_dimer_fft 0%
+- ACTZ made 0.134 mmol/L: r_cys_actz 100%
+- ACTZ used 3.53e-08 mmol/L: ch_actz_decay 100%
 - Cys made 0 mmol/L: 
-- Cys used 6.38 mmol/L: r_cys_thermal 85%, r_cys_h2s 13%, r_cys_actz 2%, r_dpo_ddp 0%
-- final (mmol/L): Cys 13.6, PENT 0, ARP 0.719, TTCA 0, H2S 0.0507, NF 10, FUR 0.00652, DPO 0.0305, MGO 0.0836, MFT 0.00849, FFT 6.63e-05, MFTD 0.00733, FFTD 6.66e-10, ACTZ 0.14, OX 0.993
+- Cys used 6.37 mmol/L: r_cys_thermal 85%, r_cys_h2s 13%, r_cys_actz 2%, r_dpo_ddp 0%
+- final (mmol/L): Cys 13.6, PENT 0, ARP 0.719, TTCA 0, H2S 0.343, NF 10.8, FUR 0.0063, DPO 0.0204, MGO 0.0785, MFT 0.0173, FFT 0.000305, MFTD 0.00156, FFTD 4.44e-09, ACTZ 0.134, OX 0.998
 
 ## zhou2023_arp_cys_ph7_actz
 
-2-acetylthiazole falsifier (11.70 ug/L measured). 120 C, label pH 7, 60 min, charge {'ARP': 20.0, 'Cys': 20.0}; half-times (min) {'Cys': None, 'ARP': 29.5}; in-situ pH {'start': 5.246660141739994, 'end': 4.536533547518765}.
+2-acetylthiazole falsifier (11.70 ug/L measured). 120 C, label pH 7, 60 min, charge {'ARP': 20.0, 'Cys': 20.0}; half-times (min) {'Cys': None, 'ARP': 29.5}; in-situ pH {'start': 5.246660141739994, 'end': 4.536663879593825}.
 
 - H2S made 0.622 mmol/L: r_cys_h2s 100%, r_dpo_ddp_h2s 0%
-- H2S used 0.487 mmol/L: r_nf_mft 99%, r_nf_mp3p 1%, r_mgo_mp 0%, r_fur_fft_hs 0%
-- NF made 9.29 mmol/L: r_dpo_nf 100%
-- NF used 0.664 mmol/L: r_nf_mft 73%, r_nf_decay 23%, r_nf_decay_oh 4%, r_nf_mp3p 1%
+- H2S used 0.221 mmol/L: r_h2s_loss 88%, r_nf_mft 8%, r_nf_mp3p 3%, r_fur_fft_hs 0%
+- NF made 9.42 mmol/L: r_dpo_nf 100%
+- NF used 0.215 mmol/L: r_nf_decay 74%, r_nf_decay_oh 13%, r_nf_mft 9%, r_nf_mp3p 3%
 - FUR made 0.00497 mmol/L: r_tdp_fur 100%
-- FUR used 0.00199 mmol/L: r_fur_decay 93%, r_fur_fft_hs 7%, r_fur_fft 0%
-- MFT made 0.483 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
-- MFT used 0.463 mmol/L: ch_mft_decay 96%, ch_dimer_mft 3%, ch_thiolate_loss_mft 1%
-- FFT made 0.000142 mmol/L: r_fur_fft_hs 96%, r_fur_fft 4%
-- FFT used 5.94e-05 mmol/L: ch_fft_decay 90%, ch_thiolate_loss_fft 10%, ch_dimer_fft 0%
-- ACTZ made 0.0894 mmol/L: r_cys_actz 100%
-- ACTZ used 8.91e-09 mmol/L: ch_actz_decay 100%
+- FUR used 0.00207 mmol/L: r_fur_decay 88%, r_fur_fft_hs 12%, r_fur_fft 0%
+- MFT made 0.0187 mmol/L: r_nf_mft 100%, r_ha_mp_mft 0%, r_ddp_mft 0%, r_ddp_mft_hs 0%
+- MFT used 0.00789 mmol/L: ch_mft_decay 83%, ch_thiolate_loss_mft 8%, ch_dimer_mft 8%
+- FFT made 0.000254 mmol/L: r_fur_fft_hs 96%, r_fur_fft 4%
+- FFT used 9.04e-05 mmol/L: ch_fft_decay 90%, ch_thiolate_loss_fft 10%, ch_dimer_fft 0%
+- ACTZ made 0.0869 mmol/L: r_cys_actz 100%
+- ACTZ used 8.79e-09 mmol/L: ch_actz_decay 100%
 - Cys made 0 mmol/L: 
 - Cys used 3.67 mmol/L: r_cys_thermal 81%, r_cys_h2s 17%, r_cys_actz 2%, r_dpo_ddp 0%
-- final (mmol/L): Cys 16.3, PENT 0, ARP 4.5, TTCA 0, H2S 0.136, NF 8.63, FUR 0.00299, DPO 0.189, MGO 0.27, MFT 0.0199, FFT 8.29e-05, MFTD 0.00633, FFTD 2.77e-10, ACTZ 0.0894, OX 0.994
+- final (mmol/L): Cys 16.3, PENT 0, ARP 4.5, TTCA 0, H2S 0.401, NF 9.21, FUR 0.00291, DPO 0.127, MGO 0.256, MFT 0.0109, FFT 0.000163, MFTD 0.000324, FFTD 6.87e-10, ACTZ 0.0869, OX 1
 

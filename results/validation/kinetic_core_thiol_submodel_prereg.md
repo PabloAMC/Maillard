@@ -321,4 +321,42 @@ pH <= 5.5 (47 % at Hofmann pH 7, 71 % in the Zhai pot).
 **Order now:** (1) round 1 repeated with figure scales (s042, capped, s080); (2) R2b alone, then R2a + R2b, on the
 round-1 winner; (3) in parallel, the in-situ pH of unbuffered near-neutral pots (sub-model 1), which gates R2c.
 
+## 8. Round 1 results, scales per figure (2026-10-30; s042, s042_capped, s080)
+
+The three runs agree: every constant within its Laplace sigma, reduced chi-square 5.38 / 5.40 / 5.32 (21.8 with the
+ledger-keyed scales). `k_dpo_ddp` goes to its 10^-8 bound in all three, so the B59a Strecker share (0.042 vs 0.080)
+is not identified -- the H2S it carries rides on a step the data switch off. Base for round 2: s042.
+
+| constant (log10 x shipped) | s042 | capped | s080 |
+|---|---|---|---|
+| NF -> MGO share | 0.016 +- 0.005 | 0.015 | 0.016 |
+| k_dpo_c2c3 | +2.20 +- 0.18 | +2.21 | +2.26 |
+| k_dpo_nf | -0.19 +- 0.19 | -0.15 | -0.15 |
+| k_nf_mft | -0.68 +- 0.15 | -0.61 | -0.70 |
+| FFT formation (both branches) | -1.28 +- 0.26 | -1.25 | -1.28 |
+| k_h2s_loss | -0.17 +- 0.43 | -0.11 | -0.21 |
+| k_mft_decay | -0.92 +- 0.42 | -0.70 (cap) | -0.91 |
+
+**Done-tests (sec. 4), s042:** Zhai MGO |mean| 0.09 / 0.16 / 0.26 and RMS <= 0.31 -- PASS. Absolute MFT / FFT within
+0.3: Garching fed-precursor pots PASS (T3 0.19, T4 0.29, T10 0.09); Schieberle 2000 FAIL (MFT -1.58, FFT -1.72);
+Zhou 2022 is per-paper scaled (shape MFT 0.03, FFT 0.06 -- PASS). Semi-quantitative shapes <= 0.35: PASS except Zhai
+JAFC Fig. 3 MFT (TTCA arm -1.00, TTCA + Cys +0.62 after their now-shared scale: the lane's MFT answer to added
+cysteine is ~1.6 dex too strong) and Food Chem Fig. 1a FFT (0.71). Constants off their bounds: all but `k_dpo_ddp`.
+`k_mft_decay` 10^-0.9 (x8 slower than shipped) is CF-013's >= x5 from an independent route; `k_h2s_loss` is now
+identified at the shipped value. **Hold-outs, scored once:** Hofmann pH ladder MFT +0.09 / 0.31 (PASS), FFT
++0.10 / 1.66 (the direction still inverted); Hofmann T1 MFT +0.24, FFT -0.52; Yiltirak MFT +1.41, FFT +1.90
+(CF-068); Zhai 140 C, on the scale fitted at 100 - 120 C: FFT -1.44 / -1.47 (the lane's FFT rises too little with
+temperature), MFT TTCA + Cys +1.10. 2-Acetylthiazole x1000 (+2.97), unchanged.
+
+**Expected vs found (sec. 4-5):** `k_h2s_loss` up by > x3: no (P 0.25 stated); `k_dpo_ddp` off its bound: no (0.3);
+Schieberle MFT within x3: no (0.45). Expected failures written in sec. 5 that occurred: 3-DX (no coordinate; now
+within its tau 0.3 scale), Hofmann pH 7 FFT, the temperature ordering (every Ea held).
+
+**Flux at the corrected optimum** (`kinetic_core_thiol_flux_diagnosis_s042.md`, regenerated): in Schieberle's pot
+73 % of the H2S goes to `r_h2s_loss`, and MFT is late, not just low -- -2.4 dex at 30 min, -2.0 at 60, -1.2 at 6 h,
+-0.7 at 12 h. A slope over time cannot come from a multiplier on one step: an early MFT source is missing or too
+slow in a ribose + cysteine pot at 100 C (norfuraneol is the only MFT parent the lane uses; Hofmann T10's
+route split and the intact-C5 DDP route, frozen at 10^-6.5, are the candidates). This is a new structural lead for
+round 3; it does not change round 2's order (R2b, then R2a + R2b).
+
 ## Amendments
