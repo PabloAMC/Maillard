@@ -79,3 +79,25 @@ lacks) -- pre-registered as an expected flag.
 
 **Process note for the morning.** Three design flaws tonight (two reviewer-found, one fit-found), all mine, all
 caught before shipping. The pattern: every "fix" I write gets the same scrutiny as the original design.
+
+## Checkpoint 4 -- 03:10
+
+**Results.** Sub-model 1 arm B (re-run, after Amendment 1): two starts converged; in-sample the hexose acids improve
+(Martins 2005 FA / AA within tolerance), but two Amadori slopes sit on their 1.5 bound, a pH trend remains
+(rho +0.40), leave-one-laboratory-out fails for every laboratory, and the pentose block is unchanged (its cause is
+sub-model 3's k_dpo_ddp, per that review). FROZEN HOLD-OUT (Martins 2005b, committed before scoring): acetic acid
+within tolerance in all five runs (incl. the constant-pH pH-stat, a mode the fit never saw); formic acid
+under-predicted in all four (x10 at pH 5.5, x3 at 6.0, x2 at 7.5, x3.4 pH-stat) -- the over-steep formic slope.
+Martins 2005b's own Table 3 puts the ladder's pH dependence on the glucose-consuming steps (condensation 0.50,
+Glc -> Fru 0.88), which the lane leaves flat: Amendment 2 pre-registers arm C (those steps sloped), which predicts
+the formic slope relaxes.
+
+**Lost time.** Arm A hung for ~1 h on one pot (one worker at 100 % CPU, eight idle): a stiff corner of parameter
+space. Fixed with a 120 s wall-clock limit per pot (a counted failure, tested); queue restarted: arm C, arm A,
+then sub-model 3 A2, A3, A4, A1. ETA: sub-model 1 ~05:30, sub-model 3 A2 / A3 by ~07:30.
+
+**Does it serve the goal?** Yes, and the hold-out is the first lab-independent evidence of the night: the acid
+supply's pH dependence transfers to a mode the fit never saw for acetic acid and fails for formic acid, which names
+the step to look at. Watch item: if arm C also leaves the formic slope on its bound, the 3-DG -> formic exit is not
+a single pH-sloped step (Martins 2005b's Table 3 gives it pD 0.09 +/- 1.10 -- unidentified there too), and that
+step goes to the literature.
