@@ -1,0 +1,1548 @@
+{
+ "artifact": "kinetic_core_ph_acid_submodel_fit_A",
+ "provenance": {
+  "artifact": "kinetic_core_ph_acid_submodel_fit_A",
+  "generated_on": "2026-10-30",
+  "git": {
+   "commit": "3d417c69f3c6e869e5c3ef64eedc1ddd75bf7dd4",
+   "short": "3d417c69",
+   "branch": "submodel1-ph",
+   "dirty": false
+  },
+  "generated_by": "scripts/generators/fit_ph_acid_submodel.py",
+  "inputs": [
+   {
+    "path": "data/lit/fit_rows/ph_acid_submodel.yml",
+    "sha256": "27db4b0c5a7e4c594d29fb4e3395d15121aac0a7c84b36f06c3641891a3574c9"
+   },
+   {
+    "path": "src/kinetic_core/sulfur.py",
+    "sha256": "3a67aa9e0828af888f06a5613798d5d5ac5fedfd5cfde7720fe226657cac904f"
+   },
+   {
+    "path": "src/kinetic_core/ph_state.py",
+    "sha256": "1432efea79d51c13387e9a6344eba25b8953f19ad3d5ac69c9f8350aeaf95944"
+   },
+   {
+    "path": "src/kinetic_core/observations.py",
+    "sha256": "d53acf404b40dd6d887c96d3cf635e15a278bc4ed1a53a46eb8e9e083c8edd1c"
+   },
+   {
+    "path": "src/kinetic_core/trunk_conditions.py",
+    "sha256": "a448ce7e6a76493959c1eac16bffd1b5bd20c867b4790dec6ffb384debdf9f00"
+   },
+   {
+    "path": "src/kinetic_core/parameters.py",
+    "sha256": "e19d346a4337e967543064d473651bb7b8450e32a29714046358b2ca249284e8"
+   },
+   {
+    "path": "src/kinetic_core/fitting.py",
+    "sha256": "53270d23485666fff91b7d5312761c36f7a0665e73cda609ad151678405b4f0b"
+   },
+   {
+    "path": "scripts/generators/build_submodel_probe.py",
+    "sha256": "989d04257383631cac7284c3ea26621e9c61fc809c015df5b564007266738785"
+   }
+  ]
+ },
+ "arm": "A",
+ "ph_coupling": "inline",
+ "rows": 311,
+ "pots": 32,
+ "start": {
+  "slope_ama_tdg": 0.69,
+  "offset_ama_tdg": 0.0,
+  "slope_ama_odg": 0.69,
+  "offset_ama_odg": 0.0,
+  "slope_tdg_fa": 0.77,
+  "offset_tdg_fa": 0.0,
+  "acid_yield": 7.50328133349608e-05,
+  "arp_amine_pka": 7.0679258095802675,
+  "log10_k_aa_frag": -1.9276399911739752,
+  "ea_k_aa_frag": 20.000000150449104
+ },
+ "fit": {
+  "theta": {
+   "slope_ama_tdg": 1.386295756165174,
+   "offset_ama_tdg": -0.4469449036348323,
+   "slope_ama_odg": 1.4999999913792363,
+   "offset_ama_odg": 0.15246043807898774,
+   "slope_tdg_fa": 4.789568109894274e-07,
+   "offset_tdg_fa": 1.4999999974362936,
+   "acid_yield": 0.9999999999003681,
+   "arp_amine_pka": 6.441700888304184,
+   "log10_k_aa_frag": -2.602671887893678,
+   "ea_k_aa_frag": 20.000000001953932
+  },
+  "cost": 9811.261133484302,
+  "start_cost": 9811.261329656043,
+  "start": {
+   "slope_ama_tdg": 1.3862778508423743,
+   "offset_ama_tdg": -0.44694687273393047,
+   "slope_ama_odg": 1.4999999913725004,
+   "offset_ama_odg": 0.15246129240038087,
+   "slope_tdg_fa": 4.802210850884247e-07,
+   "offset_tdg_fa": 1.4999999974242781,
+   "acid_yield": 0.999999999957345,
+   "arp_amine_pka": 6.441700889034955,
+   "log10_k_aa_frag": -2.602672250035267,
+   "ea_k_aa_frag": 20.000000000129038
+  },
+  "status": 2,
+  "budget_exhausted": false,
+  "evaluations": 31,
+  "budget": 480,
+  "seconds": 58.4
+ },
+ "two_starts": {
+  "converged": true,
+  "cost_agreement": true,
+  "disagreeing": [],
+  "unidentified": [
+   "slope_ama_tdg",
+   "slope_tdg_fa",
+   "offset_tdg_fa",
+   "acid_yield"
+  ],
+  "costs": [
+   9811.261133484302,
+   9812.700303851823
+  ],
+  "thetas": [
+   {
+    "slope_ama_tdg": 1.386295756165174,
+    "offset_ama_tdg": -0.4469449036348323,
+    "slope_ama_odg": 1.4999999913792363,
+    "offset_ama_odg": 0.15246043807898774,
+    "slope_tdg_fa": 4.789568109894274e-07,
+    "offset_tdg_fa": 1.4999999974362936,
+    "acid_yield": 0.9999999999003681,
+    "arp_amine_pka": 6.441700888304184,
+    "log10_k_aa_frag": -2.602671887893678,
+    "ea_k_aa_frag": 20.000000001953932
+   },
+   {
+    "slope_ama_tdg": 1.405235080106258,
+    "offset_ama_tdg": -0.44050994631519674,
+    "slope_ama_odg": 1.4999999905334098,
+    "offset_ama_odg": 0.1523112326706606,
+    "slope_tdg_fa": 1.406441241136769e-05,
+    "offset_tdg_fa": 1.4999998540148278,
+    "acid_yield": 0.9999999999999999,
+    "arp_amine_pka": 6.4417012903925785,
+    "log10_k_aa_frag": -2.603995152452723,
+    "ea_k_aa_frag": 20.000000000000004
+   }
+  ]
+ },
+ "laplace": {
+  "chi2_red": 65.19110387697211,
+  "sigma_common": 8.074100809190588,
+  "sigma": {
+   "slope_ama_tdg": 0.29925474577022065,
+   "offset_ama_tdg": 0.11749867033130867,
+   "slope_ama_odg": 0.061104447411873916,
+   "offset_ama_odg": 0.023569091820670046,
+   "slope_tdg_fa": 3.065114775422245,
+   "offset_tdg_fa": 0.9557628565656929,
+   "acid_yield": 1.0156090291538504,
+   "arp_amine_pka": 0.2496043030472492,
+   "log10_k_aa_frag": 0.05530937669557986,
+   "ea_k_aa_frag": 9.648437189351686
+  },
+  "at_bound": {
+   "slope_ama_tdg": false,
+   "offset_ama_tdg": false,
+   "slope_ama_odg": true,
+   "offset_ama_odg": false,
+   "slope_tdg_fa": true,
+   "offset_tdg_fa": true,
+   "acid_yield": true,
+   "arp_amine_pka": false,
+   "log10_k_aa_frag": false,
+   "ea_k_aa_frag": true
+  },
+  "identified": {
+   "slope_ama_tdg": false,
+   "offset_ama_tdg": true,
+   "slope_ama_odg": true,
+   "offset_ama_odg": true,
+   "slope_tdg_fa": false,
+   "offset_tdg_fa": false,
+   "acid_yield": false,
+   "arp_amine_pka": true,
+   "log10_k_aa_frag": true,
+   "ea_k_aa_frag": true
+  },
+  "correlation": [
+   [
+    1.0,
+    0.778,
+    0.417,
+    0.264,
+    -0.666,
+    -0.64,
+    -0.0,
+    0.0,
+    -0.374,
+    -0.184
+   ],
+   [
+    0.778,
+    1.0,
+    0.469,
+    0.352,
+    -0.357,
+    -0.554,
+    -0.0,
+    0.0,
+    -0.543,
+    -0.138
+   ],
+   [
+    0.417,
+    0.469,
+    1.0,
+    0.85,
+    -0.143,
+    -0.209,
+    -0.0,
+    0.0,
+    -0.437,
+    0.079
+   ],
+   [
+    0.264,
+    0.352,
+    0.85,
+    1.0,
+    -0.011,
+    -0.058,
+    -0.0,
+    0.0,
+    -0.059,
+    -0.078
+   ],
+   [
+    -0.666,
+    -0.357,
+    -0.143,
+    -0.011,
+    1.0,
+    0.925,
+    0.0,
+    -0.0,
+    0.185,
+    0.102
+   ],
+   [
+    -0.64,
+    -0.554,
+    -0.209,
+    -0.058,
+    0.925,
+    1.0,
+    0.0,
+    -0.0,
+    0.322,
+    0.092
+   ],
+   [
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    0.0,
+    0.0,
+    1.0,
+    -0.685,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.0,
+    -0.0,
+    -0.685,
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   [
+    -0.374,
+    -0.543,
+    -0.437,
+    -0.059,
+    0.185,
+    0.322,
+    0.0,
+    -0.0,
+    1.0,
+    -0.406
+   ],
+   [
+    -0.184,
+    -0.138,
+    0.079,
+    -0.078,
+    0.102,
+    0.092,
+    0.0,
+    -0.0,
+    -0.406,
+    1.0
+   ]
+  ]
+ },
+ "series_extra_noise": {
+  "davidek2002_tab5_acids_naoh_uptake|davidek2002_water_ph5|FA+AA": 0.16098191685572055,
+  "davidek2002_tab5_acids_naoh_uptake|davidek2002_water_ph6|FA+AA": 0.16098191685572055,
+  "davidek2002_tab5_acids_naoh_uptake|davidek2002_water_ph7|FA+AA": 0.16098191685572055,
+  "davidek2002_tab5_acids_naoh_uptake|davidek2002_water_ph8|FA+AA": 0.16098191685572055,
+  "davidek2002_tab5_acids_naoh_uptake|davidek2002_phosphate_ph5|FA+AA": 0.16098191685572055,
+  "davidek2002_tab5_acids_naoh_uptake|davidek2002_phosphate_ph6|FA+AA": 0.16098191685572055,
+  "davidek2002_tab5_acids_naoh_uptake|davidek2002_phosphate_ph7|FA+AA": 0.16098191685572055,
+  "davidek2002_tab5_acids_naoh_uptake|davidek2002_phosphate_ph8|FA+AA": 0.16098191685572055,
+  "martins2003b_fig6_organic_acids|martins2003b_100c_ph68|FA": 0.09507654763292454,
+  "martins2003b_fig6_organic_acids|martins2003b_100c_ph55|FA": 0.09507654763292454,
+  "martins2003b_fig6_organic_acids|martins2003b_120c_ph68|FA": 0.09507654763292454,
+  "martins2003b_fig6_organic_acids|martins2003b_120c_ph55|FA": 0.09507654763292454,
+  "martins2003b_fig7_ph_drift|martins2003b_100c_ph68_drift|pH": 0.05265272565947203,
+  "martins2003b_fig7_ph_drift|martins2003b_120c_ph68_drift|pH": 0.05265272565947203,
+  "martins2005b_fig4_ph_drift_ladder|martins2005b_ph48|pH": 0.18297713776906527,
+  "martins2005b_fig4_ph_drift_ladder|martins2005b_ph55|pH": 0.18297713776906527,
+  "martins2005b_fig4_ph_drift_ladder|martins2005b_ph60|pH": 0.18297713776906527,
+  "martins2005b_fig4_ph_drift_ladder|martins2005b_ph68|pH": 0.18297713776906527,
+  "martins2005b_fig4_ph_drift_ladder|martins2005b_ph75|pH": 0.18297713776906527,
+  "cao2017_fig4c_ph|cao2017_blank|pH": 0.10961933399024149,
+  "cao2017_fig4c_ph|cao2017_gly_x1|pH": 0.10961933399024149,
+  "zhao2017b_fig2c_ph_diluted|zhao2017b_blank|pH_6x_dilution_25C": 0.06821350774625871
+ },
+ "failed_pot_runs": 10,
+ "failures_sample": [
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s",
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s",
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s",
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s",
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s",
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s",
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s",
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s",
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s",
+  "zhou2023_arp_cys_ph6: PotTimeout: pot zhou2023_arp_cys_ph6 exceeded 120 s"
+ ],
+ "raw_at_start": {
+  "cao2017_fig4c_ph | pH": {
+   "n": 12,
+   "mean": -0.7897925316821782,
+   "rms": 0.8131510531349362,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "davidek2002_tab5_acids_naoh_uptake | FA+AA": {
+   "n": 53,
+   "mean": -0.1889789356459181,
+   "rms": 0.3584205711446271,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "martins2003b_fig6_organic_acids | AA": {
+   "n": 32,
+   "mean": 0.08743902599547163,
+   "rms": 0.51642132431764,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "martins2003b_fig6_organic_acids | FA": {
+   "n": 23,
+   "mean": -0.22880675673194054,
+   "rms": 0.45808480910454724,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "martins2003b_fig7_ph_drift | pH": {
+   "n": 16,
+   "mean": 0.08545477447286248,
+   "rms": 0.1032674751030113,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "martins2005_glc_gly_multiresponse_timecourses | AA": {
+   "n": 57,
+   "mean": -0.07658339202591455,
+   "rms": 0.13593412190803209,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "martins2005_glc_gly_multiresponse_timecourses | FA": {
+   "n": 54,
+   "mean": -0.407302882671283,
+   "rms": 0.47852875017669255,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "martins2005b_fig4_ph_drift_ladder | pH": {
+   "n": 52,
+   "mean": 0.22027034473476503,
+   "rms": 0.4409927493160736,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhao2017b_fig2c_ph_diluted | pH_6x_dilution_25C": {
+   "n": 6,
+   "mean": -0.8176846790735919,
+   "rms": 0.8206950963415067,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2023_fig2_final_ph | pH": {
+   "n": 6,
+   "mean": 0.3944053827126821,
+   "rms": 0.981395896483591,
+   "tolerance": 0.3,
+   "within": false
+  }
+ },
+ "raw_at_optimum": {
+  "cao2017_fig4c_ph | pH": {
+   "n": 12,
+   "mean": -0.812256367923692,
+   "rms": 0.8338905156420644,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "davidek2002_tab5_acids_naoh_uptake | FA+AA": {
+   "n": 53,
+   "mean": -0.2871956212359485,
+   "rms": 0.45288840519198675,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "martins2003b_fig6_organic_acids | AA": {
+   "n": 32,
+   "mean": -0.03701860961911366,
+   "rms": 0.17028382135050477,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "martins2003b_fig6_organic_acids | FA": {
+   "n": 23,
+   "mean": -0.357102678764995,
+   "rms": 0.4808266027699439,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "martins2003b_fig7_ph_drift | pH": {
+   "n": 16,
+   "mean": 0.05438579168356955,
+   "rms": 0.07503640497719795,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "martins2005_glc_gly_multiresponse_timecourses | AA": {
+   "n": 57,
+   "mean": 0.02884690451788154,
+   "rms": 0.1409274988285808,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "martins2005_glc_gly_multiresponse_timecourses | FA": {
+   "n": 54,
+   "mean": -0.1001255593393438,
+   "rms": 0.19422542117648853,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "martins2005b_fig4_ph_drift_ladder | pH": {
+   "n": 52,
+   "mean": 0.22765416302517624,
+   "rms": 0.35212698829176,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhao2017b_fig2c_ph_diluted | pH_6x_dilution_25C": {
+   "n": 6,
+   "mean": -0.8409984534904359,
+   "rms": 0.8432594314523346,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2023_fig2_final_ph | pH": {
+   "n": 6,
+   "mean": 0.4693722902139028,
+   "rms": 0.737418545239828,
+   "tolerance": 0.3,
+   "within": false
+  }
+ },
+ "diagnostic_rows_at_optimum": {
+  "brands2001_fig3_ph_titratable_acid | FA+AA": {
+   "n": 13,
+   "mean": -0.0856196265107486,
+   "rms": 0.39700208785464963,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "brands2001_fig3_ph_titratable_acid | TA_to_pH8.3": {
+   "n": 13,
+   "mean": -0.48053913220926125,
+   "rms": 0.6085253213458948,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "brands2001_fig3_ph_titratable_acid | pH": {
+   "n": 14,
+   "mean": 0.1655144044767533,
+   "rms": 0.17957035556814743,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "davidek2002_tab5_acids_naoh_uptake | NaOH_uptake": {
+   "n": 49,
+   "mean": -11.720601903553417,
+   "rms": 18.778887389023648,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "nguyen2016_figs1_ph_mass_balance | pH": {
+   "n": 24,
+   "mean": 0.036902725581700636,
+   "rms": 0.05577954894693693,
+   "tolerance": 0.3,
+   "within": true
+  }
+ },
+ "diagnostics_whitened": {
+  "n": 311,
+  "rms": 7.943231515160314,
+  "by": {
+   "laboratory": {
+    "btbu_xie": {
+     "n": 18,
+     "mean": -8.824162195685771,
+     "rms": 9.255868620617381,
+     "share_positive": 0.0
+    },
+    "jiangnan_zhang_x": {
+     "n": 6,
+     "mean": 3.7227343889769533,
+     "rms": 8.64297252801555,
+     "share_positive": 0.6666666666666666
+    },
+    "nestle_blank": {
+     "n": 53,
+     "mean": -1.6727965166755443,
+     "rms": 2.6517601105916655,
+     "share_positive": 0.18867924528301888
+    },
+    "wageningen_van_boekel": {
+     "n": 234,
+     "mean": -0.6700760676358691,
+     "rms": 8.588291938972691,
+     "share_positive": 0.5085470085470085
+    }
+   },
+   "data_set": {
+    "cao2017_fig4c_ph": {
+     "n": 12,
+     "mean": -7.136978068994899,
+     "rms": 7.328300882778485,
+     "share_positive": 0.0
+    },
+    "davidek2002_tab5_acids_naoh_uptake": {
+     "n": 53,
+     "mean": -1.6727965166755443,
+     "rms": 2.6517601105916655,
+     "share_positive": 0.18867924528301888
+    },
+    "martins2003b_fig6_organic_acids": {
+     "n": 55,
+     "mean": -1.9467257577507973,
+     "rms": 11.530838678606475,
+     "share_positive": 0.2909090909090909
+    },
+    "martins2003b_fig7_ph_drift": {
+     "n": 16,
+     "mean": 1.0282890076023512,
+     "rms": 1.4187365490049761,
+     "share_positive": 0.8125
+    },
+    "martins2005_glc_gly_multiresponse_timecourses": {
+     "n": 111,
+     "mean": -1.1782054259504477,
+     "rms": 9.358970249815211,
+     "share_positive": 0.45045045045045046
+    },
+    "martins2005b_fig4_ph_drift_ladder": {
+     "n": 52,
+     "mean": 1.2423133655454328,
+     "rms": 1.9215640869951314,
+     "share_positive": 0.7692307692307693
+    },
+    "zhao2017b_fig2c_ph_diluted": {
+     "n": 6,
+     "mean": -12.198530449067517,
+     "rms": 12.231325525441822,
+     "share_positive": 0.0
+    },
+    "zhou2023_fig2_final_ph": {
+     "n": 6,
+     "mean": 3.7227343889769533,
+     "rms": 8.64297252801555,
+     "share_positive": 0.6666666666666666
+    }
+   },
+   "observable": {
+    "AA": {
+     "n": 89,
+     "mean": -1.034795033602705,
+     "rms": 12.644297868380718,
+     "share_positive": 0.48314606741573035
+    },
+    "FA": {
+     "n": 77,
+     "mean": -1.8929085839760091,
+     "rms": 6.036870813608646,
+     "share_positive": 0.2987012987012987
+    },
+    "FA+AA": {
+     "n": 53,
+     "mean": -1.6727965166755443,
+     "rms": 2.6517601105916655,
+     "share_positive": 0.18867924528301888
+    },
+    "pH": {
+     "n": 86,
+     "mean": 0.20634405390608218,
+     "rms": 3.9131026604613344,
+     "share_positive": 0.6627906976744186
+    },
+    "pH_6x_dilution_25C": {
+     "n": 6,
+     "mean": -12.198530449067517,
+     "rms": 12.231325525441822,
+     "share_positive": 0.0
+    }
+   },
+   "temperature_C": {
+    "100.0": {
+     "n": 146,
+     "mean": 1.5548109759468247,
+     "rms": 7.1205411277323005,
+     "share_positive": 0.6164383561643836
+    },
+    "120.0": {
+     "n": 73,
+     "mean": -5.138848189198979,
+     "rms": 11.83651089942395,
+     "share_positive": 0.2465753424657534
+    },
+    "80.0": {
+     "n": 21,
+     "mean": 0.6510534204932087,
+     "rms": 1.923904243362473,
+     "share_positive": 0.7142857142857143
+    },
+    "90.0": {
+     "n": 71,
+     "mean": -3.485818801495039,
+     "rms": 5.193125127467534,
+     "share_positive": 0.14084507042253522
+    }
+   },
+   "label_pH": {
+    "4.8": {
+     "n": 11,
+     "mean": -0.1859306983360985,
+     "rms": 0.2196175864435903,
+     "share_positive": 0.0
+    },
+    "5.0": {
+     "n": 11,
+     "mean": -4.2767111042575925,
+     "rms": 4.653294482245863,
+     "share_positive": 0.0
+    },
+    "5.5": {
+     "n": 51,
+     "mean": -5.054071060984606,
+     "rms": 7.149286307009788,
+     "share_positive": 0.29411764705882354
+    },
+    "6.0": {
+     "n": 27,
+     "mean": -0.8413954491639662,
+     "rms": 2.882788431238986,
+     "share_positive": 0.48148148148148145
+    },
+    "6.8": {
+     "n": 169,
+     "mean": -0.5458032057249232,
+     "rms": 9.756615464071603,
+     "share_positive": 0.4970414201183432
+    },
+    "7.0": {
+     "n": 16,
+     "mean": 1.3699251424868033,
+     "rms": 4.438922301948036,
+     "share_positive": 0.5
+    },
+    "7.5": {
+     "n": 10,
+     "mean": 2.6891082424654744,
+     "rms": 3.0021990886161434,
+     "share_positive": 1.0
+    },
+    "8.0": {
+     "n": 16,
+     "mean": -0.559956891864904,
+     "rms": 1.9353572656566425,
+     "share_positive": 0.1875
+    }
+   },
+   "time_min": {
+    "10.0": {
+     "n": 10,
+     "mean": -3.646731104876392,
+     "rms": 12.146947931425329,
+     "share_positive": 0.2
+    },
+    "120.0": {
+     "n": 39,
+     "mean": -1.7501111288287217,
+     "rms": 8.344975364433385,
+     "share_positive": 0.5897435897435898
+    },
+    "15.0": {
+     "n": 27,
+     "mean": -3.1993193668327695,
+     "rms": 9.709380960356699,
+     "share_positive": 0.3333333333333333
+    },
+    "150.0": {
+     "n": 22,
+     "mean": 3.4390980545760113,
+     "rms": 6.561195001049528,
+     "share_positive": 0.6818181818181818
+    },
+    "180.0": {
+     "n": 29,
+     "mean": -0.652993474346091,
+     "rms": 5.752190921347292,
+     "share_positive": 0.41379310344827586
+    },
+    "20.0": {
+     "n": 6,
+     "mean": -12.314374042080876,
+     "rms": 13.42291160956538,
+     "share_positive": 0.0
+    },
+    "210.0": {
+     "n": 6,
+     "mean": 8.145055693313227,
+     "rms": 12.588027938682883,
+     "share_positive": 0.8333333333333334
+    },
+    "240.0": {
+     "n": 18,
+     "mean": 1.5336449994358743,
+     "rms": 10.360744108855659,
+     "share_positive": 0.3888888888888889
+    },
+    "30.0": {
+     "n": 31,
+     "mean": -2.5150749598953093,
+     "rms": 6.860266397478028,
+     "share_positive": 0.3548387096774194
+    },
+    "300.0": {
+     "n": 11,
+     "mean": -3.6520499281928767,
+     "rms": 4.728253025898763,
+     "share_positive": 0.0
+    },
+    "360.0": {
+     "n": 8,
+     "mean": -2.513802978623256,
+     "rms": 3.102511329163459,
+     "share_positive": 0.0
+    },
+    "420.0": {
+     "n": 8,
+     "mean": -2.8162294298301345,
+     "rms": 3.4012294685901616,
+     "share_positive": 0.0
+    },
+    "45.0": {
+     "n": 20,
+     "mean": -0.6277369408603791,
+     "rms": 5.150858920366599,
+     "share_positive": 0.35
+    },
+    "5.0": {
+     "n": 11,
+     "mean": 2.421185312144865,
+     "rms": 8.861108575737356,
+     "share_positive": 0.45454545454545453
+    },
+    "60.0": {
+     "n": 37,
+     "mean": -1.3068760002633228,
+     "rms": 7.844922544541929,
+     "share_positive": 0.5405405405405406
+    },
+    "75.0": {
+     "n": 3,
+     "mean": -0.27859111591449,
+     "rms": 0.518819984883352,
+     "share_positive": 0.3333333333333333
+    },
+    "90.0": {
+     "n": 25,
+     "mean": -2.170891551511287,
+     "rms": 7.664171848134375,
+     "share_positive": 0.64
+    }
+   },
+   "sugar": {
+    "AMA": {
+     "n": 124,
+     "mean": -1.4457702253101619,
+     "rms": 7.8892052261041,
+     "share_positive": 0.31451612903225806
+    },
+    "ARP": {
+     "n": 6,
+     "mean": 3.7227343889769533,
+     "rms": 8.64297252801555,
+     "share_positive": 0.6666666666666666
+    },
+    "Glc": {
+     "n": 163,
+     "mean": -0.4060153820376515,
+     "rms": 7.799060515743409,
+     "share_positive": 0.5521472392638037
+    },
+    "PENT": {
+     "n": 18,
+     "mean": -8.824162195685771,
+     "rms": 9.255868620617381,
+     "share_positive": 0.0
+    }
+   },
+   "amine": {
+    "Cys": {
+     "n": 15,
+     "mean": -7.494416803419426,
+     "rms": 9.741556059476913,
+     "share_positive": 0.13333333333333333
+    },
+    "Gly": {
+     "n": 163,
+     "mean": -0.4060153820376515,
+     "rms": 7.799060515743409,
+     "share_positive": 0.5521472392638037
+    },
+    "Gly+Cys": {
+     "n": 6,
+     "mean": -5.79246972131187,
+     "rms": 5.874232430543469,
+     "share_positive": 0.0
+    },
+    "none": {
+     "n": 127,
+     "mean": -1.3275822893525953,
+     "rms": 7.9751003680797945,
+     "share_positive": 0.3228346456692913
+    }
+   },
+   "buffer": {
+    "clamped": {
+     "n": 53,
+     "mean": -1.6727965166755443,
+     "rms": 2.6517601105916655,
+     "share_positive": 0.18867924528301888
+    },
+    "none": {
+     "n": 6,
+     "mean": 3.7227343889769533,
+     "rms": 8.64297252801555,
+     "share_positive": 0.6666666666666666
+    },
+    "phosphate": {
+     "n": 252,
+     "mean": -1.2525107910680051,
+     "rms": 8.637687204915414,
+     "share_positive": 0.4722222222222222
+    }
+   }
+  },
+  "trends": {
+   "temperature_C": {
+    "rho": -0.07435682410354746,
+    "p": 0.19093173948060396
+   },
+   "label_pH": {
+    "rho": 0.2762860913636468,
+    "p": 7.443876450299663e-07
+   },
+   "time_min": {
+    "rho": 0.09746706790403209,
+    "p": 0.08615892973035577
+   }
+  },
+  "flags": [
+   "laboratory=btbu_xie: mean residual -8.82 over 18 rows (one sign)",
+   "laboratory=jiangnan_zhang_x: mean residual +3.72 over 6 rows (one sign)",
+   "laboratory=nestle_blank: mean residual -1.67 over 53 rows (one sign)",
+   "laboratory=wageningen_van_boekel: mean residual -0.67 over 234 rows (one sign)",
+   "data_set=cao2017_fig4c_ph: mean residual -7.14 over 12 rows (one sign)",
+   "data_set=davidek2002_tab5_acids_naoh_uptake: mean residual -1.67 over 53 rows (one sign)",
+   "data_set=martins2003b_fig6_organic_acids: mean residual -1.95 over 55 rows (one sign)",
+   "data_set=martins2003b_fig7_ph_drift: mean residual +1.03 over 16 rows (one sign)",
+   "data_set=martins2005_glc_gly_multiresponse_timecourses: mean residual -1.18 over 111 rows (one sign)",
+   "data_set=martins2005b_fig4_ph_drift_ladder: mean residual +1.24 over 52 rows (one sign)",
+   "data_set=zhao2017b_fig2c_ph_diluted: mean residual -12.20 over 6 rows (one sign)",
+   "data_set=zhou2023_fig2_final_ph: mean residual +3.72 over 6 rows (one sign)",
+   "observable=AA: mean residual -1.03 over 89 rows (one sign)",
+   "observable=FA: mean residual -1.89 over 77 rows (one sign)",
+   "observable=FA+AA: mean residual -1.67 over 53 rows (one sign)",
+   "observable=pH_6x_dilution_25C: mean residual -12.20 over 6 rows (one sign)",
+   "temperature_C=100.0: mean residual +1.55 over 146 rows (one sign)",
+   "temperature_C=120.0: mean residual -5.14 over 73 rows (one sign)",
+   "temperature_C=80.0: mean residual +0.65 over 21 rows (one sign)",
+   "temperature_C=90.0: mean residual -3.49 over 71 rows (one sign)",
+   "label_pH=5.0: mean residual -4.28 over 11 rows (one sign)",
+   "label_pH=5.5: mean residual -5.05 over 51 rows (one sign)",
+   "label_pH=6.0: mean residual -0.84 over 27 rows (one sign)",
+   "label_pH=6.8: mean residual -0.55 over 169 rows (one sign)",
+   "label_pH=7.0: mean residual +1.37 over 16 rows (one sign)",
+   "label_pH=7.5: mean residual +2.69 over 10 rows (one sign)",
+   "residual trends with label_pH: rank correlation +0.28 (p = 7.4e-07)",
+   "time_min=10.0: mean residual -3.65 over 10 rows (one sign)",
+   "time_min=120.0: mean residual -1.75 over 39 rows (one sign)",
+   "time_min=15.0: mean residual -3.20 over 27 rows (one sign)",
+   "time_min=150.0: mean residual +3.44 over 22 rows (one sign)",
+   "time_min=180.0: mean residual -0.65 over 29 rows (one sign)",
+   "time_min=20.0: mean residual -12.31 over 6 rows (one sign)",
+   "time_min=210.0: mean residual +8.15 over 6 rows (one sign)",
+   "time_min=240.0: mean residual +1.53 over 18 rows (one sign)",
+   "time_min=30.0: mean residual -2.52 over 31 rows (one sign)",
+   "time_min=300.0: mean residual -3.65 over 11 rows (one sign)",
+   "time_min=360.0: mean residual -2.51 over 8 rows (one sign)",
+   "time_min=420.0: mean residual -2.82 over 8 rows (one sign)",
+   "time_min=45.0: mean residual -0.63 over 20 rows (one sign)",
+   "time_min=5.0: mean residual +2.42 over 11 rows (one sign)",
+   "time_min=60.0: mean residual -1.31 over 37 rows (one sign)",
+   "time_min=90.0: mean residual -2.17 over 25 rows (one sign)",
+   "sugar=AMA: mean residual -1.45 over 124 rows (one sign)",
+   "sugar=ARP: mean residual +3.72 over 6 rows (one sign)",
+   "sugar=Glc: mean residual -0.41 over 163 rows (one sign)",
+   "sugar=PENT: mean residual -8.82 over 18 rows (one sign)",
+   "amine=Cys: mean residual -7.49 over 15 rows (one sign)",
+   "amine=Gly: mean residual -0.41 over 163 rows (one sign)",
+   "amine=Gly+Cys: mean residual -5.79 over 6 rows (one sign)",
+   "amine=none: mean residual -1.33 over 127 rows (one sign)",
+   "buffer=clamped: mean residual -1.67 over 53 rows (one sign)",
+   "buffer=none: mean residual +3.72 over 6 rows (one sign)",
+   "buffer=phosphate: mean residual -1.25 over 252 rows (one sign)"
+  ]
+ },
+ "diagnostics_raw": {
+  "n": 311,
+  "rms": 0.3705243509920037,
+  "by": {
+   "laboratory": {
+    "btbu_xie": {
+     "n": 18,
+     "mean": -0.8218370631126066,
+     "rms": 0.8370251395844075,
+     "share_positive": 0.0
+    },
+    "jiangnan_zhang_x": {
+     "n": 6,
+     "mean": 0.4693722902139028,
+     "rms": 0.737418545239828,
+     "share_positive": 0.6666666666666666
+    },
+    "nestle_blank": {
+     "n": 53,
+     "mean": -0.2871956212359485,
+     "rms": 0.45288840519198675,
+     "share_positive": 0.18867924528301888
+    },
+    "wageningen_van_boekel": {
+     "n": 234,
+     "mean": -0.001932797529767356,
+     "rms": 0.2610974894213427,
+     "share_positive": 0.5085470085470085
+    }
+   },
+   "data_set": {
+    "cao2017_fig4c_ph": {
+     "n": 12,
+     "mean": -0.812256367923692,
+     "rms": 0.8338905156420644,
+     "share_positive": 0.0
+    },
+    "davidek2002_tab5_acids_naoh_uptake": {
+     "n": 53,
+     "mean": -0.2871956212359485,
+     "rms": 0.45288840519198675,
+     "share_positive": 0.18867924528301888
+    },
+    "martins2003b_fig6_organic_acids": {
+     "n": 55,
+     "mean": -0.17087194762557312,
+     "rms": 0.33697471333399226,
+     "share_positive": 0.2909090909090909
+    },
+    "martins2003b_fig7_ph_drift": {
+     "n": 16,
+     "mean": 0.05438579168356955,
+     "rms": 0.07503640497719795,
+     "share_positive": 0.8125
+    },
+    "martins2005_glc_gly_multiresponse_timecourses": {
+     "n": 111,
+     "mean": -0.03389645627752539,
+     "rms": 0.16896936350782257,
+     "share_positive": 0.45045045045045046
+    },
+    "martins2005b_fig4_ph_drift_ladder": {
+     "n": 52,
+     "mean": 0.22765416302517624,
+     "rms": 0.35212698829176,
+     "share_positive": 0.7692307692307693
+    },
+    "zhao2017b_fig2c_ph_diluted": {
+     "n": 6,
+     "mean": -0.8409984534904359,
+     "rms": 0.8432594314523346,
+     "share_positive": 0.0
+    },
+    "zhou2023_fig2_final_ph": {
+     "n": 6,
+     "mean": 0.4693722902139028,
+     "rms": 0.737418545239828,
+     "share_positive": 0.6666666666666666
+    }
+   },
+   "observable": {
+    "AA": {
+     "n": 89,
+     "mean": 0.005164921906827082,
+     "rms": 0.15213619230571004,
+     "share_positive": 0.48314606741573035
+    },
+    "FA": {
+     "n": 77,
+     "mean": -0.17688495864830453,
+     "rms": 0.3090525293244886,
+     "share_positive": 0.2987012987012987
+    },
+    "FA+AA": {
+     "n": 53,
+     "mean": -0.2871956212359485,
+     "rms": 0.45288840519198675,
+     "share_positive": 0.18867924528301888
+    },
+    "pH": {
+     "n": 86,
+     "mean": 0.06717844733076038,
+     "rms": 0.4593339767533463,
+     "share_positive": 0.6627906976744186
+    },
+    "pH_6x_dilution_25C": {
+     "n": 6,
+     "mean": -0.8409984534904359,
+     "rms": 0.8432594314523346,
+     "share_positive": 0.0
+    }
+   },
+   "temperature_C": {
+    "100.0": {
+     "n": 146,
+     "mean": 0.06133699847396791,
+     "rms": 0.2414611604276768,
+     "share_positive": 0.6164383561643836
+    },
+    "120.0": {
+     "n": 73,
+     "mean": -0.12217273380574939,
+     "rms": 0.36182290583308174,
+     "share_positive": 0.2465753424657534
+    },
+    "80.0": {
+     "n": 21,
+     "mean": 0.11082699571134517,
+     "rms": 0.23358252209330616,
+     "share_positive": 0.7142857142857143
+    },
+    "90.0": {
+     "n": 71,
+     "mean": -0.4227385219934111,
+     "rms": 0.575089933173621,
+     "share_positive": 0.14084507042253522
+    }
+   },
+   "label_pH": {
+    "4.8": {
+     "n": 11,
+     "mean": -0.03407183620841681,
+     "rms": 0.040244964929177854,
+     "share_positive": 0.0
+    },
+    "5.0": {
+     "n": 11,
+     "mean": -0.7541141871416805,
+     "rms": 0.804569944943829,
+     "share_positive": 0.0
+    },
+    "5.5": {
+     "n": 51,
+     "mean": -0.3702610869406138,
+     "rms": 0.564249301878292,
+     "share_positive": 0.29411764705882354
+    },
+    "6.0": {
+     "n": 27,
+     "mean": -0.09938180454262845,
+     "rms": 0.34277940666065715,
+     "share_positive": 0.48148148148148145
+    },
+    "6.8": {
+     "n": 169,
+     "mean": -0.015736909206595723,
+     "rms": 0.22708623358913518,
+     "share_positive": 0.4970414201183432
+    },
+    "7.0": {
+     "n": 16,
+     "mean": 0.10629665977850666,
+     "rms": 0.3929744813987853,
+     "share_positive": 0.5
+    },
+    "7.5": {
+     "n": 10,
+     "mean": 0.49277960231378676,
+     "rms": 0.5501535600510773,
+     "share_positive": 1.0
+    },
+    "8.0": {
+     "n": 16,
+     "mean": -0.08642565327626785,
+     "rms": 0.347844439380414,
+     "share_positive": 0.1875
+    }
+   },
+   "time_min": {
+    "10.0": {
+     "n": 10,
+     "mean": -0.14190519600491489,
+     "rms": 0.2331751997857395,
+     "share_positive": 0.2
+    },
+    "120.0": {
+     "n": 39,
+     "mean": -0.06226469952017803,
+     "rms": 0.3611867429004529,
+     "share_positive": 0.5897435897435898
+    },
+    "15.0": {
+     "n": 27,
+     "mean": -0.10065764508875485,
+     "rms": 0.2388334303325103,
+     "share_positive": 0.3333333333333333
+    },
+    "150.0": {
+     "n": 22,
+     "mean": 0.09718348309013503,
+     "rms": 0.23345240740625925,
+     "share_positive": 0.6818181818181818
+    },
+    "180.0": {
+     "n": 29,
+     "mean": -0.09220169190945214,
+     "rms": 0.39785222857497116,
+     "share_positive": 0.41379310344827586
+    },
+    "20.0": {
+     "n": 6,
+     "mean": -0.1345956189863251,
+     "rms": 0.1611664825766659,
+     "share_positive": 0.0
+    },
+    "210.0": {
+     "n": 6,
+     "mean": 0.24269743115808026,
+     "rms": 0.3622535245659103,
+     "share_positive": 0.8333333333333334
+    },
+    "240.0": {
+     "n": 18,
+     "mean": -0.12762269650398098,
+     "rms": 0.5271039506681205,
+     "share_positive": 0.3888888888888889
+    },
+    "30.0": {
+     "n": 31,
+     "mean": -0.16905368967717832,
+     "rms": 0.36962761066547273,
+     "share_positive": 0.3548387096774194
+    },
+    "300.0": {
+     "n": 11,
+     "mean": -0.4695045787335506,
+     "rms": 0.5575189091957858,
+     "share_positive": 0.0
+    },
+    "360.0": {
+     "n": 8,
+     "mean": -0.42342038458794096,
+     "rms": 0.5222597445070154,
+     "share_positive": 0.0
+    },
+    "420.0": {
+     "n": 8,
+     "mean": -0.47278120571745275,
+     "rms": 0.57129069597137,
+     "share_positive": 0.0
+    },
+    "45.0": {
+     "n": 20,
+     "mean": -0.08254998527253012,
+     "rms": 0.25954659538948427,
+     "share_positive": 0.35
+    },
+    "5.0": {
+     "n": 11,
+     "mean": 0.003415726222522222,
+     "rms": 0.1674249315443458,
+     "share_positive": 0.45454545454545453
+    },
+    "60.0": {
+     "n": 37,
+     "mean": -0.007910433270209941,
+     "rms": 0.45590437481723894,
+     "share_positive": 0.5405405405405406
+    },
+    "75.0": {
+     "n": 3,
+     "mean": -0.04348696668099083,
+     "rms": 0.08254519122182472,
+     "share_positive": 0.3333333333333333
+    },
+    "90.0": {
+     "n": 25,
+     "mean": 0.028418677379949676,
+     "rms": 0.2812455144674471,
+     "share_positive": 0.64
+    }
+   },
+   "sugar": {
+    "AMA": {
+     "n": 124,
+     "mean": -0.19152542240302162,
+     "rms": 0.3725042124913192,
+     "share_positive": 0.31451612903225806
+    },
+    "ARP": {
+     "n": 6,
+     "mean": 0.4693722902139028,
+     "rms": 0.737418545239828,
+     "share_positive": 0.6666666666666666
+    },
+    "Glc": {
+     "n": 163,
+     "mean": 0.04954300509511564,
+     "rms": 0.2428963690031192,
+     "share_positive": 0.5521472392638037
+    },
+    "PENT": {
+     "n": 18,
+     "mean": -0.8218370631126066,
+     "rms": 0.8370251395844075,
+     "share_positive": 0.0
+    }
+   },
+   "amine": {
+    "Cys": {
+     "n": 15,
+     "mean": -0.6581405033804477,
+     "rms": 0.8522617590192837,
+     "share_positive": 0.13333333333333333
+    },
+    "Gly": {
+     "n": 163,
+     "mean": 0.04954300509511564,
+     "rms": 0.2428963690031192,
+     "share_positive": 0.5521472392638037
+    },
+    "Gly+Cys": {
+     "n": 6,
+     "mean": -0.6535081054580708,
+     "rms": 0.6617300060550747,
+     "share_positive": 0.0
+    },
+    "none": {
+     "n": 127,
+     "mean": -0.17269944558474837,
+     "rms": 0.39242140635345724,
+     "share_positive": 0.3228346456692913
+    }
+   },
+   "buffer": {
+    "clamped": {
+     "n": 53,
+     "mean": -0.2871956212359485,
+     "rms": 0.45288840519198675,
+     "share_positive": 0.18867924528301888
+    },
+    "none": {
+     "n": 6,
+     "mean": 0.4693722902139028,
+     "rms": 0.737418545239828,
+     "share_positive": 0.6666666666666666
+    },
+    "phosphate": {
+     "n": 252,
+     "mean": -0.060497387928541584,
+     "rms": 0.3366691647664941,
+     "share_positive": 0.4722222222222222
+    }
+   }
+  },
+  "trends": {
+   "temperature_C": {
+    "rho": 0.08263972912630965,
+    "p": 0.14594987797619913
+   },
+   "label_pH": {
+    "rho": 0.3200378194933406,
+    "p": 7.752064554367094e-09
+   },
+   "time_min": {
+    "rho": -0.07007188777907378,
+    "p": 0.21784807934730516
+   }
+  },
+  "flags": [
+   "laboratory=btbu_xie: mean residual -0.82 over 18 rows (one sign)",
+   "data_set=cao2017_fig4c_ph: mean residual -0.81 over 12 rows (one sign)",
+   "temperature_C=90.0: mean residual -0.42 over 71 rows (one sign)",
+   "label_pH=5.0: mean residual -0.75 over 11 rows (one sign)",
+   "label_pH=5.5: mean residual -0.37 over 51 rows (one sign)",
+   "residual trends with label_pH: rank correlation +0.32 (p = 7.8e-09)",
+   "sugar=PENT: mean residual -0.82 over 18 rows (one sign)",
+   "amine=Cys: mean residual -0.66 over 15 rows (one sign)"
+  ]
+ },
+ "shipped_coupling_max_abs_difference": 0.0006973135760328653,
+ "leave_one_laboratory_out": {
+  "btbu_xie": {
+   "rows_kept": 293,
+   "rows_held": 18,
+   "theta": {
+    "slope_ama_tdg": 1.3786763009708125,
+    "offset_ama_tdg": -0.4496718225429247,
+    "slope_ama_odg": 1.4999999514537588,
+    "offset_ama_odg": 0.1526503437764131,
+    "slope_tdg_fa": 1.4919436234059249e-06,
+    "offset_tdg_fa": 1.499999998803236,
+    "acid_yield": 0.9999999999999999,
+    "arp_amine_pka": 6.441700853166574,
+    "log10_k_aa_frag": -2.6036748018260965,
+    "ea_k_aa_frag": 20.000000000000004
+   },
+   "shift_sigma": {
+    "slope_ama_tdg": -0.025461434787778073,
+    "offset_ama_tdg": -0.023208083124714198,
+    "slope_ama_odg": -6.533972449103115e-07,
+    "offset_ama_odg": 0.008057404115113624,
+    "slope_tdg_fa": 3.304890311250906e-07,
+    "offset_tdg_fa": 1.430210776354784e-09,
+    "acid_yield": 9.810049382859133e-11,
+    "arp_amine_pka": -1.4077325481116622e-07,
+    "log10_k_aa_frag": -0.01813280120545109,
+    "ea_k_aa_frag": -2.0251244177144804e-10
+   },
+   "beyond_2_sigma": [],
+   "held_out_raw": {
+    "cao2017_fig4c_ph | pH": {
+     "n": 12,
+     "mean": -0.812256367923692,
+     "rms": 0.8338905156420644,
+     "tolerance": 0.3,
+     "within": false
+    },
+    "zhao2017b_fig2c_ph_diluted | pH_6x_dilution_25C": {
+     "n": 6,
+     "mean": -0.8409984534904359,
+     "rms": 0.8432594314523346,
+     "tolerance": 0.3,
+     "within": false
+    }
+   }
+  },
+  "jiangnan_zhang_x": {
+   "rows_kept": 305,
+   "rows_held": 6,
+   "theta": {
+    "slope_ama_tdg": 1.2350298876945645,
+    "offset_ama_tdg": -0.257597982313309,
+    "slope_ama_odg": 1.3885850214346214,
+    "offset_ama_odg": 0.10975507148907197,
+    "slope_tdg_fa": 0.6105694328306055,
+    "offset_tdg_fa": 0.9795298229573253,
+    "acid_yield": 1.1945742676736891e-08,
+    "arp_amine_pka": 6.441700888304184,
+    "log10_k_aa_frag": -2.647472587375845,
+    "ea_k_aa_frag": 20.0000000005569
+   },
+   "shift_sigma": {
+    "slope_ama_tdg": -0.5054752534710256,
+    "offset_ama_tdg": 1.6114813962372982,
+    "slope_ama_odg": -1.823352876323772,
+    "offset_ama_odg": -1.8119224497425583,
+    "slope_tdg_fa": 0.19919937705748184,
+    "offset_tdg_fa": -0.5445599511464114,
+    "acid_yield": -0.9846308562141973,
+    "arp_amine_pka": 0.0,
+    "log10_k_aa_frag": -0.8100018868183544,
+    "ea_k_aa_frag": -1.4479377048300947e-10
+   },
+   "beyond_2_sigma": [],
+   "held_out_raw": {
+    "zhou2023_fig2_final_ph | pH": {
+     "n": 6,
+     "mean": 0.9419190647974611,
+     "rms": 1.2846984157343486,
+     "tolerance": 0.3,
+     "within": false
+    }
+   }
+  },
+  "nestle_blank": {
+   "rows_kept": 258,
+   "rows_held": 53,
+   "theta": {
+    "slope_ama_tdg": 1.4359336888565388,
+    "offset_ama_tdg": -0.43767726965762577,
+    "slope_ama_odg": 1.499972980581052,
+    "offset_ama_odg": 0.15175370577266675,
+    "slope_tdg_fa": 0.00040262855426648203,
+    "offset_tdg_fa": 1.499999892848978,
+    "acid_yield": 0.9999999917211736,
+    "arp_amine_pka": 6.4427456255556494,
+    "log10_k_aa_frag": -2.601902468364202,
+    "ea_k_aa_frag": 20.000000000000004
+   },
+   "shift_sigma": {
+    "slope_ama_tdg": 0.1658718312506852,
+    "offset_ama_tdg": 0.07887437322545669,
+    "slope_ama_odg": -0.00044204308079704764,
+    "offset_ama_odg": -0.029985555306852395,
+    "slope_tdg_fa": 0.00013120213333613035,
+    "offset_tdg_fa": -1.0942810235653703e-07,
+    "acid_yield": -8.053487423888413e-09,
+    "arp_amine_pka": 0.004185573881183099,
+    "log10_k_aa_frag": 0.013911195089232617,
+    "ea_k_aa_frag": -2.0251244177144804e-10
+   },
+   "beyond_2_sigma": [],
+   "held_out_raw": {
+    "davidek2002_tab5_acids_naoh_uptake | FA+AA": {
+     "n": 53,
+     "mean": -0.29148246413771367,
+     "rms": 0.4611843466428577,
+     "tolerance": 0.3,
+     "within": false
+    }
+   }
+  },
+  "wageningen_van_boekel": {
+   "rows_kept": 77,
+   "rows_held": 234,
+   "theta": {
+    "slope_ama_tdg": 0.9251394186037604,
+    "offset_ama_tdg": 0.3995145222408851,
+    "slope_ama_odg": 0.9563513055579485,
+    "offset_ama_odg": -1.4134115842218613,
+    "slope_tdg_fa": 0.23628126754813492,
+    "offset_tdg_fa": 0.16516155329868884,
+    "acid_yield": 0.9999999999999999,
+    "arp_amine_pka": 6.441700860574076,
+    "log10_k_aa_frag": -5.999999999974456,
+    "ea_k_aa_frag": 159.99999999973275
+   },
+   "shift_sigma": {
+    "slope_ama_tdg": -1.541015954064459,
+    "offset_ama_tdg": 7.203991530193257,
+    "slope_ama_odg": -8.897039558460113,
+    "offset_ama_odg": -66.43752055510186,
+    "slope_tdg_fa": 0.07708709327492452,
+    "offset_tdg_fa": -1.3966209661401052,
+    "acid_yield": 9.810049382859133e-11,
+    "arp_amine_pka": -1.1109627377847417e-07,
+    "log10_k_aa_frag": -61.424089639981084,
+    "ea_k_aa_frag": 14.51012192443841
+   },
+   "beyond_2_sigma": [
+    "offset_ama_tdg",
+    "slope_ama_odg",
+    "offset_ama_odg",
+    "log10_k_aa_frag",
+    "ea_k_aa_frag"
+   ],
+   "held_out_raw": {
+    "martins2003b_fig6_organic_acids | AA": {
+     "n": 32,
+     "mean": -1.157920249832622,
+     "rms": 1.1760065129901902,
+     "tolerance": 0.3,
+     "within": false
+    },
+    "martins2003b_fig6_organic_acids | FA": {
+     "n": 23,
+     "mean": 0.45208798995613264,
+     "rms": 0.566869081934955,
+     "tolerance": 0.3,
+     "within": false
+    },
+    "martins2003b_fig7_ph_drift | pH": {
+     "n": 16,
+     "mean": 0.057714031578041614,
+     "rms": 0.06612669538004912,
+     "tolerance": 0.3,
+     "within": true
+    },
+    "martins2005_glc_gly_multiresponse_timecourses | AA": {
+     "n": 57,
+     "mean": -1.2499731116618178,
+     "rms": 1.2617734613048945,
+     "tolerance": 0.3,
+     "within": false
+    },
+    "martins2005_glc_gly_multiresponse_timecourses | FA": {
+     "n": 54,
+     "mean": 0.13311657288001633,
+     "rms": 0.34863745355360864,
+     "tolerance": 0.3,
+     "within": false
+    },
+    "martins2005b_fig4_ph_drift_ladder | pH": {
+     "n": 52,
+     "mean": 0.2893881217663964,
+     "rms": 0.4585274350208779,
+     "tolerance": 0.3,
+     "within": false
+    }
+   }
+  }
+ },
+ "wall_seconds": 3456.9
+}
