@@ -227,6 +227,11 @@ def main(argv=None) -> int:
     parser.add_argument("--without", action="append", default=[])
     parser.add_argument("--switch-on", action="append", default=[], choices=SWITCHES)
     parser.add_argument("--scale-group", choices=("series", "figure"), default="series")
+    parser.add_argument("--k-multiplier", action="append", default=[], metavar="KEY=LOG10",
+                        help="a fitted arm's constant applied unfitted (k_ref x 10^LOG10), e.g. k_dpo_ddp=-4")
+    parser.add_argument("--nf-mgo-share", type=float, default=None,
+                        help="NF_HYDROXIDE_DECAY.mgo_share (sub-model 3), applied unfitted")
+    parser.add_argument("--label", default=None, help="a name for this arm in the artifact's file name")
     parser.add_argument("--scale-tau", type=float, default=float("inf"))
     parser.add_argument("--ph-coupling", choices=("fixed_point_nodes", "inline"), default=sulfur.PH_COUPLING,
                         help="the shipped coupling by default; 'inline' to check it against the shipped one on this table")
@@ -235,8 +240,13 @@ def main(argv=None) -> int:
     ph_state.TRUNK_SOLUTES_IN_BALANCE = bool(args.trunk_solutes_in_balance)
     for name in args.switch_on:   # set here, never at import; the workers fork after it
         setattr(parameters_sulfur, name, dataclasses.replace(getattr(parameters_sulfur, name), enabled=True))
+    if args.nf_mgo_share is not None:
+        parameters_sulfur.NF_HYDROXIDE_DECAY = dataclasses.replace(parameters_sulfur.NF_HYDROXIDE_DECAY,
+                                                                   mgo_share=float(args.nf_mgo_share))
+    base = engine.core_parameters(engine.SULFUR)
+    k_ref_override = {k: base[k].k_ref * 10.0 ** float(v) for k, v in (kv.split("=") for kv in args.k_multiplier)}
     sulfur.TRUNK_PH_TERMS = bool(args.trunk_ph_dynamic)   # set here, never at import; the workers fork after it
-    arm = "_".join(["trunk_ph_dynamic"] * args.trunk_ph_dynamic + ["trunk_solutes"] * args.trunk_solutes_in_balance
+    arm = "_".join(([args.label] if args.label else []) + ["trunk_ph_dynamic"] * args.trunk_ph_dynamic + ["trunk_solutes"] * args.trunk_solutes_in_balance
                    + ([f"figure_scale_tau{args.scale_tau:g}"] if args.scale_group == "figure" else [])
                    + [f"with_{SWITCHES[n]}" for n in args.switch_on]
                    + [f"without_{k}" for k in args.without] + (["inline"] if args.ph_coupling == "inline" else [])) or None
@@ -247,6 +257,7 @@ def main(argv=None) -> int:
     jobs = plan(pots, rows)
     for job in jobs:
         job["without"] = tuple(args.without)
+        job["k_ref"] = dict(k_ref_override)
     runnable = [j for j in jobs if "skip" not in j]
     results = dict(zip((j["pot"] for j in runnable), parallel.map_ordered(run_pot, runnable)))
     by_pot = {j["pot"]: j for j in jobs}

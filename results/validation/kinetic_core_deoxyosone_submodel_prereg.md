@@ -203,4 +203,32 @@ SDs of 1-3 % get the per-data-set noise; information counted by pots (~30), not 
 **Cross-sub-model consequence.** `k_dpo_ddp` sits on the intact-C5 MFT route (DDP) and on cysteine's loss: lowering
 it moves sub-model 2 (cysteine) and sub-model 4 (MFT) too. Sub-models 2-4 are coupled through this one constant;
 it is fitted here, and the route and thiol tables are re-scored with it before either is fitted.
+## Results (2026-10-30, 05:40; arms A2 and A3 -- A4 / A1 not run tonight)
+
+Fits: `kinetic_core_deoxyosone_submodel_fit_{A2,A3}.md` (engine state: B60 + B58 / B59b / B59a / B61 on; sub-model 1
+switches off; per-figure scales, tau 0.3; Zhou MGO per-paper scale).
+
+| | A2: k_dpo_ddp + k_dpo_c2c3 | A3: 3-DX -> MGO + HA |
+| --- | --- | --- |
+| cost (start -> optimum); reduced chi-square | 1114 -> 640; 3.2 | 1245 -> 845; 4.7 |
+| constants | k_dpo_ddp x 10^-4 (ON ITS BOUND); k_dpo_c2c3 x 10^2.47; NF -> MGO share 1.4 % | k_tdp_mgo 10^-5.1 /min at 100 C, pH 5; Ea 40 (on bound); NF -> MGO 1.4 % |
+| Zhai MGO, absolute (tolerance mean <= 0.3, RMS <= 0.4) | 2021 ladder -0.04 / 0.13; Food Chem +0.18 / 0.34; JAFC +0.21 / 0.35 -- all within | +0.35 / 0.58 to -0.70 / 1.59 -- outside |
+| Zhou MGO, shape (RMS <= 0.3) | 0.50-0.82 -- outside | 0.53-2.16 -- outside |
+| 1-DX per figure (RMS <= 0.35) | Zhai 2021 0.47, JAFC 0.44, Zhai 2019 0.81, Food Chem 1.21, Zhou 0.5-1.6 | 0.6-3.2 |
+| 3-DX per figure | 0.4-1.6 (Zhai over-predicted +0.5 to +1.2) | similar |
+| hold-out (Zhai 2023 JAFC, 140 C) | MGO -0.45 / 0.62; 1-DX -1.67; 3-DX +0.16 / 0.47 | MGO -0.68 / 0.99; 1-DX -2.58 |
+| norfuraneol (Mikami, Hofmann) | within 0.01-0.27 | within 0.01-0.02 |
+
+**Reading.** A2 -- the parent arm the review recommended -- closes the calibrated MGO gap on Zhai's three data sets
+(from -2 dex to within tolerance) and halves to quarters the 1-DX misfit across the pH ladder, by making 1-DX's
+cysteine Strecker step (`k_dpo_ddp`) 10^4 slower and its C3 + C2 split ~300x faster. A3 (the textbook 3-DX route)
+does worse on every MGO set and leaves 1-DX untouched: the data favour the 1-deoxy parent, as the pH ladder said.
+Mikami's NF -> MGO share fits at 1.4 % (his printed 0.6 % is a lower bound), consistent. NOT YET ACCEPTED: (1)
+`k_dpo_ddp` sits ON its lower bound -- the data want the step even slower or gone, and it carries cysteine loss,
+the intact-C5 MFT route (DDP) and the Strecker H2S; the review required every B60 MFT / FFT row and the route and
+thiol tables re-scored before acceptance (running, unfitted). (2) Leave-one-paper-out not run (time). (3) 3-DX
+remains over-predicted in Zhai's pots and the hold-out's 1-DX at 140 C is 47x low: a temperature dependence the
+held Ea of the carbonyl family does not carry. Expected result (sec. 5): A2 or A3 beats A1 -- A1 not run; A2 lifts
+Cao's pH -- being checked; some arm brings every Zhai MGO set within x3 -- yes (A2, P was 0.4).
+
 ## Amendments

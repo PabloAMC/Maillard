@@ -1,0 +1,1105 @@
+{
+ "artifact": "kinetic_core_deoxyosone_submodel_fit_A3",
+ "provenance": {
+  "artifact": "kinetic_core_deoxyosone_submodel_fit_A3",
+  "generated_on": "2026-10-30",
+  "git": {
+   "commit": "94d34e392b7d0495fca46e107bb7399ce860c74f",
+   "short": "94d34e39",
+   "branch": "submodel1-ph",
+   "dirty": false
+  },
+  "generated_by": "scripts/generators/fit_deoxyosone_submodel.py",
+  "inputs": [
+   {
+    "path": "data/lit/fit_rows/deoxyosone_submodel.yml",
+    "sha256": "4af9c953a653ef5ed8377a0b34efe81774111bf3a47706f5799cc182f5775853"
+   },
+   {
+    "path": "src/kinetic_core/sulfur.py",
+    "sha256": "3a67aa9e0828af888f06a5613798d5d5ac5fedfd5cfde7720fe226657cac904f"
+   },
+   {
+    "path": "src/kinetic_core/parameters_sulfur.py",
+    "sha256": "bb04690a8393ebf22724cc29a9f12e30cfc7784e604355cff5c83d1826bda083"
+   },
+   {
+    "path": "src/kinetic_core/fitting.py",
+    "sha256": "53270d23485666fff91b7d5312761c36f7a0665e73cda609ad151678405b4f0b"
+   },
+   {
+    "path": "scripts/generators/build_submodel_probe.py",
+    "sha256": "989d04257383631cac7284c3ea26621e9c61fc809c015df5b564007266738785"
+   }
+  ]
+ },
+ "arm": "A3",
+ "engine_state": "B60 + B58/B59b/B59a/B61 on; sub-model 1 switches off",
+ "ph_coupling": "inline",
+ "rows": 404,
+ "pots": 52,
+ "start": {
+  "mgo_share_nf": 0.02,
+  "log10_k_tdp_mgo": -4.0,
+  "ea_tdp_mgo": 100.0
+ },
+ "fit": {
+  "theta": {
+   "mgo_share_nf": 0.014183045116843512,
+   "log10_k_tdp_mgo": -5.0747681213773355,
+   "ea_tdp_mgo": 40.00000000000001
+  },
+  "cost": 844.5424423756175,
+  "start_cost": 1244.729372603568,
+  "start": {
+   "mgo_share_nf": 0.030108866086207234,
+   "log10_k_tdp_mgo": -3.24013141939755,
+   "ea_tdp_mgo": 40.00000000000001
+  },
+  "status": 2,
+  "budget_exhausted": false,
+  "evaluations": 82,
+  "budget": 120,
+  "seconds": 507.6
+ },
+ "laplace": {
+  "chi2_red": 4.672153544202083,
+  "sigma_common": 2.161516491771942,
+  "sigma": {
+   "mgo_share_nf": 0.0010450424977640816,
+   "log10_k_tdp_mgo": 0.13612333383362818,
+   "ea_tdp_mgo": 21.795286590935536
+  },
+  "at_bound": {
+   "mgo_share_nf": false,
+   "log10_k_tdp_mgo": false,
+   "ea_tdp_mgo": true
+  },
+  "identified": {
+   "mgo_share_nf": true,
+   "log10_k_tdp_mgo": true,
+   "ea_tdp_mgo": false
+  },
+  "correlation": [
+   [
+    1.0,
+    0.0,
+    0.002
+   ],
+   [
+    0.0,
+    1.0,
+    -0.645
+   ],
+   [
+    0.002,
+    -0.645,
+    1.0
+   ]
+  ]
+ },
+ "series_extra_noise": {
+  "zhai2019_fig3b_dicarbonyls_ttca|TDP": 0.43908823247984935,
+  "zhai2019_fig3b_dicarbonyls_ttca|DPO": 0.8321804274408106,
+  "zhai2021_fig5ab_deoxyosones_ph_ladder|TDP": 0.47916217037270764,
+  "zhai2021_fig5ab_deoxyosones_ph_ladder|DPO": 1.4980420350396364,
+  "zhai2021_fig5_dicarbonyls_ph_ladder|zhai2021_ttca_ph55_100c|MGO": 0.45276294831132385,
+  "zhai2021_fig5_dicarbonyls_ph_ladder|zhai2021_ttca_ph60_100c|MGO": 0.45276294831132385,
+  "zhai2021_fig5_dicarbonyls_ph_ladder|zhai2021_ttca_ph70_100c|MGO": 0.45276294831132385,
+  "zhai2021_fig5_dicarbonyls_ph_ladder|zhai2021_ttca_ph80_100c|MGO": 0.45276294831132385,
+  "zhai2021_fig5_dicarbonyls_ph_ladder|zhai2021_ttca_xyl_ph55_100c|MGO": 0.45276294831132385,
+  "zhai2021_fig5_dicarbonyls_ph_ladder|zhai2021_ttca_xyl_ph60_100c|MGO": 0.45276294831132385,
+  "zhai2021_fig5_dicarbonyls_ph_ladder|zhai2021_ttca_xyl_ph70_100c|MGO": 0.45276294831132385,
+  "zhai2021_fig5_dicarbonyls_ph_ladder|zhai2021_ttca_xyl_ph80_100c|MGO": 0.45276294831132385,
+  "zhai2023foodchem_fig2_deoxyosones|TDP": 0.44618899409924817,
+  "zhai2023foodchem_fig2_deoxyosones|DPO": 0.2912105181742416,
+  "zhai2023foodchem_fig3_cys_da_mgo_go|zhai2023fc_mgo_ttca_xyl_120c|MGO": 0.3280801501759474,
+  "zhai2023foodchem_fig3_cys_da_mgo_go|zhai2023fc_mgo_ttca_xyl_140c|MGO": 0.3280801501759474,
+  "zhou2025b_fig2bc_deoxyxylosones_axarp_xylose|TDP": 0.619961454343569,
+  "zhou2025b_fig2bc_deoxyxylosones_axarp_xylose|DPO": 0.22452353088432792,
+  "zhou2025b_figs1_3_axarp_xylose_120c|MGO": 0.20030645853019038,
+  "zhou2025b_figs1_3_axarp_xylose_120c|zhou2025b_axarp_120c|FUR": 0.14760950350160024,
+  "zhou2025b_figs1_3_axarp_xylose_120c|zhou2025b_axarp_xyl_120c|FUR": 0.14760950350160024,
+  "zhou2025b_fig2a_deoxyxylosone_xylose_alone|TDP": 0.0801282097106732,
+  "zhou2025b_fig2a_xylose_alone_dicarbonyls|MGO": 0.24639402712180936,
+  "desclaux2006_fig2_xylose_glycine_100c|NF": 0.13158379851888752,
+  "desclaux2006_fig2_xylose_glycine_100c|TDP": 0.46742269982620843,
+  "zhou2022_table1_arp_cys_volatiles_timecourse|zhou2022_axarp_120C_volatiles|FUR": 0.21630781026863868,
+  "zhou2022_table1_arp_cys_volatiles_timecourse|zhou2022_axarp_cys_120C_volatiles|FUR": 0.21630781026863868,
+  "zhou2022_fig1cd_deoxypentosones_arp_cys|TDP": 0.5836404311825163,
+  "zhou2022_fig1cd_deoxypentosones_arp_cys|DPO": 0.2349722988806365,
+  "zhou2022_fig1_arp_cys_ala_dicarbonyls|MGO": 0.31485101329398063,
+  "zhai2023jafc_fig5bc_deoxyosones|TDP": 0.36030320692274376,
+  "zhai2023jafc_fig5bc_deoxyosones|DPO": 0.6856266958595815,
+  "zhai2023jafc_fig5_arp_dicarbonyls|zhai2023jafc_ttca_100C|MGO": 0.35497971851107485,
+  "zhai2023jafc_fig5_arp_dicarbonyls|zhai2023jafc_ttca_cys_100C|MGO": 0.35497971851107485,
+  "zhai2023jafc_fig5_arp_dicarbonyls|zhai2023jafc_ttca_120C|MGO": 0.35497971851107485,
+  "zhai2023jafc_fig5_arp_dicarbonyls|zhai2023jafc_ttca_cys_120C|MGO": 0.35497971851107485,
+  "zhou2024_fig3cd_deoxyxylosones_arp_ala|TDP": 0.08059813326765734,
+  "zhou2024_fig3cd_deoxyxylosones_arp_ala|DPO": 0.33682370442419274,
+  "zhou2024_fig3_fig4_axarp_dicarbonyls_ph|MGO": 0.07984497810466877,
+  "wang2026b_tables1_22_volatiles|FUR": 0.0661383566895783,
+  "zhou2023c_fig4ab_deoxypentosones_arp_gsh|TDP": 0.026959000964875485,
+  "zhou2023c_fig4ab_deoxypentosones_arp_gsh|DPO": 0.24252011450358965,
+  "zhou2023c_fig4_dicarbonyls_arp_gsh|MGO": 0.1223785796286579
+ },
+ "failed_pot_runs": 0,
+ "raw_at_start": {
+  "desclaux2006_fig2_xylose_glycine_100c | NF": {
+   "n": 4,
+   "mean": -0.9426981932775202,
+   "rms": 0.9495124944728394,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+   "n": 4,
+   "mean": 1.2134438073541625,
+   "rms": 1.2751915842079622,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "hofmann1998_t5_fa_nf_pairs | FUR": {
+   "n": 1,
+   "mean": 0.08962298311467279,
+   "rms": 0.08962298311467279,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "hofmann1998_t5_fa_nf_pairs | NF": {
+   "n": 1,
+   "mean": 0.017700744875657967,
+   "rms": 0.017700744875657967,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "mikami2017_fig6b_norfuraneol_decay_ph8 | MGO": {
+   "n": 3,
+   "mean": 0.1602368095488476,
+   "rms": 0.3512732494717376,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "mikami2017_fig6b_norfuraneol_decay_ph8 | NF": {
+   "n": 2,
+   "mean": 0.006984918308749575,
+   "rms": 0.011520784867048602,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "wang2026b_tables1_22_volatiles | FUR": {
+   "n": 4,
+   "mean": 1.3027970122893207,
+   "rms": 1.3041340768351581,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2019_fig3b_dicarbonyls_ttca | DPO": {
+   "n": 12,
+   "mean": -3.061629700876294,
+   "rms": 3.162942964048689,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2019_fig3b_dicarbonyls_ttca | TDP": {
+   "n": 12,
+   "mean": 0.49591808989549824,
+   "rms": 1.0608115642318354,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2021_fig5_dicarbonyls_ph_ladder | MGO": {
+   "n": 48,
+   "mean": 0.015998920000574568,
+   "rms": 1.2932619418506377,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2021_fig5ab_deoxyosones_ph_ladder | DPO": {
+   "n": 48,
+   "mean": -2.1229695811579545,
+   "rms": 2.585995877665093,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2021_fig5ab_deoxyosones_ph_ladder | TDP": {
+   "n": 48,
+   "mean": 0.06143937642499383,
+   "rms": 0.3048388185814366,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023foodchem_fig2_deoxyosones | DPO": {
+   "n": 11,
+   "mean": -2.567926780776751,
+   "rms": 2.5839055656416536,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023foodchem_fig2_deoxyosones | TDP": {
+   "n": 11,
+   "mean": -0.05688162208828,
+   "rms": 0.2567470079942661,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "zhai2023foodchem_fig3_cys_da_mgo_go | MGO": {
+   "n": 12,
+   "mean": 1.4281509502373149,
+   "rms": 1.4607768333914188,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023jafc_fig5_arp_dicarbonyls | MGO": {
+   "n": 27,
+   "mean": 1.1773847852481358,
+   "rms": 1.2637429033465277,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023jafc_fig5bc_deoxyosones | DPO": {
+   "n": 21,
+   "mean": -2.5304103249081304,
+   "rms": 2.6173406435002535,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023jafc_fig5bc_deoxyosones | TDP": {
+   "n": 27,
+   "mean": 0.47904620113778257,
+   "rms": 0.857800314736846,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2022_fig1_arp_cys_ala_dicarbonyls | MGO": {
+   "n": 8,
+   "mean": -0.8576202677598721,
+   "rms": 0.9305783953650606,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2022_fig1cd_deoxypentosones_arp_cys | DPO": {
+   "n": 8,
+   "mean": -0.8514228071403442,
+   "rms": 0.879899864689853,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2022_fig1cd_deoxypentosones_arp_cys | TDP": {
+   "n": 8,
+   "mean": -0.10863967837506644,
+   "rms": 0.5562907572240915,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2022_table1_arp_cys_volatiles_timecourse | FUR": {
+   "n": 8,
+   "mean": -0.2954697223508885,
+   "rms": 0.3979616264112399,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2023c_fig4_dicarbonyls_arp_gsh | MGO": {
+   "n": 4,
+   "mean": -0.8462818441411115,
+   "rms": 0.8478914259271866,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2023c_fig4ab_deoxypentosones_arp_gsh | DPO": {
+   "n": 4,
+   "mean": -0.5814440118355148,
+   "rms": 0.6179473655370477,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2023c_fig4ab_deoxypentosones_arp_gsh | TDP": {
+   "n": 4,
+   "mean": -0.40529306804802323,
+   "rms": 0.4058022698273574,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2024_fig3_fig4_axarp_dicarbonyls_ph | MGO": {
+   "n": 8,
+   "mean": -1.703368385133456,
+   "rms": 1.7046866261379274,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2024_fig3cd_deoxyxylosones_arp_ala | DPO": {
+   "n": 8,
+   "mean": -1.5268465278064554,
+   "rms": 1.5594266664223748,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2024_fig3cd_deoxyxylosones_arp_ala | TDP": {
+   "n": 8,
+   "mean": -1.629587107983386,
+   "rms": 1.6313911611299536,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_fig2a_deoxyxylosone_xylose_alone | TDP": {
+   "n": 4,
+   "mean": 1.3425902198895785,
+   "rms": 1.343761594409902,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_fig2a_xylose_alone_dicarbonyls | MGO": {
+   "n": 4,
+   "mean": 0.9282357624651782,
+   "rms": 0.9460255655590928,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_fig2bc_deoxyxylosones_axarp_xylose | DPO": {
+   "n": 8,
+   "mean": -0.38385161498892584,
+   "rms": 0.4372108265589566,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_fig2bc_deoxyxylosones_axarp_xylose | TDP": {
+   "n": 8,
+   "mean": -0.14247189903627083,
+   "rms": 0.6001955496958231,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_figs1_3_axarp_xylose_120c | FUR": {
+   "n": 8,
+   "mean": -0.9532217258304533,
+   "rms": 1.102940199355736,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_figs1_3_axarp_xylose_120c | MGO": {
+   "n": 8,
+   "mean": -0.1901847998904291,
+   "rms": 0.5698725663169467,
+   "tolerance": 0.3,
+   "within": false
+  }
+ },
+ "raw_at_optimum": {
+  "desclaux2006_fig2_xylose_glycine_100c | NF": {
+   "n": 4,
+   "mean": -0.9426981933206338,
+   "rms": 0.9495124945352722,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "desclaux2006_fig2_xylose_glycine_100c | TDP": {
+   "n": 4,
+   "mean": 1.2390998497025318,
+   "rms": 1.303073639721642,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "hofmann1998_t5_fa_nf_pairs | FUR": {
+   "n": 1,
+   "mean": 0.09511787457501406,
+   "rms": 0.09511787457501406,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "hofmann1998_t5_fa_nf_pairs | NF": {
+   "n": 1,
+   "mean": 0.017675390857819006,
+   "rms": 0.017675390857819006,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "mikami2017_fig6b_norfuraneol_decay_ph8 | MGO": {
+   "n": 3,
+   "mean": 0.010976298425125394,
+   "rms": 0.31278992913273757,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "mikami2017_fig6b_norfuraneol_decay_ph8 | NF": {
+   "n": 2,
+   "mean": 0.006984918311447935,
+   "rms": 0.011520784868629046,
+   "tolerance": 0.3,
+   "within": true
+  },
+  "wang2026b_tables1_22_volatiles | FUR": {
+   "n": 4,
+   "mean": 1.304078946755189,
+   "rms": 1.3054288539150438,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2019_fig3b_dicarbonyls_ttca | DPO": {
+   "n": 12,
+   "mean": -3.064174006225256,
+   "rms": 3.165550941645756,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2019_fig3b_dicarbonyls_ttca | TDP": {
+   "n": 12,
+   "mean": 1.1384728210966004,
+   "rms": 1.2136464465611458,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2021_fig5_dicarbonyls_ph_ladder | MGO": {
+   "n": 48,
+   "mean": -0.7020088139634296,
+   "rms": 1.5858907129505184,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2021_fig5ab_deoxyosones_ph_ladder | DPO": {
+   "n": 48,
+   "mean": -2.1236057750892683,
+   "rms": 2.5868817295537454,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2021_fig5ab_deoxyosones_ph_ladder | TDP": {
+   "n": 48,
+   "mean": 0.38847383180963574,
+   "rms": 0.6223680281965415,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023foodchem_fig2_deoxyosones | DPO": {
+   "n": 11,
+   "mean": -2.60681087873268,
+   "rms": 2.621472452819564,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023foodchem_fig2_deoxyosones | TDP": {
+   "n": 11,
+   "mean": 0.5888940318334434,
+   "rms": 0.7256486996331801,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023foodchem_fig3_cys_da_mgo_go | MGO": {
+   "n": 12,
+   "mean": 0.3527703963504834,
+   "rms": 0.5804822372301002,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023jafc_fig5_arp_dicarbonyls | MGO": {
+   "n": 27,
+   "mean": 0.31442103699365803,
+   "rms": 0.6826696994454684,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023jafc_fig5bc_deoxyosones | DPO": {
+   "n": 21,
+   "mean": -2.540992700318788,
+   "rms": 2.627246174600564,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023jafc_fig5bc_deoxyosones | TDP": {
+   "n": 27,
+   "mean": 0.991136629780751,
+   "rms": 1.05611022173266,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2022_fig1_arp_cys_ala_dicarbonyls | MGO": {
+   "n": 8,
+   "mean": -1.8246817969999285,
+   "rms": 1.8496060900008697,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2022_fig1cd_deoxypentosones_arp_cys | DPO": {
+   "n": 8,
+   "mean": -0.8514278142804135,
+   "rms": 0.8799038773286127,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2022_fig1cd_deoxypentosones_arp_cys | TDP": {
+   "n": 8,
+   "mean": -0.1048572620630896,
+   "rms": 0.5543412928677002,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2022_table1_arp_cys_volatiles_timecourse | FUR": {
+   "n": 8,
+   "mean": -0.2922086928942178,
+   "rms": 0.3952153011276664,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2023c_fig4_dicarbonyls_arp_gsh | MGO": {
+   "n": 4,
+   "mean": -1.5414478567530117,
+   "rms": 1.5450690482834892,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2023c_fig4ab_deoxypentosones_arp_gsh | DPO": {
+   "n": 4,
+   "mean": -0.5814440201473142,
+   "rms": 0.6179473763240596,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2023c_fig4ab_deoxypentosones_arp_gsh | TDP": {
+   "n": 4,
+   "mean": -0.38228117323543864,
+   "rms": 0.38302688123246326,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2024_fig3_fig4_axarp_dicarbonyls_ph | MGO": {
+   "n": 8,
+   "mean": -2.160241113154384,
+   "rms": 2.161785289641276,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2024_fig3cd_deoxyxylosones_arp_ala | DPO": {
+   "n": 8,
+   "mean": -1.5268465329681442,
+   "rms": 1.5594266718119343,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2024_fig3cd_deoxyxylosones_arp_ala | TDP": {
+   "n": 8,
+   "mean": -1.550997028470786,
+   "rms": 1.5530974955303096,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_fig2a_deoxyxylosone_xylose_alone | TDP": {
+   "n": 4,
+   "mean": 1.4548587181347026,
+   "rms": 1.4566274330916271,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_fig2a_xylose_alone_dicarbonyls | MGO": {
+   "n": 4,
+   "mean": -0.4813449527156867,
+   "rms": 0.5281106273721994,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_fig2bc_deoxyxylosones_axarp_xylose | DPO": {
+   "n": 8,
+   "mean": -0.3838516555326439,
+   "rms": 0.43721087507623224,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_fig2bc_deoxyxylosones_axarp_xylose | TDP": {
+   "n": 8,
+   "mean": -0.070916768301313,
+   "rms": 0.5818821604099464,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_figs1_3_axarp_xylose_120c | FUR": {
+   "n": 8,
+   "mean": -0.8949825997218486,
+   "rms": 1.0487279489326322,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhou2025b_figs1_3_axarp_xylose_120c | MGO": {
+   "n": 8,
+   "mean": -0.9950097466892645,
+   "rms": 1.0140042705646641,
+   "tolerance": 0.3,
+   "within": false
+  }
+ },
+ "holdout_raw_at_optimum": {
+  "zhai2023jafc_fig5_arp_dicarbonyls | MGO": {
+   "n": 13,
+   "mean": -0.6807436328671407,
+   "rms": 0.9881281454038159,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023jafc_fig5bc_deoxyosones | DPO": {
+   "n": 10,
+   "mean": -2.5781022126900917,
+   "rms": 2.6203881271275766,
+   "tolerance": 0.3,
+   "within": false
+  },
+  "zhai2023jafc_fig5bc_deoxyosones | TDP": {
+   "n": 12,
+   "mean": 0.1893812312242271,
+   "rms": 0.45496118762547566,
+   "tolerance": 0.3,
+   "within": false
+  }
+ },
+ "diagnostics_whitened": {
+  "n": 404,
+  "rms": 2.140008329945864,
+  "by": {
+   "paper": {
+    "desclaux2006": {
+     "n": 8,
+     "mean": 0.04662057061071023,
+     "rms": 1.8010171239464832,
+     "share_positive": 0.5
+    },
+    "hofmann1998": {
+     "n": 2,
+     "mean": 1.2985804578788098,
+     "rms": 1.5751962158788029,
+     "share_positive": 1.0
+    },
+    "mikami2017": {
+     "n": 5,
+     "mean": 0.4113735964034582,
+     "rms": 3.6109562435922693,
+     "share_positive": 0.4
+    },
+    "wang2026b": {
+     "n": 4,
+     "mean": 2.151393575213991,
+     "rms": 2.3231338516751947,
+     "share_positive": 1.0
+    },
+    "zhai2019": {
+     "n": 24,
+     "mean": -0.6456761684035192,
+     "rms": 2.015964561163947,
+     "share_positive": 0.4166666666666667
+    },
+    "zhai2021": {
+     "n": 144,
+     "mean": -0.7292370487527889,
+     "rms": 2.228642298971086,
+     "share_positive": 0.4305555555555556
+    },
+    "zhai2023foodchem": {
+     "n": 34,
+     "mean": -0.259600143398505,
+     "rms": 1.9558284026563728,
+     "share_positive": 0.47058823529411764
+    },
+    "zhai2023jafc": {
+     "n": 75,
+     "mean": 0.06968017331501794,
+     "rms": 1.6485490232180455,
+     "share_positive": 0.5733333333333334
+    },
+    "zhou2022": {
+     "n": 32,
+     "mean": -0.5960201623337779,
+     "rms": 1.3078014018090978,
+     "share_positive": 0.3125
+    },
+    "zhou2023c": {
+     "n": 12,
+     "mean": -0.5147706402588766,
+     "rms": 1.0672705107464606,
+     "share_positive": 0.3333333333333333
+    },
+    "zhou2024": {
+     "n": 24,
+     "mean": -1.182489426741754,
+     "rms": 1.700754857934787,
+     "share_positive": 0.125
+    },
+    "zhou2025b": {
+     "n": 40,
+     "mean": -1.0668446860954282,
+     "rms": 3.3466573036636396,
+     "share_positive": 0.425
+    }
+   },
+   "data_set": {
+    "desclaux2006_fig2_xylose_glycine_100c": {
+     "n": 8,
+     "mean": 0.04662057061071023,
+     "rms": 1.8010171239464832,
+     "share_positive": 0.5
+    },
+    "hofmann1998_t5_fa_nf_pairs": {
+     "n": 2,
+     "mean": 1.2985804578788098,
+     "rms": 1.5751962158788029,
+     "share_positive": 1.0
+    },
+    "mikami2017_fig6b_norfuraneol_decay_ph8": {
+     "n": 5,
+     "mean": 0.4113735964034582,
+     "rms": 3.6109562435922693,
+     "share_positive": 0.4
+    },
+    "wang2026b_tables1_22_volatiles": {
+     "n": 4,
+     "mean": 2.151393575213991,
+     "rms": 2.3231338516751947,
+     "share_positive": 1.0
+    },
+    "zhai2019_fig3b_dicarbonyls_ttca": {
+     "n": 24,
+     "mean": -0.6456761684035192,
+     "rms": 2.015964561163947,
+     "share_positive": 0.4166666666666667
+    },
+    "zhai2021_fig5_dicarbonyls_ph_ladder": {
+     "n": 48,
+     "mean": -1.549115783418646,
+     "rms": 3.5004981510076645,
+     "share_positive": 0.4583333333333333
+    },
+    "zhai2021_fig5ab_deoxyosones_ph_ladder": {
+     "n": 96,
+     "mean": -0.3192976814198605,
+     "rms": 1.1504460406905883,
+     "share_positive": 0.4166666666666667
+    },
+    "zhai2023foodchem_fig2_deoxyosones": {
+     "n": 22,
+     "mean": -0.9872476153366015,
+     "rms": 2.0511293423018957,
+     "share_positive": 0.3181818181818182
+    },
+    "zhai2023foodchem_fig3_cys_da_mgo_go": {
+     "n": 12,
+     "mean": 1.0744202218213388,
+     "rms": 1.7678166016994694,
+     "share_positive": 0.75
+    },
+    "zhai2023jafc_fig5_arp_dicarbonyls": {
+     "n": 27,
+     "mean": 0.8481781580458935,
+     "rms": 1.883423172387156,
+     "share_positive": 0.7407407407407407
+    },
+    "zhai2023jafc_fig5bc_deoxyosones": {
+     "n": 48,
+     "mean": -0.3682249430960994,
+     "rms": 1.500360403208701,
+     "share_positive": 0.4791666666666667
+    },
+    "zhou2022_fig1_arp_cys_ala_dicarbonyls": {
+     "n": 8,
+     "mean": 0.016601768524419747,
+     "rms": 0.9446075986322712,
+     "share_positive": 0.5
+    },
+    "zhou2022_fig1cd_deoxypentosones_arp_cys": {
+     "n": 16,
+     "mean": -0.5340267369141694,
+     "rms": 1.161080382409759,
+     "share_positive": 0.25
+    },
+    "zhou2022_table1_arp_cys_volatiles_timecourse": {
+     "n": 8,
+     "mean": -1.332628944031192,
+     "rms": 1.8035740079264713,
+     "share_positive": 0.25
+    },
+    "zhou2023c_fig4_dicarbonyls_arp_gsh": {
+     "n": 4,
+     "mean": 0.0007096808680318034,
+     "rms": 0.8617904557635337,
+     "share_positive": 0.5
+    },
+    "zhou2023c_fig4ab_deoxypentosones_arp_gsh": {
+     "n": 8,
+     "mean": -0.7725108008223309,
+     "rms": 1.1563987719817748,
+     "share_positive": 0.25
+    },
+    "zhou2024_fig3_fig4_axarp_dicarbonyls_ph": {
+     "n": 8,
+     "mean": -0.041353148596880995,
+     "rms": 0.9551385996959606,
+     "share_positive": 0.375
+    },
+    "zhou2024_fig3cd_deoxyxylosones_arp_ala": {
+     "n": 16,
+     "mean": -1.7530575658141907,
+     "rms": 1.9704582608795818,
+     "share_positive": 0.0
+    },
+    "zhou2025b_fig2a_deoxyxylosone_xylose_alone": {
+     "n": 4,
+     "mean": 2.3947516418264896,
+     "rms": 2.5484796069928253,
+     "share_positive": 1.0
+    },
+    "zhou2025b_fig2a_xylose_alone_dicarbonyls": {
+     "n": 4,
+     "mean": -0.007242009239031455,
+     "rms": 0.8564828965995125,
+     "share_positive": 0.75
+    },
+    "zhou2025b_fig2bc_deoxyxylosones_axarp_xylose": {
+     "n": 16,
+     "mean": -0.25250503527943735,
+     "rms": 0.9825027309749678,
+     "share_positive": 0.4375
+    },
+    "zhou2025b_figs1_3_axarp_xylose_120c": {
+     "n": 16,
+     "mean": -3.011484088105997,
+     "rms": 5.022738131655206,
+     "share_positive": 0.1875
+    }
+   },
+   "observable": {
+    "DPO": {
+     "n": 120,
+     "mean": -1.3163733232751982,
+     "rms": 1.7539268604975145,
+     "share_positive": 0.175
+    },
+    "FUR": {
+     "n": 21,
+     "mean": -2.280335001124876,
+     "rms": 4.6241154423625295,
+     "share_positive": 0.3333333333333333
+    },
+    "MGO": {
+     "n": 122,
+     "mean": -0.3053966291981128,
+     "rms": 2.5828291006949136,
+     "share_positive": 0.5491803278688525
+    },
+    "NF": {
+     "n": 7,
+     "mean": -0.7667994996190749,
+     "rms": 1.3465206487858825,
+     "share_positive": 0.2857142857142857
+    },
+    "TDP": {
+     "n": 134,
+     "mean": 0.3111955622182875,
+     "rms": 1.2381852953078936,
+     "share_positive": 0.5970149253731343
+    }
+   },
+   "temperature_C": {
+    "100.0": {
+     "n": 192,
+     "mean": -0.5826091622664845,
+     "rms": 2.166384158021712,
+     "share_positive": 0.4375
+    },
+    "120.0": {
+     "n": 192,
+     "mean": -0.45543690219345073,
+     "rms": 2.179837060717895,
+     "share_positive": 0.4479166666666667
+    },
+    "140.0": {
+     "n": 18,
+     "mean": -0.5594405710193884,
+     "rms": 1.3289011842894407,
+     "share_positive": 0.2777777777777778
+    },
+    "145.0": {
+     "n": 2,
+     "mean": 1.2985804578788098,
+     "rms": 1.5751962158788029,
+     "share_positive": 1.0
+    }
+   },
+   "label_pH": {
+    "5.0": {
+     "n": 2,
+     "mean": 1.2985804578788098,
+     "rms": 1.5751962158788029,
+     "share_positive": 1.0
+    },
+    "5.5": {
+     "n": 40,
+     "mean": -1.352811336673856,
+     "rms": 2.843501204050808,
+     "share_positive": 0.425
+    },
+    "6.0": {
+     "n": 44,
+     "mean": -1.3428291814071789,
+     "rms": 2.4152092396559617,
+     "share_positive": 0.1590909090909091
+    },
+    "7.0": {
+     "n": 177,
+     "mean": -0.11857314186793749,
+     "rms": 1.5891546942631551,
+     "share_positive": 0.5141242937853108
+    },
+    "7.4": {
+     "n": 24,
+     "mean": -0.6456761684035192,
+     "rms": 2.015964561163947,
+     "share_positive": 0.4166666666666667
+    },
+    "7.5": {
+     "n": 12,
+     "mean": -0.5147706402588766,
+     "rms": 1.0672705107464606,
+     "share_positive": 0.3333333333333333
+    },
+    "8.0": {
+     "n": 105,
+     "mean": -0.5096849082892435,
+     "rms": 2.594724382725132,
+     "share_positive": 0.4380952380952381
+    }
+   },
+   "time_min": {
+    "10.0": {
+     "n": 4,
+     "mean": -0.23887137599976177,
+     "rms": 1.320148053780695,
+     "share_positive": 0.5
+    },
+    "100.0": {
+     "n": 39,
+     "mean": -0.4391871527646856,
+     "rms": 1.936577216640713,
+     "share_positive": 0.41025641025641024
+    },
+    "120.0": {
+     "n": 69,
+     "mean": -0.6589771251703095,
+     "rms": 2.2361310441157523,
+     "share_positive": 0.36231884057971014
+    },
+    "140.0": {
+     "n": 12,
+     "mean": 0.04341859555839794,
+     "rms": 1.5529027835705855,
+     "share_positive": 0.5833333333333334
+    },
+    "150.0": {
+     "n": 1,
+     "mean": 3.3727604571650325,
+     "rms": 3.3727604571650325,
+     "share_positive": 1.0
+    },
+    "160.0": {
+     "n": 10,
+     "mean": 0.5996338961273475,
+     "rms": 1.6442650373266665,
+     "share_positive": 0.8
+    },
+    "180.0": {
+     "n": 10,
+     "mean": 0.742241414982636,
+     "rms": 2.378041529714295,
+     "share_positive": 0.8
+    },
+    "20.0": {
+     "n": 40,
+     "mean": -0.80785281479748,
+     "rms": 2.333146911319722,
+     "share_positive": 0.475
+    },
+    "30.0": {
+     "n": 35,
+     "mean": -0.729724062402116,
+     "rms": 1.9491013017642471,
+     "share_positive": 0.4
+    },
+    "40.0": {
+     "n": 40,
+     "mean": -0.6140467113778606,
+     "rms": 2.1637091825713726,
+     "share_positive": 0.5
+    },
+    "50.0": {
+     "n": 4,
+     "mean": -0.8809126598946053,
+     "rms": 2.1680767977097752,
+     "share_positive": 0.25
+    },
+    "60.0": {
+     "n": 72,
+     "mean": -0.4776403241523537,
+     "rms": 2.2404957048452236,
+     "share_positive": 0.4027777777777778
+    },
+    "80.0": {
+     "n": 38,
+     "mean": -0.47696705433313724,
+     "rms": 1.993043065348232,
+     "share_positive": 0.42105263157894735
+    },
+    "90.0": {
+     "n": 30,
+     "mean": -0.7360706360332224,
+     "rms": 2.3012439433978087,
+     "share_positive": 0.36666666666666664
+    }
+   }
+  },
+  "trends": {
+   "temperature_C": {
+    "rho": 0.026044138456800967,
+    "p": 0.6017070535515537
+   },
+   "label_pH": {
+    "rho": 0.07978916385779046,
+    "p": 0.10930448848287343
+   },
+   "time_min": {
+    "rho": 0.070645177826934,
+    "p": 0.15638876465845286
+   }
+  },
+  "flags": [
+   "paper=wang2026b: mean residual +2.15 over 4 rows (one sign)",
+   "paper=zhai2019: mean residual -0.65 over 24 rows (one sign)",
+   "paper=zhai2021: mean residual -0.73 over 144 rows (one sign)",
+   "paper=zhou2022: mean residual -0.60 over 32 rows (one sign)",
+   "paper=zhou2024: mean residual -1.18 over 24 rows (one sign)",
+   "paper=zhou2025b: mean residual -1.07 over 40 rows (one sign)",
+   "data_set=wang2026b_tables1_22_volatiles: mean residual +2.15 over 4 rows (one sign)",
+   "data_set=zhai2019_fig3b_dicarbonyls_ttca: mean residual -0.65 over 24 rows (one sign)",
+   "data_set=zhai2021_fig5_dicarbonyls_ph_ladder: mean residual -1.55 over 48 rows (one sign)",
+   "data_set=zhai2021_fig5ab_deoxyosones_ph_ladder: mean residual -0.32 over 96 rows (one sign)",
+   "data_set=zhai2023foodchem_fig2_deoxyosones: mean residual -0.99 over 22 rows (one sign)",
+   "data_set=zhai2023foodchem_fig3_cys_da_mgo_go: mean residual +1.07 over 12 rows (one sign)",
+   "data_set=zhai2023jafc_fig5_arp_dicarbonyls: mean residual +0.85 over 27 rows (one sign)",
+   "data_set=zhai2023jafc_fig5bc_deoxyosones: mean residual -0.37 over 48 rows (one sign)",
+   "data_set=zhou2022_table1_arp_cys_volatiles_timecourse: mean residual -1.33 over 8 rows (one sign)",
+   "data_set=zhou2024_fig3cd_deoxyxylosones_arp_ala: mean residual -1.75 over 16 rows (one sign)",
+   "data_set=zhou2025b_fig2a_deoxyxylosone_xylose_alone: mean residual +2.39 over 4 rows (one sign)",
+   "data_set=zhou2025b_figs1_3_axarp_xylose_120c: mean residual -3.01 over 16 rows (one sign)",
+   "observable=DPO: mean residual -1.32 over 120 rows (one sign)",
+   "observable=FUR: mean residual -2.28 over 21 rows (one sign)",
+   "observable=MGO: mean residual -0.31 over 122 rows (one sign)",
+   "observable=TDP: mean residual +0.31 over 134 rows (one sign)",
+   "temperature_C=100.0: mean residual -0.58 over 192 rows (one sign)",
+   "temperature_C=120.0: mean residual -0.46 over 192 rows (one sign)",
+   "label_pH=5.5: mean residual -1.35 over 40 rows (one sign)",
+   "label_pH=6.0: mean residual -1.34 over 44 rows (one sign)",
+   "label_pH=7.4: mean residual -0.65 over 24 rows (one sign)",
+   "label_pH=8.0: mean residual -0.51 over 105 rows (one sign)",
+   "time_min=100.0: mean residual -0.44 over 39 rows (one sign)",
+   "time_min=120.0: mean residual -0.66 over 69 rows (one sign)",
+   "time_min=20.0: mean residual -0.81 over 40 rows (one sign)",
+   "time_min=30.0: mean residual -0.73 over 35 rows (one sign)",
+   "time_min=40.0: mean residual -0.61 over 40 rows (one sign)",
+   "time_min=60.0: mean residual -0.48 over 72 rows (one sign)",
+   "time_min=80.0: mean residual -0.48 over 38 rows (one sign)",
+   "time_min=90.0: mean residual -0.74 over 30 rows (one sign)"
+  ]
+ },
+ "wall_seconds": 848.1
+}
