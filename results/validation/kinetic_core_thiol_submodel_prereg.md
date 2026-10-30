@@ -136,6 +136,39 @@ replicated pair, if Met is carried). Expected result for the H2S arm revised fro
    in shape. Yiltirak 2026's buffered arm: FFT ~120x high.
 5. **Order:** the thiol constants are not fitted before the two missing routes (finding 1 here, finding 2 of the
    deoxyosone probe) are defined, because a thiol fit would absorb them (the k_aa_frag lesson).
-## 4. Design (step 4) -- TO DO
+## 4. Design (step 4) -- the JOINT sub-model 3 + 4 fit (2026-10-30, owner: "run the joint submodel fits")
+
+**Why joint.** Sub-model 3's best arm (A2: `k_dpo_ddp` x 10^-4 on its bound, `k_dpo_c2c3` x 300) closes Zhai's
+calibrated methylglyoxal but harms the MFT / FFT rows (Schieberle 2000 MFT -1.24 -> -1.55 dex, FFT -0.16 -> -0.67;
+Yiltirak MFT +0.53 -> +1.51; Zhou 2022 MFT +0.15 -> +0.64). The link is NOT the intact-C5 DDP route (`k_ddp_mft`
+ships at 0) but the H2S budget: with B59a on, `r_dpo_ddp` releases a share of the cysteine sulfur as H2S, and
+both MFT (from norfuraneol) and FFT (from furfural) need H2S. One constant cannot be set on one table without
+breaking the other.
+
+**Engine state (named):** B60 + the route switches B58 / B59b / B59a / B61 on; sub-model 1's switches off; inline
+pH coupling (checked against the fixed point at the optimum).
+
+**Coordinates (7, log10 multipliers on the shipped k_ref unless stated; Ea held at the carbonyl family's):**
+`k_dpo_ddp`, `k_dpo_c2c3`, the NF -> MGO share (0-1), `k_dpo_nf` (DPO -> norfuraneol), `k_nf_mft` (norfuraneol +
+H2S -> MFT), `k_fur_fft` (furfural + H2S -> FFT), `k_h2s_loss`. `k_ddp_mft` stays at its shipped 0 (B60 fitted it
+there; the hexose / DDP question is a separate arm once the hexose -> C5 entry exists). Bounds: multipliers 10^-4 to
+10^3.
+
+**Rows:** the deoxyosone and thiol tables together (MGO, 1-DX, 3-DX, furfural, norfuraneol, MFT, FFT, mercapto-
+propanone). OUT: glyoxal (no engine species); the hexose + cysteine pots (glucose / fructose: MFT structurally zero
+until the hexose -> C5 entry exists, declared); the hold-out -- Zhai 2023 JAFC's 140 C pots in BOTH tables.
+**Measurement model:** semi-quantitative series share one scale per figure (tau 0.3 dex, the Jiangnan thiols as
+well as the quinoxalines); each Zhou paper's MGO its own scale (CF-060); calibrated and SIDA rows absolute; extra
+noise per data set x observable from within-series scatter.
+
+**Done-tests (declared now, raw residuals):** Zhai MGO |mean| <= 0.3 and RMS <= 0.4 per data set; SIDA / calibrated
+MFT and FFT (Hofmann fed-precursor pots, Schieberle 2000, Zhou 2022) RMS <= 0.3 dex (x2) per data set; semi-
+quantitative thiol and deoxyosone figures RMS <= 0.35 in shape; the pentose pH (Cao, Zhao; sub-model 1's table,
+scored unfitted) within 0.3; every constant off its bound with a Laplace sigma under 1 dex; the hold-out (JAFC 140 C)
+scored once, after the fit. Leave-one-paper-out on the winner.
+
+**Expected (written now):** the joint fit keeps Zhai's MGO within tolerance AND brings Schieberle's MFT within x3
+(P = 0.35); `k_dpo_ddp` comes off its bound once the H2S budget can move (P = 0.5); `k_h2s_loss` rises (Li 2022's
+single point suggested ~10x faster at 90 C; P = 0.6 that it moves up by > x3).
 ## 5. Design review (step 5) -- TO DO
 ## Amendments
