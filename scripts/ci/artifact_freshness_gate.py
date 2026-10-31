@@ -139,9 +139,12 @@ def check_runners(failures: List[str]) -> None:
 #: regenerated: they describe the model as it is.
 #: 2026-10-30: the Phase 2 sub-model records (each fit arm, each no-refit probe, each frozen hold-out prediction) are
 #: records of the same kind -- run at a commit, quoted by number in their pre-registration -- and are pinned likewise.
+#: 2026-10-31: so are the structural feasibility records (feasibility_*.py: sampled constants within declared bands, each
+#: run read in its pre-registration, e.g. dpo partition prereg secs. 17 - 22); a 600-draw run costs hours.
 FROZEN_RECORD_GENERATOR = re.compile(
     r"scripts/generators/(generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
-    r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout|diagnose_\w+|probe_\w+)\.py$")
+    r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout|diagnose_\w+|probe_\w+|"
+    r"feasibility_\w+)\.py$")
 
 
 #: 2026-10-30 (owner: "I am not sure regenerating the figure is needed until we have the engine finished"; strategy

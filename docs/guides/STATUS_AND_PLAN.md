@@ -114,6 +114,36 @@ compute is unattended.
 
 **Course correction (2026-10-31 ~12:00, after the owner asked to step back and an independent red-team review).** The hub feasibility line (dpo prereg secs. 16 - 21) drifted off this roadmap: it skipped row 3 (identifiability audit + power test) and row 2 (the forced-input Strecker layer), and row 1 never ran its closing leave-one-lab-out. Its signatures became design targets; the trap it found has P ~0.2 and two counter-indications. Decisions: no trap fit; the feasibility method gets negative / positive controls before any more structures; no new global engine switches until A3's configuration object exists; the branch is pushed and split into one PR per sub-model; then rows 2 and 3 in order, and the row-1 leave-one-lab-out overnight.
 
+**How a mechanism is identified (owner, 2026-10-31: "how can we find the true mechanisms?").** Fits to concentration time courses select constants, not structures. Evidence ranks, strongest first:
+1. isotope labelling;
+2. fed intermediates;
+3. trapping;
+4. directly measured intermediates and lifetimes;
+5. mass balance closure;
+6. one factor varied inside one study (order, pH, temperature, O2, buffer);
+7. fitted time courses.
+
+Per open mechanism:
+- (a) at least two rival structures plus the published null are written BEFORE any result is read;
+- (b) the literature experiments of kinds 1-6 that discriminate them are listed, with each rival's prediction;
+- (c) the discrimination's POWER is measured on synthetic data from each rival at realistic noise, and an underpowered test is not scored;
+- (d) scoring uses the between-lab error, and a single-lab result is PROVISIONAL until one cross-lab check;
+- (e) constants are pinned by physical chemistry (measured analogues, classes, pKa) so a structure cannot hide behind free constants;
+- (f) where no published experiment discriminates, the item is a declared band and the cheapest discriminating experiment goes to the designed-experiment brief (`rank` verb).
+
+**Mechanism triage (2026-10-31, after its premortem; frozen until the 11-07 checkpoint).** Ranking:
+1. Strecker / pyrazine flux with forced inputs (single-lab Hofmann, with a cross-lab check);
+2. CF-072 (its own session / PR);
+3. thiol losses and cysteine fate, anchored on Cerny;
+4. the power / identifiability of the signature machinery, with an exit rule: below 0.6 power, use paired held-out log density or a declared band, 12 h time-box;
+5. pyrazines (pyrrole sink);
+6. the deoxyosone hub, reclassified from known-wrong to uncertain (single lab, underpowered);
+7. oxygen;
+8. thermal history and observation operators (OPD, SAFE / SPME, steam distillation), H2S volatility, pH drift in unbuffered pots;
+9. phosphate, protein-bound amine, matrix and lipid on the sensitivity page until designed data exist.
+
+Investigation runs in parallel: <= 3 agents, read-only on `src/`, writing standalone modules to [A2_MODULE_CONTRACT.md](A2_MODULE_CONTRACT.md) sec. 3. Each has neutral briefs, a prereg first, positive and negative controls, and "inconclusive" allowed. Implementation is serial: A3, then A2, in a writer session after the B7 branch merges. Forced-input layers are admitted on their own scores, so admission does not wait for A2. P(>= 2 mechanism changes admitted by evidence by 11-21) ~0.5.
+
 Rules throughout: premortem of each plan change; pre-registration + independent review before every fit; converged
 fits only; chance baselines AND (from step 3) a measured power before credit; one PR per sub-model; a mechanism
 without data -> DOIs to the owner.

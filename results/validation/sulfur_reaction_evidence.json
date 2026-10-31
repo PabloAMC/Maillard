@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-31",
     "git": {
-      "commit": "30822dc7cdb4a9795d2cf82fda0dbb08b83b2d37",
-      "short": "30822dc7",
+      "commit": "bf9ed087f1a9e1c8829699983a36540f5ded96cf",
+      "short": "bf9ed087",
       "branch": "b7-deoxyosone-partition",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/sulfur_flux_attribution.json",
-        "sha256": "3410cead3277122d095c89e5e2396a06c7f5856731572f59f50b74eb13862679"
+        "sha256": "f0dff3c0679fe31be4885086514919f8391f0225a319d32522467b6e3ca4b0da"
       },
       {
         "path": "results/validation/kinetic_core_b60_laplace_covariance.json",
@@ -33,11 +33,11 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "d82e7dd7ca6ffe0222189eb590f93658578092673d8afa50c2a580787add71ed"
+        "sha256": "c64e61c187eaf92acbb5003869f326df4bfed9dc79dc433fe81d728756509832"
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "fd352f9f36e99e2c6210886ce7111ea41ded63519c97683595ca444ef7783f1b"
+        "sha256": "4728c9d75e015afb89d4a281530c22ed25670dc8f6d3ffbd4503cd8a04c1a180"
       },
       {
         "path": "src/kinetic_core/parameters.py",
@@ -70,7 +70,7 @@
     ]
   },
   "summary": {
-    "steps": 131,
+    "steps": 132,
     "carrying_more_than_1_percent": 10,
     "by_grade_among_carrying": {
       "fitted": 9,
@@ -6498,6 +6498,58 @@
       "species_measured_over_time": [
         "Cys",
         "MGO"
+      ],
+      "conflicts": [],
+      "unclear": false,
+      "why_unclear": []
+    },
+    {
+      "reaction": "r_tdp_cys_trap",
+      "equation": "TDP + Cys -> CBX + FRAG_C + FRAG_N + FRAG_S",
+      "parameter": "k_tdp_cys_trap",
+      "grade": "derived",
+      "source": "",
+      "dossiers": [],
+      "identification_b60": null,
+      "max_flux_share": 0.0,
+      "max_odorant_path_share": 0.0,
+      "matters": false,
+      "where": null,
+      "ledger": {
+        "CBX": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "Cys": {
+          "data_sets": 97,
+          "time_series": 47,
+          "used_by_the_model": 15
+        },
+        "FRAG_C": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_N": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "FRAG_S": {
+          "data_sets": 0,
+          "time_series": 0,
+          "used_by_the_model": 0
+        },
+        "TDP": {
+          "data_sets": 23,
+          "time_series": 14,
+          "used_by_the_model": 1
+        }
+      },
+      "species_measured_over_time": [
+        "Cys",
+        "TDP"
       ],
       "conflicts": [],
       "unclear": false,

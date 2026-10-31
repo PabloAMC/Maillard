@@ -55,6 +55,32 @@ TDP_EXIT_BAND = {"log10_k_ref_per_min": (-3.5, -1.0), "ea_kj_mol": (30.0, 100.0)
 THRESHOLDS = {"time_slope": 5, "ph_segments": 4, "xylose_double_ratio": 3}
 
 
+def _synthetic_rows(args, rows, plans, share):
+    """The power test (prereg sec. 23): the TDP / DPO rows replaced by a known structure's predictions with log-normal
+    noise -- the truth is a joint pass of another feasibility record (its arm, constants and TDP exit)."""
+    import dataclasses
+    stem, index = args.synthetic_from.rsplit(":", 1)
+    rec = json.loads((data_paths.VALIDATION_DIR / f"kinetic_core_deoxyosone_feasibility_{stem}.json").read_text())
+    truth = rec["joint_passes"][int(index)]
+    saved = (dict(joint.TDP_EXIT_STATIC), dict(joint.EA_STATIC), dict(joint.DDP_LAW_STATIC))
+    sc._configure(rec["arm"], share)
+    joint.TDP_EXIT_STATIC = joint.tdp_exit_static(joint.ARMS[rec["arm"]], **truth["tdp_exit"]) if truth["tdp_exit"] else {}
+    tkeys, *_ = joint.coordinates(False, joint.ARMS[rec["arm"]])
+    trial = joint.trial([truth["theta"][k] for k in tkeys], tkeys)
+    rng = np.random.default_rng(args.seed + 7)
+    out = []
+    for r in rows:
+        if r.pot in plans and r.species in ("TDP", "DPO"):
+            j = dict(plans[r.pot], **trial, strecker_share=share)
+            res = joint.run_task(j)
+            p = probe.predict(r, j, res) if "failed" not in res else float("nan")
+            out.append(dataclasses.replace(r, value=float(p) * 10.0 ** (args.synthetic_sigma * rng.standard_normal())))
+        else:
+            out.append(r)
+    joint.TDP_EXIT_STATIC, joint.EA_STATIC, joint.DDP_LAW_STATIC = saved
+    return out
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     parser.add_argument("--arm", required=True, choices=tuple(joint.ARMS))
@@ -62,6 +88,9 @@ def main(argv=None) -> int:
     parser.add_argument("--draws", type=int, default=300)
     parser.add_argument("--seed", type=int, default=20261031)
     parser.add_argument("--tag", default="", help="suffix for the output stem (a rerun with another seed or size)")
+    parser.add_argument("--synthetic-from", metavar="RECORD:INDEX", help="power test (prereg sec. 23): replace the "
+                        "TDP / DPO rows by joint pass INDEX of feasibility record RECORD (e.g. b7asst2m:0) plus noise")
+    parser.add_argument("--synthetic-sigma", type=float, default=0.15, help="log10 noise per synthetic row")
     args = parser.parse_args(argv)
     from src.kinetic_core import parallel
 
@@ -87,6 +116,8 @@ def main(argv=None) -> int:
         draws.append({"theta": theta, "tdp_exit": exit_})
     pots, rows = fit_rows.load(sd.TABLE)
     plans = {j["pot"]: j for j in probe.plan(pots, rows) if j["pot"] in sd._wanted()}
+    if args.synthetic_from:
+        rows = _synthetic_rows(args, rows, plans, float(ref["strecker_share"]))
 
     def one(draw):
         try:

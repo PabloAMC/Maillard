@@ -44,6 +44,15 @@ measured 0.45, predicted 1.67
 | zhai2023jafc_ttca_cys_140C_dx | reported | 100 | 0.035 | 0.0425 | yes | 80 | 0.0173 | 0.0377 | no |
 | zhai2023fc_dx_ttca_xyl_140c | reported | 60 | 0.00228 | 0.0229 | no | 100 | 0.00694 | 0.0211 | no |
 
+## (vii) the +xylose / -xylose double ratio of TDP / DPO at 120 min (Zhai 2021; declared prereg sec. 14; pass 3 of 4 within 0.15 dex)
+
+| pH | measured | predicted | pass |
+|---|---|---|---|
+| 5.5 | 0.85 | 0.94 | yes |
+| 6 | 0.92 | 0.90 | yes |
+| 7 | 1.22 | 1.21 | yes |
+| 8 | 2.71 | 1.22 | NO |
+
 ## The engine's in-situ pH at 60 min (Zhai 2021, 100 C; the pH the split reads)
 
 | pot | in-situ pH |

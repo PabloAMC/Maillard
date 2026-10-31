@@ -501,3 +501,25 @@ fate are one structure for any further test; the partition is single-laboratory,
 deoxyosone rows are Zhai's, 3-DX / 1-DX against a diacetyl internal standard without authentic standards; P(a
 substantial part of (ii) or (vii) is a method artefact) ~0.25) -- by roadmap row 3's rule its pH law is a declared band,
 not a fitted coordinate, until another laboratory confirms it. **No trap fit follows v5.**
+
+## 22. Feasibility v5 result (read 2026-10-31 ~12:15, after sec. 21 and its amendment were written)
+
+**v5 (B7ASST2C, the cysteine trap, 600 draws, seed 20261103; ..._feasibility_b7asst2c.md): NOT feasible.** Time slope
+>= 5 / 8 by 37 draws (best 6), pH segments >= 4 / 6 by 15 (best 6), (vii) by 101; time + pH jointly 0 (time + (vii)
+15; pH + (vii) 6). Expectations: feasible P 0.5 (mine), ~0.6 (the red team) -- NO. Contrast v4 (the same sink written
+as 3-DX -> MGO): feasible. The likeliest reason is the coupling sec. 21 flagged: the trap's rate is proportional to
+free cysteine, which the engine has at the wrong level and with the wrong pH profile (excess largest at pH 5.5), so
+the trap's EFFECTIVE pH law is distorted by the cysteine error. **The trap, coupled to today's cysteine chemistry, is
+rejected without a fit;** it returns only as one structure with a corrected cysteine fate. The must-not-break checks
+are moot (no joint pass). The switch stays in the engine, off.
+
+## 23. A power test of the feasibility method (red-team item 3), designed before it runs (2026-10-31 ~12:25)
+
+**Synthetic truth.** The first v4 joint pass (arm B7ASST2M; its constants and TDP exit as recorded in
+..._feasibility_b7asst2m.json) generates synthetic TDP and DPO values on exactly the pots and times of the deoxyosone
+table, with log-normal noise sigma = 0.15 dex per row (declared; the fitted series noise of these figures is 0.3 - 0.6
+dex AFTER per-figure scales, so 0.15 on a scale-free ratio is a mild case). **Positive control:** the tester on arm
+B7ASST2M against the synthetic data must find it feasible (expected P 0.8). **Negative control:** the tester on arm
+B7ASST2 (the same structure WITHOUT the base-favoured 3-DX sink -- v3's arm) against the same synthetic data must find
+it NOT feasible (expected P 0.7). 600 draws each, the bands of sec. 19, seeds 20261104 / 20261105. If the positive
+control fails, "infeasible" verdicts carry little weight; if the negative control passes, "feasible" verdicts do.

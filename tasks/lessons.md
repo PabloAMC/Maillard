@@ -392,3 +392,8 @@ signature and chance records stale for the freshness gate. Remedy now tracked:
 `scripts/generators/regenerate_signature_records.py` re-scores every stale signature / chance record (and lists the
 other generators to re-run: data_wishlist, sulfur_flux_attribution). Run it after any src/kinetic_core edit, before
 the full verification.
+
+## 2026-10-31 — Side problems go to subagents, not the main thread
+- **Pattern:** the feasibility tester's validation (v1–v5, power test, oracle check) ate the main thread for hours while the plan's active step (commit, verify, push, split) waited. Owner: "leave rabbit hole problems to subagents, so you do not get off track and cover more ground."
+- **Rule:** when a sub-question appears mid-step, brief a background subagent (files it may touch, what not to touch, compute cap, no commits) and continue the active step; fold the result in when it reports.
+- 2026-10-31 (again): a text-patch script was run with system python3 -I. Even pure text patches go through the wrapper: ./scripts/docker_maillard.sh run "python <patch.py>".

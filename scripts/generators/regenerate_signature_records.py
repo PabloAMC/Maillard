@@ -66,7 +66,7 @@ def main(argv=None) -> int:
     # frozen wave records (fits, probes, hold-out predictions, diagnoses) are pinned by their commit in the freshness
     # gate, not re-hashed: they are not reported
     frozen = ("_fit_", "_probe", "_holdout_predictions_", "_flux_diagnosis_", "_ship_rule", "_verification",
-              "figure_inputs")   # the last: deferred to Phase 3 by the gate itself
+              "_feasibility_", "figure_inputs")   # the last: deferred to Phase 3 by the gate itself
     for path in sorted(VALIDATION.glob("*.json")):
         if any(tag in path.name for tag in frozen):
             continue

@@ -583,3 +583,15 @@ entries:
     verdict: supported
     conclusion: "The v1 -> v5 feasibility line drifted off the roadmap (rows 2 and 3 skipped; row 1's leave-one-lab-out never run; Cerny pot D unchanged in every structure); the partition signatures became design targets; the held-out list was weaker than claimed (two items not independent, one inert for the trap) and two held-out results point against the trap (P ~0.2); the feasibility method lacks controls; the partition is single-laboratory evidence (P ~0.25 of a method artefact); engineering debt (unpushed mixed branch, new global switches, scratchpad checks)."
     follow_up: "Sec. 21 amended before v5 was read; no trap fit; controls for the feasibility method; push + split the branch; roadmap rows 2 and 3; the row-1 leave-one-lab-out overnight (STATUS_AND_PLAN course correction)."
+  - id: EX-048
+    date: "2026-10-31"
+    kind: probe
+    question: "Feasibility v5: is the base-favoured 3-DX sink a cysteine trap (no MGO)?"
+    hypothesis: "A cysteine trap of 3-DX resolves the time / pH tension without v4's MGO overshoot (dpo prereg sec. 20)."
+    design: "feasibility_deoxyosone.py --arm B7ASST2C --draws 600 --seed 20261103; held-out tests and thresholds declared before reading (secs. 21 + amendment)."
+    expected: "feasible P 0.5 (red team ~0.6)."
+    artifacts: [results/validation/kinetic_core_deoxyosone_feasibility_b7asst2c.md]
+    commit: pending
+    verdict: rejected
+    conclusion: "NOT feasible: time + pH jointly 0 of 600 (each reachable alone: 37 / 15). Unlike v4's 3-DX -> MGO stand-in, the trap's rate scales with free cysteine, which the engine gets wrong in level and pH profile -- the trap as coupled to today's cysteine chemistry is rejected without a fit."
+    follow_up: "The trap only as one structure with a corrected cysteine fate (hub step); first the feasibility method's controls and roadmap rows 2 - 3."
