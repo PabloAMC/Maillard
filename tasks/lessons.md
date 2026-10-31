@@ -405,3 +405,7 @@ the full verification.
 ## 2026-10-31 — An edit to the conflicts register or the measurement ledger stales sulfur_reaction_evidence
 - **Pattern:** twice in one day a branch failed the freshness gate after only register / ledger edits, because `results/validation/sulfur_reaction_evidence.json` hashes `docs/reference/conflicts_register.yml` and `data/lit/measurement_ledger/trunk.yml`.
 - **Rule:** after any edit to either file, run `python scripts/generators/build_sulfur_reaction_evidence.py` before staging (it takes seconds), and `regenerate_signature_records.py --dry-run` lists anything else stale.
+
+## 2026-11-01 — Dossier agents skip the DOI line; check it after every ingestion batch
+- **Pattern:** 9 of 36 new dossiers had no DOI line, although the brief asked for one; the paper registry's "dossiers without a printed DOI" count (30 -> 41) was the only signal.
+- **Rule:** after an ingestion batch, compare that count before and after, and grep each new dossier for a `DOI:` line in its header (before the first `##` / `###`); add missing ones only after a Crossref check.
