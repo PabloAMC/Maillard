@@ -66,33 +66,20 @@ def _slope(x, y) -> float:
     return float(np.polyfit(x, y, 1)[0]) if len(x) >= 2 else float("nan")
 
 
-def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
-    parser.add_argument("--fit", required=True, help="the joint fit's stem suffix (s042_r3en_fixed, ...)")
-    args = parser.parse_args(argv)
-    fit_path = data_paths.VALIDATION_DIR / f"kinetic_core_joint_deoxyosone_thiol_fit_{args.fit}.json"
-    fit = json.loads(fit_path.read_text())
-    theta, arm = fit["fit"]["theta"], fit.get("arm") or sc._arm_of(args.fit)
-    sc._configure(arm, float(fit["strecker_share"]))
-    if fit.get("ea_static") is not None:
-        joint.EA_STATIC = dict(fit["ea_static"])
-    if fit.get("tdp_exit") is not None:    # B7a R-T's constants, from the fit's record (before B7a: from the arm)
-        joint.TDP_EXIT_STATIC = dict(fit["tdp_exit"])
-    keys = tuple(theta)
-    trial = joint.trial([theta[k] for k in keys], keys)
-    pots, rows = fit_rows.load(TABLE)
-    wanted = (set(TIME_SLOPE_POTS) | {p for ps in PH_LADDERS.values() for p in ps} | set(DOUBLE_RATIO) | set(DECLINE_POTS)
-              | set(REPORTED_DECLINE_POTS))
+def score(trial: Dict[str, Any], strecker_share: float, plans, rows, strict: bool = True):
+    """Every B7a signature at one trial (the arm already configured): (results, pass counts); with strict=False a
+    pot the engine cannot run makes the draw (None, None) instead of stopping."""
     ph_at_60: Dict[str, float] = {}
-    plans = {j["pot"]: j for j in probe.plan(pots, rows) if j["pot"] in wanted}
     meas: Dict[Tuple[str, str, float], float] = {}
     pred: Dict[Tuple[str, str, float], float] = {}
     for pot, job in plans.items():
-        j = dict(job, **trial, strecker_share=float(fit["strecker_share"]))
+        j = dict(job, **trial, strecker_share=float(strecker_share))
         res = joint.run_task(j)
         if "failed" in res:
-            raise SystemExit(f"{pot}: {res['failed']}")
-        if pot.startswith("zhai2021") and res.get("ph_in_situ"):
+            if strict:
+                raise SystemExit(f"{pot}: {res['failed']}")
+            return None, None
+        if pot.startswith("zhai2021") and res.get("ph_in_situ") and max(j["times"]) >= PH_REPORT_MIN:
             ph_at_60[pot] = float(np.interp(PH_REPORT_MIN, j["times"], res["ph_in_situ"]))
         for r in rows:
             if r.pot == pot and r.species in ("TDP", "DPO"):
@@ -153,6 +140,86 @@ def main(argv=None) -> int:
     passed = {"time_slope": sum(s["pass"] for s in out["time_slope"]),
               "ph_segments": sum(s["pass"] for s in out["ph_segments"]),
               "tdp_decline": sum(s.get("pass", False) for s in out["tdp_decline"] if s["decisive"])}
+    return out, passed
+
+
+def chance(arm: str, n: int, seed: int, strecker_share: float = 0.042) -> int:
+    """The chance baseline of these signatures (STATUS_AND_PLAN rule d; B7a review S2): pass counts when every
+    coordinate of the arm is drawn uniformly within its declared box -- what a constant set chosen without the data
+    passes. Written before any B7a arm is credited."""
+    from src.kinetic_core import parallel
+    sc._configure(arm, strecker_share)
+    keys, _kinds, lower, upper, _start = joint.coordinates(False, joint.ARMS[arm])
+    rng = np.random.default_rng(seed)
+    draws = [lower + (upper - lower) * rng.random(len(keys)) for _ in range(n)]
+    pots, rows = fit_rows.load(TABLE)
+    plans = {j["pot"]: j for j in probe.plan(pots, rows) if j["pot"] in _wanted()}
+
+    def one(x):
+        try:
+            _, passed = score(joint.trial(list(x), keys), strecker_share, plans, rows, strict=False)
+            return passed if passed is not None else {"error": "a pot failed"}
+        except Exception as exc:  # noqa: BLE001 - counted as a failed draw
+            return {"error": repr(exc)[:200]}
+
+    results = parallel.map_ordered(one, draws)
+    ok = [r for r in results if "error" not in r]
+    dist = {fam: {str(k): sum(1 for r in ok if r[fam] == k) for k in sorted({r[fam] for r in ok})}
+            for fam in ("time_slope", "ph_segments", "tdp_decline")}
+    thresholds = {"time_slope": 5, "ph_segments": 4, "tdp_decline": 2}
+    rate = {fam: sum(1 for r in ok if r[fam] >= t) / max(1, len(ok)) for fam, t in thresholds.items()}
+    stem = data_paths.VALIDATION_DIR / f"kinetic_core_deoxyosone_signatures_chance_{arm.lower()}"
+    payload = {"artifact": stem.name,
+               "provenance": provenance.provenance_block(
+                   stem.name, generated_by="scripts/generators/score_deoxyosone_signatures.py",
+                   inputs=[ROOT / "src/kinetic_core/sulfur.py", fit_rows.FIT_ROWS_DIR / f"{TABLE}.yml"]),
+               "arm": arm, "draws": n, "seed": seed, "runnable_draws": len(ok), "pass_count_distribution": dist,
+               "chance_rate_of_the_decisive_threshold": rate, "thresholds": thresholds,
+               "errors_sample": [r["error"] for r in results if "error" in r][:5]}
+    stem.with_suffix(".json").write_text(provenance.dumps_compact(payload) + "\n")
+    lines = [f"# Deoxyosone partition signatures: chance baseline, arm {arm}", "",
+             f"*Generated by `scripts/generators/score_deoxyosone_signatures.py --chance {n} --arm {arm}` (seed {seed}); "
+             f"every coordinate uniform within the arm's box. {len(ok)} of {n} draws ran.*", "",
+             "| family | decisive threshold | chance rate of reaching it | passes per draw |", "|---|---|---|---|"]
+    lines += [f"| {fam} | >= {t} | {rate[fam]:.2f} | {dist[fam]} |" for fam, t in thresholds.items()]
+    stem.with_suffix(".md").write_text("\n".join(lines) + "\n")
+    print(f"wrote {data_paths.rel(stem.with_suffix('.md'))}: {rate}")
+    return 0
+
+
+def _wanted():
+    return (set(TIME_SLOPE_POTS) | {p for ps in PH_LADDERS.values() for p in ps} | set(DOUBLE_RATIO) | set(DECLINE_POTS)
+            | set(REPORTED_DECLINE_POTS))
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
+    parser.add_argument("--fit", help="the joint fit's stem suffix (s042_r3en_fixed, ...)")
+    parser.add_argument("--chance", type=int, metavar="N", help="the chance baseline from N uniform draws (with --arm)")
+    parser.add_argument("--arm", choices=tuple(joint.ARMS), help="the arm whose box the chance baseline draws from")
+    parser.add_argument("--seed", type=int, default=20261031)
+    args = parser.parse_args(argv)
+    if args.chance:
+        if not args.arm:
+            raise SystemExit("--chance needs --arm")
+        return chance(args.arm, args.chance, args.seed)
+    if not args.fit:
+        raise SystemExit("--fit or --chance")
+    fit_path = data_paths.VALIDATION_DIR / f"kinetic_core_joint_deoxyosone_thiol_fit_{args.fit}.json"
+    fit = json.loads(fit_path.read_text())
+    theta, arm = fit["fit"]["theta"], fit.get("arm") or sc._arm_of(args.fit)
+    sc._configure(arm, float(fit["strecker_share"]))
+    if fit.get("ea_static") is not None:
+        joint.EA_STATIC = dict(fit["ea_static"])
+    if fit.get("tdp_exit") is not None:    # B7a R-T's constants, from the fit's record (before B7a: from the arm)
+        joint.TDP_EXIT_STATIC = dict(fit["tdp_exit"])
+    keys = tuple(theta)
+    trial = joint.trial([theta[k] for k in keys], keys)
+    pots, rows = fit_rows.load(TABLE)
+    wanted = (set(TIME_SLOPE_POTS) | {p for ps in PH_LADDERS.values() for p in ps} | set(DOUBLE_RATIO) | set(DECLINE_POTS)
+              | set(REPORTED_DECLINE_POTS))
+    plans = {j["pot"]: j for j in probe.plan(pots, rows) if j["pot"] in wanted}
+    out, passed = score(trial, float(fit["strecker_share"]), plans, rows)
     stem = data_paths.VALIDATION_DIR / f"kinetic_core_deoxyosone_signatures_{args.fit}"
     payload = {"artifact": stem.name,
                "provenance": provenance.provenance_block(
@@ -198,7 +265,7 @@ def main(argv=None) -> int:
                                          *_cells(s["dpo"])]) + " |")
     lines += ["", f"## The engine's in-situ pH at {PH_REPORT_MIN:g} min (Zhai 2021, 100 C; the pH the split reads)", "",
               "| pot | in-situ pH |", "|---|---|"]
-    lines += [f"| {k} | {v:.2f} |" for k, v in sorted(ph_at_60.items())]
+    lines += [f"| {k} | {v:.2f} |" for k, v in sorted(out["ph_in_situ_at_60_min"].items())]
     stem.with_suffix(".md").write_text("\n".join(lines) + "\n")
     print(f"wrote {data_paths.rel(stem.with_suffix('.md'))}: {passed}")
     return 0

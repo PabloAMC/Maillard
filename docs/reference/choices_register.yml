@@ -258,7 +258,7 @@ entries:
       same group's Martins & Van Boekel 2005b Table 2 prints four non-zero k5 cells, 6.3e-3 / 2.0e-2 / 4.1e-3 /
       1.9e-2 1/min at pH 5.5 / 6.0 / 6.8 / 7.5 (pH 4.8 a deleted parameter), geometric mean 1.0e-2, 3.5x below; its
       Table 3 exponent pD = 0.09 +- 1.10 licenses no pH term. The barrier conflicts across laboratories (k_tdg_fa's
-      note): Martins 30 (29.6 +- 8.5 in the paper), Yu 2018 43.9 (pH 10), Knol 2010 84 +- 14.
+      note): Martins 30 (29.6 +- 8.5 in the paper), Yu 2018 43.9 (pH 10), Knol 2010 84 +- 14. When on, the exit is a derived rate: it ignores a job's k_ref override or ablation of k_osone_decay (code review 2026-10-31), by design -- it replaces that constant for TDP.
     alternatives:
       - {name: trunk_k_tdg_fa, value: "3.45e-2 1/min at 100 C, Ea 30.0", source: "Martins & Van Boekel 2005, Table 2 M4, step 5"}
       - {name: martins2005b_geomean, value: "1.0e-2 1/min at 100 C (--tdp-exit-k)", source: "Martins & Van Boekel 2005b, Table 2 k5"}
