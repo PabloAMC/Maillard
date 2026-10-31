@@ -1,7 +1,7 @@
 # Cross-domain literature search, 2026-10-31: kinetics from adjacent fields
 
 The search was read-only: no repo edits, no downloads. I checked every candidate against all earlier records: the
-`docs/guides/LITERATURE_SEARCH_2026-10*.md` files, MECHANISM_REVIEWS, EVIDENCE_MAP and DOWNLOAD_QUEUE (538 DOIs plus
+`docs/guides/LITERATURE_SEARCH_2026-10*.md` files, MECHANISM_REVIEWS, EVIDENCE_MAP and the private download queue (538 DOIs plus
 author and keyword greps), and against `data/articles/` and `data/lit/extraction_dossiers/`. None of the papers listed
 below appears in those records. While checking, I dropped candidates that turned out to be covered already: Hofmann 1996
 (thiol oxidative stability), Guth 1995, Kreitman 2016/2017, Kachur 1999, Lienhard & Jencks 1966, Esterbauer 1976,

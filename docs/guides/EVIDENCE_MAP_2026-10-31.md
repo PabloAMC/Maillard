@@ -95,7 +95,7 @@ Also checked (amine or peptide rows outside the hub and odorant responses):
   - That is at least 2 labs, so a FITTED coordinate is allowed for the glycine order of the early steps (hexose).
   - Pentose: Ho network only (deng2021, zhou2024). Declared band.
 - **Peptide vs free amine on the hub:** xia2022 only (one lab). Declared band.
-  - cui2022 (glycylglycine, 10.1021/acs.jafc.2c03427) is in DOWNLOAD_QUEUE tier 2.
+  - cui2022 (glycylglycine, 10.1021/acs.jafc.2c03427) is in the private download queue, tier 2.
 - **Peptide vs free amine on pyrazines:**
   - De Kimpe (vanlancker2012, peak areas) only on disk; scalone2015 and vanlancker2010 are in the queue.
   - That leaves one lab, so a declared band.
@@ -779,7 +779,7 @@ not to the bench.
 
 ---
 
-# 4. Papers the dossiers cite that would fill a gap, NOT on disk and NOT in DOWNLOAD_QUEUE.md
+# 4. Papers the dossiers cite that would fill a gap, NOT on disk and NOT in the private download queue
 
 Each candidate's absence from the main repo's `data/articles` (492 files) was checked by name. DOIs were verified
 against Crossref today (title, authors, journal, pages matched); "lead" means not verified. Already queued and so left
