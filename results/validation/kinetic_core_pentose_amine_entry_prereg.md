@@ -155,3 +155,27 @@ R2b optimum (10^-3) in every arm that carries it.
 rows: the joint fit's + Davidek 2008's 19 (absolute, isotope dilution); hold-out Cao 2017 glycine pot; score-only
 Zhou 2023 final pH, Zhou 2023 2-acetylthiazole pH 6 / 8. Done-tests as sec. 4, plus the sanity bound and the
 censored rows above.
+
+## 9. Arm E: result, read by the acceptance protocol (2026-10-30 / 31)
+
+**Fit** (`kinetic_core_joint_deoxyosone_thiol_fit_s042_e.md`; 15 coordinates; reduced chi-square 5.15, budget
+exhausted): entry 10^-4.21 L/(mmol min) at 100 C / pH 6 (+-0.27 dex), slope +0.57 / pH (+-0.08); acetic step
+10^-1.23 / min (+-0.20), slope +0.16 (+-0.09); `k_aa_frag` to its floor (10^-6 x shipped: the data want no
+acetic-acid sink, CF-069); `amine_return` not identified (corr -0.95 with the entry rate, as declared).
+**Mechanism signatures** (`kinetic_core_mechanism_signatures_s042_e.md`): 5 / 15 (round 2's model 1 / 15) -- the
+three acetic-acid signatures (plateau at pH 6 and 8, the pH 8 / 6 effect) and the Hofmann MFT pH direction pass; the
+xylose pH 8 / 6 ratio misses by 0.01 dex beyond its 0.3 tolerance. **Hold-out:** Cao 2017's glycine pot pH 0.06 (RMS).
+**Evidence audit:** each new step is required by a measurement (the entry by Davidek's xylose decay, the acetic step
+by Davidek's isotope-dilution acetic acid and its labelling, the absent sink by the plateau). Admitted; adequacy
+(leave-one-laboratory-out) pending.
+**Sanity bound FAILED:** norfuraneol in Davidek's pots peaks at 25 - 36 mol% (bound 5 %; Desclaux ~3 %).
+
+**Diagnosis of the failure (plan step B7, read-only flux at E's optimum).** In the glycine pots 94 - 99 % of PAMA goes
+to 1-deoxypentosone, which then splits norfuraneol 38 - 53 %, acetic acid 37 - 55 %, MGO 7 - 10 %; measured: acetic
+16 - 28 mol%, norfuraneol ~3 %. The lane's 1-deoxypentosone has only those exits (plus a 1 % acid lump), so
+norfuraneol absorbs the flux that, in Desclaux 2006's own network, goes to diacetyl, hydroxyacetone, 2,3-pentanedione,
+glycolaldehyde and a lumped "Maillard products" sink. `k_dpo_nf` was fitted on the Jiangnan cysteine / TTCA pots.
+**Next arm (B7), rival structures to pre-register:** (a) Desclaux's first-order DONE-1 -> Maillard products (amine-
+independent); (b) an amine-assisted 1-deoxypentosone consumption (1-DP + amino acid -> products), which would also
+explain lower norfuraneol where the amine is abundant. Signatures that discriminate: norfuraneol yield in glycine
+(Desclaux) vs cysteine (Jiangnan) pots at like conditions; Cerny 2004's diacetyl from C-1 loss vs C-5 loss (54 : 46).

@@ -1,0 +1,273 @@
+# EXPERIMENT REGISTER (2026-10-31; owner: "are we logging the experiments we did, the hypothesis, results and
+# conclusions, in case we want to revisit them in the future?").
+#
+# One entry per experiment -- a fit arm, a probe, a diagnosis, a literature search -- so that "did we ever test X,
+# and what did it say?" is a lookup. The full reasoning lives in the design document each entry links; the numbers
+# live in the artifacts, pinned by the commit that wrote them (a superseded run survives at its commit).
+# Fields: id, date, kind (fit | probe | diagnosis | literature | review), question, hypothesis, design (document and
+# section), expected (as pre-registered, with P where one was written), artifacts, commit, verdict
+# (supported | rejected | partial | inconclusive | superseded | pending), conclusion, follow_up.
+# Earlier waves (B1-B64) are recorded in tasks/data_restructure_plan.md sec. 7 and docs/history/; this register
+# starts with Phase 2's sub-models (2026-10-29).
+# Checked by scripts/ci/experiment_register_gate.py (every fit / probe / diagnosis / signature artifact in
+# results/validation must appear in some entry's artifacts).
+entries:
+  - id: EX-001
+    date: "2026-10-29"
+    kind: fit
+    question: "Do the acid sinks and exits fitted on Martins' glucose data transfer to other laboratories (sub-model 1, arm A)?"
+    hypothesis: "The acetic-acid sink is ~5x smaller than shipped and the formic exit is pH-independent."
+    design: "results/validation/kinetic_core_ph_acid_submodel_prereg.md secs. 3-5"
+    expected: "Done-tests on raw residuals; leave-one-lab-out within 0.30 per data set x observable."
+    artifacts: [results/validation/kinetic_core_ph_acid_submodel_fit_A.md, results/validation/kinetic_core_ph_acid_submodel_fit_A.json]
+    commit: 23efd67
+    verdict: partial
+    conclusion: "Acetic acid transfers (Martins 2005b hold-out 5 / 5); formic acid does not (1 / 4); leave-one-lab-out fails (1 / 10 cells); nothing ships."
+    follow_up: "Formic exit to the literature; acid amounts across pH as fit data (done later via Davidek, EX-013)."
+  - id: EX-002
+    date: "2026-10-29"
+    kind: fit
+    question: "Do pH slopes on the Amadori steps explain the acid pH dependence (sub-model 1, arm B)?"
+    hypothesis: "Martins 2003's measured slopes, applied in the sulfur lane, reproduce the pH trend."
+    design: "results/validation/kinetic_core_ph_acid_submodel_prereg.md secs. 4-5, Amendment 1"
+    expected: "Slopes inside Martins' band; no pH trend in residuals."
+    artifacts: [results/validation/kinetic_core_ph_acid_submodel_fit_B.md, results/validation/kinetic_core_ph_acid_submodel_fit_B.json,
+                results/validation/kinetic_core_ph_acid_submodel_fit_B_superseded_amendment1.md, results/validation/kinetic_core_ph_acid_submodel_fit_B_superseded_amendment1.json]
+    commit: 1b6aeac
+    verdict: partial
+    conclusion: "First run's slopes on bounds (DFG at the wrong pKa; label-scale slopes) -> Amendment 1; rerun: acetic 5 / 5 on the hold-out, formic 0 / 4."
+    follow_up: "As EX-001."
+  - id: EX-003
+    date: "2026-10-29"
+    kind: fit
+    question: "Do slopes on the glucose-consuming steps (condensation, sugar) close the acid pH trend (sub-model 1, arm C)?"
+    hypothesis: "The pH trend is the glucose steps' slopes, not the formic exit."
+    design: "results/validation/kinetic_core_ph_acid_submodel_prereg.md Amendment 2"
+    expected: "In-sample pH trend gone; hold-out passes."
+    artifacts: [results/validation/kinetic_core_ph_acid_submodel_fit_C.md, results/validation/kinetic_core_ph_acid_submodel_fit_C.json,
+                results/validation/kinetic_core_ph_acid_submodel_holdout_score.md]
+    commit: ebe99d6
+    verdict: rejected
+    conclusion: "In-sample it worked by putting the condensation slope on its bound; the frozen hold-out rejected it (low-pH drifting runs 10 - 200x low in acid)."
+    follow_up: "The hold-out did its job: an in-sample improvement that would have damaged low-pH predictions was stopped."
+  - id: EX-004
+    date: "2026-10-30"
+    kind: fit
+    question: "Can sub-model 3 close the calibrated methylglyoxal by re-routing 1-deoxypentosone (arm A2)?"
+    hypothesis: "k_dpo_ddp slowed and k_dpo_c2c3 raised close Zhai's MGO."
+    design: "results/validation/kinetic_core_deoxyosone_submodel_prereg.md"
+    expected: "Zhai MGO within tolerance."
+    artifacts: [results/validation/kinetic_core_deoxyosone_submodel_fit_A2.md, results/validation/kinetic_core_deoxyosone_submodel_fit_A2.json]
+    commit: 1ef09d9
+    verdict: partial
+    conclusion: "MGO closes (k_dpo_c2c3 x10^2.47, k_dpo_ddp to its bound) but MFT / FFT worsen and 2-acetylthiazole goes ~2000x high: the constants cannot be set on one table alone."
+    follow_up: "The joint sub-model 3 + 4 fit (EX-006 / EX-007)."
+  - id: EX-005
+    date: "2026-10-30"
+    kind: fit
+    question: "Is methylglyoxal made by 3-deoxypentosone's retro-aldol (sub-model 3, arm A3)?"
+    hypothesis: "r_tdp_mgo carries the MGO the data need."
+    design: "results/validation/kinetic_core_deoxyosone_submodel_prereg.md"
+    expected: "Better than A2 on MGO without harming the thiols."
+    artifacts: [results/validation/kinetic_core_deoxyosone_submodel_fit_A3.md, results/validation/kinetic_core_deoxyosone_submodel_fit_A3.json]
+    commit: 1ef09d9
+    verdict: rejected
+    conclusion: "Worse than A2."
+    follow_up: "None."
+  - id: EX-006
+    date: "2026-10-30"
+    kind: fit
+    question: "Joint sub-model 3 + 4: do the deoxyosone and thiol tables admit one set of constants (round 1, first run)?"
+    hypothesis: "The H2S budget couples them; fitted together they agree."
+    design: "results/validation/kinetic_core_thiol_submodel_prereg.md secs. 4-5"
+    expected: "Zhai MGO within 0.3; SIDA MFT / FFT RMS <= 0.3; constants off bounds."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042.md]
+    commit: d84b300
+    verdict: superseded
+    conclusion: "Semi-quantitative scales were keyed by ledger id instead of per figure (an implementation deviation from the reviewed design) and the report printed raw residuals as if after scale; re-run as EX-007."
+    follow_up: "The scale key fixed; MeasurementModel.offsets added."
+  - id: EX-007
+    date: "2026-10-30"
+    kind: fit
+    question: "Round 1 with scales per figure: three runs (Strecker H2S share 0.042, the same with MFT decay capped, share 0.080)."
+    hypothesis: "As EX-006."
+    design: "results/validation/kinetic_core_thiol_submodel_prereg.md secs. 4-8"
+    expected: "k_h2s_loss up > x3 (P 0.25); k_dpo_ddp off its bound (0.3); Schieberle MFT within x3 (0.45)."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042.json,
+                results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_capped.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_capped.json,
+                results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s080.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s080.json]
+    commit: 5c73ca9
+    verdict: partial
+    conclusion: "Three runs agree (reduced chi-square 5.3-5.4); MGO and Garching's fed-precursor thiols fit; MFT decay x8 slower than shipped (CF-013 independently); the Strecker share is not identified (k_dpo_ddp to its bound); Schieberle MFT / FFT ~-1.6 / -1.7 dex; the model reproduces 1 / 15 mechanism signatures (EX-014)."
+    follow_up: "Round 2 (EX-010, EX-011); the flux diagnosis (EX-008)."
+  - id: EX-008
+    date: "2026-10-30"
+    kind: diagnosis
+    question: "Where do the thiol misses come from, at the round-1 optimum?"
+    hypothesis: "A flux budget names the step a structural arm must change."
+    design: "results/validation/kinetic_core_thiol_submodel_prereg.md secs. 6, 8"
+    expected: "Budgets closing to 1 %."
+    artifacts: [results/validation/kinetic_core_thiol_flux_diagnosis_s042.md, results/validation/kinetic_core_thiol_flux_diagnosis_s042.json]
+    commit: 5c73ca9
+    verdict: supported
+    conclusion: "H2S only from (measured) cysteine thermolysis; 73 % of Schieberle's H2S lost; MFT is late, not just low (-2.4 dex at 30 min, -0.7 at 12 h): an early MFT source is missing."
+    follow_up: "Round 3 (the intact-C5 route, EX-015 - EX-017)."
+  - id: EX-009
+    date: "2026-10-30"
+    kind: diagnosis
+    question: "Why do Zhou 2023's unbuffered ARP pots end 1 - 2.2 pH units too high at initial pH 7 / 8?"
+    hypothesis: "The lane's acid supply does not rise with pH."
+    design: "results/validation/kinetic_core_thiol_submodel_prereg.md sec. 7 (B1)"
+    expected: "-"
+    artifacts: [scripts/diagnostics/zhou2023_arp_acid_sources.py]
+    commit: c1a58cb
+    verdict: supported
+    conclusion: "~3.5 mM net acid at every initial pH; no pentose route to formic or acetic acid."
+    follow_up: "Literature (EX-019) -> Davidek 2008 -> the pentose acetic-acid step (EX-012, EX-013)."
+  - id: EX-010
+    date: "2026-10-30"
+    kind: fit
+    question: "Round 2b: is 2-acetylthiazole's constant set by its own data, and does freeing it disturb anything?"
+    hypothesis: "k_cys_actz was fitted when MGO was 10^3 too low."
+    design: "results/validation/kinetic_core_thiol_submodel_prereg.md secs. 6-7"
+    expected: "pH 6 / 8 within x3 unfitted (P 0.2)."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r2b.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r2b.json]
+    commit: 338bbad
+    verdict: supported
+    conclusion: "k_cys_actz x10^-3.06 +- 0.39; every other constant within 0.03 dex; the pH 6 / 8 test fails (+0.6 / -1.5 dex): the step's pH dependence is too weak."
+    follow_up: "The thiazole step's pH law (open)."
+  - id: EX-011
+    date: "2026-10-30"
+    kind: fit
+    question: "Round 2a: does a methylglyoxal + cysteine Strecker supply the missing H2S?"
+    hypothesis: "H2S follows the carbon that 1-deoxypentosone sends to MGO."
+    design: "results/validation/kinetic_core_thiol_submodel_prereg.md secs. 6-7"
+    expected: "Schieberle MFT within x3 (P 0.2, after the review's ceiling argument)."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r2ab.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r2ab.json]
+    commit: c1a58cb
+    verdict: rejected
+    conclusion: "Its rate goes to the lower bound (10^-6): the data reject the step."
+    follow_up: "None."
+  - id: EX-012
+    date: "2026-10-30"
+    kind: probe
+    question: "Pentose + amino-acid entry and the pentose acetic-acid step: can they reach the data, and is ARP's breakdown rate right for a glycine Amadori compound?"
+    hypothesis: "Glycine-xylose Amadori compounds break down at ARP's rate (declared, checked against Desclaux 2006)."
+    design: "results/validation/kinetic_core_pentose_amine_entry_prereg.md secs. 2-7"
+    expected: "Check the declared assumption; if > x3 off, use Desclaux's constants."
+    artifacts: [results/validation/kinetic_core_pentose_amine_entry_probe.md, results/validation/kinetic_core_pentose_amine_entry_probe.json]
+    commit: 338bbad
+    verdict: partial
+    conclusion: "The assumption failed (ARP 4.1x / 9.1x slower than Desclaux) -> PAMA on Desclaux's constants; acetic acid reachable only with a fast beta-cleavage, which competes with norfuraneol -> a joint-fit arm."
+    follow_up: "The design review found the fitted acetic-acid sink (CF-069) -> arm E."
+  - id: EX-013
+    date: "2026-10-30"
+    kind: fit
+    question: "Arm E: the pentose + amine entry, the acetic-acid step and a free acetic-acid sink, jointly with the thiol layer."
+    hypothesis: "The entry and the beta-cleavage reproduce Davidek's xylose and acetic acid; the sink is not needed."
+    design: "results/validation/kinetic_core_pentose_amine_entry_prereg.md secs. 7-9"
+    expected: "Acetic / xylose within 0.15 / 0.2 dex (P 0.5); norfuraneol <= 5 mol% (sanity bound)."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_e.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_e.json]
+    commit: c1a58cb
+    verdict: partial
+    conclusion: "Admitted on the evidence audit: entry identified (10^-4.2 at 100 C / pH 6, slope 0.57), acetic sink to its floor (CF-069), Cao hold-out pH 0.06; 5 / 15 signatures; norfuraneol sanity bound FAILED (25 - 36 mol%)."
+    follow_up: "EX-018 (why norfuraneol); leave-one-lab-out on the admitted structure."
+  - id: EX-014
+    date: "2026-10-30"
+    kind: diagnosis
+    question: "How many mechanism signatures (within-paper ratios a wrong mechanism cannot reproduce) does each arm reproduce?"
+    hypothesis: "Numeric fit and mechanism are different things."
+    design: "docs/guides/STRATEGY_2026-10-29.md sec. 9; scripts/generators/score_mechanism_signatures.py (tolerances declared before arms were read)"
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_mechanism_signatures_s042_r2b.md, results/validation/kinetic_core_mechanism_signatures_s042_r2b.json,
+                results/validation/kinetic_core_mechanism_signatures_s042_e.md, results/validation/kinetic_core_mechanism_signatures_s042_e.json]
+    commit: c1a58cb
+    verdict: supported
+    conclusion: "Round 2's model (reduced chi-square ~5): 1 / 15 signatures; arm E: 5 / 15 (all three acetic-acid signatures and the Hofmann MFT pH direction)."
+    follow_up: "Every later arm is scored the same way."
+  - id: EX-015
+    date: "2026-10-30"
+    kind: fit
+    question: "Round 3 (R3E): MFT through the intact C5 skeleton (DDP route) with the DDP-forming step's shipped free-amine pH law."
+    hypothesis: "Cerny 2003's labelling (~7 % of MFT via free norfuraneol at 95 C) requires the DDP route."
+    design: "results/validation/kinetic_core_thiol_submodel_prereg.md secs. 9-10"
+    expected: "Pass of the Cerny hold-out with the 'base' law ~0.15 (review)."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3e.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3e.json,
+                results/validation/kinetic_core_mechanism_signatures_s042_r3e.md, results/validation/kinetic_core_mechanism_signatures_s042_r3e.json]
+    commit: 599baec
+    verdict: rejected
+    conclusion: "The fit switched the route back off (route product +0.38, k_dpo_ddp 10^-4.5); Cerny pot D fed-norfuraneol share 0.976 (measured 0.07). At its start the route had put Schieberle's MFT at -0.01 dex: other rows pull it off under this law."
+    follow_up: "The rival laws (EX-016, EX-017)."
+  - id: EX-016
+    date: "2026-10-30"
+    kind: fit
+    question: "Round 3 (R3En): the DDP-forming step with no pH dependence."
+    hypothesis: "Without the free-amine factor, Zhai's pH ladder no longer forces the route off."
+    design: "results/validation/kinetic_core_thiol_submodel_prereg.md sec. 10"
+    expected: "Decided by mechanism signatures and the Cerny tests."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en.json,
+                results/validation/kinetic_core_mechanism_signatures_s042_r3en.md, results/validation/kinetic_core_mechanism_signatures_s042_r3en.json]
+    commit: pending
+    verdict: partial
+    conclusion: "The data now ACCEPT DDP formation (k_dpo_ddp 10^-0.61 +- 0.18, off its bound; reduced chi-square 4.95, the lowest so far) but raise norfuraneol + H2S -> MFT x26, so Cerny pot D's fed-norfuraneol share is 0.994 (measured 0.07); pot C's MP3P companion passes; 4 / 15 signatures. The rows that pin k_nf_mft are fed-norfuraneol pots at 145 C (Hofmann T4 / T10); Cerny's 95 C labelling wants that step minor: with one shared barrier no constant satisfies both -> the route mix must change with temperature."
+    follow_up: "Combine round 3 with B6: the DDP step's pH law (R3En / R3Es) plus a free barrier for norfuraneol + H2S -> MFT (and Lau's 81.5 kJ/mol for norfuraneol formation); Cerny 95 C, Hofmann 145 C, Liu 168 C as the signatures."
+  - id: EX-017
+    date: "2026-10-30"
+    kind: fit
+    question: "Round 3 (R3Es): the DDP-forming step with a free pH slope."
+    hypothesis: "The data choose the step's pH law."
+    design: "results/validation/kinetic_core_thiol_submodel_prereg.md sec. 10"
+    expected: "Decided by mechanism signatures and the Cerny tests."
+    artifacts: []
+    commit: pending
+    verdict: pending
+    conclusion: "-"
+    follow_up: "-"
+  - id: EX-018
+    date: "2026-10-31"
+    kind: diagnosis
+    question: "Why does arm E put 25 - 36 mol% norfuraneol in glycine pots?"
+    hypothesis: "1-deoxypentosone lacks exits in the lane."
+    design: "results/validation/kinetic_core_pentose_amine_entry_prereg.md sec. 9"
+    expected: "-"
+    artifacts: [scripts/diagnostics/deoxypentosone_partition.py]
+    commit: pending
+    verdict: supported
+    conclusion: "1-deoxypentosone splits norfuraneol 38 - 53 % / acetic 37 - 55 % / MGO 7 - 10 % (measured norfuraneol ~3 %); Desclaux's network has exits the lane lacks (diacetyl, hydroxyacetone, 2,3-pentanedione, glycolaldehyde, 'Maillard products')."
+    follow_up: "Arm B7: rival 1-deoxypentosone sinks (first order vs amine-assisted)."
+  - id: EX-019
+    date: "2026-10-30"
+    kind: literature
+    question: "Is there measured pentose-derived formic / acetic acid vs pH?"
+    hypothesis: "-"
+    design: "chat, 2026-10-30 (search agent); owner downloaded the papers"
+    expected: "P 0.55 acetic with a pH dependence; P 0.15 formic too."
+    artifacts: [data/lit/fit_rows/ph_acid_davidek_acids.yml, data/lit/extraction_dossiers/davidek2008_extraction.md]
+    commit: 5204e7c
+    verdict: partial
+    conclusion: "Davidek 2008 (isotope dilution, pH 6 / 8 time courses of acetic acid and xylose) -- acetic yes; formic near pH 5 - 8 unmeasured anywhere found."
+    follow_up: "Keyed by two readers (41 rows)."
+  - id: EX-020
+    date: "2026-10-31"
+    kind: literature
+    question: "MFT routes: the pH law of 1,4-dideoxyosone formation, the route mix vs temperature, H2S vs HS- reactivity."
+    hypothesis: "-"
+    design: "chat, 2026-10-31 (search agent)"
+    expected: "-"
+    artifacts: []
+    commit: "-"
+    verdict: partial
+    conclusion: "No new download needed. Nedvidek 1992: 1,4-dideoxyosones much higher with an alpha-amino acid (Strecker-assisted). Liu 2023 (168 C): ~19 % fragment recombination vs <= 5 % at 95 C (Cerny) -> the route mix moves with temperature. No H2S / HS- rate data."
+    follow_up: "Arm B6 (route barriers; Lau 2003's 81.5 kJ/mol for norfuraneol), drafted in the thiol prereg sec. 11."
+  - id: EX-021
+    date: "2026-10-31"
+    kind: review
+    question: "What do the engine and the corpus hold for a Strecker-aldehyde lane (plan step C9)?"
+    hypothesis: "-"
+    design: "results/validation/kinetic_core_strecker_lane_prereg.md (step 1, inventory)"
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_strecker_lane_prereg.md]
+    commit: pending
+    verdict: supported
+    conclusion: "No Strecker aldehyde is shipped; B18's constant is a pyrazine-yield constant ~2.3 dex below the Strecker rate Hofmann 2000's fed MGO + Phe pot implies; 3-DG and glucosone are near-MGO donors at pH 7 and absent from the lane; Hofmann 2000 is the anchor (SIDA, fed donors, argon / air, pH series)."
+    follow_up: "Digitise Hofmann 2000 Fig. 3 (the donor in the same pot); design C9-A; a targeted search for the Strecker step's own barrier (G1)."

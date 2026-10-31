@@ -447,4 +447,26 @@ strongest -- the temperature dependence of the route mix is not representable ye
 0.042 ("none"), pot C MP3P / MFT 0.002 / 0.0005; at the ridge's far end (10^-3, +3.5) 0.81 / 0.58. What decides
 between the laws is whether Zhai's pH ladder lets `k_dpo_ddp` sit near 10^-1 -- the question the rival fits answer.
 
+## 11. Draft (2026-10-31, before round 3's result): the MFT route mix vs temperature (plan step B6)
+
+*A draft, written while round 3 runs; it is pre-registered for review only after round 3 decides the DDP step's pH
+law, because both arms move the same routes.*
+
+**Why.** The lane gives every formation and assembly step one lumped barrier (64.08 kJ/mol) and the DDP and
+norfuraneol decays one (143.5), so its route mix barely moves with temperature (sec. 10, NOTE). The measured route
+mix does move: Cerny 2003 (95 C, pH 5) -- MFT keeps the intact skeleton, ~7 % via free norfuraneol, fragment
+recombination <= 5 %; Hofmann 1998 T10 (145 C) -- norfuraneol and the C2 + C3 route (hydroxyacetaldehyde +
+mercapto-2-propanone) strong; Liu 2023 (LWT, 168 C, pH 5.88, carbon-module labelling) -- ~81 % intact C5 with
+norfuraneol named as the intermediate, ~19 % recombined fragments.
+**Measured barrier available:** Lau 2003 -- norfuraneol formation from ribose + protein amines, first order,
+Ea 81.5 +- 3.2 kJ/mol over 116 - 131 C (whey gel; HPLC peak areas, so a rate, not a yield). A barrier above the DDP
+route's makes norfuraneol gain share with temperature, the measured direction.
+**Arm (B6):** the norfuraneol-formation barrier at Lau's 81.5 (measured-class, band +-10, a declared ribose-gel ->
+aqueous transfer); the DDP route's barrier free (its pH law from round 3); the C2 + C3 route (`r_ha_mp_mft`) with its
+own barrier free. **Signatures (declared now):** Cerny 95 C fed-norfuraneol share in [0.03, 0.15]; Liu 168 C
+fragment (C2 + C3) share of MFT 0.19 (band 0.10 - 0.30, simulated at Liu's conditions -- volume from the paper, to be
+read); Hofmann T10 145 C route ranking; Zhai 140 / 120 C and Yiltirak's temperature ladder directions.
+**Open question for the literature (owner downloads on DOIs):** a labelling study at two or more temperatures in one
+laboratory -- the search of 2026-10-31 found none (P ~0.1 that one exists).
+
 ## Amendments
