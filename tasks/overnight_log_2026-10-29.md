@@ -197,3 +197,15 @@ rivals -> round-3 verdict; (2) pre-register the lag rivals from the literature p
 groups and chance baseline; (4) leave-one-lab-out on the converged finalist; (5) A3 config context manager, then A2.
 **Is this the most valuable next step?** Yes: every verdict so far rests on unconverged fits; converging them is
 cheap compute and protects every later decision.
+
+## Checkpoint 11 -- 2026-10-31 ~01:00
+
+**Goal:** unchanged (sec. 1). **State:** commits 5096e72 (premortem folded in) and 8a25ae7 (signatures v2, R3Es,
+Hofmann 2000, T1) on submodel1-ph, verifying on a clean checkout before the PR #30 push. Convergence queue running
+since 00:55 (E conv -> E fixed -> R3En / R3Es / R3E fixed). Chance baseline (v2, R3En box, 200 draws) running.
+**Learned this hour:** the lag literature pass turns the MFT question into a supply-rate one: Schieberle's MFT is
+near-linear after a ~9 min dead time and stops at ~6 h (a reservoir), and T1 shows start conditions explain ~0.5 dex
+of the early excess at 30 min but not at 60 min -- the intact-C5 route's early supply is ~10x too fast. Rivals R4a /
+R4b drafted (prereg sec. 14), to be reviewed in the day. R3Es: budget-exhausted, same picture as R3En.
+**Is this the most valuable next step?** Yes: the converged rivals decide whether round 3 said anything; R4 is the
+mechanistic answer either way, so its design waits for the owner's review, not for compute.

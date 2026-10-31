@@ -343,3 +343,39 @@ entries:
     verdict: rejected
     conclusion: "Ramp + TTCA lower the 30 min excess from +1.30 to +0.76 dex but leave 60 min at +1.10 (from +1.17). Start conditions are worth ~0.5 dex at 30 min, not the fix: the early DDP (intact-C5) supply is ~10x too fast in the first hour -- the route's pool is full at once where the data want it fed at a reservoir's drain rate. Both points also make MFT fall after 6 h (measured: a stop)."
     follow_up: "Rivals R4a (DDP fed only by the cysteine Amadori compound's first-order decomposition, TTCA reservoir and come-up in place) and R4b (+ H2S-supply limit), to be pre-registered and reviewed (thiol prereg sec. 14)."
+  - id: EX-028
+    date: "2026-10-31"
+    kind: diagnosis
+    question: "Where does the engine's early intact-C5 (DDP) supply in Schieberle's pot come from?"
+    hypothesis: "A pool that is full at once feeds the 1-deoxypentosone (thiol prereg sec. 14, T1)."
+    design: "Flux attribution of DPO / DDP / MFT / Cys at 30 / 60 / 360 / 720 min at sec. 13's Cerny-passing point; switch-off dry runs of r_pent_dpo, r_pent_thermal_dpo, r_ttca_deg; a 3 x 3 grid (Ea of NF -> MFT within the class x DDP route) with r_ttca_deg off. No fit; thiol prereg sec. 15."
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_thiol_submodel_prereg.md]
+    commit: pending
+    verdict: supported
+    conclusion: "r_ttca_deg (TTCA -> DPO without freeing cysteine; fitted in B2.1) supplies most DPO in the first hour (0.40 of 0.58 mM at 30 min); the measured cysteine Amadori route takes over only after hours. Off: the early-rise signature passes, Cerny pot D still passes at Ea 160 (0.075), but in-class (Ea <= 133) pot D reaches only 0.17 and the lag error stays +0.91 dex at fixed MFT decay -- a fit must decide. MFT net is a small difference of formation and decay (0.42 made, 0.39 destroyed by 720 min)."
+    follow_up: "Arm R4a vs null R4n (thiol prereg sec. 15), after an independent design review."
+  - id: EX-029
+    date: "2026-10-31"
+    kind: review
+    question: "Design review of arm R4a (r_ttca_deg off; NF -> MFT barrier free in class) vs null R4n."
+    hypothesis: "Removing TTCA's direct breakdown to the 1-deoxypentosone fixes the early MFT supply (thiol prereg sec. 15)."
+    design: "Independent review with single-process dry checks at the unconverged R3En optimum; thiol prereg sec. 16."
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_thiol_submodel_prereg.md]
+    commit: pending
+    verdict: rejected
+    conclusion: "Blocking: the barrier is not identified by the fit rows (Cerny is a hold-out; Zhai Fig. 6b reads MFT decay), so a free barrier makes the verdict start-dependent. r_ttca_deg is ~2 % of TTCA turnover and moves the route tables <= 0.06 dex; free cysteine is already 2 - 40x too high (a missing sink) and Zhai 2019's 3-DX / 1-DX is off by 1 - 2 decades in both arms -- upstream misfits that outrank the MFT routes."
+    follow_up: "Arm R4f (EX-030); plan step B7 redefined as the DPO partition and the cysteine sink."
+  - id: EX-030
+    date: "2026-10-31"
+    kind: fit
+    question: "Do the fit rows send TTCA's direct breakdown to the 1-deoxypentosone to zero (Amadori-only), at any barrier of NF -> MFT within the measured class?"
+    hypothesis: "The direct step is a fitted stand-in for the measured Amadori route (de Roos 2005), so its offset piles up at the lower bound."
+    design: "Arm R4f = R3En + offset_k_ttca_deg in [-4, 0.5]; ea_k_nf_mft profiled at 64.08 / 100 / 133 (fixed); from s042_r3en_fixed under s042_e_conv's fixed noise; budget 1200, ftol 1e-4 (thiol prereg sec. 16). Queued after EX-024."
+    expected: "offset at its lower bound at >= 2 of 3 points (P 0.45); Cerny pot D passes at any point (P 0.15); cost profile flat within 2 units (P 0.6)."
+    artifacts: []
+    commit: pending
+    verdict: pending
+    conclusion: "-"
+    follow_up: "-"

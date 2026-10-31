@@ -353,3 +353,9 @@
   freshness-gate line that the producing run (a detached `&` job whose chain stopped after pytest) never printed. Wait
   on the producing process, not on a string (`run_in_background` and its completion notice), or give the loop a
   deadline and print what it last saw. Never start a detached `&` job: its output and exit are invisible.
+
+**Generated READMEs count TRACKED files: regenerate them after `git add`** (2026-10-31). `build_data_readme.py` and
+`build_results_readme.py` list what git tracks, so running them before staging new files leaves both stale in the
+commit (unit tests `test_*_readme_is_current` fail). Order: stage everything, regenerate the READMEs, stage them,
+commit. And a verification chain must not stop at the first failing step: the env wrapper runs `set -eo pipefail`,
+so `pytest ... | tail` kills the rest of the chain -- redirect each step to its own log instead.

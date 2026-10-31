@@ -570,4 +570,76 @@ come-up. Decided by the v2 signatures (MFT timing, supply exhaustion), Cerny pot
 baseline. A designed time-resolved pot-D experiment (fed NF + [13C5]ribose, 0.5 - 6 h at 100 C) separates (1) from
 (2): a candidate for the designed time-course protocol.
 
+## 15. Where the early intact-C5 supply comes from, and arm R4a -- design, 2026-10-31 ~01:30, before any R4 fit
+
+**Flux attribution (Schieberle's pot at sec. 13's Cerny-passing point, no fit).** 1-deoxypentosone (DPO) made by 30 /
+60 / 360 / 720 min: 0.58 / 1.34 / 9.8 / 17.5 mM. In the first hour most of it comes from `r_ttca_deg` (TTCA -> DPO
+without releasing cysteine: 0.40 of 0.58 at 30 min, 0.79 of 1.34 at 60 min); the cysteine Amadori route (`r_cama_dpo`,
+B59b: TTCA -> Amadori compound -> DPO + Cys, de Roos 2005) dominates only later (6.1 of 9.8 by 360 min). TTCA reaches
+~27 of 33 mM cysteine within minutes, so `r_ttca_deg` is a supply that is "full at once" -- the shape T1 blamed. The
+direct cysteine-catalysed enolisation `r_pent_dpo` is already retired by B59b (switching it off changes nothing).
+MFT: 0.42 mM made by 720 min, 0.39 mM of it destroyed by `ch_mft_decay` -- net MFT is a small difference, so the
+lag is entangled with MFT's decay constant. Free cysteine sits at 4 - 5 mM from 30 min to 12 h (no reservoir drains).
+
+**Why `r_ttca_deg` is the suspect.** It was added in B2.1 (fitted on Kang's TTCA ladder) so that >= 84 % of the
+cysteine moiety could leave TTCA without ever being free -- the 16.3 % ceiling. B59b later gave TTCA a measured route
+that also never frees cysteine on the way in: the Amadori rearrangement (formation anchored on Cao 2017's blank pot,
+decay de Roos 2005, split Zhai 2019). de Roos 2005 names the Amadori compound, not the thiazolidine, as the precursor.
+Two routes now do one job, and the fitted one is fast where the measured one is slow.
+
+**Dry grid (no fit; `r_ttca_deg` off; Ea of NF -> MFT within the sulfur class).** Cerny pot D fed share / Schieberle
+lag error (dex) at DDP route +1 / +2 / +3 over R3En: Ea 64: 0.99 / 0.94 / 0.65, lag -0.52 / +0.22 / +0.91; Ea 100:
+0.97 / 0.80 / 0.37; Ea 133: 0.91 / 0.55 / 0.17, same lags. At sec. 13's Ea 160 + DDP +3: pot D 0.075 (PASS), lag
++0.91 (with `r_ttca_deg`: +1.29), early rise +0.19 (+-0.25: within). Groups passed 4 - 6 of 11. So removing the step
+helps the early shape (early rise passes) but not the lag at fixed MFT decay; the fit must decide with the decay free.
+
+**Arm R4a (to be reviewed before it runs).** R3En's structure with `r_ttca_deg` OFF (TTCA's only way to the
+deoxyosones is its Amadori compound; one fitted step fewer) and `ea_k_nf_mft` free within the measured sulfur class
+[40, 133] kJ/mol (sec. 13's rule). Coordinates: R3En's + `ea_k_nf_mft`. Two starts: (i) the converged R3En (EX-024)
+with Ea 64.08; (ii) the in-class Cerny corner (Ea 133, route product R3En + 3). Fixed measurement model: E's converged
+series noise (one objective with EX-024); budget 1200, ftol 1e-4. Rival null R4n: R3En's structure + the same Ea
+coordinate, `r_ttca_deg` ON (so the comparison isolates the step). Decided, in order, by: Cerny pot D within [0.03,
+0.15]; signature groups (v2) vs the chance baseline (EX-025); cost under the fixed noise (R4a has one constant fewer
+in the network, the same coordinates); Kang's TTCA ladder (the free-cysteine ceiling and maximum time -- the reason
+`r_ttca_deg` exists) as a must-not-break check.
+**Expected (written now):** R4a's cost within 2 % of R4n's or lower (P 0.5); Cerny pot D passes in R4a (P 0.3) and
+in R4n (P 0.1); Schieberle lag within tolerance in R4a (P 0.35); Kang's free-cysteine peak stays <= 16.3 % without
+`r_ttca_deg` (P 0.5 -- the Amadori formation may be too slow at 100 - 140 C to carry it). If Kang breaks, the next
+question is the Amadori formation's barrier (Zhang 2026's hexose value is a declared transfer).
+
+## 16. Design review of R4a, and arm R4f -- 2026-10-31 ~01:45, before any R4 fit; sec. 15's R4a / R4n superseded
+
+**Review (independent; dry checks at the unconverged R3En optimum).** BLOCKING: the norfuraneol -> MFT barrier is not
+identified inside the fit -- Cerny is a hold-out (not in the cost) and the only fitted pot feeding norfuraneol off
+145 C (Zhai JAFC Fig. 6b, NF + (NH4)2S, 120 C, two semi-quantitative MFT rows) reads MFT decay, not formation -- so a
+free barrier would make the first decision criterion depend on the start. SHOULD-FIX: (S1) `k_ttca_deg` is ~2 % of
+TTCA's ring opening; switching it off moves the route-table series (TTCA, Amadori compound, free cysteine, pentose; 52
+series, 5 papers) by <= 0.06 dex, and free cysteine is ALREADY 2 - 40x too high in both arms (Zhai 2023 FC Fig. 3a
++0.33 / +0.87 dex; Zhai 2021 Fig. 6 +0.6 to +1.6), so Kang's ceiling cannot discriminate (P ~0.02 in both arms, not
+0.5) -- a missing cysteine sink, recorded as a pre-existing misfit; (S2) rows that will move: Schieberle MFT -0.77 /
+-0.67 dex at 30 / 60 min (intended), Zhai 2021 TTCA pH 5.5 / 6 early MGO -0.5 to -0.85 dex, early DPO spread better
+(0.30 -> 0.16); (S3) switching the step off DOUBLES pot D's share at a fixed point (0.038 -> 0.075), so sec. 15's
+P(R4a passes) > P(R4n) had no reason; (S4) the sec. 15 grid scored all 17 signatures and Cerny on 9 points before the
+expectations were written: every expectation below is post-grid, only the converged position and the cost are unseen;
+(S5) the come-up and TTCA pre-equilibration stay out of both arms (isothermal, as every arm so far) and are a 2 x 2
+dry check at the optimum; R4n's `k_ttca_deg` is a stale B2.1 value; the chance baseline must cover v2 and R4's box.
+NOTE: the case for the Amadori compound as the precursor stands (de Roos 2005, Zhai 2019, Hou 2017), but the lever acts
+through a MIS-PARTITIONED 1-deoxypentosone pool: Zhai 2019's fed-TTCA 3-DX / 1-DX is 20 - 330 in the engine vs 2.1 -
+2.6 measured, in both arms, and the fitted C2 + C3 drain on DPO sits at +2.42 dex.
+
+**Arm R4f (adopted from the review).** R3En + `offset_k_ttca_deg` free in [-4, +0.5] (start 0 = R4n): R4a and R4n
+are the two ends of one coordinate, and a pile-up at the lower bound is the data's verdict for the Amadori-only route.
+The barrier is PROFILED, not freed: three fits at `ea_k_nf_mft` = 64.08 (shipped) / 100 / 133 kJ/mol (the class's
+median and upper end), each from the converged R3En (`s042_r3en_fixed`, EX-024) under E's converged series noise
+(`s042_e_conv`; one objective with EX-024), budget 1200, ftol 1e-4. Read: the profile of cost vs Ea; at each point
+`offset_k_ttca_deg` (bound or interior), Cerny pot D, signature groups (v2) vs the chance baseline, and the rows of
+S2. A cost difference < 2 units across the profile = Ea not identified by the fit rows (the expected outcome).
+**Expected (post-grid, written now):** `offset_k_ttca_deg` at its lower bound at >= 2 of 3 profile points (P 0.45);
+Cerny pot D within [0.03, 0.15] at any profile point (P 0.15); the cost profile flat within 2 units (P 0.6); the
+Schieberle lag within tolerance at the best point (P 0.3).
+**What decides beyond R4f (recorded now so the result cannot redirect it).** Two upstream misfits outrank the MFT
+route arms: the cysteine excess in the fed-TTCA pots (a missing sink) and the 1-deoxypentosone partition (3-DX / 1-DX
+off by 1 - 2 decades; the fitted C2 + C3 drain). Plan step B7 (rival 1-DP sinks) becomes "the DPO partition and the
+cysteine sink", tested on Zhai 2019 / 2021 and Cao 2017 before any further MFT-route arm.
+
 ## Amendments

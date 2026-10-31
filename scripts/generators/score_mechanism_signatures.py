@@ -267,6 +267,8 @@ def main(argv=None) -> int:
     # ends in its arm); the stem only for records written before the fit stored its arm
     theta, arm = fit["fit"]["theta"], fit.get("arm") or _arm_of(args.fit)
     _configure(arm, float(fit["strecker_share"]))
+    if fit.get("ea_static") is not None:   # the barriers the fit held fixed (a profile point), from its record
+        joint.EA_STATIC = dict(fit["ea_static"])
     tables, measured, jobs = _measured()
     out, groups, cerny = score(theta, float(fit["strecker_share"]), tables, measured, jobs)
     stem = data_paths.VALIDATION_DIR / f"kinetic_core_mechanism_signatures_{args.fit}"

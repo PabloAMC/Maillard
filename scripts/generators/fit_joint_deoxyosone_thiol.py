@@ -71,7 +71,11 @@ ARMS = {"none": frozenset(), "R2a": frozenset({"mgo_strecker"}), "R2b": frozense
         # "L": norfuraneol formation at Lau 2003's measured 81.5 kJ/mol (a declared transfer), a sensitivity
         "R3Tn": frozenset({"actz", "entry", "ddp", "ddp_law_none", "nf_mft_ea"}),
         "R3Ts": frozenset({"actz", "entry", "ddp", "ddp_law_slope", "nf_mft_ea"}),
-        "R3TnL": frozenset({"actz", "entry", "ddp", "ddp_law_none", "nf_mft_ea", "dpo_nf_lau"})}
+        "R3TnL": frozenset({"actz", "entry", "ddp", "ddp_law_none", "nf_mft_ea", "dpo_nf_lau"}),
+        # R4f (thiol prereg sec. 16, after the R4a review): R3En + TTCA's direct breakdown to the 1-deoxypentosone as
+        # a free log offset (its lower bound ~ off: TTCA then reaches the deoxyosones only via its Amadori
+        # compound); the norfuraneol -> MFT barrier is PROFILED (--ea-nf-mft), not freed (review B1)
+        "R4f": frozenset({"actz", "entry", "ddp", "ddp_law_none", "ttca_deg"})}
 NF_MFT_EA_COORDINATE = ("ea_k_nf_mft", "Ea", 40.0, 200.0, 100.0)
 LAU_NF_EA_KJ_MOL = 81.5
 #: round 3 (review B2): the DDP route's PRODUCT (log10 multiplier of k_dpo_ddp x both DDP -> MFT branches) is the
@@ -91,9 +95,11 @@ CERNY_MP3P_RATIO_MAX = 0.1
 DDP_LAW_STATIC: Dict[str, Any] = {}
 #: barriers set by the arm rather than fitted (R3TnL: norfuraneol formation at Lau 2003's), read by trial()
 EA_STATIC: Dict[str, float] = {}
-ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",), "ddp_mft": ("k_ddp_mft", "k_ddp_mft_hs")}
-ARM_LOWER, ARM_UPPER, ARM_START = ({"k_cys_actz": -6.0, "k_aa_frag": -6.0}, {"k_cys_actz": 1.0, "k_aa_frag": 0.5},
-                                   {"k_cys_actz": -3.0, "k_aa_frag": -1.5})
+ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",), "ddp_mft": ("k_ddp_mft", "k_ddp_mft_hs"),
+                  "k_ttca_deg": ("k_ttca_deg",)}
+ARM_LOWER, ARM_UPPER, ARM_START = ({"k_cys_actz": -6.0, "k_aa_frag": -6.0, "k_ttca_deg": -4.0},
+                                   {"k_cys_actz": 1.0, "k_aa_frag": 0.5, "k_ttca_deg": 0.5},
+                                   {"k_cys_actz": -3.0, "k_aa_frag": -1.5, "k_ttca_deg": 0.0})
 #: the entry's own coordinates: (key, kind, lower, upper, start). Rates as log10 of k at 100 C / pH 6 (entry
 #: L/(mmol min), acetic 1/min); slopes in decades per in-situ pH unit; amine_return a share in [0, 1]
 ENTRY_COORDINATES = (("log10_k_pent_amine", "log10_offset", -7.0, -2.0, -4.15),
@@ -148,6 +154,9 @@ def coordinates(mft_decay_cap: bool, arms=frozenset()):
     if "ddp" in arms:
         key, _, lo, hi, st = DDP_COORDINATE
         keys.append(key); kinds.append("log10_offset"); lower.append(lo); upper.append(hi); start.append(st)
+    if "ttca_deg" in arms:
+        keys.append("offset_k_ttca_deg"); kinds.append("log10_offset")
+        lower.append(ARM_LOWER["k_ttca_deg"]); upper.append(ARM_UPPER["k_ttca_deg"]); start.append(ARM_START["k_ttca_deg"])
     if "nf_mft_ea" in arms:
         key, kind, lo, hi, st = NF_MFT_EA_COORDINATE
         keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
@@ -436,6 +445,8 @@ def main(argv=None) -> int:
     parser.add_argument("--noise-from", metavar="FIT", help="fix every series' extra noise at that fit's estimate "
                         "(a single round, no re-estimation): rival arms then share ONE objective (premortem 2026-10-31)")
     parser.add_argument("--ftol", type=float, help="relative cost tolerance (default: the fitting module's)")
+    parser.add_argument("--ea-nf-mft", type=float, metavar="KJ_MOL", help="fix the norfuraneol + H2S -> MFT barrier "
+                        "(a profile point, thiol prereg sec. 16); its multiplier stays referenced at 145 C")
     parser.add_argument("--tag", default="", help="suffix for the output stem (e.g. conv), so a re-fit never "
                         "overwrites the record it continues")
     parser.add_argument("--check-fixed-point", action="store_true",
@@ -452,6 +463,8 @@ def main(argv=None) -> int:
     global DDP_LAW_STATIC, EA_STATIC
     DDP_LAW_STATIC = {"law": "none"} if "ddp_law_none" in arms else {}
     EA_STATIC = {"k_dpo_nf": LAU_NF_EA_KJ_MOL} if "dpo_nf_lau" in arms else {}
+    if args.ea_nf_mft is not None:
+        EA_STATIC["k_nf_mft"] = float(args.ea_nf_mft)
     t0 = time.time()
     sulfur.PH_COUPLING = "inline"
     predictable = set(sulfur.SULFUR_STATE_KEYS)
@@ -534,6 +547,7 @@ def main(argv=None) -> int:
         "engine_state": "B60 + B58/B59b/B59a/B61 on; sub-model 1 switches off; inline coupling"
                         + ("" if args.arm == "none" else f"; round-2 arm {args.arm}"),
         "arm": args.arm, "start_from": args.start_from, "noise_from": args.noise_from, "ftol": args.ftol,
+        "ea_static": dict(EA_STATIC),
         "rows": len(data), "pots": len({key_of(r) for r in data}), "start": dict(zip(keys, map(float, start))),
         "fit": best.as_dict(keys), "laplace": lap, "series_extra_noise": dict(final_model.extra_noise),
         "failed_pot_runs": len(FAILURES), "failures_sample": FAILURES[:10],
