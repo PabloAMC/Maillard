@@ -3,11 +3,11 @@
  "provenance": {
   "artifact": "kinetic_core_mechanism_signatures_s042_r3en_fixed",
   "generated_on": "2026-10-31",
-  "git": {"commit": "b6f6af10cd870b4593e3c4a9633bc558c1a82a6d", "short": "b6f6af10", "branch": "submodel1-ph", "dirty": true},
+  "git": {"commit": "bf9ed087f1a9e1c8829699983a36540f5ded96cf", "short": "bf9ed087", "branch": "b7-deoxyosone-partition", "dirty": true},
   "generated_by": "scripts/generators/score_mechanism_signatures.py",
   "inputs": [
    {"path": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en_fixed.json", "sha256": "596924ef51ec83d192e0c51c1616148943f59bc40e2462e6fe44a51dca325af0"},
-   {"path": "src/kinetic_core/sulfur.py", "sha256": "1887c9ba5bb509eb320bc71c3ac42d44c7a446dd1af6d63cd35127fa8c0eec0a"},
+   {"path": "src/kinetic_core/sulfur.py", "sha256": "c64e61c187eaf92acbb5003869f326df4bfed9dc79dc433fe81d728756509832"},
    {"path": "data/lit/fit_rows/ph_acid_davidek_acids.yml", "sha256": "af52f68f8e9ab8dd68b83d46c05fb8e28a2ece13fe9639d91f83e79e17aa1338"},
    {"path": "data/lit/fit_rows/thiol_submodel.yml", "sha256": "95b36cd13d0a84275e2331bf913ac1543217af34e8f92e0a86d3409f3c8ea4da"},
    {"path": "data/lit/fit_rows/thiol_zhou2023_ph_series.yml", "sha256": "70c521303b7961ca7c158c6cf7099a813a16241dc5220fe976398be789b4a18e"}
@@ -20,35 +20,35 @@
  "fit_converged": true,
  "groups_passed": {"MFT timing (an early source)": false, "FFT timing": false, "MFT supply exhaustion (a reservoir)": false, "MFT pH direction": false, "FFT and furfural pH direction": false, "no acetic-acid sink": false, "beta-cleavage pH law": true, "pentose + amine entry pH law": true, "cysteine's role in MFT formation": false, "temperature dependence": false, "isotope routes (Cerny 2003)": false},
  "signatures": [
-  {"signature": "schieberle MFT lag 60 / 720 min", "mechanism": "an early MFT source (not only accumulating norfuraneol)", "group": "MFT timing (an early source)", "role": "fitted", "measured_log10": -1.1129739445786566, "predicted_log10": -1.0978101800914395, "tolerance_dex": 0.3, "sign_must_match": true, "pass": true},
-  {"signature": "schieberle FFT lag 60 / 720 min", "mechanism": "FFT's early supply", "group": "FFT timing", "role": "fitted", "measured_log10": -1.6292122373715772, "predicted_log10": -2.6147062122242173, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false},
-  {"signature": "schieberle MFT plateau 720 / 360 min", "mechanism": "a reservoir that runs dry near 6 h, not accumulating norfuraneol", "group": "MFT supply exhaustion (a reservoir)", "role": "fitted", "measured_log10": 0.059728432625431545, "predicted_log10": -0.19071013169661385, "tolerance_dex": 0.25, "sign_must_match": false, "pass": false},
-  {"signature": "schieberle MFT early rise 60 / 30 min", "mechanism": "near-linear formation after a short dead time (no slow intermediate)", "group": "MFT timing (an early source)", "role": "fitted", "measured_log10": 0.48666657262589286, "predicted_log10": 0.9454586194738506, "tolerance_dex": 0.25, "sign_must_match": true, "pass": false},
-  {"signature": "hofmann MFT pH 7 / pH 3 (hold-out)", "mechanism": "the pH direction of MFT formation", "group": "MFT pH direction", "role": "held_out", "measured_log10": -1.3447851226326606, "predicted_log10": -0.1287730593523387, "tolerance_dex": 0.5, "sign_must_match": true, "pass": false},
-  {"signature": "hofmann FFT pH 7 / pH 3 (hold-out)", "mechanism": "the pH direction of FFT formation", "group": "FFT and furfural pH direction", "role": "held_out", "measured_log10": -1.2806542362922633, "predicted_log10": 2.085259849168749, "tolerance_dex": 0.5, "sign_must_match": true, "pass": false},
+  {"signature": "schieberle MFT lag 60 / 720 min", "mechanism": "an early MFT source (not only accumulating norfuraneol)", "group": "MFT timing (an early source)", "role": "fitted", "measured_log10": -1.1129739445786566, "predicted_log10": -1.097810177969262, "tolerance_dex": 0.3, "sign_must_match": true, "pass": true},
+  {"signature": "schieberle FFT lag 60 / 720 min", "mechanism": "FFT's early supply", "group": "FFT timing", "role": "fitted", "measured_log10": -1.6292122373715772, "predicted_log10": -2.614706212299666, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false},
+  {"signature": "schieberle MFT plateau 720 / 360 min", "mechanism": "a reservoir that runs dry near 6 h, not accumulating norfuraneol", "group": "MFT supply exhaustion (a reservoir)", "role": "fitted", "measured_log10": 0.059728432625431545, "predicted_log10": -0.19071013382858445, "tolerance_dex": 0.25, "sign_must_match": false, "pass": false},
+  {"signature": "schieberle MFT early rise 60 / 30 min", "mechanism": "near-linear formation after a short dead time (no slow intermediate)", "group": "MFT timing (an early source)", "role": "fitted", "measured_log10": 0.48666657262589286, "predicted_log10": 0.9454586194730554, "tolerance_dex": 0.25, "sign_must_match": true, "pass": false},
+  {"signature": "hofmann MFT pH 7 / pH 3 (hold-out)", "mechanism": "the pH direction of MFT formation", "group": "MFT pH direction", "role": "held_out", "measured_log10": -1.3447851226326606, "predicted_log10": -0.12877305878105375, "tolerance_dex": 0.5, "sign_must_match": true, "pass": false},
+  {"signature": "hofmann FFT pH 7 / pH 3 (hold-out)", "mechanism": "the pH direction of FFT formation", "group": "FFT and furfural pH direction", "role": "held_out", "measured_log10": -1.2806542362922633, "predicted_log10": 2.0852598479592994, "tolerance_dex": 0.5, "sign_must_match": true, "pass": false},
   {"signature": "zhou2023 furfural pH 8 / 6", "mechanism": "furfural supply vs pH (reads the pH model too)", "group": "FFT and furfural pH direction", "role": "unfitted", "measured_log10": -0.4320524311858081, "predicted_log10": -1.7836969415108266, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false},
   {"signature": "zhou2023 FFT pH 8 / 6", "mechanism": "FFT vs pH (reads the pH model too)", "group": "FFT and furfural pH direction", "role": "unfitted", "measured_log10": -0.3982603832966872, "predicted_log10": 0.11931151798042566, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false},
   {"signature": "zhou2023 MFT pH 7 / 6", "mechanism": "MFT's rising side vs pH", "group": "MFT pH direction", "role": "unfitted", "measured_log10": 0.35777980953649136, "predicted_log10": 0.32992880779342976, "tolerance_dex": 0.3, "sign_must_match": true, "pass": true},
   {"signature": "zhou2023 MFT pH 8 / 7", "mechanism": "MFT's falling side vs pH", "group": "MFT pH direction", "role": "unfitted", "measured_log10": -0.4803344747764804, "predicted_log10": 0.1331653662489598, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false},
-  {"signature": "davidek acetic 240 / 60 min, pH 8", "mechanism": "no acetic-acid sink (plateau at xylose exhaustion)", "group": "no acetic-acid sink", "role": "fitted", "measured_log10": 0.01115680206280981, "predicted_log10": -0.22682689297635114, "tolerance_dex": 0.1, "sign_must_match": false, "pass": false},
-  {"signature": "davidek acetic 240 / 60 min, pH 6", "mechanism": "no acetic-acid sink", "group": "no acetic-acid sink", "role": "fitted", "measured_log10": 0.07751717764509106, "predicted_log10": -0.10205589381289754, "tolerance_dex": 0.1, "sign_must_match": false, "pass": false},
-  {"signature": "davidek acetic pH 8 / 6 at 240 min", "mechanism": "base-favoured beta-cleavage of the 1-deoxypentosone", "group": "beta-cleavage pH law", "role": "fitted", "measured_log10": 0.23273655539809607, "predicted_log10": 0.15429455091584482, "tolerance_dex": 0.15, "sign_must_match": true, "pass": true},
-  {"signature": "davidek xylose pH 8 / 6 at 30 min", "mechanism": "the pentose + amine entry's pH law", "group": "pentose + amine entry pH law", "role": "fitted", "measured_log10": -1.2731666860752227, "predicted_log10": -1.243025564890809, "tolerance_dex": 0.3, "sign_must_match": true, "pass": true},
-  {"signature": "zhai MFT +Cys / TTCA, 120 C", "mechanism": "cysteine's stoichiometric role in MFT formation", "group": "cysteine's role in MFT formation", "role": "fitted", "measured_log10": 0.3631496315703433, "predicted_log10": 0.6932858831660036, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false},
-  {"signature": "zhai MFT 140 / 120 C, +Cys (hold-out)", "mechanism": "the temperature dependence of MFT formation", "group": "temperature dependence", "role": "held_out", "measured_log10": 0.2043886711630966, "predicted_log10": -0.3887471330638679, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false},
-  {"signature": "zhai FFT 140 / 120 C, +Cys (hold-out)", "mechanism": "the temperature dependence of FFT formation", "group": "temperature dependence", "role": "held_out", "measured_log10": 0.12933310294372177, "predicted_log10": -0.30634463169011794, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false}
+  {"signature": "davidek acetic 240 / 60 min, pH 8", "mechanism": "no acetic-acid sink (plateau at xylose exhaustion)", "group": "no acetic-acid sink", "role": "fitted", "measured_log10": 0.01115680206280981, "predicted_log10": -0.22682689299802275, "tolerance_dex": 0.1, "sign_must_match": false, "pass": false},
+  {"signature": "davidek acetic 240 / 60 min, pH 6", "mechanism": "no acetic-acid sink", "group": "no acetic-acid sink", "role": "fitted", "measured_log10": 0.07751717764509106, "predicted_log10": -0.10205589471006515, "tolerance_dex": 0.1, "sign_must_match": false, "pass": false},
+  {"signature": "davidek acetic pH 8 / 6 at 240 min", "mechanism": "base-favoured beta-cleavage of the 1-deoxypentosone", "group": "beta-cleavage pH law", "role": "fitted", "measured_log10": 0.23273655539809607, "predicted_log10": 0.15429455125402905, "tolerance_dex": 0.15, "sign_must_match": true, "pass": true},
+  {"signature": "davidek xylose pH 8 / 6 at 30 min", "mechanism": "the pentose + amine entry's pH law", "group": "pentose + amine entry pH law", "role": "fitted", "measured_log10": -1.2731666860752227, "predicted_log10": -1.2430255713171146, "tolerance_dex": 0.3, "sign_must_match": true, "pass": true},
+  {"signature": "zhai MFT +Cys / TTCA, 120 C", "mechanism": "cysteine's stoichiometric role in MFT formation", "group": "cysteine's role in MFT formation", "role": "fitted", "measured_log10": 0.3631496315703433, "predicted_log10": 0.6932858819944593, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false},
+  {"signature": "zhai MFT 140 / 120 C, +Cys (hold-out)", "mechanism": "the temperature dependence of MFT formation", "group": "temperature dependence", "role": "held_out", "measured_log10": 0.2043886711630966, "predicted_log10": -0.38874714441581293, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false},
+  {"signature": "zhai FFT 140 / 120 C, +Cys (hold-out)", "mechanism": "the temperature dependence of FFT formation", "group": "temperature dependence", "role": "held_out", "measured_log10": 0.12933310294372177, "predicted_log10": -0.3063446445468493, "tolerance_dex": 0.3, "sign_must_match": true, "pass": false}
  ],
  "cerny_route_checks": {
   "cerny2003_potD_nf_ribose_cys": {
-   "mft_made_mmol_L": 0.43936294068935994,
-   "share_by_step": {"r_nf_mft": 0.9981891745986161, "r_ddp_mft": 0.0017786177868271706, "r_ddp_mft_hs": 3.2207044950757565e-05, "r_ha_mp_mft": 5.696058996635629e-10},
-   "nf_route_flux_share": 0.9981891745986161,
-   "c2_c3_route_share": 5.696058996635629e-10,
-   "mp3p_over_mft": 0.0032778378135840864,
-   "fed_nf_mft_share": 0.9925276289657248,
-   "fed_fraction_of_nf_pool_at_end": 0.9872548026192274
+   "mft_made_mmol_L": 0.43936294097643636,
+   "share_by_step": {"r_nf_mft": 0.9981891745981087, "r_ddp_mft": 0.0017786177873302868, "r_ddp_mft_hs": 3.2207044955118226e-05, "r_ha_mp_mft": 5.696058996837162e-10},
+   "nf_route_flux_share": 0.9981891745981087,
+   "c2_c3_route_share": 5.696058996837162e-10,
+   "mp3p_over_mft": 0.0032778378135824206,
+   "fed_nf_mft_share": 0.9925276289678998,
+   "fed_fraction_of_nf_pool_at_end": 0.9872548026274228
   },
-  "cerny2003_potC_ribose_cys": {"mft_made_mmol_L": 0.24319828505280647, "share_by_step": {"r_nf_mft": 0.8933177146917904, "r_ddp_mft": 0.10479336728330912, "r_ddp_mft_hs": 0.0018887104180798468, "r_ha_mp_mft": 2.0760682062575885e-07}, "nf_route_flux_share": 0.8933177146917904, "c2_c3_route_share": 2.0760682062575885e-07, "mp3p_over_mft": 0.002933462573303018},
+  "cerny2003_potC_ribose_cys": {"mft_made_mmol_L": 0.24319828501491336, "share_by_step": {"r_nf_mft": 0.8933177146981838, "r_ddp_mft": 0.10479336727704266, "r_ddp_mft_hs": 0.0018887104179526899, "r_ha_mp_mft": 2.076068208305501e-07}, "nf_route_flux_share": 0.8933177146981838, "c2_c3_route_share": 2.076068208305501e-07, "mp3p_over_mft": 0.0029334625733240132},
   "verdict": "pot D unlabelled (fed-norfuraneol) MFT share 0.993 vs measured 0.07: FAIL; pot C MP3P / MFT 0.00293 (blind; <= 0.1): PASS"
  }
 }

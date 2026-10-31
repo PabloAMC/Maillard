@@ -463,3 +463,135 @@ entries:
     verdict: supported
     conclusion: "192 of 200 draws ran. Chance of reaching the decisive thresholds: time slope >= 5 / 8 0.02, pH segments >= 4 / 6 0.00, both declines 0.00 -- strict tests. Typical random draw: time 1 / 8, pH 1 - 2 / 6. The fitted arms (time 1 - 2 / 8, pH 0 - 1 / 6) are at or BELOW chance on the partition: no structure tried so far carries information about it. Every draw passes exactly one of the two TDP declines, so that pair is uninformative as a pair; (vi) needs both."
     follow_up: "Credit a B7 arm only on (i) and (ii); next candidate the amine-assisted beta-cleavage of DPO (prereg sec. 11)."
+  - id: EX-038
+    date: "2026-10-31"
+    kind: review
+    question: "Premortem of the roadmap of 2026-10-31 morning: if it has failed by late November, why?"
+    hypothesis: "-"
+    design: "An independent read-only agent given STATUS_AND_PLAN, the overnight checkpoints, EX-022 - EX-037 and the B7 prereg."
+    expected: "-"
+    artifacts: [docs/guides/STATUS_AND_PLAN.md]
+    commit: pending
+    verdict: supported
+    conclusion: "Ranked failure shares: the hub not identifiable from literature (lab effects confound amine / phosphate / O2 factors) 0.30; the odorants reached too late (Strecker behind B, A3, A2, C1) 0.25; the signature machinery without measured power 0.15; A2 overrun 0.12; C6 scope creep 0.10; a thin yardstick 0.08. B7a-2's confound: Zhai's TTCA pots are not amine-free (cysteine). Missing: the published multiresponse hub models (Martins 2005, Brands 2002) as nulls."
+    follow_up: "Roadmap revised (STATUS_AND_PLAN sec. 5): B capped at 24 h with cysteine's amine order declared; forced-input odorant layers now; an identifiability audit + synthetic power test before the hub; the hub as a standalone module seeded from Martins / Brands, B7b folded in; A2 after; C6 cut to a sensitivity page."
+  - id: EX-039
+    date: "2026-10-31"
+    kind: review
+    question: "Six mechanism reviews (hub, cysteine, thiols, Strecker, pyrazines, matrix): what does the literature say about each core problem, and which papers would settle it?"
+    hypothesis: "-"
+    design: "Independent read-only agents, one per problem, reading the dossiers and PDFs on disk and searching (DOIs verified against Crossref / PubMed). Synthesis docs/guides/MECHANISM_REVIEWS_2026-10-31.md; raw reports docs/history/mechanism_reviews_2026-10-31/."
+    expected: "-"
+    artifacts: [docs/guides/MECHANISM_REVIEWS_2026-10-31.md]
+    commit: pending
+    verdict: supported
+    conclusion: "Ten plan-changing findings: deoxyosones quasi-steady with the engine's 3-DX far too long-lived (P 0.65); a cysteine trap of 3-DX growing with pH (signature vii); dilute TTCA pots kinetically far from equilibrium -- catalysed hydrolysis (P 0.55); the MFT loss law as the likeliest missing thiol element (P 0.40); Liu 2023's recombination an EI-MS artefact (P 0.8); the pyrazine lane's yield constant used as a Strecker flux (~1.9 dex); Strecker yields are branching shares with a shallow pH law and a separate O2 acid route; protein-bound lysine the dominant real-product amine; a glycation-arm bug (CF-072); a wrong buffer claim in the B7 prereg (corrected). 25 papers listed in two tiers."
+    follow_up: "Download list to the owner; the hub step seeded with Martins M4 and signature (vii); B7b as catalysed rate laws; the MFT-loss arm (thiol prereg sec. 17); pyrazines after the forced-input Strecker layer."
+  - id: EX-040
+    date: "2026-10-31"
+    kind: diagnosis
+    question: "Does a slower MFT loss reconcile Cerny 2003 with Schieberle 2000 at an in-class NF -> MFT barrier?"
+    hypothesis: "The MFT loss law, not the route barriers, carries the Cerny / Schieberle conflict (thiol review, P 0.40)."
+    design: "Dry grid at s042_r3en_fixed: Ea(NF -> MFT) 100 / 133, DDP route +2 / +3, MFT decay x1 / 0.2 / 0.1, DPO -> NF x1 / 0.1; thiol prereg sec. 17. No fit."
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_thiol_submodel_prereg.md]
+    commit: pending
+    verdict: partial
+    conclusion: "At Ea 133 and DDP +3, Cerny pot D passes (0.070) already with the fitted decay; slowing the decay x0.1 cuts Schieberle's lag error from +1.30 to +0.80 dex and brings the early rise and plateau within tolerance, but the lag still fails. The fits restore a fast decay, so a temperature-dependent MFT loss is the next candidate."
+    follow_up: "Design + review an MFT-loss-barrier arm (thiol prereg sec. 17)."
+  - id: EX-041
+    date: "2026-10-31"
+    kind: fit
+    question: "B7a-2: does the DPO beta-cleavage's saturating pH law (Davidek 2006a, amine-free 1-DG), alone (B7AS) or with the split law (B7ASS), reproduce the partition signatures?"
+    hypothesis: "The engine's log-linear base factor over-drains DPO at high pH (dpo partition prereg sec. 13)."
+    design: "Under the B7a null's fixed noise (w 0.2), from the null's optimum; the pK replaces the slope (same coordinate count); budget 1200, ftol 1e-4 (prereg sec. 13 + its review amendments; signature vii declared sec. 14)."
+    expected: "B7AS >= 4 / 6 pH segments P 0.07; B7ASS P 0.1; Davidek 2008 acetic signatures hold P 0.75."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_b7as_w02.md, results/validation/kinetic_core_mechanism_signatures_s042_b7as_w02.md, results/validation/kinetic_core_deoxyosone_signatures_s042_b7as_w02.md, results/validation/kinetic_core_deoxyosone_signatures_s042_r3en_b7anull_w02_fixed.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_b7ass_w02.md, results/validation/kinetic_core_mechanism_signatures_s042_b7ass_w02.md, results/validation/kinetic_core_deoxyosone_signatures_s042_b7ass_w02.md]
+    commit: pending
+    verdict: rejected
+    conclusion: "B7AS: status 3, cost 1022 vs the null's 1093 under the same noise (-71 at the same coordinate count: a real cost gain), pK 5.35 +- 0.32 (in-situ; just below Davidek's ~5.5 - 6.2); partition signatures time 1 / 8, pH segments 0 / 6 (the null 1 / 6), (vii) 2 / 4 (the null 2 / 4): at pH 7 / 8 the measured +xylose double ratio is 1.22 / 2.71, every model ~0.73. Cerny pot D 0.994. B7ASS: status 3, cost 901.5 (+2 coordinates; pK 5.64, DPO share at pH 7 0.87, pH_c 6.38): time 0 / 8, pH segments 1 / 6 but the RIGHT SIGN from pH 6 to 8 (too shallow), (vii) 3 / 4 -- the first pass; Cerny 0.997. Neither arm passes (i) or (ii); under mechanisms-before-constants the cost gains are not evidence. The pH structure (split + saturating cleavage) and the time structure (the 3-DX lifetime) are separate faults."
+    follow_up: "Section B partition work closed (dpo prereg sec. 15); carried to the hub step as feasibility tests: 3-DX quasi-steady (Martins M4), the split + saturating cleavage, a cysteine trap of 3-DX, catalysed TTCA hydrolysis, phosphate as a variable."
+  - id: EX-042
+    date: "2026-10-31"
+    kind: review
+    question: "Design review of the forced-input Strecker layer (roadmap step 2)."
+    hypothesis: "-"
+    design: "Independent review, no runs; arithmetic on the keyed Hofmann 2000 rows and the dossiers (strecker forced-input prereg, review section)."
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_strecker_forced_input_prereg.md]
+    commit: pending
+    verdict: partial
+    conclusion: "Two structures settled dry under mechanisms-before-constants: a single O2 constant (arm A) is impossible (the four donors need omega 0.99 / 0.88 / 0.18 / 0.085) -> class constants with real hold-outs (A'); first-order donor consumption misses Table 3's hyperbolic curve and nu = 1 contradicts the Phe loss -> an amine-free second-order sink as the rival, nu banded. The decisive glucose-pot test omitted the Amadori compound's direct oxidative route (dry 15 - 50 % of the pot's PA) -> a two-route forced layer. Weenen vs Hofmann (x14 - 20) is not an aldehyde-loss effect (CF-073)."
+    follow_up: "Key hofmann2000 Fig. 2 and hofmann2000b Tables 2 - 3 (two readers) before any fit; then a feasibility check of the two-route layer."
+  - id: EX-043
+    date: "2026-10-31"
+    kind: probe
+    question: "Feasibility (mechanisms before constants): can B7ASS's pH structure + a real 3-DX exit reproduce the partition signatures anywhere in its bands?"
+    hypothesis: "A 3-DX exit (the hub review's H1, quasi-steady deoxyosones) supplies the flat time course B7ASS lacked."
+    design: "scripts/generators/feasibility_deoxyosone.py --arm B7ASST --reference s042_b7ass_w02 --draws 300 (dpo partition prereg sec. 16)."
+    expected: "feasible P 0.3; (i) reachable P 0.55; (ii) reachable P 0.35."
+    artifacts: [results/validation/kinetic_core_deoxyosone_feasibility_b7asst.md]
+    commit: pending
+    verdict: rejected
+    conclusion: "NOT feasible (299 draws): time slope >= 5 / 8 never reached (best 4), pH segments >= 4 / 6 by 6 draws (the R3En box never), (vii) by 91, pH + (vii) by 6. A 3-DX exit as fast as 0.1 /min cannot flatten the ratio's time course: the sources must shift in time (prereg sec. 17)."
+    follow_up: "Feasibility v2 with the sources sampled (pentose caramelisation to 3-DX, TTCA's direct breakdown to 1-DX, DPO -> NF)."
+  - id: EX-044
+    date: "2026-10-31"
+    kind: probe
+    question: "Feasibility v2: with the 3-DX and 1-DX SOURCES sampled too (pentose caramelisation, TTCA's direct breakdown, DPO -> NF), can the structure reach the partition signatures?"
+    hypothesis: "The ratio's time course is set by the sources shifting in time (the hub review's H5)."
+    design: "feasibility_deoxyosone.py --arm B7ASST2 --reference s042_b7ass_w02 --draws 300 (dpo partition prereg sec. 17)."
+    expected: "feasible P 0.25; (i) reachable P 0.45."
+    artifacts: [results/validation/kinetic_core_deoxyosone_feasibility_b7asst2.md]
+    commit: pending
+    verdict: partial
+    conclusion: "Not feasible in 299 draws, but the time slope is now reachable (3 draws reach 5 / 8; v1 0): the sources drive the ratio's time course. pH segments reached by 4, (vii) by 64; time + pH jointly by 0 -- a tension or a small joint region (prereg sec. 18)."
+    follow_up: "v3: 600 draws, another seed, the reaching draws' constants recorded."
+  - id: EX-045
+    date: "2026-10-31"
+    kind: probe
+    question: "Feasibility v3: are the time-slope and pH-segment signatures in tension, or is their joint region merely small?"
+    hypothesis: "-"
+    design: "feasibility_deoxyosone.py --arm B7ASST2 --draws 600 --seed 20261101 --tag v3, recording the constants of the draws reaching each family (dpo partition prereg sec. 18)."
+    expected: "joint pass P 0.3; time-reaching draws with caramelisation < -1 in >= 2 of 3 P 0.6."
+    artifacts: [results/validation/kinetic_core_deoxyosone_feasibility_b7asst2_v3.md]
+    commit: pending
+    verdict: supported
+    conclusion: "A real tension, located in the 3-DX exit: the time-reaching draws need a FAST exit (log10 k -1.13 to -1.01, lifetime ~13 min), the pH-reaching draws a slow one (-3.40 to -1.34) -- disjoint. A fast pH-flat exit flattens the time course but removes the pH shape: both need a fast 3-DX sink that grows with pH (a base-favoured sink -- the hub review's cysteine trap H2, signature vii). No joint pass in 597 draws."
+    follow_up: "v4: a base-favoured 3-DX exit (r_tdp_mgo as the stand-in), prereg sec. 19."
+  - id: EX-046
+    date: "2026-10-31"
+    kind: probe
+    question: "Feasibility v4: does a fast, base-favoured 3-DX exit (r_tdp_mgo as the stand-in) resolve the time / pH tension?"
+    hypothesis: "Both families need a fast 3-DX sink that grows with pH (EX-045)."
+    design: "feasibility_deoxyosone.py --arm B7ASST2M --draws 600 --seed 20261102; then the joint passes evaluated on the 100 calibrated Zhai MGO rows, the thiol groups and Cerny pot D (scratchpad v4_joint_check.py; dpo partition prereg sec. 20)."
+    expected: "feasible P 0.4; MGO overshoot at the joint passes P 0.5 (would favour a cysteine trap)."
+    artifacts: [results/validation/kinetic_core_deoxyosone_feasibility_b7asst2m.md]
+    commit: pending
+    verdict: supported
+    conclusion: "FEASIBLE: time + pH jointly by 7 of 600 draws, several also passing (vii) and both TDP declines -- the first structure to pass every partition family. The pH dependence comes from 3-DX's removal (the split law near off in most joint passes). But where the 3-DX -> MGO route carries the exit the calibrated MGO rows overshoot by +0.5 to +1.3 dex: the base-favoured 3-DX sink must not make MGO -> a cysteine trap of 3-DX (non-volatile adduct), converging with signature vii and the missing cysteine sink."
+    follow_up: "v5: TDP_CYSTEINE_TRAP (r_tdp_cys_trap) and its feasibility with must-not-break checks (prereg sec. 20)."
+  - id: EX-047
+    date: "2026-10-31"
+    kind: review
+    question: "Red-team review of the day's decisions (owner: 'take a step back and make sure we are taking the right decisions')."
+    hypothesis: "-"
+    design: "An independent read-only agent given the record (STATUS_AND_PLAN, EX-022 - EX-046, the dpo prereg, the mechanism reviews, the overnight log, git state), not the coordinator's conclusions."
+    expected: "-"
+    artifacts: [docs/guides/STATUS_AND_PLAN.md, results/validation/kinetic_core_dpo_partition_prereg.md]
+    commit: pending
+    verdict: supported
+    conclusion: "The v1 -> v5 feasibility line drifted off the roadmap (rows 2 and 3 skipped; row 1's leave-one-lab-out never run; Cerny pot D unchanged in every structure); the partition signatures became design targets; the held-out list was weaker than claimed (two items not independent, one inert for the trap) and two held-out results point against the trap (P ~0.2); the feasibility method lacks controls; the partition is single-laboratory evidence (P ~0.25 of a method artefact); engineering debt (unpushed mixed branch, new global switches, scratchpad checks)."
+    follow_up: "Sec. 21 amended before v5 was read; no trap fit; controls for the feasibility method; push + split the branch; roadmap rows 2 and 3; the row-1 leave-one-lab-out overnight (STATUS_AND_PLAN course correction)."
+  - id: EX-048
+    date: "2026-10-31"
+    kind: probe
+    question: "Feasibility v5: is the base-favoured 3-DX sink a cysteine trap (no MGO)?"
+    hypothesis: "A cysteine trap of 3-DX resolves the time / pH tension without v4's MGO overshoot (dpo prereg sec. 20)."
+    design: "feasibility_deoxyosone.py --arm B7ASST2C --draws 600 --seed 20261103; held-out tests and thresholds declared before reading (secs. 21 + amendment)."
+    expected: "feasible P 0.5 (red team ~0.6)."
+    artifacts: [results/validation/kinetic_core_deoxyosone_feasibility_b7asst2c.md]
+    commit: pending
+    verdict: rejected
+    conclusion: "NOT feasible: time + pH jointly 0 of 600 (each reachable alone: 37 / 15). Unlike v4's 3-DX -> MGO stand-in, the trap's rate scales with free cysteine, which the engine gets wrong in level and pH profile -- the trap as coupled to today's cysteine chemistry is rejected without a fit."
+    follow_up: "The trap only as one structure with a corrected cysteine fate (hub step); first the feasibility method's controls and roadmap rows 2 - 3."

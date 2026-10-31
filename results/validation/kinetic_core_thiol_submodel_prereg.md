@@ -643,3 +643,24 @@ off by 1 - 2 decades; the fitted C2 + C3 drain). Plan step B7 (rival 1-DP sinks)
 cysteine sink", tested on Zhai 2019 / 2021 and Cao 2017 before any further MFT-route arm.
 
 ## Amendments
+
+## 17. The thiol mechanism review and the MFT-loss dry check -- 2026-10-31 ~09:30, no fit
+
+**Review (docs/history/mechanism_reviews_2026-10-31/thiols.md; synthesis docs/guides/MECHANISM_REVIEWS_2026-10-31.md).**
+(1) Liu 2023's "19 % fragment recombination" at 168 C is an EI-MS artefact (P 0.8): its MFT isotope channels give
+M+4 / M+5 = 0.30 against the NIST spectrum's [M-H]+ / M+ = 0.28 (furfural and 2-methylfuran match too); corrected,
+recombination is ~6 % -- **the Liu signature (sec. 11) is withdrawn.** (2) At 95 - 100 C >= 85 % of MFT comes from an
+intact C5 that is not free norfuraneol (P 0.75); at 140 - 170 C norfuraneol may supply 30 - 80 % (P 0.5). (3) The most
+likely missing element is the MFT LOSS law (P 0.40): the engine destroys 0.39 of 0.42 mM made in Schieberle's pot, so
+only an accelerating precursor (norfuraneol) reproduces the rise; with an hours-long MFT lifetime (CF-013) a constant
+intact-C5 supply already gives the lag.
+
+**Dry check (scratchpad mft_loss_dry.py; converged R3En constants s042_r3en_fixed; no fit).** At Ea(NF -> MFT) 133
+kJ/mol (the class's upper end) and the DDP route +3: Cerny pot D 0.070 (measured 0.07, PASS) with the shipped decay;
+Schieberle lag / early rise / plateau errors +1.30 / -0.21 / -0.14 with the fitted decay, +0.80 / -0.04 / -0.08 with
+MFT decay x0.1 (+0.93 / -0.06 / -0.11 at x0.2). At Ea 100: pot D 0.19. So a slower MFT loss is worth ~0.5 dex on the
+lag and brings the early rise and plateau within tolerance, but not the lag (tol 0.3); and the R4f fits put the decay
+back at its shipped value, so some fit rows want a FAST loss. **Candidate (to be designed and reviewed, roadmap step 7 /
+C4 or within section B's box):** MFT loss with its own barrier (slow at 100 C, fast at 145 C -- the fed-NF 145 C pots
+are where a fast loss is fitted), the NF -> MFT barrier held at the class's upper end, the DDP route free; decided by
+Cerny pot D, the Schieberle shape signatures and the v2 groups against their chance baseline.

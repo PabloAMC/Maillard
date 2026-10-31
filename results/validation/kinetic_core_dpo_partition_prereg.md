@@ -255,3 +255,271 @@ relatively MORE abundant at high pH). Candidate: DPO's beta-cleavage to acetic a
 Davidek's pots, none in Zhai's), so its base factor should multiply a free-amine term, not act alone -- one structural
 change, no new coordinate if the amine order is declared. Second: TDP's caramelisation source and its pH dependence
 (Zhai 2021's xylose ladder isolates it). Both are testable on data already keyed; neither was run tonight.
+
+## 12. Notes for the cysteine fate (B7b, folded into the hub step) from the new dossiers (2026-10-31 ~08:30)
+
+Roberts 1987 (roberts1987_extraction.md): no ring-opening rate, K or buffer data; the sugar-cysteine thiazolidines
+anomerise within minutes in unbuffered water at room temperature -- mild evidence AGAINST an intrinsically slow ring
+opening in water, so buffer catalysis is not supported as the whole explanation of Cao (phosphate) vs Zhai (water);
+leads for a rate: Nagasawa 1981 (10.1002/jhet.5570180538), Schubert 1939 (10.1016/s0021-9258(18)73532-1). Parker 2014:
+one 140 C / 30 min end point -- MFT goes the opposite way to norfuraneol across ribose vs ascorbic acid (consistent
+with Cerny's minor norfuraneol route); nothing on the 100 C lag. Tai & Ho 1997 / 1998: no free thiol, H2S or MFT;
+sulfur volatiles carry < 0.5 % of the charged sulfur, so the missing cysteine sink is non-volatile. **A rival worth
+testing:** headspace O2 oxidises thiol to disulfide in proportion to the headspace, not the charge -- large in the
+5 - 10 mM Zhai pots, <= 10 % at Cao's 0.4 M, which matches where the engine misfits; against it, Zhai 2021's cysteine
+excess is largest at pH 5.5 (thiolate oxidation predicts the opposite). P(oxidation is the main cause) ~0.2; the Zhai
+vessels' headspace is the deciding fact (check the dossiers).
+
+## 13. B7a-2, revised by the Davidek 2006a / 2006b / Novotny 2008 dossiers -- design, 2026-10-31 ~09:30, before any fit
+
+**What the dossiers changed.** The amine-assisted cleavage (sec. 11's candidate) is contradicted: synthetic
+1-deoxyglucosone heated WITHOUT amine in 0.16 - 0.2 M phosphate gives 0.80 - 0.84 mol acetic acid / mol at pH 6.5 - 8
+(60 min, 120 C; Davidek 2006a Fig. 3), 0.56 at pH 6, 0.20 at pH 5 -- an amine REQUIREMENT is excluded for the hexose
+analogue (P 0.85; 0.75 that it transfers to the pentose), amine ACCELERATION is untested (no paired run). The pH law
+is a SATURATING step, flat above pH 6.5 ("no significant differences ... at pH 6.5, 7, 8"), not the engine's
+log-linear base factor 10^(aa_ph_slope (pH - 6)), which keeps raising DPO's beta-cleavage from pH 7 to 8 -- exactly the
+over-drain of DPO at high pH that sec. 11 found cancelling the split law. Phosphate cannot be the Davidek / Zhai
+difference (Zhai 2021's TTCA pots are also 0.2 M phosphate). The 1-DG yields are branching fractions (1-DG is gone
+within 5 min at pH >= 6), so the curve constrains the cleavage's share of DPO's fate, not its rate directly.
+
+**Arms (both under the B7a null's fixed series noise, w 0.2, from the null's optimum; budget 1200, ftol 1e-4):**
+- **B7AS -- the saturating law alone.** r_dpo_aa = k_max / (1 + 10^(pK - pH_in_situ)) (an acid-base step completing
+  above pK; the rate saturates), replacing 10^(aa_ph_slope (pH - 6)). Coordinates: log10 k_max (replacing log10
+  k_dpo_aa at pH 6) and pK in [5.0, 7.5] (replacing aa_ph_slope) -- the SAME number of coordinates as the null, so
+  the cost difference is a direct test. Reference band from Davidek 2006a with a pH-flat competing sink: pK ~5.8 -
+  6.4 (reported against, not imposed).
+- **B7ASS -- the saturating law + B7S's split law** (+2 coordinates, the split's share at pH 7 and pH_c).
+**Decided by** (sec. 7's order): converged; the partition's scale-free signatures against their chance baseline
+(EX-037: time slope >= 5 / 8 at chance 0.02; pH segments >= 4 / 6 at chance 0.00); must-not-break: the Davidek 2008
+acetic plateaus and pH 8 / 6 ratio (the rows the slope was fitted on), the v2 thiol groups no worse than the null;
+cost vs the null under the same noise (1093) and vs B7S (1039).
+**Expected (written now):** B7AS's fitted pK within 5.8 - 6.4 (P 0.4); B7AS passes >= 4 / 6 pH segments (P 0.15);
+B7ASS passes >= 4 / 6 (P 0.3) and >= 5 / 8 time slopes (P 0.1 -- the time slope is a lifetime problem the pH law
+does not touch); the Davidek 2008 acetic signatures hold in both (P 0.6). If neither arm moves the pH segments,
+section B closes by its rule (24 h cap, 11-01 ~08:00).
+**Note at implementation (before any fit):** with pK 6 the saturating factor is 0.18 / 1 / 1.52 / 1.82 / 1.98 at pH 5 /
+6 / 6.5 / 7 / 8, while R3En's fitted slope (0.15 dex per pH unit) gives 0.71 / 1 / 1.19 / 1.41 / 2.0: the two laws
+nearly coincide from pH 6 to 8 and differ mainly BELOW pH 6. So B7AS mostly tests the acid side; it cannot by itself
+remove a high-pH over-drain that the slope did not cause. The P 0.15 for B7AS's pH segments stands.
+**Review of B7a-2 (independent, before any fit; nothing blocking) -- amendments adopted now.** (1) The coordinate is
+log10 k at pH 6 (the saturating factor is normalised to 1 at pH 6), not log10 k_max as written above. (2) Davidek's
+5.8 - 6.4 band is on the LABEL scale (set at room temperature); the engine's pK acts on the in-situ pH, ~0.2 - 0.3 lower
+for phosphate at 120 C: the comparison band is ~5.5 - 6.2. (3) The pK test is not independent: the pentose fit rows are
+pH 6 and 8 only, both laws are one-parameter maps of the same 8 / 6 ratio, and slope 0.15 maps to pK ~6.0 -- a pK in
+band is not evidence. (4) The informative check is the BRANCHING share: the engine's DPO -> acetic acid flux share at
+pH 5 / 6 / 6.5 / 7 / 8 against Fig. 3's shape (flat above 6.5) -- reported for both arms. (5) Cost: with the same
+coordinate count, B7AS counts as a gain only if it is >= 5 units below the null under the same noise (delta chi-square
+>= 10, ~2 after the reduced chi-square); B7ASS against B7S (1039) with the same rule. (6) The chance baselines (EX-037)
+were drawn in R3En's box; replacing one coordinate by another of the same reach is taken as negligible (stated, not
+re-drawn). **Expectations revised:** B7AS >= 4 / 6 pH segments P 0.07; B7ASS P 0.1; the Davidek 2008 acetic
+signatures hold P 0.75; the engine's DPO -> acetic share flat (within 0.1) from pH 6.5 to 8 under B7AS P 0.5.
+
+**CORRECTION (2026-10-31 ~08:45, before the B7a-2 arms were read).** Sec. 13 states "Phosphate cannot be the Davidek /
+Zhai difference (Zhai 2021's TTCA pots are also 0.2 M phosphate)". That is WRONG: Zhai 2021's TTCA pots are
+UNBUFFERED water, pH set with NaOH / HCl (zhai2021_extraction.md, Methods; the fit table's pots), as are Zhai 2019,
+Zhai 2023 and Kang 2026. The claim came from a dossier agent's summary and was copied without checking. Consequences:
+Davidek 2006a's amine-free 1-DG pots (0.16 - 0.2 M phosphate) and Zhai's TTCA pots (water) differ in phosphate, so
+**phosphate (general-acid / base) catalysis of the DPO beta-cleavage is a live rival** for the Davidek / Zhai
+tension -- the cysteine mechanism review (scratchpad mechanism_reviews/cysteine.md) independently ranks catalysis by
+solutes and buffer as the leading cause of the cysteine misfit (P 0.55), with the +-xylose contrast of Zhai 2021
+Fig. 6 (free cysteine RISES on adding xylose: no equilibrium model allows it) as its on-disk discriminator. The B7a-2
+arms (saturating pH law) are unaffected as tests; their interpretation will name phosphate as the untested rival.
+
+## 14. A held-out signature declared before the B7a-2 arms are read (2026-10-31 ~08:50), and the hub review's leads
+
+**Signature (vii), declared now (held out from every B7 arm's credit until a fit is designed on it):** the +xylose /
+-xylose double ratio of TDP / DPO by pH in Zhai 2021 Fig. 5 (100 C, 120 min), measured 0.85 / 0.92 / 1.22 / 2.7 at pH
+5.5 / 6 / 7 / 8 (the hub mechanism review's arithmetic on the keyed tables): extra xylose re-traps released cysteine,
+and 3-DX is rescued only at high pH -- the signature of a cysteine trap of the aldehydic 3-DX that grows with pH.
+Reported for every arm from B7a-2 on; tolerance +-0.15 dex per point, pass = 3 of 4.
+
+**The hub review's ranked hypotheses (scratchpad mechanism_reviews/hub.md; inputs to the hub step, roadmap step 5):**
+H1 both deoxyosones quasi-steady (short-lived vs the cysteine Amadori compound) while the engine's 3-DX lives ~35 h
+(P 0.65; Hofmann 1999, Zhai 2023 JAFC, Zhai 2021 pH 5.5, Martins M4); H2 free cysteine traps 3-DX faster at higher pH
+(P 0.45; signature vii); H3 the split itself moves toward 1-DX with pH (P 0.5 as a contributor; Martins 2005b pD,
+Nedvidek 1992); H4 the 1-DX sinks calibrated in phosphate and applied to water (P 0.35; see the correction above);
+H5 the pH-flat caramelisation source of 3-DX too large (P 0.4); H6 O2 diverting the Amadori compound to the osone (P
+0.15; Gobert 2009). Null for the hub step: Martins & van Boekel 2005 M4 (its topology already puts both osones in
+quasi-steady state).
+(Timing note: the command that appended this section printed the B7a-2 log first, so B7AS's COST -- 1079 -> 1022 --
+was seen just before (vii) was written; none of B7AS's signature values had been computed or read.)
+
+## 15. B7a-2 results (2026-10-31 09:20) and the close of section B's partition work
+
+| arm | cost (null 1093) | added | key constants | (i) time | (ii) pH segments | (vii) +xyl | Cerny pot D |
+|---|---|---|---|---|---|---|---|
+| B7AS | 1021.6 | 0 | pK 5.35 +- 0.32 | 1 / 8 | 0 / 6 | 2 / 4 | 0.994 |
+| B7ASS | 901.5 | 2 | pK 5.64; DPO share at pH 7 0.87; pH_c 6.38 | 0 / 8 | 1 / 6 | **3 / 4 (pass)** | 0.997 |
+
+Both converged (status 3). **Neither passes (i) or (ii); B7ASS is the first arm to pass (vii).** Under the owner's rule
+(mechanisms before constants) the large cost gains (-71, -192) are not evidence. What B7ASS does show: the split law
+together with the saturating beta-cleavage turns the ratio's pH slope to the RIGHT SIGN from pH 6 to 8 (-0.23 / -0.15,
+-0.22 / -0.10 dex per pH unit vs measured -0.38 / -0.80, -0.38 / -0.70; too shallow) and reproduces the +xylose
+double ratio at pH 5.5 - 7 -- while the time slope gets WORSE (+0.4 to +2.0 per decade vs ~flat). So the pH structure
+and the time structure are separate faults: the time slope is the 3-DX LIFETIME (the hub review's H1, P 0.65: both
+deoxyosones quasi-steady, the engine's 3-DX ~35 h), which no arm here touched. Expectations: B7AS pH segments (P 0.07)
+no; B7ASS (P 0.1) no; the B7AS pK in the in-situ band ~5.5 - 6.2 -- 5.35 no, B7ASS's 5.64 yes.
+
+**Section B's partition work closes here** (the 24 h cap, roadmap row 1). Carried to the hub step (roadmap row 5),
+each to be tested for FEASIBILITY before any fit (STATUS_AND_PLAN, mechanisms before constants): (a) 3-DX
+quasi-steady (Martins M4's lifetimes as the null); (b) the split law + saturating beta-cleavage (B7ASS's pH structure);
+(c) a cysteine trap of 3-DX growing with pH (signature vii at pH 8); (d) catalysed TTCA hydrolysis (the cysteine
+review); (e) phosphate as a variable (Davidek in phosphate, Zhai in water). Decisive tests: (i), (ii), (vii), the
++-xylose free-cysteine contrast, Cerny pot D.
+
+## 16. The first hub FEASIBILITY test (mechanisms before constants) -- design, 2026-10-31 ~09:40, before any run
+
+**Question.** Is there ANY constant set, inside declared bands, for which the structure "B7ASS's pH structure + a
+real 3-DX exit" (arm B7ASST: the split's base-saturating law, the saturating beta-cleavage, and TDP's own decay)
+reproduces the partition's scale-free signatures? No fit: a structure that cannot reach them anywhere in its bands is
+rejected; one that can goes to a pre-registered fit.
+
+**Sampled (uniform, independent), all else held at B7ASS's optimum (s042_b7ass_w02):** dpo_share7 [0.02, 0.98];
+split_ph_c [5, 10]; aa_pk [5, 7.5]; log10_k_dpo_aa (pH 6) its optimum +-1 dex; offset_k_dpo_c2c3 [0, 3] (the C2 + C3
+drain, compensation-suspect); offset_k_dpo_ddp its optimum +-1; TDP's own decay log10 k(100 C) in [-3.5, -1] /min
+(lifetimes ~5 min - 50 h; Martins' 3-DG ~30 min sits inside) and its Ea in [30, 100] kJ/mol. 300 draws (seed
+20261031). **Null comparison:** the R3En-box chance baseline (EX-037) never reached (ii) >= 4 / 6 in 192 draws.
+**Feasible** if any draw passes (i) >= 5 / 8 AND (ii) >= 4 / 6 AND (vii) >= 3 / 4; reported: the share of draws
+passing each, the best draw per family, the joint passes, and the constants of the joint passes (are they physical?).
+**Expected (written now):** feasible (>= 1 joint pass) P 0.3; (i) >= 5 / 8 reached by some draw P 0.55 (a 3-DX exit is
+exactly what (i) needs); (ii) >= 4 / 6 reached P 0.35.
+
+## 17. Feasibility v1 result, and v2 (the sources) -- 2026-10-31 ~10:05; v2 designed before it runs
+
+**v1 (B7ASST, 299 of 300 draws; results/validation/kinetic_core_deoxyosone_feasibility_b7asst.md): NOT feasible.**
+Time slope >= 5 / 8 reached by 0 draws (best 4); pH segments >= 4 / 6 by 6 (the R3En box: 0 of 192 -- this structure
+CAN produce the pH shape); (vii) by 91; pH + (vii) together by 6; nothing with the time slope. Expectations: feasible
+(P 0.3) no; (i) reachable (P 0.55) no; (ii) reachable (P 0.35) yes. **A 3-DX exit as fast as 0.1 /min cannot flatten
+the ratio's time course**, so the time slope is not (only) 3-DX's lifetime: the SOURCES must shift in time -- the
+hub review's H5 (pH-flat pentose caramelisation feeding 3-DX as free xylose is released from TTCA) and the early
+1-DX burst from TTCA's direct breakdown fading (sec. 15's flux attribution).
+
+**v2 (arm B7ASST2 = B7ASST + offset_k_pent_caramel + offset_k_ttca_deg), same tester, same reference and seed, 300
+draws.** Added bands: offset_k_pent_caramel [-3, +0.5]; offset_k_ttca_deg [-3, +0.5]; offset_k_dpo_nf its optimum
++-1 (the tester's band table gained these three rows at v2; v1's record lists the bands it used). Feasible as in sec. 16.
+**Expected (written now):** feasible P 0.25; time slope >= 5 / 8 reachable P 0.45; the joint passes, if any, need
+caramelisation lowered by >= 1 dex (P 0.6 given feasible).
+
+## 18. Feasibility v2 result, and v3 -- 2026-10-31 ~10:00; v3 designed before it runs
+
+**v2 (B7ASST2, 299 draws; ..._feasibility_b7asst2.md): NOT feasible, but the time slope is now reachable.** Time slope
+>= 5 / 8 by 3 draws (v1: 0), pH segments >= 4 / 6 by 4, (vii) by 64; time + pH together by 0, pH + (vii) by 2.
+Expectations: feasible (P 0.25) no; (i) reachable (P 0.45) yes. **The sources drive the ratio's time course** (v1's
+3-DX exit could not). Whether time and pH are in TENSION or the joint region is merely small in nine dimensions is
+not decidable from 300 uniform draws.
+**v3:** the same arm and bands, 600 draws, another seed (20261101), and the tester now records the sampled constants of
+every draw reaching each family (the first 40) -- so the time-reaching and pH-reaching regions can be compared.
+**Expected (written now):** a joint time + pH pass in 600 draws P 0.3; the time-reaching draws have caramelisation
+lowered (offset < -1) in >= 2 of 3 cases P 0.6; if the two regions are disjoint in a constant (e.g. the split law's
+pH_c), that constant's mechanism is the tension -- reported, then designed.
+
+## 19. Feasibility v3: the tension located; v4 designed (2026-10-31 ~10:50, before v4 runs)
+
+**v3 (B7ASST2, 597 of 600 draws, seed 20261101): NOT feasible, and the tension is located.** Time slope >= 5 / 8 by 3
+draws, pH segments >= 4 / 6 by 11, (vii) by 110; time + pH jointly 0. The time-reaching and pH-reaching draws are
+DISJOINT in the 3-DX exit: time-reaching log10 k(100 C) -1.13 to -1.01 (lifetime ~13 min, Ea ~91), pH-reaching -3.40
+to -1.34 (slow). They also differ in the split (DPO share at pH 7: time 0.07 - 0.43, pH 0.34 - 0.94) and in the DDP
+route (time ~-1.1, pH ~-0.1). Reading: a FAST 3-DX exit makes 3-DX quasi-steady and flattens the time course, but a
+pH-FLAT exit then removes the ratio's pH dependence; both together need a fast 3-DX exit that grows with pH -- a
+BASE-FAVOURED 3-DX sink (the hub review's H2, a cysteine trap of 3-DX with a free-amine factor, and signature vii's
+pH 8 point). Expectations (sec. 18): joint pass in 600 draws (P 0.3) no; time-reaching draws with caramelisation
+< -1 in >= 2 of 3 (P 0.6) no (median -0.53; one of three).
+
+**v4 (arm B7ASST2M = B7ASST2 + r_tdp_mgo, the coded base-favoured 3-DX -> MGO exit; the engine's "base" factor, 1 at
+pH 5).** Sampled additionally: log10 k_tdp_mgo (100 C, pH 5) in [-5, -1]; all other bands as v3; 600 draws, seed
+20261102; same thresholds. This is a STAND-IN for any base-favoured 3-DX sink (a cysteine trap would have the same pH
+direction); if v4 is feasible, the next step is to tell the candidates apart (MGO from 3-DX is measured in the Zhai
+pots; a cysteine trap consumes cysteine).
+**Expected (written now):** feasible P 0.4; the joint passes need log10 k_tdp_mgo > -3 (P 0.7 given feasible); MGO
+rows overshoot at the joint passes (P 0.5 -- would favour a cysteine trap over the MGO route).
+
+## 20. Feasibility v4 FEASIBLE; the MGO check rules out its stand-in; v5 = a cysteine trap of 3-DX (2026-10-31 ~11:20)
+
+**v4 (B7ASST2M, 600 draws, seed 20261102; ..._feasibility_b7asst2m.md): FEASIBLE.** Time slope >= 5 / 8 by 73 draws
+(v3: 3), pH segments >= 4 / 6 by 30, (vii) by 200; time + pH jointly by 7 -- several of them also pass (vii) and both
+TDP declines (the first structure to pass every partition family). In most joint passes the split law sits near
+"off" (pH_c 8.3 - 9.9): the ratio's pH dependence comes from 3-DX's REMOVAL, not from the enolisation split.
+Expectations: feasible (P 0.4) yes; joint passes need log10 k_tdp_mgo > -3 (P 0.7) -- 3 of the first 5, the others
+use a fast pH-flat exit with the split -- mixed.
+**The pre-registered discriminating check (no fit):** at the joint passes the 100 calibrated Zhai MGO rows overshoot
+by +0.49 to +1.28 dex (mean; rms 0.68 - 1.38) wherever the 3-DX -> MGO route carries the exit, against -0.04 at the
+B7ASS reference; Cerny pot D 0.98 - 1.00 throughout. **So the base-favoured 3-DX sink must NOT make methylglyoxal**
+(expected outcome, P 0.5, "would favour a cysteine trap"). Four independent lines now point at one mechanism -- a
+CYSTEINE TRAP OF 3-DX, faster at high pH, giving a non-volatile adduct: the fast 3-DX exit (time course), its base law
+(pH segments), signature (vii) (xylose competes for cysteine and rescues 3-DX at pH 8), and the cysteine review's
+missing non-volatile cysteine sink (H3, P 0.7 as a needed second term). Wei 2022 shows cysteine trapping deoxyosones
+(but reports 1-DX lowered before 3-DX -- mildly against, P ~0.3; wei2022_extraction.md).
+
+**v5 (design, before code).** A new switch, `TDP_CYSTEINE_TRAP` (OFF: bit-identical): r_tdp_cys_trap, TDP + Cys ->
+CBX + 7 FRAG_C + FRAG_N + FRAG_S (carbon, nitrogen, sulfur balanced; the cysteine amine declared destroyed, as
+r_mgo_cys_strecker), second order, k(100 C, pH 5) x the engine's "base" factor, Ea 64.08 kJ/mol (declared, as the MGO
+Strecker of cysteine). Arm B7ASST2C = B7ASST2 + the trap; feasibility sampling adds log10 k_trap in [-5, 0] L/(mmol
+min). **Decided by:** feasibility on (i), (ii), (vii) as before, THEN at the joint passes the must-not-break checks
+that v4 failed or did not read: the Zhai MGO rows (mean within +-0.3 dex of the reference), free cysteine and TTCA in
+Zhai 2021 (the trap should LOWER the cysteine excess -- the cysteine review's test), Cao's blank pots (within 0.1 dex),
+the thiol groups no worse than the reference.
+**Expected (written now):** feasible P 0.5; at the joint passes MGO within +-0.3 dex P 0.7; free cysteine in Zhai 2021
+moved toward the data by >= 0.3 dex P 0.4.
+
+## 21. Held-out tests of the cysteine-trap hypothesis, declared 2026-10-31 ~11:45 BEFORE the v5 result is read
+
+The partition signatures (i), (ii), (vi), (vii) have been used to design each feasibility structure (v1 -> v5); they
+are now DESIGN TARGETS, not tests, for the trap. Credit for the trap (beyond "feasible") comes only from data not used
+to design it:
+1. **Another laboratory:** Hofmann 1999 (deoxyosone_hofmann1999 table; authentic quinoxaline standards) -- the ratio's
+   plateau (~3) and its time shape; reported at the joint passes.
+2. **The cysteine fate it predicts:** free cysteine and TTCA in Zhai 2021 (route table) must move TOWARD the data (a
+   trap consumes cysteine); Cao 2017's blank pots must stay within 0.1 dex.
+3. **Zhai 2023 JAFC's TTCA +- Cys double ratio** (CF-071; 0.53 - 2.6, the conflict with Zhai 2019) -- reported.
+4. **What it must not make:** the calibrated Zhai MGO rows (within +-0.3 dex of the reference); the Davidek 2008
+   acetic plateaus and pH 8 / 6 ratio; Cerny pot D no worse than the reference; the v2 thiol groups no worse.
+5. **A power check of the feasibility method itself** before any credit: the tester must REJECT a deliberately wrong
+   structure (R3En's box already never reaches (ii) -- recorded) and should be run on a synthetic case where the true
+   structure is known (to be designed).
+P(the trap is the real mechanism of the partition, written now) ~0.35 -- it was found by searching against these
+signatures, and free cysteine (its co-reactant) is itself 2 - 40x too high in the engine, so the trap may be
+compensating the cysteine error: the trap and the cysteine fate are to be tested TOGETHER.
+
+**Amendment to sec. 21 after an independent red-team review (2026-10-31 ~12:00), STILL before the v5 result is read.**
+(a) **Independence, honestly graded.** Item 2 (Zhai 2021 free Cys / TTCA) is NOT held out -- the missing cysteine sink
+was one of the four lines that motivated the trap (sec. 20). Item 3 (CF-071) is one laboratory disagreeing with
+itself and cannot discriminate. Item 1 (Hofmann 1999, xylose + alanine in phosphate, no cysteine) tests the 3-DX EXIT,
+not the trap (the trap is inert there). (b) **Two held-out results already point AGAINST the trap:** Wei 2022 (another
+laboratory) lowers 1-DX before 3-DX; and sec. 2's own argument -- a pure extra cysteine sink pushes TTCA lower, while
+TTCA is already low (-0.14 to -1.41 dex). (c) **The partition signatures cannot tell candidates apart:** v4 showed a
+different chemistry (3-DX -> MGO) passing every partition family; ANY fast 3-DX sink faster at high pH passes them, so
+a "feasible" v5 is expected (P ~0.6) and low-information; the discrimination rests on the must-not-break rows.
+(d) **Numeric pass thresholds for the must-not-break checks:** Zhai MGO mean within +-0.3 dex of the reference;
+Davidek 2008 acetic plateaus and pH 8 / 6 ratio within their v2 tolerances; Cerny pot D no worse than the reference;
+the v2 thiol groups no fewer than the reference's; Cao blanks within 0.1 dex; Zhai 2021 free Cys AND TTCA both
+within 0.3 dex (must-pass, not "moves toward") together with signature (iv). (e) **Negative controls of equal
+dimension, declared tests of the feasibility method (they must FAIL):** the same sink on DPO instead of TDP; the trap
+pH-flat; the trap with its pH law inverted. **Positive control (must pass):** synthetic data from a known structure (a
+v4 joint pass) with the fitted series noise. Feasibility is reported as a pass fraction with a confidence interval
+across seeds, not mere existence. (f) **P(the trap is the real mechanism) revised to ~0.2**; the trap and the cysteine
+fate are one structure for any further test; the partition is single-laboratory, provisional evidence (212 of ~276
+deoxyosone rows are Zhai's, 3-DX / 1-DX against a diacetyl internal standard without authentic standards; P(a
+substantial part of (ii) or (vii) is a method artefact) ~0.25) -- by roadmap row 3's rule its pH law is a declared band,
+not a fitted coordinate, until another laboratory confirms it. **No trap fit follows v5.**
+
+## 22. Feasibility v5 result (read 2026-10-31 ~12:15, after sec. 21 and its amendment were written)
+
+**v5 (B7ASST2C, the cysteine trap, 600 draws, seed 20261103; ..._feasibility_b7asst2c.md): NOT feasible.** Time slope
+>= 5 / 8 by 37 draws (best 6), pH segments >= 4 / 6 by 15 (best 6), (vii) by 101; time + pH jointly 0 (time + (vii)
+15; pH + (vii) 6). Expectations: feasible P 0.5 (mine), ~0.6 (the red team) -- NO. Contrast v4 (the same sink written
+as 3-DX -> MGO): feasible. The likeliest reason is the coupling sec. 21 flagged: the trap's rate is proportional to
+free cysteine, which the engine has at the wrong level and with the wrong pH profile (excess largest at pH 5.5), so
+the trap's EFFECTIVE pH law is distorted by the cysteine error. **The trap, coupled to today's cysteine chemistry, is
+rejected without a fit;** it returns only as one structure with a corrected cysteine fate. The must-not-break checks
+are moot (no joint pass). The switch stays in the engine, off.
+
+## 23. A power test of the feasibility method (red-team item 3), designed before it runs (2026-10-31 ~12:25)
+
+**Synthetic truth.** The first v4 joint pass (arm B7ASST2M; its constants and TDP exit as recorded in
+..._feasibility_b7asst2m.json) generates synthetic TDP and DPO values on exactly the pots and times of the deoxyosone
+table, with log-normal noise sigma = 0.15 dex per row (declared; the fitted series noise of these figures is 0.3 - 0.6
+dex AFTER per-figure scales, so 0.15 on a scale-free ratio is a mild case). **Positive control:** the tester on arm
+B7ASST2M against the synthetic data must find it feasible (expected P 0.8). **Negative control:** the tester on arm
+B7ASST2 (the same structure WITHOUT the base-favoured 3-DX sink -- v3's arm) against the same synthetic data must find
+it NOT feasible (expected P 0.7). 600 draws each, the bands of sec. 19, seeds 20261104 / 20261105. If the positive
+control fails, "infeasible" verdicts carry little weight; if the negative control passes, "feasible" verdicts do.

@@ -521,6 +521,13 @@ class PentoseAmineEntry:
     k_dpo_aa_per_min_100c_ph6: float = 0.0
     aa_ph_slope: float = 0.0
     ea_dpo_aa_kj_mol: float = 76.0
+    #: B7a-2 (2026-10-31; kinetic_core_dpo_partition_prereg.md sec. 13): the beta-cleavage's pH law. "slope" (default,
+    #: unchanged): 10^(aa_ph_slope (pH - 6)). "saturating": an acid-base step completing above ``aa_pk``,
+    #: (1 + 10^(aa_pk - 6)) / (1 + 10^(aa_pk - pH)) -- equal to 1 at pH 6, so k_dpo_aa_per_min_100c_ph6 keeps its
+    #: meaning; flat above the pK. Basis: Davidek 2006a Fig. 3, synthetic 1-deoxyglucosone WITHOUT amine, 0.20 / 0.56 /
+    #: 0.80 - 0.84 mol acetic acid per mol at pH 5 / 6 / 6.5 - 8 (120 C, 60 min; flat above 6.5).
+    aa_law: str = "slope"
+    aa_pk: float = 6.0
     #: PAMA's enolisations as multiples of ARP's derived rates. The probe (2026-10-30) found ARP's 4.2x (to 1-DP) and
     #: 9.1x (to 3-DP) slower than Desclaux 2006's MEASURED glycine-xylose constants (2.79e-2 / 5.50e-4 per min, pH 6,
     #: 100 C): the prereg's declared alternative (> x3) puts PAMA on Desclaux's level, ARP's pH and T dependence.
@@ -535,6 +542,14 @@ class PentoseAmineEntry:
     @property
     def enabled(self) -> bool:
         return self.k_entry_l_per_mmol_min_100c_ph6 > 0.0
+
+    def aa_ph_factor(self, ph: float) -> float:
+        """The beta-cleavage's pH factor (1 at pH 6 under either law)."""
+        if self.aa_law == "slope":
+            return 10.0 ** (float(self.aa_ph_slope) * (float(ph) - 6.0))
+        if self.aa_law == "saturating":
+            return (1.0 + 10.0 ** (float(self.aa_pk) - 6.0)) / (1.0 + 10.0 ** (float(self.aa_pk) - float(ph)))
+        raise ValueError(f"unknown aa_law {self.aa_law!r}")
 
     @staticmethod
     def k_at(k_100: float, ea: float, temperature_k: float) -> float:
@@ -579,6 +594,29 @@ class MgoCysteineStrecker:
 
 
 MGO_CYSTEINE_STRECKER = MgoCysteineStrecker()
+
+
+@dataclass(frozen=True)
+class TdpCysteineTrap:
+    """
+    B7 hub feasibility (2026-10-31; kinetic_core_dpo_partition_prereg.md sec. 20), OFF by default (rate 0): free
+    cysteine TRAPS the aldehydic 3-deoxypentosone as a non-volatile adduct, faster at higher pH. Four lines of evidence
+    converge on it without a fit: the partition signatures need a fast 3-DX sink that grows with pH (feasibility v3 /
+    v4), it must not make methylglyoxal (v4's MGO check), Zhai 2021's +xylose double ratio rescues 3-DX at pH 8
+    (signature vii), and the cysteine review's missing non-volatile cysteine sink. Wei 2022 (wei2022_extraction.md)
+    shows cysteine trapping deoxyosones. Second order, L/(mmol min) at 100 C and pH 5 times the engine's "base" pH
+    factor (as r_mgo_cys_strecker); Ea DECLARED at the MGO Strecker of cysteine's 64.08 kJ/mol; no measured constant.
+    """
+
+    k_l_per_mmol_min_100c_ph5: float = 0.0
+    ea_kj_mol: float = 64.08
+
+    def k_at(self, temperature_k: float) -> float:
+        return float(self.k_l_per_mmol_min_100c_ph5) * math.exp(
+            -float(self.ea_kj_mol) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+TDP_CYSTEINE_TRAP = TdpCysteineTrap()
 
 
 @dataclass(frozen=True)

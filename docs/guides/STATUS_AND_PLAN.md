@@ -72,7 +72,85 @@ pinned by tests), then the chemistry moves onto it (the pentose and hexose entri
 donor-generic Strecker). Estimate: 3 - 5 days of work for the refactor and the trunk merge, ~1 day of regeneration and
 CI; P(bit-identical on the first pass) ~0.6, the rest found by the pinning tests.
 
+**The mechanisms most likely missing (2026-10-31, after the night's B-section work; P = probability that adding it
+changes the alt-protein odorant predictions materially).** The chemistry is qualitatively known (Hodge's scheme,
+Yaylayan's "chemical pools"); what the model lacks is the HUB -- the deoxyosones' formation split and fates -- and
+the agents that steer it:
+1. The amine as a variable: protein-bound lysine / peptide N-termini as the dominant amine in a real alt-protein
+   matrix, and amine catalysis of enolisation and of dicarbonyl cleavage (the B7a diagnosis: DPO's beta-cleavage
+   fitted on glycine pots and applied amine-free). P 0.85.
+2. Oxygen as a reagent: autoxidative (Wolff) glucosone / glyoxal, oxidative alpha-dicarbonyl cleavage, the Namiki
+   C2 route from the Schiff base; Hofmann 2000 Table 4 measures x4 more phenylacetic acid in air than under argon
+   from the same MGO pot. The engine's oxygen pool is thin. P 0.7.
+3. Buffer (phosphate) catalysis of the early steps (the Cao-vs-Zhai ring-opening conflict; well known qualitatively).
+   P 0.6.
+4. Redox coupling: reductones, the reduction that forms 1,4-dideoxyosones coupled to Strecker degradation
+   (Nedvidek 1992), H2S / thiol redox. P 0.5.
+5. Donor-generic Strecker degradation (every dicarbonyl x every amino acid) -> Strecker aldehydes, aminoketones ->
+   pyrazines, cysteine's H2S. Absent today. P 0.9 for the odorant set (the aldehydes and pyrazines are half of it).
+6. Lipid carbonyls crossing into the Maillard network (Strecker donors, thiol traps). P 0.6 for plant-based meat.
+7. Matrix and phase: low water activity (real cooking is not a dilute pot), protein binding of thiols (> 98 % of MFT
+   bound to pea protein, Xu 2022), melanoidins as sinks / binders. P 0.7 for product-level numbers, ~0 for pot data.
+
 ## 5. The plan
+
+**Roadmap (2026-10-31 morning, revised after its premortem the same morning; owner: "do whatever is best", no
+designed experiment for now). This ordering governs; the numbered steps below are its detail.** Hours are work;
+compute is unattended.
+
+| # | step | addresses (sec. 4 list) | work / compute | decides |
+|---|---|---|---|---|
+| 1 | **B-close, capped at 24 h (to 11-01 ~08:00):** dossiers of the new papers (Roberts, Parker, Tai & Ho x2, Davidek 2006a/b, Novotny 2008); B7a-2 (DPO's beta-cleavage amine-assisted, with CYSTEINE's amine order declared before the fit -- Zhai's TTCA pots are not amine-free); the stop rule: freeze the thiols at the admitted structure with the measured between-lab spread, leave-one-lab-out overnight. B7b moves into step 4. | 2 | ~4 h / ~10 h | the thiol lane's honest interval |
+| 2 | **Odorant layers with forced inputs, now:** Strecker aldehydes scored from MEASURED dicarbonyls (Hofmann 2000's 111 rows, Cremer 2000, Balagiannis 2009), pyrazines from measured aminoketone precursors where printed -- no hub, no refactor needed; each layer judged on its own, so errors stop propagating down the chain. The yardstick extended with the keyed Strecker / pyrazine within-study contrasts, its power reported, paired differences with study bootstraps. | 1 | 17 - 21 h | the first scored odorant lane (~11-07) |
+| 3 | **Identifiability audit before the hub:** a within-study factor matrix (for amine, phosphate, O2, pH, temperature: which studies vary the factor INSIDE one study; < ~2 such studies -> a declared band, not a fitted coordinate) and a synthetic model-recovery / power test of the signature machinery (data generated from two rival hub structures with the fitted between-lab noise; does the scorer pick the true one; a third of the signatures held out). | 2, 3, 5 | 10 - 12 h + overnight | which hub factors can be fitted at all |
+| 4 | **A3 explicit engine configuration + persistent pool; A4 one fit harness.** | -- | 11 - 13 h | safety of what follows |
+| 5 | **C1 the deoxyosone HUB as a standalone module written to the composable-network interface,** seeded from the published multiresponse models (Martins & van Boekel 2005, glucose + glycine; Brands & van Boekel 2002, casein sugars) as null / rivals; B7b (buffer catalysis of the ring opening) folded in; only the factors step 3 admits. | 2, 3, 5, 7 | 2 - 3 days | everything downstream |
+| 6 | **A2 the composable network:** the lanes refactored onto the hub module (bit-identical box 3 days), amine classes, oxygen as a species. | enabling | 3 - 5 days | composition of real recipes |
+| 7 | **C2 - C5 on the network:** donor-generic Strecker (step 2's forced-input layer, now fed by the hub), pyrazines, thiols re-fitted on the hub (Cerny, Schieberle as tests), lipid carbonyls into the network. | 1, 6 | 7 - 9 days | the odorant set |
+| 8 | **C6 cut to a one-page sensitivity on declared bands** (protein-bound lysine, thiol binding, low a_w); product-level numbers out of scope until designed data exist. | 4 | ~4 h | -- |
+| 9 | **D adequacy per lane:** leave-one-lab-out with the between-paper error, coverage WITH interval width; Phase 3 regeneration of what passes its audit. | -- | ~1 day / overnight each | what ships |
+
+**Mechanisms before constants (owner, 2026-10-31).** A candidate structure is first tested for FEASIBILITY: can any constant set inside the measured / declared bands reproduce the mechanism signatures (isotope routes, branching ratios, scale-free ratios, presence / absence, the direction of a contrast)? -- by sampling or dry grids, before any fit. A structure that cannot pass is rejected without fitting; fits follow only for structures that pass, and their cost is read after the signatures. Evidence: three B7 arms gained 20 - 70 cost units while failing every scale-free test. Literature mechanism evidence (labelling, fed intermediates, trapping) outranks more fitting.
+
+**Course correction (2026-10-31 ~12:00, after the owner asked to step back and an independent red-team review).** The hub feasibility line (dpo prereg secs. 16 - 21) drifted off this roadmap: it skipped row 3 (identifiability audit + power test) and row 2 (the forced-input Strecker layer), and row 1 never ran its closing leave-one-lab-out. Its signatures became design targets; the trap it found has P ~0.2 and two counter-indications. Decisions: no trap fit; the feasibility method gets negative / positive controls before any more structures; no new global engine switches until A3's configuration object exists; the branch is pushed and split into one PR per sub-model; then rows 2 and 3 in order, and the row-1 leave-one-lab-out overnight.
+
+**How a mechanism is identified (owner, 2026-10-31: "how can we find the true mechanisms?").** Fits to concentration time courses select constants, not structures. Evidence ranks, strongest first:
+1. isotope labelling;
+2. fed intermediates;
+3. trapping;
+4. directly measured intermediates and lifetimes;
+5. mass balance closure;
+6. one factor varied inside one study (order, pH, temperature, O2, buffer);
+7. fitted time courses.
+
+Per open mechanism:
+- (a) at least two rival structures plus the published null are written BEFORE any result is read;
+- (b) the literature experiments of kinds 1-6 that discriminate them are listed, with each rival's prediction;
+- (c) the discrimination's POWER is measured on synthetic data from each rival at realistic noise, and an underpowered test is not scored;
+- (d) scoring uses the between-lab error, and a single-lab result is PROVISIONAL until one cross-lab check;
+- (e) constants are pinned by physical chemistry (measured analogues, classes, pKa) so a structure cannot hide behind free constants;
+- (f) where no published experiment discriminates, the item is a declared band and the cheapest discriminating experiment goes to the designed-experiment brief (`rank` verb).
+
+**Mechanism triage (2026-10-31, after its premortem; frozen until the 11-07 checkpoint).** Ranking:
+1. Strecker / pyrazine flux with forced inputs (single-lab Hofmann, with a cross-lab check);
+2. CF-072 (its own session / PR);
+3. thiol losses and cysteine fate, anchored on Cerny;
+4. the power / identifiability of the signature machinery, with an exit rule: below 0.6 power, use paired held-out log density or a declared band, 12 h time-box;
+5. pyrazines (pyrrole sink);
+6. the deoxyosone hub, reclassified from known-wrong to uncertain (single lab, underpowered);
+7. oxygen;
+8. thermal history and observation operators (OPD, SAFE / SPME, steam distillation), H2S volatility, pH drift in unbuffered pots;
+9. phosphate, protein-bound amine, matrix and lipid on the sensitivity page until designed data exist.
+
+Investigation runs in parallel: <= 3 agents, read-only on `src/`, writing standalone modules to [A2_MODULE_CONTRACT.md](A2_MODULE_CONTRACT.md) sec. 3. Each has neutral briefs, a prereg first, positive and negative controls, and "inconclusive" allowed. Implementation is serial: A3, then A2, in a writer session after the B7 branch merges. Forced-input layers are admitted on their own scores, so admission does not wait for A2. P(>= 2 mechanism changes admitted by evidence by 11-21) ~0.5.
+
+Rules throughout: premortem of each plan change; pre-registration + independent review before every fit; converged
+fits only; chance baselines AND (from step 3) a measured power before credit; one PR per sub-model; a mechanism
+without data -> DOIs to the owner.
+**Calibration (revised by the premortem):** P(ranked relative predictions with honest intervals in ~4 weeks) ~0.45
+with this ordering (~0.30 with the first draft); P(the hub's partition signatures above chance after step 5) ~0.4;
+P(a scored Strecker lane by ~11-07) ~0.6 (forced inputs remove the hub dependency); P(absolute odorants within x3
+across laboratories for most rows) ~0.15 without designed data.
 
 **A. Consolidate and de-risk (this week; ~1.5 days of work).**
 1. Merge PR #30 once CI is green (owner's call; nothing shipped moves). From then on, one PR per sub-model, code

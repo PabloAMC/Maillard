@@ -375,3 +375,25 @@ always launched as the background command itself (run_in_background), never with
 **The paper registry records citation LINE numbers** (2026-10-31): any edit above a cited line in a register or
 ledger moves them, and `build_paper_registry.py --check` (unit test + freshness gate) fails. Regenerate it with the
 READMEs after staging, as part of every commit that touches docs/reference or data/lit.
+
+**Describe a paper only after its dossier exists** (2026-10-31). I gave the owner one-line descriptions of the Tai &
+Ho papers from a literature agent's summary ("cysteine vs cystine"); the PDFs compare cysteine with its sulfinic /
+cysteic acids and GSH with its sulfonic acid. The DOIs were right, the contents were not. When listing papers to
+download, say "reported to" and keep the claim to what a verified abstract states.
+
+**An agent's factual claim about a paper is a lead, not a fact** (2026-10-31, again). "Zhai 2021's pots are 0.2 M
+phosphate" came from a dossier agent's report; I wrote it into a pre-registration; the dossier and the fit rows say
+unbuffered water, and the cysteine review caught it. Before a claim about conditions enters a prereg, grep the
+dossier / fit table for it (one command).
+
+**An engine edit stales every signature record, even when bit-identical** (2026-10-31, twice). The scorers record
+the sha256 of sulfur.py / parameters_sulfur.py, so B7a's and B7a-2's switches (defaults bit-identical) left ~30
+signature and chance records stale for the freshness gate. Remedy now tracked:
+`scripts/generators/regenerate_signature_records.py` re-scores every stale signature / chance record (and lists the
+other generators to re-run: data_wishlist, sulfur_flux_attribution). Run it after any src/kinetic_core edit, before
+the full verification.
+
+## 2026-10-31 — Side problems go to subagents, not the main thread
+- **Pattern:** the feasibility tester's validation (v1–v5, power test, oracle check) ate the main thread for hours while the plan's active step (commit, verify, push, split) waited. Owner: "leave rabbit hole problems to subagents, so you do not get off track and cover more ground."
+- **Rule:** when a sub-question appears mid-step, brief a background subagent (files it may touch, what not to touch, compute cap, no commits) and continue the active step; fold the result in when it reports.
+- 2026-10-31 (again): a text-patch script was run with system python3 -I. Even pure text patches go through the wrapper: ./scripts/docker_maillard.sh run "python <patch.py>".

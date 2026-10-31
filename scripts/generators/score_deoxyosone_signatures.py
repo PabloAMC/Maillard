@@ -59,6 +59,7 @@ REPORTED_DECLINE_POTS = ("zhai2023jafc_ttca_100C_dx", "zhai2023jafc_ttca_cys_100
                          "zhai2023jafc_ttca_cys_140C_dx", "zhai2023fc_dx_ttca_xyl_140c")
 PH_REPORT_MIN = 60.0
 TOL_TIME, TOL_PH, TOL_DECLINE = 0.3, 0.15, 0.3
+TOL_XYL = 0.15
 
 
 def _slope(x, y) -> float:
@@ -136,10 +137,23 @@ def score(trial: Dict[str, Any], strecker_share: float, plans, rows, strict: boo
             entry["pass"] = tdp["within_tolerance"]
         out["tdp_decline"].append(entry)
     out["ph_in_situ_at_60_min"] = ph_at_60
+    # (vii), declared 2026-10-31 (prereg sec. 14) before any B7a-2 signature was read: the +xylose / -xylose double
+    # ratio of TDP / DPO per pH (Zhai 2021, 120 min), a cysteine trap of 3-DX growing with pH; pass = 3 of 4 within 0.15 dex
+    def at_120(src, pot):
+        tdp, dpo = src.get((pot, "TDP", 120.0)), src.get((pot, "DPO", 120.0))
+        return math.log10(tdp / dpo) if tdp and dpo and tdp > 0 and dpo > 0 else float("nan")
+    xyl_rows = []
+    for plain, xyl in zip(PH_LADDERS["TTCA"], PH_LADDERS["TTCA + xylose"]):
+        m = at_120(meas, xyl) - at_120(meas, plain)
+        q = at_120(pred, xyl) - at_120(pred, plain)
+        xyl_rows.append({"pH": PH_OF[plain.split("_")[-3]], "measured": 10 ** m, "predicted": 10 ** q,
+                         "pass": bool(math.isfinite(q) and abs(q - m) <= TOL_XYL)})
+    out["xylose_double_ratio"] = xyl_rows
 
     passed = {"time_slope": sum(s["pass"] for s in out["time_slope"]),
               "ph_segments": sum(s["pass"] for s in out["ph_segments"]),
-              "tdp_decline": sum(s.get("pass", False) for s in out["tdp_decline"] if s["decisive"])}
+              "tdp_decline": sum(s.get("pass", False) for s in out["tdp_decline"] if s["decisive"]),
+              "xylose_double_ratio": sum(s["pass"] for s in out["xylose_double_ratio"])}
     return out, passed
 
 
@@ -263,6 +277,10 @@ def main(argv=None) -> int:
             tdp[3] = "yes" if s.get("pass") else "NO"
         lines.append("| " + " | ".join([s["pot"], "decisive" if s["decisive"] else "reported", *tdp,
                                          *_cells(s["dpo"])]) + " |")
+    lines += ["", f"## (vii) the +xylose / -xylose double ratio of TDP / DPO at 120 min (Zhai 2021; declared prereg sec. "
+              f"14; pass 3 of 4 within {TOL_XYL} dex)", "", "| pH | measured | predicted | pass |", "|---|---|---|---|"]
+    lines += [f"| {s['pH']:g} | {s['measured']:.2f} | {s['predicted']:.2f} | {'yes' if s['pass'] else 'NO'} |"
+              for s in out["xylose_double_ratio"]]
     lines += ["", f"## The engine's in-situ pH at {PH_REPORT_MIN:g} min (Zhai 2021, 100 C; the pH the split reads)", "",
               "| pot | in-situ pH |", "|---|---|"]
     lines += [f"| {k} | {v:.2f} |" for k, v in sorted(out["ph_in_situ_at_60_min"].items())]
