@@ -126,9 +126,10 @@ class Fit:
 
 
 def fit(problem: Problem, start: np.ndarray, budget: int = 1200, rows: Optional[Tuple[Any, ...]] = None,
-        upper: Optional[np.ndarray] = None) -> Fit:
+        upper: Optional[np.ndarray] = None, ftol: Optional[float] = None) -> Fit:
     """One least-squares fit with the codebase's settings. ``budget`` counts every evaluation, Jacobian columns
-    included (least_squares' max_nfev does not count them)."""
+    included (least_squares' max_nfev does not count them). ``ftol`` overrides the settings' relative cost tolerance
+    (a convergence re-fit's declared stopping rule, 2026-10-31)."""
     from scipy.optimize import least_squares
 
     upper = np.asarray(problem.upper if upper is None else upper, dtype=float)
@@ -150,7 +151,8 @@ def fit(problem: Problem, start: np.ndarray, budget: int = 1200, rows: Optional[
     t0 = time.time()
     r0 = f(start)
     result = least_squares(f, start, jac=jac, bounds=(lower, upper),
-                           max_nfev=max(1, budget // (len(problem.keys) + 1)), **LEAST_SQUARES_SETTINGS)
+                           max_nfev=max(1, budget // (len(problem.keys) + 1)),
+                           **{**LEAST_SQUARES_SETTINGS, **({} if ftol is None else {"ftol": ftol})})
     r = f(result.x)
     return Fit(theta=np.asarray(result.x, dtype=float), cost=float(0.5 * r @ r), start=start,
                start_cost=float(0.5 * r0 @ r0), status=int(result.status), evaluations=count["n"], budget=budget,
@@ -548,7 +550,7 @@ def fit_with_series_noise(make_problem: Callable[["MeasurementModel"], "Problem"
                           raw_residuals: Callable[[np.ndarray, Tuple[Any, ...]], np.ndarray], start: np.ndarray,
                           budget: int = 1200, rounds: int = 4, tol: float = 0.05,
                           estimator: Optional[Callable[..., Dict[str, float]]] = None,
-                          between: bool = False) -> Tuple["Fit", "MeasurementModel"]:
+                          between: bool = False, ftol: Optional[float] = None) -> Tuple["Fit", "MeasurementModel"]:
     """Fit, estimate each series' extra noise from the residuals, refit with it, until the noise estimates move by
     less than ``tol`` (relative) or ``rounds`` is reached. ``make_problem(model)`` builds the Problem whose residuals
     are ``model.whiten(raw_residuals(theta, rows), rows)``. Returns the last fit and the model carrying its noise."""
@@ -569,7 +571,7 @@ def fit_with_series_noise(make_problem: Callable[["MeasurementModel"], "Problem"
     for _ in range(max(1, rounds)):
         current = build(noise, taus)
         problem = make_problem(current)
-        f_ = fit(problem, theta, budget=budget)
+        f_ = fit(problem, theta, budget=budget, ftol=ftol)
         theta = f_.theta
         raw_now = raw_residuals(theta, problem.rows)
         new = (estimator or estimate_series_noise)(current, raw_now, problem.rows, len(problem.keys))

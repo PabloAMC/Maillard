@@ -92,9 +92,13 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     fit_path = data_paths.VALIDATION_DIR / f"kinetic_core_joint_deoxyosone_thiol_fit_{args.fit}.json"
     fit = json.loads(fit_path.read_text())
-    theta, arm = fit["fit"]["theta"], _arm_of(args.fit)
+    # the arm and the Strecker share from the fit's own record (premortem 2026-10-31: a tagged re-fit's stem no longer
+    # ends in its arm); the stem only for records written before the fit stored its arm
+    theta, arm = fit["fit"]["theta"], fit.get("arm") or _arm_of(args.fit)
+    joint.STRECKER_SHARE = float(fit["strecker_share"])
     keys = tuple(theta)
     joint.DDP_LAW_STATIC = {"law": "none"} if "ddp_law_none" in joint.ARMS[arm] else {}
+    joint.EA_STATIC = {"k_dpo_nf": joint.LAU_NF_EA_KJ_MOL} if "dpo_nf_lau" in joint.ARMS[arm] else {}
     trial = joint.trial([theta[k] for k in keys], keys)
     sulfur.PH_COUPLING = "inline"
 

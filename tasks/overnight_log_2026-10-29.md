@@ -164,3 +164,36 @@ any acceptance. (2) Between-laboratory spread for absolute thiols is 10-100x (CF
 the sequence went on (owner's call to run the joint fits); today's findings are exactly the foundation it was meant
 to give, so the pentose entry is the right next step. (4) The other odorant lanes (Strecker aldehydes, pyrazines,
 lipid aldehydes) have had no Phase 2 time.
+
+## Checkpoint 9 -- night of 2026-10-30 / 31, ~00:40 (owner: "keep the big picture; every hour remind yourself")
+
+**Goal (unchanged):** the right mechanisms for the alternative-protein odorants, with honest lab-independent
+uncertainty; the shipped model loses to a typical-yield baseline out of sample (STATUS_AND_PLAN sec. 2), and the
+architecture is split into lanes that do not compose (sec. 4) -- the composable network is now plan step A2, before
+new lanes. **State:** branch 4810355 + uncommitted R3T arms / prereg sec. 12; PR #30 push waits on the freshness gate;
+R3Es fitting; R3T under design review; two readers keying Hofmann 2000 (Strecker anchor); experiment register 21
+entries, gated. **Decided this hour:** round 3's failure is a temperature conflict, not a pH one (EX-016); R3T frees
+the norfuraneol -> MFT barrier (k_nf_mft is referenced at 145 C, so the barrier sets its 95 C value); the dry check
+lowers its expected pass to 0.2. **Is this the most valuable next step?** Yes: MFT is the alt-protein meaty odorant
+and its route is the sulfur lane's biggest mechanistic contradiction; the Strecker keying is data work that survives
+any architecture.
+
+## Checkpoint 10 -- 2026-10-31 ~00:45 (after a context compaction; owner: "remember the state of the plan, the priorities")
+
+**Goal (unchanged):** the right mechanisms for the alt-protein odorants with honest lab-independent uncertainty
+(STATUS_AND_PLAN sec. 1); the one plan is STATUS_AND_PLAN sec. 5. **Two independent reads changed tonight's order:**
+- *Premortem* (STATUS_AND_PLAN sec. 5 "Rules adopted"): every joint-fit arm (E, R3E, R3En; R3Es too) stopped on its
+  budget -- 200 evaluations = 11 optimiser iterations -- so EX-015 / EX-016 are re-marked inconclusive; the "MFT
+  loss x8 slower" and "actz x10^-3" findings are provisional (R3En's optimum restores the acetic sink and the shipped
+  decay). New rules: no verdict from a budget-exhausted fit; rivals under ONE fixed measurement model; no silently
+  lost signature; signatures frozen v1 by mechanism group with a chance baseline; section B time-boxed to 48 h.
+- *R3T design review* (thiol prereg sec. 13): R3T withdrawn. The binding conflict is Cerny 95 C vs Schieberle 100 C
+  (same chemistry, 5 K apart): the DDP route kills Schieberle's MFT lag, the NF route makes fed NF dominate Cerny's pot.
+  The question is now mechanistic -- what makes MFT late at 100 C -- and a literature pass is running (DOIs to the owner).
+**Running:** R3Es (budget-limited, scored for the record); then the convergence queue (scratchpad converge.sh: E
+converged, E under its own fixed noise, then R3En / R3Es / R3E from their optima under E's noise; ftol 1e-4,
+9 workers, ~5 - 8 h); Hofmann 2000 adjudication (agent). **Priorities after the queue:** (1) read the converged
+rivals -> round-3 verdict; (2) pre-register the lag rivals from the literature pass; (3) signatures v1 frozen with
+groups and chance baseline; (4) leave-one-lab-out on the converged finalist; (5) A3 config context manager, then A2.
+**Is this the most valuable next step?** Yes: every verdict so far rests on unconverged fits; converging them is
+cheap compute and protects every later decision.

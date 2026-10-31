@@ -65,7 +65,15 @@ ARMS = {"none": frozenset(), "R2a": frozenset({"mgo_strecker"}), "R2b": frozense
         # round 3 after its review (sec. 10): the DDP-forming step's pH law as the rival structures
         "R3n": frozenset({"actz", "ddp", "ddp_law_none"}), "R3s": frozenset({"actz", "ddp", "ddp_law_slope"}),
         "R3En": frozenset({"actz", "entry", "ddp", "ddp_law_none"}),
-        "R3Es": frozenset({"actz", "entry", "ddp", "ddp_law_slope"})}
+        "R3Es": frozenset({"actz", "entry", "ddp", "ddp_law_slope"}),
+        # round 3 + B6 (thiol prereg sec. 12): the norfuraneol -> MFT barrier free (k_nf_mft's reference is 145 C, so
+        # the barrier sets its 95 - 100 C value while the 145 C fed-norfuraneol rows keep pinning its multiplier);
+        # "L": norfuraneol formation at Lau 2003's measured 81.5 kJ/mol (a declared transfer), a sensitivity
+        "R3Tn": frozenset({"actz", "entry", "ddp", "ddp_law_none", "nf_mft_ea"}),
+        "R3Ts": frozenset({"actz", "entry", "ddp", "ddp_law_slope", "nf_mft_ea"}),
+        "R3TnL": frozenset({"actz", "entry", "ddp", "ddp_law_none", "nf_mft_ea", "dpo_nf_lau"})}
+NF_MFT_EA_COORDINATE = ("ea_k_nf_mft", "Ea", 40.0, 200.0, 100.0)
+LAU_NF_EA_KJ_MOL = 81.5
 #: round 3 (review B2): the DDP route's PRODUCT (log10 multiplier of k_dpo_ddp x both DDP -> MFT branches) is the
 #: coordinate; the DDP -> MFT multiplier is the product less k_dpo_ddp's own offset
 DDP_COORDINATE = ("offset_ddp_route", ("k_ddp_mft", "k_ddp_mft_hs"), -4.0, 8.0, 5.5)
@@ -81,6 +89,8 @@ CERNY_NF_SHARE_BAND = (0.03, 0.15)
 CERNY_MP3P_RATIO_MAX = 0.1
 #: a pH law set by the arm rather than fitted (R3n): read by trial() in the main process, carried in every job
 DDP_LAW_STATIC: Dict[str, Any] = {}
+#: barriers set by the arm rather than fitted (R3TnL: norfuraneol formation at Lau 2003's), read by trial()
+EA_STATIC: Dict[str, float] = {}
 ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",), "ddp_mft": ("k_ddp_mft", "k_ddp_mft_hs")}
 ARM_LOWER, ARM_UPPER, ARM_START = ({"k_cys_actz": -6.0, "k_aa_frag": -6.0}, {"k_cys_actz": 1.0, "k_aa_frag": 0.5},
                                    {"k_cys_actz": -3.0, "k_aa_frag": -1.5})
@@ -138,6 +148,9 @@ def coordinates(mft_decay_cap: bool, arms=frozenset()):
     if "ddp" in arms:
         key, _, lo, hi, st = DDP_COORDINATE
         keys.append(key); kinds.append("log10_offset"); lower.append(lo); upper.append(hi); start.append(st)
+    if "nf_mft_ea" in arms:
+        key, kind, lo, hi, st = NF_MFT_EA_COORDINATE
+        keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
     if "ddp_law_slope" in arms:
         key, kind, lo, hi, st = DDP_SLOPE_COORDINATE
         keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
@@ -161,6 +174,13 @@ def trial(theta, keys) -> Dict[str, Any]:
     out = {"k_ref": k_ref, "routes": routes, "mgo_share": t["mgo_share_nf"]}
     if "log10_k_mgo_cys_strecker" in t:
         out["mgo_strecker_k"] = 10.0 ** t["log10_k_mgo_cys_strecker"]
+    ea = {}
+    if NF_MFT_EA_COORDINATE[0] in t:
+        ea["k_nf_mft"] = t[NF_MFT_EA_COORDINATE[0]]
+    if EA_STATIC:
+        ea.update(EA_STATIC)
+    if ea:
+        out["ea"] = ea
     if "ddp_ph_slope" in t:
         out["ddp_law"] = {"law": "slope", "slope": t["ddp_ph_slope"]}
     elif DDP_LAW_STATIC:
@@ -395,6 +415,10 @@ def actz_falsifier(theta, start, keys) -> Dict[str, float]:
     return out
 
 
+def _fit_record(suffix: str) -> Dict[str, Any]:
+    return json.loads((data_paths.VALIDATION_DIR / f"kinetic_core_joint_deoxyosone_thiol_fit_{suffix}.json").read_text())
+
+
 def _mr(cell) -> str:
     return "" if not cell else f"{cell['mean']:+.2f} / {cell['rms']:.2f}"
 
@@ -407,6 +431,13 @@ def main(argv=None) -> int:
     parser.add_argument("--strecker-share", type=float, choices=(0.042, 0.080), default=0.042)
     parser.add_argument("--mft-decay-cap", action="store_true")
     parser.add_argument("--arm", choices=tuple(ARMS), default="none", help="round-2 arm (thiol prereg sec. 6)")
+    parser.add_argument("--start-from", metavar="FIT", help="warm start: the theta of a joint fit's JSON (its stem "
+                        "suffix, e.g. s042_e); coordinates it lacks keep their declared start")
+    parser.add_argument("--noise-from", metavar="FIT", help="fix every series' extra noise at that fit's estimate "
+                        "(a single round, no re-estimation): rival arms then share ONE objective (premortem 2026-10-31)")
+    parser.add_argument("--ftol", type=float, help="relative cost tolerance (default: the fitting module's)")
+    parser.add_argument("--tag", default="", help="suffix for the output stem (e.g. conv), so a re-fit never "
+                        "overwrites the record it continues")
     parser.add_argument("--check-fixed-point", action="store_true",
                         help="re-score the optimum on the shipped fixed-point coupling (slow: ~1 h for these 0.4 M pots)")
     args = parser.parse_args(argv)
@@ -415,10 +446,12 @@ def main(argv=None) -> int:
     # no dot in the stem (a ".042" would be taken for the suffix)
     OUT = data_paths.VALIDATION_DIR / (f"kinetic_core_joint_deoxyosone_thiol_fit_s{round(args.strecker_share * 1000):03d}"
                                        + ("_capped" if args.mft_decay_cap else "")
-                                       + ("" if args.arm == "none" else f"_{args.arm.lower()}"))
+                                       + ("" if args.arm == "none" else f"_{args.arm.lower()}")
+                                       + (f"_{args.tag}" if args.tag else ""))
     arms = ARMS[args.arm]
-    global DDP_LAW_STATIC
+    global DDP_LAW_STATIC, EA_STATIC
     DDP_LAW_STATIC = {"law": "none"} if "ddp_law_none" in arms else {}
+    EA_STATIC = {"k_dpo_nf": LAU_NF_EA_KJ_MOL} if "dpo_nf_lau" in arms else {}
     t0 = time.time()
     sulfur.PH_COUPLING = "inline"
     predictable = set(sulfur.SULFUR_STATE_KEYS)
@@ -459,6 +492,10 @@ def main(argv=None) -> int:
     score_only = tuple(r for r in rows_all if not is_holdout(r) and is_score_only(r))
     data = tuple(r for r in rows_all if not is_holdout(r) and not is_score_only(r))
     keys, kinds, lower, upper, start = coordinates(args.mft_decay_cap, arms)
+    if args.start_from:
+        warm = _fit_record(args.start_from)["fit"]["theta"]
+        start = np.clip(np.array([warm.get(k, s0) for k, s0 in zip(keys, start)], dtype=float), lower, upper)
+    fixed_noise = dict(_fit_record(args.noise_from)["series_extra_noise"]) if args.noise_from else None
     raw_many = make_raw_many(jobs, keys)
 
     def raw(theta, rows):
@@ -466,7 +503,11 @@ def main(argv=None) -> int:
 
     model = fitting.MeasurementModel(
         series_of=series_of,
-        sigma_of=lambda r: r.sigma, method_of=method_of, scale_tau=sm3.SCALE_TAU)
+        sigma_of=lambda r: r.sigma, method_of=method_of, scale_tau=sm3.SCALE_TAU, extra_noise=fixed_noise or {})
+    if fixed_noise is not None:
+        missing = {series_of(r) for r in data} - set(fixed_noise)
+        if missing:
+            raise SystemExit(f"--noise-from {args.noise_from}: no noise for series {sorted(missing)[:5]}")
 
     def make_problem(m, rows=data):
         return fitting.Problem(keys=keys, kinds=kinds, lower=lower, upper=upper, rows=rows,
@@ -475,8 +516,9 @@ def main(argv=None) -> int:
                                group_of=sm3.paper_of, nuisance_dof=m.nuisance_dof)
 
     raw_start = raw(start, data)
-    best, final_model = fitting.fit_with_series_noise(make_problem, model, raw, start, budget=args.budget,
-                                                      rounds=args.rounds, estimator=noise_with_floor)
+    best, final_model = fitting.fit_with_series_noise(
+        make_problem, model, raw, start, budget=args.budget, rounds=1 if fixed_noise is not None else args.rounds,
+        estimator=(lambda *_a, **_k: dict(fixed_noise)) if fixed_noise is not None else noise_with_floor, ftol=args.ftol)
     problem = make_problem(final_model)
     lap = fitting.laplace(problem, best.theta)
     raw_best = raw(best.theta, data)
@@ -491,6 +533,7 @@ def main(argv=None) -> int:
                       ROOT / "src/kinetic_core/fitting.py", ROOT / "scripts/generators/build_submodel_probe.py"]),
         "engine_state": "B60 + B58/B59b/B59a/B61 on; sub-model 1 switches off; inline coupling"
                         + ("" if args.arm == "none" else f"; round-2 arm {args.arm}"),
+        "arm": args.arm, "start_from": args.start_from, "noise_from": args.noise_from, "ftol": args.ftol,
         "rows": len(data), "pots": len({key_of(r) for r in data}), "start": dict(zip(keys, map(float, start))),
         "fit": best.as_dict(keys), "laplace": lap, "series_extra_noise": dict(final_model.extra_noise),
         "failed_pot_runs": len(FAILURES), "failures_sample": FAILURES[:10],

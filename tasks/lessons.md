@@ -349,3 +349,7 @@
   added the same morning (CF-068: a kind outside the enum, a document name where ledger ids belong). Run
   `./scripts/docker_maillard.sh gates` (or every step of `.github/workflows/ci.yml`'s data-integrity job) before a
   push that touches `docs/reference/*_register.yml`, `data/`, or the generators.
+- **A wait loop needs a way out** (2026-10-31). `until grep -q "<line>" log; do sleep 30; done` waited ~12 h for a
+  freshness-gate line that the producing run (a detached `&` job whose chain stopped after pytest) never printed. Wait
+  on the producing process, not on a string (`run_in_background` and its completion notice), or give the loop a
+  deadline and print what it last saw. Never start a detached `&` job: its output and exit are invisible.

@@ -195,8 +195,8 @@ entries:
     artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3e.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3e.json,
                 results/validation/kinetic_core_mechanism_signatures_s042_r3e.md, results/validation/kinetic_core_mechanism_signatures_s042_r3e.json]
     commit: 599baec
-    verdict: rejected
-    conclusion: "The fit switched the route back off (route product +0.38, k_dpo_ddp 10^-4.5); Cerny pot D fed-norfuraneol share 0.976 (measured 0.07). At its start the route had put Schieberle's MFT at -0.01 dex: other rows pull it off under this law."
+    verdict: inconclusive
+    conclusion: "The fit switched the route back off (route product +0.38, k_dpo_ddp 10^-4.5); Cerny pot D fed-norfuraneol share 0.976 (measured 0.07). At its start the route had put Schieberle's MFT at -0.01 dex: other rows pull it off under this law. Was: rejected. PREMORTEM 2026-10-31: this fit stopped on its evaluation budget (200 = 11 optimiser iterations), not at an optimum, so the verdict is not readable until the convergence re-fit (STATUS_AND_PLAN sec. 5, B0)."
     follow_up: "The rival laws (EX-016, EX-017)."
   - id: EX-016
     date: "2026-10-30"
@@ -208,8 +208,8 @@ entries:
     artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en.json,
                 results/validation/kinetic_core_mechanism_signatures_s042_r3en.md, results/validation/kinetic_core_mechanism_signatures_s042_r3en.json]
     commit: pending
-    verdict: partial
-    conclusion: "The data now ACCEPT DDP formation (k_dpo_ddp 10^-0.61 +- 0.18, off its bound; reduced chi-square 4.95, the lowest so far) but raise norfuraneol + H2S -> MFT x26, so Cerny pot D's fed-norfuraneol share is 0.994 (measured 0.07); pot C's MP3P companion passes; 4 / 15 signatures. The rows that pin k_nf_mft are fed-norfuraneol pots at 145 C (Hofmann T4 / T10); Cerny's 95 C labelling wants that step minor: with one shared barrier no constant satisfies both -> the route mix must change with temperature."
+    verdict: inconclusive
+    conclusion: "The data now ACCEPT DDP formation (k_dpo_ddp 10^-0.61 +- 0.18, off its bound; reduced chi-square 4.95, the lowest so far) but raise norfuraneol + H2S -> MFT x26, so Cerny pot D's fed-norfuraneol share is 0.994 (measured 0.07); pot C's MP3P companion passes; 4 / 15 signatures. The rows that pin k_nf_mft are fed-norfuraneol pots at 145 C (Hofmann T4 / T10); Cerny's 95 C labelling wants that step minor: with one shared barrier no constant satisfies both -> the route mix must change with temperature. Was: partial. PREMORTEM 2026-10-31: this fit stopped on its evaluation budget (200 = 11 optimiser iterations), not at an optimum, so the verdict is not readable until the convergence re-fit (STATUS_AND_PLAN sec. 5, B0)."
     follow_up: "Combine round 3 with B6: the DDP step's pH law (R3En / R3Es) plus a free barrier for norfuraneol + H2S -> MFT (and Lau's 81.5 kJ/mol for norfuraneol formation); Cerny 95 C, Hofmann 145 C, Liu 168 C as the signatures."
   - id: EX-017
     date: "2026-10-30"

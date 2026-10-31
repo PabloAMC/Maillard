@@ -469,4 +469,58 @@ read); Hofmann T10 145 C route ranking; Zhai 140 / 120 C and Yiltirak's temperat
 **Open question for the literature (owner downloads on DOIs):** a labelling study at two or more temperatures in one
 laboratory -- the search of 2026-10-31 found none (P ~0.1 that one exists).
 
+## 12. Round 3 read so far, and arm R3T (round 3 + temperature-dependent routes) -- design, 2026-10-31, before any R3T fit
+
+**Round 3 so far** (experiment register EX-015, EX-016): with the shipped free-amine law (R3E) the fit switches the
+DDP route off; with no pH law (R3En) the data ACCEPT DDP formation (`k_dpo_ddp` 10^-0.61 +- 0.18, reduced chi-square
+4.95, the lowest so far) but raise norfuraneol + H2S -> MFT x26 (`k_nf_mft` +1.41), so Cerny 2003's pot D share is
+0.994 (measured 0.07). Both fail for one reason: `k_nf_mft` is pinned at 145 C by fed-norfuraneol rows (Hofmann T4 /
+T10) while Cerny's 95 C labelling wants the step minor, and one shared barrier (64.08) cannot do both. R3Es (free
+slope) is running; R3T takes whichever law the signatures favour (R3En if they tie: fewer coordinates).
+
+**Arm R3T.** R3En's (or R3Es's) state plus ONE coordinate: the barrier of norfuraneol + H2S -> MFT (`ea_k_nf_mft`, kind
+Ea, 40 - 200 kJ/mol, start 100). `k_nf_mft`'s reference temperature is 145 C, so its multiplier stays pinned by the
+145 C rows and the barrier alone sets its 95 - 100 C value -- the decoupling the conflict needs. Sensitivity R3TnL:
+norfuraneol formation (`k_dpo_nf`) at Lau 2003's measured 81.5 kJ/mol (ribose + protein amines, 116 - 131 C; a declared
+transfer from a whey gel to water). Signatures and hold-outs as sec. 10, plus the temperature signatures already in
+the scorer (Zhai 140 / 120 C for MFT and FFT; Schieberle's lag).
+
+**Dry check (R3En's optimum, the barrier alone moved, no fit):** pot D share 0.994 / 0.991 / 0.971 / 0.877 at
+64 / 100 / 140 / 180 kJ/mol. The fed norfuraneol (145 mM) outweighs the DDP made in situ at 95 C, so lowering the
+norfuraneol route is not enough: a pass also needs the DDP route to rise at 95 C (the route product is a coordinate;
+the DDP route's own barrier is NOT freed here, to keep the arm at one new coordinate).
+**Expected (written now):** `ea_k_nf_mft` > 100 kJ/mol (P 0.6); Cerny pot D share in [0.03, 0.15] (P 0.2 -- lowered by
+the dry check); Schieberle's MFT lag signature within tolerance (P 0.35); signatures >= 7 / 15 (P 0.3). If the pot D
+share stays above ~0.5 with the barrier on its upper half, the next question is the DDP route's own barrier and its
+supply at 95 C (Cerny's pots), not more freedom on the norfuraneol side.
+
+## 13. Design review of R3T, and the premortem -- 2026-10-31, before any R3T fit: R3T is NOT run as designed
+
+**Blocking (independent design review).** A grid at R3En's optimum (`ea_k_nf_mft` x `offset_ddp_route`, no refit):
+Cerny pot D's share falls into [0.03, 0.15] only where the barrier sits at or beyond the measured sulfur class's upper
+end (30 - 133 kJ/mol, median 100.9) AND the DDP route is raised so far that Schieberle 2000's early MFT is over-made by
+~1 dex (Ea 160, DDP +3: share 0.038, Schieberle 30 / 60 min +1.30 / +1.17 dex). The conflict that binds is not 95 C vs
+145 C but **Cerny 95 C vs Schieberle 100 C** -- the same chemistry (ribose + cysteine, pH 5, phosphate) 5 K apart, which
+no Arrhenius term can separate: the DDP route removes Schieberle's measured MFT lag, the norfuraneol route supplies it.
+Sec. 12's diagnosis (pinned at 145 C by T4 / T10) missed the binding row. Also (should-fix): the barrier is not
+identified on its own (the temperature ladders are all hold-outs); the arm did not nest R3En (it started from START, not
+R3En's theta); Lau 2003's 81.5 kJ/mol is an overall ribose -> norfuraneol appearance barrier, not `k_dpo_nf`'s (R3TnL
+would be a declared assumption, and moving one DPO branch alone contradicts Lau's temperature-independent plateau);
+the Zhai 140 / 120 C MFT signature was read at design (R3En: -0.40 vs measured +0.20, wrong sign) and is recorded as
+seen; the pot C MP3P companion cannot fail (the lane's NF -> MP3P : NF -> MFT is 0.003 - 0.075, Whitfield 1999 measures
+~5 at 140 C).
+
+**Premortem (same night).** Every joint-fit arm so far stopped on its evaluation budget (11 optimiser iterations), so
+EX-015 / EX-016 / EX-017 are inconclusive until converged (STATUS_AND_PLAN sec. 5, B0: E converged, then each rival
+from its own optimum under E's fixed measurement model; queued 2026-10-31 ~00:50).
+
+**Decision.** (1) No R3T fit. (2) The question becomes mechanistic: **what makes MFT LATE at 100 C in ribose +
+cysteine when the isotope labels say the fed norfuraneol is a minor source?** Rival structures to be pre-registered
+after a literature pass (candidates: a slow H2S supply -- cysteine's H2S via its own Strecker degradation, which waits
+for dicarbonyls; a ribose-cysteine thiazolidine reservoir delaying both precursors; a two-step intact-C5 route whose
+intermediate builds slowly; in-situ norfuraneol reacting before it is released as the free furanone, which fed
+norfuraneol cannot). (3) Any later barrier coordinate is bounded to its measured class (<= 133 kJ/mol for sulfur
+steps) and starts from the arm it extends. (4) Backlog: tie NF -> MP3P to NF -> MFT at Whitfield 1999's ratio, so
+Cerny's "no MP3P from ribose" becomes a real test.
+
 ## Amendments
