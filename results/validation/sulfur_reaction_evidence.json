@@ -4,10 +4,10 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-31",
     "git": {
-      "commit": "36ea5b97af8964b321a0a57e7c3c9bf0f9206a6d",
-      "short": "36ea5b97",
-      "branch": "b7-deoxyosone-partition",
-      "dirty": true
+      "commit": "8685f270572b96ed69b3adc6866f0053adcae0a3",
+      "short": "8685f270",
+      "branch": "wave1-investigations-2026-10-31",
+      "dirty": false
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
     "inputs": [
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "10d0d896fbbcf931826a02f51084e666347aa0e2338b2c88c470b4604b4e6ea3"
+        "sha256": "e9c75c1d0ef501052537822675f5f2b544fb7d7121f0b941c4da9c9c18872545"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -65,7 +65,7 @@
       },
       {
         "path": "data/lit/measurement_ledger/trunk.yml",
-        "sha256": "6cc18a7adb57fb474d6023edc56fa48f63a59bf4c14ca37772edde427a0b8b93"
+        "sha256": "a84a95cc43ef0ac3b233fbaff3b6a54dad64fb24b5d00e430db9b493a426c26a"
       }
     ]
   },
