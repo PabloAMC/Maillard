@@ -1,0 +1,116 @@
+# KEYED FIT TABLE -- Strecker degradation: Hofmann, Munch & Schieberle 2000 (J Agric Food Chem 48:434-440, DFA Garching;
+# doi 10.1021/jf990954c, printed on p. 434), Fig. 2: the time course of phenylacetaldehyde (PHEAL, open circles) and
+# phenylacetic acid (PHEAC, filled circles) in the glucose + L-phenylalanine pot (the recipe of Table 2 / Fig. 3).
+# Companion of strecker_hofmann2000.yml (Tables 2-4, Figs. 3-5), whose verified header records the paper-wide rulings
+# (buffer molarity, 98 C vs reflux); this table follows its conventions and does not re-rule them.
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS). Laboratory and
+# quantification class from the ledger entry hofmann2000_fig2_pa_paa_glucose_phe (data/lit/measurement_ledger/trunk.yml;
+# NEW 2026-10-31: the older entry hofmann2000_fig2_fig3_glucose_phe_dicarbonyls mixes Fig. 2 (SIDA) with Fig. 3
+# (quinoxalines) under class 'calibrated'; Fig. 3 was split out the same way, as hofmann2000_fig3_dicarbonyls_glucose_phe).
+# FIRST READER (agent-hofmann2000-fig2-2000b-reader1-2026-10-31), read from data/articles/hofmann2000.pdf (text layer via
+# pdftotext -layout; the embedded 300 ppi 1-bit stencil raster of Fig. 2, pdfimages object 50, page 436, 995 x 661 px).
+# The dossier hofmann2000_extraction.md was a map only. Verification: data/lit/source_verification/strecker_hofmann2000_fig2.yml.
+# Second reader: agent-hofmann2000-fig2-2000b-reader2-2026-10-31 (verified; see TWO READERS below).
+#
+# SPECIES KEYS (not in the engine; the pot is engine_species_missing, so these are verified data for later, NOT fit rows
+# today; fit_rows.load refuses them by species): PHE, PHEAL, PHEAC, as strecker_hofmann2000.yml. Engine key: Glc.
+#
+# UNITS. The y axis reads 'amount [umol/mmol glucose]'. The recipe charges glucose 1.0 mmol + L-Phe 1.0 mmol in 10 mL
+# (Experimental, p. 435; Tables 1-2 footnotes), so 1 umol/mmol = 1 umol per pot = 0.1 mmol/L, and value / Glc0
+# (100 mmol/L) is the plotted ratio exactly. The solutes' volume (~0.25 mL) is ignored (<= 2.5 %).
+# DIGITISATION. Axes fitted by least squares on the tick marks found in the pixels: y ticks 1-5 at rows 452 / 341 / 231 /
+# 121 / 10 plus the x-axis line (row 563) as 0: 110.514 px per umol/mmol, zero at row 562.62, max residual 0.59 px;
+# x ticks 0-250 min at cols 92 / 242 / 392 / 542 / 690 / 840.5: 2.9923 px/min, max residual 0.84 px. The x axis is
+# broken between 250 and 450 min; the right segment carries one marker pair at the 500-min tick (col 974; markers at
+# col 975), snapped to 500 min. Markers at 10, 30, 60, 120, 240, 500 min (x fit within 0.3 min of each), none at 0
+# (both curves are drawn from the origin). Open circles: centre of the enclosed hole (9 x 9 px); filled circles: bbox
+# centre after a 5 x 5 morphological opening (11 x 11 px discs). At 10 and 60 min the PA ring's bottom merges with the
+# PAA disc's top (ASCII dumps): the disc is taken as its 11 clean rows, +-1.5 px for both markers there.
+# ERRORS. No SD, no n, no error bars in the paper. read_error (dex) = sqrt(marker_px^2 + 0.59^2) / 110.514 / value /
+# ln 10, marker +-1 px (+-1.5 px where markers merge); transcription only, not the replicate scatter.
+# NOTE ON VALUES: every digitised point lies within 0.008 umol/mmol (0.8 px) of a multiple of 0.1 (PA 0.2 / 0.5 / 0.9 /
+# 1.4 / 2.0 / 2.2; PAA 0.1 / 0.3 / 0.8 / 1.8 / 3.2 / 3.5): the figure was likely plotted from values rounded to 0.1.
+# The rows keep the digitised values (the convention), the read error does not cover the plotting rounding (+-0.05).
+#
+# CONDITIONS (none printed for Fig. 2; DECLARED from the paper's glucose/Phe recipe, see the pot): 98 C (Experimental;
+# footnotes 'refluxed'; abstract '100 C'); phosphate pH 7.0, 0.5 mol/L per the Tables 1-2 footnotes (Experimental:
+# '0.5 mmol/L', ruled a misprint in strecker_hofmann2000 ruling 1); atmosphere not controlled; vessel / one pot sampled
+# or one vessel per time: not stated. Whether Fig. 2 and Fig. 3 come from one run is not stated.
+# CHECKS AGAINST THE PAPER'S OWN NUMBERS:
+#  * text p. 436 'the formation of PA was slightly favored within the first 60 min' -- PA > PAA at 10 / 30 / 60 min,
+#    curves cross at ~70 min: consistent.
+#  * text p. 436 'After ~8 h, the amounts of the acid were nearly twice as high as ... the aldehyde' -- 500 min PAA / PA
+#    = 3.498 / 2.204 = 1.59 (240 min: 1.60): 'nearly twice' is generous; flagged as text_check, no row.
+#  * Table 2 (same recipe, 30 min reflux, printed) PA 0.42 / PAA 0.29 umol/mmol vs Fig. 2 at 30 min 0.494 / 0.295: PAA
+#    agrees, PA 18 % higher in the figure (different run, or plotted differently). Not a duplicate; both kept.
+#  * Figs. 4-5 glucose at pH 7 (declared 60 min, strecker_hofmann2000) PA 0.78 / PAA 0.63 vs Fig. 2 at 60 min 0.90 /
+#    0.79: same order, 15-25 % apart.
+# DUPLICATE CANDIDATE (recorded, not resolved): Fig. 2 at 120 min (PA 1.399, PAA 1.797) equals Hofmann & Schieberle 2000b
+# Table 2 expt II, glucose/Phe (PA 1.4, PAA 1.8 umol/mmol; '100 C ... 120 min in a closed vial', 'Argon was replaced by
+# air oxygen') to the printed digit. Same laboratory, same recipe, same time: probably one experiment printed twice,
+# under two different condition statements (98 C / reflux / atmosphere not controlled here; 100 C / closed vial / air
+# there). The 120-min rows carry duplicate_candidate; do not fit both as independent. Hofmann & Schieberle 2000b Fig. 1
+# (glucose/Phe, squares) is a DIFFERENT series (eyeballed, not digitised: ~1.2 / ~1.5 at 120 min), not keyed here.
+#
+# TWO READERS (2026-10-31): first agent-hofmann2000-fig2-2000b-reader1-2026-10-31 (this file), second
+# agent-hofmann2000-fig2-2000b-reader2-2026-10-31 (fit_rows/second/strecker_hofmann2000_fig2.yml, values kept as written;
+# ledger id relabelled, see L); compared by scripts/reconcile_source_readings.py
+# (results/validation/source_reading_reconciliation_strecker_hofmann2000_fig2.md). Before adjudication the readings agreed on
+# every value (12 rows each) and differed only in the ledger id (inventory: one id per reader); after the relabel: 1 agree.
+# ADJUDICATION (agent-hofmann2000-fig2-2000b-adjudicator-2026-10-31, against hofmann2000.pdf: text layer and the Fig. 2 raster).
+#  (L) LEDGER ID. hofmann2000_fig2_pa_paa_glucose_phe (class sida; PA / PAA by [13C2]-SIDA, p. 435), not the combined
+#      hofmann2000_fig2_fig3_glucose_phe_dicarbonyls, whose class 'calibrated' describes Fig. 3's quinoxalines; the same
+#      split as Fig. 3 (hofmann2000_fig3_dicarbonyls_glucose_phe). The second reader proposed this id (its corrections item
+#      3); its pot and entry were relabelled, nothing else.
+#  (P) POT ID. hofmann2000_fig2_glc_phe_98c (this reader's name) is the record; the second reader's
+#      hofmann2000_glc_phe_98c_timecourse_fig2 is the same pot (the tool matches pots by T, time, pH, initial amounts).
+#      Rule, as strecker_hofmann2000: the first reading's names are kept, the second reading is not renamed. Not merged with
+#      the Fig. 3 pot hofmann2000_glc_phe_98c_timecourse: the paper never says Figs. 2 and 3 share a run (Fig. 3 has a
+#      300-min point Fig. 2 lacks).
+#  (V) VALUES. All 12 within the larger read error; largest gap PA 30 min 0.494 vs 0.499 umol/mmol (0.55 px: hole centre vs
+#      bbox midpoint). Re-measured on raster object 50 (bbox midpoints): 0.499 / 0.295 (30), 1.395 / 1.797 (120), 2.001 /
+#      3.195 (240), 2.209 / 3.503 (500) -- the first reading's values are kept (within 0.6 px).
+#  (C) CONDITIONS. Declared alike by both readers: 98 C (strecker_hofmann2000 ruling 2; alternative 99-100 C), phosphate
+#      0.5 mol/L (ruling 1; the Experimental's 0.5 mmol/L a misprint), 1 + 1 mmol in 10 mL, pH 7.0 not held, air not
+#      controlled, vessel / sampling not stated. Kept.
+#  (D) DUPLICATE: the 120-min pair (1.399 / 1.797) equals hofmann2000b Table 2 expt II Glc/Phe (1.4 / 1.8) to the printed
+#      digit. Ruled one experiment reported twice (P ~ 0.75), ORIGINAL = this figure: hofmann2000 was received 24 Aug 1999
+#      and on the web 4 Jan 2000, hofmann2000b received 18 Jan 2000 and cites it for the SIDA; a time-course point is the
+#      natural source of a single-time cell, not the reverse. The two condition statements are compatible except the
+#      vessel: 98 C vs 100 C is one reflux (ruling 2); atmosphere uncontrolled = air; 'refluxed / heated' here vs 'closed
+#      vial' there is the real difference. Coincidence (P ~ 0.25) is not excluded: run-to-run scatter at this recipe is
+#      10-30 % (Table 2 vs this figure at 30 min, PA +18 %; hofmann2000b Fig. 1, ~1.2 / ~1.5 at 120 min). The 120-min rows
+#      keep duplicate_candidate; for the conflicts register (and fitting.count_once) copy hofmann2000b expt II Glc/Phe ->
+#      original these rows.
+status: ready   # two readers + adjudication (2026-10-31); the pot is engine_species_missing: fit_rows.load refuses the species (literature only)
+pots:
+  hofmann2000_fig2_glc_phe_98c:
+    {ledger_id: hofmann2000_fig2_pa_paa_glucose_phe,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "NOT STATED for Fig. 2: the glucose/Phe recipe (Experimental p. 435) says 'heated at 98 C'; Tables 1-2 footnotes say 'refluxed'; the abstract says '100 C'. 98 C as strecker_hofmann2000 ruling 2 (reflux at Garching ~99 C); alternative 99-100 C",
+     minutes: 500,
+     initial_mmol_L: {Glc: 100.0, PHE: 100.0},
+     concentration_basis: "DECLARED from the glucose/Phe recipe (Fig. 2 states no amounts): 1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol glucose = 0.1 mmol/L",
+     buffer: "phosphate pH 7.0, 0.5 mol/L per the glucose/Phe table footnotes (Experimental prints 0.5 mmol/L, a misprint per strecker_hofmann2000 ruling 1); counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated (pH of the buffer as prepared; never re-measured)",
+     atmosphere: "not controlled (no argon or oxygen treatment is stated for the glucose/Phe recipe; text p. 437 says oxygen was not controlled in the Table 3 experiments): air assumed",
+     vessel: "not stated for Fig. 2 (Table 2 footnote: refluxed; Methods: heated); one sampled pot or one vessel per time not stated",
+     source_figure: "Fig. 2: phenylacetaldehyde (open circles), phenylacetic acid (filled circles); y amount (umol/mmol glucose), x t (min) 0-250 // 450-500",
+     condition_quote: "A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.5 mmol/L, pH 7.0) was heated at 98 C for 30 min. ... To gain further insight into the time course of phenylacetaldehyde (PA) and phenylacetic acid (PAA) formation from L-phenylalanine, their generation was followed quantitatively."}
+rows:
+  # PHEAL: phenylacetaldehyde, open circles (centre of the enclosed hole)
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAL, t_min: 10, value: 0.01956, unit: mmol_L, printed: 'Fig. 2 (digitised): 0.196 umol/mmol glucose, phenylacetaldehyde (open circles)', read_error: 0.0233, read_error_basis: 'centre of the open circle''s hole (rows 537-545), y by least squares on 6 ticks (110.514 px per umol/mmol, max residual 0.59 px), t snapped to the sampling grid (x fit residual 0.84 px); +-1 px marker, tick residual in quadrature; in dex'}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAL, t_min: 30, value: 0.04942, unit: mmol_L, printed: 'Fig. 2 (digitised): 0.494 umol/mmol glucose, phenylacetaldehyde (open circles)', read_error: 0.0092, text_check: 'Table 2 (same recipe, 30 min, printed): PA 0.42 umol/mmol; the figure reads 18 % higher (PAA agrees); both kept'}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAL, t_min: 60, value: 0.08969, unit: mmol_L, printed: 'Fig. 2 (digitised): 0.897 umol/mmol glucose, phenylacetaldehyde (open circles)', read_error: 0.0071, note: 'ring rows 458-469; its bottom merges with the PAA disc top: +-1.5 px', text_check: 'text p. 436: PA slightly favoured within the first 60 min: PA 0.897 > PAA 0.793'}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAL, t_min: 120, value: 0.13991, unit: mmol_L, printed: 'Fig. 2 (digitised): 1.399 umol/mmol glucose, phenylacetaldehyde (open circles)', read_error: 0.0033, duplicate_candidate: 'hofmann2000b Table 2 expt II glucose/Phe (100 C, 120 min, closed vial, air): PA 1.4 umol/mmol printed = this point to the printed digit; probably one experiment printed twice under two condition statements; not independent'}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAL, t_min: 240, value: 0.20054, unit: mmol_L, printed: 'Fig. 2 (digitised): 2.005 umol/mmol glucose, phenylacetaldehyde (open circles)', read_error: 0.0023}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAL, t_min: 500, value: 0.22044, unit: mmol_L, printed: 'Fig. 2 (digitised): 2.204 umol/mmol glucose, phenylacetaldehyde (open circles)', read_error: 0.0021, note: 'right axis segment (after the 250 // 450 break); marker at the 500-min tick'}
+  # PHEAC: phenylacetic acid, filled circles (bbox centre after a 5 x 5 opening)
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAC, t_min: 10, value: 0.00961, unit: mmol_L, printed: 'Fig. 2 (digitised): 0.096 umol/mmol glucose, phenylacetic acid (filled circles)', read_error: 0.0659, read_error_basis: 'bbox centre of the filled disc (11 clean rows 547-557; its top merges with the PA ring bottom, row 546), y by least squares on 6 ticks (max residual 0.59 px); +-1.5 px marker (merged), tick residual in quadrature; in dex'}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAC, t_min: 30, value: 0.02952, unit: mmol_L, printed: 'Fig. 2 (digitised): 0.295 umol/mmol glucose, phenylacetic acid (filled circles)', read_error: 0.0155, text_check: 'Table 2 (same recipe, 30 min, printed): PAA 0.29 umol/mmol: agrees'}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAC, t_min: 60, value: 0.07928, unit: mmol_L, printed: 'Fig. 2 (digitised): 0.793 umol/mmol glucose, phenylacetic acid (filled circles)', read_error: 0.008, note: 'disc rows 470-480; its top merges with the PA ring bottom (row 469): +-1.5 px'}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAC, t_min: 120, value: 0.17972, unit: mmol_L, printed: 'Fig. 2 (digitised): 1.797 umol/mmol glucose, phenylacetic acid (filled circles)', read_error: 0.0025, duplicate_candidate: 'hofmann2000b Table 2 expt II glucose/Phe (100 C, 120 min, closed vial, air): PAA 1.8 umol/mmol printed = this point to the printed digit; probably one experiment printed twice under two condition statements; not independent'}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAC, t_min: 240, value: 0.31998, unit: mmol_L, printed: 'Fig. 2 (digitised): 3.200 umol/mmol glucose, phenylacetic acid (filled circles)', read_error: 0.0014}
+  - {pot: hofmann2000_fig2_glc_phe_98c, ledger_id: hofmann2000_fig2_pa_paa_glucose_phe, species: PHEAC, t_min: 500, value: 0.34984, unit: mmol_L, printed: 'Fig. 2 (digitised): 3.498 umol/mmol glucose, phenylacetic acid (filled circles)', read_error: 0.0013, note: 'right axis segment (after the 250 // 450 break); marker at the 500-min tick', text_check: 'text p. 436: after ~8 h the acid nearly twice the aldehyde; the figure gives PAA / PA = 1.59 at 500 min (1.60 at 240 min); hofmann2000b text (its Fig. 1): 1.7 at 500 min. Flag, no row'}

@@ -1,0 +1,70 @@
+# SOURCE VERIFICATION -- Strecker degradation, Hofmann, Munch & Schieberle 2000, Fig. 2 (fit table
+# data/lit/fit_rows/strecker_hofmann2000_fig2.yml). Format and the five checks: the header of data/lit/source_verification.yml.
+# FIRST READER: agent-hofmann2000-fig2-2000b-reader1-2026-10-31, against data/articles/hofmann2000.pdf (pdftotext -layout;
+# the embedded Fig. 2 raster via pdfimages, page 436, object 50, 995 x 661 px, 300 ppi 1-bit stencil). The dossier
+# hofmann2000_extraction.md was a map only. The paper-wide rulings of the verified companion table strecker_hofmann2000
+# (buffer 0.5 mol/L, 98 C ~ reflux) are followed, not re-ruled.
+# second_reader "pending" = NOT verified (the loader and the gate refuse the rows until a second reader signs).
+# `notes` is an extra field: conditions as printed, contradictions, assumptions with their alternatives.
+# DIGITISATION: y ticks 1-5 found at rows 452 / 341 / 231 / 121 / 10 (7+ px of ink left of the axis column 92) plus the
+# x-axis line row 563 as 0: least squares 110.514 px per umol/mmol, zero 562.62, residuals <= 0.59 px. x ticks 0 / 50 /
+# 100 / 150 / 200 / 250 min at cols 92 / 242 / 392 / 542 / 690 / 840.5 (ink below the axis): 2.9923 px/min, residuals
+# <= 0.84 px; break 250 // 450, 500-min tick col 974. Markers: open circles from their enclosed 9 x 9 hole; filled
+# circles after a 5 x 5 opening (11 x 11); the 10- and 60-min pairs touch (ASCII dumps): +-1.5 px. Scripts and dumps:
+# this reader's scratchpad (h2000r1/code: explore.py, ascii.py, ticks.py, digitise.py, rows.py).
+# SECOND READER: agent-hofmann2000-fig2-2000b-reader2-2026-10-31 (source_verification/second/strecker_hofmann2000_fig2.yml,
+# fit_rows/second/strecker_hofmann2000_fig2.yml), independent and in parallel; its ledger id relabelled by the adjudicator (see
+# that file). Reconciled by scripts/reconcile_source_readings.py --promote
+# (results/validation/source_reading_reconciliation_strecker_hofmann2000_fig2.md: 1 agree, 0 disagree).
+# ADJUDICATED 2026-10-31 by agent-hofmann2000-fig2-2000b-adjudicator-2026-10-31 against hofmann2000.pdf (text layer; the Fig. 2
+# raster, object 50, re-extracted with pdfimages and its marker ink runs re-measured). Rulings: the fit table's header.
+
+entries:
+- ledger_id: hofmann2000_fig2_pa_paa_glucose_phe
+  source_file: hofmann2000.pdf
+  read_by: agent-hofmann2000-fig2-2000b-reader1-2026-10-31
+  second_reader: agent-hofmann2000-fig2-2000b-reader2-2026-10-31
+  date: 2026-10-31
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: 'Figure 2. Time course of the formation of phenylacetaldehyde (O) and phenylacetic acid (b) from glucose and
+    L-phenylalanine. ... To gain further insight into the time course of phenylacetaldehyde (PA) and phenylacetic acid
+    (PAA) formation from L-phenylalanine, their generation was followed quantitatively.'
+  notes: 'Fig. 2 (p. 436): y "amount [umol/mmol glucose]" 0-5, x "t (min)" 0-250 // 450-500; open circles PA, filled
+    circles PAA (the text layer renders them O and b); markers at 10 / 30 / 60 / 120 / 240 / 500 min, curves drawn from
+    the origin. READ (umol/mmol glucose): PA 0.196 / 0.494 / 0.897 / 1.399 / 2.005 / 2.204; PAA 0.096 / 0.295 / 0.793 /
+    1.797 / 3.200 / 3.498. All 12 within 0.8 px of a 0.1 grid (plotted from rounded values; rows keep the digitised
+    values). UNITS: x 0.1 mmol/L (1.0 mmol glucose in 10 mL, declared). CONDITIONS corrected: the caption and the text
+    state NO conditions for Fig. 2; the pot declares the glucose/Phe recipe -- Experimental p. 435 "glucose (1.0 mmol)
+    and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.5 mmol/L, pH 7.0) was heated at 98 C"; Tables 1-2
+    footnotes "0.5 mol/L ... refluxed"; abstract "(30 min, 100 C)". Taken: 98 C (alternative 99-100 C), 0.5 mol/L
+    (strecker_hofmann2000 ruling 1), 1 + 1 mmol in 10 mL, pH 7.0 not held, atmosphere not controlled (air assumed; no
+    argon treatment is described for the glucose/Phe recipe; alternative: unknown headspace O2), vessel / sampling not
+    stated. Whether Figs. 2 and 3 share one run: not stated. QUANTIFICATION: SIDA, [13C2]phenylacetaldehyde /
+    [13C2]phenylacetic acid, ether extract at pH 3, GC-MS-CI m/z 121/123, 137/139 (p. 435); the old combined ledger
+    entry hofmann2000_fig2_fig3_glucose_phe_dicarbonyls is "calibrated" (for Fig. 3), so a new entry with class sida was
+    added (as Fig. 3 was split out). DUPLICATES corrected: (a) 120 min PA 1.399 / PAA 1.797 equal hofmann2000b Table 2
+    expt II glucose/Phe (1.4 / 1.8 umol/mmol, "100 C ... 120 min in a closed vial", "Argon was replaced by air oxygen")
+    to the printed digit -- same lab, recipe and time, different condition statements: duplicate_candidate on both
+    120-min rows (and on the 2000b rows); not resolved. (b) Table 2 of this paper (30 min, printed 0.42 / 0.29) vs the
+    figure at 30 min 0.494 / 0.295: PAA agrees, PA +18 %; separate rows, no duplicate. (c) Text p. 436 "After ~8 h,
+    the amounts of the acid were nearly twice as high" vs 1.59 at 500 min: text_check, no row. (d) hofmann2000b Fig. 1
+    (glucose/Phe squares) is a different series by eye (~1.2 / ~1.5 at 120 min; not digitised); its text "factor of
+    1.7 ... after 500 min" matches neither figure exactly. 12 rows (PHEAL 6, PHEAC 6); pot engine_species_missing
+    [PHE, PHEAL, PHEAC].'
+  adjudication: >-
+    Both readings agree on the pot and all 12 values (Fig. 2, p. 436): the largest gap is PA at 30 min, 0.494 vs 0.499
+    umol/mmol (0.55 px; the first reader took the ring's hole centre, the second the bbox midpoint), inside either read
+    error. Raster re-measured by the adjudicator (object 50, bbox midpoints on rows 502-513, 525-535, 359-369, 403-414,
+    204-215, 336-347, 170-181, 313-324 with zero 562.62 and 110.514 px per unit): 0.499 / 0.295 / 1.797 / 1.395 / 3.195
+    / 2.001 / 3.503 / 2.209 umol/mmol, i.e. the second reading to the digit and the first within 0.6 px; first reading
+    kept (ruling V). LEDGER ID (ruling L): hofmann2000_fig2_pa_paa_glucose_phe (class sida; the old combined
+    hofmann2000_fig2_fig3_glucose_phe_dicarbonyls is 'calibrated' for Fig. 3's quinoxalines and carries the
+    fig2_keyed_as flag); the second reader proposed the same split. CONDITIONS (both corrected, both alike): none printed
+    for Fig. 2; the glucose / Phe recipe (p. 435) with 0.5 mol/L (strecker_hofmann2000 ruling 1), 98 C (ruling 2), air
+    not controlled. DUPLICATE (ruling D): the 120-min pair equals hofmann2000b Table 2 expt II Glc/Phe; this figure is
+    the original (received 24 Aug 1999, web 4 Jan 2000; hofmann2000b received 18 Jan 2000).

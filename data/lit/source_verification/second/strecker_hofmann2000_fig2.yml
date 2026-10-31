@@ -1,0 +1,40 @@
+# Second reader, Hofmann, Muench & Schieberle 2000 (J. Agric. Food Chem. 48:434-440, doi 10.1021/jf990954c), Fig. 2 (PA / PAA
+# time course, glucose + L-Phe). Independent of the first reading (data/lit/fit_rows/strecker_hofmann2000_fig2.yml and
+# data/lit/source_verification/strecker_hofmann2000_fig2.yml NOT opened). Rows: data/lit/fit_rows/second/strecker_hofmann2000_fig2.yml.
+# The ledger id is the only trunk.yml entry naming Fig. 2 on 2026-10-31 (it bundles Fig. 3, keyed elsewhere).
+# ADJUDICATOR RELABEL (2026-10-31): ledger id hofmann2000_fig2_fig3_glucose_phe_dicarbonyls -> hofmann2000_fig2_pa_paa_glucose_phe
+# (this reader's own proposal, corrections item 3); nothing else changed.
+reader: agent-hofmann2000-fig2-2000b-reader2-2026-10-31
+role: independent second reader, Strecker sub-model (glucose + Phe PA / PAA time course)
+entries:
+- ledger_id: hofmann2000_fig2_pa_paa_glucose_phe
+  source_file: hofmann2000.pdf
+  location: p. 436, Fig. 2 (1-bit raster 995 x 661 px, 300 ppi; pdfimages page 3 object 50); text p. 436 right column
+  read_by: agent-hofmann2000-fig2-2000b-reader2-2026-10-31
+  second_reader: self
+  date: '2026-10-31'
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: corrected
+    duplicates: corrected
+    values: pass
+  quote: Fig. 2 caption "Time course of the formation of phenylacetaldehyde (open circle) and phenylacetic acid (filled circle) from glucose
+    and L-phenylalanine." y "amount [umol/mmol glucose]" 0-5, x "t (min)" 0-250 // 450-500. Text "the formation of PA was slightly favored
+    within the first 60 min ... After ~8 h, the amounts of the acid were nearly twice as high as the concentration of the aldehyde."
+  notes: 'Digitised (umol/mmol glucose; x 0.1 = mmol/L at 100 mmol/L glucose) at 10 / 30 / 60 / 120 / 240 / 500 min: PA 0.200 0.499 0.897
+    1.394 2.001 2.209; PAA 0.096 0.295 0.793 1.797 3.195 3.503. 12 rows. Ticks fitted at 110.5 px/unit (residuals <= 0.6 px), x 2.993 px/min
+    (<= 0.7 px); read error +-1.5 px (+-0.014 umol/mmol), +-2 px for the touching pairs at 10 and 60 min. Origin not keyed. Conditions are
+    NOT in the caption or text: declared from the methods glucose/Phe recipe (1 + 1 mmol / 10 mL, phosphate pH 7, 98 C), conditions_inferred:
+    true; the mmol/L conversion rests on it.'
+  corrections:
+  - 'Conditions: none printed for Fig. 2 (concentration, temperature, buffer, vessel, atmosphere inferred from the methods recipe written
+    for 30 min; methods buffer 0.5 mmol/L vs footnotes 0.5 mol/L; 98 C methods vs ''refluxed'' footnotes vs ''100 C'' abstract).'
+  - 'Quantification: the ledger entry''s quant_class ''calibrated'' describes the Fig. 3 dicarbonyls; Fig. 2 PA / PAA are SIDA ([13C2] isotopologues).'
+  - 'Ledger id: hofmann2000_fig2_fig3_glucose_phe_dicarbonyls bundles Fig. 2 with Fig. 3 (Fig. 3 now under hofmann2000_fig3_dicarbonyls_glucose_phe);
+    a Fig. 2-only id (e.g. hofmann2000_fig2_pa_paa_glucose_phe) would be cleaner.'
+  - 'Duplicates: 120-min point (1.395 / 1.797) = hofmann2000b Table 2 expt II Glc/Phe (1.4 / 1.8): duplicate candidate.'
+  contradictions:
+  - Table 2 (same paper, glucose + Phe, 30 min) PA 0.42 vs Fig. 2 30-min PA 0.499 (+19 %, 8.7 px, outside the read error); PAA 0.29 vs 0.295
+    agrees.
+  - Text "after ~8 h ... nearly twice" vs Fig. 2 PAA / PA = 1.59 at 500 min.

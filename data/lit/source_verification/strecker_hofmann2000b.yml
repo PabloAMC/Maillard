@@ -1,0 +1,104 @@
+# SOURCE VERIFICATION -- Strecker degradation via the Amadori compound, Hofmann & Schieberle 2000b (fit table
+# data/lit/fit_rows/strecker_hofmann2000b.yml). Format and the five checks: the header of data/lit/source_verification.yml.
+# FIRST READER: agent-hofmann2000-fig2-2000b-reader1-2026-10-31, against data/articles/hofmann2000b.pdf (pdftotext -layout;
+# Tables 2-3 checked cell by cell against a 150 dpi render of page 4302). The dossier hofmann2000b_extraction.md was a
+# map only. PAPER: J. Agric. Food Chem. 2000, 48 (9), 4301-4305, doi 10.1021/jf000076e (printed p. 4301; footer
+# 'JF000076E' p. 4305): the brief's citation verified.
+# SECOND READER: agent-hofmann2000-fig2-2000b-reader2-2026-10-31 (source_verification/second/strecker_hofmann2000b.yml,
+# fit_rows/second/strecker_hofmann2000b.yml), independent and in parallel; its ARP-Phe key relabelled AMA -> PHEARP by the
+# adjudicator (see that file). Reconciled by scripts/reconcile_source_readings.py --promote
+# (results/validation/source_reading_reconciliation_strecker_hofmann2000b.md: 2 agree, 0 disagree).
+# ADJUDICATED 2026-10-31 by agent-hofmann2000-fig2-2000b-adjudicator-2026-10-31 against hofmann2000b.pdf (text layer, p. 4302
+# Tables 2-3 and footnotes, Experimental p. 4301-4302). Rulings: the fit table's header.
+# second_reader "pending" = NOT verified (the loader and the gate refuse the rows until a second reader signs).
+# `notes` is an extra field: conditions as printed, contradictions, assumptions with their alternatives.
+
+entries:
+- ledger_id: hofmann2000b_table2_arp_phe_oxygen
+  source_file: hofmann2000b.pdf
+  read_by: agent-hofmann2000-fig2-2000b-reader1-2026-10-31
+  second_reader: agent-hofmann2000-fig2-2000b-reader2-2026-10-31
+  date: 2026-10-31
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: 'a The precursors (1 mmol each) were heated (100 C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0) for 120 min
+    in a closed vial under an atmosphere of argon. b Argon was replaced by air oxygen. c Heating was performed in an air
+    atmosphere and in the presence of copper (II) ions (0.05 mmol CuSO4).'
+  notes: 'Table 2 "Concentrations (umol/mmol) of PA and PAA Generated upon Thermal Treatment of Either ARP-Phe or
+    D-Glucose/Phenylalanine (Glc/Phe) under Various Conditions" (p. 4302): expt I (argon) ARP-Phe PA 0.6 / PAA 0.3,
+    Glc/Phe 0.4 / 0.2; expt II (air) 5.5 / 3.0, 1.4 / 1.8; expt III (air + Cu) 13.8 / 7.6, 2.6 / 3.9. Text layer and
+    render agree; dossier agrees. CONDITIONS as printed: 100 C, 120 min, closed vial (size, headspace not stated), 1 mmol
+    of each precursor in 10 mL phosphate 0.5 mol/L pH 7.0 (footnote a). CORRECTED / declared: (1) Experimental p. 4301
+    gives "0.1 mmol each ... (1 mL; 0.5 mmol/L, pH 7.0)": same 0.1 mol/L, 10x smaller scale, buffer mmol vs mol (as in
+    the companion paper, CF-020): 10 mL and 0.5 mol/L from the footnote. (2) Argon: "under an atmosphere of argon"
+    (footnote), "pure argon" (text); whether the solution was sparged is not stated (alternative: residual dissolved O2
+    if only the headspace was exchanged). (3) Air: footnote b "Argon was replaced by air oxygen" vs text "Flushing of
+    the models with oxygen": air taken (footnote; expt III "air atmosphere"), alternative pure O2. (4) Cu: CuSO4 0.05
+    mmol = 5 mmol/L, no engine term. (5) ARP-Phe "purity of about 90 %" (p. 4301), impurity unidentified: 100 mmol/L as
+    printed, alternative 90 mmol/L. (6) pH 7.0 set, never re-measured. UNITS: umol/mmol precursor x 0.1 = mmol/L.
+    QUANTIFICATION: SIDA, [13C2]phenylacetaldehyde and [13C2]phenylacetic acid, ether extract at pH 3.0, GC-MS/CI m/z
+    121/123, 137/139 (p. 4301-4302); ledger class sida, rows carry no method. DUPLICATES corrected: expt II Glc/Phe
+    (1.4 / 1.8) equals Hofmann 2000 Fig. 2 at 120 min (1.399 / 1.797 digitised, strecker_hofmann2000_fig2) to the
+    printed digit, under different printed conditions (98 C / reflux / atmosphere not controlled there): both rows
+    duplicate_candidate, not resolved. Text p. 4302 statements (argon yields low, aldehyde > acid; oxygen raises both;
+    PAA slightly favoured from Glc/Phe; Cu raises both; ARP-Phe higher in every experiment) all agree with the cells,
+    counted once. LEDGER: status in_model_fit (B29 used four within-pot PA ratios for atmosphere factors) -- unchanged;
+    those ratios rest on these cells (air / argon ARP 9.2, Glc 3.5; air+Cu / air ARP 2.5, Glc 1.9). 12 rows (PHEAL 6,
+    PHEAC 6); species key PHEARP coined for ARP-Phe (engine ARP is the xylose-alanine compound; alternative PARP).'
+  adjudication: >-
+    Both readings agree on the 6 pots and 12 values (Table 2, p. 4302; text layer re-read cell by cell). SPECIES (ruling
+    S): PHEARP for the fed ARP-Phe (second reader AMA, relabelled). BUFFER: 0.5 mol/L from footnote a; Experimental
+    '0.1 mmol in 1 mL; 0.5 mmol/L' (p. 4301) is the same concentration at a tenth of the scale with the companion's
+    mmol misprint (CF-020): 10 mL, 0.5 mol/L. TEMPERATURE: 100 C, closed vial, as printed (footnote a). ATMOSPHERE (ruling
+    A): expt I argon (method not stated); expt II AIR -- footnote b 'Argon was replaced by air oxygen' governs over the
+    text's 'Flushing of the models with oxygen' (p. 4302), read as flushing with air oxygen (the companion's term for
+    its air model B; expt III 'air atmosphere'); alternative pure O2 (~4.8x the O2). Cu(II) 5 mmol/L in expt III.
+    DUPLICATE (ruling D): expt II Glc/Phe 1.4 / 1.8 = hofmann2000 Fig. 2 at 120 min; that figure is the original
+    (earlier paper); this cell is a probable reprint and its printed 100 C / closed vial may not describe it.
+- ledger_id: hofmann2000b_table3_arp_phe_formation
+  source_file: hofmann2000b.pdf
+  read_by: agent-hofmann2000-fig2-2000b-reader1-2026-10-31
+  second_reader: agent-hofmann2000-fig2-2000b-reader2-2026-10-31
+  date: 2026-10-31
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: 'a A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) was refluxed in phosphate buffer (10 mL; 0.5
+    mol/L, pH 7.0). b The yield of ARP-Phe was calculated based on the amounts of L-phenylalanine reacted.'
+  notes: 'Table 3 "Formation of N-(1-Deoxy-D-fructosyl)-L-phenylalanine (ARP-Phe) from Glucose and L-Phenylalanine"
+    (p. 4302): 10 / 30 / 60 / 120 / 300 min; ARP-Phe 42 / 48 / 32 / 21 / 9 umol; phenylalanine unreacted 920 / 825 /
+    640 / 510 / 398 umol; yield of ARP-Phe 52.5 / 27.4 / 9.0 / 4.3 / 1.5 %. Text layer, render and dossier agree.
+    CONDITIONS as printed: glucose 1.0 + Phe 1.0 mmol, 10 mL phosphate 0.5 mol/L pH 7.0, refluxed. CORRECTED /
+    declared: temperature NOT printed for Table 3 -- 100 C declared (ledger; Table 2 of this paper), alternative 98-99
+    C (reflux at Garching ~99 C, strecker_hofmann2000 ruling 2; the companion prints 98 C for this recipe); atmosphere
+    NOT stated -- air assumed (reflux, no argon named); one sampled pot or one vessel per time not stated; buffer
+    mmol/mol misprint in Experimental (CF-020) as for Table 2. UNITS: umol in 10 mL x 0.1 = mmol/L; the yield column is
+    derived (ARP / (1000 - Phe unreacted)) and not keyed: it reproduces at 10 / 30 / 120 / 300 min, at 60 min 32 / 360
+    = 8.9 % vs printed 9.0 (last-digit rounding). QUANTIFICATION: amino-acid analyser (Biotronic 3000), post-column
+    ninhydrin, photometric at 570 or 440 nm (p. 4302); ledger class calibrated kept (an external-standard instrument);
+    the calibration and the ARP-Phe standard are not described -- if the ~90 % pure synthesised ARP-Phe was the
+    standard without correction, ARP-Phe reads up to 11 % high (flag only). Phe column: three of five values end in 0
+    (920, 640, 510): rounding to 10 umol cannot be excluded (read error then 10x; noted on the rows). DUPLICATES
+    corrected: CF-070 -- Phe consumed 8.0 / 17.5 / 36.0 / 49.0 / 60.2 % here vs Hofmann 2000 Table 3 (MGO + Phe pot) 9 /
+    18 / 36 / 49 / 61 %: within 1 point at all five shared times; PHE rows carry duplicate_candidate; recorded, not
+    resolved (here the Phe assay is printed, there it is not). Text p. 4303: "maximum concentration of 48 umol" after
+    30 min (agrees); "after 300 min, about 60 % of the L-phenylalanine was degraded" (60.2 %, agrees); "but only 1.5 %
+    of the ARP-Phe was left" -- CONTRADICTION: 1.5 % is the yield on Phe reacted, ARP-Phe left is 9 / 48 = 19 % of its
+    peak (0.9 % of glucose); table kept, text not a row. 10 rows (PHEARP 5, PHE 5); pot engine_species_missing [PHE,
+    PHEARP].'
+  adjudication: >-
+    Both readings agree on the pot and all 10 values (Table 3, p. 4302; text layer re-read: 42 / 48 / 32 / 21 / 9 umol ARP-Phe,
+    920 / 825 / 640 / 510 / 398 umol Phe unreacted). SPECIES (ruling S): ARP-Phe = PHEARP, a provisional non-engine key
+    (engine AMA is DFG, the glucose-glycine Amadori compound, C8 N1, src/kinetic_core/species.py; ARP-Phe is C15 N1 and
+    releases Phe, so AMA would break the atom ledger and the decay products). TEMPERATURE (ruling T): footnote a prints
+    'refluxed' only; 100 C declared by both readers (the paper's Table 2 value; the companion abstract calls the same
+    reflux 100 C), physical estimate ~99 C at Garching (strecker_hofmann2000 ruling 2), alternative 98-99 C. ATMOSPHERE:
+    not stated, air (open reflux). QUANTIFICATION: calibrated (amino-acid analyser, post-column ninhydrin, p. 4302; the
+    assay IS printed here, unlike hofmann2000). DUPLICATES: CF-070 stands (Phe-loss series = hofmann2000 Table 3).
