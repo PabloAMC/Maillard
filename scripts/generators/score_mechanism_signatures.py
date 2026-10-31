@@ -134,6 +134,7 @@ def _configure(arm: str, strecker_share: float) -> None:
     joint.STRECKER_SHARE = float(strecker_share)
     joint.DDP_LAW_STATIC = {"law": "none"} if "ddp_law_none" in joint.ARMS[arm] else {}
     joint.EA_STATIC = {"k_dpo_nf": joint.LAU_NF_EA_KJ_MOL} if "dpo_nf_lau" in joint.ARMS[arm] else {}
+    joint.TDP_EXIT_STATIC = joint.tdp_exit_static(joint.ARMS[arm])   # B7a R-T (the split and B7D's k are in theta)
     sulfur.PH_COUPLING = "inline"
 
 
@@ -269,6 +270,8 @@ def main(argv=None) -> int:
     _configure(arm, float(fit["strecker_share"]))
     if fit.get("ea_static") is not None:   # the barriers the fit held fixed (a profile point), from its record
         joint.EA_STATIC = dict(fit["ea_static"])
+    if fit.get("tdp_exit") is not None:    # B7a R-T's constants, from the fit's record (before B7a: from the arm)
+        joint.TDP_EXIT_STATIC = dict(fit["tdp_exit"])
     tables, measured, jobs = _measured()
     out, groups, cerny = score(theta, float(fit["strecker_share"]), tables, measured, jobs)
     stem = data_paths.VALIDATION_DIR / f"kinetic_core_mechanism_signatures_{args.fit}"

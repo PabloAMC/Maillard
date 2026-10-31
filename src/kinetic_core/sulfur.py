@@ -1404,12 +1404,20 @@ def sulfur_rate_constants_at(
         out["r_ttca_form"] = float(_ttca.k_l_per_mmol) * out["r_ttca_cys"]
         out["r_cama_form"] = _route.k_form(float(temperature_k))
         _decay = _route.k_decay(float(temperature_k), float(ph))
-        out["r_cama_dpo"] = _route.dpo_share * _decay
-        out["r_cama_tdp"] = (1.0 - _route.dpo_share) * _decay
+        _dpo_share = _route.dpo_share_at(float(ph))   # B7a R-S: the in-situ pH, as the decay; dpo_share at slope 0
+        out["r_cama_dpo"] = _dpo_share * _decay
+        out["r_cama_tdp"] = (1.0 - _dpo_share) * _decay
         out["r_pent_dpo"] = 0.0
         out["r_pent_tdp"] = 0.0
     else:
         out["r_cama_form"] = out["r_cama_dpo"] = out["r_cama_tdp"] = 0.0
+
+    # B7a R-T (2026-10-31): 3-deoxypentosone's own decay at a measured hexose 3-DG -> formic acid constant (the
+    # trunk's k_tdg_fa by default; a declared hexose -> pentose transfer), replacing the shared k_osone_decay for TDP
+    # only; untouched while the switch is off.
+    _tdp_exit = _ps.TDP_OWN_DECAY
+    if _tdp_exit.enabled:
+        out["r_osone_decay_tdp"] = _tdp_exit.k_at(float(temperature_k))
 
     # Round 3 (2026-10-30): the DDP-forming step's pH law, when a rival to the shipped "base" factor is set
     _law = _ps.DDP_FORMATION_PH

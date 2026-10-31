@@ -41,6 +41,7 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
 
 from src import data_paths, provenance  # noqa: E402
 from src.kinetic_core import engine, fit_rows, fitting, parallel, sulfur  # noqa: E402
+from src.kinetic_core.parameters_sulfur import PentoseMgoRoutes as _PentoseMgoRoutes  # noqa: E402
 
 import build_submodel_probe as probe  # noqa: E402
 import fit_deoxyosone_submodel as sm3  # noqa: E402
@@ -75,7 +76,17 @@ ARMS = {"none": frozenset(), "R2a": frozenset({"mgo_strecker"}), "R2b": frozense
         # R4f (thiol prereg sec. 16, after the R4a review): R3En + TTCA's direct breakdown to the 1-deoxypentosone as
         # a free log offset (its lower bound ~ off: TTCA then reaches the deoxyosones only via its Amadori
         # compound); the norfuraneol -> MFT barrier is PROFILED (--ea-nf-mft), not freed (review B1)
-        "R4f": frozenset({"actz", "entry", "ddp", "ddp_law_none", "ttca_deg"})}
+        "R4f": frozenset({"actz", "entry", "ddp", "ddp_law_none", "ttca_deg"}),
+        # B7a (kinetic_core_dpo_partition_prereg.md sec. 8 as revised after its design review, 2026-10-31): the
+        # deoxyosone partition's rivals on R3En's structure (the null N is R3En itself under --within-tau). The
+        # prereg's R-S / R-T / R-ST, named without a hyphen for the output stem: B7S the enolisation split's saturating
+        # base law (+2 coordinates, SPLIT_COORDINATES), B7T a TDP exit at the trunk's 3-DG -> formic acid constant (0
+        # coordinates: TDP_EXIT_STATIC; --tdp-exit-k / --tdp-exit-ea its sensitivities), B7ST both; B7D a long-lived
+        # DPO with a second MGO parent: the coded base-catalysed r_tdp_mgo freed (+1 coordinate, TDP_MGO_COORDINATE)
+        "B7S": frozenset({"actz", "entry", "ddp", "ddp_law_none", "split_ph"}),
+        "B7T": frozenset({"actz", "entry", "ddp", "ddp_law_none", "tdp_exit"}),
+        "B7ST": frozenset({"actz", "entry", "ddp", "ddp_law_none", "split_ph", "tdp_exit"}),
+        "B7D": frozenset({"actz", "entry", "ddp", "ddp_law_none", "tdp_mgo"})}
 NF_MFT_EA_COORDINATE = ("ea_k_nf_mft", "Ea", 40.0, 200.0, 100.0)
 LAU_NF_EA_KJ_MOL = 81.5
 #: round 3 (review B2): the DDP route's PRODUCT (log10 multiplier of k_dpo_ddp x both DDP -> MFT branches) is the
@@ -95,6 +106,18 @@ CERNY_MP3P_RATIO_MAX = 0.1
 DDP_LAW_STATIC: Dict[str, Any] = {}
 #: barriers set by the arm rather than fitted (R3TnL: norfuraneol formation at Lau 2003's), read by trial()
 EA_STATIC: Dict[str, float] = {}
+#: B7a R-T: TDP's own decay switched on by the arm, not fitted -- the full parameters_sulfur.TdpOwnDecay field dict
+#: (empty: off), set in main from the arm and --tdp-exit-k / --tdp-exit-ea, read by trial() in the main process,
+#: carried in every job ("tdp_exit"), recorded in the fit's report and read back by the scorers
+TDP_EXIT_STATIC: Dict[str, Any] = {}
+#: B7a R-S: the cysteine Amadori compound's 1-deoxyosone share at pH 7 (a share, CR-12's 0.30 at the start) and the
+#: saturating base law's midpoint pH_c (a pKa-like absolute pH, B8's "pka" step 0.1): (key, kind, lower, upper, start)
+SPLIT_COORDINATES = (("dpo_share7", "acid_yield", 0.02, 0.98, 0.30),
+                     ("split_ph_c", "pka", 5.0, 10.0, 7.5))
+#: B7a B7D: log10 of r_tdp_mgo's k at 100 C / pH 5 (1/min; sub-model 3 arm A3's fitted -5.08 at the start), its
+#: barrier held at PentoseMgoRoutes' default (recorded in the report as "tdp_mgo_ea_kj_mol")
+TDP_MGO_COORDINATE = ("log10_k_tdp_mgo", "log10_offset", -8.0, -1.0, -5.08)
+TDP_MGO_EA_KJ_MOL = _PentoseMgoRoutes().ea_tdp_mgo_kj_mol
 ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",), "ddp_mft": ("k_ddp_mft", "k_ddp_mft_hs"),
                   "k_ttca_deg": ("k_ttca_deg",)}
 ARM_LOWER, ARM_UPPER, ARM_START = ({"k_cys_actz": -6.0, "k_aa_frag": -6.0, "k_ttca_deg": -4.0},
@@ -163,6 +186,12 @@ def coordinates(mft_decay_cap: bool, arms=frozenset()):
     if "ddp_law_slope" in arms:
         key, kind, lo, hi, st = DDP_SLOPE_COORDINATE
         keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
+    if "split_ph" in arms:
+        for key, kind, lo, hi, st in SPLIT_COORDINATES:
+            keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
+    if "tdp_mgo" in arms:
+        key, kind, lo, hi, st = TDP_MGO_COORDINATE
+        keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
     if "mgo_strecker" in arms:
         keys.append("log10_k_mgo_cys_strecker"); kinds.append("log10_offset")
         lower.append(MGO_STRECKER_BOUNDS[0]); upper.append(MGO_STRECKER_BOUNDS[1]); start.append(MGO_STRECKER_START)
@@ -180,6 +209,9 @@ def trial(theta, keys) -> Dict[str, Any]:
         for key in DDP_COORDINATE[1]:
             k_ref[key] = base[key].k_ref * 10.0 ** (t[DDP_COORDINATE[0]] - t["offset_k_dpo_ddp"])
     routes = {"k_tdp_mgo_100c_ph5": 0.0, "ea_tdp_mgo_kj_mol": 100.0, "k_pent_mgo_100c_ph5": 0.0, "ea_pent_mgo_kj_mol": 100.0}
+    if TDP_MGO_COORDINATE[0] in t:   # B7D: the barrier stays at PentoseMgoRoutes' default
+        routes["k_tdp_mgo_100c_ph5"] = 10.0 ** t[TDP_MGO_COORDINATE[0]]
+        routes["ea_tdp_mgo_kj_mol"] = TDP_MGO_EA_KJ_MOL
     out = {"k_ref": k_ref, "routes": routes, "mgo_share": t["mgo_share_nf"]}
     if "log10_k_mgo_cys_strecker" in t:
         out["mgo_strecker_k"] = 10.0 ** t["log10_k_mgo_cys_strecker"]
@@ -199,10 +231,29 @@ def trial(theta, keys) -> Dict[str, Any]:
                         "entry_ph_slope": t["entry_ph_slope"], "k_dpo_aa_per_min_100c_ph6": 10.0 ** t["log10_k_dpo_aa"],
                         "aa_ph_slope": t["aa_ph_slope"], "amine_return": t["amine_return"]}
         out["trunk_solutes"] = True     # design review B2: glycine (0.1 M, amine pKa ~8 at 120 C) in the balance
+    if SPLIT_COORDINATES[0][0] in t:
+        out["cama_split"] = {"split_law": "base_saturating", "dpo_share": t[SPLIT_COORDINATES[0][0]],
+                             "split_ph_c": t[SPLIT_COORDINATES[1][0]]}
+    if TDP_EXIT_STATIC:
+        out["tdp_exit"] = dict(TDP_EXIT_STATIC)
     return out
 
 
 STRECKER_SHARE = 0.042
+
+
+def tdp_exit_static(arms, k_ref_per_min=None, ea_kj_mol=None) -> Dict[str, Any]:
+    """B7a R-T's static switch for an arm: the full TdpOwnDecay field dict (so the record names every constant used),
+    or {} for an arm without the exit; a sensitivity flag on an arm without it is refused."""
+    import dataclasses as _dc
+    from src.kinetic_core import parameters_sulfur as _ps
+
+    if "tdp_exit" not in arms:
+        if k_ref_per_min is not None or ea_kj_mol is not None:
+            raise SystemExit("--tdp-exit-k / --tdp-exit-ea need an arm with the TDP exit (B7T, B7ST)")
+        return {}
+    over = {k: float(v) for k, v in (("k_ref_per_min", k_ref_per_min), ("ea_kj_mol", ea_kj_mol)) if v is not None}
+    return _dc.asdict(_ps.TdpOwnDecay(enabled=True, **over))
 
 
 def run_task(job):
@@ -388,6 +439,14 @@ def install(job) -> None:
                                             k_l_per_mmol_min_100c_ph5=float(job.get("mgo_strecker_k", 0.0)))
     _ps.PENTOSE_AMINE_ENTRY = _ps.PentoseAmineEntry(**job.get("entry", {}))
     _ps.DDP_FORMATION_PH = _ps.DdpFormationPh(**job.get("ddp_law", {"law": "base"}))
+    # B7a: the split's pH law and TDP's own exit, the shipped defaults whenever the job does not carry them
+    _default = _ps.CysAmadoriRoute()
+    _split = job.get("cama_split", {})
+    _ps.CYS_AMADORI_ROUTE = _dc.replace(
+        _ps.CYS_AMADORI_ROUTE, split_law=str(_split.get("split_law", _default.split_law)),
+        dpo_share=float(_split.get("dpo_share", _default.dpo_share)),
+        split_ph_c=float(_split.get("split_ph_c", _default.split_ph_c)), dpo_share_ref_ph=_default.dpo_share_ref_ph)
+    _ps.TDP_OWN_DECAY = _ps.TdpOwnDecay(**job.get("tdp_exit", {}))
     _ph.TRUNK_SOLUTES_IN_BALANCE = bool(job.get("trunk_solutes", False))
 
 
@@ -458,6 +517,10 @@ def main(argv=None) -> int:
                         "sensitivity 0.4). Default: one scale per species, as before")
     parser.add_argument("--ea-nf-mft", type=float, metavar="KJ_MOL", help="fix the norfuraneol + H2S -> MFT barrier "
                         "(a profile point, thiol prereg sec. 16); its multiplier stays referenced at 145 C")
+    parser.add_argument("--tdp-exit-k", type=float, metavar="PER_MIN", help="B7a R-T sensitivity: TDP's own decay "
+                        "constant at its reference temperature (default: the trunk's k_tdg_fa; Martins 2005b's 1.0e-2)")
+    parser.add_argument("--tdp-exit-ea", type=float, metavar="KJ_MOL", help="B7a R-T sensitivity: its barrier "
+                        "(default: k_tdg_fa's; CR-16's alternatives 43.9, 84)")
     parser.add_argument("--tag", default="", help="suffix for the output stem (e.g. conv), so a re-fit never "
                         "overwrites the record it continues")
     parser.add_argument("--check-fixed-point", action="store_true",
@@ -471,8 +534,9 @@ def main(argv=None) -> int:
                                        + ("" if args.arm == "none" else f"_{args.arm.lower()}")
                                        + (f"_{args.tag}" if args.tag else ""))
     arms = ARMS[args.arm]
-    global DDP_LAW_STATIC, EA_STATIC
+    global DDP_LAW_STATIC, EA_STATIC, TDP_EXIT_STATIC
     DDP_LAW_STATIC = {"law": "none"} if "ddp_law_none" in arms else {}
+    TDP_EXIT_STATIC = tdp_exit_static(arms, args.tdp_exit_k, args.tdp_exit_ea)
     EA_STATIC = {"k_dpo_nf": LAU_NF_EA_KJ_MOL} if "dpo_nf_lau" in arms else {}
     if args.ea_nf_mft is not None:
         EA_STATIC["k_nf_mft"] = float(args.ea_nf_mft)
@@ -560,7 +624,8 @@ def main(argv=None) -> int:
         "engine_state": "B60 + B58/B59b/B59a/B61 on; sub-model 1 switches off; inline coupling"
                         + ("" if args.arm == "none" else f"; round-2 arm {args.arm}"),
         "arm": args.arm, "start_from": args.start_from, "noise_from": args.noise_from, "ftol": args.ftol,
-        "ea_static": dict(EA_STATIC), "within_tau": args.within_tau,
+        "ea_static": dict(EA_STATIC), "tdp_exit": dict(TDP_EXIT_STATIC), "within_tau": args.within_tau,
+        "tdp_mgo_ea_kj_mol": TDP_MGO_EA_KJ_MOL if "tdp_mgo" in arms else None,
         "rows": len(data), "pots": len({key_of(r) for r in data}), "start": dict(zip(keys, map(float, start))),
         "fit": best.as_dict(keys), "laplace": lap, "series_extra_noise": dict(final_model.extra_noise),
         "failed_pot_runs": len(FAILURES), "failures_sample": FAILURES[:10],

@@ -10,7 +10,10 @@ fitted scale cannot absorb. Declared before any B7a arm was read:
         (5.5 - 6, 6 - 7, 7 - 8), each within +-0.15 dex per pH unit;
   (iii) cysteine's double ratio, Zhai 2019: (TDP / DPO) with cysteine over without -- REPORTED, not decisive (CF-071);
   (vi)  TDP's decline after its measured peak, Zhai 2023 JAFC (TTCA, 120 / 140 C): the apparent first-order rate,
-        log10(predicted / measured) within +-0.3.
+        log10(predicted / measured) within +-0.3. Decisive on those two pots; the same rate on every other pot with a
+        measured TDP series (JAFC 100 C, the + Cys pots, Zhai 2023 FC 140 C) and DPO's own post-peak rate beside it
+        are REPORTED, not decisive (added after B7a's design review, 2026-10-31, before any arm was read).
+Also reported: the engine's in-situ pH at 60 min in each Zhai 2021 pot (the pH the split law reads).
 Each is computed from the two-reader table (measured) and the engine at a fit's optimum (predicted), the fit's arm
 and fixed barriers read from its record.
 
@@ -51,6 +54,10 @@ PH_LADDERS = {"TTCA": ("zhai2021_ttca_ph55_100c_dx", "zhai2021_ttca_ph60_100c_dx
 PH_OF = {"ph55": 5.5, "ph60": 6.0, "ph70": 7.0, "ph80": 8.0}
 DOUBLE_RATIO = ("zhai2019_ttca_cys_120c", "zhai2019_ttca_120c")
 DECLINE_POTS = ("zhai2023jafc_ttca_120C_dx", "zhai2023jafc_ttca_140C_dx")
+#: reported beside the decisive pair (design review, 2026-10-31): not counted in the (vi) verdict
+REPORTED_DECLINE_POTS = ("zhai2023jafc_ttca_100C_dx", "zhai2023jafc_ttca_cys_100C_dx", "zhai2023jafc_ttca_cys_120C_dx",
+                         "zhai2023jafc_ttca_cys_140C_dx", "zhai2023fc_dx_ttca_xyl_140c")
+PH_REPORT_MIN = 60.0
 TOL_TIME, TOL_PH, TOL_DECLINE = 0.3, 0.15, 0.3
 
 
@@ -69,10 +76,14 @@ def main(argv=None) -> int:
     sc._configure(arm, float(fit["strecker_share"]))
     if fit.get("ea_static") is not None:
         joint.EA_STATIC = dict(fit["ea_static"])
+    if fit.get("tdp_exit") is not None:    # B7a R-T's constants, from the fit's record (before B7a: from the arm)
+        joint.TDP_EXIT_STATIC = dict(fit["tdp_exit"])
     keys = tuple(theta)
     trial = joint.trial([theta[k] for k in keys], keys)
     pots, rows = fit_rows.load(TABLE)
-    wanted = set(TIME_SLOPE_POTS) | {p for ps in PH_LADDERS.values() for p in ps} | set(DOUBLE_RATIO) | set(DECLINE_POTS)
+    wanted = (set(TIME_SLOPE_POTS) | {p for ps in PH_LADDERS.values() for p in ps} | set(DOUBLE_RATIO) | set(DECLINE_POTS)
+              | set(REPORTED_DECLINE_POTS))
+    ph_at_60: Dict[str, float] = {}
     plans = {j["pot"]: j for j in probe.plan(pots, rows) if j["pot"] in wanted}
     meas: Dict[Tuple[str, str, float], float] = {}
     pred: Dict[Tuple[str, str, float], float] = {}
@@ -81,6 +92,8 @@ def main(argv=None) -> int:
         res = joint.run_task(j)
         if "failed" in res:
             raise SystemExit(f"{pot}: {res['failed']}")
+        if pot.startswith("zhai2021") and res.get("ph_in_situ"):
+            ph_at_60[pot] = float(np.interp(PH_REPORT_MIN, j["times"], res["ph_in_situ"]))
         for r in rows:
             if r.pot == pot and r.species in ("TDP", "DPO"):
                 meas[(pot, r.species, r.t_min)] = r.value
@@ -115,22 +128,31 @@ def main(argv=None) -> int:
     dm = float(np.nanmean(ratio(meas, with_cys)[1]) - np.nanmean(ratio(meas, without)[1]))
     dp = float(np.nanmean(ratio(pred, with_cys)[1]) - np.nanmean(ratio(pred, without)[1]))
     out["double_ratio"] = {"measured": 10 ** dm, "predicted": 10 ** dp, "decisive": False}
-    for pot in DECLINE_POTS:
-        tdp = sorted((t, v) for (p, s, t), v in meas.items() if p == pot and s == "TDP")
-        peak = max(range(len(tdp)), key=lambda i: tdp[i][1])
-        after = tdp[peak:]
+    def decline(pot, species):
+        """The apparent first-order rate after the species' MEASURED peak, measured and predicted at the same times."""
+        series = sorted((t, v) for (p, sp, t), v in meas.items() if p == pot and sp == species)
+        if not series:
+            return {"note": f"no measured {species}"}
+        peak = max(range(len(series)), key=lambda i: series[i][1])
+        after = series[peak:]
         if len(after) < 2:
-            out["tdp_decline"].append({"pot": pot, "note": "no measured decline after the peak"})
-            continue
+            return {"note": "no measured decline after the peak"}
         km = -_slope([t for t, _ in after], [math.log(v) for _, v in after])
-        kp = -_slope([t for t, _ in after], [math.log(max(pred[(pot, "TDP", t)], 1e-300)) for t, _ in after])
-        ok = km > 0 and kp > 0 and abs(math.log10(kp / km)) <= TOL_DECLINE
-        out["tdp_decline"].append({"pot": pot, "peak_min": after[0][0], "measured_per_min": km,
-                                   "predicted_per_min": kp, "pass": bool(ok)})
+        kp = -_slope([t for t, _ in after], [math.log(max(pred[(pot, species, t)], 1e-300)) for t, _ in after])
+        return {"peak_min": after[0][0], "measured_per_min": km, "predicted_per_min": kp,
+                "within_tolerance": bool(km > 0 and kp > 0 and abs(math.log10(kp / km)) <= TOL_DECLINE)}
+
+    for pot in DECLINE_POTS + REPORTED_DECLINE_POTS:
+        tdp = decline(pot, "TDP")
+        entry = {"pot": pot, "decisive": pot in DECLINE_POTS, **tdp, "dpo": decline(pot, "DPO")}
+        if "within_tolerance" in tdp:
+            entry["pass"] = tdp["within_tolerance"]
+        out["tdp_decline"].append(entry)
+    out["ph_in_situ_at_60_min"] = ph_at_60
 
     passed = {"time_slope": sum(s["pass"] for s in out["time_slope"]),
               "ph_segments": sum(s["pass"] for s in out["ph_segments"]),
-              "tdp_decline": sum(s.get("pass", False) for s in out["tdp_decline"])}
+              "tdp_decline": sum(s.get("pass", False) for s in out["tdp_decline"] if s["decisive"])}
     stem = data_paths.VALIDATION_DIR / f"kinetic_core_deoxyosone_signatures_{args.fit}"
     payload = {"artifact": stem.name,
                "provenance": provenance.provenance_block(
@@ -144,7 +166,7 @@ def main(argv=None) -> int:
              "`results/validation/kinetic_core_dpo_partition_prereg.md` secs. 3 and 7 before any B7a arm was read.*", "",
              f"**Time slope {passed['time_slope']} / {len(out['time_slope'])} pots; pH segments "
              f"{passed['ph_segments']} / {len(out['ph_segments'])}; TDP decline {passed['tdp_decline']} / "
-             f"{len(out['tdp_decline'])}.**" + ("" if payload["fit_converged"] else
+             f"{len(DECLINE_POTS)}.**" + ("" if payload["fit_converged"] else
                                                  " The fit stopped on its budget: no verdict (rule a)."), "",
              f"## (i) d log10(TDP / DPO) / d log10(t), tolerance {TOL_TIME}", "", "| pot | measured | predicted | pass |",
              "|---|---|---|---|"]
@@ -157,11 +179,26 @@ def main(argv=None) -> int:
     dr = out["double_ratio"]
     lines += ["", "## (iii) cysteine's double ratio (Zhai 2019; reported, not decisive -- CF-071)", "",
               f"measured {dr['measured']:.2f}, predicted {dr['predicted']:.2f}", "",
-              f"## (vi) TDP's apparent first-order decline after its measured peak (Zhai 2023 JAFC), tolerance "
-              f"{TOL_DECLINE} dex", "", "| pot | from (min) | measured /min | predicted /min | pass |", "|---|---|---|---|---|"]
-    lines += [f"| {s['pot']} | {s.get('peak_min', '-')} | {s.get('measured_per_min', float('nan')):.3g} | "
-              f"{s.get('predicted_per_min', float('nan')):.3g} | {'yes' if s.get('pass') else 'NO'} |"
-              for s in out["tdp_decline"]]
+              f"## (vi) TDP's apparent first-order decline after its measured peak, tolerance {TOL_DECLINE} dex "
+              "(decisive: Zhai 2023 JAFC TTCA 120 / 140 C; the rest reported), with DPO's own beside it", "",
+              "| pot | role | TDP from (min) | TDP measured /min | TDP predicted /min | pass | DPO from (min) | "
+              "DPO measured /min | DPO predicted /min | DPO within |", "|---|---|---|---|---|---|---|---|---|---|"]
+
+    def _cells(d):
+        if "note" in d:
+            return [d["note"], "-", "-", "-"]
+        return [f"{d['peak_min']:g}", f"{d['measured_per_min']:.3g}", f"{d['predicted_per_min']:.3g}",
+                "yes" if d["within_tolerance"] else "no"]
+
+    for s in out["tdp_decline"]:
+        tdp = _cells(s)
+        if s["decisive"]:
+            tdp[3] = "yes" if s.get("pass") else "NO"
+        lines.append("| " + " | ".join([s["pot"], "decisive" if s["decisive"] else "reported", *tdp,
+                                         *_cells(s["dpo"])]) + " |")
+    lines += ["", f"## The engine's in-situ pH at {PH_REPORT_MIN:g} min (Zhai 2021, 100 C; the pH the split reads)", "",
+              "| pot | in-situ pH |", "|---|---|"]
+    lines += [f"| {k} | {v:.2f} |" for k, v in sorted(ph_at_60.items())]
     stem.with_suffix(".md").write_text("\n".join(lines) + "\n")
     print(f"wrote {data_paths.rel(stem.with_suffix('.md'))}: {passed}")
     return 0
