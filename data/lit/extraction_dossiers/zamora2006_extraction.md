@@ -1,4 +1,5 @@
 # Zamora, Navarro, Gallardo & Hidalgo 2006 — EXTRACTION
+DOI: 10.1021/jf061239n (checked against Crossref, 2026-11-01)
 ### *"Chemical Conversion of α-Amino Acids into α-Keto Acids by 4,5-Epoxy-2-decenal"*
 ### 4,5-Epoxy-2-decenal (ED, 0-31 µmol) + phenylalanine (25 µmol) in 500 µL acetonitrile / 50 mM buffer (2:1), 37 or 60 °C, up to 24 h: phenylpyruvic acid (PPA, the α-keto acid, by PFBHA / BSTFA GC-MS) and phenylacetaldehyde (PA, direct GC-MS). PPA > PA at 37 °C (~2.5x at pH 2-4); pH optimum 3 for both; both linear in ED; time courses at 37 and 60 °C; PPA degrades at 60 °C, and fed PPA + Phe gives benzaldehyde and PA. **All numbers figure-only; Seville; yields ~0.5-1.7 % of Phe.**
 

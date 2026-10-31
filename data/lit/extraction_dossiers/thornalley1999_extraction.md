@@ -1,4 +1,5 @@
 # Thornalley, Langborg & Minhas 1999 — EXTRACTION
+DOI: 10.1042/bj3440109 (checked against Crossref, 2026-11-01)
 ### *"Formation of glyoxal, methylglyoxal and 3-deoxyglucosone in the glycation of proteins by glucose"*
 ### Glucose 50 mM alone, + Nα-t-BOC-lysine 50 mM, + human serum albumin 50 mg/mL, and fructosyl-lysine 0.5 mM, in sodium phosphate pH 7.4, **37 °C, 21 days**: glyoxal (GO), methylglyoxal (MGO), 3-deoxyglucosone (3-DG) by DDB derivatisation + HPLC. Phosphate **10-100 mM** series (initial rates) and **± 100 µM DETAPAC (= DTPA)** at 100 mM phosphate. Fed 3-DG ± BOC-Lys (2 d). **No argon arm, no other buffer, no 1-DG, no glucosone measured, one pH, one temperature.**
 

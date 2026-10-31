@@ -1,4 +1,5 @@
 # Voigt, Smuda, Pfahler & Glomb 2010 — EXTRACTION
+DOI: 10.1021/jf100140h (checked against Crossref, 2026-11-01)
 ### *"Oxygen-Dependent Fragmentation Reactions during the Degradation of 1-Deoxy-D-erythro-hexo-2,3-diulose"*
 ### Synthetic 1-deoxyglucosone (1-DG) + L-alanine, 42 mM each, 0.1 M phosphate pH 7.4, **37 and 50 °C**, 0-48 h, aerated vs deaerated: lactic acid (Fig. 1), γ-pyranone (Fig. 2), acetaldehyde (Fig. 3), glyceric acid (text only). [13C]glucose isotopomers + alanine (50 °C, 7 d, air): lactic acid carbon origin (Table 1) and glyceric acid origin. Fed γ-pyranone gives the same acids, also O2-dependent. **No acetic acid, no 100-140 °C, and the deaerated arm carries 1 mM DTPA that the aerated arm lacks** (protocol of ref 8).
 

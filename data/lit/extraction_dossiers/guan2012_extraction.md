@@ -1,4 +1,5 @@
 # Guan, Wang, Yu, Yu & Zhao 2012 — EXTRACTION
+DOI: 10.3168/jds.2011-4860 (checked against Crossref, 2026-11-01)
 ### *"Changes in the initial stages of a glucose-proline Maillard reaction model system influences dairy product quality during thermal processing"*
 ### Two experiments, both at **110 and 130 °C, 0-60 min, initial pH 5.8 (25 °C)**: (1) glucose + L-proline (very concentrated, ~2.5 M glucose) in water or phosphate / acetate / citrate at 0.1 / 0.2 / 0.3 M — glucose loss (Fig. 1); (2) the purified proline Amadori compound DFP heated in water or 0.1 M phosphate / acetate / citrate — DFP, glucose, mannose, HMF, formic acid (Fig. 5). **Phosphate speeds DFP loss ×~4 (110 °C) and ×~2.5 (130 °C) against acetate, citrate and water.** No O2 control, no metals or chelators, no labels, no rate constants, pH not measured after heating; axis units in Fig. 5 are not credible as absolute concentrations.
 

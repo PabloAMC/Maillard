@@ -1,4 +1,5 @@
 # Hidalgo, Gallardo & Zamora 2005 — EXTRACTION
+DOI: 10.1021/jf052240+ (checked against Crossref, 2026-11-01)
 ### *"Strecker Type Degradation of Phenylalanine by 4-Hydroxy-2-nonenal in Model Systems"*
 ### 4-Hydroxy-2-nonenal (HNE) + phenylalanine, 50 µmol + 50 µmol in 1 mL acetonitrile-water (2:1, 1:1, 1:2), unbuffered (pH ~5), closed 4-mL vials, 37 / 60 / 80 °C, 21 h: phenylacetaldehyde **~17 % of Phe** (166-188 µmol/mmol), the same as 4,5-epoxy-2-decenal (160-248). HNE dose-response 0-50 µmol (Fig. 5). Products by GC-MS: N-substituted 2-pentylpyrrole, 2-pentylfuran, nona-1,3-dien-1-amine, 2-pentyl-1H-pyrrole. GC-FID with internal standard, n >= 3, SD printed. **Seville only; endpoint only (no time course); not water.**
 

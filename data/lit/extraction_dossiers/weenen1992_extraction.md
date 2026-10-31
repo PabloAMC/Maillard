@@ -1,4 +1,5 @@
 # Weenen & Tjan 1992 — EXTRACTION
+DOI: 10.1021/bk-1992-0490.ch017 (checked against Crossref, 2026-11-01)
 ### *"Analysis, Structure, and Reactivity of 3-Deoxyglucosone"* (ACS Symp. Ser. 490, *Flavor Precursors*, ch. 17, pp. 217-231)
 ### 3-DG purified on an α-cyclodextrin HPLC column; in water it is ~5 major + >= 6 minor isomers with NO detectable C=O (13C-NMR): almost entirely (hemi)acetal / hydrate. Stable in water (70 °C, 2 h: no change); 2 N AcOH 100 °C 1 h -> 40-50 % HMF; base -> metasaccharinic acid. Methylpyrazines from fructose / glucose / 3-DG + asparagine in 1,2-propanediol + K2HPO4, 130 °C, 1 h; [1-13C]glucose labelling of the pyrazine methyls (~26 %) and ring CH (~20 %). **No Strecker aldehyde is measured, and there is NO cysteamine trapping in this chapter.**
 

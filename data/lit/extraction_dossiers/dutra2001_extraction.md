@@ -1,4 +1,5 @@
 # Dutra, Knudsen, Curi & Bechara 2001 — EXTRACTION
+DOI: 10.1021/tx015526r (checked against Crossref, 2026-11-01)
 ### *"Aerobic Oxidation of Aminoacetone, a Threonine Catabolite: Iron Catalysis and Coupled Iron Release from Ferritin"*
 ### Aminoacetone (AA, the α-aminoketone that the engine's B18 Strecker step makes from methylglyoxal + glycine) autoxidises in Chelex-treated 0.1 M phosphate pH 7.4, **37 °C**, to **methylglyoxal + NH4⁺ in 1 : 1 stoichiometry with the O2 consumed**. Oxygraph rates: apparent k2 = 0.160 M⁻¹ s⁻¹; Fe(II)EDTA ×3, Cu(II) aquo ×20; SOD −90 %; phosphate 50 -> 100 mM ×2.2; pH 5.8 -> 8.6 ×~80. EPR spin trapping. **37 °C only; no product formation under N2 / argon (the N2 arm is only for ferritin iron release); no other buffer.**
 

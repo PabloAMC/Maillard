@@ -1,4 +1,5 @@
 # Pripis-Nicolau, de Revel, Bertrand & Maujean 2000 — EXTRACTION
+DOI: 10.1021/jf991024w (checked against Crossref, 2026-11-01)
 ### *"Formation of Flavor Components by the Reaction of Amino Acid and Carbonyl Compounds in Mild Conditions"*
 ### Wine conditions: 14 amino acids x 6 carbonyls (glyoxal, methylglyoxal, diacetyl, pentane-2,3-dione, acetoin, acetol), 20 mmol/L each, 12 % hydro-alcoholic, pH 3.5 (H3PO4 / NaOH), 25 °C in the dark, 4 weeks. **Strecker aldehydes are IDENTIFIED, never quantified.** The only numbers are cysteine loss (pH 3.5 vs 8, three carbonyls, 25 °C) and 2-acetyl-2-thiazoline / 2-acetylthiazole from cysteine + MGO (2 mM, 10 / 25 °C). **Not a second laboratory for donor-generic Strecker magnitudes.**
 

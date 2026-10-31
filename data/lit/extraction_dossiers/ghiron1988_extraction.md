@@ -1,4 +1,5 @@
 # Ghiron, Quack, Mawhinney & Feather 1988 — EXTRACTION
+DOI: 10.1021/jf00082a002 (checked against Crossref, 2026-11-01)
 ### *"Studies on the Role of 3-Deoxy-D-erythro-glucosulose (3-Deoxyglucosone) in Nonenzymatic Browning. Evidence for Involvement in a Strecker Degradation"*
 ### Synthesised 3-DG (Madson & Feather) with L-alanine / L-phenylalanine at 100 °C: browning rate (A450, pH 3.5 phthalate, 0.1 M), disappearance of 3-DG and alanine (0.4 M each, unbuffered water, 0-7 h, GLC), 13C-NMR of 3-DG + [1-13C] / [2-13C]alanine (no adduct seen), and phenylacetaldehyde IDENTIFIED (not quantified) from 3-DG + Phe. **Second laboratory (Missouri, Feather) for the EXISTENCE of 3-DG as a Strecker donor; no yield. Its Fig. 2 is the only on-disk fed-3-DG + amino acid pot with the DONOR followed over time.**
 
