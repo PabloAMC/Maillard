@@ -409,3 +409,7 @@ the full verification.
 ## 2026-11-01 — Dossier agents skip the DOI line; check it after every ingestion batch
 - **Pattern:** 9 of 36 new dossiers had no DOI line, although the brief asked for one; the paper registry's "dossiers without a printed DOI" count (30 -> 41) was the only signal.
 - **Rule:** after an ingestion batch, compare that count before and after, and grep each new dossier for a `DOI:` line in its header (before the first `##` / `###`); add missing ones only after a Crossref check.
+
+## 2026-11-01 — `git add -A` swept an agent's half-written files into a commit
+- **Pattern:** a docs-only commit (the queue made private) used `git add -A` while a leave-one-lab-out agent was writing in the same worktree; its unfinished prereg, generator and test were committed and pushed, and the next full suite failed on the undescribed prereg.
+- **Rule:** while any agent may write in a worktree, stage by explicit path (`git add <files>`), never `-A` / `.`; check `git status --short` against the intended file list before committing.
