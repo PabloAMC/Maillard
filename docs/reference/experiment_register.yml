@@ -218,11 +218,11 @@ entries:
     hypothesis: "The data choose the step's pH law."
     design: "results/validation/kinetic_core_thiol_submodel_prereg.md sec. 10"
     expected: "Decided by mechanism signatures and the Cerny tests."
-    artifacts: []
-    commit: pending
-    verdict: pending
-    conclusion: "-"
-    follow_up: "-"
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3es.md, results/validation/kinetic_core_mechanism_signatures_s042_r3es.md]
+    commit: 5096e72
+    verdict: inconclusive
+    conclusion: "Cost 5400 -> 859, budget exhausted (157 evaluations, 11 iterations): not readable (premortem rule a). At the stopping point the free slope is ~flat (ddp_ph_slope -0.13), the route product +2.9, k_nf_mft x21 again (+1.32), so Cerny pot D 0.996 (FAIL); 2 of 11 groups, 5 of 17 signatures (v2) -- the same picture as R3En."
+    follow_up: "Converged under E's fixed noise in EX-024 (s042_r3es_fixed)."
   - id: EX-018
     date: "2026-10-31"
     kind: diagnosis
@@ -271,3 +271,75 @@ entries:
     verdict: supported
     conclusion: "No Strecker aldehyde is shipped; B18's constant is a pyrazine-yield constant ~2.3 dex below the Strecker rate Hofmann 2000's fed MGO + Phe pot implies; 3-DG and glucosone are near-MGO donors at pH 7 and absent from the lane; Hofmann 2000 is the anchor (SIDA, fed donors, argon / air, pH series)."
     follow_up: "Digitise Hofmann 2000 Fig. 3 (the donor in the same pot); design C9-A; a targeted search for the Strecker step's own barrier (G1)."
+  - id: EX-022
+    date: "2026-10-31"
+    kind: review
+    question: "Premortem of the plan: if it has failed by mid-November, why?"
+    hypothesis: "-"
+    design: "An independent read-only agent, given the plan, the fits and the signature reports (STATUS_AND_PLAN sec. 5)."
+    expected: "-"
+    artifacts: [docs/guides/STATUS_AND_PLAN.md]
+    commit: 5096e72
+    verdict: supported
+    conclusion: "Nine failure modes; the decisive one verified: every joint-fit arm stopped on its budget (200 evaluations = 11 optimiser iterations for 15 - 16 coordinates), and R3E (which nests E) has a higher cost than E, so no arm is at an optimum. Also: the fit compensates as it grows (R3En restores the acetic sink and the shipped MFT decay); signatures correlated, partly in-sample, without a chance baseline; section B without a defined end."
+    follow_up: "Rules (a) - (f) in STATUS_AND_PLAN sec. 5; step B0 convergence (EX-024); signatures v1 by group with a chance baseline (EX-025)."
+  - id: EX-023
+    date: "2026-10-31"
+    kind: review
+    question: "Design review of arm R3T (a free barrier for norfuraneol + H2S -> MFT): can it reconcile Cerny 2003 with the fit?"
+    hypothesis: "Cerny 95 C and the 145 C fed-norfuraneol rows conflict only through temperature (thiol prereg sec. 12)."
+    design: "Independent review with a no-refit grid at R3En's optimum (ea_k_nf_mft x offset_ddp_route); thiol prereg sec. 13."
+    expected: "P(Cerny pot D passes) 0.2 (sec. 12)."
+    artifacts: [results/validation/kinetic_core_thiol_submodel_prereg.md]
+    commit: 5096e72
+    verdict: rejected
+    conclusion: "Pot D passes only with the barrier beyond the measured sulfur class (> 133 kJ/mol) and a DDP route that over-makes Schieberle 2000's early MFT by ~1 dex. The binding conflict is Cerny 95 C vs Schieberle 100 C -- the same chemistry 5 K apart -- which no Arrhenius term separates: the DDP route removes Schieberle's MFT lag, the norfuraneol route supplies it. R3T is not run."
+    follow_up: "The mechanistic question 'what makes MFT late at 100 C while fed norfuraneol stays minor' (literature pass; rivals to be pre-registered)."
+  - id: EX-024
+    date: "2026-10-31"
+    kind: fit
+    question: "Step B0: do the round-3 verdicts survive converged fits under one objective?"
+    hypothesis: "Unconverged optima (11 iterations) may have produced 'the route switched off' (EX-015) and 'the data accept DDP' (EX-016)."
+    design: "E warm-started from its optimum (budget 1200, two noise rounds, ftol 1e-4) -> s042_e_conv; E again under that fixed series noise -> s042_e_fixed; R3En, R3Es, R3E each from its own optimum under s042_e_conv's fixed noise (budget 1200) -> s042_<arm>_fixed. Costs then share one measurement model; a nested arm can only match or beat E."
+    expected: "At least one rival's verdict changes (P 0.4); R3E's cost <= E's under the fixed noise (P 0.9 if converged)."
+    artifacts: []
+    commit: 5096e72
+    verdict: pending
+    conclusion: "-"
+    follow_up: "-"
+  - id: EX-025
+    date: "2026-10-31"
+    kind: diagnosis
+    question: "How often does each mechanism signature (and group) pass by chance, with the constants drawn without the data?"
+    hypothesis: "Sign-only and loose-tolerance signatures pass often by chance, so a pass count without a baseline overstates the evidence (premortem #4)."
+    design: "score_mechanism_signatures.py --chance 200 --arm R3En (seed 20261031): every coordinate uniform within the arm's declared box; signature list v1 (bfa7676f309c)."
+    expected: "Some signature passes in > 30 % of draws (P 0.7); the median draw passes <= 2 of 10 groups (P 0.6)."
+    artifacts: []
+    commit: pending
+    verdict: pending
+    conclusion: "-"
+    follow_up: "-"
+  - id: EX-026
+    date: "2026-10-31"
+    kind: literature
+    question: "Key Hofmann, Muench & Schieberle 2000 (Strecker aldehydes from dicarbonyls + amino acids) as the Strecker lane's anchor (plan step C9)."
+    hypothesis: "-"
+    design: "Two independent readers + an adjudicator against the PDF (scripts/reconcile_source_readings.py)."
+    expected: "-"
+    artifacts: [results/validation/source_reading_reconciliation_strecker_hofmann2000.md]
+    commit: pending
+    verdict: supported
+    conclusion: "111 rows (Tables 2 - 4, Fig. 3, Figs. 4 - 5), status ready, loadable as literature only (the engine has no Phe / Strecker-aldehyde species yet). Rulings: buffer per table footnote (Experimental's 0.5 mmol/L a misprint); 98 C kept (reflux at Garching ~99 C); near-axis markers restored with their read errors; Figs. 4 - 5 conditions declared (60 min, air -- supported by Table 4's air run). New conflict CF-070: the phenylalanine-loss column duplicates hofmann2000b Table 3 (a different pot). DOI 10.1021/jf990954c."
+    follow_up: "Engine species for Phe, phenylacetaldehyde / acid, Ala, Leu, 3-methylbutanal / acid when the Strecker lane is built on the composable network (A2, C9)."
+  - id: EX-027
+    date: "2026-10-31"
+    kind: diagnosis
+    question: "Is Schieberle 2000's early MFT excess (at the point where Cerny pot D passes) an artefact of the start conditions (isothermal start, all cysteine free)?"
+    hypothesis: "A come-up ramp plus TTCA pre-equilibrated at t = 0 lowers the 30 / 60 min excess to <= +0.5 dex (lag literature pass, mechanisms 1 and 3)."
+    design: "scripts/generators/diagnose_mft_start_conditions.py: four start conditions x two points (R3En's optimum; Ea 160 + DDP +3), no fit; thiol prereg sec. 14."
+    expected: "Excess <= +0.5 dex at 30 and 60 min (P 0.5)."
+    artifacts: [results/validation/kinetic_core_thiol_submodel_prereg.md, scripts/generators/diagnose_mft_start_conditions.py]
+    commit: pending
+    verdict: rejected
+    conclusion: "Ramp + TTCA lower the 30 min excess from +1.30 to +0.76 dex but leave 60 min at +1.10 (from +1.17). Start conditions are worth ~0.5 dex at 30 min, not the fix: the early DDP (intact-C5) supply is ~10x too fast in the first hour -- the route's pool is full at once where the data want it fed at a reservoir's drain rate. Both points also make MFT fall after 6 h (measured: a stop)."
+    follow_up: "Rivals R4a (DDP fed only by the cysteine Amadori compound's first-order decomposition, TTCA reservoir and come-up in place) and R4b (+ H2S-supply limit), to be pre-registered and reviewed (thiol prereg sec. 14)."

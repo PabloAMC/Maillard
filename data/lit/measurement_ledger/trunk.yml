@@ -3649,8 +3649,8 @@ entries:
     quant_class: sida
     simulable: true
     condition_quote: "A solution of glucose (1.0 mmol) and the respective amino acid (1.0 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), was refluxed for 30 min."
-    flags: [condition_uncertain, ph_start_only]
-    note: "6 cells (aldehyde + acid per amino acid), no replicates/SD. Acetic acid from Ala pot also has sugar-degradation origin. Constrains Strecker yield from glucose per amino acid."
+    flags: [condition_uncertain, ph_start_only, "duplicate_of: hofmann2000_table2_glucose_amino_acids"]
+    note: "6 cells (aldehyde + acid per amino acid), no replicates/SD. Acetic acid from Ala pot also has sugar-degradation origin. Constrains Strecker yield from glucose per amino acid. 2026-10-31: keyed from the PDF under hofmann2000_table2_glucose_amino_acids (fit table strecker_hofmann2000); this entry is kept for the conflicts register's references."
   - id: hofmann2000_table3_mgo_phe_timecourse
     dossier: hofmann2000_extraction.md
     paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
@@ -3664,11 +3664,11 @@ entries:
     kind: time_series
     location: "Table 3 (dossier sec. 3)"
     status: digitised_in_dossier
-    quant_class: sida
+    quant_class: other
     simulable: true
     condition_quote: "2-Oxopropanal (1 mmol) and L-phenylalanine (1 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), were heated (98 C) in a closed vial."
-    flags: [ph_start_only, phe_loss_series_coincides_with_hofmann2000b]
-    note: "7 time points; PA plateaus then falls, PAA rises; Phe degraded % column nearly identical to hofmann2000b Table 3 (Glc/Phe pot): do not treat both as independent. Fed-dicarbonyl Strecker step + amino-acid loss."
+    flags: [ph_start_only, phe_loss_series_coincides_with_hofmann2000b, no_replicates, phe_method_not_stated]
+    note: "7 time points; PA plateaus then falls, PAA rises; Phe degraded % column nearly identical to hofmann2000b Table 3 (Glc/Phe pot): do not treat both as independent. Fed-dicarbonyl Strecker step + amino-acid loss. 2026-10-31 (first reader, fit table strecker_hofmann2000): quant_class sida -> other because the entry mixes methods: PA / PAA by SIDA ([13C2] isotopologues), but the paper never says how phenylalanine was measured; rows name their method."
   - id: hofmann2000_table4_dicarbonyl_donors_oxygen
     dossier: hofmann2000_extraction.md
     paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
@@ -3685,8 +3685,8 @@ entries:
     quant_class: sida
     simulable: true
     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial."
-    flags: [ph_start_only, status_uncertain]
-    note: "9 PA + 9 PAA cells: donor ranking; acid O2-dependent (x1.6-5.5), aldehyde O2-independent. Not fitted, but trunk_conditions.py (B29) cites this fed-dicarbonyl control to place the oxygen lever upstream of the dicarbonyls. No SD."
+    flags: [ph_start_only, status_uncertain, "duplicate_of: hofmann2000_table4_dicarbonyl_donors_argon_air"]
+    note: "2026-10-31: keyed from the PDF under hofmann2000_table4_dicarbonyl_donors_argon_air (fit table strecker_hofmann2000); this entry is kept for the conflicts register's references. 9 PA + 9 PAA cells: donor ranking; acid O2-dependent (x1.6-5.5), aldehyde O2-independent. Not fitted, but trunk_conditions.py (B29) cites this fed-dicarbonyl control to place the oxygen lever upstream of the dicarbonyls. No SD."
   - id: hofmann2000_table5_labelled_pa_oxidation
     dossier: hofmann2000_extraction.md
     paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
@@ -3721,8 +3721,8 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "heated at 98 C ... Oxygen, the concentration of which was not controlled"
-    flags: [ph_start_only, condition_uncertain]
-    note: "Dicarbonyls by o-phenylenediamine quinoxalines (3-DG/glucosone HPLC-DAD; GO/MGO GC-MS vs labelled butanedione). Text gives only glucosone max and MGO/GO=3 at 500 min. 1-DG not measured. Valuable deoxyosone time course at pH 7."
+    flags: [ph_start_only, condition_uncertain, "fig3_keyed_as: hofmann2000_fig3_dicarbonyls_glucose_phe"]
+    note: "Dicarbonyls by o-phenylenediamine quinoxalines (3-DG/glucosone HPLC-DAD; GO/MGO GC-MS vs labelled butanedione). Text gives only glucosone max and MGO/GO=3 at 500 min. 1-DG not measured. Valuable deoxyosone time course at pH 7. 2026-10-31: Fig. 3 digitised under hofmann2000_fig3_dicarbonyls_glucose_phe (fit table strecker_hofmann2000); Fig. 2 (PA, PAA) is still figure-only here: rows for Fig. 3 must cite the new id, not this one."
   - id: hofmann2000_fig4_fig5_ph_series_strecker
     dossier: hofmann2000_extraction.md
     paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
@@ -3739,8 +3739,80 @@ entries:
     quant_class: sida
     simulable: true
     condition_quote: ""
-    flags: [condition_uncertain, ph_start_only]
-    note: "Text reads 2x (PA pH5/pH9, MGO) and 7x (PAA pH9/pH3, MGO); PA:PAA 3:1 at pH 3, 1:5 at pH 9. Heating time not stated in dossier for the pH series. Constrains pH dependence of the Strecker aldehyde/acid branch."
+    flags: [condition_uncertain, ph_start_only, "duplicate_of: hofmann2000_fig4_5_ph_series"]
+    note: "Text reads 2x (PA pH5/pH9, MGO) and 7x (PAA pH9/pH3, MGO); PA:PAA 3:1 at pH 3, 1:5 at pH 9. Heating time not stated in dossier for the pH series. Constrains pH dependence of the Strecker aldehyde/acid branch. 2026-10-31: digitised from the PDF under hofmann2000_fig4_5_ph_series (fit table strecker_hofmann2000); this entry is kept for the conflicts register's references."
+  - id: hofmann2000_table2_glucose_amino_acids
+    dossier: "hofmann2000_extraction.md (guide only; values read from the PDF)"
+    paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
+    lab: "DFA Munich (Hofmann / Schieberle)"
+    system: "glucose 0.1 M + L-Phe, L-Ala or L-Leu 0.1 M (1.0 mmol each in 10 mL), three pots"
+    medium: "phosphate buffer pH 7.0, 0.5 mol/L per the table footnote (Experimental: '0.5 mmol/L'); refluxed (Experimental: 98 C); atmosphere not controlled"
+    temperature_c: [98]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [30]
+    species: [phenylacetaldehyde, phenylacetic acid, acetaldehyde, acetic acid, 3-methylbutanal, 3-methylbutanoic acid]
+    kind: endpoint
+    location: "Table 2 (umol/mmol); text p. 436 '0.042 and 0.029 mol %' = the Phe column"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of glucose (1.0 mmol) and the respective amino acid (1.0 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), was refluxed for 30 min."
+    flags: [ph_start_only, no_replicates, condition_uncertain, buffer_molarity_mmol_vs_mol]
+    note: "Read by the first reader of fit table strecker_hofmann2000 (2026-10-31). Six cells, na elsewhere. SIDA: [13C2]PA / PAA, [2H2]-3-methylbutanal / -butanoic acid, [13C2]acetic acid; acetaldehyde by headspace GC-MS vs [13C2]acetaldehyde. Acetic acid in the Ala pot also has a sugar origin."
+  - id: hofmann2000_table4_dicarbonyl_donors_argon_air
+    dossier: "hofmann2000_extraction.md (guide only; values read from the PDF)"
+    paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
+    lab: "DFA Munich (Hofmann / Schieberle)"
+    system: "methylglyoxal, glyoxal, 3-deoxyglucosone or glucosone 0.1 M + L-Phe 0.1 M (1.0 mmol each in 10 mL); MGO also with CuSO4 0.05 mmol (5 mmol/L) under air"
+    medium: "phosphate 0.1 mol/L pH 7.0 (table footnote; 0.5 elsewhere in the paper); closed vial; model A argon-sparged >= 20 min, model B air"
+    temperature_c: [98]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [phenylacetaldehyde, phenylacetic acid]
+    kind: endpoint
+    location: "Table 4 (umol/mmol, experiments 1-5, models A / B)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."
+    flags: [ph_start_only, no_replicates, condition_uncertain, reflux_vs_closed_vial]
+    note: "Read by the first reader of fit table strecker_hofmann2000 (2026-10-31). 18 cells (expt 2 model A na). Methods: 'argon was bubbled through the solution for at least 20 min prior to thermal treatment'. PA ~O2-independent, PAA x1.6-5.5 under air."
+  - id: hofmann2000_fig3_dicarbonyls_glucose_phe
+    dossier: "hofmann2000_extraction.md (guide only; values digitised from the PDF)"
+    paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
+    lab: "DFA Munich (Hofmann / Schieberle)"
+    system: "glucose 0.1 M + L-Phe 0.1 M (1.0 mmol each in 10 mL)"
+    medium: "phosphate buffer pH 7.0 (0.5 mol/L per the glucose/Phe footnotes; Experimental '0.5 mmol/L'); heated at 98 C / refluxed; atmosphere not controlled; no trapping agent in the pot"
+    temperature_c: [98]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [10, 500]
+    species: [3-deoxyglucosone, glucosone, glyoxal, methylglyoxal]
+    kind: time_series
+    location: "Fig. 3 (umol/mmol glucose; 300 ppi 1-bit raster, page 437), digitised; text p. 436-437 (glucosone maximum 0.009 mol %; MGO 3x glyoxal at 500 min)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.5 mmol/L, pH 7.0) was heated at 98 C for 30 min. ... the time course of the formation of four alpha-dicarbonyls was monitored in the glucose/L-phenylalanine mixture."
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, internal_inconsistency]
+    note: "Read by the first reader of fit table strecker_hofmann2000 (2026-10-31). 3-DG and glucosone as quinoxalines by HPLC-DAD 320 nm (reference quinoxalines synthesised); glyoxal and MGO as quinoxalines by GC-MS-CI vs [13C4]butane-2,3-dione (labelled homologue): calibrated, as hofmann1999. The text's glucosone maximum (0.009 mol %) is 6.5x below the figure's (0.059 mol %); its 'MGO 3x glyoxal at 500 min' reads 5.1x in the figure (2.7x vs 3-DG). 1-DG not measured."
+  - id: hofmann2000_fig4_5_ph_series
+    dossier: "hofmann2000_extraction.md (guide only; values digitised from the PDF)"
+    paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
+    lab: "DFA Munich (Hofmann / Schieberle)"
+    system: "glucose, MGO, glyoxal, 3-deoxyglucosone or glucosone + L-Phe, each at pH 3.0, 5.0, 7.0, 9.0 (20 pots; amounts not restated, 1 mmol + 1 mmol in 10 mL elsewhere)"
+    medium: "not stated for the pH series (buffer, molarity, time, atmosphere); pH 7 values match Table 4 model B (air, 60 min) within 1-2 % for PA (PAA 4-46 % higher)"
+    temperature_c: [98]
+    ph: {initial: [3.0, 5.0, 7.0, 9.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [phenylacetaldehyde, phenylacetic acid]
+    kind: endpoint
+    location: "Fig. 4 (PA, umol/mmol phenylalanine) and Fig. 5 (PAA), 300 ppi 1-bit rasters page 437, digitised; text p. 439 (2x, 7x) and abstract (3:1, 1:5) are read off these figures"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, time_not_stated, buffer_not_stated]
+    note: "Read by the first reader of fit table strecker_hofmann2000 (2026-10-31). 60 min and air are declared assumptions from the pH 7 match with Table 4 model B. PA and PAA by SIDA (the paper's method for both)."
   - id: hofmann2000b_table2_arp_phe_oxygen
     dossier: hofmann2000b_extraction.md
     paper: "Hofmann & Schieberle 2000 J Agric Food Chem 48:4301"

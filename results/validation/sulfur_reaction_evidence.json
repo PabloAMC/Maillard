@@ -2,10 +2,10 @@
   "artifact": "sulfur_reaction_evidence",
   "provenance": {
     "artifact": "sulfur_reaction_evidence",
-    "generated_on": "2026-10-30",
+    "generated_on": "2026-10-31",
     "git": {
-      "commit": "ce0983212cecc46d8a514a1565dc6b99c185febd",
-      "short": "ce098321",
+      "commit": "5096e722ee171c8d84c88f649d006fc0a29b8573",
+      "short": "5096e722",
       "branch": "submodel1-ph",
       "dirty": true
     },
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "6a8219f2402d6043516f489366fdec0861234cf1d65e348d6889052f0a4d2711"
+        "sha256": "2a5f1f41586e9bd67ae75a5368fab40df395a87197edc1f135100775f0081de8"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -65,7 +65,7 @@
       },
       {
         "path": "data/lit/measurement_ledger/trunk.yml",
-        "sha256": "1881f374c3a32db435662fd6b43bb186215503f21961a854e6d5b0e533976547"
+        "sha256": "a2f97a60b7a5935b1127f86d51434462725415504d57df58590ae2f4e8bfb652"
       }
     ]
   },
@@ -2494,8 +2494,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         }
       },
@@ -2534,8 +2534,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         }
       },
@@ -2715,8 +2715,8 @@
           "used_by_the_model": 15
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         }
       },
@@ -3045,8 +3045,8 @@
           "used_by_the_model": 1
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         },
         "MP": {
@@ -3230,8 +3230,8 @@
           "used_by_the_model": 14
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         }
       },
@@ -3539,8 +3539,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 65,
-          "time_series": 30,
+          "data_sets": 66,
+          "time_series": 31,
           "used_by_the_model": 17
         }
       },
@@ -3578,8 +3578,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 65,
-          "time_series": 30,
+          "data_sets": 66,
+          "time_series": 31,
           "used_by_the_model": 17
         }
       },
@@ -3622,8 +3622,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         }
       },
@@ -3689,7 +3689,7 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 46,
+          "data_sets": 49,
           "time_series": 24,
           "used_by_the_model": 5
         },
@@ -3742,8 +3742,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 65,
-          "time_series": 30,
+          "data_sets": 66,
+          "time_series": 31,
           "used_by_the_model": 17
         }
       },
@@ -3770,7 +3770,7 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 46,
+          "data_sets": 49,
           "time_series": 24,
           "used_by_the_model": 5
         },
@@ -3875,7 +3875,7 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 46,
+          "data_sets": 49,
           "time_series": 24,
           "used_by_the_model": 5
         },
@@ -3913,8 +3913,8 @@
           "used_by_the_model": 22
         },
         "TDG": {
-          "data_sets": 65,
-          "time_series": 30,
+          "data_sets": 66,
+          "time_series": 31,
           "used_by_the_model": 17
         }
       },
@@ -3947,8 +3947,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 65,
-          "time_series": 30,
+          "data_sets": 66,
+          "time_series": 31,
           "used_by_the_model": 17
         }
       },
@@ -4112,13 +4112,13 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         },
         "TDG": {
-          "data_sets": 65,
-          "time_series": 30,
+          "data_sets": 66,
+          "time_series": 31,
           "used_by_the_model": 17
         }
       },
@@ -4244,8 +4244,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 65,
-          "time_series": 30,
+          "data_sets": 66,
+          "time_series": 31,
           "used_by_the_model": 17
         }
       },
@@ -4642,8 +4642,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         }
       },
@@ -6395,8 +6395,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         },
         "NF": {
@@ -6432,8 +6432,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         },
         "TDP": {
@@ -6490,8 +6490,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         }
       },
@@ -6542,8 +6542,8 @@
           "used_by_the_model": 1
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         }
       },
@@ -6611,8 +6611,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 102,
-          "time_series": 58,
+          "data_sets": 103,
+          "time_series": 59,
           "used_by_the_model": 17
         },
         "PENT": {
@@ -6942,7 +6942,7 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 46,
+          "data_sets": 49,
           "time_series": 24,
           "used_by_the_model": 5
         },

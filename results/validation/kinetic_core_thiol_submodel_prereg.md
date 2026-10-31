@@ -523,4 +523,51 @@ norfuraneol cannot). (3) Any later barrier coordinate is bounded to its measured
 steps) and starts from the arm it extends. (4) Backlog: tie NF -> MP3P to NF -> MFT at Whitfield 1999's ratio, so
 Cerny's "no MP3P from ribose" becomes a real test.
 
+## 14. The 100 C MFT lag: literature pass and dry check T1 -- 2026-10-31, before any converged arm was read
+
+**What the data say (literature pass; dossiers schieberle2000, cerny2003, deroos2005, nedvidek1992, zhai2019, cao2017).**
+Schieberle's MFT is not a slow-accumulation curve: MFT = A (t - tau)^n with tau ~ 9 min (the autoclave's come-up) and
+n ~ 1.25 on both intervals, then a STOP (720 / 360 min = 1.15) -- formation roughly constant for ~6 h, ending when a
+reservoir runs dry (cysteine, 33 mM, is the limiting reagent). An accumulating-norfuraneol route gives the wrong shape
+at both ends. Cerny's pot D: 96 % of 2-mercapto-3-pentanone comes from the fed NF but only 7 % of MFT, and pot C (no
+fed NF) makes no MP3P -- so fed NF does meet H2S at 95 C; NF -> MFT is slow because the STEP is slow there. de Roos
+2005: during boiling NF gives no more MFT than ribose (the NF route needs >= 140 C, closed); the cysteine Amadori
+compound, decomposing first order, is the precursor. Nedvidek 1992: 1,4-dideoxyosones form only with an alpha-amino
+acid (a reduction coupled to Strecker degradation).
+
+**Ranked mechanisms (agent's probabilities, adopted as the priors of the next design).** (1) An intact-C5 route fed by a
+reservoir -- TTCA -> cysteine Amadori compound -> 1-deoxypentosone -> DDP (Strecker-coupled) -> + H2S -> MFT -- rate set
+by the reservoir's drain (hours), plateau at cysteine exhaustion; NF -> MFT with a high barrier, minor <= 100 C: 0.45.
+(2) Slow H2S supply as a co-limiter: 0.20 (against it as the sole cause: MFT, FFT and MP3P have different shapes in
+the same pot). (3) Start conditions / heat-up as the main fix: 0.10. (4) Pot differences (Cerny: 3x the cysteine,
+H2S in headspace, pH 4.3 at the end): 0.08. (5) A slowly building two-step intermediate: 0.08 (n ~ 1.25 argues
+against). (6) Bound in-situ NF: 0.05. (7) Oxidation / measurement artefacts: 0.04.
+
+**Signatures added (list v2, before any converged arm):** Schieberle MFT plateau 720 / 360 (tol 0.25, group "MFT
+supply exhaustion") and early rise 60 / 30 (tol 0.25, sign). At R3En's optimum: plateau -0.20 vs +0.06 (the engine's
+MFT falls after 6 h), early rise +0.96 vs +0.49.
+
+**Dry check T1 (no fit; `scripts/generators/diagnose_mft_start_conditions.py`).** Schieberle's pot under four start conditions -- as fitted
+(isothermal, all cysteine free); a 13-min linear come-up 20 -> 100 C; TTCA pre-equilibrated at Cao's K (26.9 of 33 mM
+cysteine bound); both -- at R3En's optimum and at sec. 13's Cerny-passing point (Ea 160, DDP +3). MFT residuals (dex)
+at 30 / 60 / 360 / 720 min:
+
+| point | as fitted | ramp + TTCA |
+|---|---|---|
+| R3En optimum | -0.65 / -0.17 / +0.16 / -0.10 | -1.15 / -0.37 / +0.15 / -0.10 |
+| Cerny-passing | +1.30 / +1.17 / +0.03 / -0.12 | +0.76 / +1.10 / +0.03 / -0.12 |
+
+Mechanisms (1) and (3) predicted the early excess at the Cerny-passing point would fall to <= +0.5 dex: it falls at 30
+min (+0.76) but NOT at 60 min (+1.10). So start conditions are worth ~0.5 dex at 30 min (mechanism 3 is real but not
+the fix) and **the early DDP supply itself is ~10x too fast in the first hour**: in the engine the intact-C5 route
+is supplied by a pool that is full at once, where the data want it fed at the reservoir's drain rate. Both points also
+put MFT FALLING after 6 h (720 / 360 err -0.15 to -0.26), against the measured stop.
+
+**Next design (to be pre-registered and reviewed in the day, not run tonight).** Rival R4a: DDP formation fed only by
+the cysteine Amadori compound's first-order decomposition (de Roos 2005; Hou 2017's fed cysteine-Amadori pots) with the
+TTCA reservoir and the come-up in place; R4b: the same plus an H2S-supply limit; the null: R3En's structure with the
+come-up. Decided by the v2 signatures (MFT timing, supply exhaustion), Cerny pot D, and the converged R3En as the
+baseline. A designed time-resolved pot-D experiment (fed NF + [13C5]ribose, 0.5 - 6 h at 100 C) separates (1) from
+(2): a candidate for the designed time-course protocol.
+
 ## Amendments

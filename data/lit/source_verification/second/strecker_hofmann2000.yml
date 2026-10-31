@@ -1,0 +1,137 @@
+# Second reader, Hofmann, Muench & Schieberle 2000 (J. Agric. Food Chem. 48:434-440, doi 10.1021/jf990954c): Strecker aldehydes
+# and acids from L-Phe / L-Ala / L-Leu with glucose or alpha-dicarbonyls; alpha-dicarbonyls in glucose + Phe. Independent of the
+# first reading (data/lit/fit_rows/strecker_hofmann2000.yml, data/lit/source_verification/strecker_hofmann2000.yml, the
+# extraction dossier and ledger entries naming hofmann2000 NOT opened). Rows: data/lit/fit_rows/second/strecker_hofmann2000.yml.
+# Each entry's "location" says where in the paper the ledger id's data sit, so the adjudicator can match ids to reader 1's.
+# Only hofmann2000_table3_mgo_phe_timecourse was found as an id in data/lit/measurement_ledger/ on 2026-10-31 (grep count only);
+# the other four ids are cited as the brief names them.
+reader: agent-hofmann2000-reader2-2026-10-31
+role: independent second reader, Strecker sub-model (aldehyde / acid split, dicarbonyl donors, O2, pH)
+common:
+  quantification_quote: 'Methods p. 435 "Quantification by Stable Isotope Dilution Assays (SIDAs). Phenylacetaldehyde, Phenylacetic
+    Acid, 3-Methylbutanal, 3-Methylbutanoic Acid, and Acetic Acid. Depending on the amino acid reacted, the mixtures were spiked with
+    defined amounts of the labeled internal standards [13C2]phenylacetaldehyde and [13C2]phenylacetic acid (for L-phenylalanine),
+    [2H2]-3-methylbutanal and [2H2]-3-methylbutanoic acid (for L-leucine), or [13C2]acetic acid (for L-alanine) ... Quantification was
+    performed by mass chromatography" / "Acetaldehyde. The reaction mixture (containing L-alanine) was spiked with a defined amount of
+    the labeled internal standard [13C2]acetaldehyde ... headspace ... CI mode" / "Quantification of alpha-Dicarbonyls. 2-Hexosulose
+    and 3-Deoxy-2-hexosulose ... HPLC ... 320 nm ... quinoxaline derivatives" / "Glyoxal and 2-Oxopropanal ... the internal standard
+    [13C4]butane-2,3-dione ... and a methanolic solution of 1,2-diaminobenzene (2 mL; 1 mmol/L)"'
+  quantification_classes_as_read: 'PA, PAA, 3-methylbutanal, 3-methylbutanoic acid, acetic acid, acetaldehyde: SIDA (isotopologue
+    standards, GC-MS CI). GO, MGO: internal-standard calibrated with a DIFFERENT dicarbonyl ([13C4]butane-2,3-dione) -> calibrated,
+    not SIDA. TDG, G: HPLC-UV of quinoxalines, calibration not described -> calibrated (external presumed). Phenylalanine degraded
+    (Table 3): no method anywhere in the paper -> unknown.'
+  errors: No SD, CV, replicate count or "mean of n" anywhere in the paper.
+  buffer_contradiction: 'Methods "phosphate buffer (10 mL; 0.5 mmol/L, pH 7.0)" in both model-reaction paragraphs; Tables 1, 2, 3, 5
+    footnotes "0.5 mol/L"; Table 4 footnote "0.1 mol/L". mmol/L read as a misprint (cannot buffer 100 mmol/L solutes); 0.1 vs 0.5
+    mol/L for Table 4 unresolved.'
+  temperature_contradiction: 'Methods and Table 3 "98 C"; Tables 1, 2, 5 "refluxed"; Table 4 "refluxed for 60 min in a closed vial";
+    abstract "100 C". All pots declared 98 C.'
+entries:
+- ledger_id: hofmann2000_table2_glucose_amino_acids
+  source_file: hofmann2000.pdf
+  location: 'p. 436, Table 2 ("Amounts of Strecker Aldehydes and Acids Generated from Three Different alpha-Amino Acids"); text p. 436
+    left column "0.042 and 0.029 mol %"'
+  read_by: agent-hofmann2000-reader2-2026-10-31
+  second_reader: self
+  date: '2026-10-31'
+  checks: {conditions: corrected, units: pass, quantification: pass, duplicates: pass, values: pass}
+  quote: 'Table 2: "amount (umol/mmol) generated from" phenylalanine / alanine / leucine: phenylacetaldehyde 0.42 na na; phenylacetic
+    acid 0.29 na na; acetaldehyde na 0.48 na; acetic acid na 0.30 na; 3-methylbutanal na na 0.89; 3-methylbutanoic acid na na 0.49.
+    Footnote a "A solution of glucose (1.0 mmol) and the respective amino acid (1.0 mmol), dissolved in phosphate buffer (10 mL; 0.5
+    mol/L, pH 7.0), was refluxed for 30 min. b na, not analyzed."'
+  notes: 'Glucose + amino acid 100 mmol/L each nominal, phosphate pH 7, reflux (text: 98 C), 30 min. 6 rows (umol/mmol x 0.1 = mmol/L).
+    Text "0.042 and 0.029 mol %" = the Phe column (0.42 umol/mmol = 0.042 mol%): consistent, keyed once. Key MEBUAC3
+    (3-methylbutanoic acid) proposed by this reader. Acetic acid (engine AA) is also a sugar-fragmentation product; the paper
+    attributes it to Ala without a no-amino-acid blank.'
+  corrections:
+  - 'Conditions: "refluxed" (table) vs "98 C" (text); buffer 0.5 mol/L (table) vs 0.5 mmol/L (methods).'
+- ledger_id: hofmann2000_table3_mgo_phe_timecourse
+  source_file: hofmann2000.pdf
+  location: 'p. 437, Table 3 ("Time Course of the Formation of Phenylacetaldehyde (PA) and Phenylacetic Acid (PAA) from
+    L-Phenylalanine and 2-Oxopropanal"); text p. 437 left column'
+  read_by: agent-hofmann2000-reader2-2026-10-31
+  second_reader: self
+  date: '2026-10-31'
+  checks: {conditions: corrected, units: pass, quantification: corrected, duplicates: pass, values: pass}
+  quote: 'Table 3 columns "reaction time (min) / PA (umol) / PAA (umol) / phenylalanine degraded (%)": 10 6.2 10.1 9; 30 9.5 17.2 18;
+    60 10.6 20.6 36; 120 12.3 23.1 49; 240 13.5 24.8 58; 300 13.3 25.8 61; 500 12.2 27.6 69. Footnote a "2-Oxopropanal (1 mmol) and
+    L-phenylalanine (1 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), were heated (98 C) in a closed vial." Text:
+    "oxygen, the concentration of which was not controlled in the experiments displayed in Table 3"'
+  notes: 'MGO + Phe 100 mmol/L each, 98 C, closed vial, 10-500 min. 21 rows: PHEAL 7, PHEAC 7 (umol in 10 mL x 0.1 = mmol/L), PHE 7
+    (remaining = 100 - degraded %, mmol/L). Atmosphere: text says O2 not controlled, but the methods paragraph for Phe/dicarbonyl runs
+    says argon was bubbled >= 20 min -- contradictory; the 60-min values (10.6 / 20.6) equal Table 4 model B (air: 10.2 / 20.4),
+    not model A (argon: 11.1 / 4.7), so read as air. Table 3 60 min and Table 4 expt 1 model B are close but differ (different
+    buffer molarity printed, 0.5 vs 0.1 mol/L): separate experiments, both keyed.'
+  corrections:
+  - 'Quantification: PA / PAA SIDA; "phenylalanine degraded (%)" has no described method (class unknown, not SIDA).'
+  - 'Conditions: atmosphere contradiction (text "not controlled" vs methods argon bubbling).'
+- ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air
+  source_file: hofmann2000.pdf
+  location: 'p. 437, Table 4 ("Amounts of Phenylacetaldehyde (PA) and Phenylacetic Acid (PAA) Generated from L-Phenylalanine in the
+    Presence of Different alpha-Dicarbonyls: Influence of Oxygen and Copper Ions"); text pp. 437-438'
+  read_by: agent-hofmann2000-reader2-2026-10-31
+  second_reader: self
+  date: '2026-10-31'
+  checks: {conditions: corrected, units: pass, quantification: pass, duplicates: pass, values: pass}
+  quote: 'Table 4 "PA (umol/mmol) model A / model B; PAA (umol/mmol) model A / model B": 1 2-oxopropanal 11.1 10.2 4.7 20.4; 2
+    2-oxopropanal(d) na 10.0 na 27.1; 3 glyoxal 9.2 8.3 2.2 12.2; 4 3-deoxy-2-hexosulose 8.4 7.8 1.5 3.3; 5 2-hexosulose 8.1 6.9 1.3
+    2.1. Footnotes "a A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1
+    mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed
+    in the presence of oxygen and copper ions (0.05 mmol). e na, not analyzed."'
+  notes: 'Dicarbonyl + Phe 100 mmol/L each, pH 7, 60 min; model A argon (methods: argon bubbled >= 20 min), model B air (how supplied
+    not stated); expt 2 adds CuSO4 0.05 mmol (5 mmol/L). 9 pots, 18 rows (umol/mmol Phe x 0.1 = mmol/L). Text "factor of nearly 4"
+    = 20.4 / 4.7 = 4.3 (consistent). 3-deoxy-2-hexosulose = 3-deoxyglucosone (TDG), synthesised in house; 2-hexosulose = glucosone
+    (G), synthesised in house; purities not stated.'
+  corrections:
+  - 'Conditions: "refluxed ... in a closed vial" (self-contradictory) vs methods "98 C in closed vials"; buffer 0.1 mol/L here vs 0.5
+    elsewhere.'
+- ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe
+  source_file: hofmann2000.pdf
+  location: 'p. 437, Fig. 3 (1-bit raster 975 x 660 px, 300 ppi; pdfimages object 69); text p. 436 right column / p. 437 left column'
+  read_by: agent-hofmann2000-reader2-2026-10-31
+  second_reader: self
+  date: '2026-10-31'
+  checks: {conditions: corrected, units: pass, quantification: corrected, duplicates: pass, values: corrected}
+  quote: 'Fig. 3 caption "Time course of the formation of four alpha-dicarbonyls in a thermally treated glucose/L-phenylalanine
+    solution: 3-deoxy-2-hexosulose (filled square); 2-hexosulose (open circle); glyoxal (+); 2-oxopropanal (filled circle)." y axis
+    "amount [umol/mmol glucose]" 0-17, x "t (min)" 0-500. Text: "2-Hexosulose was formed in much lower amounts, reaching a maximum of
+    concentration of 0.009 mol %." / "after 500 min more 2-oxopropanal was present by a factor of 3 than, for example, glyoxal."'
+  notes: 'Digitised (umol/mmol glucose; x 0.1 = mmol/L at 100 mmol/L glucose), times 10 / 30 / 60 / 120 / 240 / 300 / 500 min: TDG
+    4.02 12.21 16.00 14.48 7.49 6.47 3.98; MGO 0.30 1.50 3.28 5.17 7.97 8.95 10.97; GO 0.98 6.50 7.98 5.78 3.50 3.16 2.17; G 0.09
+    0.39 0.59 0.29 0.09, 0 (300), 0 (500). 26 rows (G at 300 / 500 min on the axis: zeros, not keyed; t = 0 origin not keyed).
+    Read error +-1.5 px (+-0.045 umol/mmol) on clean markers, 2-3 px where hidden (G 10 min under the MGO circle; G 240 min on the
+    axis; GO 120 min crossed by the curve). Conditions for Fig. 3 are NOT in the caption: concentration, 98 C, pH 7 taken from the
+    methods "L-Phenylalanine/Glucose" recipe (written for 30 min); the dicarbonyl assays consume 3-6 mL per time point, so one pot
+    per time is implied but not stated.'
+  corrections:
+  - 'Quantification: GO / MGO by OPD + GC-MS against [13C4]butane-2,3-dione (not their isotopologue) -> calibrated, not SIDA; OPD
+    for GO/MGO is 2 umol per 1 mL aliquot holding up to ~2.5 umol of alpha-dicarbonyls at 60 min -> possibly limiting.'
+  contradictions:
+  - 'Text "maximum ... 0.009 mol %" for 2-hexosulose vs Fig. 3 peak 0.59 umol/mmol = 0.059 mol% (6.5x). Rows keep the figure.'
+  - 'Text "by a factor of 3 than, for example, glyoxal" at 500 min vs Fig. 3 MGO / GO = 10.97 / 2.17 = 5.1 (MGO / TDG = 2.8).'
+- ledger_id: hofmann2000_fig4_5_ph_series
+  source_file: hofmann2000.pdf
+  location: 'p. 437, Fig. 4 (PA, raster 721 x 605 px, pdfimages object 68) and Fig. 5 (PAA, raster 727 x 605 px, object 67); text pp.
+    438-439 and abstract'
+  read_by: agent-hofmann2000-reader2-2026-10-31
+  second_reader: self
+  date: '2026-10-31'
+  checks: {conditions: unstated, units: corrected, quantification: pass, duplicates: corrected, values: pass}
+  quote: 'Text p. 438 "glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH
+    values." Fig. 4 / 5 captions "Influence of the pH value on the formation of phenylacetaldehyde [phenylacetic acid] from
+    phenylalanine in the presence of (filled square) 2-oxopropanal, (open circle) glyoxal, (+) 3-deoxyosone, (filled circle)
+    glucosone, and (filled triangle) glucose." y "umol / mmol phenylalanine". Abstract "at pH 3.0 the ratio of PA to PAA was 3:1,
+    whereas at pH 9.0 the ratio was 1:5"; p. 439 "double the amount of phenylacetaldehyde was formed from 2-oxopropanal/
+    phenylalanine at pH 5.0 compared to the amount formed at pH 9.0" and "7 times higher amounts of the acid were formed from
+    2-oxopropanal/phenylalanine at pH 9.0 compared to the amounts formed at pH 3.0 (Figure 5)."'
+  notes: 'Digitised (umol/mmol Phe) at pH 3 / 5 / 7 / 9. PA (Fig. 4): MGO 10.49 13.39 10.37 5.76; GO 9.79 11.89 8.35 5.55; TDG 8.18
+    10.97 7.96 5.15; G 7.97 9.99 6.97 4.96; Glc 1.01 1.48 0.78 0.56. PAA (Fig. 5): MGO 4.19 19.17 21.23 30.83; GO 2.10 9.21 13.03
+    19.02; TDG 0.97 2.73 4.81 8.03; G 0.22 0.98 2.60 5.00; Glc 0.13 0.19 0.60 1.02. 40 rows. Ratios: MGO PA/PAA pH 3 = 2.5 (text
+    3:1), pH 9 = 1:5.4 (text 1:5); PA pH 5 / pH 9 = 2.3 (text "double"); PAA pH 9 / pH 3 = 7.4 (text "7 times"): all consistent,
+    ratios not keyed as rows. Fig. 5 pH 3: glucosone and glucose markers overlap on the x axis (assignment uncertain, +-0.15
+    umol/mmol); Fig. 4 pH 3 and pH 9: 3-DG plus and glucosone circle overlap (resolved on pixel maps, +-2-2.5 px).'
+  corrections:
+  - 'Conditions: NONE printed (time, temperature, concentration, buffer, atmosphere). Pots declared from the Table 4 recipe (1 mmol
+    + 1 mmol / 10 mL, 98 C, 60 min); conditions_inferred: true. The mmol/L conversion depends on this assumption.'
+  - 'Duplicates: the pH 7 points match Table 4 model B (air) - PA 10.37 / 8.35 / 7.96 / 6.97 vs 10.2 / 8.3 / 7.8 / 6.9; PAA 21.23 /
+    13.03 / 4.81 / 2.60 vs 20.4 / 12.2 / 3.3 / 2.1 - probably the same or replicate runs; pH 7 rows carry duplicate_candidate.'

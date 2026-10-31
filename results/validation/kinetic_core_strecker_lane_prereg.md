@@ -75,3 +75,14 @@ Fit rows: Hofmann 2000 Tables 2 - 4 (argon). Hold-outs: Weenen 2001, Hofmann 200
 ratios, Chan 1994b, Cremer 2000's lag, Deng 2022. Expected: >= 7 of the 11 signatures (P 0.55); Weenen's pH x donor
 contrast (P 0.25); the step / supply pH sign flip (P 0.4); sugar-pot absolute levels within x3 across laboratories
 (P 0.2: the dicarbonyl supply limits it).
+
+## 7. Step 2 done (2026-10-31): Hofmann 2000 keyed by two readers and adjudicated
+
+`data/lit/fit_rows/strecker_hofmann2000.yml`, status ready, 111 rows (Tables 2 - 4, Fig. 3's donor time courses, Figs.
+4 - 5's pH series); reconciliation `results/validation/source_reading_reconciliation_strecker_hofmann2000.md`;
+experiment register EX-026. It loads as literature only: the engine has no species for Phe, phenylacetaldehyde /
+phenylacetic acid, Ala, Leu, 3-methylbutanal / 3-methylbutanoic acid (provisional key MEBUAC3), which arrive with the
+lane on the composable network (STATUS_AND_PLAN A2, then C9). For the design: Table 3's phenylalanine rows are
+semi-quantitative and probably duplicate hofmann2000b Table 3 (CF-070) -- at most one enters a fit; Table 4's buffer
+is 0.1 mol/L as printed (alternative 0.5); the Figs. 4 - 5 pH points carry declared conditions (60 min, air), not
+printed ones, so they are signatures (pH shape), not level rows.
