@@ -1726,3 +1726,46 @@ entries:
     status: open
     remedy: "Counted once: 2000b expt II Glc / Phe maps to the original Fig. 2 rows; the 2000b Glc / Phe air / argon ratio (3.5, used by B29) is flagged as possibly comparing different vessels."
     affects: [hofmann2000_fig2_pa_paa_glucose_phe, hofmann2000b_table2_arp_phe_oxygen]
+  - id: CF-075
+    kind: self_contradiction
+    scope: other_lane
+    sources: [hofmann2000b]
+    quantity: "phenylacetic acid / phenylacetaldehyde (PAA / PA) at 500 min in the glucose + phenylalanine pot, pH 7, reflux (hofmann2000b Fig. 1)"
+    observation: >-
+      The text (p. 4302) says "by a factor of 1.7 higher amounts of the acid were formed after 500 min". Fig. 1, digitised by two blind
+      readers who agree within 0.011 umol/mmol, gives PAA / PA = 3.709 / 2.804 = 1.32 at 500 min. That is 1.33 at 240 min and 1.24 at
+      300 min, so 1.7 is reached at no plotted time; the gap is 0.11 dex against a read error of ~0.004 dex. Separately, Table 2 expt II
+      (air, 100 C, 120 min, closed vial: ARP-Phe 5.5 / 3.0, Glc/Phe 1.4 / 1.8 umol/mmol) differs from Fig. 1 at 120 min (6.21 / 3.21,
+      1.21 / 1.52) by 7 - 16 %, outside the read error. So Table 2 is a different run (or vessel) from Fig. 1 and is not a duplicate;
+      its Glc/Phe cell is itself hofmann2000 Fig. 2's 120-min point (CF-074). Found by both Fig. 1 readers; recorded by the forced-input
+      Strecker blind test (2026-10-31).
+    explanations:
+      - "The text quotes a different run (e.g. the one behind hofmann2000 Fig. 2, whose 500-min ratio is 1.59) or a rounded remembrance."
+      - "A text error; the figure, plotted from values rounded to 0.1, is the data."
+    tests:
+      - "None on disk beyond the figure; a third time course of the recipe from the same laboratory would decide which number belongs to which run."
+    status: open
+    remedy: "Fig. 1's 1.32 is the row value (strecker_hofmann2000b_fig1.yml); the text's 1.7 is a text_check, never a row or a target. Table 2 expt II and Fig. 1 are counted as two runs, never as one measurement; the Table 2 Glc/Phe cell stays mapped to hofmann2000 Fig. 2 (CF-074)."
+    affects: [hofmann2000b_fig1_pa_paa_timecourse, hofmann2000b_table2_arp_phe_oxygen]
+  - id: CF-076
+    kind: conflict
+    scope: other_lane
+    sources: [zhai2021, zhai2019, cao2017]
+    quantity: "the cysteine / xylose <-> TTCA exchange (thiazolidine formation k_f, its reverse k_ttca_cys, K) across dilute and concentrated pots"
+    observation: >-
+      Zhai 2021's dilute fed-TTCA pots (~10 mM, unbuffered water, pH 5.5 - 8) and their +/- xylose contrast want slow exchange: a
+      mass-action ceiling of ~1.7e-4 L/mmol/min at 100 C. Zhai 2019 (same laboratory, 83 / 165 mM) forms 14.5 mM TTCA at room
+      temperature before heating and ~1.7e-4 at 70 C. Cao 2017 needs >= ~4.4e-4 at 90 C. One pH-flat k_f / k_r / K in plain mass action
+      cannot fit both regimes (the engine's exchange is rejected provisionally on the dilute pots; a slow-exchange rival fitted to
+      them is rejected by the concentrated ones). Found by the thiol-rivals analysis and its red team (EX-050,
+      docs/history/thiol_rivals_2026-10-31/).
+    explanations:
+      - "Catalysed exchange: k = k0 + k_aa [amino acid] + k_P [phosphate / solutes] (the cysteine review, P 0.55), so concentrated pots run faster per mol."
+      - "In-situ pH: the unbuffered dilute pots drift in pH while heating, and the engine uses the label pH."
+      - "A second cysteine sink (adducts, cystine) in the dilute pots that the exchange rate is absorbing."
+    tests:
+      - "Fit nothing yet: a feasibility test of catalysed exchange with in-situ pH, scored on Zhai 2019 + Zhai 2021 + Cao 2017 together, every dataset scored."
+      - "Designed experiment E4 (TTCA at 10 vs 100 mM in water, and 10 mM +/- 0.2 M phosphate)."
+    status: open
+    remedy: "k_ttca_cys is untouched until the catalysed-exchange test; until then it carries the conflict flag."
+    affects: [zhai2021_fig4b_ttca_ph_ladder, zhai2021_fig6_cys_xyl, zhai2019_fig3a_ttca_cama, cao2017_fig5_ttca_cama_glyarp, cao2017_fig4ab_cys_xyl]

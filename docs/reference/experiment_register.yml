@@ -595,3 +595,63 @@ entries:
     verdict: rejected
     conclusion: "NOT feasible: time + pH jointly 0 of 600 (each reachable alone: 37 / 15). Unlike v4's 3-DX -> MGO stand-in, the trap's rate scales with free cysteine, which the engine gets wrong in level and pH profile -- the trap as coupled to today's cysteine chemistry is rejected without a fit."
     follow_up: "The trap only as one structure with a corrected cysteine fate (hub step); first the feasibility method's controls and roadmap rows 2 - 3."
+  - id: EX-049
+    date: "2026-10-31"
+    kind: probe
+    question: "Feasibility (mechanisms before constants, roadmap row 2): can the two-route forced-input Strecker layer (EX-042) reproduce the scale-free Hofmann signatures anywhere in its bands, and which routes does it need?"
+    hypothesis: "The dicarbonyl route alone cannot reproduce the glucose pot's shapes; the Amadori oxidative route closes the gap (review: 15 - 50 % of PA)."
+    design: "scripts/generators/feasibility_strecker_forced_input.py --draws 4000 --seed 20261031 (+ --interp early_step, post hoc): forced quadrature on Fig. 3 donors and hofmann2000b Table 3 ARP-Phe / Phe; fed-pot calibrations exact; 4 arms (DC_ARP, DC, ARP, NOOMEGA) by sampling + a bounded violation search; chance (uninformed, scrambled, flat forcing), negative controls (ARP-only; slope-1 free-amine law), oracle at realistic and 0.15-dex noise, model recovery (6 sets x 2 truths). Expectations and thresholds written before running; one disclosed amendment (T1b, the search, fed-pot run factor 0.02) after a 400-draw smoke run."
+    expected: "feasible: DC 0.20, DC_ARP 0.35, ARP 0.05, NOOMEGA 0.10; oracle joint pass at prereg tolerances >= 0.8 P 0.35."
+    artifacts: [results/validation/kinetic_core_strecker_forced_input_feasibility.md, results/validation/kinetic_core_strecker_forced_input_feasibility_early_step.md, scripts/generators/feasibility_strecker_forced_input.py]
+    commit: pending
+    verdict: partial
+    conclusion: "SINGLE LABORATORY. DC-only NOT feasible (min violation 3.9; 1.3 without Fig. 2's 10-min point; recovery rejects it 6 / 6 when the ARP route is real) -> the prereg's arm B is rejected without a fit. ARP-only fails (G6b). Removing omega fails (2.2); the A' oxygen hold-outs pass (GO 0.045, G 0.156 dex); O3 exact fails but is underpowered (truth 0.63). The two-route layer is INCONCLUSIVE: it fails the primary (1.75) on the 10-min point vs the PA = PAA crossover; passes post hoc (no 10-min point 0.52; early-step forcing 0.70) at band walls (O2 ~1, fastest ARP decay, cal_ARP ~+0.2), needing the ARP route at 45 - 65 % of PA at 120 min and over-predicting the level (R30 0.38 - 0.49). Flat (time-averaged) forcing also passes the joint set by search: the glucose-pot shapes have weak power against forcing with no time structure. The prereg's T1 tolerance (0.10) fails its own truth 1/3 of the time at realistic noise -> 0.15; at 0.15-dex noise the set has no power. Free-amine slope-1 law fails by 3.4 - 3.9 dex (negative control works)."
+    follow_up: "Key hofmann2000b Fig. 1 (two readers) and pre-declare the early-time forcing treatment before any two-route fit; bound the fed-ARP route's transfer (O2 limitation at 100 mmol/L); freeze O3' (class order) and T1 0.15 for the fit's prereg."
+  - id: EX-050
+    date: "2026-10-31"
+    kind: probe
+    question: "Wave 1 (mechanism triage rank 3): which structures for (a) the loss of MFT during heating and (b) the fate of free cysteine in xylose + cysteine pots are consistent with the discriminating evidence on disk?"
+    hypothesis: "Neutral: rivals A0 (engine) - A3 for MFT loss and B0 (engine) - B4 for cysteine exchange / sinks, plus negative controls, written in a prereg before any run."
+    design: "Standalone reduced modules (A2 contract sec. 3), feasibility sampling within declared bands, a power check per test (synthetic data from each rival at realistic noise; underpowered tests dropped), negative controls; then an independent red team given the prereg, code and data, not the verdict. Record: docs/history/thiol_rivals_2026-10-31/."
+    expected: "see prereg.yaml (written 12:50, first run 12:58)"
+    artifacts: [docs/history/thiol_rivals_2026-10-31/README.md, docs/history/thiol_rivals_2026-10-31/red_team.md]
+    commit: pending
+    verdict: partial
+    conclusion: "After the red team. (a) INCONCLUSIVE: the engine's MFT loss (A0) is rejected by the spiked-standard time course of one patent (lambda(110 C) <~ 0.02 - 0.05 /min vs 0.095), single source; van Seeventer's 50 C storage data do not test a processing law. Cerny pot D is a route problem (the loss law moves it <= 0.3 dex vs a 1.1 dex miss). P(k_mft_decay too fast >= 3x at <= 110 C, cysteine-rich) ~0.75. (b) The engine's exchange is rejected provisionally; the agent's 'slow exchange' was REJECTED by the red team: its ceiling was derived from the contrast it was scored on, and Zhai 2019 / Cao 2017's concentrated pots (unscored) need faster exchange. Surviving: one pH-flat k_r and K cannot fit dilute and concentrated pots together (P ~0.75)."
+    follow_up: "k_mft_decay as a declared single-lab band (lambda(110 C) <= ~0.02 - 0.03 /min) in the evidence-audit PR after A3; a conflict entry for dilute vs concentrated cysteine exchange; test catalysed exchange (k0 + k_aa[AA] + k_P[P]) with in-situ pH on Zhai 2019 / 2021 + Cao 2017 together; designed experiment E3 (spiked labelled MFT during heating, cysteine 0 - 150 mM) and E4."
+  - id: EX-051
+    date: "2026-10-31"
+    kind: probe
+    question: "Blind test of the forced-input Strecker layer on hofmann2000b Fig. 1 (prereg sec. 12): do the shape-feasible DC_ARP optima of EX-049 reproduce an unread glucose + Phe run and the fed ARP-Phe run?"
+    hypothesis: "If Fig. 2's 10-min deficit is a run artefact, the optima pass Fig. 1's blind shape points (PASS); if a fast early aldehyde source is missing, the t <= 30 min points are under-predicted by every optimum (EARLY DEFICIT REPRODUCED)."
+    design: "Fig. 1 keyed by two blind readers (strecker_hofmann2000b_fig1.yml; mean, error max(A, B, |A-B|/2)); scripts/generators/feasibility_strecker_forced_input.py --blind-fig1: the five recorded DC_ARP optima (EX-049 recorded five, its report said four; all five scored, PASS required of every 4-subset, declared before scoring), O2 = 1, forcing unchanged, linear primary / early-step reported; G5' and G7 shapes blind (tol 0.154), G6a' / G6b' in-sample; rule 6 drops points with read error > tol / 2."
+    expected: "PASS 0.30; EARLY DEFICIT REPRODUCED 0.40; INCONCLUSIVE 0.30."
+    artifacts: [results/validation/kinetic_core_strecker_forced_input_feasibility_blind_fig1.md, data/lit/fit_rows/strecker_hofmann2000b_fig1.yml, results/validation/source_reading_reconciliation_strecker_hofmann2000b_fig1.md]
+    commit: pending
+    verdict: partial
+    conclusion: "INCONCLUSIVE (single laboratory). Rule 6 dropped the Glc/Phe 10-min point (0.094 dex; the optima would miss it by -0.5 to -0.6). The glucose-pot shape G5' passes blind for all five optima (max |dev| 0.12 vs 0.154; 30 min -0.06 to -0.11: no early deficit). The ARP-Phe aldehyde shape G7 fails blind for all five (+0.5 dex at 10 min, -0.4 to -0.5 at 500 min): the optima's ARP-Phe decay (0.058 - 0.069 /min, the band's upper wall) is too fast; Fig. 1's own course needs ~0.010 /min (post hoc diagnostic, the band's lower end), so one decay constant cannot serve both pots under k_ox O2 [ARP]. Vessel-explainable (O2-limited reflux), hence not REFUSE. G6a' passes 5 / 5, G6b' 4 / 5. CF-075: text 1.7 vs figure 1.32; Table 2 a different run."
+    follow_up: "Pre-register an Amadori-route variant with ARP-Phe decay shared between the fed ARP pot (Fig. 1 circles, in-sample) and the glucose pot, then re-test feasibility on Fig. 2 + Fig. 1; no two-route fit before it."
+  - id: EX-052
+    date: "2026-10-31"
+    kind: probe
+    question: "Wave 1 (triage rank 5): which pyrazine structures (P0 engine, P1 shared condensation + pyrrole sink, P1x pair-specific, P2 extra methylpyrazine route, negative control) are consistent with the discriminating evidence on disk?"
+    hypothesis: "Neutral; rivals, tests, bands and expectations in a prereg before any run."
+    design: "Constant-free signatures (Leahy mixing bound, 15N identity, 13C origin, Adams pyrrole mass balance, pH sign), a power check per test, underpowered tests dropped; then an independent red team given the prereg, code and data, not the verdict. Record: docs/history/pyrazine_rivals_2026-10-31/."
+    expected: "see prereg.yaml"
+    artifacts: [docs/history/pyrazine_rivals_2026-10-31/README.md, docs/history/pyrazine_rivals_2026-10-31/red_team.md]
+    commit: pending
+    verdict: partial
+    conclusion: "After the red team. ENGINE BUG (CF-077): the three condensations share k_cond in plain mass action, so the engine's R = MPZ^2 / (PZ DMP) = 1 while its docstrings promise the cross-pair factor (R = 4); methylpyrazine is under-predicted 2x against its own design. P0 (engine) REJECTED on three labs' tests (Reineccius S1, Ho S2, Ghent S7). P1 (one shared constant) inconclusive by the single-lab rule, P(wrong) ~0.9. P1x pair-specific: inconclusive, leaning rejected (a post hoc label test fails on Zhou 2024). P2b extra MPZ route: provisional. P2a_aa rejected by 13C (two labs). Negative control fails as required. Process: two bands set after the data they decide; one row unscored."
+    follow_up: "Fix CF-077 in its own PR (owner approval: shipped methylpyrazine moves); declare a one-sided MPZ band; the pH slope below 7 as a band on fed-dicarbonyl Strecker steps; ask for the Zhou 2024 SI ([M-H]+ correction); pre-register the label-average test for pairing rivals."
+  - id: EX-053
+    date: "2026-10-31"
+    kind: probe
+    question: "Power test of the deoxyosone feasibility method (red-team item 3; prereg secs. 23 - 25): does the tester find a known true structure and reject a known wrong one?"
+    hypothesis: "The method has power: the positive control (B7ASST2M on its own synthetic truth) is feasible and the negative (B7ASST2) is not."
+    design: "Oracle check of the truth on its own synthetic data; a signature power curve over 400 noise seeds and sigma 0.03 - 0.15; realistic sigma from within-pot scatter (0.075 dex); chance rates of every threshold; the sec. 24 amendment written before the controls; controls at 600 draws each on one noise realization."
+    expected: "positive feasible P 0.8; negative not feasible P 0.75; inconclusive P 0.15 (sec. 24 (f))."
+    artifacts: [results/validation/kinetic_core_deoxyosone_feasibility_b7asst2m_power_pos.md, results/validation/kinetic_core_deoxyosone_feasibility_b7asst2_power_neg.md]
+    commit: pending
+    verdict: partial
+    conclusion: "INCONCLUSIVE controls (positive 2 / 599, negative 0 / 600; Fisher p 0.25). Sec. 23's sigma 0.15 was model misfit, not measurement noise (realistic 0.075); at it the truth passes the declared thresholds with P 0.60, failing on the xylose signature (vii), which passes by chance 161 / 193 at >= 2. New joint rule: time >= 5 AND pH >= 4 (truth P 0.99, chance 0 / 193). The binding limit is band coverage by random draws: P(miss a true structure) ~0.14 at 600 draws, ~0.37 at 299, so v1 / v3 / v5 are 'not found', not 'not feasible'."
+    follow_up: "Feasibility by bounded violation-minimising search (multi-start), random draws as the chance baseline only; re-run the controls under search before the hub returns to the active ranking; fold --noise-seed / --thresholds into feasibility_deoxyosone.py."

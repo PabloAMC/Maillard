@@ -1,0 +1,47 @@
+{
+ "rf_default": {
+  "Lys-Glc": 3.64,
+  "Lys-Fru": 0.65,
+  "Lys-Rib": 7.4,
+  "Asn-Glc": 3.18,
+  "Asn-Fru": 2.23
+ },
+ "rf_band_top": {
+  "Lys-Glc": 2.29,
+  "Lys-Fru": 0.42,
+  "Lys-Rib": 4.91,
+  "Asn-Glc": 2.01,
+  "Asn-Fru": 1.52
+ },
+ "P1x_posthoc": {
+  "95 C": {
+   "u_min_from_highest_R": 51.1,
+   "implied_h": {
+    "Lys-Glc": 0.22,
+    "Lys-Fru": 0.09,
+    "Lys-Rib": 1.0,
+    "Asn-Glc": 0.19,
+    "Asn-Fru": 0.32
+   }
+  },
+  "85 C": {
+   "u_min_from_highest_R": 68.1,
+   "implied_h": {
+    "Lys-Glc": 0.2,
+    "Lys-Fru": 0.14,
+    "Lys-Rib": 1.0,
+    "Asn-Glc": 0.27,
+    "Asn-Fru": 0.21
+   }
+  },
+  "75 C": {
+   "u_min_from_highest_R": 45.7,
+   "implied_h": {
+    "Lys-Glc": 0.36,
+    "Lys-Fru": 0.26,
+    "Lys-Rib": 1.0,
+    "Asn-Fru": 0.17
+   }
+  }
+ }
+}

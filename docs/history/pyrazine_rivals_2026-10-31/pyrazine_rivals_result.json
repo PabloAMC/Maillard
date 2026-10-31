@@ -1,0 +1,2928 @@
+{
+ "config_keys": [
+  [
+   "pyr.h_linear",
+   1.0,
+   [
+    0.5,
+    1.0
+   ],
+   "linear product courses (Leahy ch.7; Zhou 2024 T2)"
+  ],
+  [
+   "pyr.h_any",
+   1.0,
+   [
+    0.1,
+    1.0
+   ],
+   "no time course printed"
+  ],
+  [
+   "pyr.log10_u",
+   0.0,
+   [
+    0.0,
+    3.0
+   ],
+   "aldehyde/ketone imine selectivity, class (declared)"
+  ],
+  [
+   "pyr.log10_e",
+   -9.0,
+   [
+    -2.0,
+    0.9542425094393249
+   ],
+   "P2 extra/pairing MPZ flux (uninformed)"
+  ],
+  [
+   "op.rf_calibrated_dex",
+   0.05,
+   [
+    0.0,
+    0.08
+   ],
+   "per-compound RF sd, calibrated"
+  ],
+  [
+   "op.rf_area_dex",
+   0.0,
+   [
+    -0.7,
+    0.7
+   ],
+   "area-R bias, uncalibrated (Ho lab slopes give x3.4-4.2)"
+  ],
+  [
+   "op.near_loq_dex",
+   0.3,
+   [
+    0.15,
+    0.4
+   ],
+   "near-intercept compound sd"
+  ],
+  [
+   "op.iso_sd_pt",
+   1.0,
+   [
+    0.5,
+    2.0
+   ],
+   "isotopomer fraction sd, points"
+  ],
+  [
+   "op.mh_leak_mpz",
+   0.0,
+   [
+    0.0,
+    0.3
+   ],
+   "uncorrected [M-H]+ leakage, PRIMARY band"
+  ],
+  [
+   "op.mh_leak_mpz_corrected",
+   0.0,
+   [
+    0.0,
+    0.05
+   ],
+   "SECONDARY band (correction assumed)"
+  ],
+  [
+   "op.mh_leak_pz",
+   0.0,
+   [
+    0.0,
+    0.05
+   ],
+   "parent pyrazine"
+  ],
+  [
+   "pyr.p2_g",
+   0.3,
+   [
+    0.0,
+    1.0
+   ],
+   "P2b extra-route N label"
+  ],
+  [
+   "pyr.p2_rho",
+   0.0,
+   [
+    0.0,
+    1.0
+   ],
+   "P2b within-molecule N correlation"
+  ],
+  [
+   "pyr.fA_sd_time",
+   0.0,
+   [
+    0.0,
+    0.03
+   ],
+   "A-pool label drift allowed under P1"
+  ],
+  [
+   "pyr.fM_mean",
+   0.45,
+   [
+    0.1,
+    0.7
+   ],
+   "M-pool label (free)"
+  ],
+  [
+   "pyr.fM_sd",
+   0.0,
+   [
+    0.0,
+    0.2
+   ],
+   "M-pool label heterogeneity"
+  ],
+  [
+   "strecker.log10_c_mgo",
+   -1.15,
+   [
+    -2.5,
+    0.5
+   ],
+   "MGO lifetime, kappa D0 /min (forced-input layer)"
+  ],
+  [
+   "strecker.transfer_aa_dex",
+   0.0,
+   [
+    -0.5,
+    0.5
+   ],
+   "Phe <-> Ala transfer"
+  ],
+  [
+   "lab.between_dex",
+   0.5,
+   [
+    0.3,
+    0.7
+   ],
+   "between-lab sd of a Strecker-type yield (CF-073)"
+  ]
+ ],
+ "S1S2_rf_default": [
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Glc 95 C rate",
+   "R": 11.738806387299931,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.01729566330265289,
+   "kind": "calibrated",
+   "excess_dex": 0.45053728789825237,
+   "z": 3.642480466238013,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02125,
+    "power_P1x_band": 0.707,
+    "power_P2_band": 0.415,
+    "power_P1x_material": 0.93475,
+    "power_P2_material": 0.88625
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Glc 85 C rate",
+   "R": 14.358730893932377,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.04270682288204357,
+   "kind": "calibrated",
+   "excess_dex": 0.5380294043999281,
+   "z": 4.148040846858357,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02175,
+    "power_P1x_band": 0.7005,
+    "power_P2_band": 0.403,
+    "power_P1x_material": 0.9205,
+    "power_P2_material": 0.8715
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Glc 75 C rate",
+   "R": 17.35005999781826,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.06194761917926544,
+   "kind": "calibrated",
+   "excess_dex": 0.6202143291592858,
+   "z": 4.518872380464949,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0215,
+    "power_P1x_band": 0.6945,
+    "power_P2_band": 0.40075,
+    "power_P1x_material": 0.9225,
+    "power_P2_material": 0.8705
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Fru 95 C rate",
+   "R": 5.027614186624788,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.029548818097509002,
+   "kind": "calibrated",
+   "excess_dex": 0.08227529123634206,
+   "z": 0.6530374767729638,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02525,
+    "power_P1x_band": 0.70975,
+    "power_P2_band": 0.4085,
+    "power_P1x_material": 0.93975,
+    "power_P2_material": 0.87325
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Fru 85 C rate",
+   "R": 9.899509187012333,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.052751946858024916,
+   "kind": "calibrated",
+   "excess_dex": 0.37652701122278054,
+   "z": 2.823556333998433,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.022,
+    "power_P1x_band": 0.71075,
+    "power_P2_band": 0.406,
+    "power_P1x_material": 0.92375,
+    "power_P2_material": 0.86525
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Fru 75 C rate",
+   "R": 12.552270011947433,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.05198730007872938,
+   "kind": "calibrated",
+   "excess_dex": 0.47963562099695367,
+   "z": 3.6048892561234784,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0205,
+    "power_P1x_band": 0.69775,
+    "power_P2_band": 0.402,
+    "power_P1x_material": 0.924,
+    "power_P2_material": 0.8625
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Rib 95 C rate",
+   "R": 53.124484942666754,
+   "Rmax": 4.749999999999999,
+   "sig_pot": 0.05060931786901845,
+   "kind": "calibrated",
+   "excess_dex": 1.0486011228425924,
+   "z": 7.912832081250047,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0195,
+    "power_P1x_band": 0.67,
+    "power_P2_band": 0.38325,
+    "power_P1x_material": 0.895,
+    "power_P2_material": 0.827
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Rib 85 C rate",
+   "R": 70.14419910072459,
+   "Rmax": 4.749999999999999,
+   "sig_pot": 0.06819644520084492,
+   "kind": "calibrated",
+   "excess_dex": 1.169298151231814,
+   "z": 8.341336489467869,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.025,
+    "power_P1x_band": 0.6635,
+    "power_P2_band": 0.38325,
+    "power_P1x_material": 0.89075,
+    "power_P2_material": 0.81575
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Rib 75 C rate",
+   "R": 47.758312674615354,
+   "Rmax": 4.749999999999999,
+   "sig_pot": 0.05792524034536007,
+   "kind": "calibrated",
+   "excess_dex": 1.0023553649234016,
+   "z": 7.398447216793766,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.021,
+    "power_P1x_band": 0.6665,
+    "power_P2_band": 0.37125,
+    "power_P1x_material": 0.90025,
+    "power_P2_material": 0.82475
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Glc 95 C rate",
+   "R": 9.947575934579438,
+   "Rmax": 4.0,
+   "sig_pot": 0.022950625960905587,
+   "kind": "calibrated",
+   "excess_dex": 0.3956572716795027,
+   "z": 3.1752588430799347,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0225,
+    "power_P1x_band": 0.70875,
+    "power_P2_band": 0.43075,
+    "power_P1x_material": 0.941,
+    "power_P2_material": 0.88125
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Glc 85 C rate",
+   "R": 19.043621299353017,
+   "Rmax": 4.0,
+   "sig_pot": 0.06894313478905603,
+   "kind": "calibrated",
+   "excess_dex": 0.6776895451986986,
+   "z": 4.821837173692239,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.023,
+    "power_P1x_band": 0.687,
+    "power_P2_band": 0.398,
+    "power_P1x_material": 0.9185,
+    "power_P2_material": 0.857
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Fru 95 C rate",
+   "R": 16.767363524568253,
+   "Rmax": 4.0,
+   "sig_pot": 0.0651216748756449,
+   "kind": "calibrated",
+   "excess_dex": 0.6224047888245429,
+   "z": 4.487050895015256,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02075,
+    "power_P1x_band": 0.69975,
+    "power_P2_band": 0.40775,
+    "power_P1x_material": 0.916,
+    "power_P2_material": 0.863
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Fru 85 C rate",
+   "R": 14.55272511848341,
+   "Rmax": 4.0,
+   "sig_pot": 0.06711964009213066,
+   "kind": "calibrated",
+   "excess_dex": 0.5608843348532419,
+   "z": 4.016056556854261,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02575,
+    "power_P1x_band": 0.69525,
+    "power_P2_band": 0.416,
+    "power_P1x_material": 0.92225,
+    "power_P2_material": 0.8655
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Fru 75 C rate",
+   "R": 8.318129880384317,
+   "Rmax": 4.0,
+   "sig_pot": 0.07363023867998965,
+   "kind": "calibrated",
+   "excess_dex": 0.3179657058855937,
+   "z": 2.225037821831051,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02225,
+    "power_P1x_band": 0.6985,
+    "power_P2_band": 0.40825,
+    "power_P1x_material": 0.928,
+    "power_P2_material": 0.86025
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Lys-Glc 2 h 95 C end point",
+   "R": 12.57450474959468,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.009071270161661135,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.4804042374611758,
+   "z": 3.9117691342791647,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0255,
+    "power_P1x_band": 0.7175,
+    "power_P2_band": 0.41175,
+    "power_P1x_material": 0.92625,
+    "power_P2_material": 0.87125
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Lys-Fru 2 h 95 C end point",
+   "R": 7.479101850798814,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.0030514793143920672,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.2547627957152638,
+   "z": 2.0794841775936748,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.025,
+    "power_P1x_band": 0.7015,
+    "power_P2_band": 0.42,
+    "power_P1x_material": 0.92775,
+    "power_P2_material": 0.88075
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Lys-Rib 2 h 95 C end point",
+   "R": 52.20608634586846,
+   "Rmax": 4.0,
+   "sig_pot": 0.011449542030517847,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 1.115661146010307,
+   "z": 9.069788765320114,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02025,
+    "power_P1x_band": 0.72375,
+    "power_P2_band": 0.4285,
+    "power_P1x_material": 0.93375,
+    "power_P2_material": 0.89175
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Asn-Glc 2 h 95 C end point",
+   "R": 8.180143237621111,
+   "Rmax": 4.0,
+   "sig_pot": 0.0015653239533740724,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.31070091708221254,
+   "z": 2.5366551929578964,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0245,
+    "power_P1x_band": 0.72825,
+    "power_P2_band": 0.4215,
+    "power_P1x_material": 0.93975,
+    "power_P2_material": 0.8935
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Asn-Fru 2 h 95 C end point",
+   "R": 11.845378397559102,
+   "Rmax": 4.0,
+   "sig_pot": 0.021729762505762605,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.47148894737767844,
+   "z": 3.790493233124501,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02425,
+    "power_P1x_band": 0.7005,
+    "power_P2_band": 0.4305,
+    "power_P1x_material": 0.93475,
+    "power_P2_material": 0.8955
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989a T-III",
+   "label": "Lys-Glc pH 7, 2 h 95 C end point",
+   "R": 15.365386385290474,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.01282569731207812,
+   "kind": "calibrated",
+   "excess_dex": 0.5674568339113112,
+   "z": 4.60806720398673,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02675,
+    "power_P1x_band": 0.69875,
+    "power_P2_band": 0.4175,
+    "power_P1x_material": 0.9215,
+    "power_P2_material": 0.871
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 T1",
+   "label": "ARP pH 8 (DMP25 near intercept)",
+   "R": 14.199705925637506,
+   "Rmax": 4.399002493765586,
+   "sig_pot": 0.3129218600793505,
+   "kind": "calibrated",
+   "excess_dex": 0.5089251421091723,
+   "z": 1.5144965828730645,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.019,
+    "power_P1x_band": 0.53,
+    "power_P2_band": 0.26325,
+    "power_P1x_material": 0.69875,
+    "power_P2_material": 0.5585
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 T1",
+   "label": "ARP + Cys pH 8",
+   "R": 2.4344283293927274,
+   "Rmax": 4.0,
+   "sig_pot": 0.04706616802890623,
+   "kind": "calibrated",
+   "excess_dex": -0.21566299807243342,
+   "z": -1.6436876692618425,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02125,
+    "power_P1x_band": 0.70325,
+    "power_P2_band": 0.4305,
+    "power_P1x_material": 0.9265,
+    "power_P2_material": 0.873
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2022 T3",
+   "label": "ARP pH 8 (DMP25 near intercept)",
+   "R": 7.673962508136384,
+   "Rmax": 4.399002493765586,
+   "sig_pot": 0.336102578156997,
+   "kind": "calibrated",
+   "excess_dex": 0.24166546490543583,
+   "z": 0.6755680286339286,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02,
+    "power_P1x_band": 0.52475,
+    "power_P2_band": 0.252,
+    "power_P1x_material": 0.674,
+    "power_P2_material": 0.53625
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2022 T3",
+   "label": "ARP + 6 Cys pH 8",
+   "R": 1.8554921672881683,
+   "Rmax": 4.1481343283582035,
+   "sig_pot": 0.14446988509868672,
+   "kind": "calibrated",
+   "excess_dex": -0.3493936862595329,
+   "z": -1.8447605184294293,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.026,
+    "power_P1x_band": 0.65,
+    "power_P2_band": 0.364,
+    "power_P1x_material": 0.8685,
+    "power_P2_material": 0.779
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2022 T3",
+   "label": "ARP + 14 Cys pH 8",
+   "R": 2.387740154577618,
+   "Rmax": 4.1481343283582035,
+   "sig_pot": 0.05728582228330773,
+   "kind": "calibrated",
+   "excess_dex": -0.23986574862764226,
+   "z": -1.7740275474726512,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.022,
+    "power_P1x_band": 0.70125,
+    "power_P2_band": 0.41375,
+    "power_P1x_material": 0.919,
+    "power_P2_material": 0.86425
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2022 T3",
+   "label": "ARP + 20 Cys pH 8",
+   "R": 2.312909448306799,
+   "Rmax": 4.1481343283582035,
+   "sig_pot": 0.07052832855526786,
+   "kind": "calibrated",
+   "excess_dex": -0.2536941813996016,
+   "z": -1.7950449112409064,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02575,
+    "power_P1x_band": 0.696,
+    "power_P2_band": 0.40225,
+    "power_P1x_material": 0.90925,
+    "power_P2_material": 0.85375
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 6 30 min",
+   "R": 4.948101329734801,
+   "Rmax": 4.0,
+   "sig_pot": 0.0953109873219643,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.09237859342339617,
+   "z": 0.5952581829325877,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02425,
+    "power_P1x_band": 0.6855,
+    "power_P2_band": 0.3995,
+    "power_P1x_material": 0.9045,
+    "power_P2_material": 0.83925
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 6 60 min",
+   "R": 6.083214596999003,
+   "Rmax": 4.0,
+   "sig_pot": 0.09050056427318627,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.18207314597149007,
+   "z": 1.1956173942191197,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0195,
+    "power_P1x_band": 0.7015,
+    "power_P2_band": 0.408,
+    "power_P1x_material": 0.90675,
+    "power_P2_material": 0.85575
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 6 90 min",
+   "R": 7.206722597885285,
+   "Rmax": 4.0,
+   "sig_pot": 0.09020108582245935,
+   "kind": "calibrated",
+   "dependent": false,
+   "excess_dex": 0.2556778141328516,
+   "z": 1.6809186393358613,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02225,
+    "power_P1x_band": 0.6875,
+    "power_P2_band": 0.4025,
+    "power_P1x_material": 0.91425,
+    "power_P2_material": 0.84825
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 7 30 min",
+   "R": 3.0987717120255107,
+   "Rmax": 4.0,
+   "sig_pot": 0.09865264979442268,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": -0.11087040858965265,
+   "z": -0.704990065840668,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02525,
+    "power_P1x_band": 0.663,
+    "power_P2_band": 0.40375,
+    "power_P1x_material": 0.908,
+    "power_P2_material": 0.8415
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 7 60 min",
+   "R": 3.5671306701790444,
+   "Rmax": 4.0,
+   "sig_pot": 0.09432396244268205,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": -0.0497409727386181,
+   "z": -0.32176773428483857,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.024,
+    "power_P1x_band": 0.6805,
+    "power_P2_band": 0.40625,
+    "power_P1x_material": 0.90875,
+    "power_P2_material": 0.85175
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 7 90 min",
+   "R": 3.729370928232248,
+   "Rmax": 4.0,
+   "sig_pot": 0.09286275011799087,
+   "kind": "calibrated",
+   "dependent": false,
+   "excess_dex": -0.03042441030697045,
+   "z": -0.19794755279127205,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0235,
+    "power_P1x_band": 0.6785,
+    "power_P2_band": 0.3915,
+    "power_P1x_material": 0.9145,
+    "power_P2_material": 0.8405
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 8 30 min",
+   "R": 2.8583859385802475,
+   "Rmax": 4.0,
+   "sig_pot": 0.0999446125994504,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": -0.14593912457775288,
+   "z": -0.9232045684047767,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02625,
+    "power_P1x_band": 0.668,
+    "power_P2_band": 0.394,
+    "power_P1x_material": 0.8985,
+    "power_P2_material": 0.8405
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 8 60 min",
+   "R": 3.322901679109568,
+   "Rmax": 4.0,
+   "sig_pot": 0.09337675106273614,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": -0.0805425001400999,
+   "z": -0.5229677723626508,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.022,
+    "power_P1x_band": 0.706,
+    "power_P2_band": 0.41075,
+    "power_P1x_material": 0.91125,
+    "power_P2_material": 0.84
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 8 90 min",
+   "R": 3.305982520527697,
+   "Rmax": 4.0,
+   "sig_pot": 0.09235802347809595,
+   "kind": "calibrated",
+   "dependent": false,
+   "excess_dex": -0.08275943829895717,
+   "z": -0.5395187336699803,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.01875,
+    "power_P1x_band": 0.689,
+    "power_P2_band": 0.40125,
+    "power_P1x_material": 0.90925,
+    "power_P2_material": 0.83325
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023c T1",
+   "label": "ARP + GSH",
+   "R": 5.371634551726578,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.20708600848008138,
+   "kind": "calibrated",
+   "excess_dex": 0.04958247079475963,
+   "z": 0.20608509868419503,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.01775,
+    "power_P1x_band": 0.5835,
+    "power_P2_band": 0.30075,
+    "power_P1x_material": 0.7965,
+    "power_P2_material": 0.66075
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023c T1",
+   "label": "ARP + Glu",
+   "R": 6.764913062307152,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.11131894791507317,
+   "kind": "calibrated",
+   "excess_dex": 0.14973823187410656,
+   "z": 0.9047353451068086,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.022,
+    "power_P1x_band": 0.6425,
+    "power_P2_band": 0.35075,
+    "power_P1x_material": 0.8595,
+    "power_P2_material": 0.7685
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + ctrl, starch 180 C",
+   "R": 23.7246347673586,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.7731395440077555,
+   "z": 0.2985909380647269,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.001,
+    "power_P1x_band": 0.3845,
+    "power_P2_band": 0.14275,
+    "power_P1x_material": 0.50425,
+    "power_P2_material": 0.332
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Gln, starch 180 C",
+   "R": 15.793403040528805,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.5964157271848496,
+   "z": -0.42288102295727537,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00275,
+    "power_P1x_band": 0.37125,
+    "power_P2_band": 0.1505,
+    "power_P1x_material": 0.477,
+    "power_P2_material": 0.31625
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Lys, starch 180 C",
+   "R": 94.4684340501227,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 1.3732267250335652,
+   "z": 2.7484365958953823,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0015,
+    "power_P1x_band": 0.361,
+    "power_P2_band": 0.148,
+    "power_P1x_material": 0.488,
+    "power_P2_material": 0.32325
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Asn, starch 180 C",
+   "R": 2.444362826519631,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.21389432091123067,
+   "z": -3.73095794176643,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00175,
+    "power_P1x_band": 0.3605,
+    "power_P2_band": 0.1605,
+    "power_P1x_material": 0.4875,
+    "power_P2_material": 0.338
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Phe, starch 180 C",
+   "R": 7.264116908241316,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.25912283374942824,
+   "z": -1.7998734942634824,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00025,
+    "power_P1x_band": 0.37975,
+    "power_P2_band": 0.146,
+    "power_P1x_material": 0.481,
+    "power_P2_material": 0.32825
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Glu, starch 180 C",
+   "R": 3.3544531798645574,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.0764382567849874,
+   "z": -3.1697959098321298,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00175,
+    "power_P1x_band": 0.37725,
+    "power_P2_band": 0.1505,
+    "power_P1x_material": 0.48675,
+    "power_P2_material": 0.32225
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Asp, starch 180 C",
+   "R": 7.352698594746428,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.26438677220649587,
+   "z": -1.778383555501434,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00275,
+    "power_P1x_band": 0.37675,
+    "power_P2_band": 0.15025,
+    "power_P1x_material": 0.48075,
+    "power_P2_material": 0.32925
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Ile, starch 180 C",
+   "R": 18.2907008727117,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.6601703559920487,
+   "z": -0.16260384076030365,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.001,
+    "power_P1x_band": 0.36075,
+    "power_P2_band": 0.1465,
+    "power_P1x_material": 0.49125,
+    "power_P2_material": 0.33075
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Arg, starch 180 C",
+   "R": 3.2557985868981074,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.0894024609905079,
+   "z": -3.2227220518734114,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00175,
+    "power_P1x_band": 0.37075,
+    "power_P2_band": 0.1505,
+    "power_P1x_material": 0.4955,
+    "power_P2_material": 0.32525
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato U",
+   "R": 19.6,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.6901960800285137,
+   "z": -0.04002433568203774,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0005,
+    "power_P1x_band": 0.35775,
+    "power_P2_band": 0.145,
+    "power_P1x_material": 0.49175,
+    "power_P2_material": 0.31525
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato G",
+   "R": 6.0,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.17609125905568124,
+   "z": -2.13884847849593,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00025,
+    "power_P1x_band": 0.361,
+    "power_P2_band": 0.1565,
+    "power_P1x_material": 0.49025,
+    "power_P2_material": 0.32775
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GA",
+   "R": 9.27,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.36501974281653465,
+   "z": -1.3675511733429488,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00225,
+    "power_P1x_band": 0.3705,
+    "power_P2_band": 0.1485,
+    "power_P1x_material": 0.49125,
+    "power_P2_material": 0.32325
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GGn",
+   "R": 17.2,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.6334684555795865,
+   "z": -0.2716138927155435,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0015,
+    "power_P1x_band": 0.3555,
+    "power_P2_band": 0.16625,
+    "power_P1x_material": 0.47475,
+    "power_P2_material": 0.333
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GL",
+   "R": 4.83,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.08188713942354976,
+   "z": -2.523435186440639,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0025,
+    "power_P1x_band": 0.361,
+    "power_P2_band": 0.1515,
+    "power_P1x_material": 0.493,
+    "power_P2_material": 0.332
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GI",
+   "R": 2.78,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.15801519540988615,
+   "z": -3.5028323671810337,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00075,
+    "power_P1x_band": 0.3695,
+    "power_P2_band": 0.14325,
+    "power_P1x_material": 0.501,
+    "power_P2_material": 0.322
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GP",
+   "R": 5.59,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.14535181655846088,
+   "z": -2.2643417269889543,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00075,
+    "power_P1x_band": 0.35425,
+    "power_P2_band": 0.1475,
+    "power_P1x_material": 0.47725,
+    "power_P2_material": 0.3195
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GM",
+   "R": 3.71,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.032686081712916516,
+   "z": -2.991178403059644,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00125,
+    "power_P1x_band": 0.3835,
+    "power_P2_band": 0.15525,
+    "power_P1x_material": 0.5005,
+    "power_P2_material": 0.32775
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato X",
+   "R": 8.72,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.33845649360460484,
+   "z": -1.4759951841423078,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00225,
+    "power_P1x_band": 0.362,
+    "power_P2_band": 0.1575,
+    "power_P1x_material": 0.497,
+    "power_P2_material": 0.33825
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho uncal",
+   "id": "deng2022",
+   "label": "Met/Glc 120 C 60",
+   "R": 0.52,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.9645206442269708,
+   "z": -6.795377074474688,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0015,
+    "power_P1x_band": 0.33475,
+    "power_P2_band": 0.12575,
+    "power_P1x_material": 0.46575,
+    "power_P2_material": 0.29275
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho uncal",
+   "id": "deng2022",
+   "label": "Met/Glc 120 C 240",
+   "R": 1.53,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.4958325570441711,
+   "z": -4.881965970943128,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00275,
+    "power_P1x_band": 0.3335,
+    "power_P2_band": 0.128,
+    "power_P1x_material": 0.4695,
+    "power_P2_material": 0.27525
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho uncal",
+   "id": "deng2022",
+   "label": "ARP 120 C max",
+   "R": 5.71,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.07611212038407808,
+   "z": -2.5470116029432446,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0015,
+    "power_P1x_band": 0.3395,
+    "power_P2_band": 0.13325,
+    "power_P1x_material": 0.456,
+    "power_P2_material": 0.29025
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho uncal",
+   "id": "deng2022",
+   "label": "ARP 130 C max",
+   "R": 8.78,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.2629705280443326,
+   "z": -1.78416534808226,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0015,
+    "power_P1x_band": 0.344,
+    "power_P2_band": 0.12525,
+    "power_P1x_material": 0.469,
+    "power_P2_material": 0.29925
+   },
+   "powered": false
+  },
+  {
+   "lab": "other uncal",
+   "id": "vanlancker2012",
+   "label": "vanlancker2012 max (Gly+Lys Glc)",
+   "R": 0.77,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.7155692661554806,
+   "z": -5.7790373294116,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00125,
+    "power_P1x_band": 0.36275,
+    "power_P2_band": 0.14875,
+    "power_P1x_material": 0.48825,
+    "power_P2_material": 0.32425
+   },
+   "powered": false
+  },
+  {
+   "lab": "other uncal",
+   "id": "shu1999",
+   "label": "shu1999 120 C",
+   "R": 3.13,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.10651565378151392,
+   "z": -3.2925863688864787,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0025,
+    "power_P1x_band": 0.3655,
+    "power_P2_band": 0.1535,
+    "power_P1x_material": 0.49225,
+    "power_P2_material": 0.32
+   },
+   "powered": false
+  }
+ ],
+ "S1S2_rf_default_lab": [
+  {
+   "lab": "Reineccius",
+   "n_rows_above_bound": 15,
+   "n_rows_z_gt_2": 14,
+   "weakest_rejecting_row": "Lys-Rib 85 C rate",
+   "max_z": 8.341336489467869
+  },
+  {
+   "lab": "Ho",
+   "n_rows_above_bound": 3,
+   "n_rows_z_gt_2": 0,
+   "weakest_rejecting_row": null,
+   "max_z": 1.6809186393358613
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "n_rows_above_bound": 0
+  },
+  {
+   "lab": "Reading uncal",
+   "n_rows_above_bound": 0
+  },
+  {
+   "lab": "Ho uncal",
+   "n_rows_above_bound": 0
+  },
+  {
+   "lab": "other uncal",
+   "n_rows_above_bound": 0
+  }
+ ],
+ "S1S2_rf_band_top": [
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Glc 95 C rate",
+   "R": 11.738806387299931,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.01729566330265289,
+   "kind": "calibrated",
+   "excess_dex": 0.45053728789825237,
+   "z": 2.2902351909810967,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02625,
+    "power_P1x_band": 0.65925,
+    "power_P2_band": 0.34925,
+    "power_P1x_material": 0.86475,
+    "power_P2_material": 0.76525
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Glc 85 C rate",
+   "R": 14.358730893932377,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.04270682288204357,
+   "kind": "calibrated",
+   "excess_dex": 0.5380294043999281,
+   "z": 2.6826503438607356,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0235,
+    "power_P1x_band": 0.6525,
+    "power_P2_band": 0.34875,
+    "power_P1x_material": 0.85075,
+    "power_P2_material": 0.756
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Glc 75 C rate",
+   "R": 17.35005999781826,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.06194761917926544,
+   "kind": "calibrated",
+   "excess_dex": 0.6202143291592858,
+   "z": 3.017815290752187,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.01825,
+    "power_P1x_band": 0.64475,
+    "power_P2_band": 0.36,
+    "power_P1x_material": 0.8485,
+    "power_P2_material": 0.7455
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Fru 95 C rate",
+   "R": 5.027614186624788,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.029548818097509002,
+   "kind": "calibrated",
+   "excess_dex": 0.08227529123634206,
+   "z": 0.41516588171587965,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.01675,
+    "power_P1x_band": 0.64125,
+    "power_P2_band": 0.36275,
+    "power_P1x_material": 0.85625,
+    "power_P2_material": 0.75275
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Fru 85 C rate",
+   "R": 9.899509187012333,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.052751946858024916,
+   "kind": "calibrated",
+   "excess_dex": 0.37652701122278054,
+   "z": 1.8554034972886795,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02125,
+    "power_P1x_band": 0.632,
+    "power_P2_band": 0.35575,
+    "power_P1x_material": 0.85025,
+    "power_P2_material": 0.767
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Fru 75 C rate",
+   "R": 12.552270011947433,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.05198730007872938,
+   "kind": "calibrated",
+   "excess_dex": 0.47963562099695367,
+   "z": 2.36579093108806,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0245,
+    "power_P1x_band": 0.645,
+    "power_P2_band": 0.367,
+    "power_P1x_material": 0.8485,
+    "power_P2_material": 0.76275
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Rib 95 C rate",
+   "R": 53.124484942666754,
+   "Rmax": 4.749999999999999,
+   "sig_pot": 0.05060931786901845,
+   "kind": "calibrated",
+   "excess_dex": 1.0486011228425924,
+   "z": 5.181117439410344,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02125,
+    "power_P1x_band": 0.62475,
+    "power_P2_band": 0.33775,
+    "power_P1x_material": 0.8195,
+    "power_P2_material": 0.72375
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Rib 85 C rate",
+   "R": 70.14419910072459,
+   "Rmax": 4.749999999999999,
+   "sig_pot": 0.06819644520084492,
+   "kind": "calibrated",
+   "excess_dex": 1.169298151231814,
+   "z": 5.635531429427518,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02475,
+    "power_P1x_band": 0.621,
+    "power_P2_band": 0.33275,
+    "power_P1x_material": 0.812,
+    "power_P2_material": 0.701
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Lys-Rib 75 C rate",
+   "R": 47.758312674615354,
+   "Rmax": 4.749999999999999,
+   "sig_pot": 0.05792524034536007,
+   "kind": "calibrated",
+   "excess_dex": 1.0023553649234016,
+   "z": 4.905301894495959,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02225,
+    "power_P1x_band": 0.613,
+    "power_P2_band": 0.323,
+    "power_P1x_material": 0.81975,
+    "power_P2_material": 0.71525
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Glc 95 C rate",
+   "R": 9.947575934579438,
+   "Rmax": 4.0,
+   "sig_pot": 0.022950625960905587,
+   "kind": "calibrated",
+   "excess_dex": 0.3956572716795027,
+   "z": 2.0053730936198093,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0245,
+    "power_P1x_band": 0.657,
+    "power_P2_band": 0.36025,
+    "power_P1x_material": 0.86075,
+    "power_P2_material": 0.79275
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Glc 85 C rate",
+   "R": 19.043621299353017,
+   "Rmax": 4.0,
+   "sig_pot": 0.06894313478905603,
+   "kind": "calibrated",
+   "excess_dex": 0.6776895451986986,
+   "z": 3.2623045735608804,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02325,
+    "power_P1x_band": 0.65025,
+    "power_P2_band": 0.3555,
+    "power_P1x_material": 0.85125,
+    "power_P2_material": 0.75175
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Fru 95 C rate",
+   "R": 16.767363524568253,
+   "Rmax": 4.0,
+   "sig_pot": 0.0651216748756449,
+   "kind": "calibrated",
+   "excess_dex": 0.6224047888245429,
+   "z": 3.014116870173737,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02375,
+    "power_P1x_band": 0.657,
+    "power_P2_band": 0.359,
+    "power_P1x_material": 0.85925,
+    "power_P2_material": 0.755
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Fru 85 C rate",
+   "R": 14.55272511848341,
+   "Rmax": 4.0,
+   "sig_pot": 0.06711964009213066,
+   "kind": "calibrated",
+   "excess_dex": 0.5608843348532419,
+   "z": 2.7078158386794913,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.025,
+    "power_P1x_band": 0.63125,
+    "power_P2_band": 0.3615,
+    "power_P1x_material": 0.8515,
+    "power_P2_material": 0.77325
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-I",
+   "label": "Asn-Fru 75 C rate",
+   "R": 8.318129880384317,
+   "Rmax": 4.0,
+   "sig_pot": 0.07363023867998965,
+   "kind": "calibrated",
+   "excess_dex": 0.3179657058855937,
+   "z": 1.518927685162797,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0255,
+    "power_P1x_band": 0.6395,
+    "power_P2_band": 0.36,
+    "power_P1x_material": 0.8455,
+    "power_P2_material": 0.744
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Lys-Glc 2 h 95 C end point",
+   "R": 12.57450474959468,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.009071270161661135,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.4804042374611758,
+   "z": 2.4489300879348335,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.025,
+    "power_P1x_band": 0.65,
+    "power_P2_band": 0.3705,
+    "power_P1x_material": 0.86125,
+    "power_P2_material": 0.76575
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Lys-Fru 2 h 95 C end point",
+   "R": 7.479101850798814,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.0030514793143920672,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.2547627957152638,
+   "z": 1.2999233496769182,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.023,
+    "power_P1x_band": 0.63975,
+    "power_P2_band": 0.35975,
+    "power_P1x_material": 0.86375,
+    "power_P2_material": 0.767
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Lys-Rib 2 h 95 C end point",
+   "R": 52.20608634586846,
+   "Rmax": 4.0,
+   "sig_pot": 0.011449542030517847,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 1.115661146010307,
+   "z": 5.683641148823462,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.0235,
+    "power_P1x_band": 0.6445,
+    "power_P2_band": 0.3705,
+    "power_P1x_material": 0.865,
+    "power_P2_material": 0.77525
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Asn-Glc 2 h 95 C end point",
+   "R": 8.180143237621111,
+   "Rmax": 4.0,
+   "sig_pot": 0.0015653239533740724,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.31070091708221254,
+   "z": 1.5854883951944905,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0205,
+    "power_P1x_band": 0.64925,
+    "power_P2_band": 0.3755,
+    "power_P1x_material": 0.86325,
+    "power_P2_material": 0.78775
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989 T-III",
+   "label": "Asn-Fru 2 h 95 C end point",
+   "R": 11.845378397559102,
+   "Rmax": 4.0,
+   "sig_pot": 0.021729762505762605,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.47148894737767844,
+   "z": 2.391399056341454,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.02625,
+    "power_P1x_band": 0.66525,
+    "power_P2_band": 0.3675,
+    "power_P1x_material": 0.86225,
+    "power_P2_material": 0.77275
+   },
+   "powered": true
+  },
+  {
+   "lab": "Reineccius",
+   "id": "leahy1989a T-III",
+   "label": "Lys-Glc pH 7, 2 h 95 C end point",
+   "R": 15.365386385290474,
+   "Rmax": 4.159936025589764,
+   "sig_pot": 0.01282569731207812,
+   "kind": "calibrated",
+   "excess_dex": 0.5674568339113112,
+   "z": 2.889608369298814,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.022,
+    "power_P1x_band": 0.65525,
+    "power_P2_band": 0.37025,
+    "power_P1x_material": 0.8545,
+    "power_P2_material": 0.7655
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 T1",
+   "label": "ARP pH 8 (DMP25 near intercept)",
+   "R": 14.199705925637506,
+   "Rmax": 4.399002493765586,
+   "sig_pot": 0.3129218600793505,
+   "kind": "calibrated",
+   "excess_dex": 0.5089251421091723,
+   "z": 1.3783959033014408,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02025,
+    "power_P1x_band": 0.4985,
+    "power_P2_band": 0.26125,
+    "power_P1x_material": 0.69025,
+    "power_P2_material": 0.5405
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 T1",
+   "label": "ARP + Cys pH 8",
+   "R": 2.4344283293927274,
+   "Rmax": 4.0,
+   "sig_pot": 0.04706616802890623,
+   "kind": "calibrated",
+   "excess_dex": -0.21566299807243342,
+   "z": -1.0701168709961144,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02425,
+    "power_P1x_band": 0.64975,
+    "power_P2_band": 0.35,
+    "power_P1x_material": 0.852,
+    "power_P2_material": 0.78425
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2022 T3",
+   "label": "ARP pH 8 (DMP25 near intercept)",
+   "R": 7.673962508136384,
+   "Rmax": 4.399002493765586,
+   "sig_pot": 0.336102578156997,
+   "kind": "calibrated",
+   "excess_dex": 0.24166546490543583,
+   "z": 0.6211577973760711,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0235,
+    "power_P1x_band": 0.494,
+    "power_P2_band": 0.25375,
+    "power_P1x_material": 0.65725,
+    "power_P2_material": 0.512
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2022 T3",
+   "label": "ARP + 6 Cys pH 8",
+   "R": 1.8554921672881683,
+   "Rmax": 4.1481343283582035,
+   "sig_pot": 0.14446988509868672,
+   "kind": "calibrated",
+   "excess_dex": -0.3493936862595329,
+   "z": -1.4351322334679355,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0225,
+    "power_P1x_band": 0.61525,
+    "power_P2_band": 0.338,
+    "power_P1x_material": 0.8255,
+    "power_P2_material": 0.70275
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2022 T3",
+   "label": "ARP + 14 Cys pH 8",
+   "R": 2.387740154577618,
+   "Rmax": 4.1481343283582035,
+   "sig_pot": 0.05728582228330773,
+   "kind": "calibrated",
+   "excess_dex": -0.23986574862764226,
+   "z": -1.174885938743864,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0225,
+    "power_P1x_band": 0.641,
+    "power_P2_band": 0.36825,
+    "power_P1x_material": 0.846,
+    "power_P2_material": 0.7395
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2022 T3",
+   "label": "ARP + 20 Cys pH 8",
+   "R": 2.312909448306799,
+   "Rmax": 4.1481343283582035,
+   "sig_pot": 0.07052832855526786,
+   "kind": "calibrated",
+   "excess_dex": -0.2536941813996016,
+   "z": -1.2181325319762473,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02475,
+    "power_P1x_band": 0.64275,
+    "power_P2_band": 0.35025,
+    "power_P1x_material": 0.8475,
+    "power_P2_material": 0.7645
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 6 30 min",
+   "R": 4.948101329734801,
+   "Rmax": 4.0,
+   "sig_pot": 0.0953109873219643,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.09237859342339617,
+   "z": 0.4239326386917957,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.01725,
+    "power_P1x_band": 0.635,
+    "power_P2_band": 0.367,
+    "power_P1x_material": 0.83425,
+    "power_P2_material": 0.74325
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 6 60 min",
+   "R": 6.083214596999003,
+   "Rmax": 4.0,
+   "sig_pot": 0.09050056427318627,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": 0.18207314597149007,
+   "z": 0.8435248859900608,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.021,
+    "power_P1x_band": 0.6495,
+    "power_P2_band": 0.3475,
+    "power_P1x_material": 0.84375,
+    "power_P2_material": 0.7515
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 6 90 min",
+   "R": 7.206722597885285,
+   "Rmax": 4.0,
+   "sig_pot": 0.09020108582245935,
+   "kind": "calibrated",
+   "dependent": false,
+   "excess_dex": 0.2556778141328516,
+   "z": 1.185215762535914,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.01975,
+    "power_P1x_band": 0.63875,
+    "power_P2_band": 0.35,
+    "power_P1x_material": 0.83775,
+    "power_P2_material": 0.74925
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 7 30 min",
+   "R": 3.0987717120255107,
+   "Rmax": 4.0,
+   "sig_pot": 0.09865264979442268,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": -0.11087040858965265,
+   "z": -0.5053556623000738,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02125,
+    "power_P1x_band": 0.61625,
+    "power_P2_band": 0.3695,
+    "power_P1x_material": 0.83275,
+    "power_P2_material": 0.74275
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 7 60 min",
+   "R": 3.5671306701790444,
+   "Rmax": 4.0,
+   "sig_pot": 0.09432396244268205,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": -0.0497409727386181,
+   "z": -0.22871646568482937,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.026,
+    "power_P1x_band": 0.6375,
+    "power_P2_band": 0.3395,
+    "power_P1x_material": 0.83625,
+    "power_P2_material": 0.75075
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 7 90 min",
+   "R": 3.729370928232248,
+   "Rmax": 4.0,
+   "sig_pot": 0.09286275011799087,
+   "kind": "calibrated",
+   "dependent": false,
+   "excess_dex": -0.03042441030697045,
+   "z": -0.1403022831684712,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02325,
+    "power_P1x_band": 0.6525,
+    "power_P2_band": 0.3505,
+    "power_P1x_material": 0.8425,
+    "power_P2_material": 0.76
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 8 30 min",
+   "R": 2.8583859385802475,
+   "Rmax": 4.0,
+   "sig_pot": 0.0999446125994504,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": -0.14593912457775288,
+   "z": -0.6634355619164571,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.017,
+    "power_P1x_band": 0.63825,
+    "power_P2_band": 0.36575,
+    "power_P1x_material": 0.8405,
+    "power_P2_material": 0.7505
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 8 60 min",
+   "R": 3.322901679109568,
+   "Rmax": 4.0,
+   "sig_pot": 0.09337675106273614,
+   "kind": "calibrated",
+   "dependent": true,
+   "excess_dex": -0.0805425001400999,
+   "z": -0.3710445620879763,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.025,
+    "power_P1x_band": 0.64375,
+    "power_P2_band": 0.354,
+    "power_P1x_material": 0.841,
+    "power_P2_material": 0.74575
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023 F3",
+   "label": "Cys+MGO pH 8 90 min",
+   "R": 3.305982520527697,
+   "Rmax": 4.0,
+   "sig_pot": 0.09235802347809595,
+   "kind": "calibrated",
+   "dependent": false,
+   "excess_dex": -0.08275943829895717,
+   "z": -0.38202539764659854,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0205,
+    "power_P1x_band": 0.64025,
+    "power_P2_band": 0.3495,
+    "power_P1x_material": 0.8485,
+    "power_P2_material": 0.74225
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023c T1",
+   "label": "ARP + GSH",
+   "R": 5.371634551726578,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.20708600848008138,
+   "kind": "calibrated",
+   "excess_dex": 0.04958247079475963,
+   "z": 0.173909773096195,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02,
+    "power_P1x_band": 0.54525,
+    "power_P2_band": 0.2795,
+    "power_P1x_material": 0.74525,
+    "power_P2_material": 0.61025
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho",
+   "id": "zhou2023c T1",
+   "label": "ARP + Glu",
+   "R": 6.764913062307152,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.11131894791507317,
+   "kind": "calibrated",
+   "excess_dex": 0.14973823187410656,
+   "z": 0.6644088921295553,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.02475,
+    "power_P1x_band": 0.605,
+    "power_P2_band": 0.31,
+    "power_P1x_material": 0.8005,
+    "power_P2_material": 0.692
+   },
+   "powered": true
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + ctrl, starch 180 C",
+   "R": 23.7246347673586,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.7731395440077555,
+   "z": 0.2985909380647269,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.001,
+    "power_P1x_band": 0.35175,
+    "power_P2_band": 0.141,
+    "power_P1x_material": 0.48425,
+    "power_P2_material": 0.32575
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Gln, starch 180 C",
+   "R": 15.793403040528805,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.5964157271848496,
+   "z": -0.42288102295727537,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00075,
+    "power_P1x_band": 0.3515,
+    "power_P2_band": 0.14675,
+    "power_P1x_material": 0.4945,
+    "power_P2_material": 0.32875
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Lys, starch 180 C",
+   "R": 94.4684340501227,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 1.3732267250335652,
+   "z": 2.7484365958953823,
+   "rejects_shared": true,
+   "power": {
+    "size_null_h1": 0.00225,
+    "power_P1x_band": 0.3575,
+    "power_P2_band": 0.1505,
+    "power_P1x_material": 0.492,
+    "power_P2_material": 0.329
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Asn, starch 180 C",
+   "R": 2.444362826519631,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.21389432091123067,
+   "z": -3.73095794176643,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00075,
+    "power_P1x_band": 0.37125,
+    "power_P2_band": 0.14075,
+    "power_P1x_material": 0.4985,
+    "power_P2_material": 0.32
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Phe, starch 180 C",
+   "R": 7.264116908241316,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.25912283374942824,
+   "z": -1.7998734942634824,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.001,
+    "power_P1x_band": 0.3705,
+    "power_P2_band": 0.14925,
+    "power_P1x_material": 0.50125,
+    "power_P2_material": 0.32575
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Glu, starch 180 C",
+   "R": 3.3544531798645574,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.0764382567849874,
+   "z": -3.1697959098321298,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00175,
+    "power_P1x_band": 0.364,
+    "power_P2_band": 0.147,
+    "power_P1x_material": 0.49825,
+    "power_P2_material": 0.32775
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Asp, starch 180 C",
+   "R": 7.352698594746428,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.26438677220649587,
+   "z": -1.778383555501434,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0005,
+    "power_P1x_band": 0.3525,
+    "power_P2_band": 0.143,
+    "power_P1x_material": 0.492,
+    "power_P2_material": 0.3255
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Ile, starch 180 C",
+   "R": 18.2907008727117,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.6601703559920487,
+   "z": -0.16260384076030365,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00125,
+    "power_P1x_band": 0.37175,
+    "power_P2_band": 0.154,
+    "power_P1x_material": 0.4775,
+    "power_P2_material": 0.32325
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "id": "hwang1995 T1",
+   "label": "Glc + 15N-Gly + Arg, starch 180 C",
+   "R": 3.2557985868981074,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.0894024609905079,
+   "z": -3.2227220518734114,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00275,
+    "power_P1x_band": 0.36725,
+    "power_P2_band": 0.158,
+    "power_P1x_material": 0.4875,
+    "power_P2_material": 0.32875
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato U",
+   "R": 19.6,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.6901960800285137,
+   "z": -0.04002433568203774,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.001,
+    "power_P1x_band": 0.382,
+    "power_P2_band": 0.15325,
+    "power_P1x_material": 0.492,
+    "power_P2_material": 0.33825
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato G",
+   "R": 6.0,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.17609125905568124,
+   "z": -2.13884847849593,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00075,
+    "power_P1x_band": 0.373,
+    "power_P2_band": 0.14625,
+    "power_P1x_material": 0.4765,
+    "power_P2_material": 0.322
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GA",
+   "R": 9.27,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.36501974281653465,
+   "z": -1.3675511733429488,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.001,
+    "power_P1x_band": 0.381,
+    "power_P2_band": 0.1445,
+    "power_P1x_material": 0.487,
+    "power_P2_material": 0.333
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GGn",
+   "R": 17.2,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.6334684555795865,
+   "z": -0.2716138927155435,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00075,
+    "power_P1x_band": 0.37275,
+    "power_P2_band": 0.15575,
+    "power_P1x_material": 0.4835,
+    "power_P2_material": 0.331
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GL",
+   "R": 4.83,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.08188713942354976,
+   "z": -2.523435186440639,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0015,
+    "power_P1x_band": 0.3505,
+    "power_P2_band": 0.1595,
+    "power_P1x_material": 0.482,
+    "power_P2_material": 0.3325
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GI",
+   "R": 2.78,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.15801519540988615,
+   "z": -3.5028323671810337,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0025,
+    "power_P1x_band": 0.369,
+    "power_P2_band": 0.15625,
+    "power_P1x_material": 0.504,
+    "power_P2_material": 0.29625
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GP",
+   "R": 5.59,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.14535181655846088,
+   "z": -2.2643417269889543,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00075,
+    "power_P1x_band": 0.3605,
+    "power_P2_band": 0.1505,
+    "power_P1x_material": 0.489,
+    "power_P2_material": 0.33225
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato GM",
+   "R": 3.71,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.032686081712916516,
+   "z": -2.991178403059644,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0015,
+    "power_P1x_band": 0.37,
+    "power_P2_band": 0.13325,
+    "power_P1x_material": 0.4915,
+    "power_P2_material": 0.3145
+   },
+   "powered": false
+  },
+  {
+   "lab": "Reading uncal",
+   "id": "martin2001",
+   "label": "potato X",
+   "R": 8.72,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.33845649360460484,
+   "z": -1.4759951841423078,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.001,
+    "power_P1x_band": 0.364,
+    "power_P2_band": 0.14775,
+    "power_P1x_material": 0.477,
+    "power_P2_material": 0.32875
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho uncal",
+   "id": "deng2022",
+   "label": "Met/Glc 120 C 60",
+   "R": 0.52,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.9645206442269708,
+   "z": -6.795377074474688,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.001,
+    "power_P1x_band": 0.33725,
+    "power_P2_band": 0.14225,
+    "power_P1x_material": 0.45825,
+    "power_P2_material": 0.2805
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho uncal",
+   "id": "deng2022",
+   "label": "Met/Glc 120 C 240",
+   "R": 1.53,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.4958325570441711,
+   "z": -4.881965970943128,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0005,
+    "power_P1x_band": 0.3355,
+    "power_P2_band": 0.12625,
+    "power_P1x_material": 0.45975,
+    "power_P2_material": 0.28875
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho uncal",
+   "id": "deng2022",
+   "label": "ARP 120 C max",
+   "R": 5.71,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.07611212038407808,
+   "z": -2.5470116029432446,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.00125,
+    "power_P1x_band": 0.34125,
+    "power_P2_band": 0.132,
+    "power_P1x_material": 0.4675,
+    "power_P2_material": 0.29125
+   },
+   "powered": false
+  },
+  {
+   "lab": "Ho uncal",
+   "id": "deng2022",
+   "label": "ARP 130 C max",
+   "R": 8.78,
+   "Rmax": 4.792079207920793,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": 0.2629705280443326,
+   "z": -1.78416534808226,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0005,
+    "power_P1x_band": 0.344,
+    "power_P2_band": 0.12875,
+    "power_P1x_material": 0.448,
+    "power_P2_material": 0.28925
+   },
+   "powered": false
+  },
+  {
+   "lab": "other uncal",
+   "id": "vanlancker2012",
+   "label": "vanlancker2012 max (Gly+Lys Glc)",
+   "R": 0.77,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.7155692661554806,
+   "z": -5.7790373294116,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.001,
+    "power_P1x_band": 0.3625,
+    "power_P2_band": 0.15475,
+    "power_P1x_material": 0.498,
+    "power_P2_material": 0.31175
+   },
+   "powered": false
+  },
+  {
+   "lab": "other uncal",
+   "id": "shu1999",
+   "label": "shu1999 120 C",
+   "R": 3.13,
+   "Rmax": 4.0,
+   "sig_pot": 0.2449489742783178,
+   "kind": "uncalibrated",
+   "excess_dex": -0.10651565378151392,
+   "z": -3.2925863688864787,
+   "rejects_shared": false,
+   "power": {
+    "size_null_h1": 0.0015,
+    "power_P1x_band": 0.36325,
+    "power_P2_band": 0.15425,
+    "power_P1x_material": 0.489,
+    "power_P2_material": 0.3215
+   },
+   "powered": false
+  }
+ ],
+ "S1S2_rf_band_top_lab": [
+  {
+   "lab": "Reineccius",
+   "n_rows_above_bound": 15,
+   "n_rows_z_gt_2": 12,
+   "weakest_rejecting_row": "Lys-Rib 85 C rate",
+   "max_z": 5.635531429427518
+  },
+  {
+   "lab": "Ho",
+   "n_rows_above_bound": 3,
+   "n_rows_z_gt_2": 0,
+   "weakest_rejecting_row": null,
+   "max_z": 1.185215762535914
+  },
+  {
+   "lab": "Ho(Rutgers) uncal",
+   "n_rows_above_bound": 0
+  },
+  {
+   "lab": "Reading uncal",
+   "n_rows_above_bound": 0
+  },
+  {
+   "lab": "Ho uncal",
+   "n_rows_above_bound": 0
+  },
+  {
+   "lab": "other uncal",
+   "n_rows_above_bound": 0
+  }
+ ],
+ "S3": {
+  "D_obs": {
+   "30": 0.12926650443942145,
+   "60": 0.09324476650563618,
+   "90": 0.07556274210939251,
+   "120": 0.07562124659229719
+  },
+  "PZ_binomial_residual_pt_30": [
+   -0.47,
+   0.94,
+   -0.47
+  ],
+  "DMP_binomial_residual_pt_30": [
+   3.76,
+   -7.53,
+   3.76
+  ],
+  "primary": {
+   "leak_band": [
+    0.0,
+    0.3
+   ],
+   "D_crit_95": 0.13946976355311658,
+   "D_crit_05": -0.018623554998991376,
+   "size_two_sided": 0.1,
+   "power_P2_band": 0.5551,
+   "power_P2_material": 0.96895,
+   "obs_rejects_single_pool": {
+    "30": false,
+    "60": false,
+    "90": false,
+    "120": false
+   },
+   "obs_pctile_under_P1_30": 0.9351,
+   "D_null_max_at_band_top_leak": 0.1494785727206911
+  },
+  "secondary": {
+   "leak_band": [
+    0.0,
+    0.05
+   ],
+   "D_crit_95": 0.05668611887039949,
+   "D_crit_05": -0.046022804485409304,
+   "size_two_sided": 0.1,
+   "power_P2_band": 0.7005,
+   "power_P2_material": 0.99525,
+   "obs_rejects_single_pool": {
+    "30": true,
+    "60": true,
+    "90": true,
+    "120": true
+   },
+   "obs_pctile_under_P1_30": 0.9989,
+   "D_null_max_at_band_top_leak": 0.028483831751558997
+  }
+ },
+ "S4": {
+  "P0": {
+   "pred_band": [
+    0.0,
+    0.0
+   ],
+   "passes_obs": true
+  },
+  "P1": {
+   "pred_band": [
+    0.0,
+    0.0
+   ],
+   "passes_obs": true
+  },
+  "P1x": {
+   "pred_band": [
+    0.0,
+    0.0
+   ],
+   "passes_obs": true
+  },
+  "P2a_sugar": {
+   "pred_band": [
+    0.0,
+    0.0
+   ],
+   "passes_obs": true
+  },
+  "P2b": {
+   "pred_band": [
+    0.0,
+    0.0
+   ],
+   "passes_obs": true
+  },
+  "NC": {
+   "pred_band": [
+    0.4,
+    1.0
+   ],
+   "passes_obs": false,
+   "power": 1.0
+  },
+  "P2a_aa": {
+   "pred_band_material": [
+    0.15,
+    0.9
+   ],
+   "power_vs_obs_0.07": 0.9915,
+   "passes_obs": false,
+   "max_w_allowed_phi_0.5": 0.30000000000000004,
+   "max_w_allowed_phi_1": 0.15000000000000002
+  },
+  "obs": {
+   "amranihemaimi1995 MPZ (Ala, Gly)": 0.0,
+   "amranihemaimi1995 DMP25": 0.0,
+   "low2007 MPZ (Gly)": 0.07,
+   "low2007 DMP25": 0.063
+  }
+ },
+ "S5": {
+  "rows": [
+   {
+    "row": "130 C 1:1 phosphate pH 7",
+    "B_dex": -0.3010299956639812,
+    "sigma": 0.27869743668508473,
+    "rejects_P0": false
+   },
+   {
+    "row": "130 C 1:1 bicarbonate pH 7",
+    "B_dex": 0.3979400086720376,
+    "sigma": 0.2261588071642697,
+    "rejects_P0": false
+   },
+   {
+    "row": "130 C 1:1 acetate pH 4",
+    "B_dex": 1.2798406965940432,
+    "sigma": 0.21861141456689182,
+    "rejects_P0": true
+   },
+   {
+    "row": "100 C 1:1 acetate pH 4 30 min",
+    "B_dex": 1.4393326938302626,
+    "sigma": 0.21496350129106034,
+    "rejects_P0": true
+   },
+   {
+    "row": "100 C 1:1 acetate pH 4 60 min",
+    "B_dex": 1.3979400086720377,
+    "sigma": 0.21848821867038346,
+    "rejects_P0": true
+   },
+   {
+    "row": "100 C 2:1 acetate pH 4 30 min",
+    "B_dex": 1.2839966563652008,
+    "sigma": 0.23379114251675054,
+    "rejects_P0": true
+   },
+   {
+    "row": "100 C 1:3 acetate pH 4 30 min",
+    "B_dex": 2.063051745747089,
+    "sigma": 0.23846105707647636,
+    "rejects_P0": true
+   }
+  ],
+  "power_material": 0.952,
+  "size": 0.0,
+  "S5b_pyrrole_over_DMP_2:1,1:1,1:3": [
+   38.46153846153846,
+   55.0,
+   231.25
+  ],
+  "S5b_monotone_rising": true
+ },
+ "S6": {
+  "MGO": {
+   "obs_mol_pct": 1.58,
+   "P0_yield_max_mol_pct": 0.05487744122491555,
+   "P0_yield_default_mol_pct": 0.007396772924734597,
+   "G_min_dex": 1.459263233669114,
+   "G_default_dex": 2.329614800555944,
+   "thresholds": {
+    "lab_0.3": 0.848528137423857,
+    "lab_0.5": 1.4142135623730951,
+    "lab_0.7": 1.9798989873223332
+   },
+   "rejects_P0": {
+    "lab_0.3": true,
+    "lab_0.5": true,
+    "lab_0.7": false
+   }
+  },
+  "GO": {
+   "obs_mol_pct": 1.14,
+   "P0_yield_max_mol_pct": 0.5781243150690364,
+   "P0_yield_default_mol_pct": 0.07347042943523331,
+   "G_min_dex": 0.29488361578208117,
+   "G_default_dex": 1.190792273030042,
+   "thresholds": {
+    "lab_0.3": 0.848528137423857,
+    "lab_0.5": 1.4142135623730951,
+    "lab_0.7": 1.9798989873223332
+   },
+   "rejects_P0": {
+    "lab_0.3": false,
+    "lab_0.5": false,
+    "lab_0.7": false
+   }
+  },
+  "power_P1_Yle0.1_lab0.5": 0.38325,
+  "size_P0_lab0.5": 0.00125
+ },
+ "S7": {
+  "obs_dex": 0.3222192947339193,
+  "P0_pred_dex": -1.7385428637681954,
+  "sigma": 0.3674234614174767,
+  "rejects_P0": true,
+  "size": 0.04225,
+  "power_P1_material": 0.9285
+ }
+}

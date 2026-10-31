@@ -1,0 +1,338 @@
+# SECOND READER (reader B) -- Hofmann & Schieberle 2000b, J. Agric. Food Chem. 48:4301-4305 (hofmann2000b.pdf), Fig. 1
+# (p. 4303): PA / PAA time courses from glucose + L-Phe (squares) and ARP-Phe (circles). Reader B's values AS WRITTEN,
+# converted to mmol/L (x 0.1); the raw reading (coordinator's scratchpad, fig1_reader_B.yml) is not repeated here.
+# Independent of reader A; blind to the hypothesis. Exposure: the rough Fig. 1 notes in
+# fit_rows/second/strecker_hofmann2000_fig2.yml text_checks were visible to both readers.
+# Digitisation (reader B): pdfimages page 3 object 21 (1390 x 889 px, 300 ppi, 1-bit), crops upscaled 8-10x with sips;
+# y ticks at rows 10.9 / 195.9 / 380.9 / 565.9 (12 / 9 / 6 / 3), 61.667 px per umol/mmol, 0 at row 750.9; marker
+# centre = midpoint of top and bottom ink rows; +-1.5 px isolated (0.024 umol/mmol), +-2 px for the touching squares at 30 /
+# 60 min, the 10-min cluster per row. Origin not keyed. Pot names are this reader's (suffix _b); the first reading's names
+# are the record.
+name: strecker_hofmann2000b_fig1
+status: draft
+reader: agent-hofmann2000b-fig1-readerB-2026-10-31
+read_by: agent-hofmann2000b-fig1-readerB-2026-10-31
+pots:
+  hofmann2000b_fig1_glc_phe_reflux_b:
+    ledger_id: hofmann2000b_fig1_pa_paa_timecourse
+    t_c: 100
+    t_c_basis: not stated for Fig. 1; reflux (~100 C) inferred from the Table 1 / Table 3 recipe the text calls "both reaction systems"
+    minutes: 500
+    conditions_inferred: true
+    initial_mmol_L:
+      Glc: 100.0
+      PHE: 100.0
+    concentration_basis: 1.0 mmol each in 10 mL (table footnotes; Methods 0.1 mmol in 1 mL), inferred for Fig. 1
+    engine_species_missing: [PHE, PHEAL, PHEAC]
+    label_ph: 7.0
+    ph_measured_at: not stated
+    buffer: phosphate pH 7.0; Methods "0.5 mmol/L" vs Tables 1-3 "0.5 mol/L" (mol/L taken)
+    atmosphere: not stated for Fig. 1; air presumed (reflux, no argon named)
+    vessel: not stated (reflux inferred)
+    condition_quote: Fig. 1 caption; Table 1 footnote c "A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate
+      buffer (10 mL; 0.5 mol/L, pH 7.0) was refluxed for 30 min."
+  hofmann2000b_fig1_arp_phe_reflux_b:
+    ledger_id: hofmann2000b_fig1_pa_paa_timecourse
+    t_c: 100
+    t_c_basis: as the Glc/Phe pot (inferred)
+    minutes: 500
+    conditions_inferred: true
+    initial_mmol_L:
+      PHEARP: 100.0
+    concentration_basis: 1.0 mmol ARP-Phe in 10 mL (Table 1 footnote b), inferred for Fig. 1
+    engine_species_missing: [PHEARP, PHEAL, PHEAC]
+    label_ph: 7.0
+    ph_measured_at: not stated
+    buffer: phosphate pH 7.0, 0.5 mol/L (as the Glc/Phe pot)
+    atmosphere: not stated for Fig. 1; air presumed
+    vessel: not stated (reflux inferred)
+    condition_quote: Fig. 1 caption; Table 1 footnote b "A solution of N-(1-deoxy-D-fructosyl)-L-phenylalanine (1.0 mmol) in phosphate
+      buffer (10 mL; 0.5 mol/L, pH 7.0) was refluxed for 30 min."
+rows:
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAL
+  t_min: 10
+  value: 0.09900
+  unit: mmol_L
+  read_error: 0.0105
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.011)'
+  value_as_printed: 0.99
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PA (open circles) 10 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAL
+  t_min: 30
+  value: 0.26100
+  unit: mmol_L
+  read_error: 0.0040
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.004)'
+  value_as_printed: 2.61
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PA (open circles) 30 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAL
+  t_min: 60
+  value: 0.42000
+  unit: mmol_L
+  read_error: 0.0025
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0025)'
+  value_as_printed: 4.2
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PA (open circles) 60 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAL
+  t_min: 120
+  value: 0.62100
+  unit: mmol_L
+  read_error: 0.0017
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0017)'
+  value_as_printed: 6.21
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PA (open circles) 120 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAL
+  t_min: 240
+  value: 0.84900
+  unit: mmol_L
+  read_error: 0.0012
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0012)'
+  value_as_printed: 8.49
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PA (open circles) 240 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAL
+  t_min: 300
+  value: 0.92000
+  unit: mmol_L
+  read_error: 0.0011
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0011)'
+  value_as_printed: 9.2
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PA (open circles) 300 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAL
+  t_min: 500
+  value: 1.00000
+  unit: mmol_L
+  read_error: 0.0010
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.001)'
+  value_as_printed: 10.0
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PA (open circles) 500 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAC
+  t_min: 10
+  value: 0.03000
+  unit: mmol_L
+  read_error: 0.0463
+  read_error_basis: 'reader B +-0.032 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.046)'
+  value_as_printed: 0.3
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PAA (filled circles) 10 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAC
+  t_min: 30
+  value: 0.08000
+  unit: mmol_L
+  read_error: 0.0130
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.013)'
+  value_as_printed: 0.8
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PAA (filled circles) 30 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAC
+  t_min: 60
+  value: 0.18100
+  unit: mmol_L
+  read_error: 0.0058
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0058)'
+  value_as_printed: 1.81
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PAA (filled circles) 60 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAC
+  t_min: 120
+  value: 0.32100
+  unit: mmol_L
+  read_error: 0.0032
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0032)'
+  value_as_printed: 3.21
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PAA (filled circles) 120 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAC
+  t_min: 240
+  value: 0.60100
+  unit: mmol_L
+  read_error: 0.0017
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0017)'
+  value_as_printed: 6.01
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PAA (filled circles) 240 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAC
+  t_min: 300
+  value: 0.72000
+  unit: mmol_L
+  read_error: 0.0014
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0014)'
+  value_as_printed: 7.2
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PAA (filled circles) 300 min, reader B as written
+- pot: hofmann2000b_fig1_arp_phe_reflux_b
+  species: PHEAC
+  t_min: 500
+  value: 0.89900
+  unit: mmol_L
+  read_error: 0.0012
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0012)'
+  value_as_printed: 8.99
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 ARP-Phe PAA (filled circles) 500 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAL
+  t_min: 10
+  value: 0.02100
+  unit: mmol_L
+  read_error: 0.1241
+  read_error_basis: 'reader B +-0.060 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.13)'
+  value_as_printed: 0.21
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PA (open squares) 10 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAL
+  t_min: 30
+  value: 0.04000
+  unit: mmol_L
+  read_error: 0.0347
+  read_error_basis: 'reader B +-0.032 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.035)'
+  value_as_printed: 0.4
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PA (open squares) 30 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAL
+  t_min: 60
+  value: 0.06100
+  unit: mmol_L
+  read_error: 0.0228
+  read_error_basis: 'reader B +-0.032 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.023)'
+  value_as_printed: 0.61
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PA (open squares) 60 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAL
+  t_min: 120
+  value: 0.12000
+  unit: mmol_L
+  read_error: 0.0087
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0087)'
+  value_as_printed: 1.2
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PA (open squares) 120 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAL
+  t_min: 240
+  value: 0.21100
+  unit: mmol_L
+  read_error: 0.0049
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0049)'
+  value_as_printed: 2.11
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PA (open squares) 240 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAL
+  t_min: 300
+  value: 0.25100
+  unit: mmol_L
+  read_error: 0.0042
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0042)'
+  value_as_printed: 2.51
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PA (open squares) 300 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAL
+  t_min: 500
+  value: 0.28000
+  unit: mmol_L
+  read_error: 0.0037
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0037)'
+  value_as_printed: 2.8
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PA (open squares) 500 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAC
+  t_min: 10
+  value: 0.01000
+  unit: mmol_L
+  read_error: 0.1303
+  read_error_basis: 'reader B +-0.030 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.13)'
+  value_as_printed: 0.1
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PAA (filled squares) 10 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAC
+  t_min: 30
+  value: 0.03000
+  unit: mmol_L
+  read_error: 0.0463
+  read_error_basis: 'reader B +-0.032 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.046)'
+  value_as_printed: 0.3
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PAA (filled squares) 30 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAC
+  t_min: 60
+  value: 0.05000
+  unit: mmol_L
+  read_error: 0.0278
+  read_error_basis: 'reader B +-0.032 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.028)'
+  value_as_printed: 0.5
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PAA (filled squares) 60 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAC
+  t_min: 120
+  value: 0.15200
+  unit: mmol_L
+  read_error: 0.0069
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0069)'
+  value_as_printed: 1.52
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PAA (filled squares) 120 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAC
+  t_min: 240
+  value: 0.28100
+  unit: mmol_L
+  read_error: 0.0037
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0037)'
+  value_as_printed: 2.81
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PAA (filled squares) 240 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAC
+  t_min: 300
+  value: 0.31100
+  unit: mmol_L
+  read_error: 0.0034
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0034)'
+  value_as_printed: 3.11
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PAA (filled squares) 300 min, reader B as written
+- pot: hofmann2000b_fig1_glc_phe_reflux_b
+  species: PHEAC
+  t_min: 500
+  value: 0.37100
+  unit: mmol_L
+  read_error: 0.0028
+  read_error_basis: 'reader B +-0.024 umol/mmol abs, in dex (reader B dex as written, an averaged asymmetric interval for the 10-min squares = 0.0028)'
+  value_as_printed: 3.71
+  unit_as_printed: umol/mmol starting material (digitised)
+  source_value: Fig. 1 Glc/Phe PAA (filled squares) 500 min, reader B as written
+text_checks:
+- quote: p. 4302 "by a factor of 1.7 higher amounts of the acid were formed after 500 min"
+  reading: Glc/Phe at 500 min PAA / PA = 3.71 / 2.80 = 1.32; 1.7 is reached at no plotted time. INCONSISTENT (text vs figure).
+- quote: p. 4302 "formation of PA (empty squares, Figure 1) was favored only within the first 60 min"
+  reading: PA > PAA at 10 / 30 / 60 min; crossover ~75 min. Consistent.
+- quote: Table 2 expt II (air, 100 C, 120 min, closed vial) ARP-Phe 5.5 / 3.0, Glc/Phe 1.4 / 1.8 umol/mmol
+  reading: Fig. 1 at 120 min 6.21 / 3.21, 1.20 / 1.52; 7 - 16 % apart, outside the read error -> a different run / vessel.

@@ -3871,20 +3871,20 @@ entries:
     dossier: hofmann2000b_extraction.md
     paper: "Hofmann & Schieberle 2000 J Agric Food Chem 48:4301"
     lab: "DFA Munich (Hofmann / Schieberle)"
-    system: "ARP-Phe 0.1 M, or glucose 0.1 M + L-Phe 0.1 M"
-    medium: "0.5 mol/L phosphate buffer pH 7.0, reflux, air not controlled"
+    system: "ARP-Phe 0.1 M, or glucose 0.1 M + L-Phe 0.1 M (1.0 mmol in 10 mL; INFERRED from Table 1, no amounts printed for Fig. 1)"
+    medium: "0.5 mol/L phosphate buffer pH 7.0 (Methods misprint '0.5 mmol/L'), reflux, air presumed; none of it printed for Fig. 1 (inferred from Table 1 column II, the system the text refers to)"
     temperature_c: [100]
     ph: {initial: [7.0], measured_during: false, final: null}
-    time_min: [0, 500]
+    time_min: [10, 500]
     species: [phenylacetaldehyde, phenylacetic acid]
     kind: time_series
-    location: "Fig. 1; not digitised"
-    status: figure_only
+    location: "Fig. 1 (p. 4303; umol/mmol starting material; 300 ppi 1-bit raster, page 3 object 21), digitised at 10 / 30 / 60 / 120 / 240 / 300 / 500 min for both systems; text p. 4302 (ARP-Phe PA > PAA at all times; Glc/Phe PA favoured within 60 min; 'factor of 1.7' acid after 500 min)"
+    status: digitised_in_dossier
     quant_class: sida
     simulable: true
-    condition_quote: ""
-    flags: [ph_start_only]
-    note: "Text gives only PAA/PA = 1.7 at 500 min for Glc/Phe. Same pot as hofmann2000 Fig. 2 (glucose/Phe reflux) in substance."
+    condition_quote: "Figure 1. Formation of phenylacetaldehyde (PA) and phenylacetic acid (PAA) from glucose/phenylalanine (filled square, PAA; open square, PA) or N-(1-deoxy-D-fructosyl)-L-phenylalanine (ARP-Phe) (filled circle, PAA; open circle, PA). / Table 1 footnote c: A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0) was refluxed for 30 min."
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, conditions_declared_not_printed, "text_vs_figure_conflict: CF-075"]
+    note: "Fit table strecker_hofmann2000b_fig1 (2026-10-31): two blind readers (A, B) agree within 0.011 umol/mmol on all 28 points; adjudicated mean, error max(A, B, |A-B|/2) (verified; status ready, literature only). Keyed as the BLIND test of the forced-input Strecker layer (kinetic_core_strecker_forced_input_prereg.md sec. 12). The Glc/Phe 10-min squares are hidden in a cluster (0.13 dex): dropped from that blind score by its rule 6. Text 'factor of 1.7' at 500 min vs the figure's 1.32 (CF-075). Table 2 expt II (air, 120 min, closed vial) is 7 - 16 % from the figure: a different run, not a duplicate. Not the same run as hofmann2000 Fig. 2 (10 - 40 % apart; the older note 'same pot in substance' meant the recipe)."
   - id: hofmann2000b_fig2_fig3_arp_phe_dicarbonyls
     dossier: hofmann2000b_extraction.md
     paper: "Hofmann & Schieberle 2000 J Agric Food Chem 48:4301"

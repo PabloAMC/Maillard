@@ -523,3 +523,79 @@ B7ASST2M against the synthetic data must find it feasible (expected P 0.8). **Ne
 B7ASST2 (the same structure WITHOUT the base-favoured 3-DX sink -- v3's arm) against the same synthetic data must find
 it NOT feasible (expected P 0.7). 600 draws each, the bands of sec. 19, seeds 20261104 / 20261105. If the positive
 control fails, "infeasible" verdicts carry little weight; if the negative control passes, "feasible" verdicts do.
+
+## 24. Amendment to sec. 23 (2026-10-31 ~13:00), written BEFORE either power control was run
+
+**Why.** An oracle check scored the truth (v4 joint pass 0) on its own synthetic data. At the declared sigma 0.15 dex,
+it fails the joint threshold on both declared noise realizations (time / pH / xylose 3/3/1 and 5/3/1). Over 400 noise
+seeds, P(truth passes) is 0.07 (scratchpad power_test_report.md). The positive control as declared could not pass, so
+it would have tested the noise, not the method.
+
+**(a) Noise.** Sigma is re-declared at **0.075 dex per row**, from the data's own scatter of log10(TDP/DPO):
+- within-pot rms about a smooth curve in log10 t: 0.055 (quadratic) - 0.068 (line) dex per row;
+- printed sd + read error: median 0.024 dex per species.
+
+The within-figure tau 0.2 is a response-factor offset that cancels in every scale-free signature. Sec. 23's 0.15 was
+model misfit after scales. Sensitivity: sigma 0.10 (reported, not run unless the main result is inconclusive).
+
+**(b) Decisive families.** A joint pass is **time slope >= 5 / 8 AND pH segments >= 4 / 6**. Signature (vii) is
+REPORTED, not decisive, as (iii) is (CF-071).
+- At sigma 0.075, (vii) >= 3 / 4 has power 0.60.
+- At >= 2 / 4 it passes by chance in 161 of 193 random draws.
+
+So no count of (vii) meets the rule P(truth) >= 0.8 with chance <= 0.05. The rule is met by the new joint threshold:
+P(truth passes) is 0.99 at sigma 0.075 and 0.91 at 0.10, and its chance rate is 0 / 193 (R3En box, seed 20261031, 95 %
+upper bound 1.5 %). The change alters no earlier verdict: v1, v2, v3 and v5 failed on time + pH jointly, and v4 passes
+it.
+
+**(c) One realization.** Both controls run against the SAME synthetic data, as sec. 23 intended: noise seed 20261111
+(the positive control's seed + 7, as the script derives it). The draw seeds stay 20261104 (positive) and 20261105
+(negative). The bands are those of sec. 19, with 600 draws each. On this realization the truth itself scores 8 / 5 / 3
+(a precondition, not a result).
+
+**(d) Outcomes.**
+- **The method has power:** the positive control is feasible (>= 1 joint pass) and the negative is not.
+- **The method is blind:** the positive control fails. Every "not feasible" verdict (v1, v3, v5) is then downgraded to
+  "not found" and carries little weight.
+- **The method over-accepts:** the negative control is feasible. Feasibility verdicts (v4) then carry little weight.
+- **INCONCLUSIVE** is an allowed outcome when the positive control passes with 1 - 2 joint passes only (a draw-count
+  fluke cannot be excluded at 600 draws) or the negative control's passes sit within 1 of the positive's. The remedy
+  is a second noise realization (seed 20261112) before any conclusion. It is not a re-tuning of thresholds.
+
+Each control's pass fraction is reported with its 95 % interval.
+
+**(e) Exit rule (premortem).** Threshold counting is retired for this hub if either of two things holds:
+- the truth's joint-pass probability at the realistic sigma is below 0.6 under the best calibrated thresholds whose
+  chance rate is <= ~0.05;
+- the controls end blind or over-accepting.
+
+The replacement is the paired held-out log density between rival structures, compared against a null-calibrated
+distribution: draws from the null structure's band give the null distribution of the log-density difference.
+Otherwise the item becomes a declared band plus a designed-data request. By (a) - (b) the numbers put us in the
+**keep** branch (P 0.99 >= 0.6, chance 0 / 193), pending the controls. Time-box: 12 h of wall clock in total for this
+item from now, including any second realization.
+
+**(f) Expected (written now).**
+- positive control feasible: P 0.8;
+- negative control not feasible: P 0.75;
+- both as hoped ("the method has power"): P 0.6;
+- inconclusive: P 0.15.
+
+Reasons: on real data the positive arm had 7 time + pH draws of 600 and the negative 0 of 597, and the synthetic data
+resemble the real on time and pH.
+
+## 25. Power controls read; the feasibility method changes (2026-10-31 ~17:30)
+
+**Result (sec. 24 (c) - (d)), one noise realization (seed 20261111), 600 draws each:**
+- positive control (B7ASST2M on its own synthetic truth): **2 / 599** joint passes, so feasible;
+- negative control (B7ASST2): **0 / 600**, so not feasible.
+
+The one-sided Fisher p is 0.25, which is sec. 24 (d)'s INCONCLUSIVE zone: 1 - 2 passes cannot exclude a draw-count fluke. Records: `kinetic_core_deoxyosone_feasibility_b7asst2m_power_pos.*` and `..._b7asst2_power_neg.*`. They were run through a scratch wrapper with noise-seed and threshold overrides; the flags are to be folded into the tester before reuse.
+
+**What the controls show.** The binding limit is not noise but how much of the band volume random draws cover. On the truth's own data only 12 / 599 draws reach pH >= 4. The probability that random sampling misses a TRUE structure is ~0.14 at 600 draws (v3, v5) and ~0.37 at 299 (v1, v2).
+
+**Decisions:**
+1. **The "not feasible" verdicts of v1, v3 and v5 are downgraded to "not found by random sampling"** (P(miss | true) 0.14 - 0.37). v4's "feasible" stands.
+2. **Feasibility is decided by SEARCH, not by random draws.** A bounded violation-minimising search, multi-start from the band, as in `feasibility_strecker_forced_input.py` (EX-049), which found feasible regions that sampling missed. Random draws remain the CHANCE baseline. The controls are re-run under the search before the hub returns to the active ranking (triage rank 6): positive / negative as in sec. 24, the same realization, 20 starts each. Expected: positive feasible P 0.85, negative not feasible P 0.75.
+3. **The 2400-draw re-run recommended by the power analysis is not run.** Search answers the same question at a fraction of the compute.
+4. **The xylose double ratio (vii) is reported, not decisive (sec. 24 (b)).** No earlier verdict changes.

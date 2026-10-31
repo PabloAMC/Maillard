@@ -90,3 +90,26 @@ the typical-yield baseline on these new-laboratory data, out of sample.
   point if affordable.
 - Whether a xylose twin of the centre point is worth adding. The model treats ribose and xylose as one pentose;
   the data say ribose is faster (Mikami 2017, Furukawa 2013).
+
+## Additions from the 2026-10-31 evidence map (mechanisms the literature cannot discriminate)
+
+The within-study factor matrix and mechanism map ([EVIDENCE_MAP_2026-10-31.md](EVIDENCE_MAP_2026-10-31.md)) tell, per open mechanism, whether published labelling, fed-intermediate, trapping or measured-intermediate experiments can decide it.
+- **Decidable from the literature (≥ 2 labs):** the hexose hub; the existence of a cysteine trap of 3-DX; MFT routes at 95 - 140 °C; disulfide reversibility; the Strecker donor ranking; the pyrazines' carbon origin.
+- **Single-lab or no discriminating experiment:** the pentose split and its pH and phosphate laws; the MFT lifetime at process temperature; amine acceleration of β-cleavage; dilute cysteine fate; the Strecker O2 acid route; the pyrrole sink; Wolff vs Amadori oxidation; lipid carbonyls as Strecker donors.
+
+Ranked by (mechanisms discriminated) × P(it changes a structural choice) ÷ cost. Each cell is either already in the core above or added to it:
+
+| # | experiment | decides | relation to the core | P (changes a structure) |
+|---|---|---|---|---|
+| E1 | **Pentose hub ladder, in-situ vs ex-situ OPD.** Xylose + Gly 50 mM, pH-stat 5.5 / 6.5 / 7.5, phosphate 0 / 0.2 M, Cys 0 / 5 / 25 mM, 100 °C (+ 120 °C corner), 9 times to 240 min | the pentose split as a FLUX (not a standing level); the 3-DX cysteine trap and its pH law; phosphate catalysis; the OPD operator | new (the core has no OPD arm); its phosphate factor extends arm C | 0.6 |
+| E3 | **Labelled MFT spiked into a running ribose + Cys pot (CAMOLA, [13C5]-ribose 1:1).** 100 vs 140 °C, air vs argon, [2H3]-MFT spike at t = 0 vs at sampling | the MFT loss law (lifetime, O2 and carbonyl dependence); the time-resolved route mix; the thiol work-up operator | runs ON the core recipe; adds the spike and label arms | 0.65 |
+| E5 | **Forced-input Strecker / pyrazine pot, second lab.** MGO or butanedione 10 mM + Phe / Leu / Ala / Gly; pH 3.2 / 7.0; argon vs air; closed vial vs Likens-Nickerson; [13C2]-glyoxal and 15N-Ala arms | Strecker flux vs yield; the O2 acid route (cross-lab for Hofmann 2000); the aminoketone partition to pyrazine vs pyrrole; the SDE operator behind the 20x Weenen / Hofmann gap (CF-073) | new; feeds the forced-input Strecker layer (EX-049) directly | 0.6 |
+| E4 | **Cysteine / sulfur mass balance with an H2S time course,** dilute (10 / 10 mM) and concentrated (83 / 165 mM) | dilute cysteine fate (catalysed hydrolysis vs K(pH) vs adducts); H2S supply | the core plus arm C cover most of it; add the dilute level and argon | 0.55 |
+| E2 | **Fed 1-DG / 3-DG (3-DX if available) decay, ± Gly 0 / 20 / 100 mM, ± phosphate, ± Cys** | amine acceleration of β-cleavage; the deoxyosone lifetimes; the 3-DX sink's identity | new, small (published syntheses) | 0.55 |
+| E6 | **Free sugar vs Amadori compound under argon / air / O2, α- vs β-amino acid, ± DTPA** | Wolff vs Amadori oxidation; Namiki C2; 1,4-dideoxyosones; oxidative α-cleavage acids (second lab) | new | 0.45 |
+| E7 | **Lipid vs sugar dicarbonyl as Strecker donor in one pot, ± MFT spike** | lipid carbonyls as Strecker donors (cross-lab); as thiol traps | new | 0.4 |
+| E8 | **Water activity × thermal history on one recipe** (ribose / Cys / Gly on cellulose, a_w 0.3 / 0.6 / 0.9, ramp vs isothermal) | water activity; thermal history; the low-water C2 + C3 MFT route | new; product-facing | 0.35 |
+
+**If one experiment only:** E3 on the core recipe. It decides the likeliest missing thiol element (the MFT loss law) and the route mix over time in one run. It needs a [2H3]-MFT standard and [13C5]-ribose, both standard reagents for the groups that run SIDA. **If two:** add E1. The pentose hub is the most upstream open question, and its in-situ OPD arm tests a method artefact that otherwise confounds every published deoxyosone level. P(E1 + E3 together resolve at least two of the hub / thiol questions) ~0.7; P(the literature alone does) ~0.3.
+
+Candidate partners have the methods: the Wageningen group (Fogliano), whose multiresponse kinetics come from van Boekel's tradition; Granvogl / Hofmann (Munich: SIDA, CAMOLA, Strecker); Reading (Parker / Mottram: thiols, pyrazine isotopomers); Nestlé / Davidek (deoxyosone feeding).

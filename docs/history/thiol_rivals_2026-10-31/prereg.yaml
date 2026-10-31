@@ -1,0 +1,68 @@
+# Pre-registration, written 2026-10-31 BEFORE any computation (input to feasibility_thiol_loss_cysteine_fate.py).
+# Protocol: STATUS_AND_PLAN "How a mechanism is identified" (a)-(f), triage item 3; A2_MODULE_CONTRACT sec. 3.
+# (The harness refused report.md for a subagent; this file carries section 1 and is read by the scorer.)
+labs:
+  nestle: [cerny2003, us10076126]
+  munich: [schieberle2000, guth1995, hofmann1995]
+  quest: [vanseeventer2001]
+  jiangnan: [zhai2019, zhai2021, zhai2023jafc]
+  btbu: [cao2017, wang2022]
+  beijing_liu: [liu2023b]
+question_a_mft_loss:
+  skeleton: "MFT' = s(t) - loss; s(t) from a declared family (lag 5-20 min, power 0.5-1.5, exhaustion 2-30 h); the supply is a nuisance, not the question"
+  rivals:
+    A0_null: "engine: first order, one barrier, k_mft_decay at the converged R3En value (CF-013 analysis: 0.095 /min mean at 110 C, half-life 7 min)"
+    A1: "first order, pot-independent; k anchored on van Seeventer 2001 50 C matrix rate (59-69 %/day), Ea in the sulfur class [40, 133] kJ/mol"
+    A2: "second order in a growing electrophile pool E(t) (carbonyl / melanoidin load; van Seeventer 'electrophilic coupling', Hofmann 2002 FFT dose series); k2 a DECLARED band"
+    A3: "oxidative / thiol-coupling loss suppressed by free cysteine: k_ox MFT / (1 + Cys/K_c); k_ox from van Seeventer clean buffer (> 90 %/day), K_c from his +150 mM Cys entry; Ea class band"
+    NC_a: "no loss (known wrong: net declines at >= 140 C, Liu 2023b 168 C, Zhai 2023 JAFC 140 C, Wang 2022)"
+  tests:
+    Ta1_spike_survival: {kind: 4, labs: [nestle], observable: "lambda(110 C) <= ~0.02 /min (inferred bound: [2H3]-MFT charged before 4 h quantified)", predicted: {A0: fail, A1: "pass if Ea <= ~60", A2: "depends on k2 E", A3: "depends on Cys left", NC_a: pass}}
+    Ta2_cys_matrix_contrast: {kind: 6, labs: [quest], observable: "50 C: clean buffer > 90 %/d, +150 mM Cys 69 %/d, +ribose no effect", predicted: {A0: "fail (no contrast)", A1: "fail (no contrast)", A2: "fail (clean buffer slowest)", A3: pass, NC_a: fail}}
+    Ta3_schieberle_shape: {kind: "7, scale-free", labs: [munich], observable: "60/30 3.07, 360/60 11.3, 720/360 1.15", predicted: {A0: "needs accelerating supply", A1: "rise + plateau", A2: "late fall", A3: "late fall as Cys exhausts", NC_a: "plateau by exhaustion only"}}
+    Ta4_cerny_pot_D: {kind: "1+2", labs: [nestle], observable: "NF share of MFT 0.07", predicted: "loss law moves the share only through route timing (all rivals similar)"}
+    Ta5_high_T_decline: {kind: "6 (T)", labs: [beijing_liu, jiangnan, btbu], observable: "net decline after the peak at >= 140 C", predicted: {A0: pass, A1: "pass if Ea high enough", A2: pass, A3: pass, NC_a: fail}}
+    Ta6_disulfide_reverts: {kind: "3+5", labs: [munich, nestle], observable: "Guth 1995: MFT-MFT 86 % gone in 2 h at 100 C, 62 % of theory back as MFT; Cerny pot C disulfides binomial; Hofmann 1995 no headspace disulfide", predicted: "contradicts A3 only if read as TERMINAL dimerisation; read, not simulated"}
+question_b_cysteine_fate:
+  skeleton: "TTCA forced from Zhai 2021 Fig. 4b; TTCA <-> Cys + Xyl (k_r, k_f = K k_r); TTCA -> CAMA -> dicarbonyl + Cys (k_cd, de Roos 2005); xylose loss from its control"
+  rivals:
+    B0_null: "engine: fast uncatalysed ring opening (k_r ~0.028 /min, pH-flat), K 60 L/mol (Cao 2017, 45-75), no Cys sink besides re-condensation"
+    B1: "slow exchange in dilute water (k_f <= 0.17 L/mol/min), K unchanged; free Cys mainly from CAMA decay (k_cd 4.5e-3 - 1.4e-2 /min)"
+    B2: "fast exchange, pH-dependent K (Kallen 1971 slope +0.55 to +0.83 log per pH unit) from Cao's K at pH ~4.5"
+    B3: "B1 + Cys + dicarbonyl adduct sink (3-DX, 1-DX, MGO, GO forced from Fig. 5); k_s DECLARED 1e-4 - 1e-1 L/mmol/min"
+    B4: "B1 + Cys oxidation suppressed by xylose-derived reductones, k_ox / (1 + q Xyl); k_ox DECLARED 1e-4 - 5e-3 /min (floor Zheng & Ho 1994), q 0 - 1 /mM"
+    NC_b: "instantaneous equilibrium at K 60 L/mol (known wrong: ~7 mM free Cys vs 0.05 - 2.2 measured)"
+  tests:   # all Zhai 2021, Jiangnan, 100 C, pH 5.5/6/7/8, n = 3; ONE lab
+    Tb1_xylose_contrast: {kind: 6, observable: "mean log10 Cys(+Xyl)/Cys(-Xyl), 60-120 min, per pH", predicted: {B0: neg, B1: "~0 / slightly neg", B2: "strongly neg", B3: neg, B4: "pos if q > 0", NC_b: "strongly neg"}}
+    Tb2_free_cys_yield: {kind: 5, observable: "free Cys / TTCA lost at 120 min (~0.10 / 0.08 / 0.14 / 0.16)", predicted: {B0: "high >= 0.5", B1: low, B2: high, B3: low, B4: low, NC_b: "very high"}}
+    Tb3_xylose_consumption: {kind: 6, observable: "log10 Xyl(+TTCA)/Xyl(control) at 120 min (-0.01 / -0.07 / -0.19 / -0.50)", predicted: {B0: neg, B1: "~0", B2: neg, B3: "~0", B4: "~0", NC_b: neg}}
+    Tb4_concentration: {kind: "6 between studies (same lab)", observable: "Zhai 2019 83 mM, 70 C: half the Cys in TTCA by 20 min", scored: false, reason: "tests B1's unspecified concentration law; cross-study"}
+noise:
+  contrast_cys_dex: 0.07     # replicate CV ~8 % -> 0.035/point, 0.05 per two-series contrast, + 0.05 model floor
+  contrast_xyl_dex: 0.05     # xylose CV ~2 % + floor
+  level_figure_offset_dex: 0.20   # joint fit within-figure tau
+  level_point_dex: 0.035
+  schieberle_ratio_dex: 0.08 # SIDA CV ~10 % (no replicates printed) + floor
+  cerny_share_abs: 0.03      # duplicate SPME, pairs agree to ~3 points
+  power_threshold: 0.8
+expectations:
+  a:
+    controls_work: 0.9            # NC_a fails Ta5, A0 fails Ta1
+    Ta3_underpowered: 0.7
+    Ta4_underpowered: 0.8
+    A1_passes_powered_except_Ta2: 0.5
+    Ta2_powered: 0.6
+    verdict_inconclusive_A1_vs_A3: 0.55
+    A3_admitted_provisional: 0.2
+    A1_admitted_provisional: 0.15
+  b:
+    Tb1_separates_B2_NCb_from_B1_B4: 0.75
+    Tb1_separates_B1_from_B4: 0.4
+    B0_NCb_fail_Tb2: 0.9
+    only_B4_passes_Tb1: 0.5
+    Tb1_rejects_all: 0.3
+    Tb3_contradicts_B1_at_high_pH: 0.5
+    B0_rejected: 0.85
+    B2_rejected: 0.75
+    one_admitted_provisional: 0.35
+    inconclusive: 0.5
