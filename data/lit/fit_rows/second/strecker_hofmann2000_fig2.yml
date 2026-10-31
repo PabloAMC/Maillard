@@ -1,0 +1,231 @@
+# SECOND READER -- Hofmann, Muench & Schieberle 2000, J. Agric. Food Chem. 48:434-440 (hofmann2000.pdf), Fig. 2: the time
+# course of phenylacetaldehyde (PHEAL, open circles) and phenylacetic acid (PHEAC, filled circles) from glucose + L-Phe.
+# Independent of the first reading (data/lit/fit_rows/strecker_hofmann2000_fig2.yml and its source_verification NOT opened).
+# Conventions follow data/lit/fit_rows/second/strecker_hofmann2000.yml. Verification:
+# data/lit/source_verification/second/strecker_hofmann2000_fig2.yml.
+#
+# Ledger id: hofmann2000_fig2_fig3_glucose_phe_dicarbonyls is the only trunk.yml entry naming Fig. 2 on 2026-10-31 (its Fig. 3
+# half is keyed under hofmann2000_fig3_dicarbonyls_glucose_phe); its quant_class "calibrated" fits the dicarbonyls, not the
+# SIDA-quantified PA / PAA of Fig. 2.
+#
+# Pot naming rule (this reader): <paper key>_<precursors>_<declared T>c_<regime>, as in the second-reader strecker_hofmann2000
+# file; "_fig2" is appended because the Fig. 3 pot hofmann2000_glc_phe_98c_timecourse is a nominally identical recipe with a
+# different sampling grid and the paper never says they share a pot.
+#
+# Digitisation. 1-bit raster 995 x 661 px at 300 ppi (pdfimages, unscaled). Axes: y axis line col 92, x axis line row 563.
+# y ticks (left of the axis) at rows 10 / 121 / 231 / 341 / 452 for 5 / 4 / 3 / 2 / 1 and the axis row 563 for 0; least-squares
+# fit 110.51 px per umol/mmol, tick residuals <= 0.59 px. x ticks (below the axis) at cols 242 / 392 / 542 / 690.5 / 840.5 for
+# 50-250 min and the axis col 92 for 0 (2.993 px/min, residuals <= 0.67 px); after the break a 500 tick at col 974. Marker
+# centres = midpoint of the top and bottom ink rows of each 11-12 px circle on ASCII pixel maps (open rings and filled disks
+# separated by hand where they touch at 10 and 60 min). Read error +-1.5 px (+-0.014 umol/mmol); +-2 px for the touching pairs.
+# All twelve readings fall within 0.01 umol/mmol of a 0.1 grid (the authors probably plotted rounded values).
+#
+# NOT keyed: the origin (curves start at 0, no marker). Units: umol/mmol glucose x 0.1 = mmol/L at 100 mmol/L glucose (the
+# conversion rests on the inferred recipe: conditions_inferred).
+#
+# ADJUDICATOR RELABEL (agent-hofmann2000-fig2-2000b-adjudicator-2026-10-31): identifier only, no value touched. Ledger id
+# hofmann2000_fig2_fig3_glucose_phe_dicarbonyls -> hofmann2000_fig2_pa_paa_glucose_phe (the Fig. 2-only SIDA entry the first
+# reader added and this reader proposed; ruling L of the first-reader table strecker_hofmann2000_fig2.yml).
+name: strecker_hofmann2000_fig2
+status: draft
+reader: agent-hofmann2000-fig2-2000b-reader2-2026-10-31
+read_by: agent-hofmann2000-fig2-2000b-reader2-2026-10-31
+pots:
+  hofmann2000_glc_phe_98c_timecourse_fig2:
+    ledger_id: hofmann2000_fig2_pa_paa_glucose_phe
+    t_c: 98
+    t_c_basis: not stated for Fig. 2; the "L-Phenylalanine/Glucose" model reaction is "heated at 98 C" (methods); Tables 1-2 footnotes "refluxed";
+      abstract "100 C". Declared 98 C; alternative 100 C (aqueous reflux).
+    minutes: 500
+    conditions_inferred: true
+    conditions_basis: Fig. 2 caption and the text introducing it state NO condition (no concentration, temperature, buffer, vessel or atmosphere).
+      Declared from the methods' glucose/Phe recipe (written for 30 min) because the 30-min PAA marker (0.295) equals Table 2's 0.29 umol/mmol;
+      the 30-min PA marker (0.499) is 19 % above Table 2's 0.42, so Fig. 2 may be a separate run.
+    initial_mmol_L:
+      Glc: 100.0
+      PHE: 100.0
+    concentration_basis: '1.0 mmol each in 10 mL buffer -> 100 mmol/L nominal (methods recipe, inferred for Fig. 2); y axis per mmol glucose:
+      1 umol/mmol glucose = 0.1 mmol/L'
+    engine_species_missing:
+    - PHE
+    - PHEAL
+    - PHEAC
+    label_ph: 7.0
+    ph_measured_at: not stated (methods recipe as prepared); pH not re-measured
+    buffer: phosphate pH 7.0 (methods recipe, inferred); molarity 0.5 mol/L as read (see buffer_contradiction)
+    buffer_contradiction: Methods print "0.5 mmol/L" (both model-reaction paragraphs); Tables 1, 2, 3, 5 print "0.5 mol/L"; Table 4 prints
+      "0.1 mol/L". 0.5 mmol/L cannot buffer 100 mmol/L solutes, so mmol/L is read as a misprint for mol/L.
+    atmosphere: not stated for Fig. 2 (the methods' glucose/Phe recipe has no degassing; argon bubbling is written only for the dicarbonyl
+      runs) -> air presumed, not controlled
+    vessel: 'not stated (Table 2 footnote: refluxed; methods: heated at 98 C); one pot per time not stated'
+    source_figure: Fig. 2 (p. 436), 1-bit raster 995 x 661 px at 300 ppi (pdfimages page 3 object 50); y "amount [umol/mmol glucose]" 0-5,
+      x "t (min)" 0-250 then a break to 450-500; markers at 10, 30, 60, 120, 240 and 500 min; curves from the origin (no t = 0 marker)
+    quantification_note: PA and PAA by SIDA ([13C2]phenylacetaldehyde, [13C2]phenylacetic acid; GC-MS CI), as for Table 2
+    condition_quote: Fig. 2 caption "Time course of the formation of phenylacetaldehyde (open circle) and phenylacetic acid (filled circle)
+      from glucose and L-phenylalanine." / Methods "Model Reactions. L-Phenylalanine/Glucose. A solution of glucose (1.0 mmol) and L-phenylalanine
+      (1.0 mmol) in phosphate buffer (10 mL; 0.5 mmol/L, pH 7.0) was heated at 98 C for 30 min." / text p. 436 "The results showed (Figure
+      2) that the formation of PA was slightly favored within the first 60 min of the thermal treatment. However, increasing the reaction
+      time then led to a predominant generation of PAA. After ~8 h, the amounts of the acid were nearly twice as high as the concentration
+      of the aldehyde."
+    possible_same_pot: hofmann2000_glc_phe_98c_timecourse (Fig. 3 dicarbonyls, strecker_hofmann2000) is also a glucose + Phe time course;
+      Fig. 3 has a 300-min point Fig. 2 lacks, and the paper does not say they share a pot. Kept separate; the adjudicator may merge.
+rows:
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAL
+  t_min: 10
+  value: 0.02
+  unit: mmol_L
+  read_error: 0.0393
+  read_error_basis: +-2.0 px on the marker centre (110.5 px per umol/mmol) = +-0.0181 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 0.2
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 10.1 min
+  source_value: Fig. 2 phenylacetaldehyde (open circle) 10 min, marker row 540.5 col 122.5 (open circle rows 535-546; its bottom arc touches
+    the filled circle below) -> 0.2 umol/mmol glucose = 0.02 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAC
+  t_min: 10
+  value: 0.0096
+  unit: mmol_L
+  read_error: 0.0819
+  read_error_basis: +-2.0 px on the marker centre (110.5 px per umol/mmol) = +-0.0181 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 0.096
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 10.1 min
+  source_value: Fig. 2 phenylacetic acid (filled circle) 10 min, marker row 552.0 col 122.5 (filled circle rows 547-557, touching the open
+    circle above) -> 0.096 umol/mmol glucose = 0.0096 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAL
+  t_min: 30
+  value: 0.0499
+  unit: mmol_L
+  read_error: 0.0118
+  read_error_basis: +-1.5 px on the marker centre (110.5 px per umol/mmol) = +-0.0136 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 0.499
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 30.0 min
+  source_value: Fig. 2 phenylacetaldehyde (open circle) 30 min, marker row 507.5 col 182.0 (open circle rows 502-513) -> 0.499 umol/mmol
+    glucose = 0.0499 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAC
+  t_min: 30
+  value: 0.0295
+  unit: mmol_L
+  read_error: 0.02
+  read_error_basis: +-1.5 px on the marker centre (110.5 px per umol/mmol) = +-0.0136 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 0.295
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 30.0 min
+  source_value: Fig. 2 phenylacetic acid (filled circle) 30 min, marker row 530.0 col 182.0 (filled circle rows 525-535) -> 0.295 umol/mmol
+    glucose = 0.0295 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAL
+  t_min: 60
+  value: 0.0897
+  unit: mmol_L
+  read_error: 0.0088
+  read_error_basis: +-2.0 px on the marker centre (110.5 px per umol/mmol) = +-0.0181 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 0.897
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 60.2 min
+  source_value: Fig. 2 phenylacetaldehyde (open circle) 60 min, marker row 463.5 col 272.5 (open circle rows 458-469, abutting the filled
+    circle below) -> 0.897 umol/mmol glucose = 0.0897 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAC
+  t_min: 60
+  value: 0.0793
+  unit: mmol_L
+  read_error: 0.0099
+  read_error_basis: +-2.0 px on the marker centre (110.5 px per umol/mmol) = +-0.0181 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 0.793
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 60.0 min
+  source_value: Fig. 2 phenylacetic acid (filled circle) 60 min, marker row 475.0 col 272.0 (filled circle rows 470-480, abutting the open
+    circle above) -> 0.793 umol/mmol glucose = 0.0793 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAL
+  t_min: 120
+  value: 0.1394
+  unit: mmol_L
+  read_error: 0.0042
+  read_error_basis: +-1.5 px on the marker centre (110.5 px per umol/mmol) = +-0.0136 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 1.394
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 120.2 min
+  source_value: Fig. 2 phenylacetaldehyde (open circle) 120 min, marker row 408.5 col 452.0 (open circle rows 403-414) -> 1.394 umol/mmol
+    glucose = 0.1394 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAC
+  t_min: 120
+  value: 0.1797
+  unit: mmol_L
+  read_error: 0.0033
+  read_error_basis: +-1.5 px on the marker centre (110.5 px per umol/mmol) = +-0.0136 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 1.797
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 120.2 min
+  source_value: Fig. 2 phenylacetic acid (filled circle) 120 min, marker row 364.0 col 452.0 (filled circle rows 359-369) -> 1.797 umol/mmol
+    glucose = 0.1797 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAL
+  t_min: 240
+  value: 0.2001
+  unit: mmol_L
+  read_error: 0.0029
+  read_error_basis: +-1.5 px on the marker centre (110.5 px per umol/mmol) = +-0.0136 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 2.001
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 239.9 min
+  source_value: Fig. 2 phenylacetaldehyde (open circle) 240 min, marker row 341.5 col 810.5 (open circle rows 336-347) -> 2.001 umol/mmol
+    glucose = 0.2001 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAC
+  t_min: 240
+  value: 0.3195
+  unit: mmol_L
+  read_error: 0.0018
+  read_error_basis: +-1.5 px on the marker centre (110.5 px per umol/mmol) = +-0.0136 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 3.195
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at 240.1 min
+  source_value: Fig. 2 phenylacetic acid (filled circle) 240 min, marker row 209.5 col 811.0 (filled circle rows 204-215) -> 3.195 umol/mmol
+    glucose = 0.3195 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAL
+  t_min: 500
+  value: 0.2209
+  unit: mmol_L
+  read_error: 0.0027
+  read_error_basis: +-1.5 px on the marker centre (110.5 px per umol/mmol) = +-0.0136 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 2.209
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at the 500 tick (col 974) beyond the axis break
+  source_value: Fig. 2 phenylacetaldehyde (open circle) 500 min, marker row 318.5 col 974.5 (open circle rows 313-324, right of the axis
+    break (500 tick col 974)) -> 2.209 umol/mmol glucose = 0.2209 mmol/L
+- pot: hofmann2000_glc_phe_98c_timecourse_fig2
+  species: PHEAC
+  t_min: 500
+  value: 0.3503
+  unit: mmol_L
+  read_error: 0.0017
+  read_error_basis: +-1.5 px on the marker centre (110.5 px per umol/mmol) = +-0.0136 umol/mmol abs, in dex; no SD or replicate count printed
+  value_as_printed: 3.503
+  unit_as_printed: umol/mmol glucose (digitised)
+  t_min_basis: nominal sampling time; marker column read at the 500 tick (col 974) beyond the axis break
+  source_value: Fig. 2 phenylacetic acid (filled circle) 500 min, marker row 175.5 col 975.0 (filled circle rows 170-181, right of the axis
+    break (500 tick col 974)) -> 3.503 umol/mmol glucose = 0.3503 mmol/L
+text_checks:
+- quote: p. 436 "the formation of PA was slightly favored within the first 60 min"
+  reading: PA > PAA at 10 / 30 / 60 min (0.200 / 0.096, 0.499 / 0.295, 0.897 / 0.793); curves cross at ~70 min -> consistent
+- quote: p. 436 "After ~8 h, the amounts of the acid were nearly twice as high as the concentration of the aldehyde."
+  reading: '500 min (8.3 h): PAA / PA = 3.503 / 2.209 = 1.59; ''nearly twice'' is generous (hofmann2000b text says 1.7 at 500 min for its
+    own glucose/Phe Fig. 1)'
+- quote: 'Table 2 (same paper): PA 0.42, PAA 0.29 umol/mmol at 30 min, glucose + Phe refluxed'
+  reading: 'Fig. 2 at 30 min: PA 0.499 (+19 %, = 8.7 px, outside the read error), PAA 0.295 (match). CONTRADICTION on PA: Table 2 and Fig.
+    2 are not the same measurement, or one is a different run; rows keep the figure.'
+- quote: 'hofmann2000b Table 2 expt II (Glc/Phe, 100 C, 120 min, closed vial, air): PA 1.4, PAA 1.8 umol/mmol'
+  reading: 'Fig. 2 at 120 min: PA 1.395, PAA 1.797 -> identical to 0.1. DUPLICATE CANDIDATE: the 2000b air value may be this run''s 120-min
+    point (or a coincidence); do not count both as independent.'
+- quote: hofmann2000b Fig. 1 (glucose/Phe, open squares PA, filled squares PAA; eyeballed, not digitised)
+  reading: '2000b Fig. 1 reads roughly PA 0.6 / 1.2 / 2.1 / 2.8 and PAA 0.5 / 1.5 / 2.8 / 3.7 at 60 / 120 / 240 / 500 min, i.e. NOT the same
+    series as this Fig. 2 (0.90 / 1.40 / 2.00 / 2.21 and 0.79 / 1.80 / 3.20 / 3.50): two runs of the nominally same pot; spread ~10-30 %'

@@ -28,8 +28,9 @@ in `STATUS_AND_PLAN.md` sec. 5. Probabilities are the reviewers', kept where the
    75 C against 4 for one shared condensation constant -- methylpyrazine has an extra route (finding 6).
 4. 2-mercapto-3-pentanone / MFT from ribose as a presence / absence signature across temperature (absent at 95 C,
    present at 145 C).
-5. The Weenen 2001 vs Hofmann 2000 Strecker yield from MGO at pH ~3 (21 % vs ~1 %): a cross-laboratory test an
-   aldehyde-loss term must explain.
+5. The Weenen 2001 vs Hofmann 2000 Strecker yield from MGO at pH ~3 (21 % vs ~1 %): a cross-laboratory signature
+   (CF-073). Corrected by the forced-input design review: an aldehyde-loss term CANNOT explain it (k_loss ~4e-4 /min
+   removes <= 5 % in 2 h); donor concentration or a reversible aldehyde-amine pool drained by steam stripping can.
 
 ## 3. Papers to download (deduplicated across the six reviews; DOIs verified against Crossref or PubMed)
 

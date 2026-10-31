@@ -90,7 +90,14 @@ ARMS = {"none": frozenset(), "R2a": frozenset({"mgo_strecker"}), "R2b": frozense
         # B7a-2 (dpo partition prereg sec. 13): the beta-cleavage's pH law saturating (Davidek 2006a, amine-free
         # 1-DG), its pK replacing the slope -- the same coordinate count as R3En; and with B7S's split law
         "B7AS": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating"}),
-        "B7ASS": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating", "split_ph"})}
+        "B7ASS": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating", "split_ph"}),
+        # the hub feasibility test (dpo partition prereg sec. 16): B7ASS's pH structure + a real 3-DX exit (the hub
+        # review's H1: both deoxyosones quasi-steady)
+        "B7ASST": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating", "split_ph", "tdp_exit"}),
+        # feasibility v2 (prereg sec. 17): + the 3-DX and 1-DX SOURCES -- pentose caramelisation (to 3-DX) and TTCA's
+        # direct breakdown (to 1-DX) as offsets
+        "B7ASST2": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating", "split_ph", "tdp_exit",
+                              "ttca_deg", "pent_caramel"})}
 NF_MFT_EA_COORDINATE = ("ea_k_nf_mft", "Ea", 40.0, 200.0, 100.0)
 LAU_NF_EA_KJ_MOL = 81.5
 #: round 3 (review B2): the DDP route's PRODUCT (log10 multiplier of k_dpo_ddp x both DDP -> MFT branches) is the
@@ -123,10 +130,10 @@ SPLIT_COORDINATES = (("dpo_share7", "acid_yield", 0.02, 0.98, 0.30),
 TDP_MGO_COORDINATE = ("log10_k_tdp_mgo", "log10_offset", -8.0, -1.0, -7.0)
 TDP_MGO_EA_KJ_MOL = _PentoseMgoRoutes().ea_tdp_mgo_kj_mol
 ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",), "ddp_mft": ("k_ddp_mft", "k_ddp_mft_hs"),
-                  "k_ttca_deg": ("k_ttca_deg",)}
-ARM_LOWER, ARM_UPPER, ARM_START = ({"k_cys_actz": -6.0, "k_aa_frag": -6.0, "k_ttca_deg": -4.0},
-                                   {"k_cys_actz": 1.0, "k_aa_frag": 0.5, "k_ttca_deg": 0.5},
-                                   {"k_cys_actz": -3.0, "k_aa_frag": -1.5, "k_ttca_deg": 0.0})
+                  "k_ttca_deg": ("k_ttca_deg",), "k_pent_caramel": ("k_pent_caramel",)}
+ARM_LOWER, ARM_UPPER, ARM_START = ({"k_cys_actz": -6.0, "k_aa_frag": -6.0, "k_ttca_deg": -4.0, "k_pent_caramel": -4.0},
+                                   {"k_cys_actz": 1.0, "k_aa_frag": 0.5, "k_ttca_deg": 0.5, "k_pent_caramel": 1.0},
+                                   {"k_cys_actz": -3.0, "k_aa_frag": -1.5, "k_ttca_deg": 0.0, "k_pent_caramel": 0.0})
 #: the entry's own coordinates: (key, kind, lower, upper, start). Rates as log10 of k at 100 C / pH 6 (entry
 #: L/(mmol min), acetic 1/min); slopes in decades per in-situ pH unit; amine_return a share in [0, 1]
 ENTRY_COORDINATES = (("log10_k_pent_amine", "log10_offset", -7.0, -2.0, -4.15),
@@ -188,6 +195,10 @@ def coordinates(mft_decay_cap: bool, arms=frozenset()):
     if "ttca_deg" in arms:
         keys.append("offset_k_ttca_deg"); kinds.append("log10_offset")
         lower.append(ARM_LOWER["k_ttca_deg"]); upper.append(ARM_UPPER["k_ttca_deg"]); start.append(ARM_START["k_ttca_deg"])
+    if "pent_caramel" in arms:
+        keys.append("offset_k_pent_caramel"); kinds.append("log10_offset")
+        lower.append(ARM_LOWER["k_pent_caramel"]); upper.append(ARM_UPPER["k_pent_caramel"])
+        start.append(ARM_START["k_pent_caramel"])
     if "nf_mft_ea" in arms:
         key, kind, lo, hi, st = NF_MFT_EA_COORDINATE
         keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)

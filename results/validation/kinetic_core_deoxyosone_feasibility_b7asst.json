@@ -1,0 +1,28 @@
+{
+ "artifact": "kinetic_core_deoxyosone_feasibility_b7asst",
+ "provenance": {
+  "artifact": "kinetic_core_deoxyosone_feasibility_b7asst",
+  "generated_on": "2026-10-31",
+  "git": {"commit": "30822dc7cdb4a9795d2cf82fda0dbb08b83b2d37", "short": "30822dc7", "branch": "b7-deoxyosone-partition", "dirty": true},
+  "generated_by": "scripts/generators/feasibility_deoxyosone.py",
+  "inputs": [
+   {"path": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_b7ass_w02.json", "sha256": "13d715ac4e51735cc428e1c351eb2c049f3fb486a935fb554d0ef5c327ca36a7"},
+   {"path": "src/kinetic_core/sulfur.py", "sha256": "d82e7dd7ca6ffe0222189eb590f93658578092673d8afa50c2a580787add71ed"},
+   {"path": "data/lit/fit_rows/deoxyosone_submodel.yml", "sha256": "4af9c953a653ef5ed8377a0b34efe81774111bf3a47706f5799cc182f5775853"}
+  ]
+ },
+ "arm": "B7ASST",
+ "reference": "s042_b7ass_w02",
+ "draws": 300,
+ "seed": 20261031,
+ "runnable_draws": 299,
+ "bands": [["dpo_share7", "abs", 0.02, 0.98], ["split_ph_c", "abs", 5.0, 10.0], ["aa_pk", "abs", 5.0, 7.5], ["log10_k_dpo_aa", "rel", -1.0, 1.0], ["offset_k_dpo_c2c3", "abs", 0.0, 3.0], ["offset_k_dpo_ddp", "rel", -1.0, 1.0]],
+ "tdp_exit_band": {"log10_k_ref_per_min": [-3.5, -1.0], "ea_kj_mol": [30.0, 100.0]},
+ "thresholds": {"time_slope": 5, "ph_segments": 4, "xylose_double_ratio": 3},
+ "draws_reaching": {"time_slope": 0, "ph_segments": 6, "xylose_double_ratio": 91},
+ "best": {"time_slope": 4, "ph_segments": 4, "xylose_double_ratio": 3},
+ "pairs_reaching": {"time_slope+ph_segments": 0, "time_slope+xylose_double_ratio": 0, "ph_segments+xylose_double_ratio": 6},
+ "feasible": false,
+ "joint_passes": [],
+ "errors_sample": ["a pot failed"]
+}

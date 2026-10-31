@@ -366,3 +366,36 @@ quasi-steady (Martins M4's lifetimes as the null); (b) the split law + saturatin
 (c) a cysteine trap of 3-DX growing with pH (signature vii at pH 8); (d) catalysed TTCA hydrolysis (the cysteine
 review); (e) phosphate as a variable (Davidek in phosphate, Zhai in water). Decisive tests: (i), (ii), (vii), the
 +-xylose free-cysteine contrast, Cerny pot D.
+
+## 16. The first hub FEASIBILITY test (mechanisms before constants) -- design, 2026-10-31 ~09:40, before any run
+
+**Question.** Is there ANY constant set, inside declared bands, for which the structure "B7ASS's pH structure + a
+real 3-DX exit" (arm B7ASST: the split's base-saturating law, the saturating beta-cleavage, and TDP's own decay)
+reproduces the partition's scale-free signatures? No fit: a structure that cannot reach them anywhere in its bands is
+rejected; one that can goes to a pre-registered fit.
+
+**Sampled (uniform, independent), all else held at B7ASS's optimum (s042_b7ass_w02):** dpo_share7 [0.02, 0.98];
+split_ph_c [5, 10]; aa_pk [5, 7.5]; log10_k_dpo_aa (pH 6) its optimum +-1 dex; offset_k_dpo_c2c3 [0, 3] (the C2 + C3
+drain, compensation-suspect); offset_k_dpo_ddp its optimum +-1; TDP's own decay log10 k(100 C) in [-3.5, -1] /min
+(lifetimes ~5 min - 50 h; Martins' 3-DG ~30 min sits inside) and its Ea in [30, 100] kJ/mol. 300 draws (seed
+20261031). **Null comparison:** the R3En-box chance baseline (EX-037) never reached (ii) >= 4 / 6 in 192 draws.
+**Feasible** if any draw passes (i) >= 5 / 8 AND (ii) >= 4 / 6 AND (vii) >= 3 / 4; reported: the share of draws
+passing each, the best draw per family, the joint passes, and the constants of the joint passes (are they physical?).
+**Expected (written now):** feasible (>= 1 joint pass) P 0.3; (i) >= 5 / 8 reached by some draw P 0.55 (a 3-DX exit is
+exactly what (i) needs); (ii) >= 4 / 6 reached P 0.35.
+
+## 17. Feasibility v1 result, and v2 (the sources) -- 2026-10-31 ~10:05; v2 designed before it runs
+
+**v1 (B7ASST, 299 of 300 draws; results/validation/kinetic_core_deoxyosone_feasibility_b7asst.md): NOT feasible.**
+Time slope >= 5 / 8 reached by 0 draws (best 4); pH segments >= 4 / 6 by 6 (the R3En box: 0 of 192 -- this structure
+CAN produce the pH shape); (vii) by 91; pH + (vii) together by 6; nothing with the time slope. Expectations: feasible
+(P 0.3) no; (i) reachable (P 0.55) no; (ii) reachable (P 0.35) yes. **A 3-DX exit as fast as 0.1 /min cannot flatten
+the ratio's time course**, so the time slope is not (only) 3-DX's lifetime: the SOURCES must shift in time -- the
+hub review's H5 (pH-flat pentose caramelisation feeding 3-DX as free xylose is released from TTCA) and the early
+1-DX burst from TTCA's direct breakdown fading (sec. 15's flux attribution).
+
+**v2 (arm B7ASST2 = B7ASST + offset_k_pent_caramel + offset_k_ttca_deg), same tester, same reference and seed, 300
+draws.** Added bands: offset_k_pent_caramel [-3, +0.5]; offset_k_ttca_deg [-3, +0.5]; offset_k_dpo_nf its optimum
++-1 (the tester's band table gained these three rows at v2; v1's record lists the bands it used). Feasible as in sec. 16.
+**Expected (written now):** feasible P 0.25; time slope >= 5 / 8 reachable P 0.45; the joint passes, if any, need
+caramelisation lowered by >= 1 dex (P 0.6 given feasible).

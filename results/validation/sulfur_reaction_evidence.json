@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-31",
     "git": {
-      "commit": "bb207020b68f73d3528910cfd76477002659b4a4",
-      "short": "bb207020",
+      "commit": "30822dc7cdb4a9795d2cf82fda0dbb08b83b2d37",
+      "short": "30822dc7",
       "branch": "b7-deoxyosone-partition",
       "dirty": true
     },
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "9396db999ca9f45d4c1f0a05bc219f8fb4faf10dac67cbd866ce7ddafebf96df"
+        "sha256": "10d0d896fbbcf931826a02f51084e666347aa0e2338b2c88c470b4604b4e6ea3"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -65,7 +65,7 @@
       },
       {
         "path": "data/lit/measurement_ledger/trunk.yml",
-        "sha256": "a2f97a60b7a5935b1127f86d51434462725415504d57df58590ae2f4e8bfb652"
+        "sha256": "6cc18a7adb57fb474d6023edc56fa48f63a59bf4c14ca37772edde427a0b8b93"
       }
     ]
   },
@@ -3689,8 +3689,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 49,
-          "time_series": 24,
+          "data_sets": 50,
+          "time_series": 25,
           "used_by_the_model": 5
         },
         "FRAG_C": {
@@ -3770,8 +3770,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 49,
-          "time_series": 24,
+          "data_sets": 50,
+          "time_series": 25,
           "used_by_the_model": 5
         },
         "FA": {
@@ -3875,8 +3875,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 49,
-          "time_series": 24,
+          "data_sets": 50,
+          "time_series": 25,
           "used_by_the_model": 5
         },
         "FRAG_C": {
@@ -6942,8 +6942,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 49,
-          "time_series": 24,
+          "data_sets": 50,
+          "time_series": 25,
           "used_by_the_model": 5
         },
         "DPO": {

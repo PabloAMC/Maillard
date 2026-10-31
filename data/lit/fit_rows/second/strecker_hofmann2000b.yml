@@ -1,0 +1,517 @@
+# SECOND READER -- Hofmann & Schieberle 2000, J. Agric. Food Chem. 48:4301-4305 (hofmann2000b.pdf): Table 2, phenylacetaldehyde
+# (PHEAL) and phenylacetic acid (PHEAC) from the fed Amadori compound N-(1-deoxy-D-fructosyl)-L-phenylalanine (ARP-Phe) or from
+# glucose + L-Phe under argon / air / air + Cu(II) at 100 C, 120 min; Table 3, ARP-Phe and free Phe over 10-300 min in a refluxed
+# glucose + Phe pot. Independent of the first reading (data/lit/fit_rows/strecker_hofmann2000b.yml and its source_verification
+# NOT opened). Conventions follow data/lit/fit_rows/second/strecker_hofmann2000.yml. Verification:
+# data/lit/source_verification/second/strecker_hofmann2000b.yml.
+#
+# Ledger ids (data/lit/measurement_ledger/trunk.yml): hofmann2000b_table2_arp_phe_oxygen (Table 2),
+# hofmann2000b_table3_arp_phe_formation (Table 3).
+#
+# Pot naming rule (this reader): <paper key>_<precursor>_phe_<declared T>c_<time>_<atmosphere> for Table 2 (arp = fed ARP-Phe,
+# glc = glucose + Phe; atmosphere argon / air / air_cu = expts I / II / III); <paper key>_glc_phe_reflux_timecourse for Table 3
+# (printed "refluxed", as the second-reader strecker_hofmann2000 file names its reflux pots).
+#
+# Species keys. PHE, PHEAL, PHEAC are NOT engine species (named in engine_species_missing). ARP-Phe is keyed as the engine's
+# Amadori node AMA -- an assumption (the engine's AMA is the glucose-glycine Amadori); alternative ARPPHE.
+#
+# Units. Table 2 prints umol/mmol precursor; Table 3 absolute umol in the 10 mL pot. Every pot is 1.0 mmol (+ 1.0 mmol) in 10 mL
+# -> 100 mmol/L nominal, so 1 umol/mmol = 1 umol per 10 mL = 0.1 mmol/L. read_error = print rounding (half the last digit) in
+# dex, linearised (half-unit / value / ln 10): transcription error, NOT method or replicate scatter.
+#
+# NOT keyed: Table 1 (FD factors), Table 3's "yield of ARP-Phe (%)" column (derived from the keyed ARP and Phe: checked in
+# text_checks), Figs. 1-3 (outside the brief; Fig. 1 eyeballed only for the duplicate check in strecker_hofmann2000_fig2), t = 0.
+#
+# ADJUDICATOR RELABEL (agent-hofmann2000-fig2-2000b-adjudicator-2026-10-31): identifiers only, no value, error or condition
+# touched. ARP-Phe AMA -> PHEARP in initial_mmol_L, species and engine_species_missing (ruling S of the first-reader table
+# strecker_hofmann2000b.yml: the engine AMA is DFG, C8 N1, N-(1-deoxy-D-fructos-1-yl)glycine, src/kinetic_core/species.py;
+# ARP-Phe is C15 N1 and releases Phe, not Gly). The species_mapping fields below keep this reader's AMA reasoning as written.
+name: strecker_hofmann2000b
+status: draft
+reader: agent-hofmann2000-fig2-2000b-reader2-2026-10-31
+read_by: agent-hofmann2000-fig2-2000b-reader2-2026-10-31
+pots:
+  hofmann2000b_arp_phe_100c_120min_argon:
+    ledger_id: hofmann2000b_table2_arp_phe_oxygen
+    t_c: 100
+    t_c_basis: printed "heated (100 C)" (Table 2 footnote a), closed vial
+    minutes: 120
+    initial_mmol_L:
+      PHEARP: 100.0
+    concentration_basis: 1 mmol in 10 mL buffer (footnote; methods 0.1 mmol in 1 mL) -> 100 mmol/L nominal ARP-Phe; purity "about 90%" (synthesis)
+      -> ~90 mmol/L actual ARP-Phe if the 1 mmol was weighed as product (alternative); 1 umol/mmol = 0.1 mmol/L
+    engine_species_missing:
+    - PHEARP
+    - PHE
+    - PHEAL
+    - PHEAC
+    label_ph: 7.0
+    ph_measured_at: not stated (as prepared); pH not re-measured
+    buffer: phosphate pH 7.0, 0.5 mol/L as printed in the table footnote (see buffer_contradiction)
+    buffer_contradiction: Methods "Reaction Mixtures" print "phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0)" with 0.1 mmol precursor; Tables
+      1-3 footnotes print "(10 mL; 0.5 mol/L, pH 7.0)" with 1.0 mmol. Same 100 mmol/L precursor either way; 0.5 mmol/L cannot buffer 100
+      mmol/L solutes, read as a misprint for mol/L.
+    atmosphere: 'expt I: "under an atmosphere of argon" (footnote a); text "an atmosphere of pure argon". How argon was applied (bubbling,
+      flushing, duration) not stated in this paper'
+    vessel: closed vial, volume and headspace not stated
+    source_table: Table 2, expt I (footnote a), column ARP-Phe
+    condition_quote: Table 2 footnotes "a The precursors (1 mmol each) were heated (100 C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0)
+      for 120 min in a closed vial under an atmosphere of argon. b Argon was replaced by air oxygen. c Heating was performed in an air atmosphere
+      and in the presence of copper (II) ions (0.05 mmol CuSO4)." / Methods "Either a mixture of D-glucose and L-phenylalanine (0.1 mmol
+      each) or N-(1-deoxy-D-fructosyl-1-yl)-L-phenylalanine (0.1 mmol) dissolved in phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0) was thermally
+      treated under different conditions as detailed in the footnotes of the tables."
+    species_mapping: 'ARP-Phe = N-(1-deoxy-D-fructos-1-yl)-L-phenylalanine keyed as engine AMA (the trunk''s glucose Amadori node, which
+      the Martins network makes from glycine and decays to Gly). The amine differs (Phe, not an engine species): an ASSUMPTION; alternative
+      key ARPPHE (not an engine species) if the adjudicator wants amine-specific Amadori nodes.'
+    precursor_purity: synthesised in house, "a white powder with a purity of about 90% (24 mmol; yield 8%)"; the impurity is not identified
+      (glucose / Phe carry-over would add a Glc/Phe pot of up to ~10 mmol/L, cf. the argon floor 0.6 vs 0.4)
+  hofmann2000b_arp_phe_100c_120min_air:
+    ledger_id: hofmann2000b_table2_arp_phe_oxygen
+    t_c: 100
+    t_c_basis: printed "heated (100 C)" (Table 2 footnote a), closed vial
+    minutes: 120
+    initial_mmol_L:
+      PHEARP: 100.0
+    concentration_basis: 1 mmol in 10 mL buffer (footnote; methods 0.1 mmol in 1 mL) -> 100 mmol/L nominal ARP-Phe; purity "about 90%" (synthesis)
+      -> ~90 mmol/L actual ARP-Phe if the 1 mmol was weighed as product (alternative); 1 umol/mmol = 0.1 mmol/L
+    engine_species_missing:
+    - PHEARP
+    - PHE
+    - PHEAL
+    - PHEAC
+    label_ph: 7.0
+    ph_measured_at: not stated (as prepared); pH not re-measured
+    buffer: phosphate pH 7.0, 0.5 mol/L as printed in the table footnote (see buffer_contradiction)
+    buffer_contradiction: Methods "Reaction Mixtures" print "phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0)" with 0.1 mmol precursor; Tables
+      1-3 footnotes print "(10 mL; 0.5 mol/L, pH 7.0)" with 1.0 mmol. Same 100 mmol/L precursor either way; 0.5 mmol/L cannot buffer 100
+      mmol/L solutes, read as a misprint for mol/L.
+    atmosphere: 'expt II: "Argon was replaced by air oxygen" (footnote b); text "Flushing of the models with oxygen (expt II in Table 2)"
+      -> air vs pure O2 AMBIGUOUS; read as air (footnote, and expt III''s "air atmosphere"); alternative: O2-flushed headspace. Headspace
+      volume not stated'
+    vessel: closed vial, volume and headspace not stated
+    source_table: Table 2, expt II (footnote b), column ARP-Phe
+    condition_quote: Table 2 footnotes "a The precursors (1 mmol each) were heated (100 C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0)
+      for 120 min in a closed vial under an atmosphere of argon. b Argon was replaced by air oxygen. c Heating was performed in an air atmosphere
+      and in the presence of copper (II) ions (0.05 mmol CuSO4)." / Methods "Either a mixture of D-glucose and L-phenylalanine (0.1 mmol
+      each) or N-(1-deoxy-D-fructosyl-1-yl)-L-phenylalanine (0.1 mmol) dissolved in phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0) was thermally
+      treated under different conditions as detailed in the footnotes of the tables."
+    species_mapping: 'ARP-Phe = N-(1-deoxy-D-fructos-1-yl)-L-phenylalanine keyed as engine AMA (the trunk''s glucose Amadori node, which
+      the Martins network makes from glycine and decays to Gly). The amine differs (Phe, not an engine species): an ASSUMPTION; alternative
+      key ARPPHE (not an engine species) if the adjudicator wants amine-specific Amadori nodes.'
+    precursor_purity: synthesised in house, "a white powder with a purity of about 90% (24 mmol; yield 8%)"; the impurity is not identified
+      (glucose / Phe carry-over would add a Glc/Phe pot of up to ~10 mmol/L, cf. the argon floor 0.6 vs 0.4)
+  hofmann2000b_arp_phe_100c_120min_air_cu:
+    ledger_id: hofmann2000b_table2_arp_phe_oxygen
+    t_c: 100
+    t_c_basis: printed "heated (100 C)" (Table 2 footnote a), closed vial
+    minutes: 120
+    initial_mmol_L:
+      PHEARP: 100.0
+    concentration_basis: 1 mmol in 10 mL buffer (footnote; methods 0.1 mmol in 1 mL) -> 100 mmol/L nominal ARP-Phe; purity "about 90%" (synthesis)
+      -> ~90 mmol/L actual ARP-Phe if the 1 mmol was weighed as product (alternative); 1 umol/mmol = 0.1 mmol/L
+    engine_species_missing:
+    - PHEARP
+    - PHE
+    - PHEAL
+    - PHEAC
+    label_ph: 7.0
+    ph_measured_at: not stated (as prepared); pH not re-measured
+    buffer: phosphate pH 7.0, 0.5 mol/L as printed in the table footnote (see buffer_contradiction)
+    buffer_contradiction: Methods "Reaction Mixtures" print "phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0)" with 0.1 mmol precursor; Tables
+      1-3 footnotes print "(10 mL; 0.5 mol/L, pH 7.0)" with 1.0 mmol. Same 100 mmol/L precursor either way; 0.5 mmol/L cannot buffer 100
+      mmol/L solutes, read as a misprint for mol/L.
+    atmosphere: 'expt III: "Heating was performed in an air atmosphere and in the presence of copper (II) ions (0.05 mmol CuSO4)" (footnote
+      c); headspace not stated'
+    vessel: closed vial, volume and headspace not stated
+    source_table: Table 2, expt III (footnote c), column ARP-Phe
+    condition_quote: Table 2 footnotes "a The precursors (1 mmol each) were heated (100 C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0)
+      for 120 min in a closed vial under an atmosphere of argon. b Argon was replaced by air oxygen. c Heating was performed in an air atmosphere
+      and in the presence of copper (II) ions (0.05 mmol CuSO4)." / Methods "Either a mixture of D-glucose and L-phenylalanine (0.1 mmol
+      each) or N-(1-deoxy-D-fructosyl-1-yl)-L-phenylalanine (0.1 mmol) dissolved in phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0) was thermally
+      treated under different conditions as detailed in the footnotes of the tables."
+    species_mapping: 'ARP-Phe = N-(1-deoxy-D-fructos-1-yl)-L-phenylalanine keyed as engine AMA (the trunk''s glucose Amadori node, which
+      the Martins network makes from glycine and decays to Gly). The amine differs (Phe, not an engine species): an ASSUMPTION; alternative
+      key ARPPHE (not an engine species) if the adjudicator wants amine-specific Amadori nodes.'
+    precursor_purity: synthesised in house, "a white powder with a purity of about 90% (24 mmol; yield 8%)"; the impurity is not identified
+      (glucose / Phe carry-over would add a Glc/Phe pot of up to ~10 mmol/L, cf. the argon floor 0.6 vs 0.4)
+    additives: CuSO4 0.05 mmol in 10 mL = 5 mmol/L Cu(II) (no engine species)
+  hofmann2000b_glc_phe_100c_120min_argon:
+    ledger_id: hofmann2000b_table2_arp_phe_oxygen
+    t_c: 100
+    t_c_basis: printed "heated (100 C)" (Table 2 footnote a), closed vial
+    minutes: 120
+    initial_mmol_L:
+      Glc: 100.0
+      PHE: 100.0
+    concentration_basis: 1 mmol each in 10 mL buffer (footnote; methods 0.1 mmol each in 1 mL) -> 100 mmol/L nominal; 1 umol/mmol = 0.1 mmol/L
+    engine_species_missing:
+    - PHE
+    - PHEAL
+    - PHEAC
+    label_ph: 7.0
+    ph_measured_at: not stated (as prepared); pH not re-measured
+    buffer: phosphate pH 7.0, 0.5 mol/L as printed in the table footnote (see buffer_contradiction)
+    buffer_contradiction: Methods "Reaction Mixtures" print "phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0)" with 0.1 mmol precursor; Tables
+      1-3 footnotes print "(10 mL; 0.5 mol/L, pH 7.0)" with 1.0 mmol. Same 100 mmol/L precursor either way; 0.5 mmol/L cannot buffer 100
+      mmol/L solutes, read as a misprint for mol/L.
+    atmosphere: 'expt I: "under an atmosphere of argon" (footnote a); text "an atmosphere of pure argon". How argon was applied (bubbling,
+      flushing, duration) not stated in this paper'
+    vessel: closed vial, volume and headspace not stated
+    source_table: Table 2, expt I (footnote a), column Glc/Phe
+    condition_quote: Table 2 footnotes "a The precursors (1 mmol each) were heated (100 C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0)
+      for 120 min in a closed vial under an atmosphere of argon. b Argon was replaced by air oxygen. c Heating was performed in an air atmosphere
+      and in the presence of copper (II) ions (0.05 mmol CuSO4)." / Methods "Either a mixture of D-glucose and L-phenylalanine (0.1 mmol
+      each) or N-(1-deoxy-D-fructosyl-1-yl)-L-phenylalanine (0.1 mmol) dissolved in phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0) was thermally
+      treated under different conditions as detailed in the footnotes of the tables."
+  hofmann2000b_glc_phe_100c_120min_air:
+    ledger_id: hofmann2000b_table2_arp_phe_oxygen
+    t_c: 100
+    t_c_basis: printed "heated (100 C)" (Table 2 footnote a), closed vial
+    minutes: 120
+    initial_mmol_L:
+      Glc: 100.0
+      PHE: 100.0
+    concentration_basis: 1 mmol each in 10 mL buffer (footnote; methods 0.1 mmol each in 1 mL) -> 100 mmol/L nominal; 1 umol/mmol = 0.1 mmol/L
+    engine_species_missing:
+    - PHE
+    - PHEAL
+    - PHEAC
+    label_ph: 7.0
+    ph_measured_at: not stated (as prepared); pH not re-measured
+    buffer: phosphate pH 7.0, 0.5 mol/L as printed in the table footnote (see buffer_contradiction)
+    buffer_contradiction: Methods "Reaction Mixtures" print "phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0)" with 0.1 mmol precursor; Tables
+      1-3 footnotes print "(10 mL; 0.5 mol/L, pH 7.0)" with 1.0 mmol. Same 100 mmol/L precursor either way; 0.5 mmol/L cannot buffer 100
+      mmol/L solutes, read as a misprint for mol/L.
+    atmosphere: 'expt II: "Argon was replaced by air oxygen" (footnote b); text "Flushing of the models with oxygen (expt II in Table 2)"
+      -> air vs pure O2 AMBIGUOUS; read as air (footnote, and expt III''s "air atmosphere"); alternative: O2-flushed headspace. Headspace
+      volume not stated'
+    vessel: closed vial, volume and headspace not stated
+    source_table: Table 2, expt II (footnote b), column Glc/Phe
+    condition_quote: Table 2 footnotes "a The precursors (1 mmol each) were heated (100 C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0)
+      for 120 min in a closed vial under an atmosphere of argon. b Argon was replaced by air oxygen. c Heating was performed in an air atmosphere
+      and in the presence of copper (II) ions (0.05 mmol CuSO4)." / Methods "Either a mixture of D-glucose and L-phenylalanine (0.1 mmol
+      each) or N-(1-deoxy-D-fructosyl-1-yl)-L-phenylalanine (0.1 mmol) dissolved in phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0) was thermally
+      treated under different conditions as detailed in the footnotes of the tables."
+  hofmann2000b_glc_phe_100c_120min_air_cu:
+    ledger_id: hofmann2000b_table2_arp_phe_oxygen
+    t_c: 100
+    t_c_basis: printed "heated (100 C)" (Table 2 footnote a), closed vial
+    minutes: 120
+    initial_mmol_L:
+      Glc: 100.0
+      PHE: 100.0
+    concentration_basis: 1 mmol each in 10 mL buffer (footnote; methods 0.1 mmol each in 1 mL) -> 100 mmol/L nominal; 1 umol/mmol = 0.1 mmol/L
+    engine_species_missing:
+    - PHE
+    - PHEAL
+    - PHEAC
+    label_ph: 7.0
+    ph_measured_at: not stated (as prepared); pH not re-measured
+    buffer: phosphate pH 7.0, 0.5 mol/L as printed in the table footnote (see buffer_contradiction)
+    buffer_contradiction: Methods "Reaction Mixtures" print "phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0)" with 0.1 mmol precursor; Tables
+      1-3 footnotes print "(10 mL; 0.5 mol/L, pH 7.0)" with 1.0 mmol. Same 100 mmol/L precursor either way; 0.5 mmol/L cannot buffer 100
+      mmol/L solutes, read as a misprint for mol/L.
+    atmosphere: 'expt III: "Heating was performed in an air atmosphere and in the presence of copper (II) ions (0.05 mmol CuSO4)" (footnote
+      c); headspace not stated'
+    vessel: closed vial, volume and headspace not stated
+    source_table: Table 2, expt III (footnote c), column Glc/Phe
+    condition_quote: Table 2 footnotes "a The precursors (1 mmol each) were heated (100 C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0)
+      for 120 min in a closed vial under an atmosphere of argon. b Argon was replaced by air oxygen. c Heating was performed in an air atmosphere
+      and in the presence of copper (II) ions (0.05 mmol CuSO4)." / Methods "Either a mixture of D-glucose and L-phenylalanine (0.1 mmol
+      each) or N-(1-deoxy-D-fructosyl-1-yl)-L-phenylalanine (0.1 mmol) dissolved in phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0) was thermally
+      treated under different conditions as detailed in the footnotes of the tables."
+    additives: CuSO4 0.05 mmol in 10 mL = 5 mmol/L Cu(II) (no engine species)
+  hofmann2000b_glc_phe_reflux_timecourse:
+    ledger_id: hofmann2000b_table3_arp_phe_formation
+    t_c: 100
+    t_c_basis: printed "refluxed" only (Table 3 footnote a); aqueous reflux of this ~1.2 osmol/kg solution (0.5 mol/L phosphate + 0.2 mol/L
+      solutes) boils ~100.5-101 C; declared 100 C; alternative 98 C (the companion paper hofmann2000 equates its glucose/Phe "refluxed" with
+      "98 C")
+    minutes: 300
+    initial_mmol_L:
+      Glc: 100.0
+      PHE: 100.0
+    concentration_basis: '1.0 mmol each in 10 mL buffer -> 100 mmol/L nominal; Table 3 prints absolute umol in the 10 mL pot: 1 umol = 0.1
+      mmol/L'
+    engine_species_missing:
+    - PHE
+    - PHEARP
+    label_ph: 7.0
+    ph_measured_at: not stated (as prepared); pH not re-measured
+    buffer: phosphate pH 7.0, 0.5 mol/L as printed in the table footnote (see buffer_contradiction)
+    buffer_contradiction: Methods "Reaction Mixtures" print "phosphate buffer (1 mL; 0.5 mmol/L, pH 7.0)" with 0.1 mmol precursor; Tables
+      1-3 footnotes print "(10 mL; 0.5 mol/L, pH 7.0)" with 1.0 mmol. Same 100 mmol/L precursor either way; 0.5 mmol/L cannot buffer 100
+      mmol/L solutes, read as a misprint for mol/L.
+    atmosphere: not stated (reflux; no argon mentioned) -> air presumed, not controlled
+    vessel: reflux, 10 mL; one pot per time or aliquots from one pot not stated
+    source_table: Table 3
+    species_mapping: 'ARP-Phe keyed as engine AMA (see the hofmann2000b_arp_phe_* pots: assumption; alternative key ARPPHE)'
+    quantification_note: Phe and ARP-Phe by amino acid analyser (Biotronic 3000), post-column ninhydrin, "determined photometrically at 570
+      or 440 nm"; calibration standards not described (ARP-Phe presumably against the in-house ~90 % pure material -> possible +-10 % scale
+      bias on ARP-Phe) -> calibrated (external presumed), not SIDA
+    condition_quote: Table 3 footnotes "a A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) was refluxed in phosphate buffer
+      (10 mL; 0.5 mol/L, pH 7.0). b The yield of ARP-Phe was calculated based on the amounts of L-phenylalanine reacted."
+rows:
+- pot: hofmann2000b_arp_phe_100c_120min_argon
+  species: PHEAL
+  t_min: 120
+  value: 0.06
+  unit: mmol_L
+  read_error: 0.0362
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 0.6
+  unit_as_printed: umol/mmol (ARP-Phe)
+  source_value: Table 2 expt I, ARP-Phe PA 0.6 umol/mmol = 0.06 mmol/L
+- pot: hofmann2000b_arp_phe_100c_120min_argon
+  species: PHEAC
+  t_min: 120
+  value: 0.03
+  unit: mmol_L
+  read_error: 0.0724
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 0.3
+  unit_as_printed: umol/mmol (ARP-Phe)
+  source_value: Table 2 expt I, ARP-Phe PAA 0.3 umol/mmol = 0.03 mmol/L
+- pot: hofmann2000b_arp_phe_100c_120min_air
+  species: PHEAL
+  t_min: 120
+  value: 0.55
+  unit: mmol_L
+  read_error: 0.0039
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 5.5
+  unit_as_printed: umol/mmol (ARP-Phe)
+  source_value: Table 2 expt II, ARP-Phe PA 5.5 umol/mmol = 0.55 mmol/L
+- pot: hofmann2000b_arp_phe_100c_120min_air
+  species: PHEAC
+  t_min: 120
+  value: 0.3
+  unit: mmol_L
+  read_error: 0.0072
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 3.0
+  unit_as_printed: umol/mmol (ARP-Phe)
+  source_value: Table 2 expt II, ARP-Phe PAA 3.0 umol/mmol = 0.3 mmol/L
+- pot: hofmann2000b_arp_phe_100c_120min_air_cu
+  species: PHEAL
+  t_min: 120
+  value: 1.38
+  unit: mmol_L
+  read_error: 0.0016
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 13.8
+  unit_as_printed: umol/mmol (ARP-Phe)
+  source_value: Table 2 expt III, ARP-Phe PA 13.8 umol/mmol = 1.38 mmol/L
+- pot: hofmann2000b_arp_phe_100c_120min_air_cu
+  species: PHEAC
+  t_min: 120
+  value: 0.76
+  unit: mmol_L
+  read_error: 0.0029
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 7.6
+  unit_as_printed: umol/mmol (ARP-Phe)
+  source_value: Table 2 expt III, ARP-Phe PAA 7.6 umol/mmol = 0.76 mmol/L
+- pot: hofmann2000b_glc_phe_100c_120min_argon
+  species: PHEAL
+  t_min: 120
+  value: 0.04
+  unit: mmol_L
+  read_error: 0.0543
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 0.4
+  unit_as_printed: umol/mmol (precursor; glucose = Phe = 1 mmol)
+  source_value: Table 2 expt I, Glc/Phe PA 0.4 umol/mmol = 0.04 mmol/L
+- pot: hofmann2000b_glc_phe_100c_120min_argon
+  species: PHEAC
+  t_min: 120
+  value: 0.02
+  unit: mmol_L
+  read_error: 0.1086
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 0.2
+  unit_as_printed: umol/mmol (precursor; glucose = Phe = 1 mmol)
+  source_value: Table 2 expt I, Glc/Phe PAA 0.2 umol/mmol = 0.02 mmol/L
+- pot: hofmann2000b_glc_phe_100c_120min_air
+  species: PHEAL
+  t_min: 120
+  value: 0.14
+  unit: mmol_L
+  read_error: 0.0155
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 1.4
+  unit_as_printed: umol/mmol (precursor; glucose = Phe = 1 mmol)
+  source_value: Table 2 expt II, Glc/Phe PA 1.4 umol/mmol = 0.14 mmol/L
+- pot: hofmann2000b_glc_phe_100c_120min_air
+  species: PHEAC
+  t_min: 120
+  value: 0.18
+  unit: mmol_L
+  read_error: 0.0121
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 1.8
+  unit_as_printed: umol/mmol (precursor; glucose = Phe = 1 mmol)
+  source_value: Table 2 expt II, Glc/Phe PAA 1.8 umol/mmol = 0.18 mmol/L
+- pot: hofmann2000b_glc_phe_100c_120min_air_cu
+  species: PHEAL
+  t_min: 120
+  value: 0.26
+  unit: mmol_L
+  read_error: 0.0084
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 2.6
+  unit_as_printed: umol/mmol (precursor; glucose = Phe = 1 mmol)
+  source_value: Table 2 expt III, Glc/Phe PA 2.6 umol/mmol = 0.26 mmol/L
+- pot: hofmann2000b_glc_phe_100c_120min_air_cu
+  species: PHEAC
+  t_min: 120
+  value: 0.39
+  unit: mmol_L
+  read_error: 0.0056
+  read_error_basis: print rounding only (+-0.05 umol/mmol); no SD or replicate count printed
+  value_as_printed: 3.9
+  unit_as_printed: umol/mmol (precursor; glucose = Phe = 1 mmol)
+  source_value: Table 2 expt III, Glc/Phe PAA 3.9 umol/mmol = 0.39 mmol/L
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHEARP
+  t_min: 10
+  value: 4.2
+  unit: mmol_L
+  read_error: 0.0052
+  read_error_basis: print rounding only (+-0.5 umol, integer umol); no SD or replicate count printed
+  value_as_printed: 42
+  unit_as_printed: umol ARP-Phe (in the 10 mL pot)
+  species_as_printed: ARP-Phe (N-(1-deoxy-D-fructosyl)-L-phenylalanine)
+  quantification_as_read: amino acid analyser, ninhydrin (calibrated; calibration not described)
+  source_value: Table 3, ARP-Phe 42 umol at 10 min = 4.2 mmol/L (printed yield on Phe reacted 52.5 %)
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHE
+  t_min: 10
+  value: 92.0
+  unit: mmol_L
+  read_error: 0.0002
+  read_error_basis: print rounding only (+-0.5 umol formally; the trailing zeros of 920 / 640 / 510 may hide +-5 umol rounding, i.e. up to
+    0.004 dex); no SD or replicate count printed
+  value_as_printed: 920
+  unit_as_printed: umol phenylalanine unreacted (in the 10 mL pot)
+  quantification_as_read: amino acid analyser, ninhydrin 570 nm (calibrated; calibration not described)
+  source_value: Table 3, phenylalanine unreacted 920 umol at 10 min = 92.0 mmol/L
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHEARP
+  t_min: 30
+  value: 4.8
+  unit: mmol_L
+  read_error: 0.0045
+  read_error_basis: print rounding only (+-0.5 umol, integer umol); no SD or replicate count printed
+  value_as_printed: 48
+  unit_as_printed: umol ARP-Phe (in the 10 mL pot)
+  species_as_printed: ARP-Phe (N-(1-deoxy-D-fructosyl)-L-phenylalanine)
+  quantification_as_read: amino acid analyser, ninhydrin (calibrated; calibration not described)
+  source_value: Table 3, ARP-Phe 48 umol at 30 min = 4.8 mmol/L (printed yield on Phe reacted 27.4 %)
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHE
+  t_min: 30
+  value: 82.5
+  unit: mmol_L
+  read_error: 0.0003
+  read_error_basis: print rounding only (+-0.5 umol formally; the trailing zeros of 920 / 640 / 510 may hide +-5 umol rounding, i.e. up to
+    0.004 dex); no SD or replicate count printed
+  value_as_printed: 825
+  unit_as_printed: umol phenylalanine unreacted (in the 10 mL pot)
+  quantification_as_read: amino acid analyser, ninhydrin 570 nm (calibrated; calibration not described)
+  source_value: Table 3, phenylalanine unreacted 825 umol at 30 min = 82.5 mmol/L
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHEARP
+  t_min: 60
+  value: 3.2
+  unit: mmol_L
+  read_error: 0.0068
+  read_error_basis: print rounding only (+-0.5 umol, integer umol); no SD or replicate count printed
+  value_as_printed: 32
+  unit_as_printed: umol ARP-Phe (in the 10 mL pot)
+  species_as_printed: ARP-Phe (N-(1-deoxy-D-fructosyl)-L-phenylalanine)
+  quantification_as_read: amino acid analyser, ninhydrin (calibrated; calibration not described)
+  source_value: Table 3, ARP-Phe 32 umol at 60 min = 3.2 mmol/L (printed yield on Phe reacted 9.0 %)
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHE
+  t_min: 60
+  value: 64.0
+  unit: mmol_L
+  read_error: 0.0003
+  read_error_basis: print rounding only (+-0.5 umol formally; the trailing zeros of 920 / 640 / 510 may hide +-5 umol rounding, i.e. up to
+    0.004 dex); no SD or replicate count printed
+  value_as_printed: 640
+  unit_as_printed: umol phenylalanine unreacted (in the 10 mL pot)
+  quantification_as_read: amino acid analyser, ninhydrin 570 nm (calibrated; calibration not described)
+  source_value: Table 3, phenylalanine unreacted 640 umol at 60 min = 64.0 mmol/L
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHEARP
+  t_min: 120
+  value: 2.1
+  unit: mmol_L
+  read_error: 0.0103
+  read_error_basis: print rounding only (+-0.5 umol, integer umol); no SD or replicate count printed
+  value_as_printed: 21
+  unit_as_printed: umol ARP-Phe (in the 10 mL pot)
+  species_as_printed: ARP-Phe (N-(1-deoxy-D-fructosyl)-L-phenylalanine)
+  quantification_as_read: amino acid analyser, ninhydrin (calibrated; calibration not described)
+  source_value: Table 3, ARP-Phe 21 umol at 120 min = 2.1 mmol/L (printed yield on Phe reacted 4.3 %)
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHE
+  t_min: 120
+  value: 51.0
+  unit: mmol_L
+  read_error: 0.0004
+  read_error_basis: print rounding only (+-0.5 umol formally; the trailing zeros of 920 / 640 / 510 may hide +-5 umol rounding, i.e. up to
+    0.004 dex); no SD or replicate count printed
+  value_as_printed: 510
+  unit_as_printed: umol phenylalanine unreacted (in the 10 mL pot)
+  quantification_as_read: amino acid analyser, ninhydrin 570 nm (calibrated; calibration not described)
+  source_value: Table 3, phenylalanine unreacted 510 umol at 120 min = 51.0 mmol/L
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHEARP
+  t_min: 300
+  value: 0.9
+  unit: mmol_L
+  read_error: 0.0241
+  read_error_basis: print rounding only (+-0.5 umol, integer umol); no SD or replicate count printed
+  value_as_printed: 9
+  unit_as_printed: umol ARP-Phe (in the 10 mL pot)
+  species_as_printed: ARP-Phe (N-(1-deoxy-D-fructosyl)-L-phenylalanine)
+  quantification_as_read: amino acid analyser, ninhydrin (calibrated; calibration not described)
+  source_value: Table 3, ARP-Phe 9 umol at 300 min = 0.9 mmol/L (printed yield on Phe reacted 1.5 %)
+- pot: hofmann2000b_glc_phe_reflux_timecourse
+  species: PHE
+  t_min: 300
+  value: 39.8
+  unit: mmol_L
+  read_error: 0.0005
+  read_error_basis: print rounding only (+-0.5 umol formally; the trailing zeros of 920 / 640 / 510 may hide +-5 umol rounding, i.e. up to
+    0.004 dex); no SD or replicate count printed
+  value_as_printed: 398
+  unit_as_printed: umol phenylalanine unreacted (in the 10 mL pot)
+  quantification_as_read: amino acid analyser, ninhydrin 570 nm (calibrated; calibration not described)
+  source_value: Table 3, phenylalanine unreacted 398 umol at 300 min = 39.8 mmol/L
+text_checks:
+- quote: p. 4302 "the yields of both odorants were quite low from either ARP-Phe or Glc/Phe and the aldehyde was formed in higher amounts
+    compared to the acid" (expt I)
+  reading: 'argon: ARP 0.6 > 0.3, Glc/Phe 0.4 > 0.2 -> consistent'
+- quote: p. 4302-4303 "From the glucose/phenylalanine mixture, PAA formation was slightly favored." (expt II)
+  reading: Glc/Phe air 1.8 > 1.4 -> consistent; ARP air 5.5 > 3.0 ('favored formation of the aldehyde') consistent
+- quote: p. 4303 "the aldehyde was preferably formed from the ARP-Phe, whereas the reverse was true for the binary precursor mixture Glc/Phe"
+    (expt III) and "in any experiment the yields of both aroma compounds were higher from the ARP-Phe"
+  reading: 13.8 > 7.6 and 2.6 < 3.9; ARP > Glc/Phe in all six pairs -> consistent
+- quote: 'Table 3 yield column (footnote b: based on the amounts of L-phenylalanine reacted)'
+  reading: 'ARP / (1000 - Phe unreacted): 42/80 = 52.5, 48/175 = 27.4, 32/360 = 8.9 (printed 9.0), 21/490 = 4.3, 9/602 = 1.5 -> consistent
+    except 60 min (8.9 vs 9.0: ARP unrounded ~32.4 umol, or a rounding slip)'
+- quote: p. 4303 "After 300 min, about 60% of the L-phenylalanine was degraded, but only 1.5% of the ARP-Phe was left."
+  reading: 60.2 % degraded consistent; '1.5 % of the ARP-Phe was left' MISSTATES the yield column (1.5 % of Phe reacted); the ARP-Phe left
+    is 9 umol = 0.9 mol% of glucose, 19 % of its 48-umol peak
+- quote: p. 4303 "After 30 min of thermal treatment, the Amadori compound reached a maximum concentration of 48 umol."
+  reading: Table 3 consistent (30-min maximum on a 10/30/60 grid)
+- quote: hofmann2000 Table 3 (MGO + Phe, 98 C closed vial) phenylalanine degraded 9 / 18 / 36 / 49 / 61 % at 10 / 30 / 60 / 120 / 300 min
+  reading: 'this Table 3 (Glc + Phe, reflux): 8.0 / 17.5 / 36.0 / 49.0 / 60.2 % -> the two series coincide to print rounding in two different
+    pots: DUPLICATE CANDIDATE (one series reused?); do not count both as independent Phe-loss evidence'
+- quote: 'hofmann2000 Fig. 2 (glucose + Phe, PA / PAA time course) at 120 min, digitised by this reader: PA 1.395, PAA 1.797'
+  reading: 'equals Table 2 expt II Glc/Phe (air) 1.4 / 1.8 -> DUPLICATE CANDIDATE across papers (different printed conditions: Fig. 2 98
+    C / reflux uncontrolled, Table 2 100 C closed vial under air)'

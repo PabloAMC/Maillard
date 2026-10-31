@@ -326,3 +326,36 @@ pending; the forced pot is a quadrature and the fed pot an analytic A + B soluti
 (c) Enter the Weenen-vs-Hofmann pH-3 donor-ratio contradiction in the conflicts register? (d) Key hofmann2000 Fig. 2
 and hofmann2000b before the fit (recommended: they carry the only blind scale-free tests). (e) The fit_rows loader
 change (sec. 9.1) touches `src/`; it is the only engine-side edit.
+
+## Independent design review (2026-10-31 ~09:50; no runs) -- adopted before any code or fit
+
+**BLOCKING, both settled DRY (mechanisms before constants).** (1) **Arm A is rejected without a fit:** under the rate
+law PAA(air) / PAA(argon) = 1 + omega / phi_D; from the argon rows phi_D = 0.30 / 0.19 / 0.15 / 0.14 (MGO / GO / 3-DG /
+glucosone), so the four measured ratios need omega = 0.99 / 0.88 / 0.18 / 0.085 -- no single omega exists. **Replaced
+by arm A':** class constants, omega_C2/C3 fitted on MGO with GO held out (predicted 6.1 vs measured 5.5, 0.04 dex) and
+omega_C6 fitted on 3-DG with glucosone held out (2.3 vs 1.6, 0.15 dex) -- the only oxygen hold-outs that are real
+tests. Donor consumption: Table 3's curve is hyperbolic -- equimolar second order (kappa_D0 ~0.07 /min) fits 10 - 500
+min within ~0.02 dex, first order misses by 0.08 / 0.13 dex (the draft's P 0.5 -> ~0.9); with nu = 1 the same kappa
+predicts Phe loss of 41 % / 81 % at 10 / 60 min against Table 3's 9 % / 36 % -- nu = 1 refuted by 0.35 - 0.66 dex IF the
+CF-070 series belongs to this pot. Because [D] = [AA] here, kappa [D][AA] and kappa_2 [D]^2 cannot be told apart:
+**the rival is an amine-free second-order MGO sink;** nu gets a band [0.1, 1]; the Phe column is checked under both
+CF-070 readings before any fit. (2) **The decisive glucose-pot test omits a forceable route:** the direct oxidative
+route from the Amadori compound (hofmann2000b) can be forced from the ARP-Phe course (hofmann2000b Table 3) times a
+constant from the fed-ARP pot (Table 2: 0.55 mol % PA in air at 120 min); dry estimate 15 - 50 % of the glucose pot's
+PA at 30 - 120 min, putting a correct dicarbonyl layer's R at ~1.2 - 2. **Adopted: a two-route forced layer**
+(dicarbonyl donors + the Amadori oxidative route). ADMIT's second leg had no power (null (a) already nearer than the
+layer on G3 / G4): **G3 must now beat null (a).**
+**SHOULD-FIX, adopted.** Noise: PA floor >= 0.02 dex (Granvogl's within-run RSD 1.7 - 5.9 %), a run-to-run term >= 0.1
+dex between the Fig. 3 and Table 2 sugar pots (Cu raises that pot's PA x1.9), sigma_GO >= 0.2 dex (text vs figure
+calibration differ 0.23 dex; GO carries ~40 % of G1). Oxygen: the glucose pot is REFLUXED (boiling water ~O2-free)
+while omega comes from closed vials and the fed-MGO pot's extra PAA exceeds air-saturated water's dissolved O2 -- O2
+declared in [0, 1] for reflux pots; Fig. 2's 120-min point checked against hofmann2000b's closed-vial 0.32 mmol/L once
+keyed. Identity: f_Leu declared 1.16 +- 0.15 dex (Granvogl 2006, aldehyde only) -- I1 then tests whether the supply is
+amine-independent (expected miss ~0.22 dex); Granvogl is NOT cross-laboratory (Schieberle co-author): used for the
+amine-exit signature (<= 1.1 %) and as a temperature hold-out. The Weenen 2001 x14 - 20 gap cannot be an aldehyde-loss
+effect (k_loss ~4e-4 /min removes <= 5 % in 2 h): registered as a conflict (CF-073); it is a signature AGAINST the
+layer's concentration-independent share s = k / kappa (confounded). NOTES: T2 carries no information (its measured
+slope 0.084 dex / decade < its 0.10 tolerance); a Phe mass-balance CEILING caps the kappa band at ~+0.4 dex (nu = 1);
+effective degrees of freedom ~11 (Table 3 is one smooth curve). **Expectations revised:** ADMIT 0.2, LOWER BOUND 0.3,
+INCONCLUSIVE 0.35, REFUSE 0.15; P(T1 passes) ~0.85. **Before any fit:** key hofmann2000 Fig. 2 and hofmann2000b Tables
+2 - 3 (two readers).
