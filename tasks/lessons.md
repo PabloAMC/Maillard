@@ -328,3 +328,50 @@
 - **Local checks must be case-exact** (2026-10-29). macOS folds case and CI's Linux does not: `xin2026b` and
   `zhang2024_extraction.md` passed every local gate and failed CI. Gates match names against directory listings or
   git's tracked paths, never `Path.exists()`.
+- **Never brief an agent with `python -I -c 'from src ...'`** (2026-10-29). `-I` drops the working directory from
+  `sys.path`, so every such check fails with `No module named src` before reading anything; three adjudicators hit it.
+  `-I` is for scripts that read untrusted downloads, not for repo imports.
+- **Verification is scoped to the table that reads the source** (2026-10-29). Keyed by ledger id alone, one
+  sub-model's verified reading cleared another sub-model's pending rows under the same id. A permission check keyed
+  coarser than the thing it protects leaks across users of the key.
+- **Read a function's sign convention from its code, not from memory** (2026-10-29). The sub-model 1 probe report
+  and prereg said "residual = measured minus predicted"; `fit_rows.residual` returns predicted minus measured. The
+  findings were stated from the numbers and stood, but a reader acting on the label would have read every bias
+  backwards. Labels that describe a computation are written next to the line that computes it.
+- **Pin BLAS / numba threads to one per worker** when forking `MAILLARD_WORKERS` processes beside another parallel
+  job (2026-10-29): the probe batch next to the unit tier drove the load average to ~250 and the probes to ~7 % CPU
+  each. `OMP_NUM_THREADS=OPENBLAS_NUM_THREADS=MKL_NUM_THREADS=NUMBA_NUM_THREADS=1`.
+- **A wait loop must not match itself** (2026-10-30). `until ! pgrep -f "pytest tests/unit"; do ...` never ends: the
+  loop's own shell command line contains the pattern. Three such loops ran ~8 h. Wait on a PID (`wait`, `kill -0
+  $PID`), on a log line, or on a pattern the waiter cannot contain (`pgrep -f "[p]ytest tests/unit"`).
+- **Before a push, run every CI gate, not only the one that failed last** (2026-10-30). A fix for the freshness gate
+  was pushed after the unit tier and that gate passed locally; the data-integrity tier then failed on a register entry
+  added the same morning (CF-068: a kind outside the enum, a document name where ledger ids belong). Run
+  `./scripts/docker_maillard.sh gates` (or every step of `.github/workflows/ci.yml`'s data-integrity job) before a
+  push that touches `docs/reference/*_register.yml`, `data/`, or the generators.
+- **A wait loop needs a way out** (2026-10-31). `until grep -q "<line>" log; do sleep 30; done` waited ~12 h for a
+  freshness-gate line that the producing run (a detached `&` job whose chain stopped after pytest) never printed. Wait
+  on the producing process, not on a string (`run_in_background` and its completion notice), or give the loop a
+  deadline and print what it last saw. Never start a detached `&` job: its output and exit are invisible.
+
+**Generated READMEs count TRACKED files: regenerate them after `git add`** (2026-10-31). `build_data_readme.py` and
+`build_results_readme.py` list what git tracks, so running them before staging new files leaves both stale in the
+commit (unit tests `test_*_readme_is_current` fail). Order: stage everything, regenerate the READMEs, stage them,
+commit. And a verification chain must not stop at the first failing step: the env wrapper runs `set -eo pipefail`,
+so `pytest ... | tail` kills the rest of the chain -- redirect each step to its own log instead.
+
+**Even text munging goes through the env wrapper** (2026-10-31, again). I parsed `gh pr view` JSON and edited the PR
+body with system `python3` -- the rule has no exception for "not repo code". Use
+`./scripts/docker_maillard.sh run "python ..."`, or `jq` / `gh -q` for JSON.
+
+**Backticks inside `docker_maillard.sh run "..."` are command substitution** (2026-10-31). A Markdown `code` span in
+a heredoc passed in double quotes ran the script name as a command and silently dropped it from the text. Write such
+edits with the Edit tool, or single-quote the wrapper argument.
+
+**I started a detached `&` job again** (2026-10-31 05:08, the B7a arms queue) -- against the wait-loop lesson above.
+The harness cannot notify on it. Remedy used: a background waiter on the job's PID with a deadline. Rule: a queue is
+always launched as the background command itself (run_in_background), never with a trailing `&`.
+
+**The paper registry records citation LINE numbers** (2026-10-31): any edit above a cited line in a register or
+ledger moves them, and `build_paper_registry.py --check` (unit test + freshness gate) fails. Regenerate it with the
+READMEs after staging, as part of every commit that touches docs/reference or data/lit.

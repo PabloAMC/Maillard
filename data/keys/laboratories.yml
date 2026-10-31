@@ -1,0 +1,43 @@
+# Which research GROUP produced each ledger entry: the leave-one-laboratory-out unit of the fitting module.
+#
+# HAND-CURATED (2026-10-29). The ledgers' `lab` field is free text and spells one group several ways ("Jiangnan
+# (Zhang X / Cui H / Ho)" and "Jiangnan (Zhang X. / Ho)"), so leave-one-out would split one laboratory in two. A
+# laboratory here is a group with shared methods, instruments and calibrations, not an institution: two groups in one
+# university stay apart. src/kinetic_core/fit_rows.py maps every ledger `lab` string of a fit table through `groups`
+# and refuses a table whose laboratory is not mapped, so a new source must be placed here, with its evidence, before
+# it can be fitted. Add a string only after checking the paper's authors (corresponding author first).
+
+groups:
+  wageningen_van_boekel:
+    strings: ["Wageningen (van Boekel)"]
+    evidence: "Martins, Brands, Nguyen papers; van Boekel corresponding or senior author"
+  nestle_blank:
+    strings: ["Nestle Research (Blank)", "Nestle (Kraehenbuehl / Davidek / Belrhlid)"]
+    evidence: "Davidek 2002 (Blank, Nestle Research Center); US 10,076,126 (Kraehenbuehl, Davidek, Viton, Oertling, Belrhlid; Nestec, Lausanne): Davidek in both, same Nestle Research Center flavour group -- merged as one laboratory, the conservative choice for leave-one-out (thiol adjudicator, 2026-10-29)"
+  btbu_xie:
+    strings: ["BTBU (Xie J)", "Beijing Technology and Business University (Xie)"]
+    evidence: "Cao 2017, Zhao 2017b, Hou 2017, Zhao 2019: Jianchun Xie corresponding (xjchun@th.btbu.edu.cn); 'BTBU (Cao Y)' is a different group"
+  jiangnan_zhang_x:
+    strings: ["Jiangnan (Zhang X / Cui H / Ho)", "Jiangnan (Zhang X. / Ho)", "Zhejiang Gongshang / Jiangnan (Fu Y / Zhang X / Ho)"]
+    evidence: "Zhang Xiaoming's group at Jiangnan (Cui, Hayat, Zhai, Zhou, Deng, Feng); Ho (Rutgers) co-authors many. Zhai 2023 JAFC (Zhai Y, Cui, Hayat, Fu, Zhang X*, Ho*) belongs here"
+  dfa_hofmann_schieberle:
+    strings: ["DFA Garching (Hofmann / Schieberle)", "DFA Munich (Hofmann / Schieberle)", "DFA Garching (Hofmann)"]
+    evidence: "Deutsche Forschungsanstalt fuer Lebensmittelchemie (Garching, by Munich): Hofmann and Schieberle, one institute and method set"
+  ogawa_kumazawa:
+    strings: ["Ogawa & Co. (Kumazawa / Masuda)"]
+    evidence: "Kumazawa 2003: Ogawa & Co. (Kumazawa, Masuda)"
+  dalian_polytechnic_chen_d:
+    strings: ["affiliation not given in dossier (Wang / Chen)"]
+    evidence: "Wang 2026b p. 1: corresponding author D. Chen, School of Food Science and Technology, Dalian Polytechnic University; distinct from 'Dalian Polytechnic University (Qin, Huang)'"
+  ochanomizu_murata:
+    strings: ["Ochanomizu (Murata)"]
+    evidence: "Mikami 2017: Masatsune Murata corresponding, Ochanomizu University, Tokyo"
+  reading_mottram:
+    strings: ["Reading (Mottram / Parker / Elmore)", "Reading (Mottram)", "Reading (Elmore)"]
+    evidence: "Desclaux 2006 (Mottram, University of Reading, School of Food Biosciences); Parker and Elmore in the same flavour group; Yiltirak 2026 (Yiltirak, Balagiannis, Koek, Koch, Elmore*; University of Reading, Food and Nutritional Sciences). 'Reading (Ames)' is a different group"
+  zhejiang_gongshang_zhai_fu:
+    strings: ["Zhejiang Gongshang (Fu Y / Zhai Y)"]
+    evidence: "Kang 2026: Fu Y* and Zhai Yun* (Zhang X's former student) at Zhejiang Gongshang; its own group. Its SI Figs. S3 / S4 reprint Jiangnan's Zhai 2023 Food Chem data, which must enter once, as Jiangnan's (CF-005 family), not as a second laboratory"
+  quest_givaudan:
+    strings: ["Givaudan / Quest (Weenen / Kerler)", "Givaudan / Quest (Weenen / de Roos)"]
+    evidence: "van Seeventer 2001 (Weenen, Winkel*, Kerler: Quest International, Naarden); de Roos's work from the same Quest flavour group"

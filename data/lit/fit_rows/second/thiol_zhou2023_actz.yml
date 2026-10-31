@@ -1,0 +1,128 @@
+# Draft fit table, Zhou et al. 2023 J Agric Food Chem 71:2472 (Zhou2023b.pdf; NOT Zhou2023.pdf, which is Zhu et al.
+# Food Chem 400:133854, see data/keys/pdf_dossier_aliases.yml) Table 1: 2-acetylthiazole (engine ACTZ) in the xylose-alanine
+# ARP +/- cysteine pots at initial pH 6 / 7 / 8, 120 C, 60 min. SECOND, independent reader (agent-sm34-reader2-2026-10-30);
+# read from the paper only. status: draft.
+# sd: the printed SD (ug/L, n = 3). The ARP-alone columns print ND (no LOD given) and go under below_detection.
+# Ledger: the pH 7 columns are zhou2023_table1_ph7_arp_cys_volatiles; the pH 6 / 8 columns zhou2023_table1_ph6_ph8_arp_cys_volatiles
+# (sulfur.yml has Table 1 split in two ids).
+status: draft
+submodel: thiol_submodel
+read_by: agent-sm34-reader2-2026-10-30
+pots:
+  zhou2023_arp_ph6_120C:
+    ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      ARP: 20.0
+    label_ph: 6.0
+    ph_measured_during: false
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    condition_quote: The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were
+      prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L).
+      The reaction was carried out at 120 C for 1 h, and then the reacted mixture was cooled in an ice bath
+    note: ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine, purified in-house (ion exchange, lyophilised). Vessel, fill volume and
+      heating device not stated. Final pH in Fig. 2 (not transcribed here).
+  zhou2023_arp_cys_ph6_120C:
+    ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      ARP: 20.0
+      Cys: 20.0
+    label_ph: 6.0
+    ph_measured_during: false
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    condition_quote: The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were
+      prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L).
+      The reaction was carried out at 120 C for 1 h, and then the reacted mixture was cooled in an ice bath
+    note: Vessel, fill volume and heating device not stated. Final pH in Fig. 2 (not transcribed here).
+  zhou2023_arp_ph7_120C:
+    ledger_id: zhou2023_table1_ph7_arp_cys_volatiles
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      ARP: 20.0
+    label_ph: 7.0
+    ph_measured_during: false
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    condition_quote: The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were
+      prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L).
+      The reaction was carried out at 120 C for 1 h, and then the reacted mixture was cooled in an ice bath
+    note: Vessel, fill volume and heating device not stated. Final pH in Fig. 2 (not transcribed here).
+  zhou2023_arp_cys_ph7_120C:
+    ledger_id: zhou2023_table1_ph7_arp_cys_volatiles
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      ARP: 20.0
+      Cys: 20.0
+    label_ph: 7.0
+    ph_measured_during: false
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    condition_quote: The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were
+      prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L).
+      The reaction was carried out at 120 C for 1 h, and then the reacted mixture was cooled in an ice bath
+    note: Vessel, fill volume and heating device not stated. Final pH in Fig. 2 (not transcribed here).
+  zhou2023_arp_ph8_120C:
+    ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      ARP: 20.0
+    label_ph: 8.0
+    ph_measured_during: false
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    condition_quote: The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were
+      prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L).
+      The reaction was carried out at 120 C for 1 h, and then the reacted mixture was cooled in an ice bath
+    note: Vessel, fill volume and heating device not stated. Final pH in Fig. 2 (not transcribed here).
+  zhou2023_arp_cys_ph8_120C:
+    ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      ARP: 20.0
+      Cys: 20.0
+    label_ph: 8.0
+    ph_measured_during: false
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    condition_quote: The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were
+      prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L).
+      The reaction was carried out at 120 C for 1 h, and then the reacted mixture was cooled in an ice bath
+    note: Vessel, fill volume and heating device not stated. Final pH in Fig. 2 (not transcribed here).
+rows:
+- pot: zhou2023_arp_cys_ph6_120C
+  species: ACTZ
+  t_min: 60
+  value: 2.43
+  unit: ug_L
+  sd: 0.08
+  source: Table 1 (2-acetylthiazole, pH 6, ARP + Cys)
+- pot: zhou2023_arp_cys_ph7_120C
+  species: ACTZ
+  t_min: 60
+  value: 11.70
+  unit: ug_L
+  sd: 2.14
+  source: Table 1 (2-acetylthiazole, pH 7, ARP + Cys)
+- pot: zhou2023_arp_cys_ph8_120C
+  species: ACTZ
+  t_min: 60
+  value: 582.34
+  unit: ug_L
+  sd: 14.57
+  source: Table 1 (2-acetylthiazole, pH 8, ARP + Cys)
+below_detection:
+- pot: zhou2023_arp_ph6_120C
+  species: ACTZ
+  t_min: 60
+  source: Table 1 (ND; no LOD printed)
+- pot: zhou2023_arp_ph7_120C
+  species: ACTZ
+  t_min: 60
+  source: Table 1 (ND; no LOD printed)
+- pot: zhou2023_arp_ph8_120C
+  species: ACTZ
+  t_min: 60
+  source: Table 1 (ND; no LOD printed)

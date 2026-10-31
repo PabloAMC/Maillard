@@ -1,0 +1,1517 @@
+# ADJUDICATED 2026-10-30 (lead): Fig. 3's 210 / 240 min points removed. Fig. 3 disagrees with Fig. 7 at 90 min
+# (FA 0.36 vs 0.48-0.53, AA 0.21 vs 0.35) and may be a separate run set or summary; counted once, Fig. 7 only, as reader 1.
+# SECOND READER -- Martins & van Boekel 2005, Food Chem 92:437 (martins2005b.pdf): formic and acetic acid hold-out time courses.
+# Independent of the first reading (data/lit/fit_rows/ph_acid_holdout_martins2005b.yml and its source_verification not opened,
+# no dossier numbers, nothing under results/validation/). Verification: data/lit/source_verification/second/ph_acid_holdout_martins2005b.yml.
+# Method: the figures are vector. pdftocairo -svg page 6 (Fig. 5) and page 8 (Fig. 7), page 5 (Fig. 3); every marker's path parsed,
+# value = least-squares tick calibration of that panel (diamond = top-vertex x / side-vertex y; square, circle, triangle = bbox centre,
+# checked on t = 0 markers that sit exactly on the zero axis; asterisk / plus = the shared start point of their rays). Overlapping
+# markers are separate paths (or ray groups 6 rays per asterisk, 4 per plus), so coincident replicates are counted, not lost.
+# Fig. 3 points are read at the error-bar origin (the squares sit 0.3 pt off it; the bar origin lands on the 0 tick and time ticks).
+# Times are the nominal sampling times (marker x within 0.6 min of 0,5,15,30,...,240; Fig. 5 also 10, 20, 105).
+# Replicate index = drawing order within one time point (zeros included in the count), not a run identity across times.
+# sd: none -- no figure defines its error bars (Fig. 3 bars recorded as bar_half_length_undefined only); every row carries read_error
+# (dex) = read error in mmol/L / (value x ln 10).
+# Series identity (Fig. 7 caption): pH 4.8 filled diamond, 5.5 asterisk, 6.0 open circle, 6.8 plus, 7.5 filled triangle; series are
+# drawn in that order in both panels. Fig. 5d: formic filled diamond, acetic open square.
+# NOT transcribed: the pH 6.8 (+) arm of Fig. 7 (a reprint of the Martins 2005 100 C replicate acids); Fig. 3 means at times shared
+# with Fig. 7 (counted once); every other species.
+# Axis zeros left out (marker centre on the zero line; t_min and replicate):
+#   Fig. 7g FA pH 4.8: ALL 24 markers (0, 15, 30, 45, 60, 75, 90, 120, 150, 180, 210, 240 min; r1 and r2) -- no FA row for pH 4.8
+#   Fig. 7g FA pH 5.5: 0(r1), 0(r2), 0(r3)
+#   Fig. 7g FA pH 6.0: 0(r1), 0(r2), 15(r1), 15(r2), 30(r1), 30(r2), 45(r2)
+#   Fig. 7g FA pH 7.5: 0(r1), 0(r2)
+#   Fig. 7h AA pH 4.8: 0(r1), 0(r2), 15(r1), 15(r2), 30(r1), 30(r2), 45(r1), 45(r2), 60(r1), 60(r2), 75(r1), 75(r2), 90(r1), 90(r2)
+#   Fig. 7h AA pH 5.5: 0(r1), 0(r2), 0(r3), 15(r1), 15(r2), 15(r3), 30(r1), 30(r2), 30(r3), 45(r1), 45(r2), 45(r3)
+#   Fig. 7h AA pH 6.0: 0(r1), 0(r2), 15(r1), 15(r2)
+#   Fig. 7h AA pH 7.5: 0(r1), 0(r2), 5(r1), 15(r1)
+#   Fig. 5d FA and AA: t = 0 (one marker each)
+#   Fig. 3 FA and AA: t = 0 (not entered anyway: shared time)
+name: ph_acid_holdout_martins2005b
+status: draft
+reader: agent-m2005b-holdout-reader2-2026-10-30
+note: 'Second reader, vector read of Figs. 5d, 7g, 7h and 3. Read errors: Fig. 7g FA +-0.061 mmol/L (0.523 pt coordinate grid), Fig.
+  7h AA +-0.18 mmol/L (same grid on a 3x coarser axis), Fig. 5d +-0.21 mmol/L (0.59 pt grid), Fig. 3 bar origins +-0.01 mmol/L. Rows:
+  132.'
+pots:
+  martins2005b_phstat_100c:
+    ledger_id: martins2005b_fig5_phstat_timecourses
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      Glc: 200.0
+      Gly: 200.0
+    buffer: phosphate 0.10 M presumed (counter-ion not stated; the 'additional experiment' of sec. 2.1, buffer not restated for it);
+      pH held by pH-stat with 1 M NaOH
+    label_ph: 6.8
+    ph_measured_at: hot (pH-stat electrode in the 100 C reaction mix, held at the pH the solution had at 100 C; that set-point value
+      is not printed; 6.8 is the room-temperature initial pH)
+    ph_control: pH-stat (Radiometer ABU901 auto-burette, 1 mol/L NaOH); NaOH volume added not reported, dilution not corrected
+    vessel: not stated (samples drawn through a septum with a Hamilton SampleLock syringe, cooled in ice)
+    source_figure: 'Fig. 5d: formic acid (filled diamond), acetic acid (open square), one marker per time, 0-120 min'
+    condition_quote: Because of the observed heat-induced pH drop, an additional experiment was done at 100 °C where the pH was kept
+      constant; the initial pH was 6.8 as set at room temperature. The pH stat controller monitored the pH and, when it dropped below
+      its set point, an auto burette (ABU901 Radiometer Copenhagen) added a solution of NaOH (1 mol/l) to the reaction mix. [...] When
+      the pH was kept constant, this was done at the pH the solution had at 100 °C; the corresponding initial pH was 6.8 at room temperature.
+  martins2005b_ph48:
+    ledger_id: martins2005b_fig7_ten_responses_five_ph
+    t_c: 100
+    minutes: 240
+    initial_mmol_L:
+      Glc: 200.0
+      Gly: 200.0
+    buffer: phosphate 0.10 M (counter-ion not stated); pH not held
+    label_ph: 4.8
+    ph_measured_at: not stated (initial pH set at 20 C, "reported as set at room temperature"; samples ice-cooled before analyses)
+    ph_control: none (drifting; Fig. 4)
+    vessel: screw-capped glass tubes 16 x 160 mm, 10 mL, oil bath
+    source_figure: Fig. 7g/h, pH 4.8 (filled diamond), two markers per time, 0-240 min
+    condition_quote: Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set
+      to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell) and heated
+      at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken
+      and immediately cooled in ice, prior to analyses.
+  martins2005b_ph55:
+    ledger_id: martins2005b_fig7_ten_responses_five_ph
+    t_c: 100
+    minutes: 180
+    initial_mmol_L:
+      Glc: 200.0
+      Gly: 200.0
+    buffer: phosphate 0.10 M (counter-ion not stated); pH not held
+    label_ph: 5.5
+    ph_measured_at: not stated (initial pH set at 20 C, "reported as set at room temperature"; samples ice-cooled before analyses)
+    ph_control: none (drifting; Fig. 4)
+    vessel: screw-capped glass tubes 16 x 160 mm, 10 mL, oil bath
+    source_figure: Fig. 7g/h, pH 5.5 (asterisk), three markers per time, 0-180 min; plus Fig. 3 means (error bars undefined) at 210
+      and 240 min only
+    condition_quote: Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set
+      to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell) and heated
+      at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken
+      and immediately cooled in ice, prior to analyses.
+    note: 'Fig. 3 (pH 5.5, means with undefined bars, 0-240 min) is NOT a strict subset of Fig. 7: it adds 210 and 240 min (entered
+      here, source_figure: Fig. 3) and at 90 min its FA mean 0.36 +- 0.04 lies below all three Fig. 7 replicates (0.47-0.53); AA 90
+      min 0.21 vs 0.35. Other shared times agree within the read. Shared-time Fig. 3 means are not entered (counted once, via the Fig.
+      7 replicates).'
+  martins2005b_ph60:
+    ledger_id: martins2005b_fig7_ten_responses_five_ph
+    t_c: 100
+    minutes: 210
+    initial_mmol_L:
+      Glc: 200.0
+      Gly: 200.0
+    buffer: phosphate 0.10 M (counter-ion not stated); pH not held
+    label_ph: 6.0
+    ph_measured_at: not stated (initial pH set at 20 C, "reported as set at room temperature"; samples ice-cooled before analyses)
+    ph_control: none (drifting; Fig. 4)
+    vessel: screw-capped glass tubes 16 x 160 mm, 10 mL, oil bath
+    source_figure: Fig. 7g/h, pH 6.0 (open circle), two markers per time, 0-210 min
+    condition_quote: Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set
+      to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell) and heated
+      at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken
+      and immediately cooled in ice, prior to analyses.
+  martins2005b_ph75:
+    ledger_id: martins2005b_fig7_ten_responses_five_ph
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      Glc: 200.0
+      Gly: 200.0
+    buffer: phosphate 0.10 M (counter-ion not stated); pH not held
+    label_ph: 7.5
+    ph_measured_at: not stated (initial pH set at 20 C, "reported as set at room temperature"; samples ice-cooled before analyses)
+    ph_control: none (drifting; Fig. 4)
+    vessel: screw-capped glass tubes 16 x 160 mm, 10 mL, oil bath
+    source_figure: Fig. 7g/h, pH 7.5 (filled triangle), two markers per time, 0-120 min (with a 5 min point)
+    condition_quote: Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set
+      to have an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 °C. The solutions were filtered (0.2 µm, Schleicher & Schuell) and heated
+      at 100 °C in an oil bath, in screw-capped glass tubes (Schott, 16 × 160 mm). At predetermined heating times, samples were taken
+      and immediately cooled in ice, prior to analyses.
+rows:
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 5
+  value: 0.228
+  unit: mmol_L
+  read_error: 0.4004
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 0.228 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 10
+  value: 0.437
+  unit: mmol_L
+  read_error: 0.2088
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 0.437 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 15
+  value: 0.855
+  unit: mmol_L
+  read_error: 0.1067
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 0.855 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 20
+  value: 1.306
+  unit: mmol_L
+  read_error: 0.0698
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 1.306 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 30
+  value: 1.933
+  unit: mmol_L
+  read_error: 0.0472
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 1.933 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 60
+  value: 4.508
+  unit: mmol_L
+  read_error: 0.0202
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 4.508 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 75
+  value: 5.551
+  unit: mmol_L
+  read_error: 0.0164
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 5.551 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 90
+  value: 6.839
+  unit: mmol_L
+  read_error: 0.0133
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 6.839 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 105
+  value: 7.708
+  unit: mmol_L
+  read_error: 0.0118
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 7.708 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: FA
+  t_min: 120
+  value: 8.752
+  unit: mmol_L
+  read_error: 0.0104
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 8.752 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 5
+  value: 0.246
+  unit: mmol_L
+  read_error: 0.371
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 0.246 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 10
+  value: 0.471
+  unit: mmol_L
+  read_error: 0.1935
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 0.471 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 15
+  value: 1.098
+  unit: mmol_L
+  read_error: 0.0831
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 1.098 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 20
+  value: 1.968
+  unit: mmol_L
+  read_error: 0.0463
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 1.968 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 30
+  value: 4.09
+  unit: mmol_L
+  read_error: 0.0223
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 4.090 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 60
+  value: 11.779
+  unit: mmol_L
+  read_error: 0.0077
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 11.779 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 75
+  value: 16.058
+  unit: mmol_L
+  read_error: 0.0057
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 16.058 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 90
+  value: 20.302
+  unit: mmol_L
+  read_error: 0.0045
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 20.302 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 105
+  value: 23.956
+  unit: mmol_L
+  read_error: 0.0038
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 23.956 mmol/L
+- pot: martins2005b_phstat_100c
+  ledger_id: martins2005b_fig5_phstat_timecourses
+  species: AA
+  t_min: 120
+  value: 27.783
+  unit: mmol_L
+  read_error: 0.0033
+  read_error_basis: +-0.21 mmol/L abs (vector marker centre; coordinates snap to a 0.59 pt grid = 0.209 mmol/L; tick-fit residual 0.09
+    mmol/L), in dex
+  source_value: Fig. 5d vector marker centre, 27.783 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 120
+  value: 0.167
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.467
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.167 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 120
+  value: 0.167
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.467
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.167 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 150
+  value: 0.167
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.467
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.167 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 150
+  value: 0.347
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.2253
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.347 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 180
+  value: 0.347
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.2253
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.347 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 180
+  value: 0.347
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.2253
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.347 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 210
+  value: 0.347
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.2253
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.347 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 210
+  value: 0.347
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.2253
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.347 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 240
+  value: 0.526
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1485
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.526 mmol/L
+- pot: martins2005b_ph48
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 240
+  value: 0.347
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.2253
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.347 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 15
+  value: 0.061
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.4372
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.061 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 15
+  value: 0.061
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.4372
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.061 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 15
+  value: 0.061
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.4372
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.061 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 30
+  value: 0.121
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.2188
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.121 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 30
+  value: 0.121
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.2188
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.121 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 30
+  value: 0.121
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.2188
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.121 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 45
+  value: 0.172
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1543
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.172 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 45
+  value: 0.232
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.1141
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.232 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 45
+  value: 0.172
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.1543
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.172 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 60
+  value: 0.293
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0905
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.293 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 60
+  value: 0.293
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0905
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.293 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 60
+  value: 0.293
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0905
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.293 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 90
+  value: 0.525
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0504
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.525 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 90
+  value: 0.475
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0558
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.475 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 90
+  value: 0.475
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0558
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.475 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 120
+  value: 0.646
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.041
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.646 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 120
+  value: 0.646
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.041
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.646 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 120
+  value: 0.646
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.041
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.646 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 150
+  value: 0.768
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0345
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.768 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 150
+  value: 0.818
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0324
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.818 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 150
+  value: 0.818
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0324
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.818 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 180
+  value: 1.061
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.025
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.061 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 180
+  value: 1.061
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.025
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.061 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 180
+  value: 1.121
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0236
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.121 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 60
+  value: 0.167
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.467
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.167 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 60
+  value: 0.167
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.467
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.167 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 60
+  value: 0.167
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.467
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.167 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 90
+  value: 0.347
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.2253
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.347 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 90
+  value: 0.347
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.2253
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.347 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 90
+  value: 0.347
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.2253
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.347 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 120
+  value: 0.526
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1485
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.526 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 120
+  value: 0.526
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.1485
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.526 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 120
+  value: 0.676
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.1156
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.676 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 150
+  value: 0.857
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0912
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.857 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 150
+  value: 0.676
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.1156
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.676 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 150
+  value: 0.857
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0912
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.857 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 180
+  value: 1.037
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0754
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 1.037 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 180
+  value: 1.037
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0754
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 1.037 mmol/L
+- pot: martins2005b_ph55
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 180
+  value: 1.037
+  unit: mmol_L
+  replicate: 3
+  read_error: 0.0754
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 1.037 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 45
+  value: 0.06
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.4386
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.060 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 60
+  value: 0.243
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1091
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.243 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 60
+  value: 0.298
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0888
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.298 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 75
+  value: 0.414
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0639
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.414 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 75
+  value: 0.768
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0345
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.768 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 90
+  value: 0.889
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0298
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.889 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 90
+  value: 0.829
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.032
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.829 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 120
+  value: 0.945
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.028
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.945 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 120
+  value: 1.061
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.025
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.061 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 150
+  value: 1.182
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0224
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.182 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 150
+  value: 1.238
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0214
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.238 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 180
+  value: 1.945
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0136
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.945 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 180
+  value: 1.945
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0136
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.945 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 210
+  value: 2.182
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0121
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 2.182 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 210
+  value: 2.414
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.011
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 2.414 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 30
+  value: 0.183
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.4276
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.183 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 30
+  value: 0.183
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.4276
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.183 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 45
+  value: 0.528
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.1479
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.528 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 45
+  value: 0.528
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.1479
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.528 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 60
+  value: 0.887
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0881
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.887 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 60
+  value: 0.887
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0881
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.887 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 75
+  value: 1.232
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0635
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 1.232 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 75
+  value: 1.232
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0635
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 1.232 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 90
+  value: 1.757
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0445
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 1.757 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 90
+  value: 1.757
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0445
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 1.757 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 120
+  value: 2.806
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0279
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 2.806 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 120
+  value: 2.806
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0279
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 2.806 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 150
+  value: 4.019
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0195
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 4.019 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 150
+  value: 4.019
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0195
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 4.019 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 180
+  value: 5.067
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0154
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 5.067 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 180
+  value: 5.067
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0154
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 5.067 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 210
+  value: 6.28
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0124
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 6.280 mmol/L
+- pot: martins2005b_ph60
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 210
+  value: 6.28
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0124
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 6.280 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 5
+  value: 0.116
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.2276
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.116 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 5
+  value: 0.116
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.2276
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.116 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 15
+  value: 0.586
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0452
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.586 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 15
+  value: 0.53
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0499
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 0.530 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 30
+  value: 1.47
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.018
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.470 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 30
+  value: 1.763
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.015
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 1.763 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 45
+  value: 3.232
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0082
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 3.232 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 45
+  value: 3.586
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0074
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 3.586 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 60
+  value: 4.177
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0063
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 4.177 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 60
+  value: 4.586
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0058
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 4.586 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 90
+  value: 6.293
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0042
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 6.293 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 90
+  value: 6.763
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0039
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 6.763 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 120
+  value: 7.586
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0035
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 7.586 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: FA
+  t_min: 120
+  value: 7.879
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0034
+  read_error_basis: +-0.061 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.0605 mmol/L; tick-fit residual
+    < 0.07 mmol/L), in dex
+  source_value: Fig. 7g vector marker centre, 7.879 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 5
+  value: 0.168
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.465
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.168 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 15
+  value: 0.873
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0896
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 0.873 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 30
+  value: 4.528
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0173
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 4.528 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 30
+  value: 3.824
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0204
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 3.824 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 45
+  value: 8.543
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0092
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 8.543 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 45
+  value: 9.936
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0079
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 9.936 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 60
+  value: 13.608
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0057
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 13.608 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 60
+  value: 14.296
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0055
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 14.296 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 90
+  value: 18.132
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0043
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 18.132 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 90
+  value: 18.836
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0042
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 18.836 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 120
+  value: 21.623
+  unit: mmol_L
+  replicate: 1
+  read_error: 0.0036
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 21.623 mmol/L
+- pot: martins2005b_ph75
+  ledger_id: martins2005b_fig7_ten_responses_five_ph
+  species: AA
+  t_min: 120
+  value: 22.147
+  unit: mmol_L
+  replicate: 2
+  read_error: 0.0035
+  read_error_basis: +-0.18 mmol/L abs (vector marker centre; coordinates snap to a 0.523 pt grid = 0.179 mmol/L; tick-fit residual <
+    0.07 mmol/L), in dex
+  source_value: Fig. 7h vector marker centre, 22.147 mmol/L

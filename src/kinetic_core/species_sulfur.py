@@ -374,6 +374,12 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
                   "RELEASES THE CYSTEINE. Measured over 0.5-5 h at 90 C by Cao 2017 and Zhao 2017 (0.006 -> 0.133 "
                   "mol/L from 0.4 M Cys + Xyl). Distinct from ARP, the alanine Amadori compound of Zhou 2023. "
                   "Appended last, so every existing index is unchanged.")),
+    Species("PAMA", "pentose Amadori compound of a non-sulfur amino acid formed in the pot (glycine standing for all)",
+            7, 1, "intermediate", True,
+            note=("Pentose + amine entry (2026-10-30; kinetic_core_pentose_amine_entry_prereg.md). The pentose "
+                  "analogue of the trunk's AMA: PENT + Gly -> PAMA, whose enolisations give the deoxyosones and "
+                  "release the amino acid. Distinct from ARP (Zhou's FED alanine compound) and CAMA (cysteine's). "
+                  "Zero unless PENTOSE_AMINE_ENTRY is set. Appended last.")),
 )
 
 #: The concatenated table. B1's entries first, in B1's order, so trunk indices
@@ -459,9 +465,13 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "H2S": 34.08,
     "GSH": 307.32,    # C10H17N3O6S
     "CAMA": 253.27,   # C8H15NO6S, an isomer of TTCA (L-cysteine + D-pentose - H2O)
-    "DPO": 130.10,    # C5H8O4
-    "TDP": 130.10,
-    "DDP": 114.10,    # C5H6O3
+    "PAMA": 207.18,   # C7H13NO6, 1-deoxy-pentulosyl-glycine (D-pentose + glycine - H2O)
+    # CORRECTED 2026-10-29 (sub-model 3 first reading, CF-059): 130.10 is C5H6O4, not the C5H8O4 the comment named
+    # (a pentose minus water: 132.12); 1,4-dideoxy-2,3-pentodiulose is CH3-CO-CO-CH2-CH2OH, C5H8O3 (116.12), formed
+    # from 1-deoxypentosone with cysteine as the reductant (r_dpo_ddp), not the C5H6O3 the old comment named.
+    "DPO": 132.12,    # C5H8O4
+    "TDP": 132.12,    # C5H8O4
+    "DDP": 116.12,    # C5H8O3
     "NF": 114.10,     # C5H6O3
     "PTR": 114.10,
     "FUR": 96.08,     # C5H4O2

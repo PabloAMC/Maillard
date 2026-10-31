@@ -1,0 +1,53 @@
+# SOURCE VERIFICATION -- Zhou 2023 Table 1, 2-acetylthiazole (fit table data/lit/fit_rows/thiol_zhou2023_actz.yml).
+# Format and the five checks: the header of data/lit/source_verification.yml. First reader: agent-sm34-reader1-2026-10-30,
+# against the PDF (data/articles/Zhou2023b.pdf -- NOT Zhou2023.pdf, which is Zhu et al. 2023 Food Chem 400:133854, an
+# unrelated Baijiu paper) and its supplement (zhou2023b_supporting.pdf), not the dossier.
+# second_reader "pending" = NOT verified (the loader and the gate refuse it until a second reader signs).
+# `notes` is an extra field: what was checked, what was corrected, and why rows were left out.
+entries:
+  - ledger_id: zhou2023_table1_ph7_arp_cys_volatiles
+    source_file: Zhou2023b.pdf
+    read_by: "agent-sm34-reader1-2026-10-30"
+    second_reader: agent-sm34-reader2-2026-10-30
+    date: 2026-10-30
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The aqueous solutions of ARP (20 mmol/L) with the presence or the absence of added Cys (20 mmol/L) were prepared, and the pH levels of the systems were adjusted to different pH values (6, 7, and 8) using NaOH (3 mol/L). The reaction was carried out at 120 °C for 1 h, and then the reacted mixture was cooled in an ice bath"
+    notes: >-
+      Conditions as the ledger: purified N-(1-deoxy-D-xylulos-1-yl)-alanine (prepared in-house from Xyl : Ala 2:1, 80
+      C, Dowex 50WX8 purification, identity by UPLC-Q-TOF/MS and NMR, Figs. S1-S2) 20 mmol/L, +- Cys 20 mmol/L, in
+      deionized water (unbuffered), initial pH 6 / 7 / 8 set with 3 M NaOH, 120 C, 1 h, cooled in an ice bath; pH
+      read with a Mettler-Toledo meter (temperature of reading not stated). Vessel, fill volume and heating medium
+      not stated (the sibling Zhou 2023c says 'pressure-resistant bottles'; this paper does not). Units:
+      Table 1 header 'concentration (ug/L)'. Quantification: HS-SPME (CAR/PDMS/DVB, 3 mL sample + 2 mL saturated
+      NaCl, 60 C 30 min) GC-MS with 1,2-dichlorobenzene IS; 'Different concentrations of the chemical standards and
+      the fixed concentration of internal standards were mixed to construct standard curves'; 2-acetylthiazole was
+      purchased (Aladdin) and identified 'MS, RI, S'; SI Table S1: y = 0.0132x + 0.0041, R2 = 0.9975 (calibration
+      range and the standards' matrix not printed) -> calibrated, as the ledger. Duplicates: not the same data as
+      Zhou 2022 (a sibling run, same lab and nominal pot; CF-014 records 2-acetylthiazole x1.4 between them) nor
+      Zhou 2023c (pH 7.5 heat map). CF-014's remedy asks for both Table S1s: this paper's is on disk now
+      (zhou2023b_supporting.pdf). Values: pH 7 ARP + Cys 11.70 +- 2.14 ug/L (Duncan letter b); ARP alone ND.
+      Column assignment confirmed independently by SI Table S2 (OAV = value / threshold 10 ug/L: 0.243 / 1.17 /
+      58.234 for pH 6 / 7 / 8 ARP + Cys, '-' for ARP alone). n = 3 (Table 1 footnote).
+  - ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles
+    source_file: Zhou2023b.pdf
+    read_by: "agent-sm34-reader1-2026-10-30"
+    second_reader: agent-sm34-reader2-2026-10-30
+    date: 2026-10-30
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Table 1. Volatile Flavor Compounds of Thermally Treated ARP with or without Cys at 120 °C for 1 h under Different Initial pH Values (6, 7, and 8)"
+    notes: >-
+      Same experiment and method as the pH 7 entry (one sentence of the methods sets all three pH values). Values:
+      2-acetylthiazole pH 6 ARP + Cys 2.43 +- 0.08 ug/L (b), pH 8 ARP + Cys 582.34 +- 14.57 ug/L (c; also in the
+      text, 'increased significantly (582.34 ug/L)'); ARP alone ND at pH 6 and 8. The Duncan letters print pH 6 and
+      pH 7 as not different (both b) despite 2.43 vs 11.70, consistent with the pH 7 SD of 2.14. Final pH (Fig. 2) not
+      re-read here; the ledger lists ARP + Cys 3.22 / 3.42 / 5.07 for pH 6 / 7 / 8.

@@ -1,0 +1,394 @@
+# SOURCE VERIFICATION -- sub-model 2, the cysteine-pentose route (fit table data/lit/fit_rows/route_submodel.yml;
+# frame results/validation/kinetic_core_route_submodel_prereg.md).
+# Format and the five checks: the header of data/lit/source_verification.yml. One file per sub-model so parallel
+# readers never edit the same file. First reader: agent-sm2-reader1-2026-10-29, against the PDFs / SI (not the
+# dossiers; the dossiers were used only for their digitised values, which were then checked against the figures).
+# second_reader "pending" = NOT verified (the loader and the gate refuse it until a second reader signs).
+# `notes` is an extra field: what was checked, what was corrected, and why rows were left out.
+# Vector figures were read from the PDF's own paths (pdftocairo -svg; axes calibrated on the tick paths); a value
+# called "vector" below is exact to the plotting software's coordinates (< 0.1 % of the axis).
+#
+# checks: conditions (T, time, pH and where it was measured, buffer and strength, concentrations, vessel),
+#         units, quantification (sida / calibrated / semi_quantitative / relative, and the evidence), duplicates
+#         (the ledger's `same_data_as` or the conflicts register's duplicate entries), values (a sample of
+#         transcribed numbers against the table or figure).
+# ADJUDICATED 2026-10-29 (agent-route-adjudicator-2026-10-29) against the second, independent reading
+# (data/lit/source_verification/second/route_submodel.yml; reconciliation in
+# results/validation/source_reading_reconciliation_route_submodel.md). second_reader = agent-sm2-reader2 where both
+# readings agree; = the adjudicator where they disagreed or one reader alone chose the data set (what was checked is in
+# the entry's quote, after '|| ADJUDICATOR'). Excluded data sets carry a failed check with the reason. The dicarbonyl
+# and alanine-ARP entries (zhai2019_fig3b, zhai2021_fig5, zhai2023foodchem_fig2, zhou2025b_figs1_3) were REMOVED from
+# this file: they are sub-model 3's (data/lit/source_verification/deoxyosone_submodel.yml), and an entry here would
+# override that file's (the loader and the gate key verification by ledger id, the last file read wins).
+
+entries:
+  - ledger_id: cao2017_fig5_ttca_cama_glyarp
+    source_file: cao2017.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-sm2-reader2-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The amounts of cysteine and xylose used in the reaction models were both 2 mmol in 5 mL of phosphate buffer (0.2 M, pH 5.5). ... The vials were sealed and heated at 90 °C while stirring for 0.5, 1, 2, 3, 4, or 5 h. At the end time, the vials were removed and cooled immediately by a stream of tap water."
+    notes: >-
+      Accepted manuscript (not the typeset version). Conditions: Cys 0.40 + Xyl 0.40 mol/L, 0.2 M phosphate pH 5.5
+      (reagents list NaH2PO4 and NaOH, so sodium phosphate by inference; strength 0.2 M as printed), 15 mL pressure
+      glass vial, sealed, stirred, 90 C, 0.5-5 h, tap-water quench; pH read after cooling ("The pH was determined by a
+      PHSJ-5 pH meter"); three replicates. Units: Fig. 5 axis "Concentration (mol/L)". Quantification: "An external
+      standard method in SIM scan mode was used for quantitative determination of Cys-Amadori, TTCA ... The
+      synthesized Cys-Amadori, TTCA, and Gly-Amadori were used as the standards", 0.05-0.5 mol/L, TTCA R2 0.9902,
+      Cys-Amadori R2 0.9985 -> calibrated. Caveats kept: TTCA and Cys-Amadori share SIM m/z 254 / 236 (separated by
+      retention only); the 0.5 h Cys-Amadori (0.0046 mol/L) lies 10x below the lowest standard. Duplicates: none in
+      the register; Zhao 2017b (same lab, same recipe, HPLC-ELSD) is a sibling RUN, not a copy (its values differ).
+      Values: Fig. 5 is VECTOR; blank-arm markers read from the paths: TTCA 0.3555 / 0.3371 / 0.2890 / 0.2669 /
+      0.2529 / 0.2360 and Cys-Amadori 0.0046 / 0.0621 / 0.0886 / 0.1051 / 0.1086 / 0.1325 mol/L at 0.5-5 h; the
+      dossier's raster reads differ by <= 0.0015 mol/L (inside its +-0.005). Error bars are SDs ("Means +- standard
+      deviations were used to plot the figures (n=3)"); their half-lengths read from the paths become row sd; the
+      blank TTCA bars at 2-5 h are not drawn (hidden or absent), those rows carry the read error only. Only the blank
+      arm is transcribed: the glycine arms are 3.2-9.6 mol/L glycine (not solutions as written) and need chemistry
+      outside this sub-model. t = 0 (plotted 0) is the pot's initial state, not a row.
+  - ledger_id: cao2017_fig4ab_cys_xyl
+    source_file: cao2017.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-sm2-reader2-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Standard solutions of cysteine and xylose were prepared in the mixed solvent of water-acetonitrile (50:50,v:v). The concentrations of cysteine were 0.01, 0.025, 0.05, 0.075, and 0.1 mol/L, while the concentrations of xylose were 0.05, 0.1, 0.125, 0.15, and 0.175 mol/L."
+    notes: >-
+      Same heated systems as Fig. 5 (conditions as above). Units: axis "Concentration (mol/L)". Quantification:
+      HPLC-ELSD "using an external standard method", Cys y = 38046 x - 311.57 (R2 0.9995), Xyl y = 61719 x - 587.1
+      (R2 0.9995) -> calibrated; the blank's 0.056-0.075 (Cys) and 0.069-0.079 (Xyl) mol/L lie inside the standards.
+      The t = 0 point (0.40 for both) is above the Cys standards: it is the charge, kept on the pot, not a row.
+      Duplicates: none. Values: Fig. 4 is VECTOR; blank Cys 0.0752 / 0.0674 / 0.0662 / 0.0639 / 0.0619 / 0.0563 and
+      Xyl 0.0785 / 0.0749 / 0.0722 / 0.0703 / 0.0694 / 0.0690 mol/L at 0.5-5 h; dossier within 0.0016 (inside its
+      +-0.004). SD bars read from the paths (0.0016-0.0215 mol/L). The pH series (Fig. 4c, cao2017_fig4c_ph) is
+      sub-model 1's (pH and acids) and is not transcribed here; it is an input of this sub-model's pots. Glycine
+      arms not transcribed (as Fig. 5). In the fit table the Fig. 4 and Fig. 5 rows sit on two pot ids
+      (cao2017_blank_fig4 / _fig5) because a pot carries one ledger id; they are ONE heated system.
+  - ledger_id: zhai2019_fig3a_ttca_cama
+    source_file: zhai2019.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The reaction system of Xyl and Cys was mixed in a 2:1 molar ratio and dissolved in 80 mL of deionized water. The concentration of final solution was 34.8 mg/mL. The solution pH was adjusted to pH 7.4 with NaOH (6 mol/L). ... The solution was heated at temperatures of 70 °C, 90 °C, 110 °C, and 130 °C for 0, 20, 40, 60, 80, 120, 140, and 160 min. || ADJUDICATOR 2026-10-29: readings agree on all 61 values (both re-read the dossier digitisation on the 600 dpi raster); they differed only on the initial state. Pots start from the t = 0 state of Fig. 3A (orchestrator decision): TTCA 14.5 measured, Cys 68.1 / PENT 150.7 = charge minus TTCA (not measured); the 70 C 20-min ARP 0.2 (< its +-0.3 read error) is left out; t = 0 is not a row"
+    notes: >-
+      Conditions: 34.8 mg/mL at Xyl:Cys 2:1 -> Cys 82.6, Xyl 165.2 mmol/L; unbuffered water; pH 7.4 set at room
+      temperature with NaOH, never re-measured; ice-bath quench; vessel not stated (oil bath is named only for the
+      120 C experiments). The methods' time list omits 100 min; the figure plots it (transcribed from the figure).
+      TTCA is 14.5 mmol/L at t = 0 (formed before heating): the pots start from that state (charge kept as
+      charged_mmol_L). Later Zhai papers describe the same preparation as equimolar 82.7 mM (ledger note; not a new
+      conflict). Units: axis "Concentration (mmol/L)". Quantification: "According to standard curve constructed with
+      pure compound, the TTCA/ARP compounds ... were quantified by established HPLC-ELSD conditions"; "quantified by
+      external standard method (Figure 3A)" -> calibrated; the curve is not printed and ELSD is non-linear (caveat).
+      "ARP" here is the cysteine Amadori compound (species CAMA). Duplicates: Fig. 1B re-plots the 90 C TTCA series
+      (count once; only Fig. 3A transcribed). Values: Fig. 3A is a 600 dpi raster without error bars; checked by eye
+      against the render (+-0.5 mmol/L): TTCA 90 C 40 min 59.2, 110 C 20 min 58.5, 130 C 100 / 160 min 21.2 / 6.9,
+      ARP 110 C 60 min 5.6, ARP 130 C 20 min 4.3 -- all as the dossier. Read errors are the dossier's (+-0.7 TTCA,
+      +-0.3 ARP). Left out: the two plotted ARP zeros at 130 C, 140 and 160 min (no log residual; below detection).
+  - ledger_id: zhai2021_fig3a_ttca_tladder
+    source_file: zhai2021.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "The aqueous solution of TTCA (pH 5.5, 10 mmol/L) without the adjustment of pH was heated under different temperatures (100, 120, and 140 °C) ... Figure 3. Effect of different temperatures (100, 120, and 140 °C) on the concentrations of TTCA (a) and A420 (b) during heat treatment, under the natural pH of 5.5. || ADJUDICATOR 2026-10-29: 120 / 140 C means and SD bars identical in both readings; the 100 C series (= Fig. 4b pH 5.5, identical means, different drawn SDs) is entered once, in Fig. 4b (orchestrator decision)"
+    notes: >-
+      Conditions: purified TTCA (98 %) 10 mmol/L in water, natural pH 5.5 (not adjusted; the ledger is right since
+      CF-010), thermostatic oil bath 100 / 120 / 140 C, 20-120 min, ice quench; vessel not stated; pH not
+      re-measured. Units: mmol/L. Quantification: HPLC-ELSD "using the purified compounds prepared in our laboratory
+      as external standards"; TTCA LOD 2.21 / LOQ 6.63 mg/L -> calibrated. Duplicates: the 100 C series is the SAME
+      data as Fig. 4b pH 5.5 (identical means, different drawn SDs); only the 120 and 140 C series are transcribed
+      from this entry, the 100 C series once, from Fig. 4b. Values: vector; read here 120 C 8.77 / 7.27 / 6.18 / 4.59
+      / 3.17 / 2.47 and 140 C 7.59 / 5.87 / 3.98 / 2.29 / 1.20 / 0.27 mmol/L, SD bars 0.115-0.299 -- identical to the
+      dossier sec. 5.1a. Printed zero-order fits reproduce at 120 / 140 C; the printed 100 C slope 0.0271 is 0.0274 by
+      refit (dossier; no row depends on it).
+  - ledger_id: zhai2021_fig4b_ttca_ph_ladder
+    source_file: zhai2021.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). || ADJUDICATOR 2026-10-29: re-read from the vector paths (page 4): all means agree with both readings; the pH 5.5 TTCA-alone SDs are Fig. 4b's own bars (0.095 / 0.395 / 0.29 / 0.245 / 0.165 / 0.37), the first reader's; the second reader's smaller SDs are Fig. 3a's bars for the same means"
+    notes: >-
+      Conditions: TTCA 10 mmol/L +- Xyl 10 mmol/L, unbuffered water, pH 5.5 / 6 / 7 / 8 set at room temperature with
+      2 M NaOH or HCl (strength of the resulting solution not stated; the added Na+ / Cl- is unknown), oil bath, Fig.
+      4b at 100 C only; pH never re-measured; vessel not stated. Units: mmol/L. Quantification: as Fig. 3a
+      (calibrated). Duplicates: pH 5.5 TTCA-alone = Fig. 3a 100 C (counted once, here). Values: vector, read here
+      from the paths; all 48 means agree with the dossier sec. 5.1 to <= 0.0005 mmol/L (e.g. pH 7 9.14 / 8.21 / 7.02
+      / 5.52 / 2.08 / 0.89; +Xyl pH 8 8.12 / 6.07 / 2.16). SD bars exist only for TTCA-alone pH 5.5, 6 and 7 (pH 7 at
+      100 / 120 min drawn zero-length: no sd given). The other series carry only the vector read error (+-0.005
+      mmol/L, the dossier's), i.e. ~1e-3 dex or less: such rows will dominate a fit unless the measurement model
+      adds its per-series scale (flagged in the report). Left out: the 7 plotted zeros (TTCA < LOD; pH 8 at 100 /
+      120, +Xyl pH 7 at 100 / 120, +Xyl pH 8 at 80-120).
+  - ledger_id: zhai2021_fig6_cys_xyl
+    source_file: zhai2021.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Figure 6. Concentration of Cys (a) decomposed from the thermal degradation of TTCA with or without the addition of Xyl at 100 °C and pH values of 5.5, 6, 7, and 8; depletion rate of Xyl (b) in the model reaction system of TTCA−Xyl and Xyl control systems under the heat treatment of 100 °C and pH values of 5.5, 6, 7, and 8, respectively. || ADJUDICATOR 2026-10-29: re-read from the vector paths (page 7; half-bar joints = means, cap centres = SD; legend draw order, checked on the markers): all 48 Cys and 48 Xyl means match the first reader to <= 0.001 mmol/L; the second reader's TTCA-Xyl pH 7 Xyl series is offset +0.018 and some of its SDs are missing or misread (Cys pH 6 80 min 0.018 vs 0.0118): the first reader's rows kept. The four xylose-alone controls are INCLUDED (the second reader left them out): their contrast with TTCA-Xyl at the same pH separates the pentose's own loss from the cysteine-driven loss that the frame tests (r_pent_tdp / r_pent_dpo)"
+    notes: >-
+      CONDITIONS CORRECTED: the ledger records none (temperature [], pH null, empty quote, figure_only). From the
+      caption and methods: the Fig. 4b systems (TTCA 10 mmol/L +- Xyl 10 mmol/L, water, pH 5.5 / 6 / 7 / 8, 100 C,
+      20-120 min) plus four xylose-only controls (Xyl 10 mmol/L, plotted t = 0 at 10.00; their preparation is not
+      described beyond the caption). The ledger entry should carry these. Units: axes "Concentration (mmol/L)".
+      Quantification: HPLC-ELSD, "analytical-grade Cys and Xyl were used as external standards" -> calibrated; Cys
+      LOD 3.025 / LOQ 10.89 mg/L = 0.025 / 0.090 mmol/L, so the Cys values 0.050-0.080 at pH 5.5 / 6, 20-40 min lie
+      between LOD and LOQ (kept, flagged). DUPLICATES (new, checked point by point): the TTCA pH 7 and TTCA-Xyl pH 7
+      Cys series of Fig. 6a are re-plotted as the 100 C series of Zhai 2023 Food Chem Fig. 3a (TTCA-100 C /
+      TTCA+Xyl-100 C, "initial pH value of 7"), and the TTCA pH 7 series again as Kang 2026 SI Fig. S3 "TTCA-100 C"
+      (0.12 / 0.24 / 0.69 / 0.87 / 1.29 / 1.23 here; Kang dossier 0.121 / 0.242 / 0.693 / 0.872 / ~1.30 / 1.233).
+      This entry is the ORIGINAL (2021); the copies are not transcribed at 100 C. Values: Fig. 6 is
+      VECTOR (page 7) and the dossier did not digitise it: read here from the paths, axes on the tick paths (6a 0 /
+      2.5 mmol/L at y 155.75 / 70.76 pt; 6b 0 / 12 at 288.63 / 188.74; x 0 / 120 min), series by draw order (= legend
+      order; dashed TTCA / Xyl-control first, solid TTCA-Xyl after, as the legends), each marker matched to its own
+      error bar (mean at the bar joint, SD = joint to cap centre, cap 0.48 pt). Values land on round 2-3 decimal
+      numbers (e.g. Cys TTCA pH 7: 0.12 / 0.24 / 0.69 / 0.87 / 1.29 / 1.23; TTCA-Xyl pH 8: 0.439 / 0.918 / 1.496 /
+      1.987 / 2.179 / 2.148), so the read error is taken as the dossier's for this paper's vector figures (+-0.005
+      mmol/L, sec. 5.1). The text's checks hold: Cys rises faster with pH; at pH 8 TTCA-Xyl is slightly lower at 20
+      min (0.439 vs 0.490); Xyl falls fastest at pH 7-8 in TTCA-Xyl (6.13 / 2.99 at 120 min) and only to 9.36-9.53
+      in the controls. Flags: the xylose-control and TTCA-Xyl pH 5.5 series share most SDs (0.0211 / 0.0336 /
+      0.0148 ...); recorded, not corrected. A 13C5-TTCA series (Fig. 7a, same systems) has no ledger entry.
+  - ledger_id: kang2026_si_fig_s3_cys_release_from_ttca
+    source_file: Kang2026_supplementary.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: pass
+      duplicates: fail
+      values: pass
+    quote: "Figure S3. The release of Cys during the degradation of TTCA. || ADJUDICATOR 2026-10-29: FAIL (duplicates): a reprint of Zhai 2023 Food Chem Fig. 3a's TTCA arm (and Zhai 2021 Fig. 6a pH 7 at 100 C), confirmed value by value; not in the fit table, the original is"
+    notes: >-
+      Kang states no conditions for this figure (caption above; main text cites it as "Fig. S2") and no analytical
+      method for Cys. DUPLICATE (new, checked by eye on both rasters): the three curves are the TTCA-alone series of
+      Zhai 2023 Food Chem Fig. 3a (TTCA-100 / 120 / 140 C, "initial pH value of 7"), and the 100 C curve is also Zhai
+      2021 Fig. 6a TTCA pH 7 (values identical to 0.01). So the conditions are the original's (corrected): TTCA 10
+      mmol/L, water, pH 7.0 +- 0.01 (6 and 2 M NaOH), pressure-resistant bottles with stirring, 100 / 120 / 140 C,
+      20-120 min, ice quench; quantification the original's: "HPLC-ELSD system with the pure TTCA, analytical grade
+      Xyl, and Cys as external standards" -> calibrated (ledger right). The ledger flag should read same_data_as
+      zhai2023foodchem_fig3_cys_da_mgo_go (and the 100 C curve zhai2021_fig6_cys_xyl). Units: axis "Cys
+      Concentration (mmol/L)". Values: raster (Kang SI p. 15), checked by eye against the dossier's digitisation (+-0.03
+      mmol/L): 140 C 0.50 / 1.63 / 1.57 / 1.62, 120 C 1.22 at 60 min, 0.87 at 120 min -- as the dossier. Small error
+      bars are drawn at a few points (the dossier says none; not read). Transcribed: 120 and 140 C only, with the
+      dossier's read error (the 100 C curve is Zhai 2021 Fig. 6a's, transcribed there). Rows are keyed to this entry
+      because the original's figure (Zhai 2023 Food Chem Fig. 3a) has no digitisation with a read error; once one
+      exists these rows move to the original.
+  - ledger_id: kang2026_si_fig_s4_free_cys_depletion
+    source_file: Kang2026_supplementary.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: pass
+      duplicates: fail
+      values: pass
+    quote: "Figure S4. Depletion of Cys compound at an initial pH of 7 under different temperatures (100, 120 and 140 ℃). || ADJUDICATOR 2026-10-29: FAIL (duplicates): a reprint of Zhai 2023 Food Chem SI Fig. S2 (orchestrator decision); and a cysteine-alone system (no pentose, no TTCA): outside this table's inclusion rule"
+    notes: >-
+      The figure is Zhai 2023 Food Chem SI Fig. S2 (identical image and caption, checked in
+      zhai2023foodchem_supplementary.docx, media/image3.png), which resolves the ledger's "system identity inferred,
+      85 %": Zhai 2023 Food Chem sec. 2.4, "Aqueous solution of Cys reaction system (10 mmol/L) was prepared and
+      adjusted to pH 7 ± 0.01 with NaOH solution (6 mol/L) prior to the heating treatment at a temperatures of 100,
+      120, and 140 °C for different times (20, 40, 60, 80, 100, 120 min)" -> free cysteine 10 mmol/L alone
+      (conditions corrected: certain, not inferred); vessel not stated for this system. Quantification: the
+      original's HPLC-ELSD with Cys as external standard -> calibrated. Duplicates: the ledger's duplicate_of
+      zhai2023foodchem_p6_cys_alone_conversion is right (that text's 16.2 / 38.8 / 62.2 % consumption vs 16.2 / 38.7
+      / 62.6 % from these points). Units: axis "Cys concentration (mmol/L)". Values: raster, checked by eye against
+      the dossier: 100 C 9.77 / 8.64 / 8.38 (20 / 100 / 120 min), 120 C 7.11 at 60 min, 140 C 4.76 / 3.74 (80 / 120
+      min). Error bars (SD, triplicate per the original) are drawn but not read; rows carry the dossier's read error
+      (+-0.03 mmol/L). All three temperatures transcribed (stage 1 held 140 C out; the role is the prereg's call).
+  - ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go
+    source_file: Zhai2023.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: corrected
+      values: pass
+    quote: "Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 °C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer (DF-101S). || ADJUDICATOR 2026-10-29: Cys (Fig. 3a) at 120 / 140 C, both arms, INCLUDED (24 rows, the second reader's raster transcription): re-read on the 300 ppi image (page 8; axes on the tick rows, marker centroids): all within the stated read errors (e.g. +Xyl-140 60 min 2.035 vs 2.047; 80 min +Xyl-120 / +Xyl-140 ~1.83 / ~1.78 vs 1.82 / 1.79); TTCA-alone values equal Kang SI Fig. S3 as the first reader read it (0.205 / 0.989 / 1.219 ... vs 0.20 / 0.99 / 1.228): the copy is confirmed and Kang's rows are dropped. 100 C = Zhai 2021 Fig. 6a pH 7, not entered here"
+    notes: >-
+      Conditions as the ledger (TTCA 10 mmol/L +- Xyl 10 mmol/L, water, pH 7.00 +- 0.01 set at room temperature,
+      pressure-resistant bottles, stirred, 100 / 120 / 140 C, 20-120 min, ice water quench; pH not re-measured).
+      Units: Fig. 3a axis "Cys concentration (mmol/L)". Quantification (Cys): "HPLC-ELSD system with the pure TTCA,
+      analytical grade Xyl, and Cys as external standards" -> calibrated. DUPLICATES (new): Fig. 3a's 100 C series
+      (TTCA and TTCA+Xyl) are Zhai 2021 Fig. 6a's pH 7 series (e.g. TTCA+Xyl 0.15 / 0.30 / 0.63 / 1.03 / 1.40 / 1.47);
+      Fig. 3a's three TTCA-alone curves are re-published as Kang 2026 SI Fig. S3. Values: 300 dpi raster, checked by
+      eye: TTCA-140 C 1.63 at 40 min, TTCA+Xyl-140 C peak ~2.05 at 60 min, TTCA+Xyl-120 C ~1.80 at 80 min.
+      NOT TRANSCRIBED: no digitisation with a read error exists (the dossier read peaks only, +-10-15 %); the
+      TTCA-alone 120 / 140 C curves enter through Kang S3 (same numbers), the 100 C curves through Zhai 2021 Fig. 6a;
+      the TTCA+Xyl 120 / 140 C Cys curves (12 points, SD bars drawn) are left out pending a digitisation. DA / MGO /
+      GO (Fig. 3b-d) are not route species.
+      ADJUDICATED 2026-10-29: the 'NOT TRANSCRIBED' above is superseded; the Cys rows at 120 / 140 C now enter from this, the original (verification of the second reader's digitisation in the quote). DA / MGO / GO stay out (sub-model 3; that reading is in deoxyosone_submodel.yml).
+  - ledger_id: zhao2017b_fig2abde_xyl_cys_ttca_cama
+    source_file: zhao2017b.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-sm2-reader2-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "15 mL耐压反应管中依次加入5 mL缓冲液（氢氧化钠滴加到磷酸二氢钠溶液中配制，0.2 mol/L，pH 5.5）、L-半胱氨酸2 mmol（0.242 g）、D-（＋）-木糖2 mmol（0.300 g）... 90 ℃分别反应0.5、1、2、3、4、5 h ... 同时做空白实验。每个体系平行3 次，结果取平均值。"
+    notes: >-
+      (Quote assembled from the methods text layer, Chinese; translated in the pot's condition_quote.) Conditions:
+      Cys 0.40 + Xyl 0.40 mol/L, sodium phosphate 0.2 M pH 5.5 (NaOH into NaH2PO4: counter-ion explicit here),
+      sealed 15 mL pressure tube, 90 C, 0.5-5 h, running-water quench, triplicate; pH measured on a 6-fold dilution
+      at 25 C (not the pot's pH). Units: axes in mol/L. Quantification: HPLC-ELSD, external standards of TTCA and
+      Cys-Amadori (prepared after Cao 2016), Xyl and Cys; calibrations printed (TTCA y = 49 119x - 4 516, Cys-Amadori
+      y = 24 024.1x - 143.9; ranges not stated) -> calibrated. Duplicates: same lab, recipe, vessel and times as Cao
+      2017's blank but a different run and assay (values differ: Cys-Amadori at 1 h 0.037 here vs 0.062 in Cao; TTCA
+      at 2 h 0.327 vs 0.289): a sibling run, not a copy (the ledger's sibling_run_of flag is right; for
+      leave-one-laboratory-out both are BTBU). Values: Fig. 2 is vector but its paths are merged; checked by eye on
+      a 110 dpi render: blank TTCA 0.355 at 0.5 h falling to ~0.29 at 5 h, Cys ~0.08 -> 0.06, Cys-Amadori 0 at 0.5 h
+      ("detected only after 0.5 h", text) and ~0.09 at 5 h -- as the dossier. Read errors the dossier's (+-0.004
+      Xyl / Cys, +-0.005 TTCA, +-0.002 Cys-Amadori mol/L). Only the blank is transcribed (the aldehyde arms need
+      lipid-aldehyde chemistry); the 0.5 h Cys-Amadori zero is left out. No error bars are read (some are drawn).
+  - ledger_id: zhang2025b_fig2abc_ttca_cama_lysarp
+    source_file: zhang2025b.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-sm2-reader2-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "In a 15-mL pressure glass vial, 0.2 mmol of cysteine, 0.2 mmol of xylose, lysine at 0, 1, 2, 4, 6, 8, or 16 times the amount of cysteine, and 5 mL of phosphate buffer (0.2 mol/L, pH 6.5) were added. The vials were heated at 120 °C for a total of 50 mins on a Parallel Synthesis Poly-Block 4 system (HEL Co. Ltd., United Kingdom)."
+    notes: >-
+      Conditions: Cys 40 + Xyl 40 mmol/L (0.2 mmol each in 5 mL), 0.2 M phosphate pH 6.5 (counter-ion not stated),
+      15 mL pressure vial, 120 C, vials "taken at intervals" to 50 min, ice-water quench, triplicate; pH never
+      measured; no come-up time stated (5 mL in a block heater: the first minutes are not isothermal). Units: axes
+      "Concentration (mmol/L)". Quantification: LC-MS/MS MRM with synthesized TTCA and Cys-Amadori "using external
+      standard method" (Table 1: TTCA 0.1-20 mmol/L, y = 2418x, R2 0.993; Cys-Amadori 0.1-3 mmol/L, y = 6703x, R2
+      0.991) -> calibrated; the blank's 10 min Cys-Amadori (0.07) lies below the lowest standard (flag). Duplicates:
+      none. Values: 300 dpi raster (p. 7), checked by eye on the blank (black) series: TTCA 11.2 / 15.1 / 17.7 / 18.2
+      at 10 / 20 / 30 / 50 min, Cys-Amadori 1.05 / 1.60 / 1.62 at 15 / 30 / 50 min -- as the dossier. Read errors the
+      dossier's (+-0.3 TTCA, +-0.05 Cys-Amadori mmol/L); SD bars drawn, not read. Only the blank is transcribed (the
+      lysine arms need lysine chemistry); the 5 min Cys-Amadori (~0) is left out. The printed first-order fits for
+      free Cys and Xyl (Fig. 2g-h, entry zhang2025b_fig2dh_rate_fits) are fits, not points; not read here.
+  - ledger_id: deroos2005_fig4_xylulose_cysteine_ph_stability
+    source_file: deroos2005.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: fail
+      units: fail
+      quantification: fail
+      duplicates: pass
+      values: pass
+    quote: "Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer. || ADJUDICATOR 2026-10-29: FAIL: a drawn curve with no points, % left after 2 h with no starting concentration and no assay (both readers); not a fit row (orchestrator decision)"
+    notes: >-
+      Scanned chapter (600 dpi page images); Fig. 4 on p. 127. Conditions: purified D-xylulose-L-cysteine (the
+      pentose Cys-Amadori, species CAMA) in boiling (~100 C) 0.5 M phosphate, pH 3-6, 2 h; starting concentration,
+      counter-ion, vessel and the analytical method are NOT stated (ledger flags right). Units: y "% left after 2 h"
+      (0-100), x pH. Quantification CORRECTED: no method is given for this figure (ledger 'calibrated' has no
+      support in the chapter); a % remaining within one assay is a ratio, so the class is 'relative' at best.
+      Duplicates: none. Values: the figure is a dashed curve with NO markers (a sketch of an unknown number of
+      points); checked by eye on the scan: ~51 % at pH 3, maximum ~58 % at pH 5, ~18 % at pH 6 -- as the dossier
+      (+-3 %). NOT TRANSCRIBED: (1) the loader has no unit for a fraction remaining (fit_rows.UNITS); (2) the starting
+      concentration is unknown, so a pot cannot be written without inventing one; (3) the curve has no data points.
+      It stays what stage 1 used it for: a held pH profile (first-order k = -ln(f)/120), or a check, not a fit row.
+  - ledger_id: du2024_fig2_cama_aldehyde_thiazolidines
+    source_file: du2024.pdf
+    read_by: "agent-sm2-reader1-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: fail
+      units: fail
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Based on our previous study, to study the influence of the number and position of the unsaturated bond in aliphatic aldehydes on the Maillard reaction system of “cysteine-glucose”, the conditions of the meat flavorings system were designed (Du et al., 2019). || ADJUDICATOR 2026-10-29: FAIL confirmed: glucose Cys-Amadori, conditions not stated (orchestrator decision)"
+    notes: >-
+      FAIL, nothing transcribed. (1) Conditions: the heated systems of Fig. 2 (M, A-D) have no stated charge,
+      temperature, time base or volume; they are delegated to Du 2019, which (ledger) is a youtiao aroma paper. (2)
+      Out of scope: the Cys-Amadori here is the GLUCOSE compound ("N-(1-deoxy-D-glucos-1-yl)-L-cysteine"), not the
+      pentose CAMA of this sub-model. (3) Units: the ledger records the plotted levels as inconsistent with any stated
+      charge (17.5-49 mM if g/L); with no charge stated the axis unit cannot be checked. Quantification as the ledger
+      (UPLC-MS/MS MRM, external standards of the synthesized compounds).
+  - ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    source_file: Zhai2023b.pdf
+    read_by: "agent-sm2-reader2-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: corrected
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Figure 5. Time course levels of downstream products including ARP (a), 3-DX (b), 1-DX (c), MGO (d), and GO (e) generated from TTCA reaction models with and without the addition of Cys under different temperatures (100, 120, and 140 °C), initial pH of 7.0, and TTCA−Cys molar ratio of 1:1. || ADJUDICATOR 2026-10-29: one-sided (second reader); verified as second reader: panel a re-digitised from the vector paths (page 7; error-bar joints; series by draw order = legend T-100, T+C-100, T-120, T+C-120, T-140, T+C-140, checked on the markers: squares 100 C, diamonds 120 C, triangles 140 C, dashed TTCA / solid TTCA+Cys): all 45 means within 0.002 mmol/L of the second reader's; included"
+    notes: >-
+      Conditions CORRECTED (the ledger's condition_quote is empty): purified TTCA 10 mmol/L +- Cys 10 mmol/L (1:1),
+      water, initial pH 7.0 (the agent is not stated for the models; the paper's TTCA preparation uses 2 / 6 M NaOH),
+      100 / 120 / 140 C, 20-180 min, pressure-resistant bottles with a collector-type magnetic stirrer (DF-101S),
+      ice-bath quench; pH never re-measured. Units: axis "Cncentration (mmol/L)" [sic]. Quantification: "HPLC-ELSD was
+      employed to quantify the ARP compound using external standards" (in-lab ARP, the 1-amino-1-deoxyxylose derivative
+      of Cys = species CAMA) -> calibrated; no LOD printed. Duplicates: none found (Kang 2026 SI and this paper's SI
+      checked; Zhai 2021 / Zhai 2023 Food Chem did not measure ARP). Values: vector; plotted zeros left out (TTCA+Cys at
+      20 min, TTCA-120 at 180, TTCA-140 at 140-180, TTCA+Cys-120 at 180, TTCA+Cys-140 at 160-180). SD bars from the paths
+      (n = 3, "mean +- standard deviation"). Panels b-e (dicarbonyls) belong to sub-model 3, not transcribed here.
+  - ledger_id: zhang2025b_fig2dh_rate_fits
+    source_file: zhang2025b.pdf
+    read_by: "agent-sm2-reader2-2026-10-29"
+    second_reader: "agent-route-adjudicator-2026-10-29"
+    date: 2026-10-29
+    checks:
+      conditions: pass
+      units: corrected
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Ln (C/C0) of xylose and cysteine with reaction times along with the fitted linear equations, where the slopes indicated reaction rate constants. Note. C0 and C are the concentration of original reaction solution and that at certain reaction time, respectively. Means ± standard deviations were used to plot the figures (n = 3). || ADJUDICATOR 2026-10-29: one-sided (second reader); verified as second reader: the blank (black) markers of Fig. 2g / 2h re-read on the 300 ppi image (page 7; centroids of the black markers, axis from the 0 / -10 labels): xylose -0.78 / -1.24 / -1.57 / -1.86 / -2.16 / -2.44 / -3.16 at 5-40 min vs the second reader's -0.77 / -1.23 / -1.56 / -1.82 / -2.18 / -2.44 / -3.13 (within the +-0.08 read error); included"
+    notes: >-
+      Same heated system as Fig. 2a-c (Cys 40 + Xyl 40 mmol/L, 0.2 M phosphate pH 6.5, 120 C, 15 mL pressure vial, no
+      come-up time). Units CORRECTED: ln(C/C0) converted with C0 = the 40 mmol/L charge (the caption defines C0 as "the
+      concentration of original reaction solution"); the row keeps the read ln value. Quantification: HPLC-ELSD external
+      standards; the printed Cys and Xyl calibrations are identical (one misprinted; the ln ratio does not depend on the
+      slope). Duplicates: none. The printed blank fits (Xyl y = -0.073x - 0.324; Cys y = -0.059x - 0.760) do not
+      reproduce the plotted points (least squares on the points: k_Xyl ~0.061 /min) and imply C/C0 = 0.72 / 0.47 at
+      t = 0, while the plotted t = 0 point is ln 0: the points, not the fits, are transcribed. Closure (ledger flag
+      half_of_reactants_unaccounted): at 50 min Cys 0.8 + TTCA 18.2 + Cys-Amadori 1.6 = 21 of 40 mmol/L; at 5 min Cys
+      20.3 + TTCA 7.4 = 28 of 40. The fit will see it; not corrected here.

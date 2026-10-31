@@ -52,6 +52,8 @@ EXTRACTION_DOSSIERS_DIR: Path = LIT_DIR / "extraction_dossiers"
 #: 2026-10-29 (strategy M3 / M5 / guards): the measurement index, the source-verification record, the conflicts register.
 MEASUREMENT_LEDGER_DIR: Path = LIT_DIR / "measurement_ledger"
 SOURCE_VERIFICATION: Path = LIT_DIR / "source_verification.yml"
+#: one file per sub-model or wave, so parallel readers never edit the same file (2026-10-29)
+SOURCE_VERIFICATION_DIR: Path = LIT_DIR / "source_verification"
 CONFLICTS_REGISTER: Path = DOCS_ROOT / "reference" / "conflicts_register.yml"
 # LLM research dumps kept only so citation_gate can detect laundered citations. Not
 # provenance; nothing loads them as inputs.

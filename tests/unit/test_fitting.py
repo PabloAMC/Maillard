@@ -201,6 +201,19 @@ def test_a_scale_free_series_sees_only_its_shape():
     assert not np.allclose(mm.whiten(r, rows)[6:], mm.whiten(shifted, rows)[6:])
 
 
+def test_series_offsets_are_the_posterior_mean_of_the_scale():
+    rows = _series_rows() + _series_rows(name="abs", method="sida")
+    sig = np.array([r["sigma"] for r in rows[:6]])
+    r = np.random.default_rng(4).normal(size=len(rows)) * 0.1 + 0.7
+    weighted_mean = float(np.sum(r[:6] / sig ** 2) / np.sum(1 / sig ** 2))
+    free = _mm().offsets(r, rows)
+    assert free["s"] == pytest.approx(weighted_mean) and free["abs"] == 0.0
+    shrunk = _mm(0.3).offsets(r, rows)["s"]
+    assert 0.0 < shrunk < weighted_mean
+    # the residual a reader judges a scale-free series by has no weighted mean left
+    assert float(np.sum((r[:6] - free["s"]) / sig ** 2)) == pytest.approx(0.0, abs=1e-9)
+
+
 def test_a_series_cannot_mix_method_classes():
     rows = _series_rows(n=2) + [{"series": "s", "sigma": 0.1, "method": "sida"}]
     with pytest.raises(ValueError, match="mixes method classes"):
@@ -260,3 +273,143 @@ def test_diagnostics_flag_a_biased_laboratory_and_a_trend():
     assert not any(f.startswith("lab=A") for f in report["flags"])
     assert report["trends"]["T"]["rho"] > 0
     assert "| B | 6 |" in fitting.diagnostics_markdown(report)
+
+
+def test_series_noise_is_estimated_where_the_stated_error_is_too_small():
+    """A series whose stated error (0.001 dex, a vector read) is far below its real scatter (0.1 dex) gets an extra
+    noise near 0.1; a series whose stated error is honest gets none or little; a two-point series gets none."""
+    rng = np.random.default_rng(5)
+    rows = ([{"series": "tiny", "sigma": 0.001, "method": "calibrated"} for _ in range(40)]
+            + [{"series": "honest", "sigma": 0.1, "method": "calibrated"} for _ in range(40)]
+            + [{"series": "pair", "sigma": 0.001, "method": "calibrated"} for _ in range(2)])
+    r = np.concatenate([rng.normal(0, 0.1, 40), rng.normal(0, 0.1, 40), rng.normal(0, 0.1, 2)])
+    mm = _mm()
+    noise = fitting.estimate_series_noise(mm, r, rows)
+    assert noise["tiny"] == pytest.approx(0.1, rel=0.25)
+    assert noise.get("honest", 0.0) < 0.05
+    assert "pair" not in noise
+    with_noise = fitting.MeasurementModel(series_of=mm.series_of, sigma_of=mm.sigma_of, method_of=mm.method_of,
+                                          extra_noise=noise)
+    z = with_noise.whiten(r, rows)
+    assert float(np.mean(z[:40] ** 2)) == pytest.approx(1.0, rel=0.35)   # the tiny series is no longer 10^4 x over-weighted
+
+
+def test_a_scale_free_series_noise_ignores_its_offset():
+    rows = [{"series": "semi", "sigma": 0.01, "method": "semi_quantitative"} for _ in range(30)]
+    r = 0.7 + np.random.default_rng(6).normal(0, 0.05, 30)   # a response factor of 10^0.7 plus 0.05 dex of scatter
+    noise = fitting.estimate_series_noise(_mm(), r, rows)
+    assert noise["semi"] == pytest.approx(0.05, rel=0.3)
+
+
+def test_fit_with_series_noise_recovers_the_rate_when_one_series_states_a_tiny_error():
+    """Two series of one decay, both with 0.05 dex real scatter; one states 0.0005 dex (a vector read). Without the
+    noise term that series dominates; with it the rate is recovered and both series carry their real scatter."""
+    rng = np.random.default_rng(9)
+    times = np.linspace(10.0, 200.0, 12)
+    rows = []
+    for name, stated in (("vector", 0.0005), ("table", 0.05)):
+        for t in times:
+            y = 10.0 * math.exp(-0.01 * t) * 10.0 ** rng.normal(0, 0.05)
+            rows.append({"series": name, "sigma": stated, "method": "calibrated", "t": float(t), "y": y})
+    rows = tuple(rows)
+
+    def raw(theta, rows_):
+        a, lk = theta
+        return np.array([a - (10.0 ** lk) * r["t"] / math.log(10.0) - math.log10(r["y"]) for r in rows_])
+
+    def make(mm):
+        return fitting.Problem(keys=("log10_A", "log10_k"), kinds=("log10k", "log10k"), lower=np.array([-2.0, -5.0]),
+                               upper=np.array([3.0, 0.0]), rows=rows,
+                               residuals=lambda th, rr: mm.whiten(raw(th, rr), rr), nuisance_dof=mm.nuisance_dof)
+
+    f_, mm = fitting.fit_with_series_noise(make, _mm(), raw, np.array([0.5, -2.5]), budget=600)
+    assert f_.theta[1] == pytest.approx(-2.0, abs=0.05)
+    assert mm.extra_noise["vector"] == pytest.approx(0.05, rel=0.5)
+    # the honest series' TOTAL error stays near its true 0.05 (12 points: the moment estimate fluctuates ~40 %)
+    assert math.sqrt(0.05 ** 2 + mm.extra_noise.get("table", 0.0) ** 2) < 0.08
+
+
+def test_evaluate_many_is_used_for_batches_and_must_match_the_single_evaluation():
+    # sub-model 1 (2026-10-29): a flattened batch evaluation feeds the Jacobian; non-finite values become the
+    # failed residual exactly as in the single-point path
+    calls = []
+
+    def residuals(theta, rows):
+        return np.array([theta[0] - 1.0, theta[1] + 2.0])
+
+    def many(points, rows):
+        calls.append(len(points))
+        out = [residuals(x, rows) for x in points]
+        out[-1] = np.array([np.nan, 0.0])
+        return out
+
+    problem = fitting.Problem(keys=("a", "b"), kinds=("ph_slope", "log10_offset"), lower=np.array([0.0, -3.0]),
+                              upper=np.array([2.0, 3.0]), rows=(1, 2), residuals=residuals, evaluate_many=many)
+    values = fitting._evaluate_all(problem, [np.array([0.5, 0.0]), np.array([1.0, 1.0])], None)
+    assert calls == [2] and np.allclose(values[0], [-0.5, 2.0]) and values[1][0] == problem.failed_residual
+    assert fitting._step("ph_slope") == 0.05 and fitting._threshold("log10_offset") == 0.5
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The acceptance protocol's measurement pieces (2026-10-30, STRATEGY sec. 9): the between-paper error of an absolute
+# method class, the log predictive density and the interval coverage
+# ---------------------------------------------------------------------------------------------------------------------
+
+def _abs_rows(n_papers=40, per=5, sigma=0.05):
+    return [{"series": f"p{g}|pot{i}", "paper": f"p{g}", "sigma": sigma, "method": "sida"}
+            for g in range(n_papers) for i in range(per)]
+
+
+def _between_model(tau=0.0):
+    return fitting.MeasurementModel(series_of=lambda row: row["series"], sigma_of=lambda row: row["sigma"],
+                                    method_of=lambda row: row["method"], level_of=lambda row: row["paper"],
+                                    between_tau={"sida": tau} if tau else {})
+
+
+def test_the_between_paper_error_is_recovered_from_paper_offsets():
+    rng = np.random.default_rng(7)
+    rows = _abs_rows()
+    offsets = {f"p{g}": rng.normal(0.0, 0.4) for g in range(40)}
+    r = np.array([offsets[row["paper"]] + rng.normal(0.0, row["sigma"]) for row in rows])
+    tau = fitting.estimate_between_tau(_between_model(), r, rows)["sida"]
+    assert tau == pytest.approx(0.4, rel=0.25)
+
+
+def test_no_between_term_leaves_absolute_rows_exactly_as_before():
+    rows = _abs_rows(n_papers=3)
+    r = np.random.default_rng(1).normal(size=len(rows)) * 0.1
+    plain = fitting.MeasurementModel(series_of=lambda row: row["series"], sigma_of=lambda row: row["sigma"],
+                                     method_of=lambda row: row["method"])
+    assert np.allclose(plain.whiten(r, rows), _between_model().whiten(r, rows))
+
+
+def test_log_density_is_the_exact_gaussian_with_a_shared_paper_offset():
+    from scipy.stats import multivariate_normal
+
+    rows = _abs_rows(n_papers=1, per=4)
+    r = np.random.default_rng(3).normal(size=4) * 0.2
+    tau = 0.3
+    cov = np.diag([row["sigma"] ** 2 for row in rows]) + tau ** 2 * np.ones((4, 4))
+    assert _between_model(tau).log_density(r, rows) == pytest.approx(
+        float(multivariate_normal(np.zeros(4), cov).logpdf(r)), rel=1e-9)
+
+
+def test_ninety_percent_intervals_cover_about_ninety_percent():
+    rng = np.random.default_rng(11)
+    rows = _abs_rows(n_papers=200, per=3)
+    offsets = {f"p{g}": rng.normal(0.0, 0.3) for g in range(200)}
+    r = np.array([offsets[row["paper"]] + rng.normal(0.0, row["sigma"]) for row in rows])
+    inside, scored = _between_model(0.3).coverage(r, rows, level=0.90)
+    assert scored == len(rows) and 0.86 <= inside / scored <= 0.94
+
+
+def test_compact_json_round_trips_and_writes_a_row_per_line():
+    import json
+
+    from src.provenance import dumps_compact
+
+    payload = {"rows": [{"pot": f"p{i}", "measured": 1.5, "predicted": None, "flags": [1, 2]} for i in range(50)],
+               "meta": {"n": 50}}
+    text = dumps_compact(payload)
+    assert json.loads(text) == payload
+    assert len(text.splitlines()) <= 50 + 6

@@ -118,6 +118,10 @@ jobs:
         run: python scripts/ci/import_time_switch_gate.py
       - name: Unpinned constants gate
         run: python scripts/ci/unpinned_constants_gate.py
+      # 2026-10-31 (owner: "are we logging the experiments ... in case we want to revisit them?"). Every fit,
+      # signature, diagnosis and probe record is in docs/reference/experiment_register.yml, well-formed.
+      - name: Experiment register gate
+        run: python scripts/ci/experiment_register_gate.py
 
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.

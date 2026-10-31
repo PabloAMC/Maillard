@@ -1,0 +1,91 @@
+# Second reader, Martins & van Boekel 2005b (Food Chem 92:437), formic and acetic acid hold-out time courses (Fig. 5d pH-stat;
+# Fig. 7g/h drifting runs at initial pH 4.8 / 5.5 / 6.0 / 7.5; Fig. 3). Independent of the first reading
+# (data/lit/fit_rows/ph_acid_holdout_martins2005b.yml, data/lit/source_verification/ph_acid_holdout_martins2005b.yml, the dossier's
+# numbers and results/validation/ not opened). Rows: data/lit/fit_rows/second/ph_acid_holdout_martins2005b.yml.
+reader: agent-m2005b-holdout-reader2-2026-10-30
+role: independent second reader, sub-model 1 hold-out (pH and acid production), Martins 2005b glucose/glycine acids
+entries:
+- ledger_id: martins2005b_fig5_phstat_timecourses
+  source_file: martins2005b.pdf
+  read_by: agent-m2005b-holdout-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: corrected
+  quote: 'Because of the observed heat-induced pH drop, an additional experiment was done at 100 C where the pH was kept constant;
+    the initial pH was 6.8 as set at room temperature. The pH stat controller monitored the pH and, when it dropped below its set
+    point, an auto burette (ABU901 Radiometer Copenhagen) added a solution of NaOH (1 mol/l) to the reaction mix. [...] When the pH
+    was kept constant, this was done at the pH the solution had at 100 C; the corresponding initial pH was 6.8 at room temperature.
+    / Fig. 5 caption: "Glucose-glycine Maillard reaction at 100 C with pH kept constant by addition of 1 N NaOH (initial pH set at
+    6.8 at room temperature). Model fit (lines, calculated according to Scheme 1) to experimental data (markers). [...] (d) formic
+    acid (filled diamond), acetic acid (open square)"'
+  notes: 'Conditions: glucose 0.2 M + glycine 0.2 M, 100 C, pH held by a pH-stat (1 M NaOH) at the pH the solution had at 100 C,
+    which corresponds to pH 6.8 set at room temperature; the 100 C set-point value is never printed (ledger flag
+    ph_hot_setpoint_value_unstated is right). The buffer is not restated for this run; it is the "additional experiment" of the
+    phosphate-buffer recipe of sec. 2.1, so 0.1 M phosphate is presumed. Sampled through a septum (Hamilton SampleLock), cooled in
+    ice. One run ("one experiment was done"), one marker per time. NaOH volume added is not reported: with ~36 mmol/L total acid at
+    120 min the 1 M base dilutes the pot by roughly 3-4 % if the reactor is ~10 mL (volume not stated); not corrected.
+    Units: y axis "Acids mmol/l". Quantification: methods by reference to Martins & Van Boekel 2004 (HPLC) -> calibrated, as the
+    ledger says. Errors: no error bars; read error from the vector coordinate grid (0.59 pt = 0.21 mmol/L; tick-fit residual
+    0.09 mmol/L). Read: Fig. 5d, vector (pdftocairo -svg page 6), 11 times per acid: 0, 5, 10, 15, 20, 30, 60, 75, 90, 105, 120 min;
+    t = 0 on the zero axis for both acids (left out). Rows: FA 10, AA 10. Values sample: 120 min FA 8.75, AA 27.78; 60 min FA 4.51,
+    AA 11.78; 15 min FA 0.85, AA 1.10. AA exceeds FA from 15 min on and is ~3x FA at 120 min.'
+  corrections_vs_ledger:
+  - 'Location/values: the ledger records "terminal values only" (~120 min); the full Fig. 5d time course is vector and was read at
+    all 11 sampling times (0-120 min, including 5, 10, 20 and 105 min that the drifting runs do not have).'
+  - 'time_min: the ledger says [0, 150]; the acids (and every Fig. 5 panel) end at 120 min; the axis runs to 150.'
+- ledger_id: martins2005b_fig7_ten_responses_five_ph
+  source_file: martins2005b.pdf
+  read_by: agent-m2005b-holdout-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: corrected
+  quote: 'Equimolar solutions of glucose and glycine (0.2 mol/l) were prepared in phosphate buffer (10 ml, 0.1 mol/l), set to have
+    an initial pH 4.8, 5.5, 6.0, 6.8 and 7.5 at 20 C. The solutions were filtered (0.2 um, Schleicher & Schuell) and heated at 100 C
+    in an oil bath, in screw-capped glass tubes (Schott, 16 x 160 mm). At predetermined heating times, samples were taken and
+    immediately cooled in ice, prior to analyses. Each reaction mixture was prepared, heated and analysed, at least in duplicate. /
+    Fig. 7 caption: "Model fit (lines, calculated according to Scheme 1) to experimental data (markers) of glucose/glycine aqueous
+    system heated at 100 C and initial pH 4.8 (filled diamond); pH 5.5 (asterisk); pH 6.0 (open circle); pH 6.8 (+) and pH 7.5
+    (filled triangle). [...] (g) formic acid (FA); (h) acetic acid (AA); [...] The initial pH values are reported as set at room
+    temperature." / Fig. 3 caption: "Organic acids formation during heating of glucose/glycine reaction mixture in phosphate buffer
+    (0.1 M) at 100 C and pH 5.5. Formic acid (filled square); acetic acid (open square)."'
+  notes: 'Conditions: glucose 0.2 M + glycine 0.2 M, 0.1 M phosphate (counter-ion not stated), initial pH set at 20 C, pH drifting
+    (Fig. 4), 10 mL screw-cap tubes, oil bath, 100 C. Units: y axes "FA mmol/l", "AA mmol/l". Quantification: HPLC by reference to
+    Martins & Van Boekel 2004 -> calibrated. Errors: Fig. 7 has no bars, but separate markers per replicate (two per time at pH 4.8,
+    6.0, 7.5; three at pH 5.5 and 6.8); Fig. 3 bars are not defined (caption silent) -> bar_half_length_undefined, never sd.
+    Method: vector (pdftocairo -svg page 8), every marker path parsed and calibrated on that panel''s ticks by least squares; the
+    series are drawn in caption order. Coordinate grid 0.523 pt = 0.061 mmol/L (FA panel) and 0.18 mmol/L (AA panel); used as
+    the absolute read error. Times nominal: 0, 15, 30, 45, 60, 75, 90, 120, 150, 180, 210, 240 (+5 min at pH 7.5); pH 5.5 has no
+    75 min. Spans read: pH 4.8 0-240, pH 5.5 0-180 (Fig. 3 to 240), pH 6.0 0-210, pH 7.5 0-120 min. Rows: pH 4.8 FA 0 (all 24
+    markers on the zero line), AA 10; pH 5.5 FA 24 + 2 (Fig. 3), AA 15 + 2 (Fig. 3); pH 6.0 FA 15, AA 18; pH 7.5 FA 14, AA 12
+    (112 incl. 4 Fig. 3 rows). Values sample: pH 7.5 120 min FA 7.59 / 7.88, AA 21.62 / 22.15; pH 6.0 210 min FA 2.18 / 2.41, AA
+    6.28 x2; pH 5.5 180 min FA 1.06 / 1.06 / 1.12, AA 1.04 x3; pH 4.8 240 min AA 0.53 / 0.35. Consistent with Table 2: k5 (formic
+    acid) = 0.00 at pH 4.8, and FA is zero at every pH 4.8 marker. The pH 6.8 (+) series was located but not entered (not asked;
+    see duplicates).'
+  duplicates_evidence:
+  - 'pH 6.8 arm: the Fig. 7g/h (+) series, three markers per time to 150 min, reads AA 120 min 12.03 / 10.99 / 11.67 and 150 min
+    13.41 / 12.72 / 13.08 -- the Martins 2005 (Food Chem 90:257) 100 C replicate acids (flag arm_reprint_of in the ledger). Not
+    entered here.'
+  - 'Fig. 3 vs Fig. 7 pH 5.5 (asterisks): Fig. 3 prints means (error-bar origins) on the same time grid (no 75 min) but to 240 min.
+    Shared times agree within the read at most points (FA 15 0.066 vs 0.061 x3; 60 0.309 vs 0.293 x3; 120 0.676 vs 0.646 x3; 150
+    0.831 vs 0.768 / 0.818 / 0.818; AA 120 0.588 vs 0.526 / 0.526 / 0.676; 150 0.816 vs 0.857 / 0.676 / 0.857), but at 90 min Fig. 3
+    FA is 0.361 +- 0.044 against 0.525 / 0.475 / 0.475 in Fig. 7 (outside both reads), AA 0.213 +- 0.062 vs 0.347 x3, and FA 180
+    1.015 vs 1.061 / 1.061 / 1.121. So Fig. 3 is not a strict subset: probably the same run averaged over a different replicate set,
+    the paper does not say. Counted once: Fig. 7 replicates at shared times; Fig. 3 only at 210 and 240 min (FA 1.192 / 1.251, AA
+    1.272 / 1.331), rows tagged source_figure: Fig. 3, bar half-lengths kept as bar_half_length_undefined.'
+  corrections_vs_ledger:
+  - 'Values: the ledger says "not digitised (overlapping markers)"; the figure is vector and every overlapping marker is its own
+    path (or its own 6-ray / 4-ray group), so coincident replicates were counted and read.'
+  - 'Duplicates: "Fig. 3 (acids at pH 5.5) is a subset" is not exact -- Fig. 3 adds 210 and 240 min and differs at 90 min (above).'
+  - 'Replicates: the methods say "at least in duplicate"; Fig. 7 prints three markers per time for pH 5.5 and 6.8 and two for pH
+    4.8, 6.0 and 7.5. Replicate index in the rows = drawing order within a time point.'
+  - 'time_min: data run 0-240 min (axis to 250).'

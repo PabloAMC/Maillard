@@ -1,0 +1,46 @@
+# SOURCE VERIFICATION, Hofmann & Schieberle 1998 Table 9: the INDEPENDENT SECOND READING.
+# Reader: agent-hofmann-t9-reader2-2026-10-30. Read against data/articles/hofmann1998.pdf (pdftotext -layout, and
+# p. 240 rendered at 300 dpi; text layer and image agree); the dossier was not opened, the first reader's files not read.
+# Format and checks as in the header of data/lit/source_verification.yml (conditions, units, quantification,
+# duplicates, values; verdicts pass / corrected / fail). `notes` gives the reason per check.
+entries:
+  - ledger_id: hofmann1998_t9_m2p_glucose_cys
+    source_file: hofmann1998.pdf
+    read_by: agent-hofmann-t9-reader2-2026-10-30
+    second_reader: self
+    date: 2026-10-30
+    checks: {conditions: pass, units: pass, quantification: corrected, duplicates: pass, values: pass}
+    quote: "A solution (100 mL) of glucose (10.0 mmol) and cysteine (3.3 mmol) was reacted in a laboratory autoclave."
+    notes:
+      conditions: >-
+        Table 9 footnote a gives the pot (glucose 10.0 mmol + cysteine 3.3 mmol in 100 mL = 100 / 33 mmol/L); the
+        Model Experiments paragraph (p. 236) gives the rest for the first (aqueous) series: "dissolved in phosphate
+        buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 °C in a laboratory autoclave
+        (200 mL; Type II; Roth, Germany)". So 100 mL fill, ~100 mL headspace; pH set before heating only, never
+        measured during or after; no come-up / cool-down times printed. Matches the ledger (T, time, pH 3 / 5 / 7,
+        buffer, concentrations, measured_during false). Table 9 rows carry pH only, no T / time of their own: the
+        145 C / 20 min attribution rests on the general Model Experiments statement (the dry series is 180 C / 6 min
+        on silica and is flagged per-table with footnote c elsewhere; Table 9 has no such footnote).
+      units: >-
+        "amount (ug)" with footnote b "See footnote b in Table 1" (means of triplicates, differing by not more than
+        10 %); per 100 mL pot, so ug per pot x 10 = ug/L: 114 / 596 / 265 ug/L at pH 3 / 5 / 7. In molar terms (MP
+        90.14 g/mol): 1.26 / 6.61 / 2.94 umol/L, i.e. 0.0038 / 0.020 / 0.0089 % of the 33 mmol/L cysteine.
+      quantification: >-
+        "Quantitation of Mercapto-2-propanone and NF" (p. 236): after cooling, "[13C4]mercapto-2-butanone" (a labelled
+        homologue, not an isotopologue of the analyte) added, ether extraction (4x, 50 mL), ion-trap CI mass
+        chromatography, MS response factor 1.08 "calculated from mixtures containing known amounts of the analyte and
+        the labeled standard". Corrected: ledger class 'unknown' -> calibrated (labelled-homologue internal standard
+        with a measured response factor). It is not SIDA: the homologue can differ from MP in extraction recovery
+        and in reactive loss between cooling and extraction, which an isotopologue would cancel. Standard added after
+        cooling, so losses during heating are not corrected (true for every assay in the paper).
+      duplicates: >-
+        No other print found: the text layers of hofmann1995/1995b/1996/1996b/1997/1998b/1998c/2000/2000b/2001 and
+        schieberle1989/1996/1998/2000/2005 contain neither the three values nor an MP-from-glucose/cysteine table. Not
+        a copy of Table 2 (that table is FFT / MFT, same pots by protocol). Note: the pH 5 Table 9 pot is by protocol
+        the same kind of pot as the Table 1 / Table 2 glucose pH 5 row; whether MP was measured in the SAME reaction
+        mixtures as Table 2's FFT/MFT is not stated (MP uses a different standard and extraction, so likely separate
+        runs, unconfirmed).
+      values: >-
+        All 3 cells transcribed from the 300 dpi image and confirmed in the text layer: pH 3.0 11.4, pH 5.0 59.6,
+        pH 7.0 26.5 ug per pot. Text (p. 240) agrees in direction: "its formation going through a maximum at pH 5.0".
+        Table 9 has one compound column only (mercapto-2-propanone = MP); no other engine species in the table.

@@ -30,6 +30,7 @@ sweeps them. Writes results/validation/choice_robustness.{json,md}.
 | CR-13 | untested |
 | CR-14 | untested |
 | CR-15 | untested |
+| CR-16 | untested |
 
 ## CR-05
 

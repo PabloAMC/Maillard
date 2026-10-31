@@ -568,7 +568,7 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "glucose/glycine aqueous system heated at 100 C and initial pH 4.8; pH 5.5; pH 6.0; pH 6.8 and pH 7.5 ... The initial pH values are reported as set at room temperature."
-    flags: [ph_start_only, ph_set_at_room_temperature, caption_typo_panel_e]
+    flags: [ph_start_only, ph_set_at_room_temperature, caption_typo_panel_e, "arm_reprint_of: martins2005_glc_gly_multiresponse_timecourses (the pH 6.8 arm = Martins 2005 Figs. 6-8 at 100 C, replicate by replicate; both readers 2026-10-29)"]
     note: "Central data figure: 10 responses x 5 pH, not digitised (overlapping markers); suppressed zeros on Glu/Gly panels. Thesis vector PDF could allow a content-stream read as for martins2005 timeseries."
   - id: martins2005b_figs8_9_molar_ratio_timecourses
     dossier: martins2005b_extraction.md
@@ -2748,8 +2748,8 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "AX-ARP 20 mmol/L +/- Cys 20 mmol/L, aqueous (no buffer), initial pH 7 (NaOH 3 M)"
-    flags: [ph_start_only, unbuffered, legend_symbols_swapped_between_panels]
-    note: "5 time points x 2 arms; 3-DP and 1-DP semi-quantitative (3,4-hexanedione IS, no standards). Pentose-ARP decay, amine release and deoxypentosone split at 120 C; Cys arm cuts 3-DP 5-8x. Sister of zhou2023 (engine ARP feed)."
+    flags: [ph_start_only, unbuffered, legend_symbols_swapped_between_panels, "duplicate_of: zhou2022_fig1_arp_cys_ala_dicarbonyls"]
+    note: "5 time points x 2 arms; 3-DP and 1-DP semi-quantitative (3,4-hexanedione IS, no standards). Pentose-ARP decay, amine release and deoxypentosone split at 120 C; Cys arm cuts 3-DP 5-8x. Sister of zhou2023 (engine ARP feed). ADJUDICATION 2026-10-29 (sub-model 3, CF-062): the same Fig. 1 as the sulfur entry zhou2022_fig1_arp_cys_ala_dicarbonyls (deoxypentosones: zhou2022_fig1cd_deoxypentosones_arp_cys); counted once, there."
   - id: zhou2022_table1_furans_butanedione_pyrazines
     dossier: zhou2022_extraction.md
     paper: "Zhou, Xia, Cui, Hayat, Zhang & Ho 2022 J Agric Food Chem 70:15202"
@@ -2766,8 +2766,8 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "the Reaction Temperature Was 120 C; Initial pH Was 7.0"
-    flags: [ph_start_only, unbuffered, calibration_in_missing_supplement]
-    note: "4 times x 2 arms, n=3. Furfural from a pentose ARP rises 443 -> 1261 ug/L; butanedione only without Cys, pyrazines only with Cys. HS-SPME external calibration (Table S1 not on disk); MFT/FFT 4-8x apart from zhou2023 same pot."
+    flags: [ph_start_only, unbuffered, calibration_in_missing_supplement, "same_table_as: zhou2022_table1_arp_cys_volatiles_timecourse (furfural cells counted once, under that id)"]
+    note: "4 times x 2 arms, n=3. Furfural from a pentose ARP rises 443 -> 1261 ug/L; butanedione only without Cys, pyrazines only with Cys. HS-SPME external calibration (Table S1 not on disk); MFT/FFT 4-8x apart from zhou2023 same pot. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): furfural of this table is counted under zhou2022_table1_arp_cys_volatiles_timecourse (sub-model 3). Not flagged duplicate_of: its butanedione and pyrazine cells are not in that entry, and the loader drops whole entries."
   - id: zhou2022_table3_cys_dose_ph7_ph8
     dossier: zhou2022_extraction.md
     paper: "Zhou, Xia, Cui, Hayat, Zhang & Ho 2022 J Agric Food Chem 70:15202"
@@ -2867,7 +2867,7 @@ entries:
     temperature_c: [120]
     ph: {initial: [8.0], measured_during: true, final: null}
     time_min: [0, 120]
-    species: ["Ala-ARP", "pH", "3-deoxyxylosone", "1-deoxyxylosone", "glyoxal", "methylglyoxal", "alanine", "pyrazine", "methylpyrazine", "2,5-dimethylpyrazine"]
+    species: ["Ala-ARP", "pH", "glyoxal", "methylglyoxal", "alanine", "pyrazine", "methylpyrazine", "2,5-dimethylpyrazine"]
     kind: time_series
     location: "Figs. 3 and 4 (figure-only); text gives 120-min pyrazine ratios +Ala/-Ala (1.40/1.48/1.21)"
     status: figure_only
@@ -2875,7 +2875,25 @@ entries:
     simulable: true
     condition_quote: "pH falls more slowly with added Ala"
     flags: [unbuffered]
-    note: "Pentose-ARP decay with pH trajectory, deoxyxylosones, GO/MGO and amine regeneration at 120 C; would constrain the ARP -> deoxyosone split and acidification. Not digitised."
+    note: "Pentose-ARP decay with pH trajectory, deoxyxylosones, GO/MGO and amine regeneration at 120 C; would constrain the ARP -> deoxyosone split and acidification. Not digitised. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): GO / MGO calibrated (MGO, GO 40 % standards purchased; method by citation); 3-DX / 1-DX split to zhou2024_fig3cd_deoxyxylosones_arp_ala. Dicarbonyls ~10x those of zhou2025b's same nominal pot (CF-060)."
+  - id: zhou2024_fig3cd_deoxyxylosones_arp_ala
+    dossier: zhou2024_extraction.md
+    paper: "Zhou, Huang, Cui, Hussain, Hayat, Zhang & Ho 2024 J Agric Food Chem 72:18630"
+    lab: "Jiangnan (Zhang X. / Ho)"
+    system: "Ala-ARP 20 mM, with or without L-alanine (14N or 15N) 20 mM"
+    medium: "water, pH 8.0 with NaOH, unbuffered; oil bath"
+    temperature_c: [120]
+    ph: {initial: [8.0], measured_during: true, final: null}
+    time_min: [0, 120]
+    species: ["3-deoxyxylosone", "1-deoxyxylosone"]
+    kind: time_series
+    location: "Fig. 3c-d"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "pH falls more slowly with added Ala"
+    flags: ["split_from: zhou2024_fig3_fig4_axarp_dicarbonyls_ph", unbuffered]
+    note: "ADJUDICATION 2026-10-29 (sub-model 3, CF-062): 3-DX / 1-DX panels of Fig. 3 (vector), split from zhou2024_fig3_fig4_axarp_dicarbonyls_ph: method by citation; the laboratory's stated method is 3,4-hexanedione IS with no deoxyosone standard -> semi_quantitative. 3-DX 3.7-5.3 mM vs 0.37-0.55 in zhou2025b (CF-060)."
   - id: zhou2025b_table1_ala_xyl_arp_and_ala_go_pyrazine_rates
     dossier: zhou2025b_extraction.md
     paper: "Zhou, Chai, Zhang, Cui, Mohammad, Hayat, Zhang & Ho 2025 Food Chem 487:144764"
@@ -2921,7 +2939,7 @@ entries:
     temperature_c: [120]
     ph: {initial: [8], measured_during: true, final: null}
     time_min: [0, 120]
-    species: ["pyrazine", "methylpyrazine", "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", "furfural", "3-deoxyxylosone", "1-deoxyxylosone", "glyoxal", "methylglyoxal", "AX-ARP", "alanine", "A420", "pH"]
+    species: ["pyrazine", "methylpyrazine", "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", "furfural", "glyoxal", "methylglyoxal", "AX-ARP", "alanine", "A420", "pH"]
     kind: time_series
     location: "Figs. 1a-e, 2b-e, 3a-d (axis labels only read); text gives GO excess 0.36 mM at 120 min"
     status: figure_only
@@ -2929,7 +2947,25 @@ entries:
     simulable: true
     condition_quote: "The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted to 8"
     flags: [unbuffered, "same_lab_republication_of: zhou2024"]
-    note: "Rich pentose-ARP set with pH trajectory, deoxyxylosones, furfural (to 2500 ug/L) and amine. AX-ARP-alone arm repeats zhou2024 Fig. 3 design (re-measured or re-plotted not stated). DX method: 3,4-hexanedione IS."
+    note: "Rich pentose-ARP set with pH trajectory, deoxyxylosones, furfural (to 2500 ug/L) and amine. AX-ARP-alone arm repeats zhou2024 Fig. 3 design (re-measured or re-plotted not stated). DX method: 3,4-hexanedione IS. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): furfural calibrated (curve printed), GO / MGO calibrated (standards purchased, 3,4-hexanedione IS); 3-DX / 1-DX split to zhou2025b_fig2bc_deoxyxylosones_axarp_xylose. The dicarbonyl panels are NOT a re-plot of zhou2024 (CF-060); the 'same_lab_republication_of' flag holds for the design only."
+  - id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose
+    dossier: zhou2025b_extraction.md
+    paper: "Zhou, Chai, Zhang, Cui, Mohammad, Hayat, Zhang & Ho 2025 Food Chem 487:144764"
+    lab: "Jiangnan (Zhang X. / Ho)"
+    system: "AX-ARP 20 mM, with or without D-xylose 20 mM"
+    medium: "water, no buffer, pH 8 initial (base not stated)"
+    temperature_c: [120]
+    ph: {initial: [8], measured_during: true, final: null}
+    time_min: [0, 120]
+    species: ["3-deoxyxylosone", "1-deoxyxylosone"]
+    kind: time_series
+    location: "Fig. 2b-c"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted to 8"
+    flags: ["split_from: zhou2025b_figs1_3_axarp_xylose_120c", unbuffered]
+    note: "ADJUDICATION 2026-10-29 (sub-model 3, CF-062): 3-DX / 1-DX panels of Fig. 2, split from zhou2025b_figs1_3_axarp_xylose_120c: '10 uL of 3,4-hexanedione (86 mmol/L) as the internal standard', no deoxyosone standard -> semi_quantitative. ~10x below zhou2024's same nominal pot (CF-060)."
   - id: zhou2025b_fig2a_xylose_alone_dicarbonyls
     dossier: zhou2025b_extraction.md
     paper: "Zhou, Chai, Zhang, Cui, Mohammad, Hayat, Zhang & Ho 2025 Food Chem 487:144764"
@@ -2939,7 +2975,7 @@ entries:
     temperature_c: [120]
     ph: {initial: [8], measured_during: false, final: null}
     time_min: [0, 120]
-    species: ["glyoxal", "3-deoxyxylosone", "methylglyoxal"]
+    species: ["glyoxal", "methylglyoxal"]
     kind: time_series
     location: "Fig. 2a (figure-only); text: 1.1% of xylose to dicarbonyls, GO 0.12 mM at 120 min"
     status: figure_only
@@ -2947,7 +2983,25 @@ entries:
     simulable: true
     condition_quote: "Only 1.1 % of the initial Xyl was converted into alpha-dicarbonyl compounds"
     flags: [ph_start_only, unbuffered, condition_uncertain]
-    note: "Amine-free pentose degradation to GO/3-DX/MGO at pH 8, 120 C; GO the most abundant. Concentration inferred. Would constrain sugar-only dicarbonyl formation for pentoses."
+    note: "Amine-free pentose degradation to GO/3-DX/MGO at pH 8, 120 C; GO the most abundant. Concentration inferred. Would constrain sugar-only dicarbonyl formation for pentoses. ADJUDICATION 2026-10-29 (sub-model 3, CF-062): GO / MGO calibrated; 3-DX split to zhou2025b_fig2a_deoxyxylosone_xylose_alone."
+  - id: zhou2025b_fig2a_deoxyxylosone_xylose_alone
+    dossier: zhou2025b_extraction.md
+    paper: "Zhou, Chai, Zhang, Cui, Mohammad, Hayat, Zhang & Ho 2025 Food Chem 487:144764"
+    lab: "Jiangnan (Zhang X. / Ho)"
+    system: "D-xylose alone (presumably 20 mM, 'identical conditions')"
+    medium: "water, no buffer, pH 8 initial"
+    temperature_c: [120]
+    ph: {initial: [8], measured_during: false, final: null}
+    time_min: [0, 120]
+    species: ["3-deoxyxylosone"]
+    kind: time_series
+    location: "Fig. 2a (figure-only); text: 1.1% of xylose to dicarbonyls, GO 0.12 mM at 120 min"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "Only 1.1 % of the initial Xyl was converted into alpha-dicarbonyl compounds"
+    flags: ["split_from: zhou2025b_fig2a_xylose_alone_dicarbonyls", ph_start_only, unbuffered, condition_uncertain]
+    note: "ADJUDICATION 2026-10-29 (sub-model 3, CF-062): the 3-DX series of Fig. 2a, split from zhou2025b_fig2a_xylose_alone_dicarbonyls: 3,4-hexanedione IS, no deoxyosone standard -> semi_quantitative."
   - id: liu2022_table1_grarp_furans
     dossier: liu2022_extraction.md
     paper: "Liu, Yu, Zhou, Xu, Hayat, Zhang & Ho 2022 J Agric Food Chem 70:11643"
@@ -3595,8 +3649,8 @@ entries:
     quant_class: sida
     simulable: true
     condition_quote: "A solution of glucose (1.0 mmol) and the respective amino acid (1.0 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), was refluxed for 30 min."
-    flags: [condition_uncertain, ph_start_only]
-    note: "6 cells (aldehyde + acid per amino acid), no replicates/SD. Acetic acid from Ala pot also has sugar-degradation origin. Constrains Strecker yield from glucose per amino acid."
+    flags: [condition_uncertain, ph_start_only, "duplicate_of: hofmann2000_table2_glucose_amino_acids"]
+    note: "6 cells (aldehyde + acid per amino acid), no replicates/SD. Acetic acid from Ala pot also has sugar-degradation origin. Constrains Strecker yield from glucose per amino acid. 2026-10-31: keyed from the PDF under hofmann2000_table2_glucose_amino_acids (fit table strecker_hofmann2000); this entry is kept for the conflicts register's references."
   - id: hofmann2000_table3_mgo_phe_timecourse
     dossier: hofmann2000_extraction.md
     paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
@@ -3610,11 +3664,11 @@ entries:
     kind: time_series
     location: "Table 3 (dossier sec. 3)"
     status: digitised_in_dossier
-    quant_class: sida
+    quant_class: other
     simulable: true
     condition_quote: "2-Oxopropanal (1 mmol) and L-phenylalanine (1 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), were heated (98 C) in a closed vial."
-    flags: [ph_start_only, phe_loss_series_coincides_with_hofmann2000b]
-    note: "7 time points; PA plateaus then falls, PAA rises; Phe degraded % column nearly identical to hofmann2000b Table 3 (Glc/Phe pot): do not treat both as independent. Fed-dicarbonyl Strecker step + amino-acid loss."
+    flags: [ph_start_only, phe_loss_series_coincides_with_hofmann2000b, no_replicates, phe_method_not_stated]
+    note: "7 time points; PA plateaus then falls, PAA rises; Phe degraded % column nearly identical to hofmann2000b Table 3 (Glc/Phe pot): do not treat both as independent. Fed-dicarbonyl Strecker step + amino-acid loss. 2026-10-31 (first reader, fit table strecker_hofmann2000): quant_class sida -> other because the entry mixes methods: PA / PAA by SIDA ([13C2] isotopologues), but the paper never says how phenylalanine was measured; rows name their method."
   - id: hofmann2000_table4_dicarbonyl_donors_oxygen
     dossier: hofmann2000_extraction.md
     paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
@@ -3631,8 +3685,8 @@ entries:
     quant_class: sida
     simulable: true
     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial."
-    flags: [ph_start_only, status_uncertain]
-    note: "9 PA + 9 PAA cells: donor ranking; acid O2-dependent (x1.6-5.5), aldehyde O2-independent. Not fitted, but trunk_conditions.py (B29) cites this fed-dicarbonyl control to place the oxygen lever upstream of the dicarbonyls. No SD."
+    flags: [ph_start_only, status_uncertain, "duplicate_of: hofmann2000_table4_dicarbonyl_donors_argon_air"]
+    note: "2026-10-31: keyed from the PDF under hofmann2000_table4_dicarbonyl_donors_argon_air (fit table strecker_hofmann2000); this entry is kept for the conflicts register's references. 9 PA + 9 PAA cells: donor ranking; acid O2-dependent (x1.6-5.5), aldehyde O2-independent. Not fitted, but trunk_conditions.py (B29) cites this fed-dicarbonyl control to place the oxygen lever upstream of the dicarbonyls. No SD."
   - id: hofmann2000_table5_labelled_pa_oxidation
     dossier: hofmann2000_extraction.md
     paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
@@ -3667,8 +3721,8 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "heated at 98 C ... Oxygen, the concentration of which was not controlled"
-    flags: [ph_start_only, condition_uncertain]
-    note: "Dicarbonyls by o-phenylenediamine quinoxalines (3-DG/glucosone HPLC-DAD; GO/MGO GC-MS vs labelled butanedione). Text gives only glucosone max and MGO/GO=3 at 500 min. 1-DG not measured. Valuable deoxyosone time course at pH 7."
+    flags: [ph_start_only, condition_uncertain, "fig3_keyed_as: hofmann2000_fig3_dicarbonyls_glucose_phe"]
+    note: "Dicarbonyls by o-phenylenediamine quinoxalines (3-DG/glucosone HPLC-DAD; GO/MGO GC-MS vs labelled butanedione). Text gives only glucosone max and MGO/GO=3 at 500 min. 1-DG not measured. Valuable deoxyosone time course at pH 7. 2026-10-31: Fig. 3 digitised under hofmann2000_fig3_dicarbonyls_glucose_phe (fit table strecker_hofmann2000); Fig. 2 (PA, PAA) is still figure-only here: rows for Fig. 3 must cite the new id, not this one."
   - id: hofmann2000_fig4_fig5_ph_series_strecker
     dossier: hofmann2000_extraction.md
     paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
@@ -3685,8 +3739,80 @@ entries:
     quant_class: sida
     simulable: true
     condition_quote: ""
-    flags: [condition_uncertain, ph_start_only]
-    note: "Text reads 2x (PA pH5/pH9, MGO) and 7x (PAA pH9/pH3, MGO); PA:PAA 3:1 at pH 3, 1:5 at pH 9. Heating time not stated in dossier for the pH series. Constrains pH dependence of the Strecker aldehyde/acid branch."
+    flags: [condition_uncertain, ph_start_only, "duplicate_of: hofmann2000_fig4_5_ph_series"]
+    note: "Text reads 2x (PA pH5/pH9, MGO) and 7x (PAA pH9/pH3, MGO); PA:PAA 3:1 at pH 3, 1:5 at pH 9. Heating time not stated in dossier for the pH series. Constrains pH dependence of the Strecker aldehyde/acid branch. 2026-10-31: digitised from the PDF under hofmann2000_fig4_5_ph_series (fit table strecker_hofmann2000); this entry is kept for the conflicts register's references."
+  - id: hofmann2000_table2_glucose_amino_acids
+    dossier: "hofmann2000_extraction.md (guide only; values read from the PDF)"
+    paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
+    lab: "DFA Munich (Hofmann / Schieberle)"
+    system: "glucose 0.1 M + L-Phe, L-Ala or L-Leu 0.1 M (1.0 mmol each in 10 mL), three pots"
+    medium: "phosphate buffer pH 7.0, 0.5 mol/L per the table footnote (Experimental: '0.5 mmol/L'); refluxed (Experimental: 98 C); atmosphere not controlled"
+    temperature_c: [98]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [30]
+    species: [phenylacetaldehyde, phenylacetic acid, acetaldehyde, acetic acid, 3-methylbutanal, 3-methylbutanoic acid]
+    kind: endpoint
+    location: "Table 2 (umol/mmol); text p. 436 '0.042 and 0.029 mol %' = the Phe column"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of glucose (1.0 mmol) and the respective amino acid (1.0 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), was refluxed for 30 min."
+    flags: [ph_start_only, no_replicates, condition_uncertain, buffer_molarity_mmol_vs_mol]
+    note: "Read by the first reader of fit table strecker_hofmann2000 (2026-10-31). Six cells, na elsewhere. SIDA: [13C2]PA / PAA, [2H2]-3-methylbutanal / -butanoic acid, [13C2]acetic acid; acetaldehyde by headspace GC-MS vs [13C2]acetaldehyde. Acetic acid in the Ala pot also has a sugar origin."
+  - id: hofmann2000_table4_dicarbonyl_donors_argon_air
+    dossier: "hofmann2000_extraction.md (guide only; values read from the PDF)"
+    paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
+    lab: "DFA Munich (Hofmann / Schieberle)"
+    system: "methylglyoxal, glyoxal, 3-deoxyglucosone or glucosone 0.1 M + L-Phe 0.1 M (1.0 mmol each in 10 mL); MGO also with CuSO4 0.05 mmol (5 mmol/L) under air"
+    medium: "phosphate 0.1 mol/L pH 7.0 (table footnote; 0.5 elsewhere in the paper); closed vial; model A argon-sparged >= 20 min, model B air"
+    temperature_c: [98]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [phenylacetaldehyde, phenylacetic acid]
+    kind: endpoint
+    location: "Table 4 (umol/mmol, experiments 1-5, models A / B)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."
+    flags: [ph_start_only, no_replicates, condition_uncertain, reflux_vs_closed_vial]
+    note: "Read by the first reader of fit table strecker_hofmann2000 (2026-10-31). 18 cells (expt 2 model A na). Methods: 'argon was bubbled through the solution for at least 20 min prior to thermal treatment'. PA ~O2-independent, PAA x1.6-5.5 under air."
+  - id: hofmann2000_fig3_dicarbonyls_glucose_phe
+    dossier: "hofmann2000_extraction.md (guide only; values digitised from the PDF)"
+    paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
+    lab: "DFA Munich (Hofmann / Schieberle)"
+    system: "glucose 0.1 M + L-Phe 0.1 M (1.0 mmol each in 10 mL)"
+    medium: "phosphate buffer pH 7.0 (0.5 mol/L per the glucose/Phe footnotes; Experimental '0.5 mmol/L'); heated at 98 C / refluxed; atmosphere not controlled; no trapping agent in the pot"
+    temperature_c: [98]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [10, 500]
+    species: [3-deoxyglucosone, glucosone, glyoxal, methylglyoxal]
+    kind: time_series
+    location: "Fig. 3 (umol/mmol glucose; 300 ppi 1-bit raster, page 437), digitised; text p. 436-437 (glucosone maximum 0.009 mol %; MGO 3x glyoxal at 500 min)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.5 mmol/L, pH 7.0) was heated at 98 C for 30 min. ... the time course of the formation of four alpha-dicarbonyls was monitored in the glucose/L-phenylalanine mixture."
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, internal_inconsistency]
+    note: "Read by the first reader of fit table strecker_hofmann2000 (2026-10-31). 3-DG and glucosone as quinoxalines by HPLC-DAD 320 nm (reference quinoxalines synthesised); glyoxal and MGO as quinoxalines by GC-MS-CI vs [13C4]butane-2,3-dione (labelled homologue): calibrated, as hofmann1999. The text's glucosone maximum (0.009 mol %) is 6.5x below the figure's (0.059 mol %); its 'MGO 3x glyoxal at 500 min' reads 5.1x in the figure (2.7x vs 3-DG). 1-DG not measured."
+  - id: hofmann2000_fig4_5_ph_series
+    dossier: "hofmann2000_extraction.md (guide only; values digitised from the PDF)"
+    paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
+    lab: "DFA Munich (Hofmann / Schieberle)"
+    system: "glucose, MGO, glyoxal, 3-deoxyglucosone or glucosone + L-Phe, each at pH 3.0, 5.0, 7.0, 9.0 (20 pots; amounts not restated, 1 mmol + 1 mmol in 10 mL elsewhere)"
+    medium: "not stated for the pH series (buffer, molarity, time, atmosphere); pH 7 values match Table 4 model B (air, 60 min) within 1-2 % for PA (PAA 4-46 % higher)"
+    temperature_c: [98]
+    ph: {initial: [3.0, 5.0, 7.0, 9.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [phenylacetaldehyde, phenylacetic acid]
+    kind: endpoint
+    location: "Fig. 4 (PA, umol/mmol phenylalanine) and Fig. 5 (PAA), 300 ppi 1-bit rasters page 437, digitised; text p. 439 (2x, 7x) and abstract (3:1, 1:5) are read off these figures"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, time_not_stated, buffer_not_stated]
+    note: "Read by the first reader of fit table strecker_hofmann2000 (2026-10-31). 60 min and air are declared assumptions from the pH 7 match with Table 4 model B. PA and PAA by SIDA (the paper's method for both)."
   - id: hofmann2000b_table2_arp_phe_oxygen
     dossier: hofmann2000b_extraction.md
     paper: "Hofmann & Schieberle 2000 J Agric Food Chem 48:4301"
@@ -6227,3 +6353,273 @@ entries:
     condition_quote: "300 mg amino acid + 36 uL water (12 % moisture level) in an enclosed Parr vessel"
     flags: [ph_not_measured]
     note: "Borderline trunk: pyrazines from hydroxy-amino-acid fragmentation without sugar (aminoacetone / aminoacetaldehyde). FID with hexadecane IS, RF assumed 1; no replicates. 300 C arms are pyrolysis. Useful for aldehyde-addition / cross-condensation ratios only. Condition quote is dossier paraphrase."
+  - id: hofmann1999_fig10_xylose_ala_c2_c4_fragments
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "xylose 6 mmol + L-alanine 6 mmol in 4 mL buffer (~1.2-1.5 M each, final volume not stated)"
+    medium: "0.5 M phosphate pH 7.0, refluxed open to air; derivatisation after cooling (no trapping agent in the pot)"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 180]
+    species: ["glyoxal", "methylglyoxal", "diacetyl", "glycolaldehyde", "hydroxyacetone", "acetoin", "furfural"]
+    kind: time_series
+    location: "Fig. 10 (dossier sec. 4.2 digitisation, 5-180 min); text p. 118 (glyoxal 59 ug/mmol at 5 min, methylglyoxal 120 ug/mmol at 180 min); Table 3 back-calculation for 5 and 60 min (sec. 4.6)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine"
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, concentration_basis_inferred, internal_inconsistency]
+    note: "THE ONLY GLYCOLALDEHYDE (engine HA) TIME COURSE IN THE CORPUS; methylglyoxal from a pentose by a non-Jiangnan lab. ug per mmol starting xylose; MGO 0.35 -> 1.67 umol/mmol (5 -> 180 min), glycolaldehyde peak 0.12-0.13 umol/mmol at 10 min then ~0.05 plateau. GO/MGO/glycolaldehyde/hydroxyacetone use 13C4 labelled HOMOLOGUES (Rf 0.96-0.99) -> calibrated; isotopologue SIDA only for diacetyl and acetoin. Simulable with declared assumptions: reflux ~100-103 C (not stated), molarity from 6 mmol in ~4.6-5 mL. Diacetyl series disagrees 1.4-3.6x with Table 3 (internal_inconsistency). OPD (2 umol) may be limiting in early samples rich in osones."
+  - id: hofmann1999_fig9_glucose_ala_c2_c4_fragments
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "glucose 6 mmol + L-alanine 6 mmol in 4 mL buffer (~1.2-1.5 M each)"
+    medium: "0.5 M phosphate pH 7.0, refluxed open to air; derivatisation after cooling"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 180]
+    species: ["glyoxal", "methylglyoxal", "diacetyl", "glycolaldehyde", "hydroxyacetone", "acetoin", "HMF"]
+    kind: time_series
+    location: "Fig. 9 (dossier sec. 4.3 digitisation); text p. 117 (glyoxal 98 ug/mmol at 10 min; 180-min ratios); Table 2 back-calculation (sec. 4.6)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine"
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, concentration_basis_inferred, internal_inconsistency]
+    note: "Hexose twin of the xylose pot: MGO 0.18 -> 1.62 umol/mmol (10 -> 180 min), glycolaldehyde rising to ~0.30 umol/mmol, hydroxyacetone ~2.9 umol/mmol at 180 min. 0-20 ug/mmol cluster at 10-40 min read +-1. Diacetyl disagrees ~2x with Table 2."
+  - id: hofmann1999_fig5_xylose_ala_deoxypentosones
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "xylose 6 mmol + L-alanine 6 mmol in 4 mL buffer (~1.2-1.5 M each)"
+    medium: "0.5 M phosphate pH 7.0, refluxed; OPD derivatisation after cooling, RP-HPLC-UV 320 nm, synthesised quinoxaline external standards"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 120]
+    species: ["3-deoxypentosone", "1-deoxypentosone", "2-pentosulose"]
+    kind: time_series
+    location: "Fig. 5 (dossier sec. 4.4 digitisation, +-10 ug/mmol); text p. 116-117 (maxima 1260 / 610 / ~200 ug/mmol at 10 min); Table 3 back-calculation"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine"
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, concentration_basis_inferred]
+    note: "Peak at 10 min (3-DP 9.5, 1-DP 4.7 umol/mmol), then a flat plateau from 40 min (4.6 and 1.5 umol/mmol). 1-deoxypentosone is the engine's DPO. Post-heating derivatisation (2 mmol OPD per quarter, not limiting)."
+  - id: hofmann1999_fig4_glucose_ala_deoxyhexosones
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "glucose 6 mmol + L-alanine 6 mmol in 4 mL buffer (~1.2-1.5 M each)"
+    medium: "0.5 M phosphate pH 7.0, refluxed; OPD derivatisation after cooling, RP-HPLC-UV 320 nm, external standards"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 120]
+    species: ["3-deoxyglucosone", "1-deoxyglucosone", "glucosone"]
+    kind: time_series
+    location: "Fig. 4 (dossier sec. 4.5 digitisation, +-8 ug/mmol); text p. 116 (maxima 1000 / 290 ug/mmol at 40 min, glucosone ~50 at 20 min)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine"
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, concentration_basis_inferred]
+    note: "3-DG peak 6.1 umol/mmol at 40 min; 1-DG 1.7; glucosone 0.29 at 20 min."
+  - id: hofmann1999_tab2_3_browning_activity_products
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "xylose or glucose 6 mmol + L-alanine 6 mmol in 4 mL buffer (the Fig. 4/5/9/10 pots)"
+    medium: "0.5 M phosphate pH 7.0, refluxed"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [5, 10, 60, 120]
+    species: ["3-deoxypentosone", "3-deoxyglucosone", "glyoxal", "methylglyoxal", "glycolaldehyde", "2-pentosulose", "glucosone", "diacetyl", "furfural", "hydroxyacetone", "acetoin", "HMF"]
+    kind: other
+    location: "Tables 2 (glucose) and 3 (xylose): printed concentration (umol/mmol) x CD factor; dossier sec. 4.6 back-calculates concentrations with the Table 1 CD factors"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: ["duplicate_of: hofmann1999_fig10_xylose_ala_c2_c4_fragments", "duplicate_of: hofmann1999_fig9_glucose_ala_c2_c4_fragments", "duplicate_of: hofmann1999_fig5_xylose_ala_deoxypentosones", "duplicate_of: hofmann1999_fig4_glucose_ala_deoxyhexosones", internal_inconsistency]
+    note: "Printed-number route to the figure values at 5/10/60/120 min (BPA / CD). Reconciles with Figs. 4/5/9/10 within ~15 % for MGO, glycolaldehyde, glyoxal, furfural, 3-DP, 3-DG; supplies glycolaldehyde (xylose) at 5 min = 0.066 and MGO (xylose) at 60 min = 1.08 umol/mmol, which the figure lacks. Diacetyl does NOT reconcile (1.4-3.6x). Same pots as the figure entries, not independent data."
+  - id: hofmann1999_tab1_browning_ability_cd
+    dossier: hofmann1999_extraction.md
+    paper: "Hofmann 1999 Eur Food Res Technol 209:113"
+    lab: "DFA Garching (Hofmann)"
+    system: "each carbonyl 1 mmol + L-alanine 1 mmol in 5 mL buffer"
+    medium: "0.5 M phosphate pH 7.0, refluxed 15 min; colour-dilution factor by visual triangle test"
+    temperature_c: [100]
+    ph: {initial: 7.0, measured_during: false, final: null}
+    time_min: [15]
+    species: ["glycolaldehyde", "furfural", "methylglyoxal", "3-deoxypentosone", "3-deoxyglucosone", "glyoxal", "2-pentosulose", "glucosone", "diacetyl", "acetoin", "HMF", "hydroxyacetone"]
+    kind: ranking
+    location: "Table 1 (CD factors 1024 ... 1), partly from Hofmann, Bors & Stettmeier 1999 JAFC 47:379"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "Mixtures of carbohydrate degradation products (1 mmol) and L-alanine (1 mmol), dissolved in 5 ml phosphate buffer (0.5 mol/l, pH 7.0), were refluxed for 15 min"
+    flags: [ph_start_only, no_replicates]
+    note: "Visual colour-dilution thresholds, a ranking of browning ability: glycolaldehyde = furfural 1024 > MGO = 3-DP 256 > 3-DG = GO = osuloses 128 > DA 64 > acetoin 8 > HMF 2 > hydroxyacetone 1. No absorbance; not an engine observable. Qualitative support for a fast glycolaldehyde sink."
+  - id: weenen1998_fig1_dicarbonyls_sugars_alanine_opd_trapped
+    dossier: weenen1998_extraction.md
+    paper: "Weenen 1998 Food Chem 62:393"
+    lab: "Quest International (Weenen)"
+    system: "glucose, fructose, xylose, 3-deoxyglucosone or N-fructosylalanine 0.55 M + L-alanine 0.6 M, 1,2-diaminobenzene in the pot"
+    medium: "0.33 M phosphate pH 8, 30 mL, + n-butanol 15 mL with 4-methylquinoline IS (biphasic); 1 h"
+    temperature_c: [100]
+    ph: {initial: 8.0, measured_during: false, final: null}
+    time_min: [60]
+    species: ["glyoxal", "methylglyoxal", "diacetyl", "2,3-pentanedione"]
+    kind: endpoint
+    location: "Fig. 1 (bars, ug; dossier sec. 4 digitisation +-2 ug)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "Various carbohydrates (0.55 M) and the Amadori rearrangement product of glucose and alanine (0.55 M) were reacted with cyclohexyl amine (0.6 M), alanine (0.6 M) and without amine/amino acid, in an aqueous phosphate buffer solution (30 ml, 0.33 M, pH 8) and n-butanol (15 ml)"
+    flags: [trapping_agent_in_pot, secondary_source, primary_not_on_disk, ph_start_only, no_replicates, condition_uncertain]
+    note: "Summary of Weenen & Apeldoorn 1996 (RSC chapter, not on disk). Xylose + Ala: MGO ~82, GO ~27, DA ~28, 2,3-pentanedione ~42 ug. 'ug' basis not stated; as whole-pot yields MGO would be ~16x below hofmann1999 -> use only ratios (MGO xylose/glucose 1.9; xylose with/without Ala 4.8). Not simulable: in-situ OPD and a water/butanol two-phase pot."
+  - id: weenen1998_fig2_dicarbonyls_sugars_no_amine_opd_trapped
+    dossier: weenen1998_extraction.md
+    paper: "Weenen 1998 Food Chem 62:393"
+    lab: "Quest International (Weenen)"
+    system: "glucose, fructose, xylose, 3-deoxyglucosone or N-fructosylalanine 0.55 M, no added amine, 1,2-diaminobenzene in the pot"
+    medium: "0.33 M phosphate pH 8, 30 mL, + n-butanol 15 mL (biphasic); 1 h"
+    temperature_c: [100]
+    ph: {initial: 8.0, measured_during: false, final: null}
+    time_min: [60]
+    species: ["glyoxal", "methylglyoxal", "diacetyl", "2,3-pentanedione"]
+    kind: endpoint
+    location: "Fig. 2 (bars, ug; dossier sec. 4 digitisation +-2 ug)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [trapping_agent_in_pot, secondary_source, primary_not_on_disk, ph_start_only, no_replicates, condition_uncertain]
+    note: "Sugars alone give only GO and MGO (xylose: GO ~62, MGO ~17 ug); diacetyl and 2,3-pentanedione need an amine. 3-deoxyglucosone gives MGO ~57 ug with or without alanine. Ratios only."
+  - id: smuda2013_text_cited_fragment_yields
+    dossier: smuda2013_extraction.md
+    paper: "Smuda & Glomb 2013 J Agric Food Chem 61:10198 (review)"
+    lab: "Halle (Glomb)"
+    system: "cited: synthesised 3-deoxyglucosone 50 uM (Thornalley 1999); synthesised maltosone (Smuda & Glomb 2011)"
+    medium: "not given in the review"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: ["methylglyoxal", "3-deoxypentosone"]
+    kind: ratio
+    location: "p. C text and Table 1 row 3 (0.09 uM MGO from 50 uM 3-DG = 0.18 mol %); p. H text and Table 4 row 3 (maltosone -> 16 mol % 3-deoxypentosone)"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [secondary_source, cited_not_primary, primary_not_on_disk, "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "Review with no own measurements. Its mechanistic verdict (retro-aldol of dicarbonyls 'largely hypothetical'; 1-deoxyglucosone -> MGO + glyceraldehyde 'disproven by Voigt'; beta-dicarbonyl cleavage dominant) is in the dossier and bears on the engine's r_dpo_c2c3. Primaries for numbers: Voigt 2010 JAFC 58:5685, Thornalley 1999 Biochem J 344:109, Smuda & Glomb 2011 JAFC 59:13254."
+  - id: davidek2008_fig1_xylose_gly_acetic_residual_xylose
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Gouezec, Devaud & Blank 2008 Ann N Y Acad Sci 1126:241"
+    lab: "Nestle Research (Blank)"
+    system: "D-xylose 0.1 M + glycine 0.1 M (0.35 mmol each in 3.5 mL)"
+    medium: "0.2 M sodium phosphate, pH 6.0 or 8.0 (not held); 0.4 mL in 1.5 mL screw-cap vials, silicone bath"
+    temperature_c: [120]
+    ph: {initial: [6.0, 8.0], measured_during: false, final: null}
+    time_min: [0, 240]
+    species: [acetic acid, xylose]
+    kind: time_series
+    location: "Fig. 1 (acetic acid mol% right axis, residual xylose % left axis; raster 909 ppi); text 16 / 28 mol% = the 240 min markers"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of glycine (0.35 mmol) and D-xylose (0.35 mmol) in phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL/vial) into 1.5 mL screw-cap vials ... and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). The experiments were performed at pH 6.0 and pH 8.0."
+    flags: [ph_start_only, no_error_bars, "xylose_method_not_stated", "methods_90C_15h_vs_fig4_16h"]
+    note: "Digitised by reader 1 (fit table ph_acid_davidek_acids). Xylose quantification method not described (only acetic acid SIDA); 90 C runs report only label percentages (Fig. 4), no amounts."
+  - id: davidek2006a_tab1_glc_gly_acetic_ph
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Devaud, Robert & Blank 2006 J Agric Food Chem 54:6667"
+    lab: "Nestle Research (Blank)"
+    system: "D-glucose 0.1 M + glycine 0.1 M (0.35 mmol each in 3.5 mL)"
+    medium: "0.2 M sodium phosphate, pH 4, 6 or 8 (not held); 0.4 mL in 1.5 mL screw-cap vials, silicone bath"
+    temperature_c: [120]
+    ph: {initial: [4, 6, 8], measured_during: false, final: null}
+    time_min: [15, 480]
+    species: [acetic acid]
+    kind: time_series
+    location: "Table 1 (mol%, mean +- printed, CV < 10%); text 'about 1, 17 and 38 mol%' after 4 h = Table 1 240 min"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of glycine (0.35 mmol) and D-glucose ... (0.35 mmol) in a phosphate buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL) into screw-cap vials (1.5 mL ...) and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h). Experiments were performed at pH 4, pH 6, and pH 8."
+    flags: [ph_start_only, "ND_means_not_determined"]
+    note: "Each sample prepared at least in duplicate and injected twice; the +- is not defined. 120 C table runs to 480 min at pH 4 although the method says 4 h."
+  - id: davidek2006a_text_3dg_gly_acetic_formic
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Devaud, Robert & Blank 2006 J Agric Food Chem 54:6667"
+    lab: "Nestle Research (Blank)"
+    system: "3-deoxy-D-erythro-hexos-2-ulose (3-DG) 0.1 M + glycine 0.1 M (0.05 mmol each in 0.5 mL)"
+    medium: "0.2 M sodium phosphate, pH 4, 6 or 8 (not held); 1.5 mL screw-cap vials, silicone bath"
+    temperature_c: [120]
+    ph: {initial: [4, 6, 8], measured_during: false, final: null}
+    time_min: [240]
+    species: [acetic acid, formic acid]
+    kind: endpoint
+    location: "Results text p. 6670 (mol% after 4 h)"
+    status: text_only
+    quant_class: other
+    simulable: true
+    condition_quote: "A solution of glycine (0.05 mmol) and 2 (0.05 mmol) in a phosphate buffer (0.5 mL, 0.2 mol/L) was placed into screw-cap vials (1.5 mL) and thermally treated in a silicone bath (120 C, 4 h). The experiments were performed at pH 4, pH 6, and pH 8."
+    flags: [ph_start_only, no_sd, "formic_acid_quantified_against_d3_acetic_acid"]
+    note: "Acetic acid by SIDA; formic acid with [2H3]acetic acid as internal standard (not its own isotopologue): mixed class 'other', each row names its method."
+  - id: davidek2006a_fig3_1dg_acetic_ph
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Devaud, Robert & Blank 2006 J Agric Food Chem 54:6667"
+    lab: "Nestle Research (Blank)"
+    system: "1-deoxy-D-erythro-2,3-hexodiulose (1-DG) ~10 mM nominal (0.1 mmol protected precursor in 2 mL water, deprotected on Dowex H+, diluted 5x with buffer), no amine"
+    medium: "phosphate (0.2 M stock, ~0.16 M after dilution), pH 5, 6, 6.5, 7, 8; 0.5 mL in 1.5 mL screw-cap vials"
+    temperature_c: [120]
+    ph: {initial: [5, 6, 6.5, 7, 8], measured_during: false, final: null}
+    time_min: [0, 60]
+    species: [acetic acid]
+    kind: time_series
+    location: "Fig. 3 (mol/mol 1-DG; 600 ppi stencil raster; end labels 0.84 / 0.82 / 0.80 / 0.56 / 0.20)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "After 2.5 h, the resin was filtered off and the solution of 1 was diluted five times with phosphate buffer (0.2 mol/L). The solution was dispatched (0.5 mL) into a screw-cap vial (1.5 mL, Infochroma) and thermally treated in a silicone bath for a defined period of time (120 C, up to 60 min). The experiments were performed at pH 5, pH 6, pH 6.5, pH 7, and pH 8."
+    flags: [ph_start_only, "initial_concentration_nominal", "overlapping_markers_ph65_7_8", "acetic_acid_present_at_t0"]
+    note: "NOT KEYED (adjudication 2026-10-30: readers split on the overlapping pH 6.5 / 7 markers; precursor concentration unprinted). pH 6.5 / 7 / 8 curves overlap; markers assigned by tracing their connecting lines (dotted = pH 6.5). One t = 0 marker cluster sits at ~0.02 mol/mol (unassigned)."
+  - id: davidek2006a_fig5_pentanediones_gly_acetic
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Devaud, Robert & Blank 2006 J Agric Food Chem 54:6667"
+    lab: "Nestle Research (Blank)"
+    system: "2,4-pentanedione or 2,3-pentanedione 0.1 M + glycine 0.1 M (0.5 mmol each in 5 mL)"
+    medium: "0.2 M phosphate, pH 6, 8 or 10 (not held); 0.4 mL in 1.5 mL screw-cap vials"
+    temperature_c: [120]
+    ph: {initial: [6, 8, 10], measured_during: false, final: null}
+    time_min: [0, 240]
+    species: [acetic acid, acetone, propanoic acid]
+    kind: time_series
+    location: "Fig. 5A (2,4-pentanedione) and 5B (2,3-pentanedione), mol%; 600 ppi stencil raster"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "A solution of glycine (0.5 mmol) and 2,3-pentanedione (0.5 mmol) or 2,4-pentanedione (0.5 mmol) in a phosphate buffer (5 mL, 0.2 mol/L) was dispatched (0.4 mL) into screw-cap vials (1.5 mL, Infochroma) and thermally treated at 120 C in a silicone bath for a defined period of time (10-240 min). The experiments were performed at pH 6, pH 8, and pH 10."
+    flags: [ph_start_only, "engine_species_missing: 2,4-pentanedione, 2,3-pentanedione", "open_markers_occlude_filled"]
+    note: "NOT KEYED (adjudication 2026-10-30: precursors have no engine species). Model beta-/alpha-dicarbonyls, not engine species: kept for when they are. Acetone and propanoic acid (open markers) not keyed."
+  - id: davidek2006b_tab1_glc_gly_acetic_atmosphere
+    dossier: "none (read from PDF)"
+    paper: "Davidek, Robert, Devaud, Vera & Blank 2006 J Agric Food Chem 54:6677"
+    lab: "Nestle Research (Blank)"
+    system: "D-glucose 0.1 M + glycine 0.1 M (0.3 mmol each in 3 mL)"
+    medium: "0.2 M phosphate pH 8 (not held), 10 mL flask, under argon (degassed), air or 18O2, atmospheric pressure"
+    temperature_c: [90]
+    ph: {initial: [8], measured_during: false, final: null}
+    time_min: [900]
+    species: [acetic acid]
+    kind: endpoint
+    location: "Table 1 (mmol/L, mean +- printed, CV <= 10%)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of glycine (0.3 mmol) and glucose (0.3 mmol) in phosphate buffer (3 mL, 0.2 mol/L, pH 8) was placed in a flask (10 mL) under argon. ... heated in a silicone bath (90 C, 15 h). Similar experiments were performed replacing argon by 18O-dioxygen or air ... Each sample was prepared at least in duplicate."
+    flags: [ph_start_only, "atmosphere_is_a_condition"]
+    note: "18O2 total 33.5 = 22.9 unlabelled + 10.6 mono-18O; text 'about 32 mol %' / '30-33 mol %' is the same table."

@@ -15,6 +15,8 @@ normally true. The ``inputs`` hashes, not the git stamp, are what a freshness ch
 """
 from __future__ import annotations
 
+import json
+
 import hashlib
 import subprocess
 from datetime import datetime, timezone
@@ -100,6 +102,22 @@ def provenance_block(
 #: Keys a freshness comparison must ignore: they change with the clock and the checkout,
 #: not with the code or the data.
 VOLATILE_KEYS = ("generated_on", "git", "wall_seconds", "workers", "generated")
+
+
+def dumps_compact(value: Any, width: int = 400, default: Any = None, _indent: int = 0) -> str:
+    """JSON with one line per item that fits in ``width`` characters (a fit row, ~350), nested otherwise (2026-10-30: per-row records
+    written one value per line made a probe 8,700 lines for ~500 rows; this writes the same content in ~1/10 the
+    lines and keeps diffs row-per-line). ``json.loads`` of the result equals the input."""
+    flat = json.dumps(value, separators=(", ", ": "), default=default)
+    if len(flat) + _indent <= width or not isinstance(value, (dict, list)) or not value:
+        return flat
+    pad, inner = " " * _indent, " " * (_indent + 1)
+    if isinstance(value, dict):
+        items = [f"{inner}{json.dumps(str(k))}: {dumps_compact(v, width, default, _indent + 1).lstrip()}"
+                 for k, v in value.items()]
+        return "{\n" + ",\n".join(items) + "\n" + pad + "}"
+    items = [inner + dumps_compact(v, width, default, _indent + 1).lstrip() for v in value]
+    return "[\n" + ",\n".join(items) + "\n" + pad + "]"
 
 
 def strip_volatile(value: Any) -> Any:

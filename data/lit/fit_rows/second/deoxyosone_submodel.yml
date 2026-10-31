@@ -1,0 +1,5735 @@
+# Draft fit table, sub-model 3 (deoxyosones), second reader's transcription. status: draft.
+# sd: the paper's printed SD (value units); read_error: digitisation error in dex (2 px unless noted).
+# ADJUDICATED 2026-10-29 by agent-sm3-adjudicator-2026-10-29: GO rows of the Zhai 2021 / 2023 series moved to adjudication_excluded
+# (below the method's LOD, CF-061); two Zhai 2023 Food Chem 3-DX points re-read on the raster; Desclaux rows on
+# the mass basis (ug/kg); Ala -> Gly; deoxyosone rows of mixed figures under their own ledger ids (CF-062).
+status: draft
+submodel: deoxyosone_submodel
+read_by: agent-sm3-reader2-2026-10-29
+pots:
+  zhou2022_axarp_120C:
+    ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L).
+      The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions
+      were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C
+      for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+  zhou2022_axarp_cys_120C:
+    ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Cys: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L).
+      The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions
+      were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C
+      for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+  zhou2022_axarp_120C_volatiles:
+    ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L).
+      The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions
+      were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C
+      for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    same_pot_as: zhou2022_axarp_120C
+  zhou2022_axarp_cys_120C_volatiles:
+    ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Cys: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L).
+      The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions
+      were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C
+      for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    same_pot_as: zhou2022_axarp_cys_120C
+  zhai2019_ttca_120C:
+    ledger_id: zhai2019_fig3b_dicarbonyls_ttca
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      TTCA: 5.0
+    condition_quote: For the reaction between Cys and TTCA, reactants were mixed in 10 mL of deionized water in a molar ratio
+      of Cys to TTCA of 1:1 (Cys concentration was 5 mmol/L). The solutions were adjusted to pH 7.4 with NaOH (6 mol/L) and
+      placed at room temperature for 10 min. Then the solutions were heated in a thermostatic oil bath at 120 C for different
+      times (0, 10, 20, 30, 40, 50, 60 min). ... The samples without Cys addition were also prepared as a control group.
+    buffer: none (deionized water, 10 mL; pH set with 6 M NaOH)
+    label_ph: 7.4
+    ph_measured_during: false
+    note: TTCA purity 95 % (p. 8635). Vessel not stated.
+  zhai2019_ttca_cys_120C:
+    ledger_id: zhai2019_fig3b_dicarbonyls_ttca
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      TTCA: 5.0
+      Cys: 5.0
+    condition_quote: For the reaction between Cys and TTCA, reactants were mixed in 10 mL of deionized water in a molar ratio
+      of Cys to TTCA of 1:1 (Cys concentration was 5 mmol/L). The solutions were adjusted to pH 7.4 with NaOH (6 mol/L) and
+      placed at room temperature for 10 min. Then the solutions were heated in a thermostatic oil bath at 120 C for different
+      times (0, 10, 20, 30, 40, 50, 60 min). ... The samples without Cys addition were also prepared as a control group.
+    buffer: none (deionized water, 10 mL; pH set with 6 M NaOH)
+    label_ph: 7.4
+    ph_measured_during: false
+    note: TTCA purity 95 % (p. 8635). Vessel not stated.
+  zhai2023jafc_ttca_100C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 100
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_100C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 100
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_120C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 120
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_120C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 120
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_140C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 140
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_140C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 140
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023fc_ttca_xyl_120C_dx:
+    ledger_id: zhai2023foodchem_fig2_deoxyosones
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established.
+      The model reactions were adjusted to pH 7 +/- 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment
+      under 100, 120, and 140 C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant
+      bottles in the collector-type magnetic stirrer (DF-101S).
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    same_pot_as: null
+  zhai2023fc_ttca_xyl_140C_dx:
+    ledger_id: zhai2023foodchem_fig2_deoxyosones
+    t_c: 140
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established.
+      The model reactions were adjusted to pH 7 +/- 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment
+      under 100, 120, and 140 C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant
+      bottles in the collector-type magnetic stirrer (DF-101S).
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    same_pot_as: null
+  zhai2023fc_ttca_xyl_120C_mgo_go:
+    ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established.
+      The model reactions were adjusted to pH 7 +/- 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment
+      under 100, 120, and 140 C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant
+      bottles in the collector-type magnetic stirrer (DF-101S).
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    same_pot_as: zhai2023fc_ttca_xyl_120C_dx
+  zhai2023fc_ttca_xyl_140C_mgo_go:
+    ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go
+    t_c: 140
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established.
+      The model reactions were adjusted to pH 7 +/- 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment
+      under 100, 120, and 140 C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant
+      bottles in the collector-type magnetic stirrer (DF-101S).
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    same_pot_as: zhai2023fc_ttca_xyl_140C_dx
+  zhai2021_ttca_ph55_100C:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 5.5
+    ph_measured_during: false
+    note: TTCA purity 98 %. Vessel not stated here (the 2023 reprints say stirred pressure-resistant bottles).
+  zhai2021_ttca_xyl_ph55_100C:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 5.5
+    ph_measured_during: false
+    note: TTCA purity 98 %.
+  zhai2021_ttca_ph6_100C:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 6.0
+    ph_measured_during: false
+    note: TTCA purity 98 %. Vessel not stated here (the 2023 reprints say stirred pressure-resistant bottles).
+  zhai2021_ttca_xyl_ph6_100C:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 6.0
+    ph_measured_during: false
+    note: TTCA purity 98 %.
+  zhai2021_ttca_ph7_100C:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA purity 98 %. Vessel not stated here (the 2023 reprints say stirred pressure-resistant bottles).
+  zhai2021_ttca_xyl_ph7_100C:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA purity 98 %.
+  zhai2021_ttca_ph8_100C:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 8.0
+    ph_measured_during: false
+    note: TTCA purity 98 %. Vessel not stated here (the 2023 reprints say stirred pressure-resistant bottles).
+  zhai2021_ttca_xyl_ph8_100C:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 8.0
+    ph_measured_during: false
+    note: TTCA purity 98 %.
+  zhou2024_axarp_ph8_120C:
+    ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: Ala-ARP reaction models (20 mmol/L) with or without the addition of the same concentrations of 14N-Ala/15N-Ala
+      were prepared. The pH of each model was finely adjusted to 8.0 +/- 0.02 using a 5 mmol/L NaOH solution prior to the
+      heat treatment. Thermal reactions were conducted in an oil bath at 120 C for various durations (30, 60, 90, and 120
+      min).
+    buffer: none (water; pH set with NaOH)
+    label_ph: 8.0
+    ph_measured_during: true
+    ph_trajectory_fig3b:
+    - - 30
+      - 5.13
+    - - 60
+      - 4.32
+    - - 90
+      - 4.19
+    - - 120
+      - 4.08
+    note: Vessel / volume not stated. pH read from Fig. 3b (vector).
+  zhou2024_axarp_ala_ph8_120C:
+    ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Gly: 20.0
+    condition_quote: Ala-ARP reaction models (20 mmol/L) with or without the addition of the same concentrations of 14N-Ala/15N-Ala
+      were prepared. The pH of each model was finely adjusted to 8.0 +/- 0.02 using a 5 mmol/L NaOH solution prior to the
+      heat treatment. Thermal reactions were conducted in an oil bath at 120 C for various durations (30, 60, 90, and 120
+      min).
+    buffer: none (water; pH set with NaOH)
+    label_ph: 8.0
+    ph_measured_during: true
+    ph_trajectory_fig3b:
+    - - 30
+      - 5.54
+    - - 60
+      - 4.61
+    - - 90
+      - 4.36
+    - - 120
+      - 4.21
+    note: Ala added as 14N- or 15N-Ala; Fig. 3 arm 'ARP + Ala'.
+    initial_note: 'added L-alanine (14N or 15N) 20 mM, entered under the engine''s amine-pool key Gly (species.py: ''any alpha-amino
+      acid''); adjudication'
+  zhou2025b_axarp_ph8_120C:
+    ledger_id: zhou2025b_figs1_3_axarp_xylose_120c
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted
+      to 8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil
+      bath and heated at 120 C for predetermined durations of 30, 60, 90, and 120 min.
+    buffer: none (water; pH 8 set, base not stated)
+    label_ph: 8.0
+    ph_measured_during: true
+  zhou2025b_axarp_xyl_ph8_120C:
+    ledger_id: zhou2025b_figs1_3_axarp_xylose_120c
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      PENT: 20.0
+    condition_quote: The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted
+      to 8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil
+      bath and heated at 120 C for predetermined durations of 30, 60, 90, and 120 min.
+    buffer: none (water; pH 8 set, base not stated)
+    label_ph: 8.0
+    ph_measured_during: true
+  zhou2025b_xyl_ph8_120C:
+    ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      PENT: 20.0
+    condition_quote: the thermal degradation of xylose alone under identical reaction conditions was studied ... Only 1.1
+      % of the initial Xyl was converted into alpha-dicarbonyl compounds
+    buffer: none (water; pH 8)
+    label_ph: 8.0
+    ph_measured_during: false
+    note: Xyl 20 mM inferred from 'identical reaction conditions'; consistent with the 1.1 % statement (sum of read GO + 3-DX
+      + MGO at 120 min = 0.235 mM = 1.2 % of 20 mM).
+  wang2026b_xyl_cys_ph55_120C:
+    ledger_id: wang2026b_tables1_22_volatiles
+    t_c: 120
+    minutes: 150
+    initial_mmol_L:
+      PENT: 199.8
+      Cys: 199.7
+    condition_quote: D-Xylose (0.300 g) and L-cysteine (0.242 g) were dissolved at a 1:1 M ratio in 10 mL of 0.2 mol/L sodium
+      dihydrogen phosphate buffer (pH 5.5) and thoroughly mixed. The mixture was transferred into a 15 mL pressure-resistant
+      thick-walled container and heated in a thermostatic magnetic stirring oil bath ... at 120 C for 60, 90, 120, or 150
+      min.
+    buffer: 0.2 M NaH2PO4, pH 5.5
+    label_ph: 5.5
+    ph_measured_during: true
+    note: 'Concentrations from the masses: 0.300 g / 150.13 g/mol and 0.242 g / 121.16 g/mol in 10 mL. pH falls with time
+      (Fig. 1A, not transcribed). 10 mL in a 15 mL vessel.'
+  desclaux2006_xyl_gly_ph6_100C:
+    ledger_id: desclaux2006_fig2_xylose_glycine_100c
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      PENT: 240.0
+      Gly: 240.0
+    condition_quote: Samples (25 g) were prepared using xylose (6 mmol), glycine (6 mmol) and buffer (0.5 M phosphate at pH
+      6). Reaction was carried out in stirred sealed steel tubes placed in thermostatically controlled heating block. ...
+      Measurements were taken at 30, 60, 90 and 120 min. The time to rise to the final temperature was typically 5 min.
+    buffer: 0.5 M phosphate, pH 6
+    label_ph: 6.0
+    ph_measured_during: false
+    note: Initial concentrations 6 mmol / 25 g = 0.24 mol/kg, entered as mmol/L assuming density ~1 (a 0.5 M phosphate solution
+      is ~1.05-1.07 g/mL, so mmol/L may be ~5 % higher). 5-min come-up.
+  zhou2023c_axarp_ph75_120C:
+    ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: Reaction systems of ARP (20 mmol/L) with or without GSH (20 mmol/L) addition were prepared, and the initial
+      pH of the resultant mixtures was adjusted to 7.5 with a 3 mol/L NaOH solution before the heat treatment. All the samples
+      were transferred to the pressure-resistant bottles and then heated in an oil bath at a temperature of 120 C for 30,
+      60, 90, and 120 min separately.
+    buffer: none (water; pH set with 3 M NaOH)
+    label_ph: 7.5
+    ph_measured_during: false
+  zhou2022_axarp_120C_dx:
+    ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L).
+      The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions
+      were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C
+      for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+  zhou2022_axarp_cys_120C_dx:
+    ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Cys: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L).
+      The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions
+      were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C
+      for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+  zhai2023jafc_ttca_100C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 100
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_100C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 100
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_120C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 120
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_120C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 120
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_140C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 140
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_140C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 140
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5,
+      1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100,
+      110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant
+      bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures
+      (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2021_ttca_ph55_100C_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 5.5
+    ph_measured_during: false
+    note: TTCA purity 98 %. Vessel not stated here (the 2023 reprints say stirred pressure-resistant bottles).
+  zhai2021_ttca_ph6_100C_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 6.0
+    ph_measured_during: false
+    note: TTCA purity 98 %. Vessel not stated here (the 2023 reprints say stirred pressure-resistant bottles).
+  zhai2021_ttca_ph7_100C_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA purity 98 %. Vessel not stated here (the 2023 reprints say stirred pressure-resistant bottles).
+  zhai2021_ttca_ph8_100C_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 8.0
+    ph_measured_during: false
+    note: TTCA purity 98 %. Vessel not stated here (the 2023 reprints say stirred pressure-resistant bottles).
+  zhai2021_ttca_xyl_ph55_100C_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 5.5
+    ph_measured_during: false
+    note: TTCA purity 98 %.
+  zhai2021_ttca_xyl_ph6_100C_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 6.0
+    ph_measured_during: false
+    note: TTCA purity 98 %.
+  zhai2021_ttca_xyl_ph7_100C_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA purity 98 %.
+  zhai2021_ttca_xyl_ph8_100C_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared
+      and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100,
+      120, and 140 C for various durations (20, 40, 60, 80, 100, and 120 min). [Fig. 5:] reaction temperature of 100 C.
+    buffer: none (water; pH set with 2 M NaOH or HCl)
+    label_ph: 8.0
+    ph_measured_during: false
+    note: TTCA purity 98 %.
+  zhou2024_axarp_ph8_120C_dx:
+    ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: Ala-ARP reaction models (20 mmol/L) with or without the addition of the same concentrations of 14N-Ala/15N-Ala
+      were prepared. The pH of each model was finely adjusted to 8.0 +/- 0.02 using a 5 mmol/L NaOH solution prior to the
+      heat treatment. Thermal reactions were conducted in an oil bath at 120 C for various durations (30, 60, 90, and 120
+      min).
+    buffer: none (water; pH set with NaOH)
+    label_ph: 8.0
+    ph_measured_during: true
+    ph_trajectory_fig3b:
+    - - 30
+      - 5.13
+    - - 60
+      - 4.32
+    - - 90
+      - 4.19
+    - - 120
+      - 4.08
+    note: Vessel / volume not stated. pH read from Fig. 3b (vector).
+  zhou2024_axarp_ala_ph8_120C_dx:
+    ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Gly: 20.0
+    condition_quote: Ala-ARP reaction models (20 mmol/L) with or without the addition of the same concentrations of 14N-Ala/15N-Ala
+      were prepared. The pH of each model was finely adjusted to 8.0 +/- 0.02 using a 5 mmol/L NaOH solution prior to the
+      heat treatment. Thermal reactions were conducted in an oil bath at 120 C for various durations (30, 60, 90, and 120
+      min).
+    buffer: none (water; pH set with NaOH)
+    label_ph: 8.0
+    ph_measured_during: true
+    ph_trajectory_fig3b:
+    - - 30
+      - 5.54
+    - - 60
+      - 4.61
+    - - 90
+      - 4.36
+    - - 120
+      - 4.21
+    note: Ala added as 14N- or 15N-Ala; Fig. 3 arm 'ARP + Ala'.
+    initial_note: 'added L-alanine (14N or 15N) 20 mM, entered under the engine''s amine-pool key Gly (species.py: ''any alpha-amino
+      acid''); adjudication'
+  zhou2025b_axarp_ph8_120C_dx:
+    ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted
+      to 8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil
+      bath and heated at 120 C for predetermined durations of 30, 60, 90, and 120 min.
+    buffer: none (water; pH 8 set, base not stated)
+    label_ph: 8.0
+    ph_measured_during: true
+  zhou2025b_axarp_xyl_ph8_120C_dx:
+    ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      PENT: 20.0
+    condition_quote: The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted
+      to 8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil
+      bath and heated at 120 C for predetermined durations of 30, 60, 90, and 120 min.
+    buffer: none (water; pH 8 set, base not stated)
+    label_ph: 8.0
+    ph_measured_during: true
+  zhou2025b_xyl_ph8_120C_dx:
+    ledger_id: zhou2025b_fig2a_deoxyxylosone_xylose_alone
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      PENT: 20.0
+    condition_quote: the thermal degradation of xylose alone under identical reaction conditions was studied ... Only 1.1
+      % of the initial Xyl was converted into alpha-dicarbonyl compounds
+    buffer: none (water; pH 8)
+    label_ph: 8.0
+    ph_measured_during: false
+    note: Xyl 20 mM inferred from 'identical reaction conditions'; consistent with the 1.1 % statement (sum of read GO + 3-DX
+      + MGO at 120 min = 0.235 mM = 1.2 % of 20 mM).
+  zhou2023c_axarp_ph75_120C_dx:
+    ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: Reaction systems of ARP (20 mmol/L) with or without GSH (20 mmol/L) addition were prepared, and the initial
+      pH of the resultant mixtures was adjusted to 7.5 with a 3 mol/L NaOH solution before the heat treatment. All the samples
+      were transferred to the pressure-resistant bottles and then heated in an oil bath at a temperature of 120 C for 30,
+      60, 90, and 120 min separately.
+    buffer: none (water; pH set with 3 M NaOH)
+    label_ph: 7.5
+    ph_measured_during: false
+rows:
+- pot: zhou2022_axarp_120C_volatiles
+  species: FUR
+  t_min: 30
+  value: 442.78
+  unit: ug_L
+  sd: 27.7
+  source: Table 1
+- pot: zhou2022_axarp_120C_volatiles
+  species: FUR
+  t_min: 60
+  value: 828.66
+  unit: ug_L
+  sd: 91.83
+  source: Table 1
+- pot: zhou2022_axarp_120C_volatiles
+  species: FUR
+  t_min: 90
+  value: 1046.54
+  unit: ug_L
+  sd: 85.39
+  source: Table 1
+- pot: zhou2022_axarp_120C_volatiles
+  species: FUR
+  t_min: 120
+  value: 1261.12
+  unit: ug_L
+  sd: 118.93
+  source: Table 1
+- pot: zhou2022_axarp_cys_120C_volatiles
+  species: FUR
+  t_min: 30
+  value: 252.49
+  unit: ug_L
+  sd: 18.08
+  source: Table 1
+- pot: zhou2022_axarp_cys_120C_volatiles
+  species: FUR
+  t_min: 60
+  value: 434.91
+  unit: ug_L
+  sd: 13.71
+  source: Table 1
+- pot: zhou2022_axarp_cys_120C_volatiles
+  species: FUR
+  t_min: 90
+  value: 524.77
+  unit: ug_L
+  sd: 38.71
+  source: Table 1
+- pot: zhou2022_axarp_cys_120C_volatiles
+  species: FUR
+  t_min: 120
+  value: 510.92
+  unit: ug_L
+  sd: 36.03
+  source: Table 1
+- pot: zhou2022_axarp_120C_dx
+  species: TDP
+  t_min: 30
+  value: 4.31
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 1c
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_120C_dx
+  species: TDP
+  t_min: 60
+  value: 6.07
+  unit: mmol_L
+  sd: 0.435
+  read_error: 0.003
+  source: Fig. 1c
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_120C_dx
+  species: TDP
+  t_min: 90
+  value: 5.9
+  unit: mmol_L
+  sd: 0.447
+  read_error: 0.004
+  source: Fig. 1c
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_120C_dx
+  species: TDP
+  t_min: 120
+  value: 5.77
+  unit: mmol_L
+  sd: 0.713
+  read_error: 0.004
+  source: Fig. 1c
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_cys_120C_dx
+  species: TDP
+  t_min: 30
+  value: 1.66
+  unit: mmol_L
+  read_error: 0.013
+  source: Fig. 1c
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_cys_120C_dx
+  species: TDP
+  t_min: 60
+  value: 1.19
+  unit: mmol_L
+  read_error: 0.018
+  source: Fig. 1c
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_cys_120C_dx
+  species: TDP
+  t_min: 90
+  value: 0.77
+  unit: mmol_L
+  read_error: 0.027
+  source: Fig. 1c
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_cys_120C_dx
+  species: TDP
+  t_min: 120
+  value: 0.7
+  unit: mmol_L
+  read_error: 0.03
+  source: Fig. 1c
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_120C_dx
+  species: DPO
+  t_min: 30
+  value: 0.824
+  unit: mmol_L
+  sd: 0.048
+  read_error: 0.003
+  source: Fig. 1d
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_120C_dx
+  species: DPO
+  t_min: 60
+  value: 0.605
+  unit: mmol_L
+  sd: 0.044
+  read_error: 0.004
+  source: Fig. 1d
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_120C_dx
+  species: DPO
+  t_min: 90
+  value: 0.326
+  unit: mmol_L
+  read_error: 0.008
+  source: Fig. 1d
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_120C_dx
+  species: DPO
+  t_min: 120
+  value: 0.26
+  unit: mmol_L
+  read_error: 0.01
+  source: Fig. 1d
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_cys_120C_dx
+  species: DPO
+  t_min: 30
+  value: 0.236
+  unit: mmol_L
+  read_error: 0.011
+  source: Fig. 1d
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_cys_120C_dx
+  species: DPO
+  t_min: 60
+  value: 0.181
+  unit: mmol_L
+  read_error: 0.014
+  source: Fig. 1d
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_cys_120C_dx
+  species: DPO
+  t_min: 90
+  value: 0.121
+  unit: mmol_L
+  sd: 0.027
+  read_error: 0.022
+  source: Fig. 1d
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_cys_120C_dx
+  species: DPO
+  t_min: 120
+  value: 0.086
+  unit: mmol_L
+  read_error: 0.03
+  source: Fig. 1d
+  quant_note: semi_quantitative in fact (3,4-hexanedione IS, no authentic standard); ledger says calibrated
+- pot: zhou2022_axarp_120C
+  species: GO
+  t_min: 30
+  value: 0.47
+  unit: mmol_L
+  sd: 0.084
+  read_error: 0.011
+  source: Fig. 1e
+- pot: zhou2022_axarp_120C
+  species: GO
+  t_min: 60
+  value: 0.747
+  unit: mmol_L
+  read_error: 0.007
+  source: Fig. 1e
+- pot: zhou2022_axarp_120C
+  species: GO
+  t_min: 90
+  value: 0.831
+  unit: mmol_L
+  read_error: 0.006
+  source: Fig. 1e
+- pot: zhou2022_axarp_120C
+  species: GO
+  t_min: 120
+  value: 1.115
+  unit: mmol_L
+  sd: 0.193
+  read_error: 0.005
+  source: Fig. 1e
+- pot: zhou2022_axarp_cys_120C
+  species: GO
+  t_min: 30
+  value: 0.252
+  unit: mmol_L
+  sd: 0.063
+  read_error: 0.021
+  source: Fig. 1e
+- pot: zhou2022_axarp_cys_120C
+  species: GO
+  t_min: 60
+  value: 0.337
+  unit: mmol_L
+  sd: 0.136
+  read_error: 0.015
+  source: Fig. 1e
+- pot: zhou2022_axarp_cys_120C
+  species: GO
+  t_min: 90
+  value: 0.291
+  unit: mmol_L
+  read_error: 0.018
+  source: Fig. 1e
+- pot: zhou2022_axarp_cys_120C
+  species: GO
+  t_min: 120
+  value: 0.351
+  unit: mmol_L
+  read_error: 0.015
+  source: Fig. 1e
+- pot: zhou2022_axarp_120C
+  species: MGO
+  t_min: 30
+  value: 0.095
+  unit: mmol_L
+  sd: 0.035
+  read_error: 0.014
+  source: Fig. 1f
+- pot: zhou2022_axarp_120C
+  species: MGO
+  t_min: 60
+  value: 0.14
+  unit: mmol_L
+  sd: 0.02
+  read_error: 0.009
+  source: Fig. 1f
+- pot: zhou2022_axarp_120C
+  species: MGO
+  t_min: 90
+  value: 0.182
+  unit: mmol_L
+  read_error: 0.007
+  source: Fig. 1f
+- pot: zhou2022_axarp_120C
+  species: MGO
+  t_min: 120
+  value: 0.273
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 1f
+- pot: zhou2022_axarp_cys_120C
+  species: MGO
+  t_min: 30
+  value: 0.012
+  unit: mmol_L
+  read_error: 0.109
+  source: Fig. 1f
+- pot: zhou2022_axarp_cys_120C
+  species: MGO
+  t_min: 60
+  value: 0.018
+  unit: mmol_L
+  read_error: 0.072
+  source: Fig. 1f
+- pot: zhou2022_axarp_cys_120C
+  species: MGO
+  t_min: 90
+  value: 0.023
+  unit: mmol_L
+  read_error: 0.057
+  source: Fig. 1f
+- pot: zhou2022_axarp_cys_120C
+  species: MGO
+  t_min: 120
+  value: 0.036
+  unit: mmol_L
+  read_error: 0.036
+  source: Fig. 1f
+- pot: zhai2019_ttca_120C
+  species: TDP
+  t_min: 10
+  value: 89.4
+  unit: umol_L
+  read_error: 0.004
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: TDP
+  t_min: 20
+  value: 164.0
+  unit: umol_L
+  read_error: 0.002
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: TDP
+  t_min: 30
+  value: 199.2
+  unit: umol_L
+  read_error: 0.002
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: TDP
+  t_min: 40
+  value: 204.4
+  unit: umol_L
+  read_error: 0.002
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: TDP
+  t_min: 50
+  value: 228.3
+  unit: umol_L
+  read_error: 0.002
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: TDP
+  t_min: 60
+  value: 248.7
+  unit: umol_L
+  read_error: 0.001
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: GO
+  t_min: 10
+  value: 54.8
+  unit: umol_L
+  read_error: 0.006
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: GO
+  t_min: 20
+  value: 94.8
+  unit: umol_L
+  read_error: 0.004
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: GO
+  t_min: 30
+  value: 112.9
+  unit: umol_L
+  read_error: 0.003
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: GO
+  t_min: 40
+  value: 121.8
+  unit: umol_L
+  read_error: 0.003
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: GO
+  t_min: 50
+  value: 138.3
+  unit: umol_L
+  read_error: 0.003
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: GO
+  t_min: 60
+  value: 149.4
+  unit: umol_L
+  read_error: 0.002
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: DPO
+  t_min: 10
+  value: 42.6
+  unit: umol_L
+  read_error: 0.008
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: DPO
+  t_min: 20
+  value: 68.6
+  unit: umol_L
+  read_error: 0.005
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: DPO
+  t_min: 30
+  value: 76.9
+  unit: umol_L
+  read_error: 0.005
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: DPO
+  t_min: 40
+  value: 89.6
+  unit: umol_L
+  read_error: 0.004
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: DPO
+  t_min: 50
+  value: 91.8
+  unit: umol_L
+  read_error: 0.004
+  source: Fig. 3B
+- pot: zhai2019_ttca_120C
+  species: DPO
+  t_min: 60
+  value: 97.9
+  unit: umol_L
+  read_error: 0.004
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: TDP
+  t_min: 10
+  value: 21.8
+  unit: umol_L
+  read_error: 0.025
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: TDP
+  t_min: 20
+  value: 24.7
+  unit: umol_L
+  read_error: 0.022
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: TDP
+  t_min: 30
+  value: 25.3
+  unit: umol_L
+  read_error: 0.021
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: TDP
+  t_min: 40
+  value: 31.9
+  unit: umol_L
+  read_error: 0.017
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: TDP
+  t_min: 50
+  value: 49.5
+  unit: umol_L
+  read_error: 0.007
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: TDP
+  t_min: 60
+  value: 51.5
+  unit: umol_L
+  read_error: 0.007
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: DPO
+  t_min: 10
+  value: 17.3
+  unit: umol_L
+  read_error: 0.031
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: DPO
+  t_min: 20
+  value: 19.6
+  unit: umol_L
+  read_error: 0.027
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: DPO
+  t_min: 30
+  value: 31.3
+  unit: umol_L
+  read_error: 0.017
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: DPO
+  t_min: 40
+  value: 33.8
+  unit: umol_L
+  read_error: 0.016
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: DPO
+  t_min: 50
+  value: 41.0
+  unit: umol_L
+  read_error: 0.009
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: DPO
+  t_min: 60
+  value: 44.2
+  unit: umol_L
+  read_error: 0.008
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: GO
+  t_min: 10
+  value: 10.6
+  unit: umol_L
+  read_error: 0.051
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: GO
+  t_min: 20
+  value: 12.5
+  unit: umol_L
+  read_error: 0.043
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: GO
+  t_min: 30
+  value: 18.4
+  unit: umol_L
+  read_error: 0.029
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: GO
+  t_min: 40
+  value: 25.0
+  unit: umol_L
+  read_error: 0.022
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: GO
+  t_min: 50
+  value: 30.5
+  unit: umol_L
+  read_error: 0.012
+  source: Fig. 3B
+- pot: zhai2019_ttca_cys_120C
+  species: GO
+  t_min: 60
+  value: 34.8
+  unit: umol_L
+  read_error: 0.01
+  source: Fig. 3B
+- pot: zhai2023jafc_ttca_100C_dx
+  species: TDP
+  t_min: 140
+  value: 0.3896
+  unit: mmol_L
+  sd: 0.0291
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_100C_dx
+  species: TDP
+  t_min: 160
+  value: 0.2803
+  unit: mmol_L
+  sd: 0.027
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_100C_dx
+  species: TDP
+  t_min: 180
+  value: 0.1896
+  unit: mmol_L
+  sd: 0.019
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: TDP
+  t_min: 20
+  value: 0.087
+  unit: mmol_L
+  sd: 0.0171
+  read_error: 0.006
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: TDP
+  t_min: 40
+  value: 0.1048
+  unit: mmol_L
+  sd: 0.0248
+  read_error: 0.005
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: TDP
+  t_min: 60
+  value: 0.1791
+  unit: mmol_L
+  sd: 0.019
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: TDP
+  t_min: 80
+  value: 0.2128
+  unit: mmol_L
+  sd: 0.0231
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: TDP
+  t_min: 100
+  value: 0.2278
+  unit: mmol_L
+  sd: 0.0282
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: TDP
+  t_min: 120
+  value: 0.3183
+  unit: mmol_L
+  sd: 0.0321
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: TDP
+  t_min: 140
+  value: 0.3289
+  unit: mmol_L
+  sd: 0.0289
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: TDP
+  t_min: 160
+  value: 0.2509
+  unit: mmol_L
+  sd: 0.0149
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: TDP
+  t_min: 180
+  value: 0.0817
+  unit: mmol_L
+  sd: 0.0282
+  read_error: 0.006
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: TDP
+  t_min: 20
+  value: 0.2099
+  unit: mmol_L
+  sd: 0.012
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: TDP
+  t_min: 40
+  value: 0.3198
+  unit: mmol_L
+  sd: 0.0231
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: TDP
+  t_min: 60
+  value: 0.4701
+  unit: mmol_L
+  sd: 0.0258
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: TDP
+  t_min: 80
+  value: 0.6899
+  unit: mmol_L
+  sd: 0.019
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: TDP
+  t_min: 100
+  value: 0.6899
+  unit: mmol_L
+  sd: 0.0263
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: TDP
+  t_min: 120
+  value: 0.5901
+  unit: mmol_L
+  sd: 0.0253
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: TDP
+  t_min: 140
+  value: 0.4277
+  unit: mmol_L
+  sd: 0.0282
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: TDP
+  t_min: 160
+  value: 0.3448
+  unit: mmol_L
+  sd: 0.0159
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: TDP
+  t_min: 180
+  value: 0.287
+  unit: mmol_L
+  sd: 0.0178
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_120C_dx
+  species: TDP
+  t_min: 80
+  value: 0.1516
+  unit: mmol_L
+  sd: 0.0178
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_120C_dx
+  species: TDP
+  t_min: 100
+  value: 0.1781
+  unit: mmol_L
+  sd: 0.0171
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_120C_dx
+  species: TDP
+  t_min: 120
+  value: 0.168
+  unit: mmol_L
+  sd: 0.019
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_120C_dx
+  species: TDP
+  t_min: 140
+  value: 0.1723
+  unit: mmol_L
+  sd: 0.0171
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_120C_dx
+  species: TDP
+  t_min: 160
+  value: 0.1101
+  unit: mmol_L
+  sd: 0.0209
+  read_error: 0.005
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_120C_dx
+  species: TDP
+  t_min: 180
+  value: 0.0239
+  unit: mmol_L
+  sd: 0.0231
+  read_error: 0.022
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: TDP
+  t_min: 20
+  value: 0.3198
+  unit: mmol_L
+  sd: 0.0231
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: TDP
+  t_min: 40
+  value: 0.4899
+  unit: mmol_L
+  sd: 0.0282
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: TDP
+  t_min: 60
+  value: 0.7
+  unit: mmol_L
+  sd: 0.0171
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: TDP
+  t_min: 80
+  value: 0.8099
+  unit: mmol_L
+  sd: 0.0282
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: TDP
+  t_min: 100
+  value: 0.7901
+  unit: mmol_L
+  sd: 0.019
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: TDP
+  t_min: 140
+  value: 0.2099
+  unit: mmol_L
+  sd: 0.019
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: TDP
+  t_min: 160
+  value: 0.1101
+  unit: mmol_L
+  sd: 0.0209
+  read_error: 0.005
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_140C_dx
+  species: TDP
+  t_min: 60
+  value: 0.129
+  unit: mmol_L
+  sd: 0.0292
+  read_error: 0.004
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_140C_dx
+  species: TDP
+  t_min: 80
+  value: 0.1969
+  unit: mmol_L
+  sd: 0.0191
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_140C_dx
+  species: TDP
+  t_min: 100
+  value: 0.2967
+  unit: mmol_L
+  sd: 0.027
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_140C_dx
+  species: TDP
+  t_min: 120
+  value: 0.2191
+  unit: mmol_L
+  sd: 0.0169
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_140C_dx
+  species: TDP
+  t_min: 140
+  value: 0.0731
+  unit: mmol_L
+  sd: 0.0231
+  read_error: 0.007
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_100C_dx
+  species: DPO
+  t_min: 140
+  value: 0.042
+  unit: mmol_L
+  sd: 0.0022
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_100C_dx
+  species: DPO
+  t_min: 160
+  value: 0.0271
+  unit: mmol_L
+  sd: 0.0021
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_100C_dx
+  species: DPO
+  t_min: 180
+  value: 0.012
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.007
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: DPO
+  t_min: 20
+  value: 0.011
+  unit: mmol_L
+  sd: 0.0011
+  read_error: 0.008
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: DPO
+  t_min: 40
+  value: 0.019
+  unit: mmol_L
+  sd: 0.0018
+  read_error: 0.005
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: DPO
+  t_min: 60
+  value: 0.0241
+  unit: mmol_L
+  sd: 0.0021
+  read_error: 0.004
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: DPO
+  t_min: 80
+  value: 0.039
+  unit: mmol_L
+  sd: 0.0023
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: DPO
+  t_min: 100
+  value: 0.042
+  unit: mmol_L
+  sd: 0.0024
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: DPO
+  t_min: 120
+  value: 0.049
+  unit: mmol_L
+  sd: 0.0018
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: DPO
+  t_min: 140
+  value: 0.0311
+  unit: mmol_L
+  sd: 0.0023
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_100C_dx
+  species: DPO
+  t_min: 160
+  value: 0.011
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.008
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: DPO
+  t_min: 20
+  value: 0.032
+  unit: mmol_L
+  sd: 0.0022
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: DPO
+  t_min: 40
+  value: 0.0561
+  unit: mmol_L
+  sd: 0.0025
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: DPO
+  t_min: 60
+  value: 0.052
+  unit: mmol_L
+  sd: 0.0016
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: DPO
+  t_min: 80
+  value: 0.049
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: DPO
+  t_min: 100
+  value: 0.053
+  unit: mmol_L
+  sd: 0.0015
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: DPO
+  t_min: 120
+  value: 0.049
+  unit: mmol_L
+  sd: 0.0018
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_120C_dx
+  species: DPO
+  t_min: 140
+  value: 0.012
+  unit: mmol_L
+  sd: 0.0025
+  read_error: 0.007
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_120C_dx
+  species: DPO
+  t_min: 100
+  value: 0.0141
+  unit: mmol_L
+  sd: 0.0011
+  read_error: 0.006
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_120C_dx
+  species: DPO
+  t_min: 120
+  value: 0.021
+  unit: mmol_L
+  sd: 0.0012
+  read_error: 0.004
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_120C_dx
+  species: DPO
+  t_min: 140
+  value: 0.0091
+  unit: mmol_L
+  sd: 0.0011
+  read_error: 0.01
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: DPO
+  t_min: 20
+  value: 0.0411
+  unit: mmol_L
+  sd: 0.0014
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: DPO
+  t_min: 40
+  value: 0.0721
+  unit: mmol_L
+  sd: 0.0027
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: DPO
+  t_min: 60
+  value: 0.0891
+  unit: mmol_L
+  sd: 0.0018
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: DPO
+  t_min: 80
+  value: 0.1121
+  unit: mmol_L
+  sd: 0.0012
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: DPO
+  t_min: 100
+  value: 0.0991
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: DPO
+  t_min: 120
+  value: 0.052
+  unit: mmol_L
+  sd: 0.0025
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_140C_dx
+  species: DPO
+  t_min: 140
+  value: 0.021
+  unit: mmol_L
+  sd: 0.0012
+  read_error: 0.004
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_140C_dx
+  species: DPO
+  t_min: 80
+  value: 0.022
+  unit: mmol_L
+  sd: 0.0021
+  read_error: 0.004
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_140C_dx
+  species: DPO
+  t_min: 100
+  value: 0.0141
+  unit: mmol_L
+  sd: 0.0011
+  read_error: 0.006
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_cys_140C_dx
+  species: DPO
+  t_min: 120
+  value: 0.011
+  unit: mmol_L
+  sd: 0.0018
+  read_error: 0.008
+  source: Fig. 5
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023jafc_ttca_100C
+  species: MGO
+  t_min: 140
+  value: 0.0234
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_100C
+  species: MGO
+  t_min: 160
+  value: 0.0221
+  unit: mmol_L
+  sd: 0.002
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_100C
+  species: MGO
+  t_min: 180
+  value: 0.0193
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_100C
+  species: MGO
+  t_min: 20
+  value: 0.0108
+  unit: mmol_L
+  sd: 0.0018
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_100C
+  species: MGO
+  t_min: 40
+  value: 0.0132
+  unit: mmol_L
+  sd: 0.0013
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_100C
+  species: MGO
+  t_min: 60
+  value: 0.0179
+  unit: mmol_L
+  sd: 0.0029
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_100C
+  species: MGO
+  t_min: 80
+  value: 0.021
+  unit: mmol_L
+  sd: 0.0021
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_100C
+  species: MGO
+  t_min: 100
+  value: 0.0197
+  unit: mmol_L
+  sd: 0.0008
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_100C
+  species: MGO
+  t_min: 120
+  value: 0.021
+  unit: mmol_L
+  sd: 0.0018
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_100C
+  species: MGO
+  t_min: 140
+  value: 0.0197
+  unit: mmol_L
+  sd: 0.0021
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_100C
+  species: MGO
+  t_min: 160
+  value: 0.0172
+  unit: mmol_L
+  sd: 0.0023
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_100C
+  species: MGO
+  t_min: 180
+  value: 0.0096
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.005
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_120C
+  species: MGO
+  t_min: 20
+  value: 0.0318
+  unit: mmol_L
+  sd: 0.0021
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_120C
+  species: MGO
+  t_min: 40
+  value: 0.0427
+  unit: mmol_L
+  sd: 0.0027
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_120C
+  species: MGO
+  t_min: 60
+  value: 0.0532
+  unit: mmol_L
+  sd: 0.0015
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_120C
+  species: MGO
+  t_min: 80
+  value: 0.0573
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_120C
+  species: MGO
+  t_min: 100
+  value: 0.0528
+  unit: mmol_L
+  sd: 0.0011
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_120C
+  species: MGO
+  t_min: 120
+  value: 0.0479
+  unit: mmol_L
+  sd: 0.0027
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_120C
+  species: MGO
+  t_min: 140
+  value: 0.0492
+  unit: mmol_L
+  sd: 0.0024
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_120C
+  species: MGO
+  t_min: 160
+  value: 0.0319
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_120C
+  species: MGO
+  t_min: 180
+  value: 0.0121
+  unit: mmol_L
+  sd: 0.0021
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_120C
+  species: MGO
+  t_min: 80
+  value: 0.0112
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_120C
+  species: MGO
+  t_min: 100
+  value: 0.0123
+  unit: mmol_L
+  sd: 0.0013
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_120C
+  species: MGO
+  t_min: 120
+  value: 0.011
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_120C
+  species: MGO
+  t_min: 140
+  value: 0.0128
+  unit: mmol_L
+  sd: 0.0024
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_120C
+  species: MGO
+  t_min: 160
+  value: 0.0048
+  unit: mmol_L
+  sd: 0.0018
+  read_error: 0.009
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_120C
+  species: MGO
+  t_min: 180
+  value: 0.0012
+  unit: mmol_L
+  sd: 0.002
+  read_error: 0.036
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_140C
+  species: MGO
+  t_min: 20
+  value: 0.0398
+  unit: mmol_L
+  sd: 0.0011
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_140C
+  species: MGO
+  t_min: 40
+  value: 0.0537
+  unit: mmol_L
+  sd: 0.0025
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_140C
+  species: MGO
+  t_min: 60
+  value: 0.0717
+  unit: mmol_L
+  sd: 0.0027
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_140C
+  species: MGO
+  t_min: 80
+  value: 0.0699
+  unit: mmol_L
+  sd: 0.0026
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_140C
+  species: MGO
+  t_min: 100
+  value: 0.0682
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_140C
+  species: MGO
+  t_min: 120
+  value: 0.0599
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_140C
+  species: MGO
+  t_min: 140
+  value: 0.0324
+  unit: mmol_L
+  sd: 0.0023
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_140C
+  species: MGO
+  t_min: 160
+  value: 0.0112
+  unit: mmol_L
+  sd: 0.0012
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_140C
+  species: MGO
+  t_min: 80
+  value: 0.0178
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_140C
+  species: MGO
+  t_min: 100
+  value: 0.0156
+  unit: mmol_L
+  sd: 0.0015
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_140C
+  species: MGO
+  t_min: 120
+  value: 0.0134
+  unit: mmol_L
+  sd: 0.0019
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_140C
+  species: MGO
+  t_min: 140
+  value: 0.0097
+  unit: mmol_L
+  sd: 0.0027
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2023jafc_ttca_cys_140C
+  species: MGO
+  t_min: 160
+  value: 0.0043
+  unit: mmol_L
+  sd: 0.0021
+  read_error: 0.01
+  source: Fig. 5
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: TDP
+  t_min: 20
+  value: 0.307
+  unit: mmol_L
+  read_error: 0.021
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: TDP
+  t_min: 40
+  value: 0.573
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: TDP
+  t_min: 60
+  value: 1.125
+  unit: mmol_L
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: TDP
+  t_min: 80
+  value: 1.097
+  unit: mmol_L
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: TDP
+  t_min: 100
+  value: 1.016
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: TDP
+  t_min: 120
+  value: 0.984
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: TDP
+  t_min: 40
+  value: 0.391
+  unit: mmol_L
+  read_error: 0.007
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+  adjudicated: second reading 0.386, first 0.394 mmol/L; caps at rows 512 / 529 put the mean at 0.391 mmol/L
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: TDP
+  t_min: 60
+  value: 0.617
+  unit: mmol_L
+  read_error: 0.004
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: TDP
+  t_min: 80
+  value: 0.81
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: TDP
+  t_min: 100
+  value: 0.82
+  unit: mmol_L
+  read_error: 0.011
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: TDP
+  t_min: 120
+  value: 0.814
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+  adjudicated: second reading 0.803 mmol/L; error-bar caps at rows 371.5 / 386.5 of the 300 ppi raster (zero 651.5, 1.5 mM
+    at 149) put the mean at 0.814 mmol/L, as the first reading
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: DPO
+  t_min: 20
+  value: 0.0517
+  unit: mmol_L
+  read_error: 0.008
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: DPO
+  t_min: 40
+  value: 0.0887
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: DPO
+  t_min: 60
+  value: 0.1384
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: DPO
+  t_min: 80
+  value: 0.1731
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: DPO
+  t_min: 100
+  value: 0.1739
+  unit: mmol_L
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_dx
+  species: DPO
+  t_min: 120
+  value: 0.1517
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: DPO
+  t_min: 40
+  value: 0.0474
+  unit: mmol_L
+  read_error: 0.009
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: DPO
+  t_min: 60
+  value: 0.0968
+  unit: mmol_L
+  read_error: 0.004
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: DPO
+  t_min: 80
+  value: 0.1318
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: DPO
+  t_min: 100
+  value: 0.1278
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_120C_dx
+  species: DPO
+  t_min: 120
+  value: 0.1187
+  unit: mmol_L
+  read_error: 0.004
+  source: Fig. 2
+  quant_note: 'DX: no standard named; semi_quantitative at best'
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: MGO
+  t_min: 20
+  value: 0.0414
+  unit: mmol_L
+  read_error: 0.021
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: MGO
+  t_min: 40
+  value: 0.0789
+  unit: mmol_L
+  read_error: 0.002
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: MGO
+  t_min: 60
+  value: 0.0792
+  unit: mmol_L
+  read_error: 0.002
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: MGO
+  t_min: 80
+  value: 0.0689
+  unit: mmol_L
+  read_error: 0.013
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: MGO
+  t_min: 100
+  value: 0.0538
+  unit: mmol_L
+  read_error: 0.016
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: MGO
+  t_min: 120
+  value: 0.0457
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: MGO
+  t_min: 20
+  value: 0.0324
+  unit: mmol_L
+  read_error: 0.027
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: MGO
+  t_min: 40
+  value: 0.0517
+  unit: mmol_L
+  read_error: 0.017
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: MGO
+  t_min: 60
+  value: 0.0626
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: MGO
+  t_min: 80
+  value: 0.0541
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: MGO
+  t_min: 100
+  value: 0.0426
+  unit: mmol_L
+  read_error: 0.004
+  source: Fig. 3
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: MGO
+  t_min: 120
+  value: 0.0386
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 3
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: TDP
+  t_min: 20
+  value: 0.28008
+  unit: mmol_L
+  sd: 0.01691
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: TDP
+  t_min: 40
+  value: 0.37005
+  unit: mmol_L
+  sd: 0.0177
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: TDP
+  t_min: 60
+  value: 0.52004
+  unit: mmol_L
+  sd: 0.01179
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: TDP
+  t_min: 80
+  value: 0.65001
+  unit: mmol_L
+  sd: 0.01679
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: TDP
+  t_min: 100
+  value: 0.64007
+  unit: mmol_L
+  sd: 0.01979
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: TDP
+  t_min: 120
+  value: 0.62006
+  unit: mmol_L
+  sd: 0.02109
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: TDP
+  t_min: 20
+  value: 0.33004
+  unit: mmol_L
+  sd: 0.01449
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: TDP
+  t_min: 40
+  value: 0.48002
+  unit: mmol_L
+  sd: 0.0117
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: TDP
+  t_min: 60
+  value: 0.59
+  unit: mmol_L
+  sd: 0.0098
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: TDP
+  t_min: 80
+  value: 0.75004
+  unit: mmol_L
+  sd: 0.0219
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: TDP
+  t_min: 100
+  value: 0.89008
+  unit: mmol_L
+  sd: 0.0218
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: TDP
+  t_min: 120
+  value: 0.92998
+  unit: mmol_L
+  sd: 0.0298
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: TDP
+  t_min: 20
+  value: 0.1501
+  unit: mmol_L
+  sd: 0.0229
+  read_error: 0.003
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: TDP
+  t_min: 40
+  value: 0.21012
+  unit: mmol_L
+  sd: 0.01081
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: TDP
+  t_min: 60
+  value: 0.37999
+  unit: mmol_L
+  sd: 0.00978
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: TDP
+  t_min: 80
+  value: 0.47008
+  unit: mmol_L
+  sd: 0.0178
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: TDP
+  t_min: 100
+  value: 0.51009
+  unit: mmol_L
+  sd: 0.0183
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: TDP
+  t_min: 120
+  value: 0.42001
+  unit: mmol_L
+  sd: 0.0194
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: TDP
+  t_min: 20
+  value: 0.06201
+  unit: mmol_L
+  sd: 0.02248
+  read_error: 0.008
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: TDP
+  t_min: 40
+  value: 0.07207
+  unit: mmol_L
+  sd: 0.02378
+  read_error: 0.007
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: TDP
+  t_min: 60
+  value: 0.08611
+  unit: mmol_L
+  sd: 0.0627
+  read_error: 0.006
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: TDP
+  t_min: 80
+  value: 0.09804
+  unit: mmol_L
+  sd: 0.01591
+  read_error: 0.005
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: TDP
+  t_min: 100
+  value: 0.10705
+  unit: mmol_L
+  sd: 0.01872
+  read_error: 0.005
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: TDP
+  t_min: 120
+  value: 0.07511
+  unit: mmol_L
+  sd: 0.02279
+  read_error: 0.007
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: TDP
+  t_min: 20
+  value: 0.29003
+  unit: mmol_L
+  sd: 0.0194
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: TDP
+  t_min: 40
+  value: 0.4
+  unit: mmol_L
+  sd: 0.0178
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: TDP
+  t_min: 60
+  value: 0.58005
+  unit: mmol_L
+  sd: 0.01791
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: TDP
+  t_min: 80
+  value: 0.69997
+  unit: mmol_L
+  sd: 0.0218
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: TDP
+  t_min: 100
+  value: 0.75004
+  unit: mmol_L
+  sd: 0.0069
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: TDP
+  t_min: 120
+  value: 0.77005
+  unit: mmol_L
+  sd: 0.01789
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: TDP
+  t_min: 20
+  value: 0.37999
+  unit: mmol_L
+  sd: 0.0078
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: TDP
+  t_min: 40
+  value: 0.51009
+  unit: mmol_L
+  sd: 0.00889
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: TDP
+  t_min: 60
+  value: 0.63001
+  unit: mmol_L
+  sd: 0.01979
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: TDP
+  t_min: 80
+  value: 0.81006
+  unit: mmol_L
+  sd: 0.0279
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: TDP
+  t_min: 100
+  value: 1.03001
+  unit: mmol_L
+  sd: 0.0328
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: TDP
+  t_min: 120
+  value: 1.09003
+  unit: mmol_L
+  sd: 0.02681
+  read_error: 0.0
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: TDP
+  t_min: 20
+  value: 0.16999
+  unit: mmol_L
+  sd: 0.01891
+  read_error: 0.003
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: TDP
+  t_min: 40
+  value: 0.23001
+  unit: mmol_L
+  sd: 0.0298
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: TDP
+  t_min: 60
+  value: 0.36011
+  unit: mmol_L
+  sd: 0.0298
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: TDP
+  t_min: 80
+  value: 0.56999
+  unit: mmol_L
+  sd: 0.0194
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: TDP
+  t_min: 100
+  value: 0.77005
+  unit: mmol_L
+  sd: 0.01889
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: TDP
+  t_min: 120
+  value: 0.92998
+  unit: mmol_L
+  sd: 0.0298
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: TDP
+  t_min: 20
+  value: 0.04808
+  unit: mmol_L
+  sd: 0.03713
+  read_error: 0.011
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: TDP
+  t_min: 40
+  value: 0.07605
+  unit: mmol_L
+  sd: 0.01277
+  read_error: 0.007
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: TDP
+  t_min: 60
+  value: 0.10705
+  unit: mmol_L
+  sd: 0.0173
+  read_error: 0.005
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: TDP
+  t_min: 80
+  value: 0.14706
+  unit: mmol_L
+  sd: 0.01889
+  read_error: 0.004
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: TDP
+  t_min: 100
+  value: 0.25809
+  unit: mmol_L
+  sd: 0.03197
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: TDP
+  t_min: 120
+  value: 0.35905
+  unit: mmol_L
+  sd: 0.00936
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: DPO
+  t_min: 20
+  value: 0.01001
+  unit: mmol_L
+  sd: 0.00211
+  read_error: 0.009
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: DPO
+  t_min: 40
+  value: 0.01301
+  unit: mmol_L
+  sd: 0.00222
+  read_error: 0.007
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: DPO
+  t_min: 60
+  value: 0.02501
+  unit: mmol_L
+  sd: 0.00148
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: DPO
+  t_min: 80
+  value: 0.03702
+  unit: mmol_L
+  sd: 0.0021
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: DPO
+  t_min: 100
+  value: 0.03601
+  unit: mmol_L
+  sd: 0.00248
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C_dx
+  species: DPO
+  t_min: 120
+  value: 0.03202
+  unit: mmol_L
+  sd: 0.00264
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: DPO
+  t_min: 20
+  value: 0.0172
+  unit: mmol_L
+  sd: 0.00181
+  read_error: 0.005
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: DPO
+  t_min: 40
+  value: 0.02151
+  unit: mmol_L
+  sd: 0.00146
+  read_error: 0.004
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: DPO
+  t_min: 60
+  value: 0.03372
+  unit: mmol_L
+  sd: 0.00122
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: DPO
+  t_min: 80
+  value: 0.04981
+  unit: mmol_L
+  sd: 0.00274
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: DPO
+  t_min: 100
+  value: 0.0628
+  unit: mmol_L
+  sd: 0.00273
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph6_100C_dx
+  species: DPO
+  t_min: 120
+  value: 0.06191
+  unit: mmol_L
+  sd: 0.00223
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: DPO
+  t_min: 20
+  value: 0.021
+  unit: mmol_L
+  sd: 0.00236
+  read_error: 0.004
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: DPO
+  t_min: 40
+  value: 0.02901
+  unit: mmol_L
+  sd: 0.00373
+  read_error: 0.003
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: DPO
+  t_min: 60
+  value: 0.04801
+  unit: mmol_L
+  sd: 0.00373
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: DPO
+  t_min: 80
+  value: 0.061
+  unit: mmol_L
+  sd: 0.00243
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: DPO
+  t_min: 100
+  value: 0.07902
+  unit: mmol_L
+  sd: 0.00236
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph7_100C_dx
+  species: DPO
+  t_min: 120
+  value: 0.06901
+  unit: mmol_L
+  sd: 0.00372
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: DPO
+  t_min: 20
+  value: 0.03202
+  unit: mmol_L
+  sd: 0.00281
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: DPO
+  t_min: 40
+  value: 0.05201
+  unit: mmol_L
+  sd: 0.00297
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: DPO
+  t_min: 60
+  value: 0.07402
+  unit: mmol_L
+  sd: 0.00784
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: DPO
+  t_min: 80
+  value: 0.09901
+  unit: mmol_L
+  sd: 0.00199
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: DPO
+  t_min: 100
+  value: 0.11701
+  unit: mmol_L
+  sd: 0.00234
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph8_100C_dx
+  species: DPO
+  t_min: 120
+  value: 0.10601
+  unit: mmol_L
+  sd: 0.00285
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: DPO
+  t_min: 20
+  value: 0.012
+  unit: mmol_L
+  sd: 0.00243
+  read_error: 0.007
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: DPO
+  t_min: 40
+  value: 0.01301
+  unit: mmol_L
+  sd: 0.00222
+  read_error: 0.007
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: DPO
+  t_min: 60
+  value: 0.02802
+  unit: mmol_L
+  sd: 0.00224
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: DPO
+  t_min: 80
+  value: 0.04
+  unit: mmol_L
+  sd: 0.00272
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: DPO
+  t_min: 100
+  value: 0.04301
+  unit: mmol_L
+  sd: 0.00086
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph55_100C_dx
+  species: DPO
+  t_min: 120
+  value: 0.047
+  unit: mmol_L
+  sd: 0.00224
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: DPO
+  t_min: 20
+  value: 0.01792
+  unit: mmol_L
+  sd: 0.00098
+  read_error: 0.005
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: DPO
+  t_min: 40
+  value: 0.02302
+  unit: mmol_L
+  sd: 0.00111
+  read_error: 0.004
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: DPO
+  t_min: 60
+  value: 0.03401
+  unit: mmol_L
+  sd: 0.00247
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: DPO
+  t_min: 80
+  value: 0.05102
+  unit: mmol_L
+  sd: 0.00349
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: DPO
+  t_min: 100
+  value: 0.06882
+  unit: mmol_L
+  sd: 0.0041
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph6_100C_dx
+  species: DPO
+  t_min: 120
+  value: 0.07902
+  unit: mmol_L
+  sd: 0.00335
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: DPO
+  t_min: 20
+  value: 0.02602
+  unit: mmol_L
+  sd: 0.00236
+  read_error: 0.003
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: DPO
+  t_min: 40
+  value: 0.03101
+  unit: mmol_L
+  sd: 0.00373
+  read_error: 0.003
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: DPO
+  t_min: 60
+  value: 0.05302
+  unit: mmol_L
+  sd: 0.00373
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: DPO
+  t_min: 80
+  value: 0.075
+  unit: mmol_L
+  sd: 0.00243
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: DPO
+  t_min: 100
+  value: 0.09401
+  unit: mmol_L
+  sd: 0.00236
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph7_100C_dx
+  species: DPO
+  t_min: 120
+  value: 0.12501
+  unit: mmol_L
+  sd: 0.00373
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: DPO
+  t_min: 20
+  value: 0.03101
+  unit: mmol_L
+  sd: 0.00929
+  read_error: 0.003
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: DPO
+  t_min: 40
+  value: 0.05302
+  unit: mmol_L
+  sd: 0.0016
+  read_error: 0.002
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: DPO
+  t_min: 60
+  value: 0.08201
+  unit: mmol_L
+  sd: 0.00216
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: DPO
+  t_min: 80
+  value: 0.119
+  unit: mmol_L
+  sd: 0.00236
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: DPO
+  t_min: 100
+  value: 0.172
+  unit: mmol_L
+  sd: 0.004
+  read_error: 0.001
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_xyl_ph8_100C_dx
+  species: DPO
+  t_min: 120
+  value: 0.18701
+  unit: mmol_L
+  sd: 0.00117
+  read_error: 0.0
+  source: Fig. 5
+  quant_note: semi_quantitative (diacetyl IS, no DX standard); ledger says calibrated
+- pot: zhai2021_ttca_ph55_100C
+  species: MGO
+  t_min: 20
+  value: 0.0081
+  unit: mmol_L
+  sd: 0.00053
+  read_error: 0.005
+  source: Fig. 5
+- pot: zhai2021_ttca_ph55_100C
+  species: MGO
+  t_min: 40
+  value: 0.0107
+  unit: mmol_L
+  sd: 0.00055
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2021_ttca_ph55_100C
+  species: MGO
+  t_min: 60
+  value: 0.0132
+  unit: mmol_L
+  sd: 0.00037
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2021_ttca_ph55_100C
+  species: MGO
+  t_min: 80
+  value: 0.0139
+  unit: mmol_L
+  sd: 0.00052
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2021_ttca_ph55_100C
+  species: MGO
+  t_min: 100
+  value: 0.0137
+  unit: mmol_L
+  sd: 0.00062
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2021_ttca_ph55_100C
+  species: MGO
+  t_min: 120
+  value: 0.0114
+  unit: mmol_L
+  sd: 0.00066
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2021_ttca_ph6_100C
+  species: MGO
+  t_min: 20
+  value: 0.0129
+  unit: mmol_L
+  sd: 0.00045
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2021_ttca_ph6_100C
+  species: MGO
+  t_min: 40
+  value: 0.0178
+  unit: mmol_L
+  sd: 0.00036
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_ph6_100C
+  species: MGO
+  t_min: 60
+  value: 0.0247
+  unit: mmol_L
+  sd: 0.00031
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_ph6_100C
+  species: MGO
+  t_min: 80
+  value: 0.0252
+  unit: mmol_L
+  sd: 0.00068
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_ph6_100C
+  species: MGO
+  t_min: 100
+  value: 0.0248
+  unit: mmol_L
+  sd: 0.00068
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_ph6_100C
+  species: MGO
+  t_min: 120
+  value: 0.0201
+  unit: mmol_L
+  sd: 0.00056
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_ph7_100C
+  species: MGO
+  t_min: 20
+  value: 0.0219
+  unit: mmol_L
+  sd: 0.00072
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+- pot: zhai2021_ttca_ph7_100C
+  species: MGO
+  t_min: 40
+  value: 0.0279
+  unit: mmol_L
+  sd: 0.00034
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+- pot: zhai2021_ttca_ph7_100C
+  species: MGO
+  t_min: 60
+  value: 0.0348
+  unit: mmol_L
+  sd: 0.00031
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+- pot: zhai2021_ttca_ph7_100C
+  species: MGO
+  t_min: 80
+  value: 0.0311
+  unit: mmol_L
+  sd: 0.00056
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+- pot: zhai2021_ttca_ph7_100C
+  species: MGO
+  t_min: 100
+  value: 0.0299
+  unit: mmol_L
+  sd: 0.00057
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+- pot: zhai2021_ttca_ph7_100C
+  species: MGO
+  t_min: 120
+  value: 0.0269
+  unit: mmol_L
+  sd: 0.00061
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3; Zhai 2023 JAFC Fig. 5
+- pot: zhai2021_ttca_ph8_100C
+  species: MGO
+  t_min: 20
+  value: 0.0302
+  unit: mmol_L
+  sd: 0.0007
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_ph8_100C
+  species: MGO
+  t_min: 40
+  value: 0.0452
+  unit: mmol_L
+  sd: 0.00074
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_ph8_100C
+  species: MGO
+  t_min: 60
+  value: 0.0574
+  unit: mmol_L
+  sd: 0.00196
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_ph8_100C
+  species: MGO
+  t_min: 80
+  value: 0.0499
+  unit: mmol_L
+  sd: 0.0005
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_ph8_100C
+  species: MGO
+  t_min: 100
+  value: 0.0347
+  unit: mmol_L
+  sd: 0.00058
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_ph8_100C
+  species: MGO
+  t_min: 120
+  value: 0.0279
+  unit: mmol_L
+  sd: 0.00071
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: MGO
+  t_min: 20
+  value: 0.0102
+  unit: mmol_L
+  sd: 0.00061
+  read_error: 0.004
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: MGO
+  t_min: 40
+  value: 0.0127
+  unit: mmol_L
+  sd: 0.00056
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: MGO
+  t_min: 60
+  value: 0.0144
+  unit: mmol_L
+  sd: 0.00056
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: MGO
+  t_min: 80
+  value: 0.0199
+  unit: mmol_L
+  sd: 0.00068
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: MGO
+  t_min: 100
+  value: 0.0213
+  unit: mmol_L
+  sd: 0.00011
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: MGO
+  t_min: 120
+  value: 0.0247
+  unit: mmol_L
+  sd: 0.00056
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: MGO
+  t_min: 20
+  value: 0.0169
+  unit: mmol_L
+  sd: 0.00024
+  read_error: 0.003
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: MGO
+  t_min: 40
+  value: 0.0199
+  unit: mmol_L
+  sd: 0.00028
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: MGO
+  t_min: 60
+  value: 0.0214
+  unit: mmol_L
+  sd: 0.00062
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: MGO
+  t_min: 80
+  value: 0.0249
+  unit: mmol_L
+  sd: 0.00087
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: MGO
+  t_min: 100
+  value: 0.0278
+  unit: mmol_L
+  sd: 0.00102
+  read_error: 0.002
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: MGO
+  t_min: 120
+  value: 0.03
+  unit: mmol_L
+  sd: 0.00084
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: MGO
+  t_min: 20
+  value: 0.0198
+  unit: mmol_L
+  sd: 0.00059
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: MGO
+  t_min: 40
+  value: 0.0231
+  unit: mmol_L
+  sd: 0.00093
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: MGO
+  t_min: 60
+  value: 0.02793
+  unit: mmol_L
+  sd: 0.00093
+  read_error: 0.002
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: MGO
+  t_min: 80
+  value: 0.03175
+  unit: mmol_L
+  sd: 0.00061
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: MGO
+  t_min: 100
+  value: 0.0374
+  unit: mmol_L
+  sd: 0.00059
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: MGO
+  t_min: 120
+  value: 0.0425
+  unit: mmol_L
+  sd: 0.00093
+  read_error: 0.001
+  source: Fig. 5
+  also_printed_in: Zhai 2023 Food Chem Figs. 2-3 (TTCA+Xyl-100 C)
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: MGO
+  t_min: 20
+  value: 0.0374
+  unit: mmol_L
+  sd: 0.00232
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: MGO
+  t_min: 40
+  value: 0.05531
+  unit: mmol_L
+  sd: 0.0004
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: MGO
+  t_min: 60
+  value: 0.06382
+  unit: mmol_L
+  sd: 0.00054
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: MGO
+  t_min: 80
+  value: 0.06719
+  unit: mmol_L
+  sd: 0.00059
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: MGO
+  t_min: 100
+  value: 0.05972
+  unit: mmol_L
+  sd: 0.001
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: MGO
+  t_min: 120
+  value: 0.0569
+  unit: mmol_L
+  sd: 0.00029
+  read_error: 0.001
+  source: Fig. 5
+- pot: zhou2024_axarp_ph8_120C_dx
+  species: TDP
+  t_min: 30
+  value: 3.671
+  unit: mmol_L
+  sd: 0.4465
+  read_error: 0.001
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ph8_120C_dx
+  species: TDP
+  t_min: 60
+  value: 4.67
+  unit: mmol_L
+  sd: 0.1346
+  read_error: 0.001
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ph8_120C_dx
+  species: TDP
+  t_min: 90
+  value: 4.961
+  unit: mmol_L
+  read_error: 0.001
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ph8_120C_dx
+  species: TDP
+  t_min: 120
+  value: 5.294
+  unit: mmol_L
+  sd: 0.5102
+  read_error: 0.001
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ala_ph8_120C_dx
+  species: TDP
+  t_min: 30
+  value: 2.573
+  unit: mmol_L
+  sd: 0.2197
+  read_error: 0.002
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ala_ph8_120C_dx
+  species: TDP
+  t_min: 60
+  value: 3.423
+  unit: mmol_L
+  read_error: 0.001
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ala_ph8_120C_dx
+  species: TDP
+  t_min: 90
+  value: 3.6
+  unit: mmol_L
+  read_error: 0.001
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ala_ph8_120C_dx
+  species: TDP
+  t_min: 120
+  value: 3.721
+  unit: mmol_L
+  sd: 0.3897
+  read_error: 0.001
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ph8_120C_dx
+  species: DPO
+  t_min: 30
+  value: 3.054
+  unit: mmol_L
+  sd: 0.3614
+  read_error: 0.002
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ph8_120C_dx
+  species: DPO
+  t_min: 60
+  value: 2.891
+  unit: mmol_L
+  sd: 0.3541
+  read_error: 0.002
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ph8_120C_dx
+  species: DPO
+  t_min: 90
+  value: 2.75
+  unit: mmol_L
+  sd: 0.2055
+  read_error: 0.002
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ph8_120C_dx
+  species: DPO
+  t_min: 120
+  value: 2.14
+  unit: mmol_L
+  sd: 0.4535
+  read_error: 0.002
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ala_ph8_120C_dx
+  species: DPO
+  t_min: 30
+  value: 2.36
+  unit: mmol_L
+  sd: 0.1417
+  read_error: 0.002
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ala_ph8_120C_dx
+  species: DPO
+  t_min: 60
+  value: 2.247
+  unit: mmol_L
+  sd: 0.1276
+  read_error: 0.002
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ala_ph8_120C_dx
+  species: DPO
+  t_min: 90
+  value: 2.098
+  unit: mmol_L
+  read_error: 0.002
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ala_ph8_120C_dx
+  species: DPO
+  t_min: 120
+  value: 1.184
+  unit: mmol_L
+  sd: 0.1558
+  read_error: 0.004
+  source: Fig. 3
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2024_axarp_ph8_120C
+  species: GO
+  t_min: 30
+  value: 1.011
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 3
+- pot: zhou2024_axarp_ph8_120C
+  species: GO
+  t_min: 60
+  value: 2.532
+  unit: mmol_L
+  sd: 0.1416
+  read_error: 0.002
+  source: Fig. 3
+- pot: zhou2024_axarp_ph8_120C
+  species: GO
+  t_min: 90
+  value: 3.897
+  unit: mmol_L
+  sd: 0.1698
+  read_error: 0.001
+  source: Fig. 3
+- pot: zhou2024_axarp_ph8_120C
+  species: GO
+  t_min: 120
+  value: 4.859
+  unit: mmol_L
+  sd: 0.2688
+  read_error: 0.001
+  source: Fig. 3
+- pot: zhou2024_axarp_ala_ph8_120C
+  species: GO
+  t_min: 30
+  value: 1.775
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 3
+- pot: zhou2024_axarp_ala_ph8_120C
+  species: GO
+  t_min: 60
+  value: 1.337
+  unit: mmol_L
+  sd: 0.1696
+  read_error: 0.004
+  source: Fig. 3
+- pot: zhou2024_axarp_ala_ph8_120C
+  species: GO
+  t_min: 90
+  value: 1.365
+  unit: mmol_L
+  sd: 0.3608
+  read_error: 0.003
+  source: Fig. 3
+- pot: zhou2024_axarp_ala_ph8_120C
+  species: GO
+  t_min: 120
+  value: 0.849
+  unit: mmol_L
+  sd: 0.1628
+  read_error: 0.006
+  source: Fig. 3
+- pot: zhou2024_axarp_ph8_120C
+  species: MGO
+  t_min: 30
+  value: 0.469
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 3
+- pot: zhou2024_axarp_ph8_120C
+  species: MGO
+  t_min: 60
+  value: 0.946
+  unit: mmol_L
+  sd: 0.0868
+  read_error: 0.001
+  source: Fig. 3
+- pot: zhou2024_axarp_ph8_120C
+  species: MGO
+  t_min: 90
+  value: 1.088
+  unit: mmol_L
+  sd: 0.1559
+  read_error: 0.001
+  source: Fig. 3
+- pot: zhou2024_axarp_ph8_120C
+  species: MGO
+  t_min: 120
+  value: 1.047
+  unit: mmol_L
+  sd: 0.0691
+  read_error: 0.001
+  source: Fig. 3
+- pot: zhou2024_axarp_ala_ph8_120C
+  species: MGO
+  t_min: 30
+  value: 0.648
+  unit: mmol_L
+  sd: 0.0655
+  read_error: 0.002
+  source: Fig. 3
+- pot: zhou2024_axarp_ala_ph8_120C
+  species: MGO
+  t_min: 60
+  value: 0.712
+  unit: mmol_L
+  sd: 0.0407
+  read_error: 0.002
+  source: Fig. 3
+- pot: zhou2024_axarp_ala_ph8_120C
+  species: MGO
+  t_min: 90
+  value: 0.787
+  unit: mmol_L
+  sd: 0.0407
+  read_error: 0.002
+  source: Fig. 3
+- pot: zhou2024_axarp_ala_ph8_120C
+  species: MGO
+  t_min: 120
+  value: 0.806
+  unit: mmol_L
+  sd: 0.0638
+  read_error: 0.002
+  source: Fig. 3
+- pot: zhou2025b_axarp_ph8_120C_dx
+  species: TDP
+  t_min: 30
+  value: 0.365
+  unit: mmol_L
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C_dx
+  species: TDP
+  t_min: 60
+  value: 0.524
+  unit: mmol_L
+  sd: 0.0172
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C_dx
+  species: TDP
+  t_min: 90
+  value: 0.55
+  unit: mmol_L
+  sd: 0.0159
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C_dx
+  species: TDP
+  t_min: 120
+  value: 0.52
+  unit: mmol_L
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C_dx
+  species: TDP
+  t_min: 30
+  value: 0.422
+  unit: mmol_L
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C_dx
+  species: TDP
+  t_min: 60
+  value: 0.619
+  unit: mmol_L
+  read_error: 0.001
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C_dx
+  species: TDP
+  t_min: 90
+  value: 0.703
+  unit: mmol_L
+  sd: 0.0218
+  read_error: 0.001
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C_dx
+  species: TDP
+  t_min: 120
+  value: 0.683
+  unit: mmol_L
+  sd: 0.0236
+  read_error: 0.001
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C_dx
+  species: DPO
+  t_min: 30
+  value: 0.285
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C_dx
+  species: DPO
+  t_min: 60
+  value: 0.167
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C_dx
+  species: DPO
+  t_min: 90
+  value: 0.123
+  unit: mmol_L
+  read_error: 0.007
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C_dx
+  species: DPO
+  t_min: 120
+  value: 0.087
+  unit: mmol_L
+  read_error: 0.01
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C_dx
+  species: DPO
+  t_min: 30
+  value: 0.313
+  unit: mmol_L
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C_dx
+  species: DPO
+  t_min: 60
+  value: 0.198
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C_dx
+  species: DPO
+  t_min: 90
+  value: 0.15
+  unit: mmol_L
+  read_error: 0.006
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C_dx
+  species: DPO
+  t_min: 120
+  value: 0.122
+  unit: mmol_L
+  read_error: 0.007
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C
+  species: GO
+  t_min: 30
+  value: 0.15
+  unit: mmol_L
+  sd: 0.0211
+  read_error: 0.006
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C
+  species: GO
+  t_min: 60
+  value: 0.192
+  unit: mmol_L
+  sd: 0.0262
+  read_error: 0.005
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C
+  species: GO
+  t_min: 90
+  value: 0.257
+  unit: mmol_L
+  sd: 0.0298
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C
+  species: GO
+  t_min: 120
+  value: 0.314
+  unit: mmol_L
+  sd: 0.019
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: GO
+  t_min: 30
+  value: 0.294
+  unit: mmol_L
+  sd: 0.0254
+  read_error: 0.003
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: GO
+  t_min: 60
+  value: 0.376
+  unit: mmol_L
+  sd: 0.029
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: GO
+  t_min: 90
+  value: 0.482
+  unit: mmol_L
+  sd: 0.0401
+  read_error: 0.002
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: GO
+  t_min: 120
+  value: 0.677
+  unit: mmol_L
+  sd: 0.0519
+  read_error: 0.001
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C
+  species: MGO
+  t_min: 30
+  value: 0.081
+  unit: mmol_L
+  read_error: 0.008
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C
+  species: MGO
+  t_min: 60
+  value: 0.076
+  unit: mmol_L
+  read_error: 0.009
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C
+  species: MGO
+  t_min: 90
+  value: 0.072
+  unit: mmol_L
+  read_error: 0.009
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C
+  species: MGO
+  t_min: 120
+  value: 0.089
+  unit: mmol_L
+  sd: 0.0313
+  read_error: 0.008
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: MGO
+  t_min: 30
+  value: 0.07
+  unit: mmol_L
+  read_error: 0.05
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: MGO
+  t_min: 60
+  value: 0.064
+  unit: mmol_L
+  read_error: 0.054
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: MGO
+  t_min: 90
+  value: 0.066
+  unit: mmol_L
+  read_error: 0.053
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: MGO
+  t_min: 120
+  value: 0.076
+  unit: mmol_L
+  read_error: 0.046
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C
+  species: GO
+  t_min: 30
+  value: 0.064
+  unit: mmol_L
+  read_error: 0.014
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C
+  species: GO
+  t_min: 60
+  value: 0.075
+  unit: mmol_L
+  read_error: 0.012
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C
+  species: GO
+  t_min: 90
+  value: 0.09
+  unit: mmol_L
+  read_error: 0.024
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C
+  species: GO
+  t_min: 120
+  value: 0.111
+  unit: mmol_L
+  read_error: 0.02
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C_dx
+  species: TDP
+  t_min: 30
+  value: 0.044
+  unit: mmol_L
+  read_error: 0.02
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C_dx
+  species: TDP
+  t_min: 60
+  value: 0.049
+  unit: mmol_L
+  read_error: 0.018
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C_dx
+  species: TDP
+  t_min: 90
+  value: 0.08
+  unit: mmol_L
+  read_error: 0.011
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C_dx
+  species: TDP
+  t_min: 120
+  value: 0.088
+  unit: mmol_L
+  read_error: 0.01
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C
+  species: MGO
+  t_min: 30
+  value: 0.019
+  unit: mmol_L
+  read_error: 0.047
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C
+  species: MGO
+  t_min: 60
+  value: 0.021
+  unit: mmol_L
+  read_error: 0.042
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C
+  species: MGO
+  t_min: 90
+  value: 0.03
+  unit: mmol_L
+  read_error: 0.03
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_xyl_ph8_120C
+  species: MGO
+  t_min: 120
+  value: 0.032
+  unit: mmol_L
+  read_error: 0.028
+  source: Fig. 2
+  quant_note: 3,4-hexanedione IS only; semi_quantitative
+- pot: zhou2025b_axarp_ph8_120C
+  species: FUR
+  t_min: 30
+  value: 124.0
+  unit: ug_L
+  read_error: 0.022
+  source: Fig. 1e
+- pot: zhou2025b_axarp_ph8_120C
+  species: FUR
+  t_min: 60
+  value: 675.0
+  unit: ug_L
+  read_error: 0.004
+  source: Fig. 1e
+- pot: zhou2025b_axarp_ph8_120C
+  species: FUR
+  t_min: 90
+  value: 1173.0
+  unit: ug_L
+  read_error: 0.002
+  source: Fig. 1e
+- pot: zhou2025b_axarp_ph8_120C
+  species: FUR
+  t_min: 120
+  value: 1558.0
+  unit: ug_L
+  sd: 79.4
+  read_error: 0.002
+  source: Fig. 1e
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: FUR
+  t_min: 30
+  value: 220.0
+  unit: ug_L
+  read_error: 0.012
+  source: Fig. 1e
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: FUR
+  t_min: 60
+  value: 810.0
+  unit: ug_L
+  read_error: 0.003
+  source: Fig. 1e
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: FUR
+  t_min: 90
+  value: 1403.0
+  unit: ug_L
+  sd: 91.2
+  read_error: 0.002
+  source: Fig. 1e
+- pot: zhou2025b_axarp_xyl_ph8_120C
+  species: FUR
+  t_min: 120
+  value: 2049.0
+  unit: ug_L
+  sd: 127.4
+  read_error: 0.001
+  source: Fig. 1e
+- pot: wang2026b_xyl_cys_ph55_120C
+  species: FUR
+  t_min: 60
+  value: 255.22
+  unit: ug_L
+  sd: 5.35
+  source: SI Table S1
+- pot: wang2026b_xyl_cys_ph55_120C
+  species: FUR
+  t_min: 90
+  value: 391.5
+  unit: ug_L
+  sd: 27.6
+  source: SI Table S1
+- pot: wang2026b_xyl_cys_ph55_120C
+  species: FUR
+  t_min: 120
+  value: 413.05
+  unit: ug_L
+  sd: 6.92
+  source: SI Table S1
+- pot: wang2026b_xyl_cys_ph55_120C
+  species: FUR
+  t_min: 150
+  value: 423.35
+  unit: ug_L
+  sd: 19.61
+  source: SI Table S1
+- pot: desclaux2006_xyl_gly_ph6_100C
+  species: NF
+  t_min: 30
+  value: 366124.1
+  unit: ug_kg
+  read_error: 0.007
+  source: Fig. 2
+  raw_value_umol_per_mmol_sugar: 13.37
+  method: semi_quantitative
+  method_basis: Desclaux 2006 names no calibration, standard or internal standard (ledger class unknown)
+  adjudicated: second reading 3.2088 mmol/kg written as mmol_L; entered on the exact mass basis (ug/kg, MW 114.1) as the first
+    reading, no density assumed
+- pot: desclaux2006_xyl_gly_ph6_100C
+  species: NF
+  t_min: 60
+  value: 545489.3
+  unit: ug_kg
+  read_error: 0.005
+  source: Fig. 2
+  raw_value_umol_per_mmol_sugar: 19.92
+  method: semi_quantitative
+  method_basis: Desclaux 2006 names no calibration, standard or internal standard (ledger class unknown)
+  adjudicated: second reading 4.7808 mmol/kg written as mmol_L; entered on the exact mass basis (ug/kg, MW 114.1) as the first
+    reading, no density assumed
+- pot: desclaux2006_xyl_gly_ph6_100C
+  species: NF
+  t_min: 90
+  value: 701851.9
+  unit: ug_kg
+  read_error: 0.004
+  source: Fig. 2
+  raw_value_umol_per_mmol_sugar: 25.63
+  method: semi_quantitative
+  method_basis: Desclaux 2006 names no calibration, standard or internal standard (ledger class unknown)
+  adjudicated: second reading 6.1512 mmol/kg written as mmol_L; entered on the exact mass basis (ug/kg, MW 114.1) as the first
+    reading, no density assumed
+- pot: desclaux2006_xyl_gly_ph6_100C
+  species: NF
+  t_min: 120
+  value: 748130.9
+  unit: ug_kg
+  read_error: 0.004
+  source: Fig. 2
+  raw_value_umol_per_mmol_sugar: 27.32
+  method: semi_quantitative
+  method_basis: Desclaux 2006 names no calibration, standard or internal standard (ledger class unknown)
+  adjudicated: second reading 6.5568 mmol/kg written as mmol_L; entered on the exact mass basis (ug/kg, MW 114.1) as the first
+    reading, no density assumed
+- pot: desclaux2006_xyl_gly_ph6_100C
+  species: TDP
+  t_min: 30
+  value: 124298.5
+  unit: ug_kg
+  read_error: 0.009
+  source: Fig. 2
+  raw_value_umol_per_mmol_sugar: 3.92
+  method: semi_quantitative
+  method_basis: Desclaux 2006 names no calibration, standard or internal standard (ledger class unknown)
+  adjudicated: second reading 0.9408 mmol/kg written as mmol_L; entered on the exact mass basis (ug/kg, MW 132.12) as the
+    first reading, no density assumed
+- pot: desclaux2006_xyl_gly_ph6_100C
+  species: TDP
+  t_min: 60
+  value: 91321.3
+  unit: ug_kg
+  read_error: 0.012
+  source: Fig. 2
+  raw_value_umol_per_mmol_sugar: 2.88
+  method: semi_quantitative
+  method_basis: Desclaux 2006 names no calibration, standard or internal standard (ledger class unknown)
+  adjudicated: second reading 0.6912 mmol/kg written as mmol_L; entered on the exact mass basis (ug/kg, MW 132.12) as the
+    first reading, no density assumed
+- pot: desclaux2006_xyl_gly_ph6_100C
+  species: TDP
+  t_min: 90
+  value: 53905.0
+  unit: ug_kg
+  read_error: 0.02
+  source: Fig. 2
+  raw_value_umol_per_mmol_sugar: 1.7
+  method: semi_quantitative
+  method_basis: Desclaux 2006 names no calibration, standard or internal standard (ledger class unknown)
+  adjudicated: second reading 0.408 mmol/kg written as mmol_L; entered on the exact mass basis (ug/kg, MW 132.12) as the first
+    reading, no density assumed
+- pot: desclaux2006_xyl_gly_ph6_100C
+  species: TDP
+  t_min: 120
+  value: 39953.1
+  unit: ug_kg
+  read_error: 0.028
+  source: Fig. 2
+  raw_value_umol_per_mmol_sugar: 1.26
+  method: semi_quantitative
+  method_basis: Desclaux 2006 names no calibration, standard or internal standard (ledger class unknown)
+  adjudicated: second reading 0.3024 mmol/kg written as mmol_L; entered on the exact mass basis (ug/kg, MW 132.12) as the
+    first reading, no density assumed
+- pot: zhou2023c_axarp_ph75_120C_dx
+  species: TDP
+  t_min: 30
+  value: 0.638
+  unit: mmol_L
+  read_error: 0.009
+  source: Fig. 4
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2023c_axarp_ph75_120C_dx
+  species: TDP
+  t_min: 60
+  value: 0.915
+  unit: mmol_L
+  read_error: 0.006
+  source: Fig. 4
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2023c_axarp_ph75_120C_dx
+  species: TDP
+  t_min: 90
+  value: 1.062
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 4
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2023c_axarp_ph75_120C_dx
+  species: TDP
+  t_min: 120
+  value: 1.135
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 4
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2023c_axarp_ph75_120C_dx
+  species: DPO
+  t_min: 30
+  value: 0.43
+  unit: mmol_L
+  read_error: 0.007
+  source: Fig. 4
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2023c_axarp_ph75_120C_dx
+  species: DPO
+  t_min: 60
+  value: 0.305
+  unit: mmol_L
+  read_error: 0.01
+  source: Fig. 4
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2023c_axarp_ph75_120C_dx
+  species: DPO
+  t_min: 90
+  value: 0.229
+  unit: mmol_L
+  read_error: 0.013
+  source: Fig. 4
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2023c_axarp_ph75_120C_dx
+  species: DPO
+  t_min: 120
+  value: 0.185
+  unit: mmol_L
+  read_error: 0.016
+  source: Fig. 4
+  quant_note: 'DX: IS method by citation; semi_quantitative'
+- pot: zhou2023c_axarp_ph75_120C
+  species: GO
+  t_min: 30
+  value: 0.699
+  unit: mmol_L
+  read_error: 0.011
+  source: Fig. 4
+- pot: zhou2023c_axarp_ph75_120C
+  species: GO
+  t_min: 60
+  value: 1.066
+  unit: mmol_L
+  read_error: 0.007
+  source: Fig. 4
+- pot: zhou2023c_axarp_ph75_120C
+  species: GO
+  t_min: 90
+  value: 1.311
+  unit: mmol_L
+  read_error: 0.006
+  source: Fig. 4
+- pot: zhou2023c_axarp_ph75_120C
+  species: GO
+  t_min: 120
+  value: 1.402
+  unit: mmol_L
+  read_error: 0.005
+  source: Fig. 4
+- pot: zhou2023c_axarp_ph75_120C
+  species: MGO
+  t_min: 30
+  value: 0.0666
+  unit: mmol_L
+  read_error: 0.011
+  source: Fig. 4
+- pot: zhou2023c_axarp_ph75_120C
+  species: MGO
+  t_min: 60
+  value: 0.0829
+  unit: mmol_L
+  read_error: 0.009
+  source: Fig. 4
+- pot: zhou2023c_axarp_ph75_120C
+  species: MGO
+  t_min: 90
+  value: 0.1009
+  unit: mmol_L
+  read_error: 0.007
+  source: Fig. 4
+- pot: zhou2023c_axarp_ph75_120C
+  species: MGO
+  t_min: 120
+  value: 0.1113
+  unit: mmol_L
+  read_error: 0.007
+  source: Fig. 4
+below_detection:
+- pot: zhai2023jafc_ttca_cys_120C
+  species: TDP
+  t_min: 20
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: TDP
+  t_min: 40
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: TDP
+  t_min: 60
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_140C
+  species: TDP
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: TDP
+  t_min: 20
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: TDP
+  t_min: 40
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: TDP
+  t_min: 160
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: TDP
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_100C
+  species: DPO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_120C
+  species: DPO
+  t_min: 160
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_120C
+  species: DPO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: DPO
+  t_min: 20
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: DPO
+  t_min: 40
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: DPO
+  t_min: 60
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: DPO
+  t_min: 80
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: DPO
+  t_min: 160
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: DPO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_140C
+  species: DPO
+  t_min: 160
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_140C
+  species: DPO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: DPO
+  t_min: 20
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: DPO
+  t_min: 40
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: DPO
+  t_min: 60
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: DPO
+  t_min: 140
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: DPO
+  t_min: 160
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: DPO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: MGO
+  t_min: 20
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: MGO
+  t_min: 40
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: MGO
+  t_min: 60
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_140C
+  species: MGO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: MGO
+  t_min: 20
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: MGO
+  t_min: 40
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: MGO
+  t_min: 60
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: MGO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_100C
+  species: GO
+  t_min: 20
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_100C
+  species: GO
+  t_min: 40
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_100C
+  species: GO
+  t_min: 60
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_100C
+  species: GO
+  t_min: 160
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_100C
+  species: GO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: GO
+  t_min: 20
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: GO
+  t_min: 40
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: GO
+  t_min: 60
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: GO
+  t_min: 140
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: GO
+  t_min: 160
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_120C
+  species: GO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_140C
+  species: GO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: GO
+  t_min: 20
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: GO
+  t_min: 40
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: GO
+  t_min: 60
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: GO
+  t_min: 140
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: GO
+  t_min: 160
+  source: Fig. 5 (plotted at zero)
+- pot: zhai2023jafc_ttca_cys_140C
+  species: GO
+  t_min: 180
+  source: Fig. 5 (plotted at zero)
+- pot: wang2026b_xyl_cys_ph55_120C
+  species: FUR
+  t_min: 0
+  source: SI Table S1 (ND)
+adjudication_excluded:
+- pot: zhai2023jafc_ttca_100C
+  species: GO
+  t_min: 140
+  value: 0.0033
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_100C
+  species: GO
+  t_min: 160
+  value: 0.0026
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_100C
+  species: GO
+  t_min: 180
+  value: 0.0025
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_100C
+  species: GO
+  t_min: 80
+  value: 0.0016
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_100C
+  species: GO
+  t_min: 100
+  value: 0.0014
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_100C
+  species: GO
+  t_min: 120
+  value: 0.0021
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_100C
+  species: GO
+  t_min: 140
+  value: 0.0014
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_120C
+  species: GO
+  t_min: 20
+  value: 0.0029
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_120C
+  species: GO
+  t_min: 40
+  value: 0.0033
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_120C
+  species: GO
+  t_min: 60
+  value: 0.0037
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_120C
+  species: GO
+  t_min: 80
+  value: 0.0042
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_120C
+  species: GO
+  t_min: 100
+  value: 0.0039
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_120C
+  species: GO
+  t_min: 120
+  value: 0.0035
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_120C
+  species: GO
+  t_min: 140
+  value: 0.003
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_120C
+  species: GO
+  t_min: 160
+  value: 0.0023
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_120C
+  species: GO
+  t_min: 180
+  value: 0.0018
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_120C
+  species: GO
+  t_min: 80
+  value: 0.0021
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_120C
+  species: GO
+  t_min: 100
+  value: 0.0027
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_120C
+  species: GO
+  t_min: 120
+  value: 0.0011
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_140C
+  species: GO
+  t_min: 20
+  value: 0.0035
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_140C
+  species: GO
+  t_min: 40
+  value: 0.0052
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_140C
+  species: GO
+  t_min: 60
+  value: 0.0057
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_140C
+  species: GO
+  t_min: 80
+  value: 0.0052
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_140C
+  species: GO
+  t_min: 100
+  value: 0.0051
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_140C
+  species: GO
+  t_min: 120
+  value: 0.005
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_140C
+  species: GO
+  t_min: 140
+  value: 0.0037
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_140C
+  species: GO
+  t_min: 160
+  value: 0.0027
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_140C
+  species: GO
+  t_min: 80
+  value: 0.0028
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_140C
+  species: GO
+  t_min: 100
+  value: 0.0023
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023jafc_ttca_cys_140C
+  species: GO
+  t_min: 120
+  value: 0.0016
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: GO
+  t_min: 20
+  value: 0.0061
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: GO
+  t_min: 40
+  value: 0.0097
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: GO
+  t_min: 60
+  value: 0.0094
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: GO
+  t_min: 80
+  value: 0.007
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: GO
+  t_min: 100
+  value: 0.0047
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_140C_mgo_go
+  species: GO
+  t_min: 120
+  value: 0.004
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: GO
+  t_min: 20
+  value: 0.0052
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: GO
+  t_min: 40
+  value: 0.007
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: GO
+  t_min: 60
+  value: 0.0083
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: GO
+  t_min: 80
+  value: 0.0081
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: GO
+  t_min: 100
+  value: 0.0079
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2023fc_ttca_xyl_120C_mgo_go
+  species: GO
+  t_min: 120
+  value: 0.0074
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph55_100C
+  species: GO
+  t_min: 20
+  value: 0.00249
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph55_100C
+  species: GO
+  t_min: 40
+  value: 0.00306
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph55_100C
+  species: GO
+  t_min: 60
+  value: 0.00348
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph55_100C
+  species: GO
+  t_min: 80
+  value: 0.00378
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph55_100C
+  species: GO
+  t_min: 100
+  value: 0.00408
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph55_100C
+  species: GO
+  t_min: 120
+  value: 0.00413
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph6_100C
+  species: GO
+  t_min: 20
+  value: 0.00239
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph6_100C
+  species: GO
+  t_min: 40
+  value: 0.00278
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph6_100C
+  species: GO
+  t_min: 60
+  value: 0.00294
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph6_100C
+  species: GO
+  t_min: 80
+  value: 0.00319
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph6_100C
+  species: GO
+  t_min: 100
+  value: 0.00358
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph6_100C
+  species: GO
+  t_min: 120
+  value: 0.00382
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph7_100C
+  species: GO
+  t_min: 20
+  value: 0.0011
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph7_100C
+  species: GO
+  t_min: 40
+  value: 0.0019
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph7_100C
+  species: GO
+  t_min: 60
+  value: 0.00218
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph7_100C
+  species: GO
+  t_min: 80
+  value: 0.00234
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph7_100C
+  species: GO
+  t_min: 100
+  value: 0.00289
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph7_100C
+  species: GO
+  t_min: 120
+  value: 0.00309
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph8_100C
+  species: GO
+  t_min: 20
+  value: 0.0019
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph8_100C
+  species: GO
+  t_min: 40
+  value: 0.00215
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph8_100C
+  species: GO
+  t_min: 60
+  value: 0.00257
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph8_100C
+  species: GO
+  t_min: 80
+  value: 0.00289
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph8_100C
+  species: GO
+  t_min: 100
+  value: 0.00347
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_ph8_100C
+  species: GO
+  t_min: 120
+  value: 0.00363
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: GO
+  t_min: 20
+  value: 0.00263
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: GO
+  t_min: 40
+  value: 0.00326
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: GO
+  t_min: 60
+  value: 0.00389
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: GO
+  t_min: 80
+  value: 0.00418
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: GO
+  t_min: 100
+  value: 0.00437
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph55_100C
+  species: GO
+  t_min: 120
+  value: 0.00479
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: GO
+  t_min: 20
+  value: 0.00249
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: GO
+  t_min: 40
+  value: 0.00284
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: GO
+  t_min: 60
+  value: 0.00327
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: GO
+  t_min: 80
+  value: 0.00368
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: GO
+  t_min: 100
+  value: 0.00389
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph6_100C
+  species: GO
+  t_min: 120
+  value: 0.00413
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: GO
+  t_min: 20
+  value: 0.00194
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: GO
+  t_min: 40
+  value: 0.00233
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: GO
+  t_min: 60
+  value: 0.00281
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: GO
+  t_min: 80
+  value: 0.00298
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: GO
+  t_min: 100
+  value: 0.00287
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph7_100C
+  species: GO
+  t_min: 120
+  value: 0.00273
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: GO
+  t_min: 20
+  value: 0.00224
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: GO
+  t_min: 40
+  value: 0.0027
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: GO
+  t_min: 60
+  value: 0.00315
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: GO
+  t_min: 80
+  value: 0.00312
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: GO
+  t_min: 100
+  value: 0.00298
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'
+- pot: zhai2021_ttca_xyl_ph8_100C
+  species: GO
+  t_min: 120
+  value: 0.00253
+  unit: mmol_L
+  reason: 'left out (adjudication, CF-061): every GO mean of this Jiangnan series (<= 9.7 umol/L) lies below the GO LOQ Zhai
+    2021 prints for this method (LOD 1.118 mg/L, LOQ 2.691 mg/L = 19 / 46 umol/L as GO, 8.6 / 21 umol/L as GO-quinoxaline),
+    most below the LOD'

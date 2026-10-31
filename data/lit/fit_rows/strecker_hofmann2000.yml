@@ -1,0 +1,709 @@
+# KEYED FIT TABLE -- Strecker degradation: Hofmann, Munch & Schieberle 2000 (J Agric Food Chem 48:434-440, DFA Garching;
+# doi 10.1021/jf990954c, printed on p. 434 and as the page-440 footer 'JF990954C'):
+# phenylacetaldehyde (PHEAL) and phenylacetic acid (PHEAC) from L-phenylalanine with methylglyoxal (time course, Table 3),
+# with four alpha-dicarbonyls under argon / air / air + Cu (Table 4), across pH 3-9 (Figs. 4-5); Strecker aldehydes and
+# acids from glucose + Phe / Ala / Leu (Table 2); and the four dicarbonyls in the glucose + Phe pot (Fig. 3).
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS). Laboratory and
+# quantification class from the ledger entries (data/lit/measurement_ledger/trunk.yml, hofmann2000_*).
+# FIRST READER (agent-hofmann2000-reader1-2026-10-31), read from data/articles/hofmann2000.pdf (text layer +
+# 300 dpi page renders; figures from the embedded 300 ppi 1-bit rasters). The dossier hofmann2000_extraction.md was a
+# map only. Verification: data/lit/source_verification/strecker_hofmann2000.yml.
+#
+# NEW SPECIES KEYS (not in the engine; every pot is engine_species_missing, so these are verified data for later, NOT
+# fit rows today; fit_rows.load refuses them by species): PHE L-phenylalanine, LEU L-leucine, ALA L-alanine, PHEAL
+# phenylacetaldehyde, PHEAC phenylacetic acid, MEBUAL3 3-methylbutanal, ACAL acetaldehyde, MEBUAC3 3-methylbutanoic acid
+# (coined here: the brief named no key). Engine keys used: Glc, MGO, GO, TDG (3-deoxy-2-hexosulose), G (2-hexosulose =
+# glucosone), AA (acetic acid). NB deoxyosone_hofmann1999.yml writes L-alanine as 'Ala'; this table uses ALA as briefed.
+#
+# UNITS. The paper prints umol per mmol of the charged reactant (Tables 2, 4; Fig. 3 per mmol glucose; Figs. 4-5 per
+# mmol phenylalanine) or umol in the pot (Table 3). Every pot charges 1.0 mmol + 1.0 mmol in 10 mL, so 1 umol/mmol =
+# 1 umol per pot = 0.1 mmol/L, and value / reactant0 (100 mmol/L) is the printed ratio exactly. The solutes' volume
+# (<= 2.5 %) is ignored. Text check: the paper itself writes 0.42 umol/mmol as '0.042 mol %'. Phenylalanine (Table 3)
+# is printed as % degraded; the row is the residual, 100 x (1 - % / 100) mmol/L.
+# ERRORS. No SD, no n, no error bars anywhere in the paper. Printed numbers carry half the last printed digit (dex);
+# digitised points a read error (dex): bounding-box centre of the marker, axes fitted on the tick marks found in the
+# pixels, +-1 px per marker (more where markers overlap; +-2 px for triangles, bbox vs centroid), tick-fit residual in
+# quadrature. Read error is transcription only: it is not the replicate scatter, which the paper never gives.
+# LEFT OUT: Fig. 3 glucosone at 300 / 500 min (ring centred on the x-axis: zero). [The first reading also left out
+# glucosone at 10 / 240 min and Fig. 5 glucosone pH 3, glucose pH 3 and pH 5; the adjudicator restored all five, see
+# ADJUDICATION (3)-(4).] Table 1 (FD factors), Table 5 (13C2-label experiment;
+# PAA 40.1 ug/mmol = 0.295 umol/mmol, a cross-check of Table 2's 0.29, quantified against furan-2-carboxylic acid) and
+# Fig. 2 (PA / PAA in the glucose + Phe pot) are outside the brief and not keyed (Fig. 2 is digitisable: 6 times x 2).
+# CONTRADICTIONS (kept as printed, flagged on the rows): buffer molarity 0.5 mmol/L (Experimental, twice) vs 0.5 mol/L
+# (Tables 1-3, 5) vs 0.1 mol/L (Table 4); 'heated at 98 C' vs 'refluxed'; Table 4 'refluxed ... in a closed vial';
+# glucosone maximum 0.009 mol % in the text vs 0.059 mol % in Fig. 3; 'MGO 3x glyoxal at 500 min' vs 5.1x in Fig. 3.
+# DUPLICATES: text ratios (2x, 7x, 3:1, 1:5, 'nearly 4') are read off the tables / figures: kept as text_check on the
+# rows, counted once. Figs. 4-5 at pH 7 vs Table 4 model B: PA agrees to 1-2 %, PAA 4-46 % higher in the figure:
+# possibly one experiment, adjudicator to decide. Table 3's Phe-degraded column is near-identical to hofmann2000b
+# Table 3 (a glucose + Phe pot): flagged in the ledger.
+#
+# TWO READERS (2026-10-31): first agent-hofmann2000-reader1-2026-10-31 (this file), second
+# agent-hofmann2000-reader2-2026-10-31 (fit_rows/second/strecker_hofmann2000.yml, kept as written); compared by
+# scripts/reconcile_source_readings.py (results/validation/source_reading_reconciliation_strecker_hofmann2000.md).
+# Before adjudication: Tables 2, 3, 4 agree on every pot and row; Fig. 3 and Figs. 4-5 agree on every value both keyed
+# and differ only in five near-axis markers the first reader left out (and the second reader's Figs. 4-5 conditions
+# verdict 'unstated'). 106 rows (first) vs 111 (second).
+# ADJUDICATION (agent-hofmann2000-adjudicator-2026-10-31, against hofmann2000.pdf: text layer, and the page-437
+# rasters re-dumped pixel by pixel). Each ruling also sits in the `adjudication` field of its verification entry.
+#  (1) BUFFER. Experimental prints '0.5 mmol/L' twice (p. 435, both model-reaction paragraphs); the footnotes of
+#      Tables 1, 2, 3, 5 print '0.5 mol/L' and Table 4's '0.1 mol/L'. 0.5 mmol/L phosphate (~0.3 mmol/L per pH unit of
+#      capacity) cannot hold pH 7 against 100 mmol/L amino acid + 100 mmol/L dicarbonyl and their acids: a misprint.
+#      Each pot takes its own footnote (0.5 mol/L; Table 4 0.1 mol/L; Fig. 3 the glucose / Phe footnotes' 0.5 mol/L).
+#      Table 4's 0.1 is not overruled (the paper gives no reason to); alternative 0.5 mol/L. Evidence it hardly
+#      matters at 60 min: Table 3 (0.5 mol/L, air) 10.6 / 20.6 umol vs Table 4 expt 1 model B (0.1 mol/L) 10.2 / 20.4.
+#  (2) TEMPERATURE. '98 C' (p. 435 Methods twice, p. 436 text, Table 3 footnote) vs 'refluxed' (Tables 1, 2, 4, 5
+#      footnotes; p. 439 'at reflux') vs abstract '100 C'. Not a real conflict: at Garching (~480 m, ~957 hPa standard
+#      atmosphere) water boils at 98.4 C (Antoine), the 0.5 mol/L phosphate + 0.2 mol/L solutes add ~0.6 K, so reflux
+#      is ~99 C. 98 C kept; alternative 99 C (~ +9 % on a rate with Ea 100 kJ/mol). Table 4's 'refluxed ... in a
+#      closed vial' is read as the Methods' 'heated at 98 C in closed vials' (a closed vial cannot reflux).
+#  (3) FIG. 3 GLUCOSONE AT 10 AND 240 MIN (second reader only): restored. The 240-min ring spans raster rows 554-564,
+#      centre 559.0, 3.5 px above the 300-min ring (rows 557-568, centred on the axis, row 562): 0.09 umol/mmol. The
+#      10-min ring is hidden under the MGO disc except its bottom arc, which ends on row 564 like the 240-min ring:
+#      same height. Values and read errors as the second reader (0.29 / 0.44 dex: near-zero, they weigh little).
+#  (4) FIG. 5 NEAR-AXIS PAA (second reader only): restored. pH 5 glucose: triangle apex row 501, base 511, axis 509
+#      (15.64 px per unit): centre 506 = 0.19 umol/mmol. pH 3: one blob (rows 501-512); its top is a disc's (6 px
+#      wide at row 501) and its bottom widens to 11 px on rows 511-512, a triangle base 1 px below pH 5's: glucosone
+#      0.22, glucose 0.13 umol/mmol, assignment uncertain (+-0.15 umol/mmol covers a swap; 0.30 / 0.50 dex).
+#      Precedent: ph_acid_submodel (near-zero points one reader kept are included with their read error).
+#  (5) FIGS. 4-5 CONDITIONS. The paper prints none (p. 438 'glucose and each dicarbonyl were individually reacted in
+#      the presence of L-phenylalanine at different pH values'; captions give pH only). Kept as DECLARED assumptions,
+#      both readers alike: 98 C, 1 + 1 mmol in 10 mL, 60 min, air. Air is not a guess: at pH 7 MGO PAA reads 21.2 vs
+#      Table 4 model B (air) 20.4 and model A (argon) 4.7. 60 min: pH 7 MGO PA 10.4 / PAA 21.2 sit between Table 3's
+#      30 min (9.5 / 17.2) and 120 min (12.3 / 23.1), nearest 60 min (10.6 / 20.6); alternative 30-120 min. Buffer and
+#      how pH 3 / 5 / 9 were set: unknown (phosphate barely buffers at pH 5). The mmol/L scale rests on the declared
+#      1 mmol Phe / 10 mL. The pH 7 points are NOT a replot of Table 4 model B (3-DG PAA 4.8 vs 3.3, glucosone 2.6 vs
+#      2.1): kept as a separate run; if a fit treats them as replicates of one experiment, count one of the two.
+#  (6) TABLE 3 CLASS. The ledger entry is 'other' (the first reader's change from sida, confirmed): PA / PAA rows are
+#      SIDA (p. 435), but the paper never says how phenylalanine was measured (the second reader: 'unknown, not
+#      SIDA'). PHE rows: method semi_quantitative (precedent: davidek2006a formic acid, no calibration described),
+#      not calibrated as first keyed; the companion hofmann2000b used an amino-acid analyser (ninhydrin), which this
+#      paper does not claim. Owner may upgrade only with evidence. The Phe-degraded column (9 / 18 / 36 / 49 / 61 % at
+#      10 / 30 / 60 / 120 / 300 min) matches hofmann2000b Table 3's glucose + Phe pot (8.0 / 17.5 / 36.0 / 49.0 / 60.2 %)
+#      to <= 1 point at all five shared times: probable reuse of one series under two different pots (ledger flag
+#      phe_loss_series_coincides_with_hofmann2000b); the PHE rows carry duplicate_candidate and must not be fitted as
+#      independent of hofmann2000b.
+#  (7) TEXT vs FIGURE. Glucosone 'maximum of concentration of 0.009 mol %' (p. 436) vs Fig. 3's 0.59 umol/mmol =
+#      0.059 mol % at 60 min: the figure is kept (its marker sits on a smooth curve consistent with the other three
+#      series); the text value equals the figure's 10 / 240-min markers, not its maximum. 'More 2-oxopropanal ... by a
+#      factor of 3 than, for example, glyoxal' (p. 437) vs Fig. 3 at 500 min MGO / GO 10.95 / 2.16 = 5.1 (MGO / 3-DG
+#      2.75): the figure is kept; the text's 'for example' fits 3-DG, not glyoxal. Neither text number is a row.
+#  (8) SPECIES KEYS. MEBUAC3 (3-methylbutanoic acid) was coined by both readers independently; kept as a provisional
+#      key with PHE, PHEAL, PHEAC, ACAL, MEBUAL3, ALA, LEU. None is an engine species: fit_rows.load refuses this table
+#      by species (src/ and data/keys/ untouched). Verified literature data, NOT fit rows today.
+status: ready   # two readers + adjudication (2026-10-31); every pot is engine_species_missing: fit_rows.load refuses the species (literature only)
+pots:
+  hofmann2000_t3_mgo_phe_98c_closed:
+    {ledger_id: hofmann2000_table3_mgo_phe_timecourse,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     minutes: 500,
+     initial_mmol_L: {MGO: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL for MGO + Phe, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.5 mol/L pH 7.0 (Table 3 footnote; Experimental prints 0.5 mmol/L), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated (pH of the buffer as prepared; never re-measured)",
+     atmosphere: "not controlled: air in a closed vial (text p. 437: oxygen, the concentration of which was not controlled in the experiments displayed in Table 3)",
+     vessel: "closed vial, size and headspace not stated; one vial per time implied, not stated",
+     source_table: "Table 3 (PA and PAA in umol in the 10 mL pot; phenylalanine degraded in %)",
+     condition_quote: "2-Oxopropanal (1 mmol) and L-phenylalanine (1 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), were heated (98 C) in a closed vial."}
+  hofmann2000_t4_mgo_phe_60min_argon:
+    {ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C in closed vials; the footnote says refluxed ... in a closed vial (contradictory; 98 C taken)",
+     minutes: 60,
+     initial_mmol_L: {MGO: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.1 mol/L pH 7.0 (Table 4 footnote; 0.5 mol/L in every other footnote), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "model A, oxygen absent: argon bubbled through the solution for at least 20 min before heating (Methods); closed vial",
+     source_table: "Table 4, experiment 1 (2-oxopropanal)",
+     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."}
+  hofmann2000_t4_mgo_phe_60min_air:
+    {ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C in closed vials; the footnote says refluxed ... in a closed vial (contradictory; 98 C taken)",
+     minutes: 60,
+     initial_mmol_L: {MGO: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.1 mol/L pH 7.0 (Table 4 footnote; 0.5 mol/L in every other footnote), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "model B, oxygen present (text p. 437: air oxygen); closed vial",
+     source_table: "Table 4, experiment 1 (2-oxopropanal)",
+     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."}
+  hofmann2000_t4_mgo_phe_60min_air_cu:
+    {ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C in closed vials; the footnote says refluxed ... in a closed vial (contradictory; 98 C taken)",
+     minutes: 60,
+     initial_mmol_L: {MGO: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.1 mol/L pH 7.0 (Table 4 footnote; 0.5 mol/L in every other footnote), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "model B (air) + CuSO4 0.05 mmol (5 mmol/L; no engine species or term)",
+     source_table: "Table 4, experiment 2 (2-oxopropanal)",
+     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."}
+  hofmann2000_t4_go_phe_60min_argon:
+    {ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C in closed vials; the footnote says refluxed ... in a closed vial (contradictory; 98 C taken)",
+     minutes: 60,
+     initial_mmol_L: {GO: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.1 mol/L pH 7.0 (Table 4 footnote; 0.5 mol/L in every other footnote), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "model A, oxygen absent: argon bubbled through the solution for at least 20 min before heating (Methods); closed vial",
+     source_table: "Table 4, experiment 3 (glyoxal)",
+     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."}
+  hofmann2000_t4_go_phe_60min_air:
+    {ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C in closed vials; the footnote says refluxed ... in a closed vial (contradictory; 98 C taken)",
+     minutes: 60,
+     initial_mmol_L: {GO: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.1 mol/L pH 7.0 (Table 4 footnote; 0.5 mol/L in every other footnote), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "model B, oxygen present (text p. 437: air oxygen); closed vial",
+     source_table: "Table 4, experiment 3 (glyoxal)",
+     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."}
+  hofmann2000_t4_tdg_phe_60min_argon:
+    {ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C in closed vials; the footnote says refluxed ... in a closed vial (contradictory; 98 C taken)",
+     minutes: 60,
+     initial_mmol_L: {TDG: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.1 mol/L pH 7.0 (Table 4 footnote; 0.5 mol/L in every other footnote), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "model A, oxygen absent: argon bubbled through the solution for at least 20 min before heating (Methods); closed vial",
+     source_table: "Table 4, experiment 4 (3-deoxy-2-hexosulose)",
+     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."}
+  hofmann2000_t4_tdg_phe_60min_air:
+    {ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C in closed vials; the footnote says refluxed ... in a closed vial (contradictory; 98 C taken)",
+     minutes: 60,
+     initial_mmol_L: {TDG: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.1 mol/L pH 7.0 (Table 4 footnote; 0.5 mol/L in every other footnote), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "model B, oxygen present (text p. 437: air oxygen); closed vial",
+     source_table: "Table 4, experiment 4 (3-deoxy-2-hexosulose)",
+     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."}
+  hofmann2000_t4_g_phe_60min_argon:
+    {ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C in closed vials; the footnote says refluxed ... in a closed vial (contradictory; 98 C taken)",
+     minutes: 60,
+     initial_mmol_L: {G: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.1 mol/L pH 7.0 (Table 4 footnote; 0.5 mol/L in every other footnote), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "model A, oxygen absent: argon bubbled through the solution for at least 20 min before heating (Methods); closed vial",
+     source_table: "Table 4, experiment 5 (2-hexosulose (glucosone))",
+     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."}
+  hofmann2000_t4_g_phe_60min_air:
+    {ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C in closed vials; the footnote says refluxed ... in a closed vial (contradictory; 98 C taken)",
+     minutes: 60,
+     initial_mmol_L: {G: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.1 mol/L pH 7.0 (Table 4 footnote; 0.5 mol/L in every other footnote), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "model B, oxygen present (text p. 437: air oxygen); closed vial",
+     source_table: "Table 4, experiment 5 (2-hexosulose (glucosone))",
+     condition_quote: "A solution of the alpha-dicarbonyl (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.1 mol/L, pH 7.0) was refluxed for 60 min in a closed vial. b Oxygen was absent. c Oxygen was present. d The reaction was performed in the presence of oxygen and copper ions (0.05 mmol)."}
+  hofmann2000_t2_glc_phe_reflux_30min:
+    {ledger_id: hofmann2000_table2_glucose_amino_acids,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "footnote: refluxed; Methods (glucose/Phe): heated at 98 C. Reflux of 0.5 M phosphate at ~480 m a.s.l. is ~99-101 C; 98 C as printed",
+     minutes: 30,
+     initial_mmol_L: {Glc: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.5 mol/L pH 7.0 (footnote; Experimental prints 0.5 mmol/L), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not controlled (reflux, air)",
+     source_table: "Table 2 (umol/mmol amino acid = umol/mmol glucose: equimolar)",
+     condition_quote: "A solution of glucose (1.0 mmol) and the respective amino acid (1.0 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), was refluxed for 30 min."}
+  hofmann2000_t2_glc_ala_reflux_30min:
+    {ledger_id: hofmann2000_table2_glucose_amino_acids,
+     engine_species_missing: [ALA, ACAL],
+     t_c: 98,
+     t_c_basis: "footnote: refluxed; Methods (glucose/Phe): heated at 98 C. Reflux of 0.5 M phosphate at ~480 m a.s.l. is ~99-101 C; 98 C as printed",
+     minutes: 30,
+     initial_mmol_L: {Glc: 100.0, ALA: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.5 mol/L pH 7.0 (footnote; Experimental prints 0.5 mmol/L), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not controlled (reflux, air)",
+     source_table: "Table 2 (umol/mmol amino acid = umol/mmol glucose: equimolar)",
+     condition_quote: "A solution of glucose (1.0 mmol) and the respective amino acid (1.0 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), was refluxed for 30 min."}
+  hofmann2000_t2_glc_leu_reflux_30min:
+    {ledger_id: hofmann2000_table2_glucose_amino_acids,
+     engine_species_missing: [LEU, MEBUAL3, MEBUAC3],
+     t_c: 98,
+     t_c_basis: "footnote: refluxed; Methods (glucose/Phe): heated at 98 C. Reflux of 0.5 M phosphate at ~480 m a.s.l. is ~99-101 C; 98 C as printed",
+     minutes: 30,
+     initial_mmol_L: {Glc: 100.0, LEU: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate 0.5 mol/L pH 7.0 (footnote; Experimental prints 0.5 mmol/L), counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not controlled (reflux, air)",
+     source_table: "Table 2 (umol/mmol amino acid = umol/mmol glucose: equimolar)",
+     condition_quote: "A solution of glucose (1.0 mmol) and the respective amino acid (1.0 mmol), dissolved in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0), was refluxed for 30 min."}
+  hofmann2000_fig3_glc_phe_98c:
+    {ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe,
+     engine_species_missing: [PHE],
+     t_c: 98,
+     t_c_basis: "Methods: heated at 98 C (the glucose/Phe footnotes say refluxed); the Fig. 3 run itself has no stated conditions beyond the glucose/L-phenylalanine mixture",
+     minutes: 500,
+     initial_mmol_L: {Glc: 100.0, PHE: 100.0},
+     concentration_basis: "1.0 mmol each dissolved in 10 mL (the solutes' volume, ~0.25 mL for glucose + Phe, ignored: <= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     buffer: "phosphate pH 7.0, 0.5 mol/L per the glucose/Phe table footnotes (Experimental prints 0.5 mmol/L); pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not controlled",
+     vessel: "not stated for Fig. 3; aliquots (1 mL for GO / MGO, 2-5 mL for 3-DG / glucosone) withdrawn and cooled rapidly, so one vessel per time or one sampled pot is not stated",
+     workup: "no trapping agent in the pot: 1,2-diaminobenzene added after cooling (3 h, 30 C)",
+     source_figure: "Fig. 3: 3-deoxy-2-hexosulose (filled squares), 2-hexosulose (open circles), glyoxal (+), 2-oxopropanal (filled circles); y amount (umol/mmol glucose)",
+     condition_quote: "A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.5 mmol/L, pH 7.0) was heated at 98 C for 30 min. ... Therefore, in a first experiment, the time course of the formation of four alpha-dicarbonyls was monitored in the glucose/L-phenylalanine mixture."}
+  hofmann2000_ph_glc_phe_ph3:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {Glc: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 3.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glucose (filled triangles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_glc_phe_ph5:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {Glc: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 5.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glucose (filled triangles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_glc_phe_ph7:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {Glc: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glucose (filled triangles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_glc_phe_ph9:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {Glc: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 9.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glucose (filled triangles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_mgo_phe_ph3:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {MGO: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 3.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), 2-oxopropanal (filled squares)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_mgo_phe_ph5:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {MGO: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 5.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), 2-oxopropanal (filled squares)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_mgo_phe_ph7:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {MGO: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), 2-oxopropanal (filled squares)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_mgo_phe_ph9:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {MGO: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 9.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), 2-oxopropanal (filled squares)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_go_phe_ph3:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {GO: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 3.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glyoxal (open circles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_go_phe_ph5:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {GO: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 5.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glyoxal (open circles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_go_phe_ph7:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {GO: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glyoxal (open circles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_go_phe_ph9:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {GO: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 9.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glyoxal (open circles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_tdg_phe_ph3:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {TDG: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 3.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), 3-deoxyosone (+)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_tdg_phe_ph5:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {TDG: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 5.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), 3-deoxyosone (+)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_tdg_phe_ph7:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {TDG: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), 3-deoxyosone (+)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_tdg_phe_ph9:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {TDG: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 9.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), 3-deoxyosone (+)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_g_phe_ph3:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {G: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 3.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glucosone (filled circles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_g_phe_ph5:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {G: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 5.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glucosone (filled circles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_g_phe_ph7:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {G: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glucosone (filled circles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+  hofmann2000_ph_g_phe_ph9:
+    {ledger_id: hofmann2000_fig4_5_ph_series,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 98,
+     t_c_basis: "not stated for the pH series; 98 C as every other pot of the paper",
+     minutes: 60,
+     minutes_basis: "NOT STATED: declared 60 min because the pH 7 points match Table 4 model B (60 min, air) to 1-2 % for PA",
+     initial_mmol_L: {G: 100.0, PHE: 100.0},
+     concentration_basis: "NOT STATED for the pH series: 1.0 mmol + 1.0 mmol in 10 mL assumed as every other pot (Fig. 4-5 y axis per mmol phenylalanine)",
+     buffer: "NOT STATED (buffer, molarity, how pH 3 / 5 / 9 were set); pH not held",
+     label_ph: 9.0,
+     ph_measured_at: "not stated",
+     atmosphere: "not stated (air by the pH 7 match with Table 4 model B)",
+     source_figure: "Fig. 4 (PA) and Fig. 5 (PAA), glucosone (filled circles)",
+     condition_quote: "To gain insights into further factors governing the formation of phenylacetaldehyde and phenylacetic acid in Strecker-type reactions, glucose and each dicarbonyl were individually reacted in the presence of L-phenylalanine at different pH values."}
+rows:
+  # ---- Table 3: MGO + Phe, 98 C closed vial, air not controlled (umol in the 10 mL pot -> x 0.1 mmol/L) ----
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAL, t_min: 10, value: 0.62, unit: mmol_L, printed: 'Table 3: PA 6.2 umol', read_error: 0.0035, method: sida, method_basis: 'SIDA, [13C2]phenylacetaldehyde (Methods)', read_error_basis: 'half the last printed digit (0.05 umol = 0.005 mmol/L), in dex; no SD, no n printed'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAL, t_min: 30, value: 0.95, unit: mmol_L, printed: 'Table 3: PA 9.5 umol', read_error: 0.0023, method: sida, method_basis: 'SIDA, [13C2]phenylacetaldehyde (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAL, t_min: 60, value: 1.06, unit: mmol_L, printed: 'Table 3: PA 10.6 umol', read_error: 0.002, method: sida, method_basis: 'SIDA, [13C2]phenylacetaldehyde (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAL, t_min: 120, value: 1.23, unit: mmol_L, printed: 'Table 3: PA 12.3 umol', read_error: 0.0018, method: sida, method_basis: 'SIDA, [13C2]phenylacetaldehyde (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAL, t_min: 240, value: 1.35, unit: mmol_L, printed: 'Table 3: PA 13.5 umol', read_error: 0.0016, method: sida, method_basis: 'SIDA, [13C2]phenylacetaldehyde (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAL, t_min: 300, value: 1.33, unit: mmol_L, printed: 'Table 3: PA 13.3 umol', read_error: 0.0016, method: sida, method_basis: 'SIDA, [13C2]phenylacetaldehyde (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAL, t_min: 500, value: 1.22, unit: mmol_L, printed: 'Table 3: PA 12.2 umol', read_error: 0.0018, method: sida, method_basis: 'SIDA, [13C2]phenylacetaldehyde (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAC, t_min: 10, value: 1.01, unit: mmol_L, printed: 'Table 3: PAA 10.1 umol', read_error: 0.0021, method: sida, method_basis: 'SIDA, [13C2]phenylacetic acid (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAC, t_min: 30, value: 1.72, unit: mmol_L, printed: 'Table 3: PAA 17.2 umol', read_error: 0.0013, method: sida, method_basis: 'SIDA, [13C2]phenylacetic acid (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAC, t_min: 60, value: 2.06, unit: mmol_L, printed: 'Table 3: PAA 20.6 umol', read_error: 0.0011, method: sida, method_basis: 'SIDA, [13C2]phenylacetic acid (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAC, t_min: 120, value: 2.31, unit: mmol_L, printed: 'Table 3: PAA 23.1 umol', read_error: 0.0009, method: sida, method_basis: 'SIDA, [13C2]phenylacetic acid (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAC, t_min: 240, value: 2.48, unit: mmol_L, printed: 'Table 3: PAA 24.8 umol', read_error: 0.0009, method: sida, method_basis: 'SIDA, [13C2]phenylacetic acid (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAC, t_min: 300, value: 2.58, unit: mmol_L, printed: 'Table 3: PAA 25.8 umol', read_error: 0.0008, method: sida, method_basis: 'SIDA, [13C2]phenylacetic acid (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHEAC, t_min: 500, value: 2.76, unit: mmol_L, printed: 'Table 3: PAA 27.6 umol', read_error: 0.0008, method: sida, method_basis: 'SIDA, [13C2]phenylacetic acid (Methods)'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHE, t_min: 10, value: 91.0, unit: mmol_L, printed: 'Table 3: phenylalanine degraded 9 %', read_error: 0.0024, method: semi_quantitative, method_basis: 'NOT STATED: the paper prints % of the charged 1 mmol degraded and never describes the Phe assay (the companion hofmann2000b uses an amino-acid analyser); value = residual Phe = 100 x (1 - degraded/100) mmol/L, a ratio to the charge, so its scale is fixed. ADJUDICATED (2026-10-31): semi_quantitative, not calibrated: no assay or calibration is described (precedent davidek2006a formic acid)', read_error_basis: 'half the last printed digit (0.5 % = 0.5 mmol/L) on the residual', duplicate_candidate: 'hofmann2000b Table 3 (glucose + Phe, amino-acid analyser): Phe degraded 8.0 / 17.5 / 36.0 / 49.0 / 60.2 % at 10 / 30 / 60 / 120 / 300 min, within 1 point of this column; probable reuse of one series, not independent'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHE, t_min: 30, value: 82.0, unit: mmol_L, printed: 'Table 3: phenylalanine degraded 18 %', read_error: 0.0026, method: semi_quantitative, method_basis: 'Phe assay not stated (see the 10-min PHE row)', duplicate_candidate: 'hofmann2000b Table 3 (glucose + Phe, amino-acid analyser): Phe degraded 8.0 / 17.5 / 36.0 / 49.0 / 60.2 % at 10 / 30 / 60 / 120 / 300 min, within 1 point of this column; probable reuse of one series, not independent'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHE, t_min: 60, value: 64.0, unit: mmol_L, printed: 'Table 3: phenylalanine degraded 36 %', read_error: 0.0034, method: semi_quantitative, method_basis: 'Phe assay not stated (see the 10-min PHE row)', duplicate_candidate: 'hofmann2000b Table 3 (glucose + Phe, amino-acid analyser): Phe degraded 8.0 / 17.5 / 36.0 / 49.0 / 60.2 % at 10 / 30 / 60 / 120 / 300 min, within 1 point of this column; probable reuse of one series, not independent'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHE, t_min: 120, value: 51.0, unit: mmol_L, printed: 'Table 3: phenylalanine degraded 49 %', read_error: 0.0043, method: semi_quantitative, method_basis: 'Phe assay not stated (see the 10-min PHE row)', duplicate_candidate: 'hofmann2000b Table 3 (glucose + Phe, amino-acid analyser): Phe degraded 8.0 / 17.5 / 36.0 / 49.0 / 60.2 % at 10 / 30 / 60 / 120 / 300 min, within 1 point of this column; probable reuse of one series, not independent'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHE, t_min: 240, value: 42.0, unit: mmol_L, printed: 'Table 3: phenylalanine degraded 58 %', read_error: 0.0052, method: semi_quantitative, method_basis: 'Phe assay not stated (see the 10-min PHE row)', duplicate_candidate: 'hofmann2000b Table 3 (glucose + Phe, amino-acid analyser): Phe degraded 8.0 / 17.5 / 36.0 / 49.0 / 60.2 % at 10 / 30 / 60 / 120 / 300 min, within 1 point of this column; probable reuse of one series, not independent'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHE, t_min: 300, value: 39.0, unit: mmol_L, printed: 'Table 3: phenylalanine degraded 61 %', read_error: 0.0056, method: semi_quantitative, method_basis: 'Phe assay not stated (see the 10-min PHE row)', duplicate_candidate: 'hofmann2000b Table 3 (glucose + Phe, amino-acid analyser): Phe degraded 8.0 / 17.5 / 36.0 / 49.0 / 60.2 % at 10 / 30 / 60 / 120 / 300 min, within 1 point of this column; probable reuse of one series, not independent'}
+  - {pot: hofmann2000_t3_mgo_phe_98c_closed, ledger_id: hofmann2000_table3_mgo_phe_timecourse, species: PHE, t_min: 500, value: 31.0, unit: mmol_L, printed: 'Table 3: phenylalanine degraded 69 %', read_error: 0.007, method: semi_quantitative, method_basis: 'Phe assay not stated (see the 10-min PHE row)', duplicate_candidate: 'hofmann2000b Table 3 (glucose + Phe, amino-acid analyser): Phe degraded 8.0 / 17.5 / 36.0 / 49.0 / 60.2 % at 10 / 30 / 60 / 120 / 300 min, within 1 point of this column; probable reuse of one series, not independent'}
+  # ---- Table 4: dicarbonyl + Phe, 60 min, model A (argon) / model B (air) / expt 2 (air + Cu); umol/mmol Phe -> x 0.1 mmol/L ----
+  - {pot: hofmann2000_t4_mgo_phe_60min_argon, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAL, t_min: 60, value: 1.11, unit: mmol_L, printed: 'Table 4 model A: PA 11.1 umol/mmol', read_error: 0.002, read_error_basis: 'half the last printed digit (0.05 umol/mmol), in dex; no SD, no n printed'}
+  - {pot: hofmann2000_t4_mgo_phe_60min_argon, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAC, t_min: 60, value: 0.47, unit: mmol_L, printed: 'Table 4 model A: PAA 4.7 umol/mmol', read_error: 0.0046}
+  - {pot: hofmann2000_t4_mgo_phe_60min_air, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAL, t_min: 60, value: 1.02, unit: mmol_L, printed: 'Table 4 model B: PA 10.2 umol/mmol', read_error: 0.0021}
+  - {pot: hofmann2000_t4_mgo_phe_60min_air, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAC, t_min: 60, value: 2.04, unit: mmol_L, printed: 'Table 4 model B: PAA 20.4 umol/mmol', read_error: 0.0011, text_check: 'text p. 437: PAA under air ''by a factor of nearly 4'' over argon = 20.4 / 4.7 = 4.34 (counted once)'}
+  - {pot: hofmann2000_t4_mgo_phe_60min_air_cu, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAL, t_min: 60, value: 1.0, unit: mmol_L, printed: 'Table 4 expt 2 (Cu), model B: PA 10.0 umol/mmol', read_error: 0.0022}
+  - {pot: hofmann2000_t4_mgo_phe_60min_air_cu, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAC, t_min: 60, value: 2.71, unit: mmol_L, printed: 'Table 4 expt 2 (Cu), model B: PAA 27.1 umol/mmol', read_error: 0.0008}
+  - {pot: hofmann2000_t4_go_phe_60min_argon, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAL, t_min: 60, value: 0.92, unit: mmol_L, printed: 'Table 4 model A: PA 9.2 umol/mmol', read_error: 0.0024}
+  - {pot: hofmann2000_t4_go_phe_60min_argon, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAC, t_min: 60, value: 0.22, unit: mmol_L, printed: 'Table 4 model A: PAA 2.2 umol/mmol', read_error: 0.0099}
+  - {pot: hofmann2000_t4_go_phe_60min_air, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAL, t_min: 60, value: 0.83, unit: mmol_L, printed: 'Table 4 model B: PA 8.3 umol/mmol', read_error: 0.0026}
+  - {pot: hofmann2000_t4_go_phe_60min_air, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAC, t_min: 60, value: 1.22, unit: mmol_L, printed: 'Table 4 model B: PAA 12.2 umol/mmol', read_error: 0.0018}
+  - {pot: hofmann2000_t4_tdg_phe_60min_argon, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAL, t_min: 60, value: 0.84, unit: mmol_L, printed: 'Table 4 model A: PA 8.4 umol/mmol', read_error: 0.0026}
+  - {pot: hofmann2000_t4_tdg_phe_60min_argon, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAC, t_min: 60, value: 0.15, unit: mmol_L, printed: 'Table 4 model A: PAA 1.5 umol/mmol', read_error: 0.0145}
+  - {pot: hofmann2000_t4_tdg_phe_60min_air, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAL, t_min: 60, value: 0.78, unit: mmol_L, printed: 'Table 4 model B: PA 7.8 umol/mmol', read_error: 0.0028}
+  - {pot: hofmann2000_t4_tdg_phe_60min_air, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAC, t_min: 60, value: 0.33, unit: mmol_L, printed: 'Table 4 model B: PAA 3.3 umol/mmol', read_error: 0.0066}
+  - {pot: hofmann2000_t4_g_phe_60min_argon, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAL, t_min: 60, value: 0.81, unit: mmol_L, printed: 'Table 4 model A: PA 8.1 umol/mmol', read_error: 0.0027}
+  - {pot: hofmann2000_t4_g_phe_60min_argon, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAC, t_min: 60, value: 0.13, unit: mmol_L, printed: 'Table 4 model A: PAA 1.3 umol/mmol', read_error: 0.0167}
+  - {pot: hofmann2000_t4_g_phe_60min_air, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAL, t_min: 60, value: 0.69, unit: mmol_L, printed: 'Table 4 model B: PA 6.9 umol/mmol', read_error: 0.0031}
+  - {pot: hofmann2000_t4_g_phe_60min_air, ledger_id: hofmann2000_table4_dicarbonyl_donors_argon_air, species: PHEAC, t_min: 60, value: 0.21, unit: mmol_L, printed: 'Table 4 model B: PAA 2.1 umol/mmol', read_error: 0.0103}
+  # ---- Table 2: glucose + amino acid, reflux 30 min; umol/mmol -> x 0.1 mmol/L ----
+  - {pot: hofmann2000_t2_glc_phe_reflux_30min, ledger_id: hofmann2000_table2_glucose_amino_acids, species: PHEAL, t_min: 30, value: 0.042, unit: mmol_L, printed: 'Table 2: phenylacetaldehyde 0.42 umol/mmol', read_error: 0.0052, duplicate_text: 'text p. 436: 0.042 mol % = this cell; counted once', read_error_basis: 'half the last printed digit (0.005 umol/mmol), in dex; no SD, no n printed'}
+  - {pot: hofmann2000_t2_glc_phe_reflux_30min, ledger_id: hofmann2000_table2_glucose_amino_acids, species: PHEAC, t_min: 30, value: 0.029, unit: mmol_L, printed: 'Table 2: phenylacetic acid 0.29 umol/mmol', read_error: 0.0075, duplicate_text: 'text p. 436: 0.029 mol % = this cell; counted once', table5_check: 'Table 5 (same recipe + 50.1 ug [13C2]PA, PAA vs furan-2-carboxylic acid IS) 40.1 ug/mmol / 136.15 = 0.295 umol/mmol'}
+  - {pot: hofmann2000_t2_glc_ala_reflux_30min, ledger_id: hofmann2000_table2_glucose_amino_acids, species: ACAL, t_min: 30, value: 0.048, unit: mmol_L, printed: 'Table 2: acetaldehyde 0.48 umol/mmol', read_error: 0.0045, method_note: 'headspace GC-MS-CI vs [13C2]acetaldehyde'}
+  - {pot: hofmann2000_t2_glc_ala_reflux_30min, ledger_id: hofmann2000_table2_glucose_amino_acids, species: AA, t_min: 30, value: 0.03, unit: mmol_L, printed: 'Table 2: acetic acid 0.30 umol/mmol', read_error: 0.0072, origin_note: 'acetic acid also forms from the sugar (1-DG cleavage); not a Strecker-only yield'}
+  - {pot: hofmann2000_t2_glc_leu_reflux_30min, ledger_id: hofmann2000_table2_glucose_amino_acids, species: MEBUAL3, t_min: 30, value: 0.089, unit: mmol_L, printed: 'Table 2: 3-methylbutanal 0.89 umol/mmol', read_error: 0.0024}
+  - {pot: hofmann2000_t2_glc_leu_reflux_30min, ledger_id: hofmann2000_table2_glucose_amino_acids, species: MEBUAC3, t_min: 30, value: 0.049, unit: mmol_L, printed: 'Table 2: 3-methylbutanoic acid 0.49 umol/mmol', read_error: 0.0044, key_note: 'MEBUAC3 coined by this reader (the brief named no key for 3-methylbutanoic acid)'}
+  # ---- Fig. 3: dicarbonyls in glucose + Phe (umol/mmol glucose -> x 0.1 mmol/L), digitised ----
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: TDG, t_min: 10, value: 0.4015, unit: mmol_L, printed: 'Fig. 3 (digitised): 4.015 umol/mmol glucose, 3-deoxy-2-hexosulose (filled squares)', read_error: 0.0045, read_error_basis: 'bbox centre of the marker (filled: 5x5 opening; open circle: enclosed hole; +: vertical bar), y by least squares on 17 ticks (32.36 px per umol/mmol, max residual 0.9 px), t snapped to the sampling grid (x fit residual 0.4 px); +-1 px marker, more where overlapped; tick residual in quadrature; in dex'}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: TDG, t_min: 30, value: 1.219, unit: mmol_L, printed: 'Fig. 3 (digitised): 12.188 umol/mmol glucose, 3-deoxy-2-hexosulose (filled squares)', read_error: 0.0015}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: TDG, t_min: 60, value: 1.602, unit: mmol_L, printed: 'Fig. 3 (digitised): 16.020 umol/mmol glucose, 3-deoxy-2-hexosulose (filled squares)', read_error: 0.0011}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: TDG, t_min: 120, value: 1.449, unit: mmol_L, printed: 'Fig. 3 (digitised): 14.490 umol/mmol glucose, 3-deoxy-2-hexosulose (filled squares)', read_error: 0.0013}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: TDG, t_min: 240, value: 0.7491, unit: mmol_L, printed: 'Fig. 3 (digitised): 7.491 umol/mmol glucose, 3-deoxy-2-hexosulose (filled squares)', read_error: 0.0024}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: TDG, t_min: 300, value: 0.6472, unit: mmol_L, printed: 'Fig. 3 (digitised): 6.472 umol/mmol glucose, 3-deoxy-2-hexosulose (filled squares)', read_error: 0.0028}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: TDG, t_min: 500, value: 0.3984, unit: mmol_L, printed: 'Fig. 3 (digitised): 3.984 umol/mmol glucose, 3-deoxy-2-hexosulose (filled squares)', read_error: 0.0059, note: 'right edge: x-axis line 1 px lower here (scan skew)'}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: MGO, t_min: 10, value: 0.0292, unit: mmol_L, printed: 'Fig. 3 (digitised): 0.292 umol/mmol glucose, 2-oxopropanal (filled circles)', read_error: 0.0807, note: 'touches the open circle below'}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: MGO, t_min: 30, value: 0.1497, unit: mmol_L, printed: 'Fig. 3 (digitised): 1.497 umol/mmol glucose, 2-oxopropanal (filled circles)', read_error: 0.0121}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: MGO, t_min: 60, value: 0.3289, unit: mmol_L, printed: 'Fig. 3 (digitised): 3.289 umol/mmol glucose, 2-oxopropanal (filled circles)', read_error: 0.0055}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: MGO, t_min: 120, value: 0.5189, unit: mmol_L, printed: 'Fig. 3 (digitised): 5.189 umol/mmol glucose, 2-oxopropanal (filled circles)', read_error: 0.0035}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: MGO, t_min: 240, value: 0.797, unit: mmol_L, printed: 'Fig. 3 (digitised): 7.970 umol/mmol glucose, 2-oxopropanal (filled circles)', read_error: 0.0023}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: MGO, t_min: 300, value: 0.8959, unit: mmol_L, printed: 'Fig. 3 (digitised): 8.959 umol/mmol glucose, 2-oxopropanal (filled circles)', read_error: 0.002}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: MGO, t_min: 500, value: 1.095, unit: mmol_L, printed: 'Fig. 3 (digitised): 10.952 umol/mmol glucose, 2-oxopropanal (filled circles)', read_error: 0.0022, note: 'right edge: scan skew 1 px', text_check: 'text p. 437: after 500 min MGO by a factor of 3 over glyoxal; figure 10.95 / 2.16 = 5.1 (vs 3-DG 2.7): CONTRADICTION, figure kept'}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: GO, t_min: 10, value: 0.0987, unit: mmol_L, printed: 'Fig. 3 (digitised): 0.987 umol/mmol glucose, glyoxal (+)', read_error: 0.0184}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: GO, t_min: 30, value: 0.6503, unit: mmol_L, printed: 'Fig. 3 (digitised): 6.503 umol/mmol glucose, glyoxal (+)', read_error: 0.0028}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: GO, t_min: 60, value: 0.8001, unit: mmol_L, printed: 'Fig. 3 (digitised): 8.001 umol/mmol glucose, glyoxal (+)', read_error: 0.0023}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: GO, t_min: 120, value: 0.5792, unit: mmol_L, printed: 'Fig. 3 (digitised): 5.792 umol/mmol glucose, glyoxal (+)', read_error: 0.0031}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: GO, t_min: 240, value: 0.349, unit: mmol_L, printed: 'Fig. 3 (digitised): 3.490 umol/mmol glucose, glyoxal (+)', read_error: 0.0052}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: GO, t_min: 300, value: 0.3165, unit: mmol_L, printed: 'Fig. 3 (digitised): 3.165 umol/mmol glucose, glyoxal (+)', read_error: 0.0057}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: GO, t_min: 500, value: 0.2161, unit: mmol_L, printed: 'Fig. 3 (digitised): 2.161 umol/mmol glucose, glyoxal (+)', read_error: 0.0109, note: 'right edge: scan skew 1 px'}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: G, t_min: 10, value: 0.009, unit: mmol_L, printed: 'Fig. 3 (digitised): 0.09 umol/mmol glucose, 2-hexosulose (open circles)', read_error: 0.4391, read_error_basis: '+-3 px (+-0.09 umol/mmol): ring hidden under the 10-min MGO disc except its bottom arc (raster row 564, as the 240-min ring), centre 559; in dex', adjudication: 'restored 2026-10-31 (second reader only; first reader left it out as near-axis); value and error from the second reading, checked on the raster'}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: G, t_min: 30, value: 0.0384, unit: mmol_L, printed: 'Fig. 3 (digitised): 0.384 umol/mmol glucose, 2-hexosulose (open circles)', read_error: 0.0472}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: G, t_min: 60, value: 0.0585, unit: mmol_L, printed: 'Fig. 3 (digitised): 0.585 umol/mmol glucose, 2-hexosulose (open circles)', read_error: 0.031, text_check: 'text p. 436: glucosone maximum 0.009 mol % (= 0.09 umol/mmol); the figure maximum is 0.585 umol/mmol = 0.059 mol %: 6.5x CONTRADICTION, figure kept'}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: G, t_min: 120, value: 0.0276, unit: mmol_L, printed: 'Fig. 3 (digitised): 0.276 umol/mmol glucose, 2-hexosulose (open circles)', read_error: 0.0657}
+  - {pot: hofmann2000_fig3_glc_phe_98c, ledger_id: hofmann2000_fig3_dicarbonyls_glucose_phe, species: G, t_min: 240, value: 0.009, unit: mmol_L, printed: 'Fig. 3 (digitised): 0.09 umol/mmol glucose, 2-hexosulose (open circles)', read_error: 0.2944, read_error_basis: '+-2 px (+-0.06 umol/mmol): ring rows 554-564, centre 559.0, 3.5 px above the 300-min ring centred on the axis (row 562); ring bottom merges with the axis line; in dex', adjudication: 'restored 2026-10-31 (second reader only; first reader left it out as near-axis); value and error from the second reading, checked on the raster'}
+  # ---- Figs. 4 (PA) and 5 (PAA): donor + Phe at pH 3 / 5 / 7 / 9 (umol/mmol Phe -> x 0.1 mmol/L), digitised ----
+  - {pot: hofmann2000_ph_mgo_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 1.049, unit: mmol_L, printed: 'Fig. 4 (digitised): 10.490 umol/mmol phenylalanine, filled square', read_error: 0.0012, read_error_basis: 'bbox centre of the marker, y by least squares on the y ticks (Fig. 4: 35.69 px per umol/mmol, residual 0.4 px; Fig. 5: 15.64 px, residual 0.45 px), pH from x ticks; +-1 px marker (+-1.5 overlapped, +-2 triangles: bbox vs centroid), tick residual in quadrature; in dex'}
+  - {pot: hofmann2000_ph_mgo_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 1.339, unit: mmol_L, printed: 'Fig. 4 (digitised): 13.390 umol/mmol phenylalanine, filled square', read_error: 0.001, text_check: 'text p. 439: PA from MGO at pH 5 double that at pH 9; figure 13.39 / 5.75 = 2.33 (read off this figure, counted once)'}
+  - {pot: hofmann2000_ph_mgo_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 1.036, unit: mmol_L, printed: 'Fig. 4 (digitised): 10.364 umol/mmol phenylalanine, filled square', read_error: 0.0013, table4_check: 'Table 4 model B (air, 60 min): 10.2 umol/mmol; figure / table = 1.02; possibly the same experiment (adjudicator)'}
+  - {pot: hofmann2000_ph_mgo_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.5754, unit: mmol_L, printed: 'Fig. 4 (digitised): 5.754 umol/mmol phenylalanine, filled square', read_error: 0.0023, text_check: 'text p. 439: PA from MGO at pH 5 double that at pH 9; figure 13.39 / 5.75 = 2.33 (read off this figure, counted once)'}
+  - {pot: hofmann2000_ph_go_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.9789, unit: mmol_L, printed: 'Fig. 4 (digitised): 9.789 umol/mmol phenylalanine, open circle', read_error: 0.0013}
+  - {pot: hofmann2000_ph_go_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 1.188, unit: mmol_L, printed: 'Fig. 4 (digitised): 11.877 umol/mmol phenylalanine, open circle', read_error: 0.0011}
+  - {pot: hofmann2000_ph_go_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.8374, unit: mmol_L, printed: 'Fig. 4 (digitised): 8.374 umol/mmol phenylalanine, open circle', read_error: 0.0016, note: 'ring crossed by two lines; centre from the ring extent rows 206-216', table4_check: 'Table 4 model B (air, 60 min): 8.3 umol/mmol; figure / table = 1.01; possibly the same experiment (adjudicator)'}
+  - {pot: hofmann2000_ph_go_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.5544, unit: mmol_L, printed: 'Fig. 4 (digitised): 5.544 umol/mmol phenylalanine, open circle', read_error: 0.0034, note: 'ring top hidden under the filled square; centre = ring bottom (317) - 5 px'}
+  - {pot: hofmann2000_ph_tdg_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.8192, unit: mmol_L, printed: 'Fig. 4 (digitised): 8.192 umol/mmol phenylalanine, +', read_error: 0.0023, note: 'merged with the filled circle below; centre from the vertical bar top (212) + 5.5 px and the horizontal bar rows 216-219'}
+  - {pot: hofmann2000_ph_tdg_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 1.098, unit: mmol_L, printed: 'Fig. 4 (digitised): 10.980 umol/mmol phenylalanine, +', read_error: 0.0012}
+  - {pot: hofmann2000_ph_tdg_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.7968, unit: mmol_L, printed: 'Fig. 4 (digitised): 7.968 umol/mmol phenylalanine, +', read_error: 0.0016, table4_check: 'Table 4 model B (air, 60 min): 7.8 umol/mmol; figure / table = 1.02; possibly the same experiment (adjudicator)'}
+  - {pot: hofmann2000_ph_tdg_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.5166, unit: mmol_L, printed: 'Fig. 4 (digitised): 5.166 umol/mmol phenylalanine, +', read_error: 0.0037, note: 'merged with the filled circle below; vertical bar top 320 + 5.5 px'}
+  - {pot: hofmann2000_ph_g_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.7982, unit: mmol_L, printed: 'Fig. 4 (digitised): 7.982 umol/mmol phenylalanine, filled circle', read_error: 0.0024, note: 'merged with the + above; circle bottom 230 - 5 px'}
+  - {pot: hofmann2000_ph_g_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.9985, unit: mmol_L, printed: 'Fig. 4 (digitised): 9.985 umol/mmol phenylalanine, filled circle', read_error: 0.0013}
+  - {pot: hofmann2000_ph_g_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.6973, unit: mmol_L, printed: 'Fig. 4 (digitised): 6.973 umol/mmol phenylalanine, filled circle', read_error: 0.0019, table4_check: 'Table 4 model B (air, 60 min): 6.9 umol/mmol; figure / table = 1.01; possibly the same experiment (adjudicator)'}
+  - {pot: hofmann2000_ph_g_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.4955, unit: mmol_L, printed: 'Fig. 4 (digitised): 4.955 umol/mmol phenylalanine, filled circle', read_error: 0.0038, note: 'merged with the + above; circle bottom 338 - 5 px'}
+  - {pot: hofmann2000_ph_glc_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.1004, unit: mmol_L, printed: 'Fig. 4 (digitised): 1.004 umol/mmol phenylalanine, filled triangle', read_error: 0.0247, note: 'filled triangle rows 469-479; bbox centre (centroid would sit 1.8 px lower)'}
+  - {pot: hofmann2000_ph_glc_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.1481, unit: mmol_L, printed: 'Fig. 4 (digitised): 1.481 umol/mmol phenylalanine, filled triangle', read_error: 0.0167, note: 'triangle rows 452-462, bbox centre'}
+  - {pot: hofmann2000_ph_glc_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.078, unit: mmol_L, printed: 'Fig. 4 (digitised): 0.780 umol/mmol phenylalanine, filled triangle', read_error: 0.0318, note: 'triangle rows 477-487, bbox centre'}
+  - {pot: hofmann2000_ph_glc_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAL, t_min: 60, value: 0.0556, unit: mmol_L, printed: 'Fig. 4 (digitised): 0.556 umol/mmol phenylalanine, filled triangle', read_error: 0.0446, note: 'triangle rows 485-495, bbox centre'}
+  - {pot: hofmann2000_ph_mgo_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.4214, unit: mmol_L, printed: 'Fig. 5 (digitised): 4.214 umol/mmol phenylalanine, filled square', read_error: 0.0072, text_check: 'text p. 439: 7x more PAA from MGO at pH 9 than pH 3 (figure 30.84 / 4.21 = 7.3); abstract PA:PAA 3:1 at pH 3 (figure 10.49 / 4.21 = 2.5) and 1:5 at pH 9 (5.75 / 30.84 = 1:5.4); read off Figs. 4-5, counted once'}
+  - {pot: hofmann2000_ph_mgo_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 1.918, unit: mmol_L, printed: 'Fig. 5 (digitised): 19.176 umol/mmol phenylalanine, filled square', read_error: 0.0016}
+  - {pot: hofmann2000_ph_mgo_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 2.122, unit: mmol_L, printed: 'Fig. 5 (digitised): 21.222 umol/mmol phenylalanine, filled square', read_error: 0.0014, table4_check: 'Table 4 model B (air, 60 min): 20.4 umol/mmol; figure / table = 1.04; possibly the same experiment (adjudicator)'}
+  - {pot: hofmann2000_ph_mgo_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 3.084, unit: mmol_L, printed: 'Fig. 5 (digitised): 30.845 umol/mmol phenylalanine, filled square', read_error: 0.001, text_check: 'text p. 439: 7x more PAA from MGO at pH 9 than pH 3 (figure 30.84 / 4.21 = 7.3); abstract PA:PAA 3:1 at pH 3 (figure 10.49 / 4.21 = 2.5) and 1:5 at pH 9 (5.75 / 30.84 = 1:5.4); read off Figs. 4-5, counted once'}
+  - {pot: hofmann2000_ph_go_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.2104, unit: mmol_L, printed: 'Fig. 5 (digitised): 2.104 umol/mmol phenylalanine, open circle', read_error: 0.0145}
+  - {pot: hofmann2000_ph_go_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.9201, unit: mmol_L, printed: 'Fig. 5 (digitised): 9.201 umol/mmol phenylalanine, open circle', read_error: 0.0033, note: 'ring rows 360-370 (line through its top)'}
+  - {pot: hofmann2000_ph_go_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 1.304, unit: mmol_L, printed: 'Fig. 5 (digitised): 13.038 umol/mmol phenylalanine, open circle', read_error: 0.0023, table4_check: 'Table 4 model B (air, 60 min): 12.2 umol/mmol; figure / table = 1.07; possibly the same experiment (adjudicator)'}
+  - {pot: hofmann2000_ph_go_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 1.902, unit: mmol_L, printed: 'Fig. 5 (digitised): 19.016 umol/mmol phenylalanine, open circle', read_error: 0.0016, note: 'ring rows 206-217'}
+  - {pot: hofmann2000_ph_tdg_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.1017, unit: mmol_L, printed: 'Fig. 5 (digitised): 1.017 umol/mmol phenylalanine, +', read_error: 0.0299}
+  - {pot: hofmann2000_ph_tdg_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.2775, unit: mmol_L, printed: 'Fig. 5 (digitised): 2.775 umol/mmol phenylalanine, +', read_error: 0.011, note: 'vertical bar rows 460-471, horizontal bar rows 464-466'}
+  - {pot: hofmann2000_ph_tdg_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.4821, unit: mmol_L, printed: 'Fig. 5 (digitised): 4.821 umol/mmol phenylalanine, +', read_error: 0.0063, table4_check: 'Table 4 model B (air, 60 min): 3.3 umol/mmol; figure / table = 1.46; possibly the same experiment (adjudicator)'}
+  - {pot: hofmann2000_ph_tdg_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.805, unit: mmol_L, printed: 'Fig. 5 (digitised): 8.050 umol/mmol phenylalanine, +', read_error: 0.0038}
+  - {pot: hofmann2000_ph_g_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.022, unit: mmol_L, printed: 'Fig. 5 (digitised): 0.22 umol/mmol phenylalanine, filled circle', read_error: 0.2961, read_error_basis: 'glucosone disc and glucose triangle overlap on the x-axis at pH 3 (one blob, raster rows 501-512); disc top 6 px wide at row 501; +-0.15 umol/mmol covers a swap; in dex', adjudication: 'restored 2026-10-31 (second reader only); value and error from the second reading, checked on the raster'}
+  - {pot: hofmann2000_ph_g_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.0985, unit: mmol_L, printed: 'Fig. 5 (digitised): 0.985 umol/mmol phenylalanine, filled circle', read_error: 0.0309}
+  - {pot: hofmann2000_ph_g_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.2615, unit: mmol_L, printed: 'Fig. 5 (digitised): 2.615 umol/mmol phenylalanine, filled circle', read_error: 0.0116, table4_check: 'Table 4 model B (air, 60 min): 2.1 umol/mmol; figure / table = 1.25; possibly the same experiment (adjudicator)'}
+  - {pot: hofmann2000_ph_g_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.5013, unit: mmol_L, printed: 'Fig. 5 (digitised): 5.013 umol/mmol phenylalanine, filled circle', read_error: 0.0061}
+  - {pot: hofmann2000_ph_glc_phe_ph3, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.013, unit: mmol_L, printed: 'Fig. 5 (digitised): 0.13 umol/mmol phenylalanine, filled triangle', read_error: 0.5011, read_error_basis: 'triangle under the glucosone disc: its base widens to 11 px on rows 511-512 (1 px below the pH 5 base), apex/base midpoint row 507, axis 509, 15.64 px per unit; +-0.15 umol/mmol covers a swap with the disc; in dex', adjudication: 'restored 2026-10-31 (second reader only); value and error from the second reading, checked on the raster'}
+  - {pot: hofmann2000_ph_glc_phe_ph5, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.019, unit: mmol_L, printed: 'Fig. 5 (digitised): 0.19 umol/mmol phenylalanine, filled triangle', read_error: 0.2903, read_error_basis: 'triangle apex row 501, base row 511, axis row 509: centre 506 = 3 px above the axis; +-2 px (+-0.13 umol/mmol); in dex', adjudication: 'restored 2026-10-31 (second reader only; first reader left it out as on the axis); value and error from the second reading, checked on the raster'}
+  - {pot: hofmann2000_ph_glc_phe_ph7, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.0633, unit: mmol_L, printed: 'Fig. 5 (digitised): 0.633 umol/mmol phenylalanine, filled triangle', read_error: 0.0899, note: 'triangle rows 494-504 crossed by its line, bbox centre'}
+  - {pot: hofmann2000_ph_glc_phe_ph9, ledger_id: hofmann2000_fig4_5_ph_series, species: PHEAC, t_min: 60, value: 0.1017, unit: mmol_L, printed: 'Fig. 5 (digitised): 1.017 umol/mmol phenylalanine, filled triangle', read_error: 0.056, note: 'triangle rows 488-498, bbox centre'}

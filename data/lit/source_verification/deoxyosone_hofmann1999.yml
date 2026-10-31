@@ -1,0 +1,77 @@
+# SOURCE VERIFICATION -- Hofmann 1999, xylose + L-alanine pot, MGO and glycolaldehyde (fit table
+# data/lit/fit_rows/deoxyosone_hofmann1999.yml). Format and the five checks: the header of data/lit/source_verification.yml.
+# First reader: agent-sm34-reader1-2026-10-30, against the PDF (data/articles/hofmann1999.pdf), not the dossier.
+# second_reader "pending" = NOT verified (the loader and the gate refuse it until a second reader signs).
+# `notes` is an extra field: what was checked, what was corrected, and why rows were left out.
+# Digitisation: Fig. 10 is the third CCITT raster on page 6 of the PDF (pdfimages, 1355 x 1087 px at 400 ppi; ink
+# white on black). Axes calibrated on the tick marks found in the pixels (lower y scale: ticks 10-60 at rows 864.5 /
+# 747.1 / 628.5 / 510.5 / 393.0 / 274.0, least squares 11.808 px per ug/mmol, zero at row 982.9 = the x-axis line
+# 982-986; upper y scale: 100 at row 91.0, 120 at row 24.0; x: 120 min at col 857, 180 at 1215, 5.963 px/min, zero at
+# col 141 = the y-axis line). Filled squares: centroid of a 9x9 morphological opening; open circles: centroid of the
+# enclosed hole. Scripts: the first reader's scratchpad (sm34r1_scripts: markers.py, convert.py).
+entries:
+  - ledger_id: hofmann1999_fig10_xylose_ala_c2_c4_fragments
+    source_file: hofmann1999.pdf
+    read_by: "agent-sm34-reader1-2026-10-30"
+    second_reader: agent-sm34-reader2-2026-10-30
+    date: 2026-10-30
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "Solutions of 6 mmol xylose or 6 mmol glucose in 4 ml phosphate buffer (0.5 mol/l, pH 7.0) were refluxed in the presence of 6 mmol L-alanine for the reaction times given in Figs. 3–6."
+    notes: >-
+      Conditions as the ledger: 6 mmol xylose + 6 mmol L-alanine in 4 mL 0.5 M phosphate (counter-ion not stated) pH
+      7.0, refluxed; the reflux temperature, the final volume, the pot's pH (start or end), the vessel and heat-up are
+      not stated. No trapping agent in the pot: dicarbonyls derivatised after cooling ("Maillard mixtures were,
+      therefore, heated without a trapping reagent and, after cooling, the dicarbonyls formed were derivatized").
+      Sampling times read from the figure's markers: 5, 10, 20, 40, 60, 80, 120, 180 min (MGO 60 / 80 min hidden in
+      the axis break 70-100 ug/mmol; glycolaldehyde has no 5-min marker). The methods sentence cites 'Figs. 3-6' for
+      the reaction times although the C2-C4 data are Figs. 9-10 (the paper's own cross-reference slip). Units: Fig. 10
+      y axis 'Amount (ug / mmol xylose)'; the text's PDF text layer renders the micro sign as 'm' ('120 mg/mmol'), the
+      rendered page reads ug. Eq. 1 prints BPA = concentration (umol/mmol) x CD factor; the Table 3 back-calculation
+      is self-consistent with the text (3-DP at 10 min: 2438 / 256 = 9.52 umol/mmol x 132.1 = 1258 ug/mmol, text
+      1260). Converted to mmol/L on a declared basis (fit table header: 4.94 mL, 1215.6 mmol/L). Quantification:
+      MGO as 2-methylquinoxaline by GC/MS-CI against [13C4]-butane-2,3-dione (a labelled HOMOLOGUE, response factor
+      0.97 measured with 1:3-3:1 mixtures); glycolaldehyde as its syn/anti-O-ethyloxime by GC/MS-CI against
+      [13C4]-3-hydroxy-2-butanone (homologue, Rf 0.96). The paper calls both 'stable isotope dilution analysis'; with
+      a homologue internal standard and measured Rf the class is calibrated (as the ledger), not sida. CAVEAT for the
+      second reader: the dicarbonyl method prints '2 ml of a methanolic solution of 1,2-diaminobenzene (1 mmol/l)' =
+      2 umol OPD per quarter-mixture, while a quarter holds ~1.5 mmol-xylose worth of dicarbonyls (3-DP alone ~14
+      umol at 10 min, MGO 2.5 umol at 180 min): either a misprint for 1 mol/l (the deoxyosone method's strength) or
+      OPD-limited derivatisation compensated only as far as the homologue IS reacts alike. Not resolvable from the
+      paper; recorded, the class left at calibrated. Duplicates: Table 3 (xylose) is the same pot (ledger
+      hofmann1999_tab2_3_browning_activity_products, duplicate_of this entry); each (species, time) enters once:
+      figure where it has a marker, Table 3 / CD for MGO 60 min and glycolaldehyde 5 min (the ledger's `location`
+      names these two back-calculations). Hofmann, Bors & Stettmeier 1999 (JAFC 47:379, ref. 4) is cited for CD
+      factors only, not for this time course; no entry in the conflicts register. Values: every MGO and glycolaldehyde
+      marker digitised (15 rows: MGO 7, HA 8). Text checks: MGO 120 ug/mmol at 180 min (read 120.3); glycolaldehyde
+      maximum at 10 min (read 7.1, the series' maximum). Figure vs Table 3 where both exist: MGO 0.99 / 1.01 / 1.03
+      (5 / 10 / 120 min) - agree; glycolaldehyde 0.88 / 0.90 / 0.86 (10 / 60 / 120 min) - the figure sits 10-14 %
+      BELOW the table. Not a calibration slip of this reading (the same lower scale reproduces MGO and glyoxal at 10
+      min, 8.2 vs Table 3 18/128 x 58.04 = 8.16 ug/mmol); an internal inconsistency of the paper for glycolaldehyde,
+      reported, not corrected (new; the ledger's internal_inconsistency flag names diacetyl only).
+  - ledger_id: hofmann1999_tab2_3_browning_activity_products
+    source_file: hofmann1999.pdf
+    read_by: "agent-sm34-reader1-2026-10-30"
+    second_reader: pending
+    date: 2026-10-30
+    checks:
+      conditions: pass
+      units: pass
+      quantification: pass
+      duplicates: pass
+      values: pass
+    quote: "BPA = concentration (μmol/mmol) × browning ability (CD factor) (1)"
+    notes: >-
+      Read for the two values Fig. 10 lacks; NO pot of the fit table cites this ledger id (its values would be
+      dropped by fitting.count_once beside the figure entry, which is the same pot): the two table-derived rows carry
+      the figure's ledger id and `source: table3`. Table 3 (headed 'Hexose degradation product' although it is the
+      pentose table, caption 'pentose degradation products in an aqueous solution of xylose and L-alanine') prints
+      integer relative browning activities at 5 / 10 / 60 / 120 min; Table 1 CD factors: glycolaldehyde 1024,
+      2-oxopropanal 256. 2-Oxopropanal 89 / 148 / 276 / 386 -> 0.348 / 0.578 / 1.078 / 1.508 umol/mmol;
+      glycolaldehyde 68 / 137 / 60 / 58 -> 0.0664 / 0.134 / 0.0586 / 0.0566 umol/mmol. Rounding of a printed
+      integer: +-0.5 / CD. The table's condition_quote in the ledger is empty; the table caption carries no
+      conditions beyond the pot (same pot as Figs. 5 / 10).

@@ -1,0 +1,111 @@
+# Second reader, Davidek 2008 (Ann NY Acad Sci 1126:241), Davidek 2006a (JAFC 54:6667), Davidek 2006b (JAFC 54:6677), Novotny 2008
+# (Czech J Food Sci 26:117): acetic / formic acid and sugar consumed vs pH, T, time. Independent of the first reading
+# (data/lit/fit_rows/ph_acid_davidek_acids.yml, data/lit/source_verification/ph_acid_davidek_acids.yml and ledger entries naming
+# these papers NOT opened). Rows: data/lit/fit_rows/second/ph_acid_davidek_acids.yml.
+# Each entry's "location" says where in the paper the ledger id's data sit, so the adjudicator can match ids to reader 1's.
+reader: agent-davidek-reader2-2026-10-30
+role: independent second reader, sub-model 1 (pH and acid production), Davidek / Novotny acid papers
+entries:
+- ledger_id: davidek2008_fig1_xylose_gly_acetic_residual_xylose
+  source_file: davidek2008.pdf
+  location: 'page 2 (p. 242), Fig. 1 (raster 2550 x 2510 px, 909 ppi); text yields p. 242 Results para 1 and abstract'
+  read_by: agent-davidek-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks: {conditions: pass, units: corrected, quantification: corrected, duplicates: pass, values: pass}
+  quote: 'Materials and Methods: "A solution of glycine (0.35 mmol) and D-xylose (0.35 mmol) in phosphate buffer (3.5 mL, 0.2 mol/L)
+    was dispatched (0.4 mL/vial) into 1.5 mL screw-cap vials ... and thermally treated in a silicone bath (90 C, 15 h or 120 C, 4 h).
+    The experiments were performed at pH 6.0 and pH 8.0." / Results: "equimolar concentrations of glycine and unlabeled or 13C-labeled
+    xylose (0.1 mol/L)" ... "Almost twice as much acetic acid was formed at pH 8.0 (28 mol%) compared to pH 6.0 (16 mol%) after 4 h of
+    reaction." / Fig. 1 caption: "Formation of acetic acid (solid lines) and residual xylose level (dotted lines) in xylose-glycine
+    reaction systems in phosphate buffer at 120 C at pH 6.0 (squares) and pH 8.0 (triangles)."'
+  notes: 'Conditions: xylose + glycine 0.1 mol/L each (0.35 mmol in 3.5 mL), phosphate 0.2 M (Na), pH 6.0 / 8.0 (where measured not
+    stated), 0.4 mL in 1.5 mL screw-cap vials, 120 C, 0-240 min. Units: left axis "Residual xylose (%)" 0-100, right axis "Acetic acid
+    (mol%)" 0-60 sharing gridlines (1 % left = 0.6 mol% right). Conversion to mmol/L is unambiguous because the pot is equimolar
+    at 100 mmol/L: 1 mol% = 1.0 mmol/L whichever reactant is the reference; residual xylose % = mmol/L of 100. Digitised (raster):
+    AA pH 6 at 15, 30, 60, 120, 240 min = 8.69, 11.25, 13.51, 14.74, 16.15; AA pH 8 at 10, 20, 30, 60, 120, 240 = 17.72, 22.37, 24.10,
+    26.89, 26.89, 27.59; xylose pH 6 at 15, 30, 60, 120, 240 = 42.1, 26.2, 13.4, 7.35, 2.44 %; xylose pH 8 at 10, 20, 30 = 14.6, 3.42,
+    1.40 %; pH 8 xylose at 60, 120, 240 on the zero line (the 60-min marker labelled "0" by the authors; centre reads +0.2 %) -- left
+    out as zeros. t = 0: AA 0 (left out), xylose 100 % (normalisation, left out). The two series have different time grids (pH 6 has
+    15 min, pH 8 has 10 and 20 min). Text yields: 16 and 28 mol% are the 240-min (4 h) points of Fig. 1, also printed in the figure
+    as data labels "16" and "28" next to the 240-min markers: the same numbers, not new data; keyed once (as the digitised Fig. 1
+    points; read 16.15 / 27.59, consistent with the rounded labels). Fig. 1 is the 120 C set only; no amounts at 90 C anywhere in the
+    paper (Figs. 3-4 are labelling percentages).'
+  corrections_vs_ledger:
+  - 'Quantification: acetic acid is SIDA (SPME-GC/MS, [2H3]acetic acid); the xylose method is not described anywhere -- the PENT rows
+    have no stated method (class unknown, not sida).'
+  - 'Units: Fig. 1 acetic acid is mol% (right axis), xylose % residual (left axis); both converted to mmol/L on the 100 mmol/L basis.'
+  contradictions:
+  - '90 C time: methods say "90 C, 15 h"; Fig. 4 legend says "90 C, 16h".'
+  - 'Mechanism text says "1-deoxypento-2,4-diulose" in the abstract / conclusion but Fig. 2 caption says "1-deoxypento-2,3-diulose" (no
+    effect on data).'
+  labelling_not_keyed: 'Fig. 3 (120 C, pH 6, % singly labelled AA vs time; end labels 85.2 [1-13C], 84.5 [2-13C], 10.5 [5-13C]) and
+    Fig. 4 (90 C 15/16 h and 120 C 4 h, pH 6 / 8: [1-13C] ~85 / 87 / 81.5 / 77, [2-13C] ~85.5 / 87 / 82.5 / 79, [5-13C] ~10 / 9 / 13 /
+    14.5 %); text C-1/C-2 77-87 %, C-4/C-5 9-15 %, 12 -> 17 % over time at pH 8. Notes only.'
+- ledger_id: davidek2006a_tab1_glc_gly_acetic_ph
+  source_file: davidek2006.pdf
+  location: 'p. 6670, Table 1 (and Results p. 6669 "about 1, 17, and 38 mol %")'
+  read_by: agent-davidek-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks: {conditions: pass, units: pass, quantification: pass, duplicates: pass, values: pass}
+  quote: 'Methods: "A solution of glycine (0.35 mmol) and D-glucose or various 13C-labeled glucose isotopomers (0.35 mmol) in a phosphate
+    buffer (3.5 mL, 0.2 mol/L) was dispatched (0.4 mL) into screw-cap vials (1.5 mL ...) and thermally treated in a silicone bath
+    (90 C, 15 h or 120 C, 4 h). Experiments were performed at pH 4, pH 6, and pH 8. ... stable isotope dilution assay ... Each sample
+    was prepared at least in duplicate and injected twice." / Table 1 "acetic acid concentration (mol %)"; footnote a "The data
+    obtained by SPME GC-MS showed variation coefficients of less than 10%. b ND, not determined."'
+  notes: 'Glucose + glycine 0.1 mol/L each, phosphate 0.2 M, 120 C. Values (mol% = mmol/L): pH 4: 60 0.28+-0.02, 120 0.48+-0.04, 240
+    1.00+-0.01, 480 1.69+-0.17; pH 6: 30 9.7+-0.1, 60 12.6+-0.1, 120 15.1+-0.1, 240 16.9+-0.2; pH 8: 15 21.4+-0.1, 30 28.3+-0.2, 60
+    33.0+-0.1, 120 37.0+-0.2, 240 38.4+-0.4. ND cells: pH 4 15/30, pH 6 15/480, pH 8 480. 13 rows. The +- is not defined (tiny vs
+    the footnote CV < 10 %, probably injection repeatability) -> pm_printed, never sd; rows carry 10 % (0.0414 dex). Text "about 1,
+    17, and 38 mol %" after 4 h = the 240-min cells (duplicate). 90 C / 15 h glucose runs: labelling only (Table 2), no amounts.'
+  contradictions:
+  - 'Methods: 120 C runs for 4 h; Table 1 prints a 480-min value at pH 4.'
+- ledger_id: davidek2006a_text_3dg_gly_acetic_formic
+  source_file: davidek2006.pdf
+  location: 'p. 6670, Results, right column ("To confirm that acetic acid is not formed in significant amounts via the 1,2-enolization
+    pathway ..."); methods p. 6668 "Degradation of 3-Deoxy-D-erythro-hexos-2-ulose (2)"'
+  read_by: agent-davidek-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks: {conditions: pass, units: pass, quantification: corrected, duplicates: pass, values: pass}
+  quote: '"(2) was heated in the presence of glycine for 4 h at 120 C. Indeed, irrespectively of the pH, only small amounts of acetic
+    acid were detected, i.e., 0.8, 1.5, and 2.4 mol % at pH 4, 6, and 8, respectively. Surprisingly, the quantities of formic acid
+    were also very low, resulting in 0.9, 1.5, and 1.7 mol % at pH 4, 6, and 8, respectively." / methods "glycine (0.05 mmol) and 2
+    (0.05 mmol) in a phosphate buffer (0.5 mL, 0.2 mol/L) ... (120 C, 4 h)."'
+  notes: '3-DG (engine TDG) + glycine 0.1 mol/L each, 120 C, 240 min, pH 4/6/8; AA and FA, 6 rows, mol% = mmol/L. No CV stated for
+    these; 10 % assumed.'
+  corrections_vs_ledger:
+  - 'Quantification: formic acid is quantified with [2H3]acetic acid as internal standard (methods "[2H3]Acetic acid was used as
+    internal standard for the quantification of formic acid") -- internal-standard calibrated, NOT a true SIDA for FA; AA is SIDA.'
+- ledger_id: davidek2006b_tab1_glc_gly_acetic_atmosphere
+  source_file: davidek2006b.pdf
+  location: 'p. 6679, Table 1; methods p. 6678 "Degradation of Glucose"'
+  read_by: agent-davidek-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks: {conditions: pass, units: pass, quantification: pass, duplicates: pass, values: pass}
+  quote: 'Table 1 "Formation of Acetic Acid from Glucose Heated in the Presence of Glycine under Air, Argon, and 18O-Dioxygen",
+    "concentration of acetic acid (mmol/L)": argon 30.5 +- 0.4 (total 30.5 +- 0.4); air 32.3 +- 3.3 (32.3 +- 3.3); 18O2 22.9 +- 0.3
+    unlabelled + 10.6 +- 0.2 labelled = 33.5 +- 0.5; footnote a "Glycine (0.3 mmol) and D-glucose (0.3 mmol) were reacted (15 h, 90 C)
+    in a phosphate buffer (3 mL, 0.2 mol/L, pH 8) at atmospheric pressure."'
+  notes: 'Glucose + glycine 0.1 mol/L, phosphate 0.2 M, pH 8, 90 C, 900 min, 10 mL flask; three atmospheres. 3 rows (total AA,
+    mmol/L as printed). Text "about 32 mol %" and "30-33 mol %" = this table. C4-aldonic acids 0.7 / 2.2 / 5.1 mmol/L (argon / air /
+    18O2) and glyceric / lactic acids: no engine species, not keyed. 17O-NMR runs (pH 10, 90 C, 3 h, NaOH, unbuffered): no amounts.
+    A pH 6 18O2 run (text p. 6680) gives only an MS ratio, no amount.'
+- ledger_id: novotny2008_tables1_3_acids_persulfate_naoh
+  source_file: novotny2008.pdf
+  location: 'pp. 122, 126, 128, Tables 1-3'
+  read_by: agent-davidek-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks: {conditions: pass, units: pass, quantification: pass, duplicates: pass, values: pass}
+  quote: '"Equimolar amounts of a sugar and potassium peroxodisulfate (5 mmol each) were dissolved in 50 ml of water or 0.3M sodium
+    hydroxide, respectively (model 1 and model 2). The respective sugars (5 mmol) were also dissolved in 50 ml of 0.05M sodium hydroxide
+    (model 3). All mixtures were heated under reflux for 1 h"'
+  notes: 'NO ROWS: no simulable condition. All three systems are amine-free and either oxidant-driven or alkaline: (1) K2S2O8 / water
+    (persulfate is oxidant, radical initiator and acidulant), (2) K2S2O8 / 0.3 M NaOH, (3) 0.05 M NaOH (sugar 0.1 M; pH ~12.7 at
+    start, unbuffered). No near-neutral aqueous run. Values for the record (% n/n, means of 3, RSD < 20 %), Glc / Fru / Ara / Dha /
+    Gla: formic (1) 9.93 7.59 18.04 10.66 11.63, (2) 20.64 13.50 15.64 8.76 10.11, (3) 5.32 5.91 5.65 6.47 6.69; acetic (1) 0.79
+    1.68 0.52 2.39 2.57, (2) 1.53 1.81 1.21 1.97 2.56, (3) 11.48 12.06 12.45 7.81 10.64. Acids by external 5-point calibration
+    (GC/MS after ether extraction) -> calibrated. Sugar consumption not reported.'

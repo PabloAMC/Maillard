@@ -1,0 +1,480 @@
+# FIT ROWS, sub-model 4 (thiol formation and loss): the INDEPENDENT SECOND READING (agent-sm4-reader2-2026-10-29).
+# Format: src/kinetic_core/fit_rows.py. Values are transcribed from the paper / supplement (not from a dossier).
+# Errors: `sd` is the printed SD (same unit as the value); `read_error` (dex) is the transcription error only: half the
+# last printed digit for a printed number without SD, or the reading error of a digitised point. Neither covers the
+# replicate scatter a paper did not print; the measurement model must add it.
+# Pot `minutes` = the last sampling time of the series.
+status: draft
+pots:
+  schieberle2000_rib_cys_ph5_100C:
+    ledger_id: schieberle2000_t4_100c_time_course
+    t_c: 100
+    minutes: 720
+    initial_mmol_L: {PENT: 100.0, Cys: 33.0}
+    buffer: {kind: phosphate, mol_L: 0.5}
+    label_ph: 5.0
+    vessel: "laboratory autoclave (closed); fill / headspace not stated"
+    condition_quote: "Ribose (10 mmol) and cysteine (3.3 mmol) were reacted in phosphate buffer (100 mL; 0.5 mol/L; pH 5.0) at 100°C in a laboratory autoclave."
+  us10076126_xyl_cys_ph55_110C_mft:
+    ledger_id: us10076126_fig1_mft_time_course
+    t_c: 110
+    minutes: 240
+    initial_mmol_L: {PENT: 250.0, Cys: 248.0}
+    buffer: {kind: phosphate, mol_L: null}
+    label_ph: 5.5
+    vessel: "crimped glass vials, oil bath; vial size / headspace not printed"
+    condition_quote: "For each solvent, 75 mg of xylose (Fluka) and 60 mg of L-cysteine (Fluka) were weighed into 2.0 g of the solvent ... C) an aqueous phosphate buffer at pH 5.5 ... heated to 110° C. in an oil bath for periods between 30 minutes and 4 hours"
+  us10076126_xyl_cys_ph55_110C_fft:
+    ledger_id: us10076126_fig2_fft_time_course
+    t_c: 110
+    minutes: 240
+    initial_mmol_L: {PENT: 250.0, Cys: 248.0}
+    buffer: {kind: phosphate, mol_L: null}
+    label_ph: 5.5
+    vessel: "crimped glass vials, oil bath; vial size / headspace not printed"
+    condition_quote: "For each solvent, 75 mg of xylose (Fluka) and 60 mg of L-cysteine (Fluka) were weighed into 2.0 g of the solvent ... C) an aqueous phosphate buffer at pH 5.5 ... heated to 110° C. in an oil bath for periods between 30 minutes and 4 hours"
+  feng2022_rgarp_ph7_120C:
+    ledger_id: feng2022_table1_rgarp_volatiles
+    t_c: 120
+    minutes: 120
+    initial_mmol_L: {ARP: 20.0}
+    precursor_note: "ARP here = N-(1-deoxy-D-ribulos-1-yl)-glutathione (RG-ARP), a ribose-GLUTATHIONE Amadori compound"
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant glass bottle, stirred, oil bath; volume / headspace not stated"
+    condition_quote: "The solutions of the RG-ARP (20 mmol/L) with or without GSH, Cys, Glu, or Gly (20 mmol/L) ... were prepared and adjusted to pH 7.0 with NaOH (6 mol/L). Then, the solutions were injected into the pressure-resistant glass bottle and thermally stirred in an oil bath at 100 and 120 °C for different times (30, 60, 90, and 120 min)."
+  feng2022_rgarp_ph7_100C:
+    ledger_id: feng2022_table1_rgarp_volatiles
+    t_c: 100
+    minutes: 120
+    initial_mmol_L: {ARP: 20.0}
+    precursor_note: "ARP here = RG-ARP (ribose-glutathione Amadori compound)"
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant glass bottle, stirred, oil bath; volume / headspace not stated"
+    condition_quote: "The solutions of the RG-ARP (20 mmol/L) ... adjusted to pH 7.0 with NaOH (6 mol/L) ... thermally stirred in an oil bath at 100 and 120 °C"
+  feng2022_rgarp_gsh_ph7_120C:
+    ledger_id: feng2022_table2_rgarp_gsh_volatiles
+    t_c: 120
+    minutes: 120
+    initial_mmol_L: {ARP: 20.0, GSH: 20.0}
+    precursor_note: "ARP here = RG-ARP (ribose-glutathione Amadori compound); GSH added 20 mmol/L"
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant glass bottle, stirred, oil bath; volume / headspace not stated"
+    condition_quote: "The solutions of the RG-ARP (20 mmol/L) with or without GSH, Cys, Glu, or Gly (20 mmol/L) ... adjusted to pH 7.0 with NaOH (6 mol/L) ... at 100 and 120 °C for different times (30, 60, 90, and 120 min)."
+  feng2022_rgarp_gsh_ph7_100C:
+    ledger_id: feng2022_table2_rgarp_gsh_volatiles
+    t_c: 100
+    minutes: 120
+    initial_mmol_L: {ARP: 20.0, GSH: 20.0}
+    precursor_note: "ARP here = RG-ARP; GSH added 20 mmol/L"
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant glass bottle, stirred, oil bath; volume / headspace not stated"
+    condition_quote: "The solutions of the RG-ARP (20 mmol/L) with or without GSH ... adjusted to pH 7.0 with NaOH (6 mol/L) ... at 100 and 120 °C"
+  zhou2022_axarp_cys_ph7_120C:
+    ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse
+    t_c: 120
+    minutes: 120
+    initial_mmol_L: {ARP: 20.0, Cys: 20.0}
+    precursor_note: "ARP = alanine-xylose Amadori compound (AX-ARP), the engine's ARP"
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant bottle, oil bath; volume / headspace not stated"
+    condition_quote: "The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L). The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 °C for different times (30, 60, 90, and 120 min)."
+  wang2026b_xyl_cys_ph55_120C:
+    ledger_id: wang2026b_tables1_22_volatiles
+    t_c: 120
+    minutes: 150
+    initial_mmol_L: {PENT: 199.8, Cys: 199.7}
+    buffer: {kind: sodium dihydrogen phosphate, mol_L: 0.2}
+    label_ph: 5.5
+    vessel: "15 mL pressure-resistant thick-walled container, 10 mL fill (5 mL headspace), stirred oil bath"
+    condition_quote: "D-Xylose (0.300 g) and L-cysteine (0.242 g) were dissolved at a 1:1 M ratio in 10 mL of 0.2 mol/L sodium dihydrogen phosphate buffer (pH 5.5) and thoroughly mixed. The mixture was transferred into a 15 mL pressure-resistant thick-walled container and heated in a thermostatic magnetic stirring oil bath ... at 120 ◦C for 60, 90, 120, or 150 min."
+  zhai2023jafc_ttca_ph7_100C:
+    ledger_id: zhai2023jafc_fig3_ttca_arm_volatile_grid
+    t_c: 100
+    minutes: 180
+    initial_mmol_L: {TTCA: 10.0}
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant bottle with magnetic stirrer; volume / headspace not stated"
+    condition_quote: "TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures ... The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 3: 100 / 120 / 140 °C, initial pH of 7.0 and molar ratio of 1:1; 40 / 80 / 120 / 180 min]"
+  zhai2023jafc_ttcacys_ph7_100C:
+    ledger_id: zhai2023jafc_fig3_ttcacys_arm_volatile_grid
+    t_c: 100
+    minutes: 180
+    initial_mmol_L: {TTCA: 10.0, Cys: 10.0}
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant bottle with magnetic stirrer; volume / headspace not stated"
+    condition_quote: "TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures ... The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 3: 100 / 120 / 140 °C, initial pH of 7.0 and molar ratio of 1:1; 40 / 80 / 120 / 180 min]"
+  zhai2023jafc_ttca_ph7_120C:
+    ledger_id: zhai2023jafc_fig3_ttca_arm_volatile_grid
+    t_c: 120
+    minutes: 180
+    initial_mmol_L: {TTCA: 10.0}
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant bottle with magnetic stirrer; volume / headspace not stated"
+    condition_quote: "TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures ... The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 3: 100 / 120 / 140 °C, initial pH of 7.0 and molar ratio of 1:1; 40 / 80 / 120 / 180 min]"
+  zhai2023jafc_ttcacys_ph7_120C:
+    ledger_id: zhai2023jafc_fig3_ttcacys_arm_volatile_grid
+    t_c: 120
+    minutes: 180
+    initial_mmol_L: {TTCA: 10.0, Cys: 10.0}
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant bottle with magnetic stirrer; volume / headspace not stated"
+    condition_quote: "TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures ... The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 3: 100 / 120 / 140 °C, initial pH of 7.0 and molar ratio of 1:1; 40 / 80 / 120 / 180 min]"
+  zhai2023jafc_ttca_ph7_140C:
+    ledger_id: zhai2023jafc_fig3_ttca_arm_volatile_grid
+    t_c: 140
+    minutes: 180
+    initial_mmol_L: {TTCA: 10.0}
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant bottle with magnetic stirrer; volume / headspace not stated"
+    condition_quote: "TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures ... The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 3: 100 / 120 / 140 °C, initial pH of 7.0 and molar ratio of 1:1; 40 / 80 / 120 / 180 min]"
+  zhai2023jafc_ttcacys_ph7_140C:
+    ledger_id: zhai2023jafc_fig3_ttcacys_arm_volatile_grid
+    t_c: 140
+    minutes: 180
+    initial_mmol_L: {TTCA: 10.0, Cys: 10.0}
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant bottle with magnetic stirrer; volume / headspace not stated"
+    condition_quote: "TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures ... The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 3: 100 / 120 / 140 °C, initial pH of 7.0 and molar ratio of 1:1; 40 / 80 / 120 / 180 min]"
+  gigl2021_fft_melanoidin_ph55_27C:
+    ledger_id: gigl2021_fig2_fig4_coffee_melanoidin_fft_binding
+    t_c: 27
+    minutes: 5760
+    initial_mmol_L: {FFT: 5.0}
+    matrix: "coffee high-molecular-weight (>10 kDa) melanoidin fraction at the original beverage concentration (5.4 g coffee / 100 mL)"
+    buffer: {kind: potassium phosphate (KH2PO4 / KOH in D2O, 1/10 of the sample), mol_L: 0.15}
+    label_ph: 5.5
+    vessel: "tightly sealed NMR tube, 600 uL, H2O/D2O 9:1; probe 300 K (no temperature calibration stated)"
+    condition_quote: "the NMR buffer (60 μL), HMW fraction (150 μL, concentration × 4), and odorant stock solution were taken and filled to 600 μL with water ... 1H NMR spectra were recorded at different time steps after incubation (5 min−96 h)"
+  zhai2023foodchem_ttca_ph7_100C:
+    ledger_id: zhai2023foodchem_fig1a_100c_timecourse_grid
+    t_c: 100
+    minutes: 140
+    initial_mmol_L: {TTCA: 10.0}
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure resistant bottle, magnetic stirrer; volume / headspace not stated"
+    condition_quote: "Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 ◦C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer (DF-101S)."
+  zhai2023foodchem_ttcaxyl_ph7_100C:
+    ledger_id: zhai2023foodchem_fig1a_100c_timecourse_grid
+    t_c: 100
+    minutes: 140
+    initial_mmol_L: {TTCA: 10.0, PENT: 10.0}
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure resistant bottle, magnetic stirrer; volume / headspace not stated"
+    condition_quote: "Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 ... prior to the heat treatment under 100, 120, and 140 ◦C"
+  yiltirak2026_rib_cys_ph55_buffer_100C:
+    ledger_id: yiltirak2026_tables3_buffer_arm_mft_fft
+    t_c: 100
+    minutes: 240
+    initial_mmol_L: {PENT: 25.0, Cys: 25.0}
+    buffer: {kind: potassium phosphate, mol_L: 0.5}
+    label_ph: 5.5
+    vessel: "3 mL in a 20 mL PTFE-lined screw-cap Duran tube (17 mL air headspace), stirred heating block"
+    condition_quote: "All buffer phases were prepared by dissolving ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5). ... model systems (3 mL) ... were transferred to 20-mL Duran tubes with screw-caps lined with PTFE gaskets ... and they were heated at 100 ◦C/4 h, 110 ◦C/2 h, 120 ◦C/1 h and 130 ◦C/0.5 h"
+  yiltirak2026_rib_cys_ph55_buffer_110C:
+    ledger_id: yiltirak2026_tables3_buffer_arm_mft_fft
+    t_c: 110
+    minutes: 120
+    initial_mmol_L: {PENT: 25.0, Cys: 25.0}
+    buffer: {kind: potassium phosphate, mol_L: 0.5}
+    label_ph: 5.5
+    vessel: "3 mL in a 20 mL PTFE-lined screw-cap Duran tube (17 mL air headspace), stirred heating block"
+    condition_quote: "All buffer phases were prepared by dissolving ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5). ... model systems (3 mL) ... were transferred to 20-mL Duran tubes with screw-caps lined with PTFE gaskets ... and they were heated at 100 ◦C/4 h, 110 ◦C/2 h, 120 ◦C/1 h and 130 ◦C/0.5 h"
+  yiltirak2026_rib_cys_ph55_buffer_120C:
+    ledger_id: yiltirak2026_tables3_buffer_arm_mft_fft
+    t_c: 120
+    minutes: 60
+    initial_mmol_L: {PENT: 25.0, Cys: 25.0}
+    buffer: {kind: potassium phosphate, mol_L: 0.5}
+    label_ph: 5.5
+    vessel: "3 mL in a 20 mL PTFE-lined screw-cap Duran tube (17 mL air headspace), stirred heating block"
+    condition_quote: "All buffer phases were prepared by dissolving ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5). ... model systems (3 mL) ... were transferred to 20-mL Duran tubes with screw-caps lined with PTFE gaskets ... and they were heated at 100 ◦C/4 h, 110 ◦C/2 h, 120 ◦C/1 h and 130 ◦C/0.5 h"
+  yiltirak2026_rib_cys_ph55_buffer_130C:
+    ledger_id: yiltirak2026_tables3_buffer_arm_mft_fft
+    t_c: 130
+    minutes: 30
+    initial_mmol_L: {PENT: 25.0, Cys: 25.0}
+    buffer: {kind: potassium phosphate, mol_L: 0.5}
+    label_ph: 5.5
+    vessel: "3 mL in a 20 mL PTFE-lined screw-cap Duran tube (17 mL air headspace), stirred heating block"
+    condition_quote: "All buffer phases were prepared by dissolving ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5). ... model systems (3 mL) ... were transferred to 20-mL Duran tubes with screw-caps lined with PTFE gaskets ... and they were heated at 100 ◦C/4 h, 110 ◦C/2 h, 120 ◦C/1 h and 130 ◦C/0.5 h"
+  zhai2023jafc_sulfide_furfural_ph7_120C:
+    ledger_id: zhai2023jafc_fig6_sulfide_furanoids
+    t_c: 120
+    minutes: 20
+    initial_mmol_L: {H2S: 10.0, FUR: 10.0}
+    precursor_note: "sulfide supplied as ammonium sulfide (NH4)2S 10 mmol/L (NH4+ 20 mmol/L, not an engine species)"
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant bottle; volume / headspace not stated"
+    condition_quote: "Compounds of furfural, furan, 2-methylfuran, 4-hydroxy-5-methyl-3(2H)furanone, and MGO-GO were added to the aqueous ammonium sulfide solution (10 mmol/L) with the same molar ratio, respectively. The prepared solutions were adjusted to pH 7.0 ± 0.1 and subsequently treated at 120 °C for a defined reaction time (10, 20, 30, and 40 min). All of the reactions were performed in pressure-resistant bottles"
+  zhai2023jafc_sulfide_norfuraneol_ph7_120C:
+    ledger_id: zhai2023jafc_fig6_sulfide_furanoids
+    t_c: 120
+    minutes: 20
+    initial_mmol_L: {H2S: 10.0, NF: 10.0}
+    precursor_note: "sulfide supplied as ammonium sulfide (NH4)2S 10 mmol/L"
+    buffer: {kind: none, mol_L: 0.0}
+    label_ph: 7.0
+    vessel: "pressure-resistant bottle; volume / headspace not stated"
+    condition_quote: "Compounds of furfural, furan, 2-methylfuran, 4-hydroxy-5-methyl-3(2H)furanone, and MGO-GO were added to the aqueous ammonium sulfide solution (10 mmol/L) with the same molar ratio, respectively. The prepared solutions were adjusted to pH 7.0 ± 0.1 and subsequently treated at 120 °C"
+  zhang2026_gsh_glc_ph65_130C:
+    ledger_id: zhang2026_tables6_s8_volatiles
+    t_c: 130
+    minutes: 120
+    initial_mmol_L: {GSH: 60.0, Glc: 60.0}
+    buffer: {kind: sodium dihydrogen phosphate, mol_L: 0.2}
+    label_ph: 6.5
+    vessel: "15 mL pressure glass vial, 5 mL fill (10 mL headspace), HEL PolyBlock"
+    condition_quote: "In a 15 mL pressure glass vial, 0.3 mmol (0.092 g) of GSH, 0.3 mmol (0.054 g) of glucose, and 5 mL of sodium dihydrogen phosphate buffer solution (0.2 mol/L) were added, which was adjusted to pH 6.5 using 1 mol/L NaOH solution. The vials were placed in a Parallel Synthesis Poly-Block 4 system (HEL Co. Ltd., United Kingdom) and heated at 130, 140, or 150 ◦C for 10, 20, 30, 40, 50, 60, 90, or 120 min."
+  zhang2026_gsh_glc_ph65_140C:
+    ledger_id: zhang2026_tables6_s8_volatiles
+    t_c: 140
+    minutes: 120
+    initial_mmol_L: {GSH: 60.0, Glc: 60.0}
+    buffer: {kind: sodium dihydrogen phosphate, mol_L: 0.2}
+    label_ph: 6.5
+    vessel: "15 mL pressure glass vial, 5 mL fill (10 mL headspace), HEL PolyBlock"
+    condition_quote: "In a 15 mL pressure glass vial, 0.3 mmol (0.092 g) of GSH, 0.3 mmol (0.054 g) of glucose, and 5 mL of sodium dihydrogen phosphate buffer solution (0.2 mol/L) were added, which was adjusted to pH 6.5 using 1 mol/L NaOH solution. The vials were placed in a Parallel Synthesis Poly-Block 4 system (HEL Co. Ltd., United Kingdom) and heated at 130, 140, or 150 ◦C for 10, 20, 30, 40, 50, 60, 90, or 120 min."
+  zhang2026_gsh_glc_ph65_150C:
+    ledger_id: zhang2026_tables6_s8_volatiles
+    t_c: 150
+    minutes: 120
+    initial_mmol_L: {GSH: 60.0, Glc: 60.0}
+    buffer: {kind: sodium dihydrogen phosphate, mol_L: 0.2}
+    label_ph: 6.5
+    vessel: "15 mL pressure glass vial, 5 mL fill (10 mL headspace), HEL PolyBlock"
+    condition_quote: "In a 15 mL pressure glass vial, 0.3 mmol (0.092 g) of GSH, 0.3 mmol (0.054 g) of glucose, and 5 mL of sodium dihydrogen phosphate buffer solution (0.2 mol/L) were added, which was adjusted to pH 6.5 using 1 mol/L NaOH solution. The vials were placed in a Parallel Synthesis Poly-Block 4 system (HEL Co. Ltd., United Kingdom) and heated at 130, 140, or 150 ◦C for 10, 20, 30, 40, 50, 60, 90, or 120 min."
+  kumazawa2003_fft_mcilvaine_ph68_121C_10min:
+    ledger_id: kumazawa2003_t2_fft_survival_t_time_ph
+    t_c: 121
+    minutes: 10
+    initial_mmol_L: {FFT: 0.00876}
+    precursor_note: "FFT 1 ppm (1000 ug/L) spiked; no other reactant"
+    buffer: {kind: "citric acid / Na2HPO4 (McIlvaine: 1/10 M citric acid + 1/5 M Na2HPO4 mixed to pH)", mol_L: null}
+    label_ph: 6.8
+    vessel: "canned without deoxidization (air headspace), retort; can volume / headspace not stated"
+    condition_quote: "At a concentration of 1 ppm, 2-furfurylthiol was dissolved in citric/Na2HPO4 buffer solutions of pH 3.0, 4.0, 5.0, 5.4, 6.0, 6.4, and 7.0 (mixed 1/10 M citric acid and 1/5 M Na2HPO4). Half of each solution was canned without the deoxidization process and treated by heat processing ... [Table 2: 121 °C, 10 min and 123 °C, 20 min; pH 6.8 and 6.0]"
+  kumazawa2003_fft_mcilvaine_ph60_121C_10min:
+    ledger_id: kumazawa2003_t2_fft_survival_t_time_ph
+    t_c: 121
+    minutes: 10
+    initial_mmol_L: {FFT: 0.00876}
+    precursor_note: "FFT 1 ppm (1000 ug/L) spiked; no other reactant"
+    buffer: {kind: "citric acid / Na2HPO4 (McIlvaine: 1/10 M citric acid + 1/5 M Na2HPO4 mixed to pH)", mol_L: null}
+    label_ph: 6.0
+    vessel: "canned without deoxidization (air headspace), retort; can volume / headspace not stated"
+    condition_quote: "At a concentration of 1 ppm, 2-furfurylthiol was dissolved in citric/Na2HPO4 buffer solutions of pH 3.0, 4.0, 5.0, 5.4, 6.0, 6.4, and 7.0 (mixed 1/10 M citric acid and 1/5 M Na2HPO4). Half of each solution was canned without the deoxidization process and treated by heat processing ... [Table 2: 121 °C, 10 min and 123 °C, 20 min; pH 6.8 and 6.0]"
+  kumazawa2003_fft_mcilvaine_ph68_123C_20min:
+    ledger_id: kumazawa2003_t2_fft_survival_t_time_ph
+    t_c: 123
+    minutes: 20
+    initial_mmol_L: {FFT: 0.00876}
+    precursor_note: "FFT 1 ppm (1000 ug/L) spiked; no other reactant"
+    buffer: {kind: "citric acid / Na2HPO4 (McIlvaine: 1/10 M citric acid + 1/5 M Na2HPO4 mixed to pH)", mol_L: null}
+    label_ph: 6.8
+    vessel: "canned without deoxidization (air headspace), retort; can volume / headspace not stated"
+    condition_quote: "At a concentration of 1 ppm, 2-furfurylthiol was dissolved in citric/Na2HPO4 buffer solutions of pH 3.0, 4.0, 5.0, 5.4, 6.0, 6.4, and 7.0 (mixed 1/10 M citric acid and 1/5 M Na2HPO4). Half of each solution was canned without the deoxidization process and treated by heat processing ... [Table 2: 121 °C, 10 min and 123 °C, 20 min; pH 6.8 and 6.0]"
+  kumazawa2003_fft_mcilvaine_ph60_123C_20min:
+    ledger_id: kumazawa2003_t2_fft_survival_t_time_ph
+    t_c: 123
+    minutes: 20
+    initial_mmol_L: {FFT: 0.00876}
+    precursor_note: "FFT 1 ppm (1000 ug/L) spiked; no other reactant"
+    buffer: {kind: "citric acid / Na2HPO4 (McIlvaine: 1/10 M citric acid + 1/5 M Na2HPO4 mixed to pH)", mol_L: null}
+    label_ph: 6.0
+    vessel: "canned without deoxidization (air headspace), retort; can volume / headspace not stated"
+    condition_quote: "At a concentration of 1 ppm, 2-furfurylthiol was dissolved in citric/Na2HPO4 buffer solutions of pH 3.0, 4.0, 5.0, 5.4, 6.0, 6.4, and 7.0 (mixed 1/10 M citric acid and 1/5 M Na2HPO4). Half of each solution was canned without the deoxidization process and treated by heat processing ... [Table 2: 121 °C, 10 min and 123 °C, 20 min; pH 6.8 and 6.0]"
+rows:
+  # US 10,076,126 FIG. 1 / FIG. 2, aqueous-buffer arm (open diamonds), digitised; ng/g = ug/kg
+  - {pot: us10076126_xyl_cys_ph55_110C_mft, species: MFT, t_min: 30, value: 16.0, unit: ug_kg, read_error: 0.2109}
+  - {pot: us10076126_xyl_cys_ph55_110C_mft, species: MFT, t_min: 60, value: 122.0, unit: ug_kg, read_error: 0.0342}
+  - {pot: us10076126_xyl_cys_ph55_110C_mft, species: MFT, t_min: 120, value: 578.0, unit: ug_kg, read_error: 0.0100}
+  - {pot: us10076126_xyl_cys_ph55_110C_mft, species: MFT, t_min: 240, value: 1862.0, unit: ug_kg, read_error: 0.0100}
+  - {pot: us10076126_xyl_cys_ph55_110C_fft, species: FFT, t_min: 120, value: 180.0, unit: ug_kg, read_error: 0.1427}
+  - {pot: us10076126_xyl_cys_ph55_110C_fft, species: FFT, t_min: 240, value: 550.0, unit: ug_kg, read_error: 0.0520}
+  # Schieberle 2000 Table IV, ug per 100 mL pot x 10
+  - {pot: schieberle2000_rib_cys_ph5_100C, species: MFT, t_min: 30, value: 45.0, unit: ug_L, read_error: 0.0048}
+  - {pot: schieberle2000_rib_cys_ph5_100C, species: MFT, t_min: 60, value: 138.0, unit: ug_L, read_error: 0.0016}
+  - {pot: schieberle2000_rib_cys_ph5_100C, species: MFT, t_min: 360, value: 1560.0, unit: ug_L, read_error: 0.0014}
+  - {pot: schieberle2000_rib_cys_ph5_100C, species: MFT, t_min: 720, value: 1790.0, unit: ug_L, read_error: 0.0012}
+  - {pot: schieberle2000_rib_cys_ph5_100C, species: FFT, t_min: 30, value: 20.0, unit: ug_L, read_error: 0.0109}
+  - {pot: schieberle2000_rib_cys_ph5_100C, species: FFT, t_min: 60, value: 31.0, unit: ug_L, read_error: 0.0070}
+  - {pot: schieberle2000_rib_cys_ph5_100C, species: FFT, t_min: 360, value: 1100.0, unit: ug_L, read_error: 0.0020}
+  - {pot: schieberle2000_rib_cys_ph5_100C, species: FFT, t_min: 720, value: 1320.0, unit: ug_L, read_error: 0.0016}
+  # Feng 2022 Table 1 (RG-ARP) and Table 2 (RG-ARP + GSH), ug/L, mean +- SD, n = 3
+  - {pot: feng2022_rgarp_ph7_120C, species: MFT, t_min: 30, value: 4.45, unit: ug_L, sd: 0.38}
+  - {pot: feng2022_rgarp_ph7_120C, species: MFT, t_min: 60, value: 5.95, unit: ug_L, sd: 0.04}
+  - {pot: feng2022_rgarp_ph7_120C, species: MFT, t_min: 90, value: 6.62, unit: ug_L, sd: 0.64}
+  - {pot: feng2022_rgarp_ph7_120C, species: MFT, t_min: 120, value: 7.22, unit: ug_L, sd: 0.44}
+  - {pot: feng2022_rgarp_ph7_120C, species: FFT, t_min: 30, value: 6.04, unit: ug_L, sd: 0.33}
+  - {pot: feng2022_rgarp_ph7_120C, species: FFT, t_min: 60, value: 8.27, unit: ug_L, sd: 0.52}
+  - {pot: feng2022_rgarp_ph7_120C, species: FFT, t_min: 90, value: 9.66, unit: ug_L, sd: 0.52}
+  - {pot: feng2022_rgarp_ph7_120C, species: FFT, t_min: 120, value: 10.46, unit: ug_L, sd: 0.41}
+  - {pot: feng2022_rgarp_ph7_100C, species: MFT, t_min: 120, value: 4.39, unit: ug_L, sd: 0.22}
+  - {pot: feng2022_rgarp_ph7_100C, species: FFT, t_min: 120, value: 5.05, unit: ug_L, sd: 0.02}
+  - {pot: feng2022_rgarp_gsh_ph7_120C, species: MFT, t_min: 30, value: 11.27, unit: ug_L, sd: 0.28}
+  - {pot: feng2022_rgarp_gsh_ph7_120C, species: MFT, t_min: 60, value: 21.88, unit: ug_L, sd: 1.01}
+  - {pot: feng2022_rgarp_gsh_ph7_120C, species: MFT, t_min: 90, value: 28.63, unit: ug_L, sd: 0.76}
+  - {pot: feng2022_rgarp_gsh_ph7_120C, species: MFT, t_min: 120, value: 32.15, unit: ug_L, sd: 0.49}
+  - {pot: feng2022_rgarp_gsh_ph7_120C, species: FFT, t_min: 30, value: 14.31, unit: ug_L, sd: 0.41}
+  - {pot: feng2022_rgarp_gsh_ph7_120C, species: FFT, t_min: 60, value: 30.45, unit: ug_L, sd: 0.36}
+  - {pot: feng2022_rgarp_gsh_ph7_120C, species: FFT, t_min: 90, value: 39.35, unit: ug_L, sd: 0.13}
+  - {pot: feng2022_rgarp_gsh_ph7_120C, species: FFT, t_min: 120, value: 44.63, unit: ug_L, sd: 0.34}
+  - {pot: feng2022_rgarp_gsh_ph7_100C, species: MFT, t_min: 120, value: 9.51, unit: ug_L, sd: 0.18}
+  - {pot: feng2022_rgarp_gsh_ph7_100C, species: FFT, t_min: 120, value: 10.92, unit: ug_L, sd: 2.04}
+  # Zhou 2022 Table 1, AX-ARP + Cys arm, ug/L, mean +- SD, n = 3
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: MFT, t_min: 30, value: 63.28, unit: ug_L, sd: 4.93}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: MFT, t_min: 60, value: 202.87, unit: ug_L, sd: 17.41}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: MFT, t_min: 90, value: 262.91, unit: ug_L, sd: 15.44}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: MFT, t_min: 120, value: 344.87, unit: ug_L, sd: 12.05}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: FFT, t_min: 30, value: 74.51, unit: ug_L, sd: 3.99}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: FFT, t_min: 60, value: 187.13, unit: ug_L, sd: 11.32}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: FFT, t_min: 90, value: 306.19, unit: ug_L, sd: 12.09}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: FFT, t_min: 120, value: 418.68, unit: ug_L, sd: 15.03}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: MFTD, t_min: 30, value: 34.67, unit: ug_L, sd: 1.37}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: MFTD, t_min: 60, value: 37.56, unit: ug_L, sd: 2.41}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: MFTD, t_min: 90, value: 40.68, unit: ug_L, sd: 2.49}
+  - {pot: zhou2022_axarp_cys_ph7_120C, species: MFTD, t_min: 120, value: 43.72, unit: ug_L, sd: 2.82}
+  # Wang 2026b SI Table S1, semi-quantitative (cyclohexanone IS, RF = 1), ng/mL = ug/L, mean +- SD, n = 3
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFT, t_min: 60, value: 543.73, unit: ug_L, sd: 124.61}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFT, t_min: 90, value: 1830.61, unit: ug_L, sd: 191.56}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFT, t_min: 120, value: 1877.38, unit: ug_L, sd: 47.22}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFT, t_min: 150, value: 2407.32, unit: ug_L, sd: 420.60}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: FFT, t_min: 60, value: 274.58, unit: ug_L, sd: 7.72}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: FFT, t_min: 90, value: 1366.95, unit: ug_L, sd: 89.99}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: FFT, t_min: 120, value: 1625.43, unit: ug_L, sd: 209.03}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: FFT, t_min: 150, value: 2120.24, unit: ug_L, sd: 93.03}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFTD, t_min: 60, value: 3730.50, unit: ug_L, sd: 142.70}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFTD, t_min: 90, value: 5856.47, unit: ug_L, sd: 117.54}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFTD, t_min: 120, value: 7271.36, unit: ug_L, sd: 585.83}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFTD, t_min: 150, value: 8722.94, unit: ug_L, sd: 244.80}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: FFTD, t_min: 90, value: 142.97, unit: ug_L, sd: 10.24}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: FFTD, t_min: 120, value: 266.02, unit: ug_L, sd: 59.27}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: FFTD, t_min: 150, value: 480.59, unit: ug_L, sd: 85.01}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFT_FFT_mixed_disulfide, t_min: 60, value: 75.91, unit: ug_L, sd: 3.98}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFT_FFT_mixed_disulfide, t_min: 90, value: 687.80, unit: ug_L, sd: 49.75}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFT_FFT_mixed_disulfide, t_min: 120, value: 835.73, unit: ug_L, sd: 67.61}
+  - {pot: wang2026b_xyl_cys_ph55_120C, species: MFT_FFT_mixed_disulfide, t_min: 150, value: 1023.16, unit: ug_L, sd: 140.27}
+  # Zhai 2023 JAFC Fig. 3, T arm, printed heat-map cells (ug/L, semi-quantitative), no SD printed
+  - {pot: zhai2023jafc_ttca_ph7_100C, species: MFT, t_min: 180, value: 0.923, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023jafc_ttca_ph7_100C, species: FFT, t_min: 180, value: 3.119, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_120C, species: MFT, t_min: 40, value: 0.432, unit: ug_L, read_error: 0.0005}
+  - {pot: zhai2023jafc_ttca_ph7_120C, species: MFT, t_min: 80, value: 0.937, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023jafc_ttca_ph7_120C, species: MFT, t_min: 120, value: 1.388, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023jafc_ttca_ph7_120C, species: MFT, t_min: 180, value: 2.479, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_120C, species: FFT, t_min: 40, value: 1.129, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023jafc_ttca_ph7_120C, species: FFT, t_min: 80, value: 3.019, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_120C, species: FFT, t_min: 120, value: 4.107, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_120C, species: FFT, t_min: 180, value: 4.279, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_140C, species: MFT, t_min: 40, value: 1.129, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023jafc_ttca_ph7_140C, species: MFT, t_min: 80, value: 3.043, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_140C, species: MFT, t_min: 120, value: 5.907, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_140C, species: MFT, t_min: 180, value: 4.012, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_140C, species: FFT, t_min: 40, value: 5.079, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_140C, species: FFT, t_min: 80, value: 12.439, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_140C, species: FFT, t_min: 120, value: 11.439, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttca_ph7_140C, species: FFT, t_min: 180, value: 4.906, unit: ug_L, read_error: 0.0001}
+  # Zhai 2023 JAFC Fig. 3, TC arm, printed heat-map cells (ug/L, semi-quantitative), no SD printed
+  - {pot: zhai2023jafc_ttcacys_ph7_100C, species: MFT, t_min: 40, value: 0.021, unit: ug_L, read_error: 0.0103}
+  - {pot: zhai2023jafc_ttcacys_ph7_100C, species: MFT, t_min: 80, value: 0.218, unit: ug_L, read_error: 0.001}
+  - {pot: zhai2023jafc_ttcacys_ph7_100C, species: MFT, t_min: 120, value: 1.178, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023jafc_ttcacys_ph7_100C, species: MFT, t_min: 180, value: 3.078, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_100C, species: FFT, t_min: 40, value: 0.117, unit: ug_L, read_error: 0.0019}
+  - {pot: zhai2023jafc_ttcacys_ph7_100C, species: FFT, t_min: 80, value: 0.526, unit: ug_L, read_error: 0.0004}
+  - {pot: zhai2023jafc_ttcacys_ph7_100C, species: FFT, t_min: 120, value: 2.034, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_100C, species: FFT, t_min: 180, value: 4.596, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_120C, species: MFT, t_min: 40, value: 1.104, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023jafc_ttcacys_ph7_120C, species: MFT, t_min: 80, value: 1.741, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_120C, species: MFT, t_min: 120, value: 4.083, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_120C, species: MFT, t_min: 180, value: 5.032, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_120C, species: FFT, t_min: 40, value: 2.064, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_120C, species: FFT, t_min: 80, value: 5.073, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_120C, species: FFT, t_min: 120, value: 11.591, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_120C, species: FFT, t_min: 180, value: 12.937, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_140C, species: MFT, t_min: 40, value: 1.576, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_140C, species: MFT, t_min: 80, value: 3.126, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_140C, species: MFT, t_min: 120, value: 7.189, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_140C, species: MFT, t_min: 180, value: 5.037, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_140C, species: FFT, t_min: 40, value: 2.728, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_140C, species: FFT, t_min: 80, value: 6.963, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_140C, species: FFT, t_min: 120, value: 17.763, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023jafc_ttcacys_ph7_140C, species: FFT, t_min: 180, value: 16.628, unit: ug_L, read_error: 0.0001}
+  # Gigl 2021 SI Table S2, FFT % free x 5 mmol/L nominal = free FFT mmol/L (qHNMR, RT 300 K, coffee HMW melanoidin)
+  - {pot: gigl2021_fft_melanoidin_ph55_27C, species: FFT, t_min: 5, value: 1.615, unit: mmol_L, read_error: 0.0007}
+  - {pot: gigl2021_fft_melanoidin_ph55_27C, species: FFT, t_min: 30, value: 1.615, unit: mmol_L, read_error: 0.0007}
+  - {pot: gigl2021_fft_melanoidin_ph55_27C, species: FFT, t_min: 60, value: 1.61, unit: mmol_L, read_error: 0.0007}
+  - {pot: gigl2021_fft_melanoidin_ph55_27C, species: FFT, t_min: 120, value: 1.615, unit: mmol_L, read_error: 0.0007}
+  - {pot: gigl2021_fft_melanoidin_ph55_27C, species: FFT, t_min: 240, value: 1.565, unit: mmol_L, read_error: 0.0007}
+  - {pot: gigl2021_fft_melanoidin_ph55_27C, species: FFT, t_min: 720, value: 1.35, unit: mmol_L, read_error: 0.0008}
+  - {pot: gigl2021_fft_melanoidin_ph55_27C, species: FFT, t_min: 1440, value: 1.165, unit: mmol_L, read_error: 0.0009}
+  - {pot: gigl2021_fft_melanoidin_ph55_27C, species: FFT, t_min: 2880, value: 0.765, unit: mmol_L, read_error: 0.0014}
+  # Zhai 2023 Food Chem Fig. 1a, 100 C, printed heat-map cells (ug/L, semi-quantitative RF = 1), no SD printed
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: MFT, t_min: 40, value: 0.078, unit: ug_L, read_error: 0.0028}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: MFT, t_min: 60, value: 0.1, unit: ug_L, read_error: 0.0022}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: MFT, t_min: 80, value: 0.509, unit: ug_L, read_error: 0.0004}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: MFT, t_min: 100, value: 0.98, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: MFT, t_min: 120, value: 1.237, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: MFT, t_min: 140, value: 1.179, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: MFT, t_min: 20, value: 0.083, unit: ug_L, read_error: 0.0026}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: MFT, t_min: 40, value: 0.213, unit: ug_L, read_error: 0.001}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: MFT, t_min: 60, value: 0.334, unit: ug_L, read_error: 0.0007}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: MFT, t_min: 80, value: 0.939, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: MFT, t_min: 100, value: 1.537, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: MFT, t_min: 120, value: 1.729, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: MFT, t_min: 140, value: 1.928, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: FFT, t_min: 20, value: 0.253, unit: ug_L, read_error: 0.0009}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: FFT, t_min: 40, value: 0.708, unit: ug_L, read_error: 0.0003}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: FFT, t_min: 60, value: 0.842, unit: ug_L, read_error: 0.0003}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: FFT, t_min: 80, value: 1.206, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: FFT, t_min: 100, value: 3.022, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: FFT, t_min: 120, value: 3.734, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023foodchem_ttca_ph7_100C, species: FFT, t_min: 140, value: 3.029, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: FFT, t_min: 20, value: 0.372, unit: ug_L, read_error: 0.0006}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: FFT, t_min: 40, value: 1.218, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: FFT, t_min: 60, value: 1.397, unit: ug_L, read_error: 0.0002}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: FFT, t_min: 80, value: 2.101, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: FFT, t_min: 100, value: 3.499, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: FFT, t_min: 120, value: 4.736, unit: ug_L, read_error: 0.0001}
+  - {pot: zhai2023foodchem_ttcaxyl_ph7_100C, species: FFT, t_min: 140, value: 4.875, unit: ug_L, read_error: 0.0001}
+  # Yiltirak 2026 SI Table S3, buffer arm, SIDA, ug/L, mean +- SD (each condition heated three times)
+  - {pot: yiltirak2026_rib_cys_ph55_buffer_100C, species: MFT, t_min: 240, value: 6.88, unit: ug_L, sd: 0.98}
+  - {pot: yiltirak2026_rib_cys_ph55_buffer_100C, species: FFT, t_min: 240, value: 1.28, unit: ug_L, sd: 0.08}
+  - {pot: yiltirak2026_rib_cys_ph55_buffer_110C, species: MFT, t_min: 120, value: 3.29, unit: ug_L, sd: 0.06}
+  - {pot: yiltirak2026_rib_cys_ph55_buffer_110C, species: FFT, t_min: 120, value: 1.46, unit: ug_L, sd: 0.19}
+  - {pot: yiltirak2026_rib_cys_ph55_buffer_120C, species: MFT, t_min: 60, value: 2.4, unit: ug_L, sd: 0.16}
+  - {pot: yiltirak2026_rib_cys_ph55_buffer_120C, species: FFT, t_min: 60, value: 1.68, unit: ug_L, sd: 0.21}
+  - {pot: yiltirak2026_rib_cys_ph55_buffer_130C, species: MFT, t_min: 30, value: 1.71, unit: ug_L, sd: 0.12}
+  - {pot: yiltirak2026_rib_cys_ph55_buffer_130C, species: FFT, t_min: 30, value: 1.62, unit: ug_L, sd: 0.11}
+  # Zhai 2023 JAFC Fig. 6a/6b, 3-D bars digitised (front-face height over its base), g/L -> mmol/L; read error 0.03 g/L
+  - {pot: zhai2023jafc_sulfide_furfural_ph7_120C, species: FUR, t_min: 0, value: 10.46, unit: mmol_L, read_error: 0.013, method: semi_quantitative, method_basis: "ledger class unknown; the paper's only stated method (Table S2 calibration curves) is contradicted for this laboratory's cells (Fig. 3 2-methylthiazole below its curve's zero point; Food Chem 2023: correction factor 1), and no dilution brings g/L samples into an HS-SPME calibration range: treated as semi-quantitative", g_per_L: 1.005}
+  - {pot: zhai2023jafc_sulfide_furfural_ph7_120C, species: FUR, t_min: 10, value: 2.10, unit: mmol_L, read_error: 0.060, method: semi_quantitative, method_basis: "ledger class unknown; the paper's only stated method (Table S2 calibration curves) is contradicted for this laboratory's cells (Fig. 3 2-methylthiazole below its curve's zero point; Food Chem 2023: correction factor 1), and no dilution brings g/L samples into an HS-SPME calibration range: treated as semi-quantitative", g_per_L: 0.202}
+  - {pot: zhai2023jafc_sulfide_furfural_ph7_120C, species: FFT, t_min: 10, value: 1.19, unit: mmol_L, read_error: 0.086, method: semi_quantitative, method_basis: "ledger class unknown; the paper's only stated method (Table S2 calibration curves) is contradicted for this laboratory's cells (Fig. 3 2-methylthiazole below its curve's zero point; Food Chem 2023: correction factor 1), and no dilution brings g/L samples into an HS-SPME calibration range: treated as semi-quantitative", g_per_L: 0.136}
+  - {pot: zhai2023jafc_sulfide_furfural_ph7_120C, species: FFT, t_min: 20, value: 2.43, unit: mmol_L, read_error: 0.045, method: semi_quantitative, method_basis: "ledger class unknown; the paper's only stated method (Table S2 calibration curves) is contradicted for this laboratory's cells (Fig. 3 2-methylthiazole below its curve's zero point; Food Chem 2023: correction factor 1), and no dilution brings g/L samples into an HS-SPME calibration range: treated as semi-quantitative", g_per_L: 0.278}
+  - {pot: zhai2023jafc_sulfide_norfuraneol_ph7_120C, species: NF, t_min: 0, value: 10.60, unit: mmol_L, read_error: 0.011, method: semi_quantitative, method_basis: "ledger class unknown; the paper's only stated method (Table S2 calibration curves) is contradicted for this laboratory's cells (Fig. 3 2-methylthiazole below its curve's zero point; Food Chem 2023: correction factor 1), and no dilution brings g/L samples into an HS-SPME calibration range: treated as semi-quantitative", g_per_L: 1.209}
+  - {pot: zhai2023jafc_sulfide_norfuraneol_ph7_120C, species: MFT, t_min: 10, value: 3.22, unit: mmol_L, read_error: 0.034, method: semi_quantitative, method_basis: "ledger class unknown; the paper's only stated method (Table S2 calibration curves) is contradicted for this laboratory's cells (Fig. 3 2-methylthiazole below its curve's zero point; Food Chem 2023: correction factor 1), and no dilution brings g/L samples into an HS-SPME calibration range: treated as semi-quantitative", g_per_L: 0.368}
+  - {pot: zhai2023jafc_sulfide_norfuraneol_ph7_120C, species: MFT, t_min: 20, value: 3.45, unit: mmol_L, read_error: 0.032, method: semi_quantitative, method_basis: "ledger class unknown; the paper's only stated method (Table S2 calibration curves) is contradicted for this laboratory's cells (Fig. 3 2-methylthiazole below its curve's zero point; Food Chem 2023: correction factor 1), and no dilution brings g/L samples into an HS-SPME calibration range: treated as semi-quantitative", g_per_L: 0.394}
+  # Zhang 2026 SI Tables S6-S8, 2-methyl-3-furanthiol, ng/g = ug/kg, semi-quantitative (single IS), mean +- SD, n = 3
+  - {pot: zhang2026_gsh_glc_ph65_130C, species: MFT, t_min: 90, value: 0.33, unit: ug_kg, sd: 0.11}
+  - {pot: zhang2026_gsh_glc_ph65_130C, species: MFT, t_min: 120, value: 1.01, unit: ug_kg, sd: 0.21}
+  - {pot: zhang2026_gsh_glc_ph65_140C, species: MFT, t_min: 90, value: 0.56, unit: ug_kg, sd: 0.11}
+  - {pot: zhang2026_gsh_glc_ph65_140C, species: MFT, t_min: 120, value: 1.12, unit: ug_kg, sd: 0.32}
+  - {pot: zhang2026_gsh_glc_ph65_150C, species: MFT, t_min: 90, value: 0.78, unit: ug_kg, sd: 0.12}
+  - {pot: zhang2026_gsh_glc_ph65_150C, species: MFT, t_min: 120, value: 2.32, unit: ug_kg, sd: 0.45}
+  # Kumazawa 2003 Table 2, FFT residual ratio (%) x 1 ppm spike = FFT remaining, ug/L; read error = half the printed 0.1 %
+  - {pot: kumazawa2003_fft_mcilvaine_ph68_121C_10min, species: FFT, t_min: 10, value: 55.0, unit: ug_L, read_error: 0.0039}
+  - {pot: kumazawa2003_fft_mcilvaine_ph60_121C_10min, species: FFT, t_min: 10, value: 483.0, unit: ug_L, read_error: 0.0004}
+  - {pot: kumazawa2003_fft_mcilvaine_ph68_123C_20min, species: FFT, t_min: 20, value: 53.0, unit: ug_L, read_error: 0.0041}
+  - {pot: kumazawa2003_fft_mcilvaine_ph60_123C_20min, species: FFT, t_min: 20, value: 434.0, unit: ug_L, read_error: 0.0005}

@@ -245,7 +245,10 @@ rules:
     name: 1,4-dideoxypentosone + H2S -> 2-methyl-3-furanthiol (the intact-C5 route)
     class: sulfur_assembly
     status: net
-    smirks: "[CH3:1][C:2](=[O:6])[C:3](=O)[CH2:4][CH1:5]=O.[SH2:7]>>[CH3:1][c:2]1[o:6][cH:5][cH:4][c:3]1[SH1:7]"
+    # 2026-10-29 (CF-059): the template now reads 1,4-dideoxy-2,3-pentodiulose as it is, C5 a CH2OH (C5H8O3); the ring
+    # oxygen is that hydroxyl, and the net step loses two waters. It read a 2,3-dioxopentanal (C5H6O3) before, which
+    # cannot give MFT by dehydration alone.
+    smirks: "[CH3:1][C:2](=O)[C:3](=O)[CH2:4][CH2:5][OH:6].[SH2:7]>>[CH3:1][c:2]1[o:6][cH:5][cH:4][c:3]1[SH1:7]"
     source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 6, ribose + H2S -> MFT with the pentose skeleton intact (isotope labelling)"}
     conditions: "aqueous, 145 C, pH 5"
     controls:

@@ -137,9 +137,17 @@ def check_runners(failures: List[str]) -> None:
 #: are not re-hashed; it must carry the commit it was written at. The LIVE artifacts (scorecards, the envelope, flux
 #: attribution, baselines, contrasts, the choice sweep, the wishlist, figures) are still re-hashed and, where cheap,
 #: regenerated: they describe the model as it is.
+#: 2026-10-30: the Phase 2 sub-model records (each fit arm, each no-refit probe, each frozen hold-out prediction) are
+#: records of the same kind -- run at a commit, quoted by number in their pre-registration -- and are pinned likewise.
 FROZEN_RECORD_GENERATOR = re.compile(
-    r"scripts/generators/generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
-    r"structural_discrepancy)\.py$")
+    r"scripts/generators/(generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
+    r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout|diagnose_\w+|probe_\w+)\.py$")
+
+
+#: 2026-10-30 (owner: "I am not sure regenerating the figure is needed until we have the engine finished"; strategy
+#: sec. 4: no regeneration of a structurally changing model before Phase 3). The figures are rebuilt ONCE, at Phase
+#: 3's single regeneration; until then their record's staleness is REPORTED, not failed, so it stays visible.
+DEFERRED_TO_PHASE3 = ("results/validation/figure_inputs.json",)
 
 
 def is_frozen_record(relative: str, payload: Dict) -> bool:
@@ -163,7 +171,9 @@ def check_input_hashes(failures: List[str]) -> None:
             frozen += 1
             continue
         stale = provenance.stale_inputs(payload)
-        if stale:
+        if stale and data_paths.rel(path) in DEFERRED_TO_PHASE3:
+            print(f"  [deferred] {data_paths.rel(path)}: {len(stale)} stale inputs -- rebuilt at Phase 3 (owner, 2026-10-30)")
+        elif stale:
             failures.append(f"{data_paths.rel(path)}: stale inputs:\n      " + "\n      ".join(stale))
         else:
             print(f"  [inputs] {data_paths.rel(path)}: {len(payload['provenance'].get('inputs', []))} inputs current")

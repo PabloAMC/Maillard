@@ -19,6 +19,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 LEDGERS = ROOT / "data" / "lit" / "measurement_ledger"
 VERIFICATION = ROOT / "data" / "lit" / "source_verification.yml"
+VERIFICATION_DIR = ROOT / "data" / "lit" / "source_verification"   # one file per sub-model (2026-10-29)
 FIT_ROWS = ROOT / "data" / "lit" / "fit_rows"
 CHECKS = ("conditions", "units", "quantification", "duplicates", "values")
 FIELDS = ("ledger_id", "source_file", "read_by", "second_reader", "date", "checks", "quote")
@@ -33,41 +34,60 @@ def _ledger_entries() -> dict:
     return out
 
 
+def _check_entry(entry: dict, ledger: dict, verified: dict, problems: list, where: str) -> None:
+    key = entry.get("ledger_id", "?")
+    if key in verified:
+        problems.append(f"{where}: {key} is entered twice")
+    missing = [f for f in FIELDS if f not in entry]
+    if missing:
+        problems.append(f"{where}: {key}: missing {missing}")
+        return
+    if key not in ledger:
+        problems.append(f"{where}: {key}: not in any measurement ledger")
+    checks = entry["checks"] or {}
+    absent = [c for c in CHECKS if c not in checks]
+    if absent:
+        problems.append(f"{where}: {key}: checks missing {absent}")
+    bad = {c: v for c, v in checks.items() if v not in VERDICTS}
+    if bad:
+        problems.append(f"{where}: {key}: verdicts not in {sorted(VERDICTS)}: {bad}")
+    if not str(entry["quote"] or "").strip():
+        problems.append(f"{where}: {key}: no quote from the source")
+    if str(entry["second_reader"] or "").strip() == str(entry["read_by"] or "").strip():
+        problems.append(f"{where}: {key}: the second reader must differ from the first")
+    # a check by one reader is not a verification: "pending" (the second reader has not run) is unverified
+    second = str(entry["second_reader"] or "").strip()
+    verified[key] = all(checks.get(c) in ("pass", "corrected") for c in CHECKS) and second not in ("", "pending")
+
+
 def check() -> tuple:
     problems, notes = [], []
     ledger = _ledger_entries()
-    verified = {}
-    for entry in (yaml.safe_load(VERIFICATION.read_text(encoding="utf-8")) or {}).get("entries") or []:
-        key = entry.get("ledger_id", "?")
-        missing = [f for f in FIELDS if f not in entry]
-        if missing:
-            problems.append(f"{key}: missing {missing}")
-            continue
-        if key not in ledger:
-            problems.append(f"{key}: not in any measurement ledger")
-        checks = entry["checks"] or {}
-        absent = [c for c in CHECKS if c not in checks]
-        if absent:
-            problems.append(f"{key}: checks missing {absent}")
-        bad = {c: v for c, v in checks.items() if v not in VERDICTS}
-        if bad:
-            problems.append(f"{key}: verdicts not in {sorted(VERDICTS)}: {bad}")
-        if not str(entry["quote"] or "").strip():
-            problems.append(f"{key}: no quote from the source")
-        if str(entry["second_reader"] or "").strip() == str(entry["read_by"] or "").strip():
-            problems.append(f"{key}: the second reader must differ from the first")
-        verified[key] = all(checks.get(c) in ("pass", "corrected") for c in CHECKS)
-    rows_checked = 0
+    # verification is scoped per table (2026-10-29): a ledger id verified for one sub-model's rows is not verified for
+    # another's, so each file keeps its own map; the shared file (key None) counts for every table
+    verified_in = {}
+    files = [VERIFICATION, *sorted(VERIFICATION_DIR.glob("*.yml"))] if VERIFICATION_DIR.exists() else [VERIFICATION]
+    for f in files:
+        verified = verified_in.setdefault(None if f == VERIFICATION else f.stem, {})
+        for entry in (yaml.safe_load(f.read_text(encoding="utf-8")) or {}).get("entries") or []:
+            _check_entry(entry, ledger, verified, problems, f.name)
+    rows_checked, drafts = 0, []
     for path in sorted(FIT_ROWS.glob("*.yml")) if FIT_ROWS.exists() else []:
-        for row in (yaml.safe_load(path.read_text(encoding="utf-8")) or {}).get("rows") or []:
-            rows_checked += 1
-            key = row.get("ledger_id")
-            if key is None:
-                problems.append(f"{path.name}: a row has no ledger_id")
-            elif not verified.get(key, False):
-                problems.append(f"{path.name}: row of {key!r} enters a fit but its source is not verified")
-    debt = sorted(k for k, e in ledger.items() if e.get("status") == "in_model_fit" and not verified.get(k))
-    notes.append(f"{len(verified)} ledger entries verified; {rows_checked} keyed fit rows checked; "
+        table = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        if table.get("status", "draft") != "ready":
+            # a table still being read and verified: reported, not failed; fit_rows.load refuses it for fitting
+            drafts.append(path.name)
+            continue
+        cited = {pot.get("ledger_id") for pot in (table.get("pots") or {}).values()}
+        rows_checked += len(table.get("rows") or [])
+        own = {**verified_in.get(None, {}), **verified_in.get(path.stem, {})}
+        for key in sorted(k for k in cited if k):
+            if not own.get(key, False):
+                problems.append(f"{path.name} is ready but its source {key!r} is not verified by two readers "
+                                f"in source_verification/{path.stem}.yml")
+    anywhere = {k for v in verified_in.values() for k, ok in v.items() if ok}
+    debt = sorted(k for k, e in ledger.items() if e.get("status") == "in_model_fit" and k not in anywhere)
+    notes.append(f"draft tables (not yet fit-ready): {drafts or 'none'}; {len(anywhere)} ledger entries verified by two readers ({len({k for v in verified_in.values() for k in v})} read); {rows_checked} keyed fit rows checked; "
                  f"{len(debt)} in_model_fit entries of earlier waves unverified (debt, reported, not failed)")
     return problems, notes
 

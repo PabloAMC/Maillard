@@ -245,3 +245,24 @@ entries:
       - {name: shape_only, value: "tau = inf for every series", source: "strategy sec. 7 decision 2 (relative accuracy primary)"}
     decided_by: "owner 2026-10-29 (strategy M6); a fit reports its constants under both until the data separate them"
     sensitivity: {status: untested}
+
+  - id: CR-16
+    what: 3-deoxypentosone's own decay in B7a arm R-T, a hexose constant transferred to the pentose osone
+    where: {file: src/kinetic_core/parameters_sulfur.py, symbol: TDP_OWN_DECAY}
+    kind: alternatives
+    current: >-
+      off by default; when on, the trunk's k_tdg_fa (3.45e-2 1/min at 100 C, Ea 30.0 kJ/mol), no pH term
+    basis: >-
+      No pentose measurement exists. The primary pairing is the hexose step the trunk already runs: Martins & Van
+      Boekel 2005 (Food Chem. 90) Table 2 model M4, step 5, 3-DG -> formic acid (parameters.MARTINS_M4 k_tdg_fa). The
+      same group's Martins & Van Boekel 2005b Table 2 prints four non-zero k5 cells, 6.3e-3 / 2.0e-2 / 4.1e-3 /
+      1.9e-2 1/min at pH 5.5 / 6.0 / 6.8 / 7.5 (pH 4.8 a deleted parameter), geometric mean 1.0e-2, 3.5x below; its
+      Table 3 exponent pD = 0.09 +- 1.10 licenses no pH term. The barrier conflicts across laboratories (k_tdg_fa's
+      note): Martins 30 (29.6 +- 8.5 in the paper), Yu 2018 43.9 (pH 10), Knol 2010 84 +- 14. When on, the exit is a derived rate: it ignores a job's k_ref override or ablation of k_osone_decay (code review 2026-10-31), by design -- it replaces that constant for TDP.
+    alternatives:
+      - {name: trunk_k_tdg_fa, value: "3.45e-2 1/min at 100 C, Ea 30.0", source: "Martins & Van Boekel 2005, Table 2 M4, step 5"}
+      - {name: martins2005b_geomean, value: "1.0e-2 1/min at 100 C (--tdp-exit-k)", source: "Martins & Van Boekel 2005b, Table 2 k5"}
+      - {name: yu_ea, value: "43.9 kJ/mol (--tdp-exit-ea)", source: "Yu 2018 Table 1, step 5 (pH 10)"}
+      - {name: knol_ea, value: "84 kJ/mol (--tdp-exit-ea)", source: "Knol 2010 T2"}
+    decided_by: "kinetic_core_dpo_partition_prereg.md sec. 8 as revised after its design review (2026-10-31): the trunk's k_tdg_fa is the declared transfer; the others are sensitivities"
+    sensitivity: {status: untested}

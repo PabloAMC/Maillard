@@ -60,6 +60,7 @@ from typing import Any, Dict, Mapping, Optional, Tuple
 
 from . import ph_state as _ph
 from .parameters import EVIDENCE_CLASSES, R_KJ
+from .parameters import MARTINS_M4 as _MARTINS_M4, T_REF_K as _T_REF_K_TRUNK
 
 #: Reference temperature of the sulfur module: 145 C, the temperature of the
 #: Hofmann 1998 SIDA anchors and of the Cerny isotope experiments -- i.e. the
@@ -453,6 +454,11 @@ class NfHydroxideDecay:
     ea_kj_mol: float = 103.7
     source: str = ("Mikami, Nakamura, Yamada & Murata 2017, Food Sci. Technol. Res. 23:283 (10.3136/fstr.23.283), "
                    "Fig. 6B: norfuraneol 1.7-1.8 mM alone, 0.2 M phosphate pH 8.0, 100 C, k = 0.032 1/min")
+    #: Sub-model 3 (2026-10-30; design review): the share of this decay that gives methylglyoxal (r_nf_decay_oh_mgo).
+    #: Mikami Fig. 6B prints MGO-quinoxaline peaking at 0.6 mol % of the norfuraneol at 0.5 h -- a transient, so a
+    #: LOWER bound on the formation share (MGO is itself consumed); the share is fitted on Mikami's own MGO rows.
+    #: 0 = exactly B61 as shipped.
+    mgo_share: float = 0.0
 
     @property
     def log10_k_anchor_ph5(self) -> float:
@@ -467,6 +473,134 @@ class NfHydroxideDecay:
 
 
 NF_HYDROXIDE_DECAY = NfHydroxideDecay()
+
+
+@dataclass(frozen=True)
+class PentoseMgoRoutes:
+    """
+    Sub-model 3 (2026-10-30), the design review's rival arms for methylglyoxal in pentose systems, OFF by default
+    (rates zero): A3, 3-deoxypentosone's C3-C4 retro-aldol to methylglyoxal + glycolaldehyde (``r_tdp_mgo``; the
+    hexose analogue r_tdg_mgo is Martins' measured step); A4, a lumped amine-free pentose fragmentation via the
+    ketose / triose route (``r_pent_mgo``). Both base-favoured (the engine's "base" pH factor, 1 at pH 5); constants
+    at 100 C and pH 5 with an Arrhenius Ea, FITTED on the calibrated Jiangnan MGO rows when an arm is run
+    (results/validation/kinetic_core_deoxyosone_submodel_prereg.md sec. 5). No literature rate exists for either.
+    """
+
+    k_tdp_mgo_100c_ph5: float = 0.0
+    ea_tdp_mgo_kj_mol: float = 100.0
+    k_pent_mgo_100c_ph5: float = 0.0
+    ea_pent_mgo_kj_mol: float = 100.0
+
+    @staticmethod
+    def k_at(k_100: float, ea: float, temperature_k: float) -> float:
+        return float(k_100) * math.exp(-float(ea) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+PENTOSE_MGO_ROUTES = PentoseMgoRoutes()
+
+
+@dataclass(frozen=True)
+class PentoseAmineEntry:
+    """
+    Pentose + amine entry and the pentose acetic-acid step (2026-10-30; kinetic_core_pentose_amine_entry_prereg.md),
+    OFF by default (rates zero). ``r_pent_amine``: PENT + Gly -> PAMA, second order, L/(mmol min) at 100 C and pH 6,
+    times 10^(entry_ph_slope (pH - 6)) on the in-situ pH; PAMA's two enolisations run at ARP's derived rates (a
+    declared assumption: the Amadori compound's breakdown does not depend on its amino acid) and return the amino
+    acid. ``r_dpo_aa``: 1-deoxypentosone -> acetic acid + C3 (hydrolytic beta-cleavage of the 2,4-diulose, Davidek
+    2008), first order, 1/min at 100 C and pH 6, times 10^(aa_ph_slope (pH - 6)). Every rate FITTED (Davidek 2008,
+    Desclaux 2006). Ea (design review S3): the entry at Martins 2003's measured hexose condensation (k_schiff, 96.8
+    kJ/mol; a declared hexose -> pentose transfer, band +-15), the cleavage at the measured hexose analogue's
+    (r_odg_aa, Martins 2005, 76.0). ``amine_return``: the fraction of PAMA's enolisations that returns the amino
+    acid; the rest leaves it in a fragment (design review S4: Davidek's pH 6 xylose decays as if glycine were used
+    1 : 1). Fitted in [0, 1]; 1 means fully catalytic.
+    """
+
+    k_entry_l_per_mmol_min_100c_ph6: float = 0.0
+    entry_ph_slope: float = 0.0
+    ea_entry_kj_mol: float = 96.8
+    k_dpo_aa_per_min_100c_ph6: float = 0.0
+    aa_ph_slope: float = 0.0
+    ea_dpo_aa_kj_mol: float = 76.0
+    #: PAMA's enolisations as multiples of ARP's derived rates. The probe (2026-10-30) found ARP's 4.2x (to 1-DP) and
+    #: 9.1x (to 3-DP) slower than Desclaux 2006's MEASURED glycine-xylose constants (2.79e-2 / 5.50e-4 per min, pH 6,
+    #: 100 C): the prereg's declared alternative (> x3) puts PAMA on Desclaux's level, ARP's pH and T dependence.
+    #: Frozen from the probe (design review S5: never left to a generator to remember); pinned by a unit test at
+    #: Desclaux's conditions. TRANSFER RESTRICTION: Desclaux's constants are fitted constants of Desclaux's own
+    #: network in 0.5 M phosphate; ARP's come from Zhou's unbuffered pots -- the gap may be phosphate catalysis, not
+    #: the amino acid. Every row the entry is fitted on is a high-phosphate pot.
+    pama_dpo_factor: float = 4.139022442570774
+    pama_tdp_factor: float = 9.13331167984854
+    amine_return: float = 1.0
+
+    @property
+    def enabled(self) -> bool:
+        return self.k_entry_l_per_mmol_min_100c_ph6 > 0.0
+
+    @staticmethod
+    def k_at(k_100: float, ea: float, temperature_k: float) -> float:
+        return float(k_100) * math.exp(-float(ea) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+PENTOSE_AMINE_ENTRY = PentoseAmineEntry()
+
+
+@dataclass(frozen=True)
+class DdpFormationPh:
+    """
+    Round 3 (thiol prereg secs. 9-10, 2026-10-30): the pH law of r_dpo_ddp, 1-deoxypentosone + cysteine ->
+    1,4-dideoxypentosone (the intact-C5 MFT route's first step; Cerny 2003's proposal, DDP never detected). Shipped:
+    the engine's "base" (free-amine) factor -- x143 at pH 7, x0.29 at pH 4.3 against pH 5 -- which nothing measured
+    supports. Rivals: "none" (pH-independent) and "slope" (10^(slope (pH - 5)) on the in-situ pH, the slope fitted).
+    """
+
+    law: str = "base"
+    slope: float = 0.0
+
+
+DDP_FORMATION_PH = DdpFormationPh()
+
+
+@dataclass(frozen=True)
+class MgoCysteineStrecker:
+    """
+    Sub-model 3 + 4 (2026-10-30; the joint fit's design review, B5), OFF by default (rate 0): the Strecker
+    degradation of cysteine by METHYLGLYOXAL -- the textbook Strecker reagent -- which the lane lacked: B59a's
+    Strecker sulfur rides only on 1-deoxypentosone + cysteine, so moving 1-deoxypentosone flux to MGO deleted H2S
+    that should follow it. Second order, L/(mmol min) at 100 C and pH 5 (the "base" pH factor, as r_dpo_ddp), with
+    an Arrhenius Ea; FITTED (no measured constant exists). Its H2S branch is B59a's registered share (CR-11) of it.
+    """
+
+    k_l_per_mmol_min_100c_ph5: float = 0.0
+    ea_kj_mol: float = 64.08
+
+    def k_at(self, temperature_k: float) -> float:
+        return float(self.k_l_per_mmol_min_100c_ph5) * math.exp(
+            -float(self.ea_kj_mol) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+MGO_CYSTEINE_STRECKER = MgoCysteineStrecker()
+
+
+@dataclass(frozen=True)
+class HexoseC5Entry:
+    """
+    Sub-model 4 (2026-10-30), OFF by default (rate 0): a hexose -> C5 entry, 1-deoxyglucosone -> 1-deoxypentosone +
+    C1 (the C-6 loss). The thiol probe found glucose + cysteine makes NO MFT in the lane (Hofmann 1998 measures
+    19-25 ug/L); labelling (Du 2023: Cys + [13C6]glucose, MFT 0 : 5 = 52 : 48, mixed isotopomers < 1 %; Zhao 2019b)
+    says hexose MFT keeps an intact glucose C5, so the entry is to a C5 dicarbonyl, not to C2 + C3. First order,
+    1/min at 100 C, Ea declared; FITTED. Falsified if it predicts the ribose norfuraneol / MFT ratio (~10^3) against
+    Hofmann's 7 for glucose (then the entry belongs at 1,4-dideoxypentosone).
+    """
+
+    k_per_min_100c: float = 0.0
+    ea_kj_mol: float = 100.0
+
+    def k_at(self, temperature_k: float) -> float:
+        return float(self.k_per_min_100c) * math.exp(
+            -float(self.ea_kj_mol) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+HEXOSE_C5_ENTRY = HexoseC5Entry()
 
 
 @dataclass(frozen=True)
@@ -531,6 +665,19 @@ class CysAmadoriRoute:
     ea_decay_kj_mol: float = 85.7
     dpo_share: float = 0.30
     dpo_share_alternatives: Tuple[float, ...] = (0.28, 0.32)
+    #: B7a arm R-S (2026-10-31; kinetic_core_dpo_partition_prereg.md sec. 8, as revised after its design review): the
+    #: split's pH law. WHY: de Roos 2005 -- acid favours the 1,2-enolisation (3-deoxyosone), base the 2,3-enolisation
+    #: (1-deoxyosone); Nedvidek 1992 -- 1-DG / 3-DG rises ~x5 from pH 5 to 7; Zhai 2021's measured TDP / DPO falls with
+    #: pH (curved: -0.14 to -0.80 dex per pH unit by segment) where the engine's fixed split makes it rise. A constant
+    #: log-ratio slope cannot bend, so the law is a SATURATING base catalysis of the 2,3-enolisation on the IN-SITU pH
+    #: (the pH the decay itself reads): TDP : DPO odds(pH) = odds_ref (1 + 10^(ref - pH_c)) / (1 + 10^(pH - pH_c)),
+    #: odds_ref = (1 - dpo_share) / dpo_share, so the share at ``dpo_share_ref_ph`` is ``dpo_share`` exactly; flat in
+    #: acid, one decade of odds per pH unit well above pH_c. ``split_law`` "none" (the NULL, shipped) returns
+    #: ``dpo_share`` exactly, so the default engine is bit-identical; "base_saturating" is the arm (dpo_share and
+    #: split_ph_c FITTED there).
+    split_law: str = "none"
+    split_ph_c: float = 7.5
+    dpo_share_ref_ph: float = 7.0
     source: str = ("de Roos 2005 (deroos2005_extraction.md, Fig. 4); Cao 2017 (cao2017_extraction.md, Figs. 4-5); "
                    "Zhai 2019 (zhai2019_extraction.md); Zhang 2026 (ZHANG_EA_* in this module)")
 
@@ -558,8 +705,61 @@ class CysAmadoriRoute:
         t_ref = self.t_decay_ref_c + 273.15
         return self.k_decay_at_ref(ph) * math.exp(-self.ea_decay_kj_mol / R_KJ * (1.0 / float(temperature_k) - 1.0 / t_ref))
 
+    def dpo_share_at(self, ph: float) -> float:
+        """The 1-deoxyosone share of the decay at the in-situ ``ph`` (B7a R-S, 2026-10-31): ``dpo_share`` itself under
+        the "none" law (exactly: no arithmetic on it), else the saturating base law about ``dpo_share_ref_ph``."""
+        if self.split_law == "none":
+            return self.dpo_share
+        if self.split_law != "base_saturating":
+            raise ValueError(f"CysAmadoriRoute.split_law {self.split_law!r}: 'none' or 'base_saturating'")
+        s, ph_c = float(self.dpo_share), float(self.split_ph_c)
+        odds = (1.0 - s) / s * (1.0 + 10.0 ** (float(self.dpo_share_ref_ph) - ph_c)) / (1.0 + 10.0 ** (float(ph) - ph_c))
+        return 1.0 / (1.0 + odds)
+
 
 CYS_AMADORI_ROUTE = CysAmadoriRoute()
+
+
+#: B7a R-T's primary constants: the trunk's own measured hexose step, read (not retyped) from parameters.MARTINS_M4
+_K_TDG_FA = _MARTINS_M4["k_tdg_fa"]
+
+
+@dataclass(frozen=True)
+class TdpOwnDecay:
+    """
+    B7a arm R-T (2026-10-31; results/validation/kinetic_core_dpo_partition_prereg.md sec. 8, as revised after its design
+    review), OFF by default: an exit for 3-deoxypentosone of its own. Today TDP leaves (besides its routes) through
+    ``r_osone_decay_tdp`` at the SHARED fitted deoxyosone decay k_osone_decay (4.8e-4 1/min), and the B7a null's
+    signatures fail on it: TDP / DPO climbs with time where the measured ratio is flat, and TDP's post-peak decline at
+    120 C is x8 too slow (Zhai 2023 JAFC). When enabled, ``r_osone_decay_tdp`` runs at a measured hexose 3-deoxyosone
+    -> formic acid constant instead, with no pH term (products unchanged: ACID + FRAG_C 4, the formic acid joining the
+    lumped acid pool the charge balance carries).
+
+    * PRIMARY (the defaults): the trunk's own k_tdg_fa (parameters.MARTINS_M4; Martins & Van Boekel 2005, Food Chem.
+      90, Table 2 model M4, step 5, 3-DG -> formic acid; martins2005_extraction.md), its k_ref, reference temperature
+      and Ea as the trunk declares them (3.45e-2 1/min at 100 C, 30.0 kJ/mol), so the pentose and hexose osones share
+      one measured constant.
+    * SENSITIVITIES (the fit's --tdp-exit-k / --tdp-exit-ea): Martins & Van Boekel 2005b's Table 2 k5, 1.0e-2 1/min at
+      100 C, the geometric mean of its four non-zero cells (6.3e-3, 2.0e-2, 4.1e-3, 1.9e-2 at pH 5.5 - 7.5; the pH
+      4.8 cell is a deleted parameter; "low pH-dependence", Table 3 pD = 0.09 +- 1.10; martins2005b_extraction.md
+      sec. 4); the barrier's conflicting readings (Yu 2018 43.9, Knol 2010 84 kJ/mol; recorded on k_tdg_fa). CR-16.
+    DECLARED TRANSFER: a hexose 3-deoxyosone's (3-deoxyglucosone's) constant used for the pentose 3-deoxyosone. Off:
+    ``r_osone_decay_tdp`` at k_osone_decay, the engine bit-identical.
+    """
+
+    enabled: bool = False
+    k_ref_per_min: float = float(_K_TDG_FA.k_ref)
+    t_ref_c: float = _T_REF_K_TRUNK - 273.15
+    ea_kj_mol: float = float(_K_TDG_FA.ea_kj_mol)
+    source: str = ("the trunk's k_tdg_fa (Martins & Van Boekel 2005, Food Chem. 90, Table 2 model M4, step 5; "
+                   "martins2005_extraction.md), 3-DG -> formic acid; a declared hexose -> pentose transfer")
+
+    def k_at(self, temperature_k: float) -> float:
+        return float(self.k_ref_per_min) * math.exp(
+            -float(self.ea_kj_mol) / R_KJ * (1.0 / float(temperature_k) - 1.0 / (float(self.t_ref_c) + 273.15)))
+
+
+TDP_OWN_DECAY = TdpOwnDecay()
 
 THIAMINE_H2S_SHARE_FLOOR_PH: float = 6.25
 

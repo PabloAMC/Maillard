@@ -430,6 +430,7 @@ entries:
       - "Concentration (0.4 M vs 0.08 M) and laboratory (method, calibration)."
       - "The Zhai 2021 rows run at the wrong pH (CF-010) bias k_ttca_deg and the ring opening that both arms share."
     tests:
+      - "root-cause analysis 2026-10-29 (docs/reference/conflict_analyses/CF-011.md): most likely dihydrogen-phosphate catalysis of the Amadori step, Zhai's water ladder holding the formation barrier near its floor (0.45); the register's 'Zhai 2019 pH 7.4 -> 4.9' is Zhai 2023 Food Chem's, and '3.8 at 130 C' has no source on disk. Settled by the designed protocol's buffer arm C."
       - "results/validation/kinetic_core_cysteine_route_calibration_prereg.md: leave-one-source-out refits, review items 4, 5, 8 and sec. 6 verdict (constants not forwarded; stage 1b to include pH laws and phosphate catalysis)."
       - "docs/guides/LITERATURE_SEARCH_2026-10-29_phosphate_thiazolidine.md: no direct measurement of phosphate catalysis of TTCA -> Cys-Amadori, nor K(pH) for a cysteine-sugar thiazolidine at 60-140 C; nearest anchors Davidek 2002 (x1.3-3.5, degradation, 90 C), Munanairi 2007 (~10-12x per equivalent, 37 C, A280), Kim 1986 (thiazolidine k1 ~10x per pH unit 5.5-8, 25 C)."
     status: open
@@ -462,8 +463,9 @@ entries:
       - "A temperature-dependent pH law (low-pH optimum at 140-145 C, near-neutral at 90-120 C)."
       - "Feed: free sugar (Hofmann, Meynier) vs Amadori compound (Zhou) - different rate-limiting steps with opposite pH dependence."
       - "Buffer: buffered (Hofmann, Meynier) vs unbuffered pots whose pH collapses during heating (Zhou's pH 8 pot ends at 5.07)."
-    tests: []
-    status: open
+    tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-012.md): a source conflict, not chemistry: Zhou's pots start unbuffered at pH 6-8, fall to 3.2-5.1 and are fed the Amadori compound (0.70); three buffered laboratories agree MFT falls with pH, and the engine reproduces Zhou's pattern with no temperature term. The real misfit is the model's norfuraneol at pH 3, 55x below pH 5 (sub-model 3)."
+    status: explained
     remedy: >-
       Pending. B59b's pre-registration must state which explanation it tests (plan, 'Open question for B59b'); Zhai
       2021 Fig. 4b / 5 and Kang S5 (CF-002, temperature unresolved) are the in-corpus pH series on purified TTCA.
@@ -492,8 +494,9 @@ entries:
       - "Temperature: below ~110 C formation outlasts the sink for hours; at 120-140 C the precursors are exhausted within the window and the sink wins."
       - "Precursor supply: fed TTCA / ARP pots (Zhai, Zhou) run out; free-sugar pots at high loading (Schieberle, Nestle) do not."
       - "Wang 2022's lipid co-substrate as an extra thiol sink."
-    tests: []
-    status: open
+    tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-013.md): temperature plus precursor supply (0.75): within both 'falling' laboratories the lower temperatures rise. US 10,076,126's labelled standards, added before heating, survived it: the engine's MFT sink is at least 5x too fast (sub-model 4, k_mft_decay)."
+    status: explained
     remedy: >-
       Pending: the B59b hold-outs declared in the plan (US 10,076,126 shape, Schieberle 2000 100 C) test the first two
       explanations; enter Wang 2022 only with its lipid charge.
@@ -518,7 +521,8 @@ entries:
     explanations:
       - "An unstated pot variable (fill volume / headspace, ARP purity, final pH)."
       - "A changed HS-SPME calibration (Table S1 of both papers; not on disk)."
-    tests: []
+    tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-014.md): Zhou 2022 is the outlier, a thiol-specific measurement or handling loss (0.65); Zhou 2023c (MFT 1150 ug/L) agrees with Zhou 2023. Test: both papers' Table S1 calibrations."
     status: open
     remedy: >-
       Pending: in M6, treat the two Zhou tables as one laboratory with a between-paper scale term, or widen zhou_pH7_MFT
@@ -543,7 +547,8 @@ entries:
     explanations:
       - "Different temperature, xylose:cysteine ratio and concentration between the two patents."
       - "Patent analytics (single runs, not peer reviewed)."
-    tests: []
+    tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-015.md): two opposite displacements: US 8,920,862's concentrated 3:1 xylose recipe favours FFT (0.40); US 10,076,126's standards went through the heating (0.25). MFT agrees across sources; FFT differs."
     status: open
     remedy: >-
       Pending: report the patents' MFT/FFT, do not fit it (us10076126 / us8920862 dossiers); the US 10,076,126 shape and
@@ -569,6 +574,7 @@ entries:
       - "A typo or unit slip in one print (67.5 vs 6.75 would leave a 1.3x residual)."
       - "Different workups: SIDA for furfural in Hofmann 1998 vs a purge-and-trap / AEDA quantification in the 1998 chapter."
     tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-016.md): unresolved: Schieberle under-recovered 0.35, a 10x slip 0.25, Hofmann high 0.25; Hofmann's furfural is internal-standard (5-methylfurfural), not SIDA; Meynier's and Cerny's furfural / MFT ratios side with Schieberle. Test: three vials of Hofmann's exact pot."
       - "hofmann1998.pdf Table 5 and schieberle1998.pdf Table IV read 2026-10-29 (both quoted above); schieberle1998 ledger note already flags the 13-fold gap."
     status: open
     remedy: >-
@@ -596,8 +602,9 @@ entries:
     explanations:
       - "Hold-time artefact: the 140 C curve passes its maximum inside the window (dossier sec. 8.3)."
     tests:
+      - "root-cause analysis 2026-10-29 (conflict_analyses/CF-017.md): holds, corrected: the flat low leg is the 100 C curve plateauing; the JAFC grid at 100 C 40/80/120 min reprints Food Chem Fig. 1a. Slice-free test: measured thiols order 100 < 120 < 140 C in 16 / 16 comparisons; the engine gets 140 >= 120 C in 1 / 8 (a structural misfit for sub-model 4)."
       - "zhai2023jafc dossier sec. 8.2 tables (digitised from the numeric heat map); 120-min column identical to Kang S4."
-    status: open
+    status: error_confirmed
     remedy: >-
       Pending (proposed): retire kang_switch_on_* as scored rows and B10's T4 as a gate; replace the single-slice folds
       by the four-time grid of Zhai 2023 JAFC Fig. 3 (columns A / C / E / G, semi-quantitative, one series per compound,
@@ -702,7 +709,7 @@ entries:
     explanations: []
     tests: []
     status: open
-    remedy: "Pending: carry each as condition_uncertain in its ledger entry; resolve only if the paper is ever entered as a row."
+    remedy: "Pending: carry each as condition_uncertain in its ledger entry; resolve only if the paper is ever entered as a row. 2026-10-31: hofmann2000 IS now entered (fit table strecker_hofmann2000, two readers + adjudication): the buffer is ruled per pot from its table footnote (0.5 mol/L Tables 1 - 3, 5, Fig. 3; 0.1 mol/L Table 4 as printed, alternative 0.5), the Experimental's 0.5 mmol/L a misprint (it cannot hold pH 7 against 0.1 M reactants); the other papers stay pending."
     affects:
       - cremer2000_text_strecker_ea_four_aldehydes
       - weenen2001_tab2_pac_arp_vs_glc_phe_ph
@@ -1280,3 +1287,386 @@ entries:
     affects:
       - nguyen2016_table1_m1_glucose_casein_constants
       - {file: src/kinetic_core/parameters_glycation.py, symbol: k_flp_decay}
+
+  - id: CF-053
+    kind: self_contradiction
+    scope: corpus
+    sources: [cao2017]
+    quantity: "glycine concentration of Cao 2017's glycine arms (Figs. 3-5, Table 1)"
+    observation: >-
+      Methods: "The glycine was added in the reaction systems at 0, 1, 8, 12, 16, or 24 times of the cysteine
+      concentration (mol/L)" with cysteine at 0.40 mol/L, i.e. 0.4 / 3.2 / 4.8 / 6.4 / 9.6 mol/L glycine. 9.6 mol/L
+      is 720 g/L; glycine dissolves to ~250 g/L at 25 C, so the x8-x24 arms cannot have been the stated solutions
+      (the cao2017 dossier's Flag 1 says the same). Read against the PDF 2026-10-29 (sub-model 1 first reader).
+    explanations:
+      - "The multiplier may refer to something else (mmol added, or a ratio to another species); not decidable from the text."
+    tests: []
+    status: open
+    remedy: >-
+      Use only the blank and x1 (0.4 mol/L glycine) arms as fit or check rows; the x8-x24 arms stay out of every
+      fit until the composition is resolved (authors or a sibling paper).
+    affects:
+      - cao2017_fig4c_ph
+      - cao2017_fig4ab_cys_xyl
+      - cao2017_fig5_ttca_cama_glyarp
+      - cao2017_fig3_a294_a420
+      - cao2017_table1_volatiles_3h
+
+  - id: CF-054
+    kind: conflict
+    scope: corpus
+    sources: [chen2000, chen2002]
+    quantity: "final pH of ribose + cysteine (0.01 mol, 100 mL water), 180 C, 2 h, initial pH 8.5 (Hoke cylinder)"
+    observation: >-
+      Same laboratory (Ho, Rutgers), same printed recipe and conditions, control pot without additive: Chen et al.
+      2000 Table 4 prints 8.5 -> 6.05, Chen & Ho 2002 Table 1 prints 8.5 -> 4.96 (1.1 pH units apart); at initial
+      pH 5 the two agree within 0.15 (3.86 vs 4.01). Neither prints replicates or errors. Read against both PDFs
+      2026-10-29 (sub-model 1 first reader).
+    explanations:
+      - "Run-to-run spread of an unbuffered drift at 180 C (the alkaline start makes the end pH sensitive to how much acid forms before the base is consumed)."
+      - "Different pH adjustment or reading (reagent and reading temperature are not stated in either paper)."
+    tests: []
+    status: open
+    remedy: >-
+      Neither enters a fit (no error, concentration ambiguous). If an unbuffered 180 C endpoint is ever used, use
+      the two as one condition with the spread as its error, not as two independent rows.
+    affects:
+      - chen2000_table4_final_ph
+      - chen2002_table1_final_ph
+
+  # ---- found by the sub-model 4 first reading (2026-10-29), recorded by the orchestrator ----
+
+  - id: CF-055
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [schieberle2000]
+    quantity: "the fold increase of MFT over the 145 C run that Schieberle 2000's text states ('by a factor of 13')"
+    observation: >-
+      The text (p. 141) says MFT rose 'by a factor of 13'; the paper's own Table IV gives 156 / 19.8 = 7.9 at 6 h. 13 is
+      156 / 12.1, where 12.1 is an FFT cell: a column slip in the text. The B16 fit uses the text's x13 as a cross-system
+      MFT ratio row (FACTOR_13_SIGMA = 0.15). (First reader of sub-model 4, against the PDF; to be confirmed by the
+      second reader.)
+    explanations:
+      - "The authors divided by the wrong column when writing the text."
+    tests:
+      - "Table IV recomputed against the text's sentence (first reader, 2026-10-29)."
+    status: open
+    remedy: >-
+      Pending the second reading: if confirmed, the row's target becomes the table's 7.9 (or the row is dropped as a
+      within-paper inconsistency), applied when the row migrates into the thiol sub-model's keyed table; B16's frozen
+      record is annotated, not rerun.
+    affects:
+      - {file: scripts/generators/generate_kinetic_core_b16_fit.py, symbol: FACTOR_13_SIGMA}
+
+  - id: CF-056
+    kind: self_contradiction
+    scope: corpus
+    sources: [kang2026_SI]
+    quantity: "the SD of MFT in the cell shared by Kang 2026 SI Tables S4 and S5"
+    observation: "S5 prints MFT 1.237 +- 0.061 where S4 prints +- 0.142 for the same cell (the CF-002 family)."
+    explanations:
+      - "A transcription error in one table."
+    tests: []
+    status: open
+    remedy: ""
+    affects: []
+
+  - id: CF-057
+    kind: self_contradiction
+    scope: corpus
+    sources: [zhai2023foodchem]
+    quantity: "furfural at 140 C in the TTCA + xylose arm of Zhai 2023 Food Chem Table 1"
+    observation: "Printed '26 +- 0.725': the value lacks the decimals its SD implies (likely 2.6 or 0.26)."
+    explanations:
+      - "A dropped decimal point in the value."
+      - "A real value: the significance letter 'a' ranks the 26 +- 0.725 cell highest in its row (thiol adjudication, 2026-10-29), which argues against a dropped decimal; the SD is then implausibly small (3 %) for this group's furfural."
+    tests: []
+    status: open
+    remedy: ""
+    affects: []
+
+  - id: CF-058
+    kind: code_mismatch
+    scope: sulfur_rows
+    sources: [feng2022]
+    quantity: "the identity of Feng 2022's RG-ARP against the engine's ARP species"
+    observation: >-
+      Feng 2022's RG-ARP is an Amadori compound that carries sulfur; the engine's ARP is the alanine-xylose Amadori
+      compound and carries none. Feng's pots cannot be simulated with ARP as their precursor without misplacing sulfur.
+    explanations:
+      - "The engine has no sulfur-bearing Amadori species other than CAMA (the cysteine Amadori compound)."
+    tests: []
+    status: open
+    remedy: "Sub-model 4 design: map RG-ARP to the species that carries its sulfur (CAMA if it is the cysteine compound) or keep Feng's rows out."
+    affects: []
+
+  # ---- found by the sub-model 3 first reading (2026-10-29), recorded by the orchestrator ----
+
+  - id: CF-059
+    kind: code_mismatch
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation]
+    quantity: "molar masses of 1-/3-deoxypentosone and 1,4-dideoxypentosone in species_sulfur.MOLECULAR_WEIGHT_G_PER_MOL"
+    observation: >-
+      DPO and TDP were 130.10 g/mol (C5H6O4) though their comment named C5H8O4 (a pentose minus water: 132.12); DDP was
+      114.10 (C5H6O3) though 1,4-dideoxy-2,3-pentodiulose (CH3-CO-CO-CH2-CH2OH, formed from 1-deoxypentosone with
+      cysteine as the reductant) is C5H8O3, 116.12. Used only for ug <-> mmol conversions; no shipped benchmark reports
+      these intermediates in mass units, so no shipped number moved.
+    explanations:
+      - "A formula slip when the table was written; the comment kept the right formula for DPO."
+    tests:
+      - "Recomputed from the formulas (C 12.011, H 1.008, O 15.999), 2026-10-29."
+    status: fixed
+    remedy: "species_sulfur.py corrected on branch submodel1-ph (2026-10-29)."
+    affects:
+      - {file: src/kinetic_core/species_sulfur.py, symbol: "CF-059"}
+
+  - id: CF-060
+    kind: conflict
+    scope: sulfur_rows
+    sources: [zhou2025b, zhou2024, zhou2022, zhou2023c]
+    quantity: "3-deoxyxylosone and other dicarbonyls from the Ala-xylose Amadori compound (AX-ARP 20 mM, pH 7-8, 120 C)"
+    observation: >-
+      For the same nominal pot, Zhou 2024 Fig. 3 prints dicarbonyls 7-24x higher than Zhou 2025b (3-DX 3.7-5.3 vs
+      0.37-0.52 mM), while the ARP's decay and the pH agree. CF-019 called zhou2025b a re-publication of zhou2024; it is
+      not a re-plot. Confirmed by both sub-model 3 readers and the adjudicator (Zhou 2024 Fig. 3 read from the page
+      vectors, Zhou 2025b Fig. 2 at 600 dpi), and every dicarbonyl differs, not 3-DX alone: 1-DX 3.05 -> 2.14 vs
+      0.29 -> 0.09, GO 1.0 -> 4.9 vs 0.15 -> 0.31, MGO 0.47 -> 1.05 vs ~0.08 mM. Across the laboratory's four AX-ARP-alone
+      pots at 120 C the 3-deoxypentosone scale spans ~10x: Zhou 2022 (pH 7) 4.3-6.1 mM, Zhou 2023c (pH 7.5) 0.64-1.13,
+      Zhou 2024 (pH 8) 3.7-5.3, Zhou 2025b (pH 8) 0.37-0.55 (adjudication, sub-model 3, 2026-10-29). The two pH 8 pots
+      are the cleanest contrast: a pH 7 -> 8 step cannot explain Zhou 2024 vs Zhou 2025b.
+    explanations:
+      - "A unit or dilution slip (mM vs per-sample) in one paper; predicts a constant ratio across species and times (it is not constant: 7-24x)."
+      - "Different derivatisation / quantification (internal standard without an authentic dicarbonyl standard, CF-062); predicts the spread is confined to 3-DX / 1-DX, but GO and MGO, which have purchased standards, differ ~10x too."
+      - "Different ARP batches (in-house synthesis, purity not stated): the ARP decay curves agree, so the batch would have to differ in a co-purified catalyst, not in the ARP itself."
+    tests: []
+    status: open
+    remedy: >-
+      Not settled by the papers. In the sub-model 3 table all four papers' 3-DX / 1-DX enter as semi_quantitative (their own
+      ledger ids, shape only); their GO / MGO stay calibrated, so the fit must report the Zhou 2024 vs 2025b GO / MGO
+      residuals per paper (a per-paper scale on these calibrated rows is the honest fallback). Ask the authors (Zhang X,
+      Jiangnan) which print is right; until then no absolute dicarbonyl level from this laboratory constrains a constant.
+    affects: [zhou2024_fig3_fig4_axarp_dicarbonyls_ph, zhou2024_fig3cd_deoxyxylosones_arp_ala, zhou2025b_figs1_3_axarp_xylose_120c, zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, zhou2022_fig1cd_deoxypentosones_arp_cys, zhou2023c_fig4ab_deoxypentosones_arp_gsh]
+
+  - id: CF-061
+    kind: conflict
+    scope: sulfur_rows
+    sources: [zhai2019, zhai2021]
+    quantity: "glyoxal relative to 3-deoxyxylosone in the cysteine + xylose / TTCA systems"
+    observation: "GO / 3-DX is 0.6 in Zhai 2019 and 0.005 in Zhai 2021: same laboratory, same method. In Zhai 2021 all GO is below the paper's own LOD (1.118 mg/L)."
+    explanations:
+      - "Zhai 2019's GO is above an LOD that Zhai 2021 later raised; or a co-eluting quinoxaline in 2019."
+      - "Quantification: Zhai 2019 names no GO standard (hexanedione internal standard, assumed response factor), Zhai 2021 calibrates GO against a purchased standard; predicts the 2019 GO level is off by a response-factor ratio while its time shape is sound (adjudication, 2026-10-29)."
+    tests: []
+    status: open
+    remedy: >-
+      Adjudication (sub-model 3, 2026-10-29): the GO rows of Zhai 2021 Fig. 5d, Zhai 2023 Food Chem Fig. 3d and Zhai 2023 JAFC
+      Fig. 5e (all <= 9.7 umol/L, below the LOD / LOQ Zhai 2021 prints for the method: 1.118 / 2.691 mg/L = 19 / 46 umol/L as
+      GO, 8.6 / 21 as GO-quinoxaline) enter no table (the second reading's 90 GO rows are in its adjudication_excluded list).
+      Zhai 2019's GO (55-149 umol/L) enters shape-only: its ledger entry is semi_quantitative (CF-062), so its level does not
+      contradict the calibrated rows.
+    affects: [zhai2021_fig5_dicarbonyls_ph_ladder, zhai2023foodchem_fig3_cys_da_mgo_go, zhai2023jafc_fig5_arp_dicarbonyls, zhai2019_fig3b_dicarbonyls_ttca]
+
+  - id: CF-062
+    kind: condition_error
+    scope: sulfur_rows
+    sources: [zhai2019, zhai2021, zhai2023foodchem, zhou2025b]
+    quantity: "the quantification class of the Jiangnan group's deoxyosone (3-DX, 1-DX) data"
+    observation: >-
+      Every Jiangnan paper quantifies the deoxyosones as quinoxalines against an internal standard with no authentic
+      deoxyosone standard (none is commercially available), yet the ledgers class them 'calibrated'; zhai2023foodchem
+      says 'external standards' for data zhai2021 quantified with diacetyl as the internal standard. Without an
+      authentic standard the absolute level carries an unknown response factor: the series are semi-quantitative.
+    explanations:
+      - "The ledgers took 'quantified with an internal standard' as calibration."
+    tests: []
+    status: fixed
+    remedy: >-
+      Confirmed by the second reader and decided per source by the adjudicator from each methods section (2026-10-29).
+      semi_quantitative: every 3-DX / 1-DX (3-DP / 1-DP) series of Zhai 2019, Zhai 2021, Zhai 2023 Food Chem, Zhai 2023
+      JAFC, Zhou 2022, Zhou 2023c, Zhou 2024, Zhou 2025b (internal standard -- diacetyl or 3,4-hexanedione -- and no
+      authentic deoxyosone standard; Zhou 2022: 'based on the internal standard because of the lack of standards'), and
+      Zhai 2019's GO (no GO standard in that paper). calibrated: MGO / GO of Zhai 2021 / 2023 and Zhou 2022-2025b (purchased
+      40 % standards, external or IS curves), Zhou 2025b furfural (curve printed), Zhou 2022 furfural. Ledger edits
+      (measurement_ledger/sulfur.yml, trunk.yml): zhai2019_fig3b_dicarbonyls_ttca and zhai2023foodchem_fig2_deoxyosones
+      -> semi_quantitative; seven mixed figures split, the calibrated species keeping the old id and the deoxyosones a new
+      semi_quantitative id: zhai2021_fig5ab_deoxyosones_ph_ladder, zhai2023jafc_fig5bc_deoxyosones,
+      zhou2022_fig1cd_deoxypentosones_arp_cys, zhou2023c_fig4ab_deoxypentosones_arp_gsh, zhou2024_fig3cd_deoxyxylosones_arp_ala,
+      zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, zhou2025b_fig2a_deoxyxylosone_xylose_alone. The old ids keep
+      'calibrated' because other tables read their calibrated species (route_submodel reads zhai2023jafc Fig. 5a ARP and
+      zhai2023foodchem Fig. 3a Cys). Desclaux 2006 (no calibration stated) and Hofmann 1998 (IS with measured response
+      factors) stay 'unknown' in the ledger; their rows name semi_quantitative / calibrated with method_basis.
+      Not done: the trunk twin zhou2022_fig1_axarp_dicarbonyl_timecourses still lists 3-DP / 1-DP under 'calibrated'
+      (it is flagged duplicate_of the sulfur entry, so a table holding both drops it).
+    affects: [zhai2019_fig3b_dicarbonyls_ttca, zhai2023foodchem_fig2_deoxyosones, zhai2021_fig5ab_deoxyosones_ph_ladder, zhai2023jafc_fig5bc_deoxyosones, zhou2022_fig1cd_deoxypentosones_arp_cys, zhou2023c_fig4ab_deoxypentosones_arp_gsh, zhou2024_fig3cd_deoxyxylosones_arp_ala, zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, zhou2025b_fig2a_deoxyxylosone_xylose_alone]
+  - id: CF-063
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [zhang2025b]
+    quantity: "TTCA / CAMA / Lys-ARP decay in Zhang 2025b Figs. 2d-h: printed first-order fits vs the plotted points"
+    observation: >-
+      The printed rate fits do not reproduce the plotted points: extrapolated to t = 0 they imply C/C0 of 0.72 and 0.47,
+      not 1, and at 50 min only about half the charged reactants are accounted for by the measured species (route
+      adjudication, 2026-10-29).
+    explanations:
+      - "The fits were made over a later window (an induction or heat-up period excluded) and the intercept was not reported."
+      - "An unmeasured sink (oligomers, bound forms) takes up the missing half, so the mass balance is open, not wrong."
+    tests: []
+    status: open
+    remedy: "The route table uses the points (Figs. 2a-c, 2g/h converted with C0 = 40 mM), never the printed constants; the sub-model 2 probe reports this pot's mass balance separately."
+    affects: []
+  - id: CF-064
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [zhai2021]
+    quantity: "error bars of the TTCA series in Zhai 2021 Figs. 3a, 4b and 6"
+    observation: >-
+      The same means carry different SD bars in Figs. 3a and 4b, and in Fig. 6 the pH 5.5 xylose-alone control and the
+      TTCA + xylose series carry the same set of SDs (route adjudication, 2026-10-29).
+    explanations:
+      - "The bars were copied between panels when the figures were assembled, so the printed SD is not the series' own scatter."
+    tests: []
+    status: open
+    remedy: "These rows' printed SDs are not trusted as their own: the sub-model 2 fit estimates a per-series noise scale (fitting.fit_with_series_noise) rather than weighting by the bars."
+    affects: []
+  - id: CF-065
+    kind: conflict
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation, zhai2023foodchem]
+    quantity: "molar yield of FFT from furfural + H2S and of MFT from norfuraneol + H2S"
+    observation: >-
+      FFT from furfural + H2S is 0.48 mol % in Hofmann & Schieberle (pH 5, 145 C, 20 min, isotope dilution) but about
+      23 % in Zhai 2023 Food Chem Fig. 6 (pH 7, 120 C, 20 min); MFT from norfuraneol is 0.19 % against about 34 %. A
+      50-180x gap at milder temperature (thiol adjudication, 2026-10-29).
+    explanations:
+      - "pH: at pH 7 a larger share of the sulfide is HS-, the nucleophile; predicts the gap shrinks at matched pH."
+      - "Quantification: Zhai's thiols are semi-quantitative (no authentic-standard response factor); predicts the gap is a scale factor common to all of Zhai's thiol rows."
+      - "A co-reactant: ammonium or the amine in Zhai's system opens a route Hofmann's binary system lacks; predicts the gap depends on the amine charge."
+    tests: []
+    status: open
+    remedy: "Sub-model 4 fits Zhai's thiol rows shape-only (semi_quantitative, SCALE_TAU = inf), so only the isotope-dilution rows set the absolute yield; the probe reports the two laboratories' residual levels separately."
+    affects: []
+  - id: CF-066
+    kind: duplicate
+    scope: sulfur_rows
+    sources: [zhai2021, zhai2023foodchem, zhai2023jafc]
+    quantity: "TTCA 10 mM (+/- xylose 10 mM) pH 7 dicarbonyl time courses (3-DX, 1-DX, MGO, GO), 100 / 120 / 140 C, 20-120 min"
+    observation: >-
+      One data set printed three times. ORIGINAL of the 100 C arms: Zhai 2021 JAFC Fig. 5 'TTCA-7' and 'TTCA-Xyl-7'
+      (vector; means identical to the plotted digit in all four species). Copies: Zhai 2023 Food Chem Figs. 2-3 (100 C
+      TTCA and TTCA + Xyl arms) and Zhai 2023 JAFC Fig. 5 (T-100 C, 20-120 min), the JAFC print with different SD bars for
+      the same means. Second family: the TTCA-alone 120 / 140 C arms of Food Chem Figs. 2-3 (online Sep 2022) are JAFC
+      Fig. 5's T-120 / T-140 at 20-120 min (the first reader's raster read of Food Chem matches the adjudicator's vector
+      read of JAFC in 33 of 34 points within read error). The exception: T-140 3-DX at 120 min is ~0.63 mM in Food Chem
+      but 0.420 +- 0.024 in JAFC -- exactly T-100's mean AND error bar at 120 min, i.e. a cell copied within the JAFC
+      figure (sub-model 3 adjudication, 2026-10-29).
+    explanations:
+      - "The group reuses control arms across papers without saying so; the JAFC T-140 120-min point is a copy-paste slip in the figure source."
+    tests: []
+    status: duplicate_confirmed
+    remedy: >-
+      Counted once in data/lit/fit_rows/deoxyosone_submodel.yml by transcription, not by flag: the 100 C arms under Zhai
+      2021 (zhai2021_fig5ab_deoxyosones_ph_ladder / zhai2021_fig5_dicarbonyls_ph_ladder, pH 7 pots); the TTCA-alone 120 /
+      140 C arms and T-100 from 140 min under JAFC (zhai2023jafc_fig5bc_deoxyosones / zhai2023jafc_fig5_arp_dicarbonyls,
+      vector values with SDs, to 180 min); Food Chem contributes only its TTCA + Xyl 120 / 140 C arms. The JAFC T-140 3-DX
+      120-min point is dropped (the Food Chem value 0.626 is the likelier truth but cannot be attached to the JAFC series).
+      The ledgers carry non-dropping flags (arm_reprint_of / reprinted_in): duplicate_of would make fit_rows._drop_copies
+      drop whole entries, and each of these entries also holds arms printed nowhere else. Copy -> original map for
+      count_once: zhai2023foodchem (100 C arms) -> zhai2021; zhai2023jafc (T-100 20-120) -> zhai2021; zhai2023foodchem
+      (TTCA-alone 120 / 140 C) -> zhai2023jafc (counted there).
+    affects: [zhai2021_fig5ab_deoxyosones_ph_ladder, zhai2021_fig5_dicarbonyls_ph_ladder, zhai2023foodchem_fig2_deoxyosones, zhai2023foodchem_fig3_cys_da_mgo_go, zhai2023jafc_fig5_arp_dicarbonyls, zhai2023jafc_fig5bc_deoxyosones]
+  - id: CF-067
+    kind: self_contradiction
+    scope: corpus
+    sources: [hofmann1999]
+    quantity: "glycolaldehyde from xylose + L-alanine (pH 7, reflux): Hofmann 1999 Fig. 10 vs Table 3 (browning activity / colour-dilution factor)"
+    observation: >-
+      Where the paper prints a point twice, its figure reads 0.86-0.90x its table for glycolaldehyde (10, 60, 120 min),
+      while methylglyoxal agrees (0.99-1.03) and glyoxal at 10 min agrees exactly -- so it is not a reading error (two
+      independent readers, 2026-10-30). Also: the derivatising reagent is printed as 2 umol per quarter pot (2 mL of
+      1 mmol/L OPD), below the dicarbonyl it must trap (MGO alone 2.5 umol at 180 min): a misprint for 1 mol/L, or
+      OPD-limited (then early dicarbonyl values are lower bounds).
+    explanations:
+      - "The figure was drawn from a different analysis or replicate set than the table."
+      - "A transcription slip in Table 3's glycolaldehyde colour-dilution factor."
+    tests: []
+    status: open
+    remedy: "The keyed table takes the printed table value where both exist and carries the disagreement as the row's error (0.066 dex)."
+    affects: []
+  - id: CF-068
+    kind: conflict
+    scope: corpus
+    sources: [schieberle2000, yiltirak2026]
+    quantity: "MFT and FFT from ribose + cysteine in 0.5 M phosphate at pH 5 - 5.5, 100 C, 4 h (both SIDA)"
+    observation: >-
+      Schieberle 2000 Table IV (ribose 100 / cysteine 33 mM, pH 5, closed autoclave): MFT 138 ug/L at 1 h and 1560 at
+      6 h (about 800 at 4 h, interpolated), FFT 31 -> 1100. Yiltirak 2026 SI Table S3 (ribose 25 / cysteine 25 mM,
+      K phosphate pH 5.5, 3 mL in a 20 mL tube under air): MFT 6.88, FFT 1.28 ug/L at 4 h. A x120 gap in MFT where
+      the 4x lower ribose and the 0.5 pH unit explain about x10 (Hofmann 1998's pH ladder: MFT falls x22 from pH 3 to
+      7). The joint thiol fit's lane predicts the Yiltirak pot HIGHER than Schieberle's (s042: x3.7 at 100 C), so no
+      lane chemistry reconciles them. Units and quantification of both verified by two readers.
+    explanations:
+      - "Headspace oxygen: 17 mL air over 3 mL (about 50 mM-equivalent O2 against 25 mM cysteine) oxidises cysteine and the thiols during heating; the lane's oxygen consumers are off and no measured cysteine autoxidation rate is in the corpus."
+      - "Free-thiol losses between heating and analysis in Yiltirak (labelled standards added to a 30 uL aliquot after heating, extraction into 1 M NaOH): thiols bound as disulfides or adducts are not counted."
+      - "Garching's 100 C time course over-reads (CF-055 records an internal text vs table inconsistency in the same laboratory's tables)."
+    tests:
+      - "Any third laboratory's SIDA ribose + cysteine pot at 100 - 120 C with the vessel headspace stated."
+      - "An oxygen-consumer arm with a measured cysteine autoxidation rate: does it move Yiltirak down without moving Schieberle?"
+    status: open
+    remedy: "Both stay as data: Schieberle in the joint fit, Yiltirak a declared hold-out. Neither is down-weighted; the spread is reported as between-laboratory error if the thiol layer ships as a declared limitation (thiol prereg sec. 6)."
+    affects: [schieberle2000_t4_100c_time_course, yiltirak2026_tables3_buffer_arm_mft_fft]
+  - id: CF-069
+    kind: conflict
+    scope: corpus
+    sources: [martins2005, davidek2008]
+    quantity: "loss of acetic acid in heated sugar + glycine solutions (the trunk's r_aa_frag)"
+    observation: >-
+      The trunk's acetic-acid loss, fitted on Martins 2005's glucose + glycine acids, runs at 0.0164 /min at 120 C
+      (Ea 20 kJ/mol on its lower bound). Davidek 2008 (xylose + glycine, 0.2 M phosphate, isotope dilution) measures
+      acetic acid on a plateau from 60 to 240 min at pH 8 (26.9 -> 27.6 mol%) -- a loss of at most ~4e-4 /min, >= 40x
+      slower. Acetic acid is thermally stable in water at 120 C, so the fitted loss stands in for another deficiency
+      of the Martins fit (a missing late acid sink, or the acid budget's split between formic and acetic).
+    explanations:
+      - "The Martins fit used r_aa_frag to absorb a late fall in measured acetic acid that has another cause (volatilisation, a sampling or derivatisation artefact, a pH-dependent extraction)."
+      - "Glucose and xylose systems differ in a late acetic-acid consumer the lane lacks."
+    tests:
+      - "The pentose + amine entry arm (E) frees k_aa_frag on Davidek 2008 and re-scores Martins 2005 and Davidek 2006a / b at its optimum."
+    status: open
+    remedy: "k_aa_frag is a coordinate of arm E; nothing shipped changes until a fit and its audit decide."
+    affects: [davidek2008_fig1_xylose_gly_acetic_residual_xylose]
+  - id: CF-070
+    kind: duplicate
+    scope: corpus
+    sources: [hofmann2000, hofmann2000b]
+    quantity: "phenylalanine degraded (%) vs time, 98 - 100 C, pH 7, 1 + 1 mmol in 10 mL"
+    observation: >-
+      Hofmann 2000 Table 3 (MGO + Phe) prints a "Phe degraded" column that matches Hofmann & Schieberle 2000b Table 3
+      (glucose + Phe, a different pot) within 1 point at all five shared times. Two different dicarbonyl / sugar
+      donors are unlikely to consume phenylalanine identically; one series is probably reused. Neither paper says how
+      phenylalanine was measured. Found by the first reader and confirmed by the adjudicator (2026-10-31).
+    explanations:
+      - "One phenylalanine series was printed in both papers (a copy)."
+      - "Phenylalanine loss is set by a step common to both pots (e.g. the amine's own thermal loss) and the coincidence is real."
+    tests:
+      - "A third Phe-loss series from the same laboratory with a different donor; or the Strecker lane's fit predicting the two pots' Phe loss separately."
+    status: open
+    remedy: "The Hofmann 2000 Table 3 phenylalanine rows are semi_quantitative and flagged duplicate_candidate: never fitted as independent of hofmann2000b Table 3; at most one of the two enters a fit."
+    affects: [hofmann2000_table3_mgo_phe_timecourse, hofmann2000b_table3_arp_phe_formation]
+  - id: CF-071
+    kind: conflict
+    scope: corpus
+    sources: [zhai2019, zhai2023jafc]
+    quantity: "cysteine's effect on the 3- / 1-deoxypentosone ratio in fed-TTCA pots: (TDP / DPO) with Cys over without"
+    observation: >-
+      Zhai 2019 Fig. 3b (fed TTCA +- cysteine, 120 C) gives a double ratio of 0.45 (0.32 - 0.60): cysteine lowers TDP
+      more than DPO. Zhai 2023 JAFC Fig. 5bc (TTCA +- cysteine, same laboratory) gives 0.53 - 2.6, i.e. at some times
+      cysteine raises the ratio. Found by the B7 design review (2026-10-31) recomputing the signature from both tables.
+    explanations:
+      - "Different conditions (pH 7.4 vs 7, buffer, time window) change which dicarbonyl cysteine traps."
+      - "Calibration of the quinoxalines differs between the papers (internal standard vs external standards), so one ratio carries a response-factor error."
+    tests:
+      - "Both double ratios as signatures of the B7a arms; an arm that passes one and fails the other is not credited on this mechanism."
+    status: open
+    remedy: "Signature (iii) is reported, not decisive, in B7a (kinetic_core_dpo_partition_prereg.md sec. 7)."
+    affects: [zhai2019_fig3b_dicarbonyls_ttca, zhai2023jafc_fig5_arp_dicarbonyls]
+

@@ -867,7 +867,9 @@ def test_network_shape_is_pinned():
     # 2026-10-27: + SHET (B49, norfuraneol's heterocycles) and GSH (glutathione, a measured H2S source).
     # 2026-10-29: + CAMA (the cysteine Amadori compound of de Roos's route, B59b), appended last and
     # inert while CYS_AMADORI_ROUTE is off, which it is in the shipped model.
-    assert described["n_species"] == 61
+    # 2026-10-30: + PAMA (the pentose + amine entry's Amadori compound), appended last, inert while
+    # PENTOSE_AMINE_ENTRY is off.
+    assert described["n_species"] == 62
     # B7 adds ELEVEN steps to the TRUNK -- the furanic channel hangs there
     # because all four of its parents (Fru, 3-DG, 1-DG, MGO) are trunk species.
     # 15 through B6.

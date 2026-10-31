@@ -1,0 +1,114 @@
+# Second, independent reading of Zhou et al. 2023 J Agric Food Chem 71:2472 (Zhou2023b.pdf + zhou2023b_supporting.pdf):
+# Table 1 MFT / FFT / MFTD / FUR and Fig. 2 final pH, by agent-zhou2023ph-reader2-2026-10-30. Read from the paper and
+# SI only; the first reader's ph_series files were not opened. Disclosure: while locating the ledger ids this reader
+# saw the measurement-ledger entry (data/lit/measurement_ledger/sulfur.yml) and the ph_acid_submodel fit rows, both of
+# which print final-pH numbers; the values here come from a pixel measurement of the embedded Fig. 2 raster (method in
+# the fit table header), not from those files.
+entries:
+- ledger_id: zhou2023_table1_ph7_arp_cys_volatiles
+  source_file: Zhou2023b.pdf
+  read_by: agent-zhou2023ph-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: Table 1. Volatile Flavor Compounds of Thermally Treated ARP with or without Cys at 120 C for 1 h under Different
+    Initial pH Values (6, 7, and 8) ... concentration (ug/L) ... Results are displayed as means +/- standard deviation,
+    data within a row with different superscript letters denoted significantly different (p < 0.05) using Duncan's
+    multiple comparison test (n = 3)
+  quantification_quote: Different concentrations of the chemical standards and the fixed concentration of internal standards
+    were mixed to construct standard curves. The x-axis and the y-axis represent the concentration of the flavor compounds
+    and the peak area ratio of the corresponding compounds to the internal standard, respectively. The calibration
+    equations established for different flavor substances are shown in Table S1. (IS 1,2-dichlorobenzene, 0.0018 ug/uL in
+    methanol; HS-SPME CAR/PDMS/DVB, 3 mL sample + 2 mL saturated NaCl, 60 C 30 min; DB-WAX; p. 2473)
+  check_notes:
+    conditions: 'Methods p. 2473: ARP 20 mM +/- Cys 20 mM, deionized water, pH set to 6 / 7 / 8 with 3 M NaOH, 120 C,
+      1 h, ice-bath quench. Matches the ledger. Vessel, fill volume, heating device not stated; final pH in Fig. 2
+      (entry zhou2023_fig2_final_ph).'
+    units: Table 1 header 'concentration (ug/L)'; mean +/- SD, n = 3 (footnote a).
+    quantification: 'Calibrated: MFT, FFT, MFTD and 2-furfural all identified ''MS, RI, S'' and bought as authentic standards
+      (Aladdin; Chemicals list), external standard curves with IS ratio (Table S1: MFT y = 0.001x + 0.0029, R2 0.9966;
+      FFT y = 0.0018x + 0.0037, R2 0.9951; MFTD y = 0.0208x - 0.7126, R2 0.9984; furfural y = 0.0191x - 0.3498,
+      R2 0.9900). Not SIDA. Not stated: the matrix of the standard curves (water vs reacted pot), their concentration
+      ranges, the x unit of the equations, and the IS volume added. The MFTD curve crosses zero response at x = 34.3
+      (in the curve''s x unit); if that unit is ug/L the 50-103 ug/L MFTD cells sit close to the curve''s zero and are
+      sensitive to its intercept.'
+    duplicates: 'Reprinted only as OAVs in Table S2 (value / odour threshold in water); recomputed, all agree with Table 1
+      to the printed digits (MFT 3.18e5 = 1588.57/0.005; FFT 1.26e5 = 757.965/0.006; MFTD 3.21e5 = 102.59/0.00032;
+      furfural 0.45 / 0.16 = 1339.37 / 473.07 over 3000). Not a second measurement. The text cites a previous study by
+      the same group on the same alanine-xylose ARP / Cys model (ref. 10) whose pH 7 condition may overlap; not checked
+      here.'
+    values: 'pH 7 cells, text layer and 200 dpi render agree: MFT ND / 1588.57 +/- 21.24 c; FFT ND / 757.965 +/- 13.03 c
+      (three decimals as printed); MFTD ND / 102.59 +/- 4.17 c; 2-furfural 1339.37 +/- 83.04 c / 473.07 +/- 14.04 c.'
+  species_used:
+  - MFT
+  - FFT
+  - MFTD
+  - FUR
+- ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles
+  source_file: Zhou2023b.pdf
+  read_by: agent-zhou2023ph-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: Table 1. Volatile Flavor Compounds of Thermally Treated ARP with or without Cys at 120 C for 1 h under Different
+    Initial pH Values (6, 7, and 8) ... concentration (ug/L) ... (n = 3)
+  quantification_quote: As the pH 7 entry (standard curves with 1,2-dichlorobenzene IS; Table S1).
+  check_notes:
+    conditions: As the pH 7 entry; initial pH 6 and 8 (3 M NaOH), unbuffered.
+    units: Table 1 header 'concentration (ug/L)'; mean +/- SD, n = 3.
+    quantification: As the pH 7 entry.
+    duplicates: As the pH 7 entry (Table S2 OAVs agree with these cells; e.g. MFT 1.39e5 = 696.99/0.005, 1.05e5 =
+      525.62/0.005; FFT 5.42e4 = 325.22/0.006; MFTD 1.87e5 / 1.56e5; furfural 0.54 / 0.20 / 0.15 / 0.07).
+    values: 'pH 6: MFT ND / 696.99 +/- 17.44 c; FFT ND / 813.65 +/- 13.37 c; MFTD ND / 59.70 +/- 2.75 c; 2-furfural
+      1606.92 +/- 41.62 e / 608.41 +/- 22.97 d. pH 8: MFT ND / 525.62 +/- 16.88 b; FFT ND / 325.22 +/- 14.61 b; MFTD ND /
+      50.07 +/- 2.15 b; 2-furfural 436.63 +/- 19.93 c / 224.98 +/- 23.14 b. Text layer and render agree. The Duncan letters
+      do not track the values: 2-furfural 1339.37 (pH 7 ARP) shares c with 473.07 and 436.63 while 608.41 is d; MFT
+      696.99 and 1588.57 share c (~40 SD apart) although the text says MFT was higher at pH 7 than pH 6; MFTD 59.70 and
+      102.59 share c. The letters are kept in ''printed'' but carry no information a fit can use; the means and SDs are
+      self-consistent with Table S2 and the text trends (FFT and 2-furfural fall with pH; MFT and MFTD peak at pH 7).'
+  species_used:
+  - MFT
+  - FFT
+  - MFTD
+  - FUR
+- ledger_id: zhou2023_fig2_final_ph
+  source_file: Zhou2023b.pdf
+  read_by: agent-zhou2023ph-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: Figure 2. Final pH value of thermally treated ARP with or without Cys at 120 C for 60 min under different initial
+    pH values (6, 7, and 8) (the concentrations of ARP and Cys were both 20 mmol/L).
+  quantification_quote: 'Measurement of pH. A pH meter (Mettler-Toledo, Shanghai, China) was used to determine the pH value.'
+  check_notes:
+    conditions: Same six pots as Table 1 (caption). Read after the 60 min at 120 C; the Methods say the mixture was cooled
+      in an ice bath for further analysis, so the reading is after quench; reading temperature not stated.
+    units: pH (y axis 'Final pH value', 0-6, ticks every 2).
+    quantification: Glass-electrode pH meter; calibration buffers not stated. Error bars not defined in the caption; the
+      Statistical Analysis section says every experiment was repeated three times and reported as mean +/- SD, so the
+      bars are taken as SD, n = 3.
+    duplicates: No numeric print of the final pH anywhere in the paper or SI. The text states only orderings (final pH
+      below initial; at initial pH 7 ARP + Cys significantly lower than ARP; at initial pH 8 ARP + Cys not lower than ARP),
+      all consistent with the digitised bars and the letters (ARP b / b / c; ARP+Cys a / a / c).
+    values: 'Digitised from the embedded raster (pdfimages, 1333 x 755 px, 600 ppi; y axis 106.1 px/pH by least squares
+      on the 0 / 2 / 4 / 6 ticks, residual < 1 px). Bar-top line centre and error-cap midpoint agree within 0.01:
+      ARP 3.98 +/- 0.02 / 4.11 +/- 0.07 / 4.96 +/- 0.18; ARP + Cys 3.23 +/- 0.06 / 3.43 +/- 0.11 / 5.05 +/- 0.18
+      (initial pH 6 / 7 / 8). read_error 0.02 pH per point. The ARP pH 6 SD is below resolution (caps merge into the bar
+      top), entered as 0.02.'
+  species_used:
+  - pH

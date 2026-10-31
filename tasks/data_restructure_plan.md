@@ -1298,6 +1298,29 @@ hashes for every artifact that carries a block, the envelope included).
       bundles (Pratap-Singh, Trikusuma, Resconi, Bolton, Cerny, ACSRef3) and the matrix bundles are the ones without a
       primary-source pass; one pass per bundle, recorded in the bundle, closes it. Needs the PDFs (`data/articles/`).
 
+### Phase 2 sub-models: status and backlog (2026-10-30, overnight; log: [tasks/overnight_log_2026-10-29.md](overnight_log_2026-10-29.md))
+
+Records live in the four pre-registrations (`results/validation/kinetic_core_{ph_acid,route,deoxyosone,thiol}_submodel_prereg.md`).
+
+- [x] Four keyed fit tables READY, every source read by two readers and adjudicated (sub-model 1: 45 pots / 507
+      rows; 2: 41 / 357; 3: 56 / 483; 4: 63 / 243), plus sub-model 1's hold-out (Martins 2005b, 5 / 128).
+- [x] Source verification scoped per table (one sub-model's reading no longer clears another's rows).
+- [x] No-refit probes of all four (`scripts/generators/build_submodel_probe.py`), observation operators tested
+      (`src/kinetic_core/observations.py`); inline pH coupling checked against the fixed point (<= 1e-3).
+- [x] Sub-model 1: design review (7 blocking, answered), Amendment 1 (DFG's measured pKa; in-situ slopes).
+- [ ] Sub-model 1: arms A / B fitted (running), hold-out predictions frozen and scored, evidence audit on
+      `sulfur.TRUNK_PH_TERMS` and `ph_state.TRUNK_SOLUTES_IN_BALANCE` (both OFF until then).
+- [ ] Sub-model 3: arms A2 / A3 / A4 / A1 (queued); the winner's leave-one-paper-out; re-score every B60 fit row
+      and hold-out with `k_dpo_ddp` / `k_dpo_c2c3` moved (they couple sub-models 2-4).
+- [ ] Sub-model 3: a second laboratory's pentose MGO time course (Feng 2021, doi 10.1016/j.fbio.2021.100951);
+      glycolaldehyde rows (Hofmann 1999, doi 10.1007/s002170050468) to give HA a measured sink.
+- [ ] Sub-model 4: the hexose -> C5 entry (labelling: intact C5; Du 2023, Zhao 2019b), tested on Hofmann T1 / T2 /
+      T5 / T9; the thiol pH direction at pH 7 (CF-012 / CF-017); MFT at 100 C early (Schieberle 2000).
+- [ ] Route switches B58 / B59b: the probe supports them on independent data (within ~x3 with no refit); their
+      evidence audit at Phase 3's single regeneration.
+- [ ] Phosphate catalysis of the Amadori steps (Davidek pH 5: 3.3 vs 11 mmol/L acids, water vs phosphate):
+      pre-registered as an expected flag in sub-model 1; a measured term if the fit shows it.
+
 ### Calibration diagnosis 2026-09-04 (review pass: "why does so little land?")
 
 Measured on the shipped artifacts, not argued from first principles. Signed residuals

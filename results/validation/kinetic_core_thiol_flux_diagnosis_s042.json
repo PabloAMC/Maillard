@@ -1,0 +1,1101 @@
+{
+ "artifact": "kinetic_core_thiol_flux_diagnosis_s042",
+ "provenance": {
+  "artifact": "kinetic_core_thiol_flux_diagnosis_s042",
+  "generated_on": "2026-10-30",
+  "git": {"commit": "5204e7c70732b3245885fa467a0c8b37e8a406e1", "short": "5204e7c7", "branch": "submodel1-ph", "dirty": true},
+  "generated_by": "scripts/generators/diagnose_thiol_flux_at_joint_optimum.py",
+  "inputs": [{"path": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042.json", "sha256": "081c498ded922f83f1319994699f2d3ab8fe5d95c395e1b4130338d1a24f6144"}, {"path": "src/kinetic_core/sulfur.py", "sha256": "ae30cceb4193c373ab868bd14486fd548de8fa77c1accb2c62484e68d4cf423f"}]
+ },
+ "fit": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042.json",
+ "theta": {"mgo_share_nf": 0.01627656342993779, "offset_k_dpo_ddp": -7.999999999999999, "offset_k_dpo_c2c3": 2.195248146017332, "offset_k_dpo_nf": -0.19028399591797546, "offset_k_nf_mft": -0.6808656578388833, "offset_fft_formation": -1.283443914014654, "offset_k_h2s_loss": -0.17000555164841719, "offset_k_mft_decay": -0.923192419692094},
+ "strecker_share": 0.042,
+ "pots": {
+  "schieberle2000_rib_cys_ph5_100C": {
+   "t_c": 100.0,
+   "label_ph": 5.0,
+   "charge_mmol_L": {"PENT": 100.0, "Cys": 33.0},
+   "minutes": 720.0,
+   "half_time_min": {"Cys": 4.867797422822266, "PENT": 240.0},
+   "ph_in_situ": {"start": 5.098697430919856, "end": 4.575317848520318},
+   "final_mmol_L": {
+    "Cys": 7.294701825495397,
+    "PENT": 14.774096239589321,
+    "ARP": 0.0,
+    "TTCA": 5.187912187916583,
+    "H2S": 0.029262527043477125,
+    "NF": 17.181521503949714,
+    "FUR": 0.3268412136680818,
+    "DPO": 0.09949970535076058,
+    "MGO": 0.07304193729728309,
+    "MFT": 0.003198346492563041,
+    "FFT": 0.0038292368080683013,
+    "MFTD": 4.193706628514982e-05,
+    "FFTD": 5.238705164124776e-07,
+    "ACTZ": 0.035410212844770785,
+    "OX": 0.9999575390627651
+   },
+   "peak_mmol_L": {"Cys": 33.0, "PENT": 100.0, "ARP": 0.0, "TTCA": 23.05337440764474, "H2S": 0.029262527043477125, "NF": 17.181521503949714, "FUR": 0.3268412136680818, "DPO": 0.14825858432141917, "MGO": 0.10353747812173317, "MFT": 0.003198346492563041, "FFT": 0.0038292368080683013, "MFTD": 4.193706628514982e-05, "FFTD": 5.238705164124776e-07, "ACTZ": 0.035410212844770785, "OX": 1.0},
+   "closure_relative_error": {"Cys": 2.3745375669542566e-05, "PENT": 2.325713767832195e-05, "H2S": 1.8318879903056954e-05, "MFT": 2.0124689463786504e-06, "FFT": 9.47032676830957e-08},
+   "species": {
+    "Cys": {
+     "made": {"total_mmol_L": 243.98120645229844, "top": [{"reaction": "r_ttca_cys", "mmol_L": 199.31209990453416, "share": 0.816915789550792}, {"reaction": "r_cama_tdp", "mmol_L": 31.26837458343498, "share": 0.12815894731444555}, {"reaction": "r_cama_dpo", "mmol_L": 13.40073196432928, "share": 0.05492526313476239}]},
+     "used": {
+      "total_mmol_L": 269.69870214920667,
+      "top": [
+       {"reaction": "r_ttca_form", "mmol_L": 265.33694215136916, "share": 0.9838272859191424},
+       {"reaction": "r_cys_thermal", "mmol_L": 4.230039834732422, "share": 0.015684316613404456},
+       {"reaction": "r_cys_h2s", "mmol_L": 0.09631010222735291, "share": 0.0003571025795076716},
+       {"reaction": "r_cys_actz", "mmol_L": 0.03540974719646053, "share": 0.00013129372486512977},
+       {"reaction": "r_dpo_ddp", "mmol_L": 3.0050667196625593e-07, "share": 1.1142310644120387e-09}
+      ]
+     }
+    },
+    "PENT": {
+     "made": {"total_mmol_L": 199.31209990453416, "top": [{"reaction": "r_ttca_cys", "mmol_L": 199.31209990453416, "share": 1.0}]},
+     "used": {"total_mmol_L": 284.54925689513715, "top": [{"reaction": "r_ttca_form", "mmol_L": 265.33694215136916, "share": 0.9324815852502888}, {"reaction": "r_pent_caramel", "mmol_L": 18.042993231751574, "share": 0.06340903303922817}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 1.169321512016405, "share": 0.004109381710482999}]}
+    },
+    "ARP": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "TTCA": {
+     "made": {"total_mmol_L": 265.33694215136916, "top": [{"reaction": "r_ttca_form", "mmol_L": 265.33694215136916, "share": 1.0}]},
+     "used": {"total_mmol_L": 260.13875090742476, "top": [{"reaction": "r_ttca_cys", "mmol_L": 199.31209990453416, "share": 0.7661761241233264}, {"reaction": "r_cama_form", "mmol_L": 56.19042377697493, "share": 0.21600174361170568}, {"reaction": "r_ttca_deg", "mmol_L": 4.636227225915689, "share": 0.017822132264968}]}
+    },
+    "H2S": {
+     "made": {"total_mmol_L": 0.09631011540196692, "top": [{"reaction": "r_cys_h2s", "mmol_L": 0.09631010222735291, "share": 0.9999998632063314}, {"reaction": "r_dpo_ddp_h2s", "mmol_L": 1.3174614011046716e-08, "share": 1.3679366861995944e-07}]},
+     "used": {
+      "total_mmol_L": 0.06704459588315217,
+      "top": [
+       {"reaction": "r_h2s_loss", "mmol_L": 0.04881095887377946, "share": 0.7280371852617178},
+       {"reaction": "r_nf_mft", "mmol_L": 0.007663867151525674, "share": 0.11430999099289894},
+       {"reaction": "r_fur_fft_hs", "mmol_L": 0.0075012506100733635, "share": 0.11188449287019081},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.00274216917461059, "share": 0.040900674222718036},
+       {"reaction": "r_fur_fft", "mmol_L": 0.0003097788161146524, "share": 0.004620488975047988}
+      ]
+     }
+    },
+    "NF": {
+     "made": {"total_mmol_L": 17.549575885029906, "top": [{"reaction": "r_dpo_nf", "mmol_L": 17.549575885029906, "share": 1.0}]},
+     "used": {
+      "total_mmol_L": 0.36829153374799944,
+      "top": [
+       {"reaction": "r_nf_decay", "mmol_L": 0.2906277564428474, "share": 0.7891241850856857},
+       {"reaction": "r_nf_decay_oh", "mmol_L": 0.06616301609181655, "share": 0.17964848504252628},
+       {"reaction": "r_nf_mft", "mmol_L": 0.007663867151525674, "share": 0.02080924064024131},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.00274216917461059, "share": 0.007445648143752599},
+       {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.0010947248871992774, "share": 0.0029724410877941445}
+      ]
+     }
+    },
+    "FUR": {
+     "made": {"total_mmol_L": 0.5849346078893994, "top": [{"reaction": "r_tdp_fur", "mmol_L": 0.5849346078893994, "share": 1.0}]},
+     "used": {"total_mmol_L": 0.2580997273990718, "top": [{"reaction": "r_fur_decay", "mmol_L": 0.2502886979728838, "share": 0.9697363902515455}, {"reaction": "r_fur_fft_hs", "mmol_L": 0.0075012506100733635, "share": 0.029063380599681877}, {"reaction": "r_fur_fft", "mmol_L": 0.0003097788161146524, "share": 0.0012002291487726944}]}
+    },
+    "DPO": {
+     "made": {"total_mmol_L": 19.206280702261374, "top": [{"reaction": "r_cama_dpo", "mmol_L": 13.40073196432928, "share": 0.6977265495631051}, {"reaction": "r_ttca_deg", "mmol_L": 4.636227225915689, "share": 0.24139120414760015}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 1.169321512016405, "share": 0.06088224628929471}]},
+     "used": {
+      "total_mmol_L": 19.10673374725716,
+      "top": [
+       {"reaction": "r_dpo_nf", "mmol_L": 17.549575885029906, "share": 0.9185021426045261},
+       {"reaction": "r_dpo_c2c3", "mmol_L": 1.5129380692478238, "share": 0.07918350091966983},
+       {"reaction": "r_osone_decay_dpo", "mmol_L": 0.0437698684122149, "share": 0.0022908085176252704},
+       {"reaction": "r_dpo_ptr", "mmol_L": 0.0004496240605408237, "share": 2.3532230389998963e-05},
+       {"reaction": "r_dpo_ddp", "mmol_L": 3.0050667196625593e-07, "share": 1.572778874408059e-08}
+      ]
+     }
+    },
+    "MGO": {
+     "made": {"total_mmol_L": 1.5140327941350231, "top": [{"reaction": "r_dpo_c2c3", "mmol_L": 1.5129380692478238, "share": 0.9992769477045411}, {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.0010947248871992774, "share": 0.0007230522954588318}]},
+     "used": {
+      "total_mmol_L": 1.440979669008588,
+      "top": [{"reaction": "r_mgo_mel", "mmol_L": 1.405553336963139, "share": 0.9754151062590475}, {"reaction": "r_cys_actz", "mmol_L": 0.03540974719646053, "share": 0.024573384314868836}, {"reaction": "r_mgo_mp", "mmol_L": 1.657125697420698e-05, "share": 1.1499993601997321e-05}, {"reaction": "r_mgo_dmhf", "mmol_L": 1.359201434271766e-08, "share": 9.432481689397557e-09}]
+     }
+    },
+    "MFT": {
+     "made": {
+      "total_mmol_L": 0.007663949777609239,
+      "top": [{"reaction": "r_nf_mft", "mmol_L": 0.007663867151525674, "share": 0.9999892188641677}, {"reaction": "r_ha_mp_mft", "mmol_L": 8.2626009342943e-08, "share": 1.078112614781749e-05}, {"reaction": "r_ddp_mft", "mmol_L": 7.137407457754484e-14, "share": 9.312962199474369e-12}, {"reaction": "r_ddp_mft_hs", "mmol_L": 2.847694792320031e-15, "share": 3.7157012701724236e-13}]
+     },
+     "used": {"total_mmol_L": 0.004465627695444195, "top": [{"reaction": "ch_mft_decay", "mmol_L": 0.0039877820563531405, "share": 0.8929947430282759}, {"reaction": "ch_thiolate_loss_mft", "mmol_L": 0.00039396564038489244, "share": 0.08822178364461813}, {"reaction": "ch_dimer_mft", "mmol_L": 8.387999870616231e-05, "share": 0.018783473327106098}]}
+    },
+    "FFT": {
+     "made": {"total_mmol_L": 0.007811029426188016, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.0075012506100733635, "share": 0.9603408463580924}, {"reaction": "r_fur_fft", "mmol_L": 0.0003097788161146524, "share": 0.03965915364190767}]},
+     "used": {"total_mmol_L": 0.003981791501301038, "top": [{"reaction": "ch_fft_decay", "mmol_L": 0.003593952278135549, "share": 0.9025968027108492}, {"reaction": "ch_thiolate_loss_fft", "mmol_L": 0.0003867913587388705, "share": 0.0971400332268748}, {"reaction": "ch_dimer_fft", "mmol_L": 1.0478644266185251e-06, "share": 0.0002631640622760229}]}
+    },
+    "MFTD": {"made": {"total_mmol_L": 4.1939999353081156e-05, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 4.1939999353081156e-05, "share": 1.0}]}, "used": {"total_mmol_L": 4.303602144323427e-13, "top": [{"reaction": "ch_mftd_decay", "mmol_L": 4.303602144323427e-13, "share": 1.0}]}},
+    "FFTD": {"made": {"total_mmol_L": 5.239322133092626e-07, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 5.239322133092626e-07, "share": 1.0}]}, "used": {"total_mmol_L": 4.408855219025559e-15, "top": [{"reaction": "ch_fftd_decay", "mmol_L": 4.408855219025559e-15, "share": 1.0}]}},
+    "ACTZ": {"made": {"total_mmol_L": 0.03540974719646053, "top": [{"reaction": "r_cys_actz", "mmol_L": 0.03540974719646053, "share": 1.0}]}, "used": {"total_mmol_L": 8.14340643478853e-09, "top": [{"reaction": "ch_actz_decay", "mmol_L": 8.14340643478853e-09, "share": 1.0}]}},
+    "OX": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 4.246393156639042e-05, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 4.1939999353081156e-05, "share": 0.9876617120934712}, {"reaction": "ch_dimer_fft", "mmol_L": 5.239322133092626e-07, "share": 0.012338287906528826}]}}
+   },
+   "predictions": [
+    {"species": "MFT", "t_min": 30.0, "unit": "ug_L", "method": "sida", "measured": 45.0, "predicted": 0.1714256375363697, "log10_ratio": -2.4191367404825423},
+    {"species": "MFT", "t_min": 60.0, "unit": "ug_L", "method": "sida", "measured": 138.0, "predicted": 1.2920805915139797, "log10_ratio": -2.0285894834556095},
+    {"species": "MFT", "t_min": 360.0, "unit": "ug_L", "method": "sida", "measured": 1560.0, "predicted": 105.37462488377217, "log10_ratio": -1.1703885567354022},
+    {"species": "MFT", "t_min": 720.0, "unit": "ug_L", "method": "sida", "measured": 1790.0, "predicted": 365.1232355909967, "log10_ratio": -0.6904135596629782},
+    {"species": "FFT", "t_min": 30.0, "unit": "ug_L", "method": "sida", "measured": 20.0, "predicted": 0.017180006554678825, "log10_ratio": -3.0660066704725817},
+    {"species": "FFT", "t_min": 60.0, "unit": "ug_L", "method": "sida", "measured": 31.0, "predicted": 0.19356317005279924, "log10_ratio": -2.20453896774443},
+    {"species": "FFT", "t_min": 360.0, "unit": "ug_L", "method": "sida", "measured": 1100.0, "predicted": 79.34080180595687, "log10_ratio": -1.1418961000845866},
+    {"species": "FFT", "t_min": 720.0, "unit": "ug_L", "method": "sida", "measured": 1320.0, "predicted": 437.14567400907725, "log10_ratio": -0.47994774623571657}
+   ],
+   "why": "absolute, under-predicted (MFT -0.85, FFT -2.0)",
+   "ledger_id": "schieberle2000_t4_100c_time_course"
+  },
+  "yiltirak2026_rib_cys_ph55_buffer_100C": {
+   "t_c": 100.0,
+   "label_ph": 5.5,
+   "charge_mmol_L": {"PENT": 25.0, "Cys": 25.0},
+   "minutes": 240.0,
+   "half_time_min": {"Cys": 59.36692779932699, "PENT": 58.0},
+   "ph_in_situ": {"start": 5.57550140330568, "end": 5.361357569182292},
+   "final_mmol_L": {
+    "Cys": 11.056056689419558,
+    "PENT": 6.8003474526495085,
+    "ARP": 0.0,
+    "TTCA": 3.81970775382185,
+    "H2S": 0.07828559357055877,
+    "NF": 2.5440796723060717,
+    "FUR": 0.015937203915507358,
+    "DPO": 0.06274507675927778,
+    "MGO": 0.04364258953719553,
+    "MFT": 0.00051779115585009,
+    "FFT": 0.0010295521308204265,
+    "MFTD": 1.6039009937890376e-06,
+    "FFTD": 5.3892242126775184e-08,
+    "ACTZ": 0.00979706647552952,
+    "OX": 0.99999834220676
+   },
+   "peak_mmol_L": {"Cys": 25.0, "PENT": 25.0, "ARP": 0.0, "TTCA": 8.784292967236887, "H2S": 0.07828559357055877, "NF": 2.5440796723060717, "FUR": 0.015937203915507358, "DPO": 0.06583676028938294, "MGO": 0.04381703043444071, "MFT": 0.00051779115585009, "FFT": 0.0010295521308204265, "MFTD": 1.6039009937890376e-06, "FFTD": 5.3892242126775184e-08, "ACTZ": 0.00979706647552952, "OX": 1.0},
+   "closure_relative_error": {"Cys": 2.6086067716369537e-05, "PENT": 2.6918337418026952e-05, "H2S": 1.2029946947467259e-05, "MFT": 1.5009378659091047e-06, "FFT": 1.54239603359428e-05},
+   "species": {
+    "Cys": {
+     "made": {"total_mmol_L": 47.548412257545024, "top": [{"reaction": "r_ttca_cys", "mmol_L": 41.564128868505705, "share": 0.8741433603161013}, {"reaction": "r_cama_tdp", "mmol_L": 4.188998372327524, "share": 0.08809964777872914}, {"reaction": "r_cama_dpo", "mmol_L": 1.7952850167117969, "share": 0.03775699190516965}]},
+     "used": {
+      "total_mmol_L": 61.49520008718113,
+      "top": [
+       {"reaction": "r_ttca_form", "mmol_L": 58.0713879677197, "share": 0.94432391284836},
+       {"reaction": "r_cys_thermal", "mmol_L": 3.294264233986295, "share": 0.05356945305188127},
+       {"reaction": "r_cys_h2s", "mmol_L": 0.11975032930149583, "share": 0.0019473118085920036},
+       {"reaction": "r_cys_actz", "mmol_L": 0.009796915596866542, "share": 0.00015931187447113844},
+       {"reaction": "r_dpo_ddp", "mmol_L": 6.136725481193441e-07, "share": 9.979194266371141e-09}
+      ]
+     }
+    },
+    "PENT": {
+     "made": {"total_mmol_L": 41.564128868505705, "top": [{"reaction": "r_ttca_cys", "mmol_L": 41.564128868505705, "share": 1.0}]},
+     "used": {"total_mmol_L": 59.76650906815896, "top": [{"reaction": "r_ttca_form", "mmol_L": 58.0713879677197, "share": 0.9716376089741814}, {"reaction": "r_pent_caramel", "mmol_L": 1.5919507331695073, "share": 0.026636167278132537}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.10317036726974849, "share": 0.0017262237476860305}]}
+    },
+    "ARP": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "TTCA": {
+     "made": {"total_mmol_L": 58.0713879677197, "top": [{"reaction": "r_ttca_form", "mmol_L": 58.0713879677197, "share": 1.0}]},
+     "used": {"total_mmol_L": 54.24879157656367, "top": [{"reaction": "r_ttca_cys", "mmol_L": 41.564128868505705, "share": 0.7661761241233264}, {"reaction": "r_cama_form", "mmol_L": 11.717833569365764, "share": 0.21600174361170568}, {"reaction": "r_ttca_deg", "mmol_L": 0.9668291386921997, "share": 0.017822132264968}]}
+    },
+    "H2S": {
+     "made": {"total_mmol_L": 0.11975035620572028, "top": [{"reaction": "r_cys_h2s", "mmol_L": 0.11975032930149583, "share": 0.9999997753307356}, {"reaction": "r_dpo_ddp_h2s", "mmol_L": 2.6904224447820925e-08, "share": 2.2466926446216078e-07}]},
+     "used": {
+      "total_mmol_L": 0.041462823249165434,
+      "top": [
+       {"reaction": "r_h2s_loss", "mmol_L": 0.03895508629400475, "share": 0.9395184225615616},
+       {"reaction": "r_fur_fft_hs", "mmol_L": 0.0014239882805655026, "share": 0.03434373660491546},
+       {"reaction": "r_nf_mft", "mmol_L": 0.0007871051927593195, "share": 0.018983395993787337},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.00028163009014722513, "share": 0.006792351993370201},
+       {"reaction": "r_fur_fft", "mmol_L": 1.001904510193848e-05, "share": 0.0002416392400905827}
+      ]
+     }
+    },
+    "NF": {
+     "made": {"total_mmol_L": 2.574131992758464, "top": [{"reaction": "r_dpo_nf", "mmol_L": 2.574131992758464, "share": 1.0}]},
+     "used": {
+      "total_mmol_L": 0.030095820370913063,
+      "top": [
+       {"reaction": "r_nf_decay_oh", "mmol_L": 0.01642740321328024, "share": 0.5458366979474983},
+       {"reaction": "r_nf_decay", "mmol_L": 0.012327876141071708, "share": 0.4096208705773086},
+       {"reaction": "r_nf_mft", "mmol_L": 0.0007871051927593195, "share": 0.026153305776639973},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.00028163009014722513, "share": 0.009357780803988794},
+       {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.0002718057336545691, "share": 0.009031344894564272}
+      ]
+     }
+    },
+    "FUR": {
+     "made": {"total_mmol_L": 0.020667557986619643, "top": [{"reaction": "r_tdp_fur", "mmol_L": 0.020667557986619643, "share": 1.0}]},
+     "used": {"total_mmol_L": 0.0047304157299010744, "top": [{"reaction": "r_fur_decay", "mmol_L": 0.003296408404233633, "share": 0.6968538480448884}, {"reaction": "r_fur_fft_hs", "mmol_L": 0.0014239882805655026, "share": 0.30102814675768086}, {"reaction": "r_fur_fft", "mmol_L": 1.001904510193848e-05, "share": 0.002118005197430714}]}
+    },
+    "DPO": {
+     "made": {"total_mmol_L": 2.865284522673745, "top": [{"reaction": "r_cama_dpo", "mmol_L": 1.7952850167117969, "share": 0.6265643088863383}, {"reaction": "r_ttca_deg", "mmol_L": 0.9668291386921997, "share": 0.33742866756911155}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.10317036726974849, "share": 0.036007023544550085}]},
+     "used": {
+      "total_mmol_L": 2.802532946339504,
+      "top": [
+       {"reaction": "r_dpo_nf", "mmol_L": 2.574131992758464, "share": 0.9185019559254911},
+       {"reaction": "r_dpo_c2c3", "mmol_L": 0.2219143250313599, "share": 0.07918348482618581},
+       {"reaction": "r_osone_decay_dpo", "mmol_L": 0.006420065039567109, "share": 0.0022908080520347147},
+       {"reaction": "r_dpo_ptr", "mmol_L": 6.594983756498514e-05, "share": 2.3532225607240322e-05},
+       {"reaction": "r_dpo_ddp", "mmol_L": 6.136725481193441e-07, "share": 2.1897068111933722e-07}
+      ]
+     }
+    },
+    "MGO": {
+     "made": {"total_mmol_L": 0.22218613076501448, "top": [{"reaction": "r_dpo_c2c3", "mmol_L": 0.2219143250313599, "share": 0.9987766755165198}, {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.0002718057336545691, "share": 0.001223324483480171}]},
+     "used": {
+      "total_mmol_L": 0.17854459144702978,
+      "top": [{"reaction": "r_mgo_mel", "mmol_L": 0.16874268083511465, "share": 0.9451010499255412}, {"reaction": "r_cys_actz", "mmol_L": 0.009796915596866542, "share": 0.05487097378568911}, {"reaction": "r_mgo_mp", "mmol_L": 4.99434643622275e-06, "share": 2.7972543977645283e-05}, {"reaction": "r_mgo_dmhf", "mmol_L": 6.686123679998164e-10, "share": 3.744792057720655e-09}]
+     }
+    },
+    "MFT": {
+     "made": {
+      "total_mmol_L": 0.0007871061051230782,
+      "top": [{"reaction": "r_nf_mft", "mmol_L": 0.0007871051927593195, "share": 0.9999988408630645}, {"reaction": "r_ha_mp_mft", "mmol_L": 9.122132848424327e-10, "share": 1.158945762083489e-06}, {"reaction": "r_ddp_mft", "mmol_L": 1.2199598700224343e-13, "share": 1.549930640966978e-10}, {"reaction": "r_ddp_mft_hs", "mmol_L": 2.847782205939968e-14, "share": 3.61804105876509e-11}]
+     },
+     "used": {"total_mmol_L": 0.0002693133636530053, "top": [{"reaction": "ch_mft_decay", "mmol_L": 0.0001696122691059027, "share": 0.6297952199818733}, {"reaction": "ch_thiolate_loss_mft", "mmol_L": 9.649282758157628e-05, "share": 0.35829201445013215}, {"reaction": "ch_dimer_mft", "mmol_L": 3.208266965526296e-06, "share": 0.011912765567994473}]}
+    },
+    "FFT": {
+     "made": {"total_mmol_L": 0.001434007325667441, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.0014239882805655026, "share": 0.9930132538916597}, {"reaction": "r_fur_fft", "mmol_L": 1.001904510193848e-05, "share": 0.006986746108340304}]},
+     "used": {"total_mmol_L": 0.00040442683891137997, "top": [{"reaction": "ch_fft_decay", "mmol_L": 0.0002492024149949808, "share": 0.616186640000881}, {"reaction": "ch_thiolate_loss_fft", "mmol_L": 0.0001551166112283832, "share": 0.3835467785617787}, {"reaction": "ch_dimer_fft", "mmol_L": 1.0781268801600431e-07, "share": 0.00026658143734033626}]}
+    },
+    "MFTD": {"made": {"total_mmol_L": 1.604133482763148e-06, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 1.604133482763148e-06, "share": 1.0}]}, "used": {"total_mmol_L": 4.236597307802323e-15, "top": [{"reaction": "ch_mftd_decay", "mmol_L": 4.236597307802323e-15, "share": 1.0}]}},
+    "FFTD": {"made": {"total_mmol_L": 5.3906344008002155e-08, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 5.3906344008002155e-08, "share": 1.0}]}, "used": {"total_mmol_L": 1.1545128262429462e-16, "top": [{"reaction": "ch_fftd_decay", "mmol_L": 1.1545128262429462e-16, "share": 1.0}]}},
+    "ACTZ": {"made": {"total_mmol_L": 0.009796915596866542, "top": [{"reaction": "r_cys_actz", "mmol_L": 0.009796915596866542, "share": 1.0}]}, "used": {"total_mmol_L": 6.648228486655401e-10, "top": [{"reaction": "ch_actz_decay", "mmol_L": 6.648228486655401e-10, "share": 1.0}]}},
+    "OX": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 1.6580398267711501e-06, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 1.604133482763148e-06, "share": 0.9674879076258507}, {"reaction": "ch_dimer_fft", "mmol_L": 5.3906344008002155e-08, "share": 0.032512092374149315}]}}
+   },
+   "predictions": [{"species": "MFT", "t_min": 240.0, "unit": "ug_L", "method": "sida", "measured": 6.88, "predicted": 59.111038351846275, "log10_ratio": 0.9340801500512269}, {"species": "FFT", "t_min": 240.0, "unit": "ug_L", "method": "sida", "measured": 1.28, "predicted": 117.53367125445989, "log10_ratio": 1.9629523322378848}],
+   "why": "absolute hold-out, over-predicted (MFT +2.35, FFT +1.9)",
+   "ledger_id": "yiltirak2026_tables3_buffer_arm_mft_fft"
+  },
+  "yiltirak2026_rib_cys_ph55_buffer_130C": {
+   "t_c": 130.0,
+   "label_ph": 5.5,
+   "charge_mmol_L": {"PENT": 25.0, "Cys": 25.0},
+   "minutes": 30.0,
+   "half_time_min": {"Cys": 12.699537984264639, "PENT": 9.0},
+   "ph_in_situ": {"start": 5.687611103523523, "end": 5.472366847656684},
+   "final_mmol_L": {
+    "Cys": 12.708017692398538,
+    "PENT": 6.217100183355755,
+    "ARP": 0.0,
+    "TTCA": 3.218593647940598,
+    "H2S": 0.322728238234154,
+    "NF": 2.3820457181886465,
+    "FUR": 0.005204341404138361,
+    "DPO": 0.11734989603049477,
+    "MGO": 0.13154947183206875,
+    "MFT": 0.0008516020400192537,
+    "FFT": 0.0008985386296890762,
+    "MFTD": 1.2186611644712168e-05,
+    "FFTD": 1.292582510301692e-07,
+    "ACTZ": 0.012356982321573824,
+    "OX": 0.9999876841300868
+   },
+   "peak_mmol_L": {"Cys": 25.0, "PENT": 25.0, "ARP": 0.0, "TTCA": 7.425817512073759, "H2S": 0.322728238234154, "NF": 2.3820457181886465, "FUR": 0.005204341404138361, "DPO": 0.12009606127559326, "MGO": 0.13154947183206875, "MFT": 0.0008516020400192537, "FFT": 0.0008985386296890762, "MFTD": 1.2186611644712168e-05, "FFTD": 1.292582510301692e-07, "ACTZ": 0.012356982321573824, "OX": 1.0},
+   "closure_relative_error": {"Cys": 2.7389480666705665e-05, "PENT": 2.910989921048795e-05, "H2S": 1.2013193765410274e-05, "MFT": 2.2496114507130877e-06, "FFT": 8.007815029300156e-06},
+   "species": {
+    "Cys": {
+     "made": {"total_mmol_L": 28.241310953905806, "top": [{"reaction": "r_ttca_cys", "mmol_L": 20.63863946663425, "share": 0.730796084513205}, {"reaction": "r_cama_tdp", "mmol_L": 5.32187004109009, "share": 0.18844274084075652}, {"reaction": "r_cama_dpo", "mmol_L": 2.2808014461814663, "share": 0.08076117464603848}]},
+     "used": {
+      "total_mmol_L": 40.53517701379478,
+      "top": [
+       {"reaction": "r_ttca_form", "mmol_L": 38.41017650047649, "share": 0.9475763850101082},
+       {"reaction": "r_cys_thermal", "mmol_L": 1.69986920661017, "share": 0.041935655197254396},
+       {"reaction": "r_cys_h2s", "mmol_L": 0.41277345426300166, "share": 0.010183092431606457},
+       {"reaction": "r_cys_actz", "mmol_L": 0.012356998419801318, "share": 0.0003048462922857357},
+       {"reaction": "r_dpo_ddp", "mmol_L": 8.181562571316058e-07, "share": 2.018385800691518e-08}
+      ]
+     }
+    },
+    "PENT": {
+     "made": {"total_mmol_L": 20.63863946663425, "top": [{"reaction": "r_ttca_cys", "mmol_L": 20.63863946663425, "share": 1.0}]},
+     "used": {"total_mmol_L": 39.42328767992412, "top": [{"reaction": "r_ttca_form", "mmol_L": 38.41017650047649, "share": 0.9743017074660785}, {"reaction": "r_pent_caramel", "mmol_L": 0.9514500671875005, "share": 0.0241342141455142}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.061661112260130026, "share": 0.0015640783884072224}]}
+    },
+    "ARP": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "TTCA": {
+     "made": {"total_mmol_L": 38.41017650047649, "top": [{"reaction": "r_ttca_form", "mmol_L": 38.41017650047649, "share": 1.0}]},
+     "used": {"total_mmol_L": 35.18958720427476, "top": [{"reaction": "r_ttca_cys", "mmol_L": 20.63863946663425, "share": 0.5864984816908313}, {"reaction": "r_cama_form", "mmol_L": 14.07086939695322, "share": 0.39985889335024427}, {"reaction": "r_ttca_deg", "mmol_L": 0.4800783406872882, "share": 0.013642624958924477}]}
+    },
+    "H2S": {
+     "made": {"total_mmol_L": 0.4127734901320651, "top": [{"reaction": "r_cys_h2s", "mmol_L": 0.41277345426300166, "share": 0.9999999131023084}, {"reaction": "r_dpo_ddp_h2s", "mmol_L": 3.586906346505994e-08, "share": 8.689769164580745e-08}]},
+     "used": {
+      "total_mmol_L": 0.0900392115114986,
+      "top": [
+       {"reaction": "r_h2s_loss", "mmol_L": 0.08647945399456149, "share": 0.9604643637235483},
+       {"reaction": "r_nf_mft", "mmol_L": 0.0015195752148705816, "share": 0.01687681610446491},
+       {"reaction": "r_fur_fft_hs", "mmol_L": 0.0014648661784754783, "share": 0.01626920264943019},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.0005437114488461416, "share": 0.006038607399140829},
+       {"reaction": "r_mgo_mp", "mmol_L": 2.3692005340009128e-05, "share": 0.00026312986244868996}
+      ]
+     }
+    },
+    "NF": {
+     "made": {"total_mmol_L": 2.452560757228691, "top": [{"reaction": "r_dpo_nf", "mmol_L": 2.452560757228691, "share": 1.0}]},
+     "used": {
+      "total_mmol_L": 0.0705565025992437,
+      "top": [
+       {"reaction": "r_nf_decay", "mmol_L": 0.04135391059527384, "share": 0.586110550719348},
+       {"reaction": "r_nf_decay_oh", "mmol_L": 0.026697570715438063, "share": 0.3783856871007129},
+       {"reaction": "r_nf_mft", "mmol_L": 0.0015195752148705816, "share": 0.021536997426044046},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.0005437114488461416, "share": 0.007706043083433243},
+       {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.0004417346248150796, "share": 0.006260721670461804}
+      ]
+     }
+    },
+    "FUR": {
+     "made": {"total_mmol_L": 0.01131468437377221, "top": [{"reaction": "r_tdp_fur", "mmol_L": 0.01131468437377221, "share": 1.0}]},
+     "used": {"total_mmol_L": 0.006110425712377214, "top": [{"reaction": "r_fur_decay", "mmol_L": 0.00463764686488512, "share": 0.758972792270619}, {"reaction": "r_fur_fft_hs", "mmol_L": 0.0014648661784754783, "share": 0.23973226210872034}, {"reaction": "r_fur_fft", "mmol_L": 7.91266901661543e-06, "share": 0.0012949456206607032}]}
+    },
+    "DPO": {
+     "made": {"total_mmol_L": 2.8225408991288847, "top": [{"reaction": "r_cama_dpo", "mmol_L": 2.2808014461814663, "share": 0.8080667482569998}, {"reaction": "r_ttca_deg", "mmol_L": 0.4800783406872882, "share": 0.17008729291945915}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.061661112260130026, "share": 0.02184595882354101}]},
+     "used": {
+      "total_mmol_L": 2.70519003620838,
+      "top": [
+       {"reaction": "r_dpo_nf", "mmol_L": 2.452560757228691, "share": 0.9066131119816719},
+       {"reaction": "r_dpo_c2c3", "mmol_L": 0.2114337441008896, "share": 0.07815855495210872},
+       {"reaction": "r_osone_decay_dpo", "mmol_L": 0.04113188156723051, "share": 0.015204802995977816},
+       {"reaction": "r_dpo_ptr", "mmol_L": 6.283515531158158e-05, "share": 2.322763076550878e-05},
+       {"reaction": "r_dpo_ddp", "mmol_L": 8.181562571316058e-07, "share": 3.0243947603708517e-07}
+      ]
+     }
+    },
+    "MGO": {
+     "made": {"total_mmol_L": 0.2118754787257047, "top": [{"reaction": "r_dpo_c2c3", "mmol_L": 0.2114337441008896, "share": 0.9979151215257573}, {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.0004417346248150796, "share": 0.0020848784742426565}]},
+     "used": {
+      "total_mmol_L": 0.08032949416152423,
+      "top": [{"reaction": "r_mgo_mel", "mmol_L": 0.06794880332732019, "share": 0.8458761509277115}, {"reaction": "r_cys_actz", "mmol_L": 0.012356998419801318, "share": 0.1538289086565667}, {"reaction": "r_mgo_mp", "mmol_L": 2.3692005340009128e-05, "share": 0.0002949353234114724}, {"reaction": "r_mgo_dmhf", "mmol_L": 4.090627074819546e-10, "share": 5.09231026227332e-09}]
+     }
+    },
+    "MFT": {
+     "made": {
+      "total_mmol_L": 0.0015195771504015428,
+      "top": [{"reaction": "r_nf_mft", "mmol_L": 0.0015195752148705816, "share": 0.9999987262700281}, {"reaction": "r_ha_mp_mft", "mmol_L": 1.935142674674862e-09, "share": 1.2734744492331352e-06}, {"reaction": "r_ddp_mft", "mmol_L": 2.9791422907330654e-13, "share": 1.9605074279682591e-10}, {"reaction": "r_ddp_mft_hs", "mmol_L": 9.0372228464439e-14, "share": 5.947195799868303e-11}]
+     },
+     "used": {"total_mmol_L": 0.0006679701892507447, "top": [{"reaction": "ch_mft_decay", "mmol_L": 0.0003741607549422706, "share": 0.5601458881899548}, {"reaction": "ch_thiolate_loss_mft", "mmol_L": 0.0002694320434185032, "share": 0.4033593830298361}, {"reaction": "ch_dimer_mft", "mmol_L": 2.43773908899708e-05, "share": 0.03649472878020899}]}
+    },
+    "FFT": {
+     "made": {"total_mmol_L": 0.0014727788474920938, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.0014648661784754783, "share": 0.9946273881987853}, {"reaction": "r_fur_fft", "mmol_L": 7.91266901661543e-06, "share": 0.0053726118012147155}]},
+     "used": {"total_mmol_L": 0.0005742238257842455, "top": [{"reaction": "ch_fft_decay", "mmol_L": 0.00032081218185474564, "share": 0.5586883849979524}, {"reaction": "ch_thiolate_loss_fft", "mmol_L": 0.00025315306637082154, "share": 0.44086130704360454}, {"reaction": "ch_dimer_fft", "mmol_L": 2.5857755867825577e-07, "share": 0.0004503079584430406}]}
+    },
+    "MFTD": {"made": {"total_mmol_L": 1.21886954449854e-05, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 1.21886954449854e-05, "share": 1.0}]}, "used": {"total_mmol_L": 1.7533482675234248e-14, "top": [{"reaction": "ch_mftd_decay", "mmol_L": 1.7533482675234248e-14, "share": 1.0}]}},
+    "FFTD": {"made": {"total_mmol_L": 1.2928877933912788e-07, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 1.2928877933912788e-07, "share": 1.0}]}, "used": {"total_mmol_L": 1.656552904847633e-16, "top": [{"reaction": "ch_fftd_decay", "mmol_L": 1.656552904847633e-16, "share": 1.0}]}},
+    "ACTZ": {"made": {"total_mmol_L": 0.012356998419801318, "top": [{"reaction": "r_cys_actz", "mmol_L": 0.012356998419801318, "share": 1.0}]}, "used": {"total_mmol_L": 9.205329238271413e-10, "top": [{"reaction": "ch_actz_decay", "mmol_L": 9.205329238271413e-10, "share": 1.0}]}},
+    "OX": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 1.2317984224324527e-05, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 1.21886954449854e-05, "share": 0.9895040635720398}, {"reaction": "ch_dimer_fft", "mmol_L": 1.2928877933912788e-07, "share": 0.010495936427960283}]}}
+   },
+   "predictions": [{"species": "MFT", "t_min": 30.0, "unit": "ug_L", "method": "sida", "measured": 1.71, "predicted": 97.21888888859799, "log10_ratio": 1.754754542837748}, {"species": "FFT", "t_min": 30.0, "unit": "ug_L", "method": "sida", "measured": 1.62, "predicted": 102.57716996530495, "log10_ratio": 1.8015356984615618}],
+   "why": "the same, short hot end of the equal-cook series",
+   "ledger_id": "yiltirak2026_tables3_buffer_arm_mft_fft"
+  },
+  "hofmann1998_cys_xylose_ph5": {
+   "t_c": 145.0,
+   "label_ph": 5.0,
+   "charge_mmol_L": {"Cys": 33.0, "PENT": 100.0},
+   "minutes": 20.0,
+   "half_time_min": {"Cys": 0.5466340270884466, "PENT": 12.666666666666666},
+   "ph_in_situ": {"start": 5.267625433858484, "end": 4.623154885461574},
+   "final_mmol_L": {
+    "Cys": 5.4950765686049845,
+    "PENT": 35.972484738275654,
+    "ARP": 0.0,
+    "TTCA": 6.0192194099595815,
+    "H2S": 0.18680367736129952,
+    "NF": 8.807347590333332,
+    "FUR": 0.01207192488638746,
+    "DPO": 0.2961439933176949,
+    "MGO": 0.5341370494065847,
+    "MFT": 0.002536596803714244,
+    "FFT": 0.000284933306726406,
+    "MFTD": 4.7248188523850914e-05,
+    "FFTD": 6.494485358701956e-09,
+    "ACTZ": 0.027402623600014806,
+    "OX": 0.9999527453168874
+   },
+   "peak_mmol_L": {"Cys": 33.0, "PENT": 100.0, "ARP": 0.0, "TTCA": 19.11239180019431, "H2S": 0.18680367736129952, "NF": 8.807347590333332, "FUR": 0.01207192488638746, "DPO": 0.3116067587452057, "MGO": 0.5341370494065847, "MFT": 0.002536596803714244, "FFT": 0.000284933306726406, "MFTD": 4.7248188523850914e-05, "FFTD": 6.494485358701956e-09, "ACTZ": 0.027402623600014806, "OX": 1.0},
+   "closure_relative_error": {"Cys": 4.753193847141132e-05, "PENT": 5.129332062760919e-05, "H2S": 4.183670568406201e-05, "MFT": 9.23741677358438e-08, "FFT": 1.2552431771116445e-06},
+   "species": {
+    "Cys": {
+     "made": {"total_mmol_L": 80.50575882416861, "top": [{"reaction": "r_ttca_cys", "mmol_L": 49.57877989321308, "share": 0.6158414083332514}, {"reaction": "r_cama_tdp", "mmol_L": 21.64888525166887, "share": 0.26891101416672397}, {"reaction": "r_cama_dpo", "mmol_L": 9.27809367928666, "share": 0.1152475775000246}]},
+     "used": {
+      "total_mmol_L": 108.01964323337452,
+      "top": [
+       {"reaction": "r_ttca_form", "mmol_L": 106.88464237217504, "share": 0.9894926438634191},
+       {"reaction": "r_cys_thermal", "mmol_L": 0.839760543046844, "share": 0.007774146608062352},
+       {"reaction": "r_cys_h2s", "mmol_L": 0.2678373565572182, "share": 0.0024795245433144072},
+       {"reaction": "r_cys_actz", "mmol_L": 0.027402792678806125, "share": 0.0002536834214458835},
+       {"reaction": "r_dpo_ddp", "mmol_L": 1.618221225118975e-07, "share": 1.498080512655311e-09}
+      ]
+     }
+    },
+    "PENT": {
+     "made": {"total_mmol_L": 49.57877989321308, "top": [{"reaction": "r_ttca_cys", "mmol_L": 49.57877989321308, "share": 1.0}]},
+     "used": {"total_mmol_L": 113.61466588867624, "top": [{"reaction": "r_ttca_form", "mmol_L": 106.88464237217504, "share": 0.9407644826144582}, {"reaction": "r_pent_caramel", "mmol_L": 6.320413254584496, "share": 0.055630258691932125}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.4096102619167151, "share": 0.0036052586936097322}]}
+    },
+    "ARP": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "TTCA": {
+     "made": {"total_mmol_L": 106.88464237217504, "top": [{"reaction": "r_ttca_form", "mmol_L": 106.88464237217504, "share": 1.0}]},
+     "used": {"total_mmol_L": 100.85712988495199, "top": [{"reaction": "r_cama_form", "mmol_L": 50.12509091073633, "share": 0.49699105028979274}, {"reaction": "r_ttca_cys", "mmol_L": 49.57877989321308, "share": 0.4915743681162426}, {"reaction": "r_ttca_deg", "mmol_L": 1.1532590810025716, "share": 0.011434581593964625}]}
+    },
+    "H2S": {
+     "made": {"total_mmol_L": 0.26783736365171623, "top": [{"reaction": "r_cys_h2s", "mmol_L": 0.2678373565572182, "share": 0.999999973511918}, {"reaction": "r_dpo_ddp_h2s", "mmol_L": 7.094498064195925e-09, "share": 2.6488082049005285e-08}]},
+     "used": {
+      "total_mmol_L": 0.08101909128558554,
+      "top": [
+       {"reaction": "r_h2s_loss", "mmol_L": 0.07299805896044166, "share": 0.900998243773552},
+       {"reaction": "r_nf_mft", "mmol_L": 0.005421472030701039, "share": 0.06691598171091308},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.0019398292258552955, "share": 0.02394286575021632},
+       {"reaction": "r_fur_fft_hs", "mmol_L": 0.000547597208183557, "share": 0.006758866330076729},
+       {"reaction": "r_mgo_mp", "mmol_L": 9.143367879987475e-05, "share": 0.0011285448571322363}
+      ]
+     }
+    },
+    "NF": {
+     "made": {"total_mmol_L": 9.369107449609201, "top": [{"reaction": "r_dpo_nf", "mmol_L": 9.369107449609201, "share": 1.0}]},
+     "used": {
+      "total_mmol_L": 0.5619269977381169,
+      "top": [
+       {"reaction": "r_nf_decay", "mmol_L": 0.5233453951908433, "share": 0.9313405429841006},
+       {"reaction": "r_nf_decay_oh", "mmol_L": 0.030712142076457186, "share": 0.054655039177830024},
+       {"reaction": "r_nf_mft", "mmol_L": 0.005421472030701039, "share": 0.0096480006344662},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.0019398292258552955, "share": 0.0034521018453705665},
+       {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.000508159214260129, "share": 0.0009043153582326255}
+      ]
+     }
+    },
+    "FUR": {
+     "made": {"total_mmol_L": 0.05680705495216385, "top": [{"reaction": "r_tdp_fur", "mmol_L": 0.05680705495216385, "share": 1.0}]},
+     "used": {"total_mmol_L": 0.04473545422521226, "top": [{"reaction": "r_fur_decay", "mmol_L": 0.04416715683546741, "share": 0.9872964877726766}, {"reaction": "r_fur_fft_hs", "mmol_L": 0.000547597208183557, "share": 0.012240787931352647}, {"reaction": "r_fur_fft", "mmol_L": 2.070018156129346e-05, "share": 0.00046272429597075905}]}
+    },
+    "DPO": {
+     "made": {"total_mmol_L": 10.840963022205948, "top": [{"reaction": "r_cama_dpo", "mmol_L": 9.27809367928666, "share": 0.8558366687795168}, {"reaction": "r_ttca_deg", "mmol_L": 1.1532590810025716, "share": 0.10637976336975859}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.4096102619167151, "share": 0.03778356785072463}]},
+     "used": {
+      "total_mmol_L": 10.544798254105867,
+      "top": [
+       {"reaction": "r_dpo_nf", "mmol_L": 9.369107449609201, "share": 0.8885051400543502},
+       {"reaction": "r_dpo_c2c3", "mmol_L": 0.8077049512905076, "share": 0.07659747790584884},
+       {"reaction": "r_osone_decay_dpo", "mmol_L": 0.36774565275502596, "share": 0.03487460299317111},
+       {"reaction": "r_dpo_ptr", "mmol_L": 0.00024003862900926113, "share": 2.276370047343451e-05},
+       {"reaction": "r_dpo_ddp", "mmol_L": 1.618221225118975e-07, "share": 1.5346156333421385e-08}
+      ]
+     }
+    },
+    "MGO": {
+     "made": {"total_mmol_L": 0.8082131105047677, "top": [{"reaction": "r_dpo_c2c3", "mmol_L": 0.8077049512905076, "share": 0.9993712559130069}, {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.000508159214260129, "share": 0.0006287440869930447}]},
+     "used": {
+      "total_mmol_L": 0.2740896271780027,
+      "top": [{"reaction": "r_mgo_mel", "mmol_L": 0.24659539585481793, "share": 0.8996889024722955}, {"reaction": "r_cys_actz", "mmol_L": 0.027402792678806125, "share": 0.09997748897301341}, {"reaction": "r_mgo_mp", "mmol_L": 9.143367879987475e-05, "share": 0.0003335904380667961}, {"reaction": "r_mgo_dmhf", "mmol_L": 4.965578784257817e-09, "share": 1.811662424216079e-08}]
+     }
+    },
+    "MFT": {
+     "made": {
+      "total_mmol_L": 0.005421513853812594,
+      "top": [{"reaction": "r_nf_mft", "mmol_L": 0.005421472030701039, "share": 0.999992285713422}, {"reaction": "r_ha_mp_mft", "mmol_L": 4.182306873236723e-08, "share": 7.71427867936846e-06}, {"reaction": "r_ddp_mft", "mmol_L": 4.104939050121459e-14, "share": 7.57157347709206e-12}, {"reaction": "r_ddp_mft_hs", "mmol_L": 1.7733006900475306e-15, "share": 3.2708589111148077e-13}]
+     },
+     "used": {"total_mmol_L": 0.0028849178173980627, "top": [{"reaction": "ch_mft_decay", "mmol_L": 0.0025164924818991026, "share": 0.8722926062998748}, {"reaction": "ch_thiolate_loss_mft", "mmol_L": 0.0002739173186939796, "share": 0.09494804914097292}, {"reaction": "ch_dimer_mft", "mmol_L": 9.450801680498054e-05, "share": 0.03275934455915223}]}
+    },
+    "FFT": {
+     "made": {"total_mmol_L": 0.0005682973897448505, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.000547597208183557, "share": 0.9635750894956824}, {"reaction": "r_fur_fft", "mmol_L": 2.070018156129346e-05, "share": 0.03642491050431757}]},
+     "used": {"total_mmol_L": 0.0002833651520620392, "top": [{"reaction": "ch_fft_decay", "mmol_L": 0.00025314799563999467, "share": 0.8933631880908599}, {"reaction": "ch_thiolate_loss_fft", "mmol_L": 3.0204165901049098e-05, "share": 0.10659096815982608}, {"reaction": "ch_dimer_fft", "mmol_L": 1.2990520995472362e-08, "share": 4.58437493140591e-05}]}
+    },
+    "MFTD": {"made": {"total_mmol_L": 4.725400840249027e-05, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 4.725400840249027e-05, "share": 1.0}]}, "used": {"total_mmol_L": 1.030380915445574e-13, "top": [{"reaction": "ch_mftd_decay", "mmol_L": 1.030380915445574e-13, "share": 1.0}]}},
+    "FFTD": {"made": {"total_mmol_L": 6.495260497736181e-09, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 6.495260497736181e-09, "share": 1.0}]}, "used": {"total_mmol_L": 1.3812590873633582e-17, "top": [{"reaction": "ch_fftd_decay", "mmol_L": 1.3812590873633582e-17, "share": 1.0}]}},
+    "ACTZ": {"made": {"total_mmol_L": 0.027402792678806125, "top": [{"reaction": "r_cys_actz", "mmol_L": 0.027402792678806125, "share": 1.0}]}, "used": {"total_mmol_L": 4.060657827026608e-09, "top": [{"reaction": "ch_actz_decay", "mmol_L": 4.060657827026608e-09, "share": 1.0}]}},
+    "OX": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 4.726050366298801e-05, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 4.725400840249027e-05, "share": 0.9998625647211875}, {"reaction": "ch_dimer_fft", "mmol_L": 6.495260497736181e-09, "share": 0.00013743527881237826}]}}
+   },
+   "predictions": [{"species": "FFT", "t_min": 20.0, "unit": "ug_L", "method": "sida", "measured": 96.0, "predicted": 32.527986295886514, "log10_ratio": -0.4700140547148045}, {"species": "MFT", "t_min": 20.0, "unit": "ug_L", "method": "sida", "measured": 143.0, "predicted": 289.5778911120181, "log10_ratio": 0.30642936351797795}],
+   "why": "absolute hold-out (Hofmann T1), Garching 145 C 20 min: off by MFT +0.72, FFT -0.68 at s042",
+   "ledger_id": "hofmann1998_t1_cys_carbohydrates"
+  },
+  "hofmann1998_cys_ribose_ph3": {
+   "t_c": 145.0,
+   "label_ph": 3.0,
+   "charge_mmol_L": {"Cys": 33.0, "PENT": 100.0},
+   "minutes": 20.0,
+   "half_time_min": {"Cys": 0.5466340270884466, "PENT": 12.166666666666666},
+   "ph_in_situ": {"start": 3.709078521002084, "end": 3.739498337171961},
+   "final_mmol_L": {
+    "Cys": 5.971445520855988,
+    "PENT": 34.55096054971435,
+    "ARP": 0.0,
+    "TTCA": 6.297541834912733,
+    "H2S": 0.19603255889032034,
+    "NF": 9.348528233382126,
+    "FUR": 0.012797237284583316,
+    "DPO": 0.3114233996454911,
+    "MGO": 0.5631787780093842,
+    "MFT": 0.0030562909158966876,
+    "FFT": 5.547569377848015e-05,
+    "MFTD": 8.87756641855687e-06,
+    "FFTD": 3.300312009606951e-11,
+    "ACTZ": 0.030974499287622026,
+    "OX": 0.9999911224005591
+   },
+   "peak_mmol_L": {"Cys": 33.0, "PENT": 100.0, "ARP": 0.0, "TTCA": 19.119313185131706, "H2S": 0.19603255889032034, "NF": 9.348528233382126, "FUR": 0.012797237284583316, "DPO": 0.33045060173927826, "MGO": 0.5631787780093842, "MFT": 0.0030562909158966876, "FFT": 5.547569377848015e-05, "MFTD": 8.87756641855687e-06, "FFTD": 3.300312009606951e-11, "ACTZ": 0.030974499287622026, "OX": 1.0},
+   "closure_relative_error": {"Cys": 4.610330965236253e-05, "PENT": 4.989445335685813e-05, "H2S": 4.0053701895647734e-05, "MFT": 1.200329895269152e-06, "FFT": 1.465885298128408e-06},
+   "species": {
+    "Cys": {
+     "made": {"total_mmol_L": 83.71585900072346, "top": [{"reaction": "r_ttca_cys", "mmol_L": 50.76040349244365, "share": 0.6063415474480766}, {"reaction": "r_cama_tdp", "mmol_L": 23.068818855795868, "share": 0.2755609167863464}, {"reaction": "r_cama_dpo", "mmol_L": 9.886636652483936, "share": 0.11809753576557697}]},
+     "used": {
+      "total_mmol_L": 110.75337915537203,
+      "top": [
+       {"reaction": "r_ttca_form", "mmol_L": 109.56670318153085, "share": 0.9892854197055565},
+       {"reaction": "r_cys_thermal", "mmol_L": 0.8762316164312159, "share": 0.007911556497088738},
+       {"reaction": "r_cys_h2s", "mmol_L": 0.27946962002441206, "share": 0.0025233507289412265},
+       {"reaction": "r_cys_actz", "mmol_L": 0.030974711490042908, "share": 0.00027967283460118695},
+       {"reaction": "r_dpo_ddp", "mmol_L": 2.4807897220636356e-08, "share": 2.2399223761682456e-10}
+      ]
+     }
+    },
+    "PENT": {
+     "made": {"total_mmol_L": 50.76040349244365, "top": [{"reaction": "r_ttca_cys", "mmol_L": 50.76040349244365, "share": 1.0}]},
+     "used": {"total_mmol_L": 116.21777422762916, "top": [{"reaction": "r_ttca_form", "mmol_L": 109.56670318153085, "share": 0.9427706210147233}, {"reaction": "r_pent_caramel", "mmol_L": 6.246266078249504, "share": 0.0537462201437045}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.40480496784881026, "share": 0.003483158841572217}]}
+    },
+    "ARP": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "TTCA": {
+     "made": {"total_mmol_L": 109.56670318153085, "top": [{"reaction": "r_ttca_form", "mmol_L": 109.56670318153085, "share": 1.0}]},
+     "used": {"total_mmol_L": 103.2608833673775, "top": [{"reaction": "r_cama_form", "mmol_L": 51.319734878604706, "share": 0.49699105028979246}, {"reaction": "r_ttca_cys", "mmol_L": 50.76040349244365, "share": 0.4915743681162429}, {"reaction": "r_ttca_deg", "mmol_L": 1.1807449963291423, "share": 0.011434581593964621}]}
+    },
+    "H2S": {
+     "made": {"total_mmol_L": 0.2794696211120234, "top": [{"reaction": "r_cys_h2s", "mmol_L": 0.27946962002441206, "share": 0.9999999961083021}, {"reaction": "r_dpo_ddp_h2s", "mmol_L": 1.087611360403681e-09, "share": 3.891697981612534e-09}]},
+     "used": {
+      "total_mmol_L": 0.08342252704778044,
+      "top": [
+       {"reaction": "r_h2s_loss", "mmol_L": 0.07498767247638002, "share": 0.8988899656975228},
+       {"reaction": "r_nf_mft", "mmol_L": 0.0060595991450178, "share": 0.07263744409884815},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.002168154230420945, "share": 0.025990032994075207},
+       {"reaction": "r_mgo_mp", "mmol_L": 0.00010170666730731842, "share": 0.0012191750946248091},
+       {"reaction": "r_fur_fft_hs", "mmol_L": 8.233169701527565e-05, "share": 0.0009869240351364564}
+      ]
+     }
+    },
+    "NF": {
+     "made": {"total_mmol_L": 9.916377021881024, "top": [{"reaction": "r_dpo_nf", "mmol_L": 9.916377021881024, "share": 1.0}]},
+     "used": {
+      "total_mmol_L": 0.5680282730565166,
+      "top": [
+       {"reaction": "r_nf_decay", "mmol_L": 0.5553292561484525, "share": 0.9776436886851924},
+       {"reaction": "r_nf_mft", "mmol_L": 0.0060595991450178, "share": 0.010667777349200526},
+       {"reaction": "r_nf_decay_oh", "mmol_L": 0.00439848672812464, "share": 0.007743429221325058},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.002168154230420945, "share": 0.003816982944800042},
+       {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 7.277680450074479e-05, "share": 0.00012812179948216025}
+      ]
+     }
+    },
+    "FUR": {
+     "made": {"total_mmol_L": 0.059609333507263024, "top": [{"reaction": "r_tdp_fur", "mmol_L": 0.059609333507263024, "share": 1.0}]},
+     "used": {"total_mmol_L": 0.0468124410874211, "top": [{"reaction": "r_fur_decay", "mmol_L": 0.04670704655877343, "share": 0.9977485786641451}, {"reaction": "r_fur_fft_hs", "mmol_L": 8.233169701527565e-05, "share": 0.0017587567557419874}, {"reaction": "r_fur_fft", "mmol_L": 2.306283163239655e-05, "share": 0.0004926645801129505}]}
+    },
+    "DPO": {
+     "made": {"total_mmol_L": 11.472186616661888, "top": [{"reaction": "r_cama_dpo", "mmol_L": 9.886636652483936, "share": 0.8617918259911199}, {"reaction": "r_ttca_deg", "mmol_L": 1.1807449963291423, "share": 0.1029224014377748}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.40480496784881026, "share": 0.03528577257110538}]},
+     "used": {
+      "total_mmol_L": 11.160742290290077,
+      "top": [
+       {"reaction": "r_dpo_nf", "mmol_L": 9.916377021881024, "share": 0.888505151714536},
+       {"reaction": "r_dpo_c2c3", "mmol_L": 0.8548847222123388, "share": 0.07659747891106619},
+       {"reaction": "r_osone_decay_dpo", "mmol_L": 0.38922646159092633, "share": 0.03487460345084359},
+       {"reaction": "r_dpo_ptr", "mmol_L": 0.00025405979789147864, "share": 2.2763700772171078e-05},
+       {"reaction": "r_dpo_ddp", "mmol_L": 2.4807897220636356e-08, "share": 2.2227820135421815e-09}
+      ]
+     }
+    },
+    "MGO": {
+     "made": {"total_mmol_L": 0.8549574990168396, "top": [{"reaction": "r_dpo_c2c3", "mmol_L": 0.8548847222123388, "share": 0.9999148766990353}, {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 7.277680450074479e-05, "share": 8.512330096459139e-05}]},
+     "used": {
+      "total_mmol_L": 0.2917933026027438,
+      "top": [{"reaction": "r_mgo_mel", "mmol_L": 0.26071687889420186, "share": 0.8934985024284458}, {"reaction": "r_cys_actz", "mmol_L": 0.030974711490042908, "share": 0.10615292131023589}, {"reaction": "r_mgo_mp", "mmol_L": 0.00010170666730731842, "share": 0.00034855723692118096}, {"reaction": "r_mgo_dmhf", "mmol_L": 5.551191697680773e-09, "share": 1.9024397229700413e-08}]
+     }
+    },
+    "MFT": {
+     "made": {
+      "total_mmol_L": 0.006059648121800657,
+      "top": [{"reaction": "r_nf_mft", "mmol_L": 0.0060595991450178, "share": 0.9999919175533177}, {"reaction": "r_ha_mp_mft", "mmol_L": 4.8976776175373206e-08, "share": 8.0824455795e-06}, {"reaction": "r_ddp_mft", "mmol_L": 6.643017775379333e-15, "share": 1.0962712094584997e-12}, {"reaction": "r_ddp_mft_hs", "mmol_L": 3.88282986862792e-17, "share": 6.407682080843526e-15}]
+     },
+     "used": {"total_mmol_L": 0.0030033463273207916, "top": [{"reaction": "ch_mft_decay", "mmol_L": 0.0029421119746348007, "share": 0.9796112915353933}, {"reaction": "ch_thiolate_loss_mft", "mmol_L": 4.3476891066197074e-05, "share": 0.0144761497103072}, {"reaction": "ch_dimer_mft", "mmol_L": 1.7757461619793734e-05, "share": 0.005912558754299479}]}
+    },
+    "FFT": {
+     "made": {"total_mmol_L": 0.0001053945286476722, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 8.233169701527565e-05, "share": 0.7811761964466462}, {"reaction": "r_fur_fft", "mmol_L": 2.306283163239655e-05, "share": 0.21882380355335387}]},
+     "used": {"total_mmol_L": 4.9919062541101984e-05, "top": [{"reaction": "ch_fft_decay", "mmol_L": 4.912397393114361e-05, "share": 0.984072445084406}, {"reaction": "ch_thiolate_loss_fft", "mmol_L": 7.950225961213951e-07, "share": 0.015926232498192354}, {"reaction": "ch_dimer_fft", "mmol_L": 6.601383697941218e-11, "share": 1.3224174016701176e-06}]}
+    },
+    "MFTD": {"made": {"total_mmol_L": 8.878730809896867e-06, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 8.878730809896867e-06, "share": 1.0}]}, "used": {"total_mmol_L": 1.9024370904587244e-14, "top": [{"reaction": "ch_mftd_decay", "mmol_L": 1.9024370904587244e-14, "share": 1.0}]}},
+    "FFTD": {"made": {"total_mmol_L": 3.300691848970609e-11, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 3.300691848970609e-11, "share": 1.0}]}, "used": {"total_mmol_L": 7.064630312889014e-20, "top": [{"reaction": "ch_fftd_decay", "mmol_L": 7.064630312889014e-20, "share": 1.0}]}},
+    "ACTZ": {"made": {"total_mmol_L": 0.030974711490042908, "top": [{"reaction": "r_cys_actz", "mmol_L": 0.030974711490042908, "share": 1.0}]}, "used": {"total_mmol_L": 4.5379271622371096e-09, "top": [{"reaction": "ch_actz_decay", "mmol_L": 4.5379271622371096e-09, "share": 1.0}]}},
+    "OX": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 8.878763816815356e-06, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 8.878730809896867e-06, "share": 0.9999962824871603}, {"reaction": "ch_dimer_fft", "mmol_L": 3.300691848970609e-11, "share": 3.717512839703517e-06}]}}
+   },
+   "predictions": [{"species": "FFT", "t_min": 20.0, "unit": "ug_L", "method": "sida", "measured": 229.0, "predicted": 6.333105201751293, "log10_ratio": -1.5582187800127751}, {"species": "MFT", "t_min": 20.0, "unit": "ug_L", "method": "sida", "measured": 553.0, "predicted": 348.90617095876587, "log10_ratio": -0.20001648060224578}],
+   "why": "absolute hold-out, pH ladder low end",
+   "ledger_id": "hofmann1998_t2_ph_ladder"
+  },
+  "hofmann1998_cys_ribose_ph7": {
+   "t_c": 145.0,
+   "label_ph": 7.0,
+   "charge_mmol_L": {"Cys": 33.0, "PENT": 100.0},
+   "minutes": 20.0,
+   "half_time_min": {"Cys": 0.5466340270884466, "PENT": 6.333333333333333},
+   "ph_in_situ": {"start": 7.242723255883902, "end": 7.23224779204466},
+   "final_mmol_L": {
+    "Cys": 16.547518728913097,
+    "PENT": 12.302217346742133,
+    "ARP": 0.0,
+    "TTCA": 7.187765336724498,
+    "H2S": 3.0787533938065783,
+    "NF": 4.965096045055859,
+    "FUR": 0.0018832435855598362,
+    "DPO": 0.34706953585543643,
+    "MGO": 1.1454391673258182,
+    "MFT": 0.0005340097585176596,
+    "FFT": 0.005893650489744414,
+    "MFTD": 0.00032364394028907965,
+    "FFTD": 0.0005605887535178265,
+    "ACTZ": 0.2178715394956173,
+    "OX": 0.9991157673026456
+   },
+   "peak_mmol_L": {"Cys": 33.0, "PENT": 100.0, "ARP": 0.0, "TTCA": 19.93660847720825, "H2S": 3.0787533938065783, "NF": 6.189928532325838, "FUR": 0.0031643233650664833, "DPO": 0.8417336434132637, "MGO": 1.1494925127481481, "MFT": 0.0005340097585176596, "FFT": 0.00593104211334169, "MFTD": 0.00032364394028907965, "FFTD": 0.0005605887535178265, "ACTZ": 0.2178715394956173, "OX": 1.0},
+   "closure_relative_error": {"Cys": 2.937481778100254e-05, "PENT": 3.15498795975787e-05, "H2S": 1.3028281072916745e-05, "MFT": 1.20430697037651e-06, "FFT": 1.1920319878724938e-06},
+   "species": {
+    "Cys": {
+     "made": {"total_mmol_L": 146.00933041751267, "top": [{"reaction": "r_ttca_cys", "mmol_L": 73.22457461809229, "share": 0.5015061325786998}, {"reaction": "r_cama_tdp", "mmol_L": 50.94932905959426, "share": 0.34894570719491014}, {"reaction": "r_cama_dpo", "mmol_L": 21.83542673982613, "share": 0.14954816022639017}]},
+     "used": {
+      "total_mmol_L": 162.470873238371,
+      "top": [
+       {"reaction": "r_ttca_form", "mmol_L": 156.1552633119637, "share": 0.961127740618829},
+       {"reaction": "r_cys_h2s", "mmol_L": 4.142844765829244, "share": 0.025498999809959913},
+       {"reaction": "r_cys_thermal", "mmol_L": 1.9545305363320018, "share": 0.012030036506693664},
+       {"reaction": "r_cys_actz", "mmol_L": 0.21786974434022238, "share": 0.0013409772471683111},
+       {"reaction": "r_dpo_ddp", "mmol_L": 0.0003495549498127729, "share": 2.1514930205361754e-06}
+      ]
+     }
+    },
+    "PENT": {
+     "made": {"total_mmol_L": 73.22457461809229, "top": [{"reaction": "r_ttca_cys", "mmol_L": 73.22457461809229, "share": 1.0}]},
+     "used": {"total_mmol_L": 160.92974481193542, "top": [{"reaction": "r_ttca_form", "mmol_L": 156.1552633119637, "share": 0.9703318892007736}, {"reaction": "r_pent_caramel", "mmol_L": 4.48389163606934, "share": 0.02786241686587693}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.29058986390238395, "share": 0.0018056939333494315}]}
+    },
+    "ARP": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "TTCA": {
+     "made": {"total_mmol_L": 156.1552633119637, "top": [{"reaction": "r_ttca_form", "mmol_L": 156.1552633119637, "share": 1.0}]},
+     "used": {"total_mmol_L": 148.95930172009483, "top": [{"reaction": "r_cama_form", "mmol_L": 74.03143981230411, "share": 0.4969910502897931}, {"reaction": "r_ttca_cys", "mmol_L": 73.22457461809229, "share": 0.4915743681162422}, {"reaction": "r_ttca_deg", "mmol_L": 1.7032872896984204, "share": 0.011434581593964632}]}
+    },
+    "H2S": {
+     "made": {"total_mmol_L": 4.14286009078529, "top": [{"reaction": "r_cys_h2s", "mmol_L": 4.142844765829244, "share": 0.9999963008753107}, {"reaction": "r_dpo_ddp_h2s", "mmol_L": 1.5324956046071473e-05, "share": 3.699124689283578e-06}]},
+     "used": {
+      "total_mmol_L": 1.0640388600356616,
+      "top": [
+       {"reaction": "r_h2s_loss", "mmol_L": 0.9403628166253791, "share": 0.8837673622125629},
+       {"reaction": "r_fur_fft_hs", "mmol_L": 0.11076243806306975, "share": 0.1040962339094998},
+       {"reaction": "r_nf_mft", "mmol_L": 0.00920365212053056, "share": 0.008649733074807152},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.0032931117723947094, "share": 0.0030949168268951566},
+       {"reaction": "r_mgo_mp", "mmol_L": 0.000405646114705863, "share": 0.0003812324248122551}
+      ]
+     }
+    },
+    "NF": {
+     "made": {"total_mmol_L": 20.863676581782155, "top": [{"reaction": "r_dpo_nf", "mmol_L": 20.863676581782155, "share": 1.0}]},
+     "used": {
+      "total_mmol_L": 15.898774316695874,
+      "top": [
+       {"reaction": "r_nf_decay_oh", "mmol_L": 15.025306883591176, "share": 0.9450607062088152},
+       {"reaction": "r_nf_decay", "mmol_L": 0.6123638439055082, "share": 0.03851641841738976},
+       {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.24860682530626543, "share": 0.015636854788560303},
+       {"reaction": "r_nf_mft", "mmol_L": 0.00920365212053056, "share": 0.000578890670261636},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.0032931117723947094, "share": 0.00020712991497316208}
+      ]
+     }
+    },
+    "FUR": {
+     "made": {"total_mmol_L": 0.13044060578201488, "top": [{"reaction": "r_tdp_fur", "mmol_L": 0.13044060578201488, "share": 1.0}]},
+     "used": {"total_mmol_L": 0.12855739565786203, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.11076243806306975, "share": 0.8615796663915692}, {"reaction": "r_fur_decay", "mmol_L": 0.017783765037462835, "share": 0.13833327088230613}, {"reaction": "r_fur_fft", "mmol_L": 1.1192557329439044e-05, "share": 8.706272612449701e-05}]}
+    },
+    "DPO": {
+     "made": {"total_mmol_L": 23.829303893426932, "top": [{"reaction": "r_cama_dpo", "mmol_L": 21.83542673982613, "share": 0.9163266722973475}, {"reaction": "r_ttca_deg", "mmol_L": 1.7032872896984204, "share": 0.07147868428369217}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.29058986390238395, "share": 0.012194643418960307}]},
+     "used": {
+      "total_mmol_L": 23.482122840277878,
+      "top": [
+       {"reaction": "r_dpo_nf", "mmol_L": 20.863676581782155, "share": 0.8884919273991526},
+       {"reaction": "r_dpo_c2c3", "mmol_L": 1.7986446380153513, "share": 0.07659633885102642},
+       {"reaction": "r_osone_decay_dpo", "mmol_L": 0.818917533468704, "share": 0.03487408438491131},
+       {"reaction": "r_dpo_ptr", "mmol_L": 0.0005345320618553168, "share": 2.2763361962252274e-05},
+       {"reaction": "r_dpo_ddp", "mmol_L": 0.0003495549498127729, "share": 1.4886002947450572e-05}
+      ]
+     }
+    },
+    "MGO": {
+     "made": {"total_mmol_L": 2.047251463321617, "top": [{"reaction": "r_dpo_c2c3", "mmol_L": 1.7986446380153513, "share": 0.8785655647289626}, {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.24860682530626543, "share": 0.12143443527103738}]},
+     "used": {
+      "total_mmol_L": 0.901853924514983,
+      "top": [{"reaction": "r_mgo_mel", "mmol_L": 0.6835784996401428, "share": 0.7579703109988364}, {"reaction": "r_cys_actz", "mmol_L": 0.21786974434022238, "share": 0.24157985946270924}, {"reaction": "r_mgo_mp", "mmol_L": 0.000405646114705863, "share": 0.00044979137272593167}, {"reaction": "r_mgo_dmhf", "mmol_L": 3.441991189788975e-08, "share": 3.816572835384708e-08}]
+     }
+    },
+    "MFT": {
+     "made": {
+      "total_mmol_L": 0.00920411445157121,
+      "top": [{"reaction": "r_nf_mft", "mmol_L": 0.00920365212053056, "share": 0.9999497690904341}, {"reaction": "r_ha_mp_mft", "mmol_L": 4.595487884194855e-07, "share": 4.992862603322334e-05}, {"reaction": "r_ddp_mft_hs", "mmol_L": 2.620880585220313e-09, "share": 2.8475097729504106e-07}, {"reaction": "r_ddp_mft", "mmol_L": 1.613716467415158e-10, "share": 1.753255542296831e-08}]
+     },
+     "used": {"total_mmol_L": 0.008670126219126181, "top": [{"reaction": "ch_thiolate_loss_mft", "mmol_L": 0.0070939416785539685, "share": 0.8182051217322338}, {"reaction": "ch_mft_decay", "mmol_L": 0.0009288978053408342, "share": 0.10713774884749638}, {"reaction": "ch_dimer_mft", "mmol_L": 0.0006472867352313777, "share": 0.0746571294202698}]}
+    },
+    "FFT": {
+     "made": {"total_mmol_L": 0.11077363062039919, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.11076243806306975, "share": 0.9998989600930587}, {"reaction": "r_fur_fft", "mmol_L": 1.1192557329439044e-05, "share": 0.00010103990694133584}]},
+     "used": {"total_mmol_L": 0.10488023719696352, "top": [{"reaction": "ch_thiolate_loss_fft", "mmol_L": 0.09267580446627906, "share": 0.8836345811483558}, {"reaction": "ch_fft_decay", "mmol_L": 0.011083266959844648, "share": 0.1056754566547217}, {"reaction": "ch_dimer_fft", "mmol_L": 0.001121165770839813, "share": 0.010689962196922575}]}
+    },
+    "MFTD": {"made": {"total_mmol_L": 0.00032364336761568884, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 0.00032364336761568884, "share": 1.0}]}, "used": {"total_mmol_L": 1.177031538535186e-12, "top": [{"reaction": "ch_mftd_decay", "mmol_L": 1.177031538535186e-12, "share": 1.0}]}},
+    "FFTD": {"made": {"total_mmol_L": 0.0005605828854199065, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 0.0005605828854199065, "share": 1.0}]}, "used": {"total_mmol_L": 2.370447725167004e-12, "top": [{"reaction": "ch_fftd_decay", "mmol_L": 2.370447725167004e-12, "share": 1.0}]}},
+    "ACTZ": {"made": {"total_mmol_L": 0.21786974434022238, "top": [{"reaction": "r_cys_actz", "mmol_L": 0.21786974434022238, "share": 1.0}]}, "used": {"total_mmol_L": 3.4308449542457534e-08, "top": [{"reaction": "ch_actz_decay", "mmol_L": 3.4308449542457534e-08, "share": 1.0}]}},
+    "OX": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0.0008842262530355953, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 0.0005605828854199065, "share": 0.6339812728873361}, {"reaction": "ch_dimer_mft", "mmol_L": 0.00032364336761568884, "share": 0.36601872711266387}]}}
+   },
+   "predictions": [{"species": "FFT", "t_min": 20.0, "unit": "ug_L", "method": "sida", "measured": 12.0, "predicted": 672.8191399092223, "log10_ratio": 1.748717091437127}, {"species": "MFT", "t_min": 20.0, "unit": "ug_L", "method": "sida", "measured": 25.0, "predicted": 60.96255403237602, "log10_ratio": 0.38712314485196236}],
+   "why": "absolute hold-out, pH ladder high end",
+   "ledger_id": "hofmann1998_t2_ph_ladder"
+  },
+  "zhai2023jafc_ttcacys_ph7_120C": {
+   "t_c": 120.0,
+   "label_ph": 7.0,
+   "charge_mmol_L": {"TTCA": 10.0, "Cys": 10.0},
+   "minutes": 180.0,
+   "half_time_min": {"Cys": null, "TTCA": 6.435848888111195},
+   "ph_in_situ": {"start": 5.449389164801687, "end": 5.42765647699128},
+   "final_mmol_L": {
+    "Cys": 9.620117518618772,
+    "PENT": 0.26231653538553135,
+    "ARP": 0.0,
+    "TTCA": 0.11350879893306251,
+    "H2S": 1.2727654101399726,
+    "NF": 1.9434546069818368,
+    "FUR": 0.003505024379148673,
+    "DPO": 0.0034098970101033013,
+    "MGO": 0.00922554800515127,
+    "MFT": 0.00601024706192752,
+    "FFT": 0.005684450450184185,
+    "MFTD": 0.0034312532958826352,
+    "FFTD": 8.69463948707466e-05,
+    "ACTZ": 0.02896446293577715,
+    "OX": 0.9964818002707876
+   },
+   "peak_mmol_L": {"Cys": 14.950900084509664, "PENT": 3.5680680002908427, "ARP": 0.0, "TTCA": 10.0, "H2S": 1.6383256215476645, "NF": 1.9463625845150787, "FUR": 0.003505024379148673, "DPO": 0.09475034482881241, "MGO": 0.06876812283929631, "MFT": 0.00601024706192752, "FFT": 0.005719467819032022, "MFTD": 0.0034312532958826352, "FFTD": 8.69463948707466e-05, "ACTZ": 0.02896446293577715, "OX": 1.0},
+   "closure_relative_error": {"Cys": 3.0498726860185557e-05, "PENT": 4.4925163306908314e-05, "H2S": 4.636363715486655e-06, "MFT": 3.209002104269124e-06, "FFT": 2.454647193121167e-06},
+   "species": {
+    "Cys": {
+     "made": {"total_mmol_L": 25.577742485751454, "top": [{"reaction": "r_ttca_cys", "mmol_L": 17.023823244921918, "share": 0.6655717663279059}, {"reaction": "r_cama_tdp", "mmol_L": 5.987743468580676, "share": 0.23409976357046589}, {"reaction": "r_cama_dpo", "mmol_L": 2.5661757722488616, "share": 0.10032847010162826}]},
+     "used": {
+      "total_mmol_L": 25.95605325197241,
+      "top": [
+       {"reaction": "r_ttca_form", "mmol_L": 16.308381720005624, "share": 0.6283074534363711},
+       {"reaction": "r_cys_thermal", "mmol_L": 6.216896953239888, "share": 0.23951626593181935},
+       {"reaction": "r_cys_h2s", "mmol_L": 3.401804533276709, "share": 0.13106016158362616},
+       {"reaction": "r_cys_actz", "mmol_L": 0.028963525805274386, "share": 0.001115867868050141},
+       {"reaction": "r_dpo_ddp", "mmol_L": 6.2458198279280606e-06, "share": 2.406305676481627e-07}
+      ]
+     }
+    },
+    "PENT": {
+     "made": {"total_mmol_L": 17.023823244921918, "top": [{"reaction": "r_ttca_cys", "mmol_L": 17.023823244921918, "share": 1.0}]},
+     "used": {"total_mmol_L": 16.75998896625567, "top": [{"reaction": "r_ttca_form", "mmol_L": 16.308381720005624, "share": 0.9730544425083271}, {"reaction": "r_pent_caramel", "mmol_L": 0.4241210180122983, "share": 0.025305566660349103}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.027486228237748662, "share": 0.0016399908313238783}]}
+    },
+    "ARP": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "TTCA": {
+     "made": {"total_mmol_L": 16.308381720005624, "top": [{"reaction": "r_ttca_form", "mmol_L": 16.308381720005624, "share": 1.0}]},
+     "used": {"total_mmol_L": 26.19716074752702, "top": [{"reaction": "r_ttca_cys", "mmol_L": 17.023823244921918, "share": 0.6498346675423193}, {"reaction": "r_cama_form", "mmol_L": 8.77734391839678, "share": 0.3350494354326299}, {"reaction": "r_ttca_deg", "mmol_L": 0.39599358420832126, "share": 0.0151158970250508}]}
+    },
+    "H2S": {
+     "made": {"total_mmol_L": 3.4018048071017954, "top": [{"reaction": "r_cys_h2s", "mmol_L": 3.401804533276709, "share": 0.9999999195059381}, {"reaction": "r_dpo_ddp_h2s", "mmol_L": 2.7382508640185654e-07, "share": 8.04940618080744e-08}]},
+     "used": {
+      "total_mmol_L": 2.129013754075329,
+      "top": [
+       {"reaction": "r_h2s_loss", "mmol_L": 2.0268368902834863, "share": 0.95200741958747},
+       {"reaction": "r_fur_fft_hs", "mmol_L": 0.04885329473942104, "share": 0.02294644393250477},
+       {"reaction": "r_nf_mft", "mmol_L": 0.03907203746347616, "share": 0.018352177100164336},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.013980166227208855, "share": 0.006566498783978362},
+       {"reaction": "r_mgo_mp", "mmol_L": 0.0001629781653112068, "share": 7.655101569881182e-05}
+      ]
+     }
+    },
+    "NF": {
+     "made": {"total_mmol_L": 2.7260981752228104, "top": [{"reaction": "r_dpo_nf", "mmol_L": 2.7260981752228104, "share": 1.0}]},
+     "used": {
+      "total_mmol_L": 0.782625666495735,
+      "top": [
+       {"reaction": "r_nf_decay_oh", "mmol_L": 0.5835814183052321, "share": 0.7456711979793119},
+       {"reaction": "r_nf_decay", "mmol_L": 0.13633618024116273, "share": 0.1742035638207704},
+       {"reaction": "r_nf_mft", "mmol_L": 0.03907203746347616, "share": 0.04992429859657444},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.013980166227208855, "share": 0.017863158372771106},
+       {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.00965586425865504, "share": 0.012337781230572076}
+      ]
+     }
+    },
+    "FUR": {
+     "made": {"total_mmol_L": 0.060464737560796844, "top": [{"reaction": "r_tdp_fur", "mmol_L": 0.060464737560796844, "share": 1.0}]},
+     "used": {"total_mmol_L": 0.05695976330717805, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.04885329473942104, "share": 0.8576807890854519}, {"reaction": "r_fur_decay", "mmol_L": 0.007998081474856858, "share": 0.1404163397190406}, {"reaction": "r_fur_fft", "mmol_L": 0.00010838709290015639, "share": 0.0019028711955075396}]}
+    },
+    "DPO": {
+     "made": {"total_mmol_L": 2.9896555846949315, "top": [{"reaction": "r_cama_dpo", "mmol_L": 2.5661757722488616, "share": 0.8583516393614008}, {"reaction": "r_ttca_deg", "mmol_L": 0.39599358420832126, "share": 0.13245458314179992}, {"reaction": "r_pent_thermal_dpo", "mmol_L": 0.027486228237748662, "share": 0.009193777496799315}]},
+     "used": {
+      "total_mmol_L": 2.9862074318820144,
+      "top": [
+       {"reaction": "r_dpo_nf", "mmol_L": 2.7260981752228104, "share": 0.9128964539160382},
+       {"reaction": "r_dpo_c2c3", "mmol_L": 0.2350152355145981, "share": 0.07870023796923013},
+       {"reaction": "r_osone_decay_dpo", "mmol_L": 0.025017932079618735, "share": 0.008377827947421436},
+       {"reaction": "r_dpo_ptr", "mmol_L": 6.984324515911348e-05, "share": 2.3388611391639254e-05},
+       {"reaction": "r_dpo_ddp", "mmol_L": 6.2458198279280606e-06, "share": 2.0915559184687052e-06}
+      ]
+     }
+    },
+    "MGO": {
+     "made": {"total_mmol_L": 0.24467109977325313, "top": [{"reaction": "r_dpo_c2c3", "mmol_L": 0.2350152355145981, "share": 0.96053532980559}, {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.00965586425865504, "share": 0.03946467019441009}]},
+     "used": {
+      "total_mmol_L": 0.23543885275240936,
+      "top": [{"reaction": "r_mgo_mel", "mmol_L": 0.2063123480236834, "share": 0.8762884528690947}, {"reaction": "r_cys_actz", "mmol_L": 0.028963525805274386, "share": 0.12301931251649793}, {"reaction": "r_mgo_mp", "mmol_L": 0.0001629781653112068, "share": 0.000692231394291565}, {"reaction": "r_mgo_dmhf", "mmol_L": 7.581403797965813e-10, "share": 3.2201158429609397e-09}]
+     }
+    },
+    "MFT": {
+     "made": {
+      "total_mmol_L": 0.03907216573623636,
+      "top": [{"reaction": "r_nf_mft", "mmol_L": 0.03907203746347616, "share": 0.9999967170296863}, {"reaction": "r_ha_mp_mft", "mmol_L": 1.2816923516315672e-07, "share": 3.2803207282745996e-06}, {"reaction": "r_ddp_mft", "mmol_L": 5.2701360656855865e-11, "share": 1.3488210766873232e-09}, {"reaction": "r_ddp_mft_hs", "mmol_L": 5.08236784144326e-11, "share": 1.3007643025863199e-09}]
+     },
+     "used": {"total_mmol_L": 0.03306215015348032, "top": [{"reaction": "ch_thiolate_loss_mft", "mmol_L": 0.015497722884460798, "share": 0.4687451606298333}, {"reaction": "ch_mft_decay", "mmol_L": 0.010702065375560283, "share": 0.3236953835694113}, {"reaction": "ch_dimer_mft", "mmol_L": 0.006862361893459235, "share": 0.20755945580075538}]}
+    },
+    "FFT": {
+     "made": {"total_mmol_L": 0.04896168183232119, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.04885329473942104, "share": 0.9977862873813986}, {"reaction": "r_fur_fft", "mmol_L": 0.00010838709290015639, "share": 0.002213712618601401}]},
+     "used": {"total_mmol_L": 0.04327745779668219, "top": [{"reaction": "ch_thiolate_loss_fft", "mmol_L": 0.028999428470436368, "share": 0.6700816070730377}, {"reaction": "ch_fft_decay", "mmol_L": 0.014104141628630154, "share": 0.3259004189869819}, {"reaction": "ch_dimer_fft", "mmol_L": 0.00017388769761566766, "share": 0.004017973939980332}]}
+    },
+    "MFTD": {"made": {"total_mmol_L": 0.0034311809467296177, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 0.0034311809467296177, "share": 1.0}]}, "used": {"total_mmol_L": 3.70311397911968e-11, "top": [{"reaction": "ch_mftd_decay", "mmol_L": 3.70311397911968e-11, "share": 1.0}]}},
+    "FFTD": {"made": {"total_mmol_L": 8.694384880783383e-05, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 8.694384880783383e-05, "share": 1.0}]}, "used": {"total_mmol_L": 1.4289374668439783e-12, "top": [{"reaction": "ch_fftd_decay", "mmol_L": 1.4289374668439783e-12, "share": 1.0}]}},
+    "ACTZ": {"made": {"total_mmol_L": 0.028963525805274386, "top": [{"reaction": "r_cys_actz", "mmol_L": 0.028963525805274386, "share": 1.0}]}, "used": {"total_mmol_L": 1.2456580835325113e-08, "top": [{"reaction": "ch_actz_decay", "mmol_L": 1.2456580835325113e-08, "share": 1.0}]}},
+    "OX": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0.0035181247955374515, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 0.0034311809467296177, "share": 0.9752868775666749}, {"reaction": "ch_dimer_fft", "mmol_L": 8.694384880783383e-05, "share": 0.024713122433325088}]}}
+   },
+   "predictions": [
+    {"species": "MFT", "t_min": 40.0, "unit": "ug_L", "method": "semi_quantitative", "measured": 1.104, "predicted": 46.93068099578076, "log10_ratio": 1.6284877827703903},
+    {"species": "MFT", "t_min": 80.0, "unit": "ug_L", "method": "semi_quantitative", "measured": 1.741, "predicted": 164.87497475094096, "log10_ratio": 1.9763559709289609},
+    {"species": "MFT", "t_min": 120.0, "unit": "ug_L", "method": "semi_quantitative", "measured": 4.083, "predicted": 361.6707793740103, "log10_ratio": 1.9473340421113345},
+    {"species": "MFT", "t_min": 180.0, "unit": "ug_L", "method": "semi_quantitative", "measured": 5.032, "predicted": 686.1298045896457, "log10_ratio": 2.1346656524884984},
+    {"species": "FFT", "t_min": 40.0, "unit": "ug_L", "method": "semi_quantitative", "measured": 2.064, "predicted": 193.3093426829768, "log10_ratio": 1.9715431511282786},
+    {"species": "FFT", "t_min": 80.0, "unit": "ug_L", "method": "semi_quantitative", "measured": 5.073, "predicted": 375.4251405884121, "log10_ratio": 1.8692584897538356},
+    {"species": "FFT", "t_min": 120.0, "unit": "ug_L", "method": "semi_quantitative", "measured": 11.591, "predicted": 527.9852693493175, "log10_ratio": 1.6585009001709539},
+    {"species": "FFT", "t_min": 180.0, "unit": "ug_L", "method": "semi_quantitative", "measured": 12.937, "predicted": 648.9368633930264, "log10_ratio": 1.7003688671664008}
+   ],
+   "why": "semi-quantitative, shape fits (sd 0.2)",
+   "ledger_id": "zhai2023jafc_fig3_ttcacys_arm_volatile_grid"
+  },
+  "zhou2022_axarp_cys_ph7_120C": {
+   "t_c": 120.0,
+   "label_ph": 7.0,
+   "charge_mmol_L": {"ARP": 20.0, "Cys": 20.0},
+   "minutes": 120.0,
+   "half_time_min": {"Cys": null, "ARP": 29.68346389966349},
+   "ph_in_situ": {"start": 5.246660141739994, "end": 4.2738896868657195},
+   "final_mmol_L": {"Cys": 13.625870202996479, "PENT": 0.0, "ARP": 0.719069432543578, "TTCA": 0.0, "H2S": 0.34271596048757497, "NF": 10.803574464470865, "FUR": 0.0062996650081361735, "DPO": 0.02043218732422125, "MGO": 0.07849964616358926, "MFT": 0.01726411979623441, "FFT": 0.00030542349276809866, "MFTD": 0.0015560124021535093, "FFTD": 4.436936865076312e-09, "ACTZ": 0.1341433644276236, "OX": 0.99844398314762},
+   "peak_mmol_L": {"Cys": 20.0, "PENT": 0.0, "ARP": 20.0, "TTCA": 0.0, "H2S": 0.422966844249554, "NF": 10.803574464470865, "FUR": 0.0062996650081361735, "DPO": 0.4926098405857544, "MGO": 0.3141536192619875, "MFT": 0.01726411979623441, "FFT": 0.00030542349276809866, "MFTD": 0.0015560124021535093, "FFTD": 4.436936865076312e-09, "ACTZ": 0.1341433644276236, "OX": 1.0},
+   "closure_relative_error": {"Cys": 5.011760901085793e-06, "PENT": 0.0, "H2S": 8.371553347920274e-05, "MFT": 7.577326429431077e-06, "FFT": 9.376063511522538e-06},
+   "species": {
+    "Cys": {
+     "made": {"total_mmol_L": 0, "top": []},
+     "used": {
+      "total_mmol_L": 6.374230032221543,
+      "top": [
+       {"reaction": "r_cys_thermal", "mmol_L": 5.42250177774896, "share": 0.8506912600170334},
+       {"reaction": "r_cys_h2s", "mmol_L": 0.8175875552796562, "share": 0.12826451997288701},
+       {"reaction": "r_cys_actz", "mmol_L": 0.13413947648898997, "share": 0.021044028190215745},
+       {"reaction": "r_dpo_ddp", "mmol_L": 1.1713503711001646e-06, "share": 1.837634294932915e-07},
+       {"reaction": "r_dpo_ddp_h2s", "mmol_L": 5.135356533006982e-08, "share": 8.056434278411523e-09}
+      ]
+     }
+    },
+    "PENT": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "ARP": {
+     "made": {"total_mmol_L": 0, "top": []},
+     "used": {
+      "total_mmol_L": 19.28135832112367,
+      "top": [
+       {"reaction": "r_arp_dpo_thermal", "mmol_L": 12.12973432547793, "share": 0.629091276841695},
+       {"reaction": "r_arp_decay", "mmol_L": 3.8105034438421965, "share": 0.19762629688114888},
+       {"reaction": "r_arp_tdp", "mmol_L": 2.9750703370295772, "share": 0.15429775680120225},
+       {"reaction": "r_arp_dpo", "mmol_L": 0.35556959206117544, "share": 0.01844110700809038},
+       {"reaction": "r_arp_tdp_thermal", "mmol_L": 0.010480622712788584, "share": 0.0005435624678634052}
+      ]
+     }
+    },
+    "TTCA": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "H2S": {
+     "made": {"total_mmol_L": 0.8175876066332215, "top": [{"reaction": "r_cys_h2s", "mmol_L": 0.8175875552796562, "share": 0.9999999371889142}, {"reaction": "r_dpo_ddp_h2s", "mmol_L": 5.135356533006982e-08, "share": 6.281108582545769e-08}]},
+     "used": {
+      "total_mmol_L": 0.47476345628697186,
+      "top": [
+       {"reaction": "r_h2s_loss", "mmol_L": 0.4036840472821615, "share": 0.8502845826409895},
+       {"reaction": "r_nf_mft", "mmol_L": 0.05154352371264471, "share": 0.10856674630300338},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.01844252504396389, "share": 0.038845713164612786},
+       {"reaction": "r_fur_fft_hs", "mmol_L": 0.0007115861294482145, "share": 0.0014988224557411904},
+       {"reaction": "r_mgo_mp", "mmol_L": 0.00033157054154257993, "share": 0.000698391034844437}
+      ]
+     }
+    },
+    "NF": {
+     "made": {"total_mmol_L": 11.378951449250568, "top": [{"reaction": "r_dpo_nf", "mmol_L": 11.378951449250568, "share": 1.0}]},
+     "used": {
+      "total_mmol_L": 0.575252403370154,
+      "top": [
+       {"reaction": "r_nf_decay", "mmol_L": 0.45422509824873836, "share": 0.7896100834827126},
+       {"reaction": "r_nf_mft", "mmol_L": 0.05154352371264471, "share": 0.08960157908193618},
+       {"reaction": "r_nf_decay_oh", "mmol_L": 0.05021048011804162, "share": 0.08728425961174646},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.01844252504396389, "share": 0.03205988351533543},
+       {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.0008307762467654996, "share": 0.0014441943082694523}
+      ]
+     }
+    },
+    "FUR": {
+     "made": {"total_mmol_L": 0.016923699084875513, "top": [{"reaction": "r_tdp_fur", "mmol_L": 0.016923699084875513, "share": 1.0}]},
+     "used": {"total_mmol_L": 0.010624220225496224, "top": [{"reaction": "r_fur_decay", "mmol_L": 0.009862430522113467, "share": 0.9282968832334068}, {"reaction": "r_fur_fft_hs", "mmol_L": 0.0007115861294482145, "share": 0.06697772771506894}, {"reaction": "r_fur_fft", "mmol_L": 5.020357393454247e-05, "share": 0.0047253890515242605}]}
+    },
+    "DPO": {
+     "made": {"total_mmol_L": 12.485303917539106, "top": [{"reaction": "r_arp_dpo_thermal", "mmol_L": 12.12973432547793, "share": 0.971520950197962}, {"reaction": "r_arp_dpo", "mmol_L": 0.35556959206117544, "share": 0.02847904980203793}]},
+     "used": {
+      "total_mmol_L": 12.464643355822993,
+      "top": [
+       {"reaction": "r_dpo_nf", "mmol_L": 11.378951449250568, "share": 0.9128982775054505},
+       {"reaction": "r_dpo_c2c3", "mmol_L": 0.9809723578778403, "share": 0.07870039517974403},
+       {"reaction": "r_osone_decay_dpo", "mmol_L": 0.10442684606227072, "share": 0.008377844682855413},
+       {"reaction": "r_dpo_ptr", "mmol_L": 0.00029153128194244176, "share": 2.3388658112407988e-05},
+       {"reaction": "r_dpo_ddp", "mmol_L": 1.1713503711001646e-06, "share": 9.397383765119566e-08}
+      ]
+     }
+    },
+    "MGO": {
+     "made": {"total_mmol_L": 0.9818031341246058, "top": [{"reaction": "r_dpo_c2c3", "mmol_L": 0.9809723578778403, "share": 0.9991538260391618}, {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.0008307762467654996, "share": 0.0008461739608381219}]},
+     "used": {
+      "total_mmol_L": 0.9032673508755702,
+      "top": [{"reaction": "r_mgo_mel", "mmol_L": 0.7687962898855161, "share": 0.851128172783278}, {"reaction": "r_cys_actz", "mmol_L": 0.13413947648898997, "share": 0.1485047326895671}, {"reaction": "r_mgo_mp", "mmol_L": 0.00033157054154257993, "share": 0.00036707907268116846}, {"reaction": "r_mgo_dmhf", "mmol_L": 1.395952161738828e-08, "share": 1.5454473809838032e-08}]
+     }
+    },
+    "MFT": {
+     "made": {
+      "total_mmol_L": 0.05154431471820708,
+      "top": [{"reaction": "r_nf_mft", "mmol_L": 0.05154352371264471, "share": 0.999984653873726}, {"reaction": "r_ha_mp_mft", "mmol_L": 7.910022859746713e-07, "share": 1.534606270932271e-05}, {"reaction": "r_ddp_mft", "mmol_L": 3.168696091407442e-12, "share": 6.147518128295453e-11}, {"reaction": "r_ddp_mft_hs", "mmol_L": 1.076997109922617e-13, "share": 2.0894585868694992e-12}]
+     },
+     "used": {"total_mmol_L": 0.034280845247225585, "top": [{"reaction": "ch_mft_decay", "mmol_L": 0.02941338972428169, "share": 0.8580123830716272}, {"reaction": "ch_dimer_mft", "mmol_L": 0.003111989107771533, "share": 0.09077924086552074}, {"reaction": "ch_thiolate_loss_mft", "mmol_L": 0.0017554664151723626, "share": 0.051208376062852064}]}
+    },
+    "FFT": {
+     "made": {"total_mmol_L": 0.0007617897033827569, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.0007115861294482145, "share": 0.9340978570442584}, {"reaction": "r_fur_fft", "mmol_L": 5.020357393454247e-05, "share": 0.06590214295574165}]},
+     "used": {"total_mmol_L": 0.00045637763222896455, "top": [{"reaction": "ch_fft_decay", "mmol_L": 0.0004295426995643407, "share": 0.9412001580060769}, {"reaction": "ch_thiolate_loss_fft", "mmol_L": 2.6826058848221252e-05, "share": 0.05878039797262155}, {"reaction": "ch_dimer_fft", "mmol_L": 8.873816402620771e-09, "share": 1.9444021301571545e-05}]}
+    },
+    "MFTD": {"made": {"total_mmol_L": 0.0015559945538857665, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 0.0015559945538857665, "share": 1.0}]}, "used": {"total_mmol_L": 1.3290564755999672e-11, "top": [{"reaction": "ch_mftd_decay", "mmol_L": 1.3290564755999672e-11, "share": 1.0}]}},
+    "FFTD": {"made": {"total_mmol_L": 4.436908201310386e-09, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 4.436908201310386e-09, "share": 1.0}]}, "used": {"total_mmol_L": 3.4029252600031477e-17, "top": [{"reaction": "ch_fftd_decay", "mmol_L": 3.4029252600031477e-17, "share": 1.0}]}},
+    "ACTZ": {"made": {"total_mmol_L": 0.13413947648898997, "top": [{"reaction": "r_cys_actz", "mmol_L": 0.13413947648898997, "share": 1.0}]}, "used": {"total_mmol_L": 3.5254356603294505e-08, "top": [{"reaction": "ch_actz_decay", "mmol_L": 3.5254356603294505e-08, "share": 1.0}]}},
+    "OX": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0.0015559989907939678, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 0.0015559945538857665, "share": 0.9999971485147306}, {"reaction": "ch_dimer_fft", "mmol_L": 4.436908201310386e-09, "share": 2.851485269310103e-06}]}}
+   },
+   "predictions": [
+    {"species": "MFT", "t_min": 30.0, "unit": "ug_L", "method": "calibrated", "measured": 63.28, "predicted": 432.0354256950044, "log10_ratio": 0.8342528887166571},
+    {"species": "MFT", "t_min": 60.0, "unit": "ug_L", "method": "calibrated", "measured": 202.87, "predicted": 1238.8346365494338, "log10_ratio": 0.785795510080899},
+    {"species": "MFT", "t_min": 90.0, "unit": "ug_L", "method": "calibrated", "measured": 262.91, "predicted": 1753.2835933021768, "log10_ratio": 0.8240450636575536},
+    {"species": "MFT", "t_min": 120.0, "unit": "ug_L", "method": "calibrated", "measured": 344.87, "predicted": 1970.87191593812, "log10_ratio": 0.7570029840006824},
+    {"species": "FFT", "t_min": 30.0, "unit": "ug_L", "method": "calibrated", "measured": 74.51, "predicted": 5.247933521373999, "log10_ratio": -1.1522262384559157},
+    {"species": "FFT", "t_min": 60.0, "unit": "ug_L", "method": "calibrated", "measured": 187.13, "predicted": 18.637418468329827, "log10_ratio": -1.0017576610002559},
+    {"species": "FFT", "t_min": 90.0, "unit": "ug_L", "method": "calibrated", "measured": 306.19, "predicted": 29.260859451898728, "log10_ratio": -1.0197039246678035},
+    {"species": "FFT", "t_min": 120.0, "unit": "ug_L", "method": "calibrated", "measured": 418.68, "predicted": 34.867145934406146, "log10_ratio": -1.079465816031062},
+    {"species": "MFTD", "t_min": 30.0, "unit": "ug_L", "method": "calibrated", "measured": 34.67, "predicted": 5.344601070302427, "log10_ratio": -0.8120385473467924},
+    {"species": "MFTD", "t_min": 60.0, "unit": "ug_L", "method": "calibrated", "measured": 37.56, "predicted": 73.31212822253124, "log10_ratio": 0.2904502434946862},
+    {"species": "MFTD", "t_min": 90.0, "unit": "ug_L", "method": "calibrated", "measured": 40.68, "predicted": 203.3780333854912, "log10_ratio": 0.6989230992492463},
+    {"species": "MFTD", "t_min": 120.0, "unit": "ug_L", "method": "calibrated", "measured": 43.72, "predicted": 352.15672685538226, "log10_ratio": 0.9060558353708055},
+    {"species": "FUR", "t_min": 30.0, "unit": "ug_L", "method": "calibrated", "measured": 252.49, "predicted": 87.22806078193223, "log10_ratio": -0.46158796480425873},
+    {"species": "FUR", "t_min": 60.0, "unit": "ug_L", "method": "calibrated", "measured": 434.91, "predicted": 279.38583663703275, "log10_ratio": -0.19219500769134326},
+    {"species": "FUR", "t_min": 90.0, "unit": "ug_L", "method": "calibrated", "measured": 524.77, "predicted": 477.13103933066714, "log10_ratio": -0.041331329257925646},
+    {"species": "FUR", "t_min": 120.0, "unit": "ug_L", "method": "calibrated", "measured": 510.92, "predicted": 605.2718139817235, "log10_ratio": 0.07359754685496354}
+   ],
+   "why": "semi-quantitative, Zhou ARP + Cys",
+   "ledger_id": "zhou2022_table1_arp_cys_volatiles_timecourse"
+  },
+  "zhou2023_arp_cys_ph7_actz": {
+   "t_c": 120.0,
+   "label_ph": 7.0,
+   "charge_mmol_L": {"ARP": 20.0, "Cys": 20.0},
+   "minutes": 60.0,
+   "half_time_min": {"Cys": null, "ARP": 29.5},
+   "ph_in_situ": {"start": 5.246660141739994, "end": 4.536663879593825},
+   "final_mmol_L": {"Cys": 16.327524377468535, "PENT": 0.0, "ARP": 4.4969936254812986, "TTCA": 0.0, "H2S": 0.40149105872014956, "NF": 9.210179391598677, "FUR": 0.0029078459268205323, "DPO": 0.12728088089581263, "MGO": 0.2557288470671419, "MFT": 0.010851739983173023, "FFT": 0.0001632569942769421, "MFTD": 0.0003239312842146366, "FFTD": 6.867144337482379e-10, "ACTZ": 0.08686090450240856, "OX": 0.9996760680280813},
+   "peak_mmol_L": {"Cys": 20.0, "PENT": 0.0, "ARP": 20.0, "TTCA": 0.0, "H2S": 0.422966844249554, "NF": 9.210179391598677, "FUR": 0.0029078459268205323, "DPO": 0.4926048184901736, "MGO": 0.3141753799840889, "MFT": 0.010851739983173023, "FFT": 0.0001632569942769421, "MFTD": 0.0003239312842146366, "FFTD": 6.867144337482379e-10, "ACTZ": 0.08686090450240856, "OX": 1.0},
+   "closure_relative_error": {"Cys": 1.7217371912181534e-06, "PENT": 0.0, "H2S": 3.585075606648395e-05, "MFT": 8.286643986745615e-06, "FFT": 7.4682424999705516e-06},
+   "species": {
+    "Cys": {
+     "made": {"total_mmol_L": 0, "top": []},
+     "used": {
+      "total_mmol_L": 3.6724411877876406,
+      "top": [
+       {"reaction": "r_cys_thermal", "mmol_L": 2.963135288250355, "share": 0.8068571113143987},
+       {"reaction": "r_cys_h2s", "mmol_L": 0.622445810542146, "share": 0.1694910221059581},
+       {"reaction": "r_cys_actz", "mmol_L": 0.08685892378231858, "share": 0.023651549294011785},
+       {"reaction": "r_dpo_ddp", "mmol_L": 1.1162738825720447e-06, "share": 3.039596348837686e-07},
+       {"reaction": "r_dpo_ddp_h2s", "mmol_L": 4.893893848436938e-08, "share": 1.3325996518912606e-08}
+      ]
+     }
+    },
+    "PENT": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "ARP": {
+     "made": {"total_mmol_L": 0, "top": []},
+     "used": {
+      "total_mmol_L": 15.50310124699577,
+      "top": [
+       {"reaction": "r_arp_dpo_thermal", "mmol_L": 10.114671231827188, "share": 0.6524288960434438},
+       {"reaction": "r_arp_decay", "mmol_L": 3.1774801102818455, "share": 0.20495770876150252},
+       {"reaction": "r_arp_tdp", "mmol_L": 1.8653333777199181, "share": 0.12032001520220911},
+       {"reaction": "r_arp_dpo", "mmol_L": 0.3368770073883838, "share": 0.021729652797930647},
+       {"reaction": "r_arp_tdp_thermal", "mmol_L": 0.008739519778435076, "share": 0.0005637271949138977}
+      ]
+     }
+    },
+    "TTCA": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0, "top": []}},
+    "H2S": {
+     "made": {"total_mmol_L": 0.6224458594810844, "top": [{"reaction": "r_cys_h2s", "mmol_L": 0.622445810542146, "share": 0.9999999213763933}, {"reaction": "r_dpo_ddp_h2s", "mmol_L": 4.893893848436938e-08, "share": 7.862360675861575e-08}]},
+     "used": {
+      "total_mmol_L": 0.2209850383963136,
+      "top": [
+       {"reaction": "r_h2s_loss", "mmol_L": 0.19508221023678682, "share": 0.8827846973374154},
+       {"reaction": "r_nf_mft", "mmol_L": 0.018740506180293163, "share": 0.08480441172077913},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.006705444829372973, "share": 0.030343433555657544},
+       {"reaction": "r_fur_fft_hs", "mmol_L": 0.00024376463456542572, "share": 0.0011030820743993506},
+       {"reaction": "r_mgo_mp", "mmol_L": 0.000203205716967721, "share": 0.0009195451350117775}
+      ]
+     }
+    },
+    "NF": {
+     "made": {"total_mmol_L": 9.424826949412685, "top": [{"reaction": "r_dpo_nf", "mmol_L": 9.424826949412685, "share": 1.0}]},
+     "used": {
+      "total_mmol_L": 0.21474806354189788,
+      "top": [
+       {"reaction": "r_nf_decay", "mmol_L": 0.15993305837068716, "share": 0.7447473832027539},
+       {"reaction": "r_nf_decay_oh", "mmol_L": 0.028891026888606907, "share": 0.13453451645663012},
+       {"reaction": "r_nf_mft", "mmol_L": 0.018740506180293163, "share": 0.0872674047495513},
+       {"reaction": "r_nf_mp3p", "mmol_L": 0.006705444829372973, "share": 0.031224704515506487},
+       {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.00047802727293765827, "share": 0.0022259910755581458}
+      ]
+     }
+    },
+    "FUR": {
+     "made": {"total_mmol_L": 0.004973846161897788, "top": [{"reaction": "r_tdp_fur", "mmol_L": 0.004973846161897788, "share": 1.0}]},
+     "used": {"total_mmol_L": 0.002066036487214025, "top": [{"reaction": "r_fur_decay", "mmol_L": 0.0018123650558973582, "share": 0.8772183197699797}, {"reaction": "r_fur_fft_hs", "mmol_L": 0.00024376463456542572, "share": 0.11798660675839924}, {"reaction": "r_fur_fft", "mmol_L": 9.906796751241197e-06, "share": 0.004795073471621091}]}
+    },
+    "DPO": {
+     "made": {"total_mmol_L": 10.451548239215573, "top": [{"reaction": "r_arp_dpo_thermal", "mmol_L": 10.114671231827188, "share": 0.9677677412304927}, {"reaction": "r_arp_dpo", "mmol_L": 0.3368770073883838, "share": 0.03223225876950721}]},
+     "used": {
+      "total_mmol_L": 10.324071492964078,
+      "top": [
+       {"reaction": "r_dpo_nf", "mmol_L": 9.424826949412685, "share": 0.912898264588323},
+       {"reaction": "r_dpo_c2c3", "mmol_L": 0.8125084948635493, "share": 0.07870039406616654},
+       {"reaction": "r_osone_decay_dpo", "mmol_L": 0.08649346623890214, "share": 0.008377844564312441},
+       {"reaction": "r_dpo_ptr", "mmol_L": 0.0002414661750603492, "share": 2.3388657781468285e-05},
+       {"reaction": "r_dpo_ddp", "mmol_L": 1.1162738825720447e-06, "share": 1.0812341655448556e-07}
+      ]
+     }
+    },
+    "MGO": {
+     "made": {"total_mmol_L": 0.8129865221364869, "top": [{"reaction": "r_dpo_c2c3", "mmol_L": 0.8125084948635493, "share": 0.9994120108268444}, {"reaction": "r_nf_decay_oh_mgo", "mmol_L": 0.00047802727293765827, "share": 0.0005879891731555735}]},
+     "used": {
+      "total_mmol_L": 0.5572544031848343,
+      "top": [{"reaction": "r_mgo_mel", "mmol_L": 0.47019226372375367, "share": 0.8437659012409755}, {"reaction": "r_cys_actz", "mmol_L": 0.08685892378231858, "share": 0.15586942568044376}, {"reaction": "r_mgo_mp", "mmol_L": 0.000203205716967721, "share": 0.00036465520201608927}, {"reaction": "r_mgo_dmhf", "mmol_L": 9.961794321342776e-09, "share": 1.787656457160119e-08}]
+     }
+    },
+    "MFT": {
+     "made": {
+      "total_mmol_L": 0.018740644384733322,
+      "top": [{"reaction": "r_nf_mft", "mmol_L": 0.018740506180293163, "share": 0.9999926254168575}, {"reaction": "r_ha_mp_mft", "mmol_L": 1.3820286392541943e-07, "share": 7.374499034729218e-06}, {"reaction": "r_ddp_mft", "mmol_L": 1.5018635315872316e-12, "share": 8.013937518662345e-11}, {"reaction": "r_ddp_mft_hs", "mmol_L": 7.436920990471448e-14, "share": 3.968337927872844e-12}]
+     },
+     "used": {"total_mmol_L": 0.007889125072979241, "top": [{"reaction": "ch_mft_decay", "mmol_L": 0.0065803322153263994, "share": 0.8341016468181572}, {"reaction": "ch_thiolate_loss_mft", "mmol_L": 0.0006609211979129834, "share": 0.08377623523509355}, {"reaction": "ch_dimer_mft", "mmol_L": 0.0006478716597398589, "share": 0.08212211794674937}]}
+    },
+    "FFT": {
+     "made": {"total_mmol_L": 0.0002536714313166669, "top": [{"reaction": "r_fur_fft_hs", "mmol_L": 0.00024376463456542572, "share": 0.9609463442539803}, {"reaction": "r_fur_fft", "mmol_L": 9.906796751241197e-06, "share": 0.039053655746019725}]},
+     "used": {"total_mmol_L": 9.041700677562193e-05, "top": [{"reaction": "ch_fft_decay", "mmol_L": 8.170739440236374e-05, "share": 0.9036728522226809}, {"reaction": "ch_thiolate_loss_fft", "mmol_L": 8.70823890647066e-06, "share": 0.09631195741837541}, {"reaction": "ch_dimer_fft", "mmol_L": 1.3734667875355926e-09, "share": 1.5190358943688281e-05}]}
+    },
+    "MFTD": {"made": {"total_mmol_L": 0.00032393582986992947, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 0.00032393582986992947, "share": 1.0}]}, "used": {"total_mmol_L": 9.904602613278592e-13, "top": [{"reaction": "ch_mftd_decay", "mmol_L": 9.904602613278592e-13, "share": 1.0}]}},
+    "FFTD": {"made": {"total_mmol_L": 6.867333937677963e-10, "top": [{"reaction": "ch_dimer_fft", "mmol_L": 6.867333937677963e-10, "share": 1.0}]}, "used": {"total_mmol_L": 1.8877787586330442e-18, "top": [{"reaction": "ch_fftd_decay", "mmol_L": 1.8877787586330442e-18, "share": 1.0}]}},
+    "ACTZ": {"made": {"total_mmol_L": 0.08685892378231858, "top": [{"reaction": "r_cys_actz", "mmol_L": 0.08685892378231858, "share": 1.0}]}, "used": {"total_mmol_L": 8.79263453652418e-09, "top": [{"reaction": "ch_actz_decay", "mmol_L": 8.79263453652418e-09, "share": 1.0}]}},
+    "OX": {"made": {"total_mmol_L": 0, "top": []}, "used": {"total_mmol_L": 0.00032393651660332325, "top": [{"reaction": "ch_dimer_mft", "mmol_L": 0.00032393582986992947, "share": 0.9999978800371104}, {"reaction": "ch_dimer_fft", "mmol_L": 6.867333937677963e-10, "share": 2.1199628895458437e-06}]}}
+   },
+   "predictions": [],
+   "why": "2-acetylthiazole falsifier (11.70 ug/L measured)",
+   "ledger_id": "zhou2023 T1 (B60 fit row zhou_pH7_ACTZ)"
+  }
+ }
+}

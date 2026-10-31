@@ -1,0 +1,54 @@
+# Second, independent reading of Zhou et al. 2023 J Agric Food Chem 71:2472 (Zhou2023b.pdf) Table 1, 2-acetylthiazole,
+# by agent-sm34-reader2-2026-10-30. Read from the paper only (no dossier, no first reader's file).
+entries:
+- ledger_id: zhou2023_table1_ph7_arp_cys_volatiles
+  source_file: Zhou2023b.pdf
+  read_by: agent-sm34-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: Table 1. Volatile Flavor Compounds of Thermally Treated ARP with or without Cys at 120 C for 1 h under Different
+    Initial pH Values (6, 7, and 8) ... concentration (ug/L) ... Results are displayed as means +/- standard deviation ...
+    (n = 3)
+  check_notes:
+    conditions: 'Methods p. 2473 (quoted in the pots): ARP 20 mM +/- Cys 20 mM, deionized water, pH set to 6 / 7 / 8 with
+      3 M NaOH, 120 C, 1 h, ice-bath quench. Matches the ledger. Vessel, fill volume, heating device not stated; final pH is
+      Fig. 2 (not read here).'
+    units: Table 1 header 'concentration (ug/L)'; mean +/- SD, n = 3 (footnote a).
+    quantification: 'calibrated, as the ledger says: 2-acetylthiazole identified ''MS, RI, S'' and bought from Aladdin (Chemicals
+      list); HS-SPME (3 mL sample + 2 mL saturated NaCl, CAR/PDMS/DVB, 60 C 30 min) with 1,2-dichlorobenzene IS and standard
+      curves (Table S1, not on disk). The calibration matrix (water vs reacted matrix) is not stated.'
+    duplicates: No other print of these cells found; the pH 7 columns are the 60 min endpoint, not a re-plot of a time course
+      in this paper.
+    values: 'Read from the text layer (pdftotext -layout) and checked on a 200 dpi render of the rotated table (column headers
+      pH 6 / 7 / 8 x ARP / ARP + Cys): 2-acetylthiazole ND, 2.43 +/- 0.08 b, ND, 11.70 +/- 2.14 b, ND, 582.34 +/- 14.57 c.
+      This entry: pH 7 cells (ND; 11.70 +/- 2.14).'
+  species_used:
+  - ACTZ
+- ledger_id: zhou2023_table1_ph6_ph8_arp_cys_volatiles
+  source_file: Zhou2023b.pdf
+  read_by: agent-sm34-reader2-2026-10-30
+  second_reader: self
+  date: '2026-10-30'
+  checks:
+    conditions: pass
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: Table 1. Volatile Flavor Compounds of Thermally Treated ARP with or without Cys at 120 C for 1 h under Different
+    Initial pH Values (6, 7, and 8) ... concentration (ug/L) ... (n = 3)
+  check_notes:
+    conditions: As the pH 7 entry; initial pH 6 and 8 (3 M NaOH), unbuffered.
+    units: Table 1 header 'concentration (ug/L)'; mean +/- SD, n = 3.
+    quantification: As the pH 7 entry (authentic standard, IS + standard curves; matrix of the curves not stated).
+    duplicates: No other print of these cells found.
+    values: 'pH 6: ND (ARP), 2.43 +/- 0.08 (ARP + Cys); pH 8: ND (ARP), 582.34 +/- 14.57 (ARP + Cys). The pH 8 value is 50x
+      the pH 7 one; checked on the page render, not a misplaced decimal in the text layer.'
+  species_used:
+  - ACTZ

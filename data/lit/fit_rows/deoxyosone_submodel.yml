@@ -1,0 +1,1156 @@
+# KEYED FIT TABLE -- sub-model 3, the deoxyosones and their fates (results/validation/kinetic_core_deoxyosone_submodel_prereg.md).
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS; every row an sd as
+# printed or a read_error for a digitised point). Laboratory and quantification class come from the ledger entry.
+# First reader: agent-sm3-reader1-2026-10-29, against the PDFs (data/articles/), not the dossiers; second reader agent-sm3-reader2-2026-10-29;
+# adjudicated by agent-sm3-adjudicator-2026-10-29 (data/lit/source_verification/deoxyosone_submodel.yml, results/validation/
+# source_reading_reconciliation_deoxyosone_submodel.md). Rows also carry their pot's ledger_id (redundant, for grep).
+# Conventions:
+#   * initial_mmol_L and species use engine keys (src/kinetic_core/species.py, species_sulfur.py): PENT (xylose /
+#     ribose), Cys, Gly, TTCA, CAMA, ARP (= the alanine-xylose Amadori compound of species_sulfur), NF, and the measured
+#     species DPO (1-deoxypentosone, 1-DX), TDP (3-deoxypentosone, 3-DX), FUR (furfural), NF (norfuraneol), MGO, GO.
+#     GO is a trunk-only key (species.TRUNK_ONLY_KEYS): the sulfur lane's state vector does not carry it.
+#   * label_ph: the pH the paper sets or holds; ph_measured_at: where and when the paper's electrode read it.
+#   * read_error is in dex (log10 units), as fit_rows._sigma adds it; read_error_basis gives it in the figure's units.
+#   * `printed` records the value as the source prints it, before any unit conversion.
+#   * Adjudication (2026-10-29): rows carry the unit of the figure's axis (mmol_L where it prints mmol/L; Desclaux's
+#     'umol per mmol initial sugar' on the exact mass basis, ug_kg); deoxyosone rows of figures that also hold calibrated
+#     species sit in `<pot>_dx` pots under their own semi_quantitative ledger id (CF-062); duplicated arms are counted
+#     once by transcription (CF-066); GO of Zhai 2021 / 2023 is left out (below the method's LOD, CF-061); rows the
+#     adjudicator checked for a source only the second reader chose carry checked_by; corrected values carry adjudicated.
+status: ready   # every source verified by two readers (adjudicated 2026-10-29; reconciliation: 20 agree, 0 disagree; hofmann1998 / mikami2017 second-read by the adjudicator)
+pots:
+  zhai2019_ttca_120c:
+    ledger_id: zhai2019_fig3b_dicarbonyls_ttca
+    t_c: 120
+    minutes: 60
+    buffer: none (deionized water, 10 mL; pH set with 6 M NaOH; vessel not stated)
+    label_ph: 7.4
+    ph_measured_at: before heating only (set with NaOH, then 10 min at room temperature); never re-measured
+    initial_mmol_L:
+      TTCA: 5.0
+    condition_quote: For the reaction between Cys and TTCA, reactants were mixed in 10 mL of deionized water in a molar ratio of Cys to TTCA of 1:1 (Cys concentration was 5 mmol/L). The solutions were adjusted to pH 7.4 with NaOH (6 mol/L) and placed at room temperature for 10 min. Then the solutions were heated in a thermostatic oil bath at 120 °C for different times (0, 10, 20, 30, 40, 50, 60 min). ... The samples without Cys addition were also prepared as a control group.
+  zhai2019_ttca_cys_120c:
+    ledger_id: zhai2019_fig3b_dicarbonyls_ttca
+    t_c: 120
+    minutes: 60
+    buffer: none (deionized water, 10 mL; pH set with 6 M NaOH; vessel not stated)
+    label_ph: 7.4
+    ph_measured_at: before heating only (set with NaOH, then 10 min at room temperature); never re-measured
+    initial_mmol_L:
+      TTCA: 5.0
+      Cys: 5.0
+    condition_quote: For the reaction between Cys and TTCA, reactants were mixed in 10 mL of deionized water in a molar ratio of Cys to TTCA of 1:1 (Cys concentration was 5 mmol/L). The solutions were adjusted to pH 7.4 with NaOH (6 mol/L) and placed at room temperature for 10 min. Then the solutions were heated in a thermostatic oil bath at 120 °C for different times (0, 10, 20, 30, 40, 50, 60 min). ... The samples without Cys addition were also prepared as a control group.
+  zhai2021_ttca_ph55_100c:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 5.5
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_ph60_100c:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 6.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_ph70_100c:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 7.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_ph80_100c:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 8.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_xyl_ph55_100c:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 5.5
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_xyl_ph60_100c:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 6.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_xyl_ph70_100c:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 7.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_xyl_ph80_100c:
+    ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 8.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2023fc_dx_ttca_xyl_120c:
+    ledger_id: zhai2023foodchem_fig2_deoxyosones
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (deionized water; pH set with 6 and 2 M NaOH; pressure-resistant bottles, magnetic stirring)
+    label_ph: 7.0
+    ph_measured_at: 'before heating only (temperature not stated); text: ''rapid decrease of pH from 7.0 to 4.9'' unattached to T, t or arm'
+    condition_quote: Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 °C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer (DF-101S).
+  zhai2023fc_dx_ttca_xyl_140c:
+    ledger_id: zhai2023foodchem_fig2_deoxyosones
+    t_c: 140
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (deionized water; pH set with 6 and 2 M NaOH; pressure-resistant bottles, magnetic stirring)
+    label_ph: 7.0
+    ph_measured_at: 'before heating only (temperature not stated); text: ''rapid decrease of pH from 7.0 to 4.9'' unattached to T, t or arm'
+    condition_quote: Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 °C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer (DF-101S).
+  zhai2023fc_mgo_ttca_xyl_120c:
+    ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (deionized water; pH set with 6 and 2 M NaOH; pressure-resistant bottles, magnetic stirring)
+    label_ph: 7.0
+    ph_measured_at: 'before heating only (temperature not stated); text: ''rapid decrease of pH from 7.0 to 4.9'' unattached to T, t or arm'
+    condition_quote: Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 °C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer (DF-101S).
+  zhai2023fc_mgo_ttca_xyl_140c:
+    ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go
+    t_c: 140
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (deionized water; pH set with 6 and 2 M NaOH; pressure-resistant bottles, magnetic stirring)
+    label_ph: 7.0
+    ph_measured_at: 'before heating only (temperature not stated); text: ''rapid decrease of pH from 7.0 to 4.9'' unattached to T, t or arm'
+    condition_quote: Model systems of TTCA (10 mmol/L) with or without the presence of extra-added Xyl (10 mmol/L) were established. The model reactions were adjusted to pH 7 ± 0.01 using NaOH solution (6 mol/L and 2 mol/L) prior to the heat treatment under 100, 120, and 140 °C for varying times (20, 40, 60, 80, 100, 120 min) which were carried out using pressure resistant bottles in the collector-type magnetic stirrer (DF-101S).
+  hofmann1998_ribose_cys_145c_ph5:
+    ledger_id: hofmann1998_t5_fa_nf_pairs
+    t_c: 145
+    minutes: 20
+    initial_mmol_L:
+      PENT: 100.0
+      Cys: 33.0
+    buffer: phosphate 0.5 M (counter-ion not stated); 100 mL in a 200 mL laboratory autoclave; heat-up not stated
+    label_ph: 5.0
+    ph_measured_at: set before heating (temperature not stated); never re-measured
+    sugar: D-ribose
+    condition_quote: In a first series of experiments, the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 °C in a laboratory autoclave (200 mL; Type II; Roth, Germany). ... An aqueous solution (100 mL) of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0 mmol) was reacted at pH 5.0 in a laboratory autoclave.
+  mikami2017_nf_ph8_100c:
+    ledger_id: mikami2017_fig6b_norfuraneol_decay_ph8
+    t_c: 100
+    minutes: 360
+    initial_mmol_L:
+      NF: 1.72
+    initial_note: t = 0 plotted 1.72 mM (read); Methods 1.8 mM, Fig. 6 caption 1.7 mM
+    buffer: phosphate-Na/K 0.2 M; capped test tube in boiling water (100 C taken as the bath temperature)
+    label_ph: 8.0
+    ph_measured_at: buffer pH as prepared (temperature not stated); never re-measured
+    condition_quote: A solution of 0.2 M phosphate buffer (pH 8.0) containing 1.8 mM HMFO was heated at 100℃ for 0.5, 1, 3, and 6 h, and then reacted with the same amount of 1.8 mM OPD solution for 5 h at 20℃.
+  zhou2025b_axarp_120c:
+    ledger_id: zhou2025b_figs1_3_axarp_xylose_120c
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted to 8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil bath and heated at 120 °C for predetermined durations of 30, 60, 90, and 120 min.
+    t_c: 120
+    minutes: 120
+    buffer: none (water; pH set to 8, base not stated; pressure-resistant flask in an oil bath)
+    label_ph: 8.0
+    ph_measured_at: initial set before heating; the pH of the AX-ARP and AX-ARP-Xyl pots was measured after each heating time with a pH meter (Fig. 3d; not transcribed here)
+  zhou2025b_axarp_xyl_120c:
+    ledger_id: zhou2025b_figs1_3_axarp_xylose_120c
+    initial_mmol_L:
+      ARP: 20.0
+      PENT: 20.0
+    condition_quote: The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted to 8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil bath and heated at 120 °C for predetermined durations of 30, 60, 90, and 120 min.
+    t_c: 120
+    minutes: 120
+    buffer: none (water; pH set to 8, base not stated; pressure-resistant flask in an oil bath)
+    label_ph: 8.0
+    ph_measured_at: initial set before heating; the pH of the AX-ARP and AX-ARP-Xyl pots was measured after each heating time with a pH meter (Fig. 3d; not transcribed here)
+  zhou2025b_xyl_120c:
+    ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls
+    initial_mmol_L:
+      PENT: 20.0
+    initial_note: 'xylose concentration not printed for this arm; 20 mM inferred from ''identical reaction conditions'' and checked: the plotted 120 min dicarbonyls sum to 1.18 % of 20 mM vs the printed 1.1 %'
+    condition_quote: the thermal degradation of xylose alone under identical reaction conditions was studied, focusing on its role in generating α-dicarbonyl compounds. ... Only 1.1 % of the initial Xyl was converted into α-dicarbonyl compounds after 120 min.
+    t_c: 120
+    minutes: 120
+    buffer: none (water; pH set to 8, base not stated; pressure-resistant flask in an oil bath)
+    label_ph: 8.0
+    ph_measured_at: initial set before heating (pH 8 per "identical reaction conditions"); not reported after heating
+  desclaux2006_xyl_gly_ph6_100c:
+    ledger_id: desclaux2006_fig2_xylose_glycine_100c
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      PENT: 240.0
+      Gly: 240.0
+    initial_note: '6 mmol each in 25 g of sample = 240 mmol/kg (mass basis); 240 mmol/L only if 1 kg = 1 L (density of 0.5 M phosphate ~1.05-1.08 g/mL: true concentration ~250-260 mmol/L)'
+    buffer: phosphate 0.5 M (counter-ion not stated); stirred sealed steel tubes, heating block; heat-up ~5 min
+    label_ph: 6.0
+    ph_measured_at: buffer pH (temperature not stated); never re-measured
+    condition_quote: Samples (25 g) were prepared using xylose (6 mmol), glycine (6 mmol) and buffer (0.5 M phosphate at pH 6). Reaction was carried out in stirred sealed steel tubes placed in thermostatically controlled heating block. Batch experiments were performed at pH6 and temperatures of 80, 100, and 120 °C. Measurements were taken at 30, 60, 90 and 120 min. The time to rise to the final temperature was typically 5 min.
+  zhou2022_axarp_120C_volatiles:
+    ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L). The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    same_pot_as: zhou2022_axarp_120C
+  zhou2022_axarp_cys_120C_volatiles:
+    ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Cys: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L). The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    same_pot_as: zhou2022_axarp_cys_120C
+  zhou2022_axarp_120C:
+    ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L). The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+  zhou2022_axarp_cys_120C:
+    ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Cys: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L). The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+  zhou2022_axarp_120C_dx:
+    ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L). The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+  zhou2022_axarp_cys_120C_dx:
+    ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Cys: 20.0
+    condition_quote: The aqueous AX-ARP (20 mmol/L) solutions were prepared with or without the addition of Cys (20 mmol/L). The initial pH value of the above two reaction solutions was adjusted to 7 with NaOH (3 mol/L), and then the solutions were transferred to a pressure-resistant bottle respectively and heated in a constant-temperature oil bath at 120 C for different times (30, 60, 90, and 120 min).
+    buffer: none (deionized water; initial pH set with 3 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+  zhai2023jafc_ttca_100C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 100
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_100C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 100
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_120C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 120
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_120C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 120
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_140C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 140
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_140C:
+    ledger_id: zhai2023jafc_fig5_arp_dicarbonyls
+    t_c: 140
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_100C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 100
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_100C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 100
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_120C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 120
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_120C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 120
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_140C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 140
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhai2023jafc_ttca_cys_140C_dx:
+    ledger_id: zhai2023jafc_fig5bc_deoxyosones
+    t_c: 140
+    minutes: 180
+    initial_mmol_L:
+      TTCA: 10.0
+      Cys: 10.0
+    condition_quote: TTCA reaction models (10 mmol/L) with or without the addition of different amounts of Cys (0.1, 0.5, 1, 2, and 10 mol/moL TTCA) were prepared under different pH values ... and heated at different temperatures (90, 100, 110, 120, 130, 140, and 150 C) for varying times (20, 40, ... 180 min). The reaction was performed in appropriate pressure-resistant bottles equipped with a collector-type magnetic stirrer (DF-101S). [Fig. 5 caption:] ... under different temperatures (100, 120, and 140 C), initial pH of 7.0, and TTCA-Cys molar ratio of 1:1.
+    buffer: none (water; pH set with 2 / 6 M NaOH)
+    label_ph: 7.0
+    ph_measured_during: false
+    note: TTCA synthesised and purified in-house; stirred pressure-resistant bottle; fill volume not stated.
+  zhou2023c_axarp_ph75_120C:
+    ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: Reaction systems of ARP (20 mmol/L) with or without GSH (20 mmol/L) addition were prepared, and the initial pH of the resultant mixtures was adjusted to 7.5 with a 3 mol/L NaOH solution before the heat treatment. All the samples were transferred to the pressure-resistant bottles and then heated in an oil bath at a temperature of 120 C for 30, 60, 90, and 120 min separately.
+    buffer: none (water; pH set with 3 M NaOH)
+    label_ph: 7.5
+    ph_measured_during: false
+  zhou2023c_axarp_ph75_120C_dx:
+    ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: Reaction systems of ARP (20 mmol/L) with or without GSH (20 mmol/L) addition were prepared, and the initial pH of the resultant mixtures was adjusted to 7.5 with a 3 mol/L NaOH solution before the heat treatment. All the samples were transferred to the pressure-resistant bottles and then heated in an oil bath at a temperature of 120 C for 30, 60, 90, and 120 min separately.
+    buffer: none (water; pH set with 3 M NaOH)
+    label_ph: 7.5
+    ph_measured_during: false
+  zhou2024_axarp_ph8_120C:
+    ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: Ala-ARP reaction models (20 mmol/L) with or without the addition of the same concentrations of 14N-Ala/15N-Ala were prepared. The pH of each model was finely adjusted to 8.0 +/- 0.02 using a 5 mmol/L NaOH solution prior to the heat treatment. Thermal reactions were conducted in an oil bath at 120 C for various durations (30, 60, 90, and 120 min).
+    buffer: none (water; pH set with NaOH)
+    label_ph: 8.0
+    ph_measured_during: true
+    ph_trajectory_fig3b:
+    - - 30
+      - 5.13
+    - - 60
+      - 4.32
+    - - 90
+      - 4.19
+    - - 120
+      - 4.08
+    note: Vessel / volume not stated. pH read from Fig. 3b (vector).
+  zhou2024_axarp_ala_ph8_120C:
+    ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Gly: 20.0
+    condition_quote: Ala-ARP reaction models (20 mmol/L) with or without the addition of the same concentrations of 14N-Ala/15N-Ala were prepared. The pH of each model was finely adjusted to 8.0 +/- 0.02 using a 5 mmol/L NaOH solution prior to the heat treatment. Thermal reactions were conducted in an oil bath at 120 C for various durations (30, 60, 90, and 120 min).
+    buffer: none (water; pH set with NaOH)
+    label_ph: 8.0
+    ph_measured_during: true
+    ph_trajectory_fig3b:
+    - - 30
+      - 5.54
+    - - 60
+      - 4.61
+    - - 90
+      - 4.36
+    - - 120
+      - 4.21
+    note: Ala added as 14N- or 15N-Ala; Fig. 3 arm 'ARP + Ala'.
+    initial_note: 'added L-alanine (14N or 15N) 20 mM, entered under the engine''s amine-pool key Gly (species.py: ''any alpha-amino acid''); adjudication'
+  zhou2024_axarp_ph8_120C_dx:
+    ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: Ala-ARP reaction models (20 mmol/L) with or without the addition of the same concentrations of 14N-Ala/15N-Ala were prepared. The pH of each model was finely adjusted to 8.0 +/- 0.02 using a 5 mmol/L NaOH solution prior to the heat treatment. Thermal reactions were conducted in an oil bath at 120 C for various durations (30, 60, 90, and 120 min).
+    buffer: none (water; pH set with NaOH)
+    label_ph: 8.0
+    ph_measured_during: true
+    ph_trajectory_fig3b:
+    - - 30
+      - 5.13
+    - - 60
+      - 4.32
+    - - 90
+      - 4.19
+    - - 120
+      - 4.08
+    note: Vessel / volume not stated. pH read from Fig. 3b (vector).
+  zhou2024_axarp_ala_ph8_120C_dx:
+    ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala
+    t_c: 120
+    minutes: 120
+    initial_mmol_L:
+      ARP: 20.0
+      Gly: 20.0
+    condition_quote: Ala-ARP reaction models (20 mmol/L) with or without the addition of the same concentrations of 14N-Ala/15N-Ala were prepared. The pH of each model was finely adjusted to 8.0 +/- 0.02 using a 5 mmol/L NaOH solution prior to the heat treatment. Thermal reactions were conducted in an oil bath at 120 C for various durations (30, 60, 90, and 120 min).
+    buffer: none (water; pH set with NaOH)
+    label_ph: 8.0
+    ph_measured_during: true
+    ph_trajectory_fig3b:
+    - - 30
+      - 5.54
+    - - 60
+      - 4.61
+    - - 90
+      - 4.36
+    - - 120
+      - 4.21
+    note: Ala added as 14N- or 15N-Ala; Fig. 3 arm 'ARP + Ala'.
+    initial_note: 'added L-alanine (14N or 15N) 20 mM, entered under the engine''s amine-pool key Gly (species.py: ''any alpha-amino acid''); adjudication'
+  wang2026b_xyl_cys_ph55_120C:
+    ledger_id: wang2026b_tables1_22_volatiles
+    t_c: 120
+    minutes: 150
+    initial_mmol_L:
+      PENT: 199.8
+      Cys: 199.7
+    condition_quote: D-Xylose (0.300 g) and L-cysteine (0.242 g) were dissolved at a 1:1 M ratio in 10 mL of 0.2 mol/L sodium dihydrogen phosphate buffer (pH 5.5) and thoroughly mixed. The mixture was transferred into a 15 mL pressure-resistant thick-walled container and heated in a thermostatic magnetic stirring oil bath ... at 120 C for 60, 90, 120, or 150 min.
+    buffer: 0.2 M NaH2PO4, pH 5.5
+    label_ph: 5.5
+    ph_measured_during: true
+    note: 'Concentrations from the masses: 0.300 g / 150.13 g/mol and 0.242 g / 121.16 g/mol in 10 mL. pH falls with time (Fig. 1A, not transcribed). 10 mL in a 15 mL vessel.'
+  zhai2021_ttca_ph55_100c_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 5.5
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_ph60_100c_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 6.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_ph70_100c_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 7.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_ph80_100c_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 8.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_xyl_ph55_100c_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 5.5
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_xyl_ph60_100c_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 6.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_xyl_ph70_100c_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 7.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhai2021_ttca_xyl_ph80_100c_dx:
+    ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder
+    t_c: 100
+    minutes: 120
+    initial_mmol_L:
+      TTCA: 10.0
+      PENT: 10.0
+    buffer: none (water; pH set with 2 M NaOH or HCl; pH 5.5 = TTCA's natural pH, not adjusted; vessel not stated)
+    label_ph: 8.0
+    ph_measured_at: before heating only (temperature not stated); never re-measured
+    condition_quote: Aqueous TTCA (10 mmol/L) model systems with the presence or absence of Xyl (10 mmol/L) were prepared and adjusted to pH 5.5, 6, 7, and 8 using NaOH (2 mol/L) or HCl (2 mol/L) and heated in a thermostatic oil bath at 100, 120, and 140 °C for various durations (20, 40, 60, 80, 100, and 120 min). The solutions were rapidly transferred to an ice bath to terminate the reaction for further detection.
+  zhou2025b_axarp_120c_dx:
+    ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose
+    initial_mmol_L:
+      ARP: 20.0
+    condition_quote: The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted to 8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil bath and heated at 120 °C for predetermined durations of 30, 60, 90, and 120 min.
+    t_c: 120
+    minutes: 120
+    buffer: none (water; pH set to 8, base not stated; pressure-resistant flask in an oil bath)
+    label_ph: 8.0
+    ph_measured_at: initial set before heating; the pH of the AX-ARP and AX-ARP-Xyl pots was measured after each heating time with a pH meter (Fig. 3d; not transcribed here)
+  zhou2025b_axarp_xyl_120c_dx:
+    ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose
+    initial_mmol_L:
+      ARP: 20.0
+      PENT: 20.0
+    condition_quote: The initial concentrations of AX-ARP and Xyl were both set at 20 mmol/L. The pH of each system was adjusted to 8 before transferring the solution into the pressure-resistant flask. The reaction flask was then placed in an oil bath and heated at 120 °C for predetermined durations of 30, 60, 90, and 120 min.
+    t_c: 120
+    minutes: 120
+    buffer: none (water; pH set to 8, base not stated; pressure-resistant flask in an oil bath)
+    label_ph: 8.0
+    ph_measured_at: initial set before heating; the pH of the AX-ARP and AX-ARP-Xyl pots was measured after each heating time with a pH meter (Fig. 3d; not transcribed here)
+  zhou2025b_xyl_120c_dx:
+    ledger_id: zhou2025b_fig2a_deoxyxylosone_xylose_alone
+    initial_mmol_L:
+      PENT: 20.0
+    initial_note: 'xylose concentration not printed for this arm; 20 mM inferred from ''identical reaction conditions'' and checked: the plotted 120 min dicarbonyls sum to 1.18 % of 20 mM vs the printed 1.1 %'
+    condition_quote: the thermal degradation of xylose alone under identical reaction conditions was studied, focusing on its role in generating α-dicarbonyl compounds. ... Only 1.1 % of the initial Xyl was converted into α-dicarbonyl compounds after 120 min.
+    t_c: 120
+    minutes: 120
+    buffer: none (water; pH set to 8, base not stated; pressure-resistant flask in an oil bath)
+    label_ph: 8.0
+    ph_measured_at: initial set before heating (pH 8 per "identical reaction conditions"); not reported after heating
+rows:
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 10, value: 89.4, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.01, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 20, value: 164.0, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.005, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 30, value: 199.2, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.004, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 40, value: 204.4, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.004, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 50, value: 228.3, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.004, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 60, value: 248.7, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.003, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 10, value: 54.8, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.016, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 20, value: 95.0, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.009, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 30, value: 112.9, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.008, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 40, value: 122.0, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.007, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 50, value: 138.3, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.006, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 60, value: 149.4, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.006, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 10, value: 42.9, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.02, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 20, value: 69.0, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.013, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 30, value: 77.3, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.011, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 40, value: 90.0, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.01, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 50, value: 92.1, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.009, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 60, value: 98.3, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.009, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 10, value: 21.8, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.08, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 20, value: 24.4, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.071, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 30, value: 25.3, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.069, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 40, value: 31.6, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.055, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 50, value: 49.2, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.018, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: TDP, t_min: 60, value: 51.3, unit: umol_L, printed: 3-DX Fig. 3B (digitised), read_error: 0.017, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 10, value: 17.5, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.099, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 20, value: 20.0, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.087, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 30, value: 31.1, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.056, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 40, value: 34.6, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.05, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 50, value: 41.4, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.021, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: DPO, t_min: 60, value: 44.5, unit: umol_L, printed: 1-DX Fig. 3B (digitised), read_error: 0.02, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 10, value: 10.1, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.172, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 20, value: 12.2, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.142, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 30, value: 17.9, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.097, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 40, value: 24.5, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.071, read_error_basis: '+-4 umol/L, 600 dpi raster, overlapped markers, dashed-line centres'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 50, value: 30.5, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.028, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2019_ttca_cys_120c, ledger_id: zhai2019_fig3b_dicarbonyls_ttca, species: GO, t_min: 60, value: 34.8, unit: umol_L, printed: GO Fig. 3B (digitised), read_error: 0.025, read_error_basis: '+-2 umol/L, 600 dpi raster marker centre'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 20, value: 0.28, unit: mmol_L, sd: 0.017, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.28 +- 0.017 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 20, value: 0.33, unit: mmol_L, sd: 0.014, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.33 +- 0.014 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 20, value: 0.15, unit: mmol_L, sd: 0.023, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.15 +- 0.023 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 20, value: 0.062, unit: mmol_L, sd: 0.022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.062 +- 0.022 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 20, value: 0.29, unit: mmol_L, sd: 0.019, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.29 +- 0.019 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 20, value: 0.38, unit: mmol_L, sd: 0.008, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.38 +- 0.008 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 20, value: 0.17, unit: mmol_L, sd: 0.019, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.17 +- 0.019 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 20, value: 0.048, unit: mmol_L, sd: 0.074, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.048 +- 0.074 mmol/L', note: only the upper half of the SD bar is drawn (lower half clipped at zero)}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 40, value: 0.37, unit: mmol_L, sd: 0.018, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.37 +- 0.018 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 40, value: 0.48, unit: mmol_L, sd: 0.012, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.48 +- 0.012 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 40, value: 0.21, unit: mmol_L, sd: 0.011, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.21 +- 0.011 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 40, value: 0.072, unit: mmol_L, sd: 0.024, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.072 +- 0.024 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 40, value: 0.4, unit: mmol_L, sd: 0.018, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.4 +- 0.018 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 40, value: 0.51, unit: mmol_L, sd: 0.009, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.51 +- 0.009 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 40, value: 0.23, unit: mmol_L, sd: 0.03, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.23 +- 0.03 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 40, value: 0.076, unit: mmol_L, sd: 0.013, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.076 +- 0.013 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 60, value: 0.52, unit: mmol_L, sd: 0.012, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.52 +- 0.012 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 60, value: 0.59, unit: mmol_L, sd: 0.01, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.59 +- 0.01 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 60, value: 0.38, unit: mmol_L, sd: 0.01, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.38 +- 0.01 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 60, value: 0.086, unit: mmol_L, sd: 0.063, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.086 +- 0.063 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 60, value: 0.58, unit: mmol_L, sd: 0.018, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.58 +- 0.018 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 60, value: 0.63, unit: mmol_L, sd: 0.02, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.63 +- 0.02 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 60, value: 0.36, unit: mmol_L, sd: 0.03, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.36 +- 0.03 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 60, value: 0.107, unit: mmol_L, sd: 0.017, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.107 +- 0.017 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 80, value: 0.65, unit: mmol_L, sd: 0.017, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.65 +- 0.017 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 80, value: 0.75, unit: mmol_L, sd: 0.022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.75 +- 0.022 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 80, value: 0.47, unit: mmol_L, sd: 0.018, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.47 +- 0.018 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 80, value: 0.098, unit: mmol_L, sd: 0.016, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.098 +- 0.016 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 80, value: 0.7, unit: mmol_L, sd: 0.022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.7 +- 0.022 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 80, value: 0.81, unit: mmol_L, sd: 0.028, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.81 +- 0.028 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 80, value: 0.57, unit: mmol_L, sd: 0.019, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.57 +- 0.019 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 80, value: 0.147, unit: mmol_L, sd: 0.019, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.147 +- 0.019 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 100, value: 0.64, unit: mmol_L, sd: 0.02, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.64 +- 0.02 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 100, value: 0.89, unit: mmol_L, sd: 0.022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.89 +- 0.022 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 100, value: 0.51, unit: mmol_L, sd: 0.018, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.51 +- 0.018 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 100, value: 0.107, unit: mmol_L, sd: 0.019, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.107 +- 0.019 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 100, value: 0.75, unit: mmol_L, sd: 0.007, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.75 +- 0.007 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 100, value: 1.03, unit: mmol_L, sd: 0.033, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 1.03 +- 0.033 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 100, value: 0.77, unit: mmol_L, sd: 0.019, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.77 +- 0.019 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 100, value: 0.258, unit: mmol_L, sd: 0.032, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.258 +- 0.032 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 120, value: 0.62, unit: mmol_L, sd: 0.021, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.62 +- 0.021 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 120, value: 0.93, unit: mmol_L, sd: 0.03, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.93 +- 0.03 mmol/L', note: 'two series share this mean; bars 18 / 30 unassignable, larger SD taken'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 120, value: 0.42, unit: mmol_L, sd: 0.019, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.42 +- 0.019 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 120, value: 0.075, unit: mmol_L, sd: 0.023, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.075 +- 0.023 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 120, value: 0.77, unit: mmol_L, sd: 0.018, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.77 +- 0.018 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 120, value: 1.09, unit: mmol_L, sd: 0.027, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 1.09 +- 0.027 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 120, value: 0.93, unit: mmol_L, sd: 0.03, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.93 +- 0.03 mmol/L', note: 'two series share this mean; bars 18 / 30 unassignable, larger SD taken'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: TDP, t_min: 120, value: 0.359, unit: mmol_L, sd: 0.009, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.359 +- 0.009 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 20, value: 0.01, unit: mmol_L, sd: 0.0021, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.01 +- 0.0021 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 20, value: 0.0172, unit: mmol_L, sd: 0.0018, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0172 +- 0.0018 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 20, value: 0.021, unit: mmol_L, sd: 0.0024, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.021 +- 0.0024 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 20, value: 0.032, unit: mmol_L, sd: 0.0028, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.032 +- 0.0028 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 20, value: 0.012, unit: mmol_L, sd: 0.0024, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.012 +- 0.0024 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 20, value: 0.0179, unit: mmol_L, sd: 0.001, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0179 +- 0.001 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 20, value: 0.026, unit: mmol_L, sd: 0.0024, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.026 +- 0.0024 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 20, value: 0.031, unit: mmol_L, sd: 0.0093, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.031 +- 0.0093 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 40, value: 0.013, unit: mmol_L, sd: 0.0022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.013 +- 0.0022 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 40, value: 0.0215, unit: mmol_L, sd: 0.0015, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0215 +- 0.0015 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 40, value: 0.029, unit: mmol_L, sd: 0.0037, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.029 +- 0.0037 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 40, value: 0.052, unit: mmol_L, sd: 0.003, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.052 +- 0.003 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 40, value: 0.013, unit: mmol_L, sd: 0.0022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.013 +- 0.0022 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 40, value: 0.023, unit: mmol_L, sd: 0.0011, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.023 +- 0.0011 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 40, value: 0.031, unit: mmol_L, sd: 0.0037, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.031 +- 0.0037 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 40, value: 0.053, unit: mmol_L, sd: 0.0016, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.053 +- 0.0016 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 60, value: 0.025, unit: mmol_L, sd: 0.0015, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.025 +- 0.0015 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 60, value: 0.0337, unit: mmol_L, sd: 0.0012, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0337 +- 0.0012 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 60, value: 0.048, unit: mmol_L, sd: 0.0037, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.048 +- 0.0037 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 60, value: 0.074, unit: mmol_L, sd: 0.0078, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.074 +- 0.0078 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 60, value: 0.028, unit: mmol_L, sd: 0.0022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.028 +- 0.0022 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 60, value: 0.034, unit: mmol_L, sd: 0.0025, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.034 +- 0.0025 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 60, value: 0.053, unit: mmol_L, sd: 0.0037, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.053 +- 0.0037 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 60, value: 0.082, unit: mmol_L, sd: 0.0022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.082 +- 0.0022 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 80, value: 0.037, unit: mmol_L, sd: 0.0021, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.037 +- 0.0021 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 80, value: 0.0498, unit: mmol_L, sd: 0.0027, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0498 +- 0.0027 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 80, value: 0.061, unit: mmol_L, sd: 0.0024, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.061 +- 0.0024 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 80, value: 0.099, unit: mmol_L, sd: 0.002, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.099 +- 0.002 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 80, value: 0.04, unit: mmol_L, sd: 0.0027, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.04 +- 0.0027 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 80, value: 0.051, unit: mmol_L, sd: 0.0035, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.051 +- 0.0035 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 80, value: 0.075, unit: mmol_L, sd: 0.0024, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.075 +- 0.0024 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 80, value: 0.119, unit: mmol_L, sd: 0.0024, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.119 +- 0.0024 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 100, value: 0.036, unit: mmol_L, sd: 0.0025, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.036 +- 0.0025 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 100, value: 0.0628, unit: mmol_L, sd: 0.0027, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0628 +- 0.0027 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 100, value: 0.079, unit: mmol_L, sd: 0.0024, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.079 +- 0.0024 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 100, value: 0.117, unit: mmol_L, sd: 0.0023, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.117 +- 0.0023 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 100, value: 0.043, unit: mmol_L, sd: 0.0009, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.043 +- 0.0009 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 100, value: 0.0688, unit: mmol_L, sd: 0.0041, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0688 +- 0.0041 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 100, value: 0.094, unit: mmol_L, sd: 0.0024, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.094 +- 0.0024 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 100, value: 0.172, unit: mmol_L, sd: 0.004, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.172 +- 0.004 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 120, value: 0.032, unit: mmol_L, sd: 0.0026, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.032 +- 0.0026 mmol/L'}
+  - {pot: zhai2021_ttca_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 120, value: 0.0619, unit: mmol_L, sd: 0.0022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0619 +- 0.0022 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 120, value: 0.069, unit: mmol_L, sd: 0.0037, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.069 +- 0.0037 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 120, value: 0.106, unit: mmol_L, sd: 0.0029, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.106 +- 0.0029 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 120, value: 0.047, unit: mmol_L, sd: 0.0022, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.047 +- 0.0022 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 120, value: 0.079, unit: mmol_L, sd: 0.0033, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.079 +- 0.0033 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 120, value: 0.125, unit: mmol_L, sd: 0.0037, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.125 +- 0.0037 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c_dx, ledger_id: zhai2021_fig5ab_deoxyosones_ph_ladder, species: DPO, t_min: 120, value: 0.187, unit: mmol_L, sd: 0.0012, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.187 +- 0.0012 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 20, value: 0.0081, unit: mmol_L, sd: 0.0005, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0081 +- 0.0005 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 20, value: 0.0129, unit: mmol_L, sd: 0.0005, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0129 +- 0.0005 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 20, value: 0.0219, unit: mmol_L, sd: 0.0007, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0219 +- 0.0007 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 20, value: 0.0302, unit: mmol_L, sd: 0.0007, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0302 +- 0.0007 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 20, value: 0.0102, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0102 +- 0.0006 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_xyl_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 20, value: 0.0169, unit: mmol_L, sd: 0.0002, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0169 +- 0.0002 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 20, value: 0.0198, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0198 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 20, value: 0.0374, unit: mmol_L, sd: 0.0023, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0374 +- 0.0023 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 40, value: 0.0107, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0107 +- 0.0006 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 40, value: 0.0178, unit: mmol_L, sd: 0.0004, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0178 +- 0.0004 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 40, value: 0.0279, unit: mmol_L, sd: 0.0003, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0279 +- 0.0003 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 40, value: 0.0452, unit: mmol_L, sd: 0.0007, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0452 +- 0.0007 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 40, value: 0.0127, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0127 +- 0.0006 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_xyl_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 40, value: 0.0199, unit: mmol_L, sd: 0.0003, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0199 +- 0.0003 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 40, value: 0.0231, unit: mmol_L, sd: 0.0009, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0231 +- 0.0009 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 40, value: 0.0553, unit: mmol_L, sd: 0.0004, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0553 +- 0.0004 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 60, value: 0.0132, unit: mmol_L, sd: 0.0004, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0132 +- 0.0004 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 60, value: 0.0247, unit: mmol_L, sd: 0.0003, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0247 +- 0.0003 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 60, value: 0.0348, unit: mmol_L, sd: 0.0003, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0348 +- 0.0003 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 60, value: 0.0574, unit: mmol_L, sd: 0.002, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0574 +- 0.002 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 60, value: 0.0144, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0144 +- 0.0006 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_xyl_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 60, value: 0.0214, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0214 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 60, value: 0.0279, unit: mmol_L, sd: 0.0009, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0279 +- 0.0009 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 60, value: 0.0638, unit: mmol_L, sd: 0.0005, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0638 +- 0.0005 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 80, value: 0.0139, unit: mmol_L, sd: 0.0005, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0139 +- 0.0005 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 80, value: 0.0252, unit: mmol_L, sd: 0.0007, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0252 +- 0.0007 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 80, value: 0.0311, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0311 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 80, value: 0.0499, unit: mmol_L, sd: 0.0005, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0499 +- 0.0005 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 80, value: 0.0199, unit: mmol_L, sd: 0.0007, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0199 +- 0.0007 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 80, value: 0.0249, unit: mmol_L, sd: 0.0009, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0249 +- 0.0009 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 80, value: 0.0318, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0318 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 80, value: 0.0672, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0672 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 100, value: 0.0137, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0137 +- 0.0006 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 100, value: 0.0248, unit: mmol_L, sd: 0.0007, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0248 +- 0.0007 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 100, value: 0.0299, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0299 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 100, value: 0.0347, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0347 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 100, value: 0.0213, unit: mmol_L, sd: 0.00015, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0213 +- 0.00015 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 100, value: 0.0278, unit: mmol_L, sd: 0.001, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0278 +- 0.001 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 100, value: 0.0374, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0374 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 100, value: 0.0597, unit: mmol_L, sd: 0.001, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0597 +- 0.001 mmol/L'}
+  - {pot: zhai2021_ttca_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 120, value: 0.0114, unit: mmol_L, sd: 0.0007, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0114 +- 0.0007 mmol/L', flag: below the paper LOQ (MGOqx 2.405 mg/L = 16.7 umol/L as quinoxaline); above LOD (4.2 umol/L)}
+  - {pot: zhai2021_ttca_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 120, value: 0.0201, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0201 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 120, value: 0.0269, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0269 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 120, value: 0.0279, unit: mmol_L, sd: 0.0007, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0279 +- 0.0007 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph55_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 120, value: 0.0247, unit: mmol_L, sd: 0.0006, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0247 +- 0.0006 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph60_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 120, value: 0.03, unit: mmol_L, sd: 0.0008, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.03 +- 0.0008 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph70_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 120, value: 0.0425, unit: mmol_L, sd: 0.0009, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0425 +- 0.0009 mmol/L'}
+  - {pot: zhai2021_ttca_xyl_ph80_100c, ledger_id: zhai2021_fig5_dicarbonyls_ph_ladder, species: MGO, t_min: 120, value: 0.0569, unit: mmol_L, sd: 0.0003, printed: 'Fig. 5 (vector, digitised; axis mmol/L): 0.0569 +- 0.0003 mmol/L'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 40, value: 0.391, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.007, read_error_basis: '+-6 umol/L, 300 dpi raster, clean marker', adjudicated: 'first reading 0.394, second 0.386 mmol/L; error-bar caps at rows 512 / 529 of the 300 ppi raster (zero 651.5, 1.5 mM at 149) put the mean at 0.391 mmol/L'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 60, value: 0.623, unit: mmol_L, sd: 0.069, sd_basis: 'error bar visible beyond the marker, read at 300 dpi', printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.004, read_error_basis: '+-6 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 80, value: 0.811, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.008, read_error_basis: '+-15 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 100, value: 0.817, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.016, read_error_basis: '+-30 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 120, value: 0.814, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.003, read_error_basis: '+-6 umol/L, 300 dpi raster, clean marker', adjudicated: second reading 0.803; caps at rows 371.5 / 386.5 put the mean at 0.814 mmol/L (first reading confirmed)}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 20, value: 0.319, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.02, read_error_basis: '+-15 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 40, value: 0.576, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.005, read_error_basis: '+-6 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 60, value: 1.124, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.002, read_error_basis: '+-6 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 80, value: 1.099, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.002, read_error_basis: '+-6 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 100, value: 1.02, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.003, read_error_basis: '+-6 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: TDP, t_min: 120, value: 0.99, unit: mmol_L, printed: 'Fig. (2a) digitised, axis mmol/L', read_error: 0.007, read_error_basis: '+-15 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 40, value: 0.0488, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.027, read_error_basis: '+-3 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 60, value: 0.0981, unit: mmol_L, sd: 0.008, sd_basis: 'error bar visible beyond the marker, read at 300 dpi', printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.009, read_error_basis: '+-2 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 80, value: 0.1323, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.003, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 100, value: 0.129, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.003, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 120, value: 0.12, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.011, read_error_basis: '+-3 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 20, value: 0.0523, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.008, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 40, value: 0.089, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.005, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 60, value: 0.1388, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.003, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 80, value: 0.173, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.003, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 100, value: 0.1745, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.002, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_dx_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig2_deoxyosones, species: DPO, t_min: 120, value: 0.1519, unit: mmol_L, printed: 'Fig. (2b) digitised, axis mmol/L', read_error: 0.003, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 20, value: 0.0322, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.027, read_error_basis: '+-2 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 40, value: 0.0508, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.017, read_error_basis: '+-2 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 60, value: 0.063, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.007, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 80, value: 0.0539, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.008, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 100, value: 0.0425, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.01, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_120c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 120, value: 0.0389, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.011, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 20, value: 0.0409, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.021, read_error_basis: '+-2 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 40, value: 0.0789, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.006, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 60, value: 0.0793, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.005, read_error_basis: '+-1 umol/L, 300 dpi raster, clean marker'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 80, value: 0.068, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.013, read_error_basis: '+-2 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 100, value: 0.054, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.016, read_error_basis: '+-2 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: zhai2023fc_mgo_ttca_xyl_140c, ledger_id: zhai2023foodchem_fig3_cys_da_mgo_go, species: MGO, t_min: 120, value: 0.0456, unit: mmol_L, printed: 'Fig. (3c) digitised, axis mmol/L', read_error: 0.019, read_error_basis: '+-2 umol/L, 300 dpi raster, overlapped markers'}
+  - {pot: hofmann1998_ribose_cys_145c_ph5, ledger_id: hofmann1998_t5_fa_nf_pairs, species: FUR, t_min: 20, value: 675.0, unit: ug_L, sd: 67.5, sd_basis: 'Table 1 footnote b: ''mean values of triplicates and differed by not more than 10%'' (bound taken as sd)', method: calibrated, method_basis: 'internal standard 5-methylfurfural with a measured MS response factor: ''An MS response factor of 0.95 was calculated from mixtures containing known amounts of furan-2-aldehyde and 5-methylfurfural'' (calibrated against the authentic analyte; not SIDA)', printed: 67.5 ug per 100 mL pot (Table 5), flag: 'CF-016 open: Schieberle 1998 Table IV prints 52 ug / 100 mmol ribose (= 5.2 ug per pot) for the same pot, 13x lower'}
+  - {pot: hofmann1998_ribose_cys_145c_ph5, ledger_id: hofmann1998_t5_fa_nf_pairs, species: NF, t_min: 20, value: 545300.0, unit: ug_L, sd: 54530.0, sd_basis: 'Table 1 footnote b: ''mean values of triplicates and differed by not more than 10%'' (bound taken as sd)', method: calibrated, method_basis: 'labelled homologue [13C2]-4-hydroxy-2,5-dimethyl-3(2H)-furanone with a measured response factor: ''MS response factors for mercapto-2-propanone (1.08) and NF (0.98) were calculated from mixtures containing known amounts of the analyte and the labeled standard'' (calibrated; homologue, not isotopologue SIDA)', printed: '54530.0 ug per 100 mL pot (Table 5) = 4.78 mmol/L, 4.8 mol% of ribose'}
+  - {pot: mikami2017_nf_ph8_100c, ledger_id: mikami2017_fig6b_norfuraneol_decay_ph8, species: NF, t_min: 30, value: 0.634, unit: mmol_L, sd: 0.062, sd_basis: upper half of the drawn bar (n = 3 per Fig. 3 legend; bar type not stated), printed: 'HMFO (mM), right axis, Fig. 6B', read_error: 0.005, read_error_basis: '+-0.007 mmol/L, 350 dpi raster marker centre (2 px)'}
+  - {pot: mikami2017_nf_ph8_100c, ledger_id: mikami2017_fig6b_norfuraneol_decay_ph8, species: NF, t_min: 60, value: 0.253, unit: mmol_L, sd: 0.104, sd_basis: 'drawn bar, caps at 0.357 / 0.149 mM', printed: 'HMFO (mM), right axis, Fig. 6B', read_error: 0.012, read_error_basis: '+-0.007 mmol/L, 350 dpi raster marker centre (2 px)'}
+  - {pot: mikami2017_nf_ph8_100c, ledger_id: mikami2017_fig6b_norfuraneol_decay_ph8, species: MGO, t_min: 30, value: 10.7, unit: umol_L, printed: 'quinoxaline I (mM), left axis, Fig. 6B', flag: 'OPD 1.8 mM added 1:1 to the heated 1.8 mM HMFO solution, 5 h at 20 C; derivatisation yield not stated (possible lower bound)', read_error: 0.02, read_error_basis: '+-0.5 umol/L, 350 dpi raster marker centre (2 px)'}
+  - {pot: mikami2017_nf_ph8_100c, ledger_id: mikami2017_fig6b_norfuraneol_decay_ph8, species: MGO, t_min: 60, value: 3.6, unit: umol_L, printed: 'quinoxaline I (mM), left axis, Fig. 6B', flag: 'OPD 1.8 mM added 1:1 to the heated 1.8 mM HMFO solution, 5 h at 20 C; derivatisation yield not stated (possible lower bound)', read_error: 0.06, read_error_basis: '+-0.5 umol/L, 350 dpi raster marker centre (2 px)'}
+  - {pot: mikami2017_nf_ph8_100c, ledger_id: mikami2017_fig6b_norfuraneol_decay_ph8, species: MGO, t_min: 180, value: 2.6, unit: umol_L, printed: 'quinoxaline I (mM), left axis, Fig. 6B', flag: 'OPD 1.8 mM added 1:1 to the heated 1.8 mM HMFO solution, 5 h at 20 C; derivatisation yield not stated (possible lower bound)', read_error: 0.083, read_error_basis: +-0.5 umol/L (2 px) on a 2.6 umol/L point; square partly hidden, adjudicated: 'first reading 4.0 umol/L; the red square (33 px side) spans rows 728-760 of the 350 ppi raster (bottom half behind the HMFO diamond), centre 744, x axis at 754, 3849 px per mM: 2.6 umol/L (dossier ~3)'}
+  - {pot: zhou2025b_axarp_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: TDP, t_min: 30, value: 0.3651, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2b (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.004, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: TDP, t_min: 60, value: 0.5237, unit: mmol_L, sd: 0.019, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2b (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.002, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: TDP, t_min: 90, value: 0.5494, unit: mmol_L, sd: 0.017, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2b (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.002, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: TDP, t_min: 120, value: 0.5196, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2b (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.003, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: TDP, t_min: 30, value: 0.4226, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2b (digitised; axis mmol/L), read_error: 0.003, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: TDP, t_min: 60, value: 0.6193, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2b (digitised; axis mmol/L), read_error: 0.002, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: TDP, t_min: 90, value: 0.7035, unit: mmol_L, sd: 0.024, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2b (digitised; axis mmol/L), read_error: 0.002, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: TDP, t_min: 120, value: 0.6829, unit: mmol_L, sd: 0.025, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2b (digitised; axis mmol/L), read_error: 0.002, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: DPO, t_min: 30, value: 0.2854, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2c (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.005, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: DPO, t_min: 60, value: 0.1674, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2c (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.008, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: DPO, t_min: 90, value: 0.1232, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2c (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.011, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: DPO, t_min: 120, value: 0.0873, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2c (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.015, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: DPO, t_min: 30, value: 0.3136, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2c (digitised; axis mmol/L), read_error: 0.004, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: DPO, t_min: 60, value: 0.1982, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2c (digitised; axis mmol/L), read_error: 0.007, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: DPO, t_min: 90, value: 0.1504, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2c (digitised; axis mmol/L), read_error: 0.009, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c_dx, ledger_id: zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, species: DPO, t_min: 120, value: 0.1227, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2c (digitised; axis mmol/L), read_error: 0.011, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: GO, t_min: 30, value: 0.1499, unit: mmol_L, sd: 0.023, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2d (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.009, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: GO, t_min: 60, value: 0.192, unit: mmol_L, sd: 0.028, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2d (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.007, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: GO, t_min: 90, value: 0.2567, unit: mmol_L, sd: 0.031, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2d (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.005, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: GO, t_min: 120, value: 0.3142, unit: mmol_L, sd: 0.02, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2d (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.004, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: GO, t_min: 30, value: 0.2942, unit: mmol_L, sd: 0.027, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2d (digitised; axis mmol/L), read_error: 0.004, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: GO, t_min: 60, value: 0.3764, unit: mmol_L, sd: 0.031, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2d (digitised; axis mmol/L), read_error: 0.003, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: GO, t_min: 90, value: 0.4817, unit: mmol_L, sd: 0.042, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2d (digitised; axis mmol/L), read_error: 0.003, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: GO, t_min: 120, value: 0.6773, unit: mmol_L, sd: 0.053, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2d (digitised; axis mmol/L), read_error: 0.002, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: MGO, t_min: 30, value: 0.0815, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2e (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.016, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: MGO, t_min: 60, value: 0.0758, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2e (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.017, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: MGO, t_min: 90, value: 0.0719, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2e (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.018, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: MGO, t_min: 120, value: 0.0892, unit: mmol_L, sd: 0.033, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 2e (digitised; axis mmol/L), flag: 'NEW CONFLICT: Zhou 2024 (JAFC 72:18630) Fig. 3 prints the same nominal AX-ARP 20 mM, pH 8, 120 C pot with 3-DX / 1-DX / GO / MGO 7-24x higher (e.g. 3-DX 3.7-5.3 vs 0.37-0.52 mmol/L) while AX-ARP decay and pH agree', read_error: 0.015, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: MGO, t_min: 30, value: 0.0708, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2e (digitised; axis mmol/L), read_error: 0.031, read_error_basis: '+-5 umol/L, 600 dpi render of the vector figure, marker centre (marker partly occluded)'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: MGO, t_min: 60, value: 0.0646, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2e (digitised; axis mmol/L), read_error: 0.034, read_error_basis: '+-5 umol/L, 600 dpi render of the vector figure, marker centre (marker partly occluded)'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: MGO, t_min: 90, value: 0.0662, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2e (digitised; axis mmol/L), read_error: 0.033, read_error_basis: '+-5 umol/L, 600 dpi render of the vector figure, marker centre (marker partly occluded)'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: MGO, t_min: 120, value: 0.0762, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2e (digitised; axis mmol/L), read_error: 0.028, read_error_basis: '+-5 umol/L, 600 dpi render of the vector figure, marker centre (marker partly occluded)'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: FUR, t_min: 30, value: 124.3, unit: ug_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 1e (digitised; axis ug/L), read_error: 0.024, read_error_basis: '+-7 ug/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: FUR, t_min: 60, value: 673.3, unit: ug_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 1e (digitised; axis ug/L), read_error: 0.005, read_error_basis: '+-7 ug/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: FUR, t_min: 90, value: 1171.9, unit: ug_L, sd: 52.0, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 1e (digitised; axis ug/L), read_error: 0.003, read_error_basis: '+-7 ug/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: FUR, t_min: 120, value: 1557.3, unit: ug_L, sd: 85.0, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 1e (digitised; axis ug/L), read_error: 0.002, read_error_basis: '+-7 ug/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: FUR, t_min: 30, value: 218.6, unit: ug_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 1e (digitised; axis ug/L), read_error: 0.014, read_error_basis: '+-7 ug/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: FUR, t_min: 60, value: 808.5, unit: ug_L, sd: 50.0, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 1e (digitised; axis ug/L), read_error: 0.004, read_error_basis: '+-7 ug/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: FUR, t_min: 90, value: 1401.6, unit: ug_L, sd: 96.0, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 1e (digitised; axis ug/L), read_error: 0.002, read_error_basis: '+-7 ug/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_axarp_xyl_120c, ledger_id: zhou2025b_figs1_3_axarp_xylose_120c, species: FUR, t_min: 120, value: 2048.1, unit: ug_L, sd: 132.0, sd_basis: 'drawn SD bar (triplicate, mean +- SD), 600 dpi render of the vector figure', printed: Fig. 1e (digitised; axis ug/L), read_error: 0.001, read_error_basis: '+-7 ug/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c_dx, ledger_id: zhou2025b_fig2a_deoxyxylosone_xylose_alone, species: TDP, t_min: 30, value: 0.0431, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.03, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c_dx, ledger_id: zhou2025b_fig2a_deoxyxylosone_xylose_alone, species: TDP, t_min: 60, value: 0.0498, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.026, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c_dx, ledger_id: zhou2025b_fig2a_deoxyxylosone_xylose_alone, species: TDP, t_min: 90, value: 0.0796, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.016, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c_dx, ledger_id: zhou2025b_fig2a_deoxyxylosone_xylose_alone, species: TDP, t_min: 120, value: 0.0883, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.015, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c, ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls, species: GO, t_min: 30, value: 0.0657, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.033, read_error_basis: '+-5 umol/L, 600 dpi render of the vector figure, marker centre (marker partly occluded)'}
+  - {pot: zhou2025b_xyl_120c, ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls, species: GO, t_min: 60, value: 0.076, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.017, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c, ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls, species: GO, t_min: 90, value: 0.0935, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.023, read_error_basis: '+-5 umol/L, 600 dpi render of the vector figure, marker centre (marker partly occluded)'}
+  - {pot: zhou2025b_xyl_120c, ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls, species: GO, t_min: 120, value: 0.1155, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.011, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c, ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls, species: MGO, t_min: 30, value: 0.0195, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.067, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c, ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls, species: MGO, t_min: 60, value: 0.0216, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.06, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c, ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls, species: MGO, t_min: 90, value: 0.0308, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.042, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: zhou2025b_xyl_120c, ledger_id: zhou2025b_fig2a_xylose_alone_dicarbonyls, species: MGO, t_min: 120, value: 0.0329, unit: mmol_L, sd_note: 'SD bar hidden inside the marker (SD below half the marker height: ~13 umol/L in Figs. 2b-e, ~7-10 in 2a, ~42 ug/L in 1e); not transcribed', printed: Fig. 2a (digitised; axis mmol/L), read_error: 0.04, read_error_basis: '+-3 umol/L, 600 dpi render of the vector figure, marker centre'}
+  - {pot: desclaux2006_xyl_gly_ph6_100c, ledger_id: desclaux2006_fig2_xylose_glycine_100c, species: NF, t_min: 30, value: 366120.0, unit: ug_kg, read_error: 0.01, read_error_basis: '+-0.3 umol per mmol initial sugar, 300 dpi 1-bit scan, marker bbox centre', method: semi_quantitative, method_basis: 'the paper names GC / GC-MS after solvent extraction (dicarbonyls as 1,2-diaminobenzene quinoxalines, deoxyosones as quinoxalines silylated with BSTFA, heterocycles directly; ref. Hofmann 1999) but states no standard, calibration or response factor; the ledger class is ''unknown'', so semi_quantitative is named', printed: '13.37 umol per mmol initial sugar (Fig. 2, digitised); x 240 mmol sugar/kg x 114.1 ug/umol'}
+  - {pot: desclaux2006_xyl_gly_ph6_100c, ledger_id: desclaux2006_fig2_xylose_glycine_100c, species: NF, t_min: 60, value: 545490.0, unit: ug_kg, read_error: 0.007, read_error_basis: '+-0.3 umol per mmol initial sugar, 300 dpi 1-bit scan, marker bbox centre', method: semi_quantitative, method_basis: 'the paper names GC / GC-MS after solvent extraction (dicarbonyls as 1,2-diaminobenzene quinoxalines, deoxyosones as quinoxalines silylated with BSTFA, heterocycles directly; ref. Hofmann 1999) but states no standard, calibration or response factor; the ledger class is ''unknown'', so semi_quantitative is named', printed: '19.92 umol per mmol initial sugar (Fig. 2, digitised); x 240 mmol sugar/kg x 114.1 ug/umol'}
+  - {pot: desclaux2006_xyl_gly_ph6_100c, ledger_id: desclaux2006_fig2_xylose_glycine_100c, species: NF, t_min: 90, value: 700760.0, unit: ug_kg, read_error: 0.005, read_error_basis: '+-0.3 umol per mmol initial sugar, 300 dpi 1-bit scan, marker bbox centre', method: semi_quantitative, method_basis: 'the paper names GC / GC-MS after solvent extraction (dicarbonyls as 1,2-diaminobenzene quinoxalines, deoxyosones as quinoxalines silylated with BSTFA, heterocycles directly; ref. Hofmann 1999) but states no standard, calibration or response factor; the ledger class is ''unknown'', so semi_quantitative is named', printed: '25.59 umol per mmol initial sugar (Fig. 2, digitised); x 240 mmol sugar/kg x 114.1 ug/umol'}
+  - {pot: desclaux2006_xyl_gly_ph6_100c, ledger_id: desclaux2006_fig2_xylose_glycine_100c, species: NF, t_min: 120, value: 748130.0, unit: ug_kg, read_error: 0.005, read_error_basis: '+-0.3 umol per mmol initial sugar, 300 dpi 1-bit scan, marker bbox centre', method: semi_quantitative, method_basis: 'the paper names GC / GC-MS after solvent extraction (dicarbonyls as 1,2-diaminobenzene quinoxalines, deoxyosones as quinoxalines silylated with BSTFA, heterocycles directly; ref. Hofmann 1999) but states no standard, calibration or response factor; the ledger class is ''unknown'', so semi_quantitative is named', printed: '27.32 umol per mmol initial sugar (Fig. 2, digitised); x 240 mmol sugar/kg x 114.1 ug/umol'}
+  - {pot: desclaux2006_xyl_gly_ph6_100c, ledger_id: desclaux2006_fig2_xylose_glycine_100c, species: TDP, t_min: 30, value: 124620.0, unit: ug_kg, read_error: 0.011, read_error_basis: '+-0.1 umol per mmol initial sugar, 300 dpi 1-bit scan, marker bbox centre', method: semi_quantitative, method_basis: 'the paper names GC / GC-MS after solvent extraction (dicarbonyls as 1,2-diaminobenzene quinoxalines, deoxyosones as quinoxalines silylated with BSTFA, heterocycles directly; ref. Hofmann 1999) but states no standard, calibration or response factor; the ledger class is ''unknown'', so semi_quantitative is named', printed: '3.93 umol per mmol initial sugar (Fig. 2, digitised); x 240 mmol sugar/kg x 132.12 ug/umol'}
+  - {pot: desclaux2006_xyl_gly_ph6_100c, ledger_id: desclaux2006_fig2_xylose_glycine_100c, species: TDP, t_min: 60, value: 91640.0, unit: ug_kg, read_error: 0.015, read_error_basis: '+-0.1 umol per mmol initial sugar, 300 dpi 1-bit scan, marker bbox centre', method: semi_quantitative, method_basis: 'the paper names GC / GC-MS after solvent extraction (dicarbonyls as 1,2-diaminobenzene quinoxalines, deoxyosones as quinoxalines silylated with BSTFA, heterocycles directly; ref. Hofmann 1999) but states no standard, calibration or response factor; the ledger class is ''unknown'', so semi_quantitative is named', printed: '2.89 umol per mmol initial sugar (Fig. 2, digitised); x 240 mmol sugar/kg x 132.12 ug/umol'}
+  - {pot: desclaux2006_xyl_gly_ph6_100c, ledger_id: desclaux2006_fig2_xylose_glycine_100c, species: TDP, t_min: 90, value: 52320.0, unit: ug_kg, read_error: 0.026, read_error_basis: '+-0.1 umol per mmol initial sugar, 300 dpi 1-bit scan, marker bbox centre', method: semi_quantitative, method_basis: 'the paper names GC / GC-MS after solvent extraction (dicarbonyls as 1,2-diaminobenzene quinoxalines, deoxyosones as quinoxalines silylated with BSTFA, heterocycles directly; ref. Hofmann 1999) but states no standard, calibration or response factor; the ledger class is ''unknown'', so semi_quantitative is named', printed: '1.65 umol per mmol initial sugar (Fig. 2, digitised); x 240 mmol sugar/kg x 132.12 ug/umol'}
+  - {pot: desclaux2006_xyl_gly_ph6_100c, ledger_id: desclaux2006_fig2_xylose_glycine_100c, species: TDP, t_min: 120, value: 41540.0, unit: ug_kg, read_error: 0.033, read_error_basis: '+-0.1 umol per mmol initial sugar, 300 dpi 1-bit scan, marker bbox centre', method: semi_quantitative, method_basis: 'the paper names GC / GC-MS after solvent extraction (dicarbonyls as 1,2-diaminobenzene quinoxalines, deoxyosones as quinoxalines silylated with BSTFA, heterocycles directly; ref. Hofmann 1999) but states no standard, calibration or response factor; the ledger class is ''unknown'', so semi_quantitative is named', printed: '1.31 umol per mmol initial sugar (Fig. 2, digitised); x 240 mmol sugar/kg x 132.12 ug/umol'}
+  - {pot: zhou2022_axarp_120C_volatiles, ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse, species: FUR, t_min: 30, value: 442.78, unit: ug_L, sd: 27.7, source: Table 1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_volatiles, ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse, species: FUR, t_min: 60, value: 828.66, unit: ug_L, sd: 91.83, source: Table 1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_volatiles, ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse, species: FUR, t_min: 90, value: 1046.54, unit: ug_L, sd: 85.39, source: Table 1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_volatiles, ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse, species: FUR, t_min: 120, value: 1261.12, unit: ug_L, sd: 118.93, source: Table 1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_volatiles, ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse, species: FUR, t_min: 30, value: 252.49, unit: ug_L, sd: 18.08, source: Table 1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_volatiles, ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse, species: FUR, t_min: 60, value: 434.91, unit: ug_L, sd: 13.71, source: Table 1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_volatiles, ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse, species: FUR, t_min: 90, value: 524.77, unit: ug_L, sd: 38.71, source: Table 1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_volatiles, ledger_id: zhou2022_table1_arp_cys_volatiles_timecourse, species: FUR, t_min: 120, value: 510.92, unit: ug_L, sd: 36.03, source: Table 1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: TDP, t_min: 30, value: 4.31, unit: mmol_L, read_error: 0.005, source: Fig. 1c, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: TDP, t_min: 60, value: 6.07, unit: mmol_L, sd: 0.435, read_error: 0.003, source: Fig. 1c, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: TDP, t_min: 90, value: 5.9, unit: mmol_L, sd: 0.447, read_error: 0.004, source: Fig. 1c, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: TDP, t_min: 120, value: 5.77, unit: mmol_L, sd: 0.713, read_error: 0.004, source: Fig. 1c, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: TDP, t_min: 30, value: 1.66, unit: mmol_L, read_error: 0.013, source: Fig. 1c, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: TDP, t_min: 60, value: 1.19, unit: mmol_L, read_error: 0.018, source: Fig. 1c, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: TDP, t_min: 90, value: 0.77, unit: mmol_L, read_error: 0.027, source: Fig. 1c, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: TDP, t_min: 120, value: 0.7, unit: mmol_L, read_error: 0.03, source: Fig. 1c, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: DPO, t_min: 30, value: 0.824, unit: mmol_L, sd: 0.048, read_error: 0.003, source: Fig. 1d, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: DPO, t_min: 60, value: 0.605, unit: mmol_L, sd: 0.044, read_error: 0.004, source: Fig. 1d, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: DPO, t_min: 90, value: 0.326, unit: mmol_L, read_error: 0.008, source: Fig. 1d, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: DPO, t_min: 120, value: 0.26, unit: mmol_L, read_error: 0.01, source: Fig. 1d, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: DPO, t_min: 30, value: 0.236, unit: mmol_L, read_error: 0.011, source: Fig. 1d, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: DPO, t_min: 60, value: 0.181, unit: mmol_L, read_error: 0.014, source: Fig. 1d, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: DPO, t_min: 90, value: 0.121, unit: mmol_L, sd: 0.027, read_error: 0.022, source: Fig. 1d, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C_dx, ledger_id: zhou2022_fig1cd_deoxypentosones_arp_cys, species: DPO, t_min: 120, value: 0.086, unit: mmol_L, read_error: 0.03, source: Fig. 1d, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: GO, t_min: 30, value: 0.47, unit: mmol_L, sd: 0.084, read_error: 0.011, source: Fig. 1e, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: GO, t_min: 60, value: 0.747, unit: mmol_L, read_error: 0.007, source: Fig. 1e, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: GO, t_min: 90, value: 0.831, unit: mmol_L, read_error: 0.006, source: Fig. 1e, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: GO, t_min: 120, value: 1.115, unit: mmol_L, sd: 0.193, read_error: 0.005, source: Fig. 1e, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: GO, t_min: 30, value: 0.252, unit: mmol_L, sd: 0.063, read_error: 0.021, source: Fig. 1e, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: GO, t_min: 60, value: 0.337, unit: mmol_L, sd: 0.136, read_error: 0.015, source: Fig. 1e, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: GO, t_min: 90, value: 0.291, unit: mmol_L, read_error: 0.018, source: Fig. 1e, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: GO, t_min: 120, value: 0.351, unit: mmol_L, read_error: 0.015, source: Fig. 1e, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: MGO, t_min: 30, value: 0.095, unit: mmol_L, sd: 0.035, read_error: 0.014, source: Fig. 1f, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: MGO, t_min: 60, value: 0.14, unit: mmol_L, sd: 0.02, read_error: 0.009, source: Fig. 1f, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: MGO, t_min: 90, value: 0.182, unit: mmol_L, read_error: 0.007, source: Fig. 1f, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: MGO, t_min: 120, value: 0.273, unit: mmol_L, read_error: 0.005, source: Fig. 1f, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: MGO, t_min: 30, value: 0.012, unit: mmol_L, read_error: 0.109, source: Fig. 1f, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: MGO, t_min: 60, value: 0.018, unit: mmol_L, read_error: 0.072, source: Fig. 1f, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: MGO, t_min: 90, value: 0.023, unit: mmol_L, read_error: 0.057, source: Fig. 1f, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2022_axarp_cys_120C, ledger_id: zhou2022_fig1_arp_cys_ala_dicarbonyls, species: MGO, t_min: 120, value: 0.036, unit: mmol_L, read_error: 0.036, source: Fig. 1f, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 140, value: 0.3896, unit: mmol_L, sd: 0.0291, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 160, value: 0.2803, unit: mmol_L, sd: 0.027, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 180, value: 0.1896, unit: mmol_L, sd: 0.019, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 20, value: 0.087, unit: mmol_L, sd: 0.0171, read_error: 0.006, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 40, value: 0.1048, unit: mmol_L, sd: 0.0248, read_error: 0.005, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 60, value: 0.1791, unit: mmol_L, sd: 0.019, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 80, value: 0.2128, unit: mmol_L, sd: 0.0231, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 100, value: 0.2278, unit: mmol_L, sd: 0.0282, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 120, value: 0.3183, unit: mmol_L, sd: 0.0321, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 140, value: 0.3289, unit: mmol_L, sd: 0.0289, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 160, value: 0.2509, unit: mmol_L, sd: 0.0149, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 180, value: 0.0817, unit: mmol_L, sd: 0.0282, read_error: 0.006, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 20, value: 0.2099, unit: mmol_L, sd: 0.012, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 40, value: 0.3198, unit: mmol_L, sd: 0.0231, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 60, value: 0.4701, unit: mmol_L, sd: 0.0258, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 80, value: 0.6899, unit: mmol_L, sd: 0.019, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 100, value: 0.6899, unit: mmol_L, sd: 0.0263, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 120, value: 0.5901, unit: mmol_L, sd: 0.0253, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 140, value: 0.4277, unit: mmol_L, sd: 0.0282, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 160, value: 0.3448, unit: mmol_L, sd: 0.0159, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 180, value: 0.287, unit: mmol_L, sd: 0.0178, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 80, value: 0.1516, unit: mmol_L, sd: 0.0178, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 100, value: 0.1781, unit: mmol_L, sd: 0.0171, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 120, value: 0.168, unit: mmol_L, sd: 0.019, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 140, value: 0.1723, unit: mmol_L, sd: 0.0171, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 160, value: 0.1101, unit: mmol_L, sd: 0.0209, read_error: 0.005, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 180, value: 0.0239, unit: mmol_L, sd: 0.0231, read_error: 0.022, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 20, value: 0.3198, unit: mmol_L, sd: 0.0231, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 40, value: 0.4899, unit: mmol_L, sd: 0.0282, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 60, value: 0.7, unit: mmol_L, sd: 0.0171, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 80, value: 0.8099, unit: mmol_L, sd: 0.0282, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 100, value: 0.7901, unit: mmol_L, sd: 0.019, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 140, value: 0.2099, unit: mmol_L, sd: 0.019, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 160, value: 0.1101, unit: mmol_L, sd: 0.0209, read_error: 0.005, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 60, value: 0.129, unit: mmol_L, sd: 0.0292, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 80, value: 0.1969, unit: mmol_L, sd: 0.0191, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 100, value: 0.2967, unit: mmol_L, sd: 0.027, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 120, value: 0.2191, unit: mmol_L, sd: 0.0169, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: TDP, t_min: 140, value: 0.0731, unit: mmol_L, sd: 0.0231, read_error: 0.007, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 140, value: 0.042, unit: mmol_L, sd: 0.0022, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 160, value: 0.0271, unit: mmol_L, sd: 0.0021, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 180, value: 0.012, unit: mmol_L, sd: 0.0019, read_error: 0.007, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 20, value: 0.011, unit: mmol_L, sd: 0.0011, read_error: 0.008, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 40, value: 0.019, unit: mmol_L, sd: 0.0018, read_error: 0.005, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 60, value: 0.0241, unit: mmol_L, sd: 0.0021, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 80, value: 0.039, unit: mmol_L, sd: 0.0023, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 100, value: 0.042, unit: mmol_L, sd: 0.0024, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 120, value: 0.049, unit: mmol_L, sd: 0.0018, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 140, value: 0.0311, unit: mmol_L, sd: 0.0023, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 160, value: 0.011, unit: mmol_L, sd: 0.0019, read_error: 0.008, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 20, value: 0.032, unit: mmol_L, sd: 0.0022, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 40, value: 0.0561, unit: mmol_L, sd: 0.0025, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 60, value: 0.052, unit: mmol_L, sd: 0.0016, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 80, value: 0.049, unit: mmol_L, sd: 0.0019, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 100, value: 0.053, unit: mmol_L, sd: 0.0015, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 120, value: 0.049, unit: mmol_L, sd: 0.0018, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 140, value: 0.012, unit: mmol_L, sd: 0.0025, read_error: 0.007, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 100, value: 0.0141, unit: mmol_L, sd: 0.0011, read_error: 0.006, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 120, value: 0.021, unit: mmol_L, sd: 0.0012, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 140, value: 0.0091, unit: mmol_L, sd: 0.0011, read_error: 0.01, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 20, value: 0.0411, unit: mmol_L, sd: 0.0014, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 40, value: 0.0721, unit: mmol_L, sd: 0.0027, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 60, value: 0.0891, unit: mmol_L, sd: 0.0018, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 80, value: 0.1121, unit: mmol_L, sd: 0.0012, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 100, value: 0.0991, unit: mmol_L, sd: 0.0019, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 120, value: 0.052, unit: mmol_L, sd: 0.0025, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 140, value: 0.021, unit: mmol_L, sd: 0.0012, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 80, value: 0.022, unit: mmol_L, sd: 0.0021, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 100, value: 0.0141, unit: mmol_L, sd: 0.0011, read_error: 0.006, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C_dx, ledger_id: zhai2023jafc_fig5bc_deoxyosones, species: DPO, t_min: 120, value: 0.011, unit: mmol_L, sd: 0.0018, read_error: 0.008, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 140, value: 0.0234, unit: mmol_L, sd: 0.0019, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 160, value: 0.0221, unit: mmol_L, sd: 0.002, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 180, value: 0.0193, unit: mmol_L, sd: 0.0019, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 20, value: 0.0108, unit: mmol_L, sd: 0.0018, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 40, value: 0.0132, unit: mmol_L, sd: 0.0013, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 60, value: 0.0179, unit: mmol_L, sd: 0.0029, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 80, value: 0.021, unit: mmol_L, sd: 0.0021, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 100, value: 0.0197, unit: mmol_L, sd: 0.0008, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 120, value: 0.021, unit: mmol_L, sd: 0.0018, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 140, value: 0.0197, unit: mmol_L, sd: 0.0021, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 160, value: 0.0172, unit: mmol_L, sd: 0.0023, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_100C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 180, value: 0.0096, unit: mmol_L, sd: 0.0019, read_error: 0.005, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 20, value: 0.0318, unit: mmol_L, sd: 0.0021, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 40, value: 0.0427, unit: mmol_L, sd: 0.0027, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 60, value: 0.0532, unit: mmol_L, sd: 0.0015, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 80, value: 0.0573, unit: mmol_L, sd: 0.0019, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 100, value: 0.0528, unit: mmol_L, sd: 0.0011, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 120, value: 0.0479, unit: mmol_L, sd: 0.0027, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 140, value: 0.0492, unit: mmol_L, sd: 0.0024, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 160, value: 0.0319, unit: mmol_L, sd: 0.0019, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 180, value: 0.0121, unit: mmol_L, sd: 0.0021, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 80, value: 0.0112, unit: mmol_L, sd: 0.0019, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 100, value: 0.0123, unit: mmol_L, sd: 0.0013, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 120, value: 0.011, unit: mmol_L, sd: 0.0019, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 140, value: 0.0128, unit: mmol_L, sd: 0.0024, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 160, value: 0.0048, unit: mmol_L, sd: 0.0018, read_error: 0.009, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_120C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 180, value: 0.0012, unit: mmol_L, sd: 0.002, read_error: 0.036, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 20, value: 0.0398, unit: mmol_L, sd: 0.0011, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 40, value: 0.0537, unit: mmol_L, sd: 0.0025, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 60, value: 0.0717, unit: mmol_L, sd: 0.0027, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 80, value: 0.0699, unit: mmol_L, sd: 0.0026, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 100, value: 0.0682, unit: mmol_L, sd: 0.0019, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 120, value: 0.0599, unit: mmol_L, sd: 0.0019, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 140, value: 0.0324, unit: mmol_L, sd: 0.0023, read_error: 0.001, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 160, value: 0.0112, unit: mmol_L, sd: 0.0012, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 80, value: 0.0178, unit: mmol_L, sd: 0.0019, read_error: 0.002, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 100, value: 0.0156, unit: mmol_L, sd: 0.0015, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 120, value: 0.0134, unit: mmol_L, sd: 0.0019, read_error: 0.003, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 140, value: 0.0097, unit: mmol_L, sd: 0.0027, read_error: 0.004, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhai2023jafc_ttca_cys_140C, ledger_id: zhai2023jafc_fig5_arp_dicarbonyls, species: MGO, t_min: 160, value: 0.0043, unit: mmol_L, sd: 0.0021, read_error: 0.01, source: Fig. 5, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: TDP, t_min: 30, value: 3.671, unit: mmol_L, sd: 0.4465, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: TDP, t_min: 60, value: 4.67, unit: mmol_L, sd: 0.1346, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: TDP, t_min: 90, value: 4.961, unit: mmol_L, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: TDP, t_min: 120, value: 5.294, unit: mmol_L, sd: 0.5102, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: TDP, t_min: 30, value: 2.573, unit: mmol_L, sd: 0.2197, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: TDP, t_min: 60, value: 3.423, unit: mmol_L, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: TDP, t_min: 90, value: 3.6, unit: mmol_L, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: TDP, t_min: 120, value: 3.721, unit: mmol_L, sd: 0.3897, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: DPO, t_min: 30, value: 3.054, unit: mmol_L, sd: 0.3614, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: DPO, t_min: 60, value: 2.891, unit: mmol_L, sd: 0.3541, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: DPO, t_min: 90, value: 2.75, unit: mmol_L, sd: 0.2055, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: DPO, t_min: 120, value: 2.14, unit: mmol_L, sd: 0.4535, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: DPO, t_min: 30, value: 2.36, unit: mmol_L, sd: 0.1417, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: DPO, t_min: 60, value: 2.247, unit: mmol_L, sd: 0.1276, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: DPO, t_min: 90, value: 2.098, unit: mmol_L, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C_dx, ledger_id: zhou2024_fig3cd_deoxyxylosones_arp_ala, species: DPO, t_min: 120, value: 1.184, unit: mmol_L, sd: 0.1558, read_error: 0.004, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: GO, t_min: 30, value: 1.011, unit: mmol_L, read_error: 0.005, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: GO, t_min: 60, value: 2.532, unit: mmol_L, sd: 0.1416, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: GO, t_min: 90, value: 3.897, unit: mmol_L, sd: 0.1698, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: GO, t_min: 120, value: 4.859, unit: mmol_L, sd: 0.2688, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: GO, t_min: 30, value: 1.775, unit: mmol_L, read_error: 0.003, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: GO, t_min: 60, value: 1.337, unit: mmol_L, sd: 0.1696, read_error: 0.004, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: GO, t_min: 90, value: 1.365, unit: mmol_L, sd: 0.3608, read_error: 0.003, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: GO, t_min: 120, value: 0.849, unit: mmol_L, sd: 0.1628, read_error: 0.006, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: MGO, t_min: 30, value: 0.469, unit: mmol_L, read_error: 0.003, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: MGO, t_min: 60, value: 0.946, unit: mmol_L, sd: 0.0868, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: MGO, t_min: 90, value: 1.088, unit: mmol_L, sd: 0.1559, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: MGO, t_min: 120, value: 1.047, unit: mmol_L, sd: 0.0691, read_error: 0.001, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: MGO, t_min: 30, value: 0.648, unit: mmol_L, sd: 0.0655, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: MGO, t_min: 60, value: 0.712, unit: mmol_L, sd: 0.0407, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: MGO, t_min: 90, value: 0.787, unit: mmol_L, sd: 0.0407, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2024_axarp_ala_ph8_120C, ledger_id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph, species: MGO, t_min: 120, value: 0.806, unit: mmol_L, sd: 0.0638, read_error: 0.002, source: Fig. 3, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: wang2026b_xyl_cys_ph55_120C, ledger_id: wang2026b_tables1_22_volatiles, species: FUR, t_min: 60, value: 255.22, unit: ug_L, sd: 5.35, source: SI Table S1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: wang2026b_xyl_cys_ph55_120C, ledger_id: wang2026b_tables1_22_volatiles, species: FUR, t_min: 90, value: 391.5, unit: ug_L, sd: 27.6, source: SI Table S1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: wang2026b_xyl_cys_ph55_120C, ledger_id: wang2026b_tables1_22_volatiles, species: FUR, t_min: 120, value: 413.05, unit: ug_L, sd: 6.92, source: SI Table S1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: wang2026b_xyl_cys_ph55_120C, ledger_id: wang2026b_tables1_22_volatiles, species: FUR, t_min: 150, value: 423.35, unit: ug_L, sd: 19.61, source: SI Table S1, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C_dx, ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh, species: TDP, t_min: 30, value: 0.638, unit: mmol_L, read_error: 0.009, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C_dx, ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh, species: TDP, t_min: 60, value: 0.915, unit: mmol_L, read_error: 0.006, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C_dx, ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh, species: TDP, t_min: 90, value: 1.062, unit: mmol_L, read_error: 0.005, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C_dx, ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh, species: TDP, t_min: 120, value: 1.135, unit: mmol_L, read_error: 0.005, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C_dx, ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh, species: DPO, t_min: 30, value: 0.43, unit: mmol_L, read_error: 0.007, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C_dx, ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh, species: DPO, t_min: 60, value: 0.305, unit: mmol_L, read_error: 0.01, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C_dx, ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh, species: DPO, t_min: 90, value: 0.229, unit: mmol_L, read_error: 0.013, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C_dx, ledger_id: zhou2023c_fig4ab_deoxypentosones_arp_gsh, species: DPO, t_min: 120, value: 0.185, unit: mmol_L, read_error: 0.016, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C, ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh, species: GO, t_min: 30, value: 0.699, unit: mmol_L, read_error: 0.011, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C, ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh, species: GO, t_min: 60, value: 1.066, unit: mmol_L, read_error: 0.007, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C, ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh, species: GO, t_min: 90, value: 1.311, unit: mmol_L, read_error: 0.006, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C, ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh, species: GO, t_min: 120, value: 1.402, unit: mmol_L, read_error: 0.005, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C, ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh, species: MGO, t_min: 30, value: 0.0666, unit: mmol_L, read_error: 0.011, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C, ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh, species: MGO, t_min: 60, value: 0.0829, unit: mmol_L, read_error: 0.009, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C, ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh, species: MGO, t_min: 90, value: 0.1009, unit: mmol_L, read_error: 0.007, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}
+  - {pot: zhou2023c_axarp_ph75_120C, ledger_id: zhou2023c_fig4_dicarbonyls_arp_gsh, species: MGO, t_min: 120, value: 0.1113, unit: mmol_L, read_error: 0.007, source: Fig. 4, checked_by: agent-sm3-adjudicator-2026-10-29}

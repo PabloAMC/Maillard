@@ -41,7 +41,7 @@ What the literature cannot give, ranked by the flux it decides:
 | ribose | HPAEC-PAD | trunk timescale |
 | TTCA, Cys-Amadori compound | LC-MS/MS with synthesised standards (Cao 2017; Zhai 2019 routes) | the de Roos route |
 | norfuraneol, furfural | HPLC-DAD (280 nm) or LC-MS | the MFT and FFT precursors |
-| H2S | headspace, ³⁴S-sulfide SIDA (Li, Schieberle & Steinhaus 2016) or methylene blue | sulfur supply |
+| H2S | ³⁴S-sulfide SIDA after in-vial derivatisation (Li, Schieberle & Steinhaus 2017, Eur Food Res Technol 243:69; NOT headspace: cool the sealed vial, add the ³⁴S standard and 3-buten-2-one through the septum before opening, ~30 % of H2S sits in the headspace at pH 5; 1-10 mL aliquots cover ~0.01-0.9 mmol/L; validated at pH 7.4 only; one day per batch; `li2016b_extraction.md`) or methylene blue | sulfur supply |
 | MFT, FFT, bis(2-methyl-3-furyl) disulfide | SIDA GC-MS with labelled standards | the observables, quantified |
 | pH | after cooling, at 25 °C | the pH trajectory |
 
@@ -63,6 +63,16 @@ phosphate**, and in a **non-carboxylate, non-phosphate buffer at equal pH** (a G
 its own reactivity checked in a sugar-free blank). Analytes as the core, TTCA and Cys-Amadori first. 4 media × 2
 pH × 7 times × 2 ≈ 110 vials; if the budget is tight, pH 6 only (~55 vials). It also gives the pH trajectory of an
 unbuffered pot, which no paper on disk reports.
+
+**Cells added by the conflict analyses (2026-10-29, `docs/reference/conflict_analyses/`):** each settles a recorded
+conflict the literature cannot.
+- **pH 4 cell** at 140 C in the core (norfuraneol and MFT vs pH; CF-012: the model's norfuraneol at pH 3 is 55x below
+  pH 5).
+- **Standards before vs after heating**, in sister vials at the centre point: labelled MFT / FFT added before heating
+  in one vial, after it in the other (CF-013, CF-015: the thiols' loss during heating, which bounds the sink).
+- **A 3:1 xylose : cysteine cell** at the centre point (CF-015: the recipe that favours FFT).
+- **Hofmann's exact pot in triplicate** (ribose 100 / cysteine 33 mmol/L, 0.5 M phosphate pH 5, 145 C ramp; CF-016:
+  furfural 13x apart between two papers on the same run).
 
 ## What we would do with it
 

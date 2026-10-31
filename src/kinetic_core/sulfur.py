@@ -900,6 +900,30 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     # the wave's switch is off.
     Reaction("r_nf_decay_oh", {"NF": 1}, {"FRAG_C": 5}, "k_nf_decay_oh",
              "B61. Norfuraneol -> fragments through its enolate, specific-base catalysed (Mikami 2017)."),
+    # Sub-model 3 (2026-10-30): three steps that are ZERO unless their constants are set (design review of the
+    # deoxyosone sub-model): the methylglyoxal share of B61's decay, and the two rival methylglyoxal routes.
+    Reaction("r_nf_decay_oh_mgo", {"NF": 1}, {"MGO": 1, "FRAG_C": 2}, "k_nf_decay_oh_mgo",
+             "Sub-model 3. The methylglyoxal share of B61's decay (Mikami 2017 Fig. 6B, >= 0.6 mol % as a transient; "
+             "NF_HYDROXIDE_DECAY.mgo_share)."),
+    Reaction("r_tdp_mgo", {"TDP": 1}, {"MGO": 1, "HA": 1}, "k_tdp_mgo",
+             "Sub-model 3 arm A3. 3-Deoxypentosone C3-C4 retro-aldol to methylglyoxal + glycolaldehyde, base-favoured "
+             "(PENTOSE_MGO_ROUTES; fitted)."),
+    Reaction("r_mgo_cys_strecker", {"MGO": 1, "Cys": 1}, {"CBX": 1, "FRAG_C": 5, "FRAG_N": 1, "FRAG_S": 1},
+             "k_mgo_cys_strecker",
+             "Joint fit (review B5). Methylglyoxal + cysteine Strecker: aminoacetone + mercaptoacetaldehyde + CO2; the "
+             "carboxyl CARRIED (CBX), the amine into the aminoketone (FRAG_N), the sulfur in the Strecker aldehyde "
+             "(FRAG_S). MGO_CYSTEINE_STRECKER; zero unless set."),
+    Reaction("r_mgo_cys_h2s", {"MGO": 1, "Cys": 1}, {"MGO": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "H2S": 1},
+             "k_mgo_cys_h2s",
+             "Joint fit (review B5). The same event's B59a fate: the aminoreductone reduces the mercaptoacetaldehyde to "
+             "H2S + acetaldehyde and returns as the dicarbonyl (Kobayasi & Fujimaki 1965); STRECKER_SULFUR.h2s_share "
+             "of the MGO Strecker constant. Zero unless set."),
+    Reaction("r_odg_dpo", {"ODG": 1}, {"DPO": 1, "FRAG_C": 1}, "k_odg_dpo",
+             "Sub-model 4. Hexose -> C5 entry: 1-deoxyglucosone -> 1-deoxypentosone + C1 (C-6 loss); labelling says "
+             "hexose MFT keeps an intact C5 (Du 2023, Zhao 2019b). HEXOSE_C5_ENTRY; zero unless set."),
+    Reaction("r_pent_mgo", {"PENT": 1}, {"MGO": 1, "HA": 1}, "k_pent_mgo",
+             "Sub-model 3 arm A4. Lumped amine-free pentose fragmentation to methylglyoxal + glycolaldehyde via the "
+             "ketose / triose route, base-favoured (PENTOSE_MGO_ROUTES; fitted)."),
     # B59b (2026-10-29): DE ROOS 2005's ROUTE. TTCA is a reservoir in fast equilibrium with the open Schiff base;
     # the Schiff base rearranges slowly to the cysteine Amadori compound, whose enolisation gives the
     # deoxyosones and RELEASES the cysteine. All three are DERIVED rates (CYS_AMADORI_ROUTE), zero when off.
@@ -911,6 +935,26 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
              "(de Roos 2005). Share of the measured decay: Zhai 2019's fed-TTCA 3-DX / 1-DX = 2.1-2.6."),
     Reaction("r_cama_tdp", {"CAMA": 1}, {"TDP": 1, "Cys": 1}, "k_cama_tdp",
              "B59b. The 1,2-enolisation to the 3-deoxyosone, the amino acid released (de Roos 2005)."),
+    # Pentose + amine entry (2026-10-30): zero unless PENTOSE_AMINE_ENTRY is set.
+    Reaction("r_pent_amine", {"PENT": 1, "Gly": 1}, {"PAMA": 1}, "k_pent_amine",
+             "Pentose + amine entry. Free pentose + a non-sulfur amino acid -> its Amadori compound (via the "
+             "glycosylamine, lumped). Fitted on Davidek 2008's xylose decay (pH 6 / 8); in-situ pH slope."),
+    Reaction("r_pama_dpo", {"PAMA": 1}, {"DPO": 1, "Gly": 1}, "k_pama_dpo",
+             "Pentose + amine entry. 2,3-enolisation to 1-deoxypentosone, the amino acid released; ARP's derived rate "
+             "(r_arp_dpo + r_arp_dpo_thermal), declared."),
+    Reaction("r_pama_tdp", {"PAMA": 1}, {"TDP": 1, "Gly": 1}, "k_pama_tdp",
+             "Pentose + amine entry. 1,2-enolisation to 3-deoxypentosone, the amino acid released; ARP's derived rate "
+             "(r_arp_tdp + r_arp_tdp_thermal), declared."),
+    Reaction("r_pama_dpo_n", {"PAMA": 1}, {"DPO": 1, "FRAG_C": 2, "FRAG_N": 1}, "k_pama_dpo_n",
+             "Pentose + amine entry. As r_pama_dpo, the amino acid NOT returned (left in a fragment): the "
+             "(1 - amine_return) share (design review S4)."),
+    Reaction("r_pama_tdp_n", {"PAMA": 1}, {"TDP": 1, "FRAG_C": 2, "FRAG_N": 1}, "k_pama_tdp_n",
+             "Pentose + amine entry. As r_pama_tdp, the amino acid not returned: the (1 - amine_return) share."),
+    Reaction("r_dpo_aa", {"DPO": 1}, {"AA": 1, "FRAG_C": 3}, "k_dpo_aa",
+             "Pentose acetic acid. Hydrolytic beta-cleavage of 1-deoxypento-2,4-diulose (the 1-deoxypentosone "
+             "tautomer), HO- at C-2: acetic acid (C-1/C-2, 77-89 % of the label; Davidek 2008) + a triose C3H6O3 "
+             "(glyceraldehyde / dihydroxyacetone; acetol is the partner of the C-4 attack's glycolic acid, not of "
+             "this one). Base-favoured; fitted with an in-situ pH slope."),
 )
 
 def inactive_reactions() -> frozenset:
@@ -928,6 +972,22 @@ def inactive_reactions() -> frozenset:
         off.update({"r_pent_dpo", "r_pent_tdp"})
     if not _ps.NF_HYDROXIDE_DECAY.enabled:
         off.add("r_nf_decay_oh")
+    if not (_ps.NF_HYDROXIDE_DECAY.enabled and _ps.NF_HYDROXIDE_DECAY.mgo_share > 0.0):
+        off.add("r_nf_decay_oh_mgo")
+    if _ps.PENTOSE_MGO_ROUTES.k_tdp_mgo_100c_ph5 <= 0.0:
+        off.add("r_tdp_mgo")
+    if _ps.PENTOSE_MGO_ROUTES.k_pent_mgo_100c_ph5 <= 0.0:
+        off.add("r_pent_mgo")
+    if _ps.MGO_CYSTEINE_STRECKER.k_l_per_mmol_min_100c_ph5 <= 0.0:
+        off.update({"r_mgo_cys_strecker", "r_mgo_cys_h2s"})
+    if _ps.HEXOSE_C5_ENTRY.k_per_min_100c <= 0.0:
+        off.add("r_odg_dpo")
+    if not _ps.PENTOSE_AMINE_ENTRY.enabled:
+        off.update({"r_pent_amine", "r_pama_dpo", "r_pama_tdp", "r_pama_dpo_n", "r_pama_tdp_n"})
+    elif _ps.PENTOSE_AMINE_ENTRY.amine_return >= 1.0:
+        off.update({"r_pama_dpo_n", "r_pama_tdp_n"})
+    if _ps.PENTOSE_AMINE_ENTRY.k_dpo_aa_per_min_100c_ph6 <= 0.0:
+        off.add("r_dpo_aa")
     return frozenset(off)
 
 
@@ -1018,6 +1078,12 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
         "released and is exactly the nitrogen the shared basis is about -- "
         "released, then consumed by the Maillard chemistry this step is part "
         "of. " + AMINE_FATE_BASIS)},
+    "r_mgo_cys_strecker": {"amine": -1, "basis": (
+        "methylglyoxal Strecker of cysteine (joint fit, review B5): the amine leaves in aminoacetone, the carboxyl as "
+        "CO2 (CARRIED). " + AMINE_FATE_BASIS)},
+    "r_mgo_cys_h2s": {"amine": -1, "basis": (
+        "as r_mgo_cys_strecker, the B59a fate: H2S + acetaldehyde, the dicarbonyl returned; the amine leaves as NH3. "
+        "Carboxyl CARRIED. " + AMINE_FATE_BASIS)},
     "r_dpo_ddp_h2s": {"amine": -1, "basis": (
         "as r_dpo_ddp (B59a, revised): the Strecker event whose aminoreductone reduces the mercaptoacetaldehyde to "
         "H2S and returns as the deoxyosone; the amine leaves as NH3 either way. Carboxyl CARRIED. "
@@ -1031,6 +1097,9 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
         "as r_arp_dpo, uncatalysed. " + AMINE_FATE_BASIS)},
     "r_arp_tdp_thermal": {"amine": -1, "basis": (
         "as r_arp_tdp, uncatalysed. " + AMINE_FATE_BASIS)},
+    "r_dpo_aa": {"carboxyl": +1, "basis": (
+        "Pentose acetic acid (2026-10-30): 1-deoxypentosone -> ACETIC ACID + hydroxyacetone, a neutral dicarbonyl "
+        "giving one neutral acid (Davidek 2008, isotope dilution); as the trunk's r_odg_aa.")},
     "r_ttca_deg": {"amine": -1, "basis": (
         "TTCA's thiazolidine ring opens and its nitrogen leaves with the C2S1 "
         "residue. Carboxyl CARRIED (CBX, at FULL strength -- B2.2 put it in "
@@ -1188,6 +1257,30 @@ SULFUR_STOICHIOMETRY: np.ndarray = sulfur_stoichiometric_matrix()
 # ---------------------------------------------------------------------------
 
 
+#: Sub-model 1 (2026-10-29), pre-registered with the switch OFF: the trunk's MEASURED pH terms (Martins & van Boekel
+#: 2003 Part II Table 3, ``trunk_conditions``: the three Amadori-decay steps and the 3-DG -> formic acid exit) applied
+#: inside the sulfur lane at the pH the lane computes (in situ: Amendment 1, see the evaluation). The trunk lane
+#: applies them at the declared pH; the sulfur lane, the one lane whose pH moves, never did -- so its acid supply was
+#: the same at pH 5 and pH 8 (Davidek 2002's pH-stat measures 3 vs 79 mmol/L). The no-refit probe that found it:
+#: results/validation/kinetic_core_ph_acid_submodel_probe*.md. The evidence audit decides whether it ships.
+TRUNK_PH_TERMS: bool = False
+#: Slopes (decades per pH unit) that replace the measured ones, by parameter key: set by a fit at run time (sub-model
+#: 1, scripts/generators/fit_ph_acid_submodel.py), empty otherwise.
+TRUNK_PH_EXPONENT_OVERRIDE: Dict[str, float] = {}
+
+
+def _trunk_ph_exponents() -> Dict[str, float]:
+    from . import trunk_conditions as _tc
+
+    out = {key: float(_tc.PH_EXPONENT_DECADES_PER_UNIT) for key in _tc.PH_STEPS}
+    if _tc.THREE_DEOXY_EXIT_PH_TERM:
+        out.update({key: float(exponent) for key, (exponent, _band, _source) in _tc.THREE_DEOXY_EXIT_PH.items()})
+    # a fit's trial slopes; a key the measured table does not slope (sub-model 1 arm C: the condensation and the
+    # amine-free glucose steps) gains one only through this override
+    out.update({key: float(v) for key, v in TRUNK_PH_EXPONENT_OVERRIDE.items()})
+    return out
+
+
 def sulfur_rate_constants_at(
     parameters: Mapping[str, Any],
     temperature_k: float,
@@ -1214,6 +1307,7 @@ def sulfur_rate_constants_at(
     # B51: the MEASURED pH-indexed tables were measured on 25 C labels; under B51 they read the
     # cooled pH of the state (``ph_label``), every speciation factor reads the in-situ pH.
     ph_table = float(ph_label) if (ph_label is not None and _ph.B51.label_scale_tables) else ph
+    trunk_ph = _trunk_ph_exponents() if TRUNK_PH_TERMS else {}
     for reaction in FULL_REACTIONS:
         key = reaction.parameter_key
         if key is None:
@@ -1228,8 +1322,11 @@ def sulfur_rate_constants_at(
             continue  # B50: derived below from the two thiamine steps
         if key == "k_ttca_form":
             continue  # B58: derived below from r_ttca_cys by detailed balance
-        if key == "k_nf_decay_oh":
-            continue  # B61: a measured constant, below
+        if key in ("k_pent_amine", "k_pama_dpo", "k_pama_tdp", "k_pama_dpo_n", "k_pama_tdp_n", "k_dpo_aa"):
+            continue  # the pentose + amine entry: derived below
+        if key in ("k_nf_decay_oh", "k_nf_decay_oh_mgo", "k_tdp_mgo", "k_pent_mgo", "k_mgo_cys_strecker",
+                   "k_mgo_cys_h2s", "k_odg_dpo"):
+            continue  # B61 and sub-model 3: derived below
         if key == "k_dpo_ddp_h2s":
             continue  # B59a: a measured share of r_dpo_ddp, below
         if key in ("k_cama_form", "k_cama_dpo", "k_cama_tdp"):
@@ -1268,6 +1365,13 @@ def sulfur_rate_constants_at(
         value *= ph_factor(
             REACTION_PH_FACTOR.get(reaction.key, ""), ph, float(temperature_k), ionic_strength_m
         )
+        if key in trunk_ph:
+            from .trunk_conditions import REFERENCE_PH as _TRUNK_REFERENCE_PH
+
+            # Amendment 1 (2026-10-30): on the IN-SITU pH. Martins' slopes were measured in 0.1 M phosphate, whose
+            # label sits within ~0.1-0.3 of the in-situ pH, so they are in-situ slopes; reading them on the label
+            # scale imports a system's own thermal shift (Davidek's DFG-water pH-stat: ~1 unit) they never contained.
+            value *= 10.0 ** (trunk_ph[key] * (ph - _TRUNK_REFERENCE_PH))
         out[reaction.key] = value
 
     # DERIVED RATE 1: the reverse of the thioether conjugation. Stack 2018
@@ -1300,12 +1404,27 @@ def sulfur_rate_constants_at(
         out["r_ttca_form"] = float(_ttca.k_l_per_mmol) * out["r_ttca_cys"]
         out["r_cama_form"] = _route.k_form(float(temperature_k))
         _decay = _route.k_decay(float(temperature_k), float(ph))
-        out["r_cama_dpo"] = _route.dpo_share * _decay
-        out["r_cama_tdp"] = (1.0 - _route.dpo_share) * _decay
+        _dpo_share = _route.dpo_share_at(float(ph))   # B7a R-S: the in-situ pH, as the decay; dpo_share at slope 0
+        out["r_cama_dpo"] = _dpo_share * _decay
+        out["r_cama_tdp"] = (1.0 - _dpo_share) * _decay
         out["r_pent_dpo"] = 0.0
         out["r_pent_tdp"] = 0.0
     else:
         out["r_cama_form"] = out["r_cama_dpo"] = out["r_cama_tdp"] = 0.0
+
+    # B7a R-T (2026-10-31): 3-deoxypentosone's own decay at a measured hexose 3-DG -> formic acid constant (the
+    # trunk's k_tdg_fa by default; a declared hexose -> pentose transfer), replacing the shared k_osone_decay for TDP
+    # only; untouched while the switch is off.
+    _tdp_exit = _ps.TDP_OWN_DECAY
+    if _tdp_exit.enabled:
+        out["r_osone_decay_tdp"] = _tdp_exit.k_at(float(temperature_k))
+
+    # Round 3 (2026-10-30): the DDP-forming step's pH law, when a rival to the shipped "base" factor is set
+    _law = _ps.DDP_FORMATION_PH
+    if _law.law != "base":
+        _b = ph_factor("base", ph, float(temperature_k), ionic_strength_m)
+        _alt = 1.0 if _law.law == "none" else 10.0 ** (float(_law.slope) * (float(ph) - 5.0))
+        out["r_dpo_ddp"] = out["r_dpo_ddp"] / _b * _alt if _b > 0.0 else 0.0
 
     # DERIVED RATE 0d (B59a): the Strecker sulfur released as H2S, a share of the Strecker step (Kobayasi 1965).
     _strecker = _ps.STRECKER_SULFUR
@@ -1321,6 +1440,38 @@ def sulfur_rate_constants_at(
         _nf_oh.k_ph5(float(temperature_k)) * ph_factor("hydroxide", ph, float(temperature_k), ionic_strength_m)
         if _nf_oh.enabled else 0.0
     )
+    # Sub-model 3: the methylglyoxal share of that decay (zero unless NF_HYDROXIDE_DECAY.mgo_share is set)
+    _share = float(getattr(_nf_oh, "mgo_share", 0.0))
+    out["r_nf_decay_oh_mgo"] = _share * out["r_nf_decay_oh"]
+    out["r_nf_decay_oh"] = (1.0 - _share) * out["r_nf_decay_oh"]
+    # Sub-model 3's rival methylglyoxal routes (zero unless PENTOSE_MGO_ROUTES' constants are set)
+    _mgo = _ps.PENTOSE_MGO_ROUTES
+    _base = ph_factor("base", ph, float(temperature_k), ionic_strength_m)
+    out["r_tdp_mgo"] = _mgo.k_at(_mgo.k_tdp_mgo_100c_ph5, _mgo.ea_tdp_mgo_kj_mol, temperature_k) * _base
+    out["r_pent_mgo"] = _mgo.k_at(_mgo.k_pent_mgo_100c_ph5, _mgo.ea_pent_mgo_kj_mol, temperature_k) * _base
+    # the methylglyoxal Strecker of cysteine and its B59a H2S share (zero unless MGO_CYSTEINE_STRECKER is set)
+    _mgo_strecker = _ps.MGO_CYSTEINE_STRECKER.k_at(temperature_k) * ph_factor("base", ph, float(temperature_k), ionic_strength_m)
+    _share_h2s = float(_ps.STRECKER_SULFUR.h2s_share) if _ps.STRECKER_SULFUR.enabled else 0.0
+    out["r_mgo_cys_h2s"] = _share_h2s * _mgo_strecker
+    out["r_mgo_cys_strecker"] = (1.0 - _share_h2s) * _mgo_strecker
+    # the hexose -> C5 entry (zero unless HEXOSE_C5_ENTRY is set)
+    out["r_odg_dpo"] = _ps.HEXOSE_C5_ENTRY.k_at(temperature_k)
+    # the pentose + amine entry and the pentose acetic acid (zero unless PENTOSE_AMINE_ENTRY is set); the slopes act
+    # on the in-situ pH, about pH 6
+    _ent = _ps.PENTOSE_AMINE_ENTRY
+    if _ent.enabled:
+        out["r_pent_amine"] = (_ent.k_at(_ent.k_entry_l_per_mmol_min_100c_ph6, _ent.ea_entry_kj_mol, temperature_k)
+                               * 10.0 ** (float(_ent.entry_ph_slope) * (float(ph) - 6.0)))
+        _ret = min(max(float(_ent.amine_return), 0.0), 1.0)
+        _dpo = float(_ent.pama_dpo_factor) * (out["r_arp_dpo"] + out["r_arp_dpo_thermal"])
+        _tdp = float(_ent.pama_tdp_factor) * (out["r_arp_tdp"] + out["r_arp_tdp_thermal"])
+        out["r_pama_dpo"], out["r_pama_dpo_n"] = _ret * _dpo, (1.0 - _ret) * _dpo
+        out["r_pama_tdp"], out["r_pama_tdp_n"] = _ret * _tdp, (1.0 - _ret) * _tdp
+    else:
+        for _key in ("r_pent_amine", "r_pama_dpo", "r_pama_tdp", "r_pama_dpo_n", "r_pama_tdp_n"):
+            out[_key] = 0.0
+    out["r_dpo_aa"] = (_ent.k_at(_ent.k_dpo_aa_per_min_100c_ph6, _ent.ea_dpo_aa_kj_mol, temperature_k)
+                       * 10.0 ** (float(_ent.aa_ph_slope) * (float(ph) - 6.0)))
 
     _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
     out["ch_thioether_release"] = out["ch_thioether_mft"] / _k_adduct
@@ -1617,6 +1768,8 @@ PH_COUPLING: str = "fixed_point_nodes"
 
 #: The state keys the charge balance reads (``ph_state.titratable_inventory``).
 _TITRATABLE_KEYS = ("ACID", "FA", "AA", "Cys", "ARP", "TTCA", "CBX", "CAMA")
+#: the trunk's solutes, in the balance only when ph_state.TRUNK_SOLUTES_IN_BALANCE (PAMA: the pentose + amine entry)
+_TRUNK_SOLUTE_KEYS = ("Gly", "AMA", "SB", "PAMA")
 
 
 def _integrate_inline_ph(parameters, y0, eval_times, duration, temperature_of, sid, drift, spec,
@@ -1635,13 +1788,15 @@ def _integrate_inline_ph(parameters, y0, eval_times, duration, temperature_of, s
 
     warm_solve = solve_ph_and_ionic_strength_compiled if ph_kernel.COMPILED else solve_ph_and_ionic_strength_warm
 
-    index = [SULFUR_INDEX[k] for k in _TITRATABLE_KEYS]
+    # sub-model 1 (design review B4): the trunk's solutes join the balance when ph_state says so
+    keys = _TITRATABLE_KEYS + (_TRUNK_SOLUTE_KEYS if _ph.TRUNK_SOLUTES_IN_BALANCE else ())
+    index = [SULFUR_INDEX[k] for k in keys]
     use_label = bool(_ph.B51.label_scale_tables)
     memo = {"ph": None, "i": 0.0, "cool": None}
 
     def state_ph(y, temperature):
         inventory = titratable_inventory(
-            {k: float(max(y[i], 0.0)) for k, i in zip(_TITRATABLE_KEYS, index)}, drift, spec)
+            {k: float(max(y[i], 0.0)) for k, i in zip(keys, index)}, drift, spec)
         if memo["ph"] is None:
             from .ph_state import solve_ph_and_ionic_strength
             ph, ionic = solve_ph_and_ionic_strength(temperature, sid, inventory)
@@ -1700,9 +1855,14 @@ def integrate_sulfur(
     ph_iterations: int = 3,
     sid_mmol_l: Optional[float] = None,
     temperature_profile: Optional[Tuple[Sequence[float], Sequence[float]]] = None,
+    clamp_ph_label: Optional[float] = None,
 ) -> SulfurRun:
     """
     Integrate the sulfur network at one temperature and one pH TRAJECTORY.
+
+    ``clamp_ph_label`` (sub-model 1, 2026-10-29; design review B3): for a CLAMPED run whose pH was held at the reaction
+    temperature (a pH-stat read hot), the held state's pH on the 25 C label scale, which the measured pH-indexed
+    tables read under B51. Without it a clamped run hands those tables the in-situ set-point, as before.
 
     B64 (2026-10-28): or along a recorded TEMPERATURE PROFILE. ``temperature_profile`` is
     ``(times_min, temperatures_K)``, piecewise linear from t = 0; the rate constants (and the
@@ -1899,7 +2059,7 @@ def integrate_sulfur(
                 for tk, p in zip(_node_temperatures(node_times), node_ph_line)
             ])
         elif ph1 == ph0:
-            k_fixed = rate_vector(sulfur_rate_constants_at(parameters, t_k, ph0))
+            k_fixed = rate_vector(sulfur_rate_constants_at(parameters, t_k, ph0, ph_label=clamp_ph_label))
             node_times = np.array([0.0, duration])
             k_nodes = np.array([k_fixed, k_fixed])
         else:

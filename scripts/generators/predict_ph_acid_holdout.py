@@ -1,0 +1,118 @@
+#!/usr/bin/env python
+"""
+predict_ph_acid_holdout.py -- sub-model 1's frozen out-of-condition prediction (prereg sec. 5, done-test 5): the
+fitted arms' formic and acetic acid in Martins 2005b's hold-out runs, written BEFORE the hold-out rows are compared.
+
+The runs (glucose + glycine 0.2 M, 0.1 M phosphate, 100 C), on a dense time grid (0-250 min, every 5 min):
+  * the pH-stat run (Fig. 5): pH set to 6.8 at room temperature, then HELD at that solution's 100 C pH; the lane is
+    clamped at the hot equivalent (the SID that gives pH 6.8 at 25 C, solved at 100 C) and the measured tables read
+    6.8 on the label scale;
+  * the drifting runs (Fig. 7) at initial pH 4.8, 5.5, 6.0 and 7.5 (6.8 is a reprint of fitted data and is not here).
+Each arm's optimum comes from results/validation/kinetic_core_ph_acid_submodel_fit_<arm>.json. Output: one frozen
+file per arm, results/validation/kinetic_core_ph_acid_submodel_holdout_predictions_<arm>.json, written once (an arm
+fitted later gets its own file; none is ever rewritten); the comparison is a separate step, ``--score``.
+
+    python scripts/generators/predict_ph_acid_holdout.py --arm B    # freeze arm B's predictions
+    python scripts/generators/predict_ph_acid_holdout.py --score    # compare every frozen arm with the table
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import sys
+from pathlib import Path
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[2]
+for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
+    if entry not in sys.path:
+        sys.path.insert(0, entry)
+
+from src import data_paths, provenance  # noqa: E402
+from src.kinetic_core import fit_rows, observations, parallel, ph_state, sulfur  # noqa: E402
+
+import build_submodel_probe as probe  # noqa: E402
+import fit_ph_acid_submodel as fit  # noqa: E402
+
+def OUT_FOR(arm: str) -> Path:
+    return data_paths.VALIDATION_DIR / f"kinetic_core_ph_acid_submodel_holdout_predictions_{arm}.json"
+SCORE = data_paths.VALIDATION_DIR / "kinetic_core_ph_acid_submodel_holdout_score.md"
+GRID = [float(t) for t in range(0, 255, 5)]
+CHARGE = {"Glc": 200.0, "Gly": 200.0}
+PHOSPHATE = "phosphate 0.10 M (counter-ion not stated); pH not held"
+RUNS = {"phstat_6.8": 6.8, "drift_4.8": 4.8, "drift_5.5": 5.5, "drift_6.0": 6.0, "drift_7.5": 7.5}
+
+
+def jobs_for(arm_theta, keys):
+    tr = fit.trial([arm_theta[k] for k in keys], keys)
+    out = {}
+    for run, ph in RUNS.items():
+        job = {"pot": run, "ledger_id": "holdout", "t_c": 100.0, "charge": dict(CHARGE), "dropped": [], "times": GRID,
+               "buffer": PHOSPHATE, "label_ph": ph, "notes": [], **tr}
+        if run.startswith("phstat"):
+            held = probe.buffer_of({"buffer": PHOSPHATE}, ph)
+            sid = ph_state.strong_ion_difference(ph, CHARGE, tr["drift"], held)
+            job["label_ph"] = observations.ph_cooled(CHARGE, sid, tr["drift"], held, temperature_k=373.15)
+            job["buffer"] = "phosphate 0.10 M; pH-stat at the 100 C equivalent of pH 6.8 (20 C)"
+            job["clamp_label_ph"] = ph
+        out[run] = job
+    return out
+
+
+def freeze(arm: str) -> int:
+    out = OUT_FOR(arm)
+    if out.exists():
+        raise SystemExit(f"{data_paths.rel(out)} exists: frozen predictions are written once")
+    path = data_paths.VALIDATION_DIR / f"kinetic_core_ph_acid_submodel_fit_{arm}.json"
+    report = json.loads(path.read_text())
+    sulfur.PH_COUPLING = "inline"
+    keys = tuple(report["fit"]["theta"])
+    jobs = jobs_for(report["fit"]["theta"], keys)
+    results = dict(zip(jobs, parallel.map_ordered(fit.run_task, list(jobs.values()))))
+    payload = {"artifact": out.stem, "arm": arm, "frozen_before_comparison": True, "grid_min": GRID,
+               "provenance": provenance.provenance_block(out.stem, generated_by="scripts/generators/predict_ph_acid_holdout.py",
+                                                         inputs=[path]),
+               "curves": {run: {"FA": [s["FA"] for s in res["states"]], "AA": [s["AA"] for s in res["states"]],
+                                "held_hot_pH": jobs[run]["label_ph"] if run.startswith("phstat") else None}
+                          for run, res in results.items()}}
+    out.write_text(provenance.dumps_compact(payload) + "\n", encoding="utf-8")
+    print(f"froze arm {arm} -> {data_paths.rel(out)}")
+    return 0
+
+
+def score() -> int:
+    frozen_arms = {p.stem.rsplit("_", 1)[1]: json.loads(p.read_text())
+                   for p in sorted(data_paths.VALIDATION_DIR.glob("kinetic_core_ph_acid_submodel_holdout_predictions_*.json"))}
+    pots, rows = fit_rows.load("ph_acid_holdout_martins2005b")
+    run_of = {}
+    for pot_id, pot in pots.items():
+        run_of[pot_id] = "phstat_6.8" if "pH-stat" in str(pot.get("buffer")) else f"drift_{float(pot['label_ph']):.1f}"
+    lines = ["# Sub-model 1 hold-out: Martins 2005b's pH-stat and drifting runs (frozen predictions vs the two-reader table)", "",
+             "*Generated by `scripts/generators/predict_ph_acid_holdout.py --score`. Predictions frozen per arm in "
+             "`kinetic_core_ph_acid_submodel_holdout_predictions_<arm>.json` before this comparison; raw residual = "
+             "log10(predicted / measured); tolerance 0.30 dex RMS "
+             "(prereg sec. 5).*", "", "| arm | run | species | n | mean | RMS | within |", "|---|---|---|---|---|---|---|"]
+    for arm, frozen in frozen_arms.items():
+        curves = frozen["curves"]
+        for run in RUNS:
+            for species in ("FA", "AA"):
+                sel = [r for r in rows if run_of[r.pot] == run and r.species == species]
+                if not sel:
+                    continue
+                pred = np.interp([r.t_min for r in sel], frozen["grid_min"], curves[run][species])
+                res = [math.log10(max(p, 1e-30) / r.value) for p, r in zip(pred, sel)]
+                rms = float(np.sqrt(np.mean(np.square(res))))
+                lines.append(f"| {arm} | {run} | {species} | {len(sel)} | {np.mean(res):+.2f} | {rms:.2f} | {'yes' if rms <= 0.30 else 'NO'} |")
+    SCORE.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"-> {data_paths.rel(SCORE)}")
+    return 0
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
+    parser.add_argument("--score", action="store_true")
+    parser.add_argument("--arm", choices=("A", "B", "C"))
+    a = parser.parse_args()
+    sys.exit(score() if a.score else freeze(a.arm))

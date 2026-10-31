@@ -66,7 +66,7 @@ species:
   ARP:   {kind: molecule, smiles: "OCC(O)C(O)C(=O)CNC(C)C(=O)O", note: "N-(1-deoxy-D-xylulos-1-yl)-alanine, open chain"}
   DPO:   {kind: molecule, smiles: "CC(=O)C(=O)C(O)CO", note: "1-deoxypentosone"}
   TDP:   {kind: molecule, smiles: "OCC(O)CC(=O)C=O", note: "3-deoxypentosone"}
-  DDP:   {kind: molecule, smiles: "CC(=O)C(=O)CC=O", note: "1,4-dideoxypentosone (1,4-dideoxy-2,3-pentodiulose)"}
+  DDP:   {kind: molecule, smiles: "CC(=O)C(=O)CCO", note: "1,4-dideoxypentosone (1,4-dideoxy-2,3-pentodiulose, C5H8O3: C5 stays CH2OH; + H2S - 2 H2O = MFT; CF-059)"}
   NF:    {kind: molecule, registry_id: norfuraneol}
   PTR:   {kind: molecule, smiles: "CC(=O)C(=O)C(C)=O", note: "2,3,4-pentanetrione"}
   FUR:   {kind: molecule, registry_id: furfural}
@@ -101,6 +101,7 @@ species:
   GSH: {kind: molecule, smiles: "N[C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)O)C(=O)O", note: "glutathione (gamma-Glu-Cys-Gly); 2026-10-27, a measured H2S source"}
   SHET: {kind: lump, note: "B49: norfuraneol's sulfur heterocycles (dithiolanones, thiophenones, thiophenes, trithiolanes), lumped as one C5/S1 pool; no single structure"}
   CAMA: {kind: molecule, smiles: "OC(=O)C(CS)NCC(=O)C(O)C(O)CO", note: "B59b, 2026-10-29: the cysteine Amadori compound N-(1-deoxy-D-pentulos-1-yl)-L-cysteine, open-chain keto form (C8H15NO6S, an isomer of TTCA); inert while CYS_AMADORI_ROUTE is off"}
+  PAMA: {kind: molecule, smiles: "OC(=O)CNCC(=O)C(O)C(O)CO", note: "2026-10-30: the pentose + amine entry's Amadori compound, N-(1-deoxy-D-pentulos-1-yl)glycine, open-chain keto form (C7H13NO6), glycine standing for any non-sulfur amino acid; inert while PENTOSE_AMINE_ENTRY is off"}
   # ---- acrylamide: asparagine + sugar ----
   Asn:   {kind: molecule, smiles: "NC(CC(N)=O)C(=O)O"}
   SBA:   {kind: molecule, smiles: "OCC(O)C(O)C(O)C(O)C=NC(CC(N)=O)C(=O)O", note: "Schiff base of asparagine and glucose"}
