@@ -363,3 +363,7 @@ so `pytest ... | tail` kills the rest of the chain -- redirect each step to its 
 **Even text munging goes through the env wrapper** (2026-10-31, again). I parsed `gh pr view` JSON and edited the PR
 body with system `python3` -- the rule has no exception for "not repo code". Use
 `./scripts/docker_maillard.sh run "python ..."`, or `jq` / `gh -q` for JSON.
+
+**Backticks inside `docker_maillard.sh run "..."` are command substitution** (2026-10-31). A Markdown `code` span in
+a heredoc passed in double quotes ran the script name as a command and silently dropped it from the text. Write such
+edits with the Edit tool, or single-quote the wrapper argument.

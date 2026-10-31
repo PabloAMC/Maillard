@@ -28,7 +28,8 @@ VERDICTS = {"supported", "rejected", "partial", "inconclusive", "superseded", "p
 #: the records that must be registered (the Phase 2 experiment records; older waves are in the plan's sec. 7)
 COVERED = ("kinetic_core_joint_deoxyosone_thiol_fit_*.md", "kinetic_core_ph_acid_submodel_fit_*.md",
            "kinetic_core_deoxyosone_submodel_fit_*.md", "kinetic_core_mechanism_signatures_*.md",
-           "kinetic_core_thiol_flux_diagnosis_*.md", "kinetic_core_pentose_amine_entry_probe.md")
+           "kinetic_core_thiol_flux_diagnosis_*.md", "kinetic_core_pentose_amine_entry_probe.md",
+           "kinetic_core_deoxyosone_signatures_*.md")
 
 
 def main() -> int:

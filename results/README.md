@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **788**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **790**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -166,6 +166,7 @@ Tracked files: **788**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b9_members/` (2 files) | B9 optimiser members (two starts); read back by the B9 generator's consolidation. |
 | `kinetic_core_cysteine_route_calibration/` (22 files) | Route calibration (stage 1): fits per arm, starts, leave-one-source-out, checks; withdrawn_no_diff_step/ holds the falsely converged first fits. |
 | `kinetic_core_cysteine_route_calibration_prereg.md` | Route calibration (stage 1) pre-registration, run logs 1-5, independent review, verdict. |
+| `kinetic_core_deoxyosone_signatures_*` (2): `kinetic_core_deoxyosone_signatures_s042_r3en_fixed.json`, `kinetic_core_deoxyosone_signatures_s042_r3en_fixed.md` | B7a's scale-free signatures of the 3- / 1-deoxypentosone partition at a joint fit's optimum: the ratio's time slope per pot, its pH slope by segment (Zhai 2021), cysteine's double ratio (reported) and TDP's decline after its peak -- a shared figure scale cancels in each, so a fitted scale cannot absorb them. Written by `scripts/generators/score_deoxyosone_signatures.py`; declared in kinetic_core_dpo_partition_prereg.md. |
 | `kinetic_core_dpo_partition_prereg.md` | Plan step B7: the 1- / 3-deoxypentosone partition and the cysteine fate -- groundwork from the fit records (per-species scales hide 85 - 94 % of the TDP / DPO ratio error), scale-free signatures, rivals, its independent review and the B7a / B7b scope. Written before any B7 fit. |
 | `kinetic_core_env_b13_prereg.*` (1): `kinetic_core_env_b13_prereg.md` | Pre-registration: the whole dicarbonyl and furanic-sink block had no prior row either, so eight constants were asserted with certainty and five hydroxymethylfurfural rows were published with no interval at all. |
 | `kinetic_core_env_b18_prereg.*` (1): `kinetic_core_env_b18_prereg.md` | Pre-registration: the pyrazine step had no prior row in the envelope, so every pyrazine interval was published without that step's own spread. |

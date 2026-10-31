@@ -403,3 +403,15 @@ entries:
     verdict: partial
     conclusion: "The diagnosis holds at the converged E (scales absorb 85 - 94 % of the TDP / DPO ratio error; TDP high everywhere), but the draft was not runnable: the route rows would dominate the cost (~2,000 - 6,000 units vs 507); a slower ring-opening cannot reconcile Cao (phosphate) with Zhai (water) -- buffer catalysis is the missing rival; the TDP exit needs its own arm; the shared scale needs a two-level measurement model in fitting.py."
     follow_up: "B7a (partition only: two-level measurement model, split-law arm R-S, TDP-exit arm R-T) inside the 48 h box; B7b (cysteine fate, R-P) only after a cost-by-block check."
+  - id: EX-033
+    date: "2026-10-31"
+    kind: diagnosis
+    question: "How does the admitted structure (R3En, converged, one-level measurement model) score on B7a's scale-free deoxyosone signatures?"
+    hypothesis: "The null fails (i) in >= 2 figures (dpo partition prereg sec. 7, P 0.8)."
+    design: "scripts/generators/score_deoxyosone_signatures.py --fit s042_r3en_fixed (signatures declared in kinetic_core_dpo_partition_prereg.md secs. 3, 7)."
+    expected: "Null fails (i) in >= 2 figures (P 0.8)."
+    artifacts: [results/validation/kinetic_core_deoxyosone_signatures_s042_r3en_fixed.md]
+    commit: pending
+    verdict: supported
+    conclusion: "Time slope 1 / 8 pots: the engine's log10(TDP / DPO) climbs +1.1 to +1.8 per decade of time in six pots where the measured ratio is flat (-0.5 to +0.1). pH segments 1 / 6: the engine's ratio RISES with pH (+0.08 to +0.40 per pH unit) where the measured falls (-0.14 to -0.80) -- the wrong sign. TDP's post-peak decline: x8 too slow at 120 C, right at 140 C. Cysteine double ratio 0.78 vs 0.45 (reported). The partition is structurally wrong in time and in pH, as the groundwork said."
+    follow_up: "The same signatures at the B7a null under the two-level measurement model, then the R-S (split pH law) and R-T (TDP exit) arms."
