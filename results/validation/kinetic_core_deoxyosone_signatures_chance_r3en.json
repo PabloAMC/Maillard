@@ -1,0 +1,18 @@
+{
+ "artifact": "kinetic_core_deoxyosone_signatures_chance_r3en",
+ "provenance": {
+  "artifact": "kinetic_core_deoxyosone_signatures_chance_r3en",
+  "generated_on": "2026-10-31",
+  "git": {"commit": "ee797dbad860527a71f5a2876d3476f0fe350920", "short": "ee797dba", "branch": "submodel1-ph", "dirty": false},
+  "generated_by": "scripts/generators/score_deoxyosone_signatures.py",
+  "inputs": [{"path": "src/kinetic_core/sulfur.py", "sha256": "1887c9ba5bb509eb320bc71c3ac42d44c7a446dd1af6d63cd35127fa8c0eec0a"}, {"path": "data/lit/fit_rows/deoxyosone_submodel.yml", "sha256": "4af9c953a653ef5ed8377a0b34efe81774111bf3a47706f5799cc182f5775853"}]
+ },
+ "arm": "R3En",
+ "draws": 200,
+ "seed": 20261031,
+ "runnable_draws": 192,
+ "pass_count_distribution": {"time_slope": {"0": 78, "1": 56, "2": 37, "3": 16, "4": 2, "5": 3}, "ph_segments": {"0": 42, "1": 74, "2": 76}, "tdp_decline": {"1": 192}},
+ "chance_rate_of_the_decisive_threshold": {"time_slope": 0.015625, "ph_segments": 0.0, "tdp_decline": 0.0},
+ "thresholds": {"time_slope": 5, "ph_segments": 4, "tdp_decline": 2},
+ "errors_sample": ["a pot failed", "a pot failed", "a pot failed", "a pot failed", "a pot failed"]
+}

@@ -451,3 +451,15 @@ entries:
     verdict: rejected
     conclusion: "All converged; none passes. Costs B7D 1074, B7S 1039, B7T 1146, B7ST 1082 vs the null under the same fixed noise 1093 (s042_r3en_b7anull_w02_fixed): B7S -54 (2 coordinates) and B7D -19 (1) are real gains, B7T +53 rejected, B7ST -11 weak -- but no arm reproduces the signatures. (i) 1 - 2 / 8, (ii) 0 - 1 / 6 in every arm; B7T passes (vi) 2 / 2 but raises the cost ~44 for no coordinate. B7S's split law is identified (share 0.62 at pH 7, pH_c 6.8) yet the ratio's pH slope stays ~0: DPO's own sinks are pH-dependent the other way (base-favoured beta-cleavage to acetic acid takes 51 - 61 % of DPO at pH 8, fitted on Davidek's glycine pots), and 39 - 45 % of TDP comes from pH-flat pentose caramelisation. Cerny pot D 0.99 everywhere."
     follow_up: "Candidate (for review): DPO's beta-cleavage amine-assisted (glycine in Davidek, none in Zhai); TDP's caramelisation source and pH law. The null's fixed-noise cost and both chance baselines are running."
+  - id: EX-037
+    date: "2026-10-31"
+    kind: diagnosis
+    question: "How often do the B7a partition signatures pass by chance (constants uniform in R3En's box)?"
+    hypothesis: "The decisive thresholds are strict tests (chance rate <= 0.05)."
+    design: "score_deoxyosone_signatures.py --chance 200 --arm R3En (seed 20261031)."
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_deoxyosone_signatures_chance_r3en.md]
+    commit: pending
+    verdict: supported
+    conclusion: "192 of 200 draws ran. Chance of reaching the decisive thresholds: time slope >= 5 / 8 0.02, pH segments >= 4 / 6 0.00, both declines 0.00 -- strict tests. Typical random draw: time 1 / 8, pH 1 - 2 / 6. The fitted arms (time 1 - 2 / 8, pH 0 - 1 / 6) are at or BELOW chance on the partition: no structure tried so far carries information about it. Every draw passes exactly one of the two TDP declines, so that pair is uninformative as a pair; (vi) needs both."
+    follow_up: "Credit a B7 arm only on (i) and (ii); next candidate the amine-assisted beta-cleavage of DPO (prereg sec. 11)."
