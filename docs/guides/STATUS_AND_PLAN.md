@@ -89,7 +89,11 @@ CI; P(bit-identical on the first pass) ~0.6, the rest found by the pinning tests
    (warm start, larger budget, its series noise re-estimated), then fit every round-3 rival from its own optimum
    with E's measurement model FIXED, so the costs are one objective and a nested arm can only match or beat E.
    EX-015 / EX-016 / EX-017 are inconclusive until then. ~1 h of work + ~7 h of unattended compute (night of 10-31).
-5. Round 3: the pH law of the intact-C5 MFT route (rivals R3E / R3En / R3Es; verdict after step 0).
+   **Done 2026-10-31 02:57 (EX-024):** E converged; under E's fixed noise E 1141, R3E 1140 (route off), R3En 1076,
+   R3Es 1069 (slope ties zero).
+5. Round 3: the pH law of the intact-C5 MFT route. **Verdict (converged): R3En admitted** -- the data accept DDP
+   formation without the shipped free-amine law; Cerny pot D fails in every arm (0.98 - 0.99), so the admitted
+   structure still makes MFT through fed norfuraneol (R4f, B7a next).
 6. The route mix vs temperature (R3T): BEFORE freeing the norfuraneol -> MFT barrier, re-score the optimum with a
    heat-up ramp on the Hofmann 145 C autoclave pots (premortem #3; ~1 h, no fit): a barrier fitted against a misread
    ramp is a tuned number. Then separate barriers for the DDP, norfuraneol and C2 + C3 routes, tested on Cerny 95 C,
