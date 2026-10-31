@@ -112,6 +112,8 @@ compute is unattended.
 
 **Mechanisms before constants (owner, 2026-10-31).** A candidate structure is first tested for FEASIBILITY: can any constant set inside the measured / declared bands reproduce the mechanism signatures (isotope routes, branching ratios, scale-free ratios, presence / absence, the direction of a contrast)? -- by sampling or dry grids, before any fit. A structure that cannot pass is rejected without fitting; fits follow only for structures that pass, and their cost is read after the signatures. Evidence: three B7 arms gained 20 - 70 cost units while failing every scale-free test. Literature mechanism evidence (labelling, fed intermediates, trapping) outranks more fitting.
 
+**Course correction (2026-10-31 ~12:00, after the owner asked to step back and an independent red-team review).** The hub feasibility line (dpo prereg secs. 16 - 21) drifted off this roadmap: it skipped row 3 (identifiability audit + power test) and row 2 (the forced-input Strecker layer), and row 1 never ran its closing leave-one-lab-out. Its signatures became design targets; the trap it found has P ~0.2 and two counter-indications. Decisions: no trap fit; the feasibility method gets negative / positive controls before any more structures; no new global engine switches until A3's configuration object exists; the branch is pushed and split into one PR per sub-model; then rows 2 and 3 in order, and the row-1 leave-one-lab-out overnight.
+
 Rules throughout: premortem of each plan change; pre-registration + independent review before every fit; converged
 fits only; chance baselines AND (from step 3) a measured power before credit; one PR per sub-model; a mechanism
 without data -> DOIs to the owner.

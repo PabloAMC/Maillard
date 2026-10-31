@@ -597,6 +597,29 @@ MGO_CYSTEINE_STRECKER = MgoCysteineStrecker()
 
 
 @dataclass(frozen=True)
+class TdpCysteineTrap:
+    """
+    B7 hub feasibility (2026-10-31; kinetic_core_dpo_partition_prereg.md sec. 20), OFF by default (rate 0): free
+    cysteine TRAPS the aldehydic 3-deoxypentosone as a non-volatile adduct, faster at higher pH. Four lines of evidence
+    converge on it without a fit: the partition signatures need a fast 3-DX sink that grows with pH (feasibility v3 /
+    v4), it must not make methylglyoxal (v4's MGO check), Zhai 2021's +xylose double ratio rescues 3-DX at pH 8
+    (signature vii), and the cysteine review's missing non-volatile cysteine sink. Wei 2022 (wei2022_extraction.md)
+    shows cysteine trapping deoxyosones. Second order, L/(mmol min) at 100 C and pH 5 times the engine's "base" pH
+    factor (as r_mgo_cys_strecker); Ea DECLARED at the MGO Strecker of cysteine's 64.08 kJ/mol; no measured constant.
+    """
+
+    k_l_per_mmol_min_100c_ph5: float = 0.0
+    ea_kj_mol: float = 64.08
+
+    def k_at(self, temperature_k: float) -> float:
+        return float(self.k_l_per_mmol_min_100c_ph5) * math.exp(
+            -float(self.ea_kj_mol) / R_KJ * (1.0 / float(temperature_k) - 1.0 / 373.15))
+
+
+TDP_CYSTEINE_TRAP = TdpCysteineTrap()
+
+
+@dataclass(frozen=True)
 class HexoseC5Entry:
     """
     Sub-model 4 (2026-10-30), OFF by default (rate 0): a hexose -> C5 entry, 1-deoxyglucosone -> 1-deoxypentosone +

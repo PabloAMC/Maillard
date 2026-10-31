@@ -913,6 +913,12 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
              "Joint fit (review B5). Methylglyoxal + cysteine Strecker: aminoacetone + mercaptoacetaldehyde + CO2; the "
              "carboxyl CARRIED (CBX), the amine into the aminoketone (FRAG_N), the sulfur in the Strecker aldehyde "
              "(FRAG_S). MGO_CYSTEINE_STRECKER; zero unless set."),
+    Reaction("r_tdp_cys_trap", {"TDP": 1, "Cys": 1}, {"CBX": 1, "FRAG_C": 7, "FRAG_N": 1, "FRAG_S": 1},
+             "k_tdp_cys_trap",
+             "B7 hub (2026-10-31). Free cysteine traps the aldehydic 3-deoxypentosone as a non-volatile adduct, base-"
+             "favoured (TDP_CYSTEINE_TRAP; dpo partition prereg sec. 20): the adduct is not observed, so it is written "
+             "into the lumped fragments, carbon / nitrogen / sulfur balanced (C5 + C3 = CBX + 7 FRAG_C), the carboxyl "
+             "CARRIED. Zero unless set."),
     Reaction("r_mgo_cys_h2s", {"MGO": 1, "Cys": 1}, {"MGO": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "H2S": 1},
              "k_mgo_cys_h2s",
              "Joint fit (review B5). The same event's B59a fate: the aminoreductone reduces the mercaptoacetaldehyde to "
@@ -980,6 +986,8 @@ def inactive_reactions() -> frozenset:
         off.add("r_pent_mgo")
     if _ps.MGO_CYSTEINE_STRECKER.k_l_per_mmol_min_100c_ph5 <= 0.0:
         off.update({"r_mgo_cys_strecker", "r_mgo_cys_h2s"})
+    if _ps.TDP_CYSTEINE_TRAP.k_l_per_mmol_min_100c_ph5 <= 0.0:
+        off.add("r_tdp_cys_trap")
     if _ps.HEXOSE_C5_ENTRY.k_per_min_100c <= 0.0:
         off.add("r_odg_dpo")
     if not _ps.PENTOSE_AMINE_ENTRY.enabled:
@@ -1081,6 +1089,10 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
     "r_mgo_cys_strecker": {"amine": -1, "basis": (
         "methylglyoxal Strecker of cysteine (joint fit, review B5): the amine leaves in aminoacetone, the carboxyl as "
         "CO2 (CARRIED). " + AMINE_FATE_BASIS)},
+    "r_tdp_cys_trap": {"amine": -1, "basis": (
+        "the B7 cysteine trap of 3-deoxypentosone (dpo partition prereg sec. 20): the adduct (a thiazolidine / Schiff "
+        "base of the cysteine amine) is not observed; the amine is declared consumed, the carboxyl CARRIED. "
+        + AMINE_FATE_BASIS)},
     "r_mgo_cys_h2s": {"amine": -1, "basis": (
         "as r_mgo_cys_strecker, the B59a fate: H2S + acetaldehyde, the dicarbonyl returned; the amine leaves as NH3. "
         "Carboxyl CARRIED. " + AMINE_FATE_BASIS)},
@@ -1325,7 +1337,7 @@ def sulfur_rate_constants_at(
         if key in ("k_pent_amine", "k_pama_dpo", "k_pama_tdp", "k_pama_dpo_n", "k_pama_tdp_n", "k_dpo_aa"):
             continue  # the pentose + amine entry: derived below
         if key in ("k_nf_decay_oh", "k_nf_decay_oh_mgo", "k_tdp_mgo", "k_pent_mgo", "k_mgo_cys_strecker",
-                   "k_mgo_cys_h2s", "k_odg_dpo"):
+                   "k_mgo_cys_h2s", "k_odg_dpo", "k_tdp_cys_trap"):
             continue  # B61 and sub-model 3: derived below
         if key == "k_dpo_ddp_h2s":
             continue  # B59a: a measured share of r_dpo_ddp, below
@@ -1454,6 +1466,9 @@ def sulfur_rate_constants_at(
     _share_h2s = float(_ps.STRECKER_SULFUR.h2s_share) if _ps.STRECKER_SULFUR.enabled else 0.0
     out["r_mgo_cys_h2s"] = _share_h2s * _mgo_strecker
     out["r_mgo_cys_strecker"] = (1.0 - _share_h2s) * _mgo_strecker
+    # the B7 cysteine trap of 3-DX (zero unless TDP_CYSTEINE_TRAP is set)
+    out["r_tdp_cys_trap"] = (_ps.TDP_CYSTEINE_TRAP.k_at(temperature_k)
+                             * ph_factor("base", ph, float(temperature_k), ionic_strength_m))
     # the hexose -> C5 entry (zero unless HEXOSE_C5_ENTRY is set)
     out["r_odg_dpo"] = _ps.HEXOSE_C5_ENTRY.k_at(temperature_k)
     # the pentose + amine entry and the pentose acetic acid (zero unless PENTOSE_AMINE_ENTRY is set); the slopes act

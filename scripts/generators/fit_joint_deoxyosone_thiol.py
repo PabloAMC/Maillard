@@ -97,7 +97,13 @@ ARMS = {"none": frozenset(), "R2a": frozenset({"mgo_strecker"}), "R2b": frozense
         # feasibility v2 (prereg sec. 17): + the 3-DX and 1-DX SOURCES -- pentose caramelisation (to 3-DX) and TTCA's
         # direct breakdown (to 1-DX) as offsets
         "B7ASST2": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating", "split_ph", "tdp_exit",
-                              "ttca_deg", "pent_caramel"})}
+                              "ttca_deg", "pent_caramel"}),
+        # feasibility v4 (prereg sec. 19): + a FAST, BASE-FAVOURED 3-DX exit (r_tdp_mgo, the engine's base factor)
+        "B7ASST2M": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating", "split_ph", "tdp_exit",
+                               "ttca_deg", "pent_caramel", "tdp_mgo"}),
+        # feasibility v5 (prereg sec. 20): the base-favoured 3-DX sink as a CYSTEINE TRAP (no MGO)
+        "B7ASST2C": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating", "split_ph", "tdp_exit",
+                               "ttca_deg", "pent_caramel", "tdp_cys_trap"})}
 NF_MFT_EA_COORDINATE = ("ea_k_nf_mft", "Ea", 40.0, 200.0, 100.0)
 LAU_NF_EA_KJ_MOL = 81.5
 #: round 3 (review B2): the DDP route's PRODUCT (log10 multiplier of k_dpo_ddp x both DDP -> MFT branches) is the
@@ -128,6 +134,9 @@ SPLIT_COORDINATES = (("dpo_share7", "acid_yield", 0.02, 0.98, 0.30),
 #: B7a B7D: log10 of r_tdp_mgo's k at 100 C / pH 5 (1/min; start -7, near the null with a usable gradient -- A3's -5.08 was fitted at Ea 40, at 100 kJ/mol it gives ~1500x the null's MGO), its
 #: barrier held at PentoseMgoRoutes' default (recorded in the report as "tdp_mgo_ea_kj_mol")
 TDP_MGO_COORDINATE = ("log10_k_tdp_mgo", "log10_offset", -8.0, -1.0, -7.0)
+#: B7 hub (dpo partition prereg sec. 20): log10 of the cysteine trap of 3-DX, L/(mmol min) at 100 C / pH 5 (the base
+#: factor rises with pH); start near off
+TDP_CYS_TRAP_COORDINATE = ("log10_k_tdp_cys_trap", "log10_offset", -7.0, 0.0, -6.0)
 TDP_MGO_EA_KJ_MOL = _PentoseMgoRoutes().ea_tdp_mgo_kj_mol
 ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",), "ddp_mft": ("k_ddp_mft", "k_ddp_mft_hs"),
                   "k_ttca_deg": ("k_ttca_deg",), "k_pent_caramel": ("k_pent_caramel",)}
@@ -211,6 +220,9 @@ def coordinates(mft_decay_cap: bool, arms=frozenset()):
     if "tdp_mgo" in arms:
         key, kind, lo, hi, st = TDP_MGO_COORDINATE
         keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
+    if "tdp_cys_trap" in arms:
+        key, kind, lo, hi, st = TDP_CYS_TRAP_COORDINATE
+        keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
     if "mgo_strecker" in arms:
         keys.append("log10_k_mgo_cys_strecker"); kinds.append("log10_offset")
         lower.append(MGO_STRECKER_BOUNDS[0]); upper.append(MGO_STRECKER_BOUNDS[1]); start.append(MGO_STRECKER_START)
@@ -234,6 +246,8 @@ def trial(theta, keys) -> Dict[str, Any]:
     out = {"k_ref": k_ref, "routes": routes, "mgo_share": t["mgo_share_nf"]}
     if "log10_k_mgo_cys_strecker" in t:
         out["mgo_strecker_k"] = 10.0 ** t["log10_k_mgo_cys_strecker"]
+    if TDP_CYS_TRAP_COORDINATE[0] in t:
+        out["tdp_cys_trap_k"] = 10.0 ** t[TDP_CYS_TRAP_COORDINATE[0]]
     ea = {}
     if NF_MFT_EA_COORDINATE[0] in t:
         ea["k_nf_mft"] = t[NF_MFT_EA_COORDINATE[0]]
@@ -457,6 +471,8 @@ def install(job) -> None:
     _ps.STRECKER_SULFUR = _dc.replace(_ps.STRECKER_SULFUR, h2s_share=float(job.get("strecker_share", STRECKER_SHARE)))
     _ps.MGO_CYSTEINE_STRECKER = _dc.replace(_ps.MGO_CYSTEINE_STRECKER,
                                             k_l_per_mmol_min_100c_ph5=float(job.get("mgo_strecker_k", 0.0)))
+    _ps.TDP_CYSTEINE_TRAP = _dc.replace(_ps.TDP_CYSTEINE_TRAP,
+                                        k_l_per_mmol_min_100c_ph5=float(job.get("tdp_cys_trap_k", 0.0)))
     _ps.PENTOSE_AMINE_ENTRY = _ps.PentoseAmineEntry(**job.get("entry", {}))
     _ps.DDP_FORMATION_PH = _ps.DdpFormationPh(**job.get("ddp_law", {"law": "base"}))
     # B7a: the split's pH law and TDP's own exit, the shipped defaults whenever the job does not carry them

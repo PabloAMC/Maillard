@@ -385,3 +385,10 @@ download, say "reported to" and keep the claim to what a verified abstract state
 phosphate" came from a dossier agent's report; I wrote it into a pre-registration; the dossier and the fit rows say
 unbuffered water, and the cysteine review caught it. Before a claim about conditions enters a prereg, grep the
 dossier / fit table for it (one command).
+
+**An engine edit stales every signature record, even when bit-identical** (2026-10-31, twice). The scorers record
+the sha256 of sulfur.py / parameters_sulfur.py, so B7a's and B7a-2's switches (defaults bit-identical) left ~30
+signature and chance records stale for the freshness gate. Remedy now tracked:
+`scripts/generators/regenerate_signature_records.py` re-scores every stale signature / chance record (and lists the
+other generators to re-run: data_wishlist, sulfur_flux_attribution). Run it after any src/kinetic_core edit, before
+the full verification.

@@ -46,6 +46,10 @@ BANDS: Tuple[Tuple[str, str, float, float], ...] = (
     ("offset_k_pent_caramel", "abs", -3.0, 0.5),
     ("offset_k_ttca_deg", "abs", -3.0, 0.5),
     ("offset_k_dpo_nf", "rel", -1.0, 1.0),
+    # v4 (prereg sec. 19): the base-favoured 3-DX exit to MGO (log10 k at 100 C, pH 5; the base factor rises with pH)
+    ("log10_k_tdp_mgo", "abs", -5.0, -1.0),
+    # v5 (prereg sec. 20): the cysteine trap of 3-DX, L/(mmol min) at 100 C / pH 5
+    ("log10_k_tdp_cys_trap", "abs", -5.0, 0.0),
 )
 TDP_EXIT_BAND = {"log10_k_ref_per_min": (-3.5, -1.0), "ea_kj_mol": (30.0, 100.0)}
 THRESHOLDS = {"time_slope": 5, "ph_segments": 4, "xylose_double_ratio": 3}
@@ -57,6 +61,7 @@ def main(argv=None) -> int:
     parser.add_argument("--reference", required=True, help="the fit whose optimum holds the unsampled constants")
     parser.add_argument("--draws", type=int, default=300)
     parser.add_argument("--seed", type=int, default=20261031)
+    parser.add_argument("--tag", default="", help="suffix for the output stem (a rerun with another seed or size)")
     args = parser.parse_args(argv)
     from src.kinetic_core import parallel
 
@@ -102,7 +107,8 @@ def main(argv=None) -> int:
     pairs = {f"{a}+{b}": sum(1 for _, p in ok if p[a] >= THRESHOLDS[a] and p[b] >= THRESHOLDS[b])
              for a, b in (("time_slope", "ph_segments"), ("time_slope", "xylose_double_ratio"),
                           ("ph_segments", "xylose_double_ratio"))}
-    stem = data_paths.VALIDATION_DIR / f"kinetic_core_deoxyosone_feasibility_{args.arm.lower()}"
+    stem = data_paths.VALIDATION_DIR / (f"kinetic_core_deoxyosone_feasibility_{args.arm.lower()}"
+                                        + (f"_{args.tag}" if args.tag else ""))
     payload = {"artifact": stem.name,
                "provenance": provenance.provenance_block(
                    stem.name, generated_by="scripts/generators/feasibility_deoxyosone.py",
@@ -112,6 +118,10 @@ def main(argv=None) -> int:
                "thresholds": THRESHOLDS, "draws_reaching": reach, "best": best, "pairs_reaching": pairs,
                "feasible": bool(joint_ok), "joint_passes": [{"theta": d["theta"], "tdp_exit": d["tdp_exit"],
                                                             "passed": p} for d, p in joint_ok[:20]],
+               # v3 (prereg sec. 18): where each family is reached, so a tension between families can be read
+               "reaching_draws": {fam: [{"sampled": {k: d["theta"][k] for k, *_ in BANDS if k in d["theta"]},
+                                         "tdp_exit": d["tdp_exit"], "passed": p}
+                                        for d, p in ok if p[fam] >= t][:40] for fam, t in THRESHOLDS.items()},
                "errors_sample": [r["error"] for r in results if "error" in r][:5]}
     stem.with_suffix(".json").write_text(provenance.dumps_compact(payload, default=float) + "\n")
     lines = [f"# Deoxyosone partition feasibility: arm {args.arm}", "",

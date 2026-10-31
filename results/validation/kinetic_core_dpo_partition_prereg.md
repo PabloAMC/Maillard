@@ -399,3 +399,105 @@ draws.** Added bands: offset_k_pent_caramel [-3, +0.5]; offset_k_ttca_deg [-3, +
 +-1 (the tester's band table gained these three rows at v2; v1's record lists the bands it used). Feasible as in sec. 16.
 **Expected (written now):** feasible P 0.25; time slope >= 5 / 8 reachable P 0.45; the joint passes, if any, need
 caramelisation lowered by >= 1 dex (P 0.6 given feasible).
+
+## 18. Feasibility v2 result, and v3 -- 2026-10-31 ~10:00; v3 designed before it runs
+
+**v2 (B7ASST2, 299 draws; ..._feasibility_b7asst2.md): NOT feasible, but the time slope is now reachable.** Time slope
+>= 5 / 8 by 3 draws (v1: 0), pH segments >= 4 / 6 by 4, (vii) by 64; time + pH together by 0, pH + (vii) by 2.
+Expectations: feasible (P 0.25) no; (i) reachable (P 0.45) yes. **The sources drive the ratio's time course** (v1's
+3-DX exit could not). Whether time and pH are in TENSION or the joint region is merely small in nine dimensions is
+not decidable from 300 uniform draws.
+**v3:** the same arm and bands, 600 draws, another seed (20261101), and the tester now records the sampled constants of
+every draw reaching each family (the first 40) -- so the time-reaching and pH-reaching regions can be compared.
+**Expected (written now):** a joint time + pH pass in 600 draws P 0.3; the time-reaching draws have caramelisation
+lowered (offset < -1) in >= 2 of 3 cases P 0.6; if the two regions are disjoint in a constant (e.g. the split law's
+pH_c), that constant's mechanism is the tension -- reported, then designed.
+
+## 19. Feasibility v3: the tension located; v4 designed (2026-10-31 ~10:50, before v4 runs)
+
+**v3 (B7ASST2, 597 of 600 draws, seed 20261101): NOT feasible, and the tension is located.** Time slope >= 5 / 8 by 3
+draws, pH segments >= 4 / 6 by 11, (vii) by 110; time + pH jointly 0. The time-reaching and pH-reaching draws are
+DISJOINT in the 3-DX exit: time-reaching log10 k(100 C) -1.13 to -1.01 (lifetime ~13 min, Ea ~91), pH-reaching -3.40
+to -1.34 (slow). They also differ in the split (DPO share at pH 7: time 0.07 - 0.43, pH 0.34 - 0.94) and in the DDP
+route (time ~-1.1, pH ~-0.1). Reading: a FAST 3-DX exit makes 3-DX quasi-steady and flattens the time course, but a
+pH-FLAT exit then removes the ratio's pH dependence; both together need a fast 3-DX exit that grows with pH -- a
+BASE-FAVOURED 3-DX sink (the hub review's H2, a cysteine trap of 3-DX with a free-amine factor, and signature vii's
+pH 8 point). Expectations (sec. 18): joint pass in 600 draws (P 0.3) no; time-reaching draws with caramelisation
+< -1 in >= 2 of 3 (P 0.6) no (median -0.53; one of three).
+
+**v4 (arm B7ASST2M = B7ASST2 + r_tdp_mgo, the coded base-favoured 3-DX -> MGO exit; the engine's "base" factor, 1 at
+pH 5).** Sampled additionally: log10 k_tdp_mgo (100 C, pH 5) in [-5, -1]; all other bands as v3; 600 draws, seed
+20261102; same thresholds. This is a STAND-IN for any base-favoured 3-DX sink (a cysteine trap would have the same pH
+direction); if v4 is feasible, the next step is to tell the candidates apart (MGO from 3-DX is measured in the Zhai
+pots; a cysteine trap consumes cysteine).
+**Expected (written now):** feasible P 0.4; the joint passes need log10 k_tdp_mgo > -3 (P 0.7 given feasible); MGO
+rows overshoot at the joint passes (P 0.5 -- would favour a cysteine trap over the MGO route).
+
+## 20. Feasibility v4 FEASIBLE; the MGO check rules out its stand-in; v5 = a cysteine trap of 3-DX (2026-10-31 ~11:20)
+
+**v4 (B7ASST2M, 600 draws, seed 20261102; ..._feasibility_b7asst2m.md): FEASIBLE.** Time slope >= 5 / 8 by 73 draws
+(v3: 3), pH segments >= 4 / 6 by 30, (vii) by 200; time + pH jointly by 7 -- several of them also pass (vii) and both
+TDP declines (the first structure to pass every partition family). In most joint passes the split law sits near
+"off" (pH_c 8.3 - 9.9): the ratio's pH dependence comes from 3-DX's REMOVAL, not from the enolisation split.
+Expectations: feasible (P 0.4) yes; joint passes need log10 k_tdp_mgo > -3 (P 0.7) -- 3 of the first 5, the others
+use a fast pH-flat exit with the split -- mixed.
+**The pre-registered discriminating check (no fit):** at the joint passes the 100 calibrated Zhai MGO rows overshoot
+by +0.49 to +1.28 dex (mean; rms 0.68 - 1.38) wherever the 3-DX -> MGO route carries the exit, against -0.04 at the
+B7ASS reference; Cerny pot D 0.98 - 1.00 throughout. **So the base-favoured 3-DX sink must NOT make methylglyoxal**
+(expected outcome, P 0.5, "would favour a cysteine trap"). Four independent lines now point at one mechanism -- a
+CYSTEINE TRAP OF 3-DX, faster at high pH, giving a non-volatile adduct: the fast 3-DX exit (time course), its base law
+(pH segments), signature (vii) (xylose competes for cysteine and rescues 3-DX at pH 8), and the cysteine review's
+missing non-volatile cysteine sink (H3, P 0.7 as a needed second term). Wei 2022 shows cysteine trapping deoxyosones
+(but reports 1-DX lowered before 3-DX -- mildly against, P ~0.3; wei2022_extraction.md).
+
+**v5 (design, before code).** A new switch, `TDP_CYSTEINE_TRAP` (OFF: bit-identical): r_tdp_cys_trap, TDP + Cys ->
+CBX + 7 FRAG_C + FRAG_N + FRAG_S (carbon, nitrogen, sulfur balanced; the cysteine amine declared destroyed, as
+r_mgo_cys_strecker), second order, k(100 C, pH 5) x the engine's "base" factor, Ea 64.08 kJ/mol (declared, as the MGO
+Strecker of cysteine). Arm B7ASST2C = B7ASST2 + the trap; feasibility sampling adds log10 k_trap in [-5, 0] L/(mmol
+min). **Decided by:** feasibility on (i), (ii), (vii) as before, THEN at the joint passes the must-not-break checks
+that v4 failed or did not read: the Zhai MGO rows (mean within +-0.3 dex of the reference), free cysteine and TTCA in
+Zhai 2021 (the trap should LOWER the cysteine excess -- the cysteine review's test), Cao's blank pots (within 0.1 dex),
+the thiol groups no worse than the reference.
+**Expected (written now):** feasible P 0.5; at the joint passes MGO within +-0.3 dex P 0.7; free cysteine in Zhai 2021
+moved toward the data by >= 0.3 dex P 0.4.
+
+## 21. Held-out tests of the cysteine-trap hypothesis, declared 2026-10-31 ~11:45 BEFORE the v5 result is read
+
+The partition signatures (i), (ii), (vi), (vii) have been used to design each feasibility structure (v1 -> v5); they
+are now DESIGN TARGETS, not tests, for the trap. Credit for the trap (beyond "feasible") comes only from data not used
+to design it:
+1. **Another laboratory:** Hofmann 1999 (deoxyosone_hofmann1999 table; authentic quinoxaline standards) -- the ratio's
+   plateau (~3) and its time shape; reported at the joint passes.
+2. **The cysteine fate it predicts:** free cysteine and TTCA in Zhai 2021 (route table) must move TOWARD the data (a
+   trap consumes cysteine); Cao 2017's blank pots must stay within 0.1 dex.
+3. **Zhai 2023 JAFC's TTCA +- Cys double ratio** (CF-071; 0.53 - 2.6, the conflict with Zhai 2019) -- reported.
+4. **What it must not make:** the calibrated Zhai MGO rows (within +-0.3 dex of the reference); the Davidek 2008
+   acetic plateaus and pH 8 / 6 ratio; Cerny pot D no worse than the reference; the v2 thiol groups no worse.
+5. **A power check of the feasibility method itself** before any credit: the tester must REJECT a deliberately wrong
+   structure (R3En's box already never reaches (ii) -- recorded) and should be run on a synthetic case where the true
+   structure is known (to be designed).
+P(the trap is the real mechanism of the partition, written now) ~0.35 -- it was found by searching against these
+signatures, and free cysteine (its co-reactant) is itself 2 - 40x too high in the engine, so the trap may be
+compensating the cysteine error: the trap and the cysteine fate are to be tested TOGETHER.
+
+**Amendment to sec. 21 after an independent red-team review (2026-10-31 ~12:00), STILL before the v5 result is read.**
+(a) **Independence, honestly graded.** Item 2 (Zhai 2021 free Cys / TTCA) is NOT held out -- the missing cysteine sink
+was one of the four lines that motivated the trap (sec. 20). Item 3 (CF-071) is one laboratory disagreeing with
+itself and cannot discriminate. Item 1 (Hofmann 1999, xylose + alanine in phosphate, no cysteine) tests the 3-DX EXIT,
+not the trap (the trap is inert there). (b) **Two held-out results already point AGAINST the trap:** Wei 2022 (another
+laboratory) lowers 1-DX before 3-DX; and sec. 2's own argument -- a pure extra cysteine sink pushes TTCA lower, while
+TTCA is already low (-0.14 to -1.41 dex). (c) **The partition signatures cannot tell candidates apart:** v4 showed a
+different chemistry (3-DX -> MGO) passing every partition family; ANY fast 3-DX sink faster at high pH passes them, so
+a "feasible" v5 is expected (P ~0.6) and low-information; the discrimination rests on the must-not-break rows.
+(d) **Numeric pass thresholds for the must-not-break checks:** Zhai MGO mean within +-0.3 dex of the reference;
+Davidek 2008 acetic plateaus and pH 8 / 6 ratio within their v2 tolerances; Cerny pot D no worse than the reference;
+the v2 thiol groups no fewer than the reference's; Cao blanks within 0.1 dex; Zhai 2021 free Cys AND TTCA both
+within 0.3 dex (must-pass, not "moves toward") together with signature (iv). (e) **Negative controls of equal
+dimension, declared tests of the feasibility method (they must FAIL):** the same sink on DPO instead of TDP; the trap
+pH-flat; the trap with its pH law inverted. **Positive control (must pass):** synthetic data from a known structure (a
+v4 joint pass) with the fitted series noise. Feasibility is reported as a pass fraction with a confidence interval
+across seeds, not mere existence. (f) **P(the trap is the real mechanism) revised to ~0.2**; the trap and the cysteine
+fate are one structure for any further test; the partition is single-laboratory, provisional evidence (212 of ~276
+deoxyosone rows are Zhai's, 3-DX / 1-DX against a diacetyl internal standard without authentic standards; P(a
+substantial part of (ii) or (vii) is a method artefact) ~0.25) -- by roadmap row 3's rule its pH law is a declared band,
+not a fitted coordinate, until another laboratory confirms it. **No trap fit follows v5.**
