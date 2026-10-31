@@ -374,11 +374,11 @@ entries:
     hypothesis: "The direct step is a fitted stand-in for the measured Amadori route (de Roos 2005), so its offset piles up at the lower bound."
     design: "Arm R4f = R3En + offset_k_ttca_deg in [-4, 0.5]; ea_k_nf_mft profiled at 64.08 / 100 / 133 (fixed); from s042_r3en_fixed under s042_e_conv's fixed noise; budget 1200, ftol 1e-4 (thiol prereg sec. 16). Queued after EX-024."
     expected: "offset at its lower bound at >= 2 of 3 points (P 0.45); Cerny pot D passes at any point (P 0.15); cost profile flat within 2 units (P 0.6)."
-    artifacts: []
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r4f_ea64.md, results/validation/kinetic_core_mechanism_signatures_s042_r4f_ea64.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r4f_ea100.md, results/validation/kinetic_core_mechanism_signatures_s042_r4f_ea100.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r4f_ea133.md, results/validation/kinetic_core_mechanism_signatures_s042_r4f_ea133.md]
     commit: pending
-    verdict: pending
-    conclusion: "-"
-    follow_up: "-"
+    verdict: rejected
+    conclusion: "All three converged (status 2). Cost at Ea 64 / 100 / 133: 1070.4 / 1074.0 / 1075.2 (R3En fixed 1076; flat within 4.8 units -- the barrier is not identified by the fit rows, as the review said). offset_k_ttca_deg +0.20 / +0.23 / +0.23 +- 0.14: the data KEEP TTCA's direct breakdown at about its B2.1 value, they do not send it to the Amadori-only bound -- the R4a hypothesis is rejected (expected lower bound at >= 2 points, P 0.45: no). Cerny pot D 0.989 / 0.959 / 0.805: fails at every in-class barrier (expected pass P 0.15: no). Groups 2 / 3 / 4 of 11; the two gained at Ea 133 are weak (supply exhaustion 0.54 by chance, cysteine's role 0.12)."
+    follow_up: "Neither the DDP pH law (round 3) nor the TTCA step (R4f) nor an in-class barrier reconciles Cerny: the fed-norfuraneol dominance comes from upstream (B7a: the deoxyosone partition under the two-level measurement model)."
   - id: EX-031
     date: "2026-10-31"
     kind: diagnosis
