@@ -463,3 +463,15 @@ entries:
     verdict: supported
     conclusion: "192 of 200 draws ran. Chance of reaching the decisive thresholds: time slope >= 5 / 8 0.02, pH segments >= 4 / 6 0.00, both declines 0.00 -- strict tests. Typical random draw: time 1 / 8, pH 1 - 2 / 6. The fitted arms (time 1 - 2 / 8, pH 0 - 1 / 6) are at or BELOW chance on the partition: no structure tried so far carries information about it. Every draw passes exactly one of the two TDP declines, so that pair is uninformative as a pair; (vi) needs both."
     follow_up: "Credit a B7 arm only on (i) and (ii); next candidate the amine-assisted beta-cleavage of DPO (prereg sec. 11)."
+  - id: EX-038
+    date: "2026-10-31"
+    kind: review
+    question: "Premortem of the roadmap of 2026-10-31 morning: if it has failed by late November, why?"
+    hypothesis: "-"
+    design: "An independent read-only agent given STATUS_AND_PLAN, the overnight checkpoints, EX-022 - EX-037 and the B7 prereg."
+    expected: "-"
+    artifacts: [docs/guides/STATUS_AND_PLAN.md]
+    commit: pending
+    verdict: supported
+    conclusion: "Ranked failure shares: the hub not identifiable from literature (lab effects confound amine / phosphate / O2 factors) 0.30; the odorants reached too late (Strecker behind B, A3, A2, C1) 0.25; the signature machinery without measured power 0.15; A2 overrun 0.12; C6 scope creep 0.10; a thin yardstick 0.08. B7a-2's confound: Zhai's TTCA pots are not amine-free (cysteine). Missing: the published multiresponse hub models (Martins 2005, Brands 2002) as nulls."
+    follow_up: "Roadmap revised (STATUS_AND_PLAN sec. 5): B capped at 24 h with cysteine's amine order declared; forced-input odorant layers now; an identifiability audit + synthetic power test before the hub; the hub as a standalone module seeded from Martins / Brands, B7b folded in; A2 after; C6 cut to a sensitivity page."

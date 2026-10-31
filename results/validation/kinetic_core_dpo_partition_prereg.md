@@ -255,3 +255,17 @@ relatively MORE abundant at high pH). Candidate: DPO's beta-cleavage to acetic a
 Davidek's pots, none in Zhai's), so its base factor should multiply a free-amine term, not act alone -- one structural
 change, no new coordinate if the amine order is declared. Second: TDP's caramelisation source and its pH dependence
 (Zhai 2021's xylose ladder isolates it). Both are testable on data already keyed; neither was run tonight.
+
+## 12. Notes for the cysteine fate (B7b, folded into the hub step) from the new dossiers (2026-10-31 ~08:30)
+
+Roberts 1987 (roberts1987_extraction.md): no ring-opening rate, K or buffer data; the sugar-cysteine thiazolidines
+anomerise within minutes in unbuffered water at room temperature -- mild evidence AGAINST an intrinsically slow ring
+opening in water, so buffer catalysis is not supported as the whole explanation of Cao (phosphate) vs Zhai (water);
+leads for a rate: Nagasawa 1981 (10.1002/jhet.5570180538), Schubert 1939 (10.1016/s0021-9258(18)73532-1). Parker 2014:
+one 140 C / 30 min end point -- MFT goes the opposite way to norfuraneol across ribose vs ascorbic acid (consistent
+with Cerny's minor norfuraneol route); nothing on the 100 C lag. Tai & Ho 1997 / 1998: no free thiol, H2S or MFT;
+sulfur volatiles carry < 0.5 % of the charged sulfur, so the missing cysteine sink is non-volatile. **A rival worth
+testing:** headspace O2 oxidises thiol to disulfide in proportion to the headspace, not the charge -- large in the
+5 - 10 mM Zhai pots, <= 10 % at Cao's 0.4 M, which matches where the engine misfits; against it, Zhai 2021's cysteine
+excess is largest at pH 5.5 (thiolate oxidation predicts the opposite). P(oxidation is the main cause) ~0.2; the Zhai
+vessels' headspace is the deciding fact (check the dossiers).

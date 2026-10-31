@@ -375,3 +375,8 @@ always launched as the background command itself (run_in_background), never with
 **The paper registry records citation LINE numbers** (2026-10-31): any edit above a cited line in a register or
 ledger moves them, and `build_paper_registry.py --check` (unit test + freshness gate) fails. Regenerate it with the
 READMEs after staging, as part of every commit that touches docs/reference or data/lit.
+
+**Describe a paper only after its dossier exists** (2026-10-31). I gave the owner one-line descriptions of the Tai &
+Ho papers from a literature agent's summary ("cysteine vs cystine"); the PDFs compare cysteine with its sulfinic /
+cysteic acids and GSH with its sulfonic acid. The DOIs were right, the contents were not. When listing papers to
+download, say "reported to" and keep the claim to what a verified abstract states.
