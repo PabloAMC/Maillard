@@ -302,23 +302,23 @@ entries:
     hypothesis: "Unconverged optima (11 iterations) may have produced 'the route switched off' (EX-015) and 'the data accept DDP' (EX-016)."
     design: "E warm-started from its optimum (budget 1200, two noise rounds, ftol 1e-4) -> s042_e_conv; E again under that fixed series noise -> s042_e_fixed; R3En, R3Es, R3E each from its own optimum under s042_e_conv's fixed noise (budget 1200) -> s042_<arm>_fixed. Costs then share one measurement model; a nested arm can only match or beat E."
     expected: "At least one rival's verdict changes (P 0.4); R3E's cost <= E's under the fixed noise (P 0.9 if converged)."
-    artifacts: []
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_e_conv.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_e_fixed.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en_fixed.md, results/validation/kinetic_core_mechanism_signatures_s042_e_fixed.md, results/validation/kinetic_core_mechanism_signatures_s042_r3en_fixed.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3es_fixed.md, results/validation/kinetic_core_mechanism_signatures_s042_r3es_fixed.md]
     commit: 5096e72
     verdict: pending
-    conclusion: "-"
+    conclusion: "(in progress) E converged (status 2, ftol; cost 507, reduced chi-square 5.00, 155 evaluations). Against the budget-stopped E: MFT decay back at the shipped value (offset -1.29 -> +0.01), the acetic sink partly back (-6.0 -> -1.37), H2S loss to its lower bound (-4), NF -> MFT up (+1.17), DDP formation at its lower bound; Cerny pot D 0.984 (FAIL). So the round-2 / E findings that MFT loss is ~8x slower and the acetic sink is gone were optimiser artefacts (premortem #1). E under that fixed noise (s042_e_fixed): cost 1203 -> 1141, status 3 (xtol), reduced chi-square 4.75 -- THE REFERENCE COST for the rivals (same rows, same fixed series noise); constants moved up to 0.72 dex along sloppy directions. R3En under the same noise (s042_r3en_fixed): cost 1085 -> 1076, status 2, reduced chi-square 4.48: 65 cost units below E for one coordinate (delta chi-square 130, ~29 after the reduced chi-square of 4.5) -- the data ACCEPT DDP formation (k_dpo_ddp -0.59 vs E's lower bound -8): EX-016's reading survives convergence. But Cerny pot D 0.993 (FAIL): NF -> MFT stays fast (+1.36). Signatures: E_fixed 3 / 11 groups, R3En_fixed 2 / 11 (chance median 1). R3Es under the same noise: cost 1069, status 3; the free pH slope -0.11 +- 0.08 (1.3 sigma from zero), 7 units below R3En for one coordinate (delta chi-square 14, ~3 after the reduced chi-square 4.46): a tie, so R3En (no pH law) is admitted by the pre-declared rule; Cerny pot D 0.993 (FAIL); 2 / 11 groups. R3E follows."
     follow_up: "-"
   - id: EX-025
     date: "2026-10-31"
     kind: diagnosis
     question: "How often does each mechanism signature (and group) pass by chance, with the constants drawn without the data?"
     hypothesis: "Sign-only and loose-tolerance signatures pass often by chance, so a pass count without a baseline overstates the evidence (premortem #4)."
-    design: "score_mechanism_signatures.py --chance 200 --arm R3En (seed 20261031): every coordinate uniform within the arm's declared box; signature list v1 (bfa7676f309c)."
+    design: "score_mechanism_signatures.py --chance 200 --arm R3En (seed 20261031): every coordinate uniform within the arm's declared box; signature list v2 (0ecbfb24f608; v1 run stopped when v2 was declared)."
     expected: "Some signature passes in > 30 % of draws (P 0.7); the median draw passes <= 2 of 10 groups (P 0.6)."
-    artifacts: []
-    commit: pending
-    verdict: pending
-    conclusion: "-"
-    follow_up: "-"
+    artifacts: [results/validation/kinetic_core_mechanism_signatures_chance_r3en.md]
+    commit: 1d201d5
+    verdict: supported
+    conclusion: "200 of 200 draws ran. Groups passed per draw: 0: 34, 1: 70, 2: 53, 3: 33, 4: 7, 5: 3 (median 1; P(>= 2) 0.48, P(>= 3) 0.22). The fitted arms pass 2 - 3 groups (E 2, R3E 3, R3En 2, R3Es 2): on mechanism groups they are not yet distinguishable from constants drawn without the data. Weak by construction: Zhou MFT pH 7 / 6 (0.80 by chance), the Schieberle MFT plateau and early rise (0.54 / 0.53), Davidek acetic plateaus (0.40 / 0.32). Strong (<= 0.05 by chance): FFT / furfural pH direction (0.00), temperature dependence (0.01), MFT pH direction (0.04), Cerny routes (0.04), the entry pH law (0.05)."
+    follow_up: "Arms are credited by groups weighted by 1 - chance rate (a pass of a 0.8-chance group is little evidence); success = passing groups whose chance rate is <= 0.05. The chance baseline is rerun for each new box (R4f, B7a)."
   - id: EX-026
     date: "2026-10-31"
     kind: literature
@@ -379,3 +379,27 @@ entries:
     verdict: pending
     conclusion: "-"
     follow_up: "-"
+  - id: EX-031
+    date: "2026-10-31"
+    kind: diagnosis
+    question: "What do the fit's own data say about the deoxyosone partition and the cysteine fate (plan step B7)?"
+    hypothesis: "The 3-DX / 1-DX split and free cysteine are mis-specified upstream of every thiol (R4a review)."
+    design: "Read-only pass over the fit records s042_e / s042_r3en (raw vs after-scale residuals per series), the route-table dry checks and the dossiers; no engine runs."
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_dpo_partition_prereg.md]
+    commit: pending
+    verdict: supported
+    conclusion: "Per-species scales absorb 85 - 93 % of the TDP / DPO ratio error (1.57 of 1.85 dex in Zhai 2019); TDP has no real exit (positive offset in every figure, ~35 h lifetime); the c2c3 +2.4 makes MGO out of DPO, the only MGO parent switched on; the split's basis is one 120 C ratio while Zhai 2021 measures a strong pH dependence; free cysteine high with TTCA low points at a too-fast TTCA ring-opening rather than a missing sink. No Cys / TTCA / Amadori row is in the joint cost."
+    follow_up: "B7 pre-registration draft (shared TDP / DPO scale with a response-factor prior; route rows in the cost; rivals R-A pH split + ring-opening, R-B Cys + aldehydic dicarbonyl adducts); independent review before any fit."
+  - id: EX-032
+    date: "2026-10-31"
+    kind: review
+    question: "Design review of the B7 draft (deoxyosone partition + cysteine fate)."
+    hypothesis: "-"
+    design: "Independent review, no engine runs; numbers recomputed from the fit-row YAML, the route table and s042_e_conv (kinetic_core_dpo_partition_prereg.md sec. 7)."
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_dpo_partition_prereg.md]
+    commit: pending
+    verdict: partial
+    conclusion: "The diagnosis holds at the converged E (scales absorb 85 - 94 % of the TDP / DPO ratio error; TDP high everywhere), but the draft was not runnable: the route rows would dominate the cost (~2,000 - 6,000 units vs 507); a slower ring-opening cannot reconcile Cao (phosphate) with Zhai (water) -- buffer catalysis is the missing rival; the TDP exit needs its own arm; the shared scale needs a two-level measurement model in fitting.py."
+    follow_up: "B7a (partition only: two-level measurement model, split-law arm R-S, TDP-exit arm R-T) inside the 48 h box; B7b (cysteine fate, R-P) only after a cost-by-block check."

@@ -38,8 +38,14 @@ lead, calibrated out-of-sample prediction decides adequacy, scores diagnose).
   budget (200 evaluations = 11 optimiser iterations for 15 - 16 coordinates), not at an optimum. "MFT's loss ~8x
   slower than shipped" (also CF-013) and "2-acetylthiazole's constant 1000x high" are fit results; at R3En's optimum
   the acetic sink (-0.76 dex) and the shipped MFT decay (-0.02) come back. They stand only once converged fits agree.
+  **Converged E (2026-10-31, EX-024): MFT decay at the shipped value (+0.01), the acetic sink partly back (-1.37),
+  H2S loss at its lower bound -- "MFT loss ~8x slower" does NOT survive convergence.** The isotope evidence against
+  an acetic sink (CF-069) stands, so the fit's sink is absorbing another error (CF-069's first explanation).
 - Mechanism signatures: the round-2 model 1 / 15 (despite reduced chi-square ~5); with the pentose entry 5 / 15;
   R3E 5, R3En 4 -- a reshuffle, read off unconverged fits.
+  **Chance baseline (EX-025): constants drawn uniformly within the box pass a median 1 of 11 groups (P(>= 3) 0.22),
+  so 2 - 3 groups is not yet evidence. Credit goes to the groups that pass <= 5 % by chance: FFT / furfural pH
+  direction, temperature dependence, MFT pH direction, Cerny's routes, the entry pH law -- only the entry pH law passes (R3E, R3En).**
 
 ## 4. What a well-architected Maillard model needs, and how far we are (owner, 2026-10-31: "keep the big picture")
 
@@ -92,7 +98,9 @@ CI; P(bit-identical on the first pass) ~0.6, the rest found by the pinning tests
    the engine puts Zhai 2019's fed-TTCA 3-DX / 1-DX at 20 - 330 (measured 2.1 - 2.6), the fitted C2 + C3 drain on DPO
    at +2.4 dex, free cysteine 2 - 40x too high in the fed-TTCA pots (a missing sink), and in glycine pots DPO
    over-feeds norfuraneol (25 - 36 mol% vs <= 5 %). Rival DPO sinks and a cysteine sink, tested on Zhai 2019 / 2021,
-   Cao 2017 and Davidek. Then the pH model on unbuffered pots with the pentose acids in.
+   Cao 2017 and Davidek. Then the pH model on unbuffered pots with the pentose acids in. Scoped after its review
+   (kinetic_core_dpo_partition_prereg.md sec. 7): B7a the partition only (two-level measurement model; split-law
+   and TDP-exit arms); B7b the cysteine fate (buffer catalysis of the ring-chain step) only after a cost-by-block check.
    Meanwhile (queued after step 0): R4f -- TTCA's direct breakdown to DPO as a free offset (its lower bound = the
    measured Amadori route only), the NF -> MFT barrier profiled at 64 / 100 / 133 kJ/mol (thiol prereg secs. 14 - 16).
 8. Adequacy: leave-one-laboratory-out with the between-paper error on the finalist (6 - 10 h compute; overnight or

@@ -359,3 +359,7 @@
 commit (unit tests `test_*_readme_is_current` fail). Order: stage everything, regenerate the READMEs, stage them,
 commit. And a verification chain must not stop at the first failing step: the env wrapper runs `set -eo pipefail`,
 so `pytest ... | tail` kills the rest of the chain -- redirect each step to its own log instead.
+
+**Even text munging goes through the env wrapper** (2026-10-31, again). I parsed `gh pr view` JSON and edited the PR
+body with system `python3` -- the rule has no exception for "not repo code". Use
+`./scripts/docker_maillard.sh run "python ..."`, or `jq` / `gh -q` for JSON.

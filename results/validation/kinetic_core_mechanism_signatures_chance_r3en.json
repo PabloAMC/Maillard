@@ -1,0 +1,43 @@
+{
+ "artifact": "kinetic_core_mechanism_signatures_chance_r3en",
+ "provenance": {
+  "artifact": "kinetic_core_mechanism_signatures_chance_r3en",
+  "generated_on": "2026-10-31",
+  "git": {"commit": "1d201d542d5b1a56ba6cf9faced5bdd74c0fb000", "short": "1d201d54", "branch": "submodel1-ph", "dirty": true},
+  "generated_by": "scripts/generators/score_mechanism_signatures.py",
+  "inputs": [
+   {"path": "src/kinetic_core/sulfur.py", "sha256": "66447bc3348206cf89c24d5f3f994d5f4ff135176b2e5e0d0645b621337456df"},
+   {"path": "data/lit/fit_rows/ph_acid_davidek_acids.yml", "sha256": "af52f68f8e9ab8dd68b83d46c05fb8e28a2ece13fe9639d91f83e79e17aa1338"},
+   {"path": "data/lit/fit_rows/thiol_submodel.yml", "sha256": "95b36cd13d0a84275e2331bf913ac1543217af34e8f92e0a86d3409f3c8ea4da"},
+   {"path": "data/lit/fit_rows/thiol_zhou2023_ph_series.yml", "sha256": "70c521303b7961ca7c158c6cf7099a813a16241dc5220fe976398be789b4a18e"}
+  ]
+ },
+ "arm": "R3En",
+ "draws": 200,
+ "seed": 20261031,
+ "runnable_draws": 200,
+ "signatures_version": "v2",
+ "signatures_sha": "0ecbfb24f608",
+ "signature_pass_rate": {
+  "schieberle MFT lag 60 / 720 min": 0.23,
+  "schieberle FFT lag 60 / 720 min": 0.185,
+  "schieberle MFT plateau 720 / 360 min": 0.535,
+  "schieberle MFT early rise 60 / 30 min": 0.525,
+  "hofmann MFT pH 7 / pH 3 (hold-out)": 0.245,
+  "hofmann FFT pH 7 / pH 3 (hold-out)": 0.0,
+  "zhou2023 furfural pH 8 / 6": 0.0,
+  "zhou2023 FFT pH 8 / 6": 0.145,
+  "zhou2023 MFT pH 7 / 6": 0.8,
+  "zhou2023 MFT pH 8 / 7": 0.18,
+  "davidek acetic 240 / 60 min, pH 8": 0.4,
+  "davidek acetic 240 / 60 min, pH 6": 0.315,
+  "davidek acetic pH 8 / 6 at 240 min": 0.19,
+  "davidek xylose pH 8 / 6 at 30 min": 0.05,
+  "zhai MFT +Cys / TTCA, 120 C": 0.125,
+  "zhai MFT 140 / 120 C, +Cys (hold-out)": 0.195,
+  "zhai FFT 140 / 120 C, +Cys (hold-out)": 0.01
+ },
+ "group_pass_rate": {"FFT and furfural pH direction": 0.0, "FFT timing": 0.185, "MFT pH direction": 0.04, "MFT supply exhaustion (a reservoir)": 0.535, "MFT timing (an early source)": 0.175, "beta-cleavage pH law": 0.19, "cysteine's role in MFT formation": 0.125, "isotope routes (Cerny 2003)": 0.04, "no acetic-acid sink": 0.24, "pentose + amine entry pH law": 0.05, "temperature dependence": 0.01},
+ "groups_passed_distribution": {"0": 34, "1": 70, "2": 53, "3": 33, "4": 7, "5": 3},
+ "errors_sample": []
+}

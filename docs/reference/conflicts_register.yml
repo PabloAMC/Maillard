@@ -1652,3 +1652,21 @@ entries:
     status: open
     remedy: "The Hofmann 2000 Table 3 phenylalanine rows are semi_quantitative and flagged duplicate_candidate: never fitted as independent of hofmann2000b Table 3; at most one of the two enters a fit."
     affects: [hofmann2000_table3_mgo_phe_timecourse, hofmann2000b_table3_arp_phe_formation]
+  - id: CF-071
+    kind: conflict
+    scope: corpus
+    sources: [zhai2019, zhai2023jafc]
+    quantity: "cysteine's effect on the 3- / 1-deoxypentosone ratio in fed-TTCA pots: (TDP / DPO) with Cys over without"
+    observation: >-
+      Zhai 2019 Fig. 3b (fed TTCA +- cysteine, 120 C) gives a double ratio of 0.45 (0.32 - 0.60): cysteine lowers TDP
+      more than DPO. Zhai 2023 JAFC Fig. 5bc (TTCA +- cysteine, same laboratory) gives 0.53 - 2.6, i.e. at some times
+      cysteine raises the ratio. Found by the B7 design review (2026-10-31) recomputing the signature from both tables.
+    explanations:
+      - "Different conditions (pH 7.4 vs 7, buffer, time window) change which dicarbonyl cysteine traps."
+      - "Calibration of the quinoxalines differs between the papers (internal standard vs external standards), so one ratio carries a response-factor error."
+    tests:
+      - "Both double ratios as signatures of the B7a arms; an arm that passes one and fails the other is not credited on this mechanism."
+    status: open
+    remedy: "Signature (iii) is reported, not decisive, in B7a (kinetic_core_dpo_partition_prereg.md sec. 7)."
+    affects: [zhai2019_fig3b_dicarbonyls_ttca, zhai2023jafc_fig5_arp_dicarbonyls]
+

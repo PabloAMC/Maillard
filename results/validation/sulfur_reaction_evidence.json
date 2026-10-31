@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-31",
     "git": {
-      "commit": "5096e722ee171c8d84c88f649d006fc0a29b8573",
-      "short": "5096e722",
+      "commit": "1d201d542d5b1a56ba6cf9faced5bdd74c0fb000",
+      "short": "1d201d54",
       "branch": "submodel1-ph",
       "dirty": true
     },
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "2a5f1f41586e9bd67ae75a5368fab40df395a87197edc1f135100775f0081de8"
+        "sha256": "63e80892dd89480447eb8ffa48d51d3a00e69484050edaa765c01dcbb7f8aaee"
       },
       {
         "path": "src/kinetic_core/sulfur.py",

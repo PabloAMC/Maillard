@@ -209,3 +209,29 @@ of the early excess at 30 min but not at 60 min -- the intact-C5 route's early s
 R4b drafted (prereg sec. 14), to be reviewed in the day. R3Es: budget-exhausted, same picture as R3En.
 **Is this the most valuable next step?** Yes: the converged rivals decide whether round 3 said anything; R4 is the
 mechanistic answer either way, so its design waits for the owner's review, not for compute.
+
+## Checkpoint 12 -- 2026-10-31 01:40
+
+**Goal:** unchanged. **State:** branch 9 commits ahead of origin (last 1d201d5); full verification of 1d201d5 running
+on a clean checkout (the first run of 8a25ae7 found the READMEs stale -- regenerated before staging; lesson added).
+E convergence fit running (since 00:55); R3En / R3Es / R3E under E's noise follow; R4f (3 profile fits) queued
+after; chance baseline (v2) finishing. Register: 30 entries, every finished run in. **Finished / decided since 01:00:**
+R3Es scored (inconclusive, budget-exhausted); the early intact-C5 supply traced to r_ttca_deg (EX-028); R4a reviewed
+and replaced by R4f (EX-029 / EX-030); B7 redefined as the 1-deoxypentosone partition + the cysteine sink, ahead of
+any further MFT-route arm. The cron's step list is stale (R3T withdrawn, Hofmann done): the live list is
+STATUS_AND_PLAN sec. 5. **Most valuable next step:** the B7 design (no compute needed to draft): the cysteine sink and
+the DPO partition are upstream of every thiol, so getting them right is worth more than any route arm.
+
+## Checkpoint 13 -- 2026-10-31 02:40
+
+**Goal:** unchanged. **Finished since 01:40:** converged E (status 2) and E under fixed noise (the reference, cost
+1141); R3En fixed (1076: the data accept DDP formation, 65 units for one coordinate -- EX-016's reading survives
+convergence); R3Es fixed (1069: the pH slope ties zero -> R3En admitted); Cerny pot D fails in every arm (0.98 - 0.99).
+Converged E reverses "MFT loss ~8x slower" (decay back at shipped) -- STATUS sec. 3 corrected. Chance baseline: a
+median random draw passes 1 of 11 groups, P(>= 3) 0.22, so 2 - 3 groups is not evidence; credit goes to the <= 5 %
+groups. B7 groundwork + review: B7a (partition: two-level measurement model, split-law and TDP-exit arms) inside the
+box, B7b (cysteine fate, buffer catalysis) after a cost-by-block check; CF-071 registered. Verification of 1d201d5:
+gates PASS, unit 1150 PASS, scientific 108 PASS, freshness running. **Next:** R3E fixed -> EX-024 verdict; push when
+freshness passes; R4f queued; B7a code after the queue (fitting.py is imported by every queued fit).
+**Most valuable?** Yes. The cheapest high-value work left tonight is reading results as they land and keeping the
+record exact; new code waits for the queue.
