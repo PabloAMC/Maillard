@@ -235,3 +235,17 @@ gates PASS, unit 1150 PASS, scientific 108 PASS, freshness running. **Next:** R3
 freshness passes; R4f queued; B7a code after the queue (fitting.py is imported by every queued fit).
 **Most valuable?** Yes. The cheapest high-value work left tonight is reading results as they land and keeping the
 record exact; new code waits for the queue.
+
+## Checkpoint 14 -- 2026-10-31 03:41
+
+**Goal:** unchanged. **Finished since 02:40:** R3E fixed (1140 = E: the shipped law switches the route off) closes
+EX-024 -- R3En admitted, the round-3 readings survive convergence. 1d201d5 pushed to PR #30 after the full clean
+verification; PR description updated. R4f (EX-030): TTCA's direct step stays at its value (+0.2 +- 0.14), the NF ->
+MFT barrier is unidentified (cost flat within 4.8), Cerny fails at every in-class barrier -- rejected. B7a: the two-level
+measurement model coded, reviewed (algebra checked), 48 tests, bit-identical when off; cherry-picked; its scorer shows
+the admitted structure failing the scale-free partition signatures in time (1 / 8) and in pH (wrong sign, 1 / 6)
+(EX-033). **Running:** the B7a null under the two-level model (w 0.2 then 0.4); the R-S / R-T / R-ST arms being coded
+in a separate worktree, their design (prereg sec. 8) under independent review; df6b80f verifying (6 commits unpushed).
+**Most valuable?** Yes: the partition is now shown structurally wrong by tests a scale cannot absorb, and it is
+upstream of every thiol. Morning: a summary for the owner (decisions: PR #30 merge; the stranded main-checkout fix;
+the designed-experiment brief; the four DOIs).

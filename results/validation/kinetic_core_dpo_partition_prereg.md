@@ -134,3 +134,40 @@ list; P(R-A breaks Cao) ~0.7; the "engine" column is re-read at the null; the co
 - **Cut:** R-AB, signature (v) as a score.
 - **Expected (written now, before any B7a arm):** R-S passes (ii) by segment (P 0.45); R-T passes (vi) (P 0.5) and
   lowers c2c3 below +1.5 (P 0.35); the null fails (i) in >= 2 figures (P 0.8).
+
+## 8. B7a arms, specified (2026-10-31 ~03:50, after the null's signatures at R3En (EX-033), before any B7a arm)
+
+**Null at the admitted structure (EX-033, one-level measurement model):** time slope 1 / 8 pots (the engine's
+log10(TDP / DPO) climbs +1.1 to +1.8 per decade where the measured is flat), pH segments 1 / 6 (the engine's ratio
+RISES with pH, the measured falls -0.14 to -0.80 per pH unit), TDP decline x8 too slow at 120 C (right at 140 C).
+The B7a null under the two-level measurement model (`--within-tau` 0.2 and 0.4, R3En from `s042_r3en_fixed`, noise
+re-estimated) is running; its signatures are read with the same scorer.
+
+**All arms:** R3En's structure and coordinates (R4f showed `k_ttca_deg` stays near its value, so it is not freed),
+the two-level measurement model at within_tau 0.2 (0.4 as the sensitivity of the winner), series noise taken from
+the B7a null at the same width (one objective), from the B7a null's optimum, budget 1200, ftol 1e-4.
+
+- **N** = the B7a null itself.
+- **R-S (the enolisation split's pH law), +2 coordinates.** `CysAmadoriRoute.dpo_share` becomes
+  logistic(logit(s7) + b (pH - 7)) with s7 the 1-deoxyosone share at pH 7 (kind acid_yield, [0.02, 0.98], start
+  0.30 = CR-12) and b in logit units per in-situ pH unit ([-3, +3], start 0). Basis: de Roos 2005 (acid -> 1,2-
+  enolisation / 3-deoxyosone, base -> 2,3-enolisation / 1-deoxyosone), Nedvidek 1992 (1-DG / 3-DG x5 from pH 5 to 7),
+  Zhai 2021's ratio falling with pH. With b = 0 and s7 = 0.30 the engine is exactly today's (short-circuit, no
+  logit round trip).
+- **R-T (a TDP exit), 0 coordinates.** TDP's own decay (`r_osone_decay_tdp`, today the shared fitted osone decay
+  4.8e-4 /min) at Martins 2005b's 3-DG -> formic acid step k5 as a DECLARED TRANSFER (hexose 3-deoxyosone ->
+  pentose): 1.0e-2 /min at 100 C (geometric mean of the four non-zero cells 6.3e-3, 2.0e-2, 4.1e-3, 1.9e-2 /min,
+  pH 5.5 - 7.5; Martins reports "low pH-dependence", Table 3 pD 0.09 +- 1.10, so no pH term), Ea 29.6 kJ/mol (Martins
+  2005, step 5). Products unchanged (ACID + FRAG_C 4: the formic acid joins the lumped acid pool the charge balance
+  already carries). Implemented as a derived rate behind a switch (off: bit-identical). Arithmetic check: 1.6e-2 /min
+  at 120 C, 2.5e-2 at 140 C vs Zhai 2023 JAFC's apparent post-peak declines 0.0097 / 0.0266.
+- **R-ST = R-S + R-T**, +2 coordinates (the null's two failures are in different signatures -- time and pH -- which
+  the two arms address separately, so their combination is declared now rather than added after a partial result).
+
+**Decision order (sec. 5, as revised in sec. 7):** converged fits only; (i) per pot (pass >= 5 / 8); (ii) by segment
+(pass >= 4 / 6); (vi) (2 / 2); must-not-break: the v2 thiol groups no worse than the null, Cao / Zhao blanks, Zhai
+MGO absolute, Cerny pot D no worse than the null; cost under the fixed measurement model (R-T has no new coordinate,
+so its cost difference is a direct test; R-S / R-ST pay 2 coordinates); diagnostic: c2c3 below +1.5.
+**Expected (written now):** R-T passes (vi) (P 0.6) and >= 5 / 8 of (i) (P 0.35); R-S passes >= 4 / 6 of (ii) (P 0.35
+-- the measured pH law is curved and a logit-linear one may miss a segment); R-ST passes all three families (P 0.2);
+R-T lowers the cost below N's (P 0.6); c2c3 below +1.5 in any arm (P 0.25 -- MGO still needs a parent).
