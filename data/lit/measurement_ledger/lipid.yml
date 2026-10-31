@@ -4199,7 +4199,7 @@ entries:
     simulable: false
     condition_quote: ""
     flags: [matrix_food, concentrations_not_stated, dossier_conflict, "same_material_as: xin2026b_enpi"]
-    note: "Sugar lowers 2-PF (mono 50-77 vs poly ~98-100 mg/kg); a lipid-lane observable moved by sugar. Dossier calls control hexanal 922.04 the minimum, Xin2026b reads this paper's Fig. 7B as ~750 control, range 453-1099: dossiers conflict."
+    note: "Sugar lowers 2-PF (mono 50-77 vs poly ~98-100 mg/kg); a lipid-lane observable moved by sugar. Dossier called control hexanal 922.04 the minimum (corrected 2026-11-01: 922.04 is benzaldehyde, per the text; CF-029), Xin2026b reads this paper's Fig. 7B as ~750 control, range 453-1099: dossiers conflict."
   - id: xin2026_fig6_7_volatile_heatmap_bars
     dossier: xin2026_extraction.md
     paper: "Xin, Liu, Cui, Nie, Huang & Qin 2026 Food Hydrocoll 182:113124"

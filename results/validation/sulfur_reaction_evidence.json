@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-31",
     "git": {
-      "commit": "1e1b225524b673f3714d16e8a789df3852455e20",
-      "short": "1e1b2255",
+      "commit": "75b64005053422767e461bf5accbe01ea781defe",
+      "short": "75b64005",
       "branch": "ingest-2026-11-01",
       "dirty": true
     },
@@ -53,7 +53,7 @@
       },
       {
         "path": "data/lit/measurement_ledger/lipid.yml",
-        "sha256": "331b519df0fe942793c1b38d0e2437a9ba32ac496dc43e12f371edee534bab58"
+        "sha256": "e8b42a01480b5a580c57d26725370ace7d5ebcc12618dd5c5482c79845a52954"
       },
       {
         "path": "data/lit/measurement_ledger/matrix.yml",
