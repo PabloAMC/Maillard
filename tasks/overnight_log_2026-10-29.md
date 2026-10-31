@@ -249,3 +249,14 @@ in a separate worktree, their design (prereg sec. 8) under independent review; d
 **Most valuable?** Yes: the partition is now shown structurally wrong by tests a scale cannot absorb, and it is
 upstream of every thiol. Morning: a summary for the owner (decisions: PR #30 merge; the stranded main-checkout fix;
 the designed-experiment brief; the four DOIs).
+
+## Checkpoint 15 -- 2026-10-31 04:40
+
+**Goal:** unchanged. **Since 03:41:** df6b80f verified clean (gates, unit 1150, scientific 108, freshness) and pushed;
+B7a arms implemented and code-reviewed (nothing blocking), starts moved near the null and declared (prereg sec. 10),
+the scorer gained a chance mode; the B7a arms' design review (sec. 9) replaced R-S's linear law with a curved one,
+R-T's constant with the trunk's own, and added B7D (a long-lived DPO with a second MGO parent) after the observation
+that TDP and DPO decline at the same rate in Zhai 2023 JAFC. B7a null (w 0.2) converged: partition signatures
+unchanged (1 / 8, 1 / 6, 1 / 2) -- the structure, not the measurement model, is wrong (EX-035). **Next:** w 0.4 null
+(running) -> cherry-pick the arm commits -> regenerate engine-dependent artifacts -> chance baseline -> the four arms.
+**Most valuable?** Yes. The morning summary is the other must-do before ~08:00.

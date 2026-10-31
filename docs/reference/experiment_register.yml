@@ -415,3 +415,27 @@ entries:
     verdict: supported
     conclusion: "Time slope 1 / 8 pots: the engine's log10(TDP / DPO) climbs +1.1 to +1.8 per decade of time in six pots where the measured ratio is flat (-0.5 to +0.1). pH segments 1 / 6: the engine's ratio RISES with pH (+0.08 to +0.40 per pH unit) where the measured falls (-0.14 to -0.80) -- the wrong sign. TDP's post-peak decline: x8 too slow at 120 C, right at 140 C. Cysteine double ratio 0.78 vs 0.45 (reported). The partition is structurally wrong in time and in pH, as the groundwork said."
     follow_up: "The same signatures at the B7a null under the two-level measurement model, then the R-S (split pH law) and R-T (TDP exit) arms."
+  - id: EX-034
+    date: "2026-10-31"
+    kind: review
+    question: "Design review of the B7a arms (dpo partition prereg sec. 8)."
+    hypothesis: "-"
+    design: "Independent review, no engine runs; the fit table and fit records parsed (prereg sec. 9)."
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_dpo_partition_prereg.md]
+    commit: pending
+    verdict: partial
+    conclusion: "Not runnable as specified: R-T's constant was a forking-path choice (Ea from one fit, k from another, picked after the declines were read) and slows TDP's sink at 140 C where the null passes; a logit-linear split cannot pass the curved pH segments; the base-catalysed r_tdp_mgo was dropped. Key observation: in Zhai 2023 JAFC TDP and DPO decline at the same rate with a flat ratio -- equal lifetimes -- so the likelier fault is an over-drained DPO (c2c3 +2.4) without a second MGO parent, not a missing TDP exit."
+    follow_up: "Arms revised (prereg sec. 9): B7S curved split law, B7T at the trunk's own k_tdg_fa with a +-1 dex band and sensitivities, B7ST, and B7D (r_tdp_mgo on, c2c3 free); all declines reported; a chance baseline before crediting."
+  - id: EX-035
+    date: "2026-10-31"
+    kind: fit
+    question: "B7a null: the admitted structure (R3En) under the two-level measurement model -- does the honest measurement model alone change the partition signatures?"
+    hypothesis: "No: the null fails (i) in >= 2 figures (dpo partition prereg sec. 7, P 0.8)."
+    design: "R3En from s042_r3en_fixed, --within-tau 0.2 (and 0.4), two noise rounds, budget 1200, ftol 1e-4 (prereg secs. 7 - 8)."
+    expected: "Null fails (i) in >= 2 figures (P 0.8)."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en_b7anull_w02.md, results/validation/kinetic_core_deoxyosone_signatures_s042_r3en_b7anull_w02.md, results/validation/kinetic_core_mechanism_signatures_s042_r3en_b7anull_w02.md]
+    commit: pending
+    verdict: supported
+    conclusion: "w 0.2: converged (status 2), cost 409 (not comparable with one-level costs), reduced chi-square 4.61. Partition signatures unchanged: time slope 1 / 8, pH segments 1 / 6 (wrong sign), TDP decline 1 / 2; constants close to R3En's (c2c3 +2.17, DDP route accepted); Cerny pot D 0.993 (FAIL); thiol groups 4 / 11. The measurement model alone does not fix the partition: the structure must change. w 0.4 running."
+    follow_up: "The B7a arms (B7S, B7T, B7ST, B7D) under w 0.2's series noise; the chance baseline of the partition signatures first."

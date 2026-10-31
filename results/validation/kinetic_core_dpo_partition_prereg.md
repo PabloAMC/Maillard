@@ -171,3 +171,54 @@ so its cost difference is a direct test; R-S / R-ST pay 2 coordinates); diagnost
 **Expected (written now):** R-T passes (vi) (P 0.6) and >= 5 / 8 of (i) (P 0.35); R-S passes >= 4 / 6 of (ii) (P 0.35
 -- the measured pH law is curved and a logit-linear one may miss a segment); R-ST passes all three families (P 0.2);
 R-T lowers the cost below N's (P 0.6); c2c3 below +1.5 in any arm (P 0.25 -- MGO still needs a parent).
+
+## 9. Design review of sec. 8 (2026-10-31 ~04:00; no engine runs) and the revised arms
+
+**BLOCKING.** (B1) R-T's transfer was a forking-path choice: the Ea 29.6 is Martins 2005's, whose own constant for
+the step is 3.5e-2 /min -- the trunk's `k_tdg_fa` 3.45e-2 -- while 2005b's cells scatter ~0.35 dex (its pH 6.8 cell
+8.5x lower) and the Ea itself is contested (Knol 84 +- 14, Yu 43.9; at 84 the rate fails (vi) by 0.6 - 0.7 dex); the
+source was picked after the declines were read. (B2) At 140 C R-T SLOWS TDP's sink: the null's shared osone decay (B60,
+Ea 143.5) gives 4.7e-4 / 5.0e-3 / 4.2e-2 /min at 100 / 120 / 140 C, so R-T's 0.025 replaces 0.042 exactly where the
+null passes both signatures; an apparent post-peak decline is only a lower bound on a first-order exit while
+formation continues. (B3) A logit-linear split gives a constant log-ratio slope against measured segments -0.21 /
+-0.38 / -0.80 and -0.14 / -0.38 / -0.70: at most 2 per ladder can pass, so R-S's fail was close to predetermined;
+and sec. 7's base-catalysed `r_tdp_mgo` (a sink with the right pH direction and a second MGO parent) was silently
+dropped. SHOULD-FIX: (S1) the declines were selected -- the JAFC 100 C pot (~0.018 /min) and the +Cys pots (0.025 -
+0.035, flat in temperature) were left out, Zhai 2023 FC's 140 C pot plateaus, the apparent declines do not rise with
+temperature (no single Arrhenius exit), and **in JAFC TDP and DPO fall at the same rate (140 C: 0.025 vs 0.028 /min)
+with the ratio flat from 10 min -- equal lifetimes**: the missing rival is a LONG-LIVED DPO (the c2c3 drain released)
+plus an MGO parent. (S2) No chance baseline for these signatures, and the thresholds were set after reading the null.
+(S3) The split acts only on the Amadori flux (r_pent_caramel, r_pent_thermal_dpo have no pH factor); the Zhai 2021 pots
+are unbuffered, so the in-situ pH span is narrower than the labels. (S4) s7 is identified mainly by the response-
+factor term; report cost by block and profile the law with s7 fixed; TDP / DPO are 276 of 521 rows and noise
+re-estimated at N absorbs N's misfit (compare with e_conv's 0.40 - 0.57). (S5) R-T's extra ACID lowers the in-situ pH
+of unbuffered pots: report the shift. Must-not-break additions: the null's two passes at 140 C, furfural (17
+calibrated rows; r_tdp_fur scales with TDP) and FFT, Zhou 2025b's amine-free TDP, Kang <= 16.3 %, the hold-outs.
+
+**Revised arms (adopted; all else as sec. 8).**
+- **B7S** -- a CURVED split law with the same two coordinates: TDP : DPO odds(pH) = odds7 (1 + 10^(7 - pHc)) /
+  (1 + 10^(pH - pHc)) (base-saturating 2,3-enolisation; s7 = DPO share at pH 7, pHc in [5, 10]).
+- **B7T** -- TDP's own decay at the trunk's own hexose pairing (`k_tdg_fa`, its declared k_ref / t_ref / Ea),
+  band +-1 dex declared, sensitivities at Martins 2005b's 1.0e-2 /min and at Ea 84 (Knol); 0 coordinates.
+- **B7ST** = B7S + B7T.
+- **B7D (new, the review's rival)** -- a long-lived DPO with a second MGO parent: the base-catalysed `r_tdp_mgo`
+  switched on with one coordinate (log10 k at 100 C / pH 5, [-8, -1], start -5.08 = sub-model 3 arm A3's fit; Ea at
+  its declared 100 kJ/mol), `offset_k_dpo_c2c3` free as before (the data can lower it once MGO has another parent).
+- Scorer: all post-peak declines reported (the two JAFC TTCA pots decisive), DPO's decline beside TDP's, Zhai 2021's
+  in-situ pH; a chance baseline for these signatures before any arm is credited.
+**Expected (rewritten, post-review):** B7T passes (vi) 2 / 2 (P 0.35) and >= 5 / 8 of (i) (P <= 0.15) and loses at
+least one of the null's 140 C passes (P 0.5); B7S passes >= 4 / 6 segments (P 0.35); **B7D passes >= 5 / 8 of (i)
+(P 0.35) and brings c2c3 below +1.5 (P 0.4)**; B7ST all three families (P 0.15).
+
+## 10. Before any B7a arm is read (2026-10-31 ~04:15): the implementation, its review, and two declared changes
+
+Implemented on branch `b7a-two-level-measurement` (B7S / B7T / B7ST / B7D; every default bit-identical -- 1048 rate
+constants equal to the parent commit with the switches off; 154 targeted tests; the switch, choices, unpinned-constant
+and evidence-anchor gates pass) and code-reviewed independently (nothing blocking). **Two starts changed from sec. 9,
+declared now, before any arm is fitted or read:** B7S starts at pH_c 9.5 (within ~3 % of the null at pH 8; at 7.5 the
+start already moved the split, so the arm would not have started at the null); B7D starts at log10 k_tdp_mgo = -7
+(sub-model 3 arm A3's -5.08 was fitted with its barrier at the 40 kJ/mol bound; at the declared 100 kJ/mol it gives
+~1500x the null's MGO at 120 - 140 C, far from the null). B7T's primary constant is the trunk's `k_tdg_fa` (3.45e-2 /min
+at 100 C, Ea 30), ~5.6e-2 at 120 C against Zhai's apparent 0.0097: its (vi) fail at 120 C is likely (P 0.6) and is
+part of the test, not a reason to swap the constant (the Martins 2005b 1.0e-2 sensitivity runs beside it). A chance
+baseline of these signatures (`score_deoxyosone_signatures.py --chance`) runs before any arm is credited.
