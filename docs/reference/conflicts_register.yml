@@ -1643,7 +1643,7 @@ entries:
       Hofmann 2000 Table 3 (MGO + Phe) prints a "Phe degraded" column that matches Hofmann & Schieberle 2000b Table 3
       (glucose + Phe, a different pot) within 1 point at all five shared times. Two different dicarbonyl / sugar
       donors are unlikely to consume phenylalanine identically; one series is probably reused. Neither paper says how
-      phenylalanine was measured. Found by the first reader and confirmed by the adjudicator (2026-10-31).
+      phenylalanine was measured in Hofmann 2000; Hofmann & Schieberle 2000b does print its assay (amino-acid analyser with ninhydrin, p. 4302 -- corrected by the 2000b adjudication). Found by the first reader and confirmed by the adjudicator (2026-10-31).
     explanations:
       - "One phenylalanine series was printed in both papers (a copy)."
       - "Phenylalanine loss is set by a step common to both pots (e.g. the amine's own thermal loss) and the coincidence is real."
@@ -1669,4 +1669,60 @@ entries:
     status: open
     remedy: "Signature (iii) is reported, not decisive, in B7a (kinetic_core_dpo_partition_prereg.md sec. 7)."
     affects: [zhai2019_fig3b_dicarbonyls_ttca, zhai2023jafc_fig5_arp_dicarbonyls]
-
+  - id: CF-072
+    kind: code_mismatch
+    scope: corpus
+    sources: [nguyen2016]
+    quantity: "the protein-glycation arm (B20): the fructoselysine-protein decay r_flp_decay"
+    observation: >-
+      src/kinetic_core/network.py r_flp_decay writes FLP -> TDG + LYSP, returning the protein lysine to the pool.
+      Nguyen 2016's fitted network (nguyen2016_extraction.md, the supplementary equations) returns NO lysine: lysine is
+      consumed only by k3, and AP -> CML / CEL / MRPs leave d[lys]/dt untouched. The dossier warns that a network that
+      writes the lysine back and uses Nguyen's constant is not Nguyen's model. The frozen k_glyc at 120 C is 0.64x
+      Nguyen's printed k3, consistent with the fit compensating for the different network. Found by the matrix
+      mechanism review (2026-10-31).
+    explanations:
+      - "A transcription choice in B20: the Amadori decay written with amine release as in the free-amino-acid trunk."
+      - "A deliberate declared departure not recorded in the choices register."
+    tests:
+      - "Refit B20 with the lysine kept out (Nguyen's structure) and compare k_glyc with Nguyen's k3; score the casein-glucose rows."
+    status: open
+    remedy: "Fix in its own PR (it moves shipped numbers): r_flp_decay without LYSP, k_glyc re-derived; until then the arm is flagged."
+    affects: [nguyen2016_table1_m1_glucose_casein_constants]
+  - id: CF-073
+    kind: conflict
+    scope: corpus
+    sources: [weenen2001, hofmann2000]
+    quantity: "Strecker aldehyde yield from methylglyoxal + phenylalanine at pH ~3 (and the MGO / 3-DG donor ratio)"
+    observation: >-
+      Weenen 2001 gets ~21 % phenylacetaldehyde from MGO at pH 3.2 (26 mmol/L, steam distillation), Hofmann 2000 ~1 %
+      at pH 3 (100 mmol/L, SIDA): x14 - 20. The MGO / 3-DG donor ratio at pH ~3 is 35 (Weenen) vs ~1.6 (Hofmann). An
+      aldehyde-loss term cannot explain it (k_loss ~4e-4 /min removes <= 5 % in 2 h). Found by the Strecker mechanism
+      review and the forced-input design review (2026-10-31).
+    explanations:
+      - "Donor concentration: a concentration-dependent share (Weenen 26 mM vs Hofmann 100 mM; Granvogl 2006 at 5 mM gets >= 7 % aldehyde alone)."
+      - "A reversible phenylacetaldehyde-amine pool drained by Weenen's steam stripping."
+      - "Different quantification (steam distillation vs SIDA) or a printing / units issue."
+    tests:
+      - "The forced-input Strecker layer predicts a concentration-independent share s = k / kappa: Weenen vs Hofmann is a signature against it (confounded by method)."
+    status: open
+    remedy: "Carried as a cross-laboratory signature of the forced-input Strecker layer, not as fit rows (kinetic_core_strecker_forced_input_prereg.md, review)."
+    affects: [hofmann2000_table3_mgo_phe_timecourse, weenen2001_tab3_pac_from_15_carbonyls]
+  - id: CF-074
+    kind: duplicate
+    scope: corpus
+    sources: [hofmann2000, hofmann2000b]
+    quantity: "phenylacetaldehyde / phenylacetic acid at 120 min in the glucose + phenylalanine pot, pH 7"
+    observation: >-
+      Hofmann 2000 Fig. 2 reads 1.399 / 1.797 micromol/mmol at 120 min; Hofmann & Schieberle 2000b Table 2 expt II
+      (Glc / Phe, air) prints 1.4 / 1.8 -- identical to the printed digit, while the printed conditions differ (98 C,
+      reflux / heated, atmosphere uncontrolled vs 100 C, closed vial, air). hofmann2000 was received Aug 1999 and online
+      4 Jan 2000; 2000b was received 18 Jan 2000. Found by both readers; ruled by the adjudicator (2026-10-31).
+    explanations:
+      - "One run reported twice (P ~0.75); hofmann2000 is the original."
+      - "Coincidence (P ~0.25): runs of this recipe scatter 10 - 30 %."
+    tests:
+      - "None on disk; the paired air / argon comparison of 2000b may compare a reflux pot with a closed argon vial."
+    status: open
+    remedy: "Counted once: 2000b expt II Glc / Phe maps to the original Fig. 2 rows; the 2000b Glc / Phe air / argon ratio (3.5, used by B29) is flagged as possibly comparing different vessels."
+    affects: [hofmann2000_fig2_pa_paa_glucose_phe, hofmann2000b_table2_arp_phe_oxygen]

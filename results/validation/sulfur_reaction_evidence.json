@@ -4,9 +4,9 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-31",
     "git": {
-      "commit": "b6f6af10cd870b4593e3c4a9633bc558c1a82a6d",
-      "short": "b6f6af10",
-      "branch": "submodel1-ph",
+      "commit": "33bc1afbf3d1dbde0a526f7eeb4f3c21925ba982",
+      "short": "33bc1afb",
+      "branch": "lit-2026-10-31-dossiers-reviews",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "63e80892dd89480447eb8ffa48d51d3a00e69484050edaa765c01dcbb7f8aaee"
+        "sha256": "10d0d896fbbcf931826a02f51084e666347aa0e2338b2c88c470b4604b4e6ea3"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -65,7 +65,7 @@
       },
       {
         "path": "data/lit/measurement_ledger/trunk.yml",
-        "sha256": "a2f97a60b7a5935b1127f86d51434462725415504d57df58590ae2f4e8bfb652"
+        "sha256": "6cc18a7adb57fb474d6023edc56fa48f63a59bf4c14ca37772edde427a0b8b93"
       }
     ]
   },
@@ -3689,8 +3689,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 49,
-          "time_series": 24,
+          "data_sets": 50,
+          "time_series": 25,
           "used_by_the_model": 5
         },
         "FRAG_C": {
@@ -3770,8 +3770,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 49,
-          "time_series": 24,
+          "data_sets": 50,
+          "time_series": 25,
           "used_by_the_model": 5
         },
         "FA": {
@@ -3875,8 +3875,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 49,
-          "time_series": 24,
+          "data_sets": 50,
+          "time_series": 25,
           "used_by_the_model": 5
         },
         "FRAG_C": {
@@ -6942,8 +6942,8 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 49,
-          "time_series": 24,
+          "data_sets": 50,
+          "time_series": 25,
           "used_by_the_model": 5
         },
         "DPO": {

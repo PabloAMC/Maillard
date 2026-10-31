@@ -3721,8 +3721,26 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: "heated at 98 C ... Oxygen, the concentration of which was not controlled"
-    flags: [ph_start_only, condition_uncertain, "fig3_keyed_as: hofmann2000_fig3_dicarbonyls_glucose_phe"]
-    note: "Dicarbonyls by o-phenylenediamine quinoxalines (3-DG/glucosone HPLC-DAD; GO/MGO GC-MS vs labelled butanedione). Text gives only glucosone max and MGO/GO=3 at 500 min. 1-DG not measured. Valuable deoxyosone time course at pH 7. 2026-10-31: Fig. 3 digitised under hofmann2000_fig3_dicarbonyls_glucose_phe (fit table strecker_hofmann2000); Fig. 2 (PA, PAA) is still figure-only here: rows for Fig. 3 must cite the new id, not this one."
+    flags: [ph_start_only, condition_uncertain, "fig3_keyed_as: hofmann2000_fig3_dicarbonyls_glucose_phe", "fig2_keyed_as: hofmann2000_fig2_pa_paa_glucose_phe"]
+    note: "Dicarbonyls by o-phenylenediamine quinoxalines (3-DG/glucosone HPLC-DAD; GO/MGO GC-MS vs labelled butanedione). Text gives only glucosone max and MGO/GO=3 at 500 min. 1-DG not measured. Valuable deoxyosone time course at pH 7. 2026-10-31: Fig. 3 digitised under hofmann2000_fig3_dicarbonyls_glucose_phe (fit table strecker_hofmann2000); rows for Fig. 3 must cite the new id, not this one. 2026-10-31 (first reader, draft fit table strecker_hofmann2000_fig2): Fig. 2 (PA, PAA; SIDA, not this entry's 'calibrated') digitised under hofmann2000_fig2_pa_paa_glucose_phe; rows for Fig. 2 cite that id."
+  - id: hofmann2000_fig2_pa_paa_glucose_phe
+    dossier: "hofmann2000_extraction.md (guide only; values digitised from the PDF)"
+    paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
+    lab: "DFA Munich (Hofmann / Schieberle)"
+    system: "glucose 0.1 M + L-Phe 0.1 M (1.0 mmol each in 10 mL; declared from the glucose/Phe recipe, Fig. 2 states no amounts)"
+    medium: "phosphate buffer pH 7.0 (0.5 mol/L per the glucose/Phe footnotes; Experimental '0.5 mmol/L'); heated at 98 C / refluxed (abstract 100 C); atmosphere not controlled; none of it stated for Fig. 2 itself"
+    temperature_c: [98]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [10, 500]
+    species: [phenylacetaldehyde, phenylacetic acid]
+    kind: time_series
+    location: "Fig. 2 (umol/mmol glucose; 300 ppi 1-bit raster, page 436), digitised at 10 / 30 / 60 / 120 / 240 / 500 min; text p. 436 (PA favoured within 60 min; acid nearly twice the aldehyde after ~8 h)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.5 mmol/L, pH 7.0) was heated at 98 C for 30 min. ... To gain further insight into the time course of phenylacetaldehyde (PA) and phenylacetic acid (PAA) formation from L-phenylalanine, their generation was followed quantitatively."
+    flags: [ph_start_only, no_replicates, no_error_bars, condition_uncertain, conditions_declared_not_printed, "point_120min_coincides_with: hofmann2000b_table2_arp_phe_oxygen"]
+    note: "Fit table strecker_hofmann2000_fig2 (2026-10-31): two readers agree on all 12 points, adjudicated (verified; status ready, literature only: PHE / PHEAL / PHEAC are not engine species). PA / PAA by SIDA ([13C2]isotopologues, p. 435). 12 points, all within 0.8 px of a 0.1 umol/mmol grid (plotted from rounded values). The 120-min pair (1.40 / 1.80) equals hofmann2000b Table 2 expt II glucose/Phe (1.4 / 1.8; 100 C closed vial, air) to the printed digit: ruled one experiment reported twice, this figure the original (earlier paper); count once. At 30 min PA 0.49 vs Table 2's 0.42 (PAA 0.30 vs 0.29). Text 'nearly twice' after ~8 h vs 1.59 in the figure."
   - id: hofmann2000_fig4_fig5_ph_series_strecker
     dossier: hofmann2000_extraction.md
     paper: "Hofmann, Munch & Schieberle 2000 J Agric Food Chem 48:434"
@@ -3829,7 +3847,7 @@ entries:
     quant_class: sida
     simulable: true
     condition_quote: "The precursors (1 mmol each) were heated (100 C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0) for 120 min in a closed vial under an atmosphere of argon."
-    flags: [ph_start_only, condition_uncertain]
+    flags: [ph_start_only, condition_uncertain, "glc_phe_air_cell_copy_of: hofmann2000_fig2_pa_paa_glucose_phe"]
     note: "12 cells. B29 fit used 4 within-pot PA ratios (air/argon, air+Cu/air) for atmosphere factors on k_ama_g/k_glc_g; factors on bounds, unidentified, not forwarded (ATMOSPHERE_FACTORS air only). PAA rows not fitted. Air vs pure O2 ambiguous. No SD."
   - id: hofmann2000b_table3_arp_phe_formation
     dossier: hofmann2000b_extraction.md
