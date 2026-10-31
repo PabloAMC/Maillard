@@ -34,6 +34,7 @@ aliases:
   Zhou2023b: zhou2023                        # Zhou et al., JAFC 2023, 10.1021/acs.jafc.2c08360
   brands2002: brands2002b                    # the ICS 1245 conference version; cross-checked and declared a DUPLICATE in brands2002b section 8
   chan2005: chan1994b                        # Chan & Reineccius 1994 RSC chapter (digital edition 2005)
+  davidek2006: davidek2006a                  # JAFC 54 (2006) 6667, 10.1021/jf060667q; the ledger / fit table key is davidek2006a (companion 6677 = davidek2006b)
   devleeschouwer2008b: devleeschouwer2007    # Biotechnol Prog 23 (2007) 722
   hofmann1996b: [hofmann1998_reconciliation, k3_final_parameter_inventory]   # declared a duplicate of jf9705983 tables in the reconciliation; Fig. 2 / Table 4 read in k3 section B.10
   hofmann1998: hofmann1998_reconciliation    # JAFC 46 (1998) 235, 10.1021/jf9705983
