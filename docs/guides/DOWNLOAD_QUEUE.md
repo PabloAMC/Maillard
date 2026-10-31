@@ -8,8 +8,7 @@
 **Done 2026-10-31:** tier 1 (smuda2010, wei2022, zyzak1995, fife1991, granvogl2006, low2007, hayashi1980,
 warmbier1976) -- all eight dossiered.
 
-**New lead from the tier-1 dossiers (DOI to verify before asking):** Voigt & Glomb 2009, J. Agric. Food Chem.
-57:4765 (10.1021/jf900459x as reported) -- the amine-free vs amine 1-DG cleavage the Smuda paper does not test.
+**Voigt & Glomb 2009** (lead from the tier-1 dossiers): DOI verified 2026-10-31, now in tier 2b.
 
 ## Tier 2 -- useful constants or rivals
 
@@ -32,6 +31,28 @@ warmbier1976) -- all eight dossiered.
 | adams2001.pdf | Adams, Mottram, Parker & Brown 2001, J. Agric. Food Chem. 49:4333 | 10.1021/jf0100797 | abstract | volatile disulfides lost to ovalbumin (matrix: thiol binding) |
 | lo1994.pdf | Lo, Westwood, McLellan, Selwood & Thornalley 1994, J. Biol. Chem. 269:32299 | 10.1016/S0021-9258(18)31635-1 | search snippet | MGO with lysine / cysteine / arginine (matrix: dicarbonyl traps) |
 | shibamoto1977.pdf | Shibamoto & Bernhard 1977, Agric. Biol. Chem. 41:143 | 10.1271/bbb1961.41.143 | abstract | pyrazine pathways in glucose-ammonia (pyrazines) |
+
+
+## Tier 2b -- from the evidence map (2026-10-31; DOIs checked against Crossref by the coordinator, titles match)
+
+| save as | paper | DOI | for |
+|---|---|---|---|
+| voigt2009.pdf | Voigt & Glomb 2009, J. Agric. Food Chem. 57:4765 | 10.1021/jf900459x | amine-free vs amine 1-DG cleavage (hub: amine acceleration) |
+| beck1988.pdf | Beck, Ledl & Severin 1988, Carbohydr. Res. 177:240 | 10.1016/0008-6215(88)85058-4 | the 1-DG : 3-DG split from Amadori compounds at pH 7 (hub) |
+| huyghuesdespointes1996.pdf | Huyghues-Despointes & Yaylayan 1996, J. Agric. Food Chem. 44:672 | 10.1021/jf9502921 | 13C labelling of the Amadori retro-aldol / redox routes (hub, redox) |
+| kallen1971b.pdf | Kallen 1971, J. Am. Chem. Soc. 93:6236 | 10.1021/ja00752a040 | thiazolidine forward / reverse RATE constants (cysteine fate) |
+| charlesbernard2005a.pdf | Charles-Bernard et al. 2005, J. Agric. Food Chem. 53:4417 (Part 1) | 10.1021/jf048021q | which matrix fraction binds thiols (MFT loss) |
+| ghiron1988.pdf | Ghiron et al. 1988, J. Agric. Food Chem. 36:677 | 10.1021/jf00082a002 | 3-DG as a Strecker donor / 3-DG sink |
+| grosch1992.pdf | Grosch & Zeiler-Hilgart 1992, ACS Symp. Ser. 490:183 | 10.1021/bk-1992-0490.ch014 | SDE vs direct extraction of MFT (observation operator) |
+| weenen1992.pdf | Weenen & Tjan 1992, ACS Symp. Ser. 490:217 | 10.1021/bk-1992-0490.ch017 | cysteamine trapping of 3-DG (3-DX sink analogue) |
+| kim1996b.pdf | Kim, Hartman & Ho 1996, J. Agric. Food Chem. 44:3906 | 10.1021/jf950623+ | lipid carbonyl (2,4-decadienal) + amino acids in water |
+| low2006.pdf | Low et al. 2006, J. Agric. Food Chem. 54:5976 | 10.1021/jf060328x | the concentrations behind Low 2007's label shares (pyrazines) |
+| mottram1996.pdf | Mottram, Nobrega & Dodson 1996, Flavour Science 413 | 10.1533/9781845698232.7.413 | thiol / disulfide exchange with protein (MFT loss) |
+
+Leads without a DOI (not asked): Weenen & Apeldoorn 1996; de Roos 1992 (ACS Symp. Ser. 490); Mottram & Leseigneur 1990;
+Desclaux 2006 (thesis); a Cerny / Davidek norfuraneol + cysteine CAMOLA follow-up (may be unpublished). Data to ask authors
+or SI for: Zhai 2021's 13C5-xylose label fraction in TTCA; Xia 2022 SI Fig. S5; Zhou 2024 SI Table S1; Zamora 2015 SI
+Figs. S5 - S6.
 
 ## Tier 3 -- title only, older, lower expected value
 
