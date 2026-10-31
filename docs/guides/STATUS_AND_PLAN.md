@@ -110,6 +110,8 @@ compute is unattended.
 | 8 | **C6 cut to a one-page sensitivity on declared bands** (protein-bound lysine, thiol binding, low a_w); product-level numbers out of scope until designed data exist. | 4 | ~4 h | -- |
 | 9 | **D adequacy per lane:** leave-one-lab-out with the between-paper error, coverage WITH interval width; Phase 3 regeneration of what passes its audit. | -- | ~1 day / overnight each | what ships |
 
+**Mechanisms before constants (owner, 2026-10-31).** A candidate structure is first tested for FEASIBILITY: can any constant set inside the measured / declared bands reproduce the mechanism signatures (isotope routes, branching ratios, scale-free ratios, presence / absence, the direction of a contrast)? -- by sampling or dry grids, before any fit. A structure that cannot pass is rejected without fitting; fits follow only for structures that pass, and their cost is read after the signatures. Evidence: three B7 arms gained 20 - 70 cost units while failing every scale-free test. Literature mechanism evidence (labelling, fed intermediates, trapping) outranks more fitting.
+
 Rules throughout: premortem of each plan change; pre-registration + independent review before every fit; converged
 fits only; chance baselines AND (from step 3) a measured power before credit; one PR per sub-model; a mechanism
 without data -> DOIs to the owner.

@@ -343,3 +343,26 @@ H5 the pH-flat caramelisation source of 3-DX too large (P 0.4); H6 O2 diverting 
 quasi-steady state).
 (Timing note: the command that appended this section printed the B7a-2 log first, so B7AS's COST -- 1079 -> 1022 --
 was seen just before (vii) was written; none of B7AS's signature values had been computed or read.)
+
+## 15. B7a-2 results (2026-10-31 09:20) and the close of section B's partition work
+
+| arm | cost (null 1093) | added | key constants | (i) time | (ii) pH segments | (vii) +xyl | Cerny pot D |
+|---|---|---|---|---|---|---|---|
+| B7AS | 1021.6 | 0 | pK 5.35 +- 0.32 | 1 / 8 | 0 / 6 | 2 / 4 | 0.994 |
+| B7ASS | 901.5 | 2 | pK 5.64; DPO share at pH 7 0.87; pH_c 6.38 | 0 / 8 | 1 / 6 | **3 / 4 (pass)** | 0.997 |
+
+Both converged (status 3). **Neither passes (i) or (ii); B7ASS is the first arm to pass (vii).** Under the owner's rule
+(mechanisms before constants) the large cost gains (-71, -192) are not evidence. What B7ASS does show: the split law
+together with the saturating beta-cleavage turns the ratio's pH slope to the RIGHT SIGN from pH 6 to 8 (-0.23 / -0.15,
+-0.22 / -0.10 dex per pH unit vs measured -0.38 / -0.80, -0.38 / -0.70; too shallow) and reproduces the +xylose
+double ratio at pH 5.5 - 7 -- while the time slope gets WORSE (+0.4 to +2.0 per decade vs ~flat). So the pH structure
+and the time structure are separate faults: the time slope is the 3-DX LIFETIME (the hub review's H1, P 0.65: both
+deoxyosones quasi-steady, the engine's 3-DX ~35 h), which no arm here touched. Expectations: B7AS pH segments (P 0.07)
+no; B7ASS (P 0.1) no; the B7AS pK in the in-situ band ~5.5 - 6.2 -- 5.35 no, B7ASS's 5.64 yes.
+
+**Section B's partition work closes here** (the 24 h cap, roadmap row 1). Carried to the hub step (roadmap row 5),
+each to be tested for FEASIBILITY before any fit (STATUS_AND_PLAN, mechanisms before constants): (a) 3-DX
+quasi-steady (Martins M4's lifetimes as the null); (b) the split law + saturating beta-cleavage (B7ASS's pH structure);
+(c) a cysteine trap of 3-DX growing with pH (signature vii at pH 8); (d) catalysed TTCA hydrolysis (the cysteine
+review); (e) phosphate as a variable (Davidek in phosphate, Zhai in water). Decisive tests: (i), (ii), (vii), the
++-xylose free-cysteine contrast, Cerny pot D.

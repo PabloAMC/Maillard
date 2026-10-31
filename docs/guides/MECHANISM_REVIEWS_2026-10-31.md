@@ -46,7 +46,7 @@ paper below is a different one).
 | Wei, Cui, Hayat, Zhang & Ho 2022, J. Agric. Food Chem. 70:12164 | 10.1021/acs.jafc.2c04961 | abstract | cysteine traps the deoxyosones of a Gly-Xyl ARP as TTCA: the 3-DX trap behind signature (vii) |
 | Zyzak, Richardson, Thorpe & Baynes 1995, Arch. Biochem. Biophys. 316:547 | 10.1006/abbi.1995.1073 | abstract | the Amadori compound decomposes faster in phosphate than HEPES, faster in air and at high pH (37 C): phosphate catalysis |
 | Fife, Natarajan, Shen & Bembi 1991, J. Am. Chem. Soc. 113:3071 | 10.1021/ja00008a041 | title only | ring opening AND hydrolysis of thiazolidines as separate steps -- the two steps the engine lumps |
-| Granvogl, Bugan & Schieberle 2006, J. Agric. Food Chem. 54:1730 | 10.1021/jf0525939 | abstract | Ile / Leu / Phe / Val + MGO: Strecker aldehydes vs amines, for the donor-generic layer |
+| Granvogl, Bugan & Schieberle 2006, J. Agric. Food Chem. 54:1730 | 10.1021/jf0525939 | abstract | Ile / Leu / Met / Phe + MGO (Val only in cocoa; corrected from the dossier): Strecker aldehydes vs amines, for the donor-generic layer |
 | Low, Parker & Mottram 2007, J. Agric. Food Chem. 55:4087 | 10.1021/jf070044s | abstract | [2-13C]glycine into alkylpyrazines, two pathways with their shares |
 | Hayashi & Namiki 1980, Agric. Biol. Chem. 44:2575 | 10.1271/bbb1961.44.2575 | abstract | the early C2 (Namiki) fragment from sugar + amine: the pre-Amadori nitrogen / dicarbonyl route |
 | Warmbier, Schnickels & Labuza 1976, J. Food Sci. 41:528 | 10.1111/j.1365-2621.1976.tb00663.x | abstract | casein-glucose-glycerol: first-order available-lysine loss vs water activity (browning maximum a_w 0.4 - 0.5) |
