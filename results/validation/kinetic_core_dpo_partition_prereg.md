@@ -222,3 +222,35 @@ start already moved the split, so the arm would not have started at the null); B
 at 100 C, Ea 30), ~5.6e-2 at 120 C against Zhai's apparent 0.0097: its (vi) fail at 120 C is likely (P 0.6) and is
 part of the test, not a reason to swap the constant (the Martins 2005b 1.0e-2 sensitivity runs beside it). A chance
 baseline of these signatures (`score_deoxyosone_signatures.py --chance`) runs before any arm is credited.
+
+## 11. B7a arms: results (2026-10-31 06:20) -- no arm passes; the diagnosis moves to DPO's pH-dependent sinks
+
+All four converged (status 2) under the B7a null's fixed series noise (w 0.2), from the null's optimum.
+
+| arm | cost | added | key constants | (i) time | (ii) pH segments | (vi) decline | thiol groups | Cerny pot D |
+|---|---|---|---|---|---|---|---|---|
+| B7D | 1074.4 | 1 | log10 k_tdp_mgo -6.75 +- 0.19; c2c3 +2.37 | 2 / 8 | 0 / 6 | 1 / 2 | 3 / 11 | 0.992 |
+| B7S | 1038.9 | 2 | DPO share at pH 7 0.62 +- 0.13; pH_c 6.79 +- 0.41; c2c3 +2.32 | 1 / 8 | 0 / 6 | 1 / 2 | 2 / 11 | 0.994 |
+| B7T | 1146.0 | 0 | (trunk k_tdg_fa) c2c3 +2.45 | 1 / 8 | 1 / 6 | 2 / 2 | 4 / 11 | 0.993 |
+| B7ST | 1082.0 | 2 | share 0.69 +- 0.13; pH_c 6.50 +- 0.36 | 2 / 8 | 0 / 6 | 2 / 2 | 3 / 11 | 0.996 |
+
+The null's own cost under the same fixed noise is being computed (`s042_r3en_b7anull_w02_fixed`); the arms' start costs
+(1102 with each switch near its null value) are a close proxy. **Against the declared thresholds -- (i) >= 5 / 8, (ii)
+>= 4 / 6, (vi) 2 / 2 -- no arm passes.** Expectations: B7D (i) (P 0.35) no, c2c3 < 1.5 (P 0.4) no; B7S (ii) (P 0.35)
+no; B7T (vi) 2 / 2 (P 0.35) YES, (i) (P <= 0.15) no; B7ST all three (P 0.15) no. B7T's 3-DX exit at the trunk's
+hexose constant reproduces the post-peak declines but RAISES the cost by ~44 for no coordinate: the fit rows reject the
+exit at that rate. B7S lowers the cost by ~63 for two coordinates, but its pH law does not show in the ratio.
+
+**Why the split's pH law does not reach the ratio (flux attribution at B7S's optimum, no fit).** DPO's sinks are
+pH-dependent the OTHER way: at pH 8 the base-favoured beta-cleavage to acetic acid (`r_dpo_aa`, slope fitted on
+Davidek 2008's glycine pots) takes 51 - 61 % of DPO, at pH 5.5 the DDP route takes 58 %; so DPO is drained hardest
+exactly where the split makes more of it. And 39 - 45 % of TDP comes from the amine-free pentose caramelisation
+(`r_pent_caramel`), which has no pH law. DPO is made mostly through the Amadori compound (56 - 92 %), so the split
+does act on it -- the sinks cancel it.
+
+**What this points at (for the owner's review; no arm is pre-registered yet).** A tension between Davidek 2008
+(xylose + glycine: acetic acid from DPO strongly base-favoured) and Zhai 2021 (TTCA, no free amine but cysteine: DPO
+relatively MORE abundant at high pH). Candidate: DPO's beta-cleavage to acetic acid is AMINE-ASSISTED (glycine in
+Davidek's pots, none in Zhai's), so its base factor should multiply a free-amine term, not act alone -- one structural
+change, no new coordinate if the amine order is declared. Second: TDP's caramelisation source and its pH dependence
+(Zhai 2021's xylose ladder isolates it). Both are testable on data already keyed; neither was run tonight.

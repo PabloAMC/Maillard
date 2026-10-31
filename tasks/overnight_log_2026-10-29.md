@@ -260,3 +260,15 @@ that TDP and DPO decline at the same rate in Zhai 2023 JAFC. B7a null (w 0.2) co
 unchanged (1 / 8, 1 / 6, 1 / 2) -- the structure, not the measurement model, is wrong (EX-035). **Next:** w 0.4 null
 (running) -> cherry-pick the arm commits -> regenerate engine-dependent artifacts -> chance baseline -> the four arms.
 **Most valuable?** Yes. The morning summary is the other must-do before ~08:00.
+
+## Checkpoint 16 -- 2026-10-31 05:40
+
+**Goal:** unchanged. **Since 04:40:** B7a null w 0.4 = w 0.2 (the conclusion does not depend on the response-factor
+width); the B7a arm commits cherry-picked; every engine-dependent artifact re-hashed (all signature counts unchanged:
+the defaults are bit-identical); B7D fitted -- r_tdp_mgo identified but small (-6.75 +- 0.19), c2c3 not released
+(+2.37), partition signatures 2 / 8, 0 / 6, 1 / 2: the long-lived-DPO rival is not chosen through this MGO parent.
+**Running:** B7S (since 05:23), then B7T, B7ST; then the null under its own fixed noise and both chance baselines.
+10 commits ahead of PR #30; one full verification after the arms. **Most valuable?** Yes; the next judgement is
+whether ANY B7a structure moves the partition signatures -- if none does, the partition's fault is in a step none of
+the arms touches (the deoxyosones' detection / the quinoxaline response, or a TTCA -> deoxyosone route with its own
+split), and that becomes the owner's morning question.
