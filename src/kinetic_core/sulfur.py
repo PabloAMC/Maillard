@@ -1471,7 +1471,7 @@ def sulfur_rate_constants_at(
         for _key in ("r_pent_amine", "r_pama_dpo", "r_pama_tdp", "r_pama_dpo_n", "r_pama_tdp_n"):
             out[_key] = 0.0
     out["r_dpo_aa"] = (_ent.k_at(_ent.k_dpo_aa_per_min_100c_ph6, _ent.ea_dpo_aa_kj_mol, temperature_k)
-                       * 10.0 ** (float(_ent.aa_ph_slope) * (float(ph) - 6.0)))
+                       * _ent.aa_ph_factor(float(ph)))
 
     _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
     out["ch_thioether_release"] = out["ch_thioether_mft"] / _k_adduct

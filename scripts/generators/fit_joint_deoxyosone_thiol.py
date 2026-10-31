@@ -86,7 +86,11 @@ ARMS = {"none": frozenset(), "R2a": frozenset({"mgo_strecker"}), "R2b": frozense
         "B7S": frozenset({"actz", "entry", "ddp", "ddp_law_none", "split_ph"}),
         "B7T": frozenset({"actz", "entry", "ddp", "ddp_law_none", "tdp_exit"}),
         "B7ST": frozenset({"actz", "entry", "ddp", "ddp_law_none", "split_ph", "tdp_exit"}),
-        "B7D": frozenset({"actz", "entry", "ddp", "ddp_law_none", "tdp_mgo"})}
+        "B7D": frozenset({"actz", "entry", "ddp", "ddp_law_none", "tdp_mgo"}),
+        # B7a-2 (dpo partition prereg sec. 13): the beta-cleavage's pH law saturating (Davidek 2006a, amine-free
+        # 1-DG), its pK replacing the slope -- the same coordinate count as R3En; and with B7S's split law
+        "B7AS": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating"}),
+        "B7ASS": frozenset({"actz", "entry", "ddp", "ddp_law_none", "aa_saturating", "split_ph"})}
 NF_MFT_EA_COORDINATE = ("ea_k_nf_mft", "Ea", 40.0, 200.0, 100.0)
 LAU_NF_EA_KJ_MOL = 81.5
 #: round 3 (review B2): the DDP route's PRODUCT (log10 multiplier of k_dpo_ddp x both DDP -> MFT branches) is the
@@ -130,6 +134,8 @@ ENTRY_COORDINATES = (("log10_k_pent_amine", "log10_offset", -7.0, -2.0, -4.15),
                      ("log10_k_dpo_aa", "log10_offset", -4.0, 0.5, -0.5),
                      ("aa_ph_slope", "ph_slope", -0.5, 1.5, 0.3),
                      ("amine_return", "acid_yield", 0.0, 1.0, 0.5))
+#: B7a-2: the saturating law's pK (in-situ pH), replacing aa_ph_slope; start inside Davidek 2006a's band 5.8 - 6.4
+AA_PK_COORDINATE = ("aa_pk", "pka", 5.0, 7.5, 6.1)
 ENTRY_TABLE = "ph_acid_davidek_acids"
 ENTRY_FIT_PREFIX = "davidek2008"
 #: scored with the entry (prereg sec. 8): Cao 2017's cysteine + xylose + glycine pot (a hold-out) and Zhou 2023's
@@ -173,6 +179,8 @@ def coordinates(mft_decay_cap: bool, arms=frozenset()):
         keys.append("offset_k_aa_frag"); kinds.append("log10_offset")
         lower.append(ARM_LOWER["k_aa_frag"]); upper.append(ARM_UPPER["k_aa_frag"]); start.append(ARM_START["k_aa_frag"])
         for key, kind, lo, hi, st in ENTRY_COORDINATES:
+            if key == "aa_ph_slope" and "aa_saturating" in arms:
+                key, kind, lo, hi, st = AA_PK_COORDINATE
             keys.append(key); kinds.append(kind); lower.append(lo); upper.append(hi); start.append(st)
     if "ddp" in arms:
         key, _, lo, hi, st = DDP_COORDINATE
@@ -229,7 +237,8 @@ def trial(theta, keys) -> Dict[str, Any]:
     if "log10_k_pent_amine" in t:
         out["entry"] = {"k_entry_l_per_mmol_min_100c_ph6": 10.0 ** t["log10_k_pent_amine"],
                         "entry_ph_slope": t["entry_ph_slope"], "k_dpo_aa_per_min_100c_ph6": 10.0 ** t["log10_k_dpo_aa"],
-                        "aa_ph_slope": t["aa_ph_slope"], "amine_return": t["amine_return"]}
+                        "amine_return": t["amine_return"],
+                        **({"aa_law": "saturating", "aa_pk": t["aa_pk"]} if "aa_pk" in t else {"aa_ph_slope": t["aa_ph_slope"]})}
         out["trunk_solutes"] = True     # design review B2: glycine (0.1 M, amine pKa ~8 at 120 C) in the balance
     if SPLIT_COORDINATES[0][0] in t:
         out["cama_split"] = {"split_law": "base_saturating", "dpo_share": t[SPLIT_COORDINATES[0][0]],

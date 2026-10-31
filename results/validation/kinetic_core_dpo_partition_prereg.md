@@ -269,3 +269,47 @@ testing:** headspace O2 oxidises thiol to disulfide in proportion to the headspa
 5 - 10 mM Zhai pots, <= 10 % at Cao's 0.4 M, which matches where the engine misfits; against it, Zhai 2021's cysteine
 excess is largest at pH 5.5 (thiolate oxidation predicts the opposite). P(oxidation is the main cause) ~0.2; the Zhai
 vessels' headspace is the deciding fact (check the dossiers).
+
+## 13. B7a-2, revised by the Davidek 2006a / 2006b / Novotny 2008 dossiers -- design, 2026-10-31 ~09:30, before any fit
+
+**What the dossiers changed.** The amine-assisted cleavage (sec. 11's candidate) is contradicted: synthetic
+1-deoxyglucosone heated WITHOUT amine in 0.16 - 0.2 M phosphate gives 0.80 - 0.84 mol acetic acid / mol at pH 6.5 - 8
+(60 min, 120 C; Davidek 2006a Fig. 3), 0.56 at pH 6, 0.20 at pH 5 -- an amine REQUIREMENT is excluded for the hexose
+analogue (P 0.85; 0.75 that it transfers to the pentose), amine ACCELERATION is untested (no paired run). The pH law
+is a SATURATING step, flat above pH 6.5 ("no significant differences ... at pH 6.5, 7, 8"), not the engine's
+log-linear base factor 10^(aa_ph_slope (pH - 6)), which keeps raising DPO's beta-cleavage from pH 7 to 8 -- exactly the
+over-drain of DPO at high pH that sec. 11 found cancelling the split law. Phosphate cannot be the Davidek / Zhai
+difference (Zhai 2021's TTCA pots are also 0.2 M phosphate). The 1-DG yields are branching fractions (1-DG is gone
+within 5 min at pH >= 6), so the curve constrains the cleavage's share of DPO's fate, not its rate directly.
+
+**Arms (both under the B7a null's fixed series noise, w 0.2, from the null's optimum; budget 1200, ftol 1e-4):**
+- **B7AS -- the saturating law alone.** r_dpo_aa = k_max / (1 + 10^(pK - pH_in_situ)) (an acid-base step completing
+  above pK; the rate saturates), replacing 10^(aa_ph_slope (pH - 6)). Coordinates: log10 k_max (replacing log10
+  k_dpo_aa at pH 6) and pK in [5.0, 7.5] (replacing aa_ph_slope) -- the SAME number of coordinates as the null, so
+  the cost difference is a direct test. Reference band from Davidek 2006a with a pH-flat competing sink: pK ~5.8 -
+  6.4 (reported against, not imposed).
+- **B7ASS -- the saturating law + B7S's split law** (+2 coordinates, the split's share at pH 7 and pH_c).
+**Decided by** (sec. 7's order): converged; the partition's scale-free signatures against their chance baseline
+(EX-037: time slope >= 5 / 8 at chance 0.02; pH segments >= 4 / 6 at chance 0.00); must-not-break: the Davidek 2008
+acetic plateaus and pH 8 / 6 ratio (the rows the slope was fitted on), the v2 thiol groups no worse than the null;
+cost vs the null under the same noise (1093) and vs B7S (1039).
+**Expected (written now):** B7AS's fitted pK within 5.8 - 6.4 (P 0.4); B7AS passes >= 4 / 6 pH segments (P 0.15);
+B7ASS passes >= 4 / 6 (P 0.3) and >= 5 / 8 time slopes (P 0.1 -- the time slope is a lifetime problem the pH law
+does not touch); the Davidek 2008 acetic signatures hold in both (P 0.6). If neither arm moves the pH segments,
+section B closes by its rule (24 h cap, 11-01 ~08:00).
+**Note at implementation (before any fit):** with pK 6 the saturating factor is 0.18 / 1 / 1.52 / 1.82 / 1.98 at pH 5 /
+6 / 6.5 / 7 / 8, while R3En's fitted slope (0.15 dex per pH unit) gives 0.71 / 1 / 1.19 / 1.41 / 2.0: the two laws
+nearly coincide from pH 6 to 8 and differ mainly BELOW pH 6. So B7AS mostly tests the acid side; it cannot by itself
+remove a high-pH over-drain that the slope did not cause. The P 0.15 for B7AS's pH segments stands.
+**Review of B7a-2 (independent, before any fit; nothing blocking) -- amendments adopted now.** (1) The coordinate is
+log10 k at pH 6 (the saturating factor is normalised to 1 at pH 6), not log10 k_max as written above. (2) Davidek's
+5.8 - 6.4 band is on the LABEL scale (set at room temperature); the engine's pK acts on the in-situ pH, ~0.2 - 0.3 lower
+for phosphate at 120 C: the comparison band is ~5.5 - 6.2. (3) The pK test is not independent: the pentose fit rows are
+pH 6 and 8 only, both laws are one-parameter maps of the same 8 / 6 ratio, and slope 0.15 maps to pK ~6.0 -- a pK in
+band is not evidence. (4) The informative check is the BRANCHING share: the engine's DPO -> acetic acid flux share at
+pH 5 / 6 / 6.5 / 7 / 8 against Fig. 3's shape (flat above 6.5) -- reported for both arms. (5) Cost: with the same
+coordinate count, B7AS counts as a gain only if it is >= 5 units below the null under the same noise (delta chi-square
+>= 10, ~2 after the reduced chi-square); B7ASS against B7S (1039) with the same rule. (6) The chance baselines (EX-037)
+were drawn in R3En's box; replacing one coordinate by another of the same reach is taken as negligible (stated, not
+re-drawn). **Expectations revised:** B7AS >= 4 / 6 pH segments P 0.07; B7ASS P 0.1; the Davidek 2008 acetic
+signatures hold P 0.75; the engine's DPO -> acetic share flat (within 0.1) from pH 6.5 to 8 under B7AS P 0.5.
