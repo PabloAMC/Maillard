@@ -1758,7 +1758,11 @@ entries:
       temperature before heating and ~1.7e-4 at 70 C. Cao 2017 needs >= ~4.4e-4 at 90 C. One pH-flat k_f / k_r / K in plain mass action
       cannot fit both regimes (the engine's exchange is rejected provisionally on the dilute pots; a slow-exchange rival fitted to
       them is rejected by the concentrated ones). Found by the thiol-rivals analysis and its red team (EX-050,
-      docs/history/thiol_rivals_2026-10-31/).
+      docs/history/thiol_rivals_2026-10-31/). EX-054 (catalysed exchange, in-situ pH, a second sink, all
+      pre-registered) admits none: the engine's exchange fails the dilute-pot gate (cysteine released 2 - 30x faster than
+      TTCA is lost); catalysed exchange + in-situ pH passes only if one test that fails every structure is dropped (post
+      hoc). The conflict is inside ONE laboratory (Zhai 2021 vs Zhai 2019); Cao 2017 adds little; Kang 2026 Fig. S3 is a
+      copy of Zhai 2021 Fig. 6 (not independent).
     explanations:
       - "Catalysed exchange: k = k0 + k_aa [amino acid] + k_P [phosphate / solutes] (the cysteine review, P 0.55), so concentrated pots run faster per mol."
       - "In-situ pH: the unbuffered dilute pots drift in pH while heating, and the engine uses the label pH."

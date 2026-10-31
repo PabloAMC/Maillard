@@ -655,3 +655,15 @@ entries:
     verdict: partial
     conclusion: "INCONCLUSIVE controls (positive 2 / 599, negative 0 / 600; Fisher p 0.25). Sec. 23's sigma 0.15 was model misfit, not measurement noise (realistic 0.075); at it the truth passes the declared thresholds with P 0.60, failing on the xylose signature (vii), which passes by chance 161 / 193 at >= 2. New joint rule: time >= 5 AND pH >= 4 (truth P 0.99, chance 0 / 193). The binding limit is band coverage by random draws: P(miss a true structure) ~0.14 at 600 draws, ~0.37 at 299, so v1 / v3 / v5 are 'not found', not 'not feasible'."
     follow_up: "Feasibility by bounded violation-minimising search (multi-start), random draws as the chance baseline only; re-run the controls under search before the hub returns to the active ranking; fold --noise-seed / --thresholds into feasibility_deoxyosone.py."
+  - id: EX-054
+    date: "2026-10-31"
+    kind: probe
+    question: "CF-076: which exchange structure lets one law fit Zhai 2021's dilute pots and the concentrated pots of Zhai 2019 / Cao 2017?"
+    hypothesis: "Neutral: E0 engine, E1 catalysed (k0 + k_aa[AA] + k_P[P]), E2 in-situ pH + K(pH), E3 E0 + a cysteine sink, E4 E1 + E2; NC1 instant, NC2 none."
+    design: "Standalone module (A2 contract sec. 3); bands from non-scored data (Kallen, Fife, Kang's pH drift); 7 tests, power per test (none dropped); feasibility sampling + a bounded search. Record: docs/history/cys_exchange_2026-10-31/."
+    expected: "see prereg.yaml (13:44; first run 13:52)"
+    artifacts: [docs/history/cys_exchange_2026-10-31/README.md, docs/history/cys_exchange_2026-10-31/verdict.yaml]
+    commit: pending
+    verdict: partial
+    conclusion: "No rival admitted. The engine's exchange (E0) rejected, provisionally (single lab): it releases cysteine 2 - 30x faster than TTCA is lost in the dilute pots (T4, power >= 0.93). E3 and E2 rejected; E1 feasible only at its band corner; E4 fails only T3, which also fails the no-exchange control (inconclusive is a post hoc reading). The conflict is inside one laboratory (Zhai 2021 vs Zhai 2019); Cao adds little; Kang 2026 Fig. S3 duplicates Zhai 2021 Fig. 6."
+    follow_up: "No engine change; red team before any exchange law changes; designed TTCA 10 vs 100 mM x phosphate x carboxylate; ask Zhai for the 13C5 label fraction; test TTCA re-formation after the quench."

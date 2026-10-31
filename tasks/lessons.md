@@ -401,3 +401,7 @@ the full verification.
 ## 2026-10-31 — A rival's band derived from the test it is scored on, and data left unscored
 - **Pattern:** an investigation agent admitted "slow cysteine exchange". Its rate ceiling had been derived from the same xylose contrast it was then scored on, and two concentrated-pot datasets that contradict it (same lab and another lab) were left unscored under a reason that did not apply. It also counted 50 C storage data as a second lab for a processing loss law. The independent red team caught all three.
 - **Rule:** a rival's bands come from data OTHER than its scored tests; every on-disk dataset that bears on the question is scored or its exclusion justified in the prereg; a "second lab" must measure the same channel. Every structural verdict gets a red team before it moves the engine.
+
+## 2026-10-31 — An edit to the conflicts register or the measurement ledger stales sulfur_reaction_evidence
+- **Pattern:** twice in one day a branch failed the freshness gate after only register / ledger edits, because `results/validation/sulfur_reaction_evidence.json` hashes `docs/reference/conflicts_register.yml` and `data/lit/measurement_ledger/trunk.yml`.
+- **Rule:** after any edit to either file, run `python scripts/generators/build_sulfur_reaction_evidence.py` before staging (it takes seconds), and `regenerate_signature_records.py --dry-run` lists anything else stale.

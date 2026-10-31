@@ -1,0 +1,134 @@
+# Pre-registration, CF-076 (cysteine + xylose <-> TTCA exchange across dilute and concentrated pots).
+# Written 2026-10-31 BEFORE any simulation of this analysis. Only data reads and the engine-constant read
+# (engine_constants.py: k_ttca_cys 0.2638 /min at 145 C, Ea 64.08 kJ/mol -> 0.0286 /min at 100 C; s042_r3en_fixed's
+# theta holds only offset_k_cys_actz, so the base value is the converged one) were run before this file.
+# Prior knowledge declared: the thiol-rivals analysis, its red team and CF-076's bounds were read
+# (docs/history/thiol_rivals_2026-10-31/). Protocol: STATUS_AND_PLAN "How a mechanism is identified" (a)-(f);
+# A2_MODULE_CONTRACT sec. 3; lessons 2026-10-31 (bands from data OTHER than the scored tests; every dataset scored or
+# its exclusion justified; a "second lab" must measure the same channel).
+labs:
+  jiangnan: [zhai2019, zhai2021]          # Zhang / Ho group; HPLC-ELSD; one lab
+  jiangnan_lineage: [kang2026]            # Zhai Y. (PI) at Zhejiang Gongshang; NOT independent of jiangnan (Fig. S3 100 C = Zhai 2021 Fig. 6 pH 7, identical digits)
+  btbu: [cao2017]                         # Xie group; LC-MS (TTCA) + ELSD (Cys, Xyl); the only other lab
+question: >-
+  Why does one pH-flat mass-action exchange TTCA <-> Cys + Xyl (k_r, K, k_f = K k_r) fail to fit Zhai 2021's dilute
+  unbuffered fed-TTCA pots together with the concentrated formation pots of Zhai 2019 and Cao 2017?
+
+# ---------------------------------------------------------------------------------------------------------------
+skeleton: >-
+  Standalone reduced module (A2 sec. 3: CONFIG_KEYS with bands, rate_constants(params, ctx), OBSERVABLES). Exchange
+  r = k_r(ctx) TTCA - k_f(ctx) Cys Xyl, k_f = K(ctx) k_r(ctx), Arrhenius about 100 C. Common to every rival (the
+  non-exchange chemistry, identical across rivals, on the LABEL pH): free-Cys thermal loss k_th; TTCA's non-releasing
+  loss through the Cys-Amadori compound (CAMA) and its decay releasing Cys (de Roos 2005 table); xylose's own loss.
+  Dilute pots (Zhai 2021): TTCA FORCED from the measured series (Fig. 4b / Fig. 3a); TTCA's non-exchange loss is what
+  the measured net loss leaves after the exchange (A2 sec. 2 forced input). Concentrated pots (Zhai 2019 70 / 90 C,
+  Cao 2017 blank): TTCA, Cys, Xyl SIMULATED from the charge; CAMA forced from the same figure (its formation drains
+  TTCA); in-situ pH forced from Cao Fig. 4c where printed.
+rivals:
+  E0: "Engine exchange (s042_r3en_fixed): k_r(100 C) = 0.0286 /min, Ea 64.1, K = Cao's 60 L/mol, pH-, T- and solute-flat."
+  E1: "Catalysed exchange: k_r = k0 (1 + c_aa [AA] + c_P [HPO4 2-]); K pH-flat (Cao). [AA] = Cys + TTCA + CAMA (M); [HPO4 2-] from total phosphate and the in-situ pH (pKa2 7.1). Catalysis moves k_r and k_f together (K unchanged)."
+  E2: "Plain mass action on the IN-SITU pH: K(pH) = K2 (1 + 10^(pH - pKa_T)) / (1 + 10^(pH - pKa_C)) (Kallen 1971 species bookkeeping: TTCA ring-N vs Cys amine), anchored K(4.5) = Cao's K; ring-opening rate k_r(pH) = k_r45 10^(-a (pH - 4.5)), a in [0, 1] (0 pH-flat, 1 specific-acid limb, Fife 1991); k_f = K k_r."
+  E3: "E0 plus a second cysteine sink: first-order oxidation / cystine (k_ox) and a second-order adduct with the measured dicarbonyls (k_s [Cys][DC], Zhai 2021 Fig. 5 forced; zero where no dicarbonyls are printed)."
+  E4: "E1 + E2: k_r = k_r45 10^(-a (pH - 4.5)) (1 + c_aa [AA] + c_P [HPO4 2-]), K(pH) as E2."
+  NC1: "Negative control (known wrong, fast side): instantaneous equilibrium (k_r 3 /min) at K 60 L/mol, pH-flat. A 10 mM TTCA charge would be 77 % dissociated within minutes."
+  NC2: "Negative control (known wrong, slow side): no exchange (k_r = k_f = 0). Cao and Zhai 2019 form TTCA from free Cys + Xyl."
+
+# ---------------------------------------------------------------------------------------------------------------
+bands:   # log-uniform where the band spans > x3; ALL from data other than the scored tests (basis given)
+  common:
+    k_th_100: {band: [7.4e-4, 2.9e-3], unit: /min, Ea: 55.1, basis: "Kang 2026 Fig. S4: free Cys 10 mM alone, pH 7, 1.47e-3 /min at 100 C, Ea 55.1 (not scored: a free-Cys pot, no TTCA); x[0.5, 2]"}
+    k_cd_55: {band: [0.0035, 0.014], unit: /min, basis: "CAMA decay at pH 5.5, ~100 C, de Roos 2005 table (engine 0.007) x[0.5, 2]; Ea 85.7 (engine, Zhang 2026 transfer)"}
+    cd_ph_slope: {band: [0.31, 0.62], basis: "de Roos 5.5 -> 6.0 slope 0.62, half as lower edge"}
+    release: {band: [0.5, 1.0], basis: "share of CAMA decay that frees Cys"}
+    w_cama: {band: [0.5, 1.0], basis: "share of TTCA's non-exchange loss through CAMA (engine 0.92)"}
+    k_x: "Zhai 2021 Fig. 6 xylose-only control per label pH (input, first order); Ea 100 kJ/mol to 120 / 140 C (declared; < 2 % effect)"
+    K_ref: {band: [0.045, 0.075], unit: L/mmol, basis: "Cao 2017 blank, late-time Q = TTCA/(Cys Xyl) 58.5-64.6 L/mol at 90 C, in-situ pH 4.2-4.7 (arithmetic 1; T7 below scores only the scale-free ratio Q(30)/Q(late), so K cancels to first order -- shared denominator declared)"}
+  E0: {k_r_100: [0.0143, 0.0572], Ea: 64.1, basis: "engine value x[0.5, 2] (as the thiol-rivals B0); NB the engine constant was itself fitted on Jiangnan-lab TTCA pots"}
+  E1:
+    k0_100: {band: [1.0e-5, 1.0], unit: /min, basis: "declared, 5 decades: fast end Kallen 1971 TC relaxation 0.009-0.03 /min at 25 C x Arrhenius 40-100 kJ/mol to 100 C (x25 - x3000) and Schubert 1939 (ring opening as fast as free Cys to I2 at RT); slow end Fife 1991's hydrolysis-limited regime (V: ~1e-4 /s at 90 C, pH 5.4) / 100 for a polyhydroxyalkyl iminium"}
+    c_aa: {band: [0.3, 30], unit: "1/M", basis: "Fife 1991 Table II general-base k_B / k0 = 4-83 1/M (acetate, imidazole, phosphate on I / II), Bronsted beta 0.29 transfer to carboxylate (pKa ~2) and amine bases, /3 .. x3"}
+    c_P: {band: [4, 300], unit: "1/M of HPO4 2-", basis: "Fife 1991: phosphate on I 0.050 /M/s vs k0 6e-4 /s -> 83 /M; II by Bronsted ~20 /M; /5 .. x4"}
+    Ea: {band: [40, 100], basis: "Fife IV apparent 58 kJ/mol; engine 64; thiazolidine / Schiff-base class"}
+    K: K_ref
+  E2:
+    k_r45_100: {band: [1.0e-5, 1.0], basis: "as E1 k0 (same band, same Occam cost)"}
+    a: {band: [0.0, 1.0], basis: "Fife 1991: II ring opening k_H 7e5 /M/s H3O+ term (slope -1) below pH ~5, pH-independent k1' above; V H3O+-limited"}
+    pKa_T: {band: [5.6, 6.6], basis: "Kallen 1971 TC ring-N pKa 6.24 (25 C), +-0.4 for TTCA and temperature"}
+    dpKa_CT: {band: [1.6, 2.6], basis: "Kallen 1971 Cys amine 8.38 - TC ring-N 6.24 = 2.14 (K_F3/K_F2 = 138 cycle) +-0.5"}
+    Ea: {band: [40, 100]}
+    insitu_pH:
+      zhai2021: "pH(t) = label - s Delta(label) (t/120)^g, Delta = 0.4 / 1.0 / 2.1 / 3.3 at label 5.5 / 6 / 7 / 8 (Kang 2026 p. 3242, MEASURED drift of 10 mM TTCA, same preparation lineage, 120 min; label 6 interpolated); s in [0.5, 1.5] (Kang's temperature 100 or 120 C is ambiguous), g in [0.5, 2]; +Xyl pots an extra d (t/120), d in [0, 0.4] (xylose acids: ~0.6 mM xylose lost in the control by 120 min, Fig. 6 input)"
+      zhai2019: "pH(t) = pH_inf + (pH_0 - pH_inf) exp(-t / tau); pH_0 in [6.0, 7.4] (label 7.4; the 14.5 mM TTCA formed before heating releases ~0.8 H+ per TTCA against an unknown 9-23 mM NaOH), pH_inf in [5.0, 6.5] (proton bookkeeping: TTCA ring-N pKa 6.24 buffering 55-63 mM TTCA against that base, minus sugar acids as Kang), tau in [5, 40] min (the formation timescale)"
+      cao2017: "measured Fig. 4c (blank), interpolated: an INPUT, not a test"
+  E3: {E0: "as E0", k_ox: {band: [1.0e-4, 5.0e-3], unit: /min, basis: "declared (thiol-rivals B4; floor Zheng & Ho 1994 thermal H2S)"}, k_s: {band: [1.0e-4, 1.0e-1], unit: L/mmol/min, basis: "declared (thiol-rivals B3; no measured Cys + dicarbonyl constant on disk)"}}
+  E4: "union of E1 and E2 bands"
+  zhai2019_RT_point: >-
+    The 14.5 mM TTCA at t = 0 (formed at RT before heating) is the initial condition and a CHECK on the fast band
+    edges only: k_f(RT) >= 14.5 / (dt 68 150) L/mmol/min with dt between 10 min (the stated mixing / adjustment) and
+    ~24 h (4 C storage before HPLC, not stated) -> >= 1.4e-4 .. 6e-7. Not used to cut any band (dt unknown).
+
+# ---------------------------------------------------------------------------------------------------------------
+datasets:   # every on-disk dataset bearing on the exchange: role
+  zhai2021_fig6_cys_xyl: {role: "tests T1, T2, T3 (Cys, Xyl at 100 C, 4 pH, +-Xyl); xylose-only control = k_x input", lab: jiangnan}
+  zhai2021_fig4b_ttca_ph_ladder: {role: "forced TTCA input for T1-T3 AND test T4 (exchange gate) on the 8 pots", lab: jiangnan}
+  zhai2021_fig3a_ttca_tladder: {role: "test T4 at 120 / 140 C (pH 5.5, TTCA alone; 100 C duplicates Fig. 4b pH 5.5)", lab: jiangnan}
+  zhai2021_fig5_dicarbonyls: {role: "forced input of E3's adduct sink only. NOT scored: dicarbonyls are downstream of the CAMA / deoxyosone hub (B7, single-lab, uncertain); no exchange rival predicts them without importing the hub"}
+  zhai2019_fig3a_ttca_cama: {role: "tests T5 (approach), T6 (plateau) at 70 and 90 C; CAMA forced; t = 0 point = initial condition. 110 / 130 C EXCLUDED: TTCA peaks at 20 min then falls (net of an unbanded TTCA degradation at pH ~6-7, no band from other data), so the exchange signal at 20 min is confounded by a free nuisance per temperature", lab: jiangnan}
+  zhai2019_fig3b_dicarbonyls_ttca: {role: "EXCLUDED: TTCA 5 mM +- Cys 5 mM, 120 C, only dicarbonyls printed (no TTCA / Cys series). The +Cys suppression discriminates the dicarbonyl ROUTE (TTCA -> CAMA vs free xylose), not the exchange; every rival predicts Le Chatelier retention of TTCA", lab: jiangnan}
+  cao2017_fig4ab_cys_xyl: {role: "test T7 (equilibration speed) with fig5", lab: btbu}
+  cao2017_fig5_ttca_cama_glyarp: {role: "TTCA -> T7; CAMA forced input; glycine arms EXCLUDED (slurries, Flag 1; glycine unmeasured)", lab: btbu}
+  cao2017_fig4c_ph: {role: "input: in-situ pH of the Cao pot (E1 phosphate base fraction; E2 / E4 pH law)", lab: btbu}
+  kang2026_figS3: {role: "EXCLUDED: dossier-only digitisation (not keyed); the 100 C series duplicates Zhai 2021 Fig. 6 pH 7 to the digit (not independent); 120 / 140 C have no TTCA series to force"}
+  kang2026_figS4_and_pH_drift: {role: "BANDS only (k_th; E2's dilute drift)"}
+  zhai2023jafc / zhai2023foodchem / hou2017: {role: "EXCLUDED: no TTCA, free Cys or free Xyl series (dicarbonyls, volatiles, UV only)"}
+  kallen1971 / fife1991 / schubert1939 / deroos2005: {role: "BANDS only (no TTCA-Xyl measurement)"}
+
+# ---------------------------------------------------------------------------------------------------------------
+tests:
+  T1_xyl_contrast_cys:   {data: zhai2021_fig6, obs: "mean log10 Cys(+Xyl)/Cys(-Xyl), 60-120 min, per label pH (4)", sigma: 0.07, kind: 6}
+  T2_cys_level:          {data: zhai2021_fig6, obs: "log10 Cys(120 min) TTCA-alone, per pH (4); shared figure offset tau 0.20 + point 0.061", kind: 5}
+  T3_xyl_consumption:    {data: zhai2021_fig6, obs: "log10 Xyl(TTCA+Xyl, 120) / Xyl(control, 120) at pH 5.5 / 6 / 7 (3)", sigma: 0.05, kind: 6,
+                          excluded_point: "pH 8: xylose falls 6.39 -> 2.99 mM at 80-120 min while TTCA < LOD; no exchange rival can route it through TTCA (needs turnover > 8 /min; red team sec. 6) -- it tests a non-exchange xylose sink"}
+  T4_exchange_gate:      {data: [zhai2021_fig4b (8 pots, 100 C), zhai2021_fig3a (120, 140 C, pH 5.5)], obs: "v = max_t [integral of net exchange release - measured TTCA loss]_+ / charge, per pot (10); observed 0", sigma: 0.03, kind: 5,
+                          basis_sigma: "TTCA replicate SD 0.1-0.4 mM of 10 mM (Fig. 4b / 3a bars)"}
+  T5_formation_approach: {data: zhai2019_fig3a, obs: "f20 = (TTCA20 - TTCA0) / (TTCA60 - TTCA0) at 70 and 90 C (2)", sigma: 0.06, kind: 7, basis_sigma: "read +-0.7 mM, ELSD non-linearity, model floor"}
+  T6_formation_plateau:  {data: zhai2019_fig3a, obs: "log10 mean TTCA 60-160 min at 70 and 90 C (2)", sigma: 0.04, kind: 5}
+  T7_cao_equilibration:  {data: cao2017 fig4ab + fig5, obs: "log10 Q(30 min) / mean Q(60-300 min), Q = TTCA / (Cys Xyl) (1)", sigma: 0.06, kind: 7, basis_sigma: "Cys SD 7 % and TTCA bar +-10 % at 0.5 h, Xyl 2 %; floor 0.03"}
+lab_split: {jiangnan: [T1, T2, T3, T4, T5, T6], btbu: [T7]}
+
+# ---------------------------------------------------------------------------------------------------------------
+power:
+  method: "N_score = 600 draws per rival inside its bands; N_truth = 80 further draws per rival as synthetic truths + realistic noise (the sigmas above; T2 with the figure offset). Pairwise power = P(truth's band log-marginal > the other's), both directions averaged."
+  rule: "A test is SCORED if its pairwise power >= 0.8 for at least one pair among E0-E4; otherwise dropped (reported). Controls enter scoring but not the power rule."
+scoring:
+  - "Per test and joint (scored tests only): log-marginal (mean likelihood over band draws) and feasibility share (draw within 2 sigma on every component; T2 after the best figure offset within 2 tau; T4 v <= 0.06)."
+  - "Feasibility search (not a fit; constants are not reported as estimates): for any rival with joint feasibility 0 of 600, scipy differential_evolution on max |z| over the scored tests, inside the bands (<= ~3000 evaluations)."
+verdict_rule:
+  admitted: "joint feasibility > 0 (sampled or by search, max |z| <= 2) on the scored tests of BOTH labs and joint log-marginal within 3 nats of the best rival -> 'admitted, provisional' (Zhai 2019 / 2021 one lab; Cao the only cross-lab check, on one test)"
+  rejected: "the search's best max |z| > 3 on the scored tests, with the failing test(s) powered against that rival"
+  inconclusive: "otherwise (2 < best max |z| <= 3, or failing only on an unpowered / single-component test)"
+  controls: "NC1 must fail T4 and NC2 must fail T5 / T7, else the battery is broken and nothing is read"
+
+# ---------------------------------------------------------------------------------------------------------------
+expectations:   # probabilities stated before any run
+  controls_fail_as_designed: 0.95
+  T4_powered_fast_vs_slow: 0.9          # E0 / E3 / NC1 vs E1 / E2 / E4
+  T1_powered_fast_vs_slow: 0.75
+  T5_powered_NC2_vs_rest: 0.9
+  T5_separates_E1_from_E2: 0.4
+  T6_powered_E2_vs_E0: 0.6
+  T7_powered_slow_vs_fast: 0.8
+  E0_fails_T4: 0.9
+  E0_passes_T7: 0.8
+  E0_rejected: 0.85
+  E3_rejected: 0.8                      # a sink cannot repair the gate (it drains TTCA faster)
+  E1_passes_T4_and_T7: 0.5
+  E1_fails_T5_with_T4: 0.6              # physchem-pinned catalysis gives <= x3.5 at 83 mM vs x1.3 at 10 mM
+  E1_admitted: 0.2
+  E2_admitted: 0.15                     # an acid limb can separate Cao (pH 4.5) from Zhai 2021 (5.1-5.5) but slows Zhai 2019 (pH 6-7)
+  E4_admitted: 0.25
+  no_rival_admitted: 0.5                # then the conflict points outside the listed structures
+  unlisted_live: >-
+    (i) observation operator: post-quench re-equilibration at 4 C / RT before HPLC (exothermic K) inflates TTCA in
+    concentrated pots and the t = 0 point; (ii) ELSD non-linearity (Zhai 2023d prints log-log calibrations);
+    (iii) Zhai 2019's Xyl : Cys 2 : 1 vs "equimolar" (Flag 3) -- changes the plateau, not the approach.
