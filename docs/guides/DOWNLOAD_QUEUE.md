@@ -10,6 +10,20 @@ warmbier1976) -- all eight dossiered.
 
 **Voigt & Glomb 2009** (lead from the tier-1 dossiers): DOI verified 2026-10-31, now in tier 2b.
 
+## If you only have time for a few (priority across tiers, 2026-10-31 evening)
+
+Ranked by what the current plan uses next: the measured-input odorant layers (pyrazines, thiols, Strecker) and the cysteine-exchange conflict (CF-076). The hub papers come later.
+
+1. **Zhou 2024 Supporting Information** (10.1021/acs.jafc.4c03706): whether the 15N methylpyrazine data were corrected for [M-H]+. It decides between the two surviving pyrazine structures (EX-052).
+2. **elfsson1999.pdf** (10.1016/s0928-0987(98)00009-8): aminoketone self-condensation k, its pH law and Ea (pyrazine layer).
+3. **bunke2000.pdf** (10.1002/1520-6017(200010)89:10<1335::aid-jps11>3.0.co;2-#): dihydropyrazine -> pyrazine and its O2 step (pyrazine layer).
+4. **esterbauer1975.pdf** (10.1515/znc-1975-7-808): thiol + enal forward / reverse rates and catalysis (thiol loss, lipid traps).
+5. **pripisnicolau2000.pdf** (10.1021/jf991024w): a second laboratory for donor-generic Strecker (the Strecker layer is single-lab).
+6. **kallen1971b.pdf** (10.1021/ja00752a040): thiazolidine forward / reverse rate constants (CF-076).
+7. **Zhai 2021 Supporting Information** (10.1021/acs.jafc.1c03727): possibly the 13C5-xylose label fraction in TTCA (CF-076).
+8. **nikolantonaki2012.pdf** (10.1021/jf302017j): FFT / H2S / GSH + quinone rates (thiol loss).
+9. **voigt2009.pdf** (10.1021/jf900459x) and **beck1988.pdf** (10.1016/0008-6215(88)85058-4): the hub, for later.
+
 ## Tier 2 -- useful constants or rivals
 
 | save as | paper | DOI | verified | for |
@@ -54,6 +68,25 @@ Desclaux 2006 (thesis); a Cerny / Davidek norfuraneol + cysteine CAMOLA follow-u
 or SI for: Zhai 2021's 13C5-xylose label fraction in TTCA; Xia 2022 SI Fig. S5; Zhou 2024 SI Table S1; Zamora 2015 SI
 Figs. S5 - S6.
 
+
+## Tier 2c -- adjacent-field analogue constants (cross-domain search 2026-10-31; DOIs checked against Crossref by the coordinator)
+
+These are ANALOGUES (5-ALA for aminoacetone, FFT / thiolates for MFT, glyoxal + ammonium for the pot), mostly 25 - 50 C; any use needs a declared transfer assumption with a band. Search record: [LITERATURE_SEARCH_2026-10-31_CROSSDOMAIN.md](LITERATURE_SEARCH_2026-10-31_CROSSDOMAIN.md).
+
+| save as | paper | DOI | for |
+|---|---|---|---|
+| elfsson1999.pdf | Elfsson et al. 1999, Eur. J. Pharm. Sci. 7:87 | 10.1016/s0928-0987(98)00009-8 | alpha-aminoketone (5-ALA) self-condensation: second order, pH 4.8 - 7.4, Ea 37 - 85 C (pyrazine layer) |
+| bunke2000.pdf | Bunke et al. 2000, J. Pharm. Sci. 89:1335 | 10.1002/1520-6017(200010)89:10<1335::aid-jps11>3.0.co;2-# | aminoketone -> dihydropyrazine -> pyrazine, O2 dependence of the last step (pyrazine layer) |
+| sedehi2013.pdf | Sedehi et al. 2013, Atmos. Environ. 77:656 | 10.1016/j.atmosenv.2013.05.070 | glyoxal / MGO + ammonium / amines, rate laws vs pH and T (dicarbonyl + amine) |
+| noziere2009.pdf | Nozière et al. 2009, J. Phys. Chem. A 113:231 | 10.1021/jp8078293 | glyoxal + NH4+ rate constant vs pH and ammonium activity (dicarbonyl + amine) |
+| nikolantonaki2012.pdf | Nikolantonaki & Waterhouse 2012, J. Agric. Food Chem. 60:8484 | 10.1021/jf302017j | FFT (and H2S, GSH) + quinone rates (thiol loss) |
+| esterbauer1975.pdf | Esterbauer et al. 1975, Z. Naturforsch. C 30:466 | 10.1515/znc-1975-7-808 | thiol + enal forward / reverse rates, K, pH and buffer catalysis (thiol traps by lipid carbonyls) |
+| doorn2002.pdf | Doorn & Petersen 2002, Chem. Res. Toxicol. 15:1445 | 10.1021/tx025590o | HNE / 4-oxononenal + Cys / His / Lys rate constants (lipid carbonyl traps) |
+| dutra2001.pdf | Dutra et al. 2001, Chem. Res. Toxicol. 14:1323 | 10.1021/tx015526r | aminoacetone autoxidation to MGO (the aminoketone's O2 sink) |
+| dehaan2009.pdf | De Haan et al. 2009, Environ. Sci. Technol. 43:2818 | 10.1021/es803534f | glyoxal + amino acids -> imidazoles (a competing dicarbonyl + amine route) |
+
+Came back EMPTY in this search (designed data or authors): thiazolidine kinetics with Ea; the dicarbonyl Strecker step in water; lipid-Strecker donors outside Seville; MFT's own heated-water lifetime; aminoacetone dimerisation itself; 3-DG lifetime with phosphate catalysis and Ea.
+
 ## Tier 3 -- title only, older, lower expected value
 
 | save as | paper | DOI |
@@ -72,8 +105,12 @@ Asked per paper once its dossier says the Supporting Information holds data the 
 | paper | why | asked |
 |---|---|---|
 | Wei 2022 Supporting Information, Fig. S3 only (the product mass spectrum) | checks whether the trapped product really has TTCA's mass (the dossier finds the proposed deoxyosone + Cys -> TTCA scheme unbalanced by 2 Da) | 2026-10-31 |
+| Zhou 2024 Supporting Information (10.1021/acs.jafc.4c03706; SI suffix .s001) | whether the 15N methyl-pyrazine data were corrected for [M-H]+ (decides pairing vs an extra methylpyrazine route, EX-052); its Table S1 glycine isotopomers | 2026-10-31 |
+| Zhai 2021 Supporting Information (10.1021/acs.jafc.1c03727; SI suffix .s001) | possibly the 13C5-xylose label fraction in TTCA and the final pH (the cysteine exchange conflict, CF-076) | 2026-10-31 |
+| Xia 2022 SI Fig. S5 | 120 C 1-DG / 3-DG (hub; xia2022 dossier) | 2026-10-31 |
+| Zamora 2015 SI Figs. S5 - S6 | lipid-carbonyl Strecker data (zamora2015 dossier) | 2026-10-31 |
 | none needed: granvogl2006, low2007, fife1991, hayashi1980, warmbier1976, smuda2010, zyzak1995 (no SI, or no data in it) | -- | -- |
 
-**Optional companion (DOI to verify before asking):** Low, Parker & Mottram 2006, J. Agric. Food Chem. 54:5976 -- the
+**Optional companion (now verified and in tier 2b as low2006.pdf):** Low, Parker & Mottram 2006, J. Agric. Food Chem. 54:5976 -- the
 concentrations behind Low 2007's isotopomer shares (potato-matrix pyrazines); only if the pyrazine lane needs
 potato-matrix numbers.
