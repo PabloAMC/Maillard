@@ -105,6 +105,12 @@ CI; P(bit-identical on the first pass) ~0.6, the rest found by the pinning tests
    Cao 2017 and Davidek. Then the pH model on unbuffered pots with the pentose acids in. Scoped after its review
    (kinetic_core_dpo_partition_prereg.md sec. 7): B7a the partition only (two-level measurement model; split-law
    and TDP-exit arms); B7b the cysteine fate (buffer catalysis of the ring-chain step) only after a cost-by-block check.
+   **Night of 10-31 (EX-030, EX-033 - EX-036):** R4f rejected (TTCA's direct step stays; no in-class barrier passes
+   Cerny); the two-level measurement model built (bit-identical off); the admitted structure fails the partition's
+   scale-free signatures in time and pH (wrong sign) under either measurement model; NO B7a arm passes (split law,
+   TDP exit, both, second MGO parent). Diagnosis: DPO's base-favoured beta-cleavage (fitted on Davidek's glycine
+   pots) cancels any split law in amine-free TTCA pots -> next candidate (to design and review): the beta-cleavage
+   amine-assisted; TDP's caramelisation source. **Time-box: 48 h from 10-31 00:30 -> B closes 11-02 00:30.**
    Meanwhile (queued after step 0): R4f -- TTCA's direct breakdown to DPO as a free offset (its lower bound = the
    measured Amadori route only), the NF -> MFT barrier profiled at 64 / 100 / 133 kJ/mol (thiol prereg secs. 14 - 16).
 8. Adequacy: leave-one-laboratory-out with the between-paper error on the finalist (6 - 10 h compute; overnight or

@@ -272,3 +272,13 @@ the defaults are bit-identical); B7D fitted -- r_tdp_mgo identified but small (-
 whether ANY B7a structure moves the partition signatures -- if none does, the partition's fault is in a step none of
 the arms touches (the deoxyosones' detection / the quinoxaline response, or a TTCA -> deoxyosone route with its own
 split), and that becomes the owner's morning question.
+
+## Checkpoint 17 -- 2026-10-31 06:40
+
+**Goal:** unchanged. **Since 05:40:** the four B7a arms converged and none passes the partition signatures (EX-036);
+the null under the same fixed noise costs 1093: B7S -54 / 2 coordinates and B7D -19 / 1 are real gains without the
+signature shape, B7T +53 rejected. Flux attribution at B7S's optimum: DPO's base-favoured beta-cleavage (fitted on
+Davidek's glycine pots) takes 51 - 61 % of DPO at pH 8 and cancels the split law in amine-free TTCA pots; 39 - 45 % of
+TDP is pH-flat caramelisation. **Running:** the B7a chance baseline, then the thiol v2 chance baseline. **Next:** full
+verification of HEAD, push PR #30, morning summary. **Most valuable?** Yes: close the night with a verified, pushed
+record and a clear next question (the amine-assisted beta-cleavage), not another unreviewed arm.

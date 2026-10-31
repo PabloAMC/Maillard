@@ -234,8 +234,9 @@ All four converged (status 2) under the B7a null's fixed series noise (w 0.2), f
 | B7T | 1146.0 | 0 | (trunk k_tdg_fa) c2c3 +2.45 | 1 / 8 | 1 / 6 | 2 / 2 | 4 / 11 | 0.993 |
 | B7ST | 1082.0 | 2 | share 0.69 +- 0.13; pH_c 6.50 +- 0.36 | 2 / 8 | 0 / 6 | 2 / 2 | 3 / 11 | 0.996 |
 
-The null's own cost under the same fixed noise is being computed (`s042_r3en_b7anull_w02_fixed`); the arms' start costs
-(1102 with each switch near its null value) are a close proxy. **Against the declared thresholds -- (i) >= 5 / 8, (ii)
+The null's own cost under the same fixed noise (`s042_r3en_b7anull_w02_fixed`, converged) is **1093**: B7S -54 for two
+coordinates and B7D -19 for one are real cost gains (delta chi-square / reduced chi-square ~24 and ~8); B7T +53 for none is
+rejected by the fit rows; B7ST -11 for two is weak. **Against the declared thresholds -- (i) >= 5 / 8, (ii)
 >= 4 / 6, (vi) 2 / 2 -- no arm passes.** Expectations: B7D (i) (P 0.35) no, c2c3 < 1.5 (P 0.4) no; B7S (ii) (P 0.35)
 no; B7T (vi) 2 / 2 (P 0.35) YES, (i) (P <= 0.15) no; B7ST all three (P 0.15) no. B7T's 3-DX exit at the trunk's
 hexose constant reproduces the post-peak declines but RAISES the cost by ~44 for no coordinate: the fit rows reject the
