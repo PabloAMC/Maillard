@@ -1669,4 +1669,23 @@ entries:
     status: open
     remedy: "Signature (iii) is reported, not decisive, in B7a (kinetic_core_dpo_partition_prereg.md sec. 7)."
     affects: [zhai2019_fig3b_dicarbonyls_ttca, zhai2023jafc_fig5_arp_dicarbonyls]
-
+  - id: CF-072
+    kind: code_mismatch
+    scope: corpus
+    sources: [nguyen2016]
+    quantity: "the protein-glycation arm (B20): the fructoselysine-protein decay r_flp_decay"
+    observation: >-
+      src/kinetic_core/network.py r_flp_decay writes FLP -> TDG + LYSP, returning the protein lysine to the pool.
+      Nguyen 2016's fitted network (nguyen2016_extraction.md, the supplementary equations) returns NO lysine: lysine is
+      consumed only by k3, and AP -> CML / CEL / MRPs leave d[lys]/dt untouched. The dossier warns that a network that
+      writes the lysine back and uses Nguyen's constant is not Nguyen's model. The frozen k_glyc at 120 C is 0.64x
+      Nguyen's printed k3, consistent with the fit compensating for the different network. Found by the matrix
+      mechanism review (2026-10-31).
+    explanations:
+      - "A transcription choice in B20: the Amadori decay written with amine release as in the free-amino-acid trunk."
+      - "A deliberate declared departure not recorded in the choices register."
+    tests:
+      - "Refit B20 with the lysine kept out (Nguyen's structure) and compare k_glyc with Nguyen's k3; score the casein-glucose rows."
+    status: open
+    remedy: "Fix in its own PR (it moves shipped numbers): r_flp_decay without LYSP, k_glyc re-derived; until then the arm is flagged."
+    affects: [nguyen2016_table1_m1_glucose_casein_constants]

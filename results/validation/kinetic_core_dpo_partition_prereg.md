@@ -313,3 +313,33 @@ coordinate count, B7AS counts as a gain only if it is >= 5 units below the null 
 were drawn in R3En's box; replacing one coordinate by another of the same reach is taken as negligible (stated, not
 re-drawn). **Expectations revised:** B7AS >= 4 / 6 pH segments P 0.07; B7ASS P 0.1; the Davidek 2008 acetic
 signatures hold P 0.75; the engine's DPO -> acetic share flat (within 0.1) from pH 6.5 to 8 under B7AS P 0.5.
+
+**CORRECTION (2026-10-31 ~08:45, before the B7a-2 arms were read).** Sec. 13 states "Phosphate cannot be the Davidek /
+Zhai difference (Zhai 2021's TTCA pots are also 0.2 M phosphate)". That is WRONG: Zhai 2021's TTCA pots are
+UNBUFFERED water, pH set with NaOH / HCl (zhai2021_extraction.md, Methods; the fit table's pots), as are Zhai 2019,
+Zhai 2023 and Kang 2026. The claim came from a dossier agent's summary and was copied without checking. Consequences:
+Davidek 2006a's amine-free 1-DG pots (0.16 - 0.2 M phosphate) and Zhai's TTCA pots (water) differ in phosphate, so
+**phosphate (general-acid / base) catalysis of the DPO beta-cleavage is a live rival** for the Davidek / Zhai
+tension -- the cysteine mechanism review (scratchpad mechanism_reviews/cysteine.md) independently ranks catalysis by
+solutes and buffer as the leading cause of the cysteine misfit (P 0.55), with the +-xylose contrast of Zhai 2021
+Fig. 6 (free cysteine RISES on adding xylose: no equilibrium model allows it) as its on-disk discriminator. The B7a-2
+arms (saturating pH law) are unaffected as tests; their interpretation will name phosphate as the untested rival.
+
+## 14. A held-out signature declared before the B7a-2 arms are read (2026-10-31 ~08:50), and the hub review's leads
+
+**Signature (vii), declared now (held out from every B7 arm's credit until a fit is designed on it):** the +xylose /
+-xylose double ratio of TDP / DPO by pH in Zhai 2021 Fig. 5 (100 C, 120 min), measured 0.85 / 0.92 / 1.22 / 2.7 at pH
+5.5 / 6 / 7 / 8 (the hub mechanism review's arithmetic on the keyed tables): extra xylose re-traps released cysteine,
+and 3-DX is rescued only at high pH -- the signature of a cysteine trap of the aldehydic 3-DX that grows with pH.
+Reported for every arm from B7a-2 on; tolerance +-0.15 dex per point, pass = 3 of 4.
+
+**The hub review's ranked hypotheses (scratchpad mechanism_reviews/hub.md; inputs to the hub step, roadmap step 5):**
+H1 both deoxyosones quasi-steady (short-lived vs the cysteine Amadori compound) while the engine's 3-DX lives ~35 h
+(P 0.65; Hofmann 1999, Zhai 2023 JAFC, Zhai 2021 pH 5.5, Martins M4); H2 free cysteine traps 3-DX faster at higher pH
+(P 0.45; signature vii); H3 the split itself moves toward 1-DX with pH (P 0.5 as a contributor; Martins 2005b pD,
+Nedvidek 1992); H4 the 1-DX sinks calibrated in phosphate and applied to water (P 0.35; see the correction above);
+H5 the pH-flat caramelisation source of 3-DX too large (P 0.4); H6 O2 diverting the Amadori compound to the osone (P
+0.15; Gobert 2009). Null for the hub step: Martins & van Boekel 2005 M4 (its topology already puts both osones in
+quasi-steady state).
+(Timing note: the command that appended this section printed the B7a-2 log first, so B7AS's COST -- 1079 -> 1022 --
+was seen just before (vii) was written; none of B7AS's signature values had been computed or read.)

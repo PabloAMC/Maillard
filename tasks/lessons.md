@@ -380,3 +380,8 @@ READMEs after staging, as part of every commit that touches docs/reference or da
 Ho papers from a literature agent's summary ("cysteine vs cystine"); the PDFs compare cysteine with its sulfinic /
 cysteic acids and GSH with its sulfonic acid. The DOIs were right, the contents were not. When listing papers to
 download, say "reported to" and keep the claim to what a verified abstract states.
+
+**An agent's factual claim about a paper is a lead, not a fact** (2026-10-31, again). "Zhai 2021's pots are 0.2 M
+phosphate" came from a dossier agent's report; I wrote it into a pre-registration; the dossier and the fit rows say
+unbuffered water, and the cysteine review caught it. Before a claim about conditions enters a prereg, grep the
+dossier / fit table for it (one command).

@@ -4,9 +4,9 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-10-31",
     "git": {
-      "commit": "b6f6af10cd870b4593e3c4a9633bc558c1a82a6d",
-      "short": "b6f6af10",
-      "branch": "submodel1-ph",
+      "commit": "bb207020b68f73d3528910cfd76477002659b4a4",
+      "short": "bb207020",
+      "branch": "b7-deoxyosone-partition",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -29,15 +29,15 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "63e80892dd89480447eb8ffa48d51d3a00e69484050edaa765c01dcbb7f8aaee"
+        "sha256": "9396db999ca9f45d4c1f0a05bc219f8fb4faf10dac67cbd866ce7ddafebf96df"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "1887c9ba5bb509eb320bc71c3ac42d44c7a446dd1af6d63cd35127fa8c0eec0a"
+        "sha256": "d82e7dd7ca6ffe0222189eb590f93658578092673d8afa50c2a580787add71ed"
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "3319bb7d6ae21f7e50c3b5674b3e65ca2d6b956ff71d5703b6e947e523921b79"
+        "sha256": "fd352f9f36e99e2c6210886ce7111ea41ded63519c97683595ca444ef7783f1b"
       },
       {
         "path": "src/kinetic_core/parameters.py",

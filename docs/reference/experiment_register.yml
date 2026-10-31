@@ -475,3 +475,39 @@ entries:
     verdict: supported
     conclusion: "Ranked failure shares: the hub not identifiable from literature (lab effects confound amine / phosphate / O2 factors) 0.30; the odorants reached too late (Strecker behind B, A3, A2, C1) 0.25; the signature machinery without measured power 0.15; A2 overrun 0.12; C6 scope creep 0.10; a thin yardstick 0.08. B7a-2's confound: Zhai's TTCA pots are not amine-free (cysteine). Missing: the published multiresponse hub models (Martins 2005, Brands 2002) as nulls."
     follow_up: "Roadmap revised (STATUS_AND_PLAN sec. 5): B capped at 24 h with cysteine's amine order declared; forced-input odorant layers now; an identifiability audit + synthetic power test before the hub; the hub as a standalone module seeded from Martins / Brands, B7b folded in; A2 after; C6 cut to a sensitivity page."
+  - id: EX-039
+    date: "2026-10-31"
+    kind: review
+    question: "Six mechanism reviews (hub, cysteine, thiols, Strecker, pyrazines, matrix): what does the literature say about each core problem, and which papers would settle it?"
+    hypothesis: "-"
+    design: "Independent read-only agents, one per problem, reading the dossiers and PDFs on disk and searching (DOIs verified against Crossref / PubMed). Synthesis docs/guides/MECHANISM_REVIEWS_2026-10-31.md; raw reports docs/history/mechanism_reviews_2026-10-31/."
+    expected: "-"
+    artifacts: [docs/guides/MECHANISM_REVIEWS_2026-10-31.md]
+    commit: pending
+    verdict: supported
+    conclusion: "Ten plan-changing findings: deoxyosones quasi-steady with the engine's 3-DX far too long-lived (P 0.65); a cysteine trap of 3-DX growing with pH (signature vii); dilute TTCA pots kinetically far from equilibrium -- catalysed hydrolysis (P 0.55); the MFT loss law as the likeliest missing thiol element (P 0.40); Liu 2023's recombination an EI-MS artefact (P 0.8); the pyrazine lane's yield constant used as a Strecker flux (~1.9 dex); Strecker yields are branching shares with a shallow pH law and a separate O2 acid route; protein-bound lysine the dominant real-product amine; a glycation-arm bug (CF-072); a wrong buffer claim in the B7 prereg (corrected). 25 papers listed in two tiers."
+    follow_up: "Download list to the owner; the hub step seeded with Martins M4 and signature (vii); B7b as catalysed rate laws; the MFT-loss arm (thiol prereg sec. 17); pyrazines after the forced-input Strecker layer."
+  - id: EX-040
+    date: "2026-10-31"
+    kind: diagnosis
+    question: "Does a slower MFT loss reconcile Cerny 2003 with Schieberle 2000 at an in-class NF -> MFT barrier?"
+    hypothesis: "The MFT loss law, not the route barriers, carries the Cerny / Schieberle conflict (thiol review, P 0.40)."
+    design: "Dry grid at s042_r3en_fixed: Ea(NF -> MFT) 100 / 133, DDP route +2 / +3, MFT decay x1 / 0.2 / 0.1, DPO -> NF x1 / 0.1; thiol prereg sec. 17. No fit."
+    expected: "-"
+    artifacts: [results/validation/kinetic_core_thiol_submodel_prereg.md]
+    commit: pending
+    verdict: partial
+    conclusion: "At Ea 133 and DDP +3, Cerny pot D passes (0.070) already with the fitted decay; slowing the decay x0.1 cuts Schieberle's lag error from +1.30 to +0.80 dex and brings the early rise and plateau within tolerance, but the lag still fails. The fits restore a fast decay, so a temperature-dependent MFT loss is the next candidate."
+    follow_up: "Design + review an MFT-loss-barrier arm (thiol prereg sec. 17)."
+  - id: EX-041
+    date: "2026-10-31"
+    kind: fit
+    question: "B7a-2: does the DPO beta-cleavage's saturating pH law (Davidek 2006a, amine-free 1-DG), alone (B7AS) or with the split law (B7ASS), reproduce the partition signatures?"
+    hypothesis: "The engine's log-linear base factor over-drains DPO at high pH (dpo partition prereg sec. 13)."
+    design: "Under the B7a null's fixed noise (w 0.2), from the null's optimum; the pK replaces the slope (same coordinate count); budget 1200, ftol 1e-4 (prereg sec. 13 + its review amendments; signature vii declared sec. 14)."
+    expected: "B7AS >= 4 / 6 pH segments P 0.07; B7ASS P 0.1; Davidek 2008 acetic signatures hold P 0.75."
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_b7as_w02.md, results/validation/kinetic_core_mechanism_signatures_s042_b7as_w02.md, results/validation/kinetic_core_deoxyosone_signatures_s042_b7as_w02.md, results/validation/kinetic_core_deoxyosone_signatures_s042_r3en_b7anull_w02_fixed.md]
+    commit: pending
+    verdict: pending
+    conclusion: "(in progress) B7AS: status 3, cost 1022 vs the null's 1093 under the same noise (-71 at the same coordinate count: a real cost gain), pK 5.35 +- 0.32 (in-situ; just below Davidek's ~5.5 - 6.2); partition signatures time 1 / 8, pH segments 0 / 6 (the null 1 / 6), (vii) 2 / 4 (the null 2 / 4): at pH 7 / 8 the measured +xylose double ratio is 1.22 / 2.71, every model ~0.73. Cerny pot D 0.994. B7ASS running."
+    follow_up: "-"
