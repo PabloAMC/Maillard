@@ -111,10 +111,10 @@ def test_the_arms_carry_their_coordinates_and_static_switch(monkeypatch):
     keys, kinds, lower, upper, start = joint.coordinates(False, joint.ARMS["B7ST"])
     i, j = keys.index("dpo_share7"), keys.index("split_ph_c")
     assert (kinds[i], lower[i], upper[i], start[i]) == ("acid_yield", 0.02, 0.98, 0.30)
-    assert (kinds[j], lower[j], upper[j], start[j]) == ("pka", 5.0, 10.0, 7.5)
+    assert (kinds[j], lower[j], upper[j], start[j]) == ("pka", 5.0, 10.0, 9.5)
     keys_d, kinds_d, lower_d, upper_d, start_d = joint.coordinates(False, joint.ARMS["B7D"])
     m = keys_d.index("log10_k_tdp_mgo")
-    assert (kinds_d[m], lower_d[m], upper_d[m], start_d[m]) == ("log10_offset", -8.0, -1.0, -5.08)
+    assert (kinds_d[m], lower_d[m], upper_d[m], start_d[m]) == ("log10_offset", -8.0, -1.0, -7.0)
     n_null = len(joint.coordinates(False, joint.ARMS["R3En"])[0])
     assert len(joint.coordinates(False, joint.ARMS["B7T"])[0]) == n_null and len(keys_d) == n_null + 1
     assert joint.ARMS["B7ST"] - joint.ARMS["R3En"] == {"split_ph", "tdp_exit"}
@@ -123,7 +123,7 @@ def test_the_arms_carry_their_coordinates_and_static_switch(monkeypatch):
     assert _job("B7T", monkeypatch, k_ref_per_min=1e-2, ea_kj_mol=84.0)["tdp_exit"]["ea_kj_mol"] == 84.0
     assert "tdp_exit" not in _job("B7S", monkeypatch) and "cama_split" not in _job("R3En", monkeypatch)
     routes = _job("B7D", monkeypatch)["routes"]
-    assert routes["k_tdp_mgo_100c_ph5"] == pytest.approx(10.0 ** -5.08)
+    assert routes["k_tdp_mgo_100c_ph5"] == pytest.approx(10.0 ** -7.0)
     assert routes["ea_tdp_mgo_kj_mol"] == ps.PentoseMgoRoutes().ea_tdp_mgo_kj_mol == 100.0
     assert _job("R3En", monkeypatch)["routes"]["k_tdp_mgo_100c_ph5"] == 0.0
     with pytest.raises(SystemExit):

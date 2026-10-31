@@ -113,10 +113,10 @@ TDP_EXIT_STATIC: Dict[str, Any] = {}
 #: B7a R-S: the cysteine Amadori compound's 1-deoxyosone share at pH 7 (a share, CR-12's 0.30 at the start) and the
 #: saturating base law's midpoint pH_c (a pKa-like absolute pH, B8's "pka" step 0.1): (key, kind, lower, upper, start)
 SPLIT_COORDINATES = (("dpo_share7", "acid_yield", 0.02, 0.98, 0.30),
-                     ("split_ph_c", "pka", 5.0, 10.0, 7.5))
-#: B7a B7D: log10 of r_tdp_mgo's k at 100 C / pH 5 (1/min; sub-model 3 arm A3's fitted -5.08 at the start), its
+                     ("split_ph_c", "pka", 5.0, 10.0, 9.5))   # start near the null (pH_c -> inf): ~3 % off it at pH 8
+#: B7a B7D: log10 of r_tdp_mgo's k at 100 C / pH 5 (1/min; start -7, near the null with a usable gradient -- A3's -5.08 was fitted at Ea 40, at 100 kJ/mol it gives ~1500x the null's MGO), its
 #: barrier held at PentoseMgoRoutes' default (recorded in the report as "tdp_mgo_ea_kj_mol")
-TDP_MGO_COORDINATE = ("log10_k_tdp_mgo", "log10_offset", -8.0, -1.0, -5.08)
+TDP_MGO_COORDINATE = ("log10_k_tdp_mgo", "log10_offset", -8.0, -1.0, -7.0)
 TDP_MGO_EA_KJ_MOL = _PentoseMgoRoutes().ea_tdp_mgo_kj_mol
 ARM_MULTIPLIED = {"k_cys_actz": ("k_cys_actz",), "k_aa_frag": ("k_aa_frag",), "ddp_mft": ("k_ddp_mft", "k_ddp_mft_hs"),
                   "k_ttca_deg": ("k_ttca_deg",)}
