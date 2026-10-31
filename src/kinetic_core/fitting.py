@@ -344,6 +344,20 @@ def summary_lines(problem: Problem, f_: Fit, lap: Dict[str, Any]) -> List[str]:
 #              (its within-study contrasts) counts, at the cost of one degree of freedom (``nuisance_dof``).
 # A finite tau for calibrated data from different laboratories is a choice no source supplies; it belongs in the
 # choices register as a swept cutoff, not here.
+#
+# TWO LEVELS (plan step B7a, 2026-10-31; results/validation/kinetic_core_dpo_partition_prereg.md secs. 2, 4, 7). One
+# level per species series gives the 3- and 1-deoxypentosone of ONE figure, read by ONE method (OPD quinoxalines,
+# HPLC-DAD), separate free scales, and those absorbed 85-94 % of their RATIO error: the ratio a figure measures well
+# was not in the cost. With ``group_of`` (the outer group, a paper x figure) and ``within_tau`` (per method class) the
+# level groups of one outer group G share an outer level mu_G ~ N(0, tauG^2) (tauG = ``tau(method)``; inf = free) and
+# each deviates from it by a response-factor term d_s ~ N(0, tauW^2), so
+#     Sigma_G = D + tauG^2 11^T + sum_s tauW^2 1_s 1_s^T.
+# Whitening uses the SYMMETRIC root: with K = D^-1/2 Sigma_G D^-1/2 = I + (low rank), z = K^-1/2 u. It is the one-level
+# transform above written for a general K (for one level group and tauW -> 0, K^-1/2 = I - c w^ w^^T exactly), so the
+# cost and the residual vector are continuous in tauW and do not depend on row order (a Cholesky factor does). tauG
+# inf: with K0 = D^-1/2 Sigma0 D^-1/2, Sigma0 = D + sum_s tauW^2 1_s 1_s^T, v = K0^-1/2 w, the free level is projected
+# out, z = K0^-1/2 u - v^ (v^ . K0^-1/2 u), so |z|^2 = r'Sigma0^-1 r - (1'Sigma0^-1 r)^2 / 1'Sigma0^-1 1 (the shape
+# the outer group's rows share, ONE degree of freedom per outer group).
 SCALE_TAU: Dict[str, float] = {
     "sida": 0.0,
     "calibrated": 0.0,
@@ -371,6 +385,17 @@ class MeasurementModel:
     #: default): absolute rows carry no level term, exactly as before. ``level_of`` defaults to ``series_of``.
     level_of: Optional[Callable[[Any], str]] = None
     between_tau: Mapping[str, float] = field(default_factory=dict)
+    #: 2026-10-31 (B7a, two levels; see the block comment above SCALE_TAU): the OUTER group of a row (a paper x figure)
+    #: whose level groups share one level, ``tau(method)`` wide, and ``within_tau`` per method class, the width (dex)
+    #: of each level group's deviation from it (a species' response factor; finite, > 0). Rows whose method is absent
+    #: from ``within_tau``, or every row when ``group_of`` is None (the default), keep the one-level model unchanged.
+    group_of: Optional[Callable[[Any], str]] = None
+    within_tau: Mapping[str, float] = field(default_factory=dict)
+
+    def __post_init__(self):
+        for method, t in self.within_tau.items():
+            if not (math.isfinite(float(t)) and float(t) > 0.0):
+                raise ValueError(f"within_tau[{method!r}] = {t!r}: a response-factor width must be finite and > 0")
 
     def tau(self, method: str) -> float:
         """The level offset's prior width for a method class: its calibration scale, else its between-paper error."""
@@ -392,6 +417,82 @@ class MeasurementModel:
                 raise KeyError(f"level group {name!r}: unknown method class {next(iter(methods))!r}")
         return out
 
+    def _grouped(self, rows: Sequence[Any]) -> Dict[str, Tuple[List[int], List[str], str]]:
+        """The two-level outer groups: name -> (row indices, each row's level key, method class). Empty when
+        ``group_of`` is None or ``within_tau`` is empty. An outer group holding a method with a within term must hold
+        that method only, and a level group must sit inside one outer group."""
+        if self.group_of is None or not self.within_tau:
+            return {}
+        idx_of: Dict[str, List[int]] = {}
+        methods_of: Dict[str, set] = {}
+        for i, row in enumerate(rows):
+            g = self.group_of(row)
+            idx_of.setdefault(g, []).append(i)
+            methods_of.setdefault(g, set()).add(self.method_of(row))
+        out: Dict[str, Tuple[List[int], List[str], str]] = {}
+        home: Dict[str, str] = {}
+        for g, idx in idx_of.items():
+            methods = methods_of[g]
+            if not methods & set(self.within_tau):
+                continue
+            if len(methods) != 1:
+                raise ValueError(f"outer group {g!r} mixes method classes {sorted(methods)}")
+            (method,) = methods
+            if method not in self.scale_tau:
+                raise KeyError(f"outer group {g!r}: unknown method class {method!r}")
+            labels = [self.level_key(rows[i]) for i in idx]
+            for key in labels:
+                if home.setdefault(key, g) != g:
+                    raise ValueError(f"level group {key!r} spans outer groups {sorted({home[key], g})}")
+            out[g] = (idx, labels, method)
+        return out
+
+    @staticmethod
+    def _two_level_root(s: np.ndarray, labels: Sequence[str], tau_g: float, tau_w: float
+                        ) -> Tuple[np.ndarray, float, Optional[np.ndarray]]:
+        """For one outer group: K^-1/2 (K = D^-1/2 Sigma D^-1/2, Sigma = Sigma_G, or Sigma0 when tau_g is inf), log det
+        Sigma (or Sigma0), and v = K0^-1/2 w for a free outer level (None otherwise). K is I plus a PSD low-rank term,
+        so its eigenvalues are >= 1 and the symmetric root is well conditioned."""
+        w = 1.0 / s
+        k = np.eye(len(s))
+        lab = np.asarray(labels, dtype=object)
+        for key in dict.fromkeys(labels):
+            ws = np.where(lab == key, w, 0.0)
+            k += tau_w * tau_w * np.outer(ws, ws)
+        free = math.isinf(tau_g)
+        if not free and tau_g > 0.0:
+            k += tau_g * tau_g * np.outer(w, w)
+        lam, q = np.linalg.eigh(k)
+        root = (q / np.sqrt(lam)) @ q.T
+        logdet = float(np.sum(2.0 * np.log(s)) + np.sum(np.log(lam)))
+        return root, logdet, (root @ w if free else None)
+
+    def _grouped_posterior(self, r: np.ndarray, sigma: np.ndarray, idx: List[int], labels: List[str], method: str
+                           ) -> Tuple[float, Dict[str, float]]:
+        """One outer group's posterior means from its finite rows: the outer level mu and each level group's TOTAL
+        offset mu + d_s. Finite tauG: E[mu + d_s | r] = (tauG^2 1 + tauW^2 1_s)' Sigma^-1 r (the BLUP). tauG inf:
+        mu = the GLS mean 1'Sigma0^-1 r / 1'Sigma0^-1 1 and d_s = tauW^2 1_s' Sigma0^-1 (r - 1 mu) (Henderson). A level
+        group with no finite row takes mu (its own deviation's posterior is its prior, mean 0)."""
+        tau_g, tau_w = self.tau(method), float(self.within_tau[method])
+        ok = [j for j, i in enumerate(idx) if np.isfinite(r[i])]
+        keys = list(dict.fromkeys(labels))
+        if not ok:
+            return 0.0, {key: 0.0 for key in keys}
+        rows_ok = [idx[j] for j in ok]
+        lab_ok = np.asarray([labels[j] for j in ok], dtype=object)
+        s = sigma[rows_ok]
+        root, _, _ = self._two_level_root(s, list(lab_ok), tau_g, tau_w)
+        kinv = root @ root
+        alpha = (kinv @ (r[rows_ok] / s)) / s            # Sigma^-1 r (Sigma0 for a free level)
+        if math.isinf(tau_g):
+            beta = (kinv @ (1.0 / s)) / s                 # Sigma0^-1 1
+            mu = float(np.sum(alpha) / np.sum(beta))
+            resid = alpha - mu * beta
+        else:
+            mu = tau_g * tau_g * float(np.sum(alpha))
+            resid = alpha
+        return mu, {key: mu + tau_w * tau_w * float(np.sum(resid[lab_ok == key])) for key in keys}
+
     def sigma(self, row: Any) -> float:
         """The row's error with its series' extra noise added in quadrature."""
         s, e = float(self.sigma_of(row)), float(self.extra_noise.get(self.series_of(row), 0.0))
@@ -411,12 +512,18 @@ class MeasurementModel:
         return out
 
     def whiten(self, log_residuals: np.ndarray, rows: Sequence[Any]) -> np.ndarray:
-        """Residuals in dex -> whitened residuals, each series' calibration offset integrated out."""
+        """Residuals in dex -> whitened residuals, each series' calibration offset integrated out (two-level outer
+        groups: K^-1/2 u, the free outer level projected out; see the block comment above SCALE_TAU). As in the
+        one-level case, where a non-finite residual spoils its whole level group, one spoils its whole outer group."""
         r = np.asarray(log_residuals, dtype=float)
         sigma = np.array([self.sigma(row) for row in rows])
         z = r / sigma
         self._series(rows)   # validates the noise series
-        for idx in self._levels(rows).values():
+        grouped = self._grouped(rows)
+        nested = {key for _, labels, _ in grouped.values() for key in labels}
+        for name, idx in self._levels(rows).items():
+            if name in nested:
+                continue
             tau = self.tau(self.method_of(rows[idx[0]]))
             if tau == 0.0:
                 continue
@@ -425,16 +532,43 @@ class MeasurementModel:
             c = 1.0 if math.isinf(tau) else 1.0 - 1.0 / math.sqrt(1.0 + tau * tau * norm2)
             w_hat = w / math.sqrt(norm2)
             z[idx] = z[idx] - c * w_hat * float(w_hat @ z[idx])
+        for idx, labels, method in grouped.values():
+            u = z[idx]
+            if not np.all(np.isfinite(u)):
+                z[idx] = np.nan
+                continue
+            root, _, v = self._two_level_root(sigma[idx], labels, self.tau(method), float(self.within_tau[method]))
+            zg = root @ u
+            if v is not None:
+                v_hat = v / math.sqrt(float(v @ v))
+                zg = zg - v_hat * float(v_hat @ zg)
+            z[idx] = zg
         return z
+
+    def group_offsets(self, log_residuals: np.ndarray, rows: Sequence[Any]) -> Dict[str, float]:
+        """Each two-level outer group's level (dex), its posterior mean (tauG inf: the GLS mean in Sigma0's metric;
+        tauG 0: none). Empty for a one-level model."""
+        r = np.asarray(log_residuals, dtype=float)
+        sigma = np.array([self.sigma(row) for row in rows])
+        return {g: self._grouped_posterior(r, sigma, idx, labels, method)[0]
+                for g, (idx, labels, method) in self._grouped(rows).items()}
 
     def offsets(self, log_residuals: np.ndarray, rows: Sequence[Any]) -> Dict[str, float]:
         """Each series' calibration offset (dex), the posterior mean under its N(0, tau^2) prior:
         tau^2 S / (1 + tau^2 W), S = sum r / sigma^2, W = sum 1 / sigma^2 (tau = inf: the weighted mean; 0: none).
-        Subtracting it gives the residual a reader should judge a semi-quantitative series by."""
+        Subtracting it gives the residual a reader should judge a semi-quantitative series by. A level group inside a
+        two-level outer group gets its TOTAL offset, outer level plus its own deviation (``_grouped_posterior``), still
+        keyed by its level key (``group_offsets`` gives the outer levels)."""
         r = np.asarray(log_residuals, dtype=float)
         sigma = np.array([self.sigma(row) for row in rows])
         out: Dict[str, float] = {}
+        nested: Dict[str, float] = {}
+        for idx, labels, method in self._grouped(rows).values():
+            nested.update(self._grouped_posterior(r, sigma, idx, labels, method)[1])
         for name, idx in self._levels(rows).items():
+            if name in nested:
+                out[name] = nested[name]
+                continue
             tau = self.tau(self.method_of(rows[idx[0]]))
             ok = [i for i in idx if np.isfinite(r[i])]
             if tau == 0.0 or not ok:
@@ -445,19 +579,29 @@ class MeasurementModel:
         return out
 
     def nuisance_dof(self, rows: Sequence[Any]) -> int:
-        """One degree of freedom per scale-free series present in ``rows``."""
-        return sum(1 for idx in self._levels(rows).values() if math.isinf(self.tau(self.method_of(rows[idx[0]]))))
+        """One degree of freedom per scale-free series present in ``rows`` (per free OUTER group for two-level rows:
+        its level groups' deviations are shrunk by a proper prior and cost none)."""
+        grouped = self._grouped(rows)
+        nested = {key for _, labels, _ in grouped.values() for key in labels}
+        return (sum(1 for name, idx in self._levels(rows).items()
+                    if name not in nested and math.isinf(self.tau(self.method_of(rows[idx[0]]))))
+                + sum(1 for _, _, method in grouped.values() if math.isinf(self.tau(method))))
 
     def log_density(self, log_residuals: np.ndarray, rows: Sequence[Any]) -> float:
         """The rows' log predictive density under this model (natural log): per level group a Gaussian with covariance
         D + tau^2 11^T. A scale-free group (tau inf) counts its shape only: one dimension fewer, and its log-determinant
         taken on the projected space (an improper level prior's constant dropped -- equal across arms on the same rows,
-        so paired differences are exact)."""
+        so paired differences are exact). A two-level outer group: the Gaussian with Sigma_G, or for a free outer level
+        its projected form, log det Sigma0 + log 1'Sigma0^-1 1 on n - 1 dimensions (the same convention)."""
         r = np.asarray(log_residuals, dtype=float)
         z = self.whiten(r, rows)
         sigma = np.array([self.sigma(row) for row in rows])
         total = 0.0
-        for idx in self._levels(rows).values():
+        grouped = self._grouped(rows)
+        nested = {key for _, labels, _ in grouped.values() for key in labels}
+        for name, idx in self._levels(rows).items():
+            if name in nested:
+                continue
             tau = self.tau(self.method_of(rows[idx[0]]))
             w2 = float(np.sum(1.0 / sigma[idx] ** 2))
             logdet = float(np.sum(2.0 * np.log(sigma[idx])))
@@ -468,19 +612,50 @@ class MeasurementModel:
             elif tau > 0.0:
                 logdet += math.log(1.0 + tau * tau * w2)
             total += -0.5 * (float(z[idx] @ z[idx]) + logdet + n_eff * math.log(2.0 * math.pi))
+        for idx, labels, method in grouped.values():
+            _, logdet, v = self._two_level_root(sigma[idx], labels, self.tau(method), float(self.within_tau[method]))
+            n_eff = len(idx)
+            if v is not None:
+                logdet += math.log(float(v @ v))   # 1' Sigma0^-1 1 = |K0^-1/2 w|^2
+                n_eff -= 1
+            total += -0.5 * (float(z[idx] @ z[idx]) + logdet + n_eff * math.log(2.0 * math.pi))
         return total
 
     def coverage(self, log_residuals: np.ndarray, rows: Sequence[Any], level: float = 0.90) -> Tuple[int, int]:
         """How many rows fall inside their central ``level`` predictive interval, of how many scored: marginal variance
         sigma_i^2 + tau^2 for a finite level term; a scale-free group's rows centred on its weighted mean (variance
-        sigma_i^2 (1 - w_i^2 / sum w^2)); single-row scale-free groups carry no information and are not scored."""
+        sigma_i^2 (1 - w_i^2 / sum w^2)); single-row scale-free groups carry no information and are not scored.
+        Two-level rows (2026-10-31): finite tauG, marginal variance sigma_i^2 + tauG^2 + tauW^2 around 0; free tauG,
+        centred on the outer group's GLS mean mu in Sigma0's metric, variance Var(r_i - mu) = sigma_i^2 + tauW^2 -
+        1 / 1'Sigma0^-1 1 (the one-level formula when tauW -> 0). As for a one-level free group, a free outer group with
+        a non-finite residual has no centre and is not scored."""
         from scipy.stats import norm
 
         q = float(norm.ppf(0.5 + level / 2.0))
         r = np.asarray(log_residuals, dtype=float)
         sigma = np.array([self.sigma(row) for row in rows])
         inside = scored = 0
-        for idx in self._levels(rows).values():
+        grouped = self._grouped(rows)
+        nested = {key for _, labels, _ in grouped.values() for key in labels}
+        for idx, labels, method in grouped.values():
+            tau_g, tau_w = self.tau(method), float(self.within_tau[method])
+            s = sigma[idx]
+            if math.isinf(tau_g):
+                if len(idx) < 2 or not np.all(np.isfinite(r[idx])):
+                    continue
+                root, _, _ = self._two_level_root(s, labels, tau_g, tau_w)
+                kinv = root @ root
+                beta = (kinv @ (1.0 / s)) / s
+                centred = r[idx] - float(np.sum((kinv @ (r[idx] / s)) / s) / np.sum(beta))
+                var = s ** 2 + tau_w * tau_w - 1.0 / float(np.sum(beta))
+            else:
+                centred, var = r[idx], s ** 2 + tau_g * tau_g + tau_w * tau_w
+            ok = np.isfinite(centred)
+            inside += int(np.sum(np.abs(centred[ok]) <= q * np.sqrt(var[ok])))
+            scored += int(np.sum(ok))
+        for name, idx in self._levels(rows).items():
+            if name in nested:
+                continue
             tau = self.tau(self.method_of(rows[idx[0]]))
             s = sigma[idx]
             if math.isinf(tau):
@@ -503,11 +678,17 @@ def estimate_between_tau(model: "MeasurementModel", raw_residuals: np.ndarray, r
         tau^2 = max(0, mean_g (m_g^2 - v_g)),   m_g = the group's precision-weighted mean residual, v_g = 1 / sum w
     pooled across laboratories (D4: no laboratory terms). A class with fewer than two groups gets none. It absorbs
     whatever is shared within a paper's series -- calibration, unstated conditions, the model's own structural error
-    for that system -- which is what a prediction for a new laboratory must carry."""
+    for that system -- which is what a prediction for a new laboratory must carry. Two-level rows (2026-10-31): the
+    moments are taken over OUTER groups, m_g the GLS mean in Sigma0's metric (D + the within term) and v_g its
+    variance 1 / 1'Sigma0^-1 1, so the estimate is the outer tau, not the outer plus the within one."""
     r = np.asarray(raw_residuals, dtype=float)
     sigma = np.array([model.sigma(row) for row in rows])
     per_class: Dict[str, List[float]] = {}
-    for idx in model._levels(rows).values():
+    grouped = model._grouped(rows)
+    nested = {key for _, labels, _ in grouped.values() for key in labels}
+    for name, idx in model._levels(rows).items():
+        if name in nested:
+            continue
         method = model.method_of(rows[idx[0]])
         if float(model.scale_tau[method]) > 0.0:
             continue
@@ -517,6 +698,19 @@ def estimate_between_tau(model: "MeasurementModel", raw_residuals: np.ndarray, r
         w = 1.0 / sigma[ok] ** 2
         m = float(np.sum(w * r[ok]) / np.sum(w))
         per_class.setdefault(method, []).append(m * m - 1.0 / float(np.sum(w)))
+    for idx, labels, method in grouped.values():
+        if float(model.scale_tau[method]) > 0.0:
+            continue
+        ok = [j for j, i in enumerate(idx) if np.isfinite(r[i])]
+        if not ok:
+            continue
+        rows_ok = [idx[j] for j in ok]
+        s = sigma[rows_ok]
+        root, _, _ = model._two_level_root(s, [labels[j] for j in ok], float("inf"), float(model.within_tau[method]))
+        kinv = root @ root
+        beta = (kinv @ (1.0 / s)) / s
+        m = float(np.sum((kinv @ (r[rows_ok] / s)) / s) / np.sum(beta))
+        per_class.setdefault(method, []).append(m * m - 1.0 / float(np.sum(beta)))
     return {k: math.sqrt(max(0.0, float(np.mean(v)))) for k, v in per_class.items() if len(v) >= 2}
 
 
@@ -527,13 +721,18 @@ def estimate_series_noise(model: "MeasurementModel", raw_residuals: np.ndarray, 
     where r are the raw residuals (dex or pH), m_k the series' mean residual if its calibration is free (tau > 0; the
     shape is all that is fitted) and 0 otherwise, and p_k the constants charged to the series (``n_constants`` spread
     over all rows). A series of one or two rows gets none (its scatter cannot be read). Iterate with the fit
-    (``fit_with_series_noise``): the residuals move as the weights change."""
+    (``fit_with_series_noise``): the residuals move as the weights change. A row with a two-level response-factor
+    term (2026-10-31: ``group_of`` set, its method in ``within_tau``) has a level of its own even when tauG is 0, so its
+    series is centred too."""
     r = np.asarray(raw_residuals, dtype=float)
     out: Dict[str, float] = {}
     n_total = max(len(rows), 1)
     for name, idx in model._series(rows).items():
         n = len(idx)
-        tau = model.tau(model.method_of(rows[idx[0]]))
+        method = model.method_of(rows[idx[0]])
+        tau = model.tau(method)
+        if model.group_of is not None and method in model.within_tau:
+            tau = max(tau, float(model.within_tau[method]))
         if n < 3:
             continue
         ri = r[idx]
@@ -559,9 +758,11 @@ def fit_with_series_noise(make_problem: Callable[["MeasurementModel"], "Problem"
     taus: Dict[str, float] = dict(model.between_tau)
 
     def build(noise_, taus_):
+        # every field but the two estimated ones carried over (2026-10-31: a field left out here is silently dropped
+        # after round 1; tests/unit/test_fitting_two_level.py checks the two-level ones survive)
         return MeasurementModel(series_of=model.series_of, sigma_of=model.sigma_of, method_of=model.method_of,
                                 scale_tau=model.scale_tau, extra_noise=noise_, level_of=model.level_of,
-                                between_tau=taus_)
+                                between_tau=taus_, group_of=model.group_of, within_tau=model.within_tau)
 
     def rel(a, b):
         return max((abs(a.get(k, 0.0) - b.get(k, 0.0)) / max(a.get(k, 0.0), b.get(k, 0.0), 1e-12)
