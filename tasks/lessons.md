@@ -371,3 +371,7 @@ edits with the Edit tool, or single-quote the wrapper argument.
 **I started a detached `&` job again** (2026-10-31 05:08, the B7a arms queue) -- against the wait-loop lesson above.
 The harness cannot notify on it. Remedy used: a background waiter on the job's PID with a deadline. Rule: a queue is
 always launched as the background command itself (run_in_background), never with a trailing `&`.
+
+**The paper registry records citation LINE numbers** (2026-10-31): any edit above a cited line in a register or
+ledger moves them, and `build_paper_registry.py --check` (unit test + freshness gate) fails. Regenerate it with the
+READMEs after staging, as part of every commit that touches docs/reference or data/lit.

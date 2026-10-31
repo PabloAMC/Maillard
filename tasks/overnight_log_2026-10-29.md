@@ -282,3 +282,50 @@ Davidek's glycine pots) takes 51 - 61 % of DPO at pH 8 and cancels the split law
 TDP is pH-flat caramelisation. **Running:** the B7a chance baseline, then the thiol v2 chance baseline. **Next:** full
 verification of HEAD, push PR #30, morning summary. **Most valuable?** Yes: close the night with a verified, pushed
 record and a clear next question (the amine-assisted beta-cleavage), not another unreviewed arm.
+
+## Checkpoint 18 -- 2026-10-31 07:40
+
+**Goal:** unchanged. **Since 06:40:** both chance baselines regenerated (thiol v2 identical; B7a partition thresholds
+strict, chance <= 2 %, the fitted arms at or below chance -- EX-037). Verification of 8339590: gates, scientific
+108 / 108 PASS; one unit test and the freshness gate failed on a stale paper registry (citation line numbers moved by
+the register edits; lesson added); regenerated in 3d606a3, re-verifying (gates + freshness, unit in parallel). PR #30's
+pushed head df6b80f is CI-green. **Next:** push 3d606a3; the morning summary below; stop the hourly cron when the
+owner is back. **Most valuable?** Yes -- the night's record verified and pushed before the owner reads it.
+
+## Morning summary -- 2026-10-31 ~07:45 (for the owner)
+
+**The night in one paragraph.** The premortem was right about the biggest risk: every joint-fit arm had stopped on its
+evaluation budget, so round 3 was re-run converged and under one fixed measurement model. The converged round-3
+verdict stands (the data accept DDP formation; R3En admitted), but one headline finding did not survive ("MFT loss ~8x
+slower" -- converged E puts MFT decay back at the shipped value). Every attempt to reconcile Cerny 2003's isotope
+labelling failed (R3T withdrawn on review; R4f rejected; no in-class barrier passes), and the trail led upstream: the
+1- / 3-deoxypentosone partition is structurally wrong in time and in pH, by scale-free tests a calibration scale
+cannot absorb -- the fitted structure scores AT OR BELOW random constants on them (EX-033, EX-037). Four reviewed B7a
+arms (split pH law, TDP exit, both, a second MGO parent) improve the cost but none reproduces the partition; the flux
+check says why: DPO's base-favoured beta-cleavage to acetic acid, fitted on Davidek's GLYCINE pots, drains DPO exactly
+where the split would make more of it in amine-free TTCA pots.
+
+**What is now true (with register ids).** Converged round 3: R3En admitted (EX-024). R4f rejected (EX-030). Chance
+baselines: thiol signatures -- a random draw passes a median 1 of 11 groups, so 2 - 3 is not evidence (EX-025);
+partition signatures -- strict tests, chance <= 2 % (EX-037). Two-level measurement model in `fitting.py` (a shared
+figure scale + a response-factor term; bit-identical when off; 48 tests). Hofmann 2000 (Strecker anchor) keyed by two
+readers + adjudication, 111 rows (EX-026; CF-070). Reviews this night: premortem, R3T, R4a, B7 draft, B7a arms, B7a
+code -- each changed the design before any compute was spent on it.
+
+**Decisions for you.**
+1. Merge PR #30 (head 3d606a3 verified locally: 12 gates, unit 1179, scientific 108, freshness; CI re-runs on push; nothing shipped moves). P(regret) low.
+2. The stranded fix in the main checkout (uncommitted since 10-28: the `k_odg_da` band, a pH fixed-point warning):
+   rescue onto a branch off main? It touches your working copy, so it waits for your OK.
+3. Send the one-page designed-experiment brief (premortem #9): designed data is the only lever on the x10 - x1000
+   between-lab spread. A time-resolved pot-D experiment (fed NF + [13C5]ribose, 0.5 - 6 h at 100 C) would settle the
+   MFT route question directly.
+4. Papers (none blocks today's work): Parker et al. 2014 https://doi.org/10.1016/B978-0-12-398549-1.00040-4 (ribose
+   thiazolidine limits H2S); Roberts et al. 1987 https://doi.org/10.1021/jm00393a034 (ribose-cysteine thiazolidine
+   ring opening); Tai & Ho 1997 https://doi.org/10.1021/jf970297t and 1998 https://doi.org/10.1021/jf971111t
+   (cysteine / cystine, thiol oxidation). For the amine-assisted beta-cleavage question, Davidek's own mechanism papers
+   are on disk; I will list any gap with DOIs once the design is drafted.
+
+**Proposed next (section B time-box closes 11-02 00:30).** B7a-2: DPO's beta-cleavage amine-assisted (its base factor
+times a free-amine term; one structural change, no new coordinate) -- design, independent review, then fit; if the
+partition still does not move, section B stops by its rule and A2 (the composable network) starts, with the thiols
+shipped on the measured between-lab spread. P(B7a-2 passes (ii) by segment) ~0.3.
