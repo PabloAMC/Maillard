@@ -241,6 +241,14 @@ def series_of(row) -> str:
     return f"{paper}|{row.ledger_id.split('_')[1]}|{row.species}"
 
 
+def figure_of(row) -> str:
+    """B7a (2026-10-31; kinetic_core_dpo_partition_prereg.md sec. 7): the OUTER calibration group of a quinoxaline row
+    -- its paper x figure -- so the 3- and 1-deoxypentosone read by one method in one figure share one scale and differ
+    only by a response-factor term (fitting.MeasurementModel.within_tau). Other rows: their own series."""
+    series = series_of(row)
+    return series.rsplit("|", 1)[0] if method_of(row) == "semi_figure" else series
+
+
 def noise_with_floor(model, raw_residuals, rows, n_constants=0):
     """pooled_noise, and NOISE_FLOOR_DEX (declared; CF-016 / CF-055 between-run scatter) for every series whose
     noise cannot be estimated (design review S1: Garching's 10 % sd would otherwise dominate the cost)."""
@@ -445,6 +453,9 @@ def main(argv=None) -> int:
     parser.add_argument("--noise-from", metavar="FIT", help="fix every series' extra noise at that fit's estimate "
                         "(a single round, no re-estimation): rival arms then share ONE objective (premortem 2026-10-31)")
     parser.add_argument("--ftol", type=float, help="relative cost tolerance (default: the fitting module's)")
+    parser.add_argument("--within-tau", type=float, metavar="DEX", help="B7a: the quinoxalines of one figure share "
+                        "one scale, each species deviating by N(0, DEX^2) (a response factor; prereg sec. 7: 0.2, "
+                        "sensitivity 0.4). Default: one scale per species, as before")
     parser.add_argument("--ea-nf-mft", type=float, metavar="KJ_MOL", help="fix the norfuraneol + H2S -> MFT barrier "
                         "(a profile point, thiol prereg sec. 16); its multiplier stays referenced at 145 C")
     parser.add_argument("--tag", default="", help="suffix for the output stem (e.g. conv), so a re-fit never "
@@ -516,7 +527,9 @@ def main(argv=None) -> int:
 
     model = fitting.MeasurementModel(
         series_of=series_of,
-        sigma_of=lambda r: r.sigma, method_of=method_of, scale_tau=sm3.SCALE_TAU, extra_noise=fixed_noise or {})
+        sigma_of=lambda r: r.sigma, method_of=method_of, scale_tau=sm3.SCALE_TAU, extra_noise=fixed_noise or {},
+        group_of=figure_of if args.within_tau else None,
+        within_tau={"semi_figure": float(args.within_tau)} if args.within_tau else {})
     if fixed_noise is not None:
         missing = {series_of(r) for r in data} - set(fixed_noise)
         if missing:
@@ -547,7 +560,7 @@ def main(argv=None) -> int:
         "engine_state": "B60 + B58/B59b/B59a/B61 on; sub-model 1 switches off; inline coupling"
                         + ("" if args.arm == "none" else f"; round-2 arm {args.arm}"),
         "arm": args.arm, "start_from": args.start_from, "noise_from": args.noise_from, "ftol": args.ftol,
-        "ea_static": dict(EA_STATIC),
+        "ea_static": dict(EA_STATIC), "within_tau": args.within_tau,
         "rows": len(data), "pots": len({key_of(r) for r in data}), "start": dict(zip(keys, map(float, start))),
         "fit": best.as_dict(keys), "laplace": lap, "series_extra_noise": dict(final_model.extra_noise),
         "failed_pot_runs": len(FAILURES), "failures_sample": FAILURES[:10],
