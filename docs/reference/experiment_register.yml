@@ -434,8 +434,8 @@ entries:
     hypothesis: "No: the null fails (i) in >= 2 figures (dpo partition prereg sec. 7, P 0.8)."
     design: "R3En from s042_r3en_fixed, --within-tau 0.2 (and 0.4), two noise rounds, budget 1200, ftol 1e-4 (prereg secs. 7 - 8)."
     expected: "Null fails (i) in >= 2 figures (P 0.8)."
-    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en_b7anull_w02.md, results/validation/kinetic_core_deoxyosone_signatures_s042_r3en_b7anull_w02.md, results/validation/kinetic_core_mechanism_signatures_s042_r3en_b7anull_w02.md]
+    artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en_b7anull_w02.md, results/validation/kinetic_core_deoxyosone_signatures_s042_r3en_b7anull_w02.md, results/validation/kinetic_core_mechanism_signatures_s042_r3en_b7anull_w02.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en_b7anull_w04.md, results/validation/kinetic_core_deoxyosone_signatures_s042_r3en_b7anull_w04.md]
     commit: pending
     verdict: supported
-    conclusion: "w 0.2: converged (status 2), cost 409 (not comparable with one-level costs), reduced chi-square 4.61. Partition signatures unchanged: time slope 1 / 8, pH segments 1 / 6 (wrong sign), TDP decline 1 / 2; constants close to R3En's (c2c3 +2.17, DDP route accepted); Cerny pot D 0.993 (FAIL); thiol groups 4 / 11. The measurement model alone does not fix the partition: the structure must change. w 0.4 running."
+    conclusion: "w 0.2: converged (status 2), cost 409 (not comparable with one-level costs), reduced chi-square 4.61. Partition signatures unchanged: time slope 1 / 8, pH segments 1 / 6 (wrong sign), TDP decline 1 / 2; constants close to R3En's (c2c3 +2.17, DDP route accepted); Cerny pot D 0.993 (FAIL); thiol groups 4 / 11. The measurement model alone does not fix the partition: the structure must change. w 0.4 (sensitivity): converged, cost 374, reduced chi-square 4.41, the same 1 / 8, 1 / 6, 1 / 2 -- the conclusion does not depend on the response-factor width."
     follow_up: "The B7a arms (B7S, B7T, B7ST, B7D) under w 0.2's series noise; the chance baseline of the partition signatures first."

@@ -32,9 +32,27 @@
 
 measured 0.45, predicted 0.89
 
-## (vi) TDP's apparent first-order decline after its measured peak (Zhai 2023 JAFC), tolerance 0.3 dex
+## (vi) TDP's apparent first-order decline after its measured peak, tolerance 0.3 dex (decisive: Zhai 2023 JAFC TTCA 120 / 140 C; the rest reported), with DPO's own beside it
 
-| pot | from (min) | measured /min | predicted /min | pass |
-|---|---|---|---|---|
-| zhai2023jafc_ttca_120C_dx | 80.0 | 0.0097 | 0.00125 | NO |
-| zhai2023jafc_ttca_140C_dx | 80.0 | 0.0266 | 0.0239 | yes |
+| pot | role | TDP from (min) | TDP measured /min | TDP predicted /min | pass | DPO from (min) | DPO measured /min | DPO predicted /min | DPO within |
+|---|---|---|---|---|---|---|---|---|---|
+| zhai2023jafc_ttca_120C_dx | decisive | 80 | 0.0097 | 0.00125 | NO | 40 | 0.0112 | 0.0114 | yes |
+| zhai2023jafc_ttca_140C_dx | decisive | 80 | 0.0266 | 0.0239 | yes | 80 | 0.0283 | 0.0193 | yes |
+| zhai2023jafc_ttca_100C_dx | reported | 140 | 0.018 | -0.00338 | no | 140 | 0.0313 | 0.00291 | no |
+| zhai2023jafc_ttca_cys_100C_dx | reported | 140 | 0.0348 | -0.00422 | no | 120 | 0.0373 | 0.00457 | no |
+| zhai2023jafc_ttca_cys_120C_dx | reported | 100 | 0.0222 | 0.00241 | no | 120 | 0.0418 | 0.0123 | no |
+| zhai2023jafc_ttca_cys_140C_dx | reported | 100 | 0.035 | 0.0351 | yes | 80 | 0.0173 | 0.0377 | no |
+| zhai2023fc_dx_ttca_xyl_140c | reported | 60 | 0.00228 | 0.0227 | no | 100 | 0.00694 | 0.0183 | no |
+
+## The engine's in-situ pH at 60 min (Zhai 2021, 100 C; the pH the split reads)
+
+| pot | in-situ pH |
+|---|---|
+| zhai2021_ttca_ph55_100c_dx | 4.81 |
+| zhai2021_ttca_ph60_100c_dx | 5.81 |
+| zhai2021_ttca_ph70_100c_dx | 7.64 |
+| zhai2021_ttca_ph80_100c_dx | 8.15 |
+| zhai2021_ttca_xyl_ph55_100c_dx | 4.61 |
+| zhai2021_ttca_xyl_ph60_100c_dx | 5.35 |
+| zhai2021_ttca_xyl_ph70_100c_dx | 7.50 |
+| zhai2021_ttca_xyl_ph80_100c_dx | 8.08 |

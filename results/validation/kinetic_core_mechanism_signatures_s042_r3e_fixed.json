@@ -3,11 +3,11 @@
  "provenance": {
   "artifact": "kinetic_core_mechanism_signatures_s042_r3e_fixed",
   "generated_on": "2026-10-31",
-  "git": {"commit": "6f2f09f15e4d14b2de2b705064f9fe0b84f75613", "short": "6f2f09f1", "branch": "submodel1-ph", "dirty": false},
+  "git": {"commit": "b6f6af10cd870b4593e3c4a9633bc558c1a82a6d", "short": "b6f6af10", "branch": "submodel1-ph", "dirty": true},
   "generated_by": "scripts/generators/score_mechanism_signatures.py",
   "inputs": [
    {"path": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3e_fixed.json", "sha256": "64b5dbd636c8fc365da2bad0df439fbb80aa48523e806a175d957df885809fd7"},
-   {"path": "src/kinetic_core/sulfur.py", "sha256": "66447bc3348206cf89c24d5f3f994d5f4ff135176b2e5e0d0645b621337456df"},
+   {"path": "src/kinetic_core/sulfur.py", "sha256": "1887c9ba5bb509eb320bc71c3ac42d44c7a446dd1af6d63cd35127fa8c0eec0a"},
    {"path": "data/lit/fit_rows/ph_acid_davidek_acids.yml", "sha256": "af52f68f8e9ab8dd68b83d46c05fb8e28a2ece13fe9639d91f83e79e17aa1338"},
    {"path": "data/lit/fit_rows/thiol_submodel.yml", "sha256": "95b36cd13d0a84275e2331bf913ac1543217af34e8f92e0a86d3409f3c8ea4da"},
    {"path": "data/lit/fit_rows/thiol_zhou2023_ph_series.yml", "sha256": "70c521303b7961ca7c158c6cf7099a813a16241dc5220fe976398be789b4a18e"}

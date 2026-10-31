@@ -3,11 +3,11 @@
  "provenance": {
   "artifact": "kinetic_core_deoxyosone_signatures_s042_r3en_fixed",
   "generated_on": "2026-10-31",
-  "git": {"commit": "ae153c7a9edec71b31f5ae2150190096fc13eee3", "short": "ae153c7a", "branch": "submodel1-ph", "dirty": false},
+  "git": {"commit": "b6f6af10cd870b4593e3c4a9633bc558c1a82a6d", "short": "b6f6af10", "branch": "submodel1-ph", "dirty": true},
   "generated_by": "scripts/generators/score_deoxyosone_signatures.py",
   "inputs": [
    {"path": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en_fixed.json", "sha256": "596924ef51ec83d192e0c51c1616148943f59bc40e2462e6fe44a51dca325af0"},
-   {"path": "src/kinetic_core/sulfur.py", "sha256": "66447bc3348206cf89c24d5f3f994d5f4ff135176b2e5e0d0645b621337456df"},
+   {"path": "src/kinetic_core/sulfur.py", "sha256": "1887c9ba5bb509eb320bc71c3ac42d44c7a446dd1af6d63cd35127fa8c0eec0a"},
    {"path": "data/lit/fit_rows/deoxyosone_submodel.yml", "sha256": "4af9c953a653ef5ed8377a0b34efe81774111bf3a47706f5799cc182f5775853"}
   ]
  },
@@ -35,5 +35,23 @@
   {"ladder": "TTCA + xylose", "segment": "7 - 8", "measured": -0.6950860133634619, "predicted": 0.08331212273384914, "pass": false}
  ],
  "double_ratio": {"measured": 0.4518350932026925, "predicted": 0.7804812063820368, "decisive": false},
- "tdp_decline": [{"pot": "zhai2023jafc_ttca_120C_dx", "peak_min": 80.0, "measured_per_min": 0.009697055114400072, "predicted_per_min": 0.001239409620393497, "pass": false}, {"pot": "zhai2023jafc_ttca_140C_dx", "peak_min": 80.0, "measured_per_min": 0.02658285885977358, "predicted_per_min": 0.02416764444641718, "pass": true}]
+ "tdp_decline": [
+  {"pot": "zhai2023jafc_ttca_120C_dx", "decisive": true, "peak_min": 80.0, "measured_per_min": 0.009697055114400072, "predicted_per_min": 0.001239409620393497, "within_tolerance": false, "dpo": {"peak_min": 40.0, "measured_per_min": 0.011158492085248798, "predicted_per_min": 0.01138715377964578, "within_tolerance": true}, "pass": false},
+  {"pot": "zhai2023jafc_ttca_140C_dx", "decisive": true, "peak_min": 80.0, "measured_per_min": 0.02658285885977358, "predicted_per_min": 0.02416764444641718, "within_tolerance": true, "dpo": {"peak_min": 80.0, "measured_per_min": 0.02834746199909299, "predicted_per_min": 0.01922521934131752, "within_tolerance": true}, "pass": true},
+  {"pot": "zhai2023jafc_ttca_100C_dx", "decisive": false, "peak_min": 140.0, "measured_per_min": 0.018005099548686485, "predicted_per_min": -0.003395043735955691, "within_tolerance": false, "dpo": {"peak_min": 140.0, "measured_per_min": 0.03131907421238421, "predicted_per_min": 0.0029056893437019653, "within_tolerance": false}, "pass": false},
+  {"pot": "zhai2023jafc_ttca_cys_100C_dx", "decisive": false, "peak_min": 140.0, "measured_per_min": 0.03481749378322637, "predicted_per_min": -0.004231581372770952, "within_tolerance": false, "dpo": {"peak_min": 120.0, "measured_per_min": 0.037348125632806414, "predicted_per_min": 0.00449940892873272, "within_tolerance": false}, "pass": false},
+  {"pot": "zhai2023jafc_ttca_cys_120C_dx", "decisive": false, "peak_min": 100.0, "measured_per_min": 0.022197541991954613, "predicted_per_min": 0.002404275628914083, "within_tolerance": false, "dpo": {"peak_min": 120.0, "measured_per_min": 0.04181240121003085, "predicted_per_min": 0.012126347201254528, "within_tolerance": false}, "pass": false},
+  {"pot": "zhai2023jafc_ttca_cys_140C_dx", "decisive": false, "peak_min": 100.0, "measured_per_min": 0.03502232901352607, "predicted_per_min": 0.03513713211377012, "within_tolerance": true, "dpo": {"peak_min": 80.0, "measured_per_min": 0.01732867951399863, "predicted_per_min": 0.03774092763539675, "within_tolerance": false}, "pass": true},
+  {"pot": "zhai2023fc_dx_ttca_xyl_140c", "decisive": false, "peak_min": 60.0, "measured_per_min": 0.002277151550501537, "predicted_per_min": 0.02274864879598476, "within_tolerance": false, "dpo": {"peak_min": 100.0, "measured_per_min": 0.006935116602037738, "predicted_per_min": 0.018795763321963872, "within_tolerance": false}, "pass": false}
+ ],
+ "ph_in_situ_at_60_min": {
+  "zhai2021_ttca_ph55_100c_dx": 4.806014013756085,
+  "zhai2021_ttca_ph60_100c_dx": 5.809818290348626,
+  "zhai2021_ttca_ph70_100c_dx": 7.6177562692639,
+  "zhai2021_ttca_ph80_100c_dx": 8.100021264853407,
+  "zhai2021_ttca_xyl_ph55_100c_dx": 4.613667873805378,
+  "zhai2021_ttca_xyl_ph60_100c_dx": 5.3487712763482715,
+  "zhai2021_ttca_xyl_ph70_100c_dx": 7.472411477679263,
+  "zhai2021_ttca_xyl_ph80_100c_dx": 8.010372944211138
+ }
 }
