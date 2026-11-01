@@ -164,7 +164,8 @@ Investigation runs in parallel: <= 3 agents, read-only on `src/`, writing standa
 - **(iii) Incumbent first.** Each change is scored at the incumbent constants before any refit. A compensation ledger lets a B60 row get worse only if a named open error explains it, declared before the run. One joint refit after E1 + E6 + E11, not three.
 - **(iv) A time-box per error item,** and an atlas cell moves the model only after its PDF is re-read.
 
-**Order:**
+**Order** (amended by the plan review adopted 2026-11-01 evening, below: an admission gate of >= 2 held-out labs
+per error, track H gated on H0, the Strecker layer before E6 + E11; see "Active order from here"):
 1. **Land the night:** the ingest PR; EX-056 (the thiol leave-one-lab-out) recorded BEFORE anything it imports changes.
 2. **The contrast benchmark, built on the split:** sign and log-ratio per contrast, study / lab bootstraps, power per change. The shipped engine and both null baselines are scored on DEVELOPMENT and TEST separately. A "no change" null has no sign, so the sign score is against the measured direction only.
 3. **E4 (the pyrazine pH law off the Strecker step) + CF-077 (the methylpyrazine cross-pair factor):** one owner-approved regeneration, E4 capped at 3 h.
@@ -353,7 +354,8 @@ intervals (~0.55).
 4. The E6 + E11 refit runs after the thiol leave-one-lab-out; it does not ship.
 5. The coordinator drafts the author data requests and the designed-experiment brief for the owner to review and send.
 
-**Plan review, 2026-11-01 afternoon (cloud session; proposals with defaults, the owner decides).** Basis: the
+**Plan review, 2026-11-01 afternoon (cloud session). ADOPTED by the owner, 2026-11-01 evening ("Yes, PR and adopt"):
+all six items, as written. Where they differ from the "Plan from 2026-11-01" order above, they govern.** Basis: the
 contrast benchmark's power tables (`docs/reference/contrast_benchmark/README.md` secs. 5, 8, 11), the 2026-10-09
 brief ([EXPERIMENTS_BRIEF.md](EXPERIMENTS_BRIEF.md): "stop scraping literature"), the plan above.
 1. **An admission gate before work starts, not only before scoring.** Under split v2, 8 of 20 errors have < 2
@@ -384,3 +386,17 @@ P(checkpoint 11-07 met) with these changes ~0.55 (from ~0.5): fewer parallel tra
 **Done 2026-11-01 (cloud session):** PR #36 (A3 phase 2) merged after its full suite; the forked-pool pH bug
 re-scored (`results/validation/kinetic_core_joint_fit_entry_ph_rescore.md`: 21 records reproduce their recorded
 values to 1e-6; corrected Cao RMS 0.06 - 0.22; the three R4f records flip from fail to within; Zhou unchanged).
+
+**Done 2026-11-01 evening (laptop session):** PR #38 (the ingest) merged; PR #39 merged: four papers keyed (Ruan 2025,
+Feng 2024 JSFA, de Sousa Fontes 2024, Feng 2023 Front Nutr), all MARGINAL as data, and the repo's records citing
+Feng 2023 corrected against the paper (an unsupported 82 kJ/mol record deleted). No shipped number moved.
+
+**Active order from here (the adopted review, items 1 - 3):**
+1. the contrast benchmark scorer on split v2 (its prereg v2 is in `results/validation/`);
+2. H0, the out-of-sample between-lab tau from EX-056;
+3. the forced-input Strecker layer (E3);
+4. E6 + E11 on >= 8 cores, after the 2 h profile (item 6);
+5. the pyrazine items E13 / E14.
+
+E1 / E2 wait for >= 2 held-out labs (item 1); H1 - H4 wait for H0 (item 3); A2 waits for a second lane that needs
+the trunk. Owner: item 5 (the brief and the 5 author requests).
