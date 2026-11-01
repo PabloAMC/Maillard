@@ -144,6 +144,57 @@ Per open mechanism:
 
 Investigation runs in parallel: <= 3 agents, read-only on `src/`, writing standalone modules to [A2_MODULE_CONTRACT.md](A2_MODULE_CONTRACT.md) sec. 3. Each has neutral briefs, a prereg first, positive and negative controls, and "inconclusive" allowed. Implementation is serial: A3, then A2, in a writer session after the B7 branch merges. Forced-input layers are admitted on their own scores, so admission does not wait for A2. P(>= 2 mechanism changes admitted by evidence by 11-21) ~0.5.
 
+**Plan from 2026-11-01 (after the night's atlas and its premortem; supersedes the order above where they differ).**
+
+**Basis.**
+- The pathway-condition atlas: [pathway_atlas/README.md](../reference/pathway_atlas/README.md); 32 families, 562 sourced cells, ~9 % wrong per cell; 25 regimes settled, 233 unsettled, 1790 never studied.
+- [ENGINE_VS_LITERATURE.md](../reference/pathway_atlas/ENGINE_VS_LITERATURE.md): 20 ranked engine mechanism errors; its sec. 5 red-team amendment is binding.
+- A3 phase 1 (Config) merged in PR #34, after an independent review.
+
+**Rules added by the premortem:**
+- **(i) No circular scoring.** Before anything is scored, a frozen, hashed split:
+  - DEVELOPMENT = every cell cited in ENGINE_VS_LITERATURE secs. 2 - 5 or in any prereg;
+  - TEST = whole laboratories not cited there, plus newly keyed rows;
+  - lab ids normalised;
+  - held-out numbers re-read in the PDF by two readers.
+  
+  A change's tests come from TEST. The cells that diagnosed it are development checks.
+- **(ii) Power before score,** with lab-cluster bootstraps. Route-share changes (E6 / E11) are judged on held-out LABELLING cells, not on contrasts.
+- **(iii) Incumbent first.** Each change is scored at the incumbent constants before any refit. A compensation ledger lets a B60 row get worse only if a named open error explains it, declared before the run. One joint refit after E1 + E6 + E11, not three.
+- **(iv) A time-box per error item,** and an atlas cell moves the model only after its PDF is re-read.
+
+**Order:**
+1. **Land the night:** the ingest PR; EX-056 (the thiol leave-one-lab-out) recorded BEFORE anything it imports changes.
+2. **The contrast benchmark, built on the split:** sign and log-ratio per contrast, study / lab bootstraps, power per change. The shipped engine and both null baselines are scored on DEVELOPMENT and TEST separately. A "no change" null has no sign, so the sign score is against the measured direction only.
+3. **E4 (the pyrazine pH law off the Strecker step) + CF-077 (the methylpyrazine cross-pair factor):** one owner-approved regeneration, E4 capped at 3 h.
+4. **A3 phase 2:**
+   - the owner decides review item 1 (refuse non-default build keys) and item 6 (field-level vs dataclass keys);
+   - script statics move into jobs; scripts migrate; a persistent pool;
+   - a stable digest; an allowlist-based coverage test.
+   
+   It is on the critical path of E1 / E2 / E10 / E5, which need new switches.
+5. **In parallel with 4:** E1 (a Glc + Cys -> 1-DG step) and E2 (per-step enolisation exponents) written as standalone modules to the A2 contract. The forced-input Strecker layer RESTORED (triage item 1): its pre-registered next step is one Amadori decay shared by the fed-ARP and glucose pots (EX-051 follow-up).
+6. **After 4:** E6 + E11 (per-route MFT barriers) and E10 via B59b. Then the joint refit; then E5 (buffer catalysis), E3 (the Strecker-aldehyde lane), E7 (lipid coupling). Each: prereg -> feasibility by search -> benchmark on TEST -> red team -> owner ship decision.
+
+**Parallel tracks:**
+- **(P1) Keying:** only rows with paired arms, from papers outside DEVELOPMENT, each with a named consumer (a benchmark contrast or an open mechanism), into TEST. Stop if fewer than half of the first 30 qualify.
+- **(P2) Owner:** one decision memo with a default for each item (E4 + CF-077, A3 items 1 and 6, the author emails drafted and ready, the E3 + E1 designed-experiment brief).
+- **(P3) A literature census** of the most-unknown regimes, low priority.
+
+**Missing pieces carried as declared limitations until built:**
+- in-situ pH: the probes clamp pH while the literature pots drift (CF-084);
+- observation operators;
+- intermediate water activity and protein-bound amine, which is where alt-protein recipes actually sit;
+- the WUR scoring hook.
+
+**Checkpoint 2026-11-07:**
+- (a) the benchmark with its frozen split exists, and the shipped engine is scored;
+- (b) E4 + CF-077 have verdicts;
+- (c) the A3 phase 2 PR is green;
+- (d) E1 is pre-registered as a standalone module.
+
+P(met) ~0.5 (premortem). P(>= 2 evidence-admitted mechanism changes shipped by 11-14) ~0.45.
+
 Rules throughout: premortem of each plan change; pre-registration + independent review before every fit; converged
 fits only; chance baselines AND (from step 3) a measured power before credit; one PR per sub-model; a mechanism
 without data -> DOIs to the owner.
