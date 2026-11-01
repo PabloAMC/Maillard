@@ -87,9 +87,9 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | SUG-11 | sugar_identity | independent | FFT | A<B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | SUG-12 | sugar_identity | independent | HMF | A>B | **disagree** | trunk | 948, 1.54e+03 |  |
 | SUG-13 | sugar_identity | independent | Furfural | A>B | **not_evaluable** | - | - | the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructose, 165 C 8 min 276) is within measurement noise (< 1.4x); no model, however good |
-| PH-06 | ph | independent | 2,5-Dimethylpyrazine | increasing | **agree** | trunk | 0.000311, 6.92, 21.8 |  |
+| PH-06 | ph | independent | 2,5-Dimethylpyrazine | increasing | **agree** | trunk | 0.000258, 6.39, 21.8 |  |
 | PH-07 | ph | independent | Furfural | flat | **disagree** | sulfur | 18.7, 17.5, 17.4 |  |
-| TEMP-04 | temperature | independent | 2,5-Dimethylpyrazine | A>B | **agree** | trunk | 0.0016, 4.37e-06 |  |
+| TEMP-04 | temperature | independent | 2,5-Dimethylpyrazine | A>B | **agree** | trunk | 0.00159, 4.37e-06 |  |
 | TEMP-05 | temperature | independent | HMF | increasing | **disagree** | trunk | 1.1e+03, 726, 651 |  |
 | TEMP-06 | temperature | independent | Furfural | A>B | **agree** | sulfur | 17.5, 0.000551 |  |
 | AW-03 | moisture_aw | independent | HMF | peak | **agree** | trunk | 1.3e+03, 1.47e+03, 760 |  |
