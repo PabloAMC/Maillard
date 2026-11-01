@@ -1,0 +1,1040 @@
+# SECOND READER (reader B) -- Zhang et al. 2021, Food Res Int 139:109918 (zhang2021.pdf), Table 3 (pp. 4-5): the twelve sulfur
+# volatiles in eight groups (A1 - D2). Reader B's values AS WRITTEN (ug/kg, printed; no conversion); the raw reading (coordinator's
+# scratchpad, keying_reader_B.yml) is not repeated here. Independent of reader A. Table read from the text layer (pdftotext -layout
+# and -raw), column assignment checked against the page render; wrapped cells (rows 8, 27, 31, 33) assigned by the render.
+# Pot names are this reader's (suffix _b); the first reading's names are the record. '—' cells are not rows (listed per pot).
+# B's error: none written (exact transcription); half the last printed digit (0.005 ug/kg) entered as read_error, as in the
+# first reading, plus the printed SD.
+name: heldout_zhang2021_table3
+status: draft
+reader: agent-readerB-2026-11-01
+read_by: agent-readerB-2026-11-01
+pots:
+  zhang2021_A1_b:
+    ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      PENT: 80.0
+      Cys: 80.0
+    concentration_basis: 4 mmol xylose + 4 mmol L-cysteine in 50 ml (80 mM nominal)
+    engine_species_missing: [THIOPH_2ME, THIOL_2ME_PENTANE_3, THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2_4MEPENTYL, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2CHO_3ME, THIOPH_2_E2BUTENYL, THIOPH_25DICHO]
+    lecithin: '0'
+    cephalin: '0'
+    reheat: 'No'
+    label_ph: 5.5
+    ph_measured_at: not stated
+    buffer: sodium phosphate pH 5.5; molarity not stated
+    not_detected: [THIOPH_2_3MEBUTYL, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2CHO_3ME, THIOPH_2_E2BUTENYL]
+    condition_quote: Table 1 column A1; Sec. 2.2 "heated at 120 C for 60 min in an autoclave"
+  zhang2021_A2_b:
+    ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      PENT: 80.0
+      Cys: 80.0
+    concentration_basis: 4 mmol xylose + 4 mmol L-cysteine in 50 ml (80 mM nominal)
+    engine_species_missing: [THIOPH_2ME, THIOL_2ME_PENTANE_3, THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2_4MEPENTYL, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2CHO_3ME, THIOPH_2_E2BUTENYL, THIOPH_25DICHO]
+    lecithin: '0'
+    cephalin: '0'
+    reheat: 'Yes'
+    label_ph: 5.5
+    ph_measured_at: not stated
+    buffer: sodium phosphate pH 5.5; molarity not stated
+    not_detected: [THIOPH_2ME, THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2_4MEPENTYL]
+    condition_quote: Table 1 column A2; Sec. 2.2 "heated at 120 C for 60 min in an autoclave"
+  zhang2021_B1_b:
+    ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      PENT: 80.0
+      Cys: 80.0
+    concentration_basis: 4 mmol xylose + 4 mmol L-cysteine in 50 ml (80 mM nominal)
+    engine_species_missing: [THIOPH_2ME, THIOL_2ME_PENTANE_3, THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2_4MEPENTYL, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2CHO_3ME, THIOPH_2_E2BUTENYL, THIOPH_25DICHO, SOY_PC]
+    lecithin: '0.24%'
+    cephalin: '0'
+    reheat: 'No'
+    label_ph: 5.5
+    ph_measured_at: not stated
+    buffer: sodium phosphate pH 5.5; molarity not stated
+    not_detected: [THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2_E2BUTENYL]
+    condition_quote: Table 1 column B1; Sec. 2.2 "heated at 120 C for 60 min in an autoclave"
+  zhang2021_B2_b:
+    ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      PENT: 80.0
+      Cys: 80.0
+    concentration_basis: 4 mmol xylose + 4 mmol L-cysteine in 50 ml (80 mM nominal)
+    engine_species_missing: [THIOPH_2ME, THIOL_2ME_PENTANE_3, THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2_4MEPENTYL, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2CHO_3ME, THIOPH_2_E2BUTENYL, THIOPH_25DICHO, SOY_PC]
+    lecithin: '0.24%'
+    cephalin: '0'
+    reheat: 'Yes'
+    label_ph: 5.5
+    ph_measured_at: not stated
+    buffer: sodium phosphate pH 5.5; molarity not stated
+    not_detected: [THIOPH_2ME, THIOPH_2_3MEBUTYL, THIOPH_2ACETYL_4ME]
+    condition_quote: Table 1 column B2; Sec. 2.2 "heated at 120 C for 60 min in an autoclave"
+  zhang2021_C1_b:
+    ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      PENT: 80.0
+      Cys: 80.0
+    concentration_basis: 4 mmol xylose + 4 mmol L-cysteine in 50 ml (80 mM nominal)
+    engine_species_missing: [THIOPH_2ME, THIOL_2ME_PENTANE_3, THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2_4MEPENTYL, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2CHO_3ME, THIOPH_2_E2BUTENYL, THIOPH_25DICHO, SOY_PE]
+    lecithin: '0'
+    cephalin: '0.07%'
+    reheat: 'No'
+    label_ph: 5.5
+    ph_measured_at: not stated
+    buffer: sodium phosphate pH 5.5; molarity not stated
+    not_detected: [THIOPH_2ME, THIOPH_2_3MEBUTYL, THIOPH_2_4MEPENTYL, THIOPH_2ACETYL_4ME]
+    condition_quote: Table 1 column C1; Sec. 2.2 "heated at 120 C for 60 min in an autoclave"
+  zhang2021_C2_b:
+    ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      PENT: 80.0
+      Cys: 80.0
+    concentration_basis: 4 mmol xylose + 4 mmol L-cysteine in 50 ml (80 mM nominal)
+    engine_species_missing: [THIOPH_2ME, THIOL_2ME_PENTANE_3, THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2_4MEPENTYL, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2CHO_3ME, THIOPH_2_E2BUTENYL, THIOPH_25DICHO, SOY_PE]
+    lecithin: '0'
+    cephalin: '0.07%'
+    reheat: 'Yes'
+    label_ph: 5.5
+    ph_measured_at: not stated
+    buffer: sodium phosphate pH 5.5; molarity not stated
+    not_detected: [THIOPH_2_3MEBUTYL, THIOPH_2_4MEPENTYL]
+    condition_quote: Table 1 column C2; Sec. 2.2 "heated at 120 C for 60 min in an autoclave"
+  zhang2021_D1_b:
+    ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      PENT: 80.0
+      Cys: 80.0
+    concentration_basis: 4 mmol xylose + 4 mmol L-cysteine in 50 ml (80 mM nominal)
+    engine_species_missing: [THIOPH_2ME, THIOL_2ME_PENTANE_3, THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2_4MEPENTYL, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2CHO_3ME, THIOPH_2_E2BUTENYL, THIOPH_25DICHO, SOY_PC, SOY_PE]
+    lecithin: '0.24%'
+    cephalin: '0.24%'
+    reheat: 'No'
+    label_ph: 5.5
+    ph_measured_at: not stated
+    buffer: sodium phosphate pH 5.5; molarity not stated
+    not_detected: [THIOPH_2_3MEBUTYL, THIOPH_2CHO, THIOPH_2_E2BUTENYL, THIOPH_25DICHO]
+    condition_quote: Table 1 column D1; Sec. 2.2 "heated at 120 C for 60 min in an autoclave"
+  zhang2021_D2_b:
+    ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+    t_c: 120
+    minutes: 60
+    initial_mmol_L:
+      PENT: 80.0
+      Cys: 80.0
+    concentration_basis: 4 mmol xylose + 4 mmol L-cysteine in 50 ml (80 mM nominal)
+    engine_species_missing: [THIOPH_2ME, THIOL_2ME_PENTANE_3, THIOPH_2_3MEBUTYL, THIOPHENONE_2ME_DIHYDRO, THIOPH_2_4MEPENTYL, THIOPH_2CHO, THIOPH_2ACETYL_4ME, THIOPH_2CHO_3ME, THIOPH_2_E2BUTENYL, THIOPH_25DICHO, SOY_PC, SOY_PE]
+    lecithin: '0.07%'
+    cephalin: '0.07%'
+    reheat: 'Yes'
+    label_ph: 5.5
+    ph_measured_at: not stated
+    buffer: sodium phosphate pH 5.5; molarity not stated
+    not_detected: [THIOPH_2CHO]
+    condition_quote: Table 1 column D2; Sec. 2.2 "heated at 120 C for 60 min in an autoclave"
+rows:
+- pot: zhang2021_A1_b
+  species: THIOPH_2ME
+  t_min: 60
+  value: 0.58
+  unit: ug_kg
+  sd: 0.03
+  n: 3
+  letters: c
+  read_error: 0.0037
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '0.58 ± 0.03 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 4 column A1, reader B as written
+- pot: zhang2021_B1_b
+  species: THIOPH_2ME
+  t_min: 60
+  value: 0.76
+  unit: ug_kg
+  sd: 0.36
+  n: 3
+  letters: bc
+  read_error: 0.0029
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '0.76 ± 0.36 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 4 column B1, reader B as written
+- pot: zhang2021_C2_b
+  species: THIOPH_2ME
+  t_min: 60
+  value: 1.42
+  unit: ug_kg
+  sd: 0.52
+  n: 3
+  letters: ab
+  read_error: 0.0015
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '1.42 ± 0.52 ab'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 4 column C2, reader B as written
+- pot: zhang2021_D1_b
+  species: THIOPH_2ME
+  t_min: 60
+  value: 1.88
+  unit: ug_kg
+  sd: 0.64
+  n: 3
+  letters: a
+  read_error: 0.0012
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '1.88 ± 0.64 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 4 column D1, reader B as written
+- pot: zhang2021_D2_b
+  species: THIOPH_2ME
+  t_min: 60
+  value: 1.45
+  unit: ug_kg
+  sd: 0.29
+  n: 3
+  letters: ab
+  read_error: 0.0015
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '1.45 ± 0.29 ab'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 4 column D2, reader B as written
+- pot: zhang2021_A1_b
+  species: MFT
+  t_min: 60
+  value: 15.04
+  unit: ug_kg
+  sd: 1.53
+  n: 3
+  letters: a
+  read_error: 0.00014
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '15.04 ± 1.53 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 8 column A1, reader B as written
+- pot: zhang2021_A2_b
+  species: MFT
+  t_min: 60
+  value: 12.37
+  unit: ug_kg
+  sd: 2.28
+  n: 3
+  letters: ab
+  read_error: 0.00018
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '12.37 ± 2.28 ab'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 8 column A2, reader B as written
+- pot: zhang2021_B1_b
+  species: MFT
+  t_min: 60
+  value: 8.95
+  unit: ug_kg
+  sd: 1.39
+  n: 3
+  letters: bc
+  read_error: 0.00024
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '8.95 ± 1.39 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 8 column B1, reader B as written
+- pot: zhang2021_B2_b
+  species: MFT
+  t_min: 60
+  value: 6.31
+  unit: ug_kg
+  sd: 2.74
+  n: 3
+  letters: cd
+  read_error: 0.00034
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '6.31 ± 2.74 cd'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 8 column B2, reader B as written
+- pot: zhang2021_C1_b
+  species: MFT
+  t_min: 60
+  value: 5.36
+  unit: ug_kg
+  sd: 1.08
+  n: 3
+  letters: cd
+  read_error: 0.00041
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '5.36 ± 1.08 cd'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 8 column C1, reader B as written
+- pot: zhang2021_C2_b
+  species: MFT
+  t_min: 60
+  value: 6.53
+  unit: ug_kg
+  sd: 0.93
+  n: 3
+  letters: cd
+  read_error: 0.00033
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '6.53 ± 0.93 cd'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 8 column C2, reader B as written
+- pot: zhang2021_D1_b
+  species: MFT
+  t_min: 60
+  value: 6.40
+  unit: ug_kg
+  sd: 2.10
+  n: 3
+  letters: cd
+  read_error: 0.00034
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '6.40 ± 2.10 cd'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 8 column D1, reader B as written
+- pot: zhang2021_D2_b
+  species: MFT
+  t_min: 60
+  value: 3.88
+  unit: ug_kg
+  sd: 1.45
+  n: 3
+  letters: d
+  read_error: 0.00056
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '3.88 ± 1.45 d'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 8 column D2, reader B as written
+- pot: zhang2021_A1_b
+  species: THIOL_2ME_PENTANE_3
+  t_min: 60
+  value: 117.62
+  unit: ug_kg
+  sd: 3.53
+  n: 3
+  letters: a
+  read_error: 1.8e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '117.62 ± 3.53 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 10 column A1, reader B as written
+- pot: zhang2021_A2_b
+  species: THIOL_2ME_PENTANE_3
+  t_min: 60
+  value: 67.52
+  unit: ug_kg
+  sd: 18.86
+  n: 3
+  letters: c
+  read_error: 3.2e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '67.52 ± 18.86 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 10 column A2, reader B as written
+- pot: zhang2021_B1_b
+  species: THIOL_2ME_PENTANE_3
+  t_min: 60
+  value: 117.95
+  unit: ug_kg
+  sd: 22.98
+  n: 3
+  letters: a
+  read_error: 1.8e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '117.95 ± 22.98 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 10 column B1, reader B as written
+- pot: zhang2021_B2_b
+  species: THIOL_2ME_PENTANE_3
+  t_min: 60
+  value: 90.81
+  unit: ug_kg
+  sd: 11.04
+  n: 3
+  letters: bc
+  read_error: 2.4e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '90.81 ± 11.04 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 10 column B2, reader B as written
+- pot: zhang2021_C1_b
+  species: THIOL_2ME_PENTANE_3
+  t_min: 60
+  value: 91.47
+  unit: ug_kg
+  sd: 22.11
+  n: 3
+  letters: abc
+  read_error: 2.4e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '91.47 ± 22.11 abc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 10 column C1, reader B as written
+- pot: zhang2021_C2_b
+  species: THIOL_2ME_PENTANE_3
+  t_min: 60
+  value: 77.18
+  unit: ug_kg
+  sd: 11.49
+  n: 3
+  letters: bc
+  read_error: 2.8e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '77.18 ± 11.49 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 10 column C2, reader B as written
+- pot: zhang2021_D1_b
+  species: THIOL_2ME_PENTANE_3
+  t_min: 60
+  value: 128.92
+  unit: ug_kg
+  sd: 25.45
+  n: 3
+  letters: a
+  read_error: 1.7e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '128.92 ± 25.45 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 10 column D1, reader B as written
+- pot: zhang2021_D2_b
+  species: THIOL_2ME_PENTANE_3
+  t_min: 60
+  value: 92.50
+  unit: ug_kg
+  sd: 22.01
+  n: 3
+  letters: abc
+  read_error: 2.3e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '92.50 ± 22.01 abc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 10 column D2, reader B as written
+- pot: zhang2021_A1_b
+  species: FFT
+  t_min: 60
+  value: 153.59
+  unit: ug_kg
+  sd: 14.41
+  n: 3
+  letters: abc
+  read_error: 1.4e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '153.59 ± 14.41 abc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 14 column A1, reader B as written
+- pot: zhang2021_A2_b
+  species: FFT
+  t_min: 60
+  value: 87.29
+  unit: ug_kg
+  sd: 14.32
+  n: 3
+  letters: c
+  read_error: 2.5e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '87.29 ± 14.32 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 14 column A2, reader B as written
+- pot: zhang2021_B1_b
+  species: FFT
+  t_min: 60
+  value: 176.73
+  unit: ug_kg
+  sd: 37.62
+  n: 3
+  letters: ab
+  read_error: 1.2e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '176.73 ± 37.62 ab'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 14 column B1, reader B as written
+- pot: zhang2021_B2_b
+  species: FFT
+  t_min: 60
+  value: 149.15
+  unit: ug_kg
+  sd: 17.29
+  n: 3
+  letters: bc
+  read_error: 1.5e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '149.15 ± 17.29 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 14 column B2, reader B as written
+- pot: zhang2021_C1_b
+  species: FFT
+  t_min: 60
+  value: 106.79
+  unit: ug_kg
+  sd: 18.42
+  n: 3
+  letters: c
+  read_error: 2e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '106.79 ± 18.42 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 14 column C1, reader B as written
+- pot: zhang2021_C2_b
+  species: FFT
+  t_min: 60
+  value: 128.77
+  unit: ug_kg
+  sd: 29.64
+  n: 3
+  letters: bc
+  read_error: 1.7e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '128.77 ± 29.64 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 14 column C2, reader B as written
+- pot: zhang2021_D1_b
+  species: FFT
+  t_min: 60
+  value: 205.14
+  unit: ug_kg
+  sd: 18.61
+  n: 3
+  letters: a
+  read_error: 1.1e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '205.14 ± 18.61 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 14 column D1, reader B as written
+- pot: zhang2021_D2_b
+  species: FFT
+  t_min: 60
+  value: 159.99
+  unit: ug_kg
+  sd: 33.10
+  n: 3
+  letters: abc
+  read_error: 1.4e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '159.99 ± 33.10 abc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 14 column D2, reader B as written
+- pot: zhang2021_D2_b
+  species: THIOPH_2_3MEBUTYL
+  t_min: 60
+  value: 1.28
+  unit: ug_kg
+  sd: 0.96
+  n: 3
+  letters: a
+  read_error: 0.0017
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '1.28 ± 0.96 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 16 column D2, reader B as written
+- pot: zhang2021_A1_b
+  species: THIOPHENONE_2ME_DIHYDRO
+  t_min: 60
+  value: 4.01
+  unit: ug_kg
+  sd: 0.33
+  n: 3
+  letters: c
+  read_error: 0.00054
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '4.01 ± 0.33 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 20 column A1, reader B as written
+- pot: zhang2021_B2_b
+  species: THIOPHENONE_2ME_DIHYDRO
+  t_min: 60
+  value: 7.14
+  unit: ug_kg
+  sd: 0.37
+  n: 3
+  letters: b
+  read_error: 0.0003
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '7.14 ± 0.37 b'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 20 column B2, reader B as written
+- pot: zhang2021_C1_b
+  species: THIOPHENONE_2ME_DIHYDRO
+  t_min: 60
+  value: 3.75
+  unit: ug_kg
+  sd: 0.81
+  n: 3
+  letters: c
+  read_error: 0.00058
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '3.75 ± 0.81 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 20 column C1, reader B as written
+- pot: zhang2021_C2_b
+  species: THIOPHENONE_2ME_DIHYDRO
+  t_min: 60
+  value: 4.38
+  unit: ug_kg
+  sd: 0.21
+  n: 3
+  letters: c
+  read_error: 0.0005
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '4.38 ± 0.21 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 20 column C2, reader B as written
+- pot: zhang2021_D1_b
+  species: THIOPHENONE_2ME_DIHYDRO
+  t_min: 60
+  value: 9.88
+  unit: ug_kg
+  sd: 1.87
+  n: 3
+  letters: a
+  read_error: 0.00022
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '9.88 ± 1.87 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 20 column D1, reader B as written
+- pot: zhang2021_D2_b
+  species: THIOPHENONE_2ME_DIHYDRO
+  t_min: 60
+  value: 6.72
+  unit: ug_kg
+  sd: 1.13
+  n: 3
+  letters: b
+  read_error: 0.00032
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '6.72 ± 1.13 b'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 20 column D2, reader B as written
+- pot: zhang2021_A1_b
+  species: THIOPH_2_4MEPENTYL
+  t_min: 60
+  value: 4.83
+  unit: ug_kg
+  sd: 2.49
+  n: 3
+  letters: c
+  read_error: 0.00045
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '4.83 ± 2.49 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 26 column A1, reader B as written
+- pot: zhang2021_B1_b
+  species: THIOPH_2_4MEPENTYL
+  t_min: 60
+  value: 220.77
+  unit: ug_kg
+  sd: 36.67
+  n: 3
+  letters: a
+  read_error: 9.8e-06
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '220.77 ± 36.67 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 26 column B1, reader B as written
+- pot: zhang2021_B2_b
+  species: THIOPH_2_4MEPENTYL
+  t_min: 60
+  value: 130.91
+  unit: ug_kg
+  sd: 14.99
+  n: 3
+  letters: b
+  read_error: 1.7e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '130.91 ± 14.99 b'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 26 column B2, reader B as written
+- pot: zhang2021_D1_b
+  species: THIOPH_2_4MEPENTYL
+  t_min: 60
+  value: 220.77
+  unit: ug_kg
+  sd: 83.31
+  n: 3
+  letters: a
+  read_error: 9.8e-06
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '220.77 ± 83.31 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 26 column D1, reader B as written
+- pot: zhang2021_D2_b
+  species: THIOPH_2_4MEPENTYL
+  t_min: 60
+  value: 163.72
+  unit: ug_kg
+  sd: 55.75
+  n: 3
+  letters: ab
+  read_error: 1.3e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '163.72 ± 55.75 ab'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 26 column D2, reader B as written
+- pot: zhang2021_A2_b
+  species: THIOPH_2CHO
+  t_min: 60
+  value: 7.38
+  unit: ug_kg
+  sd: 0.47
+  n: 3
+  letters: a
+  read_error: 0.00029
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '7.38 ± 0.47 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 27 column A2, reader B as written
+- pot: zhang2021_B2_b
+  species: THIOPH_2CHO
+  t_min: 60
+  value: 4.83
+  unit: ug_kg
+  sd: 0.14
+  n: 3
+  letters: c
+  read_error: 0.00045
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '4.83 ± 0.14 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 27 column B2, reader B as written
+- pot: zhang2021_C1_b
+  species: THIOPH_2CHO
+  t_min: 60
+  value: 5.46
+  unit: ug_kg
+  sd: 0.67
+  n: 3
+  letters: c
+  read_error: 0.0004
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '5.46 ± 0.67 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 27 column C1, reader B as written
+- pot: zhang2021_C2_b
+  species: THIOPH_2CHO
+  t_min: 60
+  value: 6.28
+  unit: ug_kg
+  sd: 0.68
+  n: 3
+  letters: b
+  read_error: 0.00035
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '6.28 ± 0.68 b'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 27 column C2, reader B as written
+- pot: zhang2021_A2_b
+  species: THIOPH_2ACETYL_4ME
+  t_min: 60
+  value: 14.64
+  unit: ug_kg
+  sd: 1.44
+  n: 3
+  letters: a
+  read_error: 0.00015
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '14.64 ± 1.44 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 28 column A2, reader B as written
+- pot: zhang2021_C2_b
+  species: THIOPH_2ACETYL_4ME
+  t_min: 60
+  value: 0.92
+  unit: ug_kg
+  sd: 0.10
+  n: 3
+  letters: c
+  read_error: 0.0024
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '0.92 ± 0.10 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 28 column C2, reader B as written
+- pot: zhang2021_D1_b
+  species: THIOPH_2ACETYL_4ME
+  t_min: 60
+  value: 4.37
+  unit: ug_kg
+  sd: 0.41
+  n: 3
+  letters: b
+  read_error: 0.0005
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '4.37 ± 0.41 b'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 28 column D1, reader B as written
+- pot: zhang2021_D2_b
+  species: THIOPH_2ACETYL_4ME
+  t_min: 60
+  value: 1.84
+  unit: ug_kg
+  sd: 0.57
+  n: 3
+  letters: c
+  read_error: 0.0012
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '1.84 ± 0.57 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 28 column D2, reader B as written
+- pot: zhang2021_A2_b
+  species: THIOPH_2CHO_3ME
+  t_min: 60
+  value: 7.27
+  unit: ug_kg
+  sd: 0.93
+  n: 3
+  letters: a
+  read_error: 0.0003
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '7.27 ± 0.93 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 29 column A2, reader B as written
+- pot: zhang2021_B1_b
+  species: THIOPH_2CHO_3ME
+  t_min: 60
+  value: 4.25
+  unit: ug_kg
+  sd: 0.55
+  n: 3
+  letters: bc
+  read_error: 0.00051
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '4.25 ± 0.55 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 29 column B1, reader B as written
+- pot: zhang2021_B2_b
+  species: THIOPH_2CHO_3ME
+  t_min: 60
+  value: 5.04
+  unit: ug_kg
+  sd: 1.31
+  n: 3
+  letters: bc
+  read_error: 0.00043
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '5.04 ± 1.31 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 29 column B2, reader B as written
+- pot: zhang2021_C1_b
+  species: THIOPH_2CHO_3ME
+  t_min: 60
+  value: 5.18
+  unit: ug_kg
+  sd: 0.27
+  n: 3
+  letters: bc
+  read_error: 0.00042
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '5.18 ± 0.27 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 29 column C1, reader B as written
+- pot: zhang2021_C2_b
+  species: THIOPH_2CHO_3ME
+  t_min: 60
+  value: 3.58
+  unit: ug_kg
+  sd: 0.22
+  n: 3
+  letters: c
+  read_error: 0.00061
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '3.58 ± 0.22 c'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 29 column C2, reader B as written
+- pot: zhang2021_D1_b
+  species: THIOPH_2CHO_3ME
+  t_min: 60
+  value: 5.83
+  unit: ug_kg
+  sd: 1.43
+  n: 3
+  letters: b
+  read_error: 0.00037
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '5.83 ± 1.43 b'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 29 column D1, reader B as written
+- pot: zhang2021_D2_b
+  species: THIOPH_2CHO_3ME
+  t_min: 60
+  value: 3.95
+  unit: ug_kg
+  sd: 0.63
+  n: 3
+  letters: bc
+  read_error: 0.00055
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '3.95 ± 0.63 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 29 column D2, reader B as written
+- pot: zhang2021_A2_b
+  species: THIOPH_2_E2BUTENYL
+  t_min: 60
+  value: 15.14
+  unit: ug_kg
+  sd: 6.83
+  n: 3
+  letters: b
+  read_error: 0.00014
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '15.14 ± 6.83 b'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 32 column A2, reader B as written
+- pot: zhang2021_B2_b
+  species: THIOPH_2_E2BUTENYL
+  t_min: 60
+  value: 66.16
+  unit: ug_kg
+  sd: 8.52
+  n: 3
+  letters: a
+  read_error: 3.3e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '66.16 ± 8.52 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 32 column B2, reader B as written
+- pot: zhang2021_C1_b
+  species: THIOPH_2_E2BUTENYL
+  t_min: 60
+  value: 24.26
+  unit: ug_kg
+  sd: 2.89
+  n: 3
+  letters: b
+  read_error: 9e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '24.26 ± 2.89 b'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 32 column C1, reader B as written
+- pot: zhang2021_C2_b
+  species: THIOPH_2_E2BUTENYL
+  t_min: 60
+  value: 23.03
+  unit: ug_kg
+  sd: 3.77
+  n: 3
+  letters: b
+  read_error: 9.4e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '23.03 ± 3.77 b'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 32 column C2, reader B as written
+- pot: zhang2021_D2_b
+  species: THIOPH_2_E2BUTENYL
+  t_min: 60
+  value: 70.21
+  unit: ug_kg
+  sd: 20.01
+  n: 3
+  letters: a
+  read_error: 3.1e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '70.21 ± 20.01 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 32 column D2, reader B as written
+- pot: zhang2021_A1_b
+  species: THIOPH_25DICHO
+  t_min: 60
+  value: 18.95
+  unit: ug_kg
+  sd: 3.39
+  n: 3
+  letters: cd
+  read_error: 0.00011
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '18.95 ± 3.39 cd'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 33 column A1, reader B as written
+- pot: zhang2021_A2_b
+  species: THIOPH_25DICHO
+  t_min: 60
+  value: 15.01
+  unit: ug_kg
+  sd: 1.99
+  n: 3
+  letters: d
+  read_error: 0.00014
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '15.01 ± 1.99 d'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 33 column A2, reader B as written
+- pot: zhang2021_B1_b
+  species: THIOPH_25DICHO
+  t_min: 60
+  value: 32.55
+  unit: ug_kg
+  sd: 4.63
+  n: 3
+  letters: a
+  read_error: 6.7e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '32.55 ± 4.63 a'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 33 column B1, reader B as written
+- pot: zhang2021_B2_b
+  species: THIOPH_25DICHO
+  t_min: 60
+  value: 22.12
+  unit: ug_kg
+  sd: 3.03
+  n: 3
+  letters: bcd
+  read_error: 9.8e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '22.12 ± 3.03 bcd'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 33 column B2, reader B as written
+- pot: zhang2021_C1_b
+  species: THIOPH_25DICHO
+  t_min: 60
+  value: 23.90
+  unit: ug_kg
+  sd: 3.17
+  n: 3
+  letters: bc
+  read_error: 9.1e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '23.90 ± 3.17 bc'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 33 column C1, reader B as written
+- pot: zhang2021_C2_b
+  species: THIOPH_25DICHO
+  t_min: 60
+  value: 16.85
+  unit: ug_kg
+  sd: 2.14
+  n: 3
+  letters: cd
+  read_error: 0.00013
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '16.85 ± 2.14 cd'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 33 column C2, reader B as written
+- pot: zhang2021_D2_b
+  species: THIOPH_25DICHO
+  t_min: 60
+  value: 26.71
+  unit: ug_kg
+  sd: 5.29
+  n: 3
+  letters: ab
+  read_error: 8.1e-05
+  read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex (reader B: exact transcription)'
+  value_as_printed: '26.71 ± 5.29 ab'
+  unit_as_printed: ug/kg
+  source_value: Table 3 row 33 column D2, reader B as written
+text_checks:
+- quote: Table 3 Subtotal C2 "78.80 ± 58.69 bc"
+  reading: below C2's own FFT (128.77) and furfural cells; likely a dropped leading digit. Kept as printed (reader B).
+- quote: Table 3 row 26 B1 and D1 both "220.77" (SD 36.67 vs 83.31)
+  reading: possible copy error in the paper; both kept as printed (reader B).
+- quote: Table 1 D1 lecithin 0.24 % + cephalin 0.24 %, D2 0.07 % + 0.07 %
+  reading: D1 and D2 differ in composition, so D1 -> D2 is not a clean reheating contrast (likely a Table 1 typo; unresolved).

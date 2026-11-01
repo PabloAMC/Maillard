@@ -173,7 +173,7 @@ Even under the most generous choices, at most E3, E10, E12 and E18 reach two TES
 
 ## 6. Caveats
 
-- **The numbers are not yet re-read.** Rule (i) requires the held-out numbers to be re-read in the PDF by two readers before scoring. None of the 32 TEST contrasts has been. The atlas's per-cell wrong rate is about 9 % (95 % CI 4 - 18 %).
+- **The numbers are not yet re-read.** Rule (i) requires the held-out numbers to be re-read in the PDF by two readers before scoring. None of the 32 TEST contrasts had been when v1 was frozen; the 2026-11-01 re-read is in sec. 9. The atlas's per-cell wrong rate is about 9 % (95 % CI 4 - 18 %).
 - **Heuristic parts:**
   - the numeric-effect test;
   - the DEVELOPMENT factor tags;
@@ -276,7 +276,58 @@ Of the plan's next changes, E6 + E11 and E5 have held-out tests. E4, E1, E2 and 
 - the 65 contrasts that sit in at least one TEST(E) set;
 - v1's 32 TEST contrasts. Nine of them are among the 65, and the other 23 matter only if v1 is scored.
 
-That makes **88 distinct contrasts in all, of which 56 are new to v2** (`split_v2_per_change.yml` -> `reread_list`). None has been re-read.
+That makes **88 distinct contrasts in all, of which 56 are new to v2** (`split_v2_per_change.yml` -> `reread_list`). Re-read 2026-11-01: sec. 9.
 
     ./scripts/docker_maillard.sh run "python scripts/generators/build_contrast_split.py --v2"           # check (~2 min)
     ./scripts/docker_maillard.sh run "python scripts/generators/build_contrast_split.py --v2 --write"   # same membership only
+
+## 9. reread_status (2026-11-01)
+
+The 88 `reread_list` contrasts were re-read against the PDFs by two independent readers (A read all 88, B read 58: the priority group, errors E5 / E6 / E7 / E11 / E13, plus 30 others), then adjudicated. Rules: both readers agree -> their grade; they disagree, or a single reader grades MINOR / WRONG -> the adjudicator opens the PDF and decides; single reader MATCH -> accepted, marked single-reader. Corrections were applied to the atlas cells, each recorded in the cell's `note` ("re-read 2026-11-01: ..."); `quote` fields were left alone because they quote the dossier, not the PDF. The per-entry record (grades, readers, basis, action) is in the session's `reread_adjudication.yml` (scratchpad).
+
+```yaml
+reread_status:
+  date: 2026-11-01
+  entries: 88
+  final_grades: {MATCH: 70, MINOR: 15, WRONG: 3}
+  verification: {two_reader: 58, reader_plus_adjudicator: 6, single_reader_match: 24}
+  v2_test_contrasts: {total: 65, two_reader: 51, reader_plus_adjudicator: 3, single_reader_match: 11}   # 54 / 65 verified by two people
+  v1_test_contrasts: {total: 32, two_reader: 14, reader_plus_adjudicator: 4, single_reader_match: 14}  # 18 / 32
+  wrong: [F05#23@thornalley1999, F13#13@haleva1999, F14#12@haleva1999]
+  single_reader_v2_test: [F03#8, F16#11, F16#14, F16#15, F16#16, F16#17, F18#16, F21#4, F21#6, F21#8, F21#9]
+```
+
+- **WRONG (3), all corrected:** F05#23 said Thornalley 1999 printed no HSA fructosamine, but Fig. 2d plots it, so the cell is now `operating`, not `unattributed`. F13#13 and F14#12 (Haleva 1999) were tagged `phosphate`; the buffer is 0.1 M citrate-phosphate, now `other_buffer`.
+- **MINOR (15), all corrected:** mostly a wrong range or condition. Examples: Kallen's ceiling is x3.1-4.4, not x3.5-5; Stack's kinetics buffer is 0.050 M; Low 2006's ND means not determined; Du 2023's "92 % no glucose carbon" is ~84 % in a 1:1 CAMOLA.
+- **Liu 2023b (F23#6, F24#6; E6 / E11):** both readers confirm the printed 41 / 3 / 2 / 1 / 12 / 40. The adjudication (CF-086) finds that the Methods' [M-1]+/[M]+ adjustment did not reach the labelled MFT ion, so the fragment share is ~6 %, not 19 %; P 0.9.
+- **Still single-reader:** 11 of the 65 v2 TEST contrasts, including all five of E3's (F16, Strecker aldehydes). A second read of these 11 would finish v2. v1's 14 single-reader contrasts matter only if v1 is scored.
+- **Membership is unchanged.** No correction moved a cell into or out of the candidate set; `build_contrast_split.py --v2` still checks OK. The v1 check's `contrasts` block now differs from a rebuild only in the `status` of F05#23 and F24#6. That check was already failing before the re-read (cited-text drift, `development_lab_reasons`), so `--write` waits for that review.
+
+## 10. Addendum: newly keyed TEST rows (2026-11-01)
+
+Three held-out sources were keyed by two independent readers and adjudicated (P1 keying, rule (i)'s "newly keyed rows"). They are **TEST data only, never a fit input**: `fit_rows.load` refuses all three tables (units or species outside its vocabulary; laboratories not in `data/keys/laboratories.yml`).
+
+**They sit outside the frozen splits.** v1 and v2 hash atlas cells and contrast ids, and these are fit-row tables, not atlas cells. `split.yml` and `split_v2_per_change.yml` are unchanged. A score that uses these rows must say so and report them beside the v2 TEST set. To count them as v2 contrasts takes a new, dated version (sec. 3).
+
+| table (`data/lit/fit_rows/`) | error | lab | rows | the contrast it carries |
+|---|---|---|---|---|
+| `heldout_zhang2021_table3.yml` | E7 lipid inert | China Meat Research Center, Beijing (Zang M.); not in `lab_ids_v1` (proposed id `china_meat_research_center_beijing`); no author shared with CAAS, BTBU or any DEV(E7) lab | 68 (+ 28 not-detected cells listed per pot) | MFT, FFT and ten sulfur volatiles (thiophenes, a thiophenone, 2-methylpentane-3-thiol), with vs without soybean lecithin / cephalin / both, Cys + Xyl 80 + 80 mM, pH 5.5, 120 C / 60 min, with or without reheating |
+| `heldout_larralde1995.yml` | E5 buffer catalysis | UCSD (Miller); not in `lab_ids_v1`, and not the University of San Diego (De Haan) | 26 | bicarbonate / phosphate = 0.52 at equal pD 7.4; the phosphate rate law k0 + kP [P] at 100 C; Fig. 2 (Arrhenius) and Fig. 1 (pD profile) rate constants |
+| `heldout_lee2024_fig2.yml` | E13 CF-077 cross pair | SayFood, Paris-Saclay (`sayfood_paris_saclay`, already a TEST lab in v1 via Lee 2022; not in DEV(E13)) | 41 | PZ, MPZ, 2,5-DMP and 2,6-DMP in the oven vapour of a glucose + Leu cake at 140 / 170 / 200 C: MPZ^2 / (PZ x DMP) vs time and temperature |
+
+If a new version admits these labs, TEST(E) labs grow by one each:
+- E5: 3 -> 4;
+- E7: 3 -> 4;
+- E13: 4 -> 5.
+
+**Verification.** Each table has a first reading (the adjudicated rows), a second reading under `second/`, two `source_verification` records, and a reconciliation note `results/validation/source_reading_reconciliation_heldout_*.md`. All three reconcile with 0 disagreements.
+
+**Caveats a scorer must carry.**
+- **Zhang 2021.** The printed D doses conflict: D1 is 0.24 % + 0.24 %, D2 is 0.07 % + 0.07 %, yet the text calls D2 the reheated D1. So D1 -> D2 is not a clean reheating contrast. The ug/kg values are semi-quantitative (one internal standard, response factor 1).
+- **Larralde 1995.**
+  - The rate law's printed "s-1" is read as min-1 (P ~0.9). It is consistent with Fig. 2 only in min-1.
+  - The bicarbonate temperature (100 C) is inferred.
+  - The system is amine-free ribose loss. It tests buffer-species catalysis of sugar degradation, not of the Amadori step.
+- **Lee 2024.**
+  - These are vapour concentrations in an open, non-isothermal oven. 39 of the 80 points were dropped: at the reading floor, or 140 C points plotted at a time the Methods did not sample.
+  - The text says MP is the lowest pyrazine, but the figure shows it the highest (unresolved). So any E13 ratio must also be reported with MPZ / 10.

@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **719**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **731**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -134,7 +134,7 @@ Per-paper extraction records (verbatim quotes, digitised tables, unit reconcilia
 
 ## `data/lit/fit_rows`
 
-15 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml`, `strecker_hofmann2000b.yml`, `strecker_hofmann2000b_fig1.yml`, `thiol_hofmann_t9.yml` …
+18 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `heldout_larralde1995.yml`, `heldout_lee2024_fig2.yml`, `heldout_zhang2021_table3.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml` …
 
 ## `data/lit/measurement_ledger`
 
@@ -142,7 +142,7 @@ Per-paper extraction records (verbatim quotes, digitised tables, unit reconcilia
 
 ## `data/lit/source_verification`
 
-15 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml`, `strecker_hofmann2000b.yml`, `strecker_hofmann2000b_fig1.yml`, `thiol_hofmann_t9.yml` …
+18 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `heldout_larralde1995.yml`, `heldout_lee2024_fig2.yml`, `heldout_zhang2021_table3.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml` …
 
 ## `data/lit/timeseries`
 
@@ -170,8 +170,8 @@ Free-precursor hold-out bundles: the network's out-of-sample test, hand-authored
 
 ## `data/lit/fit_rows/second`
 
-15 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml`, `strecker_hofmann2000b.yml`, `strecker_hofmann2000b_fig1.yml`, `thiol_hofmann_t9.yml` …
+18 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `heldout_larralde1995.yml`, `heldout_lee2024_fig2.yml`, `heldout_zhang2021_table3.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml` …
 
 ## `data/lit/source_verification/second`
 
-15 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml`, `strecker_hofmann2000b.yml`, `strecker_hofmann2000b_fig1.yml`, `thiol_hofmann_t9.yml` …
+18 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `heldout_larralde1995.yml`, `heldout_lee2024_fig2.yml`, `heldout_zhang2021_table3.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml` …

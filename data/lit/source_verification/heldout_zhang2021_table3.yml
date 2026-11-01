@@ -1,0 +1,42 @@
+# SOURCE VERIFICATION -- Zhang, Zang et al. 2021, Food Res Int 139:109918, Table 3 (TEST table
+# data/lit/fit_rows/heldout_zhang2021_table3.yml; contrast benchmark error E7).
+# Format and the five checks: the header of data/lit/source_verification.yml.
+# FIRST READER: reader A (agent-readerA-2026-11-01), against data/articles/zhang2021.pdf (pdftotext -bbox, every cell assigned to
+# its column by x position; checked against the rendered pages 4-5). SECOND READER: reader B (agent-readerB-2026-11-01),
+# independent and in parallel (source_verification/second/heldout_zhang2021_table3.yml, fit_rows/second/heldout_zhang2021_table3.yml).
+# ADJUDICATED 2026-11-01 by agent-heldout-adjudicator-2026-11-01: table cells, so the printed value; A and B agree on all 96 cells
+# (value, SD, Duncan letters, 28 not-detected). The adjudicator re-read Table 1, Table 3 and Sec. 2.2 / 3.2 in the PDF for the three
+# flagged ambiguities (group composition, C2 Subtotal, the shared 220.77).
+
+entries:
+- ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+  source_file: zhang2021.pdf
+  read_by: agent-readerA-2026-11-01
+  second_reader: agent-readerB-2026-11-01
+  date: 2026-11-01
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: corrected
+  quote: 'Table 1. Composition and treatment of each group: buffer solution 50 ml; xylose 4 mmol; L-cysteine 4 mmol; lecithin 0 / 0
+    / 0.24% / 0.24% / 0 / 0 / 0.24% / 0.07%; cephalin 0 / 0 / 0 / 0 / 0.07% / 0.07% / 0.24% / 0.07%; Reheat treatment No / Yes (A1 -
+    D2). ... heated at 120 C for 60 min in an autoclave ... The reheating treatment included chilling storage at 4 C for 5 days, and
+    then a boiling for 30 min. / Table 3. Identification and quantification of volatile compounds in eight groups (ug/kg).'
+  notes: 'Table 3 (pp. 4-5): 12 sulfur volatiles x 8 groups = 96 cells, 68 numeric (mean +- SD, n = 3, Duncan letters) and 28
+    not detected ("—"). MFT A1 15.04, A2 12.37, B1 8.95, B2 6.31, C1 5.36, C2 6.53, D1 6.40, D2 3.88; FFT A1 153.59, A2 87.29, B1
+    176.73, B2 149.15, C1 106.79, C2 128.77, D1 205.14, D2 159.99 ug/kg. CONDITIONS corrected: the design is none / lecithin /
+    cephalin / both (not "with / without lecithin"); Table 1 prints D1 0.24 % + 0.24 % and D2 0.07 % + 0.07 %, while the text
+    treats D2 as the reheated D1 (one D column misprinted, which one unresolved; D pots carry composition_conflict); % basis, buffer
+    molarity, vessel and headspace not printed. UNITS: ug/kg of reaction solution, as printed. QUANTIFICATION: semi-quantitative
+    (single IS 2-methyl-3-heptanone, response factor 1, formula (1)), as the ledger. DUPLICATES corrected: the lipid ledger entry
+    zhang2021_tab3_phospholipid_cys_xyl_lipid_volatiles is the same Table 3; rows keyed only under this (sulfur) id. VALUES
+    corrected: the C2 Subtotal "78.80" is 478.80 (the column sums reproduce the other seven Subtotals to 0.01; a dropped "4"); B1 and
+    D1 both 220.77 for 2-(4-methylpentyl)thiophene, kept (each Subtotal needs it), D1 row flagged.'
+  adjudication: >-
+    Readers A and B agree on all 96 cells; value = the printed cell, read error = half the last printed digit in dex, plus the
+    printed SD. (1) Composition: as printed, conflict recorded (unresolved, D dose uncertain; D1 -> D2 not a clean reheating
+    contrast). (2) C2 Subtotal 78.80 -> 478.80 (P > 0.99; not a row). (3) 220.77 in B1 and D1: the authors' sheet holds both (the
+    Subtotal arithmetic needs each); kept, flagged. Reader A's furfural and Subtotal rows were outside the brief and unmatched by
+    reader B: not keyed. No row dropped.

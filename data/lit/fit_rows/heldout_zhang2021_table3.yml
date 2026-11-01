@@ -1,0 +1,290 @@
+# KEYED TEST TABLE -- Zhang Z, Zang M, Zhang K, Wang S, Li D & Li X 2021, Food Res Int 139:109918 (China Meat Research
+# Center, Beijing; doi 10.1016/j.foodres.2020.109918), Table 3 (pp. 4-5, landscape): sulfur volatiles from L-cysteine + D-xylose
+# (4 + 4 mmol in 50 mL sodium phosphate pH 5.5, 120 C / 60 min, autoclave) with or without soybean lecithin and / or cephalin,
+# each with or without reheating (eight groups A1 - D2, Table 1).
+# PURPOSE: TEST data for the contrast benchmark, engine error E7 ("lipid lane inert to Maillard odorants";
+# docs/reference/contrast_benchmark/split_v2_per_change.yml). The contrasts are phospholipid vs none within one reheat status
+# (B1 / C1 / D1 vs A1; B2 / C2 / D2 vs A2). NEVER a fit input: fit_rows.load refuses every row (the laboratory string of the
+# ledger entry is in no group of data/keys/laboratories.yml, and ten of the twelve species are not engine species); keep it so.
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS). Laboratory and quantification
+# class from the ledger entry zhang2021_tab3_cys_xyl_phospholipid_reheat (data/lit/measurement_ledger/sulfur.yml; semi-quantitative: SPME, single internal
+# standard 2-methyl-3-heptanone, response factor 1, formula (1) of the paper). The lipid ledger's
+# zhang2021_tab3_phospholipid_cys_xyl_lipid_volatiles is the SAME Table 3 (its lipid-derived rows); nothing is keyed under it here.
+#
+# READERS (2026-11-01), independent, in parallel and blind to each other: reader A (agent-readerA-2026-11-01; text layer by pdftotext -bbox, every
+# cell assigned to its column by x position, checked against the page render) and reader B (agent-readerB-2026-11-01; pdftotext -layout / -raw,
+# column assignment checked against the render of pp. 4-5). Raw files: the coordinator's scratchpad (keying_reader_A.yml,
+# keying_reader_B.yml); B's rows as written: fit_rows/second/heldout_zhang2021_table3.yml.
+# ADJUDICATION (agent-heldout-adjudicator-2026-11-01): table cells, so value = the printed cell. A and B agree on all 96 cells of the twelve sulfur species
+# (value, SD and Duncan letters), including the 28 '—' (not detected) cells; nothing needed a re-read for disagreement.
+# Read error = half the last printed digit (0.005 ug/kg) in dex; each row also carries the printed SD (n = 3, 'average +- st.dev.').
+# Reader A also keyed furfural (row 17) and the Subtotal row; reader B did not (the brief named MFT, FFT and thiophenes): not
+# rows here; the Subtotal is a text check below.
+#
+# NOT DETECTED. '—' cells (footnote 1: 'not detected or the RI was not found'; in a data cell, not detected; no LOD printed) are
+# not rows (a zero has no log residual); each pot lists them under not_detected, for sign / presence contrasts.
+#
+# RESOLUTIONS OF THE FLAGGED AMBIGUITIES (re-read in the PDF, 2026-11-01):
+#  (1) Group composition. Table 1 prints lecithin / cephalin: A 0 / 0, B 0.24 % / 0, C 0 / 0.07 %, D1 0.24 % / 0.24 %, D2 0.07 % /
+#      0.07 % (both readers; the PDF text layer agrees). The brief's 'with / without lecithin' is wrong: the design is none /
+#      lecithin / cephalin / both. D1 and D2 differ in dose, yet the text treats D2 as the reheated D1 ('substances in the Group D2
+#      (after reheating treatment) were lower than those in Group D1'): one of the two D columns of Table 1 is a misprint, and the
+#      paper does not say which (unresolved; neither matches B + C, 0.24 % + 0.07 %). Kept as printed; the D pots carry
+#      composition_conflict. Consequence: D1 vs A1 and D2 vs A2 are valid 'both phospholipids vs none' contrasts with an uncertain
+#      dose; D1 -> D2 is NOT a clean reheating contrast. The % basis (w/v or w/w) is not printed.
+#  (2) C2 Subtotal. Printed '78.80 ± 58.69 bc'. The column sums of Table 3 reproduce the seven other Subtotals to 0.01 ug/kg
+#      (A1 500.40, A2 384.34, B1 787.69, B2 784.33, C1 466.13, D1 1052.81, D2 892.55; bbox parse of pp. 4-5); C2's cells sum to
+#      478.80. The printed 78.80 drops the leading '4' (misprint; P > 0.99). It is not a row; it confirms the text's 'the other four
+#      groups [B, C] exhibited the opposite' (C2 478.80 > C1 466.13).
+#  (3) The shared 220.77 (row 26, 2-(4-methylpentyl)thiophene, B1 220.77 ± 36.67 a and D1 220.77 ± 83.31 a). Both Subtotals,
+#      B1 787.69 and D1 1052.81, are reproduced only WITH 220.77 in each column, so the authors' sheet holds 220.77 in both cells:
+#      as printed, both kept. A copy error upstream of the sheet cannot be excluded (identical 5-digit means with different SDs;
+#      P ~0.3 that one is a copy); the D1 row is flagged.
+# CONDITIONS. Buffer molarity, vessel, headspace and atmosphere: not printed. The *2 groups: 120 C / 60 min, cooled to 20 C, 24 h
+# at 4 C, then 'chilling storage at 4 C for 5 days, and then a boiling for 30 min' (whether in the sealed vessel: not stated);
+# the *1 groups: 120 C / 60 min, cooled, 24 h at 4 C. t_min 60 = the end of the 120 C hold (the analysis follows the post-heat
+# history in post_heat). Concentration 4 mmol in 50 mL = 80 mmol/L each (solute volume ignored).
+# TEXT CHECKS (no rows): the text's MFT statement (reheating lowers OAVs 'except for the two groups with the addition of
+# cephalin') vs Table 3: MFT falls on reheating in A, B, D (D confounded, (1)) and rises in C (5.36 -> 6.53, same letters).
+# Sec. 3.1 and 3.2 give conflicting compound counts (15 / 18 / 21 / 19 vs 16 / 22 / 24 / 20); not used.
+# NEW SPECIES KEYS (coined here, not engine species; listed per pot under engine_species_missing): THIOPH_2ME 2-methylthiophene
+# (row 4), THIOL_2ME_PENTANE_3 2-methylpentane-3-thiol (10), THIOPH_2_3MEBUTYL 2-(3-methylbutyl)thiophene (16),
+# THIOPHENONE_2ME_DIHYDRO dihydro-2-methyl-3(2H)-thiophenone (20), THIOPH_2_4MEPENTYL 2-(4-methylpentyl)thiophene (26),
+# THIOPH_2CHO thiophene-2-carboxaldehyde (27), THIOPH_2ACETYL_4ME 1-(4-methyl-2-thienyl)ethanone (28), THIOPH_2CHO_3ME
+# 3-methyl-2-thiophenecarboxaldehyde (29), THIOPH_2_E2BUTENYL 2-[(E)-2-butenyl]thiophene (32), THIOPH_25DICHO
+# 2,5-thiophenedicarboxaldehyde (33); SOY_PC soybean lecithin, SOY_PE soybean cephalin. Engine keys: MFT, FFT, PENT (xylose), Cys.
+# No thiazole is listed in Table 3.
+status: ready   # two readers + adjudication (2026-11-01); TEST data (E7), never a fit input: fit_rows.load refuses it (laboratory unmapped; species)
+purpose: 'TEST data for the contrast benchmark, error E7 (docs/reference/contrast_benchmark/split_v2_per_change.yml; README sec. 10); never a fit input'
+pots:
+  zhang2021_tab3_A1_no_phospholipid:
+    {ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat',
+     engine_species_missing: ['THIOPH_2ME', 'THIOL_2ME_PENTANE_3', 'THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2_4MEPENTYL', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2CHO_3ME', 'THIOPH_2_E2BUTENYL', 'THIOPH_25DICHO'],
+     t_c: 120,
+     t_c_basis: 'printed: ''heated at 120 C for 60 min in an autoclave''',
+     minutes: 60,
+     initial_mmol_L: {PENT: 80, Cys: 80},
+     concentration_basis: 'printed (Table 1): 4 mmol xylose + 4 mmol L-cysteine in 50 mL buffer = 80 mmol/L each; solute volume ignored',
+     phospholipid_pct: {lecithin: 0, cephalin: 0},
+     phospholipid_basis: 'Table 1 as printed; % basis (w/v or w/w) not stated; soybean lecithin and cephalin > 98 %',
+     label_ph: 5.5,
+     ph_measured_at: 'not stated (pH of the buffer as prepared)',
+     buffer: 'sodium phosphate (NaH2PO4.2H2O / Na2HPO4) pH 5.5; molarity not stated',
+     atmosphere: 'not stated',
+     vessel: 'autoclave; container and headspace not stated',
+     post_heat: 'cooled to 20 C (cold-water bath); 24 h at 4 C',
+     replicates: 3,
+     not_detected: ['THIOPH_2_3MEBUTYL', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2CHO_3ME', 'THIOPH_2_E2BUTENYL'],
+     source_table: 'Table 1 column A1; Table 3 column A1 (ug/kg, average ± st.dev., n = 3)',
+     condition_quote: 'Table 1: buffer solution 50 ml; xylose 4 mmol; L-cysteine 4 mmol; lecithin 0; cephalin 0; Reheat treatment No. / Sec. 2.2: ''heated at 120 C for 60 min in an autoclave ... cooled to room temperature (20 C) with a cold-water bath and then placed at 4 C aging for 24 h. The reheating treatment included chilling storage at 4 C for 5 days, and then a boiling for 30 min.'''}
+  zhang2021_tab3_A2_no_phospholipid_reheated:
+    {ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat',
+     engine_species_missing: ['THIOPH_2ME', 'THIOL_2ME_PENTANE_3', 'THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2_4MEPENTYL', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2CHO_3ME', 'THIOPH_2_E2BUTENYL', 'THIOPH_25DICHO'],
+     t_c: 120,
+     t_c_basis: 'printed: ''heated at 120 C for 60 min in an autoclave''',
+     minutes: 60,
+     initial_mmol_L: {PENT: 80, Cys: 80},
+     concentration_basis: 'printed (Table 1): 4 mmol xylose + 4 mmol L-cysteine in 50 mL buffer = 80 mmol/L each; solute volume ignored',
+     phospholipid_pct: {lecithin: 0, cephalin: 0},
+     phospholipid_basis: 'Table 1 as printed; % basis (w/v or w/w) not stated; soybean lecithin and cephalin > 98 %',
+     label_ph: 5.5,
+     ph_measured_at: 'not stated (pH of the buffer as prepared)',
+     buffer: 'sodium phosphate (NaH2PO4.2H2O / Na2HPO4) pH 5.5; molarity not stated',
+     atmosphere: 'not stated',
+     vessel: 'autoclave; container and headspace not stated',
+     post_heat: 'cooled to 20 C (cold-water bath); 24 h at 4 C; then REHEATED: 5 d at 4 C and 30 min boiling',
+     replicates: 3,
+     not_detected: ['THIOPH_2ME', 'THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2_4MEPENTYL'],
+     source_table: 'Table 1 column A2; Table 3 column A2 (ug/kg, average ± st.dev., n = 3)',
+     condition_quote: 'Table 1: buffer solution 50 ml; xylose 4 mmol; L-cysteine 4 mmol; lecithin 0; cephalin 0; Reheat treatment Yes. / Sec. 2.2: ''heated at 120 C for 60 min in an autoclave ... cooled to room temperature (20 C) with a cold-water bath and then placed at 4 C aging for 24 h. The reheating treatment included chilling storage at 4 C for 5 days, and then a boiling for 30 min.'''}
+  zhang2021_tab3_B1_lecithin:
+    {ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat',
+     engine_species_missing: ['THIOPH_2ME', 'THIOL_2ME_PENTANE_3', 'THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2_4MEPENTYL', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2CHO_3ME', 'THIOPH_2_E2BUTENYL', 'THIOPH_25DICHO', 'SOY_PC'],
+     t_c: 120,
+     t_c_basis: 'printed: ''heated at 120 C for 60 min in an autoclave''',
+     minutes: 60,
+     initial_mmol_L: {PENT: 80, Cys: 80},
+     concentration_basis: 'printed (Table 1): 4 mmol xylose + 4 mmol L-cysteine in 50 mL buffer = 80 mmol/L each; solute volume ignored',
+     phospholipid_pct: {lecithin: 0.24, cephalin: 0},
+     phospholipid_basis: 'Table 1 as printed; % basis (w/v or w/w) not stated; soybean lecithin and cephalin > 98 %',
+     label_ph: 5.5,
+     ph_measured_at: 'not stated (pH of the buffer as prepared)',
+     buffer: 'sodium phosphate (NaH2PO4.2H2O / Na2HPO4) pH 5.5; molarity not stated',
+     atmosphere: 'not stated',
+     vessel: 'autoclave; container and headspace not stated',
+     post_heat: 'cooled to 20 C (cold-water bath); 24 h at 4 C',
+     replicates: 3,
+     not_detected: ['THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2_E2BUTENYL'],
+     source_table: 'Table 1 column B1; Table 3 column B1 (ug/kg, average ± st.dev., n = 3)',
+     condition_quote: 'Table 1: buffer solution 50 ml; xylose 4 mmol; L-cysteine 4 mmol; lecithin 0.24%; cephalin 0; Reheat treatment No. / Sec. 2.2: ''heated at 120 C for 60 min in an autoclave ... cooled to room temperature (20 C) with a cold-water bath and then placed at 4 C aging for 24 h. The reheating treatment included chilling storage at 4 C for 5 days, and then a boiling for 30 min.'''}
+  zhang2021_tab3_B2_lecithin_reheated:
+    {ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat',
+     engine_species_missing: ['THIOPH_2ME', 'THIOL_2ME_PENTANE_3', 'THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2_4MEPENTYL', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2CHO_3ME', 'THIOPH_2_E2BUTENYL', 'THIOPH_25DICHO', 'SOY_PC'],
+     t_c: 120,
+     t_c_basis: 'printed: ''heated at 120 C for 60 min in an autoclave''',
+     minutes: 60,
+     initial_mmol_L: {PENT: 80, Cys: 80},
+     concentration_basis: 'printed (Table 1): 4 mmol xylose + 4 mmol L-cysteine in 50 mL buffer = 80 mmol/L each; solute volume ignored',
+     phospholipid_pct: {lecithin: 0.24, cephalin: 0},
+     phospholipid_basis: 'Table 1 as printed; % basis (w/v or w/w) not stated; soybean lecithin and cephalin > 98 %',
+     label_ph: 5.5,
+     ph_measured_at: 'not stated (pH of the buffer as prepared)',
+     buffer: 'sodium phosphate (NaH2PO4.2H2O / Na2HPO4) pH 5.5; molarity not stated',
+     atmosphere: 'not stated',
+     vessel: 'autoclave; container and headspace not stated',
+     post_heat: 'cooled to 20 C (cold-water bath); 24 h at 4 C; then REHEATED: 5 d at 4 C and 30 min boiling',
+     replicates: 3,
+     not_detected: ['THIOPH_2ME', 'THIOPH_2_3MEBUTYL', 'THIOPH_2ACETYL_4ME'],
+     source_table: 'Table 1 column B2; Table 3 column B2 (ug/kg, average ± st.dev., n = 3)',
+     condition_quote: 'Table 1: buffer solution 50 ml; xylose 4 mmol; L-cysteine 4 mmol; lecithin 0.24%; cephalin 0; Reheat treatment Yes. / Sec. 2.2: ''heated at 120 C for 60 min in an autoclave ... cooled to room temperature (20 C) with a cold-water bath and then placed at 4 C aging for 24 h. The reheating treatment included chilling storage at 4 C for 5 days, and then a boiling for 30 min.'''}
+  zhang2021_tab3_C1_cephalin:
+    {ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat',
+     engine_species_missing: ['THIOPH_2ME', 'THIOL_2ME_PENTANE_3', 'THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2_4MEPENTYL', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2CHO_3ME', 'THIOPH_2_E2BUTENYL', 'THIOPH_25DICHO', 'SOY_PE'],
+     t_c: 120,
+     t_c_basis: 'printed: ''heated at 120 C for 60 min in an autoclave''',
+     minutes: 60,
+     initial_mmol_L: {PENT: 80, Cys: 80},
+     concentration_basis: 'printed (Table 1): 4 mmol xylose + 4 mmol L-cysteine in 50 mL buffer = 80 mmol/L each; solute volume ignored',
+     phospholipid_pct: {lecithin: 0, cephalin: 0.07},
+     phospholipid_basis: 'Table 1 as printed; % basis (w/v or w/w) not stated; soybean lecithin and cephalin > 98 %',
+     label_ph: 5.5,
+     ph_measured_at: 'not stated (pH of the buffer as prepared)',
+     buffer: 'sodium phosphate (NaH2PO4.2H2O / Na2HPO4) pH 5.5; molarity not stated',
+     atmosphere: 'not stated',
+     vessel: 'autoclave; container and headspace not stated',
+     post_heat: 'cooled to 20 C (cold-water bath); 24 h at 4 C',
+     replicates: 3,
+     not_detected: ['THIOPH_2ME', 'THIOPH_2_3MEBUTYL', 'THIOPH_2_4MEPENTYL', 'THIOPH_2ACETYL_4ME'],
+     source_table: 'Table 1 column C1; Table 3 column C1 (ug/kg, average ± st.dev., n = 3)',
+     condition_quote: 'Table 1: buffer solution 50 ml; xylose 4 mmol; L-cysteine 4 mmol; lecithin 0; cephalin 0.07%; Reheat treatment No. / Sec. 2.2: ''heated at 120 C for 60 min in an autoclave ... cooled to room temperature (20 C) with a cold-water bath and then placed at 4 C aging for 24 h. The reheating treatment included chilling storage at 4 C for 5 days, and then a boiling for 30 min.'''}
+  zhang2021_tab3_C2_cephalin_reheated:
+    {ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat',
+     engine_species_missing: ['THIOPH_2ME', 'THIOL_2ME_PENTANE_3', 'THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2_4MEPENTYL', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2CHO_3ME', 'THIOPH_2_E2BUTENYL', 'THIOPH_25DICHO', 'SOY_PE'],
+     t_c: 120,
+     t_c_basis: 'printed: ''heated at 120 C for 60 min in an autoclave''',
+     minutes: 60,
+     initial_mmol_L: {PENT: 80, Cys: 80},
+     concentration_basis: 'printed (Table 1): 4 mmol xylose + 4 mmol L-cysteine in 50 mL buffer = 80 mmol/L each; solute volume ignored',
+     phospholipid_pct: {lecithin: 0, cephalin: 0.07},
+     phospholipid_basis: 'Table 1 as printed; % basis (w/v or w/w) not stated; soybean lecithin and cephalin > 98 %',
+     label_ph: 5.5,
+     ph_measured_at: 'not stated (pH of the buffer as prepared)',
+     buffer: 'sodium phosphate (NaH2PO4.2H2O / Na2HPO4) pH 5.5; molarity not stated',
+     atmosphere: 'not stated',
+     vessel: 'autoclave; container and headspace not stated',
+     post_heat: 'cooled to 20 C (cold-water bath); 24 h at 4 C; then REHEATED: 5 d at 4 C and 30 min boiling',
+     replicates: 3,
+     not_detected: ['THIOPH_2_3MEBUTYL', 'THIOPH_2_4MEPENTYL'],
+     source_table: 'Table 1 column C2; Table 3 column C2 (ug/kg, average ± st.dev., n = 3)',
+     condition_quote: 'Table 1: buffer solution 50 ml; xylose 4 mmol; L-cysteine 4 mmol; lecithin 0; cephalin 0.07%; Reheat treatment Yes. / Sec. 2.2: ''heated at 120 C for 60 min in an autoclave ... cooled to room temperature (20 C) with a cold-water bath and then placed at 4 C aging for 24 h. The reheating treatment included chilling storage at 4 C for 5 days, and then a boiling for 30 min.'''}
+  zhang2021_tab3_D1_lecithin_cephalin:
+    {ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat',
+     engine_species_missing: ['THIOPH_2ME', 'THIOL_2ME_PENTANE_3', 'THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2_4MEPENTYL', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2CHO_3ME', 'THIOPH_2_E2BUTENYL', 'THIOPH_25DICHO', 'SOY_PC', 'SOY_PE'],
+     t_c: 120,
+     t_c_basis: 'printed: ''heated at 120 C for 60 min in an autoclave''',
+     minutes: 60,
+     initial_mmol_L: {PENT: 80, Cys: 80},
+     concentration_basis: 'printed (Table 1): 4 mmol xylose + 4 mmol L-cysteine in 50 mL buffer = 80 mmol/L each; solute volume ignored',
+     phospholipid_pct: {lecithin: 0.24, cephalin: 0.24},
+     phospholipid_basis: 'Table 1 as printed; % basis (w/v or w/w) not stated; soybean lecithin and cephalin > 98 %',
+     label_ph: 5.5,
+     ph_measured_at: 'not stated (pH of the buffer as prepared)',
+     buffer: 'sodium phosphate (NaH2PO4.2H2O / Na2HPO4) pH 5.5; molarity not stated',
+     atmosphere: 'not stated',
+     vessel: 'autoclave; container and headspace not stated',
+     post_heat: 'cooled to 20 C (cold-water bath); 24 h at 4 C',
+     replicates: 3,
+     not_detected: ['THIOPH_2_3MEBUTYL', 'THIOPH_2CHO', 'THIOPH_2_E2BUTENYL', 'THIOPH_25DICHO'],
+     source_table: 'Table 1 column D1; Table 3 column D1 (ug/kg, average ± st.dev., n = 3)',
+     condition_quote: 'Table 1: buffer solution 50 ml; xylose 4 mmol; L-cysteine 4 mmol; lecithin 0.24%; cephalin 0.24%; Reheat treatment No. / Sec. 2.2: ''heated at 120 C for 60 min in an autoclave ... cooled to room temperature (20 C) with a cold-water bath and then placed at 4 C aging for 24 h. The reheating treatment included chilling storage at 4 C for 5 days, and then a boiling for 30 min.''',
+     composition_conflict: 'Table 1 prints D1 0.24 % + 0.24 % and D2 0.07 % + 0.07 %, but the text treats D2 as the reheated D1: one D column is a misprint, which one is not printed (unresolved). Dose uncertain; D1 -> D2 is not a clean reheating contrast.'}
+  zhang2021_tab3_D2_lecithin_cephalin_reheated:
+    {ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat',
+     engine_species_missing: ['THIOPH_2ME', 'THIOL_2ME_PENTANE_3', 'THIOPH_2_3MEBUTYL', 'THIOPHENONE_2ME_DIHYDRO', 'THIOPH_2_4MEPENTYL', 'THIOPH_2CHO', 'THIOPH_2ACETYL_4ME', 'THIOPH_2CHO_3ME', 'THIOPH_2_E2BUTENYL', 'THIOPH_25DICHO', 'SOY_PC', 'SOY_PE'],
+     t_c: 120,
+     t_c_basis: 'printed: ''heated at 120 C for 60 min in an autoclave''',
+     minutes: 60,
+     initial_mmol_L: {PENT: 80, Cys: 80},
+     concentration_basis: 'printed (Table 1): 4 mmol xylose + 4 mmol L-cysteine in 50 mL buffer = 80 mmol/L each; solute volume ignored',
+     phospholipid_pct: {lecithin: 0.07, cephalin: 0.07},
+     phospholipid_basis: 'Table 1 as printed; % basis (w/v or w/w) not stated; soybean lecithin and cephalin > 98 %',
+     label_ph: 5.5,
+     ph_measured_at: 'not stated (pH of the buffer as prepared)',
+     buffer: 'sodium phosphate (NaH2PO4.2H2O / Na2HPO4) pH 5.5; molarity not stated',
+     atmosphere: 'not stated',
+     vessel: 'autoclave; container and headspace not stated',
+     post_heat: 'cooled to 20 C (cold-water bath); 24 h at 4 C; then REHEATED: 5 d at 4 C and 30 min boiling',
+     replicates: 3,
+     not_detected: ['THIOPH_2CHO'],
+     source_table: 'Table 1 column D2; Table 3 column D2 (ug/kg, average ± st.dev., n = 3)',
+     condition_quote: 'Table 1: buffer solution 50 ml; xylose 4 mmol; L-cysteine 4 mmol; lecithin 0.07%; cephalin 0.07%; Reheat treatment Yes. / Sec. 2.2: ''heated at 120 C for 60 min in an autoclave ... cooled to room temperature (20 C) with a cold-water bath and then placed at 4 C aging for 24 h. The reheating treatment included chilling storage at 4 C for 5 days, and then a boiling for 30 min.''',
+     composition_conflict: 'Table 1 prints D1 0.24 % + 0.24 % and D2 0.07 % + 0.07 %, but the text treats D2 as the reheated D1: one D column is a misprint, which one is not printed (unresolved). Dose uncertain; D1 -> D2 is not a clean reheating contrast.'}
+rows:
+  - {pot: 'zhang2021_tab3_A1_no_phospholipid', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2ME', t_min: 60, value: 0.58, unit: 'ug_kg', sd: 0.03, n: 3, letters: 'c', printed: 'Table 3 row 4 (p. 4), 2-Methylthiophene, group A1: 0.58 ± 0.03 c ug/kg; readers A and B identical', read_error: 0.0037, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B1_lecithin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2ME', t_min: 60, value: 0.76, unit: 'ug_kg', sd: 0.36, n: 3, letters: 'bc', printed: 'Table 3 row 4 (p. 4), 2-Methylthiophene, group B1: 0.76 ± 0.36 bc ug/kg; readers A and B identical', read_error: 0.0029, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2ME', t_min: 60, value: 1.42, unit: 'ug_kg', sd: 0.52, n: 3, letters: 'ab', printed: 'Table 3 row 4 (p. 4), 2-Methylthiophene, group C2: 1.42 ± 0.52 ab ug/kg; readers A and B identical', read_error: 0.0015, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D1_lecithin_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2ME', t_min: 60, value: 1.88, unit: 'ug_kg', sd: 0.64, n: 3, letters: 'a', printed: 'Table 3 row 4 (p. 4), 2-Methylthiophene, group D1: 1.88 ± 0.64 a ug/kg; readers A and B identical', read_error: 0.0012, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2ME', t_min: 60, value: 1.45, unit: 'ug_kg', sd: 0.29, n: 3, letters: 'ab', printed: 'Table 3 row 4 (p. 4), 2-Methylthiophene, group D2: 1.45 ± 0.29 ab ug/kg; readers A and B identical', read_error: 0.0015, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A1_no_phospholipid', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'MFT', t_min: 60, value: 15.04, unit: 'ug_kg', sd: 1.53, n: 3, letters: 'a', printed: 'Table 3 row 8 (p. 4), 2-Methyl-3-furanthiol, group A1: 15.04 ± 1.53 a ug/kg; readers A and B identical', read_error: 0.00014, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A2_no_phospholipid_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'MFT', t_min: 60, value: 12.37, unit: 'ug_kg', sd: 2.28, n: 3, letters: 'ab', printed: 'Table 3 row 8 (p. 4), 2-Methyl-3-furanthiol, group A2: 12.37 ± 2.28 ab ug/kg; readers A and B identical', read_error: 0.00018, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B1_lecithin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'MFT', t_min: 60, value: 8.95, unit: 'ug_kg', sd: 1.39, n: 3, letters: 'bc', printed: 'Table 3 row 8 (p. 4), 2-Methyl-3-furanthiol, group B1: 8.95 ± 1.39 bc ug/kg; readers A and B identical', read_error: 0.00024, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B2_lecithin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'MFT', t_min: 60, value: 6.31, unit: 'ug_kg', sd: 2.74, n: 3, letters: 'cd', printed: 'Table 3 row 8 (p. 4), 2-Methyl-3-furanthiol, group B2: 6.31 ± 2.74 cd ug/kg; readers A and B identical', read_error: 0.00034, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C1_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'MFT', t_min: 60, value: 5.36, unit: 'ug_kg', sd: 1.08, n: 3, letters: 'cd', printed: 'Table 3 row 8 (p. 4), 2-Methyl-3-furanthiol, group C1: 5.36 ± 1.08 cd ug/kg; readers A and B identical', read_error: 0.00041, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'MFT', t_min: 60, value: 6.53, unit: 'ug_kg', sd: 0.93, n: 3, letters: 'cd', printed: 'Table 3 row 8 (p. 4), 2-Methyl-3-furanthiol, group C2: 6.53 ± 0.93 cd ug/kg; readers A and B identical', read_error: 0.00033, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D1_lecithin_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'MFT', t_min: 60, value: 6.4, unit: 'ug_kg', sd: 2.1, n: 3, letters: 'cd', printed: 'Table 3 row 8 (p. 4), 2-Methyl-3-furanthiol, group D1: 6.40 ± 2.10 cd ug/kg; readers A and B identical', read_error: 0.00034, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'MFT', t_min: 60, value: 3.88, unit: 'ug_kg', sd: 1.45, n: 3, letters: 'd', printed: 'Table 3 row 8 (p. 4), 2-Methyl-3-furanthiol, group D2: 3.88 ± 1.45 d ug/kg; readers A and B identical', read_error: 0.00056, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A1_no_phospholipid', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOL_2ME_PENTANE_3', t_min: 60, value: 117.62, unit: 'ug_kg', sd: 3.53, n: 3, letters: 'a', printed: 'Table 3 row 10 (p. 4), 2-Methylpentane-3-thiol, group A1: 117.62 ± 3.53 a ug/kg; readers A and B identical', read_error: 1.8e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A2_no_phospholipid_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOL_2ME_PENTANE_3', t_min: 60, value: 67.52, unit: 'ug_kg', sd: 18.86, n: 3, letters: 'c', printed: 'Table 3 row 10 (p. 4), 2-Methylpentane-3-thiol, group A2: 67.52 ± 18.86 c ug/kg; readers A and B identical', read_error: 3.2e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B1_lecithin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOL_2ME_PENTANE_3', t_min: 60, value: 117.95, unit: 'ug_kg', sd: 22.98, n: 3, letters: 'a', printed: 'Table 3 row 10 (p. 4), 2-Methylpentane-3-thiol, group B1: 117.95 ± 22.98 a ug/kg; readers A and B identical', read_error: 1.8e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B2_lecithin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOL_2ME_PENTANE_3', t_min: 60, value: 90.81, unit: 'ug_kg', sd: 11.04, n: 3, letters: 'bc', printed: 'Table 3 row 10 (p. 4), 2-Methylpentane-3-thiol, group B2: 90.81 ± 11.04 bc ug/kg; readers A and B identical', read_error: 2.4e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C1_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOL_2ME_PENTANE_3', t_min: 60, value: 91.47, unit: 'ug_kg', sd: 22.11, n: 3, letters: 'abc', printed: 'Table 3 row 10 (p. 4), 2-Methylpentane-3-thiol, group C1: 91.47 ± 22.11 abc ug/kg; readers A and B identical', read_error: 2.4e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOL_2ME_PENTANE_3', t_min: 60, value: 77.18, unit: 'ug_kg', sd: 11.49, n: 3, letters: 'bc', printed: 'Table 3 row 10 (p. 4), 2-Methylpentane-3-thiol, group C2: 77.18 ± 11.49 bc ug/kg; readers A and B identical', read_error: 2.8e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D1_lecithin_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOL_2ME_PENTANE_3', t_min: 60, value: 128.92, unit: 'ug_kg', sd: 25.45, n: 3, letters: 'a', printed: 'Table 3 row 10 (p. 4), 2-Methylpentane-3-thiol, group D1: 128.92 ± 25.45 a ug/kg; readers A and B identical', read_error: 1.7e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOL_2ME_PENTANE_3', t_min: 60, value: 92.5, unit: 'ug_kg', sd: 22.01, n: 3, letters: 'abc', printed: 'Table 3 row 10 (p. 4), 2-Methylpentane-3-thiol, group D2: 92.50 ± 22.01 abc ug/kg; readers A and B identical', read_error: 2.3e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A1_no_phospholipid', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'FFT', t_min: 60, value: 153.59, unit: 'ug_kg', sd: 14.41, n: 3, letters: 'abc', printed: 'Table 3 row 14 (p. 4), Furfuryl mercaptan, group A1: 153.59 ± 14.41 abc ug/kg; readers A and B identical', read_error: 1.4e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A2_no_phospholipid_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'FFT', t_min: 60, value: 87.29, unit: 'ug_kg', sd: 14.32, n: 3, letters: 'c', printed: 'Table 3 row 14 (p. 4), Furfuryl mercaptan, group A2: 87.29 ± 14.32 c ug/kg; readers A and B identical', read_error: 2.5e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B1_lecithin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'FFT', t_min: 60, value: 176.73, unit: 'ug_kg', sd: 37.62, n: 3, letters: 'ab', printed: 'Table 3 row 14 (p. 4), Furfuryl mercaptan, group B1: 176.73 ± 37.62 ab ug/kg; readers A and B identical', read_error: 1.2e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B2_lecithin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'FFT', t_min: 60, value: 149.15, unit: 'ug_kg', sd: 17.29, n: 3, letters: 'bc', printed: 'Table 3 row 14 (p. 4), Furfuryl mercaptan, group B2: 149.15 ± 17.29 bc ug/kg; readers A and B identical', read_error: 1.5e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C1_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'FFT', t_min: 60, value: 106.79, unit: 'ug_kg', sd: 18.42, n: 3, letters: 'c', printed: 'Table 3 row 14 (p. 4), Furfuryl mercaptan, group C1: 106.79 ± 18.42 c ug/kg; readers A and B identical', read_error: 2e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'FFT', t_min: 60, value: 128.77, unit: 'ug_kg', sd: 29.64, n: 3, letters: 'bc', printed: 'Table 3 row 14 (p. 4), Furfuryl mercaptan, group C2: 128.77 ± 29.64 bc ug/kg; readers A and B identical', read_error: 1.7e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D1_lecithin_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'FFT', t_min: 60, value: 205.14, unit: 'ug_kg', sd: 18.61, n: 3, letters: 'a', printed: 'Table 3 row 14 (p. 4), Furfuryl mercaptan, group D1: 205.14 ± 18.61 a ug/kg; readers A and B identical', read_error: 1.1e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'FFT', t_min: 60, value: 159.99, unit: 'ug_kg', sd: 33.1, n: 3, letters: 'abc', printed: 'Table 3 row 14 (p. 4), Furfuryl mercaptan, group D2: 159.99 ± 33.10 abc ug/kg; readers A and B identical', read_error: 1.4e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_3MEBUTYL', t_min: 60, value: 1.28, unit: 'ug_kg', sd: 0.96, n: 3, letters: 'a', printed: 'Table 3 row 16 (p. 4), 2-(3-Methylbutyl)thiophene, group D2: 1.28 ± 0.96 a ug/kg; readers A and B identical', read_error: 0.0017, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A1_no_phospholipid', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPHENONE_2ME_DIHYDRO', t_min: 60, value: 4.01, unit: 'ug_kg', sd: 0.33, n: 3, letters: 'c', printed: 'Table 3 row 20 (p. 4), 3(2H)-Thiophenone, dihydro-2-methyl-, group A1: 4.01 ± 0.33 c ug/kg; readers A and B identical', read_error: 0.00054, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B2_lecithin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPHENONE_2ME_DIHYDRO', t_min: 60, value: 7.14, unit: 'ug_kg', sd: 0.37, n: 3, letters: 'b', printed: 'Table 3 row 20 (p. 4), 3(2H)-Thiophenone, dihydro-2-methyl-, group B2: 7.14 ± 0.37 b ug/kg; readers A and B identical', read_error: 0.0003, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C1_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPHENONE_2ME_DIHYDRO', t_min: 60, value: 3.75, unit: 'ug_kg', sd: 0.81, n: 3, letters: 'c', printed: 'Table 3 row 20 (p. 4), 3(2H)-Thiophenone, dihydro-2-methyl-, group C1: 3.75 ± 0.81 c ug/kg; readers A and B identical', read_error: 0.00058, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPHENONE_2ME_DIHYDRO', t_min: 60, value: 4.38, unit: 'ug_kg', sd: 0.21, n: 3, letters: 'c', printed: 'Table 3 row 20 (p. 4), 3(2H)-Thiophenone, dihydro-2-methyl-, group C2: 4.38 ± 0.21 c ug/kg; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D1_lecithin_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPHENONE_2ME_DIHYDRO', t_min: 60, value: 9.88, unit: 'ug_kg', sd: 1.87, n: 3, letters: 'a', printed: 'Table 3 row 20 (p. 4), 3(2H)-Thiophenone, dihydro-2-methyl-, group D1: 9.88 ± 1.87 a ug/kg; readers A and B identical', read_error: 0.00022, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPHENONE_2ME_DIHYDRO', t_min: 60, value: 6.72, unit: 'ug_kg', sd: 1.13, n: 3, letters: 'b', printed: 'Table 3 row 20 (p. 4), 3(2H)-Thiophenone, dihydro-2-methyl-, group D2: 6.72 ± 1.13 b ug/kg; readers A and B identical', read_error: 0.00032, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A1_no_phospholipid', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_4MEPENTYL', t_min: 60, value: 4.83, unit: 'ug_kg', sd: 2.49, n: 3, letters: 'c', printed: 'Table 3 row 26 (p. 4), Thiophene, 2-(4-methylpentyl)-, group A1: 4.83 ± 2.49 c ug/kg; readers A and B identical', read_error: 0.00045, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B1_lecithin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_4MEPENTYL', t_min: 60, value: 220.77, unit: 'ug_kg', sd: 36.67, n: 3, letters: 'a', printed: 'Table 3 row 26 (p. 4), Thiophene, 2-(4-methylpentyl)-, group B1: 220.77 ± 36.67 a ug/kg; readers A and B identical', read_error: 9.8e-06, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B2_lecithin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_4MEPENTYL', t_min: 60, value: 130.91, unit: 'ug_kg', sd: 14.99, n: 3, letters: 'b', printed: 'Table 3 row 26 (p. 4), Thiophene, 2-(4-methylpentyl)-, group B2: 130.91 ± 14.99 b ug/kg; readers A and B identical', read_error: 1.7e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D1_lecithin_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_4MEPENTYL', t_min: 60, value: 220.77, unit: 'ug_kg', sd: 83.31, n: 3, letters: 'a', printed: 'Table 3 row 26 (p. 4), Thiophene, 2-(4-methylpentyl)-, group D1: 220.77 ± 83.31 a ug/kg; readers A and B identical; SAME MEAN AS B1 (220.77, SD 36.67): kept as printed, both Subtotals need it, a copy error upstream of the sheet not excluded', read_error: 9.8e-06, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_4MEPENTYL', t_min: 60, value: 163.72, unit: 'ug_kg', sd: 55.75, n: 3, letters: 'ab', printed: 'Table 3 row 26 (p. 4), Thiophene, 2-(4-methylpentyl)-, group D2: 163.72 ± 55.75 ab ug/kg; readers A and B identical', read_error: 1.3e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A2_no_phospholipid_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO', t_min: 60, value: 7.38, unit: 'ug_kg', sd: 0.47, n: 3, letters: 'a', printed: 'Table 3 row 27 (p. 4), 2-Thenaldehyde, group A2: 7.38 ± 0.47 a ug/kg; readers A and B identical', read_error: 0.00029, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B2_lecithin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO', t_min: 60, value: 4.83, unit: 'ug_kg', sd: 0.14, n: 3, letters: 'c', printed: 'Table 3 row 27 (p. 4), 2-Thenaldehyde, group B2: 4.83 ± 0.14 c ug/kg; readers A and B identical', read_error: 0.00045, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C1_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO', t_min: 60, value: 5.46, unit: 'ug_kg', sd: 0.67, n: 3, letters: 'c', printed: 'Table 3 row 27 (p. 4), 2-Thenaldehyde, group C1: 5.46 ± 0.67 c ug/kg; readers A and B identical', read_error: 0.0004, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO', t_min: 60, value: 6.28, unit: 'ug_kg', sd: 0.68, n: 3, letters: 'b', printed: 'Table 3 row 27 (p. 4), 2-Thenaldehyde, group C2: 6.28 ± 0.68 b ug/kg; readers A and B identical', read_error: 0.00035, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A2_no_phospholipid_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2ACETYL_4ME', t_min: 60, value: 14.64, unit: 'ug_kg', sd: 1.44, n: 3, letters: 'a', printed: 'Table 3 row 28 (p. 4), Ethanone, 1-(4-methyl-2-thienyl)-, group A2: 14.64 ± 1.44 a ug/kg; readers A and B identical', read_error: 0.00015, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2ACETYL_4ME', t_min: 60, value: 0.92, unit: 'ug_kg', sd: 0.1, n: 3, letters: 'c', printed: 'Table 3 row 28 (p. 4), Ethanone, 1-(4-methyl-2-thienyl)-, group C2: 0.92 ± 0.10 c ug/kg; readers A and B identical', read_error: 0.0024, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D1_lecithin_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2ACETYL_4ME', t_min: 60, value: 4.37, unit: 'ug_kg', sd: 0.41, n: 3, letters: 'b', printed: 'Table 3 row 28 (p. 4), Ethanone, 1-(4-methyl-2-thienyl)-, group D1: 4.37 ± 0.41 b ug/kg; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2ACETYL_4ME', t_min: 60, value: 1.84, unit: 'ug_kg', sd: 0.57, n: 3, letters: 'c', printed: 'Table 3 row 28 (p. 4), Ethanone, 1-(4-methyl-2-thienyl)-, group D2: 1.84 ± 0.57 c ug/kg; readers A and B identical', read_error: 0.0012, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A2_no_phospholipid_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO_3ME', t_min: 60, value: 7.27, unit: 'ug_kg', sd: 0.93, n: 3, letters: 'a', printed: 'Table 3 row 29 (p. 4), 3-Methyl-2-thiophenecarboxaldehyde, group A2: 7.27 ± 0.93 a ug/kg; readers A and B identical', read_error: 0.0003, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B1_lecithin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO_3ME', t_min: 60, value: 4.25, unit: 'ug_kg', sd: 0.55, n: 3, letters: 'bc', printed: 'Table 3 row 29 (p. 4), 3-Methyl-2-thiophenecarboxaldehyde, group B1: 4.25 ± 0.55 bc ug/kg; readers A and B identical', read_error: 0.00051, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B2_lecithin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO_3ME', t_min: 60, value: 5.04, unit: 'ug_kg', sd: 1.31, n: 3, letters: 'bc', printed: 'Table 3 row 29 (p. 4), 3-Methyl-2-thiophenecarboxaldehyde, group B2: 5.04 ± 1.31 bc ug/kg; readers A and B identical', read_error: 0.00043, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C1_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO_3ME', t_min: 60, value: 5.18, unit: 'ug_kg', sd: 0.27, n: 3, letters: 'bc', printed: 'Table 3 row 29 (p. 4), 3-Methyl-2-thiophenecarboxaldehyde, group C1: 5.18 ± 0.27 bc ug/kg; readers A and B identical', read_error: 0.00042, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO_3ME', t_min: 60, value: 3.58, unit: 'ug_kg', sd: 0.22, n: 3, letters: 'c', printed: 'Table 3 row 29 (p. 4), 3-Methyl-2-thiophenecarboxaldehyde, group C2: 3.58 ± 0.22 c ug/kg; readers A and B identical', read_error: 0.00061, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D1_lecithin_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO_3ME', t_min: 60, value: 5.83, unit: 'ug_kg', sd: 1.43, n: 3, letters: 'b', printed: 'Table 3 row 29 (p. 4), 3-Methyl-2-thiophenecarboxaldehyde, group D1: 5.83 ± 1.43 b ug/kg; readers A and B identical', read_error: 0.00037, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2CHO_3ME', t_min: 60, value: 3.95, unit: 'ug_kg', sd: 0.63, n: 3, letters: 'bc', printed: 'Table 3 row 29 (p. 4), 3-Methyl-2-thiophenecarboxaldehyde, group D2: 3.95 ± 0.63 bc ug/kg; readers A and B identical', read_error: 0.00055, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A2_no_phospholipid_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_E2BUTENYL', t_min: 60, value: 15.14, unit: 'ug_kg', sd: 6.83, n: 3, letters: 'b', printed: 'Table 3 row 32 (p. 4), 2-[(E)-2-Butenyl]thiophene, group A2: 15.14 ± 6.83 b ug/kg; readers A and B identical', read_error: 0.00014, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B2_lecithin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_E2BUTENYL', t_min: 60, value: 66.16, unit: 'ug_kg', sd: 8.52, n: 3, letters: 'a', printed: 'Table 3 row 32 (p. 4), 2-[(E)-2-Butenyl]thiophene, group B2: 66.16 ± 8.52 a ug/kg; readers A and B identical', read_error: 3.3e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C1_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_E2BUTENYL', t_min: 60, value: 24.26, unit: 'ug_kg', sd: 2.89, n: 3, letters: 'b', printed: 'Table 3 row 32 (p. 4), 2-[(E)-2-Butenyl]thiophene, group C1: 24.26 ± 2.89 b ug/kg; readers A and B identical', read_error: 9e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_E2BUTENYL', t_min: 60, value: 23.03, unit: 'ug_kg', sd: 3.77, n: 3, letters: 'b', printed: 'Table 3 row 32 (p. 4), 2-[(E)-2-Butenyl]thiophene, group C2: 23.03 ± 3.77 b ug/kg; readers A and B identical', read_error: 9.4e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_2_E2BUTENYL', t_min: 60, value: 70.21, unit: 'ug_kg', sd: 20.01, n: 3, letters: 'a', printed: 'Table 3 row 32 (p. 4), 2-[(E)-2-Butenyl]thiophene, group D2: 70.21 ± 20.01 a ug/kg; readers A and B identical', read_error: 3.1e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A1_no_phospholipid', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_25DICHO', t_min: 60, value: 18.95, unit: 'ug_kg', sd: 3.39, n: 3, letters: 'cd', printed: 'Table 3 row 33 (p. 5), 2,5-Thiophenedicarboxaldehyde, group A1: 18.95 ± 3.39 cd ug/kg; readers A and B identical', read_error: 0.00011, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_A2_no_phospholipid_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_25DICHO', t_min: 60, value: 15.01, unit: 'ug_kg', sd: 1.99, n: 3, letters: 'd', printed: 'Table 3 row 33 (p. 5), 2,5-Thiophenedicarboxaldehyde, group A2: 15.01 ± 1.99 d ug/kg; readers A and B identical', read_error: 0.00014, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B1_lecithin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_25DICHO', t_min: 60, value: 32.55, unit: 'ug_kg', sd: 4.63, n: 3, letters: 'a', printed: 'Table 3 row 33 (p. 5), 2,5-Thiophenedicarboxaldehyde, group B1: 32.55 ± 4.63 a ug/kg; readers A and B identical', read_error: 6.7e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_B2_lecithin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_25DICHO', t_min: 60, value: 22.12, unit: 'ug_kg', sd: 3.03, n: 3, letters: 'bcd', printed: 'Table 3 row 33 (p. 5), 2,5-Thiophenedicarboxaldehyde, group B2: 22.12 ± 3.03 bcd ug/kg; readers A and B identical', read_error: 9.8e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C1_cephalin', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_25DICHO', t_min: 60, value: 23.9, unit: 'ug_kg', sd: 3.17, n: 3, letters: 'bc', printed: 'Table 3 row 33 (p. 5), 2,5-Thiophenedicarboxaldehyde, group C1: 23.90 ± 3.17 bc ug/kg; readers A and B identical', read_error: 9.1e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_C2_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_25DICHO', t_min: 60, value: 16.85, unit: 'ug_kg', sd: 2.14, n: 3, letters: 'cd', printed: 'Table 3 row 33 (p. 5), 2,5-Thiophenedicarboxaldehyde, group C2: 16.85 ± 2.14 cd ug/kg; readers A and B identical', read_error: 0.00013, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'zhang2021_tab3_D2_lecithin_cephalin_reheated', ledger_id: 'zhang2021_tab3_cys_xyl_phospholipid_reheat', species: 'THIOPH_25DICHO', t_min: 60, value: 26.71, unit: 'ug_kg', sd: 5.29, n: 3, letters: 'ab', printed: 'Table 3 row 33 (p. 5), 2,5-Thiophenedicarboxaldehyde, group D2: 26.71 ± 5.29 ab ug/kg; readers A and B identical', read_error: 8.1e-05, read_error_basis: 'half the last printed digit (0.005 ug/kg), in dex; the printed SD (n = 3) carries the scatter'}
