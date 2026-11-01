@@ -405,3 +405,7 @@ the full verification.
 ## 2026-10-31 — An edit to the conflicts register or the measurement ledger stales sulfur_reaction_evidence
 - **Pattern:** twice in one day a branch failed the freshness gate after only register / ledger edits, because `results/validation/sulfur_reaction_evidence.json` hashes `docs/reference/conflicts_register.yml` and `data/lit/measurement_ledger/trunk.yml`.
 - **Rule:** after any edit to either file, run `python scripts/generators/build_sulfur_reaction_evidence.py` before staging (it takes seconds), and `regenerate_signature_records.py --dry-run` lists anything else stale.
+
+## 2026-11-01 — A worker's switches are not the parent's: post-processing in the parent read a different state
+- **Pattern:** the sub-model fits installed each pot's switches in `run_task`, then predicted the rows in the PARENT. Serially the parent held the last task's state; with `MAILLARD_WORKERS > 1` it held its own, so an entry arm's pH rows were predicted without the trunk solutes the integration had in its charge balance (Cao 2017's hold-out pH, up to 0.14 pH; found by A3 phase 2's serial / fork / persistent comparison). The fitted rows were not pH rows, but every hold-out pH a forked run reported was computed in the wrong state.
+- **Rule:** a result is read in the configuration it was computed in: build each task's `Config` in the caller (`parallel.configured`) and read its result under it (`parallel.run_under`). A check of a parallel path compares serial, forked and persistent runs, not one of them against a record.
