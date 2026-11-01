@@ -501,3 +501,31 @@ def test_the_joint_fits_install_through_a_config_sets_what_it_set_before(monkeyp
                     joint.install(variant)
                     assert config.Config.from_globals() == legacy, arm
                     assert legacy != before
+
+
+def test_the_choice_robustness_q10_sweep_sets_every_binding(monkeypatch):
+    """The bug the review found: build_choice_robustness set only parameters_lipid.Q10_ASSUMPTION, so the rate used
+    the alternative while lipid.integrate_lipid reported ``q10_used`` (and the decades of extrapolation) from its own,
+    re-imported binding, still the shipped 2.449. Now the sweep installs a Config: both agree, and nothing is left."""
+    monkeypatch.syspath_prepend(str(ROOT / "scripts" / "generators"))
+    import build_choice_robustness as robustness
+    from src.kinetic_core import lipid
+    from src.kinetic_core.engine import core_lipid_model
+
+    branch, composition = core_lipid_model()
+    charge = lipid.charge_from_carrier(pl.LIPID_CARRIERS["frankel_pure_hydroperoxide"], composition)
+
+    def measure():
+        segment = lipid.integrate_lipid(charge, [(1.0, 180.0)], branch).metadata["segments"][0]
+        return segment["q10_used"], segment["k_LOOH_decomp_per_min"], segment["decades_of_extrapolation_from_25C"]
+
+    alternatives = [{"name": "moist_matrix", "value": 1.6}, {"name": "bulk_oil", "value": 3.3}]
+    out = robustness.q10_sweep(alternatives, measure)
+    for a in alternatives:
+        used, k, decades = out[a["name"]]
+        q10 = dataclasses.replace(pl.Q10Assumption(), default=a["value"])
+        assert used == a["value"]                                              # the report ...
+        assert k == pl.k_looh_decomp_per_min(180.0, a["value"])                 # ... names the rate's Q10
+        assert decades == q10.decades_of_extrapolation(180.0)
+    assert out["moist_matrix"][1] != out["bulk_oil"][1]
+    assert config.Config.from_globals() == config.Config.shipped()            # every binding restored
