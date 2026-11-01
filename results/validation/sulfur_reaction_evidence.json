@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-01",
     "git": {
-      "commit": "55d20af6813726ce4fef2d46b8b0030e17416c71",
-      "short": "55d20af6",
+      "commit": "19c66e99beefcbf969fec853c3c67823641b9e96",
+      "short": "19c66e99",
       "branch": "cf077-pyrazine-cross-pair-factor",
       "dirty": true
     },
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "92534dca9c15f2f653d72ce1a494371a2142aa284a80fa0de5783d7236f21356"
+        "sha256": "7c3810b4e6ab7b18101940400f8464b3719750597ac003fc5b893183992d6365"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
