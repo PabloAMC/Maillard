@@ -5136,3 +5136,77 @@ entries:
     condition_quote: ""
     flags: [si_read_2026-11-01, phase_basis_differs, no_sd_printed, identity_by_library, internal_inconsistency, "also_relevant: sulfur"]
     note: "Ranking signature only, never absolute (the IS is far more oil-retained than MFT / FFT, inflating oil-phase numbers by an estimated 10-100x): Raw-MR oil-phase FFT coconut 2141 > palm 1407 > peanut 1158 > olive 642 > corn 53 ng/mL, Spearman rho -0.9 against iodine value (n = 5); ENTH / raw x0.57-0.95 on the thiol subtotal (mild oxidation, confounded with lipase hydrolysis). MFT undetected in 5 of 10 oil phases. Corn ENTH-MR thiol subtotal misprinted (110.97 vs 113.51 summed; its MFT 0.54 uncertain). arms: 5 oils x raw vs ENTH (same lab, same HS-SPME assay)."
+  # ---- ruan2025 ----
+  - id: ruan2025_tab1_lipid_volatiles_by_fatty_acid
+    dossier: ruan2025_extraction.md
+    paper: "Ruan, Hu, Su, Li, Yin, Han, Liu & Cai 2025 Food Res Int 221:117512"
+    lab: "Henan Univ. of Technology (Yin W-t)"
+    system: "sesame-meal enzymatic hydrolysate 150 g/L (defatted) alone or + 2.0 g of one free fatty acid (C16:0, C18:0, C20:0, C18:1, C18:2, C18:3; ~0.22 v/v oil phase) per 10 mL"
+    medium: "0.2 M sodium phosphate pH 6.5, 50 mL sealed high-pressure bottle (~38 mL headspace, gas not stated), oil bath; aqueous phase only after centrifugation; SAFE + GC-O-MS, 4-nonanol IS"
+    temperature_c: [160]
+    ph: {initial: [6.5], measured_during: false, final: 5.93}
+    time_min: [40]
+    species: [hexanal, nonanal, (E)-2-heptenal, 2-pentylfuran, 1-penten-3-ol, pentanoic acid, 2-heptanone, 2-ethyl-5-methylfuran, 2-butylpyridine]
+    kind: endpoint
+    location: "Table 1 pp. 8-10 (read as image; dossier sec. 4.4 'Lipid-oxidation volatiles')"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "heated at 160 ± 1 °C for 40 min using a DF-101S oil bath"
+    flags: [single_is_no_response_factor, oil_phase_partition_confound, matrix_precursor_composition, heating_up_included_in_time, internal_inconsistency, presence_only]
+    note: "Aqueous phase only (FA phase discarded before SAFE). Hexanal / 2-PF / heptenal / pentanoic acid max with C18:2, 1-penten-3-ol only C18:3, nonanal only C18:1; all ND in SMH alone and in saturated arms (CF-033 negative control, LOD unstated). Only GC-O-active compounds listed. RI column wrong for several compounds (identity flag). final pH = SMH control; FA arms 5.51-5.67 (Fig. 4C)."
+  - id: ruan2025_tab1_pyrazines_lipid_vs_no_lipid
+    dossier: ruan2025_extraction.md
+    paper: "Ruan, Hu, Su, Li, Yin, Han, Liu & Cai 2025 Food Res Int 221:117512"
+    lab: "Henan Univ. of Technology (Yin W-t)"
+    system: "sesame-meal enzymatic hydrolysate 150 g/L alone or + 2.0 g of one of six free fatty acids per 10 mL (equal mass, 6.4-7.8 mmol)"
+    medium: "0.2 M sodium phosphate pH 6.5, sealed 50 mL bottle, oil bath; aqueous phase only; SAFE + GC-MS, 4-nonanol IS"
+    temperature_c: [160]
+    ph: {initial: [6.5], measured_during: false, final: 5.93}
+    time_min: [40]
+    species: [pyrazine, methylpyrazine, '2,5-dimethylpyrazine', '2,3-dimethylpyrazine', 2-ethyl-5-methylpyrazine, '2,3,5-trimethylpyrazine', '3-ethyl-2,5-dimethylpyrazine', acetylpyrazine, sum of pyrazines]
+    kind: endpoint
+    location: "Table 1 p. 8 (read as image; dossier sec. 4.4 'Pyrazines' and sec. 5)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "2.0 g of each fatty acid ... was mixed with the SMH-buffer solution"
+    flags: [single_is_no_response_factor, oil_phase_partition_confound, matrix_precursor_composition, buffer_confounds_ph, condition_uncertain]
+    note: "Sum of pyrazines 27.74 (SMH) -> 10.40-13.86 mg/kg in every FA arm, saturated as much as unsaturated; fall grows with pyrazine log K_ow (pyrazine ~1.0, 2,5-DMP ~0.35, TMP ~0.2): partition into the discarded 0.22 v/v FA phase plus lower final pH, not carbonyl competition (dossier sec. 5, P ~0.7). Not a lipid-carbonyl coupling datum."
+  - id: ruan2025_fig2_fatty_acid_loss_with_without_smh
+    dossier: ruan2025_extraction.md
+    paper: "Ruan, Hu, Su, Li, Yin, Han, Liu & Cai 2025 Food Res Int 221:117512"
+    lab: "Henan Univ. of Technology (Yin W-t)"
+    system: "2.0 g free C16:0 / C18:0 / C20:0 / C18:1 / C18:2 / C18:3 in 10 mL 0.2 M phosphate pH 6.5, with or without 1.5 g sesame-meal hydrolysate"
+    medium: "sealed 50 mL bottle, ~38 mL headspace (gas not stated), oil bath; FA phase methylated (BF3-MeOH), GC-FID, BHT as 'internal standard'"
+    temperature_c: [160]
+    ph: {initial: [6.5], measured_during: false, final: null}
+    time_min: [40]
+    species: [palmitic acid, stearic acid, arachidic acid, oleic acid, linoleic acid, linolenic acid]
+    kind: endpoint
+    location: "Fig. 2 p. 5 and sec. 3.2 text (dossier sec. 4.2)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "thermal loss rate of fatty acids in various reaction models after a 40-min reaction at 160 °C"
+    flags: [internal_inconsistency, text_quoted_figure_sourced, condition_uncertain, no_error_bars]
+    note: "NOT an oxidation rate: 12-45 % 'loss' with saturated ~ unsaturated, while ~0.33 mmol O2 in the headspace caps oxidation at <= ~5 mol % of ~7 mmol FA (dossier sec. 6 flag 2). Text swaps the FA-only and FA-SMH numbers relative to Fig. 2; the figure (SMH lowers loss) agrees with the text's words. Do not key into any lipid oxidation constant."
+  # ---- desousafontes2024 ----
+  - id: desousafontes2024_tab2_lipid_volatiles_viscera_hydrolysate_flavourings
+    dossier: desousafontes2024_extraction.md
+    paper: "de Sousa Fontes, Galvao, de Carvalho, Guedes, Lima, Bezerra & Madruga 2024 Food Chem 445:138398"
+    lab: "UFPB Joao Pessoa (Madruga)"
+    system: "goat viscera mix (GV), its Alcalase hydrolysate (H; lipid 15.25 g/100 g dry), and H + Cys + Xyl + thiamine heated at initial pH 4 / 6 (F4, F6; lipid ~0.53 g/100 g wet)"
+    medium: "unbuffered hydrolysate, pH set with 1 M HCl; 100 mL screw-cap flask, ~50 mL air headspace, autoclave"
+    temperature_c: [121]
+    ph: {initial: [4.0, 6.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [pentanal, hexanal, heptanal, octanal, nonanal, decanal, hexadecanal, (E)-2-octenal, (Z)-2-nonenal, (E)-2-decenal, '(E,E)-2,4-decadienal', 1-octen-3-ol, 2-pentylfuran, (E)-2-(2-pentenyl)furan, 2-alkanones, hexanoic acid]
+    kind: endpoint
+    location: "Table 2 pp. 4-5 (acids, alcohols, aldehydes, ketones, alkylfurans; GV in ug/kg, H/F4/F6 in ug/L, n = 3; dossier sec. 3.3); Table 1 p. 3 lipid content"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "Twenty milliliters of goat viscera protein hydrolysate were transferred to 100 mL screw-on flasks"
+    flags: [matrix_food, ph_start_only, unbuffered, single_is_no_response_factor, supplement_missing, internal_inconsistency, 'also_in_sulfur_ledger: desousafontes2024_tab2_sulfur_thiazoles_ph4_ph6_goat_hydrolysate']
+    note: "Lipid-containing Maillard pot (organ lipid, fatty acids in missing Table S1): lipid aldehydes, 2-pentylfuran and ketones all HIGHER at initial pH 6 than pH 4 (hexanal x1.4, octanal x41, 2-pentylfuran x9.5), opposite in sign to madruga1995 beef (aldehydes rise as pH falls). No lipid-free or reactant-free arm with numbers. Letters inverted for nonanal and (Z)-2-nonenal."

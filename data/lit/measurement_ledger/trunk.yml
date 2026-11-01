@@ -8281,3 +8281,132 @@ entries:
     condition_quote: ""
     flags: [matrix_food, ph_not_measured, vessel_not_stated, aw_label_is_starting_aw_not_reaction_aw, partial_transcription, low_moisture_no_aw_term]
     note: "3-DG highest at 100 C and falling with T; values below the axis break (~0-500 ug/g) are unreadable, so CPI-S at a_w 0.53 / 0.75 and all 200 C cells are missing. Unheated CPI-M already holds 209.23 ug/g (formed during co-lyophilisation, ~47x CPI-S). At 100 C 3-DG and colour peak at a_w 0.97, against the a_w ~0.5 maxima of Warmbier / Pereyra (reaction a_w not the label). Two readers before keying. arms: a_w x T x maltose vs sucrose (same lab, same LC-MS/MS assay)."
+  # ---- ruan2025 ----
+  - id: ruan2025_fig1_carbohydrate_and_free_amino_acid_consumption
+    dossier: ruan2025_extraction.md
+    paper: "Ruan, Hu, Su, Li, Yin, Han, Liu & Cai 2025 Food Res Int 221:117512"
+    lab: "Henan Univ. of Technology (Yin W-t)"
+    system: "sesame-meal enzymatic hydrolysate 150 g/L (raw: total hydrolysable carbohydrate 68.70 mg/g dry, Glc 49.5 % / Gal 26.5 %; free AA 35.69 mg/mL) unheated, heated alone, or + one of six free fatty acids"
+    medium: "0.2 M sodium phosphate pH 6.5, sealed 50 mL bottle, oil bath; aqueous phase; carbohydrate by 72 % H2SO4 hydrolysis + HPAEC-PAD per g freeze-dried aqueous phase; free AA by cation-exchange analyser"
+    temperature_c: [160]
+    ph: {initial: [6.5], measured_during: false, final: 5.93}
+    time_min: [0, 40]
+    species: [total monosaccharides (after acid hydrolysis), glucose, galactose, mannose, xylose, arabinose, total free amino acids, cysteine, lysine, methionine]
+    kind: endpoint
+    location: "Fig. 1A/B p. 5 (400 dpi crops; dossier sec. 4.1); totals for SMH raw / SMH and range ends printed in abstract and sec. 3.1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "the total monosaccharides in SMH decreased significantly from 68.70 mg/g to 28.93 mg/g"
+    flags: [matrix_precursor_composition, concentration_basis_inferred, buffer_confounds_ph, coarse_read, heating_up_included_in_time, condition_uncertain]
+    note: "'Monosaccharides' = total hydrolysable carbohydrate per g dry aqueous phase, not free reducing sugar; basis shifts with dissolved soap/buffer. Heating alone consumes 57.89 % carbohydrate / 19.43 % free AA; FA arms add 0.5-10 / 1.4-7.7 points, ordered by unsaturation (C18:3 most). Calibration not described (quant_class calibrated assumes external standards; downgrade to semi_quantitative if the keeper prefers). No proline listed."
+  - id: ruan2025_fig4_final_ph_and_browning_by_fatty_acid
+    dossier: ruan2025_extraction.md
+    paper: "Ruan, Hu, Su, Li, Yin, Han, Liu & Cai 2025 Food Res Int 221:117512"
+    lab: "Henan Univ. of Technology (Yin W-t)"
+    system: "sesame-meal enzymatic hydrolysate 150 g/L alone or + 2.0 g of one of six free fatty acids per 10 mL"
+    medium: "0.2 M sodium phosphate pH 6.5, sealed 50 mL bottle, oil bath; aqueous phase; A420 at 200x and A294 at 1000x dilution; pH meter (temperature not stated)"
+    temperature_c: [160]
+    ph: {initial: [6.5], measured_during: false, final: 5.93}
+    time_min: [40]
+    species: [final pH, A294, A420, DPPH scavenging]
+    kind: endpoint
+    location: "Fig. 4A-D p. 7 (170 dpi render; dossier sec. 4.3)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "The pH values of the aqueous phase of the reaction models were determined using a precision pH meter"
+    flags: [ph_measurement_temperature_unstated, buffer_confounds_ph, matrix_precursor_composition, coarse_read]
+    note: "Final pH 5.93 (SMH) vs 5.51-5.67 (FA arms); starting pH of the FA + buffer mixtures not reported, so part of the drop may be acid-base from ~7 mmol carboxylic acid vs 2 mmol phosphate, not oxidation acids. A420 0.338 -> 0.418 (x200 dilution), single time point."
+  - id: ruan2025_tab1_furans_strecker_aldehydes_by_fatty_acid
+    dossier: ruan2025_extraction.md
+    paper: "Ruan, Hu, Su, Li, Yin, Han, Liu & Cai 2025 Food Res Int 221:117512"
+    lab: "Henan Univ. of Technology (Yin W-t)"
+    system: "sesame-meal enzymatic hydrolysate 150 g/L alone or + 2.0 g of one of six free fatty acids per 10 mL"
+    medium: "0.2 M sodium phosphate pH 6.5, sealed 50 mL bottle, oil bath; aqueous phase only; SAFE + GC-MS, 4-nonanol IS"
+    temperature_c: [160]
+    ph: {initial: [6.5], measured_during: false, final: 5.93}
+    time_min: [40]
+    species: [furfural, 5-methylfurfural, HMF, 2-furanmethanol, maltol, norfuraneol, 2-methylpropanal, 2-methylbutanal, benzaldehyde, phenylacetaldehyde, acetoin, '2,3-pentanedione', 3-methylbutanoic acid]
+    kind: endpoint
+    location: "Table 1 pp. 8-10 (read as image; dossier sec. 4.4 'Furans and Strecker aldehydes')"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "Quantitative analysis ... was performed using the internal standard method"
+    flags: [single_is_no_response_factor, oil_phase_partition_confound, matrix_precursor_composition, internal_inconsistency]
+    note: "HMF ND in SMH alone but 0.19-0.68 mg/kg in every FA arm; furfural 0.27 -> 0.33-0.46; 2-methylbutanal halves with any FA (partition-compatible), 2-methylpropanal appears only with FA (odd for a Val-rich hydrolysate). Phenylacetaldehyde RI 1569 on HP-5MS (should be ~1045): identity flag. 'Furanone' (RI 1150) unspecified."
+  # ---- desousafontes2024 ----
+  - id: desousafontes2024_tab2_furfural_furans_ph4_ph6_goat_hydrolysate
+    dossier: desousafontes2024_extraction.md
+    paper: "de Sousa Fontes, Galvao, de Carvalho, Guedes, Lima, Bezerra & Madruga 2024 Food Chem 445:138398"
+    lab: "UFPB Joao Pessoa (Madruga)"
+    system: "goat viscera hydrolysate 20 mL + xylose 1.0 g (133 mM) + cysteine 0.1 g + thiamine 0.5 g to 50 mL"
+    medium: "unbuffered hydrolysate, pH set to 4.0 / 6.0 with 1 M HCl; 100 mL screw-cap flask, autoclave"
+    temperature_c: [121]
+    ph: {initial: [4.0, 6.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [furfural, 2-(hydroxymethyl)furan, 2-methylfuran, 2-acetylfuran, furan, '2,2''-bifuran']
+    kind: endpoint
+    location: "Table 2 pp. 4-5 (furans block; ug/L, n = 3; dossier sec. 3.2)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "subjected to thermal treatment in an autoclave at 121 C for 60 min"
+    flags: [matrix_food, ph_start_only, unbuffered, single_is_no_response_factor, 'also_relevant: sulfur']
+    note: "Furfural 1892 (pH 4) vs 3188 ug/L (pH 6), ~2e-4 of charged xylose; direction opposite to cerny2007 T2 (furfural 0 at pH 6, buffered 145 C). In-situ pH of the unbuffered pots unknown. Table 1 xylose after heating unusable (wet/dry basis ambiguous, dossier sec. 6 flag 4)."
+  # ---- feng2022b ----
+  - id: feng2022b_table1_asa_loss_k_ph_temperature_concentration
+    dossier: feng2022b_extraction.md
+    paper: "Feng, Yang, Xie, Liu, Peng, Hu & Yu 2023 Front Nutr 9:1022254 (file stem feng2022b)"
+    lab: "Hubei Minzu Univ. (Yang Y / Yu AN)"
+    system: "L-ascorbic acid alone, 0.03 / 0.05 / 0.07 M (0.30 / 0.50 / 0.70 mmol in 10 mL)"
+    medium: "0.20 M sodium phosphate, initial pH set with NaOH; N2-purged sealed 316L autoclave with quartz liner, oven-heated, saturated vapour pressure 0.79-1.25 MPa, ice-bath quench"
+    temperature_c: [150, 170, 180, 190]
+    ph: {initial: [5.0, 7.0, 9.5], measured_during: false, final: null}
+    time_min: [0, 30, 45, 60, 75, 90, 120, 150]
+    species: [L-ascorbic acid]
+    kind: rate_constant
+    location: "Table 1 (p. 5, rotated): k (min-1) +- and R2 per pH x [ASA]0 x T; Ea per pH (and Ea* of earlier work)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "ASA (0.30, 0.50, and 0.70 mmol) was dissolved in 10 mL of phosphate buffer (0.20 M)"
+    flags: [ph_start_only, internal_inconsistency, heating_up_included_in_time, condition_uncertain]
+    note: "HPLC-DAD 243 nm, external standard. The repo's Ea 15.77 / 31.7 / 47.53 kJ/mol are printed here, but only pH 5.0 reproduces from Table 1 (re-fit 15.77 / 29.50 / 42.17; 47.53 = the 0.07 M row). k apparently fitted from 30 min; [ASA] rises 6-27 % above C0 at 30 min in all 150 C arms; heat-up of the oven-heated autoclave not reported; decay decelerates ~2.5x within 30-150 min. pH 5 / 9.5 weakly buffered by phosphate. No 160 C column although methods say 150-190 C. +- on k and Ea undefined; pre-exponentials not printed. Anaerobic (N2). No ASA species in the engine. File named 2022b, published 2023."
+  - id: feng2022b_fig2_asa_time_courses_150_190c
+    dossier: feng2022b_extraction.md
+    paper: "Feng, Yang, Xie, Liu, Peng, Hu & Yu 2023 Front Nutr 9:1022254 (file stem feng2022b)"
+    lab: "Hubei Minzu Univ. (Yang Y / Yu AN)"
+    system: "L-ascorbic acid alone, 0.03 / 0.05 / 0.07 M in 10 mL"
+    medium: "0.20 M sodium phosphate, initial pH set with NaOH; N2-purged sealed autoclave, oven-heated"
+    temperature_c: [150, 190]
+    ph: {initial: [5.0, 7.0, 9.5], measured_during: false, final: null}
+    time_min: [0, 30, 45, 60, 75, 90, 120, 150]
+    species: [L-ascorbic acid]
+    kind: time_series
+    location: "Fig. 2A-C (p. 4); same series re-plotted in Fig. 3 (p. 6). pH 5.0 digitised in full, pH 7.0 / 9.5 as 30 / 150 min pairs (dossier sec. 4c)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The reaction temperature and time ranged from 150 to 190 C and from 30 to 150 min, respectively."
+    flags: [ph_start_only, heating_up_included_in_time, internal_inconsistency, coarse_read]
+    note: "Read +-0.002 M from 400 dpi crops. Supra-initial [ASA] at 30 min (co-elution at 243 nm or t=0 basis); near-flat 0-30 min at 190 C implies heat-up lag. 170 / 180 C time courses not shown. The anchor for any future anaerobic ASA-loss check; compare yu2016_fig2_residual_cys_asa (same lab, +Cys, pH 8, 125-155 C, Ea ~100 kJ/mol)."
+  - id: feng2022b_fig1_fig3_a420_a294_browning
+    dossier: feng2022b_extraction.md
+    paper: "Feng, Yang, Xie, Liu, Peng, Hu & Yu 2023 Front Nutr 9:1022254 (file stem feng2022b)"
+    lab: "Hubei Minzu Univ. (Yang Y / Yu AN)"
+    system: "L-ascorbic acid alone, 0.03 / 0.05 / 0.07 M in 10 mL"
+    medium: "0.20 M sodium phosphate, initial pH set with NaOH; N2-purged sealed autoclave, oven-heated"
+    temperature_c: [150, 190]
+    ph: {initial: [5.0, 7.0, 9.5], measured_during: false, final: null}
+    time_min: [0, 30, 45, 60, 75, 90, 120, 150]
+    species: [A420, A294]
+    kind: time_series
+    location: "Fig. 1 (A420 at 190 C / 90 min, printed values); text p. 4 (A420 at 150 min, pH 5.0, 150 and 190 C); Fig. 3 A294 / A420 curves (A294 endpoints at 190 C read, dossier sec. 4d)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "The UV absorbance of the reaction solutions was measured at 294 nm for the UIPs and at 420 nm for the BPs"
+    flags: [ph_start_only, internal_inconsistency, coarse_read]
+    note: "Dilution-corrected absorbances (dilution 30-100x / 0-25x). No browning rate constant, order or Ea printed; Eq. 11 (browning proportional to [H3O+][ASA]T) is derived, not fitted, and contradicts Fig. 1 (pH 5.0 vs 9.5 only x1.2-1.3). A420 roughly proportional to [ASA]0 although the text calls browning independent of [ASA]. 150 C pH 7.0 / 9.5 curves figure-only."

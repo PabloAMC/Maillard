@@ -2756,3 +2756,59 @@ entries:
     condition_quote: ""
     flags: [si_read_2026-11-01, ph_start_only, unbuffered, coarse_read, "absolute_level_unit_suspect: axis 'mmol/L' is ug/L by cross-check with main Fig. 1", "complements: zhou2024_fig1_axarp_pyrazine_timecourses"]
     note: "ARP + Gly at 60 min: PZ ~69, MPZ ~13, DMP ~7.0 ug/L (molar R 0.34; ARP alone 0.58): a low-R glycine row from a second lab beside bemisyoung1993 (0.02-0.54), against CF-087's 'low-level data' explanation. The printed 'mmol/L' axis is impossible (~70 mM pyrazine from 20 mM ARP); the ARP bars match main Fig. 1 at 60 min in ug/L. Labelled pot: SPME calibrated on unlabelled standards, quantifier ions not stated, so 15N isotopologues may be under-counted in proportion to label. Two readers before keying. arms: ARP alone vs ARP + 15N-Gly (same lab, same SPME-GC-MS assay)."
+  # ---- feng2023 ----
+  - id: feng2023_table1_asa_cys_hcw_pyrazines_pyrroles_ph_temperature
+    dossier: feng2023_extraction.md
+    paper: "Feng, Yang, Xie, Yan, Ma, Hu & Yu 2024 J Sci Food Agric 104:5764 (file stem feng2023)"
+    lab: "Hubei Minzu Univ. (Yang Y / Yu AN)"
+    system: "L-ascorbic acid + L-cysteine 2.45 mmol each (~70 mM, 1:1 inferred) in 35 mL water"
+    medium: "unbuffered double-distilled water, initial pH set with NaOH; N2-purged sealed 316L autoclave with quartz liner, saturated vapour pressure"
+    temperature_c: [170, 210]
+    ph: {initial: [4.5, 6.0, 7.0, 8.0, 9.5], measured_during: false, final: null}
+    time_min: [30]
+    species: [2-methylpyrazine, 2-ethylpyrazine, 2-methyl-5-ethylpyrazine, 6-methyl-2-ethylpyrazine, '2,5-dimethyl-3-ethylpyrazine', 1-furfurylpyrrole, '2,4-dimethyl-3-ethyl-1H-pyrrole']
+    kind: endpoint
+    location: "Table 1 rows 1-5, 35, 37 (Fig. 1A re-plots the pyrazines)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "The solution pH was adjusted to 4.5, 6.0, 7.0, 8.0, and 9.5 ... using NaOH."
+    flags: [unbuffered, ph_start_only, internal_inconsistency, concentration_basis_inferred, 'also_relevant: sulfur']
+    note: "complements: feng2023_table1_asa_cys_hcw_sulfur_volatiles_ph_temperature. Same IS / RF caveats. Sum of 5 pyrazines peaks at pH 8.0 (170 C) / pH 7.0 (210 C) and falls x2.2 / x6.6 at pH 9.5; text calls No. 3 an alkaline product but Table 1 has it highest at pH 4.5. Nitrogen source is cysteine (no other amine); no ASA lane in the engine. Disagrees with yu2010 (phosphate, pyrazines rising to pH 9)."
+  # ---- desousafontes2024 ----
+  - id: desousafontes2024_tab2_strecker_pyrazines_ph4_ph6_goat_hydrolysate
+    dossier: desousafontes2024_extraction.md
+    paper: "de Sousa Fontes, Galvao, de Carvalho, Guedes, Lima, Bezerra & Madruga 2024 Food Chem 445:138398"
+    lab: "UFPB Joao Pessoa (Madruga)"
+    system: "goat viscera Alcalase hydrolysate (H) alone, unheated after hydrolysis; and H 20 mL + cysteine 0.1 g + xylose 1.0 g + thiamine 0.5 g to 50 mL, heated (F4, F6)"
+    medium: "unbuffered hydrolysate, pH set to 4.0 / 6.0 with 1 M HCl; 100 mL screw-cap flask, autoclave"
+    temperature_c: [121]
+    ph: {initial: [4.0, 6.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [2-methylpropanal, 2-methylbutanal, 3-methylbutanal, 2-methylpentanal, 2-methylpyrazine, 2-propylpyrazine, '2,5-dimethylpyrazine', 2-methyl-5-isopropylpyrazine, 1-furfurylpyrrole, benzaldehyde]
+    kind: endpoint
+    location: "Table 2 pp. 4-6 (Strecker aldehydes, pyrazines, pyrrole; benzaldehyde in the aldehyde block; ug/L, n = 3; dossier sec. 3.1, 3.3)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "subjected to thermal treatment in an autoclave at 121 C for 60 min"
+    flags: [matrix_food, ph_start_only, unbuffered, single_is_no_response_factor, 'complements: desousafontes2024_tab2_sulfur_thiazoles_ph4_ph6_goat_hydrolysate']
+    note: "Strecker aldehydes x26 and pyrazines x100 higher at initial pH 6 than pH 4 (class totals). Most of these rows quantified on the polar column (italic in Table 2). H column = hydrolysate before the Maillard step. IS 1,2-dichlorobenzene, RF 1."
+  - id: desousafontes2024_tab1_sugars_free_amino_acids_before_after_heating
+    dossier: desousafontes2024_extraction.md
+    paper: "de Sousa Fontes, Galvao, de Carvalho, Guedes, Lima, Bezerra & Madruga 2024 Food Chem 445:138398"
+    lab: "UFPB Joao Pessoa (Madruga)"
+    system: "goat viscera mix (GV), hydrolysate (H), and heated flavourings F4 / F6 (H + Cys 0.1 g + Xyl 1.0 g + thiamine 0.5 g to 50 mL)"
+    medium: "unbuffered hydrolysate, pH set to 4.0 / 6.0 with 1 M HCl; autoclave"
+    temperature_c: [121]
+    ph: {initial: [4.0, 6.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [glucose, fructose, mannose, maltose, ribose, xylose, cysteine, lysine, glycine, alanine, leucine, valine + methionine, 17 free amino acids, protein, lipid, moisture, ash]
+    kind: endpoint
+    location: "Table 1 p. 3 (mg/100 g, mean +- SD, n = 3; read from 170 dpi render; dossier sec. 3.4)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "calibration curves were created to quantify the sugars"
+    flags: [matrix_food, ph_start_only, quant_basis_conflict, internal_inconsistency, concentration_basis_inferred]
+    note: "External-standard HPLC-RID sugars and OPA-HPLC-DAD amino acids, but the wet/dry basis of the mg/100 g rows is not stated: wet reading gives 113 % xylose recovery (> total carbohydrate), dry reading ~93 % xylose loss. Free cysteine by OPA with SD 12.03 on 16.76. Composition context only; not a consumption datum. Amino-acid LOD printed inconsistently (0.289 vs 1,358 mg/L)."
