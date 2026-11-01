@@ -30,8 +30,9 @@ lead, calibrated out-of-sample prediction decides adequacy, scores diagnose).
   (per-figure scales, series noise, a between-paper error per method class); pre-registration + independent review
   before every fit; the acceptance protocol and a mechanism-signature scorer (15 within-paper tests + isotope routes).
 - Findings from evidence (they do not depend on a fit converging): acetic acid transfers across laboratories,
-  formic acid does not; the pentose + amino-acid reaction was missing and is now built (Cao hold-out pH within
-  0.06); a fitted acetic-acid sink is ruled out by isotope data (CF-069); MFT's route in the lane contradicts
+  formic acid does not; the pentose + amino-acid reaction was missing and is now built (Cao hold-out pH RMS
+  0.08 at arm E's optimum; the recorded 0.06 was predicted without the trunk solutes, the forked-pool pH bug, re-scored in
+  `kinetic_core_joint_fit_entry_ph_rescore.md`); a fitted acetic-acid sink is ruled out by isotope data (CF-069); MFT's route in the lane contradicts
   isotope labelling (Cerny 2003), and the route mix changes with temperature (Cerny 95 C vs Liu 168 C); two
   between-lab conflicts recorded (CF-068: x120 for the same pot).
 - Findings from fits, PROVISIONAL (premortem, 2026-10-31): every joint-fit arm so far stopped on its evaluation
@@ -351,3 +352,35 @@ intervals (~0.55).
    - keep dataclass-level keys and add field-level bands for the fields feasibility samples.
 4. The E6 + E11 refit runs after the thiol leave-one-lab-out; it does not ship.
 5. The coordinator drafts the author data requests and the designed-experiment brief for the owner to review and send.
+
+**Plan review, 2026-11-01 afternoon (cloud session; proposals with defaults, the owner decides).** Basis: the
+contrast benchmark's power tables (`docs/reference/contrast_benchmark/README.md` secs. 5, 8, 11), the 2026-10-09
+brief ([EXPERIMENTS_BRIEF.md](EXPERIMENTS_BRIEF.md): "stop scraping literature"), the plan above.
+1. **An admission gate before work starts, not only before scoring.** Under split v2, 8 of 20 errors have < 2
+   held-out laboratories (E1, E2, E4, E8, E10, E15, E16, E17); the keyed queue lifts E4 to 3 labs and E10 to 2 once a
+   new split version admits it. Rule: no prereg, feasibility search or fit for an error until its TEST(E) has >= 2
+   labs in a frozen split version; otherwise it is a declared band plus a designed-experiment line. Default: adopt.
+   Effect: step 5's E1 and E2 modules wait; E4 is already a declared band (owner decision 2).
+2. **Order after the benchmark scorer and H0:** the forced-input Strecker layer (E3, testable, triage item 1,
+   P(a scored lane by 11-07) ~0.6), then E6 + E11 on >= 8 cores, then the pyrazine items E13 / E14 (testable).
+   A2 starts when a second lane needs the shared trunk, not before.
+3. **Track H gated on H0.** H1 - H4 start only after H0 is scored. If tau_ABS > 0.8 dex the thiol lane ships
+   relative predictions only, and H4's gain is then small. Default: adopt.
+4. **Wave V cut to what scores.** V1 on the 11 single-reader v2 TEST contrasts (finishes v2) and on the TEST rows a
+   scorer reads; V2 for CF entries that name a TEST cell; V3 (citation chains) only for an error that rule 1 blocks
+   for lack of labs. Default: adopt.
+5. **Owner actions with the largest effect:** send the designed-experiment brief and the 5 author data requests
+   (`data/articles/OUTREACH_DRAFTS.md`, laptop only). The between-lab spread (x10 - x1000) is the binding limit; no
+   step above removes it.
+6. **Profile before the next long refit:** 2 h on one joint-fit evaluation (finite-difference Jacobian, pH solve,
+   integrator) before E6 + E11's ~1 day queue; exact Jacobians cut a 16-constant fit ~3 - 8x (H3's first step).
+
+*Premortem of these changes.* (a) Rule 1 starves the mechanism work if P1 keying stalls; P1 needs the PDFs, so it
+runs on the laptop (P(>= 2 more errors testable by 11-14) ~0.5). (b) The Strecker layer may fail its blind test
+again (EX-051 INCONCLUSIVE, one decay constant cannot serve both pots); its exit is a declared band with the
+designed experiment named. (c) Cutting V3 may miss a paper that would settle a CF; rule 1 re-opens V3 per error.
+P(checkpoint 11-07 met) with these changes ~0.55 (from ~0.5): fewer parallel tracks, the same dependencies.
+
+**Done 2026-11-01 (cloud session):** PR #36 (A3 phase 2) merged after its full suite; the forked-pool pH bug
+re-scored (`results/validation/kinetic_core_joint_fit_entry_ph_rescore.md`: 21 records reproduce their recorded
+values to 1e-6; corrected Cao RMS 0.06 - 0.22; the three R4f records flip from fail to within; Zhou unchanged).

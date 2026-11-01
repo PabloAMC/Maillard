@@ -170,7 +170,7 @@ entries:
     artifacts: [results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_e.md, results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_e.json]
     commit: c1a58cb
     verdict: partial
-    conclusion: "Admitted on the evidence audit: entry identified (10^-4.2 at 100 C / pH 6, slope 0.57), acetic sink to its floor (CF-069), Cao hold-out pH 0.06; 5 / 15 signatures; norfuraneol sanity bound FAILED (25 - 36 mol%)."
+    conclusion: "Admitted on the evidence audit: entry identified (10^-4.2 at 100 C / pH 6, slope 0.57), acetic sink to its floor (CF-069), Cao hold-out pH 0.06 (corrected 2026-11-01: RMS 0.080, mean +0.07; the recorded value was predicted without the trunk solutes, the forked-pool pH bug, kinetic_core_joint_fit_entry_ph_rescore.md); 5 / 15 signatures; norfuraneol sanity bound FAILED (25 - 36 mol%)."
     follow_up: "EX-018 (why norfuraneol); leave-one-lab-out on the admitted structure."
   - id: EX-014
     date: "2026-10-30"
@@ -378,7 +378,7 @@ entries:
     commit: pending
     verdict: rejected
     conclusion: "All three converged (status 2). Cost at Ea 64 / 100 / 133: 1070.4 / 1074.0 / 1075.2 (R3En fixed 1076; flat within 4.8 units -- the barrier is not identified by the fit rows, as the review said). offset_k_ttca_deg +0.20 / +0.23 / +0.23 +- 0.14: the data KEEP TTCA's direct breakdown at about its B2.1 value, they do not send it to the Amadori-only bound -- the R4a hypothesis is rejected (expected lower bound at >= 2 points, P 0.45: no). Cerny pot D 0.989 / 0.959 / 0.805: fails at every in-class barrier (expected pass P 0.15: no). Groups 2 / 3 / 4 of 11; the two gained at Ea 133 are weak (supply exhaustion 0.54 by chance, cysteine's role 0.12)."
-    follow_up: "Neither the DDP pH law (round 3) nor the TTCA step (R4f) nor an in-class barrier reconciles Cerny: the fed-norfuraneol dominance comes from upstream (B7a: the deoxyosone partition under the two-level measurement model)."
+    follow_up: "Neither the DDP pH law (round 3) nor the TTCA step (R4f) nor an in-class barrier reconciles Cerny: the fed-norfuraneol dominance comes from upstream (B7a: the deoxyosone partition under the two-level measurement model). Correction 2026-11-01 (forked-pool pH bug, results/validation/kinetic_core_joint_fit_entry_ph_rescore.md): the Cao 2017 pH hold-out, recorded as failing (RMS 0.34 - 0.36), is within tolerance when re-scored in each pot's own state (RMS 0.21 - 0.22). The rejection does not rest on it."
   - id: EX-031
     date: "2026-10-31"
     kind: diagnosis
