@@ -120,6 +120,13 @@ def wave_generator(name: str) -> Iterator[object]:
             sys.modules.pop(module, None)
 
 
+def worker_pid(_item) -> int:
+    """The worker's process id (tests/unit/test_engine_config.py: the persistent pool is reused)."""
+    import os
+
+    return os.getpid()
+
+
 def engine_config_probe(seed: int) -> dict:
     """What a worker computes with (tests/unit/test_engine_config.py, A3 phase 1): the engine's configuration as its
     globals hold it, and numbers that read those switches -- the sulfur lane's operative parameters and rate

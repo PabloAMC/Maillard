@@ -460,6 +460,35 @@ def test_a_spawned_worker_given_the_config_reproduces_the_forked_one_with_every_
         assert spawned_bare[0][numbers] != forked[0][numbers], numbers   # the probe reads the switches
 
 
+@pytest.mark.skipif("fork" not in mp.get_all_start_methods(), reason="needs fork to compare against")
+def test_the_persistent_pool_is_bit_identical_to_fork_and_never_stale(monkeypatch):
+    """A3 phase 2: MAILLARD_POOL=persistent keeps one spawned pool for the process; every job carries the caller's
+    Config read at the call, so the same workers follow the caller's state from call to call."""
+    flipped, seeds = _flipped_runtime(), [0, 1, 2]
+    monkeypatch.setenv("MAILLARD_POOL", "fork_per_call")
+    with config.applied(flipped):
+        forked = parallel.map_ordered(support.engine_config_probe, seeds, n_workers=2)
+    forked_shipped = parallel.map_ordered(support.engine_config_probe, seeds, n_workers=2)
+    monkeypatch.setenv("MAILLARD_POOL", "persistent")
+    try:
+        with config.applied(flipped):
+            persistent = parallel.map_ordered(support.engine_config_probe, seeds, n_workers=2)
+        persistent_shipped = parallel.map_ordered(support.engine_config_probe, seeds, n_workers=2)   # same pool
+        pids = set(parallel.map_ordered(support.worker_pid, range(8), n_workers=2))
+        again = set(parallel.map_ordered(support.worker_pid, range(8), n_workers=2))
+        assert persistent == forked and persistent_shipped == forked_shipped   # every number, bit for bit
+        assert persistent != persistent_shipped
+        assert len(pids) <= 2 and pids == again and os.getpid() not in pids   # reused, not re-forked
+        # a closure cannot be pickled: it runs on the per-call fork, which carries it
+        offset = 3
+        assert parallel.map_ordered(lambda x: x + offset, [1, 2], n_workers=2) == [4, 5]
+    finally:
+        parallel.shutdown_persistent_pool()
+    monkeypatch.setenv("MAILLARD_POOL", "persistent_typo")
+    with pytest.raises(ValueError, match="MAILLARD_POOL"):
+        parallel.map_ordered(support.worker_pid, [0, 1], n_workers=2)
+
+
 def _legacy_joint_install(joint, job):
     """fit_joint_deoxyosone_thiol.install as it was before A3 (origin/main 7b1bc7cd), for the equivalence below."""
     joint.sm3.install(job)
