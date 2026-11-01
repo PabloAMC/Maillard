@@ -162,3 +162,56 @@
   Owner decisions before phase 2: items 1 and 6.
 - 03:xx next-phase plan written, premortemed (circularity, power, re-tuning compensations, A3 blocking, the owner bottleneck) and amended into STATUS_AND_PLAN. Started: the benchmark's frozen split.
 - 03:45 E4 corrected: the red team misread Leahy (14 = pyrazine; MPZ = 215, shipped 170 matches); E4 expected REFUSE -> declared band + designed experiment; the order becomes CF-077 then A3 phase 2. Both preregs committed (E6 + E11 runs after EX-056).
+- split v1 frozen (sha 022d0cab...): 68 labs (35 dev / 33 test), 486 / 76 cells, 297 contrasts (32 TEST). Under the GLOBAL rule, 19 / 20 engine errors have < 2 TEST labs: the held-out power is ~nil. The binding constraint is test data, not mechanisms. Next: a per-change v2 split declared before any scoring; P1 keying from untouched labs; author / designed data.
+- 09:50 held-out search: only E5 (larralde1995), E7 (zhang2021) and E13 (lee2024) can gain a second held-out lab from data on disk; E6 / E11 and E10 need designed data; E1 has weak arms only. 8 new papers (DOIs verified) went to the PRIVATE queue (tier H; Tressl 1994 the top lead). PR #34 merged (19cf422); the ingest suite is running.
+
+## Morning summary (2026-11-01, ~10:00)
+
+**What we now know: which reactions happen under which conditions** (docs/reference/pathway_atlas/, 562 sourced cells; ~9 % wrong per cell).
+- **Settled (2+ independent labs, labelling / fed / within-study), mostly in dilute phosphate water, pH 5 - 8, 90 - 170 C, glucose or ribose with glycine or cysteine:**
+  - Amadori decay returns most of its amine;
+  - phosphate speeds the early steps;
+  - the 1-deoxyosone route takes over from the 3-deoxyosone route as pH rises, and carries most acetic acid;
+  - MFT is an intact C5 from either sugar (not C2 + C3, rarely free norfuraneol);
+  - FFT is furfural + H2S and collapses by pH 7;
+  - pyrazines are aminoketone pairs;
+  - thiamine dominates MFT when present;
+  - lipid suppresses the meaty thiols.
+- **Regimes:** 25 settled, 233 unsettled, 1790 never studied. The never-studied ones include intermediate water activity, O2 above 100 C, alkaline cooking, plant-protein amines, pentose splits, and labelled 100 - 140 C pots.
+
+**The engine against that** (ENGINE_VS_LITERATURE.md; red-teamed; corrections in secs. 5 / 5.1). Errors that survive, verified in code and by probes:
+- no glucose + cysteine route to MFT through an intact C5 (needs a NEW step);
+- MFT 99.9 % via free norfuraneol vs 7 % measured, with one barrier for all routes, so the mix cannot move with T;
+- no buffer catalysis;
+- lipid inert;
+- no Strecker-aldehyde lane (a refusal, not a silent error);
+- the methylpyrazine cross-pair factor (CF-077, a bug);
+- TTCA / cysteine exchange wrong (two labs).
+
+Corrected leads:
+- E4 (the pyrazine pH law) was a misread table, so the shipped engine matches Leahy;
+- the FFT "sign error" is a slope error;
+- dpo_share is latent.
+
+**Verified vs not:**
+- **Verified:** atlas quotes grep in their dossiers; the engine claims by code reading + probes; red teams on the atlas, the ranking and the clusters.
+- **NOT verified:** atlas cells against the PDFs beyond the 10 % sample; the held-out numbers' two-reader re-read.
+- **The binding constraint:** held-out power is ~nil. With the frozen split v1, 19 / 20 errors have < 2 independent held-out labs. On disk only E5, E7 and E13 can gain one. E6 / E11 and E10 need designed data or new papers (Tressl 1994 is the top lead).
+
+**Landed:**
+- PR #33 (wave 1) and PR #34 (A3 phase 1, bit-identical) merged;
+- the ingest branch (36 dossiers, 91-entry register, the atlas, the comparison, the split, the preregs) under its full suite, PR next;
+- the conflict programme archived (EX-055).
+
+**Running:** the thiol leave-one-lab-out (7+ folds); the per-change split v2.
+
+**Decisions for Pablo (default in brackets):**
+1. CF-077, the methylpyrazine factor 2 (shipped methylpyrazine moves ~x2) [yes: start its session card / I do it here as a PR for your approval].
+2. E4 [no change; a declared band + a designed experiment, as its prereg expects].
+3. A3 phase 2, review item 1, refuse non-default build keys [yes]; item 6, key granularity [keep dataclass-level keys, add field-level bands for the sampled fields].
+4. The E6 + E11 refit (does not ship; runs after the leave-one-lab-out) [yes, tonight].
+5. Author data requests (Zhai 13C label fraction and final pH; Zhou 2024 SI; DFA raw Table 4; Zhou vessel / storage) [I draft, you send].
+6. The designed-experiment brief (E3 + E1, plus the atlas's settling list) for WUR / TUM [I draft for your review].
+7. Downloads: tier H in the private queue (8 papers, Tressl 1994 first) plus 3 supplements; Bunke 2000 still missing.
+8. The CF-072 lysine session card (now two-sided) [hold].
+- ~10:20 split v2 (per change) committed, sha dbe32a2b...: 12 / 20 errors testable on held-out labs (incl. E5, E6 / E11, E7, E13); untestable: E1, E2, E4, E8, E10, E15, E16, E17. Launched: the two-reader PDF re-read of the 88 held-out contrasts (E5 / E6 / E7 / E11 / E13 first), the precondition for scoring the benchmark.

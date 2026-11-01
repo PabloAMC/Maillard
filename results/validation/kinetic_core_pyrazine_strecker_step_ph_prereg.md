@@ -208,3 +208,11 @@ The same three pyrazines move within 0.05 dex of each other at 95 and 120 C (85 
 They reproduce the red team's numbers exactly (shipped MPZ 170, PZ 8.07; s = 0.07 gives MPZ 13.8, PZ 0.71); only the
 comparison target differs. Work so far ~2 h; the remaining run (V1 re-anchoring check, the verdict note) is <= 1 h,
 which is inside the 3 h box.
+
+## Owner decision (2026-11-01, ~10:30): no change
+
+Pablo approved the default: the shipped Strecker-step pH law is NOT changed.
+- E4's question (does the below-pH-7 pyrazine slope belong to the Strecker step or to the supply?) is carried as a DECLARED BAND on the step slope, [0, 0.58] dec / pH (the shipped 0.58 at the upper edge), in the uncertainty report.
+- Leahy's methylpyrazine pH 7 / 5 ratio (215; shipped 170) stays matched.
+- Hofmann's fed-dicarbonyl Strecker optimum near pH 5 remains a recorded miss.
+- The settling experiment is ENGINE_VS_LITERATURE.md sec. 3.1, row E4: one pot with fed dicarbonyl + amino acid + 2,5-DMP at pH-stat 4 / 5 / 6 / 7.

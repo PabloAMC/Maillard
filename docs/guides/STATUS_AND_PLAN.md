@@ -286,3 +286,12 @@ classes, donor-generic Strecker. Prerequisite for C, so new lanes do not copy th
 Strecker-aldehyde lane within ~1 week of starting it) ~0.5; P(absolute odorant predictions within x3 across
 laboratories for most rows) ~0.15 -- the realistic near-term product is ranked, relative predictions with honest
 intervals (~0.55).
+
+**Owner decisions, 2026-11-01 (~10:30; defaults approved):**
+1. CF-077 (the methylpyrazine cross-pair factor) fixed in its own session, as a PR for the owner's approval.
+2. E4: no change; a declared band and a designed experiment (the prereg's decision note).
+3. A3 phase 2:
+   - refuse non-default build-phase keys;
+   - keep dataclass-level keys and add field-level bands for the fields feasibility samples.
+4. The E6 + E11 refit runs after the thiol leave-one-lab-out; it does not ship.
+5. The coordinator drafts the author data requests and the designed-experiment brief for the owner to review and send.
