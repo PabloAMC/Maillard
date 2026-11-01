@@ -482,3 +482,15 @@ No mismatch cites the other cells that are back: F02#12, F07#14, F23#15, F25#6 /
 - Two entries narrow: F27-b to >= 145 C, and F20-a to the non-MPZ adducts.
 - One gains evidence that is not used in the ranking: E8, now three labs within-study.
 - E1's M2 side and E6 are firmer.
+
+### 5.1 Correction to sec. 5's E4 row (2026-11-01, ~03:40; verified by the coordinator against leahy1989a_extraction.md Table I)
+
+The red team's "shipped methylpyrazine pH 7 / 5 = 170 vs Leahy's 14" misread the table. **14.4 is PYRAZINE's** k(pH 7) / k(pH 5) at 95 C. **Methylpyrazine's is 215** (99 at 85 C). So the shipped engine (170) MATCHES Leahy's methylpyrazine pH dependence, and E4's band [0, 0.15] would make it ~1.2 dex too flat (9.9 - 20).
+
+What remains of E4:
+- the Strecker STEP's law fails the fed-dicarbonyl check (Hofmann: PA largest near pH 5; shipped k5 / k7 0.069);
+- the same slope cannot serve both Leahy's sugar + lysine cascade and fed-dicarbonyl Strecker.
+
+E4 is therefore NOT a band-now change. Its prereg (kinetic_core_pyrazine_strecker_step_ph_prereg.md) expects REFUSE (P 0.85): a declared band, plus a designed experiment that separates the step law from the supply law (sec. 3.1, E4 row). The recommended order becomes CF-077 first, then A3 phase 2.
+
+Lesson: a red team's numeric claim is a lead too; verify it against the dossier table before it orders work.

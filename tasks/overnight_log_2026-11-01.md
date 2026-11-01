@@ -143,3 +143,21 @@
     - fix the 10 wrong cells; add Zhao 2019b's labelled FFT cell;
     - a README limitation: many quotes are dossier paraphrase, so the gate checks the dossier, not the paper.
 - engine-vs-literature comparison committed. Two agent leads corrected by engine probes (the FFT pH 'sign error' is a 10 - 70x slope error; dpo_share 0.30 is latent, not shipped). Top errors: no hexose intact-C5 MFT route; the enolisation split is pH-frozen; no Strecker aldehydes + the pyrazine pH law on the Strecker step; no buffer catalysis; MFT 99.9 % via free NF; lipid inert. Next: a red team of the ranking; the atlas fix-up.
+- red team of the engine-error ranking: E1 / E10 band-now fixes REFUTED (B58 already said do-not-ship for TTCA; E1 needs a new Glc + Cys step); E2 weakened; E3 a refusal. Order: E4 (owner approval) -> E6+E11 refit -> E10 via B59b -> E1 -> E2; E5 / E7 / E3 after A3. Amendment in ENGINE_VS_LITERATURE sec. 5.
+- recount on the fixed atlas: settled 31 -> 25, unsettled 217 -> 233, unknown 1800 -> 1790; all 22 pooled claims survive (P12 / P13 firmer); E18 narrowed to >= 145 C, E14 narrowed; no mismatch changes kind.
+- 02:36 A3 phase 1 green and bit-identical: draft PR #34 (42 ConfigKeys; 9 tests incl. the AST coverage scan and spawn-vs-fork with all keys flipped; unit 1195 / scientific 108 / 14 gates pass; core panel byte-identical). NOT merged (owner review). An independent code review launched. Not covered: script-level statics (TDP_EXIT_STATIC etc.) still need fork, so no persistent pool yet.
+- A3 PR #34 independent review: APPROVE WITH CHANGES. applied() correct (all bindings restored, nesting OK, not thread-safe); bit-identity holds. Issues:
+  1. MEDIUM: build-phase keys (shipped_b39, shipped_b22) can be installed but give an inconsistent engine (tables built at import); make install refuse non-default build keys.
+  2. MEDIUM: the AST coverage scan misses whole classes of new switch (mode strings, argument-built holders, plain numbers / dicts, setattr by variable, in-place dict edits); fix with "every uppercase global read by a function is a key or on an explicit allowlist" (~60).
+  3. LOW-MEDIUM: hash(Config) is not stable across processes; add digest() before caching.
+  4. LOW: bands declared but not checked; types not checked.
+  5. LOW: the joint fit still builds its Config in the worker.
+  6. LOW: key granularity (whole route dataclasses) vs the A2 contract's field-level keys; decide before phase 2.
+  7. NIT: a test leaves sys.path modified.
+  
+  The spawn test is meaningful for 25 of 42 keys only (17 have no reader in the probe).
+  
+  **Existing bug found:** build_choice_robustness.py:99 sets only parameters_lipid.Q10_ASSUMPTION; the rates use it, but lipid.py:580 REPORTS q10_used from the other binding (a reporting mismatch).
+  
+  Owner decisions before phase 2: items 1 and 6.
+- 03:xx next-phase plan written, premortemed (circularity, power, re-tuning compensations, A3 blocking, the owner bottleneck) and amended into STATUS_AND_PLAN. Started: the benchmark's frozen split.

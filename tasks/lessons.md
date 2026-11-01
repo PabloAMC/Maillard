@@ -413,3 +413,7 @@ the full verification.
 ## 2026-11-01 — `git add -A` swept an agent's half-written files into a commit
 - **Pattern:** a docs-only commit (the queue made private) used `git add -A` while a leave-one-lab-out agent was writing in the same worktree; its unfinished prereg, generator and test were committed and pushed, and the next full suite failed on the undescribed prereg.
 - **Rule:** while any agent may write in a worktree, stage by explicit path (`git add <files>`), never `-A` / `.`; check `git status --short` against the intended file list before committing.
+
+## 2026-11-01 — A red team's number is a lead too
+- **Pattern:** the engine-error red team ranked E4 (the pyrazine pH law) as SUPPORTED on "methylpyrazine pH 7 / 5 = 170 vs Leahy's 14". 14 was pyrazine's ratio; methylpyrazine's is 215, so the shipped engine already matched. The premortem inherited the error, and only the pre-registration agent, reading the table for its test, caught it.
+- **Rule:** before a red team's or reviewer's number orders work or a change, the coordinator checks it against the dossier table (one grep). Reviews reduce error; they do not certify numbers.
