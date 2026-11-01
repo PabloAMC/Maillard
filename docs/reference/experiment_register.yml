@@ -595,7 +595,7 @@ entries:
     verdict: rejected
     conclusion: "NOT feasible: time + pH jointly 0 of 600 (each reachable alone: 37 / 15). Unlike v4's 3-DX -> MGO stand-in, the trap's rate scales with free cysteine, which the engine gets wrong in level and pH profile -- the trap as coupled to today's cysteine chemistry is rejected without a fit."
     follow_up: "The trap only as one structure with a corrected cysteine fate (hub step); first the feasibility method's controls and roadmap rows 2 - 3."
-  - id: EX-055
+  - id: EX-056
     date: "2026-11-01"
     kind: fit
     question: "Plan step B8 (adequacy; roadmap rows 1 and 9): does the admitted thiol structure R3En, refitted without each laboratory, predict that laboratory within honest intervals and better than the two chemistry-free nulls?"
