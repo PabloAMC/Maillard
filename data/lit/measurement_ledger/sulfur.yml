@@ -7528,31 +7528,31 @@ entries:
     time_min: [90]
     species: [water-phase pH, residual xylose, residual cysteine, thiol-class total]
     kind: endpoint
-    location: "Fig. 2a-c (pH, xylose, cysteine, read by dossier); Fig. 4 (thiol class totals, read +-15 %); Tables S1-S5 per-compound (not on disk)"
+    location: "Fig. 2a-c (pH, xylose, cysteine, read by dossier); Fig. 4 (thiol class totals, read +-15 %); Tables S1-S5 per-compound (SI read 2026-11-01: zhang2022_tabS1_S5_water_phase_thiols_oil_vs_no_oil, zhang2022_tabS1_no_oil_aqueous_endpoint)"
     status: digitised_in_dossier
     quant_class: semi_quantitative
     simulable: false
     condition_quote: "Equimolar L-cysteine (0.4 mol) and D-xylose (0.4 mol) were completely dissolved into 10 mL deionized water, subsequently, the pH was adjusted to 7.2 using 4 M sodium hydroxide"
-    flags: [condition_uncertain, supplement_missing_for_mft_fft]
-    note: "oil-water matrix. The no-oil control (final pH, residual Xyl/Cys) is an aqueous endpoint but the charge as printed is impossible (40 M); dossier reads it as ~0.4 mol/L. Cysteine kit assay not specific (upper bound). MFT/FFT per compound only in Tables S1-S5, not on disk; Fig. 3 heat maps colour only."
+    flags: [condition_uncertain, si_read_2026-11-01]
+    note: "oil-water matrix. The no-oil control (final pH, residual Xyl/Cys) is an aqueous endpoint but the charge as printed is impossible (40 M); dossier reads it as ~0.4 mol/L. Cysteine kit assay not specific (upper bound). MFT/FFT per compound only in Tables S1-S5, not on disk; Fig. 3 heat maps colour only. SI read 2026-11-01 (dossier SI section): MFT / FFT per compound and phase now keyed as zhang2022_tabS1_S5_water_phase_thiols_oil_vs_no_oil (water phase, oil vs no oil), zhang2022_tabS1_no_oil_aqueous_endpoint (oil-free control) and lipid.yml zhang2022_tabS1_S5_oil_phase_thiols_by_oil (oil-phase ranking)."
   - id: zhang2021_tab3_cys_xyl_phospholipid_reheat
     dossier: zhang2021_extraction.md
     paper: "Zhang Z, Zang M et al. 2021 Food Res Int 139:109918"
     lab: "China Meat Research Center (Zang M)"
-    system: "xylose 4 mmol + L-cysteine 4 mmol in 50 mL (80 + 80 mM) +- soybean lecithin 0.24 % and/or cephalin 0.07 / 0.24 %; +- reheating (5 d at 4 C, then boiling 30 min)"
+    system: "xylose 4 mmol + L-cysteine 4 mmol in 50 mL (80 + 80 mM); groups A none, B soybean lecithin 0.24 %, C cephalin 0.07 %, D both (Table 1: D1 0.24 % + 0.24 %, D2 0.07 % + 0.07 %, conflicting); each +- reheating (5 d at 4 C, then boiling 30 min)"
     medium: "sodium phosphate buffer pH 5.5, molarity not stated; autoclave"
     temperature_c: [120]
     ph: {initial: 5.5, measured_during: false, final: null}
     time_min: [60]
-    species: [MFT, FFT, thiophenes, thiazoles, 33 volatiles]
+    species: [MFT, FFT, "2-methylpentane-3-thiol", "thiophenes (9)", "dihydro-2-methyl-3(2H)-thiophenone"]
     kind: endpoint
     location: "Table 3 (ug/kg, mean +- SD, n = 3); Table 4 (OAV); Table 5 (sensory)"
     status: digitised_in_dossier
     quant_class: semi_quantitative
     simulable: false
     condition_quote: "corresponding to the pH of pork"
-    flags: [buffer_molarity_not_stated, analysis_delay_uncertain]
-    note: "phospholipid-model. Lipid-free control (A1) is a buffered Cys + Xyl pot, but buffer molarity, vessel/headspace and analysis delay (24 h vs 5 d at 4 C) are not stated, so marked not simulable. IS = 2-methyl-3-heptanone, RF 1."
+    flags: [buffer_molarity_not_stated, analysis_delay_uncertain, group_D_composition_conflict, "subtotal_misprint: C2 78.80 = 478.80", "shared_mean_220.77: row 26 B1 and D1"]
+    note: "phospholipid-model. Lipid-free control (A1) is a buffered Cys + Xyl pot, but buffer molarity, vessel/headspace and analysis delay (24 h vs 5 d at 4 C) are not stated, so marked not simulable. IS = 2-methyl-3-heptanone, RF 1. TEST table heldout_zhang2021_table3 (2026-11-01): two blind readers (A, B) agree on all 96 cells of the 12 sulfur species (68 numeric, 28 not detected); verified, status ready, TEST data for contrast-benchmark error E7, never a fit input. Table 1 D1 / D2 doses conflict with the text (D2 'after reheating' of D1): one D column misprinted, unresolved. C2 Subtotal 78.80 is 478.80 (column sums reproduce the other seven Subtotals). Laboratory China Meat Research Center (Zang) is not in data/keys/laboratories.yml nor in lab_ids_v1."
   - id: gao2020b_tab2_tab4_tilapia_hydrolysate_rsm
     dossier: gao2020b_extraction.md
     paper: "Gao, Xia, Li & Liu 2020 Food Chem 331:127353"
@@ -8821,7 +8821,7 @@ entries:
     simulable: false
     condition_quote: "two-threefold increases in rate from 0 to 0.025 M buffer"
     flags: ["analogue_formaldehyde", "coarse_read", "internal_inconsistency", "erratum_not_on_disk", "condition_not_stated: time_min"]
-    note: "The saturation ceiling of phosphate catalysis (attack becomes rate-limiting), against any linear k0(1 + c_P[HPO4 2-]) law; two readers for the plateau. arms: phosphate 0-0.3 M at three pH (same lab, same assay)."
+    note: "The saturation ceiling of phosphate catalysis (attack becomes rate-limiting), against any linear k0(1 + c_P[HPO4 2-]) law; two readers for the plateau. arms: phosphate 0-0.3 M at three pH (same lab, same assay). Eqs 9-10 as corrected in JACS 95, 6510 (kallen1973 dossier, 2026-11-01): only the corrected eq 10 (partition term divided by the free-base fraction) gives the saturation of this figure; no printed value changes."
   - id: kallen1971b_tab1_thiazolidine_formation_rate_vs_ph
     dossier: kallen1971b_extraction.md
     paper: "Kallen 1971 J Am Chem Soc 93:6236"
@@ -8839,7 +8839,7 @@ entries:
     simulable: false
     condition_quote: ""
     flags: ["analogue_formaldehyde", "erratum_not_on_disk", "condition_not_stated: time_min"]
-    note: "Forward pH law of a cysteine thiazolidine; with kallen1971's K_app it yields the reverse k_r(pH), which stays a derived note beside kallen1971_tables3_4, never a measurement; 1973 Additions and Corrections not on disk. arms: pH ladder and buffer identity / concentration (same lab, same polarimetric / UV assay)."
+    note: "Forward pH law of a cysteine thiazolidine; with kallen1971's K_app it yields the reverse k_r(pH), which stays a derived note beside kallen1971_tables3_4, never a measurement; Eqs 9-10 as corrected in JACS 95, 6510 (kallen1973 dossier, 2026-11-01): the erratum changes no table, figure or constant here. arms: pH ladder and buffer identity / concentration (same lab, same polarimetric / UV assay)."
   - id: kallen1971b_tab2_microscopic_rate_equilibrium_constants
     dossier: kallen1971b_extraction.md
     paper: "Kallen 1971 J Am Chem Soc 93:6236"
@@ -9038,3 +9038,239 @@ entries:
     condition_quote: "cysteine + MGO \"at a low concentration (2 mM)\", 10 and 25 C, pH 3.5 (by context)"
     flags: ["ph_start_only", "internal_inconsistency", "condition_uncertain", "no_replicates", "no_error_bars", "vessel_not_stated"]
     note: "Only time-resolved Cys + MGO -> acetylthiazoline -> acetylthiazole series at low T (thiazoline intermediate maximum, thiazole rising); SIM vs octan-3-ol, no response factor; ~355 mg/L start = 2.93 mM free Cys, key the Cys axis as fraction of initial. arms: 10 vs 25 C (pH 3.5, same lab, same assay)."
+  # ---- ingest batch 2 (2026-11-01; the 20 dossiers of commits 2fc869c1 / faea6d14 / e7ffb46b, 'Ingest batch 2'; huber1990 and kallen1973 have no ledger-ready data); ledgered 2026-11-01 ----
+  - id: tressl1994_tab4_13c_label_c5_heterocycles_glucose_cysteine
+    dossier: tressl1994_extraction.md
+    paper: "Tressl, Kersten, Nittka & Rewicki 1994 ACS Symp Ser 564:224"
+    lab: "TU Berlin (Tressl)"
+    system: "[1-13C]- or [6-13C]-D-glucose (or [1-13C]-D-arabinose) + L-cysteine, equimolar (concentrations not printed; method of Tressl 1993)"
+    medium: "aqueous, pH 5 (buffer not named); vessel and headspace not stated"
+    temperature_c: [160]
+    ph: {initial: [5.0], measured_during: false, final: null}
+    time_min: [90]
+    species: ["5-hydroxymethylfurfurylthiol", "5-methylfurfurylthiol", "5-acetyltetrahydrothiophene-3-one", "2-acetylpyrrole", "furfuryl alcohol", "2-hydroxymethylthiophene", "5-hydroxymethyltetrahydrothiophene-3-one", "3-thiolanone"]
+    kind: ratio
+    location: "Table IV (label position, printed; read from 300 dpi crops); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "Equimolar amounts"
+    flags: [concentrations_not_stated, ph_start_only, vessel_not_stated, no_replicates, "also_relevant: trunk"]
+    note: "C-1-loss signature of hexose C5 heterocycles: 18, 22, 23, 24 unlabelled from [1-13C], 100 % singly labelled from [6-13C] (glucose C2-C6 via 3-DG, Scheme 4 proposed). NO MFT, NO norfuraneol, NO FFT from glucose in any table: cannot move E1 / E6 / E11; weakly against a 1-DG -> C5 (C-6 loss) entry (absence, not a measured zero). arms: [1-13C]- vs [6-13C]-glucose; [1-13C]-arabinose control (same lab, same GC-MS isotopomer assay)."
+  - id: tressl1994_tab5_13c_label_1dg_products_intact_c6
+    dossier: tressl1994_extraction.md
+    paper: "Tressl, Kersten, Nittka & Rewicki 1994 ACS Symp Ser 564:224"
+    lab: "TU Berlin (Tressl)"
+    system: "[1-13C]- or [6-13C]-D-glucose + L-cysteine, equimolar (concentrations not printed)"
+    medium: "aqueous, pH 5 (buffer not named); vessel and headspace not stated"
+    temperature_c: [160]
+    ph: {initial: [5.0], measured_during: false, final: null}
+    time_min: [90]
+    species: [thioacetylformoin, thiofuraneol, furaneol, "2,5-dimethyltetrahydrofuran-3-one", "dihydro-dihydroxy-methylpyranone (28)", "2-acetylthiophene"]
+    kind: ratio
+    location: "Table V (isotopomer shares, printed; 300 dpi crop); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [concentrations_not_stated, ph_start_only, vessel_not_stated, no_replicates, "also_relevant: trunk"]
+    note: "Every 1-DG product keeps all six carbons (100 % singly labelled from both labels); the 5- / 2-methyl label split is 55 : 45 (39), 54 : 46 (40), 48 : 52 (32), not the 50 : 50 of a symmetric diacetylformoin, attributed to a Cys-specific route (Scheme 6, proposed). arms: [1-13C]- vs [6-13C]-glucose (same lab, same GC-MS isotopomer assay)."
+  - id: vandenouweland1975_tab1_tab2_norfuraneol_thiophenone_h2s_identities
+    dossier: vandenouweland1975_extraction.md
+    paper: "van den Ouweland & Peer 1975 J Agric Food Chem 23:501"
+    lab: "Unilever (van den Ouweland)"
+    system: "4-hydroxy-5-methyl-3(2H)-furanone (norfuraneol) 0.5 g in 30 mL water (~146 mM), or its 3(2H)-thiophenone analogue, + H2S 15 g (~440 mmol, ~100x molar); no amine"
+    medium: "water, no buffer, pH not stated; glass-lined autoclave (closed; headspace and O2 not stated)"
+    temperature_c: [95, 100]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [240]
+    species: ["4-mercapto-2-methylfuran", "3-mercapto-2-methyl-4,5-dihydrofuran", "3-mercapto-2-methylthiophene", "3-mercapto-2-methyl-2,3-dihydrothiophene", "3-mercapto-2-methyl-4,5-dihydrothiophene", "2-methylthiophene", norfuraneol]
+    kind: other
+    location: "Tables I (NF + H2S, 17 peaks) and II (thiophenone + H2S, 16 peaks): identities, MS, IR, odour (read from 130 / 220 dpi renders); Figs. 2-3 FID traces without scale; dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "4 hr at 95-100"
+    flags: [presence_only, ph_not_stated, unbuffered, no_replicates, vessel_not_stated, "conflicts_with: whitfield1999_table1_nf_cys_h2s_volatiles"]
+    note: "Qualitative 'operating' row: free NF + H2S (no amine, 100x H2S) reaches the 2-methyl-3-thio skeleton as the dihydrofuran and the thiophene. MFT is NOT named: the aromatic furanthiol is printed (name, structure, synthesised reference) as 4-mercapto-2-methylfuran (P misnamed ~0.3; [M-H]+/M+ 0.50 vs MFT's 0.28). No yields, no internal standard: bounds neither k_nf_mft nor the free-NF share (E6). Whitfield 1999 (NF + H2S, pH 4.5, 140 C) finds MFT and none of the dihydro derivatives. Second reader to re-check peak 3's structure against its name. arms: norfuraneol vs thiophenone substrate (same lab, same GC-IR-MS)."
+  - id: radomski1989_tab3_thiazolidine_c2_epimer_equilibria_37c
+    dossier: radomski1989_extraction.md
+    paper: "Radomski & Temeriusz 1989 Carbohydr Res 187:223"
+    lab: "Warsaw (Temeriusz)"
+    system: "fifteen 2-(polyhydroxyalkyl)thiazolidine-4(R)-carboxylic acids from L-cysteine + aldoses / glycolaldehyde / glyceraldehydes, incl. D-xylose (compound 10 = TTCA), dissolved as purified solids"
+    medium: "saturated solutions in D2O / water (NMR) or c 0.25-0.5 (polarimetry), unbuffered, N2-washed water; solution pH 3.7-4.0"
+    temperature_c: [37]
+    ph: {initial: [3.7, 4.0], measured_during: false, final: null}
+    time_min: [16, 45]
+    species: ["2R : 2S epimer ratio at equilibrium", "[alpha]eq, [alpha]2S, [alpha]2R"]
+    kind: other
+    location: "Table III (printed; 90 MHz H-2 doublet ratio + polarimetry), Table IV 13C shifts per epimer; dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Saturated solutions at 37"
+    flags: [unbuffered, internal_inconsistency, "also_relevant: trunk"]
+    note: "Analyte composition: TTCA is two C-2 epimers, 2R : 2S = 4.06 at 37 C, equilibrating in ~40 min; HPLC 'TTCA' is their sum unless separated. Compound 8 [alpha]eq '39.0' has lost its minus sign (Fig. 5 plateau -39). No formation K, no release rate. arms: 15 aldehydes / sugars incl. the pentoses 9-14 (same lab, same NMR / polarimetry)."
+  - id: radomski1989_fig5_ring_chain_epimerisation_relaxation_37c
+    dossier: radomski1989_extraction.md
+    paper: "Radomski & Temeriusz 1989 Carbohydr Res 187:223"
+    lab: "Warsaw (Temeriusz)"
+    system: "2-(L-glycero-1,2-dihydroxyethyl)thiazolidine-4(R)-carboxylic acid (compound 8, from L-glyceraldehyde), dissolved solid; Fig. 1 mutarotation curves of all 15 compounds (TTCA included)"
+    medium: "water / D2O, unbuffered, pH ~3.8"
+    temperature_c: [37]
+    ph: {initial: [3.7, 4.0], measured_during: false, final: null}
+    time_min: [3, 60]
+    species: ["2R epimer molar fraction or 2R : 2S ratio (axis label ambiguous)", "[alpha]D"]
+    kind: time_series
+    location: "Fig. 5 (digitised from a 300 dpi crop, +-0.003, +-0.3 min); Fig. 1 mutarotation (temperature not printed); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [internal_inconsistency, unbuffered, analogue_glyceraldehyde_thiazolidine]
+    note: "Ring-chain exchange relaxation k ~0.20 min-1 (t1/2 ~3.5 min) at 37 C for 8 (dossier fit); transfer to TTCA assumed. Ring opening is ~10^4-10^5x faster than CF-076's k_r band at 100 C for any Ea 40-80 kJ/mol, so it cannot be the slow step of TTCA release (supports the structure CF-076's explanation assumes, not a number). Right axis says 'molar fraction' but most likely plots the ratio (dossier sec. 6.2). arms: polarimetry vs NMR (same lab)."
+  - id: radomski1989_text_solution_ph_alkaline_decomposition
+    dossier: radomski1989_extraction.md
+    paper: "Radomski & Temeriusz 1989 Carbohydr Res 187:223"
+    lab: "Warsaw (Temeriusz)"
+    system: "aqueous solutions (c 0.5 g/100 mL, ~20 mM for TTCA) of compounds 6-20; alkaline runs at pH >= 8.5 (base not stated); synthesis pots Cys.HCl 20 mmol + aldehyde 20 mmol in 2-5 mL"
+    medium: "water, unbuffered (alkaline runs base not stated); Fig. 2 also 0.5 M phthalate pH 2.1 and 1-4 M HCl"
+    temperature_c: [25]
+    ph: {initial: [3.7, 4.0, 9.0, 12.0], measured_during: false, final: null}
+    time_min: [5, 10, 1200]
+    species: ["solution pH of the zwitterion", "thiazolidine remaining after alkaline exposure", "formation under strong acid (13C NMR)"]
+    kind: other
+    location: "Results text (pH 3.7-4.0 of 6-20; pH 9 / 12 decomposition by t.l.c.; acid synthesis mixture by 13C NMR); dossier sec. 1, 3"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: "Aqueous solutions (c 0.5) of 6-20 have a pH in the range 3.7-4.0"
+    flags: ["condition_not_stated: temperature (room assumed)", "condition_not_stated: compound for the alkaline runs", "also_relevant: trunk"]
+    note: "Input for a TTCA ring-N pKa bound (~5.2-6.1 by charge balance with pKa1 1.5-2.2; P ~0.6), not itself a pKa; the range is for 6-20 together. Disagrees with Zhai 2021's 'natural pH 5.5' for 10 mM TTCA (a pure zwitterion sits at 3.7-4.5). Alkaline decomposition (pH 12 ~50 % left at 10 min) and the acid limb (no product in 20 h at 4 M H+) are qualitative rows only. arms: neutral vs pH 9 vs pH 12; acid vs base work-up (same lab)."
+  - id: bustillotrueba2018_fig6_fig4a_cys_aldehyde_thiazolidine_stability_ph
+    dossier: bustillotrueba2018_extraction.md
+    paper: "Bustillo Trueba, De Clippeleer, Van der Eycken, Guevara Romero, De Rouck, Aerts & De Cooman 2018 J Am Soc Brew Chem 76:272"
+    lab: "KU Leuven Ghent EFBT (Aerts / De Cooman)"
+    system: "2-substituted thiazolidine-4-carboxylic acids of L-cysteine with furfural, benzaldehyde or methional (FURF-CYS, BENZ-CYS, METH-CYS), 100 mg/L (~0.5 mM), synthesised solids"
+    medium: "Carmody borate / citrate / phosphate universal buffers (0.025-0.03 mol/L per pH unit), label pH, N2-sparged, prepared in an anaerobic workstation; separate vials per time"
+    temperature_c: [20]
+    ph: {initial: [2.0, 4.4, 5.2, 6.0, 9.0], measured_during: false, final: null}
+    time_min: [0, 60, 300, 600, 1440]
+    species: ["thiazolidine remaining (% of t = 0): FURF-CYS, BENZ-CYS, METH-CYS"]
+    kind: time_series
+    location: "Fig. 6 black bars (read from a 170 dpi render, +-3 points; cleaner than the Fig. 4A lines) and Fig. 4A; dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [ph_start_only, coarse_read, analogue_aryl_alkyl_thiazolidine, buffer_confounds_ph, "also_relevant: aroma_other"]
+    note: "A 20 C pH profile of 2-substituted Cys-ring loss under N2: bell with the maximum at pH 4.4-5.2 (x1.6-4.7 slower at 6.0, x3-6 slower at 2.0, nearly stable at 9.0); initial apparent k at pH 4.4 1.3-3.3 x 10^-3 min-1 (BENZ > FURF > METH), 100-240x TC. More acid maximum than Karpinski's PrThz (pH ~6). No sugar ring, no T series, no K, ring pKa only cited (Butvin 1999). arms: 3 adducts x 5 pH x 4 times (same lab, same UPLC-PDA assay)."
+  - id: bustillotrueba2018_fig4b_aldehyde_release_24h_mass_balance
+    dossier: bustillotrueba2018_extraction.md
+    paper: "Bustillo Trueba, De Clippeleer, Van der Eycken, Guevara Romero, De Rouck, Aerts & De Cooman 2018 J Am Soc Brew Chem 76:272"
+    lab: "KU Leuven Ghent EFBT (Aerts / De Cooman)"
+    system: "FURF-CYS, BENZ-CYS, METH-CYS at 2 mg/L (~10 uM; a 50-fold dilution of the ring-loss vials)"
+    medium: "Carmody buffers pH 2.0-9.0, N2, 20 mL headspace vials"
+    temperature_c: [20]
+    ph: {initial: [2.0, 4.4, 5.2, 6.0, 9.0], measured_during: false, final: null}
+    time_min: [0, 1440]
+    species: [furfural, benzaldehyde, methional, "mass balance (ring % + aldehyde %)"]
+    kind: endpoint
+    location: "Fig. 4B (released aldehyde at 24 h, % of full release) and Fig. 6 (mass balance bars); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: ""
+    flags: [ph_start_only, coarse_read, large_cv, internal_inconsistency, "also_relevant: aroma_other"]
+    note: "Storage-release check for Cys-bound Strecker aldehydes (methional, benzaldehyde) at room temperature, pH 4.4-6.0 (HS-SPME on-fibre PFBHA, deuterated IS, calibration per pH). The 'mass balance' adds % ring lost at 0.5 mM to % aldehyde released at ~10 uM: near 100 % at 0-1 h says far from equilibrium, not a validation; no K derivable. arms: 3 aldehydes x 5 pH (same lab, same SPME-GC-MS assay)."
+  - id: karpinski1990_tab1_pentose_thiazolidine_and_tc_release_rate
+    dossier: karpinski1990_extraction.md
+    paper: "Karpinski, Karny & Kublik 1990 J Electroanal Chem 288:129"
+    lab: "Warsaw (Kublik / Temeriusz)"
+    system: "2-(L-arabino-tetrahydroxybutyl)thiazolidine-4-carboxylic acid (AThz, a pentose-cysteine ring) and thiazolidine-4-carboxylic acid (Thz = TC), 10^-5-10^-4 M"
+    medium: "deaerated phosphate buffer (pH 6.0, 7.4; ionic strength not stated), argon; water-jacketed cell"
+    temperature_c: [25]
+    ph: {initial: [6.0, 7.4], measured_during: false, final: null}
+    time_min: [0, 480]
+    species: ["first-order release constant k_a (ring loss = L-cysteine gain)"]
+    kind: rate_constant
+    location: "Table 1 (p. 139, header 10^5 k_a / s, read from a 200 dpi render; the OCR layer garbles it); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: [large_cv, ph_start_only, "condition_not_stated: ionic strength", "also_relevant: trunk"]
+    note: "The first measured release rate of a cysteine-pentose ring: AThz / Thz = 1.0 (pH 6.0) and 1.3 (pH 7.4), so phi ~1 (0.6-1.9 within the 30 % RSDs; ~10 % conversion in 8 h). Contradicts CF-076's phi ~0.1 escape: the declared k_r(100 C, pH 4.5) band then needs release Ea ~17-34 kJ/mol (to ~52 with a phosphate allowance), not TC's 64. Thz at pH 6.0 is x3.3 the corrected Kallen value (supports the kallen1971 correction). Mass balance ring + Cys = c0 within 5 %. Two readers; carry the 30 % RSD. arms: AThz vs Thz at pH 6.0 and 7.4 (same lab, same NP / OSW voltammetry)."
+  - id: karpinski1990_tab1_propyl_thiazolidine_release_ph_ladder
+    dossier: karpinski1990_extraction.md
+    paper: "Karpinski, Karny & Kublik 1990 J Electroanal Chem 288:129"
+    lab: "Warsaw (Kublik / Temeriusz)"
+    system: "2-propylthiazolidine-4-carboxylic acid (PrThz), 10^-5-10^-3 M"
+    medium: "deaerated buffers under argon: phosphate at pH 6.0 / 6.7 / 7.4 (captions), pH 4.5 / 5.2 buffer not named (acetate likely), pH 8.0"
+    temperature_c: [25]
+    ph: {initial: [4.5, 5.2, 6.0, 6.7, 7.4, 8.0], measured_during: false, final: null}
+    time_min: [0, 360]
+    species: ["first-order release constant k_a"]
+    kind: rate_constant
+    location: "Table 1 (printed, RSD < 10 %); Fig. 8 ln c vs t at pH 6.0 (read +-0.05); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: "a maximum at pH near 6"
+    flags: [ph_start_only, buffer_molarity_not_stated, "condition_not_stated: pH 4.5 / 5.2 buffer identity", analogue_aryl_alkyl_thiazolidine, internal_inconsistency]
+    note: "A 2-alkyl release pH profile: bell with its maximum near pH 6 (k(4.5)/k(6.0) = 0.29), against Bustillo Trueba 2018's more acid maximum for aryl / heteroaryl rings. The pH 7.4 -> 8.0 drop (x53) is steeper than one ionisation gives (not discussed). k_a independent of c0 below 10^-3 M, ~x0.5 at 10^-3 M. arms: pH 4.5-8.0 (same lab, same voltammetry)."
+  - id: karpinski1990_tab1_air_vs_argon_thiazolidine_loss
+    dossier: karpinski1990_extraction.md
+    paper: "Karpinski, Karny & Kublik 1990 J Electroanal Chem 288:129"
+    lab: "Warsaw (Kublik / Temeriusz)"
+    system: "Thz (pH 6.0) and PrThz (pH 6.0, 7.4), 10^-5-10^-4 M"
+    medium: "phosphate buffer, air-saturated vs deaerated (argon)"
+    temperature_c: [25]
+    ph: {initial: [6.0, 7.4], measured_during: false, final: null}
+    time_min: [0, 360]
+    species: ["first-order loss constant k_a", "cystine (qualitative)"]
+    kind: rate_constant
+    location: "Table 1 air-saturated rows (printed) and text (linear only for the first 3 h, then accelerating); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [ph_start_only, air_headspace, internal_inconsistency]
+    note: "The only O2 contrast on thiazolidine stability on disk: air speeds ring loss x1.4-4.3 (Thz 0.3 -> 1.3, PrThz 7.3 -> 14.8 x 10^-5 s-1 at pH 6.0) and yields cystine; ln c linear only for 3 h. Bears on the cysteine-sink rival in Wei 2022 / Zhai 2021, at 25 C only. arms: air vs argon (same lab, same voltammetry)."
+  # ---- ingest batch 2 supplements (SI read 2026-11-01: zhang2022, zhou2024; wei2022 Fig. S3 and zhai2021 Table S1 are identities only, no new measurement); ledgered 2026-11-01 ----
+  - id: zhang2022_tabS1_S5_water_phase_thiols_oil_vs_no_oil
+    dossier: zhang2022_extraction.md
+    paper: "Zhang Z, He S et al. 2022 Food Res Int 155:111081"
+    lab: "Hefei Univ. Technology (He S / Sun H)"
+    system: "equimolar xylose + cysteine (printed '0.4 mol' each in 10 mL; ~0.4 mol/L intended) +- corn / peanut / olive / coconut / palm oil, raw (RM) or hydrolysed-oxidised (ENTH, EM), oil : aqueous 4 : 1 v/v; oil-free control"
+    medium: "deionized water, pH 7.2 set with 4 M NaOH (unbuffered); sealed 50 mL tube, oil bath, 150 rpm; water phase analysed separately (4 mL HS-SPME, 1,2-dichlorobenzene IS, RF 1)"
+    temperature_c: [120]
+    ph: {initial: [7.2], measured_during: false, final: [4.33, 4.72]}
+    time_min: [90]
+    species: [MFT, FFT, "bis(2-methyl-3-furyl) disulfide", "bis(2-furfuryl) disulfide", furfural]
+    kind: endpoint
+    location: "Supplementary Tables S1-S5, columns 'No oil', 'W-<oil>-RM', 'W-<oil>-EM' (read from the docx XML, 11 cells per row); dossier SI sec. S.1-S.3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "Equimolar L-cysteine (0.4 mol) and D-xylose (0.4 mol) were completely dissolved into 10 mL deionized water"
+    flags: [si_read_2026-11-01, condition_uncertain, no_sd_printed, near_lod, identity_by_library, single_is_no_response_factor, "also_relevant: lipid", "complements: zhang2022_fig2_fig4_xyl_cys_oil_water"]
+    note: "Held-out TEST candidate for E7 (key as within-study contrasts, arm / no-oil, sign and dex; the absolute charge is uncertain): water-phase free FFT x0.93-6.5 and free MFT x0.36-4.8 over the oil-free control, so partition alone (which predicts x1/20-1/400 at 4 : 1 oil) is ruled out for free thiols; but the MFT disulfide (20x free MFT in the control) vanishes from every RM water phase, so 'MFT suppression' depends on counting it. Disagrees in sign with the xu2011 / Reading F30 cells. Means only, no SD / n; water-phase MFT 0.05-0.67 ng/mL near LOD (ratios < 2x uninformative); MFT / FFT by library match, no authentic standards. The single most useful E7 row. arms: no oil vs 5 oils x raw vs ENTH (same lab, same HS-SPME assay)."
+  - id: zhang2022_tabS1_no_oil_aqueous_endpoint
+    dossier: zhang2022_extraction.md
+    paper: "Zhang Z, He S et al. 2022 Food Res Int 155:111081"
+    lab: "Hefei Univ. Technology (He S / Sun H)"
+    system: "equimolar xylose + cysteine (printed '0.4 mol' each in 10 mL; ~0.4 mol/L intended), no oil"
+    medium: "deionized water, pH 7.2 set with 4 M NaOH (unbuffered); sealed 50 mL tube, oil bath, 150 rpm"
+    temperature_c: [120]
+    ph: {initial: [7.2], measured_during: false, final: [4.72]}
+    time_min: [90]
+    species: [MFT, FFT, "bis(2-methyl-3-furyl) disulfide", "bis(2-furfuryl) disulfide", "2-methyl-3-pentanethiol (identity doubtful)", "2-thiophenecarboxaldehyde", furfural]
+    kind: endpoint
+    location: "Supplementary Tables S1-S5, 'No oil' column (identical in every table; coconut table's thiol subtotal 5.15 vs 5.08 elsewhere); Fig. 2 residual xylose / cysteine (main text); dossier SI sec. S.2"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "Equimolar L-cysteine (0.4 mol) and D-xylose (0.4 mol) were completely dissolved into 10 mL deionized water, subsequently, the pH was adjusted to 7.2 using 4 M sodium hydroxide"
+    flags: [si_read_2026-11-01, condition_uncertain, no_sd_printed, near_lod, identity_by_library, internal_inconsistency]
+    note: "Oil-free aqueous Xyl / Cys endpoint (MFT 0.14, FFT 4.63, MFT disulfide 2.81, furfural 6.17 ng/mL), in the engine's domain once the charge is confirmed with the authors (printed charge impossible, dossier flag 1); MFT disulfide / MFT = 20 is a thiol-oxidation signature worth testing. Not simulable until the charge is resolved. arms: none (the control of zhang2022_tabS1_S5_water_phase_thiols_oil_vs_no_oil)."

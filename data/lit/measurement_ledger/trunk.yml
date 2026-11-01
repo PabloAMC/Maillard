@@ -1878,13 +1878,13 @@ entries:
     time_min: []
     species: [ribose]
     kind: rate_constant
-    location: "Fig. 1 log k vs pD at 4 T (digitised, dossier sec. 4)"
+    location: "Fig. 1 log k vs pD at 4 T: 19 points (60 C has no pD 4.4 point)"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: false
     condition_quote: "dissolved in aqueous 0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
     flags: [ph_is_pd_measured_25c, pd_temperature_correction_ambiguous, buffer_identity_changes_across_profile, sugar_concentration_not_reported]
-    note: "18 digitised points; slope ~+1 per pD from 4 to 6, plateau above ~7 (apparent pKa ~7.0). Only measured pH law for amine-free pentose loss; kH/kD 1.0. Not in the core (pentose steps pH-flat). Simulable in principle as first-order loss."
+    note: "18 digitised points; slope ~+1 per pD from 4 to 6, plateau above ~7 (apparent pKa ~7.0). Only measured pH law for amine-free pentose loss; kH/kD 1.0. Not in the core (pentose steps pH-flat). Simulable in principle as first-order loss. Keyed in heldout_larralde1995 (2026-11-01; two readers within 0.05 dex). Buffer per point from the Methods ranges; the plotted pD 5.44 - 5.72 points are the nominal pD 5.4 acetate runs. The nominal pD 7.4 points are probably Fig. 2's runs (count once)."
   - id: larralde1995_fig2_text_ribose_arrhenius_phosphate
     dossier: larralde1995_extraction.md
     paper: "Larralde, Robertson & Miller 1995 PNAS 92:8158"
@@ -1896,13 +1896,13 @@ entries:
     time_min: []
     species: [ribose]
     kind: rate_constant
-    location: "Fig. 2 (digitised) + printed Arrhenius line and phosphate rate law, p. 8158-8159 (dossier sec. 3-4)"
+    location: "Fig. 2 (Arrhenius points, pD 7.4, 0.05 M phosphate) + text p. 8158 (phosphate rate law, 100 C) and p. 8159 (0.05 M bicarbonate / phosphate = 0.52 at pD 7.4; 73-min half-life = the Arrhenius line)"
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: false
     condition_quote: "rate = 2.86 x 10^-3 + 9.36 x 10^-2 ([DPO4 2-] + [D2PO4 -])"
-    flags: [rate_law_unit_s_vs_min_typo, ph_is_pd_measured_25c, sugar_concentration_not_reported]
-    note: "Ea 107 kJ/mol at pD 7.4; phosphate general-base term at 100 C (printed s^-1 is almost certainly min^-1); bicarbonate 0.52x phosphate. Only buffer-catalysis term in corpus for pentose loss."
+    flags: [rate_law_unit_s_vs_min_typo, ph_is_pd_measured_25c, sugar_concentration_not_reported, bicarbonate_temperature_inferred_100C, phosphate_concentration_series_not_printed]
+    note: "Ea 107 kJ/mol at pD 7.4; phosphate general-base term at 100 C (printed s^-1 is almost certainly min^-1); bicarbonate 0.52x phosphate. Only buffer-catalysis term in corpus for pentose loss. TEST table heldout_larralde1995 (2026-11-01): two blind readers agree (Fig. 2 within 0.01 dex); verified, status ready, TEST data for contrast-benchmark error E5, never a fit input. Rate-law unit resolved as min-1 (P ~0.9): in s-1 it is 48 - 55x the paper's own half-life and Fig. 2. Laboratory UCSD (Miller) is not in data/keys/laboratories.yml nor in lab_ids_v1."
   - id: larralde1995_fig3_other_aldoses
     dossier: larralde1995_extraction.md
     paper: "Larralde, Robertson & Miller 1995 PNAS 92:8158"
@@ -2857,7 +2857,7 @@ entries:
     simulable: true
     condition_quote: "Ala-ARP 20 mmol/L, with or without 20 mmol/L 14N-Ala or 15N-Ala; pH 8.0"
     flags: [ph_start_only, unbuffered]
-    note: "12 rows of isotopomer fractions (response-factor-immune). ~55% of pyrazine N from free Ala, ~37-43% for methyl/dimethylpyrazine. Cited only as mechanistic context in species.py. Gly variant Table S1 not on disk."
+    note: "12 rows of isotopomer fractions (response-factor-immune). ~55% of pyrazine N from free Ala, ~37-43% for methyl/dimethylpyrazine. Cited only as mechanistic context in species.py. Gly variant Table S1 read 2026-11-01 (aroma_other.yml zhou2024_supp_table_s1_15n_gly_and_arrhenius); the SI has no methods, so whether the isotopologues were corrected for [M-H]+ stays undocumented (EX-052)."
   - id: zhou2024_fig3_fig4_axarp_dicarbonyls_ph
     dossier: zhou2024_extraction.md
     paper: "Zhou, Huang, Cui, Hussain, Hayat, Zhang & Ho 2024 J Agric Food Chem 72:18630"
@@ -5445,13 +5445,13 @@ entries:
     time_min: [0, 86]
     species: [3-methylbutanal, pyrazine, methylpyrazine, "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", acetic acid, furfural, 5-methylfurfural, furfuryl_alcohol, HMF]
     kind: time_series
-    location: "Figs. 1-3 and 4A-B (Fig. 4C's transport constants are matrix.yml lee2024_fig4c_matrix_vapour_transport_constants); supplementary Figs. S1-S4 not on disk"
+    location: "Fig. 2 (p. 6: 3-MB and the four pyrazines, G + L only; 140 C grey squares, 170 C green triangles, 200 C magenta circles); Fig. 1 (furanics, AA); Fig. 3 is the reaction scheme (no data; Sec. 3.2.2 mis-cites it for the pyrazines); Figs. 4A-B; supplementary Figs. S1-S4 not on disk"
     status: figure_only
     quant_class: semi_quantitative
     simulable: false
     condition_quote: "found ONLY in G + L; absent from G"
-    flags: [low_moisture_no_aw_term, non_isothermal, open_system_product_stripping, "same_lab_republication_of: lee2022"]
-    note: "Same pots as Lee 2022, disjoint species (vapour, mmol per L air per gDM). 3-MB and 4 pyrazines only with leucine; acetic acid 10x higher with leucine. 3-MB above linearity at 200 C. Vapour flux needs a transport model to compare to matrix."
+    flags: [low_moisture_no_aw_term, non_isothermal, open_system_product_stripping, "same_lab_republication_of: lee2022", "text_vs_figure_conflict: 'MP displayed the lowest concentrations of all pyrazines' vs Fig. 2 (MPZ highest at 200 C); proposed conflicts-register entry", "sampling_conflict: 140 C points plotted at 88 min, Methods sampled 91-95 / 116-120 instead"]
+    note: "Same pots as Lee 2022, disjoint species (vapour, nmol per L air per g DM: the axes; Sec. 2.6 'previously shown as nmol'; the 'mmol' of Sec. 3.2.1 is a typo). 3-MB and 4 pyrazines only with leucine; acetic acid 10x higher with leucine. 3-MB above linearity at 200 C. Vapour flux needs a transport model to compare to matrix. TEST table heldout_lee2024_fig2 (2026-11-01): two blind readers agree within error on 79 / 80 points; 41 rows kept (35 at the reading floor and the 4 140 C / 88-min points dropped); verified, status ready, TEST data for contrast-benchmark error E13, never a fit input. Laboratory string 'INRAE / AgroParisTech (Rega / Bonazzi)' = lab_ids_v1 sayfood_paris_saclay; not in data/keys/laboratories.yml."
   - id: solina2007_extruded_starch_spi_ahvp_volatiles
     dossier: solina2007_extraction.md
     paper: "Solina, Johnson & Whitfield 2007 Food Chem 104:1522"
@@ -7812,3 +7812,472 @@ entries:
     condition_quote: ""
     flags: ["supplement_missing", "unbuffered"]
     note: "The in-situ pH input every other zhou2024b row needs ('pH ... was <7'); also in the SI: Fig. S3 condensation-product peak areas, Fig. S4 MGO + Ala pot. arms: +/- L-alanine 20 mM."
+  # ---- ingest batch 2 (2026-11-01; the 20 dossiers of commits 2fc869c1 / faea6d14 / e7ffb46b, 'Ingest batch 2'; huber1990 and kallen1973 have no ledger-ready data); ledgered 2026-11-01 ----
+  - id: saunders1966_tab2_buffer_identity_ph3_invert_sugar_glycine
+    dossier: saunders1966_extraction.md
+    paper: "Saunders & Jervis 1966 J Sci Food Agric 17:245"
+    lab: "Cerebos Edinburgh (Saunders)"
+    system: "invert sugar 0.5 M +- glycine 0.5 M; no buffer, or sodium phosphate 0.25 M, sodium citrate 0.25 M, sodium acetate 0.75 M"
+    medium: "40 mL in a capped fish-paste jar (lacquered tinplate cap) with an internal NaOH CO2 trap; air headspace; 15 psi steam ('about 121')"
+    temperature_c: [121]
+    ph: {initial: [3.0], measured_during: false, final: [2.40, 3.12]}
+    time_min: [120]
+    species: ["T490 (browning)", "A285 (carbonyls)", CO2]
+    kind: endpoint
+    location: "Table II (printed, 8 rows; final pH per row); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [no_replicates, ph_measurement_temperature_unstated, temperature_nominal_autoclave, metal_confound_not_addressed]
+    note: "The cleanest 'is phosphate special' contrast on disk: at pH 3 citrate = phosphate per mole, acetate ~1/3 per mole, amine-free x11-12 and with glycine x1.8-2.0 on A490 = -log10 T (F undiluted, G 100-fold). Acetic acid volatilises (no CO2 for the acetate arms). arms: no buffer vs phosphate vs citrate vs acetate, each +- glycine (same lab, same T490 / A285 / CO2 assays)."
+  - id: saunders1966_fig5_reflux_phosphate_vs_none_ph_trajectory
+    dossier: saunders1966_extraction.md
+    paper: "Saunders & Jervis 1966 J Sci Food Agric 17:245"
+    lab: "Cerebos Edinburgh (Saunders)"
+    system: "glucose 0.05 M + glycine 0.05 M +- sodium phosphate 0.2 M"
+    medium: "water, boiling under reflux, air"
+    temperature_c: [100]
+    ph: {initial: [8.05], measured_during: true, final: null}
+    time_min: [120, 690]
+    species: ["T490 (browning, 1 + 9 dilution)", "pH change"]
+    kind: time_series
+    location: "Fig. 5 (read from a 200 dpi render, +-2 % T, +-0.1 pH; 5 times x 2 pots); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: ""
+    flags: [coarse_read, no_replicates, ph_measurement_temperature_unstated]
+    note: "The only time-resolved buffer arm here; the phosphate pot is the MORE acid one for the first 8 h yet x8-13 browner on A490, so at pH 8 the buffer effect is not a pH artefact (vs the 'fades at pH 8' reading of Davidek 2002). Two readers before keying. arms: 0.2 M phosphate vs none, 2-11.5 h (same lab, same T490 assay)."
+  - id: saunders1966_fig1_phosphate_vs_none_equimolar_ladder_ph75
+    dossier: saunders1966_extraction.md
+    paper: "Saunders & Jervis 1966 J Sci Food Agric 17:245"
+    lab: "Cerebos Edinburgh (Saunders)"
+    system: "sodium phosphate 0.25 M with glucose = glycine 0.05-0.40 M (equimolar ladder) or glucose + glycine at 0.5 M total; control 0.25 + 0.25 M without phosphate; glucose 0.5 M + phosphate without glycine"
+    medium: "40 mL capped jar with NaOH CO2 trap, air; 15 psi steam ('about 121')"
+    temperature_c: [121]
+    ph: {initial: [7.5], measured_during: false, final: null}
+    time_min: [120]
+    species: ["T490 (browning, 100-fold dilution)", "A285 (carbonyls)", CO2, "pH change"]
+    kind: endpoint
+    location: "Fig. 1 (read from a 200 dpi render; the open-square control point and the equimolar line); dossier sec. 1, 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [coarse_read, no_replicates, temperature_nominal_autoclave, metal_confound_not_addressed, internal_inconsistency]
+    note: "Phosphate vs none at 0.25 + 0.25 M: A490 x7.6 (x6-10 on the read), A285 x7, CO2 x5; A490 linear (not quadratic) in c along the equimolar ladder at fixed phosphate; amine-free glucose + phosphate gives CO2 ~8 mM. The legend note on the open square is garbled (read as the omission control, dossier sec. 6.4). Two readers before keying. arms: phosphate vs none at 0.25 M; equimolar ladder 0.05-0.40 M; glycine omitted (same lab, same assays)."
+  - id: saunders1966_fig2_citrate_vs_none_ph3_glucose_glycine
+    dossier: saunders1966_extraction.md
+    paper: "Saunders & Jervis 1966 J Sci Food Agric 17:245"
+    lab: "Cerebos Edinburgh (Saunders)"
+    system: "sodium citrate 0.5 M with glucose = glycine 0.05-0.30 M; control 0.25 + 0.25 M without citrate"
+    medium: "40 mL capped jar with NaOH CO2 trap, air; 15 psi steam ('about 121')"
+    temperature_c: [121]
+    ph: {initial: [3.0], measured_during: false, final: null}
+    time_min: [120]
+    species: ["T490 (browning, undiluted)", "A285 (carbonyls, 1 + 399)"]
+    kind: endpoint
+    location: "Fig. 2 (read from a 200 dpi render); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [coarse_read, no_replicates, temperature_nominal_autoclave]
+    note: "Citrate 0.5 M vs none at 0.25 + 0.25 M glucose / glycine: x3.7-3.8 on A285; a second citrate level beside Table II's 0.25 M (x1.8, but invert sugar 0.5 M), so only 'no saturation to 0.5 M' across designs. Fig. 3 / 4 (citrate at pH 8, constant-total designs) not ledgered (no clean control). arms: citrate vs none; equimolar ladder (same lab, same assays)."
+  - id: davies2005_tab1_acetate_ladder_late_browning_rate
+    dossier: davies2005_extraction.md
+    paper: "Davies 2005 ACS Symp Ser 905:146"
+    lab: "Delaware (Davies; Leeds Wedzicha lineage, merge undecided)"
+    system: "glucose 0.2 M + glycine 0.2 M in sodium acetate 0.1 / 0.2 / 0.3 / 0.4 / 0.5 M"
+    medium: "acetate buffer adjusted with glacial acetic acid; vessel, headspace and O2 not stated; incubated"
+    temperature_c: [50]
+    ph: {initial: [5.5], measured_during: false, final: [5.3]}
+    time_min: [0, 30000]
+    species: ["A420 (late-stage zero-order slope k0, intercept, t2 coefficient)"]
+    kind: rate_constant
+    location: "Table 1 (k0 +- SD, intercept, r2), Table 2 (a, b of A = a t2 + b t), Fig. 1 (0.5 M curve); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "All reaction mixtures were prepared in triplicate"
+    flags: [vessel_not_stated, ph_measurement_temperature_unstated, "time_not_stated: exact sampling times (to A420 = 2.0, up to ~500 h)"]
+    note: "The cleanest carboxylate concentration law on disk: k0 x6.2 from 0.1 to 0.5 M acetate at held pH 5.5 -> 5.3, log-log order ~1.15 (1.30 on a), no saturation; lag (-c / k0) 131 -> 93 h. The no-acetate pot is NOT a clean control (initial pH 5.9, final 4.9; 'essentially no reaction'). Lab merge with leeds_wedzicha is an owner decision (dossier sec. 4). arms: 0.1-0.5 M acetate (same lab, same A420 assay)."
+  - id: davies2005_fig3_amine_free_acetate_vs_citrate
+    dossier: davies2005_extraction.md
+    paper: "Davies 2005 ACS Symp Ser 905:146"
+    lab: "Delaware (Davies; Leeds Wedzicha lineage, merge undecided)"
+    system: "glucose 0.2 M + sodium acetate 0.5 M or sodium citrate 0.5 M, no amine; reference glucose 0.2 M + glycine 0.2 M + acetate 0.5 M"
+    medium: "buffer pH 5.5; vessel, headspace and O2 not stated"
+    temperature_c: [50]
+    ph: {initial: [5.5], measured_during: false, final: null}
+    time_min: [0, 30000]
+    species: [A420]
+    kind: time_series
+    location: "Fig. 3 (read at screen resolution, +-0.05 A420, +-10 h); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [coarse_read, vessel_not_stated, internal_inconsistency]
+    note: "Buffer-identity contrast without amine at 50 C: acetate browns to a plateau A420 ~0.6 (350-500 h, unexplained: exhausted minor reactant?), citrate <= 0.02 to ~280 h. Disagrees with Saunders 1966 Table II (citrate x12 amine-free at pH 3, 121 C). Two readers before keying. arms: acetate vs citrate, no amine; + glycine reference (same lab, same A420 assay)."
+  - id: davies2005_tab4_glucose_glycine_doublings_at_three_acetate
+    dossier: davies2005_extraction.md
+    paper: "Davies 2005 ACS Symp Ser 905:146"
+    lab: "Delaware (Davies; Leeds Wedzicha lineage, merge undecided)"
+    system: "glucose / glycine 0.2 / 0.2, 0.2 / 0.4, 0.4 / 0.2 M in sodium acetate 0.1 / 0.3 / 0.5 M"
+    medium: "acetate buffer; vessel, headspace and O2 not stated"
+    temperature_c: [50]
+    ph: {initial: [5.5], measured_during: false, final: null}
+    time_min: [0, 30000]
+    species: ["A420 (a and b of A = a t2 + b t)"]
+    kind: rate_constant
+    location: "Table 4 (printed 10^4 a and b); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: ""
+    flags: [vessel_not_stated, model_conditional_constants]
+    note: "Reactant orders at fixed buffer: doubling glucose OR glycine raises a ~3x at 0.3 / 0.5 M acetate; the 0.2 / 0.2 / 0.5 row matches Table 2. Table 3's acetate fit (exponents cut off in the scan; p of the wrong sign) not ledgered. arms: glucose x2 vs glycine x2 vs base, at 0.1 / 0.3 / 0.5 M acetate (same lab, same A420 assay)."
+  - id: eichner1972_fig2_tab3_browning_vs_aw_water_content_37c
+    dossier: eichner1972_extraction.md
+    paper: "Eichner & Karel 1972 J Agric Food Chem 20:218"
+    lab: "MIT (Karel)"
+    system: "glucose 10 g (55.5 mmol) + glycine 2.085 g (27.8 mmol) in 10 mL water or glycerol-water (glycerol 0 / 0.17 / 0.35 / 0.56 mL per g glucose), equilibrated over saturated salts"
+    medium: "syrup in desiccators over salt solutions (a_w 0.32-0.84 at 37 C, Table I), air; no buffer"
+    temperature_c: [37]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [4200]
+    species: ["E420 per g glucose (browning extent)", "water content (mL H2O per g glucose)"]
+    kind: endpoint
+    location: "Fig. 2 (read from a 200 dpi render, +-0.003-0.005 E420) and Table III (printed water contents; OCR cell 0.17 is 0.77 on the image); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [ph_not_stated, unbuffered, no_replicates, low_moisture_no_aw_term, single_endpoint_called_rate]
+    note: "Browning maximum at a_w 0.41-0.52 for a glucose-glycine syrup (x38 from 0.84 to 0.41); the controlling variable is water CONTENT, not a_w (Fig. 3 collapse). The authors' 'browning rate' is a 70 h extent (linearity in time not shown). Solution 1e (undissolved glycine) not plotted. Two readers before keying. arms: a_w 0.32-0.84 x glycerol 0-0.56 mL/g (same lab, same E420 assay)."
+  - id: eichner1972_fig1_glycerol_replacing_water_constant_reactants_50c
+    dossier: eichner1972_extraction.md
+    paper: "Eichner & Karel 1972 J Agric Food Chem 20:218"
+    lab: "MIT (Karel)"
+    system: "glucose 10 g + glycine 1.043 g (13.9 mmol) in 10 g solvent of 20-100 % water, the rest glycerol (solutions 2a-2e, a_w 0.86-~0.40, Table II)"
+    medium: "closed serum-cap bottles, air; no buffer"
+    temperature_c: [50]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [4200]
+    species: ["E420 per g glucose (browning extent)"]
+    kind: endpoint
+    location: "Fig. 1 (read from a 200 dpi render) with Table II a_w (printed); dossier sec. 1, 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [ph_not_stated, unbuffered, no_replicates, single_endpoint_called_rate]
+    note: "Water-as-product test at constant reactant concentration: E420 x18 from 100 % to 20 % solvent water (about x2 per 20 % water removed); a glycerol solvent effect is not excluded. Fig. 3 (the collapse of every point onto mL water per g glucose) is the check on any a_w law; additive runs (Figs. 6-10, Methocel / gum arabic / PVA viscosity) not ledgered. Two readers before keying. arms: solvent water 20 / 40 / 60 / 80 / 100 % (same lab, same E420 assay)."
+  - id: tressl1994_tab2_cysteine_vs_proline_3dg_1dg_products
+    dossier: tressl1994_extraction.md
+    paper: "Tressl, Kersten, Nittka & Rewicki 1994 ACS Symp Ser 564:224"
+    lab: "TU Berlin (Tressl)"
+    system: "[1-13C]-D-glucose + amino-acid mixture (Val, Ile, Leu, Phe) with L-proline or with L-cysteine, equimolar (concentrations not printed)"
+    medium: "aqueous, pH 5 (buffer not named); vessel and headspace not stated"
+    temperature_c: [160]
+    ph: {initial: [5.0], measured_during: false, final: null}
+    time_min: [90]
+    species: [HMF, "furfuryl alcohol", furaneol, cyclotene, "2-acetylfuran", "pyrrole lactones (15, 16)", "dihydro-dihydroxy-methylpyranone (28)"]
+    kind: ratio
+    location: "Table II ('ppm', basis not stated; printed); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: ""
+    flags: [concentrations_not_stated, ppm_basis_not_stated, ph_start_only, vessel_not_stated, no_replicates, "also_relevant: sulfur"]
+    note: "Within-study cysteine effect: cysteine raises the 3-DG products (HMF x15, furfuryl alcohol x1.9) and leaves the 1-DG products flat (28, furaneol); ppm basis unstated, so a ratio row only. 'All C6-compounds are 100% singly labeled'. Table I (Strecker / beta-elimination / transamination products, Cys vs Met) not ledgered. arms: AS / Pro vs AS / Cys (same lab, same GC-MS assay)."
+  - id: koehler1969_tab2_14c_amino_acid_carbon_in_mpz_dmp
+    dossier: koehler1969_extraction.md
+    paper: "Koehler, Mason & Newell 1969 J Agric Food Chem 17:393"
+    lab: "Oklahoma State (Koehler)"
+    system: "D-glucose 10 mmol + L-asparagine or L-alanine 10 mmol, with glucose-1-14C, asparagine-UL-14C or alanine-2-14C (2 uCi)"
+    medium: "20 mL water + 200 mL diethylene glycol (~45 mM each), no buffer, open reflux (air)"
+    temperature_c: [120]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1440]
+    species: ["methylpyrazine (product / reactant specific activity)", "2,5(6)-dimethylpyrazine (product / reactant specific activity)"]
+    kind: ratio
+    location: "Table II (printed); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [ph_not_measured, unbuffered, open_system, coelution_2_5_and_2_6_dmp, low_moisture_no_aw_term]
+    note: "Amino-acid carbon in MPZ <= 2.6 % (Ala-2-14C) and <= 0.2 % (Asn-UL-14C): a third lab (with Nestle and Reading) against an aldehyde-addition MPZ route carrying amino-acid carbon (S4 / P2a_aa); says nothing on a sugar-carbon extra route (P2b). arms: Asn vs Ala partner; sugar vs amino-acid label (same lab, same preparative GC + scintillation)."
+  - id: koehler1969_tab3_glucose_c1_c6_c34_label_in_mpz_dmp
+    dossier: koehler1969_extraction.md
+    paper: "Koehler, Mason & Newell 1969 J Agric Food Chem 17:393"
+    lab: "Oklahoma State (Koehler)"
+    system: "D-glucose 10 mmol (1-, 6- or 3,4-14C) + L-asparagine 10 mmol"
+    medium: "20 mL water + 200 mL diethylene glycol, no buffer, open reflux"
+    temperature_c: [120]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1440]
+    species: ["methylpyrazine (specific-activity ratio)", "2,5(6)-dimethylpyrazine (specific-activity ratio)"]
+    kind: ratio
+    location: "Table III (printed, means of 2-3 runs +- average deviation, with the pathway I / II predictions); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [ph_not_measured, unbuffered, open_system, coelution_2_5_and_2_6_dmp, low_moisture_no_aw_term]
+    note: "Fragment origin: glucose C1 in MPZ 1.29 vs 1.50 for one C1-C2 C2 + one C3 pairing; C6 and C3,4 0.63 vs 0.50; DMP ~1.0. The authors read the shortfall as C2-pool dilution; an MPZ fraction from another route fits equally (C2-pool composition free). arms: glucose-1- vs 6- vs 3,4-14C (same lab, same assay)."
+  - id: koehler1969_fig3_asn_glucose_plus_minus_acetaldehyde_pyrazines
+    dossier: koehler1969_extraction.md
+    paper: "Koehler, Mason & Newell 1969 J Agric Food Chem 17:393"
+    lab: "Oklahoma State (Koehler)"
+    system: "D-glucose 10 mmol + L-asparagine 10 mmol +- 'a large excess' of acetaldehyde (amount not stated)"
+    medium: "20 mL water + 200 mL diethylene glycol, no buffer, open reflux; falling-film isolation (recovery > 90 %)"
+    temperature_c: [120]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1440]
+    species: [pyrazine, methylpyrazine, "2,5(6)-dimethylpyrazine", trimethylpyrazine-type]
+    kind: endpoint
+    location: "Fig. 3 (umol recovered; bar tops read off a 400 dpi crop, +-3-8 umol); Table I total yields (UV, printed); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "peak areas of samples with those of known weights of standards"
+    flags: [coarse_read, ph_not_measured, unbuffered, open_system, coelution_2_5_and_2_6_dmp, concentrations_not_stated, internal_inconsistency, no_error_bars]
+    note: "The only supply perturbation with all three species: acetaldehyde moves PZ x~17, MPZ x~1.8, DMP x~0.09 and R = MPZ2/(PZ DMP) 50 -> 98 (bands 34-82 vs 72-145): pairing rivals predict R unchanged, so weak support for P2b or a heterogeneity change, not separating. Table I's 11643 umol for the acetaldehyde pot (vs ~580 from Fig. 3) is probably non-pyrazine UV absorbers. Fig. 1's Asn PZ share (4.8 %) is ~2x Fig. 3's (2.5 %). Two readers before keying. arms: +- acetaldehyde (same lab, same packed-column FID assay)."
+  - id: koehler1969_fig1_pyrazine_distribution_by_nitrogen_source
+    dossier: koehler1969_extraction.md
+    paper: "Koehler, Mason & Newell 1969 J Agric Food Chem 17:393"
+    lab: "Oklahoma State (Koehler)"
+    system: "D-glucose 10 mmol + L-asparagine, L-glutamine, L-glutamic acid, L-aspartic acid or NH4Cl 10 mmol; roasted-peanut distillate reference"
+    medium: "20 mL water + 200 mL diethylene glycol, no buffer, open reflux"
+    temperature_c: [120]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1440]
+    species: [pyrazine, methylpyrazine, "2,5(6)-dimethylpyrazine", "2-ethyl-3,6(5)-dimethylpyrazine"]
+    kind: ratio
+    location: "Fig. 1 (% of total pyrazines, bar tops read off a 400 dpi crop, +-1 point); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [coarse_read, ph_not_measured, unbuffered, open_system, coelution_2_5_and_2_6_dmp, no_error_bars, buffer_confounds_ph]
+    note: "R extremes: amino-acid pots R 9-39 (> 4, against P0 and P1), NH4Cl R ~0.07 (PZ ~75 %; NH4Cl is acidic, so N source is confounded with pH); mole vs weight share not stated (R differs ~2 %). NH4Cl 59 umol here vs ND in koehler1970 Table I (same lab, 10x concentration); Asn DMP/MPZ ~0.5 here vs 3.7 there. Key DMP as 2,5(6)-DMP unresolved; two readers. arms: Asn vs Gln vs Glu vs Asp vs NH4Cl (same lab, same FID assay)."
+  - id: koehler1970_tab3_fed_c2_c3_c4_carbonyls_pyrazines
+    dossier: koehler1970_extraction.md
+    paper: "Koehler & Odell 1970 J Agric Food Chem 18:895"
+    lab: "Oklahoma State (Koehler)"
+    system: "0.1 mol each of a carbonyl (propionaldehyde, glycerol, acetaldehyde, glyoxal, 2,3-butanedione, hydroxyacetone) + L-asparagine or NH4OH; glucosamine (neutralised) alone"
+    medium: "200 mL diethylene glycol + 20 mL water (~0.45 M each), no buffer, reflux; two falling-film passes (98 % recovery of PZ / MPZ / 2,5-DMP)"
+    temperature_c: [120]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1440]
+    species: [pyrazine, methylpyrazine, "2,5(6)-dimethylpyrazine", tetramethylpyrazine]
+    kind: endpoint
+    location: "Table III (printed, umol / 220 mL); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "comparison of peak areas of samples with those of standards"
+    flags: [ph_not_measured, unbuffered, coelution_2_5_and_2_6_dmp, below_lod, low_moisture_no_aw_term]
+    note: "The only pots of this paper with PZ: glyoxal-Asn PZ 527 / MPZ 91 / DMP ND (MPZ without its DMP sibling from a pure C2 feed; key dmp: below_unstated_lod; R >= 16-160), acetaldehyde-Asn R 0.31 (DMP 291 dominant; a low-R row beside CF-087), glucosamine R 22; hydroxyacetone -> only DMP, butanedione -> only TMP. LOD not printed ('less than 0.1 umol' used as 'essentially none'). Label test proposed: [13C2]glyoxal + Asn. arms: carbonyl identity x Asn vs NH4OH (same lab, same FID assay)."
+  - id: koehler1970_tab1_tab2_nitrogen_source_and_sugar_mpz_dmp
+    dossier: koehler1970_extraction.md
+    paper: "Koehler & Odell 1970 J Agric Food Chem 18:895"
+    lab: "Oklahoma State (Koehler)"
+    system: "Table I: D-glucose 0.1 mol + Asn, Gly, Ala, Lys, Asp, Asp + NaOH, NH4OH or NH4Cl 0.1 mol; Table II: L-asparagine 0.1 mol + glucose, fructose, sucrose or arabinose 0.1 mol"
+    medium: "200 mL diethylene glycol + 20 mL water, no buffer, reflux"
+    temperature_c: [120]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [1440]
+    species: [methylpyrazine, "2,5(6)-dimethylpyrazine"]
+    kind: endpoint
+    location: "Tables I and II (printed, umol / 220 mL and DMP/MP); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [ph_not_measured, unbuffered, coelution_2_5_and_2_6_dmp, low_moisture_no_aw_term, internal_inconsistency]
+    note: "Within-study ratios only (no PZ, so no R): glucose + NH4OH MPZ 1415 / DMP 56 (UC Davis pattern); NH4Cl ND (vs 59 umol in koehler1969); fructose DMP/MP 8.4, arabinose 0.5; glycine MPZ ND. arms: N source; sugar identity (same lab, same FID assay)."
+  - id: koehler1970_fig1_fig4_temperature_and_acid_base_mpz_dmp
+    dossier: koehler1970_extraction.md
+    paper: "Koehler & Odell 1970 J Agric Food Chem 18:895"
+    lab: "Oklahoma State (Koehler)"
+    system: "D-glucose 0.1 mol + L-asparagine 0.1 mol ('normal' pot); Fig. 1 80-150 C; Fig. 2 0-72 h; Fig. 3 Asn : glucose 1:3 / 1:1 / 3:1; Fig. 4 0-0.08+ eq H2SO4 or NaOH"
+    medium: "200 mL diethylene glycol + 20 mL water, reflux; pH not measurable in the glycol medium"
+    temperature_c: [80, 100, 110, 120, 137, 150]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 4320]
+    species: [methylpyrazine, "2,5(6)-dimethylpyrazine", "DMP/MP ratio"]
+    kind: time_series
+    location: "Figs. 1-4 (read off a 170 dpi render, +-15 umol, +-50 on Fig. 4) and the text factors (DMP x10, MPZ x4 from 100 to 140 C; base MPZ x10, DMP x5); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [coarse_read, ph_not_measured, unbuffered, coelution_2_5_and_2_6_dmp, low_moisture_no_aw_term, text_quoted_figure_sourced]
+    note: "Direction for E4 in a low-water medium: acid -> ~0, base -> MPZ x10, DMP x5 (equivalents, no pH value; supply and step not separated); 'essentially no' pyrazines below 100 C; DMP/MP ratio peaks ~4.5 at 110-115 C; MPZ > DMP only before ~3 h. No PZ in any figure. Two readers before keying beyond the text factors. arms: temperature; time; reactant ratio; acid vs base (same lab, same FID assay)."
+  - id: bemisyoung1993_tab2_glycine_glucose_pyrazine_shares_ph_ladder
+    dossier: bemisyoung1993_extraction.md
+    paper: "Bemis-Young, Huang & Bernhard 1993 Food Chem 46:383"
+    lab: "UC Davis (Bernhard / Shibamoto)"
+    system: "D-glucose 0.5 M + glycine 1.5 M, 100 mL"
+    medium: "water, unbuffered by design (initial pH set with 2 N NaOH or 10 % HCl); sealed Wheaton pressure bottles, air headspace; oven 120 C (solution T not stated)"
+    temperature_c: [120]
+    ph: {initial: [1.00, 2.34, 4.00, 5.97, 7.00, 9.00, 9.64, 12.0], measured_during: false, final: null}
+    time_min: [300]
+    species: [pyrazine, "2-methylpyrazine", "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", "2,3-dimethylpyrazine"]
+    kind: ratio
+    location: "Table 2 (mean relative weight % of identified pyrazines, read from a 220 dpi render; the text layer drops pH 12.0); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [ph_start_only, unbuffered, relative_area_percent, no_error_bars, "condition_not_stated: final pH (measured, not printed)"]
+    note: "Within-study pH ladder of R in a glycine pot (key as relative_weight_percent_rf_corrected, RF-corrected capillary FID, 2,5 / 2,6 resolved): R 0.020 / 0.087 / 0.54 / 3.3 at pH 5.97 / 7.00 / 9.00 / 9.64 (PZ ND at pH 1-4 and 12). A second lab with R << 0.4 in a glycine pot: supports CF-087's row as chemistry, contradicts the rivals' floor R >= 4h with h >= 0.1. PZ 0.06 % at pH 9.64 moves R x0.7-2 on +-0.03. arms: 8 initial pH (same lab, same RF-corrected FID assay; triplicate pots x triplicate injections, means only)."
+  - id: bemisyoung1993_tab2_tab3_trialkylpyrazines_non_pyrazines_vs_ph
+    dossier: bemisyoung1993_extraction.md
+    paper: "Bemis-Young, Huang & Bernhard 1993 Food Chem 46:383"
+    lab: "UC Davis (Bernhard / Shibamoto)"
+    system: "D-glucose 0.5 M + glycine 1.5 M, 100 mL"
+    medium: "water, unbuffered; sealed pressure bottles, air; oven 120 C"
+    temperature_c: [120]
+    ph: {initial: [1.00, 2.34, 4.00, 5.97, 7.00, 9.00, 9.64, 12.0], measured_during: false, final: null}
+    time_min: [300]
+    species: ["2,3,5-trimethylpyrazine", "2-ethyl-3,5-dimethylpyrazine", tetramethylpyrazine, "2,3-diethyl-5-methylpyrazine", acetol, "2-methylimidazole", pyrrole, "CH2Cl2 extract yield (% of glucose)"]
+    kind: ratio
+    location: "Table 2 (trialkyl rows), Table 3 (13 non-pyrazines, text layer spot-checked on the render), extract yields in text; dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [ph_start_only, unbuffered, relative_area_percent, no_error_bars, internal_inconsistency]
+    note: "Aldehyde-addition products (glycine Strecker gives HCHO) vs pH, direction only: 2,3,5-TrMP the largest pyrazine at every pH (19-47 %), 2-ethyl-3,5-DMP 71 / 55 % at pH 1.00 / 2.34 (an unusual product set dominated by a few peaks). Extract yield 1.56-5.01 % of glucose is not pyrazine-specific (context only). arms: 8 initial pH (same lab, same assay)."
+  - id: wong1988_tab2_pyrazine_shares_by_nitrogen_source
+    dossier: wong1988_extraction.md
+    paper: "Wong & Bernhard 1988 J Agric Food Chem 36:123"
+    lab: "UC Davis (Bernhard / Shibamoto)"
+    system: "D-glucose 1 M + NaOH 1 M + nitrogen source 8 M (ammonium hydroxide, ammonium formate, ammonium acetate, glycine, monosodium glutamate), 100 mL"
+    medium: "water; vessel not described here (method of Shibamoto & Bernhard 1978, continuous extraction)"
+    temperature_c: [120]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [240]
+    species: [pyrazine, "2-methylpyrazine", "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", trimethylpyrazine, tetramethylpyrazine, acetamide, "4-methylimidazole"]
+    kind: ratio
+    location: "Table II (relative weight % of 32 identified compounds, mean +- SD, n = 4; text layer spot-checked); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "dropped approximately 3 pH units for all samples"
+    flags: [relative_area_percent, vessel_not_stated, ph_not_reported, "condition_not_stated: initial pH (measured, not printed)"]
+    note: "The only calibrated, isomer-resolved N-source ladder of R with SDs (key as relative_weight_percent_of_identified_rf_corrected): R(2,5) NH4OH 14.6 (+-0.12 dex), formate 556, acetate 349, glycine 5.4 (+-0.31), glutamate 0.28 (+-0.24; a third low-R row against the rivals' floor). Same-lab disagreement: glucose + NH4OH R 14.6 here vs 310-700 in shibamoto1976 / 1977 (NaOH dose, work-up, packed vs capillary columns). Glycine pot TrMP 28.6 %, TeMP 7.1 % (aldehyde addition). arms: five N sources at equal molar N (same lab, same RF-corrected FID assay)."
+  - id: wong1988_tab1_fid_relative_response_factors
+    dossier: wong1988_extraction.md
+    paper: "Wong & Bernhard 1988 J Agric Food Chem 36:123"
+    lab: "UC Davis (Bernhard / Shibamoto)"
+    system: "authentic standards of the identified pyrazines and non-pyrazines"
+    medium: "FID (HP 5711A, DB-Wax+; Varian Vista 6000, DB-1701), method of McNair & Bonelli"
+    temperature_c: [25]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0]
+    species: ["FID relative response factor (pyrazine = 1.000)"]
+    kind: other
+    location: "Table I (printed; PZ 1.000, MPZ 1.164, 2,5-DMP 1.177, 2,6-DMP 1.271 ...); dossier sec. 1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [recovery_not_stated]
+    note: "Calibration fact, not a reaction measurement: relative FID RFs usable to convert other UC Davis area-% tables (shibamoto1976 / 1977) to weight %. Work-up recovery not stated here. arms: none."
+  - id: shibamoto1976_tab2_glucose_ammonia_ladder_and_time_series_pyrazines
+    dossier: shibamoto1976_extraction.md
+    paper: "Shibamoto & Bernhard 1976 J Agric Food Chem 24:847"
+    lab: "UC Davis (Bernhard / Shibamoto)"
+    system: "D-glucose 18 g (1 M) + ammonium hydroxide 0.1-15 M, water to 100 mL (exps 1-20); 8 M (probable; Table I prints 0.8) for the time series (exps 30-39)"
+    medium: "water, no buffer; open 300 mL flask + Friedrich condenser, air (NH3 escapes on reflux; <= 4.3 M soluble at 100 C)"
+    temperature_c: [100]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [15, 2880]
+    species: [pyrazine, "2-methylpyrazine", "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", "total pyrazine yield (% of glucose)"]
+    kind: ratio
+    location: "Table II exps 1-20 (NH3 ladder, 2 h) and 30-39 (15 min-48 h); printed rotated, read cell by cell from a 300 dpi render; dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [ph_not_stated, unbuffered, open_system, dmp_recovery_not_tested, "duplicate_of: exp 33 = exp 17 (key once)", concentration_basis_inferred, no_replicates]
+    note: "The method paper behind shibamoto1977 (its ref 3, probable): key with quantification weight_percent_rf_corrected_recovery_checked_PZ_MPZ (PZ / MPZ recovery > 98 %, DMP untested). R 313-1200 along the NH3 ladder (falls ~0.3 dex above 4 M, basicity changing too), 357-485 over 30 min-48 h; agrees with shibamoto1977 within ~0.1 dex; disagrees with wong1988's glucose + NH4OH (R 14.6). arms: NH3 0.1-15 M; time 15 min-48 h (same lab, same packed-Carbowax FID assay)."
+  - id: shibamoto1976_tab2_temperature_series_cold_pots_pyrazine_ratio
+    dossier: shibamoto1976_extraction.md
+    paper: "Shibamoto & Bernhard 1976 J Agric Food Chem 24:847"
+    lab: "UC Davis (Bernhard / Shibamoto)"
+    system: "D-glucose 1 M + ammonium hydroxide (8 M probable; Table I prints 0.8 for exps 21-41)"
+    medium: "water; open reflux (air) to 100 C; closed N2-flushed flame-sealed Kjeldahl ampoules above 100 C (oven); 30-day pots at 25 / -5 C"
+    temperature_c: [-5, 25, 50, 60, 70, 80, 90, 100, 120, 140, 160]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [120, 43200]
+    species: [pyrazine, "2-methylpyrazine", "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", "total pyrazine yield (% of glucose)"]
+    kind: ratio
+    location: "Table II exps 21-29 (50-160 C, 2 h) and 40-41 (25 / -5 C, 30 days); dossier sec. 3 flags 1-3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "should be considered with caution"
+    flags: [ph_not_stated, unbuffered, dmp_recovery_not_tested, internal_inconsistency, concentration_basis_inferred, status_uncertain]
+    note: "Temperature contrast of R: ~0.3-0.7 at -5 / 25 C (30 d, yields 0.005-0.007 %) vs ~360-500 at 100 C (2 h): an apparent dEa ~78 kJ/mol on R (times differ); bounds a pair-specific Ea (P1x) or an extra MPZ route (P2b) without separating them. Do NOT key exps 25-27 as independent: exp 27 (120 C closed) copies exp 17 in every cell (the '120 C maximum' rests on it), exps 25 / 26 share one distribution. Closed pots N2-flushed (against the shibamoto1977 dossier's 'air-filled ampoules'). Second reader before keying. arms: -5 to 160 C; open vs closed (same lab, same assay)."
+  - id: shibamoto1976_tab2_naoh_arms_pyrazine_yield
+    dossier: shibamoto1976_extraction.md
+    paper: "Shibamoto & Bernhard 1976 J Agric Food Chem 24:847"
+    lab: "UC Davis (Bernhard / Shibamoto)"
+    system: "D-glucose 1 M + ammonium hydroxide 0.1 M or 8 M + NaOH 0.4 g (0.1 M); controls exps 1 / 17"
+    medium: "water; open reflux (exps 42-43) or N2-flushed sealed ampoule (exp 44, 18 h)"
+    temperature_c: [100]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [120, 1080]
+    species: [pyrazine, "2-methylpyrazine", "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", "total pyrazine yield (% of glucose)"]
+    kind: endpoint
+    location: "Table II exps 42-44 (printed); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [ph_not_stated, dmp_recovery_not_tested, no_replicates]
+    note: "Base factor on yield: 0.002 -> 0.056 % at 0.1 M NH3, 0.945 -> 1.048 % at 8 M; best yield 5.47 % (8 M + NaOH, 18 h, closed); R 432-534 (vs 388-534 in shibamoto1977). arms: +- 0.1 M NaOH at 0.1 / 8 M NH3; open 2 h vs closed 18 h (same lab, same assay)."
+  - id: cui2026_fig4_mgo_go_aw_temperature_grid_chestnut_protein
+    dossier: cui2026_extraction.md
+    paper: "Cui, Xin, Ji, Wang, Sun, Yu, Wei, Wang, Zhang & Wang 2026 LWT 258:120020"
+    lab: "Nankai (Wang Shuo)"
+    system: "chestnut protein isolate (92.62 % purity, 4.31 % residual carbohydrate) alone, + maltose or + sucrose, protein : sugar 1 : 1.5 w/w, freeze-dried"
+    medium: "freeze-dried powder equilibrated 7-10 d in open Petri dishes over saturated salts to a_w 0.53 / 0.75 / 0.97 (AquaLab-verified BEFORE heating); forced-convection oven, air; vessel and closure not stated; no buffer"
+    temperature_c: [100, 150, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20]
+    species: [methylglyoxal, glyoxal]
+    kind: endpoint
+    location: "Fig. 4 (3 x 5 grid; digitised from 300 dpi crops of p. 9, +-0.3 ug/g GO, +-1.5 MGO); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [matrix_food, ph_not_measured, vessel_not_stated, aw_label_is_starting_aw_not_reaction_aw, low_moisture_no_aw_term, single_endpoint_called_rate, "also_relevant: aroma_other"]
+    note: "The only a_w x T grid of dicarbonyl end points on a plant protein: at 150 C MGO / GO rise monotonically with a_w (no intermediate maximum), all fall from 150 to 200 C (consumed). OPD derivatisation implied by the quinoxaline MRM transitions, not described. Fig. 4 is captioned 'kinetic profiles' but its x-axis is temperature: end points at 20 min, NOT rates. Open dishes at 150-200 C dry out, so the reaction a_w is unknown. Two readers before keying. arms: a_w 0.53 / 0.75 / 0.97 x 100 / 150 / 200 C x maltose vs sucrose vs protein alone (same lab, same LC-MS/MS assay)."
+  - id: cui2026_fig4_3dg_above_axis_break_chestnut_protein
+    dossier: cui2026_extraction.md
+    paper: "Cui, Xin, Ji, Wang, Sun, Yu, Wei, Wang, Zhang & Wang 2026 LWT 258:120020"
+    lab: "Nankai (Wang Shuo)"
+    system: "chestnut protein isolate + maltose or + sucrose, 1 : 1.5 w/w, freeze-dried; unheated CPI-M anchor 209.23 ug/g"
+    medium: "powder at starting a_w 0.53 / 0.75 / 0.97 (salts, AquaLab before heating); forced-convection oven, air"
+    temperature_c: [100, 150, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20]
+    species: ["3-deoxyglucosone"]
+    kind: endpoint
+    location: "Fig. 4 3-DG panels above the axis break (+-100 ug/g; CPI-M at 100 / 150 C all a_w, CPI-S a_w 0.97); unheated 209.23 ug/g printed in text; dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [matrix_food, ph_not_measured, vessel_not_stated, aw_label_is_starting_aw_not_reaction_aw, partial_transcription, low_moisture_no_aw_term]
+    note: "3-DG highest at 100 C and falling with T; values below the axis break (~0-500 ug/g) are unreadable, so CPI-S at a_w 0.53 / 0.75 and all 200 C cells are missing. Unheated CPI-M already holds 209.23 ug/g (formed during co-lyophilisation, ~47x CPI-S). At 100 C 3-DG and colour peak at a_w 0.97, against the a_w ~0.5 maxima of Warmbier / Pereyra (reaction a_w not the label). Two readers before keying. arms: a_w x T x maltose vs sucrose (same lab, same LC-MS/MS assay)."
