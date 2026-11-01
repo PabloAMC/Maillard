@@ -401,3 +401,29 @@ Constants read at 100 / 145 C:
 **Caveats:**
 - Clamped pH is a pH-stat. The literature pots are buffered with drift <= 0.2 (Meynier) or more (others).
 - 30 mM charges are not the papers' charges, except E. The probe tests direction and order of magnitude, not a scored fit.
+
+## 5. Red-team amendment (2026-11-01, night; binding over sec. 3 where they differ)
+
+An independent red team re-ran the probes (they reproduce Appendix A) and tested the top 8 items: the engine claim, the literature strength, the "minimum structure" and the band-now claim. Notes: scratchpad/redteam_engine_errors.md (to be archived with EX-056).
+
+| item | verdict | P (error real and material) | what changes |
+|---|---|---|---|
+| E1 hexose intact-C5 MFT | engine error SUPPORTED; band-now fix REFUTED | 0.85 | Cysteine is not an amine in the trunk, so Glc + Cys has only amine-free 1-DG supply. HEXOSE_C5_ENTRY on gives ribose / glucose MFT 45 - 78 (measured 10.4), and 0.79 with 33 mM Gly (13x over). Needs a NEW Glc + Cys -> 1-DG step; hexose MFT also inherits E6. |
+| E2 enolisation split frozen in pH | WEAKENED | 0.55 | The trapping data are one school; Wageningen's slopes overlap; Martins 2003 at 120 C has equal slopes. No per-step hook exists (a code change). |
+| E3 no Strecker aldehydes | a REFUSAL, not a silent error | 0.3 (as a silent error) | Leucine requests are refused. The 3-DG donor band is DFA-only (Quest 0.03x). Stays A3. |
+| E4 pyrazine pH law on the Strecker step | SUPPORTED | 0.7 | The supply already carries 0.69 dec / pH, so the step's slope double-counts (shipped methylpyrazine pH 7 / 5 = 170 vs Leahy 14). With the step slope at 0.07, methylpyrazine matches (13.8) but pyrazine goes flat (0.71). |
+| E5 no buffer catalysis | SUPPORTED, step-specific | 0.7 | 8+ labs, but FFT and acetic yield are unchanged, and citrate beats phosphate for acrylamide at pH 6. A3. |
+| E6 MFT via free norfuraneol | strongly SUPPORTED at <= 100 C | 0.85 | Off on three labs' designs: Cerny pot D NF share 0.98 - 1.00 vs 0.07; Givaudan ribose / NF MFT 0.0066 vs 48; Hofmann 145 C 21 vs 2.6. But F23#13 puts NF at 30 - 100 % at 145 C, and the single 64 kJ/mol barrier makes the share T-invariant. So E6 needs E11 (per-route barriers); k_ddp_mft and k_dpo_nf are frozen keys. |
+| E7 lipid inert | SUPPORTED | 0.7 | Reading counts as one lab (+ Huazhong); Du 2025 shows MFT +19 - 30 % with free fatty acids; part is oil partition. A3. |
+| E10 TTCA formation off | engine error SUPPORTED; fix REFUTED | 0.75 | B58 already ran TTCA_FORMATION (DO NOT SHIP). The probe moves MFT / FFT <= 4 %. Slowing k_r contradicts Cao's K under detailed balance (k_r >= ~7e-3 /min at 90 C). The real lever is B59b CYS_AMADORI_ROUTE (MFT x0.16 - 3.6, FFT up to x654 at pH 6.5). |
+
+**Recommended order of change.** Each step is a pre-registered declared-band change behind an EXISTING switch or parameter, judged by its evidence test.
+1. **E4:** band the below-7 pyrazine Strecker-step slope at [0, 0.15].
+   - Test: Leahy's methylpyrazine ratio within 0.3 dex; pyrazine's expected miss pre-registered.
+   - Shipped pyrazines move x2.6 - 10 at pH 5 - 6: OWNER APPROVAL.
+2. **E6 + E11 as one refit:** unfreeze k_ddp_mft / k_dpo_nf, with per-route barriers via formation_Ea_by_route bounded by measured classes.
+   - Tests: pot D NF share <= 0.15; Givaudan >= 10; Hofmann within 3x; no B60 row worse by > 0.3 dex.
+3. **E10 via B59b,** after fixing its dpo_share split law. Test: TTCA (Zhai 2019, Zhang 2025b) within 2x.
+4. **E1:** a new hexose + Cys -> 1-DG step. Tests: Hofmann T1 MFT 10.4 and FFT 4.3 within 3x.
+5. **E2:** per-step exponents, with the 120 C equality declared.
+6. **E5, E7, E3:** after A3.
