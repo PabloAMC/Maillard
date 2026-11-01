@@ -1,0 +1,20 @@
+# Second reader (reader B), Thornalley, Langborg & Minhas 1999, Biochem J 344:109-116 (thornalley1999.pdf), Figs. 1b, 2e, 2f, 3c and the 100 mM text rates. Independent of reader A. Rows: data/lit/fit_rows/second/heldout_thornalley1999_figs1b_2e_2f_3c.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes.
+reader: 'agent-readerB-2026-11-01'
+role: 'independent second reader, contrast benchmark TEST keying (error E5)'
+
+entries:
+- ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates'
+  source_file: 'thornalley1999.pdf'
+  location: 'Figs. 1b (p. 111), 2e, 2f (p. 112), 3c (p. 113); text pp. 111, 113, 114'
+  read_by: 'agent-readerB-2026-11-01'
+  second_reader: 'self'
+  date: '2026-11-01'
+  checks:
+    conditions: 'pass'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'corrected'
+    values: 'corrected'
+  quote: 'The initial rate of increase in alpha-oxoaldehyde concentration (determined over the initial 2 days) was: glyoxal 1.72 +- 0.05 uM/day, methylglyoxal 0.098 +- 0.003 uM/day and 3-DG 0.437 +- 0.032 uM/day (n = 3). ... Incubations contain 50 mM glucose in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (b) 10-100 mM sodium phosphate buffer'
+  notes: 'Reader B''s reading of the same cells; values identical to reader A''s except where the first record''s adjudication says otherwise.'

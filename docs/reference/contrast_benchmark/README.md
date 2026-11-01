@@ -333,3 +333,67 @@ If a new version admits these labs, TEST(E) labs grow by one each:
 - **Lee 2024.**
   - These are vapour concentrations in an open, non-isothermal oven. 39 of the 80 points were dropped: at the reading floor, or 140 C points plotted at a time the Methods did not sample.
   - The text says MP is the lowest pyrazine, but the figure shows it the highest (unresolved). So any E13 ratio must also be reported with MPZ / 10.
+
+## 11. Addendum: the top 15 queue units keyed (2026-11-01)
+
+The first 15 units of `keying_queue.yml` (ranks 1-15) were keyed by two independent, blind readers (A and B) and adjudicated, under the same rules as sec. 10. Table cells take the printed value. Figure reads take the mean of A and B, with read error max(A, B, |A-B|/2). Every ambiguity either reader flagged was re-read in the PDF.
+
+The result is 12 tables (Meynier's three units share one file, and so do Zhao 2019b's two) holding 1,104 rows. All are **TEST data only, never a fit input**: `fit_rows.load` refuses every table, because each row's unit is outside `fit_rows.UNITS` and most species are coined `V_` keys. Every table reconciles with 0 disagreements (`results/validation/source_reading_reconciliation_heldout_*.md`). Each unit's `keying_status` in `keying_queue.yml` records its table, row count and drops.
+
+As in sec. 10, **these rows sit outside the frozen splits**. `split.yml` and `split_v2_per_change.yml` are unchanged. A score that uses these rows must say so, and counting them as v2 contrasts needs a new, dated version (sec. 3).
+
+| table (`data/lit/fit_rows/`) | units (rank) | consumer | lab | rows | dropped |
+|---|---|---|---|---|---|
+| `heldout_meynier1995_tab1_2_4.yml` | 1, 14, 15 | E4; E3 (Table 4) | Reading (`reading_mottram_parker`) | 88 | DMDS pH 6.0 (8.6) |
+| `heldout_sedehi2013_tab1.yml` | 2 | E4 | University of San Diego (`de_haan_san_diego`) | 26 | glyoxal + AS law (Yu 2011 data) |
+| `heldout_zhao2017b_tab1.yml` | 3 | E7 | BTBU | 52 | none |
+| `heldout_du2023_tab2.yml` | 4 | E6 / E11 | CAAS | 133 | no. 34 D, no. 26 C and D, no. 47 A |
+| `heldout_liu2023b_tab3.yml` | 5 | E6 / E11 | CAAS | 203 | none |
+| `heldout_zhao2019b_tab1_2.yml` | 6, 11 | E6 / E11 (Table 2); E7 (Table 1) | BTBU | 134 + 124 | none |
+| `heldout_wang2022_tab2.yml` | 7 | E7, E12 | BTBU | 76 | none |
+| `heldout_thornalley1999_figs1b_2e_2f_3c.yml` | 8 | E5 | Essex | 48 | Fig. 1b MG 100 mM point |
+| `heldout_zamora2015_tab1.yml` | 9 | E7 | Seville (Hidalgo) | 139 | none |
+| `heldout_xu2007_tab1.yml` | 10 | E8 | China Agricultural Univ. (`new_cau_gao_y`) | 65 | none (single-reader cells not rows) |
+| `heldout_deroos2005_fig4.yml` | 12 | E10 | Givaudan / Quest (`givaudan_de_roos`) | 6 | single-reader pH 3.5, 5.25 |
+| `heldout_grosch1992_tab2.yml` | 13 | CF-089, E18 | DFA Garching (Grosch) | 10 | none |
+
+**What these add, per consumer.** Each count assumes a new version admits the rows. Lab counts are TEST(E) labs under v2 (`keying_queue.yml` -> `per_error_gain_if_queue_keyed`):
+- **E4:** 4 new TEST contrasts: the glycine and lysine MPZ / 2,5-DMP pH ladders, the methionine methional ladder, and Sedehi's printed pH laws. Labs grow 1 -> 3 (Reading, University of San Diego).
+- **E3:** 1 new contrast (methional vs pH, Meynier Table 4). No new lab.
+- **E7:** 3 new contrasts: Zhao 2017b's aldehyde arms, Wang 2022's methyl linoleate dose and Zhao 2019b Table 1's fat / oxidised fat. Zamora 2015 makes the existing F30#15 scorable. Labs grow 3 -> 4 (BTBU), or to 5 with sec. 10's China Meat Research Center.
+- **E8:** 1 new contrast (Xu 2007's pH 5.6 / 7.0 / 8.0 control arms). Labs grow 0 -> 1 (China Agricultural University).
+- **E10:** 1 new contrast (de Roos Fig. 4's pH profile of the cysteine Amadori compound). Labs grow 1 -> 2 (Givaudan, which is DEV only for E6 / E11).
+- **E5:** no new contrast. F05#23, F06#11 and F08#2 (Thornalley) become scorable. Labs stay at 3, or 4 with sec. 10's UCSD.
+- **E6 / E11:** no new contrast or lab. Eight existing contrasts become scorable: F23#6 and F24#6 (Liu 2023b), F23#7, F24#4 and F25#23 (Zhao 2019b), and F23#8, F24#5 and F26#24 (Du 2023).
+- **E12:** F28#25 (Wang 2022) becomes scorable.
+- **CF-089 / E18:** F27#15 and F27#16 (Grosch 1992) become scorable.
+
+**Resolutions a scorer must carry.**
+- **Meynier 1995.**
+  - Table 4's printed "3-(Methylthio)propanol" is read as methional (P ~0.9), on the evidence of the abstract, the discussion and the LRI of 903.
+  - The DMDS cell 24.82 is kept as printed. The cell 8.6 at pH 6.0 is dropped: it contradicts the rise the text states.
+  - In-pot concentrations are 50 + 35 mM. This is inferred, because the printed 100 / 70 mM is the stock before a 25 -> 50 mL make-up.
+- **Sedehi 2013.**
+  - The per-run data are in Supplement Table S2, which is not on disk. Only the printed laws are keyed (flag `supplement_missing`).
+  - The rate constants are measured in D2O at 4-25 C and 0.2-1.5 M.
+  - MG loss includes aldol self-reaction, so these laws are an upper bound on the imine step.
+- **Thornalley 1999.**
+  - In Fig. 2e the square and triangle symbols are re-assigned (square = MG, triangle = 3-DG; P ~0.85). The text, the Fig. 2g bars and the printed fold changes (5x, 32x, 6x) all support this.
+  - Fig. 1b's MG point at 100 mM is 2.4x the text value and is dropped. At 100 mM the text rates replace the figure points, so each is counted once.
+  - Phosphate is not crossed with the chelator.
+- **Wang 2022.** The printed Total row is misprinted in all three columns, while the subtotals reproduce the row sums. Row 16 may be a copy of row 6 and is flagged.
+- **Du 2023.**
+  - No system-M (no-aldehyde) CAMOLA rows are printed. There is therefore no in-paper baseline, and lipid-carbon shares must be read against 50 : 50.
+  - No. 34 is printed twice. Its D row conflicts with Table 1 and is dropped.
+- **Xu 2007.**
+  - The "phosphate" buffer is 0.2 M pyrophosphate.
+  - The final pH is printed (5.5 / 6.2 / 6.8).
+  - The pH 5.6 columns duplicate Xu 2008, so count them once.
+- **Liu 2023b.**
+  - Table 3 exists; the queue's `text_only` status was wrong.
+  - A "potassium phosphate tribasic" buffer at pH 5.88 is internally inconsistent. Reactant amounts are not printed.
+  - CF-086's ~6 % MFT fragment share applies.
+- **Zhao 2019b.** Table 2 prints systems only for 2-ethylthiophene. The other rows stand for all three systems, since the text says their patterns are "unchanged".
+- **de Roos 2005.** Fig. 4 is a curve without data markers: the rows are readings of the curve, not data points.
+
+**Verification.** Each table has a first reading (the adjudicated rows) and a second reading under `second/` (reader B's values as written, with the adjudication's species keys). Each also has two `source_verification` records and a reconciliation note. `schema_gate`, `source_verification_gate`, `citation_gate` and `dossier_coverage_gate` pass. The ledger updates are proposed for the ledger's sole writer, not applied here.

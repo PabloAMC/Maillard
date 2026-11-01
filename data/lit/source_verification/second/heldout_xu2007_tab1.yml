@@ -1,0 +1,20 @@
+# Second reader (reader B), Xu, Gao, Liu & Zhao 2008 (online 2007), J Sci Food Agric 88:328-335 (xu2007.pdf), Table 1, control columns. Independent of reader A. Rows: data/lit/fit_rows/second/heldout_xu2007_tab1.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes.
+reader: 'agent-readerB-2026-11-01'
+role: 'independent second reader, contrast benchmark TEST keying (error E8)'
+
+entries:
+- ledger_id: 'xu2007_table1_ph_axis_volatiles'
+  source_file: 'xu2007.pdf'
+  location: 'Table 1, pp. 332-333; Methods p. 329'
+  read_by: 'agent-readerB-2026-11-01'
+  second_reader: 'self'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'corrected'
+    values: 'pass'
+  quote: 'Phosphate buffers (0.2 mol L-1) at different pH values were prepared by mixing appropriate volumes of 0.2 mol L-1 sodium pyrophosphate dibasic and 0.2 mol L-1 sodium pyrophosphate tetrabasic. ... b Each model system consisted of 5 mmol ribose and 5 mmol cysteine in 100 mL 0.2 of mol L-1 phosphate buffer.'
+  notes: 'Reader B''s reading of the same cells; values identical to reader A''s except where the first record''s adjudication says otherwise.'

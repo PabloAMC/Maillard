@@ -2,7 +2,8 @@
 version: keying_queue_v1
 date: '2026-11-01'
 status: TRIAGE ONLY. No value was keyed. Every row below still needs its numbers keyed AND re-read in the PDF by two readers (plan rule
-  (i)).
+  (i)). UPDATE 2026-11-01 -- the top 15 units (ranks 1-15) are keyed by two blind readers and adjudicated into TEST tables (each unit's
+  keying_status; docs/reference/contrast_benchmark/README.md sec. 11); ranks 16 on are still triage only.
 purpose: 'P1 (docs/guides/STATUS_AND_PLAN.md, plan from 2026-11-01): key only rows with paired arms, from papers outside DEVELOPMENT,
   each with a named consumer, into TEST; stop if fewer than half of the first 30 qualify.'
 inputs:
@@ -442,6 +443,85 @@ already_keyed_since_triage_started:
   - zhang2021_tab3_cys_xyl_phospholipid_reheat
   keyed_in:
   - data/lit/fit_rows/heldout_zhang2021_table3.yml
+- unit: meynier1995_gly_ribose_pyrazine_ph_ladder
+  ledger_entries:
+  - meynier1995_table1_gly_ribose_ph_ladder
+  keyed_in:
+  - data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+- unit: sedehi2013_dicarbonyl_amine_ph_rate_laws
+  ledger_entries:
+  - sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws
+  keyed_in:
+  - data/lit/fit_rows/heldout_sedehi2013_tab1.yml
+- unit: zhao2017b_cys_xyl_aldehyde_arms
+  ledger_entries:
+  - zhao2017b_tab1_aldehyde_arm_volatiles_3h
+  keyed_in:
+  - data/lit/fit_rows/heldout_zhao2017b_tab1.yml
+- unit: du2023_camola_glucose_c9_aldehydes
+  ledger_entries:
+  - du2023_table2_camola_isotopomers
+  - du2023_tab2_camola_lipid_carbon_share
+  keyed_in:
+  - data/lit/fit_rows/heldout_du2023_tab2.yml
+- unit: liu2023b_ribose_label_carbon_modules
+  ledger_entries:
+  - liu2023b_carbon_module_labelling
+  keyed_in:
+  - data/lit/fit_rows/heldout_liu2023b_tab3.yml
+- unit: zhao2019b_camola_glucose_gsh
+  ledger_entries:
+  - zhao2019b_table2_camola_glucose_labelling
+  - zhao2019b_tab2_camola_fat_systems
+  keyed_in:
+  - data/lit/fit_rows/heldout_zhao2019b_tab1_2.yml
+- unit: wang2022_cys_xyl_methyl_linoleate
+  ledger_entries:
+  - wang2022_table2_lipid_vs_blank_120c_150min
+  - wang2022_table2_volatiles_120c_150min
+  keyed_in:
+  - data/lit/fit_rows/heldout_wang2022_tab2.yml
+- unit: thornalley1999_phosphate_series
+  ledger_entries:
+  - thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates
+  keyed_in:
+  - data/lit/fit_rows/heldout_thornalley1999_figs1b_2e_2f_3c.yml
+- unit: zamora2015_lipid_carbonyl_strecker_pea
+  ledger_entries:
+  - zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl
+  keyed_in:
+  - data/lit/fit_rows/heldout_zamora2015_tab1.yml
+- unit: xu2007_ribose_cys_ffT_ph_axis
+  ledger_entries:
+  - xu2007_table1_ph_axis_volatiles
+  keyed_in:
+  - data/lit/fit_rows/heldout_xu2007_tab1.yml
+- unit: zhao2019b_gsh_glucose_fat_arms
+  ledger_entries:
+  - zhao2019b_table1_gsh_glucose_fat_volatiles
+  - zhao2019b_tab1_gsh_glc_fat_oxidised_fat_volatiles
+  keyed_in:
+  - data/lit/fit_rows/heldout_zhao2019b_tab1_2.yml
+- unit: deroos2005_cys_amadori_ph_stability
+  ledger_entries:
+  - deroos2005_fig4_xylulose_cysteine_ph_stability
+  keyed_in:
+  - data/lit/fit_rows/heldout_deroos2005_fig4.yml
+- unit: grosch1992_thiamine_cys_ribose_gsh_systems
+  ledger_entries:
+  - grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems
+  keyed_in:
+  - data/lit/fit_rows/heldout_grosch1992_tab2.yml
+- unit: meynier1995_lys_ribose_pyrazine_ph_ladder
+  ledger_entries:
+  - meynier1995_table2_lys_ribose_ph_ladder
+  keyed_in:
+  - data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+- unit: meynier1995_met_ribose_methional_ph_ladder
+  ledger_entries:
+  - meynier1995_table4_met_ribose_ph_ladder
+  keyed_in:
+  - data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
 queue:
 - rank: 1
   unit: meynier1995_gly_ribose_pyrazine_ph_ladder
@@ -473,6 +553,14 @@ queue:
   arms_quality: 0.8
   value: 43.2
   caveat: 'pyrazines rise from n.d. with pH: censored low-pH arms; octadecane IS, no RF (ratios only); pH set before heating'
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+    rows: 24
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'in-pot 50 + 35 mM inferred (stock diluted 25 -> 50 mL); 6 nd / tr cells listed per pot'
 - rank: 2
   unit: sedehi2013_dicarbonyl_amine_ph_rate_laws
   kind: benchmark_contrast
@@ -503,6 +591,14 @@ queue:
   arms_quality: 0.6
   value: 33.35
   caveat: 'the step''s own pH law (MGO / GO + glycine, pH 2-8) but at 4-25 C and 0.2-1.5 M: a temperature transfer the scorer must declare'
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_sedehi2013_tab1.yml
+    rows: 26
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'glyoxal + ammonium sulfate law (a fit to Yu et al. 2011 data, not this lab)'
+    note: 'supplement_missing: per-run k (Table S2) not on disk; only the printed rate laws (9 laws, 5 Ea, Eqs. 3-4) keyed'
 - rank: 3
   unit: zhao2017b_cys_xyl_aldehyde_arms
   kind: benchmark_contrast
@@ -533,6 +629,14 @@ queue:
   arms_quality: 0.8
   value: 32.17
   caveat: MFT / FFT to n.d. with aldehydes (censored); aldehyde-derived block not re-typed (PDF)
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_zhao2017b_tab1.yml
+    rows: 52
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: '4-methyl-2-propylfuran (77.0) assigned to the decadienal arm by the subtotals; 112 ''-'' cells listed per pot'
 - rank: 4
   unit: du2023_camola_glucose_c9_aldehydes
   kind: benchmark_contrast
@@ -573,6 +677,14 @@ queue:
   arms_quality: 0.8
   value: 27.82
   caveat: 150 C; the calibration_broad alternative drops Du 2023 (HEXOSE_C5_ENTRY documentation)
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_du2023_tab2.yml
+    rows: 133
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'no. 34 D (compound not in system D per Table 1), no. 26 C (Table 1 conflict) and D (truncated, 47 %), no. 47 A (sums to 109 %)'
+    note: 'no system-M rows printed: no in-paper no-aldehyde baseline (read against 50 : 50)'
 - rank: 5
   unit: liu2023b_ribose_label_carbon_modules
   kind: benchmark_contrast
@@ -611,6 +723,14 @@ queue:
   arms_quality: 0.8
   value: 27.82
   caveat: 'text_only: the dossier gives no table number, so the PDF must be read first; prereg expects ~0 power here'
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_liu2023b_tab3.yml
+    rows: 203
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'Table 3 exists (the ''text_only'' status was wrong); ''potassium phosphate tribasic'' at pH 5.88 unresolved; amounts not printed'
 - rank: 6
   unit: zhao2019b_camola_glucose_gsh
   kind: benchmark_contrast
@@ -652,6 +772,14 @@ queue:
   value: 27.2
   caveat: DEV for E1; the E6 + E11 prereg scores Zhao 2019b under E1, not E6 (v2 caveat); the alternative 'calibration = every paper
     src cites' drops it
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_zhao2019b_tab1_2.yml
+    rows: 134
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'Table 2 rows other than no. 15 carry no system; the text says patterns unchanged with fat: placed in the control pot'
 - rank: 7
   unit: wang2022_cys_xyl_methyl_linoleate
   kind: benchmark_contrast
@@ -690,6 +818,14 @@ queue:
   arms_quality: 1.0
   value: 25.2
   caveat: CF-028 (composition of the Fig. 3 grid) does not touch Table 2
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_wang2022_tab2.yml
+    rows: 76
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'printed Total row misprinted (subtotals reproduce the row sums); row 16 possible copy of row 6 (flagged)'
 - rank: 8
   unit: thornalley1999_phosphate_series
   kind: benchmark_contrast
@@ -723,6 +859,14 @@ queue:
   arms_quality: 0.8
   value: 23.44
   caveat: 37 C; phosphate co-varies with its trace metals (not crossed with the chelator)
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_thornalley1999_figs1b_2e_2f_3c.yml
+    rows: 48
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'Fig. 1b MG 100 mM figure point (2.4x the text; the text row kept)'
+    note: 'Fig. 2e square / triangle re-assigned (MG / 3-DG) per the text, Fig. 2g and the fold changes; 100 mM text rates replace the figure points (count once)'
 - rank: 9
   unit: zamora2015_lipid_carbonyl_strecker_pea
   kind: benchmark_contrast
@@ -754,6 +898,14 @@ queue:
   arms_quality: 0.8
   value: 21.91
   caveat: Seville is DEV for E20, so this serves E7 only
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_zamora2015_tab1.yml
+    rows: 139
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: '140 C / 1 h from the Methods default; 5 zero cells not rows'
 - rank: 10
   unit: xu2007_ribose_cys_ffT_ph_axis
   kind: benchmark_contrast
@@ -784,6 +936,14 @@ queue:
   arms_quality: 1.0
   value: 21.49
   caveat: RF = 1 (ratios only); pH 5.6 columns duplicate xu2008 (count once); 'phosphate' is pyrophosphate; measured final pH printed
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_xu2007_tab1.yml
+    rows: 65
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'control columns only; 34 compounds both readers keyed (SC-CO2 columns and 38 sulfur heterocycles single-reader, not rows); buffer is 0.2 M pyrophosphate'
 - rank: 11
   unit: zhao2019b_gsh_glucose_fat_arms
   kind: benchmark_contrast
@@ -815,6 +975,14 @@ queue:
   arms_quality: 0.8
   value: 21.0
   caveat: relative areas to an inlet-injected standard (between-arm ratios only); fat arms oil-water
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_zhao2019b_tab1_2.yml
+    rows: 124
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'inlet IS: fat arms carry a headspace-partition confound; 35 ''-'' cells listed per pot'
 - rank: 12
   unit: deroos2005_cys_amadori_ph_stability
   kind: benchmark_contrast
@@ -846,6 +1014,14 @@ queue:
   value: 20.77
   caveat: purified D-xylulose-L-cysteine, concentration unstated (first-order reading still usable); Givaudan is DEV for E6 / E11, not
     E10; tests B59b's CYS_AMADORI_ROUTE step
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_deroos2005_fig4.yml
+    rows: 6
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'single-reader curve positions pH 3.5 (B) and 5.25 (A)'
+    note: 'a curve without data markers: readings, not data points'
 - rank: 13
   unit: grosch1992_thiamine_cys_ribose_gsh_systems
   kind: benchmark_contrast
@@ -884,6 +1060,14 @@ queue:
   arms_quality: 1.0
   value: 13.95
   caveat: SIDA; Tables IV / VI are further factors on the same design, not ledgered separately
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_grosch1992_tab2.yml
+    rows: 10
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'censored cells listed per pot as upper limits'
 - rank: 14
   unit: meynier1995_lys_ribose_pyrazine_ph_ladder
   kind: benchmark_contrast
@@ -914,6 +1098,14 @@ queue:
   arms_quality: 0.8
   value: 13.44
   caveat: same pot design and lab as the glycine ladder; pyridine IDs tentative
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+    rows: 30
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: '5 nd / tr cells listed per pot'
 - rank: 15
   unit: meynier1995_met_ribose_methional_ph_ladder
   kind: benchmark_contrast
@@ -950,6 +1142,14 @@ queue:
   arms_quality: 0.8
   value: 13.44
   caveat: table label vs prose disagree on methional identity (dossier Flags 7); DMDS outliers
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+    rows: 34
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'DMDS pH 6.0 (8.6; contradicts the stated rise, misprint not provable)'
+    note: 'printed ''3-(Methylthio)propanol'' resolved as methional (MTAL, P ~0.9); DMDS 24.82 kept as printed'
 - rank: 16
   unit: shibamoto1977_glucose_ammonia_pyrazine_distribution
   kind: benchmark_contrast

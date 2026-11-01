@@ -1,0 +1,21 @@
+# SOURCE VERIFICATION -- de Roos, Wolswinkel & Sipma 2005, ACS Symp Ser 905 ch. 9 (deroos2005.pdf), Fig. 4 (TEST table data/lit/fit_rows/heldout_deroos2005_fig4.yml; contrast benchmark error E10). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_deroos2005_fig4.yml, fit_rows/second/heldout_deroos2005_fig4.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability'
+  source_file: 'deroos2005.pdf'
+  location: 'Fig. 4, p. 127 (PDF p. 11)'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: 'Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer.'
+  notes: '6 curve readings (% left after 2 h at pH 3.0 - 6.0). CONDITIONS corrected: no data markers (readings of a curve), concentration and method not stated, ''boiling'' = 100 C.'
+  adjudication: 'Mean of A and B at the six common pH values (agree within 1 % point); A''s pH 5.25 and B''s pH 3.5 readings are single-reader, not rows.'

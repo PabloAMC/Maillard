@@ -7289,7 +7289,7 @@ entries:
     simulable: true
     condition_quote: ""
     flags: ["supplement_missing", "condition_uncertain", "buffer_confounds_ph", "analogue_d2o_solvent", "ph_not_pd_corrected", "condition_not_stated: vessel"]
-    note: "Total consumption constants (imidazole, imine-oligomer and aldol pathways), reported per computed dehydrated-aldehyde fraction: key as k x f_Ald at 298 K; 277-298 K only, molar concentrations, no Ea for glyoxal + glycine; bounds the engine's Strecker steps from above only. arms: pH ~2-8 per pair x 277-298 K (same lab, same NMR assay); glycine vs ammonium; glyoxal vs methylglyoxal."
+    note: "Total consumption constants (imidazole, imine-oligomer and aldol pathways), reported per computed dehydrated-aldehyde fraction: key as k x f_Ald at 298 K; 277-298 K only, molar concentrations, no Ea for glyoxal + glycine; bounds the engine's Strecker steps from above only. arms: pH ~2-8 per pair x 277-298 K (same lab, same NMR assay); glycine vs ammonium; glyoxal vs methylglyoxal. TEST table heldout_sedehi2013_tab1 (2026-11-01): the PRINTED rate laws only (9 laws as slope + intercept, 5 Ea, Eqs. 3-4; 26 rows), two blind readers identical; TEST data for E4 (University of San Diego a new TEST lab), never a fit input. Glyoxal + AS dropped (footnote i: Yu et al. 2011 data). Per-run k (Table S2) still missing (supplement_missing)."
   - id: sedehi2013_tabS2_per_run_rate_constants
     dossier: sedehi2013_extraction.md
     paper: "Sedehi, Takano, Blasic, Sullivan & De Haan 2013 Atmos Environ 77:656"
@@ -7414,8 +7414,8 @@ entries:
     quant_class: calibrated
     simulable: true
     condition_quote: ""
-    flags: ["ph_start_only", "coarse_read", "phosphate_cofactor_trace_metals", "analogue_lysine_amine"]
-    note: "The only within-study phosphate concentration law for 3-DG formation on disk; phosphate co-varies with the trace metals the salt carries (not crossed with the chelator), low-end reads +-0.15 uM/day. arms: phosphate 10 / 25 / 50 / 100 mM at pH 7.4 (same lab, same assay)."
+    flags: [ph_start_only, coarse_read, phosphate_cofactor_trace_metals, analogue_lysine_amine, "symbols_reassigned: Fig. 2e square = MG, triangle = 3-DG (text, Fig. 2g, fold changes; P ~0.85)", "figure_vs_text_conflict: Fig. 1b MG 100 mM ~0.235 vs text 0.098 (figure point dropped)"]
+    note: "The only within-study phosphate concentration law for 3-DG formation on disk; phosphate co-varies with the trace metals the salt carries (not crossed with the chelator), low-end reads +-0.15 uM/day. arms: phosphate 10 / 25 / 50 / 100 mM at pH 7.4 (same lab, same assay). TEST table heldout_thornalley1999_figs1b_2e_2f_3c (2026-11-01; two blind readers within error on all 48 figure points; 48 rows, the 100 mM text rates replacing the figure points for glucose, BOC-Lys and fructosyl-lysine): TEST data for E5, never a fit input."
   - id: thornalley1999_figs1c_2g_2h_3d_detapac_chelator_contrast
     dossier: thornalley1999_extraction.md
     paper: "Thornalley, Langborg & Minhas 1999 Biochem J 344:109"

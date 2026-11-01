@@ -1,0 +1,21 @@
+# SOURCE VERIFICATION -- Thornalley, Langborg & Minhas 1999, Biochem J 344:109-116 (thornalley1999.pdf), Figs. 1b, 2e, 2f, 3c and the 100 mM text rates (TEST table data/lit/fit_rows/heldout_thornalley1999_figs1b_2e_2f_3c.yml; contrast benchmark error E5). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_thornalley1999_figs1b_2e_2f_3c.yml, fit_rows/second/heldout_thornalley1999_figs1b_2e_2f_3c.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates'
+  source_file: 'thornalley1999.pdf'
+  location: 'Figs. 1b (p. 111), 2e, 2f (p. 112), 3c (p. 113); text pp. 111, 113, 114'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'pass'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'corrected'
+    values: 'corrected'
+  quote: 'The initial rate of increase in alpha-oxoaldehyde concentration (determined over the initial 2 days) was: glyoxal 1.72 +- 0.05 uM/day, methylglyoxal 0.098 +- 0.003 uM/day and 3-DG 0.437 +- 0.032 uM/day (n = 3). ... Incubations contain 50 mM glucose in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (b) 10-100 mM sodium phosphate buffer'
+  notes: '48 rows: 4 systems x 4 phosphate levels x 3 dicarbonyls; at 100 mM the text rate replaces the figure point for glucose, BOC-Lys and fructosyl-lysine (9 rows), HSA keeps its figure points. VALUES corrected: Fig. 2e square / triangle re-assigned (MG / 3-DG) per the text, the Fig. 2g bars and the printed fold changes. DUPLICATES corrected: text and figure 100 mM points are one measurement (count once). Fig. 1b MG 100 mM point dropped (2.4x the text).'
+  adjudication: 'Figure points: A and B within error on all 48; value = mean, error = max(A, B, |A-B|/2). Text rates: A keyed all ten; B wrote five in its notes; the adjudicator re-read the other four (glyoxal x 3, MG of fructosyl-lysine) on pp. 111-114.'

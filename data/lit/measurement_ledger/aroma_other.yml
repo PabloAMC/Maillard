@@ -628,7 +628,7 @@ entries:
     simulable: true
     condition_quote: "pH adjusted to 4.5, 5.0, 5.5, 6.0 or 6.5 with 0.2 M tetrasodium pyrophosphate; volume made to 50 mL ... heated in sealed glass ampoules at 140 °C under pressure for 1 h"
     flags: [condition_error_in_dossier_heading]
-    note: "6 compounds x 5 pH, triplicate means, no SD (CV<20 %), octadecane IS no RF, SDE 2 h. Dossier title says 100/70 mM; methods show 2x make-up to 50/35 mM. Trunk rows (furfural, norfuraneol) not in trunk.yml. Pyrazines rise from nd with pH (censored ratios)."
+    note: "6 compounds x 5 pH, triplicate means, no SD (CV<20 %), octadecane IS no RF, SDE 2 h. Dossier title says 100/70 mM; methods show 2x make-up to 50/35 mM. Trunk rows (furfural, norfuraneol) not in trunk.yml. Pyrazines rise from nd with pH (censored ratios). TEST table heldout_meynier1995_tab1_2_4 (2026-11-01; two blind readers agree on all 30 cells; 24 rows): TEST data for contrast-benchmark error E4 (Reading a new TEST lab for E4), never a fit input. In-pot 50 + 35 mM inferred (printed 100 / 70 mM is the stock before the 25 -> 50 mL make-up; the 'per 10 mg ribose' basis fits 35 mM)."
   - id: meynier1995_table2_lys_ribose_ph_ladder
     dossier: meynier1995_extraction.md
     paper: "Meynier & Mottram 1995 Food Chem 52:361"
@@ -646,7 +646,7 @@ entries:
     simulable: true
     condition_quote: "pH adjusted to 4.5, 5.0, 5.5, 6.0 or 6.5 with 0.2 M tetrasodium pyrophosphate; volume made to 50 mL ... heated in sealed glass ampoules at 140 °C under pressure for 1 h"
     flags: [condition_error_in_dossier_heading]
-    note: "7 compounds x 5 pH, triplicate means, octadecane IS no RF. Same 100/70 vs 50/35 mM heading issue. Pyridines tentative IDs. Trunk rows (furfural, norfuraneol) not in trunk.yml. Lysine pot is the companion to apriyantono1993's xylose-lysine pair."
+    note: "7 compounds x 5 pH, triplicate means, octadecane IS no RF. Same 100/70 vs 50/35 mM heading issue. Pyridines tentative IDs. Trunk rows (furfural, norfuraneol) not in trunk.yml. Lysine pot is the companion to apriyantono1993's xylose-lysine pair. TEST table heldout_meynier1995_tab1_2_4 (2026-11-01; two blind readers agree on all 35 cells; 30 rows): TEST data for E4, never a fit input. Pyridines tentative (footnote a); lysine carries two amino groups."
   - id: whitfield2001_table1_nf_cys_pyrazine_oxazole_rows
     dossier: whitfield2001_extraction.md
     paper: "Whitfield & Mottram 2001 J Agric Food Chem 49:816"

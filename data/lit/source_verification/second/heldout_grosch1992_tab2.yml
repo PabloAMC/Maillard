@@ -1,0 +1,20 @@
+# Second reader (reader B), Grosch & Zeiler-Hilgart 1992, ACS Symp Ser 490:183-192 (grosch1992.pdf), Table II. Independent of reader A. Rows: data/lit/fit_rows/second/heldout_grosch1992_tab2.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes.
+reader: 'agent-readerB-2026-11-01'
+role: 'independent second reader, contrast benchmark TEST keying (CF-089, E18)'
+
+entries:
+- ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems'
+  source_file: 'grosch1992.pdf'
+  location: 'Table II, p. 185; Experimental, p. 184'
+  read_by: 'agent-readerB-2026-11-01'
+  second_reader: 'self'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'corrected'
+    values: 'pass'
+  quote: 'Table II. Thiamine as Precursor ... Amount (mean +- standard deviation) found after isolation by method I. Reactants: thiamine.HCl (10.2 mg; 30 umol), thiamine pyrophosphate (13.9 mg; 30 umol), D(-)-ribose (100 mg; 670 umol), cysteine.HCl (57 mg; 325 umol), GSH (71 mg; 230 umol).'
+  notes: 'Reader B''s reading of the same cells; values identical to reader A''s except where the first record''s adjudication says otherwise.'

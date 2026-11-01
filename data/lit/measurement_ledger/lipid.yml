@@ -1446,7 +1446,7 @@ entries:
     simulable: false
     condition_quote: "mixtures of phenylalanine and the lipid derivative (10 µmol of each) were singly homogenized with 50-70 mesh sand (600 mg) (Aldrich), 30 µL of 0.3 M buffer, and 80 µL of water"
     flags: [low_moisture_no_aw_term, ph_start_only, calibration_matrix_ph6_only]
-    note: "Only systematic aldehyde/amine split for lipid carbonyls; air raises PAC 4-8x. Phe-alone row non-zero, read net. Control DD row reproduced in hidalgo2016 Table 1. Distinct from zamora2015b (Food Chem, DecadienalBreakage)."
+    note: "Only systematic aldehyde/amine split for lipid carbonyls; air raises PAC 4-8x. Phe-alone row non-zero, read net. Control DD row reproduced in hidalgo2016 Table 1. Distinct from zamora2015b (Food Chem, DecadienalBreakage). TEST table heldout_zamora2015_tab1 (2026-11-01; two blind readers identical on all 144 cells; 139 rows, 5 printed zeros not rows): TEST data for E7 (F30#15), never a fit input. 140 C / 1 h from the Methods default; buffers (citrate pH 3, phosphate pH 6) from the figure captions."
   - id: zamora2015_text_ea_pea_pac_decadienal
     dossier: zamora2015_extraction.md
     paper: "Zamora, Leon & Hidalgo 2015 J Agric Food Chem 63 (accepted MS; doi 10.1021/acs.jafc.5b02619)"
@@ -1979,7 +1979,7 @@ entries:
     simulable: false
     condition_quote: ""
     flags: [internal_inconsistency, "also_in_sulfur_ledger: du2023_table2_camola_isotopomers"]
-    note: "2-pentylthiophene 92 % unlabelled (aldehyde carbon); 2-heptylthiophene from nonanal 16 % doubly labelled (aldol chain extension). Table 2 lists entries absent from Table 1."
+    note: "2-pentylthiophene 92 % unlabelled (aldehyde carbon); 2-heptylthiophene from nonanal 16 % doubly labelled (aldol chain extension). Table 2 lists entries absent from Table 1. Same Table 2 as sulfur.yml du2023_table2_camola_isotopomers, keyed there (heldout_du2023_tab2, 2026-11-01); the dropped rows and the missing system-M baseline apply here too."
   - id: du2023_table_s1_aldehyde_derived_volatiles
     dossier: du2023_extraction.md
     paper: "Du et al. 2023 Food Res Int 173:113337"
@@ -2180,8 +2180,8 @@ entries:
     quant_class: other
     simulable: false
     condition_quote: ""
-    flags: [peak_area_only, table_partly_transcribed, "also_in_sulfur_ledger: zhao2017b_table1_volatiles_3h"]
-    note: "Aldehydes suppress MFT/FFT to n.d. (hexanal: MFT 1.2 % of blank). The aldehyde-derived block (2-hexylthiophene, 2-pentylfuran, alkanethiols) is NOT re-typed: transcribe from the PDF if wanted. No IS."
+    flags: [peak_area_only, "also_in_sulfur_ledger: zhao2017b_table1_volatiles_3h"]
+    note: "Aldehydes suppress MFT/FFT to n.d. (hexanal: MFT 1.2 % of blank). The aldehyde-derived block (2-hexylthiophene, 2-pentylfuran, alkanethiols) is NOT re-typed: transcribe from the PDF if wanted. No IS. TEST table heldout_zhao2017b_tab1 (2026-11-01; two blind readers identical on all 164 cells incl. the aldehyde-derived blocks; 52 rows): TEST data for E7 (BTBU a new TEST lab), never a fit input. 4-methyl-2-propylfuran (77.0) belongs to the decadienal arm (subtotals); (E)-2-heptenal 0.061 g printed for 0.5 mmol (0.056 g): 0.5 mmol used."
   # ---- zhao2019b ----
   - id: zhao2019b_tab1_gsh_glc_fat_oxidised_fat_volatiles
     dossier: zhao2019b_extraction.md
@@ -2200,7 +2200,7 @@ entries:
     simulable: false
     condition_quote: "GSH 0.3 mmol + glucose 0.3 mmol in 5 mL sodium phosphate buffer (pH 6.5)"
     flags: [peak_area_only, buffer_molarity_not_stated, ph_not_measured, conflicts_with_du2025, "also_in_sulfur_ledger: zhao2019b_table1_gsh_glucose_fat_volatiles"]
-    note: "Lipid-vs-no-lipid: fat lowers MFT 38 %, oxidised fat 65 %; lipid-only alkylthiophenes appear (2-pentylthiophene 0 -> 1.04 -> 8.91). Opposite MFT sign to du2025 (free acids). IS injected at inlet, not in sample. PV/AV of the oxidised fat printed, preparation by reference only."
+    note: "Lipid-vs-no-lipid: fat lowers MFT 38 %, oxidised fat 65 %; lipid-only alkylthiophenes appear (2-pentylthiophene 0 -> 1.04 -> 8.91). Opposite MFT sign to du2025 (free acids). IS injected at inlet, not in sample. PV/AV of the oxidised fat printed, preparation by reference only. Same Table 1 as sulfur.yml zhao2019b_table1_gsh_glucose_fat_volatiles, keyed there (heldout_zhao2019b_tab1_2, 2026-11-01)."
   - id: zhao2019b_tab2_camola_fat_systems
     dossier: zhao2019b_extraction.md
     paper: "Zhao, Wang, Xie et al. 2019 Food Chem 270:436"
@@ -2218,7 +2218,7 @@ entries:
     simulable: false
     condition_quote: ""
     flags: ["also_in_sulfur_ledger: zhao2019b_table2_camola_glucose_labelling"]
-    note: "Lipid view: 2-ethylthiophene glucose share ~90 % -> ~44 % with oxidised fat; fat opens no second MFT/FFT carbon route."
+    note: "Lipid view: 2-ethylthiophene glucose share ~90 % -> ~44 % with oxidised fat; fat opens no second MFT/FFT carbon route. Same Table 2 as sulfur.yml zhao2019b_table2_camola_glucose_labelling, keyed there (heldout_zhao2019b_tab1_2, 2026-11-01)."
   - id: zhao2019b_table_s1_fat_only_blanks
     dossier: zhao2019b_extraction.md
     paper: "Zhao, Wang, Xie et al. 2019 Food Chem 270:436"
@@ -2885,8 +2885,8 @@ entries:
     quant_class: semi_quantitative
     simulable: true
     condition_quote: "and 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L) were placed in a 15 mL pressure vial"
-    flags: [partial_transcription_lipid_maillard_rows_only_in_pdf, "also_in_sulfur_ledger: wang2022_table2_volatiles_120c_150min"]
-    note: "Lipid-vs-no-lipid at fixed cook: methyl linoleate suppresses MFT/FFT 3-5x and creates 11 lipid-Maillard thiophenes/thiols absent from the blank (PDF p. 5). ng/g vs 1,2-dichlorobenzene IS, n = 2. The 35 rows other than MFT/FFT are in the PDF, not the dossier."
+    flags: [partial_transcription_lipid_maillard_rows_only_in_pdf, "also_in_sulfur_ledger: wang2022_table2_volatiles_120c_150min", "total_row_misprinted: printed Totals 4003.84 / 1891.92 / 1424.24 vs subtotal sums 4011.16 / 1948.95 / 1407.86", "possible_copy: row 16 (7.75 +- 0.37) = row 6 in the 2 % column"]
+    note: "Lipid-vs-no-lipid at fixed cook: methyl linoleate suppresses MFT/FFT 3-5x and creates 11 lipid-Maillard thiophenes/thiols absent from the blank (PDF p. 5). ng/g vs 1,2-dichlorobenzene IS, n = 2. The 35 rows other than MFT/FFT are in the PDF, not the dossier. TEST table heldout_wang2022_tab2 (2026-11-01; two blind readers identical on all 111 cells; 76 rows): TEST data for E7 (BTBU a new TEST lab) and E12, never a fit input. Dose basis: 1 % / 2 % of the total system mass."
   - id: wang2022_si_table1_lipid_degradation_ml1pct_30_90min
     dossier: wang2022_extraction.md
     paper: "Wang, Xie, Zhang, Xu et al. 2022 Flavour Fragr J 37 (doi 10.1002/ffj.3710)"

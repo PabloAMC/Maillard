@@ -1,0 +1,278 @@
+# KEYED TEST TABLE -- Sedehi N, Takano H, Blasic VA, Sullivan KA & De Haan DO 2013, Atmos Environ 77:656-663 (University of San Diego,
+# De Haan), Table 1 (p. 661): pH laws log10 k = slope x pH + intercept of glyoxal and methylglyoxal loss with glycine, serine, arginine,
+# methylamine and ammonium sulfate (1H NMR in D2O, 0.2 - 1.5 M, room temperature), activation energies where printed, and the pooled
+# laws Eq. (3) (glyoxal) and Eq. (4) (methylglyoxal).
+# PURPOSE: TEST data for engine error E4 ('pyrazine pH law on the Strecker step'): the dicarbonyl + amine step's own pH dependence (MG +
+# glycine slope 0.262 per pH; glyoxal + glycine 0.741). University of San Diego (De Haan) is a new TEST lab for E4 (not UCSD / Miller).
+# The transfer is large: 4 - 25 C, 0.2 - 1.5 M, D2O, pH read on an ISFET without pD correction; MG-loss k includes amine-catalysed aldol
+# self-reaction (20 - 30 % for Gly / Arg at low pH, more elsewhere): an upper bound on the imine step, not the step itself.
+# NEVER a fit input: fit_rows.load refuses every row (the unit is not in fit_rows.UNITS); keep it so.
+# Format: src/kinetic_core/fit_rows.py. Ledger entry: sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws (trunk.yml).
+# FLAG supplement_missing: the per-run rate constants (Supplement Table S2) and Arrhenius plots (Fig. S5) are NOT on disk; only the
+# PRINTED rate laws are keyed. Rows are law parameters: unit per_pH (slope), log10_per_M_per_s (intercept), kJ_per_mol (Ea),
+# per_M_per_s (Eq. 3); k is per ACTIVE (unhydrated) aldehyde (fAld 7.0e-4 glyoxal, 2.7e-3 MG, computed) and the paper puts it within
+# ~ factor 2 (footnote a).
+#
+# READERS (2026-11-01), independent and in parallel, blind to each other: reader A (agent-readerA-2026-11-01; pdftotext -layout for
+# born-digital text, pdfimages / sips crops for scans and figures) and reader B (agent-readerB-2026-11-01; pages rendered at 200-300 ppi
+# and read visually, pdftotext as a cross-check). Raw files: the coordinator's scratchpad (queue_reader_A.yml, queue_reader_B.yml);
+# B's rows as written: fit_rows/second/heldout_sedehi2013_tab1.yml. Adjudicator: agent-queue-adjudicator-2026-11-01.
+# ADJUDICATION: printed numbers, identical in both readings (10 laws, 6 Ea, Eqs. 3-4); intercept signs read on the render (the text
+# layer drops minus signs: both readers). Read error = half the last printed digit in the row's own unit (not dex).
+# RESOLUTIONS: (1) Glyoxal + ammonium sulfate (slope 1.05, intercept -7.45, Ea 21 +- 15) is a fit to Yu et al. 2011 data (footnote i),
+# not this laboratory: DROPPED. (2) The MG slope is printed '0.36 +- 0.06' in Eq. (4) and '0.36 +- 0.08' in the text: Eq. (4)'s +- kept.
+# (3) pH ranges of each law (x-range of the fitted points, Figs. 2 / 3) were read by reader A only: pot context, not rows. (4) Ea rows
+# come from methylglyoxal loss or formic acid production rates (footnote c; species basis per row not stated). OH / NO3 radical rows
+# (literature values) and the aerosol concentration / contribution columns (model estimates) are not measurements: not keyed.
+status: ready   # two readers + adjudication (2026-11-01); TEST data, never a fit input: fit_rows.load refuses every row (units outside fit_rows.UNITS)
+purpose: 'TEST data for the contrast benchmark, engine error E4 (pyrazine pH law on the Strecker step; keying_queue.yml rank 2); never a fit input; printed rate laws only (per-run data in a supplement not on disk)'
+pots:
+  sedehi2013_tab1_GO_arginine:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: ['V_ARGININE'],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {GO: null, V_ARGININE: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: '4.0-5.8',
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate'}
+  sedehi2013_tab1_GO_glycine:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: [],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {GO: null, Gly: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: '2.2-5.7',
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate'}
+  sedehi2013_tab1_GO_methylamine:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: ['V_METHYLAMINE'],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {GO: null, V_METHYLAMINE: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: '4.0-6.15',
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate'}
+  sedehi2013_tab1_GO_serine:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: ['V_SERINE'],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {GO: null, V_SERINE: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: '2.45-5.35 (lowest point is a formic-acid-based +)',
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate'}
+  sedehi2013_tab1_MGO_ammonium_sulfate:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: ['V_AMMONIUM_SULFATE'],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {MGO: null, V_AMMONIUM_SULFATE: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: '3.2-3.95',
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate'}
+  sedehi2013_tab1_MGO_arginine:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: ['V_ARGININE'],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {MGO: null, V_ARGININE: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: '3.6-8.0',
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate'}
+  sedehi2013_tab1_MGO_glycine:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: [],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {MGO: null, Gly: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: '3.3-6.55',
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate'}
+  sedehi2013_tab1_MGO_methylamine:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: ['V_METHYLAMINE'],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {MGO: null, V_METHYLAMINE: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: '3.85-5.6',
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate'}
+  sedehi2013_tab1_MGO_serine:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: ['V_SERINE'],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {MGO: null, V_SERINE: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: '3.7-6.5',
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate'}
+  sedehi2013_eq4_MGO_primary_amines:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: [],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {MGO: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: null,
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate',
+     pooled_over: 'methylglyoxal + glycine, serine, arginine, methylamine (Eq. 4)'}
+  sedehi2013_eq3_GO_any_amine:
+    {ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws',
+     engine_species_missing: [],
+     t_c: 25,
+     t_c_basis: 'room temperature, 298 K (the pH laws); Ea from 277 - 298 +- 1 K',
+     minutes: null,
+     rate_window: 'initial rates; 1H NMR >= 16 h (glyoxal ''initial'' at t = 6 h)',
+     initial_mmol_L: {GO: null},
+     concentration_basis: '''initial concentrations between 0.2 and 1.5 M''; per-run values in Supplement Table S2, NOT on disk',
+     label_ph: null,
+     ph_range: null,
+     ph_range_basis: 'x-range of the fitted points in Fig. 3 (MG) / Fig. 2 (glyoxal), read by reader A only (B did not read the figures)',
+     ph_measured_at: 'ISFET in D2O, no pD correction stated; for pH 2.5 - 6 the run-average pH from formic / acetic acid NMR shifts; initial pH for the 3 runs above pH 6',
+     buffer: 'none as such: pH set down with acetic acid-d6 or up with sodium phosphate (amounts not printed)',
+     solvent: 'D2O (99.9 % D) with 1 % v/v acetonitrile internal standard',
+     atmosphere: 'not stated',
+     vessel: 'NMR tube',
+     rate_law: 'Rate = k fAld [Ald]tot [Am]tot (Eq. 1); fAld (298 K) = 7.0e-4 glyoxal, 2.7e-3 methylglyoxal (computed); k uncertain by ~2x',
+     supplement_missing: 'per-run rate constants (Table S2) and the Arrhenius plots (Fig. S5) are in the supplement, not on disk: only the printed laws are keyed',
+     condition_quote: 'Table 1 (p. 661): log k as a function of pH; text: ''initial concentrations between 0.2 and 1.5 M'' in D2O, pH adjusted with acetic acid-d6 or sodium phosphate',
+     pooled_over: 'glyoxal + glycine, serine, arginine, methylamine, ammonium (Eq. 3)'}
+rows:
+  - {pot: 'sedehi2013_tab1_GO_arginine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: 0.994, unit: 'per_pH', quantity: 'd log10 k / d pH; law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), glyoxal + arginine: ''0.994 (pH) - 7.69''; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_GO_arginine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: -7.69, unit: 'log10_per_M_per_s', quantity: 'log10 k at pH 0 (intercept); law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), glyoxal + arginine: ''0.994 (pH) - 7.69''; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_GO_glycine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: 0.741, unit: 'per_pH', quantity: 'd log10 k / d pH; law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), glyoxal + glycine: ''0.741 (pH) - 6.84''; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_GO_glycine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: -6.84, unit: 'log10_per_M_per_s', quantity: 'log10 k at pH 0 (intercept); law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), glyoxal + glycine: ''0.741 (pH) - 6.84''; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_GO_methylamine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: 0.972, unit: 'per_pH', quantity: 'd log10 k / d pH; law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), glyoxal + methylamine: ''0.972 (pH) - 8.33''; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_GO_methylamine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: -8.33, unit: 'log10_per_M_per_s', quantity: 'log10 k at pH 0 (intercept); law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), glyoxal + methylamine: ''0.972 (pH) - 8.33''; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_GO_serine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: 0.998, unit: 'per_pH', quantity: 'd log10 k / d pH; law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), glyoxal + serine: ''0.998 (pH) - 7.59''; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_GO_serine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: -7.59, unit: 'log10_per_M_per_s', quantity: 'log10 k at pH 0 (intercept); law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), glyoxal + serine: ''0.998 (pH) - 7.59''; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_GO_serine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: 51, unit: 'kJ_per_mol', sd: 10, quantity: 'activation energy (277 - 298 K, pH-corrected; footnote c: from methylglyoxal loss or formic acid production rates)', printed: 'Table 1 (p. 661), glyoxal + serine: Ea 51 +- 10 kJ/mol; readers A and B identical', read_error: 0.5, read_error_basis: 'half the last printed digit (0.5 kJ/mol), in the row''s unit; the printed +- carries the fit error'}
+  - {pot: 'sedehi2013_tab1_MGO_ammonium_sulfate', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 0.834, unit: 'per_pH', quantity: 'd log10 k / d pH; law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + ammonium sulfate: ''0.834 (pH) - 5.91''; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_ammonium_sulfate', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: -5.91, unit: 'log10_per_M_per_s', quantity: 'log10 k at pH 0 (intercept); law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + ammonium sulfate: ''0.834 (pH) - 5.91''; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_ammonium_sulfate', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 15, unit: 'kJ_per_mol', sd: 5, quantity: 'activation energy (277 - 298 K, pH-corrected; footnote c: from methylglyoxal loss or formic acid production rates)', printed: 'Table 1 (p. 661), methylglyoxal + ammonium sulfate: Ea 15 +- 5 kJ/mol; readers A and B identical', read_error: 0.5, read_error_basis: 'half the last printed digit (0.5 kJ/mol), in the row''s unit; the printed +- carries the fit error'}
+  - {pot: 'sedehi2013_tab1_MGO_arginine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 0.422, unit: 'per_pH', quantity: 'd log10 k / d pH; law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + arginine: ''0.422 (pH) - 4.09''; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_arginine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: -4.09, unit: 'log10_per_M_per_s', quantity: 'log10 k at pH 0 (intercept); law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + arginine: ''0.422 (pH) - 4.09''; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_arginine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 55, unit: 'kJ_per_mol', sd: 24, quantity: 'activation energy (277 - 298 K, pH-corrected; footnote c: from methylglyoxal loss or formic acid production rates)', printed: 'Table 1 (p. 661), methylglyoxal + arginine: Ea 55 +- 24 kJ/mol; readers A and B identical', read_error: 0.5, read_error_basis: 'half the last printed digit (0.5 kJ/mol), in the row''s unit; the printed +- carries the fit error'}
+  - {pot: 'sedehi2013_tab1_MGO_glycine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 0.262, unit: 'per_pH', quantity: 'd log10 k / d pH; law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + glycine: ''0.262 (pH) - 3.4''; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_glycine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: -3.4, unit: 'log10_per_M_per_s', quantity: 'log10 k at pH 0 (intercept); law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + glycine: ''0.262 (pH) - 3.4''; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_glycine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 54, unit: 'kJ_per_mol', sd: 33, quantity: 'activation energy (277 - 298 K, pH-corrected; footnote c: from methylglyoxal loss or formic acid production rates)', printed: 'Table 1 (p. 661), methylglyoxal + glycine: Ea 54 +- 33 kJ/mol; readers A and B identical', read_error: 0.5, read_error_basis: 'half the last printed digit (0.5 kJ/mol), in the row''s unit; the printed +- carries the fit error'}
+  - {pot: 'sedehi2013_tab1_MGO_methylamine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 0.334, unit: 'per_pH', quantity: 'd log10 k / d pH; law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + methylamine: ''0.334 (pH) - 3.22''; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_methylamine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: -3.22, unit: 'log10_per_M_per_s', quantity: 'log10 k at pH 0 (intercept); law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + methylamine: ''0.334 (pH) - 3.22''; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_serine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 0.421, unit: 'per_pH', quantity: 'd log10 k / d pH; law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + serine: ''0.421 (pH) - 3.91''; readers A and B identical', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_serine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: -3.91, unit: 'log10_per_M_per_s', quantity: 'log10 k at pH 0 (intercept); law log10 k = slope x pH + intercept, k in M-1 s-1 per ACTIVE (unhydrated) aldehyde', printed: 'Table 1 (p. 661), methylglyoxal + serine: ''0.421 (pH) - 3.91''; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.005), in the row''s own unit (a slope / a log10 intercept, NOT dex of the value); the paper states extracted k within ~ factor 2 (footnote a)'}
+  - {pot: 'sedehi2013_tab1_MGO_serine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 40, unit: 'kJ_per_mol', sd: 9, quantity: 'activation energy (277 - 298 K, pH-corrected; footnote c: from methylglyoxal loss or formic acid production rates)', printed: 'Table 1 (p. 661), methylglyoxal + serine: Ea 40 +- 9 kJ/mol; readers A and B identical', read_error: 0.5, read_error_basis: 'half the last printed digit (0.5 kJ/mol), in the row''s unit; the printed +- carries the fit error'}
+  - {pot: 'sedehi2013_eq4_MGO_primary_amines', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: 0.36, unit: 'per_pH', sd: 0.06, quantity: 'slope of the pooled law', printed: 'Eq. (4), p. 661: Rate = 10^[(0.36 +- 0.06) pH - (3.6 +- 0.3)] M-1 s-1 fAld [MG]tot [Am]tot (methylglyoxal + amino acids / primary amines pooled); readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit, in the row''s own unit; the printed +- carries the fit error'}
+  - {pot: 'sedehi2013_eq4_MGO_primary_amines', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'MGO', t_min: 0, value: -3.6, unit: 'log10_per_M_per_s', sd: 0.3, quantity: 'intercept of the pooled law', printed: 'Eq. (4), p. 661: Rate = 10^[(0.36 +- 0.06) pH - (3.6 +- 0.3)] M-1 s-1 fAld [MG]tot [Am]tot (methylglyoxal + amino acids / primary amines pooled); readers A and B identical', read_error: 0.05, read_error_basis: 'half the last printed digit, in the row''s own unit; the printed +- carries the fit error'}
+  - {pot: 'sedehi2013_eq3_GO_any_amine', ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws', species: 'GO', t_min: 0, value: 70, unit: 'per_M_per_s', sd: 60, quantity: 'k_per_deprotonated_amine of the pooled law', printed: 'Eq. (3), p. 660: Rate = (7 +- 6) x 10^1 M-1 s-1 fAld [Glx]tot fAm [Am]tot (fAm = deprotonated amine fraction; glyoxal + any amine); readers A and B identical', read_error: 5, read_error_basis: 'half the last printed digit, in the row''s own unit; the printed +- carries the fit error'}

@@ -1414,7 +1414,7 @@ entries:
     simulable: true
     condition_quote: "and 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L) were placed in a 15 mL pressure vial"
     flags: []
-    note: "ng/g vs internal standard, n=2; 26 Maillard + 11 lipid-Maillard compounds; blank column is aqueous, lipid columns are oil-water."
+    note: "ng/g vs internal standard, n=2; 26 Maillard + 11 lipid-Maillard compounds; blank column is aqueous, lipid columns are oil-water. Same Table 2 as lipid.yml wang2022_table2_lipid_vs_blank_120c_150min, keyed there (heldout_wang2022_tab2, 2026-11-01): the printed Total row is misprinted; row 16 possibly copies row 6."
   - id: wang2022_fig3_thiol_trends_5t_6t_ml1pct
     dossier: wang2022_extraction.md
     paper: "Wang et al. 2022 Flavour Fragr J 37 (doi 10.1002/ffj.3710)"
@@ -1791,8 +1791,8 @@ entries:
     quant_class: other
     simulable: true
     condition_quote: ""
-    flags: ["table2_lists_entries_absent_from_table1"]
-    note: "Glucose-carbon incorporation fractions; carbon-module evidence for aldehyde + H2S thiophene routes."
+    flags: [table2_lists_entries_absent_from_table1, no_system_M_camola_rows, "duplicate_row: no. 34 printed for D (conflicts with Table 1) and A", "rows_dropped: no. 34 D, no. 26 C / D, no. 47 A"]
+    note: "Glucose-carbon incorporation fractions; carbon-module evidence for aldehyde + H2S thiophene routes. TEST table heldout_du2023_tab2 (2026-11-01; two blind readers identical on all 59 printed rows; 55 kept, 133 numeric cells): TEST data for E6 / E11, never a fit input. No system-M (no-aldehyde) CAMOLA rows are printed: no in-paper baseline. Dropped: no. 34 D (compound absent from system D in Table 1), no. 26 C (Table 1 conflict) and D (truncated, 47 %), no. 47 A (sums to 109 %)."
   - id: du2024_fig2_cama_aldehyde_thiazolidines
     dossier: du2024_extraction.md
     paper: "Du, Wang, Ma, Li, Wang, Bai, Fan & Wang 2024 Curr Res Food Sci 8:100719"
@@ -2107,16 +2107,16 @@ entries:
     medium: "0.5 mol/L tripotassium phosphate buffer, pH 5.88"
     temperature_c: [168]
     ph: {initial: 5.88, measured_during: false, final: null}
-    time_min: [20, 60]
-    species: ["MFT", "3-thiophenethiol", "furans", "thiophenes"]
+    time_min: [20, 40, 60]
+    species: [acetaldehyde, 2-mercaptoethanol, furan, 2-methylfuran, norfuraneol, MFT, FFT, furfural, 3-thiophenethiol, 5-methyl-2-thiophenecarboxaldehyde]
     kind: ratio
-    location: "labelling tables (numbering not given in dossier)"
-    status: text_only
+    location: "Table 3 (p. 5): isotopologue % [M]+ ... [M+6]+ of 10 compounds at 20 / 40 / 60 min"
+    status: "digitised_in_dossier"
     quant_class: other
     simulable: false
     condition_quote: ""
-    flags: ["table_not_transcribed_in_dossier"]
-    note: "Dossier gives only MFT ~81 % intact C5 ribose skeleton, ~19 % recombined fragments."
+    flags: ["buffer_inconsistent: 'potassium phosphate tribasic' 0.5 M at pH 5.88", "amounts_not_printed: weight ratio '10.10' only"]
+    note: "Dossier gives only MFT ~81 % intact C5 ribose skeleton, ~19 % recombined fragments. TEST table heldout_liu2023b_tab3 (2026-11-01; two blind readers identical on all 30 distributions; 203 rows): TEST data for E6 / E11, never a fit input. CF-086 (MFT fragment share ~6 %, not 19 %) applies."
   - id: schirle1992_figs3_5_furans_time_courses
     dossier: schirle1992_extraction.md
     paper: "Schirle-Keller & Reineccius 1992 ACS Symp Ser 490 ch. 19"
@@ -3638,15 +3638,15 @@ entries:
     temperature_c: [140]
     ph: {initial: [4.5, 5.0, 5.5, 6.0, 6.5], measured_during: false, final: "within 0.2 unit of initial"}
     time_min: [60]
-    species: [methional, dimethyl disulfide, dimethyl trisulfide, furfural, norfuraneol, 3-methyl-1,2-dithian-4-one]
+    species: [methylpyrazine, furfural, 2-furylmethanol, norfuraneol, 2-furylmethyl methyl sulphide, dimethyl disulfide, methional, dimethyl trisulfide]
     kind: endpoint
     location: "Table 4"
     status: digitised_in_dossier
     quant_class: semi_quantitative
     simulable: true
     condition_quote: "no change of more than 0.2 pH unit occurred after heating"
-    flags: [condition_uncertain]
-    note: "Same pot design as Table 3. DMDS row has anomalies (24.82 at pH 5.5, 8.6 outlier at pH 6.0; dossier Flags 5); table label vs prose disagree on methional identity (Flags 7). Gly (Table 1) and Lys (Table 2) arms carry no sulfur species and are not entered. Not used by the 'Meynier directional' hold-out (Table 3 MFT/FFT/furfural only)."
+    flags: [condition_uncertain, "label_resolved: printed '3-(Methylthio)propanol' = methional (abstract, discussion, LRI 903; P ~0.9)", "cell_dropped: DMDS pH 6.0 (8.6) contradicts the stated rise"]
+    note: "Same pot design as Table 3. DMDS row has anomalies (24.82 at pH 5.5, 8.6 outlier at pH 6.0; dossier Flags 5); table label vs prose disagree on methional identity (Flags 7). Gly (Table 1) and Lys (Table 2) arms carry no sulfur species and are not entered. Not used by the 'Meynier directional' hold-out (Table 3 MFT/FFT/furfural only). TEST table heldout_meynier1995_tab1_2_4 (2026-11-01; two blind readers agree on all 40 cells; 34 rows, DMDS pH 6.0 dropped): TEST data for E4 and E3, never a fit input. Label, 24.82 and 8.6 confirmed on a 300 dpi render."
   - id: mottram1995_table1_dione_h2s_identification
     dossier: mottram1995_extraction.md
     paper: "Mottram, Madruga & Whitfield 1995 J Agric Food Chem 43:189"
@@ -3825,8 +3825,8 @@ entries:
     quant_class: semi_quantitative
     simulable: true
     condition_quote: "5 mmol ribose and 5 mmol cysteine in 100 mL 0.2 mol L-1 phosphate buffer"
-    flags: ["duplicate_of: xu2008_table2_ratio_series_volatiles (pH 5.6 columns only)", condition_uncertain]
-    note: "HS-SPME vs 15.13 ng tridecane, RF=1, ng/mL of mixture. pH 5.6 columns = xu2008 1:1 columns (identical numbers, a few last-digit differences); pH 7.0 and 8.0 arms are new (candidate hold-out shape rows with measured final pH). 'Phosphate' is pyrophosphate by the recipe. Control arm gas/pressure not stated. Fig. 2 (A280/A420 vs pH) not digitised."
+    flags: ["duplicate_of: xu2008_table2_ratio_series_volatiles (pH 5.6 columns only)", condition_uncertain, "buffer_is_pyrophosphate: 0.2 M sodium pyrophosphate labelled 'phosphate'"]
+    note: "HS-SPME vs 15.13 ng tridecane, RF=1, ng/mL of mixture. pH 5.6 columns = xu2008 1:1 columns (identical numbers, a few last-digit differences); pH 7.0 and 8.0 arms are new (candidate hold-out shape rows with measured final pH). 'Phosphate' is pyrophosphate by the recipe. Control arm gas/pressure not stated. Fig. 2 (A280/A420 vs pH) not digitised. TEST table heldout_xu2007_tab1 (2026-11-01; control columns, the 34 compounds both readers keyed, all 102 cells identical; 65 rows): TEST data for E8 (China Agricultural Univ. a new TEST lab; E8 had none), never a fit input. Final pH 5.5 / 6.2 / 6.8 printed. SC-CO2 columns and 38 sulfur heterocycles single-reader, not keyed."
   - id: xu2010_table1_atmosphere_pressure_volatiles
     dossier: xu2010_extraction.md
     paper: "Xu, He, Liu & Gao 2010 Czech J Food Sci 28:192"
@@ -4906,7 +4906,7 @@ entries:
     simulable: false
     condition_quote: "Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer."
     flags: [condition_uncertain]
-    note: "Digitised [D] +-3 %; dossier derives first-order k (4.5e-3 min-1 at pH 5 to 1.4e-2 at pH 6). Only pH profile of purified Cys-Amadori decay; simulable except starting concentration unstated (first-order read would still be usable)."
+    note: "Digitised [D] +-3 %; dossier derives first-order k (4.5e-3 min-1 at pH 5 to 1.4e-2 at pH 6). Only pH profile of purified Cys-Amadori decay; simulable except starting concentration unstated (first-order read would still be usable). TEST table heldout_deroos2005_fig4 (2026-11-01; two blind readers within 1 % point at six pH values; 6 rows): TEST data for E10 (Givaudan a new TEST lab for E10), never a fit input. The figure is a curve without data markers: readings, not data points."
   - id: deroos2005_text_yields_continuous_reactor
     dossier: deroos2005_extraction.md
     paper: "de Roos, Wolswinkel & Sipma 2005 ACS Symp Ser 905"
@@ -6184,7 +6184,7 @@ entries:
     simulable: true
     condition_quote: "GSH 0.3 mmol + glucose 0.3 mmol in 5 mL sodium phosphate buffer (pH 6.5)"
     flags: [condition_uncertain]
-    note: "Relative peak area vs an injection standard (1,2-dichlorobenzene added at the GC inlet, not to the sample); only between-system ratios usable. Fat arms are oil-water (fat ~1 % w/w); control arm is aqueous. Buffer molarity not stated; no measured pH. Fat lowers MFT/FFT (opposite sign to du2025)."
+    note: "Relative peak area vs an injection standard (1,2-dichlorobenzene added at the GC inlet, not to the sample); only between-system ratios usable. Fat arms are oil-water (fat ~1 % w/w); control arm is aqueous. Buffer molarity not stated; no measured pH. Fat lowers MFT/FFT (opposite sign to du2025). TEST table heldout_zhao2019b_tab1_2 (2026-11-01; two blind readers identical on all 159 cells; 124 rows): TEST data for E7 (BTBU a new TEST lab for E7), never a fit input. Inlet IS: the fat arms carry a headspace-partition confound."
   - id: zhao2019b_table2_camola_glucose_labelling
     dossier: zhao2019b_extraction.md
     paper: "Zhao J et al. 2019 Food Chem 270:436"
@@ -6202,7 +6202,7 @@ entries:
     simulable: true
     condition_quote: ""
     flags: [condition_uncertain]
-    note: "Isotopomer distributions (CAMOLA): MFT/FFT ~100 % glucose C5 fragment; thiazoles carry non-glucose C3. Fat-system numbers printed only for 2-ethylthiophene."
+    note: "Isotopomer distributions (CAMOLA): MFT/FFT ~100 % glucose C5 fragment; thiazoles carry non-glucose C3. Fat-system numbers printed only for 2-ethylthiophene. TEST table heldout_zhao2019b_tab1_2 (2026-11-01; two blind readers identical on all 28 distributions; 134 rows): TEST data for E6 / E11, never a fit input. Rows other than no. 15 carry no system; the text says patterns were unchanged with fat, so they sit in the control pot standing for a, b and c."
   - id: zhang2024_fig1_thiamine_xylose_redox_series
     dossier: Zhang2024_extraction.md
     paper: "Zhang, Kuang, Wang & Cao 2024 Food Res Int 182:114149"
@@ -8695,7 +8695,7 @@ entries:
     simulable: true
     condition_quote: ""
     flags: ["ph_start_only", "open_system"]
-    note: "Ledger-ready rows 1, 4, 6, 7 (thiamine route at meat-like levels); the disulfide is not the sink. Tables IV (0.1 vs 0.2 M pyrophosphate) and VI (+ H2S flushes) are further within-study factors on the same Method I design, not itemised in the dossier's ledger-ready list. arms: thiamine vs thiamine pyrophosphate x +- cysteine x +- ribose x +- GSH (same lab, same SIDA)."
+    note: "Ledger-ready rows 1, 4, 6, 7 (thiamine route at meat-like levels); the disulfide is not the sink. Tables IV (0.1 vs 0.2 M pyrophosphate) and VI (+ H2S flushes) are further within-study factors on the same Method I design, not itemised in the dossier's ledger-ready list. arms: thiamine vs thiamine pyrophosphate x +- cysteine x +- ribose x +- GSH (same lab, same SIDA). TEST table heldout_grosch1992_tab2 (2026-11-01; two blind readers identical on all 24 cells; 10 rows, censored cells kept as per-pot upper limits): TEST data for CF-089 / E18, never a fit input. Table III's 325 / 30 umol cell is this table's no. 6 (count once)."
   - id: grosch1992_tab3_mft_cysteine_dose_series_thiamine_ribose
     dossier: grosch1992_extraction.md
     paper: "Grosch & Zeiler-Hilgart 1992 ACS Symp Ser 490:183"

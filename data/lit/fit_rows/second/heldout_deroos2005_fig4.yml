@@ -1,0 +1,113 @@
+# SECOND READER (reader B) -- de Roos, Wolswinkel & Sipma 2005, ACS Symp Ser 905 ch. 9 (deroos2005.pdf), Fig. 4. Reader B's values AS WRITTEN; independent of reader A. Pots carry the adjudicated
+# conditions (names suffixed _b) so that scripts/reconcile_source_readings.py can pair them; species keys are the adjudication's.
+# Only the cells kept in the first reading are here (B's other cells, if any, stay in the raw file: the coordinator's scratchpad,
+# queue_reader_B.yml). B's pH 3.5 reading (53 %) is not here (single reader).
+name: heldout_deroos2005_fig4
+reader: agent-readerB-2026-11-01
+read_by: agent-readerB-2026-11-01
+status: draft
+purpose: 'TEST data for the contrast benchmark, engine error E10 (TTCA formation off, release too fast and pH-flat; keying_queue.yml rank 12); never a fit input'
+pots:
+  deroos2005_fig4_xylcys_pH3p0_b:
+    {ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: '''boiling'' (temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {CAMA: null},
+     concentration_basis: 'purified D-xylulose-L-cysteine; concentration NOT printed (a first-order reading -ln(f)/t does not need it)',
+     label_ph: 3,
+     ph_measured_at: 'not stated (x axis ''pH'')',
+     buffer: '0.5 M aqueous phosphate (counter-ion and pH adjustment not stated)',
+     atmosphere: 'not stated',
+     vessel: 'not stated (''boiling'')',
+     curve_note: 'Fig. 4 draws a dash-dot curve with no data markers: the pH values actually measured are unknown; this is a reading of the curve at this pH',
+     source_figure: 'Fig. 4 (p. 127): % left after 2 h vs pH 2-7 (curve spans pH 3-6); 600 dpi 1-bit scan',
+     condition_quote: 'Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer. (y axis: % left after 2 h)'}
+  deroos2005_fig4_xylcys_pH4p0_b:
+    {ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: '''boiling'' (temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {CAMA: null},
+     concentration_basis: 'purified D-xylulose-L-cysteine; concentration NOT printed (a first-order reading -ln(f)/t does not need it)',
+     label_ph: 4,
+     ph_measured_at: 'not stated (x axis ''pH'')',
+     buffer: '0.5 M aqueous phosphate (counter-ion and pH adjustment not stated)',
+     atmosphere: 'not stated',
+     vessel: 'not stated (''boiling'')',
+     curve_note: 'Fig. 4 draws a dash-dot curve with no data markers: the pH values actually measured are unknown; this is a reading of the curve at this pH',
+     source_figure: 'Fig. 4 (p. 127): % left after 2 h vs pH 2-7 (curve spans pH 3-6); 600 dpi 1-bit scan',
+     condition_quote: 'Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer. (y axis: % left after 2 h)'}
+  deroos2005_fig4_xylcys_pH4p5_b:
+    {ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: '''boiling'' (temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {CAMA: null},
+     concentration_basis: 'purified D-xylulose-L-cysteine; concentration NOT printed (a first-order reading -ln(f)/t does not need it)',
+     label_ph: 4.5,
+     ph_measured_at: 'not stated (x axis ''pH'')',
+     buffer: '0.5 M aqueous phosphate (counter-ion and pH adjustment not stated)',
+     atmosphere: 'not stated',
+     vessel: 'not stated (''boiling'')',
+     curve_note: 'Fig. 4 draws a dash-dot curve with no data markers: the pH values actually measured are unknown; this is a reading of the curve at this pH',
+     source_figure: 'Fig. 4 (p. 127): % left after 2 h vs pH 2-7 (curve spans pH 3-6); 600 dpi 1-bit scan',
+     condition_quote: 'Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer. (y axis: % left after 2 h)'}
+  deroos2005_fig4_xylcys_pH5p0_b:
+    {ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: '''boiling'' (temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {CAMA: null},
+     concentration_basis: 'purified D-xylulose-L-cysteine; concentration NOT printed (a first-order reading -ln(f)/t does not need it)',
+     label_ph: 5,
+     ph_measured_at: 'not stated (x axis ''pH'')',
+     buffer: '0.5 M aqueous phosphate (counter-ion and pH adjustment not stated)',
+     atmosphere: 'not stated',
+     vessel: 'not stated (''boiling'')',
+     curve_note: 'Fig. 4 draws a dash-dot curve with no data markers: the pH values actually measured are unknown; this is a reading of the curve at this pH',
+     source_figure: 'Fig. 4 (p. 127): % left after 2 h vs pH 2-7 (curve spans pH 3-6); 600 dpi 1-bit scan',
+     condition_quote: 'Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer. (y axis: % left after 2 h)'}
+  deroos2005_fig4_xylcys_pH5p5_b:
+    {ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: '''boiling'' (temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {CAMA: null},
+     concentration_basis: 'purified D-xylulose-L-cysteine; concentration NOT printed (a first-order reading -ln(f)/t does not need it)',
+     label_ph: 5.5,
+     ph_measured_at: 'not stated (x axis ''pH'')',
+     buffer: '0.5 M aqueous phosphate (counter-ion and pH adjustment not stated)',
+     atmosphere: 'not stated',
+     vessel: 'not stated (''boiling'')',
+     curve_note: 'Fig. 4 draws a dash-dot curve with no data markers: the pH values actually measured are unknown; this is a reading of the curve at this pH',
+     source_figure: 'Fig. 4 (p. 127): % left after 2 h vs pH 2-7 (curve spans pH 3-6); 600 dpi 1-bit scan',
+     condition_quote: 'Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer. (y axis: % left after 2 h)'}
+  deroos2005_fig4_xylcys_pH6p0_b:
+    {ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: '''boiling'' (temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {CAMA: null},
+     concentration_basis: 'purified D-xylulose-L-cysteine; concentration NOT printed (a first-order reading -ln(f)/t does not need it)',
+     label_ph: 6,
+     ph_measured_at: 'not stated (x axis ''pH'')',
+     buffer: '0.5 M aqueous phosphate (counter-ion and pH adjustment not stated)',
+     atmosphere: 'not stated',
+     vessel: 'not stated (''boiling'')',
+     curve_note: 'Fig. 4 draws a dash-dot curve with no data markers: the pH values actually measured are unknown; this is a reading of the curve at this pH',
+     source_figure: 'Fig. 4 (p. 127): % left after 2 h vs pH 2-7 (curve spans pH 3-6); 600 dpi 1-bit scan',
+     condition_quote: 'Figure 4. Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous phosphate buffer. (y axis: % left after 2 h)'}
+rows:
+  - {pot: 'deroos2005_fig4_xylcys_pH3p0_b', ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability', species: 'CAMA', t_min: 120, value: 51, unit: 'percent_remaining', quantity: 'D-xylulose-L-cysteine left after 2 h in boiling 0.5 M phosphate (% of the start)', printed: 'reader B: 51 % at pH 3', read_error: 0.017, read_error_basis: 'max(A 2, B 2, |A-B|/2 0) = 2 % points, in dex'}
+  - {pot: 'deroos2005_fig4_xylcys_pH4p0_b', ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability', species: 'CAMA', t_min: 120, value: 54, unit: 'percent_remaining', quantity: 'D-xylulose-L-cysteine left after 2 h in boiling 0.5 M phosphate (% of the start)', printed: 'reader B: 54 % at pH 4', read_error: 0.0161, read_error_basis: 'max(A 2, B 2, |A-B|/2 0) = 2 % points, in dex'}
+  - {pot: 'deroos2005_fig4_xylcys_pH4p5_b', ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability', species: 'CAMA', t_min: 120, value: 56, unit: 'percent_remaining', quantity: 'D-xylulose-L-cysteine left after 2 h in boiling 0.5 M phosphate (% of the start)', printed: 'reader B: 56 % at pH 4.5', read_error: 0.0155, read_error_basis: 'max(A 2, B 2, |A-B|/2 0) = 2 % points, in dex'}
+  - {pot: 'deroos2005_fig4_xylcys_pH5p0_b', ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability', species: 'CAMA', t_min: 120, value: 58, unit: 'percent_remaining', quantity: 'D-xylulose-L-cysteine left after 2 h in boiling 0.5 M phosphate (% of the start)', printed: 'reader B: 58 % at pH 5', read_error: 0.015, read_error_basis: 'max(A 2, B 2, |A-B|/2 0) = 2 % points, in dex'}
+  - {pot: 'deroos2005_fig4_xylcys_pH5p5_b', ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability', species: 'CAMA', t_min: 120, value: 43, unit: 'percent_remaining', quantity: 'D-xylulose-L-cysteine left after 2 h in boiling 0.5 M phosphate (% of the start)', printed: 'reader B: 43 % at pH 5.5', read_error: 0.0303, read_error_basis: 'max(A 3, B 3, |A-B|/2 0) = 3 % points, in dex'}
+  - {pot: 'deroos2005_fig4_xylcys_pH6p0_b', ledger_id: 'deroos2005_fig4_xylulose_cysteine_ph_stability', species: 'CAMA', t_min: 120, value: 18, unit: 'percent_remaining', quantity: 'D-xylulose-L-cysteine left after 2 h in boiling 0.5 M phosphate (% of the start)', printed: 'reader B: 18 % at pH 6', read_error: 0.0483, read_error_basis: 'max(A 2, B 2, |A-B|/2 0.5) = 2 % points, in dex'}

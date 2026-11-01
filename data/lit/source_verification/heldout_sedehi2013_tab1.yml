@@ -1,0 +1,21 @@
+# SOURCE VERIFICATION -- Sedehi, Takano, Blasic, Sullivan & De Haan 2013, Atmos Environ 77:656-663 (sedehi2013.pdf), Table 1 and Eqs. (3)-(4) (TEST table data/lit/fit_rows/heldout_sedehi2013_tab1.yml; contrast benchmark error E4). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_sedehi2013_tab1.yml, fit_rows/second/heldout_sedehi2013_tab1.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws'
+  source_file: 'sedehi2013.pdf'
+  location: 'Table 1, p. 661; Eqs. (3)-(4), pp. 660-661'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'corrected'
+    values: 'pass'
+  quote: 'Table 1 ... log k as a function of pH ... Rate = 10^[(0.36 +- 0.06) pH - (3.6 +- 0.3)] M-1 s-1 fAld [MG]tot [Am]tot (Eq. 4); initial concentrations between 0.2 and 1.5 M'
+  notes: '26 law parameters: 9 Table 1 laws (slope + intercept), 5 Ea, Eq. (3) k and Eq. (4) slope + intercept. DUPLICATES corrected: glyoxal + AS is a fit to Yu et al. 2011 data (dropped). CONDITIONS corrected: per-run data in Supplement Table S2 (not on disk); D2O, ISFET pH without pD correction; 277 - 298 K.'
+  adjudication: 'All printed numbers identical in both readings; one law dropped (another laboratory''s data).'

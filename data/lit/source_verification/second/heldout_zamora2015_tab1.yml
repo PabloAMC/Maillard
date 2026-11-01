@@ -1,0 +1,20 @@
+# Second reader (reader B), Zamora, Leon & Hidalgo 2015, J Agric Food Chem 63 (accepted manuscript; zamora2015.pdf), Table 1. Independent of reader A. Rows: data/lit/fit_rows/second/heldout_zamora2015_tab1.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes.
+reader: 'agent-readerB-2026-11-01'
+role: 'independent second reader, contrast benchmark TEST keying (error E7)'
+
+entries:
+- ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl'
+  source_file: 'zamora2015.pdf'
+  location: 'Table 1, MS p. 20; Methods MS p. 5'
+  read_by: 'agent-readerB-2026-11-01'
+  second_reader: 'self'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: 'mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C. ... Values are mean +- SD values (in nmol/umol of phennylalanine) of, at least, three independent experiments.'
+  notes: 'Reader B''s reading of the same cells; values identical to reader A''s except where the first record''s adjudication says otherwise.'
