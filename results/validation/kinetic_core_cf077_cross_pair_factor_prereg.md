@@ -115,3 +115,70 @@ The declared one-sided MPZ band and the pH-slope-below-7 band (EX-052 follow-ups
 wave records (`kinetic_core_b18_fit_report.*`, `kinetic_core_b18_ship_rule.*`) state what was true at their commit and
 are not regenerated (artifact-freshness policy of 2026-10-29); their "2 sqrt" text was the design, which the engine
 now meets.
+
+---
+
+## 6. OUTCOME (appended after the runs; sections 1 - 5 are unchanged since commit `55d20af6`)
+
+### 6.1 The B18 fit at its own commit: the prediction FAILED, the decision rule fired
+
+Re-run at `34da5b51` (a detached worktree; the generator's own `predictions()` at the report's frozen vector; the
+factor by the same monkeypatch as the probe). Factor 1 reproduces the report to every printed digit.
+
+| row | report | factor 1 | factor 2 | shift (dex) |
+|---|---:|---:|---:|---:|
+| zhou_PZ_rate_100C / 110C / 120C | 0.029544 / 0.070337 / 0.16004 | same | same | 0 |
+| zhou_DMP_rate_100C / 110C / 120C | 0.0041261 / 0.0094551 / 0.020565 | same | same | 0 |
+| leahy_PZ_k_ph7_over_ph9 | 0.4989 | 0.4989 | 0.5624 | +0.052 |
+| leahy_PZ_k_ph5_over_ph9 | 0.025699 | 0.025699 | 0.083836 | +0.514 |
+| leahy_MPZ_k_ph7_over_ph9 | 0.35665 | 0.35665 | 0.37585 | +0.023 |
+| leahy_MPZ_k_ph5_over_ph9 | 0.0023924 | 0.0023924 | 0.0042644 | +0.251 |
+
+Cost 2.644 -> 15.364. Why sec. 4's argument failed: it assumed the fast-condensation limit. In the Leahy pots the
+aminoketone flux is tiny (2,5-DMP reaches 1.6e-4 mM in 2 h at pH 9 and 3.3e-8 mM at pH 5), and at a quasi-steady
+pool the aminoketone lifetime is 1 / sqrt(2 k_cond F): ~6 min at pH 9 but ~400 min at pH 5, longer than the 120-min
+window. So the condensation is not fast in the acid arm, the products grow as k [A][B] on accumulating pools, and
+the factor reaches the cross pair (MPZ x1.9 at pH 5, x1.07 at pH 9) and the minor pool unevenly across pH. The same caveat applies to sec. 3's table: it is
+the fast limit, and in slow (dilute, acid, cool) pots MPZ can rise by up to x2, not x1.5.
+
+By the rule fixed in sec. 4 (any Leahy row > 0.05 dex, cost > 0.25), **the frozen B18 pH slopes are conditional on
+CF-077.** The Strecker constants are not (Zhou's rows are bit-identical). This PR does not refit. Sizing, for the owner's
+decision only (the generator's `fit_member` at the fit commit with the factor, starts 0 / 1 / 2, all at cost 3.439):
+
+| coordinate | frozen | re-fit with the factor | shift | Laplace sigma |
+|---|---:|---:|---:|---:|
+| log10_k_go_ak_100C | -6.5415 | -6.5807 | -0.039 | 0.094 |
+| log10_k_mgo_ak_100C | -7.5297 | -7.5682 | -0.038 | 0.088 |
+| ea_go_ak / ea_mgo_ak (kJ/mol) | 103.1 / 114.9 | same (upper bounds) | 0 | 18 |
+| ph_slope_above_7 | 0.1974 | 0.2143 | +0.017 | 0.047 |
+| ph_slope_below_7 | 0.5795 | 0.6907 | +0.111 | 0.055 |
+
+The two log10 k shifts are the pH-term transfer from Zhou's pH 8 to the stored pH 6.8 (0.017 x 1 + 0.111 x 0.2 =
+0.039), not a change at pH 8. On TODAY's trunk the frozen vector already misses Leahy's PZ rows by ~1.4 dex with or
+without the factor (sec. 4), so a B18 re-fit now is a larger question than CF-077 and is the owner's.
+
+### 6.2 The live artifacts after the fix
+
+The artifact-freshness gate re-ran every live artifact it regenerates: `core_panel_scores`, the B60 fit targets, the
+experiment-value ranking, the data wishlist, network hypotheses, the model card and the wave manifest all match
+(bit-identical). Only `core_directional_scores` moved, in its two trunk 2,5-DMP claims, and both keep `agree`:
+
+| claim | arm | before (ug/L) | after | shift (dex) |
+|---|---|---:|---:|---:|
+| PH-06 (DMP rises with pH) | pH 4 | 3.107e-4 | 2.581e-4 | -0.081 |
+| PH-06 | pH 7 | 6.920 | 6.393 | -0.034 |
+| PH-06 | pH 9 | 21.84 | 21.77 | -0.001 |
+| TEMP-04 (A > B) | T4 profile, 160 C max | 1.596e-3 | 1.590e-3 | -0.002 |
+| TEMP-04 | T1 profile, 145 C max | 4.37e-6 | 4.37e-6 | 0.000 |
+
+The envelope (`core_prediction_uncertainty`) carries pyrazines only as refusals and does not hash `network.py`; it is
+not regenerated (35 min) and cannot move. `figure_inputs.json` is stale on `network.py` but its rebuild is deferred
+to Phase 3 (owner, 2026-10-30), as the gate reports. Sulfur, acrylamide and lipid lanes: bit-identical (every scorecard
+row matches). Front-door pots (the probe of sec. 1, not shipped artifacts), glucose + glycine 100 + 100 mM:
+
+| pot | PZ | DMP | MPZ | R |
+|---|---|---|---|---|
+| 120 C, 60 min, pH 6.8 | 316.0 -> 297.7 (-0.026) | 47.6 -> 23.2 (-0.311) | 123.6 -> 167.0 (+0.131) | 1.016 -> 4.030 |
+| 95 C, 120 min, pH 9 | 2.25 -> 1.28 (-0.246) | 13.88 -> 12.51 (-0.045) | 5.65 -> 8.08 (+0.156) | 1.021 -> 4.082 |
+
+Every pre-registered expectation of sec. 3 held except the B18 one (sec. 6.1).

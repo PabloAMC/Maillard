@@ -4,11 +4,12 @@ from __future__ import annotations
 import json
 import math
 
+import numpy as np
 import pytest
 
 from src import data_paths
-from src.kinetic_core import network, species
-from src.kinetic_core.engine import FormulationSpec, ProcessSpec, ThermalProgram, predict
+from src.kinetic_core import network, operative_parameters, species
+from src.kinetic_core.engine import FormulationSpec, ProcessSpec, ThermalProgram, b1_fitted, predict
 from src.kinetic_core.parameters_pyrazine import (
     FROZEN_B18, K_COND, PYRAZINE_KEYS, PYRAZINE_PARAMETERS, PYRAZINE_PH_STEPS, PYRAZINE_REFERENCE_PH,
     pyrazine_ph_factor, with_fitted_pyrazine,
@@ -30,6 +31,21 @@ def test_the_five_steps_run_on_the_trunk_only_and_balance():
     assert not set(network.PYRAZINE_REACTION_KEYS) & set(FULL_REACTION_KEYS)
     cond = [r for r in network.PYRAZINE_REACTIONS if r.parameter_key == "k_cond"]
     assert len(cond) == 3 and all(r.order == 2 for r in cond)
+
+
+def test_the_cross_pair_carries_the_statistical_factor_so_the_mixing_ratio_is_four():
+    # CF-077 (2026-11-01): one shared k_cond in plain mass action gave MPZ^2 / (PZ DMP) = 1; random pairing
+    # of two pools gives 4. Pinned on the instantaneous rates at equal and unequal pools, and the homo pairs
+    # keep k_cond itself (Zhou 2024's single-pool fit rows are unchanged).
+    k = network.rate_constants_at(operative_parameters(b1_fitted()), 373.15)
+    assert k["r_akg_pz"] == k["r_akm_dmp"] == pytest.approx(K_COND.k_ref)
+    assert k["r_ak_mpz"] == pytest.approx(2.0 * K_COND.k_ref)
+    keys = [r.key for r in network.TRUNK_REACTIONS]
+    for akg, akm in ((0.5, 0.5), (0.3, 0.7)):
+        y = np.zeros(len(species.SPECIES_KEYS))
+        y[species.INDEX["AKG"]], y[species.INDEX["AKM"]] = akg, akm
+        rate = dict(zip(keys, network.reaction_rates(y, k)))
+        assert rate["r_ak_mpz"] ** 2 / (rate["r_akg_pz"] * rate["r_akm_dmp"]) == pytest.approx(4.0, rel=1e-12)
 
 
 def test_the_species_are_appended_after_every_existing_one_and_are_trunk_only():

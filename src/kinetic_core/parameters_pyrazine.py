@@ -25,7 +25,8 @@ condensation "I + I -> pyrazines" as "fast" (jousse2002_extraction.md, Table of 
 products rise linearly from t = 0; `k_cond` is set where the aminoketone lifetime is minutes at the
 fitted fluxes, its value is a declared assumption, and the ship rule reports the sensitivity. The
 mixed pyrazine then follows the two pools statistically: rate_MPZ = 2 sqrt(rate_PZ rate_DMP), which
-is the pre-registration's "geometric mean" made mechanistic (with its factor two). (iii) The pH term
+is the pre-registration's "geometric mean" made mechanistic (with its factor two, which the engine
+carries as network.CROSS_PAIR_STATISTICAL_FACTOR on r_ak_mpz since CF-077, 2026-11-01). (iii) The pH term
 is piecewise-linear in log10 k against pH with a knot at 7, exactly 1 at the trunk's reference pH
 6.8 where the stored constants apply, on the two Strecker steps (trunk_conditions.pyrazine_factor);
 Zhou's pH-8 pots carry its factor in the fit like any other pot.
@@ -129,7 +130,8 @@ K_COND: KineticParameter = KineticParameter(
     aw_of_measurement=AW_OF_MEASUREMENT,
     flags=("b18_pyrazine", "declared_fast", "no_measured_rate", "shared_by_three_pairings"),
     note="A declared assumption, not a measurement: any value above about 1e3 gives the same pyrazine yields; the "
-         "mixed pyrazine follows the two aminoketone pools statistically because the constant is shared.",
+         "mixed pyrazine follows the two aminoketone pools statistically because the constant is shared (the cross "
+         "pair at the unlike-pair factor 2, network.CROSS_PAIR_STATISTICAL_FACTOR; CF-077).",
 )
 
 

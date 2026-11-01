@@ -667,3 +667,15 @@ entries:
     verdict: partial
     conclusion: "No rival admitted. The engine's exchange (E0) rejected, provisionally (single lab): it releases cysteine 2 - 30x faster than TTCA is lost in the dilute pots (T4, power >= 0.93). E3 and E2 rejected; E1 feasible only at its band corner; E4 fails only T3, which also fails the no-exchange control (inconclusive is a post hoc reading). The conflict is inside one laboratory (Zhai 2021 vs Zhai 2019); Cao adds little; Kang 2026 Fig. S3 duplicates Zhai 2021 Fig. 6."
     follow_up: "No engine change; red team before any exchange law changes; designed TTCA 10 vs 100 mM x phosphate x carboxylate; ask Zhai for the 13C5 label fraction; test TTCA re-formation after the quench."
+  - id: EX-057
+    date: "2026-11-01"
+    kind: diagnosis
+    question: "CF-077: does the engine give the B18 cross pair (AKG + AKM -> 2-methylpyrazine) its statistical factor, and what moves when it does?"
+    hypothesis: "The three condensations share k_cond in plain mass action, so R = MPZ^2 / (PZ DMP) = 1 where the design says 4; 2 k_cond on r_ak_mpz restores the design, leaves Zhou 2024's single-pool B18 rows bit-identical, and leaves the frozen B18 vector unconditional on the bug (the fit-time Leahy pots ran in the minor-pool limit)."
+    design: "Reproduce R in the env; pre-register the fix, the expected shifts (fast-limit partition table) and a decision rule for the B18 fit (results/validation/kinetic_core_cf077_cross_pair_factor_prereg.md, commit 55d20af6); re-run the B18 generator at its own commit (34da5b51) with the factor; apply the fix; regenerate the live artifacts and list every moved number."
+    expected: "R = 1 reproduced; Zhou rows bit-identical; Leahy ratio rows at the fit commit move < 0.01 dex (P 0.9); no panel score moves (P 0.95); PH-06 / TEMP-04 keep agree (P 0.9); other lanes bit-identical (P 0.99)."
+    artifacts: [results/validation/kinetic_core_cf077_cross_pair_factor_prereg.md, docs/reference/conflicts_register.yml]
+    commit: pending
+    verdict: partial
+    conclusion: "R = 1.000 reproduced (1.016 / 1.021 in pots); fixed to 4 (2 k_cond on r_ak_mpz, unit test). Zhou's B18 rows bit-identical. The B18 prediction FAILED: at the fit commit the factor moves Leahy's two-pool pH-ratio rows by up to +0.51 dex (cost 2.64 -> 15.4) because the condensation is not fast in the dilute acid arm, so the frozen pH slopes are conditional on CF-077 (sizing re-fit: slope below 7 +0.11, 2.0 sigma). Live artifacts: only core_directional_scores moved (PH-06 DMP -0.081 / -0.034 / -0.001 dex, TEMP-04 -0.002; both still agree); every scorecard, ranking and other lane bit-identical."
+    follow_up: "Owner decision: re-fit B18's pH slopes with the factor (sizing at the fit commit: slope below pH 7 +0.11, 2.0 sigma; stored Strecker constants -0.04 dex), on today's trunk where the frozen vector already misses Leahy's PZ ratios by ~1.4 dex (a pre-existing drift since B21, not CF-077's). Out of scope here: the one-sided MPZ band and the pH-slope-below-7 band (EX-052)."
