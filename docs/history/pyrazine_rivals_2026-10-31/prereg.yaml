@@ -1,0 +1,230 @@
+# Pyrazine formation: rival structures, discriminating tests, bands, power, expectations.
+# PRE-REGISTRATION. Written 2026-10-31 13:48-14:20, before any power check or scoring script was written or run.
+# Protocol: docs/guides/STATUS_AND_PLAN.md "How a mechanism is identified" (a)-(f) and "Mechanism triage" rank 5;
+# docs/guides/A2_MODULE_CONTRACT.md sec. 3; tasks/lessons.md last entry (bands from data OTHER than the scored tests;
+# every dataset scored or its exclusion justified; a "second lab" must measure the same channel).
+#
+# DISCLOSURE (not blind). Several scored numbers were seen before this file was written:
+#  - the Leahy mixing ratio R = MPZ^2/(PZ x 2,5-DMP) = 11.7 / 14.4 / 17.3 (95 / 85 / 75 C) is in the brief and in
+#    docs/history/mechanism_reviews_2026-10-31/pyrazines.md;
+#  - a read-only survey subagent listed R for zhou2022 / zhou2023 / deng2022 / hwang1995 / martin2001 / vanlancker2012;
+#  - while designing S3 I computed its statistic by hand at 30 min (D ~ 0.13).
+#  Consequence: no band, tolerance or critical value below is set from those numbers. The bound tests (S1, S2, S3) use
+#  critical values computed from the NULL rival's synthetic distribution, and the alternative rivals' bands are
+#  declared uninformed (physical-chemistry class ranges), so knowing the observed values cannot tune a pass.
+#
+# Notation. A = aminoacetaldehyde (Strecker of glyoxal, GO), M = aminoacetone (Strecker of methylglyoxal, MGO at the
+# aldehyde carbon), M' = 2-aminopropanal (MGO at the keto carbon), DHP = dihydropyrazine. PZ = pyrazine, MPZ =
+# 2-methylpyrazine, DMP25 / DMP26 = 2,5- / 2,6-dimethylpyrazine. Ratios are MOLAR.
+
+meta:
+  question: "Which structures for pyrazine formation are consistent with the discriminating evidence on disk?"
+  owner_rank: "Mechanism triage rank 5 (pyrazines, pyrrole sink); rank 1 supplies the Strecker flux (forced-input layer)"
+  out_dir: /private/tmp/claude-501/-Users-pabloantoniomorenocasares-Developer-Maillard/128e3455-67ec-4d82-ba48-6cfcfb79a63e/scratchpad/pyrazine/
+  no_edits: "src/ and data/ read only; no commits; python only via ./scripts/docker_maillard.sh run, nice -n 10, OMP_NUM_THREADS=1"
+  module_form: >
+    The tests below are closed-form, constant-free signatures (Cauchy-Schwarz bounds on pairing statistics, label
+    identities, mass balances, signs). They need no ODE. So the script is a standalone A2-contract-shaped module
+    (CONFIG_KEYS with bands and basis, rival observables, positive / negative controls, an INCONCLUSIVE outcome) but
+    it carries no SPECIES / REACTIONS integration; a reaction-level module is written only for a rival that survives.
+
+# ---------------------------------------------------------------------------------------------------------------
+rivals:
+  P0:
+    name: "engine (B18): pyrazine-yield constant serving as the Strecker flux"
+    structure: >
+      GO + amine -> A + CO2 + aldehyde; MGO + amine -> M + CO2 + aldehyde, constants k_go_ak / k_mgo_ak FITTED to
+      2 x Zhou 2024's pyrazine formation rates (so aminoketone flux == 2 x pyrazine flux by construction); one shared,
+      fast condensation k_cond for AA, AM, MM; no DHP species, no aminoketone sink; pH law (Leahy slopes 0.58 / 0.20
+      dex per unit, knot 7) on the two Strecker steps. Source: src/kinetic_core/parameters_pyrazine.py.
+    sharp_predictions:
+      - "per-aminoketone pyrazine yield Y == 1 (every aminoketone ends in a pyrazine)"
+      - "Strecker aldehyde + acid from fed MGO = 2 x the pyrazine-calibrated flux (no other N-transfer)"
+      - "no pyrrole (or any other aminoketone product)"
+      - "R = MPZ^2/(PZ x DMP_all) <= 4 for any time / space heterogeneity of the pools (Cauchy-Schwarz)"
+      - "fed-MGO pyrazine falls x10^(0.58 x 3) ~ 55 from pH 7 to pH 4"
+  P1:
+    name: "Strecker flux -> aminoketone -> DHP -> pyrazine, with an aminoketone -> pyrrole sink; ONE shared condensation constant"
+    structure: >
+      Strecker flux J_D = k_D [D][amine] with k_D from the forced-input Strecker layer's DICARBONYL route (Hofmann 2000
+      Table 4 / Table 3 calibrations; needed but not sufficient in sugar pots, where the Amadori route adds aldehyde
+      but no aminoketone of known identity); A, M, M' pools; AK_i + AK_j -> DHP_ij with k_ij = shared statistics
+      (k_AA = k_MM = k, k_AM = 2k); DHP -> pyrazine (oxidation or dehydration, one constant for all DHP);
+      AK + n MGO -> 2,5-diacetyl-3-methylpyrrole (Adams Scheme 3; n in [1, 2]); first-order AK losses.
+    sharp_predictions:
+      - "Y = 2 x pyrazine / Strecker flux in (0, 1], pot-dependent"
+      - "R <= 4 (1 + delta) where delta is set by the measured DMP26/DMP25 (M' share); R <= 4 exactly if DMP26 is included"
+      - "MPZ N-label from the SAME A and M pools as PZ / DMP: with f_A constant in time, P2/f_A + P0/(1-f_A) = 1 for MPZ isotopomers"
+      - "pyrrole / DMP rises with MGO : amine (any n >= 1, any regime)"
+  P1x:
+    name: "P1 with pair-specific condensation constants (carbonyl-class rule)"
+    structure: >
+      As P1 but rate_ij proportional to (n_i c_j + n_j c_i) [first intermolecular imine formation rate-determining;
+      n = amine nucleophilicity, c = carbonyl reactivity]. One parameter u = n_M c_A / (n_A c_M) (aldehyde vs ketone
+      selectivity), so R = h (1 + u)^2 / u with h <= 1 the heterogeneity factor; T-dependence through dEa.
+    added_because: "R > 4 alone does not need a new route: unequal pair constants also give it. Without P1x the Leahy test would be over-read."
+  P2:
+    name: "P1 plus a methylpyrazine route that does not go through the A x M pairing"
+    sub_variants:
+      P2a_aa: "amino-acid Strecker aldehyde (HCHO from Gly) adds to the A+A DHP -> MPZ (Low 2007 'x + x + y'); MPZ carries amino-acid carbon"
+      P2a_sugar: "same addition with sugar-derived HCHO; MPZ carries no amino-acid carbon"
+      P2b: >
+        a sugar-carbon C2 + C3 route not via free A: e.g. a hydroxylated C3 aminoketone (DHA / glyceraldehyde
+        amination, Adams Scheme 2) pairing with A and aromatising by DEHYDRATION (Shibamoto 1977, no oxidant), or a
+        three-component GO + MGO + 2 N route; its N comes from its own source (label g, within-molecule correlation rho).
+    sharp_predictions:
+      - "R = 4 h (1 + e)^2 with e = extra / pairing MPZ flux; any R > 4 reachable"
+      - "MPZ isotopomers may break the P1 identity (P2/f_A + P0/(1-f_A) != 1)"
+      - "P2a_aa: MPZ 13C share from [2-13C]Gly ~ e/(1+e) x (Gly share of HCHO)"
+  NC:
+    name: "negative control (declared known-wrong): ring carbons from the amino acid"
+    structure: "Strecker aldehyde + NH3 condense to the ring (no dicarbonyl skeleton); predicts >= 40 % amino-acid carbon in MPZ and DMP25"
+    must: "FAIL S4. If NC passes S4 the label test is broken and S4 is void."
+  positive_controls: "for each bound / identity test, synthetic data from the rival that the test should admit must pass at >= 0.9"
+
+# ---------------------------------------------------------------------------------------------------------------
+config_keys:   # name, default, band, basis. NONE of these comes from a scored test.
+  - [pyr.h_linear, 1.0, [0.5, 1.0], "heterogeneity factor for pots whose products rise linearly from t~0 (Leahy ch.7 'r2 > 0.95 zero order'; Zhou 2024 Table 2 R2 0.96-0.99): constant pools give h = 1; 0.5 allows a 2x drift between the A and M pools. Used ONLY in alternative-rival synthetic data (h cannot raise R above the bound, so it never helps the null)."]
+  - [pyr.h_any, 1.0, [0.1, 1.0], "heterogeneity factor where no time course is printed (dry / fried / Cys pots)"]
+  - [pyr.log10_u, 0.0, [0.0, 3.0], "P1x aldehyde/ketone selectivity: imine-forming addition of primary amines to aliphatic aldehydes vs methyl ketones, class range 1 - 1e3 (general physical organic chemistry, Jencks-type data; NOT on disk -> declared, lead only)"]
+  - [pyr.dEa_u, 0.0, [0.0, 40.0], "kJ/mol, T-dependence of u (class; declared)"]
+  - [pyr.log10_e, -9, [-2.0, 0.954], "P2 extra/pairing MPZ flux e in [0.01, 9] (uninformed: up to 90 % of MPZ)"]
+  - [pyr.delta_m_prime, 0.0, "from each pot's own DMP26/DMP25", "M' share: 2,6-DMP = 2 M M', 2,5-DMP = M^2 + M'^2; DMP26 < LOD -> M'/M bound from the LOD"]
+  - [op.rf_calibrated_dex, 0.05, [0.0, 0.08], "per-compound response-factor error, sd in dex, for in-matrix empirical RFs (Leahy: standards purged from borate) or external standards + IS (Zhou)"]
+  - [op.rf_area_dex, 0.0, [-0.7, 0.7], "BIAS of an area-based R relative to the molar R for uncalibrated studies (peak areas, RF = 1, single IS). Basis: the Ho lab's own calibration slopes give molar responses PZ : MPZ : DMP25 = 0.096 : 0.329 : 0.335 (zhou2023 Table S1 as dossiered) and 0.705 : 3.48 : 4.08 (zhou2024), i.e. area-R / molar-R = 3.4 - 4.2 for DVB/CAR/PDMS SPME-MS; other extractions unknown -> symmetric +-0.7 dex"]
+  - [op.near_loq_dex, 0.30, [0.15, 0.40], "sd for a compound reported within ~2x of its calibration intercept (zhou2022/2023 2,5-DMP at 0.27 - 0.34 ug/L where the curve intercept exceeds the signal)"]
+  - [op.iso_sd_pt, 1.0, [0.5, 2.0], "sd of one isotopomer fraction, percentage points (GC-MS ion cluster, triplicates; PZ rows of zhou2024 Table 1 sit within 0.5 pt of a binomial, so 1 pt is not optimistic)"]
+  - [op.mh_leak_mpz, 0.0, [0.0, 0.30], "uncorrected [M-H]+ leakage I(M-1)/I(M) for methyl-pyrazines if the authors did NOT correct (EI class: methylpyridines ~0.3; Zhou 2024 does not print its correction; the Ho lab's Hwang 1993 method solves an M-1/M/M+1/M+2 system (hwang1995_extraction.md:78)). PRIMARY band [0, 0.30]; SECONDARY (correction assumed) [0, 0.05]"]
+  - [op.mh_leak_pz, 0.0, [0.0, 0.05], "parent pyrazine has no benzylic H; PZ rows fit a binomial"]
+  - [pyr.p2_g, 0.3, [0.0, 1.0], "P2b extra route N-label (uninformed)"]
+  - [pyr.p2_rho, 0.0, [0.0, 1.0], "P2b within-molecule N-label correlation (0 independent, 1 both N from one source molecule)"]
+  - [pyr.fA_sd_time, 0.0, [0.0, 0.03], "time variation of the A-pool 15N label allowed under P1 (bounded by the PZ rows' binomial fit; declared)"]
+  - [pyr.fM_mean, 0.45, [0.1, 0.7], "M-pool 15N label weighted by A x M (free under P1)"]
+  - [strecker.log10_c_mgo, -1.15, [-2.5, 0.5], "MGO lifetime band in Hofmann's fed pot, kappa D0 /min (forced-input layer CONFIG_KEYS)"]
+  - [strecker.transfer_aa_dex, 0.0, [-0.5, 0.5], "Phe <-> Ala Strecker transfer (engine PYRAZINE_TRANSFER_BAND_DECADES; Hofmann Table 1 glucose pots: acetaldehyde/PA = 1.1)"]
+  - [lab.between_dex, 0.5, [0.3, 0.7], "between-lab sd of a Strecker-type yield (CF-073: Weenen vs Hofmann ~20x on one quantity, in the direction of MORE Strecker product)"]
+
+# ---------------------------------------------------------------------------------------------------------------
+tests:
+  S1_leahy_mixing:
+    kind: "scale-free product ratio, within one study (Reineccius); rank 6-7 evidence but CONSTANT-FREE (a bound, not a fit)"
+    lab: "Reineccius (Minnesota)"
+    data: "leahy1989 Table I zero-order rates (5 systems x 75/85/95 C, pH 9 borate), Table III 2-h / 95 C distributions; leahy1989a lysine-glucose pH 7 (and pH 9 re-print)"
+    statistic: "z = log10(R_obs / R_max) / sigma, R_max = 4 (1 + delta); sigma from op.rf_calibrated_dex (2 x MPZ + PZ + DMP) and slope SE sqrt((1-r2)/(r2 (n-2)))"
+    rule: "reject the shared-constant family (P0, P1) for a dataset if z > 2.0 (one-sided). Lab-level: RF errors are SHARED across a lab's pots, so pots of one lab are combined by the MINIMUM z over its independent T levels for one system, not by summing."
+    predictions: {P0: "R <= R_max", P1: "R <= R_max", P1x: "R = h (1+u)^2/u, any value >= 4h", P2: "R = 4h(1+e)^2", NC: "no prediction (NC makes no MPZ from A x M)"}
+  S2_ho_mixing:
+    kind: "same channel as S1, second lab (Ho network)"
+    lab: "Ho network (Jiangnan / Rutgers); calibrated external standards + IS"
+    data: "zhou2023 Table 1 (ARP pH 8; ARP+Cys pH 7, 8), zhou2022 Table 3 (pH 8: ARP, +6/+14/+20 Cys), zhou2023 Fig. 3 (Cys + MGO pH 6/7/8 at 30/60/90 min, DMP25 + DMP26), zhou2023c Table 1 (ARP + GSH / Glu / Cys / Gly, 60 min)"
+    rule: "as S1, with op.near_loq_dex for DMP rows near the intercept; R < 4 rows are non-discriminating by construction (all rivals allow h < 1)"
+    within_study_factor: "Cys dose at fixed T, pH (zhou2022): P1x predicts R unchanged if h unchanged; P2 predicts R falls when the pairing route grows; NOT scored (h unbounded in Cys pots) -- direction reported"
+  S3_ho_15N_identity:
+    kind: "K1 isotope labelling (15N), Ho network single lab"
+    data: "zhou2024 Table 1: Ala-ARP 20 mM + 15N-Ala 20 mM, pH 8, 120 C, isotopomers (0/1/2 x 15N) of PZ, MPZ, DMP25 at 30/60/90/120 min"
+    statistic: "f_A from PZ (15N atom share); D = P2_MPZ / f_A + P0_MPZ / (1 - f_A) - 1. PRIMARY time point 30 min (cumulative rows are correlated; others reported)."
+    rule: "critical value D_crit = 95th percentile of D under P1 synthetic data (f_A constant +- pyr.fA_sd_time, f_M free, op.iso_sd_pt, op.mh_leak_* bands). Reject P1 / P1x if D_obs > D_crit."
+    predictions: {P0: "D = 0 (+ artefacts)", P1: "D = 0", P1x: "D = 0 (pair constants do not move labels)", P2: "D != 0 for e > 0 unless g = f_A and rho = 0", NC: "n/a"}
+    secondary: "same with op.mh_leak_mpz in [0, 0.05] (correction assumed)"
+  S3b_ho_13C:
+    data: "zhou2025b Table 2 (13C5-xylose; PZ M+2/M+4, MPZ M+2/M+3)"
+    status: "NOT SCORED: PZ M+4 is 3x its binomial value at 30 min, i.e. the A-pool label is heterogeneous, and no band bounds that heterogeneity; MPZ M+2 above PZ's single-unit label is reported as a direction only"
+  S4_carbon_origin:
+    kind: "K1 13C labelling, two labs, same channel"
+    labs: ["Nestle (amranihemaimi1995 Table 2: [3-13C]Ala, [2-13C]Gly; 180 C kieselguhr)", "Reading (low2007 Table 1: [2-13C]Gly potato, 180 C)"]
+    statistic: "13C-labelled fraction of MPZ and DMP25"
+    predictions: {P0: 0, P1: 0, P1x: 0, P2a_sugar: 0, P2b: 0, P2a_aa: "e/(1+e) x phi_HCHO, phi_HCHO >= 0.5 where 2,6-DMP is >= 25-45 % HCHO-labelled in the same pot", NC: ">= 0.4"}
+    rule: "a rival predicting >= 0.25 labelled MPZ fails where observed <= 0.07; P2a_aa is judged at the e it needs to explain S1 (e >= 0.7 if S1 rejects the null), with the transfer caveat (180 C matrices vs aqueous 95 C)"
+  S5_adams_pyrrole:
+    kind: "K2 fed MGO + K5 mass balance, Ghent single lab (within one pot, so no cross-lab error)"
+    data: "adams2008 Table 3: pyrrole 34 and 2,5(6)-DMP mol % of Ala, 8 rows (pH 7 phosphate / bicarbonate, pH 4 acetate; 10/30/60 min; Ala:MGO 2:1, 1:1, 1:3)"
+    statistics:
+      S5a: "B = log10(pyrrole / (2 x DMP)); P0 forbids pyrrole from the Strecker flux it books (B = -inf); reject P0 if B - 2 sigma > 0 in any calibrated row"
+      S5b: "sign of d(pyrrole/DMP)/d(MGO:Ala) at 100 C pH 4 30 min (2:1, 1:1, 1:3): P1 / P1x / P2 predict +; P0 predicts 0/0"
+    sigma: "0.15 dex per compound (IS with RFs; pyrrole reference 78 % pure) + printed +-"
+  S6_strecker_vs_pyrazine_flux:
+    kind: "K2 fed dicarbonyl, CROSS-LAB (DFA Strecker products vs the Ho-calibrated P0 constant)"
+    data: "hofmann2000 Table 4 argon: PA + PAA from MGO + Phe (100 + 100 mM, pH 7 phosphate 0.1 M, 98 C, 60 min) = 1.58 mol %; GO 1.14 mol %"
+    statistic: "G = log10(observed Strecker yield / P0-predicted yield), P0 yield from k_mgo_ak (B18 frozen, its own pH and Arrhenius laws) integrated over the MGO course (lifetime band strecker.log10_c_mgo), Phe <- Ala transfer band"
+    rule: "P0 predicts G = 0 +- (transfer + between-lab); reject P0 if G_min (over the bands) > 2 x lab.between_dex x sqrt(2)"
+    predictions: {P0: "G = 0", P1: "G = -log10 Y > 0", P2: "as P1", P1x: "as P1"}
+  S7_adams_pH:
+    kind: "within-study factor (pH 4 vs 7, 130 C, 30 min), Ghent; buffer-confounded (acetate vs phosphate)"
+    statistic: "log10 DMP(pH4)/DMP(pH7) observed vs P0's pH law on the Strecker step (-1.74 dex) +- buffer band (phosphate/bicarbonate = 1.8x in the same table -> +-0.3 dex)"
+    rule: "reject P0's pH placement if |obs - pred| > 2 x sqrt(0.15^2 x 2 + 0.3^2)"
+    predictions: {P0: "-1.74 dex", P1: "Strecker shallow (Hofmann Figs 4-5, <= 0.07 dex/unit) x unknown partition -> any sign; no prediction", P2: "as P1"}
+
+# ---------------------------------------------------------------------------------------------------------------
+datasets_on_disk:   # every dataset that bears on the question: scored (test) or excluded (reason)
+  scored:
+    - {id: leahy1989, test: S1, note: "rates at 3 T for Lys-Glc, Lys-Fru, Lys-Rib, Asn-Glc, Asn-Fru where PZ, MPZ, DMP25 all printed; Table III end points"}
+    - {id: leahy1989a, test: S1, note: "Lys-Glc pH 7 distribution (pH 5 has no quantifiable DMP -> R undefined, excluded)"}
+    - {id: zhou2023, test: [S2], note: "Table 1 + Fig. 3 (figure-read +-0.8-3 ug/L)"}
+    - {id: zhou2022, test: S2}
+    - {id: zhou2023c, test: S2, note: "Table 1 (n = 3); heat-map time series has no SD -> reported only"}
+    - {id: zhou2024, test: S3, note: "Table 1 isotopomers; its Table 2 RATES are P0's calibration source and are therefore NOT scored against P0"}
+    - {id: amranihemaimi1995, test: S4}
+    - {id: low2007, test: S4}
+    - {id: adams2008, test: [S5, S7], note: "Table 3 (calibrated). Table 1 (neat, peak area, no PZ) excluded: no R, areas"}
+    - {id: hofmann2000, test: S6, note: "Table 4 argon arm; Table 3 for the MGO lifetime band only via the forced-input layer's config"}
+    - {id: hwang1995, test: S2_uncalibrated, note: "dry starch 180 C, single IS, no RFs, DMP25+26 unresolved: scored with op.rf_area_dex"}
+    - {id: martin2001, test: S2_uncalibrated, note: "fried potato, peak areas, DMP25(6) unresolved: op.rf_area_dex"}
+    - {id: deng2022, test: S2_uncalibrated, note: "RF = 1 vs 1,2-dichlorobenzene: op.rf_area_dex"}
+    - {id: vanlancker2012, test: S2_uncalibrated, note: "SBSE / SPME peak areas; R < 1 everywhere -> non-discriminating by construction"}
+    - {id: shu1999, test: S2_uncalibrated, note: "neat Ser + Thr, R 3.1 / 2.4 -> non-discriminating"}
+  excluded:
+    - {id: zhou2025b, reason: "S3b not scored (heterogeneity unbounded); rates 70x off zhou2024 (dossier flag) and levels only"}
+    - {id: yu2018, reason: "PZ and MPZ not detected; time unit of k unresolved"}
+    - {id: leahy1989 absolute total / B21 deficit, reason: "a LEVEL that needs the dicarbonyl supply (hub); no dicarbonyl measured in Leahy's pots -> not a structural test of the pyrazine layer (the hub is triage rank 6)"}
+    - {id: leahy1989a pH and a_w series, reason: "whole-cascade levels; supply pH dependence confounds the placement of the pH law"}
+    - {id: zhou2024 Table 2 rates, reason: "P0's calibration rows (in-sample for P0); usable for P1's Y only with a k_c band that does not exist"}
+    - {id: cerny1994, reason: "ethyl-dimethylpyrazine isomer split bears on aldehyde-addition regiochemistry, not on the PZ/MPZ/DMP rivals"}
+    - {id: meynier1995 / whitfield1988 / Meynier2002, reason: "no parent pyrazine -> no R; peak areas"}
+    - {id: jousse2002, reason: "'fast' condensation without a number"}
+    - {id: koutsidis2008a / koutsidis2008b, reason: "no pyrazine content in the dossiers"}
+    - {id: kocadagli2021, reason: "relative-to-control only; absolutes in an SI not on disk"}
+    - {id: hofmann2000b, reason: "ARP route of the Strecker ALDEHYDE; makes no aminoketone of known identity; no pyrazine measured -> the forced-input layer cannot be extended to pyrazines on DFA pots"}
+    - {id: weenen1998 / weenen2001, reason: "no pyrazines"}
+    - {id: leahy1989 Cys + Glc null, reason: "all rivals share the Strecker front end; Cys traps dicarbonyls -> non-discriminating"}
+    - {id: hwang1995b, reason: "pyrroles / pyridines only"}
+    - {id: "level-only methylpyrazine dossiers (xu2022, wang2025, bi2020, thong2024, solina2007, raza2020, feng2022, conti2025b, li2026, zhao2017, wang2026)", reason: "no PZ + MPZ + DMP triplet with calibration surfaced by the survey; not re-read (time box) -- a gap to close in a later pass"}
+
+# ---------------------------------------------------------------------------------------------------------------
+power_check:
+  method: "for each test, synthetic data from each rival at the noise bands above (2000 draws per rival per dataset); power = P(the rule separates rival X from the null | X true); size = P(rule fires | null true)"
+  drop_rule: "a test with power < 0.6 against the rival it is meant to discriminate, or size > 0.1, is NOT scored (reported only)"
+
+# ---------------------------------------------------------------------------------------------------------------
+verdict_rules:
+  admitted: "passes every powered test within its bands; PROVISIONAL if the passing evidence is single-lab for its discriminating channel"
+  rejected: "fails a powered test whose failure is not removable inside the declared bands, in >= 2 labs or in one lab plus a mass balance"
+  inconclusive: "otherwise"
+
+expectations:    # my probabilities before any run
+  - {claim: "P0 rejected (S5a and/or S6)", p: 0.85}
+  - {claim: "S1 powered against P2 / P1x at the calibrated noise", p: 0.8}
+  - {claim: "shared-constant family (P0, P1) rejected by S1 + S2 (two labs)", p: 0.65}
+  - {claim: "S3 powered at the PRIMARY (uncorrected [M-H]) band", p: 0.3}
+  - {claim: "S3 powered at the SECONDARY (corrected) band", p: 0.7}
+  - {claim: "P1x rejected at the primary band", p: 0.25}
+  - {claim: "P2 (some sub-variant) admitted, provisional", p: 0.55}
+  - {claim: "P2a_aa rejected in the 180 C matrices (S4), not testable in water", p: 0.7}
+  - {claim: "NC fails S4 (control works)", p: 0.97}
+  - {claim: "final picture: P0 rejected; P1 rejected or inconclusive; P1x and P2b not separated by on-disk data at the primary band", p: 0.45}
+
+# ---------------------------------------------------------------------------------------------------------------
+amendment_1:   # 2026-10-31 14:30, BEFORE the script existed or any number was simulated
+  issue: >
+    The alternative rivals are NESTED around the null (P1x at u = 1 and P2 at e = 0 are P1). Band-averaged power
+    over an uninformed band is then dominated by its near-null part and measures the band, not the test.
+  change: >
+    Power is reported two ways: (i) band-averaged (as above) and (ii) at the MATERIAL effect, declared now:
+    S1/S2: the rival at least doubles R relative to the null bound (P2: e >= 0.41; P1x: u >= 5.8), h in its band;
+    S3: P2 with extra share w = e/(1+e) >= 0.3 and (|g - f_pairing| >= 0.2 or rho >= 0.5);
+    S4: P2a_aa with w >= 0.3; NC as declared;
+    S5a: P1 with an aminoketone sink >= 3x the pyrazine flux (B_true >= 0.48);
+    S6: P1 with Y <= 0.1;
+    S7: P1 with a partition pH effect drawn U[-1, +1] dex.
+    The DROP RULE applies to (ii); (i) is reported. Size is always computed at the null's least favourable
+    point inside its bands (h = 1, leakage at band top, transfer at band edge).
+  also: "S6 is reported for GO as well as MGO (both Table 4 argon rows were listed under S6 data)."

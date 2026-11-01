@@ -1,0 +1,114 @@
+# KEYED FIT TABLE -- Strecker degradation: Hofmann & Schieberle 2000b (J Agric Food Chem 48:4301-4305, DFA Garching;
+# doi 10.1021/jf000076e), Fig. 1 (p. 4303): phenylacetaldehyde (PHEAL) and phenylacetic acid (PHEAC), 0 - 500 min, from
+# glucose + L-phenylalanine (squares) and from N-(1-deoxy-D-fructosyl)-L-phenylalanine (ARP-Phe, PHEARP; circles).
+# Companion of strecker_hofmann2000b.yml (Tables 2-3) and strecker_hofmann2000_fig2.yml; it follows their conventions.
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS; units: fit_rows.UNITS). Laboratory and
+# quantification class from the ledger entry hofmann2000b_fig1_pa_paa_timecourse (data/lit/measurement_ledger/trunk.yml;
+# sida: [13C2]-PA / [13C2]-PAA, HRGC/MS-CI, p. 4302).
+# PURPOSE: the BLIND test pre-declared in results/validation/kinetic_core_strecker_forced_input_prereg.md sec. 12 (keyed
+# after that declaration, before any model value was computed on it).
+#
+# READERS (2026-10-31), independent and blind to the hypothesis: reader A (agent-hofmann2000b-fig1-readerA-2026-10-31;
+# raster pdfimages page 3 object 21, 1390 x 889 px, 300 ppi; crops upscaled with sips, edges read by eye) and reader B
+# (agent-hofmann2000b-fig1-readerB-2026-10-31; same raster, 8-10x crops). Their raw files: the coordinator's scratchpad
+# (fig1_reader_A.yml, fig1_reader_B.yml); B's rows as written: fit_rows/second/strecker_hofmann2000b_fig1.yml.
+# EXPOSURE (recorded): both readers could see the rough, eyeballed Fig. 1 notes in the text_checks of
+# fit_rows/second/strecker_hofmann2000_fig2.yml (PA ~0.6 / 1.2 / 2.1 / 2.8, PAA ~0.5 / 1.5 / 2.8 / 3.7 at 60 / 120 / 240 /
+# 500 min) before they digitised. The 10- and 30-min points carry no such prior.
+# Calibration: y ticks 0-12 at ~61.67 px per umol/mmol (A: twelve ticks, max residual ~0.35 px; B: four ticks, equal
+# spacing); x 3.127 px/min, markers snapped to 10 / 30 / 60 / 120 / 240 / 300 / 500 min (axis break after ~320 min).
+# The origin (all four curves start at 0; one filled square visible there) is not keyed (strecker_hofmann2000_fig2
+# convention).
+#
+# ADJUDICATION (agent-strecker-feasibility-2026-10-31, on the coordinator's rule, without re-reading the raster):
+# value = mean(A, B); read error = max(A's error, B's error, |A - B| / 2) in umol/mmol, then in dex
+# (log10(e) x error / value). A and B agree within 0.011 umol/mmol everywhere (largest gap: ARP-Phe PA 60 min, 4.210 vs
+# 4.200). The two Glc/Phe 10-min squares are AMBIGUOUS for both readers: hidden in one cluster with the ARP-Phe filled
+# circle, read from curve continuity (PA 0.205 / 0.21, +-0.05 / 0.06; PAA 0.105 / 0.10, +-0.025 / 0.03): 0.126 / 0.127 dex.
+# The sec. 12 resolution rule (6) drops them from the blind score; they stay as rows with their errors.
+#
+# UNITS. y 'Amount [umol/mmol starting material]' = per mmol glucose (and Phe, 1:1) for Glc/Phe, per mmol ARP-Phe for
+# ARP-Phe (the readers' reading; 'starting material' is undefined). At 1 mmol in 10 mL, 1 umol/mmol = 0.1 mmol/L.
+# CONDITIONS: NONE are printed for Fig. 1 (caption and text). INFERRED, both readers alike: the text introducing Fig. 1
+# ('In further experiments ... in both reaction systems') follows Table 1 ('under the same conditions', column II), so
+# 1.0 mmol glucose + 1.0 mmol L-Phe (or 1.0 mmol ARP-Phe) in 10 mL phosphate pH 7.0, 0.5 mol/L, REFLUXED (~100 C), air
+# presumed (no argon treatment named; open reflux). The Methods print '0.1 mmol each ... 1 mL ... 0.5 mmol/L': the same
+# 100 mmol/L; '0.5 mmol/L' vs every table footnote's '0.5 mol/L' is the misprint ruled in strecker_hofmann2000 ruling 1.
+# ARP-Phe purity 'about 90 %' (strecker_hofmann2000b.yml (5)). Vessel / sampling (one pot or one vessel per time): not stated.
+# CHECKS AGAINST THE PAPER'S OWN NUMBERS (text_check, no rows):
+#  * p. 4302 'ARP-Phe preferentially gave the aldehyde independently from the reaction time': PA > PAA at every time.
+#  * p. 4302 Glc/Phe 'formation of PA ... favored only within the first 60 min': PA > PAA at 10 / 30 / 60 min, crossover
+#    between 60 and 120 min (~89 min, log-interpolated): consistent.
+#  * p. 4302 'by a factor of 1.7 higher amounts of the acid were formed after 500 min': the figure gives PAA / PA =
+#    3.709 / 2.804 = 1.32 at 500 min (1.33 at 240, 1.24 at 300). CONTRADICTION (CF-075): the figure is kept.
+#  * Table 2 expt II (air, 100 C, 120 min, closed vial): ARP-Phe 5.5 / 3.0, Glc/Phe 1.4 / 1.8 umol/mmol vs the figure at
+#    120 min 6.21 / 3.21 and 1.21 / 1.52: same order, 7 - 16 % apart (outside the read error): a DIFFERENT run (CF-075);
+#    the Glc/Phe Table 2 cell is itself the hofmann2000 Fig. 2 120-min point (CF-074). Not a duplicate; count both, never
+#    as the same measurement.
+#  * hofmann2000 Fig. 2 (same recipe, 98 C): PA 0.90 / 1.40 / 2.00 / 2.20, PAA 0.79 / 1.80 / 3.20 / 3.50 at 60 / 120 /
+#    240 / 500 min vs this figure 0.61 / 1.21 / 2.11 / 2.80, 0.50 / 1.52 / 2.81 / 3.71: two runs, 10 - 40 % apart.
+# Plotting: all non-hidden points lie within ~0.01 - 0.02 of a 0.1 grid (both readers): plotted from rounded values;
+# the read error does not cover that rounding (+-0.05).
+status: ready   # two readers + adjudication (2026-10-31); every pot is engine_species_missing: fit_rows.load refuses the species (literature only)
+pots:
+  hofmann2000b_fig1_glc_phe_reflux:
+    {ledger_id: hofmann2000b_fig1_pa_paa_timecourse,
+     engine_species_missing: [PHE, PHEAL, PHEAC],
+     t_c: 100,
+     t_c_basis: "INFERRED (none printed for Fig. 1): reflux, as Table 1 column II, the system the text refers to; Table 2 prints 100 C; reflux at Garching ~99 C (strecker_hofmann2000 ruling 2); alternative 98 - 100 C",
+     minutes: 500,
+     initial_mmol_L: {Glc: 100.0, PHE: 100.0},
+     concentration_basis: "INFERRED: 1.0 mmol each in 10 mL (Table 1 footnote c; Methods 0.1 mmol in 1 mL, the same 100 mmol/L); the solutes' volume ignored (<= 2.5 %); 1 umol/mmol = 0.1 mmol/L",
+     conditions_inferred: true,
+     buffer: "phosphate pH 7.0, 0.5 mol/L per the table footnotes (Methods print 0.5 mmol/L, a misprint per strecker_hofmann2000 ruling 1); counter-ion not stated; pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated (pH of the buffer as prepared)",
+     atmosphere: "INFERRED: air presumed (open reflux; no argon or oxygen treatment named for Fig. 1)",
+     vessel: "INFERRED reflux (not stated for Fig. 1); one sampled pot or one vessel per time not stated",
+     source_figure: "Fig. 1 (p. 4303): PA open squares, PAA filled squares; y amount (umol/mmol starting material) 0-12, x t (min) 0-300 // 450-500",
+     condition_quote: "Figure 1. Formation of phenylacetaldehyde (PA) and phenylacetic acid (PAA) from glucose/phenylalanine (filled square, PAA; open square, PA) or N-(1-deoxy-D-fructosyl)-L-phenylalanine (ARP-Phe) (filled circle, PAA; open circle, PA). / Table 1 footnote c: A solution of glucose (1.0 mmol) and L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0) was refluxed for 30 min."}
+  hofmann2000b_fig1_arp_phe_reflux:
+    {ledger_id: hofmann2000b_fig1_pa_paa_timecourse,
+     engine_species_missing: [PHEARP, PHEAL, PHEAC],
+     t_c: 100,
+     t_c_basis: "INFERRED as the Glc/Phe pot (Table 1 column I: refluxed)",
+     minutes: 500,
+     initial_mmol_L: {PHEARP: 100.0},
+     concentration_basis: "INFERRED: 1.0 mmol ARP-Phe in 10 mL (Table 1 footnote b); purity 'about 90 %' (alternative 90 mmol/L); 1 umol/mmol = 0.1 mmol/L",
+     conditions_inferred: true,
+     buffer: "phosphate pH 7.0, 0.5 mol/L per the table footnotes (Methods 0.5 mmol/L, misprint); pH not held",
+     label_ph: 7.0,
+     ph_measured_at: "not stated (pH of the buffer as prepared)",
+     atmosphere: "INFERRED: air presumed (open reflux; none named)",
+     vessel: "INFERRED reflux (not stated for Fig. 1)",
+     source_figure: "Fig. 1 (p. 4303): PA open circles, PAA filled circles",
+     condition_quote: "Figure 1. Formation of phenylacetaldehyde (PA) and phenylacetic acid (PAA) from glucose/phenylalanine ... or N-(1-deoxy-D-fructosyl)-L-phenylalanine (ARP-Phe) (filled circle, PAA; open circle, PA). / Table 1 footnote b: A solution of N-(1-deoxy-D-fructosyl)-L-phenylalanine (1.0 mmol) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0) was refluxed for 30 min."}
+rows:
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 10, value: 0.09935, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 0.9935 umol/mmol starting material, ARP-Phe PA (open circles); reader A 0.997, reader B 0.990', read_error: 0.0105, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0035) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 30, value: 0.26085, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 2.6085 umol/mmol starting material, ARP-Phe PA (open circles); reader A 2.607, reader B 2.610', read_error: 0.0040, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0015) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 60, value: 0.42050, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 4.2050 umol/mmol starting material, ARP-Phe PA (open circles); reader A 4.210, reader B 4.200', read_error: 0.0025, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0050) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 120, value: 0.62115, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 6.2115 umol/mmol starting material, ARP-Phe PA (open circles); reader A 6.213, reader B 6.210', read_error: 0.0017, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0015) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 240, value: 0.84935, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 8.4935 umol/mmol starting material, ARP-Phe PA (open circles); reader A 8.497, reader B 8.490', read_error: 0.0012, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0035) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 300, value: 0.92010, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 9.2010 umol/mmol starting material, ARP-Phe PA (open circles); reader A 9.202, reader B 9.200', read_error: 0.0011, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0010) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 500, value: 1.00025, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 10.0025 umol/mmol starting material, ARP-Phe PA (open circles); reader A 10.005, reader B 10.000', read_error: 0.0010, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0025) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 10, value: 0.02980, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 0.2980 umol/mmol starting material, ARP-Phe PAA (filled circles); reader A 0.296, reader B 0.300', read_error: 0.0466, read_error_basis: 'max(A 0.020, B 0.032, |A-B|/2 0.0020) = 0.032 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 30, value: 0.08045, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 0.8045 umol/mmol starting material, ARP-Phe PAA (filled circles); reader A 0.809, reader B 0.800', read_error: 0.0130, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0045) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 60, value: 0.18095, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 1.8095 umol/mmol starting material, ARP-Phe PAA (filled circles); reader A 1.809, reader B 1.810', read_error: 0.0058, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0005) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 120, value: 0.32075, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 3.2075 umol/mmol starting material, ARP-Phe PAA (filled circles); reader A 3.205, reader B 3.210', read_error: 0.0032, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0025) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 240, value: 0.60095, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 6.0095 umol/mmol starting material, ARP-Phe PAA (filled circles); reader A 6.009, reader B 6.010', read_error: 0.0017, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0005) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 300, value: 0.72000, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 7.2000 umol/mmol starting material, ARP-Phe PAA (filled circles); reader A 7.200, reader B 7.200', read_error: 0.0014, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0000) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_arp_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 500, value: 0.89930, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 8.9930 umol/mmol starting material, ARP-Phe PAA (filled circles); reader A 8.996, reader B 8.990', read_error: 0.0012, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0030) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 10, value: 0.02075, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 0.2075 umol/mmol starting material, Glc/Phe PA (open squares); reader A 0.205, reader B 0.210', read_error: 0.1256, read_error_basis: 'max(A 0.050, B 0.060, |A-B|/2 0.0025) = 0.060 umol/mmol, in dex; AMBIGUOUS (10-min cluster; both readers).'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 30, value: 0.04025, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 0.4025 umol/mmol starting material, Glc/Phe PA (open squares); reader A 0.405, reader B 0.400', read_error: 0.0345, read_error_basis: 'max(A 0.030, B 0.032, |A-B|/2 0.0025) = 0.032 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 60, value: 0.06130, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 0.6130 umol/mmol starting material, Glc/Phe PA (open squares); reader A 0.616, reader B 0.610', read_error: 0.0227, read_error_basis: 'max(A 0.030, B 0.032, |A-B|/2 0.0030) = 0.032 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 120, value: 0.12055, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 1.2055 umol/mmol starting material, Glc/Phe PA (open squares); reader A 1.211, reader B 1.200', read_error: 0.0086, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0055) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 240, value: 0.21145, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 2.1145 umol/mmol starting material, Glc/Phe PA (open squares); reader A 2.119, reader B 2.110', read_error: 0.0049, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0045) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 300, value: 0.25140, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 2.5140 umol/mmol starting material, Glc/Phe PA (open squares); reader A 2.518, reader B 2.510', read_error: 0.0041, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0040) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAL, t_min: 500, value: 0.28040, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 2.8040 umol/mmol starting material, Glc/Phe PA (open squares); reader A 2.808, reader B 2.800', read_error: 0.0037, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0040) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 10, value: 0.01025, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 0.1025 umol/mmol starting material, Glc/Phe PAA (filled squares); reader A 0.105, reader B 0.100', read_error: 0.1271, read_error_basis: 'max(A 0.025, B 0.030, |A-B|/2 0.0025) = 0.030 umol/mmol, in dex; AMBIGUOUS (10-min cluster; both readers).'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 30, value: 0.03000, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 0.3000 umol/mmol starting material, Glc/Phe PAA (filled squares); reader A 0.300, reader B 0.300', read_error: 0.0463, read_error_basis: 'max(A 0.030, B 0.032, |A-B|/2 0.0000) = 0.032 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 60, value: 0.04975, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 0.4975 umol/mmol starting material, Glc/Phe PAA (filled squares); reader A 0.495, reader B 0.500', read_error: 0.0279, read_error_basis: 'max(A 0.030, B 0.032, |A-B|/2 0.0025) = 0.032 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 120, value: 0.15180, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 1.5180 umol/mmol starting material, Glc/Phe PAA (filled squares); reader A 1.516, reader B 1.520', read_error: 0.0069, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0020) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 240, value: 0.28100, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 2.8100 umol/mmol starting material, Glc/Phe PAA (filled squares); reader A 2.810, reader B 2.810', read_error: 0.0037, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0000) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 300, value: 0.31090, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 3.1090 umol/mmol starting material, Glc/Phe PAA (filled squares); reader A 3.108, reader B 3.110', read_error: 0.0034, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0010) = 0.024 umol/mmol, in dex'}
+  - {pot: hofmann2000b_fig1_glc_phe_reflux, ledger_id: hofmann2000b_fig1_pa_paa_timecourse, species: PHEAC, t_min: 500, value: 0.37090, unit: mmol_L, printed: 'Fig. 1 (digitised, adjudicated): 3.7090 umol/mmol starting material, Glc/Phe PAA (filled squares); reader A 3.708, reader B 3.710', read_error: 0.0028, read_error_basis: 'max(A 0.020, B 0.024, |A-B|/2 0.0010) = 0.024 umol/mmol, in dex'}

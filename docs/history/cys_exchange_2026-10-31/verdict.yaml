@@ -1,0 +1,19 @@
+# CF-076 verdicts (machine-readable record; numbers from results.json, search_results.json, profile_caa.json).
+# Prereg: prereg.yaml (13:44). First run 13:52. Post hoc items are labelled.
+controls: "pass: NC1 fails T4 (z 33); NC2 fails T5 / T6 / T7 (z 13 / 17 / 6.4). Battery read."
+power: "all 7 tests pass the >= 0.8 pairwise rule (none dropped). Strong: T4 E0|E1 0.93, E0|E2/E4 0.99; T5 E0|E1 0.89. Weak: E1|E2|E4 not separable on any test (0.46-0.76); E0|E3 not separable (0.46-0.64); T7 (the only BTBU test) powered only for E0|E2 (0.80) and vs NC2."
+search_best_max_z:   # primary = all scored tests (prereg); core = T4+T5+T6+T7 (post hoc); noT3 = all but T3 (post hoc)
+  E0:  {primary: 33.3, core: 33.3, failing: "T4 gate (exchange releases 2-30x more Cys than TTCA loses), T2, T3, T5 3.5"}
+  E3:  {primary: 33.3, core: 33.3, failing: "T4 gate (a sink cannot repair it)"}
+  E2:  {primary: 5.71, core: 3.61, failing: "T5 / T7 vs T4: pH + acid limb cannot make dilute slow and concentrated fast"}
+  E1:  {primary: 4.15, core: 1.76, noT3: 3.19, failing: "T2 / T3 / T5; core feasible only with c_aa >= ~20-30 /M (band top 30) and Ea at the band floor 40"}
+  E4:  {primary: 3.54, core: 0.37, noT3: 1.39, failing: "T3 only (3.54); core feasible from c_aa ~3 /M with acid limb a 0.4-0.6"}
+  NC2: {primary: 17.0, note: "T3 3.71, T2 3.61 even with NO exchange -> T2 (pH 7-8 Cys levels) and T3 (pH 7 xylose loss) are failures of the common skeleton"}
+profile_c_aa_core_max_z: {E1: {1: 4.11, 3: 3.22, 10: 2.50, 20: 2.04, 30: 1.76}, E4: {1: 2.42, 3: 1.76, 10: 0.96, 20: 0.63}}
+verdicts:
+  E0: REJECTED (T4, powered; Jiangnan only -- provisional until a cross-lab dilute pot)
+  E3: REJECTED (T4, same as E0; E0 vs E3 unpowered)
+  E2: REJECTED (core 3.6, primary 5.7)
+  E1: "REJECTED by the prereg rule (4.15); on the core it is feasible only at the corner of its physchem band -> treat as INCONCLUSIVE-disfavoured"
+  E4: "prereg rule: rejected (3.54, on T3 alone). Read as INCONCLUSIVE, the only structure feasible on every test except T3, which fails every structure incl. no exchange (post hoc reading; needs red team). Single lab on all but T7."
+  conflict_located: "dilute gate (Zhai 2021, k_r(100 C, 10 mM) <~ 1e-3 /min) vs Zhai 2019 70 / 90 C approach (needs ~10x faster at 83 mM, pH 6-7) -- a concentration contrast inside one lab; Cao 2017 is passed by every exchange fast enough and so adds little."
