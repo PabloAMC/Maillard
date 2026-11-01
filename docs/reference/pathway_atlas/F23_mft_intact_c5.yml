@@ -1,0 +1,309 @@
+family: F23_mft_intact_c5
+definition: "MFT from an intact C5 unit (ribose / 1,4-dideoxypentosone / norfuraneol + H2S)"
+# Conventions of this file (2026-11-01):
+# - water bin from ALL solutes, buffer included (families.yml): a 0.5 M buffer alone is `concentrated`; buffer molarity
+#   in tags.buffer_M, which the gate checks. (Until the 2026-11-01 red team this file binned the reactant charge only.)
+# - "C5 unit" includes a hexose's C5 fragment (C-1 or C-6 loss) when a 1:1 [13C6]-glucose label shows MFT as
+#   0 : 5 isotopomers only; tagged subroute: hexose_c5. The F23 / F24 split is read ONLY from 1:1 (unlabelled :
+#   uniformly labelled) mixtures or positional labels; a pot whose sugar is 100 % labelled cannot see C2 + C3
+#   recombination of its own fragments, so those cells say "sugar-derived" and nothing more.
+# - subroute tag: intact_c5_total (MFT carries one sugar's C5, whatever the intermediate), free_nf (via free
+#   norfuraneol), ddp_or_bound (intact C5 not via free NF: 1,4-dideoxypentosone or an amine-bound C5).
+markers:
+  - "1:1 unlabelled : [13C5]pentose (CAMOLA): MFT isotopomers only M+0 and M+5, the 1-4-label channels at the
+    impurity level (98-99 % enrichment) -> intact C5; mixed channels -> F24"
+  - "[1-13C]ribose: MFT singly labelled, label on the 2-methyl carbon (ribose C-1 -> methyl)"
+  - "fed unlabelled norfuraneol against [13C5]ribose at equimolar charge (Cerny pot D): the unlabelled MFT share is
+    the free-NF sub-route's share"
+  - "free-NF marker isomer 2-mercapto-3-pentanone: made from fed NF (Cerny pot D 96 % NF-derived; Whitfield 1999),
+    absent when the free-NF pool is small; present / absent from the sugar alone reads the NF sub-route on or off"
+  - "1:1 unlabelled : [13C6]glucose: MFT as M+0 / M+5 only -> a hexose C5 fragment, not C2 + C3"
+  - "1,4-dideoxypentosone (DDP) trapped as 2-methyl-3-(2'-hydroxyethyl)quinoxaline (o-phenylenediamine in situ)"
+  - "fed intermediates (NF, ARP, TTCA) + H2S / cysteine giving MFT: shows the step can run, not its share"
+cells:
+  # ---------------- labelling: intact-C5 share by temperature ----------------
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: intact_c5_total, buffer_M: 0.5, t_min: 240}
+    status: dominant
+    quote: "pathways via ribose fragmentation were not relevant"
+    quantity: "MFT 49 / 1 / 0 / 1 / 3 / 46 % (0-5 labels): 0 + 5 = 95 %, channels 1-4 = 5 % (98 % enrichment explains part); ribose 72.5 + [13C5]ribose 72.5 umol, Cys 48.3 umol, pH 5.00, 4 h"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny & Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "Table 2 row 7 (pot C); p. 2715"
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: intact_c5_total, buffer_M: 0.5, t_min: 240}
+    status: dominant
+    quote: "100 % singly labelled at the 2-methyl carbon"
+    quantity: "[1-13C]ribose (99 %): MFT 0 / 100 / 0 (unlabelled / 13C1 / 13C2), label on the methyl; ~100 mM Cys + 300 mM ribose"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny & Davidek); same lab and pot design as cerny2003, not independent"
+    dossiers: [cerny2004_extraction.md]
+    where: "Table 1 row 7; sec. 4"
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: free_nf, buffer_M: 0.5}
+    contrast: "fed NF (72.5 umol, unlabelled) vs [13C5]ribose (72.5 umol) at equimolar charge, one pot: MFT 7 % NF-derived, 93 % ribose-derived; route ratio 13 : 1 for ribose"
+    status: minor
+    quote: "the norfuraneol route supplies 7 % of the MFT"
+    quantity: "7 % of MFT via free NF even with NF fed at the ribose's molar charge; so >= 85-93 % of the intact-C5 MFT does not pass through free NF at 95 C (subroute ddp_or_bound dominant)"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny & Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "Table 3 (pot D), dossier arithmetic item 3"
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: intact_c5_total, other_precursor: thiamine, buffer_M: 0.5, t_min: 20}
+    contrast: "+/- thiamine at 145 C, pH 5.00 (300 : 100 : 100 mM xylose : Cys : thiamine): xylose share of MFT 46 % in the ternary, > 95 % without thiamine"
+    status: operating
+    quote: "MFT and 3-mercapto-2-pentanone are >95 % xylose"
+    quantity: "xylose-derived MFT 46 % (ternary) / > 95 % (no thiamine); fully labelled xylose, so own-fragment recombination is invisible; cross-source (xylose x thiamine) channels m/z 115-117 within ~1 % of the unlabelled reference"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny); same PI as the Nestle papers"
+    dossiers: [cerny2007b_extraction.md]
+    where: "Tables 2, 3, 6"
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: intact_c5_total, other_precursor: thiamine, buffer_M: 0.5, t_min: 20, ph_range: "4.0-7.0"}
+    contrast: "pH 4 / 5 / 6 / 7 (xylose 150 / Cys 50 / thiamine 50 mM): xylose share of MFT 25 / 15 / 10 / 20 %; xylose-derived MFT area 104 / 50 / 54 / 78 (a shallow U)"
+    status: operating
+    quote: "The pH during the reaction had no major influence on the isotopomer distribution"
+    quantity: "pentose route 10-25 % of MFT, thiamine the rest (F27); route mix moves <= 2.5x over three pH units"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny & Briffod)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Tables 3, 4; sec. 4.2"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 132, sugar: pentose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, subroute: intact_c5_total, other_precursor: "thiamine 1.2 mM; glutathione", t_min: 90}
+    status: minor
+    quote: "MFT is >99:<1, so <~2 %"
+    quantity: "xylose 26 mM (1:1 label), thiamine 1.2 mM: MFT < ~2 % xylose-derived; at dilute loading the thiamine route (F27) wins"
+    evidence: labelling
+    lab: "BTBU Beijing (Sun / Song)"
+    dossiers: [wang2012_extraction.md]
+    where: "isotope table; sec. 1"
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 168, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: intact_c5_total, buffer_M: 0.5, t_min: "20-60"}
+    status: dominant
+    quote: "MFT is mostly the intact C5 ribose skeleton (~81 %)"
+    quantity: "printed ~81 % intact / ~19 % fragments (41 / 3 / 2 / 1 / 12 / 40 at 20 min); the 19 % is carried by M+4, the labelled MFT's own EI [M-H]+ ion (M+4 / M+5 0.30 vs NIST [M-H]+/M+ 0.28; same-pot FFT 0.09 vs its 0.05). The Methods' [M-1]+/[M]+ adjustment did not reach the labelled cluster (applied, M+4 would be ~1), so the correction is not double-counted: ~94 % intact C5, fragments 5.9-6.6 % at 20-60 min (CF-086, P 0.9)"
+    evidence: labelling
+    lab: "CAAS Beijing (Zhang Dequan group)"
+    dossiers: [liu2023b_extraction.md]
+    where: "Table 3; sec. 2.7 (Methods), sec. 3.2; docs/history/mechanism_reviews_2026-10-31/thiols.md sec. 0"
+    conflict: "CF-086 (the 19 % vs ~6 % re-read; see F24)"
+    note: "re-read 2026-11-01: two readers (A MINOR, B MATCH): both confirm the printed 81 % and flag sec. 2.7 (H-loss adjusted by [M-1]+/[M]+). Adjudicated MATCH: the table carries the uncorrected signature in every furan / thiol (M+4 / M+5 tracks each compound's own NIST [M-H]+ / M+), M+1 (3) is not M+4 (12) as C4 + C1 recombination requires, and unlabelled : labelled 41 : 52 equals the uncounted m/z 113 ion. See CF-086."
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: hexose_c5, t_min: 300}
+    contrast: "+/- chicken fat / oxidised fat: label pattern unchanged (text)"
+    status: dominant
+    quote: "MFT and FFT are ~100 % a glucose C5 fragment in all three systems"
+    quantity: "glutathione + 1:1 [13C6]glucose 60 + 60 mM, pH 6.5: MFT 50 / <1 / <1 / <1 / 2 / 47 (0-5 labels): a glucose C5, no C2 + C3 pattern"
+    evidence: labelling
+    lab: "BTBU Beijing (Sun Baoguo) with CAAS and Clemson"
+    dossiers: [zhao2019b_extraction.md]
+    where: "isotopomer table row 4; sec. 3 derived origins"
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 150, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: hexose_c5, other_precursor: "nonanal or (E)-2-nonenal 10 mM", buffer_M: 0.2, t_min: 120, water_note: "Cys 200 + glucose 200 mM + 0.2 M buffer = 0.6 M solutes"}
+    status: dominant
+    quote: "0: 52 / 57; 5: 48 / 43"
+    quantity: "Cys 200 + 1:1 [13C6]glucose 200 mM, pH 6.50: MFT only M+0 and M+5 (other channels < 1 %, omitted in the print); glucose C5 (authors: 1-deoxypentosone + H2S)"
+    evidence: labelling
+    lab: "CAAS Beijing (Fan / Wang Fengzhong); same institute as liu2023b, count as possibly one group"
+    dossiers: [du2023_extraction.md]
+    where: "Table 2 row 82"
+  # ---------------- the free-NF sub-route: marker 2-mercapto-3-pentanone and fed NF ----------------
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: free_nf, buffer_M: 0.5}
+    contrast: "ribose + Cys (pot C) vs NF + Cys (pots B, D): 2-mercapto-3-pentanone absent from ribose, made from NF"
+    status: absent
+    detection_basis: "positive control: the same HS-SPME-GC-MS analysis detected and isotope-resolved 2-mercapto-3-pentanone in the fed-norfuraneol pot D (96 % NF-derived, cerny2003 Table 3 row 16)"
+    quote: "the isomer 2-mercapto-3-pentanone was not detected"
+    quantity: "NF marker not detected from ribose at 95 C (Cerny 2003 pot C 'not detected at all'; Cerny 2004 again); detected from fed NF (pot D 96 % NF-derived)"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny & Davidek)"
+    dossiers: [cerny2004_extraction.md, cerny2003_extraction.md]
+    where: "cerny2004 sec. 3 'Species NOT detected'; cerny2003 running-text table, p. 2715"
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: free_nf, other_precursor: thiamine, buffer_M: 0.5, ph_range: "4.0-7.0"}
+    contrast: "pH 4 / 5 vs 6 / 7 at 145 C: 2-mercapto-3-pentanone 0 / 0 vs 18 / 5 (area), 94-95 % xylose-derived"
+    status: operating
+    quote: "appears only at pH >= 6, entirely pentose-derived"
+    quantity: "free-NF marker on only at pH >= 6 (absent at pH 4-5.5) at 145 C / 20 min"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny & Briffod)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 4 row 6; sec. 4.2"
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, subroute: free_nf, water_pct: 37, t_min: 90}
+    contrast: "fed NF vs ribose vs xylose, each 1 : 1 with Cys (lactate, 37 % water, pH 5.0, boiling 1.5 h): MFT 0.9 vs 43.5 vs 36 mg / mol Cys (NF 48x below ribose); 2-mercapto-3-pentanone 24.3 (NF) vs 16.4 (ribose)"
+    status: minor
+    quote: "| 2-Methylfuran-3-thiol | 43.5 | 36 | < 0.05 | 0.9 |"
+    quantity: "fed NF a poor MFT source at boiling; but the NF marker 2-mercapto-3-pentanone IS formed from ribose in this concentrated pot (16.4 mg/mol), unlike Cerny's dilute 95 C pot"
+    evidence: fed_intermediate
+    lab: "Givaudan Barneveld (de Roos; data Laarhoven, unpublished)"
+    dossiers: [deroos2005_extraction.md]
+    where: "Table I and text; sec. 3.3"
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: free_nf, buffer_M: 0.5, t_min: 20}
+    contrast: "fed NF vs ribose, each 1 mmol + H2S 1 mmol in 50 mL, pH 5.0: MFT 211.2 vs 15.1 ug (0.19 vs 0.01 mol %)"
+    status: operating
+    quote: "NF is **13.99× ribose** (the text says \"by a factor of ≈14\")"
+    quantity: "per mol, NF + H2S 14x ribose + H2S at 145 C, no amino acid (which also shuts the DDP step, Nedvidek)"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 4"
+    conflict: CF-065
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: ddp_or_bound, buffer_M: 0.5, t_min: 20}
+    contrast: "ribose vs glucose vs rhamnose + Cys, pH 5.0: NF / MFT mass ratio 2754 / 7.1 / 23.9 (in-situ NF 54530 ug from ribose)"
+    status: operating
+    quote: "the amounts of NF were **not well correlated** with those of MFT"
+    quantity: "in-situ NF ~4.8 mol % of ribose (thiols.md) yet MFT is 3000x lower; authors: MFT not exclusively via NF; the NF sub-route could carry 30-100 % of MFT here (thiols.md estimate, unlabelled)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 5; p. 239"
+  - key: {ph: mild_acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: free_nf, buffer_M: 0.5, t_min: 60, fed: "NF 50 mM"}
+    contrast: "fed NF + Cys 50 mM vs NF + H2S ~97 mM, pH 4.5: MFT 15 vs 12 ug / 10 mg NF; mercaptoketones 10-17x higher with Cys"
+    status: operating
+    quote: "require only hydrogen sulfide and not other cysteine degradation products"
+    quantity: "MFT 0.150 mol % of fed NF (Cys), 0.120 (H2S); free + disulfide-bound ~0.23 mol %; mercaptoketones : MFT 16.3 -> MFT is a minor fate of free NF"
+    evidence: fed_intermediate
+    lab: "Reading (Mottram) with Food Science Australia (Whitfield)"
+    dossiers: [whitfield1999_extraction.md]
+    where: "Table 1 rows 5-9; p. 1630"
+  - key: {ph: neutral, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: free_nf, buffer_M: 0.5, t_min: 60, fed: "NF 50 mM"}
+    contrast: "pH 4.5 (Whitfield 1999) vs pH 6.5, same lab, charges and instrument: free MFT 15 -> nd (< 0.1 ug / 10 mg NF)"
+    status: minor
+    quote: "MFT-equivalent bound in a mixed disulfide: ~0.53 µg MFT-eq/10 mg -> ~0.005 mol %"
+    quantity: "free MFT nd at pH 6.5 (< 0.1 ug / 10 mg NF, < 0.001 mol %) vs 15 ug at pH 4.5 (>= 150x); MFT mixed disulfide 1, 1 ug = ~0.005 mol % MFT-equivalent, so >= ~24x below pH 4.5 counting it"
+    evidence: fed_intermediate
+    lab: "Reading (Mottram) with Food Science Australia (Whitfield)"
+    dossiers: [whitfield2001_extraction.md]
+    where: "Table 2; sec. 4"
+    note: "was `absent`: Table 1 has 3-(2-methyl-3-furyldithio)-2-butanone at 1 ug in both duplicates, so fed NF did make MFT at pH 6.5, which was then captured (an F28 loss) (red team 2026-11-01)."
+  # ---------------- intermediates ----------------
+  - key: {ph: mild_acid, temperature: not_stated, water: not_stated}
+    tags: {ph_basis: label, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: not_stated, metals: not_controlled, subroute: ddp_or_bound, t_min: 720, ph_range: "5-7"}
+    contrast: "alpha-amino acids (hydrolysed wheat protein) vs beta-alanine: the 1,4-dideoxypentosone quinoxaline 'decreases significantly' with beta-alanine"
+    status: operating
+    quote: "observation that 1,4-dideoxyosones appear only when an"
+    quantity: "DDP (quinoxaline 9) formed from xylose; needs an alpha-amino acid (Strecker reduction of the 1-deoxyosone); no number, temperature never stated"
+    evidence: trapping
+    lab: "Stuttgart (Ledl)"
+    dossiers: [nedvidek1992_extraction.md]
+    where: "Table 2; Results p. 226; Scheme 3"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100-140", sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, subroute: intact_c5_total, fed: "TTCA (cysteine-xylose thiazolidine) 10 mM, water, pH 7 set with NaOH; MFT not isotope-traced"}
+    contrast: "TTCA alone at 100 / 120 / 140 C: MFT 1.237 / 1.388 / 5.907 ug/L at 120 min"
+    status: operating
+    quote: "| 5 | **MFT ladder, TTCA** | 1.237 / 1.388 / 5.907 |"
+    quantity: "fed thiazolidine (C5 + S in one molecule) gives MFT, rising ~5x 100 -> 140 C; semi-quantitative; label pH 7 water, pH drifts"
+    evidence: fed_intermediate
+    lab: "Jiangnan University (Zhang Xiaoming / Cui) with Rutgers (Ho)"
+    dossiers: [zhai2023foodchem_extraction.md]
+    where: "Table 1"
+  # ---------------- condition factors without a route marker ----------------
+  - key: {ph: acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 20, ph_range: "3.0-7.0"}
+    contrast: "pH 3.0 / 5.0 / 7.0, ribose + Cys: MFT 55.3 / 19.8 / 2.5 ug (x22 fall); dry 180 C / 6 min: 25.1"
+    status: unattributed
+    quote: "MFT was preferentially formed from this model mixture under"
+    quantity: "MFT falls x22 from pH 3 to 7 (route not marked; at 95 and 145 C the labelled pots say intact C5)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 2; pp. 237-238"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, buffer_note: "0.2 M pyrophosphate, pH re-measured", t_min: 60, ph_range: "4.5-6.5"}
+    contrast: "pH 4.5 -> 6.5 at constant pyrophosphate: MFT 15.2 / 6.3 / 1.7 / 1.0 / tr ug per 10 mg ribose"
+    status: unattributed
+    quote: "| **2-Methyl-3-furanthiol** | 868 | **15.2** | 6.3 | 1.7 | 1.0 | **tr** |"
+    quantity: "> 152x fall over two pH units (second lab agreeing with Garching's acid preference)"
+    evidence: within_study_factor
+    lab: "Reading (Meynier & Mottram)"
+    dossiers: [meynier1995_extraction.md]
+    where: "Table 3"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, t_min: 30}
+    contrast: "buffered (phosphate or phthalate pH 5.6) vs unbuffered (final pH 3.9): MFT x2.2-2.6; phosphate pH 4.2 x8.2; FFT unchanged; ribose-5-phosphate ~ ribose when buffered"
+    status: unattributed
+    quote: "suggests that catalysis by the buffer occurred, which was"
+    quantity: "buffer catalysis of the 2,3-enolisation branch (NF / MFT / mercaptoketones) 2-8x, none on furfural -> FFT"
+    evidence: within_study_factor
+    lab: "Reading (Mottram & Nobrega)"
+    dossiers: [mottram2002_extraction.md]
+    where: "Table 1; sec. 4.2"
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 20}
+    contrast: "ribose / xylose / fructose / glucose / rhamnose + Cys, pH 5.0: MFT 19.8 / 14.3 / 2.5 / 1.9 / 0.8 ug"
+    status: unattributed
+    quote: "| ribose | **12.1** | **19.8** |"
+    quantity: "pentose 10x hexose for MFT; hexose MFT is itself a C5 unit by labelling (Zhao 2019b, Du 2023)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 1"
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: "30-720"}
+    contrast: "100 C time course vs 145 C / 20 min in the same pot: MFT 4.5 / 13.8 / 156 / 179 ug at 30 / 60 / 360 / 720 min; x13 the 145 C yield at 6 h"
+    status: unattributed
+    quote: "by a factor of 13 higher yields of e.g. 2-methyl-3-furanthiol were obtained"
+    quantity: "MFT still rising at 12 h at 100 C; the route is not marked here, Cerny 95 C says intact C5"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [schieberle2000_extraction.md]
+    where: "Table IV; text"
+    conflict: CF-013
+condition_dependence: >-
+  SHOWN: wherever a 1:1 label could see it, MFT keeps one sugar's C5 (95 C: Cerny 2003 / 2004, 95 %; 140-150 C from
+  glucose: Zhao 2019b, Du 2023, a hexose C5 with < 1-6 % mixed channels; 168 C: Liu 2023b, ~81 % printed, ~94 % on the
+  EI re-read). Three labelling labs (Cerny, CAAS, BTBU), pH 5-6.5, phosphate pots (0.2-0.5 M buffer: concentrated by the families.yml rule), so F23 is the dominant MFT
+  carbon route from 95 to 168 C. Inside F23 the sub-route shifts with temperature and pH: at 95 C, pH 5 free NF
+  carries only 7 % even when fed at the ribose's charge, and its marker 2-mercapto-3-pentanone is absent (intact C5
+  not via free NF dominant: DDP or an amine-bound C5; DDP is trapped only with alpha-amino acids, Nedvidek). At 145 C
+  the NF marker appears only at pH >= 6 (Cerny 2007) while fed NF makes MFT at pH 4.5 and none at 6.5 (Whitfield
+  2001); Hofmann's ribose pot holds 3000x more NF than MFT. So free NF is a minor MFT channel at 95 C and an
+  operating but unquantified one at 145 C; its share at 145 C is NOT measured (no labelled pot D at 145 C). In
+  concentrated boiled pots (de Roos, 37 % water) the NF marker forms from ribose although fed NF stays a poor MFT
+  source. Total MFT falls x22-150 from pH 3-4.5 to 6.5-7 in two labs (Garching, Reading; unattributed), and buffer
+  catalyses the branch 2-8x (Reading). ASSUMED, not shown: that the same intact-C5 route holds at 100-140 C in pentose
+  pots (no 1:1 pentose label between 95 and 168 C; Cerny 2007 / 2007b used fully labelled xylose), and the pH
+  dependence of the intact-C5 route itself (only total MFT is measured across pH). Thiamine competes for the MFT
+  carbon at dilute loadings (F27: 54-98 % of MFT).
+best_supported_regimes:
+  - "mild_acid / moderate (95 C) / concentrated (0.5 M phosphate) / pentose + cysteine: dominant (labelling, 1 lab: Cerny 2003 + 2004), free-NF sub-route minor (7 %)"
+  - "neutral / high-very_high (140-150 C) / dilute-concentrated / glucose + Cys or GSH: dominant as a hexose C5 (labelling, 2 labs: BTBU, CAAS)"
+  - "mild_acid / very_high (168 C) / pentose + Cys: dominant (labelling, CAAS; share 81-94 % depending on the EI correction)"
+  - "free-NF sub-route: operating at 140-145 C, mild_acid (fed NF, 2 labs: Garching, Reading); shut for MFT at pH 6.5 (Reading); its marker forms from xylose only at pH >= 6, 145 C (Cerny)"
+unknown_regimes:
+  - "100-140 C with a 1:1 pentose label (the regime of the Schieberle / Hofmann / Yiltirak pots): no CAMOLA on disk"
+  - "the NF share at 145 C (no labelled fed-NF competition pot above 95 C) and its time dependence (no time-resolved pot D)"
+  - "alkaline pH (> 7.5) and acid pH < 4.5 with a label"
+  - "low a_w / dry heating: Hofmann's 180 C silica arm has no label for MFT; confounded with T, t and buffer"
+  - "intermediate a_w (meat-like, 0.5-0.9) with a label; de Roos 37 % water has yields but no label"
+  - "protein-bound amines, peptides other than GSH, ammonium as the amine"
+  - "oxygen contrast (air vs inert) on any MFT route"
+  - "DDP never fed and never measured as quinoxaline in a cysteine pot at known temperature; its rise before MFT is unobserved"
+  - "ribose-5-phosphate / IMP (meat's ribose forms) with a label"
+competing_families:
+  - "F24_mft_fragments: the alternative carbon route; at <= 5-6 % wherever a 1:1 label could see it (95, 140, 150, 168 C)"
+  - "F27_thiamine_gsh_sources: thiamine wins MFT carbon at dilute loadings (Cerny 2007: 75-90 %; Wang 2012: > 98 %; falls to 54 % at 300 / 100 / 100 mM)"
+  - "F26_thiazoles_thiophenes: free NF goes mostly to mercaptoketones (16x MFT), dithiolanones and thiophenones, increasingly at pH 6.5; the same H2S feeds them"
+  - "F13_furans_dehydration / F06: 3-deoxypentosone -> furfural -> FFT (F25) competes for the pentose at acid pH; F07 1-deoxypentosone is F23's entry"
+  - "F28_thiol_losses: disulfide-bound MFT is ~35 % of the NF-made MFT at 140 C pH 4.5 (Whitfield 1999)"
+engine: >-
+  In the engine: r_ddp_mft / r_ddp_mft_hs (DDP + H2S / HS-, the intact-C5 route, fed by r_dpo_ddp: DPO + Cys -> DDP +
+  Strecker products), r_nf_mft (free NF + H2S) and r_dpo_nf, plus r_arp_dpo / r_cama_dpo / r_ttca_deg as C5 sources.
+  Mismatches: (1) the shipped lane made ~100 % of its MFT through free NF (k_ddp_mft frozen ~7500x below k_nf_mft;
+  thiol prereg sec. 9) against Cerny's 7 % at 95 C; round 3 admitted R3En (DDP formation without the free-amine law),
+  but Cerny pot D still fails in every arm (0.98-0.99 NF share; STATUS_AND_PLAN B.5) and the early DDP supply is ~10x
+  too fast in the first hour. (2) Hexoses reach MFT in the engine ONLY via C2 + C3 (r_glc_c2c3 note) and the hexose
+  C5 entry r_odg_dpo is off (HEXOSE_C5_ENTRY k = 0), while two labelling labs show hexose MFT is an intact C5
+  (Zhao 2019b, Du 2023). (3) The NF marker 2-mercapto-3-pentanone (r_nf_mp3p) is the right diagnostic, but the
+  engine has no temperature- or pH-switch making it absent at 95 C / pH 5 and present at 145 C / pH >= 6; whether
+  it is reproduced is untested. (4) No buffer-catalysis term on DPO / DDP formation (Mottram 2002: 2-8x); phosphate
+  enters only through pH. (5) The intact-C5 route's pH law is fitted (R3En), the measured pH dependence is of total
+  MFT only, so the split of the x22-150 acid preference between supply (DPO / DDP) and the H2S / HS- step is not
+  identified by the literature.

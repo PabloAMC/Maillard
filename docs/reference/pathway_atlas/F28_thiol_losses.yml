@@ -1,0 +1,387 @@
+# Pathway-condition atlas, family F28 (thiol losses). Compiled 2026-11-01 from the extraction dossiers, the
+# thiol-rivals record (docs/history/thiol_rivals_2026-10-31/), the cluster-4 resolutions of 2026-11-01 and the
+# red team of claims 2-4. Vocabulary: docs/reference/pathway_atlas/families.yml (binding).
+# Conventions used in this file:
+#   - temperature: 100 C is binned `high` (processing); storage / model work at <= 60 C is `low`. Storage and
+#     processing sinks are DIFFERENT CHANNELS (thiol-rivals red team): a `low` cell never sets a processing law.
+#   - ph_basis: `label` = nominal buffer pH; `in_situ` = measured at reaction temperature; `not_stated` = the dossier
+#     gives no pH (the bin is then the closest plausible one and says so in `quantity`).
+#   - evidence `trapping` is used for a route whose PRODUCT ADDUCT was identified (MS / NMR) or whose reverse step was
+#     driven by a thiol trap; the other kinds as in families.yml.
+#   - `matrix` is an extra tag (coffee, protein, beef, lipid) where the loss partner is a matrix, not a reagent.
+#   - Laboratories: DFA Garching; Nestle Research Center Lausanne, Kraehenbuehl / Roberts group (Charles-Bernard
+#     Part 1 + Part 2 = one material, CF-081 is between them, counted ONCE; US 10,076,126 is the same group);
+#     Nestle Lausanne, Blank group (with SCRI Dundee); Reading (Mottram / Elmore); Quest Naarden; Ogawa Chiba; BTBU
+#     Beijing (Wang 2022 and Zhang 2024 counted as one); Jiangnan Wuxi (Zhang X. / Ho); Huazhong Wuhan; Beijing (Liu);
+#     Graz (Esterbauer); Nebraska Omaha (Stack); Minnesota (Reineccius); Stockholm (Ehrenberg).
+family: F28_thiol_losses
+definition: "thiol losses: oxidation / disulfides, capture by carbonyls / quinones / melanoidins / protein (reversible or not)"
+markers:
+  - "OXIDATION: the symmetrical / mixed disulfide measured as a product (with a thiol mass balance), and an O2 vs N2 / argon contrast on the loss within one study; metal dependence shown by a chelator or metal-omission arm."
+  - "OXIDATION caveat (operator): disulfides found in solvent extracts can be work-up artefacts (Hofmann 1995: absent from the headspace of the same pot); SDE of protein matrices reduces disulfides to thiols (Mottram 1996b). A disulfide is a marker only with the work-up stated."
+  - "REVERSIBILITY of the disulfide: free thiol recovered from the disulfide on heating (thiol trap, D2O label: Guth 1995) or by protein -SH (Mottram 1996, Adams 2001)."
+  - "CAPTURE: the covalent adduct identified (LC/MS or NMR of the thiol-melanoidin / thiol-pyrazinium / thiol-quinone / thiol-protein adduct; labelled thiol found on the macromolecule); a competing nucleophile (hydroxylamine, cysteine, GSH) that slows the loss; free-thiol recovery (DTE / DTT / TCEP, or DTNB-driven reverse rate) for reversibility."
+  - "PROTEIN: native vs denatured protein (exposed -SH titre by Ellman), pH 2 null (no thiolate), disulfide -> free thiol conversion."
+  - "NET LOSS without any of the above (thiol falls with time, or with an added matrix / lipid) is recorded as `unattributed`: it does not say which sub-route ran, and a lower thiol with an additive can also be lower FORMATION."
+cells:
+  # ======================= OXIDATION / DISULFIDES =======================
+  - key: {ph: mild_acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 25, sugar: none, amine: none, oxygen: [air, inert], buffer: carboxylate, metals: [not_controlled, chelated], matrix: "reconstituted coffee solids 1 % (10 g/L)", metals_note: "control vs DTPA 0.5 mmol/g arm"}
+    contrast: "air vs N2 (glovebox, Ar-degassed buffer): loss slowed 15-20x for aliphatic thiols and >40x for FFT. Metal chelator DTPA 0.5 mmol/g: 1/k_rel 0.5-1.0 (no protection), so metal catalysis is NOT shown here."
+    status: operating
+    quote: "In the absence of oxygen, linear aliphatic thiols are only"
+    quantity: "Table 3 1/k_rel anaerobic: EtSH 17.9, PropSH 19.8, BuSH 15.9, PentSH 16.4, FFT 45.1; aerobic k_ref EtSH 1.19e-4 /s, FFT > 7.7e-4 /s (25 C, pH 5.2). The O2 dependence is of the WHOLE loss; the authors place the addition on oxidised matrix species (O2 and electrophile co-required), so this cell does not say the product is a disulfide."
+    evidence: within_study_factor
+    lab: "Nestle Research Center Lausanne (Charles-Bernard / Roberts / Kraehenbuehl)"
+    dossiers: [charlesbernard2005_extraction.md, charlesbernard2005a_extraction.md]
+    where: "Table 3; Discussion p. 4429-4431"
+    conflict: CF-081
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_stated, T_C: 100, sugar: none, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "+/- 4-vinylpyridine thiol trap, water vs benzene: in water with the trap the disulfides split back to thiols (86 % of MFT-MFT, >= 98 % of FFT-FFT gone); without the trap the MFT-MFT pool is conserved (95.5 %) and only scrambles (21.5 % mixed disulfide); in benzene nothing reacts."
+    status: operating
+    quote: "Disulfides are not stable during heating of foods"
+    quantity: "100 C, 2 h, 8.8-16 uM disulfide in 50 mL water: thiol recovered 62 % (MFT) and 92 % (FFT) of 2 per disulfide; D2O puts one D in the trapped MFT (63 %), i.e. hydrolysis RSSR + H2O -> RSH + RSOH. pH never stated (the trap may push unbuffered water to ~7-8, dossier estimate), so the bin is uncertain. This is the REVERSIBILITY of the oxidation sub-route at processing temperature."
+    evidence: trapping
+    lab: "DFA Garching (Guth / Hofmann / Schieberle / Grosch)"
+    dossiers: [guth1995_extraction.md]
+    where: "Tables 2-3"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    contrast: "disulfide measured (SIDA) against the MFT missing from the reflux pot: the disulfide is not the in-pot sink."
+    status: minor
+    quote: "Disulfide is excluded as the main sink by measurement"
+    quantity: "bis(2-methyl-3-furyl) disulfide <= 0.2 ug (thiamine pot), n.d. with Cys, 1.6 +/- 1.2 ug in the full system, against 20-100 ug MFT missing: <= 1-5 % of the loss. 0.2 M pyrophosphate pH 5.7, 2 h reflux (open condenser: air, dossier inference)."
+    evidence: mass_balance
+    lab: "DFA Garching (Grosch / Zeiler-Hilgart)"
+    dossiers: [grosch1992_extraction.md]
+    where: "Tables II, VIII"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 121, sugar: none, amine: none, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 3.0 -> 7.0 (citrate / phosphate, cold-pH labels), 121 C 10 min, canned without deoxidisation: FFT survival 99.5 -> 0.1 % (Fig. 3) while difurfuryl disulfide rises monotonically <0.01 -> 0.17 (area ratio)."
+    status: operating
+    quote: "Among these compounds, difurfuryl disulfide was the major"
+    quantity: "Disulfide share of (FFT + 2 x disulfide), uncorrected areas: <4 % at pH 3, 13 % at pH 5, 55 % at pH 6, >97 % at pH 7. The authors state a mass-balance SHORTFALL (products < FFT lost) and attribute the rest to a Fenton-type route (unattributed). 1 ppm FFT; no replicates printed."
+    evidence: within_study_factor
+    lab: "Ogawa & Co., Chiba (Kumazawa / Masuda)"
+    dossiers: [kumazawa2003_extraction.md]
+    where: "Table 3, Fig. 3, p. 2677"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "initial pH 6 / 7 / 8 (unbuffered, NaOH; pH drifts): the MFT disulfide share is nearly pH-flat while MFT itself swings 3x."
+    status: operating
+    quote: "Here it is 6.5–9.6 % of MFT (thiol-equivalents) across"
+    quantity: "Ala-xylose Amadori 20 mM + Cys 20 mM, 120 C, 60 min: thiol equivalents in bis(2-methyl-3-furyl) disulfide / free MFT 8.6 / 6.5 / 9.6 % (pH 6 / 7 / 8); FFT disulfide 4.4 / 2.4 / 0 %. HS-SPME, IS-relative (semi-quantitative). Contrasts in sign with Kumazawa's steep FFT pH law (different thiol, buffer and pot)."
+    evidence: within_study_factor
+    lab: "Jiangnan University Wuxi (Zhang X.) with Rutgers (Ho)"
+    dossiers: [zhou2023_extraction.md]
+    where: "Table 1; dossier sec. 2.1"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 115, sugar: pentose, amine: sulfur_aa_other, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "cystine vs cysteine arm at near-matched molar sulfur (Met + thiamine + xylose pot): the oxidised additive raises the MFT disulfide share x6.3 but does NOT lower free MFT (x1.5 higher)."
+    status: operating
+    quote: "is 54.2 % of the MFT pool by mass in the GCys system"
+    quantity: "MFT-MFT / (MFT + MFT-MFT) by mass 54.2 % (cystine) vs 8.6 % (cysteine), pH 4.9 phosphate, 115 C. FIGURE READ-OFF (Fig. 1a; figure-only under the current rule, zhang2024b keeps only the text's ordering GCys > Cys ~ GSH). Sign agrees with 'oxidant -> disulfide', not with 'oxidant -> less free thiol' (cluster 4 sec. 1)."
+    evidence: within_study_factor
+    lab: "BTBU Beijing (Zhang / Kuang / Wang / Cao)"
+    dossiers: [Zhang2024_extraction.md, zhang2024b_extraction.md]
+    where: "Fig. 1a (read-off); text 3.2"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    contrast: "none for O2 (the pot is oxygen-rich by the dossier's arithmetic: ~0.7 mmol O2 per 0.5 mmol reagent)."
+    status: operating
+    quote: "bis(2-methyl-3-furanyl) disulfide | 202 (213) | tr"
+    quantity: "Cys 25 + ribose 25 mM, pyrophosphate pH 5.5, 140 C 30 min: MFT 807 (+/- 508) and its disulfide 202 (+/- 213) ng in the headspace of 100 mL (two-fibre SPME at room temperature, RF 1), plus three mixed MFT disulfides 38-52; CV 63-105 %. 100 mL bottle with 80 mL air headspace. No thiol mass balance, so the disulfide's share of the loss is not known."
+    evidence: qualitative
+    lab: "Reading (Elmore / Mottram) with Bristol"
+    dossiers: [elmore2002_extraction.md]
+    where: "Table 1"
+  - key: {ph: mild_acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "Fenton factorial (Fe(III) / H2O2 / ascorbate / EDTA omitted one at a time) and 22 vs 37 C: FFT loss 89 % (complete, 37 C) vs 19 % without FeCl3 and <3 % in buffer alone; 20 % at 22 C."
+    status: operating
+    quote: "2 on its own is rather stable in aqueous solutions, it is rapidly decomposed"
+    quantity: "3.8 mM FFT in 3.3 % SDS, 20 mM K2HPO4 pH 5.5, 1 h: difurfuryl disulfide the major product (with mono- and trisulfide). Radical (OH.) oxidation needs Fe + H2O2 + reductant; the no-EDTA arm is temperature-flat (apparent Ea ~7 kJ/mol, dossier derivation, single-exponential assumption falsified by Fig. 3)."
+    evidence: within_study_factor
+    lab: "Nestle Research Center Lausanne (Blank) with SCRI Dundee"
+    dossiers: [blank2002_extraction.md]
+    where: "Table 3; Table 6; Fig. 4"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 37, sugar: none, amine: cysteine, oxygen: air, buffer: other_buffer, metals: chelated}
+    contrast: "metal-free (EDTA-washed glass, quartz-distilled water) vs Cu(II) / Fe added: cysteine is stable under aeration without metal; with Cu it autoxidises to the disulfide (Michaelis-Menten in RSH, partly second order in Cu); Fe and Cu rates not additive."
+    status: operating
+    quote: "within the accuracy of the analysis (± 2 %), over 40 min at 37 °C"
+    quantity: "1 mM cysteine, 40 mM Tris pH 7.2 / 8.1 (measured at temperature), 29-37 C, air or O2 bubbling; K <= 1e-3 M; stoichiometry 4 RSH per O2 overall. The O2 consumer the engine's inert ch_cys_ox would need (cluster 4 names this form)."
+    evidence: within_study_factor
+    lab: "Stockholm University (Ehrenberg / Harms-Ringdahl)"
+    dossiers: [ehrenberg1989_extraction.md]
+    where: "Experimental p. 186; eqns 1-7"
+  - key: {ph: mild_acid, temperature: low, water: concentrated}
+    tags: {ph_basis: label, T_C: 50, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "thiol identity: in Cys-free 0.5 M phosphate pH 5.0 at 50 C, the MB and FFT losses close as thiol + (mixed) disulfide; MFT's does not (next cell). STORAGE channel, not a processing law."
+    status: operating
+    quote: "MB and FFT: initial thiol = final thiol + (mixed) disulfides"
+    quantity: "Reconstituted 50 uM each thiol, 50 C, 24 h: losses > 90 %/day without cysteine (Table 1 entry 2); the balance is stated as an equality, no numbers printed. DMFT closes too ('data not presented')."
+    evidence: mass_balance
+    lab: "Quest International Naarden (van Seeventer / Winkel / Kerler)"
+    dossiers: [vanseeventer2001_extraction.md]
+    where: "p. 4294; Table 1"
+  # ======================= CAPTURE (carbonyls, quinones, melanoidins, self-coupling) =======================
+  - key: {ph: mild_acid, temperature: low, water: concentrated}
+    tags: {ph_basis: label, T_C: 50, sugar: pentose, amine: cysteine, oxygen: [air, inert], buffer: phosphate, metals: not_controlled}
+    contrast: "air vs argon (process flavouring, 'almost no difference', data not presented) and MFT vs MB / FFT / DMFT: MFT is lost neither as thiol nor as (mixed) disulfide; H-D exchange 85 % at C-5 vs 10 % at C-4 (CH3OD / DCl, RT) points to acid-catalysed electrophilic coupling at C-5."
+    status: operating
+    quote: "The instability is not due to disulfide formation, but appears to result from electrophilic"
+    quantity: "Ribose 100 + Cys 33 mM process flavouring (130 C, 20 min), stored at 50 C: MFT 59 %/day, FFT 28, MB 14 (~5 uM each). Partner of the coupling unidentified (the authors' scheme makes the protonated thiol itself the electrophile). STORAGE (<= 60 C) channel only (thiol-rivals red team)."
+    evidence: mass_balance
+    lab: "Quest International Naarden (van Seeventer / Winkel / Kerler)"
+    dossiers: [vanseeventer2001_extraction.md]
+    where: "Table 1 entry 1; p. 4293-4295; Fig. 3"
+  - key: {ph: mild_acid, temperature: low, water: concentrated}
+    tags: {ph_basis: label, T_C: 50, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "+/- 150 mM cysteine, +/- 250 mM ribose (reconstituted, 50 uM thiols): cysteine protects, ribose alone does nothing, both together protect MFT most; MFT's loss has a MINIMUM near 50 mM cysteine (Fig. 1), MB and FFT fall monotonically."
+    status: operating
+    quote: "a stabilizing effect through the addition of cysteine was clearly present (entry 4)"
+    quantity: "% per day, entries 2 / 3 / 4 / 5: MFT > 90 / > 90 / 69 / 42; FFT > 90 / > 90 / 39 / 43; MB > 90 / > 90 / 26 / 25. Per unit pool the process flavouring (15 mM residual Cys) and the 150 mM-Cys reconstitution agree within 17 % for MFT (first-order-like, dossier arithmetic). Storage channel."
+    evidence: within_study_factor
+    lab: "Quest International Naarden (van Seeventer / Winkel / Kerler)"
+    dossiers: [vanseeventer2001_extraction.md]
+    where: "Table 1 entries 2-5; Fig. 1; p. 4293-4294"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "same pot refluxed then extracted vs stripped continuously by SDE (SIDA standards after boiling): x5.3 (thiamine) and x4.1 (thiamine + 325 umol Cys) more MFT with SDE, i.e. in-pot loss; +Cys lowers the inferred loss only weakly (lambda 0.044 -> 0.034 /min, CI includes no effect)."
+    status: unattributed
+    quote: "increased approximately 5- and 4-fold"
+    quantity: "Inferred first-order in-pot loss at 100 C, pH 5.7 pyrophosphate: 0.044 (0.035-0.053) /min thiamine alone, 0.034 (0.030-0.038) with Cys (cluster 4 sec. 2). Sub-route not marked: the disulfide is excluded (cell above); thiamine pots release a pyrimidinylmethyl electrophile that traps MFT (jhoo2002), so this may be a pot-specific capture sink. Assumes equal formation under SDE and reflux (lower bound)."
+    evidence: within_study_factor
+    lab: "DFA Garching (Grosch / Zeiler-Hilgart)"
+    dossiers: [grosch1992_extraction.md]
+    where: "Table VIII; p. 189"
+  - key: {ph: mild_acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 110, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "none within study; the [2H3]-MFT standard co-heated with the precursors bounds the in-pot loss, against Grosch's thiamine-pot lambda (cluster 4: one pot-independent constant serves both with P ~0.15)."
+    status: conflicting
+    quote: "Internal standards added BEFORE heating"
+    quantity: "Xylose 0.25 + Cys 0.25 mol/kg, phosphate pH 5.5, 110 C, 0.5-4 h: MFT still rising with upward curvature at 4 h. Derived bound lambda(110 C) <= 0.02 (slow precursor exhaustion) / 0.05 /min (fast); NOT measurement-grade (P 0.15: 4 single-vial digitised points, standard amounts unprinted). Free Cys is high (~16-250 mM), so a Cys-suppressed loss would also fit."
+    evidence: kinetic_fit
+    lab: "Nestle Research Center Lausanne (Kraehenbuehl / Davidek; patent, Nestec)"
+    dossiers: [us10076126_extraction.md]
+    where: "Example 1, Fig. 1; dossier sec. 6 flag 1"
+    conflict: CF-013
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 30, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled, matrix: "coffee melanoidin > 3 kDa, 12.5 g/L"}
+    contrast: "electrophile source ladder at one condition (30 min, 30 C): FFT left 92 % (chlorogenic acid), 86 % (heated CGA), 58 % (albumin / glucose), 31 % (albumin / glycolaldehyde), 17 % (N-acetyl-Lys / glycolaldehyde); melanoidin GPC fractions bind in the order of their EPR radical activity."
+    status: dominant
+    quote: "about 400 or 330 µg of 2-furfurylthiol was"
+    quantity: "500 ug FFT in 10 mL 0.1 M phosphate pH 6.0 with 125 mg melanoidin: ~400 ug bound (80 %, capacity >= 0.028 mmol/g) while < 6 ug bis(2-furfuryl) disulfide formed (< 1.5 % of the flux). [2H2]-FFT label found on the > 3 kDa retentate (2H NMR 3.0-4.2 ppm); thioether adducts with the pyrazinium (CROSSPY) electrophile by LC/MS (m/z 251 / 267 / 363 and [2H] shifts). Covalent: dithioerythritol could not regenerate the thiol (cited, ref 6)."
+    evidence: labelling
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2001_extraction.md, hofmann2002_extraction.md]
+    where: "Table 2; p. 322-326; Figs. 2, 3, 6-9"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_stated, T_C: 80, sugar: none, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, matrix: "real coffee brew 50 g/L"}
+    contrast: "none (time course in a thermos)."
+    status: unattributed
+    quote: "After 60 min the 2-furfurylthiol concentration decreased by a factor of more than four"
+    quantity: "FFT 16.0 -> ~4 at 60 min -> complete loss by 210 min (SIDA): k >= 0.023 /min at 80 C, a lower bound; MMBF 8.2 -> 1.3. The 80 C brew is NOT faster than the 30 C models (6-9e-4 /s). pH unmeasured (bin assumed mild_acid for coffee)."
+    evidence: qualitative
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2001_extraction.md, hofmann2002_extraction.md]
+    where: "Fig. 1; p. 322"
+  - key: {ph: mild_acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 25, sugar: none, amine: none, oxygen: [air, inert], buffer: carboxylate, metals: not_controlled, matrix: "reconstituted coffee solids 1 % (10 g/L)"}
+    contrast: "hydroxylamine pre-incubation (a carbonyl-competing nucleophile): loss slowed 10.5-13x (aliphatic) and 4x (FFT); combined with N2, 65-236x (aliphatic) and 93x (FFT): the two factors act jointly (nucleophilic addition to O2-dependent electrophiles)."
+    status: operating
+    quote: "the aliphatic thiols (e.g., ethanethiol) were dramatically stabilized when"
+    quantity: "Table 3 1/k_rel hydroxylamine 10 mmol/g: EtSH 10.5, PropSH 11.4, BuSH 10.8, PentSH 13.4, FFT 4.0; anaerobic + hydroxylamine 21 mmol/g: 64.8 / 82.5 / 101.3 / 236.1 / 92.6. No adduct identified; reversibility not tested. Level-off dose '8-10 mmol/g' is the CF-081 site-density number (x30 vs Part 1's 0.29 mmol/g probe)."
+    evidence: within_study_factor
+    lab: "Nestle Research Center Lausanne (Charles-Bernard / Roberts / Kraehenbuehl)"
+    dossiers: [charlesbernard2005_extraction.md, charlesbernard2005a_extraction.md]
+    where: "Tables 1, 3; p. 4428, 4430"
+    conflict: CF-081
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 20, sugar: none, amine: sulfur_aa_other, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "carbonyl structure (21 enals / enones) and pH (3.5-10.5, pH-stat) and thiol identity: the Michael capture is REVERSIBLE (2-alkenal adducts revert in hours); rate follows the thiolate fraction; cysteine reacts ~61x faster than GSH unbuffered and is not buffer-catalysed (phosphate accelerates GSH x4.6)."
+    status: operating
+    quote: "simple 2-alkenal adducts dissociate with t½ 4-6 h at 20 °C"
+    quantity: "GSH, 66 mM phosphate pH 7.4, 20 C: k1 crotonaldehyde 0.785, 2-hexenal 0.330, 4-HNE 1.09, acrolein 121 M-1 s-1; k2 (reverse) 2-alkenals 3.0-4.7e-5 /s, 4-hydroxyalkenals 4-13e-7 /s; K_diss 4e-5 - 1.4e-4 M (2-alkenals). Reverse driven by DTNB trapping. GSH, not MFT; one temperature (no Ea)."
+    evidence: trapping
+    lab: "Graz (Esterbauer)"
+    dossiers: [esterbauer1975_extraction.md]
+    where: "Tables II-V; Fig. 1"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 19.4, sugar: none, amine: sulfur_aa_other, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "temperature 4.6 -> 19.4 C (stopped flow): the thiol + o-quinone Michael equilibrium constant FALLS with temperature (exothermic), so heating shifts bound thiol back to free; both directions measured."
+    status: operating
+    quote: "K decreases with temperature for both thiols"
+    quantity: "Bisphenol A-3,4-quinone + N-acetylcysteine / GSH, 0.050 M phosphate pH 6.2 in 50 % methanol (stopped flow; 0.1 M was the synthesis buffer): K(NAC) 10.57 (4.6 C) -> 5.64 M-1 (19.4 C); K(GSH) 35.3 (9.6 C) -> 18.4 M-1 (19.4 C); k1 496 / 1547 M-1 s-1, k-1 88 / 84 /s at 19.4 C. Printed activation parameters are wrong by a ln/log10 slip (dossier sec. 6); the rate constants stand."
+    evidence: within_study_factor
+    lab: "University of Nebraska Omaha (Stack)"
+    dossiers: [stack2018_extraction.md]
+    where: "Fig. 4C (values printed in the figure); dossier sec. 3.1"
+    note: "re-read 2026-11-01: two readers MINOR: kinetics buffer 0.050 M, not 0.1 M; Fig. 4C values are printed, not read off. K values reproduce."
+  # ======================= LIPID ELECTROPHILES (in-pot, processing T) =======================
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled, matrix: "methyl linoleate / linolenate 25 mM"}
+    contrast: "+/- 25 mM PUFA methyl ester: MFT falls 14x (18:2) and > 80x (18:3) while FFT barely moves with 18:2 (92 -> 87); its disulfide falls > 20x; 2-enals / 2,4-dienals are consumed and H2S-lipid products appear."
+    status: unattributed
+    quote: "MFT 807 (±508) → 58 (±71) → tr"
+    quantity: "Cys 25 + ribose 25 mM, pyrophosphate pH 5.5, 140 C 30 min. MFT-selective, which fits capture of MFT (thiol-enal) OR of its specific precursors; no adduct identified, so the sub-route is unattributed (cluster 4 sec. 8: the falls scale with oxidation load; headspace operator explains <= 0.1-0.4 dex)."
+    evidence: within_study_factor
+    lab: "Reading (Elmore / Mottram) with Bristol"
+    dossiers: [elmore2002_extraction.md]
+    where: "Table 1; Results"
+    conflict: CF-031
+  - key: {ph: mild_acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled, matrix: "lard 1 % w/v, fresh or oxidised (PV 184 meq/kg)"}
+    contrast: "no lard vs fresh vs oxidised lard: MFT x21 and x143 lower, FFT x3 and x6.4 lower; more oxidised lipid, more loss."
+    status: unattributed
+    quote: "Lard cuts MFT ×21 (fresh) and ×143 (oxidised), FFT ×3 and ×6.4"
+    quantity: "Cys ~165 + xylose ~133 mM, 0.2 M phosphate pH 5.0, sealed 20 mL vial (10 mL air headspace), 120 C 60 min; HS-SPME vs cyclohexanone RF 1. Same direction and ordering as Elmore 2002 (a second lab); no adduct measured."
+    evidence: within_study_factor
+    lab: "Huazhong Agricultural University Wuhan (Xu / Pan)"
+    dossiers: [xu2011_extraction.md]
+    where: "Table 1"
+    conflict: CF-031
+  # ======================= PROTEIN =======================
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_stated, T_C: 100, sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, matrix: "egg albumin vs casein vs maltodextrin vs water, 67 g/L"}
+    contrast: "matrix: with albumin the furyl disulfides are consumed (99 %) and come back partly as free thiol; with casein little; maltodextrin and water nil. Without protein the FREE thiol oxidises (disulfide increases); with protein no thiol oxidation is seen."
+    status: operating
+    quote: "In the systems containing protein there was no evidence of thiol oxidation"
+    quantity: "500 ug disulfide (2.9 uM), 2 h stirring then 2 h SDE (~100 C): thiol yield 44.8 % (MFT) and 25.2 % (FFT) with albumin, 13.3 / 2.4 % with casein; 54-74 % of the albumin sulfur unaccounted (protein-bound, inferred, not measured). pH not printed (bin assumed). SDE is the heating, so this is also an observation operator."
+    evidence: within_study_factor
+    lab: "Reading (Mottram / Szauman-Szumski / Dodson)"
+    dossiers: [mottram1996_extraction.md]
+    where: "Tables 1-2; p. 2350-2351"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_stated, T_C: 100, sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, matrix: "cooked minced beef 100 g in 750 mL"}
+    contrast: "cooked beef vs water, spiked furyl disulfides through 2 h SDE: in beef ~80 % of each disulfide is consumed and returns mostly as free thiol; in water the disulfide survives and no thiol forms. SDE vs Tenax headspace on the same beef give opposite thiol / disulfide pictures."
+    status: operating
+    quote: "58-60 % of the thiol units return as free thiol"
+    quantity: "Thiol units accounted (thiol + 2 x disulfide + mixed / methyl disulfides): 83 % (FFT), 90 % (MFT): in beef the disulfide is a REVERSIBLE RESERVOIR, only 10-17 % unaccounted. Beef autoclaved 140 C before the spike; pH not printed (bin assumed). Same lab as mottram1996 / adams2001."
+    evidence: mass_balance
+    lab: "Reading (Mottram / Nobrega / Dodson / Elmore)"
+    dossiers: [mottram1996b_extraction.md]
+    where: "Tables 1-2"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, matrix: "ovalbumin 1 % w/v, native vs heat-denatured"}
+    contrast: "native vs heat-denatured ovalbumin (Ellman SH 0.01 vs 1.24 per molecule), pH 2.0 / 6.7 / 8.0, disulfide added before vs after heating: no loss at pH 2; more at pH 8 than 6.7; denatured >> native; free thiols released only in the protein system; diallyl sulfide (no S-S) inert."
+    status: operating
+    quote: "Ellman: native 0.01 SH per ovalbumin; heat-denatured 1.24 per molecule"
+    quantity: "2-furfuryl methyl disulfide / water ratio, denatured protein, added after heating: 0.23 (pH 6.7), 0.10 (pH 8.0); added before heating (10 min to 90 C): 0.026 / 0. Contact at RT + 37 C (time not printed): k2 ~0.06-0.09 L/(mmol min) on 0.28 mM SH (dossier, +/- 0.5 dex). Thiolate-disulfide interchange, protein mixed disulfide proposed, not measured."
+    evidence: within_study_factor
+    lab: "Reading (Adams / Mottram / Parker) with CCFRA"
+    dossiers: [adams2001_extraction.md]
+    where: "Tables 1-3; Fig. 4"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 22, sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, matrix: "beta-lactoglobulin 1 wt % (1 free Cys, 2 disulfides)"}
+    contrast: "thiol class (propanethiol, FFT, thiophenol; 47 flavour compounds): FFT and n-PrSH give 1:1 and 2:1 covalent adducts (intact-protein MS), thiophenol only 1:1."
+    status: operating
+    quote: "In close analogy to the reactions with n-PrSH, both 1:1 and 2:1 adducts"
+    quantity: "+114 / +228 Da for FFT within 24 h at ambient, pH 6.7 isolate in water; saturating flavour dose (12 g/L FFT) by design, so no rate or extent; the 2:1 propanethiol adduct appears between 6 and 24 h. Disulfide exchange with the protein's S-S (the engine's ch_protein_ss source)."
+    evidence: trapping
+    lab: "University of Minnesota (Anantharamkrishnan / Hoye / Reineccius)"
+    dossiers: [anantharamkrishnan2020b_extraction.md]
+    where: "Fig. 7c; Results"
+  # ======================= NET LOSS AT PROCESSING TEMPERATURE (no marker) =======================
+  - key: {ph: mild_acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "temperature 100 / 110 vs 120-140 C, 30-180 min, one pot (15 mL pressure vial, 10 mL air headspace): MFT and FFT keep rising at 100-110 C and peak then fall at 120-140 C (at 140 C from 60 min)."
+    status: unattributed
+    quote: "at higher reaction temperatures of 120-140 C, their levels tended"
+    quantity: "Cys 0.4 + xylose 0.4 M, 0.2 M phosphate pH 5.5 (grid pot with 1 % methyl linoleate, CF-028); heat maps only, no numbers. Bis(2-methylfuryl) disulfide identified at high T. Lipid arm at 120 C / 150 min: MFT 1510 -> 445 (1 %) -> 283 ng/g (2 %)."
+    evidence: within_study_factor
+    lab: "BTBU Beijing (Wang / Xie / Zhang / Xu)"
+    dossiers: [wang2022_extraction.md]
+    where: "sec. 3.3, Figs. 1-3; Table 2"
+    conflict: CF-013
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 168, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "time 20 / 40 / 60 min and thiol identity: MFT halves while FFT stays flat in the same vial series."
+    status: unattributed
+    quote: "MFT FALLS by half between 20 and 60 min"
+    quantity: "Ribose : Cys ~1 : 12.5 molar (reading the printed 'weight ratio of 10.10' as Cys : ribose; no masses printed), 0.5 M K3PO4 pH 5.88, 168 C: MFT 1253 -> 760 -> 628 ng/vial; FFT 175 -> 198 -> 170 (HS-SPME, IS-relative). Sugar is the limiting charge, so a precursor-exhaustion reading competes with a sink."
+    evidence: within_study_factor
+    lab: "Beijing (Liu et al., LWT 2023)"
+    dossiers: [liu2023b_extraction.md]
+    where: "Table 2"
+    note: "re-read 2026-11-01: two readers (A MINOR, B MATCH); adjudicated MINOR: amounts match; a 10.10 weight ratio gives ~1 : 12.5 molar, not 1 : 15. Sugar stays the limiting charge under either reading of the ratio."
+condition_dependence: >-
+  OXYGEN: the only within-study O2 contrasts are at <= 50 C and they disagree by matrix. In coffee solids at 25 C the
+  loss needs air (x15-45 slower under N2, Charles-Bernard), while in a ribose / cysteine process flavouring at 50 C air
+  ~ argon for MFT (van Seeventer, data not presented); no study varies O2 on thiols at process temperature (cluster 4
+  sec. 1). METALS: radical / metal-catalysed oxidation is shown for FFT (Fe + H2O2 + reductant, Blank) and cysteine
+  (Cu / Fe, Ehrenberg) in clean systems, but a chelator does not slow the coffee loss (DTPA null). pH: the FFT loss at
+  121 C rises steeply from pH 5 to 7 with the disulfide as main product (Kumazawa), and protein interchange needs a
+  thiolate (pH 2 null, Adams); the Michael capture rate follows the thiolate fraction (Esterbauer, GSH). Yet the MFT
+  disulfide share at 120 C is pH-flat from 6 to 8 (Zhou), so the thiolate law is shown for FFT and analogues, not for
+  MFT's oxidation branch. TEMPERATURE: below ~110 C net thiol rises for hours in cysteine-pentose pots (Wang 100-110 C;
+  CF-013 with Schieberle 2000), while at 120-168 C thiols peak and fall (Wang, Liu); the in-pot first-order loss
+  inferred at 100 C (Grosch, thiamine pots, ~0.04 /min) and the co-heated-standard bound at 110 C (Nestle, <= 0.02-0.05
+  /min, 0.25 M Cys) cannot be one constant (cluster 4, P 0.15). CYSTEINE: protects at 50 C storage (van Seeventer, with a
+  minimum near 50 mM for MFT) and only weakly in Grosch's 100 C pot; Esterbauer gives the competition basis (Cys ~61x
+  GSH); no designed Cys series at process T exists. SUGAR: ribose alone has no effect on storage loss (van Seeventer).
+  MATRIX: coffee melanoidins capture FFT covalently and essentially irreversibly at 30 C (labelling, disulfide < 1.5 %,
+  DTE no release), whereas protein (albumin, beef, ovalbumin, beta-lactoglobulin) exchanges with disulfides and can
+  RETURN the thiol (reservoir in beef, 83-90 % of units accounted); lipid oxidation load lowers MFT 14-143x at 120-140 C
+  (Elmore, Xu, Wang), selectively over FFT, with no adduct identified. REVERSIBILITY: the disulfide reverts to thiol at
+  100 C in water when the thiol is drawn off (Guth); Michael adducts of enals and quinones revert, and their K falls
+  with temperature (Esterbauer, Stack). The disulfide is a MINOR sink where measured against a thiol deficit at 30-100 C
+  (Hofmann, Grosch) and the major product only in FFT pots at pH >= 6 (Kumazawa) or with an oxidised additive (Zhang
+  2024, cystine).
+best_supported_regimes:
+  - "neutral / low T / dilute / coffee melanoidin: covalent capture of FFT dominant over oxidation (1 lab, labelling + disulfide balance)"
+  - "mild_acid / low T / dilute / coffee solids: loss O2-dependent and carbonyl-nucleophile-competed, chelator-insensitive (1 lab, two within-study factors; CF-081 open on the site density)"
+  - "neutral-to-alkaline / low-high T / protein matrix: thiol-disulfide interchange with protein -SH, thiol released, needs thiolate and exposed SH (1 lab, Reading: 3 papers, 3 within-study factors; MS adducts from a 2nd lab, Minnesota)"
+  - "mild_acid-neutral / high T / dilute: oxidation to the disulfide operating, a measured product (Ogawa, Jiangnan, BTBU, Reading, DFA: 5 labs), minor where weighed against a thiol deficit (DFA)"
+  - "any / high T / water: disulfides are a reversible reservoir, not a terminal sink (DFA trap + label; Reading beef mass balance: 2 labs)"
+  - "mild_acid / high T / lipid present: MFT lost selectively (Reading, Huazhong, BTBU: 3 labs) - sub-route unattributed"
+  - "mild_acid / low T (50 C storage) / concentrated: MFT-specific non-oxidative non-disulfide sink, suppressed by cysteine (1 lab, mass balance; storage channel only)"
+unknown_regimes:
+  - "any O2 vs inert contrast on MFT / FFT loss at >= 100 C (none on disk; the designed E3 / Yiltirak-fill experiment in cluster 4 is the decider)"
+  - "a designed cysteine series on thiol LOSS at process temperature (labelled MFT spiked during heating, Cys 0-150 mM): only Grosch's two pots and the patent's derived bound"
+  - "moderate T (60-100 C) in pentose / cysteine pots: only the 80 C coffee brew (no marker) and Adams' 10-min 90 C step"
+  - "low_aw / dry / roasting: no thiol-loss study with a marker (Chen 2000 / 2002 at 180 C report levels only)"
+  - "alkaline (> 7.5) at process T for MFT: only Zhou's pH 8 arm (unbuffered, drifting)"
+  - "covalent thiol-electrophile adducts identified IN a heated sugar + cysteine pot (deoxyosone, furfural, norfuraneol, enal adducts of MFT): never measured; only thiamine (jhoo2002, not keyed here), melanoidin / pyrazinium (30 C) and model quinones / enals / proteins"
+  - "reversibility of melanoidin capture at process temperature (DTE negative is cited, 30 C, FFT only); MFT kinetics with melanoidins (rFD only)"
+  - "the identity of van Seeventer's missing MFT and whether the C-5 coupling runs at >= 100 C"
+  - "metal effects at process T (chelator or metal-spike arm in a Maillard pot)"
+  - "plant-protein matrices (no free-SH / S-S titres; Mottram's albumin vs casein suggests SH content governs)"
+competing_families:
+  - "F31_melanoidins: melanoidin sites are the capture partner in coffee (dominant at 30 C); in pentose pots the electrophile pool is not identified (engine k_mele_site inert)"
+  - "F30_lipid_oxidation_crossover / F26_thiazoles_thiophenes: lipid enals compete for H2S and the thiols' precursors; lipid lowers MFT (Elmore, Xu, Wang) and makes alkylthiophenes, so capture of MFT and suppression of its formation are not separated"
+  - "F04_thiazolidine_ttca: TTCA binds cysteine reversibly, lowering the free Cys that protects thiols (van Seeventer's MFT minimum near 50 mM is attributed to it)"
+  - "F15_redox_reductones: reductones and the H2S / dicarbonyl redox couple supply or scavenge the oxidant the disulfide route needs; ascorbate protects in coffee (1/k_rel 4-24)"
+  - "F27_thiamine_gsh_sources: thiamine releases a pyrimidinylmethyl electrophile that consumes MFT (jhoo2002), so thiamine-pot loss rates (Grosch) may be capture, not a generic sink"
+  - "F22_cysteine_h2s: H2S / HS- consumes disulfides (persulfide) and competes with odorant thiols for electrophiles and oxidant"
+engine: >-
+  In the engine (src/kinetic_core/sulfur.py, read only), thiol loss is carried by: ch_mft_decay / ch_fft_decay
+  (k_mft_decay, k_fft_decay; first order, irreversible, "unassigned sink"; shipped k_mft_decay frozen at 10^0.13 = 1.36
+  /min at 145 C, ~0.095 /min at 110 C; k_fft_decay 0.15 /min at 145 C); ch_thiolate_loss_mft / _fft (k_thiolate_loss,
+  0.028 /min at 145 C, thiolate-fraction pH factor, from Kumazawa); ch_dimer_mft / _fft (k_dimer_mft / _fft, 2 RSH + OX,
+  thiolate tag, Zhang 2024 anchor; sitting on the 0.5 ceiling, bound-limited) with ch_mftd_decay / ch_fftd_decay
+  (k_dimer_decay ~0) and ch_dimer_release_* (k_dimer_release = 0, inert); ch_mmft (k_mmft, MFT + MeSH);
+  ch_thioether_mft / _fft + ch_thioether_release(_fft) (k_thioether 5.01e-4 L/mmol/min on the MELE site pool, reverse
+  from Stack's K(T)); ch_protein_ss_mft / _fft (k_protein_ss 6.05e-6, terminal, PROT_SS zero in every scored panel);
+  ch_oligomer_mft / _fft (k_oligomer = 0, van Seeventer kept a hold-out); ch_add_mft/fft_dpo/tdp (k_add, irreversible
+  thiol + deoxypentosone, inert at zero); ch_mele_from_dpo/tdp/ddp (k_mele_site, inert); O2 consumers ch_cys_ox,
+  ch_red_ox_* and ox_supply inert (B11 not shipped; OX seeded at the ambient level only). network.py carries no
+  odorant-thiol loss (only the methanethiol -> dimethyl disulfide step of B22). MISMATCHES with the literature cells:
+  (1) k_mft_decay is pot-independent and has no cysteine, O2, pH or matrix term, while the 0.25 M-Cys patent pot needs
+  lambda(110 C) <= 0.02-0.05 /min against the engine's 0.095 (CF-013; P(too fast by >= 3x at <= 110 C in a Cys-rich pot)
+  ~0.75, thiol rivals) and Grosch's thiamine pot sits at the engine's size; one constant serving both has P ~0.15
+  (cluster 4), and a Cys-suppression / electrophile-capture law is the proposed form. (2) The disulfide is effectively a
+  terminal store (k_dimer_release = 0, k_dimer_decay ~0), whereas Guth (100 C, water) and Mottram 1996b (beef) show it
+  reverting to thiol; and no thiol-disulfide exchange with cystine / protein -SH exists in the reducing direction
+  (Mottram, Adams), only the terminal protein_ss arrow at a rate ~4 dex below Adams' interchange estimate. (3) O2 enters
+  only through the dimer's OX at ambient seeding; the coffee loss's x15-45 O2 dependence and any vessel-O2 effect
+  (CF-068) cannot be expressed, and there is no metal species (Blank, Ehrenberg). (4) Michael capture is either
+  irreversible (k_add, inert) or uses the quinone K(T) of Stack for melanoidin thioethers, while Hofmann's pyrazinium
+  adducts are not released by DTE: the reversible thioether channel may be the wrong sign of reversibility for coffee
+  melanoidin; its site density carries the CF-081 x30 band. (5) Lipid electrophiles are not partners of any sulfur-lane
+  thiol channel, so the 14-143x lipid falls (Elmore, Xu, Wang) cannot be produced. (6) The thiolate pH factor on
+  ch_dimer_* matches Kumazawa's FFT direction but would predict a pH-dependent MFT disulfide share that Zhou's 120 C pot
+  does not show. (7) The 50 C storage channel (k_oligomer) is zero by declaration; correct as a storage channel, and it
+  must not be borrowed as a processing law.

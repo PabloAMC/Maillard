@@ -1,0 +1,216 @@
+# Proposed edits to docs/reference/conflicts_register.yml and docs/reference/experiment_register.yml (resolve2_pyrbuf,
+# 2026-11-01). PROPOSALS ONLY: the register writer applies them and assigns the new ids (placeholders CF-NEW-1..7, EX-NEW).
+# Evidence: scratchpad/resolve2_pyrbuf/{prereg.md, results.md, results_tests.json, shib_abs.json, piloty_engine_probe.json}.
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 1. CF-011: append to `tests` (status stays open; P unchanged)
+CF-011_append_test: >-
+  "resolve2_pyrbuf (2026-11-01; prereg first): the form of buffer catalysis across labs is linear per step (Potman TEST
+  I(0.5)/I(0.1) = 5.7, F-sat <= 1.67 rejected at power 1.0; Thornalley convex; Davies acetate order 1.15; Zyzak linear)
+  and Kallen's saturation is a change of rate-determining step, predicted from buffer-free data within 0.2 dex. The DEV
+  band kappa_P [5, 40] /M (Guan, Davidek, Zyzak, Bell) gives x2 - 9 at 0.2 M: phosphate catalysis is SUFFICIENT for the
+  3 - 6x residual, not shown to occur. Kallen (no catalysis of the attack below pH 5) puts any catalysis in Cao's pot on
+  the Amadori rearrangement. Guan (DEV): acetate / citrate do not speed Amadori decay (<= 0.1x phosphate), while
+  carboxylates speed browning (Saunders, Rizzi): a citrate arm at equal pH separates step-specific phosphate catalysis
+  (citrate = water) from general catalysis (citrate 0.3 - 1x phosphate). P(phosphate catalysis of formation) 0.5, unchanged."
+CF-011_remedy_append: "Add a citrate arm (0.2 M, same in-situ pH) to buffer arm C."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 2. CF-087: append to `tests`; adjust the explanation weights in a note
+CF-087_append_test: >-
+  "resolve2_pyrbuf (2026-11-01): low R in glucose / glycine pots is reproduced by an independent laboratory -- Bemis-Young
+  1993 (UC Davis, glucose + Gly, 120 C) R(2,5) 0.020 / 0.087 at pH 5.97 / 7.0 -- and by the Zhou 2024 SI glycine pot
+  (0.34); Wong 1988 (same UC Davis lab, 1 M NaOH) gives 5.4. Low R with glycine is a condition effect (pH <= 7), not only a
+  low-level artefact: P(low-level data) 0.4 -> 0.2; P(segregated formation / condition-dependent pairing) up."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 3. New entries
+new_entries:
+
+  - id: CF-NEW-1
+    kind: conflict
+    scope: other_lane
+    sources: [kallen1971b, potman1989, davies2005, zyzak1995, thornalley1999, larralde1995, saunders1966]
+    quantity: "concentration law of buffer catalysis (the E5 fix's 'saturating' factor)"
+    observation: >-
+      Kallen 1971b: phosphate catalysis of thiazolidine formation saturates at x3.5 - 5 (half-saturation 17 - 29 mM, pH
+      6.1 - 6.6, 25 C). Potman 1989 (glucose consumption, 100 C, pH 5.6): no saturation to 0.5 M, order 1.34. Davies 2005
+      (acetate, browning, 50 C): order 1.15 - 1.3 to 0.5 M. Zyzak 1995 (fructoselysine decay, 37 C, chelator): linear to
+      0.2 M. Thornalley 1999: convex 10 - 100 mM. Larralde 1995: a linear law k0 + kP [P]. The E5 fix in
+      ENGINE_VS_LITERATURE.md sec. 3 says "saturating".
+    explanations:
+      - "Change of rate-determining step (Kallen's own reading): buffer catalysis is linear in the catalysed dehydration; the plateau is the uncatalysed amine attack, so it is network-specific, not a property of the buffer."
+      - "Buffer binding / catalyst saturation that would apply to every step (the E5 fix as written)."
+    tests:
+      - "resolve2_pyrbuf T1 (Potman TEST, 5-h secant): I(0.5) / I(0.1) = 5.7 (4.6 - 7.3); a Michaelis factor with K <= 0.1 M allows <= 1.67; power 1.0 / 0.0 on synthetic F-lin / F-sat designs."
+      - "resolve2_pyrbuf T4 (Kallen TEST): the buffer-free attack plateau (Fig. 6, pH 4.5 - 5.2, 10^3.4 per free base) predicts the phosphate ceilings x3.6 / 3.9 / 6.8 at pH 6.12 / 6.31 / 6.62 vs x5 / 3.5 / 4.3 observed (+0.14 / -0.04 / -0.20 dex)."
+      - "resolve2_pyrbuf T5 (Thornalley TEST): GO, 3-DG and MGO convex in phosphate (50 mM point 15 - 28 % below the 10 - 100 mM chord)."
+    status: explained
+    remedy: >-
+      E5's factor is linear per step, k_s = k_s,u (1 + sum_b kappa_{s,b} c_b), with no Michaelis term; apparent
+      saturation only where the network holds an uncatalysed preceding step (the thiazolidine attack). Rewrite the E5 fix
+      text (ENGINE_VS_LITERATURE.md sec. 3 row 5; atlas P2). Red team before any code (A3).
+    affects:
+      - {file: docs/reference/pathway_atlas/ENGINE_VS_LITERATURE.md, symbol: "E5 fix: saturating, fading at pH 8"}
+      - potman1989_fig4_5_phosphate_dose_series
+      - kallen1971b_fig7_phosphate_catalysis_saturation
+      - davies2005_tab1_acetate_ladder_late_browning_rate
+
+  - id: CF-NEW-2
+    kind: conflict
+    scope: other_lane
+    sources: [saunders1966, rizzi2004, davies2005, guan2012, bell1997, larralde1995]
+    quantity: "carboxylate (and bicarbonate) catalysis relative to phosphate, per mole, by response"
+    observation: >-
+      Citrate ~ phosphate per mole and acetate ~1/3 on browning at pH 3, ~121 C (Saunders); citrate 0.45, succinate 0.30,
+      acetate 0.12 on A420 at pH 7.3, ~100 C (Rizzi); 0.5 M acetate browns glucose without amine at 50 C but citrate does
+      not (Davies); bicarbonate 0.23x phosphate on amine-free ribose loss, 100 C (Larralde, recomputed from 0.52 and the
+      rate law); but acetate and citrate leave proline-ARP decay at the water rate at 110 - 130 C, pH 5.8 (Guan: kappa
+      1.6 / 3.4 vs phosphate 28 - 38 /M), and citrate leaves glycine loss at the floor at 25 C (Bell).
+    explanations:
+      - "Step-specific selectivity: carboxylates and bicarbonate catalyse free-sugar enolisation / late browning, not the Amadori decay (P 0.6; the Amadori-decay null is one lab, Guan)."
+      - "Temperature: carboxylate catalysis has a higher barrier (active >= 100 C) (P 0.2; Guan's null is at 110 - 130 C, against it)."
+      - "pH / base fraction (citrate pKa3 6.4, acetate 4.76) and response (browning integrates several steps) (P 0.2)."
+    tests:
+      - "resolve2_pyrbuf (results.md Q1 specificity table and negative control)."
+    status: open
+    remedy: >-
+      Until a second laboratory measures carboxylate catalysis of an Amadori step: Amadori-step factors for carboxylates
+      in [0, 3] /M; free-sugar steps rho x kappa_P, rho in [0.1, 1]. Decider: a citrate arm on fed DFG decay at pH-stat
+      (Davidek's design) and in CF-011's buffer arm C.
+    affects: [guan2012_fig5a_dfp_time_courses_buffer_contrast, saunders1966_tab2_buffer_identity_ph3_invert_sugar_glycine, davies2005_fig3_amine_free_acetate_vs_citrate]
+
+  - id: CF-NEW-3
+    kind: code_mismatch
+    scope: other_lane
+    sources: [piloty1979, sedehi2013]
+    quantity: "amino-acid consumption by fed methylglyoxal at 100 C (non-Strecker dicarbonyl-amine adducts)"
+    observation: >-
+      Piloty & Baltes 1979 (MGO 312 mM + 13 amino acids at 16 mM each, 0.4 M phosphate, 100 C, 3 h): glycine loss 85 / 86 /
+      82 % at pH 4.52 / 6.97 / 9.50. The engine in the same pot (clamped pH; the shipped slope and s = 0) loses 1.9e-5 to
+      1.6e-3 of its glycine (1e-5 to 1e-3 of the measured loss). Its only MGO + amine step is the Strecker r_mgo_ak
+      (k 3e-8 L/(mmol min)); r_mgo_mel consumes no amine. Implied total consumption constant >= 3.5e-5 L/(mmol min),
+      ~1e3x. The Sedehi 2013 analogue (glyoxal + glycine) is also ~1e3x the engine's k_go_ak.
+    explanations:
+      - "The engine omits reversible / irreversible dicarbonyl-amine adducts (imines, carbinolamines, imidazoles, hydroimidazolones), which compete for the amine and the dicarbonyl."
+      - "Piloty's mixture (13 amino acids, Arg / Lys cross-linking) and 0.4 M phosphate inflate consumption relative to a single-amine pot (a factor, not 1e3)."
+    tests:
+      - "resolve2_pyrbuf Q2-b (piloty_engine_probe.json; control without MGO at the same floor)."
+    status: open
+    remedy: >-
+      Not a Strecker-step error. A declared caveat on amine-limited, dicarbonyl-rich pots (fed MGO / GO; low-amine
+      foods): the engine's amine and dicarbonyl budgets omit adduct consumption. Candidate A3 step: MGO + AA -> adduct,
+      with Piloty's pH-flat law as the shape check (consumption, not aldehyde).
+    affects:
+      - piloty1979_tab4_mgo_diacetyl_amino_acid_loss_ph_100c
+      - {file: src/kinetic_core/network.py, symbol: r_mgo_ak}
+      - {file: src/kinetic_core/network.py, symbol: r_mgo_mel}
+
+  - id: CF-NEW-4
+    kind: conflict
+    scope: other_lane
+    sources: [wolf1977, nguyen2016]
+    quantity: "available-lysine loss on repeated heating with glucose in excess (soy isolate, a_w 0.65, 125 C)"
+    observation: >-
+      Wolf, Thompson & Reineccius 1977: one 2-min pass at 125 C takes lysine 9.6 -> 5.0 mg/g; a second pass at the same
+      a_w and with glucose still ~3x in molar excess removes nothing (5.3 -> 4.8 / 5.3 -> 5.3 / 4.8 -> 5.1, n.s.). With the
+      frozen B20 constants, matched to pass 1, the engine loses another 36 % on pass 2 (shipped, lysine-returning
+      r_flp_decay; pseudo-steady free fraction 0.21) and 48 % with Nguyen's no-return structure.
+    explanations:
+      - "An inaccessible lysine fraction (~50 % at a_w 0.65 in a dried soy isolate) (P 0.5)."
+      - "FDNB 'available lysine' counts part of the bound Amadori lysine as available, so the measured loss stalls (P 0.35)."
+      - "Glucose depleted by other routes (P 0.1; 3.4 mol / mol at the start, ~14 % used by pass 1)."
+    tests:
+      - "resolve2_pyrbuf Q4 (results_tests.json Q4_wolf)."
+    status: open
+    remedy: >-
+      Neither CF-072 remedy produces the plateau, so Wolf does not decide CF-072. Download Wolf 1977a (DOI
+      10.1111/j.1365-2621.1977.tb08420.x): its glucose-level series separates the accessible-pool reading (plateau depth
+      independent of glucose) from the assay reading (depth tracking FLP). Meanwhile flag repeated or long dry heating
+      of protein with excess sugar: the engine over-predicts lysine loss after the first ~50 %.
+    affects:
+      - wolf1977_tab1_tab2_soy_available_lysine_plateau_reprocessing
+      - {file: src/kinetic_core/network.py, symbol: r_glc_lysp}
+      - {file: src/kinetic_core/network.py, symbol: r_flp_decay}
+
+  - id: CF-NEW-5
+    kind: self_contradiction
+    scope: other_lane
+    sources: [lee2024]
+    quantity: "methylpyrazine level in the oven vapour of the G + L sponge cake (Fig. 2 vs Sec. 3.2.2)"
+    observation: >-
+      Sec. 3.2.2 says MP "displayed the lowest concentrations of all pyrazines". Fig. 2's MPZ panel (ticks 0.00 / 0.05 /
+      0.10 / 0.15) puts MPZ highest at 200 C (0.098 at 54 min, 4 - 7x the others). R = MPZ^2 / (PZ DMP) is 15 - 26 at face
+      value and 0.15 - 0.26 with MPZ / 10. The first exceeds the pairing bound R <= 4; the second is below CF-087's floor
+      0.4.
+    explanations:
+      - "The text is wrong (the figure is the measurement)."
+      - "The MPZ panel's axis is 10x too high."
+    tests:
+      - "resolve2_pyrbuf Q3: both readings fail a pairing bound, in opposite directions; R RATIOS (pool-invariance test) are unaffected by the x10."
+    status: open
+    remedy: "Every E13 / E14 score reports both readings; author request (Rega / Bonazzi) for the MPZ calibration."
+    affects: [lee2024_fig2_fig3_oven_vapour_volatiles]
+
+  - id: CF-NEW-6
+    kind: conflict
+    scope: corpus
+    sources: [wong1988, shibamoto1976]
+    quantity: "R = MPZ^2 / (PZ x 2,5-DMP), glucose + ammonia, UC Davis (one laboratory)"
+    observation: >-
+      Wong & Bernhard 1988: glucose 1 M + NH4OH 8 M + NaOH 1 M, 120 C, 4 h, capillary GC, measured RFs: R 14.6
+      (+-0.12 dex). Shibamoto & Bernhard 1976: glucose 1 M + NH3 8 M, 100 - 140 C, 2 - 4 h, packed Carbowax: R 357 - 522
+      (+ NaOH 432 - 534). That is a 1.4 - 1.6 dex gap. Shibamoto's MPZ is 74 - 92 % of the pyrazines in every hot pot.
+    explanations:
+      - "Packed-column co-elution inflating the MPZ peak, or literature RFs (Shibamoto) vs measured RFs (Wong)."
+      - "NaOH 1 M / basicity: against, since Bemis-Young (same lab) shows R rising with pH and Shibamoto's + NaOH arm also rises."
+      - "Work-up (continuous vs batch CH2Cl2 extraction) or NH3 loss on reflux (open 100 C pots vs Wong's 120 C)."
+    tests: []
+    status: open
+    remedy: >-
+      Read Shibamoto's MPZ as a possible upper bound until resolved. Shibamoto's TIME course (one method) stays usable
+      for pool-invariance tests (ratios); its levels do not enter a P0 / P1 level score unweighted.
+    affects: [wong1988_tab2_pyrazine_shares_by_nitrogen_source, shibamoto1976_tab2_glucose_ammonia_ladder_and_time_series_pyrazines]
+
+  - id: CF-NEW-7
+    kind: condition_error
+    scope: corpus
+    sources: [huber1990, huyghuesdespointes1996]
+    quantity: "atlas family of the 1-amino-1,4-dideoxy-2,3-hexodiulose route"
+    observation: >-
+      Atlas F15 (redox) carries the McGill cell "~5 % via the 1-amino-1,4-dideoxy-2,3-hexodiulose RA[4,5] (B)". Huber &
+      Ledl 1990 show the compound is a C-4 beta-elimination product of the 2,3-enediol, amine retained: the 1-deoxyosone's
+      oxidation level, no reductant.
+    explanations: ["A family mis-assignment in the atlas build."]
+    tests: ["huber1990 dossier sec. 1, answer 1 (structure; P 0.85)."]
+    status: error_confirmed
+    remedy: "Move the RA[4,5] share to F07; keep the pyruvaldehyde -> 1,2-propanediol redox side experiment in F15 (doc_corrections.md item A1)."
+    affects: [{file: docs/reference/pathway_atlas/F15_redox_reductones.yml, symbol: "McGill (Yaylayan) cell"}]
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 4. experiment_register.yml: a new entry
+experiment_entry:
+  - id: EX-NEW
+    date: "2026-11-01"
+    kind: probe
+    question: "Batch-2 resolution (resolve2_pyrbuf): the form of buffer catalysis (E5 / CF-011); whether Piloty 1979 discriminates E4's step vs supply; which pyrazine rivals produce condition-dependent R; three early-step items (Huber F15 -> F07, the a_w maximum, Wolf's lysine plateau)."
+    hypothesis: "Neutral; rivals, bands (DEV / unsplit only), decision rules and probabilities in the prereg before any number."
+    design: "Arithmetic on dossier / keyed TEST tables (Potman, Larralde, Kallen, Thornalley for E5; Lee 2024 for E13) with a power check for the form test and a negative control (carboxylates on Amadori decay). An in-memory engine probe of Piloty's pot under the shipped slope and s = 0, with a no-MGO control. A pool-invariance test of R on time courses and supply arms (Shibamoto 1976, Koehler 1969, Lee 2024)."
+    expected: "see prereg.md"
+    artifacts: [docs/history/conflict_resolution_2026-11-01/resolve2_pyrbuf/prereg.md, docs/history/conflict_resolution_2026-11-01/resolve2_pyrbuf/results.md]
+    commit: pending
+    verdict: partial
+    conclusion: >-
+      E5: buffer catalysis is linear per step (Potman TEST, power 1.0); Kallen's saturation is a change of rate-determining
+      step (predicted within 0.2 dex); selectivity is step-specific (P 0.6: carboxylates speed browning and free-sugar
+      loss, not Amadori decay); the pH 8 'fade' is the uncatalysed rate rising (Potman pH 9 reproduced, -0.03 dex);
+      browning is not the Amadori step. E4: Piloty is not discriminating (the engine's Strecker step is <= 1e-3 of its
+      measured consumption under both rivals); it exposes a missing dicarbonyl-amine adduct sink (~1e3x). E13 / E14: P0
+      rejected (5 labs); a lower-order extra MPZ route rejected by pool invariance (Shibamoto time course, |z| 3 - 6;
+      Koehler); pair-specific constants survive, separable from a second-order extra route only by labels; Lee 2024 fails
+      the pairing bounds at both readings of its x10 conflict. Huber: F15 -> F07. a_w: Cui is end-point, no conflict.
+      Wolf: neither glycation structure gives the plateau.
+    follow_up: >-
+      A3: E5 as a linear per-step factor with the proposed bands (red team first); a citrate arm in CF-011's buffer arm C
+      and on fed DFG decay; the E4 designed pot must measure the aldehyde, not amino-acid loss; download Wolf 1977a;
+      Zhou 2024 raw ions (EX-052 open).

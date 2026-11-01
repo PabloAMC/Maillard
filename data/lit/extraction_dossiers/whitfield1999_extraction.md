@@ -490,3 +490,10 @@ mol % = µg / (MW x 0.8764).
     absolute solution concentration; any oxygen or headspace-composition variation; any statement of
     the ampule's headspace volume or atmosphere beyond "flame sealed"; and any supplementary
     material.
+11. **[!] Attribution of MFT to van den Ouweland & Peer 1975 (added 2026-11-01; CF-092).** The introduction and the
+    discussion (pp. 1629-1630) both attribute MFT to van den Ouweland & Peer 1975 (the discussion as a major product
+    of HMF + H2S). Their Table I lists no MFT (peak 3 is 4-mercapto-2-methylfuran); their Fig. 4 POSTULATES the NF ->
+    MFT pathway. So the attribution overstates a proposed pathway as an identification (P 0.65; P 0.3 that the 1975
+    paper did make MFT and misassigned it). This paper's Table 1 reference column is a spectral-identification
+    reference (beside "MS + LRI"), not an attribution of who reported MFT, so it cannot be read against the
+    introduction.

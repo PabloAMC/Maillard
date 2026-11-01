@@ -4,9 +4,9 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-01",
     "git": {
-      "commit": "f26750bb9150f0cb9416d9e460322dd0675e3cab",
-      "short": "f26750bb",
-      "branch": "cf077-pyrazine-cross-pair-factor",
+      "commit": "461fdf841ebb9880fe39e6809eeb1fd0972c2b49",
+      "short": "461fdf84",
+      "branch": "ingest-2026-11-01",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "7c3810b4e6ab7b18101940400f8464b3719750597ac003fc5b893183992d6365"
+        "sha256": "905ee33cd5347124736c80a068f4dd0f1c3fc6f34e621785bdee3e6e35d6e7ff"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -45,27 +45,27 @@
       },
       {
         "path": "data/lit/measurement_ledger/acrylamide.yml",
-        "sha256": "ef9631929204566dabaa3b51717d94bbc57c0d381a1712a1a227e4d3345d1df6"
+        "sha256": "c40dc445266768110627b8adef5cda0cb48ec195be2d20736237c2a40d7c36fe"
       },
       {
         "path": "data/lit/measurement_ledger/aroma_other.yml",
-        "sha256": "2ed2bcfbc4bae577cf024dbc73094bf4f3f4e4f7cfc57050122ceb36ccb8c5e0"
+        "sha256": "e674792f353f5a00cd2acb4d5567c0d01d98a3c2092f65991d61903d0561716c"
       },
       {
         "path": "data/lit/measurement_ledger/lipid.yml",
-        "sha256": "331b519df0fe942793c1b38d0e2437a9ba32ac496dc43e12f371edee534bab58"
+        "sha256": "f9ba22a96c0629f980c7bacbd0383ab4706e4b26522cd3108bf8edbd698c4917"
       },
       {
         "path": "data/lit/measurement_ledger/matrix.yml",
-        "sha256": "c1b99a1aabba9072f03127e317c897edf985f4af60bdce5e84917eab22a501d9"
+        "sha256": "2c3df12cf72501671f24998df40b888180d06b3a574b7c90df4cec9cfce4f4cb"
       },
       {
         "path": "data/lit/measurement_ledger/sulfur.yml",
-        "sha256": "31724320e27e64b804ed2e59798c95b9fc2bac764f46144e67c801cd2e6dc846"
+        "sha256": "9b264c1ae69aac1c22c8cae25f17ba501e1394649dc5ef0d368e22344477214b"
       },
       {
         "path": "data/lit/measurement_ledger/trunk.yml",
-        "sha256": "a84a95cc43ef0ac3b233fbaff3b6a54dad64fb24b5d00e430db9b493a426c26a"
+        "sha256": "8e00a830a5b8e8ea357e4333b8c228aba8ad09529b7aa339d010c3711a1fbc74"
       }
     ]
   },
@@ -1545,8 +1545,8 @@
       },
       "ledger": {
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "PENT": {
@@ -1555,8 +1555,8 @@
           "used_by_the_model": 5
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -1594,13 +1594,13 @@
       },
       "ledger": {
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "PENT": {
@@ -1648,8 +1648,8 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "DDP": {
@@ -1658,8 +1658,8 @@
           "used_by_the_model": 0
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -1721,8 +1721,8 @@
           "used_by_the_model": 0
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -1801,12 +1801,12 @@
       },
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "NF": {
-          "data_sets": 32,
+          "data_sets": 34,
           "time_series": 9,
           "used_by_the_model": 7
         }
@@ -1849,8 +1849,8 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "FRAG_C": {
@@ -1904,8 +1904,8 @@
           "used_by_the_model": 5
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -1945,8 +1945,8 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "FRAG_C": {
@@ -1960,7 +1960,7 @@
           "used_by_the_model": 0
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         }
@@ -2001,7 +2001,7 @@
           "used_by_the_model": 0
         },
         "NF": {
-          "data_sets": 32,
+          "data_sets": 34,
           "time_series": 9,
           "used_by_the_model": 7
         }
@@ -2043,7 +2043,7 @@
           "used_by_the_model": 0
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         }
@@ -2080,13 +2080,13 @@
       },
       "ledger": {
         "FUR": {
-          "data_sets": 113,
-          "time_series": 30,
+          "data_sets": 121,
+          "time_series": 32,
           "used_by_the_model": 13
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -2126,8 +2126,8 @@
           "used_by_the_model": 0
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -2166,8 +2166,8 @@
       },
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "PENT": {
@@ -2212,8 +2212,8 @@
           "used_by_the_model": 0
         },
         "FUR": {
-          "data_sets": 113,
-          "time_series": 30,
+          "data_sets": 121,
+          "time_series": 32,
           "used_by_the_model": 13
         }
       },
@@ -2247,17 +2247,17 @@
       },
       "ledger": {
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "FUR": {
-          "data_sets": 113,
-          "time_series": 30,
+          "data_sets": 121,
+          "time_series": 32,
           "used_by_the_model": 13
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         }
@@ -2296,17 +2296,17 @@
       },
       "ledger": {
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         },
         "NF": {
-          "data_sets": 32,
+          "data_sets": 34,
           "time_series": 9,
           "used_by_the_model": 7
         }
@@ -2353,7 +2353,7 @@
           "used_by_the_model": 0
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         }
@@ -2390,17 +2390,17 @@
       },
       "ledger": {
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "FUR": {
-          "data_sets": 113,
-          "time_series": 30,
+          "data_sets": 121,
+          "time_series": 32,
           "used_by_the_model": 13
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         }
@@ -2439,8 +2439,8 @@
       },
       "ledger": {
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "FRAG_C": {
@@ -2484,8 +2484,8 @@
       },
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "HA": {
@@ -2494,8 +2494,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         }
       },
@@ -2534,8 +2534,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         }
       },
@@ -2569,7 +2569,7 @@
       },
       "ledger": {
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         },
@@ -2579,7 +2579,7 @@
           "used_by_the_model": 5
         },
         "NF": {
-          "data_sets": 32,
+          "data_sets": 34,
           "time_series": 9,
           "used_by_the_model": 7
         }
@@ -2615,8 +2615,8 @@
       },
       "ledger": {
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "FRAG_C": {
@@ -2660,8 +2660,8 @@
       },
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "PTR": {
@@ -2700,8 +2700,8 @@
       },
       "ledger": {
         "ACTZ": {
-          "data_sets": 27,
-          "time_series": 7,
+          "data_sets": 28,
+          "time_series": 8,
           "used_by_the_model": 0
         },
         "CBX": {
@@ -2710,13 +2710,13 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         }
       },
@@ -2805,7 +2805,7 @@
           "used_by_the_model": 0
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         }
@@ -2845,12 +2845,12 @@
           "used_by_the_model": 0
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         }
@@ -2888,12 +2888,12 @@
       },
       "ledger": {
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "FFTD": {
-          "data_sets": 13,
+          "data_sets": 15,
           "time_series": 8,
           "used_by_the_model": 1
         },
@@ -2940,12 +2940,12 @@
       },
       "ledger": {
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         },
         "MFTD": {
-          "data_sets": 38,
+          "data_sets": 45,
           "time_series": 9,
           "used_by_the_model": 7
         },
@@ -2997,12 +2997,12 @@
           "used_by_the_model": 0
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         }
@@ -3040,13 +3040,13 @@
       },
       "ledger": {
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         },
         "MP": {
@@ -3129,8 +3129,8 @@
       },
       "ledger": {
         "ACTZ": {
-          "data_sets": 27,
-          "time_series": 7,
+          "data_sets": 28,
+          "time_series": 8,
           "used_by_the_model": 0
         },
         "FRAG_C": {
@@ -3184,7 +3184,7 @@
           "used_by_the_model": 0
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         },
@@ -3225,13 +3225,13 @@
       },
       "ledger": {
         "DMHF": {
-          "data_sets": 65,
+          "data_sets": 69,
           "time_series": 11,
           "used_by_the_model": 14
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         }
       },
@@ -3319,7 +3319,7 @@
           "used_by_the_model": 0
         },
         "MFTD": {
-          "data_sets": 38,
+          "data_sets": 45,
           "time_series": 9,
           "used_by_the_model": 7
         }
@@ -3354,7 +3354,7 @@
       },
       "ledger": {
         "FFTD": {
-          "data_sets": 13,
+          "data_sets": 15,
           "time_series": 8,
           "used_by_the_model": 1
         },
@@ -3392,8 +3392,8 @@
       "where": null,
       "ledger": {
         "Glc": {
-          "data_sets": 99,
-          "time_series": 50,
+          "data_sets": 109,
+          "time_series": 53,
           "used_by_the_model": 22
         },
         "Gly": {
@@ -3466,8 +3466,8 @@
           "used_by_the_model": 16
         },
         "Glc": {
-          "data_sets": 99,
-          "time_series": 50,
+          "data_sets": 109,
+          "time_series": 53,
           "used_by_the_model": 22
         }
       },
@@ -3500,8 +3500,8 @@
           "used_by_the_model": 16
         },
         "Glc": {
-          "data_sets": 99,
-          "time_series": 50,
+          "data_sets": 109,
+          "time_series": 53,
           "used_by_the_model": 22
         }
       },
@@ -3539,8 +3539,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 66,
-          "time_series": 31,
+          "data_sets": 75,
+          "time_series": 32,
           "used_by_the_model": 17
         }
       },
@@ -3568,7 +3568,7 @@
       "where": null,
       "ledger": {
         "FA": {
-          "data_sets": 29,
+          "data_sets": 33,
           "time_series": 17,
           "used_by_the_model": 4
         },
@@ -3578,8 +3578,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 66,
-          "time_series": 31,
+          "data_sets": 75,
+          "time_series": 32,
           "used_by_the_model": 17
         }
       },
@@ -3622,8 +3622,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         }
       },
@@ -3689,7 +3689,7 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 50,
+          "data_sets": 53,
           "time_series": 25,
           "used_by_the_model": 5
         },
@@ -3742,8 +3742,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 66,
-          "time_series": 31,
+          "data_sets": 75,
+          "time_series": 32,
           "used_by_the_model": 17
         }
       },
@@ -3770,12 +3770,12 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 50,
+          "data_sets": 53,
           "time_series": 25,
           "used_by_the_model": 5
         },
         "FA": {
-          "data_sets": 29,
+          "data_sets": 33,
           "time_series": 17,
           "used_by_the_model": 4
         },
@@ -3818,8 +3818,8 @@
           "used_by_the_model": 0
         },
         "Glc": {
-          "data_sets": 99,
-          "time_series": 50,
+          "data_sets": 109,
+          "time_series": 53,
           "used_by_the_model": 22
         }
       },
@@ -3844,7 +3844,7 @@
       "where": null,
       "ledger": {
         "FA": {
-          "data_sets": 29,
+          "data_sets": 33,
           "time_series": 17,
           "used_by_the_model": 4
         },
@@ -3875,7 +3875,7 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 50,
+          "data_sets": 53,
           "time_series": 25,
           "used_by_the_model": 5
         },
@@ -3908,13 +3908,13 @@
       "where": null,
       "ledger": {
         "Glc": {
-          "data_sets": 99,
-          "time_series": 50,
+          "data_sets": 109,
+          "time_series": 53,
           "used_by_the_model": 22
         },
         "TDG": {
-          "data_sets": 66,
-          "time_series": 31,
+          "data_sets": 75,
+          "time_series": 32,
           "used_by_the_model": 17
         }
       },
@@ -3947,8 +3947,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 66,
-          "time_series": 31,
+          "data_sets": 75,
+          "time_series": 32,
           "used_by_the_model": 17
         }
       },
@@ -3980,7 +3980,7 @@
           "used_by_the_model": 0
         },
         "HMF": {
-          "data_sets": 53,
+          "data_sets": 56,
           "time_series": 16,
           "used_by_the_model": 16
         }
@@ -4041,7 +4041,7 @@
       "where": null,
       "ledger": {
         "HMF": {
-          "data_sets": 53,
+          "data_sets": 56,
           "time_series": 16,
           "used_by_the_model": 16
         },
@@ -4112,13 +4112,13 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         },
         "TDG": {
-          "data_sets": 66,
-          "time_series": 31,
+          "data_sets": 75,
+          "time_series": 32,
           "used_by_the_model": 17
         }
       },
@@ -4151,7 +4151,7 @@
           "used_by_the_model": 0
         },
         "HMF": {
-          "data_sets": 53,
+          "data_sets": 56,
           "time_series": 16,
           "used_by_the_model": 16
         }
@@ -4211,7 +4211,7 @@
           "used_by_the_model": 0
         },
         "DMHF": {
-          "data_sets": 65,
+          "data_sets": 69,
           "time_series": 11,
           "used_by_the_model": 14
         }
@@ -4244,8 +4244,8 @@
           "used_by_the_model": 0
         },
         "TDG": {
-          "data_sets": 66,
-          "time_series": 31,
+          "data_sets": 75,
+          "time_series": 32,
           "used_by_the_model": 17
         }
       },
@@ -4344,12 +4344,12 @@
           "used_by_the_model": 0
         },
         "GSH": {
-          "data_sets": 36,
+          "data_sets": 38,
           "time_series": 25,
           "used_by_the_model": 0
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         }
@@ -4378,8 +4378,8 @@
       "where": null,
       "ledger": {
         "ARP": {
-          "data_sets": 36,
-          "time_series": 29,
+          "data_sets": 41,
+          "time_series": 33,
           "used_by_the_model": 0
         },
         "CBX": {
@@ -4388,8 +4388,8 @@
           "used_by_the_model": 0
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -4427,8 +4427,8 @@
       "where": null,
       "ledger": {
         "ARP": {
-          "data_sets": 36,
-          "time_series": 29,
+          "data_sets": 41,
+          "time_series": 33,
           "used_by_the_model": 0
         },
         "CBX": {
@@ -4447,8 +4447,8 @@
           "used_by_the_model": 0
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -4476,8 +4476,8 @@
       "where": null,
       "ledger": {
         "ARP": {
-          "data_sets": 36,
-          "time_series": 29,
+          "data_sets": 41,
+          "time_series": 33,
           "used_by_the_model": 0
         },
         "CBX": {
@@ -4496,8 +4496,8 @@
           "used_by_the_model": 0
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -4525,8 +4525,8 @@
       "where": null,
       "ledger": {
         "ARP": {
-          "data_sets": 36,
-          "time_series": 29,
+          "data_sets": 41,
+          "time_series": 33,
           "used_by_the_model": 0
         },
         "CBX": {
@@ -4535,8 +4535,8 @@
           "used_by_the_model": 0
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -4577,13 +4577,13 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -4597,7 +4597,7 @@
           "used_by_the_model": 0
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         }
@@ -4632,8 +4632,8 @@
           "used_by_the_model": 0
         },
         "Glc": {
-          "data_sets": 99,
-          "time_series": 50,
+          "data_sets": 109,
+          "time_series": 53,
           "used_by_the_model": 22
         },
         "HA": {
@@ -4642,8 +4642,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         }
       },
@@ -4677,13 +4677,13 @@
           "used_by_the_model": 0
         },
         "FUR": {
-          "data_sets": 113,
-          "time_series": 30,
+          "data_sets": 121,
+          "time_series": 32,
           "used_by_the_model": 13
         },
         "Glc": {
-          "data_sets": 99,
-          "time_series": 50,
+          "data_sets": 109,
+          "time_series": 53,
           "used_by_the_model": 22
         }
       },
@@ -4716,8 +4716,8 @@
           "used_by_the_model": 0
         },
         "ARP": {
-          "data_sets": 36,
-          "time_series": 29,
+          "data_sets": 41,
+          "time_series": 33,
           "used_by_the_model": 0
         },
         "CBX": {
@@ -4760,12 +4760,12 @@
       "where": null,
       "ledger": {
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         },
         "NF": {
-          "data_sets": 32,
+          "data_sets": 34,
           "time_series": 9,
           "used_by_the_model": 7
         },
@@ -4927,7 +4927,7 @@
           "used_by_the_model": 0
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         },
@@ -5010,7 +5010,7 @@
           "used_by_the_model": 0
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         }
@@ -5073,8 +5073,8 @@
       "where": null,
       "ledger": {
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "PENT": {
@@ -5083,8 +5083,8 @@
           "used_by_the_model": 5
         },
         "TTCA": {
-          "data_sets": 25,
-          "time_series": 18,
+          "data_sets": 29,
+          "time_series": 20,
           "used_by_the_model": 4
         }
       },
@@ -5118,8 +5118,8 @@
           "used_by_the_model": 0
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -5138,8 +5138,8 @@
           "used_by_the_model": 0
         },
         "TTCA": {
-          "data_sets": 25,
-          "time_series": 18,
+          "data_sets": 29,
+          "time_series": 20,
           "used_by_the_model": 4
         }
       },
@@ -5179,7 +5179,7 @@
           "used_by_the_model": 0
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         }
@@ -5188,11 +5188,12 @@
         "MFT"
       ],
       "conflicts": [
-        "CF-006"
+        "CF-006",
+        "CF-081"
       ],
       "unclear": true,
       "why_unclear": [
-        "conflicts: CF-006"
+        "conflicts: CF-006, CF-081"
       ]
     },
     {
@@ -5218,8 +5219,8 @@
           "used_by_the_model": 0
         },
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "MELE": {
@@ -5232,11 +5233,12 @@
         "FFT"
       ],
       "conflicts": [
-        "CF-006"
+        "CF-006",
+        "CF-081"
       ],
       "unclear": true,
       "why_unclear": [
-        "conflicts: CF-006"
+        "conflicts: CF-006, CF-081"
       ]
     },
     {
@@ -5263,7 +5265,7 @@
           "used_by_the_model": 0
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         }
@@ -5294,8 +5296,8 @@
           "used_by_the_model": 0
         },
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "MELE": {
@@ -5327,8 +5329,8 @@
       "where": null,
       "ledger": {
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "PRB": {
@@ -5365,7 +5367,7 @@
       "where": null,
       "ledger": {
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         },
@@ -5401,7 +5403,7 @@
       "where": null,
       "ledger": {
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         },
@@ -5432,8 +5434,8 @@
       "where": null,
       "ledger": {
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "OLG": {
@@ -5470,7 +5472,7 @@
           "used_by_the_model": 4
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         },
@@ -5583,8 +5585,8 @@
           "used_by_the_model": 0
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -5631,8 +5633,8 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "FRAG_N": {
@@ -5641,7 +5643,7 @@
           "used_by_the_model": 0
         },
         "HMF": {
-          "data_sets": 53,
+          "data_sets": 56,
           "time_series": 16,
           "used_by_the_model": 16
         },
@@ -5675,7 +5677,7 @@
       "where": null,
       "ledger": {
         "DMHF": {
-          "data_sets": 65,
+          "data_sets": 69,
           "time_series": 11,
           "used_by_the_model": 14
         },
@@ -5685,7 +5687,7 @@
           "used_by_the_model": 0
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         }
@@ -5759,8 +5761,8 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "FRAG_C": {
@@ -5814,8 +5816,8 @@
       "where": null,
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -5864,7 +5866,7 @@
           "used_by_the_model": 0
         },
         "NF": {
-          "data_sets": 32,
+          "data_sets": 34,
           "time_series": 9,
           "used_by_the_model": 7
         },
@@ -5905,12 +5907,12 @@
       "where": null,
       "ledger": {
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         },
         "MFTD": {
-          "data_sets": 38,
+          "data_sets": 45,
           "time_series": 9,
           "used_by_the_model": 7
         }
@@ -5941,12 +5943,12 @@
       "where": null,
       "ledger": {
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "FFTD": {
-          "data_sets": 13,
+          "data_sets": 15,
           "time_series": 8,
           "used_by_the_model": 1
         }
@@ -5977,8 +5979,8 @@
       "where": null,
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -5995,9 +5997,13 @@
       "species_measured_over_time": [
         "DPO"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-081"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-081"
+      ]
     },
     {
       "reaction": "ch_mele_from_tdp",
@@ -6027,17 +6033,21 @@
           "used_by_the_model": 0
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
       "species_measured_over_time": [
         "TDP"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-081"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-081"
+      ]
     },
     {
       "reaction": "ch_mele_from_ddp",
@@ -6073,9 +6083,13 @@
         }
       },
       "species_measured_over_time": [],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-081"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-081"
+      ]
     },
     {
       "reaction": "ch_add_mft_dpo",
@@ -6095,8 +6109,8 @@
       "where": null,
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -6105,7 +6119,7 @@
           "used_by_the_model": 0
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         },
@@ -6146,7 +6160,7 @@
           "used_by_the_model": 0
         },
         "MFT": {
-          "data_sets": 166,
+          "data_sets": 176,
           "time_series": 28,
           "used_by_the_model": 31
         },
@@ -6156,8 +6170,8 @@
           "used_by_the_model": 0
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -6187,13 +6201,13 @@
       "where": null,
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "FRAG_C": {
@@ -6233,8 +6247,8 @@
       "where": null,
       "ledger": {
         "FFT": {
-          "data_sets": 161,
-          "time_series": 31,
+          "data_sets": 177,
+          "time_series": 32,
           "used_by_the_model": 30
         },
         "FRAG_C": {
@@ -6248,8 +6262,8 @@
           "used_by_the_model": 0
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -6278,7 +6292,7 @@
       "where": null,
       "ledger": {
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         },
@@ -6288,7 +6302,7 @@
           "used_by_the_model": 5
         },
         "NF": {
-          "data_sets": 32,
+          "data_sets": 34,
           "time_series": 9,
           "used_by_the_model": 7
         },
@@ -6321,8 +6335,8 @@
       "where": null,
       "ledger": {
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "PENT": {
@@ -6331,8 +6345,8 @@
           "used_by_the_model": 5
         },
         "TTCA": {
-          "data_sets": 25,
-          "time_series": 18,
+          "data_sets": 29,
+          "time_series": 20,
           "used_by_the_model": 4
         }
       },
@@ -6364,7 +6378,7 @@
           "used_by_the_model": 0
         },
         "NF": {
-          "data_sets": 32,
+          "data_sets": 34,
           "time_series": 9,
           "used_by_the_model": 7
         }
@@ -6395,12 +6409,12 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         },
         "NF": {
-          "data_sets": 32,
+          "data_sets": 34,
           "time_series": 9,
           "used_by_the_model": 7
         }
@@ -6432,13 +6446,13 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -6470,8 +6484,8 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "FRAG_C": {
@@ -6490,8 +6504,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         }
       },
@@ -6522,8 +6536,8 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "FRAG_C": {
@@ -6542,8 +6556,8 @@
           "used_by_the_model": 0
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -6574,8 +6588,8 @@
           "used_by_the_model": 0
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "FRAG_C": {
@@ -6589,13 +6603,13 @@
           "used_by_the_model": 0
         },
         "H2S": {
-          "data_sets": 34,
+          "data_sets": 35,
           "time_series": 12,
           "used_by_the_model": 1
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         }
       },
@@ -6622,8 +6636,8 @@
       "where": null,
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -6663,8 +6677,8 @@
           "used_by_the_model": 0
         },
         "MGO": {
-          "data_sets": 103,
-          "time_series": 59,
+          "data_sets": 117,
+          "time_series": 61,
           "used_by_the_model": 17
         },
         "PENT": {
@@ -6701,8 +6715,8 @@
           "used_by_the_model": 3
         },
         "TTCA": {
-          "data_sets": 25,
-          "time_series": 18,
+          "data_sets": 29,
+          "time_series": 20,
           "used_by_the_model": 4
         }
       },
@@ -6733,13 +6747,13 @@
           "used_by_the_model": 3
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         }
       },
@@ -6771,13 +6785,13 @@
           "used_by_the_model": 3
         },
         "Cys": {
-          "data_sets": 97,
-          "time_series": 47,
+          "data_sets": 105,
+          "time_series": 50,
           "used_by_the_model": 15
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -6840,8 +6854,8 @@
       "where": null,
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "Gly": {
@@ -6886,8 +6900,8 @@
           "used_by_the_model": 0
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -6912,8 +6926,8 @@
       "where": null,
       "ledger": {
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {
@@ -6968,8 +6982,8 @@
           "used_by_the_model": 0
         },
         "TDP": {
-          "data_sets": 23,
-          "time_series": 14,
+          "data_sets": 26,
+          "time_series": 17,
           "used_by_the_model": 1
         }
       },
@@ -6994,13 +7008,13 @@
       "where": null,
       "ledger": {
         "AA": {
-          "data_sets": 50,
+          "data_sets": 53,
           "time_series": 25,
           "used_by_the_model": 5
         },
         "DPO": {
-          "data_sets": 13,
-          "time_series": 8,
+          "data_sets": 15,
+          "time_series": 10,
           "used_by_the_model": 1
         },
         "FRAG_C": {

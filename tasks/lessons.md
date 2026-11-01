@@ -413,6 +413,30 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Pattern:** twice in one day a branch failed the freshness gate after only register / ledger edits, because `results/validation/sulfur_reaction_evidence.json` hashes `docs/reference/conflicts_register.yml` and `data/lit/measurement_ledger/trunk.yml`.
 - **Rule:** after any edit to either file, run `python scripts/generators/build_sulfur_reaction_evidence.py` before staging (it takes seconds), and `regenerate_signature_records.py --dry-run` lists anything else stale.
 
+## 2026-11-01 — Dossier agents skip the DOI line; check it after every ingestion batch
+- **Pattern:** 9 of 36 new dossiers had no DOI line, although the brief asked for one; the paper registry's "dossiers without a printed DOI" count (30 -> 41) was the only signal.
+- **Rule:** after an ingestion batch, compare that count before and after, and grep each new dossier for a `DOI:` line in its header (before the first `##` / `###`); add missing ones only after a Crossref check.
+
+## 2026-11-01 — `git add -A` swept an agent's half-written files into a commit
+- **Pattern:** a docs-only commit (the queue made private) used `git add -A` while a leave-one-lab-out agent was writing in the same worktree; its unfinished prereg, generator and test were committed and pushed, and the next full suite failed on the undescribed prereg.
+- **Rule:** while any agent may write in a worktree, stage by explicit path (`git add <files>`), never `-A` / `.`; check `git status --short` against the intended file list before committing.
+
+## 2026-11-01 — A red team's number is a lead too
+- **Pattern:** the engine-error red team ranked E4 (the pyrazine pH law) as SUPPORTED on "methylpyrazine pH 7 / 5 = 170 vs Leahy's 14". 14 was pyrazine's ratio; methylpyrazine's is 215, so the shipped engine already matched. The premortem inherited the error, and only the pre-registration agent, reading the table for its test, caught it.
+- **Rule:** before a red team's or reviewer's number orders work or a change, the coordinator checks it against the dossier table (one grep). Reviews reduce error; they do not certify numbers.
+
+## 2026-11-01 — Check the alias table before calling a PDF "wrong"
+- **Pattern:** an agent reported Zhou2023.pdf as "the wrong paper", and I passed it on to the owner as "please replace". data/keys/pdf_dossier_aliases.yml had recorded since 2026-08 that Zhou2023.pdf is Zhu et al. (kafirin) and that the wanted paper is on disk as Zhou2023b.pdf.
+- **Rule:** before telling the owner a file is missing or wrong, grep pdf_dossier_aliases.yml and the dossier's "Source on disk" line, and check +/- 1 year and the b / c suffixes.
+
+## 2026-11-01 — A frozen artifact must be checked against its inputs at freeze time
+- **Pattern:** the benchmark's frozen v1 split was checked by regenerating it from the LIVE cited documents. A legitimate later edit (the owner's decision note appended to the E4 prereg) made the check fail although the split was unchanged.
+- **Rule:** a frozen record checks against `git show <freeze commit>:<input>`; live drift is reported separately and never silently fails or silently passes.
+
+## 2026-11-01 — Check "held-out" against the frozen split files; cumulative yields are not pool sizes
+- **Pattern:** the buffer / pyrazine resolution called Larralde 1995 and Lee 2024 "TEST" for E5 / E13. Neither sits in any frozen split: both are keyed held-out tables, candidate TEST for a later version (contrast-benchmark README sec. 10). In the same record a pool-invariance test read sqrt(cumulative yield) as the instantaneous aminoketone pool and "rejected" the lower-order extra MPZ route at |z| 3-6. A cumulative yield grows even at a constant pool; with rate-based proxies the pools barely moved and the test had no power. The red team caught both, after the claims had reached the draft register text.
+- **Rule:** before writing "TEST", "DEV" or "held-out" for a source, grep `docs/reference/contrast_benchmark/split.yml` and `split_v2_per_change.yml` for its cell or lab and say which version; a keyed table outside them is "keyed held-out (not in a frozen split)". Before using a time course as a pool, check whether the printed quantity is cumulative (yield, amount formed) or standing (concentration at t); a pool test needs the standing quantity or a rate-based proxy, and points in net loss carry no pool information.
+
 ## 2026-11-01 — A worker's switches are not the parent's: post-processing in the parent read a different state
 - **Pattern:** the sub-model fits installed each pot's switches in `run_task`, then predicted the rows in the PARENT. Serially the parent held the last task's state; with `MAILLARD_WORKERS > 1` it held its own, so an entry arm's pH rows were predicted without the trunk solutes the integration had in its charge balance (Cao 2017's hold-out pH, up to 0.14 pH; found by A3 phase 2's serial / fork / persistent comparison). The fitted rows were not pH rows, but every hold-out pH a forked run reported was computed in the wrong state.
 - **Rule:** a result is read in the configuration it was computed in: build each task's `Config` in the caller (`parallel.configured`) and read its result under it (`parallel.run_under`). A check of a parallel path compares serial, forked and persistent runs, not one of them against a record.

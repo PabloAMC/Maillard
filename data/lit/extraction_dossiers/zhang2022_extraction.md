@@ -243,3 +243,191 @@ Tables S1-S5 only.
 5. [!] Table 1a/1b: implausible peanut-oil C20:3/C20:5; γ-linolenic acid appearing only after processing;
    several "± a" typesetting slips (shown as printed).
 6. Fig. 2 values are my read-offs (±0.05 pH, ±0.3 mg/mL); Fig. 4 thiol segments ±15 %.
+
+---
+
+## Supplementary Information (read 2026-11-01)
+
+**Source:** `data/articles/zhang2022_supplementary.docx` (Appendix A; title, authors and affiliations match the
+paper). Read from the docx XML (`word/document.xml`, one row per `<w:tr>`): every data row of Tables S1-S5 has
+exactly 11 cells (No., compound, 1KI, 2KI, then 7 concentration columns), no merged cells in the data body, so
+the column assignment below is unambiguous. Class subtotals were re-summed from the compound rows; all agree
+except the two flagged below. **This supersedes "Supplementary Tables S1-S6 and Fig. S1 not on disk" and "no
+MFT/FFT number" in the header and sec. 4.**
+
+**What the SI prints:** means only, ng/mL, **no SD, no n, no significance letters** anywhere in S1-S5 (the main
+text says "at least three times"). Blank cell = "undetected". Same HS-SPME semi-quant as the main text
+(1,2-dichlorobenzene, RF 1), so flag 3 applies in full.
+
+### S.0 Contents of the supplement
+
+| item | content |
+|---|---|
+| **Tables S1-S5** | Volatiles, one table per oil (S1 corn, S2 peanut, S3 olive, S4 coconut, S5 palm), with 7 columns: oil phase *Raw oil*, *Raw-MR oil*, *ENTH oil*, *ENTH-MR oil*; water phase *No oil* (the shared oil-free control, the same numbers in every table), *W-<oil>-RM*, *W-<oil>-EM*. Classes: aldehydes, ketones, alcohols, acids, esters, lactones, thiols, thiophenes, thiazoles, N-heterocyclics, (pyrazines, S2 only), O-heterocyclics, sulfides; 1KI "Rtx-WAX, commercial database", 2KI from LRI/NIST/literature on 23 listed columns |
+| **Table S6** | PLSR "correlation" summary: per oil and treatment, which X variables (fatty acids, oil aldehydes) go with which Y volatiles. Names only, no coefficients or VIPs [Q]. Sulfur entries: corn — octyl thioglycolate, 2-formyl-2,3-dihydrothiophene, 2-[(methyldithio)methyl]furan, 2,4-dimethylthiazole; ENTH-corn — 1,2-ethanedithiol, *cis*-2-methylcyclopentanethiol; peanut — bis(2-furfuryl) disulfide; ENTH-peanut — m-methoxybenzenethiol, 2-hexylthiophene; coconut (C8-C14 acids) — **3,3'-dithiobis(2-methylfuran)**; palm — two butanethiols. MFT and FFT themselves are not listed for any oil |
+| **Fig. S1** | Caption only read (the seven embedded TIFFs were not viewed): proposed pathways (a) linoleate oxidation, (b) 1-octen-3-one from C20:4, (c) overall oil-Maillard scheme, (d) 2-hexylthiophene / 2-pentyl-2H-thiapyran / 2-pentylpyridine from H2S, NH3 + 2,4-decadienal, (e) 2-butylpyridine from NH3 + 2,4-nonadienal, (f) alkylthiophenes, (g) alkylthiazoles, (h) alkylthios, (i) furanthiols, sulfides, disulfides from the Xyl-Cys Amadori product, (j) thiophene/furan aldehydes and FFT, (k)-(m) methylthiophene aldehydes, 2-acylthiophenes, 2-(hexylthio)thiophene. Schemes, no data [Q] |
+
+### S.1 MFT, FFT and their disulfides, all arms [M] (ng/mL, semi-quant, means, n and SD not printed; "–" = undetected)
+
+| oil (table) | MFT oil Raw-MR | MFT oil ENTH-MR | MFT water RM | MFT water EM | FFT oil Raw-MR | FFT oil ENTH-MR | FFT water RM | FFT water EM |
+|---|---|---|---|---|---|---|---|---|
+| **no oil** (all tables, "No oil") | n/a | n/a | **0.14** | (same) | n/a | n/a | **4.63** | (same) |
+| corn (S1) | – | 0.54 [!] | 0.51 | 0.44 | 52.86 | 58.37 | 20.44 | 29.93 |
+| peanut (S2) | – | 10.18 | 0.22 | 0.67 | 1158.03 | 986.91 | 5.99 | 22.97 |
+| olive (S3) | 13.79 | – | 0.12 | 0.24 | 642.49 | 570.68 | 9.77 | 15.86 |
+| coconut (S4) | 17.76 | 3.39 | 0.56 | 0.05 | 2141.25 | 1517.77 | 5.00 | 5.27 |
+| palm (S5) | – | – | 0.19 | 0.27 | 1406.98 | 1125.90 | 4.29 | 10.16 |
+
+Raw oil and ENTH oil before MR: MFT, FFT, every thiol, thiophene, thiazole and sulfide undetected in all five
+oils (the "Raw oil" / "ENTH oil" columns are blank for every sulfur class), except corn: see flag S-a.
+
+| oil | bis(2-methyl-3-furyl) disulfide ("Furan, 3,3'-dithiobis[2-methyl-") oil RM / oil EM / water RM / water EM | bis(2-furfuryl) disulfide oil RM / oil EM / water RM / water EM |
+|---|---|---|
+| **no oil** | water **2.81** | water **0.36** |
+| corn | – / – / – / 1.30 | 21.33 / 2.81 / – / 0.47 |
+| peanut | – / 20.64 / – / 2.32 | 59.18 / 50.49 / – / 2.03 |
+| olive | – / – / – / 0.86 | 8.23 / 24.18 / – / 0.15 |
+| coconut | 288.49 / 59.74 / 0.31 / 1.40 | 16.76 / 33.58 / – / 0.12 |
+| palm | 21.74 / – / – / 0.57 | 6.71 / 15.28 / – / – |
+
+### S.2 Other sulfur volatiles [M] (ng/mL; class subtotals as printed, re-summed by me)
+
+**No-oil control (water)** — thiols 5.08 (MFT 0.14, "2-methyl-3-pentanethiol" 0.31, FFT 4.63); thiophenes 0.34
+(2-thiophenecarboxaldehyde 0.10, 3-acetyl-2,5-dimethylthiophene 0.20, thieno[2,3-b]thiophene 0.04); thiazoles
+none; sulfides 3.17 (MFT disulfide 2.81, furfuryl disulfide 0.36). Also furfural 6.17, 6-methyl-2-
+pyridinecarbaldehyde 0.14, no pyrazine.
+
+| oil | phase / arm | thiols | thiophenes | thiazoles | sulfides | largest sulfur compounds (ng/mL) |
+|---|---|---|---|---|---|---|
+| corn | oil Raw-MR | 177.02 | 118.36 | 4.40 | 314.04 | 1-(ethenylthio)butane 94.15; 3,6-dimethyl-1,4-dithiane-2,5-dione 85.90; "2-methyl-3-pentanethiol" 84.47; carbomethoxy benzyl disulfide 72.27; m-methoxybenzenethiol 39.69; 2,5-thiophenedicarboxaldehyde 35.37; 2-hexylthiophene 20.36 |
+| corn | oil ENTH-MR | 110.97 [!] | 38.36 | 0.96 | 13.12 | "2-methyl-3-pentanethiol" 48.58; 2-(hexylthio)thiophene 11.74; S-ethyl thioacetate 10.31; 2-thiophenecarboxaldehyde 7.63; 1,2-ethanedithiol 2.00 |
+| corn | water RM / EM | 31.13 / 53.24 | 1.90 / 2.42 | – / 0.14 | 2.07 / 4.11 | "2-methyl-3-pentanethiol" 9.74 / 22.87; dithianedione 0.99 / 1.37; octyl thioglycolate 0.75 / –; 2-pentylpyridine – / 1.01 |
+| peanut | oil Raw-MR | 1896.03 | 466.15 | – | 98.52 | "2-methyl-3-pentanethiol" 719.32; 2-(3-methylbutyl)thiophene 257.06; 3-acetyl-2,5-dimethylthiophene 78.66; furfuryl disulfide 59.18; 2-thiophenecarboxaldehyde 53.73; 2-hexylthiophene 27.33 |
+| peanut | oil ENTH-MR | 1791.25 | 454.98 | – | 96.96 | "2-methyl-3-pentanethiol" 744.45; 3-acetyl-2,5-dimethylthiophene 112.73; 2-(hexylthio)thiophene 84.84; 2-thiophenecarboxaldehyde 84.14; 5-methyl-2-thiophenecarboxaldehyde 67.05; dihydro-2-methyl-3(2H)-thiophenone 60.91 |
+| peanut | water RM / EM | 9.00 / 47.80 | 0.82 / 4.21 | – / 0.41 | 0.93 / 9.07 | "2-methyl-3-pentanethiol" 2.79 / 24.16; S-ethyl thioacetate – / 2.20 |
+| olive | oil Raw-MR | 943.09 | 203.67 | 26.29 | 63.98 | "2-methyl-3-pentanethiol" 286.81; 5-methyl-2-thiophenecarboxaldehyde 70.17; 2-thiophenecarboxaldehyde 58.12; dithianedione 47.73; thiazole 26.29 |
+| olive | oil ENTH-MR | 728.26 | 82.38 | – | 36.71 | "2-methyl-3-pentanethiol" 157.58; 3-acetyl-2,5-dimethylthiophene 46.59; 2-thiophenecarboxaldehyde 35.79 |
+| olive | water RM / EM | 15.75 / 29.96 | 0.90 / 1.30 | – / 0.08 | 0.29 / 1.6 | "2-methyl-3-pentanethiol" 5.86 / 13.86 |
+| coconut | oil Raw-MR | 2824.62 | 299.78 | 22.86 | 366.18 | "2-methyl-3-pentanethiol" 644.48; MFT disulfide 288.49; 2-(hexylthio)thiophene 120.89; 3-acetyl-2,5-dimethylthiophene 73.48; S-ethyl thioacetate 39.73; thiazole 20.61 |
+| coconut | oil ENTH-MR | 1776.81 | 120.41 | – | 350.88 | methyl thioacetate 228.46; "2-methyl-3-pentanethiol" 255.65; MFT disulfide 59.74; 2-(hexylthio)thiophene 45.62 |
+| coconut | water RM / EM | 7.94 / 6.73 | 0.59 / 0.36 | – | 1.36 / 2.43 | methyl thioacetate 0.79 / 0.91 |
+| palm | oil Raw-MR | 2542.2 | 110.02 | 14.54 | 35.32 | "2-methyl-3-pentanethiol" 1106.68; 2,5-thiophenedicarboxaldehyde 40.29; dihydro-2-methyl-3(2H)-thiophenone 37.85; 3-methyl-2-butanethiol 28.54; MFT disulfide 21.74 |
+| palm | oil ENTH-MR | 1443.2 | 102.88 | – | 15.28 | "2-methyl-3-pentanethiol" 317.30; 2-thiophenecarboxaldehyde 54.14; 3-acetyl-2,5-dimethylthiophene 48.74 |
+| palm | water RM / EM | 7.12 / 20.79 | 0.26 / 0.82 | – | – / 1.00 | "2-methyl-3-pentanethiol" – / 10.36; 2,3-dimethyl-2-butanethiol 2.64 / – |
+
+Furfural (O-heterocyclics), water phase RM / EM: corn 51.61 / 60.76; peanut 48.20 / 97.79; olive 30.83 / 40.78;
+coconut 26.82 / 25.48; palm 20.69 / 34.96; no oil 6.17 [M].
+
+**SI flags:**
+- **S-a [!] Corn ENTH-MR thiol subtotal.** Printed 110.97; the six compound rows sum to 113.51. The gap is
+  exactly MFT 0.54 + 1,2-ethanedithiol 2.00, so either the subtotal omits them or those two values belong to
+  another column (the XML has no shifted cells). Treat corn ENTH-MR oil MFT 0.54 as uncertain.
+- **S-b [!]** The coconut table prints the no-oil thiol subtotal as 5.15; its compound rows and the other four
+  tables give 5.08.
+- **S-c [!] "MFT and FFT were formed in all oil-MRPs" (main text) is true for FFT, not for MFT:** MFT is
+  undetected in 5 of 10 oil phases (corn Raw-MR, peanut Raw-MR, olive ENTH-MR, palm both). It is detected in all
+  11 water phases.
+- **S-d [!] Identification.** No authentic standards are stated. The printed 1KI ("Rtx-WAX") for MFT (936) and
+  FFT (946) look like non-polar-column values; from memory, both elute near 1300-1450 on a wax column (moderate
+  confidence), and the MFT 2KI switches between 901a (S1, S2) and 873a (S3-S5). The dominant oil-phase thiol,
+  "3-pentanethiol, 2-methyl-" (1KI 793), is an unusual Maillard product and is probably a library assignment.
+  MFT/FFT identities are plausible (they are the expected Xyl/Cys thiols) but rest on MS-library matching.
+- **S-e** Near the detection limit: the water-phase MFT values (0.05-0.67 ng/mL) are 2-3 significant figures of a
+  semi-quant signal with no SD; I treat ratios < 2x as uninformative.
+
+### S.3 E7: what the oil does to MFT and FFT
+
+**(a) Water phase vs the oil-free control (same phase, same quantitation basis; the only like-for-like
+comparison)** [Z] from S.1:
+
+| oil | MFT RM / no oil | MFT EM / no oil | FFT RM / no oil | FFT EM / no oil |
+|---|---|---|---|---|
+| corn | x3.6 | x3.1 | x4.4 | x6.5 |
+| peanut | x1.6 | x4.8 | x1.3 | x5.0 |
+| olive | x0.86 | x1.7 | x2.1 | x3.4 |
+| coconut | x4.0 | x0.36 | x1.08 | x1.14 |
+| palm | x1.4 | x1.9 | x0.93 | x2.2 |
+
+FFT -0.03 to +0.81 dex, MFT -0.45 to +0.68 dex. **No oil suppresses free FFT in the water phase beyond x0.93
+(palm RM), and only two arms have less free MFT than the control: olive RM (0.12, x0.86, within noise) and ENTH
+coconut (0.05, x0.36).** The oxidised (ENTH) oil gives *more*
+water-phase FFT than its raw oil for all five (x1.05-3.8) and more MFT for 3 of 5 (peanut x3.0, olive x2.0, palm
+x1.4; corn x0.86, coconut x0.09). Furfural is up x3.3-15.8 in every oil water phase.
+
+**But the MFT disulfide moves the other way.** The control holds 20x more bis(2-methyl-3-furyl) disulfide
+(2.81) than free MFT (0.14); with oil it is undetected in all five RM water phases and 0.57-2.32 in the EM
+ones. Free MFT + disulfide (ng/mL; ~1:1 in MFT-equivalent mass): control 2.95; RM corn 0.51, peanut 0.22, olive
+0.12, coconut 0.87, palm 0.19 (**x1/3.4 to x1/25**); EM corn 1.74, peanut 2.99, olive 1.10, coconut 1.45, palm
+0.84 (x1/1.0 to x1/3.5) [Z]. So "MFT suppression" in this study depends on whether the disulfide is counted.
+
+**(b) Oil phase: raw vs oxidised (ENTH), within a phase** [Z]: FFT ENTH/raw corn 1.10, peanut 0.85, olive 0.89,
+coconut 0.71, palm 0.80; thiol subtotal 0.63, 0.94, 0.77, 0.63, 0.57; MFT corn – -> 0.54, peanut – -> 10.18,
+olive 13.79 -> –, coconut 17.76 -> 3.39, palm – / –. The ENTH oxidation is mild (PV <= 4.28 mmol/kg, MDA < 0.25
+mg/100 g), and it is confounded with lipase hydrolysis (free fatty acids).
+
+**(c) Between oils, oil phase:** FFT coconut 2141 > palm 1407 > peanut 1158 > olive 642 > corn 53 (Raw-MR; the
+thiol subtotals rank the same). Against raw-oil iodine value (coconut 12, palm 52, olive 87, peanut 92, corn 99)
+Spearman rho = -0.9 (n = 5; two-sided p ~0.08) [Z]. Corn, the most PUFA-rich oil (60 % C18:2), holds 40x less FFT
+than coconut in its oil phase.
+
+**(d) Whole system, nominal** (4 vol oil + 1 vol water per vol of aqueous; assumes the phase volumes are
+unchanged, not stated) [Z]: FFT x50-57 (corn), x860-1000 (peanut), x500-560 (olive), x1300-1850 (coconut),
+x980-1220 (palm) over the control; MFT x1.4-510. **Not usable as a magnitude:** the IS is added into each phase,
+and 1,2-dichlorobenzene (log Kow 3.4) is far more retained by oil than MFT/FFT (log Kow ~1-2, my estimate), so
+Cv = (Pv/Pi) Ci inflates the oil-phase numbers, by my order-of-magnitude estimate 10-100x (low confidence).
+Even deflated by 100x the FFT totals stay >= the control for four of five oils.
+
+**Capture vs partition (4:1 oil : aqueous).** If the oil only partitioned the thiols and formation were
+unchanged, the water phase would fall by 1/(1 + 4 K_oil/w); for K_oil/w ~5-100 that is **x1/20 to x1/400**. The
+water phase instead *rises* for free FFT and stays within x0.4-4.8 for free MFT, so (i) **partition alone is
+ruled out** as the dominant effect on free thiols, and (ii) the oil systems must *form* at least as much FFT/MFT
+as the control, and probably more (consistent with the larger cysteine and xylose consumption, lower pH and
+higher furfural in Fig. 2 / S1-S5). Signatures that do fit partition: the lipophilic MFT disulfide disappears
+from the water phase; apparent oil/water FFT ratios of 36-430 for four oils. Signatures that fit **chemical
+capture inside the oil**: the oil-phase thiol ranking against unsaturation (c), the ENTH x0.57-0.95 (b), MFT
+undetected in 5/10 oil phases while present in their water phases (at any K > 10 it should be well above the
+oil-phase detection seen elsewhere), and corn's anomalous oil/water FFT ratio of 2.6 vs 36-430 (two long-chain
+triglycerides, corn and peanut, cannot differ 75x in a true partition coefficient). Capture here is a 1-40x
+between-oil effect inside the oil phase, not a suppression relative to oil-free cooking. **Reading: not
+consistent with a net capture-driven suppression; partition accounts for the disulfide only; the net oil effect
+on free MFT/FFT is neutral to positive.** Confidence ~60 % in that sign for FFT (no SD; HS-SPME across
+matrices), ~40 % for MFT (near-LOD values, disulfide ambiguity).
+
+**Against the F30 / CF-031 cells:**
+
+| lab (F30 cell) | their result | Zhang 2022 | verdict |
+|---|---|---|---|
+| Huazhong (xu2011): 165 mM Cys + 133 mM Xyl, pH 5.0 phosphate, **120 C**, 60 min, +/- fresh / oxidised lard | MFT x1/21 / x1/143; FFT x1/3 / x1/6.4; furfural x1/2.3-2.5; oxidation deepens suppression | same sugar, amino acid and T; free MFT x0.4-4.8, FFT x0.9-6.5, furfural x3.3-15.8; oxidation raises water-phase FFT 5/5 | **disagrees** in sign for free thiols and furfural, and on the oxidation direction (but Xu's lard PV 184 vs ENTH <= 4.3 mmol/kg; pH 5.0 buffered vs 7.2 -> 4.7 unbuffered; whole headspace vs separated phases). Agrees only if the MFT disulfide is added (MFT pool x1/3.4-1/25 with raw oil) |
+| Reading (elmore2002, whitfield1988): PUFA ester / lecithin, pH 5.5-6.2, 140 C | MFT x1/3 to >1/80, FFT x1/2 to 1/5 | as above | **disagrees** (free thiols) |
+| Reading (yiltirak2026): 10 % canola, SIDA matrix-matched, 100-130 C | buffer + oil: MFT x1/9.6; emulsion FFT x2.1 vs buffer | 80 % oil, stirred (not emulsified), water phase: MFT not suppressed, FFT up | **disagrees** on MFT; agrees in sign on FFT rising with dispersed oil |
+| CAAS (du2025): GSH + glucose + 10 mM free fatty acids, 145 C | MFT +19-30 % | ENTH (hydrolysed, FFA-rich) vs raw: water-phase MFT up 3/5, FFT up 5/5 | **agrees in sign**, weakly (hydrolysis confounded with oxidation; no AV of ENTH oils in the dossier) |
+| US 8,920,862 (CF-031 "raise" half) | MFT x10.1, FFT x7.4 | FFT up to x6.5 (water phase) | agrees in sign |
+
+**For E7:** this is a new, discriminating disagreement inside CF-031. A capture + partition fix tuned to the
+x1/10-1/143 cells would predict this pot's water-phase MFT/FFT at roughly x1/20-1/400; the data say x0.4-6.5.
+Zhang 2022 is the only CF-031 study that measures the aqueous phase of a 4:1 oil system separately, so it tests
+the partition term directly; its weight is limited by HS-SPME RF 1, no SD and the impossible printed charge
+(flag 1).
+
+### Ledger-ready measurements
+
+Held-out TEST candidates (key as within-study contrasts; the absolute charge is uncertain, flag 1):
+
+- **`zhang2022_tabS1_S5_water_phase_thiols_oil_vs_no_oil`** (sulfur lane, `kind: endpoint`, `quant_class:
+  semi_quantitative`, `simulable: false` until a two-phase partition exists): water-phase MFT, FFT, bis(2-methyl-
+  3-furyl) disulfide, bis(2-furfuryl) disulfide and furfural for the no-oil control and 10 oil arms (S.1 tables;
+  Tables S1-S5, "No oil", "W-<oil>-RM", "W-<oil>-EM" columns). Contrast = arm / no-oil, sign and dex. Flags:
+  `condition_uncertain`, `no_sd_printed`, `near_lod` (MFT), `identity_by_library` (S-d). The single most useful
+  E7 row.
+- **`zhang2022_tabS1_S5_oil_phase_thiols_by_oil`** (lipid lane, ranking signature only): oil-phase FFT and thiol
+  subtotal Raw-MR and ENTH-MR per oil, against iodine value (S.3 c). Two-phase, oil-phase quantitation bias;
+  between-oil ranking and ENTH/raw ratio only, never absolute.
+- **`zhang2022_tabS1_no_oil_aqueous_endpoint`** (sulfur lane): oil-free Xyl/Cys water, 120 C, 90 min, pH 7.2 ->
+  4.72: MFT 0.14, FFT 4.63, MFT disulfide 2.81, furfural 6.17 ng/mL, plus Fig. 2 residual xylose/cysteine.
+  Aqueous, so in the engine's domain once the charge is confirmed with the authors; MFT disulfide/MFT = 20 is a
+  thiol-oxidation signature worth testing.
+- **Not for keying:** the nominal whole-system totals (S.3 d), Table S6 (names only), Fig. S1 (schemes); the
+  "2-methyl-3-pentanethiol" rows (identity doubtful, S-d).
+- The existing ledger rows `zhang2022_fig2_fig4_xyl_cys_oil_water` (sulfur.yml) and
+  `zhang2022_text_lipid_volatiles_and_si_tables` (lipid.yml) carry `supplement_missing_for_mft_fft`; that flag can
+  now be cleared (not edited here).

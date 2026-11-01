@@ -1,0 +1,356 @@
+family: F27_thiamine_gsh_sources
+definition: "thiamine and glutathione as sulfur / MFT precursors"
+markers:
+  - "Thiamine as MFT CARBON source: unlabelled MFT (and 3-mercapto-2-pentanone) in a [13C5]pentose + cysteine + thiamine pot (CAMOLA-type); the unlabelled fraction is the thiamine route (Cerny 2007 / 2007b, Wang 2012)."
+  - "Thiamine as MFT SULFUR source: 34S-cysteine + thiamine, the 32S share of MFT sulfur (Bolton 1993); 35S-thiamine sulfur balance between intact thiazole and lost (volatile, H2S) sulfur (Dwivedi & Arnold 1972)."
+  - "Thiamine as a sulfide donor to a SUGAR skeleton: a sulfur product carrying the pentose label in a cysteine-free pentose + thiamine pot (FFT > 99 % xylose in Cerny 2007b pot D); H2S measured from thiamine alone (Dwivedi & Arnold 1971)."
+  - "The thiamine route's intermediate: 5-hydroxy-3-mercapto-2-pentanone isolated and identified (Cerny 2008); thiamine-only markers 4,5-dihydro-2-methyl-3-furanthiol, the dihydrofuranone, 3-mercapto-2-butanone (>= 95 % thiamine carbon)."
+  - "Glutathione as a sulfur source: sulfur volatiles from GSH + sugar with GSH the only sulfur; the reduced vs S-oxidised (glutathionesulfonic acid) negative control; GSH degradation intermediates measured (pyroglutamic acid, Cys-Gly, free Cys)."
+  - "No-labelling within-study contrasts (thiamine vs cysteine, GSH vs cysteine, +/- thiamine, +/- GSH in the same lab and protocol) are recorded as operating at most."
+cells:
+  # --- thiamine: labelling ---------------------------------------------------------------------------------
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "ternary [13C5]xylose 300 + cysteine 100 + thiamine 100 mM vs the two single-route controls: no cysteine -> MFT > 99 % thiamine; no thiamine -> MFT > 95 % xylose"
+    status: dominant
+    quote: "MFT is 54 : 46 and 3-mercapto-2-pentanone 60 : 40"
+    quantity: "thiamine (unlabelled) share of MFT carbon 54 %, of 3-mercapto-2-pentanone 60 %; FFT and furfural > 99 % xylose (a near-even split, so 'dominant' is marginal)"
+    evidence: labelling
+    lab: "Firmenich (Cerny)"
+    dossiers: [cerny2007b_extraction.md, cerny2007_extraction.md]
+    where: "cerny2007b Tables 3, 5, 6; = cerny2007 Table 5 column A (duplicate)"
+    conflict: CF-007
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "cysteine omitted (xylose + thiamine only): FFT still forms and is > 99 % xylose-labelled, so thiamine supplied the sulfur to a sugar skeleton at pH 5; MFT, 3-MP, 2-methylthiophene < 1 % xylose"
+    status: operating
+    quote: "so thiamine supplied the sulfur to a xylose skeleton"
+    quantity: "isotope ratios only, no amounts; single unreplicated control"
+    evidence: labelling
+    lab: "Firmenich (Cerny)"
+    dossiers: [cerny2007b_extraction.md]
+    where: "Table 5; dossier sec. 6 item 3"
+  - key: {ph: acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
+    contrast: "pH ladder (xylose 150 / Cys 50 / thiamin 50 mM, 0.5 M phosphate): pH 4 arm"
+    status: dominant
+    quote: "**75 / 25** | **85 / 15**"
+    quantity: "thiamine share of MFT 75 % at pH 4 (3-MP 77 %); xylose-derived MFT area 2.1x its pH-5 value"
+    evidence: labelling
+    lab: "Firmenich (Cerny)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 4; dossier sec. 4.2"
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
+    contrast: "pH 5 arm, and the concentration contrast at pH 5: halving all three precursors moves the thiamine share of MFT 54 -> 85 % (3-MP 60 -> 86 %): dilution favours the first-order thiamine route"
+    status: dominant
+    quote: "2-methyl-3-furanthiol | 114; 119 | 54 : 46 | 85 : 15"
+    quantity: "thiamine share of MFT 85 % at pH 5, 1x loading (54 % at 2x)"
+    evidence: labelling
+    lab: "Firmenich (Cerny)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Tables 4 and 5"
+    conflict: CF-007
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
+    contrast: "pH 6 and 7 arms: the rise of total MFT at pH 6 is carried by the thiamine route; the isotopomer split moves at most 2.5x over pH 4-7"
+    status: dominant
+    quote: "the pH-6 peak of total MFT is a THIAMIN peak"
+    quantity: "thiamine share of MFT 90 % (pH 6), 80 % (pH 7); 3-MP 90 / 88 %"
+    evidence: labelling
+    lab: "Firmenich (Cerny)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Tables 2 and 4; dossier sec. 4.2"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 132, sugar: pentose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "dilute thiamine (1.2 mM) with 26 mM 1:1 [13C5]/[12C] xylose and GSH or Cys / Cys-Gly; isotope pot not stated"
+    status: dominant
+    quote: "MFT is >99:<1, so <~2 %"
+    quantity: "MFT < ~2 % xylose-derived, i.e. essentially all thiamine carbon; furfural intact xylose; FFT 80:20 conflicts with both Cerny papers"
+    evidence: labelling
+    lab: "Beijing Technology and Business Univ. (Song)"
+    dossiers: [wang2012_extraction.md]
+    where: "Table 3; dossier sec. 1"
+  - key: {ph: mild_acid, temperature: high, water: intermediate_aw}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "100 % 34S-cysteine + thiamine in a bouillon blend (MSG, NaCl, IMP, glucose; a_w 0.83; pH 5.5-5.8 before AND after): cysteine supplies ~8 % of MFT sulfur; without thiamine no MFT (< ~2.3 % of the thiamine pots); + 6 mM xylose changes neither MFT nor the 34S share"
+    status: dominant
+    quote: "A net **7.5 to 8.0 %** of the MFT formed contained labeled sulfur"
+    quantity: "thiamine share of MFT sulfur ~92 %; MFT 389-489 ng / 33.3 g (11.7-14.7 ppb); LOD ~10 ng"
+    evidence: labelling
+    lab: "Univ. Minnesota / Nestle Lausanne (Reineccius / Liardon)"
+    dossiers: [bolton1993_extraction.md]
+    where: "Table II (p. 275); dossier sec. 3"
+    conflict: "CF-090 (xylose null here vs Hincelin's 4-5x)"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 121, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "35S-thiamine, pH 3.5 / 5.0 / 6.0 vs 7.0 / 8.0 (0.1 M phosphate, 15-120 min): at pH <= 6 the intact thiazole keeps the sulfur"
+    status: minor
+    quote: "96–100 % of the degraded thiamine's sulfur is the intact thiazole"
+    quantity: "non-thiazole sulfur (H2S included) <= 4 % of degraded thiamine at pH 3.5-6 (<= 1.5 % at 30 min); thiamine loss 4-18 % in 30 min"
+    evidence: labelling
+    lab: "Univ. Nebraska (Dwivedi / Arnold)"
+    dossiers: [dwivedi1972_extraction.md]
+    where: "Table I (p. 887)"
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 121, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 7 -> 8: the thiazole carries only 9-16 % (pH 7) and none (pH 8) of the destroyed thiamine's 35S; the deficit is volatile 35S attributed to H2S (not measured here)"
+    status: operating
+    quote: "At pH 8.0 no thiazole peak at all."
+    quantity: "thiamine destroyed 33-59 % in 15-30 min, 93 % in 2 h at pH 8"
+    evidence: labelling
+    lab: "Univ. Nebraska (Dwivedi / Arnold)"
+    dossiers: [dwivedi1972_extraction.md]
+    where: "Table I, Figs. 2-3"
+  # --- thiamine: H2S measured, intermediates, within-study contrasts ---------------------------------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "~100 (and 120 autoclave)", sugar: none, amine: none, oxygen: inert, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 5.5 -> 7.0 (0.12 mM thiamine, 0.1 M phosphate, 30 min): H2S rises far more steeply than thiamine loss; air vs N2 vs sealed differ little; at 120 C, pH 7, H2S plateaus ~88 mmol/mol"
+    status: operating
+    quote: "At pH 7 Table I puts **up to ~40 %** of the sulfur"
+    quantity: "47-71 mmol H2S per mol thiamine at pH 7, ~100 C, 30 min"
+    evidence: within_study_factor
+    lab: "Univ. Nebraska (Dwivedi / Arnold)"
+    dossiers: [arnold1971_extraction.md]
+    where: "Table I, Figs. 2-5"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "~100", sugar: none, amine: none, oxygen: inert, buffer: phosphate, metals: not_controlled}
+    contrast: "same series, acid side: H2S from thiamine vanishes below pH 6 (methylene-blue assay could see it)"
+    status: absent
+    detection_basis: "positive control: the same methylene-blue H2S assay in the same series measured 3 - 7 mmol/mol thiamine at pH 6.5 and 47 - 71 at pH 7; ~0 at pH 5.5 and <= 3 at pH 6.0"
+    quote: "≈ 0 at pH 5.5, ≤ 3 at pH 6.0, 3–7 at pH 6.5"
+    quantity: "mmol H2S per mol thiamine in 30 min; thiamine loss <= 2 % below pH 6"
+    evidence: within_study_factor
+    lab: "Univ. Nebraska (Dwivedi / Arnold)"
+    dossiers: [arnold1971_extraction.md]
+    where: "Fig. 4"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "~100", sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "+ cysteine 1 mg/mL (70x thiamine) vs none, pH 5-7, sealed: no thiamine lost in 30 min, all H2S from cysteine; oxidants destroy thiamine with no H2S"
+    status: absent
+    detection_basis: "positive control: the same thiamine assay measured a 14 - 17 % loss in 30 min at pH 7 without cysteine; 0 % with cysteine"
+    quote: "cysteine (1 mg/mL) stops thiamine degradation completely for 30 min at pH 5–7"
+    quantity: "thiamine loss 0 % with cysteine vs 14-17 % without (pH 7, 30 min)"
+    evidence: within_study_factor
+    lab: "Univ. Nebraska (Dwivedi / Arnold)"
+    dossiers: [arnold1971_extraction.md]
+    where: "sec. 3.1 text (p. 924)"
+    conflict: "CF-089 (Grosch: cysteine raises thiamine-MFT 7x)"
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: "~100 (boiling, SDE)", sugar: pentose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "thiamine 0.05 mol +/- xylose 1 mol, held at pH 7 with NaOH, 1 h SDE: xylose raises MFT 4-5x (absolute, authors) and H2S's relative area 1 -> 3 % of the isolate (x3 relative; absolute H2S not printed)"
+    status: operating
+    quote: "a 4–5-fold rise in absolute yield; H2S doubles (1 % → 3 %)"
+    quantity: "MFT 2 % -> 14 % of the isolate; open stripping system"
+    evidence: within_study_factor
+    lab: "Univ. Reading / Dijon (Ames)"
+    dossiers: [hincelin1992_extraction.md]
+    where: "Tables 1-3; dossier sec. 1"
+    conflict: "CF-090 (Bolton: no xylose effect at pH 5.5-5.8, a_w 0.83)"
+    note: "re-read 2026-11-01: two readers MINOR: H2S relative area triples (1 -> 3 %); 'doubles' holds only after the implied absolute rescaling, so it is not a relative-area statement. The quote keeps the dossier's wording."
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "thiamine 74 + cysteine 25 + xylose 73 mmol, pH 5.0, 45 min: the thiamine -> MFT intermediate isolated (20 mg after two columns) and identified by MS and NMR against a synthesised reference"
+    status: operating
+    quote: "5-hydroxy-3-mercapto-2-pentanone is formed and is isolable"
+    quantity: ">= 0.20 mol % of charged thiamine (a floor, not a yield); open chain : cyclic ketal 69 : 31 in CDCl3"
+    evidence: measured_intermediate
+    lab: "Firmenich (Cerny)"
+    dossiers: [cerny2008_extraction.md]
+    where: "Results p. 10682; Isolation"
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fed precursors, 1.0 mmol each in 50 mL, pH 5: thiamine alone vs NF + H2S, NF + cysteine, hydroxyacetaldehyde + mercapto-2-propanone"
+    status: operating
+    quote: "thiamin | **8.2** | **0.01**"
+    quantity: "MFT 0.01 mol % from thiamine vs 0.19 (NF/H2S), 0.05 (NF/Cys), 0.24 (C2 + C3)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 10 (p. 240)"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "meat-like concentrations (thiamine 60 uM, ribose 1.3 mM, Cys 0.65 mM; 0.2 M pyrophosphate pH 5.7; 2 h reflux, SIDA): thiamine alone 4.7 ug MFT vs ribose + Cys < 0.1 ug; + cysteine raises thiamine-MFT 7x; Cys dose optimum then fall 9.5x by 5.4 mM"
+    status: operating
+    quote: "thiamine >> ribose + cysteine; cysteine raises thiamine-MFT x7 (Method I)"
+    quantity: "MFT 0.14 % of thiamine (reflux), 0.73 % (SDE); thiamine + Cys 0.97 / 3.97 %"
+    evidence: within_study_factor
+    lab: "DFA Garching (Grosch)"
+    dossiers: [grosch1992_extraction.md]
+    where: "Tables II, III, VIII"
+    conflict: "CF-089 (Arnold: cysteine stops thiamine degradation)"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "thiamine pyrophosphate (30 umol) vs free thiamine, +/- cysteine; IMP + Cys"
+    status: absent
+    detection_basis: "detection bound + positive control: SIDA bound MF-SH < 0.5 ug for thiamine pyrophosphate (+/- Cys) against 4.7 / 33 ug from thiamine (+/- Cys) by the same method and pot design"
+    quote: "thiamine pyrophosphate inactive; IMP + Cys only traces"
+    quantity: "MFT < 0.5 ug from TPP (+/- Cys) vs 4.7 / 33 ug from thiamine (SIDA)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Grosch)"
+    dossiers: [grosch1992_extraction.md]
+    where: "Table II rows 2, 5"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "thiamine + exogenous H2S (3 flushes, 26.8 mmol) vs thiamine alone: MFT x3; ribose / R5P / ribulose / IMP + H2S <= 0.4 ug"
+    status: operating
+    quote: "15 ± 7 µg vs 4.7 without (x3)"
+    quantity: "MFT 15 +- 7 vs 4.7 +- 1.2 ug / 500 mL"
+    evidence: within_study_factor
+    lab: "DFA Garching (Grosch)"
+    dossiers: [grosch1992_extraction.md]
+    where: "Table VI"
+  - key: {ph: not_stated, temperature: moderate, water: not_stated}
+    tags: {ph_basis: not_measured, T_C: 69, sugar: [hexose_ketose, pentose], amine: cysteine, oxygen: inert, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "model cooked ham (pork muscle, nitrite; 40 -> 69 C ramp + 2 h hold, vacuum jars): thiamine dose 0-8000 mg / 100 g brine vs cysteine 100-10,000 + fructose or xylose 3 g"
+    status: operating
+    quote: "Thiamine is the MFT source; cysteine (+ fructose or xylose) is not."
+    quantity: "MFT ~0.3 -> ~40 x 1e4 a.u. at the top thiamine dose; cysteine series indistinguishable from control (SIM areas, no IS)"
+    evidence: within_study_factor
+    lab: "INRA Clermont / IFIP (Berdague)"
+    dossiers: [thomas2014_extraction.md]
+    where: "Fig. 2 (p. 211)"
+  - key: {ph: acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 135, sugar: none, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "~1 M thiamine HCl in water (pH 2.3) vs propylene glycol (a water-free solvent), 30 min: MFT only in water; its disulfide dominant in PG"
+    status: operating
+    quote: "2-Methyl-3-furanthiol: M in water, absent in PG."
+    quantity: "size classes only (XS-XL); bis(2-methyl-3-furyl) disulfide XL in PG, S in water"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [hartman1984_extraction.md]
+    where: "Table I (p. 1016)"
+  - key: {ph: mild_acid, temperature: high, water: intermediate_aw}
+    tags: {ph_basis: label, T_C: 135, sugar: none, amine: sulfur_aa_other, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "thiamine + cystine + ascorbic acid + MSG over water:PG mixes (a_w 0 - 0.75 by vessel pressure): sulfur volatiles incl. MFT peak near a_w 0.72; thiamine vs cystine sulfur not separated"
+    status: unattributed
+    quote: "All sulfur volatiles peak near a_w 0.72."
+    quantity: "MFT <= ~2 ppm (TMP-equivalent) at a_w <= 0.39, 7-16 ppm at 0.72, ~2.6 ppm all-water"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [hartman1984b_extraction.md]
+    where: "Figs. 2, 6"
+  # --- glutathione ------------------------------------------------------------------------------------------
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 160, sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "initial pH 3 / 6 / 8 (GSH 24 mM + glucose, 2 h): sulfur volatiles pH 6 ~ pH 8 > pH 3; glutathionesulfonic acid gives no sulfur compound at any pH"
+    status: operating
+    quote: "total sulfur volatiles at pH 6 ≈ pH 8 ≈ 2.1× pH 3"
+    quantity: "thiophenes 326.8 / 311.6 / 93.1 mg/mol (pH 8 / 6 / 3); FFT 11.9 / 14.7 / 9.1; no MFT; S in volatiles 0.16-0.34 % of GSH S"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [tai1998_extraction.md]
+    where: "Tables 1-2 (pp. 2262, 2264)"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "GSH alone vs cysteine alone (~50 mM, pH 7.5, 1 h); and with glucose (Zhang 1991b): GSH gives 30x fewer polysulfides, ~3x fewer thiazoles / thiophenes, no MFT / FFT from either"
+    status: operating
+    quote: "GSH is a poorer source of S-volatiles than free cysteine"
+    quantity: "S in identified volatiles 1.6 % (GSH) vs 4.0 % (Cys) of precursor S; GSH trithiolanes 3.39 mmol/mol (2.8x Cys)"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [zhang1988_extraction.md, zhang1991b_extraction.md]
+    where: "zhang1988 Table I; zhang1991b Tables I-II"
+    conflict: CF-008
+  - key: {ph: acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: pentose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "IMP (ribose source) + GSH vs IMP + Cys, 50 + 50 mM, unadjusted pH 2.2 / 2.3 (measured before heating), 1 h"
+    status: operating
+    quote: "MFT 9.60 mg/mol from Cys, not detected from GSH"
+    quantity: "FFT 180 (GSH) vs 384 (Cys) mg/mol; MFT n.d. vs 8.4e-5 mol/mol"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [zhang1991_extraction.md]
+    where: "Table I (p. 1146)"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "GSH 20 mM heated alone, 0-120 min, initial pH 7.5: degradation products quantified; with 20 mM Ala-xylose ARP GSH falls twice as fast and Cys-Gly / Cys are scavenged"
+    status: operating
+    quote: "pyroglutamic acid 4.7 mM (the largest), Cys-Gly 2.3 mM"
+    quantity: "GSH loss k ~8.2e-3 1/min alone (1.6e-2 with ARP), 7-14x the Zheng & Ho H2S constant; free Cys ~0.05 mM"
+    evidence: measured_intermediate
+    lab: "Jiangnan Univ. (Zhang / Cui, with Ho)"
+    dossiers: [zhou2023c_extraction.md]
+    where: "Fig. 2-3 time courses; dossier sec. 1, item (1)-(2)"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "ARP + GSH vs ARP + free Cys (same ARP, 60 min, pH 7.5 start): GSH a far weaker MFT source, nearly as good an FFT source"
+    status: operating
+    quote: "MFT(Cys)/MFT(GSH) = 18; FFT(Cys)/FFT(GSH) = 1.3"
+    quantity: "MFT 2.8e-5, FFT 1.7e-4 mol/mol GSH at the 60-min peak (standard-calibrated HS-SPME)"
+    evidence: within_study_factor
+    lab: "Jiangnan Univ. (Zhang / Cui, with Ho)"
+    dossiers: [zhou2023c_extraction.md]
+    where: "Table 1; dossier item (3)"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "ribose-GSH Amadori compound (RG-ARP) 20 mM alone vs + 20 mM extra GSH, 120 min: the GSH-Amadori compound gives MFT / FFT by itself, extra GSH raises MFT 4.5x"
+    status: operating
+    quote: "★ **32.15 ± 0.49ᵃ**"
+    quantity: "MFT 7.22 (ARP alone) vs 32.15 ug/L (ARP + GSH); FFT 10.46 vs 44.63 ug/L"
+    evidence: within_study_factor
+    lab: "Jiangnan Univ. (Zhang / Cui)"
+    dossiers: [feng2022_extraction.md]
+    where: "Tables 1-2 (pp. 9098, 9101)"
+    conflict: CF-058
+condition_dependence: >-
+  THIAMINE. SHOWN by labelling (Firmenich, Minnesota / Nestle, BTBU; 3 labs): thiamine is the main MFT source
+  whenever it is present at food-like or dilute loadings, and its share falls as the pentose + cysteine loading rises
+  (85 -> 54 % at pH 5, 145 C, 1x -> 2x; < 2 % xylose MFT at 1.2 mM thiamine, 132 C). Across pH 4-7 at 145 C the share
+  moves only 75-90 % (labelling cells 3-5), so pH barely shifts the route mix while it strongly shifts levels. 34S
+  shows thiamine also supplies ~92 % of MFT SULFUR in a bouillon at a_w 0.83, 120 C (cell 7). Within-study (no
+  label): thiamine >> ribose + cysteine at meat-like concentrations, 100 C (DFA, cell 16), and at 69 C in ham
+  cysteine + sugar gives no MFT at all (INRA, cell 19); but fed thiamine alone at 20 mM, 145 C is a weak MFT source
+  per mole (0.01 %, cell 15). Thiamine as an H2S donor: SHOWN to switch on between pH 6 and 7 at ~100-121 C (35S and
+  methylene blue, Nebraska, cells 8-11); yet Cerny's cysteine-free pot puts thiamine sulfur on a xylose skeleton at pH
+  5, 145 C (cell 2), so some sulfur transfer exists below the H2S threshold at higher T (free H2S or S-transfer
+  unresolved). Partners: cysteine raises thiamine-MFT 7x at 100 C, pH 5.7 (Grosch) but stops thiamine degradation
+  for 30 min at ~100 C, pH 5-7 (Arnold) - a tension between two labs at different cysteine:thiamine ratios (~11 vs 70;
+  Grosch's own dose series drops below its cysteine-free level at ~91) and times (CF-089); exogenous H2S raises
+  thiamine-MFT 3x (Grosch), consistent with Bolton's HMP -> oxofuran + H2S route; xylose raises thiamine-MFT 4-5x at
+  pH 7 in an SDE pot with no other sugar (Reading) but not at pH 5.5-5.8, a_w 0.83 in a glucose-rich blend (Bolton)
+  (CF-090). Water: MFT needs water (absent in PG, Hartman 1984); total S volatiles peak
+  near a_w 0.72 (cell 21, unattributed). Thiamine pyrophosphate is inactive (cell 17). GLUTATHIONE. SHOWN (Rutgers,
+  Jiangnan; 2 labs, no labelling): GSH is a weaker sulfur donor than free cysteine for MFT (18x at 120 C, pH 7.5;
+  n.d. vs 9.6 mg/mol at pH 2.2, 180 C) and for polysulfides (30x with glucose, 180 C), but nearly as good for FFT
+  (1.3-2.1x); with glucose its sulfur volatiles rise 2.1x from pH 3 to pH 6-8 at 160 C (cell 22); the reduced thiol
+  is required (sulfonic acid gives none). GSH disappears mainly by gamma-glutamyl cleavage (pGlu + Cys-Gly -> Cys),
+  7-14x faster than its H2S release (cell 25), and its ribose Amadori compound is itself an MFT / FFT precursor
+  (cell 27). GSH's own H2S kinetics (80-110 C, pH 3-9) are in F22 cell 4. ASSUMED, not shown: any labelled split of
+  GSH vs thiamine sulfur; the in-situ pH of every unbuffered GSH pot.
+best_supported_regimes:
+  - "mild_acid-neutral (pH 4-7) / very_high (145 C) / dilute-concentrated / pentose + cysteine + thiamine: thiamine route dominant for MFT, 54-90 % (1 lab, Firmenich, two papers that share one arm: CF-007)"
+  - "mild_acid / high (120-132 C) / intermediate_aw or dilute / thiamine present at low loading: thiamine dominant for MFT carbon and sulfur (2 labs: Minnesota / Nestle 34S, BTBU 13C)"
+  - "mild_acid / moderate (100 C) / dilute, meat-like concentrations: thiamine >> ribose + cysteine (1 lab, DFA, SIDA, no label)"
+  - "acid-mild_acid (pH <= 6) / high (121 C): thiamine releases <= 4 % of its sulfur, thiazole retains it (1 lab, 35S); H2S from thiamine at pH >= 6.5-7 (same lab)"
+  - "neutral / high-very_high / dilute / GSH + sugar: GSH operating as a weaker S donor than cysteine (2 labs, within-study)"
+unknown_regimes:
+  - "thiamine route share by labelling at moderate T (< 100 C) and at alkaline pH (> 7.5): no labelled pot"
+  - "thiamine route share with a hexose (glucose) and no pentose, by labelling (Bolton's glucose pot did not label carbon)"
+  - "thiamine -> H2S at pH < 6.25 above 121 C (Cerny pot D implies sulfur transfer at 145 C, pH 5; no H2S measured)"
+  - "low_aw / dry (only propylene-glycol qualitative data, Hartman 1984)"
+  - "GSH vs cysteine vs thiamine sulfur by isotope (no 34S-GSH study on disk)"
+  - "GSH in protein / meat matrices; GSSG as a donor"
+  - "thiamine route rates: no time course of HMP, MFT and thiamine loss in one pot"
+competing_families:
+  - "F23_mft_intact_c5 (pentose / norfuraneol + H2S): the labelled alternative to the thiamine route; wins at high pentose + cysteine loading and loses at dilution (Cerny Table 5, Wang 2012)"
+  - "F22_cysteine_h2s: cysteine is the sulfide donor the sugar route needs and, per Arnold 1971, suppresses thiamine degradation"
+  - "F25_fft_furfural_h2s: FFT keeps its xylose skeleton in every thiamine pot; thiamine (or GSH) only supplies its sulfur"
+  - "F28_thiol_losses: Grosch's 4-5x SDE vs reflux gap is an in-pot MFT sink in the thiamine pots; Hartman's PG pots shift MFT to its disulfide"
+  - "F04_thiazolidine_ttca and F05_protein_glycation analogues: GSH forms its own Amadori compound (RG-ARP) that competes with free-GSH thermolysis"
+engine: >-
+  In the engine (src/kinetic_core/sulfur.py, parameters_sulfur.py, species_sulfur.py; read only). Thiamine: THI ->
+  r_thi_hmp (-> HMP; k_thi_hmp, fitted, thiol_assembly barrier family, no literature note), r_hmp_mft, r_hmp_mp2p,
+  r_hmp_decay, r_thi_mesh, and r_thi_h2s (B50: a DERIVED share of thiamine loss, thiamine_h2s_share = 0 below pH
+  6.25, 0.04 at 6.5, 0.39 at >= 7, temperature-independent, from Arnold 1971). The first-order thiamine vs
+  second-order sugar structure reproduces the dilution direction of the labelled share (Cerny Table 5, Wang 2012).
+  Mismatches: (1) no pH factor on the thiamine steps (REACTION_PH_FACTOR has none), while thiamine loss rises from
+  4-8 % (pH 3.5) to 33-59 % (pH 8) in 15-30 min at 121 C (Dwivedi 1972); (2) r_thi_h2s = 0 at pH 5 cannot give Cerny
+  2007b pot D's xylose-skeleton FFT (no cysteine, pH 5, 145 C); (3) no HMP -> oxofuran + H2S -> MFT edge, so Bolton's
+  ~8 % cysteine-sulfur MFT has no route except the sugar lane; (4) MP2P comes only from HMP, but Cerny 2007b pot F
+  makes it > 95 % from xylose without thiamine; (5) no cysteine inhibition of thiamine degradation (Arnold 1971);
+  (6) no water-activity term (Bolton a_w 0.83, Hartman). Glutathione: GSH species with one reaction, r_gsh_h2s
+  (k_gsh_h2s = glutathione_thermolysis_k, Zheng & Ho Table III refit); matches F22's measured GSH H2S kinetics at
+  80-110 C. Mismatches: no gamma-glutamyl cleavage GSH -> pGlu + Cys-Gly -> Cys (Zhou 2023c: GSH loss 7-14x the H2S
+  constant, so the engine's GSH lingers and releases no cysteine); no GSH-Amadori species (CF-058, Feng 2022 rows
+  excluded); no S-oxidised GSH / cysteine species (the negative controls are unscorable).

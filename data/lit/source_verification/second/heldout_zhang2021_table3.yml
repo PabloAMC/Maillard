@@ -1,0 +1,26 @@
+# Second reader (reader B), Zhang, Zang, Zhang, Wang, Li & Li 2021 (Food Res Int 139:109918, doi 10.1016/j.foodres.2020.109918),
+# Table 3 (sulfur volatiles, eight groups). Independent of reader A. Rows: data/lit/fit_rows/second/heldout_zhang2021_table3.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes (each flag B
+# raised is a "corrected", nothing B marked as failing).
+reader: agent-readerB-2026-11-01
+role: independent second reader, contrast benchmark TEST keying (E7)
+entries:
+- ledger_id: zhang2021_tab3_cys_xyl_phospholipid_reheat
+  source_file: zhang2021.pdf
+  location: pp. 4-5, Table 3 (landscape; text layer -layout / -raw, column assignment checked against the render); Table 1 p. 2
+  read_by: agent-readerB-2026-11-01
+  second_reader: self
+  date: '2026-11-01'
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: corrected
+  quote: Table 3 "Identification and quantification of volatile compounds in eight groups (ug/kg)." "Each group was analysed in
+    triplicate, and the results are the average +- st.dev." "— not detected or the RI was not found."
+  notes: 'Twelve sulfur species (rows 4, 8, 10, 14, 16, 20, 26, 27, 28, 29, 32, 33); no thiazole listed. MFT 15.04 / 12.37 / 8.95 /
+    6.31 / 5.36 / 6.53 / 6.40 / 3.88 and FFT 153.59 / 87.29 / 176.73 / 149.15 / 106.79 / 128.77 / 205.14 / 159.99 ug/kg (A1 - D2).
+    Phospholipid design is lecithin (B), cephalin (C) and both (D), not lecithin only; Table 1 D1 0.24 % + 0.24 % vs D2 0.07 % +
+    0.07 % (likely a typo, unresolved). Buffer molarity not stated. Subtotal C2 "78.80" inconsistent with C2''s own rows (a dropped
+    leading digit); 2-(4-methylpentyl)thiophene B1 and D1 both 220.77 (different SDs). Semi-quantitative (IS, RF 1).'

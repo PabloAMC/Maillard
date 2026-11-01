@@ -1,0 +1,34 @@
+# Second reader (reader B), Zhao J et al. 2019, Food Chem 270:436-444 (zhao2019b.pdf), Tables 1 and 2. Independent of reader A. Rows: data/lit/fit_rows/second/heldout_zhao2019b_tab1_2.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes.
+reader: 'agent-readerB-2026-11-01'
+role: 'independent second reader, contrast benchmark TEST keying (errors E7 (Table 1), E6 / E11 (Table 2))'
+
+entries:
+- ledger_id: 'zhao2019b_table1_gsh_glucose_fat_volatiles'
+  source_file: 'zhao2019b.pdf'
+  location: 'Table 1, p. 438; Sec. 2.2-2.4'
+  read_by: 'agent-readerB-2026-11-01'
+  second_reader: 'self'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: 'GSH (0.3 mmol) and D-glucose (0.3 mmol) ... in 5 mL sodium phosphate buffer (pH 6.5) ... 53.0 mg chicken fat or oxidized chicken fat ... 140 C for 5 h; ... with the addition of chicken fat or oxidized chicken fat ... isotope distribution patterns of all the compounds were unchanged, except for the 2-ethylthiophene'
+  notes: 'Reader B''s reading of the same cells; values identical to reader A''s except where the first record''s adjudication says otherwise.'
+- ledger_id: 'zhao2019b_table2_camola_glucose_labelling'
+  source_file: 'zhao2019b.pdf'
+  location: 'Table 2, p. 441; text p. 440'
+  read_by: 'agent-readerB-2026-11-01'
+  second_reader: 'self'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: 'GSH (0.3 mmol) and D-glucose (0.3 mmol) ... in 5 mL sodium phosphate buffer (pH 6.5) ... 53.0 mg chicken fat or oxidized chicken fat ... 140 C for 5 h; ... with the addition of chicken fat or oxidized chicken fat ... isotope distribution patterns of all the compounds were unchanged, except for the 2-ethylthiophene'
+  notes: 'Reader B''s reading of the same cells; values identical to reader A''s except where the first record''s adjudication says otherwise.'

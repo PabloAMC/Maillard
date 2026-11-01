@@ -46,6 +46,16 @@ rearrangement**. Their own pH data do not single out H2PO4⁻: the absolute cata
 ×6 from pH 3 to pH 7 while the H2PO4⁻ fraction falls. Phosphate also accelerates Amadori product
 (ARP) breakdown, "resulting in a relatively low overall concentration of the ARP" [Q].
 
+**Form result (added 2026-11-01, resolve2_pyrbuf T1, red-teamed; CF-093).** The κ_eff "rise" above is on
+initial-rate extrapolations. On the 5-h secant the per-M increment is flat, **22-29 M⁻¹ (0.1-0.5 M)**; on the 3-h
+secant it is **48-81 M⁻¹**. So the super-linearity is not robust to the rate extraction, and the relative κ is
+k0-limited (k0 ±24 % at 5 h, ±60 % at 3 h from read error alone) [Z]. What survives: no saturation to 0.5 M
+(I(0.5) / I(0.1) = 5.7 on the 5-h secant, read-error range 4.6-7.3; a Michaelis factor with K ≤ 0.1 M allows ≤ 1.67;
+power ≥ 0.85 at the Fig. 4 vs Fig. 7 run-to-run noise of 3-8 % points). Order ≥ 1 (1.0-1.35), not exactly 1. Two
+confounds scale with the dose: phosphate at pH 5.6 is 1.6 units below pKa2, so buffer capacity (and the admitted,
+unreported pH drift) grow with concentration, and ionic strength co-varies with buffer. Series A (1.2 M phosphate,
+30-40 % dry matter, ×11.6, κ ≈ 9 M⁻¹) is 0.43 dex short of a linear κ 25: the concentrated-matrix ceiling above.
+
 ---
 
 ## 2. METHODS [M] (p. 186–189)

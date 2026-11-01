@@ -1,0 +1,21 @@
+# SOURCE VERIFICATION -- Du et al. 2023, Food Res Int 173:113337 (Du2023.pdf), Table 2 (TEST table data/lit/fit_rows/heldout_du2023_tab2.yml; contrast benchmark errors E6, E11). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_du2023_tab2.yml, fit_rows/second/heldout_du2023_tab2.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'du2023_table2_camola_isotopomers'
+  source_file: 'Du2023.pdf'
+  location: 'Table 2, p. 7; Table 1, pp. 4-5; Sec. 2.2, 2.6'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'corrected'
+    values: 'corrected'
+  quote: 'system M: L-cysteine (1 mmol), and [12C6]-D-glucose (1 mmol), were dissolved in 5 mL of phosphate buffer (0.2 M, pH 6.50) in a 15 mL glass vial with a screw cap. The five models were magnetically stirred at 150 C in an oil bath ... The reactions of five systems were performed as described ... but the glucose was a mixture of the equimolar ratio of fully labeled [13C6]-D-glucose (0.5 mmol) and unlabeled [12C6]-D-glucose (0.5 mmol).'
+  notes: '133 numeric isotopomer cells from 55 of the 59 printed rows (systems A - D). DUPLICATES corrected: no. 34 printed twice; the D row conflicts with Table 1 and is dropped. VALUES corrected: no. 26 C (Table 1 conflict) and D (truncated, 47 %) and no. 47 A (sums to 109 %) dropped. CONDITIONS corrected: no system-M CAMOLA rows (no in-paper baseline); 120 min read as the heating time.'
+  adjudication: 'All 59 printed rows identical in both readings; 4 dropped as unresolvable against Table 1 or their own sums.'

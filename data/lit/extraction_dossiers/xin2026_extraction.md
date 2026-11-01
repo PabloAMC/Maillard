@@ -56,7 +56,7 @@ seconds' residence is not a 120 °C aqueous hold, and the sugars are 6 % of a pr
 | 2-pentylfuran, polysaccharide-added extrudates | **100 259.10 and 97 794.41 µg/kg** (two of BG/WS/MA) | sec. 3.11 |
 | 2-pentylfuran, monosaccharide-added extrudates (GL, RI, FR) | **50 230.59–77 137.05 µg/kg** | sec. 3.11 |
 | aldehyde class total, highest (one polysaccharide extrudate) | 3506.49 µg/kg; FR 3483.59; MA 3381.41; two others 2433.19 and 2346.88 | sec. 3.11 |
-| hexanal, control extrudate (the minimum) | 922.04 µg/kg; GL 1698.56; FR (number cut at page break) | sec. 3.11 |
+| benzaldehyde (corrected 2026-11-01: was mislabelled hexanal; the text says benzaldehyde), control extrudate (the minimum) | 922.04 µg/kg; GL 1698.56; FR 1654.03 | sec. 3.11 |
 | compounds with OAV > 1 | 16: three ketones, six aldehydes (hexanal, benzaldehyde, nonanal, heptanal, octanal, decanal), two furans (2-butylfuran, 2-pentylfuran), three alcohols, two pyrazines (2-ethyl-3,6-dimethylpyrazine, 2,3-dimethyl-5-propylpyrazine) | sec. 3.11 |
 | pyrazines identified | 2,5-dimethylpyrazine, 2-ethylpyrazine, 2-methyl-5-(1-methylethyl)pyrazine, 2-ethyl-3,6-dimethylpyrazine, 2,3-dimethyl-5-propylpyrazine | sec. 3.11 |
 

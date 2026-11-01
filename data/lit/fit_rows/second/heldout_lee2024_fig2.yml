@@ -1,0 +1,511 @@
+# SECOND READER (reader B) -- Lee, Roux, Descharles, Rega & Bonazzi 2024, Food Res Int 183:114183 (lee2024.pdf), Fig. 2 (p. 6):
+# PZ, MPZ, DMP (2,5-), DMP26 (2,6-) in the oven vapour, G + L cake, 140 / 170 / 200 C. Reader B's values AS WRITTEN
+# (nmol.L_air-1.g_DM-1, the axis unit; no conversion); read_error = B's absolute error converted to dex; sd = B's plotted error-bar
+# half-length where B gave a number. Independent of reader A. Digitisation: pdfimages p. 6 object 634 (1016 x 1743 px, 300 ppi),
+# panels calibrated from the y tick labels. Only the points kept in the first reading are listed (the adjudication drops points
+# at the reading floor and the 140 C 88-min points); B's other readings are in the coordinator's scratchpad (keying_reader_B.yml).
+# Pot names are this reader's (suffix _b).
+name: heldout_lee2024_fig2
+status: draft
+reader: agent-readerB-2026-11-01
+read_by: agent-readerB-2026-11-01
+pots:
+  lee2024_fig2_GL_140C_b:
+    ledger_id: lee2024_fig2_fig3_oven_vapour_volatiles
+    t_c: 140
+    t_c_basis: oven set-point
+    minutes: 120
+    initial_mmol_L:
+      Glc: null
+      LEU: null
+    concentration_basis: precursor amounts not printed in this paper (Lee et al. 2020)
+    engine_species_missing: [LEU, DMP26]
+    label_ph: null
+    ph_measured_at: not applicable
+    buffer: none (model sponge cake)
+    n: 4
+    measured_phase: oven vapour (NOT the cake matrix)
+    sampling: median times 4, 10, 22, 35, 54, 93, 118 min (the 86-90 min interval replaced by 91-95 and 116-120 min)
+    condition_quote: Fig. 2 caption "... baking of G + L model cakes at 140 C (n = 4), 170 C (n = 6) and 200 C (n = 4)"
+  lee2024_fig2_GL_170C_b:
+    ledger_id: lee2024_fig2_fig3_oven_vapour_volatiles
+    t_c: 170
+    t_c_basis: oven set-point
+    minutes: 90
+    initial_mmol_L:
+      Glc: null
+      LEU: null
+    concentration_basis: precursor amounts not printed in this paper (Lee et al. 2020)
+    engine_species_missing: [LEU, DMP26]
+    label_ph: null
+    ph_measured_at: not applicable
+    buffer: none (model sponge cake)
+    n: 6
+    measured_phase: oven vapour (NOT the cake matrix)
+    sampling: median times 4, 10, 22, 35, 54, 88 min
+    condition_quote: Fig. 2 caption "... baking of G + L model cakes at 140 C (n = 4), 170 C (n = 6) and 200 C (n = 4)"
+  lee2024_fig2_GL_200C_b:
+    ledger_id: lee2024_fig2_fig3_oven_vapour_volatiles
+    t_c: 200
+    t_c_basis: oven set-point
+    minutes: 90
+    initial_mmol_L:
+      Glc: null
+      LEU: null
+    concentration_basis: precursor amounts not printed in this paper (Lee et al. 2020)
+    engine_species_missing: [LEU, DMP26]
+    label_ph: null
+    ph_measured_at: not applicable
+    buffer: none (model sponge cake)
+    n: 4
+    measured_phase: oven vapour (NOT the cake matrix)
+    sampling: median times 4, 10, 22, 35, 54, 88 min
+    condition_quote: Fig. 2 caption "... baking of G + L model cakes at 140 C (n = 4), 170 C (n = 6) and 200 C (n = 4)"
+rows:
+- pot: lee2024_fig2_GL_200C_b
+  species: PZ
+  t_min: 10
+  value: 0.002
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.109
+  read_error_basis: 'reader B +-0.0005 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.002
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 pyrazine 200 C 10 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: PZ
+  t_min: 22
+  value: 0.0082
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.0318
+  read_error_basis: 'reader B +-0.0006 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0082
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 pyrazine 200 C 22 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: PZ
+  t_min: 35
+  value: 0.0139
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0043
+  n: 4
+  read_error: 0.0187
+  read_error_basis: 'reader B +-0.0006 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0139
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 pyrazine 200 C 35 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: PZ
+  t_min: 54
+  value: 0.0171
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0045
+  n: 4
+  read_error: 0.0152
+  read_error_basis: 'reader B +-0.0006 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0171
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 pyrazine 200 C 54 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: PZ
+  t_min: 88
+  value: 0.0583
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0266
+  n: 4
+  read_error: 0.00596
+  read_error_basis: 'reader B +-0.0008 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0583
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 pyrazine 200 C 88 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: PZ
+  t_min: 22
+  value: 0.0017
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.204
+  read_error_basis: 'reader B +-0.0008 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0017
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 pyrazine 170 C 22 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: PZ
+  t_min: 35
+  value: 0.0016
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.217
+  read_error_basis: 'reader B +-0.0008 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0016
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 pyrazine 170 C 35 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: PZ
+  t_min: 54
+  value: 0.0016
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.217
+  read_error_basis: 'reader B +-0.0008 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0016
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 pyrazine 170 C 54 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: PZ
+  t_min: 88
+  value: 0.0037
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.0939
+  read_error_basis: 'reader B +-0.0008 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0037
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 pyrazine 170 C 88 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: MPZ
+  t_min: 10
+  value: 0.0023
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.151
+  read_error_basis: 'reader B +-0.0008 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0023
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2-methylpyrazine 200 C 10 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: MPZ
+  t_min: 22
+  value: 0.031
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0131
+  n: 4
+  read_error: 0.014
+  read_error_basis: 'reader B +-0.001 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.031
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2-methylpyrazine 200 C 22 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: MPZ
+  t_min: 35
+  value: 0.0666
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0211
+  n: 4
+  read_error: 0.00652
+  read_error_basis: 'reader B +-0.001 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0666
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2-methylpyrazine 200 C 35 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: MPZ
+  t_min: 54
+  value: 0.0982
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.024
+  n: 4
+  read_error: 0.00442
+  read_error_basis: 'reader B +-0.001 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0982
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2-methylpyrazine 200 C 54 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: MPZ
+  t_min: 88
+  value: 0.0236
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0145
+  n: 4
+  read_error: 0.0184
+  read_error_basis: 'reader B +-0.001 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0236
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2-methylpyrazine 200 C 88 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: MPZ
+  t_min: 54
+  value: 0.0066
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.079
+  read_error_basis: 'reader B +-0.0012 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0066
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2-methylpyrazine 170 C 54 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: MPZ
+  t_min: 88
+  value: 0.016
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.0407
+  read_error_basis: 'reader B +-0.0015 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.016
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2-methylpyrazine 170 C 88 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP
+  t_min: 4
+  value: 0.0009
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.145
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0009
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 200 C 4 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP
+  t_min: 10
+  value: 0.0007
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.186
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0007
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 200 C 10 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP
+  t_min: 22
+  value: 0.0053
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0027
+  n: 4
+  read_error: 0.0164
+  read_error_basis: 'reader B +-0.0002 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0053
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 200 C 22 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP
+  t_min: 35
+  value: 0.0121
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0047
+  n: 4
+  read_error: 0.00718
+  read_error_basis: 'reader B +-0.0002 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0121
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 200 C 35 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP
+  t_min: 54
+  value: 0.0221
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0044
+  n: 4
+  read_error: 0.00393
+  read_error_basis: 'reader B +-0.0002 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0221
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 200 C 54 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP
+  t_min: 88
+  value: 0.0047
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0032
+  n: 4
+  read_error: 0.0185
+  read_error_basis: 'reader B +-0.0002 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0047
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 200 C 88 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: DMP
+  t_min: 22
+  value: 0.0004
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.326
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0004
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 170 C 22 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: DMP
+  t_min: 35
+  value: 0.0005
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.261
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0005
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 170 C 35 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: DMP
+  t_min: 54
+  value: 0.0015
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.116
+  read_error_basis: 'reader B +-0.0004 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0015
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 170 C 54 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: DMP
+  t_min: 88
+  value: 0.0045
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.0965
+  read_error_basis: 'reader B +-0.001 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0045
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 170 C 88 min, reader B as written
+- pot: lee2024_fig2_GL_140C_b
+  species: DMP
+  t_min: 4
+  value: 0.0011
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.158
+  read_error_basis: 'reader B +-0.0004 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0011
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 140 C 4 min, reader B as written
+- pot: lee2024_fig2_GL_140C_b
+  species: DMP
+  t_min: 10
+  value: 0.0006
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.217
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0006
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 140 C 10 min, reader B as written
+- pot: lee2024_fig2_GL_140C_b
+  species: DMP
+  t_min: 22
+  value: 0.0003
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.434
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0003
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 140 C 22 min, reader B as written
+- pot: lee2024_fig2_GL_140C_b
+  species: DMP
+  t_min: 35
+  value: 0.0003
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.434
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0003
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 140 C 35 min, reader B as written
+- pot: lee2024_fig2_GL_140C_b
+  species: DMP
+  t_min: 93
+  value: 0.0004
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.326
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0004
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,5-dimethylpyrazine 140 C 93 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP26
+  t_min: 22
+  value: 0.0041
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0019
+  n: 4
+  read_error: 0.0212
+  read_error_basis: 'reader B +-0.0002 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0041
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 200 C 22 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP26
+  t_min: 35
+  value: 0.008
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0027
+  n: 4
+  read_error: 0.0109
+  read_error_basis: 'reader B +-0.0002 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.008
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 200 C 35 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP26
+  t_min: 54
+  value: 0.0132
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0024
+  n: 4
+  read_error: 0.00658
+  read_error_basis: 'reader B +-0.0002 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0132
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 200 C 54 min, reader B as written
+- pot: lee2024_fig2_GL_200C_b
+  species: DMP26
+  t_min: 88
+  value: 0.0037
+  unit: nmol_per_L_air_per_g_DM
+  sd: 0.0019
+  n: 4
+  read_error: 0.0235
+  read_error_basis: 'reader B +-0.0002 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0037
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 200 C 88 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: DMP26
+  t_min: 35
+  value: 0.0004
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.326
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0004
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 170 C 35 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: DMP26
+  t_min: 54
+  value: 0.0012
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.145
+  read_error_basis: 'reader B +-0.0004 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0012
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 170 C 54 min, reader B as written
+- pot: lee2024_fig2_GL_170C_b
+  species: DMP26
+  t_min: 88
+  value: 0.0036
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.0965
+  read_error_basis: 'reader B +-0.0008 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0036
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 170 C 88 min, reader B as written
+- pot: lee2024_fig2_GL_140C_b
+  species: DMP26
+  t_min: 4
+  value: 0.0006
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.217
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0006
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 140 C 4 min, reader B as written
+- pot: lee2024_fig2_GL_140C_b
+  species: DMP26
+  t_min: 93
+  value: 0.0004
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.326
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0004
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 140 C 93 min, reader B as written
+- pot: lee2024_fig2_GL_140C_b
+  species: DMP26
+  t_min: 118
+  value: 0.0004
+  unit: nmol_per_L_air_per_g_DM
+  read_error: 0.326
+  read_error_basis: 'reader B +-0.0003 nmol/L_air/g_DM abs, in dex'
+  value_as_printed: 0.0004
+  unit_as_printed: nmol.L_air-1.g_DM-1 (digitised)
+  source_value: Fig. 2 2,6-dimethylpyrazine 140 C 118 min, reader B as written
+text_checks:
+- quote: Fig. 2 symbol mapping (caption glyphs lost in the text layer)
+  reading: grey squares = 140 C (the only series at 93 and 118 min), magenta circles = 200 C (hatched >range 3-MB points), green triangles = 170 C. Confidence high.
+- quote: Sec. 3.2.1 furanic levels in "mmol.L-1 air.gDM" vs the Fig. 2 axis nmol.L_air-1.g_DM-1
+  reading: values keyed in the axis unit; the text-vs-axis prefix conflict unresolved (reader B).
+- quote: '140 C squares at 88 min vs Methods "At 140 C, the last interval was replaced with two intervals: 91-95 min and 116-120 min"'
+  reading: keyed as plotted by reader B (dropped in the adjudication).

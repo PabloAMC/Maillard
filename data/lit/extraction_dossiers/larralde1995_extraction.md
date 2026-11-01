@@ -174,6 +174,13 @@ shown); phosphate activity at pH 3-5 (term measured only at pD 7.4); anything am
 6. **The plateau may be HPO₄²⁻ catalysis, not an ionisation** — the authors offer both readings.
 7. Abstract's 40 °C data are not shown.
 8. No product identification: "decomposition" may include products other than either deoxyosone.
+9. **Bicarbonate activity (added 2026-11-01, resolve2_pyrbuf T3 as corrected by its red team; CF-094)** [Z]: from
+   the bicarbonate / phosphate ratio 0.52 at equal pD 7.4 and the rate law in min⁻¹, the derived bicarbonate activity
+   is ~0.23x phosphate per mole, but with the paper's own ratio precision (kH2O / kD2O = 1.0 ± 0.2) 0.52 ± 0.10 against
+   0.38 (0.33-0.43) for phosphate-only catalysis is 0.9-1.4 σ: **consistent with zero**. Two biases: the bicarbonate
+   run's temperature is inferred (100 °C, P 0.8), and CO2 loss in the sealed tube would raise pD and the rate, i.e.
+   bias toward apparent catalysis. Status of this paper's rows: keyed held-out (`heldout_larralde1995.yml`), NOT in
+   a frozen split (contrast-benchmark README sec. 10).
 
 ## Use in the model
 

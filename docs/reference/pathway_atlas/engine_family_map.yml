@@ -1,0 +1,1740 @@
+# Pathway-condition atlas, ENGINE SIDE: which engine reaction implements which family, and the condition
+# dependence the engine CODES for it (a map, 2026-11-01; no simulation grid).
+#
+# Read from: src/kinetic_core/network.py (TRUNK_REACTIONS and its blocks), sulfur.py (FULL_REACTIONS =
+# network.REACTIONS + FED_3DEOXY_REACTIONS + SULFUR_REACTIONS, REACTION_PH_FACTOR, inactive_reactions),
+# acrylamide.py (FULL_ACRYLAMIDE_REACTIONS = network.REACTIONS + ACRYLAMIDE_REACTIONS), lipid.py (its analytic
+# steps), trunk_conditions.py, acrylamide_conditions.py, parameters_sulfur.ph_factor, engine._integrate_program.
+# The numbers (Ea, pH ratios, on/off) were read from the shipped configuration (engine.core_parameters(lane) and the
+# lanes' rate-constant functions at 100 C), not from a run.
+# Vocabulary: families.yml (binding). Checker: scripts/generators/check_engine_family_map.py
+#   ./scripts/docker_maillard.sh run "python -m scripts.generators.check_engine_family_map"
+#
+# FIELDS (per reaction)
+#   lanes      -- the lanes whose reaction tuple carries the key (the checker verifies this against the tuples).
+#   family     -- ONE primary family id from families.yml, or one of the pseudo ids below.
+#   secondary  -- optional further family ids.
+#   shipped    -- true when the step carries a non-zero rate in the SHIPPED configuration (checker: k != 0 at 100 C,
+#                 pH 7 / the lane's reference, and not in sulfur.inactive_reactions()). off_reason says which switch.
+#   ph         -- the coded pH factor, per lane where lanes differ. Ratios are k(pH)/k(reference) at 100 C.
+#   T          -- the coded temperature law (Arrhenius Ea in kJ/mol unless stated) and its evidence class.
+#   o2, amine, buffer, water -- the coded term; OMITTED MEANS "none: no term in the code".
+#   note       -- what matters for the comparison with the literature atlas.
+#
+# PSEUDO IDS (not families; engine steps outside the families.yml vocabulary)
+#   X_unassigned_sink         -- a lumped loss of a named species to FRAG / MEL accounting pools, no chemistry named.
+#   X_outside_vocabulary      -- named chemistry that no family in families.yml covers (listed under vocabulary_gaps).
+#   X_transport               -- mass transfer, not a reaction (gas-liquid oxygen supply).
+#
+# LANE-LEVEL CONDITION MACHINERY (what the per-reaction fields abbreviate)
+#   pH, trunk lane: STATIC, the DECLARED pH (process.ph), applied once to k_ref by trunk_conditions.apply
+#     (engine.py:2657). Terms: Martins 2003 slope 0.69 dec/unit about pH 6.8 on k_ama_tdg / k_ama_odg / k_ama_mgo
+#     (trunk_conditions.py:126; x0.057 at pH 5, x14.9 at pH 8.5); 0.77 dec/unit on k_tdg_fa (trunk_conditions.py:145);
+#     the Leahy two-slope pyrazine term (knot 7, ref 6.8) on k_go_ak / k_mgo_ak (x0.091 at pH 5, x2.6 at pH 8.5) and,
+#     by transfer, on k_go_met / k_mgo_met / k_mgo_pro / k_ha_athp. Everything else on the trunk: no pH term.
+#   pH, sulfur lane: DYNAMIC in-situ pH (ph_state), factor kinds from sulfur.REACTION_PH_FACTOR (sulfur.py:1158),
+#     normalised to 1 at pH 5 (parameters_sulfur.ph_factor, :992). The 29 trunk steps the lane carries get NO pH term:
+#     sulfur.TRUNK_PH_TERMS = False (sulfur.py:1278).
+#     Ratios quoted below are k(pH)/k(pH 7) at 100 C, I = 0:
+#       acid        [H+]                        x100 at pH 5,  x0.01 at pH 9
+#       base        free cysteine-amine fraction x0.010 at pH 5, x86 at pH 9
+#       neutral_h2s neutral H2S fraction         x4.3 at pH 5,  x0.013 at pH 9
+#       hs_anion    HS- fraction                 x0.043 at pH 5, x1.29 at pH 9
+#       thiolate    thiolate fraction            x0.017 at pH 5, x2.4 at pH 9
+#       hydroxide   [OH-] (only on switched-off steps)
+#   pH, acrylamide lane: STATIC, INITIAL pH, window 4-8 held at the edges (acrylamide_conditions.py:122-123):
+#     k_asn_glc 0.235 dec/unit (x0.38 pH 5, x1.9 pH 8), k_acr_dp 0.149 dec/unit (x0.54 pH 5, x1.5 pH 8). The 26 trunk
+#     steps the lane carries: no pH term.
+#   pH, lipid lane: none (engine.NO_PH_TERM_LANES).
+#   water: trunk lane a_w multiplier on k_schiff ONLY (trunk_conditions.py:82; x3.5 at a_w 0.6, held below 0.33);
+#     acrylamide lane: flat formation term on k_int1_acr inside a_w 0.34-0.99 and an elimination shape on k_acr_dp
+#     (x0.58 at a_w 0.6); sulfur and lipid lanes: none. No term distinguishes dilute from concentrated solutions.
+#   oxygen: trunk lane: an atmosphere lever on k_glc_g / k_ama_g (trunk_conditions.py:266) whose factor table holds
+#     only air = 1 (trunk_conditions.py:275): any other atmosphere RAISES. Sulfur lane: an oxidant state OX seeded at
+#     1.0 ambient for every pot (engine.py:2533, also under inert_gas), resupply k_ox_supply = 0 and the two O2
+#     consumers k_cys_ox / k_red_ox = 0 in the shipped report: OX is a fixed, non-replenished oxidant charge consumed
+#     only by the thiol dimerisations. Acrylamide and lipid lanes: none (the lipid LOOH pool is an input; no
+#     initiation, parameters_lipid.py:593).
+#   amine: the trunk's single amine is Gly; PRO and MET are ADDED TO Gly on the trunk lane (engine.py:2560, :2565);
+#     the B18 pyrazine constants are alanine data declared as glycine; bound lysine LYSP is charged only from a
+#     protein loading. Sulfur lane: cysteine is the catalyst of pentose enolisation (r_pent_*), the pentose + other
+#     amine entry is OFF; ARP (a fed pentose Amadori compound) is the only non-sulfur amine route. Acrylamide lane:
+#     Asn, plus Gln / Lys / Ala / Cys as competitors.
+#   buffer: no reaction carries a buffer (phosphate / carboxylate) CATALYSIS term anywhere. The sulfur lane uses the
+#     buffer only as a titrant in the pH state. Every Martins / De Vleeschouwer constant was measured in phosphate.
+#   temperature: Arrhenius per step (KineticParameter / SulfurParameter.k_at). The sulfur lane's fitted formation steps
+#     share ONE barrier, 64.08 kJ/mol (frozen lumped_formation_Ea_kJ_mol), the osone / furfural / norfuraneol sinks
+#     one 143.5 (carbonyl_sink), the thiol sinks one 101.3 (thiol_sink); measured overrides in
+#     parameters_sulfur.MEASURED_EA_OVERRIDES. The lipid rate is a Q10 = 2.45 law from 25 C (parameters_lipid.py:312).
+
+schema: engine_family_map/v1
+vocabulary: docs/reference/pathway_atlas/families.yml
+pseudo_ids: [X_unassigned_sink, X_outside_vocabulary, X_transport]
+
+lanes:
+  trunk: {tuple: network.TRUNK_REACTIONS, n: 55}
+  sulfur: {tuple: sulfur.FULL_REACTIONS, n: 132, composition: "network.REACTIONS (26) + FED_3DEOXY_REACTIONS (3) + SULFUR_REACTIONS (103)"}
+  acrylamide: {tuple: acrylamide.FULL_ACRYLAMIDE_REACTIONS, n: 42, composition: "network.REACTIONS (26) + ACRYLAMIDE_REACTIONS (16)"}
+  lipid: {tuple: "none (analytic steps in lipid.integrate_lipid)", n: 6}
+
+reactions:
+  # =====================================================================================================================
+  # network.REACTIONS -- B1 + B7, carried by trunk, sulfur and acrylamide lanes (same constants in all three)
+  # =====================================================================================================================
+  r_schiff:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F01_schiff_glycosylamine
+    shipped: true
+    ph: "none in every lane"
+    T: "Ea 96.8, measured (Martins 2005 step 1, composite)"
+    amine: "Gly = the generic amine (PRO, MET added to it on the trunk lane)"
+    water: "trunk lane only: a_w multiplier x3.5 at a_w 0.6 (Pereyra Gonzales 2010, measured on bound-lysine loss)"
+  r_amadori:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F02_amadori_heyns
+    shipped: true
+    ph: "none"
+    T: "derived: 44.9 x k_schiff x amine loading, so Ea 96.8 by construction"
+    amine: "Gly generic"
+    water: "trunk lane: inherits the k_schiff a_w multiplier through the derivation"
+    note: "Aldose only: the fructose / Heyns arm does not exist (Fru has no amine reaction)."
+  r_glc_fru:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F14_caramelisation_amine_free
+    shipped: true
+    ph: "none"
+    T: "Ea 123.0, measured (Martins step 2)"
+    note: "Lobry de Bruyn isomerisation; amine-independent and pH-independent in code although base-catalysed."
+  r_fru_glc:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F14_caramelisation_amine_free
+    shipped: true
+    ph: "none"
+    T: "Ea 93.0, measured (Martins step 3)"
+  r_ama_tdg:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F06_enol12_3deoxyosone
+    secondary: [F03_amadori_reversion]
+    shipped: true
+    ph: "trunk: +0.69 dec/unit about 6.8 (x0.057 pH 5, x14.9 pH 8.5); sulfur: none (TRUNK_PH_TERMS False); acrylamide: none"
+    T: "Ea 97.0, measured (Martins step 4)"
+    amine: "Gly generic; the amine is regenerated"
+  r_tdg_fa:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F11_beta_dicarbonyl_cleavage
+    shipped: true
+    ph: "trunk: +0.77 dec/unit about 6.8 (x0.041 pH 5, x20 pH 8.5); sulfur: none; acrylamide: none"
+    T: "Ea 30.0, measured (Martins step 5; flagged ea_conflicts_with_knol_2010, three_laboratories_disagree_b44)"
+  r_ama_mgo:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F10_retroaldol_c3_c2
+    secondary: [F03_amadori_reversion]
+    shipped: true
+    ph: "trunk: +0.69 dec/unit (Martins); sulfur: none; acrylamide: none"
+    T: "Ea 125.0, measured (Martins step 6)"
+    amine: "Gly generic; regenerated"
+  r_ama_odg:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F07_enol23_1deoxyosone
+    secondary: [F03_amadori_reversion]
+    shipped: true
+    ph: "trunk: +0.69 dec/unit (Martins); sulfur: none; acrylamide: none"
+    T: "Ea 107.0, measured (Martins step 7)"
+    amine: "Gly generic; regenerated"
+  r_odg_aa:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F11_beta_dicarbonyl_cleavage
+    shipped: true
+    ph: "none in every lane"
+    T: "Ea 76.0, measured (Martins step 8)"
+  r_tdg_mel:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F31_melanoidins
+    shipped: true
+    ph: "none"
+    T: "Ea 95.2, measured (Martins step 9, the mass sink)"
+    amine: "Gly generic (consumed)"
+  r_fru_acids:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F14_caramelisation_amine_free
+    secondary: [F11_beta_dicarbonyl_cleavage]
+    shipped: true
+    ph: "none"
+    T: "Ea 237.0, measured but flagged ea_poorly_determined (Martins step 10)"
+  r_glc_frag:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F14_caramelisation_amine_free
+    shipped: true
+    ph: "none"
+    T: "Ea 180.7, fitted (B1); k(100 C) = 1e-8 /min, effectively inert"
+  r_mgo_mel:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F31_melanoidins
+    shipped: true
+    ph: "none"
+    T: "Ea 20.04, fitted (B1) and sitting on the 20 kJ/mol lower bound"
+    amine: "none: MGO enters the melanoidin pool without an amine (carbon only)"
+  r_fa_frag:
+    lanes: [trunk, sulfur, acrylamide]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 20.5, fitted at the lower bound; k(100 C) 3.5e-8 /min"
+  r_aa_frag:
+    lanes: [trunk, sulfur, acrylamide]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 20.0, fitted at the lower bound"
+  r_glc_tdg:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F06_enol12_3deoxyosone
+    secondary: [F14_caramelisation_amine_free]
+    shipped: true
+    ph: "none"
+    T: "Ea 107.2, measured in a 160-200 C glucose melt (Kocadagli), extrapolated below 160 C"
+    amine: "amine-free"
+    water: "none (measured in a melt, applied in water too)"
+  r_tdg_ddg:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F13_furans_dehydration
+    shipped: true
+    ph: "none"
+    T: "Ea 36.9, fitted (B7, melt data, extrapolated below 160 C)"
+  r_ddg_hmf:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F13_furans_dehydration
+    shipped: true
+    ph: "none"
+    T: "Ea 0 (author-fixed to zero; 'does not follow Arrhenius')"
+  r_fru_int:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F13_furans_dehydration
+    secondary: [F14_caramelisation_amine_free]
+    shipped: true
+    ph: "none"
+    T: "Ea 100.4, measured in the melt, extrapolated below 160 C"
+  r_int_hmf:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F13_furans_dehydration
+    secondary: [F14_caramelisation_amine_free]
+    shipped: true
+    ph: "none"
+    T: "Ea 151.4, measured in the melt, extrapolated below 160 C"
+  r_fru_odg:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F07_enol23_1deoxyosone
+    secondary: [F14_caramelisation_amine_free]
+    shipped: true
+    ph: "none"
+    T: "Ea 99.3, measured in the melt"
+    amine: "amine-free"
+  r_tdg_mgo:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F10_retroaldol_c3_c2
+    shipped: true
+    ph: "none (a 0.63 dec/unit term was tried in B40 and rejected by the Leitzen hold-out; trunk_conditions.py:153)"
+    T: "Ea 84.8, measured in the melt"
+  r_hmf_self:
+    lanes: [trunk, sulfur, acrylamide]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 0 by declaration (one temperature, 5 C)"
+  r_odg_af:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F13_furans_dehydration
+    shipped: true
+    ph: "none"
+    T: "Ea 0 by declaration (level transferred from the pentose fit)"
+  r_af_dmhf:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F13_furans_dehydration
+    secondary: [F15_redox_reductones]
+    shipped: true
+    ph: "none"
+    T: "Ea 76.0, declared 'not rate-limiting' assumption"
+    note: "A reduction with no reductant in the stoichiometry."
+  r_mgo_dmhf:
+    lanes: [trunk, sulfur, acrylamide]
+    family: F13_furans_dehydration
+    secondary: [F10_retroaldol_c3_c2]
+    shipped: true
+    ph: "none"
+    T: "Ea 0 (single temperature, digitised bar chart); k 1.2e-9 L/(mmol min)"
+
+  # =====================================================================================================================
+  # network.FED_3DEOXY_REACTIONS -- trunk and sulfur lanes (not acrylamide)
+  # =====================================================================================================================
+  r_ddg_tdg:
+    lanes: [trunk, sulfur]
+    family: F06_enol12_3deoxyosone
+    secondary: [F13_furans_dehydration]
+    shipped: true
+    ph: "none"
+    T: "Ea 36.9, declared equal to the forward dehydration (B39 fit)"
+  r_ddg_dgal:
+    lanes: [trunk, sulfur]
+    family: F06_enol12_3deoxyosone
+    secondary: [F13_furans_dehydration]
+    shipped: true
+    ph: "none"
+    T: "Ea 36.9, declared (B39)"
+  r_dgal_ddg:
+    lanes: [trunk, sulfur]
+    family: F06_enol12_3deoxyosone
+    secondary: [F13_furans_dehydration]
+    shipped: true
+    ph: "none"
+    T: "Ea 36.9, declared (B39)"
+
+  # =====================================================================================================================
+  # network.DICARBONYL_REACTIONS (B13) -- trunk lane only
+  # =====================================================================================================================
+  r_glc_g:
+    lanes: [trunk]
+    family: F08_oxidative_osone
+    shipped: true
+    ph: "none"
+    T: "Ea 125.9, measured (Kocadagli, glucose melt in air)"
+    o2: "atmosphere lever; only air answerable (factor 1), argon / air_cu raise"
+  r_g_go:
+    lanes: [trunk]
+    family: F10_retroaldol_c3_c2
+    secondary: [F08_oxidative_osone]
+    shipped: true
+    ph: "none"
+    T: "Ea 4.2, fitted (B21; barrier consistent with zero)"
+  r_odg_da:
+    lanes: [trunk]
+    family: F10_retroaldol_c3_c2
+    secondary: [F11_beta_dicarbonyl_cleavage]
+    shipped: true
+    ph: "none"
+    T: "Ea 150.8, measured in the melt"
+  r_go_sink:
+    lanes: [trunk]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 0 (author-fixed)"
+  r_da_sink:
+    lanes: [trunk]
+    family: X_unassigned_sink
+    shipped: false
+    off_reason: "k = 0 +/- 0 in the source (diacetyl accumulates), carried at zero"
+    ph: "none"
+    T: "Ea 0"
+
+  # =====================================================================================================================
+  # network.PYRAZINE_REACTIONS (B18) -- trunk lane only
+  # =====================================================================================================================
+  r_go_ak:
+    lanes: [trunk]
+    family: F16_strecker_aldehyde
+    secondary: [F19_aminoketone_pyrazine]
+    shipped: true
+    ph: "Leahy two-slope term, knot 7, ref 6.8 (x0.091 pH 5, x2.6 pH 8.5)"
+    T: "Ea 103.1, fitted (B18, Zhou 2024 three temperatures)"
+    amine: "Gly; fitted on ALANINE data declared as glycine (+/- 0.5 dex)"
+  r_mgo_ak:
+    lanes: [trunk]
+    family: F16_strecker_aldehyde
+    secondary: [F19_aminoketone_pyrazine]
+    shipped: true
+    ph: "Leahy two-slope term (as r_go_ak)"
+    T: "Ea 114.9, fitted (B18)"
+    amine: "Gly; alanine data declared as glycine"
+  r_akg_pz:
+    lanes: [trunk]
+    family: F19_aminoketone_pyrazine
+    shipped: true
+    ph: "none"
+    T: "Ea 0, declared fast (shared k_cond)"
+  r_akm_dmp:
+    lanes: [trunk]
+    family: F19_aminoketone_pyrazine
+    shipped: true
+    ph: "none"
+    T: "Ea 0, declared fast (k_cond)"
+  r_ak_mpz:
+    lanes: [trunk]
+    family: F19_aminoketone_pyrazine
+    shipped: true
+    ph: "none"
+    T: "Ea 0, declared fast (k_cond)"
+
+  # =====================================================================================================================
+  # network.GLYCATION_REACTIONS (B20) -- trunk lane only; carry flux only when a protein loading charges LYSP
+  # =====================================================================================================================
+  r_glc_lysp:
+    lanes: [trunk]
+    family: F05_protein_glycation
+    secondary: [F01_schiff_glycosylamine, F02_amadori_heyns]
+    shipped: true
+    ph: "none"
+    T: "Ea 96.8, declared (B20; not fitted)"
+    amine: "protein-bound lysine LYSP (from matrix site density x available fraction)"
+    water: "none (the trunk a_w term is on k_schiff, not on k_glyc)"
+  r_flp_cml:
+    lanes: [trunk]
+    family: F05_protein_glycation
+    secondary: [F08_oxidative_osone]
+    shipped: true
+    ph: "none"
+    T: "Ea 113.0, declared (Berk 2021)"
+    o2: "none (an oxidative cleavage with no O2 term)"
+  r_flp_cel:
+    lanes: [trunk]
+    family: F05_protein_glycation
+    shipped: true
+    ph: "none"
+    T: "Ea 92.0, declared"
+  r_flp_decay:
+    lanes: [trunk]
+    family: F05_protein_glycation
+    secondary: [F06_enol12_3deoxyosone, F03_amadori_reversion]
+    shipped: true
+    ph: "none (the free-amine Amadori decays carry the Martins slope; the bound one does not)"
+    T: "Ea 97.1, declared"
+  r_cml_loss:
+    lanes: [trunk]
+    family: F31_melanoidins
+    secondary: [F05_protein_glycation]
+    shipped: true
+    ph: "none"
+    T: "Ea 0, declared"
+
+  # =====================================================================================================================
+  # network.AQUEOUS_GLYOXAL_REACTIONS (B21) -- trunk lane only
+  # =====================================================================================================================
+  r_ama_g:
+    lanes: [trunk]
+    family: F08_oxidative_osone
+    secondary: [F03_amadori_reversion]
+    shipped: true
+    ph: "none (not one of the Martins PH_STEPS)"
+    T: "Ea 75.9, measured (Hamzalioglu 2026)"
+    o2: "atmosphere lever; only air answerable"
+    amine: "Gly generic; regenerated"
+
+  # =====================================================================================================================
+  # network.METHIONINE_REACTIONS (B22 / B22b) -- trunk lane only; NOT SHIPPED
+  # =====================================================================================================================
+  r_go_met:
+    lanes: [trunk]
+    family: F16_strecker_aldehyde
+    secondary: [F19_aminoketone_pyrazine]
+    shipped: false
+    off_reason: "METHIONINE_SHIPPED = False (parameters_methionine.py:59): inert constants"
+    ph: "Leahy pyrazine term by transfer"
+    T: "Ea 103.1, B18's barrier"
+    amine: "methionine (MET also added to the Gly pool)"
+  r_mgo_met:
+    lanes: [trunk]
+    family: F16_strecker_aldehyde
+    secondary: [F19_aminoketone_pyrazine]
+    shipped: false
+    off_reason: "METHIONINE_SHIPPED = False"
+    ph: "Leahy pyrazine term by transfer"
+    T: "Ea 114.9, B18's barrier"
+    amine: "methionine"
+  r_mtal_msh:
+    lanes: [trunk]
+    family: X_outside_vocabulary
+    shipped: false
+    off_reason: "METHIONINE_SHIPPED = False"
+    ph: "none"
+    T: "Ea 64.0, fitted (B22)"
+    note: "methional -> methanethiol + acrolein (retro-Michael); methionine-sulfur chemistry has no family."
+  r_msh_dmds:
+    lanes: [trunk]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "METHIONINE_SHIPPED = False"
+    ph: "none (the sulfur lane's disulfides are thiolate-gated; this one is not)"
+    T: "Ea 81.0, fitted"
+    o2: "none: an apparent second-order constant, internal oxidant not tracked"
+  r_marp_mtal:
+    lanes: [trunk]
+    family: F17_strecker_acid_o2
+    secondary: [F16_strecker_aldehyde]
+    shipped: false
+    off_reason: "B22B_SHIPPED = False (parameters_methionine.py:103)"
+    ph: "none"
+    T: "Ea 85.0, declared at one temperature"
+    o2: "none (the Amadori route is O2-dependent in Hofmann 2000b; no term)"
+  r_marp_loss:
+    lanes: [trunk]
+    family: X_unassigned_sink
+    shipped: false
+    off_reason: "B22B_SHIPPED = False"
+    ph: "none"
+    T: "Ea 85.0, declared"
+
+  # =====================================================================================================================
+  # network.PROLINE_REACTIONS (B24 / B24b) -- trunk lane only; NOT SHIPPED
+  # =====================================================================================================================
+  r_mgo_pro:
+    lanes: [trunk]
+    family: F16_strecker_aldehyde
+    secondary: [F21_pyrroles_pyridines]
+    shipped: false
+    off_reason: "PROLINE_SHIPPED = False (parameters_proline.py:48)"
+    ph: "Leahy pyrazine term by transfer"
+    T: "Ea 114.9, declared"
+    amine: "proline (PRO also added to the Gly pool)"
+  r_pyrl_ha_athp:
+    lanes: [trunk]
+    family: F21_pyrroles_pyridines
+    shipped: false
+    off_reason: "B24B_SHIPPED = False (parameters_proline.py:152)"
+    ph: "Leahy pyrazine term by transfer, checked against Schieberle & Hofmann 2005 Table 2"
+    T: "Ea 60.2, declared"
+  r_pyrl_loss:
+    lanes: [trunk]
+    family: X_unassigned_sink
+    shipped: false
+    off_reason: "B24B_SHIPPED = False"
+    ph: "none"
+    T: "Ea 60.2, declared"
+  r_pyrl_ap:
+    lanes: [trunk]
+    family: F21_pyrroles_pyridines
+    shipped: false
+    off_reason: "PROLINE_SHIPPED = False"
+    ph: "none"
+    T: "Ea 60.2, declared"
+    o2: "none ('oxidation in air' in the note; no term)"
+
+  # =====================================================================================================================
+  # sulfur.SULFUR_REACTIONS -- sulfur lane only (pH = dynamic in-situ; kinds from REACTION_PH_FACTOR)
+  # =====================================================================================================================
+  r_gsh_h2s:
+    lanes: [sulfur]
+    family: F27_thiamine_gsh_sources
+    secondary: [F22_cysteine_h2s]
+    shipped: true
+    ph: "measured pH-indexed Arrhenius table (glutathione_thermolysis_k): x0.20 pH 5, x3.2 pH 9"
+    T: "Ea 111.2 at the reference pH, measured (Zheng & Ho); pH-dependent"
+  r_cys_h2s:
+    lanes: [sulfur]
+    family: F22_cysteine_h2s
+    shipped: true
+    ph: "measured four-pH Arrhenius set (cysteine_thermolysis_k): x0.18 pH 5, x2.25 pH 9 (label pH under B51)"
+    T: "Ea 133, measured (Zheng & Ho)"
+    amine: "cysteine"
+  r_cys_thermal:
+    lanes: [sulfur]
+    family: X_unassigned_sink
+    secondary: [F28_thiol_losses]
+    shipped: true
+    ph: "none"
+    T: "Ea 55.1, measured override (Kang)"
+    note: "lump of cystine formation, non-sulfide degradation, self-condensation"
+  r_h2s_loss:
+    lanes: [sulfur]
+    family: X_unassigned_sink
+    secondary: [F28_thiol_losses]
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared formation barrier (fitted)"
+    note: "volatilisation and every non-thiol sulfide sink"
+  r_pent_dpo:
+    lanes: [sulfur]
+    family: F07_enol23_1deoxyosone
+    shipped: true
+    ph: "base (cysteine free-amine fraction): x0.010 pH 5, x86 pH 9"
+    T: "Ea 64.1, shared formation barrier"
+    amine: "cysteine as CATALYST (regenerated); no other amine catalyses"
+    note: "set to zero when CYS_AMADORI_ROUTE is enabled (off in shipped), as is r_pent_tdp"
+  r_pent_tdp:
+    lanes: [sulfur]
+    family: F06_enol12_3deoxyosone
+    shipped: true
+    ph: "acid: [H+], x100 pH 5, x0.01 pH 9"
+    T: "Ea 64.1, shared"
+    amine: "cysteine as catalyst"
+  r_pent_caramel:
+    lanes: [sulfur]
+    family: F06_enol12_3deoxyosone
+    secondary: [F14_caramelisation_amine_free]
+    shipped: true
+    ph: "none (B2.1 removed its acid factor)"
+    T: "Ea 64.1, shared"
+    amine: "amine-free"
+  r_pent_thermal_dpo:
+    lanes: [sulfur]
+    family: F07_enol23_1deoxyosone
+    secondary: [F14_caramelisation_amine_free]
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+    amine: "amine-free"
+  r_arp_dpo:
+    lanes: [sulfur]
+    family: F07_enol23_1deoxyosone
+    shipped: true
+    ph: "base (CYSTEINE free-amine fraction, applied to an alanine Amadori compound): x0.010 pH 5, x86 pH 9"
+    T: "Ea 85.7, measured override"
+    amine: "fed pentose Amadori compound (alanine); amine declared destroyed"
+  r_arp_tdp:
+    lanes: [sulfur]
+    family: F06_enol12_3deoxyosone
+    shipped: true
+    ph: "acid: x100 pH 5, x0.01 pH 9"
+    T: "Ea 85.7, measured override"
+  r_arp_tdp_thermal:
+    lanes: [sulfur]
+    family: F06_enol12_3deoxyosone
+    shipped: true
+    ph: "none (uncatalysed twin)"
+    T: "Ea 64.1, shared"
+  r_arp_dpo_thermal:
+    lanes: [sulfur]
+    family: F07_enol23_1deoxyosone
+    shipped: true
+    ph: "none (uncatalysed twin)"
+    T: "Ea 64.1, shared"
+  r_dpo_nf:
+    lanes: [sulfur]
+    family: F13_furans_dehydration
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  r_dpo_ptr:
+    lanes: [sulfur]
+    family: F15_redox_reductones
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+    note: "Nedvidek's other partition product (2,3,4-pentanetrione); family assignment low confidence"
+  r_dpo_ddp:
+    lanes: [sulfur]
+    family: F15_redox_reductones
+    secondary: [F16_strecker_aldehyde, F23_mft_intact_c5]
+    shipped: true
+    ph: "base: x0.010 pH 5, x86 pH 9 (rival laws under DDP_FORMATION_PH; base shipped)"
+    T: "Ea 64.1, shared"
+    amine: "cysteine (Strecker-coupled reduction, consumed)"
+  r_dpo_ddp_h2s:
+    lanes: [sulfur]
+    family: F22_cysteine_h2s
+    secondary: [F16_strecker_aldehyde]
+    shipped: false
+    off_reason: "STRECKER_SULFUR.enabled False: derived share of r_dpo_ddp is zero"
+    ph: "base (inherits r_dpo_ddp)"
+    T: "inherits r_dpo_ddp"
+    amine: "cysteine"
+  r_dpo_c2c3:
+    lanes: [sulfur]
+    family: F10_retroaldol_c3_c2
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  r_tdp_fur:
+    lanes: [sulfur]
+    family: F13_furans_dehydration
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  r_glc_c2c3:
+    lanes: [sulfur]
+    family: F10_retroaldol_c3_c2
+    secondary: [F14_caramelisation_amine_free]
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared; k(100 C) 2.8e-10 /min"
+    amine: "amine-free"
+  r_glc_fur:
+    lanes: [sulfur]
+    family: F13_furans_dehydration
+    secondary: [F14_caramelisation_amine_free]
+    shipped: true
+    ph: "acid: x100 pH 5, x0.01 pH 9"
+    T: "Ea 64.1, shared"
+  r_arp_decay:
+    lanes: [sulfur]
+    family: F11_beta_dicarbonyl_cleavage
+    shipped: true
+    ph: "none"
+    T: "Ea 143.5, carbonyl_sink barrier (fitted)"
+    note: "lumped Amadori sink to ACID; family low confidence"
+  r_osone_decay_dpo:
+    lanes: [sulfur]
+    family: F11_beta_dicarbonyl_cleavage
+    shipped: true
+    ph: "none"
+    T: "Ea 143.5, carbonyl_sink"
+    note: "lumped osone sink to ACID (the measured base-catalysed pentose acetic acid route r_dpo_aa is off)"
+  r_osone_decay_tdp:
+    lanes: [sulfur]
+    family: F11_beta_dicarbonyl_cleavage
+    shipped: true
+    ph: "none"
+    T: "Ea 143.5, carbonyl_sink (TDP_OWN_DECAY alternative off)"
+  r_osone_decay_ddp:
+    lanes: [sulfur]
+    family: F11_beta_dicarbonyl_cleavage
+    shipped: true
+    ph: "none"
+    T: "Ea 143.5, carbonyl_sink"
+  r_ptr_decay:
+    lanes: [sulfur]
+    family: F11_beta_dicarbonyl_cleavage
+    shipped: true
+    ph: "none"
+    T: "Ea 143.5, carbonyl_sink"
+  r_ddp_mft:
+    lanes: [sulfur]
+    family: F23_mft_intact_c5
+    shipped: true
+    ph: "neutral_h2s: x4.3 pH 5, x0.013 pH 9"
+    T: "Ea 64.1, shared"
+  r_ddp_mft_hs:
+    lanes: [sulfur]
+    family: F23_mft_intact_c5
+    shipped: true
+    ph: "hs_anion: x0.043 pH 5, x1.29 pH 9"
+    T: "Ea 64.1, shared"
+  r_nf_mft:
+    lanes: [sulfur]
+    family: F23_mft_intact_c5
+    shipped: true
+    ph: "neutral_h2s: x4.3 pH 5, x0.013 pH 9"
+    T: "Ea 64.1, shared"
+  r_nf_mp3p:
+    lanes: [sulfur]
+    family: F26_thiazoles_thiophenes
+    shipped: true
+    ph: "neutral_h2s"
+    T: "Ea 64.1, shared"
+  r_nf_shet:
+    lanes: [sulfur]
+    family: F26_thiazoles_thiophenes
+    shipped: false
+    off_reason: "B49 constant absent from the shipped report (k = 0)"
+    ph: "hs_anion"
+    T: "Ea 64.1, shared"
+  r_ha_mp_mft:
+    lanes: [sulfur]
+    family: F24_mft_fragments
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  r_mgo_mp:
+    lanes: [sulfur]
+    family: F26_thiazoles_thiophenes
+    secondary: [F24_mft_fragments]
+    shipped: true
+    ph: "neutral_h2s"
+    T: "Ea 64.1, shared"
+  r_fur_fft:
+    lanes: [sulfur]
+    family: F25_fft_furfural_h2s
+    shipped: true
+    ph: "neutral_h2s: x4.3 pH 5, x0.013 pH 9"
+    T: "Ea 64.1, shared"
+  r_fur_fft_hs:
+    lanes: [sulfur]
+    family: F25_fft_furfural_h2s
+    shipped: true
+    ph: "hs_anion: x0.043 pH 5, x1.29 pH 9"
+    T: "Ea 64.1, shared"
+  r_fur_decay:
+    lanes: [sulfur]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 143.5, carbonyl_sink"
+  r_nf_decay:
+    lanes: [sulfur]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none (the hydroxide-catalysed decay r_nf_decay_oh is off)"
+    T: "Ea 143.5, carbonyl_sink"
+  r_mp_decay:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "Ea 101.3, thiol_sink"
+  r_mp3p_decay:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "Ea 101.3, thiol_sink"
+  r_mp2p_decay:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "Ea 101.3, thiol_sink"
+  r_hmp_decay:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "Ea 101.3, thiol_sink"
+  r_thi_hmp:
+    lanes: [sulfur]
+    family: F27_thiamine_gsh_sources
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  r_thi_h2s:
+    lanes: [sulfur]
+    family: F27_thiamine_gsh_sources
+    secondary: [F22_cysteine_h2s]
+    shipped: true
+    ph: "measured share table (thiamine_h2s_share): 0 at pH 5, x1.0 at pH 9 vs pH 7"
+    T: "derived from r_thi_hmp + r_thi_mesh, Ea 64.1"
+  r_thi_mesh:
+    lanes: [sulfur]
+    family: F27_thiamine_gsh_sources
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  r_hmp_mft:
+    lanes: [sulfur]
+    family: F27_thiamine_gsh_sources
+    secondary: [F23_mft_intact_c5]
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  r_hmp_mp2p:
+    lanes: [sulfur]
+    family: F27_thiamine_gsh_sources
+    secondary: [F26_thiazoles_thiophenes]
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  r_cys_actz:
+    lanes: [sulfur]
+    family: F26_thiazoles_thiophenes
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+    amine: "cysteine"
+  r_ttca_cys:
+    lanes: [sulfur]
+    family: F04_thiazolidine_ttca
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+    note: "ring opening of a CHARGED TTCA only; formation r_ttca_form is off"
+  r_ttca_deg:
+    lanes: [sulfur]
+    family: F04_thiazolidine_ttca
+    secondary: [F07_enol23_1deoxyosone]
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  ch_thioether_mft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    secondary: [F31_melanoidins]
+    shipped: true
+    ph: "none"
+    T: "Ea 10.8, measured (Stack 2018)"
+  ch_thioether_fft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    secondary: [F31_melanoidins]
+    shipped: true
+    ph: "none"
+    T: "Ea 10.8, measured (Stack 2018)"
+  ch_thioether_release:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "derived: forward / measured K(T) (dH -28.5), apparent Ea 39"
+  ch_thioether_release_fft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "derived, apparent Ea 39"
+  ch_protein_ss_fft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none (thiol-disulfide exchange runs through the thiolate; no factor)"
+    T: "no Ea (temperature-independent by policy)"
+  ch_protein_ss_mft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "no Ea"
+  ch_oligomer_mft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "k_oligomer = 0 (its only measurement is a hold-out; NO_MEASURED_RATE)"
+    ph: "none (acid-catalysed per its own note; no factor)"
+    T: "no Ea"
+  ch_oligomer_fft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "k_oligomer = 0"
+    ph: "none"
+    T: "no Ea"
+  ch_dimer_mft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "thiolate: x0.017 pH 5, x2.4 pH 9"
+    T: "Ea 122.2, measured override"
+    o2: "consumes OX, a fixed charge of 1.0 ambient seeded in every pot (also inert_gas) and never resupplied"
+  ch_dimer_fft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "thiolate"
+    T: "Ea 122.2, measured override"
+    o2: "consumes the fixed OX charge"
+  ch_mmft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "no Ea (NO_EA_KEYS)"
+  ch_thiolate_loss_fft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "thiolate"
+    T: "Ea 101.3, thiol_sink"
+  ch_thiolate_loss_mft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "thiolate"
+    T: "Ea 101.3, thiol_sink"
+  ch_mft_decay:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "Ea 101.3, thiol_sink"
+  ch_fft_decay:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "Ea 101.3, thiol_sink"
+  ch_mftd_decay:
+    lanes: [sulfur]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared; k 8e-11 /min"
+  ch_fftd_decay:
+    lanes: [sulfur]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  ch_mmft_decay:
+    lanes: [sulfur]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 64.1, shared"
+  ch_mesh_decay:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "Ea 101.3, thiol_sink"
+  ch_actz_decay:
+    lanes: [sulfur]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 101.3, thiol_sink"
+  r_dpo_af:
+    lanes: [sulfur]
+    family: F13_furans_dehydration
+    secondary: [F16_strecker_aldehyde]
+    shipped: true
+    ph: "none"
+    T: "Ea 0 (B7 fit)"
+    amine: "Gly as the C1 (Strecker carbon) donor"
+  r_hmf_cys:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: true
+    ph: "none"
+    T: "Ea 29.7 measured, HELD at its 50 C value (TEMPERATURE_CAP_K), so flat above 50 C"
+  r_dmhf_h2s:
+    lanes: [sulfur]
+    family: F26_thiazoles_thiophenes
+    shipped: false
+    off_reason: "structural constant, rate exactly zero (B7 DMHF Edge C)"
+    ph: "none"
+    T: "Ea 0"
+  ox_supply:
+    lanes: [sulfur]
+    family: X_transport
+    shipped: false
+    off_reason: "k_ox_supply = 0 while the O2 consumers are zero (parameters_sulfur.py:1456)"
+    ph: "none"
+    T: "no Ea"
+    o2: "the only path from the headspace reservoir OXR to OX"
+  ch_cys_ox:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "k_cys_ox = 0 in the shipped B2 report (engine.shipped_oxygen_consumers)"
+    ph: "thiolate"
+    T: "no Ea"
+    o2: "O2 consumer (inert)"
+  ch_red_ox_dpo:
+    lanes: [sulfur]
+    family: F15_redox_reductones
+    secondary: [F08_oxidative_osone]
+    shipped: false
+    off_reason: "k_red_ox = 0"
+    ph: "none"
+    T: "no Ea"
+    o2: "O2 consumer (inert)"
+  ch_red_ox_nf:
+    lanes: [sulfur]
+    family: F15_redox_reductones
+    secondary: [F08_oxidative_osone]
+    shipped: false
+    off_reason: "k_red_ox = 0"
+    ph: "none"
+    T: "no Ea"
+    o2: "O2 consumer (inert)"
+  ch_dimer_release_mft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "B17 dimer_release constant absent from the shipped report (k = 0)"
+    ph: "none"
+    T: "Ea 122.2"
+  ch_dimer_release_fft:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "k = 0 (B17 not shipped)"
+    ph: "none"
+    T: "Ea 122.2"
+  ch_mele_from_dpo:
+    lanes: [sulfur]
+    family: F31_melanoidins
+    shipped: false
+    off_reason: "B17a site yield absent from the shipped report (k = 0); MELE is a matrix input instead"
+    ph: "none"
+    T: "Ea 64.1"
+  ch_mele_from_tdp:
+    lanes: [sulfur]
+    family: F31_melanoidins
+    shipped: false
+    off_reason: "k = 0 (B17a not shipped)"
+    ph: "none"
+    T: "Ea 64.1"
+  ch_mele_from_ddp:
+    lanes: [sulfur]
+    family: F31_melanoidins
+    shipped: false
+    off_reason: "k = 0 (B17a not shipped)"
+    ph: "none"
+    T: "Ea 64.1"
+  ch_add_mft_dpo:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "B25 thiol_addition constant absent from the shipped report (k = 0)"
+    ph: "none"
+    T: "Ea 40"
+  ch_add_mft_tdp:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "k = 0 (B25 not shipped)"
+    ph: "none"
+    T: "Ea 40"
+  ch_add_fft_dpo:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "k = 0 (B25 not shipped)"
+    ph: "none"
+    T: "Ea 40"
+  ch_add_fft_tdp:
+    lanes: [sulfur]
+    family: F28_thiol_losses
+    shipped: false
+    off_reason: "k = 0 (B25 not shipped)"
+    ph: "none"
+    T: "Ea 40"
+  ch_redox_mp3p:
+    lanes: [sulfur]
+    family: F26_thiazoles_thiophenes
+    secondary: [F15_redox_reductones]
+    shipped: false
+    off_reason: "B27 dicarbonyl_redox yield absent from the shipped report (k = 0)"
+    ph: "neutral_h2s"
+    T: "no Ea"
+  r_ttca_form:
+    lanes: [sulfur]
+    family: F04_thiazolidine_ttca
+    shipped: false
+    off_reason: "TTCA_FORMATION and CYS_AMADORI_ROUTE disabled (sulfur.inactive_reactions)"
+    ph: "none"
+    T: "derived by detailed balance from r_ttca_cys"
+    amine: "cysteine"
+  r_nf_decay_oh:
+    lanes: [sulfur]
+    family: X_unassigned_sink
+    shipped: false
+    off_reason: "NF_HYDROXIDE_DECAY disabled"
+    ph: "hydroxide: [OH-], 1 dec/unit"
+    T: "Mikami 2017 measured constant"
+  r_nf_decay_oh_mgo:
+    lanes: [sulfur]
+    family: F10_retroaldol_c3_c2
+    shipped: false
+    off_reason: "NF_HYDROXIDE_DECAY disabled / mgo_share 0"
+    ph: "hydroxide"
+    T: "as r_nf_decay_oh"
+  r_tdp_mgo:
+    lanes: [sulfur]
+    family: F10_retroaldol_c3_c2
+    shipped: false
+    off_reason: "PENTOSE_MGO_ROUTES.k_tdp_mgo = 0"
+    ph: "base"
+    T: "own Ea (unset)"
+  r_mgo_cys_strecker:
+    lanes: [sulfur]
+    family: F16_strecker_aldehyde
+    shipped: false
+    off_reason: "MGO_CYSTEINE_STRECKER k = 0"
+    ph: "base"
+    T: "own Ea (unset)"
+    amine: "cysteine"
+  r_tdp_cys_trap:
+    lanes: [sulfur]
+    family: F04_thiazolidine_ttca
+    secondary: [F28_thiol_losses]
+    shipped: false
+    off_reason: "TDP_CYSTEINE_TRAP k = 0"
+    ph: "base"
+    T: "own Ea (unset)"
+    amine: "cysteine"
+  r_mgo_cys_h2s:
+    lanes: [sulfur]
+    family: F22_cysteine_h2s
+    secondary: [F16_strecker_aldehyde]
+    shipped: false
+    off_reason: "MGO_CYSTEINE_STRECKER k = 0 and STRECKER_SULFUR off"
+    ph: "base"
+    T: "own Ea (unset)"
+    amine: "cysteine"
+  r_odg_dpo:
+    lanes: [sulfur]
+    family: F11_beta_dicarbonyl_cleavage
+    secondary: [F23_mft_intact_c5]
+    shipped: false
+    off_reason: "HEXOSE_C5_ENTRY k = 0 (sub-model 4)"
+    ph: "none"
+    T: "own Ea (unset)"
+    note: "the only hexose -> intact-C5 route; without it hexose MFT is fragments-only"
+  r_pent_mgo:
+    lanes: [sulfur]
+    family: F10_retroaldol_c3_c2
+    secondary: [F14_caramelisation_amine_free]
+    shipped: false
+    off_reason: "PENTOSE_MGO_ROUTES.k_pent_mgo = 0"
+    ph: "base"
+    T: "own Ea (unset)"
+  r_cama_form:
+    lanes: [sulfur]
+    family: F04_thiazolidine_ttca
+    secondary: [F02_amadori_heyns]
+    shipped: false
+    off_reason: "CYS_AMADORI_ROUTE disabled"
+    ph: "none"
+    T: "de Roos 2005 route, own law"
+    amine: "cysteine"
+  r_cama_dpo:
+    lanes: [sulfur]
+    family: F07_enol23_1deoxyosone
+    secondary: [F04_thiazolidine_ttca]
+    shipped: false
+    off_reason: "CYS_AMADORI_ROUTE disabled"
+    ph: "in-situ pH decay law and dpo_share (own)"
+    T: "own law"
+  r_cama_tdp:
+    lanes: [sulfur]
+    family: F06_enol12_3deoxyosone
+    secondary: [F04_thiazolidine_ttca]
+    shipped: false
+    off_reason: "CYS_AMADORI_ROUTE disabled"
+    ph: "own decay law"
+    T: "own law"
+  r_pent_amine:
+    lanes: [sulfur]
+    family: F01_schiff_glycosylamine
+    secondary: [F02_amadori_heyns]
+    shipped: false
+    off_reason: "PENTOSE_AMINE_ENTRY disabled"
+    ph: "own slope about pH 6"
+    T: "own Ea (unset)"
+    amine: "Gly standing for every non-sulfur amino acid"
+  r_pama_dpo:
+    lanes: [sulfur]
+    family: F07_enol23_1deoxyosone
+    secondary: [F03_amadori_reversion]
+    shipped: false
+    off_reason: "PENTOSE_AMINE_ENTRY disabled"
+    ph: "base + thermal (scaled ARP rates)"
+    T: "inherits ARP steps"
+  r_pama_tdp:
+    lanes: [sulfur]
+    family: F06_enol12_3deoxyosone
+    secondary: [F03_amadori_reversion]
+    shipped: false
+    off_reason: "PENTOSE_AMINE_ENTRY disabled"
+    ph: "acid + thermal (scaled ARP rates)"
+    T: "inherits ARP steps"
+  r_pama_dpo_n:
+    lanes: [sulfur]
+    family: F07_enol23_1deoxyosone
+    shipped: false
+    off_reason: "PENTOSE_AMINE_ENTRY disabled"
+    ph: "base + thermal"
+    T: "inherits ARP steps"
+  r_pama_tdp_n:
+    lanes: [sulfur]
+    family: F06_enol12_3deoxyosone
+    shipped: false
+    off_reason: "PENTOSE_AMINE_ENTRY disabled"
+    ph: "acid + thermal"
+    T: "inherits ARP steps"
+  r_dpo_aa:
+    lanes: [sulfur]
+    family: F11_beta_dicarbonyl_cleavage
+    shipped: false
+    off_reason: "PENTOSE_AMINE_ENTRY k_dpo_aa = 0"
+    ph: "own base-favoured slope (aa_ph_factor)"
+    T: "own Ea (unset)"
+
+  # =====================================================================================================================
+  # acrylamide.ACRYLAMIDE_REACTIONS -- acrylamide lane only (pH = static initial pH; a_w in window 0.34-0.99)
+  # =====================================================================================================================
+  a_asn_glc_sb:
+    lanes: [acrylamide]
+    family: F29_acrylamide
+    secondary: [F01_schiff_glycosylamine]
+    shipped: true
+    ph: "+0.235 dec/unit about 6.8 (x0.38 pH 5, x1.9 pH 8), held outside pH 4-8"
+    T: "Ea 117.5, measured (De Vleeschouwer 2009)"
+    amine: "asparagine"
+  a_sb_int1:
+    lanes: [acrylamide]
+    family: F29_acrylamide
+    shipped: true
+    ph: "inherits a_asn_glc_sb (derived)"
+    T: "derived, Ea 117.5"
+  a_int1_acr:
+    lanes: [acrylamide]
+    family: F29_acrylamide
+    shipped: true
+    ph: "none"
+    T: "Ea 159.2, measured"
+    water: "flat multiplier 1.0 inside a_w 0.34-0.99 (band 0.41-1.39); refused outside"
+  a_int1_mel:
+    lanes: [acrylamide]
+    family: F31_melanoidins
+    secondary: [F29_acrylamide]
+    shipped: true
+    ph: "none"
+    T: "Ea 260.0, fitted (B3) ON the upper bound of FITTED_ACRYLAMIDE_EA_BOUNDS (20, 260)"
+  a_asn_asp:
+    lanes: [acrylamide]
+    family: X_outside_vocabulary
+    shipped: true
+    ph: "none"
+    T: "Ea 105.4, measured"
+    note: "asparagine deamidation; no family"
+  a_asp_sink:
+    lanes: [acrylamide]
+    family: X_unassigned_sink
+    shipped: true
+    ph: "none"
+    T: "Ea 97.2, measured"
+  a_acr_dp:
+    lanes: [acrylamide]
+    family: F29_acrylamide
+    shipped: true
+    ph: "+0.149 dec/unit (x0.54 pH 5, x1.5 pH 8)"
+    T: "Ea 136.1, fitted on three measurements"
+    water: "elimination shape, minimum 0.33 at a_w 0.82 (x0.58 at a_w 0.6), 1.0 above 0.88"
+  a_acr_cys:
+    lanes: [acrylamide]
+    family: F29_acrylamide
+    secondary: [F28_thiol_losses]
+    shipped: true
+    ph: "none (thiol-Michael through the thiolate; no factor)"
+    T: "Ea 51.3, measured"
+    amine: "cysteine"
+  a_cys_sink:
+    lanes: [acrylamide]
+    family: X_unassigned_sink
+    secondary: [F22_cysteine_h2s]
+    shipped: true
+    ph: "none (the sulfur lane's cysteine thermolysis is pH-indexed; this one is not)"
+    T: "Ea 110.5, measured"
+  a_cys_glc:
+    lanes: [acrylamide]
+    family: F04_thiazolidine_ttca
+    secondary: [F31_melanoidins]
+    shipped: true
+    ph: "none"
+    T: "Ea 30.3, measured"
+    amine: "cysteine competing for glucose"
+  a_gln_glc:
+    lanes: [acrylamide]
+    family: F01_schiff_glycosylamine
+    secondary: [F31_melanoidins]
+    shipped: true
+    ph: "none"
+    T: "Ea 20.0, fitted at the lower bound"
+    amine: "glutamine"
+  a_lys_glc:
+    lanes: [acrylamide]
+    family: F01_schiff_glycosylamine
+    secondary: [F31_melanoidins]
+    shipped: true
+    ph: "none"
+    T: "Ea 20.0, fitted at the lower bound"
+    amine: "free lysine (key Lys; the trunk's bound lysine is LYSP)"
+  a_ala_glc:
+    lanes: [acrylamide]
+    family: F01_schiff_glycosylamine
+    secondary: [F31_melanoidins]
+    shipped: true
+    ph: "none"
+    T: "Ea 20.0, fitted at the lower bound"
+    amine: "alanine"
+  a_acr_gln:
+    lanes: [acrylamide]
+    family: F29_acrylamide
+    shipped: true
+    ph: "none"
+    T: "Ea 51.3, held at the measured E2 barrier"
+  a_acr_lys:
+    lanes: [acrylamide]
+    family: F29_acrylamide
+    shipped: true
+    ph: "none"
+    T: "Ea 51.3"
+  a_acr_ala:
+    lanes: [acrylamide]
+    family: F29_acrylamide
+    shipped: true
+    ph: "none"
+    T: "Ea 51.3"
+
+  # =====================================================================================================================
+  # lipid lane -- analytic steps in lipid.integrate_lipid (not Reaction objects; keys are this map's names)
+  # =====================================================================================================================
+  lipid.looh_decomposition:
+    lanes: [lipid]
+    family: F30_lipid_oxidation_crossover
+    shipped: true
+    ph: "none (lipid lane has no pH term)"
+    T: "Q10 = 2.45 from a 25 C anchor (6e-3 /h, Schroen 2022), band 1.6-3.3; no Ea"
+    o2: "none: the LOOH pool is an INPUT, no initiation / propagation (LOOH_FORMATION_GAP)"
+    note: "the lipid side only; nothing it makes enters a Maillard route (lane_coupling_verdict)"
+  lipid.slate_partition:
+    lanes: [lipid]
+    family: F30_lipid_oxidation_crossover
+    shipped: true
+    ph: "none"
+    T: "temperature-independent shares (Frankel 1989 fit at 180 C)"
+    note: "hydrogen-donor suppression d is a monotone knob with no stored value"
+  lipid.pentylfuran_from_linoleate:
+    lanes: [lipid]
+    family: F30_lipid_oxidation_crossover
+    shipped: true
+    ph: "none"
+    T: "a fixed ratio to hexanal"
+  lipid.nonanal_from_oleate:
+    lanes: [lipid]
+    family: F30_lipid_oxidation_crossover
+    shipped: true
+    ph: "none"
+    T: "declared anchor x share; REFUSED as an answer when oleate is charged"
+  lipid.decadienal_breakage:
+    lanes: [lipid]
+    family: F30_lipid_oxidation_crossover
+    shipped: true
+    ph: "none"
+    T: "Ea 26.6 (Zamora 2015b), OFF below 100 C (window_min_c)"
+  lipid.covalent_aldehyde_lysine_sink:
+    lanes: [lipid]
+    family: F30_lipid_oxidation_crossover
+    secondary: [F05_protein_glycation]
+    shipped: false
+    off_reason: "COVALENT_SINK.enabled False (inert by ruling; asserted zero)"
+    ph: "none"
+    T: "measured Ea 15-23 (not applied)"
+
+# =======================================================================================================================
+# PER FAMILY: the engine reactions (primary first, then secondary; checker verifies these lists) and the coded
+# condition dependence in the same bins. "shipped" counts reactions carrying flux in the shipped configuration.
+# =======================================================================================================================
+families:
+  F01_schiff_glycosylamine:
+    primary: [r_schiff, a_gln_glc, a_lys_glc, a_ala_glc, r_pent_amine]
+    secondary: [r_glc_lysp, a_asn_glc_sb]
+    ph: "none on r_schiff in any lane; Asn condensation +0.235 dec/unit (acrylamide lane); pentose + amine entry off"
+    T: "Ea 96.8 (Martins); competitor amines fitted at the 20 kJ/mol bound"
+    o2: none
+    amine: "Gly as the generic amine (PRO / MET folded in); Asn, Gln, Lys, Ala only in the acrylamide lane; no pentose + non-sulfur amine (off)"
+    buffer: none
+    water: "a_w multiplier x3.5 at 0.6 on k_schiff (trunk lane only)"
+  F02_amadori_heyns:
+    primary: [r_amadori]
+    secondary: [r_glc_lysp, r_cama_form, r_pent_amine]
+    ph: none
+    T: "derived from r_schiff (Ea 96.8)"
+    o2: none
+    amine: "Gly generic"
+    buffer: none
+    water: "inherits the k_schiff a_w term"
+    note: "No Heyns (ketose) arm: fructose never reacts with an amine."
+  F03_amadori_reversion:
+    primary: []
+    secondary: [r_ama_tdg, r_ama_mgo, r_ama_odg, r_flp_decay, r_ama_g, r_pama_dpo, r_pama_tdp]
+    ph: "Martins +0.69 dec/unit on the three free-Amadori decays (trunk lane only)"
+    T: "Ea 97-125 (Martins)"
+    o2: none
+    amine: "Gly regenerated; bound lysine regenerated by r_flp_decay"
+    buffer: none
+    water: none
+    note: "Amine release is implicit in the hub steps; there is no Amadori -> sugar + amine reversion step."
+  F04_thiazolidine_ttca:
+    primary: [r_ttca_cys, r_ttca_deg, a_cys_glc, r_ttca_form, r_tdp_cys_trap, r_cama_form]
+    secondary: [r_cama_dpo, r_cama_tdp]
+    ph: none
+    T: "Ea 64.1 shared (sulfur lane); Ea 30.3 for the acrylamide lane's Cys + Glc"
+    o2: none
+    amine: "cysteine"
+    buffer: none
+    water: none
+    note: "Formation (r_ttca_form) and the Cys-Amadori route are OFF; only a charged TTCA reacts."
+  F05_protein_glycation:
+    primary: [r_glc_lysp, r_flp_cml, r_flp_cel, r_flp_decay]
+    secondary: [r_cml_loss, lipid.covalent_aldehyde_lysine_sink]
+    ph: none
+    T: "declared barriers 92-113 (not fitted)"
+    o2: "none (CML formation is oxidative; no term)"
+    amine: "protein-bound lysine LYSP, charged only from a protein loading"
+    buffer: none
+    water: "none"
+  F06_enol12_3deoxyosone:
+    primary: [r_ama_tdg, r_glc_tdg, r_ddg_tdg, r_ddg_dgal, r_dgal_ddg, r_pent_tdp, r_pent_caramel, r_arp_tdp, r_arp_tdp_thermal, r_cama_tdp, r_pama_tdp, r_pama_tdp_n]
+    secondary: [r_flp_decay]
+    ph: "trunk: Amadori decay +0.69 dec/unit (rises with pH); amine-free glucose route none; sulfur lane: pentose / ARP steps 'acid' ([H+], falls 1 dec/unit) in parallel with pH-free thermal twins; hexose steps none"
+    T: "Ea 97 (Martins), 107 (melt), 64.1 (sulfur shared), 85.7 (ARP); 3-DG / 3,4-DGE / 3-DGal triangle 36.9"
+    o2: none
+    amine: "Gly generic (hexose); cysteine catalyst (pentose); amine-free routes present"
+    buffer: none
+    water: none
+    note: "OPPOSITE pH SIGNS by lane: the hexose 3-DG route rises with pH on the trunk, the pentose 3-DX route falls with pH on the sulfur lane."
+  F07_enol23_1deoxyosone:
+    primary: [r_ama_odg, r_fru_odg, r_pent_dpo, r_pent_thermal_dpo, r_arp_dpo, r_arp_dpo_thermal, r_cama_dpo, r_pama_dpo, r_pama_dpo_n]
+    secondary: [r_ttca_deg]
+    ph: "trunk: Amadori decay +0.69 dec/unit; sulfur: 'base' = cysteine free-amine fraction (x86 pH 7 -> 9), plus pH-free thermal twins"
+    T: "Ea 107 (Martins), 99.3 (melt), 64.1 (sulfur shared), 85.7 (ARP)"
+    o2: none
+    amine: "Gly generic; cysteine pKa used for the base factor of every pentose step, including the alanine ARP"
+    buffer: none
+    water: none
+  F08_oxidative_osone:
+    primary: [r_glc_g, r_ama_g]
+    secondary: [r_g_go, r_flp_cml, ch_red_ox_dpo, ch_red_ox_nf]
+    ph: none
+    T: "Ea 125.9 (Glc -> glucosone, melt), 75.9 (Amadori -> glucosone)"
+    o2: "lever present, air only (factor 1); argon / air_cu refused"
+    amine: "Gly generic (Amadori route)"
+    buffer: none
+    water: none
+    note: "Metals (Cu) named as an atmosphere value, no factor."
+  F09_namiki_c2:
+    primary: []
+    secondary: []
+    ph: "n/a"
+    T: "n/a"
+    o2: "n/a"
+    amine: "n/a"
+    buffer: "n/a"
+    water: "n/a"
+    note: "ABSENT. No Schiff-base fragmentation; glyoxal comes only from glucosone."
+  F10_retroaldol_c3_c2:
+    primary: [r_ama_mgo, r_tdg_mgo, r_g_go, r_odg_da, r_dpo_c2c3, r_glc_c2c3, r_nf_decay_oh_mgo, r_tdp_mgo, r_pent_mgo]
+    secondary: [r_mgo_dmhf]
+    ph: "Amadori -> MGO +0.69 dec/unit (trunk); 3-DG -> MGO none (rejected); sulfur C2+C3 splits none; base-favoured pentose MGO routes off"
+    T: "Ea 125 / 84.8 / 4.2 / 150.8 (trunk); 64.1 shared (sulfur)"
+    o2: none
+    amine: "mostly amine-free"
+    buffer: none
+    water: none
+  F11_beta_dicarbonyl_cleavage:
+    primary: [r_tdg_fa, r_odg_aa, r_arp_decay, r_osone_decay_dpo, r_osone_decay_tdp, r_osone_decay_ddp, r_ptr_decay, r_odg_dpo, r_dpo_aa]
+    secondary: [r_fru_acids, r_odg_da]
+    ph: "3-DG -> formic acid +0.77 dec/unit (trunk only); 1-DG -> acetic acid none; sulfur osone sinks none (the base-favoured pentose acetic acid r_dpo_aa is off)"
+    T: "Ea 30 (3-DG -> FA, conflicts with Knol), 76 (1-DG -> AA), 143.5 (sulfur lumped osone sink)"
+    o2: none
+    amine: none
+    buffer: none
+    water: none
+  F12_alpha_oxidative_cleavage:
+    primary: []
+    secondary: []
+    ph: "n/a"
+    T: "n/a"
+    o2: "n/a"
+    amine: "n/a"
+    buffer: "n/a"
+    water: "n/a"
+    note: "ABSENT. No O2-dependent dicarbonyl cleavage to lactic / glyceric acid."
+  F13_furans_dehydration:
+    primary: [r_tdg_ddg, r_ddg_hmf, r_fru_int, r_int_hmf, r_odg_af, r_af_dmhf, r_mgo_dmhf, r_dpo_nf, r_tdp_fur, r_glc_fur, r_dpo_af]
+    secondary: [r_ddg_tdg, r_ddg_dgal, r_dgal_ddg]
+    ph: "trunk HMF / DMHF limbs: none; sulfur lane: Glc -> furfural 'acid' (1 dec/unit), 3-DX -> furfural none, 1-DX -> norfuraneol none"
+    T: "HMF limb Ea 36.9 then 0 (3-DG side) / 100.4 then 151.4 (fructose side); DMHF edges Ea 0; sulfur 64.1 shared; all trunk values from a 160-200 C melt"
+    o2: none
+    amine: "amine-free on the trunk; glycine C1 in the pentose DMHF arm"
+    buffer: none
+    water: "none (dehydrations carry no a_w term by declaration)"
+  F14_caramelisation_amine_free:
+    primary: [r_glc_fru, r_fru_glc, r_fru_acids, r_glc_frag]
+    secondary: [r_glc_tdg, r_fru_int, r_int_hmf, r_fru_odg, r_pent_caramel, r_pent_thermal_dpo, r_glc_c2c3, r_glc_fur, r_pent_mgo]
+    ph: "none on the trunk (declared: no source contrasts them across pH); sulfur Glc -> furfural acid"
+    T: "Ea 93-237 measured (Martins), 99-151 (melt)"
+    o2: none
+    amine: none
+    buffer: none
+    water: none
+  F15_redox_reductones:
+    primary: [r_dpo_ptr, r_dpo_ddp, ch_red_ox_dpo, ch_red_ox_nf]
+    secondary: [r_af_dmhf, ch_redox_mp3p]
+    ph: "Nedvidek 1,4-dideoxyosone step 'base' (cysteine free-amine fraction)"
+    T: "Ea 64.1 shared"
+    o2: "the reductone O2 consumers exist with k = 0"
+    amine: "cysteine as the reductant (Strecker-coupled)"
+    buffer: none
+    water: none
+  F16_strecker_aldehyde:
+    primary: [r_go_ak, r_mgo_ak, r_go_met, r_mgo_met, r_mgo_pro, r_mgo_cys_strecker]
+    secondary: [r_marp_mtal, r_dpo_ddp, r_dpo_ddp_h2s, r_mgo_cys_h2s, r_dpo_af]
+    ph: "Leahy two-slope term, rises with pH (x0.091 pH 5, x2.6 pH 8.5); transferred to Met / Pro"
+    T: "Ea 103.1 (GO), 114.9 (MGO), fitted (B18)"
+    o2: "none (the aldehyde is O2-independent once the dicarbonyl is fed; consistent with Hofmann 2000b)"
+    amine: "glycine (alanine data declared as glycine); Met and Pro chains off; no Phe / Leu / Ile / Val donors; cysteine Strecker only as r_dpo_ddp (on) and the MGO + Cys steps (off)"
+    buffer: none
+    water: none
+    note: "No Strecker ALDEHYDE species is tracked for glycine (HCHO to FRAG_C); the aldehyde of each donor is not an output except methional (off)."
+  F17_strecker_acid_o2:
+    primary: [r_marp_mtal]
+    secondary: []
+    ph: none
+    T: "Ea 85 declared"
+    o2: "none"
+    amine: "methionine"
+    buffer: none
+    water: none
+    note: "Effectively ABSENT: the one step (Amadori -> Strecker aldehyde) is off and has no O2 term; no Strecker acid exists."
+  F18_lipid_strecker:
+    primary: []
+    secondary: []
+    ph: "n/a"
+    T: "n/a"
+    o2: "n/a"
+    amine: "n/a"
+    buffer: "n/a"
+    water: "n/a"
+    note: "ABSENT. Lipid aldehydes never enter the Maillard lanes (lane_coupling_verdict)."
+  F19_aminoketone_pyrazine:
+    primary: [r_akg_pz, r_akm_dmp, r_ak_mpz]
+    secondary: [r_go_ak, r_mgo_ak, r_go_met, r_mgo_met]
+    ph: "condensation none; the Strecker feed carries the Leahy term"
+    T: "condensation Ea 0, declared fast"
+    o2: "none (the dihydropyrazine oxidation is lumped, no O2)"
+    amine: "glycine aminoketones only (aminoacetaldehyde, aminoacetone)"
+    buffer: none
+    water: none
+  F20_extra_pyrazine_routes:
+    primary: []
+    secondary: []
+    ph: "n/a"
+    T: "n/a"
+    o2: "n/a"
+    amine: "n/a"
+    buffer: "n/a"
+    water: "n/a"
+    note: "ABSENT. Only three pyrazines, all from aminoketone pairing."
+  F21_pyrroles_pyridines:
+    primary: [r_pyrl_ha_athp, r_pyrl_ap]
+    secondary: [r_mgo_pro]
+    ph: "Leahy term transferred (ATHP)"
+    T: "Ea 60.2 declared"
+    o2: none
+    amine: "proline"
+    buffer: none
+    water: none
+    note: "Effectively ABSENT in shipped: all proline steps off; no pyrroles / imidazoles."
+  F22_cysteine_h2s:
+    primary: [r_cys_h2s, r_dpo_ddp_h2s, r_mgo_cys_h2s]
+    secondary: [r_gsh_h2s, r_thi_h2s, a_cys_sink]
+    ph: "measured four-pH Arrhenius table, rises with pH (x0.18 pH 5, x2.25 pH 9)"
+    T: "Ea 133 measured"
+    o2: none
+    amine: "cysteine"
+    buffer: none
+    water: none
+    note: "Only thermolysis is on; cysteine's own Strecker H2S (Kobayasi share) is off."
+  F23_mft_intact_c5:
+    primary: [r_ddp_mft, r_ddp_mft_hs, r_nf_mft]
+    secondary: [r_dpo_ddp, r_hmp_mft, r_odg_dpo]
+    ph: "neutral H2S branch falls with pH (x0.013 at pH 9), HS- branch rises (x1.29); the DDP feed 'base'"
+    T: "Ea 64.1 shared with every other formation step"
+    o2: none
+    amine: "cysteine (through r_dpo_ddp)"
+    buffer: none
+    water: none
+    note: "Pentose only: the hexose intact-C5 entry r_odg_dpo is off."
+  F24_mft_fragments:
+    primary: [r_ha_mp_mft]
+    secondary: [r_mgo_mp]
+    ph: "C2 + C3 recombination none; the MP feed neutral_h2s"
+    T: "Ea 64.1 shared"
+    o2: none
+    amine: none
+    buffer: none
+    water: none
+  F25_fft_furfural_h2s:
+    primary: [r_fur_fft, r_fur_fft_hs]
+    secondary: []
+    ph: "neutral_h2s + hs_anion branches"
+    T: "Ea 64.1 shared"
+    o2: none
+    amine: none
+    buffer: none
+    water: none
+  F26_thiazoles_thiophenes:
+    primary: [r_nf_mp3p, r_nf_shet, r_mgo_mp, r_cys_actz, r_dmhf_h2s, ch_redox_mp3p]
+    secondary: [r_hmp_mp2p]
+    ph: "mercaptoketones neutral_h2s; 2-acetylthiazole none"
+    T: "Ea 64.1 shared"
+    o2: none
+    amine: "cysteine for 2-acetylthiazole; NH3 never a reactant"
+    buffer: none
+    water: none
+    note: "No lipid aldehyde + H2S / NH3 route; thiophenes (SHET, DMHFS) off."
+  F27_thiamine_gsh_sources:
+    primary: [r_gsh_h2s, r_thi_hmp, r_thi_h2s, r_thi_mesh, r_hmp_mft, r_hmp_mp2p]
+    secondary: []
+    ph: "GSH thermolysis measured table (rises with pH); thiamine sulfide share measured table (0 at pH 5); other thiamine steps none"
+    T: "Ea 111.2 (GSH); 64.1 shared (thiamine)"
+    o2: none
+    amine: none
+    buffer: none
+    water: none
+  F28_thiol_losses:
+    primary: [r_mp_decay, r_mp3p_decay, r_mp2p_decay, r_hmp_decay, ch_thioether_mft, ch_thioether_fft, ch_thioether_release, ch_thioether_release_fft, ch_protein_ss_fft, ch_protein_ss_mft, ch_oligomer_mft, ch_oligomer_fft, ch_dimer_mft, ch_dimer_fft, ch_mmft, ch_thiolate_loss_fft, ch_thiolate_loss_mft, ch_mft_decay, ch_fft_decay, ch_mesh_decay, r_hmf_cys, ch_cys_ox, ch_dimer_release_mft, ch_dimer_release_fft, ch_add_mft_dpo, ch_add_mft_tdp, ch_add_fft_dpo, ch_add_fft_tdp, r_msh_dmds]
+    secondary: [r_cys_thermal, r_h2s_loss, r_tdp_cys_trap, a_acr_cys]
+    ph: "dimerisation and thiolate loss rise with pH (thiolate fraction); matrix capture and lumped decays none"
+    T: "Ea 122.2 (dimer, measured), 101.3 (thiol_sink), 10.8 (thioether, measured), none (protein SS, mmft)"
+    o2: "dimers consume a fixed OX charge seeded at 1.0 in every pot (also under inert gas); O2 resupply and cysteine autoxidation k = 0"
+    amine: none
+    buffer: none
+    water: none
+  F29_acrylamide:
+    primary: [a_asn_glc_sb, a_sb_int1, a_int1_acr, a_acr_dp, a_acr_cys, a_acr_gln, a_acr_lys, a_acr_ala]
+    secondary: [a_int1_mel]
+    ph: "formation +0.235 dec/unit, elimination +0.149, initial pH, held outside 4-8"
+    T: "Ea 117.5 / 159.2 formation, 136.1 elimination, 51.3 Michael scavenging"
+    o2: none
+    amine: "asparagine with glucose only (no fructose / dicarbonyl / decarboxylated-amine route)"
+    buffer: none
+    water: "formation flat inside a_w 0.34-0.99; elimination minimum at 0.82"
+  F30_lipid_oxidation_crossover:
+    primary: [lipid.looh_decomposition, lipid.slate_partition, lipid.pentylfuran_from_linoleate, lipid.nonanal_from_oleate, lipid.decadienal_breakage, lipid.covalent_aldehyde_lysine_sink]
+    secondary: []
+    ph: none
+    T: "Q10 2.45 from 25 C; decadienal breakage Ea 26.6 above 100 C only"
+    o2: "none: the hydroperoxide pool is an input, no new LOOH forms during heating"
+    amine: "none (aldehyde-lysine sink off)"
+    buffer: none
+    water: none
+    note: "Only the lipid-oxidation SIDE; the crossover into Maillard routes and Maillard antioxidancy are absent."
+  F31_melanoidins:
+    primary: [r_tdg_mel, r_mgo_mel, r_cml_loss, a_int1_mel, ch_mele_from_dpo, ch_mele_from_tdp, ch_mele_from_ddp]
+    secondary: [ch_thioether_mft, ch_thioether_fft, a_cys_glc, a_gln_glc, a_lys_glc, a_ala_glc]
+    ph: none
+    T: "Ea 95.2 (measured sink), 20 (MGO, on the lower fit bound), 260 (acrylamide intermediate, on the upper bound)"
+    o2: none
+    amine: "Gly (r_tdg_mel); none (r_mgo_mel)"
+    buffer: none
+    water: none
+    note: "Melanoidins as thiol binders are a MATRIX INPUT (MELE), their in-pot formation (ch_mele_from_*) is off."
+  F32_dha_crosslinks:
+    primary: []
+    secondary: []
+    ph: "n/a"
+    T: "n/a"
+    o2: "n/a"
+    amine: "n/a"
+    buffer: "n/a"
+    water: "n/a"
+    note: "ABSENT."
+
+# =======================================================================================================================
+# ENGINE GAPS -- families with no engine reaction (or none on in the shipped configuration), and families whose key
+# condition the engine cannot express.
+# =======================================================================================================================
+engine_gaps:
+  no_reaction: [F09_namiki_c2, F12_alpha_oxidative_cleavage, F18_lipid_strecker, F20_extra_pyrazine_routes, F32_dha_crosslinks]
+  no_shipped_reaction: [F17_strecker_acid_o2, F21_pyrroles_pyridines]
+  partial:
+    F02_amadori_heyns: "aldose only; no Heyns compound from fructose"
+    F03_amadori_reversion: "no reversion to sugar + amine; amine release only inside the hub steps"
+    F04_thiazolidine_ttca: "formation off; only a charged TTCA reacts"
+    F22_cysteine_h2s: "cysteine's own Strecker H2S off"
+    F23_mft_intact_c5: "pentose only; the hexose -> C5 entry is off"
+    F26_thiazoles_thiophenes: "no lipid aldehyde / NH3 route; thiophenes off"
+    F30_lipid_oxidation_crossover: "lipid side only; no crossover into Maillard routes"
+    F31_melanoidins: "in-pot formation of binding melanoidins off; binders are a matrix input"
+  condition_not_expressible:
+    oxygen:
+      families: [F05_protein_glycation, F08_oxidative_osone, F12_alpha_oxidative_cleavage, F15_redox_reductones, F17_strecker_acid_o2, F19_aminoketone_pyrazine, F28_thiol_losses, F30_lipid_oxidation_crossover]
+      why: "trunk: only 'air' has a factor (trunk_conditions.py:275), other atmospheres raise; sulfur: OX seeded 1.0 in every pot (engine.py:2533) and every O2 supply / consumer constant is 0; lipid: no LOOH formation."
+    amine_class:
+      families: [F01_schiff_glycosylamine, F02_amadori_heyns, F06_enol12_3deoxyosone, F07_enol23_1deoxyosone, F16_strecker_aldehyde, F19_aminoketone_pyrazine]
+      why: "Gly is the only trunk amine (PRO / MET added to it, engine.py:2560/2565; Met / Pro chains off); pyrazine constants are alanine data; no other Strecker donors; pentose + non-sulfur amine off; sulfur 'base' factor is the cysteine pKa for every amine."
+    buffer:
+      families: [F01_schiff_glycosylamine, F02_amadori_heyns, F06_enol12_3deoxyosone, F07_enol23_1deoxyosone, F10_retroaldol_c3_c2, F11_beta_dicarbonyl_cleavage, F29_acrylamide]
+      why: "no step anywhere carries a buffer-catalysis term; phosphate (CF-011) is only a titrant in the sulfur pH state."
+    water:
+      families: [F05_protein_glycation, F06_enol12_3deoxyosone, F07_enol23_1deoxyosone, F13_furans_dehydration, F14_caramelisation_amine_free, F16_strecker_aldehyde, F22_cysteine_h2s, F23_mft_intact_c5, F28_thiol_losses]
+      why: "a_w acts only on k_schiff (trunk) and the acrylamide pair; the sulfur and lipid lanes have none; dilute vs concentrated is not a variable; below a_w 0.33 the trunk multiplier is held."
+    ph_in_the_dynamic_lane:
+      families: [F03_amadori_reversion, F06_enol12_3deoxyosone, F07_enol23_1deoxyosone, F10_retroaldol_c3_c2, F11_beta_dicarbonyl_cleavage, F13_furans_dehydration]
+      why: "the sulfur lane computes pH but its 29 trunk steps get none (TRUNK_PH_TERMS False, sulfur.py:1278); the trunk and acrylamide lanes use a static declared / initial pH; the lipid lane none."
+
+vocabulary_gaps:
+  - "methionine sulfur chemistry: methional -> methanethiol -> DMDS (r_mtal_msh); no family"
+  - "asparagine deamidation to aspartate (a_asn_asp); no family"
+  - "lumped sinks of named products to accounting pools (X_unassigned_sink: 18 keys)"

@@ -1,0 +1,235 @@
+family: F22_cysteine_h2s
+definition: "cysteine -> H2S (+ NH3, acetaldehyde, mercaptoacetaldehyde): thermolysis and cysteine's own Strecker"
+markers:
+  - "H2S measured directly (sulfide ISE, methylene blue after Zn-acetate trapping, headspace GC-FPD) from cysteine or glutathione heated WITHOUT a carbonyl partner: the thermolysis (beta-elimination) route."
+  - "NH3 released alongside H2S from cysteine alone (Nessler; Mizutani 1960 Table II): the amine half of the thermolysis / desulfuration."
+  - "Mercaptoacetaldehyde (MAA) trapped or isolated (bis-2,4-DNPH of its disulfide) when cysteine meets an alpha-dicarbonyl: the cysteine Strecker route; acetaldehyde + H2S co-detected."
+  - "H2S yield in the presence of a dicarbonyl / enaminol partner in excess of the neat-thermolysis rate measured under the same T and pH (within-study, or against Zheng & Ho's constants): the reductive Strecker release (Kobayasi & Fujimaki)."
+  - "Weaker, downstream markers (do not identify the route alone): MAA-derived rings (1,2,3-trithia-5-cycloheptene, 2-/3-thiophenethiol) from cysteine alone; acetaldehyde + H2S (+ NH3) condensates (3,5-dimethyl-1,2,4-trithiolanes, thialdine, trimethyl-thiadiazine) from cysteine alone."
+  - "Negative control: an S-oxidised cysteine (cysteinesulfinic / cysteic acid) gives no sulfur volatile, so the reduced thiol is required."
+cells:
+  # --- thermolysis, no carbonyl partner: the H2S marker itself -------------------------------------------
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: cysteine, oxygen: inert, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 5 vs 9 (within study, 0.1 M cysteine): H2S-release K x17 at 100 C (x14.6 at 80 C, x10.7 at 90 C, x9.3 at 110 C); monotone rise pH 5 -> 9"
+    status: operating
+    quote: "K rises **17×** from pH 5 to pH 9 at 100 °C"
+    quantity: "K(100 C) = 2.65e-5 (pH 5), 2.30e-4 (pH 7), 4.53e-4 (pH 9) 1/min; <= 13 % conversion in 180 min"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [zheng1994_extraction.md]
+    where: "Table I and Table II (p. 143); dossier sec. 3, 6, 10a"
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: cysteine, oxygen: inert, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 3 vs pH 5 at 100 C: pH 3 faster (4.15e-5 vs 2.65e-5 1/min), breaking the monotone base-catalysed order; authors: a different mechanism at pH 3"
+    status: operating
+    quote: "at 100 °C, pH 3 is FASTER than pH 5"
+    quantity: "K(pH 3) 1.87e-6 (80 C) to 5.23e-5 (110 C) 1/min; half-lives 221-6171 h"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [zheng1994_extraction.md]
+    where: "Table I (p. 143); Fig. 3; dossier sec. 3"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "80-110", sugar: none, amine: cysteine, oxygen: inert, buffer: phosphate, metals: not_controlled}
+    contrast: "temperature 80 -> 110 C at each pH: Arrhenius over four temperatures"
+    status: operating
+    quote: "131.0 / 133.1 / **135.1** / 123.0 kJ/mol at pH 3/5/7/9"
+    quantity: "Ea 131-135 kJ/mol at pH 3-7, 123 kJ/mol at pH 9; matched A 9.8e11-2.4e13 1/s (refit)"
+    evidence: kinetic_fit
+    lab: "Rutgers (Ho)"
+    dossiers: [zheng1994_extraction.md]
+    where: "Table V (p. 145); dossier sec. 5, 5b"
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "80-110", sugar: none, amine: peptide, oxygen: inert, buffer: phosphate, metals: not_controlled}
+    contrast: "glutathione vs cysteine as H2S donor (same protocol, 16 matched cells): GSH faster at 80-90 C and at pH 9 at every T; ratio K(GSH)/K(Cys) falls 3.0 (80 C) -> 1.1 (110 C); < 1 in 4 cells (100-110 C, pH 3-7)"
+    status: operating
+    quote: "advantage shrinks systematically as temperature rises (mean ratio 3.0 at 80 °C"
+    quantity: "K(GSH, 100 C) 2.26e-4 (pH 7), 7.74e-4 (pH 9) 1/min; GSH Ea refit 84-111 kJ/mol (lower than cysteine's)"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [zheng1994_extraction.md]
+    where: "Tables III, V; dossier sec. 4 ratio table, sec. 5b"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_measured, T_C: "~100 (liquid; oil bath 120)", sugar: none, amine: cysteine, oxygen: inert, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "second laboratory, different sulfide assay, open CO2-swept flask: free cysteine H2S at 0.5-6 h against Zheng & Ho's constant; NH3 measured in parallel"
+    status: operating
+    quote: "At 100 °C and pH 3-5 the model is within 0.67-1.05× at every time"
+    quantity: "H2S 0.056 / 0.138 / 0.356 / 0.955 % of S at 0.5 / 1 / 3 / 6 h; NH3 0.75 / 1.34 % of N at 3 / 6 h"
+    evidence: within_study_factor
+    lab: "Hokkaido Univ. (Obata / Mizutani)"
+    dossiers: [mizutani1960_extraction.md]
+    where: "Tables I-II (p. 384-385); dossier arithmetic 1"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_measured, T_C: "~100 (liquid; oil bath 120)", sugar: none, amine: cysteine, oxygen: inert, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "cysteine bound in a thiazolidine (aldehyde adduct) vs free: H2S 0.30-0.81x at 6 h, 0.15-0.81x over 0.5-6 h (formaldehyde, acetaldehyde, butyraldehyde, benzaldehyde); furfural adduct 2.0-2.2x (aged 6x)"
+    status: operating
+    quote: "thiazolidines of simple aldehydes release H2S at"
+    quantity: "NH3 from the adducts 0.29-0.64x free cysteine at 6 h (0.19-0.54x at 3 h)"
+    evidence: within_study_factor
+    lab: "Hokkaido Univ. (Obata / Mizutani)"
+    dossiers: [mizutani1960_extraction.md]
+    where: "Tables I-II; dossier 'Use in the model', gap (b) and (e)"
+    note: "re-read 2026-11-01: two readers MINOR: the lower ends 0.27 (H2S) and 0.29 (NH3) do not reproduce across all times; ratios recomputed from Tables I-II with the butyraldehyde row read as 1 / 3 / 6 h."
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_measured, T_C: "~100 (liquid; oil bath 120)", sugar: none, amine: sulfur_aa_other, oxygen: inert, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "cystine vs cysteine (10 mM S, same apparatus): cystine lags at 1 h then exceeds cysteine; 10x dilution raised cysteine H2S 1.1-1.5x vs the 10 mL series"
+    status: operating
+    quote: "Cystine lags at 1 h (0.40× cysteine) and overtakes at 3-6 h"
+    quantity: "cysteine H2S 0.15 / 0.55 / 1.32 % of S at 1 / 3 / 6 h; cystine 0.06 / 0.73 / 1.94 %"
+    evidence: within_study_factor
+    lab: "Hokkaido Univ. (Obata / Mizutani)"
+    dossiers: [obata1960_extraction.md]
+    where: "Table I (p. 564); dossier sec. 4a, 4b"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 90, sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "time 10 vs 120 min in a sealed vial: 10-min H2S matches the Zheng & Ho constant, 120-min H2S is 0.26-0.34x the no-sink prediction (net loss of H2S or its precursor)"
+    status: operating
+    quote: "At 10 min it matches the engine's Zheng & Ho constant (1.1-1.5×)"
+    quantity: "free Cys 5.7 mM, 10 mM phosphate pH 7: H2S 3.8 +- 0.3 uM (10 min), 10.7 uM (120 min, n = 1)"
+    evidence: within_study_factor
+    lab: "Univ. Copenhagen (Lund)"
+    dossiers: [li2022_extraction.md]
+    where: "Table 1; dossier sec. 1 and the engine comparison table"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 160, sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "160 C / 160 s against Zheng & Ho extrapolated 50 C beyond their range: measured 0.05x the extrapolation"
+    status: operating
+    quote: "44.8 µM (160 °C, 160 s; n = 1)"
+    quantity: "0.8 % of the 5.7 mM cysteine as H2S in 160 s (single determination)"
+    evidence: within_study_factor
+    lab: "Univ. Copenhagen (Lund)"
+    dossiers: [li2022_extraction.md]
+    where: "Table 1; dossier engine comparison table"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "80-90", sugar: none, amine: peptide, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "protein-bound cysteine residues (beta-lactoglobulin, whey) vs time / T: H2S is a small share of all Cys reactions"
+    status: minor
+    quote: "β-LG | 0.25 % | 0.93 % | 1.93 % | 1.81 %"
+    quantity: "Cys -> H2S 0.25 % (80 C, 10 min), 0.93 % (90 C, 10 min), 1.93 % (90 C, 120 min), 1.81 % (UHT-like); authors: < 5 % of all Cys reactions"
+    evidence: mass_balance
+    lab: "Univ. Copenhagen (Lund)"
+    dossiers: [li2022_extraction.md]
+    where: "Table 5b"
+  # --- cysteine's own Strecker: MAA, acetaldehyde, reductive H2S ------------------------------------------
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_measured, T_C: 100, sugar: none, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "cysteine + ninhydrin (a fast Strecker tricarbonyl): MAA isolated as its oxidised bis-DNPH; H2S and acetaldehyde co-detected by headspace GC (unquantified)"
+    status: operating
+    quote: "from cysteine + ninhydrin at 100 °C and can be isolated"
+    quantity: ">= 3.6 mol % of the cysteine recovered as MAA in the steam distillate in 1 h (a floor)"
+    evidence: trapping
+    lab: "Univ. Tokyo (Kobayasi / Fujimaki)"
+    dossiers: [kobayasi1965_extraction.md]
+    where: "p. 698; dossier sec. 3, arithmetic 1"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_measured, T_C: 100, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "enaminol partner dose (glucosamine 10 vs 20 mmol on 10 mmol cysteine): H2S 1.9x, ~first order in the reductant; ascorbic acid gives 'a very small amount'; no cysteine-alone blank, so the excess over thermolysis is cross-study (4.6-47x Zheng & Ho at 100 C, pH 7 / 5)"
+    status: operating
+    quote: "gives H2S **in proportion to the glucosamine charge**"
+    quantity: "H2S 4.2 and 8.0 mol % of cysteine in 1 h at 100 C (glucosamine is an amino sugar, not a deoxyosone; pH and volume not reported)"
+    evidence: within_study_factor
+    lab: "Univ. Tokyo (Kobayasi / Fujimaki)"
+    dossiers: [kobayasi1965_extraction.md]
+    where: "p. 698-699; dossier sec. 3, arithmetic 2-3"
+  - key: {ph: acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 160, sugar: none, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "pH 2.2 vs 5.1 vs 7.1 (cold, unbuffered, cysteine alone, 30 min): MAA-derived rings dominate only at pH 2.2; acetaldehyde + H2S trithiolanes peak at pH 5.1 (~2.6 / ~32 / ~5 mg); thiazoles mainly at pH 7.1. No H2S measured"
+    status: operating
+    quote: "dominate only at pH 2.2 and are absent/trace at pH 5.1"
+    quantity: "1,2,3-trithia-5-cycloheptene 34.4 % and 2-thiophenethiol 14.1 % of the pH 2.2 extract; <= ~2 % of cysteine S in identified volatiles"
+    evidence: within_study_factor
+    lab: "IFF / Rutgers (Shu / Ho)"
+    dossiers: [shu1985_extraction.md]
+    where: "Table I (p. 443); dossier sec. 4-5"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "cysteine alone vs glutathione alone (same cylinder, 1 h): cysteine's volatiles are acetaldehyde + H2S + NH3 condensates (thiadiazine + thialdine 71 %); GSH's trithiolanes (63 %) with almost no N"
+    status: operating
+    quote: "Cysteine's volatiles are dominated by acetaldehyde + H2S + NH3 condensates"
+    quantity: "cysteine 3.84 g/mol identified volatiles = 4.0 % of cysteine S; thiadiazine 1257, thialdine-type dithiazine 1467 mg/mol"
+    evidence: qualitative
+    lab: "Rutgers (Ho)"
+    dossiers: [zhang1988_extraction.md]
+    where: "Table I (p. 994), text p. 995; dossier sec. 3.3"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "glucose present vs absent (same lab, cylinder, 180 C / 1 h, pH 7.5 start): cysteine's poly-S (acetaldehyde + H2S) products fall 3221 -> 205 mg/mol; thiophenes / pyrazines appear. H2S itself not measured"
+    status: operating
+    quote: "cysteine's volatiles fall from 3783 (alone) to 969 mg/mol"
+    quantity: "total 3783 -> 969 mg/mol; cyclic polysulfides 3221 -> 205 (alone column re-uses Zhang 1988, CF-008)"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [zhang1991b_extraction.md, zhang1988_extraction.md]
+    where: "zhang1991b Table II (p. 762)"
+    conflict: CF-008
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 160, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "cysteine vs cysteinesulfinic / cysteic acid with glucose (0.48 M; sulfinic arm 0.04 M): sulfur volatiles 46 % of the Cys extract vs none from either oxidised form, which switch to pyrazines and HMF"
+    status: operating
+    quote: "both oxidised forms give **no sulfur volatile at all**"
+    quantity: "Cys + Glc sulfur volatiles 56.65 'ppm' (basis unstated) = ~0.18 % of cysteine S"
+    evidence: within_study_factor
+    lab: "Rutgers (Ho)"
+    dossiers: [tai1997_extraction.md]
+    where: "Table 1 (p. 3588); dossier sec. 3"
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
+    contrast: "pH 4 -> 7 (0.5 M phosphate; thiamin also present): H2S-derived products (2-mercapto-3-pentanone, thiophenone, dithianone, acetyldithiolane) appear only at pH 6-7; authors: stronger H2S involvement at higher pH. H2S not measured; thiamin is a second sulfide source"
+    status: unattributed
+    quote: "the stronger involvement of hydrogen sulfide at higher pH"
+    quantity: "4,5-dihydro-2-methyl-3(2H)-thiophenone 0 (pH 4-5.5) vs 372 / 470 area units (pH 6 / 7)"
+    evidence: within_study_factor
+    lab: "Firmenich (Cerny)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 2; dossier sec. 4.3"
+condition_dependence: >-
+  SHOWN: (pH) neat cysteine and glutathione release H2S faster as pH rises from 5 to 9 (x9-17 for cysteine at
+  80-110 C, Zheng & Ho cell 1), with a separate, faster-than-pH-5 channel at pH 3 (cell 2); Mizutani 1960 confirms the
+  pH-5 constant at ~100 C in a second laboratory with a different assay (cell 5). (T) Ea 123-135 kJ/mol for cysteine,
+  ~84-111 for GSH, only over 80-110 C (cells 3-4); GSH is the faster donor at 80-90 C but the advantage vanishes by
+  100-110 C (cell 4). Above 110 C there is one H2S number (Li 2022, 160 C / 160 s), 20x below the Zheng
+  extrapolation (cell 9), and a 90 C sealed-vial time pair that suggests a net loss by 120 min (cell 8).
+  (Carbonyl partner) Binding cysteine as a thiazolidine lowers H2S 1.2-3.5x, except furfural which doubles it (cell
+  6); an enaminol / Strecker partner raises H2S to 4-8 mol % in 1 h at 100 C, roughly first order in the partner and
+  4.6-47x the neat thermolysis rate (cross-study, cell 12); MAA is trapped from cysteine + a tricarbonyl (cell 11).
+  No study measures H2S from cysteine + a real sugar or deoxyosone, so "a dicarbonyl accelerates H2S" rests on one
+  1965 letter with glucosamine / ninhydrin. (Sugar, downstream only) With glucose, cysteine's acetaldehyde + H2S
+  condensates fall 16x at 180 C (cell 15): sugar consumes or diverts the H2S / acetaldehyde, H2S itself unmeasured.
+  (Oxidation state) the reduced thiol is required (cell 16); cystine also releases H2S, slower at first, then faster
+  (cell 7). (Protein) protein-bound cysteine gives H2S at 0.25-3.4 % of its Cys, < 5 % of its reactions (cell 10).
+  ASSUMED, not shown: that the pH law and Ea hold above 110 C; the in-situ pH (every buffered study gives the
+  room-temperature label; the unbuffered ones never measured it); any O2 effect (Zheng N2-flushed, Li air, Mizutani
+  CO2-swept, never contrasted for cysteine).
+best_supported_regimes:
+  - "neutral-alkaline / moderate (80-110 C) / dilute / no sugar / free Cys: operating, H2S release measured and pH-resolved (2 labs: Rutgers kinetics, Hokkaido confirmation at pH ~5; Copenhagen at pH 7, 90 C)"
+  - "mild_acid / moderate (~100 C) / dilute / no sugar: operating, ~1 % of S in 6 h (2 labs agree to 1.5x)"
+  - "moderate / dilute / cysteine + Strecker or enaminol partner: operating, H2S 4-8 mol % in 1 h and MAA trapped (1 lab, 1965, no blank, pH unknown)"
+unknown_regimes:
+  - "H2S time course in any cysteine + reducing-sugar or cysteine + deoxyosone pot (none on disk; the scratchpad H2S search estimates P ~0.15 that one exists)"
+  - "the MAA -> H2S + acetaldehyde split and its rate; acetaldehyde and NH3 yields from cysteine + dicarbonyl"
+  - "high and very_high T (> 110 C) kinetics: one single-determination point (Li 2022, 160 C); Shu 1985, Zhang 1988 and Tai 1997 at 160-180 C measured no H2S"
+  - "intermediate_aw and low_aw: no H2S measurement from cysteine at reduced water activity"
+  - "in-situ pH during heating: never measured in any H2S study"
+  - "O2 vs inert as a within-study factor for cysteine H2S release"
+  - "protein-bound cysteine beyond whey (meat proteins), and peptide-bound vs free in sugar pots"
+competing_families:
+  - "F04_thiazolidine_ttca: binds free cysteine as TTCA; Mizutani shows thiazolidines still release 0.3-0.8x the H2S (furfural adduct 2x), so it slows, not stops, H2S supply"
+  - "F16_strecker_aldehyde (cysteine as donor): the same cysteine + dicarbonyl event, whose sulfur fate (MAA vs H2S) is the F22 Strecker branch"
+  - "F28_thiol_losses: H2S and cysteine oxidation / capture; Li 2022's 120-min deficit and Zheng's sealed-system K both fold sinks into the observable"
+  - "F26_thiazoles_thiophenes: consumes H2S + acetaldehyde + NH3 into trithiolanes, thialdine, thiazoles (Shu, Zhang); wins in cysteine-only pots"
+  - "F27_thiamine_gsh_sources: GSH and thiamine as parallel sulfide donors; Arnold 1971 reports that cysteine suppresses thiamine degradation"
+engine: >-
+  In the engine (src/kinetic_core/sulfur.py, read only). Thermolysis: r_cys_h2s (Cys -> H2S + CBX + FRAG_C 2 +
+  FRAG_N 1, k_cys_h2s = cysteine_thermolysis_k, Zheng & Ho matched (Ea, A) pairs, pH-3 pair below pH 5, interpolation
+  5-9, clamped above 9) and r_gsh_h2s (k_gsh_h2s = glutathione_thermolysis_k, Table III refit). These MATCH the
+  literature's pH and T dependence inside 80-110 C (Mizutani within 0.67-1.05x at 100 C, pH ~5; Li within 1.1-1.5x
+  at 90 C, 10 min). Mismatch: above 110 C the engine extrapolates the Ea (Li 2022 160 C point 0.05x the
+  extrapolation), and the 120-min deficit at 90 C is carried only by r_h2s_loss. NH3 goes to FRAG_N (amine fate
+  declared in CENTRE_LEDGER); no NH3 or acetaldehyde species. Strecker: r_dpo_ddp (1-deoxyosone + Cys) sends the
+  sulfur as MAA to inert FRAG_S; its H2S branch r_dpo_ddp_h2s (B59a, share 0.042 / 0.080 from Kobayasi) and the MGO
+  Strecker pair r_mgo_cys_strecker / r_mgo_cys_h2s exist but are OFF by default (STRECKER_SULFUR.enabled = False,
+  MGO_CYSTEINE_STRECKER zero). So by default the engine has no carbonyl-accelerated H2S, against Kobayasi's 4-8 mol %
+  (4.6-47x thermolysis); the literature cannot yet give a share per Strecker event, only floors. No MAA or
+  acetaldehyde species, so Shu's MAA rings and the trithiolane / thialdine markers are not scorable. Thiazolidine
+  H2S: the engine's TTCA releases H2S only via free cysteine; Mizutani's 0.3-0.8x (and furfural 2x) is not
+  represented. No protein-bound cysteine H2S channel; no cystine -> H2S.

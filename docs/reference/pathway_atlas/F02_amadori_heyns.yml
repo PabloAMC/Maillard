@@ -1,0 +1,245 @@
+# Pathway-condition atlas: F02 (Amadori rearrangement of aldose-amine adducts; Heyns rearrangement of ketose-amine
+# adducts), built 2026-11-01 from the extraction dossiers (data/lit/extraction_dossiers/). Vocabulary:
+# docs/reference/pathway_atlas/families.yml. Every quote is verbatim from the FIRST dossier listed in its cell.
+# Laboratories (independent): Wageningen (Martins / van Boekel; Brands), Unilever Vlaardingen (Potman & van Wijk),
+# Rutgers (Ge & Lee), Nestle (Davidek / Blank), Jiangnan (Zhang X / Cui / Ho: Xia 2022, Tang 2019, Zhou 2025b are ONE
+# laboratory), Winterswijk hospital (Weykamp), Reading (Parker: Piornos 2025), Hacettepe (Goekmen).
+# Duplicates: the pH 6.8 column of Martins 2005b Table 2 = its Table 1 'pH drop <= 1' column = its Table 4 '1:1'
+# column (martins2005b_extraction.md); counted once. Martins 2003 Part I / Part II replot one experiment (F03 file).
+# Formation of the Amadori compound from sugar + amine is recorded here; its DECOMPOSITION products are in F03 (amine
+# release / reversion) and F06 / F07 / F10 (deoxyosones, retro-aldol). Protein-bound lysine glycation is F05; the
+# protein cells below are only the Heyns / Amadori contrast. Cysteine -> Cys-Amadori via the thiazolidine is F04.
+# ph key "not_stated" is outside the bins on purpose (as in F04).
+
+family: F02_amadori_heyns
+definition: "Amadori (aldose) / Heyns (ketose) rearrangement"
+markers:
+  - "the Amadori compound (N-(1-deoxy-ketos-1-yl)-amine) quantified against a purified standard (HPAEC-PAD, HPLC-ELSD, LC-MS/MS MRM), rising from sugar + amine; for protein-bound lysine, furosine after acid hydrolysis"
+  - "the Heyns compound (2-amino-2-deoxy-aldose) from a ketose + amine, quantified (for protein: CML after periodate oxidation); its ABSENCE from a fructose pot whose method could see it is a marker result"
+  - "mass balance: Amadori compound formed ~= sugar consumed at early times (no other sink yet)"
+  - "fed intermediate: the purified Amadori compound gives the same downstream products as sugar + amine, at equal or higher yield per mol"
+  - "NOT a marker: net amine or sugar loss alone (lumps F01 + F02), browning, or a fitted 'Amadori' / 'Heyns' pool in a multiresponse model with no measured ARP"
+
+cells:
+  # ---------------- Amadori formation, free amino acid, water: mass balance and temperature ladders ----------------
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "time: ARP carries all glucose lost at <= 1 h and ~62 % by 5 h, while glycine falls more slowly than glucose after 3 h (regenerated from the ARP)"
+    status: operating
+    quote: "ARP accounts for ~100 % of glucose lost at ≤ 1 h"
+    quantity: "ARP 8.5 % of glucose at 1 h, 21.3 % at 5 h (0.4 M Glc / Gly, start pH 5.6, no phosphate; Fig. 1, read +-1.5 %)"
+    evidence: mass_balance
+    lab: "Unilever Vlaardingen (Potman & van Wijk)"
+    dossiers: [potman1989_extraction.md]
+    where: "Fig. 1, sec. 3.1"
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "phosphate 0 -> 0.5 M NaH2PO4 (start pH 5.6): glucose consumption order 1.34 in phosphate (xylose 1.09), up to ~15x (Fig. 3, pH 7, ~1.2 M phosphate); ARP formation AND conversion both enhanced, so standing ARP is LOWER with phosphate; highest ARP yields without phosphate"
+    status: operating
+    quote: "the formation and the conversion of the ARP are enhanced, resulting"
+    quantity: "no ARP numbers printed with phosphate (qualitative); with ~1.2 M phosphate the glucose-loss gain is ~4x (pH 3), ~12x (5.6), ~15x (7), ~4x (9)"
+    evidence: within_study_factor
+    lab: "Unilever Vlaardingen (Potman & van Wijk)"
+    dossiers: [potman1989_extraction.md]
+    where: "Figs. 2-4, sec. 3.7 (conclusion)"
+    note: "re-read 2026-11-01: two readers MINOR: 'up to ~30x' is printed nowhere; the Fig. 3 maximum is ~15x (pH 7), Fig. 4's 0.5 M arm ~9x. Orders and the ARP statement match."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "initial pH 4.8 / 5.5 / 6.0 / 6.8 / 7.5 (20 C label; only points with pH drop <= 1 used): lumped Glc + Gly -> DFG constant rises 7.9e-7 -> 1.8e-5 L/(mol min), x23"
+    status: operating
+    quote: "D-Glu + Gly → DFG | **0.50 ± 0.14**"
+    quantity: "pD (d log10 k / d pH) 0.50 +- 0.14 for the condensation; one of only four steps with a slope significantly above zero; single temperature (100 C)"
+    evidence: kinetic_fit
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2005b_extraction.md]
+    where: "Table 2 row 1, Table 3 row 1"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "80-120", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "temperature 80 -> 120 C (5 levels), pH 6.8 label drifting to ~5.5 in 4 h at 100 C"
+    status: operating
+    quote: "1 Glu + Gly → E1 (→ DFG)"
+    quantity: "1.6e-5 L/(mmol min) at T_av ~100 C, Ea 96.8 +- 2.8 kJ/mol (the engine's k_schiff)"
+    evidence: kinetic_fit
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2005_extraction.md]
+    where: "Table 2 step 1"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100-130", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "temperature 100 / 105 / 110 / 115 / 120 / 130 C, Glc + Gly 0.2 + 0.2 M in water, initial pH 7.5 (25 C), G-ARP by HPLC-ELSD against the purified compound"
+    status: operating
+    quote: "0.3026 | 0.4300 | 84.76"
+    quantity: "initial G-ARP formation 0.0604 -> 0.4300 mmol/(L min), Ea 84.76 kJ/mol; = 1.5e-6 L/(mmol min) at 100 C as a second-order rate (dossier); in-situ pH not reported (the same lab measured 7.0 -> 5.05 in 20 min in a 5 mM ARP pot, hou2026)"
+    evidence: measured_intermediate
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [xia2022_extraction.md]
+    where: "Table 1, sec. 3"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100-130", sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "amine form, same pot design: glycine vs diglycine vs triglycine; TriG-ARP forms 6.9x faster than G-ARP at 100 C and 5.0x at 130 C, with a lower barrier (63.5 vs 84.8 kJ/mol)"
+    status: operating
+    quote: "TriG-ARP | k | 0.4153 | 0.6159 | 0.6354"
+    quantity: "initial ARP formation at 100 C: Gly 0.0604, DiGly 0.0954, TriGly 0.4153 mmol/(L min)"
+    evidence: within_study_factor
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [xia2022_extraction.md]
+    where: "Table 1"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "40-97", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "temperature 68 -> 97 C: the rearrangement constant k2 (from the Schiff base) rises 0.067 -> 3.97 h^-1; recomputed Ea 145 kJ/mol, steeper than condensation (118) or reversion (136)"
+    status: operating
+    quote: "| 97 | 3.97 | 0.9887 | 0.37 | [F] |"
+    quantity: "k2 3.97 h^-1 at 97 C, pH 7.0 (label), Glc + Phe 10-100 mM; 40 / 54 C rows excluded (k2 falls with T)"
+    evidence: mass_balance
+    lab: "Rutgers (Ge & Lee)"
+    dossiers: [ge1997_extraction.md]
+    where: "Table 1; sec. 7.2 recomputed Ea"
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 80, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "pH 2 / 4 / 6 / 8 / 10 / 12 at 80 C (HCl, acetate, phosphate, borate, NaOH: five buffers, two ionic strengths): Amadori formation rises steeply above pH 8; at pH 2-6 it is below the figure's resolution (+-0.05 mM/h)"
+    status: operating
+    quote: "0.00 / 0.00 / 0.00 / 0.05 / 0.25 / 1.67"
+    quantity: "d[AR]/dt 0.05 / 0.25 / 1.67 mM/h at pH 8 / 10 / 12 (0.05 M Glc + Phe; digitised); the authors' reading: the free amino group, not the ammonium ion, attacks"
+    evidence: within_study_factor
+    lab: "Rutgers (Ge & Lee)"
+    dossiers: [ge1997_extraction.md]
+    where: "Fig. 6 (figure-only; low weight per the dossier)"
+  - key: {ph: not_stated, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_stated, T_C: "70-90", sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "temperature 70 / 80 / 90 C: zero-order initial AX-ARP formation from Ala + Xyl"
+    status: operating
+    quote: "AX-ARP (Ala + Xyl) | k (mmol/L·min-1) | 0.0034"
+    quantity: "0.0034 / 0.0060 / 0.017 mmol/(L min), Ea 83.12 kJ/mol; reactant concentration and pH of this ladder not printed (dossier flags 1-2)"
+    evidence: measured_intermediate
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [zhou2025b_extraction.md]
+    where: "Table 1, sec. 2 kinetic treatment"
+  # ---------------- water: atmospheric vs simultaneous vacuum dehydration (one study) ----------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 80, sugar: pentose, amine: peptide, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "atmospheric pressure (water retained) vs simultaneous vacuum dehydration (25 mbar) at 80 C, GSH 100 mM + xylose 200 mM, initial pH 7.4: ARP <= 8.44 % of GSH at atmospheric pressure in 150 min"
+    status: operating
+    quote: "GSH 100 mM + xylose 200 mM accumulate at most **8.44 % ARP**"
+    quantity: "ARP <= 8.44 % of GSH (atmospheric); 8.26 % of GSH oxidised to GSSG in the same 150 min"
+    evidence: measured_intermediate
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [tang2019_extraction.md]
+    where: "sec. 1; Figs. 3-4"
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: "50-80", sugar: pentose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "vacuum dehydration (water removed while heating; a_w not measured) vs atmospheric: ARP x8 in a tenth of the time; under dehydration GSH loss = xylose loss; initial pH 5.4 vs 9.4 at 80 C: GSH loss 0.1306 vs 0.2159 /min (x1.65 over 4 pH units)"
+    status: operating
+    quote: "pushes ARP to **67.98 % in 15 min at 80 °C**"
+    quantity: "ARP 67.98 %, 3-DX 6.49 %, 1-DX 2.77 % of GSH at 15 min, 80 C; ARP + DXs > 96 % of initial GSH (glycation is the only GSH sink)"
+    evidence: mass_balance
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [tang2019_extraction.md]
+    where: "sec. 1; Table 2 (fitted scheme, Ea GX formation 96.0, ARP 79.4 kJ/mol)"
+  # ---------------- fed intermediate: the Amadori compound is on the route ----------------
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "precursor swap, same conditions: fed DFG vs glucose + glycine (0.2 M phosphate, pH 4 / 6 / 8): DFG gives MORE acetic acid per mol at every pH (4 / 28 / 56 vs 1 / 17 / 38 mol % at 240 min)"
+    status: operating
+    quote: "final yields of acetic acid from Fru-Gly and glucose/glycine were 56 mol% and 38 mol%"
+    quantity: "acetic acid at 240 min, pH 8: 56 mol % of DFG vs 38 mol % of glucose; DFG concentration not printed (0.1 M inferred)"
+    evidence: fed_intermediate
+    lab: "Nestle (Davidek / Blank)"
+    dossiers: [davidek2005_extraction.md]
+    where: "Fig. 1 end labels; text p. 1"
+  # ---------------- Heyns vs Amadori: protein lysine, low a_w ----------------
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_ketose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "sugar identity, same pot (150 mM sugar + 3 % caseinate, 0.1 M phosphate pH 6.8): fructose-casein shows NO Heyns product (periodate -> CML assay) and no furosine, while lysine loss is as large as with glucose (7.2 vs 6.3 mM in 40 min)"
+    status: not_detected
+    quote: "Heyns not detected."
+    quantity: "Heyns product not detected at 0-40 min (no detection limit given); lysine lost 50 % (fructose) vs 42 % (glucose)"
+    evidence: measured_intermediate
+    lab: "Wageningen (Brands / van Boekel)"
+    dossiers: [brands2001_extraction.md]
+    where: "Fig. 2, sec. 2 analytics, directional claim (iii)"
+    note: "was `absent`: a standing-level non-detect (periodate -> CML assay) with no detection limit, no Heyns standard and no positive control; the authors call the non-detect unexplained (red team 2026-11-01)."
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "time course: the casein Amadori compound (furosine x 3.1) peaks then falls while lysine keeps falling"
+    status: operating
+    quote: "Amadori never accounts for lysine loss"
+    quantity: "Amadori peak 1.0 mM at 10-15 min (7 % of initial lysine), 0.5 mM at 40 min; lysine lost 6.3 mM"
+    evidence: measured_intermediate
+    lab: "Wageningen (Brands / van Boekel)"
+    dossiers: [brands2001_extraction.md]
+    where: "Fig. 1, summary table"
+  - key: {ph: not_stated, temperature: low, water: dilute}
+    tags: {ph_basis: not_stated, T_C: 37, sugar: hexose_aldose, amine: protein_bound_nterm, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "14C-glucose wash-out from erythrocytes separates the labile aldimine from the stable ketoamine (HbA1c)"
+    status: operating
+    quote: "Reaction speed constants were found for the formation of HbA₁c (4.2 · 10⁻³)"
+    quantity: "Amadori step 4.2e-3 h^-1 from the Schiff base at 37 C (vs reversion 0.435 h^-1)"
+    evidence: measured_intermediate
+    lab: "Winterswijk hospital (Weykamp & Penders)"
+    dossiers: [weykamp1982_extraction.md]
+    where: "Summary p. 341"
+  - key: {ph: not_stated, temperature: moderate, water: low_aw}
+    tags: {ph_basis: not_stated, T_C: "65-90", sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled, water_note: "dried green malt in a kiln; moisture / a_w during curing not reported"}
+    contrast: "curing temperature 65 / 78 / 90 C, 8.4 h: seven Amadori compounds of free amino acids measured in a real cereal matrix"
+    status: operating
+    quote: "ARP: FruVal, FruLeu, FruIle, FruPhe, FruAla, FruGly, FruPro"
+    quantity: "ARPs by LC-MS/MS without internal standard; the fitted ARP -> dicarbonyl Ea (315 kJ/mol, fixed) is moisture-confounded and not a chemical barrier (dossier sec. 8)"
+    evidence: measured_intermediate
+    lab: "Reading (Parker; Piornos / Balagiannis)"
+    dossiers: [piornos2025_extraction.md]
+    where: "sec. 2 analytics, sec. 8 caveats"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: not_stated, T_C: "150-170", sugar: hexose_ketose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled, water_note: "whole hazelnuts; a_w 0.40-0.55 quoted from literature, not measured"}
+    contrast: "fitted Amadori (from glucose) vs Heyns (from fructose) formation constants in a 26-step network: Amadori ~4-5x faster; the Heyns route from fructose fits to zero at 170 C"
+    status: unattributed
+    quote: "the paper's \"almost 5 times higher\" for Amadori over Heyns"
+    quantity: "k5 / k9 = 3.9 (150 C), 4.8 (160 C); neither AP nor HP is a measured response (sucrose, sugars, HMF, dicarbonyls, amino acids are)"
+    evidence: kinetic_fit
+    lab: "Hacettepe (Goekmen; Goncuoglu Tas)"
+    dossiers: [goncuoglu2016_extraction.md]
+    where: "Table of 26 constants, arithmetic sec. 1"
+
+condition_dependence: >-
+  SHOWN: the Amadori compound is the first stable product of aldose + primary amine in water at 37-130 C, and at early
+  times it carries essentially all the sugar consumed (Potman, mass balance, 100 C; Tang, > 96 % mass balance under
+  dehydration, 80 C). Temperature: four labs give barriers for the lumped condensation + rearrangement of 83-97 kJ/mol
+  (Martins 96.8, Xia 84.8, Zhou 2025b pentose 83.1; Tang GX formation 96.0) and Ge's rearrangement step alone ~145
+  (recomputed, disputed method). pH: formation rises with pH, ~0.5 decade per pH unit over 4.8-7.5 at 100 C (Martins
+  2005b, label pH, phosphate) and steeply above pH 8 at 80 C (Ge, buffer-confounded); GSH-xylose loss under dehydration
+  only x1.65 from pH 5.4 to 9.4 (Tang). Amine: peptides form their Amadori compounds faster than glycine (TriGly 5-7x,
+  Xia, one lab). Buffer: phosphate speeds both formation and breakdown, so the standing Amadori level is LOWER in
+  phosphate (Potman; and F03 cells). Water: removing water while heating raises the GSH-xylose ARP yield ~8x (Tang,
+  a_w unmeasured); real low-moisture matrices (malt, hazelnut) contain Amadori compounds but give no clean rate. Heyns:
+  fructose + casein shows no detectable Heyns product while losing as much lysine as glucose (Brands; not_detected, no detection limit), and in
+  hazelnut the fitted Heyns route is ~5x slower than Amadori (unmeasured pools). The ketose-amine adduct therefore does
+  NOT accumulate as a Heyns compound in the conditions studied; fructose's amine loss goes elsewhere. ASSUMED, not shown:
+  any O2 effect on formation (no contrast); in-situ pH during formation (every pH axis above is a label pH).
+best_supported_regimes:
+  - "neutral to mild acid / 80-130 C / dilute / glucose + glycine: operating, Ea ~85-97 kJ/mol, ~0.5 dec / pH (3 labs: Wageningen, Jiangnan, Unilever; mass balance + measured ARP)"
+  - "early times in any aqueous aldose + amine pot: the Amadori compound carries ~all sugar consumed (2 labs, mass balance)"
+  - "fructose + protein lysine / neutral / 120 C: Heyns compound not detected (1 lab; no detection limit or positive control, so not shown absent)"
+unknown_regimes:
+  - "acid (< 4.5): no Amadori formation rate (Ge's pH 2-4 points are below resolution; Martins starts at 4.8)"
+  - "very high T (> 140 C) in water: no measured ARP formation rate"
+  - "intermediate a_w with a measured a_w: none (Tang's dehydration and the malt / hazelnut matrices have no a_w record)"
+  - "Heyns compound measured in any free-amino-acid fructose pot: none in the corpus; the Heyns side is only fitted (Knol 2010 bypasses it, Goncuoglu fits it) or not detected (Brands)"
+  - "pentose + glycine Amadori FORMATION kinetics in water: only Zhou 2025b (alanine, concentration and pH unstated) and Tang (GSH); the glycine-xylose ARP is always fed purified"
+  - "O2 / inert contrast and metal chelation for formation: none"
+  - "phosphate concentration law for FORMATION at fixed pH with the ARP measured: none (Potman's phosphate arms have no ARP numbers)"
+competing_families:
+  - "F01_schiff_glycosylamine: the Schiff base reverts faster than it rearranges (Weykamp 37 C ~100x; Ge 68-97 C 2-3x)"
+  - "F04_thiazolidine_ttca: with cysteine the sugar is held as TTCA; the Cys-Amadori compound forms from it"
+  - "F14_caramelisation_amine_free: fructose loses as much amine as glucose without a Heyns compound (Brands), so ketose chemistry may run through sugar fragments rather than a Heyns rearrangement"
+  - "F29_acrylamide: with asparagine the Schiff base decarboxylates before rearranging"
+engine: >-
+  In the engine (engine_family_map.yml): r_amadori (SB -> AMA) in trunk, sulfur and acrylamide lanes, shipped, its constant
+  DERIVED from k_schiff by a pinned 44.9x ratio; the sulfur lane's fed ARP is a species (ARP) with no formation step from
+  xylose + glycine in the shipped engine (r_pent_amine -> PAMA exists but PENTOSE_AMINE_ENTRY is disabled); the
+  Cys-Amadori route (r_cama_form) is disabled. Mismatches: (1) no Heyns step: fructose has no amine reaction in the trunk,
+  which agrees with Brands' Heyns non-detect but leaves fructose's measured amine loss unmodelled. (2) No pH term on the
+  formation (Martins 2005b pD 0.50 for exactly this step, and Ge's steep rise above pH 8) while the engine applies pH only
+  to the three Amadori-decay steps. (3) No phosphate term on formation or on breakdown (Potman, Davidek, Zyzak, Guan all
+  show phosphate catalysis). (4) Glycine only: peptides form their ARP 5-7x faster (Xia) and other amino acids differ;
+  the engine has one amine. (5) Shipped Ea 96.8 (Martins) vs 84.8 (Xia, same pot design, water instead of phosphate):
+  a 12 kJ/mol spread across two labs, inside the band one would expect from buffer and pH drift, not a demonstrated
+  conflict. (6) The a_w multiplier on k_schiff rises to ~3.7x at a_w 0.4-0.7 (milk-powder lysine loss); Tang's
+  dehydration shows the direction (x8 ARP yield), no source on disk gives a free-amine a_w law.

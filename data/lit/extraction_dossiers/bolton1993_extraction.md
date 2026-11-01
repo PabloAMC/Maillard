@@ -200,7 +200,7 @@ gram (Flags 1).
 | BMFD | "only **trace amounts** ... data for BMFD are **inconclusive and not included**" | Results |
 | effect of added xylose | "**added xylose did not influence** the amount of MFT formed in model systems III and IV" | Results |
 | Hincelin's contrasting result (**cited, ref 24, not measured here**) | thiamine + added xylose at pH 7.0, 140 °C increased MFT **4 to 5 times** over thiamine alone | Results |
-| Grosch & Zeiler-Hilgart's method effect (**cited, ref 13**) | a **4-5 fold** increase in recovered MFT by Likens-Nickerson distillation-extraction over direct extraction | Results |
+| Grosch & Zeiler-Hilgart's method effect (**cited, ref 13**) | a **4-5 fold** increase in recovered MFT by Likens-Nickerson distillation-extraction over direct extraction | Results. (Corrected 2026-11-01: read at source, grosch1992 dossier, the SIDA standards were added after boiling, so the 4-5x is MFT lost IN THE POT during 2 h of reflux, avoided by SDE's continuous stripping (P 0.85, red team of cluster 4); it is not a recovery bias of direct extraction.) |
 | the pH trend in the older literature (**cited, refs 15, 16, 18, 25**) | MFT "decreased in concentration with increasing pH in the range of **2.3 to 9.5**" | Results |
 
 ### Arithmetic on the printed numbers (all mine)
@@ -382,12 +382,18 @@ twice.
    is exactly the distinction the channel's oxidant gate is built to express. This chapter is
    therefore weak **support** for the gate, not evidence against it — and it supplies no number in
    either direction.
-7. **A 4-5× method effect on MFT recovery is cited in this very paper.** Grosch & Zeiler-Hilgart
-   (ref 13) found Likens-Nickerson distillation-extraction recovers **4-5 times** more MFT than direct
-   extraction, and this study uses **direct extraction**. **The absolute level, 11.7 ppb, may be a
-   fourfold to fivefold under-estimate on that basis alone**, and the benchmark's factor-3 contract
-   does not cover a fourfold method bias. The *ratios* — the 8 % isotope share, the xylose null, the
-   no-thiamine null — are immune to it, since all are within-method.
+7. **(Corrected 2026-11-01, cluster 4 and its red team; the earlier point read Grosch & Zeiler-Hilgart's 4-5x as a
+   recovery bias of direct extraction and called 11.7 ppb "a fourfold to fivefold under-estimate".)** Grosch &
+   Zeiler-Hilgart's 4-5x (ref 13) is in-pot loss, not extraction recovery: with SIDA standards added after boiling
+   (grosch1992 dossier sec. 1; P 0.85), direct extraction measures the MFT present at the end of heating, and SDE
+   measures cumulative formation with the sink short-circuited. So it does NOT make 11.7 ppb a 4-5x under-estimate.
+   This chapter's own level does carry an unquantified work-up bias of a different kind:
+   - dodecane is added to the EXTRACT, so there is no in-pot or isotopologue standard;
+   - the work-up is 5 × 20 mL CH2Cl2, concentrated to 0.10 mL, and Schieberle & Hofmann 1996 Table 2 show that solvent
+     extraction can destroy MFT ("d.n.p."; schieberle1996 dossier);
+   - the 125 mL vial holds ~2 mol O2 per mol cysteine (yiltirak2026 dossier sec. 5).
+   The absolute level is therefore a lower bound of unknown size. The *ratios* — the 8 % isotope share, the xylose null,
+   the no-thiamine null — are unaffected, since all are within-method.
 8. **The chapter is dated two ways and the repository uses both.** File stem `bolton1993`, hold-out
    label "Bolton 1994", DOI `bk-1994-0543.ch022`, printed publication date 30 November 1993, received
    9 February 1993, copyright 1994. **It is one work.** Pick one convention — the DOI's 1994 is the

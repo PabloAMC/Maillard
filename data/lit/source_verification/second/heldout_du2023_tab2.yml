@@ -1,0 +1,20 @@
+# Second reader (reader B), Du et al. 2023, Food Res Int 173:113337 (Du2023.pdf), Table 2. Independent of reader A. Rows: data/lit/fit_rows/second/heldout_du2023_tab2.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes.
+reader: 'agent-readerB-2026-11-01'
+role: 'independent second reader, contrast benchmark TEST keying (errors E6, E11)'
+
+entries:
+- ledger_id: 'du2023_table2_camola_isotopomers'
+  source_file: 'Du2023.pdf'
+  location: 'Table 2, p. 7; Table 1, pp. 4-5; Sec. 2.2, 2.6'
+  read_by: 'agent-readerB-2026-11-01'
+  second_reader: 'self'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'corrected'
+    values: 'corrected'
+  quote: 'system M: L-cysteine (1 mmol), and [12C6]-D-glucose (1 mmol), were dissolved in 5 mL of phosphate buffer (0.2 M, pH 6.50) in a 15 mL glass vial with a screw cap. The five models were magnetically stirred at 150 C in an oil bath ... The reactions of five systems were performed as described ... but the glucose was a mixture of the equimolar ratio of fully labeled [13C6]-D-glucose (0.5 mmol) and unlabeled [12C6]-D-glucose (0.5 mmol).'
+  notes: 'Reader B''s reading of the same cells; values identical to reader A''s except where the first record''s adjudication says otherwise.'

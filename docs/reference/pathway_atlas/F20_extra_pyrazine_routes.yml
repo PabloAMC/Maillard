@@ -1,0 +1,212 @@
+# Pathway-condition atlas, family F20 (literature side). Written 2026-11-01 from the extraction dossiers named per
+# cell and docs/history/pyrazine_rivals_2026-10-31/ (EX-052 and its red team); vocabulary and status caps from
+# docs/reference/pathway_atlas/families.yml. Every quote is a verbatim substring of the cited dossier (grep-checked).
+family: F20_extra_pyrazine_routes
+definition: "pyrazine routes other than aminoketone pairing (aldehyde / C1 incorporation, alkyl side chains, methylpyrazine extra route)"
+markers:
+  - "Aldehyde addition to the dihydropyrazine: 13C from a labelled amino acid appears in ONE alkyl substituent (C-2 of the ethyl from [3-13C]alanine = acetaldehyde; a methyl from [2-13C]glycine = formaldehyde), one 'y' per ring (Amrani-Hemaimi 1995, Low 2007)."
+  - "Amino-acid-specific alkylpyrazines that appear only in the pot holding that amino acid (2-methylbutyl from Ile, isobutyl from Val, phenylethyl from Phe, ethyl-dimethyl from Ala), and vanish when the amine is a peptide that makes no Strecker aldehyde."
+  - "Methylpyrazine extra route: R = MPZ^2 / (PZ x DMP) > 4 (beyond random pairing) is a SIGNATURE only; it is equally explained by pair-specific condensation constants or dihydropyrazine fates (EX-052 P1x / P1y), so on its own it is unattributed."
+  - "Methylpyrazine extra route, label marker: label(MPZ) below the mean of label(PZ) and label(DMP) in the same pot (15N), which no pairing variant can produce (red-team identity test); or a 13C sugar isotopomer in MPZ that pairing of the measured C2 / C3 pools does not give (M+3 in Zhou 2025b)."
+  - "C1 / cross-product leak: methylpyrazine (or pyrazine) formed in a pot fed a single dicarbonyl, bounding C1 addition to the bare dihydropyrazine or dicarbonyl interconversion."
+cells:
+  # ---- aldehyde addition, labelling --------------------------------------------------------------------------------
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, water_note: "400 mM each in 70 mM phosphate pH 5.6 on kieselguhr, dried in 7 min in hot oil", sugar_also: hexose_ketose}
+    contrast: "[3-13C]alanine: 3-ethyl-2,5-DMP 100 %, 2-ethyl-3,5-DMP 70 %, 2-ethyl-5-methyl 70 %, 2-ethyl-6-methyl 20-30 % labelled at C-2 of the ethyl; with glycine the ethyl compounds 8-11 are absent (0 %)"
+    status: dominant
+    quote: "Obviously for the formation of 8 one single reaction route exists"
+    quantity: "ethyl-bearing share of the slate 39-51 % with Ala vs < 2 % with Gly (NPD areas within one pot)"
+    evidence: labelling
+    lab: "Nestle Research Centre, Lausanne (Amrani-Hemaimi / Cerny / Fay)"
+    dossiers: [amranihemaimi1995_extraction.md]
+    where: "Table 2 rows 4-11; text p. 2820; Table 1"
+    note: "dominant for 3-ethyl-2,5-DMP (100 % via acetaldehyde addition); the others carry a second, amino-acid-free route."
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, sugar_also: hexose_ketose}
+    contrast: "[2-13C]glycine vs [3-13C]alanine: 2,6-DMP 30 / 25 % labelled (one methyl) with glycine, 0 % with alanine"
+    status: operating
+    quote: "for the formation of 3 there are at least two routes"
+    quantity: "25-30 % of 2,6-DMP molecules from glycine C-2 (formaldehyde addition); methylpyrazine and 2,5-DMP 0 %"
+    evidence: labelling
+    lab: "Nestle Research Centre, Lausanne (Amrani-Hemaimi / Cerny / Fay)"
+    dossiers: [amranihemaimi1995_extraction.md]
+    where: "Table 2 row 3; text p. 2820"
+  - key: {ph: mild_acid, temperature: very_high, water: intermediate_aw}
+    tags: {ph_basis: in_situ, T_C: 180, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: none_unbuffered, metals: not_controlled, matrix: "potato cakes + 1.3 % [2-13C]glycine (400x native), impingement oven 15 / 30 min", ph_note: "raw dough 5.99 / 6.01 (low2006 Table 5)", water_note: "end moisture not stated"}
+    contrast: "glycine-flooded vs control potato (low2006): 2,3-DMP x2.1, TMP x5.2, TeMP x20 up at 30 min while MPZ falls x4; 15 vs 30 min labels similar"
+    status: operating
+    quote: "x + x + y up to **~45 % of 2,6-DMP**"
+    quantity: "formaldehyde addition ~45 % of 2,6-DMP, ~50 % of 2,3-DMP, ~50 % of TMP, ~70 % of 2-ethyl-3,5-DMP (authors' arithmetic, +-15 points); ~56 umol/kg labelled 2,6-DMP at 30 min (mine, with low2006 Table 4)"
+    evidence: labelling
+    lab: "University of Reading (Low / Parker / Mottram)"
+    dossiers: [low2007_extraction.md, low2006_extraction.md]
+    where: "low2007 Table 1, sec. 4.2; low2006 Table 4"
+  - key: {ph: mild_acid, temperature: very_high, water: intermediate_aw}
+    tags: {ph_basis: in_situ, T_C: 180, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: none_unbuffered, metals: not_controlled, matrix: "same potato + [2-13C]glycine pot"}
+    contrast: "methylpyrazine vs 2,6-DMP in the same pot: MPZ 95-100 % unlabelled although 2,6-DMP takes ~45 % from labelled HCHO"
+    status: absent
+    detection_basis: "label pattern: glycine-formaldehyde addition would carry the [2-13C]glycine label into methylpyrazine; MPZ is 95 - 100 % unlabelled while 2,6-DMP in the same pot takes ~45 % from the label"
+    quote: "Methylpyrazine is 95 - 100 % unlabelled although 2,6-DMP"
+    quantity: "glycine-HCHO addition to the C2 dihydropyrazine gives <= ~1.5 umol/kg MPZ vs ~56 umol/kg labelled 2,6-DMP (low2006 dossier, mine)"
+    evidence: labelling
+    lab: "University of Reading (Low / Parker / Mottram)"
+    dossiers: [low2007_extraction.md, low2006_extraction.md]
+    where: "low2007 Table 1 row methyl-; low2006 sec. 1 answer 2"
+    note: "absent for the glycine-formaldehyde route to MPZ only; sugar-derived HCHO is invisible to this label."
+  # ---- aldehyde addition, fed dicarbonyl / amino-acid identity -----------------------------------------------------
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, feed: "methylglyoxal + alanine 2 or 4 mmol each, 5 mL 0.07 M phosphate pH 5.6 on kieselguhr in oil, 7 min"}
+    contrast: "monosaccharides + amino acids with vs without alanine: ethyl-dimethylpyrazines 11 / 3.1 ug vs < 0.1 ug; fed MGO + Ala ~5x the hexose + Ala level"
+    status: operating
+    quote: "Text: I accounted for 84 % of the pyrazines"
+    quantity: "2-ethyl-3,6-DMP 0.094 mol % of Ala (2 mmol); I : II ~10 : 1 (SIDA against d-II)"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Cerny / Grosch)"
+    dossiers: [cerny1994_extraction.md]
+    where: "Tables 2, 5"
+    note: "Cerny later co-authors the Nestle labelling paper; counted as a separate laboratory (DFA 1994 vs Nestle 1995) but the same investigator."
+  - key: {ph: neutral, temperature: moderate, water: low_aw}
+    tags: {ph_basis: label, T_C: 90, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "1,3-dihydroxyacetone + each of 20 amino acids, neat, 30 min"}
+    contrast: "amino-acid identity: TMP (HCHO adduct) with Gly, 3-ethyl-2,5-DMP with Ala, 2,5-dimethyl-3-isobutyl with Val; the same adducts from Arg, Lys, Ser (sugar-fragment aldehydes); none from Leu / Ile / Met / Phe at 90 C"
+    status: operating
+    quote: "trimethyl / DMP: Gly 0.056, Arg 0.30, Thr 0.07"
+    quantity: "adduct : parent DMP peak-area ratio a few % (orientation only; areas of different compounds)"
+    evidence: within_study_factor
+    lab: "Ghent (De Kimpe) with Wageningen (van Boekel)"
+    dossiers: [adams2008_extraction.md]
+    where: "Table 1; dossier sec. 4 rows 'aldehyde adducts'"
+  - key: {ph: neutral, temperature: very_high, water: intermediate_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "glucose + 15N-glycine + Ile (or Phe) on wheat starch, 12-14 % moisture, 1 h", ph_note: "pH 7 before freeze-drying"}
+    contrast: "isoleucine pot vs the eight others: 2-methylbutyl-substituted pyrazines only with Ile; phenylethylpyrazines only with Phe"
+    status: operating
+    quote: "ten 2-methylbutyl-substituted pyrazines from isoleucine (via 2-methylbutanal)"
+    quantity: "Ile-only pyrazines (2-methylbutyl and C8 / C9 alkyl rows) ~430 of 1170 ug/g glucose in the Ile pot (mine, Table 1; one IS, no response factors)"
+    evidence: within_study_factor
+    lab: "Ho network (Rutgers: Hwang / Hartman / Ho)"
+    dossiers: [hwang1995_extraction.md]
+    where: "Table 1; text"
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 130, sugar: none, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Lys-X dipeptide vs Lys + X free, + methylglyoxal 0.02 M, 2 h, initial pH 8 unbuffered (MGO pots stable)"}
+    contrast: "free alanine vs Lys-Ala dipeptide (MGO): 3-ethyl-2,5-DMP 6.77 vs 0.62; Strecker aldehydes free / dipeptide ~100 (MGO)"
+    status: operating
+    quote: "3-ethyl-2,5-DMP 6.77 in Lys + Ala (Strecker acetaldehyde addition) vs 0.62 in LysAla"
+    quantity: "SBSE peak areas x 1e8; the peptide starves the addition step of its aldehyde"
+    evidence: within_study_factor
+    lab: "Ghent (De Kimpe)"
+    dossiers: [vanlancker2010_extraction.md, vanlancker2012_extraction.md]
+    where: "vanlancker2010 Table 2, Table 4; vanlancker2012 sec. 1 (ii)"
+  # ---- C1 / cross-product leak in single-dicarbonyl pots -----------------------------------------------------------
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 130, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "glyoxal 0.02 M + lysine (+ second amino acid or Lys-X dipeptide) 0.2 M, 2 h, initial pH 8"}
+    contrast: "glyoxal-only pots across 17 amine arms: methylpyrazine 1-2 % of pyrazine (molar); no DMP"
+    status: minor
+    quote: "MPZ / PZ ≈ 0.01-0.05 (area), ~0.004-0.02 molar"
+    quantity: "MPZ ~0.4-2 % of PZ (recovery-corrected, mine): any C1 addition to the C2 dihydropyrazine is small here"
+    evidence: fed_intermediate
+    lab: "Ghent (De Kimpe)"
+    dossiers: [vanlancker2010_extraction.md]
+    where: "Table 3 (rendered); dossier sec. 1"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "cysteine + methylglyoxal 20 + 20 mM, no glyoxal fed", ph_note: "label 6 (also 7, 8); unbuffered"}
+    contrast: "label pH 6 vs 8 at 90 min: pyrazine 47.0 vs 15.4 ug/L and methylpyrazine 160 vs 117 (falling with pH) while 2,5-DMP rises 66 -> 237"
+    status: unattributed
+    quote: "Surprisingly, pyrazine and methylpyrazine were detected in the reaction between Cys and MGO,"
+    quantity: "at label pH 6 methylpyrazine (160 ug/L) exceeds 2,5-DMP (66 ug/L) in a pot fed only MGO (figure-digitised)"
+    evidence: fed_intermediate
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [zhou2023_extraction.md]
+    where: "Figure 3g, 3h, 3a; text p. 2478"
+    note: "a C2 unit from MGO (authors speculate Cys-driven MGO -> GO) or an extra MPZ route; no marker separates them."
+  # ---- methylpyrazine extra route ----------------------------------------------------------------------------------
+  - key: {ph: acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose ARP 20 mM + 15N-alanine 20 mM", ph_note: "label 8; in situ 5.13 -> 4.08 over 30-120 min (Zhou 2024 Fig. 3b via CF-060)"}
+    contrast: "methylpyrazine vs pyrazine and 2,5-DMP in the same pot: MPZ 15N share 37.1 % vs mean of PZ and DMP 48.9 % at 30 min (deficit 11.7 points; 8.2 at 120 min)"
+    status: operating
+    quote: "Methylpyrazine 14N share = (2 x 39.73 + 46.29)/200 = 62.9 %"
+    quantity: "an extra low-15N (ARP-nitrogen) MPZ route carrying >= ~0.49 of MPZ fits the isotopomers (red team p2b_ridge; model-dependent); leakage of [M-H]+ cannot close the deficit"
+    evidence: labelling
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [zhou2024_extraction.md]
+    where: "Table 1; red_team.md sec. 8 (post hoc test)"
+    note: "post hoc (not pre-registered); the [M-H]+ correction status of the isotopomers is the open reading task (SI)."
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose ARP 20 mM + 13C5-xylose 20 mM", ph_note: "label 8; in situ 6.04 -> 4.50 (Zhou 2025b Fig. 3d via CF-060)"}
+    contrast: "time: methylpyrazine M+3 (an intact labelled C3) absent at 30 / 60 min, 4.56 / 4.36 % at 90 / 120 min"
+    status: minor
+    quote: "labelled xylose) appears only at 90 and 120 min"
+    quantity: "~4.5 % of MPZ molecules carry a labelled C3 from free xylose late in the run"
+    evidence: labelling
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [zhou2025b_extraction.md]
+    where: "Table 2; flag 11"
+    conflict: CF-060
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: other_buffer, metals: not_controlled, system: "0.1 M lysine + 0.1 M glucose (also fructose, ribose; asparagine), borate pH 9, 2 h"}
+    contrast: "five sugar x amino-acid pots: R = MPZ^2 / (PZ x DMP) 7.5-52 on the 2 h end points, 14 of 15 rate rows above the random-pairing bound (EX-052 S1)"
+    status: unattributed
+    quote: "x 0.415 / 94.115 = 0.0578 mmol/L methylpyrazine"
+    quantity: "lysine-glucose 2 h: PZ 0.0913, MPZ 0.0578, 2,5-DMP 0.0029 mmol/L -> R ~12.6 vs bound 4 (mine)"
+    evidence: within_study_factor
+    lab: "Reineccius, University of Minnesota (Leahy / Reineccius)"
+    dossiers: [leahy1989_extraction.md]
+    where: "Table III; dossier sec. 3 molar reconciliation; pyrazine_rivals_2026-10-31 S1"
+    conflict: CF-077
+    note: "R > 4 is either an extra MPZ route (this family) or pair-specific pairing (F19 variants P1x / P1y); the 15N cell above tips it toward an extra route. Single-lab for S1; NPD MS-confirmed on one sample only."
+  - key: {ph: alkaline, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: ammonia_ammonium, oxygen: air, buffer: none_unbuffered, metals: not_controlled, system: "1 M glucose + 8 M NH4OH, 16 pots (additives, open / closed, 2 / 18 h)", ph_note: "not printed; strongly basic"}
+    contrast: "16 pots with antioxidants, O2, Cu, Zn, NaOH: methylpyrazine 77-81 % of pyrazines in every pot; R 322-631 (2,5-DMP) or >= 83 with 2,6-DMP added (mine)"
+    status: unattributed
+    quote: "Methylpyrazine is 77-81 % of all pyrazines in every pot."
+    quantity: "R ~440 in the control pot (mine, weight % -> molar factor 0.978); PZ and MPZ recoveries > 98 %"
+    evidence: within_study_factor
+    lab: "UC Davis (Shibamoto / Bernhard)"
+    dossiers: [shibamoto1977_extraction.md]
+    where: "Table II"
+    conflict: CF-077
+    note: "authors propose a hydroxy-C2 aminocarbonyl + aminoacetone with dehydration (no oxidant) for MPZ: proposed only, no intermediate isolated."
+condition_dependence: >-
+  SHOWN. Aldehyde addition to the dihydropyrazine runs at 180 C in low-water roasts with free amino acids (13C:
+  Nestle, Reading; fed MGO + Ala: DFA) and carries 25-100 % of the ethyl / extra-methyl pyrazines, ~45-50 % of
+  2,6-DMP, 2,3-DMP and TMP in a glycine-flooded potato; it needs a free amino acid's Strecker aldehyde or a
+  sugar-fragment aldehyde (Ghent: adducts vanish with peptides at 130 C; Arg / Lys / Ser give sugar-aldehyde
+  adducts); larger Strecker aldehydes (Leu, Ile, Met, Phe) add at 130-180 C in water or a starch bed but not at
+  90 C neat (Ghent, Rutgers). It does NOT make methylpyrazine from glycine formaldehyde (Reading label) and C1 leak
+  into MPZ in glyoxal-only pots is ~1-2 % (Ghent). The methylpyrazine excess (R > 4) is shown at 75-95 C pH 9
+  (Reineccius), 100 C in 8 M NH3 (UC Davis), and in Ho-network ARP pots, and its 15N label deficit at 120 C in an
+  acidifying ARP pot (Ho network): an extra MPZ route with its own N source is favoured over pair-specific pairing,
+  but only by one post hoc test. pH: the only within-study pH contrast (fed MGO + Cys, label 6 / 7 / 8) shows the
+  unexpected PZ / MPZ from an MGO-only pot FALLING with pH while 2,5-DMP rises. ASSUMED / unshown: any temperature,
+  water or pH dependence of the addition step itself; the identity of the extra MPZ route; aqueous 95-130 C labelling
+  of the addition step.
+best_supported_regimes:
+  - "very_high T / low a_w roast / hexose + Ala or Gly: aldehyde addition operating, dominant for 3-ethyl-2,5-DMP (2 labs by 13C: Nestle, Reading; plus fed MGO + Ala at DFA)"
+  - "very_high T / intermediate a_w potato / glycine-rich: formaldehyde addition ~half of 2,6-DMP, 2,3-DMP, TMP; absent for MPZ (Reading, 13C)"
+  - "high T / dilute / peptide amine: addition starved (Ghent only, peak areas)"
+  - "methylpyrazine extra route: operating in one acid-drifting ARP pot (Ho network, 15N, post hoc); unattributed mixing signature in 3 more systems (Reineccius, UC Davis, Ho)"
+unknown_regimes:
+  - "aqueous moderate T (75-100 C) with a label able to see aldehyde addition: none (every 13C study is a 180 C roast)."
+  - "acid (< 4.5, in situ) or alkaline (> 7.5, in situ) with labelling: none; the addition step has no pH law anywhere."
+  - "the chemical identity of the methylpyrazine extra route (hydroxy-C2 / C3 dehydration, three-component, ARP-nitrogen): no fed hydroxyacetone / glycolaldehyde + aminoketone test, no argon vs air test (EX-052 missing experiments 2-3)."
+  - "low T (<= 60 C): nothing."
+  - "protein-bound amine: nothing with a marker."
+  - "Zhou 2024's [M-H]+ correction: unread SI; it decides whether the 15N deficit is real."
+  - "a cross-lab replicate of the Leahy lysine-glucose R with MS-confirmed MPZ (single lab, NPD)."
+  - "Strecker aldehyde vs sugar-fragment aldehyde share of the addition in a sugar pot: only the Ghent amino-acid screen (areas) and Reading's glycine label bound it."
+competing_families:
+  - "F19_aminoketone_pyrazine: the same dihydropyrazine either aromatises (F19 product) or adds an aldehyde (this family); oxidation wins unless the aldehyde is abundant (adduct : parent a few % at 90 C dry, ~50 % in a glycine-flooded 180 C potato)."
+  - "F16_strecker_aldehyde: the added aldehyde is the Strecker aldehyde; its loss to the dihydropyrazine is a Strecker-aldehyde sink."
+  - "F10_retroaldol_c3_c2: sugar-fragment formaldehyde / acetaldehyde and C2 / C3 pools feed both the extra MPZ route and the adducts."
+  - "F21_pyrroles_pyridines and F26 thiazoles (Cys): compete for MGO and aminoketone in the Cys + MGO pot where PZ / MPZ appear unexpectedly."
+engine: >-
+  NOT IN THE ENGINE. network.py B18 books the Strecker formaldehyde (and B22's CO2) to FRAG_C, a dead end; there
+  is no dihydropyrazine species, no aldehyde-addition step, no trialkyl / ethyl / extra-methyl pyrazine, no 2,6- or
+  2,3-DMP, and no methylpyrazine route other than r_ak_mpz (AKG + AKM, shared k_cond). MISMATCHES: (a) methylpyrazine
+  is under-predicted twice over: CF-077 (R = 1 for want of the cross-pair factor 2) and no extra route against the
+  measured R 7.5-52 (Leahy), ~440 (Shibamoto) and the 15N deficit (Zhou 2024): against Leahy's lysine-glucose /
+  lysine-ribose pots the engine is 3.5x / 7x low; (b) the Strecker formaldehyde, which the literature shows alkylating
+  dihydropyrazines (~half of 2,6-DMP / 2,3-DMP / TMP in a glycine-rich roast), is lost as unassigned fragment carbon;
+  (c) B22's methional and any Strecker aldehyde are never consumed by pyrazine adducts. None of the engine's three
+  shipped species is wrong because of (b)-(c) (MPZ and 2,5-DMP carry no amino-acid carbon), but any future trialkyl
+  or 2,6-DMP target needs the dihydropyrazine branch. The red team's minimum change (factor 2 on r_ak_mpz plus a
+  one-sided MPZ band +0.3 to +1.1 dex) is pending owner approval.

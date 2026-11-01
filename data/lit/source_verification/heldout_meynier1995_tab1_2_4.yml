@@ -1,0 +1,51 @@
+# SOURCE VERIFICATION -- Meynier & Mottram 1995, Food Chem 52:361-366 (meynier1995.pdf), Tables 1, 2 and 4 (TEST table data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml; contrast benchmark errors E4, E3). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_meynier1995_tab1_2_4.yml, fit_rows/second/heldout_meynier1995_tab1_2_4.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder'
+  source_file: 'meynier1995.pdf'
+  location: 'Table 1, p. 363; Methods p. 362'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: 'an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks ... The final volumes were then adjusted to 50 ml with pyrophosphate buffer of the appropriate pH. The reaction mixtures were heated in sealed glass ampoules at 140 C under pressure for 1 h.'
+  notes: 'Glycine + ribose, pH 4.5 - 6.5: 24 numeric cells (MPZ, 2,5-DMP, furfural, furfuryl alcohol, 4,5-dihydro-2-methyl-3(2H)-furanone, norfuraneol), ug / 10 mg ribose, RF not determined. CONDITIONS corrected: in-pot 50 + 35 mM inferred from the 25 -> 50 mL make-up (printed 100 / 70 mM is the stock). The OCR layer of Table 1 is scrambled; both readers read the image.'
+  adjudication: 'All 30 cells identical in both readings (5 nd / tr). No row dropped.'
+- ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder'
+  source_file: 'meynier1995.pdf'
+  location: 'Table 2, p. 363'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: 'an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks ... The final volumes were then adjusted to 50 ml with pyrophosphate buffer of the appropriate pH. The reaction mixtures were heated in sealed glass ampoules at 140 C under pressure for 1 h.'
+  notes: 'Lysine + ribose: 30 numeric cells (MPZ, 2,5-DMP, two tentative pyridines, furfural, furfuryl alcohol, norfuraneol). CONDITIONS corrected: in-pot 50 + 35 mM inferred; lysine carries two amino groups.'
+  adjudication: 'All 35 cells identical in both readings. No row dropped.'
+- ledger_id: 'meynier1995_table4_met_ribose_ph_ladder'
+  source_file: 'meynier1995.pdf'
+  location: 'Table 4, p. 364 (300 dpi re-read); abstract; discussion p. 365'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'corrected'
+  quote: 'an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks ... The final volumes were then adjusted to 50 ml with pyrophosphate buffer of the appropriate pH. The reaction mixtures were heated in sealed glass ampoules at 140 C under pressure for 1 h.'
+  notes: 'Methionine + ribose: 35 numeric cells, 34 rows (furfural, furfuryl alcohol, norfuraneol, 2-furylmethyl methyl sulphide, DMDS, methional, DMTS; MPZ nd / tr). VALUES corrected: the row printed ''3-(Methylthio)propanol'' (LRI 903) is methional per abstract, discussion and LRI (P ~0.9): MTAL; DMDS 24.82 kept as printed; DMDS 8.6 at pH 6.0 dropped (contradicts the stated rise; misprint not provable). CONDITIONS corrected: in-pot 50 + 35 mM inferred.'
+  adjudication: 'All 40 cells identical in both readings; the label and the two DMDS cells re-read on a 300 dpi render (as printed). One cell dropped.'

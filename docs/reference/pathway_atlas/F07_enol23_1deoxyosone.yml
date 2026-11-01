@@ -1,0 +1,286 @@
+# Pathway-condition atlas, family F07 (written 2026-11-01, atlas agent "hub"; vocabulary: families.yml).
+# Bin conventions as in F06_enol12_3deoxyosone.yml: pH boundary values go to the upper bin (4.5 -> mild_acid,
+# 6.0 -> neutral, 7.5 -> neutral); temperature upper edges inclusive (100 C / aqueous reflux -> moderate); tags.operator
+# "formation_flux" = trap present during heating, "standing_level" = trap after the run; "[derived here]" = this file's
+# arithmetic on printed numbers; "not_stated" = the source prints no value for that axis.
+family: F07_enol23_1deoxyosone
+definition: "2,3-enolisation -> 1-deoxyosone (1-DG / 1-DX)"
+markers:
+  - "IN-SITU trapped 1-deoxyosone quinoxaline (2-methyl-3-(1',2',3'-trihydroxypropyl)quinoxaline from 1-DG; 2-methyl-3-(1',2'-dihydroxyethyl)quinoxaline from 1-DX) with OPD present from t = 0: the FORMATION split (Beck 1988, Nedvidek 1992, Gobert 2009)."
+  - "Acetic acid carrying glucose C-1 / C-2 (or xylose C-1 / C-2) from 13C isotopomers: the 1-deoxyosone's beta-dicarbonyl cleavage signature (Davidek 2005 / 2006a / 2008); combined with the fed 1-DG acetic-acid yield it bounds the share of the ARP that passed through 1-DG."
+  - "Fed 1-DG / fed ARP products specific to the 1-deoxyosone: acetic acid + C4 (erythrulose, 1-deoxythreosone), acetylformoin / norfuraneol / 2,3,4-pentanetrione, hydroxyacetone from glucose but NOT from 3-DG (Weenen 1998), 1,4-dideoxyosones with alpha-amino acids (Nedvidek)."
+  - "Standing 1-deoxyosone by EX-SITU OPD: presence only. 1-DG is gone within ~5 min at pH >= 6 and 120 C (Davidek 2006a), so its standing level understates its flux by an order of magnitude or more."
+cells:
+  # ---- formation flux / trapping ------------------------------------------------------------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_amine, amine_detail: "propylamine Amadori compound fed (alkylamine; secondary N at C-1 as in amino-acid ARPs)", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "pH 4.5 vs 7: 1-DG : 3-DG 8 : 5 -> 20 : 1 (x12.5; ~0.44 dex per pH unit)"
+    status: operating
+    quote: "1-DG : 3-DG = 20 : 1 (pH 7), 8 : 5 (pH 4.5)"
+    quantity: "1-DG ~95 % of the trapped deoxyosone flux at pH 7 [derived here]; dominance is over F06 only (no mass balance on other fates)"
+    evidence: trapping
+    lab: "Ledl / Severin school, Munich"
+    dossiers: [beck1988_extraction.md]
+    where: "Experimental p. 242"
+    note: "status downgraded dominant -> operating by pathway_atlas_gate validation (2026-11-01): the cap allows `dominant` from trapping only with a mass balance, and this cell states there is none on other fates; the 20 : 1 dominance over F06 stands in `quantity`."
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_amine, amine_detail: "propylamine Amadori compound fed", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "pH 4.5 arm of the same pair"
+    status: operating
+    quote: "1-DG : 3-DG = 20 : 1 (pH 7), 8 : 5 (pH 4.5)"
+    quantity: "1-DG ~62 % of trapped deoxyosone flux at pH 4.5 [derived here]"
+    evidence: trapping
+    lab: "Ledl / Severin school, Munich"
+    dossiers: [beck1988_extraction.md]
+    where: "Experimental p. 242"
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_amine, amine_detail: "piperidino-fructose 0.5 M (tertiary N at C-1)", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "structure factor: secondary-amine ARP goes to 1-DG 'even at pH 4.5'; primary-amine ARP 8 : 5 at pH 4.5"
+    status: dominant
+    quote: "most of 7 had been transformed into 5"
+    quantity: "1-DG quinoxaline isolated in 70 % yield (lower bound on the 2,3-enolisation share; trapping with a mass balance)"
+    evidence: trapping
+    lab: "Ledl / Severin school, Munich"
+    dossiers: [beck1988_extraction.md]
+    where: "Experimental p. 242"
+  - key: {ph: neutral, temperature: not_stated, water: concentrated}
+    tags: {ph_basis: label, T_C: null, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "beta-alanine 2 M", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "pH 5 vs 7 (in situ OPD, 12 h): 1-DG / 3-DG 4.2 -> 20.9; but the fragment / deoxyosone quinoxaline ratio 2 : 3 -> 7 : 1, so 1-DG is ~51 % of all trapped dicarbonyl area at pH 5 and ~12 % at pH 7 [derived here]"
+    status: operating
+    quote: "the fragmentation-product/deoxyosone ratio changes from 2:3 at pH 5 to 7:1 at pH 7"
+    quantity: "1-DG quinoxaline 479 000 (pH 5) -> 60 700 (pH 7) peak area; temperature unprinted"
+    evidence: trapping
+    lab: "Ledl / Severin school, Stuttgart (not independent of Beck 1988)"
+    dossiers: [nedvidek1992_extraction.md]
+    where: "Table 2; Results p. 226"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 50, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "free lysine 42 mM", oxygen: [air, inert], buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "air vs deaerated (in situ OPD, 7 d): 1-DG 6.9 vs 23.5 mmol/mol (x3.4 LOWER under air), its C4 products 1-deoxythreosone 4.4 vs 14.8; glucosone the reverse"
+    status: operating
+    quote: "| 1-deoxyglucosone | 6.9 | 23.5 |"
+    quantity: "deaerated: 1-DG the largest trapped C6 osone (23.5 of ~42 mmol/mol); aerated: 6.9 against glucosone 44.5"
+    evidence: trapping
+    lab: "Glomb, Halle"
+    dossiers: [gobert2009_extraction.md]
+    where: "Table 1"
+  # ---- labelling + fed (share bounds) -------------------------------------------------------------
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: glycine, amine_detail: "fed DFG (glycine ARP) ~0.1 M; glucose + glycine 0.1 M each", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "product (acetic acid, isotope dilution)"}
+    contrast: "pH 4 / 6 / 8: acetic acid from fed DFG 4 / 28 / 56 mol %; fed 1-DG WITHOUT amine gives 0.20 (pH 5), 0.56 (pH 6), 0.80-0.84 (pH 6.5-8) mol/mol"
+    status: dominant
+    quote: "about 4, 28, and 56 mol %"
+    quantity: ">= 67-70 % of DFG through 1-DG at pH 8 (DFG acetic yield / amine-free 1-DG yield; assumes all acetic acid via 1-DG, which the C1/C2 label supports) [dossier-derived]"
+    evidence: fed_intermediate
+    lab: "Nestle Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md, davidek2005_extraction.md]
+    where: "Davidek 2005 Fig. 1; Davidek 2006a Fig. 3, Table 1"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: glycine, amine_detail: "fed DFG", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "product (acetic acid, isotope dilution)"}
+    contrast: "pH 6 arm (DFG 28 mol % / 1-DG 0.56 mol/mol)"
+    status: operating
+    quote: "about 4, 28, and 56 mol %"
+    quantity: ">= ~50 % of DFG through 1-DG at pH 6 [dossier-derived]; pH 4: DFG 4 mol %, no 1-DG yield at pH 4 to bound the share"
+    evidence: fed_intermediate
+    lab: "Nestle Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md, davidek2005_extraction.md]
+    where: "Davidek 2005 Fig. 1; Davidek 2006a Fig. 3"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "90 / 120", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "13C isotopomers of the product"}
+    contrast: "pH 6 vs 8 and 90 vs 120 C: label origin nearly constant ('pH had only a negligible effect'); C5/C6 share ~25 % at 90 C"
+    status: operating
+    quote: "C1/C2 ~70 %, C3/C4 ~8-10 %, C5/C6 ~20 %"
+    quantity: "acetic acid ~70 % from glucose C-1/C-2 (the 1-DG beta-cleavage signature; glycolaldehyde oxidation gives the same label, Huyghues-Despointes 1996)"
+    evidence: labelling
+    lab: "Nestle Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md]
+    where: "Table 2"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: glycine, amine_detail: "xylose + glycine 0.1 M each", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "product (acetic acid, isotope dilution) + 13C"}
+    contrast: "pH 6 vs 8: acetic acid 16 vs 28 mol % of xylose at 240 min"
+    status: operating
+    quote: "77-89 % of acetic acid from C-1 / C-2"
+    quantity: ">= ~12-14 % (pH 6) and >= ~22-25 % (pH 8) of xylose passed through the 1-deoxypentosone (acetic yield x C1/C2 share, 1-DX -> acetic <= 1 mol/mol) [derived here]"
+    evidence: labelling
+    lab: "Nestle Lausanne (Davidek / Blank)"
+    dossiers: [davidek2008_extraction.md]
+    where: "Fig. 1; labelling text"
+    conflict: CF-069
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: none, amine_detail: "synthetic 1-DG, no amine", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "fed intermediate, HPLC"}
+    contrast: "pH 5 vs >= 6: 8 % of 1-DG left after 5 min at pH 5; gone within 5 min at pH >= 6"
+    status: operating
+    quote: "1-DG is gone within 5 min at pH >= 6"
+    quantity: "1-DG lifetime < ~2 min at 120 C, pH >= 6 (measured intermediate lifetime): the reason standing 1-DG is small"
+    evidence: measured_intermediate
+    lab: "Nestle Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md]
+    where: "Fig. 3; dossier sec. 1 point 3"
+  # ---- standing levels from fed parents ---------------------------------------------------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "100 / 120", sugar: hexose_aldose, amine: glycine, amine_detail: "fed DFG", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: standing_level}
+    contrast: "pH 5.5 vs 6.8: higher pH favours 1-DG relative to 3-DG; 1-DG decays much faster than 3-DG"
+    status: operating
+    quote: "An increase in pH seems to favour the 1-DG formation."
+    quantity: "1-DG standing peak ~0.09 mM (pH 5.5) vs ~0.05 mM (pH 6.8) from 0.1-0.2 M DFG; 3-DG : 1-DG at pH 6.8 1.2 (figure) or 3.2 (text)"
+    evidence: fed_intermediate
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2003b_extraction.md]
+    where: "Fig. 3; sec. 3.1.4"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100 / 120 / 130", sugar: hexose_aldose, amine: sulfur_aa_other, amine_detail: "fed methionine-glucose ARP 0.2 M", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    contrast: "initial pH 5.5 vs 7.5: standing 1-DG 1.55 mM vs <= 0.25 mM (the opposite of the flux direction: at pH 7.5 it decays faster)"
+    status: operating
+    quote: "pH 5.5: 1.55 (120 °C, 30 min)"
+    quantity: "1-DG peak ~0.8 mol % of fed ARP (pH 5.5, 120 C) [derived here]; semi-quantified on the 3-DG curve"
+    evidence: fed_intermediate
+    lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+    dossiers: [deng2021_extraction.md]
+    where: "Fig. 5 (coarse read)"
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, amine_detail: "fed TTCA 10 mM", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    contrast: "label pH 5.5 / 6 / 7 / 8: 1-DX at 120 min 32 / 62 / 69 / 106 umol/L while 3-DX falls; 3-DX / 1-DX 19 -> 0.7"
+    status: operating
+    quote: "higher under pH 8"
+    quantity: "1-DX <= 0.19 mmol/L (semi-quantitative, diacetyl surrogate standard)"
+    evidence: within_study_factor
+    lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+    dossiers: [zhai2021_extraction.md]
+    where: "Fig. 5b"
+    conflict: CF-062
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: glycine, amine_detail: "fed glycine-xylose ARP 5 mM", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    contrast: "in-pot pH 5.05 -> 3.55: standing 3-DX / 1-DX climbs 2.6 -> 10.9 (1-DX falls relative as the pot acidifies)"
+    status: operating
+    quote: "1-DX ~3.5-30 min"
+    quantity: "1-DX lifetime bound 3.5-30 min at 120 C (dossier-derived, formation from ARP only)"
+    evidence: measured_intermediate
+    lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+    dossiers: [hou2026_extraction.md]
+    where: "Fig. 3; dossier sec. 1 (b)"
+    conflict: CF-083
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100 / 120", sugar: pentose, amine: peptide, amine_detail: "fed xylose-glycylglycine ARP", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    contrast: "none (1-DX never reported)"
+    status: not_detected
+    quote: "only 3-deoxyxylosone was observed"
+    quantity: "1-DX not observed as a STANDING level, no LOD; given a 1-DX lifetime of minutes this does not exclude F07 flux"
+    evidence: measured_intermediate
+    lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+    dossiers: [cui2022_extraction.md]
+    where: "dossier sec. 1 (a)"
+    note: "was `absent`: an ex-situ OPD standing level with no detection limit; a standing level shows presence only (this file's markers), and the cell's own quantity leaves F07 flux open (red team 2026-11-01)."
+  # ---- kinetic fits -------------------------------------------------------------------------------
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "standing_level (fit infers flux)"}
+    contrast: "initial pH 4.8 -> 7.5: k7 (DFG -> 1-DG) pD 0.60 +- 0.52 vs k4 0.35; k7 7.7e-4 -> 1.5e-2 /min, non-monotone at pH 5.5"
+    status: operating
+    quote: "0.60 ± 0.52"
+    quantity: "fitted 1-DG share of enolisation 0.34 (pH 4.8) -> 0.50 (pH 7.5) [derived here from Table 2 k4 / k7]"
+    evidence: kinetic_fit
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2005b_extraction.md]
+    where: "Tables 2-3"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "80-120 (k at 100)", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "standing_level (fit infers flux)"}
+    contrast: "temperature: Ea 107.3 (k7) vs 97.1 (k4): F07 share rises slowly with T"
+    status: operating
+    quote: "1.6e-2 ± 6.8e-4"
+    quantity: "k7 1.6e-2 /min at 100 C; fitted 1-DG share 0.59 of the two enolisations [derived here]"
+    evidence: kinetic_fit
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2005_extraction.md]
+    where: "Table 2"
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, operator: "standing_level (fit infers flux)"}
+    contrast: "within-fit split 51 : 1 over F06"
+    status: operating
+    quote: "ARP -> 1-deoxyosone 2.79e-2 /min"
+    quantity: "fitted 1-DX share ~98 % of ARP enolisation at pH 6, 0.5 M phosphate [derived here]; no CI"
+    evidence: kinetic_fit
+    lab: "Reading (Mottram) + Quest"
+    dossiers: [desclaux2006_extraction.md]
+    where: "text p. 370"
+  # ---- amine-free / food / acid -------------------------------------------------------------------
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: none, T_C: "160 / 180 / 200", sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    contrast: "+- NaCl"
+    status: operating
+    quote: "4.6 ± 0.5, 4.0 ± 1.2 and 3.9 ± 1.0"
+    quantity: "standing 1-DG ~1/4-1/5 of 3-DG in an amine-free glucose glass"
+    evidence: measured_intermediate
+    lab: "Hacettepe (Gokmen)"
+    dossiers: [kocadagli2016jafc_extraction.md]
+    where: "Results lines 228-231"
+  - key: {ph: acid, temperature: low, water: concentrated}
+    tags: {ph_basis: label, T_C: "27 / 37 (24-week storage)", sugar: [disaccharide, hexose_aldose, hexose_ketose], sugar_note: "disaccharide + hexoses (juices)", amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, operator: standing_level}
+    contrast: "three juices; 1-DG in none"
+    status: not_detected
+    quote: "1-DG was not detected in the acidic samples"
+    quantity: "1-DG below detection in apple, orange, peach at pH 3.4 (LC-MS of quinoxalines; standing level only)"
+    evidence: measured_intermediate
+    lab: "Hacettepe (Gokmen)"
+    dossiers: [gursulaktag2020_extraction.md]
+    where: "sec. 3.2 (iii)"
+    note: "was `absent`: no 1-DG standard or detection limit (the dossier's LOD table covers 3-DG, glucosone, MGO, GO only); a standing level in stored juice (absent audit 2026-11-01)."
+  - key: {ph: neutral, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 101, sugar: [pentose, hexose_aldose], sugar_note: "pentose and hexose_aldose (paired)", amine: other_free_aa, amine_detail: "L-alanine ~1.2-1.5 M", oxygen: air, buffer: phosphate, metals: not_controlled, operator: standing_level}
+    contrast: "xylose vs glucose"
+    status: operating
+    quote: "1000 and 290 µg/mmol glucose, at 40 min"
+    quantity: "1-DG max 290 ug/mmol glucose (40 min); 1-deoxypentosone max 610 ug/mmol xylose (10 min), plateau 1.5 umol/mmol"
+    evidence: measured_intermediate
+    lab: "DFA Garching (Hofmann)"
+    dossiers: [hofmann1999_extraction.md]
+    where: "Results p. 116; Figs. 4-5"
+  # ---- appended 2026-11-01 after the frozen extent (CF-099; outside split v1 / v2) ----
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "88-90", sugar: [disaccharide, hexose_aldose], sugar_note: "maltose vs glucose propylamino ARPs (paired)", amine: other_amine, amine_detail: "N-propyl Amadori compounds fed", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "maltose vs glucose propylamino ARPs, pH 5, reflux in water / dioxane 1:1, OPD present: a third exit from the 2,3-enediol"
+    status: operating
+    quote: "formed in higher amounts"
+    quantity: "the 1-amino-1,4-dideoxy-2,3-hexodiulose (quinoxaline 7b; C-4 beta-elimination from the 2,3-enediol with the amine retained, the 1-deoxyosone's oxidation level) from the maltose ARP; from the glucose ARP only 'possibly'; no yields"
+    evidence: trapping
+    lab: "Ledl, Universitat Stuttgart"
+    dossiers: [huber1990_extraction.md]
+    where: "sec. 1 table (split at the 2,3-enediol); Scheme"
+    note: "No numbers; 'interpretations ... are only tentative'. A 4-O-glycosyl leaving group favours C-4 elimination over amine release; for free glucose ARPs at most minor. 50 % dioxane solvent (water bin by solute molarity, ~0.08 M ARP + ~0.08 M phosphate). The McGill ~5 % share of this route (F15#3, a v1 TEST contrast) belongs here too (CF-099); its move waits for a new split version."
+condition_dependence: >-
+  SHOWN: (i) pH - every in-situ trap and every fit puts the 2,3-enolisation share up with pH: 62 % -> 95 % of trapped
+  osone flux from pH 4.5 to 7 (Beck), 1-DG / 3-DG x5 from pH 5 to 7 (Nedvidek), pD 0.60 vs 0.35 (Martins 2005b), and
+  the labelled acetic acid bounds >= 50 % (pH 6) / >= 67-70 % (pH 8) of a fed glycine ARP through 1-DG at 120 C
+  (Davidek). The same pH rise makes the STANDING 1-DG smaller relative to its flux (Deng 2021 pH 7.5; Davidek 2006a
+  lifetime < 2 min at pH >= 6), which is why standing ratios point the other way at the late, acidified times of
+  unbuffered pots (Hou 2026, Zhou 2024b). (ii) Oxygen - at 50 C air LOWERS the trapped 1-DG x3.4 (Gobert), the flux
+  going to glucosone instead; untested at 100-140 C. (iii) Amine structure - a tertiary-N ARP routes ~all to 1-DG even
+  at pH 4.5 (Beck); amine-free 1-DG formation exists in the glucose glass (Kocadagli). (iv) Sugar - pentose ARPs show
+  F07 by labelling (Davidek 2008) and by fit (Desclaux 51 : 1), but there is NO in-situ trap on a pentose amino-acid
+  ARP. ASSUMED / UNSHOWN: temperature dependence beyond Martins' fitted Ea; phosphate vs water (every flux datum is in
+  phosphate: Beck, Nedvidek, Gobert, Davidek, Desclaux, Martins); acid juices (pH 3.4) show no standing 1-DG.
+best_supported_regimes:
+  - "neutral-to-alkaline / moderate-high / dilute / hexose ARP in phosphate: dominant over F06 (Ledl school trapping; Nestle labelling + fed; Wageningen fit: 3 labs)"
+  - "neutral / high / dilute / pentose + glycine in phosphate: operating, >= ~12-25 % of xylose (Nestle labelling) and 98 % of the fitted enolisation (Reading fit): 2 labs"
+  - "neutral / low (50 C) / dilute / glucose + lysine, deaerated: the largest trapped C6 osone (Glomb, 1 lab)"
+unknown_regimes:
+  - "in-situ trapping of a pentose amino-acid (or cysteine) ARP: no formation split for 1-DX exists on disk"
+  - "unbuffered water vs phosphate for the 2,3-enolisation at 100-140 C (hub H4): every flux datum is in phosphate"
+  - "O2 / argon at 100-140 C"
+  - "acid (< 4.5) at cooking temperature (juices are 27-37 C, standing only)"
+  - "intermediate a_w and protein-bound lysine"
+  - "amine acceleration of the 2,3-enolisation itself (no amine-free ARP analogue; Smuda / Voigt pots all carry an amine)"
+competing_families:
+  - "F06_enol12_3deoxyosone: loses the formation flux to F07 at pH >= ~6; wins the standing level"
+  - "F08_oxidative_osone: under air at 50 C takes flux away from 1-DG (Gobert: glucosone 44.5 vs 1-DG 6.9 mmol/mol)"
+  - "downstream sinks that define the 1-DG lifetime: F11 beta-cleavage (acetic acid, 0.8 mol/mol, amine-free), F12 oxidative cleavage (lactic / glyceric x4-6 with air, Voigt 2010), F13 norfuraneol / acetylformoin, F15 / F16 Strecker reduction to 1,4-dideoxyosones (Nedvidek); F10 retro-aldol of 1-DG is negligible (Voigt 2009)"
+engine: >-
+  Hexose trunk: r_ama_odg (Martins k7) and the amine-free r_fru_odg (Kocadagli step 8); 1-DG exits r_odg_aa, r_odg_af,
+  r_odg_da. k_ama_odg carries the same 0.69 dex/pH factor as k_ama_tdg (trunk_conditions.PH_STEPS), so the engine's
+  F07 / F06 split does not move with pH - the in-situ and labelled data say it moves ~0.25-0.45 dex per pH unit toward
+  F07. No O2 term on r_ama_odg (only k_ama_g / k_glc_g carry the atmosphere lever, and argon refuses), so Gobert's air
+  vs deaerated shift (x3.4 on 1-DG) cannot be represented. Pentose lane: r_arp_dpo and r_pent_dpo carry the "base"
+  factor and r_arp_dpo_thermal none - the direction matches the literature. The shipped Cys-ARP route fixes
+  dpo_share = 0.30 (split_law "none"), from Zhai 2019's STANDING 3-DX / 1-DX 2.1-2.6; the formation-flux evidence
+  (Beck pH 7, Desclaux pH 6, Davidek's labelled bound) puts the 1-deoxyosone share at >= 0.5-0.98 at pH 6-8 in
+  phosphate. A standing ratio used as a flux split under-states F07 by up to ~2 decades if the transfer to pentose ARP
+  in water holds (red team claim 3b gives that transfer P 0.35; carry dpo_share as a band reaching >= 0.9). The
+  PAMA enolisations are pinned 4.1x (to 1-DP) and 9.1x (to 3-DP) above ARP's derived rates to sit on Desclaux, a
+  0.5 M phosphate fit (parameters_sulfur.py note): phosphate vs amino-acid identity is unresolved there.

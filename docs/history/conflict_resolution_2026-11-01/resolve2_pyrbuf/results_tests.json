@@ -1,0 +1,617 @@
+{
+ "Q1_T1_potman_form": {
+  "3h": {
+   "k0_per_h": 0.008097564189681529,
+   "increment_per_h": {
+    "0.1": 0.052409728018115206,
+    "0.2": 0.07815934546277209,
+    "0.4": 0.19483777985238326,
+    "0.5": 0.326943084337242
+   },
+   "I05_over_I01": 6.238213719106413,
+   "I05_over_I01_read_error_range": [
+    5.014493523001087,
+    8.128042413937598
+   ],
+   "kappa_per_M_by_c": {
+    "0.1": 64.72283120015186,
+    "0.2": 48.26102247041652,
+    "0.4": 60.15320634958933,
+    "0.5": 80.75097070643918
+   }
+  },
+  "5h": {
+   "k0_per_h": 0.01387001562695866,
+   "increment_per_h": {
+    "0.1": 0.03556601020153158,
+    "0.2": 0.06562937206483882,
+    "0.4": 0.12158475065377236,
+    "0.5": 0.20189191664742728
+   },
+   "I05_over_I01": 5.6765410430752565,
+   "I05_over_I01_read_error_range": [
+    4.607711991485171,
+    7.281804212900819
+   ],
+   "kappa_per_M_by_c": {
+    "0.1": 25.642372119900987,
+    "0.2": 23.65872318747692,
+    "0.4": 21.915034907648618,
+    "0.5": 29.11199555608533
+   }
+  },
+  "fig5_slope_refit": 1.3708036622583928,
+  "fig5_slope_printed": 1.34,
+  "power": {
+   "F-lin": {
+    "fraction_called_not_saturating": 1.0
+   },
+   "F-sat K=0.03": {
+    "fraction_called_not_saturating": 0.0
+   },
+   "F-sat K=0.1": {
+    "fraction_called_not_saturating": 0.0
+   }
+  }
+ },
+ "Q1_T2_sizes": {
+  "larralde_kP_over_k0_per_M": 32.72727272727273,
+  "potman_kappa_5h_per_M": {
+   "0.1": 25.642372119900987,
+   "0.2": 23.65872318747692,
+   "0.4": 21.915034907648618,
+   "0.5": 29.11199555608533
+  },
+  "dev_band_per_M": [
+   5.0,
+   40.0
+  ],
+  "larralde_in_band": true,
+  "potman_in_band_all_c": true,
+  "dev_members_per_M": {
+   "guan2012_DFP_110C_0-10min": 27.999999999999996,
+   "guan2012_DFP_110C_60min_mean": 37.5,
+   "guan2012_DFP_130C_0-10min": 5.0,
+   "guan2012_DFP_130C_60min_mean": 16.25,
+   "davidek2002_DFG_90C_pH5": 19.999999999999993,
+   "davidek2002_DFG_90C_pH6": 25.000000000000004,
+   "davidek2002_DFG_90C_pH7": 10.576923076923078,
+   "davidek2002_DFG_90C_pH8": 2.7272727272727293,
+   "zyzak1995_37C_chelator": 14.95238095238095,
+   "bell1997_25C_gly_loss": 10.5
+  }
+ },
+ "Q1_T3_larralde_specificity": {
+  "S-P_prediction": 0.37931034482758624,
+  "S-P_interval_0.1dex_k0": [
+   0.3267910030771443,
+   0.4348185589950642
+  ],
+  "observed": 0.52,
+  "bicarbonate_kcat_per_M_per_min": 0.021216000000000002,
+  "bicarbonate_per_mole_vs_phosphate": 0.22666666666666668,
+  "note": "the S-P interval moves k0 by +-0.1 dex with kP fixed; temperature of the bicarbonate run inferred (P 0.8)"
+ },
+ "Q1_T4_kallen_ceiling": {
+  "6.12": {
+   "observed_plateau": 3500.0,
+   "pred_plateau_fig6": 2511.88643150958,
+   "dex_obs_minus_pred": 0.14406804435027568,
+   "observed_ceiling": 5.0,
+   "pred_ceiling": 3.588409187870828,
+   "dex_ceiling_obs_minus_pred": 0.14406804435027568,
+   "pass_0.3dex": true
+  },
+  "6.31": {
+   "observed_plateau": 2250.0,
+   "pred_plateau_fig6": 2511.88643150958,
+   "dex_obs_minus_pred": -0.04781748188863747,
+   "observed_ceiling": 3.5,
+   "pred_ceiling": 3.864440663860892,
+   "dex_ceiling_obs_minus_pred": -0.04301859900686873,
+   "pass_0.3dex": true
+  },
+  "6.62": {
+   "observed_plateau": 1600.0,
+   "pred_plateau_fig6": 2511.88643150958,
+   "dex_obs_minus_pred": -0.1958800173440752,
+   "observed_ceiling": 4.3,
+   "pred_ceiling": 6.788882247323189,
+   "dex_ceiling_obs_minus_pred": -0.19832982035341842,
+   "pass_0.3dex": true
+  },
+  "note": "Fig. 6 is buffer-free (the attack plateau at pH 4.5-5.2, where Kallen finds no buffer catalysis); the printed k1 2695 is the authors' own saturation fit, shown for comparison only (not used in the prediction)",
+  "k1_printed": 2695.0
+ },
+ "Q1_T5_thornalley_shape": {
+  "GO": {
+   "obs_50": 0.6,
+   "chord_50": 0.8355555555555555,
+   "shape": "convex"
+  },
+  "3-DG": {
+   "obs_50": 0.22,
+   "chord_50": 0.29,
+   "shape": "convex"
+  },
+  "MGO": {
+   "obs_50": 0.12,
+   "chord_50": 0.14666666666666667,
+   "shape": "convex"
+  }
+ },
+ "Q1_T6_ph": {
+  "potman_increment_by_pH": {
+   "3": 20.799999999999997,
+   "5.6": 94.39999999999999,
+   "7": 126.39999999999999,
+   "9": 113.9
+  },
+  "potman_ratio_obs": {
+   "3": 3.736842105263158,
+   "5.6": 11.26086956521739,
+   "7": 14.73913043478261,
+   "9": 3.71837708830549
+  },
+  "potman_pred_ratio_pH9_additive": 4.016706443914082,
+  "dex_obs_minus_pred": -0.03351666263927819,
+  "davidek_increment_by_pH": {
+   "5": 0.09999999999999999,
+   "6": 0.4,
+   "7": 0.55,
+   "8": 0.28500000000000014
+  },
+  "davidek_ratio_by_pH": {
+   "5": 2.9999999999999996,
+   "6": 3.5000000000000004,
+   "7": 2.057692307692308,
+   "8": 1.272727272727273
+  }
+ },
+ "Q1_T6_species_diagnostic": {
+  "5": {
+   "davidek_ratio_minus_1": 1.9999999999999996,
+   "f_H2PO4": 0.9923370630601301,
+   "f_HPO4": 0.006261223581376934,
+   "davidek_increment": 0.09999999999999999
+  },
+  "6": {
+   "davidek_ratio_minus_1": 2.5000000000000004,
+   "f_H2PO4": 0.9405240892631185,
+   "f_HPO4": 0.059343058178110926,
+   "davidek_increment": 0.4
+  },
+  "7": {
+   "davidek_ratio_minus_1": 1.057692307692308,
+   "f_H2PO4": 0.6131315099512514,
+   "f_HPO4": 0.38685982933597257,
+   "davidek_increment": 0.55
+  },
+  "8": {
+   "davidek_ratio_minus_1": 0.27272727272727293,
+   "f_H2PO4": 0.13680686216598623,
+   "f_HPO4": 0.8631929445891845,
+   "davidek_increment": 0.28500000000000014
+  }
+ },
+ "Q1_negative_control": {
+  "water_k_per_min_60min": 0.011222409221062761,
+  "acetate_kappa_per_M": 1.5839653891795091,
+  "citrate_kappa_per_M": 3.3661139105917415,
+  "rule": "must be < 5 /M (Amadori decay, carboxylate) for the arithmetic to be sound"
+ },
+ "Q1_specificity_table": [
+  {
+   "response": "Amadori (ARP) decay",
+   "src": "guan2012 (DEV) 110 C pH 5.8",
+   "carboxylate_vs_phosphate_per_mole": "<= 0.05 (acetate, citrate = water)"
+  },
+  {
+   "response": "glycine loss",
+   "src": "bell1997 (DEV) 25 C pH 7",
+   "carboxylate_vs_phosphate_per_mole": "citrate <= 0.25"
+  },
+  {
+   "response": "browning A420, beta-Ala",
+   "src": "rizzi2004 (DEV) ~100 C pH 7.3",
+   "carboxylate_vs_phosphate_per_mole": "citrate 0.45, succinate 0.30, acetate 0.12"
+  },
+  {
+   "response": "browning T490, Gly / amine-free",
+   "src": "saunders1966 (unsplit) ~121 C pH 3",
+   "carboxylate_vs_phosphate_per_mole": "citrate 1.0, acetate 0.33"
+  },
+  {
+   "response": "amine-free browning",
+   "src": "davies2005 (unsplit) 50 C pH 5.5",
+   "carboxylate_vs_phosphate_per_mole": "acetate active (order 1.15), citrate ~0"
+  },
+  {
+   "response": "amine-free ribose loss",
+   "src": "larralde1995 (TEST) 100 C pD 7.4",
+   "carboxylate_vs_phosphate_per_mole": "bicarbonate 0.23"
+  },
+  {
+   "response": "HMF from ARP",
+   "src": "guan2012 (DEV) 130 C",
+   "carboxylate_vs_phosphate_per_mole": "HMF x2.7 (acetate) / x14 (citrate) lower"
+  }
+ ],
+ "Q2a_piloty_share_bound": {
+  "step_factor_4.52_over_6.97": 0.038038641650063224,
+  "Gly": {
+   "ratio_central": 0.9649089973328222,
+   "ratio_min_2err": 0.7768848446765882,
+   "f_max_Strecker_share_at_6.97": 0.23193775237097225
+  },
+  "Ala": {
+   "ratio_central": 1.2254506308909925,
+   "ratio_min_2err": 0.9602309182828581,
+   "f_max_Strecker_share_at_6.97": 0.04134166239832985
+  },
+  "Leu": {
+   "ratio_central": 1.2166142370206252,
+   "ratio_min_2err": 1.0,
+   "f_max_Strecker_share_at_6.97": 0.0
+  },
+  "Phe": {
+   "ratio_central": 0.970221435546482,
+   "ratio_min_2err": 0.8089872752386977,
+   "f_max_Strecker_share_at_6.97": 0.19856590194948012
+  },
+  "Ile": {
+   "ratio_central": 0.9554208126869069,
+   "ratio_min_2err": 0.7254551524758945,
+   "f_max_Strecker_share_at_6.97": 0.2854011183931913
+  }
+ },
+ "Q3": {
+  "koehler1969_acetaldehyde_arm": {
+   "R0": 49.77777777777778,
+   "R1": 97.54382772217167,
+   "obs_ratio": 1.95958582477577,
+   "obs_ratio_band": [
+    0.8780487804878049,
+    4.264705882352941
+   ],
+   "pred_ratio": {
+    "E-A": 6.883484638896311,
+    "E-M": 0.20705094503926924,
+    "E-0": 0.71194805927532,
+    "P1": 1.0
+   },
+   "PZ_over_DMP_change": 186.07407407407408
+  },
+  "lee2024_TEST_time_courses": {
+   "200": {
+    "points": {
+     "22": {
+      "R": 21.625214408233276,
+      "R_mpz_div10": 0.21625214408233276,
+      "log10R": 1.334960422072157,
+      "sigma_log10R": 0.43947879568190973,
+      "PZ_over_DMP": 1.5566037735849056,
+      "violates_R_le_4_face": true,
+      "violates_R_le_4_div10": false
+     },
+     "35": {
+      "R": 26.243708767425897,
+      "R_mpz_div10": 0.262437087674259,
+      "log10R": 1.4190252096445641,
+      "sigma_log10R": 0.34734608969493747,
+      "PZ_over_DMP": 1.1535269709543567,
+      "violates_R_le_4_face": true,
+      "violates_R_le_4_div10": false
+     },
+     "54": {
+      "R": 25.31729453856677,
+      "R_mpz_div10": 0.2531729453856677,
+      "log10R": 1.4034172941672374,
+      "sigma_log10R": 0.25909976506771437,
+      "PZ_over_DMP": 0.7782805429864252,
+      "violates_R_le_4_face": true,
+      "violates_R_le_4_div10": false
+     },
+     "88": {
+      "R": 1.9992880317231434,
+      "R_mpz_div10": 0.019992880317231433,
+      "log10R": 0.3008753661925639,
+      "sigma_log10R": 0.6472564497240195,
+      "PZ_over_DMP": 12.294736842105264,
+      "violates_R_le_4_face": false,
+      "violates_R_le_4_div10": false
+     }
+    },
+    "comparisons_from_first": {
+     "22->35": {
+      "obs_dlog10R": 0.08406478757240711,
+      "sigma": 0.5601704364569638,
+      "pred_dlog10R": {
+       "E-A": -0.1851224226851961,
+       "E-M": -0.12181070434522359,
+       "E-0": -0.2838027967125548,
+       "P1": 0.0
+      },
+      "z": {
+       "E-A": 0.4805451925670912,
+       "E-M": 0.36752295108570493,
+       "E-0": 0.6567065313401701,
+       "P1": 0.15007001816109863
+      }
+     },
+     "22->54": {
+      "obs_dlog10R": 0.06845687209508046,
+      "sigma": 0.5101708538442455,
+      "pred_dlog10R": {
+       "E-A": -0.2984899678524384,
+       "E-M": -0.1673144713589846,
+       "E-0": -0.4105020953299264,
+       "P1": 0.0
+      },
+      "z": {
+       "E-A": 0.719262649331095,
+       "E-M": 0.4621419308403803,
+       "E-0": 0.938820718227922,
+       "P1": 0.13418420824953722
+      }
+     },
+     "22->88": {
+      "obs_dlog10R": -1.034085055879593,
+      "sigma": 0.7823570307496214,
+      "pred_dlog10R": {
+       "E-A": 0.027436657756257997,
+       "E-M": -0.3818402899467152,
+       "E-0": -0.365729560169372,
+       "P1": 0.0
+      },
+      "z": {
+       "E-A": -1.3568251730526992,
+       "E-M": -0.8336919594215502,
+       "E-0": -0.8542845139000428,
+       "P1": -1.3217559441995128
+      }
+     }
+    }
+   },
+   "170": {
+    "points": {
+     "54": {
+      "R": 15.751861042183624,
+      "R_mpz_div10": 0.15751861042183624,
+      "log10R": 1.1973318719417012,
+      "sigma_log10R": 0.31291922280358553,
+      "PZ_over_DMP": 1.2580645161290323,
+      "violates_R_le_4_face": true,
+      "violates_R_le_4_div10": false
+     },
+     "88": {
+      "R": 15.340823970037453,
+      "R_mpz_div10": 0.15340823970037454,
+      "log10R": 1.1858486866031992,
+      "sigma_log10R": 0.1864824924758354,
+      "PZ_over_DMP": 0.8426966292134831,
+      "violates_R_le_4_face": true,
+      "violates_R_le_4_div10": false
+     }
+    },
+    "comparisons_from_first": {
+     "54->88": {
+      "obs_dlog10R": -0.01148318533850205,
+      "sigma": 0.3642720961039975,
+      "pred_dlog10R": {
+       "E-A": -0.19741191371605907,
+       "E-M": -0.1293390491487261,
+       "E-0": -0.2913315097115563,
+       "P1": 0.0
+      },
+      "z": {
+       "E-A": 0.5104116685470069,
+       "E-M": 0.3235379955553249,
+       "E-0": 0.7682398058103226,
+       "P1": -0.03152364801289547
+      }
+     }
+    }
+   }
+  },
+  "lee2024_TEST_temperature": {
+   "R_170_mean_54_88": 15.546342506110538,
+   "R_200_mean_22_54": 24.39540590474198
+  },
+  "shibamoto1976_time_course_100C": {
+   "0.5": {
+    "R": 365.579335793358,
+    "dlog10R_obs": 0.0,
+    "PZ_over_DMP": 0.6346863468634686,
+    "pred_dlog10R": {
+     "E-A": -4.821637332766436e-17,
+     "E-M": -4.821637332766436e-17,
+     "E-0": -4.821637332766436e-17,
+     "P1": 0.0
+    }
+   },
+   "1": {
+    "R": 365.896801948052,
+    "dlog10R_obs": 0.0003769741778784722,
+    "PZ_over_DMP": 0.6704761904761904,
+    "pred_dlog10R": {
+     "E-A": 0.01240257983602319,
+     "E-M": -0.00893446255716087,
+     "E-0": 0.003453243154379853,
+     "P1": 0.0
+    }
+   },
+   "2": {
+    "R": 365.30186466775166,
+    "dlog10R_obs": -0.00032975040116380223,
+    "PZ_over_DMP": 0.7954070981210856,
+    "pred_dlog10R": {
+     "E-A": 0.04820320367105905,
+     "E-M": -0.03961814862293968,
+     "E-0": 0.008329379165519337,
+     "P1": 0.0
+    }
+   },
+   "3": {
+    "R": 495.18855496424953,
+    "dlog10R_obs": 0.13178895904901877,
+    "PZ_over_DMP": 0.6444954128440367,
+    "pred_dlog10R": {
+     "E-A": 0.08509458988414843,
+     "E-M": 0.07906781104181644,
+     "E-0": 0.16498594608906417,
+     "P1": 0.0
+    }
+   },
+   "4": {
+    "R": 495.97158286410485,
+    "dlog10R_obs": 0.1324751544554955,
+    "PZ_over_DMP": 0.8324607329842932,
+    "pred_dlog10R": {
+     "E-A": 0.13723176885321084,
+     "E-M": 0.030623285969503148,
+     "E-0": 0.16836862174758854,
+     "P1": 0.0
+    }
+   },
+   "6": {
+    "R": 460.0206026785714,
+    "dlog10R_obs": 0.09979564315836399,
+    "PZ_over_DMP": 1.1904761904761905,
+    "pred_dlog10R": {
+     "E-A": 0.1881217317116089,
+     "E-M": -0.05841400189901421,
+     "E-0": 0.12833206743159406,
+     "P1": 0.0
+    }
+   },
+   "18": {
+    "R": 493.4311281095431,
+    "dlog10R_obs": 0.13024490403498235,
+    "PZ_over_DMP": 1.1590214067278288,
+    "pred_dlog10R": {
+     "E-A": 0.19892618070704218,
+     "E-M": -0.03758234327201165,
+     "E-0": 0.16042495321537747,
+     "P1": 0.0
+    }
+   },
+   "30": {
+    "R": 430.59874324669005,
+    "dlog10R_obs": 0.07109111849320295,
+    "PZ_over_DMP": 0.7096018735362998,
+    "pred_dlog10R": {
+     "E-A": 0.09329812813565685,
+     "E-M": 0.049511666129777046,
+     "E-0": 0.14338220941866375,
+     "P1": 0.0
+    }
+   },
+   "48": {
+    "R": 458.342122121447,
+    "dlog10R_obs": 0.09820813174063121,
+    "PZ_over_DMP": 0.5964125560538117,
+    "pred_dlog10R": {
+     "E-A": 0.07618504815937871,
+     "E-M": 0.10064524352820775,
+     "E-0": 0.177762071405611,
+     "P1": 0.0
+    }
+   }
+  },
+  "shibamoto1976_note": "weight % of total pyrazines from one GC run per time (2 h: 8 replicates, no SD); assumed sigma 0.15 dex on log R",
+  "P0_condition_series": {
+   "bemisyoung1993_pH5.97": {
+    "R": 0.02,
+    "dex_from_4": -2.3010299956639813,
+    "P0_pass": false
+   },
+   "bemisyoung1993_pH7": {
+    "R": 0.087,
+    "dex_from_4": -1.6625407387093438,
+    "P0_pass": false
+   },
+   "bemisyoung1993_pH9": {
+    "R": 0.54,
+    "dex_from_4": -0.8696662315049939,
+    "P0_pass": false
+   },
+   "bemisyoung1993_pH9.64": {
+    "R": 3.3,
+    "dex_from_4": -0.08354605145007493,
+    "P0_pass": true
+   },
+   "wong1988_NH4OH": {
+    "R": 14.6,
+    "dex_from_4": 0.5622928644564748,
+    "P0_pass": false
+   },
+   "wong1988_formate": {
+    "R": 556,
+    "dex_from_4": 2.143014800254095,
+    "P0_pass": false
+   },
+   "wong1988_acetate": {
+    "R": 349,
+    "dex_from_4": 1.9407654356312176,
+    "P0_pass": false
+   },
+   "wong1988_Gly": {
+    "R": 5.4,
+    "dex_from_4": 0.13033376849500614,
+    "P0_pass": true
+   },
+   "wong1988_Glu": {
+    "R": 0.28,
+    "dex_from_4": -1.154901959985743,
+    "P0_pass": false
+   },
+   "shibamoto1976_25C": {
+    "R": 0.73,
+    "dex_from_4": -0.7387371312075065,
+    "P0_pass": false
+   },
+   "shibamoto1976_60C": {
+    "R": 502,
+    "dex_from_4": 2.098643725817057,
+    "P0_pass": false
+   },
+   "shibamoto1976_100C": {
+    "R": 433,
+    "dex_from_4": 2.034427905025403,
+    "P0_pass": false
+   },
+   "koehler1969_Asn": {
+    "R": 50,
+    "dex_from_4": 1.0969100130080565,
+    "P0_pass": false
+   },
+   "koehler1969_NH4Cl": {
+    "R": 0.07,
+    "dex_from_4": -1.7569619513137056,
+    "P0_pass": false
+   }
+  }
+ },
+ "Q4_wolf": {
+  "k_flp_decay_125C_per_min": 0.09941474020189944,
+  "k_flp_cml_125C_per_min": 0.004740850979827649,
+  "L-return (engine as shipped)": {
+   "kgG_per_min_to_match_pass1": 0.3686116412056054,
+   "L_after_pass1": 0.5210675633007598,
+   "L_after_pass2": 0.33270203900054074,
+   "pass2_loss_fraction_of_remaining": 0.36149923266571593,
+   "pass2_mg_per_g_from_5.0": 3.1925038366714205,
+   "steady_state_free_fraction": 0.2124126847356928
+  },
+  "L-noreturn (Nguyen structure)": {
+   "kgG_per_min_to_match_pass1": 0.3258963640011514,
+   "L_after_pass1": 0.5210553736269831,
+   "L_after_pass2": 0.2714987023855556,
+   "pass2_loss_fraction_of_remaining": 0.4789446263730156,
+   "pass2_mg_per_g_from_5.0": 2.605276868134922,
+   "steady_state_free_fraction": 0.0
+  },
+  "observed_pass2": "5.3 -> 4.8 / 5.3 -> 5.3 / 4.8 -> 5.1 mg/g (n.s.); i.e. loss fraction -0.06 to +0.09"
+ }
+}

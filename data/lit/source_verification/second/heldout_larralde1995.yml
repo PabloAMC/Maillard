@@ -1,0 +1,41 @@
+# Second reader (reader B), Larralde, Robertson & Miller 1995 (PNAS 92:8158-8160), the phosphate rate law, the bicarbonate ratio,
+# Fig. 2 (Arrhenius points) and Fig. 1 (pD profile). Independent of reader A. Rows: data/lit/fit_rows/second/heldout_larralde1995.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes.
+reader: agent-readerB-2026-11-01
+role: independent second reader, contrast benchmark TEST keying (E5)
+entries:
+- ledger_id: larralde1995_fig2_text_ribose_arrhenius_phosphate
+  source_file: larralde1995.pdf
+  location: p. 8158 right column (displayed rate law, image-verified); p. 8159 left column (bicarbonate, 73 min), right column top
+    (Arrhenius); Fig. 2 (600 ppi 1-bit scan, page 2)
+  read_by: agent-readerB-2026-11-01
+  second_reader: self
+  date: '2026-11-01'
+  checks:
+    conditions: corrected
+    units: corrected
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: '"rate (s^-1) = 2.86 x 10^-3 + 9.36 x 10^-2 ([DPO4 2-] + [D2PO4 -])" ... "We measured the rate of ribose decomposition at pD
+    7.4, using a 0.05 M bicarbonate buffer. The rate is 0.52 that observed with a 0.05 M phosphate buffer."'
+  notes: 'Fig. 2 log10 k (s-1) -3.034 / -3.860 / -4.713 / -5.542 at 118 / 100 / 80 / 60 C (+-0.015). Rate-law unit conflict: as
+    printed (s-1) the law contradicts the 73-min half-life, the Arrhenius fit and Fig. 2; in min-1 within ~0.1 dex of Fig. 2; keyed as
+    printed, unresolved. Bicarbonate ratio 0.52; temperature not stated (100 C presumed). Only one phosphate concentration (0.05 M)
+    appears in any figure; the law''s concentration series is not printed.'
+- ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+  source_file: larralde1995.pdf
+  location: p. 8159, Fig. 1 (page-2 crop at 0.667 scale; y -3..-7 at 191.25 view px per decade)
+  read_by: agent-readerB-2026-11-01
+  second_reader: self
+  date: '2026-11-01'
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: '"0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer"; Fig. 1 caption "Rates of ribose decomposition as a
+    function of pD."'
+  notes: 19 points at 118 / 100 / 80 / 60 C (+-0.025 dex); plotted pD is temperature-corrected, so the nominal 5.4 acetate points sit at
+    5.44 - 5.71; the buffer is not marked on the figure (assigned from the Methods ranges).

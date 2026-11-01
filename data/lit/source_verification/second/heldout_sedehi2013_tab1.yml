@@ -1,0 +1,20 @@
+# Second reader (reader B), Sedehi, Takano, Blasic, Sullivan & De Haan 2013, Atmos Environ 77:656-663 (sedehi2013.pdf), Table 1 and Eqs. (3)-(4). Independent of reader A. Rows: data/lit/fit_rows/second/heldout_sedehi2013_tab1.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes.
+reader: 'agent-readerB-2026-11-01'
+role: 'independent second reader, contrast benchmark TEST keying (error E4)'
+
+entries:
+- ledger_id: 'sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws'
+  source_file: 'sedehi2013.pdf'
+  location: 'Table 1, p. 661; Eqs. (3)-(4), pp. 660-661'
+  read_by: 'agent-readerB-2026-11-01'
+  second_reader: 'self'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'corrected'
+    values: 'pass'
+  quote: 'Table 1 ... log k as a function of pH ... Rate = 10^[(0.36 +- 0.06) pH - (3.6 +- 0.3)] M-1 s-1 fAld [MG]tot [Am]tot (Eq. 4); initial concentrations between 0.2 and 1.5 M'
+  notes: 'Reader B''s reading of the same cells; values identical to reader A''s except where the first record''s adjudication says otherwise.'

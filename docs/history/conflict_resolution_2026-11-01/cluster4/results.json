@@ -1,0 +1,661 @@
+{
+ "o2_mmol_per_ml_air": 0.008688863604462915,
+ "T68": {
+  "anchor_4h_ug_L": 901.1167291743841,
+  "pH_slopes_dex_per_unit": [
+   0.22302997052158358,
+   0.4493625907947468
+  ],
+  "residuals": {
+   "yiltirak2026_buffer_100C_4h": {
+    "cys_first_order|Ea80": {
+     "pred": 406.93573198140786,
+     "resid_dex": -1.7719373875750761
+    },
+    "cys_first_order|Ea105": {
+     "pred": 406.93573198140786,
+     "resid_dex": -1.7719373875750761
+    },
+    "cys_first_order|Ea130": {
+     "pred": 406.93573198140786,
+     "resid_dex": -1.7719373875750761
+    },
+    "pentose_first_order|Ea80": {
+     "pred": 134.2887915538646,
+     "resid_dex": -1.2904513274529636
+    },
+    "pentose_first_order|Ea105": {
+     "pred": 134.2887915538646,
+     "resid_dex": -1.2904513274529636
+    },
+    "pentose_first_order|Ea130": {
+     "pred": 134.2887915538646,
+     "resid_dex": -1.2904513274529636
+    },
+    "product|Ea80": {
+     "pred": 101.73393299535196,
+     "resid_dex": -1.1698773962471136
+    },
+    "product|Ea105": {
+     "pred": 101.73393299535196,
+     "resid_dex": -1.1698773962471136
+    },
+    "product|Ea130": {
+     "pred": 101.73393299535196,
+     "resid_dex": -1.1698773962471136
+    }
+   },
+   "us8920862_buffer_95C_6h": {
+    "cys_first_order|Ea80": {
+     "pred": 6954.134136439731,
+     "resid_dex": -0.6491184650640699
+    },
+    "cys_first_order|Ea105": {
+     "pred": 6233.2157836405095,
+     "resid_dex": -0.6015875633558001
+    },
+    "cys_first_order|Ea130": {
+     "pred": 5587.033301793128,
+     "resid_dex": -0.5540566616475303
+    },
+    "pentose_first_order|Ea80": {
+     "pred": 6875.129437281415,
+     "resid_dex": -0.6441562806377152
+    },
+    "pentose_first_order|Ea105": {
+     "pred": 6162.40131154183,
+     "resid_dex": -0.5966253789294453
+    },
+    "pentose_first_order|Ea130": {
+     "pred": 5523.55999562224,
+     "resid_dex": -0.5490944772211755
+    },
+    "product|Ea80": {
+     "pred": 101043.56900246929,
+     "resid_dex": -1.8113840793620914
+    },
+    "product|Ea105": {
+     "pred": 90568.6253362966,
+     "resid_dex": -1.7638531776538215
+    },
+    "product|Ea130": {
+     "pred": 81179.59387505415,
+     "resid_dex": -1.7163222759455519
+    }
+   },
+   "us10076126_buffer_110C_4h": {
+    "cys_first_order|Ea80": {
+     "pred": 5346.05390482024,
+     "resid_dex": -0.4596894195281803,
+     "resid_dex_if_lambda": {
+      "0.0": -0.4596894195281803,
+      "0.005": -0.9808427978120825,
+      "0.01": -1.5019961760959846,
+      "0.02": -2.544302932663789
+     }
+    },
+    "cys_first_order|Ea105": {
+     "pred": 6597.411107372073,
+     "resid_dex": -0.5510296333551382,
+     "resid_dex_if_lambda": {
+      "0.0": -0.5510296333551382,
+      "0.005": -1.0721830116390403,
+      "0.01": -1.5933363899229427,
+      "0.02": -2.635643146490747
+     }
+    },
+    "cys_first_order|Ea130": {
+     "pred": 8141.674980200174,
+     "resid_dex": -0.6423698471820959,
+     "resid_dex_if_lambda": {
+      "0.0": -0.6423698471820959,
+      "0.005": -1.163523225465998,
+      "0.01": -1.6846766037499004,
+      "0.02": -2.7269833603177047
+     }
+    },
+    "pentose_first_order|Ea80": {
+     "pred": 1779.4063902164607,
+     "resid_dex": 0.01806876807468905,
+     "resid_dex_if_lambda": {
+      "0.0": 0.01806876807468905,
+      "0.005": -0.5030846102092131,
+      "0.01": -1.0242379884931152,
+      "0.02": -2.0665447450609196
+     }
+    },
+    "pentose_first_order|Ea105": {
+     "pred": 2195.914162548584,
+     "resid_dex": -0.07327144575226882,
+     "resid_dex_if_lambda": {
+      "0.0": -0.07327144575226882,
+      "0.005": -0.594424824036171,
+      "0.01": -1.115578202320073,
+      "0.02": -2.1578849588878777
+     }
+    },
+    "pentose_first_order|Ea130": {
+     "pred": 2709.914405047661,
+     "resid_dex": -0.16461165957922655,
+     "resid_dex_if_lambda": {
+      "0.0": -0.16461165957922655,
+      "0.005": -0.6857650378631287,
+      "0.01": -1.206918416147031,
+      "0.02": -2.2492251727148354
+     }
+    },
+    "product|Ea80": {
+     "pred": 12509.766137279361,
+     "resid_dex": -0.828905276938323,
+     "resid_dex_if_lambda": {
+      "0.0": -0.828905276938323,
+      "0.005": -1.3500586552222251,
+      "0.01": -1.8712120335061275,
+      "0.02": -2.913518790073932
+     }
+    },
+    "product|Ea105": {
+     "pred": 15437.941991250651,
+     "resid_dex": -0.9202454907652811,
+     "resid_dex_if_lambda": {
+      "0.0": -0.9202454907652811,
+      "0.005": -1.4413988690491832,
+      "0.01": -1.9625522473330854,
+      "0.02": -3.00485900390089
+     }
+    },
+    "product|Ea130": {
+     "pred": 19051.519453668407,
+     "resid_dex": -1.0115857045922387,
+     "resid_dex_if_lambda": {
+      "0.0": -1.0115857045922387,
+      "0.005": -1.532739082876141,
+      "0.01": -2.053892461160043,
+      "0.02": -3.0961992177278477
+     }
+    }
+   }
+  },
+  "yiltirak_series": {
+   "100": {
+    "t_min": 240,
+    "MFT": 6.88,
+    "pred_cys1_Ea105": 406.93573198140786,
+    "resid_dex": -1.7719373875750761
+   },
+   "110": {
+    "t_min": 120,
+    "MFT": 3.29,
+    "pred_cys1_Ea105": 385.2154887101603,
+    "resid_dex": -2.068507842927549
+   },
+   "120": {
+    "t_min": 60,
+    "MFT": 2.4,
+    "pred_cys1_Ea105": 348.6310031352279,
+    "resid_dex": -2.1621547638158014
+   },
+   "130": {
+    "t_min": 30,
+    "MFT": 1.71,
+    "pred_cys1_Ea105": 252.20243047432322,
+    "resid_dex": -2.1687531571601384
+   }
+  },
+  "negative_control_hofmann_xyl_vs_rib": 0.0,
+  "cf068_raw_gap_dex": 2.1171926141782995,
+  "cf068_explained_by_mass_action_and_pH_dex": {
+   "cys_first_order": 0.3452552266032233,
+   "pentose_first_order": 0.8267412867253358,
+   "product": 0.9473152179311857
+  },
+  "regression_o2_red": {
+   "points": [
+    [
+     "schieberle2000 (anchor)",
+     0.06532980153731514,
+     0.0
+    ],
+    [
+     "yiltirak2026",
+     0.9847378751724638,
+     -1.7719373875750761
+    ],
+    [
+     "us8920862",
+     0.013450253257682532,
+     -0.6015875633558001
+    ],
+    [
+     "us10076126",
+     0.10654645744283157,
+     -1.0721830116390403
+    ]
+   ],
+   "R2": 0.5604326193836121,
+   "r": -0.7486204775342524,
+   "slope_dex_per_dex": -0.7278539828632337,
+   "n": 4,
+   "df": 2,
+   "permutation_p_one_sided": 0.125,
+   "note": "EXPLORATORY (n = 4, one point per lab, lab and O2 confounded)"
+  }
+ },
+ "T_L": {
+  "lambda_100C_by_pot": {
+   "thiamine": {
+    "central": 0.04410329350247627,
+    "lo": 0.03492438803672768,
+    "hi": 0.05310060563031835
+   },
+   "thiamine_cys": {
+    "central": 0.033744710231026334,
+    "lo": 0.03004141605534389,
+    "hi": 0.03828945783842079
+   }
+  },
+  "lambda_100C_range": {
+   "low": 0.03004141605534389,
+   "central": 0.0389240018667513,
+   "high": 0.05310060563031835
+  },
+  "engine_R3En_100C": 0.04128548471629342,
+  "engine_R3En_110C": 0.09676654918300433,
+  "grosch_transported_to_110C": {
+   "Ea40": {
+    "low": 0.04205956165722593,
+    "central": 0.05449564872190453,
+    "high": 0.07434363920894896
+   },
+   "Ea60": {
+    "low": 0.04976647876291443,
+    "central": 0.06448133166228491,
+    "high": 0.08796623160275598
+   },
+   "Ea90": {
+    "low": 0.0640538398825474,
+    "central": 0.0829931511406686,
+    "high": 0.11322028510389308
+   },
+   "Ea101.25": {
+    "low": 0.0704122570976931,
+    "central": 0.09123161244009491,
+    "high": 0.12445929608634704
+   },
+   "Ea133": {
+    "low": 0.09197087908353213,
+    "central": 0.11916464465387144,
+    "high": 0.16256588473363925
+   }
+  },
+  "Ea_max_for_pot_independent_L0": {
+   "bound0.02|low": null,
+   "bound0.02|central": null,
+   "bound0.02|high": null,
+   "bound0.05|low": 60.556461117194026,
+   "bound0.05|central": 29.76578307257364,
+   "bound0.05|high": null
+  },
+  "Kc_central_from_grosch_mM": 2.117476982650825,
+  "Kc_upper_from_patent_mM": {
+   "Cys16|Ea60|bound0.02": 7.194029226227583,
+   "Cys16|Ea60|bound0.05": 55.2435382778723,
+   "Cys16|Ea101.25|bound0.02": 4.492387425163467,
+   "Cys16|Ea101.25|bound0.05": 19.40258827282862,
+   "Cys16|Ea133|bound0.02": 3.2269565540918523,
+   "Cys16|Ea133|bound0.05": 11.566603197392709,
+   "Cys250|Ea60|bound0.02": 112.40670665980599,
+   "Cys250|Ea60|bound0.05": 863.1802855917546,
+   "Cys250|Ea101.25|bound0.02": 70.19355351817917,
+   "Cys250|Ea101.25|bound0.05": 303.1654417629472,
+   "Cys250|Ea133|bound0.02": 50.421196157685195,
+   "Cys250|Ea133|bound0.05": 180.72817495926108
+  }
+ },
+ "CF015": {
+  "mft_fft": [
+   [
+    "hofmann1998 ribose 145 C 20 min",
+    "3:1",
+    "after",
+    1.6363636363636365
+   ],
+   [
+    "hofmann1998 xylose 145 C 20 min",
+    "3:1",
+    "after",
+    1.4895833333333333
+   ],
+   [
+    "schieberle2000 100 C 60 min",
+    "3:1",
+    "after",
+    4.451612903225806
+   ],
+   [
+    "schieberle2000 100 C 360 min",
+    "3:1",
+    "after",
+    1.4181818181818182
+   ],
+   [
+    "schieberle2000 100 C 720 min",
+    "3:1",
+    "after",
+    1.356060606060606
+   ],
+   [
+    "us8920862 95 C 6 h",
+    "3:1",
+    "after",
+    0.5
+   ],
+   [
+    "yiltirak2026 100 C 4 h",
+    "1:1",
+    "after",
+    5.375
+   ],
+   [
+    "yiltirak2026 110 C 2 h",
+    "1:1",
+    "after",
+    2.2534246575342465
+   ],
+   [
+    "yiltirak2026 120 C 1 h",
+    "1:1",
+    "after",
+    1.4285714285714286
+   ],
+   [
+    "yiltirak2026 130 C 0.5 h",
+    "1:1",
+    "after",
+    1.0555555555555554
+   ],
+   [
+    "us10076126 110 C 2 h",
+    "1:1",
+    "BEFORE",
+    3.8333333333333335
+   ],
+   [
+    "us10076126 110 C 4 h",
+    "1:1",
+    "BEFORE",
+    3.5673076923076925
+   ]
+  ],
+  "xu2008_within_study": {
+   "1:3 (rib 16.7, cys 50)": 8.588235294117647,
+   "1:1 (rib 50, cys 50)": 0.7523766410140336
+  },
+  "xu2008_log10_change_for_3x_sugar": -1.0574686308295058,
+  "patent_gap_dex": 0.8573324964312685,
+  "lambdaM_minus_lambdaF_needed_per_min": 0.00822533760842504,
+  "k_fft_121C_kumazawa": 0.011541085151132773,
+  "k_fft_110C": {
+   "Ea60": 0.006822697736620286,
+   "Ea100": 0.004805764172048242,
+   "Ea130": 0.0036950234450160335
+  },
+  "lambdaM_needed_110C": {
+   "Ea60": 0.015048035345045327,
+   "Ea100": 0.013031101780473283,
+   "Ea130": 0.011920361053441074
+  }
+ },
+ "CF073": {
+  "log10_weenen_over_hofmann": {
+   "MGO": 1.2368445603657336,
+   "GO": 0.8891450974680036,
+   "3-DG": -0.19983793942273964,
+   "glucose_TIII": -0.5892117042639659,
+   "glucose_TII": -1.2881817085999847
+  },
+  "donor_generic_test": {
+   "sigma_weenen_0.2": {
+    "chi2": 22.472237175557414,
+    "df": 2,
+    "p": 1.3189116345190416e-05
+   },
+   "sigma_weenen_0.3": {
+    "chi2": 11.236118587778709,
+    "df": 2,
+    "p": 0.003631682302348375
+   }
+  },
+  "max_concentration_term_second_order_dex": 0.585026652029182,
+  "MGO_residual_after_max_conc_dex": 0.6518179083365516,
+  "GO_residual_after_max_conc_dex": 0.3041184454388216,
+  "spread_MGO_minus_3DG_dex": 1.4366824997884733
+ },
+ "CF031": {
+  "yiltirak_contrasts_(MFT,FFT)_dex": {
+   "buffer_oil_vs_buffer": {
+    "100": [
+     -0.98,
+     -0.03
+    ],
+    "110": [
+     -0.64,
+     -0.04
+    ],
+    "120": [
+     -0.59,
+     -0.24
+    ],
+    "130": [
+     -0.58,
+     -0.24
+    ]
+   },
+   "emulsion_vs_buffer": {
+    "100": [
+     -0.27,
+     0.33
+    ],
+    "110": [
+     -0.07,
+     0.28
+    ],
+    "120": [
+     -0.27,
+     -0.12
+    ],
+    "130": [
+     -0.12,
+     0.13
+    ]
+   },
+   "buffer_emulsifier_vs_buffer": {
+    "100": [
+     0.04,
+     0.01
+    ],
+    "110": [
+     0.1,
+     -0.03
+    ],
+    "120": [
+     0.24,
+     0.05
+    ],
+    "130": [
+     0.22,
+     0.05
+    ]
+   },
+   "emulsion_vs_buffer_oil": {
+    "100": [
+     0.71,
+     0.36
+    ],
+    "110": [
+     0.58,
+     0.33
+    ],
+    "120": [
+     0.31,
+     0.12
+    ],
+    "130": [
+     0.46,
+     0.37
+    ]
+   }
+  },
+  "within_study": {
+   "whitfield1988": {
+    "lipid": "egg lecithin 15 g/L",
+    "observed_MFT_dex": -0.47,
+    "method": "Tenax headspace, external standards",
+    "phi": 0.015,
+    "max_partition_operator_dex_if_no_isotope_standard": [
+     -0.17,
+     -0.4
+    ]
+   },
+   "elmore2002": {
+    "lipid": "methyl linoleate 25 mM",
+    "observed_MFT_dex": -1.14,
+    "method": "headspace SPME, RF 1",
+    "phi": 0.0074,
+    "max_partition_operator_dex_if_no_isotope_standard": [
+     -0.09,
+     -0.24
+    ]
+   },
+   "xu2011 fresh lard": {
+    "lipid": "lard 1 % w/v",
+    "observed_MFT_dex": -1.32,
+    "method": "HS-SPME, cyclohexanone RF 1",
+    "phi": 0.011,
+    "max_partition_operator_dex_if_no_isotope_standard": [
+     -0.13,
+     -0.32
+    ]
+   },
+   "xu2011 oxidised lard": {
+    "lipid": "oxidised lard 1 % w/v",
+    "observed_MFT_dex": -2.16,
+    "method": "HS-SPME, cyclohexanone RF 1",
+    "phi": 0.011,
+    "max_partition_operator_dex_if_no_isotope_standard": [
+     -0.13,
+     -0.32
+    ]
+   },
+   "yiltirak2026 buffer+oil (100 C)": {
+    "lipid": "canola oil 10 %",
+    "observed_MFT_dex": -0.98,
+    "method": "SIDA (corrects partition)",
+    "phi": 0.1,
+    "max_partition_operator_dex_if_no_isotope_standard": [
+     -0.62,
+     -1.04
+    ]
+   },
+   "yiltirak2026 emulsion (100 C)": {
+    "lipid": "canola oil 10 % + 3 % sucrose ester",
+    "observed_MFT_dex": -0.27,
+    "method": "SIDA",
+    "phi": 0.1,
+    "max_partition_operator_dex_if_no_isotope_standard": [
+     -0.62,
+     -1.04
+    ]
+   },
+   "us8920862 structured lipid": {
+    "lipid": "monoglyceride + soybean oil mesophase, 85 % lipid",
+    "observed_MFT_dex": 1.0,
+    "method": "SIDA",
+    "phi": 0.85,
+    "max_partition_operator_dex_if_no_isotope_standard": [
+     -1.45,
+     -1.93
+    ]
+   },
+   "du2025 free C18 acids": {
+    "lipid": "oleic / linoleic / linolenic 10 mM",
+    "observed_MFT_dex": 0.1,
+    "method": "SPME (as printed)",
+    "phi": 0.003,
+    "max_partition_operator_dex_if_no_isotope_standard": [
+     -0.04,
+     -0.11
+    ]
+   }
+  }
+ },
+ "CF016": {
+  "hofmann_FUR_MFT": 3.409090909090909,
+  "schieberle_FUR_MFT": 0.26262626262626265,
+  "cerny2007_area_ratio": 0.47023809523809523,
+  "cerny2007_corrected_molar_ratio": {
+   "logKow_MFT1.5|slope0.6": 2.119911884450914,
+   "logKow_MFT1.5|slope0.8": 3.5020134487245924,
+   "logKow_MFT1.5|slope1.0": 5.785192434177271,
+   "logKow_MFT1.88|slope0.6": 3.5835858209528304,
+   "logKow_MFT1.88|slope0.8": 7.052089405040922,
+   "logKow_MFT1.88|slope1.0": 13.877710053966933,
+   "logKow_MFT2.0|slope0.6": 4.22978029409957,
+   "logKow_MFT2.0|slope0.8": 8.796660064815375,
+   "logKow_MFT2.0|slope1.0": 18.29438479437391
+  },
+  "meynier1995_ratio_uncorrected": 0.2380952380952381
+ },
+ "pyrazine": {
+  "ghent_R_recovery_corrected": [
+   0.24,
+   2.97
+  ],
+  "coelution_bounds": {
+   "lysine_glucose": {
+    "coelution_factor": 1.0,
+    "ghent_R_true_max": 2.97,
+    "dex": 0.0
+   },
+   "lysine_fructose": {
+    "coelution_factor": 1.0,
+    "ghent_R_true_max": 2.97,
+    "dex": 0.0
+   },
+   "asparagine_glucose": {
+    "coelution_factor": 2.1492537313432836,
+    "ghent_R_true_max": 6.383283582089553,
+    "dex": 0.3322876893944232
+   },
+   "asparagine_fructose": {
+    "coelution_factor": 2.1105193075898803,
+    "ghent_R_true_max": 6.268242343541945,
+    "dex": 0.3243893295496019
+   },
+   "nh3_shibamoto_lo": {
+    "coelution_factor": 2.8,
+    "ghent_R_true_max": 8.316,
+    "dex": 0.4471580313422192
+   },
+   "nh3_shibamoto_hi": {
+    "coelution_factor": 5.0,
+    "ghent_R_true_max": 14.850000000000001,
+    "dex": 0.6989700043360189
+   }
+  },
+  "leahy_lys_glc_R": [
+   11.74,
+   17.35
+  ],
+  "leahy_lys_glc_end_point_R": 12.57,
+  "lys_glc_gap_after_bound_dex": 0.5969116475943833,
+  "shibamoto_R_25": [
+   322,
+   631
+  ],
+  "shibamoto_R_sum": [
+   83,
+   138
+  ]
+ }
+}

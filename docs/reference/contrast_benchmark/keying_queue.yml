@@ -1,0 +1,2666 @@
+# GENERATED 2026-11-01 by the P1 keying triage (scratchpad build_queue.py; hand-reviewed units). Triage only: NO values keyed.
+version: keying_queue_v1
+date: '2026-11-01'
+status: TRIAGE ONLY. No value was keyed. Every row below still needs its numbers keyed AND re-read in the PDF by two readers (plan rule
+  (i)). UPDATE 2026-11-01 -- the top 15 units (ranks 1-15) are keyed by two blind readers and adjudicated into TEST tables (each unit's
+  keying_status; docs/reference/contrast_benchmark/README.md sec. 11); ranks 16 on are still triage only.
+purpose: 'P1 (docs/guides/STATUS_AND_PLAN.md, plan from 2026-11-01): key only rows with paired arms, from papers outside DEVELOPMENT,
+  each with a named consumer, into TEST; stop if fewer than half of the first 30 qualify.'
+inputs:
+  split: split_v2_per_change.yml (sha256 dbe32a2b3af83f3bbb603efb391dd8477999263a6b24769ea946fcc0e0fe2e12); partition is per consumer
+    error
+  ledgers: 'data/lit/measurement_ledger/*.yml: 1484 entries, 1289 unused (not in_model_fit / in_model_check), incl. the 122 ledgered
+    2026-11-01 from the 36 dossiers of commit e5195e42'
+  conflicts: docs/reference/conflicts_register.yml, open entries only
+  labs: 'a ledger entry''s lab = the canonical lab_ids.yml id of the atlas cells citing its dossier; else its ledger lab string via
+    lab_ids strings / text_aliases / declared overrides (conservative: over-merging only moves rows to DEV); else a NEW lab (TEST for
+    every error)'
+method:
+  pass_1_mechanical: 'every unused entry: arms detected (>= 2 pH or T values, an ''arms:'' clause, vs / +/- text, labelling); consumer
+    rules per error scope (ERROR_SCOPES of build_contrast_split.py, made entry-level); DEV / TEST by v2 per consumer; open CFs whose
+    sources include the dossier; v1-excluded atlas cells ''no numeric effect'' citing the dossier'
+  pass_2_review: 'the mechanical top 30 read one by one (stop_rule below), plus every unused entry of a dossier behind a v2 TEST contrast,
+    plus the new-lab candidates surfaced in ranks 31-125: 62 keying units, each a table or figure group (ledger copies of one table
+    merged, cost counted once)'
+  value: importance(consumer) x independence x arms_quality / hours_est
+  importance:
+    E: ENGINE_VS_LITERATURE sec. 3 effective score x the sec. 5 red-team P (0.6 where the red team did not review); open_mechanism_band
+      x 0.5
+    values:
+      E1: 22.9
+      E2: 9.9
+      E3: 5.4
+      E4: 12.6
+      E5: 12.6
+      E6: 15.3
+      E7: 12.6
+      E10: 9.0
+      E13: 7.2
+      E14: 7.2
+      E9: 7.2
+      E11: 7.2
+      E12: 7.2
+      E15: 5.4
+      E8: 4.8
+      E16: 3.0
+      E17: 2.4
+      E18: 3.0
+      E19: 2.4
+      E20: 3.0
+    CF: scope sulfur_rows 6 / other_lane 3 / corpus 2, x 0.6 unless kind conflict
+  independence: 3.0 for the first unit of a lab new to TEST(E) when E has < 2 TEST labs today; 1.5 when it has >= 2; 1.0 otherwise (an
+    existing TEST lab, a conflict, a band)
+  hours_est: 'per keyed table / figure: table 0.4 h + 0.01 h per row; figure 0.8 h + 0.03 h per row (figure_only +0.6 h, rows x2); supplement
+    +2 h (the SI must be fetched); rows = species x pH x T x (6 if a time series). Two readers are budgeted inside the per-row rate.'
+stop_rule:
+  rule: stop if fewer than half of the first 30 qualify
+  first_30_of_mechanical_triage:
+    qualify: 11
+    of: 30
+    fraction: 0.37
+    qualify_with_the_mechanical_consumer_as_assigned: 8
+    fraction_as_assigned: 0.27
+  verdict: 'STOP the broad sweep: fewer than half of the first 30 genuinely qualify (11 / 30 = 0.37; 8 / 30 = 0.27 with the consumer
+    the rules assigned). The reviewed queue below is the targeted alternative; keying it is an owner decision.'
+  reviewed_queue_top_30: all 30 qualify by construction (reviewed); that fraction is NOT evidence for the rule, which is about the unreviewed
+    first 30
+  first_30:
+  - ledger_id: whitfield1988_tab1_lecithin_effect_on_maillard_products
+    mechanical_consumer: E4
+    verdict: Q
+    reason: 'consumer wrong: the two pH values are per-amino-acid pots, not arms; the real arm (+/- lecithin) serves E20 (F30#4, Reading
+      TEST) -- qualifies under the corrected consumer'
+  - ledger_id: xu2007_table1_ph_axis_volatiles
+    mechanical_consumer: E4
+    verdict: Q
+    reason: 'consumer wrong (no pyrazine law): the pH 5.6 / 7 / 8 ribose + Cys arms with FFT serve E8, a new lab for an untestable error'
+  - ledger_id: meynier1995_table1_gly_ribose_ph_ladder
+    mechanical_consumer: E4
+    verdict: Q
+    reason: pyrazine pH ladder, Reading is not DEV(E4)
+  - ledger_id: meynier1995_table2_lys_ribose_ph_ladder
+    mechanical_consumer: E4
+    verdict: Q
+    reason: as above (lysine)
+  - ledger_id: meynier1995_table4_met_ribose_ph_ladder
+    mechanical_consumer: E4
+    verdict: Q
+    reason: methional pH ladder (Strecker step); methional identity flag
+  - ledger_id: zhao2019b_table2_camola_glucose_labelling
+    mechanical_consumer: E7
+    verdict: Q
+    reason: 'consumer wrong: fat arms printed only for 2-ethylthiophene; the 1:1 [13C6]glucose shares are the v2 TEST route-share contrasts
+      for E6 / E11 (F23#7, F24#4, F25#23)'
+  - ledger_id: thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates
+    mechanical_consumer: E5
+    verdict: Q
+    reason: phosphate 10-100 mM law of glucose -> dicarbonyls, Essex TEST(E5)
+  - ledger_id: low2006_tab4_methylpyrazine_to_25dmp_ratio_glycine_shift
+    mechanical_consumer: E4
+    verdict: N
+    reason: a ratio derived by the dossier ([Z]) in a potato matrix; the measured table is low2006_tab4 (queued under E9 / E13)
+  - ledger_id: pesek1975_text_aliphatic_tca_stability_acid_neutral_base
+    mechanical_consumer: E10
+    verdict: N
+    reason: qualitative NMR persistence, no number to key
+  - ledger_id: friedman1990_tab3_thiol_bisulfite_browning_inhibition
+    mechanical_consumer: E14
+    verdict: N
+    reason: A420 browning inhibition; no engine error scores browning
+  - ledger_id: deroos2005_text_yields_continuous_reactor
+    mechanical_consumer: E10
+    verdict: N
+    reason: 'batch vs continuous reactor yields: a process contrast the engine cannot simulate (the Fig. 4 pH series is queued)'
+  - ledger_id: research_round3_a32_ma2022_acrylamide_first_order_glucose_asparagine_linoleic
+    mechanical_consumer: E9
+    verdict: N
+    reason: secondary source, primary not on disk, Ea already refused; temperature is not an E9 factor
+  - ledger_id: zhao2019b_table1_gsh_glucose_fat_volatiles
+    mechanical_consumer: E7
+    verdict: Q
+    reason: +/- chicken fat / oxidised fat with MFT; BTBU is a new TEST lab for E7
+  - ledger_id: friedman1990_tab2_beta_alanine_glucose_a420_series
+    mechanical_consumer: E14
+    verdict: N
+    reason: browning (A420), no consumer
+  - ledger_id: madruga1995_tab1_tab2_beef_ph_series
+    mechanical_consumer: E4
+    verdict: N
+    reason: beef matrix (not simulable), printed unit misprinted x1e6; Reading is DEV for E8
+  - ledger_id: fischer2021_tab3_4_release_ph_pea_isolate
+    mechanical_consumer: E4
+    verdict: N
+    reason: release of bound volatiles by extraction pH, not formation
+  - ledger_id: grosch1992_tab3_mft_cysteine_dose_series_thiamine_ribose
+    mechanical_consumer: CF-089
+    verdict: Q
+    reason: cysteine dose x thiamine arms, SIDA; DFA is not DEV(E18)
+  - ledger_id: grosch1992_tab8_mft_reflux_vs_sde_same_pot
+    mechanical_consumer: CF-089
+    verdict: N
+    reason: an analytical-method pair (reflux vs SDE), not a chemistry arm
+  - ledger_id: grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems
+    mechanical_consumer: CF-089
+    verdict: Q
+    reason: thiamine / TPP x Cys x ribose x GSH, SIDA
+  - ledger_id: grosch1992_tab7_mft_meat_sde
+    mechanical_consumer: CF-089
+    verdict: N
+    reason: 'meat cuts: context, no arm on the conflict''s question'
+  - ledger_id: raza2020_tab3_pyrazine_strecker_rows
+    mechanical_consumer: E4
+    verdict: N
+    reason: yeast-extract CCD, heating time and vessel never stated
+  - ledger_id: zhao2019b_tab2_camola_fat_systems
+    mechanical_consumer: E7
+    verdict: N
+    reason: lipid-ledger copy of the Zhao 2019b CAMOLA table; fat arm only for 2-ethylthiophene (keyed once, with the E6 / E11 unit)
+  - ledger_id: wang2020_fig1hj_gsh_glucose_aldehyde_intermediates
+    mechanical_consumer: E7
+    verdict: N
+    reason: GSH-aldehyde adduct species the engine lacks; assumed ESI response; aldehydes above solubility
+  - ledger_id: us8920862_ex5_structured_lipid_vs_buffer_thiols
+    mechanical_consumer: E7
+    verdict: Q
+    reason: existing TEST contrast F25#17 (Nestle patent is not DEV(E7))
+  - ledger_id: grosch1992_tab5_ribose_cysteine_140c_mft
+    mechanical_consumer: CF-089
+    verdict: N
+    reason: 'nos. 1 and 2 differ in T, time, concentration, buffer and volume: not a pair'
+  - ledger_id: cui2022_fig1a_fig5a_xgg_arp_decay_glycylglycine_share
+    mechanical_consumer: E5
+    verdict: N
+    reason: dipeptide ARP (no engine species); GG share confounded with a 4x ARP charge range
+  - ledger_id: dutra2001_text_phosphate_50_vs_100mm_aminoacetone_oxidation
+    mechanical_consumer: E14
+    verdict: N
+    reason: data not shown; aminoacetone OXIDATION is not an engine step and not E14's missing sink
+  - ledger_id: ames2001_tab4_tab5_extrudate_pyrazines_strecker
+    mechanical_consumer: E4
+    verdict: N
+    reason: extrusion, one run per condition, column shift in Table 4
+  - ledger_id: ramaswamy1990_tables1_2_thiamine_loss
+    mechanical_consumer: E18
+    verdict: N
+    reason: 'temperature-only thiamine loss, pH never stated: E18''s question is the pH law and the 3-MP route'
+  - ledger_id: zhou2022_table1_furans_butanedione_pyrazines
+    mechanical_consumer: E7
+    verdict: N
+    reason: no lipid arm (rule misfire on +/- cysteine); Ho network is DEV in v1 for CF-060
+counts_unused_entries:
+  unused: 1289
+  with_any_named_consumer_mechanical: 554
+  no_consumer_not_keyed: 735
+  benchmark_contrast: 344
+  benchmark_contrast_TEST_for_at_least_one_error: 176
+  benchmark_contrast_DEV_only: 168
+  open_conflict: 308
+  open_conflict_TEST: 82
+  open_conflict_DEV_only: 226
+  atlas_cell_needs_number: 41
+  benchmark_contrast_by_error_all:
+    E1: 4
+    E2: 6
+    E3: 42
+    E4: 33
+    E5: 6
+    E6: 2
+    E7: 20
+    E8: 14
+    E9: 30
+    E10: 55
+    E11: 3
+    E12: 7
+    E13: 33
+    E14: 59
+    E16: 2
+    E17: 3
+    E18: 56
+    E19: 8
+    E20: 52
+  benchmark_contrast_by_error_TEST:
+    E3: 37
+    E4: 17
+    E5: 3
+    E7: 9
+    E8: 4
+    E9: 6
+    E10: 11
+    E11: 1
+    E12: 2
+    E13: 15
+    E14: 19
+    E18: 43
+    E19: 5
+    E20: 30
+  reviewed_units_qualifying: 61
+  reviewed_entries_in_units: 95
+  reviewed_units_by_kind:
+    benchmark_contrast: 55
+    open_mechanism_band: 2
+    open_conflict: 4
+  note: 'mechanical counts over-state: the review kept the units below out of the entries with a mechanical consumer; the first-30 hit
+    rate is the calibration of the mechanical pass'
+per_error_gain_if_queue_keyed:
+  E1:
+    title: hexose MFT has no intact-C5 route
+    test_labs_now: 0
+    test_contrasts_now: 0
+    queue_units: 0
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 0
+    existing_test_contrasts_made_scorable: 0
+  E2:
+    title: hexose 1,2- vs 2,3-enolisation split frozen in pH
+    test_labs_now: 0
+    test_contrasts_now: 0
+    queue_units: 0
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 0
+    existing_test_contrasts_made_scorable: 0
+  E3:
+    title: no Strecker-aldehyde lane
+    test_labs_now: 3
+    test_contrasts_now: 5
+    queue_units: 5
+    new_test_contrasts_if_keyed: 1
+    new_test_labs: []
+    test_labs_if_keyed: 3
+    existing_test_contrasts_made_scorable: 4
+  E4:
+    title: pyrazine pH law on the Strecker step
+    test_labs_now: 1
+    test_contrasts_now: 1
+    queue_units: 4
+    new_test_contrasts_if_keyed: 4
+    new_test_labs:
+    - de_haan_san_diego
+    - reading_mottram_parker
+    test_labs_if_keyed: 3
+    existing_test_contrasts_made_scorable: 0
+  E5:
+    title: no buffer-species catalysis
+    test_labs_now: 3
+    test_contrasts_now: 5
+    queue_units: 3
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 3
+    existing_test_contrasts_made_scorable: 5
+  E6:
+    title: MFT via free norfuraneol (route share)
+    test_labs_now: 2
+    test_contrasts_now: 4
+    queue_units: 4
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 2
+    existing_test_contrasts_made_scorable: 4
+  E7:
+    title: lipid lane inert to Maillard odorants
+    test_labs_now: 3
+    test_contrasts_now: 4
+    queue_units: 6
+    new_test_contrasts_if_keyed: 2
+    new_test_labs:
+    - btbu_beijing
+    test_labs_if_keyed: 4
+    existing_test_contrasts_made_scorable: 3
+  E8:
+    title: FFT / furfural supply pH law too steep
+    test_labs_now: 0
+    test_contrasts_now: 0
+    queue_units: 2
+    new_test_contrasts_if_keyed: 2
+    new_test_labs:
+    - ho_network
+    - new_cau_gao_y
+    test_labs_if_keyed: 2
+    existing_test_contrasts_made_scorable: 0
+  E9:
+    title: 'acrylamide: glucose-only, phosphate law, irreversible adducts'
+    test_labs_now: 2
+    test_contrasts_now: 4
+    queue_units: 5
+    new_test_contrasts_if_keyed: 1
+    new_test_labs:
+    - hacettepe_gokmen
+    test_labs_if_keyed: 3
+    existing_test_contrasts_made_scorable: 4
+  E10:
+    title: TTCA formation off, release too fast and pH-flat
+    test_labs_now: 1
+    test_contrasts_now: 1
+    queue_units: 2
+    new_test_contrasts_if_keyed: 1
+    new_test_labs:
+    - givaudan_de_roos
+    test_labs_if_keyed: 2
+    existing_test_contrasts_made_scorable: 1
+  E11:
+    title: one formation barrier for every sulfur route (route mix vs T)
+    test_labs_now: 2
+    test_contrasts_now: 9
+    queue_units: 4
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 2
+    existing_test_contrasts_made_scorable: 9
+  E12:
+    title: 'thiol losses: disulfide terminal, one decay, fixed O2'
+    test_labs_now: 4
+    test_contrasts_now: 4
+    queue_units: 4
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 4
+    existing_test_contrasts_made_scorable: 4
+  E13:
+    title: CF-077 methylpyrazine cross-pair factor
+    test_labs_now: 4
+    test_contrasts_now: 8
+    queue_units: 4
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 4
+    existing_test_contrasts_made_scorable: 6
+  E14:
+    title: aminoketone condensation instant; no pyrrole sink / extra MPZ route
+    test_labs_now: 3
+    test_contrasts_now: 7
+    queue_units: 3
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 3
+    existing_test_contrasts_made_scorable: 4
+  E15:
+    title: no Strecker acid / Amadori O2 route
+    test_labs_now: 0
+    test_contrasts_now: 0
+    queue_units: 0
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 0
+    existing_test_contrasts_made_scorable: 0
+  E16:
+    title: norfuraneol decay lacks base / O2 catalysis
+    test_labs_now: 0
+    test_contrasts_now: 0
+    queue_units: 0
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 0
+    existing_test_contrasts_made_scorable: 0
+  E17:
+    title: pentose ARP decays return no amine
+    test_labs_now: 1
+    test_contrasts_now: 2
+    queue_units: 0
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 1
+    existing_test_contrasts_made_scorable: 0
+  E18:
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    test_labs_now: 5
+    test_contrasts_now: 9
+    queue_units: 10
+    new_test_contrasts_if_keyed: 3
+    new_test_labs:
+    - unmapped:buenos_aires_alzamora
+    - unmapped:cftri_mysore_nottingham_taylor
+    - unmapped:umass_amherst_stumbo
+    test_labs_if_keyed: 8
+    existing_test_contrasts_made_scorable: 7
+  E19:
+    title: cysteine-Strecker H2S off
+    test_labs_now: 3
+    test_contrasts_now: 6
+    queue_units: 5
+    new_test_contrasts_if_keyed: 0
+    new_test_labs: []
+    test_labs_if_keyed: 3
+    existing_test_contrasts_made_scorable: 5
+  E20:
+    title: no lipid Strecker; no dienal + NH3 -> pentylpyridine
+    test_labs_now: 3
+    test_contrasts_now: 8
+    queue_units: 7
+    new_test_contrasts_if_keyed: 1
+    new_test_labs:
+    - kentucky_boatright
+    test_labs_if_keyed: 4
+    existing_test_contrasts_made_scorable: 7
+ledger_gaps_found:
+- F03#8 / F03#9 @zyzak1995 (E17's only TEST contrasts) have no measurement-ledger entry
+- F22#15@tai1997 (E19) has no measurement-ledger entry
+already_keyed_since_triage_started:
+- unit: zhang2021_cys_xyl_phospholipid
+  ledger_entries:
+  - zhang2021_tab3_phospholipid_cys_xyl_lipid_volatiles
+  - zhang2021_tab3_cys_xyl_phospholipid_reheat
+  keyed_in:
+  - data/lit/fit_rows/heldout_zhang2021_table3.yml
+- unit: meynier1995_gly_ribose_pyrazine_ph_ladder
+  ledger_entries:
+  - meynier1995_table1_gly_ribose_ph_ladder
+  keyed_in:
+  - data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+- unit: sedehi2013_dicarbonyl_amine_ph_rate_laws
+  ledger_entries:
+  - sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws
+  keyed_in:
+  - data/lit/fit_rows/heldout_sedehi2013_tab1.yml
+- unit: zhao2017b_cys_xyl_aldehyde_arms
+  ledger_entries:
+  - zhao2017b_tab1_aldehyde_arm_volatiles_3h
+  keyed_in:
+  - data/lit/fit_rows/heldout_zhao2017b_tab1.yml
+- unit: du2023_camola_glucose_c9_aldehydes
+  ledger_entries:
+  - du2023_table2_camola_isotopomers
+  - du2023_tab2_camola_lipid_carbon_share
+  keyed_in:
+  - data/lit/fit_rows/heldout_du2023_tab2.yml
+- unit: liu2023b_ribose_label_carbon_modules
+  ledger_entries:
+  - liu2023b_carbon_module_labelling
+  keyed_in:
+  - data/lit/fit_rows/heldout_liu2023b_tab3.yml
+- unit: zhao2019b_camola_glucose_gsh
+  ledger_entries:
+  - zhao2019b_table2_camola_glucose_labelling
+  - zhao2019b_tab2_camola_fat_systems
+  keyed_in:
+  - data/lit/fit_rows/heldout_zhao2019b_tab1_2.yml
+- unit: wang2022_cys_xyl_methyl_linoleate
+  ledger_entries:
+  - wang2022_table2_lipid_vs_blank_120c_150min
+  - wang2022_table2_volatiles_120c_150min
+  keyed_in:
+  - data/lit/fit_rows/heldout_wang2022_tab2.yml
+- unit: thornalley1999_phosphate_series
+  ledger_entries:
+  - thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates
+  keyed_in:
+  - data/lit/fit_rows/heldout_thornalley1999_figs1b_2e_2f_3c.yml
+- unit: zamora2015_lipid_carbonyl_strecker_pea
+  ledger_entries:
+  - zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl
+  keyed_in:
+  - data/lit/fit_rows/heldout_zamora2015_tab1.yml
+- unit: xu2007_ribose_cys_ffT_ph_axis
+  ledger_entries:
+  - xu2007_table1_ph_axis_volatiles
+  keyed_in:
+  - data/lit/fit_rows/heldout_xu2007_tab1.yml
+- unit: zhao2019b_gsh_glucose_fat_arms
+  ledger_entries:
+  - zhao2019b_table1_gsh_glucose_fat_volatiles
+  - zhao2019b_tab1_gsh_glc_fat_oxidised_fat_volatiles
+  keyed_in:
+  - data/lit/fit_rows/heldout_zhao2019b_tab1_2.yml
+- unit: deroos2005_cys_amadori_ph_stability
+  ledger_entries:
+  - deroos2005_fig4_xylulose_cysteine_ph_stability
+  keyed_in:
+  - data/lit/fit_rows/heldout_deroos2005_fig4.yml
+- unit: grosch1992_thiamine_cys_ribose_gsh_systems
+  ledger_entries:
+  - grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems
+  keyed_in:
+  - data/lit/fit_rows/heldout_grosch1992_tab2.yml
+- unit: meynier1995_lys_ribose_pyrazine_ph_ladder
+  ledger_entries:
+  - meynier1995_table2_lys_ribose_ph_ladder
+  keyed_in:
+  - data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+- unit: meynier1995_met_ribose_methional_ph_ladder
+  ledger_entries:
+  - meynier1995_table4_met_ribose_ph_ladder
+  keyed_in:
+  - data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+queue:
+- rank: 1
+  unit: meynier1995_gly_ribose_pyrazine_ph_ladder
+  kind: benchmark_contrast
+  ledger_entries:
+  - meynier1995_table1_gly_ribose_ph_ladder
+  dossier: meynier1995_extraction.md
+  paper: Meynier & Mottram 1995 Food Chem 52:361
+  lab: reading_mottram_parker
+  lab_string: Reading (Mottram / Parker / Elmore)
+  primary_consumer: E4
+  consumers:
+  - id: E4
+    title: pyrazine pH law on the Strecker step
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 12.6
+    independence: 3.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 30
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.7
+  arms_quality: 0.8
+  value: 43.2
+  caveat: 'pyrazines rise from n.d. with pH: censored low-pH arms; octadecane IS, no RF (ratios only); pH set before heating'
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+    rows: 24
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'in-pot 50 + 35 mM inferred (stock diluted 25 -> 50 mL); 6 nd / tr cells listed per pot'
+- rank: 2
+  unit: sedehi2013_dicarbonyl_amine_ph_rate_laws
+  kind: benchmark_contrast
+  ledger_entries:
+  - sedehi2013_tab1_glyoxal_methylglyoxal_glycine_ammonium_ph_rate_laws
+  dossier: sedehi2013_extraction.md
+  paper: Sedehi, Takano, Blasic, Sullivan & De Haan 2013 Atmos Environ 77:656
+  lab: de_haan_san_diego
+  lab_string: San Diego (De Haan)
+  primary_consumer: E4
+  consumers:
+  - id: E4
+    title: pyrazine pH law on the Strecker step
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 12.6
+    independence: 3.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 28
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.68
+  arms_quality: 0.6
+  value: 33.35
+  caveat: 'the step''s own pH law (MGO / GO + glycine, pH 2-8) but at 4-25 C and 0.2-1.5 M: a temperature transfer the scorer must declare'
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_sedehi2013_tab1.yml
+    rows: 26
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'glyoxal + ammonium sulfate law (a fit to Yu et al. 2011 data, not this lab)'
+    note: 'supplement_missing: per-run k (Table S2) not on disk; only the printed rate laws (9 laws, 5 Ea, Eqs. 3-4) keyed'
+- rank: 3
+  unit: zhao2017b_cys_xyl_aldehyde_arms
+  kind: benchmark_contrast
+  ledger_entries:
+  - zhao2017b_tab1_aldehyde_arm_volatiles_3h
+  dossier: zhao2017b_extraction.md
+  paper: Zhao, Zhao, Cao, Zhen, Wang, Li & Xie 2017 Food Sci (China) 38(20):63
+  lab: btbu_beijing
+  lab_string: Beijing Technology and Business University (Xie)
+  primary_consumer: E7
+  consumers:
+  - id: E7
+    title: lipid lane inert to Maillard odorants
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 12.6
+    independence: 1.5
+  existing_test_contrasts: []
+  cost:
+    rows_est: 7
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.47
+  arms_quality: 0.8
+  value: 32.17
+  caveat: MFT / FFT to n.d. with aldehydes (censored); aldehyde-derived block not re-typed (PDF)
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_zhao2017b_tab1.yml
+    rows: 52
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: '4-methyl-2-propylfuran (77.0) assigned to the decadienal arm by the subtotals; 112 ''-'' cells listed per pot'
+- rank: 4
+  unit: du2023_camola_glucose_c9_aldehydes
+  kind: benchmark_contrast
+  ledger_entries:
+  - du2023_table2_camola_isotopomers
+  - du2023_tab2_camola_lipid_carbon_share
+  dossier: du2023_extraction.md
+  paper: Du et al. 2023 Food Res Int 173:113337
+  lab: caas_beijing
+  lab_string: CAAS Inst. Food Sci. Technol. (Wang F / Fan B)
+  primary_consumer: E6
+  consumers:
+  - id: E11
+    title: one formation barrier for every sulfur route (route mix vs T)
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  - id: E6
+    title: MFT via free norfuraneol (route share)
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 15.3
+    independence: 1.0
+  existing_test_contrasts:
+  - F23#8@du2023
+  - F24#5@du2023
+  - F26#24@du2023
+  cost:
+    rows_est: 4
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.44
+  arms_quality: 0.8
+  value: 27.82
+  caveat: 150 C; the calibration_broad alternative drops Du 2023 (HEXOSE_C5_ENTRY documentation)
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_du2023_tab2.yml
+    rows: 133
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'no. 34 D (compound not in system D per Table 1), no. 26 C (Table 1 conflict) and D (truncated, 47 %), no. 47 A (sums to 109 %)'
+    note: 'no system-M rows printed: no in-paper no-aldehyde baseline (read against 50 : 50)'
+- rank: 5
+  unit: liu2023b_ribose_label_carbon_modules
+  kind: benchmark_contrast
+  ledger_entries:
+  - liu2023b_carbon_module_labelling
+  dossier: liu2023b_extraction.md
+  paper: Liu et al. 2023 LWT 182:114874
+  lab: caas_beijing
+  lab_string: Beijing (Liu / Zhang; Beijing-duck flavour group)
+  primary_consumer: E6
+  consumers:
+  - id: E11
+    title: one formation barrier for every sulfur route (route mix vs T)
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  - id: E6
+    title: MFT via free norfuraneol (route share)
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 15.3
+    independence: 1.0
+  existing_test_contrasts:
+  - F23#6@liu2023b
+  - F24#6@liu2023b
+  cost:
+    rows_est: 4
+    medium:
+    - table
+    status:
+    - text_only
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.44
+  arms_quality: 0.8
+  value: 27.82
+  caveat: 'text_only: the dossier gives no table number, so the PDF must be read first; prereg expects ~0 power here'
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_liu2023b_tab3.yml
+    rows: 203
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'Table 3 exists (the ''text_only'' status was wrong); ''potassium phosphate tribasic'' at pH 5.88 unresolved; amounts not printed'
+- rank: 6
+  unit: zhao2019b_camola_glucose_gsh
+  kind: benchmark_contrast
+  ledger_entries:
+  - zhao2019b_table2_camola_glucose_labelling
+  - zhao2019b_tab2_camola_fat_systems
+  dossier: zhao2019b_extraction.md
+  paper: Zhao J et al. 2019 Food Chem 270:436
+  lab: btbu_beijing
+  lab_string: BTBU (Xie J)
+  primary_consumer: E6
+  consumers:
+  - id: E6
+    title: MFT via free norfuraneol (route share)
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 15.3
+    independence: 1.0
+  - id: E11
+    title: one formation barrier for every sulfur route (route mix vs T)
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F23#7@zhao2019b
+  - F24#4@zhao2019b
+  - F25#23@zhao2019b
+  cost:
+    rows_est: 5
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.45
+  arms_quality: 0.8
+  value: 27.2
+  caveat: DEV for E1; the E6 + E11 prereg scores Zhao 2019b under E1, not E6 (v2 caveat); the alternative 'calibration = every paper
+    src cites' drops it
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_zhao2019b_tab1_2.yml
+    rows: 134
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'Table 2 rows other than no. 15 carry no system; the text says patterns unchanged with fat: placed in the control pot'
+- rank: 7
+  unit: wang2022_cys_xyl_methyl_linoleate
+  kind: benchmark_contrast
+  ledger_entries:
+  - wang2022_table2_lipid_vs_blank_120c_150min
+  - wang2022_table2_volatiles_120c_150min
+  dossier: wang2022_extraction.md
+  paper: Wang, Xie, Zhang, Xu et al. 2022 Flavour Fragr J 37 (doi 10.1002/ffj.3710)
+  lab: btbu_beijing
+  lab_string: BTBU (Xie J)
+  primary_consumer: E7
+  consumers:
+  - id: E7
+    title: lipid lane inert to Maillard odorants
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 12.6
+    independence: 1.0
+  - id: E12
+    title: 'thiol losses: disulfide terminal, one decay, fixed O2'
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F28#25@wang2022
+  cost:
+    rows_est: 10
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.5
+  arms_quality: 1.0
+  value: 25.2
+  caveat: CF-028 (composition of the Fig. 3 grid) does not touch Table 2
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_wang2022_tab2.yml
+    rows: 76
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'printed Total row misprinted (subtotals reproduce the row sums); row 16 possible copy of row 6 (flagged)'
+- rank: 8
+  unit: thornalley1999_phosphate_series
+  kind: benchmark_contrast
+  ledger_entries:
+  - thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates
+  dossier: thornalley1999_extraction.md
+  paper: Thornalley, Langborg & Minhas 1999 Biochem J 344:109
+  lab: essex_thornalley
+  lab_string: Essex (Thornalley)
+  primary_consumer: E5
+  consumers:
+  - id: E5
+    title: no buffer-species catalysis
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 12.6
+    independence: 1.0
+  existing_test_contrasts:
+  - F05#23@thornalley1999
+  - F06#11@thornalley1999
+  - F08#2@thornalley1999
+  cost:
+    rows_est: 3
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.43
+  arms_quality: 0.8
+  value: 23.44
+  caveat: 37 C; phosphate co-varies with its trace metals (not crossed with the chelator)
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_thornalley1999_figs1b_2e_2f_3c.yml
+    rows: 48
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'Fig. 1b MG 100 mM figure point (2.4x the text; the text row kept)'
+    note: 'Fig. 2e square / triangle re-assigned (MG / 3-DG) per the text, Fig. 2g and the fold changes; 100 mM text rates replace the figure points (count once)'
+- rank: 9
+  unit: zamora2015_lipid_carbonyl_strecker_pea
+  kind: benchmark_contrast
+  ledger_entries:
+  - zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl
+  dossier: zamora2015_extraction.md
+  paper: Zamora, Leon & Hidalgo 2015 J Agric Food Chem 63 (accepted MS; doi 10.1021/acs.jafc.5b02619)
+  lab: seville_hidalgo_zamora
+  lab_string: Instituto de la Grasa, CSIC Seville (Hidalgo)
+  primary_consumer: E7
+  consumers:
+  - id: E7
+    title: lipid lane inert to Maillard odorants
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 12.6
+    independence: 1.0
+  existing_test_contrasts:
+  - F30#15@zamora2015
+  cost:
+    rows_est: 6
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.46
+  arms_quality: 0.8
+  value: 21.91
+  caveat: Seville is DEV for E20, so this serves E7 only
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_zamora2015_tab1.yml
+    rows: 139
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: '140 C / 1 h from the Methods default; 5 zero cells not rows'
+- rank: 10
+  unit: xu2007_ribose_cys_ffT_ph_axis
+  kind: benchmark_contrast
+  ledger_entries:
+  - xu2007_table1_ph_axis_volatiles
+  dossier: xu2007_extraction.md
+  paper: Xu, Gao, Liu & Zhao 2008 (online 2007) J Sci Food Agric 88:328
+  lab: new_cau_gao_y
+  lab_string: China Agricultural Univ. (Gao Y)
+  primary_consumer: E8
+  consumers:
+  - id: E8
+    title: FFT / furfural supply pH law too steep
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 4.8
+    independence: 3.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 27
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.67
+  arms_quality: 1.0
+  value: 21.49
+  caveat: RF = 1 (ratios only); pH 5.6 columns duplicate xu2008 (count once); 'phosphate' is pyrophosphate; measured final pH printed
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_xu2007_tab1.yml
+    rows: 65
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'control columns only; 34 compounds both readers keyed (SC-CO2 columns and 38 sulfur heterocycles single-reader, not rows); buffer is 0.2 M pyrophosphate'
+- rank: 11
+  unit: zhao2019b_gsh_glucose_fat_arms
+  kind: benchmark_contrast
+  ledger_entries:
+  - zhao2019b_table1_gsh_glucose_fat_volatiles
+  - zhao2019b_tab1_gsh_glc_fat_oxidised_fat_volatiles
+  dossier: zhao2019b_extraction.md
+  paper: Zhao J et al. 2019 Food Chem 270:436
+  lab: btbu_beijing
+  lab_string: BTBU (Xie J)
+  primary_consumer: E7
+  consumers:
+  - id: E7
+    title: lipid lane inert to Maillard odorants
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 12.6
+    independence: 1.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 8
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.48
+  arms_quality: 0.8
+  value: 21.0
+  caveat: relative areas to an inlet-injected standard (between-arm ratios only); fat arms oil-water
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_zhao2019b_tab1_2.yml
+    rows: 124
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'inlet IS: fat arms carry a headspace-partition confound; 35 ''-'' cells listed per pot'
+- rank: 12
+  unit: deroos2005_cys_amadori_ph_stability
+  kind: benchmark_contrast
+  ledger_entries:
+  - deroos2005_fig4_xylulose_cysteine_ph_stability
+  dossier: deroos2005_extraction.md
+  paper: de Roos, Wolswinkel & Sipma 2005 ACS Symp Ser 905
+  lab: givaudan_de_roos
+  lab_string: Givaudan / Quest (Weenen / de Roos)
+  primary_consumer: E10
+  consumers:
+  - id: E10
+    title: TTCA formation off, release too fast and pH-flat
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 9.0
+    independence: 3.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 8
+    medium:
+    - figure
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-digitise the figure independently
+    hours_est: 1.04
+  arms_quality: 0.8
+  value: 20.77
+  caveat: purified D-xylulose-L-cysteine, concentration unstated (first-order reading still usable); Givaudan is DEV for E6 / E11, not
+    E10; tests B59b's CYS_AMADORI_ROUTE step
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_deroos2005_fig4.yml
+    rows: 6
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'single-reader curve positions pH 3.5 (B) and 5.25 (A)'
+    note: 'a curve without data markers: readings, not data points'
+- rank: 13
+  unit: grosch1992_thiamine_cys_ribose_gsh_systems
+  kind: benchmark_contrast
+  ledger_entries:
+  - grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems
+  dossier: grosch1992_extraction.md
+  paper: Grosch & Zeiler-Hilgart 1992 ACS Symp Ser 490:183
+  lab: dfa_garching
+  lab_string: DFA Garching (Grosch)
+  primary_consumer: CF-089
+  consumers:
+  - id: CF-089
+    title: effect of cysteine on thermal thiamine degradation (and so on thiamine-derived MFT / H2S),
+    partition_v2: n/a (conflict)
+    new_test_lab: false
+    importance: 6.0
+    independence: 1.0
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F27#15@grosch1992
+  - F27#16@grosch1992
+  cost:
+    rows_est: 3
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.43
+  arms_quality: 1.0
+  value: 13.95
+  caveat: SIDA; Tables IV / VI are further factors on the same design, not ledgered separately
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_grosch1992_tab2.yml
+    rows: 10
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: 'censored cells listed per pot as upper limits'
+- rank: 14
+  unit: meynier1995_lys_ribose_pyrazine_ph_ladder
+  kind: benchmark_contrast
+  ledger_entries:
+  - meynier1995_table2_lys_ribose_ph_ladder
+  dossier: meynier1995_extraction.md
+  paper: Meynier & Mottram 1995 Food Chem 52:361
+  lab: reading_mottram_parker
+  lab_string: Reading (Mottram / Parker / Elmore)
+  primary_consumer: E4
+  consumers:
+  - id: E4
+    title: pyrazine pH law on the Strecker step
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 12.6
+    independence: 1.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 35
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.75
+  arms_quality: 0.8
+  value: 13.44
+  caveat: same pot design and lab as the glycine ladder; pyridine IDs tentative
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+    rows: 30
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'none'
+    note: '5 nd / tr cells listed per pot'
+- rank: 15
+  unit: meynier1995_met_ribose_methional_ph_ladder
+  kind: benchmark_contrast
+  ledger_entries:
+  - meynier1995_table4_met_ribose_ph_ladder
+  dossier: meynier1995_extraction.md
+  paper: Meynier & Mottram 1995 Food Chem 52:361
+  lab: reading_mottram_parker
+  lab_string: Reading (Mottram)
+  primary_consumer: E4
+  consumers:
+  - id: E4
+    title: pyrazine pH law on the Strecker step
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 12.6
+    independence: 1.0
+  - id: E3
+    title: no Strecker-aldehyde lane
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 5.4
+    independence: 1.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 35
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.75
+  arms_quality: 0.8
+  value: 13.44
+  caveat: table label vs prose disagree on methional identity (dossier Flags 7); DMDS outliers
+  keying_status:
+    status: keyed
+    date: '2026-11-01'
+    table: data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml
+    rows: 34
+    verification: two blind readers (A, B) + adjudication; reconciled, 0 disagreements; TEST data, never a fit input
+    dropped: 'DMDS pH 6.0 (8.6; contradicts the stated rise, misprint not provable)'
+    note: 'printed ''3-(Methylthio)propanol'' resolved as methional (MTAL, P ~0.9); DMDS 24.82 kept as printed'
+- rank: 16
+  unit: shibamoto1977_glucose_ammonia_pyrazine_distribution
+  kind: benchmark_contrast
+  ledger_entries:
+  - shibamoto1977_tab2_glucose_ammonia_pyrazine_distribution_16_pots
+  - shibamoto1977_exp4_vs_exp13_oxygen_bubbling_pyrazine_yield
+  - shibamoto1977_propyl_gallate_2h_vs_18h_pyrazine_yield
+  dossier: shibamoto1977_extraction.md
+  paper: Shibamoto & Bernhard 1977 Agric Biol Chem 41:143
+  lab: ucdavis_shibamoto
+  lab_string: UC Davis (Bernhard / Shibamoto)
+  primary_consumer: E13
+  consumers:
+  - id: E13
+    title: CF-077 methylpyrazine cross-pair factor
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  - id: E14
+    title: aminoketone condensation instant; no pyrrole sink / extra MPZ route
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F19#17@shibamoto1977
+  - F20#13@shibamoto1977
+  cost:
+    rows_est: 5
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.45
+  arms_quality: 0.8
+  value: 12.8
+  caveat: 8 M ammonia (concentrated); controls 14 / 15 may be swapped (dossier); the two text pairs are rows of Table II
+- rank: 17
+  unit: xu2011_cys_xyl_lard_arms
+  kind: benchmark_contrast
+  ledger_entries:
+  - xu2011_table1_lard_vs_no_lard_sulfur_volatiles
+  dossier: xu2011_extraction.md
+  paper: Xu, Chen, Lei, Wu, Fan, Xu & Pan 2011 J Sci Food Agric 91:2241
+  lab: huazhong_pan
+  lab_string: Huazhong Agricultural Univ. (Pan S)
+  primary_consumer: E12
+  consumers:
+  - id: E12
+    title: 'thiol losses: disulfide terminal, one decay, fixed O2'
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F28#20@xu2011
+  cost:
+    rows_est: 8
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.48
+  arms_quality: 0.8
+  value: 12.0
+  caveat: Huazhong is DEV for E7, so the lard arm counts for E12 only
+- rank: 18
+  unit: us8920862_ex5_structured_lipid_vs_buffer
+  kind: benchmark_contrast
+  ledger_entries:
+  - us8920862_ex5_structured_lipid_vs_buffer_thiols
+  - us8920862_ex5_buffer_6h_endpoint
+  - us8920862_ex5_structured_lipid_arm
+  dossier: us8920862_extraction.md
+  paper: Sagalowicz, Davidek, Viton, Yu & Leser 2014 US Patent 8,920,862 B2 (Nestec)
+  lab: nestle_rc_and_cerny_firmenich
+  lab_string: Nestle Research (Davidek / Sagalowicz)
+  primary_consumer: E7
+  consumers:
+  - id: E7
+    title: lipid lane inert to Maillard odorants
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 12.6
+    independence: 1.0
+  - id: CF-031
+    title: effect of lipid on meaty thiols (MFT, FFT) in cysteine + sugar pots
+    partition_v2: n/a (conflict)
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F25#17@us8920862
+  cost:
+    rows_est: 4
+    medium:
+    - text
+    status:
+    - digitised_in_dossier
+    - text_only
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.64
+  arms_quality: 0.6
+  value: 11.81
+  caveat: patent; 6 h endpoint only; lipid RAISES MFT (opposite sign to the oil-only arms); mesophase, not an aqueous pot
+- rank: 19
+  unit: grosch1992_cysteine_dose_series
+  kind: benchmark_contrast
+  ledger_entries:
+  - grosch1992_tab3_mft_cysteine_dose_series_thiamine_ribose
+  dossier: grosch1992_extraction.md
+  paper: Grosch & Zeiler-Hilgart 1992 ACS Symp Ser 490:183
+  lab: dfa_garching
+  lab_string: DFA Garching (Grosch)
+  primary_consumer: CF-089
+  consumers:
+  - id: CF-089
+    title: effect of cysteine on thermal thiamine degradation (and so on thiamine-derived MFT / H2S),
+    partition_v2: n/a (conflict)
+    new_test_lab: false
+    importance: 6.0
+    independence: 1.0
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F27#15@grosch1992
+  cost:
+    rows_est: 1
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.41
+  arms_quality: 0.8
+  value: 11.71
+  caveat: formation from thiamine confounded with in-pot loss (dossier)
+- rank: 20
+  unit: doorn2002_thiol_vs_amine_enal_selectivity
+  kind: open_mechanism_band
+  ledger_entries:
+  - doorn2002_tab2_thiol_4hne_4one_rate_constants
+  - doorn2002_tab2_amine_imidazole_4hne_4one_rate_constants
+  dossier: doorn2002_extraction.md
+  paper: Doorn & Petersen 2002 Chem Res Toxicol 15:1445
+  lab: colorado_doorn_petersen
+  lab_string: Colorado (Petersen)
+  primary_consumer: E7
+  consumers:
+  - id: E7
+    title: lipid lane inert to Maillard odorants
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 6.3
+    independence: 1.5
+  existing_test_contrasts: []
+  cost:
+    rows_est: 5
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.85
+  arms_quality: 1.0
+  value: 11.12
+  caveat: band source (thiol >> His > Lys selectivity), 23 C, one pH; NOT a TEST row
+- rank: 21
+  unit: quan2020_acrylamide_constants
+  kind: benchmark_contrast
+  ledger_entries:
+  - quan2020_table1_acrylamide_k5_k8
+  dossier: quan2020_extraction.md
+  paper: Quan, Li, Jiao, Xue, Liu, Wang, He, Qin, Zeng & Chen 2020 Food Chem 332:127387 (pre-proof)
+  lab: jiangnan_chen_zeng
+  lab_string: Jiangnan (Zeng / Chen J.)
+  primary_consumer: E9
+  consumers:
+  - id: E9
+    title: 'acrylamide: glucose-only, phosphate law, irreversible adducts'
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F29#11@quan2020
+  cost:
+    rows_est: 1
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.41
+  arms_quality: 0.6
+  value: 10.54
+  caveat: fitted constants; the calibration_broad alternative drops Quan 2020 (E9 then 1 lab)
+- rank: 22
+  unit: wang2012_thiamine_xylose_labelling_and_cosubstrates
+  kind: benchmark_contrast
+  ledger_entries:
+  - wang2012_table3_camola_xylose_isotopomers
+  - wang2012_table2_gsh_cys_cysgly_xylose_thiamine_volatiles
+  dossier: wang2012_extraction.md
+  paper: Wang, Yang & Song 2012 Food Chem 131:280
+  lab: btbu_beijing
+  lab_string: BTBU (Song H)
+  primary_consumer: E6
+  consumers:
+  - id: E6
+    title: MFT via free norfuraneol (route share)
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 15.3
+    independence: 1.0
+  - id: E11
+    title: one formation barrier for every sulfur route (route mix vs T)
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F23#5@wang2012
+  - F27#5@wang2012
+  cost:
+    rows_est: 12
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.92
+  arms_quality: 0.6
+  value: 9.98
+  caveat: 'Table 3 does not say which pot; FFT 80 : 20 conflicts with Cerny 2007 (dossier: unreliable); unit printed ''ug ul'''
+- rank: 23
+  unit: liu2023b_ribose_cys_mft_fft
+  kind: benchmark_contrast
+  ledger_entries:
+  - liu2023b_table2_rib_cys_mft_fft
+  dossier: liu2023b_extraction.md
+  paper: Liu et al. 2023 LWT 182:114874
+  lab: caas_beijing
+  lab_string: Beijing (Liu / Zhang; Beijing-duck flavour group)
+  primary_consumer: E12
+  consumers:
+  - id: E12
+    title: 'thiol losses: disulfide terminal, one decay, fixed O2'
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F28#26@liu2023b
+  cost:
+    rows_est: 18
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.58
+  arms_quality: 0.8
+  value: 9.93
+  caveat: 168 C
+- rank: 24
+  unit: mauri1992_thiamine_loss_ph_temperature
+  kind: benchmark_contrast
+  ledger_entries:
+  - mauri1992_table1_thiamine_loss_k_ea
+  dossier: mauri1992_extraction.md
+  paper: Mauri, Alzamora & Tomio 1992
+  lab: unmapped:buenos_aires_alzamora
+  lab_string: Buenos Aires (Alzamora)
+  primary_consumer: E18
+  consumers:
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 3.0
+    independence: 1.5
+  existing_test_contrasts: []
+  cost:
+    rows_est: 6
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.46
+  arms_quality: 1.0
+  value: 9.78
+  caveat: total thiamine loss (no product); aw 0.95 salt arms beside a buffer control
+- rank: 25
+  unit: vanlancker2012_free_amino_acid_pyrazines
+  kind: benchmark_contrast
+  ledger_entries:
+  - vanlancker2012_tab4_aa_specific_pyrazines_glucose
+  dossier: vanlancker2012_extraction.md
+  paper: Van Lancker, Adams & De Kimpe 2012 J Agric Food Chem 60:4697
+  lab: ghent_de_kimpe
+  lab_string: Ghent (De Kimpe)
+  primary_consumer: E13
+  consumers:
+  - id: E13
+    title: CF-077 methylpyrazine cross-pair factor
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F19#13@vanlancker2012
+  cost:
+    rows_est: 7
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.47
+  arms_quality: 0.6
+  value: 9.19
+  caveat: dipeptide arms not simulable; the free amino acid arms are
+- rank: 26
+  unit: mulley1975_thiamine_tpp_ph_d_values
+  kind: benchmark_contrast
+  ledger_entries:
+  - mulley1975_table1_thiamine_cocarboxylase_d_values
+  dossier: mulley1975_extraction.md
+  paper: Mulley, Stumbo & Hunting 1975 J Food Sci
+  lab: unmapped:umass_amherst_stumbo
+  lab_string: UMass Amherst (Stumbo)
+  primary_consumer: E18
+  consumers:
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 3.0
+    independence: 1.5
+  existing_test_contrasts: []
+  cost:
+    rows_est: 10
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.5
+  arms_quality: 1.0
+  value: 9.0
+  caveat: one temperature (129.4 C); Fig. 7 legend inconsistent with Table 1 header
+- rank: 27
+  unit: kallen1971b_phosphate_and_general_acid_catalysis
+  kind: benchmark_contrast
+  ledger_entries:
+  - kallen1971b_fig7_phosphate_catalysis_saturation
+  - kallen1971b_tab3_general_acid_catalysis_bronsted
+  dossier: kallen1971b_extraction.md
+  paper: Kallen 1971 J Am Chem Soc 93:6236
+  lab: kallen_pennsylvania
+  lab_string: Univ. Pennsylvania (Kallen)
+  primary_consumer: E5
+  consumers:
+  - id: E5
+    title: no buffer-species catalysis
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 12.6
+    independence: 1.0
+  existing_test_contrasts:
+  - F04#2@kallen1971b
+  cost:
+    rows_est: 10
+    medium:
+    - figure
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-digitise the figure independently
+    hours_est: 1.42
+  arms_quality: 1.0
+  value: 8.87
+  caveat: thiazolidine (TTCA-type) formation at 25 C, not Amadori decay; Kallen is DEV for E10 (the 'Kallen-shaped' citation), so E5
+    only
+- rank: 28
+  unit: zhou2000_decadienal_amino_acid_pentylpyridine
+  kind: benchmark_contrast
+  ledger_entries:
+  - zhou2000_tab3_amino_acids_slurry_vs_buffer
+  dossier: zhou2000_extraction.md
+  paper: Zhou & Boatright 2000 J Food Sci 65:1155
+  lab: kentucky_boatright
+  lab_string: University of Kentucky (Boatright)
+  primary_consumer: E20
+  consumers:
+  - id: E20
+    title: no lipid Strecker; no dienal + NH3 -> pentylpyridine
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 3.0
+    independence: 1.5
+  existing_test_contrasts:
+  - F21#5@zhou2000 (v1 TEST cell, no numeric effect yet)
+  - F30#13@zhou2000 (v1 TEST cell)
+  cost:
+    rows_est: 2
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.42
+  arms_quality: 0.8
+  value: 8.57
+  caveat: temperature not stated (ledger); the pH 7 buffer arm is the simulable one; amino acids dosed into dry flour for the slurry
+    arm
+- rank: 29
+  unit: chen2000_chen2002_ribose_cys_ph_pair
+  kind: benchmark_contrast
+  ledger_entries:
+  - chen2000_table2_rib_cys_urea_volatiles
+  - chen2002_table2_rib_cys_carnosine_volatiles
+  dossier: chen2000_extraction.md
+  paper: Chen, Xing, Chin & Ho 2000 J Agric Food Chem 48:3512
+  lab: ho_network
+  lab_string: Rutgers (Ho)
+  primary_consumer: E8
+  consumers:
+  - id: E8
+    title: FFT / furfural supply pH law too steep
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 4.8
+    independence: 3.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 24
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 1.04
+  arms_quality: 0.6
+  value: 8.31
+  caveat: only the no-additive pH 5.0 vs 8.5 control pair qualifies; oven heating, come-up unstated; concentration ambiguous (per-ribose
+    yields robust); chen2002 is a sibling run of the same control
+- rank: 30
+  unit: hincelin1992_thiamine_plus_minus_xylose
+  kind: benchmark_contrast
+  ledger_entries:
+  - hincelin1992_tables1_2_thiamine_xylose_volatiles
+  dossier: hincelin1992_extraction.md
+  paper: Hincelin, Ames, Apriyantono & Elmore 1992 Food Chem 44:381
+  lab: reading_mottram_parker
+  lab_string: Reading (Ames)
+  primary_consumer: CF-090
+  consumers:
+  - id: CF-090
+    title: effect of added xylose on MFT formed from thiamine
+    partition_v2: n/a (conflict)
+    new_test_lab: false
+    importance: 6.0
+    independence: 1.0
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F27#12@hincelin1992
+  cost:
+    rows_est: 5
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.45
+  arms_quality: 0.6
+  value: 8.0
+  caveat: relative abundances in an open SDE system; Ames papers merged into Reading (lab_ids rule)
+- rank: 31
+  unit: kim1996b_pentylpyridine_by_amino_acid_and_15n
+  kind: benchmark_contrast
+  ledger_entries:
+  - kim1996b_fig1_pentylpyridine_yields_by_amino_acid
+  - kim1996b_tab3_amide_15n_share_pentylpyridines
+  dossier: kim1996b_extraction.md
+  paper: Kim, Hartman & Ho 1996 J Agric Food Chem 44:3906
+  lab: ho_network
+  lab_string: Rutgers (Ho)
+  primary_consumer: E7
+  consumers:
+  - id: E20
+    title: no lipid Strecker; no dienal + NH3 -> pentylpyridine
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  - id: E7
+    title: lipid lane inert to Maillard odorants
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 12.6
+    independence: 1.0
+  existing_test_contrasts:
+  - F21#6@kim1996b
+  - F30#11@kim1996b
+  cost:
+    rows_est: 4
+    medium:
+    - figure
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-digitise the figure independently
+    hours_est: 1.28
+  arms_quality: 0.8
+  value: 7.88
+  caveat: 'Fig. 1 read +-20 mg/mol from a 200 dpi render: second reader digitises'
+- rank: 32
+  unit: zamora2020_lipid_carbonyl_pyridines
+  kind: benchmark_contrast
+  ledger_entries:
+  - zamora2020_tab1_crotonaldehyde_ammonia_sources
+  - zamora2020_tab2_pyridines_from_lipid_carbonyls_glutamine
+  dossier: zamora2020_extraction.md
+  paper: Zamora, Lavado-Tena & Hidalgo 2020 Food Chem 304:125284
+  lab: seville_hidalgo_zamora
+  lab_string: Instituto de la Grasa, CSIC Seville (Hidalgo)
+  primary_consumer: E14
+  consumers:
+  - id: E14
+    title: aminoketone condensation instant; no pyrrole sink / extra MPZ route
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F21#8@zamora2020
+  cost:
+    rows_est: 14
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.94
+  arms_quality: 1.0
+  value: 7.66
+  caveat: Seville is DEV for E20; serves E14's aldehyde-addition route
+- rank: 33
+  unit: amranihemaimi1995_pyrazine_shares_and_labels
+  kind: benchmark_contrast
+  ledger_entries:
+  - amranihemaimi1995_tab2_13c_labelling_fractions
+  - amranihemaimi1995_tab1_pyrazine_shares
+  dossier: amranihemaimi1995_extraction.md
+  paper: Amrani-Hemaimi, Cerny & Fay 1995 J Agric Food Chem 43:2818
+  lab: nestle_rc_and_cerny_firmenich
+  lab_string: Nestle Research (Cerny / Fay)
+  primary_consumer: E13
+  consumers:
+  - id: E13
+    title: CF-077 methylpyrazine cross-pair factor
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F19#0@amranihemaimi1995
+  - F20#1@amranihemaimi1995
+  cost:
+    rows_est: 14
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.94
+  arms_quality: 1.0
+  value: 7.66
+  caveat: 180 C dry-ish pots
+- rank: 34
+  unit: huang2017_leu_ile_methylbutanal_constants
+  kind: benchmark_contrast
+  ledger_entries:
+  - huang2017_tab1_tab2_leu_ile_methylbutanal_constants
+  dossier: huang2017_extraction.md
+  paper: Huang, Tippmann & Becker 2017 J Food Process Eng e12375
+  lab: tum_weihenstephan_becker
+  lab_string: TU Munich Weihenstephan (Becker)
+  primary_consumer: E3
+  consumers:
+  - id: E3
+    title: no Strecker-aldehyde lane
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 5.4
+    independence: 1.0
+  existing_test_contrasts:
+  - F16#14@huang2017
+  cost:
+    rows_est: 20
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.6
+  arms_quality: 0.8
+  value: 7.2
+  caveat: absolute concentrations not printed; fitted constants, not raw data (figures not digitised)
+- rank: 35
+  unit: mizutani1960_h2s_nh3_cys_thiazolidines
+  kind: benchmark_contrast
+  ledger_entries:
+  - mizutani1960_table1_h2s_from_cys_thiazolidines
+  - mizutani1960_table2_nh3_from_cys_thiazolidines
+  dossier: mizutani1960_extraction.md
+  paper: Mizutani, Obata & Ishikawa 1960 Bull Agric Chem Soc Japan 24:382
+  lab: hokkaido_obata_mizutani
+  lab_string: Hokkaido Univ. (Mizutani / Obata)
+  primary_consumer: E10
+  consumers:
+  - id: E19
+    title: cysteine-Strecker H2S off
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 2.4
+    independence: 1.0
+  - id: E10
+    title: TTCA formation off, release too fast and pH-flat
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 9.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F22#5@mizutani1960
+  - F04#26@mizutani1960
+  cost:
+    rows_est: 24
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 1.04
+  arms_quality: 0.8
+  value: 6.92
+  caveat: same Hokkaido design as Obata 1960; Hokkaido named by B59a and thiol preregs (report with and without)
+- rank: 36
+  unit: modi2008_cys_thiamine_ribose_ph
+  kind: benchmark_contrast
+  ledger_entries:
+  - modi2008_tab4_aqueous_cys_thiamine_ribose_ph
+  dossier: modi2008_extraction.md
+  paper: Modi, Linforth & Taylor 2008 Am J Food Technol 3:68
+  lab: unmapped:cftri_mysore_nottingham_taylor
+  lab_string: CFTRI Mysore / Nottingham (Taylor)
+  primary_consumer: E18
+  consumers:
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 3.0
+    independence: 1.5
+  existing_test_contrasts: []
+  cost:
+    rows_est: 16
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.56
+  arms_quality: 0.8
+  value: 6.43
+  caveat: raw peak areas (ratios across pH only); methods pH 4.5 vs table 5.0
+- rank: 37
+  unit: ehrenberg1989_cysteine_autoxidation
+  kind: benchmark_contrast
+  ledger_entries:
+  - ehrenberg1989_table1_cys_h2o2_k2
+  - ehrenberg1989_tables3_4_cu_autoxidation
+  dossier: ehrenberg1989_extraction.md
+  paper: Ehrenberg, Harms-Ringdahl, Fedorcsak & Granath 1989 Acta Chem Scand 43:177
+  lab: stockholm_tornqvist_ehrenberg
+  lab_string: Stockholm Univ. (Ehrenberg)
+  primary_consumer: E12
+  consumers:
+  - id: E12
+    title: 'thiol losses: disulfide terminal, one decay, fixed O2'
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F28#8@ehrenberg1989
+  cost:
+    rows_est: 10
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.9
+  arms_quality: 0.8
+  value: 6.4
+  caveat: 25-37 C; Stockholm is DEV for E9 only
+- rank: 38
+  unit: zhang1989_decadienal_cys_gsh
+  kind: benchmark_contrast
+  ledger_entries:
+  - zhang1989_table1_decadienal_cys_gsh_volatiles
+  - zhang1989_tab1_tab3_decadienal_cys_gsh_lipid_products
+  dossier: zhang1989_extraction.md
+  paper: Zhang & Ho 1989 J Agric Food Chem 37:1016
+  lab: ho_network
+  lab_string: Rutgers (Ho)
+  primary_consumer: E20
+  consumers:
+  - id: E20
+    title: no lipid Strecker; no dienal + NH3 -> pentylpyridine
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F21#9@zhang1989
+  cost:
+    rows_est: 5
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.45
+  arms_quality: 0.8
+  value: 5.33
+  caveat: decadienal largely undissolved
+- rank: 39
+  unit: potman1989_phosphate_dose_and_ph
+  kind: benchmark_contrast
+  ledger_entries:
+  - potman1989_fig4_5_phosphate_dose_series
+  - potman1989_figs2_3_ph_phosphate_initial_rates
+  dossier: potman1989_extraction.md
+  paper: Potman & van Wijk 1989 ACS Symp Ser 409:182 (Thermal Generation of Aromas)
+  lab: unilever_vlaardingen
+  lab_string: Unilever Vlaardingen (Potman)
+  primary_consumer: E5
+  consumers:
+  - id: E5
+    title: no buffer-species catalysis
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 12.6
+    independence: 1.0
+  existing_test_contrasts:
+  - F02#1@potman1989
+  cost:
+    rows_est: 26
+    medium:
+    - figure
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-digitise the figure independently
+    hours_est: 2.38
+  arms_quality: 1.0
+  value: 5.29
+  caveat: 30-40 % dry matter; figures digitised in the dossier (second reader re-digitises)
+- rank: 40
+  unit: frankel1993_lipid_volatile_ea_by_oil
+  kind: open_conflict
+  ledger_entries:
+  - frankel1993_tab2_total_volatile_ea
+  dossier: frankel1993_extraction.md
+  paper: Frankel 1993 J Am Oil Chem Soc 70:767
+  lab: new_frankel_usda_ucdavis
+  lab_string: UC Davis (Frankel)
+  primary_consumer: CF-030
+  consumers:
+  - id: CF-030
+    title: activation energy of hexanal / lipid-oxidation volatile formation
+    partition_v2: n/a (conflict)
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 7
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.47
+  arms_quality: 0.8
+  value: 5.11
+  caveat: Ea by temperature window and fatty-acid class; serves the lipid lane's Ea conflict, no E error
+- rank: 41
+  unit: balagiannis2009_liver_extract_methylbutanals
+  kind: benchmark_contrast
+  ledger_entries:
+  - balagiannis2009_liver_extract_glucose_methylbutanals
+  dossier: balagiannis2009_extraction.md
+  paper: Balagiannis, Parker, Pyle, Desforges, Wedzicha & Mottram 2009 J Agric Food Chem 57:9916
+  lab: reading_mottram_parker
+  lab_string: Reading (Mottram / Parker / Elmore)
+  primary_consumer: E3
+  consumers:
+  - id: E3
+    title: no Strecker-aldehyde lane
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 5.4
+    independence: 1.0
+  existing_test_contrasts:
+  - F16#15@balagiannis2009
+  cost:
+    rows_est: 24
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.64
+  arms_quality: 0.6
+  value: 5.06
+  caveat: liver extract matrix; multiresponse constants, not raw data
+- rank: 42
+  unit: elmore1997_aldehyde_nh4s_heterocycles
+  kind: benchmark_contrast
+  ledger_entries:
+  - elmore1997_table1_hydroxyketone_nh4s_aldehyde_thiazolines
+  - elmore1997_table2_dione_nh4s_aldehyde_thiazolines
+  - elmore1997_tab1_alkanal_hydroxyketone_nh4s_thiazolines
+  - elmore1997_tab2_alkanal_dione_nh4s_thiazoles
+  dossier: elmore1997_extraction.md
+  paper: Elmore & Mottram 1997 J Agric Food Chem 45:3595
+  lab: reading_mottram_parker
+  lab_string: Reading (Mottram)
+  primary_consumer: E14
+  consumers:
+  - id: E14
+    title: aminoketone condensation instant; no pyrrole sink / extra MPZ route
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  - id: E20
+    title: no lipid Strecker; no dienal + NH3 -> pentylpyridine
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F21#10@elmore1997
+  cost:
+    rows_est: 8
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.88
+  arms_quality: 0.6
+  value: 4.91
+  caveat: '% of chromatogram area; two tables each ledgered twice'
+- rank: 43
+  unit: hwang1995b_glucose_15n_glycine_nine_pots
+  kind: benchmark_contrast
+  ledger_entries:
+  - hwang1995b_tab1_n_heterocycles_nine_pots
+  dossier: hwang1995b_extraction.md
+  paper: Hwang, Hartman & Ho 1995 J Agric Food Chem 43:2917
+  lab: ho_network
+  lab_string: Rutgers (Ho)
+  primary_consumer: E20
+  consumers:
+  - id: E20
+    title: no lipid Strecker; no dienal + NH3 -> pentylpyridine
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F21#4@hwang1995b
+  cost:
+    rows_est: 10
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.5
+  arms_quality: 0.8
+  value: 4.8
+  caveat: class subtotals; 15N partition only in figures
+- rank: 44
+  unit: farmer1990_cys_ribose_four_lipids
+  kind: benchmark_contrast
+  ledger_entries:
+  - farmer1990_tab2_lipid_effect_on_sulfur_maillard_products
+  dossier: farmer1990_extraction.md
+  paper: Farmer & Mottram 1990 J Sci Food Agric 53:505
+  lab: reading_mottram_parker
+  lab_string: AFRC Institute of Food Research Bristol (Mottram)
+  primary_consumer: E18
+  consumers:
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F26#22@farmer1990
+  cost:
+    rows_est: 12
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.52
+  arms_quality: 0.8
+  value: 4.62
+  caveat: Reading is DEV for E7; serves the 3-mercapto-2-pentanone rows (E18) only
+- rank: 45
+  unit: li2022_cysteine_h2s_temperature
+  kind: benchmark_contrast
+  ledger_entries:
+  - li2022_table1_h2s_gcfpd_cys_whey
+  dossier: li2022_extraction.md
+  paper: Li, Paulsen, Akillioglu, Nielsen, Engholm-Keller & Lund 2022 Food Chem Mol Sci 5:100120
+  lab: copenhagen_lund
+  lab_string: Copenhagen (Lund) / Arla Foods Ingredients
+  primary_consumer: E19
+  consumers:
+  - id: E19
+    title: cysteine-Strecker H2S off
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 2.4
+    independence: 1.0
+  existing_test_contrasts:
+  - F22#7@li2022
+  cost:
+    rows_est: 3
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.43
+  arms_quality: 0.8
+  value: 4.47
+  caveat: headspace sampled cold; external Na2S standards
+- rank: 46
+  unit: obata1960_h2s_cys_cystine_mercaptals
+  kind: benchmark_contrast
+  ledger_entries:
+  - obata1960_table1_h2s_from_cys_cystine_mercaptals
+  dossier: obata1960_extraction.md
+  paper: Obata & Mizutani 1960 Bull Agric Chem Soc Japan 24:562 (Part IV)
+  lab: hokkaido_obata_mizutani
+  lab_string: Hokkaido Univ. (Mizutani / Obata)
+  primary_consumer: E19
+  consumers:
+  - id: E19
+    title: cysteine-Strecker H2S off
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 2.4
+    independence: 1.0
+  existing_test_contrasts:
+  - F22#6@obata1960
+  cost:
+    rows_est: 6
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.46
+  arms_quality: 0.8
+  value: 4.17
+  caveat: open gas-swept flask (liquid <= ~100 C); single determinations
+- rank: 47
+  unit: thomas2014_model_ham_thiamine_cysteine
+  kind: benchmark_contrast
+  ledger_entries:
+  - thomas2014_figs2_4_model_ham_thiamine_cysteine
+  dossier: thomas2014_extraction.md
+  paper: Thomas, Mercier, Tournayre, Martin & Berdague 2014 Food Chem 155:207
+  lab: inra_clermont_berdague
+  lab_string: INRA QuaPA (Berdague)
+  primary_consumer: E18
+  consumers:
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F27#18@thomas2014
+  cost:
+    rows_est: 4
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.44
+  arms_quality: 0.6
+  value: 4.09
+  caveat: model cooked ham at 69 C; INRA Clermont named by the cultivated-tissue prereg
+- rank: 48
+  unit: whitfield1988_lecithin_pentylpyridine
+  kind: benchmark_contrast
+  ledger_entries:
+  - whitfield1988_tab1_lecithin_effect_on_maillard_products
+  - whitfield1988_tab1_aa_ribose_lecithin
+  - whitfield1988_tab1_lipid_maillard_products_and_alkylfurans
+  dossier: whitfield1988_extraction.md
+  paper: Whitfield, Mottram, Brock, Puckey & Salter 1988 J Sci Food Agric 42:261
+  lab: reading_mottram_parker
+  lab_string: AFRC Institute of Food Research Bristol (Mottram) / CSIRO (Whitfield)
+  primary_consumer: E20
+  consumers:
+  - id: E20
+    title: no lipid Strecker; no dienal + NH3 -> pentylpyridine
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F30#4@whitfield1988
+  cost:
+    rows_est: 20
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.6
+  arms_quality: 0.8
+  value: 4.0
+  caveat: one table in three ledger entries; ng trapped by purge (lower bounds); DEV for E7 (Reading)
+- rank: 49
+  unit: esterbauer1975_gsh_enal_capture_constants
+  kind: open_mechanism_band
+  ledger_entries:
+  - esterbauer1975_tab2_tab3_gsh_conjugated_carbonyl_forward_reverse_k_dissociation
+  - esterbauer1975_fig1_gsh_crotonaldehyde_ph_rate_profile
+  - esterbauer1975_tab4_buffer_and_thiol_identity_crotonaldehyde
+  dossier: esterbauer1975_extraction.md
+  paper: Esterbauer, Zollner & Scholz 1975 Z Naturforsch 30c:466
+  lab: graz_esterbauer
+  lab_string: Graz (Esterbauer)
+  primary_consumer: E7
+  consumers:
+  - id: E7
+    title: lipid lane inert to Maillard odorants
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 6.3
+    independence: 1.5
+  existing_test_contrasts: []
+  cost:
+    rows_est: 31
+    medium:
+    - figure
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-digitise the figure independently
+    hours_est: 2.43
+  arms_quality: 1.0
+  value: 3.89
+  caveat: a band source for E7's lipid-carbonyl + thiol capture (forward, reverse, K, pH law), 20 C; NOT a TEST row (bands must come
+    from data other than the scored tests)
+- rank: 50
+  unit: martin2001_potato_strecker_competition
+  kind: benchmark_contrast
+  ledger_entries:
+  - martin2001_fried_potato_strecker_pyrazines
+  - martin2001_tab3_potato_chip_methional
+  dossier: martin2001_extraction.md
+  paper: Martin & Ames 2001 J Agric Food Chem 49:3885
+  lab: reading_mottram_parker
+  lab_string: Reading (Ames)
+  primary_consumer: E3
+  consumers:
+  - id: E3
+    title: no Strecker-aldehyde lane
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 5.4
+    independence: 1.0
+  existing_test_contrasts:
+  - F16#16@martin2001
+  cost:
+    rows_est: 16
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.96
+  arms_quality: 0.6
+  value: 3.38
+  caveat: fried potato matrix; peak-area ratios; admitted by the atlas as a TEST contrast, simulability is the scorer's call
+- rank: 51
+  unit: kocadagli2021_potato_dough_acrylamide
+  kind: benchmark_contrast
+  ledger_entries:
+  - kocadagli2021_fig4_acrylamide_potato_dough
+  dossier: kocadagli2021_extraction.md
+  paper: Kocadagli, Methven, Kant & Parker 2021 Food Chem 339:128024
+  lab: reading_mottram_parker
+  lab_string: Reading (Mottram / Parker / Elmore)
+  primary_consumer: E9
+  consumers:
+  - id: E9
+    title: 'acrylamide: glucose-only, phosphate law, irreversible adducts'
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F29#23@kocadagli2021
+  cost:
+    rows_est: 16
+    medium:
+    - supplement
+    status:
+    - text_only
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 1.32
+  arms_quality: 0.6
+  value: 3.27
+  caveat: Fig. 4 bars undigitised; precursor data in an SI not on disk
+- rank: 52
+  unit: gokmen2012_glucose_vs_hmf_carbonyl
+  kind: benchmark_contrast
+  ledger_entries:
+  - gokmen2012_fig2a_acrylamide_asn_glc_hmf_180c
+  - gokmen2012_fig2b_fig3_acrylamide_temperature_ea
+  dossier: gokmen2012_extraction.md
+  paper: Gokmen, Kocadagli, Goncuoglu & Atac Mogol 2012 Food Chem 132:168
+  lab: hacettepe_gokmen
+  lab_string: Hacettepe (Gokmen)
+  primary_consumer: E9
+  consumers:
+  - id: E9
+    title: 'acrylamide: glucose-only, phosphate law, irreversible adducts'
+    partition_v2: TEST
+    new_test_lab: true
+    importance: 7.2
+    independence: 1.5
+  - id: CF-039
+    title: activation energy of acrylamide formation
+    partition_v2: n/a (conflict)
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 10
+    medium:
+    - figure
+    status:
+    - figure_only
+    - text_only
+    two_readers: true
+    second_reader_task: re-digitise the figure independently
+    hours_est: 2.68
+  arms_quality: 0.8
+  value: 3.22
+  caveat: 'figures only (60-min slice + Arrhenius lines); Hacettepe is named by other preregs (B12, B13, B20, B21, env B34): report
+    with and without'
+- rank: 53
+  unit: shu1985_cysteine_thermolysis_ph
+  kind: benchmark_contrast
+  ledger_entries:
+  - shu1985_table1_cysteine_thermolysis_ph
+  dossier: shu1985_extraction.md
+  paper: Shu, Hagedorn, Mookherjee & Ho 1985 J Agric Food Chem 33:442
+  lab: ho_network
+  lab_string: Rutgers (Ho) / IFF
+  primary_consumer: E19
+  consumers:
+  - id: E19
+    title: cysteine-Strecker H2S off
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 2.4
+    independence: 1.0
+  existing_test_contrasts:
+  - F22#12@shu1985
+  cost:
+    rows_est: 24
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.64
+  arms_quality: 0.8
+  value: 3.0
+  caveat: GC area %; total extract mass in text
+- rank: 54
+  unit: mandin1999_met_glucose_linoleic_starch
+  kind: benchmark_contrast
+  ledger_entries:
+  - mandin1999_tab2_linoleic_acid_effect_on_methional_polysulfides
+  - mandin1999_table2_met_glucose_potato_model
+  - mandin1999_tab2_linoleic_acid_volatiles_nine_pots
+  dossier: mandin1999_extraction.md
+  paper: Mandin, Duckham & Ames 1999 J Agric Food Chem 47:2355
+  lab: reading_mottram_parker
+  lab_string: University of Reading (Ames)
+  primary_consumer: E3
+  consumers:
+  - id: E20
+    title: no lipid Strecker; no dienal + NH3 -> pentylpyridine
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  - id: E3
+    title: no Strecker-aldehyde lane
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 5.4
+    independence: 1.0
+  existing_test_contrasts:
+  - F18#16@mandin1999
+  - F16#17@mandin1999
+  cost:
+    rows_est: 98
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 1.78
+  arms_quality: 0.8
+  value: 2.43
+  caveat: ug recovered per 400 mL vs one IS; lipid raises methional (opposite to the cysteine-lane quench)
+- rank: 55
+  unit: low2006_potato_glycine_citric
+  kind: benchmark_contrast
+  ledger_entries:
+  - low2006_tab2_acrylamide_glycine_citric_potato
+  - low2006_tab4_alkylpyrazines_glycine_citric_potato
+  dossier: low2006_extraction.md
+  paper: Low, Koutsidis, Parker, Elmore, Dodson & Mottram 2006 J Agric Food Chem 54:5976
+  lab: reading_mottram_parker
+  lab_string: Reading (Mottram / Parker / Elmore)
+  primary_consumer: E9
+  consumers:
+  - id: E9
+    title: 'acrylamide: glucose-only, phosphate law, irreversible adducts'
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  - id: E13
+    title: CF-077 methylpyrazine cross-pair factor
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F29#22@low2006
+  - F19#1@low2007 / F20#2-3@low2007 (denominators)
+  cost:
+    rows_est: 108
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 1.88
+  arms_quality: 0.6
+  value: 2.3
+  caveat: potato matrix; the derived MPZ / DMP ratio entry is not keyed separately
+- rank: 56
+  unit: tazi2009_almond_paste_ea_by_aw
+  kind: open_conflict
+  ledger_entries:
+  - tazi2009_results_text_activation_energies
+  - tazi2009_tab2_acceleration_factors
+  dossier: tazi2009_extraction.md
+  paper: Tazi, Plantevin, Di Falco, Puigserver & Ajandouz 2009 Food Chem 115:958
+  lab: new_aix_marseille
+  lab_string: Aix-Marseille (Ajandouz)
+  primary_consumer: CF-030
+  consumers:
+  - id: CF-030
+    title: activation energy of hexanal / lipid-oxidation volatile formation
+    partition_v2: n/a (conflict)
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 12
+    medium:
+    - table
+    - text
+    status:
+    - digitised_in_dossier
+    - text_only
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.82
+  arms_quality: 0.6
+  value: 2.2
+  caveat: almond paste matrix; chemiluminescence / TBARS
+- rank: 57
+  unit: meynier2002_air_matrix_partition
+  kind: open_conflict
+  ledger_entries:
+  - meynier2002_tab4_dh_affinity_four_media
+  - meynier2002_tab3_air_matrix_k_30c_fat_cream
+  dossier: meynier2002_extraction.md
+  paper: Meynier, Garillon, Lethuaut & Genot 2003 Lait 83:223 (repo key Meynier2002)
+  lab: unmapped:inra_nantes_leima_genot
+  lab_string: INRA Nantes LEIMA (Genot)
+  primary_consumer: CF-043
+  consumers:
+  - id: CF-043
+    title: hexanal air-water K
+    partition_v2: n/a (conflict)
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts: []
+  cost:
+    rows_est: 35
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 1.15
+  arms_quality: 0.8
+  value: 2.09
+  caveat: the matrix layer carries no temperature dependence of partition (no engine reader yet)
+- rank: 58
+  unit: goncuoglu2026_extrudate_acrylamide
+  kind: benchmark_contrast
+  ledger_entries:
+  - goncuoglu2026_fig1_acrylamide_extrudates
+  dossier: goncuoglu2026_extraction.md
+  paper: Goncuoglu Tas, Balagiannis, Ghawi, Gokmen & Parker 2026 Food Chem X 36:104019
+  lab: reading_mottram_parker
+  lab_string: Reading (Mottram / Parker / Elmore)
+  primary_consumer: E9
+  consumers:
+  - id: E9
+    title: 'acrylamide: glucose-only, phosphate law, irreversible adducts'
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 7.2
+    independence: 1.0
+  existing_test_contrasts:
+  - F29#24@goncuoglu2026
+  cost:
+    rows_est: 16
+    medium:
+    - supplement
+    status:
+    - figure_only
+    two_readers: true
+    second_reader_task: re-digitise the figure independently
+    hours_est: 2.24
+  arms_quality: 0.6
+  value: 1.93
+  caveat: figure only (E1-E19 bars); extrusion matrix
+- rank: 59
+  unit: hartman1984b_thiamine_cystine_aw_series
+  kind: benchmark_contrast
+  ledger_entries:
+  - hartman1984b_figs5_6_thiamine_cystine_aw_series
+  dossier: hartman1984b_extraction.md
+  paper: Hartman, Scheide & Ho 1984 J Food Sci 49:607
+  lab: ho_network
+  lab_string: Rutgers (Ho)
+  primary_consumer: E18
+  consumers:
+  - id: E18
+    title: 3-mercapto-2-pentanone only from thiamine; thiamine pH
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 3.0
+    independence: 1.0
+  existing_test_contrasts:
+  - F27#20@hartman1984b
+  cost:
+    rows_est: 6
+    medium:
+    - figure
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-digitise the figure independently
+    hours_est: 0.98
+  arms_quality: 0.6
+  value: 1.84
+  caveat: 'water : propylene glycol series (a_w), figures read from rasters'
+- rank: 60
+  unit: zhang1991b_glc_cys_gsh_systems
+  kind: benchmark_contrast
+  ledger_entries:
+  - zhang1991b_table2_class_totals_six_systems
+  - zhang1991b_table1_glc_cys_gsh_volatiles
+  dossier: zhang1991b_extraction.md
+  paper: Zhang & Ho 1991b J Agric Food Chem 39:760
+  lab: ho_network
+  lab_string: Rutgers (Ho)
+  primary_consumer: E19
+  consumers:
+  - id: E19
+    title: cysteine-Strecker H2S off
+    partition_v2: TEST
+    new_test_lab: false
+    importance: 2.4
+    independence: 1.0
+  existing_test_contrasts:
+  - F22#14@zhang1991b
+  cost:
+    rows_est: 12
+    medium:
+    - table
+    status:
+    - digitised_in_dossier
+    two_readers: true
+    second_reader_task: re-read the printed numbers in the PDF
+    hours_est: 0.92
+  arms_quality: 0.6
+  value: 1.57
+  caveat: class totals; mg/mol without response factors
+below_cut:
+- rank: 61
+  unit: wang2026_lipid_free_temperature_ladder
+  primary_consumer: CF-033
+  value: 1.0
+  ledger_entries:
+  - wang2026_tables3_temperature_ladder_lipid_type_volatiles
