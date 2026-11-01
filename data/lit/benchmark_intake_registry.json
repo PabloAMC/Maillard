@@ -2452,7 +2452,7 @@
     },
     {
       "id": "frontiers_2022_hcw_aa_arrhenius_anchor",
-      "citation": "Feng et al. (2023)",
+      "citation": "Feng, Yang, Xie, Liu, Peng, Hu & Yu (2023), Frontiers in Nutrition 9:1022254",
       "doi": "10.3389/fnut.2022.1022254",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
@@ -2460,13 +2460,11 @@
       "payload_role": "benchmark_intake",
       "observable_panel_tags": [
         "arrhenius_anchor",
-        "ascorbic_support",
-        "dicarbonyl"
+        "ascorbic_support"
       ],
       "process_state_scope": [
         "heated_matrix",
-        "aqueous_pre_extrusion_model",
-        "extrusion_structured"
+        "aqueous_pre_extrusion_model"
       ],
       "supporting_families": [
         "12"
@@ -2479,12 +2477,15 @@
       "eligibility": "runtime_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "Primary Family 14 Arrhenius anchor for pH-sensitive ascorbic-acid degradation under extrusion-like thermal conditions",
-        "Explicit HCW calibration for AA-driven dicarbonyl release instead of treating AA as a static precursor burden"
+        "pH-sensitive pseudo-first-order loss of ascorbic acid alone in buffered water at 150-190 C (k Table 1; Ea 15.77 / 31.7 / 47.53 kJ/mol at pH 5.0 / 7.0 / 9.5 as printed)",
+        "Acid faster than alkaline: x1.8-2.3 at 150 C, only x1.1-1.2 at 190 C"
       ],
       "what_it_does_not_support": [
         "Direct AGE endpoint closure in a real SPI or PPI extrudate",
-        "A full oxygen-transition model without additional barrel-state evidence"
+        "A full oxygen-transition model without additional barrel-state evidence",
+        "Dicarbonyl, DHA or furfural release (none measured)",
+        "Transfer to low-moisture extrusion (dilute aqueous buffer only)",
+        "Carrying the Ea as a constant (heat-up and supra-initial ASA artefacts; feng2022b dossier sec. 1)"
       ],
       "key_values": {
         "ea_kj_per_mol_by_ph": {
@@ -2509,7 +2510,32 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_check": {
+        "date": "2026-11-01",
+        "old": {
+          "citation": "Feng et al. (2023)",
+          "observable_panel_tags": [
+            "arrhenius_anchor",
+            "ascorbic_support",
+            "dicarbonyl"
+          ],
+          "process_state_scope": [
+            "heated_matrix",
+            "aqueous_pre_extrusion_model",
+            "extrusion_structured"
+          ],
+          "what_it_supports": [
+            "Primary Family 14 Arrhenius anchor for pH-sensitive ascorbic-acid degradation under extrusion-like thermal conditions",
+            "Explicit HCW calibration for AA-driven dicarbonyl release instead of treating AA as a static precursor burden"
+          ],
+          "what_it_does_not_support": [
+            "Direct AGE endpoint closure in a real SPI or PPI extrudate",
+            "A full oxygen-transition model without additional barrel-state evidence"
+          ]
+        },
+        "basis": "Checked field by field against the paper (data/articles/feng2022b.pdf), data/lit/extraction_dossiers/feng2022b_extraction.md sec. 6."
+      }
     },
     {
       "id": "scielo_brasil_aa_crosslink_hierarchy_anchor",

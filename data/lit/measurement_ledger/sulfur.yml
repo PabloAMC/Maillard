@@ -9274,3 +9274,60 @@ entries:
     condition_quote: "Equimolar L-cysteine (0.4 mol) and D-xylose (0.4 mol) were completely dissolved into 10 mL deionized water, subsequently, the pH was adjusted to 7.2 using 4 M sodium hydroxide"
     flags: [si_read_2026-11-01, condition_uncertain, no_sd_printed, near_lod, identity_by_library, internal_inconsistency]
     note: "Oil-free aqueous Xyl / Cys endpoint (MFT 0.14, FFT 4.63, MFT disulfide 2.81, furfural 6.17 ng/mL), in the engine's domain once the charge is confirmed with the authors (printed charge impossible, dossier flag 1); MFT disulfide / MFT = 20 is a thiol-oxidation signature worth testing. Not simulable until the charge is resolved. arms: none (the control of zhang2022_tabS1_S5_water_phase_thiols_oil_vs_no_oil)."
+  # ---- ruan2025 ----
+  - id: ruan2025_tab1_sulfur_heterocycles_fatty_acid_arms
+    dossier: ruan2025_extraction.md
+    paper: "Ruan, Hu, Su, Li, Yin, Han, Liu & Cai 2025 Food Res Int 221:117512"
+    lab: "Henan Univ. of Technology (Yin W-t)"
+    system: "sesame-meal enzymatic hydrolysate 150 g/L (Cys ~0.4 mg/mL, Met ~1.6 mg/mL free, coarse figure reads) alone or + 2.0 g of one of six free fatty acids per 10 mL"
+    medium: "0.2 M sodium phosphate pH 6.5, sealed 50 mL bottle, oil bath; aqueous phase only; SAFE + full-scan GC-MS, 4-nonanol IS"
+    temperature_c: [160]
+    ph: {initial: [6.5], measured_during: false, final: 5.93}
+    time_min: [40]
+    species: [thiazole, 2-methylthiazole, 2-acetylthiazole, dihydro-3(2H)-thiophenone, 2-thiophenemethanol]
+    kind: endpoint
+    location: "Table 1 p. 9 (read as image; dossier sec. 4.4 'Sulfur heterocycles')"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "Quantitative analysis ... was performed using the internal standard method"
+    flags: [single_is_no_response_factor, oil_phase_partition_confound, matrix_precursor_composition, concentrations_not_stated, coarse_read]
+    note: "No thiols (MFT, FFT, methanethiol) reported: nothing for CF-031. S-heterocycles 0.01-0.09 mg/kg each, near the 0.01 resolution; thiazole 0.03 -> 0.06 with unsaturated FA. 2-methylthiazole and dihydrothiophenone RIs inconsistent with HP-5MS (identity flag). Cys/Met concentrations only as coarse Fig. 1B reads in mg/mL."
+  # ---- feng2023 ----
+  - id: feng2023_table1_asa_cys_hcw_sulfur_volatiles_ph_temperature
+    dossier: feng2023_extraction.md
+    paper: "Feng, Yang, Xie, Yan, Ma, Hu & Yu 2024 J Sci Food Agric 104:5764 (file stem feng2023)"
+    lab: "Hubei Minzu Univ. (Yang Y / Yu AN)"
+    system: "L-ascorbic acid + L-cysteine 2.45 mmol each (~70 mM, 1:1 inferred) in 35 mL water"
+    medium: "unbuffered double-distilled water, initial pH set with NaOH; N2-purged sealed 316L autoclave with quartz liner, aluminium-block heating, saturated vapour pressure, cold-water quench"
+    temperature_c: [170, 210]
+    ph: {initial: [4.5, 6.0, 7.0, 8.0, 9.5], measured_during: false, final: null}
+    time_min: [30]
+    species: ['thiophenes (16, incl. 5-methyl-2-acetylthiophene, 2- and 3-acetylthiophene, thieno[2,3-b]thiophene, 3-(vinylthio)thiophene)', '3,5-dimethyl-1,2,4-trithiolane', '1,2,5,6-tetrathiocane', '1,2,3-trithiolane', '1,2,5-trithiepane', '4,6-dimethyl-1,2,3-trithiane', '4-methyl-3,5-dithiaheptane', 2-acetylthiazole, '2,4-dimethyl-4,5-dihydrothiazole', aromatic thiols / thioethers]
+    kind: endpoint
+    location: "Table 1 (pp. 5766-5770, rotated; Fig. 1B/C re-plots; Fig. 2 class totals)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "The solution, containing 2.45 mmol ASA and Cys, was dissolved in 35 mL double-distilled water"
+    flags: [unbuffered, ph_start_only, internal_inconsistency, concentration_basis_inferred, condition_uncertain]
+    note: "ug/L vs one IS (3-chloro-2,5-dimethylpyrazine), RF/IS amount/SPME conditions not printed; >=3 repeats, RSD 1.4-6.5 % (printed as fractions). No ASA species in the engine (not simulable); 170-210 C above every sulfur fit. No H2S, Cys, ASA or final pH measured; no time series. Polysulfides fall x2.8 (170 C) / x2.0 (210 C) from pH 4.5 to 9.5; thiophenes flat. Text contradicts Table 1 on pH optima (Nos. 10, 22, 24; pyrazine No. 3); Fig. 2 'total' != sum of its class bars. Autoclave volume not printed (BE100 model). Same lab family and pot as yu2010 (phosphate, 141 C): trithiolane direction agrees, trithiane disagrees. File named 2023, published 2024."
+  # ---- desousafontes2024 ----
+  - id: desousafontes2024_tab2_sulfur_thiazoles_ph4_ph6_goat_hydrolysate
+    dossier: desousafontes2024_extraction.md
+    paper: "de Sousa Fontes, Galvao, de Carvalho, Guedes, Lima, Bezerra & Madruga 2024 Food Chem 445:138398"
+    lab: "UFPB Joao Pessoa (Madruga)"
+    system: "goat viscera (liver/heart/lung) Alcalase hydrolysate 20 mL + cysteine 0.1 g + xylose 1.0 g + thiamine 0.5 g, to 50 mL (Cys ~16.5, Xyl ~133, thiamine ~30 mM)"
+    medium: "unbuffered hydrolysate (~0.5 % w/w organ lipid), pH set to 4.0 / 6.0 with 1 M HCl; 100 mL screw-cap flask, autoclave"
+    temperature_c: [121]
+    ph: {initial: [4.0, 6.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [MFT, FFT, bis(2-methyl-3-furyl) disulfide, 2-furfuryl 2-methyl-3-furyl disulfide, 2-furfuryl methyl disulfide, methyl disulfide, methional, 4-methyl-5-(2-hydroxyethyl)thiazole, 2-acetylthiazole, thiazole, 4-methylthiazole, 4-methyl-5-ethylthiazole, 5-ethenyl-4-methylthiazole, 3-methylthiophene, 2-formyl-3-methylthiophene, 3-thiophenecarboxaldehyde]
+    kind: endpoint
+    location: "Table 2 pp. 5 (thiols and sulfides, thiazoles, thiophenes; H, F4, F6 columns, ug/L, mean +- SD, n = 3; read from 170 dpi render; dossier sec. 3.1)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "The pH of the medium was adjusted to values of 4.0 (F4) and 6.0 (F6) using 1 M HCl"
+    flags: [matrix_food, ph_start_only, unbuffered, single_is_no_response_factor, internal_inconsistency, condition_uncertain, supplement_missing]
+    note: "Two-point initial-pH contrast with thiamine present: MFT, FFT, MFT-MFT only at pH 4 (nd at pH 6, no LOD); 2-furfuryl methyl disulfide only at pH 6 (FFT not absent, re-speciated); HET x7.2 at pH 6 (opposite of cerny2007 T2). 1,2-dichlorobenzene IS, RF 1, no authentic standards. Final pH measured but never printed. Thiamine salt form not stated. No thiamine/Cys/Xyl/lipid omission arm with numbers (M4/M6 'data not shown'). Bears weakly on CF-012."

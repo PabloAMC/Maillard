@@ -2111,16 +2111,17 @@
   "ascorbic_pathway_priors": [
     {
       "id": "frontiers_2022_hcw_aa_arrhenius_v1",
-      "source": "Frontiers in Nutrition 2022, DOI:10.3389/fnut.2022.1022254",
-      "provenance_tier": "direct_measurement",
-      "confidence_tier": "medium_high",
+      "source": "Feng, Yang, Xie, Liu, Peng, Hu & Yu (2023), Frontiers in Nutrition 9:1022254, DOI:10.3389/fnut.2022.1022254",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "low",
       "reference_conditions": {
         "matrix_context": "hot_compressed_water",
         "temperature_window_c": [
           150.0,
           190.0
         ],
-        "kinetic_order": "pseudo_first_order"
+        "kinetic_order": "pseudo_first_order",
+        "medium": "0.2 M phosphate, initial pH 5.0 / 7.0 / 9.5 (not measured after heating), sealed N2-purged autoclave"
       },
       "ea_kj_per_mol_by_ph": {
         "5.0": 15.77,
@@ -2128,8 +2129,8 @@
         "9.5": 47.53
       },
       "recommended_interpolation": "linear_between_pH_5_and_9_5",
-      "effect_direction": "acidic_high_temperature_conditions_accelerate_ascorbic_breakdown_and_dicarbonyl_release",
-      "notes": "Primary Family 14 Arrhenius anchor for extrusion-like AA degradation. Use to keep ascorbic-acid dicarbonyl release explicitly pH-sensitive instead of treating AA as a fixed generic precursor source.",
+      "effect_direction": "acid_speeds_ascorbic_acid_loss_x1.8_to_2.3_at_150_c_fading_to_x1.1_to_1.2_at_190_c",
+      "notes": "Authors' Arrhenius fit (150-190 C) of their pseudo-first-order k for ascorbic acid alone in buffered water; the three Ea are discrete (the linear interpolation is this repo's choice). Do not carry the Ea: at 150 C measured ASA rises above its initial value at 30 min, at 190 C the first 30 min look like heat-up, the decay decelerates inside the fit window, pH 7.0 / 9.5 Ea do not reproduce from Table 1 (29.5 / 42.2), and the same group reports ~109-124 kJ/mol at 125-155 C (yu2016). The 150 C rate constants are the most defensible numbers. No dicarbonyl, DHA or furfural was measured; the transfer to extrusion is ours.",
       "doi": "10.3389/fnut.2022.1022254",
       "doi_propagation": {
         "date": "2026-08-27",
@@ -2156,6 +2157,17 @@
         },
         "match_basis": "cp citation names no author ('Frontiers in Nutrition 2022, DOI:10.3389/fnut.2022.1022254'); DOI resolves to ['Feng', 'Yang', 'Xie'] 2023 'Frontiers in Nutrition'",
         "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
+      },
+      "citation_check": {
+        "date": "2026-11-01",
+        "old": {
+          "source": "Frontiers in Nutrition 2022, DOI:10.3389/fnut.2022.1022254",
+          "provenance_tier": "direct_measurement",
+          "confidence_tier": "medium_high",
+          "effect_direction": "acidic_high_temperature_conditions_accelerate_ascorbic_breakdown_and_dicarbonyl_release",
+          "notes": "Primary Family 14 Arrhenius anchor for extrusion-like AA degradation. Use to keep ascorbic-acid dicarbonyl release explicitly pH-sensitive instead of treating AA as a fixed generic precursor source."
+        },
+        "basis": "Checked field by field against the paper (data/articles/feng2022b.pdf), data/lit/extraction_dossiers/feng2022b_extraction.md sec. 6. The Ea values, DOI, temperature window and first-order form match the paper; the year (2023, not 2022), the tiers, the dicarbonyl and extrusion claims and the high-temperature reading of the pH effect did not. The twin record frontiers_2022_hcw_aa_arrhenius_anchor (Ea 82 kJ/mol at 160 C, confidence 'high') was deleted: the paper prints no 82 kJ/mol and has no 160 C run. No kinetic_core code or fit reads either record."
       }
     },
     {
@@ -2302,18 +2314,6 @@
       "decarboxylation_pct": 12.0,
       "total_mass_balance_accounted_pct": 75.0,
       "notes": "AA degradation mass balance: α-fragmentation 31%, β-cleavage 32%, decarboxylation 12%."
-    },
-    {
-      "id": "frontiers_2022_hcw_aa_arrhenius_anchor",
-      "source": "Frontiers (2022) HCW AA Arrhenius anchor",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "reference_conditions": {
-        "T_C": 160,
-        "matrix": "HCW"
-      },
-      "Ea_hcw_ascorbic_kj_mol": 82.0,
-      "notes": "Hot compressed water (HCW) AA degradation: Ea=82 kJ/mol."
     },
     {
       "id": "pmid_1904866_pentosidine_equivalence_anchor",
