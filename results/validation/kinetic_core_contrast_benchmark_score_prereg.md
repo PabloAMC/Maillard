@@ -1,109 +1,125 @@
-# Contrast benchmark, scoring step 1: the shipped engine on the held-out contrasts it can answer (prereg v1)
+# Contrast benchmark, scoring step 1: coverage of the held-out contrasts, and the shipped engine on the clean ones (prereg v2)
 
-*Plan step 2 ("the contrast benchmark, built on the split": `docs/guides/STATUS_AND_PLAN.md`, plan from 2026-11-01;
-handoff step 3). Written 2026-11-01, BEFORE any engine prediction on any row named here. Generator to be written:
-`scripts/generators/score_contrast_benchmark.py`; outputs `results/validation/kinetic_core_contrast_benchmark_score_v1.{json,md}`.*
+*Plan step 2 (`docs/guides/STATUS_AND_PLAN.md`, plan from 2026-11-01; handoff step 3). v1 written 2026-11-01 and kept
+as `kinetic_core_contrast_benchmark_score_prereg_v1_superseded.md`; v2 the same day after the independent review
+(`kinetic_core_contrast_benchmark_score_prereg_review.md`, verdict REVISE). Written BEFORE any engine prediction on any
+row named here. Generator: `scripts/generators/score_contrast_benchmark.py`; outputs
+`results/validation/kinetic_core_contrast_benchmark_score_v1.{json,md}`.*
 
-## 0. What the author had seen when writing this
+## 0. What the author had seen
 
 - The split files and their power tables (`docs/reference/contrast_benchmark/README.md` secs. 5, 8 - 11).
-- A coverage inventory (2026-11-01, read-only): every held-out row passed through `engine.declare_envelope`, which
-  decides answerability WITHOUT integrating. It gave rows answerable / refused and the refusal reasons, per table.
-  No engine number for any row was computed or read.
-- The measured values of the scored tables were seen while reading their headers: Meynier 1995's header states that
-  furfural, norfuraneol and furfuryl alcohol fall with pH in every table; Grosch 1992 and Xu 2007 values were not read.
-  This is a forking-path risk for the Meynier furan expectation in sec. 7, declared here.
+- A read-only coverage inventory: held-out rows passed through `engine.declare_envelope` (no integration), giving
+  answerable / refused rows and reasons per table. No engine number for a row was computed or read in this session.
+- Measured values: the headers of all three scored tables print measured values (Meynier: the furans fall with pH;
+  Grosch lines 4 - 6, 19 - 20; Xu lines 4 - 5), and atlas cells F27#15 / F27#16 print theirs. **The sec. 7
+  expectations are therefore not blind.**
+- **Repository exposure (review B1):** the engine has been checked against parts of these data before: Xu 2007 MFT /
+  FFT vs pH are directional claims XU07-PH-01 / 02 (`docs/validation/directional_claims_panel.yml:3154-3200`, status
+  "agree"); Meynier 1995's furfural pH fold is a hold-out claim scored since B2
+  (`kinetic_core_b2_1_holdout_report.md:36`); Meynier's pH drift is a named pH-model control. Those values were not
+  re-read for this document. Grosch 1992 Table 2 is ledger `digitised_in_dossier`, not an in-model row.
 
 ## 1. Questions
 
-- **Q1 (coverage).** Of the held-out contrasts, how many can the shipped engine answer at all, and why not the rest?
-  This is the headline: a contrast on a factor the engine does not take as an input is answered "no change" by
-  construction, which is the no-change null.
-- **Q2 (score).** On the held-out contrasts it can answer, does the shipped engine beat both nulls in log-ratio
-  error, and does it get the measured direction more often than chance?
+- **Q1 (coverage; the headline).** Of the held-out contrasts, how many can the shipped engine answer at all, and why
+  not the rest? A contrast on a factor the engine does not take as an input is answered "no change" by construction.
+- **Q2 (score; a small diagnostic).** On the CLEAN held-out pairs it can answer, does the engine get the measured
+  direction more often than chance, and is its log-ratio error lower than "no change"?
 
-## 2. Item set (frozen by this document)
+## 2. Item set (frozen here)
 
-**A. Coverage (Q1).** Every item below is classified by the generator, deterministically, from `declare_envelope`
-and the table / cell fields, into exactly one class:
-`answerable`, `factor_not_an_input` (the arms differ only in a factor the engine ignores: buffer species or
-concentration beyond pH, lipid, metals, O2, atmosphere, reheating), `species_absent`, `operator_missing` (label
-shares, rates, percent remaining, isotopomer %), `inputs_missing` (no printed charge, time or temperature),
-`refused_other` (the envelope's own reason, recorded verbatim).
-- the 65 contrasts in any v2 TEST(E) set (`split_v2_per_change.yml`), each read from its atlas cell;
-- every one-factor pot pair of the 15 keyed held-out tables (`data/lit/fit_rows/heldout_*.yml`).
-The classification of the atlas cells is done once by hand (they are free text), recorded in the generator as a
-reviewed table with one reason per cell, as `build_contrast_split.py` does for its factor tags.
+**A. Coverage (Q1).** Each item gets exactly one class, by this precedence (first that applies):
+1. `inputs_missing`: no printed charge, time or temperature;
+2. `operator_missing`: label share, rate, percent remaining, isotopomer %;
+3. `species_absent`: the observed species has no engine target;
+4. `precursor_unmapped`: a charged precursor has no engine name (e.g. TPP, GSH, LYS beside a pentose);
+5. `factor_not_an_input`: the arms differ only in a factor the engine ignores (buffer species / concentration beyond
+   pH, lipid, metals, O2 / atmosphere, reheating);
+6. `refused_other`: the envelope's own reason, verbatim;
+7. `answerable`.
 
-**B. Scored set (Q2).** The one-factor pot pairs, inside one `ledger_id`, of the three keyed tables with answerable
-rows:
+Items: the 65 contrasts in any v2 TEST(E) set, and every one-factor pot pair (sec. 2B's pair rule) of the 15 keyed
+held-out tables. The 65 atlas cells are classified BY HAND into a reviewed table inside the generator
+(`ATLAS_COVERAGE`, one reason per cell). That table is committed, with its sha256 printed in the artifact, before the
+generator's first scoring run; the score run asserts the hash.
 
-| table | lab | varied factor | species |
-|---|---|---|---|
-| `heldout_grosch1992_tab2` | DFA Garching (Grosch) | composition (thiamine vs TPP, +/- Cys, +/- ribose, +/- GSH) | MFT, FFT, MFTD |
-| `heldout_meynier1995_tab1_2_4` | Reading (Mottram) | pH 4.5 - 6.5 | FUR, NF |
-| `heldout_xu2007_tab1` | China Agricultural Univ. (Gao Y.) | pH 5.6 / 7.0 / 8.0 | MFT, FFT, MFTD, FUR, ACTZ |
+**B. Scored pairs (Q2).** Tables `heldout_grosch1992_tab2`, `heldout_meynier1995_tab1_2_4`, `heldout_xu2007_tab1`.
+- **Pair rule.** Two pots of one `ledger_id` that differ in exactly one factor, where a factor is one
+  `initial_mmol_L` key (present / absent or its amount) or `label_ph`. A swap (one key out, another in: Grosch no. 6 vs
+  no. 7, Cys for GSH) is not a pair. All such combinations, per species.
+- **Exposure tag (review B1).** `dev_exposed` = Meynier FUR (every amine), Xu MFT and Xu FFT. Everything else is
+  `clean`. **D1 and D2 are decided on clean pairs only**; exposed pairs are reported beside them as DEVELOPMENT.
+- **Detected pairs:** both rows finite and > 0. **Censored pairs (review S2, secondary):** one arm not detected; the
+  measured direction is known and |m| >= log10(value / LOD), with the table's per-pot LOD where printed; scored for
+  sign only.
+- **Engine zeros (review S4):** a pair where the engine returns 0 (or a refusal) for an arm stays in the item count
+  and is reported as `engine_zero` / `engine_refused`; it is never dropped silently.
+- **De-duplication:** F27#15 / F27#16@grosch1992 and F26#11@meynier1995 are the same data as the tables; counted once.
+- **Split status:** "keyed held-out (not in a frozen split)" (README secs. 10 - 11); none of the three papers is in v2's
+  `calibration_input_papers`. DFA Garching and Reading are DEVELOPMENT laboratories under the lab rule (v1); the score
+  is of the incumbent and tests no change, so this is reported, not used to exclude.
 
-- F27#15@grosch1992 is the same data as the Grosch table; it is counted once.
-- **Split status, stated with every number:** these rows are "keyed held-out (not in a frozen split)" (README
-  secs. 10 - 11). None of the three papers is in v2's `calibration_input_papers` (checked 2026-11-01; `meynier2004`
-  is, and is a different paper). The score is a score of the INCUMBENT; it tests no change, so rule (i)'s
-  per-change DEV / TEST does not apply, and the calibration-input exclusion does.
-- A pair enters only if both rows are answerable, both are finite and > 0 (a `not_detected` / `trace` cell is not a
-  row), and the two pots differ in exactly one factor of the table's design. Pairs are all such combinations, as in
-  `build_contrast_scores.py`.
+## 3. The engine (frozen)
 
-## 3. The engine
-
-- The shipped configuration (`Config` defaults at the generator's commit), through the front door
-  `engine.predict(FormulationSpec, targets)`, so every refusal is the shipped one. One call per pot.
-- Each pot's spec: the table's `initial_mmol_L`, `t_c`, `minutes`, `label_ph`; the buffer passed as the engine
-  takes it (sulfur lane: through pH only). A pot the envelope refuses is `refused_other` in A and leaves B.
-- Units cancel within a pair (both arms in the same table unit; the engine in ug/L).
+- The shipped `Config` at the generator's commit; its `Config.digest()` is recorded. One `engine.predict` call per pot.
+- **Name map (review B2), frozen in the generator as `PRECURSOR_MAP` / `TARGET_MAP`:** PENT -> ribose; THI ->
+  thiamine; Cys -> cysteine; Gly -> glycine; MET -> methionine; FUR -> furfural; NF -> norfuraneol; MFT, FFT, MFTD,
+  ACTZ -> the engine's own target names. TPP, GSH and LYS stay unmapped (class 4): a lysine + ribose pot would be a
+  lane conflict, and the generator does not choose a lane for it. Every mapping is checked against
+  `PRECURSOR_ALIASES` / `TARGET_ALIASES` at start; a missing name fails the run instead of being guessed.
+- **Methionine (review B2):** the sulfur lane records methionine but does not charge it (`engine.py:2549-2557`), so
+  Meynier Table 4 runs as ribose without an amine. Its pairs are reported in their own row and excluded from D1 / D2.
+- **Process:** `t_c`, `minutes`, `label_ph`; buffer `BufferSpec` pyrophosphate 0.2 M for every pot of the three
+  tables (all three print 0.2 M pyrophosphate); `vessel=None`; no `ph_final` (Xu prints one: reported, not used).
+- **Sensitivity (decides nothing):** the same pots with the pH clamped at `label_ph` (`BufferSpec(kind="clamped")`),
+  because the dynamic pH drifts Meynier's pots while the paper reports <= 0.2 unit.
 
 ## 4. Models
 
 - **engine:** p = log10(engine_a / engine_b).
 - **no_change:** p = 0.
-- **typical_yield:** p = log10(L_a / L_b), with L the pot's limiting precursor as `fit_thiol_lolo.limiting_precursor`
-  defines it, unchanged. It is 0 on every pH pair.
+- **Only one null is scored (review B3).** `typical_yield` reduces to log10(L_a / L_b) with L = min(charge), which is
+  the same in both arms of every scored pair, so it equals `no_change` here. It is reported as identical, not as a
+  second test. A null with a sign needs DEVELOPMENT contrasts of the same factor step; none is built in step 1.
 
 ## 5. Metrics
 
-Per pair, measured m = log10(a / b).
-- **E (log-ratio error):** median |p - m| over pairs, per model; and the share within x3.
-- **S (direction):** on resolved pairs (|m| > log10 1.4, the panel's MEASUREMENT_NOISE_FOLD), the share where
-  sign(p) = sign(m) and p != 0. The nulls have no sign on pH pairs, so S is read against chance 0.5.
-- **Unit of resampling: the ladder** = (ledger_id, species). Pairs within a ladder share rows, so the 90 % intervals
-  come from a ladder-cluster bootstrap (2,000 resamples, seed 20261101). A lab-cluster bootstrap is reported too; with
-  3 labs it is degenerate, and it is shown only to make that visible.
-- Every number is reported per table, per species and pooled, with the pair, ladder and lab counts beside it.
+- **S (direction):** on resolved detected pairs (|m| > log10 1.4) plus censored pairs, the share with sign(p) = sign(m)
+  and p != 0; chance 0.5.
+- **E (log-ratio):** median |p - m| over detected pairs, engine and no_change; share within x3.
+- **Ladder** = (ledger_id, species, varied factor). 90 % intervals by ladder-cluster bootstrap (2,000 resamples, seed
+  20261101). Reported: the pooled value, the median of per-ladder values, and each table separately with its
+  pair / ladder / lab counts. A lab-cluster bootstrap is shown to make its degeneracy (3 labs) visible.
+- **Power line (review S1), computed before scoring from the item counts only:** the probability that D2 passes when
+  the true per-ladder sign agreement is 0.8, under the ladder bootstrap, by simulation with the actual ladder sizes.
 
 ## 6. Decision rules (fixed)
 
-- **D1 (log-ratio):** the engine beats a null if its pooled median |p - m| is lower AND the 90 % ladder-bootstrap
-  interval of the paired difference (null error - engine error, per pair, median) excludes 0.
-- **D2 (direction):** the engine's S is above chance if the 90 % ladder-bootstrap interval of S lies above 0.5.
-- **D3 (scope):** 3 laboratories. Every verdict is PROVISIONAL. Nothing ships, no constant moves, no split changes
-  on this result. Q1's coverage table is not provisional: it is a property of the code.
-- A per-table result is reported but decides nothing.
+- **D1:** the engine beats no_change on E if, on clean detected pairs, its pooled median |p - m| is lower AND the 90 %
+  ladder-bootstrap interval of the per-pair difference (no_change error - engine error, median) excludes 0.
+- **D2:** S is above chance if, on clean pairs, the 90 % ladder-bootstrap interval of S lies above 0.5 AND at least
+  two of the three tables have S > 0.5 (so one table cannot carry the pool).
+- **D3:** if the power line is < 0.6, D1 / D2 are reported as UNDERPOWERED and decide nothing.
+- **D4:** whatever D1 - D3 say, the verdict is PROVISIONAL (3 laboratories). Nothing ships, no constant moves, no split
+  changes. Q1's coverage table is not provisional: it is a property of the code.
 
-## 7. Expectations (judgement, stated before the run)
+## 7. Expectations (judgement; not blind, sec. 0)
 
-- Q1: answerable share of the 65 v2 TEST contrasts <= 10 % (the inventory already showed this; it is not a
-  prediction, it is recorded so the reader knows it was known).
-- Meynier FUR / NF pH ladders: S >= 0.7, P ~0.6 (forking-path risk, sec. 0).
-- Xu 2007 pH ladders: S >= 0.7, P ~0.4 (MFT's pH direction is one of the few signature groups that pass beyond
-  chance on the joint fits; the shipped engine is not those fits).
-- Grosch composition: S >= 0.7, P ~0.5; the engine beats no_change on E, P ~0.45.
-- D1 against no_change, pooled: P ~0.4. D2: P ~0.45.
+- Q1: answerable share of the 65 v2 TEST contrasts <= 10 % (known from the inventory; recorded, not predicted).
+- Power line < 0.6 (UNDERPOWERED), P ~0.6: ~10 clean ladders.
+- Clean S > 0.5 in >= 2 tables, P ~0.45. D1 passes, P ~0.3.
+- Exposed pairs (Meynier FUR, Xu MFT / FFT) agree in sign, P ~0.75 (the panel has scored them before).
 
 ## 8. What this does not do
 
-No fit, no engine change, no split change, no edit of a table. It does not score DEVELOPMENT (the existing
-`contrast_scores.json` covers the panel's in-sample pairs). The keyed tables enter a frozen split only through a new,
-dated version (README sec. 3).
+No fit, no engine change, no split change, no table edit. It does not score DEVELOPMENT beyond the exposed pairs.
 
 ## 9. Revision log
 
 - v1, 2026-11-01: first version.
+- v2, 2026-11-01, after the review (all blocking and should-fix items):
+  B1 the exposure tag, D1 / D2 on clean pairs; B2 the frozen name map, the pyrophosphate BufferSpec, vessel and
+  ph_final, methionine excluded, the clamped-pH sensitivity; B3 one null, said plainly; S1 the power line and the
+  two-of-three-tables rule; S2 censored pairs for sign; S3 sec. 0 rewritten; S4 the pair rule, the swap exclusion, the
+  de-duplication, engine zeros kept; minor: the class precedence, the hashed hand table, per-ladder medians.
