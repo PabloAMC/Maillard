@@ -7,8 +7,8 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 * evidence roles (core): {'external_holdout': 26, 'predictive': 16}
 * predictive benchmarks passing their contract: hofmann1998_norfuraneol_cysteine_145C_20min_pH5; strict-ready: hofmann1998_norfuraneol_cysteine_145C_20min_pH5
 * **honest literature: 21/66 within band** (0.318), 33 benchmarks, median fold 7.871, geometric mean 14.181
-* **out-of-sample: 17/60 within band** (0.283), 27 benchmarks, median fold 8.884, geometric mean 16.721
-* **rows the sulfur fit read: 4/6 within band** (0.667), 6 benchmarks, median fold 1.897, geometric mean 2.731
+* **out-of-sample: 14/56 within band** (0.250), 25 benchmarks, median fold 11.802, geometric mean 19.205
+* **rows the sulfur fit read: 7/10 within band** (0.700), 8 benchmarks, median fold 2.036, geometric mean 2.595
 
 ## Per panel / role / lane
 
@@ -38,7 +38,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | hofmann1998_glucose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 0/2 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - | 0.27 |
 | hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 1/1 | 1.000 | 1.057 | 0.024 | 1.10 / 0.041 | pass-no-ranking | yes | 1 | 1.32 |
 | hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 1/1 | 1.000 | 1.958 | 0.292 | 1.10 / 0.041 | scale-gap | no | 1 | 1.32 |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 2/2 | 1.000 | 2.865 | 0.391 | 1.10 / 0.041 | scale-gap | no | - | 0.27 |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 2/2 | 1.000 | 2.865 | 0.391 | 1.10 / 0.041 | scale-gap | no | 2 | 0.27 |
 | pea_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive | 0/2 | 0.000 | - | - | 2.00 / 0.120 | refused | no | - | not_applicable |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | PRIMARY | predictive | 4/7 | 0.571 | 2.529 | 0.286 | 2.00 / 0.120 | coverage-gap | no | - | continuous |
 | resconi_2023_pbma_beef_identity_benchmark | trust_loop | SECONDARY | predictive | 1/1 | 1.000 | 15.397 | 1.187 | 1.50 / 0.100 | scale-gap | no | - | not_applicable |
@@ -60,7 +60,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 | maillard_path_holdout | REFERENCE | external_holdout | 0/2 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - | 0.27 |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 22.382 | 1.086 | 1.10 / 0.041 | scale-gap | no | - | 0.27 |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 4.91e+03 | 2.770 | 1.10 / 0.041 | scale-gap | no | - | 0.27 |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 3.611 | 0.371 | 1.10 / 0.041 | scale-gap | no | - | 0.27 |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 3.611 | 0.371 | 1.10 / 0.041 | scale-gap | no | 2 | 0.27 |
 | mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 233.983 | 1.273 | 1.50 / 0.100 | scale-gap | no | - | 1.98 |
 | mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 168.865 | 1.395 | 1.50 / 0.100 | scale-gap | no | - | 1.98 |
 | mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 99.563 | 1.364 | 1.50 / 0.100 | scale-gap | no | - | 1.98 |
@@ -82,8 +82,8 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | 2-Furfurylthiol (FFT) | ppb | 1.1e+04 | 1.7e+04 | 1.544 | yes | no | [2.43e+03, 1.19e+05] | yes | sulfur | yes |
 | hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 1.07e+03 | 1.057 | yes | yes | [153.577, 7.51e+03] | yes | sulfur | yes |
 | hofmann1998_norfuraneol_h2s_145C_20min_pH5 | 2-Methyl-3-furanthiol (MFT) | ppb | 4.22e+03 | 8.27e+03 | 1.958 | yes | no | [1.18e+03, 5.78e+04] | yes | sulfur | yes |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | 2-Furfurylthiol (FFT) | ppb | 121.000 | 346.617 | 2.865 | yes | no | [49.558, 2.42e+03] | yes | sulfur | no |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 93.633 | 2.115 | yes | no | [13.387, 654.885] | yes | sulfur | no |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | 2-Furfurylthiol (FFT) | ppb | 121.000 | 346.617 | 2.865 | yes | no | [49.558, 2.42e+03] | yes | sulfur | yes |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 93.633 | 2.115 | yes | no | [13.387, 654.885] | yes | sulfur | yes |
 | pea_isolate_uht_140C_Trikusuma2019 | hexanal | ppb | 782.000 | 353.858 | 2.210 | yes | no | [3.623, 3.46e+04] | yes | lipid | no |
 | pea_isolate_uht_140C_Trikusuma2019 | 2-pentylfuran | ppb | 163.000 | 64.442 | 2.529 | yes | no | [0.660, 6.29e+03] | yes | lipid | no |
 | pea_isolate_uht_140C_Trikusuma2019 | nonanal | ppb | 24.000 | 15.606 | 1.538 | yes | yes | [0.160, 1.52e+03] | yes | lipid | no |
@@ -123,8 +123,8 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 24.707 | 22.382 | no | no | [3.533, 172.806] | no | sulfur | no (shared: hofmann_ribose_pH3_MFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.170 | 70.756 | no | no | [0.024, 1.186] | no | sulfur | no (shared: hofmann_ribose_pH7_FFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | 2-Methyl-3-furanthiol (MFT) | ppb | 25.000 | 0.0051 | 4.91e+03 | no | no | [0.000729, 0.036] | no | sulfur | no (shared: hofmann_ribose_pH7_MFT) |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | 2-Furfurylthiol (FFT) | ppb | 96.000 | 346.617 | 3.611 | no | no | [49.558, 2.42e+03] | yes | sulfur | no |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 93.633 | 1.527 | yes | no | [13.387, 654.885] | yes | sulfur | no |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | 2-Furfurylthiol (FFT) | ppb | 96.000 | 346.617 | 3.611 | no | no | [49.558, 2.42e+03] | yes | sulfur | yes |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 93.633 | 1.527 | yes | no | [13.387, 654.885] | yes | sulfur | yes |
 | mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 10.334 | 1.502 | yes | no | [1.478, 72.281] | yes | sulfur | no |
 | mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | 2-Furfurylthiol (FFT) | ppb | 1.280 | 299.499 | 233.983 | no | no | [42.821, 2.09e+03] | no | sulfur | no |
 | mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 12.015 | 3.652 | no | no | [1.718, 84.036] | yes | sulfur | no |

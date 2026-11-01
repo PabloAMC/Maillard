@@ -5,7 +5,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 * benchmarks with an envelope: **33** of 42 on the panel; matched rows **66**; refused rows 27
 * mixed-population coverage: 36/66 (0.545)
 * **honest literature coverage: 36/65 (0.554)**, median CI width 1.869 log10; 1 not evaluable; 0 fitted rows excluded
-* out-of-sample literature coverage: 33/59 (1 not evaluable); rows the core fit read: {'hits': 3, 'total': 6, 'not_evaluable': 0}
+* out-of-sample literature coverage: 29/55 (1 not evaluable); rows the core fit read: {'hits': 7, 'total': 10, 'not_evaluable': 0}
 * B55 single-temperature Ea prior: on (31 rows); B56 structural discrepancy: off
 * sampled priors 97, fixed 45; lanes with NO sampled fit uncertainty: none
 * observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 25, extraction 41, undeclared 0
@@ -29,8 +29,8 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 1.1e+04 | 1.7e+04 | 9.261 | 7.07e+03 | 5.48e+04 | yes | 3.772 | no (extraction) | sulfur | predictive [in core fit] |
 | hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 1.07e+03 | 471.481 | 1.07e+03 | 1.87e+03 | yes | 0.598 | no (extraction) | sulfur | predictive [in core fit] |
 | hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 4.22e+03 | 8.27e+03 | 3.73e+03 | 7.07e+03 | 9.07e+03 | yes | 0.386 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 346.617 | 16.447 | 177.976 | 1.22e+03 | yes | 1.869 | no (extraction) | sulfur | predictive |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 93.633 | 37.127 | 95.921 | 219.557 | yes | 0.772 | no (extraction) | sulfur | predictive |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 346.617 | 16.447 | 177.976 | 1.22e+03 | yes | 1.869 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 93.633 | 37.127 | 95.921 | 219.557 | yes | 0.772 | no (extraction) | sulfur | predictive [in core fit] |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 353.858 | 67.930 | 363.927 | 2.25e+03 | yes | 1.521 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 12.355 | 69.268 | 414.631 | yes | 1.526 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.463 | 17.466 | 166.040 | yes | 1.829 | yes (headspace) | lipid | predictive |
@@ -70,8 +70,8 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 24.707 | 8.920 | 25.378 | 70.653 | no | 0.899 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_MFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.170 | 0.00319 | 0.075 | 0.328 | no | 2.012 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_FFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 25.000 | 0.0051 | 3.28e-05 | 0.00429 | 0.021 | no | 2.809 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_MFT) |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 346.617 | 16.447 | 177.976 | 1.22e+03 | yes | 1.869 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 93.633 | 37.127 | 95.921 | 219.557 | yes | 0.772 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 346.617 | 16.447 | 177.976 | 1.22e+03 | yes | 1.869 | no (extraction) | sulfur | external_holdout [in core fit] |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 93.633 | 37.127 | 95.921 | 219.557 | yes | 0.772 | no (extraction) | sulfur | external_holdout [in core fit] |
 | mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 10.334 | 0.194 | 3.569 | 83.929 | yes | 2.636 | no (extraction) | sulfur | external_holdout |
 | mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 299.499 | 0.271 | 12.621 | 422.813 | yes | 3.194 | no (extraction) | sulfur | external_holdout |
 | mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 12.015 | 0.596 | 5.519 | 76.404 | yes | 2.108 | no (extraction) | sulfur | external_holdout |
@@ -200,7 +200,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | b8.ph_drift.arp_secondary_ammonium_pKa | sulfur | fitted_ph_drift | normal | 7.068 | 0.599 | [5.000, 11.000] | yes | laplace_covariance_at_b8_optimum |
 | b13.k_da_sink.log10_k_100C | trunk | fitted_rate | uniform_band | - | - | [-12.000, -1.940] | yes | two_laboratories_disagree: flat across the disagreement |
 | b13.k_go_sink.ea_kj_mol | trunk | fitted_ea | uniform_band | 0.000 | - | [0.000, 150.800] | yes | two_laboratories_disagree: flat across the disagreement |
-| b13.k_odg_da.log10_k_100C | trunk | fitted_rate | uniform_band | -5.640 | - | [-4.630, -1.960] | yes | two_laboratories_disagree: flat across the disagreement |
+| b13.k_odg_da.log10_k_100C | trunk | fitted_rate | uniform_band | -5.640 | - | [-5.640, -2.972] | yes | two_laboratories_disagree: flat across the disagreement |
 | b13.k_hmf_self.log10_k_100C | trunk | fitted_rate | uniform_band | -6.047 | - | [-6.050, -0.960] | yes | two_laboratories_disagree: flat across the disagreement |
 | b13.k_glc_g.log10_k_100C | trunk | fitted_rate | fixed | -7.272 | - | - | no | NOT SAMPLED, and not by oversight. k_ddg_hmf (1.13x) and k_go_sink's RATE (1.87x) are cross-laboratory agreements inside |
 | b13.k_g_go.log10_k_100C | trunk | fitted_rate | fixed | -2.451 | - | - | no | NOT SAMPLED, and not by oversight. k_ddg_hmf (1.13x) and k_go_sink's RATE (1.87x) are cross-laboratory agreements inside |

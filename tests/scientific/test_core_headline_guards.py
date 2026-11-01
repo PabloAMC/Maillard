@@ -49,8 +49,28 @@ def tracked_scores():
 
 
 @pytest.fixture(scope="module")
-def live_scores():
-    return scoring.score_panel()
+def live_scores_and_warnings():
+    import warnings
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        scores = scoring.score_panel()
+    return scores, caught
+
+
+@pytest.fixture(scope="module")
+def live_scores(live_scores_and_warnings):
+    return live_scores_and_warnings[0]
+
+
+def test_every_scored_pot_has_a_converged_ph_trajectory(live_scores_and_warnings):
+    """2026-10-28 (independent review): B60 converged the pH fixed point, but its convergence flag was
+    written and never read. A scored pot whose trajectory did not converge is published on a wrong pH."""
+    from src.kinetic_core.sulfur import PhFixedPointNotConverged
+
+    _, caught = live_scores_and_warnings
+    bad = [str(w.message) for w in caught if issubclass(w.category, PhFixedPointNotConverged)]
+    assert not bad, bad[:5]
 
 
 # --------------------------------------------------------------------------------------

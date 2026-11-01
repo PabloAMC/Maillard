@@ -646,3 +646,13 @@ def test_extraction_rows_do_not_carry_the_headspace_bands(small_artifact):
         by_id["mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7"]["compounds"]
     ) + len(by_id["hofmann1998_norfuraneol_h2s_145C_20min_pH5"]["compounds"])
     assert "pea_isolate_uht_140C_Trikusuma2019" not in policy["undeclared_bundles"]
+
+
+def test_every_sampled_band_contains_the_value_the_engine_ships():
+    """2026-10-28 (independent review): ENV-B13's k_odg_da band was shifted a decade above the shipped value,
+    so every draw disagreed with the point and Steinhagen's glyoxal point sat outside its own 90 % interval.
+    A band that excludes its own centre is a units or transport error, never a statement of uncertainty."""
+    bad = [(p.key, p.centre, p.band) for p in unc.CORE_PRIORS
+           if p.sampled and p.distribution in ("uniform_band", "uniform") and p.band and p.centre is not None
+           and not (p.band[0] - 1e-6 <= p.centre <= p.band[1] + 1e-6)]
+    assert not bad, bad

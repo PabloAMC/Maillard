@@ -55,7 +55,7 @@ def _phosphate(molar: float, source: str) -> BufferSpec:
 POTS = {
     "hofmann1998_ribose_cys_ph5_145C_20min": (
         {"L-Cysteine": 33.0, "D-Ribose": 100.0}, 145.0, 20.0, 5.0, _phosphate(0.5, "Hofmann 1998"),
-        "thiol yields only (hofmann1998_extraction.md); no cysteine or sugar time course"),
+        "thiol yields only (hofmann1998_reconciliation.md); no cysteine or sugar time course"),
     "hofmann1998_ribose_cys_ph3_145C_20min": (
         {"L-Cysteine": 33.0, "D-Ribose": 100.0}, 145.0, 20.0, 3.0, _phosphate(0.5, "Hofmann 1998"),
         "MFT 553 / FFT 229 ppb (the pH 3 arm of the sweep; MFT 553 -> 198 -> 25 and FFT 229 -> 121 -> 12 ppb at pH 3 / 5 / 7)"),

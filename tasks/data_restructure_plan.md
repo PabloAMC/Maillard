@@ -916,6 +916,43 @@ literature rounds on 2026-10-28 found that the missing rate data mostly do not e
    project's headline becomes "evidence map + experiment designer" rather than "predictive simulator", and that
    is said plainly.
 
+**Decisions taken 2026-10-28 (owner delegated them: "What are your best suggestions? I think you can take
+them"), after an independent first-time review of the repository:**
+- **Product claim:** a model-system kinetics model plus an evidence map plus an experiment designer, sulfur lane
+  first. "Composable lanes for real foods" is deferred until the sulfur lane beats the typical-yield baseline on
+  designed data; real-food answers stay refused or caveated.
+- **Usefulness bar (C2):** out of sample ≥ 40 % within 3x AND beating the typical-yield baseline on within-3x
+  and median error; ≥ 65 % on independent directional claims whose effect exceeds measurement noise; both
+  with study-clustered uncertainty. Checkpoint: after the designed dataset (C8) is assimilated. Below the bar,
+  the headline becomes "evidence map + experiment designer", said plainly.
+- **Rules frozen:** the evidence-audit acceptance rule (`WAVES.md`) stands unchanged until 2027-01-31. Each
+  audit is checked by an independent fresh reviewer (a reader without this session's context) before a change
+  ships.
+- **Order:** (1) corrections from the review: leakage audit, asserted pH convergence, a point prediction
+  coherent with its interval, directional noise thresholds, stale model card and Makefile; (2) B61 and B62
+  finish; (3) the WUR protocol draft (C8); (4) B59 and every other new mechanism on hold until (3) exists;
+  (5) a slower cadence: fewer, larger commits, README updates only when a wave ships.
+
+**Corrections from the independent review (2026-10-28), status:**
+- [x] Leakage: a fit row on an intermediate of the SAME POT now marks every row of that bundle in-fit
+  (`generate_core_fit_targets.py`, `fit_targets.in_core_fit`). Hofmann's in-situ norfuraneol and furfural took
+  the ribose pH 5 bundle and its xylose twin out of the out-of-sample count: 17/60 → 14/56.
+- [x] pH convergence asserted: a non-converged fixed point emits `PhFixedPointNotConverged`, and the headline
+  guards fail on any scored pot that does (none does today).
+- [x] ENV-B13's `k_odg_da` band was shifted +1.01 dex and excluded its own shipped value (Steinhagen's glyoxal
+  point sat outside its 90 % interval). The band ends are now computed in code, and a unit test asserts that
+  every sampled band contains its centre.
+- [x] The Makefile's `trust-loop` called three deleted generators; it is replaced by `artifacts`, in
+  dependency order.
+- [ ] Directional noise threshold: `MEASUREMENT_NOISE_FOLD = 1.4` in `directional.py`, applied where the panel
+  records `measured_effect` (curation of the independent claims in progress).
+- [ ] **Open incoherence, on hold for its own evidence audit:** for the 31 single-temperature sulfur constants
+  the POINT uses the unidentified lumped 64 kJ/mol, while the envelope draws the measured carbohydrate or sulfur
+  class (median ~101-104). Off 145 °C the point sits in the prior's lower tail (Yiltirak and Zhou FFT points
+  1-1.4 dex above their envelope medians). The evidence favours the class. Moving the point there is a refit of
+  every off-145 °C prediction, so it is a wave (candidate B63), held with B59 until the WUR protocol exists. The
+  README states the incoherence until then.
+
 **0. Grounding comes first (owner, 2026-10-28: "scientifically grounded", not "improves a number").** The flux
 attribution grades every step by evidence class. On B60, 98-100 % of every reference pot's flux runs on FITTED
 constants (`SULFUR_FLUX_MAP.md` sec. 5c, the grounding ledger). The first measure of progress is that share
@@ -944,7 +981,10 @@ is accepted by its evidence audit (`WAVES.md`, "Evidence decides, scores diagnos
   engine, replacing `ph_state.B51`, `PH_NODE_GRID`, `PH_FIXED_POINT`, `FLUX_BUDGET`, `TTCA_FORMATION`,
   `NF_HYDROXIDE_DECAY` and `FURFURAL_BARRIERS` as globals. Frozen waves become configs, not monkeypatches.
 - [ ] **C8 Designed experiment (targets 4, 5).** A one-page protocol from the value-of-information ranking, for
-  the WUR conversation (draft only; Pablo sends).
+  the WUR conversation (draft only; Pablo sends). *Drafted 2026-10-28:
+  `docs/guides/DESIGNED_TIMECOURSE_PROTOCOL_DRAFT.md`. Ribose + Cys, 3 T x 3 pH time courses with TTCA,
+  Cys-Amadori, norfuraneol, furfural, H2S and SIDA thiols, plus two fed arms (furfural + Na2S at 3 T;
+  norfuraneol alone at pH 6/7). Awaiting Pablo's review.*
 - [ ] **C9 Waves keep moving forward (B61, B62, then B59).** Each kind-3 wave pre-registers which target it
   serves, and records whether it reduced unidentified directions or added them.
 

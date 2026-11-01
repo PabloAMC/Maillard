@@ -91,6 +91,7 @@ from .species_sulfur import (
     mmol_per_litre_to_ug_per_litre,
 )
 from .ph_state import BUFFER_ABSENT_WARNING, DEFAULT_BUFFER, BufferSpec, PhDrift
+from . import sulfur as _sulfur_mod
 from .sulfur import integrate_sulfur
 
 CELSIUS = 273.15
@@ -3131,7 +3132,8 @@ def engine_metadata() -> Dict[str, Any]:
         "lane_networks": {
             TRUNK: f"REACTIONS ({len(REACTIONS)} steps), no pH term, no a_w term",
             SULFUR: (
-                f"FULL_REACTIONS ({len(FULL_REACTIONS)} steps) = trunk + sulfur, "
+                # active steps only: a wave's switched-off step has a structurally zero rate (sulfur.inactive_reactions)
+                f"FULL_REACTIONS ({len(FULL_REACTIONS) - len(_sulfur_mod.inactive_reactions())} steps) = trunk + sulfur, "
                 "pH trajectory"
             ),
             ACRYLAMIDE: (

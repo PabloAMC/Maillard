@@ -11,7 +11,7 @@
     ],
     "lane_networks": {
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
-      "sulfur": "FULL_REACTIONS (114 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (113 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
@@ -43,8 +43,8 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-10-28",
     "git": {
-      "commit": "587d96a2541044221a9cf9934751372d00600698",
-      "short": "587d96a2",
+      "commit": "ab1fcc559752228d10e2ca3bed558a119681fe80",
+      "short": "ab1fcc55",
       "branch": "b58-ttca-formation",
       "dirty": true
     },
@@ -457,36 +457,36 @@
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
     "out_of_sample": {
-      "benchmarks": 27,
-      "rows": 60,
-      "within_band": 17,
+      "benchmarks": 25,
+      "rows": 56,
+      "within_band": 14,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.2833333333333333,
+      "within_band_rate": 0.25,
       "fold_summary": {
-        "n": 60,
-        "median_fold_error": 8.883929073298354,
+        "n": 56,
+        "median_fold_error": 11.801511752551193,
         "worst_fold_error": 28681.014327158067,
         "best_fold_error": 1.0101717815321325,
-        "median_abs_log10_error": 0.9484118493006441,
-        "geometric_mean_fold": 16.720822333559536
+        "median_abs_log10_error": 1.0620170899878918,
+        "geometric_mean_fold": 19.205374653879
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
     "in_core_fit": {
-      "benchmarks": 6,
-      "rows": 6,
-      "within_band": 4,
+      "benchmarks": 8,
+      "rows": 10,
+      "within_band": 7,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.6666666666666666,
+      "within_band_rate": 0.7,
       "fold_summary": {
-        "n": 6,
-        "median_fold_error": 1.8971193514294862,
+        "n": 10,
+        "median_fold_error": 2.03617377543448,
         "worst_fold_error": 13.000657281818732,
         "best_fold_error": 1.0572202533945545,
-        "median_abs_log10_error": 0.2778729827043354,
-        "geometric_mean_fold": 2.730847893849181
+        "median_abs_log10_error": 0.3084922137222161,
+        "geometric_mean_fold": 2.5951156205188024
       },
       "definition": "literature rows the sulfur fit read; reported, never pooled"
     },
@@ -495,7 +495,7 @@
       "total": 47
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 112.1
+    "wall_seconds": 242.8
   },
   "benchmarks": [
     {
@@ -1497,10 +1497,32 @@
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
       "fit_target_of": {
-        "core": [],
-        "index": []
+        "core": [
+          "kinetic_core_b60_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b60_fit_targets.json"
+        ]
       },
-      "core_fit_targets": [],
+      "core_fit_targets": [
+        {
+          "record": "kinetic_core_b60_fit_targets.json",
+          "lane": "sulfur",
+          "leverage_class": "global_low_leverage",
+          "free_parameters": 23,
+          "fitted_rows": 52,
+          "rows": [
+            [
+              "hofmann_ribose_NF_insitu",
+              "[same pot] NF"
+            ],
+            [
+              "hofmann_ribose_FUR_insitu",
+              "[same pot] FUR"
+            ]
+          ]
+        }
+      ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
       "vessel_oxygen": {
@@ -1541,7 +1563,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
+          "in_core_fit": true,
           "carried_declared_ug_per_l": null,
           "declared_share_of_prediction": null,
           "formed_predicted": null,
@@ -1567,7 +1589,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
+          "in_core_fit": true,
           "carried_declared_ug_per_l": null,
           "declared_share_of_prediction": null,
           "formed_predicted": null,
@@ -4152,10 +4174,32 @@
       "signal_origin": "external_literature",
       "evidence_role": "external_holdout",
       "fit_target_of": {
-        "core": [],
-        "index": []
+        "core": [
+          "kinetic_core_b60_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b60_fit_targets.json"
+        ]
       },
-      "core_fit_targets": [],
+      "core_fit_targets": [
+        {
+          "record": "kinetic_core_b60_fit_targets.json",
+          "lane": "sulfur",
+          "leverage_class": "global_low_leverage",
+          "free_parameters": 23,
+          "fitted_rows": 52,
+          "rows": [
+            [
+              "hofmann_ribose_NF_insitu",
+              "[same pot] NF"
+            ],
+            [
+              "hofmann_ribose_FUR_insitu",
+              "[same pot] FUR"
+            ]
+          ]
+        }
+      ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
       "vessel_oxygen": {
@@ -4196,7 +4240,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
+          "in_core_fit": true,
           "carried_declared_ug_per_l": null,
           "declared_share_of_prediction": null,
           "formed_predicted": null,
@@ -4222,7 +4266,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
+          "in_core_fit": true,
           "carried_declared_ug_per_l": null,
           "declared_share_of_prediction": null,
           "formed_predicted": null,

@@ -22,8 +22,10 @@ Scoring rules, stated so they cannot drift:
   the flat tolerance), ``peak`` when the maximum sits at an interior point, and
   ``flat`` when every step is within tolerance.
 * A claim is NOT EVALUABLE -- and is neither a hit nor a miss -- when it carries
-  no runnable conditions, when any arm is refused (out of envelope), or when the
-  observable is one the core does not represent. The reason is printed.
+  no runnable conditions, when any arm is refused (out of envelope), when the
+  observable is one the core does not represent, or (2026-10-28) when the
+  measured contrast it rests on is within measurement noise
+  (``MEASUREMENT_NOISE_FOLD``). The reason is printed.
 * IDENTICAL predictions across arms that differ on an axis the lane carries no
   term for (pH on the trunk and acrylamide lanes, water activity everywhere)
   are scored as evaluable MISSES for a non-flat expectation and flagged
@@ -52,6 +54,39 @@ from .engine import engine_metadata, fit_report_paths, predict
 PANEL_PATH: Path = data_paths.DIRECTIONAL_CLAIMS_PANEL
 INDEPENDENT = "independent"
 NOT_EVALUABLE = "not_evaluable"
+
+#: 2026-10-28 (independent review; north-star decisions): a measured contrast smaller than this fold cannot
+#: tell the arms apart -- twice a typical ~20 % within-study replicate CV -- so a claim resting on it is NOT
+#: EVALUABLE, neither hit nor miss. Applied only where the panel records the measured values
+#: (``measured_effect.values``); one declared number, not tuned.
+MEASUREMENT_NOISE_FOLD = 1.4
+
+
+def _within_noise(claim: Mapping[str, Any], claim_type: str) -> Optional[str]:
+    """The reason a claim's measured contrast is within measurement noise, or None.
+
+    A ``flat`` claim is exempt: a small measured contrast is what it asserts. A series is judged on its
+    overall measured range, not step by step -- applying the rule per step would remove four current misses
+    (CER07-PH-01/02, TEMP-01, YIL-01) whose interior steps are under 1.4x, a choice that would flatter the
+    score; declared rather than taken."""
+    if str(claim.get("expected_relation")) == "flat":
+        return None
+    values = ((claim.get("measured_effect") or {}).get("values")) or {}
+    nums = [float(v) for v in values.values() if isinstance(v, (int, float)) and float(v) > 0.0]
+    if len(nums) < 2 or len(nums) != len(values):
+        return None
+    tol = math.log10(MEASUREMENT_NOISE_FOLD)
+    if claim_type == "ordering" and len(nums) == 2:
+        small = abs(math.log10(nums[0] / nums[1])) < tol
+    elif claim_type == "ranking":
+        small = any(abs(math.log10(nums[i + 1] / nums[i])) < tol for i in range(len(nums) - 1))
+    else:  # a series: unresolvable when the whole measured range is inside the noise
+        small = math.log10(max(nums) / min(nums)) < tol
+    if not small:
+        return None
+    shown = ", ".join(f"{k} {v:g}" for k, v in values.items())
+    return (f"the measured contrast ({shown}) is within measurement noise (< {MEASUREMENT_NOISE_FOLD:g}x); "
+            "no model, however good, can be scored on it")
 
 
 # ---------------------------------------------------------------------------
@@ -230,6 +265,9 @@ def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[
     arms = _arms(claim)
     if not arms:
         return {**base, "status": NOT_EVALUABLE, "reason": "the claim carries no runnable conditions (prose-only)", "arms": []}
+    noise = _within_noise(claim, claim_type)
+    if noise:
+        return {**base, "status": NOT_EVALUABLE, "reason": noise, "arms": []}
     if not observables:
         return {**base, "status": NOT_EVALUABLE, "reason": "the claim names no observable", "arms": []}
     if claim_type == "ranking":
