@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **883**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **885**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -164,6 +164,8 @@ Tracked files: **883**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b64_verification.*` (1): `kinetic_core_b64_verification.json` | B64's verification before its fit (prereg sec. 3-4): the quick setting against the careful one under each thermal reading on the inline pH coupling (V5), and B60's vector's cost under each reading (candidate C) (`generate_kinetic_core_b64_verification.py`). |
 | `kinetic_core_b8_members/` (2 files) | B8 optimiser members (two starts); read back by the B8 generator's consolidation. |
 | `kinetic_core_b9_members/` (2 files) | B9 optimiser members (two starts); read back by the B9 generator's consolidation. |
+| `kinetic_core_between_lab_tau_h0_prereg.md` | Inference track H, stage H0: the out-of-sample between-laboratory tau of the thiol lane from EX-056's leave-one-lab-out; strict nesting (leave-two-labs-out refits) primary, lab-weighted, scored by log density and interval score against both nulls; controls that can fail; PROVISIONAL until a second split. Frozen before any pair fit (v3, 2026-11-01). |
+| `kinetic_core_between_lab_tau_h0_prereg_review.md` | The independent review of the H0 pre-registration and its two re-reviews (v2: REVISE; v3: FREEZE). |
 | `kinetic_core_cysteine_route_calibration/` (22 files) | Route calibration (stage 1): fits per arm, starts, leave-one-source-out, checks; withdrawn_no_diff_step/ holds the falsely converged first fits. |
 | `kinetic_core_cysteine_route_calibration_prereg.md` | Route calibration (stage 1) pre-registration, run logs 1-5, independent review, verdict. |
 | `kinetic_core_deoxyosone_feasibility_*` (14): `kinetic_core_deoxyosone_feasibility_b7asst.json`, `kinetic_core_deoxyosone_feasibility_b7asst.md`, `kinetic_core_deoxyosone_feasibility_b7asst2.json`, `kinetic_core_deoxyosone_feasibility_b7asst2.md` … | Mechanisms before constants (owner, 2026-10-31): whether a STRUCTURE can reproduce the deoxyosone partition's scale-free signatures anywhere in its declared constant bands -- uniform draws scored like a fit's optimum; a structure no draw can pass is rejected without a fit. Written by `scripts/generators/feasibility_deoxyosone.py`; design in kinetic_core_dpo_partition_prereg.md secs. 16 - 17. |
