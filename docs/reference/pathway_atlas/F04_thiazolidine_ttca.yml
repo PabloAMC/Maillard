@@ -1,0 +1,371 @@
+# Pathway-condition atlas: F04 (cysteine + sugar / carbonyl -> thiazolidine, its ring opening, and the Cys-Amadori route).
+# Built 2026-11-01 from the extraction dossiers (data/lit/extraction_dossiers/), the cysteine-exchange record
+# (docs/history/cys_exchange_2026-10-31/) and the cysteine review (docs/history/mechanism_reviews_2026-10-31/cysteine.md).
+# Vocabulary: docs/reference/pathway_atlas/families.yml. Every quote is verbatim from the first dossier listed in its cell.
+# Laboratories (independent): Kallen (U. Pennsylvania), Fife (USC), Pesek & Frost (N. Illinois), Schubert (Rockefeller),
+# Kim / Yun / Park (Korea), de Roos (Givaudan), Xie (BTBU, Beijing), Zhang / Cui / Ho (Jiangnan), Mizutani / Obata (Hokkaido).
+# Only THREE of them (Givaudan, BTBU, Jiangnan) work on a cysteine-SUGAR thiazolidine; the rest are carbonyl analogues.
+# Duplicates counted once: Kang 2026 SI Fig. S3 = Zhai 2021 Fig. 6 (pH 7 arm, CF-076); Zhai 2021 / Zhai 2023 Food Chem /
+# Zhai 2023 JAFC dicarbonyl arms (CF-066); Zhao 2017b is a same-lab sibling run of Cao 2017's blank (not a second lab).
+# ph key "not_stated" is used where the source states no pH (solid storage, CO2-swept pots); it is outside the bins on purpose.
+
+family: F04_thiazolidine_ttca
+definition: "cysteine + sugar / carbonyl -> thiazolidine (TTCA) and its ring opening / Cys-Amadori"
+markers:
+  - "TTCA (2-threityl-thiazolidine-4-carboxylic acid) or the hexose analogue measured directly (LC-MS MRM / HPLC-ELSD against a purified standard) in a free cysteine + sugar pot; NOT mass alone: TTCA and the Cys-Amadori compound share m/z 254 (zhai2020_extraction.md)"
+  - "a mass-action quotient [TTCA] / ([Cys][sugar]) that stays constant while all three concentrations move (pre-equilibrium; cao2017_extraction.md arithmetic 1)"
+  - "free cysteine RELEASED from fed purified TTCA (rise then fall), and the Cys-Amadori compound (N-(1-deoxy-D-xylulos-1-yl)-L-cysteine / the tetrahydro-1,4-thiazine) appearing from fed TTCA or from Cys + sugar"
+  - "label exchange: exogenous 13C5-xylose appearing in TTCA (re-formation), or 13C5-TTCA's xylose appearing in another amine's Amadori compound (ring release); 13C5-TTCA's intact C5 in MFT for the downstream route"
+  - "trapping of the released thiol (iodoacetate -> S-carboxymethylcysteine) from a thiazolidine"
+  - "the two opposite-sign perturbations of the exchange: added cysteine delays every downstream marker; added sugar speeds TTCA loss"
+  - "NOT a marker of release: iodine uptake (it reads C-S ring-chain opening to the iminium-thiol, which is fast; schubert1936_extraction.md sec. 1 (3)); NOT a marker of formation: browning or volatiles"
+
+cells:
+  # ---------------- carbonyl-analogue physical chemistry (mechanism and pH shape; no transferable constant) ----------------
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 25, sugar: none, carbonyl: formaldehyde, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: chelated}
+    contrast: "pH 5.57 -> 6.56 -> 7.45 (0.01 M phosphate, I 1.0 M KCl, EDTA): K_app 6.53e5 -> 2.32e6 -> 1.30e7 M^-1, x20; the ring couples to the cysteine monoanion (K_F3'/K_F2' = 217); TC ring-N pKa 6.24"
+    status: operating
+    quote: "so the apparent K rises ~20× between pH 5.6 and 7.5"
+    quantity: "K_app x20 over 1.9 pH units at 25 C; hydrolysis k_r ~1e-6 s^-1 (t1/2 ~9 d) at pH 5.6-6.6 with kallen1971b (corrected relaxation reading, scratchpad cluster5/kallen1971_correction.md)"
+    evidence: fed_intermediate
+    lab: "Kallen (U. Pennsylvania)"
+    dossiers: [kallen1971_extraction.md, kallen1971b_extraction.md]
+    where: "Tables III-IV; Fig. 4 (approach to equilibrium from TC hydrolysis)"
+  - key: {ph: acid, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 25, sugar: none, carbonyl: formaldehyde, amine: cysteine, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
+    contrast: "cyanoacetate / formate / acetate buffer 0.05 -> 0.4 M at pH 2.3-5.0: no change in the formation rate (amine attack on unhydrated formaldehyde limits, uncatalysed); derived k_r FALLS with acidity (+0.54 log per pH unit, pH 2.8 -> 5.6)"
+    status: operating
+    quote: "by cyanoacetate, formate or acetate, 0.05-0.4 M, pH 2.3-5.0"
+    quantity: "k_f (per total Cys) 0.014 / 0.12 / 0.59 M^-1 s^-1 at pH 2.84 / 4.47 / 5.57; no buffer catalysis below pH 5"
+    evidence: within_study_factor
+    lab: "Kallen (U. Pennsylvania)"
+    dossiers: [kallen1971b_extraction.md]
+    where: "Table I, Table III, sec. 1 answers"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 25, sugar: none, carbonyl: formaldehyde, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "phosphate 0 -> 0.3 M at pH 6.12-6.62: formation x3.5-5, SATURATING (half-saturation 17-29 mM total phosphate); general-acid catalysis of carbinolamine dehydration, rate-determining step changes at pH ~6"
+    status: operating
+    quote: "SATURATES at x3.5-5 (half-saturation 17-29 mM total phosphate"
+    quantity: "pre-saturation slope ~270 per M HPO4(2-); ceiling x3.5-5"
+    evidence: within_study_factor
+    lab: "Kallen (U. Pennsylvania)"
+    dossiers: [kallen1971b_extraction.md]
+    where: "Fig. 7, Table III"
+    conflict: CF-076
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "30-90", sugar: none, carbonyl: "2-aryl / styryl (not a sugar)", amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "ring opening (C-S, fast, general-ACID catalysed) and iminium hydrolysis (slow, general-BASE catalysed incl. phosphate 0.050 M^-1 s^-1, Bronsted beta 0.29) measured as separate steps, pH 1-12; N-acetyl ring: opening rate-limiting, no buffer catalysis"
+    status: operating
+    quote: "rate-determining step in the overall reaction must be hydrolysis of the iminium ion"
+    quantity: "N-butyl ring opening k1' 1.4 s^-1 at 30 C vs hydrolysis orders slower; 2-aminoethanethiol rings, no 4-carboxylate: form of the rate law only"
+    evidence: measured_intermediate
+    lab: "Fife (USC)"
+    dossiers: [fife1991_extraction.md]
+    where: "Tables I-II, Figs. 1-6"
+  - key: {ph: alkaline, temperature: low, water: concentrated}
+    tags: {ph_basis: label, T_C: "not stated (NMR probe)", sugar: none, carbonyl: "aliphatic aldehydes (isobutyraldehyde, acetaldehyde)", amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "8 M HCl / neutral D2O (0.5 M TCA, days): no change; 1-3 M NaOH: ring compound falls with base concentration; decomposition to cysteine + aldehyde only above 3 M NaOH"
+    status: operating
+    quote: "decreasing amounts of ring compound with increasing base concentration"
+    quantity: "qualitative; the neutral / acid 'no change' also reflects K at 0.5 M (ring side), not only a slow rate"
+    evidence: within_study_factor
+    lab: "Pesek & Frost (Northern Illinois)"
+    dossiers: [pesek1975_extraction.md]
+    where: "sec. 1 table; NMR series in HCl, D2O, NaOH"
+  - key: {ph: alkaline, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "room temperature", sugar: none, carbonyl: benzaldehyde, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    contrast: "benzaldehyde-cysteine thiazolidine + iodoacetate in NaHCO3: free cysteine trapped as S-carboxymethylcysteine, no thiazolidine left overnight"
+    status: operating
+    quote: "After standing a half hour benzaldehyde begins to separate"
+    quantity: "release complete within ~0.5 h to overnight at room temperature under an irreversible trap; yield not printed"
+    evidence: trapping
+    lab: "Schubert (Rockefeller Institute)"
+    dossiers: [schubert1936_extraction.md]
+    where: "sec. 1 trap experiment"
+  - key: {ph: alkaline, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "13-38", sugar: none, carbonyl: "S-cysteinyl-3-phenylpropanal (saturated aliphatic aldehyde)", amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "temperature 13 -> 38 C at pH 8.0 (Ea 6.1 kcal/mol); one pH for this step"
+    status: operating
+    quote: "k2 = 122 M⁻¹ s⁻¹, K2 = 1.49 × 10⁶ M⁻¹ at pH 8.0"
+    quantity: "aliphatic aldehyde + Cys thiazolidine formation, k2 122 M^-1 s^-1, K2 1.5e6 M^-1 (pH 8, 25 C)"
+    evidence: kinetic_fit
+    lab: "Kim / Yun / Park (Korea)"
+    dossiers: [kim1986_extraction.md]
+    where: "Table 4 (step 2, pH 8.0, 13-38 C)"
+  # ---------------- cysteine + sugar: formation and pre-equilibrium ----------------
+  - key: {ph: mild_acid, temperature: low, water: concentrated}
+    tags: {ph_basis: label, T_C: 50, sugar: pentose, amine: cysteine, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "none (preparative: Cys.HCl 0.1 mol + aldose 0.11 mol in 50 mL water, pH 5.0, optional phosphate or lactate)"
+    status: operating
+    quote: "in a pre-equilibrium reached in 1 h at 50 °C"
+    quantity: "equilibrium mixture of thiazolidine, cysteine and sugar within 1 h at ~1.5-2 mol/L; no K printed"
+    evidence: qualitative
+    lab: "de Roos (Givaudan)"
+    dossiers: [deroos2005_extraction.md]
+    where: "general procedure (sec. 2)"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "room temperature (mixing)", sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "none (t = 0 sample of the heating ladder)"
+    status: operating
+    quote: "14.5 mmol/L at t = 0"
+    quantity: "14.5 mM TTCA (18 % of 82.6 mM Cys) formed during mixing and NaOH adjustment, before heating; Xyl 165 mM, pH 7.4 label, never re-measured"
+    evidence: measured_intermediate
+    lab: "Zhang / Cui / Ho (Jiangnan)"
+    dossiers: [zhai2019_extraction.md]
+    where: "Fig. 3A, t = 0 [D]"
+  - key: {ph: acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "time 0.5 -> 5 h: K_app flat (58.5-64.6 L/mol) while TTCA falls a third and the in-situ pH drifts 5.49 -> 4.67 (0.5 h) -> 4.15 (5 h)"
+    status: operating
+    quote: "58.5-64.6 L/mol at every one of the six sample times from 0.5 to"
+    quantity: "TTCA 0.356 mol/L = 89 % of Cys by 0.5 h (0.4 M Cys + Xyl, 0.2 M phosphate); K_app ~60 L/mol (45-75); status capped at operating (no label), though it holds most of the cysteine"
+    evidence: mass_balance
+    lab: "Xie (BTBU)"
+    dossiers: [cao2017_extraction.md, zhao2017b_extraction.md]
+    where: "Figs. 4-5 [D], arithmetic 1-2; Zhao 2017b sibling run 0.355 mol/L at 0.5 h"
+    conflict: CF-011
+  - key: {ph: acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "blank vs + (E)-2-heptenal 0.10 M: 0.5 h TTCA 0.355 -> 0.255 mol/L, free Cys 0.081 -> 0.033 mol/L (lipid aldehyde takes cysteine from xylose)"
+    status: operating
+    quote: "heptenal lowers 0.5 h TTCA from 0.355 to 0.255"
+    quantity: "TTCA -28 % at 0.5 h with 0.25 mol aldehyde per mol Cys; hexanal and decadienal arms also run"
+    evidence: within_study_factor
+    lab: "Xie (BTBU)"
+    dossiers: [zhao2017b_extraction.md]
+    where: "sec. 1; Fig. 2 [D]"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "70 / 90 / 110 / 130", sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "temperature: TTCA plateaus at 54-63 mM (65-77 % of Cys) at 70-90 C; peaks at 58.5 mM by 20 min at 110 C; at 130 C peaks ~46 mM then falls; Cys-Amadori stays <= 5.6 mM throughout"
+    status: operating
+    quote: "6.9 mmol/L by 160 min"
+    quantity: "130 C: TTCA 46 -> 6.9 mM over 20-160 min; Cys-Amadori / TTCA <= ~0.06 at 90 C (vs Cao's 0.56 at pH ~4.2)"
+    evidence: measured_intermediate
+    lab: "Zhang / Cui / Ho (Jiangnan)"
+    dossiers: [zhai2019_extraction.md]
+    where: "Fig. 3A [D]"
+    conflict: CF-011
+  # ---------------- fed TTCA: ring opening, exchange, pH ----------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "label pH 5.5 -> 6 -> 7 -> 8 (10 mM fed TTCA, water): 0-40 min first-order-equivalent loss 0.0017 -> 0.0021 -> 0.0049 -> 0.0164 /min; every curve accelerates; the same lab's 10 mM TTCA pots end at pH 5.1 / 4.9 / 4.7 from 5.5 / 7 / 8 (kang2026_SI_extraction.md sec. 5)"
+    status: operating
+    quote: "Over pH 5.5 -> 8 the 0-40 min first-order-equivalent rises ~10×"
+    quantity: "x10 over 2.5 label-pH units (~[OH-]^0.4); share of the loss that is ring opening (vs direct degradation) not resolved"
+    evidence: fed_intermediate
+    lab: "Zhang / Cui / Ho (Jiangnan)"
+    dossiers: [zhai2021_extraction.md, kang2026_SI_extraction.md]
+    where: "Fig. 4b [D], sec. 5.3"
+    conflict: CF-010
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "+/- 10 mM xylose (13C5-xylose tracer): extra xylose speeds TTCA loss modestly at pH 5.5-7, slows it at pH 8 in the first 40 min; LC-MS/MS shows 13C5-TTCA, i.e. released Cys re-condenses with the exogenous sugar"
+    status: operating
+    quote: "Extra xylose speeds loss modestly at pH 5.5-7"
+    quantity: "label share in TTCA not printed (only MS fragments; ask the authors); free-Cys contrast of Fig. 6 not transcribed in the dossier (cysteine review: +Xyl RAISES free Cys at 120 min, 0.41 vs 0.33 mM at pH 5.5)"
+    evidence: labelling
+    lab: "Zhang / Cui / Ho (Jiangnan)"
+    dossiers: [zhai2021_extraction.md]
+    where: "Fig. 4b [D], Table 1 (13C5-TTCA fragments), sec. 5.3"
+    conflict: CF-076
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100 / 120 / 140", sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "temperature: free Cys released from 10 mM fed TTCA rises then falls; t_max ~100 / 55-60 / 40 min at 100 / 120 / 140 C"
+    status: operating
+    quote: "The TTCA → free-Cys yield is capped at ≈ 16 mol %"
+    quantity: "peak free Cys 1.63 mM (140 C, 40 min) = 16.3 mol % of TTCA; free-Cys depletion Ea 55.1 kJ/mol (Fig. S4)"
+    evidence: fed_intermediate
+    lab: "Zhang / Cui / Ho (Jiangnan)"
+    dossiers: [kang2026_SI_extraction.md]
+    where: "Fig. S3 [D] (a copy of Zhai 2021 Fig. 6, pH 7 arm: counted once)"
+    conflict: CF-076
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100 / 120 / 140", sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "TTCA 10 mM +/- Cys 10 mM (Zhai 2023 JAFC) and TTCA 5 +/- Cys 5 mM at 120 C (Zhai 2019): added Cys delays the Cys-Amadori and 3-DX (undetectable for 40-60 min at >= 120 C) and cuts 3-DX / GO / 1-DX to 20 / 23 / 45 % at 60 min"
+    status: operating
+    quote: "3-DX was undetectable before the reaction period of 40-60 min"
+    quantity: "sign and delay only; no K or reverse rate printed"
+    evidence: within_study_factor
+    lab: "Zhang / Cui / Ho (Jiangnan)"
+    dossiers: [zhai2023jafc_extraction.md, zhai2019_extraction.md]
+    where: "Zhai 2023 JAFC Fig. 5, sec. 10; Zhai 2019 Fig. 3B"
+    conflict: CF-071
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "[13C5]-TTCA 30 mM + glycine + cysteine + unlabelled Gly-Amadori 3 / 30 / 120 mM, 30 min: [13C5]-Gly-Amadori appears (TTCA's xylose released and captured by glycine); MFT label falls as Gly-Amadori rises"
+    status: operating
+    quote: "was reversibly dissociated from [¹³C₅]-TTCA in the heated reaction systems"
+    quantity: "ring release shown by label (LC-MS, data not shown, no share); downstream: 97.00 % of MFT, 93.00 % of FFT 13C-labelled when TTCA dominates"
+    evidence: labelling
+    lab: "Xie (BTBU)"
+    dossiers: [zhao2019_extraction.md]
+    where: "sec. 1 (2); Tables 1-2"
+  # ---------------- TTCA -> Cys-Amadori (de Roos route) ----------------
+  - key: {ph: acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "time 0.5 -> 5 h: TTCA 0.356 -> 0.236 mol/L while Cys-Amadori 0.006 -> 0.133 mol/L and free Cys flat at 0.06-0.08 mol/L; the Cys-bearing pool conserved"
+    status: operating
+    quote: "TTCA's dominant fate at 90 °C / pH 4-5 is isomerisation"
+    quantity: "Cys-Amadori / TTCA 0.56 at 5 h, rising; net TTCA -> Cys-Amadori ~1.0e-3 /min; all Cys-destroying channels <= ~4e-4 /min"
+    evidence: mass_balance
+    lab: "Xie (BTBU)"
+    dossiers: [cao2017_extraction.md]
+    where: "Fig. 5 [D], arithmetic 2-3"
+    conflict: CF-011
+  - key: {ph: acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "glycine 0 -> 16-24 x Cys: TTCA drained to ~0.03 mol/L by 2 h; in-situ pH 5.42 -> 4.03 (x24 arm) vs 5.49 -> 4.15 (blank)"
+    status: operating
+    quote: "Glycine accelerates the TTCA drain"
+    quantity: "authors read it as glycine catalysing TTCA -> Cys-Amadori plus competition for xylose; glycine not measured, so the two are not separated"
+    evidence: within_study_factor
+    lab: "Xie (BTBU)"
+    dossiers: [cao2017_extraction.md]
+    where: "Fig. 5a [D]; Fig. 4c pH"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "lysine 0 -> 16 x Cys (Cys + Xyl 40 mM each, 0.2 M phosphate pH 6.5): blank TTCA ~18 mM and Cys-Amadori ~1.6 mM by 40-50 min; with lysine both peak at 10-15 min and are nearly gone by 50 min"
+    status: operating
+    quote: "With lysine, both peak at 10-15 min and are nearly gone by 50 min"
+    quantity: "blank: ~45 % of Cys as TTCA; ~19 mM of each reactant in no measured pool at 50 min (mass-balance gap)"
+    evidence: within_study_factor
+    lab: "Xie (BTBU)"
+    dossiers: [zhang2025b_extraction.md]
+    where: "Fig. 2 [D], sec. 3.4"
+    conflict: CF-063
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: "85-95", sugar: pentose, amine: cysteine, oxygen: air, buffer: [none_unbuffered, phosphate, carboxylate], buffer_note: "optional phosphate or lactic acid (per batch)", metals: not_controlled}
+    contrast: "batch vs continuous anion-exchange reactor; water 20-40 %: the Cys-Amadori peaks ~2 h at 90 C and never exceeds 35 % of Cys; thiazolidine -> Amadori said to be general-acid catalysed by other amino acids (qualitative)"
+    status: operating
+    quote: "only 35 %, which is due to its instability under the conditions of its formation"
+    quantity: "max 35 % (22.5 % in another batch); continuous 12 % (2 h) -> 35 % (6 h); water 20-40 % (a_w not measured)"
+    evidence: measured_intermediate
+    lab: "de Roos (Givaudan)"
+    dossiers: [deroos2005_extraction.md]
+    where: "sec. 3.7 yields"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "~100 (boiling)", sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "fed purified D-xylulose-L-cysteine, pH 3 -> 6 in boiling 0.5 M phosphate: % left after 2 h 51 / 56 / 58 / 43 / 18 at pH 3 / 4.5 / 5 / 5.5 / 6 (stability maximum pH ~5)"
+    status: operating
+    quote: "Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous"
+    quantity: "first-order 4.5e-3 /min at pH 5, 1.43e-2 at pH 6, 5.6e-3 at pH 3; products not stated"
+    evidence: fed_intermediate
+    lab: "de Roos (Givaudan)"
+    dossiers: [deroos2005_extraction.md]
+    where: "Fig. 4 [D], sec. 3.6"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "fed Gly-Amadori vs Cys-Amadori vs TTCA, 30 mM each, 0.2 M phosphate pH 5.5, 5-30 min: rate rank Gly-Amadori > Cys-Amadori > TTCA"
+    status: operating
+    quote: "Reaction rate: Gly-Amadori > Cys-Amadori > TTCA"
+    quantity: "rank only (UV, pH, peak areas); TTCA is the slower, stable form"
+    evidence: qualitative
+    lab: "Xie (BTBU)"
+    dossiers: [hou2017_extraction.md]
+    where: "sec. 2"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "110 / 120 / 130", sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "fed Gly-Xyl Amadori 5 mM + Cys 5 mM, temperature: TTCA appears at 5.0 / 9.6 / 22.4 % of the ARP by 100 min; the source carbonyl (deoxyosone trap vs ARP reversal to xylose) is not shown, and Scheme 2 is 2 H short"
+    status: operating
+    quote: "TTCA % of ARP at 100 min:"
+    quantity: "TTCA holds only 11 % (120 C) / 26 % (130 C) of the cysteine consumed; ~70 % of Cys gone in 20 min at all three T"
+    evidence: measured_intermediate
+    lab: "Zhang / Cui / Ho (Jiangnan)"
+    dossiers: [wei2022_extraction.md]
+    where: "Fig. 3d (TTCA) and Fig. 3c (free Cys) [F], sec. 1 (2)-(3)"
+  # ---------------- low water, storage, very high T ----------------
+  - key: {ph: alkaline, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: "170-190 inlet (spray-drying)", sugar: pentose, amine: cysteine, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "no spray-drying -> 190 C inlet -> pH 9.5 stock before spray-drying: Amadori product 6.03 -> 20.83 -> 47.23 % of the total; conversion favoured over pH 7.5-9.5"
+    status: operating
+    quote: "the Amadori rearrangement product is 6.03 % of the"
+    quantity: "TTCA predominant after vacuum dehydration; ring -> Cys-Amadori conversion up to 59.48 % of formation at pH 9.5"
+    evidence: within_study_factor
+    lab: "Zhang / Cui / Ho (Jiangnan)"
+    dossiers: [zhai2020_extraction.md]
+    where: "results summary"
+  - key: {ph: not_stated, temperature: low, water: intermediate_aw}
+    tags: {ph_basis: label, T_C: "not stated (salt a_w at 25 C)", sugar: pentose, amine: cysteine, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "solid TTCA powder, a_w 0.113 -> 0.432 -> 0.843, 60 days: retention 86.49 / 72.47 / 64.23 % (ARP 78.48 / 57.27 / 39.39 %); a_w a larger stressor than 4-40 C or pH 5.5-9 in solution"
+    status: operating
+    quote: "TTCA's degradation rate in high humidity (a_w 0.843) is approximately"
+    quantity: "60-day TTCA loss 13.5 % (a_w 0.113) -> 35.77 % (a_w 0.843); products and route of the loss not identified"
+    evidence: within_study_factor
+    lab: "Zhang / Cui / Ho (Jiangnan)"
+    dossiers: [kang2026_extraction.md, kang2026_SI_extraction.md]
+    where: "Kang 2026 sec. 6a (abstract, p. 3247); SI Table S6"
+  - key: {ph: not_stated, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, carbonyl: "formaldehyde / acetaldehyde / butyraldehyde / benzaldehyde / furfural", amine: cysteine, oxygen: inert, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "free cysteine vs its aldehyde thiazolidines (0.1 M, 120 C bath, CO2 sweep, 0.5-6 h): H2S from the bound cysteine only 1.2-3.5x slower; the furfural thiazolidine releases 2x MORE"
+    status: operating
+    quote: "binding cysteine in a thiazolidine lowers H2S release by only 1.2-3.5×"
+    quantity: "free Cys 0.95 % of S as H2S in 6 h; the ring is not a full protection of cysteine against thermolysis"
+    evidence: within_study_factor
+    lab: "Mizutani / Obata (Hokkaido)"
+    dossiers: [mizutani1960_extraction.md]
+    where: "Tables I-II"
+
+condition_dependence: >-
+  SHOWN: (1) Formation is fast and extensive wherever free cysteine meets a pentose at >= 80 mM: 18 % of Cys bound at
+  room temperature before heating (Zhai 2019), 65-89 % within 0.5 h at 70-90 C (Zhai 2019 Fig. 3A; Cao 2017 / Zhao 2017b),
+  ~45 % at 120 C in phosphate (Zhang 2025b), with a constant mass-action quotient (~60 L/mol, Cao, in-situ pH 4.2-4.7).
+  Two sugar labs (BTBU, Jiangnan) plus Givaudan's qualitative 50 C pre-equilibrium. (2) Temperature: above ~110 C the
+  TTCA pool peaks and drains (Zhai 2019, 130 C: 46 -> 6.9 mM); released free Cys stays <= 16 mol % of fed TTCA at
+  100-140 C (one data set, Kang S3 = Zhai 2021 Fig. 6). (3) pH: fed-TTCA loss rises x10 from label pH 5.5 to 8 (Zhai 2021,
+  unbuffered, in-situ pH drifts to ~4.7-5.1, CF-010); the cysteine monoanion carries the ring equilibrium (Kallen, x20 in
+  K from pH 5.6 to 7.5, formaldehyde, 25 C); the Cys-Amadori is most stable at pH ~5 and decays 3x faster at pH 6
+  (de Roos); spray-dried TTCA converts to the Cys-Amadori more at pH 7.5-9.5 (Zhai 2020). (4) The TTCA -> Cys-Amadori
+  branch is large in concentrated, acid, phosphate pots (Cao: Cys-ARP / TTCA 0.56 at 5 h, pH ~4.2; de Roos: <= 35 %) and
+  small in unbuffered pH 7.4 water (Zhai 2019: <= 0.06) -- a cross-LAB contrast confounded by pH, buffer and
+  concentration (CF-011). (5) Added amines speed the drain of TTCA (glycine, Cao; lysine, Zhang 2025b; same lab) but no
+  study separates catalysis from competition for the sugar. (6) Exchange is reversible: added Cys delays downstream
+  markers, added Xyl speeds loss, and 13C5 labels cross between TTCA and free sugar / Gly-Amadori (Zhai 2021, Zhao 2019)
+  -- but no study gives a label share, so no cell can be `dominant` on that basis. (7) Rate-law form from analogues
+  only: ring opening (C-S) is fast and is NOT release (Fife; Schubert's iodine); release is slow (k_r ~1e-6 s^-1 at 25 C
+  for TC); buffer catalysis is absent below pH ~5 and saturates (x3.5-5) with phosphate above 5.5 (Kallen 1971b).
+  ASSUMED / NOT SHOWN: any K(pH) or K(T) for a cysteine-SUGAR thiazolidine; the Arrhenius transfer of TC's k_r; whether
+  the dilute (10 mM) vs concentrated (83-400 mM) discrepancy is catalysis, in-situ pH or a second cysteine sink
+  (CF-076, EX-054 admits no rival); whether TTCA formed in ARP + Cys pots comes from deoxyosones or from ARP reversal
+  (Wei 2022). Also unseen: the share of fed-TTCA loss that is ring opening vs direct degradation.
+best_supported_regimes:
+  - "acid / moderate (90 C) / concentrated / pentose + Cys, 0.2 M phosphate: TTCA formation in pre-equilibrium (K ~60 L/mol) then isomerisation to the Cys-Amadori -- operating (1 lab, BTBU, with a same-lab sibling run; mass balance)"
+  - "neutral (label) / moderate-high (70-130 C) / dilute-concentrated / pentose + Cys, unbuffered water: TTCA formation (incl. at room temperature) and its drain above ~110 C -- operating (1 lab, Jiangnan)"
+  - "neutral (label) / moderate-high / dilute fed TTCA: reversible ring release with label crossover -- operating (2 labs: Jiangnan 13C5-xylose, BTBU 13C5-TTCA)"
+  - "mild_acid / moderate / concentrated (20-40 % water) / pentose + Cys: thiazolidine pre-equilibrium at 50 C and Cys-Amadori <= 35 % at 85-95 C -- operating (Givaudan, qualitative / yields)"
+  - "analogue physical chemistry (formaldehyde, aryl aldehydes, 25-90 C, pH 1-12): mechanism and pH shape only (Kallen, Fife, Pesek, Schubert, Kim; 5 labs)"
+unknown_regimes:
+  - "hexose aldose + free cysteine thiazolidine at any condition (only de Roos's Table II glucose Cys-Amadori yields; no hexose TTCA concentration time course on disk)"
+  - "K(pH) and K(T) for any cysteine-sugar thiazolidine; Cao's K is one temperature (90 C) and one in-situ pH band (4.2-4.7)"
+  - "alkaline (> 7.5, in situ) at process temperature: only label pH 8 pots that drift acid"
+  - "very_high (> 140 C) in solution; only spray-drying (Zhai 2020)"
+  - "intermediate a_w at process temperature (de Roos 20-40 % water is the only one, a_w unmeasured); low a_w only as 25 C storage (Kang) and spray-drying"
+  - "peptide- and protein-bound cysteine (no thiazolidine from a Cys residue measured); glutathione or N-terminal cysteine thiazolidines not covered here"
+  - "inert vs air for the thiazolidine itself (no O2 contrast on disk; the cysteine sink in Wei 2022 and Zhai 2021 that looks like oxidation is not attributed)"
+  - "phosphate 0 vs 0.2 M at fixed pH in one cysteine-sugar pot (the deciding experiment for CF-011 / CF-076; designed experiment E4)"
+  - "dilute (10 mM) Cys + free sugar FORMATION time course (only fed-TTCA decay is dilute)"
+  - "competition of other carbonyls for cysteine at process temperature beyond the Zhao 2017b lipid-aldehyde arms (MGO / GO / furfural thiazolidines: Mizutani's furfural ring only at 120 C H2S)"
+competing_families:
+  - "F22_cysteine_h2s: thermolysis of free cysteine competes for the same cysteine; the ring slows H2S only 1.2-3.5x (Mizutani), so binding is not protection"
+  - "F28_thiol_losses: a fast non-TTCA cysteine sink (~70 % of Cys in 20 min, Wei 2022; ~19 mM unaccounted in Zhang 2025b; >= 84 % of fed TTCA's Cys never seen free, Kang S3) -- wins in dilute unbuffered water at pH ~7; TTCA wins in concentrated acid phosphate pots (Cao)"
+  - "F02_amadori_heyns / F03_amadori_reversion: other amines (glycine, lysine) compete for the sugar released by the ring and drain TTCA (Cao, Zhang 2025b); the Gly-Amadori is the faster route at 140 C (Hou 2017)"
+  - "F06 / F07 deoxyosone hub: TTCA / Cys-Amadori feed 3-DX > 1-DX; free Cys suppresses the hub (Zhai 2019, Zhai 2023 JAFC, Wei 2022), and TTCA may also form FROM deoxyosones (Wei 2022, unproven)"
+  - "F18 / F26 lipid aldehydes: heptenal takes cysteine away from xylose (Zhao 2017b)"
+  - "F23_mft_intact_c5: TTCA's intact C5 reaches MFT (97 %, Zhao 2019); the downstream consumer, not a competitor"
+engine: >-
+  In the engine (src/kinetic_core/sulfur.py, read only): r_ttca_cys (TTCA -> Cys + PENT, k_ttca_cys ~0.0286 /min at 100 C,
+  Ea 64.1, NO pH factor, NO solute / buffer term) and r_ttca_deg (TTCA -> DPO + fragments without free Cys, no pH factor)
+  are always on; TTCA is a FED species. r_ttca_form (B58: Cys + PENT -> TTCA by detailed balance with Cao's K = 60 L/mol,
+  pH- and T-flat) and the de Roos route r_cama_form / r_cama_dpo / r_cama_tdp (B59b: formation pH-flat, Ea 100.9 transferred
+  from a glucose system; decay on de Roos Fig. 4's pH table) are behind switches that are OFF by default
+  (parameters_sulfur.TTCA_FORMATION.enabled / CYS_AMADORI_ROUTE.enabled = False). Mismatches: (1) the shipped engine
+  cannot sequester cysteine in a Cys + pentose pot, while the literature binds 18-89 % of it before or within 0.5 h of
+  heating; (2) every exchange constant is pH-flat where the literature shows strong pH dependence (fed-TTCA loss x10
+  over label pH 5.5-8; analogue K x20 over pH 5.6-7.5), and the engine reads label pH in pots that drift ~1-3 units;
+  (3) no amine or buffer catalysis of ring release / TTCA -> Cys-Amadori, while glycine and lysine visibly speed the
+  drain (mechanism unresolved) and Kallen 1971b says phosphate catalysis saturates and is absent below pH 5 (against a
+  linear k_P law); (4) the engine's exchange releases cysteine 2-30x faster than Zhai 2021's dilute pots allow
+  (EX-054 E0 rejected, single lab; CF-076), yet a slower exchange fails the concentrated pots; (5) one lumped ring
+  opening + hydrolysis step, where Fife shows two (harmless only while release is rate-limiting); (6) no water-activity
+  or very-high-T dependence for TTCA, though a_w is the main storage stressor (Kang) and spray-drying converts TTCA to
+  the Cys-Amadori (Zhai 2020).

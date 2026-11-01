@@ -1,0 +1,228 @@
+# Pathway-condition atlas, family F10 (written 2026-11-01, atlas agent "hub"; vocabulary: families.yml).
+# Bin conventions as in F06_enol12_3deoxyosone.yml (pH boundary -> upper bin; 100 C / reflux -> moderate; operator tags;
+# "[derived here]" = this file's arithmetic; "not_stated" = axis not printed). The family has four sub-routes that the
+# literature treats separately; tags.sub_route says which one a cell bears on:
+#   sugar (open-chain aldose / enediol -> C2 + C4, C3 + C3), ARP (Amadori compound -> MGO / C3 + C3-amine),
+#   3-DG / 3-DX, 1-DG / 1-DX (incl. the pentose C2 + C3 split DPO -> glycolaldehyde + MGO that the engine carries).
+family: F10_retroaldol_c3_c2
+definition: "retro-aldol cleavage of sugars / deoxyosones -> MGO, glyoxal, hydroxyacetone, glyceraldehyde"
+markers:
+  - "COUNTERPART STOICHIOMETRY: a retro-aldol makes both halves - C3 + C3 (MGO + glyceraldehyde), C2 + C4 (glycolaldehyde + erythrose), C2 + C3 for a pentose (glycolaldehyde + MGO). Matched amounts of both halves from a FED parent are the discriminating test (Voigt 2010 / Smuda 2013: 'extremely mismatched' for 1-DG)."
+  - "Label position from singly 13C-labelled sugars: C3 units drawn ~50 : 50 from C1-C3 and C4-C6 (Huyghues-Despointes 1996), MGO label on CHO vs CH3 (Weenen 1998 Scheme 1, from a 1994 study not on disk); intact-skeleton vs scrambled isotopomers in CAMOLA (Cerny 2003; Zhou 2025b)."
+  - "Fed deoxyosone -> MGO (or GO) yield with the parent's loss measured (Thornalley 1999, Gobert 2009, Voigt 2009, Weenen 1998)."
+  - "Not markers: MGO alone (it also forms by triose dehydration, hydroxyacetone oxidation, beta-cleavage partners); a fitted 'DFG -> MGO' constant (Martins k6) is a topology choice, not a demonstration."
+cells:
+  # ---- fed deoxyosones (hexose) -------------------------------------------------------------------
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "37 / 50", sub_route: "1-DG", sugar: hexose_aldose, amine: other_free_aa, amine_detail: "fed 1-DG 42 mM + L-alanine 42 mM", oxygen: [air, inert], buffer: phosphate, metals: not_controlled, operator: "fed intermediate, OPD at sampling"}
+    contrast: "air vs deaerated, 37 vs 50 C: MGO negligible in all four arms while acetic acid reaches 0.55-0.65 mol/mol (beta-cleavage)"
+    status: absent
+    quote: "only negligible amounts of 2-methylquinoxaline"
+    quantity: "MGO from fed 1-DG negligible (data not shown); ~0.9 mol/mol of 1-DG accounted for by beta-cleavage products"
+    evidence: fed_intermediate
+    lab: "Glomb, Halle"
+    dossiers: [voigt2009_extraction.md]
+    where: "Results; dossier sec. 1 (e)"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "37 / 50", sub_route: "1-DG", sugar: hexose_aldose, amine: other_free_aa, amine_detail: "fed 1-DG + L-alanine 42 mM", oxygen: air, buffer: phosphate, metals: not_controlled, operator: "OPD benzimidazole trap after incubation"}
+    contrast: "counterpart test: glycolaldehyde 29 vs glyceraldehyde <= 13 mmol/mol, with MGO negligible - not the C3 + C3 pair a 1-DG retro-aldol needs"
+    status: absent
+    quote: "Glycolaldehyde 29 (50 °C, air, 12 h), glyceraldehyde ≤ 13"
+    quantity: "the review of the same lab calls 1-DG retro-aldolisation 'very unlikely' under these conditions"
+    evidence: fed_intermediate
+    lab: "Glomb, Halle"
+    dossiers: [voigt2010_extraction.md, smuda2013_extraction.md]
+    where: "Voigt 2010 Fig. 3 / text; Smuda 2013 Table 1"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sub_route: "3-DG", sugar: hexose_aldose, amine: [none, other_free_aa], amine_detail: "fed 3-DG 50 uM +- Nalpha-BOC-lysine 50 mM", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: standing_level}
+    contrast: "+ BOC-Lys vs alone (2 d): 3-DG loss x3.4 faster; MGO 0.55 vs 0.09 uM"
+    status: minor
+    quote: "MGO from fed 3-DG 1.3 % (alone) and 2.8 % (+ BOC-Lys)"
+    quantity: "MGO 1.3 % (alone) / 2.8 % (+ amine) of the 3-DG lost in 2 d at 37 C; counterpart glyceraldehyde not measured"
+    evidence: fed_intermediate
+    lab: "Thornalley, Essex"
+    dossiers: [thornalley1999_extraction.md]
+    where: "sec. 3 (printed table)"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 50, sub_route: "3-DG", sugar: hexose_aldose, amine: other_free_aa, amine_detail: "fed 3-DG 42 mM + lysine 42 mM", oxygen: [air, inert], buffer: phosphate, metals: not_controlled, operator: "fed intermediate, OPD at sampling"}
+    contrast: "fed 3-DG vs fed glucosone (same protocol): 3-DG t1/2 40 h, no smaller dicarbonyl; glucosone t1/2 8 h, ~1 % smaller dicarbonyls"
+    status: absent
+    quote: "without making any smaller dicarbonyl at all"
+    quantity: "MGO-, GO-quinoxaline not formed from 3-DG at 50 C, pH 7.4 (OPD method sees both)"
+    evidence: fed_intermediate
+    lab: "Glomb, Halle"
+    dossiers: [gobert2009_extraction.md]
+    where: "Results (fed experiments); Table 3"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 50, sub_route: "glucosone (osone retro-aldol / cleavage)", sugar: hexose_aldose, amine: other_free_aa, amine_detail: "fed glucosone 42 mM + lysine", oxygen: [air, inert], buffer: phosphate, metals: not_controlled, operator: "fed intermediate, OPD at sampling"}
+    contrast: "air vs deaerated: threosone 7.5 vs 3.5, MGO 0.3 vs 0.3, GO 0.7 vs 0.7 mmol/mol glucosone"
+    status: minor
+    quote: "about 1 % of it is found as any smaller"
+    quantity: "C2-C5 dicarbonyls ~1 % of glucosone in 8 h (half consumed); glyoxal 0.07 %"
+    evidence: fed_intermediate
+    lab: "Glomb, Halle"
+    dossiers: [gobert2009_extraction.md]
+    where: "Table 3"
+  - key: {ph: alkaline, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sub_route: "3-DG", sugar: hexose_aldose, amine: [other_free_aa, none], amine_detail: "fed 3-DG 0.55 M +- alanine 0.6 M; biphasic water / n-butanol", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "+ alanine vs no amine (in situ OPD, 1 h): MGO 56 vs 57 ug - amine-independent; 3-DG gives as much MGO as glucose does (43 ug)"
+    status: operating
+    quote: "methylglyoxal from 3-deoxyglucosone is almost amine-independent (56 vs 57)"
+    quantity: "relative ug only (basis unstated); at 100 C, pH 8 a fed 3-DG -> MGO channel is material, unlike 37-50 C"
+    evidence: fed_intermediate
+    lab: "Quest International (Weenen)"
+    dossiers: [weenen1998_extraction.md]
+    where: "Figs. 1-2"
+  - key: {ph: alkaline, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sub_route: "pentose (sugar / deoxyosone)", sugar: [pentose, hexose_aldose], amine: [other_free_aa, none], amine_detail: "xylose or glucose 0.55 M +- alanine 0.6 M", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "xylose vs glucose with alanine: MGO x1.9; xylose with vs without alanine: MGO x4.8"
+    status: unattributed
+    quote: "methylglyoxal xylose / glucose with alanine = 1.9"
+    quantity: "pentose MGO is amine-dependent; the author's 'pentose deoxyosones retro-aldolise more readily' is a hypothesis, no pentose label or counterpart"
+    evidence: within_study_factor
+    lab: "Quest International (Weenen)"
+    dossiers: [weenen1998_extraction.md]
+    where: "Figs. 1-2; text"
+  # ---- pentose counterpart test / CAMOLA ----------------------------------------------------------
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 101, sub_route: "1-DX (C2 + C3 split)", sugar: pentose, amine: other_free_aa, amine_detail: "L-alanine ~1.2-1.5 M", oxygen: air, buffer: phosphate, metals: not_controlled, operator: standing_level}
+    contrast: "counterpart test over 5-180 min: glycolaldehyde / MGO 0.19-0.20 (5-10 min) falling to 0.03 (180 min); a 1 : 1 C2 + C3 source would need a much faster glycolaldehyde sink (unmeasured)"
+    status: unattributed
+    quote: "glycolaldehyde is 5-37× below methylglyoxal on a molar basis"
+    quantity: "MGO 0.35 -> 1.67 umol/mmol xylose; glycolaldehyde peak 0.12-0.13 umol/mmol at 10 min, plateau 0.05"
+    evidence: measured_intermediate
+    lab: "DFA Garching (Hofmann)"
+    dossiers: [hofmann1999_extraction.md]
+    where: "Fig. 10; Table 3"
+    conflict: CF-067
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sub_route: "pentose C2 + C3 recombination (seen in MFT)", sugar: pentose, amine: cysteine, amine_detail: "ribose + cysteine, CAMOLA 13C5-ribose", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "13C isotopomers of the product"}
+    contrast: "isotopomer pattern of MFT: 49 % unlabelled / 46 % 13C5, no M+2 / M+3 fragment pattern"
+    status: minor
+    quote: "pathways via ribose fragmentation were not relevant"
+    quantity: "~93-95 % of MFT carbon is an intact C5 skeleton at 95 C, pH 5, 0.5 M phosphate: the C2 + C3 split feeds MFT only marginally here"
+    evidence: labelling
+    lab: "Nestle Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "Table 2 row 7; p. 2715"
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sub_route: "pentose (free xylose) C3 / C2 cleavage", sugar: pentose, amine: other_free_aa, amine_detail: "Ala-xylose ARP 20 mM + 13C5-xylose 20 mM", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "13C isotopomers of methylpyrazine / pyrazine"}
+    contrast: "time 30-120 min: methylpyrazine M+3 appears only at 90-120 min (4.4-4.6 %); xylose-carbon share of methylpyrazine ~5-7 %"
+    status: unattributed
+    quote: "6.0 / 5.1 / 6.9 / 6.1 %"
+    quantity: "a labelled C3 unit from free xylose reaches methylpyrazine: C-C cleavage of the pentose into C3 (+ C2) occurs; retro-aldol vs beta-cleavage (hydroxyacetone) not separated"
+    evidence: labelling
+    lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+    dossiers: [zhou2025b_extraction.md]
+    where: "Table 2"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sub_route: "3-DX / 1-DX", sugar: pentose, amine: [glycine, sulfur_aa_other], amine_note: "glycine + cystine", amine_detail: "fed glycine-xylose ARP 5 mM +- L-cystine 5 mM (a suspension)", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    contrast: "+ cystine vs ARP alone: extra GO + MGO ~0.075 mM at 20 min against a deoxyosone deficit ~0.36 mM; after 40 min GO / MGO LOWER with cystine"
+    status: unattributed
+    quote: "directed degradation of DXs toward the retro-aldolization"
+    quantity: "the authors' retro-aldol claim fails its own mass balance; no fed deoxyosone, no counterpart"
+    evidence: within_study_factor
+    lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+    dossiers: [hou2026_extraction.md]
+    where: "Fig. 3; dossier sec. 1 (e)"
+    conflict: CF-083
+  # ---- ARP (Amadori) retro-aldol --------------------------------------------------------------------
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100 / 120", sub_route: ARP, sugar: hexose_aldose, amine: glycine, amine_detail: "fed DFG (glycine ARP)", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: standing_level}
+    contrast: "pH 5.5 vs 6.8: MGO almost unchanged; 100 vs 120 C: MGO x1.6-2.6 at 120 min; no decay of MGO in time"
+    status: operating
+    quote: "increase of pH had almost no influence on the MG"
+    quantity: "MGO up to ~3.2 mM from fed DFG at 120 C, pH 6.8 (figure read); route assigned to DFG retro-aldol by the authors' model"
+    evidence: fed_intermediate
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2003b_extraction.md]
+    where: "Fig. 4; sec. 3.1.4b"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "80-120 (k at 100)", sub_route: ARP, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "standing_level (fit infers flux)"}
+    contrast: "temperature: Ea(k6, DFG -> MGO) 124.5 vs 97-107 for the enolisations, so the fitted retro-aldol share rises steeply with T"
+    status: operating
+    quote: "7.1e-3 ± 4.6e-4"
+    quantity: "k6 7.1e-3 /min at 100 C (~21 % of DFG's three exits at 100 C [derived here])"
+    evidence: kinetic_fit
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2005_extraction.md]
+    where: "Table 2"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sub_route: ARP, sugar: hexose_aldose, amine: glycine, amine_detail: "glucose : glycine 1 : 1 vs 1 : 2", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "standing_level (fit infers flux)"}
+    contrast: "doubling glycine: k6 5.2e-3 -> 8.5e-3 /min (non-overlapping HPD); pD 0.51 +- 0.14 over pH 4.8-7.5"
+    status: operating
+    quote: "1.6-fold increase"
+    quantity: "fitted ARP retro-aldol rises with free amine (x1.6) and with pH (0.51 dex / unit)"
+    evidence: kinetic_fit
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2005b_extraction.md]
+    where: "Tables 3-4"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: none, T_C: 250, sub_route: "ARP / sugar", sugar: hexose_aldose, amine: other_free_aa, amine_detail: "L-proline + singly 13C-labelled glucose (C-1 ... C-6), pyrolysis 20 s", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "13C label position (Py-GC-MS)"}
+    contrast: "label position across six glucose isotopomers"
+    status: operating
+    quote: "55 % from glucose C1-C3, 45 % from C4-C6"
+    quantity: "C3 unit (1-pyrrolidinyl-2-propanone) split ~55 : 45 between the two glucose halves, as a C3-C4 retro-aldol requires; 70 % of C2 / C4 products via C2-C3 cleavage (authors' assignment)"
+    evidence: labelling
+    lab: "McGill (Yaylayan)"
+    dossiers: [huyghuesdespointes1996_extraction.md]
+    where: "Tables 4-5; Scheme 1"
+  # ---- amine-free sugar retro-aldol ------------------------------------------------------------------
+  - key: {ph: not_stated, temperature: very_high, water: dilute}
+    tags: {ph_basis: none, T_C: "300-400 (25-40 MPa)", sub_route: sugar, sugar: [hexose_aldose, hexose_ketose], amine: none, amine_detail: "pure sub- / supercritical water, flow reactor 0.02-2 s", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "products measured (HPLC)"}
+    contrast: "glucose vs fructose: aldose -> erythrose + glycolaldehyde, ketose -> 2 glyceraldehyde"
+    status: operating
+    quote: "Glucose and fructose break by retro-aldol into erythrose + glycolaldehyde (C4 + C2)"
+    quantity: "thirteen fitted first-order constants at four conditions; no Ea printed"
+    evidence: kinetic_fit
+    lab: "Tohoku (Arai)"
+    dossiers: [kabyemela1999_extraction.md]
+    where: "Figure 6; rate table"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: none, T_C: "160 / 180 / 200", sub_route: "3-DG vs 1-DG", sugar: hexose_aldose, amine: none, oxygen: air, buffer: none_unbuffered, metals: not_controlled, operator: "standing_level (fit infers flux)"}
+    contrast: "model discrimination: MGO from 1-DG estimated zero in most cases, MGO from 3-DG kept"
+    status: operating
+    quote: "MGO comes from 3-DG here"
+    quantity: "fitted amine-free 3-DG -> MGO in a glucose glass (k step 11); 1-DG -> MGO refused by the fit"
+    evidence: kinetic_fit
+    lab: "Hacettepe (Gokmen)"
+    dossiers: [kocadagli2016jafc_extraction.md]
+    where: "lines 390-391 (Just Accepted MS)"
+condition_dependence: >-
+  SHOWN: (i) 1-DG retro-aldol is negligible from a fed 1-DG at 37-50 C, pH 7.4, with or without air (Glomb; counterpart
+  amounts mismatched), and the amine-free glass fit also refuses 1-DG -> MGO (Kocadagli) - two labs. (ii) 3-DG -> MGO is
+  tiny at 37-50 C (1.3-2.8 % of 3-DG lost, Thornalley; none detected, Gobert) but material from a fed 3-DG at 100 C,
+  pH 8, in situ (Weenen, relative units), and kept by the glass fit at 160-200 C: a strong temperature dependence that
+  no study measures inside one design. Amine raises 3-DG -> MGO x2 at 37 C (Thornalley) but not at 100 C (Weenen 56 vs
+  57). (iii) The ARP retro-aldol is a fitted step (Martins: highest Ea, 124.5; rises with amine x1.6 and pH 0.51 dex /
+  unit); labelling supports C3-C4 cleavage only under pyrolysis (Yaylayan, proline, 250 C). (iv) Sugar retro-aldol
+  without amine is shown in sub/supercritical water (Kabyemela). (v) Pentose: no fed 1-DX / 3-DX test exists; the one
+  counterpart series (Hofmann 1999) gives glycolaldehyde 5-37x below MGO, and CAMOLA shows the C5 skeleton intact in
+  MFT at 95 C (Cerny 2003) while labelled xylose C3 units reach methylpyrazine at 120 C, pH 8 (Zhou 2025b). The Jiangnan
+  claim of a cystine-promoted deoxyosone retro-aldol (Hou 2026) fails its own mass balance.
+best_supported_regimes:
+  - "neutral / low (37-50 C) / dilute / fed hexose deoxyosones in phosphate: absent (1-DG) to minor (3-DG, <= 3 %) - Glomb, Thornalley: 2 labs, fed"
+  - "neutral / moderate-high / dilute / hexose ARP + glycine: operating as a fitted DFG -> MGO step (Wageningen only)"
+  - "very_high / dry or supercritical / hexose: operating (Yaylayan labelling, pyrolysis; Arai, hot water): 2 labs, no amino acid in water"
+unknown_regimes:
+  - "fed 1-deoxypentosone or 3-deoxypentosone -> MGO / glycolaldehyde at 100-140 C (the engine's r_dpo_c2c3 has no fed test)"
+  - "fed hexose deoxyosone at 100-140 C with a calibrated MGO (Weenen's is uncalibrated and biphasic)"
+  - "pH dependence of any deoxyosone retro-aldol (only the fitted ARP step has a pD)"
+  - "O2 (the Glomb 1-DG tests are air vs deaerated and negative both ways; nothing at cooking T)"
+  - "phosphate vs water; cysteine pots; low a_w with an amino acid"
+competing_families:
+  - "F11_beta_dicarbonyl_cleavage: the 1-deoxyosone's real C-C cleavage (acetic acid + C4 / hydroxyacetone + glyceric acid; 0.55-0.84 mol/mol) - it, not retro-aldol, empties 1-DG"
+  - "F12_alpha_oxidative_cleavage under air (lactic / glyceric acid x4-6, Voigt 2010)"
+  - "F09_namiki_c2 and F08 (glyoxal / glycolaldehyde from the Schiff base or the osone)"
+  - "F13 (3-DG -> HMF / 3,4-dideoxyosone) and F31 (3-DG + amine -> melanoidin) for the 3-deoxyosone pool"
+engine: >-
+  Four steps carry the family: r_ama_mgo (Martins k6, DFG -> MGO; scaled by the shared trunk pH exponent 0.69, not by its
+  own pD 0.51); r_tdg_mgo (Kocadagli step 11, amine-free 3-DG -> MGO; its B40 pH term was rejected by the Leitzen
+  hold-out); r_dpo_c2c3 (1-deoxypentosone -> glycolaldehyde + MGO, 1 : 1, retro-aldol) and r_glc_c2c3 (glucose -> HA +
+  MGO + C1). Mismatches: (1) r_dpo_c2c3 rests on the hexose analogue that the Glomb lab refuted with fed 1-DG (negligible
+  MGO, mismatched counterparts) and on no pentose fed test; Hofmann 1999's HA : MGO of 0.03-0.2 does not show a 1 : 1
+  source; its parameter note leans on MFT label / yield arguments (Hofmann 1998 T10, Cerny), i.e. on the product, not on
+  the cleavage. (2) r_glc_c2c3's C2 + C3 + C1 stoichiometry is not a retro-aldol pattern: the measured sugar retro-aldols
+  give C2 + C4 (aldose) or C3 + C3 (ketose) (Kabyemela; Huyghues-Despointes). (3) No temperature structure: the
+  literature says 3-DG -> MGO is ~0 at 37-50 C and material at >= 100 C; the engine's r_tdg_mgo barrier comes from a
+  160-200 C glass fit. (4) The pentose lane has no glyoxal-forming cleavage at all.

@@ -1,0 +1,245 @@
+# Pathway-condition atlas, family F18 (literature side). Written 2026-11-01 from the extraction dossiers named per
+# cell; vocabulary and status caps from docs/reference/pathway_atlas/families.yml. Every quote is a verbatim substring
+# of the cited dossier (checked by scratchpad check_atlas.py, whitespace-normalised). Numbers marked "mine" are derived
+# by this atlas, not printed. Every quantitative cell but one is from ONE laboratory (Instituto de la Grasa, Seville);
+# the Reading cell is indirect. Lipid aldehyde + H2S / NH3 heterocycles are F26 / F21; lipid oxidation itself is F30.
+family: F18_lipid_strecker
+definition: "lipid carbonyls (enals, epoxyalkenals, HNE) as Strecker donors / keto-acid route"
+markers:
+  - "A FED lipid carbonyl (2,4-alkadienal, 4,5-epoxy-2-alkenal, 4-oxo-2-alkenal, 4-hydroxy-2-nonenal, hydroperoxide) + amino acid, with NO sugar, gives the Strecker aldehyde above the amino-acid-alone blank, linear in the carbonyl dose."
+  - "The nitrogen ends in a LIPID-derived product (N-substituted pyrroles, 2-alkylpyridines, nona-1,3-dien-1-amine), not in a sugar aminoketone: no pyrazine co-product is expected from this route."
+  - "The free carboxyl is required: the amino-acid METHYL ESTER gives no Strecker aldehyde (Hidalgo 2004); aldehyde formed at 37 C, not in the GC injector, shown by cysteamine trapping."
+  - "Keto-acid route: the transamination product (phenylpyruvic acid from Phe) appears beside the aldehyde; a FED alpha-keto acid degrades a second amino acid to its Strecker aldehyde without forming the amine."
+  - "Oxygen signature OPPOSITE to F16: for alkadienals / hydroperoxides the aldehyde collapses under N2 (x4 - 9 less) and the Strecker AMINE (non-oxidative decarboxylation) takes over."
+cells:
+  # ---- epoxyalkenals / hydroxyalkenals at 37 - 80 C -----------------------------------------------------------------
+  - key: {ph: mild_acid, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 37, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "HNE or 4,5-epoxy-2-decenal 50 mM + Phe 50 mM, acetonitrile-water 2:1 or 1:2, closed 4-mL vial with 1 mL, 21 h", solvent: "acetonitrile-water", ph_note: "pH ~5, 'did not change significantly'"}
+    contrast: "37 vs 60 C: equal (8.7 +- 0.4 umol PA / 50 umol Phe); 80 C lower (acetonitrile loss, authors); HNE dose 0 - 50 umol saturates above ~25 umol; HNE = ED"
+    status: dominant
+    quote: "PA 166 +- 8 to 188 +- 24 µmol/mmol Phe"
+    quantity: "PA 16.6 - 18.8 % of Phe (HNE), 16.0 - 24.8 % (ED) across 37 / 60 C, n >= 3; Phe-alone blank 1 - 6 % of Phe"
+    evidence: fed_intermediate
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [hidalgo2005_extraction.md]
+    where: "Table 2, Fig. 5"
+    conflict: CF-078
+    note: "CF-078: the same ED + Phe pot in Zamora 2006 gives ~5.1 umol/mmol (x34 lower); CF-078 (extended 2026-11-01) also carries Zamora 2013 Table 2 (pH 3 citrate, 37 C, 24 h): HNE 5.6 and ED 15.8 umol/mmol against a 4.8 control, x11 - 32 below this cell for the same two donors."
+  - key: {ph: acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "ED 0 - 31 umol + Phe 25 umol in 500 uL acetonitrile-50 mM citrate 2:1, pH 3, 21 h", solvent: "acetonitrile-buffer"}
+    contrast: "keto acid vs aldehyde exit of the same imine: PPA ~2.5x PA at pH 2 - 4; both linear in ED (slope ratio PPA / PA 3.4)"
+    status: operating
+    quote: "PPA from ED + Phe, identified against the authentic compound; ~2.5x PA at pH 2-4"
+    quantity: "PA ~0.5 %, PPA ~1.4 % of Phe at 21 - 24 h (figure-only)"
+    evidence: fed_intermediate
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2006_extraction.md]
+    where: "Figs. 1 - 4, dossier sec. 1"
+    conflict: CF-078
+  - key: {ph: acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "ED + Phe, acetonitrile-50 mM citrate (pH 2 - 6) or phosphate (pH 6 - 8) 2:1, 21 h", solvent: "acetonitrile-buffer"}
+    contrast: "pH 2 -> 8: PA 4.9 -> 2.9 umol/mmol (x1.7 fall); PPA 12.1 -> 3.6 (x4 fall); optimum pH <= 3"
+    status: operating
+    quote: "PPA falls ~4x from pH 3 to 7-8, PA only ~1.7x"
+    quantity: "PA 0.29 - 0.51 % of Phe across pH 2 - 8 (figure-only)"
+    evidence: within_study_factor
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2006_extraction.md]
+    where: "Fig. 1"
+    conflict: CF-079
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 60, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "phenylpyruvic acid 0.5 umol + Phe 25 umol, 500 uL acetonitrile-citrate 2:1, pH 3, 24 h", solvent: "acetonitrile-buffer"}
+    contrast: "fed keto acid: PA and benzaldehyde rise linearly; in the ED pots PPA falls ~64 % from 4 to 21 h, far more than this conversion explains"
+    status: minor
+    quote: "PPA -> PA conversion is slow"
+    quantity: "~2.4 % of fed PPA to PA and ~2.7 % to benzaldehyde in 24 h (dossier's derivation from the figure)"
+    evidence: fed_intermediate
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2006_extraction.md]
+    where: "Fig. 6 (caption says ED, Methods say PPA; Methods taken)"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, feed: "4,5-epoxy-2-heptenal or -decenal 0.1 M + Phe (or Phe methyl ester) 0.1 M, 0.3 M citrate / phosphate / borate pH 4 - 10, overnight"}
+    contrast: "pH 4 -> 10: PA / IS area Gaussian centred at pH 6.9; Phe methyl ester: no PA; cysteamine trap: PA made at 37 C"
+    status: operating
+    quote: "mainly produced at pH 6-7"
+    quantity: "area ratios only, no yield"
+    evidence: trapping
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [hidalgo2004_extraction.md]
+    where: "Figs. 1 - 3, dossier sec. 1 and 3"
+    conflict: CF-079
+    note: "CF-079: same lab, optimum pH 6.9 here (aqueous buffer, pH 4 - 10) vs <= 3 in Zamora 2006 (acetonitrile, pH 2 - 8)."
+  # ---- alkadienals / hydroperoxides / oxoalkenals at 120 - 180 C ----------------------------------------------------
+  - key: {ph: acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "2,4-decadienal or methyl 13-oxooctadeca-9,11-dienoate 50 mM + Phe 50 mM, 0.3 M citrate pH 3, closed tubes, air, 1 h"}
+    contrast: "air vs inert atmosphere (data not shown): almost no PA without O2; the dienal first oxidises to the epoxyalkenal (detected)"
+    status: operating
+    quote: "under an inert atmosphere almost nothing forms"
+    quantity: "PA ~8 % of Phe in 1 h (decadienal), ~6 % in 3 h (ketodiene)"
+    evidence: qualitative
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2007_extraction.md]
+    where: "Discussion, Figs. 5 - 6"
+    conflict: CF-026
+  - key: {ph: acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "same pots, 0.3 M citrate / phosphate / borate pH 3 - 12, 1 h"}
+    contrast: "pH 3 -> 12: PA falls exponentially; hexanal (9 - 14 % of decadienal) shows no clear pH trend; PA and hexanal zero order for the first hour"
+    status: operating
+    quote: "exponential decrease, pH 3–12 (r² = 0.96)"
+    quantity: "figure-only beyond the ~8 % at pH 3"
+    evidence: within_study_factor
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2007_extraction.md]
+    where: "Fig. 2A"
+  - key: {ph: acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "linoleate / linolenate hydroperoxides and their secondary / tertiary products 0 - 50 mM + Phe 50 mM, 0.3 M citrate / phosphate / borate pH 2.15 - 12, 1 h"}
+    contrast: "pH 2.15 -> 12: x48 fall; under nitrogen every product except the epoxyketo ester loses most activity; n-6 = n-3"
+    status: operating
+    quote: "12 % at pH 2.15 → 0.25 % at pH 12"
+    quantity: "PA 12 % of Phe at pH 2.15, 0.25 % at pH 12 (1 h, equimolar)"
+    evidence: within_study_factor
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2008_extraction.md]
+    where: "Fig. 1 and text; Fig. 3 (N2)"
+  - key: {ph: acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "120-180", sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "eight lipid carbonyls + Phe 20 mM each in 0.5 mL 0.3 M citrate pH 3, closed tubes; zero-order PA rates 120 - 180 C"}
+    contrast: "air vs nitrogen, 2,4-decadienal: apparent Ea x2.8 higher without air"
+    status: operating
+    quote: "27.6 (air) → 78.0 (N₂)"
+    quantity: "Ea 27.6 (air) vs 78.0 (N2) kJ/mol; Ea ladder 27.6 - 67.1 kJ/mol across classes in air"
+    evidence: kinetic_fit
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2013_extraction.md]
+    where: "Table 2 and text"
+  - key: {ph: acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "same eight carbonyls + Phe, pH 3, 37 C 24 h vs 80 C 2 h vs 180 C 1 h"}
+    contrast: "temperature: Ea correlates with yield only at 37 C (r -0.83); at 80 and 180 C competing channels set the ranking (4-oxo-2-nonenal highest)"
+    status: operating
+    quote: "A LOW ACTIVATION ENERGY PREDICTS HIGH YIELD ONLY AT LOW TEMPERATURE"
+    quantity: "PA 0.56 - 2.3 % of Phe at 37 C / 24 h vs control 0.48 %; 2.1 - 16.8 % at 180 C / 1 h vs control 0.85 %"
+    evidence: within_study_factor
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2013_extraction.md]
+    where: "Table 2, sec. 3c"
+    conflict: CF-078
+    note: "HNE at 37 C here is 5.6 vs control 4.8 umol/mmol (about nothing) while Hidalgo 2005 gives 166 - 178 for HNE at 37 C in acetonitrile-water (same lab, solvent and buffer differ): registered in CF-078 (extended 2026-11-01)."
+  - key: {ph: acid, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "11 lipid carbonyls / hydroperoxides + Phe, 10 umol each on 600 mg sand with 110 uL aqueous (0.3 M citrate pH 3 or phosphate pH 6), closed tubes, N2 or air, 1 h", water_note: "low-moisture sand slurry; a_w not measured"}
+    contrast: "air vs N2: PAC x4 - 8 (decadienal x6.0 at pH 3, x9.4 at pH 6); benzaldehyde x5 - 10; the amine PEA falls x1 - 7"
+    status: operating
+    quote: "Air multiplies PAC by 4-8 (DD pH 3: 6.0; pH 6: 9.4)"
+    quantity: "PAC under air at pH 3: hydroperoxides 11 - 16 %, alkadienals 8 - 13 %, epoxyalkenals 10 - 12 %, oxoalkenals 4 - 7 %, HNE 1 % of Phe; under N2 0 - 4.2 %"
+    evidence: within_study_factor
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2015_extraction.md]
+    where: "Table 1, dossier derived table"
+    note: "Phe alone under air gives PAC 0.4 % (pH 3) and 2.1 % (pH 6): read carbonyl yields net of that row. HNE needs O2 here (PAC 0 under N2 at pH 3) although Hidalgo 2005 makes 17 % at 37 C in a vial with an unstated headspace."
+  - key: {ph: neutral, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: other_free_aa, oxygen: inert, buffer: phosphate, metals: not_controlled, feed: "as above, pH 6 phosphate, N2", water_note: "sand slurry"}
+    contrast: "aldehyde vs amine split: under N2 at pH 6 the amine dominates (PEA / PAC 6.9 for decadienal, 8.9 - 11 for octenal / heptadienal); under air the amine share is < 0.25 for every carbonyl"
+    status: operating
+    quote: "the amine share is below 0.25 for every carbonyl, at either pH"
+    quantity: "decadienal pH 6 N2: PEA 2.7 %, PAC 0.39 %, BZA 0.22 % of Phe (aldehyde ~12 % of the quantified products)"
+    evidence: within_study_factor
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2015_extraction.md]
+    where: "Table 1 and dossier derived split table"
+    note: "the non-oxidative branch (Strecker amine) is the lipid route's main exit without O2 at pH 6; the PEA route is catalytic in the carbonyl, the aldehyde route consumes it."
+  - key: {ph: acid, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: other_free_aa, oxygen: inert, buffer: carboxylate, metals: not_controlled, feed: "decadienal + Phe on sand, pH 2.15 - 9 (atmosphere read as N2), 1 h; and 100 - 170 C time courses under N2"}
+    contrast: "pH 2.15 -> 6.5: PAC 1.6 % -> 0.4 %, flat above, while PEA rises 2.3 -> 2.8 %; temperature: Ea PAC 74 (pH 3) / 40 (pH 6), PEA 51 / 65 kJ/mol"
+    status: operating
+    quote: "from 1.6 % at pH 2.15 to 0.4 % at pH 6.5"
+    quantity: "PAC 1.6 % of Phe at pH 2.15, 0.4 % at pH 6.5 (N2)"
+    evidence: within_study_factor
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [zamora2015_extraction.md]
+    where: "text (Figs. S2, S5 - S6)"
+  # ---- alpha-keto acids as donors -----------------------------------------------------------------------------------
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "11 alpha-keto acids 62.5 mM + Phe 62.5 mM, 0.3 M citrate pH 3, closed tubes, 1 h; glyoxylic acid 80 - 140 C series"}
+    contrast: "keto-acid identity: glyoxylic > MetKA > ValKA; LeuKA / IleKA not above the Phe-alone control; no 2-phenylethylamine with any keto acid; Ea 38.2 kJ/mol (glyoxylic)"
+    status: operating
+    quote: "was not observed in the reactions of phenylalanine with α-keto acids"
+    quantity: "figure-only levels; PA linear in glyoxylic acid (r 0.998); 37 C / 6 d only 30 % below 100 C / 1 h"
+    evidence: fed_intermediate
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [hidalgo2013_extraction.md]
+    where: "Fig. 1, Fig. 2B / 2D, sec. 3.2 and 4"
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "glyoxylic acid + Phe, pH 3, 1 h, 0 - 100 % O2; and pH 2.15 - 12"}
+    contrast: "O2 0 -> 100 %: PA +19 % (linear); pH: highest at pH < 4, similar at 4 - 9, falling 9 - 12"
+    status: operating
+    quote: "increase of 19 % over the range, linear r = 0.94"
+    quantity: "x1.19 over 0 - 100 % O2"
+    evidence: within_study_factor
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [hidalgo2013_extraction.md]
+    where: "Fig. 2A, 2C; sec. 3.2"
+    note: "the keto-acid donor is nearly O2-independent, unlike the alkadienals (x4 - 9)."
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 60, sugar: none, amine: glycine, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "glycine + 4,5-epoxy-2-decenal 62.5 mM each, 0.3 M citrate pH 3, 2 d, then Phe added, 3 d more; 37 vs 60 C", amine_also: other_free_aa}
+    contrast: "37 vs 60 C: glyoxylic acid formed from Gly + ED and then consumed on Phe addition at 60 C; PA much higher at 60 C"
+    status: operating
+    quote: "much higher extent at 60 than at 37 C"
+    quantity: "figure-only; at 60 C PA exceeds the glyoxylic acid measured, so other Gly-ED products also act as donors"
+    evidence: measured_intermediate
+    lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    dossiers: [hidalgo2013_extraction.md]
+    where: "Fig. 3, sec. 3.3 and 4"
+    note: "the delayed route: lipid carbonyl -> keto acid of a first amino acid -> Strecker aldehyde of a second, after the lipid is gone."
+  # ---- second laboratory, indirect -----------------------------------------------------------------------------------
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "100-105", sugar: hexose_aldose, amine: sulfur_aa_other, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, feed: "Met 0.14 M +/- glucose 0.072 M +/- linoleic acid 0.5 g/L (+/- starch), 400 mL, reflux 2 h in SDE, pH-stat 6"}
+    contrast: "linoleic acid + Met: methional nd; + glucose: methional 36 -> 106 ug (x2.9 with linoleic acid); methionine depletes 2,4-decadienal /4"
+    status: unattributed
+    quote: "linoleic acid raises methional ×2.9 (L/M/G vs M/G)"
+    quantity: "recovered amounts under SDE (not formed amounts)"
+    evidence: within_study_factor
+    lab: "University of Reading (Ames)"
+    dossiers: [mandin1999_extraction.md]
+    where: "Table 2; dossier sec. 3 ratios"
+    note: "unoxidised linoleic ACID is no Strecker donor at 100 C (L/M nd, the evidence map's negative control); the x2.9 with glucose is attributed by the authors to more alpha-dicarbonyls, so it is not a marker of this family."
+condition_dependence: >-
+  SHOWN (one laboratory, Seville, for every quantitative cell). Lipid carbonyls degrade free Phe to its Strecker
+  aldehyde from 37 C (hours, epoxyalkenals / HNE / oxoalkenals; yields 0.5 - 25 % depending on the paper, CF-078) to
+  180 C (1 h, alkadienals / hydroperoxides 8 - 17 %). OXYGEN: alkadienals, hydroperoxides and HNE need O2 for the
+  aldehyde (x4 - 9 more under air at 140 C on sand; Ea 27.6 in air vs 78.0 under N2), because they first oxidise to
+  epoxy / keto species; without O2 the same imine decarboxylates to the Strecker AMINE, which dominates at pH 6
+  under N2. Keto-acid donors are nearly O2-independent (+19 % over 0 - 100 % O2). pH: acid favours the aldehyde
+  at 140 - 180 C (exponential fall pH 2 - 12) and in acetonitrile at 37 C (optimum <= 3), but an aqueous
+  epoxyalkenal series at 37 C peaks at pH 6.9 (CF-079). TEMPERATURE: low-Ea donors win at 37 C, competing channels
+  set the ranking at 80 - 180 C. WATER: all pots are acetonitrile-water, buffer at 20 - 90 mM, or sand slurries;
+  the water series on sand moves both exits. A transamination exit (alpha-keto acid) can exceed the aldehyde at
+  37 C (x2.5) and is itself a slow donor (~2 % per day at 60 C). Second laboratory: Reading shows only that
+  UNOXIDISED linoleic acid is not a donor at 100 C and that lipid amplifies methional with glucose (unattributed).
+  ASSUMED / NOT SHOWN: any lipid-donor Strecker in a pot with sugar where the lipid route is marked; any amino acid
+  other than Phe (and Gly as keto-acid source); protein-bound amine; purely aqueous pots at 100 - 140 C.
+best_supported_regimes:
+  - "acid / very_high (180 C) / dilute buffer / alkadienal or hydroperoxide + Phe under air: operating, 8 - 12 % PA in 1 h (Seville, several papers; one lab)"
+  - "acid / high (140 C) / low_aw sand / 11 lipid carbonyls + Phe, air vs N2: operating, O2-dependent (Seville; one lab)"
+  - "low (37 C) / dilute (acetonitrile-water) / HNE or epoxydecenal + Phe: dominant source of PA in a sugar-free fed pot, magnitude CONFLICTING (CF-078)"
+  - "acid / moderate (100 C) / dilute / alpha-keto acid + Phe: operating, no amine (Seville)"
+unknown_regimes:
+  - "any pot with sugar AND a lipid carbonyl in which the lipid route is marked (label, fed carbonyl with sugar)"
+  - "a second laboratory for any quantitative lipid-donor Strecker yield or pH / O2 law (evidence map 2.10: SINGLE)"
+  - "purely aqueous pots at 60 - 140 C (the 37 C aqueous series is area ratios only)"
+  - "amino acids other than Phe (Leu, Ile, Val, Met aldehydes never measured with a lipid donor; Hidalgo 2016 added them but measured Phe's products only)"
+  - "protein-bound or peptide amine with a lipid donor"
+  - "alkaline in-situ pH with a measured aldehyde yield beyond the figure-only series"
+  - "intermediate_aw (0.5 - 0.9) at a measured a_w"
+competing_families:
+  - "F16_strecker_aldehyde: sugar dicarbonyls compete for the same amino acid; no study has both donors with a marker (designed experiment E7)."
+  - "the Strecker AMINE exit (non-oxidative decarboxylation): wins under N2 at pH 6 (PEA / PAC up to 11)."
+  - "F30_lipid_oxidation_crossover: the same carbonyls go to hexanal (9 - 14 % of decadienal), pyrroles and melanoidin-type polymers; F21 (dienal + NH3 -> 2-alkylpyridines) and F26 (dienal + H2S -> thiophenes) take the same donors."
+  - "F28_thiol_losses / covalent amine adducts: N-substituted 2-pentylpyrroles are the main product of epoxyalkenal + amine, ahead of the aldehyde."
+engine: >-
+  NOT IN THE ENGINE. The lipid lane (lipid.py) and the Maillard lanes share no species: lane_coupling_verdict
+  permits co-integration as a DIRECT SUM because the only candidate coupling (aldehyde-lysine covalent sink) is
+  inert by ruling, so the engine predicts x1 for any lipid effect on a Strecker aldehyde. No lipid carbonyl acts on
+  an amino acid; no keto-acid species; no Strecker amine; no Phe aldehyde. MISMATCHES: (a) lipid carbonyls give
+  Strecker aldehydes at yields comparable to or above the sugar dicarbonyls (8 - 17 % at 180 C vs ~1 % from fed MGO
+  at 98 C) and from 37 C upward; (b) their O2 dependence is the opposite of the engine's Strecker (which is
+  O2-independent, correct only for sugar dicarbonyls); (c) the lipid lane's 2,4-decadienal is a reactant here that
+  Met depletes /4 (Mandin), a cross-term the direct sum forbids. A plant-protein + oil matrix is where the omission
+  matters most; the evidence is one laboratory, so a declared band, not a fitted step, is what it supports.

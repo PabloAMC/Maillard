@@ -1,0 +1,288 @@
+# Pathway-condition atlas: F30_lipid_oxidation_crossover (literature side). Built 2026-11-01 from the extraction
+# dossiers only. Quotes verbatim from the cited dossier. Scope: lipid oxidation products (or a lipid phase) ENTERING or
+# DIVERTING Maillard routes, and Maillard reactants / products acting back on lipid oxidation. The lipid-carbonyl
+# Strecker donor (F18), lipid aldehyde + H2S heterocycles (F26) and thiol traps (F28) are separate families; cells here
+# that touch them are the crossover evidence (lipid present vs absent, labelled lipid carbon, fed lipid carbonyl), and
+# say which neighbour they also bear on. "not_stated" marks a pH the study does not report.
+family: F30_lipid_oxidation_crossover
+definition: "lipid oxidation products entering Maillard routes (and Maillard products as antioxidants)"
+markers:
+  - "LABELLED LIPID CARBON in a Maillard product: 13C-dienal C5 -> pyridine C2 (zhou2000); CAMOLA with [13C6]-glucose showing the unlabelled (non-sugar) share of a sulfur heterocycle when lipid is added (du2023, du2025)."
+  - "LABELLED NITROGEN from the amine / ammonia into a lipid-carbon heterocycle: 15N-NH3 -> pyridine N (zhou2000); 15N-amide share of 2-pentylpyridine (kim1996b)."
+  - "FED LIPID CARBONYL + amine / ammonia / H2S giving a product that cannot form without it: 2-alkylpyridines, 2-alkylthiophenes, 2-alkyl-2H-thiapyrans (zamora2020, du2023, whitfield1988, elmore2002)."
+  - "LIPID PRESENT vs ABSENT in one Maillard pot (within-study factor): the change in Maillard products (MFT, FFT, thiophenes, pyrazines) and the change in lipid volatiles (aldehydes consumed by the Maillard reactants)."
+  - "Loss of amine sites (Lys, His) or thiol on a protein / peptide against a lipid aldehyde dose (meynier2004, doorn2002)."
+  - "NON-markers: a lipid volatile (hexanal, 2-pentylfuran) in a Maillard pot -- it may be carried in, or formed by lipid oxidation alone (CF-033: lipid-type volatiles in lipid-free pots)."
+cells:
+  # ---------------- lipid present vs absent in cysteine + sugar pots (CF-031) ----------------
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "25 mM Cys + ribose, pyrophosphate pH 5.5, 30 min, +/- 25 mM methyl linoleate (18:2) or linolenate (18:3): MFT x1/14 (18:2) and > x1/80 (18:3); FFT 92 -> 87 -> 17; none of 33 Cys/ribose compounds rose with 18:2"
+    status: operating
+    quote: "MFT 807 (±508) → 58 (±71) → tr"
+    quantity: "relative to 100 ng dichlorobenzene, n = 4; authors: H2S reacts with lipid products 'which reduces its availability' to Maillard intermediates"
+    evidence: within_study_factor
+    lab: "Reading (Mottram / Elmore) with Bristol"
+    dossiers: [elmore2002_extraction.md]
+    where: "Table 1; sec. 1 summary"
+    conflict: CF-031
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "REVERSE direction, same study: Cys + ribose added to the PUFA ester remove its C3-C5 2-alkenals and cut 2,4-heptadienal 10x, while 2-pentylfuran / 2-ethylfuran rise x2-5; new H2S-lipid products appear (2-ethyl-2H-thiapyran 469)"
+    status: operating
+    quote: "2-butenal 497 → ND, 2-pentenal 437 → tr"
+    quantity: "2,4-heptadienal 3083 -> 297; 2-pentylfuran 315 -> 1736 (18:2)"
+    evidence: within_study_factor
+    lab: "Reading (Mottram / Elmore) with Bristol"
+    dossiers: [elmore2002_extraction.md]
+    where: "Tables 2 and 3"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: inert, buffer: phosphate, metals: not_controlled}
+    contrast: "four lipids (beef TG, beef PL, egg PC, egg PE) heated +/- Cys + ribose, 0.5 M phosphate pH 5.6, N2, 1 h: saturated n-aldehydes ~x0.5, 2-alkenals / 2,4-alkadienals > x0.1 (often to zero), 2-alkanones unchanged, 1-alcohols and 2-alkylfurans rise (to ~20x with PC); PE alone already gives > 10x less unsaturated aldehyde (its own amine)"
+    status: operating
+    quote: "The authors reject a general antioxidant effect (ketones unchanged)"
+    quantity: "hexanal +Cys/Rib / -Cys/Rib: BTG 0.47, BPL 0.50, PC 0.83, PE 0.32 (+/- ~35 %)"
+    evidence: within_study_factor
+    lab: "Belfast / Reading (Farmer / Mottram)"
+    dossiers: [farmer1992_extraction.md]
+    where: "Table 1; Table 4; sec. 1"
+    conflict: "CF-088 (farmer1992: no antioxidant effect, aldehydes consumed by amino / thiol groups, NH3, H2S; vs xu2011: the same pattern read as antioxidant MRPs)"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "Gly, Lys or Cys + ribose, 0.2 M phosphate pH 5.7 / 6.2, 1 h, +/- egg lecithin: no-lecithin / lecithin ratios MFT 3.0, FFT 2.0, thiophenethiols 2.1-3.4, methylpyrazine 2.1, other pyrazines 1.0-1.5"
+    status: operating
+    quote: "lecithin) are: MFT 3.0, FFT 2.0, 2-thiophenethiol 3.4, 3-thiophenethiol 2.1,"
+    quantity: "ng per ampoule, external standards, n = 3; phospholipid suppresses thiols 2-3.4x and pyrazines <= 2x"
+    evidence: within_study_factor
+    lab: "Reading (Whitfield / Mottram)"
+    dossiers: [whitfield1988_extraction.md]
+    where: "within-study ratio summary (dossier sec. 1); tables"
+    conflict: CF-031
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "lipid-only products appear only with lecithin; the amino acid sets the N supply: 2-pentylpyridine Cys 194.7 > Gly 9.0 > Lys 1.9 ng; 2-alkylthiophenes and 2-pentylthiapyran only with Cys + lecithin; 2-alkylfurans 2.6-6.4x higher with amino acid + ribose than lecithin alone"
+    status: operating
+    quote: "2-pentylpyridine 194.7 ng with cysteine (9.0 with glycine, 1.9 with lysine)"
+    quantity: "2-pentylthiapyran ('2-heptylthiophene') 622.2 ng with Cys + lecithin"
+    evidence: within_study_factor
+    lab: "Reading (Whitfield / Mottram)"
+    dossiers: [whitfield1988_extraction.md]
+    where: "dossier sec. 1; heterocycle tables"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "165 mM Cys + 133 mM xylose, 0.2 M phosphate pH 5.0, 60 min, +/- fresh or OXIDISED lard (PV 184): MFT x1/21 (fresh) and x1/143 (oxidised); FFT x1/3 and x1/6.4; furfural x1/2.3-2.5; oxidation of the lipid deepens the suppression"
+    status: operating
+    quote: "Lard cuts MFT ×21 (fresh) and ×143 (oxidised), FFT ×3 and ×6.4"
+    quantity: "one time point; HS-SPME semi-quantified against cyclohexanone (RF 1); 2-pentylthiophene only with oxidised lard"
+    evidence: within_study_factor
+    lab: "Huazhong Agricultural University (Pan)"
+    dossiers: [xu2011_extraction.md]
+    where: "Table 1; dossier header"
+    conflict: CF-031
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100-130 (equivalent cooks)", sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "25 mM ribose + Cys, 0.5 M phosphate pH 5.5: buffer vs buffer + 10 % canola oil vs emulsion vs buffer + emulsifier. MFT at 100 C / 4 h: buffer 6.88, buffer+oil 0.72 (x1/9.6), emulsion 3.73 (x0.54 of buffer, x5.2 of buffer+oil); FFT: emulsion 2.74 vs buffer 1.28 (x2.1)"
+    status: operating
+    quote: "the amount of MFT in the emulsion was 5.1-, 3.8-, 3.5- and 2.9-fold higher"
+    quantity: "SIDA, matrix-matched; a FRESH oil phase (not oxidised) suppresses MFT ~10x; emulsifying it recovers half; FFT is raised by the emulsion. The text's 3.5x at 120 C does not reproduce from Table S3 (2.1)"
+    evidence: within_study_factor
+    lab: "Reading (Elmore / Balagiannis)"
+    dossiers: [yiltirak2026_extraction.md]
+    where: "Table S3; sec. 3.3"
+    conflict: "CF-031 (note: 'raises MFT in emulsion' holds against buffer+oil only; against plain buffer MFT falls, FFT rises)"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "200 mM GSH + 200 mM glucose, 0.2 M phosphate pH 6.5, +/- 10 mM oleic / linoleic / linolenic acid, 120 min: MFT RISES +19 to +30 %; summed thiophenes fall by half; other sulfides -55 to -74 %"
+    status: operating
+    quote: "MFT is 135 µg/L in GG and 161-175 µg/L with any fatty acid"
+    quantity: "fatty acids also leave more free GSH at 10 min (44-51 vs 36 mg/L)"
+    evidence: within_study_factor
+    lab: "CAAS Beijing (Wang / Fan)"
+    dossiers: [du2025_extraction.md]
+    where: "Table 1; Fig. 2"
+    conflict: CF-031
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "CAMOLA ([13C6]/[12C6]-glucose): 2-methylthiophene is 100 % glucose carbon without fatty acid, 38-48 % with it"
+    status: operating
+    quote: "52-62 % of 2-methylthiophene carbon comes from the lipid"
+    quantity: "the non-glucose share is assigned to lipid by the dossier [Z]; GSH carbon could also enter, so this is an upper bound on lipid carbon (single lab)"
+    evidence: labelling
+    lab: "CAAS Beijing (Wang / Fan)"
+    dossiers: [du2025_extraction.md]
+    where: "CAMOLA table; sec. 1"
+  # ---------------- fed lipid carbonyl -> Maillard-type heterocycles (labelled / fed) ----------------
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 150, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "Cys + glucose + one C9 aldehyde (nonanal, 2-nonenal, 2,4-nonadienal, 2,6-nonadienal) vs none, pH 6.5, 120 min: 2-pentylthiophene only from the 2,4-dienal, 92 % carrying no glucose carbon (CAMOLA); 2-butylpyridine 191 ug/L in the same pot (NH3 from cysteine)"
+    status: dominant
+    quote: "with 92 % of its molecules carrying no glucose carbon"
+    quantity: "2-pentylthiophene 238.65 +/- 23.37 ug/L; negative controls (alkanal, enal) give none (also F26)"
+    evidence: labelling
+    lab: "CAAS Beijing (Du / Wang)"
+    dossiers: [du2023_extraction.md]
+    where: "sec. 1 (i)-(ii); CAMOLA results"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 150, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "the same pots: every C9 aldehyde suppresses the control's sulfur heterocycles; dienals more than the enal or the alkanal"
+    status: operating
+    quote: "thiophene sum 2067 -> 537-1181"
+    quantity: "thieno[3,2-b]thiophene 1038 -> 0-420 ug/L"
+    evidence: within_study_factor
+    lab: "CAAS Beijing (Du / Wang)"
+    dossiers: [du2023_extraction.md]
+    where: "sec. 1 (v)"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "2,4-decadienal 10 mM + Gly / Asp / Asn / Glu / Gln 50 mM in water pH 7.5, 1 h, 15N-amide label: pyridine N from the AMIDE N -- 97 % with Gln, 47 % with Asn; amide amino acids give ~10-30x more 2-pentylpyridine than Gly"
+    status: dominant
+    quote: "Asn 46.77 % (2-pentylpyridine), 47.46 % (3-); Gln 97.00 % (2-)"
+    quantity: "2-pentylpyridine ~Gly 40, Asp 355, Asn 1035, Glu 205, Gln 745 mg/mol amino acid (figure, +/- 20 %)"
+    evidence: labelling
+    lab: "Rutgers (Ho)"
+    dossiers: [kim1996b_extraction.md]
+    where: "Table 3; Fig. 1"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "medium: amino acids + 2,4-decadienal in medium-chain triglyceride oil vs water (Kim 1996 aqueous): Gln releases 13x less NH3 in oil yet gives > 10x more 2-pentylpyridine"
+    status: operating
+    quote: "oil gives > 10x more 2-pentylpyridine than water"
+    quantity: "figure-only; authors: NH3 (not NH4+) is the nucleophile and the dienal survives longer in oil"
+    evidence: qualitative
+    lab: "Rutgers (Ho)"
+    dossiers: [kim1998_extraction.md]
+    where: "dossier header and sec. 1"
+  - key: {ph: alkaline, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "room temperature", sugar: none, amine: ammonia_ammonium, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    contrast: "5-13C-2,4-decadienal and 15N-ammonia spiked into a defatted soy-flour slurry during isolate processing: dienal C5 -> pyridine C2, NH3 N -> ring N; pH 9 > 7 > 4.5"
+    status: dominant
+    quote: "shows the reaction runs at room temperature in water at pH 9"
+    quantity: "2-pentylpyridine 0.14-0.21 ppm in untreated isolate; 2.0-2.6 ppm after a 5.64 mM dienal spike"
+    evidence: labelling
+    lab: "Kentucky (Boatright)"
+    dossiers: [zhou2000_extraction.md]
+    where: "sec. 1; Tables 1-3; Fig. 5 (pH, figure-only)"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "eleven lipid aldehydes + ammonia sources on silica gel, 1 h: chain length C6 -> C10 dienal lowers 2-alkylpyridine yield 34.07 -> 14.68 umol/mmol; NH3 ~ urea > Gln ~ NH4Cl > creatinine; 2-alkenals alone give 2,5-dialkylpyridines at 10-34 %"
+    status: operating
+    quote: "2-pentylpyridine yield from 2,4-decadienal + glutamine (14.68 ± 0.58 µmol/mmol Gln)"
+    quantity: "1.5 mol % on glutamine; D2O fixes exchangeable ring protons"
+    evidence: fed_intermediate
+    lab: "Seville (Zamora / Hidalgo)"
+    dossiers: [zamora2020_extraction.md]
+    where: "Table 1; Table 2"
+  # ---------------- lipid carbonyl as amino-acid degrader / amine and thiol consumer ----------------
+  - key: {ph: acid, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled}
+    contrast: "Phe + eleven lipid oxidation products on sand, pH 3 citrate / pH 6 phosphate, N2 vs air, 1 h: air multiplies phenylacetaldehyde 4-8x and benzaldehyde 5-10x and divides phenylethylamine 1-7x (also F18)"
+    status: operating
+    quote: "Air multiplies PAC by 4-8 (DD pH 3: 6.0; pH 6: 9.4)"
+    quantity: "under air the amine share is < 0.25 for every carbonyl at either pH"
+    evidence: within_study_factor
+    lab: "Seville (Zamora / Hidalgo)"
+    dossiers: [zamora2015_extraction.md]
+    where: "Table 1 (12 x 12); text"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "4-80", sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: not_stated, metals: not_controlled}
+    contrast: "(E)-4,5-epoxy-(E)-2-heptenal + free lysine: browning (CIELAB) and fluorescence vs pH 3-12 and T 4-80 C; kB x116, kF x864 from pH 3 to 12"
+    status: operating
+    quote: "showing kB rising 116× and kF rising 864× from pH 3 to pH 12"
+    quantity: "Ea 66.5 (colour) / 50 kJ/mol (fluorescence) -- of BROWNING, not of adduct formation (also F31)"
+    evidence: within_study_factor
+    lab: "Seville (Hidalgo / Zamora)"
+    dossiers: [hidalgo1993_extraction.md]
+    where: "Table 1; sec. 1"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 20, sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: not_stated, metals: not_controlled}
+    contrast: "hexanal vs t-2-hexenal with whey protein / Na-caseinate (3 wt %, pH 6.7, 48 h): the enal consumes Lys and His; hexanal much less; Trp not a site"
+    status: operating
+    quote: "via lysine (−29 to −38 %)"
+    quantity: "40 mM enal: Lys -29 to -38 %, His -62 to -77 %; k2 ~5-8e-5 (Lys) and 1.5-2.4e-4 /M/s (His) at 20 C (dossier derivation)"
+    evidence: within_study_factor
+    lab: "INRA Nantes (Genot)"
+    dossiers: [meynier2004_extraction.md]
+    where: "Fig. 6; dossier sec. 1"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 23, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "4-HNE and 4-ONE + N-acetyl Cys / His / Lys / Arg, 50 mM phosphate pH 7.4: selectivity thiol >> His > Lys; 4-ONE 110-150x faster than 4-HNE with thiols"
+    status: operating
+    quote: "Thiol ≫ His > Lys (> Arg for 4ONE)"
+    quantity: "4-HNE: thiols 1.2-6.8 /M/s vs His 2.1e-3, Lys 1.3e-3 /M/s; forward only, one T, one pH"
+    evidence: kinetic_fit
+    lab: "Colorado (Doorn / Petersen)"
+    dossiers: [doorn2002_extraction.md]
+    where: "Table 1; dossier header"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 20, sugar: none, amine: peptide, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "GSH + 21 alpha,beta-unsaturated carbonyls, 66 mM phosphate: forward, reverse and K; simple 2-alkenal adducts dissociate in hours, 4-hydroxyalkenal adducts in days; cysteine ~60x faster than GSH unbuffered"
+    status: operating
+    quote: "simple 2-alkenal adducts dissociate with t½ 4-6 h at 20 °C"
+    quantity: "rate proportional to thiolate fraction; general-acid buffer catalysis except for cysteine (also F28)"
+    evidence: kinetic_fit
+    lab: "Graz (Esterbauer)"
+    dossiers: [esterbauer1975_extraction.md]
+    where: "dossier header; rate tables"
+  # ---------------- Maillard products as antioxidants ----------------
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "lard +/- the Cys + xylose system: the Maillard system lowers lipid aldehydes (hexanal, heptanal, 2-heptenal, 2,4-heptadienal absent) and raises alcohols, alkylfurans and acids; the authors call it an antioxidant effect of MRPs"
+    status: unattributed
+    quote: "(2E,4E)-heptadienal absent) and raises alcohols, alkylfurans and acids (antioxidant MRPs)."
+    quantity: "no antioxidant marker (peroxide value, conjugated dienes, O2 uptake) measured after heating; aldehyde capture by Cys / H2S / NH3 explains the same pattern (farmer1992)"
+    evidence: within_study_factor
+    lab: "Huazhong Agricultural University (Pan)"
+    dossiers: [xu2011_extraction.md]
+    where: "Table 2; dossier sec. on mechanism"
+    conflict: "CF-088 (xu2011 vs farmer1992 on the antioxidant reading)"
+condition_dependence: >-
+  SHOWN. (1) Lipid present vs absent in Cys + pentose pots at 120-145 C, pH 5-6.5: MFT falls 2-143x with phospholipid,
+  PUFA ester, fresh oil or lard in four labs (Reading x3 papers = one lab group, Belfast/Reading, Huazhong), and the fall
+  grows with unsaturation (18:3 > 18:2, elmore2002) and with prior oxidation (oxidised > fresh lard, xu2011); a FRESH oil
+  phase alone suppresses MFT ~10x (yiltirak2026), so part of the effect is physical partitioning, not lipid-carbonyl
+  chemistry. The exceptions are a GSH + glucose pot with free fatty acids (MFT +19-30 %, du2025) and FFT in an emulsion
+  (x2.1 over buffer, yiltirak2026) -- CF-031 stays open and its 'emulsions raise MFT' half is only true against
+  buffer+oil. (2) The reverse flow: Maillard reactants consume unsaturated lipid aldehydes (> 10x) more than saturated
+  ones (~2x) and leave ketones untouched (farmer1992, elmore2002, xu2011: three labs agree on the pattern; they disagree
+  on the antioxidant reading, CF-088, where xu2011's own unchanged ketones favour capture). (3) Lipid carbon and amine nitrogen form heterocycles: dienal + NH3 -> 2-alkylpyridine
+  is labelled in two labs (Rutgers 15N; Kentucky 13C + 15N), runs at ROOM TEMPERATURE at pH 9 and needs free NH3 (pH
+  9 > 7 > 4.5), is > 10x stronger in oil than in water, and its N comes from amide side chains (Gln 97 %) rather than
+  the alpha-amine. Dienal + H2S -> 2-alkylthiophene: 92 % non-glucose carbon (CAMOLA, one lab). (4) O2 shifts the
+  lipid-carbonyl attack on amino acids from amine (decarboxylation) to aldehyde (Strecker) 4-8x (Seville, one lab).
+  (5) Lipid enals take thiols >> His > Lys at 20-23 C (Colorado, Graz, Nantes), thiol adducts of simple 2-alkenals
+  are reversible within hours. ASSUMED / NOT SHOWN: any of this at low a_w with protein-bound amine; any rate at
+  process temperature for enal + protein; any quantitative antioxidant effect of MRPs on lipid oxidation.
+best_supported_regimes:
+  - "mild_acid / 120-145 C / dilute / pentose + cysteine + lipid (phospholipid, PUFA ester, lard): lipid suppresses MFT and thiophenethiols (operating; 3 independent labs, within-study factor; magnitude 2-143x)"
+  - "neutral-alkaline / room T to 180 C / dilute or oil / dienal + NH3 or amide amino acid: 2-alkylpyridine formation (dominant route to that product; 2 labs with labelling, 1 lab fed)"
+  - "neutral / 140-180 C / Cys + sugar + dienal: lipid carbon is the skeleton of 2-alkylthiophenes (labelling, 1 lab; fed with H2S in Reading, elmore1997 -- see F26)"
+unknown_regimes:
+  - "low a_w / dry (crust, extrudate) with lipid present in a Maillard pot: only kim1998 (oil medium, figure-only) and zamora2015 / zamora2020 (sand / silica, fed carbonyls); no lipid-present-vs-absent contrast at low a_w"
+  - "protein-bound amine (Lys / His / N-termini) competing with lipid carbonyls at process temperature: meynier2004 / doorn2002 are 20-23 C only; the Seville Lys browning series (hidalgo1993) reads colour, not adduct"
+  - "alkaline pH (> 7.5) with sugar + amine + lipid together at cooking T: zhou2000 is room-T soy slurry only"
+  - "inert vs air as a factor in a lipid + Maillard pot: never varied in the CF-031 studies (zamora2015 varies O2 for the lipid-carbonyl Strecker only)"
+  - "Maillard products as antioxidants: NO study on disk measures an oxidation marker (PV, conjugated dienes, O2 uptake, hydroperoxide decay) with and without MRPs; xu2011 asserts it, farmer1992 rejects it"
+  - "hexose sugars with lipid: only du2023 / du2025 (CAAS, one lab) and nothing with a free amino acid other than cysteine / GSH"
+  - "the SHARE of a Maillard product's loss that is chemical (carbonyl capture of H2S / thiol) vs physical (partition into oil): only yiltirak2026 separates oil phase from oxidised lipid, at one pH"
+competing_families:
+  - "F18_lipid_strecker: lipid carbonyls as Strecker donors -- wins over the amine (decarboxylation) branch under air (zamora2015)"
+  - "F26_thiazoles_thiophenes: lipid aldehyde + H2S / NH3 heterocycles; draws H2S away from F23 / F24 (MFT) and F25 (FFT) -- elmore2002's reading of the MFT loss"
+  - "F28_thiol_losses: enals and their oxidation products trap thiols (thiol >> His > Lys, doorn2002; reversible for 2-alkenals, esterbauer1975)"
+  - "F05_protein_glycation: lipid enals and sugars compete for protein Lys / His (meynier2004 vs nguyen2016-type glycation); no study runs both"
+  - "F21_pyrroles_pyridines: 2-alkylpyridines from dienal + NH3 compete with sugar-derived pyridines for NH3; ammonia from amide deamidation (kim1996b) also feeds F19 pyrazines"
+  - "F29_acrylamide: lipid alkadienals convert Asn to 3-APA / acrylamide (hidalgo2015, barriers only)"
+engine: >-
+  Not in the engine as chemistry. src/kinetic_core/lipid.py is a separate hydroperoxide-decomposition lane (Frankel
+  slate x Schroen yield, DECADIENAL_BREAKAGE to hexanal) co-integrated with the Maillard lanes as a DIRECT SUM:
+  lane_coupling_verdict() declares the species sets disjoint and the only candidate coupling, the aldehyde-lysine
+  COVALENT_SINK, 'INERT BY RULING' (parameters_lipid.COVALENT_SINK.enabled False). src/kinetic_core/matrix_sites.py
+  binds aldehydes and HMF to protein sites AFTER integration by a declared pseudo-first-order factor (meynier2004 /
+  anantharamkrishnan2020b brackets), which removes aldehyde from the reported free pool but does not consume the
+  Maillard amine pool or feed any product. No reaction key consumes a lipid carbonyl with H2S, NH3, cysteine, an amino
+  acid or Asn; no 2-alkylpyridine, 2-alkylthiophene or thiapyran species; no lipid-phase partition of MFT / FFT.
+  MISMATCHES with the literature: (1) the engine predicts NO change in MFT / FFT when lipid is added, against a 2-143x
+  suppression in four labs (and a phase-only ~10x in yiltirak2026); (2) the engine cannot express the reverse flow
+  (Maillard reactants removing > 90 % of unsaturated lipid aldehydes, farmer1992 / elmore2002), so hexanal-type
+  predictions in a Maillard + lipid pot over-state the unsaturated aldehydes; (3) no NH3 / amide-N sink into
+  2-pentylpyridine, which runs even at room T at pH 9 (zhou2000) -- relevant for alkaline-extracted plant isolates;
+  (4) the direct-sum ruling is contradicted by the literature: the lanes share H2S, thiols, NH3 and protein Lys.

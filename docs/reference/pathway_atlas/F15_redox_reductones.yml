@@ -1,0 +1,165 @@
+family: F15_redox_reductones
+definition: "reductones / 1,4-dideoxyosones and redox coupling (incl. Strecker-coupled reduction)"
+# Built 2026-11-01 (pathway-atlas agent). Laboratories: Ledl Stuttgart (Nedvidek 1992), Kroh TU Berlin (Hollnagel 2000),
+# Rizzi (Miami University, 2010), McGill (Yaylayan; Huyghues-Despointes 1996), University of Tokyo (Kobayasi 1965),
+# Minnesota (Reineccius; Schirle-Keller 1992), Reading (Meynier 1995), Murata Ochanomizu (Mikami 2017, Nakamura 2020 - one
+# lab), Nestle Lausanne (Cerny & Davidek 2003). Every redox claim on disk is qualitative or a pool size; no reduction RATE
+# for any acceptor (MAA, furfural, acetylformoin, 1-deoxyosone) is measured anywhere.
+markers:
+  - "1,4-dideoxyosone (quinoxaline of 1,4-dideoxypentosone / -hexosone) formed in higher amount with an alpha-amino acid than with beta-alanine at the same sugar (Strecker-coupled reduction of the 1-deoxyosone; nedvidek1992)."
+  - "A titratable 2-electron reductant pool (DCIP, ascorbic-acid equivalents) and its tentative identity (the 1-deoxy-2,3-osone; rizzi2010)."
+  - "Reduced products with no added reductant: furfuryl alcohol (furfural + 2H), 1,2-propanediol (MGO + 2H), HDMF from acetylformoin; and H2S from a C-S reductive cleavage that scales with an enaminol reductant (kobayasi1965)."
+  - "Carbon pattern of a 1,4-dideoxyosone in its products (ribose C-1 as the MFT 2-methyl; cerny2003 / cerny2004) - consistent with, not proof of, the route."
+  - "O2 / chelator dependence of a reductone's loss (degassing or DTPA suppresses it; nakamura2020)."
+cells:
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: null, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "hydrolysed wheat protein (alpha-amino acids) vs beta-alanine, xylose and glucose, OPD in situ, 12 h, phosphate pH 7"
+    status: operating
+    quote: "24 and 30 formed in higher yields with alpha-amino acids than with beta-alanine"
+    quantity: "no numbers; the residual 1,4-dideoxyosone with beta-alanine assigned to reduction by reductones"
+    evidence: trapping
+    lab: "Ledl, Universitat Stuttgart"
+    dossiers: [nedvidek1992_extraction.md]
+    where: "Abstract; Results p. 226; Scheme 3"
+    note: "TEMPERATURE NEVER STATED: the temperature bin is a placeholder (T_C null). Peak-area, semi-quantitative; wheat-protein hydrolysate of unstated composition; single laboratory (the evidence map's SINGLE)."
+  - key: {ph: neutral, temperature: moderate, water: low_aw}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "glucose alone (no amine) vs with glycine, dry, OPD in situ, 100 C"
+    status: minor
+    quote: "1,4-dideoxyhexosulose each < 1 mol %"
+    quantity: "1,4-dideoxyhexosulose < 1 mol % of glucose at 180 min WITHOUT amine (with 3-DG and 1-DG also < 1 %)"
+    evidence: trapping
+    lab: "Kroh, TU Berlin"
+    dossiers: [hollnagel2000_extraction.md]
+    where: "Fig. 1 and text"
+    note: "an amine-free route to the 1,4-dideoxyosone exists in a dry melt; its with-glycine value is not in the dossier."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 100, sugar: pentose, amine: none, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "ribose / arabinose / xylose / glucose, 0.10 M in 0.10 M phosphate pH 7.1 (stayed >= 6.8), 10-300 min, no amine"
+    status: operating
+    quote: "ribose 40.5, arabinose 22.7, xylose 15.3, glucose 3.3 µmol AAE per mmol sugar"
+    quantity: "reductant pool after 300 min: 4.1 / 2.3 / 1.5 / 0.33 mM ascorbic-acid equivalents (net of autoxidation; open reflux under air); lag 20-60 min, then ~15 / 9 / 6 / 1.3 uM/min; major reductone tentatively 1-deoxy-2,3-pentosone (OPD, ~0.16 mol % lower bound)"
+    evidence: measured_intermediate
+    lab: "Rizzi (Miami University) / Heineman (Cincinnati)"
+    dossiers: [rizzi2010_extraction.md]
+    where: "Fig. 2 (digitised; categorical time axis), OPD trap"
+    note: "phosphate required (Rizzi 2004); one pH, one temperature; no reduction rate for any acceptor. Text's '1.7 %' maximum conflicts with Fig. 2's 4.05 % (dossier flag)."
+  - key: {ph: neutral, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 250, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "six singly labelled glucoses + proline, pyrolysis 20 s"
+    status: minor
+    quote: "~5 % via the 1-amino-1,4-dideoxy-2,3-hexodiulose RA[4,5] (B)"
+    quantity: "the 1,4-dideoxyosone retro-aldol route ~5 % of C2 / C4 products (author inference from labels); pyruvaldehyde alone at 100 C gives 1,2-propanediol 18 % (area) - redox without oxidant"
+    evidence: labelling
+    lab: "McGill (Yaylayan)"
+    dossiers: [huyghuesdespointes1996_extraction.md]
+    where: "Scheme 1, Tables 4-6; redox side experiments"
+    note: "pathway shares are inferences ('more than one mechanism can be compatible'); dry pyrolysis, secondary amine; pH bin a placeholder."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "cysteine 10 mmol + glucosamine 10 vs 20 mmol (enaminol reductant), 100 C, 1 h: H2S doubles with the reductant; ascorbic acid gives 'a very small amount'"
+    status: operating
+    quote: "100 °C, 1 h → 0.42 / 0.80 mmol H2S"
+    quantity: "H2S 4.2 / 8.0 mol % of cysteine, proportional to the glucosamine charge; mechanism (enaminol reductive C-S cleavage) proposed"
+    evidence: within_study_factor
+    lab: "University of Tokyo (Kobayasi / Fujimaki)"
+    dossiers: [kobayasi1965_extraction.md]
+    where: "text and Chart 1-2"
+    note: "two numbers, short communication; water, 0.2 M; pH not stated (placeholder)."
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "pH 4.5 -> 6.5 (0.2 M pyrophosphate, held within 0.2): 2-furylmethanol up 2.8x (Gly), 1.4x (Lys), > 90x (Cys), 1.6x (Met) while furfural falls 39-1500x"
+    status: operating
+    quote: "> 90x up (nd -> 0.9)"
+    quantity: "furfuryl alcohol (reduced furfural) rises with pH in every amino-acid pot; largest with cysteine"
+    evidence: within_study_factor
+    lab: "Reading (Mottram)"
+    dossiers: [meynier1995_extraction.md]
+    where: "Table 3 (arithmetic sec.)"
+    note: "the reductant is not identified (reductone, thiol, Cannizzaro all possible)."
+  - key: {ph: neutral, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "120 vs 150 C: furfuryl alcohol / furfural area ratio 0.84-0.97"
+    status: operating
+    quote: "| furfuryl alcohol / furfural | area ratio | 0.84-0.97 |"
+    quantity: "furfuryl alcohol ~ furfural (AED carbon response, recovery not corrected: a lower bound) in glucose 0.5 M + cysteine 0.1 M"
+    evidence: within_study_factor
+    lab: "Minnesota (Reineccius)"
+    dossiers: [schirle1992_extraction.md]
+    where: "Table 1, Fig. 4"
+    note: "no pH reported (placeholder bin); a reductive furfural sink of the order of the furfural pool."
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "pure norfuraneol (1.7-1.8 mM, 0.2 M phosphate pH 8, 100 C); in the xylose + lysine pot no net loss at pH 6, >= 1.8e-3 /min at pH 7"
+    status: operating
+    quote: "k ≈ 0.032 min⁻¹ (t½ ≈ 22 min)"
+    quantity: "norfuraneol (a reductone) decays first order at 0.032 /min at pH 8 to diacetyl (<= 5.5 mol %), MGO (<= 0.6 mol %) and colourless polymers"
+    evidence: fed_intermediate
+    lab: "Ochanomizu (Murata)"
+    dossiers: [mikami2017_extraction.md]
+    where: "Fig. 6B (figure-read), arithmetic 1-4"
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "control vs + DTPA vs degassed (pure norfuraneol, pH 8, 100 C, 3 h): decomposition and diacetyl formation suppressed by both"
+    status: operating
+    quote: "is abolished by a chelator or by degassing"
+    quantity: "norfuraneol gone at 3 h in the control; survives (off-scale peak) with DTPA or degassing - the loss is O2- and metal-dependent (no % printed)"
+    evidence: within_study_factor
+    lab: "Ochanomizu (Murata)"
+    dossiers: [nakamura2020_extraction.md]
+    where: "Fig. 7 (chromatograms) and text"
+    note: "same lab as mikami2017; makes Mikami's 0.032 /min an AEROBIC, non-chelated rate."
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "[1-13C]ribose and [13C5]ribose CAMOLA pots, cysteine, 0.5 M phosphate pH 5, 4 h"
+    status: unattributed
+    quote: "the route itself is proposed, not demonstrated"
+    quantity: "MFT carries ribose C-1 as its 2-methyl carbon and the intact C5 (~93 %); the 1,4-dideoxypentosone is the proposed intermediate, never measured"
+    evidence: labelling
+    lab: "Nestle Research Center, Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2003_extraction.md, cerny2004_extraction.md]
+    where: "cerny2003 Figs. 2 and 6, Flags 2; cerny2004 table"
+    note: "the label is equally consistent with an intact-C5 route via norfuraneol-free 1-deoxypentosone chemistry; concentration of the 500 mg charge not printed (dilute assumed)."
+condition_dependence: >-
+  SHOWN (all single-laboratory or qualitative): (1) Strecker-coupled reduction: alpha-amino acids give more
+  1,4-dideoxyosone than beta-alanine (Ledl; no numbers, temperature unstated). (2) Amine-free reductants exist: a mM
+  reductone pool from pentoses in 0.1 M phosphate at pH 7.1 / 100 C (ribose > arabinose > xylose >> glucose; Rizzi) and
+  < 1 mol % 1,4-dideoxyhexosulose from dry glucose at 100 C (Kroh). (3) Reduced products appear without added reductant:
+  furfuryl alcohol rises with pH from 4.5 to 6.5 at 140 C while furfural falls (Reading), and approaches the furfural
+  level at 120-150 C in glucose + cysteine (Minnesota); pyruvaldehyde disproportionates at 100 C (McGill). (4) A
+  reductant raises H2S from cysteine in proportion to its charge (Tokyo). (5) The reductone norfuraneol is lost by an
+  O2- and metal-dependent, base-accelerated route (Murata, two papers): fast at pH 8 / 100 C in air, stable at pH 6.
+  NOT SHOWN: any reduction rate constant; the pH or temperature dependence of a reductant pool; the share of the
+  1-deoxyosone that is reduced rather than cleaved (F11) or cyclised (F13); any pot that varies O2 and measures a
+  reductant; the 1,4-dideoxypentosone as a measured MFT intermediate.
+best_supported_regimes:
+  - "neutral (pH 7.1) / 100 C / dilute pentose / 0.1 M phosphate / no amine / air: operating, mM reductone pool (one lab, measured pool)"
+  - "mild acid -> neutral (4.5-6.5) / 140 C / pentose + amino acid / pyrophosphate: furfural reduction operating, rising with pH (one lab)"
+  - "alkaline (pH 8) / 100 C / air: norfuraneol oxidative loss operating (one lab, two papers)"
+unknown_regimes:
+  - "everything quantitative at 120-145 C with an amine (the process regime): no reductant titre, no 1,4-dideoxyosone yield"
+  - "acid (< 4.5): none"
+  - "inert atmosphere: no reductant measured under argon"
+  - "intermediate_aw: none"
+  - "protein-bound amine: none"
+  - "temperature dependence of the Strecker-coupled reduction: Nedvidek states no temperature"
+competing_families:
+  - "F11_beta_dicarbonyl_cleavage: the 1-deoxyosone is either cleaved (acetic acid, 0.8 mol/mol fed 1-DG at pH >= 6.5) or reduced (1,4-dideoxyosone, < 1 mol %): cleavage wins wherever both were measured"
+  - "F16_strecker_aldehyde: the Strecker step on a 1-deoxyosone yields the reduced 1,4-dideoxyosone (Scheme 3); dicarbonyl Strecker donors otherwise give aminoketones"
+  - "F12_alpha_oxidative_cleavage / F08: O2 consumes the reductones (to tricarbonyls, Voigt 2010 proposed; norfuraneol, Nakamura)"
+  - "F23_mft_intact_c5: the 1,4-dideoxypentosone (DDP) as the proposed MFT precursor vs norfuraneol"
+  - "F25_fft_furfural_h2s: furfural reduction to furfuryl alcohol competes with FFT for furfural"
+engine: >-
+  In the engine: r_dpo_ddp (DPO + Cys -> DDP + CO2 + fragments, 'base' pH factor) is the Strecker-coupled reduction,
+  but ONLY with cysteine as the amino acid - Nedvidek's observation is generic to alpha-amino acids and absent with
+  beta-alanine; glycine / alanine pots have no 1,4-dideoxyosone route. DDP feeds MFT (r_ddp_mft, r_ddp_mft_hs).
+  ch_red_ox_dpo / ch_red_ox_nf treat DPO and NF as a 'reductone pool' that consumes O2 to inert FRAG_C (fitted,
+  expected unidentified); r_af_dmhf reduces acetylformoin with no reductant; ch_dimer_release_mft reduces the disulfide
+  with an untracked reductant (zero by default). MISMATCHES: (a) no reductant species or titre (Rizzi's mM pool from
+  amine-free phosphate pentose is unrepresented; DPO stands in only as an O2 sink). (b) No furfural -> furfuryl alcohol
+  step: the observed reduced pool (~furfural level, Schirle-Keller; rising with pH, Meynier) sits inside the
+  unidentified r_fur_decay. (c) Norfuraneol loss: r_nf_decay_oh (B61, OFF by default) makes it hydroxide-catalysed and
+  O2-independent, while Nakamura shows degassing or DTPA suppresses it; the measured 0.032 /min is an aerobic rate.
+  ch_red_ox_nf carries the O2 dependence but is fitted, not anchored on Mikami / Nakamura. (d) MAA -> H2S + acetaldehyde
+  needs a reductant (Kobayasi) that the engine does not supply.

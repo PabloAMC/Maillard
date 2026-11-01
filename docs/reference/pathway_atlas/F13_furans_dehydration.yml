@@ -1,0 +1,233 @@
+family: F13_furans_dehydration
+definition: "deoxyosone dehydration -> furfural / HMF; 1-deoxyosone -> furanones (norfuraneol, furaneol), maltol"
+# Built 2026-11-01 (pathway-atlas agent). Laboratories: Firmenich (Cerny 2007 / 2007b), Jiangnan (Zhou 2025b), DFA
+# Garching (Hofmann 1998, Hofmann 1999), Reading (Meynier 1995, Mottram 2002), Murata Ochanomizu (Mikami 2017, Nakamura
+# 2020 - one lab), Nestle Lausanne (Blank 1997), Hebrew University (Haleva 1999), Hacettepe (Kocadagli 2016), Reineccius
+# Minnesota (Schirle-Keller 1992). Garrett 1969 (strong-acid pentose -> furfural) is filed under F14 (amine-free).
+markers:
+  - "Furfural / HMF carrying the INTACT sugar skeleton: all-or-none 13C5 (or 13C6) in a CAMOLA / labelled-sugar pot, no partially labelled isotopomers (cerny2007b, zhou2025b). This separates dehydration of an intact C5 / C6 unit from fragment recombination, but not 3-deoxyosone dehydration from other intact-skeleton dehydrations (cyclic fructose route for HMF)."
+  - "Fed 3-deoxyosone gives more furfural-derived product than the sugar at equal charge (hofmann1998 Table 3, read through FFT)."
+  - "HMF limb discrimination by multiresponse fit: 3-DG / 3,4-DG limb vs fructose cyclic-intermediate limb (kocadagli2016jafc; model test, not a label)."
+  - "Norfuraneol (C5) and furaneol / HDMF (C6): formed only with an amine (or a phosphate-ester sugar), at near-neutral pH, from the 1-deoxyosone pool; the HDMF label pattern splits intact-C6 / C5 + Strecker-C1 (blank1996 / 1997; Strecker share via a Strecker-inactive amine, blank1997 Table 2)."
+  - "In-situ OPD trapping that shows the 1-deoxypentosone carrying most of the xylose flux at the pH where norfuraneol forms (nakamura2020 Fig. 9)."
+cells:
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "[13C5]xylose vs xylose, with cysteine + thiamine (300 : 100 : 100 mM)"
+    status: dominant
+    quote: "FFT and furfural are >99 % xylose."
+    quantity: ">99 % of furfural (and FFT) carries the intact xylose C5 skeleton; thiamine contributes none"
+    evidence: labelling
+    lab: "Firmenich (Cerny)"
+    dossiers: [cerny2007b_extraction.md]
+    where: "Table (isotopomer shares), sec. 3.2"
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "Ala-xylose Amadori compound + [13C5]xylose vs + xylose, 30-120 min (free sugar's share rises with time)"
+    status: dominant
+    quote: "2-furfural = the M+5 column (all-or-none skeleton)"
+    quantity: "furfural all-or-none: 3.1 % (30 min) -> 13.7 % (120 min) from the free xylose, the rest from the ARP's own C5; exogenous xylose raises furfural"
+    evidence: labelling
+    lab: "Jiangnan (Zhou / Zhang / Ho)"
+    dossiers: [zhou2025b_extraction.md]
+    where: "Table 2"
+    note: "initial pH 8, unbuffered water, pH falls during heating (the authors tie the furfural rise to the faster pH fall); in-situ pH not keyed here."
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fed C5 precursors + H2S (1 mmol each, 50 mL): ribose 0.008 %, 3-deoxyribosulose 0.08 %, furfural 0.48 % FFT"
+    status: operating
+    quote: "| 3-deoxyribosulose | **78.6** | **0.08** |"
+    quantity: "the 3-deoxypentosone gives x10 the FFT of ribose (and 1/7 of fed furfural) at pH 5, 145 C, 20 min, 0.5 M phosphate"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 3"
+    note: "read through FFT, not furfural: supports 3-DP -> furfural as the FFT carbon route; no amine."
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "time course 5-180 min: 3-deoxypentosone peaks at 10 min while furfural keeps rising"
+    status: operating
+    quote: "1260 and 610 µg/mmol xylose at 10 min"
+    quantity: "3-DP ~1.0 mol % (peak) vs furfural 0.06 mol % of xylose at 180 min (xylose + L-alanine 1.5 M each, 0.5 M phosphate pH 7, reflux): furfural is a small exit of the 3-deoxypentosone at pH 7"
+    evidence: measured_intermediate
+    lab: "DFA Garching (Hofmann)"
+    dossiers: [hofmann1999_extraction.md]
+    where: "text p. 116, Fig. 5, Fig. 10"
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "glucose arm of the same design: 3-DG max 1000 ug/mmol at 40 min, HMF 30 ug/mmol at 180 min"
+    status: operating
+    quote: "| 180 | 12.6 | 116.5 | 18.0 | 218.5 | 30.0 |"
+    quantity: "HMF 30 ug/mmol glucose (~0.024 mol %) at 180 min against 3-DG ~0.6 mol % (peak): HMF a minor exit of 3-DG at pH 7, 100 C"
+    evidence: measured_intermediate
+    lab: "DFA Garching (Hofmann)"
+    dossiers: [hofmann1999_extraction.md]
+    where: "Fig. 9 (HMF column), text p. 116"
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "pH 4.5 -> 6.5 (held, 0.2 M pyrophosphate): furfural > 1510x down (Gly), > 1070x (Lys), > 39x (Cys), 48.6x (Met)"
+    status: operating
+    quote: "furfural more than 1 500-fold between pH 4.5 and 6.5"
+    quantity: "furfural from ribose 70 mM + amino acid 100 mM, 140 C, 1 h: steepest pH fall in the corpus"
+    evidence: within_study_factor
+    lab: "Reading (Mottram)"
+    dossiers: [meynier1995_extraction.md]
+    where: "Table 3 (arithmetic sec.)"
+    conflict: CF-001
+    note: "pyrophosphate tagged other_buffer; 'held at pH' per the dossier header, no post-run pH printed."
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "pH 4.5 -> 6.5: norfuraneol 16.1x down (Gly), 6.2x (Lys), 3.5x (Cys), 1.7x (Met)"
+    status: operating
+    quote: "| 4-Hydroxy-5-methyl-3(2H)-furanone | 16.1x down | 6.2x down | 3.5x down | 1.7x down |"
+    quantity: "norfuraneol FALLS with pH at 140 C / 1 h in all four amino-acid pots"
+    evidence: within_study_factor
+    lab: "Reading (Mottram)"
+    dossiers: [meynier1995_extraction.md]
+    where: "Table 3 (arithmetic sec.)"
+    note: "opposite pH direction to Mikami 2017 at 100 C (peak at pH 6.5); not registered as a CF - candidate reading: the base-catalysed norfuraneol decay outruns formation at 140 C / 1 h."
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 4.0 / 5.0 / 5.5 / 6.0 / 7.0: furfural 1.32 / 1.00 / 1.04 / 0 / 0 (rel. to pH 5)"
+    status: operating
+    quote: "gone at pH 6 while FFT is still 185"
+    quantity: "furfural standing level not detected at pH >= 6 while xylose-derived FFT persists at pH 6: furfural made but consumed, or not made"
+    evidence: within_study_factor
+    lab: "Firmenich (Cerny)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 2 x Table 4 (sec. 4.1-4.2)"
+    note: "peak areas, ternary xylose / cysteine / thiamin; label pH in 0.5 M phosphate."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 5.5 / 6.0 / 6.5 / 7.0 / 7.5 / 8.0 at 60 min: norfuraneol 27 / 61 / 100 / 83 / 60 / 21 % of max; ribose > xylose ~ arabinose"
+    status: operating
+    quote: "norfuraneol peaks at pH 6.5 at ~13-16 mol % of the pentose"
+    quantity: "15.8 mol % of xylose at pH 6.5 (xylose 13.3 mM + Lys 34 mM, 0.2 M phosphate, 100 C, 60 min); 4.3 % at pH 5.5, 3.3 % at pH 8; ribose 21.7 mol % at pH 6"
+    evidence: within_study_factor
+    lab: "Ochanomizu (Murata)"
+    dossiers: [mikami2017_extraction.md]
+    where: "Fig. 3A-C (figure-read)"
+    note: "net level: formation rises with pH, pure-NF decay is fast at pH 8 (F15 cell); calibration not described."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 6.5 vs 8.0 (time courses to 6 h); in-situ OPD vs post-heating OPD at pH 8"
+    status: operating
+    quote: "HMFO is far less stable at pH 8 (peak 0.59 mM, gone by 6 h)"
+    quantity: "norfuraneol peak 14.7 mol % of xylose at pH 6.5 (3 h) vs 4.5 % at pH 8 (0.5 h); in-situ trapping at pH 8: 1-DX 76 % of xylose, standing 1-DX < 0.2 % of its flux"
+    evidence: trapping
+    lab: "Ochanomizu (Murata)"
+    dossiers: [nakamura2020_extraction.md]
+    where: "Fig. 2, Fig. 9a/b"
+    note: "same lab as mikami2017 (count once). 1-DX -> NF is the authors' scheme; the trap shows the 1-DX flux, not its NF share."
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: none, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "ribose alone vs ribose-5-phosphate alone (no amine): NF trace vs 0.25 mol %"
+    status: absent
+    quote: "ribose alone makes no NF in 30 min at 140 C"
+    quantity: "norfuraneol < 0.004 mol % from ribose 50 mM alone (pyrophosphate pH 5.6 or unbuffered); 0.25 mol % from R5P without any amine"
+    evidence: within_study_factor
+    lab: "Reading (Mottram)"
+    dossiers: [mottram2002_extraction.md]
+    where: "Table 2"
+    note: "the method sees NF (quantified in the R5P pot), so 'absent' for the amine-free free-pentose NF route; R5P is a phosphate-ester route."
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 90, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "water vs 0.2 M phosphate vs 0.2 M malonate: HDMF 0.06 / 2.6 / 0.6 ug/mmol xylose (Gly); Strecker-inactive GABA 0.4 vs + Gly 1.5"
+    status: operating
+    quote: "| xylose/glycine | phosphate | **2.6** | **0.3** |"
+    quantity: "HDMF (furaneol) from xylose + glycine ~2e-3 mol %; phosphate x43 over water, x4.3 over malonate; ~73 % of HDMF needs a Strecker-active amino acid (C5 + C1)"
+    evidence: within_study_factor
+    lab: "Nestle Research Center, Lausanne (Blank)"
+    dossiers: [blank1997_extraction.md]
+    where: "Table 3 (medium), Table 2 (amine), Table 4 (pH 5 / 6 / 7: favoured at pH 7)"
+    note: "1 M : 1 M, 90 C, 1 h, SIDA. Part of the phosphate x43 is pH drift in the unbuffered water arm; the malonate arm isolates catalysis."
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 3 vs 5 (0.1 M citrate-phosphate, 48 h): HMF 92 vs 6 mg/L with arginine (x15); 5 vs 0.2 without"
+    status: operating
+    quote: "Glc + Arg at pH 3 gives 92 mg/L HMF = 0.73 mM"
+    quantity: "HMF 1.3 mol % of 55 mM glucose in 48 h at pH 3 with arginine; arginine raises HMF x18 at pH 3; 'formed mainly under acidic conditions' (pH 7 not tabulated)"
+    evidence: within_study_factor
+    lab: "Hebrew University (Naim)"
+    dossiers: [haleva1999_extraction.md]
+    where: "Table 1"
+    note: "buffer is citrate-phosphate (tagged phosphate)."
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 3 vs 5: furaneol from rhamnose + arginine 0.168 vs 9.4-10.3 mg/L (x60 up with pH)"
+    status: operating
+    quote: "control 9.4-10.3 mg/L ≈ 0.14 mol %; pH 3 0.168 mg/L ≈ 0.002 mol %."
+    quantity: "furaneol (C6 furanone from the 6-deoxyhexose) 0.14 mol % at pH 5 vs 0.002 % at pH 3, 70 C, 48 h: opposite pH direction to HMF in the same study"
+    evidence: within_study_factor
+    lab: "Hebrew University (Naim)"
+    dossiers: [haleva1999_extraction.md]
+    where: "Fig. 1 (figure-read)"
+  - key: {ph: neutral, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "glucose vs glucose + NaCl, 160 / 180 / 200 C; 3-DG-only HMF model vs two-limb model"
+    status: operating
+    quote: "HMF is primarily formed from fructose dehydration."
+    quantity: "HMF max 0.4 / 1.6 / 3.5 mol % of glucose at 160 / 180 / 200 C (x10 with NaCl at 160 C); the 3-DG -> 3,4-DG -> HMF limb is the minor HMF source by the fit"
+    evidence: kinetic_fit
+    lab: "Hacettepe (Kocadagli / Gokmen)"
+    dossiers: [kocadagli2016jafc_extraction.md]
+    where: "lines 235-242 (yields), line 433 (limb), Fig. S5 test"
+    note: "freeze-dried amorphous glucose, no amine, no pH printed (key pH bin is a placeholder); Just-Accepted manuscript."
+  - key: {ph: neutral, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "80 / 100 / 120 / 150 C: net furfural accumulation x30 from 100 to 120 C, x14-40 from 120 to 150 C"
+    status: unattributed
+    quote: "35.18 kcal/mol = 147 kJ/mol"
+    quantity: "apparent Ea of net furfural accumulation from glucose 0.5 M + cysteine 0.1 M, 147 kJ/mol (refit 156-189)"
+    evidence: within_study_factor
+    lab: "Minnesota (Reineccius)"
+    dossiers: [schirle1992_extraction.md]
+    where: "Table 1, Fig. 5"
+    note: "furfural from a HEXOSE needs a C1 loss; the route is unidentified. No pH reported anywhere (placeholder bin). Area units, zero-order rates."
+condition_dependence: >-
+  SHOWN: (1) Furfural is made from the intact pentose C5 (two labs by labelling: Firmenich at pH 5 / 145 C, Jiangnan at
+  initial pH 8 / 120 C) and a fed 3-deoxypentosone out-performs ribose x10 (Garching, via FFT). (2) pH: furfural falls
+  steeply with pH from 4.5 to 6.5-7 in amino-acid + pentose pots at 140-145 C (Reading > 39 to > 1500x; Firmenich gone at
+  pH >= 6, standing pool) and HMF falls x15-25 from pH 3 to 5 at 70 C (Naim); at pH 7 / 100 C furfural and HMF are
+  small exits of a large deoxyosone pool (Garching: furfural 0.06 mol % vs 3-DP 1 mol %). (3) Furanones run the other
+  way on the acid side: norfuraneol rises from pH 5.5 to a pH 6.5 maximum at 100 C (Murata, two papers) and furaneol rises
+  x60 from pH 3 to 5 at 70 C (Naim); but at 140 C / 1 h norfuraneol FALLS from pH 4.5 to 6.5 in all four Reading pots -
+  the net level is formation minus a strongly base-catalysed decay (Mikami pH 8 k = 0.032 /min at 100 C), so the pH
+  optimum moves with temperature and time (not registered as a CF; candidate). (4) Amine: free pentose alone gives no
+  norfuraneol at 140 C (Reading) and no HDMF at 90 C (Nestle), while furfural from free ribose is amine-independent and
+  pH-flat (F14 cell). (5) Buffer: phosphate x4.3 over malonate for HDMF (Nestle). (6) HMF in a dry amine-free glucose
+  melt comes mainly from the fructose cyclic route, not 3-DG (Hacettepe, model discrimination). (7) Temperature: net
+  furfural from glucose + cysteine has an apparent Ea ~150 kJ/mol (Minnesota). ASSUMED: furfural from pentose goes
+  through the 3-deoxypentosone in aqueous Maillard pots (the label shows an intact skeleton, the fed 3-DP shows
+  competence; neither shows the share).
+best_supported_regimes:
+  - "mild_acid (pH 4-5.5) / 140-145 C / pentose + amino acid, phosphate or pyrophosphate: furfural operating-dominant (labelling Firmenich; pH contrast Reading)"
+  - "neutral (pH 6-7) / 100 C / dilute pentose + lysine, phosphate: norfuraneol operating, 4-22 mol % (one lab, two papers)"
+  - "acid (pH 3) / 70 C / glucose + arginine: HMF operating, 1.3 mol % in 48 h (one lab)"
+unknown_regimes:
+  - "the 3-DP -> furfural SHARE of the 3-DP pool vs pH (no fed-3-DP pH ladder; no 3-DP-trap suppression test)"
+  - "norfuraneol formation separated from its decay at 120-145 C (only net levels; no label on NF formation)"
+  - "maltol (disaccharide 1-deoxyosone): nothing on disk"
+  - "intermediate_aw: none; low_aw only for HMF in an amine-free melt"
+  - "alkaline (> 7.5) furfural with an in-situ pH: Zhou's pots start at pH 8 unbuffered and drift down"
+  - "protein-bound amine: none"
+competing_families:
+  - "F10_retroaldol_c3_c2: the 3-deoxyosone's retro-aldol to GO / MGO wins at higher pH (Zhou 2025b's reading of the pH-fall effect); furfural wins as pH falls"
+  - "F11_beta_dicarbonyl_cleavage: competes for the 1-deoxyosone pool that makes norfuraneol / acetylformoin (DFG: acetic acid up to 0.64 mol/mol vs norfuraneol <= 16 mol % from pentose)"
+  - "F25_fft_furfural_h2s and F23_mft_intact_c5: H2S consumes furfural and norfuraneol (standing furfural gone at pH 6 while FFT persists, Cerny 2007)"
+  - "F14_caramelisation_amine_free: the amine-free furfural / HMF floor (pH-flat ribose furfural; fructose cyclic HMF)"
+  - "F20_extra_pyrazine_routes / F16: Strecker aldehydes add C1 / C2 to pentose furanones (HDMF / EHMF, Blank 1997)"
+engine: >-
+  In the engine: furfural via r_tdp_fur (3-DP -> FUR, Ea 147 kJ/mol from Schirle-Keller 1992), r_glc_fur (hexose ->
+  furfural, 'acid' pH factor), fed by r_pent_tdp / r_arp_tdp ('acid' factor) and r_pent_caramel / r_arp_tdp_thermal (no
+  pH factor); furfural sink r_fur_decay (large, unidentified) and r_fur_fft. Norfuraneol via r_dpo_nf (no pH tag) with
+  r_nf_decay (pH-free, ~700x slower than Mikami at pH 8) and r_nf_decay_oh (hydroxide-catalysed, B61, OFF by default).
+  HMF via the two Kocadagli limbs (r_glc_tdg -> r_tdg_ddg -> r_ddg_hmf; r_fru_int -> r_int_hmf), matching the
+  literature's two-limb topology; r_hmf_self is negligible at cooking temperature (declared gap). DMHF via r_odg_af /
+  r_dpo_af -> r_af_dmhf and r_mgo_dmhf. MISMATCHES: (a) with B61 off, nothing makes norfuraneol fall at pH 8 (Mikami,
+  Nakamura) or with pH at 140 C (Meynier); the engine's NF pH law is the DPO supply law only. (b) Furfural: a pH-free
+  amine-free source (r_pent_caramel) puts a pH-flat floor under furfural, which is right for free ribose (Mottram 2002,
+  pH 3.8-5.7) but may cap the > 1500x fall Meynier measures from pH 4.5 to 6.5 in the glycine pot - to be checked
+  against the engine (CF-001's corrected pot). (c) No phosphate-vs-carboxylate factor (Blank 1997 x4.3 for HDMF).
+  (d) The 3-DP -> furfural Ea (147) is a NET-accumulation Ea from a hexose + cysteine pot, applied to a pentose
+  dehydration step.

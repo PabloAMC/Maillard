@@ -1,0 +1,86 @@
+# Pathway-condition atlas: the reaction families and condition bins (definition, 2026-11-01).
+#
+# The question the atlas answers (owner, 2026-11-01): WHICH REACTIONS HAPPEN UNDER WHICH CONDITIONS.
+# - For every family below, the literature atlas (one YAML per family group in this folder) records the conditions
+#   under which the family has been SHOWN to operate, with its status, evidence kind, laboratories and dossiers.
+# - The engine regime map (results/validation/engine_regime_map.*) records the engine's own flux share per family over
+#   the same bins.
+# - Their comparison lists where the engine runs the wrong reactions.
+#
+# This file is the shared vocabulary; change it only deliberately, since both sides key on the ids.
+# It supersedes the legacy, unsourced docs/reference/reaction_families.yml (RMG-era) as the family list. That file is
+# kept as history; nothing reads it.
+
+# Cell key (premortem 2026-11-01): a cell is keyed on THREE PRIMARY AXES (ph, temperature, water); the other bins
+# (sugar, amine, oxygen, buffer, metals) are TAGS on the cell, not axes. The unit of evidence is a STUDY's
+# observation, preferably a WITHIN-STUDY CONTRAST (one factor varied inside one study) or a labelling / fed-intermediate
+# result.
+# Status is CAPPED by evidence kind:
+#   - `dominant` only from labelling or fed_intermediate (or trapping with a mass balance);
+#   - otherwise at most `operating`;
+#   - `absent` only when the study's method could have seen the family's MARKER (see below).
+# Each family's atlas file starts with `markers:`, the observables that identify THIS route rather than another one
+# making the same product (e.g. a label pattern, a fed intermediate's product, a trapped intermediate). A product
+# detected without a marker is evidence that SOME route ran, and is recorded as `operating` for the family whose
+# marker it is, or as `unattributed`.
+# Every cell carries `quote:`, the verbatim number or phrase from the cited dossier (<= 15 words), so a validator can
+# grep it.
+
+condition_bins:
+  ph:          {acid: "< 4.5", mild_acid: "4.5 - 6", neutral: "6 - 7.5", alkaline: "> 7.5", not_stated: "pH not reported"}   # IN-SITU pH where measured; else label pH, flagged
+  temperature: {low: "<= 60 C", moderate: "60 - 100 C", high: "100 - 140 C", very_high: "> 140 C", not_stated: "T not reported"}
+  water:       {dilute: "aqueous, solutes < 0.5 M", concentrated: "aqueous, >= 0.5 M", intermediate_aw: "a_w 0.5 - 0.9", low_aw: "a_w < 0.5 / dry / pyrolysis", not_stated: "water not reported"}
+  sugar:       [pentose, hexose_aldose, hexose_ketose, disaccharide, none, not_stated]
+  amine:       [none, glycine, other_free_aa, cysteine, sulfur_aa_other, peptide, protein_bound_lys, protein_bound_nterm, ammonia_ammonium, not_stated]
+  oxygen:      [air, inert, not_stated]
+  buffer:      [none_unbuffered, phosphate, carboxylate, other_buffer, not_stated]   # phosphate kept apart: it catalyses (CF-011, Guan 2012)
+  metals:      [chelated, not_controlled, not_stated]
+
+# Cell status vocabulary (for each family x condition combination studied):
+#   dominant   -- the main route to its products under these conditions (labelling / fed / trapping shows it carries most flux)
+#   operating  -- shown to occur, share not known or not dominant
+#   minor      -- shown to occur at a measured small share (< ~10 %)
+#   absent     -- looked for with a method able to see it, not found
+#   conflicting -- studies disagree (name the CF id)
+#   unattributed -- the product is formed but no marker says which family made it
+# Evidence kinds (strongest first): labelling, fed_intermediate, trapping, measured_intermediate, mass_balance,
+#   within_study_factor, kinetic_fit, qualitative
+
+families:
+  # --- 1. Entry and early steps --------------------------------------------------------------------------------------
+  - {id: F01_schiff_glycosylamine,   group: early,  name: "sugar + amine -> Schiff base / glycosylamine"}
+  - {id: F02_amadori_heyns,          group: early,  name: "Amadori (aldose) / Heyns (ketose) rearrangement"}
+  - {id: F03_amadori_reversion,      group: early,  name: "Amadori compound -> free amine + sugar-derived fragments (amine release / regeneration)"}
+  - {id: F04_thiazolidine_ttca,      group: early,  name: "cysteine + sugar / carbonyl -> thiazolidine (TTCA) and its ring opening / Cys-Amadori"}
+  - {id: F05_protein_glycation,      group: early,  name: "glycation of protein-bound lysine (fructoselysine, CML / CEL)"}
+  # --- 2. Deoxyosone hub --------------------------------------------------------------------------------------------
+  - {id: F06_enol12_3deoxyosone,     group: hub,    name: "1,2-enolisation -> 3-deoxyosone (3-DG / 3-DX)"}
+  - {id: F07_enol23_1deoxyosone,     group: hub,    name: "2,3-enolisation -> 1-deoxyosone (1-DG / 1-DX)"}
+  - {id: F08_oxidative_osone,        group: hub,    name: "oxidative routes: glucosone / osones (Wolff autoxidation of sugar, Amadori oxidation)"}
+  - {id: F09_namiki_c2,              group: hub,    name: "Namiki route: Schiff-base fragmentation -> C2 (glyoxal / glycolaldehyde)"}
+  - {id: F10_retroaldol_c3_c2,       group: hub,    name: "retro-aldol cleavage of sugars / deoxyosones -> MGO, glyoxal, hydroxyacetone, glyceraldehyde"}
+  - {id: F11_beta_dicarbonyl_cleavage, group: hub,  name: "hydrolytic beta-dicarbonyl cleavage -> acids (acetic, formic) + C_n-1 fragments"}
+  - {id: F12_alpha_oxidative_cleavage, group: hub,  name: "oxidative alpha-dicarbonyl cleavage (O2) -> acids (lactic, glyceric, acetic)"}
+  - {id: F13_furans_dehydration,     group: hub,    name: "deoxyosone dehydration -> furfural / HMF; 1-deoxyosone -> furanones (norfuraneol, furaneol), maltol"}
+  - {id: F14_caramelisation_amine_free, group: hub, name: "amine-free sugar degradation (caramelisation, enolisation without amine)"}
+  - {id: F15_redox_reductones,       group: hub,    name: "reductones / 1,4-dideoxyosones and redox coupling (incl. Strecker-coupled reduction)"}
+  # --- 3. Strecker and N-heterocycles -------------------------------------------------------------------------------
+  - {id: F16_strecker_aldehyde,      group: strecker, name: "dicarbonyl + amino acid -> Strecker aldehyde + aminoketone + CO2 (per donor)"}
+  - {id: F17_strecker_acid_o2,       group: strecker, name: "the O2 route to Strecker ACIDS (e.g. phenylacetic acid); Amadori-compound oxidative route to Strecker products"}
+  - {id: F18_lipid_strecker,         group: strecker, name: "lipid carbonyls (enals, epoxyalkenals, HNE) as Strecker donors / keto-acid route"}
+  - {id: F19_aminoketone_pyrazine,   group: strecker, name: "aminoketone condensation -> dihydropyrazine -> pyrazine (incl. mixed pairs)"}
+  - {id: F20_extra_pyrazine_routes,  group: strecker, name: "pyrazine routes other than aminoketone pairing (aldehyde / C1 incorporation, alkyl side chains, methylpyrazine extra route)"}
+  - {id: F21_pyrroles_pyridines,     group: strecker, name: "aminoketone / dicarbonyl -> pyrroles; pyridines; imidazoles"}
+  # --- 4. Sulfur ----------------------------------------------------------------------------------------------------
+  - {id: F22_cysteine_h2s,           group: sulfur, name: "cysteine -> H2S (+ NH3, acetaldehyde, mercaptoacetaldehyde): thermolysis and cysteine's own Strecker"}
+  - {id: F23_mft_intact_c5,          group: sulfur, name: "MFT from an intact C5 unit (ribose / 1,4-dideoxypentosone / norfuraneol + H2S)"}
+  - {id: F24_mft_fragments,          group: sulfur, name: "MFT from C2 + C3 fragment recombination"}
+  - {id: F25_fft_furfural_h2s,       group: sulfur, name: "furfural + H2S -> 2-furfurylthiol (FFT)"}
+  - {id: F26_thiazoles_thiophenes,   group: sulfur, name: "thiazoles / thiazolines / thiophenes / mercaptoketones (incl. lipid aldehyde + H2S / NH3)"}
+  - {id: F27_thiamine_gsh_sources,   group: sulfur, name: "thiamine and glutathione as sulfur / MFT precursors"}
+  - {id: F28_thiol_losses,           group: sulfur, name: "thiol losses: oxidation / disulfides, capture by carbonyls / quinones / melanoidins / protein (reversible or not)"}
+  # --- 5. Other lanes -----------------------------------------------------------------------------------------------
+  - {id: F29_acrylamide,             group: other,  name: "asparagine + carbonyl -> acrylamide (and its elimination)"}
+  - {id: F30_lipid_oxidation_crossover, group: other, name: "lipid oxidation products entering Maillard routes (and Maillard products as antioxidants)"}
+  - {id: F31_melanoidins,            group: other,  name: "melanoidin formation and melanoidins as sinks / binders"}
+  - {id: F32_dha_crosslinks,         group: other,  name: "beta-elimination -> dehydroalanine; lysinoalanine / lanthionine"}

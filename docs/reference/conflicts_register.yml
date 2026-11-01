@@ -996,10 +996,18 @@ entries:
     quantity: "effect of lipid on meaty thiols (MFT, FFT) in cysteine + sugar pots"
     observation: >-
       Lipid lowers the thiols in some studies (Farmer 1992, Elmore 1997, Xu 2011) and raises them in emulsions or
-      structured lipid (Yiltirak 2026, US 8,920,862: MFT x10.1, FFT x7.4 over buffer; du2025). Touches the sulfur lane's
-      thiol sinks (CF-013).
+      structured lipid (US 8,920,862: MFT x10.1, FFT x7.4 over buffer; du2025). Touches the sulfur lane's thiol sinks
+      (CF-013). Amended 2026-11-01 (pathway atlas F30): Yiltirak 2026 supports only half of the 'raises' side. Its
+      Table S3 (25 mM ribose + Cys, 0.5 M phosphate pH 5.5, four equivalent cooks 100 C / 4 h - 130 C / 0.5 h) has
+      emulsion MFT BELOW plain buffer at every cook (3.73 vs 6.88, 2.83 vs 3.29, 1.28 vs 2.4, 1.29 vs 1.71 ug/L); MFT
+      is higher in the emulsion only against buffer + fresh oil (x2.1-5.2), and buffer + oil is the lowest arm
+      everywhere (MFT 0.45-0.75, ~x10 below buffer at 100 C). FFT is raised by the emulsion over buffer at three of
+      four cooks (2.74 vs 1.28, 2.81 vs 1.46, 2.17 vs 1.62; 1.28 vs 1.68 at 120 C). So for MFT Yiltirak belongs with
+      the 'lowers' studies, with an oil-phase (not oxidised-lipid) suppression; only its FFT and its emulsion-vs-oil
+      contrast are on the 'raises' side (yiltirak2026 dossier sec. 3-4).
     explanations:
       - "Lipid aldehydes as thiol sinks vs an oil phase protecting thiols from aqueous oxidation / binding."
+      - "Physical partition: a fresh (unoxidised) oil phase alone suppresses MFT ~10x in Yiltirak 2026, so part of every 'lipid lowers MFT' result may be partitioning into oil, not carbonyl chemistry; the interface (emulsifier) recovers part of it."
     tests: []
     status: open
     remedy: "Pending (lipid x sulfur sub-model)."
@@ -2053,8 +2061,8 @@ entries:
   - id: CF-078
     kind: conflict
     scope: corpus
-    sources: [hidalgo2005, zamora2006]
-    quantity: "phenylacetaldehyde from 4,5-epoxy-2-decenal + phenylalanine, 50 mmol/L each, 37 C, 21 h (umol PA per mmol Phe)"
+    sources: [hidalgo2005, zamora2006, zamora2013]
+    quantity: "phenylacetaldehyde from 4,5-epoxy-2-decenal (and 4-hydroxy-2-nonenal) + phenylalanine, equimolar 20-50 mmol/L, 37 C, 21-24 h (umol PA per mmol Phe)"
     observation: >-
       Same laboratory (Zamora / Hidalgo, Instituto de la Grasa, Seville), same donor made the same way (2,4-decadienal +
       mCPBA), same nominal pot: Hidalgo, Gallardo & Zamora 2005 Table 2 prints PA 174 +- 18 umol/mmol (ED, ACN-water
@@ -2062,21 +2070,29 @@ entries:
       Zamora, Navarro, Gallardo & Hidalgo 2006 Fig. 2 (ED 0.025 mmol + Phe 0.025 mmol in 500 uL, ACN-50 mM citrate 2:1,
       pH 3, GC-MS, figure-only, no replicates stated) gives ~5.1, and its Fig. 4 time course 5.2 at 21 h: x34 (1.53 dex).
       Read from both PDFs by the 2026-10-31 dossiers (hidalgo2005 sec. 3 / 6.1, zamora2006 sec. 3 / 6.1). Neither paper
-      has a measurement-ledger entry yet.
+      has a measurement-ledger entry yet. Extended 2026-11-01 (pathway atlas F18): a third print of the lab, Zamora,
+      Alcon & Hidalgo 2013 Table 2 (10 umol Phe + 10 umol donor in 0.5 mL 0.3 M citrate pH 3, closed tubes, air, 37 C,
+      24 h; GC-MS, eight-point PA curve), gives ED 15.8 +- 1.6 and HNE 5.6 +- 0.2 umol/mmol against a 4.8 +- 0.1
+      no-donor control (zamora2013 dossier sec. 3; PDF Table 2). Against Hidalgo 2005's 37 C rows (ED 174 / 248, HNE
+      166 / 178 umol/mmol, unbuffered ACN-water) that is x11-16 lower for ED and x30-32 for HNE (gross; net of the
+      control HNE gives ~nothing); Zamora 2013's ED sits x3 above Zamora 2006's. The two low prints share a citrate
+      buffer at pH 3; the high print has no buffer.
     explanations:
       - "pH -- ruled out on Zamora 2006's own pH series (Fig. 1: PA 4.2 at pH 5 vs 5.1 at pH 3, x1.2)."
-      - "Medium: 50 mM citrate (catalysis or inhibition, or Phe / ED complexation) vs none."
+      - "Medium: 50 mM citrate (catalysis or inhibition, or Phe / ED complexation) vs none. Strengthened by Zamora 2013: both low prints (2006, 2013) are in citrate pH 3 (50 mM in ACN-water, 0.3 M aqueous), the high one (2005) unbuffered ACN-water."
       - "Donor batch or purity (each paper made its own ED; purity not printed)."
       - "Quantification: GC-FID (2005) vs GC-MS (2006), both against 3-(Z)-nonenol; blank handling (2005's own 0-HNE blank is 1-6 % of Phe, Zamora's 0-ED intercept 1.9 umol/mmol); neither states blank correction."
       - "Vessel / headspace (1 mL in 4 mL vs 0.5 mL, vessel not stated): O2 for an oxidative branch."
     tests:
       - "Zamora 2015 (zamora2015 dossier; 140 C, sand, pH 3, air) gives 12.3 % PA from ED, closer to Hidalgo 2005: a third print from the lab, not matched in conditions."
+      - "Zamora 2013 (zamora2013 dossier; the matched 37 C / 24 h print, citrate pH 3): ED 15.8, HNE 5.6 umol/mmol, low with Zamora 2006; does not separate citrate from solvent (aqueous vs ACN-water) or donor batch."
     status: open
     remedy: >-
       Neither enters a fit as an absolute lipid-donor Strecker yield until resolved; within-paper shapes (Zamora 2006
       pH, dose and time series; Hidalgo 2005 solvent / temperature contrasts) are usable as ratios. A lipid-donor arm
-      must report its residual against both levels. Ask the authors (Zamora R) which yield is right.
-    affects: []
+      must report its residual against both levels. Ask the authors (Zamora R) which yield is right. Zamora 2013's 37 C
+      column (ED, HNE) falls under the same rule; its Ea ladder and 80 / 180 C columns are within-paper and usable.
+    affects: [zamora2013_tab2_pac_yields_three_conditions]
 
   - id: CF-079
     kind: conflict
@@ -2250,3 +2266,150 @@ entries:
       Part II's Ea and z are not independent of Part I's 90 C data (two own points per line). No wave reads either
       entry, and no Bornhorst number is operative in parameters_sulfur.py: importance 0 today.
     affects: [bornhorst2017_tab1_cielab_rate_constants, bornhorst2017b_tab2_3_cielab_rate_constants_ea]
+
+  # ---- registered 2026-11-01 from the pathway-condition atlas (docs/reference/pathway_atlas/) ----
+
+  - id: CF-086
+    kind: self_contradiction
+    scope: corpus
+    sources: [liu2023b, cerny2003]
+    quantity: "share of 2-methyl-3-furanthiol from recombined ribose fragments, [13C5]-ribose 1:1 + cysteine, 0.5 M K3PO4 pH 5.88, 168 C, 20-60 min (CAMOLA, EI-MS)"
+    observation: >-
+      Liu 2023 (LWT 182:114874) prints that ribose-fragment recombination makes an "auxiliary contribution (19%)" to
+      MFT (sec. 3; liu2023b dossier sec. 2). Its Table 3 (re-read from data/articles/Liu2023b.pdf, 2026-11-01) gives MFT
+      at 20 min as M+0..M+5 = 41 / 3 / 2 / 1 / 12 / 40 (40 / 3 / 2 / 1 / 12 / 41 at 40 min), so the 19 % is the sum of
+      the M+1..M+4 channels and is carried mostly by M+4. M+4 / M+5 = 0.30, which equals MFT's NIST EI [M-H]+ / M+
+      ratio, 0.28: the M+4 channel is the fully labelled molecule's M-1 ion. The Methods say the hydrogen loss "were
+      adjusted by [M - 1]+/[M]+", but the table carries the uncorrected ratio, so the methods and the table disagree.
+      With M+4 corrected (12 - 0.28 x 40 ~ 1), the fragment share is ~6-7 %, the level of the label's impurity and of
+      Cerny & Davidek 2003's non-(0, 5) channels at 95 C (<= ~5 %, cerny2003 Table 2 row 7). Found by
+      docs/history/mechanism_reviews_2026-10-31/thiols.md sec. 0 (P 0.8); the atlas cells F23 cell 6 and F24 cell 6
+      read it.
+    explanations:
+      - "EI-MS artefact: the claimed [M-1]+ correction was not applied (or not applied to the labelled ion), so the labelled MFT's own M-1 fragment is read as an M+4 isotopologue."
+      - "A real fragment route at 168 C (the paper's reading): would need an M+4 isotopologue that by chance matches the EI [M-H]+ ratio in three unrelated compounds."
+    tests:
+      - "The same table's furans show the same signature (thiols.md sec. 0): furfural M+4 / M+5 = 23 / 21 against NIST [M-H]+ / M+ 0.99; 2-methylfuran 20 / 29 against 0.58. Each M+4 tracks its own compound's EI M-1 ratio."
+      - "The unlabelled : labelled imbalance (41 : 52 at 20 min) equals the unlabelled ion's uncounted M-1 (thiols.md sec. 0)."
+    status: explained
+    remedy: >-
+      Read Liu 2023's MFT labelling as ~94 % intact C5 and ~6 % fragments (band 5-19 % until the authors' raw spectra
+      settle it); no measured rise of the fragment share with temperature follows from it. The atlas cells F23 cell 6
+      (dominant, intact C5) and F24 cell 6 (conflicting) cite this entry. The dossier's sec. 2 sentence and the ledger
+      note of liu2023b_carbon_module_labelling still print the uncorrected 81 / 19 %; annotate them in a dossier
+      wave (not edited here). No engine constant uses the number.
+    affects: [liu2023b_carbon_module_labelling]
+
+  - id: CF-087
+    kind: conflict
+    scope: other_lane
+    sources: [zhou2023c, zhou2023]
+    quantity: "pyrazine mixing ratio R = MPZ^2 / (PZ * DMP) in Ala-xylose ARP pots, 120 C, water (Ho network, one ARP synthesis and SPME method)"
+    observation: >-
+      Zhou 2023c Table 1 (p. 14318; ARP 20 mM + amino acid 20 mM, water, initial pH 7.5, 120 C, 60 min, ug/L): with
+      glycine, pyrazine 5.97 +- 1.25 and 2,5-dimethylpyrazine 1.16 +- 0.164 are present while methylpyrazine is ND, so
+      R < 0.19 / 0.11 / 0.035 for an MPZ limit of 1.15 / 0.88 / 0.5 ug/L (red team sec. 5). The same table's other
+      columns give R ~5.5 (ARP + GSH: 13.1^2 / (8.33 x 3.75)) and ~6.9 (ARP + Glu: 29.5^2 / (8.33 x 15.1)); the same
+      laboratory's ARP + Cys pot at pH 8 gives R 2.43 (zhou2023, CF-077). Every pairing rival of the pyrazine-rivals
+      pre-registration (P1, P1x, P2) has R >= 4h >= 0.4 and forbids the glycine row unless the pairing share h < 0.05
+      or the low-level data are unreliable. The row is in the pre-registered S2 data list but was neither scored nor
+      excused by EX-052 (docs/history/pyrazine_rivals_2026-10-31/red_team.md sec. 1, 5). Atlas: F19 cell 21.
+    explanations:
+      - "Low-level data: MPZ ND and DMP 1.16 ug/L sit near the method's limits; an MPZ peak just under the reporting limit and a DMP read high would move R by orders of magnitude."
+      - "Segregated formation: with glycine, PZ (and DMP) form by routes that do not share a free aminoketone pool (e.g. glycine-specific condensation with glyoxal), so the cross pair cannot form; this is the h < 0.05 exception."
+      - "A transcription or reporting error in the glycine column (no SD on the ND; the red team re-read the dossier cells, not the PDF)."
+    tests: []
+    status: open
+    remedy: >-
+      Any scoring of the pyrazine rivals reports this row: either scored as a forbidden row or excused in writing
+      before the scores are read (no silent omission). Not a fit row. A re-read of Table 1 in the PDF and, if
+      possible, the authors' MPZ limit would decide between the first and second explanations.
+    affects: [zhou2023c_table1_arp_amino_acid_panel, zhou2023_table1_ph6_ph8_arp_cys_volatiles]
+
+  - id: CF-088
+    kind: conflict
+    scope: other_lane
+    sources: [farmer1992, xu2011]
+    quantity: "reading of the fall in lipid-oxidation aldehydes when cysteine + pentose is heated with lipid (antioxidant Maillard products vs carbonyl capture)"
+    observation: >-
+      Both papers measure the same pattern: the Maillard reactants cut lipid aldehydes, the unsaturated ones most, and
+      raise 1-alcohols and 2-alkylfurans. Farmer, Mottram et al. 1992 (four lipids +- Cys + ribose, 0.5 M phosphate pH
+      5.6, N2, 140 C, 1 h) reject an antioxidant reading because ketones, also lipid-oxidation products, "showed little
+      change", and attribute the aldehyde loss to reactions with amino / thiol groups, NH3 and H2S (farmer1992 dossier
+      sec. 1; PDF abstract and Discussion). Xu et al. 2011 (lard, fresh or oxidised, + Cys + xylose, 0.2 M phosphate pH
+      5.0, 120 C, 60 min) read the same pattern as the antioxidant effect of Maillard reaction products, citing Elmore,
+      Campo, Enser & Mottram (their ref. 14), and measure no oxidation marker in the heated pots (PV / AV only for the
+      lard before use; xu2011 dossier sec. 1). Atlas: F30 cells 2 and 20.
+    explanations:
+      - "Carbonyl capture (Farmer): aldehydes, and alpha,beta-unsaturated ones fastest, are consumed by cysteine's amine / thiol and by NH3 / H2S; a true antioxidant would also cut the other oxidation products."
+      - "Antioxidant MRPs (Xu): reductones / melanoidins slow lipid oxidation; predicts all oxidation products to fall, ketones included."
+    tests:
+      - "Xu 2011's own Table 2 (xu2011 dossier sec. 2; oxidised lard alone vs + Cys / Xyl, ug/mL): saturated methyl ketones are not lowered (2-decanone 1.22 -> 1.52, 2-tridecanone 1.15 -> 1.27, 2-nonanone n.d. -> 1.17), while the enone (E)-3-octen-2-one, a Michael acceptor, falls 2.63 -> n.d. and 2-pentylthiophene (H2S + dienal) appears: Farmer's discriminator, applied to Xu's data, favours capture."
+    status: explained
+    remedy: >-
+      Read the aldehyde fall in lipid + Cys + pentose pots as capture by the Maillard reactants (cysteine, NH3, H2S),
+      not as an antioxidant effect; no lipid-oxidation rate in the lipid lane is to be lowered by Maillard products on
+      the strength of xu2011. Antioxidant claims need an oxidation marker (PV, conjugated dienes, O2 uptake) measured
+      after heating.
+    affects:
+      - farmer1992_tab1_lipid_volatiles_pm_cys_rib
+      - xu2011_table2_lipid_oxidation_volatiles_lard_vs_lard_maillard
+
+  - id: CF-089
+    kind: conflict
+    scope: sulfur_rows
+    sources: [arnold1971, grosch1992]
+    quantity: "effect of cysteine on thermal thiamine degradation (and so on thiamine-derived MFT / H2S), ~100 C, pH 5-7, dilute"
+    observation: >-
+      Dwivedi & Arnold 1971 (thiamine 0.12 mM, 0.1 M phosphate, boiling water, 30 min): with cysteine 1 mg/mL (8.3 mM,
+      ~70x the thiamine) "no thiamine was lost" at pH 5-7, and all H2S came from cysteine (arnold1971 dossier sec. 1,
+      3.1; PDF p. 924). Grosch & Zeiler-Hilgart 1992 (thiamine 60 uM, 0.2 M pyrophosphate pH 5.7, 2 h reflux, SIDA):
+      cysteine 0.65 mM (~11x the thiamine) raises thiamine-MFT x7 (4.7 +- 1.2 -> 33 +- 3.7 ug / 500 mL, Table II rows
+      1, 4), while ribose + cysteine alone gives < 0.1 ug, so the MFT needs thiamine to degrade (grosch1992 dossier
+      sec. 1; PDF abstract: "Addition of cysteine ... enhanced the formation of MF-SH from thiamine"). Atlas: F27 cells
+      for arnold1971 (cysteine arm) and grosch1992 (Tables II, III, VIII).
+    explanations:
+      - "Cysteine dose: Grosch's own dose series (Table III, thiamine 30 umol + ribose 670 umol, Cys 0-2720 umol) peaks at 170-325 umol (Cys : thiamine ~6-11) and falls to 2.0 ug at 2720 umol (~91x), below the cysteine-free 5.2: at Arnold's ratio (~70x) Grosch also sees less thiamine-MFT."
+      - "Detection: thiamine-MFT is a small fraction of the thiamine (33 ug MFT = ~0.29 umol, ~1 % of 30 umol), so Grosch's x7 needs only ~1 % of the thiamine to degrade, likely within the resolution of Arnold's colorimetric duplicate assay ('no thiamine lost')."
+      - "Time and medium: 30 min in phosphate (Arnold) vs 2 h in pyrophosphate (Grosch)."
+    tests: []
+    status: open
+    remedy: >-
+      The engine's thiamine route (sulfur.py "THE THIAMINE ROUTE") is first order in thiamine with no cysteine term,
+      and its H2S share comes from Arnold's cysteine-free series. Until a cysteine x thiamine series with thiamine
+      measured is on disk, treat the cysteine effect on the thiamine route as dose-dependent and unmodelled: do not fit
+      a cysteine-free thiamine constant to cysteine-rich pots without a declared band, and score Grosch's Table III shape
+      (optimum then fall) as a directional check, not a level.
+    affects:
+      - arnold1971_figs2_3_thiamine_loss_ph_time
+      - {file: src/kinetic_core/sulfur.py, symbol: "THE THIAMINE ROUTE"}
+
+  - id: CF-090
+    kind: conflict
+    scope: sulfur_rows
+    sources: [hincelin1992, bolton1993]
+    quantity: "effect of added xylose on MFT formed from thiamine"
+    observation: >-
+      Hincelin, Ames, Apriyantono & Elmore 1992 (thiamine HCl 0.05 mol +- xylose 1 mol in 250 mL water, held at pH 7
+      with NaOH, 1 h in a Likens-Nickerson SDE head, ~100 C, relative areas): xylose raises MFT 2 -> 14 % of the isolate,
+      "a 4-5-fold increase in absolute yield", and doubles H2S (hincelin1992 dossier sec. 1). Bolton, Reineccius,
+      Liardon & Huynh-Ba 1993/1994 (bouillon solids, 30 %, pH 5.5-5.8, a_w 0.83, sealed vial, 120 C, 1 h, SIDA-like
+      GC/MS-SIM): 6.3 mM xylose leaves MFT unchanged (489 +- 90 vs 425 +- 103 ng, n = 3, t ~0.8) and the 34S share
+      unchanged (12.50 vs 12.11 %); the authors cite Hincelin as the contrasting result (bolton1993 dossier sec. 3,
+      item 8). Bolton's citation gives Hincelin's temperature as 140 C; Hincelin's pot boiled (~100 C, not printed).
+      Atlas: F27 cells for bolton1993 and hincelin1992; F27 condition_dependence.
+    explanations:
+      - "Sugar background: Hincelin's baseline is thiamine with no sugar; Bolton's already holds glucose 46.8 mM (3.4x the thiamine) and IMP (a ribose source), so 6.3 mM xylose adds little carbonyl."
+      - "Sugar dose: xylose : thiamine 20 : 1 (Hincelin) vs ~0.5 : 1 (Bolton)."
+      - "pH: 7 (Hincelin, NaOH-held) vs 5.5-5.8 (Bolton); thiamine releases H2S only at pH >= 6.5 (Dwivedi & Arnold 1971, outside this pair), so a xylose + H2S -> norfuraneol / MFT route can run at pH 7 and not at 5.5."
+      - "Measurement: open SDE stripping with relative areas (Hincelin) vs a sealed, isotope-checked pot (Bolton); water a_w 1 vs 0.83."
+    tests: []
+    status: open
+    remedy: >-
+      No single 'xylose effect on thiamine-MFT' factor: the two pots differ in sugar background, sugar dose, pH and
+      read-out at once. Score each as its own directional check (Hincelin: MFT ratio ~4.7 at pH 7, sugar-free
+      baseline; Bolton: ratio ~0.87, not significant, in a glucose-rich matrix). A pH-7 vs pH-5.5 xylose +- thiamine
+      pair in one design would separate the pH explanation from the sugar-background one.
+    affects:
+      - hincelin1992_tables1_2_thiamine_xylose_volatiles
+      - bolton1993_tab2_mft_34s_split

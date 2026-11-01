@@ -1,0 +1,259 @@
+# Pathway-condition atlas: F31_melanoidins (literature side). Built 2026-11-01 from the extraction dossiers only.
+# Quotes verbatim from the cited dossier. Two halves: FORMATION (what enters the non-dialysable polymer, from which
+# precursors, under which conditions) and the melanoidin as a SINK / BINDER (of thiols and other odorants). Colour
+# (A420 / A470, visual dilution) is NOT a melanoidin marker on its own: low-MW coloured compounds also absorb, and
+# fluorescence is not a proxy for binding (meynier2004 via hidalgo1993 dossier). "not_stated" marks an unreported pH.
+family: F31_melanoidins
+definition: "melanoidin formation and melanoidins as sinks / binders"
+markers:
+  - "LABELLED PRECURSOR CARBON / NITROGEN recovered in the NON-DIALYSABLE (> 3.5 / > 12 kDa) fraction: 13C / 15N glycine and site-specific 13C glucose by solid-state NMR (fang2009, fang2010); 14C sugar, whole glycine and glycine C-1 (mundt2004); 14C sugar on casein (brands2002b)."
+  - "ELEMENTAL STOICHIOMETRY of the isolated polymer (C/N, sugar per N 'a', CO2 and H2O lost per N) against reactant ratio / T / water (wedzicha1992, cammerer1994, mohsin2018, mundt2004)."
+  - "FED PRECURSOR -> colour or polymer: fed Amadori compound (martins2003b), fed dicarbonyls / furans with an amine (hofmann1999, colour-dilution only)."
+  - "SINK markers: covalent adduct identified on the polymer (LC/MS thioether adducts, [2H]-NMR line broadening, hofmann2001); free fraction by qNMR with covalent share by mass balance (gigl2021); thiol loss suppressed by carbonyl blockers (hydroxylamine) or by N2 (charlesbernard2005)."
+  - "NON-markers: A420 / A470 alone (low-MW colourants), a thiol loss in a whole brew with no adduct (oxidation, protein or polyphenol could do it -- charlesbernard2005a's class correlations are equal)."
+cells:
+  # ---------------- formation: labelling ----------------
+  - key: {ph: not_stated, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: 125, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "dry (freeze-dried co-precipitate, 2 h) vs aqueous (next cell), 13C / 15N glycine: glycine carbon's share of melanoidin carbon vs its 25 % share of the reactants"
+    status: dominant
+    quote: "24 % (dry) / 22 % (solution) of the carbon in"
+    quantity: "glycine C 24 % of melanoidin C (dry) vs 25 % in reactants: near-1:1 amine incorporation; 27 +/- 4 % of glycine loses C1 as CO2; N stays on glycine C2"
+    evidence: labelling
+    lab: "Iowa State (Schmidt-Rohr)"
+    dossiers: [fang2009_extraction.md]
+    where: "Results; dossier sec. 1 and mass-balance table"
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: not_stated, metals: not_controlled}
+    contrast: "aqueous 0.056 M at pH 8, 1 week, vs dry 125 C: more decarboxylation in solution (33 vs 27 %)"
+    status: dominant
+    quote: "33 ± 4 % (solution) of the glycine reactant loses C1 as CO2"
+    quantity: "glycine C 22 % of melanoidin carbon in solution"
+    evidence: labelling
+    lab: "Iowa State (Schmidt-Rohr)"
+    dossiers: [fang2009_extraction.md]
+    where: "Results; mass-balance table"
+  - key: {ph: not_stated, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: 125, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "glucose labelled one carbon at a time (13C1, 13C2, 13C3, 13C6, U-13C6): C6 barely changes, C1 makes new C-C bonds; ~40 % of polymer carbon aromatic / alkene, ~51 % alkyl; no single structure > 15 %"
+    status: operating
+    quote: "between one-quarter and one-half of all glucose carbon backbones are fragmented"
+    quantity: "intact-C6 incorporation 50-75 % of glucose units; fragment (C3 / C2) incorporation 25-50 %"
+    evidence: labelling
+    lab: "Iowa State (Schmidt-Rohr)"
+    dossiers: [fang2010_extraction.md]
+    where: "Abstract; Results 'Synopsis'"
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
+    contrast: "0.25 M glucose or maltose + 0.25 M glycine, 0.2 M acetate pH 5.5, heated to A470 = 2; 14C sugar / whole glycine / glycine C-1: about two-thirds of glycine enters DECARBOXYLATED"
+    status: dominant
+    quote: "C/N = 7.64 ± 0.21 by microanalysis and 7.61 by an independent radiochemical route"
+    quantity: "C/N 7.64 is below the 1:1 glucose-glycine unit's 8 because ~2/3 of glycine carries one C per N"
+    evidence: labelling
+    lab: "Leeds (Wedzicha)"
+    dossiers: [mundt2004_extraction.md]
+    where: "Table (CHN); radiochemical section"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "glucose vs fructose (150 mM) on 3 % Na-caseinate, 0.1 M phosphate pH 6.8: [U-14C] sugar incorporated in the protein-bound brown polymer gives the extinction per mol sugar; not different between the sugars"
+    status: operating
+    quote: "ε = 477 (± 50) L mol⁻¹ cm⁻¹ for glucose–casein"
+    quantity: "fructose-casein 527 +/- 35 L/mol/cm; protein-bound melanoidin carries the colour (sugars per casein in a microanalysis table)"
+    evidence: labelling
+    lab: "Wageningen / Leeds (van Boekel / Wedzicha)"
+    dossiers: [brands2002b_extraction.md]
+    where: "Fig. 3; Table 1; Abstract"
+  # ---------------- formation: stoichiometry vs conditions ----------------
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "glucose : glycine reactant ratio 1:9 to 9:1 (0.1-1.0 M), initial pH 5.5: polymer C/N 6.6 -> 9.3; glucose per N 'a' from 0.78 to > 1; ~3 H2O lost per glucose"
+    status: operating
+    quote: "Reactant ratio alone moves C/N from 6.6 to 9.3"
+    quantity: "equimolar: C/N 8.1, a = 1.06, 25 % of glycine decarboxylated"
+    evidence: within_study_factor
+    lab: "Leeds (Wedzicha)"
+    dossiers: [wedzicha1992_extraction.md]
+    where: "stoichiometry table (p. 363-364)"
+    conflict: CF-018
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "100 (reflux 10 h); also 60 C / 160 h", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "WATER: 0.1 M sugar + 0.1 M glycine refluxed at pH 5 or 7.3 (held by pH-stat) vs solvent-free 170-180 C: sugar per glycine in the > 12 kDa polymer ~1.2-1.3 (water) vs ~2.2 (dry)"
+    status: operating
+    quote: "in water at 100 C the ratio is ~1.2-1.3 sugar per glycine"
+    quantity: "dry incorporates ~2x more sugar (or C3 fragments) per amine; replicates and uncertainties not printed"
+    evidence: within_study_factor
+    lab: "TU Berlin (Kroh)"
+    dossiers: [cammerer1994_extraction.md]
+    where: "sec. 1; Tables 1-3"
+    conflict: CF-018
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "SUGAR TYPE, solvent-free 1:1 with glycine, 10 min: sugar units per glycine a = ribose 4.74, glucose 2.19, maltose 2.34, fructose 1.53"
+    status: operating
+    quote: "| Ribose | 50.28 | 6.28 | 2.41 | 41.03 | 4.74 | 1.69 |"
+    quantity: "pentose melanoidin carries ~2x the sugar per N of glucose; fructose the least"
+    evidence: within_study_factor
+    lab: "TU Berlin (Kroh)"
+    dossiers: [cammerer1994_extraction.md]
+    where: "Table 1"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: "130-200", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "TEMPERATURE, glucose + L-alanine 1:1 solvent-free, 10 min at 12 temperatures, dialysed 12-14 kDa: C/N rises 13 -> 21 (unit values: 9 for 1:1, 15 for 2:1 with alanine)"
+    status: operating
+    quote: "C/N ≈ 13:1 at 130 C rising to 21:1 at 200 C"
+    quantity: "carbohydrate : amine incorporation above 2:1 at high T in the dry -- sugar-only (caramel-type) carbon enters the polymer"
+    evidence: within_study_factor
+    lab: "TU Berlin / BAM (Kanzler)"
+    dossiers: [mohsin2018_extraction.md]
+    where: "CHN table; dossier header"
+  # ---------------- formation: fed precursors ----------------
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100-120", sugar: none, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "FED AMADORI (DFG) in 0.1 M phosphate, pH 5.5 / 6.8, 100 / 120 C: pH matters more than T for melanoidin from DFG; and DFG gives much less colour than a Glc + Gly pot that forms about the same DFG"
+    status: operating
+    quote: "colour formation is much less than when one starts with Glc/glycine system"
+    quantity: "melanoidin plateau ~2.5 (pH 6.8) vs ~0.6 (100 C pH 5.5) / ~1.7 (120 C pH 5.5) mmol/L sugar-equivalents (figure); the Amadori route is NOT the main colour route in Glc + Gly"
+    evidence: fed_intermediate
+    lab: "Wageningen (van Boekel / Martins)"
+    dossiers: [martins2003b_extraction.md]
+    where: "Fig. 8; sec. 3.1.7 (p. 1659)"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "100 (reflux 15 min)", sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "FED carbohydrate degradation products (1 mmol) + L-alanine, 0.5 M phosphate pH 7.0: browning ability by visual colour-dilution factor; C2 / furfural strongest, HMF and hydroxyacetone nearly inert"
+    status: operating
+    quote: "glycolaldehyde 1024; furfural 1024; 2-oxopropanal 256; 3-deoxy-2-pentosulose 256; 3-deoxy-2-hexosulose"
+    quantity: "CD factors: glycolaldehyde 1024, furfural 1024, MGO 256, 3-deoxypentosone 256, 3-DG 128, glyoxal 128, HMF 2, hydroxyacetone 1. In the xylose pot 3-deoxypentosone carries most browning activity early; in glucose 3-DG from 60 min (Tables 2-3)"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann)"
+    dossiers: [hofmann1999_extraction.md]
+    where: "Tables 1-3 (sec. 4.6)"
+    conflict: CF-067
+  # ---------------- sink / binder: thiols and other odorants ----------------
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 30, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "FFT (500 ug) + coffee melanoidin 125 mg in 10 mL 0.1 M phosphate pH 6.0, 30 min: bound vs free vs disulfide mass balance; covalent thioether adducts to a CROSSPY-derived pyrazinium identified (LC/MS, [2H]-NMR); not reducible by DTE"
+    status: dominant
+    quote: "400 µg of 2-furfurylthiol bound to 125 mg of coffee melanoidin"
+    quantity: "80 % of the charge bound; disulfide < 1.5 % of bound; capacity >= 0.028 mmol thiol / g melanoidin (dossier arithmetic); binding tracks EPR radical activity across four size fractions"
+    evidence: trapping
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2001_extraction.md, hofmann2002_extraction.md]
+    where: "Results; Fig. 2C, Fig. 3; LC/MS m/z 251 / 267 / 363"
+    conflict: CF-081
+  - key: {ph: not_stated, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 80, sugar: not_stated, amine: not_stated, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "a real coffee brew held at 80 C in a thermos vs the fresh brew"
+    status: unattributed
+    quote: "After 60 min the 2-furfurylthiol concentration decreased by a factor of more than four"
+    quantity: "k >= 0.023 /min at 80 C (lower bound, dossier); complete loss by 210 min; no adduct measured in the brew, so binding vs oxidation is not separated"
+    evidence: qualitative
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2001_extraction.md]
+    where: "Fig. 1; Results"
+  - key: {ph: mild_acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 25, sugar: not_stated, amine: not_stated, oxygen: air, buffer: carboxylate, metals: not_controlled}
+    contrast: "AIR vs N2 (degassed, glovebox), reconstituted coffee 1 % solids, 10 mM acetate pH 5.2, ten thiols over 15 h: anaerobic attenuation 15-20x (aliphatic), > 40x (FFT)"
+    status: operating
+    quote: "In the absence of oxygen, linear aliphatic thiols are only"
+    quantity: "aliphatic thiols only 20-30 % degraded after 15 h under N2; the matrix sink is mostly an O2-requiring channel at 25 C"
+    evidence: within_study_factor
+    lab: "Nestle (Roberts / Charles-Bernard)"
+    dossiers: [charlesbernard2005_extraction.md]
+    where: "Fig. 5; Discussion p. 4429-4430"
+    conflict: CF-081
+  - key: {ph: mild_acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 25, sugar: not_stated, amine: not_stated, oxygen: air, buffer: carboxylate, metals: not_controlled}
+    contrast: "CARBONYL BLOCKER: hydroxylamine pre-incubated 1 h with the coffee matrix protects aliphatic thiols, levelling off above 8-10 mmol/g; FFT still degraded at 7-21 mmol/g; N2 + hydroxylamine synergise (FFT 1/k_rel 45 / 4 / 93)"
+    status: operating
+    quote: "an indirect method to measure the number of electrophilic sites"
+    quantity: "the 8-10 mmol/g is a reagent DOSE at which protection levels off, not a titre (CF-081: Part 1 measures ~0.29 mmol/g)"
+    evidence: within_study_factor
+    lab: "Nestle (Roberts / Charles-Bernard)"
+    dossiers: [charlesbernard2005_extraction.md]
+    where: "Results p. 4428; Discussion p. 4430-4431"
+    conflict: CF-081
+  - key: {ph: mild_acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 25, sugar: not_stated, amine: not_stated, oxygen: air, buffer: carboxylate, metals: not_controlled}
+    contrast: "FRACTIONS of spray-dried coffee (SPE, 3.5 kDa dialysis, SEC, DEAE): both dialysis halves destroy FFT and EtSH completely in 24 h; class correlations (melanoidin, protein, carbohydrate, chlorogenic acid) all equal"
+    status: unattributed
+    quote: "FFT = EtSH = 0 at 24 h"
+    quantity: "electrophile consumption ~0.29 mmol O-phenylhydroxylamine per g at 13 h; FFT 8-20x more labile than EtSH in every fraction; the most thiol-active fraction (AEC-A) has the LOWEST carbonyl reactivity"
+    evidence: within_study_factor
+    lab: "Nestle (Roberts / Charles-Bernard)"
+    dossiers: [charlesbernard2005a_extraction.md]
+    where: "Fig. 1, Fig. 5, Table 3; dossier sec. 1"
+    conflict: CF-081
+  - key: {ph: not_stated, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "27 (RT)", sugar: not_stated, amine: not_stated, oxygen: not_stated, buffer: not_stated, metals: not_controlled}
+    contrast: "coffee HMW (> 10 kDa, ultrafiltered) melanoidin + 5 mmol/L odorants, qNMR over 96 h: odorant classes split into no interaction (HDMF > 96 % free), reversible pi-pi only (3-isobutyl-2-methoxypyrazine 46 % free, flat), and pi-pi + covalent (FFT 32 % free at 60 min, -> 0 by 96 h)"
+    status: operating
+    quote: "approximately 5% … maximum after 96 h with 11%"
+    quantity: "FFT covalently incorporated ~5 % at 48 h, 11 % at 96 h; N-acetylcysteine 8 % at 96 h; bound fractions are lower bounds (site saturation at 5 mM)"
+    evidence: measured_intermediate
+    lab: "TUM Freising (Hofmann / Frank)"
+    dossiers: [gigl2021_extraction.md]
+    where: "p. 15341; Fig. 2 clustering table"
+  - key: {ph: not_stated, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "6 vs 27 vs 60", sugar: not_stated, amine: not_stated, oxygen: not_stated, buffer: not_stated, metals: not_controlled}
+    contrast: "TEMPERATURE: FFT free at 60 min 24.1 % (6 C) vs 32.3 % (RT) vs 55.0 % (60 C); the slow covalent decline is almost absent at 6 C and FFT reaches zero sooner at 60 C (72 h vs 96 h)"
+    status: operating
+    quote: "whereas the covalent binding of FFT to the HMW material was almost completely"
+    quantity: "two channels of opposite T-sign: reversible pi-pi binding falls with T, covalent binding rises with T"
+    evidence: measured_intermediate
+    lab: "TUM Freising (Hofmann / Frank)"
+    dossiers: [gigl2021_extraction.md]
+    where: "p. 15342 temperature paragraph"
+condition_dependence: >-
+  FORMATION, SHOWN. Labelling in three labs (Iowa State, Leeds, Wageningen/Leeds) shows that in glucose + glycine (or
+  casein) both sugar carbon and amine nitrogen enter the non-dialysable polymer roughly 1:1 in water and in the dry at
+  70-125 C, with 25-67 % of glycine decarboxylated (more in solution than dry, Fang; ~2/3 at 70 C pH 5.5, Mundt) and
+  25-50 % of glucose backbones fragmented (Fang 2010). The stoichiometry is condition-dependent: reactant ratio moves
+  C/N 6.6 -> 9.3 (Leeds), dry roasting doubles sugar per amine (~2.2 vs 1.2-1.3, TU Berlin), pentose carries ~2x the
+  sugar per N of glucose (TU Berlin, dry), and dry glucose + alanine climbs to C/N 21 at 200 C (TU Berlin / BAM) --
+  i.e. at low a_w and very high T an amine-free (caramel-type) carbon input becomes large. Precursors: a fed Amadori
+  compound gives much less colour than the Glc + Gly pot it mimics (Wageningen), so the main colour route does not run
+  through the Amadori compound; among fed fragments C2 (glycolaldehyde), furfural and the 3-deoxyosones are the
+  strongest browning precursors at pH 7 (Garching, visual colour). pH: from DFG, pH 6.8 >> pH 5.5 (Wageningen).
+  SINK, SHOWN. At 25-30 C, covalent thioether binding of thiols to a melanoidin-derived pyrazinium electrophile is
+  proven by adduct identification (Garching) and its kinetics need O2 (Nestle, 15-40x slower under N2). At room T the
+  HMW fraction also binds odorants REVERSIBLY by pi-pi stacking (pyrazines ~50 %); temperature lowers reversible and
+  raises covalent binding (Freising). Above 30 C only the 80 C brew decay exists, without an adduct (unattributed).
+  ASSUMED: everything at cooking temperature (100-180 C) for the sink; melanoidin formation from protein-bound amine
+  other than casein; the magnitude of the site density (CF-081, ~1.5 dex).
+best_supported_regimes:
+  - "formation, glucose + glycine, 70-125 C, aqueous or dry: amine + sugar co-incorporation with partial decarboxylation (dominant; labelling, 2 independent labs Iowa State + Leeds, plus Wageningen/Leeds on casein)"
+  - "formation stoichiometry vs reactant ratio / water / sugar / T: within-study factors, 2 labs (Leeds; TU Berlin incl. BAM)"
+  - "sink, coffee melanoidin + thiols at 25-30 C, pH 5.2-6: covalent thioether binding, O2-dependent (Garching trapping + Nestle factor; Freising qNMR)"
+unknown_regimes:
+  - "the SINK at process temperature (100-180 C): no binding or adduct measurement above 60 C; the 80 C brew is unattributed"
+  - "melanoidins from plant-protein-bound Lys / Arg or peptides: only casein (brands2002b) on disk"
+  - "formation share vs pH below 5 or above 8 (only DFG at 5.5 / 6.8 and Fang's pH 8 solution)"
+  - "air vs inert as a factor on melanoidin formation or composition: never varied"
+  - "cysteine-containing (S-) melanoidins and their binding of thiols: none on disk"
+  - "melanoidins made in the model's own pots (ribose / xylose + Cys, 120-145 C) as thiol sinks: only coffee / roasted matrices are studied"
+  - "phosphate vs carboxylate buffer on melanoidin formation: never contrasted"
+  - "non-thiol odorant binding (pyrazines, aldehydes, furanones) other than gigl2021's single RT qNMR series"
+competing_families:
+  - "F13_furans_dehydration / F06_enol12_3deoxyosone: 3-DG and furfural feed both furans and the polymer; in pentose pots 3-deoxypentosone carries most early browning activity (hofmann1999)"
+  - "F09_namiki_c2 / F10_retroaldol_c3_c2: C2 / C3 fragments are the most potent browning precursors (glycolaldehyde CD 1024, MGO 256) and enter the polymer (fang2010: 25-50 % fragmented backbones)"
+  - "F19_aminoketone_pyrazine / F21_pyrroles_pyridines: compete for the same dicarbonyls and amine; pyrazines are also bound reversibly by melanoidin (gigl2021)"
+  - "F14_caramelisation_amine_free: at low a_w and >= 180 C sugar-only carbon enters the polymer (mohsin2018 C/N up to 21)"
+  - "F28_thiol_losses: the melanoidin covalent channel is one of the thiol sinks; under air at 25 C it dominates over disulfide formation (hofmann2001, < 1.5 %), but oxidation-dependent (charlesbernard2005)"
+engine: >-
+  Formation: src/kinetic_core/network.py r_tdg_mel (3-DG + Gly -> MEL_C 8 + MEL_N 1, Martins step 9, measured) and
+  r_mgo_mel (MGO -> MEL_C 3, fitted; amine-free carbon), plus the acrylamide lane's a_int1_mel and B20's CML -> MEL
+  pools; the melanoidin is an ELEMENTAL terminal pool. Sink: src/kinetic_core/sulfur.py ch_thioether_mft /
+  ch_thioether_fft on the MELE site pool with reversible release (ch_thioether_release*, K from Stack 2018, K falling
+  with T), MELE charged from a real matrix at MELANOIDIN_SITE_DENSITY 9.0 mmol/g (CF-081) or made by the pot from the
+  deoxypentosones (ch_mele_from_dpo / tdp / ddp, k_mele_site, inert default), and ch_add_mft_dpo (B25).
+  MATCHES: 3-DG + amine as a melanoidin route; covalent thiol binding to matrix electrophiles; heating releasing bound
+  thiol (sign consistent with the reversible fraction in gigl2021). MISMATCHES: (1) a FIXED C/N = 8 repeat unit with
+  one sugar per N, against measured C/N 6.6-9.3 (aqueous, ratio-dependent, ~2/3 decarboxylated glycine) and 13-21
+  (dry, high T), and sugar per N 1.2-1.3 (water) vs 2.2 (dry) -- the engine has no water or ratio dependence of
+  stoichiometry; (2) no 1-DG, glyoxal, glycolaldehyde, furfural or 3-deoxypentosone -> melanoidin step in the trunk,
+  although C2 and furfural are the most potent fed browning precursors; (3) the Amadori -> 3-DG -> melanoidin path is
+  the main trunk route, while fed DFG makes much less colour than Glc + Gly (martins2003b); (4) the thioether channel
+  is one channel with one barrier and no O2 requirement, while the literature shows an O2-requiring covalent channel
+  (15-40x slower under N2) plus a reversible pi-pi channel of the opposite T-sign; (5) no binding of non-thiol odorants
+  (pyrazines ~50 % bound at RT); (6) the site density is Part 2's reagent dose (CF-081, x30 above Part 1's measured
+  consumption); (7) no sink constant exists above 80 C, so every cooking-temperature use is an extrapolation.

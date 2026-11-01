@@ -1,0 +1,354 @@
+# Pathway-condition atlas, family F26 (literature side). Written 2026-11-01 from the extraction dossiers only.
+# Every cell's `quote` is copied verbatim from the dossier it cites (grep -F finds it, markdown included).
+# Status convention used here: F26 is a PRODUCT-CLASS family (thiazoles, thiazolines, thiophenes / thiophenones,
+# alpha-mercaptoketones), so a detected product means the family operates; the MARKERS below decide WHICH sub-route
+# (intact sugar chain vs fragment vs norfuraneol vs lipid aldehyde vs cysteamine) made it. `dominant` is used only
+# where labelling or a fed partner fixes the sub-route's share.
+family: F26_thiazoles_thiophenes
+definition: "thiazoles / thiazolines / thiophenes / mercaptoketones (incl. lipid aldehyde + H2S / NH3)"
+markers:
+  - "Mercaptopentanone isomer + label: 3-mercapto-2-pentanone M+5 (or C-1 labelled) from [13C5] / [1-13C]ribose = intact ribose chain via the 1,4-dideoxyosone; 2-mercapto-3-pentanone unlabelled when unlabelled norfuraneol is fed against [13C5]ribose = the norfuraneol (NF) route (Cerny 2003 / 2004)."
+  - "3-mercapto-2-butanone label: max 4 labels from [13C5]ribose (a C4 from a C5, no recombination); [1-13C]ribose split 54 : 46 = C-1 loss vs C-5 loss (Cerny 2004)."
+  - "Thiazole C-2 label from [1-13C] / [13C5]ribose (one sugar carbon, as formaldehyde, + cysteine N, S) (Cerny 2003 / 2004)."
+  - "Fed partners: alkanal + alpha-hydroxyketone / alpha-dione + (NH4)2S -> 2-alkyl-3-thiazolines / thiazoles (Elmore 1997); cysteamine + methylglyoxal -> HDT -> 2-acetyl-2-thiazoline (Hofmann 1995b); fed norfuraneol + Cys or H2S -> mercaptoketones / thiophenones (Whitfield 1999 / 2001); methylglyoxal + H2S -> mercapto-2-propanone (Hofmann 1998 T7); furan + sulfide -> thiophene (Zhai 2023)."
+  - "Lipid markers: 2-alkylthiophenes / 2-alkylthiapyrans / 1-alkanethiols that appear ONLY when a lipid or a 2,4-dienal is present (Farmer 1990, Whitfield 1988, Du 2023), and carry no sugar carbon under [13C6]glucose CAMOLA (Du 2023)."
+  - "Carbon-source negatives: 3-thiophenethiol 95 % unlabelled from [13C5]ribose = cysteine carbon (Cerny 2003); thiophenone > 98 % unlabelled from [13C5]xylose with thiamin = thiamin carbon (Cerny 2007)."
+cells:
+  # ---------------- alpha-mercaptoketones: labelling and fed cells ----------------
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: 3-mercapto-2-pentanone}
+    contrast: "1:1 ribose / [13C5]ribose (pot C): only M+0 and M+5"
+    status: dominant
+    quote: "3-mercapto-2-pentanone skeleton origin | 49 / 47; intermediates 4"
+    quantity: "96 % intact C5 (intermediate channels 4 % = isotopic-impurity level); the ribose-chain route makes this isomer at 95 C"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "Table 2 row 8"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: 2-mercapto-3-pentanone}
+    contrast: "ribose + Cys alone (pot C) vs fed norfuraneol pots (B, D): the NF-marker isomer appears only when NF is fed"
+    status: absent
+    quote: "2-mercapto-3-pentanone from ribose alone | **not detected**"
+    quantity: "2-mercapto-3-pentanone not detected from ribose + Cys at 95 C / 4 h (HS-SPME saw both isomers elsewhere); confirmed in Cerny 2004 with [1-13C]ribose"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "p. 2715; dossier sec. 3 item 4"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: "2-mercapto-3-pentanone / 3-mercapto-2-butanone"}
+    contrast: "fed unlabelled norfuraneol vs [13C5]ribose at equimolar charge (pot D)"
+    status: dominant
+    quote: "2-mercapto-3-pentanone: norfuraneol route share | 96 % norfuraneol / 4 % ribose"
+    quantity: "NF supplies 96 % of 2-mercapto-3-pentanone and 94 % of 3-mercapto-2-butanone, but only 42 % of 3-mercapto-2-pentanone (58 % ribose) in the same pot"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "Table 3 rows 5, 8, 16"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: 3-mercapto-2-butanone}
+    contrast: "[1-13C]ribose: M+0 (C-1 lost) vs M+1 (C-5 lost)"
+    status: operating
+    quote: "**54 / 46 / 0**"
+    quantity: "3-mercapto-2-butanone 54 % from loss of ribose C-1 (retro-Mannich of the Cys-Amadori) / 46 % from loss of C-5 (1,4-dideoxyosone or 1-deoxyosone retro-aldol): two parallel C4 routes"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2004_extraction.md]
+    where: "Table 1 row 5"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, thiamine: "50 mM", ph_range: "4.0 - 7.0", product: 2-mercapto-3-pentanone}
+    contrast: "pH 4.0 / 5.0 / 5.5 / 6.0 / 7.0: area 0 / 0 / 0 / 19 / 5; at pH 6 and 7 it is 94 and > 95 % [13C5]xylose-derived"
+    status: dominant
+    quote: "**6 / 94** | **<5 / >95**"
+    quantity: "2-mercapto-3-pentanone appears only at pH >= 6, and then almost entirely from the pentose (not thiamin)"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny / Briffod)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 2 row 6; Table 4 row 6"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, thiamine: "50 mM", ph_range: "4.0 - 7.0", product: 3-mercapto-2-pentanone}
+    contrast: "pH 4 / 5 / 6 / 7: thiamin : xylose split 77:23 / 86:14 / 90:10 / 88:12; total area 145 -> 12"
+    status: operating
+    quote: "**77 / 23** | **86 / 14** | **90 / 10** | **88 / 12**"
+    quantity: "with thiamin present 3-mercapto-2-pentanone is 77-90 % thiamin-derived; its xylose-derived part falls ~24x from pH 4 to 7"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny / Briffod)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 4 row 5; dossier sec. 4.2"
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: 2-mercapto-3-pentanone}
+    contrast: "temperature across labs: absent at 95 C (Cerny 2003 / 2004) vs present as the minor isomer at 145 C here"
+    status: operating
+    quote: "contained small amounts of its isomer 2-mercapto-3-pentanone"
+    quantity: "2-mercapto-3-pentanone detected (not quantified) beside the dominant 3-mercapto-2-pentanone from ribose + Cys ramped to 145 C, pH 5"
+    evidence: qualitative
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1995_extraction.md]
+    where: "Table 1, footnote f"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: "mercaptoketones (fed norfuraneol)"}
+    contrast: "fed NF 50 mM + cysteine 50 mM vs + H2S ~97 mM, pH 4.5, 60 min: mercaptopentanones ~10x higher with cysteine"
+    status: dominant
+    quote: "the quantities were only **~10 %** of those found in the cysteine-containing reaction"
+    quantity: "with cysteine: 3-mercapto-2-butanone 92, 3-mercapto-2-pentanone 74.5, 2-mercapto-3-pentanone 77.5 ug/10 mg NF (244 vs MFT 15: mercaptoketones are NF's main thiol fate, 16.3 : 1); isomers 1:1"
+    evidence: fed_intermediate
+    lab: "University of Reading / Food Science Australia (Whitfield / Mottram)"
+    dossiers: [whitfield1999_extraction.md]
+    where: "Table 1 rows 5, 8, 9; p. 1629"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: "thiols + mercaptoketones (fed norfuraneol)"}
+    contrast: "pH 4.5 vs 6.5, same lab, charges and method: thiols + mercaptoketones 294 -> 7 (Cys), 44 -> 1 (H2S)"
+    status: minor
+    quote: "| **thiols and mercaptoketones** | **294** | **7** | **44** | **1** |"
+    quantity: "at pH 6.5 mercaptoketones are ~2 % of NF volatiles (3-mercapto-2-pentanone 74.5 -> 3, 2-mercapto-3-pentanone 77.5 -> < 0.1 ug/10 mg)"
+    evidence: fed_intermediate
+    lab: "University of Reading / Food Science Australia (Whitfield / Mottram)"
+    dossiers: [whitfield2001_extraction.md]
+    where: "Table 2; dossier sec. 4.2"
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: mercapto-2-propanone}
+    contrast: "fed 2-oxopropanal 1 mmol + H2S 1 vs 2 mmol (50 mL, pH 5): product 1.8 -> 4.0 mol %"
+    status: operating
+    quote: "| **1** | **2** | **3600** | **4.0** |"
+    quantity: "mercapto-2-propanone 1650 -> 3600 ug when H2S is doubled (2.2x, super-linear: H2S limiting)"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 7, p. 239"
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, ph_range: "3.0 - 7.0", product: mercapto-2-propanone}
+    contrast: "glucose 100 + Cys 33 mM at pH 3.0 / 5.0 / 7.0: 11.4 / 59.6 / 26.5 ug"
+    status: operating
+    quote: "**maximum at pH 5.0** (5.23× pH 3.0, 2.25× pH 7.0)"
+    quantity: "in-situ mercapto-2-propanone from a real sugar + Cys pot, non-monotone in pH (max at 5)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 9, p. 240"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, ph_range: "4.5 - 6.5", product: "3-mercapto-2-pentanone vs thiazoles"}
+    contrast: "pyrophosphate-held pH 4.5 -> 6.5: 3-mercapto-2-pentanone 5.4 -> tr (> 54x down) while 2-acetylthiazole nd -> 4.4 (> 440x up), thiazole nd -> 2.3"
+    status: operating
+    quote: "| 3-Mercapto-2-pentanone | 903 | 5.4 | 5.0 | 3.3 | 0.5 | **tr** |"
+    quantity: "mercaptoketone and thiazole classes move in OPPOSITE pH directions in one buffered pot (in-situ pH within 0.2)"
+    evidence: within_study_factor
+    lab: "University of Reading (Meynier / Mottram)"
+    dossiers: [meynier1995_extraction.md]
+    where: "Table 3 (page image)"
+  # ---------------- thiazoles / thiazolines ----------------
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: thiazole}
+    contrast: "[1-13C]ribose: label at thiazole C-2"
+    status: operating
+    quote: "65 % labelled at C-2"
+    quantity: "65 % of thiazole C-2 is ribose C-1 (as formaldehyde), 35 % from another C1 source (Cerny 2003 with [13C5]ribose: 44 % singly labelled)"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2004_extraction.md]
+    where: "Table 1 row 3; dossier sec. 4"
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: ammonia_ammonium, oxygen: air, buffer: none_unbuffered, metals: not_controlled, ph_note: "not stated; aqueous (NH4)2S is alkaline (dossier flag 2)", product: "2-alkyl-3-thiazolines / thiazoles"}
+    contrast: "fed alkanal + acetol / acetoin vs + 2,3-dione, each + (NH4)2S 0.1 M, 30 min: thiazole / thiazoline ~0.002-0.05 (hydroxyketone) vs ~1 (dione)"
+    status: operating
+    quote: "thiazole / 3-thiazoline area ratio 0.002-0.05"
+    quantity: "3-thiazolines 15-42 % of chromatogram (acetoin pots); e.g. hexanal + acetol 4-methyl-2-pentyl-3-thiazoline 18.3 % vs its thiazole 0.7 %; diones give thiazole directly (~1 : 1)"
+    evidence: fed_intermediate
+    lab: "University of Reading (Elmore / Mottram)"
+    dossiers: [elmore1997_extraction.md]
+    where: "Tables 1-2; dossier sec. 4 E97-C/D/E"
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: sulfur_aa_other, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, ph_range: "3.0 - 9.0", product: 2-acetyl-2-thiazoline}
+    contrast: "isolated HDT (from cysteamine + MGO) refluxed 20 min at pH 3 / 5 / 5.6 / 7 / 9: AT 1.2 / 2.7 / 3.8 / 6.9 / 15.4 mol %"
+    status: operating
+    quote: "| 5 | 9.0 | 22.8 | **15.4** |"
+    quantity: "HDT -> 2-acetyl-2-thiazoline rises 13x from pH 3 to 9; AT itself decays > 99 % in 20 min at 145 C, pH 5"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1995b_extraction.md]
+    where: "Table 5 (and Table 4 for decay)"
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: "2-acetyl-2-thiazoline"}
+    contrast: "dry 180 C / 6 min vs aqueous 145 C / 20 min (confounded T + water): 2-acetyl-2-thiazoline 49 vs 7, 2-propionyl-2-thiazoline 18 vs < 1"
+    status: operating
+    quote: "| 2-acetyl-2-thiazoline (1.0) | 49 | 7 | 49 | 7 |"
+    quantity: "thiazolines ~7x higher dry (SIDA); same direction in AEDA for glucose and rhamnose (FD 128-256 -> 1024, Hofmann 1998c)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [schieberle1998_extraction.md]
+    where: "Table IV"
+    conflict: CF-006
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: 3-mercapto-2-pentanone}
+    contrast: "dry 180 C vs aqueous 145 C: 3-mercapto-2-pentanone 101 vs 599 ug/100 mmol ribose (6x lower dry)"
+    status: operating
+    quote: "| 3-mercapto-2-pentanone (0.7) | 101 | 599 | 144 | 856 |"
+    quantity: "mercaptoketone falls 6x and 5-acetyl-2,3-dihydro-1,4-thiazine 42x when dry, while thiazolines rise 7x: water favours mercaptoketones, dryness thiazolines"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [schieberle1998_extraction.md]
+    where: "Table IV"
+    conflict: CF-006
+  # ---------------- thiophenes / thiophenones (sugar, NF, cysteine, thiamin carbon) ----------------
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: "thiophenones (fed norfuraneol)"}
+    contrast: "fed NF + Cys / + H2S at pH 4.5 vs 6.5: thiophenones 94 / 94 (Cys), 39 / 129 (H2S); trithiolanes nd -> 23 / 12"
+    status: operating
+    quote: "| thiophenones | 94 | 94 | 39 | 129 |"
+    quantity: "thiophenones become a major NF + sulfide product class at pH 6.5 (25-36 % of volatiles) while thiols + mercaptoketones collapse"
+    evidence: fed_intermediate
+    lab: "University of Reading / Food Science Australia (Whitfield / Mottram)"
+    dossiers: [whitfield2001_extraction.md]
+    where: "Table 2"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, thiamine: "50 mM", product: "4,5-dihydro-2-methyl-3(2H)-thiophenone"}
+    contrast: "pH 4-5.5 vs 6-7: area 0 / 0 / 0 vs 372 / 470; >= 98 % unlabelled from [13C5]xylose"
+    status: operating
+    quote: "4,5-dihydro-2-methyl-3(2H)-thiophenone | 116; 121 | — | — | >99 / <1 | >98"
+    quantity: "a pH >= 6 thiophenone whose carbon is thiamin's, not the pentose's (F27 overlap); authors: stronger H2S involvement at higher pH"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny / Briffod)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 2 row 10; Table 4 row 10"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: "3-thiophenethiol / 2-methylthiophene"}
+    contrast: "1:1 ribose / [13C5]ribose: 3-thiophenethiol carries no ribose carbon; 2-methylthiophene 45 / 44 % intact"
+    status: operating
+    quote: "3-thiophenethiol is cysteine-derived | 95 % unlabelled, maximum 4 labels"
+    quantity: "3-thiophenethiol from cysteine carbon (Whitfield 1999: only in Cys, not H2S, systems); 2-methylthiophene ~89 % intact ribose C5"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "Table 2 rows 4 and 11"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, product: "thiophene / 2-methylthiophene from furans"}
+    contrast: "fed furan / 2-methylfuran + (NH4)2S 10 mM each, 20 min"
+    status: operating
+    quote: "| 36 | furan → thiophene yield | ≈ 29 % |"
+    quantity: "furan -> thiophene ~29 %, 2-methylfuran -> 2-methylthiophene ~15 % molar (semi-quantitative, RF = 1)"
+    evidence: fed_intermediate
+    lab: "Zhejiang Gongshang / Jiangnan (Zhai / Zhang)"
+    dossiers: [zhai2023jafc_extraction.md]
+    where: "Fig. 6c-d; dossier table rows 35-36"
+    conflict: CF-065
+  # ---------------- lipid aldehyde + H2S / NH3 ----------------
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: inert, buffer: phosphate, metals: not_controlled, lipid: "none / BTG / BPL / PC / PE 15 g/L", product: "2-alkylthiophenes / 2-pentylthiapyran"}
+    contrast: "lipid absent vs four lipids (pH 5.6, fell < 0.5): 2-pentylthiapyran 0 / 35 / 3150 / 34700 / 12500; 2-pentylthiophene 0 / 0 / 109 / 2700 / 1230"
+    status: operating
+    quote: "**2-pentylthiapyran** c | 168 | 0 | 35 (33) | 3150 (1880) | 34700 (14800)"
+    quantity: "lipid-H2S products only with lipid, ranked PC >> PE > BPL >> triglyceride (follows 2,4-decadienal / PUFA supply); thiazoles unaffected, mercaptoketones about halved by phospholipid"
+    evidence: within_study_factor
+    lab: "AFRC Bristol / Reading (Farmer / Mottram)"
+    dossiers: [farmer1990_extraction.md]
+    where: "Table 2 rows 6-11, 39-47"
+    conflict: CF-031
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: inert, buffer: phosphate, metals: not_controlled, lipid: "none / BTG / BPL / PC / PE", product: mercaptoketones}
+    contrast: "lipid absent vs present: the four mercaptoketones x0.6-1.0 with triglyceride, ~x0.5 with every phospholipid"
+    status: operating
+    quote: "reduced slightly by BTG, about halved by every phospholipid"
+    quantity: "2-mercapto-3-pentanone 27100 -> 13300-19600, 3-mercapto-2-pentanone 28200 -> 13200-21700 rel. area"
+    evidence: within_study_factor
+    lab: "AFRC Bristol / Reading (Farmer / Mottram)"
+    dossiers: [farmer1990_extraction.md]
+    where: "Table 2 rows 44-47; dossier sec. 4 F90-I"
+    conflict: CF-031
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: ammonia_ammonium, oxygen: air, buffer: none_unbuffered, metals: not_controlled, ph_note: "not stated; (NH4)2S solution alkaline", product: 2-pentylthiophene}
+    contrast: "aldehyde class with acetoin + (NH4)2S: alkanals -> 3-thiazolines; (E)-2-nonenal -> 3,4-diheptyl-2(5H)-thiophenone (18 + 11 %); (E,E)-2,4-nonadienal -> 2-pentylthiophene"
+    status: operating
+    quote: "**21 % of total area**"
+    quantity: "2-pentylthiophene 21 % of chromatogram from the dienal pot vs its thiazolines 1.7 + 0.7 %: the dienal goes to the thiophene, not the thiazoline"
+    evidence: fed_intermediate
+    lab: "University of Reading (Elmore / Mottram)"
+    dossiers: [elmore1997_extraction.md]
+    where: "text 'Other Compounds'; dossier sec. 4 E97-G/H"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 150, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, lipid: "nonanal / 2-nonenal / 2,4-nonadienal / 2,6-nonadienal 10 mM vs none", product: 2-pentylthiophene}
+    contrast: "Cys 200 + glucose 200 mM, pH 6.5, 120 min, with one C9 aldehyde each; 1:1 [13C6]/[12C6]glucose CAMOLA"
+    status: dominant
+    quote: "with 92 % of its molecules carrying no glucose carbon"
+    quantity: "2-pentylthiophene 238.65 +- 23.37 ug/L only from the 2,4-dienal pot, 92 % aldehyde + H2S (no sugar carbon); every aldehyde suppresses the sugar thiophenes (sum 2067 -> 537-1181 ug/L); no long-chain alkylthiazoles"
+    evidence: labelling
+    lab: "Du et al. 2023 (affiliation not recorded in the dossier)"
+    dossiers: [du2023_extraction.md]
+    where: "Table 1 row 28; CAMOLA section 2.6"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, lipid: "methyl linoleate / linolenate 25 mM vs none", product: "thiapyrans / alkylthiophenes"}
+    contrast: "Cys 25 + ribose 25 mM, pyrophosphate pH 5.5, 30 min, without / with 18:2 / 18:3 ester: sugar-sulfur thiophenes and thiophenethiols fall, H2S-lipid products appear"
+    status: operating
+    quote: "2-ethyl-(2H)-thiapyran 469"
+    quantity: "2-ethyl-2H-thiapyran 469 and 2-ethylthiophene 37 -> 145 with linolenate; 2-methylthiophene 443 -> 83 / 54"
+    evidence: within_study_factor
+    lab: "University of Reading / Bristol (Elmore / Mottram)"
+    dossiers: [elmore2002_extraction.md]
+    where: "Tables 1 and 3"
+    conflict: CF-031
+condition_dependence: >-
+  F26 is a product class with several sub-routes, and the literature resolves them by labelling only in pentose +
+  cysteine pots at pH 5, 95 C (Cerny 2003 / 2004) and pH 4-7, 145 C (Cerny 2007), and for the lipid thiophene in one
+  glucose pot (Du 2023). SHOWN: (a) MERCAPTOPENTANONES - at 95 C the intact ribose chain makes 3-mercapto-2-pentanone
+  (96 % intact, C-1 labelled) and the NF-marker isomer 2-mercapto-3-pentanone is absent; it appears at 140-145 C
+  (Hofmann 1995 minor isomer; Whitfield 1999 fed NF 1:1 with its isomer) and, with thiamin, only at pH >= 6, then
+  >= 94 % pentose-derived (Cerny 2007). So the NF route to mercaptoketones needs higher T and is favoured at higher pH;
+  the ribose-chain route works at 95 C. (b) pH - every within-study ladder agrees that mercaptoketones collapse from pH
+  4.5 to 6.5-7 (Meynier > 54x, Whitfield 2001 ~25 to >= 775x, Cerny 2007 xylose part ~24x) while thiazoles
+  (Meynier: 2-acetylthiazole > 440x up) and thiophenones / trithiolanes / dithiolanones (Whitfield 2001; Cerny 2007)
+  rise: H2S and NH3 shift from mercaptoketones into ring products at neutral pH. Mercapto-2-propanone in glucose pots
+  peaks at pH 5 (Hofmann T9). (c) WATER - dry 180 C raises 2-acyl-2-thiazolines ~7x and lowers 3-mercapto-2-pentanone
+  6x (Schieberle 1998 SIDA; T and water confounded). (d) CO-REACTANT - cysteine instead of H2S raises mercaptoketones
+  10-17x from fed NF (Whitfield 1999). (e) LIPID - 2-alkylthiophenes / thiapyrans appear only with PUFA-rich lipid or
+  a 2,4-dienal (Reading: 4 studies, one group; Du 2023 labelling: 92 % aldehyde + H2S); 2-alkyl-3-thiazolines form
+  readily from alkanal + hydroxyketone + NH3 + H2S in a fed alkaline pot (Elmore 1997) but no study on disk detects
+  long-chain alkylthiazoles in a cysteine + sugar + lipid pot (Du 2023: none; Farmer / Whitfield: only short-chain);
+  phospholipids halve mercaptoketones and leave thiazoles unchanged. (f) THIAZOLINES via cysteamine: HDT -> AT rises
+  13x from pH 3 to 9 at 100 C, and AT decays > 99 % in 20 min at 145 C (Hofmann 1995b), but how much cysteamine
+  cysteine yields is unmeasured. (g) Carbon sources: thiazole C-2 is 44-65 % sugar C-1; 3-thiophenethiol is cysteine
+  carbon; a pH >= 6 thiophenone is thiamin carbon. Independent laboratories: Cerny (Nestle / Firmenich, counted
+  once), DFA Garching, Reading (Mottram group; Whitfield, Farmer, Meynier, Elmore counted once), Zhai / Jiangnan, Du
+  2023 - five, of which three have labelling or fed-partner evidence for mercaptoketones and two (Reading fed, Du
+  labelling) for lipid thiophenes. ASSUMED, not shown: rates of any F26 sub-route; that Elmore's alkaline
+  ammonium-sulfide chemistry applies at pH 5-6 in cysteine pots; that the 95 C / 145 C labelling transfers to
+  100-140 C.
+best_supported_regimes:
+  - "mild_acid / moderate (95 C) / dilute / pentose + Cys: 3-mercapto-2-pentanone from the intact ribose chain dominant, NF-isomer absent (1 lab, labelling, 2 papers)"
+  - "mild_acid / high (140 C) / dilute / fed NF + Cys: mercaptoketones dominant NF thiol products, 16 : 1 over MFT (1 lab, fed)"
+  - "neutral (pH 6-7) / high-very_high / dilute / pentose or NF + Cys: mercaptoketones minor-to-absent, thiophenones / thiazoles / trithiolanes up (3 labs, within-study pH ladders + labelling)"
+  - "mild_acid-neutral / high-very_high / dilute / Cys + sugar + PUFA lipid or 2,4-dienal: 2-alkylthiophenes / thiapyrans operating (2 labs: Reading 4 studies, Du 2023 labelling)"
+  - "mild_acid / very_high / low_aw (dry 180 C): 2-acyl-2-thiazolines up, mercaptoketones down (1 lab, SIDA, T-confounded)"
+unknown_regimes:
+  - "low temperature (<= 60 C) and the 100-140 C bin with labelling: no mercaptoketone / thiazole label study"
+  - "alkaline (> 7.5) in cysteine + sugar pots: only fed (NH4)2S (Elmore, Zhai) and the isolated HDT ladder"
+  - "intermediate a_w (0.5 - 0.9): only aqueous vs dry silica 180 C"
+  - "long-chain 2-alkyl(-4-methyl)thiazoles / 3-thiazolines in real Cys + sugar + lipid pots: never detected on disk (Du 2023 negative)"
+  - "cysteine -> cysteamine yield (needed for the 2-acetyl-2-thiazoline route): unmeasured"
+  - "hexose pots with labelling of mercaptoketones / thiazoles: none (Du 2023 labels only the lipid thiophenes)"
+  - "time courses of any F26 product: none (all single time points)"
+  - "oxygen contrast (air vs inert): none within one study"
+  - "protein-bound amine / meat matrices with a marker: none"
+competing_families:
+  - "F23_mft_intact_c5 / F24_mft_fragments: norfuraneol and the 1,4-dideoxyosone split between MFT and mercaptoketones (mercaptoketones 16 : 1 over MFT from fed NF, Whitfield 1999); at pH 6.5 both lose to thiophenones / dithiolanes"
+  - "F25_fft_furfural_h2s: shares H2S; FFT falls with pH while F26 ring products rise"
+  - "F19_aminoketone_pyrazine and F21_pyrroles_pyridines: compete for NH3 and the hydroxyketone / dione (Elmore: tetramethylpyrazine 12-30 %, imidazoles to 28 %, trialkylpyridines to 48 % of area; Farmer / Du: 2-alkylpyridines from the same dienal as the thiophene)"
+  - "F22_cysteine_h2s: supplies H2S and NH3 (cysteine's own Strecker in Du 2023); cysteine gives 10-17x more mercaptoketones than free H2S from fed NF"
+  - "F27_thiamine_gsh_sources: thiamin supplies 77-90 % of 3-mercapto-2-pentanone and a pH >= 6 thiophenone (Cerny 2007)"
+  - "F28_thiol_losses: mercaptoketone / thiol disulfides (Whitfield 1999: 7.5 % of thiol as disulfide, alpha-dicarbonyl as the proposed oxidant)"
+  - "F30_lipid_oxidation_crossover: lipid aldehydes take H2S (thiophenes / thiapyrans) and halve mercaptoketones"
+engine: >-
+  Partly in the engine (src/kinetic_core/sulfur.py, species_sulfur.py, parameters_sulfur.py; read only).
+  Mercaptoketones: MP3P (2-mercapto-3-pentanone) only from norfuraneol + H2S (r_nf_mp3p, k_nf_mp3p; ch_redox_mp3p,
+  the B27 redox branch, phi = 0 by default); MP2P (3-mercapto-2-pentanone) only from thiamine via HMP (r_hmp_mp2p);
+  MP (mercapto-2-propanone) from MGO + H2S (r_mgo_mp, k_mgo_mp); all decay through k_thiol_decay. No
+  3-mercapto-2-butanone species (2,3-butanedione DA exists in network.py, with no DA + H2S step). Thiazoles: only
+  2-acetylthiazole, r_cys_actz (Cys + MGO, k_cys_actz); no thiazole, alkylthiazoles, 3-thiazolines; 2-acetyl-2-
+  thiazoline (HDT / ATD) is a declared deferred lane. Thiophenes / thiophenones: one lumped SHET pool from NF + HS-
+  (r_nf_shet, k_nf_shet, inert zero unless a B49 report supplies it) and DMHFS; no furan + sulfide -> thiophene, no
+  cysteine-carbon thiophenethiol, and lipid.py has no sulfur chemistry (no dienal + H2S -> 2-alkylthiophene /
+  thiapyran, no alkanal + NH3 + H2S -> thiazoline). Mismatches: (1) the engine has NO route from ribose (without
+  thiamine) to 3-mercapto-2-pentanone, the isomer that labelling shows is made from the intact ribose chain at 95 C
+  and that Hofmann / Meynier / Farmer measure in thiamine-free pots; (2) the only 2-mercapto-3-pentanone route is NF,
+  which matches the marker, but whether r_nf_mp3p reproduces its absence at 95 C and presence at 140-145 C / pH >= 6
+  was not checked here; (3) the observed opposite pH directions (mercaptoketones down, thiazoles / thiophenones up,
+  Meynier) need SHET and a thiazole route that are inert or missing; (4) 2-acetylthiazole has one source and the
+  prereg records it x1000 high in Zhou 2022 while the hofmann1995b dossier records it 1750x low in Zhang 2025b - the
+  single Cys + MGO channel cannot fit both; (5) no water term for the dry thiazoline rise.

@@ -1,0 +1,161 @@
+family: F12_alpha_oxidative_cleavage
+definition: "oxidative alpha-dicarbonyl cleavage (O2) -> acids (lactic, glyceric, acetic)"
+# Built 2026-11-01 (pathway-atlas agent). Laboratories: Nestle Lausanne (Davidek 2006a / 2006b), Glomb Halle (Voigt 2009,
+# Voigt 2010, Smuda 2010 - one lab), ICT Prague (Novotny 2008, persulfate only).
+# Scope note: the Glomb O2 contrasts (lactic, glyceric) do not say WHICH oxidative step makes the acid - a Baeyer-Villiger
+# alpha-cleavage (Davidek) or O2 oxidation of the reductone to a tricarbonyl followed by HYDROLYTIC cleavage (Voigt 2010
+# Fig. 5, proposed). Both are recorded here as "the O2 route to C2-C4 acids"; only the 18O2 cells mark the Baeyer-Villiger step.
+markers:
+  - "18O from 18O2 in the carboxyl of the acid (one 18O per molecule; no acid / water exchange checked): davidek2006b. An O2-dependent acid made via a tricarbonyl + hydrolysis would carry NO 18O, so 18O measures the Baeyer-Villiger share only (voigt2010 sec. 1)."
+  - "The C4-aldonic counterpart of acetic acid from 1-DG (erythronic / threonic acid = glucose C-3..C-6), rising with O2 (davidek2006b); glyceric acid from glucose C-4..C-6 only (davidek2006b, voigt2010 Table 1 / text)."
+  - "An air vs argon (deaerated) contrast on lactic / glyceric / formyl products at fixed precursor (Glomb: deaerated arm also has 1 mM DTPA, so O2 and chelation are confounded)."
+  - "Fed alpha-diketone (2,3-pentanedione) gives acetic + propanoic acid and NO propanal / acetaldehyde: rules out hydrolytic alpha-cleavage, consistent with oxidative alpha-cleavage (davidek2006a, O2 not varied)."
+cells:
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "18O2 atmosphere vs argon / air: acetic total unchanged (30.5 / 32.3 / 33.5 mmol/L); under 18O2 one third mono-18O"
+    status: operating
+    quote: "acetic acid 22.9 +- 0.3 unlabelled + 10.6 +- 0.2 mono-18O"
+    quantity: "~32 % of acetic acid (10.6 of 33.5 mmol/L; ~10 mol % of glucose) via the O2 (Baeyer-Villiger) alpha-cleavage of 1-DG under 18O2; ~0 under argon (hydrolytic route compensates)"
+    evidence: labelling
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006b_extraction.md]
+    where: "Table 1 and 18O2 MS (90 C, 15 h, pH 8, 0.2 M phosphate, 0.1 M glucose + glycine)"
+    note: "the atmosphere is pure 18O2 (93-94 %), not air; in air the share is not measured."
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "argon vs air vs 18O2: C4-aldonic acids x3 (air) and x7 (O2) over argon"
+    status: operating
+    quote: "C4-aldonic acids ~0.7 / 2.2 / 5.1 mmol/L under argon / air / 18O2"
+    quantity: "erythronic + threonic acid 0.7 (argon) / 2.2 (air) / 5.1 (18O2) mmol/L from 100 mM glucose; 1/3 18O at the carboxyl; glyceric acid 1/3 labelled, lactic ~20 %"
+    evidence: labelling
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006b_extraction.md]
+    where: "Results, HPAEC (Fig. 2) and TMS / 13C / 18O identifications"
+    note: "aldonic acids by PAD with external calibration; the argon value is non-zero (residual O2 or another oxidant)."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 6 vs pH 8 under 18O2: the 18O-acetic signal is present at both"
+    status: operating
+    quote: "m/z 60 (70), 62 (35)"
+    quantity: "pH 6 18O2 run: m/z 62 / 60 = 0.5 by peak intensity [ratio mine]; no yield printed"
+    evidence: labelling
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006b_extraction.md]
+    where: "Results only (the Methods mention pH 8 only)"
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 6 / 8 / 10: acetic acid from 2,3-pentanedione flat at ~9-13 %, with propanoic acid at similar levels"
+    status: operating
+    quote: "~9-13 % at all pH, with propanoic acid at similar levels"
+    quantity: "2,3-pentanedione + glycine (0.1 M each, 4 h): acetic acid 11 % (pH 8, printed), propanoic acid similar; no propanal or acetaldehyde"
+    evidence: fed_intermediate
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md]
+    where: "Fig. 5 (B)"
+    note: "the authors assign it to oxidative alpha-cleavage (detailed in davidek2006b); O2 not varied, so this is the product pattern only."
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "aerated vs deaerated (+ DTPA): glyceric acid 171 vs 40 mmol/mol 1-DG at 12 h (x4.3); erythrulose 43 vs 162; threosone x2.8 with air"
+    status: operating
+    quote: "glyceric acid 171 vs 40 mmol/mol (37 °C, 12 h, aerated vs deaerated)"
+    quantity: "O2-dependent glyceric acid ~130 mmol/mol fed 1-DG (+ L-alanine, 42 mM, pH 7.4) at 12 h, 37 C; 50 C aerated gives LESS (66 at 12 h)"
+    evidence: within_study_factor
+    lab: "Glomb, Martin-Luther-University Halle-Wittenberg"
+    dossiers: [voigt2009_extraction.md]
+    where: "Table 1, Fig. 3"
+    conflict: CF-080
+    note: "O2 confounded with chelation (DTPA only in the deaerated arm)."
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "aerated vs deaerated: acetic acid NOT higher under air (550 vs 650 mmol/mol at 24 h); erythronic acid not found"
+    status: absent
+    quote: "of minor relevance or even nonexistent"
+    quantity: "the Baeyer-Villiger acetic + erythronic acid branch of 1-DG not detected at 37 C, pH 7.4"
+    evidence: within_study_factor
+    lab: "Glomb, Martin-Luther-University Halle-Wittenberg"
+    dossiers: [voigt2009_extraction.md]
+    where: "sec. 4 (mechanism evidence), text"
+    note: "the authors' own hedge ('minor or nonexistent'); the marker (erythronic acid) was looked for, so 'absent' at this condition; detection limit not printed."
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "aerated vs deaerated at 37 and 50 C: lactic acid x6.4 (37 C) and x4.2 (50 C) with air; gamma-pyranone the other way (146 vs 67 at 12 h, 37 C)"
+    status: operating
+    quote: "166 vs 26 mmol/mol 1-DG (37 °C), 118 vs 28 (50 °C)"
+    quantity: "O2-dependent lactic acid 140 (37 C) and 90 (50 C) mmol/mol fed 1-DG at 48 h; glyceric acid 266 at 48 h, 37 C, aerated; the O2 effect SHRINKS from 37 to 50 C"
+    evidence: within_study_factor
+    lab: "Glomb, Martin-Luther-University Halle-Wittenberg"
+    dossiers: [voigt2010_extraction.md]
+    where: "Fig. 1, Fig. 2, text"
+    conflict: CF-080
+    note: "DTPA confound; mechanism proposed via tricarbonyl + hydrolysis (would carry no 18O), so not a measure of the Baeyer-Villiger step."
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 50, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "six [13C]glucose isotopomers (no C-4) + alanine, 7 d, air"
+    status: operating
+    quote: "Glyceric acid: label from C-5 and C-6, never from C-1 to C-3"
+    quantity: "glyceric acid exclusively from glucose C4-C6; lactic acid 48 % C1-C3, 36 % C3-C5, 16 % C4-C6"
+    evidence: labelling
+    lab: "Glomb, Martin-Luther-University Halle-Wittenberg"
+    dossiers: [voigt2010_extraction.md]
+    where: "Table 1 and text"
+    note: "agrees with davidek2006b (glyceric acid from glucose C-4..C-6): a cross-laboratory match on the glyceric-acid carbon origin, not on the O2 share."
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "aerated vs deaerated (+ DTPA): N-epsilon-formyl x1.4, glycerinyl x1.7 with air; acetyl and lactoyl amides unchanged"
+    status: operating
+    quote: "formyl 1.47 vs 1.08 and glycerinyl 0.15 vs 0.09 mmol/mol at 72 h"
+    quantity: "O2 raises the C1 (formyl) and C3 (glycerinyl) amides from fed 1-DG + Boc-lysine, not the acetyl amide"
+    evidence: within_study_factor
+    lab: "Glomb, Martin-Luther-University Halle-Wittenberg"
+    dossiers: [smuda2010_extraction.md]
+    where: "Table 3"
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "K2S2O8 / 0.3 M NaOH vs 0.05 M NaOH: formic acid 8.8-20.6 vs 5.3-6.7 %, acetic acid 1.2-2.6 vs 7.8-12.5 %"
+    status: unattributed
+    quote: "formic acid is high with persulfate (7.6-18.0 % and 8.8-20.6 %)"
+    quantity: "a peroxide-type oxidant shifts sugar acids from acetic to formic (Glc, Fru, Ara, glyceraldehyde, DHA; 1 h reflux, no amine)"
+    evidence: within_study_factor
+    lab: "ICT Prague (Novotny / Velisek)"
+    dossiers: [novotny2008_extraction.md]
+    where: "Tables 1-3"
+    note: "persulfate, not O2; the NaOH strength also differs between the arms; no pH measured. Evidence that an oxidative cleavage exists for sugars, not of its O2 rate."
+condition_dependence: >-
+  SHOWN: (1) Under pure 18O2 at 90 C and pH 8 (Nestle) the O2 alpha-cleavage of 1-DG carries ~1/3 of acetic acid, with
+  the C4-aldonic counterpart rising x3 (air) to x7 (O2) over argon; the TOTAL acetic acid is O2-independent, i.e. the
+  oxidative and hydrolytic routes share one 1-DG pool and O2 only re-partitions it. (2) At 37-50 C and pH 7.4 (Glomb,
+  fed 1-DG + amine, 0.1 M phosphate) air raises glyceric acid x4.3, lactic acid x4-6 and the formyl / glycerinyl amides
+  x1.4-1.7, lowers erythrulose and gamma-pyranone, and does NOT raise acetic acid (erythronic acid not found): the O2
+  route there feeds C3 acids, not the Baeyer-Villiger acetic branch. (3) The O2 excess falls from 37 to 50 C
+  (lactic 140 -> 90 mmol/mol; glyceric lower at 50 C). (4) Glyceric acid comes from glucose C-4..C-6 in both labs.
+  NOT SHOWN: any air (rather than pure O2) share at 90-140 C; any pH ladder of the O2 route (pH 6 vs 8 at 90 C is a
+  presence check only); any pentose; any chelator-only arm separating O2 from trace metals (every Glomb deaerated arm
+  carries DTPA); the O2 route with free sugar + amine at 37-50 C. The two labs do not measure the same quantity (18O
+  share vs aerated-minus-deaerated yield), so "two labs" holds for the DIRECTION (O2 raises C2-C4 acids from 1-DG), not
+  for a magnitude. In sealed food-process vials (air headspace, 100-140 C) the O2 supply is finite; nothing on disk
+  measures it for this family.
+best_supported_regimes:
+  - "alkaline (pH 8) / 90 C / dilute / glucose + glycine / phosphate / 18O2: operating, ~1/3 of acetic acid (labelling, one lab)"
+  - "neutral (pH 7.4) / 37-50 C / dilute / fed 1-DG + amine / phosphate / air vs deaerated + DTPA: operating for lactic and glyceric acid (two papers, one lab, within-study factor)"
+unknown_regimes:
+  - "100-140 C with air headspace (the process regime): no O2 contrast on any acid"
+  - "acid and mild acid (pH < 6): none"
+  - "pentoses (1-deoxypentosone): none"
+  - "intermediate_aw / low_aw: none"
+  - "O2 vs metals separated (chelator without deaeration): none"
+  - "free sugar + amine at low T with O2 contrast: none"
+  - "cysteine pots (thiols compete for O2): none"
+competing_families:
+  - "F11_beta_dicarbonyl_cleavage: same 1-DG pool; wins without O2 and carries >= 2/3 of acetic acid even under 18O2 at 90 C"
+  - "F08_oxidative_osone: O2 also oxidises the Amadori compound / sugar to glucosone (Gobert 2009) upstream of 1-DG"
+  - "F15_redox_reductones: O2 oxidation of the 1-DG reductone / alpha-oxo-enediol to a tricarbonyl (Voigt 2010, proposed) is the step that makes the O2-dependent C3 acids; cysteine autoxidation competes for dissolved O2"
+  - "1-DG cyclisation to gamma-pyranone (deaerated favours it, Voigt 2010)"
+engine: >-
+  Not in the engine as an acid route. There is no O2-dependent acid step on the trunk or the sulfur lane; the only O2
+  consumers are ch_cys_ox (cysteine) and ch_red_ox_dpo / ch_red_ox_nf (the 'reductone' pool DPO / NF + OX -> FRAG_C,
+  fitted, unidentified), which send the oxidised deoxyosone to inert carbon, not to glyceric / lactic / aldonic acids.
+  For acetic acid this is consistent with the literature (O2-independent total, davidek2006b). For the C3 acids it is a
+  gap: the engine carries no lactic / glyceric acid species, so the O2 re-partition of 1-DG (x4-6 at 37 C) cannot be
+  represented, and the titratable acid budget (Brands: half the acid unidentified) has no O2 term. Engine condition
+  dependence: none, since OX is zero in every default pot (B11 defaults).

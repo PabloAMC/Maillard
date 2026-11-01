@@ -1,0 +1,307 @@
+# Pathway-condition atlas, family F25 (literature side). Written 2026-11-01 from the extraction dossiers only.
+# Every cell's `quote` is copied verbatim from the first dossier it cites (grep -F finds it, markdown included).
+# Status convention used here: F25 is a ROUTE (furfural + H2S), so FFT measured without a route marker is
+# `operating` only where a marker study (labelling or fed furfural) exists in the same primary-axis bin
+# (ph x temperature x water); elsewhere it is `unattributed`.
+family: F25_fft_furfural_h2s
+definition: "furfural + H2S -> 2-furfurylthiol (FFT)"
+markers:
+  - "Fed furfural competing with [13C5]pentose in one pot: the unlabelled (furfural-derived) share of FFT (Cerny 2003 pot E)."
+  - "Positional label: ribose C-1 found at the FFT CH2SH carbon, i.e. at the former furfural CHO carbon (Cerny 2004, [1-13C]ribose)."
+  - "Intact-C5 label pattern: FFT only M+0 / M+5 from a 1:1 [12C5]/[13C5] pentose charge (no M+1..M+4 beyond the ~4-5 point isotopic-impurity budget), with furfural itself intact in the same pot."
+  - "Fed-precursor efficiency at equal charge: furfural vs 3-deoxyribosulose vs ribose + H2S -> FFT mol % (Hofmann 1998 T3); furfural + sulfide molar yield (Zhai 2023 JAFC Fig. 6)."
+  - "Negative markers for rival routes: fed norfuraneol contributes 0 % of FFT (Cerny 2003 pot D); fed [2H4]-furfural / d2-furfuryl alcohol label transfer in roasted coffee (Poisson 2009; Cerny 2021)."
+cells:
+  # ---------------- labelling and fed-intermediate cells (the route markers) ----------------
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fed 2-furaldehyde vs [13C5]ribose at equimolar charge (72.5 umol each, Cys 48.3 umol), same pot: FFT 92 : 8 furfural : ribose"
+    status: dominant
+    quote: "92 % from 2-furaldehyde / 8 % from ribose at equimolar loading"
+    quantity: "92 % of FFT carbon from fed furfural when furfural and ribose are charged 1:1 (4 h, 0.5 M phosphate pH 5.00)"
+    evidence: fed_intermediate
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "p. 2718 running text (pot E); dossier sec. 4 table"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "[1-13C]ribose vs unlabelled ribose: the label lands on the FFT CH2SH carbon in every molecule"
+    status: dominant
+    quote: "100 % singly labelled at CH2SH"
+    quantity: "100 % of FFT carries ribose C-1 as CH2SH; furfural 100 % labelled at CHO in the same pot (consistent with 3-deoxypentosone -> furfural -> FFT; does not exclude 3-deoxypentosone + H2S without free furfural)"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2004_extraction.md]
+    where: "Table 1 row 9; dossier sec. 4"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "1:1 ribose / [13C5]ribose (pot C): FFT and furfural intact C5"
+    status: operating
+    quote: "only unlabeled or completely labeled compound in a ratio of 1:1"
+    quantity: "FFT 48 / 47 % (M+0 / M+5), intermediate channels 4 % = isotopic-impurity level; furfural 47 / 45 %"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "Table 2 rows 6 and 9; p. 2715"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, route: "rival: norfuraneol"}
+    contrast: "fed unlabelled norfuraneol vs [13C5]ribose at equimolar charge (pot D): norfuraneol gives no FFT"
+    status: dominant
+    quote: "| 9 | 2-furfurylthiol | 114 | 5 | 0 | 100 |"
+    quantity: "FFT 0 % norfuraneol / 100 % ribose; the ribose (furfural-type) route carries all FFT even with NF offered"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "Table 3 row 9"
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fed precursor 1 mmol + H2S 1 mmol in 50 mL, separate pots: furfural 59.9x ribose, 7.0x 3-deoxyribosulose"
+    status: operating
+    quote: "**550.8** | **0.48**"
+    quantity: "FFT 0.48 mol % from furfural vs 0.08 % (3-deoxyribosulose) and 0.008 % (ribose), 20 min"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 3, p. 237"
+    conflict: CF-065
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "fed furfural + (NH4)2S 10 mM each, 0 / 10 / 20 min; furanoids exhausted by 20 min"
+    status: operating
+    quote: "**furfural → FFT molar yield** | **≈ 22 %**"
+    quantity: "~22 % molar FFT from furfural in 20 min (g/L axis, semi-quantitative, RF = 1); 50-180x Hofmann's 0.48 % (CF-065)"
+    evidence: fed_intermediate
+    lab: "Zhejiang Gongshang / Jiangnan (Zhai / Zhang)"
+    dossiers: [zhai2023jafc_extraction.md]
+    where: "Fig. 6a; dossier sec. 11.1 / table row 33"
+    conflict: CF-065
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, ph_range: "4.0 - 6.0", thiamine: "50 mM"}
+    contrast: "[13C5]xylose + Cys + thiamin at pH 4 / 5 / 6: FFT stays fully pentose-derived while MFT is 75-90 % thiamin-derived"
+    status: dominant
+    quote: "**<1 / >99** | **<1 / >99** | **<1 / >99**"
+    quantity: ">99 % of FFT is M+5 from [13C5]xylose at pH 4, 5 and 6 (intact pentose C5; furfural also >99 % xylose)"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny / Briffod)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 4 row 7"
+  # ---------------- within-study factor cells: pH ----------------
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, ph_range: "4.0 - 7.0", thiamine: "50 mM"}
+    contrast: "pH 4.0 / 5.0 / 5.5 / 6.0 / 7.0: FFT 431 / 368 / 364 / 185 / 0 (area); furfural 208 / 158 / 165 / 0 / 0"
+    status: absent
+    quote: "**2-furfurylthiol** | 915 | **431** | **368** | **364** | **185** | **0**"
+    quantity: "FFT 'no traceable amounts' at pH 7.0 (falls 2.3x pH 4 -> 6); furfural already 0 at pH 6 while FFT is still 185"
+    evidence: within_study_factor
+    lab: "Firmenich Geneva (Cerny / Briffod)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 2 row 7 (GC-TIC areas, triplicate, SD <= 23 %)"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, ph_range: "3.0 - 7.0"}
+    contrast: "ribose + Cys at pH 3.0 / 5.0 / 7.0 (and dry 180 C): FFT 22.9 / 12.1 / 1.2 ug (dry 97.2)"
+    status: operating
+    quote: "**22.9** | **12.1** | **1.2** | **97.2**"
+    quantity: "FFT falls 19x from pH 3 to pH 7 (SIDA, triplicate +-10 %); highest at pH 3 for ribose, at pH 5 for glucose / rhamnose"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 2, p. 237"
+    conflict: CF-006
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, ph_range: "4.5 - 6.5"}
+    contrast: "0.2 M pyrophosphate held pH 4.5 / 5.0 / 5.5 / 6.0 / 6.5 (post-heating drift <= 0.2): FFT 8.5 -> 1.4, furfural 3.9 -> tr, MFT 15.2 -> tr"
+    status: operating
+    quote: "| **2-Furylmethanethiol** | 909 | **8.5** | 6.0 | 3.1 | 1.5 | 1.4 |"
+    quantity: "FFT falls 6.1x over pH 4.5 -> 6.5 while MFT falls > 152x; MFT/FFT 1.79 -> < 0.07"
+    evidence: within_study_factor
+    lab: "University of Reading (Meynier / Mottram)"
+    dossiers: [meynier1995_extraction.md]
+    where: "Table 3 (from page image)"
+    conflict: CF-001
+  # ---------------- within-study factor cells: sugar, water / temperature, solvent ----------------
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "sugar identity at Cys 33 / sugar 100 mM, pH 5: ribose 12.1, xylose 9.6, fructose 3.2, glucose 2.8, rhamnose 0.8 ug FFT"
+    status: unattributed
+    quote: "ribose/glucose ratio: FFT **4.32×**"
+    quantity: "pentose : hexose FFT 4.3x (glucose) to 3.8x (fructose); hexose FFT needs a C5 furfural by C-loss, never labelled in an aqueous pot"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 1, p. 237"
+    conflict: CF-006
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, matrix: "silica gel + 300 uL 0.5 M phosphate pH 5"}
+    contrast: "dry 180 C / 6 min vs aqueous 145 C / 20 min (confounded T + water): FFT x8, furfural x1500"
+    status: unattributed
+    quote: "| 2-furfurylthiol (0.01) | 972 | 121 | 97200 | 12100 |"
+    quantity: "FFT 972 vs 121 ug/100 mmol ribose while furfural 79000 vs 52: FFT per furfural ~190x LOWER when dry; FFT > MFT dry, reverse in water"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [schieberle1998_extraction.md]
+    where: "Table IV (columns I vs II)"
+    conflict: CF-006
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "dry vs aqueous for glucose and rhamnose: FFT down 2x (sign opposite to ribose's x8 up)"
+    status: unattributed
+    quote: "**FFT 0.50× ↓, MFT 2.21× ↑**"
+    quantity: "hexose FFT dry/aqueous 0.50 (glucose, rhamnose) against ribose 8.03"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 2 col. 5.0c vs 5.0 (dossier sec. 2.2 ratio table)"
+    conflict: CF-006
+  - key: {ph: mild_acid, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: 110, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, solvent: "glycerol vs aqueous phosphate (strength not printed)"}
+    contrast: "solvent at xylose + Cys ~0.25 mol/kg each, 0.5-4 h: glycerol FFT ~100 / 2600 / 7000 / 29200 ng/g vs buffer < 90 / < 90 / 150 / 520"
+    status: unattributed
+    quote: "Other arms (±400 ng/g): glycerol □ ≈100 / 2600 / 7000 / 29200"
+    quantity: "FFT ~56x higher in glycerol than in buffer at 4 h; buffer FFT shows a lag (below detection to 1 h); standards heated with the pot"
+    evidence: within_study_factor
+    lab: "Nestle (patent US 10,076,126)"
+    dossiers: [us10076126_extraction.md]
+    where: "Fig. 2 (digitised), dossier sec. 3b"
+    conflict: CF-015
+  # ---------------- within-study factor cells: lipid ----------------
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: inert, buffer: phosphate, metals: not_controlled, lipid: "BTG / BPL / PC / PE 15 g/L vs none"}
+    contrast: "lipid present vs absent (Cys 41 / ribose 30 mM, 0.5 M phosphate pH 5.6, fell < 0.5): FFT x0.62-0.72 with every lipid; furfural x0.49-0.80"
+    status: operating
+    quote: "equally reduced by all four lipids"
+    quantity: "FFT 50200 (alone) -> 31000-35900 rel. area with lipid; MFT falls more (x0.15-0.40)"
+    evidence: within_study_factor
+    lab: "AFRC Bristol / Reading (Farmer / Mottram)"
+    dossiers: [farmer1990_extraction.md]
+    where: "Table 2 row 20; dossier sec. 4 F90-H"
+    conflict: CF-031
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, lipid: "egg lecithin 15 g/L vs none", ph_note: "pH 5.7 fell to about 4.7"}
+    contrast: "lecithin present vs absent: FFT 2781 -> 1385 ng per 2 mL (ratio 2.0)"
+    status: operating
+    quote: "**2781.0** | **1384.7** | **2.0**"
+    quantity: "FFT halved by phospholipid (same group as Farmer 1990; count as one lab)"
+    evidence: within_study_factor
+    lab: "AFRC Bristol / Reading (Whitfield / Mottram)"
+    dossiers: [whitfield1988_extraction.md]
+    where: "Table 1"
+    conflict: CF-031
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, lipid: "methyl linoleate / linolenate 25 mM vs none"}
+    contrast: "no lipid / + 18:2 / + 18:3 (Cys 25 / ribose 25 mM, pyrophosphate pH 5.5, 30 min): FFT 92 / 87 / 17"
+    status: operating
+    quote: "FFT 92 → 87 → 17"
+    quantity: "linoleate leaves FFT unchanged while MFT falls 14x; linolenate cuts FFT 5.4x"
+    evidence: within_study_factor
+    lab: "University of Reading / Bristol (Elmore / Mottram)"
+    dossiers: [elmore2002_extraction.md]
+    where: "Table 1; dossier header"
+    conflict: CF-031
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, lipid: "structured lipid phase vs buffer", conc: "xylose 1.45 / Cys 0.48 mol/kg"}
+    contrast: "structured-lipid arm vs aqueous buffer arm, 6 h: FFT x7.4, MFT x10.1 (direction opposite to the Reading lipid pots)"
+    status: unattributed
+    quote: "lipid/buffer = 10.1× (MFT), 7.4× (FFT)"
+    quantity: "FFT 18.9 (buffer) vs 139 (structured lipid) umol/mol xylose; single endpoint, patent"
+    evidence: within_study_factor
+    lab: "Nestle (patent US 8,920,862)"
+    dossiers: [us8920862_extraction.md]
+    where: "Example 5, col. 25; dossier sec. 2b"
+    conflict: CF-031
+  # ---------------- regimes where the furfural route is absent or not the main route ----------------
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, conc: "ribose 1.34 / Cys 0.65 mM (meat-like)"}
+    contrast: "meat-like dilution (ribose 1.34 + Cys 0.65 mM, pyrophosphate pH 5.7, reflux 2 h) vs Farmer-style 30 / 41 mM, 140 C: FFT n.d. vs 0.4 ug"
+    status: absent
+    quote: "< 0.1, FF-SH n.d., MF-S2 n.d. (n = 3)"
+    quantity: "no FFT by SIDA at meat-like concentrations, 100 C, 2 h (the same method saw 1.2-2.3 ug in thiamine pots)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Grosch / Zeiler-Hilgart)"
+    dossiers: [grosch1992_extraction.md]
+    where: "Table V no. 1 (Method I)"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, route: "rival: thiamine (no pentose, no cysteine)"}
+    contrast: "thiamine 60 uM alone, pyrophosphate pH 5.7, 2 h boiling: FFT formed without any pentose or cysteine"
+    status: unattributed
+    quote: "thiamine | 3 | 4.7 ± 1.2 | 1.9 ± 0.4 | < 0.2"
+    quantity: "FFT 1.9 +- 0.4 ug / 500 mL (17 nmol) from thiamine alone: an FFT route not through pentose-derived furfural"
+    evidence: qualitative
+    lab: "DFA Garching (Grosch / Zeiler-Hilgart)"
+    dossiers: [grosch1992_extraction.md]
+    where: "Table II row 1"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: not_measured, T_C: 236, sugar: disaccharide, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled, matrix: "roasted Arabica (reconstituted green beans)"}
+    contrast: "in-bean manipulations: sugar omission furfural -66 % / FFT +62 %; sucrose spike +61 % / -32 %; [2H4]-furfural and [13C5]-arabinose spikes"
+    status: unattributed
+    quote: "labelled furfural gave **0 % labelled FFT**"
+    quantity: "furfural and FFT anti-correlated in all five manipulations; no M+5 FFT from [13C5]-arabinose; but the [2H4]-furfural spike did not survive to the roast, so 0 % does not prove absence"
+    evidence: within_study_factor
+    lab: "Nestle PTC (Poisson / Davidek / Blank / Kerler)"
+    dossiers: [poisson2009_extraction.md]
+    where: "Tables 5-7; dossier arithmetic items 1, 4, 5"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: not_measured, T_C: 200, sugar: disaccharide, amine: protein_bound_lys, oxygen: air, buffer: none_unbuffered, metals: not_controlled, matrix: "green beans soaked with d2-furfuryl alcohol, roasted 150 -> 200 C in 5 min", route: "rival: furfuryl alcohol"}
+    contrast: "d2-furfuryl alcohol spike 2 mg/g, roast time 3 / 4 / 5 min: d2-FFT 46 / 38 / 34 % of FFT; furfural exclusively unlabelled"
+    status: unattributed
+    quote: "% of FFT | n.d. | n.d. | n.d. | **46** | **38** | **34**"
+    quantity: "furfuryl alcohol (not via furfural) supplies at least 34-46 % of FFT in spiked beans; the unlabelled rest has no marker"
+    evidence: labelling
+    lab: "Firmenich Shanghai (Cerny)"
+    dossiers: [cerny2021_extraction.md]
+    where: "Table 3"
+condition_dependence: >-
+  SHOWN: in aqueous pentose + cysteine pots at pH 4-6 the furfural route is the FFT route. Three labelling / fed
+  results from two laboratories (Nestle / Firmenich, Cerny; DFA Garching, Hofmann) agree: fed furfural out-competes
+  ribose 92 : 8 in one pot (95 C, pH 5), ribose C-1 lands on the CH2SH carbon (95 C), norfuraneol contributes 0 %, and
+  FFT stays > 99 % intact pentose C5 at 145 C over pH 4-6 even with thiamin present; fed furfural is 60x ribose and 7x
+  the 3-deoxyosone (145 C, pH 5). The pH dependence is strong and one-signed in four studies (Cerny 2007, Hofmann
+  1998, Meynier 1995, and the Hofmann hexose rows peak at pH 5): FFT falls 6-19x from pH 3-4.5 to 6.5-7 and is not
+  detected at pH 7 / 145 C (Cerny 2007), with furfural vanishing first (pH 6). The fall tracks furfural supply, not an
+  H2S shortage: H2S-driven products rise at pH >= 6 in the same pots (F26 cells). The only fed system at pH 7
+  (Zhai, (NH4)2S, 120 C) gives the highest molar yield (~22 %, CF-065, semi-quantitative), so at neutral pH the step
+  itself is fast and furfural formation is what fails. Water: dry 180 C raises ribose FFT 8x (but furfural 1500x, so
+  FFT per furfural collapses) and lowers hexose FFT 2x; glycerol raises FFT ~56x at 110 C (patent); T and water are
+  confounded in every dry contrast. Sugar: pentose 4x hexose at 145 C, with no labelling of the hexose route. Lipid:
+  phospholipids lower FFT 1.4-2x (Reading, one group) while a structured-lipid phase raises it 7x (patent, CF-031).
+  Concentration: no FFT at meat-like mM levels at 100 C (Grosch). ASSUMED, not shown: that the 95 C / 145 C labelling
+  transfers to 100-140 C (no labelled FFT cell in the high bin; the high-bin cells rest on Zhai's fed pot) and that
+  the step is the same in hexose pots. In roasted coffee the route is NOT shown: FFT and furfural anti-correlate
+  (Poisson) and furfuryl alcohol supplies >= 34 % of FFT (Cerny 2021); thiamine alone also makes FFT (Grosch).
+  Independent laboratories with marker evidence for the route: 2 (Cerny's Nestle/Firmenich line counted once; DFA
+  Garching) plus 1 fed-only (Zhai). DFA Garching's Schieberle 1998 / Hofmann 1998 FFT cells are one data set (CF-006).
+best_supported_regimes:
+  - "mild_acid / moderate (95 C) / dilute / pentose + Cys, phosphate: dominant (1 lab, labelling + fed, three independent markers)"
+  - "mild_acid / very_high (145 C) / dilute / pentose + Cys, phosphate: dominant (labelling, Cerny 2007) and fed-efficiency operating (Hofmann T3); 2 labs"
+  - "acid (pH 3-4) / very_high / dilute / pentose + Cys: FFT highest (2 labs, within-study pH ladders)"
+  - "neutral (pH 6.5-7) / high-very_high / dilute / pentose + Cys: FFT 6-19x lower to undetected (3 labs, within-study pH ladders); furfural is the limiting partner"
+unknown_regimes:
+  - "low temperature (<= 60 C): no formation data at all"
+  - "alkaline (> 7.5): never studied for FFT formation"
+  - "intermediate a_w (0.5 - 0.9): only the two end points (aqueous, dry silica 180 C), confounded with T"
+  - "high bin (100 - 140 C) with labelling: no labelled FFT study; only fed (Zhai, pH 7) and level-only ladders"
+  - "hexose pots: FFT measured (Hofmann) but never labelled in water (in roasted coffee [13C6-fructose]-sucrose gives FFT 0 % M+5, Poisson 2009); the furfural-from-hexose step is unshown"
+  - "peptide / protein-bound amine and real meat matrices: no marker study (coffee results point away from free furfural)"
+  - "oxygen (air vs inert) on FORMATION: no within-study contrast"
+  - "time-resolved labelling (does the furfural share change during a cook?): none"
+  - "furfuryl alcohol + H2S in water: not fed in any aqueous pot on disk"
+competing_families:
+  - "F13_furans_dehydration: supplies furfural; F25 is capped by it at pH >= 6 (furfural gone before FFT, Cerny 2007; Meynier furfural 3.9 -> tr)"
+  - "F23_mft_intact_c5: same pentose and H2S pool; 3-deoxyosone -> furfural -> FFT vs 1-deoxy / 1,4-dideoxyosone -> MFT; MFT wins in water at pH 3-5, FFT wins dry (Schieberle 1998) and at pH 6-6.5 (Meynier MFT/FFT < 0.07)"
+  - "F26_thiazoles_thiophenes: H2S diverted to thiophenones / dithiolanes / mercaptoketones at pH >= 6 and to lipid alkylthiophenes / thiapyrans with phospholipid"
+  - "F28_thiol_losses: FFT disulfide from the free-thiol pool (binomial in Cerny 2003), melanoidin / protein binding and Fenton loss (losses, not formation)"
+  - "F31_melanoidins / F21: furfural consumed by amines (lysine) - Meynier furfural 39x lower with Cys/Lys than Gly at pH 4.5"
+  - "F27_thiamine_gsh_sources: thiamine makes FFT without pentose (Grosch Table II)"
+  - "rival FFT routes outside the family list: furfuryl alcohol -> FFT (Cerny 2021, coffee roast); C2 + C3 feed (hydroxyacetaldehyde + mercapto-2-propanone) also gives FFT (Hofmann 1998 T8: 26 / 40 / 58 ug at pH 3 / 5 / 7, rising with pH; may pass through furfural, Hofmann T6)"
+engine: >-
+  In the engine. Furfural is made by r_tdp_fur (3-deoxypentosone -> FUR, k_tdp_fur) and r_glc_fur (hexose -> FUR,
+  k_glc_fur); FFT only by r_fur_fft (FUR + H2S, k_fur_fft) and r_fur_fft_hs (FUR + HS-, k_fur_fft_hs; the prereg
+  records 89-99.5 % of FFT through this branch). Sinks: r_fur_decay; ch_fft_decay, ch_thiolate_loss_fft,
+  ch_thioether_fft, ch_protein_ss_fft, ch_dimer_fft, ch_add_fft_dpo / _tdp. Topology matches the labelling (furfural
+  as the only FFT precursor in pentose pots). Mismatches: (1) pH direction - because FFT forms mainly through the HS-
+  branch, the engine's formation rises with pH; the prereg reports measured FFT falling x19 from pH 3 to 7 (Hofmann
+  T2) while predicted FFT rises x180, so the engine must lose FFT at pH 7 through ch_thiolate_loss_fft rather than
+  fail to form it; the literature says furfural supply collapses (Cerny 2007, Meynier). (2) No water / a_w term:
+  dry 180 C (FFT x8, furfural x1500) and glycerol (x56) are outside the engine. (3) No furfuryl-alcohol species and
+  no thiamine -> FFT or C2 + C3 -> FFT route, so coffee-type or thiamine-rich systems cannot be represented.
+  (4) Fed-sulfide rows charge H2S as fully dissolved (CF-065 remedy note). (5) Hexose FFT rests on r_glc_fur, a
+  step no labelling supports. Read only: src/kinetic_core/sulfur.py, species_sulfur.py, parameters_sulfur.py.

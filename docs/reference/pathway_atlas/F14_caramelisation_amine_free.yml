@@ -1,0 +1,205 @@
+family: F14_caramelisation_amine_free
+definition: "amine-free sugar degradation (caramelisation, enolisation without amine)"
+# Built 2026-11-01 (pathway-atlas agent). Laboratories: Wageningen (Brands 2001), ICT Prague (Novotny 2008), Rizzi
+# (Miami University; Rizzi 2004, Rizzi 2010 - one lab), Kroh TU Berlin (Hollnagel 2000), Hacettepe (Kocadagli 2016),
+# Garrett (University of Florida, 1969), Reading (Mottram 2002), DFA Garching (Hofmann 1998), Nestle (Blank 1997),
+# Hebrew University (Haleva 1999), Tohoku (Kabyemela 1999, supercritical water).
+# The amine-free 1-DG cleavage (davidek2006a Fig. 3) is a fed-intermediate result and is filed under F11.
+markers:
+  - "The product appears in the AMINE-FREE arm of a within-study amine contrast (sugar alone vs sugar + amine, same pot otherwise), with a method that sees it in the amine arm."
+  - "Glucose <-> fructose (Lobry de Bruyn-Alberda van Ekenstein) isomerisation without amine; net sugar loss unchanged by an added amine (brands2001)."
+  - "In-situ OPD trapping of deoxyosones / MGO from a sugar heated without amine (hollnagel2000, rizzi2004)."
+  - "Buffer-species catalysis of the amine-free arm (phosphate vs bis-tris; dose) - phosphate-catalysed caramelisation is a distinct, EDTA-insensitive regime (rizzi2004)."
+  - "Retro-aldol C4 + C2 / C3 + C3 fragments from glucose / fructose in hot compressed water (kabyemela1999)."
+cells:
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "glucose alone vs glucose + casein (0.1 M phosphate pH 6.8, 40 min): net glucose loss identical (0.012 /min); fructose 45 vs 35 mM"
+    status: operating
+    quote: "casein does not change net glucose loss at 120 C over 40 min"
+    quantity: "amine-free glucose loss 0.012 /min at 120 C, mostly isomerisation to fructose (45 mM of 150 mM at 40 min); Glc -> Fru 0.010 /min"
+    evidence: within_study_factor
+    lab: "Wageningen (Brands / van Boekel)"
+    dossiers: [brands2001_extraction.md]
+    where: "Fig. 6 (digitised), sec. 4"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "glucose + casein vs glucose alone: formic acid 3.3 vs 2.4 mM (x1.4); acetic 5.3 vs 2.05 (x2.6)"
+    status: operating
+    quote: "formic acid is mostly sugar-only chemistry"
+    quantity: "amine-free glucose: formic 2.4 mM, acetic 2.05 mM at 40 min (formic >= acetic without amine); titrated acid ~2x the HPLC formic + acetic"
+    evidence: within_study_factor
+    lab: "Wageningen (Brands / van Boekel)"
+    dossiers: [brands2001_extraction.md]
+    where: "Figs. 1 and 6, ratio table"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_ketose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fructose alone vs glucose alone: total formic + acetic x2.9; A420 x4.9; fructose + casein acids = fructose alone"
+    status: operating
+    quote: "ketose degrades to acids ~3x faster than aldose"
+    quantity: "fructose alone: formic 6.55 + acetic 6.55 mM at 40 min from 147 mM; Maillard adds nothing to ketose acids"
+    evidence: within_study_factor
+    lab: "Wageningen (Brands / van Boekel)"
+    dossiers: [brands2001_extraction.md]
+    where: "Fig. 6, ratio table"
+    note: "the trunk's k_fru_glc over-predicts fructose -> glucose here x5-10 (dossier sec. 4)."
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "Glc / Fru / Ara / DHA / glyceraldehyde in 0.05 M NaOH, 1 h reflux"
+    status: operating
+    quote: "total acids + lactones | 0.05 M NaOH | 89.7 | 88.7 | 86.7"
+    quantity: "87-90 mol % of Glc / Fru / Ara to acids in 1 h (glycollic 15-26, acetic 11-12, lactic 5-8, formic 5-6 %); base exhausted, pots end below neutral"
+    evidence: mass_balance
+    lab: "ICT Prague (Novotny / Velisek)"
+    dossiers: [novotny2008_extraction.md]
+    where: "Table 1-3"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: none, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "0.10 M phosphate vs 0.10 M bis-tris (and 0 / 0.05 / 0.10 M phosphate dose) at initial pH 7.3, 80 min: ribose-only A420 0.003 -> 0.045 -> 0.262"
+    status: operating
+    quote: "Phosphate also browns sugars with no amine at all"
+    quantity: "ribose 0.262, xylose 0.150, galactose 0.041 A420 in phosphate vs <= 0.003 in bis-tris; ribose fragments to GO, MGO, diacetyl (OPD) only in phosphate; EDTA leaves 88 % (not metals)"
+    evidence: within_study_factor
+    lab: "Rizzi (Miami University)"
+    dossiers: [rizzi2004_extraction.md]
+    where: "text and Fig. 1"
+    note: "pH not held (phosphate runs drift -0.03 to -0.86)."
+  - key: {ph: neutral, temperature: moderate, water: low_aw}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "dry glucose + OPD with vs without glycine, 100 C to 480 min: deoxyhexosuloses < 1 vs 11 mol %"
+    status: operating
+    quote: "methylglyoxal ~2.5 mol % predominates"
+    quantity: "amine-free dry glucose at 180 min: MGO ~2.5 mol %, 3-DG / 1-DG / 1,4-dideoxyhexosulose each < 1 mol %, fructose 6.1 mol % at 30 min; with glycine glucose > 60 % converted in 30 min"
+    evidence: trapping
+    lab: "Kroh, TU Berlin"
+    dossiers: [hollnagel2000_extraction.md]
+    where: "Fig. 1 and text"
+    note: "OPD in the reaction (formation flux into the trap; the trap perturbs the chemistry); dry melt, no pH (placeholder bin)."
+  - key: {ph: neutral, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "glucose vs glucose + NaCl, 160 / 180 / 200 C; 3-DG/1-DG 4.6 / 4.0 / 3.9 (5.6 / 5.2 / 5.3 with NaCl)"
+    status: operating
+    quote: "1-DG comes only from fructose"
+    quantity: "amine-free melt: Glc -> 3-DG, Fru -> 1-DG (no Glc -> 1-DG, no Fru -> 3-DG); Fru -> Glc ~5x Glc -> Fru; NaCl shifts glucose to the cyclic (HMF) route"
+    evidence: kinetic_fit
+    lab: "Hacettepe (Kocadagli / Gokmen)"
+    dossiers: [kocadagli2016jafc_extraction.md]
+    where: "Table 1, lines 228-231, 344-374"
+    note: "freeze-dried, no pH printed (placeholder bin)."
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 80, sugar: pentose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "0.125-1.00 M HCl and 60-80 C: rate first-order in a_H+; ribose > xylose ~ lyxose > arabinose"
+    status: operating
+    quote: "first-order in pentose and in a_H+, Ea 30.3-30.9 kcal/mol"
+    quantity: "furfural 70-92 % of pentose in strong acid; extrapolated to pH 5 / 145 C the xylose acid term is ~3e-7 /min, four decades below the engine's amine-free pentose rate"
+    evidence: within_study_factor
+    lab: "Garrett (University of Florida)"
+    dossiers: [garrett1969_extraction.md]
+    where: "Tables and text (A277)"
+    note: "pH ~0: specific-acid catalysis is real but cannot carry pentose to furfural at pH 3-7."
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: none, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    contrast: "ribose alone, pyrophosphate pH 5.6 -> 5.7 vs unbuffered 5.6 -> 3.9: furfural 107 vs 103 (same)"
+    status: operating
+    quote: "furfural yield from ribose alone is pH-flat between 3.8 and 5.7 at this severity"
+    quantity: "furfural 0.11 mol % of 50 mM ribose in 30 min at 140 C, no amine, either medium"
+    evidence: within_study_factor
+    lab: "Reading (Mottram)"
+    dossiers: [mottram2002_extraction.md]
+    where: "Table 2"
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "ribose + H2S (no amine) vs fed 3-deoxyribosulose / furfural + H2S"
+    status: operating
+    quote: "| ribose | **9.2** | **0.008** |"
+    quantity: "FFT 0.008 mol % from ribose with H2S and no amine (pH 5, 0.5 M phosphate, 20 min); MFT 0.01 mol % (Table 4)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Tables 3 and 4"
+    note: "the rows that forced the engine's r_pent_caramel / r_pent_thermal_dpo into existence; H2S present, so 'amine-free' not 'nucleophile-free'."
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 90, sugar: pentose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "xylose alone (water or phosphate) vs xylose + glycine / alanine: HDMF < 0.01 vs 2.6 ug/mmol"
+    status: absent
+    quote: "| xylose | phosphate | **<0.01** | **<0.01** |"
+    quantity: "no furanone (HDMF, EHMF) from xylose without amino acid at 90 C / 1 h by SIDA"
+    evidence: within_study_factor
+    lab: "Nestle Research Center, Lausanne (Blank)"
+    dossiers: [blank1997_extraction.md]
+    where: "Table 3 rows 1-2, Table 1 footnote c"
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "glucose alone pH 3 vs 5 (0.1 M citrate-phosphate, 48 h): HMF 5 vs 0.2 mg/L (x25); with arginine x18 more at pH 3"
+    status: operating
+    quote: "| 3 | Glc | 5 ± 1 |"
+    quantity: "amine-free HMF ~0.07 mol % of 55 mM glucose in 48 h at pH 3, 70 C; ~0.003 % at pH 5"
+    evidence: within_study_factor
+    lab: "Hebrew University (Naim)"
+    dossiers: [haleva1999_extraction.md]
+    where: "Table 1"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "rhamnose alone pH 7 vs pH 5: furaneol 1.37 mg/L vs not detected (with arginine at pH 5: ~10 mg/L)"
+    status: operating
+    quote: "| C, pH 7 | Rhm | 1.37 |"
+    quantity: "amine-free furaneol from rhamnose at pH 7, 70 C, 48 h (~0.02 mol %); absent at pH 5 without amine"
+    evidence: within_study_factor
+    lab: "Hebrew University (Naim)"
+    dossiers: [haleva1999_extraction.md]
+    where: "Fig. 1 (figure-read, log axis)"
+    note: "rhamnose = 6-deoxyhexose (tagged hexose_aldose)."
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 350, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "300-400 C, 25-40 MPa, 0.02-2 s, glucose and fructose"
+    status: operating
+    quote: "Glucose and fructose break by retro-aldol into erythrose + glycolaldehyde"
+    quantity: "C4 + C2 and C3 + C3 retro-aldol fragmentation dominates in sub/supercritical water; 13 first-order constants, no Ea printed"
+    evidence: kinetic_fit
+    lab: "Tohoku (Adschiri / Arai)"
+    dossiers: [kabyemela1999_extraction.md]
+    where: "abstract / scheme"
+    note: "outside any food regime; recorded so the very_high bin is not empty. pH bin placeholder (pure water)."
+condition_dependence: >-
+  SHOWN: (1) Amine-free degradation is not negligible next to Maillard at 120 C in phosphate: net glucose loss is the
+  same with and without casein (isomerisation dominates), formic acid is mostly sugar-only, and ketoses make acids ~3x
+  faster than aldoses with no Maillard increment (Wageningen). (2) Buffer: phosphate is a catalyst of amine-free
+  degradation at pH ~7, 100 C (Rizzi: bis-tris gives nothing, dose super-linear, EDTA-insensitive), and phosphate-
+  catalysed pentoses build a mM reductant pool (F15). (3) pH: specific-acid catalysis gives furfural only at pH ~0
+  (Garrett); at pH 3.8-5.7 amine-free ribose furfural is pH-flat (Reading); amine-free HMF falls x25 from pH 3 to 5
+  (Naim); amine-free furaneol from rhamnose appears at pH 7, not pH 5 (Naim); alkali turns ~90 % of a sugar into acids in
+  1 h (Prague). (4) Products the amine-free route cannot make: no norfuraneol from free ribose (Reading) and no HDMF
+  from xylose (Nestle) - the 1-deoxyosone furanones need the amine (or a phosphate ester). (5) Dry melts: MGO >
+  deoxyosones without amine (Kroh, trap in situ), and the 3-DG / fructose split of the hexose deoxyosones (Hacettepe):
+  3-DG only from glucose, 1-DG only from fructose. ASSUMED: that the amine-free enolisation rates measured in
+  phosphate transfer to water or carboxylate buffer (no amine-free sugar pot in water vs phosphate at constant pH
+  except Brands' / Rizzi's buffer-type swaps).
+best_supported_regimes:
+  - "neutral (pH 6.8-7.3) / 100-120 C / dilute hexose or pentose / phosphate: operating (Wageningen, Rizzi; within-study)"
+  - "alkaline / ~100 C / dilute / no buffer: operating, ~90 % to acids (Prague)"
+  - "acid (pH ~0) / 60-80 C: operating, furfural 70-92 % (Garrett)"
+unknown_regimes:
+  - "intermediate_aw (0.5-0.9) amine-free: none"
+  - "amine-free pentose degradation at constant in-situ pH across 5-8 (only phosphate pH 7.1 and unbuffered drifts)"
+  - "amine-free sugar in unbuffered water vs phosphate at the same pH, 100-145 C: none with a deoxyosone measured"
+  - "the amine-free share of a real Maillard pot's deoxyosones (labelled amine vs unlabelled? no design on disk)"
+  - "O2 effect on caramelisation: none"
+  - "disaccharides (sucrose, maltose) aqueous: Hollnagel's dry maltose only"
+competing_families:
+  - "F01_schiff_glycosylamine / F02_amadori_heyns: the amine competes for the sugar (fructose 45 vs 35 mM with casein) but does not speed net glucose loss at 120 C"
+  - "F06 / F07 enolisation hub: the amine-free enolisations feed the same 3-DX / 1-DX pools (the engine's r_pent_caramel supplies 39-45 % of its 3-DX, hub H5)"
+  - "F13_furans_dehydration: amine-free furfural / HMF floor vs amine-dependent furanones"
+  - "F15_redox_reductones: phosphate-catalysed amine-free reductones (Rizzi 2010)"
+engine: >-
+  In the engine: r_glc_fru / r_fru_glc (Martins isomerisation, no amine), r_glc_frag (FITTED amine-independent sugar
+  lane), r_fru_acids (Fru -> FA + AA), r_glc_tdg / r_fru_odg / r_tdg_mgo / r_fru_int (Kocadagli's amine-free melt limbs,
+  applied to aqueous pots), r_glc_c2c3 / r_glc_fur (hexose fragmentation for the sulfur lane), r_pent_caramel (PENT ->
+  TDP, NO pH factor since B2.1) and r_pent_thermal_dpo (PENT -> DPO). MISMATCHES: (a) no buffer-species catalysis
+  anywhere (Rizzi 2004: amine-free browning is phosphate-REQUIRED at pH 7; bis-tris gives none) - the engine's
+  amine-free lane runs at the same rate in water and phosphate. (b) r_pent_caramel supplies 39-45 % of the engine's 3-DX
+  (hub H5) on a rate anchored on Hofmann 1998's H2S pots, while Zhai 2021's free-xylose contrast suggests less. (c)
+  Kocadagli's dry-melt constants (160-200 C, freeze-dried) are carried into aqueous pots at 100-145 C. (d) k_fru_glc
+  from Martins' glucose system over-predicts fructose -> glucose in a fructose-only charge x5-10 (Brands). Engine pH
+  dependence of the amine-free lane: none on the trunk (no pH state), none on r_pent_caramel - consistent with
+  Mottram's pH-flat ribose furfural, inconsistent with the x25 HMF fall pH 3 -> 5 (Naim) if that fall is the
+  amine-free limb's.

@@ -1,0 +1,190 @@
+family: F24_mft_fragments
+definition: "MFT from C2 + C3 fragment recombination"
+# Conventions as in F23_mft_intact_c5.yml (water bin from the reactant charge; buffer molarity in tags).
+# The F24 share is visible ONLY in a 1:1 mixture of unlabelled and uniformly labelled sugar (mixed isotopomers
+# M+2 / M+3, and M+1 / M+4 from C1 + C4) or with a positional label. A pot with 100 % labelled sugar sees only
+# CROSS-SOURCE recombination (sugar fragment x thiamine or amino-acid fragment); that is recorded as such.
+markers:
+  - "1:1 unlabelled : [13C5]pentose or [13C6]hexose: MFT M+2 / M+3 (C2 + C3) above the enrichment-impurity level; M+1 / M+4 for C1 + C4"
+  - "[1-13C]ribose: MFT with the label off the 2-methyl carbon, or a 0 / 1 / 2-label spread"
+  - "fed hydroxyacetaldehyde + 1-mercapto-2-propanone (or + 2-oxopropanal / H2S) giving MFT: the step can run"
+  - "1-mercapto-2-propanone (the C3 sulfur intermediate) measured in a sugar + cysteine pot"
+  - "EI-MS caveat: the [M-H]+ ion of an M+5 isotopomer sits at M+4; a share computed without the (M-1)/M correction reads as fragments (Liu 2023 re-read)"
+cells:
+  # ---------------- labelling: fragment share by temperature ----------------
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 240}
+    status: absent
+    quote: "2-methyl-3-furanthiol | 114 | 49 | 1 | 0 | 1 | 3 | 46"
+    quantity: "channels 1-4 sum to 5 %, the M+4 3 % being largely the 98 % enrichment of [13C5]ribose; C2 + C3 (M+2 / M+3) 0 + 1 % -> <= ~1-5 %"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny & Davidek)"
+    dossiers: [cerny2003_extraction.md]
+    where: "Table 2 row 7 (pot C); p. 2715"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 240}
+    status: absent
+    quote: "C2 + C3 recombination \"was not relevant\""
+    quantity: "[1-13C]ribose: MFT 100 % singly labelled on the methyl; random C2 + C3 pairing would spread 0 / 1 / 2 labels"
+    evidence: labelling
+    lab: "Nestle Research Center Lausanne (Cerny & Davidek); same lab as cerny2003"
+    dossiers: [cerny2004_extraction.md]
+    where: "Table 1 row 7; sec. 4"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, other_precursor: thiamine, buffer_M: 0.5, t_min: 20, ph_range: "4.0-7.0", label_design: "100 % [13C5]xylose vs separate unlabelled pot"}
+    contrast: "pH 4 / 5 / 6 / 7: m/z 117 (13C3 cross-source channel) 0.7 / 0.5 / 0.4 / 0.5 % vs 0.2 % in the unlabelled reference"
+    status: minor
+    quote: "| 117 | 0.2 | 0.7 | 0.5 | 0.4 | 0.5 |"
+    quantity: "cross-source (xylose x thiamine) recombination <= ~0.5 % of MFT at every pH (mine, from Table 3); own-fragment recombination of xylose not visible in this design"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny & Briffod)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 3 (MFT cluster)"
+  - key: {ph: mild_acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, other_precursor: thiamine, buffer_M: 0.5, t_min: 20, label_design: "100 % [13C5]xylose vs separate unlabelled pot"}
+    status: minor
+    quote: "m/z 118–121 = 45.3 % vs 112–117 = 54.7 %"
+    quantity: "labelled-pot m/z 115 / 116 / 117 = 2.9 / 2.0 / 1.0 % against 2.9 / 1.9 / 0.1 expected from the 54 % unlabelled share -> cross-source mixed channel ~1 % (mine)"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny)"
+    dossiers: [cerny2007b_extraction.md]
+    where: "Table 2; sec. 3 cross-check"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: phosphate, metals: not_controlled, t_min: 300}
+    status: absent
+    quote: "glucose C5 fragment (authors: 1-deoxypentosone from glucose)"
+    quantity: "glutathione + 1:1 [13C6]glucose: MFT 50 / <1 / <1 / <1 / 2 / 47 -> C2 + C3 channels < 1 % each; non-glucose share <= 6 %"
+    evidence: labelling
+    lab: "BTBU Beijing (Sun Baoguo) with CAAS and Clemson"
+    dossiers: [zhao2019b_extraction.md]
+    where: "isotopomer table row 4; derived-origin table"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 150, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, other_precursor: "C9 aldehyde 10 mM", buffer_M: 0.2, t_min: 120}
+    status: absent
+    quote: "0: 52 / 57; 5: 48 / 43"
+    quantity: "Cys + 1:1 [13C6]glucose 200 + 200 mM: no MFT isotopomer other than M+0 / M+5 above 1 %"
+    evidence: labelling
+    lab: "CAAS Beijing (Fan / Wang Fengzhong)"
+    dossiers: [du2023_extraction.md]
+    where: "Table 2 row 82"
+  - key: {ph: mild_acid, temperature: very_high, water: not_stated}
+    tags: {ph_basis: label, T_C: 168, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: "20-60"}
+    status: conflicting
+    quote: "with ~19 % from recombined fragments"
+    quantity: "printed 19 % fragments (MFT 41 / 3 / 2 / 1 / 12 / 40); re-read: M+4 / M+5 = 0.30 equals MFT's NIST [M-H]+ / M+ 0.28, furfural and 2-methylfuran show the same; corrected ~6 %, the impurity level (P 0.8)"
+    evidence: labelling
+    lab: "CAAS Beijing (Zhang Dequan group)"
+    dossiers: [liu2023b_extraction.md]
+    where: "sec. 2; Table 3 as read in docs/history/mechanism_reviews_2026-10-31/thiols.md sec. 0"
+    conflict: "CF-086 (printed 19 % vs the EI re-read ~6 %; MECHANISM_REVIEWS_2026-10-31 row 5)"
+  # ---------------- fed fragments: the route can run ----------------
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 20, fed: "hydroxyacetaldehyde + 1-mercapto-2-propanone, 1 mmol each in 50 mL"}
+    contrast: "fed C2 + C3 vs NF / H2S vs NF / Cys vs thiamine, each 1 mmol, pH 5.0: MFT 0.24 / 0.19 / 0.05 / 0.01 mol %"
+    status: operating
+    quote: "The C₂ + C₃ route is the strongest MFT route at 145 °C."
+    quantity: "268.1 ug MFT (0.24 mol %) from the fed pair; the most efficient fed MFT route per mmol at 145 C"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 10 (= Table 8 expt 2, same experiment; do not count twice)"
+  - key: {ph: acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 20, ph_range: "3.0-7.0", fed: "hydroxyacetaldehyde + 1-mercapto-2-propanone"}
+    contrast: "pH 3.0 / 5.0 / 7.0: MFT 15.5 / 268.1 / 311.5 ug (0.01 / 0.23 / 0.27 mol %)"
+    status: operating
+    quote: "| **3** | **7.0** | **58.2** | **0.05** | **311.5** | **0.27** |"
+    quantity: "fed C2 + C3 -> MFT rises x20 from pH 3 to 7: the opposite pH sign to MFT in ribose + Cys pots (x22 FALL, Table 2)"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 8 expts 1-3"
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled, t_min: 6, fed: "hydroxyacetaldehyde + 1-mercapto-2-propanone on silica (300 uL 2 M phosphate)"}
+    contrast: "dry 180 C / 6 min on silica vs aqueous 145 C / 20 min (T, t, a_w and buffer molarity confounded): MFT 1553.9 vs 268.1 ug"
+    status: operating
+    quote: "MFT 5.80× ↑"
+    quantity: "x5.8 MFT (1.39 mol %) in the dry arm; FFT x1.27"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 8 expt 4 vs 2"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 20, fed: "2-oxopropanal + H2S"}
+    contrast: "H2S 1 vs 2 mmol (2-oxopropanal 1 mmol): 1-mercapto-2-propanone 1.8 vs 4.0 mol % (x2.2, super-linear)"
+    status: operating
+    quote: "is the limiting factor"
+    quantity: "the C3 sulfur partner forms readily from MGO + H2S (1.8-4.0 mol %), limited by H2S"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 7"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 20, ph_range: "3.0-7.0"}
+    contrast: "glucose 10 mmol + Cys 3.3 mmol, pH 3.0 / 5.0 / 7.0: 1-mercapto-2-propanone 11.4 / 59.6 / 26.5 ug (maximum at pH 5)"
+    status: operating
+    quote: "mercapto-2-propanone is indeed formed when"
+    quantity: "the C3 sulfur intermediate exists in a real sugar + cysteine pot (59.6 ug vs MFT 1.9 ug at pH 5); its MFT share is NOT measured (no label)"
+    evidence: measured_intermediate
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 9, p. 240"
+  - key: {ph: acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 20, ph_range: "3.0-7.0", fed: "hydroxyacetaldehyde + 2-oxopropanal, 1 mmol each"}
+    contrast: "pH 3 / 5 / 7: NF 0.13 / 0.78 / 3.18 mol %, furfural 0.11 / 0.40 / 1.60 mol %"
+    status: operating
+    quote: "hydroxyacetaldehyde is the better nucleophile"
+    quantity: "C2 + C3 aldol makes NF (then MFT via F23's step, but with a mixed label) and furfural, rising with pH; the only monotone-in-pH panel of the paper"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann & Schieberle)"
+    dossiers: [hofmann1998_reconciliation.md]
+    where: "Table 6"
+  # ---------------- the dry / very high regime: recombination shown for a C4 product, not for MFT ----------------
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, water_pct: 10}
+    contrast: "180 C / 10 % water (Schieberle, cited) vs 95 C / 4 h aqueous (this paper): butane-2,3-dione from recombination vs intact chain"
+    status: unattributed
+    quote: "intact carbohydrate chain, but mainly from C3/C1 recombination (21). Under cooking conditions"
+    quantity: "recombination dominates the C4 diketone (F26 precursor) at 180 C dry; no labelled MFT in this regime on disk"
+    evidence: qualitative
+    lab: "DFA Garching (Schieberle), cited by Nestle (Cerny & Davidek)"
+    dossiers: [cerny2004_extraction.md]
+    where: "text, sec. 4 'Directional claim for the temperature axis' (ref 21)"
+condition_dependence: >-
+  SHOWN: fragment recombination is a FEASIBLE MFT route (fed hydroxyacetaldehyde + 1-mercapto-2-propanone is the most
+  efficient fed MFT route at 145 C, 0.24 mol %, x20 from pH 3 to 7, x5.8 dry), and its C3 sulfur partner exists in a
+  glucose + Cys pot (Table 9; one lab, Garching). But wherever a 1:1 label could see it, recombination carries
+  <= ~1-6 % of MFT: 95 C pentose (Cerny 2003 / 2004), 140 C glucose + GSH (Zhao 2019b, BTBU), 150 C glucose + Cys
+  (Du 2023, CAAS), 168 C ribose + Cys (Liu 2023, ~6 % after the EI correction; 19 % as printed), and cross-source
+  mixing with thiamine <= ~1 % at 145 C, pH 4-7 (Cerny 2007 / 2007b). Three labelling labs; no temperature trend is
+  measured once the Liu artefact is removed. So F24 is feasible but not operating at a measurable share in dilute
+  aqueous pots from 95 to 168 C, pH 5-6.5. The fed pair's pH sign (rises to pH 7) is opposite to total MFT's (falls to
+  pH 7), a further sign that the fed route is not what makes MFT in sugar pots. ASSUMED / unshown: that F24 gains at
+  low a_w or > 170 C (the only recombination evidence there is for butane-2,3-dione at 180 C dry, cited, not MFT);
+  that hexose pots without a sugar label run F24 (the engine's hexose assumption; labelling says no).
+best_supported_regimes:
+  - "mild_acid-neutral / moderate-very_high (95-168 C) / dilute / pentose or glucose + Cys or GSH: absent or <= ~6 % (labelling, 3 labs: Cerny, BTBU, CAAS)"
+  - "fed C2 + C3, no sugar, 145 C pH 3-7 and 180 C dry: operating (fed_intermediate, 1 lab: Garching)"
+unknown_regimes:
+  - "low a_w / dry heating (180 C silica, meat crust) with a 1:1 sugar label: never measured for MFT"
+  - "> 170 C (roasting) with a label"
+  - "100-140 C pentose pots with a 1:1 label (Cerny 2007 / 2007b used 100 % labelled xylose: own-fragment recombination invisible)"
+  - "alkaline pH (> 7.5), where the fed C2 + C3 route is fastest and enolisation favours fragmentation"
+  - "intermediate a_w, protein-bound amines, ammonium, peptides other than GSH"
+  - "a second laboratory for the fed C2 + C3 -> MFT yield (Garching only)"
+competing_families:
+  - "F23_mft_intact_c5: wins the MFT carbon wherever labelled (>= 94-99 %)"
+  - "F10_retroaldol_c3_c2 / F09_namiki_c2: supply the C2 + C3 fragments (hydroxyacetaldehyde, MGO)"
+  - "F26_thiazoles_thiophenes: 1-mercapto-2-propanone and MGO + H2S also feed thiazoles, mercaptoketones and the C4 diketone route; 2-acetylthiazole is 64 % non-glucose C3 in Zhao 2019b"
+  - "F22_cysteine_h2s: H2S supply is limiting for the C3 thiol (Table 7)"
+engine: >-
+  In the engine: r_ha_mp_mft (HA + MP -> MFT, Hofmann T10), r_mgo_mp (MGO + H2S -> MP, T7), fed by r_dpo_c2c3
+  (DPO -> HA + MGO) and r_glc_c2c3 (glucose -> HA + MGO + C1). Mismatches: (1) the hexose route to MFT is ONLY C2 + C3
+  (r_glc_c2c3 note: 'Hexoses reach MFT ONLY through fragmentation') with the hexose C5 entry r_odg_dpo off by default,
+  while Zhao 2019b and Du 2023 show hexose MFT is an intact glucose C5 with < 1 % mixed channels: F24 should carry ~0
+  of hexose MFT, not all of it. (2) the fitted C2 + C3 drain on DPO sits at +2.2 to +2.4 dex (thiol prereg sec. 8;
+  STATUS_AND_PLAN B.7); whether that drain reaches MFT through r_ha_mp_mft at a share above the labelled <= 6 % in
+  Cerny's or Liu's pots should be read off the engine regime map (not run here). (3) r_ha_mp_mft is fitted at 145 C
+  only (Hofmann T8 / T10) and carries the fed pair's rising pH law, which must not leak into sugar-pot MFT. (4) The
+  thiol prereg sec. 11's 'fragment share 0.19 at Liu's conditions' signature rests on the Liu 19 %, now read as an
+  EI artefact (withdrawn per MECHANISM_REVIEWS_2026-10-31 row 5); any engine target of 10-30 % fragments at 168 C is
+  unsupported.

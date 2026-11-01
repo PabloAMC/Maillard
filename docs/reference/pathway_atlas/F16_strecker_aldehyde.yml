@@ -1,0 +1,269 @@
+# Pathway-condition atlas, family F16 (literature side). Written 2026-11-01 from the extraction dossiers named per
+# cell; vocabulary and status caps from docs/reference/pathway_atlas/families.yml. Every quote is a verbatim substring
+# of the cited dossier (checked by scratchpad check_atlas.py, whitespace-normalised). Numbers marked "mine" are derived
+# by this atlas, not printed. Lipid-carbonyl and alpha-keto-acid donors are F18; the oxygen route to the Strecker
+# ACID and the Amadori-compound oxidative route are F17; aminoketone fates are F19 - F21.
+family: F16_strecker_aldehyde
+definition: "dicarbonyl + amino acid -> Strecker aldehyde + aminoketone + CO2 (per donor)"
+markers:
+  - "A FED alpha-dicarbonyl (MGO, glyoxal, 3-DG, glucosone, 3-deoxypentosone / tetrosone) + amino acid, with no sugar present, gives the amino acid's Strecker aldehyde (R-CHO with one carbon fewer than the amino acid) above the amino-acid-alone blank: the route's existence marker per donor."
+  - "Under ARGON the aldehyde from a fed dicarbonyl is unchanged (air / argon 0.85 - 0.93, Hofmann 2000 Table 4): an oxygen-INdependent aldehyde in a fed-dicarbonyl pot is this route; an aldehyde that collapses under argon in a sugar or Amadori pot is F17 (or the oxidative entry upstream, F08)."
+  - "Donor-identity ranking at fixed amino acid (MGO > glyoxal > 3-DG ~ glucosone; C4 > C5 > C6 3-deoxyosones) and amino-acid identity at fixed donor (Ile > Leu > Phe > Met with MGO)."
+  - "The co-product is the dicarbonyl's alpha-aminoketone (aminoacetone from MGO), which is what feeds F19 / F21; the Strecker AMINE (decarboxylated, not deaminated) is the competing non-oxidative exit and is small in water (<= 3 % of aldehyde) but not in low water."
+  - "In a SUGAR + amino-acid pot the aldehyde alone carries no route marker: dicarbonyl route (this family) and the Amadori oxidative route (F17) make the same product, so such cells are 'unattributed' unless an argon arm or a fed precursor separates them."
+cells:
+  # ---- fed dicarbonyl donors, DFA Garching -------------------------------------------------------------------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: inert, buffer: phosphate, metals: not_controlled, feed: "MGO / glyoxal / 3-DG / glucosone 0.1 M + Phe 0.1 M, 0.1 M phosphate pH 7, closed vial, 60 min, argon"}
+    contrast: "donor identity under argon: PA 11.1 / 9.2 / 8.4 / 8.1 umol/mmol Phe for MGO / GO / 3-DG / glucosone (1 : 0.83 : 0.76 : 0.73)"
+    status: dominant
+    quote: "donor identity moves the aldehyde < 1.4×"
+    quantity: "PA 0.81 - 1.11 mol % of Phe at 60 min under argon; the only PA source in a sugar-free fed pot"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Table 4 (model A), dossier sec. 4 row H00-R5"
+    conflict: CF-073
+    note: "CF-073 is the magnitude conflict with Weenen 2001 (x14 - 20 more PA from MGO at pH 3.2, SDE)."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "same four fed donors, argon vs air"}
+    contrast: "air vs argon: PA x0.92 (MGO), x0.90 (GO), x0.93 (3-DG), x0.85 (glucosone); the acid goes up x1.6 - 5.5 (F17)"
+    status: dominant
+    quote: "the ALDEHYDE from a dicarbonyl is oxygen-independent"
+    quantity: "PA 0.69 - 1.02 mol % under air vs 0.81 - 1.11 under argon (7 - 15 % lower in air)"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Table 4, dossier sec. 4 row H00-R4"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "MGO 0.1 M + Phe 0.1 M, 0.5 M phosphate, closed vial, 10 - 500 min"}
+    contrast: "time: (PA + PAA) share of Phe consumed falls 18 % (10 min) -> 5.8 % (500 min); PA plateaus at 120 - 240 min"
+    status: dominant
+    quote: "Strecker products account for at most ~18 % of the amino acid consumed by MGO"
+    quantity: "PA 6.2 -> 13.5 umol per 1 mmol Phe (0.62 -> 1.35 mol %), max at 240 min; most consumed Phe goes to non-Strecker sinks"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Table 3, dossier sec. 4 row H00-R12"
+    conflict: CF-070
+    note: "CF-070: the 'Phe degraded' column is probably the glucose pot's series reprinted; the 18 % -> 5.8 % share uses it."
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 98, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "each dicarbonyl + glucose + Phe, pH 3 / 5 / 7 / 9 (buffer at pH 3 and 9 not stated)"}
+    contrast: "pH 3 / 5 / 7 / 9: PA maximal at pH 5 for every donor; MGO gives 2x more PA at pH 5 than at pH 9; all dicarbonyls beat glucose at every pH"
+    status: operating
+    quote: "Aldehyde favoured at pH 5, acid favoured at pH 9"
+    quantity: "PA(pH 5) / PA(pH 9) = 2 (MGO); figure-only, text readings"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Fig. 4 (text p. 438 - 439), dossier sec. 4 row H00-R9"
+    note: "the only pH series of a fed-dicarbonyl Strecker ALDEHYDE with a sugar-derived donor on disk; one lab, figure-only."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 98, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "glucose 0.1 M + Phe / Ala / Leu 0.1 M, 0.5 M phosphate, reflux 30 min"}
+    contrast: "amino acid identity in the glucose pot: Leu / Phe aldehyde 2.1; fed MGO vs glucose at 30 min: PA x23 (Table 3 vs Table 2)"
+    status: unattributed
+    quote: "PA 0.042, PAA 0.029, acetaldehyde 0.048"
+    quantity: "mol % of amino acid at 30 min: PA 0.042, acetaldehyde 0.048, 3-methylbutanal 0.089"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Table 2, dossier sec. 3 [D] line and row H00-R8"
+    note: "no route marker in a glucose pot. The forced-input feasibility probe (EX-049, single lab) finds the dicarbonyl route ALONE cannot reproduce this pot's shapes (min violation 3.9); its best two-route optimum puts ~84 % of PA at 120 min on the Amadori route (F17). That is a fitted-time-course result, so it cannot move this cell above 'unattributed'."
+  # ---- fed dicarbonyl donors, second and third laboratories ---------------------------------------------------------
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "15 carbonyls ~26 mM + Phe 26 mM, 50 mM citrate pH 3.2 - 3.5, reflux 2 h under Likens-Nickerson SDE (aldehyde stripped as formed)"}
+    contrast: "donor identity at pH 3.2: MGO 21.0 % > 3-deoxyerythrosone 17.2 > DHA 9.0 > glyoxal 8.8 > ... 3-DG 0.6 > glucose 0.03 %; C4 : C5 : C6 3-deoxyosones 28.7 : 4.3 : 1"
+    status: dominant
+    quote: "pyruvaldehyde/glyoxal = 2.39; pyruvaldehyde/3-deoxyglucosone = 35"
+    quantity: "PA 21.0 % (MGO), 8.8 % (glyoxal), 0.6 % (3-DG) of Phe in 2 h (basis undefined, read as mol/mol Phe)"
+    evidence: fed_intermediate
+    lab: "Quest International, Bussum (Weenen)"
+    dossiers: [weenen2001_extraction.md]
+    where: "Table III"
+    conflict: CF-073
+    note: "donor RANKING agrees with DFA (MGO > GO > 3-DG); the MAGNITUDE (21 % vs ~1 %) and the MGO / 3-DG ratio (35 vs ~1.4 - 1.6) do not (CF-073, plausibly SDE stripping or donor concentration)."
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "glucose + Phe ~26 mM, 50 mM citrate pH 3.2, SDE 2 h"}
+    contrast: "glucose + Phe at pH 7.0 (100 mM phosphate) 0.15 % vs pH 3.2 (citrate) 0.006 % = x25 (buffer co-varies); at pH 3.2 glucose + Phe = Phe alone"
+    status: absent
+    quote: "Phe alone = Glc + Phe at pH 3.2 (0.006 %)"
+    quantity: "0.006 % PA (= the Phe-alone blank) at pH 3.2; 0.15 % at pH 7.0"
+    evidence: within_study_factor
+    lab: "Quest International, Bussum (Weenen)"
+    dossiers: [weenen2001_extraction.md]
+    where: "Table II entries 1, 3, 4"
+    conflict: CF-020
+    note: "absent = no glucose-driven Strecker above the blank in 2 h at pH 3.2 (the method sees PA at 0.006 %); Table III prints 0.03 % for the same pot (CF-020, 5-fold internal spread). At pH 7 the glucose pot is 'unattributed' (no marker)."
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 170, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, feed: "MGO 5 mM + Leu / Ile / Phe / Met 5 mM, 0.1 M phosphate pH 7.0, closed vessel, 2.5 - 30 min (model B)"}
+    contrast: "aldehyde vs Strecker amine (same pot): amine <= 1.1 % of aldehyde for Leu / Ile / Phe, 3 % for Met at 30 min; identity at 30 min Ile 1.68 : Leu 1.16 : Phe 1 : Met 0.31"
+    status: dominant
+    quote: "with methylglyoxal at pH 7 the Strecker amine is a negligible exit"
+    quantity: "aldehyde at 30 min 2.25 - 12.2 mol % of amino acid (3-methylbutanal 8.5 %, 2-methylbutanal 12.2 %, PA 7.3 %, methional 2.3 %); triplicates, SIDA"
+    evidence: fed_intermediate
+    lab: "DFA Garching / TU Munich (Granvogl / Schieberle)"
+    dossiers: [granvogl2006_extraction.md]
+    where: "Tables 6 - 9 (model B); dossier sec. 1 answer 1"
+    note: "same laboratory network as Hofmann 2000 (Schieberle), so not a cross-lab check of the 98 C yields; it is the only fed-dicarbonyl aldehyde time course at > 140 C."
+  - key: {ph: neutral, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 170, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "MGO + amino acid 50 umol each on 3 g silica gel with 10 % water, closed vessel (model A)"}
+    contrast: "low water (model A) vs water (model B): Leu / Ile aldehyde x2 - 3 faster; Phe / Met aldehyde stalls or falls after 10 min; amine share of aldehyde + amine rises to 19 % (Phe) and 27 % (Met)"
+    status: operating
+    quote: "water (model A: Phe 19 %, Met 27 %) and in roasted cocoa"
+    quantity: "3-methylbutanal 17.9 mol %, 2-methylbutanal 40.2 mol %, PA 2.6 mol % at 30 min; PEA 0.6 mol %"
+    evidence: within_study_factor
+    lab: "DFA Garching / TU Munich (Granvogl / Schieberle)"
+    dossiers: [granvogl2006_extraction.md]
+    where: "Tables 6 - 9 (model A); dossier sec. 1 answer 1"
+  - key: {ph: not_stated, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "synthesised 3-DG 46 mM + Phe 42 mM, water, sealed tube, 30 min; and 3-DG + Ala 0.4 M each, 0 - 7 h"}
+    contrast: "3-DG alone vs 3-DG + Ala: 3-DG loss 33 % vs 72 % in 1 h (amine accelerates 3-DG loss ~3x); no 3-DG-Ala adduct by 13C-NMR"
+    status: operating
+    quote: "3-DG is a Strecker donor in a second laboratory"
+    quantity: "PA identified (GLC co-injection, MS), not quantified; kappa_TDG(Ala) ~1e-5 - 4e-5 L/(mmol min) (dossier's derivation, pH unknown)"
+    evidence: fed_intermediate
+    lab: "University of Missouri, Columbia (Feather)"
+    dossiers: [ghiron1988_extraction.md]
+    where: "PA identification (Methods / Results); Fig. 2"
+  - key: {ph: acid, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 25, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, feed: "glyoxal / MGO / diacetyl / pentane-2,3-dione (+ acetoin, acetol) 20 mM x 14 amino acids 20 mM, 12 % hydro-alcoholic, pH 3.5 (H3PO4 / NaOH), dark, 7 - 30 days", solvent: "12 % ethanol"}
+    contrast: "none quantitative: the same aldehydes, same odour score, from Val / Leu / Ile / Phe with all four dicarbonyls"
+    status: operating
+    quote: "Strecker aldehydes are IDENTIFIED, never quantified"
+    quantity: "existence only (GC-MS identity); no amount"
+    evidence: fed_intermediate
+    lab: "Faculte d'Oenologie, Bordeaux (de Revel / Maujean)"
+    dossiers: [pripisnicolau2000_extraction.md]
+    where: "Table 1; dossier sec. 1"
+    note: "the only fed-dicarbonyl Strecker cell at <= 60 C; existence at 25 C, pH 3.5 in weeks."
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "40-80", sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "Phe 2.4 mM + gallic acid 2.4 mM (+/- glucose 2.4 mM) + Fe(II) 134 uM / Cu(II) 6.3 uM, 10 mM tartrate pH 3.4, headspace swept with O2", donor_note: "o-quinone of gallic acid formed in situ, an ortho-dicarbonyl; not a sugar-derived donor"}
+    contrast: "pH 7 > 5 > 3.4 at 80 C; metals x4; SO2 x1/6; glucose LOWERS the rate; Ea 73.5 kJ/mol over 40 - 80 C"
+    status: operating
+    quote: "the pH ordering 7 > 5 > 3.4 at 80 C, a four-fold metal effect"
+    quantity: "headspace release rate (Weibull k), not a liquid-phase yield"
+    evidence: within_study_factor
+    lab: "Universidade Catolica Portuguesa, Porto (Silva Ferreira)"
+    dossiers: [monforte2021_extraction.md]
+    where: "Tables 1 - 2, dossier sec. 1"
+    note: "the quinone donor needs O2 + metal to form; the donor class differs from F16's sugar dicarbonyls and the pH ordering is the OPPOSITE of Hofmann's fed-MGO aldehyde (max pH 5)."
+  # ---- sugar + amino acid pots (no route marker) --------------------------------------------------------------------
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: "75-115", sugar: hexose_aldose, amine: other_free_aa, oxygen: inert, buffer: phosphate, metals: not_controlled, feed: "glucose 1.25 M + Met / Phe / Pro / Leu 0.1875 M each, nominal 0.1 M phosphate pH 6 / 7 / 8 (initial, drifting), stirred Parr reactor, N2 headspace"}
+    contrast: "pH 6 / 7 / 8 x five temperatures: PA highest at pH 6; isovaleraldehyde higher at pH 7 than 8; apparent Ea 3-MB 80.3, PA 90.0 kJ/mol (averaged over pH)"
+    status: unattributed
+    quote: "phenylacetaldehyde highest at pH 6"
+    quantity: "pseudo-zero-order formation; no rate constant or level printed"
+    evidence: within_study_factor
+    lab: "University of Minnesota (Reineccius)"
+    dossiers: [chan1994b_extraction.md]
+    where: "Table I and text p. 136 - 137"
+    note: "a glucose pot under N2 still makes Strecker aldehydes: consistent with an oxygen-free route (this family) but not a marker; pH drift not measured."
+  - key: {ph: mild_acid, temperature: moderate, water: intermediate_aw}
+    tags: {ph_basis: label, T_C: "80-110", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "freeze-dried glucose 1.0 mol/kg + Ala / Val / Ile / Leu 50 mmol/kg on cellulose, citrate pH 5.0 before drying, a_w 0.52, sealed headspace vials"}
+    contrast: "four amino acids in one pot: barriers within 9 kJ/mol; glucose + Leu at 90 C: 3-MB appears only after Fru-Leu reaches steady state (~40 min), then zero order"
+    status: unattributed
+    quote: "AA 115, 2-MP 115, 2-MB 120, 3-MB 124 kJ/mol"
+    quantity: "apparent Ea 115 - 124 kJ/mol (+/- ~6); no rate constant printed"
+    evidence: measured_intermediate
+    lab: "Universitat Munster (Eichner)"
+    dossiers: [cremer2000_extraction.md]
+    where: "Abstract, sec. 3.2 - 3.3, Figs. 5 - 7"
+    conflict: CF-020
+    note: "the aldehyde onset tracks the Amadori pool, so the measured barrier is the SUPPLY barrier (dicarbonyl or Amadori route), not the Strecker step's."
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "90-130", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, feed: "glucose or maltose + Leu or Ile 10 : 1, 0.1 M phosphate pH 5.2, 0 - 360 min (absolute concentrations not stated)"}
+    contrast: "temperature 90 -> 130 C: 3-MB x~100; sugar type matters more than amino-acid type (GL > ML > GI > MI)"
+    status: unattributed
+    quote: "raising the temperature from 90 to 130 C increases the concentration"
+    quantity: "3-MB x~100 from 90 to 130 C (figure); fitted Ea of the lumped steps 24 - 121 kJ/mol"
+    evidence: within_study_factor
+    lab: "TU Munich, Weihenstephan (Becker)"
+    dossiers: [huang2017_extraction.md]
+    where: "Fig. 5 and text; Table 2"
+  - key: {ph: not_stated, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "120-140", sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled, feed: "aqueous ox-liver extract, glucose ~1e2 mmol/kg, free amino acids 1 : 1 with sugar, protein present; sealed ampoules", amine_also: protein_bound_lys}
+    contrast: "three liver batches whose free amino acids differ 3 - 4x: 2- / 3-methylbutanal track glucose, not free amino acid"
+    status: unattributed
+    quote: "the Strecker aldehyde rate does not depend on the free amino-acid concentration at all"
+    quantity: "3-MB 0.13 %, 2-MB 0.065 % of glucose (dossier's derivation); F_ile / F_leu = 1.6"
+    evidence: within_study_factor
+    lab: "University of Reading (Parker / Mottram) with Leeds (Wedzicha)"
+    dossiers: [balagiannis2009_extraction.md]
+    where: "Figs. 1 - 2, Table 1; dossier sec. 1"
+    note: "in a protein-rich matrix the dicarbonyl SUPPLY limits the aldehyde, not the amino acid; the per-amino-acid second-order Strecker step is never identified."
+  - key: {ph: not_stated, temperature: very_high, water: not_stated}
+    tags: {ph_basis: label, T_C: "180-160", sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled, feed: "potato slices stripped and re-infused with glucose + one of six amino acids, or all six; deep-fried 2 min in palmolein"}
+    contrast: "six amino acids on one glucose pool vs singles: Leu aldehyde x1.24, Ile / Phe / Met aldehydes /2.4 / 2.7 / 5.2; total pyrazines 36.5 % of the singles' sum"
+    status: unattributed
+    quote: "leucine's aldehyde goes UP 1.24x while isoleucine's, phenylalanine's and methionine's fall"
+    quantity: "peak-area ratios (dynamic headspace, no response factors)"
+    evidence: within_study_factor
+    lab: "University of Reading (Ames)"
+    dossiers: [martin2001_extraction.md]
+    where: "Tables 3 - 5; dossier sec. 3 arithmetic 4"
+    note: "competition between amino acids for one dicarbonyl pool is NOT additive; in the methionine pot DMDS is 3x methional."
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "100-105", sugar: hexose_aldose, amine: sulfur_aa_other, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, feed: "Met 0.14 M +/- glucose 0.072 M (+/- linoleic acid, starch), 400 mL, reflux 2 h in a Likens-Nickerson SDE, pH held at 6 with NaOH / HCl (pH-stat)"}
+    contrast: "Met alone vs Met + glucose: methional nd vs 36 ug per 400 mL (recovered by SDE)"
+    status: unattributed
+    quote: "No methional from methionine alone at 100-105 °C, pH 6, 2 h"
+    quantity: "methional 1.2e-5 mol per mol glucose recovered (M/G); a recovery, not a formed amount"
+    evidence: within_study_factor
+    lab: "University of Reading (Ames)"
+    dossiers: [mandin1999_extraction.md]
+    where: "Table 2; dossier sec. 4 item 1"
+    note: "the Strecker aldehyde needs a sugar-derived carbonyl partner at 100 C (no thermal Met -> methional); which sugar route supplies it is not marked."
+condition_dependence: >-
+  SHOWN. (1) Donor: in fed pots every alpha-dicarbonyl tested gives the aldehyde, with the same ranking in two labs
+  (MGO > glyoxal > 3-DG, DFA and Quest cells), but the size of the donor effect differs by >= 20x between them
+  (x1.4 at pH 7 argon, DFA; x35 MGO / 3-DG at pH 3.2 with SDE, Quest; CF-073). (2) Oxygen: the aldehyde from a
+  fed dicarbonyl is O2-independent (one lab, four donors, 98 C); a glucose pot under N2 still makes aldehydes
+  (Reineccius). (3) pH: fed-dicarbonyl PA peaks at pH 5 and falls only 2x to pH 9 (DFA, figure); Quest gets its
+  largest yields at pH 3.2. In GLUCOSE pots acid pH suppresses the aldehyde (x25 lower at pH 3.2 than pH 7, Quest,
+  buffer-confounded) because the sugar's dicarbonyl supply is slow there; the pH dependence of a sugar pot is the
+  supply's, not this step's. (4) Temperature: occurs from 25 C (weeks, Bordeaux) to 170 C (minutes, DFA / TUM);
+  apparent barriers in sugar pots (80 - 124 kJ/mol, Reineccius, Eichner, Becker) are supply barriers. (5) Water:
+  low water (silica 10 %) speeds the branched-chain aldehydes and raises the Strecker AMINE share to 19 - 27 % for
+  Phe / Met (one lab). (6) Amine: identity at fixed donor Ile > Leu > Phe > Met (DFA only); in mixtures the
+  amino acids compete non-additively (Reading, frying); in a protein-rich matrix the aldehyde tracks the sugar,
+  not the free amino acid (Reading). ASSUMED (no study): the aminoketone co-product yield per aldehyde (never
+  measured with the aldehyde in one pot), the step's own temperature law in water with a fixed donor (only the
+  170 C DFA course plus 98 C), and any phosphate effect on the step.
+best_supported_regimes:
+  - "neutral / moderate (98 C) / dilute / fed alpha-dicarbonyl + Phe, argon or air: dominant route to PA, O2-independent (DFA; fed_intermediate, one lab)"
+  - "acid (pH 3.2) / moderate / dilute / fed dicarbonyl + Phe: dominant, same donor ranking (Quest; second lab, magnitude conflicting, CF-073)"
+  - "neutral / very_high (170 C) / dilute / fed MGO + Leu / Ile / Phe / Met: dominant aldehyde exit, amine <= 3 % (DFA / TUM)"
+  - "existence of the 3-DG donor: two labs (DFA, Missouri); existence at 25 C pH 3.5: one lab (Bordeaux)"
+unknown_regimes:
+  - "alkaline (> 7.5) with a fed dicarbonyl at a measured in-situ pH (only DFA's figure-only pH 9 point)"
+  - "concentrated (>= 0.5 M) fed-dicarbonyl pots; intermediate_aw fed-dicarbonyl pots (only sugar pots at a_w 0.52)"
+  - "fed-dicarbonyl pots with glycine, Ala or Cys as the measured aldehyde donor (Ala only in the glucose pot; Gly gives formaldehyde, never quantified)"
+  - "peptide or protein-bound amine as the Strecker amine source (no fed-dicarbonyl study on disk)"
+  - "the aminoketone co-product measured alongside the aldehyde (no study)"
+  - "1-deoxyosone (1-DG) as a fed donor (never fed; only 3-DG, glucosone, MGO, GO, 3-deoxypentosone / tetrosone)"
+  - "phosphate vs non-phosphate buffer at equal pH for the Strecker step"
+  - "pentose pots with a measured Strecker aldehyde and a donor marker (Weenen's 3-deoxyxylosone 2.6 % is the only pentose-donor number)"
+competing_families:
+  - "F17_strecker_acid_o2: under air the same imine / enaminol gives the ACID; for C2 / C3 donors the acid exceeds the aldehyde in air (PA / PAA 0.50 - 0.68), for C6 donors the aldehyde wins (2.4 - 3.3). In sugar pots the Amadori oxidative route makes the same aldehyde (fitted ~84 % share in the best EX-049 optimum)."
+  - "F18_lipid_strecker: lipid enals / epoxyalkenals / keto acids degrade the same amino acids; no study puts a sugar and a lipid donor in one pot with a marker."
+  - "F19_aminoketone_pyrazine and F21_pyrroles_pyridines consume the aminoketone co-product; F06 / F07 / F10 make the donors."
+  - "the Strecker AMINE exit (non-oxidative decarboxylation) competes in low water (Granvogl model A); in water it is <= 3 % of the aldehyde."
+  - "non-Strecker amino-acid sinks (imines, melanoidins): (PA + PAA) is only 6 - 18 % of the Phe consumed by MGO (DFA)."
+engine: >-
+  IN THE ENGINE ONLY AS THE B18 / B22 / B24 STRECKER STEPS, NOT AS A STRECKER-ALDEHYDE LANE. network.py
+  PYRAZINE_REACTIONS r_go_ak (GO + Gly) and r_mgo_ak (MGO + Gly), shipped, second order in donor and glycine, Ea
+  103.1 / 114.9 fitted on Zhou 2024's PYRAZINE rates (alanine declared as glycine), the aldehyde (formaldehyde) booked
+  to FRAG_C; r_go_met / r_mgo_met (methional, B22) and the proline step (B24) are not shipped; the sulfur lane's
+  r_mgo_cys_strecker is zero unless set, and r_dpo_ddp (cysteine + 1-deoxyosone, F15 primary) carries a Strecker
+  event. No 3-DG, glucosone or pentosone donor; no Phe / Leu / Ile Strecker aldehyde species; no Strecker amine exit.
+  MISMATCHES: (a) pH: the engine scales both Strecker steps by the Leahy PYRAZINE two-slope term (0.58 dex per pH unit
+  below 7: x0.091 at pH 5 vs pH 6.8), but the fed-dicarbonyl aldehyde PEAKS at pH 5 (DFA) and is largest at pH 3.2
+  (Quest); the Strecker prereg's review allows <= 0.07 dex / pH on the step, so the engine's acid suppression belongs
+  to the supply or the pyrazine condensation, not here. (b) Donor set: 3-DG / glucosone donors give 73 - 76 % of
+  MGO's aldehyde under argon (DFA), which the engine omits entirely. (c) Constants come from pyrazine rates (a ~1 %
+  aminoketone -> pyrazine yield, F21's pyrrole sink) rather than from the aldehyde, so the engine's Strecker flux is
+  ~1.9 dex below Hofmann's (MECHANISM_REVIEWS finding 6). (d) No water-activity term on the step, while low water
+  changes the aldehyde / amine split (Granvogl model A). (e) The engine's Strecker is O2-independent, which MATCHES
+  the fed-dicarbonyl control; the O2 sensitivity of sugar pots belongs to F17 / F08 (B29 lever on k_glc_g / k_ama_g,
+  factors unfitted, so argon pots are refused).

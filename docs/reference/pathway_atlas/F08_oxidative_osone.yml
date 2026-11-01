@@ -1,0 +1,149 @@
+# Pathway-condition atlas, family F08 (written 2026-11-01, atlas agent "hub"; vocabulary: families.yml).
+# Bin conventions as in F06_enol12_3deoxyosone.yml (pH boundary -> upper bin; 100 C / aqueous reflux -> moderate;
+# tags.operator formation_flux = trap during heating, standing_level = trap after the run; "[derived here]" = this
+# file's arithmetic; "not_stated" = axis not printed by the source).
+family: F08_oxidative_osone
+definition: "oxidative routes: glucosone / osones (Wolff autoxidation of sugar, Amadori oxidation)"
+markers:
+  - "The 2-osulose itself (glucosone = 2-hexosulose; 2-pentosulose; threosone) as its quinoxaline, ideally trapped IN SITU, AND its dependence on O2: air vs argon / deaerated inside one study (Gobert 2009). Without an O2 or chelator arm a measured glucosone is presence only (it can also arise by Amadori / enaminol oxidation with no free O2 measured)."
+  - "Chelator sensitivity (DTPA / DETAPAC) and Cu2+ acceleration of the osone or of its C2 product glyoxal: the metal-catalysed autoxidation signature (Thornalley 1999). Note: in the Glomb protocol deaeration and DTPA come together, so 'O2' there means 'O2 + adventitious metals'."
+  - "Which parent: glucosone from the free sugar with NO amine (Wolff; Thornalley glucose alone, Kocadagli / Lee glucose glass and cake) vs from a FED Amadori compound (Deng 2021, Hamzalioglu 2026 fit). The two are separated only by feeding."
+  - "Fed glucosone fate (Gobert 2009: t1/2 8 h at 50 C, ~1 % to smaller dicarbonyls, glyoxal 0.07 %): bounds how much glyoxal the osone can carry."
+cells:
+  # ---- O2 / chelator contrasts -------------------------------------------------------------------
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 50, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "free lysine 42 mM", oxygen: [air, inert], buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "aerated vs deaerated (in situ OPD, 7 d): glucosone 44.5 vs 5.5 mmol/mol glucose (x8); threosone 8.4 vs 2.0; 1-DG the reverse"
+    status: operating
+    quote: "| glucosone | 44.5 | 5.5 |"
+    quantity: "glucosone ~74 % of the trapped C6 osones under air vs ~13 % deaerated [derived here]; ~4.5 mol % of glucose in 7 d"
+    evidence: trapping
+    lab: "Glomb, Halle"
+    dossiers: [gobert2009_extraction.md]
+    where: "Table 1"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 50, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "fed glucosone 42 mM + lysine 42 mM", oxygen: [air, inert], buffer: phosphate, metals: not_controlled, operator: "fed intermediate, OPD at sampling"}
+    contrast: "aerated vs deaerated: threosone 7.5 vs 3.5, 3-deoxypentosone 2.9 vs 6.1 mmol/mol glucosone"
+    status: operating
+    quote: "with a half-life of 8 h"
+    quantity: "glucosone t1/2 8 h at 50 C; ~1 % of it found as smaller dicarbonyls, glyoxal 0.07 % (the rest to the amine / unseen products)"
+    evidence: fed_intermediate
+    lab: "Glomb, Halle"
+    dossiers: [gobert2009_extraction.md]
+    where: "Results (fed experiment); Table 3"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: none, amine_detail: "glucose 50 mM alone", oxygen: not_stated, buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled vs chelated (DETAPAC 100 uM)", operator: standing_level}
+    contrast: "DETAPAC vs none at 100 mM phosphate: glyoxal initial rate 1.73 -> 0.22 uM/day (-87 %); phosphate 10 -> 100 mM: glyoxal x14"
+    status: operating
+    quote: "cuts every initial rate"
+    quantity: "glyoxal from glucose alone 1.72 uM/day at 50 mM (glucosone not measured): an amine-free, metal-catalysed (Wolff-type) route; MGO not chelator-sensitive"
+    evidence: within_study_factor
+    lab: "Thornalley, Essex"
+    dossiers: [thornalley1999_extraction.md]
+    where: "Figs. 1b-c; sec. 3"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "fed Nalpha-formyl-fructoselysine", oxygen: [air, inert], buffer: phosphate, metals: [chelated, not_controlled], metals_note: "chelated (N2 arm) vs not_controlled (air arm)", operator: standing_level}
+    contrast: "air vs N2 + chelators: Amadori decomposition ~4x faster under air, products shift to CML / tetroses / pentoses - but no glucosone"
+    status: absent
+    quote: "glucosone not detected (its own t1/2"
+    quantity: "glucosone below detection at every sampling (days); its own t1/2 <= 12 h, so a small STANDING level is not excluded"
+    evidence: within_study_factor
+    lab: "Baynes, South Carolina"
+    dossiers: [zyzak1995_extraction.md]
+    where: "Table II; text"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "37 / 50", sugar: hexose_aldose, amine: other_free_aa, amine_detail: "fed 1-DG 42 mM + L-alanine", oxygen: [air, inert], buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled (air) vs chelated (DTPA, deaerated)", operator: "fed intermediate, OPD at sampling"}
+    contrast: "aerated vs deaerated: threosone (C4 2-osulose from the 1-DG C4 enediol) max 14 vs 5 mmol/mol at 37 C, 14 vs 10 at 50 C"
+    status: operating
+    quote: "threosone (max) | 14 | 5 | 14 | 10"
+    quantity: "C4 osone formed by oxidation of a fragment enediol, O2 x2.8 at 37 C (O2 and chelator confounded)"
+    evidence: within_study_factor
+    lab: "Glomb, Halle"
+    dossiers: [voigt2009_extraction.md]
+    where: "Table 1"
+  # ---- fed Amadori / reflux standing levels -------------------------------------------------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "100 (also 120, 130)", sugar: hexose_aldose, amine: sulfur_aa_other, amine_detail: "fed methionine-glucose ARP 0.2 M", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    contrast: "initial pH 7.5 vs 5.5: glucosone 10.6 mM vs <= 3 mM; water vs 0.1 M phosphate at pH 7.5, 100 C: ~10.6 vs ~1.2 mM peak (different peak times)"
+    status: operating
+    quote: "glucosone up to ~10.6 mM at pH 7.5 / 100 °C"
+    quantity: "glucosone ~5 mol % of the fed ARP at pH 7.5, 100 C, 60 min [derived here]; semi-quantified on the 3-DG curve; atmosphere unstated"
+    evidence: fed_intermediate
+    lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+    dossiers: [deng2021_extraction.md]
+    where: "Figs. 5-6"
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 101, sugar: [hexose_aldose, pentose], sugar_note: "hexose_aldose and pentose (paired)", amine: other_free_aa, amine_detail: "L-alanine ~1.2-1.5 M", oxygen: air, buffer: phosphate, metals: not_controlled, operator: standing_level}
+    contrast: "glucose vs xylose: 2-hexosulose max ~50 ug/mmol (20x below 3-DG); 2-pentosulose ~200 ug/mmol at 10 min"
+    status: operating
+    quote: "20 times and 3 times lower"
+    quantity: "2-hexosulose ~0.03 mol %, 2-pentosulose ~0.12 mol % of the sugar at their maxima (open reflux, author attributes them to metal-catalysed oxidation)"
+    evidence: measured_intermediate
+    lab: "DFA Garching (Hofmann)"
+    dossiers: [hofmann1999_extraction.md]
+    where: "Results pp. 116-117; Figs. 4-5"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "110-140", sugar: disaccharide, amine: protein_bound_lys, amine_detail: "pasteurised whole milk (lactose + casein / whey lysine)", oxygen: not_stated, buffer: other_buffer, metals: not_controlled, operator: "standing_level (fit infers flux)"}
+    contrast: "temperature 110 -> 140 C: LacLys -> glucosone k 1.9e-2 -> 1.5e-1 /min, Ea 75.9 +- 21.1"
+    status: operating
+    quote: "the only aqueous Amadori -> glucosone entry on disk"
+    quantity: "fitted Amadori (lactulosyllysine) -> glucosone in milk, 0.5-5 min holds"
+    evidence: kinetic_fit
+    lab: "Hacettepe (Gokmen)"
+    dossiers: [hamzalioglu2026_extraction.md]
+    where: "Table 1 step 4, Table 2"
+  # ---- foods / low water / acid ------------------------------------------------------------------
+  - key: {ph: acid, temperature: low, water: concentrated}
+    tags: {ph_basis: label, T_C: "27 / 37 (24-week storage)", sugar: [disaccharide, hexose_aldose, hexose_ketose], sugar_note: "disaccharide + hexoses (juices)", amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, operator: standing_level}
+    contrast: "juice identity: glucosone the dominant dicarbonyl in apple and orange juice, 3-DG in peach nectar"
+    status: operating
+    quote: "3.5 mmol/L @ 16 wk"
+    quantity: "glucosone max 3.5 mmol/L (apple) / 1.7 (orange) at 37 C, pH 3.4; fitted via a 1,2-enediol (k7)"
+    evidence: measured_intermediate
+    lab: "Hacettepe (Gokmen)"
+    dossiers: [gursulaktag2020_extraction.md]
+    where: "sec. 3.1"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: none, T_C: "140 / 170 / 200 (oven set-point)", sugar: hexose_aldose, amine: [none, other_free_aa], amine_detail: "glucose-only cake vs glucose + leucine", oxygen: air, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    contrast: "glucose + leucine vs glucose only: glucosone 4-10x higher with the amino acid; not detected at 140 C (glucose only), 0.03 umol/gDM at 170 C, bell-shaped at 200 C"
+    status: operating
+    quote: "Glucose -> 1,2-enediol dominates over glucose -> glucosone."
+    quantity: "3-DG : glucosone 25 : 1 in both formulations"
+    evidence: within_study_factor
+    lab: "SayFood, Paris-Saclay (Lee / Roux / Bonazzi)"
+    dossiers: [lee2022_extraction.md]
+    where: "Results pp. 15-16"
+condition_dependence: >-
+  SHOWN: oxygen is the defining factor at low temperature - glucosone x8 under air vs deaerated in situ at 50 C
+  (Gobert) and C4 osone (threosone) x2-4 with air from 1-DG (Voigt 2009; DTPA confound); metals: glyoxal from glucose
+  alone falls -87 % with DETAPAC at 37 C (Thornalley), so the 37-50 C oxidative chemistry is largely metal-catalysed;
+  phosphate raises it (x14 GO, 10 -> 100 mM, metal-confounded). pH: from a fed ARP glucosone is larger at initial pH
+  7.5 than 5.5 (Deng, standing). Parent: glucosone comes both from the free sugar without amine (Thornalley's GO, the
+  glass / cake, juices at pH 3.4) and from a fed Amadori compound (Deng; Hamzalioglu fit in milk); the Baynes fed-ARP
+  pot under air at 37 C found NO glucosone (Zyzak), so ARP oxidation to glucosone is not general at physiological
+  metal levels. Amine: leucine raises glucosone 4-10x in cake (Lee). Temperature: only fits (Ea 76 in milk; the
+  engine's 126 in the glass). ASSUMED / UNSHOWN: any O2 contrast at 100-140 C; the pentose osone outside one reflux
+  series (Hofmann 1999) and Gobert's fed-glucosone products.
+best_supported_regimes:
+  - "neutral / low (37-50 C) / dilute / glucose +- amine in phosphate, air: operating and O2- / metal-dependent (Glomb, Thornalley; Baynes negative for a fed ARP): 3 labs"
+  - "neutral / moderate-high / dilute / fed hexose ARP: operating as a standing osone (Jiangnan; Hacettepe milk fit)"
+  - "acid / low / juices and low_aw / very_high / glucose glass or cake: operating (Hacettepe, SayFood: 2 labs), standing levels and fits"
+unknown_regimes:
+  - "air vs argon (or chelator) at 100-140 C in any aqueous pot: no study on disk"
+  - "pentose osone (2-pentosulose) beyond Hofmann 1999's single reflux series; no pentose O2 contrast"
+  - "cysteine pots: osone formation vs thiol O2 scavenging (cysteine autoxidation competes for O2) - unmeasured"
+  - "alkaline (> 7.5) and intermediate a_w with a defined amine"
+competing_families:
+  - "F06 / F07 (non-oxidative enolisations of the same ARP / enediol): under air at 50 C F08 takes flux mainly from F07 (Gobert)"
+  - "F09_namiki_c2 and F10_retroaldol_c3_c2 for glyoxal: glucosone carries little glyoxal (0.07 % at 50 C, Gobert), so most GO needs another route"
+  - "F17_strecker_acid_o2 / ARP oxidative route to Strecker products (Hofmann 2000b: x9.2 air vs argon from an ARP) and F28 thiol oxidation competing for O2"
+  - "F05_protein_glycation (CML by oxidative ARP cleavage under air, Zyzak)"
+engine: >-
+  Trunk only (DICARBONYL_REACTIONS / AQUEOUS_GLYOXAL_REACTIONS): r_glc_g (Kocadagli glass, Ea 125.9), r_ama_g (B21, fitted
+  on Hamzalioglu's milk constants) and r_g_go (glucosone -> GO; per the Gobert dossier its aqueous barrier is ~4 kJ/mol,
+  'consistent with zero', fitted at 110-140 C). The only O2 lever is trunk_conditions.ATMOSPHERE_FACTORS on k_ama_g /
+  k_glc_g with air = 1 and every other atmosphere REFUSED (no fitted factor): the literature's clearest F08 fact (x8
+  glucosone, air vs deaerated, Gobert) has no channel, and there is no chelator / metal axis (Thornalley -87 %). The
+  near-zero r_g_go barrier keeps glucosone -> glyoxal fast at 50 C, where Gobert measures 0.07 %. The sulfur (pentose)
+  lane has no osone, no glyoxal-producing step and no O2 route to either (B11's OX consumers are cysteine and the
+  reductone pool only), though Hofmann 1999 measures 2-pentosulose and the Jiangnan pots measure glyoxal.

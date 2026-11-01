@@ -1,0 +1,253 @@
+# Pathway-condition atlas: F03 (Amadori compound -> free amine + sugar-derived fragments: amine release on
+# enolisation / cleavage, and true reversion to the parent sugars), built 2026-11-01 from the extraction dossiers
+# (data/lit/extraction_dossiers/). Vocabulary: docs/reference/pathway_atlas/families.yml. Every quote is verbatim from
+# the FIRST dossier listed in its cell.
+# The family has TWO observables, kept apart in every cell:
+#   (a) AMINE RELEASE: free amine per mol Amadori compound decomposed (any channel: 1,2- / 2,3-enolisation, retro-aldol);
+#   (b) REVERSION proper: parent aldoses (glucose + mannose; for xylose ARPs, xylose) formed from the fed Amadori compound.
+# Laboratories (independent): Nestle (Davidek / Blank), Wageningen (Martins / van Boekel), Baynes USC (Zyzak),
+# South China University of Technology (Guan / Yu), Jiangnan (Zhang X / Cui / Ho: Deng 2021, Hou 2026, Wei 2022,
+# Zhou 2024, Zhang 2025 are ONE laboratory).
+# Duplicates: Martins 2003 Part I (martins2003b) and Part II (martins2003) are one experiment; Part I Table 1 = thesis
+# Table 4.1.1 (glycine yields; martins2003b_extraction.md sec. 0); counted once.
+# Measured yields are NET of downstream consumption (the released amine reacts again: Strecker, melanoidins), so a
+# release yield is a LOWER bound on the share of decomposition that released the amine.
+# Fed-intermediate cells may carry `dominant` (families.yml): a fed Amadori compound whose decomposition returns most
+# of its amine shows that amine release is the main fate of the Amadori nitrogen in that regime.
+# ph key "not_stated" is outside the bins on purpose (as in F04).
+
+family: F03_amadori_reversion
+definition: "Amadori compound -> free amine + sugar-derived fragments (amine release / regeneration)"
+markers:
+  - "free amine (glycine, methionine, alanine, lysine) appearing from a FED purified Amadori compound, per mol Amadori compound decomposed"
+  - "parent aldoses (glucose + mannose in ~7 : 3; xylose for pentose ARPs) appearing from a fed Amadori compound with no free sugar at t = 0 (reversion proper); fructose formed without lag is a third, direct product"
+  - "isotope: 14N / 15N in products when a 14N-ARP is heated with 15N free amine (amine exchange), or 13C-sugar crossing into another amine's Amadori compound"
+  - "trapping: a sugar trap (cysteine -> TTCA, a second amine -> its own ARP) capturing the aldose a fed Amadori compound releases"
+  - "NOT a marker: amine loss in a sugar + amine pot (it nets formation against release), or fitted 'reverse' constants in a network that never fed the Amadori compound"
+
+cells:
+  # ---------------- Nestle: pH-stat (pH measured at 90 C), water vs phosphate, fed DFG 0.1 M ----------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "pH 5 / 6 / 7 / 8 held by pH-stat (electrode at 90 C), water vs 0.1 M phosphate: glycine per DFG decomposed at 5 % conversion 0.74 / 0.74 / 0.80 / 0.84 (water), 0.78-0.88 (phosphate); it falls with conversion (water pH 6: 0.46 at 50 %) as the released glycine is consumed"
+    status: dominant
+    quote: "Glycine release 0.74–0.88 at 5 % conversion, falling with conversion"
+    quantity: "0.74-0.88 mol glycine per mol DFG decomposed at 5 % conversion (lower bound on release); DFG decay k (water) 0.047 / 0.144 / 0.521 / 1.03 h^-1 at pH 5 / 6 / 7 / 8"
+    evidence: fed_intermediate
+    lab: "Nestle (Davidek / Blank)"
+    dossiers: [davidek2002_extraction.md]
+    where: "Table 2; sec. 4.3 (digitised k); sec. 6(c)"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "reversion proper, water, pH 5-8: parent sugars from fed DFG are a small, pH-flat share; Glc : Man ~67-69 : 31-33 at every pH"
+    status: minor
+    quote: "Parent sugars (reverse Amadori or glucosone reduction; not distinguished): 3–7 % in water"
+    quantity: "glucose + mannose 0.02-0.07 mol per mol DFG decomposed (water)"
+    evidence: fed_intermediate
+    lab: "Nestle (Davidek / Blank)"
+    dossiers: [davidek2002_extraction.md]
+    where: "Tables 3-4"
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "phosphate vs water at the same held pH: reversion rises most at pH 5-6 (0.18 / 0.15 at 5 % conversion vs 0.03 / 0.06 in water) while DFG decay is x2.8-3.6 faster; at pH 8 phosphate barely changes either (x1.27)"
+    status: operating
+    quote: "glucose + mannose 0.02–0.07 in water and 0.03–0.18 in phosphate"
+    quantity: "glucose + mannose 0.10-0.18 mol / mol DFG decomposed in 0.1 M phosphate at pH 5-6; phosphate effect consistent with a term in [H2PO4-] (kappa' ~15-30 M^-1, dossier sec. 4.4, assumes pKa2)"
+    evidence: fed_intermediate
+    lab: "Nestle (Davidek / Blank)"
+    dossiers: [davidek2002_extraction.md]
+    where: "Table 4; sec. 4.4"
+  # ---------------- Wageningen: fed DFG, 100 / 120 C x pH 5.5 / 6.8, 0.1 M phosphate ----------------
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100, 120", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "initial pH 6.8 vs 5.5 (label, drifting): glycine yield per DFG reacted is higher at pH 6.8 at both temperatures (100 C: 71-94 %; 120 C: 84-96 %)"
+    status: dominant
+    quote: "| 15 | 57.89 | 71.02 | 59.56 | 94.72 |"
+    quantity: "glycine 71.0-93.9 % (100 C) and 83.9-95.8 % (120 C) of DFG reacted at pH 6.8; non-monotone in time (released, consumed, released again)"
+    evidence: fed_intermediate
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2003b_extraction.md]
+    where: "Table 1 columns B, D"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100, 120", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "initial pH 5.5 (drifts 0.8-0.9 units mid-run): lower and more scattered glycine yields, with a deep early minimum"
+    status: operating
+    quote: "| 5 | 43.40 | n.a. | 25.87 | n.a. |"
+    quantity: "glycine 43.4-81.5 % (100 C) and 25.9-74.2 % (120 C) of DFG reacted at pH 5.5"
+    evidence: fed_intermediate
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2003b_extraction.md]
+    where: "Table 1 columns A, C; sec. 11 (pH drift)"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100, 120", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "reversion proper: glucose, mannose AND fructose appear from fed DFG; fructose with no lag (direct from DFG); Man > Glc at pH 5.5, Glc > Man at pH 6.8"
+    status: minor
+    quote: "0.4–0.8 mmol/l on 10 mmol/l DFG, i.e. 4–8 mol%"
+    quantity: "peak parent sugars 4-8 mol % of DFG; the companion paper calls the DFG -> glucose + glycine path not important quantitatively"
+    evidence: fed_intermediate
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2003b_extraction.md]
+    where: "Fig. 5, sec. 3.3.1, sec. 9"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100, 120", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "model structure: the multiresponse fit routes parent sugars out of the enolisation intermediates E1 / E2 as forward steps; no reverse constant is estimated anywhere in the Martins series"
+    status: operating
+    quote: "Parent-sugar formation (Glc, Man, Fru) is modelled as FORWARD steps 10, 11 and 16"
+    quantity: "no reverse Amadori constant exists in the papers (the thesis 'reverse rates' row has no journal source; martins2003_extraction.md sec. 4.4)"
+    evidence: kinetic_fit
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2003_extraction.md]
+    where: "Scheme 3, Table 3, sec. 4.4"
+  # ---------------- Baynes: 37 C, pH 7.4, model fructoselysine; phosphate dose, HEPES, air vs N2 ----------------
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: protein_bound_lys, amine_note: "N-alpha-formyl-fructoselysine (model of protein lysine)", oxygen: inert, buffer: phosphate, metals: chelated}
+    contrast: "phosphate 10 -> 200 mM (N2 + DTPA / phytate): decomposition x3.4 faster, product split unchanged; 0.2 M HEPES ~12x slower than 0.2 M phosphate"
+    status: operating
+    quote: "hexoses (glucose + mannose, reversal) 7.5-22 %"
+    quantity: "reversion (hexoses) ~20 % of initial fFL at about the half-life under N2, the largest single identified fate after tetroses (19-31 %); 3-DG only 1.0-1.6 %"
+    evidence: fed_intermediate
+    lab: "Baynes (USC; Zyzak)"
+    dossiers: [zyzak1995_extraction.md]
+    where: "Tables I-II"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: protein_bound_lys, amine_note: "N-alpha-formyl-fructoselysine", oxygen: inert, buffer: phosphate, metals: chelated}
+    contrast: "phosphate 10 vs 200 mM at similar extent of loss: tetroses 23.6 vs 19.0 %, hexoses 21.8 vs 19.9 %, 3-DG 1.1 vs 1.6 %"
+    status: operating
+    quote: "phosphate catalyzes the decomposition reaction, but does not significantly affect the product distribution"
+    quantity: "k = 0.0105 + 0.157 [Pi]/M d^-1 (N2); phosphate acts on a step shared by reversion, enolisation and retro-aldol"
+    evidence: within_study_factor
+    lab: "Baynes (USC; Zyzak)"
+    dossiers: [zyzak1995_extraction.md]
+    where: "Table II"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: protein_bound_lys, amine_note: "N-alpha-formyl-fructoselysine", oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "air (no chelator) vs N2 + chelators: decomposition ~4x faster (ratio 4.0-5.3 across 10-200 mM phosphate) and the products shift to oxidative cleavage (CML, LL) with fewer hexoses; confounded by the chelators"
+    status: operating
+    quote: "air accelerates decomposition ~4x, but the products under air are CML / LL"
+    quantity: "fFL t1/2 4.2-10.7 d (air) vs 16.8-57.1 d (N2); glucosone not detected under either"
+    evidence: within_study_factor
+    lab: "Baynes (USC; Zyzak)"
+    dossiers: [zyzak1995_extraction.md]
+    where: "Table I, Table II, sec. 1 (d)"
+  # ---------------- SCUT: proline ARP (secondary amine), 110 / 130 C, buffer type ----------------
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "110-130", sugar: hexose_aldose, amine: other_free_aa, amine_note: "proline (secondary amine)", oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "0.1 M phosphate vs acetate vs citrate vs water at initial pH 5.8: DFP loss x3.8 (110 C) / x1.5 (130 C) faster in phosphate over 0-10 min, and reversion to glucose + mannose x1.3 (vs citrate) / x1.5 (vs acetate) at 130 C"
+    status: operating
+    quote: "Reversion is faster in phosphate, i.e. phosphate accelerates both directions of the early equilibrium"
+    quantity: "DFP remaining at 60 min: phosphate 3.2 / 2.3 %, acetate 46.7 / 23.9 %, citrate 40.7 / 19.6 % (110 / 130 C); absolute product axes unusable (unit defects), ratios only"
+    evidence: fed_intermediate
+    lab: "South China University of Technology (Guan / Yu)"
+    dossiers: [guan2012_extraction.md]
+    where: "Fig. 5, sec. 3-4"
+  # ---------------- Jiangnan: fed sulfur / pentose / lysine ARPs, water, unbuffered ----------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 100, sugar: hexose_aldose, amine: sulfur_aa_other, amine_note: "methionine", oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "0.1 M phosphate, initial pH 7.5 (measured: 7.3 at 30 min, 5.6 at 240 min): ARP decays ~1.8x faster than unbuffered; Met is returned almost mole for mole"
+    status: dominant
+    quote: "143 mM ARP lost, 126 mM Met present"
+    quantity: "88 % of reacted MG-ARP returned free Met at 60 min (lower bound on release)"
+    evidence: fed_intermediate
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [deng2021_extraction.md]
+    where: "Fig. 6 (buffer arm), sec. 4 item 6"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100-130", sugar: hexose_aldose, amine: sulfur_aa_other, amine_note: "methionine", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "temperature 100 / 120 / 130 C x initial pH 5.5 / 7.5, unbuffered (in-situ pH not recorded): the standing Met yield falls with time and temperature (consumed after release); added Met (0.1 M) does not change the ARP decay rate"
+    status: operating
+    quote: "| MG-ARP | 30 | 67.06 ± 9.02 | 86.73 ± 7.4"
+    quantity: "Met yield 52-91 % at 30 min, 32-89 % at 240 min (Table 1); initial ARP decay 0.0048-0.066 /min, pH 7.5 2.1-2.4x faster than pH 5.5"
+    evidence: fed_intermediate
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [deng2021_extraction.md]
+    where: "Table 1, Fig. 3"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "+- L-cystine 5 mM (a diamine with no thiol): ARP loss x1.45 faster but glycine release falls to 0.12-0.16; pH measured (cooled) 7.0 -> 5.05 at 20 min -> 3.55 at 120 min alone, ~1 unit less acidic with cystine"
+    status: operating
+    quote: "glycine released per ARP consumed: alone **0.40 / 0.32 / 0.29 / 0.27 / 0.25**"
+    quantity: "0.25-0.40 mol glycine per mol GX-ARP consumed (5 mM, water), far below the 0.74-0.96 of the hexose DFG pots (Nestle, Wageningen)"
+    evidence: fed_intermediate
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [hou2026_extraction.md]
+    where: "Fig. 3, sec. 3"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: other_free_aa, amine_note: "lysine (both amines xylulosylated)", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "temperature 100 / 120 / 140 C: free lysine still rising at 90 min at 100 C, falls after 30 min at 140 C (consumed after release); pH falls 2.7 units in 120 min at 120 C"
+    status: operating
+    quote: "the free lysine (4.13 mM) means at least 2 × 4.13 = 8.3 mM"
+    quantity: ">= 21 % of the 40 mM xylulosyl residues left by 60 min at 120 C while 3-DX + 1-DX stand at 0.51 mM"
+    evidence: fed_intermediate
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [zhang2025_extraction.md]
+    where: "Fig. 3, Figs. S5-S6, derived note p. 2"
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: other_free_aa, amine_note: "alanine", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "Ala-ARP 20 mM +- free Ala 20 mM (14N or 15N), initial pH 8: regenerated Ala appears from the ARP, faster with added Ala; 15N from the free Ala supplies ~55 % of pyrazine N"
+    status: operating
+    quote: "regenerated Ala released faster with added Ala"
+    quantity: "release time courses figure-only; ARP-derived (14N) share of methylpyrazine N 58-63 % (Table 1), which counts both released and never-released ARP nitrogen"
+    evidence: labelling
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [zhou2024_extraction.md]
+    where: "Table 1, Fig. 4 (qualitative statements)"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "110-130", sugar: pentose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "GX-ARP 5 mM +- cysteine 5 mM, initial pH 7.0: TTCA appears; the authors route it through the deoxyosones, the dossier through ARP reversion to xylose (Scheme 2 is 2 H short); free xylose 'not observed' (no detection limit)"
+    status: unattributed
+    quote: "The TTCA here most likely does not come from the deoxyosones"
+    quantity: "TTCA ~10 % (120 C) to ~22 % (130 C) of the 5 mM ARP in 100 min; if via reversion, a lower bound on reversion in cysteine's presence"
+    evidence: trapping
+    lab: "Jiangnan (Zhang X / Cui / Ho)"
+    dossiers: [wei2022_extraction.md]
+    where: "sec. 1 point 2 (dossier reading ~0.65)"
+
+condition_dependence: >-
+  SHOWN (amine release): heated alone, a hexose Amadori compound of a primary amino acid returns most of its amine as
+  it decomposes, in three labs and every condition tested: glycine 0.74-0.88 per DFG at 90 C, pH 5-8 held hot (Nestle),
+  71-96 % at 100-120 C, pH 6.8 (Wageningen), methionine 88 % at 100 C in phosphate (Jiangnan). Release is lower at
+  mild-acid pH (Martins pH 5.5: 26-81 %; Davidek's water series rises 0.74 -> 0.84 from pH 5 to 8), and the standing
+  yield falls with time and temperature because the released amine is consumed again (Deng, Zhang 2025). The PENTOSE
+  ARPs of the Jiangnan pots return far less: GX-ARP 0.25-0.40 glycine per ARP at 120 C (Hou), in pots whose in-situ pH
+  falls to 3.5-5; whether the gap is the sugar (pentose), the in-situ acidity, or the dilute 5 mM charge is not
+  separable (single lab, no contrast). SHOWN (reversion proper): parent aldoses are a minor channel at 90-120 C
+  (3-8 mol %, Nestle and Wageningen) but a major one at 37 C (hexoses ~20 % of fructoselysine, Baynes); phosphate raises
+  reversion at pH 5-6 (Nestle x2.5-6 at 90 C; SCUT x1.3-1.5 at 130 C) and speeds Amadori decomposition on every channel
+  (37 C x3.4 over 10-200 mM; 90 C x1.3-3.6 depending on pH; 110-130 C x1.5-3.8), with an effect that fades at pH 8
+  (Davidek). Air speeds decomposition ~4x at 37 C and diverts it to oxidative cleavage (Zyzak; chelator confound).
+  ASSUMED, not shown: the temperature dependence of reversion itself (no reverse constant is estimated anywhere); any
+  amine catalysis of release (added Met changes nothing, Deng; added Ala speeds release, Zhou 2024 qualitative).
+best_supported_regimes:
+  - "mild acid to neutral / 90-130 C / dilute / hexose ARP of a primary amino acid, water or phosphate: amine release dominant (3 labs, fed intermediate: Nestle, Wageningen, Jiangnan)"
+  - "neutral / 90-120 C / dilute / hexose ARP: reversion to parent aldoses minor, 3-8 mol % (2 labs, fed intermediate)"
+  - "neutral / 37 C / dilute / fructoselysine model: reversion operating, ~20 % of the decomposition (1 lab)"
+  - "mild acid / 90-130 C / phosphate: reversion and decomposition both accelerated by phosphate (3 labs, within-study factor)"
+unknown_regimes:
+  - "intermediate and low a_w: no fed-Amadori release or reversion measurement in any low-moisture system"
+  - "very high T (> 140 C): no fed-ARP release yield"
+  - "acid (< 4.5) held in situ: only the drifting Hou pots reach it; no held-pH release yield below 5"
+  - "alkaline (> 7.5) with release measured: only Davidek pH 8 and Zhou 2024 label pH 8"
+  - "pentose ARP reversion to free xylose: never quantified (Wei: 'not observed', no detection limit)"
+  - "protein-bound Amadori compounds at process temperature: lysine return is disputed by model structure (CF-072, see F05), no fed protein-ARP release measurement here"
+  - "O2 effect on release at process temperature: none (only 37 C)"
+  - "peptide Amadori compounds: release of the peptide vs its breakdown not measured (Cui 2022 confounded)"
+competing_families:
+  - "F06_enol12_3deoxyosone / F07_enol23_1deoxyosone: the channels that RELEASE the amine; release is their stoichiometric by-product, not a rival"
+  - "F10_retroaldol_c3_c2: the ARP retro-aldol (to MGO) also releases the amine in Martins' scheme"
+  - "F16_strecker_aldehyde and F31_melanoidins: consume the released amine, which is why standing release yields fall with time and temperature"
+  - "F01_schiff_glycosylamine / F04_thiazolidine_ttca: re-capture of the released sugar (and, in Wei 2022, possibly cysteine trapping of the reverted xylose)"
+  - "F12_alpha_oxidative_cleavage: under air at 37 C the Amadori compound's decomposition shifts to oxidative cleavage (CML) at the expense of reversion"
+engine: >-
+  Trunk (engine_family_map.yml): r_ama_tdg, r_ama_odg, r_ama_mgo (and B21's r_ama_g) each return one glycine, i.e. 100 %
+  release, with the Martins pH slope (+0.69 dec / unit about 6.8) on the three decays. That matches the hexose fed-DFG
+  data at pH 6.8 (71-96 %) and overstates release at pH 5.5 (26-81 %), but because the measured yields are net of
+  re-consumption the comparison needs the engine's own net free glycine, not its stoichiometry. Mismatches: (1) NO
+  reversion step anywhere (AMA -> Glc + Gly): fine at 90-120 C (3-8 mol %) but wrong at <= 60 C (Baynes ~20 %) and for
+  any pot where cysteine or a second amine can trap the reverted sugar (Wei 2022). (2) No phosphate term on Amadori
+  decomposition, although four labs (Nestle, Baynes, SCUT, Jiangnan) show 1.3-12x acceleration that fades at pH 8.
+  (3) Sulfur lane: the fed pentose ARP's decays (r_arp_tdp, r_arp_dpo, r_arp_decay) send the amine nitrogen to FRAG_N, i.e.
+  NO amine release, whereas the same laboratory measures 25-40 % glycine release from GX-ARP (Hou) and regenerated
+  alanine from AX-ARP (Zhou 2024 / 2025b); the disabled pentose entry (r_pama_*) carries an amine_return share (default
+  1.0), so the two pentose routes disagree with each other. (4) No O2 dependence of the Amadori decomposition at 37 C
+  (~4x), probably irrelevant at process temperature but untested there. (5) No amine catalysis of release, consistent
+  with Deng's null for added Met.
