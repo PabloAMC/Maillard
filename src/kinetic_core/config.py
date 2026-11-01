@@ -283,6 +283,9 @@ if set(_BANDS) - set(KEY_BY_NAME):
 for _key in KEYS:   # a shipped default is a value its own key accepts
     _key.validate(_key.freeze(_key.default))
 BUILD_KEYS: Tuple[str, ...] = tuple(key.name for key in KEYS if key.phase == "build")
+#: ``(module, attribute) -> key name`` for every binding: how a script that named a global finds its key
+KEY_OF_BINDING: Mapping[Tuple[str, str], str] = MappingProxyType(
+    {binding: key.name for key in KEYS for binding in key.bindings})
 
 
 def _module(name: str):
@@ -445,5 +448,5 @@ def applied(config: Config) -> Iterator[Config]:
         _restore(snapshot)
 
 
-__all__ = ["BUILD_KEYS", "BuildPhaseKeyError", "Config", "ConfigKey", "KEYS", "KEY_BY_NAME", "applied", "install",
-           "update"]
+__all__ = ["BUILD_KEYS", "BuildPhaseKeyError", "Config", "ConfigKey", "KEYS", "KEY_BY_NAME", "KEY_OF_BINDING",
+           "applied", "install", "update"]

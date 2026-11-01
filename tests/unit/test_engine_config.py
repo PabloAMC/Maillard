@@ -503,6 +503,77 @@ def test_the_joint_fits_install_through_a_config_sets_what_it_set_before(monkeyp
                     assert legacy != before
 
 
+def _captured_tasks(monkeypatch, module, jobs, rows, keys, point):
+    """The tasks a fit's ``make_raw_many`` hands to ``parallel.map_ordered`` (none is run)."""
+    captured = []
+
+    def fake_map(fn, items, *args, **kwargs):
+        captured.append((fn, list(items)))
+        return [{"failed": "not run"} for _ in captured[-1][1]]
+
+    monkeypatch.setattr(module.parallel, "map_ordered", fake_map)
+    monkeypatch.setattr(module, "FAILURES", [])
+    module.make_raw_many(jobs, keys)([point], rows)
+    (fn, tasks), = captured
+    return fn, tasks
+
+
+def test_the_fits_tasks_carry_their_config_built_in_the_caller(monkeypatch):
+    """A3 phase 2: the joint fit's and sub-model 3's tasks are ``parallel.Configured`` with the Config the legacy
+    ``run_task`` installed in a worker forked from the caller (shipped + the inline coupling + sub-model 3's routes +
+    the job's switches, the arm's statics included), and the worker function installs nothing itself. So the
+    module's statics (STRECKER_SHARE, TDP_EXIT_STATIC ...) and the coupling are read in the caller, never inherited."""
+    monkeypatch.syspath_prepend(str(ROOT / "scripts" / "generators"))
+    import fit_deoxyosone_submodel as sm3
+    import fit_joint_deoxyosone_thiol as joint
+
+    rows = [types.SimpleNamespace(table="thiol_submodel", pot=p, ledger_id="x", species="MFT") for p in ("a", "b")]
+    jobs = {f"thiol_submodel:{p}": {"pot": p, "strecker_share": 0.08} for p in ("a", "b")}
+    caller = config.Config.shipped().replace({"ph.coupling": "inline"})
+    with config.applied(caller):
+        for arm in ("B7ASST", "R3En", "E"):
+            monkeypatch.setattr(joint, "TDP_EXIT_STATIC", joint.tdp_exit_static(joint.ARMS[arm]))
+            monkeypatch.setattr(joint, "DDP_LAW_STATIC", {"law": "none"} if "ddp_law_none" in joint.ARMS[arm] else {})
+            keys, _kinds, _lo, _hi, start = joint.coordinates(False, joint.ARMS[arm])
+            fn, tasks = _captured_tasks(monkeypatch, joint, jobs, rows, keys, start)
+            assert fn is joint.run_pot and len(tasks) == 2
+            for task in tasks:
+                assert isinstance(task, parallel.Configured) and task.config["ph.coupling"] == "inline"
+                config.install(caller)
+                _legacy_joint_install(joint, task.item)
+                assert task.config == config.Config.from_globals(), arm
+                config.install(caller)
+            assert tasks[0].config["sulfur.strecker_sulfur"].h2s_share == 0.08   # the job's, not the module's
+        keys, *_rest, start = sm3.coordinates("A3")
+        sm3_jobs = {p: {"pot": p} for p in ("a", "b")}
+        fn, tasks = _captured_tasks(monkeypatch, sm3, sm3_jobs, rows, keys, start)
+        assert fn is sm3.run_pot
+        for task in tasks:
+            for name in sm3.ROUTE_KEYS:
+                setattr(ps, config.KEY_BY_NAME[name].bindings[0][1],
+                        dataclasses.replace(config.KEY_BY_NAME[name].default, enabled=True))
+            ps.NF_HYDROXIDE_DECAY = dataclasses.replace(ps.NF_HYDROXIDE_DECAY, mgo_share=task.item["mgo_share"])
+            ps.PENTOSE_MGO_ROUTES = ps.PentoseMgoRoutes(**task.item["routes"])   # the legacy sm3.install
+            assert task.config == config.Config.from_globals()
+            config.install(caller)
+    assert config.Config.from_globals() == config.Config.shipped()
+
+
+def test_the_probe_arm_config_is_what_the_command_line_set(monkeypatch):
+    monkeypatch.syspath_prepend(str(ROOT / "scripts" / "generators"))
+    import build_submodel_probe as probe
+
+    args = types.SimpleNamespace(ph_coupling="inline", trunk_solutes_in_balance=True, trunk_ph_dynamic=True,
+                                 switch_on=["TTCA_FORMATION", "NF_HYDROXIDE_DECAY"], nf_mgo_share=0.05)
+    cfg = probe.arm_config(args, config.Config.shipped())
+    assert cfg.diff() == {
+        "ph.coupling": ("fixed_point_nodes", "inline"), "ph.trunk_solutes_in_balance": (False, True),
+        "ph.trunk_terms": (False, True),
+        "sulfur.ttca_formation": (ps.TtcaFormation(), dataclasses.replace(ps.TtcaFormation(), enabled=True)),
+        "sulfur.nf_hydroxide_decay": (ps.NfHydroxideDecay(),
+                                      dataclasses.replace(ps.NfHydroxideDecay(), enabled=True, mgo_share=0.05))}
+
+
 def test_the_choice_robustness_q10_sweep_sets_every_binding(monkeypatch):
     """The bug the review found: build_choice_robustness set only parameters_lipid.Q10_ASSUMPTION, so the rate used
     the alternative while lipid.integrate_lipid reported ``q10_used`` (and the decades of extrapolation) from its own,

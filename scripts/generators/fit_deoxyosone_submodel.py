@@ -41,13 +41,15 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
         sys.path.insert(0, entry)
 
 from src import data_paths, provenance  # noqa: E402
-from src.kinetic_core import engine, fit_rows, fitting, parallel, parameters_sulfur, sulfur  # noqa: E402
+from src.kinetic_core import config, engine, fit_rows, fitting, parallel, parameters_sulfur, sulfur  # noqa: E402
 
 import build_submodel_probe as probe  # noqa: E402
 from fit_ph_acid_submodel import pooled_noise, raw_table  # noqa: E402
 
 TABLE = "deoxyosone_submodel"
-ROUTE_SWITCHES = ("TTCA_FORMATION", "CYS_AMADORI_ROUTE", "STRECKER_SULFUR", "NF_HYDROXIDE_DECAY")
+#: the four pre-registered route steps every arm runs with on (B58 TTCA, B59b, B59a, B61), as config keys
+ROUTE_KEYS = ("sulfur.ttca_formation", "sulfur.cys_amadori_route", "sulfur.strecker_sulfur",
+              "sulfur.nf_hydroxide_decay")
 HOLDOUT_POTS_SUBSTRING = "140"   # Zhai 2023 JAFC's 140 C pots (prereg sec. 5)
 HOLDOUT_LEDGER_PREFIX = "zhai2023jafc"
 FIGURE_TAU = 0.3
@@ -86,21 +88,50 @@ def trial(theta, keys) -> Dict[str, Any]:
     return {"k_ref": k_ref, "routes": routes, "mgo_share": t["mgo_share_nf"]}
 
 
-def install(job: Dict[str, Any]) -> None:
-    """The engine state and this trial's switches, set in whichever process runs the pot."""
-    for name in ROUTE_SWITCHES:
-        setattr(parameters_sulfur, name, dataclasses.replace(getattr(parameters_sulfur, name), enabled=True))
-    parameters_sulfur.NF_HYDROXIDE_DECAY = dataclasses.replace(parameters_sulfur.NF_HYDROXIDE_DECAY,
+def job_config(job: Dict[str, Any], base: config.Config) -> config.Config:
+    """The engine state a job runs in, as one Config built from ``base`` (A3 phase 2): the four route steps on,
+    B61's methylglyoxal share and the rival MGO arms from the job. It reads no process state, so the job's answer
+    does not depend on what a worker inherited; ``base`` is the caller's configuration (``ph.coupling`` from
+    ``--ph-coupling``)."""
+    changes = {key: dataclasses.replace(base[key], enabled=True) for key in ROUTE_KEYS}
+    changes["sulfur.nf_hydroxide_decay"] = dataclasses.replace(changes["sulfur.nf_hydroxide_decay"],
                                                                mgo_share=float(job["mgo_share"]))
-    parameters_sulfur.PENTOSE_MGO_ROUTES = parameters_sulfur.PentoseMgoRoutes(**job["routes"])
+    changes["sulfur.pentose_mgo_routes"] = parameters_sulfur.PentoseMgoRoutes(**job["routes"])
+    return base.replace(changes)
 
 
-def run_task(job: Dict[str, Any]):
-    install(job)
+def install(job: Dict[str, Any]) -> None:
+    """``job_config`` on this process's state, installed and left set (the direct callers' entry)."""
+    config.install(job_config(job, config.Config.from_globals()))
+
+
+def run_pot(job: Dict[str, Any]):
+    """One pot in the state already installed (by ``install``, or by ``parallel.Configured`` in the worker)."""
     try:
         return probe.run_pot_limited(job, POT_SECONDS)
     except Exception as exc:  # noqa: BLE001 - counted; its rows become failed residuals
         return {"failed": f"{type(exc).__name__}: {exc}"}
+
+
+def run_task(job: Dict[str, Any]):
+    install(job)
+    return run_pot(job)
+
+
+def configured_tasks(tasks: List[Dict[str, Any]], job_config_of) -> List["parallel.Configured"]:
+    """Every task with the Config it runs in, built in the CALLER from its state at this moment (what a forked
+    worker inherited before A3 phase 2), so a spawned or persistent worker computes the same answer."""
+    base = config.Config.from_globals()
+    return [parallel.Configured(t, job_config_of(t, base)) for t in tasks]
+
+
+def predicted_under(task: "parallel.Configured", predict):
+    """``predict()`` with the task's Config installed: an observation operator reads the pH switches (the trunk
+    solutes in the balance), so a row is predicted in the state its pot ran in. (Before A3 phase 2 the serial loop
+    predicted in the last task's state, the same for every switch an operator reads; a forked pool predicted in
+    the parent's, which left out the trunk solutes of the entry arms.)"""
+    with config.applied(task.config):
+        return predict()
 
 
 FAILURES: List[str] = []
@@ -112,17 +143,20 @@ def make_raw_many(jobs_by_pot, keys):
     def raw_many(points, rows):
         pots = sorted({r.pot for r in rows})
         trials = [trial(x, keys) for x in points]
-        results = parallel.map_ordered(run_task, [dict(jobs_by_pot[p], **tr) for tr in trials for p in pots])
+        tasks = configured_tasks([dict(jobs_by_pot[p], **tr) for tr in trials for p in pots], job_config)
+        results = parallel.map_ordered(run_pot, tasks)
         out = []
         for i, tr in enumerate(trials):
             res = dict(zip(pots, results[i * len(pots):(i + 1) * len(pots)]))
+            task = dict(zip(pots, tasks[i * len(pots):(i + 1) * len(pots)]))
             r_i = []
             for r in rows:
                 if "failed" in res[r.pot]:
                     FAILURES.append(f"{r.pot}: {res[r.pot]['failed']}")
                     r_i.append(float("nan"))
                     continue
-                predicted = probe.predict(r, dict(jobs_by_pot[r.pot], **tr), res[r.pot])
+                predicted = predicted_under(task[r.pot],
+                                            lambda: probe.predict(r, dict(jobs_by_pot[r.pot], **tr), res[r.pot]))
                 r_i.append(fit_rows.residual(r, predicted) if predicted > 0 else float("nan"))
             out.append(np.array(r_i, dtype=float))
         return out
@@ -151,7 +185,7 @@ def main(argv=None) -> int:
     parser.add_argument("--ph-coupling", choices=("fixed_point_nodes", "inline"), default="inline")
     args = parser.parse_args(argv)
     t0 = time.time()
-    sulfur.PH_COUPLING = args.ph_coupling
+    config.update({"ph.coupling": args.ph_coupling})   # the base every task's Config is built on
     pots, all_rows = fit_rows.load(TABLE)
     jobs = {j["pot"]: j for j in probe.plan(pots, all_rows) if "skip" not in j}
     predictable = set(sulfur.SULFUR_STATE_KEYS)
