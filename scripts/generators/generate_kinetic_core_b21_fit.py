@@ -39,7 +39,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
 from src import data_paths  # noqa: E402
-from src.kinetic_core import operative_parameters, trunk_conditions  # noqa: E402
+from src.kinetic_core import config, operative_parameters, trunk_conditions  # noqa: E402
 from src.kinetic_core import parameters_dicarbonyl as PD  # noqa: E402
 from src.kinetic_core.engine import b1_fitted  # noqa: E402
 from src.kinetic_core.integrate import integrate  # noqa: E402
@@ -147,9 +147,9 @@ def _install(x) -> None:
         before = dict(PD.with_aqueous_glyoxal(-30.0, -30.0))
         before["k_ama_g"] = replace(before["k_ama_g"], k_ref=0.0)
         before["k_g_go"] = PD.GLASS_K_G_GO
-        PD.AQUEOUS_GLYOXAL_PARAMETERS = before
+        config.update({"dicarbonyl.aqueous_glyoxal_parameters": before})
     else:
-        PD.AQUEOUS_GLYOXAL_PARAMETERS = PD.with_aqueous_glyoxal(float(x[0]), float(x[1]))
+        config.update({"dicarbonyl.aqueous_glyoxal_parameters": PD.with_aqueous_glyoxal(float(x[0]), float(x[1]))})
 
 
 def _pot(initial, t_c, minutes, ph, points=8):

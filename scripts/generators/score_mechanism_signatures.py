@@ -26,7 +26,7 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
         sys.path.insert(0, entry)
 
 from src import data_paths, provenance  # noqa: E402
-from src.kinetic_core import fit_rows, sulfur  # noqa: E402
+from src.kinetic_core import config, fit_rows  # noqa: E402
 
 import build_submodel_probe as probe  # noqa: E402
 import fit_joint_deoxyosone_thiol as joint  # noqa: E402
@@ -135,7 +135,7 @@ def _configure(arm: str, strecker_share: float) -> None:
     joint.DDP_LAW_STATIC = {"law": "none"} if "ddp_law_none" in joint.ARMS[arm] else {}
     joint.EA_STATIC = {"k_dpo_nf": joint.LAU_NF_EA_KJ_MOL} if "dpo_nf_lau" in joint.ARMS[arm] else {}
     joint.TDP_EXIT_STATIC = joint.tdp_exit_static(joint.ARMS[arm])   # B7a R-T (the split and B7D's k are in theta)
-    sulfur.PH_COUPLING = "inline"
+    config.update({"ph.coupling": "inline"})
 
 
 def _measured() -> Tuple[Dict[str, Any], Dict[Point, float], Dict[Tuple[str, str], Dict[str, Any]]]:

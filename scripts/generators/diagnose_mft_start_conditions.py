@@ -23,7 +23,7 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
         sys.path.insert(0, entry)
 
 from src import data_paths  # noqa: E402
-from src.kinetic_core import fit_rows, parameters_sulfur, sulfur  # noqa: E402
+from src.kinetic_core import config, fit_rows, parameters_sulfur  # noqa: E402
 
 import build_submodel_probe as probe  # noqa: E402
 import fit_joint_deoxyosone_thiol as joint  # noqa: E402
@@ -61,7 +61,7 @@ def run(job0, rows, theta, ramp, ttca):
 
 
 def main() -> int:
-    sulfur.PH_COUPLING = "inline"
+    config.update({"ph.coupling": "inline"})
     joint.DDP_LAW_STATIC = {"law": "none"}   # R3En's law
     fit = json.loads((data_paths.VALIDATION_DIR / "kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en.json").read_text())
     theta0 = dict(fit["fit"]["theta"])

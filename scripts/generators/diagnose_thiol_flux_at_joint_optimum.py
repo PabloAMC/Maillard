@@ -32,7 +32,7 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
         sys.path.insert(0, entry)
 
 from src import data_paths, provenance  # noqa: E402
-from src.kinetic_core import fit_rows, parameters_sulfur, sulfur  # noqa: E402
+from src.kinetic_core import config, fit_rows, sulfur  # noqa: E402
 
 import build_submodel_probe as probe  # noqa: E402
 import fit_joint_deoxyosone_thiol as joint  # noqa: E402
@@ -61,9 +61,9 @@ def _grid(times):
 
 def _install(job) -> None:
     """The fit's engine state for this trial: route switches, NF -> MGO share, the Strecker H2S share."""
-    joint.sm3.install(job)
-    parameters_sulfur.STRECKER_SULFUR = dataclasses.replace(parameters_sulfur.STRECKER_SULFUR,
-                                                           h2s_share=float(job["strecker_share"]))
+    cfg = joint.sm3.job_config(job, config.Config.from_globals())
+    config.install(cfg.replace({"sulfur.strecker_sulfur": dataclasses.replace(cfg["sulfur.strecker_sulfur"],
+                                                                              h2s_share=float(job["strecker_share"]))}))
 
 
 def _diagnose(job, rows) -> Dict[str, Any]:
@@ -105,7 +105,7 @@ def main(argv=None) -> int:
     keys = tuple(theta)
     trial = joint.trial([theta[k] for k in keys], keys)
     share = float(fit["strecker_share"])
-    sulfur.PH_COUPLING = "inline"
+    config.update({"ph.coupling": "inline"})
 
     out: Dict[str, Any] = {}
     loaded: Dict[str, Any] = {}

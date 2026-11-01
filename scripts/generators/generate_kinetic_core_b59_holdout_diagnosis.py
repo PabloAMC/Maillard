@@ -35,6 +35,7 @@ for p in (ROOT, ROOT / "scripts" / "generators"):
 
 import generate_kinetic_core_b64_fit as B64  # noqa: E402  (inline pH coupling, B60's objective)
 from generate_kinetic_core_b59a_fit import best_member  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
 from src.kinetic_core import ph_state, sulfur  # noqa: E402
@@ -128,9 +129,9 @@ def main(argv=None) -> int:
               "arms": {}}
     for label, path, switches in arms(args.reading):
         if "strecker" in switches:
-            ps.STRECKER_SULFUR = dataclasses.replace(saved[0], enabled=True, h2s_share=switches["strecker"])
+            config.update({"sulfur.strecker_sulfur": dataclasses.replace(saved[0], enabled=True, h2s_share=switches["strecker"])})
         if switches.get("route"):
-            ps.CYS_AMADORI_ROUTE = dataclasses.replace(saved[1], enabled=True)
+            config.update({"sulfur.cys_amadori_route": dataclasses.replace(saved[1], enabled=True)})
         try:
             member = json.loads(path.read_text())
             if "cost" not in member:  # B60's fit report (the isothermal baseline): its cost on this objective
@@ -140,7 +141,7 @@ def main(argv=None) -> int:
                                      "optimiser_status": member.get("status"), "converged": member.get("converged"),
                                      **diagnose(_vector(path), args.reading)}
         finally:
-            ps.STRECKER_SULFUR, ps.CYS_AMADORI_ROUTE = saved
+            config.update({"sulfur.strecker_sulfur": saved[0], "sulfur.cys_amadori_route": saved[1]})
         arm = report["arms"][label]
         print(args.reading, label, "cost", round(arm["cost"], 2) if arm["cost"] else None,
               "factor", round(arm["schieberle_mft_100C_6h_over_145C"], 2),

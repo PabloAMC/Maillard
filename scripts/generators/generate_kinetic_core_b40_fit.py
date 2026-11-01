@@ -21,6 +21,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src import data_paths, provenance  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src.kinetic_core import trunk_conditions as TC  # noqa: E402
 
 PREREG = data_paths.VALIDATION_DIR / "kinetic_core_b40_prereg.md"
@@ -40,8 +41,8 @@ def main(argv=None) -> int:
     ap.add_argument("--starts", type=int, default=2)
     a = ap.parse_args(argv)
     assert PREREG.exists(), "B40 is pre-registered; write the prereg before running"
-    TC.THREE_DEOXY_EXIT_PH_TERM = True          # the wave's one structural switch, for this process
-    TC.THREE_DEOXY_EXIT_PH = dict(TC.THREE_DEOXY_EXIT_PH, **TC.THREE_DEOXY_EXIT_PH_REJECTED_B40)   # B40: BOTH exits, as pre-registered
+    config.update({"trunk.three_deoxy_exit_ph_term": True,     # the wave's one structural switch, for this process
+                   "trunk.three_deoxy_exit_ph": dict(TC.THREE_DEOXY_EXIT_PH, **TC.THREE_DEOXY_EXIT_PH_REJECTED_B40)})   # B40: BOTH exits, as pre-registered
     m = _b39()
     m.build._term_set_by_wrapper = True
     t0 = time.time()

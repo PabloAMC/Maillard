@@ -30,6 +30,7 @@ for p in (ROOT, ROOT / "scripts" / "generators"):
 
 import generate_kinetic_core_b64_fit as B64  # noqa: E402
 from generate_kinetic_core_b59a_fit import best_member  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
 
@@ -39,9 +40,9 @@ PREREG = data_paths.VALIDATION_DIR / "kinetic_core_b59b_prereg.md"
 
 
 def install(strecker_share=None) -> dict:
-    ps.CYS_AMADORI_ROUTE = dataclasses.replace(ps.CYS_AMADORI_ROUTE, enabled=True)
+    config.update({"sulfur.cys_amadori_route": dataclasses.replace(ps.CYS_AMADORI_ROUTE, enabled=True)})
     if strecker_share is not None:
-        ps.STRECKER_SULFUR = dataclasses.replace(ps.STRECKER_SULFUR, enabled=True, h2s_share=float(strecker_share))
+        config.update({"sulfur.strecker_sulfur": dataclasses.replace(ps.STRECKER_SULFUR, enabled=True, h2s_share=float(strecker_share))})
     return {"cys_amadori_route": dataclasses.asdict(ps.CYS_AMADORI_ROUTE),
             "strecker_sulfur": dataclasses.asdict(ps.STRECKER_SULFUR) if strecker_share is not None else None}
 

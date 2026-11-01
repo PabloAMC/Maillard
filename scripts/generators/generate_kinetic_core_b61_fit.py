@@ -32,6 +32,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
 
 import generate_kinetic_core_b60_fit as B60  # noqa: E402  (B51's rows and physics, B60's numerics and quick setting)
 from generate_kinetic_core_b8_laplace import frozen_vector  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
 from src.kinetic_core import ph_state, sulfur  # noqa: E402
@@ -39,7 +40,7 @@ from src.kinetic_core import ph_state, sulfur  # noqa: E402
 B51, B9, B23, B8 = B60.B51, B60.B9, B60.B23, B60.B8
 
 #: Candidate (A): B60 with the B61 step on, for the whole process.
-ps.NF_HYDROXIDE_DECAY = dataclasses.replace(ps.NF_HYDROXIDE_DECAY, enabled=True)
+config.update({"sulfur.nf_hydroxide_decay": dataclasses.replace(ps.NF_HYDROXIDE_DECAY, enabled=True)})
 
 WAVE = "B61"
 MEMBER_DIR = data_paths.VALIDATION_DIR / "kinetic_core_b61_members"

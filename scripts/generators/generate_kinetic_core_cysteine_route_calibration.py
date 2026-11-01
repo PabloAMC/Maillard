@@ -32,6 +32,7 @@ for p in (ROOT, ROOT / "scripts" / "generators"):
 import generate_kinetic_core_b64_fit as B64  # noqa: E402  (inline pH coupling, B60's objective)
 import generate_kinetic_core_b59_holdout_diagnosis as HOLDOUT  # noqa: E402
 from generate_kinetic_core_b59a_fit import best_member  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import fitting  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
@@ -125,15 +126,14 @@ def installed(theta: np.ndarray, arm: str):
     """The route on with ``theta``'s constants, restored afterwards (module switches are process-global).
     The inline pH coupling is set here, not inherited from importing B64, so the calibration's
     configuration does not depend on what else was imported."""
-    saved = (ps.CYS_AMADORI_ROUTE, ps.TTCA_FORMATION, sulfur.PH_COUPLING)
-    sulfur.PH_COUPLING = "inline"
-    ps.CYS_AMADORI_ROUTE = dataclasses.replace(_ROUTE0, k_form_ref_per_min=10.0 ** theta[4], ea_form_kj_mol=theta[5],
-                                               ea_decay_kj_mol=theta[6], above_measured_ph=arm)
-    ps.TTCA_FORMATION = dataclasses.replace(_TTCA0, k_l_per_mmol=10.0 ** theta[3])
-    try:
+    trial = config.Config.from_globals().replace({
+        "ph.coupling": "inline",
+        "sulfur.cys_amadori_route": dataclasses.replace(_ROUTE0, k_form_ref_per_min=10.0 ** theta[4],
+                                                        ea_form_kj_mol=theta[5], ea_decay_kj_mol=theta[6],
+                                                        above_measured_ph=arm),
+        "sulfur.ttca_formation": dataclasses.replace(_TTCA0, k_l_per_mmol=10.0 ** theta[3])})
+    with config.applied(trial):   # every binding back afterwards, also on an exception
         yield
-    finally:
-        ps.CYS_AMADORI_ROUTE, ps.TTCA_FORMATION, sulfur.PH_COUPLING = saved
 
 
 def overridden(parameters: dict, theta: np.ndarray) -> dict:

@@ -31,6 +31,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
 
 import generate_kinetic_core_b51_fit as B51  # noqa: E402  (installs B47's rows; B51's physics on)
 from generate_kinetic_core_b8_laplace import frozen_vector  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
 from src.kinetic_core import ph_state  # noqa: E402
@@ -38,8 +39,8 @@ from src.kinetic_core import ph_state  # noqa: E402
 B9, B23, B8, B47 = B51.B9, B51.B23, B51.B8, B51.B47
 
 #: Candidate (A): B51's corrections and the B58 TTCA formation step on, for the whole process.
-ph_state.B51 = ph_state.B51_ALL_ON
-ps.TTCA_FORMATION = dataclasses.replace(ps.TTCA_FORMATION, enabled=True)
+config.update({"ph.b51": ph_state.B51_ALL_ON})
+config.update({"sulfur.ttca_formation": dataclasses.replace(ps.TTCA_FORMATION, enabled=True)})
 
 WAVE = "B58"
 MEMBER_DIR = data_paths.VALIDATION_DIR / "kinetic_core_b58_members"
