@@ -161,3 +161,4 @@
   
   Owner decisions before phase 2: items 1 and 6.
 - 03:xx next-phase plan written, premortemed (circularity, power, re-tuning compensations, A3 blocking, the owner bottleneck) and amended into STATUS_AND_PLAN. Started: the benchmark's frozen split.
+- 03:45 E4 corrected: the red team misread Leahy (14 = pyrazine; MPZ = 215, shipped 170 matches); E4 expected REFUSE -> declared band + designed experiment; the order becomes CF-077 then A3 phase 2. Both preregs committed (E6 + E11 runs after EX-056).

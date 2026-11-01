@@ -1,0 +1,613 @@
+# Canonical laboratory ids for the contrast benchmark (v1, 2026-11-01).
+#
+# Purpose: the benchmark's unit of independence is the LABORATORY (one research group), not the paper. The pathway
+# atlas (docs/reference/pathway_atlas/F*.yml) records `lab` as free text; this file maps every distinct `lab` string
+# to one canonical id. scripts/generators/build_contrast_split.py reads it and FAILS on any atlas `lab` string that is
+# not listed here, so a new spelling cannot slip into the split as a new laboratory.
+#
+# Merge rules (applied in this order; each non-obvious merge says why in `merge_note`):
+#   1. Spelling and affiliation variants of one group are one lab ("DFA Garching (Hofmann / Schieberle)" =
+#      "DFA Garching (Hofmann & Schieberle)" = "DFA Garching (Hofmann)").
+#   2. One institute's interlinked co-author groups are one lab when the same senior authors chain the papers
+#      (Nestle: Cerny & Davidek, Davidek & Blank, Roberts & Kraehenbuehl ...). Conservative: over-merging can only
+#      move cells from TEST to DEVELOPMENT and lower the independent-lab count; it can never fake independence.
+#   3. A PRINCIPAL INVESTIGATOR who moved keeps one lab when the later work reuses the earlier designs (Cerny: Nestle ->
+#      Firmenich; Hofmann: DFA -> TUM Freising). A junior author who moved does not carry the lab (Cerny's 1994 DFA
+#      paper as Grosch's student is DFA; Kerler's Quest and Nestle papers stay in their institutes).
+#   4. A paper by two groups ("X with Y", "X + Y") is the LEAD group's (the first-named / home group), and the partner
+#      is listed under `collaborations:`. A cell carries every lab id of its string: it is DEVELOPMENT if ANY of its labs
+#      is a development lab, and for the independent-lab count it belongs to its lead lab only.
+#   5. Duplicate data (docs/reference/conflicts_register.yml, kind `duplicate`): a cell whose numbers are a reprint of
+#      another lab's data also carries the ORIGINAL lab's id (`data_copies:`), so one data set never counts as two labs.
+#      Same-lab duplicates are listed for the record; they cannot inflate a lab count.
+#
+# `text_aliases`: case-sensitive regular expressions (word-bounded by the generator) that identify this lab when
+# ENGINE_VS_LITERATURE secs. 2 - 5 or one of the two cited preregs NAME it without a cell index ("Glomb", "Leahy",
+# "DFA"). Author-year citations ("Zhai 2019", "Cerny 2003") are resolved automatically through the atlas dossier stems,
+# so they need no alias here. Aliases were reviewed on 2026-11-01 against every capitalised token of the cited text;
+# the generator refuses to run if that text changes (sha256), so a new name cannot go unreviewed.
+
+version: lab_ids_v1
+date: 2026-11-01
+
+labs:
+  # ---------------------------------------------------------------- Germany / Switzerland / flavour industry
+  - id: dfa_garching
+    name: "Deutsche Forschungsanstalt fuer Lebensmittelchemie, Garching (Grosch; Schieberle; Hofmann), with Hofmann's later TUM Freising and Granvogl's TU Munich work"
+    strings:
+      - "DFA Garching (Cerny / Grosch)"
+      - "DFA Garching (Grosch / Zeiler-Hilgart)"
+      - "DFA Garching (Grosch)"
+      - "DFA Garching (Guth / Hofmann / Schieberle / Grosch)"
+      - "DFA Garching (Hofmann & Schieberle)"
+      - "DFA Garching (Hofmann / Schieberle)"
+      - "DFA Garching (Hofmann)"
+      - "DFA Garching / TU Munich (Granvogl / Schieberle)"
+      - "TUM Freising (Hofmann / Frank)"
+    text_aliases: ["DFA", "Hofmann", "Granvogl", "Grosch", "Guth", "Schieberle"]
+    merge_note: >-
+      Grosch, Schieberle and Hofmann co-author across the DFA papers (one institute, one analytical school: SIDA, the
+      same pot designs). Hofmann's TUM Freising paper (gigl2021) and Granvogl / Schieberle at TU Munich are the same
+      PIs after the DFA moved into TUM (rule 3). Cerny 1994 is Cerny's DFA work as Grosch's student: DFA, not Nestle.
+  - id: tum_weihenstephan_becker
+    name: "TU Munich, Weihenstephan, brewing technology (Becker)"
+    strings: ["TU Munich, Weihenstephan (Becker)"]
+    text_aliases: []
+    merge_note: "Not DFA: a different chair (brewing and beverage technology) and no shared author."
+  - id: nestle_rc_and_cerny_firmenich
+    name: "Nestle Research Center Lausanne flavour group (Blank, Davidek, Cerny, Roberts, Kraehenbuehl ...), with Cerny's later Firmenich work"
+    strings:
+      - "Nestle (Davidek / Blank)"
+      - "Nestle (Roberts / Charles-Bernard)"
+      - "Nestle (patent US 10,076,126)"
+      - "Nestle (patent US 8,920,862)"
+      - "Nestle Lausanne (Cerny / Davidek)"
+      - "Nestle Lausanne (Davidek / Blank)"
+      - "Nestle PTC (Poisson / Davidek / Blank / Kerler)"
+      - "Nestle Research Center Lausanne (Blank) with SCRI Dundee"
+      - "Nestle Research Center Lausanne (Cerny & Davidek)"
+      - "Nestle Research Center Lausanne (Cerny & Davidek); same lab and pot design as cerny2003, not independent"
+      - "Nestle Research Center Lausanne (Cerny & Davidek); same lab as cerny2003"
+      - "Nestle Research Center Lausanne (Cerny / Davidek)"
+      - "Nestle Research Center Lausanne (Charles-Bernard / Roberts / Kraehenbuehl)"
+      - "Nestle Research Center Lausanne (Kraehenbuehl / Davidek; patent, Nestec)"
+      - "Nestle Research Center, Lausanne (Blank)"
+      - "Nestle Research Center, Lausanne (Cerny / Davidek)"
+      - "Nestle Research Center, Lausanne (Davidek / Blank)"
+      - "Nestle Research Centre, Lausanne (Amrani-Hemaimi / Cerny / Fay)"
+      - "Firmenich (Cerny)"
+      - "Firmenich Geneva (Cerny & Briffod)"
+      - "Firmenich Geneva (Cerny / Briffod)"
+      - "Firmenich Geneva (Cerny)"
+      - "Firmenich Geneva (Cerny); same PI as the Nestle papers"
+      - "Firmenich Shanghai (Cerny)"
+    text_aliases: ["Nestle", "Cerny", "Davidek", "Firmenich"]
+    merge_note: >-
+      Rule 2: Cerny co-authors with Davidek, Davidek with Blank, Kraehenbuehl with Davidek; the patents are the same
+      group's (Nestec). Rule 3: Cerny's Firmenich papers (2007, 2007b, 2008, 2021) re-run his Nestle labelling designs
+      (CAMOLA, 0.5 M phosphate, the same pentose + Cys pots); the atlas itself marks cerny2007b "same PI as the Nestle
+      papers". Kerler (last author on Poisson 2009 and on van Seeventer 2001 at Quest) does NOT merge Quest into Nestle:
+      different topics and designs (rule 3, junior / mobile author).
+  - id: givaudan_de_roos
+    name: "Givaudan Barneveld (de Roos)"
+    strings:
+      - "Givaudan Barneveld (de Roos; data Laarhoven, unpublished)"
+      - "de Roos (Givaudan)"
+    text_aliases: ["Givaudan", "de Roos"]
+  - id: quest_international
+    name: "Quest International, Naarden / Bussum (Weenen; van Seeventer / Winkel / Kerler)"
+    strings:
+      - "Quest International (Weenen / Tjan)"
+      - "Quest International (Weenen)"
+      - "Quest International Naarden (van Seeventer / Winkel / Kerler)"
+      - "Quest International, Bussum (Weenen)"
+    text_aliases: ["Quest"]
+    merge_note: "One company R&D site (Naarden and Bussum are the same Quest flavour research); conservative merge."
+  - id: munster_eichner
+    name: "Universitat Munster (Eichner)"
+    strings: ["Universitat Munster (Eichner)"]
+    text_aliases: []
+  - id: ledl_severin_school
+    name: "Ledl / Severin school (Munich, Stuttgart)"
+    strings:
+      - "Ledl / Severin school, Munich"
+      - "Ledl / Severin school, Stuttgart"
+      - "Ledl / Severin school, Stuttgart (not independent of Beck 1988)"
+      - "Ledl / Severin school, Stuttgart (same school as Beck 1988: not independent)"
+      - "Ledl, Universitat Stuttgart"
+      - "Stuttgart (Ledl)"
+    text_aliases: ["Ledl"]
+    merge_note: "The atlas itself marks Nedvidek 1992 'not independent of Beck 1988': one school across the move."
+  - id: glomb_halle
+    name: "Martin-Luther-University Halle-Wittenberg (Glomb)"
+    strings:
+      - "Glomb, Halle"
+      - "Glomb, Martin-Luther-University Halle-Wittenberg"
+    text_aliases: ["Glomb"]
+  - id: tu_berlin_kroh
+    name: "TU Berlin, food chemistry (Kroh)"
+    strings:
+      - "Kroh, TU Berlin"
+      - "TU Berlin (Kroh)"
+    text_aliases: ["Kroh"]
+  - id: bam_berlin_hornemann
+    name: "BAM Berlin (Hornemann / Kanzler)"
+    strings: ["TU Berlin / BAM (Kanzler)"]
+    text_aliases: ["BAM"]
+    merge_note: >-
+      Kept apart from Kroh: Mohsin 2018 is a BAM materials-analysis paper (Hornemann senior; Kanzler a Kroh alumnus,
+      not the PI; Kroh not an author). Both labs are development labs in v1, so the choice moves nothing.
+
+  # ---------------------------------------------------------------- UK
+  - id: reading_mottram_parker
+    name: "University of Reading Maillard / flavour groups (Mottram; Parker; Elmore; Ames), incl. AFRC Bristol / Belfast / Food Science Australia collaborators"
+    strings:
+      - "Univ. Reading / Dijon (Ames)"
+      - "University of Reading (Ames)"
+      - "AFRC Bristol / Reading (Farmer / Mottram)"
+      - "AFRC Bristol / Reading (Whitfield / Mottram)"
+      - "Belfast / Reading (Farmer / Mottram)"
+      - "Reading (Adams / Mottram / Parker) with CCFRA"
+      - "Reading (Elmore / Balagiannis)"
+      - "Reading (Elmore / Mottram) with Bristol"
+      - "Reading (Meynier & Mottram)"
+      - "Reading (Mottram & Nobrega)"
+      - "Reading (Mottram / Elmore) with Bristol"
+      - "Reading (Mottram / Nobrega / Dodson / Elmore)"
+      - "Reading (Mottram / Parker)"
+      - "Reading (Mottram / Szauman-Szumski / Dodson)"
+      - "Reading (Mottram)"
+      - "Reading (Mottram) + Quest"
+      - "Reading (Mottram) with Food Science Australia (Whitfield)"
+      - "Reading (Parker / Kocadagli)"
+      - "Reading (Parker; Piornos / Balagiannis)"
+      - "Reading (Whitfield / Mottram)"
+      - "Reading / Hacettepe (Parker / Gokmen)"
+      - "University of Reading (Elmore / Mottram)"
+      - "University of Reading (Low / Parker / Mottram)"
+      - "University of Reading (Meynier / Mottram)"
+      - "University of Reading (Parker / Mottram) with Leeds (Wedzicha)"
+      - "University of Reading / Bristol (Elmore / Mottram)"
+      - "University of Reading / Food Science Australia (Whitfield / Mottram)"
+    text_aliases: ["Reading", "Mottram", "Meynier", "Whitfield", "Yiltirak", "Elmore", "Ames"]
+    merge_note: >-
+      Parker and Elmore are Mottram's group and its successors (same flavour lab, same SDE / GC-MS pots). Farmer (AFRC
+      Bristol, Belfast) and Whitfield (Food Science Australia, a former Reading postdoc) publish these pots with Mottram
+      as senior author: rule 4, lead lab Reading. J. M. Ames ran her own Maillard group in the same department, but
+      Hincelin, Ames, Apriyantono & Elmore 1992 is co-authored by Elmore (Mottram's group), so by rule 2 the Ames papers
+      (hincelin1992, mandin1999, martin2001) chain into this lab. DECISIVE: kept apart, Ames would have been a TEST lab
+      and given E3 and E18 their second held-out lab (README sec. 5, sensitivity).
+  - id: leeds_wedzicha
+    name: "University of Leeds (Wedzicha)"
+    strings: ["Leeds (Wedzicha)"]
+    text_aliases: ["Leeds", "Wedzicha"]
+  - id: essex_thornalley
+    name: "University of Essex (Thornalley)"
+    strings:
+      - "Essex (Thornalley)"
+      - "Thornalley, Essex"
+    text_aliases: ["Thornalley"]
+
+  # ---------------------------------------------------------------- Netherlands / Belgium / France / Iberia / Nordic
+  - id: wageningen_fqd
+    name: "Wageningen Food Quality & Design (van Boekel: Martins, Brands, Knol; later Fogliano, Hettinga), with RIKILT"
+    strings:
+      - "RIKILT + Wageningen FQD (van der Fels-Klerx / van Boekel)"
+      - "RIKILT + Wageningen FQD (van der Fels-Klerx / van Boekel; the Brands network's descendant, same lab family)"
+      - "Wageningen (Brands / van Boekel)"
+      - "Wageningen (Knol / van Boekel)"
+      - "Wageningen (Martins / van Boekel)"
+      - "Wageningen (van Boekel / Knol)"
+      - "Wageningen (van Boekel / Martins)"
+      - "Wageningen / Leeds (van Boekel / Wedzicha)"
+      - "Wageningen FQD (Brands / van Boekel)"
+      - "Wageningen FQD (Tang / Hettinga)"
+      - "Wageningen FQD (Troise / Fogliano) + Napoli"
+    text_aliases: ["Wageningen", "Martins", "Brands", "van Boekel"]
+    merge_note: >-
+      One chair group (FQD). Fogliano succeeded van Boekel as chair; Hettinga is FQD staff. Merging them is
+      conservative (rule 2): it costs the TEST set the Troise 2015 and Tang 2019 cells, and keeps the WUR blind-test
+      laboratory (Fogliano) out of the held-out lab count, which it should be anyway as a declared blind test.
+  - id: ghent_de_kimpe
+    name: "Ghent University (De Kimpe; De Meulenaer)"
+    strings:
+      - "Ghent (De Kimpe / De Meulenaer)"
+      - "Ghent (De Kimpe)"
+      - "Ghent (De Kimpe) with Wageningen (van Boekel)"
+    text_aliases: ["Ghent"]
+    merge_note: "De Meulenaer co-authors with De Kimpe (Scalone 2015): one Ghent group."
+  - id: leuven_hendrickx
+    name: "KU Leuven (Hendrickx)"
+    strings: ["Leuven (Hendrickx)"]
+    text_aliases: ["Leuven"]
+  - id: unilever_vlaardingen
+    name: "Unilever Vlaardingen (Potman & van Wijk)"
+    strings: ["Unilever Vlaardingen (Potman & van Wijk)"]
+    text_aliases: []
+  - id: winterswijk_hospital
+    name: "Winterswijk hospital (Weykamp & Penders)"
+    strings: ["Winterswijk hospital (Weykamp & Penders)"]
+    text_aliases: ["Winterswijk"]
+  - id: inra_clermont_berdague
+    name: "INRA Clermont / IFIP (Berdague)"
+    strings: ["INRA Clermont / IFIP (Berdague)"]
+    text_aliases: []
+  - id: inra_nantes_genot
+    name: "INRA Nantes (Genot)"
+    strings: ["INRA Nantes (Genot)"]
+    text_aliases: []
+    merge_note: >-
+      Meynier 2004's first author is the Anne Meynier of Meynier & Mottram 1995 (Reading), but here she is a junior
+      author in Genot's INRA group on a different system (enals + whey protein): rule 3, not merged into Reading.
+  - id: sayfood_paris_saclay
+    name: "SayFood, Paris-Saclay (Lee / Roux / Bonazzi)"
+    strings: ["SayFood, Paris-Saclay (Lee / Roux / Bonazzi)"]
+    text_aliases: []
+  - id: bordeaux_oenologie
+    name: "Faculte d'Oenologie, Bordeaux (de Revel / Maujean)"
+    strings: ["Faculte d'Oenologie, Bordeaux (de Revel / Maujean)"]
+    text_aliases: []
+  - id: seville_hidalgo_zamora
+    name: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+    strings:
+      - "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
+      - "Instituto de la Grasa, Seville (Zamora / Hidalgo)"
+      - "Seville (Hidalgo / Zamora)"
+      - "Seville (Zamora / Hidalgo)"
+    text_aliases: ["Seville"]
+  - id: granada_garcia_villanova
+    name: "University of Granada (Ramirez-Jimenez / Garcia-Villanova)"
+    strings: ["Granada (Ramirez-Jimenez / Garcia-Villanova)"]
+    text_aliases: []
+  - id: porto_silva_ferreira
+    name: "Universidade Catolica Portuguesa, Porto (Silva Ferreira)"
+    strings: ["Universidade Catolica Portuguesa, Porto (Silva Ferreira)"]
+    text_aliases: ["Porto"]
+  - id: copenhagen_lund
+    name: "University of Copenhagen (Lund), with Arla Foods Ingredients"
+    strings:
+      - "Copenhagen (Lund) / Arla Foods Ingredients"
+      - "Univ. Copenhagen (Lund)"
+    text_aliases: ["Copenhagen"]
+  - id: stockholm_tornqvist_ehrenberg
+    name: "Stockholm University, environmental chemistry (Ehrenberg; Tornqvist)"
+    strings:
+      - "Stockholm (Tornqvist / Rydberg)"
+      - "Stockholm University (Ehrenberg / Harms-Ringdahl)"
+    text_aliases: ["Stockholm"]
+    merge_note: "Tornqvist trained in and succeeded Ehrenberg's group (same department): conservative merge."
+  - id: karolinska_ehrsson
+    name: "Karolinska Institutet, pharmaceutics (Elfsson / Ehrsson)"
+    strings: ["Karolinska (Elfsson / Ehrsson), pharmaceutics"]
+    text_aliases: ["Karolinska"]
+  - id: graz_esterbauer
+    name: "University of Graz (Esterbauer)"
+    strings: ["Graz (Esterbauer)"]
+    text_aliases: []
+  - id: ict_prague_velisek
+    name: "ICT Prague (Novotny / Velisek)"
+    strings: ["ICT Prague (Novotny / Velisek)"]
+    text_aliases: []
+  - id: hacettepe_gokmen
+    name: "Hacettepe University FoQuS (Gokmen)"
+    strings:
+      - "Hacettepe (Goekmen)"
+      - "Hacettepe (Goekmen; Goncuoglu Tas)"
+      - "Hacettepe (Gokmen)"
+      - "Hacettepe (Kocadagli / Gokmen)"
+      - "Hacettepe FoQuS (Berk / Gokmen)"
+      - "Hacettepe FoQuS (Hamzalioglu / Gokmen)"
+      - "Hacettepe FoQuS (Sen / Gokmen)"
+    text_aliases: ["Hacettepe", "Gokmen"]
+
+  # ---------------------------------------------------------------- North America
+  - id: ho_network
+    name: "Ho network: Rutgers (Ho) and Jiangnan (Zhang Xiaoming / Cui, with Ho), incl. Zhai at Zhejiang Gongshang and Shu at IFF"
+    strings:
+      - "Ho network (Jiangnan / Rutgers)"
+      - "Ho network (Rutgers: Hwang / Hartman / Ho)"
+      - "Ho network (Rutgers: Kim / Hartman / Ho)"
+      - "Ho network (Rutgers: Kim / Ho)"
+      - "Ho network (Rutgers: Zhang / Ho)"
+      - "IFF / Rutgers (Shu / Ho)"
+      - "Jiangnan (Zhang X / Cui / Ho)"
+      - "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+      - "Jiangnan (Zhou / Zhang / Ho)"
+      - "Jiangnan Univ. (Zhang / Cui)"
+      - "Jiangnan Univ. (Zhang / Cui, with Ho)"
+      - "Jiangnan University (Zhang Xiaoming / Cui) with Rutgers (Ho)"
+      - "Jiangnan University Wuxi (Zhang X.) with Rutgers (Ho)"
+      - "Rutgers (Ho)"
+      - "Zhang / Cui / Ho (Jiangnan)"
+      - "Zhejiang Gongshang / Jiangnan (Zhai / Zhang)"
+    text_aliases: ["Jiangnan", "Hou", "Zhai", "Rutgers(?! Ge)"]
+    merge_note: >-
+      The atlas already labels Jiangnan + Rutgers one "Ho network": Ho co-authors the Jiangnan Zhang / Cui papers
+      (2019 - 2026). The 1980s - 90s Rutgers Ho papers join through Ho himself (conservative; it merges two decades).
+      Zhai (Zhejiang Gongshang) is Zhang Xiaoming's former student publishing the same TTCA designs. Shu (IFF) is a
+      Ho collaborator paper with Ho senior. "Hou, Jiangnan" in sec. 2.1 is hou2026 (this lab); hou2017 is BTBU (Xie).
+  - id: rutgers_ge_lee
+    name: "Rutgers food science (Ge & Lee)"
+    strings: ["Rutgers (Ge & Lee)"]
+    text_aliases: ["Rutgers Ge", "Ge & Lee"]
+    merge_note: "Not Ho: T.-C. Lee's group, no shared author with the Ho papers."
+  - id: minnesota_reineccius
+    name: "University of Minnesota (Reineccius)"
+    strings:
+      - "Minnesota (Reineccius)"
+      - "Reineccius, University of Minnesota (Leahy / Reineccius)"
+      - "Univ. Minnesota / Nestle Lausanne (Reineccius / Liardon)"
+      - "University of Minnesota (Anantharamkrishnan / Hoye / Reineccius)"
+      - "University of Minnesota (Reineccius)"
+    text_aliases: ["Minnesota", "Leahy", "Reineccius"]
+    merge_note: "Every bare 'Minnesota' in the cited text is Reineccius's (F15-b: schirle1992), not Labuza's."
+  - id: minnesota_labuza
+    name: "University of Minnesota (Labuza)"
+    strings: ["Minnesota (Warmbier / Labuza)"]
+    text_aliases: ["Labuza"]
+  - id: kentucky_boatright
+    name: "University of Kentucky (Boatright)"
+    strings:
+      - "Kentucky (Boatright)"
+      - "University of Kentucky (Zhou / Boatright)"
+    text_aliases: ["Boatright", "Kentucky"]
+  - id: nebraska_lincoln_arnold
+    name: "University of Nebraska (Dwivedi / Arnold)"
+    strings: ["Univ. Nebraska (Dwivedi / Arnold)"]
+    text_aliases: ["Nebraska(?! Omaha)"]
+  - id: nebraska_omaha_stack
+    name: "University of Nebraska Omaha (Stack)"
+    strings: ["University of Nebraska Omaha (Stack)"]
+    text_aliases: ["Nebraska Omaha"]
+    merge_note: "A different campus and PI from Dwivedi / Arnold (Lincoln)."
+  - id: missouri_feather
+    name: "University of Missouri, Columbia (Feather)"
+    strings: ["University of Missouri, Columbia (Feather)"]
+    text_aliases: ["Missouri", "Feather"]
+  - id: baynes_south_carolina
+    name: "University of South Carolina (Baynes)"
+    strings:
+      - "Baynes (USC; Zyzak)"
+      - "Baynes, South Carolina"
+      - "USC (Zyzak / Baynes)"
+    text_aliases: ["Baynes"]
+  - id: fife_southern_california
+    name: "University of Southern California (Fife)"
+    strings: ["Fife (USC)"]
+    text_aliases: ["Fife"]
+    merge_note: >-
+      NOT Baynes: "USC" here is the University of Southern California (T. H. Fife, physical organic chemistry), while
+      Baynes's "USC" is the University of South Carolina.
+  - id: auburn_bell
+    name: "Auburn University (Bell)"
+    strings: ["Auburn (Bell)"]
+    text_aliases: ["Auburn"]
+  - id: rizzi_miami
+    name: "Miami University (Rizzi), with Cincinnati (Heineman)"
+    strings:
+      - "Rizzi (Miami University)"
+      - "Rizzi (Miami University) / Heineman (Cincinnati)"
+    text_aliases: ["Rizzi"]
+  - id: kallen_pennsylvania
+    name: "University of Pennsylvania (Kallen)"
+    strings: ["Kallen (U. Pennsylvania)"]
+    text_aliases: ["Kallen"]
+  - id: mcgill_yaylayan
+    name: "McGill University (Yaylayan)"
+    strings: ["McGill (Yaylayan)"]
+    text_aliases: []
+  - id: ucdavis_shibamoto
+    name: "UC Davis (Shibamoto / Bernhard)"
+    strings: ["UC Davis (Shibamoto / Bernhard)"]
+    text_aliases: []
+  - id: colorado_doorn_petersen
+    name: "University of Colorado (Doorn / Petersen)"
+    strings: ["Colorado (Doorn / Petersen)"]
+    text_aliases: []
+  - id: iowa_state_schmidt_rohr
+    name: "Iowa State University (Schmidt-Rohr)"
+    strings: ["Iowa State (Schmidt-Rohr)"]
+    text_aliases: []
+  - id: de_haan_san_diego
+    name: "University of San Diego (De Haan), with Boulder"
+    strings:
+      - "De Haan, University of San Diego"
+      - "De Haan, University of San Diego (with Tolbert / Jimenez, Boulder)"
+    text_aliases: []
+  - id: florida_garrett
+    name: "University of Florida (Garrett)"
+    strings: ["Garrett (University of Florida)"]
+    text_aliases: []
+  - id: northern_illinois_pesek_frost
+    name: "Northern Illinois University (Pesek & Frost)"
+    strings: ["Pesek & Frost (Northern Illinois)"]
+    text_aliases: []
+  - id: rockefeller_schubert
+    name: "Rockefeller Institute (Schubert)"
+    strings: ["Schubert (Rockefeller Institute)"]
+    text_aliases: []
+  - id: buenos_aires_malec
+    name: "Universidad de Buenos Aires FCEN (Pereyra Gonzales / Malec)"
+    strings: ["Buenos Aires FCEN (Pereyra Gonzales / Malec)"]
+    text_aliases: []
+  - id: hebrew_university_naim
+    name: "Hebrew University of Jerusalem (Naim)"
+    strings: ["Hebrew University (Naim)"]
+    text_aliases: []
+
+  # ---------------------------------------------------------------- China / East Asia
+  - id: btbu_beijing
+    name: "Beijing Technology and Business University (Sun Baoguo; Song Huanlu; Xie Jianchun ...)"
+    strings:
+      - "BTBU Beijing (Sun / Song)"
+      - "BTBU Beijing (Sun Baoguo) with CAAS and Clemson"
+      - "BTBU Beijing (Wang / Xie / Zhang / Xu)"
+      - "BTBU Beijing (Zhang / Kuang / Wang / Cao)"
+      - "Beijing Technology and Business Univ. (Song)"
+      - "Xie (BTBU)"
+    text_aliases: ["BTBU", "Cao", "Xie"]
+    merge_note: >-
+      One flavour school with Sun Baoguo as the senior figure; Song, Xie and Zhang groups share students, reaction
+      pots and the CAMOLA labelling design (rule 2, conservative). "Cao's K band" (sec. 3, E10) is Cao 2017, a Xie paper.
+  - id: caas_beijing
+    name: "Chinese Academy of Agricultural Sciences, Institute of Food Science and Technology (Zhang Dequan; Wang Fengzhong / Fan)"
+    strings:
+      - "Beijing (Liu et al., LWT 2023)"
+      - "CAAS Beijing (Du / Wang)"
+      - "CAAS Beijing (Fan / Wang Fengzhong)"
+      - "CAAS Beijing (Fan / Wang Fengzhong); same institute as liu2023b, count as possibly one group"
+      - "CAAS Beijing (Wang / Fan)"
+      - "CAAS Beijing (Zhang Dequan group)"
+      - "Du et al. 2023 (affiliation not recorded in the dossier)"
+    text_aliases: ["CAAS"]
+    merge_note: >-
+      The atlas says du2023 is "same institute as liu2023b, count as possibly one group": merged (rule 2). The
+      affiliation-less strings are the same dossiers' other cells (liu2023b, du2023), which the atlas places at CAAS.
+  - id: jiangnan_chen_zeng
+    name: "Jiangnan University (Chen / Zeng)"
+    strings: ["Jiangnan University (Chen / Zeng)"]
+    text_aliases: []
+    merge_note: "Not the Ho network: a different Jiangnan group (quan2020), no shared author."
+  - id: huazhong_pan
+    name: "Huazhong Agricultural University, Wuhan (Pan)"
+    strings:
+      - "Huazhong Agricultural University (Pan)"
+      - "Huazhong Agricultural University Wuhan (Xu / Pan)"
+    text_aliases: ["Huazhong"]
+  - id: scut_guan_yu
+    name: "South China University of Technology (Guan / Yu)"
+    strings: ["South China University of Technology (Guan / Yu)"]
+    text_aliases: ["SCUT"]
+  - id: ma_liu_group
+    name: "Ma / Fu / Cheng / Liu (affiliation not in the dossier header)"
+    strings: ["Ma / Liu group (affiliation not in dossier header)"]
+    text_aliases: []
+  - id: nus_zhou_weibiao
+    name: "National University of Singapore (Zhou Weibiao)"
+    strings: ["NUS (Zhou Weibiao)"]
+    text_aliases: []
+  - id: hokkaido_obata_mizutani
+    name: "Hokkaido University (Obata / Mizutani)"
+    strings:
+      - "Hokkaido (Mizutani / Obata)"
+      - "Hokkaido Univ. (Obata / Mizutani)"
+      - "Mizutani / Obata (Hokkaido)"
+    text_aliases: ["Hokkaido"]
+  - id: tokyo_kobayasi_fujimaki
+    name: "University of Tokyo (Kobayasi / Fujimaki)"
+    strings:
+      - "Univ. Tokyo (Kobayasi / Fujimaki)"
+      - "University of Tokyo (Kobayasi / Fujimaki)"
+    text_aliases: ["Tokyo"]
+  - id: tohoku_arai
+    name: "Tohoku University (Arai / Adschiri)"
+    strings:
+      - "Tohoku (Adschiri / Arai)"
+      - "Tohoku (Arai)"
+    text_aliases: ["Tohoku"]
+  - id: nagoya_namiki
+    name: "Nagoya University (Hayashi / Namiki)"
+    strings: ["Nagoya (Hayashi / Namiki)"]
+    text_aliases: ["Namiki"]
+    merge_note: >-
+      Sec. 2.1 row F09-a ("Namiki C2 only in ethanol") names the route after this lab and rests on its cells; counted
+      as a citation of the lab (conservative).
+  - id: ochanomizu_murata
+    name: "Ochanomizu University (Murata)"
+    strings: ["Ochanomizu (Murata)"]
+    text_aliases: ["Ochanomizu", "Mikami", "Murata"]
+  - id: ogawa_chiba
+    name: "Ogawa & Co., Chiba (Kumazawa / Masuda)"
+    strings: ["Ogawa & Co., Chiba (Kumazawa / Masuda)"]
+    text_aliases: []
+  - id: korea_kim_yun_park
+    name: "Kim / Yun / Park (Korea)"
+    strings: ["Kim / Yun / Park (Korea)"]
+    text_aliases: []
+
+# A cell whose `lab` string names two groups also carries the partner (rule 4).
+collaborations:
+  "Reading (Mottram) + Quest": [quest_international]
+  "Reading / Hacettepe (Parker / Gokmen)": [hacettepe_gokmen]
+  "University of Reading (Parker / Mottram) with Leeds (Wedzicha)": [leeds_wedzicha]
+  "Wageningen / Leeds (van Boekel / Wedzicha)": [leeds_wedzicha]
+  "Ghent (De Kimpe) with Wageningen (van Boekel)": [wageningen_fqd]
+  "BTBU Beijing (Sun Baoguo) with CAAS and Clemson": [caas_beijing]
+  "Univ. Minnesota / Nestle Lausanne (Reineccius / Liardon)": [nestle_rc_and_cerny_firmenich]
+
+# Duplicate data from docs/reference/conflicts_register.yml (kind `duplicate`) that touch atlas cells (rule 5).
+# `adds_lab` is set only when the copy and the original are different labs: then every listed cell also carries the
+# original's lab. Same-lab entries are recorded so that a reader sees they were checked; they cannot inflate a count.
+data_copies:
+  - register: CF-018
+    copy: cammerer1994
+    original: wedzicha1992
+    same_lab: false
+    adds_lab: leeds_wedzicha
+    cells: ["F31#6"]
+    note: >-
+      Cammerer's Table 3 90 C row reprints Wedzicha 1992 Table 5 (1.0 : 1.0 row; Cammerer prints pH 5 for 5.5;
+      DUPLICATE_CONFIRMED, P 0.97). F31#6's water arm therefore holds Leeds data, so the cell carries Leeds as well as
+      TU Berlin and its contrast is not a clean within-lab pair.
+  - register: CF-005
+    copy: kang2026_SI
+    original: zhai2023foodchem
+    same_lab: true
+    cells: ["F04#12", "F04#14", "F04#25"]
+    note: "Ho network both sides. F04#14 states it is a copy of Zhai 2021 Fig. 6 and is counted once there."
+  - register: CF-066
+    copy: zhai2023jafc
+    original: zhai2021
+    same_lab: true
+    cells: ["F04#15", "F25#5", "F26#20"]
+    note: "Ho network both sides; the ledgers count the shared arms once (CF-066 remedy)."
+  - register: CF-006
+    copy: schieberle1998
+    original: hofmann1998_reconciliation
+    same_lab: true
+    cells: ["F25#11", "F26#15", "F26#16"]
+    note: "DFA both sides: Table IV's aqueous 145 C column reprints Hofmann 1998 T1; the dry 180 C arm is new."
+  - register: CF-006
+    copy: hofmann2002
+    original: hofmann2001
+    same_lab: true
+    cells: ["F28#14", "F28#15", "F31#11"]
+    note: "DFA both sides; these cells already cite both papers as one source."
+  - register: CF-007
+    copy: cerny2007
+    original: cerny2007b
+    same_lab: true
+    cells: ["F27#0", "F27#3"]
+    note: >-
+      Cerny 2007 Table 5 column A = Cerny 2007b's ternary pot. F27#0 cites both as one datum; F27#3's 2x-loading arm is
+      that same pot, so F27#3 and F27#0 share an arm (one lab either way).
+  - register: CF-008
+    copy: zhang1991b
+    original: zhang1988
+    same_lab: true
+    cells: ["F22#14", "F27#22"]
+    note: "Ho network (Rutgers) both sides; the cells cite both papers as one source."
+  - register: CF-019
+    copy: leahy1989a
+    original: leahy1989
+    same_lab: true
+    cells: ["F19#8"]
+    note: "Reineccius both sides: leahy1989a's pH 9 rows are leahy1989 Table I; F19#8 cites both."
+  - register: CF-019
+    copy: nakamura2020
+    original: mikami2017
+    same_lab: true
+    cells: ["F13#9", "F15#8"]
+    note: "Not a reprint: a same-lab replicate (Ochanomizu); one laboratory, never two."
+  - register: CF-040
+    copy: devleeschouwer2009b
+    original: devleeschouwer2008
+    same_lab: true
+    cells: ["F29#9"]
+    note: "Leuven both sides: 2009b's glucose rows are 2008's a_w 0.92 column (F29#9's reference arm)."
+  - register: CF-070
+    copy: hofmann2000
+    original: hofmann2000b
+    same_lab: true
+    cells: ["F16#0", "F16#1", "F16#2", "F16#3", "F16#4", "F17#0", "F17#1", "F17#2", "F17#3", "F17#4", "F17#5"]
+    note: "DFA both sides; only the Phe rows of Hofmann 2000 Table 3 are copies. No atlas cell is a pure copy."
