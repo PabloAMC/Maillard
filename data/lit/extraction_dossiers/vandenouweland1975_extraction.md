@@ -43,6 +43,17 @@ sub-route; E6).
    gives MFT [Z]), and the paper has often been cited as an MFT source. The MS (m/e 114 100, 113 50, 85 60, 71 45)
    gives [M-H]+/M+ 0.50, against 0.28 for MFT's NIST EI spectrum (the value used in CF-086): mild evidence against
    MFT [Z], instrument-dependent.
+   **Added 2026-11-01 (resolve2_sulfur and its red team; CF-092). P ~0.3 is kept.** Two further readings: (i) the
+   paper's own **Fig. 4** (p. 505) POSTULATES the NF -> MFT pathway (H2S replaces the enol OH next to the methyl ->
+   4-mercapto-5-methyl-3(2H)-furanone -> reduction / dehydration -> 2-methyl-3-furanthiol and its dihydro /
+   tetrahydro forms), the pathway Hofmann 1998 Fig. 1 prints; peak 3's 4-SH assignment contradicts the paper's own
+   mechanism. So the paper is a legitimate citation for the PROPOSED NF -> MFT pathway, not for MFT IDENTIFIED. (ii)
+   Hofmann & Schieberle 1998 (intro) state that van den Ouweland and Peer were unable to identify MFT; Whitfield &
+   Mottram 1999 attribute MFT to them twice (intro and discussion). Against "peak 3 is MFT": four later labs make MFT
+   from NF and none reports 2-methyl-4-furanthiol. For it: Fig. 4's regiochemistry; peak 3's IR lists no S-H band
+   (~2550), unlike peaks 7, 8 and 10, a small flag on the identification as a whole. Not a misnaming in the print
+   (P <= 0.05). Unknown: whether peak 3's reference compound was synthesised by a route that fixes the
+   regiochemistry (not printed).
 2. **No rate, no yield, no share**: nothing here bounds `k_nf_mft` or the free-NF share (E6). The paper is a
    qualitative licence that NF + H2S, without any amine, reaches the 2-methyl-3-thio skeleton (as dihydrofuran and
    thiophene), at a 100x H2S excess.

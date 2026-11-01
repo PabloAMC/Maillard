@@ -555,3 +555,9 @@ volatiles is a categorical row and is the cleanest thing in the paper.
     Unsubstituted pyrazine is the notable omission: it is the parent of a keyed class, it is one of
     the two compounds whose deuterated analogue is an internal standard here, and it is one of the
     five markers that carry this paper's nitrogen result.
+14. **The MPZ x10 and the pairing bounds (added 2026-11-01, resolve2_pyrbuf Q3 as corrected by its red team;
+    CF-097).** R RATIOS within a pot (time or temperature contrasts) are independent of the MPZ x10; only levels need
+    the dual reading. At face value R = MPZ^2 / (PZ x DMP) is 15-26: that violates only P0's R <= 4, since under P1x
+    R = 4 r^2 has no upper bound (r ~2-2.5). With MPZ / 10, R is 0.15-0.26, below CF-087's floor R >= 0.4. So the
+    x10 decides whether ANY pairing bound beyond P0 fails. These rows are keyed held-out (`heldout_lee2024_fig2.yml`),
+    not in a frozen split.

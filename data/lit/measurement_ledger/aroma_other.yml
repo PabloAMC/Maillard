@@ -2663,8 +2663,62 @@ entries:
     quant_class: calibrated
     simulable: false
     condition_quote: ""
-    flags: [matrix_food, low_moisture_no_aw_term, "condition_not_stated: lag-corrected equivalent time; moisture content", secondary_source, internal_inconsistency]
-    note: "The plateau: one 125 C / 2 min pass loses ~48 % available lysine (9.6 -> 5.0 mg/g; first-pass pseudo-first-order >= 0.33 min-1, a bound), a second pass at a_w 0.65 loses none (n.s.) with glucose still in ~3x excess; heat without sugar gives no protection. The engine has no no-loss phase (it would remove another ~40-50 %). Table 1 row 5 is from Wolf 1977a (secondary_source); sugar-free 'loss' 9.6 -> 7.5 is read as noise. Rate constants are in Wolf 1977a / 1978 (not on disk). arms: one vs two passes; sugar before vs after the first pass; shear vs pressure vs neither (same lab, same FDNB assay)."
+    flags: [matrix_food, low_moisture_no_aw_term, "condition_not_stated: lag-corrected equivalent time; moisture content", "secondary_source_misattributed: Table 1 row 5 (125 C / 2 min, 5.0 +- 0.7) is footnoted Wolf et al. (1977a) in this paper, but 1977a prints no such value (probably 1977b)", internal_inconsistency]
+    note: "The plateau: one 125 C / 2 min pass loses ~48 % available lysine (9.6 -> 5.0 mg/g; first-pass pseudo-first-order >= 0.33 min-1, a bound), a second pass at a_w 0.65 loses none (n.s.) with glucose still in ~3x excess; heat without sugar gives no protection. The engine has no no-loss phase (it would remove another ~40-50 %). Table 1 row 5 is cited by this paper to Wolf 1977a, which does not print it (a mis-citation in this paper, checked 2026-11-01); sugar-free 'loss' 9.6 -> 7.5 is read as noise. Rate constants: Wolf 1977a (on disk since 2026-11-01; response surfaces only) and 1978 (not on disk). CF-096. arms: one vs two passes; sugar before vs after the first pass; shear vs pressure vs neither (same lab, same FDNB assay)."
+  - id: wolf1977a_tab2_tab3_soy_available_lysine_plateau_time_course
+    dossier: wolf1977a_extraction.md
+    paper: "Wolf, Thompson & Reineccius 1977 J Food Sci 42:1540"
+    lab: "Minnesota (Reineccius)"
+    system: "15 % soy protein (Promine D, called a concentrate) + microcrystalline cellulose + glucose 4 % (Table 2) or 1 % (Table 3); Table 2 arm re-slurried at 30 min, freeze-dried, re-equilibrated, reheated"
+    medium: "slurried in 0.1 M sodium phosphate pH 7.0 (1 : 1.5 w/v), freeze-dried, a_w 0.65 over saturated salt (hygrometer-checked), sealed retort pouches (<= 0.07 g / cm2)"
+    temperature_c: [105, 95]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 15, 30, 42, 45, 54, 60, 75]
+    species: ["available lysine (FDNB, mg/g sample)", "glucose (%, one value: 4 -> 2.5 at 30 min, 105 C)"]
+    kind: time_series
+    location: "Table 2 (105 C; continuous 0 / 30 / 42 / 54 min, reslurry 42 / 54) and Table 3 (95 C, 0-75 min), printed mean +- SD; glucose in text p. 1542; dossier sec. 3.5-3.6"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "glucose levels were set at 1%, water activity at 0.65 and pH at 7.0"
+    flags: [matrix_food, low_moisture_no_aw_term, ph_start_only, "condition_not_stated: moisture content", "condition_not_stated: glucose in the 1 % series", "condition_not_stated: n per time point", internal_inconsistency, "also_relevant: matrix"]
+    note: "Phase three with sugar in excess: 105 C, 4 % glucose, a plateau after 42 min with glucose not exhausted (2.5 % left at 30 min); re-slurried n.s. from continuous. 95 C, 1 % glucose: plateau at ~0.69 of C0. C0 differs 0.12 dex between the series at the same protein level (internal_inconsistency). Simulable only with a declared moisture band. Does not decide CF-072 (P 0.1); bears on CF-096. arms: 4 vs 1 % glucose (also 105 vs 95 C), continuous vs re-slurried (same lab, same FDNB assay)."
+  - id: wolf1977a_order_test_105c_two_protein_levels
+    dossier: wolf1977a_extraction.md
+    paper: "Wolf, Thompson & Reineccius 1977 J Food Sci 42:1540"
+    lab: "Minnesota (Reineccius)"
+    system: "7.5 or 15 % soy protein (Promine D) + 4 % glucose + microcrystalline cellulose"
+    medium: "0.1 M phosphate pH 7.0 slurry, freeze-dried, a_w 0.65, sealed pouches"
+    temperature_c: [105]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [18]
+    species: ["available lysine (FDNB)"]
+    kind: rate_constant
+    location: "p. 1541-1542 text (losses at two protein levels; first-order k); dossier sec. 3.2"
+    status: text_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The specific reaction rates for the first order curves were 0.024 and 0.026"
+    flags: [ph_start_only, "condition_not_stated: C0", "condition_not_stated: moisture content", low_moisture_no_aw_term, matrix_food]
+    note: "First order in lysine (equal slopes at two protein levels; zero / second order rejected at 99 %). Two-point (18 min + controls) slopes; C0 not printed (the slope implies ~11 mg/g at 15 % protein, above Tables 2-3)."
+  - id: wolf1977a_response_surface_e_k100_soy_glycation
+    dossier: wolf1977a_extraction.md
+    paper: "Wolf, Thompson & Reineccius 1977 J Food Sci 42:1540"
+    lab: "Minnesota (Reineccius)"
+    system: "15 % soy protein (Promine D) + glucose 0.32-3.68 % + microcrystalline cellulose; central composite pH x a_w x glucose, two replicates, two temperatures"
+    medium: "0.1 M buffer slurries (acetate pH 5.32; phosphate 6.0, 7.0; boric acid 8.0, 8.68), freeze-dried, a_w 0.33-0.94 over saturated salts (hygrometer-checked), sealed pouches; 80 C / 360 min and 125 C / 1.5 min (lag-corrected)"
+    temperature_c: [80, 125]
+    ph: {initial: [5.32, 6.0, 7.0, 8.0, 8.68], measured_during: false, final: null}
+    time_min: [1.5, 360]
+    species: ["available lysine (FDNB): first-order E and k_100"]
+    kind: rate_constant
+    location: "p. 1542 response-surface equations Cases 1-3; Table 4 regression summary (p. 1543); Figs. 3-6 drawn from Case 2; dossier sec. 3.3-3.4"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "The two processing temperatures were 125°C and 80°C."
+    flags: [derived_by_dossier, ph_start_only, "condition_not_stated: moisture content", "condition_not_stated: composition-specific C0 (center-point controls only)", buffer_species_confounded_with_ph, endpoint_derived_rate_constant, internal_inconsistency, matrix_food]
+    note: "Case 1 and Case 2 surfaces in coded units (dossier sec. 3.3); centre E 137.7 kJ/mol (residual SD ~2 kcal/mol), k_100 residual SD ~0.1 dex. Two-temperature Arrhenius per composition, endpoint k = -ln(C/C0)/t; 5 / 96 points discarded as outliers. Case 3's printed '=' is read as '+' (P ~0.9; then consistent with Cases 1-2). internal_inconsistency: the text's x5.3 (80 C) / x25 (130 C) glucose effects are not reproduced by Cases 1-2; they bracket order 1, so no glucose-order conflict with the engine. Held-out TEST and Ea band for protein glycation in a low-moisture plant matrix, NOT a fit target. Engine k_glyc G agrees at 125 C, over-predicts +0.3 to +0.7 dex at 80-100 C (CF-100)."
   - id: aylonparra2026_tab7_extrudate_lysine_cml_fava_oat
     dossier: aylonparra2026_extraction.md
     paper: "Ayllon-Parra, del Castillo, Matas, Gou & Ribas-Agusti 2027 Innov Food Sci Emerg Technol 115:104870"

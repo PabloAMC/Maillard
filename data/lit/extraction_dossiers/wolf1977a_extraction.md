@@ -23,7 +23,7 @@ not new. Presented at IFT 1976; Minnesota Agric. Exp. Stn. paper 9634.
 | order of available-lysine loss | **first order in lysine** in phase one: equal slopes at 7.5 % and 15 % protein (zero / second order rejected at 99 %) — "The specific reaction rates for the first order curves were 0.024 and 0.026" (p. 1542), i.e. **0.024 and 0.026 min⁻¹ at 105 °C**, a_w 0.65, pH 7.0, 4 % glucose, 18 min | [M] |
 | rate constant vs composition | **no table of k per condition.** Only response-surface equations for E and k_100 in coded units (sec. 3.3) and Figs. 3-6 drawn from them | [M] / [F] |
 | Ea | **32.9 kcal/mol = 137.7 kJ/mol at the design centre** (pH 7.0, a_w 0.65, glucose 2 %); Case 1 range over glucose 0.32-3.68 %: **25.9-32.4 kcal/mol (108-136 kJ/mol)** [Z from the printed equation]; each E is a TWO-temperature Arrhenius (80 and 125 °C) | [M] / [Z] |
-| glucose dependence | **strongly sub-proportional at <= 105 °C**: Case 1 k(3.68 %) / k(0.32 %) = 2.3 at 80 °C, 3.8 at 100 °C, 6.6 at 125 °C for an 11.5x glucose step [Z]; the text says "5.3 times" at 80 °C and "25-fold" at 130 °C [V], which neither printed case reproduces [!] | [M] / [Z] |
+| glucose dependence | **strongly sub-proportional at <= 105 °C**: Case 1 k(3.68 %) / k(0.32 %) = 2.3 at 80 °C, 3.8 at 100 °C, 6.6 at 125 °C for an 11.5x glucose step [Z]; the text says "5.3 times" at 80 °C and "25-fold" at 130 °C [V] (orders ~0.7 and ~1.3), which neither Case 1 nor Case 2 reproduces [!]. The text's orders bracket a first-order law, so a weaker glucose dependence than the engine's is NOT a conflict claim (red team, 2026-11-01) | [M] / [Z] |
 | pH, a_w | act only through interactions with glucose; k rises with pH above 2 % glucose and falls with pH below it (Fig. 5); no a_w maximum near 0.65 — "a maximum k at water activities near 0.65 did not occur" | [Q] / [F] |
 | plateau ("phase three") | at 105 °C, 4 % glucose, available lysine 9.4 -> 6.5 (30 min) -> 4.0 (42) -> 4.0 (54) mg/g; re-slurried at 30 min it reaches 3.6 (42) and 4.9 (54), n.s. from continuous (Table 2). **Glucose is NOT exhausted**: "the glucose levels decreased from 4% to 2.5%" in the first 30 min | [M] |
 | plateau at low sugar | 1 % glucose, 95 °C: 7.2 -> 6.7 (15) -> 4.9 (30) -> 5.4 (45) -> 5.0 (60) -> 4.9 (75) mg/g (Table 3); glucose not printed for this series [!] | [M] |
@@ -36,8 +36,9 @@ not new. Presented at IFT 1976; Minnesota Agric. Exp. Stn. paper 9634.
 2. **Against the engine's glycation step (F05)** [Z, moisture NOT printed; scanned w = 0.08-0.12 g water / g dry]:
    the engine's k_glyc·[Glc]_water at 4 % glucose is **0.26-0.39 min⁻¹ at 125 °C (Wolf Case 1: 0.30, +-0.1 dex)**,
    but **0.036-0.054 at 100 °C (Wolf 0.021, +0.24 to +0.42 dex)** and **0.0062-0.0093 at 80 °C (Wolf 0.0019, +0.5 to
-   +0.7 dex)**. The disagreement is the barrier (engine 96.8 kJ/mol, Wolf 132-138 at 2-4 % glucose) and the glucose
-   order (engine 1, Wolf ~0.35-0.8 depending on T) — both independent of CF-072.
+   +0.7 dex)**. The disagreement is the barrier (engine 96.8 kJ/mol, Wolf 132-138 at 2-4 % glucose; CF-100),
+   independent of CF-072. (Corrected 2026-11-01: the glucose order is not part of it. The printed Case 1 gives
+   orders ~0.35-0.8, but the text's x5.3 / x25 give ~0.7 / ~1.3, which bracket the engine's order 1.)
 3. **CF-072 (does the Amadori decay return lysine?)**: **not decided** (P 0.9 that this paper cannot decide it). The
    only observable on which the two rivals differ by > 0.3 dex is the 105 °C plateau (Table 2), and it separates the
    lysine-returning structure only from a BARE no-return structure; a no-return structure with an inaccessible lysine
@@ -105,9 +106,11 @@ Coded variables G, pH, a_w; E printed with unit "(Kcal/mol·K)" [!: read as kcal
 - **Case 2** (+ 3rd / 4th order): E = 32.9 + 1.10·G³ - 1.77·a_w·G - 1.32·G² + 1.50·pH·G;
   **k_100 = 0.0122 + 0.00175·G³ + 0.00104·G·a_w (min⁻¹)**.
 - **Case 3** (Case 2 with coded values shifted by +2): E = 18.32 + 15.5·G - 4.60·G² + 0.121·G⁴ + 1.50·pH·G -
-  2.59·pH - 1.80·a_w·G **"= 3.3*a_w"** (sic; read as "- 3.3·a_w") [!]; k_100 = 0.00176 + 0.004320·G + 0.000890·a_w.
-  **Case 3 does not reproduce Cases 1-2**: its centre E evaluates to 19.9 kcal/mol, not 32.9 [Z] — a misprint or an
-  unstated shift convention. **Do not use Case 3.**
+  2.59·pH - 1.80·a_w·G **"= 3.3*a_w"** (sic) [!]; k_100 = 0.00176 + 0.004320·G + 0.000890·a_w.
+  **Corrected 2026-11-01 (red team, resolve2_pyrbuf/redteam.md sec. 5):** the printed "=" is a misprint for **"+"**
+  (P ~0.9). Read as "+", Case 3's centre E is 33.1 kcal/mol and k_100 0.0122 min⁻¹, matching Cases 1 and 2; read as
+  "−" (this dossier's first reading) it is 19.9. Case 3 is therefore consistent with Cases 1-2 under "+"; Cases 1-2
+  remain the ones used here (they need no sign reading).
 - Then k = k_100·exp[-(E/R)(1/T - 1/373.15)].
 - **Table 4** [M] (overall F; R²; SD): Case 1 E 6.8, 0.73, 2.0 kcal/mol; k_100 23.8, 0.64, 0.003 min⁻¹. Case 2 E 9.6,
   0.79, 1.7; k_100 15.4, 0.72, 0.0031. Case 3 E 5.1, 0.84, 1.9; k_100 13.1, 0.69, 0.0032. "between 0.64 and 0.72 for
@@ -197,22 +200,26 @@ fraction, FDNB response to Amadori lysine, lysine return from Amadori decay. pH 
 
 ## 6. Disagreements found
 
-1. **Engine barrier and glucose order vs Wolf (NEW)**: Ea 96.8 vs 132-138 kJ/mol; glucose order 1 vs Wolf's k
-   ratio 2.3-6.6 for an 11.5x glucose step (80-125 °C). Engine k_glyc·G over-predicts by +0.24 to +0.7 dex at 80-100 °C,
+1. **Engine barrier vs Wolf (NEW; CF-100)**: Ea 96.8 vs 132-138 kJ/mol (centre 137.7, SE ~2 kcal/mol, so ~5 SE
+   apart). (Corrected 2026-11-01: the glucose order is dropped from this item; the text's x5.3 / x25 bracket order 1.)
+   Engine k_glyc·G over-predicts by +0.24 to +0.7 dex at 80-100 °C,
    agrees at 125 °C. Candidate causes: plateau-capped 80 °C / 360 min end points inflate E (P ~0.5); C0 from center
    controls only; moisture-dependent water-phase glucose; real barrier difference between free glycine and
    protein-bound lysine in a solid matrix.
-2. **Companion Table 1 row 5 is cited to this paper but is not in it** [!]: `wolf1977_extraction.md` sec. 3 (and the
-   ledger note) list "5 once with 4 % glucose 5.0 +- 0.7 (from Wolf 1977a)" at 125 °C / 2 min. Wolf 1977a prints no
-   125 °C, 2-min, 4 % glucose value (its tables are 105 °C and 95 °C; the design raw data are not printed). The
-   companion's citation is unverifiable here (perhaps the 1978 paper or unpublished).
+2. **Companion Table 1 row 5 is cited to this paper but is not in it** [!]: the companion prints "5 once with 4 %
+   glucose 5.0 +- 0.7" at 125 °C / 2 min with footnote c, "Wolf et al. (1977a)", and its reference list maps 1977a
+   to this paper (J Food Sci 42:1540), so `wolf1977_extraction.md` transcribes it faithfully. Wolf 1977a prints no
+   125 °C, 2-min, 4 % glucose value (its tables are 105 °C and 95 °C; the design raw data are not printed). This is a
+   mis-citation IN THE COMPANION (it mis-letters 1977a / b elsewhere: p. 271 vs p. 277), probably to 1977b; flagged
+   `secondary_source_misattributed` on the companion's ledger entry (2026-11-01).
 3. **Product naming** [!]: Promine D is "soybean protein concentrate" here, a "soy protein isolate" in the companion
    (and 20 % vs 15 % protein). Matters for residual carbohydrate (possible extra reducing sugar).
 4. **Lysine per protein** [!]: C0 9.4 (Table 2) and 7.2 (Table 3) mg/g at 15 % protein = 6.3 and 4.8 g / 100 g
    protein; the order experiment implies ~11 mg/g [Z]; the companion 9.6-10.2 mg/g at 20 % protein (4.8-5.1 g / 100 g).
    Batch spread ~0.15 dex within one lab and one assay.
-5. **Text vs equations** [!]: the 5.3x / 25x glucose effects (p. 1543) are not reproduced by Case 1 or 2; Case 3's
-   centre E is 19.9, not 32.9 kcal/mol; the Case 3 E equation prints "=" for a sign.
+5. **Text vs equations** [!]: the 5.3x / 25x glucose effects (p. 1543) are not reproduced by Case 1 or 2 (Case 3 not
+   checked against them); the Case 3 E equation prints "=" for a sign, read as "+" (centre 33.1 kcal/mol, consistent
+   with Cases 1-2; corrected 2026-11-01, the earlier "19.9, not 32.9" read it as "−").
 
 ## 7. Ledger-ready measurements
 
@@ -221,5 +228,6 @@ fraction, FDNB response to Amadori lysine, lysine return from Amadori decay. pH 
 - The order experiment (0.024 / 0.026 min⁻¹, 105 °C, two protein levels): a rate_constant row, endpoint-derived.
 - The Case 1 and Case 2 response surfaces (E, k_100): a rate_constant row, `kind: rate_constant`, fitted
   regression, NOT a fit target (endpoint k, center-point C0, buffer-confounded pH); usable as a held-out TEST and a
-  band for the protein-glycation barrier in a low-moisture plant matrix. Do NOT key Case 3 or Fig. 1.
+  band for the protein-glycation barrier in a low-moisture plant matrix. Do NOT key Fig. 1; prefer Cases 1-2 (Case 3
+  needs the "=" -> "+" reading, P ~0.9).
 - Proposed YAML snippets: scratchpad `wolf1977a_findings.md` sec. 4.

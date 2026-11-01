@@ -41,6 +41,10 @@ printed · **[!]** flag.
    concentration convention. **The second pass is not**: with glucose still in 3x molar excess the engine would remove
    another ~40-50 % of the lysine on re-processing; Wolf finds none (Table 2). The engine has no "no-loss phase"
    (an inaccessible / protected lysine pool). Ea cannot be tested.
+   **Added 2026-11-01 (resolve2_pyrbuf Q4; CF-096):** the shipped lysine-returning structure fails too: with the
+   frozen B20 constants matched to pass 1, pass 2 loses 36 % (pseudo-steady free fraction 0.21), and 48 % with
+   Nguyen's no-return structure. The plateau is not a CF-072 decider; Wolf 1977a, now on disk, does not decide it
+   either (P 0.1; CF-072 tests).
 3. **CF-072 (does the bound Amadori compound return lysine?)** — the schematic Fig. 1 shows lysine RISING in a
    "transition phase" after the minimum (~6.7 -> ~9.3 mg/g) [F, schematic]. Read literally it is a partial lysine return,
    the Brands-type structure the engine writes. Weight: **low (~0.15)**: it is a drawn "typical" curve; the authors
@@ -66,6 +70,12 @@ printed · **[!]** flag.
 **Table 1** (available lysine, mg/g sample, mean +- SD, n = 4) [M]: 1 unprocessed, no glucose 9.6 +- 1.2; 2 processed
 once, no glucose 7.5 +- 1.1; 3 twice, no glucose 9.1 +- 1.2; 4 twice, glucose added before the second 4.8 +- 0.5;
 5 once with 4 % glucose 5.0 +- 0.7 (from Wolf 1977a).
+[!] **Mis-citation IN THE COMPANION (checked 2026-11-01):** row 5 is printed with footnote c, "Wolf et al. (1977a)",
+and the companion's own reference list maps 1977a to J Food Sci 42:1540, so this dossier transcribes it faithfully.
+But Wolf 1977a (`wolf1977a_extraction.md`) prints no 125 °C / 2 min / 4 % glucose value: its tables are 105 °C and
+95 °C and the design raw data are not printed. The companion mis-letters 1977a / b elsewhere too (p. 271 attributes
+extrusion to 1977b, p. 277 to 1977a), so row 5 is probably from 1977b (then submitted). Treat it as
+`secondary_source_misattributed`.
 
 **Table 2** (available lysine remaining, mg/g sample) [M]: control (no process) 10.2 +- 1.0; shear 5.3 +- 0.7 -> 4.8 +-
 0.4 (F 1.68); pressure 5.3 +- 0.4 -> 5.3 +- 0.3 (F 0.08); no shear or pressure 4.8 +- 0.4 -> 5.1 +- 0.2 (F 3.63); pooled
@@ -80,6 +90,9 @@ Within-study factors (sugar-free pre-heating; shear; pressure; re-processing) on
 [Q]: sugar exhaustion and local sugar depletion (by Wolf 1977a / b, [C]), heat-induced protection without sugar
 (Table 1), reversion by shear or pressure alone (Table 2). Mechanism of the no-loss phase: unidentified, stated as
 such. Laboratory: Minnesota (Reineccius).
+(Checked against Wolf 1977a, 2026-11-01: 1977a excludes BULK exhaustion at 4 % glucose only (2.5 % left at 30 min,
+105 °C); it does not test local depletion, and at 1 % glucose (its Table 3, glucose unprinted) exhaustion is not
+excluded. 1977a calls Promine D a soybean protein CONCENTRATE at 15 % protein; this paper an isolate at 20 %.)
 
 ## 5. Bearing on open questions
 

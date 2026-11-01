@@ -401,6 +401,8 @@ replaced with the isotope-evidenced one (`Deoxyosone_Reduction` + `Thiol_Additio
 norfuraneol is retained as a real furanone product, just not in the MFT lane). Evidence
 dossier: [docs/validation/isotope_topology_evidence.md](docs/validation/isotope_topology_evidence.md).
 
+> **Erratum 2026-11-01 (CF-092):** van den Ouweland & Peer 1975 propose the NF -> MFT pathway (their Fig. 4) but identify no MFT (Table I lists 4-mercapto-2-methylfuran, dihydro-MFT and 3-mercapto-2-methylthiophene). NF + H2S -> MFT is measured on disk by Hofmann 1998, Whitfield 1999, Cerny 2003 (pot D) and de Roos 2005.
+
 **The Hofmann agreement got worse, and that is the honest number.** MFT went 235.32 → **151.87
 ppb** against a 342 ppb reference (**1.45× under → 2.25× under**) and FFT 219.96 → **243.72**
 against 200 (1.10× over → **1.22× over**). Nothing was tuned to claw it back. The 1.45× had

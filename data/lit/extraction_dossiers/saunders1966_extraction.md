@@ -138,6 +138,10 @@ T 89 → 40 % (0.05 → 0.4 M), A490 roughly linear in c; □ (no glucose) T 100
   rests on Davidek 2002's ARP decay at pH 8 (×1.27, F03), a different response, so the fade may be step-specific, not
   general; (b) a phosphate-specific factor — citrate and acetate act too (per mole: citrate ≈ phosphate at pH 3,
   acetate ~1/3). Says nothing on saturation beyond "none seen to 0.5 M citrate".
+  **Added 2026-11-01 (resolve2_pyrbuf, red-teamed):** the pH-8 "fade" in the E5 fix is a RATIO on the Amadori step
+  (Davidek: the uncatalysed rate doubles from pH 7 to 8, which gives ~60 % of the fade; the catalysed increment
+  itself falls 0.55 -> 0.29 /h, ~40 %). Browning at pH 7.5-8 integrates >= 2 catalysed steps, so no contradiction in
+  kind; the fix text is restated in ENGINE_VS_LITERATURE.md sec. 7 (CF-093 / CF-094).
 - **CF-011 (Xie phosphate pots form Cys-Amadori 3-6× faster than Jiangnan water pots): LEAVES UNCHANGED**, with mild
   support for the plausibility of "buffer catalysis" at that magnitude (0.2-0.25 M buffer → ×2-13 on a glucose-glycine
   response). It adds a testable consequence: if the explanation is general buffer catalysis, a citrate pot at the

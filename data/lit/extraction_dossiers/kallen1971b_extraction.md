@@ -53,6 +53,15 @@ Questions: CF-076 (dilute vs concentrated Cys + Xyl ⇌ TTCA exchange), the E1 /
    The one mechanism here that can be large is **nucleophilic catalysis by a secondary amine** (morpholine); whether a
    primary amino acid, or TTCA's own secondary ring nitrogen, does this for an aldose is untested anywhere on disk [P].
    That would be a concentration-dependent rate of exactly the kind CF-076 needs: an unlisted rival, not evidence for it.
+   **Added 2026-11-01 (resolve2_pyrbuf, red-teamed; CF-093):** the two-reader re-read gives the Fig. 7 ceilings as
+   x3.1-4.4 (C3 / C2 = 4.43 / 3.06 / 4.06), not x3.5-5. The plateau is consistent with the UNCATALYSED AMINE ATTACK
+   becoming rate-limiting: the buffer-free attack plateau (Fig. 6, pH 4.5-5.2, 10^3.4 per free base) predicts the
+   ceilings x3.6 / 3.9 / 6.8 at pH 6.12 / 6.31 / 6.62, residuals +0.09 / -0.11 / -0.22 dex [Z]. That is a change of
+   rate-determining step, not buffer binding, so it does not license a Michaelis form on steps the network resolves
+   (E5). Two limits: the test checks levels only (the predicted rising pH trend of the ceiling is not seen), and a
+   saturating law fits these data equally well. A LUMPED step whose uncatalysed part can limit (the engine's r_schiff)
+   inherits a hyperbolic factor by the same algebra. The no-catalysis-below-pH-5 result (i) used carboxylates
+   (cyanoacetate, formate, acetate), not phosphate.
 4. **Microscopic reversibility check of the catalyst species**: Kallen's rate law eq 4, written on the predominant
    protonated cysteine, is v = k_cat′[RNH₃⁺][F][A⁻], so the buffer BASE form appears; for phosphate monoanion as acid,
    A⁻ is HPO₄²⁻. E1's use of [HPO₄²⁻] is consistent with this and with Fife 1991's general-base catalysis of iminium

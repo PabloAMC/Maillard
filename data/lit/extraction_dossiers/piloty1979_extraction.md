@@ -88,12 +88,17 @@ mostly reflects competition and depletion). Do not use as an Arrhenius anchor.
 
 ## 5. Bearing on open questions
 
-- **E4 / F16-c (the pyrazine-cascade pH law sits on the Strecker STEP, ×0.091 at pH 5 vs 6.8): SUPPORTS the remaining
-  E4 claim** (the step law is wrong) from a **new laboratory**: MGO + Gly / Ala / Leu / Phe consumption at 100 °C is flat
-  (×1.0-1.2 faster at pH 4.52 than 6.97) and at 150 °C clearly faster at pH 4.52. The engine's GO / MGO + Gly →
-  aminoketone step at ×0.091 would predict Ala loss of ~3 % at pH 4.5 where 32 % is measured [Z, first-order transfer
-  of the pH-6.97 extent]. Caveats: consumption includes non-Strecker adducts; 0.4 M phosphate; a mixture; label pH.
-  Weight: moderate (P ~0.6 that it bears on the step as the engine defines it).
+- **E4 / F16-c (the pyrazine-cascade pH law sits on the Strecker STEP, ×0.091 at pH 5 vs 6.8): NOT DISCRIMINATING
+  (P 0.85; downgraded 2026-11-01 from "SUPPORTS ... P ~0.6", resolve2_pyrbuf Q2, upheld by its red team).**
+  MGO + Gly / Ala / Leu / Phe consumption at 100 °C is flat (×1.0-1.2 faster at pH 4.52 than 6.97) and at 150 °C
+  clearly faster at pH 4.52. The earlier reading ("the step at ×0.091 would predict Ala loss of ~3 % at pH 4.5 where
+  32 % is measured") assumed that all consumption is the Strecker step. Under the shipped step law, pH-flat
+  consumption only requires the Strecker share f of the loss to be <= 0.04 (Ala), 0 (Leu), 0.2-0.3 (Gly, Phe, Ile)
+  [Z, 2 sigma]. In the engine (in-memory probe of this pot, clamped pH) the step is 1e-5 - 1e-3 of the measured loss
+  under BOTH rivals (shipped slope and s = 0). It bears on E4 only with a pH-independent Strecker share (an
+  assumption; likelihood ratio ~1.5 for E4-supply). What it does expose is a missing dicarbonyl-amine adduct sink,
+  >= ~1e3x the engine's Strecker consumption (a lower bound; CF-095). The designed E4 pot must measure the Strecker
+  aldehyde (and acid), not amino-acid loss.
 - **F16 amino-acid identity** ("Ile > Leu > Phe > Met with MGO", DFA): here, by consumption, Phe ≥ Leu > Ile ≈ Ala at
   100 °C (33 / 26 / 18 / 17 %) — a different order (sec. 6).
 - **Hub / sugar identity:** glucose consumes amino acids faster than fructose at 100 °C, pH 6.9, in 0.4 M phosphate

@@ -360,6 +360,8 @@ right one. The paper is real, the citation is now correct, and **the route is st
 van den Ouweland & Peer describes a *synthesis* of MFT from norfuraneol, not the in-situ
 Maillard pathway.
 
+> **Erratum 2026-11-01 (CF-092):** van den Ouweland & Peer 1975 propose the NF -> MFT pathway (their Fig. 4) but identify no MFT (Table I lists 4-mercapto-2-methylfuran, dihydro-MFT and 3-mercapto-2-methylthiophene). NF + H2S -> MFT is measured on disk by Hofmann 1998, Whitfield 1999, Cerny 2003 (pot D) and de Roos 2005.
+
 - **Cerny & Davidek 2003** (`10.1021/jf026123f`) spiked authentic unlabelled norfuraneol into
   a [¹³C₅]ribose/cysteine system. The MFT came out **mainly ¹³C₅-labelled** — from the ribose,
   not from the spike: "4-hydroxy-5-methyl-3(2H)-furanone is **unimportant as an

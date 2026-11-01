@@ -149,6 +149,14 @@ to 86.19 % (exp 2) [the table prints 74.09 and 86.18; small text-table mismatch]
 | E4 (pH law) | LEAVES UNCHANGED | no pH |
 | shibamoto1977 dossier, O2 (sec. 1, item 4 there: "air-filled ampoules") | CONTRADICTS that reading if 1977 used this paper's method | here closed pots are N2-flushed before sealing |
 
+**Added 2026-11-01 (resolve2_pyrbuf Q3 as corrected by its red team).** R stays at 366-496 while the total yield
+moves x7.6 (30 min - 48 h); the 15-min point (R 1380, yield 0.013 %) is the exception. The yields are CUMULATIVE, not
+pool sizes: with rate-based pool proxies (sqrt of amount per interval) the pools move only 1.1-1.4x between 0.5 and
+2 h, and after 2 h every species shows net loss (yield 1.25 -> 0.57 %), so this time course does NOT test pool
+invariance (the lower-order extra MPZ route P2b stays untested; the resolution's |z| 3-6 rejection is withdrawn). The
+0.5 / 1 / 2 h R values are near-identical (365.6 / 365.9 / 365.3): worth a PDF re-read. Same lab, R 14.6 in Wong
+1988: CF-098. UC Davis is an E13 TEST laboratory in split v2.
+
 ## 6. Disagreements found
 
 1. **With the shibamoto1977 dossier, O2 in closed vessels**: that dossier says every pot had air ("air-filled
