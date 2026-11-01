@@ -2196,36 +2196,41 @@ entries:
   - id: CF-077
     kind: code_mismatch
     scope: other_lane
-    sources: [leahy1989, zhou2023]
-    quantity: "the methylpyrazine cross-pair rate of the B18 condensations: mixing ratio R = MPZ^2 / (PZ * DMP)"
+    sources: [leahy1989a, leahy1989, zhou2024, zhou2023]
+    quantity: "the mixing ratio R = MPZ^2 / (PZ x 2,5-DMP) of the three aminoketone condensations (B18): r_akg_pz, r_akm_dmp, r_ak_mpz"
     observation: >-
-      src/kinetic_core/network.py gives the three condensations r_akg_pz {AKG: 2} -> PZ, r_akm_dmp {AKM: 2} -> DMP and
-      r_ak_mpz {AKG: 1, AKM: 1} -> MPZ ONE shared k_cond, and reaction_rates evaluates plain mass action (k * prod
-      c^nu), so PZ = k A^2, DMP = k M^2, MPZ = k A M and R = 1. The docstrings (network.py r_ak_mpz: "2 sqrt of the two
-      homo rates"; parameters_pyrazine.py: "rate_MPZ = 2 sqrt(rate_PZ rate_DMP) ... with its factor two"; the B18 fit
-      reports' mixed_route line) promise the statistical cross-pair factor, i.e. R = 4. The code lacks the factor 2:
-      methylpyrazine is under-predicted 2x against the engine's own design (3.5x / 7x against Leahy's lysine-glucose /
-      lysine-ribose pots), and every calibrated Ho row with R >= 1.86 rejects the engine (e.g. Zhou 2023 ARP + Cys pH
-      8, R 2.43). Found by the pyrazine-rivals red team (docs/history/pyrazine_rivals_2026-10-31/red_team.md sec. 2,
-      checked in the env: AKG 0.3, AKM 0.7, k = 1 gives R = 1.0); code re-read 2026-11-01 (network.py r_akg_pz /
-      r_akm_dmp / r_ak_mpz and reaction_rates).
+      src/kinetic_core/network.py writes 2 AKG -> PZ, 2 AKM -> DMP and AKG + AKM -> MPZ on one k_cond in plain mass
+      action, so rate_MPZ = sqrt(rate_PZ rate_DMP) and R = 1 at every instant (reproduced in the env: R = 1.000 at
+      AKG : AKM 0.5 : 0.5 and 0.3 : 0.7; 1.016 / 1.021 in glucose + glycine pots through predict, the excess being
+      the pools' time heterogeneity). The design the code documents (parameters_pyrazine.py docstring, the r_ak_mpz
+      note, kinetic_core_b18_fit_report.md 'mixed_route') is random pairing with one encounter constant:
+      rate_MPZ = 2 sqrt(rate_PZ rate_DMP), R = 4. The cross pair lacks its combinatorial factor 2. Leahy 1989's
+      lysine-glucose pots give R = 11.7 - 17.3 (EX-052, S1), and every calibrated Ho row with R >= 1.86 rejects R = 1
+      (e.g. Zhou 2023 ARP + Cys pH 8, R 2.43), so R = 4 is the engine's design, not a claim that random pairing is
+      right (that is the pyrazine-rivals question, EX-052). Found by the pyrazine-rivals red team (EX-052,
+      docs/history/pyrazine_rivals_2026-10-31/red_team.md sec. 2).
     explanations:
-      - "The factor was written into the docstrings and the pre-registration ('geometric mean ... with its factor two') but never into the rate constants: all three reactions take k_cond unscaled."
+      - "A transcription slip in B18: the shared constant was written once for the three pairings without the unlike-pair factor; no test pinned R."
     tests:
-      - "Mass-action arithmetic from the code: R = (k A M)^2 / (k A^2 * k M^2) = 1 for any A, M, k."
-      - "Red team sec. 2 numeric check in the env (R = 1.0)."
-    status: error_confirmed
+      - "Unit test: R = 4 at equal pools with the fix (tests/unit/test_kinetic_core_b18.py)."
+      - "Pre-registered (kinetic_core_cf077_cross_pair_factor_prereg.md): Zhou 2024's single-pool rows bit-identical; the B18 fit's Leahy pH-ratio rows re-run at the fit commit with the factor."
+    status: fixed
     remedy: >-
-      Fix in its own PR (methylpyrazine predictions move; ask the owner first): give the cross pair its statistical
-      factor (2 k_cond on r_ak_mpz, or k_cond / 2 on the homo pairs, which changes PZ / DMP too and needs a B18 re-fit),
-      and choose the form by the pyrazine-rivals verdict, not by the docstring: the red team finds the random-pairing
-      R = 4 itself rejected by Leahy and the Ho rows. Until then the docstrings must not be quoted as the engine's R.
+      src/kinetic_core/network.py: r_ak_mpz carries statistical_factor = CROSS_PAIR_STATISTICAL_FACTOR (2), the homo
+      pairs keep k_cond (k_cond keeps its meaning; Zhou's single-pool fit rows are bit-identical); pinned by
+      tests/unit/test_kinetic_core_b18.py. Its own PR (PabloAMC/Maillard#37, commit 19c66e99): shipped pyrazine numbers move, the owner approves the merge.
+      STILL OPEN: the frozen B18 pH slopes were fitted under the bug. At the fit commit (34da5b51) the factor moves
+      Leahy's two-pool ratio rows by up to +0.51 dex (cost 2.64 -> 15.4), so the pre-registered rule flags them as
+      conditional on CF-077; a sizing re-fit (information only) moves the slope below pH 7 by +0.11 (2.0 sigma), the
+      slope above by +0.02 and the stored Strecker constants by -0.04 dex. Re-fitting B18 is a separate owner decision.
     affects:
-      - zhou2023_table1_ph6_ph8_arp_cys_volatiles
+      - zhou2024_table2_fed_dicarbonyl_pyrazine_rates
+      - leahy1989a_tab1_lys_glc_pyrazine_rates_ph_ladder
+      - leahy1989a_tab3_pyrazine_distribution_by_ph
       - leahy1989_tab3_pyrazine_distribution_95c_2h
+      - zhou2023_table1_ph6_ph8_arp_cys_volatiles
       - {file: src/kinetic_core/network.py, symbol: r_ak_mpz}
-      - {file: src/kinetic_core/parameters_pyrazine.py, symbol: "rate_MPZ = 2 sqrt(rate_PZ rate_DMP)"}
-
+      - {file: src/kinetic_core/parameters_pyrazine.py, symbol: "2 sqrt(rate_PZ rate_DMP)"}
   - id: CF-078
     kind: conflict
     scope: corpus

@@ -398,6 +398,13 @@ the full verification.
 - **Rule:** when a sub-question appears mid-step, brief a background subagent (files it may touch, what not to touch, compute cap, no commits) and continue the active step; fold the result in when it reports.
 - 2026-10-31 (again): a text-patch script was run with system python3 -I. Even pure text patches go through the wrapper: ./scripts/docker_maillard.sh run "python <patch.py>".
 
+**An overnight run on a laptop must hold the machine awake, and a per-pot wall-clock limit is not sleep-safe**
+(2026-11-01, the thiol leave-one-lab-out). The laptop hibernated on 1 % battery from 03:29 to 09:33 in the middle of
+a fold's fit; `run_pot_limited` uses SIGALRM, so pots in flight would time out on wake and enter the optimiser as
+failed residuals. Remedy used: stop, resume from the per-segment checkpoints, relaunch under `caffeinate -i` on AC.
+Rule: launch long jobs as `caffeinate -i nice -n 10 ...` and check `pmset -g batt` first; checkpoint every fit segment
+so a stop costs one segment. And a summary averaged over folds must skip a fold with no scored row (Davidek's species
+have no null answer): counting it as a difference of 0 pulls the mean to zero and shrinks its se.
 ## 2026-10-31 — A rival's band derived from the test it is scored on, and data left unscored
 - **Pattern:** an investigation agent admitted "slow cysteine exchange". Its rate ceiling had been derived from the same xylose contrast it was then scored on, and two concentrated-pot datasets that contradict it (same lab and another lab) were left unscored under a reason that did not apply. It also counted 50 C storage data as a second lab for a processing loss law. The independent red team caught all three.
 - **Rule:** a rival's bands come from data OTHER than its scored tests; every on-disk dataset that bears on the question is scored or its exclusion justified in the prereg; a "second lab" must measure the same channel. Every structural verdict gets a red team before it moves the engine.
@@ -429,3 +436,7 @@ the full verification.
 ## 2026-11-01 — Check "held-out" against the frozen split files; cumulative yields are not pool sizes
 - **Pattern:** the buffer / pyrazine resolution called Larralde 1995 and Lee 2024 "TEST" for E5 / E13. Neither sits in any frozen split: both are keyed held-out tables, candidate TEST for a later version (contrast-benchmark README sec. 10). In the same record a pool-invariance test read sqrt(cumulative yield) as the instantaneous aminoketone pool and "rejected" the lower-order extra MPZ route at |z| 3-6. A cumulative yield grows even at a constant pool; with rate-based proxies the pools barely moved and the test had no power. The red team caught both, after the claims had reached the draft register text.
 - **Rule:** before writing "TEST", "DEV" or "held-out" for a source, grep `docs/reference/contrast_benchmark/split.yml` and `split_v2_per_change.yml` for its cell or lab and say which version; a keyed table outside them is "keyed held-out (not in a frozen split)". Before using a time course as a pool, check whether the printed quantity is cumulative (yield, amount formed) or standing (concentration at t); a pool test needs the standing quantity or a rate-based proxy, and points in net loss carry no pool information.
+
+## 2026-11-01 — A limit argument in a pre-registration must be checked on the rows' own regime
+- **Pattern:** CF-077's prereg predicted the B18 fit unaffected by the cross-pair factor because the fit-time Leahy pots ran in the minor-pool limit of the FAST-condensation partition. At the fit commit the Leahy rows moved up to +0.51 dex (cost 2.64 -> 15.4): in the dilute acid arm the aminoketone lifetime (1 / sqrt(2 k F) ~ 400 min) exceeds the window, so the condensation is not fast there. "Declared fast" was true of Zhou's 20 mM pots and silently assumed for every pot.
+- **Rule:** before a prediction leans on a limit (fast step, steady state, minor pool), compute the dimensionless number that licenses it (here k_cond x pool x window) for each scored row, and state it in the prereg. Running the check at the fit's own commit (a detached worktree) is cheap and decided it.
