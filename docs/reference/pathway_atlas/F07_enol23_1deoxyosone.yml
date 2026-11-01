@@ -232,6 +232,18 @@ cells:
     lab: "DFA Garching (Hofmann)"
     dossiers: [hofmann1999_extraction.md]
     where: "Results p. 116; Figs. 4-5"
+  # ---- appended 2026-11-01 after the frozen extent (CF-099; outside split v1 / v2) ----
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "88-90", sugar: [disaccharide, hexose_aldose], sugar_note: "maltose vs glucose propylamino ARPs (paired)", amine: other_amine, amine_detail: "N-propyl Amadori compounds fed", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "maltose vs glucose propylamino ARPs, pH 5, reflux in water / dioxane 1:1, OPD present: a third exit from the 2,3-enediol"
+    status: operating
+    quote: "formed in higher amounts"
+    quantity: "the 1-amino-1,4-dideoxy-2,3-hexodiulose (quinoxaline 7b; C-4 beta-elimination from the 2,3-enediol with the amine retained, the 1-deoxyosone's oxidation level) from the maltose ARP; from the glucose ARP only 'possibly'; no yields"
+    evidence: trapping
+    lab: "Ledl, Universitat Stuttgart"
+    dossiers: [huber1990_extraction.md]
+    where: "sec. 1 table (split at the 2,3-enediol); Scheme"
+    note: "No numbers; 'interpretations ... are only tentative'. A 4-O-glycosyl leaving group favours C-4 elimination over amine release; for free glucose ARPs at most minor. 50 % dioxane solvent (water bin by solute molarity, ~0.08 M ARP + ~0.08 M phosphate). The McGill ~5 % share of this route (F15#3, a v1 TEST contrast) belongs here too (CF-099); its move waits for a new split version."
 condition_dependence: >-
   SHOWN: (i) pH - every in-situ trap and every fit puts the 2,3-enolisation share up with pH: 62 % -> 95 % of trapped
   osone flux from pH 4.5 to 7 (Beck), 1-DG / 3-DG x5 from pH 5 to 7 (Nedvidek), pD 0.60 vs 0.35 (Martins 2005b), and

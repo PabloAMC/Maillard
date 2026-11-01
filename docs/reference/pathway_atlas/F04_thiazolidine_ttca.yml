@@ -267,7 +267,7 @@ cells:
     where: "sec. 2"
   - key: {ph: neutral, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: "110 / 120 / 130", sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
-    contrast: "fed Gly-Xyl Amadori 5 mM + Cys 5 mM, temperature: TTCA appears at 5.0 / 9.6 / 22.4 % of the ARP by 100 min; the source carbonyl (deoxyosone trap vs ARP reversal to xylose) is not shown, and Scheme 2 is 2 H short"
+    contrast: "fed Gly-Xyl Amadori 5 mM + Cys 5 mM, temperature: TTCA appears at 5.0 / 9.6 / 22.4 % of the ARP by 100 min; the source carbonyl (deoxyosone trap vs ARP reversal to xylose) is not shown; TTCA identity by m/z 254 (M 253, C8H15NO6S; the Cys-ARP has the same formula) against an undescribed standard"
     status: operating
     quote: "TTCA % of ARP at 100 min:"
     quantity: "TTCA holds only 11 % (120 C) / 26 % (130 C) of the cysteine consumed; ~70 % of Cys gone in 20 min at all three T"

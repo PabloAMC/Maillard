@@ -194,14 +194,14 @@ cells:
     where: "Table 1, Fig. 4 (qualitative statements)"
   - key: {ph: neutral, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: "110-130", sugar: pentose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
-    contrast: "GX-ARP 5 mM +- cysteine 5 mM, initial pH 7.0: TTCA appears; the authors route it through the deoxyosones, the dossier through ARP reversion to xylose (Scheme 2 is 2 H short); free xylose 'not observed' (no detection limit)"
+    contrast: "GX-ARP 5 mM +- cysteine 5 mM, initial pH 7.0: TTCA appears; the authors route it through the deoxyosones, the dossier through ARP reversion to xylose (1-DX cannot give TTCA's 2-H ring; 3-DX only by rehydration back to the pentose level, redox-neutral); free xylose 'not observed' (no detection limit)"
     status: unattributed
     quote: "The TTCA here most likely does not come from the deoxyosones"
     quantity: "TTCA ~10 % (120 C) to ~22 % (130 C) of the 5 mM ARP in 100 min; if via reversion, a lower bound on reversion in cysteine's presence"
     evidence: trapping
     lab: "Jiangnan (Zhang X / Cui / Ho)"
     dossiers: [wei2022_extraction.md]
-    where: "sec. 1 point 2 (dossier reading ~0.65)"
+    where: "sec. 1 point 2 (dossier reading ~0.6)"
 
 condition_dependence: >-
   SHOWN (amine release): heated alone, a hexose Amadori compound of a primary amino acid returns most of its amine as
@@ -214,8 +214,10 @@ condition_dependence: >-
   separable (single lab, no contrast). SHOWN (reversion proper): parent aldoses are a minor channel at 90-120 C
   (3-8 mol %, Nestle and Wageningen) but a major one at 37 C (hexoses ~20 % of fructoselysine, Baynes); phosphate raises
   reversion at pH 5-6 (Nestle x2.5-6 at 90 C; SCUT x1.3-1.5 at 130 C) and speeds Amadori decomposition on every channel
-  (37 C x3.4 over 10-200 mM; 90 C x1.3-3.6 depending on pH; 110-130 C x1.5-3.8), with an effect that fades at pH 8
-  (Davidek). Air speeds decomposition ~4x at 37 C and diverts it to oxidative cleavage (Zyzak; chelator confound).
+  (37 C x3.4 over 10-200 mM; 90 C x1.3-3.6 depending on pH; 110-130 C x1.5-3.8); the catalysed / uncatalysed RATIO
+  falls at pH 8 (Davidek), ~60 % because the uncatalysed rate rises and ~40 % because the catalysed increment itself
+  falls (resolve2_pyrbuf red team, 2026-11-01). Carboxylates and bicarbonate act on free-sugar degradation and
+  browning (Saunders, Rizzi, Davies) but barely on Amadori decay (Guan, single lab; CF-094). Air speeds decomposition ~4x at 37 C and diverts it to oxidative cleavage (Zyzak; chelator confound).
   ASSUMED, not shown: the temperature dependence of reversion itself (no reverse constant is estimated anywhere); any
   amine catalysis of release (added Met changes nothing, Deng; added Ala speeds release, Zhou 2024 qualitative).
 best_supported_regimes:
@@ -245,7 +247,8 @@ engine: >-
   re-consumption the comparison needs the engine's own net free glycine, not its stoichiometry. Mismatches: (1) NO
   reversion step anywhere (AMA -> Glc + Gly): fine at 90-120 C (3-8 mol %) but wrong at <= 60 C (Baynes ~20 %) and for
   any pot where cysteine or a second amine can trap the reverted sugar (Wei 2022). (2) No phosphate term on Amadori
-  decomposition, although four labs (Nestle, Baynes, SCUT, Jiangnan) show 1.3-12x acceleration that fades at pH 8.
+  decomposition, although four labs (Nestle, Baynes, SCUT, Jiangnan) show 1.3-12x acceleration whose ratio falls at
+  pH 8 (uncatalysed rate rising; see condition_dependence).
   (3) Sulfur lane: the fed pentose ARP's decays (r_arp_tdp, r_arp_dpo, r_arp_decay) send the amine nitrogen to FRAG_N, i.e.
   NO amine release, whereas the same laboratory measures 25-40 % glycine release from GX-ARP (Hou) and regenerated
   alanine from AX-ARP (Zhou 2024 / 2025b); the disabled pentose entry (r_pama_*) carries an amine_return share (default
