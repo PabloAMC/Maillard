@@ -7935,7 +7935,7 @@ papers:
 - paper_id: frontiers_2022_hcw_aa_arrhenius_anchor
   paper_id_source: benchmark_intake_registry.id
   doi: 10.3389/fnut.2022.1022254
-  citation: Feng et al. (2023)
+  citation: Feng, Yang, Xie, Liu, Peng, Hu & Yu (2023), Frontiers in Nutrition 9:1022254
   dossier: data/lit/extraction_dossiers/feng2022b_extraction.md
   intake_ids:
   - frontiers_2022_hcw_aa_arrhenius_anchor

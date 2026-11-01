@@ -231,7 +231,7 @@ FAMILY_BOTTLENECK_REACTIONS = {
     "14": {
         "title": "Ascorbic Acid Maillard",
         "reactions": [
-            "<strong>Dehydroascorbic Acid (DHA) thermal degradation</strong>: Pseudo-first-order DHA ring-opening hydration to 2,3-diketogulonic acid (Arrhenius activation energies: 15.77 kJ/mol at pH 5.0, 31.7 kJ/mol at pH 7.0, 47.53 kJ/mol at pH 9.5; Frontiers Nutr. 2022).",
+            "<strong>Ascorbic acid (ASA) thermal degradation</strong>: Pseudo-first-order loss of ASA alone in buffered hot-compressed water, 150-190&deg;C (apparent activation energies as printed: 15.77 kJ/mol at pH 5.0, 31.7 kJ/mol at pH 7.0, 47.53 kJ/mol at pH 9.5; low confidence, heat-up artefacts; Feng et al., Front. Nutr. 2023).",
             "<strong>3-DG routing Arrhenius parameters</strong>: Ascorbic-derived 3-deoxyglucosone (3-DG) conversion to pyrraline (E_a = 53.45 kJ/mol) vs furosine (E_a = 81.7 kJ/mol) (ACS APTS ref. 24).",
             "<strong>Pentosidine crosslinking burden</strong>: Ascorbic-acid-driven pentosidine crosslinking matching glucose on a molar basis (13.2&ndash;17.0 pmol/mg protein yield at 37&deg;C; PubMed PMID:1904866).",
             "<strong>Amino reaction hierarchy</strong>: Ascorbate-derived dicarbonyl condensation rates with side chains (Lysine &gt; Arginine &gt; Histidine; E_a(Lys) = 54.94 kJ/mol, E_a(His) = 35.31 kJ/mol; SciELO Brasil)."
