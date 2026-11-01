@@ -679,3 +679,34 @@ entries:
     verdict: partial
     conclusion: "Register: duplicates confirmed and slips resolved in cluster 1; CF-053 / 063 / 054 / 015 (ratio half, P 0.6) explained; CF-068 / 073 / 016 / 031 / 060 / 065 / 071 / 011 / 076 stay open with notes. CF-076 is 'explained, provisional (P 0.45)' as a note: in-situ pH with Kallen-shaped K(pH) / k_r(pH), engine exchange rejected in two laboratories. New CF-091 (Zhai 2021 Fig. 7a quantified by difference). Dossier corrections: kallen1971 arithmetic 3 (k_r was the relaxation, 120-270x too fast); Grosch's 4-5x is in-pot loss, not extraction recovery (bolton1993, grosch1992, evidence map 2.11); liu2023b's 81 / 19 % superseded (CF-086). Red team: the shipped pH model fails both controls (P 0.85; CBX as the cause 0.35); fed-H2S rows carry a 0.5 - 0.85 dex headspace bias (0.75); the hub T8 test is inconclusive; the MFT loss law is flexible, not identifiable (0.1); the Nestle bound is not measurement-grade (0.15). Errata: EX-050 (the 'too fast' verdict holds for cysteine-rich pots only) and EX-054 (superseded by the cluster-5 re-run). No engine change."
     follow_up: "Red team of cluster 5's admission and TTCA's ring-N pKa before any exchange-law change; k_mft_decay as a declared band, Cys-conditional at most; the co-heated-standard tracer operator and a vessel / headspace operator after A3; a pH arm that moves acid to sugar fragmentation, scored jointly on Hou + Zhou + Martins + Meynier, after A3; the author requests and designed experiments named in the register remedies (CF-011 / 014 / 016 / 031 / 068 / 073 / 076 / 091)."
+  - id: EX-058
+    date: "2026-11-01"
+    kind: probe
+    question: "Batch-2 resolution (resolve2_pyrbuf): the form of buffer catalysis (E5 / CF-011); whether Piloty 1979 discriminates E4's step vs supply; which pyrazine rivals produce condition-dependent R (E13 / E14); three early-step items (Huber F15 -> F07, the a_w maximum, Wolf's lysine plateau)."
+    hypothesis: "Neutral; rivals, bands (DEV / unsplit only), decision rules and probabilities in the prereg before any number."
+    design: "Arithmetic on dossier and keyed held-out tables (Potman, Kallen, Thornalley: E5 TEST in split v2; Larralde and Lee 2024: keyed held-out, NOT in a frozen split) with a power check for the form test and a negative control (carboxylates on Amadori decay). An in-memory engine probe of Piloty's pot under the shipped slope and s = 0, with a no-MGO control. A pool-invariance test of R on time courses and supply arms (Shibamoto 1976, Koehler 1969, Lee 2024). Record: docs/history/conflict_resolution_2026-11-01/resolve2_pyrbuf/ (red team redteam.md binding where it differs)."
+    expected: "see prereg.md"
+    artifacts: [docs/history/conflict_resolution_2026-11-01/resolve2_pyrbuf/prereg.md, docs/history/conflict_resolution_2026-11-01/resolve2_pyrbuf/results.md, docs/history/conflict_resolution_2026-11-01/resolve2_pyrbuf/redteam.md]
+    commit: pending
+    verdict: partial
+    conclusion: >-
+      As corrected by the red team. E5: buffer catalysis is NON-SATURATING to 0.5 M in dilute pots, order 1.0 - 1.35
+      (Potman TEST; K <= ~0.3 M rejected, power >= 0.85 at run-to-run noise; P 0.8); 'linear, no Michaelis term' as an
+      engine law for lumped steps and concentrated foods P 0.45 (Potman Series A at 1.2 M falls 0.43 dex short of
+      linear; r_schiff lumps attack and dehydration). Kallen's saturation is consistent with a change of rate-determining
+      step (re-scored on the x3.1 - 4.4 ceilings: +0.09 / -0.11 / -0.22 dex) but a saturating law fits it equally well.
+      Selectivity step-specific P 0.5; Larralde's bicarbonate is consistent with zero; browning is not the Amadori step
+      (P 0.7); no kappa is temperature-flat (Guan 110 -> 130 C falls 0.4 - 0.75 dex); the pH-8 ratio fade is ~60 % k_u
+      rising, ~40 % lost catalysis (Davidek). E4: Piloty is not discriminating (P 0.85); it exposes a missing
+      dicarbonyl-amine adduct sink, >= ~1e3x (a lower bound; CF-095). E13 / E14: P0 rejected (3 independent labs: UC
+      Davis, Koehler, Lee); the P2b lower-order route is NOT TESTED (cumulative yields are not pool sizes; rate-based
+      proxies give |z| <= 1.8; P back to ~0.45); Lee 2024 at face value violates only P0, and only MPZ / 10 breaks
+      CF-087's floor; four pre-registered E13 TEST contrasts (shibamoto1977, low2007, vanlancker2012,
+      amranihemaimi1995) were neither scored nor excused. Huber: F15 -> F07 (P 0.85; not applied, F15#3 is TEST).
+      a_w: Cui is end-point, no conflict. Wolf: neither glycation structure gives the plateau (CF-096). New conflicts
+      CF-093 - CF-099; CF-011 / 087 notes.
+    follow_up: >-
+      A3: the E5 factor and its kappa bands under their own prereg and red team (provisional bands until then); a
+      citrate arm in CF-011's buffer arm C and on fed DFG decay; the designed E4 pot measures the Strecker aldehyde,
+      not amino-acid loss; score or excuse the four E13 TEST contrasts; record the UC Davis papers read here as
+      seen-by-designer for E13; Zhou 2024 raw ions (EX-052 open); a new split version for the F15#3 -> F07 move.

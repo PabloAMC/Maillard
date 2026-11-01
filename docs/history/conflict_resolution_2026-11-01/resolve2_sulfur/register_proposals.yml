@@ -1,0 +1,101 @@
+# resolve2_sulfur register proposals (2026-11-01). NOT applied: for the single register writer.
+# Ids CF-092 / CF-093 are placeholders; the writer assigns the next free ids.
+
+# ---------------------------------------------------------------------------------------------------------------
+# 1. CF-076: append to `sources`, `tests`, rewrite the first explanation's P, and the remedy note. (Q1)
+#    The block below is filled from phi1_retest.json; see results.md sec. 1.
+# ---------------------------------------------------------------------------------------------------------------
+CF-076_amend:
+  sources_add: [karpinski1990, radomski1989, bustillotrueba2018, kallen1973]
+  tests_append: >-
+    resolve2_sulfur re-test (2026-11-01; scratchpad resolve2_sulfur/results.md, phi1_retest.json; DEV-lab feasibility
+    only, E10 has one TEST lab). Release anchored at 25 C by Karpinski 1990 (pentose-Cys ring AThz 1.8e-4 /min at pH
+    6.0, phi = AThz/Thz ~1, Warsaw), band k25 [3e-5, 2.5e-4] (deflated for Karpinski's x3.3 phosphate / ionic-strength
+    excess over Kallen's TC), coupled to k_r45(100) through Kallen's pH shape and one Ea; pKa_T 5.2-6.1 (Radomski 1989).
+    S1, DE maxiter 20. Controls: NC1 58, NC2 34 (fail); uncoupled E4c 1.29 (passes). Coupled E2c 1.40 and E4c 1.76 in
+    the class band, both ONLY at k25's floor (3.0-3.2e-5) with Ea 40.6-42.9 at its floor; Ea 30 fixed 1.10 (k25 still at
+    its floor); Ea 50 fixed 3.43 and Ea 64 fixed 11.95 (rejected; T4, T8b). Post hoc, k25 fixed at the printed 1.8e-4:
+    feasible (1.39) only with Ea 26 and the steepest acid limb (s_lo 0.81). Every feasible point has pKa_T 5.2-5.5,
+    inside Radomski's band: the pKa is no longer the binding unknown; the release Ea is.
+  explanations_first_replace: "In-situ pH with Kallen-shaped K(pH) and k_r(pH), TTCA ring-N pKa 5.2-5.5: feasible with the release rate anchored at 25 C by a pentose-Cys ring (Karpinski, phi ~1) ONLY if the release Ea is <= ~45 kJ/mol (Ea 26 at the printed rate, ~40 if Karpinski's rate is deflated x6 for buffer catalysis); rejected at Ea >= 50. No thiazolidine release Ea has been measured. Admitted, provisional and CONDITIONAL on a low release Ea; P 0.35 (was 0.45)."  # and: K-released 0.2 -> 0.25; unlisted 0.2 -> 0.25
+  remedy_append: >-
+    Update 2026-11-01 (resolve2_sulfur): the declared band k_r(100 C, pH 4.5) 2-8e-4 /min stands only with a release Ea
+    of ~17-45 kJ/mol; at class-typical Ea (>= 50) the phi ~1 anchor rejects the family. Cheapest decider, ahead of
+    the pKa titration: ONE Arrhenius series of cysteine release from TTCA (or Karpinski's AThz) at fixed pH 4.5 and 6,
+    25-90 C, cysteine trapped (iodoacetate / N-ethylmaleimide) or by voltammetry; Ea <= 45 keeps the admission, >= 55
+    returns CF-076 to plain OPEN. The pKa titration stays second. No engine change.
+
+# ---------------------------------------------------------------------------------------------------------------
+# 2. NEW: van den Ouweland 1975 is not an MFT source (Q2)
+# ---------------------------------------------------------------------------------------------------------------
+- id: CF-092
+  kind: code_mismatch
+  scope: corpus
+  sources: [vandenouweland1975, whitfield1999, hofmann1998_reconciliation, hofmann1995]
+  quantity: "identity of the aromatic furanthiol from norfuraneol (NF) + H2S, and what the repo cites van den Ouweland & Peer 1975 for"
+  observation: >-
+    van den Ouweland & Peer 1975 (Unilever Duiven; NF + ~100x H2S, water, 95-100 C, 4 h, no yields) print peak 3 as
+    4-mercapto-2-methylfuran, drawn with SH remote from the methyl, and name the MFT-pattern products only as the
+    dihydrofuran (3-mercapto-2-methyl-4,5-dihydrofuran) and thiophenes. The repo's legacy texts describe the paper as a
+    synthesis of MFT from NF (docs/history/AUDIT_legacy_lane_2026-08.md, README_legacy_lane_2026-09-03.md,
+    tasks/audit_remediation.md, docs/validation/isotope_topology_evidence.md row 12), and the deep-research backlog
+    describes it as "MFT in cooked pork by SIDA". Whitfield & Mottram 1999's introduction says it identified MFT;
+    Hofmann & Schieberle 1998 say it could not identify MFT. Whitfield 1999 also finds none of the dihydro derivatives
+    that van den Ouweland reports.
+  explanations:
+    - "Mis-citation (the citation trail, not the paper): the print names, draws and regio-distinguishes the 4-isomer (Table I lists both 3- and 4-mercapto-2-methylthiophene, peaks 10 and 13; footnote a: checked against synthesised references); its MS [M-H]+/M+ 0.50 vs MFT's 0.28. Hofmann 1995 cites it for 2-methyl-3-thiophenethiol, Whitfield 1999's own Table 1 cites MFT to Evers 1976. P 0.85."
+    - "The authors misidentified MFT as the 4-isomer (packed GC, a synthesised 4-isomer reference): P 0.15. A misnaming in the print (intending MFT): P <= 0.05."
+    - "The dihydro products vs none (Whitfield 1999): conditions (100x H2S, strongly reducing, unbuffered, 95-100 C / 4 h vs ~2x H2S, pH 4.5 phosphate, 140 C / 1 h), P 0.6; packed-column co-elution / identification, P 0.25; unlisted 0.15."
+  tests:
+    - "Read Table I from the 220 dpi render (scratchpad ing1101/vohi-2r.png): name, drawn structure and the table's own 3- / 4-isomer distinction agree on the 4-isomer (resolve2_sulfur/corrections.md sec. B)."
+    - "Citation contexts read in the PDFs: hofmann1998.pdf intro ('unable to identify MFT'); whitfield1999.pdf intro (says MFT) vs its Table 1 (MFT cited to Evers 1976; van den Ouweland only for 2-methyl-3-thiophenethiol) and discussion (dihydro derivatives)."
+    - "Route existence without it: fed NF makes MFT in four laboratories on disk (Cerny 2003 pot D, labelling, 95 C; Hofmann 1998 Table 4, 145 C; Whitfield 1999 / 2001, 140 C; de Roos 2005, boiling). The NF route's existence does not depend on van den Ouweland (P 0.97); E6 (the NF share) never did (no yields)."
+  status: error_confirmed
+  remedy: >-
+    Erratum lines (history files are not rewritten) in AUDIT_legacy_lane_2026-08.md, README_legacy_lane_2026-09-03.md,
+    tasks/audit_remediation.md; correct docs/validation/isotope_topology_evidence.md row 12 and line ~100; fix the
+    backlog description at its source (03_thiamine_degradation.md l. 590) and regenerate deep_research_backlog.json;
+    flag the intro sentence in whitfield1999_extraction.md; vandenouweland1975_extraction.md: P(misidentified MFT) 0.3
+    -> 0.15 with the reasons. No model change: k_nf_mft and E6 never rested on this paper.
+  affects:
+    - {file: docs/validation/isotope_topology_evidence.md, symbol: "row 12 Norfuraneol"}
+    - {file: results/literature/deep_research_backlog.json, symbol: "van den Ouweland & Peer (1975)"}
+
+# ---------------------------------------------------------------------------------------------------------------
+# 3. CF-031: amend (Q4). Append to sources / observation / tests; new explanation first; remedy rewritten.
+# ---------------------------------------------------------------------------------------------------------------
+CF-031_amend:
+  sources_add: [zhang2022, zhang2021, yiltirak2026]
+  observation_append: >-
+    [Amended 2026-11-01, resolve2_sulfur] Zhang 2022 SI (Hefei; Xyl + Cys, pH 7.2 unbuffered, 120 C / 90 min, 4:1
+    oil : aqueous, phases separated): water-phase FREE MFT x0.36-4.8 and FFT x0.93-6.5 vs the oil-free control, i.e.
+    the opposite sign to Xu 2011 (same sugar, amino acid and temperature) and Reading. But the control holds 95 % of its
+    MFT pool as bis(2-methyl-3-furyl) disulfide (2.81 vs 0.14 ng/mL), which vanishes from every raw-oil water phase:
+    free + disulfide MFT falls x1/3.4-1/25 (raw oils), x1/1.0-1/3.5 (lipase-hydrolysed, mildly oxidised ENTH oils).
+    Measured species by lab: free MFT only -- Xu 2011, Whitfield 1988, Yiltirak 2026, Zhang 2021 (CMRC, keyed TEST),
+    US 8,920,862, du2025; free AND disulfide -- Elmore 2002 (pool x1/17 with linoleate, < 1/100 with linolenate) and
+    Zhang 2022. Zhang 2021 (0.07-0.24 % phospholipid, no bulk oil phase): MFT x0.31-0.60 in 6 / 6 contrasts, FFT
+    x0.70-1.83.
+  explanations_prepend:
+    - "Measurement species (free thiol vs free + disulfide pool): both labs that measured the disulfide (Reading / Elmore 2002, Hefei / Zhang 2022) see the MFT POOL fall by comparable factors (x1/17; raw-oil median x1/13), as Xu 2011's free MFT does (x1/21, fresh lard). Zhang 2022's free-MFT rise is a speciation shift (the oil-free control is 95 % disulfide; with oil the water phase holds free MFT only). EXPLAINS the sign disagreement Zhang 2022 vs Xu 2011 / Reading; P 0.65. Not explained by it: the oxidation direction (Zhang's ENTH oils suppress less, but they are lipase-hydrolysed with PV <= 4.3 vs Xu's 184; free fatty acids raise MFT in du2025: hydrolysis, P ~0.5); the Nestle mesophase raise (single run)."
+  tests_append:
+    - >-
+      resolve2_sulfur (2026-11-01; scratchpad resolve2_sulfur/corrections.md sec. C): species table per lab from the
+      Methods and tables; the pool rule (pre-registered: labs measuring the disulfide agree within x3 on pool
+      suppression; free-only labs diverge) holds: Elmore x1/17 vs Zhang 2022 raw-oil median x1/13. Partition is
+      excluded as the main term: Zhang 2021 lowers MFT with 0.07-0.24 % phospholipid and no bulk oil phase; Zhang 2022
+      water-phase FFT rises under 4:1 oil (pure partition: x1/20-1/400). Post hoc sign check on the keyed TEST table
+      (data/lit/fit_rows/heldout_zhang2021_table3.yml, not a score): MFT falls, and falls more than FFT, in 6 / 6
+      phospholipid contrasts.
+  status: open   # the Zhang 2022 sign part is EXPLAINED (P 0.65); the entry as a whole stays open (oxidation direction, Nestle raise)
+  remedy_replace: >-
+    Direction for the E7 writer (not applied): ONE term, a lipid-electrophile capture of the MFT pool (free +
+    disulfide), first order in MFT and lipid-carbonyl load, MFT-selective over FFT (log-suppression ratio >= ~3;
+    Huazhong, Reading, Hefei, consistent with CMRC). No oil-phase partition term (not supported cross-lab). No
+    oxidation-dose law and no free-MFT 'protection' term (one lab each). Every E7 row carries `mft_species: free |
+    pool`; free rows are compared with free MFT only where the pot's disulfide share is known or bounded. Carried
+    failure: this structure predicts the TEST contrast F25#17@us8920862 (MFT x10 up) wrong in sign. Ask Zhang et al.
+    (Hefei) for n / SD and the absolute charge (flag 1); ask Xu et al. whether bis(2-methyl-3-furyl) disulfide was
+    seen. Designed (ENGINE_VS_LITERATURE E7 row): add free + disulfide (or TCEP-reduced total) MFT to the buffer /
+    fresh / oxidised oil arms.
+  affects_add: [zhang2022_fig2_fig4_xyl_cys_oil_water, zhang2022_text_lipid_volatiles_and_si_tables, zhang2021_tab3_cys_xyl_phospholipid_reheat, elmore2002_tab1_tab3_cys_ribose_pufa_ester]

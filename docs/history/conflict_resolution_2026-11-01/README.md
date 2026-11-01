@@ -28,3 +28,15 @@ and wording, not the cluster's.
 - A red team of cluster 5's admission, and TTCA's ring-N pKa, before any change to the exchange law.
 - The co-heated-standard tracer operator (after A3), before the US 10,076,126 shape or level is scored.
 - The author requests and designed experiments named in each register entry's remedy.
+
+## Batch 2 (2026-11-01, afternoon; EX-058)
+
+Three more records, copied unchanged from the session scratchpad (scripts and paper text dumps not archived), each with
+an independent red team whose REQUIRED changes the single writer applied. Where a record and its red team differ, the
+register, the dossiers and `ENGINE_VS_LITERATURE.md` sec. 7 carry the red team.
+
+| record | red team | register | outcome |
+|---|---|---|---|
+| `resolve2_pyrbuf/` (prereg, results, register_edits.yml, doc_corrections.md, JSON) | `resolve2_pyrbuf/redteam.md` | CF-093 - CF-099; notes on CF-011, CF-087; EX-058 | E5: non-saturating to 0.5 M in dilute pots (P 0.8), "linear, no Michaelis term" as an engine law 0.45, step-specific 0.5; Larralde / Lee are keyed held-out, not TEST. E4: Piloty not discriminating (0.85), a missing adduct sink (CF-095). Pyrazines: P0 rejected by 3 labs; the P2b rejection withdrawn (cumulative yields are not pools; P ~0.45); Lee's face value violates only P0. Huber F15 -> F07 (0.85), not applied to the TEST cell F15#3. |
+| `resolve2_sulfur/` (prereg, results, register_proposals.yml, corrections.md, JSON) | `resolve2_sulfur/redteam.md`, `redteam_e2c_points.json` | CF-092; notes on CF-031, CF-076 | CF-076 conditional on a low release Ea along a (k25, Ea) ridge, P 0.45 -> 0.25; "rejected at Ea >= 50" is E4c-only. van den Ouweland 1975 proposes NF -> MFT (Fig. 4) but identifies no MFT; P(peak 3 is MFT) 0.3 kept. Wei's TTCA: rehydration to the pentose level, not a DX trap (0.6). CF-031: speciation shift 0.4 (the pre-registered rule fails on the ENTH arms; the oil phase was measured); Zhang 2021 (E7 keyed held-out) removed from the evidence. |
+| `wolf1977a/` (findings.md, rivals.json) | `resolve2_pyrbuf/redteam.md` sec. 5 | CF-072 notes, CF-096, CF-100; three ledger entries | Wolf 1977a does not decide CF-072 (P 0.1). Glycation barrier 137.7 vs 96.8 kJ/mol (CF-100). REFUTED and not written: a weaker glucose dependence as a conflict, and "Case 3 does not reproduce" (the printed "=" is "+", P 0.9). The 5.0 +- 0.7 is a mis-citation in the companion, flagged there. |
