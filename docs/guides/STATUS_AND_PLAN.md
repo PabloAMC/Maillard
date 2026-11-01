@@ -181,6 +181,61 @@ Investigation runs in parallel: <= 3 agents, read-only on `src/`, writing standa
 - **(P2) Owner:** one decision memo with a default for each item (E4 + CF-077, A3 items 1 and 6, the author emails drafted and ready, the E3 + E1 designed-experiment brief).
 - **(P3) A literature census** of the most-unknown regimes, low priority.
 
+**Inference track H: hierarchical Bayesian multiresponse and full posterior sampling (owner, 2026-11-01: "add the
+full hierarchical sample", with paid Colab compute available; revised after its premortem the same day).**
+
+*Why.* The thiol leave-one-lab-out (EX-056) is NOT ADEQUATE: 6 labs (5 scorable, one holding 341 of 383 held-out
+rows), 16 free constants, in-sample between-lab tau 0 - 0.17 dex against ~1 dex held out, 90 % coverage 0.34, and
+folds moving constants by 3 - 4.5 dex. In sample the fitted constants act as lab effects. A hierarchical model gives
+intervals for a NEW lab; it calibrates uncertainty, it does not fix a wrong structure (P(it alone makes the thiol
+lane beat both nulls out of sample) ~0.15), and it can HIDE a wrong structure in lab effects, which the tests below
+must catch. Today one full-cost evaluation is 2.5 - 21 s on CPU with finite-difference Jacobians, so the bottleneck
+is the code, not the chip.
+
+| # | stage | needs | work / compute | acceptance |
+|---|---|---|---|---|
+| H0 | **Out-of-sample tau from EX-056, post-processing only.** Nested leave-one-lab-out (tau calibrated without the scored lab), weighted by LAB not row, declared a lower bound (the structure, series noise and warm starts were set on all labs). Second split: another lane's leave-one-lab-out or labs newly keyed by P1; repeated grouped lab partitions only once >= 10 labs exist. | nothing (no A3 dependency) | 4 - 6 h / 1 h | a proper score (held-out log density + interval score) against both nulls, with coverage AND width reported; pre-declared: absolute-class tau > 0.8 dex -> the lane ships relative within-lab predictions only |
+| H1 | **Hierarchical specification, pre-registered.** Lab effects on OBSERVATION levels and on bounded latent CONDITIONS (heat-up lag, pH drift, buffer); on a rate constant only where >= 3 labs inform it. Hyperpriors from measured bands and Ea classes; non-centred. Masking tests: (a) lab effects regressed on recorded pH / T / buffer -- a trend names a missing mechanism; (b) lab effects must not change within-lab frozen signature verdicts; (c) a lab spread > 0.3 dex on a physical constant is structural. | H0, identifiability audit | 4 - 6 h | independent review |
+| H2 | **Tool bake-off on a forced-input layer** (the Strecker layer with measured dicarbonyls, written to the A2 contract): JAX + diffrax + NumPyro vs a compiled CPU right-hand side, float64. Positive control: simulation-based calibration on synthetic truth. Negative control: a wrong structure WITH lab effects on k, fitted to data simulated on EX-056's lopsided design, must be detected by the masking tests. GPU benchmarked here (T4 / L4 / A100 vs the 8-core CPU) before any queue is sent to Colab. | H1 | 8 - 12 h / hours | trajectories within < 1 % of the observation sigma of the numpy layer; gradients vs central differences; SBC passes; the negative control is caught |
+| H3 | **Fast differentiable engine.** First profile; then a 1-day spike on the charge balance alone: pH as an algebraic state of an index-1 DAE in CasADi / IDAS (exact forward and adjoint sensitivities, float64, CPU), against JAX (diffrax has no BDF or DAE; the nested brentq / ionic-strength / warm-start pH solve is the risk; only the inline B64 coupling can be ported). The winner compiles A2's arrays. | A2a merged, H2, a lane passing its structure tests | 3 - 5 days | panel and signature records within the stated tolerance (not bit-identical); gradient checks |
+| H4 | **Full hierarchical posterior on each lane that passes its structure tests.** At 16 - 30 constants plus lab effects: SMC or ensemble samplers, or a Gaussian-process emulator with history matching (an explicit model-discrepancy term names structural error); NUTS last, started from Laplace / Pathfinder with a dense mass matrix and a sampler-health stop rule (divergences, tree depth, solver failures). Exact leave-one-lab-out by refitting, compared with Laplace + H0's tau by paired held-out log density. GPU batching (pots x chains x folds) only if H2's benchmark shows a gain. | H3 | 1 - 2 days / 6 - 24 h per run | R-hat < 1.01, bulk ESS > 400, no unresolved divergences; held-out proper score beats Laplace + tau |
+
+*GPU facts (premortem, March 2026 sources).* Stiff kinetics needs float64. FP64 TFLOPS: T4 ~0.25, L4 ~0.47 (both
+1/32 - 1/64 of FP32), A100 9.7 (19.5 tensor), H100 26 - 34. Small stiff solves are bound by kernel launches, not
+FLOPs, so P(the GPU beats the 8-core CPU by < 3x) ~0.6. Colab Pro / Pro+ buy compute units; an A100 costs ~5 - 8
+units/h, premium GPUs are "subject to availability", and 24 h background runs are Pro+ only. Money is not the
+limit; disconnects are. Exact gradients cut a 16-constant least-squares fit by ~3 - 8x (mostly compilation), and a
+~100-dim gradient by ~100x.
+
+*Rules.*
+- A separate `maillard-jax` env (jax / jaxlib, diffrax, numpyro, optimistix, casadi); a gate checks that the core
+  `environment.yml` lock is unchanged, so frozen evidence does not drift through a numpy / scipy bump.
+- Colab runs are proposed to the owner first; the notebook clones the repo at a recorded sha with a pinned
+  requirements file; chains checkpoint to Drive; Colab returns posterior DRAWS only. Scoring, coverage and every
+  `results/validation/` artifact are made from the draws locally through `./scripts/docker_maillard.sh`. Nothing
+  private (PDFs, the download queue) goes to Colab.
+
+*Calibration (premortem):* H0 by 11-07 ~0.7; H2 passes SBC by 11-14 ~0.35; H3 by end of November ~0.2; a converged
+hierarchical posterior on the thiol lane by mid-December ~0.15; given calibration, intervals widen > 2x ~0.85.
+
+**Consolidation wave V (owner, 2026-11-01: "take a step back, send many agents to verify the current information,
+solve disagreements, and identify citation chains that may help us finalize the literature").** After the
+resolution batch in flight is red-teamed and applied; ~2 days; <= 8 agents at a time; agents write patches to the
+scratchpad and ONE writer applies them in order.
+- V1 Verify, ranked by influence: every number a prereg, a TEST contrast or a fit row cites, plus a random sample
+  of the rest (to re-measure the atlas's ~9 % error rate); figure-read numbers flagged. Verifiers are BLIND to the
+  engine's residuals. Corrections to TEST rows land with a new split hash before anything is scored on them. Every
+  dossier's DOI line checked against Crossref.
+- V2 Disagreements: each open CF entry triaged into resolvable-from-corpus / needs-a-paper / needs-an-experiment;
+  one agent per mechanism cluster resolves the first kind.
+- V3 Citation chains: best-first search per open mechanism (backward and forward via OpenAlex / Crossref, starting
+  from the dossiers with labelling, fed-intermediate or rate-constant evidence), de-duplicated against the corpus;
+  stop at < 1 useful candidate per 10 abstracts or a cap of 30 abstracts and 5 full texts per mechanism (pre-1990
+  reference lists are patchy in OpenAlex, so read those PDFs' reference lists directly). The ranked download list
+  goes to chat with verified DOIs, never into the repo.
+- Output: one consolidation record (verified / changed / still open and why); after it every literature item is
+  "settled", "needs paper X", or "needs an experiment".
+
 **Missing pieces carried as declared limitations until built:**
 - in-situ pH: the probes clamp pH while the literature pots drift (CF-084);
 - observation operators;
@@ -192,6 +247,7 @@ Investigation runs in parallel: <= 3 agents, read-only on `src/`, writing standa
 - (b) E4 + CF-077 have verdicts;
 - (c) the A3 phase 2 PR is green;
 - (d) E1 is pre-registered as a standalone module.
+- (e) H0 (out-of-sample between-lab tau from EX-056) is scored against both nulls.
 
 P(met) ~0.5 (premortem). P(>= 2 evidence-admitted mechanism changes shipped by 11-14) ~0.45.
 
