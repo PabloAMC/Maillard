@@ -83,12 +83,13 @@ cells:
     tags: {ph_basis: label, T_C: 168, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: intact_c5_total, buffer_M: 0.5, t_min: "20-60"}
     status: dominant
     quote: "MFT is mostly the intact C5 ribose skeleton (~81 %)"
-    quantity: "printed ~81 % intact / ~19 % fragments; re-read as an EI-MS [M-H]+ artefact (MFT M+4 / M+5 = 0.30 vs NIST [M-H]+/M+ 0.28) -> ~94 % intact, fragments ~6 % (MECHANISM_REVIEWS_2026-10-31 row 5, P 0.8)"
+    quantity: "printed ~81 % intact / ~19 % fragments (41 / 3 / 2 / 1 / 12 / 40 at 20 min); the 19 % is carried by M+4, the labelled MFT's own EI [M-H]+ ion (M+4 / M+5 0.30 vs NIST [M-H]+/M+ 0.28; same-pot FFT 0.09 vs its 0.05). The Methods' [M-1]+/[M]+ adjustment did not reach the labelled cluster (applied, M+4 would be ~1), so the correction is not double-counted: ~94 % intact C5, fragments 5.9-6.6 % at 20-60 min (CF-086, P 0.9)"
     evidence: labelling
     lab: "CAAS Beijing (Zhang Dequan group)"
     dossiers: [liu2023b_extraction.md]
-    where: "sec. 2 labelling; Table 3 per docs/history/mechanism_reviews_2026-10-31/thiols.md sec. 0"
+    where: "Table 3; sec. 2.7 (Methods), sec. 3.2; docs/history/mechanism_reviews_2026-10-31/thiols.md sec. 0"
     conflict: "CF-086 (the 19 % vs ~6 % re-read; see F24)"
+    note: "re-read 2026-11-01: two readers (A MINOR, B MATCH): both confirm the printed 81 % and flag sec. 2.7 (H-loss adjusted by [M-1]+/[M]+). Adjudicated MATCH: the table carries the uncorrected signature in every furan / thiol (M+4 / M+5 tracks each compound's own NIST [M-H]+ / M+), M+1 (3) is not M+4 (12) as C4 + C1 recombination requires, and unlabelled : labelled 41 : 52 equals the uncounted m/z 113 ion. See CF-086."
   - key: {ph: neutral, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: 140, sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: phosphate, metals: not_controlled, subroute: hexose_c5, t_min: 300}
     contrast: "+/- chicken fat / oxidised fat: label pattern unchanged (text)"

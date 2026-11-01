@@ -44,15 +44,16 @@ cells:
     where: "Table I, Table III, sec. 1 answers"
   - key: {ph: neutral, temperature: low, water: dilute}
     tags: {ph_basis: in_situ, T_C: 25, sugar: none, carbonyl: formaldehyde, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
-    contrast: "phosphate 0 -> 0.3 M at pH 6.12-6.62: formation x3.5-5, SATURATING (half-saturation 17-29 mM total phosphate); general-acid catalysis of carbinolamine dehydration, rate-determining step changes at pH ~6"
+    contrast: "phosphate 0 -> 0.3 M at pH 6.12-6.62: formation x3.1-4.4 (C3 / C2 of the printed Fig. 7 fit), SATURATING (half-saturation 17-29 mM total phosphate); general-acid catalysis of carbinolamine dehydration, rate-determining step changes at pH ~6"
     status: operating
     quote: "SATURATES at x3.5-5 (half-saturation 17-29 mM total phosphate"
-    quantity: "pre-saturation slope ~270 per M HPO4(2-); ceiling x3.5-5"
+    quantity: "initial relative slope (C3 - C2) / (C2 C3) ~80-180 per M total phosphate (pH 6.31 / 6.12 / 6.62) from the printed fit; ceiling x3.1-4.4; the catalyst is the phosphate monoanion H2PO4-"
     evidence: within_study_factor
     lab: "Kallen (U. Pennsylvania)"
     dossiers: [kallen1971b_extraction.md]
     where: "Fig. 7, Table III"
     conflict: CF-076
+    note: "re-read 2026-11-01: two readers MINOR: the ceiling is x3.1-4.4 (C3/C2 = 4.43 / 3.06 / 4.06), not x3.5-5 (the quote keeps the dossier's wording); the former '~270 per M HPO4(2-)' slope is not printed and names the wrong species (the paper assigns catalysis to H2PO4-). Half-saturation 17-29 mM matches."
   - key: {ph: neutral, temperature: moderate, water: dilute}
     tags: {ph_basis: in_situ, T_C: "30-90", sugar: none, carbonyl: "2-aryl / styryl (not a sugar)", amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "ring opening (C-S, fast, general-ACID catalysed) and iminium hydrolysis (slow, general-BASE catalysed incl. phosphate 0.050 M^-1 s^-1, Bronsted beta 0.29) measured as separate steps, pH 1-12; N-acetyl ring: opening rate-limiting, no buffer catalysis"
@@ -297,7 +298,7 @@ cells:
     where: "Kang 2026 sec. 6a (abstract, p. 3247); SI Table S6"
   - key: {ph: not_stated, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: 120, sugar: none, carbonyl: "formaldehyde / acetaldehyde / butyraldehyde / benzaldehyde / furfural", amine: cysteine, oxygen: inert, buffer: none_unbuffered, metals: not_controlled}
-    contrast: "free cysteine vs its aldehyde thiazolidines (0.1 M, 120 C bath, CO2 sweep, 0.5-6 h): H2S from the bound cysteine only 1.2-3.5x slower; the furfural thiazolidine releases 2x MORE"
+    contrast: "free cysteine vs its aldehyde thiazolidines (0.1 M, 120 C bath, CO2 sweep, 0.5-6 h): H2S from the bound cysteine only 1.2-3.4x slower at 6 h (up to ~6.7x at 1 h, butyraldehyde 7 vs 47 ug); the furfural thiazolidine releases 1.5-2.2x MORE"
     status: operating
     quote: "binding cysteine in a thiazolidine lowers H2S release by only 1.2-3.5×"
     quantity: "free Cys 0.95 % of S as H2S in 6 h; the ring is not a full protection of cysteine against thermolysis"
@@ -305,6 +306,7 @@ cells:
     lab: "Mizutani / Obata (Hokkaido)"
     dossiers: [mizutani1960_extraction.md]
     where: "Tables I-II"
+    note: "re-read 2026-11-01: reader A MINOR (single reader, Table I checked): the butyraldehyde row prints 7 / 29 / 97 under 1 / 3 / 6 h (no 0.5 h value), so 1.2-3.4x holds at 6 h only; earlier times reach ~6.7x. The quote keeps the dossier's 1.2-3.5."
 
 condition_dependence: >-
   SHOWN: (1) Formation is fast and extensive wherever free cysteine meets a pentose at >= 80 mM: 18 % of Cys bound at

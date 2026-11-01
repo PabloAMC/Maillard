@@ -23,6 +23,7 @@ cells:
     lab: "Iowa State (Schmidt-Rohr)"
     dossiers: [fang2009_extraction.md]
     where: "Results; dossier sec. 1 and mass-balance table"
+    note: "re-read 2026-11-01: two readers (A MATCH, B MINOR); adjudicated MATCH: 27 +/- 4 % is the authors' preferred estimate of Strecker loss of C1 as CO2 (p. 10710: '21% underestimates ... 27 ± 4% is a better estimate'); the direct count gives 21 %."
   - key: {ph: alkaline, temperature: moderate, water: dilute}
     tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: not_stated, metals: not_controlled}
     contrast: "aqueous 0.056 M at pH 8, 1 week, vs dry 125 C: more decarboxylation in solution (33 vs 27 %)"
@@ -35,14 +36,15 @@ cells:
     where: "Results; mass-balance table"
   - key: {ph: not_stated, temperature: high, water: low_aw}
     tags: {ph_basis: label, T_C: 125, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
-    contrast: "glucose labelled one carbon at a time (13C1, 13C2, 13C3, 13C6, U-13C6): C6 barely changes, C1 makes new C-C bonds; ~40 % of polymer carbon aromatic / alkene, ~51 % alkyl; no single structure > 15 %"
+    contrast: "glucose labelled one carbon at a time (13C1, 13C2, 13C3, 13C6, U-13C6): C6 changes least (about half stays OCH2), C1 makes new C-C bonds; ~40 % of polymer carbon aromatic / alkene, ~51 % alkyl; no single structure > 15 %"
     status: operating
     quote: "between one-quarter and one-half of all glucose carbon backbones are fragmented"
     quantity: "intact-C6 incorporation 50-75 % of glucose units; fragment (C3 / C2) incorporation 25-50 %"
     evidence: labelling
     lab: "Iowa State (Schmidt-Rohr)"
     dossiers: [fang2010_extraction.md]
-    where: "Abstract; Results 'Synopsis'"
+    where: "Abstract; Results 'Fragmentation' paragraph"
+    note: "re-read 2026-11-01: two readers (A MATCH, B MINOR); adjudicated MINOR: the abstract says C6 'undergoes the least transformation, remaining half in OCH2 groups'; the 1/4-1/2 sentence sits in 'Fragmentation'."
   - key: {ph: mild_acid, temperature: moderate, water: concentrated}
     tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
     contrast: "0.25 M glucose or maltose + 0.25 M glycine, 0.2 M acetate pH 5.5, heated to A470 = 2; 14C sugar / whole glycine / glycine C-1: about two-thirds of glycine enters DECARBOXYLATED"
@@ -93,11 +95,12 @@ cells:
     contrast: "SUGAR TYPE, solvent-free 1:1 with glycine, 10 min: sugar units per glycine a = ribose 4.74, glucose 2.19, maltose 2.34, fructose 1.53"
     status: operating
     quote: "| Ribose | 50.28 | 6.28 | 2.41 | 41.03 | 4.74 | 1.69 |"
-    quantity: "pentose melanoidin carries ~2x the sugar per N of glucose; fructose the least"
+    quantity: "pentose melanoidin carries ~2x the sugar per N of glucose; fructose the least of the monosaccharides (lactose 0.71 and sucrose 0.52 are lower)"
     evidence: within_study_factor
     lab: "TU Berlin (Kroh)"
     dossiers: [cammerer1994_extraction.md]
     where: "Table 1"
+    note: "re-read 2026-11-01: two readers (A MINOR, B MATCH); adjudicated MINOR: Table 1 prints lactose 0.71 and sucrose 0.52, below fructose 1.53."
   - key: {ph: not_stated, temperature: very_high, water: low_aw}
     tags: {ph_basis: label, T_C: "130-200", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "TEMPERATURE, glucose + L-alanine 1:1 solvent-free, 10 min at 12 temperatures, dialysed 12-14 kDa: C/N rises 13 -> 21 (unit values: 9 for 1:1, 15 for 2:1 with alanine)"

@@ -61,14 +61,15 @@ cells:
     where: "Tables I-II (p. 384-385); dossier arithmetic 1"
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
     tags: {ph_basis: not_measured, T_C: "~100 (liquid; oil bath 120)", sugar: none, amine: cysteine, oxygen: inert, buffer: none_unbuffered, metals: not_controlled}
-    contrast: "cysteine bound in a thiazolidine (aldehyde adduct) vs free: H2S 0.27-0.81x (formaldehyde, acetaldehyde, butyraldehyde, benzaldehyde); furfural adduct 2.0-2.2x (aged 6x)"
+    contrast: "cysteine bound in a thiazolidine (aldehyde adduct) vs free: H2S 0.30-0.81x at 6 h, 0.15-0.81x over 0.5-6 h (formaldehyde, acetaldehyde, butyraldehyde, benzaldehyde); furfural adduct 2.0-2.2x (aged 6x)"
     status: operating
     quote: "thiazolidines of simple aldehydes release H2S at"
-    quantity: "NH3 from the adducts 0.29-0.65x free cysteine"
+    quantity: "NH3 from the adducts 0.29-0.64x free cysteine at 6 h (0.19-0.54x at 3 h)"
     evidence: within_study_factor
     lab: "Hokkaido Univ. (Obata / Mizutani)"
     dossiers: [mizutani1960_extraction.md]
     where: "Tables I-II; dossier 'Use in the model', gap (b) and (e)"
+    note: "re-read 2026-11-01: two readers MINOR: the lower ends 0.27 (H2S) and 0.29 (NH3) do not reproduce across all times; ratios recomputed from Tables I-II with the butyraldehyde row read as 1 / 3 / 6 h."
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
     tags: {ph_basis: not_measured, T_C: "~100 (liquid; oil bath 120)", sugar: none, amine: sulfur_aa_other, oxygen: inert, buffer: none_unbuffered, metals: not_controlled}
     contrast: "cystine vs cysteine (10 mM S, same apparatus): cystine lags at 1 h then exceeds cysteine; 10x dilution raised cysteine H2S 1.1-1.5x vs the 10 mL series"

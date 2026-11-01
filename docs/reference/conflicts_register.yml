@@ -2075,7 +2075,7 @@ entries:
       # rewritten 2026-11-01 after the cluster-5 re-run of EX-054 (P from docs/history/conflict_resolution_2026-11-01/cluster5/verdict.md sec. 5)
       - "In-situ pH with Kallen-shaped K(pH) and k_r(pH) (TTCA ring-N pKa <= ~5.9): the concentrated unbuffered pots and Zhang 2025b's phosphate pH 6.5 pot sit at higher K and faster release than Cao (pH 4.2-4.7) and the drifting dilute pots (~4.5-5.5). Feasible, admitted PROVISIONALLY; P 0.45."
       - "A slow exchange with a much larger, pH-dependent K than Cao's 60 L/mol (the K-released search, S4: K 0.26-26 L/mmol gets close, max |z| 2.1-2.6, not inside 2); hypothesis only, P 0.2."
-      - "Catalysed exchange (amino-acid / phosphate general-acid catalysis; Kallen 1971b bounds c_aa at <= ~3 /M at pH 6-7, none below pH ~5.5, saturating at x3.5-5): REJECTED as E1c (max |z| 4.0); not identified inside the feasible family either. With secondary-amine nucleophilic catalysis by TTCA / CAMA (morpholine analogue; REJECTED as E5, 5.2): P(catalysis, any kind) 0.1."
+      - "Catalysed exchange (amino-acid / phosphate general-acid catalysis; Kallen 1971b bounds c_aa at <= ~3 /M at pH 6-7, none below pH ~5.5, saturating at x3.5-5; x3.1-4.4 from the printed Fig. 7 fit, re-read 2026-11-01): REJECTED as E1c (max |z| 4.0); not identified inside the feasible family either. With secondary-amine nucleophilic catalysis by TTCA / CAMA (morpholine analogue; REJECTED as E5, 5.2): P(catalysis, any kind) 0.1."
       - "Quench / storage operator: TTCA re-forms in the concentrated samples at 4 C / RT before HPLC (dose bounded by Zhai 2019's t = 0 point): REJECTED as E6 (5.1, dose at its band top); P 0.05."
       - "A second cysteine sink, or an unmeasured Cys + Xyl adduct pool (CF-063's missing half), or something unlisted: P 0.2 (E3, E0 + a Cys sink, is REJECTED with E0)."
     tests:
@@ -2367,20 +2367,34 @@ entries:
       With M+4 corrected (12 - 0.28 x 40 ~ 1), the fragment share is ~6-7 %, the level of the label's impurity and of
       Cerny & Davidek 2003's non-(0, 5) channels at 95 C (<= ~5 %, cerny2003 Table 2 row 7). Found by
       docs/history/mechanism_reviews_2026-10-31/thiols.md sec. 0 (P 0.8); the atlas cells F23 cell 6 and F24 cell 6
-      read it.
+      read it. Two-reader PDF re-read 2026-11-01 (docs/reference/contrast_benchmark/README.md, reread_status): both readers confirm the printed
+      table; reader A asked whether the Methods' adjustment (sec. 2.7: natural 13C / 33S / 34S subtracted, and "the
+      hydrogen loss from the ions were adjusted by [M - 1]+/[M]+") means this entry's correction double-counts. It
+      does not: had the adjustment been applied to the labelled cluster, MFT's M+4 would be ~1 (12 - 0.28 x 40), not
+      12; the printed M+4 / M+5 is the uncorrected value. The adjustment the Methods describe is the one this entry
+      applies, and it did not reach the labelled MFT ion (for furfural and 2-methylfuran M+0 ~ M+4 + M+5, the mark of
+      an adjustment applied to the unlabelled ion only; for MFT M+0 ~ M+5, the mark of none).
     explanations:
       - "EI-MS artefact: the claimed [M-1]+ correction was not applied (or not applied to the labelled ion), so the labelled MFT's own M-1 fragment is read as an M+4 isotopologue."
-      - "A real fragment route at 168 C (the paper's reading): would need an M+4 isotopologue that by chance matches the EI [M-H]+ ratio in three unrelated compounds."
+      - "A real fragment route at 168 C (the paper's reading): would need an M+4 isotopologue that by chance matches the EI [M-H]+ ratio in four unrelated compounds, a C4 + C1 recombination that fills M+4 (12) but not M+1 (3), and a labelled : unlabelled excess that equals the unlabelled ion's m/z 113 loss."
     tests:
       - "The same table's furans show the same signature (thiols.md sec. 0): furfural M+4 / M+5 = 23 / 21 against NIST [M-H]+ / M+ 0.99; 2-methylfuran 20 / 29 against 0.58. Each M+4 tracks its own compound's EI M-1 ratio."
       - "The unlabelled : labelled imbalance (41 : 52 at 20 min) equals the unlabelled ion's uncounted M-1 (thiols.md sec. 0)."
+      - "Same pot, same nominal mass (re-read 2026-11-01): 2-furfurylthiol M+4 / M+5 = 4 / 45 = 0.09 against its NIST EI [M-H]+ / M+ 0.05 (m/z 113 / 114 = 109 / 2169, webbook JCAMP C98022) plus ~0.05 from 99 % 13C label purity; MFT 12 / 40 = 0.30 against 0.28 (2799 / 9999, C28588741). The two thiols differ exactly as their own spectra do."
+      - "Symmetry (re-read 2026-11-01): random C4 + C1 recombination in a 1:1 pool fills M+1 and M+4 equally; MFT prints M+1 3 against M+4 12 at every time point."
+      - "Corrected share (re-read 2026-11-01; M+4 minus 0.28 x M+5, M+0 and M+5 restored by 1.28, renormalised): non-(0, 5) channels 6.2 / 5.9 / 6.6 % at 20 / 40 / 60 min; C2 + C3 (M+2 / M+3) 3-4 %."
     status: explained
     remedy: >-
-      Read Liu 2023's MFT labelling as ~94 % intact C5 and ~6 % fragments (band 5-19 % until the authors' raw spectra
-      settle it); no measured rise of the fragment share with temperature follows from it. The atlas cells F23 cell 6
-      (dominant, intact C5) and F24 cell 6 (conflicting) cite this entry. The dossier's sec. 2 sentence and the ledger
-      note of liu2023b_carbon_module_labelling still print the uncorrected 81 / 19 %; annotate them in a dossier
-      wave (not edited here). No engine constant uses the number.
+      Read Liu 2023's MFT labelling as ~94 % intact C5 and ~6 % fragments (5.9-6.6 % at 20-60 min; band 4-9 %, the
+      upper end from the M+1 = M+4 symmetry; 19 % only if the authors' raw spectra contradict every test above).
+      P 0.9 (up from 0.8 on the same-pot 2-furfurylthiol control and the symmetry test, 2026-11-01). Like every
+      labelled pot in F24 the share counts only the mixed half of random 1:1 recombinants, so it is comparable with
+      Cerny 2003 / Zhao 2019 / Du 2023, not an absolute recombined fraction. The claim "MFT is an intact C5, fragments
+      <= ~6 % in labelled pots" therefore holds at 168 C; no measured rise of the fragment share with temperature
+      follows. The atlas cells F23 cell 6 (dominant, intact C5) and F24 cell 6 (minor, was conflicting) cite this
+      entry. The dossier's sec. 2 sentence carries the superseded note; the ledger note of
+      liu2023b_carbon_module_labelling still prints the uncorrected 81 / 19 %; annotate it in a dossier wave (not
+      edited here). No engine constant uses the number.
     affects: [liu2023b_carbon_module_labelling]
 
   - id: CF-087

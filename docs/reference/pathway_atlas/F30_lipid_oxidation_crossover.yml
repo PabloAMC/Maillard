@@ -114,7 +114,7 @@ cells:
   # ---------------- fed lipid carbonyl -> Maillard-type heterocycles (labelled / fed) ----------------
   - key: {ph: neutral, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: 150, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
-    contrast: "Cys + glucose + one C9 aldehyde (nonanal, 2-nonenal, 2,4-nonadienal, 2,6-nonadienal) vs none, pH 6.5, 120 min: 2-pentylthiophene only from the 2,4-dienal, 92 % carrying no glucose carbon (CAMOLA); 2-butylpyridine 191 ug/L in the same pot (NH3 from cysteine)"
+    contrast: "Cys + glucose + one C9 aldehyde (nonanal, 2-nonenal, 2,4-nonadienal, 2,6-nonadienal) vs none, pH 6.5, 120 min: 2-pentylthiophene only from the 2,4-dienal, ~84 % carrying no glucose carbon (92 % M+0 / 8 % M+1 in a 1:1 CAMOLA); 2-butylpyridine 191 ug/L in the same pot (NH3 from cysteine)"
     status: dominant
     quote: "with 92 % of its molecules carrying no glucose carbon"
     quantity: "2-pentylthiophene 238.65 +/- 23.37 ug/L; negative controls (alkanal, enal) give none (also F26)"
@@ -122,6 +122,7 @@ cells:
     lab: "CAAS Beijing (Du / Wang)"
     dossiers: [du2023_extraction.md]
     where: "sec. 1 (i)-(ii); CAMOLA results"
+    note: "re-read 2026-11-01: two readers (A MATCH, B MINOR); adjudicated MINOR: as F26#24, 8 % M+1 in a 1:1 CAMOLA means ~16 % carry one glucose carbon. Still dominant."
   - key: {ph: neutral, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: 150, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "the same pots: every C9 aldehyde suppresses the control's sulfur heterocycles; dienals more than the enal or the alkanal"

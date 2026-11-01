@@ -121,7 +121,7 @@ cells:
     where: "Table II"
   - key: {ph: neutral, temperature: low, water: dilute}
     tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: protein_bound_lys, amine_note: "N-alpha-formyl-fructoselysine", oxygen: [air, inert], buffer: phosphate, metals: not_controlled}
-    contrast: "air (no chelator) vs N2 + chelators: decomposition ~4x faster (ratio 4.0-5.3 across 10-200 mM phosphate) and the products shift to oxidative cleavage (CML, LL) with fewer hexoses; confounded by the chelators"
+    contrast: "air (no chelator) vs N2 + chelators: decomposition ~4x faster (ratio 4.0-5.3 across 10-200 mM phosphate) attributed by the authors largely to CML formation (oxidative cleavage); hexitols fall (12.4 / 7.5 vs 21.8 / 19.9 %) while the other sugar products are similar; confounded by the chelators"
     status: operating
     quote: "air accelerates decomposition ~4x, but the products under air are CML / LL"
     quantity: "fFL t1/2 4.2-10.7 d (air) vs 16.8-57.1 d (N2); glucosone not detected under either"
@@ -129,6 +129,7 @@ cells:
     lab: "Baynes (USC; Zyzak)"
     dossiers: [zyzak1995_extraction.md]
     where: "Table I, Table II, sec. 1 (d)"
+    note: "re-read 2026-11-01: reader A MINOR (single reader, scanned pp. 551-552 checked): numbers match; the authors say similar carbohydrate products form under oxidative and anti-oxidative conditions and attribute the faster aerobic loss 'largely to the formation of CML'; Table II prints no CML yields; tetritols are not lower under air (30.6 / 19.7 vs 23.6 / 19.0 %)."
   # ---------------- SCUT: proline ARP (secondary amine), 110 / 130 C, buffer type ----------------
   - key: {ph: mild_acid, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: "110-130", sugar: hexose_aldose, amine: other_free_aa, amine_note: "proline (secondary amine)", oxygen: not_stated, buffer: phosphate, metals: not_controlled}

@@ -96,7 +96,7 @@ cells:
     lab: "Garrett (University of Florida)"
     dossiers: [garrett1969_extraction.md]
     where: "Tables and text (A277)"
-    note: "pH ~0: specific-acid catalysis is real but cannot carry pentose to furfural at pH 3-7."
+    note: "pH ~0: specific-acid catalysis is real but cannot carry pentose to furfural at pH 3-7. re-read 2026-11-01: reader A MINOR overruled (PDF checked): 70-92 % recomputes from Table I's computed k1 / (k1 + k2) (ribose 75, xylose 86, lyxose 70, arabinose 92 %); the abstract's 7-25 % side reaction excludes lyxose. MATCH."
   - key: {ph: mild_acid, temperature: high, water: dilute}
     tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: none, oxygen: air, buffer: other_buffer, metals: not_controlled}
     contrast: "ribose alone, pyrophosphate pH 5.6 -> 5.7 vs unbuffered 5.6 -> 3.9: furfural 107 vs 103 (same)"
@@ -140,7 +140,7 @@ cells:
     dossiers: [haleva1999_extraction.md]
     where: "Table 1"
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, buffer_note: "0.1 M citrate-phosphate (McIlvaine-type) buffer: phosphate present but mixed with citrate, so not the phosphate bin"}
     contrast: "rhamnose alone pH 7 vs pH 5: furaneol 1.37 mg/L vs not detected (with arginine at pH 5: ~10 mg/L)"
     status: operating
     quote: "| C, pH 7 | Rhm | 1.37 |"
@@ -149,7 +149,7 @@ cells:
     lab: "Hebrew University (Naim)"
     dossiers: [haleva1999_extraction.md]
     where: "Fig. 1 (figure-read, log axis)"
-    note: "rhamnose = 6-deoxyhexose (tagged hexose_aldose)."
+    note: "rhamnose = 6-deoxyhexose (tagged hexose_aldose). re-read 2026-11-01: reader A WRONG (single reader, PDF checked): Materials give 0.1 M citrate-phosphate, so buffer phosphate -> other_buffer; 1.37 mg/L is a log-axis figure read."
   - key: {ph: neutral, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: 350, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "300-400 C, 25-40 MPa, 0.02-2 s, glucose and fructose"

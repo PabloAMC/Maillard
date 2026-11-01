@@ -121,7 +121,7 @@ cells:
     where: "Tables 1-2"
   - key: {ph: neutral, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: 140, sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "C3-C10 alkanal + alpha-hydroxyketone or alpha-dione + ammonium sulfide, water, 30 min"}
-    contrast: "alkanal chain length: 2,3,5-trialkylpyridine 0.7-48 % of area, rising with chain length in every series"
+    contrast: "alkanal chain length: 2,3,5-trialkylpyridine 0.7-48 % of area, rising overall with chain length but not monotonically (dips in 3 of 5 series: 2.4 -> 2.2, 2.8 -> 2.6, 29.4 -> 27.6)"
     status: operating
     quote: "0.7-48 % of area, rising with chain length in every series"
     quantity: "percent of chromatogram area; C27-C30 pyridines did not elute (analytical absence)"
@@ -129,6 +129,7 @@ cells:
     lab: "University of Reading (Elmore / Mottram)"
     dossiers: [elmore1997_extraction.md]
     where: "Tables 1-2; route E97-F"
+    note: "re-read 2026-11-01: reader A MINOR (single reader, Tables 1-2 checked): range matches; 'rising in every series' overstates (the quote keeps the dossier's wording)."
   # ---- imidazoles --------------------------------------------------------------------------------------------------
   - key: {ph: mild_acid, temperature: low, water: concentrated}
     tags: {ph_basis: label, T_C: 22, sugar: none, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "glyoxal 1 M + glycine 1 M (serine 0.48 M, arginine 0.86 M, ornithine, aspartate) in D2O", ph_note: "assumed pH 6; fell 1-2 units (sedehi2013)"}

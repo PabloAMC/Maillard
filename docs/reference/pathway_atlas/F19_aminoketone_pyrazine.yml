@@ -22,7 +22,7 @@ cells:
     lab: "Nestle Research Centre, Lausanne (Amrani-Hemaimi / Cerny / Fay)"
     dossiers: [amranihemaimi1995_extraction.md]
     where: "Table 2 rows 1-2; dossier sec. 4"
-    note: "dominant for 2,5-DMP (no route other than dicarbonyl-carbon x + x is seen); for methylpyrazine the label cannot separate pairing from a sugar-carbon extra route (F20), so MPZ is operating only."
+    note: "dominant for 2,5-DMP (no route other than dicarbonyl-carbon x + x is seen); for methylpyrazine the label cannot separate pairing from a sugar-carbon extra route (F20), so MPZ is operating only. re-read 2026-11-01: reader A MINOR overruled: the quote is the dossier's sentence (atlas quotes are dossier-verbatim by design); numbers and conditions match both readers. MATCH."
   - key: {ph: mild_acid, temperature: very_high, water: intermediate_aw}
     tags: {ph_basis: in_situ, T_C: 180, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: none_unbuffered, metals: not_controlled, matrix: "potato flake cakes + 1.3 % w/w [2-13C]glycine (400x native)", ph_note: "raw-dough slurry pH 5.99 / 6.01 before baking (low2006 Table 5); not measured after", water_note: "dough ~56 % added water at start; end moisture not stated"}
     contrast: "15 vs 30 min: labelling patterns unchanged; glycine addition cuts methylpyrazine ~3-4x but not 2,5-DMP (low2006 Table 4)"
@@ -157,7 +157,7 @@ cells:
     where: "Table 1 (2,5(6)-DMP row) and text"
   # ---- non-Strecker aminoketone sources ----------------------------------------------------------------------------
   - key: {ph: alkaline, temperature: high, water: dilute}
-    tags: {ph_basis: label, T_C: 130, sugar: none, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "dipeptide 1 mmol vs free amino acids 1 mmol each + methylglyoxal (10x below glucose)", ph_note: "initial pH 8 unbuffered; MGO pots stayed near it (vanlancker2010)"}
+    tags: {ph_basis: label, T_C: 130, sugar: none, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "dipeptide 1 mmol vs free amino acids 1 mmol each (free Gly alone 2 mmol against GlyGly) + methylglyoxal (10x below glucose)", ph_note: "initial pH 8 unbuffered; MGO pots stayed near it (vanlancker2010)"}
     contrast: "dipeptide vs its free amino acids (MGO): 2,5(6)-DMP GlyGly x34, SerGly x27, AlaGly x20, ValGly x1.9, ProGly 0"
     status: operating
     quote: "GlyGly / Gly 34; AlaGly / (Ala + Gly) 20"
@@ -166,7 +166,7 @@ cells:
     lab: "Ghent (De Kimpe)"
     dossiers: [vanlancker2012_extraction.md, vanlancker2010_extraction.md]
     where: "vanlancker2012 Tables 2, 5; vanlancker2010 Table 2 (Lys-X dipeptides, same direction)"
-    note: "peptides make aminoketones without Strecker decarboxylation (proposed imine / 1,5-H shift route, Scheme 1, [P])."
+    note: "peptides make aminoketones without Strecker decarboxylation (proposed imine / 1,5-H shift route, Scheme 1, [P]). re-read 2026-11-01: both readers MATCH; the free-Gly arm is 2 mmol Gly against 1 mmol GlyGly (Table 5), tag corrected."
   - key: {ph: alkaline, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: "100 / 130 / 150 / 180", sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "glucose + glycine 2 mmol vs diglycine 1 mmol, 2 h, initial pH 8"}
     contrast: "temperature: diglycine's 2,5(6)-DMP advantage at 130 C (15.2 vs 0.7) is gone at 150 C and inverts at 180 C (54.2 vs 210.6); nothing at 100 C"

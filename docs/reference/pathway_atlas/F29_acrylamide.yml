@@ -247,7 +247,7 @@ cells:
     where: "amino-acid / sugar addition table; Table 5"
   - key: {ph: neutral, temperature: very_high, water: low_aw}
     tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
-    contrast: "potato cake + 1.3 % glycine: acrylamide 9480 -> 2340 ug/kg at 30 min (x0.25); + 0.39 % citric acid (pH 6.0 -> 5.15): 9480 -> 7750 and ND at 60 min"
+    contrast: "potato cake + 1.3 % glycine: acrylamide 9480 -> 2340 ug/kg at 30 min (x0.25); + 0.39 % citric acid (pH 6.0 -> 5.15): 9480 -> 7750, and ND at 60 min (ND = not determined, Table 2 footnote)"
     status: operating
     quote: "control 2110 / 9480 / 5900; + 1.3 % Gly 409 / 2340 / 2790"
     quantity: "control peaks at 30 min then falls (elimination visible in a food at 180 C); SIDA, triplicates of pooled powder"
@@ -255,9 +255,10 @@ cells:
     lab: "Reading (Mottram / Parker)"
     dossiers: [low2006_extraction.md]
     where: "Table 2 (set 2)"
+    note: "re-read 2026-11-01: two readers (A MINOR, B MATCH with the same remark); adjudicated MINOR: ND in Table 2 means not determined, not not-detected."
   - key: {ph: not_stated, temperature: very_high, water: low_aw}
     tags: {ph_basis: label, T_C: "160 then 130", sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
-    contrast: "potato-flake dough + all seven amino acids doubled: acrylamide x0.58 of control; + 3,4-hexanedione alone x1.33"
+    contrast: "potato-flake dough + all amino acids except Asn and GABA doubled: acrylamide x0.58 of control (91 ng/g); + 3,4-hexanedione alone x1.33 against a separate control (78 +/- 2.2 ng/g, another baking set)"
     status: operating
     quote: "acrylamide, all amino acids × 2 / HD alone"
     quantity: "control 91 +/- 8.2 ng/g; harsher bake 233 ng/g; milder 10-15 ng/g"
@@ -265,6 +266,7 @@ cells:
     lab: "Reading (Parker / Kocadagli)"
     dossiers: [kocadagli2021_extraction.md]
     where: "sec. 3.7, Fig. 4"
+    note: "re-read 2026-11-01: two readers (A MATCH, B MINOR); adjudicated MINOR: 'seven' is not printed (the paper says all amino acids except Asn and GABA) and the x1.33 is against the 78 ng/g control."
   - key: {ph: not_stated, temperature: very_high, water: low_aw}
     tags: {ph_basis: label, T_C: "barrel to 145-160", sugar: not_stated, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "cornmeal + pea protein isolate extrusion: 0 -> 15 % PPI raises acrylamide 19.8 -> 37.4 ug/kg; 30-70 % PPI no further rise, falls at 50-70 %"

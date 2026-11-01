@@ -151,9 +151,9 @@ cells:
     lab: "Hebrew University (Naim)"
     dossiers: [haleva1999_extraction.md]
     where: "Table 1"
-    note: "buffer is citrate-phosphate (tagged phosphate)."
+    note: "buffer is citrate-phosphate (tagged other_buffer)."
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, buffer_note: "0.1 M citrate-phosphate (McIlvaine-type) buffer: phosphate present but mixed with citrate, so not the phosphate bin"}
     contrast: "pH 3 vs 5: furaneol from rhamnose + arginine 0.168 vs 9.4-10.3 mg/L (x60 up with pH)"
     status: operating
     quote: "control 9.4-10.3 mg/L ≈ 0.14 mol %; pH 3 0.168 mg/L ≈ 0.002 mol %."
@@ -162,6 +162,7 @@ cells:
     lab: "Hebrew University (Naim)"
     dossiers: [haleva1999_extraction.md]
     where: "Fig. 1 (figure-read)"
+    note: "re-read 2026-11-01: reader A WRONG (single reader, PDF checked): Materials give 0.1 M citrate-phosphate, so buffer phosphate -> other_buffer; values match."
   - key: {ph: neutral, temperature: very_high, water: low_aw}
     tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "glucose vs glucose + NaCl, 160 / 180 / 200 C; 3-DG-only HMF model vs two-limb model"

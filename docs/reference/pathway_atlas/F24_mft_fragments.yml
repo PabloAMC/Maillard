@@ -73,14 +73,15 @@ cells:
     where: "Table 2 row 82"
   - key: {ph: mild_acid, temperature: very_high, water: concentrated}
     tags: {ph_basis: label, T_C: 168, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: "20-60"}
-    status: conflicting
+    status: minor
     quote: "with ~19 % from recombined fragments"
-    quantity: "printed 19 % fragments (MFT 41 / 3 / 2 / 1 / 12 / 40); re-read: M+4 / M+5 = 0.30 equals MFT's NIST [M-H]+ / M+ 0.28, furfural and 2-methylfuran show the same; corrected ~6 %, the impurity level (P 0.8)"
+    quantity: "printed 19 % fragments (MFT 41 / 3 / 2 / 1 / 12 / 40); M+4 is the labelled ion's EI [M-H]+ (M+4 / M+5 0.30 vs NIST 0.28; same-pot FFT 0.09 vs 0.05, furfural 1.10 vs 0.99, 2-methylfuran 0.69 vs 0.58), and the Methods' H-loss adjustment did not reach the labelled cluster. Corrected: all non-(0, 5) channels 5.9-6.6 % (20-60 min), C2 + C3 (M+2 / M+3) 3-4 %, at or near the label-impurity / natural-abundance floor; <= ~6-9 %, not 19 % (CF-086, P 0.9)"
     evidence: labelling
     lab: "CAAS Beijing (Zhang Dequan group)"
     dossiers: [liu2023b_extraction.md]
-    where: "sec. 2; Table 3 as read in docs/history/mechanism_reviews_2026-10-31/thiols.md sec. 0"
-    conflict: "CF-086 (printed 19 % vs the EI re-read ~6 %; MECHANISM_REVIEWS_2026-10-31 row 5)"
+    where: "Table 3; sec. 2.7 (Methods), sec. 3.2; docs/history/mechanism_reviews_2026-10-31/thiols.md sec. 0"
+    conflict: "CF-086 (printed 19 % vs the EI re-read ~6 %; explained, P 0.9)"
+    note: "re-read 2026-11-01: two readers (A MINOR, B MATCH); adjudicated MATCH on the printed numbers. Status conflicting -> minor: CF-086 is explained (P 0.9) and the corrected share is a measured small one (~6 %, upper bound ~9 % from the M+1 = M+4 symmetry), possibly all floor. Partial-channel sums count only the mixed half of random 1:1 recombinants, as in every labelled F24 cell."
   # ---------------- fed fragments: the route can run ----------------
   - key: {ph: mild_acid, temperature: very_high, water: concentrated}
     tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled, buffer_M: 0.5, t_min: 20, fed: "hydroxyacetaldehyde + 1-mercapto-2-propanone, 1 mmol each in 50 mL"}

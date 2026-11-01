@@ -138,7 +138,7 @@ cells:
     conflict: "CF-089 (Grosch: cysteine raises thiamine-MFT 7x)"
   - key: {ph: neutral, temperature: moderate, water: concentrated}
     tags: {ph_basis: in_situ, T_C: "~100 (boiling, SDE)", sugar: pentose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
-    contrast: "thiamine 0.05 mol +/- xylose 1 mol, held at pH 7 with NaOH, 1 h SDE: xylose raises MFT 4-5x and doubles H2S (relative areas)"
+    contrast: "thiamine 0.05 mol +/- xylose 1 mol, held at pH 7 with NaOH, 1 h SDE: xylose raises MFT 4-5x (absolute, authors) and H2S's relative area 1 -> 3 % of the isolate (x3 relative; absolute H2S not printed)"
     status: operating
     quote: "a 4–5-fold rise in absolute yield; H2S doubles (1 % → 3 %)"
     quantity: "MFT 2 % -> 14 % of the isolate; open stripping system"
@@ -147,6 +147,7 @@ cells:
     dossiers: [hincelin1992_extraction.md]
     where: "Tables 1-3; dossier sec. 1"
     conflict: "CF-090 (Bolton: no xylose effect at pH 5.5-5.8, a_w 0.83)"
+    note: "re-read 2026-11-01: two readers MINOR: H2S relative area triples (1 -> 3 %); 'doubles' holds only after the implied absolute rescaling, so it is not a relative-area statement. The quote keeps the dossier's wording."
   - key: {ph: mild_acid, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "thiamine 74 + cysteine 25 + xylose 73 mmol, pH 5.0, 45 min: the thiamine -> MFT intermediate isolated (20 mg after two columns) and identified by MS and NMR against a synthesised reference"

@@ -269,11 +269,12 @@ cells:
     contrast: "Cys 200 + glucose 200 mM, pH 6.5, 120 min, with one C9 aldehyde each; 1:1 [13C6]/[12C6]glucose CAMOLA"
     status: dominant
     quote: "with 92 % of its molecules carrying no glucose carbon"
-    quantity: "2-pentylthiophene 238.65 +- 23.37 ug/L only from the 2,4-dienal pot, 92 % aldehyde + H2S (no sugar carbon); every aldehyde suppresses the sugar thiophenes (sum 2067 -> 537-1181 ug/L); no long-chain alkylthiazoles"
+    quantity: "2-pentylthiophene 238.65 +- 23.37 ug/L only from the 2,4-dienal pot, 92 % M+0 / 8 % M+1 in a 1:1 CAMOLA, so ~84 % aldehyde + H2S with no glucose carbon and ~16 % with one; every aldehyde suppresses the sugar thiophenes (sum 2067 -> 537-1181 ug/L); no long-chain alkylthiazoles"
     evidence: labelling
     lab: "Du et al. 2023 (affiliation not recorded in the dossier)"
     dossiers: [du2023_extraction.md]
-    where: "Table 1 row 28; CAMOLA section 2.6"
+    where: "Table 1 row 28; Table 2 row 28 (CAMOLA; method sec. 2.6)"
+    note: "re-read 2026-11-01: two readers (A MATCH, B MINOR); adjudicated MINOR: in a 1:1 labelled : unlabelled glucose pot a one-glucose-carbon molecule shows M+1 only half the time (natural abundance already subtracted, Table 2 footnote), so 'no glucose carbon' is ~84 %, not 92 %. Still dominant."
   - key: {ph: mild_acid, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, lipid: "methyl linoleate / linolenate 25 mM vs none", product: "thiapyrans / alkylthiophenes"}
     contrast: "Cys 25 + ribose 25 mM, pyrophosphate pH 5.5, 30 min, without / with 18:2 / 18:3 ester: sugar-sulfur thiophenes and thiophenethiols fall, H2S-lipid products appear"

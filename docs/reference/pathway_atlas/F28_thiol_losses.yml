@@ -214,11 +214,12 @@ cells:
     contrast: "temperature 4.6 -> 19.4 C (stopped flow): the thiol + o-quinone Michael equilibrium constant FALLS with temperature (exothermic), so heating shifts bound thiol back to free; both directions measured."
     status: operating
     quote: "K decreases with temperature for both thiols"
-    quantity: "Bisphenol A-3,4-quinone + N-acetylcysteine / GSH, 0.1 M phosphate pH 6.2 in 50 % methanol: K(NAC) 10.57 (4.6 C) -> 5.64 M-1 (19.4 C); K(GSH) 35.3 (9.6 C) -> 18.4 M-1 (19.4 C); k1 496 / 1547 M-1 s-1, k-1 88 / 84 /s at 19.4 C. Printed activation parameters are wrong by a ln/log10 slip (dossier sec. 6); the rate constants stand."
+    quantity: "Bisphenol A-3,4-quinone + N-acetylcysteine / GSH, 0.050 M phosphate pH 6.2 in 50 % methanol (stopped flow; 0.1 M was the synthesis buffer): K(NAC) 10.57 (4.6 C) -> 5.64 M-1 (19.4 C); K(GSH) 35.3 (9.6 C) -> 18.4 M-1 (19.4 C); k1 496 / 1547 M-1 s-1, k-1 88 / 84 /s at 19.4 C. Printed activation parameters are wrong by a ln/log10 slip (dossier sec. 6); the rate constants stand."
     evidence: within_study_factor
     lab: "University of Nebraska Omaha (Stack)"
     dossiers: [stack2018_extraction.md]
-    where: "Fig. 4C (read-off); dossier sec. 3.1"
+    where: "Fig. 4C (values printed in the figure); dossier sec. 3.1"
+    note: "re-read 2026-11-01: two readers MINOR: kinetics buffer 0.050 M, not 0.1 M; Fig. 4C values are printed, not read off. K values reproduce."
   # ======================= LIPID ELECTROPHILES (in-pot, processing T) =======================
   - key: {ph: mild_acid, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled, matrix: "methyl linoleate / linolenate 25 mM"}
@@ -300,11 +301,12 @@ cells:
     contrast: "time 20 / 40 / 60 min and thiol identity: MFT halves while FFT stays flat in the same vial series."
     status: unattributed
     quote: "MFT FALLS by half between 20 and 60 min"
-    quantity: "Ribose : Cys ~1 : 15 molar, 0.5 M K3PO4 pH 5.88, 168 C: MFT 1253 -> 760 -> 628 ng/vial; FFT 175 -> 198 -> 170 (HS-SPME, IS-relative). Sugar is the limiting charge, so a precursor-exhaustion reading competes with a sink."
+    quantity: "Ribose : Cys ~1 : 12.5 molar (reading the printed 'weight ratio of 10.10' as Cys : ribose; no masses printed), 0.5 M K3PO4 pH 5.88, 168 C: MFT 1253 -> 760 -> 628 ng/vial; FFT 175 -> 198 -> 170 (HS-SPME, IS-relative). Sugar is the limiting charge, so a precursor-exhaustion reading competes with a sink."
     evidence: within_study_factor
     lab: "Beijing (Liu et al., LWT 2023)"
     dossiers: [liu2023b_extraction.md]
     where: "Table 2"
+    note: "re-read 2026-11-01: two readers (A MINOR, B MATCH); adjudicated MINOR: amounts match; a 10.10 weight ratio gives ~1 : 12.5 molar, not 1 : 15. Sugar stays the limiting charge under either reading of the ratio."
 condition_dependence: >-
   OXYGEN: the only within-study O2 contrasts are at <= 50 C and they disagree by matrix. In coffee solids at 25 C the
   loss needs air (x15-45 slower under N2, Charles-Bernard), while in a ribose / cysteine process flavouring at 50 C air
