@@ -412,3 +412,7 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 ## 2026-10-31 — An edit to the conflicts register or the measurement ledger stales sulfur_reaction_evidence
 - **Pattern:** twice in one day a branch failed the freshness gate after only register / ledger edits, because `results/validation/sulfur_reaction_evidence.json` hashes `docs/reference/conflicts_register.yml` and `data/lit/measurement_ledger/trunk.yml`.
 - **Rule:** after any edit to either file, run `python scripts/generators/build_sulfur_reaction_evidence.py` before staging (it takes seconds), and `regenerate_signature_records.py --dry-run` lists anything else stale.
+
+## 2026-11-01 — A limit argument in a pre-registration must be checked on the rows' own regime
+- **Pattern:** CF-077's prereg predicted the B18 fit unaffected by the cross-pair factor because the fit-time Leahy pots ran in the minor-pool limit of the FAST-condensation partition. At the fit commit the Leahy rows moved up to +0.51 dex (cost 2.64 -> 15.4): in the dilute acid arm the aminoketone lifetime (1 / sqrt(2 k F) ~ 400 min) exceeds the window, so the condensation is not fast there. "Declared fast" was true of Zhou's 20 mM pots and silently assumed for every pot.
+- **Rule:** before a prediction leans on a limit (fast step, steady state, minor pool), compute the dimensionless number that licenses it (here k_cond x pool x window) for each scored row, and state it in the prereg. Running the check at the fit's own commit (a detached worktree) is cheap and decided it.

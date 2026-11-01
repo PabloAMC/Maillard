@@ -93,6 +93,9 @@ class Reaction:
     #: key into the parameter registry, or None for a derived rate
     parameter_key: Optional[str]
     note: str = ""
+    #: a structural multiplier on the parameter's constant (CF-077: the unlike pair of two pools that
+    #: share one encounter constant forms twice as fast as either like pair); 1 for every other step
+    statistical_factor: float = 1.0
 
     @property
     def order(self) -> int:
@@ -345,6 +348,12 @@ DICARBONYL_REACTIONS: Tuple[Reaction, ...] = (
 #: follows the two aminoketone pools statistically. Each glycine leaves its two carbons as carbon
 #: dioxide and formaldehyde, booked to the unassigned fragment pool. Constants:
 #: `parameters_pyrazine.py`; pre-registration `results/validation/kinetic_core_b18_prereg.md`.
+#: CF-077 (2026-11-01): two pools that pair at random with one encounter constant make N_A^2 / 2 like
+#: pairs and N_A N_B unlike ones, so with the like pairs at k_cond [A]^2 the unlike pair runs at 2 k_cond [A][B].
+#: The factor sits on the cross pair, not as k_cond / 2 on the homo pairs, so k_cond keeps the meaning B18's
+#: records give it and Zhou 2024's single-pool fit rows are unchanged
+#: (results/validation/kinetic_core_cf077_cross_pair_factor_prereg.md).
+CROSS_PAIR_STATISTICAL_FACTOR = 2.0
 PYRAZINE_REACTIONS: Tuple[Reaction, ...] = (
     Reaction(
         "r_go_ak", {"GO": 1, "Gly": 1}, {"AKG": 1, "FRAG_C": 2}, "k_go_ak",
@@ -368,9 +377,11 @@ PYRAZINE_REACTIONS: Tuple[Reaction, ...] = (
     ),
     Reaction(
         "r_ak_mpz", {"AKG": 1, "AKM": 1}, {"MPZ": 1}, "k_cond",
-        "B18. aminoacetaldehyde + aminoacetone -> 2-methylpyrazine (net). Shared declared k_cond: the "
-        "mixed pyrazine follows the two pools statistically (2 sqrt of the two homo rates); no "
-        "source measures the mixed condensation.",
+        "B18. aminoacetaldehyde + aminoacetone -> 2-methylpyrazine (net). Shared declared k_cond at the "
+        "unlike-pair factor 2: the mixed pyrazine follows the two pools statistically (2 sqrt of the two "
+        "homo rates, MPZ^2 / (PZ DMP) = 4); no source measures the mixed condensation. Until CF-077 "
+        "(2026-11-01) the factor was missing and the ratio was 1.",
+        statistical_factor=CROSS_PAIR_STATISTICAL_FACTOR,
     ),
 )
 #: Build Wave B20 (2026-09-09): THE GLYCATION ARM, TRUNK-ONLY, five steps on protein-bound lysine.
@@ -665,7 +676,8 @@ def rate_constants_at(
     ``parameters`` must contain every ``parameter_key`` the network references.
     The Amadori rearrangement has no parameter of its own: its constant is
     DERIVED from the condensation by the pinned split ratio, and this is the
-    only derived rate in the module.
+    only derived rate in the module. A step's ``statistical_factor`` (only
+    B18's cross pair carries one, CF-077) multiplies its parameter's constant.
     """
     out: Dict[str, float] = {}
     for reaction in TRUNK_REACTIONS:
@@ -683,7 +695,7 @@ def rate_constants_at(
                 f"must be given values before the network can be integrated; "
                 f"there is no silent default."
             )
-        out[reaction.key] = parameter.k_at(temperature_k)
+        out[reaction.key] = reaction.statistical_factor * parameter.k_at(temperature_k)
 
     schiff = out["r_schiff"]  # L/(mmol*min)
     out["r_amadori"] = (
