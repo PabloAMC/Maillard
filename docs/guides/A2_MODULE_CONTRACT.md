@@ -103,6 +103,21 @@ A module that follows 1-3 ports onto A2 by wrapping it in the `Module` protocol,
    - all gates and the full suite pass;
    - the core panel and every signature record are bit-identical;
    - a test that a spawn-started worker reproduces a forked one.
+
+   **Phase 1 (2026-11-01).** [`src/kinetic_core/config.py`](../../src/kinetic_core/config.py):
+   - 42 `ConfigKey`s, one per switch, each listing every module binding of it (a re-import is a second binding);
+   - `Config.shipped()` is built from declared defaults, so it does not depend on what was imported first;
+   - `from_globals()`, and `install` / `applied()`, which restore the original objects on exit;
+   - `parallel.map_ordered(..., config=)` and `parallel.Configured`;
+   - one call site, `fit_joint_deoxyosone_thiol.install`, builds a Config.
+
+   Tests are in `tests/unit/test_engine_config.py`. They cover the scans (a new switch or binding without a key fails), the shipped state, the restore, and spawn reproducing fork with every key flipped.
+
+   Not yet covered:
+   - a script's own module globals (`joint.TDP_EXIT_STATIC`, `sm3`'s trial), which still need the fork;
+   - a new numeric tunable that no script sets: the scans cannot see it.
+
+   Phase 2 is next: the scripts build `Config.replace(...)`. Phase 3 is the persistent pool.
 2. **A2a (bit-identical, time-boxed to 3 days).**
    - The trunk, sulfur, acrylamide and lipid lanes become modules.
    - The three legacy lanes become named compositions with their legacy layouts and operation order (derived rates in their current order; the B27 block last).
