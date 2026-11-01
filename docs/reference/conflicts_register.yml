@@ -419,7 +419,7 @@ entries:
   - id: CF-011
     kind: conflict
     scope: sulfur_rows
-    sources: [cao2017, zhai2019, zhai2021, zhang2025b, kang2026_SI]
+    sources: [cao2017, zhai2019, zhai2021, zhang2025b, kang2026_SI, guan2012]
     quantity: "cysteine-route formation rate TTCA -> Cys-Amadori (k_form at 90 C) and the TTCA equilibrium K"
     observation: >-
       In route-calibration stage 1 the Xie laboratory's pots (Cao 2017: Cys + Xyl 0.40 M, 0.2 M phosphate pH 5.5, 90 C;
@@ -430,19 +430,23 @@ entries:
       want K above Cao's measured band (K on its upper bound 0.075).
     explanations:
       - "Phosphate catalysis of the Amadori step: every Xie pot is in 0.2 M phosphate, every Jiangnan pot in water."
-      - "pH: Cao's blank falls 5.49 -> 4.67 (0.5 h) -> 4.15 (5 h); Zhai 2019's starts at 7.4 and is never re-measured (its in-situ trajectory is unknown: carry it as latent, not measured); thiazolidine K rises ~20x from pH 5.6 to 7.5 (Kallen 1971, formaldehyde analogue). (Corrected 2026-11-01: the earlier 'falls to 4.9 (90 C)' is Zhai 2023 Food Chem's unattached 'pH from 7.0 to 4.9' in its TTCA 10 mM pots, not Zhai 2019; conflict_analyses/CF-011.md sec. 1, zhai2019 dossier sec. 2.)"
-      - "Concentration (0.4 M vs 0.08 M) and laboratory (method, calibration)."
+      - "pH: Cao's blank falls 5.49 -> 4.67 (0.5 h) -> 4.15 (5 h); Zhai 2019's starts at 7.4 and is never re-measured (its in-situ trajectory is unknown: carry it as latent, not measured); thiazolidine K rises ~20x from pH 5.6 to 7.5 (Kallen 1971, formaldehyde analogue). (Corrected 2026-11-01: the earlier 'falls to 4.9 (90 C)' is Zhai 2023 Food Chem's unattached 'pH from 7.0 to 4.9' in its TTCA 10 mM pots, not Zhai 2019; conflict_analyses/CF-011.md sec. 1, zhai2019 dossier sec. 2.) (Added 2026-11-01, cluster 5: Hou 2026's unbuffered ARP pot of the same laboratory network falls 7 -> 5.05 in 20 min, so Zhai 2019's latent band is realistic, not proven; Zhang 2025b is 0.2 M phosphate pH 6.5, start pH only.)"
+      - "Concentration (0.4 M vs 0.08 M) and laboratory (method, calibration). (Cluster 5, 2026-11-01: monotone pH and concentration laws are excluded, because the two Xie pots bracket Zhai 2019 in both and are both faster; what is left of this line is the laboratory / quantification half, Jiangnan ELSD at low CAMA 0.2-5.6 mM, calibration unprinted, P 0.3.)"
       - "The Zhai 2021 rows run at the wrong pH (CF-010) bias k_ttca_deg and the ring opening that both arms share."
     tests:
       - "root-cause analysis 2026-10-29 (docs/reference/conflict_analyses/CF-011.md): most likely dihydrogen-phosphate catalysis of the Amadori step, Zhai's water ladder holding the formation barrier near its floor (0.45); the register's 'Zhai 2019 pH 7.4 -> 4.9' is Zhai 2023 Food Chem's, and '3.8 at 130 C' has no source on disk. Settled by the designed protocol's buffer arm C."
       - "results/validation/kinetic_core_cysteine_route_calibration_prereg.md: leave-one-source-out refits, review items 4, 5, 8 and sec. 6 verdict (constants not forwarded; stage 1b to include pH laws and phosphate catalysis)."
       - "docs/guides/LITERATURE_SEARCH_2026-10-29_phosphate_thiazolidine.md: no direct measurement of phosphate catalysis of TTCA -> Cys-Amadori, nor K(pH) for a cysteine-sugar thiazolidine at 60-140 C; nearest anchors Davidek 2002 (x1.3-3.5, degradation, 90 C), Munanairi 2007 (~10-12x per equivalent, 37 C, A280), Kim 1986 (thiazolidine k1 ~10x per pH unit 5.5-8, 25 C)."
+      - "Cluster 5 probe 1, forced-input version, no engine (2026-11-01; docs/history/conflict_resolution_2026-11-01/cluster5/verdict.md sec. 4): apparent CAMA formation per TTCA, k_app = [dCAMA + k_cd integral CAMA] / integral TTCA at both edges of k_cd. Zhai 2019's own Arrhenius line has Ea 69 kJ/mol (scatter +-0.3 dex), not the 40 kJ/mol floor; the Xie pots run x3.1-3.3 (Cao, 90 C) and x1.6-3.6 (Zhang 2025b, 120 C) above it. The two Xie pots bracket Zhai in pH (4.2-4.7 and ~6.3-6.5 vs ~5-6) and concentration (400 and 40 vs 83 mM) and are both faster, so monotone pH and concentration laws are excluded; post-quench TTCA re-formation moves Zhai's TTCA by <= 5-15 % (<= 0.07 dex). Guan 2012 (third laboratory) shows phosphate speeds Amadori-compound DECAY at 110-130 C, which would lower CAMA, so phosphate must speed formation more than decay. Unexplained: Cao's first 30 min run at Zhai's rate (8.8e-4 vs 9.8e-4 /min). Remaining P: phosphate catalysis of formation 0.5, Jiangnan ELSD quantification of low CAMA 0.3, other (laboratory, heat-up) 0.2 -- below 0.6, so the entry stays open (note, 2026-11-01)."
     status: open
     remedy: >-
       No test outside the conflict supports one explanation yet. Stage 1b (pre-registered separately) carries phosphate
       catalysis as a declared assumption with a band, pH laws for K and the ring kinetics, Zhai 2021 Fig. 4b at its
       real pH, and Cao's pH trajectory as rows; the explanation that also predicts Zhang 2025b (phosphate, pH 6.5) and
       Zhai 2021's pH series wins. The deciding experiment: one pot, phosphate 0 / 0.2 M at fixed pH (experiment brief).
+      Added 2026-11-01 (cluster 5): the cheaper decider is Zhai's ELSD calibration for CAMA (author request); buffer arm
+      C decides phosphate (water vs 0.05 / 0.2 M phosphate at fixed pH, CAMA by LC-MS). The joint fit's barrier
+      confound is not needed (forced-input Ea 69 kJ/mol).
     affects:
       - cao2017_fig5_ttca_cama_glyarp
       - cao2017_fig4ab_cys_xyl
@@ -534,6 +538,7 @@ entries:
     tests:
       - "root-cause analysis 2026-10-29 (conflict_analyses/CF-014.md): Zhou 2022 is the outlier, a thiol-specific measurement or handling loss (0.65); Zhou 2023c (MFT 1150 ug/L) agrees with Zhou 2023. Test: both papers' Table S1 calibrations."
       - "Outside test (closure 2026-11-01): a third print, Zhou 2023c's ARP + Cys control (same group and HS-SPME method, authentic-standard curves, 120 C, 60 min, pH 7.5; zhou2023c dossier Table 1 row MFT, sec. 3), gives MFT 1150 / FFT 511 ug/L, within x1.4-1.5 of Zhou 2023, while Zhou 2022's non-thiols (furfural x1.09, 2,3-butanedione x0.94, methylpyrazine x0.92) agree with Zhou 2023: two prints agree and Zhou 2022's thiols are the outlier."
+      - "Cluster 4 (2026-11-01, docs/history/conflict_resolution_2026-11-01/cluster4/results.md sec. 7), covariate table: Zhou 2022, 2023 and 2023c all 'pressure-resistant bottle', volume / fill / atmosphere not stated; the same HS-SPME (3 mL + 2 mL NaCl), dichlorobenzene IS and external curves (Table S1 not on disk). No recorded covariate differs, so the CAUSE stays unidentified; the status rests on the remedy (one laboratory, a between-paper scale term). Author request: fill, headspace, storage time before SPME, and both Table S1s."
     status: explained
     remedy: >-
       Explained 2026-11-01 as a Zhou 2022 thiol-specific low reading (two of three prints agree; the non-thiols agree);
@@ -563,10 +568,25 @@ entries:
       - "Patent analytics (single runs, not peer reviewed)."
     tests:
       - "root-cause analysis 2026-10-29 (conflict_analyses/CF-015.md): two opposite displacements: US 8,920,862's concentrated 3:1 xylose recipe favours FFT (0.40); US 10,076,126's standards went through the heating (0.25). MFT agrees across sources; FFT differs."
-    status: open
+      - >-
+        Cluster 4 (2026-11-01, docs/history/conflict_resolution_2026-11-01/cluster4/results.md sec. 5), outside tests of
+        the sugar : cysteine ratio. Within study (Xu 2008, 140 C, one laboratory, a double ratio free of response
+        factors): ribose x3 at fixed Cys moves MFT/FFT 8.6 -> 0.75, -1.06 dex (xu2008 dossier), against the patents'
+        -0.86 dex for xylose x3: same sign, similar size. Across isotope-quantified pots: 1:1 reads 3.6-3.8 (US
+        10,076,126, co-heated standard) and 5.4 (Yiltirak 2026, 100 C / 4 h, standard after heating); 3:1 reads 1.4
+        (Schieberle 2000, 6-12 h), 1.5-1.6 (Hofmann 1998, 145 C) and 0.50 (US 8,920,862): three laboratories. IS timing
+        alone predicts the co-heated pot above every post-IS pot; Yiltirak (post-IS) is higher, so IS timing is at most
+        a co-term (it would need lambda_M - lambda_F = 0.0082 /min for all 0.86 dex; with Kumazawa 2003's FFT loss that is
+        lambda_M 0.012-0.015 /min). Temperature runs the wrong way (Yiltirak MFT/FFT 5.4 -> 1.06 from 100 to 130 C, so 95
+        C should raise US 8,920,862's ratio). P(ratio >= half the gap) 0.6; P(IS timing >= half) 0.25.
+    status: explained
     remedy: >-
-      Pending: report the patents' MFT/FFT, do not fit it (us10076126 / us8920862 dossiers); the US 10,076,126 shape and
-      the US 8,920,862 level are B59b hold-outs (plan).
+      Explained 2026-11-01 (cluster 4, P 0.6) for the RATIO half: the sugar : cysteine ratio is the main cause, IS timing
+      a possible co-term. MFT/FFT is reported, not fitted; the sugar : Cys dependence is a test of the engine's
+      furfural -> FFT vs C5 -> MFT split (score Xu 2008's double ratio, free of response factors). The SHAPE half is not
+      explained: the US 10,076,126 shape and level are scored only through a co-heated-standard tracer operator (the
+      spike run under the same loss law), which is not built; until then they stay unscored (red team of clusters 2-4,
+      claim 4). The US 8,920,862 level stays a B59b hold-out (plan).
     affects:
       - us10076126_fig1_mft_time_course
       - us10076126_fig2_fft_time_course
@@ -590,6 +610,7 @@ entries:
     tests:
       - "root-cause analysis 2026-10-29 (conflict_analyses/CF-016.md): unresolved: Schieberle under-recovered 0.35, a 10x slip 0.25, Hofmann high 0.25; Hofmann's furfural is internal-standard (5-methylfurfural), not SIDA; Meynier's and Cerny's furfural / MFT ratios side with Schieberle. Test: three vials of Hofmann's exact pot."
       - "hofmann1998.pdf Table 5 and schieberle1998.pdf Table IV read 2026-10-29 (both quoted above); schieberle1998 ledger note already flags the 13-fold gap."
+      - "Cluster 4 (2026-11-01, docs/history/conflict_resolution_2026-11-01/cluster4/results.md sec. 9): the two outside ratios are operator-biased, so neither sides with Schieberle. Cerny 2007's FUR/MFT 0.47 is an SPME GC-TIC peak-area ratio, not corrected for response or fibre partition (cerny2007 dossier, Quantification); with fibre response ~K_ow^0.6-1.0 (log K_ow 0.41 furfural vs 1.5-2.0 MFT) the molar ratio is 2.1-18 (central ~7), bracketing Hofmann's 3.4, not Schieberle's 0.26. Meynier 1995 (SDE after heating, octadecane in the solvent, no response factors) has no estimable correction. Room-temperature purge-and-trap strips ~1 % of furfural against most of the MFT, which predicts Schieberle low if no furfural isotopologue or matched calibration was used. Revised P: Schieberle under-recovered 0.45 (was 0.35), slip 0.25, Hofmann high 0.15 (was 0.25), run-to-run 0.15 -- none reaches 0.6, so the entry stays open. The 2026-10-29 line above ('Meynier's and Cerny's ratios side with Schieberle') is superseded."
     status: open
     remedy: >-
       Pending: until resolved, widen hofmann_ribose_FUR_insitu to cover both prints (target geometric mean, sigma >= 0.6
@@ -992,11 +1013,17 @@ entries:
   - id: CF-031
     kind: conflict
     scope: other_lane
-    sources: [farmer1992, elmore1997, xu2011, yiltirak2026, us8920862, du2025]
+    sources: [farmer1992, elmore1997, xu2011, yiltirak2026, us8920862, du2025, whitfield1988, elmore2002]
     quantity: "effect of lipid on meaty thiols (MFT, FFT) in cysteine + sugar pots"
     observation: >-
-      Lipid lowers the thiols in some studies (Farmer 1992, Elmore 1997, Xu 2011) and raises them in emulsions or
-      structured lipid (US 8,920,862: MFT x10.1, FFT x7.4 over buffer; du2025). Touches the sulfur lane's thiol sinks
+      Lipid lowers the thiols in some studies (Farmer 1992, Elmore 1997, Xu 2011) and raises them in structured lipid
+      (US 8,920,862: MFT x10.1, FFT x7.4 over buffer; du2025). (Corrected 2026-11-01, cluster 4 sec. 8: the earlier
+      "raises them in emulsions (Yiltirak 2026)" compared the emulsion with buffer + oil, not with the aqueous control.
+      Within-study MFT signs: Whitfield 1988 -0.47 dex (lecithin), Elmore 2002 -1.14 (25 mM methyl linoleate), Xu 2011
+      -1.32 fresh / -2.16 oxidised lard, Yiltirak 2026 buffer + oil -0.58 to -0.98 vs buffer and emulsion -0.07 to
+      -0.27 vs buffer (+0.31 to +0.71 vs buffer + oil; FFT emulsion vs buffer +0.13 to +0.33 at 3 of 4 cooks); raised
+      only in US 8,920,862's structured-lipid mesophase, +1.0 dex (FFT +0.87; single run), and slightly with free C18
+      acids, du2025 +0.10.) Touches the sulfur lane's thiol sinks
       (CF-013). Amended 2026-11-01 (pathway atlas F30): Yiltirak 2026 supports only half of the 'raises' side. Its
       Table S3 (25 mM ribose + Cys, 0.5 M phosphate pH 5.5, four equivalent cooks 100 C / 4 h - 130 C / 0.5 h) has
       emulsion MFT BELOW plain buffer at every cook (3.73 vs 6.88, 2.83 vs 3.29, 1.28 vs 2.4, 1.29 vs 1.71 ug/L); MFT
@@ -1008,9 +1035,14 @@ entries:
     explanations:
       - "Lipid aldehydes as thiol sinks vs an oil phase protecting thiols from aqueous oxidation / binding."
       - "Physical partition: a fresh (unoxidised) oil phase alone suppresses MFT ~10x in Yiltirak 2026, so part of every 'lipid lowers MFT' result may be partitioning into oil, not carbonyl chemistry; the interface (emulsifier) recovers part of it."
-    tests: []
+      - "Aliquot sampling of Yiltirak's non-emulsified oil arm (a 30 uL aliquot from a creaming oil layer under-samples a lipophilic thiol); P ~0.25 (cluster 4, 2026-11-01). The pattern is mixed: MFT falls more than FFT (-0.98 vs -0.03 to -0.24), as log K_ow predicts, but the more polar 3M2B falls -0.52."
+    tests:
+      - "Cluster 4 (2026-11-01, docs/history/conflict_resolution_2026-11-01/cluster4/results.md sec. 8): a headspace partition operator without isotope standards, 1 / (1 + phi K_ow) at log K_ow(MFT) 1.5-2.0 and phi <= 1.5 %, explains at most 0.1-0.4 dex of the 0.5-2.2 dex falls, and the falls scale with the oxidation load (fresh < oxidised lard; PUFA ester): chemistry (thiol capture by lipid electrophiles) rather than the operator. Verdict EXPLAINED IN PART, P 0.55 -- below 0.6, so the entry stays open (note, 2026-11-01)."
     status: open
-    remedy: "Pending (lipid x sulfur sub-model)."
+    remedy: >-
+      Pending (lipid x sulfur sub-model). Direction from cluster 4 (P 0.55, not applied): lipid electrophile load lowers
+      thiols, an electrophile term of a future MFT loss law; the mesophase raise is single-run and not modelled. Ask
+      Yiltirak et al. how aliquots of the oil arm were drawn (Table S2 holds the creaming index).
     affects:
       - farmer1992_tab1_lipid_volatiles_pm_cys_rib
       - xu2011_table1_lard_vs_no_lard_sulfur_volatiles
@@ -1811,12 +1843,32 @@ entries:
     explanations:
       - "Headspace oxygen: 17 mL air over 3 mL (about 50 mM-equivalent O2 against 25 mM cysteine) oxidises cysteine and the thiols during heating; the lane's oxygen consumers are off and no measured cysteine autoxidation rate is in the corpus."
       - "Free-thiol losses between heating and analysis in Yiltirak (labelled standards added to a 30 uL aliquot after heating, extraction into 1 M NaOH): thiols bound as disulfides or adducts are not counted."
-      - "Garching's 100 C time course over-reads (CF-055 records an internal text vs table inconsistency in the same laboratory's tables)."
+      - "Garching's 100 C time course over-reads (CF-055 records an internal text vs table inconsistency in the same laboratory's tables). (Cluster 4, 2026-11-01: both Nestle SIDA pots also sit 0.5-1 dex below the Garching anchor after normalisation, so part of the gap may be 'DFA high'; P(DFA reads >= 0.5 dex high) 0.35.)"
     tests:
       - "Any third laboratory's SIDA ribose + cysteine pot at 100 - 120 C with the vessel headspace stated."
       - "An oxygen-consumer arm with a measured cysteine autoxidation rate: does it move Yiltirak down without moving Schieberle?"
+      - >-
+        Cluster 4 (2026-11-01, docs/history/conflict_resolution_2026-11-01/cluster4/results.md sec. 1), engine-free
+        arithmetic: mass action plus pH (first order in the limiting precursor, 0.45 dex per pH unit, xylose x0.72)
+        explain 0.35-0.95 dex of the 2.12 dex gap; Yiltirak stays -1.17 to -1.77 dex below the DFA anchor under every
+        variant. The other isotope-quantified pots: US 8,920,862 -0.55 to -0.65 dex; US 10,076,126 -0.07 to -1.7 dex
+        depending on its co-heated standard's loss (uninterpretable without that operator). Residual on log10 O2 :
+        (Cys + pentose), one point per laboratory: R^2 0.56, n 4, one-sided permutation p 0.125 (minimum possible 0.042)
+        -- EXPLORATORY, with laboratory, concentration and O2 confounded one-to-one, and the lowest-O2 pot (US 8,920,862)
+        not the highest. No within-study O2 arm on thiols at process temperature exists (Zhang 2024's cystine arm raises
+        the disulfide share x6.3 but does not lower free MFT, x1.5 higher: the sign agrees for 'oxidant -> disulfide',
+        not for 'oxidant -> less free thiol'). Both pots added the standard after heating, so IS timing
+        alone does not separate them. Rivals: O2 >= half the residual 0.45, DFA high 0.35, Yiltirak work-up low 0.15,
+        other 0.05 -- none reaches 0.6; the entry stays open (note, 2026-11-01).
     status: open
-    remedy: "Both stay as data: Schieberle in the joint fit, Yiltirak a declared hold-out. Neither is down-weighted; the spread is reported as between-laboratory error if the thiol layer ships as a declared limitation (thiol prereg sec. 6)."
+    remedy: >-
+      Both stay as data: Schieberle in the joint fit, Yiltirak a declared hold-out. Neither is down-weighted; the spread
+      is reported as between-laboratory error if the thiol layer ships as a declared limitation (thiol prereg sec. 6).
+      Proposed 2026-11-01 (cluster 4): that declared between-laboratory band for absolute MFT levels is 0.5-0.75 dex (1
+      SD), from the four isotope-quantified laboratories' residual scatter; an O2-consumer arm (OX charged from the
+      vessel block, k_cys_ox in Ehrenberg 1989's form) is a declared, unfitted arm. Decider (designed): Yiltirak's recipe
+      (25 / 25 mM, pH 5.5, 100 C, 4 h) in 3 vs 15 mL fills, argon vs air, SIDA for MFT and bis(2-methyl-3-furyl)
+      disulfide. Author requests: Elmore (disulfides / chromatograms), DFA (the Table IV autoclave fill).
     affects: [schieberle2000_t4_100c_time_course, yiltirak2026_tables3_buffer_arm_mft_fft]
   - id: CF-069
     kind: conflict
@@ -1946,13 +1998,20 @@ entries:
       aldehyde-loss term cannot explain it (k_loss ~4e-4 /min removes <= 5 % in 2 h). Found by the Strecker mechanism
       review and the forced-input design review (2026-10-31).
     explanations:
-      - "Donor concentration: a concentration-dependent share (Weenen 26 mM vs Hofmann 100 mM; Granvogl 2006 at 5 mM gets >= 7 % aldehyde alone)."
-      - "A reversible phenylacetaldehyde-amine pool drained by Weenen's steam stripping."
-      - "Different quantification (steam distillation vs SIDA) or a printing / units issue."
+      - "Donor concentration: a concentration-dependent share (Weenen 26 mM vs Hofmann 100 mM; Granvogl 2006 at 5 mM gets >= 7 % aldehyde alone). (Cluster 4, 2026-11-01: a second-order competing donor sink caps this at 0.59 dex, leaving MGO +0.65 and GO +0.30 dex; P 0.3.)"
+      - "A reversible phenylacetaldehyde-amine pool drained by Weenen's steam stripping. (Cluster 4, 2026-11-01: only as a DONOR-SPECIFIC in-pot phenylacetaldehyde sink avoided by stripping; P 0.3.)"
+      - "Different quantification or stripping acting through a DONOR-SPECIFIC in-pot phenylacetaldehyde sink; a donor-generic method bias (stripping, FID / undecane quantification, a scale) is rejected (cluster 4, 2026-11-01, P 0.05); or a printing / units / basis issue (P 0.15). (Rewritten 2026-11-01; was 'Different quantification (steam distillation vs SIDA) or a printing / units issue.')"
+      - "MGO / GO speciation or handling (commercial aqueous solutions); P 0.2 (cluster 4, 2026-11-01)."
     tests:
       - "The forced-input Strecker layer predicts a concentration-independent share s = k / kappa: Weenen vs Hofmann is a signature against it (confounded by method)."
+      - "Cluster 4 (2026-11-01, docs/history/conflict_resolution_2026-11-01/cluster4/results.md sec. 6): per-donor log10(Weenen / Hofmann) at pH 3-3.2 (Hofmann x1.16 for 2 h vs 1 h, from its Table 3): MGO +1.24, GO +0.89, 3-DG -0.20, glucose -0.59 (Weenen Table III) / -1.29 (Table II). Equal ratios across the three dicarbonyls (a donor-generic operator) are rejected: chi^2 22.5 (sigma 0.2) / 11.2 (sigma 0.3), df 2, p 1e-5 / 0.004; the MGO - 3-DG spread is 1.44 dex. Hofmann Table 4 air / argon aldehyde ratio 0.85-0.93, so Weenen's boiling pot (O2 ~0) would gain <= 0.07 dex: O2 is not a cause. No rival reaches 0.6; the entry stays open (note, 2026-11-01)."
     status: open
-    remedy: "Carried as a cross-laboratory signature of the forced-input Strecker layer, not as fit rows (kinetic_core_strecker_forced_input_prereg.md, review)."
+    remedy: >-
+      Carried as a cross-laboratory signature of the forced-input Strecker layer, not as fit rows
+      (kinetic_core_strecker_forced_input_prereg.md, review). Added 2026-11-01 (cluster 4): Weenen's 3-DG (C6) yield
+      agrees with DFA within 0.2 dex and can serve as a cross-laboratory check of the 3-DG donor. Decider
+      (designed): MGO + Phe and 3-DG + Phe at pH 3.2, 26 and 100 mM, closed vial vs continuous stripping, SIDA (2 x 2 x
+      2), or a third laboratory's fed pots.
     affects: [hofmann2000_table3_mgo_phe_timecourse, weenen2001_tab3_pac_from_15_carbonyls]
   - id: CF-074
     kind: duplicate
@@ -1999,7 +2058,7 @@ entries:
   - id: CF-076
     kind: conflict
     scope: other_lane
-    sources: [zhai2021, zhai2019, cao2017]
+    sources: [zhai2021, zhai2019, cao2017, zhang2025b, kallen1971, kallen1971b, hou2026]
     quantity: "the cysteine / xylose <-> TTCA exchange (thiazolidine formation k_f, its reverse k_ttca_cys, K) across dilute and concentrated pots"
     observation: >-
       Zhai 2021's dilute fed-TTCA pots (~10 mM, unbuffered water, pH 5.5 - 8) and their +/- xylose contrast want slow exchange: a
@@ -2013,15 +2072,39 @@ entries:
       hoc). The conflict is inside ONE laboratory (Zhai 2021 vs Zhai 2019); Cao 2017 adds little; Kang 2026 Fig. S3 is a
       copy of Zhai 2021 Fig. 6 (not independent).
     explanations:
-      - "Catalysed exchange: k = k0 + k_aa [amino acid] + k_P [phosphate / solutes] (the cysteine review, P 0.55), so concentrated pots run faster per mol."
-      - "In-situ pH: the unbuffered dilute pots drift in pH while heating, and the engine uses the label pH."
-      - "A second cysteine sink (adducts, cystine) in the dilute pots that the exchange rate is absorbing."
+      # rewritten 2026-11-01 after the cluster-5 re-run of EX-054 (P from docs/history/conflict_resolution_2026-11-01/cluster5/verdict.md sec. 5)
+      - "In-situ pH with Kallen-shaped K(pH) and k_r(pH) (TTCA ring-N pKa <= ~5.9): the concentrated unbuffered pots and Zhang 2025b's phosphate pH 6.5 pot sit at higher K and faster release than Cao (pH 4.2-4.7) and the drifting dilute pots (~4.5-5.5). Feasible, admitted PROVISIONALLY; P 0.45."
+      - "A slow exchange with a much larger, pH-dependent K than Cao's 60 L/mol (the K-released search, S4: K 0.26-26 L/mmol gets close, max |z| 2.1-2.6, not inside 2); hypothesis only, P 0.2."
+      - "Catalysed exchange (amino-acid / phosphate general-acid catalysis; Kallen 1971b bounds c_aa at <= ~3 /M at pH 6-7, none below pH ~5.5, saturating at x3.5-5): REJECTED as E1c (max |z| 4.0); not identified inside the feasible family either. With secondary-amine nucleophilic catalysis by TTCA / CAMA (morpholine analogue; REJECTED as E5, 5.2): P(catalysis, any kind) 0.1."
+      - "Quench / storage operator: TTCA re-forms in the concentrated samples at 4 C / RT before HPLC (dose bounded by Zhai 2019's t = 0 point): REJECTED as E6 (5.1, dose at its band top); P 0.05."
+      - "A second cysteine sink, or an unmeasured Cys + Xyl adduct pool (CF-063's missing half), or something unlisted: P 0.2 (E3, E0 + a Cys sink, is REJECTED with E0)."
     tests:
       - "Fit nothing yet: a feasibility test of catalysed exchange with in-situ pH, scored on Zhai 2019 + Zhai 2021 + Cao 2017 together, every dataset scored."
       - "Designed experiment E4 (TTCA at 10 vs 100 mM in water, and 10 mM +/- 0.2 M phosphate)."
+      - >-
+        Cluster-5 re-run of EX-054 (2026-11-01, docs/history/conflict_resolution_2026-11-01/cluster5/verdict.md): bands
+        corrected with Kallen 1971b (the kallen1971 dossier's k_r was the relaxation, 120-270x too fast; corrected there
+        2026-11-01); Zhang 2025b's blank added as T8 (Xie laboratory); T7 (Cao) dropped as unpowered (0.79). T3 fails
+        every rival and NC2 (a skeleton failure), so S1 (all scored tests minus T3) governs. Controls fail as designed.
+        Engine exchange E0 REJECTED in two laboratories (T4 Jiangnan; T8b Xie, feasible share 0); E3 with it. E1c (4.0),
+        E5 (5.2) and E6 (5.1) REJECTED. E4c 1.45 (best joint log-marginal, 52.7 nats) ADMITTED PROVISIONALLY; E2c 1.55
+        inconclusive by 3.4 nats; E2c vs E4c power ~0.5, so catalysis is not identified. Post hoc (profile_pka.json):
+        feasible up to TTCA ring-N pKa 5.9; at Kallen's TC value 6.24, 2.4 (inconclusive). Zhai 2019's pH is a banded
+        latent. Zhai 2021 Fig. 7a (13C5-TTCA, never keyed) at face value disfavours the E4c point (z 6.3), but it is
+        quantified as a difference of two pots (CF-091); its resolution-limited bound (<= 0.3 mM) is passed by both
+        feasible points. Verdict: explained, provisional (P 0.45). The register's statuses have no provisional
+        'explained', and P 0.45 < 0.6, so the entry stays OPEN with this note.
     status: open
-    remedy: "k_ttca_cys is untouched until the catalysed-exchange test; until then it carries the conflict flag."
-    affects: [zhai2021_fig4b_ttca_ph_ladder, zhai2021_fig6_cys_xyl, zhai2019_fig3a_ttca_cama, cao2017_fig5_ttca_cama_glyarp, cao2017_fig4ab_cys_xyl]
+    remedy: >-
+      Note 2026-11-01: explained, provisional (P 0.45), not applied as a status. k_ttca_cys (pH-flat, 0.0286 /min at 100
+      C) is rejected in two laboratories; until it changes it carries the conflict flag. Direction for the A2 writer (a
+      declared band, not an estimate): the exchange as an in-situ-pH law, K(pH) in Kallen's bookkeeping and k_r(pH) in
+      Kallen's shape, with k_r(100 C, pH 4.5) declared in [2e-4, 8e-4] /min, flagged provisional. No engine change until
+      (1) TTCA's ring-N pKa is measured (titration at 25 and 90 C; the cheapest datum), (2) Zhai answers the m/z 259 /
+      254 request for Fig. 7a (and Zhai 2019's cooled-sample pH and storage), (3) a red team has reviewed the admission.
+      Designed: TTCA 10 vs 100 mM at 100 C with a 13C5-xylose spike and pH-stat 4.5 vs 6.5, +-0.2 M phosphate (pH 6.5) /
+      acetate (pH 4.5), +-50 mM morpholine vs N-methylmorpholine, immediate 20x cold dilution vs 4 C storage 0 / 4 / 24 h.
+    affects: [zhai2021_fig4b_ttca_ph_ladder, zhai2021_fig6_cys_xyl, zhai2019_fig3a_ttca_cama, cao2017_fig5_ttca_cama_glyarp, cao2017_fig4ab_cys_xyl, zhang2025b_fig2abc_ttca_cama_lysarp, zhang2025b_fig2dh_rate_fits]
 
   # ---- registered 2026-11-01 from the pyrazine red team and the 2026-11-01 dossier ingest ----
 
@@ -2413,3 +2496,28 @@ entries:
     affects:
       - hincelin1992_tables1_2_thiamine_xylose_volatiles
       - bolton1993_tab2_mft_34s_split
+
+  # ---- registered 2026-11-01 from the cluster-5 conflict resolution (docs/history/conflict_resolution_2026-11-01/) ----
+
+  - id: CF-091
+    kind: self_contradiction
+    scope: other_lane
+    sources: [zhai2021]
+    quantity: "13C5-TTCA formed from 13C5-xylose + the cysteine released by TTCA, 10 mM pots, 100 C, pH 5.5-8 (Zhai 2021 Fig. 7a, 3-20 uM)"
+    observation: >-
+      The Methods obtain the labelled TTCA by subtracting the unlabelled TTCA content of one pot from the total of
+      another, i.e. as a difference of two ~6-10 mM measurements. That difference has a resolution of ~0.1-0.4 mM (the
+      Fig. 4b replicate SDs), 10-100x the plotted values (3-20 uM) and their +-0.5 uM bars. Either the quantitation was
+      direct (the m/z 259 / 254 area ratio) and the Methods misdescribe it, or the plotted values are below the
+      method's resolution. Found by the cluster-5 re-run of EX-054 (2026-11-01, Addendum A; Fig. 7a read once, 400 dpi,
+      never keyed): at face value Fig. 7a rejects the provisionally admitted CF-076 point (z 6.3) and no sampled draw of
+      any rival passes it (minimum z 2.2-2.9).
+    explanations:
+      - "Direct LC-MS/MS quantitation of 13C5-TTCA (Table 1 lists its fragments) with the Methods sentence describing an earlier or a different calculation."
+      - "Quantitation by difference as printed: the plotted values and bars are below the method's resolution and carry no information beyond a bound."
+    tests:
+      - "Cluster 5 label check (docs/history/conflict_resolution_2026-11-01/cluster5/verdict.md sec. 2, caveat 4): S5a (face value) is a sensitivity reading only; S5b (resolution-limited bound, <= ~0.3 mM) is passed by both feasible points of CF-076 (0.18 / 0.04 mM)."
+    status: open
+    remedy: "Author request (already queued for the label fraction): the direct m/z 259 / 254 area ratios of TTCA in the 13C5-xylose pots. Until answered, Fig. 7a is a bound (<= ~0.3 mM), not a measurement; it is never a fit row. If the authors confirm direct quantitation, S5a becomes primary for CF-076."
+    affects:
+      - {file: data/lit/extraction_dossiers/zhai2021_extraction.md, symbol: "13C5-TTCA"}

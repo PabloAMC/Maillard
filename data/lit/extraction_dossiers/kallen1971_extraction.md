@@ -1,6 +1,6 @@
-# Kallen 1971 — EXTRACTION (cysteine + formaldehyde → thiazolidine-4-carboxylate (TC) equilibria at 25 °C, ionic strength 1.0 M (KCl), pH 5.57 / 6.56 / 7.45 in 0.01 M phosphate; per-species formation constants for TC from CYS⁺ / CYS± / CYS⁻; N-hydroxymethyl and hemithioacetal adduct constants; the full microscopic pKa set of cysteine; one approach-to-equilibrium figure, NO rate constants)
+# Kallen 1971 — EXTRACTION (cysteine + formaldehyde → thiazolidine-4-carboxylate (TC) equilibria at 25 °C, ionic strength 1.0 M (KCl), pH 5.57 / 6.56 / 7.45 in 0.01 M phosphate; per-species formation constants for TC from CYS⁺ / CYS± / CYS⁻; N-hydroxymethyl and hemithioacetal adduct constants; the full microscopic pKa set of cysteine; one approach-to-equilibrium figure, NO rate constants (Fig. 4 is a relaxation, not k_r: see arithmetic 3, corrected 2026-11-01))
 
-### THE CLEANEST PER-SPECIES EQUILIBRIUM DECOMPOSITION OF A CYSTEINE THIAZOLIDINE IN THE CORPUS: the thiazolidine forms ~217× more favourably from the cysteine monoanion (CYS⁻) than from the zwitterion (CYS±), so the apparent K rises ~20× between pH 5.6 and 7.5. But the carbonyl is formaldehyde (hydrated, no ring-chain tautomerism), the temperature is 25 °C only, and the rates are in the companion paper (Kallen 1971, JACS 93, 6236; ref 9), which is NOT on disk.
+### THE CLEANEST PER-SPECIES EQUILIBRIUM DECOMPOSITION OF A CYSTEINE THIAZOLIDINE IN THE CORPUS: the thiazolidine forms ~217× more favourably from the cysteine monoanion (CYS⁻) than from the zwitterion (CYS±), so the apparent K rises ~20× between pH 5.6 and 7.5. But the carbonyl is formaldehyde (hydrated, no ring-chain tautomerism), the temperature is 25 °C only, and the rates are in the companion paper (Kallen 1971, JACS 93, 6236; ref 9), which is NOT on disk. (Corrected 2026-11-01: now on disk as `kallen1971b_extraction.md`; with it, k_r ~1e-6 s⁻¹ at 25 °C, arithmetic 3.)
 
 **Source on disk:** `data/articles/kallen1971.pdf` (9 pp., JACS pp. 6227-6235; p. 6227 starts with the tail of an
 unrelated silane paper). Prose and Tables I, IV re-typed from the `pdftotext -layout` text layer. **The text layer
@@ -32,7 +32,7 @@ The engine needs K, k_f, k_r for Cys + PENT ⇌ TTCA and their pH and T dependen
    observed relaxation rates agree with ref 9.
 
 **Delivers for B59b:** the pH-shape of K and the reacting species — **yes**; a constant transferable to an aldose — **no**
-(formaldehyde ≠ aldose; 25 °C only; I = 1.0 M); rates — **no** (only a crude relaxation time, arithmetic 3).
+(formaldehyde ≠ aldose; 25 °C only; I = 1.0 M); rates — not in this paper; with kallen1971b, k_r ~1e-6 s⁻¹ at 25 °C (arithmetic 3, corrected 2026-11-01: was "no (only a crude relaxation time, arithmetic 3)").
 
 ## 2. Methods as they matter to a model
 
@@ -165,10 +165,7 @@ Species check of Table IV: K_app = K_F2′·x(CYS±)/(1 − α_TC⁻) at pH 5.57
 ×20 over 1.9 pH units. Mechanistic reading: K_app ∝ fraction of cysteine as monoanion / fraction of TC as anion; below
 the TC ring-N pKa (6.24) the protonated ring is strongly destabilised.
 
-**3. Relaxation rate (crude).** With [Cys]eq/[TC] ~ 1 %, the relaxation constant ≈ the hydrolysis (ring-opening +
-release) constant: k_r ≈ ln 2 / t½ ≈ **5 × 10⁻⁴ s⁻¹ (pH 6.19)** and **≈ 1.5 × 10⁻⁴ s⁻¹ (pH 5.39)** at 25 °C [D, factor ~2].
-Then k_f = K_app · k_r ≈ 1.5 × 10⁶ × 5 × 10⁻⁴ ≈ **~10³ M⁻¹ s⁻¹ (pH 6.2, formaldehyde, 25 °C)** — a Z-grade order of magnitude
-only; the exact pH-rate law is in ref 9.
+**3. Rates (corrected 2026-11-01 with the companion kallen1971b; the earlier "Relaxation rate (crude)" took the approach-to-equilibrium relaxation of Fig. 4 as the hydrolysis constant k_r and quoted the free-base-amine forward constant as if it were per total cysteine; found by kallen1971b_extraction.md sec. 7 (1)).** Fig. 4 is a relaxation, not k_r: for TC ⇌ Cys + F near equilibrium, k_obs = k_r + k_f([Cys]eq + [F]eq) = k_r (1 + 2 [TC]eq / [Cys]eq), and with [TC]/[Cys]eq ~ 60-130 (Table IV, 7.5 mM TC) the relaxation is ~130x (pH 5.4) to ~210x (pH 6.2) faster than k_r. With k_f per TOTAL cysteine from kallen1971b (Table I / Fig. 6: 0.59 / 2.2 / 4.2 M⁻¹ s⁻¹ at pH 5.57 / 6.56 / 7.45; 0.12 at 4.47; 0.014 at 2.84) and K_app from Table IV: **k_r = k_f / K_app = 9.0 × 10⁻⁷ s⁻¹ (5.4 × 10⁻⁵ min⁻¹, t½ ~9 d) at pH 5.57, 9.3 × 10⁻⁷ at 6.56, 3.2 × 10⁻⁷ at 7.45; 2.3 × 10⁻⁷ at 4.47 and 3 × 10⁻⁸ at 2.84 (K_app ~5 × 10⁵ below pH 5)** [Z]. k_r RISES with pH from 2.8 to 5.6 (+0.54 log per unit), is flat to 6.6 and falls above. Check: k_r (1 + 2[TC]/[Cys]eq) predicts t½ ~71 min at pH 5.39 (Fig. 4 read 1.2-1.4 h) and ~29 min at 6.19 with the x1.7 phosphate catalysis of 0.01 M buffer (read ~0.4 h). The "~10³ M⁻¹ s⁻¹" is kallen1971b's k1a / k1b per free-base amine, not a k_f per total cysteine. (The earlier text gave k_r ~1.5-5 × 10⁻⁴ s⁻¹: that is the relaxation, 120-270x too fast.)
 
 **4. Against Cao 2017.** Cys + xylose K ≈ 60 L/mol at 90 °C vs formaldehyde 6.5 × 10⁵ M⁻¹ (pH 5.57, 25 °C): **~10⁴× lower**.
 Plausible contributors, none quantified here: aldose open-chain fraction (≪ 1 %), steric/electronic substitution at C2,
@@ -188,7 +185,7 @@ and temperature (ΔH of TC formation not measured; carbinolamine ΔH −3.3 kcal
 | cysteine microscopic pKa (thiol from zwitterion 8.55; amine 8.88; tautomer ratio ≈ 2) | Table II | 25 °C, I 1.0 M | **M/F** (spectrophotometric + Wegscheider) |
 | carbinolamine L1′ (SMC) | 15.9 M⁻¹, ΔH −3.3 kcal/mol | 10-40 °C | **M** |
 | hemithioacetal K_H′ (NAC) | 700 M⁻¹ | 25 °C | **M** (cited manuscript) |
-| relaxation k ≈ 1.5-5 × 10⁻⁴ s⁻¹; k_f ~10³ M⁻¹ s⁻¹ | pH 5.4-6.2, 25 °C | **Z** (figure read, arithmetic 3) |
+| TC hydrolysis k_r ~1 × 10⁻⁶ s⁻¹ (pH 5.6-6.6; 2.3 × 10⁻⁷ at 4.5); k_f 0.6-4 M⁻¹ s⁻¹ per total cysteine (pH 5.6-7.5); Fig. 4 is a relaxation ~130-210 k_r (corrected 2026-11-01: was "relaxation k ≈ 1.5-5 × 10⁻⁴ s⁻¹; k_f ~10³ M⁻¹ s⁻¹") | 25 °C, I 1.0 M | **Z** (with kallen1971b) |
 | **directional check:** TTCA-type K_app should RISE with pH across 5-7.5 (≈ ×20 for formaldehyde) and the reservoir couples to the cysteine monoanion | | **Z** (shape transfer is an assumption) |
 | ! Rate law and k's are in ref 9 (JACS 93, 6236), not here — the paper to fetch for B59b rates | | **!** |
 | ! Formaldehyde is a hydrate-dominated, non-cyclic aldehyde; magnitudes do not transfer to ribose/xylose | | **!** |
@@ -203,6 +200,5 @@ and temperature (ΔH of TC formation not measured; carbinolamine ΔH −3.3 kcal
   (zwitterion term), with the TTCA ring-N pKa (6.24 for TC; TTCA's own pKa should be sourced) controlling the turnover.
   Anchor the magnitude on Cao 2017 and let Kallen supply the slope (~×20 per 1.9 pH units at 25 °C) as a declared
   assumption with a wide band.
-- **Rates:** only a Z-grade timescale (hours at 25 °C, mM, formaldehyde). At 90-140 °C and with Cao's observed 0.5 h
-  near-completion, the fast-equilibrium assumption is consistent; this paper neither proves nor bounds it for aldoses.
-- **Fetch:** Kallen 1971, JACS 93, 6236 (mechanism and pH-rate profile of TC formation).
+- **Rates (corrected 2026-11-01; the earlier bullet read Fig. 4 as k_r and called the fast-equilibrium assumption consistent):** TC releases cysteine slowly at 25 °C (t½ ~9 days; the hours-scale curve of Fig. 4 is re-formation-dominated relaxation). Arrhenius-transferred to 100 °C with Ea 40-100 kJ/mol: 3.6 × 10⁻⁴-0.047 min⁻¹ (pH 4.5), 1.4 × 10⁻³-0.18 min⁻¹ (pH 5.6). Transfer to TTCA needs phi = k_r(TTCA)/k_r(TC), which no data on disk give (TTCA's K is ~10⁻⁴ of TC's; the split of that gap between k_f and k_r is unknown). The fast-equilibrium reading of Cao's 90 °C pot is neither proved nor bounded by this pair of papers. At Ea 64 and phi = 1, TC itself would release ~10⁻² min⁻¹ at 100 °C, about 10x above the dilute-pot ceiling of Zhai 2021, so the dilute pots require phi < ~0.1 or Ea near 40.
+- **Fetch:** Kallen 1971, JACS 93, 6236 (mechanism and pH-rate profile of TC formation). (Now on disk as `kallen1971b_extraction.md`, 2026-11-01.)

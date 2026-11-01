@@ -131,3 +131,15 @@
   - **CF-076: EXPLAINED, provisional (P 0.45);** k_r(100 C, pH 4.5) ~2 - 8e-4 /min, 40 - 100x below the engine.
   - **CF-011:** explained in part (phosphate P 0.5; ELSD quantitation P 0.3).
   - **Pending:** the register / dossier edits (kallen1971 correction; evidence-map K4; CF-076 / 011 YAML) go to the next single-writer pass after the atlas fix-up. No engine change before a red team and the pKa.
+- atlas red team (98 cells, seed 20261101): WRONG 10 / 98 (6 / 68 random = 8.8 %, CI 4 - 18 %); any issue 60 % (mostly tags / bins).
+  - **`absent` 5 / 16 wrong (31 %):** non-detects without a detection limit, and product capture.
+  - **`dominant` 2 / 25.**
+  - **Fit to drive changes:** the labelling / fed cells of F23 / F24, F16 / F17, F19, F01 - F06.
+  - **NOT fit until re-audited:** `absent` cells as switch-offs; F25 dominant outside Cerny's fed-furfural pot; F31 dominant; F30 quantities; cross-file T / water bins.
+  - The comparison agent was told to apply these rules.
+  - **Pending fix-up (after the comparison):**
+    - the gate recomputes T bins from T_C;
+    - `absent` requires a detection_basis, else it becomes `not_detected` (a new status);
+    - fix the 10 wrong cells; add Zhao 2019b's labelled FFT cell;
+    - a README limitation: many quotes are dossier paraphrase, so the gate checks the dossier, not the paper.
+- engine-vs-literature comparison committed. Two agent leads corrected by engine probes (the FFT pH 'sign error' is a 10 - 70x slope error; dpo_share 0.30 is latent, not shipped). Top errors: no hexose intact-C5 MFT route; the enolisation split is pH-frozen; no Strecker aldehydes + the pyrazine pH law on the Strecker step; no buffer catalysis; MFT 99.9 % via free NF; lipid inert. Next: a red team of the ranking; the atlas fix-up.

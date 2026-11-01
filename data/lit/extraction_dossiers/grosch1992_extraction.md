@@ -159,6 +159,13 @@ bounds. Net: λ(100 °C, this pot) ~0.03-0.06 /min, confidence ~0.6 that the tru
 - **EX-050 (MFT loss law, INCONCLUSIVE):**
   - A0 (engine, 0.095 /min at 110 °C): **SUPPORTED for this kind of pot** if Ea ≳ 90 kJ/mol (engine at 100 °C 0.031-0.045
     for Ea 133-90).
+    (Caveat added 2026-11-01, cluster 4 and its red team: these are THIAMINE pots. Thiamine cleavage releases the
+    pyrimidinylmethyl electrophile that consumes MFT (jhoo2002), so this lambda may be a thiamine-specific capture
+    sink, and its agreement with the engine's pentose-pot k_mft_decay (0.041 /min at 100 °C) may be coincidental. The
+    red team also notes that the p. 189 sentence on the standards concerns the extract's storage oxidation, that
+    Method II's standard goes into the extract (SDE recovery is not compensated), and that lambda assumes equal
+    formation under SDE and reflux although SDE strips H2S (Table VI, x3) and the precursor: lambda is model-dependent
+    and probably a lower bound. "Standards added after boiling" itself stands, P 0.85.)
   - A1 (pot-independent, slower): CONTRADICTED as a pot-independent constant if the patent's λ(110 °C) ≲ 0.02-0.05
     holds in 0.25 M cysteine; Grosch's 100 °C value already sits at that bound.
   - A3 (oxidative / coupling loss suppressed by free Cys): weakly SUPPORTED in direction (λ 0.034 with 0.65 mM Cys
@@ -174,6 +181,9 @@ bounds. Net: λ(100 °C, this pot) ~0.03-0.06 /min, confidence ~0.6 that the tru
 - **CF-068** (Schieberle 2000 vs Yiltirak 2026, ribose + Cys 100 °C): Table V no. 1 (ribose 1.34 + Cys 0.65 mM,
   pyrophosphate pH 5.7, reflux 2 h: MFT < 0.1 µg / 500 mL, < 1.8 nM) is a third, dilute data point; LEAVES the
   conflict UNCHANGED (concentrations 20-75x lower).
+  (Added 2026-11-01, cluster 4: Grosch is the DFA institute, as Schieberle 2000 is, so neither Table V point is a
+  third LABORATORY; Table V no. 2, ribose 30 + Cys 41 mM, 140 °C, 1 h, 0.6 µg / 2 mL = 300 µg/L, is a DFA-institute
+  point.)
 - **Strecker / pyrazine precursors:** not touched.
 - **Thiamine as an MFT source** (k3 inventory 6c, Zeiler thesis): this chapter is the printed source of the
   thiamine >> ribose + Cys ranking at meat-like levels; the "45 vs 3.4 µg/L" pair is NOT in this chapter [!] (no
@@ -190,6 +200,10 @@ bounds. Net: λ(100 °C, this pot) ~0.03-0.06 /min, confidence ~0.6 that the tru
 2. **Grosch λ(100 °C) ≈ 0.03-0.05 /min (dilute thiamine pot, ≤ 0.65 mM Cys) vs Nestec patent λ(110 °C) ≲ 0.02-0.05
    /min (0.25 M cysteine + xylose)** — same order at face value, but ×1.5-3 apart once 10 °C is allowed for. Causes:
    cysteine level (A3), carbonyl / sugar load (A2), the patent's single unreplicated series, or assumption (a) above.
+   (Added 2026-11-01, cluster 4: also MFT lost through the open reflux condenser, an apparatus loss, small, P ~0.15;
+   and a thiamine-specific electrophile sink, jhoo2002. The red team of cluster 4 adds that the two numbers measure
+   different channels -- an inferred in-pot loss in a thiamine pot vs a bound derived from 4 single-vial digitised
+   points with co-heated standards, not measurement-grade, P 0.15 -- so P(pot-dependent >= 3x at matched T) is ~0.5.)
 3. **Same-lab tension with Guth 1995** (MFT-MFT 86 % gone in 2 h at 100 °C, 62 % back as MFT, EX-050 Ta6): Grosch
    finds almost no MF-S2 in these pots, consistent with Guth's disulfide reverting at 100 °C; not a disagreement, a
    consistency.
