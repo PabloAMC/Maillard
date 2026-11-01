@@ -1,11 +1,12 @@
 # Engine vs literature (2026-11-01): machine-readable twin of ENGINE_VS_LITERATURE.md. Generated from that file plus the
 # red-team-filtered atlas classification (scratchpad scripts rebin.py / classify2.py / mkyaml.py); regimes keyed "ph|T|water".
+# Recounted 2026-11-01 on the fixed atlas (commit 6ba6583d, no overrides): counts, pooled_settled_claims, regimes, recount_on_fixed_atlas.
 
 schema: engine_vs_literature/v1
 date: '2026-11-01'
 companion: docs/reference/pathway_atlas/ENGINE_VS_LITERATURE.md
 inputs:
-- docs/reference/pathway_atlas/F*.yml (561 cells, 10 excluded)
+- 'docs/reference/pathway_atlas/F*.yml: fixed atlas, 562 cells, no overrides (sec. 1 counts, regimes); the original sec. 2 / 3 analysis read 561 cells with 10 excluded'
 - families.yml
 - engine_family_map.yml
 - tasks/overnight_log_2026-11-01.md (leads)
@@ -27,6 +28,8 @@ red_team_rules:
   dominant_weighting: only labelling / fed flux; F25 dominant outside Cerny's fed-furfural pot, F31 dominant, F30 quantities treated as operating
   high_confidence_basis: labelling / fed cells of F23/F24, F16/F17, F19, F01-F06; else lower
   F23_F24_water_bins: unreliable
+  status_since_fixup: excluded cells, temperature rebin and absent -> not_detected now live inside the files (commit 6ba6583d); the recount applies no overrides; F23_F24_water_bins caveat
+    retired (0.5 M buffer pots now concentrated)
 classification_rule:
   settled: '>= 2 independent labs (lab map below) with labelling / fed_intermediate / trapping / within_study_factor, same direction class ({dominant, operating} vs {minor, absent-with-LOD})'
   unsettled: single lab, mixed / conflicting, or weaker evidence kinds only
@@ -34,11 +37,23 @@ classification_rule:
   grid: 4 pH x 4 T x 4 water = 64 bins per family, 2048 total
 counts:
   grid_bins: 2048
-  settled: 31
-  unsettled: 217
-  unknown: 1800
-  offgrid_bins_with_unreported_axis: 41
+  settled: 25
+  settled_minor_or_absent: 0
+  unsettled: 233
+  unsettled_only_unattributed_or_not_detected: 30
+  unsettled_mixed_or_conflicting: 13
+  unknown: 1790
+  offgrid_bins_with_unreported_axis: 42
   offgrid_settled: 3
+  basis: fixed atlas (commit 6ba6583d), 562 cells, no in-analysis overrides
+  original_analysis:
+    settled: 31
+    settled_minor_or_absent: 1
+    unsettled: 217
+    unknown: 1800
+    offgrid_bins_with_unreported_axis: 41
+    offgrid_settled: 3
+    basis: 561 cells, 10 excluded, T midpoint rebin, absent -> not_detected by text match
 pooled_settled_claims:
 - id: P1
   claim: A hexose Amadori compound of a primary amino acid returns most of its amine as it decomposes (71 - 96 %)
@@ -61,10 +76,11 @@ pooled_settled_claims:
   labs_evidence: Nestle (labelling, 18O2, fed), Glomb (fed), Wageningen
   cells: F11#1,5,8,9,12
 - id: P5
-  claim: Deoxyosone retro-aldol (1-DG, 3-DG -> MGO) is nil / minor at 37 - 50 C
+  claim: 'Deoxyosone retro-aldol (1-DG, 3-DG -> MGO) is minor at 37 - 50 C: MGO seen at negligible amounts; C3 + C3 cleavage of 1-DG bounded <= ~1.3 - 1.7 mol %; none from fed 3-DG (positive
+    control)'
   regime: neutral, low T
   labs_evidence: Glomb, Thornalley (fed)
-  cells: F10#1 - 4
+  cells: F10#0 - 4
 - id: P6
   claim: Furfural is made from the intact pentose C5 and falls steeply from pH 4.5 to 6.5
   regime: 120 - 145 C
@@ -92,18 +108,18 @@ pooled_settled_claims:
   cells: F22#0 - 5
 - id: P11
   claim: MFT carbon is an intact C5 of one sugar, INCLUDING from glucose
-  regime: pH 5 - 6.5, 95 - 168 C
+  regime: pH 5 - 6.5, 95 - 168 C; 0.5 M buffer (concentrated) except BTBU
   labs_evidence: Nestle / Firmenich, BTBU, CAAS (labelling)
   cells: F23#0,1,6,7,8
 - id: P12
   claim: C2 + C3 recombination carries <= 1 - 6 % of MFT wherever labelled
   regime: 95 - 168 C
-  labs_evidence: Nestle / Firmenich, BTBU, CAAS (labelling)
+  labs_evidence: Nestle / Firmenich, BTBU, CAAS (labelling; F24#0,1,4,5 absent on the label pattern)
   cells: F24#0,1,3,4,5
 - id: P13
   claim: 'Free norfuraneol is a poor MFT source: 7 % of MFT when fed at the ribose''s charge (95 C); 48x below ribose (boiling, concentrated); NF : MFT 3000 in a ribose pot'
   regime: 95 - 145 C
-  labs_evidence: Nestle (labelling), Givaudan (fed), DFA (within-study)
+  labs_evidence: Nestle (labelling; F23#9 absent, positive control in pot D), Givaudan (fed), DFA (within-study)
   cells: F23#2,9,11,13
 - id: P14
   claim: FFT is made from furfural + H2S in pentose + Cys pots, and FFT falls only modestly from acid to pH 6.5 - 7 (6 - 19x) while furfural collapses
@@ -118,7 +134,8 @@ pooled_settled_claims:
 - id: P16
   claim: Thiamine is the dominant MFT source at dilute loadings; its share falls as pentose + Cys rise
   regime: pH 4 - 7, 120 - 145 C
-  labs_evidence: Firmenich, Minnesota / Nestle (34S), BTBU (13C)
+  labs_evidence: Firmenich, Minnesota / Nestle (34S), BTBU (13C). The lab map makes Firmenich and Minnesota / Nestle one lab line, so two lines; F27#7 (Nebraska) is a thiamine-sulfur
+    sub-claim
   cells: F27#0 - 7
 - id: P17
   claim: Furyl disulfides are a REVERSIBLE reservoir (thiol returns in water with a trap, and in beef)
@@ -141,15 +158,116 @@ pooled_settled_claims:
   labs_evidence: Kentucky, Rutgers (13C / 15N labelling); Seville (fed)
   cells: F30#11,13,14; F21#5,6
 - id: P21
-  claim: Melanoidins take sugar C and amine N together, glycine partly decarboxylated
+  claim: 'Melanoidins take sugar C and amine N together, glycine partly decarboxylated (27 - 33 % or ~2/3: Fang 2009 vs Mundt, unregistered)'
   regime: 70 - 125 C
   labs_evidence: Iowa State, Wageningen / Leeds (labelling)
-  cells: F31#0,1,2,4
+  cells: F31#0 - 4
 - id: P22
   claim: Protein-bound lysine glycates in every regime looked at; flat over a_w 0.3 - 0.7, slower at 0.98
   regime: 37 - 220 C
   labs_evidence: 8 labs (furosine / available lysine)
   cells: F05#0 - 24
+recount_on_fixed_atlas:
+  date: '2026-11-01'
+  scripts: session scratchpad evl2/ (dump.py, classify2.py unchanged, table.py, diff.py, pooled.py); no overrides
+  cell_changes_vs_overridden_view:
+    back_or_new: 11
+    deleted:
+    - F24#13
+    status_changes: 11
+    water_moves: 58
+    temperature_moves: 17
+    now_absent_with_detection_basis:
+    - F20#3
+    - F23#9
+    - F24#0
+    - F24#1
+    - F24#5
+    - F26#1
+    - F27#10
+    - F27#11
+    now_minor:
+    - F10#1
+    - F13#10
+    now_not_detected:
+    - F12#5
+    split_or_new:
+    - F25#22 (pH 4 arm of F25#6)
+    - F25#23 (Zhao 2019b, hexose FFT CAMOLA)
+  settled_bins_lost:
+  - F07 neutral|high|dilute (F07#10 to moderate)
+  - 'F10 neutral|low|dilute (Z -> !: F10#0 back as operating under the status cap)'
+  - F16 acid|low|dilute (Porto to moderate)
+  - F23 mild_acid|very_high|dilute (to concentrated)
+  - F23 neutral|very_high|dilute (to concentrated)
+  - F26 neutral|very_high|dilute (to concentrated)
+  - F27 acid|very_high|dilute
+  - F27 mild_acid|very_high|dilute
+  - F27 neutral|very_high|dilute (all to concentrated)
+  - F27 neutral|high|dilute (F27#9 to moderate)
+  settled_bins_gained:
+  - F07 neutral|moderate|dilute
+  - F13 mild_acid|very_high|concentrated
+  - F23 mild_acid|very_high|concentrated
+  - F23 neutral|very_high|concentrated
+  pooled_claims: all 22 survive; P12, P13 firmer (absent with basis); P5 reworded (bounded small); P16 two lab lines, no settled bin; P21 regains F31#3
+  mismatch_flags:
+  - id: F23-a / F24-a (E1)
+    cells_changed: 'F24#0, #1, #5 not_detected -> absent (label pattern); F23#8, F24#5 -> concentrated'
+    classification: unchanged (M1 + M2, V p)
+    confidence: 'unchanged H; the M2 side is firmer: C2 + C3 is now absent on a label basis in all three labelling labs. Sec. 5''s E1 verdict is unaffected'
+  - id: F23-b (E6), F23-d (E11)
+    cells_changed: 'F23#9 -> absent (positive control: the same analysis saw the NF marker in fed-NF pot D)'
+    classification: unchanged
+    confidence: 'unchanged H; firmer at 95 C. Sec. 5''s caveat (F23#13: NF 30 - 100 % at 145 C) stands'
+  - id: F10-a
+    cells_changed: F10#0 back as operating (MGO "negligible", seen); F10#1 -> minor (<= ~1.3 - 1.7 mol %); F10#3 absent (positive control, fed 3-DG)
+    classification: 'unchanged (M2, L: a 37 - 50 C vs 100 - 145 C regime mismatch)'
+    confidence: unchanged; "negligible" now reads "bounded <= ~1.7 mol %"
+  - id: F25-a (E8)
+    cells_changed: 'F25#7 back: Cerny 2007''s within-study ladder, FFT x2.3 down from pH 4 to 6, and a standing-level zero at pH 7 (not_detected)'
+    classification: unchanged (M3 magnitude, V p)
+    confidence: 'stays lo under the F25 rule. A third lab (Firmenich) now agrees with DFA and Reading, so E could read 3, not 2 (E x O x R 18, effective 12 instead of 8). Not re-ranked:
+      these are standing levels, so they bound net accumulation, not formation'
+  - id: F25-c
+    cells_changed: 'F25#23 new (Zhao 2019b, BTBU CAMOLA): hexose FFT ~94 % an intact glucose C5, unattributed'
+    classification: unchanged
+    confidence: unchanged lo. A second hexose intact-C5 datum beside F23#7, so it bears on E1, but from the same lab
+  - id: F20-a (E14)
+    cells_changed: 'F20#3 not_detected -> absent (label): glycine + HCHO addition gives MPZ <= ~1.5 umol/kg at 180 C, while 2,6-DMP takes ~45 % from labelled HCHO'
+    classification: unchanged (M1, V)
+    confidence: 'scope narrowed: the missing addition route is shown for DMP / ethyl pyrazines, not for MPZ'
+  - id: F27-b (E18)
+    cells_changed: 'F27#10 -> absent (methylene-blue assay): thiamine H2S vanishes below pH 6 at ~100 C. With F27#7 (non-thiazole S <= 4 % at pH <= 6, 121 C, 35S)'
+    classification: 'narrowed: M1 only at >= 145 C. At 100 - 121 C the literature SUPPORTS the engine''s zero thiamine-H2S share below pH 6.25. What survives is that the cut-off ignores
+      T (F27#1, Cerny 145 C, a single unreplicated control)'
+    confidence: lo, and weaker. P(material) lower than the original listing implied
+  - id: F27-a (E18)
+    cells_changed: 'F27#11 -> absent: 70x cysteine stops thiamine loss at 100 C (CF-089 vs Grosch''s x7 thiamine-MFT)'
+    classification: unchanged (M4)
+    confidence: unchanged lo; adds a cysteine dependence the engine does not express (lead; CF-089 open)
+  - id: F26-a
+    cells_changed: F26#1 -> absent (the NF-marker isomer is not made from ribose; positive control); F26#0 - 5 -> concentrated
+    classification: unchanged
+    confidence: unchanged
+  - id: F12-a
+    cells_changed: F12#5 absent -> not_detected (erythronic acid, 37 C)
+    classification: unchanged (the M1 rests on the 18O2 and C3-acid cells)
+    confidence: unchanged
+  - id: F31-a
+    cells_changed: F31#3 back as operating (C/N 7.64)
+    classification: unchanged (inside 6.6 - 21)
+    confidence: unchanged
+  - id: F04-a, F08-a
+    cells_changed: F04#11, F08#5 temperature moves
+    classification: 'unchanged: the settled bins they cite (F04 neutral / high, F08 neutral / low) are still settled'
+    confidence: unchanged
+  - id: F16-a, F17-a, F19-b, F29-a / -c, F30-a, F22-b
+    cells_changed: 'water or temperature moves only (F16#2; F17#2, #5 - 7; F19#22; F29#9, #18; F30#2, #6; F22#4 - 6)'
+    classification: unchanged
+    confidence: unchanged
+  net: no mismatch changes kind or H / lo label; F27-b narrowed to >= 145 C; F20-a narrowed to non-MPZ adducts; E8 evidence 3 labs within-study (not re-ranked); E1 M2 side and E6 firmer.
+    Sec. 5 stays binding.
 corrections_to_leads:
 - lead: FFT formation rises with pH in the engine (sign error)
   verdict: 'not confirmed as net: per-furfural HS- branch rises, but net FFT falls with pH because furfural supply falls ~1.5 dec/unit; the real errors are magnitude (10-70x too steep,
@@ -1029,6 +1147,7 @@ regimes:
         idx:
         - 4
         - 5
+        - 12
         - 13
         labs:
         - Jiangnan/Ho network
@@ -1309,16 +1428,6 @@ regimes:
         top: operating
         idx:
         - 20
-        labs:
-        - Givaudan
-        strong_labs: []
-        ev:
-        - measured_intermediate
-        cf: []
-      mild_acid|moderate|dilute:
-        cls: unsettled
-        top: operating
-        idx:
         - 21
         labs:
         - Givaudan
@@ -1326,11 +1435,13 @@ regimes:
         - Givaudan
         ev:
         - fed_intermediate
+        - measured_intermediate
         cf: []
       neutral|high|dilute:
         cls: settled_present
         top: operating
         idx:
+        - 11
         - 14
         - 15
         - 19
@@ -1346,6 +1457,7 @@ regimes:
         - measured_intermediate
         - within_study_factor
         cf:
+        - CF-011
         - CF-063
         - CF-071
         - CF-076
@@ -1355,10 +1467,8 @@ regimes:
         idx:
         - 0
         - 2
-        - 3
         - 8
         labs:
-        - Fife (USC)
         - Jiangnan/Ho network
         - Kallen
         strong_labs:
@@ -1373,10 +1483,11 @@ regimes:
         cls: unsettled
         top: operating
         idx:
-        - 11
+        - 3
         - 12
         - 13
         labs:
+        - Fife (USC)
         - Jiangnan/Ho network
         strong_labs:
         - Jiangnan/Ho network
@@ -1386,7 +1497,6 @@ regimes:
         - measured_intermediate
         cf:
         - CF-010
-        - CF-011
         - CF-076
       not_stated|high|dilute:
         cls: unsettled
@@ -1434,7 +1544,6 @@ regimes:
         - 0
         - 1
         - 2
-        - 4
         - 5
         - 6
         - 7
@@ -1468,6 +1577,17 @@ regimes:
         ev:
         - fed_intermediate
         - within_study_factor
+        cf: []
+      neutral|moderate|dilute:
+        cls: unsettled
+        top: operating
+        idx:
+        - 4
+        labs:
+        - Wageningen
+        strong_labs: []
+        ev:
+        - kinetic_fit
         cf: []
       not_stated|high|intermediate_aw:
         cls: unsettled
@@ -1648,16 +1768,25 @@ regimes:
         - trapping
         - within_study_factor
         cf: []
+      neutral|moderate|concentrated:
+        cls: unsettled
+        top: operating
+        idx:
+        - 14
+        labs:
+        - Reading (Mottram/Parker)
+        strong_labs: []
+        ev:
+        - kinetic_fit
+        cf: []
       neutral|moderate|dilute:
         cls: unsettled
         top: operating
         idx:
         - 0
         - 12
-        - 14
         labs:
         - Ledl/Severin
-        - Reading (Mottram/Parker)
         - Wageningen
         strong_labs:
         - Ledl/Severin
@@ -1761,20 +1890,19 @@ regimes:
         - measured_intermediate
         cf: []
       neutral|high|dilute:
-        cls: settled_present
+        cls: unsettled
         top: operating
         idx:
         - 6
         - 7
         - 8
         - 9
-        - 10
+        - 14
         labs:
+        - Jiangnan/Ho network
         - Nestle/Firmenich
-        - Wageningen
         strong_labs:
         - Nestle/Firmenich
-        - Wageningen
         ev:
         - fed_intermediate
         - labelling
@@ -1798,27 +1926,31 @@ regimes:
         top: dominant
         idx:
         - 2
-        labs:
-        - Ledl/Severin
-        strong_labs:
-        - Ledl/Severin
-        ev:
-        - trapping
-        cf: []
-      neutral|moderate|dilute:
-        cls: unsettled
-        top: operating
-        idx:
-        - 0
-        - 16
         - 17
         labs:
         - Ledl/Severin
         - Reading (Mottram/Parker)
-        - Wageningen
         strong_labs:
         - Ledl/Severin
         ev:
+        - kinetic_fit
+        - trapping
+        cf: []
+      neutral|moderate|dilute:
+        cls: settled_present
+        top: operating
+        idx:
+        - 0
+        - 10
+        - 16
+        labs:
+        - Ledl/Severin
+        - Wageningen
+        strong_labs:
+        - Ledl/Severin
+        - Wageningen
+        ev:
+        - fed_intermediate
         - kinetic_fit
         - trapping
         cf: []
@@ -1874,15 +2006,11 @@ regimes:
         cls: unsettled
         top: operating
         idx:
-        - 5
         - 7
         labs:
         - Hacettepe
-        - Jiangnan/Ho network
-        strong_labs:
-        - Jiangnan/Ho network
+        strong_labs: []
         ev:
-        - fed_intermediate
         - kinetic_fit
         cf: []
       neutral|low|dilute:
@@ -1905,6 +2033,18 @@ regimes:
         - fed_intermediate
         - trapping
         - within_study_factor
+        cf: []
+      neutral|moderate|dilute:
+        cls: unsettled
+        top: operating
+        idx:
+        - 5
+        labs:
+        - Jiangnan/Ho network
+        strong_labs:
+        - Jiangnan/Ho network
+        ev:
+        - fed_intermediate
         cf: []
       not_stated|very_high|low_aw:
         cls: unsettled
@@ -2082,9 +2222,10 @@ regimes:
         - fed_intermediate
         cf: []
       neutral|low|dilute:
-        cls: settled_minor_or_absent
-        top: minor
+        cls: unsettled_conflicting
+        top: operating
         idx:
+        - 0
         - 1
         - 2
         - 3
@@ -2382,30 +2523,22 @@ regimes:
         - within_study_factor
         cf: []
       mild_acid|very_high|concentrated:
-        cls: unsettled
+        cls: settled_present
         top: dominant
         idx:
         - 0
+        - 2
         - 7
         labs:
+        - DFA Garching/TUM
         - Nestle/Firmenich
         strong_labs:
+        - DFA Garching/TUM
         - Nestle/Firmenich
-        ev:
-        - labelling
-        - within_study_factor
-        cf: []
-      mild_acid|very_high|dilute:
-        cls: unsettled
-        top: operating
-        idx:
-        - 2
-        labs:
-        - DFA Garching/TUM
-        strong_labs:
-        - DFA Garching/TUM
         ev:
         - fed_intermediate
+        - labelling
+        - within_study_factor
         cf: []
       neutral|high|concentrated:
         cls: unsettled_unattributed
@@ -2500,7 +2633,7 @@ regimes:
         ev:
         - within_study_factor
         cf: []
-      mild_acid|very_high|dilute:
+      mild_acid|very_high|concentrated:
         cls: unsettled
         top: operating
         idx:
@@ -2616,7 +2749,7 @@ regimes:
         ev:
         - within_study_factor
         cf: []
-      mild_acid|moderate|dilute:
+      mild_acid|moderate|concentrated:
         cls: unsettled_unattributed
         top: unattributed
         idx:
@@ -2694,31 +2827,30 @@ regimes:
     file: F16_strecker_aldehyde.yml
     bins:
       acid|low|dilute:
-        cls: settled_present
+        cls: unsettled
         top: operating
         idx:
         - 10
-        - 11
         labs:
         - Faculte d'Oenologie, Bordeaux
-        - Universidade Catolica Portuguesa, Porto
         strong_labs:
         - Faculte d'Oenologie, Bordeaux
-        - Universidade Catolica Portuguesa, Porto
         ev:
         - fed_intermediate
-        - within_study_factor
         cf: []
       acid|moderate|dilute:
-        cls: unsettled
+        cls: unsettled_conflicting
         top: dominant
         idx:
         - 5
         - 6
+        - 11
         labs:
         - Quest
+        - Universidade Catolica Portuguesa, Porto
         strong_labs:
         - Quest
+        - Universidade Catolica Portuguesa, Porto
         ev:
         - fed_intermediate
         - within_study_factor
@@ -2772,26 +2904,15 @@ regimes:
         - within_study_factor
         cf: []
       neutral|moderate|concentrated:
-        cls: unsettled_unattributed
-        top: unattributed
-        idx:
-        - 12
-        labs:
-        - Minnesota (Reineccius)
-        strong_labs: []
-        ev:
-        - within_study_factor
-        cf: []
-      neutral|moderate|dilute:
         cls: unsettled
         top: dominant
         idx:
-        - 0
-        - 1
         - 2
         - 4
+        - 12
         labs:
         - DFA Garching/TUM
+        - Minnesota (Reineccius)
         strong_labs:
         - DFA Garching/TUM
         ev:
@@ -2799,6 +2920,19 @@ regimes:
         - within_study_factor
         cf:
         - CF-070
+      neutral|moderate|dilute:
+        cls: unsettled
+        top: dominant
+        idx:
+        - 0
+        - 1
+        labs:
+        - DFA Garching/TUM
+        strong_labs:
+        - DFA Garching/TUM
+        ev:
+        - fed_intermediate
+        cf:
         - CF-073
       neutral|very_high|dilute:
         cls: unsettled
@@ -2899,25 +3033,11 @@ regimes:
         cls: unsettled
         top: operating
         idx:
-        - 8
-        labs:
-        - DFA Garching/TUM
-        strong_labs:
-        - DFA Garching/TUM
-        ev:
-        - trapping
-        cf: []
-      neutral|moderate|dilute:
-        cls: unsettled
-        top: dominant
-        idx:
-        - 0
-        - 1
         - 2
-        - 3
         - 5
         - 6
         - 7
+        - 8
         labs:
         - DFA Garching/TUM
         strong_labs:
@@ -2925,10 +3045,26 @@ regimes:
         ev:
         - fed_intermediate
         - labelling
+        - trapping
         - within_study_factor
         cf:
         - CF-070
         - CF-074
+      neutral|moderate|dilute:
+        cls: unsettled
+        top: dominant
+        idx:
+        - 0
+        - 1
+        - 3
+        labs:
+        - DFA Garching/TUM
+        strong_labs:
+        - DFA Garching/TUM
+        ev:
+        - fed_intermediate
+        - within_study_factor
+        cf: []
   F18_lipid_strecker:
     file: F18_lipid_strecker.yml
     bins:
@@ -2936,8 +3072,19 @@ regimes:
         cls: unsettled
         top: operating
         idx:
-        - 10
         - 12
+        labs:
+        - Seville
+        strong_labs:
+        - Seville
+        ev:
+        - within_study_factor
+        cf: []
+      acid|high|not_stated:
+        cls: unsettled
+        top: operating
+        idx:
+        - 10
         labs:
         - Seville
         strong_labs:
@@ -3079,7 +3226,6 @@ regimes:
         idx:
         - 4
         - 13
-        - 14
         - 20
         labs:
         - Ghent
@@ -3121,6 +3267,18 @@ regimes:
         - within_study_factor
         cf:
         - CF-019
+      alkaline|very_high|dilute:
+        cls: unsettled
+        top: operating
+        idx:
+        - 14
+        labs:
+        - Ghent
+        strong_labs:
+        - Ghent
+        ev:
+        - within_study_factor
+        cf: []
       mild_acid|high|dilute:
         cls: unsettled
         top: operating
@@ -3198,7 +3356,8 @@ regimes:
         ev:
         - fed_intermediate
         - within_study_factor
-        cf: []
+        cf:
+        - CF-087
       neutral|high|low_aw:
         cls: unsettled
         top: operating
@@ -3211,7 +3370,7 @@ regimes:
         ev:
         - within_study_factor
         cf: []
-      neutral|moderate|dilute:
+      neutral|low|dilute:
         cls: unsettled
         top: operating
         idx:
@@ -3567,7 +3726,7 @@ regimes:
         ev:
         - within_study_factor
         cf: []
-      mild_acid|high|dilute:
+      mild_acid|moderate|dilute:
         cls: unsettled
         top: operating
         idx:
@@ -3606,8 +3765,10 @@ regimes:
         top: operating
         idx:
         - 15
+        - 16
         labs:
         - Jiangnan/Ho network
+        - Nestle/Firmenich
         strong_labs:
         - Jiangnan/Ho network
         ev:
@@ -3620,11 +3781,9 @@ regimes:
         - 8
         - 13
         - 14
-        - 16
         labs:
         - Copenhagen
         - Jiangnan/Ho network
-        - Nestle/Firmenich
         strong_labs:
         - Copenhagen
         - Jiangnan/Ho network
@@ -3636,7 +3795,7 @@ regimes:
   F23_mft_intact_c5:
     file: F23_mft_intact_c5.yml
     bins:
-      acid|very_high|dilute:
+      acid|very_high|concentrated:
         cls: unsettled_unattributed
         top: unattributed
         idx:
@@ -3647,12 +3806,23 @@ regimes:
         ev:
         - within_study_factor
         cf: []
-      mild_acid|high|dilute:
-        cls: unsettled_conflicting
+      mild_acid|high|concentrated:
+        cls: unsettled
         top: operating
         idx:
-        - 5
         - 14
+        labs:
+        - Reading (Mottram/Parker)
+        strong_labs:
+        - Reading (Mottram/Parker)
+        ev:
+        - fed_intermediate
+        cf: []
+      mild_acid|high|dilute:
+        cls: unsettled
+        top: minor
+        idx:
+        - 5
         - 19
         - 20
         labs:
@@ -3660,39 +3830,29 @@ regimes:
         - Reading (Mottram/Parker)
         strong_labs:
         - BTBU
-        - Reading (Mottram/Parker)
         ev:
-        - fed_intermediate
         - labelling
         - within_study_factor
         cf: []
       mild_acid|moderate|concentrated:
-        cls: unsettled
-        top: minor
-        idx:
-        - 11
-        labs:
-        - Givaudan
-        strong_labs:
-        - Givaudan
-        ev:
-        - fed_intermediate
-        cf: []
-      mild_acid|moderate|dilute:
-        cls: unsettled
+        cls: unsettled_conflicting
         top: dominant
         idx:
         - 0
         - 1
         - 2
         - 9
+        - 11
         - 22
         labs:
         - DFA Garching/TUM
+        - Givaudan
         - Nestle/Firmenich
         strong_labs:
+        - Givaudan
         - Nestle/Firmenich
         ev:
+        - fed_intermediate
         - labelling
         - within_study_factor
         cf:
@@ -3710,29 +3870,21 @@ regimes:
         - trapping
         cf: []
       mild_acid|very_high|concentrated:
-        cls: unsettled
-        top: operating
+        cls: settled_present
+        top: dominant
         idx:
         - 3
-        labs:
-        - Nestle/Firmenich
-        strong_labs:
-        - Nestle/Firmenich
-        ev:
-        - labelling
-        cf: []
-      mild_acid|very_high|dilute:
-        cls: settled_present
-        top: operating
-        idx:
         - 4
+        - 6
         - 12
         - 13
         - 21
         labs:
+        - CAAS
         - DFA Garching/TUM
         - Nestle/Firmenich
         strong_labs:
+        - CAAS
         - DFA Garching/TUM
         - Nestle/Firmenich
         ev:
@@ -3741,19 +3893,19 @@ regimes:
         - within_study_factor
         cf:
         - CF-065
-      mild_acid|very_high|not_stated:
+        - CF-086 (the 19 % vs ~6 % re-read; see F24)
+      neutral|high|concentrated:
         cls: unsettled
-        top: dominant
+        top: minor
         idx:
-        - 6
+        - 15
         labs:
-        - CAAS
+        - Reading (Mottram/Parker)
         strong_labs:
-        - CAAS
+        - Reading (Mottram/Parker)
         ev:
-        - labelling
-        cf:
-        - 'unregistered: the 19 % vs ~6 % re-read; see F24'
+        - fed_intermediate
+        cf: []
       neutral|high|dilute:
         cls: settled_present
         top: dominant
@@ -3770,7 +3922,7 @@ regimes:
         - fed_intermediate
         - labelling
         cf: []
-      neutral|very_high|dilute:
+      neutral|very_high|concentrated:
         cls: settled_present
         top: dominant
         idx:
@@ -3788,7 +3940,7 @@ regimes:
   F24_mft_fragments:
     file: F24_mft_fragments.yml
     bins:
-      acid|very_high|dilute:
+      acid|very_high|concentrated:
         cls: unsettled
         top: operating
         idx:
@@ -3801,23 +3953,12 @@ regimes:
         ev:
         - fed_intermediate
         cf: []
-      mild_acid|moderate|dilute:
-        cls: unsettled_unattributed
-        top: not_detected
+      mild_acid|moderate|concentrated:
+        cls: unsettled
+        top: absent
         idx:
         - 0
         - 1
-        labs:
-        - Nestle/Firmenich
-        strong_labs: []
-        ev:
-        - labelling
-        cf: []
-      mild_acid|very_high|concentrated:
-        cls: unsettled
-        top: minor
-        idx:
-        - 3
         labs:
         - Nestle/Firmenich
         strong_labs:
@@ -3825,15 +3966,18 @@ regimes:
         ev:
         - labelling
         cf: []
-      mild_acid|very_high|dilute:
+      mild_acid|very_high|concentrated:
         cls: unsettled_conflicting
         top: operating
         idx:
         - 2
+        - 3
+        - 6
         - 7
         - 10
         - 11
         labs:
+        - CAAS
         - DFA Garching/TUM
         - Nestle/Firmenich
         strong_labs:
@@ -3843,7 +3987,8 @@ regimes:
         - fed_intermediate
         - labelling
         - measured_intermediate
-        cf: []
+        cf:
+        - CF-086 (printed 19 % vs the EI re-read ~6 %; MECHANISM_REVIEWS_2026-10-31 row 5)
       mild_acid|very_high|low_aw:
         cls: unsettled
         top: operating
@@ -3856,18 +4001,6 @@ regimes:
         ev:
         - fed_intermediate
         cf: []
-      mild_acid|very_high|not_stated:
-        cls: unsettled_conflicting
-        top: conflicting
-        idx:
-        - 6
-        labs:
-        - CAAS
-        strong_labs: []
-        ev:
-        - labelling
-        cf:
-        - 'unregistered: printed 19 % vs the EI re-read ~6 % (MECHANISM_REVIEWS_2026-10-31 row 5); propose a CF entry'
       neutral|high|dilute:
         cls: unsettled
         top: absent
@@ -3880,25 +4013,50 @@ regimes:
         ev:
         - labelling
         cf: []
-      neutral|very_high|dilute:
-        cls: unsettled_unattributed
-        top: not_detected
+      neutral|very_high|concentrated:
+        cls: unsettled
+        top: absent
         idx:
         - 5
         labs:
         - CAAS
-        strong_labs: []
+        strong_labs:
+        - CAAS
         ev:
         - labelling
         cf: []
   F25_fft_furfural_h2s:
     file: F25_fft_furfural_h2s.yml
     bins:
-      mild_acid|high|dilute:
+      acid|very_high|concentrated:
+        cls: unsettled
+        top: operating
+        idx:
+        - 22
+        labs:
+        - Nestle/Firmenich
+        strong_labs:
+        - Nestle/Firmenich
+        ev:
+        - labelling
+        cf: []
+      mild_acid|high|concentrated:
         cls: unsettled
         top: operating
         idx:
         - 14
+        labs:
+        - Reading (Mottram/Parker)
+        strong_labs:
+        - Reading (Mottram/Parker)
+        ev:
+        - within_study_factor
+        cf:
+        - CF-031
+      mild_acid|high|dilute:
+        cls: unsettled
+        top: operating
+        idx:
         - 15
         - 16
         labs:
@@ -3922,18 +4080,6 @@ regimes:
         cf:
         - CF-015
       mild_acid|moderate|concentrated:
-        cls: unsettled_unattributed
-        top: unattributed
-        idx:
-        - 17
-        labs:
-        - Nestle/Firmenich
-        strong_labs: []
-        ev:
-        - within_study_factor
-        cf:
-        - CF-031
-      mild_acid|moderate|dilute:
         cls: unsettled
         top: dominant
         idx:
@@ -3941,18 +4087,41 @@ regimes:
         - 1
         - 2
         - 3
-        - 18
-        - 19
+        - 17
         labs:
-        - DFA Garching/TUM
         - Nestle/Firmenich
         strong_labs:
         - Nestle/Firmenich
         ev:
         - fed_intermediate
         - labelling
+        - within_study_factor
+        cf:
+        - CF-031
+      mild_acid|moderate|dilute:
+        cls: unsettled_unattributed
+        top: not_detected
+        idx:
+        - 18
+        - 19
+        labs:
+        - DFA Garching/TUM
+        strong_labs: []
+        ev:
         - qualitative
         - within_study_factor
+        cf: []
+      mild_acid|very_high|concentrated:
+        cls: unsettled
+        top: operating
+        idx:
+        - 6
+        labs:
+        - Nestle/Firmenich
+        strong_labs:
+        - Nestle/Firmenich
+        ev:
+        - labelling
         cf: []
       mild_acid|very_high|dilute:
         cls: unsettled
@@ -3989,7 +4158,9 @@ regimes:
         idx:
         - 5
         - 9
+        - 23
         labs:
+        - BTBU
         - Jiangnan/Ho network
         - Reading (Mottram/Parker)
         strong_labs:
@@ -3997,10 +4168,22 @@ regimes:
         - Reading (Mottram/Parker)
         ev:
         - fed_intermediate
+        - labelling
         - within_study_factor
         cf:
         - CF-001
         - CF-065
+      neutral|very_high|concentrated:
+        cls: unsettled_unattributed
+        top: not_detected
+        idx:
+        - 7
+        labs:
+        - Nestle/Firmenich
+        strong_labs: []
+        ev:
+        - within_study_factor
+        cf: []
       neutral|very_high|dilute:
         cls: unsettled
         top: operating
@@ -4072,7 +4255,7 @@ regimes:
         - within_study_factor
         cf:
         - CF-031
-      mild_acid|moderate|dilute:
+      mild_acid|moderate|concentrated:
         cls: unsettled
         top: dominant
         idx:
@@ -4138,20 +4321,29 @@ regimes:
         - within_study_factor
         cf:
         - CF-065
-      neutral|very_high|dilute:
-        cls: settled_present
+      neutral|very_high|concentrated:
+        cls: unsettled
         top: dominant
         idx:
         - 4
         - 5
         - 18
+        labs:
+        - Nestle/Firmenich
+        strong_labs:
+        - Nestle/Firmenich
+        ev:
+        - labelling
+        cf: []
+      neutral|very_high|dilute:
+        cls: unsettled
+        top: dominant
+        idx:
         - 24
         labs:
         - CAAS
-        - Nestle/Firmenich
         strong_labs:
         - CAAS
-        - Nestle/Firmenich
         ev:
         - labelling
         cf: []
@@ -4170,20 +4362,28 @@ regimes:
         ev:
         - within_study_factor
         cf: []
-      acid|very_high|dilute:
-        cls: settled_present
+      acid|very_high|concentrated:
+        cls: unsettled
         top: dominant
         idx:
         - 2
-        - 23
         labs:
-        - Jiangnan/Ho network
         - Nestle/Firmenich
         strong_labs:
-        - Jiangnan/Ho network
         - Nestle/Firmenich
         ev:
         - labelling
+        cf: []
+      acid|very_high|dilute:
+        cls: unsettled
+        top: operating
+        idx:
+        - 23
+        labs:
+        - Jiangnan/Ho network
+        strong_labs:
+        - Jiangnan/Ho network
+        ev:
         - within_study_factor
         cf: []
       alkaline|high|dilute:
@@ -4227,9 +4427,10 @@ regimes:
         ev:
         - labelling
         - within_study_factor
-        cf: []
+        cf:
+        - CF-090 (xylose null here vs Hincelin's 4-5x)
       mild_acid|moderate|dilute:
-        cls: unsettled
+        cls: unsettled_conflicting
         top: operating
         idx:
         - 10
@@ -4241,15 +4442,18 @@ regimes:
         - Nebraska (Arnold)
         strong_labs:
         - DFA Garching/TUM
+        - Nebraska (Arnold)
         ev:
         - within_study_factor
-        cf: []
+        cf:
+        - 'CF-089 (Arnold: cysteine stops thiamine degradation)'
       mild_acid|very_high|concentrated:
         cls: unsettled
         top: dominant
         idx:
         - 0
         - 1
+        - 3
         labs:
         - Nestle/Firmenich
         strong_labs:
@@ -4259,10 +4463,9 @@ regimes:
         cf:
         - CF-007
       mild_acid|very_high|dilute:
-        cls: settled_present
-        top: dominant
+        cls: unsettled
+        top: operating
         idx:
-        - 3
         - 13
         - 14
         labs:
@@ -4270,27 +4473,21 @@ regimes:
         - Nestle/Firmenich
         strong_labs:
         - DFA Garching/TUM
-        - Nestle/Firmenich
         ev:
-        - labelling
         - measured_intermediate
         - within_study_factor
-        cf:
-        - CF-007
+        cf: []
       neutral|high|dilute:
-        cls: settled_present
+        cls: unsettled
         top: operating
         idx:
-        - 9
         - 24
         - 25
         - 26
         labs:
         - Jiangnan/Ho network
-        - Nebraska (Arnold)
         strong_labs:
         - Jiangnan/Ho network
-        - Nebraska (Arnold)
         ev:
         - measured_intermediate
         - within_study_factor
@@ -4307,33 +4504,45 @@ regimes:
         - Reading (Ames)
         ev:
         - within_study_factor
-        cf: []
+        cf:
+        - 'CF-090 (Bolton: no xylose effect at pH 5.5-5.8, a_w 0.83)'
       neutral|moderate|dilute:
-        cls: unsettled_unattributed
-        top: not_detected
+        cls: unsettled
+        top: operating
         idx:
+        - 9
         - 11
         labs:
         - Nebraska (Arnold)
-        strong_labs: []
+        strong_labs:
+        - Nebraska (Arnold)
         ev:
         - within_study_factor
-        cf: []
-      neutral|very_high|dilute:
-        cls: settled_present
+        cf:
+        - 'CF-089 (Grosch: cysteine raises thiamine-MFT 7x)'
+      neutral|very_high|concentrated:
+        cls: unsettled
         top: dominant
         idx:
         - 4
+        labs:
+        - Nestle/Firmenich
+        strong_labs:
+        - Nestle/Firmenich
+        ev:
+        - labelling
+        cf: []
+      neutral|very_high|dilute:
+        cls: unsettled
+        top: operating
+        idx:
         - 21
         - 22
         labs:
         - Jiangnan/Ho network
-        - Nestle/Firmenich
         strong_labs:
         - Jiangnan/Ho network
-        - Nestle/Firmenich
         ev:
-        - labelling
         - within_study_factor
         cf:
         - CF-008
@@ -4579,7 +4788,6 @@ regimes:
         top: operating
         idx:
         - 16
-        - 18
         labs:
         - Seville
         strong_labs:
@@ -4610,12 +4818,25 @@ regimes:
         ev:
         - qualitative
         cf: []
+      neutral|low|concentrated:
+        cls: unsettled
+        top: operating
+        idx:
+        - 18
+        labs:
+        - Seville
+        strong_labs:
+        - Seville
+        ev:
+        - fed_intermediate
+        cf: []
       neutral|very_high|dilute:
         cls: unsettled
         top: operating
         idx:
         - 0
         - 3
+        - 4
         - 5
         labs:
         - Leuven
@@ -4640,6 +4861,18 @@ regimes:
         ev:
         - within_study_factor
         cf: []
+      not_stated|high|concentrated:
+        cls: unsettled
+        top: operating
+        idx:
+        - 9
+        labs:
+        - Leuven
+        strong_labs:
+        - Leuven
+        ev:
+        - within_study_factor
+        cf: []
       not_stated|high|low_aw:
         cls: unsettled
         top: operating
@@ -4661,7 +4894,6 @@ regimes:
         top: operating
         idx:
         - 8
-        - 9
         - 10
         labs:
         - Leuven
@@ -4706,6 +4938,18 @@ regimes:
   F30_lipid_oxidation_crossover:
     file: F30_lipid_oxidation_crossover.yml
     bins:
+      acid|high|not_stated:
+        cls: unsettled
+        top: operating
+        idx:
+        - 15
+        labs:
+        - Seville
+        strong_labs:
+        - Seville
+        ev:
+        - within_study_factor
+        cf: []
       alkaline|low|dilute:
         cls: unsettled
         top: dominant
@@ -4718,17 +4962,30 @@ regimes:
         ev:
         - labelling
         cf: []
+      mild_acid|high|concentrated:
+        cls: unsettled
+        top: operating
+        idx:
+        - 2
+        - 6
+        labs:
+        - Reading (Mottram/Parker)
+        strong_labs:
+        - Reading (Mottram/Parker)
+        ev:
+        - within_study_factor
+        cf:
+        - 'CF-031 (note: ''raises MFT in emulsion'' holds against buffer+oil only; against plain buffer MFT falls, FFT rises)'
+        - 'CF-088 (farmer1992: no antioxidant effect, aldehydes consumed by amino / thiol groups, NH3, H2S; vs xu2011: the same pattern read as antioxidant MRPs)'
       mild_acid|high|dilute:
         cls: settled_present
         top: operating
         idx:
         - 0
         - 1
-        - 2
         - 3
         - 4
         - 5
-        - 6
         - 20
         labs:
         - Huazhong
@@ -4740,9 +4997,7 @@ regimes:
         - within_study_factor
         cf:
         - CF-031
-        - 'CF-031 (note: ''raises MFT in emulsion'' holds against buffer+oil only; against plain buffer MFT falls, FFT rises)'
-        - 'unregistered: farmer1992 (no antioxidant effect; aldehydes consumed by amino / thiol groups, NH3, H2S) vs xu2011 (attributes the same pattern to antioxidant MRPs)'
-        - 'unregistered: xu2011 vs farmer1992 on the antioxidant reading'
+        - CF-088 (xu2011 vs farmer1992 on the antioxidant reading)
       neutral|low|dilute:
         cls: settled_present
         top: operating
@@ -4844,15 +5099,18 @@ regimes:
         cls: unsettled
         top: operating
         idx:
+        - 3
         - 5
         labs:
         - Leeds
         strong_labs:
         - Leeds
         ev:
+        - labelling
         - within_study_factor
         cf:
         - CF-018
+        - 'unregistered: fang2009 (solid-state NMR, the same glucose-glycine chemistry) puts 27-33 % of glycine decarboxylated against Mundt''s ~2/3'
       mild_acid|moderate|dilute:
         cls: unsettled
         top: operating
@@ -4882,18 +5140,28 @@ regimes:
         cls: unsettled
         top: dominant
         idx:
-        - 10
         - 11
         labs:
         - DFA Garching/TUM
         strong_labs:
         - DFA Garching/TUM
         ev:
-        - fed_intermediate
         - trapping
         cf:
-        - CF-067
         - CF-081
+      neutral|moderate|concentrated:
+        cls: unsettled
+        top: operating
+        idx:
+        - 10
+        labs:
+        - DFA Garching/TUM
+        strong_labs:
+        - DFA Garching/TUM
+        ev:
+        - fed_intermediate
+        cf:
+        - CF-067
       not_stated|high|low_aw:
         cls: unsettled
         top: dominant
@@ -4946,27 +5214,18 @@ regimes:
   F32_dha_crosslinks:
     file: F32_dha_crosslinks.yml
     bins:
-      neutral|high|dilute:
-        cls: unsettled
-        top: operating
-        idx:
-        - 2
-        labs:
-        - Copenhagen
-        strong_labs: []
-        ev:
-        - measured_intermediate
-        cf: []
       neutral|moderate|dilute:
         cls: unsettled
         top: operating
         idx:
         - 0
+        - 2
         labs:
         - Copenhagen
         strong_labs:
         - Copenhagen
         ev:
+        - measured_intermediate
         - within_study_factor
         cf: []
       neutral|very_high|dilute:
@@ -4981,7 +5240,7 @@ regimes:
         ev:
         - within_study_factor
         cf: []
-      not_stated|high|dilute:
+      not_stated|moderate|dilute:
         cls: unsettled_unattributed
         top: unattributed
         idx:

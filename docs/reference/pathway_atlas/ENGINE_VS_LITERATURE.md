@@ -4,13 +4,15 @@
 
 **Inputs, read as they stood on 2026-11-01 01:20 - 02:40:** the literature atlas `F01 - F32_*.yml` (561 cells), the vocabulary [families.yml](families.yml), the engine map [engine_family_map.yml](engine_family_map.yml), the agents' mismatch notes in `tasks/overnight_log_2026-11-01.md` (used as LEADS only), and `docs/reference/conflicts_register.yml`. Source code under `src/kinetic_core/` was read, not changed.
 
-**Red-team rules applied** (coordinator ruling after the 10 % atlas audit: ~9 % of random cells wrong, 95 % CI 4 - 18 %):
-- **Ten known-wrong cells excluded:** F02#12, F07#14, F10#0, F23#15, F24#13, F25#6, F25#7, F29#4, F30#15, F31#3. 551 cells remain.
-- **Temperature bins recomputed from `T_C`:** low <= 60, moderate <= 100, high <= 140, very_high > 140 C; ranges use their midpoint. 48 cells moved bin.
-- **`absent` read as `not_detected`** unless the cell states a detection limit or a positive control (14 cells). So an M2 that rests on an `absent` cell stays a LEAD.
-- **`dominant` weighted only when it rests on labelling or fed flux.** F25 dominant cells other than Cerny's fed-furfural pot, F31 dominant cells, and F30 quantities are treated as `operating`.
+**Recount on the fixed atlas (2026-11-01).** Sec. 1 and sec. 4's counts were re-run on the atlas as fixed in commit 6ba6583d (562 cells; [README.md](README.md)), with NO in-analysis overrides. Secs. 2, 3 and 5 are the original analysis; sec. 6 flags which of their mismatches rest on cells the fix-up changed.
+
+**Red-team rules** (coordinator ruling after the 10 % atlas audit: ~9 % of random cells wrong, 95 % CI 4 - 18 %). The original analysis (secs. 2 - 3) applied the first three as overrides; since the fix-up they live INSIDE the files, and the recount applies none of them:
+- **Ten known-wrong cells:** F02#12, F07#14, F10#0, F23#15, F24#13, F25#6, F25#7, F29#4, F30#15, F31#3. The original analysis excluded them (551 cells). The fix-up corrected nine and deleted F24#13; F25#6's pH 4 arm became F25#22, and F25#23 (Zhao 2019b, hexose FFT) is new.
+- **Temperature bins from `T_C`:** low <= 60, moderate <= 100, high <= 140, very_high > 140 C. The original analysis used range midpoints (48 cells moved); the files now key a range in a bin it spans, checked by the gate. Water is now binned on all solutes, buffer included.
+- **`absent` needs a `detection_basis`** (a detection limit, a positive control, or a label pattern), otherwise the cell is `not_detected`. The original analysis approximated this with a text match.
+- **`dominant` weighted only when it rests on labelling or fed flux.** F25 dominant cells other than Cerny's fed-furfural pot, F31 dominant cells, and F30 quantities are treated as `operating`. (A reading rule; the classification below pools dominant and operating anyway.)
 - **Confidence:** a mismatch is HIGH confidence when it rests on the labelling or fed cells of F23 / F24, F16 / F17, F19 or F01 - F06. Every other mismatch is LOWER confidence.
-- **F23 / F24 water bins** are unreliable (0.5 M buffer omitted): the table below shows them, but no conclusion here uses them.
+- **F23 / F24 water bins:** the original caveat (0.5 M buffer omitted) is retired; the fix-up rebinned those pots `concentrated`.
 
 **Verification:**
 - "Verified" means three things were checked: I read the cited code lines; I read the cited atlas cells (contrast / quantity / where); and, for the five claims marked *probe*, I ran a small read-only flux-budget probe of the SHIPPED sulfur lane (clamped pH; appendix A).
@@ -37,18 +39,29 @@ Independent laboratories were assigned by a fixed lab-name map, kept in the YAML
 - Jiangnan and the Ho / Rutgers network;
 - Wageningen and RIKILT.
 
-| | count | share of 2048 |
-|---|---|---|
-| **settled** | **31** (30 present, 1 minor) | 1.5 % |
-| **unsettled** | **217** (of which 41 are only unattributed / not-detected, 11 mixed or conflicting) | 10.6 % |
-| **unknown** | **1800** | 87.9 % |
-| also: bins with a primary axis not reported (`not_stated`) | 41 (3 of them settled) | - |
+| | count (fixed atlas) | share of 2048 | original analysis |
+|---|---|---|---|
+| **settled** | **25** (all present) | 1.2 % | 31 (30 present, 1 minor) |
+| **unsettled** | **233** (of which 30 are only unattributed / not-detected, 13 mixed or conflicting) | 11.4 % | 217 (33 / 10 on the grid; the earlier "41 / 11" counted off-grid bins too) |
+| **unknown** | **1790** | 87.4 % | 1800 |
+| also: bins with a primary axis not reported (`not_stated`) | 42 (3 of them settled) | - | 41 (3 settled) |
+
+What moved the counts (31 -> 25 settled):
+- **Ten settled bins lost.** Eight are bin splits of claims that still pool (sec. 1.3): the 0.5 M-buffer pots of Nestle / Firmenich and CAAS moved `dilute` -> `concentrated` (F23 x2, F26, F27 x3), and F07#10 / F27#9 moved `high` -> `moderate`. The other two:
+  - F16 acid / low: the Porto cell (40 - 80 C) now sits in `moderate`, leaving one lab;
+  - F10 neutral / low (was the only `Z`): F10#0 is back as `operating`, because the fixed atlas caps "negligible, data not shown" at `operating`. Its content (MGO negligible) agrees with the minor cells, so the `!` is an artefact of the direction classes, not a disagreement.
+- **Four gained**, all from the same rebinning: F07 neutral / moderate, F13 mild-acid / very-high / concentrated, F23 mild-acid and neutral / very-high / concentrated.
+- **New `!` bins:**
+  - F23 mild-acid / moderate / concentrated mixes sub-claims: intact-C5 MFT `dominant` beside the minor / absent free-NF route (P11 vs P13). Not a disagreement.
+  - F16 acid / moderate pairs Quest's fed MGO with Porto's quinone donor: a different donor class with the opposite pH order, so also a sub-claim mix.
+  - F27 mild-acid / moderate carries CF-089 (does cysteine stop thiamine degradation?): a real conflict.
+  - F24 mild-acid / very-high is the old CF-086 conflict, moved from `dilute` to `concentrated`.
 
 Calibration notes on these counts:
 - **The rule is strict**, so the counts under-state how settled the textbook core is. F01 (Schiff), F02 (Amadori) and F05 (glycation) rest on mass balance and kinetic fits in 2 - 8 labs, and none of them reaches SETTLED in any bin.
 - **The binning splits single claims.** A claim shown by three labs at 95, 140 and 168 C lands in three bins, one lab each. Sec. 1.3 therefore also lists **pooled claims**: the same claim, same direction, across adjacent bins.
 - **Settled bins can mix sub-claims.** A settled bin may combine two labs that showed different sub-claims of the same family, both "operating". I would put P ~0.2 that any given settled bin overstates agreement for that reason.
-- **The atlas itself is wrong in ~9 % of cells** (red team), and this propagates.
+- **The atlas itself was wrong in ~9 % of cells** (red team). The sampled wrong cells are fixed, but the ~460 unsampled cells still carry that rate (expect ~40 wrong, 95 % CI ~20 - 80), and this propagates.
 
 ### 1.2 Compact table (pH x T; water collapsed)
 
@@ -69,47 +82,49 @@ How to read the table:
 | family | acid `LMHV` | mild_acid `LMHV` | neutral `LMHV` | alkaline `LMHV` | water | ns | tags that matter (evidence) |
 |---|---|---|---|---|---|---|---|
 | F01 Schiff base | `····` | `··au` | `uu·a` | `····` | dc | 2 | phosphate x6 (not citrate); amine type unknown beyond Gly / Phe / Asn |
-| F02 Amadori / Heyns | `····` | `·u··` | `·uu·` | `·uu·` | dc | 4 | phosphate speeds formation AND decay; peptides x5 - 7 (1 lab); Heyns absent with fructose + casein |
+| F02 Amadori / Heyns | `····` | `·u··` | `·uu·` | `·uu·` | dc | 4 | phosphate speeds formation AND decay; peptides x5 - 7 (1 lab); Heyns not detected (no LOD) with fructose + casein |
 | F03 amine release / reversion | `····` | `·uS·` | `u!u·` | `··u·` | d | 0 | phosphate x1.3 - 12 (4 labs, fades at pH 8); pentose ARP returns less amine (1 lab); O2 x4 at 37 C |
 | F04 thiazolidine / TTCA | `uu··` | `uuu·` | `uuS·` | `u··u` | dcy | 2 | amine (Gly / Lys speed drain); phosphate (CF-011); dilute vs concentrated (CF-076); in-situ pH |
-| F05 protein glycation | `····` | `··u·` | `u·!·` | `····` | d | 5 | a_w (powders, 3 labs); protein identity; lactose = glucose; phosphate (37 C) |
+| F05 protein glycation | `····` | `··u·` | `uu!·` | `····` | d | 5 | a_w (powders, 3 labs); protein identity; lactose = glucose; phosphate (37 C) |
 | F06 1,2-enol -> 3-deoxyosone | `u···` | `·Su·` | `!uu·` | `····` | dc | 2 | O2-INdependent; phosphate / metals at 37 C; amine raises it |
-| F07 2,3-enol -> 1-deoxyosone | `a···` | `·uu·` | `uuS·` | `·uu·` | dc | 2 | air lowers 1-DG x3.4 (50 C); amine structure; every flux datum in phosphate |
-| F08 oxidative osone | `u···` | `····` | `S·u·` | `····` | dc | 1 | O2 x8; metals (-87 % with chelator); phosphate x14 (GO) |
+| F07 2,3-enol -> 1-deoxyosone | `a···` | `·uu·` | `uSu·` | `·uu·` | dc | 2 | air lowers 1-DG x3.4 (50 C); amine structure; every flux datum in phosphate |
+| F08 oxidative osone | `u···` | `····` | `Suu·` | `····` | dc | 1 | O2 x8; metals (-87 % with chelator); phosphate x14 (GO) |
 | F09 Namiki C2 | `····` | `····` | `a·a·` | `·aa·` | dc | 2 | needs amine; aqueous route never marked |
-| F10 retro-aldol | `····` | `·ua·` | `Zuu·` | `·ua·` | dc | 2 | strong T dependence (nil at 37 - 50 C, material >= 100 C), no single-design measurement |
+| F10 retro-aldol | `····` | `·ua·` | `!uu·` | `·ua·` | dc | 2 | strong T dependence (bounded <= ~1.7 mol % at 37 - 50 C, material >= 100 C), no single-design measurement |
 | F11 beta-cleavage (acetic) | `··u·` | `··ua` | `uu!a` | `·Su·` | dy | 0 | pH (fed 1-DG x4 lower at pH 5); amine not required; total O2-independent; phosphate no yield effect |
 | F12 alpha-oxidative cleavage | `····` | `····` | `uu··` | `·uu·` | d | 0 | O2 defining; metal confound |
-| F13 furans / furanones | `·u··` | `·uuu` | `·uau` | `··u·` | dcy | 0 | furfural pH (falls >> 10x from 4.5 to 6.5); amine needed for furanones; phosphate x4.3 (HDMF) |
+| F13 furans / furanones | `·u··` | `·uuS` | `·uau` | `··u·` | dcy | 0 | furfural pH (falls >> 10x from 4.5 to 6.5); amine needed for furanones; phosphate x4.3 (HDMF) |
 | F14 amine-free degradation | `·S··` | `··uu` | `·Suu` | `·u··` | dcy | 0 | phosphate REQUIRED at pH 7 (1 lab); ketose x3 |
 | F15 reductones / redox | `····` | `·au·` | `·uuu` | `·u··` | dcy | 0 | O2 + metals for norfuraneol loss; alpha-amino acid for reduction |
-| F16 Strecker aldehyde | `Su··` | `·ua·` | `·uau` | `····` | dciy | 3 | donor identity (MGO > GO > 3-DG); amino-acid identity; low water raises Strecker amine; O2-independent from fed dicarbonyl |
+| F16 Strecker aldehyde | `u!··` | `·ua·` | `·uau` | `····` | dciy | 3 | donor identity (MGO > GO > 3-DG); amino-acid identity; low water raises Strecker amine; O2-independent from fed dicarbonyl |
 | F17 Strecker acid / ARP O2 route | `·a··` | `····` | `·ua·` | `·u··` | dc | 0 | O2 (77 - 82 % of acid; ARP route x9); Cu x1.3 - single lab |
-| F18 lipid Strecker | `uuuu` | `u···` | `u·u·` | `····` | dy | 0 | O2 x4 - 9; donor class - single lab |
-| F19 aminoketone pyrazine | `··u·` | `·uuu` | `·u!u` | `·uS·` | dciy | 0 | amine (Lys >> Asn x35; peptides); phosphate x1.8; a_w max ~0.75; supply pH vs step pH differ |
+| F18 lipid Strecker | `uuuu` | `u···` | `u·u·` | `····` | dy | 1 | O2 x4 - 9; donor class - single lab |
+| F19 aminoketone pyrazine | `··u·` | `·uuu` | `uu!u` | `·uSu` | dciy | 0 | amine (Lys >> Asn x35; peptides); phosphate x1.8; a_w max ~0.75; supply pH vs step pH differ |
 | F20 extra pyrazine routes | `··u·` | `··uS` | `·u·u` | `·au·` | dciy | 0 | free amino acid's aldehyde needed (peptides starve it) |
 | F21 pyrroles / pyridines | `uuu·` | `u···` | `·auu` | `u···` | dciy | 0 | NH3 / amide N; oil medium x10; concentration |
-| F22 cysteine -> H2S | `·S·u` | `··u·` | `·S·S` | `·u··` | dc | 0 | pH 5 -> 9 x9 - 17; carbonyl partner x4.6 - 47 (1 lab, 1965); reduced thiol required |
-| F23 MFT from intact C5 | `···a` | `·u!S` | `··SS` | `····` | dc | 2 | thiamine competes (F27); buffer x2 - 8; pentose ~10x hexose but hexose MFT is ALSO a C5 |
-| F24 MFT from C2 + C3 | `···u` | `·a·!` | `··ua` | `····` | dcy | 1 | <= 1 - 6 % of MFT wherever labelled; fed pair rises to pH 7 (opposite of total MFT) |
-| F25 FFT (furfural + H2S) | `····` | `·uuu` | `··Su` | `····` | dcy | 1 | pH (FFT falls 6 - 19x acid -> 6.5 - 7); sugar (pentose 4x hexose); lipid (CF-031); dry / glycerol |
-| F26 thiazoles / thiophenes | `····` | `·uuu` | `··!S` | `·uu·` | dy | 0 | pH flips mercaptoketones down / thiazoles up; PUFA lipid -> alkylthiophenes; dry -> thiazolines |
-| F27 thiamine / GSH sources | `··uS` | `·u!S` | `·uSS` | `··u·` | dci | 1 | loading (thiamine share falls as sugar + Cys rise); thiamine H2S needs pH >= 6.5; water needed |
+| F22 cysteine -> H2S | `·S·u` | `·u··` | `·S·S` | `·u··` | dc | 0 | pH 5 -> 9 x9 - 17; carbonyl partner x4.6 - 47 (1 lab, 1965); reduced thiol required |
+| F23 MFT from intact C5 | `···a` | `·!uS` | `··SS` | `····` | dc | 1 | thiamine competes (F27); buffer x2 - 8; pentose ~10x hexose but hexose MFT is ALSO a C5 |
+| F24 MFT from C2 + C3 | `···u` | `·u·!` | `··uu` | `····` | dcy | 0 | <= 1 - 6 % of MFT wherever labelled; fed pair rises to pH 7 (opposite of total MFT) |
+| F25 FFT (furfural + H2S) | `···u` | `·uuu` | `··Su` | `····` | dcy | 1 | pH (FFT falls 6 - 19x acid -> 6.5 - 7); sugar (pentose 4x hexose); lipid (CF-031); dry / glycerol |
+| F26 thiazoles / thiophenes | `····` | `·uuu` | `··!u` | `·uu·` | dcy | 0 | pH flips mercaptoketones down / thiazoles up; PUFA lipid -> alkylthiophenes; dry -> thiazolines |
+| F27 thiamine / GSH sources | `··uu` | `·!!u` | `·uuu` | `··u·` | dci | 1 | loading (thiamine share falls as sugar + Cys rise); thiamine H2S needs pH >= 6.5; water needed |
 | F28 thiol losses | `····` | `uuSa` | `SSu·` | `····` | dc | 0 | O2 x15 - 45 (25 C only); matrix (melanoidin / protein); cysteine protects; lipid 14 - 143x (MFT-selective) |
-| F29 acrylamide | `···u` | `···S` | `··uu` | `···u` | dcy | 5 | sugar (fructose > glucose, 3 labs); buffer (citrate x0.14 - 2.4 vs phosphate); a_w on elimination; amines compete |
-| F30 lipid crossover | `····` | `··S·` | `S··S` | `u···` | d | 1 | lipid unsaturation / oxidation; oil phase alone ~x10; NH3 / amide N; O2 |
-| F31 melanoidins | `····` | `uuu·` | `u·u·` | `·u··` | dc | 4 | water (dry doubles sugar per N); reactant ratio; O2 for the thiol sink (25 - 30 C) |
-| F32 DHA cross-links | `····` | `····` | `·uuu` | `····` | d | 1 | nothing beyond whey at pH 7 |
+| F29 acrylamide | `···u` | `···S` | `u·uu` | `···u` | dcy | 6 | sugar (fructose > glucose, 3 labs); buffer (citrate x0.14 - 2.4 vs phosphate); a_w on elimination; amines compete |
+| F30 lipid crossover | `····` | `··S·` | `S··S` | `u···` | dc | 2 | lipid unsaturation / oxidation; oil phase alone ~x10; NH3 / amide N; O2 |
+| F31 melanoidins | `····` | `uuu·` | `uuu·` | `·u··` | dc | 4 | water (dry doubles sugar per N); reactant ratio; O2 for the thiol sink (25 - 30 C) |
+| F32 DHA cross-links | `····` | `····` | `·u·u` | `····` | d | 1 | nothing beyond whey at pH 7 |
 
 What the table says at a glance:
-- The literature is concentrated in **dilute aqueous pots at mild-acid to neutral pH, 60 - 170 C**.
+- The literature is concentrated in **aqueous pots at mild-acid to neutral pH, 60 - 170 C**: dilute, or `concentrated` only through a 0.5 M buffer (the Nestle / Firmenich, CAAS and DFA sulfur pots).
 - The **alkaline column is nearly empty** except for F11 / F19.
 - **Intermediate a_w (0.5 - 0.9) is almost unstudied.** It has cells in only F05, F16, F19, F20, F21 and F27, and none of them is settled. That is the moisture range of meat analogues and crusts.
-- **Low T (<= 60 C) is settled only for physiological / storage chemistry** (F08, F10, F16, F28, F30).
+- **Low T (<= 60 C) is settled only for physiological / storage chemistry** (F08, F28, F30). F10's minor retro-aldol at 37 - 50 C still pools (P5), but its bin reads `!` (sec. 1.1); F16's low-T bin lost its second lab to `moderate`.
 
 ### 1.3 Pooled settled claims
 
 Each claim below has >= 2 independent labs of strong evidence in the same direction, across adjacent bins. Cells are written file#index.
+
+**Recount on the fixed atlas:** all 22 claims survive. P12 and P13 are firmer: their non-detects are now `absent` with a stated label pattern or positive control. P5 is reworded (bounded small, not nil). P16 rests on two lab lines, not three, and no longer has a settled bin under it. P21 regains the Leeds cell.
 
 | # | claim | regime | labs (evidence) | cells |
 |---|---|---|---|---|
@@ -117,23 +132,23 @@ Each claim below has >= 2 independent labs of strong evidence in the same direct
 | P2 | Phosphate accelerates early condensation and Amadori decomposition (x1.3 - 12), fading at pH 8 | pH 5 - 7.4, 25 - 130 C | Nestle, Baynes, SCUT, Auburn, Jiangnan (within-study, fed) | F01#7,9; F03#2,7,10; F05#22 |
 | P3 | The 2,3-enolisation (1-deoxyosone) share RISES with pH; the 3-deoxyosone flux share falls from ~20 - 40 % (pH <= 5) to ~5 % (pH 7). Hexose, phosphate | 100 - 120 C | Ledl school (trapping), Nestle (labelling + fed), Wageningen (fit) | F06#0,1,2,13; F07#0,3,5,6,15 |
 | P4 | Hydrolytic beta-cleavage of 1-DG is the main acetic-acid route | pH 6 - 8, 37 - 120 C | Nestle (labelling, 18O2, fed), Glomb (fed), Wageningen | F11#1,5,8,9,12 |
-| P5 | Deoxyosone retro-aldol (1-DG, 3-DG -> MGO) is nil / minor at 37 - 50 C | neutral, low T | Glomb, Thornalley (fed) | F10#1 - 4 |
+| P5 | Deoxyosone retro-aldol (1-DG, 3-DG -> MGO) is minor at 37 - 50 C: MGO seen at negligible amounts; C3 + C3 cleavage of 1-DG bounded <= ~1.3 - 1.7 mol %; none from fed 3-DG (positive control) | neutral, low T | Glomb, Thornalley (fed) | F10#0 - 4 |
 | P6 | Furfural is made from the intact pentose C5 and falls steeply from pH 4.5 to 6.5 | 120 - 145 C | Firmenich, Jiangnan (labelling); Reading, Garching (within-study) | F13#0,1,2,5,6,7 |
 | P7 | Fed alpha-dicarbonyls give Strecker aldehydes with ranking MGO > GO > 3-DG, O2-independent; the MAGNITUDE conflicts ~20x (CF-073) | pH 3 - 7, 98 - 170 C | DFA, Quest, Missouri (fed) | F16#0,1,5,7,9 |
 | P8 | Pyrazine ring carbons come from dicarbonyl / sugar carbon; ring N from two aminated halves (aminoketone pairing) | 120 - 180 C | Nestle, Reading (13C); Ho network (15N) | F19#0,1,3 |
 | P9 | Aldehyde addition to dihydropyrazines makes ethyl / extra-methyl pyrazines in roasts | ~180 C, low a_w | Nestle, Reading (13C), DFA (fed) | F20#0,1,2,4 |
 | P10 | Cysteine thermolysis H2S rises with pH 5 -> 9, Ea ~123 - 135 kJ/mol | 80 - 110 C | Rutgers; Hokkaido, Copenhagen confirmations | F22#0 - 5 |
-| P11 | **MFT carbon is an intact C5 of one sugar, INCLUDING from glucose** | pH 5 - 6.5, 95 - 168 C | Nestle / Firmenich, BTBU, CAAS (labelling) | F23#0,1,6,7,8 |
-| P12 | **C2 + C3 recombination carries <= 1 - 6 % of MFT** wherever labelled | 95 - 168 C | Nestle / Firmenich, BTBU, CAAS (labelling) | F24#0,1,3,4,5 |
-| P13 | **Free norfuraneol is a poor MFT source:** 7 % of MFT when fed at the ribose's charge (95 C); 48x below ribose (boiling, concentrated); NF : MFT 3000 in a ribose pot | 95 - 145 C | Nestle (labelling), Givaudan (fed), DFA (within-study) | F23#2,9,11,13 |
+| P11 | **MFT carbon is an intact C5 of one sugar, INCLUDING from glucose** | pH 5 - 6.5, 95 - 168 C; 0.5 M buffer (`concentrated`) except BTBU | Nestle / Firmenich, BTBU, CAAS (labelling) | F23#0,1,6,7,8 |
+| P12 | **C2 + C3 recombination carries <= 1 - 6 % of MFT** wherever labelled | 95 - 168 C | Nestle / Firmenich, BTBU, CAAS (labelling; F24#0,1,4,5 `absent` on the label pattern) | F24#0,1,3,4,5 |
+| P13 | **Free norfuraneol is a poor MFT source:** 7 % of MFT when fed at the ribose's charge (95 C); 48x below ribose (boiling, concentrated); NF : MFT 3000 in a ribose pot | 95 - 145 C | Nestle (labelling; F23#9 `absent`, positive control in pot D), Givaudan (fed), DFA (within-study) | F23#2,9,11,13 |
 | P14 | FFT is made from furfural + H2S in pentose + Cys pots, and FFT falls only modestly from acid to pH 6.5 - 7 (6 - 19x) while furfural collapses | pH 3 - 7, 140 - 145 C | DFA (fed, within-study), Reading (within-study) | F25#4,8,9 |
 | P15 | Mercaptoketones collapse and thiazoles / thiophenones rise from pH 4.5 to 7 | 140 - 145 C | Reading, Firmenich (within-study + labelling) | F26 ladders (#6 - 11) |
-| P16 | Thiamine is the dominant MFT source at dilute loadings; its share falls as pentose + Cys rise | pH 4 - 7, 120 - 145 C | Firmenich, Minnesota / Nestle (34S), BTBU (13C) | F27#0 - 7 |
+| P16 | Thiamine is the dominant MFT source at dilute loadings; its share falls as pentose + Cys rise | pH 4 - 7, 120 - 145 C | Firmenich, Minnesota / Nestle (34S), BTBU (13C). The lab map makes Firmenich and Minnesota / Nestle one lab line, so two lines; F27#7 (Nebraska) is a thiamine-sulfur sub-claim | F27#0 - 7 |
 | P17 | Furyl disulfides are a REVERSIBLE reservoir (thiol returns in water with a trap, and in beef) | ~100 C | DFA (trap + label), Reading (mass balance) | F28#1,21,22 |
 | P18 | Acrylamide: fructose > glucose; formation rises toward pH 8 (in phosphate) | 120 - 200 C | Leuven, Stockholm, Wageningen | F29#1,5,9,21 |
 | P19 | Lipid (PUFA, phospholipid, lard) suppresses MFT 3 - 143x in Cys + pentose pots; an oil phase alone ~x10 | pH 5 - 5.7, 100 - 140 C | Reading group, Huazhong (within-study) | F30#0,3,5,6 |
 | P20 | 2,4-dienal + free NH3 / amide N -> 2-alkylpyridine | RT - 180 C | Kentucky, Rutgers (13C / 15N labelling); Seville (fed) | F30#11,13,14; F21#5,6 |
-| P21 | Melanoidins take sugar C and amine N together, glycine partly decarboxylated | 70 - 125 C | Iowa State, Wageningen / Leeds (labelling) | F31#0,1,2,4 |
+| P21 | Melanoidins take sugar C and amine N together, glycine partly decarboxylated (27 - 33 % or ~2/3: Fang 2009 vs Mundt, unregistered) | 70 - 125 C | Iowa State, Wageningen / Leeds (labelling) | F31#0 - 4 |
 | P22 | Protein-bound lysine glycates in every regime looked at; flat over a_w 0.3 - 0.7, slower at 0.98 | 37 - 220 C | 8 labs (furosine / available lysine) | F05#0 - 24 |
 
 ### 1.4 The main UNSETTLED and UNKNOWN regimes
@@ -169,6 +184,8 @@ Each claim below has >= 2 independent labs of strong evidence in the same direct
 ---
 
 ## 2. Engine vs literature, per family
+
+As originally built (overrides as listed at the top). Which entries rest on cells the atlas fix-up changed: sec. 6.
 
 Mismatch kinds:
 - **M1** = the literature shows the family operating / dominant, but the engine lacks the route or ships it off;
@@ -348,8 +365,8 @@ The flavour core is settled by labelling in pentose / glucose + cysteine pots at
 - lipid suppresses meaty thiols several-fold to two orders.
 
 **How sure.**
-- Only 31 of 2048 family x pH x T x water regimes (1.5 %) meet the two-independent-labs rule; 217 (10.6 %) have single-lab or conflicting evidence; 1800 (88 %) were never studied.
-- The atlas itself is ~9 % wrong cell-for-cell (95 % CI 4 - 18 %).
+- Only 25 of 2048 family x pH x T x water regimes (1.2 %) meet the two-independent-labs rule; 233 (11.4 %) have single-lab or conflicting evidence; 1790 (87 %) were never studied (recount on the fixed atlas; the original run gave 31 / 217 / 1800).
+- The atlas was ~9 % wrong cell-for-cell (95 % CI 4 - 18 %); the sampled errors are fixed, the unsampled cells still carry that rate.
 - So I hold the pooled claims P1 - P22 at roughly 80 - 95 % each. Lower for P7's magnitude (CF-073) and P19's mechanism.
 - Any single regime cell outside them deserves at most ~60 %.
 
@@ -427,3 +444,41 @@ An independent red team re-ran the probes (they reproduce Appendix A) and tested
 4. **E1:** a new hexose + Cys -> 1-DG step. Tests: Hofmann T1 MFT 10.4 and FFT 4.3 within 3x.
 5. **E2:** per-step exponents, with the 120 C equality declared.
 6. **E5, E7, E3:** after A3.
+
+## 6. Recount on the fixed atlas (2026-11-01)
+
+Sec. 5 stays binding. Nothing in secs. 2, 3 or 5 is re-ranked or rewritten; this section only flags entries whose supporting cells the fix-up changed.
+
+**Inputs that changed.** I compared the analysis's overridden view of each cell with the fixed file (scratchpad `evl2/diff.py`):
+- **11 cells** back or new: the nine corrected red-team cells, the split F25#22 and the new F25#23. F24#13 was deleted.
+- **11 status changes** against the override:
+  - eight non-detects now `absent` with a detection basis: F20#3, F23#9, F24#0, F24#1, F24#5, F26#1, F27#10, F27#11;
+  - F10#1 and F13#10 became `minor`;
+  - F12#5 became `not_detected`.
+- **58 water moves**, almost all `dilute` -> `concentrated` (0.5 M buffer).
+- **17 temperature moves** against the midpoint rule.
+
+**Mismatches whose supporting cells changed:**
+
+| id (rank) | cells changed | classification | confidence / strength |
+|---|---|---|---|
+| F23-a / F24-a (E1) | F24#0, #1, #5 `not_detected` -> `absent` (label pattern); F23#8, F24#5 -> `concentrated` | unchanged (M1 + M2, V *p*) | unchanged H; the M2 side is firmer: C2 + C3 is now `absent` on a label basis in all three labelling labs. Sec. 5's E1 verdict is unaffected |
+| F23-b (E6), F23-d (E11) | F23#9 -> `absent` (positive control: the same analysis saw the NF marker in fed-NF pot D) | unchanged | unchanged H; firmer at 95 C. Sec. 5's caveat (F23#13: NF 30 - 100 % at 145 C) stands |
+| F10-a | F10#0 back as `operating` (MGO "negligible", seen); F10#1 -> `minor` (<= ~1.3 - 1.7 mol %); F10#3 `absent` (positive control, fed 3-DG) | unchanged (M2, L: a 37 - 50 C vs 100 - 145 C regime mismatch) | unchanged; "negligible" now reads "bounded <= ~1.7 mol %" |
+| F25-a (E8) | F25#7 back: Cerny 2007's within-study ladder, FFT x2.3 down from pH 4 to 6, and a standing-level zero at pH 7 (`not_detected`) | unchanged (M3 magnitude, V *p*) | stays lo under the F25 rule. A third lab (Firmenich) now agrees with DFA and Reading, so E could read 3, not 2 (E x O x R 18, effective 12 instead of 8). Not re-ranked: these are standing levels, so they bound net accumulation, not formation |
+| F25-c | F25#23 new (Zhao 2019b, BTBU CAMOLA): hexose FFT ~94 % an intact glucose C5, `unattributed` | unchanged | unchanged lo. A second hexose intact-C5 datum beside F23#7, so it bears on E1, but from the same lab |
+| F20-a (E14) | F20#3 `not_detected` -> `absent` (label): glycine + HCHO addition gives MPZ <= ~1.5 umol/kg at 180 C, while 2,6-DMP takes ~45 % from labelled HCHO | unchanged (M1, V) | **scope narrowed:** the missing addition route is shown for DMP / ethyl pyrazines, not for MPZ |
+| F27-b (E18) | F27#10 -> `absent` (methylene-blue assay): thiamine H2S vanishes below pH 6 at ~100 C. With F27#7 (non-thiazole S <= 4 % at pH <= 6, 121 C, 35S) | **narrowed:** M1 only at >= 145 C. At 100 - 121 C the literature SUPPORTS the engine's zero thiamine-H2S share below pH 6.25. What survives is that the cut-off ignores T (F27#1, Cerny 145 C, a single unreplicated control) | lo, and weaker. P(material) lower than the original listing implied |
+| F27-a (E18) | F27#11 -> `absent`: 70x cysteine stops thiamine loss at 100 C (CF-089 vs Grosch's x7 thiamine-MFT) | unchanged (M4) | unchanged lo; adds a cysteine dependence the engine does not express (lead; CF-089 open) |
+| F26-a | F26#1 -> `absent` (the NF-marker isomer is not made from ribose; positive control); F26#0 - 5 -> `concentrated` | unchanged | unchanged |
+| F12-a | F12#5 `absent` -> `not_detected` (erythronic acid, 37 C) | unchanged (the M1 rests on the 18O2 and C3-acid cells) | unchanged |
+| F31-a | F31#3 back as `operating` (C/N 7.64) | unchanged (inside 6.6 - 21) | unchanged |
+| F04-a, F08-a | F04#11, F08#5 temperature moves | unchanged: the settled bins they cite (F04 neutral / high, F08 neutral / low) are still settled | unchanged |
+| F16-a, F17-a, F19-b, F29-a / -c, F30-a, F22-b | water or temperature moves only (F16#2; F17#2, #5 - 7; F19#22; F29#9, #18; F30#2, #6; F22#4 - 6) | unchanged | unchanged |
+
+No mismatch cites the other cells that are back: F02#12, F07#14, F23#15, F25#6 / #22, F29#4 and F30#15.
+
+**Net:** the fix-up changes no mismatch's kind, and no H / lo confidence label.
+- Two entries narrow: F27-b to >= 145 C, and F20-a to the non-MPZ adducts.
+- One gains evidence that is not used in the ranking: E8, now three labs within-study.
+- E1's M2 side and E6 are firmer.
