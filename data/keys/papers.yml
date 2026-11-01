@@ -6,7 +6,7 @@ note: 'One row per DOI cited anywhere under data/. paper_id is the intake-regist
   does that). Do not hand-edit: re-run the generator.'
 counts:
   papers: 676
-  with_dossier: 497
+  with_dossier: 498
   with_intake_id: 144
   cited_in_more_than_one_file: 170
   cited_only_from_code_or_dossier: 445
@@ -7936,7 +7936,7 @@ papers:
   paper_id_source: benchmark_intake_registry.id
   doi: 10.3389/fnut.2022.1022254
   citation: Feng et al. (2023)
-  dossier: null
+  dossier: data/lit/extraction_dossiers/feng2022b_extraction.md
   intake_ids:
   - frontiers_2022_hcw_aa_arrhenius_anchor
   slr_paper_ids:

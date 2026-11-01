@@ -4,10 +4,10 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-01",
     "git": {
-      "commit": "0d8a62f6294197d8e7edd2612cb345d401b81e2a",
-      "short": "0d8a62f6",
+      "commit": "cad34f3ccfac5b98d83d331be980ed654d5a8908",
+      "short": "cad34f3c",
       "branch": "lit-2026-11-01-three-papers",
-      "dirty": false
+      "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
     "inputs": [
@@ -65,7 +65,7 @@
       },
       {
         "path": "data/lit/measurement_ledger/trunk.yml",
-        "sha256": "651b842a4c6161e2698dddefa33499fd20b2373453290d11a9b9a3e829828243"
+        "sha256": "5383b65fa5c06aa9a7864c979e7a65b8bf10c64bf45bb1e701586debc4119f29"
       }
     ]
   },

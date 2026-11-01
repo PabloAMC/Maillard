@@ -8355,3 +8355,58 @@ entries:
     condition_quote: "subjected to thermal treatment in an autoclave at 121 C for 60 min"
     flags: [matrix_food, ph_start_only, unbuffered, single_is_no_response_factor, 'also_relevant: sulfur']
     note: "Furfural 1892 (pH 4) vs 3188 ug/L (pH 6), ~2e-4 of charged xylose; direction opposite to cerny2007 T2 (furfural 0 at pH 6, buffered 145 C). In-situ pH of the unbuffered pots unknown. Table 1 xylose after heating unusable (wet/dry basis ambiguous, dossier sec. 6 flag 4)."
+  # ---- feng2022b ----
+  - id: feng2022b_table1_asa_loss_k_ph_temperature_concentration
+    dossier: feng2022b_extraction.md
+    paper: "Feng, Yang, Xie, Liu, Peng, Hu & Yu 2023 Front Nutr 9:1022254 (file stem feng2022b)"
+    lab: "Hubei Minzu Univ. (Yang Y / Yu AN)"
+    system: "L-ascorbic acid alone, 0.03 / 0.05 / 0.07 M (0.30 / 0.50 / 0.70 mmol in 10 mL)"
+    medium: "0.20 M sodium phosphate, initial pH set with NaOH; N2-purged sealed 316L autoclave with quartz liner, oven-heated, saturated vapour pressure 0.79-1.25 MPa, ice-bath quench"
+    temperature_c: [150, 170, 180, 190]
+    ph: {initial: [5.0, 7.0, 9.5], measured_during: false, final: null}
+    time_min: [0, 30, 45, 60, 75, 90, 120, 150]
+    species: [L-ascorbic acid]
+    kind: rate_constant
+    location: "Table 1 (p. 5, rotated): k (min-1) +- and R2 per pH x [ASA]0 x T; Ea per pH (and Ea* of earlier work)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "ASA (0.30, 0.50, and 0.70 mmol) was dissolved in 10 mL of phosphate buffer (0.20 M)"
+    flags: [ph_start_only, internal_inconsistency, heating_up_included_in_time, condition_uncertain]
+    note: "HPLC-DAD 243 nm, external standard. The repo's Ea 15.77 / 31.7 / 47.53 kJ/mol are printed here, but only pH 5.0 reproduces from Table 1 (re-fit 15.77 / 29.50 / 42.17; 47.53 = the 0.07 M row). k apparently fitted from 30 min; [ASA] rises 6-27 % above C0 at 30 min in all 150 C arms; heat-up of the oven-heated autoclave not reported; decay decelerates ~2.5x within 30-150 min. pH 5 / 9.5 weakly buffered by phosphate. No 160 C column although methods say 150-190 C. +- on k and Ea undefined; pre-exponentials not printed. Anaerobic (N2). No ASA species in the engine. File named 2022b, published 2023."
+  - id: feng2022b_fig2_asa_time_courses_150_190c
+    dossier: feng2022b_extraction.md
+    paper: "Feng, Yang, Xie, Liu, Peng, Hu & Yu 2023 Front Nutr 9:1022254 (file stem feng2022b)"
+    lab: "Hubei Minzu Univ. (Yang Y / Yu AN)"
+    system: "L-ascorbic acid alone, 0.03 / 0.05 / 0.07 M in 10 mL"
+    medium: "0.20 M sodium phosphate, initial pH set with NaOH; N2-purged sealed autoclave, oven-heated"
+    temperature_c: [150, 190]
+    ph: {initial: [5.0, 7.0, 9.5], measured_during: false, final: null}
+    time_min: [0, 30, 45, 60, 75, 90, 120, 150]
+    species: [L-ascorbic acid]
+    kind: time_series
+    location: "Fig. 2A-C (p. 4); same series re-plotted in Fig. 3 (p. 6). pH 5.0 digitised in full, pH 7.0 / 9.5 as 30 / 150 min pairs (dossier sec. 4c)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The reaction temperature and time ranged from 150 to 190 C and from 30 to 150 min, respectively."
+    flags: [ph_start_only, heating_up_included_in_time, internal_inconsistency, coarse_read]
+    note: "Read +-0.002 M from 400 dpi crops. Supra-initial [ASA] at 30 min (co-elution at 243 nm or t=0 basis); near-flat 0-30 min at 190 C implies heat-up lag. 170 / 180 C time courses not shown. The anchor for any future anaerobic ASA-loss check; compare yu2016_fig2_residual_cys_asa (same lab, +Cys, pH 8, 125-155 C, Ea ~100 kJ/mol)."
+  - id: feng2022b_fig1_fig3_a420_a294_browning
+    dossier: feng2022b_extraction.md
+    paper: "Feng, Yang, Xie, Liu, Peng, Hu & Yu 2023 Front Nutr 9:1022254 (file stem feng2022b)"
+    lab: "Hubei Minzu Univ. (Yang Y / Yu AN)"
+    system: "L-ascorbic acid alone, 0.03 / 0.05 / 0.07 M in 10 mL"
+    medium: "0.20 M sodium phosphate, initial pH set with NaOH; N2-purged sealed autoclave, oven-heated"
+    temperature_c: [150, 190]
+    ph: {initial: [5.0, 7.0, 9.5], measured_during: false, final: null}
+    time_min: [0, 30, 45, 60, 75, 90, 120, 150]
+    species: [A420, A294]
+    kind: time_series
+    location: "Fig. 1 (A420 at 190 C / 90 min, printed values); text p. 4 (A420 at 150 min, pH 5.0, 150 and 190 C); Fig. 3 A294 / A420 curves (A294 endpoints at 190 C read, dossier sec. 4d)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "The UV absorbance of the reaction solutions was measured at 294 nm for the UIPs and at 420 nm for the BPs"
+    flags: [ph_start_only, internal_inconsistency, coarse_read]
+    note: "Dilution-corrected absorbances (dilution 30-100x / 0-25x). No browning rate constant, order or Ea printed; Eq. 11 (browning proportional to [H3O+][ASA]T) is derived, not fitted, and contradicts Fig. 1 (pH 5.0 vs 9.5 only x1.2-1.3). A420 roughly proportional to [ASA]0 although the text calls browning independent of [ASA]. 150 C pH 7.0 / 9.5 curves figure-only."
