@@ -398,6 +398,13 @@ the full verification.
 - **Rule:** when a sub-question appears mid-step, brief a background subagent (files it may touch, what not to touch, compute cap, no commits) and continue the active step; fold the result in when it reports.
 - 2026-10-31 (again): a text-patch script was run with system python3 -I. Even pure text patches go through the wrapper: ./scripts/docker_maillard.sh run "python <patch.py>".
 
+**An overnight run on a laptop must hold the machine awake, and a per-pot wall-clock limit is not sleep-safe**
+(2026-11-01, the thiol leave-one-lab-out). The laptop hibernated on 1 % battery from 03:29 to 09:33 in the middle of
+a fold's fit; `run_pot_limited` uses SIGALRM, so pots in flight would time out on wake and enter the optimiser as
+failed residuals. Remedy used: stop, resume from the per-segment checkpoints, relaunch under `caffeinate -i` on AC.
+Rule: launch long jobs as `caffeinate -i nice -n 10 ...` and check `pmset -g batt` first; checkpoint every fit segment
+so a stop costs one segment. And a summary averaged over folds must skip a fold with no scored row (Davidek's species
+have no null answer): counting it as a difference of 0 pulls the mean to zero and shrinks its se.
 ## 2026-10-31 — A rival's band derived from the test it is scored on, and data left unscored
 - **Pattern:** an investigation agent admitted "slow cysteine exchange". Its rate ceiling had been derived from the same xylose contrast it was then scored on, and two concentrated-pot datasets that contradict it (same lab and another lab) were left unscored under a reason that did not apply. It also counted 50 C storage data as a second lab for a processing loss law. The independent red team caught all three.
 - **Rule:** a rival's bands come from data OTHER than its scored tests; every on-disk dataset that bears on the question is scored or its exclusion justified in the prereg; a "second lab" must measure the same channel. Every structural verdict gets a red team before it moves the engine.

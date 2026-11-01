@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-01",
     "git": {
-      "commit": "19c66e99beefcbf969fec853c3c67823641b9e96",
-      "short": "19c66e99",
+      "commit": "f26750bb9150f0cb9416d9e460322dd0675e3cab",
+      "short": "f26750bb",
       "branch": "cf077-pyrazine-cross-pair-factor",
       "dirty": true
     },
