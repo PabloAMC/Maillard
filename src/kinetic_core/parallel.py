@@ -17,6 +17,15 @@ pool is FORKED AT EACH CALL: every worker is a copy of the caller at that moment
 when the call returns. Forking 6 workers costs a few tenths of a second, small against a multi-second evaluation.
 Results are bit-identical to the serial loop (tests/unit/test_parallel.py).
 
+A JOB MAY CARRY ITS CONFIGURATION (A3 phase 1, 2026-11-01)
+==========================================================
+``map_ordered(fn, items, config=cfg)``, or an item wrapped as ``Configured(item, cfg)``: the worker installs the
+``src.kinetic_core.config.Config`` at the start of the task (and restores its own state after it), so the answer no
+longer depends on what the worker inherited. A spawn-started worker given the Config reproduces the forked one
+(tests/unit/test_engine_config.py). Without a Config nothing changes: the pool is still forked at each call, and the
+forked state is still what a job computes with. Script-level globals (a generator's own module state) are not in a
+Config; a job that reads them still needs the fork.
+
 Workers: ``MAILLARD_WORKERS`` (default 1, i.e. serial, so nothing changes unless asked); never more than the
 caller asks for. Where ``fork`` is unavailable the call runs serially, and so does a call made inside a worker.
 
@@ -31,6 +40,7 @@ from __future__ import annotations
 
 import multiprocessing as mp
 import os
+from dataclasses import dataclass
 from typing import Any, Callable, Iterable, List, Optional
 
 _FN: Optional[Callable[[Any], Any]] = None
@@ -52,18 +62,46 @@ def _mark_worker():
     _IN_WORKER = True
 
 
+@dataclass(frozen=True)
+class Configured:
+    """An item and the engine ``Config`` it is computed under (``src.kinetic_core.config``)."""
+
+    item: Any
+    config: Any
+
+
+def run_job(fn: Callable[[Any], Any], job: Any) -> Any:
+    """``fn(job)``; for a ``Configured`` job, ``fn(job.item)`` with its Config installed for the task."""
+    if isinstance(job, Configured):
+        from .config import applied
+
+        with applied(job.config):
+            return fn(job.item)
+    return fn(job)
+
+
+def run_pickled(payload) -> Any:
+    """``run_job`` for a pool that pickles its tasks (spawn): ``payload`` is ``(fn, job)``."""
+    fn, job = payload
+    return run_job(fn, job)
+
+
 def _call(item):
-    return _FN(item)
+    return run_job(_FN, item)
 
 
-def map_ordered(fn: Callable[[Any], Any], items: Iterable[Any], n_workers: Optional[int] = None) -> List[Any]:
+def map_ordered(fn: Callable[[Any], Any], items: Iterable[Any], n_workers: Optional[int] = None, *,
+                config: Any = None) -> List[Any]:
     """``[fn(item) for item in items]``, computed by ``n_workers`` forked copies of this process when more than
-    one is asked for and there is more than one item. Order is preserved; an exception in a worker is re-raised."""
+    one is asked for and there is more than one item. Order is preserved; an exception in a worker is re-raised.
+    ``config`` (a ``Config``) is installed for every item that does not carry its own (``Configured``)."""
     global _FN
     items = list(items)
+    if config is not None:
+        items = [item if isinstance(item, Configured) else Configured(item, config) for item in items]
     n = workers() if n_workers is None else max(1, int(n_workers))
     if n == 1 or len(items) < 2 or _IN_WORKER or "fork" not in mp.get_all_start_methods():
-        return [fn(item) for item in items]
+        return [run_job(fn, item) for item in items]
     _FN = fn  # read by the forked children through ``_call``; a closure needs no pickling this way
     try:
         with mp.get_context("fork").Pool(min(n, len(items)), initializer=_mark_worker) as pool:

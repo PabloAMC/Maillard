@@ -1,0 +1,358 @@
+"""src/kinetic_core/config.py (A3 phase 1, 2026-11-01): the engine's switches as one frozen Config.
+
+Four guarantees:
+* every module-level switch of the engine has a ConfigKey, and every binding of it is listed (a new switch, or a new
+  re-import of one, without a key fails here);
+* ``Config.shipped()`` is the engine as first imported, and ``from_globals()`` reads it back;
+* ``applied()`` gives every binding back the very object it held, also on an exception;
+* a SPAWN-started worker given a Config with every switch flipped reproduces the forked worker.
+
+What the scans can see: bools, zero-argument holder instances, mode strings compared in their module, and anything a
+script or test assigns. A numeric tunable that nothing sets is invisible to them; the seven solver numerics
+(``PH_FIXED_POINT_*``, ``IONIC_STRENGTH_*``, ``PROFILE_NODE_STEP_K``) are keyed by hand. Dropping ANY key fails
+``test_a_config_is_frozen_hashable_picklable_and_validated`` (FLIPPED names every key).
+"""
+from __future__ import annotations
+
+import ast
+import dataclasses
+import multiprocessing as mp
+import pickle
+import sys
+from pathlib import Path
+
+import pytest
+
+from src.kinetic_core import config, parallel
+from src.kinetic_core import parameters_dicarbonyl as pd
+from src.kinetic_core import parameters_lipid as pl
+from src.kinetic_core import parameters_sulfur as ps
+from src.kinetic_core import ph_state
+from tests import support
+
+ROOT = Path(__file__).resolve().parents[2]
+KC = ROOT / "src" / "kinetic_core"
+PACKAGE = "src.kinetic_core"
+
+#: Names the scans below find that are NOT engine switches, each with the reason.
+NOT_SWITCHES = {
+    ("parameters_furanic", "UG_PER_MMOL_EQUALS_MG_PER_MOL"): "a unit identity (ug/mmol == mg/mol), asserted, not chosen",
+    ("fit_rows", "FIT_ROWS_DIR"): "a data path, redirected to tmp_path by tests",
+    ("fit_rows", "LABORATORIES"): "a data path, redirected to tmp_path by tests",
+}
+
+#: A non-default value for EVERY key (the spawn test flips them all; a new key needs one here).
+FLIPPED = {
+    "ph.coupling": "inline",
+    "ph.node_grid": "uniform",
+    "ph.fixed_point": "fixed_sweeps",
+    "ph.fixed_point.relaxation": 0.5,
+    "ph.fixed_point.tolerance": 5e-4,
+    "ph.fixed_point.max_sweeps": 30,
+    "ph.fixed_point.flag": 2e-2,
+    "ph.b51": ph_state.PhStateCorrections(False, False, False, False, False, False),
+    "ph.trunk_solutes_in_balance": True,
+    "ph.ionic_strength.sweeps": 25,
+    "ph.ionic_strength.tol_m": 1e-10,
+    "ph.trunk_terms": True,
+    "ph.trunk_exponent_override": {"k_ama_odg": 0.2, "k_schiff": 0.5},
+    "sulfur.flux_budget": "linear_rederived",
+    "sulfur.profile_node_step_k": 1.5,
+    "sulfur.ttca_formation": dataclasses.replace(ps.TtcaFormation(), enabled=True),
+    "sulfur.nf_hydroxide_decay": dataclasses.replace(ps.NfHydroxideDecay(), enabled=True, mgo_share=0.1),
+    "sulfur.pentose_mgo_routes": ps.PentoseMgoRoutes(k_tdp_mgo_100c_ph5=1e-5, k_pent_mgo_100c_ph5=1e-6),
+    "sulfur.pentose_amine_entry": ps.PentoseAmineEntry(k_entry_l_per_mmol_min_100c_ph6=1e-4,
+                                                       k_dpo_aa_per_min_100c_ph6=1e-3),
+    "sulfur.ddp_formation_ph": ps.DdpFormationPh(law="slope", slope=0.5),
+    "sulfur.mgo_cysteine_strecker": ps.MgoCysteineStrecker(k_l_per_mmol_min_100c_ph5=1e-3),
+    "sulfur.tdp_cysteine_trap": ps.TdpCysteineTrap(k_l_per_mmol_min_100c_ph5=1e-3),
+    "sulfur.hexose_c5_entry": ps.HexoseC5Entry(k_per_min_100c=2e-3),
+    "sulfur.strecker_sulfur": dataclasses.replace(ps.StreckerSulfur(), enabled=True, h2s_share=0.08),
+    "sulfur.cys_amadori_route": dataclasses.replace(ps.CysAmadoriRoute(), enabled=True, split_law="base_saturating"),
+    "sulfur.tdp_own_decay": ps.TdpOwnDecay(enabled=True),
+    "sulfur.furfural_barriers": ps.FurfuralBarriers(enabled=True),
+    "sulfur.single_temperature_barriers": ps.SingleTemperatureBarriers(enabled=True),
+    "trunk.three_deoxy_exit_ph_term": False,
+    "trunk.three_deoxy_exit_ph": {"k_tdg_fa": (0.5, (0.4, 0.6), "flipped for the test"),
+                                  "k_tdg_mgo": (0.63, (0.37, 0.92), "flipped for the test")},
+    "dicarbonyl.aqueous_glyoxal_parameters": pd.with_aqueous_glyoxal(-2.5, -1.0),
+    "lipid.q10_assumption": dataclasses.replace(pl.Q10Assumption(), default=2.0),
+    "lipid.decadienal_breakage": dataclasses.replace(pl.DecadienalBreakage(), enabled=False),
+    "lipid.covalent_sink": dataclasses.replace(pl.CovalentSinkCeiling(), enabled=True),
+    "dicarbonyl.shipped_b39": False,
+    "methionine.shipped_b22": True,
+    "methionine.shipped_b22b": True,
+    "proline.shipped_b24": True,
+    "proline.shipped_b24b": True,
+    "panel.thermal_history": "as_recorded",
+    "uncertainty.b55_single_temperature_ea_prior": False,
+    "uncertainty.b56_structural_discrepancy": True,
+}
+
+
+def _flipped() -> config.Config:
+    return config.Config.shipped().replace(FLIPPED)
+
+
+def _covered():
+    return {binding for key in config.KEYS for binding in key.bindings}
+
+
+# --- the scans: what counts as a switch ---------------------------------------------------------------------------
+
+
+def _module_names():
+    return sorted(p.stem for p in KC.glob("*.py") if p.stem != "__init__")
+
+
+def _structural_switches():
+    """Public UPPERCASE module-level names of every src.kinetic_core module that are (a) bool-annotated or a bool
+    literal, (b) a zero-argument instance of a class (the switch-holder idiom: ``TDP_OWN_DECAY = TdpOwnDecay()``), or
+    (c) a string the module compares against string literals (a mode: ``if PH_COUPLING == "inline"``)."""
+    found = set()
+    for name in _module_names():
+        tree = ast.parse((KC / f"{name}.py").read_text(encoding="utf-8"))
+        compared = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Compare):
+                operands = [node.left, *node.comparators]
+                if any(isinstance(o, ast.Constant) and isinstance(o.value, str) for o in operands):
+                    compared.update(o.id for o in operands if isinstance(o, ast.Name))
+        for node in tree.body:
+            if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
+                target, annotation, value = node.targets[0].id, None, node.value
+            elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name) and node.value is not None:
+                target, annotation, value = node.target.id, node.annotation, node.value
+            else:
+                continue
+            if target.startswith("_") or not target.isupper():
+                continue
+            is_bool = (isinstance(annotation, ast.Name) and annotation.id == "bool") or (
+                isinstance(value, ast.Constant) and isinstance(value.value, bool))
+            is_holder = (isinstance(value, ast.Call) and isinstance(value.func, ast.Name) and value.func.id[:1].isupper()
+                         and not value.args and not value.keywords)
+            is_mode = target in compared and isinstance(value, ast.Constant) and isinstance(value.value, str)
+            if is_bool or is_holder or is_mode:
+                found.add((name, target))
+    return found
+
+
+def _aliases(tree):
+    """{local name: kinetic_core module} for every import of a src.kinetic_core module in a file (any scope)."""
+    out = {}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom) and node.module in (PACKAGE, "src.kinetic_core"):
+            for alias in node.names:
+                out[alias.asname or alias.name] = alias.name
+        elif isinstance(node, ast.Import):
+            for alias in node.names:
+                if alias.name.startswith(PACKAGE + ".") and alias.asname:
+                    out[alias.asname] = alias.name[len(PACKAGE) + 1:]
+    return out
+
+
+def _assigned_switches():
+    """Every (kinetic_core module, UPPERCASE attribute) that a script or a test assigns: ``alias.NAME = ...``,
+    ``setattr(alias, "NAME", ...)`` and ``monkeypatch.setattr(alias, "NAME", ...)``."""
+    modules = set(_module_names())
+    found = {}
+    for path in [*ROOT.joinpath("scripts").rglob("*.py"), *ROOT.joinpath("tests").rglob("*.py")]:
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        aliases = {k: v for k, v in _aliases(tree).items() if v in modules}
+        for node in ast.walk(tree):
+            targets = []
+            if isinstance(node, (ast.Assign, ast.AugAssign, ast.AnnAssign)):
+                for t in (node.targets if isinstance(node, ast.Assign) else [node.target]):
+                    if isinstance(t, ast.Attribute) and isinstance(t.value, ast.Name):
+                        targets.append((t.value.id, t.attr))
+            elif isinstance(node, ast.Call) and len(node.args) >= 2:
+                func = node.func
+                is_setattr = (isinstance(func, ast.Name) and func.id == "setattr") or (
+                    isinstance(func, ast.Attribute) and func.attr == "setattr")
+                obj, attr = node.args[0], node.args[1]
+                if is_setattr and isinstance(obj, ast.Name) and isinstance(attr, ast.Constant) \
+                        and isinstance(attr.value, str):
+                    targets.append((obj.id, attr.value))
+            for alias, attr in targets:
+                if alias in aliases and attr.isupper() and not attr.startswith("_"):
+                    found.setdefault((aliases[alias], attr), str(path.relative_to(ROOT)))
+    return found
+
+
+def _module_level_reimports():
+    """Every module-level ``from <a module binding it> import NAME`` of a switch in the engine: another binding."""
+    by_attr = {}
+    for key in config.KEYS:
+        for module, attr in key.bindings:
+            by_attr.setdefault(attr, set()).add(module)
+    found = set()
+    for path in ROOT.joinpath("src").rglob("*.py"):
+        rel = path.relative_to(ROOT).with_suffix("")
+        parts = rel.parts
+        if parts[:2] != ("src", "kinetic_core"):
+            continue   # only the engine's modules bind switches at module level today; others import in functions
+        here = ".".join(parts[2:]).replace("__init__", "").rstrip(".")
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in tree.body:
+            if not isinstance(node, ast.ImportFrom):
+                continue
+            source = node.module or ""
+            if node.level == 0 and source.startswith(PACKAGE + "."):
+                source = source[len(PACKAGE) + 1:]
+            for alias in node.names:
+                if alias.name in by_attr and source in by_attr[alias.name]:
+                    found.add((here, alias.asname or alias.name))
+    return found
+
+
+def test_every_engine_switch_has_a_config_key():
+    covered = _covered()
+    structural = {s for s in _structural_switches() if s not in NOT_SWITCHES}
+    assigned = {s: where for s, where in _assigned_switches().items() if s not in NOT_SWITCHES}
+    missing = sorted(structural - covered)
+    assert not missing, f"module-level switches without a ConfigKey in src/kinetic_core/config.py: {missing}"
+    unkeyed = sorted(f"{m}.{a} (set in {where})" for (m, a), where in assigned.items() if (m, a) not in covered)
+    assert not unkeyed, f"switches a script or test sets, without a ConfigKey: {unkeyed}"
+    # the scans see what the survey saw (A2_MODULE_CONTRACT sec. 1): the sulfur coupling, B51 and the 13 routes
+    assert {("sulfur", "PH_COUPLING"), ("ph_state", "B51"), ("parameters_sulfur", "TDP_OWN_DECAY")} <= \
+        structural | set(assigned)
+
+
+def test_every_binding_of_a_switch_is_listed_and_exists():
+    covered = _covered()
+    reimports = _module_level_reimports()
+    assert {("lipid", "DECADIENAL_BREAKAGE"), ("", "Q10_ASSUMPTION")} <= reimports   # the scan sees them
+    unlisted = sorted(reimports - covered)
+    assert not unlisted, f"a switch re-imported at module level is a second binding; add it to the key: {unlisted}"
+    for key in config.KEYS:
+        for module, attr in key.bindings:
+            mod = sys.modules[f"{PACKAGE}.{module}" if module else PACKAGE]
+            assert hasattr(mod, attr), f"{key.name}: {module}.{attr} does not exist"
+
+
+def test_shipped_is_the_engine_as_first_imported_and_from_globals_reads_it():
+    pristine = {(module.__name__, name): value for (module, name), value in support._PRISTINE_SWITCHES.items()}
+    shipped = config.Config.shipped()
+    for key in config.KEYS:
+        module, attr = key.bindings[0]
+        assert key.freeze(pristine[(f"{PACKAGE}.{module}", attr)]) == shipped.values[key.name], key.name
+    assert config.Config.from_globals() == shipped
+    assert shipped.diff() == {}
+
+
+def test_a_config_is_frozen_hashable_picklable_and_validated():
+    shipped = config.Config.shipped()
+    assert hash(shipped) == hash(config.Config.from_globals())
+    flipped = _flipped()
+    assert pickle.loads(pickle.dumps(flipped)) == flipped and hash(flipped) != hash(shipped)
+    assert set(flipped.diff()) == set(config.KEY_BY_NAME) == set(FLIPPED)   # FLIPPED covers and flips every key
+    assert flipped["ph.trunk_exponent_override"] == {"k_ama_odg": 0.2, "k_schiff": 0.5}
+    assert shipped.replace(ph__coupling="inline") == shipped.replace({"ph.coupling": "inline"})
+    with pytest.raises(dataclasses.FrozenInstanceError):
+        shipped.items = ()
+    with pytest.raises(KeyError):
+        shipped.replace({"ph.no_such_switch": 1})
+    with pytest.raises(ValueError, match="not one of"):
+        shipped.replace({"ph.coupling": "inline_typo"})
+    with pytest.raises(ValueError, match="every key"):
+        config.Config(shipped.items[:-1])
+
+
+def test_applied_sets_every_binding_and_restores_the_very_objects_also_on_an_exception():
+    before = config._snapshot()
+    flipped = _flipped()
+    with config.applied(flipped):
+        assert config.Config.from_globals() == flipped
+        from src.kinetic_core import lipid, sulfur
+        assert sulfur.PH_COUPLING == "inline" and lipid.DECADIENAL_BREAKAGE.enabled is False
+        assert pl.DECADIENAL_BREAKAGE.enabled is False   # both bindings
+    after = config._snapshot()
+    assert after.keys() == before.keys() and all(after[b] is before[b] for b in before)
+    with pytest.raises(RuntimeError, match="inside"):
+        with config.applied(flipped):
+            raise RuntimeError("inside")
+    after = config._snapshot()
+    assert all(after[b] is before[b] for b in before)
+    assert config.Config.from_globals() == config.Config.shipped()
+
+
+def test_from_globals_refuses_bindings_that_disagree(monkeypatch):
+    from src.kinetic_core import lipid
+
+    monkeypatch.setattr(lipid, "DECADIENAL_BREAKAGE", dataclasses.replace(pl.DECADIENAL_BREAKAGE, enabled=False))
+    with pytest.raises(ValueError, match="lipid.decadienal_breakage"):
+        config.Config.from_globals()
+
+
+def test_map_ordered_installs_a_jobs_config_serially_and_in_forked_workers(monkeypatch):
+    flipped = _flipped()
+    read = lambda _x: config.Config.from_globals()   # noqa: E731
+    monkeypatch.setenv("MAILLARD_WORKERS", "1")
+    assert parallel.map_ordered(read, [0, 1], config=flipped) == [flipped, flipped]
+    assert parallel.map_ordered(read, [0, 1], n_workers=2, config=flipped) == [flipped, flipped]
+    mixed = [parallel.Configured(0, config.Config.shipped()), 1]
+    assert parallel.map_ordered(read, mixed, n_workers=2, config=flipped) == [config.Config.shipped(), flipped]
+    assert config.Config.from_globals() == config.Config.shipped()   # the caller's state is untouched
+
+
+@pytest.mark.skipif("fork" not in mp.get_all_start_methods(), reason="needs fork to compare against")
+def test_a_spawned_worker_given_the_config_reproduces_the_forked_one_with_every_switch_flipped():
+    flipped = _flipped()
+    seeds = [0, 1]
+    with config.applied(flipped):   # the forked workers inherit the state: today's mechanism
+        forked = parallel.map_ordered(support.engine_config_probe, seeds, n_workers=2)
+    serial_shipped = [support.engine_config_probe(s) for s in seeds]
+    with mp.get_context("spawn").Pool(2) as pool:
+        spawned = pool.map(parallel.run_pickled,
+                           [(support.engine_config_probe, parallel.Configured(s, flipped)) for s in seeds])
+        spawned_bare = pool.map(support.engine_config_probe, seeds)
+    assert [r["config"] for r in forked] == [flipped, flipped]
+    assert spawned == forked   # every number, bit for bit
+    # the trap the Config closes: a spawned worker without it computes with the defaults, silently
+    assert spawned_bare == serial_shipped and spawned_bare != forked
+    assert [r["config"] for r in spawned_bare] == [config.Config.shipped()] * 2
+    for numbers in ("rate_constants", "trunk_ph_exponents", "concentrations", "ph_series"):
+        assert spawned_bare[0][numbers] != forked[0][numbers], numbers   # the probe reads the switches
+
+
+def _legacy_joint_install(joint, job):
+    """fit_joint_deoxyosone_thiol.install as it was before A3 (origin/main 7b1bc7cd), for the equivalence below."""
+    joint.sm3.install(job)
+    _ps = ps
+    _ps.STRECKER_SULFUR = dataclasses.replace(_ps.STRECKER_SULFUR,
+                                              h2s_share=float(job.get("strecker_share", joint.STRECKER_SHARE)))
+    _ps.MGO_CYSTEINE_STRECKER = dataclasses.replace(_ps.MGO_CYSTEINE_STRECKER,
+                                                    k_l_per_mmol_min_100c_ph5=float(job.get("mgo_strecker_k", 0.0)))
+    _ps.TDP_CYSTEINE_TRAP = dataclasses.replace(_ps.TDP_CYSTEINE_TRAP,
+                                                k_l_per_mmol_min_100c_ph5=float(job.get("tdp_cys_trap_k", 0.0)))
+    _ps.PENTOSE_AMINE_ENTRY = _ps.PentoseAmineEntry(**job.get("entry", {}))
+    _ps.DDP_FORMATION_PH = _ps.DdpFormationPh(**job.get("ddp_law", {"law": "base"}))
+    _default = _ps.CysAmadoriRoute()
+    _split = job.get("cama_split", {})
+    _ps.CYS_AMADORI_ROUTE = dataclasses.replace(
+        _ps.CYS_AMADORI_ROUTE, split_law=str(_split.get("split_law", _default.split_law)),
+        dpo_share=float(_split.get("dpo_share", _default.dpo_share)),
+        split_ph_c=float(_split.get("split_ph_c", _default.split_ph_c)), dpo_share_ref_ph=_default.dpo_share_ref_ph)
+    _ps.TDP_OWN_DECAY = _ps.TdpOwnDecay(**job.get("tdp_exit", {}))
+    ph_state.TRUNK_SOLUTES_IN_BALANCE = bool(job.get("trunk_solutes", False))
+
+
+def test_the_joint_fits_install_through_a_config_sets_what_it_set_before(monkeypatch):
+    sys.path.insert(0, str(ROOT / "scripts" / "generators"))
+    import fit_joint_deoxyosone_thiol as joint
+
+    with config.applied(config.Config.shipped()):   # every binding back afterwards (the package's too)
+        for arm in joint.ARMS:
+            monkeypatch.setattr(joint, "TDP_EXIT_STATIC", joint.tdp_exit_static(joint.ARMS[arm]))
+            keys, _kinds, _lo, _hi, start = joint.coordinates(False, joint.ARMS[arm])
+            job = dict(joint.trial(list(start), keys), strecker_share=0.042)
+            for variant in (job, dict(job, trunk_solutes=True, cama_split={"split_law": "base_saturating",
+                                                                           "dpo_share": 0.4, "split_ph_c": 6.5})):
+                for before in (config.Config.shipped(), _flipped()):
+                    config.install(before)
+                    _legacy_joint_install(joint, variant)
+                    legacy = config.Config.from_globals()
+                    config.install(before)
+                    joint.install(variant)
+                    assert config.Config.from_globals() == legacy, arm
+                    assert legacy != before

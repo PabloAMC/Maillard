@@ -462,28 +462,43 @@ def fed_norfuraneol_tracer(run) -> Dict[str, float]:
             "fed_fraction_of_nf_pool_at_end": float(f[-1])}
 
 
-def install(job) -> None:
-    """The engine state a job runs in, set in whichever process runs it (every switch set, none left over)."""
-    sm3.install(job)
+def job_config(job):
+    """The engine configuration a job runs in, as one ``Config`` (A3 phase 1): the process's globals once sub-model
+    3's switches are installed (still set as globals by ``sm3.install``: its migration is phase 2), with this job's
+    switches replaced."""
     import dataclasses as _dc
     from src.kinetic_core import parameters_sulfur as _ps
-    from src.kinetic_core import ph_state as _ph
-    _ps.STRECKER_SULFUR = _dc.replace(_ps.STRECKER_SULFUR, h2s_share=float(job.get("strecker_share", STRECKER_SHARE)))
-    _ps.MGO_CYSTEINE_STRECKER = _dc.replace(_ps.MGO_CYSTEINE_STRECKER,
-                                            k_l_per_mmol_min_100c_ph5=float(job.get("mgo_strecker_k", 0.0)))
-    _ps.TDP_CYSTEINE_TRAP = _dc.replace(_ps.TDP_CYSTEINE_TRAP,
-                                        k_l_per_mmol_min_100c_ph5=float(job.get("tdp_cys_trap_k", 0.0)))
-    _ps.PENTOSE_AMINE_ENTRY = _ps.PentoseAmineEntry(**job.get("entry", {}))
-    _ps.DDP_FORMATION_PH = _ps.DdpFormationPh(**job.get("ddp_law", {"law": "base"}))
+    from src.kinetic_core.config import Config
+
+    sm3.install(job)
+    base = Config.from_globals()
     # B7a: the split's pH law and TDP's own exit, the shipped defaults whenever the job does not carry them
     _default = _ps.CysAmadoriRoute()
     _split = job.get("cama_split", {})
-    _ps.CYS_AMADORI_ROUTE = _dc.replace(
-        _ps.CYS_AMADORI_ROUTE, split_law=str(_split.get("split_law", _default.split_law)),
-        dpo_share=float(_split.get("dpo_share", _default.dpo_share)),
-        split_ph_c=float(_split.get("split_ph_c", _default.split_ph_c)), dpo_share_ref_ph=_default.dpo_share_ref_ph)
-    _ps.TDP_OWN_DECAY = _ps.TdpOwnDecay(**job.get("tdp_exit", {}))
-    _ph.TRUNK_SOLUTES_IN_BALANCE = bool(job.get("trunk_solutes", False))
+    return base.replace({
+        "sulfur.strecker_sulfur": _dc.replace(base["sulfur.strecker_sulfur"],
+                                              h2s_share=float(job.get("strecker_share", STRECKER_SHARE))),
+        "sulfur.mgo_cysteine_strecker": _dc.replace(base["sulfur.mgo_cysteine_strecker"],
+                                                    k_l_per_mmol_min_100c_ph5=float(job.get("mgo_strecker_k", 0.0))),
+        "sulfur.tdp_cysteine_trap": _dc.replace(base["sulfur.tdp_cysteine_trap"],
+                                                k_l_per_mmol_min_100c_ph5=float(job.get("tdp_cys_trap_k", 0.0))),
+        "sulfur.pentose_amine_entry": _ps.PentoseAmineEntry(**job.get("entry", {})),
+        "sulfur.ddp_formation_ph": _ps.DdpFormationPh(**job.get("ddp_law", {"law": "base"})),
+        "sulfur.cys_amadori_route": _dc.replace(
+            base["sulfur.cys_amadori_route"], split_law=str(_split.get("split_law", _default.split_law)),
+            dpo_share=float(_split.get("dpo_share", _default.dpo_share)),
+            split_ph_c=float(_split.get("split_ph_c", _default.split_ph_c)),
+            dpo_share_ref_ph=_default.dpo_share_ref_ph),
+        "sulfur.tdp_own_decay": _ps.TdpOwnDecay(**job.get("tdp_exit", {})),
+        "ph.trunk_solutes_in_balance": bool(job.get("trunk_solutes", False)),
+    })
+
+
+def install(job) -> None:
+    """The engine state a job runs in, set in whichever process runs it (every switch set, none left over)."""
+    from src.kinetic_core import config
+
+    config.install(job_config(job))
 
 
 def entry_checks(theta, keys, jobs) -> Dict[str, Any]:
