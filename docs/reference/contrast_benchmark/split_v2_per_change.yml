@@ -3,6 +3,7 @@
 # FROZEN: `sha256` is over the `split:` block; `--v2` asserts it. A change needs a new, dated, reasoned version.
 version: contrast_split_v2_per_change
 frozen_on: '2026-11-01'
+frozen_at_commit: e596521a
 sha256: dbe32a2b3af83f3bbb603efb391dd8477999263a6b24769ea946fcc0e0fe2e12
 hash_rule: sha256 of json.dumps(split, sort_keys=True, separators=(',', ':'), ensure_ascii=True)
 rule: 'Per error E: DEV(E) = the cells cited as evidence for E in ENGINE_VS_LITERATURE.md secs. 2 - 5 (its sec. 2.1 mismatch

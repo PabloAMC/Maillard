@@ -417,3 +417,11 @@ the full verification.
 ## 2026-11-01 — A red team's number is a lead too
 - **Pattern:** the engine-error red team ranked E4 (the pyrazine pH law) as SUPPORTED on "methylpyrazine pH 7 / 5 = 170 vs Leahy's 14". 14 was pyrazine's ratio; methylpyrazine's is 215, so the shipped engine already matched. The premortem inherited the error, and only the pre-registration agent, reading the table for its test, caught it.
 - **Rule:** before a red team's or reviewer's number orders work or a change, the coordinator checks it against the dossier table (one grep). Reviews reduce error; they do not certify numbers.
+
+## 2026-11-01 — Check the alias table before calling a PDF "wrong"
+- **Pattern:** an agent reported Zhou2023.pdf as "the wrong paper", and I passed it on to the owner as "please replace". data/keys/pdf_dossier_aliases.yml had recorded since 2026-08 that Zhou2023.pdf is Zhu et al. (kafirin) and that the wanted paper is on disk as Zhou2023b.pdf.
+- **Rule:** before telling the owner a file is missing or wrong, grep pdf_dossier_aliases.yml and the dossier's "Source on disk" line, and check +/- 1 year and the b / c suffixes.
+
+## 2026-11-01 — A frozen artifact must be checked against its inputs at freeze time
+- **Pattern:** the benchmark's frozen v1 split was checked by regenerating it from the LIVE cited documents. A legitimate later edit (the owner's decision note appended to the E4 prereg) made the check fail although the split was unchanged.
+- **Rule:** a frozen record checks against `git show <freeze commit>:<input>`; live drift is reported separately and never silently fails or silently passes.

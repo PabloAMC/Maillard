@@ -22,6 +22,15 @@ and nothing is scored here: the per-error counts are availability (power) only.
 
     python scripts/generators/build_contrast_split.py            # check: rebuild in memory, assert hash + file
     python scripts/generators/build_contrast_split.py --write    # (re)write split.yml; refuses if membership moved
+    python scripts/generators/build_contrast_split.py --v2       # the same for the v2 per-change split
+    python scripts/generators/build_contrast_split.py --drift-report   # live text vs each freeze commit (exit 0)
+
+The CITED documents (ENGINE_VS_LITERATURE.md, the two preregs) are read AS OF EACH VERSION'S FREEZE COMMIT
+(`git show <commit>:<path>`; the commit is recorded in the split file and below), because a frozen split is a function
+of its inputs at the freeze and those documents are legitimately appended later. The atlas, lab_ids.yml and the other
+substrate are read live, so a later edit that moves membership still fails the check; atlas STATUS edits do not (status
+is not membership) and are reported. `--drift-report` lists what changed in the cited text and the atlas since each
+freeze, and whether the live text would move membership; it is informational.
 
 Changing the split needs a NEW, dated, reasoned version (a new VERSION / FROZEN_SHA256 here, the old split kept as
 split_<version>.yml, a README entry), never an edit of this one.
@@ -29,14 +38,16 @@ split_<version>.yml, a README entry), never an edit of this one.
 from __future__ import annotations
 
 import argparse
+import difflib
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from functools import lru_cache
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 import yaml
 
@@ -56,6 +67,7 @@ CITED_PREREGS = (
 VERSION = "contrast_split_v1"
 FROZEN_ON = "2026-11-01"
 FROZEN_SHA256 = "022d0cab5a53ececb27a1fc6837ff275fbab177cf2161ae1f8a4ed0341f273a7"   # v1; a membership change needs a new version
+FROZEN_AT_COMMIT = "ce368528"   # the commit that froze v1 (split.yml `frozen_at_commit`); its cited text is v1's input
 # The atlas cells the split covers: per family, indices 0 .. n-1 at the freeze. Cells appended later (rule (i)'s
 # "newly keyed rows", plan track P1) are outside v1: they are listed under `annotations.post_freeze_cells` and enter
 # the benchmark only through a new version. (The atlas README: new cells are added at the END of their file.)
@@ -198,6 +210,30 @@ def stem_of(dossier: str) -> str:
 def cell_sort_key(cell_id: str) -> Tuple[str, int]:
     fam, idx = cell_id.split("#")
     return fam, int(idx)
+
+
+def git(*args: str) -> str:
+    r = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
+    if r.returncode:
+        raise SystemExit(f"git {' '.join(args)} failed: {r.stderr.strip()}")
+    return r.stdout
+
+
+def cited_text(path: Path, commit: Optional[str]) -> str:
+    """A cited document's text: live (commit None) or as of `commit` (git show), never a mix."""
+    return path.read_text() if commit is None else git("show", f"{commit}:{path.relative_to(ROOT).as_posix()}")
+
+
+def freeze_commit_of(split_path: Path, declared: str) -> str:
+    """The freeze commit recorded in a split file; it must equal the script's and carry the same frozen split."""
+    disk = yaml.safe_load(split_path.read_text())
+    rec = disk.get("frozen_at_commit")
+    if rec != declared:
+        raise SystemExit(f"{split_path.name}: frozen_at_commit {rec!r} != the script's {declared!r}")
+    then = yaml.safe_load(git("show", f"{rec}:{split_path.relative_to(ROOT).as_posix()}"))
+    if then["sha256"] != disk["sha256"]:
+        raise SystemExit(f"{split_path.name}: the file at {rec} records sha256 {then['sha256']}, not {disk['sha256']}")
+    return rec
 
 
 # ------------------------------------------------------------------------------------------------------- inputs
@@ -437,7 +473,8 @@ def in_scope(con: dict, cell: dict, scope: dict) -> bool:
 
 
 # ------------------------------------------------------------------------------------------------------- build
-def build() -> Tuple[dict, dict]:
+def build(cited_at: Optional[str] = FROZEN_AT_COMMIT) -> Tuple[dict, dict]:
+    """v1. `cited_at`: the commit the cited documents are read at (None = live text, for the drift report)."""
     atlas = load_atlas()
     cells = {cid: c for cid, c in atlas.items() if c["_index"] < FROZEN_EXTENT.get(c["_family"], 0)}
     post_freeze = sorted((cid for cid in atlas if cid not in cells), key=cell_sort_key)
@@ -452,15 +489,9 @@ def build() -> Tuple[dict, dict]:
         for d in c["dossiers"]:
             stem_labs[stem_of(d)].update(labs_of[cid])
 
-    sources = {"ENGINE_VS_LITERATURE.md secs. 2 - 5": cited_sections(EVL.read_text())}
-    missing_preregs = []
-    for p in CITED_PREREGS:
-        if p.exists():
-            sources[p.name] = p.read_text()
-        else:
-            missing_preregs.append(p.name)
-    if missing_preregs:
-        raise SystemExit("cited prereg(s) missing: " + ", ".join(missing_preregs))
+    sources = {"ENGINE_VS_LITERATURE.md secs. 2 - 5": cited_sections(cited_text(EVL, cited_at))}
+    for p in CITED_PREREGS:     # a missing prereg raises (FileNotFoundError live, SystemExit at a commit)
+        sources[p.name] = cited_text(p, cited_at)
 
     citations: List[dict] = []
     for name, text in sources.items():
@@ -599,6 +630,7 @@ def build() -> Tuple[dict, dict]:
     doc = {
         "version": VERSION,
         "frozen_on": FROZEN_ON,
+        "frozen_at_commit": FROZEN_AT_COMMIT,
         "sha256": canonical_hash(split),
         "hash_rule": "sha256 of json.dumps(split, sort_keys=True, separators=(',', ':'), ensure_ascii=True)",
         "rule": ("DEVELOPMENT = every atlas cell cited (by file + index, or by naming its study or laboratory) in "
@@ -634,6 +666,7 @@ def build() -> Tuple[dict, dict]:
 VERSION_V2 = "contrast_split_v2_per_change"
 SPLIT_V2 = BENCH / "split_v2_per_change.yml"
 FROZEN_V2_SHA256 = "dbe32a2b3af83f3bbb603efb391dd8477999263a6b24769ea946fcc0e0fe2e12"
+FROZEN_V2_AT_COMMIT = "e596521a"   # the commit that froze v2 (split_v2_per_change.yml `frozen_at_commit`)
 
 # Which sec. 2.1 mismatch rows are evidence for which error: sec. 3's first column, written out (sec. 3 abbreviates
 # "F16-a, -b"). F28-d (named in E7's sec. 3 row) has no sec. 2.1 row. F21-a carries both the pyrrole (E14) and the
@@ -836,8 +869,9 @@ def _src_cited(stems: Set[str]) -> Set[str]:
 _CALIB_CACHE: Dict[frozenset, tuple] = {}
 
 
-def build_v2(variant: str = "declared") -> dict:
-    """variant: declared | ames_separate | kallen_not_cited | prereg_literal | calibration_narrow | calibration_broad."""
+def build_v2(variant: str = "declared", cited_at: Optional[str] = FROZEN_V2_AT_COMMIT) -> dict:
+    """variant: declared | ames_separate | kallen_not_cited | prereg_literal | calibration_narrow | calibration_broad.
+    `cited_at`: the commit the cited documents are read at (None = live text, for the drift report)."""
     atlas = load_atlas()
     cells = {cid: c for cid, c in atlas.items() if c["_index"] < FROZEN_EXTENT.get(c["_family"], 0)}
     lab_doc, string_to_lab, aliases, collab, copies = load_lab_ids(cells)
@@ -859,17 +893,18 @@ def build_v2(variant: str = "declared") -> dict:
         for d in c["dossiers"]:
             stem_cells[stem_of(d)].add(cid)
 
-    evl = cited_sections(EVL.read_text())
+    evl = cited_sections(cited_text(EVL, cited_at))
     segments = _segments_by_error(evl)
     texts: Dict[str, Dict[str, str]] = defaultdict(dict)    # error -> source -> text
     for e, t in segments.items():
         texts[e]["ENGINE_VS_LITERATURE secs. 2 - 5"] = t
     prereg_parts: Dict[str, Tuple[str, str, str]] = {}
     for p in CITED_PREREGS:
-        body, held, devchk = _prereg_parts(p.read_text())
+        full = cited_text(p, cited_at)
+        body, held, devchk = _prereg_parts(full)
         prereg_parts[p.name] = (body, held, devchk)
         for e in PREREG_ERRORS[p.name]:
-            texts[e][p.name] = p.read_text() if variant == "prereg_literal" else body
+            texts[e][p.name] = full if variant == "prereg_literal" else body
 
     def key(h):
         return h["kind"], h["target"]
@@ -972,8 +1007,8 @@ HEADER_V2 = """# The contrast benchmark's v2 PER-CHANGE hold-out (one DEV / TEST
 """
 
 
-def v2_document() -> dict:
-    main_run = build_v2("declared")
+def v2_document(cited_at: Optional[str] = FROZEN_V2_AT_COMMIT) -> dict:
+    main_run = build_v2("declared", cited_at)
     if main_run["review_needed"]:
         lines = [f"  {cid}  ({', '.join(sorted(es))})" for cid, es in sorted(main_run["review_needed"].items())]
         raise SystemExit("FACTOR_REVIEW_V2 needs these contrasts reviewed:\n" + "\n".join(lines))
@@ -992,13 +1027,14 @@ def v2_document() -> dict:
     }
     alternatives = {}
     for var in ("ames_separate", "kallen_not_cited", "prereg_literal", "calibration_narrow", "calibration_broad"):
-        r = build_v2(var)["errors"]
+        r = build_v2(var, cited_at)["errors"]
         alternatives[var] = {eid: {"n_test_labs": e["n_test_labs"], "n_test_contrasts": e["n_test_contrasts"],
                                    "test_labs": e["test_labs"], "verdict": e["verdict"]} for eid, e in r.items()}
     contrasts = main_run["contrasts"]
     return {
         "version": VERSION_V2,
         "frozen_on": FROZEN_ON,
+        "frozen_at_commit": FROZEN_V2_AT_COMMIT,
         "sha256": canonical_hash(split),
         "hash_rule": "sha256 of json.dumps(split, sort_keys=True, separators=(',', ':'), ensure_ascii=True)",
         "rule": ("Per error E: DEV(E) = the cells cited as evidence for E in ENGINE_VS_LITERATURE.md secs. 2 - 5 "
@@ -1029,8 +1065,17 @@ def v2_document() -> dict:
     }
 
 
+def cited_text_hashes(commit: Optional[str]) -> Dict[str, str]:
+    """The `inputs.cited_text_sha256` record, recomputed from the cited documents at `commit` (None = live)."""
+    out = {"ENGINE_VS_LITERATURE.md secs. 2 - 5": sha256_text(cited_sections(cited_text(EVL, commit)))}
+    out.update({p.name: sha256_text(cited_text(p, commit)) for p in CITED_PREREGS})
+    return out
+
+
 def main_v2(write: bool) -> int:
-    doc = v2_document()
+    if not write:
+        freeze_commit_of(SPLIT_V2, FROZEN_V2_AT_COMMIT)
+    doc = v2_document(FROZEN_V2_AT_COMMIT)
     sha = doc["sha256"]
     frozen = FROZEN_V2_SHA256 if FROZEN_V2_SHA256 != "TO_BE_SET" else None
     text = HEADER_V2 + yaml.safe_dump(doc, sort_keys=False, width=120, default_flow_style=None, allow_unicode=False)
@@ -1051,12 +1096,16 @@ def main_v2(write: bool) -> int:
     if canonical_hash(disk["split"]) != disk["sha256"] or disk["sha256"] != frozen:
         print("FAIL: split_v2_per_change.yml's split block does not hash to its recorded / frozen sha256")
         ok = False
+    if disk["inputs"]["cited_text_sha256"] != cited_text_hashes(FROZEN_V2_AT_COMMIT):
+        print(f"FAIL: the cited text at the freeze commit {FROZEN_V2_AT_COMMIT} does not hash to the recorded inputs")
+        ok = False
     for k in ("inputs", "summary", "errors", "alternatives", "reread_list", "test_contrast_factors",
               "calibration_inputs"):
         if disk.get(k) != doc[k]:
             print(f"FAIL: block `{k}` differs from a rebuild")
             ok = False
-    print(("OK" if ok else "FAILED") + f": {VERSION_V2} sha256 {sha}; testable {doc['summary']['testable_errors']}")
+    print(("OK" if ok else "FAILED") + f": {VERSION_V2} sha256 {sha} (cited text at {FROZEN_V2_AT_COMMIT}); "
+          f"testable {doc['summary']['testable_errors']}")
     return 0 if ok else 1
 
 
@@ -1071,14 +1120,123 @@ def dump(doc: dict) -> str:
     return HEADER + yaml.safe_dump(doc, sort_keys=False, width=120, default_flow_style=None, allow_unicode=False)
 
 
+def _without_status(recs: List[dict]) -> List[dict]:
+    """Contrast records minus `status`, the atlas cell's live verdict (copied for reading; not membership)."""
+    return [{k: v for k, v in r.items() if k != "status"} for r in recs]
+
+
+def _status_edits(frozen_recs: List[dict], live_recs: List[dict]) -> List[str]:
+    live = {r["id"]: r.get("status") for r in live_recs}
+    return [f"{r['id']} {r.get('status')} -> {live[r['id']]}" for r in frozen_recs
+            if r["id"] in live and live[r["id"]] != r.get("status")]
+
+
+# ------------------------------------------------------------------------------------------------- drift report
+def _atlas_at(commit: str) -> Dict[str, dict]:
+    cells: Dict[str, dict] = {}
+    for name in sorted(git("ls-tree", "--name-only", commit, "--", ATLAS.relative_to(ROOT).as_posix() + "/").split()):
+        base = name.rsplit("/", 1)[-1]
+        if re.match(r"F\d\d_.*\.yml$", base):
+            for i, c in enumerate(yaml.safe_load(git("show", f"{commit}:{name}"))["cells"]):
+                cells[f"{base[:3]}#{i}"] = c
+    return cells
+
+
+def _text_drift(old: str, new: str, label: str, limit: int = 14) -> List[str]:
+    if old == new:
+        return [f"  {label}: unchanged"]
+    diff = [l for l in difflib.unified_diff(old.split("\n"), new.split("\n"), lineterm="", n=0)
+            if not l.startswith(("---", "+++"))]
+    add = sum(l.startswith("+") for l in diff)
+    rem = sum(l.startswith("-") for l in diff)
+    out = [f"  {label}: CHANGED (+{add} / -{rem} lines; @@ = old / live line numbers)"]
+    out += ["      " + l[:160] for l in diff[:limit]]
+    if len(diff) > limit:
+        out.append(f"      ... {len(diff) - limit} more diff lines")
+    return out
+
+
+def _set_moves(name: str, old, new) -> List[str]:
+    a, b = set(old), set(new)
+    return [f"    {name}: +{sorted(b - a)} -{sorted(a - b)}"] if a != b else []
+
+
+def drift_report() -> int:
+    """Informational: what changed in the cited documents and the atlas since each version's freeze commit, and
+    whether the LIVE cited text would move membership. Always exits 0; the checks stay pinned to the freeze."""
+    live_atlas = {cid: {k: v for k, v in c.items() if not k.startswith("_")} for cid, c in load_atlas().items()}
+    substrate = [LAB_IDS, REGISTER, LEDGER_DIR, B60_REPORT, ENGINE_SRC]
+    for version, commit in ((VERSION, FROZEN_AT_COMMIT), (VERSION_V2, FROZEN_V2_AT_COMMIT)):
+        print(f"== {version}: live vs freeze commit {commit}")
+        print(" cited documents (what the split reads):")
+        old_evl, new_evl = cited_text(EVL, commit), EVL.read_text()
+        print("\n".join(_text_drift(cited_sections(old_evl), cited_sections(new_evl),
+                                    "ENGINE_VS_LITERATURE.md secs. 2 - 5")))
+        if old_evl != new_evl and cited_sections(old_evl) == cited_sections(new_evl):
+            print("    (text outside secs. 2 - 5 changed; not an input)")
+        for p in CITED_PREREGS:
+            print("\n".join(_text_drift(cited_text(p, commit), p.read_text(), p.name)))
+        if version == VERSION:
+            _, live_split = build(None)
+            frozen_split = yaml.safe_load(SPLIT.read_text())["split"]
+            moves = [m for k in ("development_labs", "test_labs", "development_cells", "test_cells")
+                     for m in _set_moves(k, frozen_split[k], live_split[k])]
+            fp = {c["id"]: c["partition"] for c in frozen_split["contrasts"]}
+            lp = {c["id"]: c["partition"] for c in live_split["contrasts"]}
+            moves += _set_moves("contrasts", fp, lp)
+            moves += [f"    {i}: {fp[i]} -> {lp[i]}" for i in sorted(set(fp) & set(lp)) if fp[i] != lp[i]]
+            live_sha, frozen_sha = canonical_hash(live_split), FROZEN_SHA256
+        else:
+            try:
+                live_doc = v2_document(None)
+            except SystemExit as e:
+                print(f" membership on the live text: rebuild refused ({e})")
+                live_doc = None
+            moves, live_sha, frozen_sha = [], None, FROZEN_V2_SHA256
+            if live_doc:
+                live_sha = live_doc["sha256"]
+                frozen_errs = yaml.safe_load(SPLIT_V2.read_text())["split"]["errors"]
+                for eid, e in live_doc["split"]["errors"].items():
+                    for k in ("development_labs", "test_contrasts"):
+                        moves += _set_moves(f"{eid} {k}", frozen_errs[eid][k], e[k])
+        if live_sha is not None:
+            print(f" membership on the live text: {'UNCHANGED' if live_sha == frozen_sha else 'WOULD MOVE'} "
+                  f"(sha256 {live_sha[:12]}... vs frozen {frozen_sha[:12]}...)")
+            print("\n".join(moves) if moves else "", end="\n" if moves else "")
+        then = _atlas_at(commit)
+        edited = sorted((cid for cid in then if cid in live_atlas and then[cid] != live_atlas[cid]), key=cell_sort_key)
+        status = [f"{cid} {then[cid].get('status')} -> {live_atlas[cid].get('status')}" for cid in edited
+                  if then[cid].get("status") != live_atlas[cid].get("status")]
+        other = [f"{cid} [{', '.join(sorted(k for k in set(then[cid]) | set(live_atlas[cid]) if k != 'status' and then[cid].get(k) != live_atlas[cid].get(k)))}]"
+                 for cid in edited]
+        other = [o for o in other if not o.endswith("[]")]
+        appended = sorted(set(live_atlas) - set(then), key=cell_sort_key)
+        print(f" atlas: {len(edited)} cells edited since {commit}; {len(appended)} appended (outside the frozen extent)")
+        if status:
+            print("    status: " + "; ".join(status))
+        if other:
+            print("    other fields: " + "; ".join(other))
+        changed = git("diff", "--name-only", commit, "--", *(p.relative_to(ROOT).as_posix() for p in substrate)).split()
+        print(f" other substrate changed since {commit} (read live by the check): "
+              + (", ".join(changed) if changed else "none"))
+    print("drift report: informational; the checks read the cited text at each freeze commit (exit 0)")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
     ap.add_argument("--write", action="store_true", help="write split.yml (refuses if membership moved)")
     ap.add_argument("--v2", action="store_true", help="the v2 per-change split (split_v2_per_change.yml) instead")
+    ap.add_argument("--drift-report", action="store_true",
+                    help="list what changed in the cited text / atlas since each freeze commit (informational, exit 0)")
     args = ap.parse_args()
+    if args.drift_report:
+        return drift_report()
     if args.v2:
         return main_v2(args.write)
-    doc, split = build()
+    if not args.write:
+        freeze_commit_of(SPLIT, FROZEN_AT_COMMIT)
+    doc, split = build(FROZEN_AT_COMMIT)
     sha = doc["sha256"]
     frozen = FROZEN_SHA256 if FROZEN_SHA256 != "TO_BE_SET" else None
     text = dump(doc)
@@ -1106,16 +1264,25 @@ def main() -> int:
         print("FAIL: split.yml's split block does not hash to its recorded / frozen sha256 (hand edit?)")
         ok = False
     if disk.get("inputs", {}).get("cited_text_sha256") != doc["inputs"]["cited_text_sha256"]:
-        print("FAIL: the cited text (ENGINE_VS_LITERATURE secs. 2 - 5 or a cited prereg) changed since the freeze: "
-              "re-review lab_ids.yml text_aliases against it and cut a new version if membership must change")
+        print(f"FAIL: the cited text at the freeze commit {FROZEN_AT_COMMIT} does not hash to the recorded inputs "
+              "(wrong freeze commit?)")
         ok = False
+    status_edits = []
     for k in ("counts", "errors", "contrasts", "excluded_candidates", "cells_cited_by_index", "development_lab_reasons"):
-        if disk.get(k) != doc[k]:
+        same = disk.get(k) == doc[k]
+        if not same and k in ("contrasts", "excluded_candidates"):
+            same = _without_status(disk.get(k) or []) == _without_status(doc[k])
+            status_edits += _status_edits(disk.get(k) or [], doc[k])
+        if not same:
             print(f"FAIL: split.yml block `{k}` differs from a rebuild (regenerate with --write; membership unchanged)")
             ok = False
+    if status_edits:
+        print(f"note: {len(status_edits)} atlas status edit(s) since the freeze (not membership): "
+              + "; ".join(status_edits))
     if disk.get("annotations") != doc["annotations"]:
         print("note: annotations changed (other preregs moved); not part of the frozen identity")
-    print(("OK" if ok else "FAILED") + f": {VERSION} sha256 {sha}; DEV cells {len(split['development_cells'])}, "
+    print(("OK" if ok else "FAILED") + f": {VERSION} sha256 {sha} (cited text at {FROZEN_AT_COMMIT}); "
+          f"DEV cells {len(split['development_cells'])}, "
           f"TEST cells {len(split['test_cells'])}; contrasts DEV "
           f"{sum(c['partition'] == 'development' for c in split['contrasts'])} / TEST "
           f"{sum(c['partition'] == 'test' for c in split['contrasts'])}")

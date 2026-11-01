@@ -51,6 +51,10 @@ aliases:
   Zhang2025_supplementary: zhang2025
   brehm2020_supplementary: brehm2020
   zhou2023b_supporting: zhou2023
+  wei2022_supplementary: wei2022             # Wei 2022 SI (Fig. S3), read 2026-11-01 into wei2022_extraction.md
+  zhai2021_supplementary: zhai2021           # Zhai 2021 SI, read 2026-11-01 into zhai2021_extraction.md
+  zhou2024_supplementary: zhou2024           # Zhou 2024 SI ([M-H]+ question), read 2026-11-01 into zhou2024_extraction.md
+  zhang2022_supplementary: zhang2022         # Zhang 2022 Appendix A (.docx), read 2026-11-01 into zhang2022_extraction.md
   schroen2022_fulltext: schroen2022          # a text dump of Schroen2022.pdf that predates the PDF
   # downloaded 2026-10-29 (strategy M3), read into their dossiers' "Supplementary material (read 2026-10-29)"
   # (bi2022_supplementary.zip and utz2022_supplementary.zip are archives, which the gate does not list)

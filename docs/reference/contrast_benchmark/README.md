@@ -84,6 +84,8 @@ The split's membership (`split.yml` -> `split:`: the labs, the cells and the con
 
 Atlas cells appended after the freeze (rule (i)'s "newly keyed rows", track P1) are outside v1. `split.yml` -> `annotations.post_freeze_cells` lists them, and they enter only through a new version.
 
+**Checks run against each version's freeze commit; live drift is reported by `--drift-report`.** (2026-11-01.) The check reads the cited documents (ENGINE_VS_LITERATURE secs. 2 - 5, the two preregs) with `git show <commit>:<path>` at the commit each split file records as `frozen_at_commit` (v1 `ce368528`, v2 `e596521a`). Later legitimate appends (the E4 owner-decision note, the re-read corrections) therefore no longer fail it, and the cited-text bullet above now means: the text at that commit must hash to the recorded `inputs`. The atlas and `lab_ids.yml` stay live, so membership is still rebuilt and hashed on them and an edit that moves it fails; atlas `status` edits (F05#23, F24#6) are printed as a note. `--drift-report` (exit 0) lists the changed cited lines, the edited atlas cells and whether the live text would move membership.
+
     ./scripts/docker_maillard.sh run "python scripts/generators/build_contrast_split.py"           # check
     ./scripts/docker_maillard.sh run "python scripts/generators/build_contrast_split.py --write"   # regenerate (same membership only)
 

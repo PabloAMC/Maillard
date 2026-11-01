@@ -1,4 +1,5 @@
 # Wei, Cui, Hayat, Zhang & Ho 2022 — EXTRACTION
+DOI: 10.1021/acs.jafc.2c04961 (printed on every page; Crossref 2026-11-01: same title, Wei / Cui / Hayat / Zhang / Ho, J. Agric. Food Chem. 70(38), 12164-12171, 2022)
 ### *"Glycine-Xylose Amadori Compound Formation Tracing through Maillard Browning Inhibition by 2-Threityl-thiazolidine-4-carboxylic Acid Formation from Deoxyosone and Exogenous Cysteine"*
 ### Purified glycine-xylose Amadori compound (GX-ARP, 5 mM) +- cysteine (5 mM), water, initial pH 7.0, 110 / 120 / 130 °C, 0-100 min: GX-ARP decay (second-order fits, Ea), 1-DX / 3-DX / GO / MGO (OPD quinoxalines, 120 °C only), cysteine and TTCA (UPLC-MS). Plus a two-step xylose (0.2 M) + glycine (0.1 M) browning experiment (80 °C then 120 °C with 5 mM cysteine). **ONE pH only: signature (vii)'s pH dependence is untested here.** The TTCA-from-deoxyosone pathway is proposed, not shown, and is not mass-balanced.
 
@@ -141,3 +142,47 @@ deoxyosone adduct Scheme 2 actually implies), i.e. it can settle flag (e). Worth
 - [!] Ea with Cys: 44.75 printed vs 42.2 recomputed from the printed k (two-point and three-point fits agree on 42.2).
 - [!] Unbuffered water, pH set at start only; headspace / O2 unstated; GX-ARP purity printed two ways (99.05 / 99.5 %).
 - [!] TTCA quantification standard and response factor not described.
+
+## Supplementary Information (read 2026-11-01)
+
+**File:** `data/articles/wei2022_supplementary.pdf` (6 pp.: author addresses, Figs. S1-S3; ACS SI
+jf2c04961_si_001). Read from the text layer and 130 dpi renders; **Fig. S3 read from a 300 dpi crop** (scratchpad
+`ing1101/ws-*.png`, `s3.png`; relative intensities +-2 % of base). Tags as in the legend above.
+
+**Contents.** Fig. S1: 13C (a) and 1H (b) NMR of the purified GX-ARP. Fig. S2: proposed isomers of the GX-ARP
+(N-(β-D-xylofuranos-1-yl)-glycine, 1 and 2; the α-furanose, 3). Fig. S3: "UPLC-Q-TOF spectrum of TTCA in the product
+of ARP degradation with cysteine addition" [V]. No time course, no rate, no table: nothing quantitative beyond Fig. S3.
+
+**Fig. S3, the question asked (TTCA's mass, or the deoxyosone + Cys - H2O mass?)** [M/F]: "SAMPLE 2", file
+20220618-7A, retention 2.694 min, background-subtracted ("Cm (93:110-(49:84+127:168))"), **TOF MS ES+ full scan,
+not MS/MS**, nominal m/z only, base 1.10 × 10⁴ counts. Ions (% of base): **254 (100)**, 255 (~17), 256 (~7),
+**236 (~25)**, 237 (~6), 238 (~1), 208 (~5), 172 (~6), 122 (~17). The authors assign 254 [M+H]⁺, 236 [M+H-H2O]⁺,
+208 [M+H-HCOOH]⁺, 172 (drawn as "-H2O" from 208, but 208 - 172 = 36, i.e. -2 H2O [!]), 122 Cys-H⁺ (loss of xylose)
+and draw 2-threityl-TTCA [M].
+
+**Answer.** The trapped product's main ion is **m/z 254, [M+H]⁺ of C8H15NO6S, M 253**, which is TTCA's formula
+(xylose C5H10O5 + Cys C3H7NO2S - H2O; Zhai 2021 SI prints the same formula and [M+H]⁺ 254 for its TTCA standard)
+[M/Z]. **The question's premise is wrong in both numbers: TTCA is not M 237 and the deoxyosone adduct is not the
+only alternative.** A deoxyosone (C5H8O4, M 132) + Cys - H2O is C8H13NO5S, M 235, [M+H]⁺ 236: an ion of 25 % is
+present at 236, which the authors read as TTCA's in-source water loss; a co-eluting M-235 species cannot be
+excluded from a full-scan spectrum, but it is not the main species [Z]. Isotope check [Z]: 255/254 = 0.17 and
+237/236 = 0.25 against ~0.10 expected for C8 (13C + 15N + 33S), so both clusters carry ~7-15 % extra intensity
+(an M+1 contributor or the subtraction), not explained here.
+
+**Correction to this dossier's own flag (e) and sec. 1 point 2 (written 2026-10-31) [!].** Sec. 1 (e) gives TTCA as
+"C8H15NO5S (M 237)" and concludes Scheme 2 "needs a net 2-H reduction". **TTCA is C8H15NO6S (M 253).** The correct
+bookkeeping: deoxyosone + Cys with NO water loss is C8H15NO6S, exactly TTCA's formula. So Scheme 2 (deoxyosone ->
+TTCA) needs a net HYDRATION relative to the deoxyosone imine (+H2O), with an internal C-2 / C-3 redox swap (the C-2
+keto becomes CHOH, the C-3 CH2 becomes CHOH); it is NOT short of 2 H, and it is redox-balanced overall [Z].
+Consequences:
+- Flag (e)'s "the scheme needs a net 2-H reduction it does not supply" and the flag line "Scheme 2 is not
+  redox-balanced" are wrong; the argument against DX trapping loses its stoichiometric leg. What remains: no
+  labelling, no fed-DX control, and a chemically awkward re-hydration of 3-DX's C-3 (the dehydration that formed
+  3-DX is normally irreversible) [Z]. My P that Wei's TTCA comes mainly from ARP reversion / xylose rather than DX
+  trapping goes from ~0.65 to **~0.55**.
+- m/z 254 cannot distinguish TTCA from the Cys-ARP (same formula and same MS/MS ions, Zhai 2021 SI Table S1) or
+  from an un-dehydrated DX-Cys adduct. Wei's TTCA identity rests on retention time against a standard, and the
+  standard is not described (sec. 3 flag) [!].
+- The same "2 H short" wording was propagated to the pathway atlas: `F04_thiazolidine_ttca.yml` (Wei cell contrast,
+  "Scheme 2 is 2 H short") and `F03_amadori_reversion.yml` ("(Scheme 2 is 2 H short)"). Both need the correction in
+  an atlas wave (not edited here).

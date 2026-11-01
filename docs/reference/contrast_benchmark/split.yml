@@ -4,6 +4,7 @@
 # needs a new, dated, reasoned version (see README.md), never an edit of this file.
 version: contrast_split_v1
 frozen_on: '2026-11-01'
+frozen_at_commit: ce368528
 sha256: 022d0cab5a53ececb27a1fc6837ff275fbab177cf2161ae1f8a4ed0341f273a7
 hash_rule: sha256 of json.dumps(split, sort_keys=True, separators=(',', ':'), ensure_ascii=True)
 rule: DEVELOPMENT = every atlas cell cited (by file + index, or by naming its study or laboratory) in ENGINE_VS_LITERATURE.md
