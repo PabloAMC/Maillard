@@ -1,4 +1,5 @@
 # Zhai et al. 2021 — EXTRACTION (TTCA degradation kinetics, with and without extra xylose)
+DOI: 10.1021/acs.jafc.1c03727 (Crossref 2026-11-01: same title, Zhai / Cui / Zhang / Hayat / Wu / Deng / Zhang / Ho, J. Agric. Food Chem. 69(36), 10648-10656, 2021)
 ### 2-Threityl-thiazolidine-4-carboxylic acid 10 mM at pH 5.5 / 6 / 7 / 8, 100 / 120 / 140 C, 20-120 min.
 
 **Source on disk:** `data/articles/zhai2021.pdf` (owner's download, 2026-09-07). Read-only extraction,
@@ -307,3 +308,46 @@ unre-measured pH, unstated vessel/heat-up, 3-DX/1-DX absolute scale tied to a di
 and error bars missing for five of eight TTCA series.
 
 
+
+## Supplementary Information (read 2026-11-01)
+
+**File:** `data/articles/zhai2021_supplementary.pdf` (6 pp., S1-S6: author addresses, Figs. S1-S2, Table S1; ACS
+SI jf1c03727_si_001). Read from the text layer and 130 dpi renders of every page (scratchpad `ing1101/zs-*.png`).
+Tags as in the legend of the main sections ([M] printed, [F] read off a figure, [Z] derived, [!] flag).
+
+**Contents.** Fig. S1: TIC of purified ARP (A, peak 1.82 min) and TTCA (C, peak 1.25 min) with their positive-ion
+MS/MS spectra (B, D). Fig. S2: MS/MS of 13C5-TTCA (precursor m/z 259). Table S1: 13C NMR shifts and MS/MS ions of
+TTCA and the Cys-Amadori compound (ARP) [M].
+
+**The three questions.**
+1. **13C5-xylose label fraction in TTCA (CF-076 / CF-091): NOT in the SI** (confidence ~97 %). No m/z 259 / 254
+   ratio, no time course, no table of labelled vs unlabelled TTCA. Fig. S2 is a single MS/MS spectrum of the m/z 259
+   precursor (sample "20201030-13a", retention 0.896 min, base intensity 645 counts against 2.3-2.5 × 10³ for the
+   unlabelled standards in Fig. S1) [M]. It shows that 13C5-TTCA WAS detected directly by MS/MS: product ions 259.07,
+   223.06 (= 218 + 5), 205.06 (= 200 + 5), 166.05, 148.03, and an unlabelled 122.03 (cysteine) [M].
+   **For CF-091:** direct LC-MS/MS detection of the labelled ion is shown; quantitation is not. This weakly favours
+   explanation 1 ("direct quantitation, the Methods misdescribe it") over 2, P shift ~+0.05 at most; the author
+   request for the m/z 259 / 254 area ratios stands.
+2. **Final pH of the unbuffered pots: NOT in the SI.** Nothing on pH at all.
+3. **Anything quantitative the main text lacks:** only the identities. Table S1 (TTCA): 13C 174.40 (C1, COOH),
+   75.07 (C6), 74.42 (C5), 72.92 (C7), 69.77 (C2), 67.48 (C4), 64.83 (C8), 35.60 (C3) ppm; ions 254 [M+H]⁺, 236
+   [M+H-H2O]⁺, 218 [M+H-2H2O]⁺, 200 [M+H-3H2O]⁺, 188 [M+H-2H2O-CH2O]⁺. Cys-ARP: two structures (open-chain keto /
+   cyclic thiazinane-type, and a pyranose N-glycoside) with their 13C sets, and **the same five MS/MS ions** [M].
+
+**Findings and flags.**
+- **TTCA's formula is C8H15NO6S, [M+H]⁺ 254 (M 253)** [M: Fig. S1 header "C8H15NO6S", Table S1]. TTCA and the
+  Cys-ARP are isomers with identical MS/MS ion lists (Table S1); the paper separates them only by retention time
+  (1.25 vs 1.82 min, Fig. S1) [M/Z]. Any MS-only "TTCA" assignment elsewhere (Wei 2022 Fig. S3) cannot tell the two
+  apart without a retention-time match.
+- [!] Fig. S1 B (ARP) and D (TTCA) list the same ions (122.01, 115.03, 146.01, 164.02, 200.02, 218.02, 219.04,
+  254.03, 255.06) with somewhat different intensities (254 at ~73 % in B, ~85 % in D, +-5 % [F]); the hidden text layer
+  labels both spectra from a file "ARP1" (scans 53 / 55 at 0.925 / 0.960 min), neither at the TIC peaks. A lead
+  that panel D may not be from the TTCA run; low weight (the layer may be a leftover of the figure template).
+- [!] Table S1 prints ONE set of 13C shifts for TTCA. Radomski & Temeriusz 1989 (`radomski1989_extraction.md`,
+  compound 10) find TTCA in water as two C-2 epimers, 2R : 2S = 4.06 at 37 °C, each with its own 13C set (ring C-2
+  67.83 / 66.97, C-4 65.56 / 65.13 ppm). Zhai's 67.48 / 69.77 / 35.60 are close to Radomski's ring carbons (C-4
+  assignment differs by ~4 ppm); the minor epimer is not reported. Not a conflict in the kinetics (the HPLC peak is
+  presumably the epimer sum).
+- **New disagreement (sec. 2 "natural pH 5.5")**: a pure TTCA zwitterion at 10 mM should sit at pH ~3.7-4.5
+  (radomski1989 dossier sec. 6; Radomski's sugar thiazolidines at ~20 mM read 3.7-4.0). Zhai's "natural pH 5.5"
+  implies the purified TTCA (made at pH 7.4) carries base (a partial salt). Nothing in the SI resolves it.

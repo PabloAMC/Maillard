@@ -1,0 +1,21 @@
+# SOURCE VERIFICATION -- Zamora, Leon & Hidalgo 2015, J Agric Food Chem 63 (accepted manuscript; zamora2015.pdf), Table 1 (TEST table data/lit/fit_rows/heldout_zamora2015_tab1.yml; contrast benchmark error E7). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_zamora2015_tab1.yml, fit_rows/second/heldout_zamora2015_tab1.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl'
+  source_file: 'zamora2015.pdf'
+  location: 'Table 1, MS p. 20; Methods MS p. 5'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: 'mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C. ... Values are mean +- SD values (in nmol/umol of phennylalanine) of, at least, three independent experiments.'
+  notes: '139 numeric cells (3 products x 12 lipid rows x pH 3 / 6 x N2 / air; 5 zero cells not rows). CONDITIONS corrected: buffer identity from the figure captions; 140 C / 1 h from the Methods default; low-moisture sand model.'
+  adjudication: 'All 144 cells identical in both readings. No row dropped.'

@@ -1,0 +1,21 @@
+# SOURCE VERIFICATION -- Liu et al. 2023, LWT 182:114874 (Liu2023b.pdf), Table 3 (TEST table data/lit/fit_rows/heldout_liu2023b_tab3.yml; contrast benchmark errors E6, E11). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_liu2023b_tab3.yml, fit_rows/second/heldout_liu2023b_tab3.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'liu2023b_carbon_module_labelling'
+  source_file: 'Liu2023b.pdf'
+  location: 'Table 3, p. 5; Sec. 2.2 and 2.7, p. 2-3'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: '(b) an equimolar 13C unlabeled/labeled ribose (1:1) and cysteine. The cysteine and ribose were prepared with a weight ratio of 10.10. These chemical reagents were placed into a potassium phosphate tribasic buffer (0.5 mol/L) in a synthware glass vial. Subsequently, the reactants were kept at 168 C for 20-60 min.'
+  notes: '203 isotopologue cells (10 compounds x 20 / 40 / 60 min x [M]+ ... [M+6]+; furan at 20 min not detected). CONDITIONS corrected: ''tribasic'' buffer at pH 5.88 is internally inconsistent (species unresolved); reactant amounts not printed. The queue''s ''text_only'' status is wrong: Table 3 is printed.'
+  adjudication: 'All 210 printed cells identical in both readings. No row dropped.'

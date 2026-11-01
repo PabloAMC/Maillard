@@ -1,0 +1,390 @@
+# KEYED TEST TABLE -- Meynier A & Mottram DS 1995, Food Chem 52:361-366 (University of Reading, Mottram), 'The effect of pH on the
+# formation of volatile compounds in meat-related model systems': Tables 1 (glycine), 2 (lysine) and 4 (methionine) + D-ribose, five
+# pH arms 4.5 - 6.5 each, 0.2 M pyrophosphate, 140 C / 1 h, sealed ampoules. Three keying units of docs/reference/contrast_benchmark/
+# keying_queue.yml (ranks 1, 14, 15), one paper, one table file.
+# PURPOSE: TEST data for the contrast benchmark, engine error E4 ('pyrazine pH law on the Strecker step'; docs/reference/contrast_benchmark/
+# split_v2_per_change.yml): MPZ and 2,5-DMP vs pH with glycine and lysine (Tables 1, 2); methional (Strecker aldehyde of Met) vs pH for
+# E4 and E3 ('no Strecker-aldehyde lane'; Table 4). Furfural, norfuraneol and furfuryl alcohol fall with pH in every table (context for
+# the pentose lane). NEVER a fit input: fit_rows.load refuses every row (unit ug_per_10mg_ribose is not in fit_rows.UNITS; most species
+# are coined keys); keep it so. The laboratory (Reading) is DEV for E8 and E20 but a NEW TEST lab for E4.
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS). Ledger entries: meynier1995_table1_gly_ribose_ph_ladder,
+# meynier1995_table2_lys_ribose_ph_ladder (data/lit/measurement_ledger/aroma_other.yml), meynier1995_table4_met_ribose_ph_ladder
+# (sulfur.yml); quantification semi-quantitative (octadecane IS added to the SDE ether, response factors NOT determined: between-arm
+# ratios only). Table 3 (cysteine) is not part of these units.
+#
+# READERS (2026-11-01), independent and in parallel: reader A (agent-readerA-2026-11-01; 300 dpi 1-bit scan, OCR checked against the
+# rendered strips) and reader B (agent-readerB-2026-11-01; 200 ppi render read visually, pdftotext as a cross-check). Raw files: the
+# coordinator's scratchpad (queue_reader_A.yml, queue_reader_B.yml); B's rows as written: fit_rows/second/heldout_meynier1995_tab1_2_4.yml.
+# ADJUDICATION (agent-queue-adjudicator-2026-11-01): table cells, so value = the printed cell. A and B agree on all 105 cells
+# (30 + 35 + 40), including every nd / tr. The OCR text layer of Table 1 is scrambled (furan rows interleaved); both readers read the
+# image. Read error = half the last printed digit (0.05 ug) in dex; no SD is printed (triplicate analyses, CV < 20 % except some
+# low-concentration compounds).
+#
+# RESOLUTIONS OF THE FLAGGED AMBIGUITIES (re-read on a 300 dpi render of p. 364, 2026-11-01):
+#  (1) Methional identity. Table 4 prints '3-(Methylthio)propanol' at LRI 903 (confirmed on the render). The abstract ('dimethyl
+#      disulphide and 3-(methylthio)propanal ... the latter compound showed a small decrease') and the discussion ('Methional was the
+#      most abundant volatile ... decreased slightly in concentration as the pH increased') describe exactly this row (167.2 -> 90.0);
+#      LRI 903 on DB-5 fits methional (~905), not methionol (~980). RESOLVED as methional, species MTAL (P ~0.9); each row keeps the
+#      printed label. The series is not monotone (167.2, 98.6, 138.2, 109.1, 90.0): only the end points carry the 'slight decrease'.
+#  (2) DMDS cells. Confirmed on the render: '24.82' at pH 5.5 (two decimals, every other cell one) and '8.6' at pH 6.0. 24.82 is kept
+#      (24.8 or 24.82 differ by 0.0004 dex; precision taken as 0.05). 8.6 breaks the rise the text states ('while the dimethyl
+#      disulphide increased': 16.2, 22.2, 24.8, -, 41.9) by ~3x; a misprint (28.6?) is plausible but not provable: DROPPED (below).
+#      DMDS and DMTS are tentative identifications (footnote a).
+#  (3) Reactant amounts. The printed 100 mM amino acid + 70 mM ribose is the stock BEFORE the 25 -> 50 mL make-up; in-pot 50 + 35 mM
+#      (INFERRED, P ~0.85: the 'ug / 10 mg ribose' basis is a 2 mL aliquot at 35 mM ribose = 10.5 mg; at 70 mM it would be 21 mg). Lysine
+#      carries two amino groups (100 mM amine N in the lysine pots). The pH is set at room temperature before heating; the per-pot
+#      measured pH after heating is not printed (within 0.2 unit).
+# DROPPED (1 cell): Table 4, dimethyl disulphide, pH 6.0, printed 8.6 (reason above).
+# NOT ROWS: 'nd' (not detected, LOD c. 10 ng / 10 mg ribose) and 'tr' (< 0.1 ug / 10 mg ribose) cells; each pot lists them under
+# not_detected / trace_below_0p1 for sign and onset contrasts (the pyrazines are nd at pH 4.5 and 5.0 with glycine, nd at 4.5 with
+# lysine, and nd / tr at every pH with methionine).
+# NEW SPECIES KEYS (coined, not engine species; listed per pot under engine_species_missing): LYS free L-lysine; V_FURFURYL_ALCOHOL
+# 2-furylmethanol; V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE; V_2_ETHYL_4_METHYLPYRIDINE and V_A_DIMETHYLPYRIDINE (tentative);
+# V_2_FURYLMETHYL_METHYL_SULPHIDE; V_DIMETHYL_TRISULPHIDE (tentative). Engine keys: MPZ, DMP, FUR, NF, MTAL, DMDS, Gly, MET, PENT.
+status: ready   # two readers + adjudication (2026-11-01); TEST data, never a fit input: fit_rows.load refuses every row (units outside fit_rows.UNITS)
+purpose: 'TEST data for the contrast benchmark, engine error E4 (pyrazine pH law on the Strecker step; Tables 1, 2, 4) and E3 (no Strecker-aldehyde lane; Table 4 methional) (keying_queue.yml ranks 1, 14, 15); never a fit input'
+pots:
+  meynier1995_gly_ribose_pH4p5:
+    {ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder',
+     engine_species_missing: ['V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {Gly: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 4.5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: ['DMP', 'MPZ', 'V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE'],
+     trace_below_0p1: [],
+     source_table: 'Table 1 (p. 363), column pH 4.5: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_gly_ribose_pH5p0:
+    {ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder',
+     engine_species_missing: ['V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {Gly: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: ['DMP', 'MPZ'],
+     trace_below_0p1: [],
+     source_table: 'Table 1 (p. 363), column pH 5.0: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_gly_ribose_pH5p5:
+    {ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder',
+     engine_species_missing: ['V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {Gly: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 5.5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: [],
+     trace_below_0p1: [],
+     source_table: 'Table 1 (p. 363), column pH 5.5: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_gly_ribose_pH6p0:
+    {ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder',
+     engine_species_missing: ['V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {Gly: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 6,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: [],
+     trace_below_0p1: [],
+     source_table: 'Table 1 (p. 363), column pH 6.0: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_gly_ribose_pH6p5:
+    {ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder',
+     engine_species_missing: ['V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {Gly: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 6.5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: [],
+     trace_below_0p1: ['FUR'],
+     source_table: 'Table 1 (p. 363), column pH 6.5: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_lys_ribose_pH4p5:
+    {ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder',
+     engine_species_missing: ['LYS', 'V_2_ETHYL_4_METHYLPYRIDINE', 'V_A_DIMETHYLPYRIDINE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {LYS: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 4.5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: ['DMP', 'MPZ'],
+     trace_below_0p1: [],
+     source_table: 'Table 2 (p. 363), column pH 4.5: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_lys_ribose_pH5p0:
+    {ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder',
+     engine_species_missing: ['LYS', 'V_2_ETHYL_4_METHYLPYRIDINE', 'V_A_DIMETHYLPYRIDINE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {LYS: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: [],
+     trace_below_0p1: [],
+     source_table: 'Table 2 (p. 363), column pH 5.0: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_lys_ribose_pH5p5:
+    {ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder',
+     engine_species_missing: ['LYS', 'V_2_ETHYL_4_METHYLPYRIDINE', 'V_A_DIMETHYLPYRIDINE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {LYS: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 5.5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: [],
+     trace_below_0p1: ['FUR'],
+     source_table: 'Table 2 (p. 363), column pH 5.5: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_lys_ribose_pH6p0:
+    {ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder',
+     engine_species_missing: ['LYS', 'V_2_ETHYL_4_METHYLPYRIDINE', 'V_A_DIMETHYLPYRIDINE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {LYS: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 6,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: ['FUR'],
+     trace_below_0p1: [],
+     source_table: 'Table 2 (p. 363), column pH 6.0: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_lys_ribose_pH6p5:
+    {ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder',
+     engine_species_missing: ['LYS', 'V_2_ETHYL_4_METHYLPYRIDINE', 'V_A_DIMETHYLPYRIDINE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {LYS: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 6.5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: ['FUR'],
+     trace_below_0p1: [],
+     source_table: 'Table 2 (p. 363), column pH 6.5: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_met_ribose_pH4p5:
+    {ledger_id: 'meynier1995_table4_met_ribose_ph_ladder',
+     engine_species_missing: ['V_2_FURYLMETHYL_METHYL_SULPHIDE', 'V_DIMETHYL_TRISULPHIDE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {MET: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 4.5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: ['MPZ'],
+     trace_below_0p1: [],
+     source_table: 'Table 4 (p. 364), column pH 4.5: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_met_ribose_pH5p0:
+    {ledger_id: 'meynier1995_table4_met_ribose_ph_ladder',
+     engine_species_missing: ['V_2_FURYLMETHYL_METHYL_SULPHIDE', 'V_DIMETHYL_TRISULPHIDE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {MET: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: ['MPZ'],
+     trace_below_0p1: [],
+     source_table: 'Table 4 (p. 364), column pH 5.0: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_met_ribose_pH5p5:
+    {ledger_id: 'meynier1995_table4_met_ribose_ph_ladder',
+     engine_species_missing: ['V_2_FURYLMETHYL_METHYL_SULPHIDE', 'V_DIMETHYL_TRISULPHIDE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {MET: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 5.5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: ['MPZ'],
+     trace_below_0p1: [],
+     source_table: 'Table 4 (p. 364), column pH 5.5: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_met_ribose_pH6p0:
+    {ledger_id: 'meynier1995_table4_met_ribose_ph_ladder',
+     engine_species_missing: ['V_2_FURYLMETHYL_METHYL_SULPHIDE', 'V_DIMETHYL_TRISULPHIDE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {MET: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 6,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: ['MPZ'],
+     trace_below_0p1: [],
+     source_table: 'Table 4 (p. 364), column pH 6.0: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+  meynier1995_met_ribose_pH6p5:
+    {ledger_id: 'meynier1995_table4_met_ribose_ph_ladder',
+     engine_species_missing: ['V_2_FURYLMETHYL_METHYL_SULPHIDE', 'V_DIMETHYL_TRISULPHIDE', 'V_FURFURYL_ALCOHOL'],
+     t_c: 140,
+     minutes: 60,
+     initial_mmol_L: {MET: 50, PENT: 35},
+     concentration_basis: 'INFERRED in-pot: the printed 100 mM amino acid + 70 mM ribose is the stock, 25 mL made up to 50 mL with buffer = 50 + 35 mM; the table basis (ug per 10 mg ribose) matches a 2 mL aliquot at 35 mM (10.5 mg), not at 70 mM (21 mg): P ~0.85',
+     conditions_inferred: true,
+     label_ph: 6.5,
+     ph_measured_at: 'after cooling (room temperature); per-pot value not printed; ''no change of more than 0.2 pH unit occurred after heating''',
+     buffer: '0.2 M sodium pyrophosphate (Na2H2P2O7 stock, pH set with Na4P2O7 0.2 M)',
+     atmosphere: 'not stated (sealed ampoule, air headspace presumed)',
+     vessel: 'sealed glass ampoules, heated under pressure',
+     not_detected: [],
+     trace_below_0p1: ['MPZ'],
+     source_table: 'Table 4 (p. 364), column pH 6.5: ug / 10 mg ribose, ''approximate quantities'' (octadecane IS, response factors not determined), mean of 3 replicates, no SD',
+     condition_quote: 'Methods: ''an aqueous solution containing the amino acid (100 mM) and ribose (70 mM) was prepared in disodium pyrophosphate (0.2 M). Five portions of 25 ml were placed in 50 ml volumetric flasks, and the pH was adjusted ... using tetrasodium pyrophosphate (0.2 M). The final volumes were then adjusted to 50 ml ... heated in sealed glass ampoules at 140 C under pressure for 1 h''; ''no change of more than 0.2 pH unit occurred after heating'''}
+rows:
+  - {pot: 'meynier1995_gly_ribose_pH4p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 151, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2-Furfural (831), pH 4.5: 151.0; readers A and B identical', read_error: 0.00014, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH4p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 1.2, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2-Furylmethanol (855), pH 4.5: 1.2; readers A and B identical', read_error: 0.0181, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH4p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'NF', t_min: 60, value: 12.9, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (1042), pH 4.5: 12.9; readers A and B identical', read_error: 0.0017, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 10.1, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2-Furfural (831), pH 5.0: 10.1; readers A and B identical', read_error: 0.0021, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 3, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2-Furylmethanol (855), pH 5.0: 3.0; readers A and B identical', read_error: 0.0072, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE', t_min: 60, value: 0.4, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 4,5-Dihydro-2-methyl-3(2H)-furanone (805), pH 5.0: 0.4; readers A and B identical', read_error: 0.0543, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'NF', t_min: 60, value: 5.2, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (1042), pH 5.0: 5.2; readers A and B identical', read_error: 0.0042, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'MPZ', t_min: 60, value: 0.3, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), Methylpyrazine (824), pH 5.5: 0.3; readers A and B identical', read_error: 0.0724, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'DMP', t_min: 60, value: 0.5, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2,5-dimethylpyrazine (912), pH 5.5: 0.5; readers A and B identical', read_error: 0.0434, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 3.6, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2-Furfural (831), pH 5.5: 3.6; readers A and B identical', read_error: 0.006, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 2.9, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2-Furylmethanol (855), pH 5.5: 2.9; readers A and B identical', read_error: 0.0075, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE', t_min: 60, value: 0.6, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 4,5-Dihydro-2-methyl-3(2H)-furanone (805), pH 5.5: 0.6; readers A and B identical', read_error: 0.0362, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH5p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'NF', t_min: 60, value: 5.5, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (1042), pH 5.5: 5.5; readers A and B identical', read_error: 0.0039, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'MPZ', t_min: 60, value: 0.5, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), Methylpyrazine (824), pH 6.0: 0.5; readers A and B identical', read_error: 0.0434, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'DMP', t_min: 60, value: 3, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2,5-dimethylpyrazine (912), pH 6.0: 3.0; readers A and B identical', read_error: 0.0072, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 0.3, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2-Furfural (831), pH 6.0: 0.3; readers A and B identical', read_error: 0.0724, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 4.3, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2-Furylmethanol (855), pH 6.0: 4.3; readers A and B identical', read_error: 0.005, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE', t_min: 60, value: 1.5, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 4,5-Dihydro-2-methyl-3(2H)-furanone (805), pH 6.0: 1.5; readers A and B identical', read_error: 0.0145, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p0', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'NF', t_min: 60, value: 1.2, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (1042), pH 6.0: 1.2; readers A and B identical', read_error: 0.0181, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'MPZ', t_min: 60, value: 0.7, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), Methylpyrazine (824), pH 6.5: 0.7; readers A and B identical', read_error: 0.031, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'DMP', t_min: 60, value: 4, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2,5-dimethylpyrazine (912), pH 6.5: 4.0; readers A and B identical', read_error: 0.0054, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 3.4, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 2-Furylmethanol (855), pH 6.5: 3.4; readers A and B identical', read_error: 0.0064, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'V_4_5_DIHYDRO_2_METHYL_3_2H_FURANONE', t_min: 60, value: 1.2, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 4,5-Dihydro-2-methyl-3(2H)-furanone (805), pH 6.5: 1.2; readers A and B identical', read_error: 0.0181, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_gly_ribose_pH6p5', ledger_id: 'meynier1995_table1_gly_ribose_ph_ladder', species: 'NF', t_min: 60, value: 0.8, unit: 'ug_per_10mg_ribose', printed: 'Table 1 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (1042), pH 6.5: 0.8; readers A and B identical', read_error: 0.0271, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH4p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_2_ETHYL_4_METHYLPYRIDINE', t_min: 60, value: 0.9, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-ethyl-4-methylpyridine (LRI 1134; tentative), pH 4.5: 0.9; readers A and B identical', read_error: 0.0241, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH4p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_A_DIMETHYLPYRIDINE', t_min: 60, value: 0.9, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), A dimethylpyridine (LRI 1262; tentative), pH 4.5: 0.9; readers A and B identical', read_error: 0.0241, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH4p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 10.7, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-Furfural (LRI 831), pH 4.5: 10.7; readers A and B identical', read_error: 0.002, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH4p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 1.4, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-Furylmethanol (LRI 855), pH 4.5: 1.4; readers A and B identical', read_error: 0.0155, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH4p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'NF', t_min: 60, value: 8.1, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 4.5: 8.1; readers A and B identical', read_error: 0.0027, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'MPZ', t_min: 60, value: 0.4, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), Methylpyrazine (LRI 824), pH 5.0: 0.4; readers A and B identical', read_error: 0.0543, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'DMP', t_min: 60, value: 0.1, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2,5-Dimethylpyrazine (LRI 912), pH 5.0: 0.1; readers A and B identical', read_error: 0.2171, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_2_ETHYL_4_METHYLPYRIDINE', t_min: 60, value: 1.4, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-ethyl-4-methylpyridine (LRI 1134; tentative), pH 5.0: 1.4; readers A and B identical', read_error: 0.0155, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_A_DIMETHYLPYRIDINE', t_min: 60, value: 1.2, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), A dimethylpyridine (LRI 1262; tentative), pH 5.0: 1.2; readers A and B identical', read_error: 0.0181, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 4, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-Furfural (LRI 831), pH 5.0: 4.0; readers A and B identical', read_error: 0.0054, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 1, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-Furylmethanol (LRI 855), pH 5.0: 1.0; readers A and B identical', read_error: 0.0217, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'NF', t_min: 60, value: 7.1, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 5.0: 7.1; readers A and B identical', read_error: 0.0031, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'MPZ', t_min: 60, value: 1.3, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), Methylpyrazine (LRI 824), pH 5.5: 1.3; readers A and B identical', read_error: 0.0167, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'DMP', t_min: 60, value: 0.6, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2,5-Dimethylpyrazine (LRI 912), pH 5.5: 0.6; readers A and B identical', read_error: 0.0362, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_2_ETHYL_4_METHYLPYRIDINE', t_min: 60, value: 2.5, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-ethyl-4-methylpyridine (LRI 1134; tentative), pH 5.5: 2.5; readers A and B identical', read_error: 0.0087, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_A_DIMETHYLPYRIDINE', t_min: 60, value: 1.8, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), A dimethylpyridine (LRI 1262; tentative), pH 5.5: 1.8; readers A and B identical', read_error: 0.0121, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 1.4, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-Furylmethanol (LRI 855), pH 5.5: 1.4; readers A and B identical', read_error: 0.0155, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH5p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'NF', t_min: 60, value: 7.3, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 5.5: 7.3; readers A and B identical', read_error: 0.003, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'MPZ', t_min: 60, value: 4.1, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), Methylpyrazine (LRI 824), pH 6.0: 4.1; readers A and B identical', read_error: 0.0053, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'DMP', t_min: 60, value: 2.8, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2,5-Dimethylpyrazine (LRI 912), pH 6.0: 2.8; readers A and B identical', read_error: 0.0078, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_2_ETHYL_4_METHYLPYRIDINE', t_min: 60, value: 3.4, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-ethyl-4-methylpyridine (LRI 1134; tentative), pH 6.0: 3.4; readers A and B identical', read_error: 0.0064, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_A_DIMETHYLPYRIDINE', t_min: 60, value: 5.6, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), A dimethylpyridine (LRI 1262; tentative), pH 6.0: 5.6; readers A and B identical', read_error: 0.0039, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 1.9, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-Furylmethanol (LRI 855), pH 6.0: 1.9; readers A and B identical', read_error: 0.0114, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p0', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'NF', t_min: 60, value: 1.4, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 6.0: 1.4; readers A and B identical', read_error: 0.0155, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'MPZ', t_min: 60, value: 4.6, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), Methylpyrazine (LRI 824), pH 6.5: 4.6; readers A and B identical', read_error: 0.0047, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'DMP', t_min: 60, value: 5, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2,5-Dimethylpyrazine (LRI 912), pH 6.5: 5.0; readers A and B identical', read_error: 0.0043, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_2_ETHYL_4_METHYLPYRIDINE', t_min: 60, value: 5.4, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-ethyl-4-methylpyridine (LRI 1134; tentative), pH 6.5: 5.4; readers A and B identical', read_error: 0.004, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_A_DIMETHYLPYRIDINE', t_min: 60, value: 6.5, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), A dimethylpyridine (LRI 1262; tentative), pH 6.5: 6.5; readers A and B identical', read_error: 0.0033, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 1.9, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 2-Furylmethanol (LRI 855), pH 6.5: 1.9; readers A and B identical', read_error: 0.0114, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_lys_ribose_pH6p5', ledger_id: 'meynier1995_table2_lys_ribose_ph_ladder', species: 'NF', t_min: 60, value: 1.3, unit: 'ug_per_10mg_ribose', printed: 'Table 2 (p. 363), 4-Hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 6.5: 1.3; readers A and B identical', read_error: 0.0167, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH4p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 92.4, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furfural (LRI 831), pH 4.5: 92.4; readers A and B identical', read_error: 0.00024, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH4p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 3.1, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethanol (LRI 855), pH 4.5: 3.1; readers A and B identical', read_error: 0.007, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH4p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'NF', t_min: 60, value: 3.1, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 4-hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 4.5: 3.1; readers A and B identical', read_error: 0.007, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH4p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_2_FURYLMETHYL_METHYL_SULPHIDE', t_min: 60, value: 2.5, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethyl methyl sulphide (LRI 1002), pH 4.5: 2.5; readers A and B identical', read_error: 0.0087, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH4p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'DMDS', t_min: 60, value: 16.2, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), Dimethyl disulphide (LRI 727; tentative ID), pH 4.5: 16.2; readers A and B identical', read_error: 0.0013, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_met_ribose_pH4p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'MTAL', t_min: 60, value: 167.2, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 3-(Methylthio)propanol [as printed; LRI 903; text calls it methional], pH 4.5: 167.2; readers A and B identical', read_error: 0.00013, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identity: 'printed label ''3-(Methylthio)propanol'' read as methional (3-(methylthio)propanal), P ~0.9: abstract and discussion name methional the most abundant product, decreasing slightly with pH (this row); LRI 903 on DB-5 fits methional (~905), not methionol (~980)'}
+  - {pot: 'meynier1995_met_ribose_pH4p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_DIMETHYL_TRISULPHIDE', t_min: 60, value: 0.5, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), Dimethyl trisulphide (LRI 965; tentative ID), pH 4.5: 0.5; readers A and B identical', read_error: 0.0434, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_met_ribose_pH5p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 10.5, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furfural (LRI 831), pH 5.0: 10.5; readers A and B identical', read_error: 0.0021, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH5p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 3.4, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethanol (LRI 855), pH 5.0: 3.4; readers A and B identical', read_error: 0.0064, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH5p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'NF', t_min: 60, value: 2.1, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 4-hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 5.0: 2.1; readers A and B identical', read_error: 0.0103, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH5p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_2_FURYLMETHYL_METHYL_SULPHIDE', t_min: 60, value: 3.2, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethyl methyl sulphide (LRI 1002), pH 5.0: 3.2; readers A and B identical', read_error: 0.0068, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH5p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'DMDS', t_min: 60, value: 22.2, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), Dimethyl disulphide (LRI 727; tentative ID), pH 5.0: 22.2; readers A and B identical', read_error: 0.00098, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_met_ribose_pH5p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'MTAL', t_min: 60, value: 98.6, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 3-(Methylthio)propanol [as printed; LRI 903; text calls it methional], pH 5.0: 98.6; readers A and B identical', read_error: 0.00022, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identity: 'printed label ''3-(Methylthio)propanol'' read as methional (3-(methylthio)propanal), P ~0.9: abstract and discussion name methional the most abundant product, decreasing slightly with pH (this row); LRI 903 on DB-5 fits methional (~905), not methionol (~980)'}
+  - {pot: 'meynier1995_met_ribose_pH5p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_DIMETHYL_TRISULPHIDE', t_min: 60, value: 0.6, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), Dimethyl trisulphide (LRI 965; tentative ID), pH 5.0: 0.6; readers A and B identical', read_error: 0.0362, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_met_ribose_pH5p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 3.2, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furfural (LRI 831), pH 5.5: 3.2; readers A and B identical', read_error: 0.0068, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH5p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 3.6, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethanol (LRI 855), pH 5.5: 3.6; readers A and B identical', read_error: 0.006, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH5p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'NF', t_min: 60, value: 1.1, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 4-hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 5.5: 1.1; readers A and B identical', read_error: 0.0197, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH5p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_2_FURYLMETHYL_METHYL_SULPHIDE', t_min: 60, value: 5.5, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethyl methyl sulphide (LRI 1002), pH 5.5: 5.5; readers A and B identical', read_error: 0.0039, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH5p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'DMDS', t_min: 60, value: 24.82, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), Dimethyl disulphide (LRI 727; tentative ID), pH 5.5: 24.82; readers A and B identical', read_error: 0.00087, read_error_basis: 'half the last printed digit (0.05), in dex; the cell prints two decimals where every other cell prints one (24.82 as printed, precision taken as 0.05)', flag: '24.82: two decimals, unlike every other cell; kept as printed', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_met_ribose_pH5p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'MTAL', t_min: 60, value: 138.2, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 3-(Methylthio)propanol [as printed; LRI 903; text calls it methional], pH 5.5: 138.2; readers A and B identical', read_error: 0.00016, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identity: 'printed label ''3-(Methylthio)propanol'' read as methional (3-(methylthio)propanal), P ~0.9: abstract and discussion name methional the most abundant product, decreasing slightly with pH (this row); LRI 903 on DB-5 fits methional (~905), not methionol (~980)'}
+  - {pot: 'meynier1995_met_ribose_pH5p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_DIMETHYL_TRISULPHIDE', t_min: 60, value: 0.6, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), Dimethyl trisulphide (LRI 965; tentative ID), pH 5.5: 0.6; readers A and B identical', read_error: 0.0362, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_met_ribose_pH6p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 2.1, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furfural (LRI 831), pH 6.0: 2.1; readers A and B identical', read_error: 0.0103, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH6p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 4, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethanol (LRI 855), pH 6.0: 4.0; readers A and B identical', read_error: 0.0054, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH6p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'NF', t_min: 60, value: 1.2, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 4-hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 6.0: 1.2; readers A and B identical', read_error: 0.0181, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH6p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_2_FURYLMETHYL_METHYL_SULPHIDE', t_min: 60, value: 7.6, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethyl methyl sulphide (LRI 1002), pH 6.0: 7.6; readers A and B identical', read_error: 0.0029, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH6p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'MTAL', t_min: 60, value: 109.1, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 3-(Methylthio)propanol [as printed; LRI 903; text calls it methional], pH 6.0: 109.1; readers A and B identical', read_error: 0.0002, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identity: 'printed label ''3-(Methylthio)propanol'' read as methional (3-(methylthio)propanal), P ~0.9: abstract and discussion name methional the most abundant product, decreasing slightly with pH (this row); LRI 903 on DB-5 fits methional (~905), not methionol (~980)'}
+  - {pot: 'meynier1995_met_ribose_pH6p0', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_DIMETHYL_TRISULPHIDE', t_min: 60, value: 0.5, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), Dimethyl trisulphide (LRI 965; tentative ID), pH 6.0: 0.5; readers A and B identical', read_error: 0.0434, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_met_ribose_pH6p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'FUR', t_min: 60, value: 1.9, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furfural (LRI 831), pH 6.5: 1.9; readers A and B identical', read_error: 0.0114, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH6p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_FURFURYL_ALCOHOL', t_min: 60, value: 4.9, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethanol (LRI 855), pH 6.5: 4.9; readers A and B identical', read_error: 0.0044, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH6p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'NF', t_min: 60, value: 1.8, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 4-hydroxy-5-methyl-3(2H)-furanone (LRI 1042), pH 6.5: 1.8; readers A and B identical', read_error: 0.0121, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH6p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_2_FURYLMETHYL_METHYL_SULPHIDE', t_min: 60, value: 7.5, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 2-Furylmethyl methyl sulphide (LRI 1002), pH 6.5: 7.5; readers A and B identical', read_error: 0.0029, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)'}
+  - {pot: 'meynier1995_met_ribose_pH6p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'DMDS', t_min: 60, value: 41.9, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), Dimethyl disulphide (LRI 727; tentative ID), pH 6.5: 41.9; readers A and B identical', read_error: 0.00052, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}
+  - {pot: 'meynier1995_met_ribose_pH6p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'MTAL', t_min: 60, value: 90, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), 3-(Methylthio)propanol [as printed; LRI 903; text calls it methional], pH 6.5: 90.0; readers A and B identical', read_error: 0.00024, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identity: 'printed label ''3-(Methylthio)propanol'' read as methional (3-(methylthio)propanal), P ~0.9: abstract and discussion name methional the most abundant product, decreasing slightly with pH (this row); LRI 903 on DB-5 fits methional (~905), not methionol (~980)'}
+  - {pot: 'meynier1995_met_ribose_pH6p5', ledger_id: 'meynier1995_table4_met_ribose_ph_ladder', species: 'V_DIMETHYL_TRISULPHIDE', t_min: 60, value: 0.5, unit: 'ug_per_10mg_ribose', printed: 'Table 4 (p. 364), Dimethyl trisulphide (LRI 965; tentative ID), pH 6.5: 0.5; readers A and B identical', read_error: 0.0434, read_error_basis: 'half the last printed digit (0.05), in dex; no SD printed (triplicate analyses, CV < 20 % stated)', identification: 'tentative (footnote a: mass spectrum vs literature spectra only)'}

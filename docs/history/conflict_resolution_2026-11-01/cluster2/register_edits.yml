@@ -1,0 +1,193 @@
+# PROPOSED edits to docs/reference/conflicts_register.yml (cluster 2, 2026-11-01). Not applied: the register's
+# single writer applies them. Evidence: scratchpad/cluster2/{prereg.md, *.py, *.out, t8_result_*.json, report.md}.
+# After applying: run scripts/generators/build_sulfur_reaction_evidence.py (lesson 2026-10-31).
+
+# ---------------------------------------------------------------------------------------------------- CF-053
+  - id: CF-053
+    kind: self_contradiction
+    scope: corpus
+    sources: [cao2017]
+    quantity: "glycine concentration of Cao 2017's glycine arms (Figs. 3-5, Table 1)"
+    observation: >-
+      Methods: "The glycine was added in the reaction systems at 0, 1, 8, 12, 16, or 24 times of the cysteine
+      concentration (mol/L)" with cysteine at 0.40 mol/L, i.e. 0.4 / 3.2 / 4.8 / 6.4 / 9.6 mol/L glycine. 9.6 mol/L
+      is 720 g/L; glycine dissolves to ~250 g/L at 25 C, so the x8-x24 arms cannot have been the stated solutions
+      at room temperature (the cao2017 dossier's Flag 1 says the same). Read against the PDF 2026-10-29 (sub-model 1
+      first reader).
+    explanations:
+      - "The multiplier may refer to something else (mmol added, or a ratio to another species); not decidable from the text."
+      - "The multiplier is literal (mol per L of buffer charged) and the solubility objection used the wrong temperature: glycine dissolves to ~62 g / 100 g water at 90 C (handbook, not on disk), so x8 (24 g / 100 g) dissolves at charging, x12 (36) and x16 (48) on heating, and x24 (72) stays saturated at ~6 M."
+    tests:
+      - >-
+        Cluster 2 (2026-11-01, scratchpad/cluster2/cf053_glycine.py, pre-registered T10): every glycine-driven response
+        rises with the nominal multiplier across x8-x24 -- log-log slopes 1.37 (excess TTCA drain 0.5-2 h over the
+        blank), 0.84 (TTCA deficit at 0.5 h), 1.04 (Gly-Amadori at 0.5 h) -- so no arm is a saturated slurry at the
+        x8 level; the x16 -> x24 segment flattens to 0.48-0.52, which is what saturation of x24 at 90 C predicts
+        (dissolved ~5.0 -> ~6.1 M, slope 0.48). The arms are consistent with the literal reading.
+    status: explained
+    remedy: >-
+      The x1-x16 arms re-enter as ORDINAL (monotone-in-glycine) rows with [Gly] the volume-corrected dissolved molarity
+      (0.39 / 2.8 / 4.0 / 5.0 mol/L; partial molar volume 43 mL/mol), flagged non-ideal (water activity, ionic strength;
+      transfer to dilute pots is order-of-magnitude only) and with a dissolution lag in the first sample for x12-x16. x24
+      stays out of every fit (saturated, ~6.1 mol/L, band 5.5-6.8); it may be reported as a saturation check. The
+      solubility numbers are handbook values from memory: verify against a cited source before any row uses them.
+      P(the literal reading is right) ~0.75.
+    affects: [cao2017_fig4c_ph, cao2017_fig4ab_cys_xyl, cao2017_fig5_ttca_cama_glyarp, cao2017_fig3_a294_a420, cao2017_table1_volatiles_3h]
+
+# ---------------------------------------------------------------------------------------------------- CF-063
+  - id: CF-063
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [zhang2025b]
+    quantity: "free xylose and cysteine loss in Zhang 2025b's blank (Figs. 2g-h): printed first-order fits vs the plotted points, and the pot's mass balance"
+    observation: >-
+      The printed rate fits do not reproduce the plotted points: extrapolated to t = 0 they imply C/C0 of 0.72 (xylose)
+      and 0.47 (cysteine), not 1, and at 50 min only about half the charged reactants are accounted for by the measured
+      species (route adjudication, 2026-10-29). [Correction: the fits are for xylose and cysteine, Figs. 2g-h, not for
+      TTCA / CAMA / Lys-ARP as the old quantity said.]
+    explanations:
+      - "The fits were made over a later window (an induction or heat-up period excluded) and the intercept was not reported."
+      - "An unmeasured sink (oligomers, bound forms) takes up the missing half, so the mass balance is open, not wrong."
+    tests:
+      - >-
+        Cluster 2 (2026-11-01, scratchpad/cluster2/cf063_refit.py, pre-registered T11). XYLOSE: the printed line (k 0.073,
+        b -0.324) is reproduced exactly by an ordinary least-squares line through the plotted t = 0 point and the 5-40 min
+        points (k 0.0729, b -0.320); the non-zero intercept is the curvature of a fast first 5 min, not a heat-up lag
+        (best lag fit puts the lag at -10 min, i.e. no lag). CYSTEINE: no contiguous window of >= 4 points, with or
+        without t = 0, reproduces (0.059, -0.760) within 15 % / 0.1; every free fit gives k 0.071-0.074 /min, b -0.20 to
+        -0.30, and the printed line misses the points by +0.23 to +0.37 (5-30 min) and -0.13 to -0.20 (40-50 min).
+        MASS BALANCE: cysteine pool (Cys + TTCA + CAMA) 69 % at 5 min, 58 % at 30 min, 52 % at 50 min; xylose pool 65 /
+        57 / 53 %. The deficit is ~12-14 mM already at 5 min and grows slowly after (to ~19 mM), and it is EQUAL for
+        cysteine and xylose at every time (12.3 vs 14.1 at 5 min, 19.4 vs 19.0 at 50 min).
+    status: explained
+    remedy: >-
+      Xylose: explained (a straight line fitted through a curved ln trace including t = 0); the constant is an apparent
+      5-40 min average and stays unused. Cysteine: the printed constant does not belong to the plotted points (paper-side
+      slip or another series' fit); never used. The route table keeps using the points. The missing half is a 1 : 1
+      cysteine : xylose pool formed within the first 5 min (equal deficits exclude cystine or H2S, which take cysteine
+      only, and sugar degradation, which takes xylose only): most likely an unmeasured Cys-Xyl adduct in fast exchange
+      (open-chain / Schiff-base / hemithioacetal or a TTCA isomer outside the MRM transition), which is CF-076's
+      question -- passed there as "a fast, reversible-looking 1 : 1 pool of ~30-50 % of the charge", not as a slow
+      irreversible sink. P(adduct rather than a destructive sink) ~0.65.
+    affects: []
+
+# ---------------------------------------------------------------------------------------------------- CF-060
+# Edit: correct the observation's "pH agree", add explanations and the cluster-2 tests; status stays open.
+  - id: CF-060
+    kind: conflict
+    scope: sulfur_rows
+    sources: [zhou2025b, zhou2024, zhou2022, zhou2023c, zhou2024b]
+    quantity: "3-deoxyxylosone and other dicarbonyls from the Ala-xylose Amadori compound (AX-ARP 20 mM, pH 7-8, 120 C)"
+    observation: >-
+      For the same nominal pot, Zhou 2024 Fig. 3 prints dicarbonyls 7-24x higher than Zhou 2025b (3-DX 3.7-5.3 vs
+      0.37-0.52 mM), while the ARP's decay is close (5.1 / 2.8 / 1.7 / 1.3 vs 3.6 / 1.8 / 1.3 / 1.0 mM at 30-120 min).
+      [Corrected 2026-11-01: the pH does NOT agree -- Zhou 2025b Fig. 3d 6.04 / 5.05 / 4.66 / 4.50 vs Zhou 2024 Fig. 3b
+      5.13 / 4.32 / 4.19 / 4.08, i.e. 2025b is 0.9 -> 0.4 units less acidic; and released Ala differs x2.2 (2025b Fig.
+      3b 11.8-14.4 vs 2024 Fig. 4 5.3-8.4 mM; read by cluster 2 from 250-300 dpi renders).] CF-019 called zhou2025b a
+      re-publication of zhou2024; it is not a re-plot. Confirmed by both sub-model 3 readers and the adjudicator, and
+      every dicarbonyl differs, not 3-DX alone: 1-DX 3.05 -> 2.14 vs 0.29 -> 0.09, GO 1.0 -> 4.9 vs 0.15 -> 0.31, MGO
+      0.47 -> 1.05 vs ~0.08 mM. Across the laboratory's FIVE AX-ARP-alone pots at 120 C the 3-deoxypentosone scale spans
+      ~10x: Zhou 2022 (pH 7) 4.3-6.1 mM, Zhou 2024b (pH 7, the methods reference of Zhou 2024) 1.4-2.1, Zhou 2023c (pH
+      7.5) 0.64-1.13, Zhou 2024 (pH 8) 3.7-5.3, Zhou 2025b (pH 8) 0.37-0.55.
+    explanations:
+      - "A unit or dilution slip in the OPD step of one paper; predicts a constant ratio across the four dicarbonyls and times, and none on Ala / ARP. The pH 8 pair is NEAR this: all four dicarbonyls +0.80 to +1.37 dex (mean 1.08, sd 0.16; 30 min 0.80-1.01), ARP +0.15, Ala -0.28."
+      - "Different derivatisation / quantification of 3-DX / 1-DX only (CF-062); predicts the spread is confined to 3-DX / 1-DX; refuted: GO and MGO (purchased standards) differ ~10x in the pH 8 pair and GO x3.3 in the pH 7 pair."
+      - "Different pots in fact (ARP lot / co-purified catalyst / headspace O2 / handling): predicts calibrated co-variables move too. Supported for the pH 7 pair (3-DX +0.48, GO +0.52, 1-DX +0.16, MGO +0.06 dex, while calibrated Ala -0.46 and furfural -0.53 move the other way) and in part for the pH 8 pair (Ala, pH)."
+      - "In-situ pH (H-pH): refuted as the cause of the pH 8 pair -- the level gap would need -0.9 to -3.3 dex per pH unit with the less acidic pot LOWER, against on-disk rate slopes of +0.25 to +0.6."
+    tests:
+      - >-
+        Cluster 2 (2026-11-01, scratchpad/cluster2/cf060_closure.py, pre-registered T1-T4b): carbon closure is satisfied
+        by every print (R_C 0.04-0.67), so no print is condemned on carbon. Nitrogen closure (every enolisation and the
+        Amadori reversal release the amine 1 : 1) is violated by the two HIGH prints only: standing 3-DX + 1-DX exceeds
+        free Ala by +2.9 / +2.5 / +0.4 / +1.1 mM (Zhou 2022) and +1.4 / +0.7 mM (Zhou 2024, 30 / 60 min), needing an Ala
+        sink of 25-55 % of released Ala within 30 min that the lab's other pots (Ala / ARP lost 0.44-1.15) do not show.
+        No protocol field (OPD time 4 vs 12 h, Ala method) sorts high from low. Scale-free check (t8_chain.py, exploratory
+        after the pre-registered joint test): the five AX-ARP and two GX-ARP pots cannot share one chemistry for log(3-DX
+        / 1-DX) within 0.25 dex under any arm, the misfit carried by Zhou 2024 vs 2025b and Zhou 2022; without those two
+        prints the rest fit jointly.
+    status: open
+    remedy: >-
+      Not settled. P(the HIGH prints -- Zhou 2022, Zhou 2024 -- overstate the dicarbonyl scale) ~0.6; P(pH 8 pair = a
+      dicarbonyl-assay dilution / handling factor) ~0.5, P(= different pots) ~0.35; P(pH 7 pair = different pots) ~0.6.
+      Keep all 3-DX / 1-DX shape-only; add a per-paper scale on the calibrated GO / MGO rows of Zhou 2022 and Zhou 2024
+      (not only 2024 / 2025b); flag Zhou 2022 and Zhou 2024 dicarbonyl rows 'nitrogen_closure_violated'. Decided by: the
+      OPD-step dilution factor of each paper (authors or raw chromatograms), Zhou 2024b Fig. S2 (pH) and the Zhou 2024 SI.
+    affects: [zhou2024_fig3_fig4_axarp_dicarbonyls_ph, zhou2024_fig3cd_deoxyxylosones_arp_ala, zhou2025b_figs1_3_axarp_xylose_120c, zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, zhou2022_fig1cd_deoxypentosones_arp_cys, zhou2023c_fig4ab_deoxypentosones_arp_gsh]
+
+# ---------------------------------------------------------------------------------------------------- CF-071
+  - id: CF-071
+    kind: conflict
+    scope: corpus
+    sources: [zhai2019, zhai2023jafc, zhou2022, zhou2023c, hou2026, wei2022, zhou2024b, zhou2024]
+    quantity: "an additive's effect on the 3- / 1-deoxypentosone ratio: double ratio DR = (TDP / DPO) with additive over without (signature iii)"
+    observation: >-
+      Zhai 2019 Fig. 3b (fed TTCA +- cysteine, 120 C) gives a double ratio of 0.45 (0.32 - 0.60): cysteine lowers TDP
+      more than DPO. Zhai 2023 JAFC Fig. 5bc (TTCA +- cysteine, same laboratory) gives 0.53 - 2.6, i.e. at some times
+      cysteine raises the ratio. Found by the B7 design review (2026-10-31) recomputing the signature from both tables.
+      [Extended 2026-11-01, cluster 2:] JAFC prints NO +Cys 3-DX / 1-DX before 80 min at 120 / 140 C, and its +Cys 1-DX
+      there is 9-22 uM, so the 0.53-2.6 range rests on late, low-signal points; at 100 C (20-140 min) JAFC's DR is
+      0.71-1.14 (mean 1.03). Same-laboratory additive panel (late DR, t >= 60 min): cysteine 0.44 (Zhou 2022 AX-ARP),
+      0.46 (Zhai 2019), ~1.0 (JAFC 100 C), 0.9-1.1 (Wei 2022 GX-ARP, either panel reading); glutathione 0.61 (Zhou
+      2023c); CYSTINE (no thiol) 0.34 (Hou 2026); alanine 0.98 (Zhou 2024b) and 1.04 (Zhou 2024).
+    explanations:
+      - "Different conditions (pH 7.4 vs 7, buffer, time window) change which dicarbonyl cysteine traps."
+      - "Calibration of the quinoxalines differs between the papers (internal standard vs external standards), so one ratio carries a response-factor error."
+      - "Time window: refuted as the explanation -- JAFC prints no matched window (no +Cys DX at <= 60 min, 120 C), and its 100 C DR shows no time trend (+0.05 dex/h pooled)."
+      - "The effect is not a thiol trap: a disulfide without a thiol (cystine) gives the strongest DR; cysteine itself is not reproducible across pots of one laboratory; the common denominator of Cys, GSH and cystine against Ala is redox-active sulfur or a pH shift, not a free SH."
+    tests:
+      - >-
+        Cluster 2 (2026-11-01, scratchpad/cluster2/cf071_double_ratio.py, pre-registered T5-T7): matched-window test not
+        runnable (above); additive panel as in the observation; a pH-only account (DR = 10^(-s dpH), s 0.25-0.6) is
+        rejected for cystine at 3 of 6 times (80-120 min: printed -0.45 to -0.48 dex vs band -0.09 to -0.22) and
+        over-predicts alanine's effect at 30-60 min (Zhou 2024: printed -0.03 to -0.04 vs band -0.07 to -0.25).
+    status: open
+    remedy: >-
+      The narrow conflict (Zhai 2019 0.45 at 120 C vs JAFC ~1 at 100 C) is not decided: temperature, Cys dose, pH 7.4 vs
+      7 or low-signal 1-DX could each do it; decided by JAFC's raw 120 C +Cys 20-60 min points or a matched re-run. Its
+      consequence is settled: signature (iii) is NOT thiol-diagnostic (P 0.8) and gives no credit to a cysteine trap of
+      3-DX; it is reported, never decisive, in every arm. Hou 2026 cystine is a held-out NEGATIVE control for any trap
+      structure (a thiol-specific trap must not reproduce it, or must explain it, e.g. by in-situ reduction of cystine,
+      P ~0.2). Cystine at 5 mM exceeds its room-temperature solubility ~10x (a suspension): weight the cystine arm 0.5.
+    affects: [zhai2019_fig3b_dicarbonyls_ttca, zhai2023jafc_fig5_arp_dicarbonyls]
+
+# ---------------------------------------------------------------------------------------------------- NEW (writer assigns the id; CF-080 if free)
+  - id: CF-080
+    kind: conflict
+    scope: corpus
+    sources: [zhou2022, zhou2024b]
+    quantity: "AX-ARP 20 mM alone, water, initial pH 7, 120 C, 30-120 min: dicarbonyls, released alanine, furfural (same laboratory, same ARP synthesis and OPD method; zhou2024b cites zhou2022 for the method)"
+    observation: >-
+      Zhou 2022 Fig. 1 vs Zhou 2024b Figs. 1-2, 5 (dossier reads): 3-DX 4.3-6.1 vs 1.4-2.1 mM (x3.0), GO x3.3, 1-DX
+      x1.4, MGO x1.1 higher in 2022, while released Ala (2.2-5.8 vs 7.8-14.3 mM, x0.35) and furfural (4.6-13.1 vs
+      13-45 umol/L, x0.3) are LOWER in 2022; ARP within 0.15 dex. Zhou 2022's standing 3-DX + 1-DX exceeds its free Ala
+      at every time (by 0.4-2.9 mM), which needs an Ala sink Zhou 2024b does not show (Ala / ARP lost 0.91-1.15).
+      Found by the zhou2024b dossier (2026-10-31); quantified by cluster 2 (cf060_closure.py) 2026-11-01.
+    explanations:
+      - "Different pots in fact (ARP lot / purity unstated in both; headspace O2 unstated): calibrated species move in opposite directions, which no single assay factor produces."
+      - "Ala quantification: HPLC-ELSD (2022) vs UPLC-MS/MS MRM (2024b); predicts Ala alone off. It cannot move GO or furfural."
+      - "The 2022 dicarbonyl scale overstated (as CF-060's high prints); predicts the nitrogen-closure violation, not the furfural gap."
+    tests: []
+    status: open
+    remedy: "Both pots shape-only for 3-DX / 1-DX (already); per-paper scale on calibrated GO / MGO / Ala / furfural; counted as one laboratory. Same family as CF-060; decided with it."
+    affects: [zhou2022_fig1cd_deoxypentosones_arp_cys, zhou2022_fig1_arp_cys_ala_dicarbonyls]
+
+  - id: CF-081
+    kind: conflict
+    scope: corpus
+    sources: [wei2022, hou2026]
+    quantity: "GX-ARP 5 mM alone, water, initial pH 7.0, 120 C, ex-situ OPD 12 h: ARP decay, 1-DX, 3-DX, GO, MGO (same laboratory and pot design)"
+    observation: >-
+      In mol % of the ARP (hou2026 dossier sec. 6): ARP left at 20-100 min 1.78 / 1.10 / 0.82 / 0.52 mM (Wei) vs 3.20 /
+      2.18 / 1.27 / 0.75 (Hou): x1.4-2.0 slower decay in Hou (calibrated in both). 1-DX at 20 / 40 / 60 min 10.2 / 14.0 /
+      12.6 % vs 4.0 / 4.8 / 2.4 % (x0.2-0.4) and at 90-120 min 15.2 % vs 0.9-1.4 % (x0.06-0.09); 3-DX x0.3-0.76; GO x0.1-
+      0.33; MGO x0.35-0.5. Wei's Fig. 3 caption swaps the 1-DX / 3-DX panels against its axes and text. pH measured only
+      in Hou (7.0 -> 5.05 at 20 min -> 3.55). Found by the hou2026 dossier (2026-10-31).
+    explanations:
+      - "Different ARP lots / purity (Wei 99.05 or 99.5 %, printed two ways; Hou not stated) or headspace O2: the calibrated ARP, GO and MGO differ, which a semi-quantitative DX scale (CF-062) cannot produce."
+      - "Panel labelling in Wei 2022: tested -- under the caption reading Wei's ratio cannot share a chemistry with the six other ARP pots (joint worst residual 0.69 dex vs 0.39 under the axes reading, t8_chain.py), so the axes / text reading is favoured (P ~0.8); neither reading brings Wei's late 1-DX near Hou's."
+      - "Different pH trajectories (unmeasured in Wei): a faster-acidifying pot would decay its ARP differently; untestable without Wei's pH."
+    tests:
+      - "Cluster 2 T8 (scratchpad/cluster2/t8_chain.py): each pot alone is reproduced by the drift + lifetime chain model (Wei worst 0.17, Hou 0.16 dex), so the two pots are individually coherent; they differ in calibrated kinetics, not only in the DX scale."
+    status: open
+    remedy: "Wei 2022 enters with the axes / text panel reading; both pots shape-only for 3-DX / 1-DX; the ARP decay of the two is not pooled for an ARP rate constant without a per-paper factor. Ask for Wei's pH and ARP lot."
+    affects: []

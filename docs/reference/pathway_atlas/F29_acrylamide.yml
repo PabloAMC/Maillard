@@ -1,0 +1,345 @@
+# Pathway-condition atlas: F29_acrylamide (literature side). Built 2026-11-01 from the extraction dossiers only.
+# Every quote is verbatim from the cited dossier. Bins follow families.yml; "not_stated" is used for a pH the study
+# never reports (powders, silica gel), never a guessed bin. Water bin "dilute" counts reactant solutes (sugar + amine),
+# not the buffer. Formation and elimination are both in this family; each cell says which part it bears on.
+family: F29_acrylamide
+definition: "asparagine + carbonyl -> acrylamide (and its elimination)"
+markers:
+  - "ATOM MAP (labelling): acrylamide's C3 skeleton and amide N from asparagine ([13C]/[15N]-Asn). NOT ON DISK: no dossier holds a labelling study of acrylamide formation (Zyzak 2003 / Stadler 2002 / Mottram 2002 Nature are not in data/lit; the on-disk zyzak1995 and mottram2002 are different papers). Every formation cell below therefore rests on precursor omission / addition, not on a label."
+  - "FED INTERMEDIATE: 3-aminopropionamide (3-APA) or a fed carbonyl (HMF, a lipid carbonyl) + Asn giving acrylamide; 3-APA measured as an intermediate (gokmen2012)."
+  - "TRAPPED / MEASURED INTERMEDIATE: the decarboxylated Asn Schiff base / azomethine ylide (Orbitrap m/z 250 from glucose, gokmen2012)."
+  - "PRECURSOR OMISSION: glucose + glutamine without asparagine gives 'negligibly small' acrylamide (claeys2005) -- the weakest marker, but the only one most kinetic papers carry."
+  - "ELIMINATION markers: loss of SPIKED acrylamide; the S-(2-carbamoylethyl) thiol adduct; 3-(alkylamino)propionamides and the acrylamide they release on reheating (zamora2010, hidalgo2010)."
+  - "NON-markers: an acrylamide level in a pot or food with Asn + sugar says SOME acrylamide route ran (operating), not which carbonyl fed it."
+cells:
+  # ---------------- formation: dilute / concentrated aqueous kinetics (Leuven, Wageningen, Wuxi) ----------------
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "120-200 (T_ref 160)", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "none inside the study (one pot, five temperatures); formation k4 and first-order elimination k6 fitted jointly"
+    status: operating
+    quote: "the model was able to fit the loss of acrylamide (k6)"
+    quantity: "k6 = 88.1 +/- 25 e-3 /min at 160 C; k6/k4 = 34.8 (dossier arithmetic): acrylamide is a fast-turnover intermediate. 0.2 M Asn + 0.2 M Glc, 0.1 M phosphate pH 6.8"
+    evidence: kinetic_fit
+    lab: "Wageningen (van Boekel / Knol)"
+    dossiers: [knol2005_extraction.md]
+    where: "Table 1; Results"
+    conflict: CF-035
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "120-200", sugar: hexose_ketose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fructose (this paper) vs glucose (knol2005, same lab, different pH): ~3 % vs ~1.5 % of Asn; cross-paper, not within-study"
+    status: operating
+    quote: "3 % of the initial asparagine concentration"
+    quantity: "max acrylamide ~3 % of 0.1 M Asn (3.0 mmol/L) with fructose, initial pH 5.5 (methods 5.3, CF-037)"
+    evidence: kinetic_fit
+    lab: "Wageningen (van Boekel / Knol)"
+    dossiers: [knol2010_extraction.md]
+    where: "Results 3.1; Conclusions"
+    conflict: CF-034
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "120-200", sugar: hexose_ketose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "ELIMINATION part: the acrylamide degradation step was fitted and DELETED (negative Ea); elimination not identifiable in the fructose pot"
+    status: not_detected
+    quote: "the activation energy for the breakdown of acrylamide was negative"
+    quantity: "no first-order elimination identifiable at pH 5.5 / fructose, against k6 = 88e-3 /min at 160 C in the same lab's glucose pot at pH 6.8"
+    evidence: kinetic_fit
+    lab: "Wageningen (van Boekel / Knol)"
+    dossiers: [knol2010_extraction.md]
+    where: "Results (Scheme 3 -> 4); k4 note in the dossier's constant table"
+    conflict: CF-037
+    note: "was `absent`: a fit that cannot identify the elimination (negative Ea, step deleted) is not a measurement that the step is off (absent audit 2026-11-01)."
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "140-200 (T_ref 160)", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
+    contrast: "a third amino acid (Gln, Cys, Lys, Ala, 0.01 M) added to 0.01 M Asn + Glc: k_E/k_F ordering Gln, Ala < control < Lys, Cys; Cys doubles k_E/k_F"
+    status: operating
+    quote: "twice as high as for the control system"
+    quantity: "k_Eref/k_Fref control vs cysteine: x2 for cysteine; only Gln changes k_F, only Lys changes k_E (95 % letters)"
+    evidence: within_study_factor
+    lab: "Leuven (Hendrickx)"
+    dossiers: [claeys2005_extraction.md]
+    where: "Table 2; Results"
+    conflict: CF-039
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "140-200", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
+    contrast: "PRECURSOR OMISSION: glucose + glutamine without asparagine"
+    status: unattributed
+    quote: "only negligibly small amounts of AA were measured"
+    quantity: "no number printed ('negligibly small amounts'); the authors explain traces by amino-acid stock impurities, citing Becalski (0.3 % asparagine in an aspartic-acid standard; 0.8 % cysteine in a glutamine standard); no asparagine was measured in this glutamine"
+    evidence: within_study_factor
+    lab: "Leuven (Hendrickx)"
+    dossiers: [claeys2005_extraction.md]
+    where: "Results (preliminary experiment)"
+    note: "was `minor`: no measured share (a preliminary 'negligible' result, data not shown), and the impurity explanation is the authors', not a measurement (red team 2026-11-01)."
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "120-200 (T_ref 160)", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "initial pH 4 / 6 / 8 in phosphate: formation k_F 4.30 -> 8.78 -> 37.5 e-3 /M/min (x8.7 over 4 pH units); elimination k_E 84 -> 175 -> 334 e-3 /min; both barriers rise as pH falls"
+    status: operating
+    quote: "0.5414 +/- 0.106"
+    quantity: "ln k_F slope 0.54 per pH unit (0.235 decades), ln k_E slope 0.344 (0.149 decades); pH drifts by up to 2.25 units during heating, so these are INITIAL-pH factors"
+    evidence: within_study_factor
+    lab: "Leuven (Hendrickx)"
+    dossiers: [devleeschouwer2006_extraction.md]
+    where: "Table 1 (phosphate rows); Table 2 (drift)"
+  - key: {ph: acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "120-200 (T_ref 160)", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
+    contrast: "BUFFER at the same initial pH 4: citrate k_F 0.599 vs phosphate 4.30 e-3 /M/min (phosphate x7.2); at pH 6 citrate 20.8 vs phosphate 8.78 (citrate x2.4); citrate shows no log-linear pH law"
+    status: operating
+    quote: "0.599 +/- 0.134"
+    quantity: "the buffer effect (x0.4 to x7) is as large as the pH effect; pH 4 pots RISE by up to 1.2 units on heating"
+    evidence: within_study_factor
+    lab: "Leuven (Hendrickx)"
+    dossiers: [devleeschouwer2006_extraction.md]
+    where: "Table 1 (citrate vs phosphate rows); Table 2"
+  - key: {ph: not_stated, temperature: very_high, water: intermediate_aw}
+    tags: {ph_basis: label, T_C: "120-200 (T_ref 160)", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "a_w 0.34 / 0.59 / 0.73 / 0.82 / 0.88 / 0.92 equimolar Asn-Glc powders: formation flat (0.71-1.09 of the 0.92 value); elimination k_E minimum at a_w 0.82 (0.33x); Maillard competition k_M maximum at 0.82"
+    status: operating
+    quote: 'k_F "varies only slightly" with a_w'
+    quantity: "net acrylamide at low a_w is set by the elimination minimum, not by formation"
+    evidence: within_study_factor
+    lab: "Leuven (Hendrickx)"
+    dossiers: [devleeschouwer2007_extraction.md]
+    where: "Table 2; authors' reading"
+  - key: {ph: not_stated, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: "120-200 (T_ref 160)", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "a_w 0.88 / 0.92 / 0.96 / 0.99 powders: formation and elimination constants not significantly different"
+    status: operating
+    quote: "did not change significantly (based on a 95% confidence level)"
+    quantity: "flat a_w response between 0.88 and 0.99 (the engine's shipped constants are this paper's a_w 0.92 column, reprinted in devleeschouwer2009b, CF-040)"
+    evidence: within_study_factor
+    lab: "Leuven (Hendrickx)"
+    dossiers: [devleeschouwer2008_extraction.md]
+    where: "Table 2; Results"
+    conflict: CF-040
+  - key: {ph: not_stated, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: "120 (series 120-200)", sugar: hexose_ketose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "SUGAR TYPE at a_w 0.92: relative max acrylamide per Asn, glucose = 100: fructose 165 / sucrose 220 at 120 C; 128 / 116 at 200 C"
+    status: operating
+    quote: "Sucrose's excess collapses from 2.2× at 120 °C to 1.16× at 200 °C."
+    quantity: "fructose > glucose at every T (110-165 %); sucrose's advantage is largest at low T (hydrolysis-limited at high T?) -- the authors fit sucrose hydrolysis k_HY 0.47e-3 /min"
+    evidence: within_study_factor
+    lab: "Leuven (Hendrickx)"
+    dossiers: [devleeschouwer2009b_extraction.md]
+    where: "Table 2"
+  - key: {ph: not_stated, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: "120-200 (T_ref 160)", sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "ELIMINATION part: cysteine added to Asn + Glc at a_w 0.92; rival 'cysteine inhibits formation' refitted with freed parameters and rejected; cysteine acts by scavenging + sugar competition"
+    status: operating
+    quote: "The reduced acrylamide concentrations in the presence of cysteine can thus not be attributed"
+    quantity: "k_E2 (acrylamide + Cys) = 49.36 +/- 1.18 /M/min, Ea 51.3 kJ/mol at T_ref 160 C"
+    evidence: kinetic_fit
+    lab: "Leuven (Hendrickx)"
+    dossiers: [devleeschouwer2009_extraction.md]
+    where: "Table 3; sec. 3.3.2"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100 and 130", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "temperature 100 vs 130 C: no acrylamide at 100 C; and Asn alone vs a Lys + Asn + Trp mixture: 22.9 -> 12.6 ug/mL"
+    status: operating
+    quote: "Asn/Glu 22.9 ± 2.55; Mix 12.6 ± 2.80 µg/mL (max); none at 100 C"
+    quantity: "0.32 mmol/L max at 130 C from 200 mM Asn + 100 mM Glc (~0.16 % of Asn); the paper's 'acrolein route' constant k8 has no marker (unattributed sub-route)"
+    evidence: within_study_factor
+    lab: "Jiangnan University (Chen / Zeng)"
+    dossiers: [quan2020_extraction.md]
+    where: "Table 1; Results (dossier sec. 4 table)"
+  # ---------------- formation: fed carbonyl, low water (Hacettepe) ----------------
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "FED CARBONYL: Asn + HMF vs Asn + glucose on silica gel, 0.01 mmol each: acrylamide x2.27 / x4.14 / x5.06 at 10 / 30 / 60 min; Asn alone ~119x lower than Asn + HMF"
+    status: operating
+    quote: "2.27, 4.14, and 5.06 times higher"
+    quantity: "7.31 mol % acrylamide on charge from Asn + HMF at 60 min; ~5.5 mol % per HMF consumed (dossier arithmetic): ~95 % of HMF goes elsewhere"
+    evidence: fed_intermediate
+    lab: "Hacettepe (Gokmen)"
+    dossiers: [gokmen2012_extraction.md]
+    where: "p. 171 left column; Fig. 2a"
+  - key: {ph: not_stated, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: "90-180", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "TEMPERATURE crossover: glucose gives more acrylamide than HMF at <= 120 C, HMF more above 120 C; apparent Ea 84 (Glc) vs 139 kJ/mol (HMF)"
+    status: operating
+    quote: "crossover temperature, ASN–GLC vs ASN–HMF acrylamide yield"
+    quantity: "crossover ~120 C; the HMF route gains share with temperature"
+    evidence: fed_intermediate
+    lab: "Hacettepe (Gokmen)"
+    dossiers: [gokmen2012_extraction.md]
+    where: "p. 171 right column; Fig. 2b, Fig. 3"
+    conflict: CF-039
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "3-APA intermediate measured: HMF pot vs glucose pot x5.30 / x6.37 at 5 / 30 min; 3-APA falls 5 -> 30 min while acrylamide rises (precursor-product shape); azomethine ylide m/z 250 confirmed"
+    status: operating
+    quote: "ASN–HMF was 5.30 and 6.37 times higher"
+    quantity: "relative only (Fig. 6 figure-only); intermediates by Orbitrap at < 1.5 ppm"
+    evidence: measured_intermediate
+    lab: "Hacettepe (Gokmen)"
+    dossiers: [gokmen2012_extraction.md]
+    where: "sec. 3.4 (p. 172-173); Fig. 4-6"
+  # ---------------- formation: lipid carbonyl route (Seville, review only) ----------------
+  - key: {ph: neutral, temperature: high, water: not_stated}
+    tags: {ph_basis: label, T_C: "37-180 (review range)", sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: not_stated, metals: not_controlled}
+    contrast: "LIPID CARBONYL route: alkadienals lower the 3-APA -> acrylamide barrier from 100-110 (none) to 41-61 kJ/mol; Asn -> 3-APA by alkadienals 81 kJ/mol; neutral / slightly basic pH favours 3-APA -> acrylamide"
+    status: operating
+    quote: "3-APA → acrylamide and nucleophile addition at neutral/slightly basic pH"
+    quantity: "barriers only (Table 1, citing Zamora 2009 and Hidalgo 2010a, NOT on disk); no yield"
+    evidence: qualitative
+    lab: "Seville (Zamora / Hidalgo)"
+    dossiers: [hidalgo2015_extraction.md]
+    where: "Table 1 (pp. 27-28); pp. 17-18"
+  # ---------------- elimination: Michael acceptors (Seville) ----------------
+  - key: {ph: neutral, temperature: high, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: "80-180", sugar: none, amine: none, oxygen: inert, buffer: phosphate, metals: not_controlled}
+    contrast: "ELIMINATION part: acrylamide + benzyl mercaptan / N-acetylcysteine under N2; the synthesised adduct does not release acrylamide (irreversible, tested); citrate vs phosphate at pH 6 changes the loss (buffer covariate)"
+    status: operating
+    quote: "pH 7, N₂, 80–180 °C, 0.2 : 20 µmol, a_w 0.95, silica gel"
+    quantity: "Ea 28 (benzyl mercaptan) and 30 kJ/mol (N-acetylcysteine) for acrylamide disappearance"
+    evidence: fed_intermediate
+    lab: "Seville (Zamora / Hidalgo)"
+    dossiers: [hidalgo2010_extraction.md]
+    where: "sec. 3 Ea table; sec. 6b"
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: 180, sugar: none, amine: [other_amine, glycine], oxygen: not_stated, buffer: carboxylate, metals: not_controlled, amine_note: "butylamine (alkylamine) and glycine arms"}
+    contrast: "ELIMINATION part: acrylamide + butylamine / glycine, pH 2.15-8, 10 min 180 C: forward aza-Michael flat in pH (61.9-74.5 %); the adduct's REVERSE release rises 8.8 -> 60.0 % over pH 2.15-6 in citrate; at pH 6 citrate 60.0 vs phosphate 27.3 %"
+    status: operating
+    quote: "similar amounts of acrylamide were recovered in the range of pH 2.15−8"
+    quantity: "Ea forward 44, reverse 52 kJ/mol (butylamine); glycine forward 52 kJ/mol"
+    evidence: fed_intermediate
+    lab: "Seville (Zamora / Hidalgo)"
+    dossiers: [zamora2010_extraction.md]
+    where: "Table 1 (dossier sec. 6); sec. 3b"
+  - key: {ph: neutral, temperature: low, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: "37-60 storage, then 180 reheat", sugar: none, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "ELIMINATION is REVERSIBLE for amine adducts: acrylamide lost during 14 d at 60 C is recovered on reheating"
+    status: operating
+    quote: "recovered by reheating at 180 °C for 20 min"
+    quantity: "reversible : irreversible ~90 : 10 over one month of storage (acrylamide + glycine, 37-60 C, dossier derivation)"
+    evidence: fed_intermediate
+    lab: "Seville (Zamora / Hidalgo)"
+    dossiers: [zamora2010_extraction.md]
+    where: "sec. 5 (storage / reheating); sec. 4"
+  # ---------------- foods (Stockholm, Reading, Reading/Hacettepe, extrusion) ----------------
+  - key: {ph: alkaline, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: "160 and 180", sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "potato homogenate, initial (cold) pH series: net acrylamide peaks near pH 7.7 (180 C) / 8.0 (160 C), ~40-50 % lower at native pH 5.7-5.8, falls again by pH 9.7"
+    status: operating
+    quote: "Net acrylamide vs initial (cold) pH peaks near"
+    quantity: "single samples; 25 min oven heating; water activity falls during heating (not measured)"
+    evidence: within_study_factor
+    lab: "Stockholm (Tornqvist / Rydberg)"
+    dossiers: [rydberg2003_extraction.md]
+    where: "pH series table; header"
+  - key: {ph: acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "ELIMINATION part: spiked acrylamide in potato, HCl to pH 3 vs native 5.7: loss 47 % vs 22 %"
+    status: operating
+    quote: "47 % lost at pH 3 vs 22 % at pH 5.7, 180 °C"
+    quantity: "acid speeds elimination of spiked acrylamide x2.1 while cutting formation"
+    evidence: within_study_factor
+    lab: "Stockholm (Tornqvist / Rydberg)"
+    dossiers: [rydberg2003_extraction.md]
+    where: "header; spiking table"
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_ketose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "35 mM additions to potato (endogenous Asn 17 mM, Glc 21 mM, Fru 2.8 mM): fructose +460 %, glucose +160 %, Asn +220 %; glutamine -76 %, glycine -70 %, lysine -43 %, alanine -14 %"
+    status: operating
+    quote: "Monosaccharides: + (fructose >"
+    quantity: "sugar-limited matrix: fructose 2.9x glucose per mol added; competing amines lower acrylamide in the order Gln ~ Gly > GABA ~ Lys > Ala"
+    evidence: within_study_factor
+    lab: "Stockholm (Tornqvist / Rydberg)"
+    dossiers: [rydberg2003_extraction.md]
+    where: "amino-acid / sugar addition table; Table 5"
+  - key: {ph: neutral, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "potato cake + 1.3 % glycine: acrylamide 9480 -> 2340 ug/kg at 30 min (x0.25); + 0.39 % citric acid (pH 6.0 -> 5.15): 9480 -> 7750, and ND at 60 min (ND = not determined, Table 2 footnote)"
+    status: operating
+    quote: "control 2110 / 9480 / 5900; + 1.3 % Gly 409 / 2340 / 2790"
+    quantity: "control peaks at 30 min then falls (elimination visible in a food at 180 C); SIDA, triplicates of pooled powder"
+    evidence: within_study_factor
+    lab: "Reading (Mottram / Parker)"
+    dossiers: [low2006_extraction.md]
+    where: "Table 2 (set 2)"
+    note: "re-read 2026-11-01: two readers (A MINOR, B MATCH with the same remark); adjudicated MINOR: ND in Table 2 means not determined, not not-detected."
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: "160 then 130", sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "potato-flake dough + all amino acids except Asn and GABA doubled: acrylamide x0.58 of control (91 ng/g); + 3,4-hexanedione alone x1.33 against a separate control (78 +/- 2.2 ng/g, another baking set)"
+    status: operating
+    quote: "acrylamide, all amino acids × 2 / HD alone"
+    quantity: "control 91 +/- 8.2 ng/g; harsher bake 233 ng/g; milder 10-15 ng/g"
+    evidence: within_study_factor
+    lab: "Reading (Parker / Kocadagli)"
+    dossiers: [kocadagli2021_extraction.md]
+    where: "sec. 3.7, Fig. 4"
+    note: "re-read 2026-11-01: two readers (A MATCH, B MINOR); adjudicated MINOR: 'seven' is not printed (the paper says all amino acids except Asn and GABA) and the x1.33 is against the 78 ng/g control."
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: "barrel to 145-160", sugar: not_stated, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "cornmeal + pea protein isolate extrusion: 0 -> 15 % PPI raises acrylamide 19.8 -> 37.4 ug/kg; 30-70 % PPI no further rise, falls at 50-70 %"
+    status: operating
+    quote: "did not cause additional increases"
+    quantity: "raw PPI already holds 12.2 ug/kg acrylamide (carried-in load)"
+    evidence: within_study_factor
+    lab: "Reading / Hacettepe (Parker / Gokmen)"
+    dossiers: [goncuoglu2026_extraction.md]
+    where: "Results 3.2; Fig. 1a"
+  - key: {ph: not_stated, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: "130 (series)", sugar: not_stated, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "soy-protein-isolate meat-analogue extrusion, process-parameter survey; raw blend vs extrudate"
+    status: operating
+    quote: "The raw blend already carries ≈38 µg/kg of acrylamide before extrusion"
+    quantity: "~150 ug/kg at 130 C (figure read-off, +/- 20 %) vs ~38 ug/kg carried in"
+    evidence: qualitative
+    lab: "Ma / Liu group (affiliation not in dossier header)"
+    dossiers: [ma2024_extraction.md]
+    where: "Figure 2D; sec. 2.3"
+condition_dependence: >-
+  FORMATION. Shown: (i) pH -- in phosphate ln k_F rises 0.54 per initial-pH unit from 4 to 8 (Leuven, one lab,
+  devleeschouwer2006), and in potato net acrylamide peaks near cold pH 7.7-8 (Stockholm, rydberg2003): two labs agree
+  on the sign (more formation toward pH 8), but the Leuven law holds only in phosphate -- citrate at pH 4 is 7x slower
+  and citrate shows no log-linear law, so the "pH effect" in the literature is partly a phosphate-catalysis effect
+  (also CF-011 territory). All pH values are INITIAL; the pots drift by up to -2.25 units (pH 8) and +1.2 (pH 4).
+  (ii) Sugar -- fructose > glucose in three labs (Leuven powders 110-165 %, Stockholm potato 2.9x per mol added,
+  Wageningen 3 % vs 1.5 % across two papers), sucrose > glucose at low T only (Leuven). (iii) Water -- formation is
+  flat from a_w 0.34 to 0.99 (Leuven, two papers; single lab); what moves with a_w is elimination (minimum at 0.82).
+  (iv) Temperature -- no acrylamide at 100 C in dilute phosphate (Wuxi); a fed-HMF route overtakes glucose above
+  ~120 C on silica (Hacettepe); apparent Ea 84 (silica) vs 130-208 kJ/mol (aqueous, pH-dependent) is CF-039.
+  (v) Competing amines -- Gly, Gln, Lys lower acrylamide in potato (Stockholm, Reading) mainly by sugar competition;
+  in dilute pots Gln changes k_F only and Lys changes k_E only (Leuven); Cys acts by scavenging, inhibition refuted by
+  model discrimination (Leuven). (vi) Carbonyl type -- HMF (fed, Hacettepe) and lipid alkadienals (Seville, review
+  barriers only) can supply the carbonyl; no study on disk measures their SHARE of acrylamide in a sugar pot.
+  ELIMINATION. Shown: first-order loss with k_E/k_F ~35 (Wageningen) and 170-280 (Leuven) at 160 C in glucose pots;
+  not identifiable in a fructose pot at pH 5.5 (Wageningen); faster at low pH in potato (Stockholm, spiking); thiol
+  adducts irreversible (Seville, tested), amine adducts reversible with release rising with pH and in citrate over
+  phosphate (Seville). ASSUMED everywhere: the atom map (no labelling on disk).
+best_supported_regimes:
+  - "neutral (initial, phosphate) / 120-200 C / dilute or a_w 0.88-0.99 / glucose or fructose + Asn: operating, k_F and k_E fitted by 2 labs (Leuven, Wageningen); formation constants agree within 1.2x across labs (knol2010 dossier)"
+  - "mild_acid-neutral / 160-180 C / potato or potato dough (concentrated -> low a_w) / endogenous Asn + sugar: operating, 3 labs (Stockholm, Reading, Reading/Hacettepe) with within-study additions"
+  - "elimination by thiols and amines, 80-180 C, pH 2-8: operating, 2 labs (Seville fed acrylamide; Leuven fitted k_E2), reversibility only from Seville"
+unknown_regimes:
+  - "ANY labelling regime: no [13C]/[15N]-Asn study on disk, so the atom map and the share of non-Asn routes (acrolein + NH3; Quan 2020's k8 is unmarked) are unmeasured"
+  - "share of acrylamide from HMF, dicarbonyls (MGO / GO) or lipid carbonyls in a SUGAR pot: fed-only evidence, never a competition with the sugar present"
+  - "in-situ pH: every constant is indexed to initial pH; no study follows pH during the acrylamide run except as end-point drift"
+  - "low T (< 100 C) formation: none detected at 100 C (Quan 2020); no data below; storage (37-60 C) only for elimination"
+  - "protein-bound amine as competitor or as Michael acceptor scavenger: extrusion data (goncuoglu2026, ma2024) are level-only, no kinetics; plant-protein matrices otherwise unstudied"
+  - "pentose sugars and alt-protein sugar systems: no acrylamide kinetics with ribose / xylose on disk"
+  - "air vs inert as a factor on acrylamide formation: never varied (hidalgo2015 states O2 inhibits olefin formation, qualitatively)"
+competing_families:
+  - "F05_protein_glycation / F01_schiff_glycosylamine with other amines: Gly, Gln, Lys compete for the sugar (wins in potato with >= 35 mM added amine, rydberg2003; low2006)"
+  - "F16_strecker_aldehyde: the same Asn-carbonyl Schiff base decarboxylates to the azomethine ylide; Strecker (aldehyde) vs 3-APA / acrylamide (olefin) split, O2 favours the aldehyde (hidalgo2015, qualitative)"
+  - "F13_furans_dehydration: HMF formation competes for the hexose but then FEEDS acrylamide above ~120 C (gokmen2012)"
+  - "F28_thiol_losses / F22_cysteine_h2s: cysteine is both a sugar competitor and the acrylamide scavenger (devleeschouwer2009); the engine runs the acrylamide and sulfur cysteine sinks in separate lanes by decision"
+  - "F18_lipid_strecker: lipid carbonyls degrade Asn to 3-APA as they degrade Phe to phenylacetaldehyde (hidalgo2015)"
+engine: >-
+  In the engine: src/kinetic_core/acrylamide.py ACRYLAMIDE_REACTIONS on top of the B1 trunk -- a_asn_glc_sb (Asn + Glc,
+  k_asn_glc), a_sb_int1, a_int1_acr (formation), a_int1_mel (fitted non-acrylamide fate), a_asn_asp / a_asp_sink,
+  elimination a_acr_dp (first order, fitted to Claeys / De Vleeschouwer / Knol k_E), a_acr_cys (De Vleeschouwer k_E2),
+  a_acr_gln / a_acr_lys / a_acr_ala (fitted Michael scavengers), sugar competitors a_cys_glc / a_gln_glc / a_lys_glc /
+  a_ala_glc; condition factors in acrylamide_conditions.py (initial-pH factor 10^(0.235 (pH-6.8)) on formation and
+  10^(0.149 (pH-6.8)) on elimination, window 4-8, held outside; flat formation a_w term and the 2007 elimination a_w
+  shape). MATCHES: first-order elimination and its maximum; the a_w shape; the pH sign; cysteine as scavenger, not
+  inhibitor. MISMATCHES: (1) the only carbonyl is glucose -- no fructose initiation in the lane (CF-034 runs Knol
+  2010's fructose pot with Glc), no sucrose, no HMF / dicarbonyl / lipid-carbonyl route and no 3-APA, although
+  fructose > glucose is a three-lab result and HMF overtakes glucose above ~120 C; (2) the pH factor is the PHOSPHATE
+  law applied to every buffer -- in citrate at pH 4 the literature is ~7x lower than phosphate, and at pH 6 citrate is
+  2.4x higher, so carboxylate pots are mis-scaled by up to ~0.8 dex; (3) initial-pH only, while pots drift up to 2 units;
+  (4) amine scavenging (a_acr_gln / lys / ala) is irreversible, but Zamora 2010 shows amine adducts are ~90 %
+  reversible and release acrylamide on reheating (pH- and buffer-dependent); only the thiol adduct is irreversible;
+  (5) Knol 2010 finds no identifiable elimination at pH 5.5 / fructose while the lane always eliminates at the fitted
+  rate; (6) glycine is not a named acrylamide-lane competitor, although Low 2006 / Rydberg 2003 show glycine is among
+  the strongest (it acts only through the trunk's glucose consumption, if composed); (7) no protein-bound amine in the
+  lane (extrusion rows score 4247x low, ma2024 dossier).

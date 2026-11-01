@@ -1,0 +1,246 @@
+family: F11_beta_dicarbonyl_cleavage
+definition: "hydrolytic beta-dicarbonyl cleavage -> acids (acetic, formic) + C_n-1 fragments"
+# Built 2026-11-01 (pathway-atlas agent, families F11-F15). Sources: extraction dossiers only (no PDF re-read).
+# Laboratories: Nestle Lausanne (Davidek / Blank: 2002, 2005, 2006a, 2006b, 2008 - one lab; davidek2005's glucose
+# series and Fig. 4 duplicate davidek2006a Table 1 / Table 2 and are counted once), Glomb Halle (Voigt 2009, Smuda 2010),
+# Wageningen (Martins 2005 / 2005b, Brands 2001, Knol 2010 - one lab), ICT Prague (Novotny 2008), McGill (Yaylayan).
+markers:
+  - "Fed 1-deoxyosone (synthetic 1-DG) gives acetic acid at ~0.5-0.8 mol/mol with no oxidant and no amine (davidek2006a Fig. 3), with its C4 counterpart (erythrulose / tetroses; voigt2009, davidek2006a Fig. 7)."
+  - "O2-independence of acetic acid: argon = air = 18O2 totals, and >= 2/3 of acetic acid carries no O2-derived oxygen under 18O2 (davidek2006b). This is what separates F11 from F12 for the SAME 1-DG parent."
+  - "13C pattern: acetic acid carries hexose C-1/C-2 (~70 %) or pentose C-1/C-2 (77-89 %) - this marks the 1-deoxyosone ORIGIN, not the cleavage type: glycolaldehyde oxidation and the F12 Baeyer-Villiger route also put C1-C2 into acetic acid (huyghuesdespointes1996 sec. 5). Read together with the O2 marker."
+  - "Fed model beta-diketone (2,4-pentanedione) splits to acetic acid + acetone near-equimolar (davidek2006a Fig. 5)."
+  - "Amine-induced variant: N-epsilon-acyl-lysine amides (acetyl, formyl, lactoyl, glycerinyl) from fed 1-DG, absent from acid + amine controls (smuda2010)."
+  - "Negative marker: fed 3-DG gives hardly any acetic acid (davidek2006a) - the 3-deoxyosone is not a beta-cleavage parent of acetic acid. No marker on disk identifies the ROUTE to formic acid (beta-cleavage of maltosone-type 1,4-glycosylated osones, alpha-cleavage of 3-DG and sugar-only chemistry all give it)."
+cells:
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 6 vs 8 and 90 vs 120 C (four arms): acetic-acid label origin unchanged"
+    status: dominant
+    quote: "pairs C1/C2 ~70 %, C3/C4 ~8-10 %, C5/C6 ~20 %"
+    quantity: "acetic acid 16.9 (pH 6) / 38.4 (pH 8) mol % of glucose at 240 min; ~70 % from glucose C-1/C-2 (1-DG), ~20 % C-5/C-6, < 10 % C-3/C-4; shares flat from 10 to 240 min (davidek2005 Fig. 3)"
+    evidence: labelling
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md, davidek2005_extraction.md]
+    where: "davidek2006a Table 1, Table 2; davidek2005 Fig. 3 (duplicate data, one lab)"
+    note: "label fixes the 1-deoxyosone origin; the hydrolytic (not oxidative) share is measured only at 90 C, pH 8 (davidek2006b cell). pH set before heating in 0.2 M phosphate, not re-measured."
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: inert, buffer: phosphate, metals: not_controlled}
+    contrast: "argon vs air vs 18O2: total acetic acid unchanged (30.5 / 32.3 / 33.5 mmol/L); under 18O2 two thirds carry no O2 oxygen"
+    status: dominant
+    quote: "argon 30.5 +- 0.4, air 32.3 +- 3.3, 18O2 33.5 +- 0.5"
+    quantity: "~31-33 mol % acetic acid of glucose in 15 h; >= 68 % hydrolytic under 18O2, ~100 % under argon"
+    evidence: labelling
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006b_extraction.md]
+    where: "Table 1 (90 C, 15 h, pH 8, 0.2 M phosphate)"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 5 / 6 / 6.5 / 7 / 8, fed 1-DG, no amine: 0.20 / 0.56 / 0.80-0.84 mol/mol at 60 min; flat above pH 6.5"
+    status: dominant
+    quote: "0.20 (pH 5), 0.56 (pH 6), 0.80-0.84 (pH 6.5 / 7 / 8, indistinguishable)"
+    quantity: "0.80-0.84 mol acetic acid per mol fed 1-DG in 60 min at pH 6.5-8 (no amine); 1-DG itself gone within 5 min at pH >= 6, acetic acid still rising to 60 min (two time scales: 2,4-diulose / C4 intermediates)"
+    evidence: fed_intermediate
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md]
+    where: "Fig. 3 (end labels printed; earlier points figure-read)"
+    note: "1-DG concentration nominal (~10 mM); excludes an amine-REQUIRED cleavage for the hexose; amine acceleration untested."
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 5 vs 6.5-8 (same fed 1-DG series): x4 lower acetic-acid yield at pH 5; 8 % of 1-DG left after 5 min at pH 5"
+    status: operating
+    quote: "0.20 (pH 5), 0.56 (pH 6), 0.80-0.84 (pH 6.5 / 7 / 8, indistinguishable)"
+    quantity: "0.20 mol/mol at 60 min, pH 5"
+    evidence: fed_intermediate
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md]
+    where: "Fig. 3"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fed 3-DG + glycine, pH 4 / 6 / 8: acetic 0.8 / 1.5 / 2.4 mol %, formic 0.9 / 1.5 / 1.7 mol % in 4 h"
+    status: minor
+    quote: "acetic acid 0.8 / 1.5 / 2.4 mol %"
+    quantity: "<= 2.4 mol % acetic and <= 1.7 mol % formic acid per mol fed 3-DG (formic acid not by SIDA)"
+    evidence: fed_intermediate
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md, davidek2005_extraction.md]
+    where: "davidek2006a text p. 6670 = davidek2005 Table 1 (unit misprint there; mol % is right)"
+    note: "the 3-deoxyosone is not a beta-cleavage (or alpha-cleavage) parent of either acid at these conditions."
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fed 2,4-pentanedione + glycine, pH 6 / 8 / 10: 240-min acetic acid ~52 / 89 / ~91 mol %; 20-min ~13 / ~40 / ~60"
+    status: operating
+    quote: "240-min acetic acid ~52 / 89 / ~91 mol %"
+    quantity: "acetic acid ~ acetone, near-equimolar; only ~3x per 2 pH units (6 -> 8), < 2x (8 -> 10): no free-amine-order term"
+    evidence: fed_intermediate
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2006a_extraction.md]
+    where: "Fig. 5A (89 printed; others figure-read)"
+    note: "model beta-diketone, not a sugar intermediate: shows the chemistry runs at pH 6-10 with glycine present."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: none, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "water vs 0.1 M phosphate at constant pH 5 / 6 / 7 / 8 (pH-stat at 90 C): acetic acid per mol DFG decomposed similar in both media (pH 6 at 50 %: 0.42 water, 0.32 phosphate; pH 8: 0.60 vs 0.54); rises with pH"
+    status: operating
+    quote: "acetic acid up to 0.64 and formic up to 0.14"
+    quantity: "acetic acid 0-0.64 mol per mol DFG decomposed (pH 5 -> 8), formic 0-0.14; phosphate accelerates DFG decay (~ +1 pH unit) but not the acetic-acid yield per DFG"
+    evidence: within_study_factor
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2002_extraction.md]
+    where: "Table 4 (acetic, formic per % DFG decomposed)"
+    note: "the only in-situ-pH and the only water-vs-phosphate contrast on an acid yield from an Amadori compound on disk; 1-DG not measured (acetic acid is the 2,3-route proxy)."
+  - key: {ph: acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 4 vs 6 vs 8 (label): glucose + glycine 1 / 17 / 38 mol %; Fru-Gly 4 / 28 / 56 mol % at 240 min"
+    status: operating
+    quote: "final yields of acetic acid from Fru-Gly and glucose/glycine were 56 mol% and 38 mol%"
+    quantity: "pH 4: 1.00 mol % (glucose + Gly, 240 min; 1.69 at 480 min), 4 mol % (Fru-Gly); steep acid side: x7 (DFG) and x17 (glucose) from pH 4 to 6"
+    evidence: within_study_factor
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2005_extraction.md, davidek2006a_extraction.md]
+    where: "davidek2005 Fig. 1 end labels; davidek2006a Table 1"
+    note: "no labelling at pH 4; 0.2 M phosphate cannot hold pH 4 (label pH). Fru-Gly concentration not printed (0.1 M inferred)."
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 6 vs 8: 16 vs 28 mol % acetic acid of xylose at 240 min; plateau once xylose is gone"
+    status: dominant
+    quote: "77-89 % of acetic acid from C-1 / C-2"
+    quantity: "pentose acetic acid 16 / 28 mol % (pH 6 / 8, 120 C, 4 h); 77-89 % from xylose C-1/C-2 (1-deoxypentosone), 8-15 % from C-4/C-5"
+    evidence: labelling
+    lab: "Nestle Research Center, Lausanne (Davidek / Blank)"
+    dossiers: [davidek2008_extraction.md]
+    where: "Fig. 1 (yields), text / abstract (labels, 90 and 120 C)"
+    conflict: CF-069
+    note: "the plateau caps any acetic-acid loss at <= ~4e-4 /min (CF-069)."
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: inert, buffer: phosphate, metals: chelated}
+    contrast: "aerated vs deaerated (He + argon + 1 mM DTPA): acetic acid 550 vs 650 mmol/mol 1-DG at 24 h (O2 and chelation confounded)"
+    status: dominant
+    quote: "Acetic acid 550 / 650 mmol/mol (24 h, 37 °C, air / deaerated)"
+    quantity: "0.55-0.65 mol acetic acid per mol fed 1-DG + L-alanine (42 mM each, pH 7.4) in 24 h; with erythrulose, acetol, glyceric acid ~0.9 mol/mol accounted; MGO negligible"
+    evidence: fed_intermediate
+    lab: "Glomb, Martin-Luther-University Halle-Wittenberg"
+    dossiers: [voigt2009_extraction.md]
+    where: "text and Table 1"
+    conflict: CF-080
+    note: "second laboratory for the fed-1-DG beta-cleavage; runs at 37 C. No amine-free arm."
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "amine as nucleophile vs water/hydroxide: N-epsilon-acetyl-lysine 1.01 vs acetic acid 310 mmol/mol (7 d); acid + Boc-Lys control gives no amides"
+    status: minor
+    quote: "Nε-acetyl lysine is 0.33 % of the acetic acid formed"
+    quantity: "amine-induced beta-cleavage 0.18-0.48 % of the matching acid (acetyl, glycerinyl, lactoyl), formyl 5.5 %; total acids 0.48 mol/mol 1-DG in 7 d"
+    evidence: fed_intermediate
+    lab: "Glomb, Martin-Luther-University Halle-Wittenberg"
+    dossiers: [smuda2010_extraction.md]
+    where: "Fig. 2, Table 3"
+    conflict: CF-080
+    note: "amine = N-alpha-Boc-lysine (an epsilon-amine model). Acetic acid here ~250 at 24 h vs ~550 with alanine in the same lab (CF-080)."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "none (multiresponse fit across 80-120 C and pH 4.8-7.5)"
+    status: operating
+    quote: "step 8: X = 1.4 ± 0.068 /min, Ea 75.7 ± 3.8"
+    quantity: "1-DG -> acetic acid k = 1.4 /min at 100 C (1-DG lifetime ~1 min), Ea 75.7 kJ/mol; Knol 2010 acetic route 75 +- 10"
+    evidence: kinetic_fit
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2005_extraction.md]
+    where: "Table 2, step 8"
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "pH 4.8 -> 7.5 ladder: formic slightly above acetic early at low pH, acetic above formic at high pH"
+    status: operating
+    quote: "of which 14% was due to acetic acid"
+    quantity: "pH 7.5: acids 20 % of degraded glucose, acetic 14 %, formic ~6 % (by difference); k8 shows low pH dependence - the limit is 1-DG formation"
+    evidence: within_study_factor
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2005b_extraction.md]
+    where: "sec. 3.1 p. 440, Fig. 2b, Fig. 3; sec. 3.4"
+    note: "0.1 M phosphate pots drift 6.76 -> 5.51 in 240 min (CF-069 test)."
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "glucose + casein vs glucose alone: acetic acid 5.3 vs 2.05 mM at 40 min (x2.6 with the amine); acetic lag ~10 min without amine, ~5 min with"
+    status: operating
+    quote: "5.3 / 2.05 = 2.6"
+    quantity: "acetic acid 5.3 mM of 150 mM glucose at 40 min with casein (15 mM Lys residues); formic only x1.4 with casein"
+    evidence: within_study_factor
+    lab: "Wageningen (Brands / van Boekel)"
+    dossiers: [brands2001_extraction.md]
+    where: "Figs. 1 and 6 (digitised), sec. 4 ratio table"
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 160, sugar: hexose_ketose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "120-200 C (five temperatures): acetic above formic at every temperature"
+    status: unattributed
+    quote: "acetic acid was always formed in higher concentrations than was formic acid"
+    quantity: "acetic acid up to 120 % (mmol/mmol fructose); formic <= 15 % of degraded fructose; acetic-route Ea 75 +- 10 kJ/mol"
+    evidence: kinetic_fit
+    lab: "Wageningen (Knol / van Boekel)"
+    dossiers: [knol2010_extraction.md]
+    where: "Results 3.1; Table 2"
+    note: "fructose + asparagine 0.1 M, initial pH 5.5; lumped fructose -> acetic step, no label: route not identified (> 1 mol acetic per fructose needs more than one 1-deoxyosone cleavage)."
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "0.05 M NaOH vs K2S2O8 (oxidant): acetic 11-12 % without oxidant vs 0.5-2.6 % with persulfate"
+    status: unattributed
+    quote: "Glc 11.48, Fru 12.06, Ara 12.45, Dha 7.81, Gla 10.64 % (n/n)"
+    quantity: "acetic acid 11.5 (Glc), 12.1 (Fru), 12.5 (Ara) mol % in 1 h reflux, no amine, no oxidant; base exhausted during the run (ends below neutral)"
+    evidence: within_study_factor
+    lab: "ICT Prague (Novotny / Velisek)"
+    dossiers: [novotny2008_extraction.md]
+    where: "Table 1-3 (0.05 M NaOH)"
+    note: "no labels, no deoxyosone measured: shows amine-free acetic acid in alkali, not which route."
+  - key: {ph: neutral, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 250, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "six singly labelled glucoses + proline, pyrolysis 20 s"
+    status: unattributed
+    quote: "73 % carries C-1/C-2, 20 % C-5/C-6, 5 % C-3/C-4"
+    quantity: "acetyl (as N-acetylpyrrolidine) 73 % from glucose C-1/C-2"
+    evidence: labelling
+    lab: "McGill (Yaylayan)"
+    dossiers: [huyghuesdespointes1996_extraction.md]
+    where: "Table 6"
+    note: "same C1/C2 pattern as Davidek, but the authors assign it to glycolaldehyde oxidation; the label cannot separate the routes. Pyrolysis, no water; pH meaningless (key bin is a placeholder)."
+condition_dependence: >-
+  SHOWN: (1) The hydrolytic beta-cleavage of the 1-deoxyosone is the main acetic-acid route in dilute aqueous phosphate
+  at pH 6-8, 37-120 C, with or without amine: labelling (Nestle, glucose and xylose), the 18O2 / argon contrast (Nestle,
+  90 C pH 8) and fed 1-DG (Nestle 120 C without amine; Glomb 37 C with alanine / Boc-lysine) - two laboratories by fed
+  intermediate, one by labelling. (2) pH: the fed-1-DG yield is steep below pH 6 (0.20 at pH 5 vs 0.80-0.84 at
+  pH >= 6.5, saturating), and the acetic yield from glucose / DFG collapses toward pH 4 (1-4 mol %); Martins' fit and
+  the DFG / 1-DG comparison (davidek2005 sec. 1 item 3) put the pH-6->8 rise mainly upstream (2,3-enolisation share),
+  not in the cleavage. (3) Amine: not required (amine-free 1-DG); amine-as-nucleophile < 1 % (Smuda); amine ACCELERATION
+  of the cleavage untested anywhere - but the amine raises acetic acid from glucose x2.6 (Brands, casein) by making the
+  Amadori 2,3-enolisation available; amine identity changes the 1-DG acid yield x2 in one lab (CF-080, open). (4) O2:
+  total acetic acid O2-independent at 90 C pH 8 (the hydrolytic route compensates when O2 is excluded); 37 C deaerated
+  gives 18 % MORE acetic acid. (5) Buffer: at constant in-situ pH, phosphate does not change acetic acid per DFG
+  decomposed (Davidek 2002, 90 C) - so H4 (phosphate-calibrated 1-DX sink applied to water) is about rates, not yields.
+  (6) Temperature: label shares and yields similar at 90 and 120 C; Ea of the lumped step ~76 kJ/mol (two Wageningen
+  fits). ASSUMED (not shown): the pentose 1-deoxyosone behaves like 1-DG (only Davidek 2008's label supports it); the
+  amine-free alkaline acetic acid (Novotny) is beta-cleavage. FORMIC ACID: no route marker; the fed 3-DG yields are
+  tiny (<= 1.7 mol %), sugar-only chemistry carries most of it (Brands), so formic acid is not evidence for F11.
+best_supported_regimes:
+  - "neutral-alkaline (pH 6-8) / 90-120 C / dilute / hexose or pentose + glycine, phosphate: dominant (labelling + 18O2, Nestle)"
+  - "neutral (pH 6.5-8) / 120 C / dilute / fed 1-DG, NO amine, phosphate: dominant (fed, Nestle)"
+  - "neutral (pH 7.4) / 37 C / dilute / fed 1-DG + alanine, phosphate: dominant (fed + partial mass balance, Glomb)"
+unknown_regimes:
+  - "acid (pH < 4.5) and mild acid with labelling: only unlabelled yields (1-4 mol %) and the pH-5 fed-1-DG point"
+  - "intermediate_aw and low_aw aqueous-free systems: only a pyrolysis label that cannot discriminate (Yaylayan)"
+  - "very_high T (> 140 C) with a route marker: Knol's lumped fit only"
+  - "water (unbuffered) vs phosphate for the 1-deoxyosone itself (fed 1-DG or 1-DX in water): none; only DFG at constant pH (Davidek 2002)"
+  - "pentose 1-deoxyosone fed directly: none; amine-free pentose acetic acid: Novotny arabinose in alkali only"
+  - "amine acceleration (same precursor with / without amine): none anywhere"
+  - "protein-bound amine: Brands casein (unlabelled) only; cysteine pots: none"
+competing_families:
+  - "F12_alpha_oxidative_cleavage: same 1-DG pool under O2; at 90 C pH 8 F12 takes ~1/3 of acetic acid but the total does not change (compensation); at 37 C O2 raises glyceric / lactic acid and lowers acetic acid"
+  - "F13_furans_dehydration (1-DX -> norfuraneol, 1-DG -> acetylformoin / DMHF) and 1-DG cyclisation (gamma-pyranone): compete for the 1-deoxyosone; Nakamura's 1-DX is 76 % of xylose at pH 8 yet norfuraneol peaks at 4-16 mol %"
+  - "F15_redox_reductones / F16 Strecker: the 1-deoxyosone as Strecker donor (1,4-dideoxyosone, Nedvidek; r_dpo_ddp with cysteine)"
+  - "F10_retroaldol_c3_c2: retro-aldol of 1-DG to MGO is negligible at 37-50 C (Voigt 2009); beta-cleavage wins"
+engine: >-
+  In the engine: r_odg_aa (trunk, 1-DG -> AA + C4, Martins step 8, k 1.45 /min at 100 C, Ea 76; the trunk has NO pH
+  state, so the step is pH-flat while fed 1-DG gives x4 less acetic acid at pH 5 than at pH >= 6.5); r_dpo_aa (sulfur
+  lane, 1-DPO -> AA + C3, fitted on Davidek 2008, slope or saturating pH law, aa_pk 6 from Davidek 2006a Fig. 3 - this
+  matches the literature's shape; amine-independent, as Davidek 2006a allows); r_fru_acids (Fru -> FA + AA, Martins step
+  10); r_tdg_fa (3-DG -> FA + C5, Martins step 5). MISMATCHES: (a) r_aa_frag destroys acetic acid at a rate >= 40x the
+  Davidek 2008 plateau allows (CF-069, open). (b) r_tdg_fa: with Martins' constants (k5 3.45e-2 /min, Ea 30; k9 8.12e-4
+  L/mmol/min, Ea 95.2) the engine's 3-DG -> formic share at 120 C and 0.1 M glycine is ~13 % of 3-DG [my arithmetic, not
+  an engine run], against <= 1.7 mol % formic from FED 3-DG + glycine at 120 C, pH 4-8 (Davidek 2006a; formic not by
+  SIDA): ~x8 too much formic acid from 3-DG, if the arithmetic holds - worth one engine check. (c) No O2 term on the
+  acetic-acid total, which is right (davidek2006b); no amine-nucleophile amide channel, which is right at < 1 %.
+  (d) No phosphate-vs-water factor on the cleavage, consistent with Davidek 2002 for yields; the rate side is untested.

@@ -1,0 +1,21 @@
+# SOURCE VERIFICATION -- Wang, Xie, Zhang, Xu & Yang 2022, Flavour Fragr J 37:274-284 (Wang2022.pdf), Table 2 (TEST table data/lit/fit_rows/heldout_wang2022_tab2.yml; contrast benchmark errors E7, E12). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_wang2022_tab2.yml, fit_rows/second/heldout_wang2022_tab2.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'wang2022_table2_lipid_vs_blank_120c_150min'
+  source_file: 'Wang2022.pdf'
+  location: 'Table 2, pp. 277-278; Table 1 and Sec. 2.2, p. 275-276'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'corrected'
+  quote: 'The 1% or 2% was the mass percentage of methyl linoleate among the total mass of the system, which included xylose, cysteine, methyl linoleate and buffer. ... Subtotal 4011.16 1235.72 811.12 ... Subtotal 0.00 713.23 596.74 Total 4003.84 1891.92 1424.24'
+  notes: '76 numeric cells (37 compounds x blank / 1 % / 2 % methyl linoleate, ng/g, n = 2). VALUES corrected: the printed Total row is misprinted (not a row); row 29 blank cell empty = not detected; row 16 possible copy of row 6 (flagged). CONDITIONS corrected: dose basis = % of total system mass.'
+  adjudication: 'All 111 cells identical in both readings; subtotals re-summed by both readers and the adjudicator''s check. No row dropped.'

@@ -1,0 +1,210 @@
+# Pathway-condition atlas, family F21 (literature side). Written 2026-11-01 from the extraction dossiers named per
+# cell; vocabulary and status caps from docs/reference/pathway_atlas/families.yml. Every quote is a verbatim substring
+# of the cited dossier (grep-checked). The lipid-aldehyde pyridines also belong to F30 (crossover); they are kept here
+# because the ring is a dicarbonyl / enal + N heterocycle, and are flagged as such.
+family: F21_pyrroles_pyridines
+definition: "aminoketone / dicarbonyl -> pyrroles; pyridines; imidazoles"
+markers:
+  - "Pyrrole from aminoketone + dicarbonyl: an isolated, NMR-identified 2,5-diacetyl-3-methylpyrrole (one aminoacetone + two MGO) whose yield rises with MGO : amine and competes with 2,5-DMP for aminoacetone (Adams 2008). NO label shows the pyrrole passes through FREE aminoacetone (NH3 or amine + 3 MGO gives the same molecule; red team sec. 4)."
+  - "Pyrrole N source: 15N partition of the ring N between a labelled and an unlabelled amine in one pot (Hwang 1995b; prose numbers only)."
+  - "Pyridine from enal / dienal + NH3: 13C at dienal C5 -> pyridine C2 and 15N-NH3 -> ring N (Zhou & Boatright 2000); amide-15N share of the ring N (Kim 1996b); D2O deuterium counts (Zamora 2020)."
+  - "Imidazole from glyoxal + amine: 1,3-disubstituted imidazole + formic acid by NMR / ESI-MS, odd ring carbon from a SECOND glyoxal (no 3-R products), with a stoichiometry on amine loss (De Haan 2009); pathway shares of dicarbonyl loss by NMR (Sedehi 2013)."
+cells:
+  # ---- pyrroles ----------------------------------------------------------------------------------------------------
+  - key: {ph: acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "alanine + methylglyoxal ~850 mM, acetate pH 4, 30 min; Ala : MGO 2:1 / 1:1 / 1:3"}
+    contrast: "Ala : MGO 2:1 -> 1:1 -> 1:3: pyrrole 0.50 -> 1.1 -> 3.7 mol % of Ala; pyrrole : 2,5-DMP 38 -> 55 -> 231; time 10 / 30 / 60 min 0.080 / 1.1 / 1.3"
+    status: operating
+    quote: "3.7 +/- 0.074"
+    quantity: "2,5-diacetyl-3-methylpyrrole up to 3.7 mol % of Ala (calibrated, IS with response factors); 2,5-DMP 0.016 mol % in the same pot"
+    evidence: fed_intermediate
+    lab: "Ghent (De Kimpe) with Wageningen (van Boekel)"
+    dossiers: [adams2008_extraction.md]
+    where: "Table 3 rows 4-8"
+    note: "not 'dominant': the route through free aminoacetone is a proposed scheme (Scheme 3), no label; 100 C sits on the moderate / high boundary."
+  - key: {ph: acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 130, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "alanine + methylglyoxal 1:1 ~850 mM, 30 min"}
+    contrast: "acetate pH 4 vs phosphate pH 7 vs bicarbonate pH 7 at 130 C: pyrrole 1.6 vs 0.020 vs 0.055 mol % (x80 acid; bicarbonate x2.75 phosphate)"
+    status: operating
+    quote: "1.6 +/- 0.040"
+    quantity: "pyrrole 1.6 mol % at pH 4 vs 0.02 at pH 7 phosphate; the pyrazine moves only x2.1 the same way"
+    evidence: fed_intermediate
+    lab: "Ghent (De Kimpe) with Wageningen (van Boekel)"
+    dossiers: [adams2008_extraction.md]
+    where: "Table 3 rows 1-3"
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, feed: "seven amino acids 1 M (Asp, Phe 0.5 M) + methylglyoxal, 1 M phosphate pH 7, 30 min; also alanine + glyoxal, phenylglyoxal, 2,3-pentanedione"}
+    contrast: "amino acid: pyrrole Ala 0.02, Asn 0.36, Leu 0.16, Asp 1.56, Glu 1.81 mol % (Asp / Glu pots fell below pH 7); dicarbonyl: no analogous pyrrole from glyoxal, phenylglyoxal or 2,3-pentanedione"
+    status: not_detected
+    quote: "No similar pyrrole from alanine with glyoxal, phenylglyoxal or 2,3-pentanedione."
+    quantity: "not detected for the non-MGO dicarbonyls (no standards); present at 0.02-1.81 mol % with MGO"
+    evidence: fed_intermediate
+    lab: "Ghent (De Kimpe) with Wageningen (van Boekel)"
+    dossiers: [adams2008_extraction.md]
+    where: "Table 2; text p. 2150"
+    note: "absent applies to the glyoxal / phenylglyoxal / pentanedione arms, where the GC-MS extract method that found compound 34 could have seen an analogue. Status `not_detected` (was `absent`): no standard or detection limit for the glyoxal / phenylglyoxal / pentanedione analogues; the MGO pyrrole is a positive control for a different compound only (absent audit 2026-11-01)."
+  - key: {ph: neutral, temperature: very_high, water: intermediate_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "glucose + 15N-glycine + one of eight amino acids on wheat starch, 12-14 % moisture, 1 h", ph_note: "pH 7 before freeze-drying; a_w not measured"}
+    contrast: "glycine vs each competitor in the same pot: tested amino acids give < 35 % of pyrrole N; > 90 % of 1-methylpyrrole and 1-methylpyrrole-2-carboxaldehyde N is glycine's"
+    status: operating
+    quote: "more than 90 % of the nitrogen atoms were"
+    quantity: "pyrroles 58-226 ug/g glucose per pot (one IS); 15N partition printed in prose as bounds only"
+    evidence: labelling
+    lab: "Ho network (Rutgers: Hwang / Hartman / Ho)"
+    dossiers: [hwang1995b_extraction.md]
+    where: "text p. 2918; Table 1"
+    note: "same nine pots as hwang1995 (not an independent experiment). Labelling fixes the N source, not the route (Strecker + 3-deoxyosone vs furan + amine)."
+  # ---- pyridines (Maillard-side) -----------------------------------------------------------------------------------
+  - key: {ph: neutral, temperature: very_high, water: intermediate_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "same Hwang starch-bed pots"}
+    contrast: "second amino acid with glycine: pyridine subtotal Asp x2.31, Gln x1.78 ... Ile x0.28, Arg x0.22 vs glycine alone; amide amino acids gave no more pyridines than their acids"
+    status: operating
+    quote: "Aspartic acid had the highest contribution and isoleucine the lowest contribution in the"
+    quantity: "pyridines 6-64 ug/g glucose (2-acetylpyridine the commonest); per-pot 15N shares figure-only"
+    evidence: within_study_factor
+    lab: "Ho network (Rutgers: Hwang / Hartman / Ho)"
+    dossiers: [hwang1995b_extraction.md]
+    where: "Table 1 class subtotals; text"
+  # ---- pyridines from lipid enals / dienals + NH3 (also F30) -------------------------------------------------------
+  - key: {ph: alkaline, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "room temperature", sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "defatted soy flour slurry 1 : 10 at pH 9 for 1 h, + 5-13C-2,4-decadienal 5.64 mM and / or 15N-ammonia 8.05 mM; buffer controls pH 4.5 / 7 / 9"}
+    contrast: "pH 9 > 7 > 4.5 in buffer and slurry (text ordering, figure values); dienal + NH3 4.27 ppm vs dienal alone 2.38 and NH3 alone 0.30 (Stressland)"
+    status: dominant
+    quote: "dienal C5 becomes pyridine C2 (the carbon bearing the pentyl)"
+    quantity: "2-pentylpyridine 2.0-2.6 ppm from the dienal spike, 4.2-4.6 ppm with dienal + NH3 (isotope dilution, n = 3)"
+    evidence: labelling
+    lab: "University of Kentucky (Zhou / Boatright)"
+    dossiers: [zhou2000_extraction.md]
+    where: "Tables 1-2; Figure 4 isotope evidence; text on Figure 5"
+    note: "lipid-carbonyl route (also F30); 13C and 15N both fix the atom map: dominant for 2-pentylpyridine in this matrix."
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "2,4-decadienal 10 mM + Gly / Asp / Asn / Glu / Gln 50 mM in water, initial pH 7.5, sealed cylinder 1 h; amide-15N Asn and Gln"}
+    contrast: "amide-labelled asparagine vs glutamine: pentylpyridine N 46.8 / 47.5 % (Asn) vs 97.0 / 99.5 % (Gln) from the amide; Asn > Gln > Asp > Glu > Gly in yield (figure)"
+    status: dominant
+    quote: "Asn 46.77 / 47.46; Gln 97.00 / 99.50"
+    quantity: "glutamine: ~97-99.5 % of pentylpyridine N via free (amide) ammonia"
+    evidence: labelling
+    lab: "Ho network (Rutgers: Kim / Hartman / Ho)"
+    dossiers: [kim1996b_extraction.md]
+    where: "Table 3"
+    note: "dominant = the free-NH3 route for Gln; for Asn ~half the N is not shown to come from free NH3 (alpha-amine directly or via NH3 not separated)."
+  - key: {ph: neutral, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: inert, buffer: none_unbuffered, metals: not_controlled, system: "amino acid 0.005 mol + 2,4-decadienal in medium-chain triglyceride oil, closed cylinder 1 h (NH3 runs under N2 purge)", ph_note: "oil, no pH"}
+    contrast: "oil vs water (cross-study, Kim 1996): glutamine gives > 10x the 2-pentylpyridine in oil while releasing ~13x less NH3; Asn / Gln >> Gly / Asp / Glu"
+    status: operating
+    quote: "Glutamine produced > 10 times the amount of 2-pentylpyridine in oil systems"
+    quantity: "figure-only yields; NH3 released 7.36e-3 (Gln, oil) vs 9.48e-2 (Gln, water), authors' unit"
+    evidence: qualitative
+    lab: "Ho network (Rutgers: Kim / Ho)"
+    dossiers: [kim1998_extraction.md]
+    where: "Results text; Figures 1, 4 (figure-only)"
+  - key: {ph: neutral, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: phosphate, metals: not_controlled, system: "lipid aldehydes 50 umol + NH3 source 10 umol (ammonia, NH4Cl, urea, glutamine, creatinine; alanine) on 300 mg silica with 30 uL 0.3 M phosphate pH 6.5, closed tube 1 h; D2O arm"}
+    contrast: "ammonia source (crotonaldehyde): ammonia ~ urea > glutamine ~ NH4Cl > creatinine; dienal chain length C6 -> C10: 34.07 -> 14.68 umol/mmol Gln"
+    status: operating
+    quote: "14.68 ± 0.58"
+    quantity: "2-pentylpyridine 14.68 umol per mmol glutamine from 2,4-decadienal (authentic standard, n >= 3); 2,5-dialkylpyridines from 2-alkenals 10-34 % yields"
+    evidence: within_study_factor
+    lab: "Instituto de la Grasa, Seville (Zamora / Hidalgo)"
+    dossiers: [zamora2020_extraction.md]
+    where: "Tables 1-2"
+    note: "lipid-carbonyl route (also F30); D2O fixes exchangeable ring H only, so not a C / N label."
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: sulfur_aa_other, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "glutathione or cysteine ~50 mM + 2,4-decadienal ~13 mM, water, initial pH 7.5, sealed cylinder 1 h"}
+    contrast: "glutathione vs cysteine: 2-pentylpyridine 1219 vs 501.5 mg/mol amine (half of GSH's volatiles)"
+    status: operating
+    quote: "2-Pentylpyridine from GSH: 1219 mg/mol = 8.2 mmol/mol GSH"
+    quantity: "3.0 % of the decadienal charged (GSH pot, SDE, semi-quantitative)"
+    evidence: within_study_factor
+    lab: "Ho network (Rutgers: Zhang / Ho)"
+    dossiers: [zhang1989_extraction.md]
+    where: "Tables 1-2"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "C3-C10 alkanal + alpha-hydroxyketone or alpha-dione + ammonium sulfide, water, 30 min"}
+    contrast: "alkanal chain length: 2,3,5-trialkylpyridine 0.7-48 % of area, rising overall with chain length but not monotonically (dips in 3 of 5 series: 2.4 -> 2.2, 2.8 -> 2.6, 29.4 -> 27.6)"
+    status: operating
+    quote: "0.7-48 % of area, rising with chain length in every series"
+    quantity: "percent of chromatogram area; C27-C30 pyridines did not elute (analytical absence)"
+    evidence: within_study_factor
+    lab: "University of Reading (Elmore / Mottram)"
+    dossiers: [elmore1997_extraction.md]
+    where: "Tables 1-2; route E97-F"
+    note: "re-read 2026-11-01: reader A MINOR (single reader, Tables 1-2 checked): range matches; 'rising in every series' overstates (the quote keeps the dossier's wording)."
+  # ---- imidazoles --------------------------------------------------------------------------------------------------
+  - key: {ph: mild_acid, temperature: low, water: concentrated}
+    tags: {ph_basis: label, T_C: 22, sugar: none, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "glyoxal 1 M + glycine 1 M (serine 0.48 M, arginine 0.86 M, ornithine, aspartate) in D2O", ph_note: "assumed pH 6; fell 1-2 units (sedehi2013)"}
+    contrast: "amine identity: Gly / Ser / Asp / Orn give 1,3-disubstituted imidazoles; arginine gives side-chain adducts instead; ornithine 80 : 20 alpha : side chain"
+    status: dominant
+    quote: "glycine imidazole 60 ± 20 % and diimine 15 ± 5 % of the"
+    quantity: "imidazole formed at 60 +- 20 % of the glycine loss rate (~1.2 imidazole per 2 Gly); formic acid co-product; no 3-R products"
+    evidence: fed_intermediate
+    lab: "De Haan, University of San Diego (with Tolbert / Jimenez, Boulder)"
+    dossiers: [haan2009_extraction.md]
+    where: "text p. 2822; Table 1; Scheme 2"
+    note: "fed dicarbonyl + NMR stoichiometry on the amine (a partial mass balance). Room temperature, atmospheric chemistry; the k values are superseded by sedehi2013."
+  - key: {ph: acid, temperature: low, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: "4-25", sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "glyoxal or methylglyoxal + ammonium sulfate, glycine, serine, arginine, methylamine, 0.2-1.5 M in D2O, pH 2-7 monitored"}
+    contrast: "amine and pH: glyoxal + ammonium sulfate imidazole + formate >= 75 % of loss at pH 4; glyoxal + methylamine at pH 6 only 18 %; MG + ammonium methylimidazole >= 70 %; MG + amino acids ~1 % (aldol dominates)"
+    status: dominant
+    quote: "imidazole + formic acid, ≥ 75 % (pathway 1) at pH 4"
+    quantity: "pathway shares of dicarbonyl loss by 1H NMR; Ea 50 +- 11 kJ/mol (amino acids), 18 +- 8 (ammonium sulfate), 277-298 K"
+    evidence: fed_intermediate
+    lab: "De Haan, University of San Diego"
+    dossiers: [sedehi2013_extraction.md]
+    where: "Table 1; text (pathway shares); dossier sec. 1"
+    note: "dominant for glyoxal + ammonium at pH 4 (NMR product share of loss); the same lab as haan2009, so one lab for imidazoles."
+  - key: {ph: mild_acid, temperature: low, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: "4-25", sugar: none, amine: [glycine, other_free_aa, other_amine], oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "methylglyoxal + glycine / serine / arginine / methylamine, D2O", amine_note: "glycine / serine / arginine / methylamine (an alkylamine) arms"}
+    contrast: "methylglyoxal + amino acids vs + ammonium: methylimidazole ~1 % of MG loss vs >= 70 %; MG loss > 20x amine loss (amine-catalysed aldol)"
+    status: minor
+    quote: "methylimidazole ~1 % yield"
+    quantity: "~1 % of MG loss to (methyl)imidazoles; except MG + Gly at pH 3.5 (mostly N-methylimidazole)"
+    evidence: fed_intermediate
+    lab: "De Haan, University of San Diego"
+    dossiers: [sedehi2013_extraction.md]
+    where: "dossier sec. 1 table (what the loss produces)"
+condition_dependence: >-
+  SHOWN. Pyrroles: the aminoacetone + MGO pyrrole (2,5-diacetyl-3-methylpyrrole) is the main aminoacetone-derived
+  product at ~0.85 M in pH 4 acetate (x80 vs pH 7 phosphate) and rises with MGO excess, but appears only with MGO, not
+  glyoxal or other dicarbonyls (Ghent; one lab, fed, calibrated); N-methylpyrroles take their N from glycine when
+  glycine competes (Rutgers, 15N, 180 C). Pyridines: dienal / enal + NH3 is the route with free NH3 as N donor, shown
+  by 13C + 15N in soy slurry at room temperature (Kentucky), by amide-15N at 180 C in water (Rutgers), and as yields
+  on silica at 180 C (Seville); favoured by alkaline pH (free NH3; text ordering pH 9 > 7 > 4.5), by an oil medium
+  (x10, Rutgers, cross-study) and by amide amino acids (NH3 release). Imidazoles: glyoxal + primary amine gives
+  1,3-disubstituted imidazoles + formic acid at 4-25 C and molar concentration (De Haan lab); with ammonium the
+  imidazole route is >= 70-75 % of dicarbonyl loss, with amino acids and methylglyoxal it is ~1 % (aldol wins), and
+  glyoxal + amines above pH 4 go mostly to oligomers. ASSUMED / unshown: the free-aminoacetone step of the pyrrole;
+  any imidazole or pyrrole formation at 100-140 C in a dilute aqueous sugar pot; temperature dependence of the
+  pyrrole; the Maillard-side (non-lipid) pyridine route (Hwang's pyridines have no marker).
+best_supported_regimes:
+  - "acid / moderate-high T / concentrated / fed MGO + Ala: pyrrole operating, the main aminoacetone sink (Ghent only, calibrated)"
+  - "alkaline / low T / dilute / dienal + NH3 (soy): pyridine dominant by 13C + 15N (Kentucky)"
+  - "neutral / very_high T / dilute or oil / dienal + amide amino acid: pyridine via free NH3, dominant for Gln (Rutgers, 15N) and calibrated yields on silica (Seville): 3 labs for the dienal + NH3 pyridine"
+  - "acid-mild_acid / low T / concentrated / glyoxal + NH4+ or primary amino acid: imidazole dominant as dicarbonyl / amine fate (De Haan lab only)"
+unknown_regimes:
+  - "pyrroles at dilute concentration (< 0.5 M) or with a sugar as the dicarbonyl source: no calibrated pyrrole data outside Adams' ~0.85 M fed-MGO pots; Hwang's starch-bed pyrroles are uncalibrated."
+  - "labelling of the pyrrole route (does it go through free aminoacetone, or NH3 / amine + 3 MGO?): none."
+  - "imidazoles at Maillard temperatures (60-180 C) or in sugar pots: none on disk (only 4-25 C atmospheric chemistry)."
+  - "pyridines from sugar-derived carbonyls with a marker: none (Hwang 1995b is product-only)."
+  - "alkaline in-situ pH at high T for any F21 product: none."
+  - "O2 vs inert for pyrroles (Adams' Scheme 3 has a reduction step): none."
+  - "peptide or protein-bound amine for pyrroles / imidazoles: none."
+  - "a temperature ladder for any F21 product except Adams' two points (100 vs 130 C, pyrrole x1.5)."
+competing_families:
+  - "F19_aminoketone_pyrazine: the pyrrole competes with 2,5-DMP for aminoacetone and MGO; the pyrrole wins when acid or MGO-rich at ~1 M, they are equal at pH 7 phosphate."
+  - "F16_strecker_aldehyde / F10: glyoxal + amine imidazole and MG + amine aldol consume the dicarbonyl and the amine without a Strecker aldehyde or aminoketone (Sedehi: total glyoxal + glycine consumption transported to 100 C is ~1000x the engine's Strecker constant; transfer is an assumption)."
+  - "F26_thiazoles_thiophenes: lipid dienal + H2S -> 2-pentylthiophene and thiazolines compete with dienal + NH3 -> pyridine for the same dienal (Elmore, Zhang)."
+  - "F30_lipid_oxidation_crossover: every dienal / enal pyridine cell is also a lipid-crossover cell."
+  - "F31_melanoidins: imidazole-forming glyoxal + amine pots brown; the N-containing oligomers of glyoxal + amines above pH 4."
+engine: >-
+  NOT IN THE ENGINE. There is no pyrrole, pyridine or imidazole reaction and no species for them (network.py,
+  species.py; grep finds pyrrole / pyridine only in the B24 proline lane). Consequences: (a) AKM (aminoacetone) has
+  only the condensations as sinks: no aminoacetone + MGO pyrrole sink, which Ghent shows takes 38-231x the 2,5-DMP at
+  pH 4 / ~0.85 M and ~1x at pH 7 phosphate; (b) glyoxal's loss is r_go_sink (Kocadagli dry-glass, first order,
+  amine-independent, barrier fixed to zero) and methylglyoxal has no amine-dependent sink, whereas the literature's
+  glyoxal + amine -> imidazole + formic acid and MG + amine aldol consumption scale with amine and pH (De Haan lab,
+  4-25 C only); (c) no lipid enal / dienal + NH3 -> pyridine route (the lipid lane has no N chemistry; NH3 is not an
+  engine species), although three labs show 2-pentylpyridine from 2,4-decadienal + free NH3 with C and N labels;
+  (d) the only N-heterocycles besides pyrazines are B24's proline products (1-pyrroline + MGO -> 2-acetyl-1-pyrroline,
+  1-pyrroline + hydroxyacetone -> ATHP), a proline-specific route outside these cells. Whether the missing sinks
+  matter at 100-140 C in dilute pots is not measured (no high-T imidazole or dilute pyrrole data).

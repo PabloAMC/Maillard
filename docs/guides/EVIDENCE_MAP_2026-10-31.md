@@ -484,8 +484,14 @@ intermediate or lifetime; K5 = mass balance.
 
 **Verdict.**
 - **Disulfide as a reversible reservoir vs a terminal sink: CAN** (DFA guth1995, Quest mass balance, Reading).
-- **MFT lifetime at 95-145 C: NONE.** Only bounds exist (schieberle2000's rise; 50 C storage). The loss law behind
-  finding 4 of the 10-31 reviews cannot be fitted from the literature.
+- **MFT lifetime at 95-145 C: SINGLE plus a bound** (corrected 2026-11-01, cluster 4 and its red team; was "NONE.
+  Only bounds exist (schieberle2000's rise; 50 C storage)"):
+  - grosch1992 (DFA, inferred from SIDA after boiling, reflux vs SDE): ~0.03-0.05 /min at 100 C in dilute thiamine
+    pots, whose thiamine-derived electrophile (jhoo2002) may be the sink; model-dependent, probably a lower bound;
+  - the US 10,076,126 spike: <= 0.02-0.05 /min at 110 C in 0.25 M cysteine, derived from 4 single-vial digitised
+    points with co-heated standards through an assumed exhaustion profile, not measurement-grade (P 0.15);
+  - the two measure different channels, so whether one constant serves both is undecided (P pot-dependent >= 3x at
+    matched T ~0.5). The loss law behind finding 4 of the 10-31 reviews still cannot be fitted from the literature.
 - **Adduct sinks (melanoidin, protein, thiamine, Cys conjugates): SINGLE per adduct type.**
 
 ## 2.5 Cysteine fate / TTCA
@@ -503,7 +509,7 @@ intermediate or lifetime; K5 = mass balance.
 | K4 | li2011 | Chen, Jiangnan | Free-Cys first-order loss constants at 100-130 C | – | :3 |
 | K4 | zheng1994 | Ho network (Rutgers) | H2S from Cys slow, Ea ~130 kJ/mol | – | :209 |
 | K2 | mizutani1960 / obata1960 | Hokkaido | Thiazolidine-bound Cys releases H2S only 1.2-3.5x slower than free Cys | – | :3 |
-| K4 | fife1991, kallen1971 | USC; Penn | Ring opening fast, hydrolysis rate-limiting and general-base (phosphate) catalysed; K(pH) rises ~20x from pH 5.6 to 7.5 (formaldehyde) | – | fife1991:3; kallen1971:3 |
+| K4 | fife1991, kallen1971 (+ kallen1971b) | USC; Penn | Ring opening fast, hydrolysis rate-limiting and general-base (phosphate) catalysed; K(pH) rises ~20x from pH 5.6 to 7.5 (formaldehyde). (Corrected 2026-11-01: phosphate catalysis saturates at x3.5-5 and is absent below pH ~5.5 (kallen1971b); TC k_r ~1e-6 s⁻¹ at 25 C, pH 5.6-6.6, rising with pH from 2.8 to 5.6 (kallen1971 arithmetic 3, corrected)) | – | fife1991:3; kallen1971:3; kallen1971b:3 |
 
 **Verdict.**
 - **TTCA <-> Cys-ARP isomerisation in concentrated pots: CAN** (BTBU + Givaudan).
@@ -524,8 +530,10 @@ intermediate or lifetime; K5 = mass balance.
 | competition | martin2001 | Reading | Mixed amino acids are not additive (2.4-5.2x falls) | – | :65 |
 
 **Verdict.**
-- **Donor ranking: CAN** (DFA + Quest). The magnitude is unresolved: a ~20x cross-lab gap (CF-073), plausibly the
-  observation operator (SDE stripping).
+- **Donor ranking: CAN** (DFA + Quest). The magnitude is unresolved: a ~20x cross-lab gap (CF-073). (Corrected
+  2026-11-01, cluster 4; was "plausibly the observation operator (SDE stripping)":) the gap is donor-specific, MGO
+  +1.24, GO +0.89, 3-DG -0.20 dex (Weenen / Hofmann); a donor-generic operator is rejected (chi^2 11-22, df 2).
+  Stripping could act only through a donor-specific sink. The 3-DG arm agrees across labs.
 - **Amino-acid identity at a fixed donor: SINGLE** (DFA x 2 papers).
 - **O2 acid route: SINGLE** (DFA).
 - **Direct oxidative ARP route on the O2 question: SINGLE.**
@@ -608,12 +616,17 @@ does not test the coupling. **Needs designed data.**
 | spike recovery | hamzalioglu2026 / buttery1986 / fan2018 | Gökmen / USDA / BTBU | OPD-LC-MS recovery 99.5-103.6 %; 2-AP through SDE only 28 %; SAFE recovery of MFT 0.94 / 0.89 | :74 / :3 / :69 |
 | fibre competition | cerny2003, fischer2021 | Nestlé; Dijon | Excess furfural saturates the PDMS-DVB fibre; non-linear calibration in mixtures | cerny2003:196 |
 | SIDA flaw | us10076126 | Nestec | Labelled standards added BEFORE 110 C heating, so they degrade | :3 |
+| method comparison (added 2026-11-01) | grosch1992 | DFA | SIDA after boiling: reflux 4.7 / 33 vs SDE 25 / 136 ug MFT (thiamine; + Cys): in-pot loss | Table VIII, :17 |
+| spike recovery (added 2026-11-01) | mottram1996b | Reading | SDE reduces furyl disulfides to thiols in cooked beef (58-60 % of units) | Table 2, :30 |
 
 **Verdict.**
 - **Thiol work-up artefacts: CAN** (DFA + Reading).
 - **OPD in situ vs ex situ: CAN** (Glomb + Murata). The NF -> quinoxaline artefact is SINGLE (Murata).
-- **SDE recovery: CAN** for 2-AP and SAFE. For MFT itself the 4-5x SDE effect is cited only (Grosch & Zeiler-Hilgart,
-  below).
+- **SDE recovery: CAN** for 2-AP and SAFE. (Corrected 2026-11-01, cluster 4; was "For MFT itself the 4-5x SDE effect
+  is cited only (Grosch & Zeiler-Hilgart, below)":) for MFT, read at source (grosch1992), SIDA after boiling shows the
+  4-5x is in-pot loss avoided by SDE stripping, not a recovery factor (SINGLE, DFA, one within-study comparison, two
+  pots; P 0.85 that the standards went in after boiling). SDE of a protein matrix is a REDUCING operator (mottram1996b:
+  spiked furyl disulfides come out ~60 % as thiol in cooked beef, none in water; Reading, the same lab as mottram1996).
 - **SPME competition: NONE** (two passing observations).
 - **The EI-MS label artefact (liu2023b): NONE.** It rests on reviewer arithmetic.
 
@@ -625,9 +638,9 @@ does not test the coupling. **Needs designed data.**
 | hub split, pentose in water x pH; amine acceleration; phosphate | **SINGLE** / **NONE** | Ho network (+ DFA one pH; Reading contradicting) | flux split vs standing level; k0 + k_aa[AA] + k_P[P] |
 | 3-DX sink (Cys trap) | **CAN** (existence) / **SINGLE** (pH law) | Ho network, Leeds | trap grows with pH? pentose 3-DX lifetime |
 | MFT routes 95-140 C | **CAN** | Nestlé, BTBU, DFA, Reading, Givaudan, Minnesota | NF vs intact C5 at 140-170 C (**SINGLE**); time-resolved mix (**NONE**) |
-| MFT loss | **NONE** (lifetime at process temperature); **CAN** (disulfide reversible) | DFA, Quest, Reading | first-order loss law and its O2 / carbonyl dependence at 95-145 C |
+| MFT loss | **SINGLE plus a bound** (lifetime at process temperature; corrected 2026-11-01, was NONE, see 2.4); **CAN** (disulfide reversible) | DFA, Quest, Reading | first-order loss law and its O2 / carbonyl dependence at 95-145 C |
 | cysteine fate / TTCA | **CAN** (concentrated); **SINGLE** (dilute off-equilibrium) | BTBU, Givaudan, Ho network, Rutgers, Hokkaido | catalysed hydrolysis vs K(pH) vs adducts; H2S time course |
-| Strecker donor identity | **CAN** (ranking); magnitude conflict | DFA, Quest | 20x yield gap (operator?) |
+| Strecker donor identity | **CAN** (ranking); magnitude conflict | DFA, Quest | 20x yield gap, donor-specific (a donor-generic operator rejected; corrected 2026-11-01, was "operator?") |
 | Strecker O2 acid route | **SINGLE** | DFA | cross-lab replicate |
 | pyrazines: carbon origin | **CAN** | Nestlé, Reading | -- |
 | pyrazines: pyrrole sink | **SINGLE** | Ghent | aminoketone partition rates |
@@ -639,7 +652,9 @@ does not test the coupling. **Needs designed data.**
 | redox, 1,4-dideoxyosones | **SINGLE** | Ledl (+ Kroh amine-free) | quantified alpha- vs beta-amino acid x O2 |
 | lipid carbonyls as Strecker donors | **SINGLE** | Seville | second lab; lipid vs sugar donor in one pot |
 | operators: thiol work-up, OPD timing | **CAN** | DFA, Reading, Glomb, Murata | -- |
-| operators: SPME competition, SDE for MFT, EI-MS label | **NONE** | -- | method-comparison pots |
+| operators: SDE for MFT (split out 2026-11-01) | **SINGLE** | DFA | in-pot sink short-circuited by stripping; a second lab |
+| operators: SDE reduction of disulfides (split out 2026-11-01) | **SINGLE** | Reading | rho beyond one beef endpoint |
+| operators: SPME competition, EI-MS label | **NONE** | -- | method-comparison pots |
 
 ---
 
@@ -792,11 +807,11 @@ lo1994, shibamoto1977, vandenouweland1975, huber1990, and others).
 | Voigt & Glomb 2009, J. Agric. Food Chem. 57:4765-4770, "Reactivity of 1-deoxy-D-erythro-hexo-2,3-diulose: a key intermediate..." | 10.1021/jf900459x | Crossref | Amine-free vs amine 1-DG cleavage: the amine-acceleration (B7a) question, 2.1 | "The lead that could answer acceleration is Voigt & Glomb 2009" smuda2010:55-56 (the queue lists it as "DOI to verify"; now verified) |
 | Beck, Ledl & Severin 1988, Carbohydr. Res. 177:240-243, "Formation of 1-deoxy-D-erythro-2,3-hexodiulose from Amadori compounds" | 10.1016/0008-6215(88)85058-4 | Crossref | 1-DG : 3-DG split at pH 7 (hub, 2.1) | martins2003b:462-464; "It has not been read." blank1997:744 |
 | Huyghues-Despointes & Yaylayan 1996, J. Agric. Food Chem. 44:672-681, "Retro-aldol and redox reactions of Amadori compounds: mechanistic studies with variously labeled D-[13C]glucose" | 10.1021/jf9502921 | Crossref | K1 labelling for the REDOX mechanism (2.9) and ARP retro-aldol (2.1) | docs/history/mechanism_reviews_2026-10-31/hub.md:81 ("Unverified content"); ARP rates cited at jousse2002:271 |
-| Kallen 1971, J. Am. Chem. Soc. 93:6236-6248, "Mechanism of reactions involving Schiff base intermediates. Thiazolidine formation from L-cysteine and formaldehyde" | 10.1021/ja00752a040 | Crossref | Forward / reverse thiazolidine RATE constants (2.5). The on-disk kallen1971 is the equilibria paper, 93:6227, 10.1021/ja00752a039 | "Not on disk; this is the paper that would carry forward/reverse rate constants." kallen1971:19 |
+| Kallen 1971, J. Am. Chem. Soc. 93:6236-6248, "Mechanism of reactions involving Schiff base intermediates. Thiazolidine formation from L-cysteine and formaldehyde" | 10.1021/ja00752a040 | Crossref | Forward / reverse thiazolidine RATE constants (2.5). The on-disk kallen1971 is the equilibria paper, 93:6227, 10.1021/ja00752a039. (Corrected 2026-11-01: now on disk as `kallen1971b_extraction.md`; it gives TC k_r ~1e-6 s⁻¹ at 25 C, and shows the kallen1971 arithmetic-3 "k_r" was the relaxation) | "Not on disk; this is the paper that would carry forward/reverse rate constants." kallen1971:19 |
 | Charles-Bernard, Kraehenbuehl, Rytz & Roberts 2005, J. Agric. Food Chem. 53:4417-4425, "Interactions between volatile and nonvolatile coffee components. 1. Screening..." | 10.1021/jf048021q | Crossref | Which matrix fraction binds thiols (MFT loss, 2.4). The on-disk charles-bernard2005.pdf is Part 2 | "Part 1 of the pair ... -- not on disk" charlesbernard2005:28 |
 | Ghiron, Quack, Mawhinney & Feather 1988, J. Agric. Food Chem. 36:677-680, "Studies on the role of 3-deoxy-D-erythro-glucosulose (3-deoxyglucosone) in nonenzymic browning..." | 10.1021/jf00082a002 | Crossref (title) | 3-DG as a Strecker donor (2.6, 3-DG sink 2.2) | docs/history/mechanism_reviews_2026-10-31/strecker.md:113 |
 | Grosch & Zeiler-Hilgart 1992, ACS Symp. Ser. 490, ch. 14, 183-192, "Formation of meatlike flavor compounds" | 10.1021/bk-1992-0490.ch014 | Crossref | The 4-5x SDE vs direct-extraction MFT effect (operator, 2.11); thiamine / Cys as MFT source | "a 4-5 fold increase in recovered MFT by Likens-Nickerson distillation-extraction over direct extraction" bolton1993:203 |
-| Weenen & Tjan 1992, ACS Symp. Ser. 490, ch. 17, 217-231, "Analysis, structure, and reactivity of 3-deoxyglucosone" | 10.1021/bk-1992-0490.ch017 | Crossref | Cysteamine trapping of 3-DG (K3, 2.2). The dossier cites it as "Weenen & Tjan 1994" | "(Weenen & Tjan 1994 with cysteamine trapping; NMR)" weenen1998:114 |
+| Weenen & Tjan 1992, ACS Symp. Ser. 490, ch. 17, 217-231, "Analysis, structure, and reactivity of 3-deoxyglucosone" | 10.1021/bk-1992-0490.ch017 | Crossref | ~~Cysteamine trapping of 3-DG (K3, 2.2). The dossier cites it as "Weenen & Tjan 1994"~~ (corrected 2026-11-01: this 1992 chapter has NO cysteamine trapping and no Strecker measurement -- 3-DG purification, (hemi)acetal structure by 13C NMR, methylpyrazines from 3-DG + Asn; `weenen1992_extraction.md`. The trapping weenen1998:114 cites is a different, 1994 paper, not on disk) | "(Weenen & Tjan 1994 with cysteamine trapping; NMR)" weenen1998:114 |
 | Kim, Hartman & Ho 1996, J. Agric. Food Chem. 44:3906-3908, "Formation of 2-pentylpyridine from the thermal interaction of amino acids and 2,4-decadienal" | 10.1021/jf950623+ | Crossref (title) | Companion to kim1998 (lipid carbonyl + amine, 2.10). The on-disk kim1996 is a different paper | "The oil-medium companion to Kim, Hartman & Ho 1996 (aqueous)" kim1998:2 |
 | Low, Koutsidis, Parker, Elmore, Dodson & Mottram 2006, J. Agric. Food Chem. 54:5976-5983 | 10.1021/jf060328x | Crossref | Concentrations behind low2007's label shares (2.7); queued as "optional, DOI to verify", now verified | "Low 2006 (not on disk)" low2007:162 |
 | Mottram, Nobrega & Dodson 1996, Flavour Science, 413-418, "Changes in thiol and disulfide flavour compounds resulting from the interaction with proteins" | 10.1533/9781845698232.7.413 | Crossref (title) | Thiol / disulfide exchange with protein (2.4). Lead that it is the "Mottram et al., 1998" whitfield1999 cites: the years differ | "thiols are not converted to disulfides during the analysis procedures ... (Mottram et al., 1998)" whitfield1999:60 |

@@ -1,0 +1,1079 @@
+# KEYED TEST TABLE -- Zamora R, Leon MM & Hidalgo FJ 2015, J Agric Food Chem 63 (accepted manuscript; Instituto de la Grasa, CSIC, Seville),
+# Table 1 (MS p. 20): 2-phenylethylamine (PEA), phenylacetaldehyde (PAC) and benzaldehyde from L-phenylalanine + one of eleven lipid
+# oxidation products (or none), pH 3 (citrate) / pH 6 (phosphate) x nitrogen / air, low-moisture sand model, 140 C / 1 h.
+# PURPOSE: TEST data for engine error E7 ('lipid lane inert to Maillard odorants'): the Strecker aldehyde PAC and the amine PEA from Phe
+# with vs without lipid carbonyls / hydroperoxides (e.g. PAC 3.87 -> 104.52 nmol/umol with LOOH at pH 3 in air). Seville is a TEST lab
+# for E7 already (F30#15) and DEV for E20, so it serves E7 only. NEVER a fit input: fit_rows.load refuses every row (the unit is not in fit_rows.UNITS); keep it so.
+# Format: src/kinetic_core/fit_rows.py. Ledger entry: zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl (lipid.yml); quantification
+# calibrated (external curves in sand / pH 6 phosphate; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol after NaBH4).
+#
+# READERS (2026-11-01), independent and in parallel, blind to each other: reader A (agent-readerA-2026-11-01; pdftotext -layout for
+# born-digital text, pdfimages / sips crops for scans and figures) and reader B (agent-readerB-2026-11-01; pages rendered at 200-300 ppi
+# and read visually, pdftotext as a cross-check). Raw files: the coordinator's scratchpad (queue_reader_A.yml, queue_reader_B.yml);
+# B's rows as written: fit_rows/second/heldout_zamora2015_tab1.yml. Adjudicator: agent-queue-adjudicator-2026-11-01.
+# ADJUDICATION: table cells, value = the printed cell. A and B agree on all 144 cells (mean and SD); Tukey letters were keyed by reader B
+# only and are not carried. Read error = half the last printed digit (0.005) in dex, with the printed SD (>= 3 experiments).
+# RESOLUTIONS: (1) Buffers: the Methods say '0.3 M buffer'; the figure captions name sodium citrate (pH 3) and sodium phosphate (pH 6)
+# (both readers). (2) Temperature / time: Table 1 does not restate them; the Methods' default 'usually 1 h at 140 C' is used
+# (conditions_inferred). (3) Amounts: 10 umol Phe + 10 umol lipid product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a
+# low-moisture solid, no solution concentration (initial_mmol_L empty; amounts_umol given). (4) The Phe-alone control is not zero (PEA
+# 5.71 at pH 6 N2; PAC 21.08 at pH 6 air): lipid effects must be read against it. TEXT CHECKS (consistent): PEA '1.4-2.6 %' at pH 3
+# with the hydroperoxides; 2-octenal 1.5 % (pH 3 air) and 2.4 % (pH 6 N2). No row dropped.
+# NOT ROWS: '0.00 +- 0.00' cells (no log residual), listed per pot under zero_printed. Lipid keys: V_LOOH, V_LOOMe, V_LnOOMe, V_OC
+# (2-octenal), V_HD (2,4-heptadienal), V_DD (2,4-decadienal), V_EH / V_ED (4,5-epoxy-2-heptenal / -decenal), V_OH / V_ON (4-oxo-2-hexenal /
+# -nonenal), V_HN (4-hydroxy-2-nonenal); V_PHE L-phenylalanine.
+status: ready   # two readers + adjudication (2026-11-01); TEST data, never a fit input: fit_rows.load refuses every row (units outside fit_rows.UNITS)
+purpose: 'TEST data for the contrast benchmark, engine error E7 (lipid lane inert to Maillard odorants; keying_queue.yml rank 9; existing TEST contrast F30#15); never a fit input'
+pots:
+  zamora2015_tab1_none_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'none (phenylalanine alone)',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: ['V_2_PHENYLETHYLAMINE'],
+     source_table: 'Table 1 (MS p. 20), lipid Phe, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_none_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'none (phenylalanine alone)',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid Phe, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_none_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'none (phenylalanine alone)',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: ['V_PHENYLACETALDEHYDE', 'V_BENZALDEHYDE'],
+     source_table: 'Table 1 (MS p. 20), lipid Phe, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_none_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'none (phenylalanine alone)',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid Phe, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LOOH_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LOOH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LOOH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '13-hydroperoxyoctadeca-9,11-dienoic acid',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LOOH, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LOOH_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LOOH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LOOH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '13-hydroperoxyoctadeca-9,11-dienoic acid',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LOOH, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LOOH_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LOOH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LOOH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '13-hydroperoxyoctadeca-9,11-dienoic acid',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LOOH, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LOOH_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LOOH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LOOH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '13-hydroperoxyoctadeca-9,11-dienoic acid',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LOOH, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LOOMe_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LOOMe', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LOOMe: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'methyl 13-hydroperoxyoctadeca-9,11-dienoate',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LOOMe, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LOOMe_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LOOMe', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LOOMe: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'methyl 13-hydroperoxyoctadeca-9,11-dienoate',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LOOMe, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LOOMe_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LOOMe', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LOOMe: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'methyl 13-hydroperoxyoctadeca-9,11-dienoate',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LOOMe, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LOOMe_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LOOMe', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LOOMe: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'methyl 13-hydroperoxyoctadeca-9,11-dienoate',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LOOMe, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LnOOMe_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LnOOMe', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LnOOMe: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'methyl 13-hydroperoxyoctadeca-9,11,15-trienoate',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LnOOMe, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LnOOMe_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LnOOMe', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LnOOMe: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'methyl 13-hydroperoxyoctadeca-9,11,15-trienoate',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LnOOMe, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LnOOMe_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LnOOMe', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LnOOMe: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'methyl 13-hydroperoxyoctadeca-9,11,15-trienoate',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LnOOMe, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_LnOOMe_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_LnOOMe', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_LnOOMe: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: 'methyl 13-hydroperoxyoctadeca-9,11,15-trienoate',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid LnOOMe, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_OC_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_OC', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_OC: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2-octenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid OC, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_OC_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_OC', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_OC: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2-octenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid OC, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_OC_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_OC', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_OC: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2-octenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid OC, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_OC_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_OC', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_OC: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2-octenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid OC, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_HD_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_HD', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_HD: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2,4-heptadienal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid HD, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_HD_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_HD', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_HD: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2,4-heptadienal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid HD, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_HD_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_HD', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_HD: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2,4-heptadienal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid HD, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_HD_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_HD', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_HD: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2,4-heptadienal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid HD, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_DD_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_DD', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_DD: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2,4-decadienal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid DD, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_DD_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_DD', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_DD: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2,4-decadienal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid DD, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_DD_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_DD', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_DD: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2,4-decadienal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid DD, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_DD_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_DD', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_DD: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '2,4-decadienal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid DD, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_EH_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_EH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_EH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4,5-epoxy-2-heptenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid EH, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_EH_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_EH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_EH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4,5-epoxy-2-heptenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid EH, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_EH_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_EH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_EH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4,5-epoxy-2-heptenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid EH, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_EH_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_EH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_EH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4,5-epoxy-2-heptenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid EH, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_ED_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_ED', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_ED: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4,5-epoxy-2-decenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid ED, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_ED_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_ED', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_ED: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4,5-epoxy-2-decenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid ED, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_ED_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_ED', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_ED: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4,5-epoxy-2-decenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid ED, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_ED_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_ED', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_ED: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4,5-epoxy-2-decenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid ED, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_OH_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_OH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_OH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-oxo-2-hexenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid OH, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_OH_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_OH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_OH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-oxo-2-hexenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid OH, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_OH_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_OH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_OH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-oxo-2-hexenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid OH, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_OH_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_OH', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_OH: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-oxo-2-hexenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid OH, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_ON_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_ON', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_ON: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-oxo-2-nonenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid ON, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_ON_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_ON', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_ON: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-oxo-2-nonenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid ON, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_ON_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_ON', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_ON: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-oxo-2-nonenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid ON, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_ON_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_ON', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_ON: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-oxo-2-nonenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid ON, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_HN_pH3_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_HN', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_HN: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-hydroxy-2-nonenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: ['V_PHENYLACETALDEHYDE'],
+     source_table: 'Table 1 (MS p. 20), lipid HN, pH3 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_HN_pH3_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_HN', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_HN: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-hydroxy-2-nonenal',
+     label_ph: 3,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid HN, pH3 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_HN_pH6_N2:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_HN', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_HN: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-hydroxy-2-nonenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'nitrogen',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: ['V_BENZALDEHYDE'],
+     source_table: 'Table 1 (MS p. 20), lipid HN, pH6 N2: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+  zamora2015_tab1_HN_pH6_air:
+    {ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl',
+     engine_species_missing: ['V_2_PHENYLETHYLAMINE', 'V_BENZALDEHYDE', 'V_HN', 'V_PHE', 'V_PHENYLACETALDEHYDE'],
+     t_c: 140,
+     t_c_basis: 'Methods default (''usually 1 h at 140 C''); Table 1 does not restate it',
+     conditions_inferred: true,
+     minutes: 60,
+     initial_mmol_L: {},
+     amounts_umol: {V_PHE: 10, V_HN: 10},
+     concentration_basis: '10 umol L-phenylalanine + 10 umol lipid oxidation product on 600 mg sand with 30 uL 0.3 M buffer + 80 uL water: a low-moisture solid, no solution concentration',
+     lipid: '4-hydroxy-2-nonenal',
+     label_ph: 6,
+     ph_measured_at: 'nominal pH of the 0.3 M buffer stock; no measured pH',
+     buffer: 'pH 3 sodium citrate, pH 6 sodium phosphate (0.3 M, 30 uL; identities from the figure captions, the Methods say ''0.3 M buffer'')',
+     atmosphere: 'air',
+     vessel: 'closed test tubes, controlled atmosphere',
+     zero_printed: [],
+     source_table: 'Table 1 (MS p. 20), lipid HN, pH6 air: nmol per umol phenylalanine, mean +- SD of >= 3 independent experiments (NaBH4-reduced; PAC as 2-phenylethanol, benzaldehyde as benzyl alcohol)',
+     condition_quote: 'Methods: ''mixtures of phenylalanine and the lipid derivative (10 umol of each) were singly homogenized with 50-70 mesh sand (600 mg), 30 uL of 0.3 M buffer, and 80 uL of water. Samples were heated under controlled atmosphere in closed test tubes at the indicated times and temperatures, usually 1 h at 140 C'''}
+rows:
+  - {pot: 'zamora2015_tab1_none_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 0.45, unit: 'nmol_per_umol_Phe', sd: 0.19, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid Phe, pH 3 N2: 0.45 +- 0.19; readers A and B identical', read_error: 0.0048, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_none_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 2.27, unit: 'nmol_per_umol_Phe', sd: 0.18, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid Phe, pH 3 N2: 2.27 +- 0.18; readers A and B identical', read_error: 0.00096, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_none_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 4.83, unit: 'nmol_per_umol_Phe', sd: 1.22, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid Phe, pH 3 air: 4.83 +- 1.22; readers A and B identical', read_error: 0.00045, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_none_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 3.87, unit: 'nmol_per_umol_Phe', sd: 0.46, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid Phe, pH 3 air: 3.87 +- 0.46; readers A and B identical', read_error: 0.00056, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_none_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 6.02, unit: 'nmol_per_umol_Phe', sd: 0.92, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid Phe, pH 3 air: 6.02 +- 0.92; readers A and B identical', read_error: 0.00036, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_none_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 5.71, unit: 'nmol_per_umol_Phe', sd: 1.01, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid Phe, pH 6 N2: 5.71 +- 1.01; readers A and B identical', read_error: 0.00038, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_none_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 0.83, unit: 'nmol_per_umol_Phe', sd: 0.31, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid Phe, pH 6 air: 0.83 +- 0.31; readers A and B identical', read_error: 0.0026, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_none_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 21.08, unit: 'nmol_per_umol_Phe', sd: 3.72, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid Phe, pH 6 air: 21.08 +- 3.72; readers A and B identical', read_error: 0.0001, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_none_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 3.43, unit: 'nmol_per_umol_Phe', sd: 1.33, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid Phe, pH 6 air: 3.43 +- 1.33; readers A and B identical', read_error: 0.00063, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 25.95, unit: 'nmol_per_umol_Phe', sd: 2.18, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LOOH, pH 3 N2: 25.95 +- 2.18; readers A and B identical', read_error: 8.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 20.75, unit: 'nmol_per_umol_Phe', sd: 5.5, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LOOH, pH 3 N2: 20.75 +- 5.50; readers A and B identical', read_error: 0.0001, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 6.37, unit: 'nmol_per_umol_Phe', sd: 1.32, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LOOH, pH 3 N2: 6.37 +- 1.32; readers A and B identical', read_error: 0.00034, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 25.89, unit: 'nmol_per_umol_Phe', sd: 3, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LOOH, pH 3 air: 25.89 +- 3.00; readers A and B identical', read_error: 8.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 104.52, unit: 'nmol_per_umol_Phe', sd: 6.85, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LOOH, pH 3 air: 104.52 +- 6.85; readers A and B identical', read_error: 2.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 60.57, unit: 'nmol_per_umol_Phe', sd: 4.71, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LOOH, pH 3 air: 60.57 +- 4.71; readers A and B identical', read_error: 4.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 11.56, unit: 'nmol_per_umol_Phe', sd: 1.12, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LOOH, pH 6 N2: 11.56 +- 1.12; readers A and B identical', read_error: 0.00019, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 5.55, unit: 'nmol_per_umol_Phe', sd: 0.83, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LOOH, pH 6 N2: 5.55 +- 0.83; readers A and B identical', read_error: 0.00039, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 1.69, unit: 'nmol_per_umol_Phe', sd: 0.51, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LOOH, pH 6 N2: 1.69 +- 0.51; readers A and B identical', read_error: 0.0013, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 7.55, unit: 'nmol_per_umol_Phe', sd: 1.22, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LOOH, pH 6 air: 7.55 +- 1.22; readers A and B identical', read_error: 0.00029, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 31.71, unit: 'nmol_per_umol_Phe', sd: 7.35, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LOOH, pH 6 air: 31.71 +- 7.35; readers A and B identical', read_error: 7.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOH_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 18.99, unit: 'nmol_per_umol_Phe', sd: 3.92, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LOOH, pH 6 air: 18.99 +- 3.92; readers A and B identical', read_error: 0.00011, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 20.99, unit: 'nmol_per_umol_Phe', sd: 2.88, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LOOMe, pH 3 N2: 20.99 +- 2.88; readers A and B identical', read_error: 0.0001, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 33.3, unit: 'nmol_per_umol_Phe', sd: 3.46, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LOOMe, pH 3 N2: 33.30 +- 3.46; readers A and B identical', read_error: 7.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 6.33, unit: 'nmol_per_umol_Phe', sd: 1.43, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LOOMe, pH 3 N2: 6.33 +- 1.43; readers A and B identical', read_error: 0.00034, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 13.77, unit: 'nmol_per_umol_Phe', sd: 2.9, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LOOMe, pH 3 air: 13.77 +- 2.90; readers A and B identical', read_error: 0.00016, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 160.54, unit: 'nmol_per_umol_Phe', sd: 32.76, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LOOMe, pH 3 air: 160.54 +- 32.76; readers A and B identical', read_error: 1.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 69.87, unit: 'nmol_per_umol_Phe', sd: 8.7, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LOOMe, pH 3 air: 69.87 +- 8.70; readers A and B identical', read_error: 3.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 10.6, unit: 'nmol_per_umol_Phe', sd: 0.87, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LOOMe, pH 6 N2: 10.60 +- 0.87; readers A and B identical', read_error: 0.0002, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 14.26, unit: 'nmol_per_umol_Phe', sd: 0.8, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LOOMe, pH 6 N2: 14.26 +- 0.80; readers A and B identical', read_error: 0.00015, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 3.14, unit: 'nmol_per_umol_Phe', sd: 0.41, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LOOMe, pH 6 N2: 3.14 +- 0.41; readers A and B identical', read_error: 0.00069, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 3.58, unit: 'nmol_per_umol_Phe', sd: 1.18, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LOOMe, pH 6 air: 3.58 +- 1.18; readers A and B identical', read_error: 0.00061, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 52.79, unit: 'nmol_per_umol_Phe', sd: 6.6, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LOOMe, pH 6 air: 52.79 +- 6.60; readers A and B identical', read_error: 4.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LOOMe_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 34.62, unit: 'nmol_per_umol_Phe', sd: 0.49, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LOOMe, pH 6 air: 34.62 +- 0.49; readers A and B identical', read_error: 6.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 16.05, unit: 'nmol_per_umol_Phe', sd: 3.62, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LnOOMe, pH 3 N2: 16.05 +- 3.62; readers A and B identical', read_error: 0.00014, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 42.17, unit: 'nmol_per_umol_Phe', sd: 9.83, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LnOOMe, pH 3 N2: 42.17 +- 9.83; readers A and B identical', read_error: 5.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 5.49, unit: 'nmol_per_umol_Phe', sd: 0.59, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LnOOMe, pH 3 N2: 5.49 +- 0.59; readers A and B identical', read_error: 0.0004, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 14.67, unit: 'nmol_per_umol_Phe', sd: 3.34, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LnOOMe, pH 3 air: 14.67 +- 3.34; readers A and B identical', read_error: 0.00015, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 118.08, unit: 'nmol_per_umol_Phe', sd: 7.43, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LnOOMe, pH 3 air: 118.08 +- 7.43; readers A and B identical', read_error: 2.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 51.4, unit: 'nmol_per_umol_Phe', sd: 4.52, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LnOOMe, pH 3 air: 51.40 +- 4.52; readers A and B identical', read_error: 4.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 11.25, unit: 'nmol_per_umol_Phe', sd: 2.07, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LnOOMe, pH 6 N2: 11.25 +- 2.07; readers A and B identical', read_error: 0.00019, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 14.72, unit: 'nmol_per_umol_Phe', sd: 3.36, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LnOOMe, pH 6 N2: 14.72 +- 3.36; readers A and B identical', read_error: 0.00015, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 2.94, unit: 'nmol_per_umol_Phe', sd: 0.78, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LnOOMe, pH 6 N2: 2.94 +- 0.78; readers A and B identical', read_error: 0.00074, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 2.15, unit: 'nmol_per_umol_Phe', sd: 0.4, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid LnOOMe, pH 6 air: 2.15 +- 0.40; readers A and B identical', read_error: 0.001, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 49.04, unit: 'nmol_per_umol_Phe', sd: 5.73, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid LnOOMe, pH 6 air: 49.04 +- 5.73; readers A and B identical', read_error: 4.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_LnOOMe_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 27.9, unit: 'nmol_per_umol_Phe', sd: 5.15, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid LnOOMe, pH 6 air: 27.90 +- 5.15; readers A and B identical', read_error: 8.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 8.87, unit: 'nmol_per_umol_Phe', sd: 0.83, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid OC, pH 3 N2: 8.87 +- 0.83; readers A and B identical', read_error: 0.00024, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 3.34, unit: 'nmol_per_umol_Phe', sd: 0.26, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid OC, pH 3 N2: 3.34 +- 0.26; readers A and B identical', read_error: 0.00065, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 5.52, unit: 'nmol_per_umol_Phe', sd: 0.43, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid OC, pH 3 N2: 5.52 +- 0.43; readers A and B identical', read_error: 0.00039, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 15, unit: 'nmol_per_umol_Phe', sd: 2.8, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid OC, pH 3 air: 15.00 +- 2.80; readers A and B identical', read_error: 0.00014, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 30.96, unit: 'nmol_per_umol_Phe', sd: 5.03, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid OC, pH 3 air: 30.96 +- 5.03; readers A and B identical', read_error: 7.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 20.54, unit: 'nmol_per_umol_Phe', sd: 5.62, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid OC, pH 3 air: 20.54 +- 5.62; readers A and B identical', read_error: 0.00011, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 23.98, unit: 'nmol_per_umol_Phe', sd: 4.53, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid OC, pH 6 N2: 23.98 +- 4.53; readers A and B identical', read_error: 9.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 2.69, unit: 'nmol_per_umol_Phe', sd: 0.16, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid OC, pH 6 N2: 2.69 +- 0.16; readers A and B identical', read_error: 0.00081, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 0.54, unit: 'nmol_per_umol_Phe', sd: 0.21, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid OC, pH 6 N2: 0.54 +- 0.21; readers A and B identical', read_error: 0.004, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 2.74, unit: 'nmol_per_umol_Phe', sd: 0.22, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid OC, pH 6 air: 2.74 +- 0.22; readers A and B identical', read_error: 0.00079, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 15.52, unit: 'nmol_per_umol_Phe', sd: 2.58, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid OC, pH 6 air: 15.52 +- 2.58; readers A and B identical', read_error: 0.00014, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OC_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 10.89, unit: 'nmol_per_umol_Phe', sd: 1.81, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid OC, pH 6 air: 10.89 +- 1.81; readers A and B identical', read_error: 0.0002, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 25.3, unit: 'nmol_per_umol_Phe', sd: 5.77, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid HD, pH 3 N2: 25.30 +- 5.77; readers A and B identical', read_error: 9.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 18.8, unit: 'nmol_per_umol_Phe', sd: 4.01, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid HD, pH 3 N2: 18.80 +- 4.01; readers A and B identical', read_error: 0.00012, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 6.88, unit: 'nmol_per_umol_Phe', sd: 1.61, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid HD, pH 3 N2: 6.88 +- 1.61; readers A and B identical', read_error: 0.00032, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 7.95, unit: 'nmol_per_umol_Phe', sd: 0.55, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid HD, pH 3 air: 7.95 +- 0.55; readers A and B identical', read_error: 0.00027, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 81.96, unit: 'nmol_per_umol_Phe', sd: 9.88, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid HD, pH 3 air: 81.96 +- 9.88; readers A and B identical', read_error: 3.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 19.48, unit: 'nmol_per_umol_Phe', sd: 1.11, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid HD, pH 3 air: 19.48 +- 1.11; readers A and B identical', read_error: 0.00011, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 27.63, unit: 'nmol_per_umol_Phe', sd: 4.59, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid HD, pH 6 N2: 27.63 +- 4.59; readers A and B identical', read_error: 8.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 2.49, unit: 'nmol_per_umol_Phe', sd: 0.74, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid HD, pH 6 N2: 2.49 +- 0.74; readers A and B identical', read_error: 0.00087, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 1.6, unit: 'nmol_per_umol_Phe', sd: 0.43, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid HD, pH 6 N2: 1.60 +- 0.43; readers A and B identical', read_error: 0.0014, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 3.18, unit: 'nmol_per_umol_Phe', sd: 0.71, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid HD, pH 6 air: 3.18 +- 0.71; readers A and B identical', read_error: 0.00068, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 14.07, unit: 'nmol_per_umol_Phe', sd: 2.6, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid HD, pH 6 air: 14.07 +- 2.60; readers A and B identical', read_error: 0.00015, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HD_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 12.42, unit: 'nmol_per_umol_Phe', sd: 0.19, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid HD, pH 6 air: 12.42 +- 0.19; readers A and B identical', read_error: 0.00017, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 30.99, unit: 'nmol_per_umol_Phe', sd: 3.37, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid DD, pH 3 N2: 30.99 +- 3.37; readers A and B identical', read_error: 7.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 21.07, unit: 'nmol_per_umol_Phe', sd: 6.37, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid DD, pH 3 N2: 21.07 +- 6.37; readers A and B identical', read_error: 0.0001, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 7.79, unit: 'nmol_per_umol_Phe', sd: 1.64, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid DD, pH 3 N2: 7.79 +- 1.64; readers A and B identical', read_error: 0.00028, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 11.23, unit: 'nmol_per_umol_Phe', sd: 2.03, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid DD, pH 3 air: 11.23 +- 2.03; readers A and B identical', read_error: 0.00019, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 126.82, unit: 'nmol_per_umol_Phe', sd: 13.58, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid DD, pH 3 air: 126.82 +- 13.58; readers A and B identical', read_error: 2.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 47.55, unit: 'nmol_per_umol_Phe', sd: 6.6, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid DD, pH 3 air: 47.55 +- 6.60; readers A and B identical', read_error: 5.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 27.22, unit: 'nmol_per_umol_Phe', sd: 5.02, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid DD, pH 6 N2: 27.22 +- 5.02; readers A and B identical', read_error: 8.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 3.93, unit: 'nmol_per_umol_Phe', sd: 0.95, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid DD, pH 6 N2: 3.93 +- 0.95; readers A and B identical', read_error: 0.00055, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 2.23, unit: 'nmol_per_umol_Phe', sd: 0.38, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid DD, pH 6 N2: 2.23 +- 0.38; readers A and B identical', read_error: 0.00097, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 3.95, unit: 'nmol_per_umol_Phe', sd: 0.56, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid DD, pH 6 air: 3.95 +- 0.56; readers A and B identical', read_error: 0.00055, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 36.88, unit: 'nmol_per_umol_Phe', sd: 6, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid DD, pH 6 air: 36.88 +- 6.00; readers A and B identical', read_error: 6.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_DD_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 19.71, unit: 'nmol_per_umol_Phe', sd: 1.79, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid DD, pH 6 air: 19.71 +- 1.79; readers A and B identical', read_error: 0.00011, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 4.24, unit: 'nmol_per_umol_Phe', sd: 1.42, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid EH, pH 3 N2: 4.24 +- 1.42; readers A and B identical', read_error: 0.00051, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 28.1, unit: 'nmol_per_umol_Phe', sd: 5.33, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid EH, pH 3 N2: 28.10 +- 5.33; readers A and B identical', read_error: 8.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 5.52, unit: 'nmol_per_umol_Phe', sd: 1.1, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid EH, pH 3 N2: 5.52 +- 1.10; readers A and B identical', read_error: 0.00039, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 8.5, unit: 'nmol_per_umol_Phe', sd: 0.69, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid EH, pH 3 air: 8.50 +- 0.69; readers A and B identical', read_error: 0.00026, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 102.81, unit: 'nmol_per_umol_Phe', sd: 9.91, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid EH, pH 3 air: 102.81 +- 9.91; readers A and B identical', read_error: 2.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 24.53, unit: 'nmol_per_umol_Phe', sd: 4.03, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid EH, pH 3 air: 24.53 +- 4.03; readers A and B identical', read_error: 9.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 8.12, unit: 'nmol_per_umol_Phe', sd: 0.84, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid EH, pH 6 N2: 8.12 +- 0.84; readers A and B identical', read_error: 0.00027, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 6.37, unit: 'nmol_per_umol_Phe', sd: 2.03, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid EH, pH 6 N2: 6.37 +- 2.03; readers A and B identical', read_error: 0.00034, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 1.14, unit: 'nmol_per_umol_Phe', sd: 0.24, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid EH, pH 6 N2: 1.14 +- 0.24; readers A and B identical', read_error: 0.0019, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 3.78, unit: 'nmol_per_umol_Phe', sd: 0.7, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid EH, pH 6 air: 3.78 +- 0.70; readers A and B identical', read_error: 0.00057, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 34.29, unit: 'nmol_per_umol_Phe', sd: 4.37, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid EH, pH 6 air: 34.29 +- 4.37; readers A and B identical', read_error: 6.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_EH_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 11.23, unit: 'nmol_per_umol_Phe', sd: 2.23, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid EH, pH 6 air: 11.23 +- 2.23; readers A and B identical', read_error: 0.00019, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 6.56, unit: 'nmol_per_umol_Phe', sd: 1.78, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid ED, pH 3 N2: 6.56 +- 1.78; readers A and B identical', read_error: 0.00033, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 28.12, unit: 'nmol_per_umol_Phe', sd: 1.19, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid ED, pH 3 N2: 28.12 +- 1.19; readers A and B identical', read_error: 8.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 5.56, unit: 'nmol_per_umol_Phe', sd: 0.74, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid ED, pH 3 N2: 5.56 +- 0.74; readers A and B identical', read_error: 0.00039, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 12.36, unit: 'nmol_per_umol_Phe', sd: 1.31, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid ED, pH 3 air: 12.36 +- 1.31; readers A and B identical', read_error: 0.00018, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 122.6, unit: 'nmol_per_umol_Phe', sd: 5.2, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid ED, pH 3 air: 122.60 +- 5.20; readers A and B identical', read_error: 2.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 30.27, unit: 'nmol_per_umol_Phe', sd: 0.43, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid ED, pH 3 air: 30.27 +- 0.43; readers A and B identical', read_error: 7.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 13.63, unit: 'nmol_per_umol_Phe', sd: 1.69, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid ED, pH 6 N2: 13.63 +- 1.69; readers A and B identical', read_error: 0.00016, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 24.21, unit: 'nmol_per_umol_Phe', sd: 2.2, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid ED, pH 6 N2: 24.21 +- 2.20; readers A and B identical', read_error: 9.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 2.67, unit: 'nmol_per_umol_Phe', sd: 0.75, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid ED, pH 6 N2: 2.67 +- 0.75; readers A and B identical', read_error: 0.00081, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 3.57, unit: 'nmol_per_umol_Phe', sd: 0.65, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid ED, pH 6 air: 3.57 +- 0.65; readers A and B identical', read_error: 0.00061, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 27.18, unit: 'nmol_per_umol_Phe', sd: 6.11, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid ED, pH 6 air: 27.18 +- 6.11; readers A and B identical', read_error: 8.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ED_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 15.31, unit: 'nmol_per_umol_Phe', sd: 3.45, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid ED, pH 6 air: 15.31 +- 3.45; readers A and B identical', read_error: 0.00014, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 0.2, unit: 'nmol_per_umol_Phe', sd: 0.1, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid OH, pH 3 N2: 0.20 +- 0.10; readers A and B identical', read_error: 0.0109, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 29.18, unit: 'nmol_per_umol_Phe', sd: 1.81, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid OH, pH 3 N2: 29.18 +- 1.81; readers A and B identical', read_error: 7.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 6.92, unit: 'nmol_per_umol_Phe', sd: 0.83, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid OH, pH 3 N2: 6.92 +- 0.83; readers A and B identical', read_error: 0.00031, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 8.18, unit: 'nmol_per_umol_Phe', sd: 1.05, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid OH, pH 3 air: 8.18 +- 1.05; readers A and B identical', read_error: 0.00027, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 43.46, unit: 'nmol_per_umol_Phe', sd: 3.48, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid OH, pH 3 air: 43.46 +- 3.48; readers A and B identical', read_error: 5.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 13.41, unit: 'nmol_per_umol_Phe', sd: 1.52, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid OH, pH 3 air: 13.41 +- 1.52; readers A and B identical', read_error: 0.00016, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 1.76, unit: 'nmol_per_umol_Phe', sd: 0.56, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid OH, pH 6 N2: 1.76 +- 0.56; readers A and B identical', read_error: 0.0012, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 12.74, unit: 'nmol_per_umol_Phe', sd: 3.02, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid OH, pH 6 N2: 12.74 +- 3.02; readers A and B identical', read_error: 0.00017, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 2.87, unit: 'nmol_per_umol_Phe', sd: 0.85, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid OH, pH 6 N2: 2.87 +- 0.85; readers A and B identical', read_error: 0.00076, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 3.35, unit: 'nmol_per_umol_Phe', sd: 0.33, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid OH, pH 6 air: 3.35 +- 0.33; readers A and B identical', read_error: 0.00065, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 52.27, unit: 'nmol_per_umol_Phe', sd: 12.16, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid OH, pH 6 air: 52.27 +- 12.16; readers A and B identical', read_error: 4.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_OH_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 16.89, unit: 'nmol_per_umol_Phe', sd: 1.78, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid OH, pH 6 air: 16.89 +- 1.78; readers A and B identical', read_error: 0.00013, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 0.1, unit: 'nmol_per_umol_Phe', sd: 0.04, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid ON, pH 3 N2: 0.10 +- 0.04; readers A and B identical', read_error: 0.0217, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 11.25, unit: 'nmol_per_umol_Phe', sd: 2.12, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid ON, pH 3 N2: 11.25 +- 2.12; readers A and B identical', read_error: 0.00019, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 5.51, unit: 'nmol_per_umol_Phe', sd: 1.34, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid ON, pH 3 N2: 5.51 +- 1.34; readers A and B identical', read_error: 0.00039, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 7.07, unit: 'nmol_per_umol_Phe', sd: 1.7, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid ON, pH 3 air: 7.07 +- 1.70; readers A and B identical', read_error: 0.00031, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 66.02, unit: 'nmol_per_umol_Phe', sd: 2.09, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid ON, pH 3 air: 66.02 +- 2.09; readers A and B identical', read_error: 3.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 16.46, unit: 'nmol_per_umol_Phe', sd: 1.52, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid ON, pH 3 air: 16.46 +- 1.52; readers A and B identical', read_error: 0.00013, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 0.83, unit: 'nmol_per_umol_Phe', sd: 0.23, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid ON, pH 6 N2: 0.83 +- 0.23; readers A and B identical', read_error: 0.0026, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 7.72, unit: 'nmol_per_umol_Phe', sd: 1.15, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid ON, pH 6 N2: 7.72 +- 1.15; readers A and B identical', read_error: 0.00028, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 1.93, unit: 'nmol_per_umol_Phe', sd: 0.62, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid ON, pH 6 N2: 1.93 +- 0.62; readers A and B identical', read_error: 0.0011, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 1.18, unit: 'nmol_per_umol_Phe', sd: 0.2, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid ON, pH 6 air: 1.18 +- 0.20; readers A and B identical', read_error: 0.0018, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 33.59, unit: 'nmol_per_umol_Phe', sd: 3.82, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid ON, pH 6 air: 33.59 +- 3.82; readers A and B identical', read_error: 6.0e-05, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_ON_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 14.08, unit: 'nmol_per_umol_Phe', sd: 2.15, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid ON, pH 6 air: 14.08 +- 2.15; readers A and B identical', read_error: 0.00015, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 5.46, unit: 'nmol_per_umol_Phe', sd: 1.39, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid HN, pH 3 N2: 5.46 +- 1.39; readers A and B identical', read_error: 0.0004, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH3_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 4.56, unit: 'nmol_per_umol_Phe', sd: 0.5, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid HN, pH 3 N2: 4.56 +- 0.50; readers A and B identical', read_error: 0.00048, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 5.48, unit: 'nmol_per_umol_Phe', sd: 1.48, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid HN, pH 3 air: 5.48 +- 1.48; readers A and B identical', read_error: 0.0004, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 11.46, unit: 'nmol_per_umol_Phe', sd: 2.04, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid HN, pH 3 air: 11.46 +- 2.04; readers A and B identical', read_error: 0.00019, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH3_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 14.56, unit: 'nmol_per_umol_Phe', sd: 3.51, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid HN, pH 3 air: 14.56 +- 3.51; readers A and B identical', read_error: 0.00015, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 8.58, unit: 'nmol_per_umol_Phe', sd: 0.61, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid HN, pH 6 N2: 8.58 +- 0.61; readers A and B identical', read_error: 0.00025, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH6_N2', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 0.24, unit: 'nmol_per_umol_Phe', sd: 0.06, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid HN, pH 6 N2: 0.24 +- 0.06; readers A and B identical', read_error: 0.009, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_2_PHENYLETHYLAMINE', t_min: 60, value: 0.64, unit: 'nmol_per_umol_Phe', sd: 0.12, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), 2-phenylethylamine, lipid HN, pH 6 air: 0.64 +- 0.12; readers A and B identical', read_error: 0.0034, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_PHENYLACETALDEHYDE', t_min: 60, value: 22.45, unit: 'nmol_per_umol_Phe', sd: 0.58, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), phenylacetaldehyde, lipid HN, pH 6 air: 22.45 +- 0.58; readers A and B identical', read_error: 0.0001, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}
+  - {pot: 'zamora2015_tab1_HN_pH6_air', ledger_id: 'zamora2015_tab1_pea_pac_bza_by_lipid_carbonyl', species: 'V_BENZALDEHYDE', t_min: 60, value: 11.99, unit: 'nmol_per_umol_Phe', sd: 2.73, n: 3, n_basis: '''at least three independent experiments''', printed: 'Table 1 (MS p. 20), benzaldehyde, lipid HN, pH 6 air: 11.99 +- 2.73; readers A and B identical', read_error: 0.00018, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (>= 3 independent experiments) carries the scatter'}

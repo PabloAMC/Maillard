@@ -1,0 +1,335 @@
+# SECOND READER (reader B) -- Thornalley, Langborg & Minhas 1999, Biochem J 344:109-116 (thornalley1999.pdf), Figs. 1b, 2e, 2f, 3c and the 100 mM text rates. Reader B's values AS WRITTEN; independent of reader A. Pots carry the adjudicated
+# conditions (names suffixed _b) so that scripts/reconcile_source_readings.py can pair them; species keys are the adjudication's.
+# Only the cells kept in the first reading are here (B's other cells, if any, stay in the raw file: the coordinator's scratchpad,
+# queue_reader_B.yml). Fig. 2e: the species of B's square / triangle points are the adjudication's re-assignment (B keyed per legend and flagged the swap). At 100 mM, where the first reading uses a text rate, this copy carries B's text value from its notes, or B's figure point where B wrote no text value.
+name: heldout_thornalley1999_figs1b_2e_2f_3c
+reader: agent-readerB-2026-11-01
+read_by: agent-readerB-2026-11-01
+status: draft
+purpose: 'TEST data for the contrast benchmark, engine error E5 (no buffer-species catalysis; keying_queue.yml rank 8; existing TEST contrasts F05#23, F06#11, F08#2); never a fit input'
+pots:
+  thornalley1999_glc_phosphate_10mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: [],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50},
+     concentration_basis: 'printed: glucose 50 mM',
+     system: 'glucose 50 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 10 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 10,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 1b: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 1 caption: ''Incubations contain glucose 50 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (b) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_glc_phosphate_25mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: [],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50},
+     concentration_basis: 'printed: glucose 50 mM',
+     system: 'glucose 50 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 25 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 25,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 1b: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 1 caption: ''Incubations contain glucose 50 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (b) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_glc_phosphate_50mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: [],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50},
+     concentration_basis: 'printed: glucose 50 mM',
+     system: 'glucose 50 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 50 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 50,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 1b: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 1 caption: ''Incubations contain glucose 50 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (b) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_glc_phosphate_100mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: [],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50},
+     concentration_basis: 'printed: glucose 50 mM',
+     system: 'glucose 50 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 100 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 100,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 1b: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 1 caption: ''Incubations contain glucose 50 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (b) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_glc_boclys_phosphate_10mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: ['V_BOC_LYSINE'],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50, V_BOC_LYSINE: 50},
+     concentration_basis: 'printed: glucose 50 mM + N-alpha-t-BOC-lysine 50 mM',
+     system: 'glucose 50 mM + N-alpha-t-BOC-lysine 50 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 10 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 10,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 2e: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 2 caption: ''Incubations contain glucose 50 mM + N-alpha-t-BOC-lysine 50 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (e) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_glc_boclys_phosphate_25mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: ['V_BOC_LYSINE'],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50, V_BOC_LYSINE: 50},
+     concentration_basis: 'printed: glucose 50 mM + N-alpha-t-BOC-lysine 50 mM',
+     system: 'glucose 50 mM + N-alpha-t-BOC-lysine 50 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 25 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 25,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 2e: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 2 caption: ''Incubations contain glucose 50 mM + N-alpha-t-BOC-lysine 50 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (e) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_glc_boclys_phosphate_50mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: ['V_BOC_LYSINE'],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50, V_BOC_LYSINE: 50},
+     concentration_basis: 'printed: glucose 50 mM + N-alpha-t-BOC-lysine 50 mM',
+     system: 'glucose 50 mM + N-alpha-t-BOC-lysine 50 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 50 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 50,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 2e: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 2 caption: ''Incubations contain glucose 50 mM + N-alpha-t-BOC-lysine 50 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (e) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_glc_boclys_phosphate_100mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: ['V_BOC_LYSINE'],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50, V_BOC_LYSINE: 50},
+     concentration_basis: 'printed: glucose 50 mM + N-alpha-t-BOC-lysine 50 mM',
+     system: 'glucose 50 mM + N-alpha-t-BOC-lysine 50 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 100 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 100,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 2e: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 2 caption: ''Incubations contain glucose 50 mM + N-alpha-t-BOC-lysine 50 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (e) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_glc_hsa_phosphate_10mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: [],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50},
+     concentration_basis: 'printed: glucose 50 mM + human serum albumin 50 mg/mL',
+     system: 'glucose 50 mM + human serum albumin 50 mg/mL',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 10 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 10,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 2f: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 2 caption: ''Incubations contain glucose 50 mM + human serum albumin 50 mg/mL in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (f) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)''',
+     protein_mg_per_mL: 50}
+  thornalley1999_glc_hsa_phosphate_25mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: [],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50},
+     concentration_basis: 'printed: glucose 50 mM + human serum albumin 50 mg/mL',
+     system: 'glucose 50 mM + human serum albumin 50 mg/mL',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 25 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 25,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 2f: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 2 caption: ''Incubations contain glucose 50 mM + human serum albumin 50 mg/mL in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (f) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)''',
+     protein_mg_per_mL: 50}
+  thornalley1999_glc_hsa_phosphate_50mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: [],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50},
+     concentration_basis: 'printed: glucose 50 mM + human serum albumin 50 mg/mL',
+     system: 'glucose 50 mM + human serum albumin 50 mg/mL',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 50 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 50,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 2f: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 2 caption: ''Incubations contain glucose 50 mM + human serum albumin 50 mg/mL in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (f) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)''',
+     protein_mg_per_mL: 50}
+  thornalley1999_glc_hsa_phosphate_100mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: [],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {Glc: 50},
+     concentration_basis: 'printed: glucose 50 mM + human serum albumin 50 mg/mL',
+     system: 'glucose 50 mM + human serum albumin 50 mg/mL',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 100 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 100,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 2f: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 2 caption: ''Incubations contain glucose 50 mM + human serum albumin 50 mg/mL in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (f) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)''',
+     protein_mg_per_mL: 50}
+  thornalley1999_frulys_phosphate_10mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: ['V_FRUCTOSYL_LYSINE'],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {V_FRUCTOSYL_LYSINE: 0.5},
+     concentration_basis: 'printed: fructosyl-lysine 0.5 mM',
+     system: 'fructosyl-lysine 0.5 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 10 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 10,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 3c: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 3 caption: ''Incubations contain fructosyl-lysine 0.5 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (c) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_frulys_phosphate_25mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: ['V_FRUCTOSYL_LYSINE'],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {V_FRUCTOSYL_LYSINE: 0.5},
+     concentration_basis: 'printed: fructosyl-lysine 0.5 mM',
+     system: 'fructosyl-lysine 0.5 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 25 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 25,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 3c: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 3 caption: ''Incubations contain fructosyl-lysine 0.5 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (c) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_frulys_phosphate_50mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: ['V_FRUCTOSYL_LYSINE'],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {V_FRUCTOSYL_LYSINE: 0.5},
+     concentration_basis: 'printed: fructosyl-lysine 0.5 mM',
+     system: 'fructosyl-lysine 0.5 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 50 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 50,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 3c: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 3 caption: ''Incubations contain fructosyl-lysine 0.5 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (c) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+  thornalley1999_frulys_phosphate_100mM_b:
+    {ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates',
+     engine_species_missing: ['V_FRUCTOSYL_LYSINE'],
+     t_c: 37,
+     minutes: null,
+     rate_window: 'initial rate over the first 2 days of a 3-week incubation',
+     initial_mmol_L: {V_FRUCTOSYL_LYSINE: 0.5},
+     concentration_basis: 'printed: fructosyl-lysine 0.5 mM',
+     system: 'fructosyl-lysine 0.5 mM',
+     label_ph: 7.4,
+     ph_measured_at: 'buffer as prepared (pH 7.4, 37 C)',
+     buffer: 'sodium phosphate 100 mM, pH 7.4 (no chelator; ionic strength not made up)',
+     phosphate_mM: 100,
+     atmosphere: 'not stated (''aseptic conditions''; air presumed)',
+     vessel: 'not stated',
+     source_figure: 'Fig. 3c: d[alpha-OA]0/dt (uM/day) vs phosphate 10 - 100 mM (circle glyoxal, square 3-DG, triangle methylglyoxal per the Fig. 1a / 2a / 3b concentrations); 100 mM text values pp. 111 - 114',
+     condition_quote: 'Fig. 3 caption: ''Incubations contain fructosyl-lysine 0.5 mM in 100 mM sodium phosphate buffer, pH 7.4 and 37 C, except (c) 10-100 mM sodium phosphate buffer, pH 7.4 and 37 C''; text: ''initial rate ... (determined over the initial 2 days)'''}
+rows:
+  - {pot: 'thornalley1999_glc_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.13, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.13', read_error: 0.1002, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.06, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.06', read_error: 0.2171, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.13, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.13', read_error: 0.1002, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.28, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.28', read_error: 0.0465, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.07, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.07', read_error: 0.1861, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.01) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.18, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.18', read_error: 0.0724, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.59, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.59', read_error: 0.0221, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.1, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.1', read_error: 0.1303, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.22, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.22', read_error: 0.0592, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 1.74, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: Fig. 1b point 1.74 (B keyed no text value here)', read_error: 0.0075, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'thornalley1999_glc_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.098, unit: 'uM_per_day', sd: 0.003, n: 3, quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B (notes): text 0.098 +- 0.003', read_error: 0.0022, read_error_basis: 'half the last printed digit (0.0005), in dex; the printed SD (n = 3) carries the scatter', conflict: 'Fig. 1b plots this point at ~0.235 (A 0.24, B 0.23), 2.4x the text; the text and the Fig. 1c bar (~0.10) agree: the text is kept'}
+  - {pot: 'thornalley1999_glc_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.437, unit: 'uM_per_day', sd: 0.032, n: 3, quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B (notes): text 0.437 +- 0.032', read_error: 0.0005, read_error_basis: 'half the last printed digit (0.0005), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.05, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.05', read_error: 1.3029, read_error_basis: 'max(A 0.15, B 0.15, |A-B|/2 0.025) = 0.15 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.3, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.3', read_error: 0.2171, read_error_basis: 'max(A 0.15, B 0.15, |A-B|/2 0.005) = 0.15 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.05, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.05', read_error: 1.3029, read_error_basis: 'max(A 0.15, B 0.15, |A-B|/2 0.025) = 0.15 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.1, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.1', read_error: 0.6514, read_error_basis: 'max(A 0.15, B 0.15, |A-B|/2 0) = 0.15 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.2, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.2', read_error: 0.3257, read_error_basis: 'max(A 0.15, B 0.15, |A-B|/2 0) = 0.15 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.1, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.1', read_error: 0.6514, read_error_basis: 'max(A 0.15, B 0.15, |A-B|/2 0) = 0.15 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.5, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.5', read_error: 0.1303, read_error_basis: 'max(A 0.15, B 0.15, |A-B|/2 0.025) = 0.15 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.3, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.3', read_error: 0.2171, read_error_basis: 'max(A 0.15, B 0.15, |A-B|/2 0.005) = 0.15 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.3, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.3', read_error: 0.2171, read_error_basis: 'max(A 0.15, B 0.15, |A-B|/2 0.025) = 0.15 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 8.2, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: Fig. 2e point 8.2 (B keyed no text value here)', read_error: 0.0053, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 3.13, unit: 'uM_per_day', sd: 0.15, n: 3, quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B (notes): text 3.13 +- 0.15', read_error: 0.00069, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'thornalley1999_glc_boclys_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 2.62, unit: 'uM_per_day', sd: 0.62, n: 3, quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B (notes): text 2.62 +- 0.62', read_error: 0.00083, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.12, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.12', read_error: 0.0724, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.11, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.11', read_error: 0.079, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.36, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.36', read_error: 0.0241, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.14, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.14', read_error: 0.062, read_error_basis: 'max(A 0.03, B 0.02, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.17, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.17', read_error: 0.0511, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0.005) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.41, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.41', read_error: 0.0212, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.12, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.12', read_error: 0.0724, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0.005) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.09, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.09', read_error: 0.0965, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0.005) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.56, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.56', read_error: 0.0155, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0.005) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.07, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.07', read_error: 0.1241, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0.01) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.05, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.05', read_error: 0.1737, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0.005) = 0.02 uM/day, in dex'}
+  - {pot: 'thornalley1999_glc_hsa_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 1.22, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 1.22', read_error: 0.0071, read_error_basis: 'max(A 0.02, B 0.02, |A-B|/2 0) = 0.02 uM/day, in dex', flag: 'Fig. 2h (100 mM, no DETAPAC) bar reads ~1.04 - 1.05 (both readers) vs this point 1.22'}
+  - {pot: 'thornalley1999_frulys_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.25, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.25', read_error: 0.0521, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_frulys_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.21, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.21', read_error: 0.062, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_frulys_phosphate_10mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.26, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.26', read_error: 0.0501, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_frulys_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.25, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.25', read_error: 0.0521, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.01) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_frulys_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.23, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.23', read_error: 0.0566, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_frulys_phosphate_25mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.31, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.31', read_error: 0.042, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_frulys_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 0.28, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.28', read_error: 0.0465, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_frulys_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.23, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.23', read_error: 0.0566, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_frulys_phosphate_50mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 0.41, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: 0.41', read_error: 0.0318, read_error_basis: 'max(A 0.02, B 0.03, |A-B|/2 0.005) = 0.03 uM/day, in dex'}
+  - {pot: 'thornalley1999_frulys_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'GO', t_min: 0, value: 1.67, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: Fig. 3c point 1.67 (B keyed no text value here)', read_error: 0.0078, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'thornalley1999_frulys_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'MGO', t_min: 0, value: 0.55, unit: 'uM_per_day', quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B: Fig. 3c point 0.55 (B keyed no text value here)', read_error: 0.0237, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (n = 3) carries the scatter'}
+  - {pot: 'thornalley1999_frulys_phosphate_100mM_b', ledger_id: 'thornalley1999_figs1b_2e_2f_3c_phosphate_series_initial_rates', species: 'TDG', t_min: 0, value: 1.03, unit: 'uM_per_day', sd: 0.15, n: 3, quantity: 'initial rate of free alpha-oxoaldehyde formation (first 2 days)', printed: 'reader B (notes): text 1.03 +- 0.15', read_error: 0.0021, read_error_basis: 'half the last printed digit (0.005), in dex; the printed SD (n = 3) carries the scatter'}

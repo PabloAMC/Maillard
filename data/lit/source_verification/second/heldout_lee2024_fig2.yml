@@ -1,0 +1,25 @@
+# Second reader (reader B), Lee, Roux, Descharles, Rega & Bonazzi 2024 (Food Res Int 183:114183), Fig. 2 (pyrazines in the oven
+# vapour, G + L cake, 140 / 170 / 200 C). Independent of reader A. Rows: data/lit/fit_rows/second/heldout_lee2024_fig2.yml.
+# Reader B wrote no verdict block; the verdicts below are transcribed by the adjudicator from reader B's notes.
+reader: agent-readerB-2026-11-01
+role: independent second reader, contrast benchmark TEST keying (E13)
+entries:
+- ledger_id: lee2024_fig2_fig3_oven_vapour_volatiles
+  source_file: lee2024.pdf
+  location: p. 6, Fig. 2 (pdfimages p. 6 object 634, 1016 x 1743 px, 300 ppi); text Secs. 2.3, 3.2.1, 3.2.2
+  read_by: agent-readerB-2026-11-01
+  second_reader: self
+  date: '2026-11-01'
+  checks:
+    conditions: corrected
+    units: corrected
+    quantification: pass
+    duplicates: pass
+    values: pass
+  quote: Fig. 2 "Concentrations of 3-methylbutanal, pyrazine, 2-methylpyrazine, 2,5-dimethylpyrazine and 2,6-dimethylpyrazine at
+    different times during the baking of G + L model cakes at 140 C (n = 4), 170 C (n = 6) and 200 C (n = 4)".
+  notes: 'Fig. 2, not Fig. 3 (the scheme; the text mis-cites it). Symbols inferred: grey squares 140 C, magenta circles 200 C, green
+    triangles 170 C (confidence high). Values in the axis unit nmol.L_air-1.g_DM-1; the text quotes Fig. 1 levels in mmol (unresolved
+    prefix conflict). Vapour, not cake, concentrations; set-points, not product temperatures; precursor amounts not printed. 140 C
+    squares plotted at 88 min although the Methods replaced 86-90 min by 91-95 and 116-120 min (keyed as plotted). Hidden markers
+    (170 C at 4 / 10 min, the DMPs at 88 min) low confidence. Glucose-only cake: no pyrazine (not detected, no LOD printed).'

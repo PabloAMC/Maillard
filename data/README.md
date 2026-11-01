@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **683**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **800**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -130,11 +130,11 @@ Verified rows the network cannot execute (see README there); kept off the panel 
 
 Per-paper extraction records (verbatim quotes, digitised tables, unit reconciliations) cited as provenance strings by `src/kinetic_core/`. `k*_` and `research_round*` files are cross-paper syntheses.
 
-475 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `almhofer2022_extraction.md`, `ames2001_extraction.md`, `amranihemaimi1995_extraction.md`, `anantharamkrishnan2020_extraction.md` …
+532 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2001_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `almhofer2022_extraction.md`, `ames2001_extraction.md`, `amranihemaimi1995_extraction.md` …
 
 ## `data/lit/fit_rows`
 
-15 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml`, `strecker_hofmann2000b.yml`, `strecker_hofmann2000b_fig1.yml`, `thiol_hofmann_t9.yml` …
+30 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `heldout_deroos2005_fig4.yml`, `heldout_du2023_tab2.yml`, `heldout_grosch1992_tab2.yml`, `heldout_larralde1995.yml`, `heldout_lee2024_fig2.yml`, `heldout_liu2023b_tab3.yml`, `heldout_meynier1995_tab1_2_4.yml`, `heldout_sedehi2013_tab1.yml`, `heldout_thornalley1999_figs1b_2e_2f_3c.yml`, `heldout_wang2022_tab2.yml` …
 
 ## `data/lit/measurement_ledger`
 
@@ -142,7 +142,7 @@ Per-paper extraction records (verbatim quotes, digitised tables, unit reconcilia
 
 ## `data/lit/source_verification`
 
-15 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml`, `strecker_hofmann2000b.yml`, `strecker_hofmann2000b_fig1.yml`, `thiol_hofmann_t9.yml` …
+30 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `heldout_deroos2005_fig4.yml`, `heldout_du2023_tab2.yml`, `heldout_grosch1992_tab2.yml`, `heldout_larralde1995.yml`, `heldout_lee2024_fig2.yml`, `heldout_liu2023b_tab3.yml`, `heldout_meynier1995_tab1_2_4.yml`, `heldout_sedehi2013_tab1.yml`, `heldout_thornalley1999_figs1b_2e_2f_3c.yml`, `heldout_wang2022_tab2.yml` …
 
 ## `data/lit/timeseries`
 
@@ -170,8 +170,8 @@ Free-precursor hold-out bundles: the network's out-of-sample test, hand-authored
 
 ## `data/lit/fit_rows/second`
 
-15 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml`, `strecker_hofmann2000b.yml`, `strecker_hofmann2000b_fig1.yml`, `thiol_hofmann_t9.yml` …
+30 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `heldout_deroos2005_fig4.yml`, `heldout_du2023_tab2.yml`, `heldout_grosch1992_tab2.yml`, `heldout_larralde1995.yml`, `heldout_lee2024_fig2.yml`, `heldout_liu2023b_tab3.yml`, `heldout_meynier1995_tab1_2_4.yml`, `heldout_sedehi2013_tab1.yml`, `heldout_thornalley1999_figs1b_2e_2f_3c.yml`, `heldout_wang2022_tab2.yml` …
 
 ## `data/lit/source_verification/second`
 
-15 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `ph_acid_davidek_acids.yml`, `ph_acid_holdout_martins2005b.yml`, `ph_acid_martins2005.yml`, `ph_acid_submodel.yml`, `route_submodel.yml`, `strecker_hofmann2000.yml`, `strecker_hofmann2000_fig2.yml`, `strecker_hofmann2000b.yml`, `strecker_hofmann2000b_fig1.yml`, `thiol_hofmann_t9.yml` …
+30 files covered by the directory description above: `deoxyosone_hofmann1999.yml`, `deoxyosone_submodel.yml`, `heldout_deroos2005_fig4.yml`, `heldout_du2023_tab2.yml`, `heldout_grosch1992_tab2.yml`, `heldout_larralde1995.yml`, `heldout_lee2024_fig2.yml`, `heldout_liu2023b_tab3.yml`, `heldout_meynier1995_tab1_2_4.yml`, `heldout_sedehi2013_tab1.yml`, `heldout_thornalley1999_figs1b_2e_2f_3c.yml`, `heldout_wang2022_tab2.yml` …

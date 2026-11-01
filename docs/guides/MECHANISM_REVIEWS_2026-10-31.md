@@ -64,7 +64,7 @@ paper below is a different one).
 | Hou, Zhou, Li, ..., Ho 2026, Food Chem. 499:147363 | 10.1016/j.foodchem.2025.147363 | abstract | cystine speeds ARP degradation and the retro-aldol of deoxyosones to GO / MGO |
 | Thornalley, Langborg & Minhas 1999, Biochem. J. 344:109 | 10.1042/bj3440109 | abstract | GO / MGO / 3-DG from glucose and fructosyl-lysine depend on phosphate and trace metals (37 C) |
 | Guan, Wang, Yu, Yu & Zhao 2012, J. Dairy Sci. 95:590 | 10.3168/jds.2011-4860 | abstract | phosphate speeds the reversible breakdown of early glucose + proline intermediates (bifunctional proton transfer) |
-| Pripis-Nicolau et al. 2000, J. Agric. Food Chem. 48:3761 | 10.1021/jf991024w | abstract | six dicarbonyls x wine amino acids at pH 3.5: donor-generic Strecker |
+| Pripis-Nicolau et al. 2000, J. Agric. Food Chem. 48:3761 | 10.1021/jf991024w | abstract | ~~six dicarbonyls x wine amino acids at pH 3.5: donor-generic Strecker~~ (corrected 2026-11-01 from the PDF: four alpha-dicarbonyls + two alpha-hydroxyketones x 14 amino acids, pH 3.5, 25 C, 12 % ethanol; Strecker aldehydes IDENTIFIED, never quantified, so not a second laboratory for donor-generic Strecker magnitudes; `pripisnicolau2000_extraction.md`) |
 | Hidalgo, Gallardo & Zamora 2005, J. Agric. Food Chem. 53:10254 | 10.1021/jf052240+ | abstract | 4-hydroxynonenal + Phe -> phenylacetaldehyde (17 %): the lipid-carbonyl Strecker donor |
 | Zamora, Navarro, Gallardo & Hidalgo 2006, J. Agric. Food Chem. 54:6101 | 10.1021/jf061239n | abstract | epoxyalkenals -> alpha-keto acids (the acid route) |
 | Scalone, Cucu, De Kimpe & De Meulenaer 2015, J. Agric. Food Chem. 63:5364 | 10.1021/acs.jafc.5b01129 | abstract | oligopeptides vs free amino acids in pyrazine formation, a_w 0.33, > 120 C |

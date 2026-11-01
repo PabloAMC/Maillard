@@ -1,0 +1,102 @@
+{
+ "cao2017_90C_phosphate_pH5.5->4.2": {
+  "T_C": 90,
+  "pH_for_kcd": 4.6,
+  "k_app_no_decay": 0.002879473467708762,
+  "k_app_kcd_lo": 0.003042328174412037,
+  "k_app_kcd_hi": 0.0032221310182644295
+ },
+ "zhai2019_70C_water": {
+  "T_C": 70,
+  "pH_for_kcd": 5.75,
+  "k_app_no_decay": 0.0004046535154274153,
+  "k_app_kcd_lo": 0.00040881400881913744,
+  "k_app_kcd_hi": 0.00042454672362450004
+ },
+ "zhai2019_90C_water": {
+  "T_C": 90,
+  "pH_for_kcd": 5.75,
+  "k_app_no_decay": 0.00035650623885918,
+  "k_app_kcd_lo": 0.0004035584839289657,
+  "k_app_kcd_hi": 0.0005814843890891112
+ },
+ "zhai2019_110C_water": {
+  "T_C": 110,
+  "pH_for_kcd": 5.75,
+  "k_app_no_decay": 0.0014719000892060659,
+  "k_app_kcd_lo": 0.002059035291740438,
+  "k_app_kcd_hi": 0.004279260112200627
+ },
+ "zhai2019_130C_water": {
+  "T_C": 130,
+  "pH_for_kcd": 5.75,
+  "k_app_no_decay": 0.007142857142857143,
+  "k_app_kcd_lo": 0.00947729655082683,
+  "k_app_kcd_hi": 0.018304872027586395
+ },
+ "zhang2025b_120C_phosphate_pH6.5": {
+  "T_C": 120,
+  "pH_for_kcd": 6.3,
+  "k_app_no_decay": 0.006839622641509434,
+  "k_app_kcd_lo": 0.008760642811078675,
+  "k_app_kcd_hi": 0.0204412826865613
+ },
+ "zhai2019_90C_water_0-20": {
+  "T_C": 90,
+  "pH_for_kcd": 6.5,
+  "k_app_no_decay": 0.0014331210191082804,
+  "k_app_kcd_lo": 0.0014809831807137924,
+  "k_app_kcd_hi": 0.0018240089849637972
+ },
+ "zhai2019_70C_water_0-20": {
+  "T_C": 70,
+  "pH_for_kcd": 6.5,
+  "k_app_no_decay": 0.00035971223021582735,
+  "k_app_kcd_lo": 0.0003620093520463231,
+  "k_app_kcd_hi": 0.0003784727134352346
+ },
+ "cao2017_90C_0-30": {
+  "T_C": 90,
+  "pH_for_kcd": 5.2,
+  "k_app_no_decay": 0.0008626347866854195,
+  "k_app_kcd_lo": 0.0008797202857793898,
+  "k_app_kcd_hi": 0.00091780284019717
+ },
+ "zhang2025b_120C_plateau_30-50": {
+  "k_app_kcd_lo": 0.0022590270603871625,
+  "k_app_kcd_hi": 0.01599489614669114
+ },
+ "zhai_arrhenius": {
+  "Ea_kJ": 69.04336572177613,
+  "k90": 0.0009840901230114057,
+  "k120": 0.005634654316954509,
+  "residual_dex": [
+   0.20552763225697834,
+   -0.30781260211134576,
+   -0.03892623826488843,
+   0.14121120811924076
+  ]
+ },
+ "storage_bias_on_zhai_ttca": {
+  "70": {
+   "TTCA_inflation_max_frac": [
+    0.154,
+    0.089,
+    0.065
+   ]
+  },
+  "90": {
+   "TTCA_inflation_max_frac": [
+    0.102,
+    0.051,
+    0.057
+   ]
+  }
+ },
+ "ratio_cao_over_zhai90_k_app_kcd_lo": 7.538754097776686,
+ "ratio_cao_over_zhaiLine90_k_app_kcd_lo": 3.0915137783338733,
+ "ratio_zhang_over_zhaiLine120_k_app_kcd_lo": 1.5547791076939999,
+ "ratio_cao_over_zhai90_k_app_kcd_hi": 5.541216718323017,
+ "ratio_cao_over_zhaiLine90_k_app_kcd_hi": 3.2742235115666176,
+ "ratio_zhang_over_zhaiLine120_k_app_kcd_hi": 3.6277793697217735
+}

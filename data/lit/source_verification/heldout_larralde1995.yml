@@ -1,0 +1,61 @@
+# SOURCE VERIFICATION -- Larralde, Robertson & Miller 1995, PNAS 92:8158-8160 (TEST table data/lit/fit_rows/heldout_larralde1995.yml;
+# contrast benchmark error E5). Format and the five checks: the header of data/lit/source_verification.yml.
+# FIRST READER: reader A (agent-readerA-2026-11-01), against data/articles/larralde1995.pdf (one 600 ppi 1-bit scan per page,
+# OCR text layer; equation and figures cropped with sips). SECOND READER: reader B (agent-readerB-2026-11-01), independent and in
+# parallel (source_verification/second/heldout_larralde1995.yml, fit_rows/second/heldout_larralde1995.yml).
+# ADJUDICATED 2026-11-01 by agent-heldout-adjudicator-2026-11-01: figure reads = mean of A and B in log10 k, error max(A, B,
+# |A-B|/2) dex; printed numbers identical in both readings. The adjudicator re-read the displayed rate law on the raster (the label
+# is "s-1"), the bicarbonate paragraph and the Methods.
+
+entries:
+- ledger_id: larralde1995_fig2_text_ribose_arrhenius_phosphate
+  source_file: larralde1995.pdf
+  read_by: agent-readerA-2026-11-01
+  second_reader: agent-readerB-2026-11-01
+  date: 2026-11-01
+  checks:
+    conditions: corrected
+    units: corrected
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: 'There is considerable general base catalysis of the decomposition of ribose and the other sugars. At pD 7.4 and 100 C,
+    rate (s-1) = 2.86 x 10-3 + 9.36 x 10-2 ([DPO4 2-] + [D2PO4 -]). ... We measured the rate of ribose decomposition at pD 7.4,
+    using a 0.05 M bicarbonate buffer. The rate is 0.52 that observed with a 0.05 M phosphate buffer. ... The half-life of ribose
+    decomposition at 100 C and pD 7.4 is 73 min. ... log k (s-1) = 11.23 - 5608/T'
+  notes: 'Rows: Fig. 2 (0.05 M phosphate, pD 7.4) log10 k (s-1) -5.541 / -4.7165 / -3.865 / -3.032 at 60 / 80 / 100 / 118 C (error
+    0.03 dex); rate law k0 = 2.86e-3 and kP = 9.36e-2 per M (printed s-1, read as min-1); bicarbonate / phosphate = 0.52 at pD 7.4.
+    UNITS corrected: in s-1 the law gives 7.54e-3 s-1 at 0.05 M, 48 - 55x the 73-min half-life, the Arrhenius line and the Fig. 2
+    point; in min-1 it gives log k -3.90 (0.035 dex from Fig. 2): read as min-1 (P ~0.9). CONDITIONS corrected: the bicarbonate
+    sentence prints no temperature (100 C inferred from the paragraph, P ~0.8; conditions_inferred); pD 7.4 = pH 7.0 per the paper;
+    ribose concentration not printed; the phosphate concentration series behind the law is not printed. QUANTIFICATION: 1H NMR,
+    ribose C1-H furanose signals vs an external CHCl3 reference (calibrated, as the ledger). DUPLICATES corrected: the 73-min
+    half-life is the Arrhenius line at 100 C (log k -3.80), not a separate measurement (text check, no row); Fig. 1''s nominal pD 7.4
+    points are probably the same runs as Fig. 2 (count once).'
+  adjudication: >-
+    Fig. 2: A and B within 0.01 dex at all four temperatures; value = mean, error max(A 0.03, B 0.015, |A-B|/2) = 0.03 dex. Printed
+    numbers (2.86e-3, 9.36e-2, 0.52) identical in both readings; error = half the last printed digit. Both readers flagged the
+    rate-law unit and left it unresolved; resolved here as min-1 on the paper's own internal consistency (rows keep the printed
+    mantissas, unit per_min / per_M_per_min). Bicarbonate temperature inferred (100 C). No row dropped; reader A's kH2O / kD2O
+    (1.0 +- 0.2) is a text check.
+- ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+  source_file: larralde1995.pdf
+  read_by: agent-readerA-2026-11-01
+  second_reader: agent-readerB-2026-11-01
+  date: 2026-11-01
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. The curves were fitted by assuming a functional form k = k0/(1
+    + [H+]/Ka) ... The samples were dissolved in aqueous 0.05 M deuterated phosphate [p2H (pD) 6.4-8.4] or acetate (pD 4.4-5.4) buffer
+    and sealed in NMR tubes.'
+  notes: '19 points (118 / 100 / 80 C at nominal pD 4.4 - 8.4; 60 C at 5.4 - 8.4), y log10 k (s-1), x plotted pD (temperature-
+    corrected). CONDITIONS corrected: the buffer per point is not marked; assigned from the Methods ranges (acetate 4.4 - 5.4,
+    phosphate 6.4 - 8.4); the plotted pD sits +0.0 to +0.3 above the nominal 25 C value, so the 5.44 - 5.72 points are the nominal
+    5.4 acetate runs (both readers). DUPLICATES corrected: the nominal pD 7.4 points are probably Fig. 2''s runs (count once).'
+  adjudication: >-
+    A and B within 0.05 dex in log k (largest: 60 C, nominal pD 5.4, -6.93 vs -6.98) and 0.03 in plotted pD on all 19 points; value =
+    mean, error = max(A 0.04, B 0.025, |A-B|/2) dex. Buffer per point: both readers assign the same buffer. No row dropped.

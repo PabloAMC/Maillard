@@ -1,0 +1,173 @@
+# Pathway-condition atlas: F01 (sugar + amine -> Schiff base / glycosylamine), built 2026-11-01 from the extraction
+# dossiers (data/lit/extraction_dossiers/). Vocabulary: docs/reference/pathway_atlas/families.yml. Every quote is
+# verbatim from the FIRST dossier listed in its cell.
+# Laboratories (independent): Rutgers (Ge & Lee), Winterswijk hospital (Weykamp & Penders), Wageningen (Martins /
+# van Boekel; Knol), Auburn (Bell), South China University of Technology (Guan / Yu), Hacettepe (Goekmen).
+# What the corpus can and cannot see: the Schiff base / glycosylamine is NEVER quantified directly in a food-relevant
+# pot. It is either inferred by mass balance (Ge 1997: A0 - A - AR), read as a 14C-labile fraction on a protein
+# (Weykamp 1982), detected by accurate mass only (Goekmen 2012; isomeric with the Amadori compound), or carried as an
+# unmeasured fitted lump (Martins, Knol). Net amine or sugar loss (Bell, Potman, Guan) lumps F01 and F02 and is
+# recorded as `unattributed` here; the cells that measure the Amadori compound are in F02_amadori_heyns.yml.
+# ph key "not_stated" is used where the source gives no pH; it is outside the bins on purpose (as in F04).
+# amine tag "protein_bound_nterm" (Weykamp: haemoglobin beta-chain N-terminal valine) is outside the vocabulary on
+# purpose; it is NOT protein-bound lysine.
+
+family: F01_schiff_glycosylamine
+definition: "sugar + amine -> Schiff base / glycosylamine"
+markers:
+  - "the Schiff base / glycosylamine itself quantified: a labile (acid- or wash-reversible) sugar-amine adduct counted apart from the stable Amadori compound, e.g. the 14C-glucose labile fraction that washes out of a protein (weykamp1982_extraction.md)"
+  - "a mass-balance gap at early times: amine lost minus Amadori compound formed (A0 - A - AR) that is constant across initial concentrations, giving an equilibrium K (ge1997_extraction.md eq 7)"
+  - "reversibility signature: amine and sugar RETURN when the free sugar is removed (wash-out / dilution), with a first-order reversion constant, faster than the Amadori rearrangement"
+  - "accurate-mass identity of the sugar-amine condensate (M + amine - H2O) and of its decarboxylated azomethine ylide; NOT unique by itself, because the glycosylamine, the Schiff base and the Amadori compound are isomers"
+  - "NOT a marker: net amine loss, sugar loss or browning (they lump F01 + F02 and downstream sinks); a fitted 'Schiff base' lump in a multiresponse model with no measured intermediate"
+
+cells:
+  # ---------------- the only two studies that resolve a Schiff-base pool (mass balance; 14C labile fraction) ----------------
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: "40-54", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "temperature ladder 40 / 54 C (of 40-97 C), equimolar Glc + Phe 10-100 mM: K 1.47 / 1.09 M^-1 (unit inferred), k_-1 1.33e-3 / 2.40e-2 h^-1; reversion and Amadori step similar in size at 40 C (k_-1 1.33e-3 vs k2 1.27e-3 h^-1)"
+    status: operating
+    quote: "| 40 | 1.33 × 10⁻³ | 0.8942 | 1.97 × 10⁻⁶ |"
+    quantity: "K ~1.1-1.5 M^-1 (Schiff base ~5-7 % of the amine at 50 mM each); k_-1 1.3e-3 h^-1 at 40 C; the 40 / 54 C k2 rows are internally inconsistent (k2 falls with T) and excluded by the dossier"
+    evidence: mass_balance
+    lab: "Rutgers (Ge & Lee)"
+    dossiers: [ge1997_extraction.md]
+    where: "Tables 1-2; sec. 6.3 (K implicitly in M^-1); method disputed in print by van Boekel (content not on disk)"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "68-97", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "temperature 68 -> 97 C: K falls 0.71 -> 0.37 M^-1 (exothermic condensation), k_-1 rises 0.129 -> 9.42 h^-1 while k2 rises 0.067 -> 3.97 h^-1, so reversion stays 2-3x faster than the rearrangement"
+    status: operating
+    quote: "| 97 | 9.42 | 0.9484 | 3.54 × 10⁻³ |"
+    quantity: "Schiff-base lifetime ~6 min at 97 C (1/k_-1); recomputed Ea (natural-log Arrhenius, dossier sec. 7): k1 118, k_-1 136, k2 145 kJ/mol; the printed Ea (x10^4 kcal/mol) are unit-defective"
+    evidence: mass_balance
+    lab: "Rutgers (Ge & Lee)"
+    dossiers: [ge1997_extraction.md]
+    where: "Tables 1-3; sec. 7.2; 68 and 81 C rows Table 1 / Table 2 inconsistent (sec. 6.3)"
+  - key: {ph: not_stated, temperature: low, water: dilute}
+    tags: {ph_basis: not_stated, T_C: 37, sugar: hexose_aldose, amine: protein_bound_nterm, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "glucose wash-out from intact erythrocytes (100 mM glucose + 14C label, then saline): the labile aldimine (HbG) decays back to Hb + glucose, the ketoamine (HbA1c) stays; double Schiff base HbGG detected at the highest glucose"
+    status: operating
+    quote: "An equilibrium constant of 2.12 · 10⁻³ was found for the"
+    quantity: "K1 2.12 M^-1; Schiff-base reversion 0.435 h^-1 (t1/2 1.6 h); Amadori step 4.2e-3 h^-1, so ~1 % of Schiff-base turnover goes forward at 37 C; k1 derived (0.92 M^-1 h^-1)"
+    evidence: measured_intermediate
+    lab: "Winterswijk hospital (Weykamp & Penders)"
+    dossiers: [weykamp1982_extraction.md]
+    where: "Summary p. 341; Methods p. 343; no pH printed anywhere (sec. 2)"
+  # ---------------- fitted lumps (no Schiff base measured) ----------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "80-120", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "model discrimination: E1 (Schiff base / enaminol composite) REVERSIBLE with DFG vs irreversible topologies; reversible preferred by posterior probability (PPB -19.05 vs -24.11 / -23.91)"
+    status: operating
+    quote: "hypothesis A (E1 reversible with DFG, formation of E1 irreversible)"
+    quantity: "condensation Glc + Gly -> E1 1.6e-5 L/(mmol min) at ~100 C, Ea 96.8 +- 2.8 kJ/mol; E1 is not rate-determining, so the Schiff/Amadori split is not identifiable from these data"
+    evidence: kinetic_fit
+    lab: "Wageningen (Martins / van Boekel)"
+    dossiers: [martins2005_extraction.md]
+    where: "Table 1 (model discrimination), Table 2 step 1, sec. 3"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "120-200", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "none inside the study; Glc + Asn 0.2 M each, 0.1 M phosphate pH 6.8; the Schiff base is the shared parent of acrylamide and melanoidins"
+    status: unattributed
+    quote: "\"Schiff base\" is a single unmeasured lump feeding both acrylamide and melanoidins"
+    quantity: "k1 (Glc + Asn -> Schiff base) fitted at five temperatures with 95 % HPD (dossier Table 2); the lump is the condensation product, never measured"
+    evidence: kinetic_fit
+    lab: "Wageningen (Knol / van Boekel)"
+    dossiers: [knol2005_extraction.md]
+    where: "sec. 1 mapping table; the network is Stadler's N-glycoside route"
+  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "120-200", sugar: hexose_ketose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "sugar identity inside one pot (Fru + Asn, glucose formed by isomerisation): the fructose -> Schiff base step is identified, the glucose -> Schiff base step fits NEGATIVE and is dropped at pH 5.5"
+    status: operating
+    quote: "for the formation of the Schiff base from glucose and asparagine"
+    quantity: "Fru + Asn -> Schiff base 0.27e-3 L/(mmol min) at 160 C (1.2x De Vleeschouwer's constant, a second lab); Glc + Asn condensation unidentifiable (< the fit's resolution) at pH 5.5"
+    evidence: kinetic_fit
+    lab: "Wageningen (Knol / van Boekel)"
+    dossiers: [knol2010_extraction.md]
+    where: "Scheme 1 -> Scheme 4 discussion; k2 definition"
+  # ---------------- accurate-mass identity on a dry support ----------------
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: not_stated, T_C: 180, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "none; Asn + Glc 0.01 mmol each on 500 mg silica gel, sealed tube, 180 C, 3 min: Orbitrap ions of the glucose-Asn Schiff base (MW 294), its dehydration analogues (276 / 258 / 240) and their decarboxylated azomethine ylides (250 / 232 / 214 / 196)"
+    status: unattributed
+    quote: "Schiff base of glucose with ASN"
+    quantity: "identity only (mass error < 1.5 ppm); no concentration printed; MW 294 is also the Amadori isomer's mass, so the ion alone does not separate F01 from F02 (my note)"
+    evidence: measured_intermediate
+    lab: "Hacettepe (Goekmen)"
+    dossiers: [gokmen2012_extraction.md]
+    where: "Fig. 5 scheme, sec. 3.5 table"
+  # ---------------- net amine / sugar loss: lumped F01 + F02 (buffer catalysis contrasts) ----------------
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 25, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "phosphate 0.02 / 0.05 / 0.2 / 0.5 M at pH 7.0 held within 6.86-7.05 (measured at each sampling): pseudo-zero-order glycine loss 0.00055 -> 0.0033 M/month (x6 for x25 phosphate)"
+    status: unattributed
+    quote: "A straight line through the four phosphate rates fits within the 95 % CL"
+    quantity: "kappa ~10-11 M^-1 (1 sigma 7-17) on net glycine loss; a 0.56-order power law fits equally; no buffer-free control (k0 extrapolated)"
+    evidence: within_study_factor
+    lab: "Auburn (Bell)"
+    dossiers: [bell1997_extraction.md]
+    where: "Table 1, Table 2 (pH), sec. 4"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 25, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
+    contrast: "citrate vs phosphate at 0.02-0.5 M, same pH 7: citrate gives no detectable glycine loss or browning in 160 d; 0.2 M citrate added to 0.25 M phosphate at 37 C slightly RAISES the rates (no inhibition)"
+    status: unattributed
+    quote: "Citrate at every concentration gives rates \"not significantly different"
+    quantity: "citrate kappa ~0 at 25 C (<= ~5 M^-1 at 37 C); a non-detect without a stated floor, so an upper bound at about the 0.02 M phosphate rate"
+    evidence: within_study_factor
+    lab: "Auburn (Bell)"
+    dossiers: [bell1997_extraction.md]
+    where: "Table 1, Fig. 4"
+  - key: {ph: mild_acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: "110-130", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "phosphate 0.1 / 0.2 / 0.3 M vs acetate / citrate, initial pH 5.8 (25 C), ~2.5 M glucose + ~1.5 M proline: glucose loss rises with phosphate only; at 130 C, 60 min, 0.3 M phosphate ~10 g/L glucose left vs ~290-320 g/L in acetate / citrate"
+    status: unattributed
+    quote: "bifunctional phosphate catalysis of glycosylamine formation"
+    quantity: "glucose remaining at 60 min (Fig. 1, read +-5 g/L): 110 C 0.3 M phosphate ~199, 0.2 M ~283 of ~460 g/L; the step catalysed (glycosylamine vs Amadori) is PROPOSED, not shown; proline is a secondary amine"
+    evidence: within_study_factor
+    lab: "South China University of Technology (Guan / Yu)"
+    dossiers: [guan2012_extraction.md]
+    where: "Fig. 1, Fig. 2 (proposed mechanism), sec. 4"
+
+condition_dependence: >-
+  SHOWN: the Schiff base / glycosylamine is a fast, REVERSIBLE pre-equilibrium in every regime where a method could
+  resolve it. Two independent labs give consistent equilibrium constants for glucose with a primary amine, K ~1.1-1.5 M^-1
+  at 40-54 C (Ge 1997, free Phe, phosphate pH 7) and 2.12 M^-1 at 37 C (Weykamp 1982, haemoglobin N-terminus), so the
+  adduct holds only a few percent of the amine at food concentrations. Reversion is faster than the forward Amadori step:
+  ~100x at 37 C (Weykamp) and 2-3x at 68-97 C (Ge), so the ratio narrows with temperature (Ge's recomputed Ea: k2 145 >
+  k_-1 136 > k1 118 kJ/mol; single lab, disputed method). K falls with temperature (0.71 -> 0.37 M^-1, 68-97 C).
+  Wageningen's multiresponse fits prefer a reversible E1 (Martins 2005) but cannot separate the Schiff base from the
+  Amadori step, and with fructose + Asn at pH 5.5 the glucose condensation is not identifiable (Knol 2010). Phosphate
+  accelerates net early condensation: x6 over 0.02-0.5 M at 25 C (Bell), several-fold at 110-130 C (Guan); citrate does
+  not catalyse at 25 C. Which sub-step phosphate acts on (carbinolamine dehydration vs Amadori rearrangement) is
+  proposed in both papers and shown in neither. ASSUMED, not shown: the pH dependence of the Schiff-base step itself
+  (the only pH series, Ge Fig. 6 and Martins 2005b, measure Amadori formation, see F02); any O2 effect; any
+  dependence on amine type beyond Phe / Gly / Asn / Pro / Hb.
+best_supported_regimes:
+  - "neutral / low-moderate T (37-97 C) / dilute / hexose aldose + primary amine: reversible pre-equilibrium, K ~0.4-2 M^-1 (2 labs, mass balance and 14C labile fraction; operating)"
+  - "neutral / low T / dilute / phosphate: net early condensation catalysed by phosphate, not by citrate (1 lab, within-study dose series; unattributed between F01 and F02)"
+unknown_regimes:
+  - "acid (< 4.5) and alkaline (> 7.5): no Schiff-base K or reversion constant measured outside pH 7"
+  - "high / very high T (> 100 C) in water: no measured Schiff-base pool; only fitted lumps (Martins, Knol)"
+  - "intermediate and low a_w: only an accurate-mass identity on silica (Goekmen 2012); no K or lifetime"
+  - "pentoses: no Schiff-base or glycosylamine measurement for xylose or ribose with any amine"
+  - "ketoses: fructose condensation only as a fitted constant (Knol 2010); no measured fructosylamine pool"
+  - "peptides and protein-bound lysine (as opposed to the Hb N-terminus): no labile-fraction measurement in the corpus"
+  - "cysteine: its Schiff base closes to the thiazolidine (F04); no open-chain measurement"
+  - "O2 / inert contrast: none"
+competing_families:
+  - "F02_amadori_heyns: the Schiff base's forward exit; it carries only ~1 % of Schiff-base turnover at 37 C and ~30 % at 97 C (Ge), the rest reverts"
+  - "F04_thiazolidine_ttca: with cysteine the carbinolamine / iminium closes to a ring instead of rearranging"
+  - "F09_namiki_c2: the Schiff base's retro-aldol fragmentation to C2 (Hayashi & Namiki 1980, ethanol); no aqueous rate"
+  - "F29_acrylamide: with asparagine the Schiff base decarboxylates (azomethine ylide) instead of rearranging (Knol, Goekmen)"
+engine: >-
+  In the engine (engine_family_map.yml): r_schiff (Glc + Gly -> SB, k_schiff = Martins 2005 step 1, Ea 96.8) in the trunk,
+  sulfur and acrylamide lanes, shipped; r_pent_amine (pentose + amine -> PAMA, glycosylamine lumped) in the sulfur lane,
+  NOT shipped (PENTOSE_AMINE_ENTRY disabled). Mismatches with the literature: (1) r_schiff is IRREVERSIBLE and r_amadori is
+  a derived constant (44.9x ratio) with no Schiff-base reversion, whereas both labs that resolve the pool find reversion
+  faster than the Amadori step; the 44.9x forward ratio makes the SB a transient pass-through, which reproduces Martins'
+  one-step lump but not a pre-equilibrium that can hand the sugar back (relevant when cysteine competes for it, F04, or
+  when the amine is consumed elsewhere). (2) No pH term on k_schiff in any lane (Martins 2005b fits pD 0.50 +- 0.14 for
+  the lumped condensation over pH 4.8-7.5; see F02), while the trunk scales only the Amadori-decay steps by pH.
+  (3) No phosphate / buffer catalysis term, although two labs show net condensation rising with phosphate and not with
+  citrate. (4) An a_w multiplier IS applied to k_schiff (trunk_conditions.py, Pereyra Gonzales 2010 lysine loss in milk
+  powder), so the engine's water dependence of this step rests on a protein-bound-lysine source, not on a free-amine one.
+  (5) Only glucose + glycine condense in the trunk; fructose, other amino acids and peptides have no condensation step.

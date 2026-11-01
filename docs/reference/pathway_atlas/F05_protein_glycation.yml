@@ -1,0 +1,340 @@
+# Pathway-condition atlas, family F05 (written 2026-11-01 by an atlas agent; literature side only, nothing fitted).
+# Vocabulary: docs/reference/pathway_atlas/families.yml. Every cell quotes its dossier verbatim (<= 15 words).
+# Deviation from the bins, flagged: where a study did not measure pH (real foods, dry roasts, powders) the ph key is
+# `not_measured` rather than a bin, so no cell is placed on an inferred pH. Tags use `not_stated` where the paper is silent.
+family: F05_protein_glycation
+definition: "glycation of protein-bound lysine (fructoselysine, CML / CEL)"
+markers:
+  - "loss of REACTIVE (OPA / FDNB-available) lysine of a protein with no free amine present, sugar-dependent (a sugar-free or ketose control shows it is not hydrolysis or crosslinking alone)"
+  - "furosine (acid-hydrolysis product of protein-bound fructosyl- / lactulosyl-lysine) rising: the bound Amadori compound itself; a rise-then-fall marks its consumption"
+  - "CML / CEL measured on the protein hydrolysate AFTER NaBH4 reduction (without it, fructosyl-lysine converts partly to CML in hot HCl: an analytical route, not a reaction route)"
+  - "route inside F05: model discrimination between Amadori -> CML / CEL and GO / MGO + bound lysine -> CML / CEL (a constant fitted to zero); weak (kinetic_fit), no labelling exists on disk"
+  - "fed pre-glycated protein (isolated glycated casein / collagen) heated alone: its products (acids, sugars, regenerated lysine) are the bound Amadori compound's fate"
+  - "glycated-peptide mass shifts on Lys (+162 hexose, +58 CML, +72 CEL) after digestion"
+cells:
+  # ---------------- Wageningen FQD (Brands / van Boekel) and its descendant Nguyen 2016: casein in phosphate, 90-130 C ----------------
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "none inside this cell (pH measured 6.72 -> 6.46 over 40 min)"
+    status: operating
+    quote: "7 % of initial lysine; Amadori never accounts for lysine loss"
+    quantity: "lysine residues 15.0 -> 8.7 mmol/L in 40 min (42 % lost); bound Amadori (furosine x 3.1) peaks 1.0 mmol/L at 10-15 min (digitised)"
+    evidence: measured_intermediate
+    lab: "Wageningen FQD (Brands / van Boekel)"
+    dossiers: [brands2001_extraction.md]
+    where: "Figs. 1, 3; sec. 4 within-study ratios"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: hexose_ketose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fructose vs glucose (same casein, same pot): lysine lost 7.2 vs 6.3 mmol/L (50 vs 42 %) in 40 min, but NO Heyns compound and NO furosine; the fitted direct ketose + lysine step goes to zero (k10 -> 0, dropped in Scheme 4)"
+    status: operating
+    quote: "only their degradation products do"
+    quantity: "lysine loss with fructose >= glucose; Heyns / Amadori below detection; the loss is carried by sugar fragments (Cn + Lys-R, k13)"
+    evidence: within_study_factor
+    lab: "Wageningen FQD (Brands / van Boekel)"
+    dossiers: [brands2002c_extraction.md, brands2001_extraction.md]
+    where: "brands2002c sec. 1, Scheme 3 -> 4; brands2001 Fig. 2"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "fed intermediate: casein glycated at 65 C / 15 h, separated on Sephadex G25, then heated alone at 120 C"
+    status: operating
+    quote: "no sugars were formed"
+    quantity: "the bound Amadori compound gives formic and acetic acid (acetic ~1.5x formic) and no free sugar: no detectable reversion to sugar + lysine at 120 C"
+    evidence: fed_intermediate
+    lab: "Wageningen FQD (Brands / van Boekel)"
+    dossiers: [brands2001_extraction.md]
+    where: "Fig. 7 (text only; figure not digitised)"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "initial pH 5.9 vs 6.8 (same model, Scheme 1, 120 C): glycation k7 0.00008 vs 0.00018 L/(mmol min), x2.25 slower per 0.9 pH unit (~0.39 dex / pH); Amadori decay k8 x4.4 slower"
+    status: operating
+    quote: "The rate of all reactions decreased with decreasing pH"
+    quantity: "k7 = 8e-5 L/(mmol min) at initial pH 5.9 vs 1.8e-4 at 6.8 (120 C)"
+    evidence: within_study_factor
+    lab: "Wageningen FQD (Brands / van Boekel)"
+    dossiers: [brands2002c_extraction.md]
+    where: "Tables 1 and 3"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "90-130", sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "temperature 90 -> 130 C (five temperatures, one model): glycation k7 1e-5 -> 2.8e-4 L/(mmol min), Ea 97 +/- 3 kJ/mol (Scheme 4; 114 +/- 2 in Scheme 1)"
+    status: operating
+    quote: "0.000 13 | 0.000 28 | 97 ± 3"
+    quantity: "k7(90 C) 1e-5, k7(100 C) 3e-5 L/(mmol min); the Amadori maximum is the same at every temperature (authors)"
+    evidence: kinetic_fit
+    lab: "Wageningen FQD (Brands / van Boekel)"
+    dossiers: [brands2002c_extraction.md]
+    where: "Tables 2 and 6"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "model discrimination on the bound Amadori compound's fate: Amadori -> Lys-R + 2 trioses (k8, lysine RETURNED) kept; Amadori -> Lys-R + Cn (k9) fitted to 0"
+    status: operating
+    quote: "Amadori → Lys-R + 2 trioses"
+    quantity: "k8 = 0.107 /min at 120 C, Ea 105 +/- 5 kJ/mol (Scheme 4): the bound Amadori compound lives ~10 min and gives its lysine back"
+    evidence: kinetic_fit
+    lab: "Wageningen FQD (Brands / van Boekel)"
+    dossiers: [brands2002c_extraction.md]
+    where: "Scheme 4, Tables 5-6"
+    conflict: CF-072
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "120 / 130", sugar: hexose_aldose, amine: protein_bound_lys, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "120 vs 130 C: glycation k3 1.5e-4 vs 1.6e-4 (Q10 1.1; the authors call the step apparent); in-situ (cooled) pH 6.83 -> 6.66 at 120 C, 6.81 -> 6.47 at 130 C over 30 min"
+    status: operating
+    quote: "1.5e-4 ± 3.0e-5 (20 %)"
+    quantity: "k3 = 1.5e-4 L/(mmol min) at 120 C (sodium caseinate 30 g/L, glucose 150 mmol/L); lysine -44 % in 30 min at 120 C (SIDA); molar recovery 85.5 % at 30 min"
+    evidence: kinetic_fit
+    lab: "RIKILT + Wageningen FQD (van der Fels-Klerx / van Boekel; the Brands network's descendant, same lab family)"
+    dossiers: [nguyen2016_extraction.md]
+    where: "Table 1; Fig. S1A (pH), Fig. S1B (mass balance)"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "120 / 130", sugar: hexose_aldose, amine: protein_bound_lys, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "model discrimination: sugar -> GO -> CML (k5, k6) vs Amadori -> CML (k7): the GO route fits to 0 at both temperatures (GO not measured; sealed tube, air headspace)"
+    status: operating
+    quote: "GO formation as an intermediate was estimated as 0"
+    quantity: "CML 0.025 -> 0.135 mmol/L (16.9-92.2 mg/100 g protein); CML-forming share of Amadori loss k7/(k7+k8+k9) = 0.14 (120 C), 0.04 (130 C), derived; no NaBH4 reduction, so part of the CML may be analytical"
+    evidence: kinetic_fit
+    lab: "RIKILT + Wageningen FQD (van der Fels-Klerx / van Boekel)"
+    dossiers: [nguyen2016_extraction.md]
+    where: "Results 3.3; Table 1"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "120 / 130", sugar: hexose_aldose, amine: protein_bound_lys, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "network structure vs Brands 2002c (same lab family): Nguyen's ODEs return NO lysine from any Amadori step; Brands' k8 returns it"
+    status: conflicting
+    quote: "no step returns lysine."
+    quantity: "d[lys]/dt = -k3[glu][lys] - k6[lys][GO]; Amadori -> MRPs (k8 0.052 /min at 120 C) is the dominant Amadori loss and keeps the lysine"
+    evidence: kinetic_fit
+    lab: "RIKILT + Wageningen FQD (van der Fels-Klerx / van Boekel)"
+    dossiers: [nguyen2016_extraction.md]
+    where: "Fig. S2A / S2B (supplement)"
+    conflict: CF-072
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "120 / 130", sugar: disaccharide, amine: protein_bound_lys, oxygen: air, buffer: phosphate, metals: not_controlled}
+    contrast: "lactose vs glucose (142 vs 150 mmol/L, same casein): glycation k3 1.7e-4 vs 1.5e-4 (equal within HPD); bound Amadori not different (paired t, p 0.35 / 0.32); CML higher and CEL lower with lactose"
+    status: operating
+    quote: "not differ between the sugars; CML in M1 does not differ"
+    quantity: "k3(lactose) = 1.7e-4 L/(mmol min) at 120 C; M2 - M1 CML -0.008 / -0.015 (p 0.003 / 0.005)"
+    evidence: within_study_factor
+    lab: "RIKILT + Wageningen FQD (van der Fels-Klerx / van Boekel)"
+    dossiers: [nguyen2016_extraction.md]
+    where: "Table 1; Table S1"
+  # ---------------- Hacettepe FoQuS (Gokmen): milk 110-140 C, dry seeds 160-220 C ----------------
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "110-140", sugar: disaccharide, amine: protein_bound_lys, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "temperature 110 -> 140 C (four temperatures, separate fits): lactose + lysine -> lactulosyllysine k1 2.2e-9 -> 2.5e-8 kg dm/(umol min), Ea 52.1 +/- 19.0 kJ/mol; milk pH 6.7, falls only 0.1 in 5 min; buffer = the milk's own salts (not added)"
+    status: operating
+    quote: "Total lysine loss: 15.9 % (110 C, 5 min), 27 % (140 C, 2.5 min)"
+    quantity: "furosine 1.04 -> 3.08 g/kg protein (120 C, 5 min); total lysine -15.9 % (110 C, 5 min), -27 % (140 C, 2.5 min)"
+    evidence: kinetic_fit
+    lab: "Hacettepe FoQuS (Hamzalioglu / Gokmen)"
+    dossiers: [hamzalioglu2026_extraction.md]
+    where: "sec. 2 (levels); Tables 1-2"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "110-140", sugar: disaccharide, amine: protein_bound_lys, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "model discrimination: LacLys -> CML (k5) vs GO + Lys -> CML (k11); LacLys -> CEL (k6) vs MGO + Lys -> CEL (k12); lysine regenerated by LacLys -> 3-DG / 1-DG / glucosone / GO, not by the CML / CEL steps"
+    status: operating
+    quote: "the Amadori route wins for both"
+    quantity: "LacLys -> CML Ea 75.4 +/- 17.6, LacLys -> CEL 61.5 +/- 19.9 kJ/mol; GO + Lys -> CML 0 at 110 C, indeterminate above; MGO + Lys -> CEL 0 at 130-140 C; CML 0.11 -> 1.51 mg/kg protein (110 C, 5 min); NaBH4-reduced"
+    evidence: kinetic_fit
+    lab: "Hacettepe FoQuS (Hamzalioglu / Gokmen)"
+    dossiers: [hamzalioglu2026_extraction.md]
+    where: "Tables 1-2; scheme notes (sec. 4)"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: not_measured, T_C: "180-220", sugar: disaccharide, amine: protein_bound_lys, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "model discrimination in a dry sesame roast: FL -> CML (k8) vs GO + bLys -> CML (k10, fitted 0 at all three temperatures)"
+    status: operating
+    quote: "of N-ε-fructoselysine compared to the reaction of glyoxal with bound lysine"
+    quantity: "FL -> CML k8 5.5e-3 / 2.9e-2 / 6.2e-2 /min at 180 / 200 / 220 C, Ea 113 kJ/mol (R2 0.966); glycation step GLU + bLys -> FL Ea -122 (R2 0.648): not temperature-resolved; moisture and a_w not measured ('low moisture content'); NaBH4-reduced CML"
+    evidence: kinetic_fit
+    lab: "Hacettepe FoQuS (Berk / Gokmen)"
+    dossiers: [berk2021_extraction.md]
+    where: "Tables 1-2; sec. 1"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: not_measured, T_C: "180-220", sugar: disaccharide, amine: protein_bound_lys, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "CEL route: MG + bLys -> CEL (k15) kept; HP -> CEL (k16) 0 at all temperatures. Opposite to Nguyen 2016 (aqueous casein: CEL from the Amadori compound) -- not registered as a CF"
+    status: operating
+    quote: "originated from the reaction between methylglyoxal and bound lysine"
+    quantity: "k15 = 3.4 / 10 / 24 kg/(mol min) at 180 / 200 / 220 C, Ea 92 kJ/mol (R2 0.999)"
+    evidence: kinetic_fit
+    lab: "Hacettepe FoQuS (Berk / Gokmen)"
+    dossiers: [berk2021_extraction.md]
+    where: "Tables 1-2"
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: not_measured, T_C: "160 / 180", sugar: disaccharide, amine: protein_bound_lys, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "five roasted nuts / seeds, one network: GO + bLys -> CML (k14) NONZERO in sunflower, peanut, pumpkin (e.g. sunflower 180 C 2.7 +/- 0.56) while FL -> CML (k13) is 0 there; flaxseed 160 C the reverse. Same laboratory as Berk 2021, which fits the GO route to 0 -- the CML route is matrix-dependent or unidentified (no CF registered)"
+    status: operating
+    quote: "GO + bLYS → CML | 0.56 ± 0.35 | 2.7 ± 0.56"
+    quantity: "CEL > CML in every matrix; max CEL 164.1 mg/kg (pumpkin, 180 C, 40 min); FL is furosine x 2.2 (not measured as such)"
+    evidence: kinetic_fit
+    lab: "Hacettepe FoQuS (Sen / Gokmen)"
+    dossiers: [sen2022_extraction.md]
+    where: "Table (p. 7), rows k13-k16; sec. 3.2"
+  # ---------------- soy / pea protein (Wageningen, other groups) ----------------
+  - key: {ph: not_stated, temperature: high, water: intermediate_aw}
+    tags: {ph_basis: not_measured, T_C: 110, sugar: not_stated, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "time course in an autoclaved expanded soybean (12 % moisture, saturated steam; a_w not measured, bin chosen by moisture and flagged): furosine rises to 30 min then falls while CML keeps rising"
+    status: operating
+    quote: "After 30 minutes the concentration of furosine reached the highest values"
+    quantity: "lysine 3.45 -> 2.60 g/100 g protein in 60 min (~23-25 %); furosine 24.2 -> 108.0 (30 min) -> 60.6 (55 min) mg/100 g protein; CML 9.9 -> > 76 mg/100 g protein; SIDA, no NaBH4"
+    evidence: measured_intermediate
+    lab: "Wageningen FQD (Troise / Fogliano) + Napoli"
+    dossiers: [troise2015_extraction.md]
+    where: "sec. 3.4 (Fig. 3 text values)"
+  - key: {ph: not_stated, temperature: moderate, water: dilute}
+    tags: {ph_basis: not_measured, T_C: 85, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: not_stated, metals: not_controlled}
+    contrast: "soy vs pea protein, wet heating (1.2 % protein, glucose 4:1 w/w, 85 C, 30 min): lysine -22 % (soy) vs -8 % (pea); furosine +1.4 vs +1.9 mg/g protein"
+    status: operating
+    quote: "decreased by ~22 %"
+    quantity: "lysine 84.2 -> ~65.7 mg/g protein (soy), 101.7 -> ~93.6 (pea); single end points, duplicates"
+    evidence: within_study_factor
+    lab: "Wageningen FQD (Tang / Hettinga)"
+    dossiers: [tang2024_extraction.md]
+    where: "sec. 3.1"
+  - key: {ph: not_stated, temperature: low, water: intermediate_aw}
+    tags: {ph_basis: not_measured, T_C: 60, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "dry (powder, a_w 0.6, 60 C, 48 h) vs wet (85 C, 30 min): dry glycates far more; pea vs soy ordering flips with the regime (dry: pea CML ~48x vs soy ~12x NT; wet: soy loses more lysine)"
+    status: operating
+    quote: "dry heating contributed more to glycation"
+    quantity: "lysine -47 % (soy), -49 % (pea); furosine ~ +46 mg/g protein (both); glucose : lysine ~32-39 : 1"
+    evidence: within_study_factor
+    lab: "Wageningen FQD (Tang / Hettinga)"
+    dossiers: [tang2024_extraction.md]
+    where: "sec. 3.1"
+  # ---------------- water activity: Labuza (Minnesota) and Malec (Buenos Aires) ----------------
+  - key: {ph: not_stated, temperature: low, water: intermediate_aw}
+    tags: {ph_basis: not_measured, T_C: "35 / 45", sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "a_w 0.14-0.87 in a casein-glucose-GLYCEROL solid: initial available-lysine loss rate peaks at a_w ~0.5-0.57 and falls x2.3-2.6 (45 C) / x4.5 (35 C) by a_w 0.85-0.87; 35 -> 45 C at the maximum x~2.25"
+    status: operating
+    quote: "maximum loss rate of these reactants occurs near the same a_w"
+    quantity: "lysine k ~0.12 /d (45 C, a_w ~0.57), ~0.05 /d (35 C, a_w ~0.5), derived from figure rates; 1.3 mol glucose per mol lysine lost initially"
+    evidence: within_study_factor
+    lab: "Minnesota (Warmbier / Labuza)"
+    dossiers: [warmbier1976_extraction.md]
+    where: "Figs. 3-5; text"
+  - key: {ph: not_stated, temperature: low, water: low_aw}
+    tags: {ph_basis: not_measured, T_C: 45, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "a_w 0.14 / 0.39 vs 0.84 at 45 C, during the 7-d browning induction: 71 / 69 % vs 37 % of the available lysine lost (glycerol keeps the solid mobile)"
+    status: operating
+    quote: "| 45 | 0.14 | 7 | 17 | 71 |"
+    quantity: "71 % lysine and 17 % glucose lost in 7 d at a_w 0.14, 45 C, before zero-order browning starts"
+    evidence: within_study_factor
+    lab: "Minnesota (Warmbier / Labuza)"
+    dossiers: [warmbier1976_extraction.md]
+    where: "Table 2"
+  - key: {ph: not_stated, temperature: low, water: intermediate_aw}
+    tags: {ph_basis: not_measured, T_C: "50 / 60", sugar: disaccharide, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "a_w 0.31-0.71 vs 0.98 in real skim milk powder (no humectant): flat over 0.31-0.71, ~4x slower at 0.98; NO intermediate-a_w maximum, unlike the same lab's buffered lactose-casein model system (maximum at 0.52)"
+    status: operating
+    quote: "were not significantly different (P > 0.05)"
+    quantity: "available-lysine k = 27.2e-3 /h (60 C, a_w 0.69) vs 7.54e-3 /h (a_w 0.98); Ea 121-135 kJ/mol at a_w 0.43-0.98 (37-60 C); OPA/NAC lysine"
+    evidence: within_study_factor
+    lab: "Buenos Aires FCEN (Pereyra Gonzales / Malec)"
+    dossiers: [pereyragonzales2010_extraction.md]
+    where: "Table 1; sec. 4.1"
+  - key: {ph: not_stated, temperature: low, water: low_aw}
+    tags: {ph_basis: not_measured, T_C: 37, sugar: disaccharide, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "a_w 0.33 vs 0.43 at 37 C (4 C above the powder's Tg): lysine-loss k 56x lower in the glass; at 50 / 60 C the a_w 0.33 rate recovers to the flat band"
+    status: operating
+    quote: "0.0198 ± 0.0020"
+    quantity: "k = 1.98e-5 /h (a_w 0.33) vs 1.115e-3 /h (a_w 0.43) at 37 C; the a_w 0.33 Arrhenius plot breaks into three zones (65 / 498 / 80 kJ/mol)"
+    evidence: within_study_factor
+    lab: "Buenos Aires FCEN (Pereyra Gonzales / Malec)"
+    dossiers: [pereyragonzales2010_extraction.md]
+    where: "Table 1; sec. 4.2"
+  # ---------------- physiological temperature: Baynes (USC), Thornalley (Essex) ----------------
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: protein_bound_lys, oxygen: inert, buffer: phosphate, metals: chelated}
+    contrast: "fed pre-glycated rat-tail collagen, phosphate 10 vs 200 mM (pH 7.4, N2 + DTPA / phytate): bound fructoselysine t1/2 75.1 vs 20.0 d (x3.8 faster); hexoses (reversion) 16.7 / 17.1 % of initial FL"
+    status: operating
+    quote: "| glycated collagen | 200 | 20.0 (single) | nd |"
+    quantity: "collagen FL lost 28 % (10 mM Pi, 35 d) and 58 % (200 mM Pi, 28 d); products tetritols 7.3 / 22.5 %, hexitols 16.7 / 17.1 %, 3-DG 1.5 / 0.6 %"
+    evidence: fed_intermediate
+    lab: "USC (Zyzak / Baynes)"
+    dossiers: [zyzak1995_extraction.md]
+    where: "Tables I-II"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled vs chelated (DETAPAC = DTPA 100 uM arm)"}
+    contrast: "glucose 50 mM + human serum albumin 50 mg/mL vs glucose alone (100 mM phosphate, pH 7.4): 3-DG initial rate 1.22 vs 0.49 uM/day; with 100 uM DETAPAC the HSA pot's 3-DG falls 1.05 -> 0.39; phosphate 10 -> 100 mM raises it 0.36 -> 1.22"
+    status: operating
+    quote: "HSA: GO and MGO < 0.5 µM throughout"
+    quantity: "protein-dependent excess 3-DG ~0.7 uM/day at 37 C; GO / MGO below 0.5 uM over 21 d; fructosamine on HSA rises ~190 uM (2 d) -> ~860 uM (21 d) (Fig. 2d, figure-read), so glycation of the protein (bound Amadori, the F05 marker) runs; which bound species (Schiff base or fructosamine) yields the excess 3-DG is not separated (the authors favour the Schiff base)"
+    evidence: within_study_factor
+    lab: "Essex (Thornalley)"
+    dossiers: [thornalley1999_extraction.md]
+    where: "sec. 3 (Figs. 2b, 2d, 2f, 2h; text p. 114)"
+    note: "re-read 2026-11-01: two readers (A WRONG, B MATCH on the rates); adjudicated WRONG. The cell said HSA fructosamine was not printed, but Fig. 2d plots it and the p. 114 text says it increases with time, so status unattributed -> operating (evidence kept within_study_factor, the 3-DG contrast; the fructosamine time course is the measured marker). Rates unchanged; the paper's own 100 mM HSA 3-DG rate is ~1.22 in Fig. 2f but ~1.05 in Fig. 2h."
+  # ---------------- real food bake ----------------
+  - key: {ph: not_stated, temperature: very_high, water: low_aw}
+    tags: {ph_basis: not_measured, T_C: 190, sugar: not_stated, amine: protein_bound_lys, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "bread bake 0-30 min at 190 C and crust vs crumb: furosine rises then falls with thermal load while HMF and colour rise monotonically (crust furosine 75-221 vs crumb ~50 mg/100 g protein)"
+    status: operating
+    quote: "whereas furosine decreases when higher intensity is reached"
+    quantity: "furosine r = -0.60 against baking temperature (common breads); no sugar, lysine, a_w or pH measured"
+    evidence: measured_intermediate
+    lab: "Granada (Ramirez-Jimenez / Garcia-Villanova)"
+    dossiers: [ramirezjimenez2000_extraction.md]
+    where: "Tables 2, 4, 6; conclusions"
+condition_dependence: >-
+  SHOWN. (1) Glycation of protein-bound lysine runs in every regime looked at, from 37 C (Zyzak, Thornalley) through
+  85-140 C in water (Brands, Nguyen, Tang, Hamzalioglu) to 160-220 C dry roasts (Berk, Sen, Ramirez-Jimenez): eight
+  laboratories, all on furosine and / or available-lysine markers; no study looked for it and failed to find it.
+  (2) pH: one within-study contrast only, Brands 2002c, glycation x2.25 slower at initial pH 5.9 than 6.8 (~0.4 dex /
+  pH, 120 C, casein); nothing below pH 5.9 or above 7.4. (3) Temperature in water: Brands 2002c Ea 97 +/- 3 kJ/mol
+  over 90-130 C (five temperatures); Hamzalioglu 2026 52 +/- 19 (milk, 110-140 C, four temperatures); Nguyen 2016
+  Q10 ~1.1 (two temperatures, called apparent); in dry seeds the glycation step is not temperature-resolved (Berk Ea
+  -122, R2 0.65). Available-lysine loss in milk powder: Ea 121-135 (Pereyra, 37-60 C). The barrier is uncertain by
+  ~2x between laboratories. (4) Water: in powders the rate is flat over a_w 0.31-0.71 and ~4x lower at 0.98 (milk
+  powder, no humectant); with glycerol a maximum at a_w ~0.5 and loss still 69-71 % at a_w 0.14-0.39 (Warmbier); a
+  glass (a_w 0.33 at 37 C, just above Tg) cuts it 56x (Pereyra). Dry heating glycates soy / pea protein much more
+  than wet heating per unit time-temperature (Tang). (5) Sugar: lactose = glucose within HPD on casein (Nguyen);
+  fructose removes lysine as fast as glucose but through fragments, with no Heyns compound (Brands). (6) Protein
+  identity changes the extent and even the ordering (pea vs soy flips between wet and dry, Tang). (7) Phosphate
+  speeds bound-Amadori decay x3.8 from 10 to 200 mM at 37 C (Zyzak, collagen); untested at process temperature.
+  (8) Downstream: CML from the Amadori compound is the fitted route in aqueous casein, milk and sesame (Nguyen,
+  Hamzalioglu, Berk), but the same Hacettepe network gives a nonzero GO + bound-Lys route in three of five roasted
+  seeds (Sen 2022); CEL from the Amadori compound in aqueous casein (Nguyen) vs from MGO + bound lysine in sesame
+  (Berk) and milk at 110 C (Hamzalioglu k12). All route statements are model discrimination (kinetic_fit); no
+  labelling on disk. ASSUMED (not shown): that one per-amine constant transfers between casein, whey and globular
+  plant proteins (the matrix review's ~1.9x casein-Lys / glycine ratio is a derived same-lab comparison,
+  docs/history/mechanism_reviews_2026-10-31/matrix.md); that the bound Amadori compound returns its lysine (Brands
+  2002c, Berk, Hamzalioglu networks: yes; Nguyen: no; CF-072).
+best_supported_regimes:
+  - "neutral / high T / dilute / hexose or lactose + casein-bound Lys, phosphate or milk salts: operating (2 lab families: Wageningen FQD x3 papers, Hacettepe; kinetic_fit + furosine / SIDA lysine; one fed-intermediate result)"
+  - "not_measured pH / low T / intermediate a_w / powders (casein-glucose-glycerol, skim milk powder, pea / soy + glucose): operating (3 labs: Minnesota, Buenos Aires, Wageningen; available-lysine loss, within-study a_w contrasts)"
+  - "not_measured pH / very high T / low a_w / sucrose + seed protein (dry roasts): operating (1 lab, Hacettepe, two papers that disagree on the CML route)"
+unknown_regimes:
+  - "acid and mild acid below pH 5.9 (no protein-glycation study on disk below the Brands initial-pH-5.9 arm)"
+  - "alkaline (> 7.5)"
+  - "pentose + protein-bound lysine (no study on disk; ribose / xylose are the savoury-flavour sugars)"
+  - "cysteine-containing pots with protein (does added Cys compete with bound Lys for the sugar?)"
+  - "pea / soy isolate glycation KINETICS at cooking temperature (Tang gives two end points; Troise one soybean time course); no rate constant for a plant protein"
+  - "in-situ pH in any real-food / powder / roast study (none measured)"
+  - "high T (100-140 C) at intermediate a_w with a measured a_w (Troise's soybean is the only near case, a_w unmeasured)"
+  - "inert vs air at process temperature (only Zyzak at 37 C contrasts N2 + chelators vs air, on a model Amadori compound)"
+  - "phosphate vs non-phosphate buffer at process temperature (Zyzak / Thornalley are 37 C only)"
+  - "route discrimination by labelling (no 13C / 15N study of CML or CEL origin on protein in the corpus)"
+competing_families:
+  - "F01_schiff_glycosylamine / F02_amadori_heyns with FREE amino acids for the same sugar: bound Lys is ~60 mmol/kg vs ~1 mmol/kg free amino acids in a 16 % pea product, so bound Lys should take most of the sugar-amine flux there (derived, matrix review); in dilute free-amino-acid pots it is absent"
+  - "F14_caramelisation_amine_free for the sugar: casein did not change net glucose loss at 120 C over 40 min (Brands 2001); with fructose the fragments, not the sugar, glycate"
+  - "F10_retroaldol_c3_c2 / F08_oxidative_osone supply GO / MGO that bound Lys traps as CML / CEL (Berk, Sen, Hamzalioglu k12; Lo 1994 for MGO + BSA at 37 C, not carded here)"
+  - "F03_amadori_reversion: reversion of the bound Amadori compound to sugar + lysine is seen at 37 C (collagen hexoses ~17 %, Zyzak) but not at 120 C (no sugars from fed glycated casein, Brands 2001)"
+  - "F28_thiol_losses / F31_melanoidins: protein-bound Amadori compounds feed the protein-bound melanoidin (Brands 2001 Fig. 4) and compete for carbonyls with thiol capture"
+engine: >-
+  In the engine as Build Wave B20 (src/kinetic_core/network.py GLYCATION_REACTIONS; parameters_glycation.py):
+  r_glc_lysp (Glc + LYSP -> FLP, k_glyc), r_flp_cml (FLP -> CML), r_flp_cel (FLP -> CEL, lumped via MGO), r_flp_decay
+  (FLP -> TDG + LYSP), r_cml_loss (CML -> melanoidin pools). All five constants are fitted to Nguyen 2016 M1 only
+  (one lab family, 120 / 130 C). MISMATCHES with the literature cells: (a) CF-072: r_flp_decay returns LYSP with a
+  constant fitted to Nguyen's lysine-NOT-returned network. Note the structural evidence is split: Brands 2002c,
+  Berk 2021 and Hamzalioglu 2026 networks DO return lysine on the Amadori -> dicarbonyl steps, Nguyen does not;
+  so the engine's structure has support but its constant does not (refit against Brands / Nguyen time courses, not
+  Nguyen's k8). (b) Sugar: only glucose glycates LYSP; lactose (Nguyen M2, Hamzalioglu milk) and sucrose-derived
+  glucose (Berk, Sen) are outside it; there is no fructose + LYSP step, which matches Brands (k10 -> 0) but the
+  fragment + LYSP route that carries fructose's lysine loss (Brands k13) is absent. (c) pH: k_glyc and k_flp_decay
+  carry no pH term (trunk_conditions PH_STEPS covers only the free-amine k_ama_* steps; rate_transfer
+  licensed_at_measurement_ph_only) while Brands 2002c shows x2.25 per 0.9 pH on glycation and x4.4 on Amadori decay.
+  (d) Water: AW_STEPS = (k_schiff,) only, so glycation of protein has no a_w term although the a_w evidence (Pereyra,
+  Warmbier, Tang) is all protein-bound lysine. (e) Temperature: k_glyc Ea declared 96.8 kJ/mol (Martins k_schiff),
+  close to Brands' 97 +/- 3 for casein; Hamzalioglu's 52 +/- 19 (milk) and the lysine-loss 121-135 (powder) bracket it.
+  (f) CML route: GO -> CML not written, consistent with Nguyen / Berk / Hamzalioglu, contradicted in three of five
+  matrices by Sen 2022 (same lab as Berk). CEL route: engine lumps FLP -> CEL (Nguyen); Berk and Hamzalioglu
+  (110 C) prefer MGO + bound Lys, so the engine's CEL does not respond to the MGO pool. (g) No phosphate
+  catalysis of bound-Amadori decay (Zyzak x3.8 at 37 C; untested hot). (h) The CML loss k_cml_loss is declared
+  flat (Nguyen's k11 falls with temperature); no other lab measures a CML sink (Berk omits it; Hamzalioglu k22
+  Ea 43 +/- 23).

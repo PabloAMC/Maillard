@@ -1,0 +1,36 @@
+# SOURCE VERIFICATION -- Zhao J et al. 2019, Food Chem 270:436-444 (zhao2019b.pdf), Tables 1 and 2 (TEST table data/lit/fit_rows/heldout_zhao2019b_tab1_2.yml; contrast benchmark errors E7 (Table 1), E6 / E11 (Table 2)). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_zhao2019b_tab1_2.yml, fit_rows/second/heldout_zhao2019b_tab1_2.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'zhao2019b_table1_gsh_glucose_fat_volatiles'
+  source_file: 'zhao2019b.pdf'
+  location: 'Table 1, p. 438; Sec. 2.2-2.4'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: 'GSH (0.3 mmol) and D-glucose (0.3 mmol) ... in 5 mL sodium phosphate buffer (pH 6.5) ... 53.0 mg chicken fat or oxidized chicken fat ... 140 C for 5 h; ... with the addition of chicken fat or oxidized chicken fat ... isotope distribution patterns of all the compounds were unchanged, except for the 2-ethylthiophene'
+  notes: '124 numeric cells (53 compounds x systems a / b / c; 35 ''-'' cells listed per pot), relative peak area vs an inlet-injected IS, mean +- SD (n = 3). CONDITIONS corrected: buffer molarity not printed; the inlet IS carries no SPME partition correction and fat (1 % w/w) changes the headspace partition in b / c.'
+  adjudication: 'All 159 cells identical in both readings. No row dropped.'
+- ledger_id: 'zhao2019b_table2_camola_glucose_labelling'
+  source_file: 'zhao2019b.pdf'
+  location: 'Table 2, p. 441; text p. 440'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'pass'
+    values: 'pass'
+  quote: 'GSH (0.3 mmol) and D-glucose (0.3 mmol) ... in 5 mL sodium phosphate buffer (pH 6.5) ... 53.0 mg chicken fat or oxidized chicken fat ... 140 C for 5 h; ... with the addition of chicken fat or oxidized chicken fat ... isotope distribution patterns of all the compounds were unchanged, except for the 2-ethylthiophene'
+  notes: '134 numeric isotopomer cells (26 compounds; only 2-ethylthiophene prints systems a / b / c). CONDITIONS corrected: the other 25 rows carry no system label; the text says their patterns were unchanged with fat, so they sit in the control pot standing for a, b and c. Four rows print one cell fewer than the carbon count needs (flagged).'
+  adjudication: 'All 28 printed distributions identical in both readings. No row dropped.'

@@ -1,0 +1,86 @@
+# Pathway-condition atlas: F32_dha_crosslinks (literature side). Built 2026-11-01 from the extraction dossiers only.
+# Quotes verbatim from the cited dossier. THE CORPUS IS NEARLY SILENT ON THIS FAMILY: one paper on disk measures a
+# dehydroalanine (DHA) marker or its cross-link product (li2022: peptide-bound DHA and lanthionine in heated whey
+# proteins); none measures lysinoalanine (LAL). friedman1990 on disk is a browning-inhibition paper (beta-alanine +
+# glucose), not Friedman's lysinoalanine work. The LAL ranges in data/lit/extrusion_damage_reference_payloads.json come
+# from an unsourced "Literature Report 12" with no dossier and are NOT cells here. zheng1994 only CITES beta-elimination
+# of cysteine (Tarbell & Harnish 1951; Schneider & Westley 1969), so it gives no cell.
+family: F32_dha_crosslinks
+definition: "beta-elimination -> dehydroalanine; lysinoalanine / lanthionine"
+markers:
+  - "DHA itself on a peptide (LC-MS/MS of the Cys -> DHA mass shift at a named residue, e.g. beta-LG Cys66 / Cys160) -- li2022, relative signals only."
+  - "CROSS-LINK PRODUCTS after acid hydrolysis: lanthionine (DHA + Cys) and lysinoalanine (DHA + Lys) by LC-MS with an isotope IS -- lanthionine in li2022; LAL nowhere on disk."
+  - "Persulfide on the peptide (the beta-elimination co-product from a disulfide) -- li2022, relative."
+  - "NON-markers: H2S, NH3 or pyruvate from cysteine (also made by cysteine's Strecker degradation and thermolysis, F22); loss of available lysine (also glycation, F05)."
+cells:
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "80-90 (10 and 120 min)", sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "TIME and T in heated whey proteins (alpha-LA, beta-LG, whey model, 3 % WPI; 55 mM HEPES pH 7.0): lanthionine < LOD unheated and at 80 C / 10 min for beta-LG; whey model 1.6 (80 C 10 min) -> 2.0 (90 C 10 min) -> 11.8 uM (90 C 120 min)"
+    status: operating
+    quote: "11.8 ± 1.7"
+    quantity: "lanthionine up to ~12 uM against ~0.77 mM free thiol in the whey model (lanthionine / unheated free thiol ~1.5 mol %, my arithmetic; each lanthionine consumes two Cys residues); beta-LG alone 3.9 uM at 90 C / 120 min"
+    evidence: within_study_factor
+    lab: "Copenhagen (Lund) / Arla Foods Ingredients"
+    dossiers: [li2022_extraction.md]
+    where: "Table 4"
+  - key: {ph: neutral, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "160 (160 s, UHT-like)", sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "UHT-like 160 C / 160 s vs 90 C / 120 min: lanthionine WPI 11.5 -> 21.4 uM; whey model 11.8 -> 14.4 uM; beta-LG 3.9 -> 4.2 uM"
+    status: operating
+    quote: "21.4 ± 5.0"
+    quantity: "a 160 s UHT-like pulse matches or exceeds 2 h at 90 C; the liquid lags the block in a 1 mL vial (dossier flag 3), so the effective T-time is uncertain"
+    evidence: within_study_factor
+    lab: "Copenhagen (Lund) / Arla Foods Ingredients"
+    dossiers: [li2022_extraction.md]
+    where: "Table 4"
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "80-160", sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
+    contrast: "DHA on beta-LG Cys66 by LC-MS/MS, relative to its own maximum: ND unheated -> 10 % (80 C 10 min) -> 15 % (90 C 10 min) -> 46 % (90 C 120 min) -> 100 % (UHT-like); Cys160 DHA 3 -> 4 -> 6 -> 25 -> 100 %"
+    status: operating
+    quote: "Cys66 DHA ND / 10.0 ± 1.8 / 14.9 ± 3.2"
+    quantity: "relative peak areas only (n = 3); no absolute DHA; H2S accounts for < 5 % of all Cys reactions in the protein arms (Table 5b, 0.25-3.4 %)"
+    evidence: measured_intermediate
+    lab: "Copenhagen (Lund) / Arla Foods Ingredients"
+    dossiers: [li2022_extraction.md]
+    where: "Table 2 (partial transcription); Table 5b"
+  - key: {ph: not_stated, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "~100 (120 C oil bath)", sugar: none, amine: cysteine, oxygen: inert, buffer: none_unbuffered, metals: not_controlled}
+    contrast: "FREE cysteine, 6 h, CO2 sweep: NH3 / H2S = 1.4, against 1.0 for the textbook beta-elimination (H2S + NH3 + pyruvate)"
+    status: unattributed
+    quote: "13.4 µmol NH3 vs 9.5 µmol H2S"
+    quantity: "0.95 % of S as H2S in 6 h; ~30 % of NH3 from non-sulfide channels (dossier). No DHA, pyruvate or lanthionine measured, so the beta-elimination share is not identified (also F22)"
+    evidence: mass_balance
+    lab: "Hokkaido (Mizutani / Obata)"
+    dossiers: [mizutani1960_extraction.md]
+    where: "dossier sec. 3 (NH3 / H2S); H2S and NH3 tables"
+condition_dependence: >-
+  SHOWN (one lab, one matrix): in heated whey protein at pH 7.0, DHA appears on specific beta-LG cysteines already at
+  80 C / 10 min and lanthionine is detectable from 80 C (whey model, WPI) and rises 4-6x from 10 to 120 min at 90 C and
+  further under a 160 C / 160 s pulse; the isolated globular proteins (beta-LG, alpha-LA) give less lanthionine than the
+  mixtures. Free-cysteine thermolysis gives NH3 in excess of H2S (Hokkaido), which is compatible with but not proof of
+  beta-elimination. NOT SHOWN anywhere on disk: any pH dependence (the classic alkaline promotion of beta-elimination
+  and LAL is not represented by a dossier), any lysinoalanine number, any plant protein, any low-a_w or extrusion
+  measurement, any sugar co-reactant effect.
+best_supported_regimes:
+  - "neutral (pH 7.0 label) / 80-160 C / dilute (3 % whey protein): DHA and lanthionine operating (single lab, within-study T and time; relative DHA, absolute lanthionine in uM)"
+unknown_regimes:
+  - "alkaline (> 7.5): the pH regime where beta-elimination and LAL are expected to dominate has NO dossier"
+  - "lysinoalanine in any condition: never measured in a dossier on disk"
+  - "plant proteins (pea, soy, gluten) and extrusion / low a_w: only unsourced report ranges (extrusion_damage_reference_payloads.json), no dossier"
+  - "acid and mild_acid pH; temperatures below 80 C; dry heating"
+  - "competition with glycation for protein Lys (F05) or with Maillard dicarbonyls for protein Cys: never co-measured"
+  - "free-amino-acid systems: DHA from free cysteine / serine never measured (only H2S / NH3 stoichiometry)"
+competing_families:
+  - "F22_cysteine_h2s: beta-elimination of (protein) cysteine releases H2S / persulfide; in the whey arms H2S is < 5 % of Cys reactions (li2022), so most Cys goes elsewhere (disulfide exchange, lanthionine, oxidation)"
+  - "F28_thiol_losses: protein thiol-disulfide exchange (the engine's PROT_SS channel) competes for the same Cys residues"
+  - "F05_protein_glycation: DHA + Lys (LAL) and sugar + Lys (fructoselysine) compete for protein-bound Lys; no study measures both"
+engine: >-
+  Not in the engine. No DHA, lanthionine or lysinoalanine species in src/kinetic_core/ (grep: none); protein-bound
+  cysteine is not a species (PROT_SS is a disulfide-site input for thiol exchange only), and LYSP is consumed only by
+  glycation (r_glc_lysp). Free-cysteine beta-elimination is lumped into sulfur.py r_cys_h2s (Cys -> H2S + CBX + FRAG_C
+  2 + FRAG_N 1, Zheng & Ho constant, products described as the textbook H2S + NH3 + pyruvic acid) with a separate
+  non-sulfide sink r_cys_thermal; that lump matches li2022's free-cysteine 10-min point (1.1-1.5x) and the Hokkaido
+  sign (NH3 > H2S). src/dha_lysinoalanine_external_package.py / data/protocols/dha_lysinoalanine_external_package_contract.json
+  are a contract for missing extrusion marker data, not chemistry. Mismatch: in a protein matrix the engine's sink for
+  protein Lys ignores LAL and for protein Cys ignores lanthionine; the literature on disk cannot size either outside
+  whey at pH 7, so this is a declared gap rather than a wrong reaction.

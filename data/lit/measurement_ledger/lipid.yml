@@ -1446,7 +1446,7 @@ entries:
     simulable: false
     condition_quote: "mixtures of phenylalanine and the lipid derivative (10 µmol of each) were singly homogenized with 50-70 mesh sand (600 mg) (Aldrich), 30 µL of 0.3 M buffer, and 80 µL of water"
     flags: [low_moisture_no_aw_term, ph_start_only, calibration_matrix_ph6_only]
-    note: "Only systematic aldehyde/amine split for lipid carbonyls; air raises PAC 4-8x. Phe-alone row non-zero, read net. Control DD row reproduced in hidalgo2016 Table 1. Distinct from zamora2015b (Food Chem, DecadienalBreakage)."
+    note: "Only systematic aldehyde/amine split for lipid carbonyls; air raises PAC 4-8x. Phe-alone row non-zero, read net. Control DD row reproduced in hidalgo2016 Table 1. Distinct from zamora2015b (Food Chem, DecadienalBreakage). TEST table heldout_zamora2015_tab1 (2026-11-01; two blind readers identical on all 144 cells; 139 rows, 5 printed zeros not rows): TEST data for E7 (F30#15), never a fit input. 140 C / 1 h from the Methods default; buffers (citrate pH 3, phosphate pH 6) from the figure captions."
   - id: zamora2015_text_ea_pea_pac_decadienal
     dossier: zamora2015_extraction.md
     paper: "Zamora, Leon & Hidalgo 2015 J Agric Food Chem 63 (accepted MS; doi 10.1021/acs.jafc.5b02619)"
@@ -1979,7 +1979,7 @@ entries:
     simulable: false
     condition_quote: ""
     flags: [internal_inconsistency, "also_in_sulfur_ledger: du2023_table2_camola_isotopomers"]
-    note: "2-pentylthiophene 92 % unlabelled (aldehyde carbon); 2-heptylthiophene from nonanal 16 % doubly labelled (aldol chain extension). Table 2 lists entries absent from Table 1."
+    note: "2-pentylthiophene 92 % unlabelled (aldehyde carbon); 2-heptylthiophene from nonanal 16 % doubly labelled (aldol chain extension). Table 2 lists entries absent from Table 1. Same Table 2 as sulfur.yml du2023_table2_camola_isotopomers, keyed there (heldout_du2023_tab2, 2026-11-01); the dropped rows and the missing system-M baseline apply here too."
   - id: du2023_table_s1_aldehyde_derived_volatiles
     dossier: du2023_extraction.md
     paper: "Du et al. 2023 Food Res Int 173:113337"
@@ -2180,8 +2180,8 @@ entries:
     quant_class: other
     simulable: false
     condition_quote: ""
-    flags: [peak_area_only, table_partly_transcribed, "also_in_sulfur_ledger: zhao2017b_table1_volatiles_3h"]
-    note: "Aldehydes suppress MFT/FFT to n.d. (hexanal: MFT 1.2 % of blank). The aldehyde-derived block (2-hexylthiophene, 2-pentylfuran, alkanethiols) is NOT re-typed: transcribe from the PDF if wanted. No IS."
+    flags: [peak_area_only, "also_in_sulfur_ledger: zhao2017b_table1_volatiles_3h"]
+    note: "Aldehydes suppress MFT/FFT to n.d. (hexanal: MFT 1.2 % of blank). The aldehyde-derived block (2-hexylthiophene, 2-pentylfuran, alkanethiols) is NOT re-typed: transcribe from the PDF if wanted. No IS. TEST table heldout_zhao2017b_tab1 (2026-11-01; two blind readers identical on all 164 cells incl. the aldehyde-derived blocks; 52 rows): TEST data for E7 (BTBU a new TEST lab), never a fit input. 4-methyl-2-propylfuran (77.0) belongs to the decadienal arm (subtotals); (E)-2-heptenal 0.061 g printed for 0.5 mmol (0.056 g): 0.5 mmol used."
   # ---- zhao2019b ----
   - id: zhao2019b_tab1_gsh_glc_fat_oxidised_fat_volatiles
     dossier: zhao2019b_extraction.md
@@ -2200,7 +2200,7 @@ entries:
     simulable: false
     condition_quote: "GSH 0.3 mmol + glucose 0.3 mmol in 5 mL sodium phosphate buffer (pH 6.5)"
     flags: [peak_area_only, buffer_molarity_not_stated, ph_not_measured, conflicts_with_du2025, "also_in_sulfur_ledger: zhao2019b_table1_gsh_glucose_fat_volatiles"]
-    note: "Lipid-vs-no-lipid: fat lowers MFT 38 %, oxidised fat 65 %; lipid-only alkylthiophenes appear (2-pentylthiophene 0 -> 1.04 -> 8.91). Opposite MFT sign to du2025 (free acids). IS injected at inlet, not in sample. PV/AV of the oxidised fat printed, preparation by reference only."
+    note: "Lipid-vs-no-lipid: fat lowers MFT 38 %, oxidised fat 65 %; lipid-only alkylthiophenes appear (2-pentylthiophene 0 -> 1.04 -> 8.91). Opposite MFT sign to du2025 (free acids). IS injected at inlet, not in sample. PV/AV of the oxidised fat printed, preparation by reference only. Same Table 1 as sulfur.yml zhao2019b_table1_gsh_glucose_fat_volatiles, keyed there (heldout_zhao2019b_tab1_2, 2026-11-01)."
   - id: zhao2019b_tab2_camola_fat_systems
     dossier: zhao2019b_extraction.md
     paper: "Zhao, Wang, Xie et al. 2019 Food Chem 270:436"
@@ -2218,7 +2218,7 @@ entries:
     simulable: false
     condition_quote: ""
     flags: ["also_in_sulfur_ledger: zhao2019b_table2_camola_glucose_labelling"]
-    note: "Lipid view: 2-ethylthiophene glucose share ~90 % -> ~44 % with oxidised fat; fat opens no second MFT/FFT carbon route."
+    note: "Lipid view: 2-ethylthiophene glucose share ~90 % -> ~44 % with oxidised fat; fat opens no second MFT/FFT carbon route. Same Table 2 as sulfur.yml zhao2019b_table2_camola_glucose_labelling, keyed there (heldout_zhao2019b_tab1_2, 2026-11-01)."
   - id: zhao2019b_table_s1_fat_only_blanks
     dossier: zhao2019b_extraction.md
     paper: "Zhao, Wang, Xie et al. 2019 Food Chem 270:436"
@@ -2329,7 +2329,7 @@ entries:
     simulable: false
     condition_quote: "50 mL buffer + 4 mmol xylose + 4 mmol L-cysteine"
     flags: [buffer_molarity_not_stated, analysis_delay_uncertain, concentrations_not_stated, "also_in_sulfur_ledger: zhang2021_tab3_cys_xyl_phospholipid_reheat"]
-    note: "Lipid-vs-no-lipid: phospholipid lowers MFT 40-64 %; cephalin (PE amine) > lecithin. Lecithin brings 2-pentylfuran (~50 ug/kg). Phospholipid % basis unknown; Table 4 OAVs use literature thresholds."
+    note: "Lipid-vs-no-lipid: phospholipid lowers MFT 40-64 %; cephalin (PE amine) > lecithin. Lecithin brings 2-pentylfuran (~50 ug/kg). Phospholipid % basis unknown; Table 4 OAVs use literature thresholds. Same Table 3 as sulfur.yml zhang2021_tab3_cys_xyl_phospholipid_reheat; its sulfur rows are keyed there (heldout_zhang2021_table3, 2026-11-01); the group-D dose conflict and the C2 Subtotal misprint (78.80 = 478.80) apply here too."
   # ---- zhang2022 ----
   - id: zhang2022_fig2_water_phase_oil_vs_no_oil
     dossier: zhang2022_extraction.md
@@ -2378,13 +2378,13 @@ entries:
     time_min: [90]
     species: [(E)-2-nonenal, "(E,E)-2,4-decadienal", nonanal, (E)-2-octenal, 1-octen-3-ol, 1-octen-3-one, 2-pentylfuran, 2-pentylpyridine, 2-butylpyridine, 2-hexylthiophene]
     kind: endpoint
-    location: "Text numbers (dossier sec. 3, 'Specific volatile numbers'); per-compound data in Supplementary Tables S1-S5; Fig. 4 thiol-class totals"
-    status: supplement_missing
+    location: "Text numbers (dossier sec. 3, 'Specific volatile numbers'); per-compound data in Supplementary Tables S1-S5 (on disk since 2026-11-01; the dossier SI section transcribes the sulfur classes and furfural, not the lipid volatiles); Fig. 4 thiol-class totals"
+    status: text_only
     quant_class: semi_quantitative
     simulable: false
     condition_quote: ""
-    flags: [supplement_missing, phase_basis_differs, ph_start_only]
-    note: "SI not on disk (DOI 10.1016/j.foodres.2022.111081). Only scattered text values (e.g. decadienal 328 ng/mL Raw-MR corn) are in the dossier; full lipid-oxidation and lipid-Maillard slate per oil x phase is in S1-S5."
+    flags: [si_read_2026-11-01, phase_basis_differs, ph_start_only, table_not_transcribed_in_dossier]
+    note: "SI not on disk (DOI 10.1016/j.foodres.2022.111081). Only scattered text values (e.g. decadienal 328 ng/mL Raw-MR corn) are in the dossier; full lipid-oxidation and lipid-Maillard slate per oil x phase is in S1-S5. SI read 2026-11-01: Tables S1-S5 are on disk (zhang2022_supplementary.docx; means only, no SD or n); their lipid-volatile rows are not yet transcribed in the dossier. The oil-phase sulfur ranking is zhang2022_tabS1_S5_oil_phase_thiols_by_oil."
   # ---- raza2020 ----
   - id: raza2020_tab3_yeast_extract_rsm_lipid_aldehydes
     dossier: raza2020_extraction.md
@@ -2885,8 +2885,8 @@ entries:
     quant_class: semi_quantitative
     simulable: true
     condition_quote: "and 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L) were placed in a 15 mL pressure vial"
-    flags: [partial_transcription_lipid_maillard_rows_only_in_pdf, "also_in_sulfur_ledger: wang2022_table2_volatiles_120c_150min"]
-    note: "Lipid-vs-no-lipid at fixed cook: methyl linoleate suppresses MFT/FFT 3-5x and creates 11 lipid-Maillard thiophenes/thiols absent from the blank (PDF p. 5). ng/g vs 1,2-dichlorobenzene IS, n = 2. The 35 rows other than MFT/FFT are in the PDF, not the dossier."
+    flags: [partial_transcription_lipid_maillard_rows_only_in_pdf, "also_in_sulfur_ledger: wang2022_table2_volatiles_120c_150min", "total_row_misprinted: printed Totals 4003.84 / 1891.92 / 1424.24 vs subtotal sums 4011.16 / 1948.95 / 1407.86", "possible_copy: row 16 (7.75 +- 0.37) = row 6 in the 2 % column"]
+    note: "Lipid-vs-no-lipid at fixed cook: methyl linoleate suppresses MFT/FFT 3-5x and creates 11 lipid-Maillard thiophenes/thiols absent from the blank (PDF p. 5). ng/g vs 1,2-dichlorobenzene IS, n = 2. The 35 rows other than MFT/FFT are in the PDF, not the dossier. TEST table heldout_wang2022_tab2 (2026-11-01; two blind readers identical on all 111 cells; 76 rows): TEST data for E7 (BTBU a new TEST lab) and E12, never a fit input. Dose basis: 1 % / 2 % of the total system mass."
   - id: wang2022_si_table1_lipid_degradation_ml1pct_30_90min
     dossier: wang2022_extraction.md
     paper: "Wang, Xie, Zhang, Xu et al. 2022 Flavour Fragr J 37 (doi 10.1002/ffj.3710)"
@@ -4199,7 +4199,7 @@ entries:
     simulable: false
     condition_quote: ""
     flags: [matrix_food, concentrations_not_stated, dossier_conflict, "same_material_as: xin2026b_enpi"]
-    note: "Sugar lowers 2-PF (mono 50-77 vs poly ~98-100 mg/kg); a lipid-lane observable moved by sugar. Dossier calls control hexanal 922.04 the minimum, Xin2026b reads this paper's Fig. 7B as ~750 control, range 453-1099: dossiers conflict."
+    note: "Sugar lowers 2-PF (mono 50-77 vs poly ~98-100 mg/kg); a lipid-lane observable moved by sugar. Dossier called control hexanal 922.04 the minimum (corrected 2026-11-01: 922.04 is benzaldehyde, per the text; CF-029), Xin2026b reads this paper's Fig. 7B as ~750 control, range 453-1099: dossiers conflict."
   - id: xin2026_fig6_7_volatile_heatmap_bars
     dossier: xin2026_extraction.md
     paper: "Xin, Liu, Cui, Nie, Huang & Qin 2026 Food Hydrocoll 182:113124"
@@ -4917,3 +4917,222 @@ entries:
     condition_quote: ""
     flags: [review_no_values, primary_not_on_disk]
     note: "The review prints conditions and reaction order only, no constants. Acquisition leads: Vazquez-Landaverde, Qian & Torres 2007 J Food Sci 72:E389; Drumm & Spanier 1991 JAFC 39:336; Hall et al. 1985 J Food Qual 7:153. None on disk."
+  # ---- ingest 2026-11-01 (the 36 dossiers of commit e5195e42, 'Ingest 36 papers'); ledgered 2026-11-01 ----
+  - id: doorn2002_tab2_amine_imidazole_4hne_4one_rate_constants
+    dossier: doorn2002_extraction.md
+    paper: "Doorn & Petersen 2002 Chem Res Toxicol 15:1445"
+    lab: "Colorado (Petersen)"
+    system: "4-hydroxy-2-nonenal or 4-oxo-2-nonenal + Ac-Lys-amide, Ac-histamine or Ac-Arg-amide (nucleophile >= 10x excess)"
+    medium: "50 mM sodium phosphate; UV plate reader / diode array; O2 not stated"
+    temperature_c: [23]
+    ph: {initial: [7.4], measured_during: false, final: null}
+    time_min: []
+    species: ["4-hydroxy-2-nonenal", "4-oxo-2-nonenal"]
+    kind: rate_constant
+    location: "Table 2 amine / imidazole / guanidine rows (mean +- SE), dossier sec. 4"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["condition_not_stated: time_min", "also_relevant: sulfur", "complements: doorn2002_tab2_thiol_4hne_4one_rate_constants"]
+    note: "Forward second-order constants by enal UV loss; Arg + 4HNE no adduct (ND); MALDI-TOF adduct structures (37 C, 16-18 h, 10 mM tricine) are qualitative. Selectivity thiol >> His > Lys (> Arg). arms: Lys vs His vs Arg models x 4HNE vs 4ONE (same lab, same assay; thiol rows in sulfur.yml)."
+  - id: hidalgo2005_fig5_phenylacetaldehyde_vs_hne_dose
+    dossier: hidalgo2005_extraction.md
+    paper: "Hidalgo, Gallardo & Zamora 2005 J Agric Food Chem 53:10254"
+    lab: "Instituto de la Grasa, CSIC Seville (Hidalgo)"
+    system: "4-hydroxy-2-nonenal 0, 1, 5, 10, 25, 50 umol + L-phenylalanine 50 umol in 1 mL"
+    medium: "acetonitrile-water 2:1, 1:1 or 1:2, unbuffered (pH ~5), 4-mL vials closed with a cap"
+    temperature_c: [37, 60, 80]
+    ph: {initial: [5], measured_during: false, final: null}
+    time_min: [1260]
+    species: ["phenylacetaldehyde"]
+    kind: endpoint
+    location: "Fig. 5A-C (PA umol vs HNE dose, three solvents per temperature; read +-0.3 umol by the dossier reader); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["unbuffered", "coarse_read", "internal_inconsistency", "also_relevant: aroma_other"]
+    note: "Saturation shape of the donor dose-response (two readers); the low-dose points give more than one PA per HNE and the 0-HNE blank is non-zero (Phe alone or the 250 C injector), neither discussed by the authors. arms: HNE dose ladder x 37 / 60 / 80 C x three ACN-water ratios (same lab, same assay)."
+  - id: hidalgo2005_tab2_phenylacetaldehyde_from_hne_and_epoxydecenal
+    dossier: hidalgo2005_extraction.md
+    paper: "Hidalgo, Gallardo & Zamora 2005 J Agric Food Chem 53:10254"
+    lab: "Instituto de la Grasa, CSIC Seville (Hidalgo)"
+    system: "4-hydroxy-2-nonenal or 4,5-epoxy-2-decenal 50 umol + L-phenylalanine 50 umol in 1 mL (50 mM each)"
+    medium: "acetonitrile-water 2:1 or 1:2, unbuffered (pH ~5, unchanged on incubation), 4-mL vials closed with a cap, 1 mL liquid; headspace gas not stated"
+    temperature_c: [37, 60]
+    ph: {initial: [5], measured_during: false, final: [5]}
+    time_min: [1260]
+    species: ["phenylacetaldehyde"]
+    kind: endpoint
+    location: "Table 2 (umol PA per mmol Phe, mean +- SD, n >= 3, letters within 37 C column); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "closed with a cap"
+    flags: ["unbuffered", "conflicts_with_zamora2006", "also_relevant: aroma_other"]
+    note: "The cleanest lipid-donor Strecker yields on disk; not blank-corrected (the 0-donor blank in Fig. 5 is non-zero); the ED 2:1 37 C level conflicts by more than a decade with zamora2006's same-lab ED + Phe pot (citrate pH 3, GC-MS), unresolved. arms: HNE vs 4,5-epoxy-2-decenal x ACN-water 2:1 vs 1:2 x 37 vs 60 C (same lab, same GC-FID assay)."
+  - id: hidalgo2005_text_80c_phenylacetaldehyde_volatility_caveat
+    dossier: hidalgo2005_extraction.md
+    paper: "Hidalgo, Gallardo & Zamora 2005 J Agric Food Chem 53:10254"
+    lab: "Instituto de la Grasa, CSIC Seville (Hidalgo)"
+    system: "4-hydroxy-2-nonenal 50 umol + L-phenylalanine 50 umol in 1 mL"
+    medium: "acetonitrile-water 2:1 or 1:2, unbuffered (pH ~5), 4-mL capped vials"
+    temperature_c: [37, 60, 80]
+    ph: {initial: [5], measured_during: false, final: null}
+    time_min: [1260]
+    species: ["phenylacetaldehyde"]
+    kind: endpoint
+    location: "Results text (PA per 50 umol Phe at 37 / 60 C pooled and at 80 C for ACN-water 2:1 and 1:2); dossier sec. 3"
+    status: text_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["unbuffered", "condition_uncertain", "also_relevant: aroma_other"]
+    note: "The 80 C values are lower, which the authors attribute to acetonitrile losses near its boiling point (proposed, not tested). arms: 80 C vs 37 / 60 C, ACN-water 2:1 vs 1:2 (same lab, same assay)."
+  - id: kim1996b_fig1_pentylpyridine_yields_by_amino_acid
+    dossier: kim1996b_extraction.md
+    paper: "Kim, Hartman & Ho 1996 J Agric Food Chem 44:3906"
+    lab: "Rutgers (Ho)"
+    system: "(E,E)-2,4-decadienal 10 mM + glycine, aspartic acid, asparagine, glutamic acid or glutamine 50 mM"
+    medium: "100 mL distilled water, no buffer, initial pH 7.5; 0.3 L Hoke SS cylinder; undecane IS added after reaction"
+    temperature_c: [180]
+    ph: {initial: [7.5], measured_during: false, final: null}
+    time_min: [60]
+    species: ["2-pentylpyridine", "3-pentylpyridine"]
+    kind: endpoint
+    location: "Fig. 1 (mg/mol amino acid bars, read +-20 from a 200 dpi render); dossier sec. 1"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["unbuffered", "ph_start_only", "coarse_read", "internal_inconsistency"]
+    note: "GC-FID vs IS with an implied response factor of 1; the Fig. 1 legend says 4-pentylpyridine where text and tables say 3-pentylpyridine. arms: five amino acids at fixed decadienal (same lab, same assay)."
+  - id: kim1996b_tab3_amide_15n_share_pentylpyridines
+    dossier: kim1996b_extraction.md
+    paper: "Kim, Hartman & Ho 1996 J Agric Food Chem 44:3906"
+    lab: "Rutgers (Ho)"
+    system: "(E,E)-2,4-decadienal 1 mmol (10 mM) + [amide-15N]asparagine or [amide-15N]glutamine 5 mmol (50 mM), and unlabelled controls"
+    medium: "100 mL distilled water, no buffer, pH set with 0.1 N NaOH / HCl; 0.3 L Hoke SS cylinder, oil bath; headspace gas not stated"
+    temperature_c: [180]
+    ph: {initial: [7.5], measured_during: false, final: null}
+    time_min: [60]
+    species: ["2-pentylpyridine", "3-pentylpyridine"]
+    kind: ratio
+    location: "Table 3 (% amide-N contribution) from Table 1 ion abundances m/z 92-94 (recomputed by the dossier reader, match); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: ["unbuffered", "ph_start_only", "condition_uncertain", "also_relevant: aroma_other"]
+    note: "Pyridine N from free NH3 (amide) vs amino-group N; alpha-15N not run, so the alpha-amine share is the remainder and not separated from alpha-amine -> NH3; replicates not stated. arms: [amide-15N]Asn vs [amide-15N]Gln vs unlabelled (same lab, same GC-MS)."
+  - id: zamora2006_fig1_ph_series_epoxydecenal_phe_pa_ppa
+    dossier: zamora2006_extraction.md
+    paper: "Zamora, Navarro, Gallardo & Hidalgo 2006 J Agric Food Chem 54:6101"
+    lab: "Instituto de la Grasa, CSIC Seville (Hidalgo)"
+    system: "4,5-epoxy-2-decenal (amount for this series not stated) + L-phenylalanine 25 umol in 500 uL"
+    medium: "acetonitrile / 50 mM buffer (2:1): sodium citrate pH 2.15-6, sodium phosphate pH 6-8"
+    temperature_c: [37]
+    ph: {initial: [2, 3, 4, 5, 6, 7, 8], measured_during: false, final: null}
+    time_min: [1260]
+    species: ["phenylacetaldehyde", "phenylpyruvic acid"]
+    kind: endpoint
+    location: "Fig. 1 (read off render; dossier sec. 3)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["ph_start_only", "concentrations_not_stated", "buffer_confounds_ph", "no_replicates", "no_error_bars", "also_relevant: aroma_other"]
+    note: "Within-study pH factor (both maximal at pH 2-4; PPA falls ~4x to pH 7-8, PA ~1.7x); conflicts with hidalgo2004's pH 6.9 optimum for PA (same lab). arms: pH 2-8 (37 C, same lab, same assay); citrate vs phosphate at pH 6."
+  - id: zamora2006_figs2_3_epoxydecenal_dose_pa_ppa
+    dossier: zamora2006_extraction.md
+    paper: "Zamora, Navarro, Gallardo & Hidalgo 2006 J Agric Food Chem 54:6101"
+    lab: "Instituto de la Grasa, CSIC Seville (Hidalgo)"
+    system: "4,5-epoxy-2-decenal 0-31 umol + L-phenylalanine 25 umol in 500 uL (ED 0-62 mM, Phe 50 mM)"
+    medium: "acetonitrile / 50 mM sodium citrate pH 3 (2:1)"
+    temperature_c: [37, 60]
+    ph: {initial: [3], measured_during: false, final: null}
+    time_min: [1260]
+    species: ["phenylacetaldehyde", "phenylpyruvic acid"]
+    kind: endpoint
+    location: "Fig. 2 (37 C) and Fig. 3 (60 C) (read off renders; printed r and PPA / PA slope ratio; dossier sec. 3)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["ph_start_only", "no_replicates", "no_error_bars", "also_relevant: aroma_other"]
+    note: "Linear in the lipid donor (first order in ED at fixed Phe); non-zero intercepts at zero ED (~0.2-0.3 % blank signal). arms: ED dose 0-31 umol x 37 vs 60 C (same lab, same assay)."
+  - id: zamora2006_figs4_5_epoxydecenal_phe_pa_ppa_timecourses
+    dossier: zamora2006_extraction.md
+    paper: "Zamora, Navarro, Gallardo & Hidalgo 2006 J Agric Food Chem 54:6101"
+    lab: "Instituto de la Grasa, CSIC Seville (Hidalgo)"
+    system: "4,5-epoxy-2-decenal 25 umol + L-phenylalanine 25 umol in 500 uL (50 mM each)"
+    medium: "acetonitrile / 50 mM sodium citrate pH 3 (2:1); vessel, headspace and atmosphere not stated"
+    temperature_c: [37, 60]
+    ph: {initial: [3], measured_during: false, final: null}
+    time_min: [0, 1440]
+    species: ["phenylacetaldehyde", "phenylpyruvic acid"]
+    kind: time_series
+    location: "Figs. 4 (37 C) and 5 (60 C) (read off 200 dpi renders; printed slopes; dossier sec. 3)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["ph_start_only", "no_replicates", "no_error_bars", "vessel_not_stated", "also_relevant: aroma_other"]
+    note: "Only lipid-donor Strecker / keto-acid time courses on disk (PA fast-then-slow; PPA falls after 4 h at 60 C); PA ~34x below hidalgo2005's same nominal pot (within-lab conflict candidate). pH is the aqueous buffer's before mixing. arms: 37 vs 60 C (pH 3, same lab, same assay)."
+  # ---- ingest batch 2 (2026-11-01; the 20 dossiers of commits 2fc869c1 / faea6d14 / e7ffb46b, 'Ingest batch 2'; huber1990 and kallen1973 have no ledger-ready data); ledgered 2026-11-01 ----
+  - id: negroni2000_tab8_pyrazines_by_oil_identity_xylose_glucose_lysine
+    dossier: negroni2000_extraction.md
+    paper: "Negroni, D'Agostina & Arnoldi 2001 J Agric Food Chem 49:439"
+    lab: "Milano (Arnoldi)"
+    system: "xylose or glucose 0.5 M + L-lysine 0.5 M, 70 mL, + 25 g extra-virgin olive, canola or sunflower oil (reference arms, no additive); additive arms + BHT, alpha-tocopherol, rosemary extract (0.30 mmol) or AIBN (0.36 mmol)"
+    medium: "water, pH held at 6 with dilute NaOH (manual pH-stat, no buffer); flask on a Likens-Nickerson apparatus, simultaneous distillation-extraction into CH2Cl2, open to air"
+    temperature_c: [100]
+    ph: {initial: [6.0], measured_during: true, final: [6.0]}
+    time_min: [180]
+    species: [pyrazine, "2-methylpyrazine", "2,5-dimethylpyrazine", "2,3-dimethylpyrazine", trimethylpyrazine]
+    kind: endpoint
+    location: "Table 8 and the reference columns of Tables 2-7 (mg per model system +- SE, n >= 4); Figs. 1-2 redraw Table 8; dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [no_oil_free_arm, open_system_product_stripping, large_cv, internal_inconsistency, error_bar_definition_unstated, "also_relevant: aroma_other"]
+    note: "Oil IDENTITY at fixed oil mass moves the pyrazine profile in opposite directions (olive -> sunflower: pyrazine x1/5-6.5, 2,5-DMP x9-11 up, in both sugars); a shared partition operator cannot do that, so chemistry is the likelier cause (dossier P ~0.7). Cumulative SDE strip, not a standing level. Table 6 swaps the rosemary / tocopherol columns against Table 8; olive fatty acids sum > 100 %; 'standard errors (P < 0.5%)' undefined. Oil-free pots only in refs 4 / 16 (not on disk). arms: olive vs canola vs sunflower x xylose vs glucose; + BHT / tocopherol / rosemary / AIBN (same lab, same SDE GC-MS assay)."
+  - id: negroni2000_tab2_7_furanmethanol_furfural_lipid_aldehydes_by_oil
+    dossier: negroni2000_extraction.md
+    paper: "Negroni, D'Agostina & Arnoldi 2001 J Agric Food Chem 49:439"
+    lab: "Milano (Arnoldi)"
+    system: "xylose or glucose 0.5 M + L-lysine 0.5 M, 70 mL, + 25 g olive, canola or sunflower oil"
+    medium: "water, pH held at 6 with NaOH; Likens-Nickerson SDE into CH2Cl2, open to air"
+    temperature_c: [100]
+    ph: {initial: [6.0], measured_during: true, final: [6.0]}
+    time_min: [180]
+    species: ["2-furanmethanol", furfural, octanal, nonanal, "(Z)-2-decenal"]
+    kind: endpoint
+    location: "Tables 2-7 (printed, mg per model system +- SE); dossier sec. 1, 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [no_oil_free_arm, open_system_product_stripping, large_cv, partial_transcription, "also_relevant: trunk"]
+    note: "The only furan contrast here: 2-furanmethanol (xylose) x1/6 olive -> sunflower; furfural reported only for xylose + olive; lipid aldehydes printed for xylose + olive (hexanal not quantified). Dossier transcribes the reference arms only. arms: olive vs canola vs sunflower x xylose vs glucose (same lab, same SDE GC-MS assay)."
+  # ---- ingest batch 2 supplements (SI read 2026-11-01: zhang2022, zhou2024; wei2022 Fig. S3 and zhai2021 Table S1 are identities only, no new measurement); ledgered 2026-11-01 ----
+  - id: zhang2022_tabS1_S5_oil_phase_thiols_by_oil
+    dossier: zhang2022_extraction.md
+    paper: "Zhang Z., He et al. 2022 Food Res Int 155:111081"
+    lab: "Hefei University of Technology (He, Sun)"
+    system: "xylose + cysteine equimolar (printed '0.4 mol' in 10 mL) + corn, peanut, olive, coconut or palm oil, raw or ENTH (lipase + 4 h air oxidation), oil : aqueous 4 : 1 v/v"
+    medium: "sealed 50 mL tube, oil bath, 150 rpm; oil phase analysed separately (3 mL HS-SPME, 1,2-dichlorobenzene IS added into the phase, RF 1)"
+    temperature_c: [120]
+    ph: {initial: [7.2], measured_during: false, final: null}
+    time_min: [90]
+    species: [FFT, MFT, "thiol class subtotal", "thiophene class subtotal", "bis(2-methyl-3-furyl) disulfide"]
+    kind: ranking
+    location: "Supplementary Tables S1-S5, columns 'Raw-MR oil' and 'ENTH-MR oil' (docx XML); dossier SI sec. S.1-S.3 (c)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [si_read_2026-11-01, phase_basis_differs, no_sd_printed, identity_by_library, internal_inconsistency, "also_relevant: sulfur"]
+    note: "Ranking signature only, never absolute (the IS is far more oil-retained than MFT / FFT, inflating oil-phase numbers by an estimated 10-100x): Raw-MR oil-phase FFT coconut 2141 > palm 1407 > peanut 1158 > olive 642 > corn 53 ng/mL, Spearman rho -0.9 against iodine value (n = 5); ENTH / raw x0.57-0.95 on the thiol subtotal (mild oxidation, confounded with lipase hydrolysis). MFT undetected in 5 of 10 oil phases. Corn ENTH-MR thiol subtotal misprinted (110.97 vs 113.51 summed; its MFT 0.54 uncertain). arms: 5 oils x raw vs ENTH (same lab, same HS-SPME assay)."

@@ -1,0 +1,21 @@
+# SOURCE VERIFICATION -- Xu, Gao, Liu & Zhao 2008 (online 2007), J Sci Food Agric 88:328-335 (xu2007.pdf), Table 1, control columns (TEST table data/lit/fit_rows/heldout_xu2007_tab1.yml; contrast benchmark error E8). Format and the five
+# checks: the header of data/lit/source_verification.yml. FIRST READER: reader A (agent-readerA-2026-11-01); SECOND READER: reader B (agent-readerB-2026-11-01), independent
+# and in parallel (source_verification/second/heldout_xu2007_tab1.yml, fit_rows/second/heldout_xu2007_tab1.yml). ADJUDICATED 2026-11-01 by agent-queue-adjudicator-2026-11-01 (rules: table
+# cells = the printed value; figure reads = mean of A and B, error max(A, B, |A-B|/2); flagged ambiguities re-read in the PDF).
+
+entries:
+- ledger_id: 'xu2007_table1_ph_axis_volatiles'
+  source_file: 'xu2007.pdf'
+  location: 'Table 1, pp. 332-333; Methods p. 329'
+  read_by: 'agent-readerA-2026-11-01'
+  second_reader: 'agent-readerB-2026-11-01'
+  date: '2026-11-01'
+  checks:
+    conditions: 'corrected'
+    units: 'pass'
+    quantification: 'pass'
+    duplicates: 'corrected'
+    values: 'pass'
+  quote: 'Phosphate buffers (0.2 mol L-1) at different pH values were prepared by mixing appropriate volumes of 0.2 mol L-1 sodium pyrophosphate dibasic and 0.2 mol L-1 sodium pyrophosphate tetrabasic. ... b Each model system consisted of 5 mmol ribose and 5 mmol cysteine in 100 mL 0.2 of mol L-1 phosphate buffer.'
+  notes: '65 numeric control-column cells (34 compounds x pH 5.6 / 7.0 / 8.0, ng/mL headspace, RF 1). CONDITIONS corrected: the buffer is pyrophosphate (labelled phosphate); final pH printed (5.5 / 6.2 / 6.8). DUPLICATES corrected: pH 5.6 columns duplicate Xu 2008 (count once).'
+  adjudication: 'All 102 shared cells identical. SC-CO2 columns (A only) and 38 sulfur heterocycles (B only) are single-reader, not rows.'

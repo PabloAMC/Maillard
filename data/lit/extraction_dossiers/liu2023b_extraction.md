@@ -24,7 +24,7 @@ internal standard ("ng" per vial, semi-quantitative). [13C5]-ribose 1:1 for the 
 | 2-furfurylthiol | 175.36 +/- 15.40 | 197.68 +/- 6.64 | 169.51 +/- 10.62 |
 | 2-furfural | 5.78 +/- 0.13 | 3.66 +/- 0.96 | 4.06 +/- 0.75 |
 
-Labelling: MFT is mostly the intact C5 ribose skeleton (~81 %) with ~19 % from recombined fragments;
+Labelling: MFT is mostly the intact C5 ribose skeleton (~81 %) with ~19 % from recombined fragments [superseded 2026-11-01, CF-086: the 19 % is carried mostly by the M+4 channel, which is the labelled MFT's own EI [M-1]+ ion (the claimed correction was not applied to the table); corrected, ~94 % intact C5 and ~6 % fragments, band 5-19 % until the raw spectra settle it];
 4-hydroxy-5-methyl-3(2H)-furanone is its intermediate; 3-thiophenethiol arises by aldol condensation.
 
 ## 3. What the repo takes

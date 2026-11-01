@@ -7488,6 +7488,8 @@ sulfide. Elimination of water from the intermediate 3-hydroxy-4-mercapto-5-methy
 dihydrofuran would give rise to MFT."* Van den Ouweland & Peer 1975 (10.1021/jf60199a045)
 and Whitfield et al. 1993 report the same synthesis.
 
+> **Erratum 2026-11-01 (CF-092):** van den Ouweland & Peer 1975 propose the NF -> MFT pathway (their Fig. 4) but identify no MFT (Table I lists 4-mercapto-2-methylfuran, dihydro-MFT and 3-mercapto-2-methylthiophene). NF + H2S -> MFT is measured on disk by Hofmann 1998, Whitfield 1999, Cerny 2003 (pot D) and de Roos 2005.
+
 **Why both are true at once.** A spike experiment measures a route's *share of flux in
 competition*; a synthesis experiment measures whether the route *exists*. Cerny's result
 says the NF route contributes **little** in situ from ribose — not that it contributes

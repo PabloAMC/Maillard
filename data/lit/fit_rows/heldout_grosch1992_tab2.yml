@@ -1,0 +1,190 @@
+# KEYED TEST TABLE -- Grosch W & Zeiler-Hilgart G 1992, ACS Symp Ser 490 (Flavor Precursors) 183-192 (Deutsche Forschungsanstalt fuer
+# Lebensmittelchemie, Garching), Table II 'Thiamine as Precursor' (p. 185): MFT, FFT and bis(2-methyl-3-furyl) disulfide by SIDA after 2 h
+# reflux of thiamine / thiamine pyrophosphate with or without ribose, cysteine and GSH in 0.2 M pyrophosphate pH 5.7 (eight systems).
+# PURPOSE: TEST data for conflict CF-089 ('effect of cysteine on thermal thiamine degradation and so on thiamine-derived MFT / H2S') and
+# engine error E18 ('3-mercapto-2-pentanone only from thiamine; thiamine pH'); contrasts no. 4 vs 1 (cysteine x7 on MFT), no. 6 vs 4
+# (ribose lowers it 33 -> 19 ug), no. 8 vs 4 (GSH + cysteine + ribose: 27 %), no. 7 vs 6 (GSH vs cysteine). NEVER a fit input: fit_rows.load refuses every row (the unit is not in fit_rows.UNITS; the laboratory string 'DFA Garching (Grosch)' is in no group of data/keys/laboratories.yml); keep it so.
+# Format: src/kinetic_core/fit_rows.py. Ledger entry: grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems
+# (data/lit/measurement_ledger/sulfur.yml); quantification SIDA (d-MF-SH, d-FF-SH, d-MF-S2).
+#
+# READERS (2026-11-01), independent and in parallel, blind to each other: reader A (agent-readerA-2026-11-01; pdftotext -layout for
+# born-digital text, pdfimages / sips crops for scans and figures) and reader B (agent-readerB-2026-11-01; pages rendered at 200-300 ppi
+# and read visually, pdftotext as a cross-check). Raw files: the coordinator's scratchpad (queue_reader_A.yml, queue_reader_B.yml);
+# B's rows as written: fit_rows/second/heldout_grosch1992_tab2.yml. Adjudicator: agent-queue-adjudicator-2026-11-01.
+# ADJUDICATION: table cells, value = the printed cell. A and B agree on all 24 cells (values, SDs, N, every '<x', 'n.a.', 'n.d.').
+# Read error = half the last printed digit in dex; each row carries the printed SD and N (trials).
+# RESOLUTIONS (re-read in the PDF text layer, p. 184-185): reactant amounts (footnote a) 30 umol thiamine.HCl (10.2 mg) or thiamine
+# pyrophosphate (13.9 mg), 670 umol ribose (100 mg), 325 umol cysteine.HCl (57 mg), 230 umol GSH (71 mg); the masses and moles agree to
+# 1 % for every reactant; in 500 mL: 0.060 / 1.34 / 0.65 / 0.46 mM. Temperature not printed ('refluxed for 2 h': ~100 C, open, air).
+# Arms 6 and 7 differ in thiol identity AND amount (325 vs 230 umol). TEXT CHECKS (consistent): no. 1 = 41 nmol MFT and 17 nmol FFT from
+# 30 umol thiamine; cysteine 'increased 7-fold' (33 / 4.7); ribose lowered MFT 'from 33 to 19 ug'; no. 8 'only 27 %' of no. 4.
+# NOT ROWS: '<x' cells (detection limits that vary by row; listed per pot under upper_limits_ug), 'n.a.' (no. 3 MF-S2, not analysed) and
+# 'n.d.' (no. 4 MF-S2, not detectable, no limit). Table III (cysteine dose x thiamine) and Table IV (0.1 vs 0.2 M pyrophosphate) share the
+# design and are not keyed; Table III's 325 umol / 30 umol cell (19 ug) is this table's no. 6 (same pot, count once). No row dropped.
+# NEW SPECIES KEYS: TPP thiamine pyrophosphate. Engine keys: MFT, FFT, MFTD, THI, PENT, Cys, GSH.
+status: ready   # two readers + adjudication (2026-11-01); TEST data, never a fit input: fit_rows.load refuses every row (units outside fit_rows.UNITS)
+purpose: 'TEST data for conflict CF-089 (cysteine and thermal thiamine degradation) and engine error E18 (docs/reference/contrast_benchmark/keying_queue.yml rank 13; existing TEST contrasts F27#15, F27#16); never a fit input'
+pots:
+  grosch1992_tab2_no1:
+    {ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: 'reflux at ambient pressure (boiling; temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {THI: 0.06},
+     concentration_basis: 'printed amounts (Table II footnote a) in 500 mL: thiamine.HCl 30 umol, thiamine pyrophosphate 30 umol, D-ribose 670 umol, cysteine.HCl 325 umol, GSH 230 umol; solute volume ignored',
+     system: 'thiamine',
+     label_ph: 5.7,
+     ph_measured_at: 'buffer as prepared; no pH after heating printed (cysteine.HCl and thiamine.HCl add acid; re-adjustment not stated)',
+     buffer: 'Na-pyrophosphate 0.2 mol/L, pH 5.7, 500 mL',
+     atmosphere: 'open reflux (air)',
+     vessel: 'reflux apparatus (Method I), extracted after cooling',
+     trials: 3,
+     upper_limits_ug: {MFTD: 0.2},
+     not_quantified: {},
+     source_table: 'Table II (p. 185) no. 1: ug per reaction system, mean +- SD over N trials, SIDA (d-MF-SH, d-FF-SH, d-MF-S2)',
+     condition_quote: 'Experimental: ''dissolved in Na-pyrophosphate buffer (pH 5.7, 0.2 mol/L, 500 mL) ... Method I: the mixture was refluxed for 2 h and extracted after cooling''; Table II footnote a: ''thiamine.HCl (10.2 mg; 30 umol), thiamine pyrophosphate (13.9 mg; 30 umol), D(-)-ribose (100 mg; 670 umol), cysteine.HCl (57 mg; 325 umol), GSH (71 mg; 230 umol)'''}
+  grosch1992_tab2_no2:
+    {ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems',
+     engine_species_missing: ['TPP'],
+     t_c: 100,
+     t_c_basis: 'reflux at ambient pressure (boiling; temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {TPP: 0.06},
+     concentration_basis: 'printed amounts (Table II footnote a) in 500 mL: thiamine.HCl 30 umol, thiamine pyrophosphate 30 umol, D-ribose 670 umol, cysteine.HCl 325 umol, GSH 230 umol; solute volume ignored',
+     system: 'thiamine pyrophosphate',
+     label_ph: 5.7,
+     ph_measured_at: 'buffer as prepared; no pH after heating printed (cysteine.HCl and thiamine.HCl add acid; re-adjustment not stated)',
+     buffer: 'Na-pyrophosphate 0.2 mol/L, pH 5.7, 500 mL',
+     atmosphere: 'open reflux (air)',
+     vessel: 'reflux apparatus (Method I), extracted after cooling',
+     trials: 2,
+     upper_limits_ug: {MFT: 0.5, FFT: 0.4, MFTD: 0.2},
+     not_quantified: {},
+     source_table: 'Table II (p. 185) no. 2: ug per reaction system, mean +- SD over N trials, SIDA (d-MF-SH, d-FF-SH, d-MF-S2)',
+     condition_quote: 'Experimental: ''dissolved in Na-pyrophosphate buffer (pH 5.7, 0.2 mol/L, 500 mL) ... Method I: the mixture was refluxed for 2 h and extracted after cooling''; Table II footnote a: ''thiamine.HCl (10.2 mg; 30 umol), thiamine pyrophosphate (13.9 mg; 30 umol), D(-)-ribose (100 mg; 670 umol), cysteine.HCl (57 mg; 325 umol), GSH (71 mg; 230 umol)'''}
+  grosch1992_tab2_no3:
+    {ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: 'reflux at ambient pressure (boiling; temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {THI: 0.06, PENT: 1.34},
+     concentration_basis: 'printed amounts (Table II footnote a) in 500 mL: thiamine.HCl 30 umol, thiamine pyrophosphate 30 umol, D-ribose 670 umol, cysteine.HCl 325 umol, GSH 230 umol; solute volume ignored',
+     system: 'thiamine + ribose',
+     label_ph: 5.7,
+     ph_measured_at: 'buffer as prepared; no pH after heating printed (cysteine.HCl and thiamine.HCl add acid; re-adjustment not stated)',
+     buffer: 'Na-pyrophosphate 0.2 mol/L, pH 5.7, 500 mL',
+     atmosphere: 'open reflux (air)',
+     vessel: 'reflux apparatus (Method I), extracted after cooling',
+     trials: 2,
+     upper_limits_ug: {FFT: 1.5},
+     not_quantified: {MFTD: 'n.a. (not analysed)'},
+     source_table: 'Table II (p. 185) no. 3: ug per reaction system, mean +- SD over N trials, SIDA (d-MF-SH, d-FF-SH, d-MF-S2)',
+     condition_quote: 'Experimental: ''dissolved in Na-pyrophosphate buffer (pH 5.7, 0.2 mol/L, 500 mL) ... Method I: the mixture was refluxed for 2 h and extracted after cooling''; Table II footnote a: ''thiamine.HCl (10.2 mg; 30 umol), thiamine pyrophosphate (13.9 mg; 30 umol), D(-)-ribose (100 mg; 670 umol), cysteine.HCl (57 mg; 325 umol), GSH (71 mg; 230 umol)'''}
+  grosch1992_tab2_no4:
+    {ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: 'reflux at ambient pressure (boiling; temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {THI: 0.06, Cys: 0.65},
+     concentration_basis: 'printed amounts (Table II footnote a) in 500 mL: thiamine.HCl 30 umol, thiamine pyrophosphate 30 umol, D-ribose 670 umol, cysteine.HCl 325 umol, GSH 230 umol; solute volume ignored',
+     system: 'thiamine + cysteine',
+     label_ph: 5.7,
+     ph_measured_at: 'buffer as prepared; no pH after heating printed (cysteine.HCl and thiamine.HCl add acid; re-adjustment not stated)',
+     buffer: 'Na-pyrophosphate 0.2 mol/L, pH 5.7, 500 mL',
+     atmosphere: 'open reflux (air)',
+     vessel: 'reflux apparatus (Method I), extracted after cooling',
+     trials: 4,
+     upper_limits_ug: {FFT: 1.5},
+     not_quantified: {MFTD: 'n.d. (not detectable; no limit printed)'},
+     source_table: 'Table II (p. 185) no. 4: ug per reaction system, mean +- SD over N trials, SIDA (d-MF-SH, d-FF-SH, d-MF-S2)',
+     condition_quote: 'Experimental: ''dissolved in Na-pyrophosphate buffer (pH 5.7, 0.2 mol/L, 500 mL) ... Method I: the mixture was refluxed for 2 h and extracted after cooling''; Table II footnote a: ''thiamine.HCl (10.2 mg; 30 umol), thiamine pyrophosphate (13.9 mg; 30 umol), D(-)-ribose (100 mg; 670 umol), cysteine.HCl (57 mg; 325 umol), GSH (71 mg; 230 umol)'''}
+  grosch1992_tab2_no5:
+    {ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems',
+     engine_species_missing: ['TPP'],
+     t_c: 100,
+     t_c_basis: 'reflux at ambient pressure (boiling; temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {TPP: 0.06, Cys: 0.65},
+     concentration_basis: 'printed amounts (Table II footnote a) in 500 mL: thiamine.HCl 30 umol, thiamine pyrophosphate 30 umol, D-ribose 670 umol, cysteine.HCl 325 umol, GSH 230 umol; solute volume ignored',
+     system: 'thiamine pyrophosphate + cysteine',
+     label_ph: 5.7,
+     ph_measured_at: 'buffer as prepared; no pH after heating printed (cysteine.HCl and thiamine.HCl add acid; re-adjustment not stated)',
+     buffer: 'Na-pyrophosphate 0.2 mol/L, pH 5.7, 500 mL',
+     atmosphere: 'open reflux (air)',
+     vessel: 'reflux apparatus (Method I), extracted after cooling',
+     trials: 2,
+     upper_limits_ug: {MFT: 0.5, FFT: 0.5, MFTD: 0.2},
+     not_quantified: {},
+     source_table: 'Table II (p. 185) no. 5: ug per reaction system, mean +- SD over N trials, SIDA (d-MF-SH, d-FF-SH, d-MF-S2)',
+     condition_quote: 'Experimental: ''dissolved in Na-pyrophosphate buffer (pH 5.7, 0.2 mol/L, 500 mL) ... Method I: the mixture was refluxed for 2 h and extracted after cooling''; Table II footnote a: ''thiamine.HCl (10.2 mg; 30 umol), thiamine pyrophosphate (13.9 mg; 30 umol), D(-)-ribose (100 mg; 670 umol), cysteine.HCl (57 mg; 325 umol), GSH (71 mg; 230 umol)'''}
+  grosch1992_tab2_no6:
+    {ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: 'reflux at ambient pressure (boiling; temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {THI: 0.06, Cys: 0.65, PENT: 1.34},
+     concentration_basis: 'printed amounts (Table II footnote a) in 500 mL: thiamine.HCl 30 umol, thiamine pyrophosphate 30 umol, D-ribose 670 umol, cysteine.HCl 325 umol, GSH 230 umol; solute volume ignored',
+     system: 'thiamine + cysteine + ribose',
+     label_ph: 5.7,
+     ph_measured_at: 'buffer as prepared; no pH after heating printed (cysteine.HCl and thiamine.HCl add acid; re-adjustment not stated)',
+     buffer: 'Na-pyrophosphate 0.2 mol/L, pH 5.7, 500 mL',
+     atmosphere: 'open reflux (air)',
+     vessel: 'reflux apparatus (Method I), extracted after cooling',
+     trials: 3,
+     upper_limits_ug: {MFTD: 0.2},
+     not_quantified: {},
+     source_table: 'Table II (p. 185) no. 6: ug per reaction system, mean +- SD over N trials, SIDA (d-MF-SH, d-FF-SH, d-MF-S2)',
+     condition_quote: 'Experimental: ''dissolved in Na-pyrophosphate buffer (pH 5.7, 0.2 mol/L, 500 mL) ... Method I: the mixture was refluxed for 2 h and extracted after cooling''; Table II footnote a: ''thiamine.HCl (10.2 mg; 30 umol), thiamine pyrophosphate (13.9 mg; 30 umol), D(-)-ribose (100 mg; 670 umol), cysteine.HCl (57 mg; 325 umol), GSH (71 mg; 230 umol)'''}
+  grosch1992_tab2_no7:
+    {ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: 'reflux at ambient pressure (boiling; temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {THI: 0.06, GSH: 0.46, PENT: 1.34},
+     concentration_basis: 'printed amounts (Table II footnote a) in 500 mL: thiamine.HCl 30 umol, thiamine pyrophosphate 30 umol, D-ribose 670 umol, cysteine.HCl 325 umol, GSH 230 umol; solute volume ignored',
+     system: 'thiamine + GSH + ribose',
+     label_ph: 5.7,
+     ph_measured_at: 'buffer as prepared; no pH after heating printed (cysteine.HCl and thiamine.HCl add acid; re-adjustment not stated)',
+     buffer: 'Na-pyrophosphate 0.2 mol/L, pH 5.7, 500 mL',
+     atmosphere: 'open reflux (air)',
+     vessel: 'reflux apparatus (Method I), extracted after cooling',
+     trials: 3,
+     upper_limits_ug: {FFT: 1.7, MFTD: 0.2},
+     not_quantified: {},
+     source_table: 'Table II (p. 185) no. 7: ug per reaction system, mean +- SD over N trials, SIDA (d-MF-SH, d-FF-SH, d-MF-S2)',
+     condition_quote: 'Experimental: ''dissolved in Na-pyrophosphate buffer (pH 5.7, 0.2 mol/L, 500 mL) ... Method I: the mixture was refluxed for 2 h and extracted after cooling''; Table II footnote a: ''thiamine.HCl (10.2 mg; 30 umol), thiamine pyrophosphate (13.9 mg; 30 umol), D(-)-ribose (100 mg; 670 umol), cysteine.HCl (57 mg; 325 umol), GSH (71 mg; 230 umol)'''}
+  grosch1992_tab2_no8:
+    {ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: 'reflux at ambient pressure (boiling; temperature not printed)',
+     minutes: 120,
+     initial_mmol_L: {THI: 0.06, GSH: 0.46, Cys: 0.65, PENT: 1.34},
+     concentration_basis: 'printed amounts (Table II footnote a) in 500 mL: thiamine.HCl 30 umol, thiamine pyrophosphate 30 umol, D-ribose 670 umol, cysteine.HCl 325 umol, GSH 230 umol; solute volume ignored',
+     system: 'thiamine + GSH + cysteine + ribose',
+     label_ph: 5.7,
+     ph_measured_at: 'buffer as prepared; no pH after heating printed (cysteine.HCl and thiamine.HCl add acid; re-adjustment not stated)',
+     buffer: 'Na-pyrophosphate 0.2 mol/L, pH 5.7, 500 mL',
+     atmosphere: 'open reflux (air)',
+     vessel: 'reflux apparatus (Method I), extracted after cooling',
+     trials: 4,
+     upper_limits_ug: {},
+     not_quantified: {},
+     source_table: 'Table II (p. 185) no. 8: ug per reaction system, mean +- SD over N trials, SIDA (d-MF-SH, d-FF-SH, d-MF-S2)',
+     condition_quote: 'Experimental: ''dissolved in Na-pyrophosphate buffer (pH 5.7, 0.2 mol/L, 500 mL) ... Method I: the mixture was refluxed for 2 h and extracted after cooling''; Table II footnote a: ''thiamine.HCl (10.2 mg; 30 umol), thiamine pyrophosphate (13.9 mg; 30 umol), D(-)-ribose (100 mg; 670 umol), cysteine.HCl (57 mg; 325 umol), GSH (71 mg; 230 umol)'''}
+rows:
+  - {pot: 'grosch1992_tab2_no1', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'MFT', t_min: 120, value: 4.7, unit: 'ug_per_pot_500mL', sd: 1.2, n: 3, printed: 'Table II (p. 185) no. 1, MF-SH: 4.7 +- 1.2 ug (N = 3); readers A and B identical', read_error: 0.0046, read_error_basis: 'half the last printed digit (0.05), in dex; the printed SD (N trials) carries the scatter'}
+  - {pot: 'grosch1992_tab2_no1', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'FFT', t_min: 120, value: 1.9, unit: 'ug_per_pot_500mL', sd: 0.4, n: 3, printed: 'Table II (p. 185) no. 1, FF-SH: 1.9 +- 0.4 ug (N = 3); readers A and B identical', read_error: 0.0114, read_error_basis: 'half the last printed digit (0.05), in dex; the printed SD (N trials) carries the scatter'}
+  - {pot: 'grosch1992_tab2_no3', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'MFT', t_min: 120, value: 5.2, unit: 'ug_per_pot_500mL', sd: 0.4, n: 2, printed: 'Table II (p. 185) no. 3, MF-SH: 5.2 +- 0.4 ug (N = 2); readers A and B identical', read_error: 0.0042, read_error_basis: 'half the last printed digit (0.05), in dex; the printed SD (N trials) carries the scatter'}
+  - {pot: 'grosch1992_tab2_no4', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'MFT', t_min: 120, value: 33, unit: 'ug_per_pot_500mL', sd: 3.7, n: 4, printed: 'Table II (p. 185) no. 4, MF-SH: 33 +- 3.7 ug (N = 4); readers A and B identical', read_error: 0.0066, read_error_basis: 'half the last printed digit (0.5), in dex; the printed SD (N trials) carries the scatter'}
+  - {pot: 'grosch1992_tab2_no6', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'MFT', t_min: 120, value: 19, unit: 'ug_per_pot_500mL', sd: 2.5, n: 3, printed: 'Table II (p. 185) no. 6, MF-SH: 19 +- 2.5 ug (N = 3); readers A and B identical', read_error: 0.0114, read_error_basis: 'half the last printed digit (0.5), in dex; the printed SD (N trials) carries the scatter'}
+  - {pot: 'grosch1992_tab2_no6', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'FFT', t_min: 120, value: 1.2, unit: 'ug_per_pot_500mL', sd: 1.1, n: 3, printed: 'Table II (p. 185) no. 6, FF-SH: 1.2 +- 1.1 ug (N = 3); readers A and B identical', read_error: 0.0181, read_error_basis: 'half the last printed digit (0.05), in dex; the printed SD (N trials) carries the scatter'}
+  - {pot: 'grosch1992_tab2_no7', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'MFT', t_min: 120, value: 23, unit: 'ug_per_pot_500mL', sd: 1.2, n: 3, printed: 'Table II (p. 185) no. 7, MF-SH: 23 +- 1.2 ug (N = 3); readers A and B identical', read_error: 0.0094, read_error_basis: 'half the last printed digit (0.5), in dex; the printed SD (N trials) carries the scatter'}
+  - {pot: 'grosch1992_tab2_no8', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'MFT', t_min: 120, value: 9, unit: 'ug_per_pot_500mL', sd: 2.8, n: 4, printed: 'Table II (p. 185) no. 8, MF-SH: 9.0 +- 2.8 ug (N = 4); readers A and B identical', read_error: 0.0024, read_error_basis: 'half the last printed digit (0.05), in dex; the printed SD (N trials) carries the scatter'}
+  - {pot: 'grosch1992_tab2_no8', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'FFT', t_min: 120, value: 2.3, unit: 'ug_per_pot_500mL', sd: 1, n: 4, printed: 'Table II (p. 185) no. 8, FF-SH: 2.3 +- 1 ug (N = 4); readers A and B identical', read_error: 0.0094, read_error_basis: 'half the last printed digit (0.05), in dex; the printed SD (N trials) carries the scatter'}
+  - {pot: 'grosch1992_tab2_no8', ledger_id: 'grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems', species: 'MFTD', t_min: 120, value: 1.6, unit: 'ug_per_pot_500mL', sd: 1.2, n: 4, printed: 'Table II (p. 185) no. 8, MF-S2: 1.6 +- 1.2 ug (N = 4); readers A and B identical', read_error: 0.0136, read_error_basis: 'half the last printed digit (0.05), in dex; the printed SD (N trials) carries the scatter'}

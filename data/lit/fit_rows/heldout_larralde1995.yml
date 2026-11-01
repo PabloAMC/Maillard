@@ -1,0 +1,493 @@
+# KEYED TEST TABLE -- Larralde R, Robertson MP & Miller SL 1995, Proc Natl Acad Sci USA 92:8158-8160 (University of California,
+# San Diego, Miller), 'Rates of decomposition of ribose and other sugars: implications for chemical evolution': amine-free D-ribose
+# loss by 1H NMR in D2O, 0.05 M deuterated phosphate or acetate, sealed NMR tubes. Text p. 8158 (the phosphate rate law), p. 8159
+# (0.05 M bicarbonate vs 0.05 M phosphate), Fig. 2 (Arrhenius points, pD 7.4) and Fig. 1 (pD-rate profile, 4 temperatures).
+# PURPOSE: TEST data for the contrast benchmark, engine error E5 ('no buffer-species catalysis';
+# docs/reference/contrast_benchmark/split_v2_per_change.yml): the buffer-species contrast at equal pD (bicarbonate / phosphate
+# = 0.52) and the phosphate dose law (k0 vs k0 + kP [P]). Fig. 2 is the reference k of the ratio; Fig. 1 is context (its buffer
+# changes with pD). NEVER a fit input: fit_rows.load refuses every row (the units per_s, per_min, per_M_per_min and ratio are not
+# in fit_rows.UNITS, and the laboratory is in no group of data/keys/laboratories.yml); keep it so.
+# Format: src/kinetic_core/fit_rows.py (pots: POT_FIELDS; rows: ROW_FIELDS). Ledger entries (data/lit/measurement_ledger/trunk.yml):
+# larralde1995_fig2_text_ribose_arrhenius_phosphate (text + Fig. 2) and larralde1995_fig1_ribose_pd_rate_profile (Fig. 1); quantification: calibrated (1H NMR, ribose C1-H furanose signals vs an
+# external CHCl3 reference).
+# ROWS ARE RATE CONSTANTS: species PENT (the engine's aldopentose; here D-ribose), value k, t_min 0 (fit_rows.ROW_FIELDS requires it;
+# a rate constant has no sampling time). Figure reads were made in log10 k, so read_error is in dex directly.
+#
+# READERS (2026-11-01), independent and in parallel: reader A (agent-readerA-2026-11-01; one 4800 x 6500 px 1-bit page scan, 600 ppi, crops with
+# sips; Fig. 2 read as offsets from the drawn line plus tick reading) and reader B (agent-readerB-2026-11-01; same raster; y ticks -3/-4/-5/-6 at
+# 412.5 px per decade; square centre = outline midpoint). Raw files: the coordinator's scratchpad; B's rows: fit_rows/second/heldout_larralde1995.yml.
+# ADJUDICATION (agent-heldout-adjudicator-2026-11-01): figure reads, value = mean of A and B in log10 k; error = max(A, B, |A-B|/2) dex. Fig. 2: A and B agree
+# within 0.01 dex at all four temperatures; Fig. 1: within 0.05 dex (largest: 60 C, nominal pD 5.4, -6.93 vs -6.98) and 0.03 pD at all 19 points. Printed numbers: identical in
+# both readings; error = half the last printed digit.
+#
+# RESOLUTIONS OF THE FLAGGED AMBIGUITIES (re-read in the PDF, 2026-11-01):
+#  (1) Rate-law units. The scan prints 'rate (s-1) = 2.86 x 10-3 + 9.36 x 10-2 ([DPO4 2-] + [D2PO4 -])' (re-read on the raster:
+#      the label is s-1). In s-1 the law is incompatible with the paper's own numbers: at the working 0.05 M it gives 7.54e-3 s-1
+#      (t1/2 92 s), 48 - 55x the 73-min half-life (1.58e-4 s-1), the Arrhenius line at 100 C (log k -3.80) and the Fig. 2 100 C
+#      point (-3.865). Read as min-1 it gives 1.257e-4 s-1 (log k -3.90): 0.035 dex from Fig. 2, 0.04 dex from Fig. 1's pD 7.55
+#      point (-3.945), 0.10 dex from the line. RESOLVED as min-1 (P ~0.9; the alternative, a wrong exponent, is not distinguishable
+#      and gives the same numbers). Rows keep the printed mantissas, unit per_min / per_M_per_min. Implied at 0.05 M: 62 % of the
+#      rate is the phosphate term; k(0.05 M) / k0 = 2.64.
+#  (2) Bicarbonate temperature: not printed in the sentence; 100 C INFERRED from the paragraph (the 73 min and the rate law are
+#      both 100 C; P ~0.8). The ratio is kept with conditions_inferred. Counter-ion, D2O and pD control for bicarbonate: not stated.
+#  (3) Fig. 1 buffer per point: not marked on the figure; assigned from the Methods ranges (acetate pD 4.4-5.4, phosphate 6.4-8.4
+#      at 25 C). The plotted pD sits +0.0 to +0.3 above the nominal 25 C value and rises with temperature in every buffer, so the
+#      points at plotted pD 5.44 - 5.72 are the nominal pD 5.4 ACETATE runs (both readers; resolved).
+# TEXT CHECKS (no rows): the 73-min half-life (p. 8159, abstract 'pH 7.0 and 100 C') is the Arrhenius line at 100 C (log k -3.80,
+# t1/2 72.8 min), not the Fig. 2 point (-3.865, ~85 min): a fit value, not a separate measurement. Arrhenius line 'log k (s-1) =
+# 11.23 - 5608/T' (Ea 25.7 kcal/mol); kH2O / kD2O = 1.0 +- 0.2 at 100 C (keyed by reader A only); other half-lives at pD 7.4,
+# 100 C: 2-deoxyribose 225 min, ribose 5-phosphate 7 min, ribose 2,4-bisphosphate 31 min (not rows). Fig. 3 (other aldoses) not
+# keyed. COUNT ONCE: Fig. 1's nominal-pD 7.4 points and Fig. 2's points are probably the same runs (Fig. 2 'adjusted for the change
+# in the buffer pD with temperature'); a pooled score must use one or the other.
+status: ready   # two readers + adjudication (2026-11-01); TEST data (E5), never a fit input: fit_rows.load refuses it (units; laboratory unmapped)
+purpose: 'TEST data for the contrast benchmark, error E5 (docs/reference/contrast_benchmark/split_v2_per_change.yml; README sec. 10); never a fit input'
+pots:
+  larralde1995_ribose_phosphate_0p05M_pD7p4_60C:
+    {ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate',
+     engine_species_missing: [],
+     t_c: 60,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'pD 7.4 (pH-meter reading at 25 C + 0.4); the paper equates it with pH 7.0 (kH2O / kD2O = 1.0 +- 0.2 at 100 C)',
+     ph_measured_at: '25 C (meter), pD corrected to the temperature by dpD = dpK; Fig. 2 points ''adjusted for the change in the buffer pD with temperature''',
+     buffer: '0.05 M deuterated phosphate, D2O',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 2 (p. 8159): Arrhenius plot, log k (s-1) vs 1/T, squares; 600 ppi 1-bit scan',
+     condition_quote: 'FIG. 2. Arrhenius plot of the rate constants of ribose decomposition ... points have been adjusted for the change in the buffer pD with temperature. / Methods: ''dissolved in aqueous 0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes'''}
+  larralde1995_ribose_phosphate_0p05M_pD7p4_80C:
+    {ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate',
+     engine_species_missing: [],
+     t_c: 80,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'pD 7.4 (pH-meter reading at 25 C + 0.4); the paper equates it with pH 7.0 (kH2O / kD2O = 1.0 +- 0.2 at 100 C)',
+     ph_measured_at: '25 C (meter), pD corrected to the temperature by dpD = dpK; Fig. 2 points ''adjusted for the change in the buffer pD with temperature''',
+     buffer: '0.05 M deuterated phosphate, D2O',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 2 (p. 8159): Arrhenius plot, log k (s-1) vs 1/T, squares; 600 ppi 1-bit scan',
+     condition_quote: 'FIG. 2. Arrhenius plot of the rate constants of ribose decomposition ... points have been adjusted for the change in the buffer pD with temperature. / Methods: ''dissolved in aqueous 0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes'''}
+  larralde1995_ribose_phosphate_0p05M_pD7p4_100C:
+    {ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate',
+     engine_species_missing: [],
+     t_c: 100,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'pD 7.4 (pH-meter reading at 25 C + 0.4); the paper equates it with pH 7.0 (kH2O / kD2O = 1.0 +- 0.2 at 100 C)',
+     ph_measured_at: '25 C (meter), pD corrected to the temperature by dpD = dpK; Fig. 2 points ''adjusted for the change in the buffer pD with temperature''',
+     buffer: '0.05 M deuterated phosphate, D2O',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 2 (p. 8159): Arrhenius plot, log k (s-1) vs 1/T, squares; 600 ppi 1-bit scan',
+     condition_quote: 'FIG. 2. Arrhenius plot of the rate constants of ribose decomposition ... points have been adjusted for the change in the buffer pD with temperature. / Methods: ''dissolved in aqueous 0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes'''}
+  larralde1995_ribose_phosphate_0p05M_pD7p4_118C:
+    {ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate',
+     engine_species_missing: [],
+     t_c: 118,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'pD 7.4 (pH-meter reading at 25 C + 0.4); the paper equates it with pH 7.0 (kH2O / kD2O = 1.0 +- 0.2 at 100 C)',
+     ph_measured_at: '25 C (meter), pD corrected to the temperature by dpD = dpK; Fig. 2 points ''adjusted for the change in the buffer pD with temperature''',
+     buffer: '0.05 M deuterated phosphate, D2O',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 2 (p. 8159): Arrhenius plot, log k (s-1) vs 1/T, squares; 600 ppi 1-bit scan',
+     condition_quote: 'FIG. 2. Arrhenius plot of the rate constants of ribose decomposition ... points have been adjusted for the change in the buffer pD with temperature. / Methods: ''dissolved in aqueous 0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes'''}
+  larralde1995_ribose_phosphate_rate_law_pD7p4_100C:
+    {ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate',
+     engine_species_missing: [],
+     t_c: 100,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'pD 7.4 (= pH 7.0 per the paper)',
+     ph_measured_at: '25 C (meter), temperature-corrected',
+     buffer: 'deuterated phosphate, total [DPO4 2-] + [D2PO4 -] varied (the concentration series is NOT printed: no table, no figure)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     rate_law: 'k = k0 + kP ([DPO4 2-] + [D2PO4 -]); printed ''rate (s-1) = 2.86 x 10-3 + 9.36 x 10-2 ([DPO4 2-] + [D2PO4 -])''',
+     unit_resolution: 'printed ''s-1'' read as min-1 (adjudication 2026-11-01, P ~0.9): in s-1 the law gives 7.54e-3 s-1 at 0.05 M (t1/2 92 s), 50x the paper''s own 73-min half-life, Arrhenius line (log k -3.80) and Fig. 2 point (-3.865); in min-1 it gives 1.257e-4 s-1 (log k -3.90), 0.035 dex from Fig. 2 and 0.10 dex from the line',
+     condition_quote: 'There is considerable general base catalysis of the decomposition of ribose and the other sugars. At pD 7.4 and 100 C, rate (s-1) = 2.86 x 10-3 + 9.36 x 10-2 ([DPO4 2-] + [D2PO4 -]). ... the lowest buffer concentration that maintained the pH at a constant value was used (0.05 M phosphate or acetate).'}
+  larralde1995_ribose_bicarbonate_0p05M_pD7p4_100C:
+    {ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate',
+     engine_species_missing: [],
+     t_c: 100,
+     t_c_basis: 'INFERRED: the sentence prints no temperature; every rate the paragraph compares (73 min, the rate law) is at 100 C (P ~0.8)',
+     conditions_inferred: true,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'pD 7.4 (= pH 7.0 per the paper)',
+     ph_measured_at: 'not stated',
+     buffer: '0.05 M bicarbonate (counter-ion, D2O and pD control not described)',
+     atmosphere: 'sealed NMR tube presumed (method)',
+     vessel: 'sealed NMR tube presumed (method)',
+     reference_pot: 'larralde1995_ribose_phosphate_0p05M_pD7p4_100C',
+     condition_quote: 'We measured the rate of ribose decomposition at pD 7.4, using a 0.05 M bicarbonate buffer. The rate is 0.52 that observed with a 0.05 M phosphate buffer.'}
+  larralde1995_fig1_ribose_118C_pD4p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 118,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 4,
+     label_pd: 4.4,
+     label_ph_basis: 'nominal pD 4.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 4.0; plotted (temperature-corrected) pD 4.71 (A 4.71, B 4.7)',
+     pd_plotted: 4.705,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated acetate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_118C_pD5p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 118,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 5,
+     label_pd: 5.4,
+     label_ph_basis: 'nominal pD 5.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 5.0; plotted (temperature-corrected) pD 5.71 (A 5.72, B 5.71)',
+     pd_plotted: 5.715,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated acetate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_118C_pD6p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 118,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 6,
+     label_pd: 6.4,
+     label_ph_basis: 'nominal pD 6.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 6.0; plotted (temperature-corrected) pD 6.62 (A 6.62, B 6.61)',
+     pd_plotted: 6.615,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_118C_pD7p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 118,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'nominal pD 7.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 7.0; plotted (temperature-corrected) pD 7.62 (A 7.62, B 7.61)',
+     pd_plotted: 7.615,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_118C_pD8p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 118,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 8,
+     label_pd: 8.4,
+     label_ph_basis: 'nominal pD 8.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 8.0; plotted (temperature-corrected) pD 8.62 (A 8.63, B 8.61)',
+     pd_plotted: 8.62,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_100C_pD4p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 100,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 4,
+     label_pd: 4.4,
+     label_ph_basis: 'nominal pD 4.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 4.0; plotted (temperature-corrected) pD 4.61 (A 4.61, B 4.6)',
+     pd_plotted: 4.605,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated acetate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_100C_pD5p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 100,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 5,
+     label_pd: 5.4,
+     label_ph_basis: 'nominal pD 5.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 5.0; plotted (temperature-corrected) pD 5.62 (A 5.62, B 5.61)',
+     pd_plotted: 5.615,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated acetate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_100C_pD6p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 100,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 6,
+     label_pd: 6.4,
+     label_ph_basis: 'nominal pD 6.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 6.0; plotted (temperature-corrected) pD 6.56 (A 6.57, B 6.55)',
+     pd_plotted: 6.56,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_100C_pD7p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 100,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'nominal pD 7.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 7.0; plotted (temperature-corrected) pD 7.55 (A 7.56, B 7.55)',
+     pd_plotted: 7.555,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_100C_pD8p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 100,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 8,
+     label_pd: 8.4,
+     label_ph_basis: 'nominal pD 8.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 8.0; plotted (temperature-corrected) pD 8.56 (A 8.56, B 8.56)',
+     pd_plotted: 8.56,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_80C_pD4p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 80,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 4,
+     label_pd: 4.4,
+     label_ph_basis: 'nominal pD 4.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 4.0; plotted (temperature-corrected) pD 4.51 (A 4.52, B 4.51)',
+     pd_plotted: 4.515,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated acetate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_80C_pD5p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 80,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 5,
+     label_pd: 5.4,
+     label_ph_basis: 'nominal pD 5.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 5.0; plotted (temperature-corrected) pD 5.52 (A 5.53, B 5.51)',
+     pd_plotted: 5.52,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated acetate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_80C_pD6p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 80,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 6,
+     label_pd: 6.4,
+     label_ph_basis: 'nominal pD 6.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 6.0; plotted (temperature-corrected) pD 6.45 (A 6.44, B 6.45)',
+     pd_plotted: 6.445,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_80C_pD7p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 80,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'nominal pD 7.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 7.0; plotted (temperature-corrected) pD 7.46 (A 7.46, B 7.45)',
+     pd_plotted: 7.455,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_80C_pD8p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 80,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 8,
+     label_pd: 8.4,
+     label_ph_basis: 'nominal pD 8.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 8.0; plotted (temperature-corrected) pD 8.46 (A 8.46, B 8.45)',
+     pd_plotted: 8.455,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_60C_pD5p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 60,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 5,
+     label_pd: 5.4,
+     label_ph_basis: 'nominal pD 5.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 5.0; plotted (temperature-corrected) pD 5.46 (A 5.47, B 5.44)',
+     pd_plotted: 5.455,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated acetate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_60C_pD6p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 60,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 6,
+     label_pd: 6.4,
+     label_ph_basis: 'nominal pD 6.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 6.0; plotted (temperature-corrected) pD 6.39 (A 6.4, B 6.39)',
+     pd_plotted: 6.395,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_60C_pD7p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 60,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 7,
+     label_pd: 7.4,
+     label_ph_basis: 'nominal pD 7.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 7.0; plotted (temperature-corrected) pD 7.39 (A 7.39, B 7.39)',
+     pd_plotted: 7.39,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+  larralde1995_fig1_ribose_60C_pD8p4:
+    {ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile',
+     engine_species_missing: [],
+     t_c: 60,
+     minutes: null,
+     initial_mmol_L: {PENT: null},
+     concentration_basis: 'ribose concentration NOT printed (1H NMR in sealed tubes); a first-order constant does not need it',
+     label_ph: 8,
+     label_pd: 8.4,
+     label_ph_basis: 'nominal pD 8.4 at 25 C (Methods ranges: acetate 4.4-5.4, phosphate 6.4-8.4) = meter pH 8.0; plotted (temperature-corrected) pD 8.39 (A 8.4, B 8.39)',
+     pd_plotted: 8.395,
+     ph_measured_at: '25 C (meter); plotted pD corrected to the temperature',
+     buffer: '0.05 M deuterated phosphate (INFERRED per point from the Methods ranges; the figure does not mark the buffer)',
+     atmosphere: 'sealed NMR tube',
+     vessel: 'sealed NMR tube',
+     source_figure: 'Fig. 1 (p. 8159): log k (s-1) vs pD, squares 118 C, circles 100 C, triangles 80 C, diamonds 60 C; curves k = k0 / (1 + [H+]/Ka)',
+     condition_quote: 'FIG. 1. Rates of ribose decomposition as a function of pD. / Methods: ''0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer'''}
+rows:
+  - {pot: 'larralde1995_ribose_phosphate_0p05M_pD7p4_60C', ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate', species: 'PENT', t_min: 0, value: 2.877e-06, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 2 (digitised, adjudicated): log10 k (s-1) = -5.541 at 60 C; reader A -5.540, reader B -5.542', read_error: 0.03, read_error_basis: 'max(A 0.03, B 0.015, |A-B|/2 0.0010) dex (read in log k)'}
+  - {pot: 'larralde1995_ribose_phosphate_0p05M_pD7p4_80C', ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate', species: 'PENT', t_min: 0, value: 1.921e-05, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 2 (digitised, adjudicated): log10 k (s-1) = -4.716 at 80 C; reader A -4.720, reader B -4.713', read_error: 0.03, read_error_basis: 'max(A 0.03, B 0.015, |A-B|/2 0.0035) dex (read in log k)'}
+  - {pot: 'larralde1995_ribose_phosphate_0p05M_pD7p4_100C', ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate', species: 'PENT', t_min: 0, value: 0.0001365, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 2 (digitised, adjudicated): log10 k (s-1) = -3.865 at 100 C; reader A -3.870, reader B -3.860', read_error: 0.03, read_error_basis: 'max(A 0.03, B 0.015, |A-B|/2 0.0050) dex (read in log k)'}
+  - {pot: 'larralde1995_ribose_phosphate_0p05M_pD7p4_118C', ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate', species: 'PENT', t_min: 0, value: 0.000929, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 2 (digitised, adjudicated): log10 k (s-1) = -3.032 at 118 C; reader A -3.030, reader B -3.034', read_error: 0.03, read_error_basis: 'max(A 0.03, B 0.015, |A-B|/2 0.0020) dex (read in log k)'}
+  - {pot: 'larralde1995_ribose_phosphate_rate_law_pD7p4_100C', ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate', species: 'PENT', t_min: 0, value: 0.00286, unit: 'per_min', quantity: 'k0: rate-law intercept, the zero-phosphate rate constant (extrapolated by the authors)', printed: 'p. 8158 displayed equation: 2.86 x 10-3, printed unit ''s-1'' (both readers, image-verified); read as min-1 (unit_resolution)', read_error: 0.00076, read_error_basis: 'half the last printed digit, in dex; the fit error of the law is not printed'}
+  - {pot: 'larralde1995_ribose_phosphate_rate_law_pD7p4_100C', ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate', species: 'PENT', t_min: 0, value: 0.0936, unit: 'per_M_per_min', quantity: 'kP: catalytic coefficient of total phosphate ([DPO4 2-] + [D2PO4 -])', printed: 'p. 8158 displayed equation: 9.36 x 10-2, printed unit ''s-1'' (both readers, image-verified); read as min-1 (unit_resolution)', read_error: 0.00023, read_error_basis: 'half the last printed digit, in dex; the fit error of the law is not printed'}
+  - {pot: 'larralde1995_ribose_bicarbonate_0p05M_pD7p4_100C', ledger_id: 'larralde1995_fig2_text_ribose_arrhenius_phosphate', species: 'PENT', t_min: 0, value: 0.52, unit: 'ratio', reference_pot: 'larralde1995_ribose_phosphate_0p05M_pD7p4_100C', quantity: 'k(0.05 M bicarbonate) / k(0.05 M phosphate), same pD 7.4', printed: 'p. 8159: ''The rate is 0.52 that observed with a 0.05 M phosphate buffer''; readers A and B identical', read_error: 0.0042, read_error_basis: 'half the last printed digit (0.005), in dex; replicate scatter not printed'}
+  - {pot: 'larralde1995_fig1_ribose_118C_pD4p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 6.383e-06, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -5.195 at plotted pD 4.71, 118 C; reader A -5.190, reader B -5.200', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0050) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_118C_pD5p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 3.02e-05, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -4.520 at plotted pD 5.71, 118 C; reader A -4.520, reader B -4.520', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0000) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_118C_pD6p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 0.0003162, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -3.500 at plotted pD 6.62, 118 C; reader A -3.490, reader B -3.510', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0100) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_118C_pD7p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 0.001084, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -2.965 at plotted pD 7.62, 118 C; reader A -2.960, reader B -2.970; nominal pD 7.4 phosphate: probably the same runs as Fig. 2''s point (adjusted there to pD 7.4): count once', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0050) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_118C_pD8p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 0.001884, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -2.725 at plotted pD 8.62, 118 C; reader A -2.720, reader B -2.730', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0050) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_100C_pD4p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 7.161e-07, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -6.145 at plotted pD 4.61, 100 C; reader A -6.130, reader B -6.160', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0150) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_100C_pD5p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 8.222e-06, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -5.085 at plotted pD 5.62, 100 C; reader A -5.080, reader B -5.090', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0050) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_100C_pD6p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 3.936e-05, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -4.405 at plotted pD 6.56, 100 C; reader A -4.400, reader B -4.410', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0050) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_100C_pD7p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 0.0001148, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -3.940 at plotted pD 7.55, 100 C; reader A -3.940, reader B -3.940; nominal pD 7.4 phosphate: probably the same runs as Fig. 2''s point (adjusted there to pD 7.4): count once', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0000) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_100C_pD8p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 0.000182, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -3.740 at plotted pD 8.56, 100 C; reader A -3.740, reader B -3.740', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0000) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_80C_pD4p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 1.035e-07, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -6.985 at plotted pD 4.51, 80 C; reader A -6.970, reader B -7.000', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0150) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_80C_pD5p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 7.079e-07, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -6.150 at plotted pD 5.52, 80 C; reader A -6.140, reader B -6.160', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0100) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_80C_pD6p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 7.586e-06, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -5.120 at plotted pD 6.45, 80 C; reader A -5.120, reader B -5.120', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0000) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_80C_pD7p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 1.905e-05, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -4.720 at plotted pD 7.46, 80 C; reader A -4.720, reader B -4.720; nominal pD 7.4 phosphate: probably the same runs as Fig. 2''s point (adjusted there to pD 7.4): count once', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0000) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_80C_pD8p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 2.291e-05, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -4.640 at plotted pD 8.46, 80 C; reader A -4.640, reader B -4.640', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0000) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_60C_pD5p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 1.109e-07, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -6.955 at plotted pD 5.46, 60 C; reader A -6.930, reader B -6.980', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0250) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_60C_pD6p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 5.188e-07, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -6.285 at plotted pD 6.39, 60 C; reader A -6.270, reader B -6.300', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0150) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_60C_pD7p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 3.02e-06, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -5.520 at plotted pD 7.39, 60 C; reader A -5.510, reader B -5.530; nominal pD 7.4 phosphate: probably the same runs as Fig. 2''s point (adjusted there to pD 7.4): count once', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0100) dex (read in log k)'}
+  - {pot: 'larralde1995_fig1_ribose_60C_pD8p4', ledger_id: 'larralde1995_fig1_ribose_pd_rate_profile', species: 'PENT', t_min: 0, value: 4.365e-06, unit: 'per_s', quantity: 'first-order rate constant of D-ribose loss', printed: 'Fig. 1 (digitised, adjudicated): log10 k (s-1) = -5.360 at plotted pD 8.39, 60 C; reader A -5.350, reader B -5.370', read_error: 0.04, read_error_basis: 'max(A 0.04, B 0.025, |A-B|/2 0.0100) dex (read in log k)'}

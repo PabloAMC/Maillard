@@ -1,0 +1,39 @@
+# SOURCE VERIFICATION -- Lee, Roux, Descharles, Rega & Bonazzi 2024, Food Res Int 183:114183, Fig. 2 (TEST table
+# data/lit/fit_rows/heldout_lee2024_fig2.yml; contrast benchmark error E13). Format and the five checks: the header of
+# data/lit/source_verification.yml.
+# FIRST READER: reader A (agent-readerA-2026-11-01), against data/articles/lee2024.pdf (pdfimages page 6, 1016 x 1743 px, 300 ppi;
+# panels cropped and 3x upscaled with sips). SECOND READER: reader B (agent-readerB-2026-11-01), independent and in parallel
+# (source_verification/second/heldout_lee2024_fig2.yml, fit_rows/second/heldout_lee2024_fig2.yml).
+# ADJUDICATED 2026-11-01 by agent-heldout-adjudicator-2026-11-01: value = mean(A, B), error max(A, B, |A-B|/2); the adjudicator
+# rendered the Fig. 2 caption at 600 dpi (symbol glyphs) and re-read Secs. 2.3, 2.6, 3.2.1 and 3.2.2.
+
+entries:
+- ledger_id: lee2024_fig2_fig3_oven_vapour_volatiles
+  source_file: lee2024.pdf
+  read_by: agent-readerA-2026-11-01
+  second_reader: agent-readerB-2026-11-01
+  date: 2026-11-01
+  checks:
+    conditions: corrected
+    units: corrected
+    quantification: pass
+    duplicates: pass
+    values: corrected
+  quote: 'Fig. 2. Concentrations of 3-methylbutanal, pyrazine, 2-methylpyrazine, 2,5-dimethylpyrazine and 2,6-dimethylpyrazine at
+    different times during the baking of G + L model cakes at 140 C (grey square, n = 4), 170 C (green triangle, n = 6) and 200 C
+    (magenta circle, n = 4). ... At 140 C, the last interval was replaced with two intervals: 91-95 min and 116-120 min. ... the values
+    in vapor previously shown as nmol.L-1 air.gDM were multiplied by 10-3 and Voven (L).'
+  notes: 'Fig. 2 panels 2-5 (PZ, MPZ, 2,5-DMP, 2,6-DMP), 80 points read by both readers; 41 kept. CONDITIONS corrected: the data are
+    Fig. 2, not Fig. 3 (the scheme; the text mis-cites it); symbol mapping from the rendered caption (140 C grey square, 170 C green
+    triangle, 200 C magenta circle), confirming both readers'' inference; temperatures are oven set-points (non-isothermal product);
+    precursor amounts not printed (Lee et al. 2020). UNITS corrected: axis nmol.L_air-1.g_DM-1 vs the text''s "mmol" (Sec. 3.2.1):
+    nmol (the axis, Sec. 2.6''s "previously shown as nmol", and physical plausibility). QUANTIFICATION: TD-GC-MS vs d4-pyrazine /
+    d4-furfural internal standards (semi-quantitative, as the ledger). DUPLICATES: lee2022 = same bakes, disjoint species (CF
+    register). VALUES corrected: 35 points at the reading floor (value <= read error) and the 4 140 C points plotted at 88 min (no
+    86-90 min sampling at 140 C per the Methods) dropped; the text''s "MP displayed the lowest concentrations of all pyrazines"
+    contradicts the figure (MPZ highest; axis ticks 0.05 / 0.10 / 0.15 re-read): unresolved, figure kept, flagged for E13.'
+  adjudication: >-
+    A and B agree within their errors on 79 / 80 points (MPZ 170 C 35 min, 0.0003 vs 0.0022, is at the reading floor and dropped).
+    Value = mean, error = max(A, B, |A-B|/2), then dex; plotted error bars (both numeric) as sd. Kept: 41 rows (200 C 20, 170 C 13,
+    140 C 8; no PZ or MPZ at 140 C). Dropped: 39 (35 floor, 4 at 140 C / 88 min). Symbol mapping and the nmol unit resolved from the PDF;
+    the MPZ text-vs-figure contradiction left open (any E13 score reports the ratio also with MPZ / 10).

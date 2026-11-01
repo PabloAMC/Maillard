@@ -121,7 +121,7 @@ quantified products PEA/(PEA + PAC + BZA); "—" where PAC = 0.
 | ON | 0.01 | 0.11 | 0.11 | 0.04 | 0.01 | 0.08 | 0.08 | 0.02 |
 | HN | — | 0.48 | 35.8 | 0.03 | 0.54 | 0.17 | 0.97 | 0.02 |
 
-Air multiplies PAC by 4-8 (DD pH 3: 6.0; pH 6: 9.4) and BZA by 5-10, and divides PEA by 1-7; under air
+Air multiplies PAC by 1.1 - 9.4 across the Table 1 pots (corrected 2026-11-01: was "4-8", inconsistent with its own 9.4; DD pH 3: 6.0; pH 6: 9.4) and BZA by 5-10, and divides PEA by 1-7; under air
 the amine share is below 0.25 for every carbonyl, at either pH. The text's "4-5 times" for PAC and
 "5-6 times (pH 3) / 9-10 times (pH 6)" for BZA are the authors' DD-based statements; the table ratios
 for DD are 6.0 / 9.4 (PAC) and 6.1 / 8.8 (BZA).

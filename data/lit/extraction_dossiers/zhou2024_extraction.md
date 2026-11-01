@@ -1,4 +1,5 @@
 # Zhou 2024 — EXTRACTION (fed alanine + glyoxal or + methylglyoxal, 1:1 at 20 mmol/L, pH 8, 100/110/120 C, 0-120 min; plus Ala-xylose Amadori compound ± 15N-alanine at 120 C)
+DOI: 10.1021/acs.jafc.4c03706 (printed on every page; Crossref 2026-11-01 resolves to this title, J. Agric. Food Chem. 72, 18630-18637)
 ### The only paper in the corpus with a printed rate, three temperatures and an Ea for "amino acid + alpha-dicarbonyl -> pyrazine".
 
 **Source on disk:** `data/articles/Zhou2024.pdf` (8 pp., owner's download, 2026-09-08). Read from the
@@ -229,3 +230,144 @@ substrate class in the corpus; they are not the same quantity as a single-step R
    (Arrhenius plots).
 10. Registry gap: the parent pyrazine has no molecule row in `compounds.yml`; the class alias
     "pyrazine" must not be used for it.
+
+## Supplementary Information (read 2026-11-01)
+
+**Source on disk:** `data/articles/ zhou2024_supplementary.pdf` (**the filename begins with a space** [!]; 7 pp.,
+Aspose-generated, ACS download stamp of 01 Nov 2026, the SI of DOI 10.1021/acs.jafc.4c03706, file jf4c03706_si_001).
+Read from `pdftotext -layout`; pp. 4, 6, 7 rendered at 150 dpi and checked cell by cell (Table S1) and against the axes
+(Figs. S1, S2). Contents: title and authors (pp. 1-2), a one-paragraph contents note (p. 3), **Table S1** (p. 4), figure
+captions (p. 5), **Fig. S1** (p. 6), **Fig. S2** (p. 7). Legend as the other dossiers ([V] verbatim, [M] printed,
+[F] figure, [Z] mine, [!] flag). Computations in the `maillard` env
+(scratchpad `pyr_scripts/zhou_labels.py`, `leak_shape.py`).
+
+### S.1 The key question (EX-052): were the 15N isotopologue data corrected for [M-H]+?
+
+**Not stated anywhere. The SI contains no methods text at all.** Its contents note lists only Table S1, Fig. S1 and
+Fig. S2 [M]. The main paper's only description of the isotopomer analysis is that isotopomers "devoid of any 15N atom
+were deemed to be pyrazines generated from regenerated Ala" [V, p. 18633]. It gives no ions, no correction for the
+[M-H]+ fragment, and none for 13C / 15N natural abundance. GC and MS conditions are delegated to ref 18 (Zhou 2022;
+`zhou2022.pdf` on disk: EI 70 eV, full scan m/z 35-450), which has no isotope work. So **the correction is
+undocumented in all three Ho-lab documents on disk**, and EX-052's S3 primary band (uncorrected leakage
+`op.mh_leak_mpz` in [0, 0.30]) stays the applicable one. The SI does not decide EX-052. P(the authors corrected for
+[M-H]+) ~0.4 [Z]: the lab's own Hwang 1993 method did solve an M-1 / M / M+1 / M+2 system (prereg note, hwang1995
+dossier); here nothing is said.
+
+**What the printed numbers say about leakage anyway [Z]** (Table 1, Ala pot; isotopomer σ ~1 point per fraction
+assumed, since no SD is printed):
+- **Uniform leakage cannot close the label deficit.** Inverting the same uncorrected [M-H]+ share r for PZ, MPZ and DMP,
+  the 30-min deficit is 11.7 / 12.5 / 13.5 / 14.4 points at r = 0 / 0.1 / 0.2 / 0.3, and 12.4-15.1 with a 13C / 15N
+  natural-abundance correction added. At 120 min: 8.2 -> 9.9. (The red team's version, leakage on MPZ and DMP only,
+  gave 9-10 points: same conclusion.)
+- **Closing it needs an MPZ-specific leak:** r_MPZ = 0.39 / 0.42 / 0.44 / 0.48 when PZ and DMP leak r = 0 / 0.05 / 0.1
+  / 0.2. That is an [M-H]+ / M+ ratio of ~0.4 for methylpyrazine above 2,5-DMP's, and EI spectra of methylpyrazines do
+  not obviously give that (2,5-DMP has two methyls to lose H from). Check against reference EI spectra (NIST m/z 93 / 94
+  vs 107 / 108) before relying on this.
+- **Isotopomer shape is weakly informative:** a binomial with leakage r shows a homozygote excess F of only ~0.01-0.06
+  for r = 0.05-0.3, comparable to noise. Observed F: PZ -0.02 / 0.01, MPZ 0.008 / 0.015, DMP 0.15 / 0.11 (30 / 120 min).
+
+### S.2 The label-average test, recomputed (every pairing rival)
+
+Pair-specific constants (P1x) and pair-specific dihydropyrazine fates (P1y) do not move labels, so under P1, P1x and
+P1y, with the A and M pools each homogeneous in time: label(MPZ) = (label(PZ) + label(DMP)) / 2, label = 15N atom
+share.
+
+| pot | t (min) | PZ | DMP | MPZ observed | predicted | deficit (points) |
+|---|---:|---:|---:|---:|---:|---:|
+| Ala-ARP + 15N-Ala (Table 1) | 30 | 0.545 | 0.432 | 0.371 | 0.489 | **11.7** |
+| | 60 | 0.540 | 0.439 | 0.385 | 0.490 | 10.5 |
+| | 90 | 0.537 | 0.457 | 0.404 | 0.497 | 9.3 |
+| | 120 | 0.543 | 0.462 | 0.421 | 0.503 | 8.2 |
+| Ala-ARP + 15N-Gly (Table S1), DMP from the printed ratio 0.59 | 60 | 0.606 | 0.371 | 0.461 | 0.488 | 2.7 |
+| same, DMP with n2 = 100 - n0 - n1 | 60 | 0.606 | 0.421 | 0.461 | 0.513 | 5.2 |
+| same, DMP row as printed, renormalised | 60 | 0.606 | 0.528 | 0.461 | 0.567 | 10.6 |
+
+**Interval labels** (Table 1 labels x Fig. 1 amounts, µg/L read off the main paper's Fig. 1, converted to µmol/L; read
+error ±0.3-1 µg/L, so ±0.1-0.2 on the later intervals) [F][Z]:
+
+| interval (min) | PZ | DMP | MPZ | predicted MPZ | deficit |
+|---|---:|---:|---:|---:|---:|
+| 0-30 | 0.545 | 0.432 | 0.371 | 0.489 | 11.7 |
+| 30-60 | 0.52 | 0.45 | 0.42 | 0.49 | ~7 |
+| 60-120 | 0.62 | 0.50 | 0.60 | 0.56 | ~-4 (within error) |
+
+**The deficit is front-loaded:** it sits in MPZ made in the first 30-60 min; MPZ made after 60 min carries the label the
+identity predicts, within the figure-read error.
+
+**Does it separate pairing (P1x / P1y) from an extra MPZ route (P2b)?** Partly, and only through shape and timing; the
+mean-label test alone does not.
+
+1. **Mean label:** the identity fails at 30-120 min in the Ala pot, robust to any uniform leakage. Two escapes remain:
+   (a) P2b, an extra MPZ route whose N label is lower than the pairing average; (b) pairing with pool heterogeneity in
+   time, where M halves made while A is abundant (early) carry a low label (~0.20 needed at 30 min vs 0.43 for DMP's
+   M halves). DMP's own homozygote excess (F 0.15 at 30 min) shows the M pool is heterogeneous, so (b) is not excluded.
+2. **Isotopomer shape** (σ 1 point per fraction assumed):
+   - MPZ is binomial at its own label (39.7 / 46.3 / 14.0 vs 39.5 / 46.7 / 13.8 for p = 0.371).
+   - Escape (b) keeps the A half at PZ's label (0.545, which is itself binomial and stable over time), so MPZ = A
+     (0.545) x M (free label). That gives a heterozygote excess: best fit χ² 60 / 32 / 21 / 21 at 30 / 60 / 90 / 120 min
+     for 1 dof.
+   - Uncorrected leakage only moves F by +0.01-0.06, so it cannot rescue this.
+   - P2b with an extra route of label q (both N from one mixed pool) fits exactly: w 0.6-1.0, q 0.35-0.39. But that
+     is 2 parameters for 2 dof, so it is admitted by flexibility, not tested.
+   - P2b with an unlabelled extra route (q = 0, N from ARP or regenerated Ala only) fits poorly: χ² 30-51.
+3. **Glycine pot (Table S1)** gives the S3 statistic D = P2 / f_A + P0 / (1 - f_A) - 1 = **-0.085**. Pairing gives
+   D = 0, uncorrected leakage pushes D positive, and the Ala pot gives +0.13. So MPZ has a heterozygote excess (F -0.17)
+   that no pairing rival with PZ's A label produces and leakage cannot cause. With the DMP row unusable (S.4) and one
+   time point, this row carries little weight.
+
+**Consequence.**
+- **P1x / P1y as the sole explanation: disfavoured** (red team's "leaning rejected" stands). The shape argument adds
+  a second, partly independent strike. It assumes ~1 point isotopomer noise, which is unprinted.
+- **P2b: still provisional.** It fits, but with free parameters, and the fitted extra route is a single mixed-label N
+  pool (q ~0.37), not an ARP-N-only route.
+- **Time structure:** the extra MPZ, or the label heterogeneity, is confined to the first 30-60 min, where ARP decay
+  and GO / MGO release peak (main paper Fig. 3, figure-only).
+- **The decisive datum is still the authors' raw ion intensities** (m/z 79-82, 93-96, 107-110, per time point) or
+  their correction method. Ask Zhang / Ho before EX-052 is re-scored.
+
+### S.3 Table S1 (Ala-ARP 20 mM + 15N-Gly 20 mM, pH 8.0 initial, 120 °C, 60 min) [M]
+
+| compound | 0 x 15N (%) | 1 x 15N (%) | 2 x 15N (%) | 15N:14N printed | row sum | 15N:14N recomputed [Z] |
+|---|---:|---:|---:|---:|---:|---:|
+| pyrazine | 14.65 | 49.59 | 35.75 | 1.53 | 99.99 | 1.535 |
+| methylpyrazine | 24.92 | 57.94 | 17.14 | 0.86 | 100.00 | 0.856 |
+| 2,5-dimethylpyrazine | 37.52 | 40.84 | **44.48** | 0.59 | **122.84** | 1.12 as printed; 0.73 with n2 = 21.64 |
+
+### S.4 Flags
+
+1. **Table S1's 2,5-DMP row is internally inconsistent** [!]: it sums to 122.84 %, and no single-cell correction
+   reproduces the printed ratio 0.59. n2 = 100 - n0 - n1 = 21.64 gives 0.73. Keeping n0 and n1, a ratio of 0.59 needs
+   n2 = 13.8 (sum 92). The render confirms the printed digits. The Gly-pot DMP label is therefore unknown (0.37-0.53).
+2. **Fig. S1's y axis reads "Concentration (mmol/L)"** [!]. That is impossible: ~70 mmol/L pyrazine from 20 mmol/L ARP.
+   The ARP bars (~25.5 / ~5.5 / ~2.0 [F]) match the main paper's Fig. 1 ARP values at 60 min in µg/L (25.5 / 5.7 / 2.1),
+   so the unit is µg/L.
+   - ARP + Gly at 60 min: PZ ~69 (±4), MPZ ~13 (±1), DMP ~7.0 (±0.2) µg/L [F].
+   - Molar R: ARP 0.58, ARP + Gly 0.34 [Z].
+   - Fig. 1 gives molar R for the Ala pot (ARP + 15N-Ala) of 0.61 / 0.64 / 0.62 / 0.53 at 30-120 min, and for ARP
+     alone 1.10 / 0.59 / 0.45 / 0.41 [Z].
+   - Every one of these is below 4 and several are at or below the rivals' floor 4h_any = 0.4, the same low-R pattern
+     as CF-087.
+   - A caveat specific to labelled pots: the SPME calibration used unlabelled standards. If the quantifier ion was the
+     molecular ion of the unlabelled compound, 15N isotopologues would be under-counted, in proportion to label. The
+     quantifier ions are not stated.
+3. **Fig. S2 (Arrhenius) shows exactly three points per compound**, at ln k = ln of Table 2's k [F]: pyrazine -1.89 /
+   -2.54 / -3.58; 2,5-DMP -3.77 / -4.61 / -5.65. They are joined point to point, not by a fitted line. This answers
+   flag 3 of this dossier: no extra replicate points lie behind the printed equations. So the printed line
+   ln k = -12100/T + 28.87 (R² 0.9972) is still not reproduced by the only data shown; the 3-point refit is
+   Ea 103.1 kJ/mol. Carry Table 2's k values; treat the printed Ea as ±3 kJ/mol.
+4. Flag 9 above ("SI not on disk") is closed by this section.
+
+### S.5 Disagreements found (new)
+
+1. **Table S1 internal** (S.4.1): 2,5-DMP isotopomers sum to 122.84 % and do not reproduce the printed 15N:14N.
+2. **Fig. S1 unit** (S.4.2): mmol/L printed, µg/L by cross-check with the main paper's Fig. 1.
+3. **Printed Arrhenius line vs the plotted points** (S.4.3): Ea 100.59 printed vs 103.1 refit from the only three
+   points; R² 0.9972 printed vs 0.986.
+4. **Glycine pots, low R, two labs:** here 0.34 (Ho, SPME); bemisyoung1993 0.02-0.54 at pH 6-9 (UC Davis, calibrated
+   capillary FID). Against CF-087's "low-level data" explanation.
+
+### S.6 Ledger-ready (additions)
+
+1. Table S1 PZ and MPZ isotopomers (Gly pot, 60 min). Key the DMP row only with the sum flag.
+2. Fig. S1 bars (µg/L, unit corrected), two readers.
+3. Table 1 + Fig. 1 interval labels: derived, not keyable; record in the EX-052 re-score instead.

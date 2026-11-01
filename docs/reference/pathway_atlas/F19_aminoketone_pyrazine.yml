@@ -1,0 +1,340 @@
+# Pathway-condition atlas, family F19 (literature side). Written 2026-11-01 from the extraction dossiers named per
+# cell; vocabulary and status caps from docs/reference/pathway_atlas/families.yml. Every quote is a verbatim substring
+# of the cited dossier (checked by grep). Numbers marked "mine" are derived by this atlas, not printed.
+family: F19_aminoketone_pyrazine
+definition: "aminoketone condensation -> dihydropyrazine -> pyrazine (incl. mixed pairs)"
+markers:
+  - "13C on the amino acid does NOT appear in the ring carbons or ring methyls of the product (methylpyrazine, 2,5-dimethylpyrazine): the ring is two dicarbonyl-derived C2 / C3 units and the amine gives only N (Amrani-Hemaimi 1995, Low 2007)."
+  - "15N from a labelled amine enters the ring N with a binomial 0 / 1 / 2 x 15N isotopomer pattern (two independently aminated halves), and under pairing label(MPZ) = mean(label(PZ), label(DMP)) (red-team identity test)."
+  - "A fed alpha-dicarbonyl + amine gives its own homo-pyrazine (glyoxal -> pyrazine; methylglyoxal -> 2,5-dimethylpyrazine >> 2,6-dimethylpyrazine, the regiochemistry of aminoacetone vs 2-aminopropanal)."
+  - "Mixing bound: under random pairing of two aminoketone pools R = MPZ^2 / (PZ x DMP) <= 4; R > 4 is evidence AGAINST pairing as the sole MPZ route (it is booked under F20, which carries the alternative)."
+  - "A fed alpha-aminoketone self-condenses (second order) to the dihydropyrazine; only an analogue (5-aminolevulinic acid) is measured. No study on disk traps or quantifies the dihydropyrazine or free aminoacetone / aminoacetaldehyde in a Maillard pot."
+  - "A secondary amine (proline) or a missing primary amine gives (almost) no alkylpyrazine: the aminoketone needs a primary amine."
+cells:
+  # ---- labelling: carbon origin ------------------------------------------------------------------------------------
+  - key: {ph: mild_acid, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, water_note: "400 mM each in 70 mM phosphate pH 5.6 on kieselguhr, water evaporates during 7 min in oil", sugar_also: hexose_ketose, amine_also: glycine}
+    contrast: "[3-13C]alanine vs [2-13C]glycine, glucose vs fructose: methylpyrazine and 2,5-DMP 0 % labelled in all four pots; 2,6-DMP 25-30 % labelled with glycine only (F20)"
+    status: dominant
+    quote: "methylpyrazine and 2,5-dimethylpyrazine in all four pots is a direct confirmation"
+    quantity: "0 % of molecules 13C-labelled from the amino acid (methylpyrazine, 2,5-DMP), four pots; no absolute yields printed"
+    evidence: labelling
+    lab: "Nestle Research Centre, Lausanne (Amrani-Hemaimi / Cerny / Fay)"
+    dossiers: [amranihemaimi1995_extraction.md]
+    where: "Table 2 rows 1-2; dossier sec. 4"
+    note: "dominant for 2,5-DMP (no route other than dicarbonyl-carbon x + x is seen); for methylpyrazine the label cannot separate pairing from a sugar-carbon extra route (F20), so MPZ is operating only. re-read 2026-11-01: reader A MINOR overruled: the quote is the dossier's sentence (atlas quotes are dossier-verbatim by design); numbers and conditions match both readers. MATCH."
+  - key: {ph: mild_acid, temperature: very_high, water: intermediate_aw}
+    tags: {ph_basis: in_situ, T_C: 180, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: none_unbuffered, metals: not_controlled, matrix: "potato flake cakes + 1.3 % w/w [2-13C]glycine (400x native)", ph_note: "raw-dough slurry pH 5.99 / 6.01 before baking (low2006 Table 5); not measured after", water_note: "dough ~56 % added water at start; end moisture not stated"}
+    contrast: "15 vs 30 min: labelling patterns unchanged; glycine addition cuts methylpyrazine ~3-4x but not 2,5-DMP (low2006 Table 4)"
+    status: dominant
+    quote: "and 2,5-DMP carry no glycine carbon, even at 400x glycine excess"
+    quantity: "2,5-DMP 3.7-6.3 % singly labelled, methylpyrazine 0-4.8 %; 2,5-DMP 277 umol/kg dry at 30 min with glycine (low2006)"
+    evidence: labelling
+    lab: "University of Reading (Low / Parker / Mottram)"
+    dossiers: [low2007_extraction.md, low2006_extraction.md]
+    where: "low2007 Table 1 and sec. 1 answer 1; low2006 Table 4"
+  - key: {ph: mild_acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose Amadori compound 20 mM + 13C5-xylose 20 mM", ph_note: "label 8; in situ 6.04 / 5.05 / 4.66 / 4.50 at 30-120 min (Zhou 2025b Fig. 3d, read in CF-060)"}
+    contrast: "isotopomers over 30-120 min: pyrazine M : M+2 : M+4 close to one well-mixed C2 pool 6-8 % xylose-derived (M+4 3x high at 30 min)"
+    status: operating
+    quote: "Roughly consistent with one GO pool that is 6-8 % xylose-derived"
+    quantity: "pyrazine carbon from free xylose 8.4 / 7.3 / 6.5 / 6.3 % at 30-120 min (mine, from Table 2)"
+    evidence: labelling
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [zhou2025b_extraction.md]
+    where: "Table 2 and dossier sec. 3 derivation"
+    conflict: CF-060
+  # ---- labelling: nitrogen origin ----------------------------------------------------------------------------------
+  - key: {ph: acid, temperature: high, water: dilute}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose Amadori compound 20 mM + 15N-alanine 20 mM", ph_note: "label 8.0; in situ 5.13 / 4.32 / 4.19 / 4.08 at 30-120 min (Zhou 2024 Fig. 3b, read in CF-060)"}
+    contrast: "time 30-120 min: pyrazine 15N share flat (54.5 -> 54.3 %); exogenous Ala x1.40 / x1.48 / x1.21 on PZ / MPZ / DMP vs ARP alone"
+    status: dominant
+    quote: "55% of the formed pyrazine originated from exogenous Ala"
+    quantity: "pyrazine isotopomers 20.26 / 50.54 / 29.20 % (0 / 1 / 2 x 15N) at 30 min vs binomial at f = 0.545: 20.7 / 49.6 / 29.7 (mine): two independently aminated C2 halves; 2,5-DMP over-dispersed (35.97 / 41.56 / 22.47 vs 32.3 / 49.1 / 18.7)"
+    evidence: labelling
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [zhou2024_extraction.md]
+    where: "Table 1; dossier sec. 3 arithmetic check"
+    note: "dominant for the parent pyrazine (binomial N pattern = pairing of two aminoketones). The methylpyrazine N deficit in the same table is the F20 cell."
+  # ---- fed dicarbonyl ----------------------------------------------------------------------------------------------
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: "100 / 110 / 120", sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "alanine + glyoxal or + methylglyoxal, 20 + 20 mM", ph_note: "initial 8.0, NaOH, drift not reported"}
+    contrast: "temperature 100 -> 120 C: PZ x5.4, 2,5-DMP x6.6; GO route 6.6-8.0x the MGO route at each T"
+    status: operating
+    quote: "ln k = -12100/T + 28.87 (R2 = 0.9972), and for 2,5-dimethylpyrazine"
+    quantity: "zero-order rates PZ 0.0279 / 0.0791 / 0.1507, 2,5-DMP 0.0035 / 0.0100 / 0.0230 umol L-1 min-1; Ea 100.6 / 111.7 kJ/mol; conversion < 0.2 %"
+    evidence: fed_intermediate
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [zhou2024_extraction.md]
+    where: "Table 2"
+    note: "the B18 fit rows. Fed dicarbonyl shows dicarbonyl -> homo-pyrazine but not the free aminoketone intermediate; linear rise from t = 0 against the slow measured aminoketone analogue (elfsson1999 cell)."
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "cysteine + methylglyoxal 20 + 20 mM", ph_note: "labels 6 / 7 / 8, unbuffered; the sister ARP pots fell 2-3.6 units in 60 min (Fig. 2)"}
+    contrast: "label pH 6 vs 7 vs 8 at 90 min: 2,5-DMP 66 / 106 / 237 ug/L (x3.6 from 6 to 8); 2,5-DMP : 2,6-DMP 8.4 / 8.4 / 9.2"
+    status: operating
+    quote: "Measured 2,5-DMP / 2,6-DMP ratio at 90 min"
+    quantity: "2,5-DMP 237 ug/L at pH 8 / 90 min (figure-digitised, +-3); regiochemical ratio 8.4-9.2, pH-insensitive"
+    evidence: fed_intermediate
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [zhou2023_extraction.md]
+    where: "Figure 3a, 3b (300 dpi digitisation)"
+  - key: {ph: neutral, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 130, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, feed: "alanine + methylglyoxal ~850 mM each, 1 M buffer", ph_note: "initial pH 7 re-set with NaOH; the 1 M buffer did not hold Asp / Glu pots"}
+    contrast: "phosphate vs bicarbonate at pH 7, 130 C: 2,5(6)-DMP x1.8, pyrrole x0.36"
+    status: operating
+    quote: "2,5(6)-DMP 1.8x; pyrrole 0.36x"
+    quantity: "2,5(6)-DMP 0.02 (phosphate) / 0.011 (bicarbonate) mol % of Ala; pyrrole : DMP molar 1 (phosphate) / 5 (bicarbonate)"
+    evidence: fed_intermediate
+    lab: "Ghent (De Kimpe) with Wageningen (van Boekel)"
+    dossiers: [adams2008_extraction.md]
+    where: "Table 3 rows 1-2"
+    note: "buffer-anion catalysis of the pyrazine (cf. CF-011 for phosphate elsewhere)."
+  - key: {ph: acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: "100 / 130", sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "alanine + methylglyoxal ~850 mM, acetate pH 4; Ala : MGO 2:1 / 1:1 / 1:3"}
+    contrast: "pH 4 acetate vs pH 7 phosphate at 130 C: 2,5(6)-DMP x2.1 (UP at acid), pyrrole x80; MGO excess (1:3) raises pyrrole : DMP to 231"
+    status: minor
+    quote: "38 (acetate 4, 130 C); 55 (acetate 4, 100 C, 30 min)"
+    quantity: "2,5(6)-DMP 0.013-0.042 mol % of Ala vs 2,5-diacetyl-3-methylpyrrole 0.5-3.7 mol %: the pyrazine is 1/38 - 1/231 of the two products (molar)"
+    evidence: fed_intermediate
+    lab: "Ghent (De Kimpe) with Wageningen (van Boekel)"
+    dossiers: [adams2008_extraction.md]
+    where: "Table 3 rows 3-8; dossier flag 6"
+    note: "minor = measured small share of the aminoacetone-derived products; the pyrrole route is F21. The pH sign is opposite to the engine's B18 pH slope below 7 (red team S7; not registered as a CF id)."
+  # ---- whole-cascade pots: pH, amine, water ------------------------------------------------------------------------
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "75 / 85 / 95", sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: other_buffer, metals: not_controlled, system: "0.1 M lysine-HCl + 0.1 M glucose; borate pH 9, citrate-phosphate pH 7 / 5", ph_note: "label; downward drift unquantified"}
+    contrast: "label pH 5 / 7 / 9 (buffer changes 7 -> 9): total pyrazines after 2 h at 95 C 0.0239 / 6.19 / 13.1 ppm; k(pH 9) / k(pH 5) pyrazine 21-60"
+    status: operating
+    quote: "a total of 13,000 ppb pyrazines produced at pH 9.0 and"
+    quantity: "pH 9: 0.152 mmol/L pyrazines after 2 h at 95 C = 0.3 % of the lysine; Ea 140-183 kJ/mol (3 points)"
+    evidence: within_study_factor
+    lab: "Reineccius, University of Minnesota (Leahy / Reineccius)"
+    dossiers: [leahy1989a_extraction.md, leahy1989_extraction.md]
+    where: "leahy1989a Tables I-III (pH 9 rows = leahy1989 Table I)"
+    conflict: CF-019
+    note: "no marker: product only, so operating at most; the R > 4 of these pots is the F20 cell (CF-077)."
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "75 / 85 / 95", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, system: "0.1 M lysine-HCl + 0.1 M glucose, citrate-phosphate pH 5.0", buffer_note: "citrate-phosphate (McIlvaine-type) buffer: phosphate present but mixed with citrate, so not the phosphate bin"}
+    contrast: "pH 5 vs 7: pyrazine k x7-27 lower, methylpyrazine x99-215 lower; dimethylpyrazines below quantification at pH 5"
+    status: operating
+    quote: "quantification of the dimethylpyrazines could only be accomplished at"
+    quantity: "pyrazine 0.0938 ppm/h at 95 C, pH 5 (vs 1.346 at pH 7); total 24 ppb after 2 h"
+    evidence: within_study_factor
+    lab: "Reineccius, University of Minnesota (Leahy / Reineccius)"
+    dossiers: [leahy1989a_extraction.md]
+    where: "Table I, Table III, text p. 202"
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 95, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: other_buffer, metals: not_controlled, system: "0.1 M sugar + 0.1 M lysine or asparagine, borate pH 9"}
+    contrast: "lysine vs asparagine (glucose, 95 C): pyrazine x34.9, methylpyrazine x6.4, 2,5-DMP x2.1; ribose : glucose : fructose (lysine) pyrazine 0.97 : 1 : 0.38"
+    status: operating
+    quote: "3.596/0.103 = 34.9; 2.837/0.442 = 6.4; 0.186/0.0871 = 2.1"
+    quantity: "2 h totals 13.1 / 5.7 / 19.9 / 0.74 / 2.2 ppm (Lys-Glc / Lys-Fru / Lys-Rib / Asn-Glc / Asn-Fru)"
+    evidence: within_study_factor
+    lab: "Reineccius, University of Minnesota (Leahy / Reineccius)"
+    dossiers: [leahy1989_extraction.md]
+    where: "Table I, Table III"
+    conflict: CF-019
+  - key: {ph: neutral, temperature: moderate, water: intermediate_aw}
+    tags: {ph_basis: label, T_C: 95, sugar: disaccharide, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, matrix: "nonfat dry milk equilibrated to a_w 0.32 / 0.58 / 0.75 / 0.84", ph_note: "not measured (milk powder)"}
+    contrast: "a_w 0.32 -> 0.58 -> 0.75 -> 0.84: pyrazine rate 1 : 2.10 : 4.23 : 4.07; methylpyrazine 1 : 2.31 : 3.27 : 2.65 (maximum near 0.75)"
+    status: operating
+    quote: "range of 0.32 to 0.75 and a maximum occurred at aw of 0.75"
+    quantity: "rates in standardized units per dry weight (not concentrations): only the ratios carry"
+    evidence: within_study_factor
+    lab: "Reineccius, University of Minnesota (Leahy / Reineccius)"
+    dossiers: [leahy1989a_extraction.md]
+    where: "Tables IV-V"
+    note: "the only a_w ladder for pyrazines; free amino acids of milk vs protein-bound lysine not separated."
+  - key: {ph: neutral, temperature: moderate, water: low_aw}
+    tags: {ph_basis: label, T_C: 90, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "1,3-dihydroxyacetone (in-situ MGO) + each of 20 amino acids, 5 + 5 mmol ground neat", ph_note: "no solvent, no pH"}
+    contrast: "amino-acid identity: 2,5(6)-DMP area Arg 493.9 > Lys 385.5 > Gly 330.5 ... Pro 1.6 (lowest; secondary amine)"
+    status: operating
+    quote: 'proline gives "very little pyrazines"'
+    quantity: "SPME peak areas x 1e-6, no internal standard (orientation only)"
+    evidence: fed_intermediate
+    lab: "Ghent (De Kimpe) with Wageningen (van Boekel)"
+    dossiers: [adams2008_extraction.md]
+    where: "Table 1 (2,5(6)-DMP row) and text"
+  # ---- non-Strecker aminoketone sources ----------------------------------------------------------------------------
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 130, sugar: none, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "dipeptide 1 mmol vs free amino acids 1 mmol each (free Gly alone 2 mmol against GlyGly) + methylglyoxal (10x below glucose)", ph_note: "initial pH 8 unbuffered; MGO pots stayed near it (vanlancker2010)"}
+    contrast: "dipeptide vs its free amino acids (MGO): 2,5(6)-DMP GlyGly x34, SerGly x27, AlaGly x20, ValGly x1.9, ProGly 0"
+    status: operating
+    quote: "GlyGly / Gly 34; AlaGly / (Ala + Gly) 20"
+    quantity: "peak-area ratios of one compound across arms (same matrix)"
+    evidence: within_study_factor
+    lab: "Ghent (De Kimpe)"
+    dossiers: [vanlancker2012_extraction.md, vanlancker2010_extraction.md]
+    where: "vanlancker2012 Tables 2, 5; vanlancker2010 Table 2 (Lys-X dipeptides, same direction)"
+    note: "peptides make aminoketones without Strecker decarboxylation (proposed imine / 1,5-H shift route, Scheme 1, [P]). re-read 2026-11-01: both readers MATCH; the free-Gly arm is 2 mmol Gly against 1 mmol GlyGly (Table 5), tag corrected."
+  - key: {ph: alkaline, temperature: very_high, water: dilute}
+    tags: {ph_basis: label, T_C: "100 / 130 / 150 / 180", sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "glucose + glycine 2 mmol vs diglycine 1 mmol, 2 h, initial pH 8"}
+    contrast: "temperature: diglycine's 2,5(6)-DMP advantage at 130 C (15.2 vs 0.7) is gone at 150 C and inverts at 180 C (54.2 vs 210.6); nothing at 100 C"
+    status: operating
+    quote: "210.6 vs 54.2 (180 C)"
+    quantity: "SPME peak areas x 1e6"
+    evidence: within_study_factor
+    lab: "Ghent (De Kimpe)"
+    dossiers: [vanlancker2012_extraction.md]
+    where: "Table 10"
+  - key: {ph: neutral, temperature: very_high, water: low_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: phosphate, metals: not_controlled, system: "tryptic whey hydrolysate vs native whey vs the hydrolysate's free amino acids, + glucose, freeze-dried on sand, 90 min", ph_note: "made up in 0.1 M phosphate pH 7.8 before drying"}
+    contrast: "peptides vs free amino acids at the hydrolysate's level: the free amino acids alone give no pyrazines; a_w 0.33 -> 0.75 (all pre-incubated): 2,5(6)-DMP -0.3 dex"
+    status: operating
+    quote: "free amino acids alone (at the hydrolysate's level) + glucose: no pyrazines"
+    quantity: "HS-SPME peak areas only; 2,5- and 2,6-DMP co-elute"
+    evidence: within_study_factor
+    lab: "Ghent (De Kimpe / De Meulenaer)"
+    dossiers: [scalone2015_extraction.md]
+    where: "Tables 2, 4, 5"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "alpha-hydroxyketone (acetoin) or alpha-dione (2,3-butanedione) + ammonium sulfide + alkanal, water, 30 min"}
+    contrast: "acetoin vs 2,3-butanedione as the C4 source: tetramethylpyrazine 12-30 % vs 0.3-2.0 % of chromatogram area"
+    status: operating
+    quote: "via 3-amino-2-butanone (NH3 on the hydroxyketone)"
+    quantity: "percent of total chromatogram area (no calibration)"
+    evidence: fed_intermediate
+    lab: "University of Reading (Elmore / Mottram)"
+    dossiers: [elmore1997_extraction.md]
+    where: "dossier route table E97-I; Tables 1-2"
+    note: "an aminoketone made by NH3 amination of a hydroxyketone, not by Strecker: a source the engine lacks."
+  - key: {ph: alkaline, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: ammonia_ammonium, oxygen: air, buffer: none_unbuffered, metals: not_controlled, system: "1 M glucose + 8 M NH4OH, 2 or 18 h, open reflux or sealed", ph_note: "not printed; 8 M aqueous NH3 is strongly basic"}
+    contrast: "O2 bubbled vs open air (2 h): total pyrazines 89.4 % of the control; antioxidants, Cu, Zn, NaOH shift the total but not the distribution"
+    status: operating
+    quote: 'dihydropyrazine aromatisation "does not appear to require oxygen"'
+    quantity: "total pyrazines 0.30-5.5 wt % of glucose; methylpyrazine 77-81 % of pyrazines (F20 cell)"
+    evidence: within_study_factor
+    lab: "UC Davis (Shibamoto / Bernhard)"
+    dossiers: [shibamoto1977_extraction.md]
+    where: "Tables I-II, text p. 145"
+    note: "O2 was never removed (every pot had air), so this shows O2 is not limiting, not that aromatisation is non-oxidative."
+  - key: {ph: neutral, temperature: high, water: low_aw}
+    tags: {ph_basis: label, T_C: 130, sugar: hexose_ketose, amine: other_free_aa, oxygen: inert, buffer: phosphate, metals: not_controlled, system: "fructose / glucose / 3-deoxyglucosone + asparagine + K2HPO4 in 1,2-propanediol, 1 h", ph_note: "non-aqueous solvent; no pH"}
+    contrast: "with vs without O2: no change in yield or distribution of methylpyrazines"
+    status: operating
+    quote: "presence / absence of O2 did not change yield or distribution of methylpyrazines"
+    quantity: "concentrations not printed"
+    evidence: within_study_factor
+    lab: "Quest International (Weenen / Tjan)"
+    dossiers: [weenen1992_extraction.md]
+    where: "dossier sec. 1 table; Table 1"
+    note: "the only air vs O2-free contrast on pyrazines on disk; qualitative, in propanediol, not water."
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: "70 / 80 / 90", sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "0.1 M glucose + 0.1 M glycine, initial pH 10, 15-90 min"}
+    contrast: "temperature 70-90 C inside one multi-response fit"
+    status: operating
+    quote: "1-DG + Gly -> 2,5-dimethylpyrazine"
+    quantity: "Ea 99.8 +- 6.7 kJ/mol for r = k[1-DG][Gly] -> 2,5-DMP (fitted)"
+    evidence: kinetic_fit
+    lab: "NUS (Zhou Weibiao)"
+    dossiers: [yu2018_extraction.md]
+    where: "Table 1 step 10"
+    note: "a lumped fitted step from 1-deoxyglucosone, not a mechanism test."
+  # ---- amine-modified ARP pots (Ho network) ------------------------------------------------------------------------
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose Amadori compound 20 mM + cysteine 0 / 6 / 14 / 20 mM, 60 min", ph_note: "labels 7 and 8, unbuffered"}
+    contrast: "label pH 7 -> 8 with 20 mM Cys: pyrazine 11.97 -> 169.13 ug/L (x14); Cys 0 -> 20 mM at pH 8: pyrazine x34"
+    status: operating
+    quote: "169.13 ± 12.59d"
+    quantity: "ug/L by HS-SPME with authentic-standard calibration"
+    evidence: within_study_factor
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [zhou2022_extraction.md]
+    where: "Table 3"
+    conflict: CF-014
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose Amadori compound 20 mM + glycine 20 mM, 60 min", ph_note: "label 7.5; 'rapid reduction of the pH' not measured"}
+    contrast: "ARP + Gly vs ARP + Glu / GSH / Cys: PZ 5.97 and 2,5-DMP 1.16 ug/L while methylpyrazine is ND (Glu: 29.5)"
+    status: conflicting
+    quote: "5.97 ± 1.25a"
+    quantity: "MPZ ND with PZ and DMP present: R < 0.04-0.19 (red team), forbidden by every pairing rival unless pairing is < 5 % efficient or the low-level data are unreliable"
+    evidence: within_study_factor
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [zhou2023c_extraction.md]
+    where: "Table 1 (p. 14318)"
+    conflict: CF-087
+    note: "unscored by EX-052 (red team sec. 5); conflicting with the pairing marker inside one lab (CF-087)."
+  # ---- the condensation step itself (analogue) ---------------------------------------------------------------------
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: in_situ, T_C: "50 (37-85 for Ea)", sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: chelated, feed: "5-aminolevulinic acid 0.031-0.074 M (an alpha-aminoketone ANALOGUE, not a Maillard pot)", ph_note: "measured before / after, drift < 0.06"}
+    contrast: "pH 4.81 (acetate) vs 7.42 (phosphate): k2 x80; pH 2.35 no loss in 37 days; EDTA no effect"
+    status: operating
+    quote: "second order in ALA"
+    quantity: "k2 5.53 M-1 h-1 at pH 7.42, 50 C; Ea 43.7 kJ/mol; extrapolated pair constant ~0.4 M-1 min-1 at 100 C, ~1e7 x below the engine's k_cond (mine)"
+    evidence: fed_intermediate
+    lab: "Karolinska (Elfsson / Ehrsson), pharmaceutics"
+    dossiers: [elfsson1999_extraction.md]
+    where: "Results table; dossier sec. 1"
+    note: "ANALOGUE: parent loss only, products cited (dihydropyrazine : porphobilinogen ~10 : 1, Franck & Stratmann 1981). Buffer co-varies with pH."
+  - key: {ph: neutral, temperature: very_high, water: intermediate_aw}
+    tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "glucose + 15N-glycine + one second amino acid, equimolar, on wheat starch at 12-14 % moisture, 1 h", ph_note: "pH 7 set before freeze-drying; a_w not measured"}
+    contrast: "second amino acid with glycine: pot total pyrazines Lys x4.34, Phe x3.0 ... Arg x0.84 vs glycine alone; glycine's own yield highest with Lys, lowest with Arg"
+    status: operating
+    quote: "glutamine and glutamic acid are the smallest contributors"
+    quantity: "ug/g glucose, one IS, no response factors; the 15N shares are figure-only"
+    evidence: within_study_factor
+    lab: "Ho network (Rutgers: Hwang / Hartman / Ho)"
+    dossiers: [hwang1995_extraction.md]
+    where: "Table 1 totals; text"
+    note: "the per-amino-acid 15N partition is printed only as figure labels (not used)."
+condition_dependence: >-
+  SHOWN. (1) Structure: in sugar + amino acid pots at 120-180 C the ring carbons of pyrazine, methylpyrazine and
+  2,5-DMP are dicarbonyl / sugar carbon (13C, two labs: Nestle, Reading) and the ring N of pyrazine comes from two
+  independently aminated halves (15N, Ho network), i.e. aminoketone pairing for PZ and 2,5-DMP. (2) pH: in
+  sugar + lysine pots yield rises steeply with label pH 5 -> 7 -> 9 (Reineccius; x260 / x2 per step, buffer changes
+  7 -> 9) and in Ho-network ARP pots pH 8 >> 7 (x14 with Cys); fed MGO + Cys rises x3.6 from label pH 6 to 8 (Ho
+  network). But with FED methylglyoxal + alanine at ~0.85 M, pH 4 acetate gives 2.1x MORE 2,5-DMP than pH 7
+  phosphate (Ghent): the pH law of the cascade (dicarbonyl supply) and of the fed step differ. In-situ pH is not
+  measured in any pyrazine pot except via sister arms (Zhou 2023 / 2024 / 2025b fall to pH 4-5 within 30-60 min),
+  so most pH bins are label bins. (3) Temperature: fed-dicarbonyl Ea 100-112 kJ/mol (Ho network, 100-120 C);
+  whole-cascade Ea 114-187 kJ/mol (Reineccius, 75-95 C, curved 3-point plots). (4) Water: one a_w ladder (milk
+  powder, maximum at a_w 0.75; Reineccius); whey peptides peak at a_w 0.33 (Ghent, confounded by pre-incubation).
+  (5) Amine: lysine >> asparagine (x35 on pyrazine), Lys synergy and Arg inhibition with glycine (Rutgers),
+  N-terminal Gly / Ala / Ser dipeptides 20-34x free amino acids at 130 C but inverted at 180 C (Ghent), proline
+  ~nil, NH3 + hydroxyketone and NH3 + sugar also give aminoketone pyrazines. (6) O2: not limiting (Shibamoto, open
+  air vs O2-enriched) and no effect of O2 removal in propanediol (Quest, qualitative). (7) Buffer: phosphate 1.8x
+  bicarbonate at pH 7 (Ghent). ASSUMED (nowhere measured): that the condensation is fast relative to the Strecker
+  step (the one measured aminoketone analogue is ~1e7x slower than the engine's k_cond), that the dihydropyrazine
+  oxidises rather than diverts, and that one constant serves all three pairings (rejected for MPZ, see F20).
+best_supported_regimes:
+  - "very_high T / low a_w roast / hexose + free Ala or Gly: 2,5-DMP via aminoketone pairing dominant (2 labs, 13C labelling: Nestle, Reading)"
+  - "high T / dilute / pentose ARP + Ala, in situ acid after 30 min: parent pyrazine via pairing of two aminated C2 units dominant (1 lab-network, 15N + 13C labelling: Ho network)"
+  - "high T / dilute / fed glyoxal or methylglyoxal + alanine, label pH 8: operating with measured rates and Ea (Ho network only)"
+  - "moderate T / dilute / hexose + lysine, label pH 5-9: operating, strongly pH-dependent (Reineccius only)"
+  - "high T / concentrated / fed MGO + Ala, pH 4 acetate: minor beside the pyrrole sink (Ghent only)"
+unknown_regimes:
+  - "Any in-situ-pH-controlled pyrazine pot below pH 6 with a sugar: every acid cell is either a label (Reineccius citrate-phosphate) or an unbuffered drift (Ho network); no pH-stat pyrazine study."
+  - "low T (<= 60 C) in a real Maillard pot: only the ALA analogue; no pyrazine formation data."
+  - "Free aminoacetone / aminoacetaldehyde or the dihydropyrazine measured in any pot: never (no trapping, no derivatised LC-MS): the pairing rate and the aminoketone lifetime are unmeasured."
+  - "A measured aminoacetone or aminoacetaldehyde self- or cross-condensation rate (only the ALA analogue)."
+  - "O2-free (argon) aqueous pots: no air vs inert contrast in water; the O2 role in aromatisation is untested in water."
+  - "a_w ladder with free amino acids (only milk powder and a pre-incubation-confounded whey series)."
+  - "protein-bound lysine as the amine with a marker (milk powder is product-only)."
+  - "labelling in aqueous moderate-T (75-100 C) pots: the 13C carbon-origin result is shown only at 120-180 C."
+  - "phosphate vs non-catalytic buffer at a fixed in-situ pH in a sugar pot (only fed MGO at ~0.85 M)."
+competing_families:
+  - "F21_pyrroles_pyridines: aminoacetone + 2 MGO -> 2,5-diacetyl-3-methylpyrrole wins at ~0.85 M when acid (pH 4 acetate) or MGO-rich (1:3): pyrazine 1/38 - 1/231 of the pair (Ghent); at pH 7 phosphate they are about equal."
+  - "F20_extra_pyrazine_routes: the dihydropyrazine is also the substrate of Strecker / sugar aldehyde addition (25-50 % of 2,6-DMP, 2,3-DMP and TMP in glycine-rich roasts); methylpyrazine has a route beside pairing."
+  - "F16_strecker_aldehyde: the aminoketone is the Strecker co-product; amine-driven dicarbonyl sinks (imidazoles, aldol, F21) compete for the same dicarbonyl upstream."
+  - "F04_thiazolidine_ttca / F26_thiazoles: cysteine diverts MGO to 2-acetylthiazole and changes pH; with Cys the Ho ARP pots make more pyrazine at pH 8."
+  - "Aminoacetone autoxidation back to MGO + NH4+ (dutra2001, 37 C, phosphate pH 7.4; not a cell here): an O2 sink competing with condensation where O2 is resupplied."
+engine: >-
+  IN THE ENGINE (B18, src/kinetic_core/network.py PYRAZINE_REACTIONS; constants parameters_pyrazine.py): Strecker
+  r_go_ak (GO + Gly -> AKG + 2 FRAG_C) and r_mgo_ak (MGO + Gly -> AKM + 2 FRAG_C), plus B22's r_go_met / r_mgo_met
+  (methionine), then three condensations r_akg_pz {AKG: 2} -> PZ, r_akm_dmp {AKM: 2} -> DMP and r_ak_mpz
+  {AKG: 1, AKM: 1} -> MPZ, all on ONE k_cond = 1e4 L/(mmol min), Ea 0, no pH term. MATCHES: the topology (ring
+  carbons from the dicarbonyl, N from the amine; 13C two labs, 15N Ho network) and the fed-dicarbonyl Ea (fitted on
+  Zhou 2024). MISMATCHES: (a) CF-077: the cross pair lacks its statistical factor 2, so the engine's R = 1 (docstring
+  promises 4); (b) k_cond is declared fast with no barrier while the only measured aminoketone condensation
+  (ALA analogue) is ~1e7x slower, pH-dependent (x80 from pH 4.8 to 7.4) and has Ea 44 kJ/mol; (c) pH acts only on
+  the two Strecker steps (0.20 dex/unit above 7, 0.58 below, fitted on Leahy's cascade ratios): Ghent's fed MGO + Ala
+  pH 4 vs 7 goes the OTHER way (x2.1 up at pH 4), so the below-7 slope is a supply effect wrongly put on the step
+  (red team S7); (d) no phosphate / buffer-anion term (Ghent x1.8 phosphate vs bicarbonate); (e) no a_w term on the
+  pyrazine steps (a_w acts only on k_schiff) against Leahy's x4 rise from a_w 0.32 to 0.75; (f) amine identity:
+  glycine only (alanine -> glycine declared +/- 0.5 dex), no lysine factor (x35 vs asparagine), no peptide,
+  protein-bound or NH3 aminoketone source (Van Lancker, Scalone, Shibamoto, Elmore all show these make pyrazines);
+  (g) no 2-aminopropanal, so no 2,6-DMP (8-9x below 2,5-DMP from fed MGO; 30 % of 2,6-DMP is F20 anyway); (h) no
+  dihydropyrazine species and no O2 in the net condensation (consistent with the weak O2-independence evidence, but
+  untested in water); (i) no pyrrole sink for AKM (F21) and no aminoketone O2 sink (dutra2001). The B18 ship-rule
+  caveat stands: from sugar + amine pots the engine misses Leahy's 95 C total by ~2.8 dex.

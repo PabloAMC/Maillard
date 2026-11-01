@@ -1,0 +1,179 @@
+# Pathway-condition atlas, family F17 (literature side). Written 2026-11-01 from the extraction dossiers named per
+# cell; vocabulary and status caps from docs/reference/pathway_atlas/families.yml. Every quote is a verbatim substring
+# of the cited dossier (checked by scratchpad check_atlas.py, whitespace-normalised). Numbers marked "mine" are derived
+# by this atlas, not printed. The O2-independent dicarbonyl aldehyde is F16; lipid / keto-acid donors (and their O2
+# dependence) are F18; the O2 diversion of the Amadori compound to glucosone itself is F08.
+family: F17_strecker_acid_o2
+definition: "the O2 route to Strecker ACIDS (e.g. phenylacetic acid); Amadori-compound oxidative route to Strecker products"
+markers:
+  - "Strecker ACID (phenylacetic, 3-methylbutanoic acid) that rises under air vs argon in the SAME fed-donor pot (Hofmann 2000 Table 4: PAA x1.6 - 5.5) while the aldehyde does not."
+  - "Labelled aldehyde fed into the pot does NOT become labelled acid (< 1 % in 30 min, [13C2]PA): the acid comes by a branch parallel to the aldehyde (the hemiaminal / enaminol), not by oxidising the aldehyde. A model that makes PAA from PA fails this marker."
+  - "Metal catalysis on the acid only: Cu(II) raises PAA x1.33 with PA unchanged (fed MGO)."
+  - "Amadori oxidative route: a FED Amadori compound gives the Strecker aldehyde (and acid) x9 - 10 more under air than argon, with the same PA / PAA ~2 in every atmosphere; with an OPD trap the ARP's main dicarbonyl switches from 1-deoxyosone (argon) to glucosone (air + Cu)."
+  - "A fed Amadori compound out-producing its free sugar + amino acid at equal charge marks an Amadori-centred route but NOT its oxidative character, unless the atmosphere is varied (such cells are 'unattributed')."
+cells:
+  # ---- the O2 route to the acid, fed dicarbonyls --------------------------------------------------------------------
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: not_controlled, feed: "MGO or glyoxal 0.1 M + Phe 0.1 M, 0.1 M phosphate pH 7, closed vial, 60 min, argon vs air"}
+    contrast: "air vs argon: PAA x4.34 (MGO: 4.7 -> 20.4 umol/mmol), x5.5 (glyoxal: 2.2 -> 12.2); PA unchanged"
+    status: dominant
+    quote: "the oxygen effect on the Strecker ACID"
+    quantity: "O2-dependent share of the acid under air 77 % (MGO), 82 % (glyoxal) (mine, 1 - argon / air); PAA 2.0 / 1.2 mol % of Phe under air"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Table 4, dossier sec. 4 rows H00-R1 / R2"
+    note: "single laboratory for the whole acid route (evidence map 2.6: SINGLE)."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: not_controlled, feed: "3-DG or glucosone 0.1 M + Phe 0.1 M, as above"}
+    contrast: "air vs argon: PAA x2.2 (3-DG), x1.6 (glucosone); per donor under air PAA MGO : GO : 3-DG : glucosone = 1 : 0.60 : 0.16 : 0.10"
+    status: operating
+    quote: "C6 donors barely oxygen-sensitive"
+    quantity: "O2-dependent share of the acid 55 % (3-DG), 38 % (glucosone) (mine); PAA 0.33 / 0.21 mol % under air"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Table 4, dossier sec. 4 row H00-R3 / R6"
+    note: "the acid route is a C2 / C3-donor phenomenon; C6 donors give mostly aldehyde (PA / PAA 2.4 - 3.3 under air)."
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 98, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "glucose + Phe 0.1 M + [13C2]phenylacetaldehyde 0.41 umol, 0.5 M phosphate, reflux 30 min"}
+    contrast: "sub-route tested: aldehyde -> acid oxidation. Labelled PAA < 0.5 ug vs unlabelled PAA 40.1 ug/mmol Phe"
+    status: absent
+    detection_basis: "label pattern + bound: fed [13C2]phenylacetaldehyde would give [13C2]phenylacetic acid; < 0.5 ug labelled acid against 40.1 ug unlabelled acid quantified in the same run (< 1 %)"
+    quote: "(< 1 %) became labelled acid"
+    quantity: "< 1 % of the fed labelled aldehyde oxidised to acid in 30 min at reflux under air"
+    evidence: labelling
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Table 5, dossier sec. 3 [D] and claim 1"
+    note: "'absent' is for the aldehyde-oxidation SUB-route only: the acid route itself operates (cells above); this is its defining marker (a parallel branch)."
+  - key: {ph: neutral, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "MGO + Phe, air vs air + CuSO4 5 mmol/L", metal_added: "Cu(II) 5 mM"}
+    contrast: "air + Cu(II) vs air: PAA x1.33, PA x0.98"
+    status: operating
+    quote: "Cu²⁺ (5 mmol/L) under air: PAA 27.1 vs 20.4"
+    quantity: "PAA 2.71 vs 2.04 mol % of Phe at 60 min"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Table 4 expt 2, dossier sec. 3"
+    note: "single high dose; no chelated arm, so the air pots' trace-metal contribution is unknown."
+  - key: {ph: alkaline, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 98, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "each dicarbonyl + glucose + Phe, pH 3 / 5 / 7 / 9 (buffer at pH 3 and 9 not stated), atmosphere not controlled"}
+    contrast: "pH 3 -> 9: PAA rises monotonically; MGO x7 more PAA at pH 9 than pH 3; PA : PAA 3 : 1 at pH 3, 1 : 5 at pH 9"
+    status: operating
+    quote: "PAA rises monotonically pH 3 → 9"
+    quantity: "PAA(pH 9) / PAA(pH 3) = 7 (MGO); branch ratio swings 15x over pH 3 - 9 (text readings of Fig. 5)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Fig. 5 and Abstract, dossier sec. 4 row H00-R10"
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "MGO 0.1 M + Phe 0.1 M, 0.5 M phosphate, closed vial (air, not controlled), 10 - 500 min"}
+    contrast: "time: PAA keeps rising after PA plateaus (PAA / PA 1.6 at 10 min -> 2.3 at 500 min)"
+    status: operating
+    quote: "PAA/PA rises from 1.6 (10 min) to 2.3 (500 min)"
+    quantity: "PAA 10.1 -> 27.6 umol per 1 mmol Phe (1.0 -> 2.8 mol %)"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000_extraction.md]
+    where: "Table 3"
+    conflict: CF-070
+  # ---- the Amadori-compound oxidative route -------------------------------------------------------------------------
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "ARP-Phe 0.1 M (purity ~90 %), 0.5 M phosphate pH 7, closed vial, 120 min, argon / air / air + Cu(II) 5 mM"}
+    contrast: "argon / air / air + Cu: PA 0.6 / 5.5 / 13.8, PAA 0.3 / 3.0 / 7.6 umol/mmol; PA / PAA 1.8 - 2.0 in every atmosphere"
+    status: operating
+    quote: "oxygen-dependent route to the Strecker aldehyde that needs no free dicarbonyl"
+    quantity: "PA 0.55 mol % of ARP under air (x9.2 over argon); O2-dependent share of PA 89 % (mine)"
+    evidence: fed_intermediate
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000b_extraction.md]
+    where: "Table 2, dossier sec. 4 rows H00b-R1 / R2 / R6"
+    note: "operating, not dominant: the 'no free dicarbonyl' mechanism is the authors' proposal (Fig. 4); with an OPD trap the ARP under air + Cu gives glucosone, itself a PA donor (F16), and no mass balance separates the two. The blind test of the forced-input layer (EX-051) failed the ARP-Phe aldehyde SHAPE for all five optima."
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "glucose + Phe 0.1 M each, 0.5 M phosphate pH 7, 120 min, argon / air / air + Cu(II)"}
+    contrast: "argon / air / air + Cu: PA 0.4 / 1.4 / 2.6, PAA 0.2 / 1.8 / 3.9 umol/mmol; PA / PAA 2.0 -> 0.78 -> 0.67"
+    status: operating
+    quote: "the glucose pot's branch ratio flips with oxygen"
+    quantity: "PA x3.5, PAA x9 under air vs argon (0.14 / 0.18 mol % in air)"
+    evidence: within_study_factor
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000b_extraction.md]
+    where: "Table 2 (Glc / Phe columns), dossier sec. 4 rows H00b-R3 / R4 / R7"
+    conflict: CF-074
+    note: "CF-074: the air cell is probably hofmann2000 Fig. 2's 120-min point reprinted, so the 3.5 may compare a reflux pot with a closed argon vial ('possible_vessel_comparison'); the ARP-Phe 9.2 is the same-vessel pair."
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 85, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: not_controlled, feed: "ARP-Phe 0.5 M + 1,2-diaminobenzene 0.6 M (in-situ trap), 2 mL phosphate pH 7, argon vs air + Cu(II) 25 mM, 20 - 320 min", metal_added: "Cu(II) 25 mM"}
+    contrast: "argon: 1-deoxyosone the main trapped dicarbonyl; air + Cu: glucosone the main one; Phe liberation ~55 % at 320 min in both"
+    status: operating
+    quote: "Under air + metal the ARP's main dicarbonyl is glucosone, not 1-DG/3-DG"
+    quantity: "figure-only; Phe liberated ~55 % after 320 min (argon), 'same order' under air + Cu"
+    evidence: trapping
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    dossiers: [hofmann2000b_extraction.md]
+    where: "Figs. 2 - 3, dossier sec. 3 [FIG] and claim 2"
+    note: "O2 changes where the ARP's carbon goes, not how fast the amine returns; the trapped glucosone is the F08 side of the same oxidative step."
+  - key: {ph: acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "Glc-Phe ARP vs glucose + Phe (~26 mM), 50 mM citrate pH 3.2 and 100 mM phosphate pH 7.0, reflux 2 h under SDE"}
+    contrast: "fed ARP vs free glucose + Phe: x4.2 at pH 7.0, x267 at pH 3.2; ARP pH 3.2 / pH 7.0 = 2.5 (buffer co-varies)"
+    status: unattributed
+    quote: "ARP/(Glc + Phe) = 4.2 at pH 7.0 and 267 at pH 3.2"
+    quantity: "PA 1.6 % of ARP at pH 3.2, 0.63 % at pH 7.0"
+    evidence: fed_intermediate
+    lab: "Quest International, Bussum (Weenen)"
+    dossiers: [weenen2001_extraction.md]
+    where: "Table II entries 1 - 5"
+    note: "second laboratory for 'the Amadori compound is a better Strecker source than its free sugar' (DFA's ARP-Phe / Glc-Phe in air is 3.9, consistent at pH 7); atmosphere never varied, so its OXIDATIVE character is not tested here."
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: none, amine: sulfur_aa_other, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Met-Glc ARP 0.2 M vs Met + glucose 0.2 M each, initial pH 7.5 unbuffered, sealed vials, 30 - 240 min; also 100 and 130 C"}
+    contrast: "fed ARP vs Met + glucose: methional peak 196.6 vs 87.8 ug/L (x2.2) at 120 C; ordering reverses at 130 C"
+    status: unattributed
+    quote: "MG-ARP > Met/Glc at 100 and 120 C but Met/Glc > MG-ARP at 130 C"
+    quantity: "methional peak 1.9 umol/L at 120 min from 0.2 M ARP (~1e-5 mol/mol); semi-quantitative SPME"
+    evidence: fed_intermediate
+    lab: "Ho network (Jiangnan / Rutgers)"
+    dossiers: [deng2022_extraction.md]
+    where: "Table 1 (120 C), Fig. 2a (100 / 130 C, figure-only)"
+    note: "third laboratory for an Amadori-centred Strecker route, for methionine; O2 not varied; Met alone gives 1 - 2 ug/L methional."
+condition_dependence: >-
+  SHOWN (all at 85 - 100 C, pH 7 label, phosphate, one laboratory for every O2 contrast). The Strecker ACID needs
+  O2 when the donor is a C2 / C3 dicarbonyl (MGO, glyoxal: 77 - 82 % of the acid is O2-dependent) and much less for
+  C6 dicarbonyls (38 - 55 %); Cu(II) adds x1.3 to the acid only. The acid is not made by oxidising the aldehyde
+  (label, < 1 %). The acid branch grows with pH (x7 from pH 3 to 9, figure-only) and with time (PAA / PA 1.6 ->
+  2.3 over 500 min). A fed Amadori compound makes the aldehyde (and acid) x9 - 10 more under air than argon with
+  an atmosphere-independent PA / PAA ~2, and under air + Cu the trapped ARP dicarbonyl switches to glucosone; the
+  glucose pot is less O2-sensitive for the aldehyde (x3.5, vessel-flagged, CF-074) but as sensitive for the acid
+  (x9). Two other labs (Quest, Phe; Ho network, Met) show the Amadori compound out-produces the free sugar at equal
+  charge (x2 - 270, largest at pH 3.2), but neither varied O2. NOT SHOWN: any O2 contrast at > 100 C, at low water,
+  outside phosphate pH 7, with a chelated arm, or in a second laboratory; any measurement of the hemiaminal /
+  enaminol intermediate or of dissolved O2.
+best_supported_regimes:
+  - "neutral / moderate (98 C) / dilute / fed MGO or glyoxal + Phe under air: the O2 route carries most of the Strecker acid (fed_intermediate + argon contrast; DFA only, PROVISIONAL)"
+  - "neutral / moderate (100 C) / dilute / fed ARP-Phe under air: an O2-dependent Amadori route to PA and PAA operates (x9 - 10; DFA only)"
+  - "acid and neutral / moderate / dilute: fed Amadori compound > free sugar as a Strecker source (Quest, Phe; with DFA at pH 7 in air) -- oxidative character unattributed"
+unknown_regimes:
+  - "any temperature above 100 C with an air / argon contrast"
+  - "intermediate_aw and low_aw (no O2 contrast on the acid or the ARP route)"
+  - "acid and mild_acid pH with controlled O2 (the pH series is under uncontrolled air)"
+  - "chelated vs not_controlled metals at food trace levels (only 5 - 25 mM Cu(II) added)"
+  - "amino acids other than Phe for the acid (Leu / Ala acids measured once, glucose pot, air only; acetic acid not Strecker-specific)"
+  - "a second laboratory for any F17 marker (evidence map 2.6: SINGLE)"
+  - "dissolved-O2 dose: the atmosphere is argon vs air-saturated closed vial, never a partial-pressure series"
+competing_families:
+  - "F16_strecker_aldehyde: the same imine / enaminol gives the aldehyde without O2; under argon F16 wins for every donor, under air F17 takes the acid share (PA / PAA 0.50 for MGO, 3.3 for glucosone)."
+  - "F08_oxidative_osone: O2 on the Amadori compound makes glucosone (trapped) instead of the Strecker products; the two are the same oxidative step's two exits."
+  - "F07_enol23_1deoxyosone: under argon the ARP goes to 1-deoxyosone + free amino acid instead."
+  - "F12_alpha_oxidative_cleavage: O2 also cleaves the dicarbonyls to acids (acetic acid from 1-DG), which is why the Ala 'Strecker acid' (acetic acid) is not route-specific."
+  - "F18_lipid_strecker: lipid enals need O2 for the aldehyde itself (the opposite of F16)."
+engine: >-
+  NOT IN THE ENGINE. There is no Strecker ACID species and no O2-dependent Strecker step. The only O2 lever is B29
+  (trunk_conditions.OXIDATIVE_ENTRY_STEPS = k_ama_g, k_glc_g: the oxidative entries to glucosone, F08) and its
+  ATMOSPHERE_FACTORS table holds only air = 1.0, so any argon or air + Cu pot is refused rather than answered. The
+  only Amadori -> Strecker-aldehyde step is r_marp_mtal (B22b, methionine ARP -> methional, first order, Ea 85
+  declared at one temperature), not shipped (B22B_SHIPPED = False) and with NO oxygen term, although the measured
+  Amadori route is x9 O2-dependent (engine_family_map.yml). MISMATCHES: (a) no acid exit, so the engine cannot carry
+  the x4 - 5.5 air / argon acid effect or the pH 3 -> 9 branch swing; (b) the B29 note's argument (aldehyde
+  O2-independent from fed dicarbonyls, so the O2 dependence sits upstream) is right for the dicarbonyl aldehyde but
+  omits the direct ARP route, which the forced-input feasibility (EX-049) found necessary for the glucose pot (DC-only
+  rejected) while the blind test (EX-051) rejected its present shape; (c) no metal term.

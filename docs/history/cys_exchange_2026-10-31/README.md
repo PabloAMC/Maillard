@@ -2,6 +2,22 @@
 
 This is an archived analysis record, not a generator. `prereg.yaml` was written at 13:44; the first run was at 13:52. No red team was run, because nothing here moves the engine; one is due before any exchange law changes.
 
+**Erratum (2026-11-01; this record is otherwise unchanged).** The k_r bands in `prereg.yaml` rest on two misreadings:
+- E1 `k0_100` basis: "Kallen 1971 TC relaxation 0.009-0.03 /min at 25 C" is the approach-to-equilibrium relaxation of
+  Kallen's Fig. 4, not the hydrolysis constant; with the companion kallen1971b, TC k_r is 5.4e-5 /min at pH 5.6 (t1/2
+  ~9 d), 120-270x slower (kallen1971 dossier, arithmetic 3, corrected 2026-11-01). "Schubert 1939 (ring opening as fast
+  as free Cys to I2 at RT)" measures C-S ring opening, not cysteine release. The band [1e-5, 1] /min survives
+  numerically on a rewritten basis, so E1's fate here (it failed on c_aa) does not move on this account.
+- `c_aa` [0.3, 30] and `c_P` [4, 300] (Fife 1991, general base, linear) are superseded by kallen1971b: ammonium
+  Brønsted c_aa 0.1-0.3 /M at pH 6 and ~1-3 at pH 7 (+-1 log), no catalysis below pH ~5.5, saturation at x3.5-5. E2 /
+  E4's acid limb (a in [0, 1], k_r falling with pH) has the wrong sign below pH 5.6 on the N-H analogue, where k_r
+  RISES with pH.
+
+The corrected bands were re-run on 2026-11-01 (cluster 5 of the conflict-resolution programme, EX-055; record in
+`docs/history/conflict_resolution_2026-11-01/cluster5/`). That re-run SUPERSEDES the verdicts below: with Kallen's
+k_r(pH) sign, in-situ pH + K(pH) is feasible and E4c is admitted provisionally (P 0.45), E1c is rejected, and E0 is
+now rejected in two laboratories (Zhang 2025b's blank added as T8).
+
 **Outcome: no rival is admitted.**
 - **E0, the engine's exchange: REJECTED, provisionally (single lab).** It releases cysteine 2 - 30x faster than TTCA is lost in Zhai 2021's dilute pots, which allow k_r(100 C, 10 mM) <~ 1e-3 /min. The T4 gate has power 0.93 / 0.99 against E1 / E2.
 - **E3, E0 plus a second cysteine sink:** rejected on the same gate.

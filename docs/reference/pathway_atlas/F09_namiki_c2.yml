@@ -1,0 +1,132 @@
+# Pathway-condition atlas, family F09 (written 2026-11-01, atlas agent "hub"; vocabulary: families.yml).
+# Bin conventions as in F06_enol12_3deoxyosone.yml (pH boundary -> upper bin; 100 C / reflux -> moderate; operator tags;
+# "[derived here]" = this file's arithmetic; "not_stated" = axis not printed). Hayashi 1980 runs in 95-99 % ETHANOL: it
+# is keyed water: low_aw (non-aqueous) with tags.medium, because no families.yml water bin describes an alcohol.
+family: F09_namiki_c2
+definition: "Namiki route: Schiff-base fragmentation -> C2 (glyoxal / glycolaldehyde)"
+markers:
+  - "An amine-bound C2 at the glyoxal level (glyoxal dialkylimine) appearing BEFORE the Amadori compound / 3-DG, isolated or trapped (Hayashi & Namiki 1980); its follow-on N,N'-dialkylpyrazinium radical cation (ESR) - the 1975 / 1977 papers that show it are NOT on disk."
+  - "Amine dependence of the early C2: present with amine, absent from sugar + alkali alone (Hayashi 1980), and rising with amine excess."
+  - "Glyoxal (or glycolaldehyde) from sugar + amine at a rate or yield the FED Amadori compound cannot supply under the same conditions (fed-ARP glyoxal is small: Deng 2021 <= 0.085 mM from 0.2 M ARP; Gobert: glucosone gives 0.07 % GO)."
+  - "Not markers by themselves: early glyoxal timing (Wolff autoxidation of the sugar is also early); chelator / O2 sensitivity (shared with F08); pyrazine labelling of a GO pool (Zhou 2025b) that does not say whether the C2 came from the Schiff base, the free sugar or the ARP."
+cells:
+  - key: {ph: not_stated, temperature: moderate, water: low_aw}
+    tags: {ph_basis: none, T_C: "~78 (ethanol reflux)", medium: "95 % ethanol", sugar: hexose_aldose, amine: other_amine, amine_detail: "t-butylamine / cyclohexylamine 1 M (alkylamines, not amino acids)", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "TLC densitometry at sampling (glyoxal after on-plate hydrolysis)"}
+    contrast: "time order inside one pot: C2 imine max at 20 min; 3-DG ~0.07 mM at 15 min, ~1 mM at 35 min; radical and A420 later"
+    status: operating
+    quote: "This precedes either the initial formation of 3-deoxyglucosone"
+    quantity: "glyoxal dicyclohexylimine isolated at 12 (1 : 1, 15 min) and 74 (1 : 5, 30 min) mmol/mol glucose - lower bounds"
+    evidence: measured_intermediate
+    lab: "Nagoya (Hayashi / Namiki)"
+    dossiers: [hayashi1980_extraction.md]
+    where: "Fig. 5; isolation (sec. 3)"
+  - key: {ph: not_stated, temperature: moderate, water: low_aw}
+    tags: {ph_basis: none, T_C: "~78 (ethanol reflux)", medium: "95 % ethanol", sugar: hexose_aldose, amine: [other_amine, none], amine_detail: "t-butylamine 0.5-32 equiv; NaOH 0-1 M; glucose in 0.1 M NaOH alone", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "TLC densitometry"}
+    contrast: "amine : glucose 0.5 -> 10 equiv: C2 imine rises ~10x, then falls at 32; NaOH (no extra amine) slightly lowers it; alkali without amine gives none"
+    status: operating
+    quote: "glucose in 0.1 M NaOH alone gives no glycolaldehyde, glyoxal or glycolic acid"
+    quantity: "maximum near a 10-fold amine excess (arbitrary units); amine-free alkaline control negative"
+    evidence: within_study_factor
+    lab: "Nagoya (Hayashi / Namiki)"
+    dossiers: [hayashi1980_extraction.md]
+    where: "Fig. 6A-B; text"
+  - key: {ph: neutral, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 101, sugar: [hexose_aldose, pentose], sugar_note: "hexose_aldose and pentose (paired)", amine: other_free_aa, amine_detail: "L-alanine ~1.2-1.5 M", oxygen: air, buffer: phosphate, metals: not_controlled, operator: standing_level}
+    contrast: "time order: glyoxal peaks at 5 min (xylose) / 10 min (glucose), before 3-DX (10 min) / 3-DG (40 min); xylose glyoxal gone by 40 min"
+    status: unattributed
+    quote: "Glyoxal is the earliest fragment from both sugars"
+    quantity: "glyoxal ~0.1 mol % of xylose at 5 min, ~0.17 mol % of glucose at 10 min; open reflux (Wolff route equally possible; no amine-free arm)"
+    evidence: measured_intermediate
+    lab: "DFA Garching (Hofmann)"
+    dossiers: [hofmann1999_extraction.md]
+    where: "Figs. 9-10; Results p. 117-118"
+  - key: {ph: alkaline, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: [hexose_aldose, hexose_ketose, pentose], sugar_note: "hexose_aldose, hexose_ketose, pentose, fed 3-DG, fed ARP", amine: [other_free_aa, none], amine_detail: "L-alanine 0.6 M vs no amine; biphasic water / n-butanol", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "+ alanine vs no amine (in situ OPD, 1 h): glyoxal glucose 58 vs 26 (x2.2), xylose 27 vs 62 (x0.43) ug; fed ARP gives the most glyoxal (82 / 103)"
+    status: unattributed
+    quote: "cannot be explained as originating from deoxyglycosones"
+    quantity: "relative ug only (basis unstated); the author's claim that glyoxal is not from the ARP is contradicted by his own ARP bars"
+    evidence: within_study_factor
+    lab: "Quest International (Weenen)"
+    dossiers: [weenen1998_extraction.md]
+    where: "Figs. 1-2; Scheme 5"
+  - key: {ph: mild_acid, temperature: not_stated, water: concentrated}
+    tags: {ph_basis: label, T_C: null, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "beta-alanine 2 M", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "pH 5 vs 7 (in situ OPD, 12 h): glyoxal quinoxaline x1.42; C2 / C3 / C4 fragments x1.3-14 while the C6 osones collapse"
+    status: unattributed
+    quote: "34 700 | 49 300"
+    quantity: "glyoxal ~4 % (pH 5) and ~10 % (pH 7) of the total trapped quinoxaline area [derived here]; no temperature printed"
+    evidence: trapping
+    lab: "Ledl / Severin school, Stuttgart"
+    dossiers: [nedvidek1992_extraction.md]
+    where: "Table 2"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 50, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "free lysine 42 mM", oxygen: [air, inert], buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    contrast: "air vs deaerated (in situ OPD, 7 d): glyoxal 3.3 vs 1.6 mmol/mol glucose (x2); fed glucosone gives only 0.07 % glyoxal"
+    status: unattributed
+    quote: "| glyoxal | 3.3 | 1.6 |"
+    quantity: "glyoxal 0.33 mol % of glucose under air in 7 d; glucosone 44.5 mmol/mol x 0.07-0.14 % (per glucosone fed / consumed in 8 h) could supply ~0.03-0.06 mmol/mol of it [derived here], so most glyoxal is NOT from glucosone - F09 or another non-osone route"
+    evidence: trapping
+    lab: "Glomb, Halle"
+    dossiers: [gobert2009_extraction.md]
+    where: "Table 1; Table 3"
+  - key: {ph: neutral, temperature: low, water: dilute}
+    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: [other_free_aa, none], amine_detail: "glucose 50 mM + Nalpha-BOC-lysine 50 mM vs glucose alone; fed fructosyl-lysine 0.5 mM", oxygen: not_stated, buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled vs chelated (DETAPAC)", operator: standing_level}
+    contrast: "BOC-Lys raises the glyoxal initial rate x5 (1.72 -> 8.09 uM/day); with DETAPAC the BOC-Lys pot equals glucose alone; fed fructosyl-lysine gives GO 6.8 mol % in 21 d"
+    status: unattributed
+    quote: "not significantly different"
+    quantity: "the amine-dependent glyoxal is entirely metal-dependent; an ARP (fructosyl-lysine) source can carry it, so no Schiff-base marker"
+    evidence: within_study_factor
+    lab: "Thornalley, Essex"
+    dossiers: [thornalley1999_extraction.md]
+    where: "Figs. 2e, 2g, 3c-d; sec. 3"
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 130, sugar: hexose_aldose, amine: glycine, amine_detail: "glucose + glycine 0.2 M each (free sugar + amine)", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    contrast: "cross-study, same laboratory and OPD method: free glucose + glycine pot vs fed methionine-glucose ARP (Deng 2021) GO <= 0.085 mM"
+    status: unattributed
+    quote: "was generated far more than"
+    quantity: "glyoxal 'far more' than MGO at 130 C, GO panel drawn to 15 mmol/L (figure only, no value printed); fed ARP GO <= 0.085 mM - a free-sugar-side C2 (F09 or Wolff), not attributable without a marker"
+    evidence: qualitative
+    lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+    dossiers: [xia2022_extraction.md, deng2021_extraction.md]
+    where: "Xia 2022 text + Fig. 5 axis; Deng 2021 Fig. 5"
+  - key: {ph: alkaline, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: other_free_aa, amine_detail: "Ala-xylose ARP 20 mM + 13C5-xylose 20 mM (free sugar + released Ala)", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "13C isotopomers of pyrazine (a GO trap) + ex-situ OPD"}
+    contrast: "+ free xylose vs ARP alone: GO +0.36 mmol/L at 120 min while xylose alone (no amine) makes 0.12 mmol/L; pyrazine M+2 11-13 %"
+    status: unattributed
+    quote: "whereas the degradation of Xyl itself contributed only"
+    quantity: "6-8 % of the pyrazine-trapped GO pool carries free-xylose carbon [dossier-derived]; amine-assisted C2 from the free sugar, route not marked"
+    evidence: labelling
+    lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
+    dossiers: [zhou2025b_extraction.md]
+    where: "Table 2; text"
+    conflict: CF-060
+condition_dependence: >-
+  SHOWN (one laboratory, non-aqueous): an amine-bound glyoxal-level C2 forms within 10-20 min at ~78 C in ethanol, ahead
+  of 3-DG, needs the amine (alkali alone gives none) and peaks near a 10-fold amine excess (Hayashi & Namiki 1980).
+  Everything aqueous is UNATTRIBUTED: early glyoxal (Hofmann 1999), amine-raised glyoxal from glucose (Weenen 1998 x2.2,
+  Thornalley x5) and glyoxal beyond what glucosone can supply (Gobert) all fit the Namiki route, but each also fits
+  sugar / ARP autoxidation, and the amine-dependent glyoxal at 37 C is wholly chelator-sensitive (Thornalley). The
+  pentose evidence goes the other way in one study (alanine LOWERS glyoxal from xylose, Weenen). pH: glyoxal formation
+  rises modestly from pH 5 to 7 (Nedvidek, in situ, x1.4); Brands 2002c cites Hayashi & Namiki 1986 for C2 / C3
+  fragments rising with pH (not on disk). Oxygen: glyoxal x2 with air at 50 C (Gobert) - Namiki's C2 imine is at the
+  glyoxal oxidation level, so an oxidation (or disproportionation) is implied; never tested with an O2 arm. Temperature,
+  phosphate, cysteine: no data.
+best_supported_regimes:
+  - "ethanol / ~78 C / glucose + alkylamine: operating, >= 1.2-7.4 % of glucose to the C2 diimine (Nagoya, 1 lab, no water, no pH)"
+unknown_regimes:
+  - "every aqueous regime: no aqueous study carries a marker that separates Schiff-base fragmentation from sugar or ARP autoxidation"
+  - "amino acids (all Hayashi amines are alkylamines); cysteine; protein-bound lysine"
+  - "pH dependence in water; temperature dependence; O2 / argon; phosphate"
+  - "glycolaldehyde (the C2 at the hydroxyaldehyde level) from the Schiff base: never measured (Hofmann 1999 glycolaldehyde is a standing level without route marker)"
+competing_families:
+  - "F08_oxidative_osone (Wolff autoxidation of the sugar; ARP oxidation): the same glyoxal, same O2 / metal dependence; glucosone itself carries little GO (0.07 %, Gobert)"
+  - "F10_retroaldol_c3_c2 (sugar retro-aldol C2 + C4 gives glycolaldehyde; amine-free in hot water, Kabyemela)"
+  - "F01 / F02 (the Schiff base goes on to the Amadori compound): the Namiki share of the Schiff-base flux is unmeasured"
+engine: >-
+  NOT IN THE ENGINE. The trunk's Schiff base (SB, r_schiff -> r_amadori) is 'irreversible and sink-free': every
+  condensed molecule reaches the Amadori pool and SB has no C2 exit. The trunk's only glyoxal source is glucosone
+  cleavage (r_g_go, fed by r_glc_g / r_ama_g); the Hayashi dossier already flags the missing amine-dependent C2. The
+  sulfur (pentose) lane has no glyoxal source at all, while every Jiangnan pentose pot measures glyoxal (Zhou 2025b's GO
+  rises with free xylose + amine). Glycolaldehyde (HA) enters only via the retro-aldol steps r_dpo_c2c3 / r_glc_c2c3.
+  Given the evidence, an F09 step would be a declared, unattributed arm (no aqueous marker), not a fitted route.

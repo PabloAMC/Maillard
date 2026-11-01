@@ -1,0 +1,555 @@
+# SECOND READER (reader B) -- Larralde, Robertson & Miller 1995, PNAS 92:8158-8160 (larralde1995.pdf; 600 ppi 1-bit scan): the
+# phosphate rate law and the bicarbonate ratio (text), Fig. 2 (Arrhenius points) and Fig. 1 (pD profile). Reader B's values AS
+# WRITTEN: B read log10 k (s-1); value = 10^(B's log k), read_error = B's error in dex. The raw reading (coordinator's scratchpad,
+# keying_reader_B.yml) is not repeated here. Independent of reader A.
+# Pots: B wrote one pot for the four Fig. 2 temperatures and the text, and one for all of Fig. 1; split here per temperature and
+# per nominal pD (names suffixed _b) so that scripts/reconcile_source_readings.py can pair them (it matches pots by temperature
+# and label pH). The rate-law unit label (per_min) is the adjudication's; B keyed the printed 's-1' as printed and left it
+# unresolved (B's note: in s-1 the law contradicts the 73-min half-life and Fig. 2; in min-1 it is within ~0.1 dex of Fig. 2).
+name: heldout_larralde1995
+status: draft
+reader: agent-readerB-2026-11-01
+read_by: agent-readerB-2026-11-01
+pots:
+  larralde1995_ribose_phosphate_0p05M_pD7p4_60C_b:
+    ledger_id: larralde1995_fig2_text_ribose_arrhenius_phosphate
+    t_c: 60
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M deuterated phosphate, D2O (reader B: one pot for all four temperatures, split here per temperature)'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_ribose_phosphate_0p05M_pD7p4_80C_b:
+    ledger_id: larralde1995_fig2_text_ribose_arrhenius_phosphate
+    t_c: 80
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M deuterated phosphate, D2O (reader B: one pot for all four temperatures, split here per temperature)'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_ribose_phosphate_0p05M_pD7p4_100C_b:
+    ledger_id: larralde1995_fig2_text_ribose_arrhenius_phosphate
+    t_c: 100
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M deuterated phosphate, D2O (reader B: one pot for all four temperatures, split here per temperature)'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_ribose_phosphate_0p05M_pD7p4_118C_b:
+    ledger_id: larralde1995_fig2_text_ribose_arrhenius_phosphate
+    t_c: 118
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M deuterated phosphate, D2O (reader B: one pot for all four temperatures, split here per temperature)'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_ribose_phosphate_rate_law_pD7p4_100C_b:
+    ledger_id: larralde1995_fig2_text_ribose_arrhenius_phosphate
+    t_c: 100
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: 'deuterated phosphate, total varied (series not printed)'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_ribose_bicarbonate_0p05M_pD7p4_100C_b:
+    ledger_id: larralde1995_fig2_text_ribose_arrhenius_phosphate
+    t_c: 100
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M bicarbonate; temperature not stated in the sentence (100 C presumed, unconfirmed)'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_118C_pD4p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 118
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 4.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M acetate (inferred, reader B); plotted pD 4.7'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_118C_pD5p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 118
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 5.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M acetate (inferred, reader B); plotted pD 5.71'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_118C_pD6p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 118
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 6.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 6.61'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_118C_pD7p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 118
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 7.61'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_118C_pD8p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 118
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 8.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 8.61'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_100C_pD4p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 100
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 4.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M acetate (inferred, reader B); plotted pD 4.6'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_100C_pD5p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 100
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 5.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M acetate (inferred, reader B); plotted pD 5.61'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_100C_pD6p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 100
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 6.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 6.55'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_100C_pD7p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 100
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 7.55'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_100C_pD8p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 100
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 8.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 8.56'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_80C_pD4p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 80
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 4.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M acetate (inferred, reader B); plotted pD 4.51'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_80C_pD5p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 80
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 5.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M acetate (inferred, reader B); plotted pD 5.51'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_80C_pD6p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 80
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 6.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 6.45'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_80C_pD7p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 80
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 7.45'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_80C_pD8p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 80
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 8.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 8.45'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_60C_pD5p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 60
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 5.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M acetate (inferred, reader B); plotted pD 5.44'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_60C_pD6p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 60
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 6.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 6.39'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_60C_pD7p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 60
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 7.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 7.39'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+  larralde1995_fig1_ribose_60C_pD8p4_b:
+    ledger_id: larralde1995_fig1_ribose_pd_rate_profile
+    t_c: 60
+    minutes: null
+    initial_mmol_L:
+      PENT: null
+    concentration_basis: not stated (D-ribose)
+    engine_species_missing: []
+    label_ph: 8.0
+    ph_measured_at: 25 C meter reading + 0.4 = pD
+    buffer: '0.05 M phosphate (inferred, reader B); plotted pD 8.39'
+    condition_quote: Methods "0.05 M deuterated phosphate [pD 6.4-8.4] or acetate (pD 4.4-5.4) buffer and sealed in NMR tubes"
+rows:
+- pot: larralde1995_ribose_phosphate_0p05M_pD7p4_60C_b
+  species: PENT
+  t_min: 0
+  value: 2.871e-06
+  unit: per_s
+  read_error: 0.015
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -5.542 (s-1)'
+  source_value: 'Fig. 2 60 C square, reader B as written'
+- pot: larralde1995_ribose_phosphate_0p05M_pD7p4_80C_b
+  species: PENT
+  t_min: 0
+  value: 1.936e-05
+  unit: per_s
+  read_error: 0.015
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -4.713 (s-1)'
+  source_value: 'Fig. 2 80 C square, reader B as written'
+- pot: larralde1995_ribose_phosphate_0p05M_pD7p4_100C_b
+  species: PENT
+  t_min: 0
+  value: 0.000138
+  unit: per_s
+  read_error: 0.015
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -3.86 (s-1)'
+  source_value: 'Fig. 2 100 C square, reader B as written'
+- pot: larralde1995_ribose_phosphate_0p05M_pD7p4_118C_b
+  species: PENT
+  t_min: 0
+  value: 0.0009247
+  unit: per_s
+  read_error: 0.015
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -3.034 (s-1)'
+  source_value: 'Fig. 2 118 C square, reader B as written'
+- pot: larralde1995_ribose_phosphate_rate_law_pD7p4_100C_b
+  species: PENT
+  t_min: 0
+  value: 0.00286
+  unit: per_min
+  read_error: 0.00076
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: '2.86 x 10-3 (printed unit s-1; B keyed it as printed, unresolved)'
+  source_value: 'p. 8158 displayed equation, reader B as written; unit label per the adjudication'
+- pot: larralde1995_ribose_phosphate_rate_law_pD7p4_100C_b
+  species: PENT
+  t_min: 0
+  value: 0.0936
+  unit: per_M_per_min
+  read_error: 0.00023
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: '9.36 x 10-2 (printed unit s-1; B keyed it as printed, unresolved)'
+  source_value: 'p. 8158 displayed equation, reader B as written; unit label per the adjudication'
+- pot: larralde1995_ribose_bicarbonate_0p05M_pD7p4_100C_b
+  species: PENT
+  t_min: 0
+  value: 0.52
+  unit: ratio
+  read_error: 0.0042
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: '0.52 (rate in 0.05 M bicarbonate / rate in 0.05 M phosphate)'
+  source_value: 'p. 8159 left column, reader B as written'
+- pot: larralde1995_fig1_ribose_118C_pD4p4_b
+  species: PENT
+  t_min: 0
+  value: 6.31e-06
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -5.2 (s-1) at plotted pD 4.7'
+  source_value: 'Fig. 1 118 C, reader B as written'
+- pot: larralde1995_fig1_ribose_118C_pD5p4_b
+  species: PENT
+  t_min: 0
+  value: 3.02e-05
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -4.52 (s-1) at plotted pD 5.71'
+  source_value: 'Fig. 1 118 C, reader B as written'
+- pot: larralde1995_fig1_ribose_118C_pD6p4_b
+  species: PENT
+  t_min: 0
+  value: 0.000309
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -3.51 (s-1) at plotted pD 6.61'
+  source_value: 'Fig. 1 118 C, reader B as written'
+- pot: larralde1995_fig1_ribose_118C_pD7p4_b
+  species: PENT
+  t_min: 0
+  value: 0.001072
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -2.97 (s-1) at plotted pD 7.61'
+  source_value: 'Fig. 1 118 C, reader B as written'
+- pot: larralde1995_fig1_ribose_118C_pD8p4_b
+  species: PENT
+  t_min: 0
+  value: 0.001862
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -2.73 (s-1) at plotted pD 8.61'
+  source_value: 'Fig. 1 118 C, reader B as written'
+- pot: larralde1995_fig1_ribose_100C_pD4p4_b
+  species: PENT
+  t_min: 0
+  value: 6.918e-07
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -6.16 (s-1) at plotted pD 4.6'
+  source_value: 'Fig. 1 100 C, reader B as written'
+- pot: larralde1995_fig1_ribose_100C_pD5p4_b
+  species: PENT
+  t_min: 0
+  value: 8.128e-06
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -5.09 (s-1) at plotted pD 5.61'
+  source_value: 'Fig. 1 100 C, reader B as written'
+- pot: larralde1995_fig1_ribose_100C_pD6p4_b
+  species: PENT
+  t_min: 0
+  value: 3.89e-05
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -4.41 (s-1) at plotted pD 6.55'
+  source_value: 'Fig. 1 100 C, reader B as written'
+- pot: larralde1995_fig1_ribose_100C_pD7p4_b
+  species: PENT
+  t_min: 0
+  value: 0.0001148
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -3.94 (s-1) at plotted pD 7.55'
+  source_value: 'Fig. 1 100 C, reader B as written'
+- pot: larralde1995_fig1_ribose_100C_pD8p4_b
+  species: PENT
+  t_min: 0
+  value: 0.000182
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -3.74 (s-1) at plotted pD 8.56'
+  source_value: 'Fig. 1 100 C, reader B as written'
+- pot: larralde1995_fig1_ribose_80C_pD4p4_b
+  species: PENT
+  t_min: 0
+  value: 1e-07
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -7.0 (s-1) at plotted pD 4.51'
+  source_value: 'Fig. 1 80 C, reader B as written'
+- pot: larralde1995_fig1_ribose_80C_pD5p4_b
+  species: PENT
+  t_min: 0
+  value: 6.918e-07
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -6.16 (s-1) at plotted pD 5.51'
+  source_value: 'Fig. 1 80 C, reader B as written'
+- pot: larralde1995_fig1_ribose_80C_pD6p4_b
+  species: PENT
+  t_min: 0
+  value: 7.586e-06
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -5.12 (s-1) at plotted pD 6.45'
+  source_value: 'Fig. 1 80 C, reader B as written'
+- pot: larralde1995_fig1_ribose_80C_pD7p4_b
+  species: PENT
+  t_min: 0
+  value: 1.905e-05
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -4.72 (s-1) at plotted pD 7.45'
+  source_value: 'Fig. 1 80 C, reader B as written'
+- pot: larralde1995_fig1_ribose_80C_pD8p4_b
+  species: PENT
+  t_min: 0
+  value: 2.291e-05
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -4.64 (s-1) at plotted pD 8.45'
+  source_value: 'Fig. 1 80 C, reader B as written'
+- pot: larralde1995_fig1_ribose_60C_pD5p4_b
+  species: PENT
+  t_min: 0
+  value: 1.047e-07
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -6.98 (s-1) at plotted pD 5.44'
+  source_value: 'Fig. 1 60 C, reader B as written'
+- pot: larralde1995_fig1_ribose_60C_pD6p4_b
+  species: PENT
+  t_min: 0
+  value: 5.012e-07
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -6.3 (s-1) at plotted pD 6.39'
+  source_value: 'Fig. 1 60 C, reader B as written'
+- pot: larralde1995_fig1_ribose_60C_pD7p4_b
+  species: PENT
+  t_min: 0
+  value: 2.951e-06
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -5.53 (s-1) at plotted pD 7.39'
+  source_value: 'Fig. 1 60 C, reader B as written'
+- pot: larralde1995_fig1_ribose_60C_pD8p4_b
+  species: PENT
+  t_min: 0
+  value: 4.266e-06
+  unit: per_s
+  read_error: 0.025
+  read_error_basis: 'reader B as written (dex; printed numbers: half the last printed digit)'
+  value_as_printed: 'log10 k = -5.37 (s-1) at plotted pD 8.39'
+  source_value: 'Fig. 1 60 C, reader B as written'
+text_checks:
+- quote: p. 8158 "rate (s-1) = 2.86 x 10-3 + 9.36 x 10-2 ([DPO4 2-] + [D2PO4 -])"
+  reading: in s-1, 7.54e-3 s-1 at 0.05 M (t1/2 92 s) contradicts the 73-min half-life, the Arrhenius fit and Fig. 2; in min-1, 1.26e-4 s-1, within ~0.1 dex of Fig. 2 but not 73 min. Unresolved by reader B.
+- quote: p. 8159 "The half-life of ribose decomposition at 100 C and pD 7.4 is 73 min."
+  reading: matches the fitted Arrhenius line (log k = -3.80), not the Fig. 2 100 C point (~84 min).
+- quote: p. 8159 "We measured the rate of ribose decomposition at pD 7.4, using a 0.05 M bicarbonate buffer. The rate is 0.52 that observed with a 0.05 M phosphate buffer."
+  reading: temperature not stated in the sentence (100 C presumed from context, unconfirmed).

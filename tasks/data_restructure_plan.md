@@ -3403,3 +3403,63 @@ one dossier (a small alias table for the renamed ones) or to a triage line that 
 - [ ] Next: a declared held-out CALIBRATION split (`FIT_HOLDOUT_DECLARATION.md` amendment) on which a
   discrepancy σ may be estimated without touching the scored out-of-sample rows; and the joint
   (k(145 °C), Ea) refit B55 ignores (it overstates width near the fit's own temperatures).
+
+### Follow-ups of 2026-11-01: batch-2 conflict resolutions, the forked-pool pH audit and the PR #36 review
+
+Batch 2 (resolve2_pyrbuf, resolve2_sulfur, Wolf 1977a; records in `docs/history/conflict_resolution_2026-11-01/`,
+red teams binding) landed as CF-092 - CF-100, notes on CF-011 / 031 / 072 / 076 / 087, EX-058, dossier corrections and
+`ENGINE_VS_LITERATURE.md` sec. 7. Nothing moved the engine. Open items:
+
+- [ ] **E13:** score or excuse the four pre-registered E13 TEST studies (shibamoto1977, low2007, vanlancker2012,
+  amranihemaimi1995; 8 contrasts in v2) before any E13 verdict (CF-087's no-silent-omission rule). Record UC Davis
+  (`ucdavis_shibamoto`, an E13 TEST lab) as seen-by-designer: resolve2_pyrbuf read Shibamoto 1976, Wong 1988 and
+  Bemis-Young 1993; every E13 score reports with and without it.
+- [ ] **E7:** before any E7 engine change, pre-register the candidate capture term with a reject / keep rule on the
+  UNSEEN E7 TEST contrasts (F30#11@kim1996b, F30#15@zamora2015, F30#16@hidalgo1993), stating whether each was viewed.
+  `heldout_zhang2021_table3.yml` and F25#17@us8920862 were viewed during resolve2 (seen-by-designer: excluded from
+  the E7 score or reported with and without); Xu 2011's lard contrast is E12 TEST F28#20 and must not calibrate E7
+  (CF-031).
+- [ ] **E5:** the kappa bands in CF-093 / CF-094 and EVL sec. 7 are PROVISIONAL until the E5 factor has its own
+  prereg and red team (non-saturating dilute law, hyperbolic factor on lumped steps, concentrated-matrix ceiling,
+  citrate arm as decider). No code before that.
+- [ ] **Split v3 (new dated version, never an edit of v1 / v2):** the F15#3 -> F07 move of the McGill ~5 % share
+  (CF-099; F15#3 is a v1 TEST contrast, so it was NOT edited); admitting the keyed held-out labs (Larralde, Lee 2024,
+  Zhang 2021: E5 3 -> 4, E13 4 -> 5, E7 3 -> 4); seen-by-designer annotations (above).
+- [ ] **CF-076 decider (designed):** one Arrhenius series of cysteine release from TTCA (or AThz) at fixed pH 4.5 and
+  6, 25 - 90 C, pH recorded at temperature; then the pKa titration. Optional checks: cluster 5's original bands at
+  maxiter 20 and a second DE seed (true search depth); the printed-rate E2c family's upper feasible Ea.
+- [ ] `results/literature/deep_research_backlog.json`: the van den Ouweland entry's description is wrong and its named
+  source (`03_thiamine_degradation.md` l. 590) is not on disk; give the generator an annotation overlay that survives
+  regeneration (CF-092).
+- [ ] `docs/reference/pathway_atlas/engine_vs_literature.yml` (the twin) does not carry EVL sec. 7; regenerate or
+  annotate when the twin is next rebuilt.
+- [ ] Owner calls from resolve2_pyrbuf: `lab_ids.yml` davies2005 -> `leeds_wedzicha` (recommended merge); new lab ids
+  `oklahoma_state_koehler`, `cerebos_edinburgh` (Saunders), `tu_berlin_baltes` (Piloty), `nankai_cui`. Membership
+  changes, so they belong to v3.
+- [ ] Author requests: Lee 2024 MPZ calibration (CF-097); Zhang 2022 (Hefei) n / SD and absolute charge; Xu 2011
+  whether bis(2-methyl-3-furyl) disulfide was seen (CF-031). PDF re-read: Shibamoto 1976's identical 0.5 / 1 / 2 h R
+  (CF-098). Papers wanted for CF-096 go to the private download queue, not this file.
+- [ ] Optional atlas text not applied in batch 2: the carboxylate specificity sentence in F01 / F02 / F14
+  condition_dependence (done in F03); F05's Cui 2026 end-point note and a Wolf plateau cell when keyed.
+
+From the forked-pool pH bug audit (scratchpad `forked_ph_bug_audit.md`):
+- [ ] One re-scoring artifact for the 20 entry-arm joint-fit records' Cao 2017 pH hold-out (serial re-prediction at
+  each recorded optimum, ~10 min; prototype `phbug_recompute.py`). R4f x3 flips fail -> pass (EX-030 stays rejected on
+  other grounds).
+- [ ] Correct `docs/guides/STATUS_AND_PLAN.md:33` and `docs/reference/experiment_register.yml:173` (arm E Cao pH
+  0.06 -> 0.080 RMS); annotate EX-030.
+- [ ] Separate issue: `predict_ph_acid_holdout.jobs_for` computes the pH-stat run's held hot pH with trunk solutes
+  off (6.891 vs 6.760 under the fit's setting); frozen sub-model 1 pH-stat FA / AA hold-outs affected; quantify; to
+  the conflicts queue.
+
+From the PR #36 review (scratchpad `a3p2_review.md`):
+- [ ] F2: `Config.update()` imports ~20 modules early; in the b51_1 / b58 / b61 / b62 / b63 ship-rule `_child` it runs
+  before `engine._B2_FIT_REPORT` is set, so `uncertainty.LAPLACE_PATH` / `PROFILE_PATH` bind to the shipped report.
+  Latent (no `_child` reads uncertainty). Fix: carry the report path in Config or set it before `update()`.
+- [ ] F3: before `MAILLARD_POOL=persistent` defaults on, the pool must carry or refuse non-default unkeyed state
+  (`_B2_FIT_REPORT`, ea_class_prior caches, `_REPORT_CACHE`).
+- [ ] L1: the coverage allowlist cannot see private names, monkeypatched callables, getattr-by-string, or
+  `src/*.py` outside kinetic_core; tighten the "numeric" category.
+- [ ] L2: the Config digest depends on dict insertion order (false mismatches only); canonicalise.
+- [ ] `fit_thiol_lolo.py` (merged from PR #35) still sets `sulfur.PH_COUPLING` and fj statics directly; migrate to
+  Config when H0's residual-only runner is built.
