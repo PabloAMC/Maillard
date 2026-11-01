@@ -36,8 +36,8 @@ cells:
     lab: "Reading (Mottram / Elmore) with Bristol"
     dossiers: [elmore2002_extraction.md]
     where: "Tables 2 and 3"
-  - key: {ph: mild_acid, temperature: high, water: dilute}
-    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: inert, buffer: phosphate, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: cysteine, oxygen: inert, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "four lipids (beef TG, beef PL, egg PC, egg PE) heated +/- Cys + ribose, 0.5 M phosphate pH 5.6, N2, 1 h: saturated n-aldehydes ~x0.5, 2-alkenals / 2,4-alkadienals > x0.1 (often to zero), 2-alkanones unchanged, 1-alcohols and 2-alkylfurans rise (to ~20x with PC); PE alone already gives > 10x less unsaturated aldehyde (its own amine)"
     status: operating
     quote: "The authors reject a general antioxidant effect (ketones unchanged)"
@@ -79,8 +79,8 @@ cells:
     dossiers: [xu2011_extraction.md]
     where: "Table 1; dossier header"
     conflict: CF-031
-  - key: {ph: mild_acid, temperature: high, water: dilute}
-    tags: {ph_basis: label, T_C: "100-130 (equivalent cooks)", sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: high, water: concentrated}
+    tags: {ph_basis: label, T_C: "100-130 (equivalent cooks)", sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "25 mM ribose + Cys, 0.5 M phosphate pH 5.5: buffer vs buffer + 10 % canola oil vs emulsion vs buffer + emulsifier. MFT at 100 C / 4 h: buffer 6.88, buffer+oil 0.72 (x1/9.6), emulsion 3.73 (x0.54 of buffer, x5.2 of buffer+oil); FFT: emulsion 2.74 vs buffer 1.28 (x2.1)"
     status: operating
     quote: "the amount of MFT in the emulsion was 5.1-, 3.8-, 3.5- and 2.9-fold higher"
@@ -153,7 +153,7 @@ cells:
     dossiers: [kim1998_extraction.md]
     where: "dossier header and sec. 1"
   - key: {ph: alkaline, temperature: low, water: dilute}
-    tags: {ph_basis: in_situ, T_C: "room temperature", sugar: none, amine: ammonia_ammonium, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    tags: {ph_basis: in_situ, T_C: "room temperature", sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "5-13C-2,4-decadienal and 15N-ammonia spiked into a defatted soy-flour slurry during isolate processing: dienal C5 -> pyridine C2, NH3 N -> ring N; pH 9 > 7 > 4.5"
     status: dominant
     quote: "shows the reaction runs at room temperature in water at pH 9"
@@ -173,16 +173,17 @@ cells:
     dossiers: [zamora2020_extraction.md]
     where: "Table 1; Table 2"
   # ---------------- lipid carbonyl as amino-acid degrader / amine and thiol consumer ----------------
-  - key: {ph: acid, temperature: high, water: low_aw}
-    tags: {ph_basis: label, T_C: 140, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled}
-    contrast: "Phe + eleven lipid oxidation products on sand, pH 3 citrate / pH 6 phosphate, N2 vs air, 1 h: air multiplies phenylacetaldehyde 4-8x and benzaldehyde 5-10x and divides phenylethylamine 1-7x (also F18)"
+  - key: {ph: acid, temperature: high, water: not_stated}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: other_free_aa, oxygen: [inert, air], buffer: carboxylate, metals: not_controlled, water_note: "110 uL aqueous (30 uL 0.3 M citrate + 80 uL water) on 600 mg sand, nominal solutes ~0.26 M; a_w not measured"}
+    contrast: "N2 vs air at pH 3 (citrate), 140 C, 1 h, Phe + each lipid on sand: PAC x1.5 - 9.3 under air (x1.4 - 9.4 net of Phe alone; decadienal x6.0); PEA RAISED by air for OC, EH, ED, OH, ON (x1.7 - 71), lowered for HD, DD (x0.3 - 0.4), flat for LOOH, HN; Phe alone gives PAC 0.45 -> 3.87 and PEA 0 -> 4.83 nmol/umol (N2 -> air)"
     status: operating
-    quote: "Air multiplies PAC by 4-8 (DD pH 3: 6.0; pH 6: 9.4)"
-    quantity: "under air the amine share is < 0.25 for every carbonyl at either pH"
+    quote: "| DD (2,4-decadienal) | 30.99 ± 3.37 | 11.23 ± 2.03 |"
+    quantity: "pH 3, air: PEA share of PEA + PAC + BZA 0.06 - 0.23 across the lipids (not netted of Phe alone); pH 6 (phosphate) is outside this cell's bin: there PAC air/N2 runs x1.1 - 9.4 and air lowers PEA for 9 of 11 lipids"
     evidence: within_study_factor
     lab: "Seville (Zamora / Hidalgo)"
     dossiers: [zamora2015_extraction.md]
     where: "Table 1 (12 x 12); text"
+    note: "Rewritten from Table 1: the earlier 'air multiplies PAC 4-8x, divides PEA 1-7x' (the dossier's summary line) misstates the table, carried pH-6 numbers and no Phe-alone netting; water was `low_aw` with no basis (red team 2026-11-01)."
   - key: {ph: neutral, temperature: low, water: dilute}
     tags: {ph_basis: label, T_C: "4-80", sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: not_stated, metals: not_controlled}
     contrast: "(E)-4,5-epoxy-(E)-2-heptenal + free lysine: browning (CIELAB) and fluorescence vs pH 3-12 and T 4-80 C; kB x116, kF x864 from pH 3 to 12"
@@ -248,7 +249,8 @@ condition_dependence: >-
   is labelled in two labs (Rutgers 15N; Kentucky 13C + 15N), runs at ROOM TEMPERATURE at pH 9 and needs free NH3 (pH
   9 > 7 > 4.5), is > 10x stronger in oil than in water, and its N comes from amide side chains (Gln 97 %) rather than
   the alpha-amine. Dienal + H2S -> 2-alkylthiophene: 92 % non-glucose carbon (CAMOLA, one lab). (4) O2 shifts the
-  lipid-carbonyl attack on amino acids from amine (decarboxylation) to aldehyde (Strecker) 4-8x (Seville, one lab).
+  lipid-carbonyl attack on amino acids toward the aldehyde (Strecker): PAC x1.1-9.4 under air across eleven lipids, while the
+  amine (decarboxylation) falls at pH 6 but rises for five lipids at pH 3 (Seville, one lab; Table 1 re-read 2026-11-01).
   (5) Lipid enals take thiols >> His > Lys at 20-23 C (Colorado, Graz, Nantes), thiol adducts of simple 2-alkenals
   are reversible within hours. ASSUMED / NOT SHOWN: any of this at low a_w with protein-bound amine; any rate at
   process temperature for enal + protein; any quantitative antioxidant effect of MRPs on lipid oxidation.

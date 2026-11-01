@@ -18,7 +18,12 @@
 # Status is CAPPED by evidence kind:
 #   - `dominant` only from labelling or fed_intermediate (or trapping with a mass balance);
 #   - otherwise at most `operating`;
-#   - `absent` only when the study's method could have seen the family's MARKER (see below).
+#   - `absent` only when the study's method could have seen the family's MARKER (see below), AND the cell says how in
+#     `detection_basis:` (a detection limit, a positive control, or a label pattern that would have shown the route).
+#     The gate fails an `absent` cell without it (red team 2026-11-01: 5 of 16 sampled `absent` cells were wrong, all
+#     a standing-level non-detect read as the route being off);
+#   - a product not seen by a method whose sensitivity is not shown is `not_detected`, never `absent`: it does not
+#     switch a step off (the product may be formed and then lost or captured faster than it accumulates).
 # Each family's atlas file starts with `markers:`, the observables that identify THIS route rather than another one
 # making the same product (e.g. a label pattern, a fed intermediate's product, a trapped intermediate). A product
 # detected without a marker is evidence that SOME route ran, and is recorded as `operating` for the family whose
@@ -28,19 +33,21 @@
 
 condition_bins:
   ph:          {acid: "< 4.5", mild_acid: "4.5 - 6", neutral: "6 - 7.5", alkaline: "> 7.5", not_stated: "pH not reported"}   # IN-SITU pH where measured; else label pH, flagged
-  temperature: {low: "<= 60 C", moderate: "60 - 100 C", high: "100 - 140 C", very_high: "> 140 C", not_stated: "T not reported"}
-  water:       {dilute: "aqueous, solutes < 0.5 M", concentrated: "aqueous, >= 0.5 M", intermediate_aw: "a_w 0.5 - 0.9", low_aw: "a_w < 0.5 / dry / pyrolysis", not_stated: "water not reported"}
+  temperature: {low: "<= 60 C", moderate: "> 60 - <= 100 C", high: "> 100 - <= 140 C", very_high: "> 140 C", not_stated: "T not reported"}   # recomputed from tags.T_C by the gate; a T range may sit in any bin it spans
+  water:       {dilute: "aqueous, solutes (reactants + buffer) < 0.5 M", concentrated: "aqueous, solutes >= 0.5 M (a 0.5 M buffer alone makes it concentrated; tags.buffer_M)", intermediate_aw: "a_w 0.5 - 0.9", low_aw: "a_w < 0.5 / dry / pyrolysis", not_stated: "water not reported"}
   sugar:       [pentose, hexose_aldose, hexose_ketose, disaccharide, none, not_stated]
-  amine:       [none, glycine, other_free_aa, cysteine, sulfur_aa_other, peptide, protein_bound_lys, protein_bound_nterm, ammonia_ammonium, not_stated]
-  oxygen:      [air, inert, not_stated]
-  buffer:      [none_unbuffered, phosphate, carboxylate, other_buffer, not_stated]   # phosphate kept apart: it catalyses (CF-011, Guan 2012)
-  metals:      [chelated, not_controlled, not_stated]
+  amine:       [none, glycine, other_free_aa, cysteine, sulfur_aa_other, peptide, protein_bound_lys, protein_bound_nterm, ammonia_ammonium, not_stated, other_amine]   # other_amine: amines that are not amino acids (propylamine, t-butylamine, piperidine, methylamine); other_free_aa: free amino acids other than glycine / cysteine (incl. proline, beta-alanine, N-blocked lysine)
+  oxygen:      [air, inert, not_stated]   # `air` / `inert` only where the source states the headspace or the sparge; a closed vial with no stated gas is not_stated
+  buffer:      [none_unbuffered, phosphate, carboxylate, other_buffer, not_stated]   # phosphate kept apart: it catalyses (CF-011, Guan 2012); mixed buffers (citrate-phosphate / McIlvaine) are other_buffer with a buffer_note
+  metals:      [chelated, not_controlled, not_stated]   # chelated = a chelator (DTPA, EDTA, ...) in the pot
 
 # Cell status vocabulary (for each family x condition combination studied):
 #   dominant   -- the main route to its products under these conditions (labelling / fed / trapping shows it carries most flux)
 #   operating  -- shown to occur, share not known or not dominant
 #   minor      -- shown to occur at a measured small share (< ~10 %)
-#   absent     -- looked for with a method able to see it, not found
+#   absent     -- looked for with a method able to see it, not found; REQUIRES `detection_basis:` on the cell
+#   not_detected -- the product / marker was not seen, but the method's sensitivity is not shown (no detection limit,
+#                 no positive control, no label pattern that would have shown the route); not evidence that it is off
 #   conflicting -- studies disagree (name the CF id)
 #   unattributed -- the product is formed but no marker says which family made it
 # Evidence kinds (strongest first): labelling, fed_intermediate, trapping, measured_intermediate, mass_balance,

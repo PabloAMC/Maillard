@@ -47,7 +47,7 @@ cells:
     dossiers: [zamora2006_extraction.md]
     where: "Fig. 1"
     conflict: CF-079
-  - key: {ph: acid, temperature: moderate, water: dilute}
+  - key: {ph: acid, temperature: low, water: dilute}
     tags: {ph_basis: label, T_C: 60, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "phenylpyruvic acid 0.5 umol + Phe 25 umol, 500 uL acetonitrile-citrate 2:1, pH 3, 24 h", solvent: "acetonitrile-buffer"}
     contrast: "fed keto acid: PA and benzaldehyde rise linearly; in the ED pots PPA falls ~64 % from 4 to 21 h, far more than this conversion explains"
     status: minor
@@ -71,7 +71,7 @@ cells:
     note: "CF-079: same lab, optimum pH 6.9 here (aqueous buffer, pH 4 - 10) vs <= 3 in Zamora 2006 (acetonitrile, pH 2 - 8)."
   # ---- alkadienals / hydroperoxides / oxoalkenals at 120 - 180 C ----------------------------------------------------
   - key: {ph: acid, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "2,4-decadienal or methyl 13-oxooctadeca-9,11-dienoate 50 mM + Phe 50 mM, 0.3 M citrate pH 3, closed tubes, air, 1 h"}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: carboxylate, metals: not_controlled, feed: "2,4-decadienal or methyl 13-oxooctadeca-9,11-dienoate 50 mM + Phe 50 mM, 0.3 M citrate pH 3, closed tubes, air, 1 h"}
     contrast: "air vs inert atmosphere (data not shown): almost no PA without O2; the dienal first oxidises to the epoxyalkenal (detected)"
     status: operating
     quote: "under an inert atmosphere almost nothing forms"
@@ -102,7 +102,7 @@ cells:
     dossiers: [zamora2008_extraction.md]
     where: "Fig. 1 and text; Fig. 3 (N2)"
   - key: {ph: acid, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: "120-180", sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "eight lipid carbonyls + Phe 20 mM each in 0.5 mL 0.3 M citrate pH 3, closed tubes; zero-order PA rates 120 - 180 C"}
+    tags: {ph_basis: label, T_C: "120-180", sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: carboxylate, metals: not_controlled, feed: "eight lipid carbonyls + Phe 20 mM each in 0.5 mL 0.3 M citrate pH 3, closed tubes; zero-order PA rates 120 - 180 C"}
     contrast: "air vs nitrogen, 2,4-decadienal: apparent Ea x2.8 higher without air"
     status: operating
     quote: "27.6 (air) → 78.0 (N₂)"
@@ -123,11 +123,11 @@ cells:
     where: "Table 2, sec. 3c"
     conflict: CF-078
     note: "HNE at 37 C here is 5.6 vs control 4.8 umol/mmol (about nothing) while Hidalgo 2005 gives 166 - 178 for HNE at 37 C in acetonitrile-water (same lab, solvent and buffer differ): registered in CF-078 (extended 2026-11-01)."
-  - key: {ph: acid, temperature: high, water: low_aw}
-    tags: {ph_basis: label, T_C: 140, sugar: none, amine: other_free_aa, oxygen: air, buffer: carboxylate, metals: not_controlled, feed: "11 lipid carbonyls / hydroperoxides + Phe, 10 umol each on 600 mg sand with 110 uL aqueous (0.3 M citrate pH 3 or phosphate pH 6), closed tubes, N2 or air, 1 h", water_note: "low-moisture sand slurry; a_w not measured"}
-    contrast: "air vs N2: PAC x4 - 8 (decadienal x6.0 at pH 3, x9.4 at pH 6); benzaldehyde x5 - 10; the amine PEA falls x1 - 7"
+  - key: {ph: acid, temperature: high, water: not_stated}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: carboxylate, metals: not_controlled, feed: "11 lipid carbonyls / hydroperoxides + Phe, 10 umol each on 600 mg sand with 110 uL aqueous (0.3 M citrate pH 3 or phosphate pH 6), closed tubes, N2 or air, 1 h", water_note: "110 uL aqueous on 600 mg sand, nominal solutes ~0.26 M; a_w not measured (was keyed low_aw with no basis, red team 2026-11-01)"}
+    contrast: "air vs N2, eleven lipids, raw Table 1 ratios: PAC x1.5 - 9.3 (pH 3) and x1.1 - 9.4 (pH 6; decadienal x6.0 / x9.4); benzaldehyde x1.9 - 20; PEA falls under air at pH 6 for 9 of 11 lipids but RISES at pH 3 for OC, EH, ED, OH, ON"
     status: operating
-    quote: "Air multiplies PAC by 4-8 (DD pH 3: 6.0; pH 6: 9.4)"
+    quote: "the amine share is below 0.25 for every carbonyl, at either pH"
     quantity: "PAC under air at pH 3: hydroperoxides 11 - 16 %, alkadienals 8 - 13 %, epoxyalkenals 10 - 12 %, oxoalkenals 4 - 7 %, HNE 1 % of Phe; under N2 0 - 4.2 %"
     evidence: within_study_factor
     lab: "Instituto de la Grasa, Seville (Hidalgo / Zamora)"
@@ -177,7 +177,7 @@ cells:
     dossiers: [hidalgo2013_extraction.md]
     where: "Fig. 2A, 2C; sec. 3.2"
     note: "the keto-acid donor is nearly O2-independent, unlike the alkadienals (x4 - 9)."
-  - key: {ph: acid, temperature: moderate, water: dilute}
+  - key: {ph: acid, temperature: low, water: dilute}
     tags: {ph_basis: label, T_C: 60, sugar: none, amine: glycine, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "glycine + 4,5-epoxy-2-decenal 62.5 mM each, 0.3 M citrate pH 3, 2 d, then Phe added, 3 d more; 37 vs 60 C", amine_also: other_free_aa}
     contrast: "37 vs 60 C: glyoxylic acid formed from Gly + ED and then consumed on Phe addition at 60 C; PA much higher at 60 C"
     status: operating

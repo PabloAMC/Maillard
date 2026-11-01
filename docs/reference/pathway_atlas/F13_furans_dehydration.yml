@@ -32,8 +32,8 @@ cells:
     dossiers: [zhou2025b_extraction.md]
     where: "Table 2"
     note: "initial pH 8, unbuffered water, pH falls during heating (the authors tie the furfural rise to the faster pH fall); in-situ pH not keyed here."
-  - key: {ph: mild_acid, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "fed C5 precursors + H2S (1 mmol each, 50 mL): ribose 0.008 %, 3-deoxyribosulose 0.08 %, furfural 0.48 % FFT"
     status: operating
     quote: "| 3-deoxyribosulose | **78.6** | **0.08** |"
@@ -63,7 +63,7 @@ cells:
     lab: "DFA Garching (Hofmann)"
     dossiers: [hofmann1999_extraction.md]
     where: "Fig. 9 (HMF column), text p. 116"
-  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+  - key: {ph: mild_acid, temperature: high, water: dilute}
     tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "pH 4.5 -> 6.5 (held, 0.2 M pyrophosphate): furfural > 1510x down (Gly), > 1070x (Lys), > 39x (Cys), 48.6x (Met)"
     status: operating
@@ -75,7 +75,7 @@ cells:
     where: "Table 3 (arithmetic sec.)"
     conflict: CF-001
     note: "pyrophosphate tagged other_buffer; 'held at pH' per the dossier header, no post-run pH printed."
-  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+  - key: {ph: mild_acid, temperature: high, water: dilute}
     tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "pH 4.5 -> 6.5: norfuraneol 16.1x down (Gly), 6.2x (Lys), 3.5x (Cys), 1.7x (Met)"
     status: operating
@@ -119,17 +119,17 @@ cells:
     dossiers: [nakamura2020_extraction.md]
     where: "Fig. 2, Fig. 9a/b"
     note: "same lab as mikami2017 (count once). 1-DX -> NF is the authors' scheme; the trap shows the 1-DX flux, not its NF share."
-  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+  - key: {ph: mild_acid, temperature: high, water: dilute}
     tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: none, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "ribose alone vs ribose-5-phosphate alone (no amine): NF trace vs 0.25 mol %"
-    status: absent
-    quote: "ribose alone makes no NF in 30 min at 140 C"
-    quantity: "norfuraneol < 0.004 mol % from ribose 50 mM alone (pyrophosphate pH 5.6 or unbuffered); 0.25 mol % from R5P without any amine"
+    status: minor
+    quote: "from ribose < 0.004 % (tr) or nd"
+    quantity: "norfuraneol from ribose alone 'tr' (detected, < 5 ug/mmol = < 0.004 mol %) in pyrophosphate and '-' (not detected, no limit) unbuffered, vs 0.25 mol % from R5P without amine; DCM recovery of NF unknown, so lower bounds"
     evidence: within_study_factor
     lab: "Reading (Mottram)"
     dossiers: [mottram2002_extraction.md]
     where: "Table 2"
-    note: "the method sees NF (quantified in the R5P pot), so 'absent' for the amine-free free-pentose NF route; R5P is a phosphate-ester route."
+    note: "was `absent` (absent audit 2026-11-01): Table 2 prints 'tr', i.e. detected below 5 ug/mmol, in the pyrophosphate arm, so the amine-free free-pentose NF route runs at a trace share (>= 60x below R5P), not zero; R5P is a phosphate-ester route."
   - key: {ph: neutral, temperature: moderate, water: concentrated}
     tags: {ph_basis: label, T_C: 90, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "water vs 0.2 M phosphate vs 0.2 M malonate: HDMF 0.06 / 2.6 / 0.6 ug/mmol xylose (Gly); Strecker-inactive GABA 0.4 vs + Gly 1.5"
@@ -142,7 +142,7 @@ cells:
     where: "Table 3 (medium), Table 2 (amine), Table 4 (pH 5 / 6 / 7: favoured at pH 7)"
     note: "1 M : 1 M, 90 C, 1 h, SIDA. Part of the phosphate x43 is pH drift in the unbuffered water arm; the malonate arm isolates catalysis."
   - key: {ph: acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, buffer_note: "citrate-phosphate (McIlvaine-type) buffer: phosphate present but mixed with citrate, so not the phosphate bin"}
     contrast: "pH 3 vs 5 (0.1 M citrate-phosphate, 48 h): HMF 92 vs 6 mg/L with arginine (x15); 5 vs 0.2 without"
     status: operating
     quote: "Glc + Arg at pH 3 gives 92 mg/L HMF = 0.73 mM"

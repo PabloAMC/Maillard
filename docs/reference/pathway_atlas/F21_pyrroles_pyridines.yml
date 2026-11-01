@@ -35,14 +35,14 @@ cells:
   - key: {ph: neutral, temperature: moderate, water: concentrated}
     tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled, feed: "seven amino acids 1 M (Asp, Phe 0.5 M) + methylglyoxal, 1 M phosphate pH 7, 30 min; also alanine + glyoxal, phenylglyoxal, 2,3-pentanedione"}
     contrast: "amino acid: pyrrole Ala 0.02, Asn 0.36, Leu 0.16, Asp 1.56, Glu 1.81 mol % (Asp / Glu pots fell below pH 7); dicarbonyl: no analogous pyrrole from glyoxal, phenylglyoxal or 2,3-pentanedione"
-    status: absent
+    status: not_detected
     quote: "No similar pyrrole from alanine with glyoxal, phenylglyoxal or 2,3-pentanedione."
-    quantity: "absent for the non-MGO dicarbonyls; present at 0.02-1.81 mol % with MGO"
+    quantity: "not detected for the non-MGO dicarbonyls (no standards); present at 0.02-1.81 mol % with MGO"
     evidence: fed_intermediate
     lab: "Ghent (De Kimpe) with Wageningen (van Boekel)"
     dossiers: [adams2008_extraction.md]
     where: "Table 2; text p. 2150"
-    note: "absent applies to the glyoxal / phenylglyoxal / pentanedione arms, where the GC-MS extract method that found compound 34 could have seen an analogue."
+    note: "absent applies to the glyoxal / phenylglyoxal / pentanedione arms, where the GC-MS extract method that found compound 34 could have seen an analogue. Status `not_detected` (was `absent`): no standard or detection limit for the glyoxal / phenylglyoxal / pentanedione analogues; the MGO pyrrole is a positive control for a different compound only (absent audit 2026-11-01)."
   - key: {ph: neutral, temperature: very_high, water: intermediate_aw}
     tags: {ph_basis: label, T_C: 180, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "glucose + 15N-glycine + one of eight amino acids on wheat starch, 12-14 % moisture, 1 h", ph_note: "pH 7 before freeze-drying; a_w not measured"}
     contrast: "glycine vs each competitor in the same pot: tested amino acids give < 35 % of pyrrole N; > 90 % of 1-methylpyrrole and 1-methylpyrrole-2-carboxaldehyde N is glycine's"
@@ -67,7 +67,7 @@ cells:
     where: "Table 1 class subtotals; text"
   # ---- pyridines from lipid enals / dienals + NH3 (also F30) -------------------------------------------------------
   - key: {ph: alkaline, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: "room temperature", sugar: none, amine: ammonia_ammonium, oxygen: air, buffer: none_unbuffered, metals: not_controlled, system: "defatted soy flour slurry 1 : 10 at pH 9 for 1 h, + 5-13C-2,4-decadienal 5.64 mM and / or 15N-ammonia 8.05 mM; buffer controls pH 4.5 / 7 / 9"}
+    tags: {ph_basis: label, T_C: "room temperature", sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "defatted soy flour slurry 1 : 10 at pH 9 for 1 h, + 5-13C-2,4-decadienal 5.64 mM and / or 15N-ammonia 8.05 mM; buffer controls pH 4.5 / 7 / 9"}
     contrast: "pH 9 > 7 > 4.5 in buffer and slurry (text ordering, figure values); dienal + NH3 4.27 ppm vs dienal alone 2.38 and NH3 alone 0.30 (Stressland)"
     status: dominant
     quote: "dienal C5 becomes pyridine C2 (the carbon bearing the pentyl)"
@@ -78,7 +78,7 @@ cells:
     where: "Tables 1-2; Figure 4 isotope evidence; text on Figure 5"
     note: "lipid-carbonyl route (also F30); 13C and 15N both fix the atom map: dominant for 2-pentylpyridine in this matrix."
   - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled, system: "2,4-decadienal 10 mM + Gly / Asp / Asn / Glu / Gln 50 mM in water, initial pH 7.5, sealed cylinder 1 h; amide-15N Asn and Gln"}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "2,4-decadienal 10 mM + Gly / Asp / Asn / Glu / Gln 50 mM in water, initial pH 7.5, sealed cylinder 1 h; amide-15N Asn and Gln"}
     contrast: "amide-labelled asparagine vs glutamine: pentylpyridine N 46.8 / 47.5 % (Asn) vs 97.0 / 99.5 % (Gln) from the amide; Asn > Gln > Asp > Glu > Gly in yield (figure)"
     status: dominant
     quote: "Asn 46.77 / 47.46; Gln 97.00 / 99.50"
@@ -110,7 +110,7 @@ cells:
     where: "Tables 1-2"
     note: "lipid-carbonyl route (also F30); D2O fixes exchangeable ring H only, so not a C / N label."
   - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 180, sugar: none, amine: sulfur_aa_other, oxygen: air, buffer: none_unbuffered, metals: not_controlled, system: "glutathione or cysteine ~50 mM + 2,4-decadienal ~13 mM, water, initial pH 7.5, sealed cylinder 1 h"}
+    tags: {ph_basis: label, T_C: 180, sugar: none, amine: sulfur_aa_other, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, system: "glutathione or cysteine ~50 mM + 2,4-decadienal ~13 mM, water, initial pH 7.5, sealed cylinder 1 h"}
     contrast: "glutathione vs cysteine: 2-pentylpyridine 1219 vs 501.5 mg/mol amine (half of GSH's volatiles)"
     status: operating
     quote: "2-Pentylpyridine from GSH: 1219 mg/mol = 8.2 mmol/mol GSH"
@@ -153,7 +153,7 @@ cells:
     where: "Table 1; text (pathway shares); dossier sec. 1"
     note: "dominant for glyoxal + ammonium at pH 4 (NMR product share of loss); the same lab as haan2009, so one lab for imidazoles."
   - key: {ph: mild_acid, temperature: low, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: "4-25", sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "methylglyoxal + glycine / serine / arginine / methylamine, D2O"}
+    tags: {ph_basis: in_situ, T_C: "4-25", sugar: none, amine: [glycine, other_free_aa, other_amine], oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "methylglyoxal + glycine / serine / arginine / methylamine, D2O", amine_note: "glycine / serine / arginine / methylamine (an alkylamine) arms"}
     contrast: "methylglyoxal + amino acids vs + ammonium: methylimidazole ~1 % of MG loss vs >= 70 %; MG loss > 20x amine loss (amine-catalysed aldol)"
     status: minor
     quote: "methylimidazole ~1 % yield"

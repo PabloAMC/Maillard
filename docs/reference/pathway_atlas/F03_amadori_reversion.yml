@@ -120,7 +120,7 @@ cells:
     dossiers: [zyzak1995_extraction.md]
     where: "Table II"
   - key: {ph: neutral, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: protein_bound_lys, amine_note: "N-alpha-formyl-fructoselysine", oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: protein_bound_lys, amine_note: "N-alpha-formyl-fructoselysine", oxygen: [air, inert], buffer: phosphate, metals: not_controlled}
     contrast: "air (no chelator) vs N2 + chelators: decomposition ~4x faster (ratio 4.0-5.3 across 10-200 mM phosphate) and the products shift to oxidative cleavage (CML, LL) with fewer hexoses; confounded by the chelators"
     status: operating
     quote: "air accelerates decomposition ~4x, but the products under air are CML / LL"

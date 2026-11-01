@@ -148,13 +148,14 @@ cells:
   - key: {ph: neutral, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: 120, sugar: hexose_ketose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "sugar identity, same pot (150 mM sugar + 3 % caseinate, 0.1 M phosphate pH 6.8): fructose-casein shows NO Heyns product (periodate -> CML assay) and no furosine, while lysine loss is as large as with glucose (7.2 vs 6.3 mM in 40 min)"
-    status: absent
+    status: not_detected
     quote: "Heyns not detected."
-    quantity: "Heyns below detection at 0-40 min; lysine lost 50 % (fructose) vs 42 % (glucose)"
+    quantity: "Heyns product not detected at 0-40 min (no detection limit given); lysine lost 50 % (fructose) vs 42 % (glucose)"
     evidence: measured_intermediate
     lab: "Wageningen (Brands / van Boekel)"
     dossiers: [brands2001_extraction.md]
     where: "Fig. 2, sec. 2 analytics, directional claim (iii)"
+    note: "was `absent`: a standing-level non-detect (periodate -> CML assay) with no detection limit, no Heyns standard and no positive control; the authors call the non-detect unexplained (red team 2026-11-01)."
   - key: {ph: neutral, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "time course: the casein Amadori compound (furosine x 3.1) peaks then falls while lysine keeps falling"
@@ -207,19 +208,19 @@ condition_dependence: >-
   Xia, one lab). Buffer: phosphate speeds both formation and breakdown, so the standing Amadori level is LOWER in
   phosphate (Potman; and F03 cells). Water: removing water while heating raises the GSH-xylose ARP yield ~8x (Tang,
   a_w unmeasured); real low-moisture matrices (malt, hazelnut) contain Amadori compounds but give no clean rate. Heyns:
-  fructose + casein shows no detectable Heyns product while losing as much lysine as glucose (Brands, absent), and in
+  fructose + casein shows no detectable Heyns product while losing as much lysine as glucose (Brands; not_detected, no detection limit), and in
   hazelnut the fitted Heyns route is ~5x slower than Amadori (unmeasured pools). The ketose-amine adduct therefore does
   NOT accumulate as a Heyns compound in the conditions studied; fructose's amine loss goes elsewhere. ASSUMED, not shown:
   any O2 effect on formation (no contrast); in-situ pH during formation (every pH axis above is a label pH).
 best_supported_regimes:
   - "neutral to mild acid / 80-130 C / dilute / glucose + glycine: operating, Ea ~85-97 kJ/mol, ~0.5 dec / pH (3 labs: Wageningen, Jiangnan, Unilever; mass balance + measured ARP)"
   - "early times in any aqueous aldose + amine pot: the Amadori compound carries ~all sugar consumed (2 labs, mass balance)"
-  - "fructose + protein lysine / neutral / 120 C: Heyns compound absent (1 lab, method able to see it)"
+  - "fructose + protein lysine / neutral / 120 C: Heyns compound not detected (1 lab; no detection limit or positive control, so not shown absent)"
 unknown_regimes:
   - "acid (< 4.5): no Amadori formation rate (Ge's pH 2-4 points are below resolution; Martins starts at 4.8)"
   - "very high T (> 140 C) in water: no measured ARP formation rate"
   - "intermediate a_w with a measured a_w: none (Tang's dehydration and the malt / hazelnut matrices have no a_w record)"
-  - "Heyns compound measured in any free-amino-acid fructose pot: none in the corpus; the Heyns side is only fitted (Knol 2010 bypasses it, Goncuoglu fits it) or absent (Brands)"
+  - "Heyns compound measured in any free-amino-acid fructose pot: none in the corpus; the Heyns side is only fitted (Knol 2010 bypasses it, Goncuoglu fits it) or not detected (Brands)"
   - "pentose + glycine Amadori FORMATION kinetics in water: only Zhou 2025b (alanine, concentration and pH unstated) and Tang (GSH); the glycine-xylose ARP is always fed purified"
   - "O2 / inert contrast and metal chelation for formation: none"
   - "phosphate concentration law for FORMATION at fixed pH with the ARP measured: none (Potman's phosphate arms have no ARP numbers)"
@@ -233,7 +234,7 @@ engine: >-
   DERIVED from k_schiff by a pinned 44.9x ratio; the sulfur lane's fed ARP is a species (ARP) with no formation step from
   xylose + glycine in the shipped engine (r_pent_amine -> PAMA exists but PENTOSE_AMINE_ENTRY is disabled); the
   Cys-Amadori route (r_cama_form) is disabled. Mismatches: (1) no Heyns step: fructose has no amine reaction in the trunk,
-  which agrees with Brands' 'Heyns absent' but leaves fructose's measured amine loss unmodelled. (2) No pH term on the
+  which agrees with Brands' Heyns non-detect but leaves fructose's measured amine loss unmodelled. (2) No pH term on the
   formation (Martins 2005b pD 0.50 for exactly this step, and Ge's steep rise above pH 8) while the engine applies pH only
   to the three Amadori-decay steps. (3) No phosphate term on formation or on breakdown (Potman, Davidek, Zyzak, Guan all
   show phosphate catalysis). (4) Glycine only: peptides form their ARP 5-7x faster (Xia) and other amino acids differ;

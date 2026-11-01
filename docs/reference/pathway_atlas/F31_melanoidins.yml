@@ -46,13 +46,15 @@ cells:
   - key: {ph: mild_acid, temperature: moderate, water: concentrated}
     tags: {ph_basis: label, T_C: 70, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
     contrast: "0.25 M glucose or maltose + 0.25 M glycine, 0.2 M acetate pH 5.5, heated to A470 = 2; 14C sugar / whole glycine / glycine C-1: about two-thirds of glycine enters DECARBOXYLATED"
-    status: dominant
+    status: operating
     quote: "C/N = 7.64 ± 0.21 by microanalysis and 7.61 by an independent radiochemical route"
     quantity: "C/N 7.64 is below the 1:1 glucose-glycine unit's 8 because ~2/3 of glycine carries one C per N"
     evidence: labelling
     lab: "Leeds (Wedzicha)"
     dossiers: [mundt2004_extraction.md]
     where: "Table (CHN); radiochemical section"
+    conflict: "unregistered: fang2009 (solid-state NMR, the same glucose-glycine chemistry) puts 27-33 % of glycine decarboxylated against Mundt's ~2/3"
+    note: "was `dominant`: the cell rests on polymer composition (C/N by microanalysis and radiochemistry), which says how incorporated glycine is built in, not what share of sugar or amine flux reaches the polymer (red team 2026-11-01)."
   - key: {ph: neutral, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: 120, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "glucose vs fructose (150 mM) on 3 % Na-caseinate, 0.1 M phosphate pH 6.8: [U-14C] sugar incorporated in the protein-bound brown polymer gives the extinction per mol sugar; not different between the sugars"
@@ -117,8 +119,8 @@ cells:
     lab: "Wageningen (van Boekel / Martins)"
     dossiers: [martins2003b_extraction.md]
     where: "Fig. 8; sec. 3.1.7 (p. 1659)"
-  - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: "100 (reflux 15 min)", sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: "100 (reflux 15 min)", sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "FED carbohydrate degradation products (1 mmol) + L-alanine, 0.5 M phosphate pH 7.0: browning ability by visual colour-dilution factor; C2 / furfural strongest, HMF and hydroxyacetone nearly inert"
     status: operating
     quote: "glycolaldehyde 1024; furfural 1024; 2-oxopropanal 256; 3-deoxy-2-pentosulose 256; 3-deoxy-2-hexosulose"
@@ -141,7 +143,7 @@ cells:
     where: "Results; Fig. 2C, Fig. 3; LC/MS m/z 251 / 267 / 363"
     conflict: CF-081
   - key: {ph: not_stated, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 80, sugar: not_stated, amine: not_stated, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 80, sugar: not_stated, amine: not_stated, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "a real coffee brew held at 80 C in a thermos vs the fresh brew"
     status: unattributed
     quote: "After 60 min the 2-furfurylthiol concentration decreased by a factor of more than four"
@@ -151,7 +153,7 @@ cells:
     dossiers: [hofmann2001_extraction.md]
     where: "Fig. 1; Results"
   - key: {ph: mild_acid, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 25, sugar: not_stated, amine: not_stated, oxygen: air, buffer: carboxylate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 25, sugar: not_stated, amine: not_stated, oxygen: [air, inert], buffer: carboxylate, metals: not_controlled}
     contrast: "AIR vs N2 (degassed, glovebox), reconstituted coffee 1 % solids, 10 mM acetate pH 5.2, ten thiols over 15 h: anaerobic attenuation 15-20x (aliphatic), > 40x (FFT)"
     status: operating
     quote: "In the absence of oxygen, linear aliphatic thiols are only"
@@ -162,7 +164,7 @@ cells:
     where: "Fig. 5; Discussion p. 4429-4430"
     conflict: CF-081
   - key: {ph: mild_acid, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 25, sugar: not_stated, amine: not_stated, oxygen: air, buffer: carboxylate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 25, sugar: not_stated, amine: not_stated, oxygen: [air, inert], buffer: carboxylate, metals: not_controlled}
     contrast: "CARBONYL BLOCKER: hydroxylamine pre-incubated 1 h with the coffee matrix protects aliphatic thiols, levelling off above 8-10 mmol/g; FFT still degraded at 7-21 mmol/g; N2 + hydroxylamine synergise (FFT 1/k_rel 45 / 4 / 93)"
     status: operating
     quote: "an indirect method to measure the number of electrophilic sites"
@@ -221,7 +223,7 @@ condition_dependence: >-
   ASSUMED: everything at cooking temperature (100-180 C) for the sink; melanoidin formation from protein-bound amine
   other than casein; the magnitude of the site density (CF-081, ~1.5 dex).
 best_supported_regimes:
-  - "formation, glucose + glycine, 70-125 C, aqueous or dry: amine + sugar co-incorporation with partial decarboxylation (dominant; labelling, 2 independent labs Iowa State + Leeds, plus Wageningen/Leeds on casein)"
+  - "formation, glucose + glycine, 70-125 C, aqueous or dry: amine + sugar co-incorporation with partial decarboxylation (operating: composition, not flux; 2 independent labs Iowa State + Leeds, plus Wageningen/Leeds on casein; decarboxylated share ~2/3 (Mundt) vs 27-33 % (Fang), unregistered conflict)"
   - "formation stoichiometry vs reactant ratio / water / sugar / T: within-study factors, 2 labs (Leeds; TU Berlin incl. BAM)"
   - "sink, coffee melanoidin + thiols at 25-30 C, pH 5.2-6: covalent thioether binding, O2-dependent (Garching trapping + Nestle factor; Freising qNMR)"
 unknown_regimes:

@@ -250,7 +250,7 @@ cells:
     dossiers: [zyzak1995_extraction.md]
     where: "Tables I-II"
   - key: {ph: neutral, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: protein_bound_lys, oxygen: not_stated, buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled vs chelated (DETAPAC = DTPA 100 uM arm)"}
     contrast: "glucose 50 mM + human serum albumin 50 mg/mL vs glucose alone (100 mM phosphate, pH 7.4): 3-DG initial rate 1.22 vs 0.49 uM/day; with 100 uM DETAPAC the HSA pot's 3-DG falls 1.05 -> 0.39; phosphate 10 -> 100 mM raises it 0.36 -> 1.22"
     status: unattributed
     quote: "HSA: GO and MGO < 0.5 µM throughout"

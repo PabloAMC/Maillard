@@ -15,8 +15,8 @@ markers:
   - "Carbon-source negatives: 3-thiophenethiol 95 % unlabelled from [13C5]ribose = cysteine carbon (Cerny 2003); thiophenone > 98 % unlabelled from [13C5]xylose with thiamin = thiamin carbon (Cerny 2007)."
 cells:
   # ---------------- alpha-mercaptoketones: labelling and fed cells ----------------
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: 3-mercapto-2-pentanone}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, product: 3-mercapto-2-pentanone}
     contrast: "1:1 ribose / [13C5]ribose (pot C): only M+0 and M+5"
     status: dominant
     quote: "3-mercapto-2-pentanone skeleton origin | 49 / 47; intermediates 4"
@@ -25,18 +25,19 @@ cells:
     lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
     dossiers: [cerny2003_extraction.md]
     where: "Table 2 row 8"
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: 2-mercapto-3-pentanone}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, product: 2-mercapto-3-pentanone}
     contrast: "ribose + Cys alone (pot C) vs fed norfuraneol pots (B, D): the NF-marker isomer appears only when NF is fed"
     status: absent
+    detection_basis: "positive control: the same HS-SPME-GC-MS analysis detected 2-mercapto-3-pentanone in the fed-norfuraneol pots B and D (cerny2003 Table 3 row 16)"
     quote: "2-mercapto-3-pentanone from ribose alone | **not detected**"
     quantity: "2-mercapto-3-pentanone not detected from ribose + Cys at 95 C / 4 h (HS-SPME saw both isomers elsewhere); confirmed in Cerny 2004 with [1-13C]ribose"
     evidence: labelling
     lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
     dossiers: [cerny2003_extraction.md]
     where: "p. 2715; dossier sec. 3 item 4"
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: "2-mercapto-3-pentanone / 3-mercapto-2-butanone"}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, product: "2-mercapto-3-pentanone / 3-mercapto-2-butanone"}
     contrast: "fed unlabelled norfuraneol vs [13C5]ribose at equimolar charge (pot D)"
     status: dominant
     quote: "2-mercapto-3-pentanone: norfuraneol route share | 96 % norfuraneol / 4 % ribose"
@@ -45,8 +46,8 @@ cells:
     lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
     dossiers: [cerny2003_extraction.md]
     where: "Table 3 rows 5, 8, 16"
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: 3-mercapto-2-butanone}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, product: 3-mercapto-2-butanone}
     contrast: "[1-13C]ribose: M+0 (C-1 lost) vs M+1 (C-5 lost)"
     status: operating
     quote: "**54 / 46 / 0**"
@@ -55,8 +56,8 @@ cells:
     lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
     dossiers: [cerny2004_extraction.md]
     where: "Table 1 row 5"
-  - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, thiamine: "50 mM", ph_range: "4.0 - 7.0", product: 2-mercapto-3-pentanone}
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, thiamine: "50 mM", ph_range: "4.0 - 7.0", product: 2-mercapto-3-pentanone}
     contrast: "pH 4.0 / 5.0 / 5.5 / 6.0 / 7.0: area 0 / 0 / 0 / 19 / 5; at pH 6 and 7 it is 94 and > 95 % [13C5]xylose-derived"
     status: dominant
     quote: "**6 / 94** | **<5 / >95**"
@@ -65,8 +66,8 @@ cells:
     lab: "Firmenich Geneva (Cerny / Briffod)"
     dossiers: [cerny2007_extraction.md]
     where: "Table 2 row 6; Table 4 row 6"
-  - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, thiamine: "50 mM", ph_range: "4.0 - 7.0", product: 3-mercapto-2-pentanone}
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, thiamine: "50 mM", ph_range: "4.0 - 7.0", product: 3-mercapto-2-pentanone}
     contrast: "pH 4 / 5 / 6 / 7: thiamin : xylose split 77:23 / 86:14 / 90:10 / 88:12; total area 145 -> 12"
     status: operating
     quote: "**77 / 23** | **86 / 14** | **90 / 10** | **88 / 12**"
@@ -136,8 +137,8 @@ cells:
     dossiers: [meynier1995_extraction.md]
     where: "Table 3 (page image)"
   # ---------------- thiazoles / thiazolines ----------------
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: thiazole}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, product: thiazole}
     contrast: "[1-13C]ribose: label at thiazole C-2"
     status: operating
     quote: "65 % labelled at C-2"
@@ -147,7 +148,7 @@ cells:
     dossiers: [cerny2004_extraction.md]
     where: "Table 1 row 3; dossier sec. 4"
   - key: {ph: alkaline, temperature: high, water: dilute}
-    tags: {ph_basis: label, T_C: 140, sugar: none, amine: ammonia_ammonium, oxygen: air, buffer: none_unbuffered, metals: not_controlled, ph_note: "not stated; aqueous (NH4)2S is alkaline (dossier flag 2)", product: "2-alkyl-3-thiazolines / thiazoles"}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, ph_note: "not stated; aqueous (NH4)2S is alkaline (dossier flag 2)", product: "2-alkyl-3-thiazolines / thiazoles"}
     contrast: "fed alkanal + acetol / acetoin vs + 2,3-dione, each + (NH4)2S 0.1 M, 30 min: thiazole / thiazoline ~0.002-0.05 (hydroxyketone) vs ~1 (dione)"
     status: operating
     quote: "thiazole / 3-thiazoline area ratio 0.002-0.05"
@@ -199,8 +200,8 @@ cells:
     lab: "University of Reading / Food Science Australia (Whitfield / Mottram)"
     dossiers: [whitfield2001_extraction.md]
     where: "Table 2"
-  - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, thiamine: "50 mM", product: "4,5-dihydro-2-methyl-3(2H)-thiophenone"}
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, thiamine: "50 mM", product: "4,5-dihydro-2-methyl-3(2H)-thiophenone"}
     contrast: "pH 4-5.5 vs 6-7: area 0 / 0 / 0 vs 372 / 470; >= 98 % unlabelled from [13C5]xylose"
     status: operating
     quote: "4,5-dihydro-2-methyl-3(2H)-thiophenone | 116; 121 | — | — | >99 / <1 | >98"
@@ -209,8 +210,8 @@ cells:
     lab: "Firmenich Geneva (Cerny / Briffod)"
     dossiers: [cerny2007_extraction.md]
     where: "Table 2 row 10; Table 4 row 10"
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, product: "3-thiophenethiol / 2-methylthiophene"}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, product: "3-thiophenethiol / 2-methylthiophene"}
     contrast: "1:1 ribose / [13C5]ribose: 3-thiophenethiol carries no ribose carbon; 2-methylthiophene 45 / 44 % intact"
     status: operating
     quote: "3-thiophenethiol is cysteine-derived | 95 % unlabelled, maximum 4 labels"
@@ -254,7 +255,7 @@ cells:
     where: "Table 2 rows 44-47; dossier sec. 4 F90-I"
     conflict: CF-031
   - key: {ph: alkaline, temperature: high, water: dilute}
-    tags: {ph_basis: label, T_C: 140, sugar: none, amine: ammonia_ammonium, oxygen: air, buffer: none_unbuffered, metals: not_controlled, ph_note: "not stated; (NH4)2S solution alkaline", product: 2-pentylthiophene}
+    tags: {ph_basis: label, T_C: 140, sugar: none, amine: ammonia_ammonium, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, ph_note: "not stated; (NH4)2S solution alkaline", product: 2-pentylthiophene}
     contrast: "aldehyde class with acetoin + (NH4)2S: alkanals -> 3-thiazolines; (E)-2-nonenal -> 3,4-diheptyl-2(5H)-thiophenone (18 + 11 %); (E,E)-2,4-nonadienal -> 2-pentylthiophene"
     status: operating
     quote: "**21 % of total area**"

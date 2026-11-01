@@ -26,7 +26,7 @@ markers:
 cells:
   # ======================= OXIDATION / DISULFIDES =======================
   - key: {ph: mild_acid, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 25, sugar: none, amine: none, oxygen: air, buffer: carboxylate, metals: not_controlled, matrix: "reconstituted coffee solids 1 % (10 g/L)"}
+    tags: {ph_basis: label, T_C: 25, sugar: none, amine: none, oxygen: [air, inert], buffer: carboxylate, metals: [not_controlled, chelated], matrix: "reconstituted coffee solids 1 % (10 g/L)", metals_note: "control vs DTPA 0.5 mmol/g arm"}
     contrast: "air vs N2 (glovebox, Ar-degassed buffer): loss slowed 15-20x for aliphatic thiols and >40x for FFT. Metal chelator DTPA 0.5 mmol/g: 1/k_rel 0.5-1.0 (no protection), so metal catalysis is NOT shown here."
     status: operating
     quote: "In the absence of oxygen, linear aliphatic thiols are only"
@@ -36,7 +36,7 @@ cells:
     dossiers: [charlesbernard2005_extraction.md, charlesbernard2005a_extraction.md]
     where: "Table 3; Discussion p. 4429-4431"
     conflict: CF-081
-  - key: {ph: neutral, temperature: high, water: dilute}
+  - key: {ph: neutral, temperature: moderate, water: dilute}
     tags: {ph_basis: not_stated, T_C: 100, sugar: none, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "+/- 4-vinylpyridine thiol trap, water vs benzene: in water with the trap the disulfides split back to thiols (86 % of MFT-MFT, >= 98 % of FFT-FFT gone); without the trap the MFT-MFT pool is conserved (95.5 %) and only scrambles (21.5 % mixed disulfide); in benzene nothing reacts."
     status: operating
@@ -46,7 +46,7 @@ cells:
     lab: "DFA Garching (Guth / Hofmann / Schieberle / Grosch)"
     dossiers: [guth1995_extraction.md]
     where: "Tables 2-3"
-  - key: {ph: mild_acid, temperature: high, water: dilute}
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
     tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled}
     contrast: "disulfide measured (SIDA) against the MFT missing from the reflux pot: the disulfide is not the in-pot sink."
     status: minor
@@ -128,7 +128,7 @@ cells:
     where: "p. 4294; Table 1"
   # ======================= CAPTURE (carbonyls, quinones, melanoidins, self-coupling) =======================
   - key: {ph: mild_acid, temperature: low, water: concentrated}
-    tags: {ph_basis: label, T_C: 50, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 50, sugar: pentose, amine: cysteine, oxygen: [air, inert], buffer: phosphate, metals: not_controlled}
     contrast: "air vs argon (process flavouring, 'almost no difference', data not presented) and MFT vs MB / FFT / DMFT: MFT is lost neither as thiol nor as (mixed) disulfide; H-D exchange 85 % at C-5 vs 10 % at C-4 (CH3OD / DCl, RT) points to acid-catalysed electrophilic coupling at C-5."
     status: operating
     quote: "The instability is not due to disulfide formation, but appears to result from electrophilic"
@@ -147,8 +147,8 @@ cells:
     lab: "Quest International Naarden (van Seeventer / Winkel / Kerler)"
     dossiers: [vanseeventer2001_extraction.md]
     where: "Table 1 entries 2-5; Fig. 1; p. 4293-4294"
-  - key: {ph: mild_acid, temperature: high, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "same pot refluxed then extracted vs stripped continuously by SDE (SIDA standards after boiling): x5.3 (thiamine) and x4.1 (thiamine + 325 umol Cys) more MFT with SDE, i.e. in-pot loss; +Cys lowers the inferred loss only weakly (lambda 0.044 -> 0.034 /min, CI includes no effect)."
     status: unattributed
     quote: "increased approximately 5- and 4-fold"
@@ -189,7 +189,7 @@ cells:
     dossiers: [hofmann2001_extraction.md, hofmann2002_extraction.md]
     where: "Fig. 1; p. 322"
   - key: {ph: mild_acid, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 25, sugar: none, amine: none, oxygen: air, buffer: carboxylate, metals: not_controlled, matrix: "reconstituted coffee solids 1 % (10 g/L)"}
+    tags: {ph_basis: label, T_C: 25, sugar: none, amine: none, oxygen: [air, inert], buffer: carboxylate, metals: not_controlled, matrix: "reconstituted coffee solids 1 % (10 g/L)"}
     contrast: "hydroxylamine pre-incubation (a carbonyl-competing nucleophile): loss slowed 10.5-13x (aliphatic) and 4x (FFT); combined with N2, 65-236x (aliphatic) and 93x (FFT): the two factors act jointly (nucleophilic addition to O2-dependent electrophiles)."
     status: operating
     quote: "the aliphatic thiols (e.g., ethanethiol) were dramatically stabilized when"
@@ -243,7 +243,7 @@ cells:
     where: "Table 1"
     conflict: CF-031
   # ======================= PROTEIN =======================
-  - key: {ph: neutral, temperature: high, water: dilute}
+  - key: {ph: neutral, temperature: moderate, water: dilute}
     tags: {ph_basis: not_stated, T_C: 100, sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, matrix: "egg albumin vs casein vs maltodextrin vs water, 67 g/L"}
     contrast: "matrix: with albumin the furyl disulfides are consumed (99 %) and come back partly as free thiol; with casein little; maltodextrin and water nil. Without protein the FREE thiol oxidises (disulfide increases); with protein no thiol oxidation is seen."
     status: operating
@@ -253,7 +253,7 @@ cells:
     lab: "Reading (Mottram / Szauman-Szumski / Dodson)"
     dossiers: [mottram1996_extraction.md]
     where: "Tables 1-2; p. 2350-2351"
-  - key: {ph: mild_acid, temperature: high, water: dilute}
+  - key: {ph: mild_acid, temperature: moderate, water: dilute}
     tags: {ph_basis: not_stated, T_C: 100, sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, matrix: "cooked minced beef 100 g in 750 mL"}
     contrast: "cooked beef vs water, spiked furyl disulfides through 2 h SDE: in beef ~80 % of each disulfide is consumed and returns mostly as free thiol; in water the disulfide survives and no thiol forms. SDE vs Tenax headspace on the same beef give opposite thiol / disulfide pictures."
     status: operating

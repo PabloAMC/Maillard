@@ -13,7 +13,7 @@ markers:
 cells:
   # ---- formation flux / trapping ------------------------------------------------------------------
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "propylamine Amadori compound fed (alkylamine; secondary N at C-1 as in amino-acid ARPs)", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_amine, amine_detail: "propylamine Amadori compound fed (alkylamine; secondary N at C-1 as in amino-acid ARPs)", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
     contrast: "pH 4.5 vs 7: 1-DG : 3-DG 8 : 5 -> 20 : 1 (x12.5; ~0.44 dex per pH unit)"
     status: operating
     quote: "1-DG : 3-DG = 20 : 1 (pH 7), 8 : 5 (pH 4.5)"
@@ -24,7 +24,7 @@ cells:
     where: "Experimental p. 242"
     note: "status downgraded dominant -> operating by pathway_atlas_gate validation (2026-11-01): the cap allows `dominant` from trapping only with a mass balance, and this cell states there is none on other fates; the 20 : 1 dominance over F06 stands in `quantity`."
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "propylamine Amadori compound fed", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_amine, amine_detail: "propylamine Amadori compound fed", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
     contrast: "pH 4.5 arm of the same pair"
     status: operating
     quote: "1-DG : 3-DG = 20 : 1 (pH 7), 8 : 5 (pH 4.5)"
@@ -34,7 +34,7 @@ cells:
     dossiers: [beck1988_extraction.md]
     where: "Experimental p. 242"
   - key: {ph: neutral, temperature: moderate, water: concentrated}
-    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "piperidino-fructose 0.5 M (tertiary N at C-1)", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_amine, amine_detail: "piperidino-fructose 0.5 M (tertiary N at C-1)", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
     contrast: "structure factor: secondary-amine ARP goes to 1-DG 'even at pH 4.5'; primary-amine ARP 8 : 5 at pH 4.5"
     status: dominant
     quote: "most of 7 had been transformed into 5"
@@ -161,13 +161,14 @@ cells:
   - key: {ph: neutral, temperature: high, water: dilute}
     tags: {ph_basis: label, T_C: "100 / 120", sugar: pentose, amine: peptide, amine_detail: "fed xylose-glycylglycine ARP", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
     contrast: "none (1-DX never reported)"
-    status: absent
+    status: not_detected
     quote: "only 3-deoxyxylosone was observed"
     quantity: "1-DX not observed as a STANDING level, no LOD; given a 1-DX lifetime of minutes this does not exclude F07 flux"
     evidence: measured_intermediate
     lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
     dossiers: [cui2022_extraction.md]
     where: "dossier sec. 1 (a)"
+    note: "was `absent`: an ex-situ OPD standing level with no detection limit; a standing level shows presence only (this file's markers), and the cell's own quantity leaves F07 flux open (red team 2026-11-01)."
   # ---- kinetic fits -------------------------------------------------------------------------------
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
     tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "standing_level (fit infers flux)"}
@@ -189,8 +190,8 @@ cells:
     lab: "Wageningen (Martins / van Boekel)"
     dossiers: [martins2005_extraction.md]
     where: "Table 2"
-  - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "standing_level (fit infers flux)"}
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, operator: "standing_level (fit infers flux)"}
     contrast: "within-fit split 51 : 1 over F06"
     status: operating
     quote: "ARP -> 1-deoxyosone 2.79e-2 /min"
@@ -201,7 +202,7 @@ cells:
     where: "text p. 370"
   # ---- amine-free / food / acid -------------------------------------------------------------------
   - key: {ph: not_stated, temperature: very_high, water: low_aw}
-    tags: {ph_basis: none, T_C: "160 / 180 / 200", sugar: hexose_aldose, amine: none, oxygen: air, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    tags: {ph_basis: none, T_C: "160 / 180 / 200", sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
     contrast: "+- NaCl"
     status: operating
     quote: "4.6 ± 0.5, 4.0 ± 1.2 and 3.9 ± 1.0"
@@ -213,14 +214,15 @@ cells:
   - key: {ph: acid, temperature: low, water: concentrated}
     tags: {ph_basis: label, T_C: "27 / 37 (24-week storage)", sugar: [disaccharide, hexose_aldose, hexose_ketose], sugar_note: "disaccharide + hexoses (juices)", amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, operator: standing_level}
     contrast: "three juices; 1-DG in none"
-    status: absent
+    status: not_detected
     quote: "1-DG was not detected in the acidic samples"
     quantity: "1-DG below detection in apple, orange, peach at pH 3.4 (LC-MS of quinoxalines; standing level only)"
     evidence: measured_intermediate
     lab: "Hacettepe (Gokmen)"
     dossiers: [gursulaktag2020_extraction.md]
     where: "sec. 3.2 (iii)"
-  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    note: "was `absent`: no 1-DG standard or detection limit (the dossier's LOD table covers 3-DG, glucosone, MGO, GO only); a standing level in stored juice (absent audit 2026-11-01)."
+  - key: {ph: neutral, temperature: high, water: concentrated}
     tags: {ph_basis: label, T_C: 101, sugar: [pentose, hexose_aldose], sugar_note: "pentose and hexose_aldose (paired)", amine: other_free_aa, amine_detail: "L-alanine ~1.2-1.5 M", oxygen: air, buffer: phosphate, metals: not_controlled, operator: standing_level}
     contrast: "xylose vs glucose"
     status: operating

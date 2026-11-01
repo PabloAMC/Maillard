@@ -30,8 +30,8 @@ cells:
     lab: "Firmenich (Cerny)"
     dossiers: [cerny2007b_extraction.md]
     where: "Table 5; dossier sec. 6 item 3"
-  - key: {ph: acid, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "pH ladder (xylose 150 / Cys 50 / thiamin 50 mM, 0.5 M phosphate): pH 4 arm"
     status: dominant
     quote: "**75 / 25** | **85 / 15**"
@@ -40,8 +40,8 @@ cells:
     lab: "Firmenich (Cerny)"
     dossiers: [cerny2007_extraction.md]
     where: "Table 4; dossier sec. 4.2"
-  - key: {ph: mild_acid, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "pH 5 arm, and the concentration contrast at pH 5: halving all three precursors moves the thiamine share of MFT 54 -> 85 % (3-MP 60 -> 86 %): dilution favours the first-order thiamine route"
     status: dominant
     quote: "2-methyl-3-furanthiol | 114; 119 | 54 : 46 | 85 : 15"
@@ -51,8 +51,8 @@ cells:
     dossiers: [cerny2007_extraction.md]
     where: "Tables 4 and 5"
     conflict: CF-007
-  - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "pH 6 and 7 arms: the rise of total MFT at pH 6 is carried by the thiamine route; the isotopomer split moves at most 2.5x over pH 4-7"
     status: dominant
     quote: "the pH-6 peak of total MFT is a THIAMIN peak"
@@ -72,7 +72,7 @@ cells:
     dossiers: [wang2012_extraction.md]
     where: "Table 3; dossier sec. 1"
   - key: {ph: mild_acid, temperature: high, water: intermediate_aw}
-    tags: {ph_basis: in_situ, T_C: 120, sugar: hexose_aldose, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    tags: {ph_basis: in_situ, T_C: 120, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "100 % 34S-cysteine + thiamine in a bouillon blend (MSG, NaCl, IMP, glucose; a_w 0.83; pH 5.5-5.8 before AND after): cysteine supplies ~8 % of MFT sulfur; without thiamine no MFT (< ~2.3 % of the thiamine pots); + 6 mM xylose changes neither MFT nor the 34S share"
     status: dominant
     quote: "A net **7.5 to 8.0 %** of the MFT formed contained labeled sulfur"
@@ -117,6 +117,7 @@ cells:
     tags: {ph_basis: label, T_C: "~100", sugar: none, amine: none, oxygen: inert, buffer: phosphate, metals: not_controlled}
     contrast: "same series, acid side: H2S from thiamine vanishes below pH 6 (methylene-blue assay could see it)"
     status: absent
+    detection_basis: "positive control: the same methylene-blue H2S assay in the same series measured 3 - 7 mmol/mol thiamine at pH 6.5 and 47 - 71 at pH 7; ~0 at pH 5.5 and <= 3 at pH 6.0"
     quote: "≈ 0 at pH 5.5, ≤ 3 at pH 6.0, 3–7 at pH 6.5"
     quantity: "mmol H2S per mol thiamine in 30 min; thiamine loss <= 2 % below pH 6"
     evidence: within_study_factor
@@ -127,6 +128,7 @@ cells:
     tags: {ph_basis: label, T_C: "~100", sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "+ cysteine 1 mg/mL (70x thiamine) vs none, pH 5-7, sealed: no thiamine lost in 30 min, all H2S from cysteine; oxidants destroy thiamine with no H2S"
     status: absent
+    detection_basis: "positive control: the same thiamine assay measured a 14 - 17 % loss in 30 min at pH 7 without cysteine; 0 % with cysteine"
     quote: "cysteine (1 mg/mL) stops thiamine degradation completely for 30 min at pH 5–7"
     quantity: "thiamine loss 0 % with cysteine vs 14-17 % without (pH 7, 30 min)"
     evidence: within_study_factor
@@ -166,7 +168,7 @@ cells:
     dossiers: [hofmann1998_reconciliation.md]
     where: "Table 10 (p. 240)"
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "meat-like concentrations (thiamine 60 uM, ribose 1.3 mM, Cys 0.65 mM; 0.2 M pyrophosphate pH 5.7; 2 h reflux, SIDA): thiamine alone 4.7 ug MFT vs ribose + Cys < 0.1 ug; + cysteine raises thiamine-MFT 7x; Cys dose optimum then fall 9.5x by 5.4 mM"
     status: operating
     quote: "thiamine >> ribose + cysteine; cysteine raises thiamine-MFT x7 (Method I)"
@@ -177,9 +179,10 @@ cells:
     where: "Tables II, III, VIII"
     conflict: "CF-089 (Arnold: cysteine stops thiamine degradation)"
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "thiamine pyrophosphate (30 umol) vs free thiamine, +/- cysteine; IMP + Cys"
     status: absent
+    detection_basis: "detection bound + positive control: SIDA bound MF-SH < 0.5 ug for thiamine pyrophosphate (+/- Cys) against 4.7 / 33 ug from thiamine (+/- Cys) by the same method and pot design"
     quote: "thiamine pyrophosphate inactive; IMP + Cys only traces"
     quantity: "MFT < 0.5 ug from TPP (+/- Cys) vs 4.7 / 33 ug from thiamine (SIDA)"
     evidence: within_study_factor
@@ -187,7 +190,7 @@ cells:
     dossiers: [grosch1992_extraction.md]
     where: "Table II rows 2, 5"
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "thiamine + exogenous H2S (3 flushes, 26.8 mmol) vs thiamine alone: MFT x3; ribose / R5P / ribulose / IMP + H2S <= 0.4 ug"
     status: operating
     quote: "15 ± 7 µg vs 4.7 without (x3)"
@@ -207,7 +210,7 @@ cells:
     dossiers: [thomas2014_extraction.md]
     where: "Fig. 2 (p. 211)"
   - key: {ph: acid, temperature: high, water: concentrated}
-    tags: {ph_basis: label, T_C: 135, sugar: none, amine: none, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 135, sugar: none, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "~1 M thiamine HCl in water (pH 2.3) vs propylene glycol (a water-free solvent), 30 min: MFT only in water; its disulfide dominant in PG"
     status: operating
     quote: "2-Methyl-3-furanthiol: M in water, absent in PG."
@@ -217,7 +220,7 @@ cells:
     dossiers: [hartman1984_extraction.md]
     where: "Table I (p. 1016)"
   - key: {ph: mild_acid, temperature: high, water: intermediate_aw}
-    tags: {ph_basis: label, T_C: 135, sugar: none, amine: sulfur_aa_other, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 135, sugar: none, amine: sulfur_aa_other, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "thiamine + cystine + ascorbic acid + MSG over water:PG mixes (a_w 0 - 0.75 by vessel pressure): sulfur volatiles incl. MFT peak near a_w 0.72; thiamine vs cystine sulfur not separated"
     status: unattributed
     quote: "All sulfur volatiles peak near a_w 0.72."
@@ -228,7 +231,7 @@ cells:
     where: "Figs. 2, 6"
   # --- glutathione ------------------------------------------------------------------------------------------
   - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 160, sugar: hexose_aldose, amine: peptide, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 160, sugar: hexose_aldose, amine: peptide, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "initial pH 3 / 6 / 8 (GSH 24 mM + glucose, 2 h): sulfur volatiles pH 6 ~ pH 8 > pH 3; glutathionesulfonic acid gives no sulfur compound at any pH"
     status: operating
     quote: "total sulfur volatiles at pH 6 ≈ pH 8 ≈ 2.1× pH 3"

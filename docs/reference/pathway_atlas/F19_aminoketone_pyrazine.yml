@@ -114,7 +114,7 @@ cells:
     conflict: CF-019
     note: "no marker: product only, so operating at most; the R > 4 of these pots is the F20 cell (CF-077)."
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: "75 / 85 / 95", sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, system: "0.1 M lysine-HCl + 0.1 M glucose, citrate-phosphate pH 5.0"}
+    tags: {ph_basis: label, T_C: "75 / 85 / 95", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, system: "0.1 M lysine-HCl + 0.1 M glucose, citrate-phosphate pH 5.0", buffer_note: "citrate-phosphate (McIlvaine-type) buffer: phosphate present but mixed with citrate, so not the phosphate bin"}
     contrast: "pH 5 vs 7: pyrazine k x7-27 lower, methylpyrazine x99-215 lower; dimethylpyrazines below quantification at pH 5"
     status: operating
     quote: "quantification of the dimethylpyrazines could only be accomplished at"
@@ -135,7 +135,7 @@ cells:
     where: "Table I, Table III"
     conflict: CF-019
   - key: {ph: neutral, temperature: moderate, water: intermediate_aw}
-    tags: {ph_basis: label, T_C: 95, sugar: disaccharide, amine: protein_bound_lys, oxygen: air, buffer: none_unbuffered, metals: not_controlled, matrix: "nonfat dry milk equilibrated to a_w 0.32 / 0.58 / 0.75 / 0.84", ph_note: "not measured (milk powder)"}
+    tags: {ph_basis: label, T_C: 95, sugar: disaccharide, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, matrix: "nonfat dry milk equilibrated to a_w 0.32 / 0.58 / 0.75 / 0.84", ph_note: "not measured (milk powder)"}
     contrast: "a_w 0.32 -> 0.58 -> 0.75 -> 0.84: pyrazine rate 1 : 2.10 : 4.23 : 4.07; methylpyrazine 1 : 2.31 : 3.27 : 2.65 (maximum near 0.75)"
     status: operating
     quote: "range of 0.32 to 0.75 and a maximum occurred at aw of 0.75"
@@ -146,7 +146,7 @@ cells:
     where: "Tables IV-V"
     note: "the only a_w ladder for pyrazines; free amino acids of milk vs protein-bound lysine not separated."
   - key: {ph: neutral, temperature: moderate, water: low_aw}
-    tags: {ph_basis: label, T_C: 90, sugar: none, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled, feed: "1,3-dihydroxyacetone (in-situ MGO) + each of 20 amino acids, 5 + 5 mmol ground neat", ph_note: "no solvent, no pH"}
+    tags: {ph_basis: label, T_C: 90, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "1,3-dihydroxyacetone (in-situ MGO) + each of 20 amino acids, 5 + 5 mmol ground neat", ph_note: "no solvent, no pH"}
     contrast: "amino-acid identity: 2,5(6)-DMP area Arg 493.9 > Lys 385.5 > Gly 330.5 ... Pro 1.6 (lowest; secondary amine)"
     status: operating
     quote: 'proline gives "very little pyrazines"'

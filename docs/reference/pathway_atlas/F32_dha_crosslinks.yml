@@ -14,7 +14,7 @@ markers:
   - "NON-markers: H2S, NH3 or pyruvate from cysteine (also made by cysteine's Strecker degradation and thermolysis, F22); loss of available lysine (also glycation, F05)."
 cells:
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: "80-90 (10 and 120 min)", sugar: none, amine: protein_bound_lys, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    tags: {ph_basis: label, T_C: "80-90 (10 and 120 min)", sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "TIME and T in heated whey proteins (alpha-LA, beta-LG, whey model, 3 % WPI; 55 mM HEPES pH 7.0): lanthionine < LOD unheated and at 80 C / 10 min for beta-LG; whey model 1.6 (80 C 10 min) -> 2.0 (90 C 10 min) -> 11.8 uM (90 C 120 min)"
     status: operating
     quote: "11.8 ± 1.7"
@@ -24,7 +24,7 @@ cells:
     dossiers: [li2022_extraction.md]
     where: "Table 4"
   - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: "160 (160 s, UHT-like)", sugar: none, amine: protein_bound_lys, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    tags: {ph_basis: label, T_C: "160 (160 s, UHT-like)", sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "UHT-like 160 C / 160 s vs 90 C / 120 min: lanthionine WPI 11.5 -> 21.4 uM; whey model 11.8 -> 14.4 uM; beta-LG 3.9 -> 4.2 uM"
     status: operating
     quote: "21.4 ± 5.0"
@@ -34,7 +34,7 @@ cells:
     dossiers: [li2022_extraction.md]
     where: "Table 4"
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: "80-160", sugar: none, amine: protein_bound_lys, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    tags: {ph_basis: label, T_C: "80-160", sugar: none, amine: protein_bound_lys, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "DHA on beta-LG Cys66 by LC-MS/MS, relative to its own maximum: ND unheated -> 10 % (80 C 10 min) -> 15 % (90 C 10 min) -> 46 % (90 C 120 min) -> 100 % (UHT-like); Cys160 DHA 3 -> 4 -> 6 -> 25 -> 100 %"
     status: operating
     quote: "Cys66 DHA ND / 10.0 ± 1.8 / 14.9 ± 3.2"

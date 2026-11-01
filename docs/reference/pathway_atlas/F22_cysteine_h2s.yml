@@ -80,7 +80,7 @@ cells:
     dossiers: [obata1960_extraction.md]
     where: "Table I (p. 564); dossier sec. 4a, 4b"
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 90, sugar: none, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 90, sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "time 10 vs 120 min in a sealed vial: 10-min H2S matches the Zheng & Ho constant, 120-min H2S is 0.26-0.34x the no-sink prediction (net loss of H2S or its precursor)"
     status: operating
     quote: "At 10 min it matches the engine's Zheng & Ho constant (1.1-1.5×)"
@@ -90,7 +90,7 @@ cells:
     dossiers: [li2022_extraction.md]
     where: "Table 1; dossier sec. 1 and the engine comparison table"
   - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 160, sugar: none, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 160, sugar: none, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "160 C / 160 s against Zheng & Ho extrapolated 50 C beyond their range: measured 0.05x the extrapolation"
     status: operating
     quote: "44.8 µM (160 °C, 160 s; n = 1)"
@@ -100,7 +100,7 @@ cells:
     dossiers: [li2022_extraction.md]
     where: "Table 1; dossier engine comparison table"
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: "80-90", sugar: none, amine: peptide, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: "80-90", sugar: none, amine: peptide, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "protein-bound cysteine residues (beta-lactoglobulin, whey) vs time / T: H2S is a small share of all Cys reactions"
     status: minor
     quote: "β-LG | 0.25 % | 0.93 % | 1.93 % | 1.81 %"
@@ -162,7 +162,7 @@ cells:
     where: "zhang1991b Table II (p. 762)"
     conflict: CF-008
   - key: {ph: neutral, temperature: very_high, water: concentrated}
-    tags: {ph_basis: label, T_C: 160, sugar: hexose_aldose, amine: cysteine, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 160, sugar: hexose_aldose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "cysteine vs cysteinesulfinic / cysteic acid with glucose (0.48 M; sulfinic arm 0.04 M): sulfur volatiles 46 % of the Cys extract vs none from either oxidised form, which switch to pyrazines and HMF"
     status: operating
     quote: "both oxidised forms give **no sulfur volatile at all**"
@@ -171,8 +171,8 @@ cells:
     lab: "Rutgers (Ho)"
     dossiers: [tai1997_extraction.md]
     where: "Table 1 (p. 3588); dossier sec. 3"
-  - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "pH 4 -> 7 (0.5 M phosphate; thiamin also present): H2S-derived products (2-mercapto-3-pentanone, thiophenone, dithianone, acetyldithiolane) appear only at pH 6-7; authors: stronger H2S involvement at higher pH. H2S not measured; thiamin is a second sulfide source"
     status: unattributed
     quote: "the stronger involvement of hydrogen sulfide at higher pH"

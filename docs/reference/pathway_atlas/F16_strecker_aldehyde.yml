@@ -26,7 +26,7 @@ cells:
     conflict: CF-073
     note: "CF-073 is the magnitude conflict with Weenen 2001 (x14 - 20 more PA from MGO at pH 3.2, SDE)."
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "same four fed donors, argon vs air"}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: not_controlled, feed: "same four fed donors, argon vs air"}
     contrast: "air vs argon: PA x0.92 (MGO), x0.90 (GO), x0.93 (3-DG), x0.85 (glucosone); the acid goes up x1.6 - 5.5 (F17)"
     status: dominant
     quote: "the ALDEHYDE from a dicarbonyl is oxygen-independent"
@@ -35,8 +35,8 @@ cells:
     lab: "DFA Garching (Hofmann / Schieberle)"
     dossiers: [hofmann2000_extraction.md]
     where: "Table 4, dossier sec. 4 row H00-R4"
-  - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "MGO 0.1 M + Phe 0.1 M, 0.5 M phosphate, closed vial, 10 - 500 min"}
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "MGO 0.1 M + Phe 0.1 M, 0.5 M phosphate, closed vial, 10 - 500 min"}
     contrast: "time: (PA + PAA) share of Phe consumed falls 18 % (10 min) -> 5.8 % (500 min); PA plateaus at 120 - 240 min"
     status: dominant
     quote: "Strecker products account for at most ~18 % of the amino acid consumed by MGO"
@@ -58,8 +58,8 @@ cells:
     dossiers: [hofmann2000_extraction.md]
     where: "Fig. 4 (text p. 438 - 439), dossier sec. 4 row H00-R9"
     note: "the only pH series of a fed-dicarbonyl Strecker ALDEHYDE with a sugar-derived donor on disk; one lab, figure-only."
-  - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 98, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "glucose 0.1 M + Phe / Ala / Leu 0.1 M, 0.5 M phosphate, reflux 30 min"}
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 98, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "glucose 0.1 M + Phe / Ala / Leu 0.1 M, 0.5 M phosphate, reflux 30 min"}
     contrast: "amino acid identity in the glucose pot: Leu / Phe aldehyde 2.1; fed MGO vs glucose at 30 min: PA x23 (Table 3 vs Table 2)"
     status: unattributed
     quote: "PA 0.042, PAA 0.029, acetaldehyde 0.048"
@@ -86,6 +86,7 @@ cells:
     tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled, feed: "glucose + Phe ~26 mM, 50 mM citrate pH 3.2, SDE 2 h"}
     contrast: "glucose + Phe at pH 7.0 (100 mM phosphate) 0.15 % vs pH 3.2 (citrate) 0.006 % = x25 (buffer co-varies); at pH 3.2 glucose + Phe = Phe alone"
     status: absent
+    detection_basis: "blank as floor: the same SDE-GC quantified phenylacetaldehyde at 0.006 % in the Phe-alone pot and 0.15 % at pH 7; glucose + Phe at pH 3.2 equals the blank (but Table III prints 0.03 %, CF-020)"
     quote: "Phe alone = Glc + Phe at pH 3.2 (0.006 %)"
     quantity: "0.006 % PA (= the Phe-alone blank) at pH 3.2; 0.15 % at pH 7.0"
     evidence: within_study_factor

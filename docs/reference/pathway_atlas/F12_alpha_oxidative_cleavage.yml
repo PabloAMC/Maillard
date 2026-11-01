@@ -12,7 +12,7 @@ markers:
   - "Fed alpha-diketone (2,3-pentanedione) gives acetic + propanoic acid and NO propanal / acetaldehyde: rules out hydrolytic alpha-cleavage, consistent with oxidative alpha-cleavage (davidek2006a, O2 not varied)."
 cells:
   - key: {ph: alkaline, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: [air, inert], buffer: phosphate, metals: not_controlled}
     contrast: "18O2 atmosphere vs argon / air: acetic total unchanged (30.5 / 32.3 / 33.5 mmol/L); under 18O2 one third mono-18O"
     status: operating
     quote: "acetic acid 22.9 +- 0.3 unlabelled + 10.6 +- 0.2 mono-18O"
@@ -23,7 +23,7 @@ cells:
     where: "Table 1 and 18O2 MS (90 C, 15 h, pH 8, 0.2 M phosphate, 0.1 M glucose + glycine)"
     note: "the atmosphere is pure 18O2 (93-94 %), not air; in air the share is not measured."
   - key: {ph: alkaline, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 90, sugar: hexose_aldose, amine: glycine, oxygen: [air, inert], buffer: phosphate, metals: not_controlled}
     contrast: "argon vs air vs 18O2: C4-aldonic acids x3 (air) and x7 (O2) over argon"
     status: operating
     quote: "C4-aldonic acids ~0.7 / 2.2 / 5.1 mmol/L under argon / air / 18O2"
@@ -55,7 +55,7 @@ cells:
     where: "Fig. 5 (B)"
     note: "the authors assign it to oxidative alpha-cleavage (detailed in davidek2006b); O2 not varied, so this is the product pattern only."
   - key: {ph: neutral, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled (aerated arm) vs chelated (deaerated arm: He-degassed buffer + 1 mM DTPA); O2 and chelation confounded"}
     contrast: "aerated vs deaerated (+ DTPA): glyceric acid 171 vs 40 mmol/mol 1-DG at 12 h (x4.3); erythrulose 43 vs 162; threosone x2.8 with air"
     status: operating
     quote: "glyceric acid 171 vs 40 mmol/mol (37 °C, 12 h, aerated vs deaerated)"
@@ -67,18 +67,18 @@ cells:
     conflict: CF-080
     note: "O2 confounded with chelation (DTPA only in the deaerated arm)."
   - key: {ph: neutral, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled (aerated arm) vs chelated (deaerated arm: He-degassed buffer + 1 mM DTPA); O2 and chelation confounded"}
     contrast: "aerated vs deaerated: acetic acid NOT higher under air (550 vs 650 mmol/mol at 24 h); erythronic acid not found"
-    status: absent
+    status: not_detected
     quote: "of minor relevance or even nonexistent"
     quantity: "the Baeyer-Villiger acetic + erythronic acid branch of 1-DG not detected at 37 C, pH 7.4"
     evidence: within_study_factor
     lab: "Glomb, Martin-Luther-University Halle-Wittenberg"
     dossiers: [voigt2009_extraction.md]
     where: "sec. 4 (mechanism evidence), text"
-    note: "the authors' own hedge ('minor or nonexistent'); the marker (erythronic acid) was looked for, so 'absent' at this condition; detection limit not printed."
+    note: "the authors' own hedge ('minor or nonexistent'); the marker (erythronic acid) was looked for, so 'absent' at this condition; detection limit not printed. Status `not_detected` (was `absent`): erythronic acid was looked for but no detection limit or positive control is printed; the acetic-acid air-vs-deaerated contrast is the stronger evidence (absent audit 2026-11-01)."
   - key: {ph: neutral, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled (aerated arm) vs chelated (deaerated arm: He-degassed buffer + 1 mM DTPA); O2 and chelation confounded"}
     contrast: "aerated vs deaerated at 37 and 50 C: lactic acid x6.4 (37 C) and x4.2 (50 C) with air; gamma-pyranone the other way (146 vs 67 at 12 h, 37 C)"
     status: operating
     quote: "166 vs 26 mmol/mol 1-DG (37 °C), 118 vs 28 (50 °C)"
@@ -101,7 +101,7 @@ cells:
     where: "Table 1 and text"
     note: "agrees with davidek2006b (glyceric acid from glucose C-4..C-6): a cross-laboratory match on the glyceric-acid carbon origin, not on the O2 share."
   - key: {ph: neutral, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 37, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled (aerated arm) vs chelated (deaerated arm: He-degassed buffer + 1 mM DTPA); O2 and chelation confounded"}
     contrast: "aerated vs deaerated (+ DTPA): N-epsilon-formyl x1.4, glycerinyl x1.7 with air; acetyl and lactoyl amides unchanged"
     status: operating
     quote: "formyl 1.47 vs 1.08 and glycerinyl 0.15 vs 0.09 mmol/mol at 72 h"

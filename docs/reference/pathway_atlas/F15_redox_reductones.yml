@@ -67,7 +67,7 @@ cells:
     dossiers: [kobayasi1965_extraction.md]
     where: "text and Chart 1-2"
     note: "two numbers, short communication; water, 0.2 M; pH not stated (placeholder)."
-  - key: {ph: mild_acid, temperature: very_high, water: dilute}
+  - key: {ph: mild_acid, temperature: high, water: dilute}
     tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "pH 4.5 -> 6.5 (0.2 M pyrophosphate, held within 0.2): 2-furylmethanol up 2.8x (Gly), 1.4x (Lys), > 90x (Cys), 1.6x (Met) while furfural falls 39-1500x"
     status: operating
@@ -90,7 +90,7 @@ cells:
     where: "Table 1, Fig. 4"
     note: "no pH reported (placeholder bin); a reductive furfural sink of the order of the furfural pool."
   - key: {ph: alkaline, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "pure norfuraneol (1.7-1.8 mM, 0.2 M phosphate pH 8, 100 C); in the xylose + lysine pot no net loss at pH 6, >= 1.8e-3 /min at pH 7"
     status: operating
     quote: "k ≈ 0.032 min⁻¹ (t½ ≈ 22 min)"
@@ -100,7 +100,7 @@ cells:
     dossiers: [mikami2017_extraction.md]
     where: "Fig. 6B (figure-read), arithmetic 1-4"
   - key: {ph: alkaline, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: [air, inert], buffer: phosphate, metals: [not_controlled, chelated], metals_note: "control vs + 40 mM DTPA arm (and a degassed arm)"}
     contrast: "control vs + DTPA vs degassed (pure norfuraneol, pH 8, 100 C, 3 h): decomposition and diacetyl formation suppressed by both"
     status: operating
     quote: "is abolished by a chelator or by degassing"
@@ -110,8 +110,8 @@ cells:
     dossiers: [nakamura2020_extraction.md]
     where: "Fig. 7 (chromatograms) and text"
     note: "same lab as mikami2017; makes Mikami's 0.032 /min an AEROBIC, non-chelated rate."
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "[1-13C]ribose and [13C5]ribose CAMOLA pots, cysteine, 0.5 M phosphate pH 5, 4 h"
     status: unattributed
     quote: "the route itself is proposed, not demonstrated"
@@ -120,7 +120,7 @@ cells:
     lab: "Nestle Research Center, Lausanne (Cerny / Davidek)"
     dossiers: [cerny2003_extraction.md, cerny2004_extraction.md]
     where: "cerny2003 Figs. 2 and 6, Flags 2; cerny2004 table"
-    note: "the label is equally consistent with an intact-C5 route via norfuraneol-free 1-deoxypentosone chemistry; concentration of the 500 mg charge not printed (dilute assumed)."
+    note: "the label is equally consistent with an intact-C5 route via norfuraneol-free 1-deoxypentosone chemistry; concentration of the 500 mg charge not printed; the 0.5 M buffer alone makes the water bin concentrated."
 condition_dependence: >-
   SHOWN (all single-laboratory or qualitative): (1) Strecker-coupled reduction: alpha-amino acids give more
   1,4-dideoxyosone than beta-alanine (Ledl; no numbers, temperature unstated). (2) Amine-free reductants exist: a mM

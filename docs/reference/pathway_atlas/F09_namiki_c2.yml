@@ -11,7 +11,7 @@ markers:
   - "Not markers by themselves: early glyoxal timing (Wolff autoxidation of the sugar is also early); chelator / O2 sensitivity (shared with F08); pyrazine labelling of a GO pool (Zhou 2025b) that does not say whether the C2 came from the Schiff base, the free sugar or the ARP."
 cells:
   - key: {ph: not_stated, temperature: moderate, water: low_aw}
-    tags: {ph_basis: none, T_C: "~78 (ethanol reflux)", medium: "95 % ethanol", sugar: hexose_aldose, amine: other_free_aa, amine_detail: "t-butylamine / cyclohexylamine 1 M (alkylamines, not amino acids)", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "TLC densitometry at sampling (glyoxal after on-plate hydrolysis)"}
+    tags: {ph_basis: none, T_C: "~78 (ethanol reflux)", medium: "95 % ethanol", sugar: hexose_aldose, amine: other_amine, amine_detail: "t-butylamine / cyclohexylamine 1 M (alkylamines, not amino acids)", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "TLC densitometry at sampling (glyoxal after on-plate hydrolysis)"}
     contrast: "time order inside one pot: C2 imine max at 20 min; 3-DG ~0.07 mM at 15 min, ~1 mM at 35 min; radical and A420 later"
     status: operating
     quote: "This precedes either the initial formation of 3-deoxyglucosone"
@@ -21,7 +21,7 @@ cells:
     dossiers: [hayashi1980_extraction.md]
     where: "Fig. 5; isolation (sec. 3)"
   - key: {ph: not_stated, temperature: moderate, water: low_aw}
-    tags: {ph_basis: none, T_C: "~78 (ethanol reflux)", medium: "95 % ethanol", sugar: hexose_aldose, amine: [other_free_aa, none], amine_detail: "t-butylamine 0.5-32 equiv; NaOH 0-1 M; glucose in 0.1 M NaOH alone", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "TLC densitometry"}
+    tags: {ph_basis: none, T_C: "~78 (ethanol reflux)", medium: "95 % ethanol", sugar: hexose_aldose, amine: [other_amine, none], amine_detail: "t-butylamine 0.5-32 equiv; NaOH 0-1 M; glucose in 0.1 M NaOH alone", oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: "TLC densitometry"}
     contrast: "amine : glucose 0.5 -> 10 equiv: C2 imine rises ~10x, then falls at 32; NaOH (no extra amine) slightly lowers it; alkali without amine gives none"
     status: operating
     quote: "glucose in 0.1 M NaOH alone gives no glycolaldehyde, glyoxal or glycolic acid"
@@ -30,7 +30,7 @@ cells:
     lab: "Nagoya (Hayashi / Namiki)"
     dossiers: [hayashi1980_extraction.md]
     where: "Fig. 6A-B; text"
-  - key: {ph: neutral, temperature: moderate, water: concentrated}
+  - key: {ph: neutral, temperature: high, water: concentrated}
     tags: {ph_basis: label, T_C: 101, sugar: [hexose_aldose, pentose], sugar_note: "hexose_aldose and pentose (paired)", amine: other_free_aa, amine_detail: "L-alanine ~1.2-1.5 M", oxygen: air, buffer: phosphate, metals: not_controlled, operator: standing_level}
     contrast: "time order: glyoxal peaks at 5 min (xylose) / 10 min (glucose), before 3-DX (10 min) / 3-DG (40 min); xylose glyoxal gone by 40 min"
     status: unattributed

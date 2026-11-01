@@ -20,7 +20,7 @@ markers:
 cells:
   # ---- formation flux (in-situ trap) ------------------------------------------------------------
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "propylamine Amadori compound fed (alkylamine, no carboxylate)", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_amine, amine_detail: "propylamine Amadori compound fed (alkylamine, no carboxylate)", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
     contrast: "pH 4.5 vs 7 (same ARP, same in-situ OPD): 3-DG share of the trapped C6 osones 38 % -> 5 % [derived here]; 1-DG : 3-DG x12.5"
     status: minor
     quote: "1-DG : 3-DG = 20 : 1 (pH 7), 8 : 5 (pH 4.5)"
@@ -30,7 +30,7 @@ cells:
     dossiers: [beck1988_extraction.md]
     where: "Experimental p. 242; dossier sec. 1 (a), sec. 3"
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "propylamine Amadori compound fed", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_amine, amine_detail: "propylamine Amadori compound fed", oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: formation_flux}
     contrast: "pH 4.5 arm of the same pair"
     status: operating
     quote: "1-DG : 3-DG = 20 : 1 (pH 7), 8 : 5 (pH 4.5)"
@@ -60,7 +60,7 @@ cells:
     dossiers: [gobert2009_extraction.md]
     where: "Table 1; Figs. 3-4 (prose values)"
   # ---- fed parents, standing levels ---------------------------------------------------------------
-  - key: {ph: neutral, temperature: moderate, water: concentrated}
+  - key: {ph: neutral, temperature: high, water: concentrated}
     tags: {ph_basis: label, T_C: 101, sugar: [pentose, hexose_aldose], sugar_note: "pentose and hexose_aldose (paired pots)", amine: other_free_aa, amine_detail: "L-alanine ~1.2-1.5 M", oxygen: air, buffer: phosphate, metals: not_controlled, operator: standing_level}
     contrast: "xylose vs glucose, same pot design: pentose osones peak at 10 min, hexose at 40 min"
     status: operating
@@ -163,8 +163,8 @@ cells:
     lab: "Wageningen (Martins / van Boekel)"
     dossiers: [martins2005b_extraction.md]
     where: "Tables 2-3"
-  - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, operator: "standing_level (fit infers flux)"}
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: glycine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, operator: "standing_level (fit infers flux)"}
     contrast: "within-fit split: ARP -> 3-DX 5.50e-4 vs ARP -> 1-DX 2.79e-2 /min (1 : 51)"
     status: operating
     quote: "ARP -> 3-deoxyosone 5.50e-4 /min at 100 C, pH 6"
@@ -175,7 +175,7 @@ cells:
     where: "text p. 370"
   # ---- low water, amine-free and food matrices ---------------------------------------------------
   - key: {ph: not_stated, temperature: very_high, water: low_aw}
-    tags: {ph_basis: none, T_C: "160 / 180 / 200", sugar: hexose_aldose, amine: none, oxygen: air, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
+    tags: {ph_basis: none, T_C: "160 / 180 / 200", sugar: hexose_aldose, amine: none, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, operator: standing_level}
     contrast: "glucose vs glucose + NaCl glass: 3-DG / 1-DG 4.6 / 4.0 / 3.9 -> 5.6 / 5.2 / 5.3"
     status: operating
     quote: "4.6 ± 0.5, 4.0 ± 1.2 and 3.9 ± 1.0"

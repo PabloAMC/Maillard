@@ -13,8 +13,8 @@ markers:
   - "Negative markers for rival routes: fed norfuraneol contributes 0 % of FFT (Cerny 2003 pot D); fed [2H4]-furfural / d2-furfuryl alcohol label transfer in roasted coffee (Poisson 2009; Cerny 2021)."
 cells:
   # ---------------- labelling and fed-intermediate cells (the route markers) ----------------
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "fed 2-furaldehyde vs [13C5]ribose at equimolar charge (72.5 umol each, Cys 48.3 umol), same pot: FFT 92 : 8 furfural : ribose"
     status: dominant
     quote: "92 % from 2-furaldehyde / 8 % from ribose at equimolar loading"
@@ -23,8 +23,8 @@ cells:
     lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
     dossiers: [cerny2003_extraction.md]
     where: "p. 2718 running text (pot E); dossier sec. 4 table"
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "[1-13C]ribose vs unlabelled ribose: the label lands on the FFT CH2SH carbon in every molecule"
     status: dominant
     quote: "100 % singly labelled at CH2SH"
@@ -33,8 +33,8 @@ cells:
     lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
     dossiers: [cerny2004_extraction.md]
     where: "Table 1 row 9; dossier sec. 4"
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "1:1 ribose / [13C5]ribose (pot C): FFT and furfural intact C5"
     status: operating
     quote: "only unlabeled or completely labeled compound in a ratio of 1:1"
@@ -43,8 +43,8 @@ cells:
     lab: "Nestle Research Center Lausanne (Cerny / Davidek)"
     dossiers: [cerny2003_extraction.md]
     where: "Table 2 rows 6 and 9; p. 2715"
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, route: "rival: norfuraneol"}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 95, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, route: "rival: norfuraneol"}
     contrast: "fed unlabelled norfuraneol vs [13C5]ribose at equimolar charge (pot D): norfuraneol gives no FFT"
     status: dominant
     quote: "| 9 | 2-furfurylthiol | 114 | 5 | 0 | 100 |"
@@ -75,27 +75,29 @@ cells:
     dossiers: [zhai2023jafc_extraction.md]
     where: "Fig. 6a; dossier sec. 11.1 / table row 33"
     conflict: CF-065
-  - key: {ph: mild_acid, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, ph_range: "4.0 - 6.0", thiamine: "50 mM"}
-    contrast: "[13C5]xylose + Cys + thiamin at pH 4 / 5 / 6: FFT stays fully pentose-derived while MFT is 75-90 % thiamin-derived"
-    status: dominant
+  - key: {ph: mild_acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, ph_range: "5.0 - 6.0", thiamine: "50 mM"}
+    contrast: "[13C5]xylose + Cys + thiamin at pH 5 / 6 (pH 4: F25#22): FFT stays fully pentose-derived while MFT is 85-90 % thiamin-derived"
+    status: operating
     quote: "**<1 / >99** | **<1 / >99** | **<1 / >99**"
-    quantity: ">99 % of FFT is M+5 from [13C5]xylose at pH 4, 5 and 6 (intact pentose C5; furfural also >99 % xylose)"
+    quantity: ">99 % of FFT is M+5 from [13C5]xylose at pH 5 and 6 (furfural also >99 % xylose): FFT is sugar-derived; a fully labelled pot cannot say which route carried the C5"
     evidence: labelling
     lab: "Firmenich Geneva (Cerny / Briffod)"
     dossiers: [cerny2007_extraction.md]
     where: "Table 4 row 7"
+    note: "was `dominant`: a pot whose pentose is 100 % labelled shows only that FFT is sugar-derived (the rule F23 / F24 apply to themselves), so at most `operating`; the pH 4 arm, in the `acid` bin, is now its own cell F25#22 (red team 2026-11-01)."
   # ---------------- within-study factor cells: pH ----------------
-  - key: {ph: neutral, temperature: very_high, water: dilute}
-    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, ph_range: "4.0 - 7.0", thiamine: "50 mM"}
+  - key: {ph: neutral, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, ph_range: "4.0 - 7.0", thiamine: "50 mM"}
     contrast: "pH 4.0 / 5.0 / 5.5 / 6.0 / 7.0: FFT 431 / 368 / 364 / 185 / 0 (area); furfural 208 / 158 / 165 / 0 / 0"
-    status: absent
+    status: not_detected
     quote: "**2-furfurylthiol** | 915 | **431** | **368** | **364** | **185** | **0**"
     quantity: "FFT 'no traceable amounts' at pH 7.0 (falls 2.3x pH 4 -> 6); furfural already 0 at pH 6 while FFT is still 185"
     evidence: within_study_factor
     lab: "Firmenich Geneva (Cerny / Briffod)"
     dossiers: [cerny2007_extraction.md]
     where: "Table 2 row 7 (GC-TIC areas, triplicate, SD <= 23 %)"
+    note: "was `absent`: GC-TIC area 0 at pH 7 is a standing-level zero with no detection limit, and F28 documents near-total FFT loss in such pots, so FFT formation at pH 7 is not excluded (red team 2026-11-01)."
   - key: {ph: neutral, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled, ph_range: "3.0 - 7.0"}
     contrast: "ribose + Cys at pH 3.0 / 5.0 / 7.0 (and dry 180 C): FFT 22.9 / 12.1 / 1.2 ug (dry 97.2)"
@@ -164,8 +166,8 @@ cells:
     where: "Fig. 2 (digitised), dossier sec. 3b"
     conflict: CF-015
   # ---------------- within-study factor cells: lipid ----------------
-  - key: {ph: mild_acid, temperature: high, water: dilute}
-    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: inert, buffer: phosphate, metals: not_controlled, lipid: "BTG / BPL / PC / PE 15 g/L vs none"}
+  - key: {ph: mild_acid, temperature: high, water: concentrated}
+    tags: {ph_basis: in_situ, T_C: 140, sugar: pentose, amine: cysteine, oxygen: inert, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, lipid: "BTG / BPL / PC / PE 15 g/L vs none"}
     contrast: "lipid present vs absent (Cys 41 / ribose 30 mM, 0.5 M phosphate pH 5.6, fell < 0.5): FFT x0.62-0.72 with every lipid; furfural x0.49-0.80"
     status: operating
     quote: "equally reduced by all four lipids"
@@ -212,13 +214,14 @@ cells:
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
     tags: {ph_basis: label, T_C: 100, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, conc: "ribose 1.34 / Cys 0.65 mM (meat-like)"}
     contrast: "meat-like dilution (ribose 1.34 + Cys 0.65 mM, pyrophosphate pH 5.7, reflux 2 h) vs Farmer-style 30 / 41 mM, 140 C: FFT n.d. vs 0.4 ug"
-    status: absent
+    status: not_detected
     quote: "< 0.1, FF-SH n.d., MF-S2 n.d. (n = 3)"
-    quantity: "no FFT by SIDA at meat-like concentrations, 100 C, 2 h (the same method saw 1.2-2.3 ug in thiamine pots)"
+    quantity: "no FFT by SIDA at meat-like concentrations, 100 C, 2 h ('n.d.', no limit printed; the same method saw 1.2-2.3 ug in thiamine pots)"
     evidence: within_study_factor
     lab: "DFA Garching (Grosch / Zeiler-Hilgart)"
     dossiers: [grosch1992_extraction.md]
     where: "Table V no. 1 (Method I)"
+    note: "was `absent`: 'n.d.' carries no number, and FFT is lost fast in such pots (F28), so a zero after 2 h reflux does not exclude formation; the thiamine pots show the SIDA sees FFT at 1.2-2.3 ug (absent audit 2026-11-01)."
   - key: {ph: mild_acid, temperature: moderate, water: dilute}
     tags: {ph_basis: label, T_C: 100, sugar: none, amine: none, oxygen: not_stated, buffer: other_buffer, metals: not_controlled, route: "rival: thiamine (no pentose, no cysteine)"}
     contrast: "thiamine 60 uM alone, pyrophosphate pH 5.7, 2 h boiling: FFT formed without any pentose or cysteine"
@@ -249,6 +252,28 @@ cells:
     lab: "Firmenich Shanghai (Cerny)"
     dossiers: [cerny2021_extraction.md]
     where: "Table 3"
+  - key: {ph: acid, temperature: very_high, water: concentrated}
+    tags: {ph_basis: label, T_C: 145, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, ph_range: "4.0", thiamine: "50 mM"}
+    contrast: "pH 4 arm of the Cerny 2007 [13C5]xylose + Cys + thiamin ladder (pH 5 / 6: F25#6): FFT fully pentose-derived while MFT is 75 % thiamin-derived"
+    status: operating
+    quote: "**<1 / >99** | **<1 / >99** | **<1 / >99**"
+    quantity: ">99 % of FFT is M+5 from [13C5]xylose at pH 4 (furfural >99 % xylose): sugar-derived; a fully labelled pot cannot say which route carried the C5"
+    evidence: labelling
+    lab: "Firmenich Geneva (Cerny / Briffod)"
+    dossiers: [cerny2007_extraction.md]
+    where: "Table 4 row 7 (pH 4 column)"
+    note: "split from F25#6, which keyed the pH 4 - 6 arms mild_acid although pH 4 is in the acid bin (red team 2026-11-01)."
+  - key: {ph: neutral, temperature: high, water: dilute}
+    tags: {ph_basis: label, T_C: 140, sugar: hexose_aldose, amine: peptide, amine_detail: "glutathione 60 mM", oxygen: not_stated, buffer: phosphate, metals: not_controlled, t_min: 300, ph_note: "label pH 6.5; 60 mM GSH likely acidifies, pH never measured", water_note: "GSH + glucose 60 + 60 mM; buffer molarity not stated"}
+    contrast: "1:1 unlabelled : [13C6]glucose (CAMOLA), GSH + glucose, sealed vial, 140 C, 5 h (+/- chicken fat: patterns unchanged, data not shown)"
+    status: unattributed
+    quote: "| FFT (C5) | ~94 % (13C5) | ~6 % |"
+    quantity: "FFT isotopomers 52 / <1 / <1 / <1 / <1 / 47 (0 - 5 labels): ~94 % an intact glucose C5 fragment, no C2 + C3 channel; furfural's own isotopomers are not reported, so the free-furfural step is not shown"
+    evidence: labelling
+    lab: "BTBU Beijing (Sun Baoguo) with CAAS and Clemson"
+    dossiers: [zhao2019b_extraction.md]
+    where: "CAMOLA table row 5; derived-origin table"
+    note: "the one aqueous label on hexose FFT on disk (added 2026-11-01, red team gap). The intact-C5 pattern is marker 3 without its furfural half, so `unattributed` between this family and other intact-C5 routes (e.g. furfuryl alcohol + H2S); the authors propose 3-deoxypentosone -> furfural."
 condition_dependence: >-
   SHOWN: in aqueous pentose + cysteine pots at pH 4-6 the furfural route is the FFT route. Three labelling / fed
   results from two laboratories (Nestle / Firmenich, Cerny; DFA Garching, Hofmann) agree: fed furfural out-competes
@@ -256,30 +281,30 @@ condition_dependence: >-
   FFT stays > 99 % intact pentose C5 at 145 C over pH 4-6 even with thiamin present; fed furfural is 60x ribose and 7x
   the 3-deoxyosone (145 C, pH 5). The pH dependence is strong and one-signed in four studies (Cerny 2007, Hofmann
   1998, Meynier 1995, and the Hofmann hexose rows peak at pH 5): FFT falls 6-19x from pH 3-4.5 to 6.5-7 and is not
-  detected at pH 7 / 145 C (Cerny 2007), with furfural vanishing first (pH 6). The fall tracks furfural supply, not an
+  detected at pH 7 / 145 C (Cerny 2007; a standing-level zero, not shown absent), with furfural vanishing first (pH 6). The fall tracks furfural supply, not an
   H2S shortage: H2S-driven products rise at pH >= 6 in the same pots (F26 cells). The only fed system at pH 7
   (Zhai, (NH4)2S, 120 C) gives the highest molar yield (~22 %, CF-065, semi-quantitative), so at neutral pH the step
   itself is fast and furfural formation is what fails. Water: dry 180 C raises ribose FFT 8x (but furfural 1500x, so
   FFT per furfural collapses) and lowers hexose FFT 2x; glycerol raises FFT ~56x at 110 C (patent); T and water are
   confounded in every dry contrast. Sugar: pentose 4x hexose at 145 C, with no labelling of the hexose route. Lipid:
   phospholipids lower FFT 1.4-2x (Reading, one group) while a structured-lipid phase raises it 7x (patent, CF-031).
-  Concentration: no FFT at meat-like mM levels at 100 C (Grosch). ASSUMED, not shown: that the 95 C / 145 C labelling
+  Concentration: FFT not detected (n.d., no limit) at meat-like mM levels at 100 C (Grosch). ASSUMED, not shown: that the 95 C / 145 C labelling
   transfers to 100-140 C (no labelled FFT cell in the high bin; the high-bin cells rest on Zhai's fed pot) and that
   the step is the same in hexose pots. In roasted coffee the route is NOT shown: FFT and furfural anti-correlate
   (Poisson) and furfuryl alcohol supplies >= 34 % of FFT (Cerny 2021); thiamine alone also makes FFT (Grosch).
   Independent laboratories with marker evidence for the route: 2 (Cerny's Nestle/Firmenich line counted once; DFA
   Garching) plus 1 fed-only (Zhai). DFA Garching's Schieberle 1998 / Hofmann 1998 FFT cells are one data set (CF-006).
 best_supported_regimes:
-  - "mild_acid / moderate (95 C) / dilute / pentose + Cys, phosphate: dominant (1 lab, labelling + fed, three independent markers)"
-  - "mild_acid / very_high (145 C) / dilute / pentose + Cys, phosphate: dominant (labelling, Cerny 2007) and fed-efficiency operating (Hofmann T3); 2 labs"
+  - "mild_acid / moderate (95 C) / concentrated (0.5 M phosphate) / pentose + Cys: dominant (1 lab, labelling + fed, three independent markers)"
+  - "mild_acid / very_high (145 C) / concentrated (0.5 M phosphate) / pentose + Cys: operating (100 %-labelled xylose shows FFT sugar-derived only, Cerny 2007) and fed-efficiency operating (Hofmann T3); 2 labs"
   - "acid (pH 3-4) / very_high / dilute / pentose + Cys: FFT highest (2 labs, within-study pH ladders)"
   - "neutral (pH 6.5-7) / high-very_high / dilute / pentose + Cys: FFT 6-19x lower to undetected (3 labs, within-study pH ladders); furfural is the limiting partner"
 unknown_regimes:
   - "low temperature (<= 60 C): no formation data at all"
   - "alkaline (> 7.5): never studied for FFT formation"
   - "intermediate a_w (0.5 - 0.9): only the two end points (aqueous, dry silica 180 C), confounded with T"
-  - "high bin (100 - 140 C) with labelling: no labelled FFT study; only fed (Zhai, pH 7) and level-only ladders"
-  - "hexose pots: FFT measured (Hofmann) but never labelled in water (in roasted coffee [13C6-fructose]-sucrose gives FFT 0 % M+5, Poisson 2009); the furfural-from-hexose step is unshown"
+  - "high bin (100 - 140 C) with labelling: one hexose pot only (Zhao 2019b, GSH, 140 C: FFT an intact glucose C5, furfural label not reported); for pentose only fed (Zhai, pH 7) and level-only ladders"
+  - "hexose pots: FFT labelled in water once (Zhao 2019b: 1:1 [13C6]glucose, FFT ~94 % an intact glucose C5, F25#23; furfural not shown as the intermediate) (in roasted coffee [13C6-fructose]-sucrose gives FFT 0 % M+5, Poisson 2009); the furfural-from-hexose step is unshown"
   - "peptide / protein-bound amine and real meat matrices: no marker study (coffee results point away from free furfural)"
   - "oxygen (air vs inert) on FORMATION: no within-study contrast"
   - "time-resolved labelling (does the furfural share change during a cook?): none"

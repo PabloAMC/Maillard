@@ -14,7 +14,7 @@ markers:
 cells:
   # ---- the O2 route to the acid, fed dicarbonyls --------------------------------------------------------------------
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "MGO or glyoxal 0.1 M + Phe 0.1 M, 0.1 M phosphate pH 7, closed vial, 60 min, argon vs air"}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: not_controlled, feed: "MGO or glyoxal 0.1 M + Phe 0.1 M, 0.1 M phosphate pH 7, closed vial, 60 min, argon vs air"}
     contrast: "air vs argon: PAA x4.34 (MGO: 4.7 -> 20.4 umol/mmol), x5.5 (glyoxal: 2.2 -> 12.2); PA unchanged"
     status: dominant
     quote: "the oxygen effect on the Strecker ACID"
@@ -25,7 +25,7 @@ cells:
     where: "Table 4, dossier sec. 4 rows H00-R1 / R2"
     note: "single laboratory for the whole acid route (evidence map 2.6: SINGLE)."
   - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "3-DG or glucosone 0.1 M + Phe 0.1 M, as above"}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: not_controlled, feed: "3-DG or glucosone 0.1 M + Phe 0.1 M, as above"}
     contrast: "air vs argon: PAA x2.2 (3-DG), x1.6 (glucosone); per donor under air PAA MGO : GO : 3-DG : glucosone = 1 : 0.60 : 0.16 : 0.10"
     status: operating
     quote: "C6 donors barely oxygen-sensitive"
@@ -35,10 +35,11 @@ cells:
     dossiers: [hofmann2000_extraction.md]
     where: "Table 4, dossier sec. 4 row H00-R3 / R6"
     note: "the acid route is a C2 / C3-donor phenomenon; C6 donors give mostly aldehyde (PA / PAA 2.4 - 3.3 under air)."
-  - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 98, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "glucose + Phe 0.1 M + [13C2]phenylacetaldehyde 0.41 umol, 0.5 M phosphate, reflux 30 min"}
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 98, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "glucose + Phe 0.1 M + [13C2]phenylacetaldehyde 0.41 umol, 0.5 M phosphate, reflux 30 min"}
     contrast: "sub-route tested: aldehyde -> acid oxidation. Labelled PAA < 0.5 ug vs unlabelled PAA 40.1 ug/mmol Phe"
     status: absent
+    detection_basis: "label pattern + bound: fed [13C2]phenylacetaldehyde would give [13C2]phenylacetic acid; < 0.5 ug labelled acid against 40.1 ug unlabelled acid quantified in the same run (< 1 %)"
     quote: "(< 1 %) became labelled acid"
     quantity: "< 1 % of the fed labelled aldehyde oxidised to acid in 30 min at reflux under air"
     evidence: labelling
@@ -67,8 +68,8 @@ cells:
     lab: "DFA Garching (Hofmann / Schieberle)"
     dossiers: [hofmann2000_extraction.md]
     where: "Fig. 5 and Abstract, dossier sec. 4 row H00-R10"
-  - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "MGO 0.1 M + Phe 0.1 M, 0.5 M phosphate, closed vial (air, not controlled), 10 - 500 min"}
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 98, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "MGO 0.1 M + Phe 0.1 M, 0.5 M phosphate, closed vial (air, not controlled), 10 - 500 min"}
     contrast: "time: PAA keeps rising after PA plateaus (PAA / PA 1.6 at 10 min -> 2.3 at 500 min)"
     status: operating
     quote: "PAA/PA rises from 1.6 (10 min) to 2.3 (500 min)"
@@ -79,8 +80,8 @@ cells:
     where: "Table 3"
     conflict: CF-070
   # ---- the Amadori-compound oxidative route -------------------------------------------------------------------------
-  - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "ARP-Phe 0.1 M (purity ~90 %), 0.5 M phosphate pH 7, closed vial, 120 min, argon / air / air + Cu(II) 5 mM"}
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "ARP-Phe 0.1 M (purity ~90 %), 0.5 M phosphate pH 7, closed vial, 120 min, argon / air / air + Cu(II) 5 mM"}
     contrast: "argon / air / air + Cu: PA 0.6 / 5.5 / 13.8, PAA 0.3 / 3.0 / 7.6 umol/mmol; PA / PAA 1.8 - 2.0 in every atmosphere"
     status: operating
     quote: "oxygen-dependent route to the Strecker aldehyde that needs no free dicarbonyl"
@@ -90,8 +91,8 @@ cells:
     dossiers: [hofmann2000b_extraction.md]
     where: "Table 2, dossier sec. 4 rows H00b-R1 / R2 / R6"
     note: "operating, not dominant: the 'no free dicarbonyl' mechanism is the authors' proposal (Fig. 4); with an OPD trap the ARP under air + Cu gives glucosone, itself a PA donor (F16), and no mass balance separates the two. The blind test of the forced-input layer (EX-051) failed the ARP-Phe aldehyde SHAPE for all five optima."
-  - key: {ph: neutral, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "glucose + Phe 0.1 M each, 0.5 M phosphate pH 7, 120 min, argon / air / air + Cu(II)"}
+  - key: {ph: neutral, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: 100, sugar: hexose_aldose, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, buffer_M: 0.5, metals: not_controlled, feed: "glucose + Phe 0.1 M each, 0.5 M phosphate pH 7, 120 min, argon / air / air + Cu(II)"}
     contrast: "argon / air / air + Cu: PA 0.4 / 1.4 / 2.6, PAA 0.2 / 1.8 / 3.9 umol/mmol; PA / PAA 2.0 -> 0.78 -> 0.67"
     status: operating
     quote: "the glucose pot's branch ratio flips with oxygen"
@@ -103,7 +104,7 @@ cells:
     conflict: CF-074
     note: "CF-074: the air cell is probably hofmann2000 Fig. 2's 120-min point reprinted, so the 3.5 may compare a reflux pot with a closed argon vial ('possible_vessel_comparison'); the ARP-Phe 9.2 is the same-vessel pair."
   - key: {ph: neutral, temperature: moderate, water: concentrated}
-    tags: {ph_basis: label, T_C: 85, sugar: none, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled, feed: "ARP-Phe 0.5 M + 1,2-diaminobenzene 0.6 M (in-situ trap), 2 mL phosphate pH 7, argon vs air + Cu(II) 25 mM, 20 - 320 min", metal_added: "Cu(II) 25 mM"}
+    tags: {ph_basis: label, T_C: 85, sugar: none, amine: other_free_aa, oxygen: [air, inert], buffer: phosphate, metals: not_controlled, feed: "ARP-Phe 0.5 M + 1,2-diaminobenzene 0.6 M (in-situ trap), 2 mL phosphate pH 7, argon vs air + Cu(II) 25 mM, 20 - 320 min", metal_added: "Cu(II) 25 mM"}
     contrast: "argon: 1-deoxyosone the main trapped dicarbonyl; air + Cu: glucosone the main one; Phe liberation ~55 % at 320 min in both"
     status: operating
     quote: "Under air + metal the ARP's main dicarbonyl is glucosone, not 1-DG/3-DG"

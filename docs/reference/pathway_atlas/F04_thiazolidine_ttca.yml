@@ -74,7 +74,7 @@ cells:
     dossiers: [pesek1975_extraction.md]
     where: "sec. 1 table; NMR series in HCl, D2O, NaOH"
   - key: {ph: alkaline, temperature: low, water: dilute}
-    tags: {ph_basis: label, T_C: "room temperature", sugar: none, carbonyl: benzaldehyde, amine: cysteine, oxygen: air, buffer: other_buffer, metals: not_controlled}
+    tags: {ph_basis: label, T_C: "room temperature", sugar: none, carbonyl: benzaldehyde, amine: cysteine, oxygen: not_stated, buffer: other_buffer, metals: not_controlled}
     contrast: "benzaldehyde-cysteine thiazolidine + iodoacetate in NaHCO3: free cysteine trapped as S-carboxymethylcysteine, no thiazolidine left overnight"
     status: operating
     quote: "After standing a half hour benzaldehyde begins to separate"
@@ -95,7 +95,7 @@ cells:
     where: "Table 4 (step 2, pH 8.0, 13-38 C)"
   # ---------------- cysteine + sugar: formation and pre-equilibrium ----------------
   - key: {ph: mild_acid, temperature: low, water: concentrated}
-    tags: {ph_basis: label, T_C: 50, sugar: pentose, amine: cysteine, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 50, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "none (preparative: Cys.HCl 0.1 mol + aldose 0.11 mol in 50 mL water, pH 5.0, optional phosphate or lactate)"
     status: operating
     quote: "in a pre-equilibrium reached in 1 h at 50 °C"
@@ -115,7 +115,7 @@ cells:
     dossiers: [zhai2019_extraction.md]
     where: "Fig. 3A, t = 0 [D]"
   - key: {ph: acid, temperature: moderate, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "time 0.5 -> 5 h: K_app flat (58.5-64.6 L/mol) while TTCA falls a third and the in-situ pH drifts 5.49 -> 4.67 (0.5 h) -> 4.15 (5 h)"
     status: operating
     quote: "58.5-64.6 L/mol at every one of the six sample times from 0.5 to"
@@ -126,7 +126,7 @@ cells:
     where: "Figs. 4-5 [D], arithmetic 1-2; Zhao 2017b sibling run 0.355 mol/L at 0.5 h"
     conflict: CF-011
   - key: {ph: acid, temperature: moderate, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "blank vs + (E)-2-heptenal 0.10 M: 0.5 h TTCA 0.355 -> 0.255 mol/L, free Cys 0.081 -> 0.033 mol/L (lipid aldehyde takes cysteine from xylose)"
     status: operating
     quote: "heptenal lowers 0.5 h TTCA from 0.355 to 0.255"
@@ -192,7 +192,7 @@ cells:
     where: "Zhai 2023 JAFC Fig. 5, sec. 10; Zhai 2019 Fig. 3B"
     conflict: CF-071
   - key: {ph: mild_acid, temperature: high, water: dilute}
-    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: label, T_C: 140, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "[13C5]-TTCA 30 mM + glycine + cysteine + unlabelled Gly-Amadori 3 / 30 / 120 mM, 30 min: [13C5]-Gly-Amadori appears (TTCA's xylose released and captured by glycine); MFT label falls as Gly-Amadori rises"
     status: operating
     quote: "was reversibly dissociated from [¹³C₅]-TTCA in the heated reaction systems"
@@ -203,7 +203,7 @@ cells:
     where: "sec. 1 (2); Tables 1-2"
   # ---------------- TTCA -> Cys-Amadori (de Roos route) ----------------
   - key: {ph: acid, temperature: moderate, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "time 0.5 -> 5 h: TTCA 0.356 -> 0.236 mol/L while Cys-Amadori 0.006 -> 0.133 mol/L and free Cys flat at 0.06-0.08 mol/L; the Cys-bearing pool conserved"
     status: operating
     quote: "TTCA's dominant fate at 90 °C / pH 4-5 is isomerisation"
@@ -214,7 +214,7 @@ cells:
     where: "Fig. 5 [D], arithmetic 2-3"
     conflict: CF-011
   - key: {ph: acid, temperature: moderate, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: other_free_aa, oxygen: air, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "glycine 0 -> 16-24 x Cys: TTCA drained to ~0.03 mol/L by 2 h; in-situ pH 5.42 -> 4.03 (x24 arm) vs 5.49 -> 4.15 (blank)"
     status: operating
     quote: "Glycine accelerates the TTCA drain"
@@ -235,7 +235,7 @@ cells:
     where: "Fig. 2 [D], sec. 3.4"
     conflict: CF-063
   - key: {ph: mild_acid, temperature: moderate, water: concentrated}
-    tags: {ph_basis: label, T_C: "85-95", sugar: pentose, amine: cysteine, oxygen: air, buffer: [none_unbuffered, phosphate, carboxylate], buffer_note: "optional phosphate or lactic acid (per batch)", metals: not_controlled}
+    tags: {ph_basis: label, T_C: "85-95", sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: [none_unbuffered, phosphate, carboxylate], buffer_note: "optional phosphate or lactic acid (per batch)", metals: not_controlled}
     contrast: "batch vs continuous anion-exchange reactor; water 20-40 %: the Cys-Amadori peaks ~2 h at 90 C and never exceeds 35 % of Cys; thiazolidine -> Amadori said to be general-acid catalysed by other amino acids (qualitative)"
     status: operating
     quote: "only 35 %, which is due to its instability under the conditions of its formation"
@@ -244,8 +244,8 @@ cells:
     lab: "de Roos (Givaudan)"
     dossiers: [deroos2005_extraction.md]
     where: "sec. 3.7 yields"
-  - key: {ph: mild_acid, temperature: moderate, water: dilute}
-    tags: {ph_basis: label, T_C: "~100 (boiling)", sugar: pentose, amine: cysteine, oxygen: air, buffer: phosphate, metals: not_controlled}
+  - key: {ph: mild_acid, temperature: moderate, water: concentrated}
+    tags: {ph_basis: label, T_C: "~100 (boiling)", sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, buffer_M: 0.5, metals: not_controlled}
     contrast: "fed purified D-xylulose-L-cysteine, pH 3 -> 6 in boiling 0.5 M phosphate: % left after 2 h 51 / 56 / 58 / 43 / 18 at pH 3 / 4.5 / 5 / 5.5 / 6 (stability maximum pH ~5)"
     status: operating
     quote: "Effect of pH on the decomposition of D-xylulose-L-cysteine in a boiling 0.5 M aqueous"
@@ -276,7 +276,7 @@ cells:
     where: "Fig. 3d (TTCA) and Fig. 3c (free Cys) [F], sec. 1 (2)-(3)"
   # ---------------- low water, storage, very high T ----------------
   - key: {ph: alkaline, temperature: very_high, water: low_aw}
-    tags: {ph_basis: label, T_C: "170-190 inlet (spray-drying)", sugar: pentose, amine: cysteine, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: "170-190 inlet (spray-drying)", sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "no spray-drying -> 190 C inlet -> pH 9.5 stock before spray-drying: Amadori product 6.03 -> 20.83 -> 47.23 % of the total; conversion favoured over pH 7.5-9.5"
     status: operating
     quote: "the Amadori rearrangement product is 6.03 % of the"
@@ -286,7 +286,7 @@ cells:
     dossiers: [zhai2020_extraction.md]
     where: "results summary"
   - key: {ph: not_stated, temperature: low, water: intermediate_aw}
-    tags: {ph_basis: label, T_C: "not stated (salt a_w at 25 C)", sugar: pentose, amine: cysteine, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: "not stated (salt a_w at 25 C)", sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "solid TTCA powder, a_w 0.113 -> 0.432 -> 0.843, 60 days: retention 86.49 / 72.47 / 64.23 % (ARP 78.48 / 57.27 / 39.39 %); a_w a larger stressor than 4-40 C or pH 5.5-9 in solution"
     status: operating
     quote: "TTCA's degradation rate in high humidity (a_w 0.843) is approximately"

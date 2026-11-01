@@ -44,13 +44,14 @@ cells:
   - key: {ph: neutral, temperature: low, water: dilute}
     tags: {ph_basis: label, T_C: 37, sugar: hexose_aldose, amine: other_free_aa, amine_detail: "fed Nalpha-formyl-fructoselysine", oxygen: [air, inert], buffer: phosphate, metals: [chelated, not_controlled], metals_note: "chelated (N2 arm) vs not_controlled (air arm)", operator: standing_level}
     contrast: "air vs N2 + chelators: Amadori decomposition ~4x faster under air, products shift to CML / tetroses / pentoses - but no glucosone"
-    status: absent
+    status: not_detected
     quote: "glucosone not detected (its own t1/2"
     quantity: "glucosone below detection at every sampling (days); its own t1/2 <= 12 h, so a small STANDING level is not excluded"
     evidence: within_study_factor
     lab: "Baynes, South Carolina"
     dossiers: [zyzak1995_extraction.md]
     where: "Table II; text"
+    note: "was `absent`: no detection limit printed, and glucosone's own t1/2 <= 12 h, so a standing-level zero does not exclude the oxidative route (absent audit 2026-11-01)."
   - key: {ph: neutral, temperature: low, water: dilute}
     tags: {ph_basis: label, T_C: "37 / 50", sugar: hexose_aldose, amine: other_free_aa, amine_detail: "fed 1-DG 42 mM + L-alanine", oxygen: [air, inert], buffer: phosphate, metals: [not_controlled, chelated], metals_note: "not_controlled (air) vs chelated (DTPA, deaerated)", operator: "fed intermediate, OPD at sampling"}
     contrast: "aerated vs deaerated: threosone (C4 2-osulose from the 1-DG C4 enediol) max 14 vs 5 mmol/mol at 37 C, 14 vs 10 at 50 C"
@@ -72,7 +73,7 @@ cells:
     lab: "Jiangnan (Zhang X / Cui) + Ho (Rutgers)"
     dossiers: [deng2021_extraction.md]
     where: "Figs. 5-6"
-  - key: {ph: neutral, temperature: moderate, water: concentrated}
+  - key: {ph: neutral, temperature: high, water: concentrated}
     tags: {ph_basis: label, T_C: 101, sugar: [hexose_aldose, pentose], sugar_note: "hexose_aldose and pentose (paired)", amine: other_free_aa, amine_detail: "L-alanine ~1.2-1.5 M", oxygen: air, buffer: phosphate, metals: not_controlled, operator: standing_level}
     contrast: "glucose vs xylose: 2-hexosulose max ~50 ug/mmol (20x below 3-DG); 2-pentosulose ~200 ug/mmol at 10 min"
     status: operating

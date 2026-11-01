@@ -38,7 +38,7 @@ cells:
   - key: {ph: mild_acid, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: "120-200", sugar: hexose_ketose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "ELIMINATION part: the acrylamide degradation step was fitted and DELETED (negative Ea); elimination not identifiable in the fructose pot"
-    status: absent
+    status: not_detected
     quote: "the activation energy for the breakdown of acrylamide was negative"
     quantity: "no first-order elimination identifiable at pH 5.5 / fructose, against k6 = 88e-3 /min at 160 C in the same lab's glucose pot at pH 6.8"
     evidence: kinetic_fit
@@ -46,6 +46,7 @@ cells:
     dossiers: [knol2010_extraction.md]
     where: "Results (Scheme 3 -> 4); k4 note in the dossier's constant table"
     conflict: CF-037
+    note: "was `absent`: a fit that cannot identify the elimination (negative Ea, step deleted) is not a measurement that the step is off (absent audit 2026-11-01)."
   - key: {ph: neutral, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: "140-200 (T_ref 160)", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
     contrast: "a third amino acid (Gln, Cys, Lys, Ala, 0.01 M) added to 0.01 M Asn + Glc: k_E/k_F ordering Gln, Ala < control < Lys, Cys; Cys doubles k_E/k_F"
@@ -60,13 +61,14 @@ cells:
   - key: {ph: neutral, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: "140-200", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
     contrast: "PRECURSOR OMISSION: glucose + glutamine without asparagine"
-    status: minor
+    status: unattributed
     quote: "only negligibly small amounts of AA were measured"
-    quantity: "no number printed; the authors attribute traces to asparagine impurity in amino-acid standards (0.3-0.8 %)"
+    quantity: "no number printed ('negligibly small amounts'); the authors explain traces by amino-acid stock impurities, citing Becalski (0.3 % asparagine in an aspartic-acid standard; 0.8 % cysteine in a glutamine standard); no asparagine was measured in this glutamine"
     evidence: within_study_factor
     lab: "Leuven (Hendrickx)"
     dossiers: [claeys2005_extraction.md]
     where: "Results (preliminary experiment)"
+    note: "was `minor`: no measured share (a preliminary 'negligible' result, data not shown), and the impurity explanation is the authors', not a measurement (red team 2026-11-01)."
   - key: {ph: neutral, temperature: very_high, water: dilute}
     tags: {ph_basis: label, T_C: "120-200 (T_ref 160)", sugar: hexose_aldose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "initial pH 4 / 6 / 8 in phosphate: formation k_F 4.30 -> 8.78 -> 37.5 e-3 /M/min (x8.7 over 4 pH units); elimination k_E 84 -> 175 -> 334 e-3 /min; both barriers rise as pH falls"
@@ -193,7 +195,7 @@ cells:
     dossiers: [hidalgo2010_extraction.md]
     where: "sec. 3 Ea table; sec. 6b"
   - key: {ph: mild_acid, temperature: very_high, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: 180, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: carboxylate, metals: not_controlled}
+    tags: {ph_basis: in_situ, T_C: 180, sugar: none, amine: [other_amine, glycine], oxygen: not_stated, buffer: carboxylate, metals: not_controlled, amine_note: "butylamine (alkylamine) and glycine arms"}
     contrast: "ELIMINATION part: acrylamide + butylamine / glycine, pH 2.15-8, 10 min 180 C: forward aza-Michael flat in pH (61.9-74.5 %); the adduct's REVERSE release rises 8.8 -> 60.0 % over pH 2.15-6 in citrate; at pH 6 citrate 60.0 vs phosphate 27.3 %"
     status: operating
     quote: "similar amounts of acrylamide were recovered in the range of pH 2.15−8"
@@ -264,7 +266,7 @@ cells:
     dossiers: [kocadagli2021_extraction.md]
     where: "sec. 3.7, Fig. 4"
   - key: {ph: not_stated, temperature: very_high, water: low_aw}
-    tags: {ph_basis: label, T_C: "barrel to 145-160", sugar: not_stated, amine: protein_bound_lys, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: "barrel to 145-160", sugar: not_stated, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "cornmeal + pea protein isolate extrusion: 0 -> 15 % PPI raises acrylamide 19.8 -> 37.4 ug/kg; 30-70 % PPI no further rise, falls at 50-70 %"
     status: operating
     quote: "did not cause additional increases"
@@ -274,7 +276,7 @@ cells:
     dossiers: [goncuoglu2026_extraction.md]
     where: "Results 3.2; Fig. 1a"
   - key: {ph: not_stated, temperature: high, water: low_aw}
-    tags: {ph_basis: label, T_C: "130 (series)", sugar: not_stated, amine: protein_bound_lys, oxygen: air, buffer: none_unbuffered, metals: not_controlled}
+    tags: {ph_basis: label, T_C: "130 (series)", sugar: not_stated, amine: protein_bound_lys, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled}
     contrast: "soy-protein-isolate meat-analogue extrusion, process-parameter survey; raw blend vs extrudate"
     status: operating
     quote: "The raw blend already carries ≈38 µg/kg of acrylamide before extrusion"

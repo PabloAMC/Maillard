@@ -46,6 +46,7 @@ cells:
     tags: {ph_basis: in_situ, T_C: 180, sugar: hexose_aldose, amine: glycine, oxygen: air, buffer: none_unbuffered, metals: not_controlled, matrix: "same potato + [2-13C]glycine pot"}
     contrast: "methylpyrazine vs 2,6-DMP in the same pot: MPZ 95-100 % unlabelled although 2,6-DMP takes ~45 % from labelled HCHO"
     status: absent
+    detection_basis: "label pattern: glycine-formaldehyde addition would carry the [2-13C]glycine label into methylpyrazine; MPZ is 95 - 100 % unlabelled while 2,6-DMP in the same pot takes ~45 % from the label"
     quote: "Methylpyrazine is 95 - 100 % unlabelled although 2,6-DMP"
     quantity: "glycine-HCHO addition to the C2 dihydropyrazine gives <= ~1.5 umol/kg MPZ vs ~56 umol/kg labelled 2,6-DMP (low2006 dossier, mine)"
     evidence: labelling
@@ -66,7 +67,7 @@ cells:
     where: "Tables 2, 5"
     note: "Cerny later co-authors the Nestle labelling paper; counted as a separate laboratory (DFA 1994 vs Nestle 1995) but the same investigator."
   - key: {ph: neutral, temperature: moderate, water: low_aw}
-    tags: {ph_basis: label, T_C: 90, sugar: none, amine: other_free_aa, oxygen: air, buffer: none_unbuffered, metals: not_controlled, feed: "1,3-dihydroxyacetone + each of 20 amino acids, neat, 30 min"}
+    tags: {ph_basis: label, T_C: 90, sugar: none, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "1,3-dihydroxyacetone + each of 20 amino acids, neat, 30 min"}
     contrast: "amino-acid identity: TMP (HCHO adduct) with Gly, 3-ethyl-2,5-DMP with Ala, 2,5-dimethyl-3-isobutyl with Val; the same adducts from Arg, Lys, Ser (sugar-fragment aldehydes); none from Leu / Ile / Met / Phe at 90 C"
     status: operating
     quote: "trimethyl / DMP: Gly 0.056, Arg 0.30, Thr 0.07"

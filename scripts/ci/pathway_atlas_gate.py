@@ -5,10 +5,15 @@ pathway_atlas_gate -- the pathway-condition atlas is well-formed and every cell 
 Checks every `docs/reference/pathway_atlas/F*.yml` against the shared vocabulary in `families.yml`:
   - `family` matches the filename and is an id in families.yml; the file has a non-empty `markers` list and `cells`;
   - every cell's `key` is exactly {ph, temperature, water}, each value a bin of families.yml (`not_stated` allowed);
+  - the temperature key AGREES with `tags.T_C`: recomputed with low <= 60 < moderate <= 100 < high <= 140 < very_high;
+    a range or list ("80-120", "100 / 130") may sit in any bin it spans; text in parentheses or after ';' is detail;
+  - the water key agrees with `tags.buffer_M`: a buffer of >= 0.5 M cannot be keyed `dilute` or `not_stated`;
   - the tag axes (sugar, amine, oxygen, buffer, metals) hold a bin, or a list of bins when the cell spans arms of a
     contrast or paired pots (detail in `<axis>_note`); other tags (ph_basis, T_C, ...) are free-form, but their
     names must be plain identifiers;
   - `status` and `evidence` are from the vocabulary, and only the known cell fields appear;
+  - `absent` carries a non-empty `detection_basis` (a detection limit, a positive control, or a label pattern that
+    would have shown the route); a non-detect without one is `not_detected`;
   - the CAP: `dominant` only from labelling / fed_intermediate, or trapping with a mass-balance note on the cell;
   - every cited dossier exists in data/lit/extraction_dossiers/ with EXACT case (CI's Linux disk is case-sensitive);
   - every `quote` is <= 15 words and appears verbatim, after whitespace normalisation, in at least one cited dossier;
@@ -34,16 +39,20 @@ REGISTER = ROOT / "docs" / "reference" / "conflicts_register.yml"
 
 KEY_AXES = ("ph", "temperature", "water")
 TAG_AXES = ("sugar", "amine", "oxygen", "buffer", "metals")
-STATUSES = {"dominant", "operating", "minor", "absent", "conflicting", "unattributed"}
+STATUSES = {"dominant", "operating", "minor", "absent", "not_detected", "conflicting", "unattributed"}
 EVIDENCE = {"labelling", "fed_intermediate", "trapping", "measured_intermediate", "mass_balance",
             "within_study_factor", "kinetic_fit", "qualitative"}
 DOMINANT_EVIDENCE = {"labelling", "fed_intermediate"}
 REQUIRED = ("key", "tags", "status", "evidence", "quote", "lab", "dossiers")
-OPTIONAL = ("quantity", "where", "contrast", "note", "conflict")
+OPTIONAL = ("quantity", "where", "contrast", "note", "conflict", "detection_basis")
 MAX_QUOTE_WORDS = 15
 CF_ID = re.compile(r"CF-\d{3}")
 MASS_BALANCE = re.compile(r"mass[- ]balance", re.IGNORECASE)
 IDENTIFIER = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+T_ORDER = ("low", "moderate", "high", "very_high")
+# a temperature number: not a time, pressure or count ("10 h", "25-40 MPa", "24-week")
+T_NUMBER = re.compile(r"\d+(?:\.\d+)?(?!\s*(?:h\b|min\b|s\b|MPa|week|\d|\.\d))")
+ROOM_T = re.compile(r"room temp|\bRT\b|ambient", re.IGNORECASE)
 
 
 def _norm(text: str) -> str:
@@ -57,6 +66,24 @@ def _states_mass_balance(text: str) -> bool:
         if not re.search(r"\b(no|not|without)\b", before):
             return True
     return False
+
+
+def _t_bin(t: float) -> str:
+    return "low" if t <= 60 else "moderate" if t <= 100 else "high" if t <= 140 else "very_high"
+
+
+def temperature_bins(t_c) -> set | None:
+    """The temperature bins a `T_C` tag allows, or None when it states no temperature (null, 'not stated')."""
+    if t_c is None or isinstance(t_c, bool):
+        return None
+    if isinstance(t_c, (int, float)):
+        return {_t_bin(float(t_c))}
+    main = re.split(r"[(;]", str(t_c))[0]
+    numbers = [float(x) for x in T_NUMBER.findall(main)]
+    if not numbers:
+        return {"low"} if ROOM_T.search(main) else None
+    lo, hi = T_ORDER.index(_t_bin(min(numbers))), T_ORDER.index(_t_bin(max(numbers)))
+    return set(T_ORDER[lo:hi + 1])
 
 
 def _vocabulary() -> tuple:
@@ -113,6 +140,16 @@ def _check_cell(where: str, cell: dict, bins: dict, register: set, dossiers: _Do
             if bad or not values:
                 problems.append(f"{where}: tags.{name} {value!r} not a bin (or list of bins) of {sorted(bins[name])}")
 
+    if isinstance(key, dict) and isinstance(tags, dict):
+        allowed = temperature_bins(tags.get("T_C"))
+        if allowed is not None and key.get("temperature") not in allowed:
+            problems.append(f"{where}: key.temperature {key.get('temperature')!r} disagrees with T_C {tags.get('T_C')!r}"
+                            f" (allowed: {sorted(allowed, key=T_ORDER.index)})")
+        buffer_m = tags.get("buffer_M")
+        if isinstance(buffer_m, (int, float)) and not isinstance(buffer_m, bool) and buffer_m >= 0.5 \
+                and key.get("water") in ("dilute", "not_stated"):
+            problems.append(f"{where}: key.water {key.get('water')!r} but buffer_M {buffer_m} (>= 0.5 M is concentrated)")
+
     status, evidence = cell["status"], cell["evidence"]
     if status not in STATUSES:
         problems.append(f"{where}: status {status!r} not in {sorted(STATUSES)}")
@@ -123,6 +160,10 @@ def _check_cell(where: str, cell: dict, bins: dict, register: set, dossiers: _Do
         if not (evidence == "trapping" and _states_mass_balance(noted)):
             problems.append(f"{where}: CAP: `dominant` from evidence {evidence!r} (needs labelling / fed_intermediate,"
                             " or trapping with a mass-balance note)")
+
+    if status == "absent" and not str(cell.get("detection_basis") or "").strip():
+        problems.append(f"{where}: `absent` without `detection_basis` (a detection limit, a positive control or a"
+                        " label pattern that would have shown the route); otherwise the status is `not_detected`")
 
     cited = cell["dossiers"] if isinstance(cell["dossiers"], list) else [cell["dossiers"]]
     present = []
