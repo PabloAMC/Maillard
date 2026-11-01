@@ -359,3 +359,38 @@ slope 0.084 dex / decade < its 0.10 tolerance); a Phe mass-balance CEILING caps 
 effective degrees of freedom ~11 (Table 3 is one smooth curve). **Expectations revised:** ADMIT 0.2, LOWER BOUND 0.3,
 INCONCLUSIVE 0.35, REFUSE 0.15; P(T1 passes) ~0.85. **Before any fit:** key hofmann2000 Fig. 2 and hofmann2000b Tables
 2 - 3 (two readers).
+
+## 12. Feasibility result (EX-049) and the pre-declared blind test on hofmann2000b Fig. 1 (2026-10-31 ~15:30, before Fig. 1 is read)
+
+**Feasibility (EX-049; scripts/generators/feasibility_strecker_forced_input.py; single laboratory).**
+- **The dicarbonyl route alone (arm B) is NOT feasible.** Minimum violation 3.9, and 1.3 without Fig. 2's 10-min point. Model recovery rejects it in 6 of 6 synthetic sets when the Amadori route is real. Arm B is rejected without a fit.
+- **The Amadori route alone fails.** PAA never overtakes PA in time.
+- **The O2 acid route is needed** (2.2 without it). The A' oxygen hold-outs pass.
+- **The adopted two-route layer is INCONCLUSIVE.**
+  - It fails the primary analysis (1.75) on one point: Fig. 2 at 10 min, traded against the PA = PAA crossover.
+  - It passes post hoc: 0.52 without that point, 0.70 with early-step forcing.
+  - The passing optima sit at band walls: O2 ~1, the fastest ARP decay, cal_ARP ~+0.2. They need the ARP route at 45 - 65 % of PA at 120 min and over-predict the level (R30 0.38 - 0.49).
+  - Flat (time-averaged) forcing also passes the joint set, so these shapes have weak power.
+- **Tolerances.** T1's tolerance of 0.10 fails its own truth a third of the time at realistic noise, so 0.15 is adopted.
+
+**The blind test, declared before Fig. 1 is digitised.** hofmann2000b Fig. 1 holds PA and PAA, 0 - 500 min, reflux, air, from Glc/Phe and from ARP-Phe. It is a run never used so far. Two readers will key it, followed by adjudication.
+
+Scoring:
+1. **Constants.** The four shape-feasible DC_ARP optima of EX-049, exactly as recorded. No new search.
+2. **Forcing.** PRIMARY linear-from-zero (EX-049's primary); SECONDARY early-step, reported only. A pass must hold under the PRIMARY.
+3. **Signatures on the Glc/Phe curve,** at the digitised times, with the calibrated tolerances frozen here:
+   - G5' shape log P(t)/P(120), tolerance 0.154;
+   - G6a' PAA/PA at 500 min, 0.160 (the text's 1.7 is SEEN, so G6a' is in-sample);
+   - G6b' crossover, x2 in time (the text's "first 60 min" is SEEN, so G6b' is in-sample).
+   
+   Only G5', and above all its points at t <= 30 min, is blind.
+4. **The ARP-Phe curve.** G7: PA > PAA at every digitised time (the text says so, so it is SEEN); its shape, log PA(t)/PA(120), is blind, tolerance 0.154.
+5. **Vessel.** Reflux under uncontrolled atmosphere, not the closed vial behind the forcing. O2 is held at its band ceiling and the forcing is unchanged. A failure that a vessel difference could explain is scored INCONCLUSIVE, not REFUSE.
+6. **Resolution.** If the two readers' adjudicated read error at any blind point exceeds half its tolerance, that point is dropped and the drop reported.
+
+Outcomes:
+- **PASS:** at least 3 of the 4 optima within tolerance on every blind point, under the primary forcing. The two-route layer is feasible (PROVISIONAL, single lab), and the fit's prereg follows, with T1 0.15 and O3' (class order) frozen.
+- **EARLY DEFICIT REPRODUCED:** the t <= 30 min points under-predicted beyond tolerance by every optimum. A fast early aldehyde source, or the heat-up, is real and missing; the layer is not fitted until that source is designed.
+- **INCONCLUSIVE:** anything else.
+
+**Expectations (P, written now):** PASS 0.30; EARLY DEFICIT REPRODUCED 0.40; INCONCLUSIVE 0.30.

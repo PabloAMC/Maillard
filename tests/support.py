@@ -118,3 +118,28 @@ def wave_generator(name: str) -> Iterator[object]:
         b23.build_parameters = snapshot[3]
         for module in SPLICING_WAVE_MODULES:
             sys.modules.pop(module, None)
+
+
+def engine_config_probe(seed: int) -> dict:
+    """What a worker computes with (tests/unit/test_engine_config.py, A3 phase 1): the engine's configuration as its
+    globals hold it, and numbers that read those switches -- the sulfur lane's operative parameters and rate
+    constants, its trunk pH slopes, and a short dynamic-pH pot (coupling, node grid, fixed point, B51, the trunk
+    solutes in the balance). Module level so that a spawn-started worker can unpickle it."""
+    import warnings
+
+    from src.kinetic_core import config, engine, ph_state, sulfur
+
+    params = engine.core_parameters(engine.SULFUR)
+    k = sulfur.sulfur_rate_constants_at(params, 393.15 + seed, 6.5, ph_label=6.2)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        run = sulfur.integrate_sulfur(params, 393.15, {"PENT": 20.0, "Cys": 20.0, "Gly": 20.0}, [0.0, 2.0, 5.0],
+                                      ph=6.0, ph_drift=engine.core_ph_drift(),
+                                      buffer_spec=ph_state.BufferSpec(kind="none", declared=True), ph_nodes=5)
+    return {
+        "config": config.Config.from_globals(),
+        "rate_constants": dict(sorted(k.items())),
+        "trunk_ph_exponents": dict(sorted(sulfur._trunk_ph_exponents().items())),
+        "concentrations": run.concentrations.tolist(),
+        "ph_series": None if run.ph_series is None else run.ph_series.tolist(),
+    }

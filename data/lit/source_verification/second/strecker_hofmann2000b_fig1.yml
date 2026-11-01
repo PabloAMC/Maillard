@@ -1,0 +1,26 @@
+# Second reader (reader B), Hofmann & Schieberle 2000b (J. Agric. Food Chem. 48:4301-4305, doi 10.1021/jf000076e), Fig. 1 (PA / PAA
+# time courses, glucose + L-Phe and ARP-Phe). Independent of reader A; blind to the hypothesis. Rows:
+# data/lit/fit_rows/second/strecker_hofmann2000b_fig1.yml. Exposure: the rough Fig. 1 notes in the text_checks of
+# fit_rows/second/strecker_hofmann2000_fig2.yml were visible (no 10- or 30-min values among them).
+reader: agent-hofmann2000b-fig1-readerB-2026-10-31
+role: independent second reader, Strecker forced-input blind test (Fig. 1 of hofmann2000b)
+entries:
+- ledger_id: hofmann2000b_fig1_pa_paa_timecourse
+  source_file: hofmann2000b.pdf
+  location: p. 4303, Fig. 1 (1-bit raster 1390 x 889 px, 300 ppi; pdfimages page 3 object 21); text p. 4302
+  read_by: agent-hofmann2000b-fig1-readerB-2026-10-31
+  second_reader: self
+  date: '2026-10-31'
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: Fig. 1 caption "Formation of phenylacetaldehyde (PA) and phenylacetic acid (PAA) from glucose/phenylalanine (filled square,
+    PAA; open square, PA) or N-(1-deoxy-D-fructosyl)-L-phenylalanine (ARP-Phe) (filled circle, PAA; open circle, PA)."
+  notes: 'Digitised (umol/mmol; x 0.1 = mmol/L at 100 mmol/L) at 10 / 30 / 60 / 120 / 240 / 300 / 500 min: Glc/Phe PA 0.21 0.40 0.61
+    1.20 2.11 2.51 2.80, PAA 0.10 0.30 0.50 1.52 2.81 3.11 3.71; ARP-Phe PA 0.99 2.61 4.20 6.21 8.49 9.20 10.00, PAA 0.30 0.80 1.81
+    3.21 6.01 7.20 8.99. Conditions NOT printed for Fig. 1: inferred from Table 1 / Table 3 (reflux, 0.5 mol/L phosphate pH 7.0, 100
+    mmol/L, air presumed); Methods "0.5 mmol/L" vs tables "0.5 mol/L". Text 1.7 vs figure 1.32 at 500 min; Table 2 expt II differs
+    7 - 16 % at 120 min (a different run).'

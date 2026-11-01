@@ -1,0 +1,49 @@
+# SOURCE VERIFICATION -- Hofmann & Schieberle 2000b, Fig. 1 (fit table data/lit/fit_rows/strecker_hofmann2000b_fig1.yml).
+# Format and the five checks: the header of data/lit/source_verification.yml.
+# FIRST READER: reader A (agent-hofmann2000b-fig1-readerA-2026-10-31), against data/articles/hofmann2000b.pdf (pdftotext
+# -layout; the embedded Fig. 1 raster, pdfimages page 3 object 21, 1390 x 889 px, 300 ppi 1-bit; crops upscaled 4-8x with
+# sips, marker edges read by eye). SECOND READER: reader B (agent-hofmann2000b-fig1-readerB-2026-10-31), independent and in
+# parallel (source_verification/second/strecker_hofmann2000b_fig1.yml, fit_rows/second/strecker_hofmann2000b_fig1.yml).
+# Both blind to the hypothesis (the blind test of kinetic_core_strecker_forced_input_prereg.md sec. 12).
+# EXPOSURE (recorded on the coordinator's instruction): both readers could see the rough, eyeballed Fig. 1 notes in the
+# text_checks of fit_rows/second/strecker_hofmann2000_fig2.yml (PA ~0.6 / 1.2 / 2.1 / 2.8, PAA ~0.5 / 1.5 / 2.8 / 3.7 at 60 /
+# 120 / 240 / 500 min) before digitising. Those notes carry no 10- or 30-min values, so the blind early points are unexposed;
+# the later points agree with the notes to their eyeball resolution (0.1), as they would without exposure.
+# second_reader "pending" = NOT verified until scripts/reconcile_source_readings.py --promote records it.
+# ADJUDICATED 2026-10-31 by agent-strecker-feasibility-2026-10-31 on the coordinator's rule (mean of A and B; error max(A, B,
+# |A-B|/2)), from the two readings, without re-reading the raster: the readings agree within 0.011 umol/mmol on all 28 points.
+
+entries:
+- ledger_id: hofmann2000b_fig1_pa_paa_timecourse
+  source_file: hofmann2000b.pdf
+  read_by: agent-hofmann2000b-fig1-readerA-2026-10-31
+  second_reader: agent-hofmann2000b-fig1-readerB-2026-10-31
+  date: 2026-10-31
+  checks:
+    conditions: corrected
+    units: pass
+    quantification: pass
+    duplicates: corrected
+    values: pass
+  quote: 'Figure 1. Formation of phenylacetaldehyde (PA) and phenylacetic acid (PAA) from glucose/phenylalanine (filled square,
+    PAA; open square, PA) or N-(1-deoxy-D-fructosyl)-L-phenylalanine (ARP-Phe) (filled circle, PAA; open circle, PA). ... the
+    formation of PA (empty squares, Figure 1) was favored only within the first 60 min ... by a factor of 1.7 higher amounts of
+    the acid were formed after 500 min.'
+  notes: 'Fig. 1 (p. 4303): y "Amount [umol/mmol starting material]" 0-12, x "t (min)" 0-300 // 450-500; markers at 0 / 10 / 30 /
+    60 / 120 / 240 / 300 / 500 min. ADJUDICATED (umol/mmol): Glc/Phe PA 0.208 / 0.403 / 0.613 / 1.206 / 2.115 / 2.514 / 2.804, PAA
+    0.103 / 0.300 / 0.498 / 1.518 / 2.810 / 3.109 / 3.709; ARP-Phe PA 0.994 / 2.609 / 4.205 / 6.212 / 8.494 / 9.201 / 10.003, PAA
+    0.298 / 0.805 / 1.810 / 3.208 / 6.010 / 7.200 / 8.993. 28 rows; origin not keyed. The two Glc/Phe 10-min squares are hidden
+    in one cluster with the ARP-Phe filled circle (both readers: curve continuity; 0.126 / 0.127 dex). UNITS: x 0.1 mmol/L (1.0
+    mmol in 10 mL, inferred). CONDITIONS corrected: NONE printed for Fig. 1; inferred from Table 1 column II (the system the
+    text refers to): 1.0 mmol glucose + 1.0 mmol L-Phe or 1.0 mmol ARP-Phe in 10 mL phosphate pH 7.0, 0.5 mol/L (Methods
+    "0.5 mmol/L", a misprint per strecker_hofmann2000 ruling 1), reflux ~100 C, air presumed; vessel / sampling not stated.
+    QUANTIFICATION: SIDA ([13C2]-PA, [13C2]-PAA, HRGC/MS-CI, p. 4302). DUPLICATES corrected: (a) Table 2 expt II (air, 100 C,
+    120 min, closed vial) vs the figure at 120 min: ARP-Phe PA +13 %, Glc/Phe PA -14 %, PAA -16 %: a different run (CF-075), not a
+    duplicate; (b) hofmann2000 Fig. 2 (same recipe) is a different run, 10 - 40 % apart; (c) text "factor of 1.7" vs the
+    figure 1.32 at 500 min: CF-075, text_check, no row.'
+  adjudication: >-
+    Readers A and B agree within 0.011 umol/mmol on all 28 points (largest gap ARP-Phe PA 60 min, 4.210 vs 4.200; Glc/Phe PA 120
+    min 1.211 vs 1.200). Value = mean; read error = max(A, B, |A-B|/2) in umol/mmol, then dex. Conditions inferred alike by both
+    readers (Table 1 column II, reflux, air presumed); the buffer misprint noted by both. Both flagged the text's 1.7 vs the
+    figure's 1.32 and the 7 - 16 % gap to Table 2 (CF-075). The 10-min Glc/Phe squares stay as rows with their 0.13-dex errors;
+    the blind test drops them by its own rule 6.
