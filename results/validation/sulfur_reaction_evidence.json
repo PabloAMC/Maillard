@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-01",
     "git": {
-      "commit": "eb7d4f70370e712bb39d7ce9680ebc067a6e2cb5",
-      "short": "eb7d4f70",
+      "commit": "e7ffb46ba343283c56130b0f3b28d9fcd97c8b5e",
+      "short": "e7ffb46b",
       "branch": "ingest-2026-11-01",
       "dirty": true
     },

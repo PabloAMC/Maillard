@@ -8461,3 +8461,580 @@ entries:
     condition_quote: ""
     flags: [matrix_food, concentrations_not_stated, vessel_not_stated, internal_inconsistency]
     note: "A420 0.14-1.27 (100-140 C, 120 min), 0.21-0.57 (60-180 min, 120 C). Text says 0.29 at 120 C but both panels show 0.37. Dilution before reading not stated."
+  # ---- ingest 2026-11-01 (the 36 dossiers of commit e5195e42, 'Ingest 36 papers'); ledgered 2026-11-01 ----
+  - id: adams2001_fig4_ph2_disulfide_null
+    dossier: adams2001_extraction.md
+    paper: "Adams, Mottram, Parker & Brown 2001 J Agric Food Chem 49:4333"
+    lab: "Reading (Mottram)"
+    system: "five volatile disulfides 100 ug/L each + propyl propanoate, 1 % (w/v) ovalbumin heated and unheated, or water"
+    medium: "HPLC water, pH 2.0 set with 0.1 M HCl, no buffer; heating 10 min boiling water bath (90 C reached); SPME 30 min at 37 C"
+    temperature_c: [37, 90]
+    ph: {initial: [2.0], measured_during: false, final: null}
+    time_min: []
+    species: ["diethyl disulfide", "diallyl disulfide", "dipropyl disulfide", "dibutyl disulfide", "2-furfuryl methyl disulfide"]
+    kind: ratio
+    location: "Fig. 4 (bar chart relative to propyl propanoate = 100; one example read by dossier at +-5 units), dossier sec. 3"
+    status: figure_only
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["unbuffered", "peak_area_only", "coarse_read", "condition_not_stated: time_min", "also_relevant: matrix"]
+    note: "Negative control for the thiolate mechanism: no systematic disulfide loss at pH 2 heated or unheated. arms: heated vs unheated protein vs water at pH 2 (and vs pH 6.7 / 8.0 in Tables 1-2)."
+  - id: adams2001_tab1_disulfide_loss_native_ovalbumin_ph
+    dossier: adams2001_extraction.md
+    paper: "Adams, Mottram, Parker & Brown 2001 J Agric Food Chem 49:4333"
+    lab: "Reading (Mottram)"
+    system: "five volatile disulfides 100 ug/L each + propyl propanoate 100 ug/L, 1 % (w/v) native (unheated) ovalbumin, or water"
+    medium: "HPLC water, no buffer (pH set with 0.1 M NaOH); 20 g in 40 mL vial, 30 min RT then SPME 30 min at 37 C"
+    temperature_c: [37]
+    ph: {initial: [6.7, 8.0], measured_during: false, final: null}
+    time_min: []
+    species: ["diethyl disulfide", "diallyl disulfide", "dipropyl disulfide", "dibutyl disulfide", "2-furfuryl methyl disulfide", "propyl propanoate"]
+    kind: ratio
+    location: "Table 1 (mean areas, CV, n = 3), dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["unbuffered", "peak_area_only", "condition_not_stated: time_min", "also_relevant: matrix"]
+    note: "SPME-GC-FID; native protein (Ellman 0.01 SH per molecule) loses disulfides mainly at pH 8.0. arms: pH 6.7 vs 8.0 vs water, native protein (same lab, same SPME assay; contrast with Table 2's denatured protein)."
+  - id: adams2001_tab2_disulfide_loss_denatured_ovalbumin_ph_addition_order
+    dossier: adams2001_extraction.md
+    paper: "Adams, Mottram, Parker & Brown 2001 J Agric Food Chem 49:4333"
+    lab: "Reading (Mottram)"
+    system: "diethyl, diallyl, dipropyl, dibutyl and 2-furfuryl methyl disulfide 100 ug/L each + propyl propanoate 100 ug/L reference, 1 % (w/v) heat-denatured ovalbumin, or water"
+    medium: "HPLC water, no buffer (pH set with 0.1 M NaOH); closed 100 mL glass bottles, boiling water bath 10 min (90 C reached); 20 g in 40 mL vial, 30 min RT then SPME 30 min at 37 C"
+    temperature_c: [37, 90]
+    ph: {initial: [6.7, 8.0], measured_during: false, final: null}
+    time_min: []
+    species: ["diethyl disulfide", "diallyl disulfide", "dipropyl disulfide", "dibutyl disulfide", "2-furfuryl methyl disulfide", "propyl propanoate"]
+    kind: ratio
+    location: "Table 2 (mean areas, CV, n = 4; Fig. 3 bars), dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["unbuffered", "peak_area_only", "non_isothermal", "condition_not_stated: time_min", "also_relevant: matrix"]
+    note: "SPME-GC-FID; key as disulfide/propyl propanoate ratios to water (operator / matrix row, not kinetic); mixing-to-sampling time not printed; pH said not to change on heating. Table 3 (GC-MS, pH 8.0 BH: free allyl mercaptan, propanethiol, butanethiol, FFT appear only with protein, no response factors) belongs to this pot. arms: pH 6.7 vs 8.0 x disulfide added before vs after heating x 5 disulfides vs water (same lab, same SPME assay)."
+  - id: charlesbernard2005a_fig2_spe_fractions_ethanethiol_fft_1h
+    dossier: charlesbernard2005a_extraction.md
+    paper: "Charles-Bernard, Kraehenbuehl, Rytz & Roberts 2005 J Agric Food Chem 53:4417"
+    lab: "Nestle (Kraehenbuehl)"
+    system: "SPE eluted (fr. 1) and retained (fr. 2) fractions of 11 solid phases and the whole brew, each at 1 % t.s. (equal mass), + the five-volatile mix"
+    medium: "10 mM acetate pH 5.2 (label; fraction pH not measured), sealed 2 mL vials, air headspace"
+    temperature_c: [25]
+    ph: {initial: [5.2], measured_during: false, final: null}
+    time_min: [60]
+    species: ["ethanethiol", "FFT"]
+    kind: endpoint
+    location: "Fig. 2 (read by dossier) with Table 2 SPE yields, dossier sec. 3.2 and 3.4"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "peak_area_only", "ph_not_measured", "internal_inconsistency", "condition_uncertain", "also_relevant: matrix"]
+    note: "Cation exchange (SCX, Dowex) removes most of the fast sink, confounded with metal removal, acidification and eluent residues; some bars missing without n.d. footnote; the 1 h screen does not match the Fig. 4 clock (D2), so rankings within the figure only. arms: 11 solid phases eluted vs retained vs whole brew, equal mass (same lab, same SPME assay)."
+  - id: charlesbernard2005a_fig3_sec_fractions_ethanethiol_1h
+    dossier: charlesbernard2005a_extraction.md
+    paper: "Charles-Bernard, Kraehenbuehl, Rytz & Roberts 2005 J Agric Food Chem 53:4417"
+    lab: "Nestle (Kraehenbuehl)"
+    system: "Sephadex G-25 SEC fractions A-J, each at 1 % t.s. (equal mass), + the five-volatile mix"
+    medium: "10 mM acetate pH 5.2 (label; fraction pH not measured), sealed 2 mL vials, air headspace"
+    temperature_c: [25]
+    ph: {initial: [5.2], measured_during: false, final: null}
+    time_min: [60]
+    species: ["ethanethiol", "FFT"]
+    kind: endpoint
+    location: "Fig. 3 (read by dossier; FFT = 0 in all, caption), with Table 1 compositions, dossier sec. 3.4"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "peak_area_only", "ph_not_measured", "condition_uncertain", "also_relevant: matrix"]
+    note: "U-shaped MW dependence of the EtSH sink at equal mass (medium-MW SEC-C least active, phenol-rich SEC-I/J most); equal-mass doses far above natural levels for minor fractions; SEC-K not shown. arms: SEC fractions A-J by molecular size (same lab, same SPME assay)."
+  - id: charlesbernard2005a_fig4_ethanethiol_fft_coffee_fraction_time_series
+    dossier: charlesbernard2005a_extraction.md
+    paper: "Charles-Bernard, Kraehenbuehl, Rytz & Roberts 2005 J Agric Food Chem 53:4417"
+    lab: "Nestle (Kraehenbuehl)"
+    system: "reconstituted medium-roast coffee brew 10 g/L, AEC-ABCD recombined, AEC-A 7.8 and 1.3 g/L, AEC-B 0.41, AEC-C 1.3, AEC-D 0.15 g/L + FFT ~35 uM, ethanethiol ~32 uM, DMS, pyrrole, 2,3-pentanedione"
+    medium: "10 mM acetate pH 5.2 (label; fraction pH not measured), 2 mL silanized amber vials, 1.2 mL air headspace, sealed, autosampler"
+    temperature_c: [25]
+    ph: {initial: [5.2], measured_during: false, final: null}
+    time_min: [30, 1110]
+    species: ["ethanethiol", "FFT"]
+    kind: time_series
+    location: "Fig. 4 (every 2 h, 0.5-18.5 h; read by dossier), dossier sec. 3.4"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "peak_area_only", "ph_not_measured", "coarse_read", "condition_uncertain", "also_relevant: matrix"]
+    note: "SPME headspace area / matched matrix-free blank, no IS; lag phase in AEC-A and ABCD, intercepts off 100 %, LSD ~12.5 points, zeros below an unstated floor; whole-brew EtSH repeats Part 2 (charlesbernard2005) within ~25 %. arms: seven matrices incl. the AEC-A 7.8 vs 1.3 g/L loading pair; FFT vs ethanethiol (same lab, same extract, same SPME assay)."
+  - id: charlesbernard2005a_fig5top_o_phenylhydroxylamine_electrophile_consumption
+    dossier: charlesbernard2005a_extraction.md
+    paper: "Charles-Bernard, Kraehenbuehl, Rytz & Roberts 2005 J Agric Food Chem 53:4417"
+    lab: "Nestle (Kraehenbuehl)"
+    system: "coffee brew or AEC-A/B/C/D fractions at 1.1 % t.s. diluted 9:1 with O-phenylhydroxylamine 10 mg/mL (~0.69-0.93 mmol per g coffee)"
+    medium: "aqueous, buffer not stated; reagent consumption by HPLC"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [30, 780]
+    species: ["O-phenylhydroxylamine consumed (electrophile equivalents per g dry)"]
+    kind: time_series
+    location: "Fig. 5 top (read by dossier), dossier sec. 3.4"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "ph_not_stated", "condition_not_stated: temperature_c", "coarse_read", "condition_uncertain", "also_relevant: matrix"]
+    note: "Bears on the MELE site density (Part 2's 8-10 mmol/g, D1): a non-saturating carbonyl probe (reagent charge caps the read), so a lower bound, not a thiol-site titre; 1:1 stoichiometry assumed; 'normalized to the yield' read as per g starting coffee (~0.75). arms: whole brew vs four AEC fractions vs their calculated sum (same lab, same assay)."
+  - id: charlesbernard2005a_fig6_24h_ethanethiol_fft_fractions_relative_yield
+    dossier: charlesbernard2005a_extraction.md
+    paper: "Charles-Bernard, Kraehenbuehl, Rytz & Roberts 2005 J Agric Food Chem 53:4417"
+    lab: "Nestle (Kraehenbuehl)"
+    system: "AEC-A/B/C/D and SEC-A/D/E/F fractions at relative-yield doses (0.15-7.8 g/L) + the five-volatile mix"
+    medium: "10 mM acetate pH 5.2 (label; fraction pH not measured), sealed 2 mL vials, air headspace"
+    temperature_c: [25]
+    ph: {initial: [5.2], measured_during: false, final: null}
+    time_min: [1440]
+    species: ["ethanethiol", "FFT"]
+    kind: endpoint
+    location: "Fig. 6 (read by dossier), dossier sec. 3.4"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "peak_area_only", "ph_not_measured", "coarse_read", "also_relevant: matrix"]
+    note: "24 h endpoints, FFT mostly censored at 100 % loss; melanoidin dose is not a threshold for FFT (D4). arms: eight fractions at their natural (relative-yield) doses (same lab, same SPME assay)."
+  - id: doorn2002_tab2_thiol_4hne_4one_rate_constants
+    dossier: doorn2002_extraction.md
+    paper: "Doorn & Petersen 2002 Chem Res Toxicol 15:1445"
+    lab: "Colorado (Petersen)"
+    system: "4-hydroxy-2-nonenal or 4-oxo-2-nonenal + N-acetylcysteamine, glutathione or Ac-RRWWCR-amide (nucleophile >= 10x excess, or 4HNE > 10x over thiol with DTNB quench)"
+    medium: "50 mM sodium phosphate; UV plate reader / diode array; O2 not stated"
+    temperature_c: [23]
+    ph: {initial: [7.4], measured_during: false, final: null}
+    time_min: []
+    species: ["4-hydroxy-2-nonenal", "4-oxo-2-nonenal", "thiol"]
+    kind: rate_constant
+    location: "Table 2 thiol rows (mean +- SE); Fig. 5 (k' vs [N-acetylcysteamine]) and Fig. 6 (4ONE + GSH 1:1) read by dossier, dossier sec. 4"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["condition_not_stated: time_min", "also_relevant: lipid", "complements: doorn2002_tab2_amine_imidazole_4hne_4one_rate_constants"]
+    note: "Forward second-order constants by enal UV loss (224 / 228 nm) or DTNB; no reverse rate, K, pH law or Ea; 'NAC' is N-acetylcysteamine. GSH + 4HNE agrees with esterbauer1975 within 22 %. arms: three thiols x 4HNE vs 4ONE (same lab, same assay)."
+  - id: esterbauer1975_fig1_gsh_crotonaldehyde_ph_rate_profile
+    dossier: esterbauer1975_extraction.md
+    paper: "Esterbauer, Zollner & Scholz 1975 Z Naturforsch 30c:466"
+    lab: "Graz (Esterbauer)"
+    system: "glutathione 0.1 mM (pH >= 7) or 1.0 mM (pH < 7) + crotonaldehyde 20x excess"
+    medium: "pH-stat with HCl / NaOH, no buffer"
+    temperature_c: [20]
+    ph: {initial: [3.5, 4.0, 5.0, 5.4, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 10.0, 10.5], measured_during: true, final: null}
+    time_min: []
+    species: ["glutathione", "crotonaldehyde"]
+    kind: rate_constant
+    location: "Fig. 1 (log k1 vs pH, 13 points read by dossier at +-0.1 log), dossier sec. 1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["unbuffered", "coarse_read", "condition_not_stated: time_min"]
+    note: "Thiolate pH law (rate ~ alpha_SH, pKa_SH 8.56); GSH analogue for MFT capture. arms: pH 3.5-10.5 at constant pH (pH-stat), same thiol and enal (same lab, same assay)."
+  - id: esterbauer1975_tab2_tab3_gsh_conjugated_carbonyl_forward_reverse_k_dissociation
+    dossier: esterbauer1975_extraction.md
+    paper: "Esterbauer, Zollner & Scholz 1975 Z Naturforsch 30c:466"
+    lab: "Graz (Esterbauer)"
+    system: "glutathione + 21 alpha,beta-unsaturated carbonyls (acrolein, 2-alkenals, 4-hydroxy-2-alkenals, enones, esters) and Table III acrylyl derivatives (incl. acrylamide, acrylic acid); 0.05-10 mM each"
+    medium: "66 mM phosphate; 10 % ethanol for some reactions; reverse runs N2-degassed for several carbonyls, DTNB trap"
+    temperature_c: [20]
+    ph: {initial: [7.4], measured_during: false, final: null}
+    time_min: []
+    species: ["glutathione", "conjugated carbonyl", "GSH-carbonyl Michael adduct"]
+    kind: rate_constant
+    location: "Table II (k1, k2, K; * = calculated) and Table III (k1, acrylyl series); Table I second-order check; Table V derived half-lives; dossier sec. 4"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["condition_not_stated: time_min", "also_relevant: lipid", "also_relevant: acrylamide", "internal_inconsistency"]
+    note: "Forward k1 by DTNB 412 nm or UV 222 nm; reverse k2 from initial DTNB-trapped release over 0.5-5 h; only thiol-trap set with forward, reverse and K; one temperature, no Ea. Caption cites a nonexistent reaction 24; MVK Table V half-life does not match k2. arms: carbonyl structure series (21 + acrylyl derivatives), same thiol, same lab, same assay."
+  - id: esterbauer1975_tab4_buffer_and_thiol_identity_crotonaldehyde
+    dossier: esterbauer1975_extraction.md
+    paper: "Esterbauer, Zollner & Scholz 1975 Z Naturforsch 30c:466"
+    lab: "Graz (Esterbauer)"
+    system: "glutathione, L-cysteine or ethyl thioglycolate 0.1 mM + crotonaldehyde 2.0 mM"
+    medium: "no buffer vs 0.066 / 0.1 M phosphate, Tris, triethanolamine, borate, NH4Cl, acetate, formate, 0.5 M NaCl"
+    temperature_c: [20]
+    ph: {initial: [7.4], measured_during: false, final: null}
+    time_min: []
+    species: ["thiol", "crotonaldehyde"]
+    kind: rate_constant
+    location: "Table IV, dossier sec. 1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["condition_not_stated: time_min"]
+    note: "General-acid buffer catalysis for NH3+-free thiols (GSH, ethyl thioglycolate; MFT is one), none for cysteine, which reacts much faster unbuffered: a competition basis for cysteine shielding MFT. arms: buffer identity and concentration x thiol identity (same lab, same assay)."
+  - id: grosch1992_tab2_mft_fft_disulfide_thiamine_cysteine_ribose_gsh_systems
+    dossier: grosch1992_extraction.md
+    paper: "Grosch & Zeiler-Hilgart 1992 ACS Symp Ser 490:183"
+    lab: "DFA Garching (Grosch)"
+    system: "thiamine or thiamine pyrophosphate 30 umol +- cysteine 325 umol +- ribose 670 umol +- GSH 230 umol, in 500 mL (meat-like levels)"
+    medium: "0.2 M Na-pyrophosphate, 500 mL, refluxed 2 h (Method I), then extracted; air through the condenser"
+    temperature_c: [100]
+    ph: {initial: [5.7], measured_during: false, final: null}
+    time_min: [120]
+    species: ["MFT", "FFT", "bis(2-methyl-3-furyl) disulfide"]
+    kind: endpoint
+    location: "Table II (8 systems, mean +- SD, N = 2-4), dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: ""
+    flags: ["ph_start_only", "open_system"]
+    note: "Ledger-ready rows 1, 4, 6, 7 (thiamine route at meat-like levels); the disulfide is not the sink. Tables IV (0.1 vs 0.2 M pyrophosphate) and VI (+ H2S flushes) are further within-study factors on the same Method I design, not itemised in the dossier's ledger-ready list. arms: thiamine vs thiamine pyrophosphate x +- cysteine x +- ribose x +- GSH (same lab, same SIDA)."
+  - id: grosch1992_tab3_mft_cysteine_dose_series_thiamine_ribose
+    dossier: grosch1992_extraction.md
+    paper: "Grosch & Zeiler-Hilgart 1992 ACS Symp Ser 490:183"
+    lab: "DFA Garching (Grosch)"
+    system: "thiamine 30 or 6 umol + ribose 670 umol + cysteine 0-2720 umol (0-5.4 mM), in 500 mL"
+    medium: "0.2 M Na-pyrophosphate, 500 mL, refluxed 2 h (Method I), then extracted; air"
+    temperature_c: [100]
+    ph: {initial: [5.7], measured_during: false, final: null}
+    time_min: [120]
+    species: ["MFT"]
+    kind: endpoint
+    location: "Table III (9 cysteine levels; thiamine 6 umol at 4 levels), dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: ""
+    flags: ["ph_start_only", "open_system", "no_error_bars"]
+    note: "Cysteine optimum then fall; the design confounds formation from thiamine with in-pot loss. arms: nine cysteine levels x thiamine 30 vs 6 umol (same lab, same SIDA)."
+  - id: grosch1992_tab5_ribose_cysteine_140c_mft
+    dossier: grosch1992_extraction.md
+    paper: "Grosch & Zeiler-Hilgart 1992 ACS Symp Ser 490:183"
+    lab: "DFA Garching (Grosch)"
+    system: "D-ribose 30 mM + L-cysteine 41 mM, 2 mL (Farmer & Mottram conditions); Table V no. 1: ribose 1.34 + cysteine 0.64 mM, 500 mL"
+    medium: "no. 2: 0.5 M Na-phosphate pH 5.6, 2 mL, vessel not stated; no. 1: 0.2 M Na-pyrophosphate pH 5.7, reflux"
+    temperature_c: [100, 140]
+    ph: {initial: [5.6, 5.7], measured_during: false, final: null}
+    time_min: [60, 120]
+    species: ["MFT", "FFT", "bis(2-methyl-3-furyl) disulfide"]
+    kind: endpoint
+    location: "Table V nos. 1-2 (Method I, n = 2-3), dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: ""
+    flags: ["ph_start_only", "vessel_not_stated", "no_replicates"]
+    note: "Ledger-ready item is no. 2 (140 C, 1 h, n = 2), a ribose + cysteine SIDA pot to check against the sulfur lane; no. 1 (100 C, 2 h reflux, dilute) is below detection. DFA institute, as Schieberle 2000 (CF-068), so not a third laboratory. arms: no. 1 vs no. 2 differ in T, time, concentration, buffer and volume (not a clean pair)."
+  - id: grosch1992_tab7_mft_meat_sde
+    dossier: grosch1992_extraction.md
+    paper: "Grosch & Zeiler-Hilgart 1992 ACS Symp Ser 490:183"
+    lab: "DFA Garching (Grosch)"
+    system: "500 g minced pork shoulder or beef (top round, eye of round, rib wing) in 500 mL tap water"
+    medium: "tap water, Likens-Nickerson SDE 2 h (Method II)"
+    temperature_c: [100]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [120]
+    species: ["MFT", "FFT", "bis(2-methyl-3-furyl) disulfide"]
+    kind: endpoint
+    location: "Table VII, dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "ph_not_stated", "open_system_product_stripping", "no_error_bars"]
+    note: "Context only (protein matrix; SDE redox artefact in meat per mottram1996b). arms: pork shoulder vs three beef cuts (same lab, same SDE + SIDA)."
+  - id: grosch1992_tab8_mft_reflux_vs_sde_same_pot
+    dossier: grosch1992_extraction.md
+    paper: "Grosch & Zeiler-Hilgart 1992 ACS Symp Ser 490:183"
+    lab: "DFA Garching (Grosch)"
+    system: "thiamine 30 umol; thiamine 30 + cysteine 325 umol; ribose 670 + cysteine 325 umol; each in 500 mL (60 uM thiamine, 0.65 mM Cys, 1.34 mM ribose)"
+    medium: "0.2 M Na-pyrophosphate, 500 mL; Method I reflux 2 h then extraction vs Method II Likens-Nickerson SDE 2 h; air"
+    temperature_c: [100]
+    ph: {initial: [5.7], measured_during: false, final: null}
+    time_min: [120]
+    species: ["MFT"]
+    kind: endpoint
+    location: "Table VIII (mean +- SD, n >= 2), dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "immediately after the boiling period would compensate alterations"
+    flags: ["ph_start_only", "open_system_product_stripping", "open_system", "condition_uncertain"]
+    note: "Deuterated standards added after boiling, so the SDE/reflux ratio reads an in-pot MFT sink (lambda inference is the dossier's, assumption-laden); Method I values repeat Table II rows 1 and 4; Method II standard timing not stated separately. Thiamine pots (pyrimidinylmethyl electrophile caveat). arms: Method I reflux vs Method II SDE on the same pots (same lab, same SIDA)."
+  - id: hou2026_fig2a_ttca_cystine_in_cysteine_mrps_storage
+    dossier: hou2026_extraction.md
+    paper: "Hou, Zhou, Li, Hua, Cui, Zhang, Hayat, Zhang & Ho 2026 Food Chem 499:147363"
+    lab: "Jiangnan (Zhang X / Cui H / Ho)"
+    system: "light-coloured MRPs: xylose 0.2 M + glycine 0.1 M pH 7.0, 80 C 80 min, then + L-cysteine 5 mM, pH re-set 7.0, 120 C 120 min; then stored"
+    medium: "aqueous MRP solution, unbuffered; storage 60 C / 65 % RH, dark; container not stated"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 43200]
+    species: ["TTCA", "cystine"]
+    kind: time_series
+    location: "Fig. 2A (TTCA printed at day 0 and 30; cystine read every 5 days); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: true
+    condition_quote: ""
+    flags: ["unbuffered", "non_isothermal", "vessel_not_stated", "also_relevant: trunk"]
+    note: "Cysteine-fate bookkeeping after a 120 C step: most added cysteine sits in neither TTCA nor cystine; the two heating steps precede the 60 C storage series. arms: storage day ladder only (the 1-5 mM cysteine dose arms of Fig. 4 are not digitised)."
+  - id: hou2026_figs3_gx_arp_cysteine_aerobic_vs_anaerobic
+    dossier: hou2026_extraction.md
+    paper: "Hou, Zhou, Li, Hua, Cui, Zhang, Hayat, Zhang & Ho 2026 Food Chem 499:147363"
+    lab: "Jiangnan (Zhang X / Cui H / Ho)"
+    system: "GX-ARP + L-cysteine (concentrations not known; SI not on disk)"
+    medium: "aerobic vs anaerobic; otherwise not known"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: ["cystine", "browning"]
+    kind: other
+    location: "Fig. S3 (supplementary data, not on disk); dossier sec. 0 and 7"
+    status: supplement_missing
+    quant_class: unknown
+    simulable: false
+    condition_quote: ""
+    flags: ["supplement_missing", "concentrations_not_stated", "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "The paper's only cysteine-with-ARP arm (the main-text model pot uses cystine); to fetch. arms: aerobic vs anaerobic."
+  - id: kallen1971b_fig7_phosphate_catalysis_saturation
+    dossier: kallen1971b_extraction.md
+    paper: "Kallen 1971 J Am Chem Soc 93:6236"
+    lab: "Univ. Pennsylvania (Kallen)"
+    system: "L-cysteine + formaldehyde, total phosphate 0-0.3 M"
+    medium: "water, I = 1.0 M KCl, pH held by 0.03 M MES"
+    temperature_c: [25]
+    ph: {initial: [6.12, 6.31, 6.62], measured_during: false, final: null}
+    time_min: []
+    species: ["formation rate constant per amine free base vs total phosphate", "fit coefficients C1-C3"]
+    kind: rate_constant
+    location: "Fig. 7 (zero-buffer and plateau per pH read +-0.1 x 10^3; printed fit coefficients C1, C2, C3); dossier sec. 4"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "two-threefold increases in rate from 0 to 0.025 M buffer"
+    flags: ["analogue_formaldehyde", "coarse_read", "internal_inconsistency", "erratum_not_on_disk", "condition_not_stated: time_min"]
+    note: "The saturation ceiling of phosphate catalysis (attack becomes rate-limiting), against any linear k0(1 + c_P[HPO4 2-]) law; two readers for the plateau. arms: phosphate 0-0.3 M at three pH (same lab, same assay)."
+  - id: kallen1971b_tab1_thiazolidine_formation_rate_vs_ph
+    dossier: kallen1971b_extraction.md
+    paper: "Kallen 1971 J Am Chem Soc 93:6236"
+    lab: "Univ. Pennsylvania (Kallen)"
+    system: "L-cysteine 2.5-10 mM (polarimetry; lower for UV) + formaldehyde 0.01-0.40 M in excess (pseudo-first-order), -> thiazolidine-4-carboxylic acid"
+    medium: "water, I = 1.0 M KCl, EDTA (concentration not printed here), buffers 0.01-0.1 M (HCl, formate, acetate, DABCO, phosphate), pH set with KOH"
+    temperature_c: [25]
+    ph: {initial: [1.0, 11.57], measured_during: false, final: null}
+    time_min: []
+    species: ["k_obsd/[F] (per total cysteine, formaldehyde hydrate basis)", "K1(app) carbinolamine", "k2obsd"]
+    kind: rate_constant
+    location: "Table I (pH 1.00-11.57; re-read from page renders, OCR misreads corrected); Fig. 3 log k vs pH; dossier sec. 4"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["analogue_formaldehyde", "erratum_not_on_disk", "condition_not_stated: time_min"]
+    note: "Forward pH law of a cysteine thiazolidine; with kallen1971's K_app it yields the reverse k_r(pH), which stays a derived note beside kallen1971_tables3_4, never a measurement; 1973 Additions and Corrections not on disk. arms: pH ladder and buffer identity / concentration (same lab, same polarimetric / UV assay)."
+  - id: kallen1971b_tab2_microscopic_rate_equilibrium_constants
+    dossier: kallen1971b_extraction.md
+    paper: "Kallen 1971 J Am Chem Soc 93:6236"
+    lab: "Univ. Pennsylvania (Kallen)"
+    system: "L-cysteine microspecies + formaldehyde hydrate -> N-hydroxymethylcysteine -> iminium -> thiazolidine-4-carboxylic acid"
+    medium: "water, I = 1.0 M KCl, water activity 1.0"
+    temperature_c: [25]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: ["K1 carbinolamine", "k1a", "k1b", "k-1a", "k-1b", "k2 (water)", "k2' (H3O+)"]
+    kind: rate_constant
+    location: "Table II; dossier sec. 4"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["analogue_formaldehyde", "internal_inconsistency", "erratum_not_on_disk", "condition_not_stated: time_min"]
+    note: "Microscopic constants of the attack and dehydration steps (ring closure fast); k2' differs between Table II and the Fig. 7 fit. arms: none (constants fitted across the Table I pH profile)."
+  - id: kallen1971b_tab3_general_acid_catalysis_bronsted
+    dossier: kallen1971b_extraction.md
+    paper: "Kallen 1971 J Am Chem Soc 93:6236"
+    lab: "Univ. Pennsylvania (Kallen)"
+    system: "L-cysteine + formaldehyde, general-acid catalysts: H3O+, acetic acid, MES, phosphate monoanion, hexafluoropropanol (HFP), phosphate dianion, water"
+    medium: "water, I = 1.0 M KCl; catalyst 0.001-0.40 M"
+    temperature_c: [25]
+    ph: {initial: [5.72, 13], measured_during: false, final: null}
+    time_min: []
+    species: ["k2'' general-acid catalytic constant for N-hydroxymethylcysteine dehydration", "catalyst pKa'"]
+    kind: rate_constant
+    location: "Table III (catalyst, pH, range, n, fraction HA, pKa', k2''); imidazolium in text; dossier sec. 4"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["analogue_formaldehyde", "erratum_not_on_disk", "condition_not_stated: time_min"]
+    note: "The Bronsted line for carbinolamine dehydration, the catalyst-class anchor for E1-type catalysed-exchange bands (amino-acid ammonium transfer is derived, not measured). arms: catalyst identity and concentration at fixed pH (same lab, same assay)."
+  - id: kallen1971b_text_no_carboxylate_buffer_catalysis
+    dossier: kallen1971b_extraction.md
+    paper: "Kallen 1971 J Am Chem Soc 93:6236"
+    lab: "Univ. Pennsylvania (Kallen)"
+    system: "L-cysteine + formaldehyde, cyanoacetate, formate or acetate buffer 0.05-0.4 M"
+    medium: "water, I = 1.0 M KCl"
+    temperature_c: [25]
+    ph: {initial: [2.3, 5.0], measured_during: false, final: null}
+    time_min: []
+    species: ["formation rate (buffer independence)"]
+    kind: other
+    location: "Results text (null result); dossier sec. 1 and 8"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: ["analogue_formaldehyde", "erratum_not_on_disk", "condition_not_stated: time_min"]
+    note: "Null result: below pH 5 amine attack limits and is not buffer-catalysed, the row against carboxylate-catalysed exchange at Cao's in-situ pH. arms: carboxylate buffer 0.05-0.4 M vs zero (same lab, same assay)."
+  - id: lo1994_text_mgo_n_acetylcysteine_hemithioacetal_constants
+    dossier: lo1994_extraction.md
+    paper: "Lo, Westwood, McLellan, Selwood & Thornalley 1994 J Biol Chem 269:32299"
+    lab: "Essex (Thornalley)"
+    system: "methylglyoxal + N-alpha-acetyl-L-cysteine, 80 mM each (1H NMR) or 0.25-2.0 mM equimolar (stopped-flow UV 288 nm)"
+    medium: "100 mM sodium phosphate (50 % D2O for NMR), air"
+    temperature_c: [37]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: []
+    species: ["MGO-N-acetylcysteine hemithioacetal", "k2, k-2, K2 (unhydrated MGO)", "overall K (all MGO forms)"]
+    kind: rate_constant
+    location: "Results / Model 2 fit (rate constants re-read from 130 / 300 dpi renders, OCR drops exponents); dossier sec. 1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["analogue_n_acetylcysteine", "internal_inconsistency", "condition_not_stated: time_min", "also_relevant: trunk"]
+    note: "The carbonyl-thiol equilibrium for a cysteine-pot MGO budget (fast, nearly complete at 37 C); temperature transfer not licensed; pH 7.0 (Methods, legends) vs 7.4 (text, abstract). arms: none (single condition; stopped-flow concentration series)."
+  - id: mottram1996b_tab1_sde_vs_headspace_thiol_disulfide_pattern
+    dossier: mottram1996b_extraction.md
+    paper: "Mottram, Nobrega, Dodson & Elmore 1996 Flavour Science: Recent Developments (RSC) pp. 413-418"
+    lab: "Reading (Mottram)"
+    system: "beef fillet (M. psoas major), fat trimmed, minced, autoclaved 140 C 30 min in sealed bottles; unspiked"
+    medium: "SDE: 100 g + 750 mL water, 2 h, air; headspace: 250 mL flask at 60 C, O2-free N2 40 mL/min, 1.5 h onto Tenax TA"
+    temperature_c: [140, 100, 60]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [30, 90, 120]
+    species: ["MFT", "FFT", "mercaptoketones", "dimethyl di-, tri-, tetrasulfide", "2-furanylmethyl methyl disulfide", "thiazoles", "thiophenes"]
+    kind: other
+    location: "Table 1 (relative TIC area x 10 000 vs IS, RF 1, mean (SD), n = 3; MFT headspace cell from the render); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "peak_area_only", "ph_not_stated", "non_isothermal", "internal_inconsistency", "also_relevant: matrix"]
+    note: "Pattern only: SDE shows thiols, Tenax headspace shows disulfides on the same cooked beef; which operator is true is not tested (trap or desorption oxidation not excluded); 'boiled' vs autoclaved in the source. arms: SDE vs dynamic headspace (same lab, same beef, different subsamples)."
+  - id: mottram1996b_tab2_spiked_furyl_disulfides_sde_beef_vs_water
+    dossier: mottram1996b_extraction.md
+    paper: "Mottram, Nobrega, Dodson & Elmore 1996 Flavour Science: Recent Developments (RSC) pp. 413-418"
+    lab: "Reading (Mottram)"
+    system: "bis(2-methyl-3-furyl) disulfide + bis(2-furylmethyl) disulfide, 500 ug each (~2.6 uM), spiked into 100 g cooked minced beef (autoclaved 140 C 30 min before spiking) or into water"
+    medium: "750 mL distilled water, modified Likens-Nickerson SDE 2 h (pentane / ether), air; pH not printed"
+    temperature_c: [100]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [120]
+    species: ["MFT", "FFT", "bis(2-methyl-3-furyl) disulfide", "bis(2-furylmethyl) disulfide", "2-furanylmethyl 2-methyl-3-furanyl disulfide", "2-methyl-3-furanyl methyl disulfide", "2-furanylmethyl methyl disulfide"]
+    kind: endpoint
+    location: "Table 2 (ug recovered by SDE, mean (SD), n = 3; water column without SD); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "ph_not_stated", "open_system_product_stripping", "condition_uncertain", "also_relevant: matrix"]
+    note: "An observation-operator row, not a kinetic row: SDE of a protein matrix reduces furyl disulfides to thiols and most thiol units are recovered; volatiles leave continuously, so no loss rate; complements mottram1996_table2_disulfide_reduction_by_protein (its Table 3 is a reprint of that table, not keyed). arms: cooked beef vs water (same lab, same SDE assay)."
+  - id: nikolantonaki2012_tab1_fft_quinone_pseudo_first_order_rate
+    dossier: nikolantonaki2012_extraction.md
+    paper: "Nikolantonaki & Waterhouse 2012 J Agric Food Chem 60:8484"
+    lab: "UC Davis (Waterhouse)"
+    system: "4-methyl-1,2-benzoquinone 1 mM + 2-furanmethanethiol (FFT) 4 mM"
+    medium: "model wine: 12 % v/v ethanol, 5 g/L L-tartaric acid, < 1 % acetonitrile; thermostated UV cell; quinone made under argon, reaction headspace not stated"
+    temperature_c: [10]
+    ph: {initial: [3.5], measured_during: false, final: null}
+    time_min: []
+    species: ["4-methyl-1,2-benzoquinone decay with FFT (pseudo-first-order K, 400 nm)", "FFT-catechol mono- and di-adducts"]
+    kind: rate_constant
+    location: "Table 1, 2FMT row (regression and K, mean of 10); Fig. 2 ln K; Table 2 HRMS products; dossier sec. 4"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["analogue_quinone_electrophile", "internal_inconsistency", "condition_not_stated: time_min"]
+    note: "The one odorant-thiol + electrophile rate on disk; the regression intercepts imply a fast initial phase, so K may understate the rate; no Ea, no pH law, no reverse rate, and no MFT. arms: FFT vs the other nucleophiles at fixed medium (see the thiol-series entry)."
+  - id: nikolantonaki2012_tab1_thiol_series_quinone_rates
+    dossier: nikolantonaki2012_extraction.md
+    paper: "Nikolantonaki & Waterhouse 2012 J Agric Food Chem 60:8484"
+    lab: "UC Davis (Waterhouse)"
+    system: "4-methyl-1,2-benzoquinone 1 mM + 4 mM 3-sulfanylhexanol, 4-methyl-4-sulfanylpentan-2-one, glutathione or H2S (also SO2, ascorbate, phloroglucinol, Met, Phe)"
+    medium: "model wine: 12 % v/v ethanol, 5 g/L L-tartaric acid; thermostated UV cell"
+    temperature_c: [10]
+    ph: {initial: [3.5], measured_during: false, final: null}
+    time_min: []
+    species: ["pseudo-first-order quinone decay K per nucleophile", "thiol-catechol adducts (HRMS)"]
+    kind: rate_constant
+    location: "Table 1 thiol and non-thiol rows; Fig. 2; Table 2 products; dossier sec. 4"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["analogue_quinone_electrophile", "internal_inconsistency", "condition_not_stated: time_min"]
+    note: "Steric / class series around FFT (primary > secondary > tertiary thiol; GSH and H2S faster): sacrificial-nucleophile competition in kind; the abstract swaps the GSH and ascorbate K values (follow Table 1). arms: nucleophile identity at fixed medium (same lab, same stopped UV assay)."
+  - id: pesek1975_text_aliphatic_tca_stability_acid_neutral_base
+    dossier: pesek1975_extraction.md
+    paper: "Pesek & Frost 1975 Tetrahedron 31:907"
+    lab: "Northern Illinois (Pesek / Frost)"
+    system: "2-substituted thiazolidine-4-carboxylic acids from L-cysteine (2-methyl, 2-ethyl, 2-isopropyl, 2-propyl, 2-cyclohexyl), 0.5 M"
+    medium: "D2O: 8 M or 4 M HCl, neutral, or 0.25-3 M NaOH; NMR tube; no buffer"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: ["thiazolidine ring persistence vs cysteine + aldehyde (1H NMR)"]
+    kind: other
+    location: "Results and summary text (qualitative); dossier sec. 1"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: ["unbuffered", "ph_not_stated", "condition_uncertain", "condition_not_stated: temperature_c", "condition_not_stated: time_min"]
+    note: "Qualitative only (dossier: none worth keying for the engine): aliphatic TCAs persist for days in strong acid and neutral D2O and open only in strong base; at 0.5 M the ring side is favoured whatever the rate, so 'no change' also reflects K. arms: 8 M HCl vs neutral D2O vs > 3 M NaOH (same lab, same NMR)."
+  - id: pripisnicolau2000_fig4_cysteine_loss_mgo_diacetyl_acetoin_ph
+    dossier: pripisnicolau2000_extraction.md
+    paper: "Pripis-Nicolau, de Revel, Bertrand & Maujean 2000 J Agric Food Chem 48:3761"
+    lab: "Bordeaux Faculte d'Oenologie (de Revel)"
+    system: "L-cysteine + methylglyoxal, diacetyl or acetoin, 20 mM each (inferred from the general recipe)"
+    medium: "12 % hydro-alcoholic solution, H3PO4 / NaOH, dark; vessel and headspace not stated"
+    temperature_c: [25]
+    ph: {initial: [3.5, 8], measured_during: false, final: null}
+    time_min: [56, 10080]
+    species: ["cysteine"]
+    kind: time_series
+    location: "Fig. 4 (% remaining on a log time axis, read +-2 points; dossier sec. 3)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "in stoichiometric conditions (20 mmol/L)"
+    flags: ["ph_start_only", "concentration_basis_inferred", "no_replicates", "no_error_bars", "vessel_not_stated"]
+    note: "Cysteine + carbonyl adduct formation (plateaus, not completion); the cysteine sink is mostly thiazolidine-type adducts, not Strecker products, so not a Strecker rate. Acetoin arm not representable in the engine. arms: pH 3.5 vs 8 x MGO / diacetyl / acetoin (25 C, same lab, same assay)."
+  - id: pripisnicolau2000_fig6_cys_mgo_acetylthiazoline_acetylthiazole_10_25c
+    dossier: pripisnicolau2000_extraction.md
+    paper: "Pripis-Nicolau, de Revel, Bertrand & Maujean 2000 J Agric Food Chem 48:3761"
+    lab: "Bordeaux Faculte d'Oenologie (de Revel)"
+    system: "L-cysteine + methylglyoxal, 2 mM each (cysteine axis starts at ~355 mg/L, see flags)"
+    medium: "12 % hydro-alcoholic solution, pH 3.5 (H3PO4 / 1 M NaOH), stored in the dark; vessel and headspace not stated"
+    temperature_c: [10, 25]
+    ph: {initial: [3.5], measured_during: false, final: null}
+    time_min: [0, 20000]
+    species: ["cysteine", "2-acetyl-2-thiazoline", "2-acetylthiazole"]
+    kind: time_series
+    location: "Fig. 6a / 6b (read off 400 dpi render; dossier sec. 3)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: true
+    condition_quote: "cysteine + MGO \"at a low concentration (2 mM)\", 10 and 25 C, pH 3.5 (by context)"
+    flags: ["ph_start_only", "internal_inconsistency", "condition_uncertain", "no_replicates", "no_error_bars", "vessel_not_stated"]
+    note: "Only time-resolved Cys + MGO -> acetylthiazoline -> acetylthiazole series at low T (thiazoline intermediate maximum, thiazole rising); SIM vs octan-3-ol, no response factor; ~355 mg/L start = 2.93 mM free Cys, key the Cys axis as fraction of initial. arms: 10 vs 25 C (pH 3.5, same lab, same assay)."

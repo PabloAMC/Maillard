@@ -1057,3 +1057,22 @@ entries:
     condition_quote: "Glucose (60 mg) + asparagine (50 mg) + linoleic acid (16 mg) in 2 mL 0.1 M phosphate buffer pH 7.4, sealed tubes, 160 / 180 / 200 C, 1-15 min"
     flags: [secondary_source, ph_start_only, status_uncertain]
     note: "Primary not on disk (no dossier; PDF absent). Per-compound exponential fits; acrylamide k moves only 1.4x over 40 C -> plateau-limited, Ea (~13 kJ/mol) REFUSED by round 3. Lipid co-reactant (linoleic acid) not in the acrylamide lane. Underlying time courses worth retrieving."
+  # ---- ingest 2026-11-01 (the 36 dossiers of commit e5195e42, 'Ingest 36 papers'); ledgered 2026-11-01 ----
+  - id: low2006_tab2_acrylamide_glycine_citric_potato
+    dossier: low2006_extraction.md
+    paper: "Low, Koutsidis, Parker, Elmore, Dodson & Mottram 2006 J Agric Food Chem 54:5976"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "drum-dried potato flake + water or additive solution 1 : 1.3 w/w; control, + 1.3 % glycine, + 0.39 % citric acid, + 0.39 % glycine + citric acid (dry wt); precursors in Table 1"
+    medium: "potato cakes 3 mm x 73 mm, ~18 g, impingement oven, open, air"
+    temperature_c: [180]
+    ph: {initial: [5.14, 6.01], measured_during: false, final: null}
+    time_min: [15, 30, 60]
+    species: ["acrylamide"]
+    kind: time_series
+    location: "Table 2 (ug/kg dry wt, set 2 triplicate means); set 1 (10-60 min, single measurements) only in Fig. 1, not digitised; dossier sec. 3.3"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "open_system", "low_moisture_no_aw_term", "ph_measured_room_temperature"]
+    note: "Glycine and citric-acid (pH) mitigation factors in one matrix; end moisture not stated; some 60 min arms not run. arms: control vs + glycine vs + citric acid vs both, 15 / 30 / 60 min (same lab, same SIDA assay)."

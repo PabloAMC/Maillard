@@ -2285,3 +2285,238 @@ entries:
     condition_quote: "conjugation 5 % gum (protein basis), 60 C, 24 h; sequential = enzyme, kill, then gum"
     flags: [condition_uncertain, matrix_food, unbuffered]
     note: "Amine loss on gum conjugation is a blocked-amine (glycation) readout, but the control's 8.44 mmol/g is ~17x pea lysine content: unit/basis unresolved, method delegated to Shen & Li 2021 (not on disk). Free SH column is the sulfur/matrix-site lane. pH of conjugation not stated."
+  # ---- ingest 2026-11-01 (the 36 dossiers of commit e5195e42, 'Ingest 36 papers'); ledgered 2026-11-01 ----
+  - id: charlesbernard2005a_fig5bottom_amperometric_oxidizability_fractions
+    dossier: charlesbernard2005a_extraction.md
+    paper: "Charles-Bernard, Kraehenbuehl, Rytz & Roberts 2005 J Agric Food Chem 53:4417"
+    lab: "Nestle (Kraehenbuehl)"
+    system: "coffee brew and AEC-A/B/C/D fractions, 0.01 % w/v"
+    medium: "degassed 100 mM acetate pH 5, prepared in a glovebox; flow-injection amperometry, glassy carbon vs Ag/AgCl, 200-800 mV"
+    temperature_c: []
+    ph: {initial: [5.0], measured_during: false, final: null}
+    time_min: []
+    species: ["amperometric signal at 800 mV (oxidizability)"]
+    kind: endpoint
+    location: "Fig. 5 bottom (read by dossier), dossier sec. 3.4"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "coarse_read", "condition_not_stated: temperature_c", "condition_not_stated: time_min", "also_relevant: sulfur"]
+    note: "Lower priority (ledger-ready item 7); normalised to fraction yield; per gram ranks AEC-A last while it is the most thiol-active (D3), so not a proxy for MELE. arms: whole brew vs four AEC fractions vs calculated sum (same lab, same assay)."
+  - id: charlesbernard2005a_tab1_coffee_fraction_composition
+    dossier: charlesbernard2005a_extraction.md
+    paper: "Charles-Bernard, Kraehenbuehl, Rytz & Roberts 2005 J Agric Food Chem 53:4417"
+    lab: "Nestle (Kraehenbuehl)"
+    system: "light, medium and dark spray-dried coffee brews and the dialysis, SEC (A-K) and DEAE (A-D) fractions of the medium roast (CTN 85)"
+    medium: "dry solids (fractions freeze-dried, dried over P2O5)"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: ["yield", "ash", "melanoidins", "carbohydrates", "proteins", "caffeine", "chlorogenic acids", "organic acids"]
+    kind: other
+    location: "Table 1 (% w/w, printed) and Table 2 (SPE yields), dossier sec. 3.1-3.2"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "matrix_precursor_composition", "internal_inconsistency", "condition_not_stated: temperature_c", "condition_not_stated: time_min", "also_relevant: sulfur"]
+    note: "Melanoidins by difference (includes unassigned low-MW material); covariates for the thiol-sink rows; AEC-B yield 0.1 % in Methods vs 4.1 % in Table 1. Industrial extraction at 120 C. Table 3 Pearson r (composition vs 24 h loss, 13 samples) is collinear with concentration and censored for FFT. arms: light vs medium vs dark roast; fractions by size and charge (same lab, same extract)."
+  - id: lo1994_text_mgo_n_acetyllysine_glycosylamine_constants
+    dossier: lo1994_extraction.md
+    paper: "Lo, Westwood, McLellan, Selwood & Thornalley 1994 J Biol Chem 269:32299"
+    lab: "Essex (Thornalley)"
+    system: "methylglyoxal + N-alpha-acetyl-L-lysine, 80 mM each"
+    medium: "100 mM sodium phosphate, 50 % D2O, air, sterile"
+    temperature_c: [37]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: []
+    species: ["MGO-lysine glycosylamine", "MGO-lysine bis-glycosylamine", "k1, k-1, K1, k2, k-2, K2"]
+    kind: rate_constant
+    location: "Model 3 fit to 1H NMR time courses (constants re-read from renders); dossier sec. 1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["analogue_n_acetyllysine", "internal_inconsistency", "condition_not_stated: time_min", "also_relevant: trunk"]
+    note: "A reversible MGO reservoir on epsilon-amines, weak binding at model-pot concentrations; 37 C only; Schiff base not detected in solution. arms: none (single condition; NMR fit)."
+  - id: lo1994_text_relative_mgo_reactivity_vs_bsa
+    dossier: lo1994_extraction.md
+    paper: "Lo, Westwood, McLellan, Selwood & Thornalley 1994 J Biol Chem 269:32299"
+    lab: "Essex (Thornalley)"
+    system: "[14C]methylglyoxal 1.0 mM + BSA 0.10 mM with competing scavengers aminoguanidine, L-arginine or L-lysine (0-29 mM)"
+    medium: "100 mM sodium phosphate, air, sterile"
+    temperature_c: [37]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: []
+    species: ["relative reactivity toward MGO (BSA = 1)"]
+    kind: ratio
+    location: "Results text (scavenger competition); dossier sec. 1"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: ["internal_inconsistency", "condition_not_stated: time_min"]
+    note: "Ranks free amino acids against protein as MGO sinks; pH 7.0 vs 7.4 within the paper. arms: aminoguanidine vs L-arginine vs L-lysine vs BSA (same lab, same [14C] assay)."
+  - id: low2006_tab4_alkylpyrazines_glycine_citric_potato
+    dossier: low2006_extraction.md
+    paper: "Low, Koutsidis, Parker, Elmore, Dodson & Mottram 2006 J Agric Food Chem 54:5976"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "drum-dried potato flake (Maris Piper : Pentland Dell 1:1) + water or additive solution 1 : 1.3 w/w; control, + 1.3 % glycine, + 0.39 % citric acid, + 0.39 % glycine + citric acid (dry wt); precursors in Table 1"
+    medium: "potato cakes 3 mm x 73 mm, ~18 g, impingement oven, open, air; pooled and milled"
+    temperature_c: [180]
+    ph: {initial: [5.14, 6.01], measured_during: false, final: null}
+    time_min: [15, 30, 60]
+    species: ["methylpyrazine", "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", "ethylpyrazine", "2,3-dimethylpyrazine", "trimethylpyrazine", "tetramethylpyrazine", "ethyl-methyl and other alkylpyrazines (24 in all)"]
+    kind: time_series
+    location: "Table 4 (umol/kg dry wt, means of 3, letters omitted); dossier sec. 3.1"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "open_system", "low_moisture_no_aw_term", "ph_measured_room_temperature", "also_relevant: trunk"]
+    note: "Calibrated SDE denominators for low2007's [2-13C]glycine isotopomer shares; unsubstituted pyrazine not quantified, so R cannot be computed; set 2 lacks the 0.39 % glycine arm and the 60 min citric arms. arms: control vs + glycine vs + citric acid vs both, 15 / 30 / 60 min (same lab, same SDE assay)."
+  - id: low2006_tab4_methylpyrazine_to_25dmp_ratio_glycine_shift
+    dossier: low2006_extraction.md
+    paper: "Low, Koutsidis, Parker, Elmore, Dodson & Mottram 2006 J Agric Food Chem 54:5976"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "potato flake cakes: control, + 1.3 % glycine, + 0.39 % citric acid, + glycine + citric acid"
+    medium: "impingement oven, open, air"
+    temperature_c: [180]
+    ph: {initial: [5.14, 6.01], measured_during: false, final: null}
+    time_min: [15, 30, 60]
+    species: ["methylpyrazine / 2,5-dimethylpyrazine"]
+    kind: ratio
+    location: "Derived from Table 4 (dossier sec. 1, [Z])"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_food", "open_system", "low_moisture_no_aw_term", "ph_measured_room_temperature"]
+    note: "A within-study shift of the C2 / C3 aminocarbonyl balance (glycine lowers MPZ, not 2,5-DMP); derived by the dossier from the Table 4 entry, not a separate measurement. arms: control vs + glycine (and citric arms), 15 / 30 / 60 min (same lab, same assay)."
+  - id: lu2005_fig3_peptide_alone_breakdown_controls
+    dossier: lu2005_extraction.md
+    paper: "Lu, Hao, Payne & Ho 2005 J Agric Food Chem 53:6443"
+    lab: "Rutgers (Ho)"
+    system: "diglycine or triglycine 40 mM alone (no glucose)"
+    medium: "glycerol with 0, 50, 100 % (v/v) water; vial, oil bath; no buffer"
+    temperature_c: [160]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: ["cyclo(Gly-Gly) (DKP)", "glycine"]
+    kind: endpoint
+    location: "Fig. 3 (bars, read +-3 mol %; diGly / triGly assignment inferred from Table 2's DKP levels); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["ph_not_stated", "coarse_read", "condition_uncertain", "internal_inconsistency"]
+    note: "Pairs with Table 2 for the share of released glycine consumed by glucose; Fig. 3 bars carry no legend and its caption gives a different '0 %' moisture. arms: peptide alone vs with glucose (Table 2), 0 / 50 / 100 % water (same lab, same assay)."
+  - id: lu2005_tab1_pyrazines_glycine_vs_peptides_water_content
+    dossier: lu2005_extraction.md
+    paper: "Lu, Hao, Payne & Ho 2005 J Agric Food Chem 53:6443"
+    lab: "Rutgers (Ho)"
+    system: "D-glucose 40 mM + glycine, diglycine or triglycine 40 mM"
+    medium: "glycerol with 0-100 % (v/v) water; vial, oil bath; no buffer; SBSE (1 mL + 9 mL phosphate pH 8, 27 % NaCl) GC-MS"
+    temperature_c: [160]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: ["pyrazine", "methylpyrazine", "2,5-dimethylpyrazine", "2,3-dimethylpyrazine", "trimethylpyrazine", "tetramethylpyrazine", "furfural", "2-acetylpyrrole", "1-methylpyrroles and others (20 compounds)"]
+    kind: ranking
+    location: "Table 1 (relative amount = area / IS area x 10, no SD; the 100 % water columns are the aqueous domain); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["peak_area_only", "ph_not_stated", "no_error_bars", "condition_uncertain"]
+    note: "A ranking signature only (glycine ~ triglycine > diglycine by pyrazines; output rises toward low water); internal-standard addition time not stated and SBSE efficiency is compound-specific. arms: glycine vs diglycine vs triglycine x six water contents (same lab, same SBSE assay)."
+  - id: lu2005_tab2_peptide_breakdown_dkp_glycine_with_glucose
+    dossier: lu2005_extraction.md
+    paper: "Lu, Hao, Payne & Ho 2005 J Agric Food Chem 53:6443"
+    lab: "Rutgers (Ho)"
+    system: "D-glucose 40 mM + diglycine or triglycine 40 mM (0.2 mmol each in 5 mL)"
+    medium: "glycerol with 0, 10, 25, 50, 75, 100 % (v/v) water ('0 %' = 1.05 % moisture); 21 x 70 mm vial, oil bath; sealing / headspace not stated; no buffer"
+    temperature_c: [160]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: ["cyclo(Gly-Gly) (DKP)", "glycine", "diglycine", "triglycine"]
+    kind: endpoint
+    location: "Table 2 (mol/mol % of the peptide charged, LC-MS/MS, external standards); dossier sec. 3"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["ph_not_stated", "unbuffered", "vessel_not_stated", "condition_uncertain", "also_relevant: trunk"]
+    note: "Peptide-bound glycine enters as a release-limited amine (triglycine nearly consumed, mostly to DKP + glycine; diglycine more stable); replication stated both as duplicate and triplicate; glycerol is also a solvent change. arms: diglycine vs triglycine x six water contents (same lab, same LC-MS/MS)."
+  - id: scalone2015_tab1_tryptic_whey_hydrolysate_free_amino_acids
+    dossier: scalone2015_extraction.md
+    paper: "Scalone, Cucu, De Kimpe & De Meulenaer 2015 J Agric Food Chem 63:5364"
+    lab: "Ghent (De Kimpe)"
+    system: "whey protein isolate LACPRODAN DI-9224, 5 mg/mL, trypsin 1:20 w/w"
+    medium: "0.1 M K-phosphate pH 7.8; 95 C / 5 min before and after digestion"
+    temperature_c: [37]
+    ph: {initial: [7.8], measured_during: false, final: null}
+    time_min: [1200]
+    species: ["free amino acids (Lys, Leu, Val, Ile, Arg, Tyr, Thr, Trp, Phe, Met, Ala)"]
+    kind: endpoint
+    location: "Table 1 (mg/100 mg hydrolysate; dossier sec. 2)"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: ""
+    flags: ["matrix_precursor_composition", "analytical_method_not_stated"]
+    note: "Free amino acid composition of a tryptic whey hydrolysate (~1.5 % of its mass; native WPI none detected). arms: none (single condition)."
+  - id: scalone2015_tab4_whey_hydrolysate_vs_native_vs_free_aa_pyrazines
+    dossier: scalone2015_extraction.md
+    paper: "Scalone, Cucu, De Kimpe & De Meulenaer 2015 J Agric Food Chem 63:5364"
+    lab: "Ghent (De Kimpe)"
+    system: "tryptic whey protein hydrolysate 15 mg, native whey protein isolate, or native WPI + the hydrolysate's free amino acids, each + D-glucose 7.5 or 15 mg"
+    medium: "made up in 0.1 M K-phosphate pH 7.8, freeze-dried on 1.5 g sand (a_w 0.16), capped vial, oven"
+    temperature_c: [180]
+    ph: {initial: [7.8], measured_during: false, final: null}
+    time_min: [90]
+    species: ["methylpyrazine", "2,5(6)-dimethylpyrazine", "2_3_dimethylpyrazine", "ethylpyrazine", "3-ethyl-2_5-dimethylpyrazine", "2-ethyl-3_5-dimethylpyrazine", "5-ethyl-2_3-dimethylpyrazine"]
+    kind: endpoint
+    location: "Table 4 (HS-SPME peak areas x 1e6, mean +- SD of 3; dossier sec. 3.3)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["peak_area_only", "ph_start_only", "low_moisture_no_aw_term", "matrix_food", "internal_inconsistency", "coelution_2_5_and_2_6_dmp", "also_relevant: trunk"]
+    note: "Peptide-vs-free-amino-acid factor for whey; no unsubstituted pyrazine, so no mixing ratio R; the 7.5 mg hydrolysate column is the same measurement as Table 2 and Table 5 a_w 0.16 (reprinted with small drift). arms: hydrolysate vs native WPI vs native + free AA (free AA alone: no pyrazines) x glucose 7.5 / 15 mg."
+  - id: scalone2015_tab5_water_activity_series_roasting_pyrazines
+    dossier: scalone2015_extraction.md
+    paper: "Scalone, Cucu, De Kimpe & De Meulenaer 2015 J Agric Food Chem 63:5364"
+    lab: "Ghent (De Kimpe)"
+    system: "tryptic whey protein hydrolysate 15 mg + D-glucose 7.5 mg"
+    medium: "freeze-dried on 1.5 g sand from 0.1 M K-phosphate pH 7.8; a_w 0.33-0.75 samples held 7 d at 30 C over salt solutions before roasting; capped vial, oven"
+    temperature_c: [180]
+    ph: {initial: [7.8], measured_during: false, final: null}
+    time_min: [90]
+    species: ["methylpyrazine", "2,5(6)-dimethylpyrazine", "3-ethyl-2_5-dimethylpyrazine", "2-ethyl-5-methylpyrazine"]
+    kind: endpoint
+    location: "Table 5 (peak areas x 1e6, n = 3; dossier sec. 3.4)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: ["peak_area_only", "ph_start_only", "low_moisture_no_aw_term", "matrix_food", "temperature_moisture_confounded", "also_relevant: trunk"]
+    note: "Key the pre-incubated arm (a_w 0.33-0.75) as the a_w factor; the 0.16 point lacks the 7-day 30 C pre-incubation (confound) and is the Table 2 measurement. arms: measured a_w 0.33 / 0.38 / 0.53 / 0.62 / 0.75 (same lab, same assay)."
+  - id: zamora2006_fig6_fed_phenylpyruvic_acid_phe_to_pa_benzaldehyde
+    dossier: zamora2006_extraction.md
+    paper: "Zamora, Navarro, Gallardo & Hidalgo 2006 J Agric Food Chem 54:6101"
+    lab: "Instituto de la Grasa, CSIC Seville (Hidalgo)"
+    system: "phenylpyruvic acid 0.5 umol + L-phenylalanine 25 umol in 500 uL"
+    medium: "acetonitrile / 50 mM sodium citrate pH 3.0 (2:1); vessel, headspace and atmosphere not stated"
+    temperature_c: [60]
+    ph: {initial: [3.0], measured_during: false, final: null}
+    time_min: [0, 1440]
+    species: ["phenylacetaldehyde", "benzaldehyde"]
+    kind: time_series
+    location: "Fig. 6 (read off 200 dpi render; dossier sec. 3)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: ["ph_start_only", "internal_inconsistency", "no_replicates", "no_error_bars", "vessel_not_stated", "also_relevant: lipid"]
+    note: "Keto-acid -> aldehyde conversion (~0.1 % of PPA per h to PA at 60 C); caption names epoxydecenal, Methods phenylpyruvic acid (Methods likelier); ~2 % reads as PA / BZA at t = 0 (impurity or 250 C injector). arms: none (single condition)."
