@@ -34,6 +34,7 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
+from functools import lru_cache
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
@@ -314,14 +315,15 @@ def parse_cell_refs(text: str, source: str, cells) -> List[dict]:
     return hits
 
 
-def author_year_patterns(stem: str) -> List[re.Pattern]:
+@lru_cache(maxsize=None)
+def author_year_patterns(stem: str) -> Tuple[re.Pattern, ...]:
     m = re.match(r"([A-Za-z]+?)(\d{4})([a-z]*)(.*)$", stem)
     name, year, suffix, rest = m.groups()
     pats = [re.compile(r"(?<![A-Za-z0-9])" + re.escape(stem) + r"(?![A-Za-z0-9])", re.I)]
     if not rest:
         pats.append(re.compile(r"\b" + re.escape(name) + r"(?: et al\.?| (?:&|and) [A-Z][a-zA-Z\-]+)?,? \(?"
                                + year + suffix + r"(?![a-z0-9])", re.I))
-    return pats
+    return tuple(pats)
 
 
 def parse_named(text: str, source: str, aliases, stem_labs) -> List[dict]:
@@ -621,6 +623,443 @@ def build() -> Tuple[dict, dict]:
     return doc, split
 
 
+# ================================================================================================================
+# v2: PER-CHANGE hold-out (coordinator, 2026-11-01, declared before any scoring). v1 above stays frozen and untouched.
+#   DEV(E)  = the cells cited AS EVIDENCE FOR E in ENGINE_VS_LITERATURE secs. 2 - 5 (E's mismatch rows in sec. 2.1, its
+#             rows in secs. 3 / 3.1 / 5 / 5.1, its recommended-order item, its Appendix-A probes, its sec. 2.0
+#             correction), plus E's own prereg cells, plus every cell of those cells' / named laboratories;
+#   TEST(E) = the candidate contrasts in E's scope (ERROR_SCOPES_V2) from laboratories not in DEV(E), EXCLUDING any
+#             contrast whose paper feeds the shipped engine (a calibration input: CALIBRATION_* below).
+# ================================================================================================================
+VERSION_V2 = "contrast_split_v2_per_change"
+SPLIT_V2 = BENCH / "split_v2_per_change.yml"
+FROZEN_V2_SHA256 = "dbe32a2b3af83f3bbb603efb391dd8477999263a6b24769ea946fcc0e0fe2e12"
+
+# Which sec. 2.1 mismatch rows are evidence for which error: sec. 3's first column, written out (sec. 3 abbreviates
+# "F16-a, -b"). F28-d (named in E7's sec. 3 row) has no sec. 2.1 row. F21-a carries both the pyrrole (E14) and the
+# pyridine (E20). F06-d (the latent dpo_share split) belongs to E10: sec. 5 makes B59b's dpo_share fix E10's lever.
+MISMATCH_ERRORS = {
+    "F23-a": ["E1"], "F24-a": ["E1"], "F06-a": ["E2"], "F06-c": ["E2"], "F16-a": ["E3"], "F16-b": ["E3"],
+    "F16-c": ["E4"], "F01-b": ["E5"], "F03-b": ["E5"], "F13-b": ["E5"], "F14-a": ["E5"], "F19-c": ["E5"],
+    "F23-c": ["E5"], "F29-b": ["E5", "E9"], "F23-b": ["E6"], "F30-a": ["E7"], "F26-c": ["E7"], "F25-a": ["E8"],
+    "F25-b": ["E8"], "F06-b": ["E8"], "F29-a": ["E9"], "F29-c": ["E9"], "F04-a": ["E10"], "F04-b": ["E10"],
+    "F06-d": ["E10"], "F23-d": ["E11"], "F28-a": ["E12"], "F28-b": ["E12"], "F28-c": ["E12"], "F19-a": ["E13"],
+    "F19-b": ["E14"], "F21-a": ["E14", "E20"], "F20-a": ["E14"], "F17-a": ["E15"], "F13-a": ["E16"],
+    "F03-a": ["E17"], "F26-a": ["E18"], "F27-a": ["E18"], "F27-b": ["E18"], "F22-a": ["E19"], "F18-a": ["E20"],
+}
+# Sec. 2.0's two corrections, and Appendix A's probes (A: NF share; B: FFT vs pH; C, E: hexose MFT; D: MFT / FFT).
+SEC20_ITEM_ERRORS = {1: ["E8"], 2: ["E10"]}
+PROBE_ERRORS = {"A": ["E6"], "B": ["E8"], "C": ["E1"], "D": ["E6", "E8"], "E": ["E1"]}
+PREREG_ERRORS = {CITED_PREREGS[0].name: ["E4"], CITED_PREREGS[1].name: ["E6", "E11"]}
+# Evidence the cited text gives without a cell index or a name. Sec. 2.1 row F03-a: "hexose ARP 71 - 96 % (3 labs)"
+# = F03#0 (Nestle, 0.74 - 0.88), F03#3 (Wageningen, 71 - 96 %), F03#11 (Ho network, 88 %). Sec. 5's E5 "8+ labs"
+# names none and cannot be resolved (README caveat).
+UNNAMED_EVIDENCE = {"E17": ["F03#0", "F03#3", "F03#11"]}
+
+# v2 scopes = v1's, with two widenings that make each error's TEST set match its own prereg's search (declared now,
+# before any v2 count was read): E4 also F17 and F21 (the E4 prereg searched F16, F17, F19, F20, F21 for pH
+# contrasts); E6 every F23 route share (the E6 prereg scores intact-C5 / xylose shares, e.g. Wang 2012's, which the
+# change moves), not only those whose text names NF.
+ERROR_SCOPES_V2 = {**ERROR_SCOPES,
+                   "E4": {**ERROR_SCOPES["E4"], "families": ["F16", "F17", "F19", "F20", "F21"]},
+                   "E6": {"title": ERROR_SCOPES["E6"]["title"], "families": ["F23", "F26"], "kinds": ["route_share"],
+                          "text_unless_family": {"F23": None, "F26": ERROR_SCOPES["E6"]["text"]}}}
+
+# Calibration inputs (a test must not be one). Paper level (conservative: one shipped row excludes the paper):
+#   (1) measurement-ledger entries `in_model_fit` without a not-shipped flag (data/lit/measurement_ledger/*.yml);
+#   (2) the shipped sulfur fit B60's 52 objective rows, by their row-id prefix (the ledger predates part of B60);
+#   (3) papers whose measured constant the engine ships FIXED (SRC_FIXED_CONSTANTS, read in src/kinetic_core).
+# Recall net for (3): every atlas paper the engine's source cites (src/kinetic_core/*.py) that would enter a TEST(E)
+# set must be reviewed into SRC_FIXED_CONSTANTS or SRC_MENTION_ONLY; the generator fails until it is.
+LEDGER_DIR = ROOT / "data" / "lit" / "measurement_ledger"
+B60_REPORT = VALIDATION / "kinetic_core_b60_fit_report.json"
+B60_ROW_PREFIX_STEMS = {
+    "hofmann_": ["hofmann1998"], "fed_": ["hofmann1998"], "zhou_": ["zhou2023"], "whitfield_": ["whitfield1999",
+    "whitfield2001"], "vanseeventer_": ["vanseeventer2001"], "zhang_fig1_": ["Zhang2024"], "cerny_": ["cerny2007b"],
+    "kang_": ["kang2026", "kang2026_SI"], "kumazawa_": ["kumazawa2003"], "feng_": ["feng2022"],
+    "zhai_": ["zhai2023foodchem", "zhai2023jafc", "zhai2021"],
+}   # zhai_*_fold_120_over_100 are Zhai 2023 Food Chem Table 1; its 100 C arm reprints Zhai 2021, as do JAFC's (CF-066)
+ENGINE_SRC = ROOT / "src" / "kinetic_core"
+SRC_FIXED_CONSTANTS = {
+    "chan1994b": "2-acetyl-1-pyrroline Ea 60.2 kJ/mol (parameters_proline.py) and the measured sulfur-class Ea prior "
+                 "(ea_class_prior.py, Table I)",
+    "arnold1971": "B50: the share of degraded thiamine released as H2S vs pH (parameters_sulfur.py ~l. 402, sulfur.py)",
+    "stack2018": "the thiol / o-quinone K(T) and forward Ea, implemented (parameters_sulfur.py ~l. 1204 - 1706)",
+}
+SRC_MENTION_ONLY = {   # cited in src/kinetic_core, read 2026-11-01: no shipped constant or fit row comes from it
+    "du2023": "documents why HEXOSE_C5_ENTRY exists; the switch ships OFF (k = 0)",
+    "zhao2019b": "documents why HEXOSE_C5_ENTRY exists; the switch ships OFF (k = 0)",
+    "farmer1990": "cited as the lipid quench behind a REFUSED saturable-thioether constant (parameters_sulfur.py)",
+    "whitfield1988": "cited as the lipid quench behind a REFUSED saturable-thioether constant (parameters_sulfur.py)",
+    "meynier1995": "B51 records the buffer (pyrophosphate) its pots used: a scoring condition, not a fitted value",
+    "mundt2004": "C/N 7.64 quoted as a comparison against the fixed MEL_C 8 : MEL_N 1 (species.py)",
+    "quan2020": "its 88 rate constants are REFUSED (parameters_acrylamide.py); its glyoxal level is a check "
+                "(ledger in_model_check)",
+    "zamora2015": "the src 'Zamora 2015 (Food Chem 174:89)' is zamora2015b, a different paper (DECADIENAL_BREAKAGE)",
+}
+
+# Hand-reviewed factor tags (2026-11-01) for contrasts that v1 left on the heuristic and that could enter a factor-
+# scoped v2 TEST set (E2 / E4 / E8 pH, E5 buffer, E7 lipid, E16 pH / O2). The generator lists, for each such error,
+# every in-family candidate from a non-DEV(E), non-calibration lab whose text carries the factor's vocabulary ANYWHERE
+# (recall), and fails until each has a review here; the review then decides (precision). Notes as comments.
+FACTOR_REVIEW_V2: Dict[str, List[str]] = {
+    "F04#2@kallen1971b": ["buffer"],                       # phosphate 0 -> 0.3 M at pH ~6.1 - 6.6, saturating
+    "F04#19@zhang2025b": ["amine"],                        # lysine dose; the phosphate is held
+    "F05#23@thornalley1999": ["amine", "buffer", "metals"],  # +/- HSA; phosphate 10 -> 100 mM; DETAPAC
+    "F06#11@thornalley1999": ["buffer", "metals", "amine"],
+    "F08#2@thornalley1999": ["metals", "buffer"],
+    "F15#9@cerny2003": [],                                 # one condition, a label pattern
+    "F16#6@weenen2001": ["ph"],                            # pH 7 phosphate vs pH 3.2 citrate: buffer co-varies
+    "F16#11@monforte2021": ["ph", "metals", "sugar", "temperature"],  # pH 7 > 5 > 3.4; metals; glucose; 40 - 80 C
+    "F22#7@li2022": ["time"],
+    "F22#12@shu1985": ["ph"],                              # unbuffered pH 2.2 / 5.1 / 7.1
+    "F25#17@us8920862": ["lipid"],                         # structured lipid vs aqueous buffer (patent)
+    "F25#18@grosch1992": ["concentration", "temperature"],  # meat-like dilution at 100 C vs Farmer-style at 140 C
+    "F27#7@dwivedi1972": ["ph"],                           # one buffer (0.1 M phosphate) across the pH ladder
+    "F27#15@grosch1992": ["amine", "concentration"],       # thiamine vs ribose + Cys; Cys dose
+    "F27#16@grosch1992": ["amine"],                        # TPP vs free thiamine (precursor identity)
+    "F28#12@grosch1992": [],                               # reflux vs SDE: a method contrast
+    "F28#20@xu2011": ["lipid"],                            # no / fresh / oxidised lard
+    "F28#25@wang2022": ["temperature"],
+    "F30#5@xu2011": ["lipid"],
+    "F30#7@du2025": ["lipid"],
+    "F30#11@kim1996b": ["amine"],                          # amino-acid identity with a dienal
+    "F30#15@zamora2015": ["oxygen", "lipid"],              # N2 vs air; lipid identity; one buffer (citrate pH 3)
+    "F31#3@mundt2004": ["sugar"],                          # glucose vs maltose, label positions; acetate held
+}
+
+
+def _segments_by_error(text: str) -> Dict[str, str]:
+    """Split ENGINE_VS_LITERATURE secs. 2 - 5 (as cited_sections() returns it) into the text that is evidence for each
+    error. Lines that belong to no error (headings, the mismatch-kind legend, the lower-ranked leads, sec. 4) drop out."""
+    out: Dict[str, List[str]] = defaultdict(list)
+    sec, item_errs = None, []
+    for line in text.split("\n"):
+        h = re.match(r"^#{2,3}\s+(Appendix A|\d+(?:\.\d+)?)", line)
+        if h:
+            sec, item_errs = h.group(1), []
+            continue
+        errs: List[str] = []
+        if sec == "2.0":
+            m = re.match(r"^(\d+)\.\s", line)
+            if m:
+                item_errs = SEC20_ITEM_ERRORS.get(int(m.group(1)), [])
+            errs = item_errs
+        elif sec == "2.1":
+            m = re.match(r"^\| (F\d\d-[a-z]) \|", line)
+            errs = MISMATCH_ERRORS.get(m.group(1), []) if m else []
+        elif sec == "3":
+            m = re.match(r"^\| \d+ \| (E\d+)\b", line)
+            errs = [m.group(1)] if m else []
+        elif sec == "3.1":
+            m = re.match(r"^\| (E\d+)(?: - (E\d+))? \|", line)
+            if m:
+                a = int(m.group(1)[1:])
+                b = int(m.group(2)[1:]) if m.group(2) else a
+                errs = [f"E{i}" for i in range(a, b + 1)]
+        elif sec == "Appendix A":
+            m = re.match(r"^\| ([A-E]) \|", line)
+            errs = PROBE_ERRORS[m.group(1)] if m else []
+        elif sec == "5":
+            m = re.match(r"^\| (E\d+) ", line)
+            o = re.match(r"^(\d+)\.\s+\*\*(.*?)\*\*", line)
+            if m:
+                errs, item_errs = [m.group(1)], []
+            elif o:
+                item_errs = re.findall(r"E\d+", o.group(2))
+                errs = item_errs
+            elif line.startswith("   ") and item_errs:
+                errs = item_errs
+            else:
+                item_errs = []
+        elif sec == "5.1":
+            errs = ["E4"]
+        for e in errs:
+            out[e].append(line)
+    unmapped = set(MISMATCH_ERRORS) - set(re.findall(r"^\| (F\d\d-[a-z]) \|", text, re.M))
+    if unmapped:
+        raise SystemExit(f"MISMATCH_ERRORS names rows absent from sec. 2.1: {sorted(unmapped)}")
+    return {e: "\n".join(v) for e, v in out.items()}
+
+
+def _prereg_parts(text: str) -> Tuple[str, str, str]:
+    """(everything but sec. 4.1, sec. 4.1 'Held-out', sec. 4.2 'Development checks')."""
+    m = re.search(r"^### 4\.1 .*?$(.*?)(?=^### )", text, re.M | re.S)
+    d = re.search(r"^### 4\.2 .*?$(.*?)(?=^##)", text, re.M | re.S)
+    if not m or not d:
+        raise SystemExit("cited prereg lacks its '### 4.1' held-out or '### 4.2' development-check section")
+    return text[:m.start()] + text[m.end():], m.group(0), d.group(0)
+
+
+def _calibration_inputs(stems: Set[str]) -> Dict[str, List[str]]:
+    """atlas dossier stem -> the calibration sources that make it a calibration input."""
+    out: Dict[str, Set[str]] = defaultdict(set)
+    lower = {s.lower(): s for s in stems}
+    for path in sorted(LEDGER_DIR.glob("*.yml")):
+        for e in yaml.safe_load(path.read_text())["entries"]:
+            if e["status"] != "in_model_fit":
+                continue
+            if any(f.startswith("fit_wave_not_shipped") or f == "fit_not_forwarded_route_stage1" for f in e["flags"]):
+                continue
+            s = lower.get(stem_of(e["dossier"]).lower())
+            if s:
+                out[s].add(f"ledger {path.name}: {e['id']}")
+    rows = json.loads(B60_REPORT.read_text())["members"][0]["row_ids"]
+    for r in rows:
+        hit = [p for p in B60_ROW_PREFIX_STEMS if r.startswith(p)]
+        if not hit:
+            raise SystemExit(f"B60 row {r} has no declared source paper (B60_ROW_PREFIX_STEMS)")
+        for s in B60_ROW_PREFIX_STEMS[hit[0]]:
+            if s in stems:
+                out[s].add(f"B60 fit row {hit[0]}*")
+    for s, why in SRC_FIXED_CONSTANTS.items():
+        if s not in stems:
+            raise SystemExit(f"SRC_FIXED_CONSTANTS names {s}, not an atlas paper")
+        out[s].add(f"fixed constant: {why}")
+    # A data set published twice is one calibration input: a register copy of a calibration paper (or the original
+    # of one) is a calibration input too (lab_ids.yml data_copies; e.g. Schieberle 1998 Table IV's aqueous arm is
+    # Hofmann 1998 T1, a B60 fit row).
+    norm = lambda x: lower.get(re.sub(r"_(extraction|reconciliation)$", "", x).lower())
+    for cp in yaml.safe_load(LAB_IDS.read_text()).get("data_copies") or []:
+        a, b = norm(cp["copy"]), norm(cp["original"])
+        for x, y in ((a, b), (b, a)):
+            if x and y and y in out and not any(t.startswith("data copy") for t in out[y]):
+                out[x].add(f"data copy ({cp['register']}) of calibration input {y}")
+    return {s: sorted(v) for s, v in sorted(out.items())}
+
+
+def _src_cited(stems: Set[str]) -> Set[str]:
+    src = "\n".join(p.read_text() for p in sorted(ENGINE_SRC.glob("*.py")))
+    return {s for s in stems if any(pt.search(src) for pt in author_year_patterns(s))}
+
+
+_CALIB_CACHE: Dict[frozenset, tuple] = {}
+
+
+def build_v2(variant: str = "declared") -> dict:
+    """variant: declared | ames_separate | kallen_not_cited | prereg_literal | calibration_narrow | calibration_broad."""
+    atlas = load_atlas()
+    cells = {cid: c for cid, c in atlas.items() if c["_index"] < FROZEN_EXTENT.get(c["_family"], 0)}
+    lab_doc, string_to_lab, aliases, collab, copies = load_lab_ids(cells)
+    aliases = {k: list(v) for k, v in aliases.items()}
+    if variant == "ames_separate":
+        for s in ("Univ. Reading / Dijon (Ames)", "University of Reading (Ames)"):
+            string_to_lab[s] = "reading_ames"
+        aliases["reading_mottram_parker"].remove("Ames")
+        aliases["reading_ames"] = ["Ames"]
+    if variant == "kallen_not_cited":
+        aliases["kallen_pennsylvania"] = []
+    labs_of = cell_labs(cells, string_to_lab, collab, copies)
+    stem_labs: Dict[str, Set[str]] = defaultdict(set)
+    for cid, c in cells.items():
+        for d in c["dossiers"]:
+            stem_labs[stem_of(d)].update(labs_of[cid])
+    stem_cells: Dict[str, Set[str]] = defaultdict(set)
+    for cid, c in cells.items():
+        for d in c["dossiers"]:
+            stem_cells[stem_of(d)].add(cid)
+
+    evl = cited_sections(EVL.read_text())
+    segments = _segments_by_error(evl)
+    texts: Dict[str, Dict[str, str]] = defaultdict(dict)    # error -> source -> text
+    for e, t in segments.items():
+        texts[e]["ENGINE_VS_LITERATURE secs. 2 - 5"] = t
+    prereg_parts: Dict[str, Tuple[str, str, str]] = {}
+    for p in CITED_PREREGS:
+        body, held, devchk = _prereg_parts(p.read_text())
+        prereg_parts[p.name] = (body, held, devchk)
+        for e in PREREG_ERRORS[p.name]:
+            texts[e][p.name] = p.read_text() if variant == "prereg_literal" else body
+
+    def key(h):
+        return h["kind"], h["target"]
+
+    # A prereg's declared held-out targets (cited in its sec. 4.1 and not among its sec. 4.2 development checks) do
+    # not become its development, wherever else the prereg mentions them (summary, baselines, expectations).
+    exempt: Dict[str, Set[Tuple[str, str]]] = {}
+    for name, (body, held, devchk) in prereg_parts.items():
+        hk = {key(h) for h in parse_cell_refs(held, name, cells) + parse_named(held, name, aliases, stem_labs)}
+        dk = {key(h) for h in parse_cell_refs(devchk, name, cells) + parse_named(devchk, name, aliases, stem_labs)}
+        exempt[name] = set() if variant == "prereg_literal" else hk - dk
+
+    def targets(text: str, source: str):
+        hits = parse_cell_refs(text, source, cells) + parse_named(text, source, aliases, stem_labs)
+        hits = [h for h in hits if key(h) not in exempt.get(source, set())]
+        tcells, tlabs = set(), set()
+        for h in hits:
+            if h["kind"] == "cell":
+                tcells.add(h["target"])
+            elif h["kind"] == "study":
+                tcells |= stem_cells[h["target"]]
+            else:
+                tlabs.add(h["target"])
+        return tcells, tlabs, hits
+
+    contrasts, _ = classify(cells, labs_of)
+    v1_test = {c["id"] for c in contrasts} & set(FACTOR_REVIEW)
+    for c in contrasts:
+        c["factors"] = (FACTOR_REVIEW.get(c["id"]) if c["id"] in v1_test else
+                        FACTOR_REVIEW_V2.get(c["id"], c["factors"]))
+        c["factors_source"] = ("v1_review" if c["id"] in v1_test else
+                               "v2_review" if c["id"] in FACTOR_REVIEW_V2 else "heuristic")
+
+    all_stems = {stem_of(d) for c in cells.values() for d in c["dossiers"]}
+    key_ = frozenset(all_stems)
+    if key_ not in _CALIB_CACHE:
+        _CALIB_CACHE[key_] = (_calibration_inputs(all_stems), _src_cited(all_stems))
+    calib, src_cited = _CALIB_CACHE[key_]
+    calib = {k: list(v) for k, v in calib.items()}
+    if variant == "calibration_narrow":
+        calib = {s: [x for x in v if not x.startswith("fixed constant")] for s, v in calib.items()}
+        calib = {s: v for s, v in calib.items() if v}
+    if variant == "calibration_broad":
+        for s_ in src_cited:
+            calib.setdefault(s_, ["cited in src/kinetic_core"])
+
+    errors, review_needed = {}, {}
+    for eid, scope in ERROR_SCOPES_V2.items():
+        cited_cells, named_labs, prov = set(), set(), []
+        for src_name, t in texts.get(eid, {}).items():
+            tc, tl, hits = targets(t, src_name)
+            cited_cells |= tc
+            named_labs |= tl
+            prov += [f"{h['kind']} {h.get('match', h['target'])} ({src_name})" for h in hits]
+        cited_cells |= set(UNNAMED_EVIDENCE.get(eid, []))
+        held_out_declared = sorted({f"{k}:{t}" for p, es in PREREG_ERRORS.items() if eid in es
+                                    for k, t in exempt[p]})
+        dev_labs = {l for cid in cited_cells for l in labs_of[cid]} | named_labs
+        dev_cells = {cid for cid in cells if cid in cited_cells or set(labs_of[cid]) & dev_labs}
+        in_scope_all = [c for c in contrasts if in_scope(c, cells[c["cell"]], scope)]
+        test, excluded_cal = [], []
+        for c in contrasts:
+            if c["cell"] in dev_cells:
+                continue
+            stems = {stem_of(d) for d in cells[c["cell"]]["dossiers"]}
+            cal = sorted(s for s in stems if s in calib)
+            if c in in_scope_all:
+                (excluded_cal if cal else test).append({**c, "calibration_papers": cal})
+                unrev = sorted(st for st in stems if st in src_cited and st not in calib
+                               and st not in SRC_MENTION_ONLY)
+                if not cal and unrev and variant == "declared":
+                    review_needed.setdefault(f"SRC:{','.join(unrev)}", set()).add(eid)
+            # recall net for factor-scoped errors: any family member whose text carries the factor vocabulary
+            if scope.get("factors") and not cal and c["id"] not in v1_test and c["id"] not in FACTOR_REVIEW_V2:
+                fam_ok = not scope.get("families") or c["family"] in scope["families"]
+                txt = " ".join(str(cells[c["cell"]].get(k) or "") for k in ("contrast", "quantity"))
+                if fam_ok and any(re.search(FACTOR_VOCAB[f], txt) for f in scope["factors"]):
+                    review_needed.setdefault(c["id"], set()).add(eid)
+        tlabs = sorted({c["lab"] for c in test})
+        errors[eid] = {
+            "title": scope["title"],
+            "development_labs": sorted(dev_labs),
+            "development_cells_cited": sorted(cited_cells, key=cell_sort_key),
+            "prereg_declared_heldout_not_dev": held_out_declared,
+            "test_contrasts": [c["id"] for c in test],
+            "test_labs": tlabs,
+            "n_test_contrasts": len(test),
+            "n_test_labs": len(tlabs),
+            "excluded_as_calibration_input": [f"{c['id']} ({', '.join(c['calibration_papers'])})"
+                                              for c in excluded_cal],
+            "verdict": "testable" if len(tlabs) >= 2 else "UNTESTABLE_on_held_out",
+        }
+    return {"errors": errors, "calibration_inputs": calib, "review_needed": review_needed,
+            "contrasts": {c["id"]: c for c in contrasts}, "cells": cells}
+
+
+HEADER_V2 = """# The contrast benchmark's v2 PER-CHANGE hold-out (one DEV / TEST split per open engine error E1 - E20). GENERATED by
+# scripts/generators/build_contrast_split.py --v2 --write. DO NOT HAND-EDIT. v1 (split.yml) stays frozen beside it.
+# FROZEN: `sha256` is over the `split:` block; `--v2` asserts it. A change needs a new, dated, reasoned version.
+"""
+
+
+def v2_document() -> dict:
+    main_run = build_v2("declared")
+    if main_run["review_needed"]:
+        lines = [f"  {cid}  ({', '.join(sorted(es))})" for cid, es in sorted(main_run["review_needed"].items())]
+        raise SystemExit("FACTOR_REVIEW_V2 needs these contrasts reviewed:\n" + "\n".join(lines))
+    errs = main_run["errors"]
+    v1_doc = yaml.safe_load(SPLIT.read_text())
+    v1_test = [c["id"] for c in v1_doc["contrasts"] if c["partition"] == "test"]
+    v2_test = sorted({cid for e in errs.values() for cid in e["test_contrasts"]},
+                     key=lambda x: cell_sort_key(x.split("@")[0]))
+    reread = sorted(set(v1_test) | set(v2_test), key=lambda x: cell_sort_key(x.split("@")[0]))
+    split = {
+        "version": VERSION_V2,
+        "atlas_extent": dict(sorted(FROZEN_EXTENT.items())),
+        "calibration_input_papers": sorted(main_run["calibration_inputs"]),
+        "errors": {eid: {"development_labs": e["development_labs"], "test_contrasts": e["test_contrasts"]}
+                   for eid, e in errs.items()},
+    }
+    alternatives = {}
+    for var in ("ames_separate", "kallen_not_cited", "prereg_literal", "calibration_narrow", "calibration_broad"):
+        r = build_v2(var)["errors"]
+        alternatives[var] = {eid: {"n_test_labs": e["n_test_labs"], "n_test_contrasts": e["n_test_contrasts"],
+                                   "test_labs": e["test_labs"], "verdict": e["verdict"]} for eid, e in r.items()}
+    contrasts = main_run["contrasts"]
+    return {
+        "version": VERSION_V2,
+        "frozen_on": FROZEN_ON,
+        "sha256": canonical_hash(split),
+        "hash_rule": "sha256 of json.dumps(split, sort_keys=True, separators=(',', ':'), ensure_ascii=True)",
+        "rule": ("Per error E: DEV(E) = the cells cited as evidence for E in ENGINE_VS_LITERATURE.md secs. 2 - 5 "
+                 "(its sec. 2.1 mismatch rows, its rows in secs. 3, 3.1, 5 and 5.1, its recommended-order item, its "
+                 "Appendix-A probes, its sec. 2.0 correction) and in E's own prereg outside that prereg's sec. 4.1 "
+                 "held-out list, plus every cell of those cells' and named laboratories (lab_ids.yml). TEST(E) = "
+                 "the candidate contrasts in E's scope from laboratories not in DEV(E), excluding any contrast "
+                 "whose paper is a calibration input of the shipped engine."),
+        "inputs": {"cited_text_sha256": yaml.safe_load(SPLIT.read_text())["inputs"]["cited_text_sha256"],
+                   "v1_sha256": v1_doc["sha256"], "lab_ids_version": "lab_ids_v1"},
+        "split": split,
+        "summary": {
+            "testable_errors": [eid for eid, e in errs.items() if e["verdict"] == "testable"],
+            "per_error": {eid: f"{e['n_test_labs']} labs / {e['n_test_contrasts']} contrasts ({e['verdict']})"
+                          for eid, e in errs.items()},
+            "v2_test_contrasts_union": len(v2_test),
+            "reread_needed": {"v1_test": len(v1_test), "v2_new": len(set(v2_test) - set(v1_test)),
+                              "total": len(reread)},
+        },
+        "errors": errs,
+        "alternatives": alternatives,
+        "reread_list": [{"id": cid, "in_v1_test": cid in v1_test,
+                         "errors": [eid for eid, e in errs.items() if cid in e["test_contrasts"]],
+                         "lab": contrasts[cid]["lab"] if cid in contrasts else None} for cid in reread],
+        "test_contrast_factors": {cid: {"factors": contrasts[cid]["factors"], "source": contrasts[cid]["factors_source"]}
+                                  for cid in v2_test},
+        "calibration_inputs": main_run["calibration_inputs"],
+    }
+
+
+def main_v2(write: bool) -> int:
+    doc = v2_document()
+    sha = doc["sha256"]
+    frozen = FROZEN_V2_SHA256 if FROZEN_V2_SHA256 != "TO_BE_SET" else None
+    text = HEADER_V2 + yaml.safe_dump(doc, sort_keys=False, width=120, default_flow_style=None, allow_unicode=False)
+    if write:
+        if frozen and sha != frozen:
+            print(f"REFUSED: v2 hash {sha} != frozen {frozen}. Cut a new dated version instead.")
+            return 1
+        SPLIT_V2.write_text(text)
+        print(f"wrote {SPLIT_V2.relative_to(ROOT)}  sha256 {sha}" + ("" if frozen else "  (FROZEN_V2_SHA256 unset)"))
+        return 0
+    ok = bool(frozen) and sha == frozen
+    if not ok:
+        print(f"FAIL: v2 rebuilt {sha} vs frozen {frozen}")
+    if not SPLIT_V2.exists():
+        print("FAIL: split_v2_per_change.yml missing")
+        return 1
+    disk = yaml.safe_load(SPLIT_V2.read_text())
+    if canonical_hash(disk["split"]) != disk["sha256"] or disk["sha256"] != frozen:
+        print("FAIL: split_v2_per_change.yml's split block does not hash to its recorded / frozen sha256")
+        ok = False
+    for k in ("inputs", "summary", "errors", "alternatives", "reread_list", "test_contrast_factors",
+              "calibration_inputs"):
+        if disk.get(k) != doc[k]:
+            print(f"FAIL: block `{k}` differs from a rebuild")
+            ok = False
+    print(("OK" if ok else "FAILED") + f": {VERSION_V2} sha256 {sha}; testable {doc['summary']['testable_errors']}")
+    return 0 if ok else 1
+
+
 HEADER = """# The contrast benchmark's DEVELOPMENT / TEST split. GENERATED by scripts/generators/build_contrast_split.py from
 # the pathway atlas, lab_ids.yml, ENGINE_VS_LITERATURE.md secs. 2 - 5 and the two cited preregs. DO NOT HAND-EDIT.
 # FROZEN: `sha256` is over the `split:` block (membership); the generator asserts it on every run. A change of the split
@@ -635,7 +1074,10 @@ def dump(doc: dict) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
     ap.add_argument("--write", action="store_true", help="write split.yml (refuses if membership moved)")
+    ap.add_argument("--v2", action="store_true", help="the v2 per-change split (split_v2_per_change.yml) instead")
     args = ap.parse_args()
+    if args.v2:
+        return main_v2(args.write)
     doc, split = build()
     sha = doc["sha256"]
     frozen = FROZEN_SHA256 if FROZEN_SHA256 != "TO_BE_SET" else None

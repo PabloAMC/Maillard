@@ -185,7 +185,7 @@ Even under the most generous choices, at most E3, E10, E12 and E18 reach two TES
   - the E6 + E11 prereg's "held-out tests come from the labelling cells of CAAS / BTBU" (both labs are DEVELOPMENT here);
   - the E4 prereg's own conclusion, which agrees: zero admissible held-out labs.
   
-  The coordinator should decide whether rule (i) is applied per change (only the cells that diagnosed THAT change) or globally (v1). A per-change split would return CAAS / BTBU to E6's test set, and would need a v2.
+  The coordinator decided: v2 (sec. 8) applies rule (i) per change, beside the frozen v1.
 
 ## 7. Versions
 
@@ -194,3 +194,89 @@ Even under the most generous choices, at most E3, E10, E12 and E18 reach two TES
   - atlas extent as of the 2026-11-01 fix-up (562 cells);
   - ENGINE_VS_LITERATURE including sec. 5.1 (E4 correction);
   - the two preregs as of 2026-11-01 ~03:00.
+- **v2 (per change), 2026-11-01:** `split_v2_per_change.yml`, sha256 `dbe32a2b3af83f3bbb603efb391dd8477999263a6b24769ea946fcc0e0fe2e12`, declared before any scoring (sec. 8). It sits beside v1; v1 is unchanged and still checks OK.
+
+## 8. v2: per-change hold-out; why
+
+**Why.** v1 applies rule (i) globally. A lab cited for ANY error is development for EVERY error, so BTBU and CAAS, cited for E1 only, could not test E6. That is stricter than standard hold-out practice. The usual rule is that the data used to diagnose or tune a change cannot test THAT change, and anything else can. The coordinator asked, on 2026-11-01, for a per-change split declared before any score. v1 stays frozen as the conservative global reading. A score should name which split it uses.
+
+**The rule (per error E1 - E20):**
+- **DEV(E)** = the cells cited AS EVIDENCE FOR E in ENGINE_VS_LITERATURE secs. 2 - 5, plus E's own prereg cells, plus every cell of those cells' and named laboratories. "Evidence for E" is read from E's own text only:
+  - E's sec. 2.1 mismatch rows (`MISMATCH_ERRORS` in the script writes out sec. 3's first column);
+  - its rows in secs. 3, 3.1, 5 and 5.1;
+  - its recommended-order item in sec. 5 (so the cells its fix was tuned on count, e.g. E4's band on Leahy);
+  - its Appendix-A probes;
+  - its sec. 2.0 correction (item 1 is E8, item 2 is E10);
+  - one unnamed citation, resolved by hand: E17's "hexose ARP 71 - 96 % (3 labs)" = F03#0, #3, #11.
+  
+  The E4 prereg feeds E4, and the E6 + E11 prereg feeds E6 and E11.
+- **TEST(E)** = the candidate contrasts in E's scope from laboratories not in DEV(E), minus any contrast whose paper is a **calibration input** of the shipped engine.
+
+**Choices (all declared before any v2 count was read, except where marked):**
+- **Conservative choices kept, as written:** the Ames papers are merged into Reading, and "Kallen-shaped" counts as citing Kallen (so Kallen is DEV(E10)).
+- **A prereg's declared held-out tests are not its development.** A target cited in the prereg's sec. 4.1 "Held-out", and not among its sec. 4.2 development checks, does not enter DEV(E). This holds wherever else the prereg mentions it (its summary, its baselines table). Without this, every prereg would turn its own tests into development. The literal reading is reported as an alternative.
+- **Calibration inputs** are paper level, which is conservative: one shipped row excludes the whole paper. There are 50 papers:
+  1. measurement-ledger entries `in_model_fit` without a not-shipped flag;
+  2. the shipped sulfur fit B60's 52 objective rows, mapped by row-id prefix to their papers (the ledger predates part of B60);
+  3. measured constants the engine ships fixed (`SRC_FIXED_CONSTANTS`): Chan & Reineccius 1994, Dwivedi & Arnold 1971 (B50) and Stack 2018 (K(T));
+  4. a register data copy of any of these (e.g. Schieberle 1998 Table IV reprints Hofmann 1998 T1).
+  
+  Every other atlas paper the engine's source cites was read and recorded as mention-only, with its reason (`SRC_MENTION_ONLY`). Examples: Du 2023 and Zhao 2019b document the HEXOSE_C5_ENTRY switch, which ships OFF; Quan 2020's constants are refused. The generator fails if a cited paper enters a TEST(E) set unreviewed.
+- **Scopes:** v1's, with two widenings that match each error's TEST set to its own prereg's search:
+  - E4 also covers F17 and F21;
+  - E6 covers every F23 route share, not only those that name NF.
+- **Factor tags:** v1's 32 reviewed tags, plus 23 more reviewed for v2 (`FACTOR_REVIEW_V2`). For every factor-scoped error (E2, E4, E5, E7, E8, E16), each in-family candidate whose text carries the factor's vocabulary anywhere had to be reviewed before the build ran.
+
+**Result (power only; nothing scored):**
+
+| error | DEV(E) labs | TEST(E) contrasts / labs | TEST(E) labs | contrasts excluded as calibration | verdict |
+|---|---|---|---|---|---|
+| E1 hexose MFT, no intact C5 | 4 | 0 / 0 | - | 0 | **UNTESTABLE** |
+| E2 enolisation split vs pH | 3 | 0 / 0 | - | 2 (Zhai 2021) | **UNTESTABLE** |
+| E3 no Strecker-aldehyde lane | 3 | 5 / 3 | Porto, Reading, TUM Becker | 1 | testable |
+| E4 pyrazine pH law on the step | 6 | 1 / 1 | Porto (Monforte 2021) | 0 | **UNTESTABLE** |
+| E5 no buffer catalysis | 9 | 5 / 3 | Essex (Thornalley), Kallen, Unilever | 3 | testable |
+| E6 MFT via free NF | 5 | 4 / 2 | BTBU, CAAS | 0 | testable |
+| E7 lipid inert | 3 | 4 / 3 | Ho network, Nestle (patent), Seville | 1 | testable |
+| E8 FFT supply pH law | 3 | 0 / 0 | - | 4 (Cerny 2007) | **UNTESTABLE** |
+| E9 acrylamide | 4 | 4 / 2 | Jiangnan (Chen / Zeng), Reading | 0 | testable |
+| E10 TTCA | 3 | 1 / 1 | Hokkaido | 0 | **UNTESTABLE** |
+| E11 one sulfur barrier | 5 | 9 / 2 | BTBU, CAAS | 0 | testable |
+| E12 thiol losses | 3 | 4 / 4 | BTBU, CAAS, Huazhong, Stockholm | 5 (Kumazawa, Stack, ...) | testable |
+| E13 CF-077 cross pair | 2 | 8 / 4 | Ghent, Nestle, Reading, UC Davis | 0 | testable |
+| E14 aminoketone condensation | 5 | 7 / 3 | Reading, Seville, UC Davis | 5 (Leahy) | testable |
+| E15 Strecker acid / O2 | 1 | 0 / 0 | - | 0 | **UNTESTABLE** |
+| E16 NF decay | 2 | 0 / 0 | - | 0 | **UNTESTABLE** |
+| E17 pentose ARP amine return | 3 | 2 / 1 | Baynes | 0 | **UNTESTABLE** |
+| E18 3-MP only from thiamine | 2 | 9 / 5 | BTBU, DFA, Ho network, INRA Clermont, Reading | 2 | testable |
+| E19 Cys-Strecker H2S | 1 | 6 / 3 | Copenhagen, Ho network, Hokkaido | 4 (Zheng & Ho 1994, Cerny 2007) | testable |
+| E20 lipid Strecker / pentylpyridine | 2 | 8 / 3 | CAAS, Ho network, Reading | 0 | testable |
+
+**12 errors become testable** (>= 2 TEST(E) labs): E3, E5, E6, E7, E9, E11, E12, E13, E14, E18, E19 and E20. **8 stay UNTESTABLE:** E1, E2, E4, E8, E10, E15, E16 and E17. Their tests must come from P1 keying or designed data.
+
+Of the plan's next changes, E6 + E11 and E5 have held-out tests. E4, E1, E2 and E10 do not. E4's single TEST lab, Porto, is the one its own prereg declared non-binding.
+
+**Alternatives** (`split_v2_per_change.yml` -> `alternatives`; TEST labs per error):
+
+| variant | what changes |
+|---|---|
+| Ames a separate lab | E3 3 -> 4, E18 5 -> 6, E20 3 -> 4; no verdict changes |
+| "Kallen-shaped" not a citation of Kallen | E10 1 -> 2: **E10 becomes testable** (Kallen 1971b F04#2 + Hokkaido) |
+| prereg read literally (its held-out list is development) | **E6 and E11 drop to 0** (BTBU and CAAS become development); E4 1 -> 0 |
+| calibration = ledger + B60 only (no fixed constants) | E3 3 -> 4 (Chan 1994b), E5 3 -> 4 (Arnold 1971), E12 4 -> 5 (Stack 2018); no verdict changes |
+| calibration = every paper src/kinetic_core cites | **E9 drops to 1 lab** (Quan 2020); E6 / E11 keep 2 labs on fewer contrasts (Du 2023 and Zhao 2019b go); E20 3 -> 2 |
+
+**Caveats specific to v2:**
+- **The per-change scope is not power to discriminate.** The E6 + E11 prereg already expects ~0 power from CAAS's Liu 2023b (no rival touches the fragment route), and it scores Zhao 2019b / Du 2023 under E1, not E6. Only BTBU's Wang 2012 has leverage there. Availability is a necessary condition, not a sufficient one.
+- **TEST(E) labs overlap DEV(E') for other errors.** A single regeneration that ships several changes needs the union rule (v1) for the joint claim.
+- **Sec. 5's "8+ labs" for E5 names no laboratory** and cannot be resolved. Any of them may sit in TEST(E5) (Essex, Kallen, Unilever).
+- **The two scope widenings (E4, E6) were written before the v2 counts were read.** The calibration curation (`SRC_MENTION_ONLY`, the data-copy rule) was written AFTER a first diagnostic pass showed which papers it affects. The `calibration_broad` alternative bounds that choice.
+
+**Two-reader PDF re-read still needed:**
+- the 65 contrasts that sit in at least one TEST(E) set;
+- v1's 32 TEST contrasts. Nine of them are among the 65, and the other 23 matter only if v1 is scored.
+
+That makes **88 distinct contrasts in all, of which 56 are new to v2** (`split_v2_per_change.yml` -> `reread_list`). None has been re-read.
+
+    ./scripts/docker_maillard.sh run "python scripts/generators/build_contrast_split.py --v2"           # check (~2 min)
+    ./scripts/docker_maillard.sh run "python scripts/generators/build_contrast_split.py --v2 --write"   # same membership only
