@@ -1,0 +1,90 @@
+{
+ "artifact": "kinetic_core_thiol_lolo",
+ "provenance": {
+  "artifact": "kinetic_core_thiol_lolo",
+  "generated_on": "2026-11-01",
+  "git": {"commit": "7b1bc7cdebe639f8d49bf7c462808a558ecebe29", "short": "7b1bc7cd", "branch": "thiol-lolo-2026-11-01", "dirty": false},
+  "generated_by": "scripts/generators/fit_thiol_lolo.py",
+  "inputs": [
+   {"path": "data/lit/fit_rows/deoxyosone_submodel.yml", "sha256": "4af9c953a653ef5ed8377a0b34efe81774111bf3a47706f5799cc182f5775853"},
+   {"path": "data/lit/fit_rows/thiol_submodel.yml", "sha256": "95b36cd13d0a84275e2331bf913ac1543217af34e8f92e0a86d3409f3c8ea4da"},
+   {"path": "data/lit/fit_rows/thiol_zhou2023_actz.yml", "sha256": "f00769bcfb267642d1b0ee51ec52c0ca0e28ed94e34f5ee67a0a18af0d8b1d70"},
+   {"path": "data/lit/fit_rows/ph_acid_davidek_acids.yml", "sha256": "af52f68f8e9ab8dd68b83d46c05fb8e28a2ece13fe9639d91f83e79e17aa1338"},
+   {"path": "data/lit/fit_rows/ph_acid_submodel.yml", "sha256": "27db4b0c5a7e4c594d29fb4e3395d15121aac0a7c84b36f06c3641891a3574c9"},
+   {"path": "data/keys/laboratories.yml", "sha256": "36562be853a8a98f56a148b689a4ce18617f87ee8ad12aef3935dcdc2c7a025a"},
+   {"path": "src/kinetic_core/sulfur.py", "sha256": "c64e61c187eaf92acbb5003869f326df4bfed9dc79dc433fe81d728756509832"},
+   {"path": "src/kinetic_core/parameters_sulfur.py", "sha256": "4728c9d75e015afb89d4a281530c22ed25670dc8f6d3ffbd4503cd8a04c1a180"},
+   {"path": "src/kinetic_core/fitting.py", "sha256": "9b3572a68597b3e02408652b5463bc7afa9f1f76126d671bf301a74192f97b47"},
+   {"path": "scripts/generators/build_submodel_probe.py", "sha256": "050cebaeaeee715b7fb70f55dde743bc9fa30eea4e63e58a52a64a4eac33d157"},
+   {"path": "scripts/generators/fit_joint_deoxyosone_thiol.py", "sha256": "80098212eae36fef14848f54dada68a14f7abbb82bbe013bb1de94d03e56f4d9"},
+   {"path": "results/validation/kinetic_core_thiol_lolo_prereg.md", "sha256": "f596bc43def13243db9d1af296c5cc10710468420971ba6856d6cfdf1302cb54"},
+   {"path": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en_fixed.json", "sha256": "596924ef51ec83d192e0c51c1616148943f59bc40e2462e6fe44a51dca325af0"},
+   {"path": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042_e_conv.json", "sha256": "0154862d9132cca775550bcc54d32ddfe58b55e89683c5426fd3debab608d9ac"}
+  ]
+ },
+ "prereg": "kinetic_core_thiol_lolo_prereg.md",
+ "folds_expected": ["dalian_polytechnic_chen_d", "dfa_hofmann_schieberle", "jiangnan_zhang_x", "nestle_blank", "ochanomizu_murata", "reading_mottram"],
+ "folds_missing": [],
+ "folds_not_converged": [],
+ "sets": {
+  "warm": {
+   "pooled_coverage": {
+    "engine": {"0.80": {"inside": 108, "scored": 383, "coverage": 0.2819843342036554, "median_width_dex": 0.4321134026578688}, "0.90": {"inside": 130, "scored": 383, "coverage": 0.3394255874673629, "median_width_dex": 0.5546115480059484}, "0.95": {"inside": 147, "scored": 383, "coverage": 0.3838120104438642, "median_width_dex": 0.660860420459611}},
+    "typical_yield": {"0.80": {"inside": 178, "scored": 383, "coverage": 0.46475195822454307, "median_width_dex": 0.8682554536569261}, "0.90": {"inside": 204, "scored": 383, "coverage": 0.5326370757180157, "median_width_dex": 1.114393810178907}, "0.95": {"inside": 216, "scored": 383, "coverage": 0.5639686684073107, "median_width_dex": 1.3278821268693126}},
+    "no_change": {"0.80": {"inside": 189, "scored": 383, "coverage": 0.4934725848563969, "median_width_dex": 0.8681969263079058}, "0.90": {"inside": 240, "scored": 383, "coverage": 0.6266318537859008, "median_width_dex": 1.1143186911396892}, "0.95": {"inside": 268, "scored": 383, "coverage": 0.6997389033942559, "median_width_dex": 1.327792617013233}}
+   },
+   "paired_log_density": {
+    "typical_yield": {
+     "per_fold": {"dalian_polytechnic_chen_d": 4.9616789807684825, "dfa_hofmann_schieberle": 91.86384244516734, "jiangnan_zhang_x": -1595.9679293320773, "ochanomizu_murata": -28.937166771213676, "reading_mottram": -0.387314411858398},
+     "folds_without_paired_rows": ["nestle_blank"],
+     "n_folds": 5,
+     "mean": -305.6933778178427,
+     "se": 323.20059705145997,
+     "per_row_mean": -3.9597587800238694,
+     "verdict": "indistinguishable"
+    },
+    "no_change": {
+     "per_fold": {"dalian_polytechnic_chen_d": 1.8376329764401973, "dfa_hofmann_schieberle": 223.97423027662052, "jiangnan_zhang_x": -1659.3482863975507, "ochanomizu_murata": -4.102166548289183, "reading_mottram": -12.158542658322537},
+     "folds_without_paired_rows": ["nestle_blank"],
+     "n_folds": 5,
+     "mean": -289.95942647022036,
+     "se": 345.20913090681114,
+     "per_row_mean": -3.755951120080575,
+     "verdict": "indistinguishable"
+    }
+   },
+   "calibrated": false,
+   "beats": {"typical_yield": false, "no_change": false}
+  },
+  "reset_where_leak_prone": {
+   "pooled_coverage": {
+    "engine": {"0.80": {"inside": 107, "scored": 383, "coverage": 0.2793733681462141, "median_width_dex": 0.43722910990665004}, "0.90": {"inside": 125, "scored": 383, "coverage": 0.3263707571801567, "median_width_dex": 0.5611774871759448}, "0.95": {"inside": 140, "scored": 383, "coverage": 0.36553524804177545, "median_width_dex": 0.6686842195424055}},
+    "typical_yield": {"0.80": {"inside": 178, "scored": 383, "coverage": 0.46475195822454307, "median_width_dex": 0.8682554536569261}, "0.90": {"inside": 204, "scored": 383, "coverage": 0.5326370757180157, "median_width_dex": 1.114393810178907}, "0.95": {"inside": 216, "scored": 383, "coverage": 0.5639686684073107, "median_width_dex": 1.3278821268693126}},
+    "no_change": {"0.80": {"inside": 189, "scored": 383, "coverage": 0.4934725848563969, "median_width_dex": 0.8681969263079058}, "0.90": {"inside": 240, "scored": 383, "coverage": 0.6266318537859008, "median_width_dex": 1.1143186911396892}, "0.95": {"inside": 268, "scored": 383, "coverage": 0.6997389033942559, "median_width_dex": 1.327792617013233}}
+   },
+   "paired_log_density": {
+    "typical_yield": {
+     "per_fold": {"dalian_polytechnic_chen_d": 4.9616789807684825, "dfa_hofmann_schieberle": 101.6213658550206, "jiangnan_zhang_x": -4573.490248994393, "ochanomizu_murata": -28.937166771213676, "reading_mottram": -0.387314411858398},
+     "folds_without_paired_rows": ["nestle_blank"],
+     "n_folds": 5,
+     "mean": -899.2463370683354,
+     "se": 918.8248531108216,
+     "per_row_mean": -11.64826861487481,
+     "verdict": "indistinguishable"
+    },
+    "no_change": {
+     "per_fold": {"dalian_polytechnic_chen_d": 1.8376329764401973, "dfa_hofmann_schieberle": 233.73175368647378, "jiangnan_zhang_x": -4636.870606059867, "ochanomizu_murata": -4.102166548289183, "reading_mottram": -12.158542658322537},
+     "folds_without_paired_rows": ["nestle_blank"],
+     "n_folds": 5,
+     "mean": -883.512385720713,
+     "se": 939.4784964606359,
+     "per_row_mean": -11.444460954931516,
+     "verdict": "indistinguishable"
+    }
+   },
+   "calibrated": false,
+   "beats": {"typical_yield": false, "no_change": false}
+  }
+ },
+ "verdict": "NOT ADEQUATE"
+}
