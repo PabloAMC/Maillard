@@ -25,6 +25,7 @@ for p in (ROOT, ROOT / "scripts" / "generators"):
         sys.path.insert(0, str(p))
 
 import generate_kinetic_core_b64_fit as B64  # noqa: E402  (B60's objective, inline pH, the thermal readings)
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
 
@@ -53,7 +54,7 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     assert PREREG.exists(), "B59a is pre-registered; write the prereg before running the fit"
     B64.install_reading(args.baseline)
-    ps.STRECKER_SULFUR = dataclasses.replace(ps.STRECKER_SULFUR, enabled=True, h2s_share=float(args.share))
+    config.update({"sulfur.strecker_sulfur": dataclasses.replace(ps.STRECKER_SULFUR, enabled=True, h2s_share=float(args.share))})
     origin_path = args.start_from or best_member(args.baseline)
     lower, upper = B64.full_bounds()
     payload = json.loads(origin_path.read_text())

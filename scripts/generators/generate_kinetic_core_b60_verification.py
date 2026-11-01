@@ -39,12 +39,13 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
 
 import generate_kinetic_core_b51_fit as B51  # noqa: E402  (installs B47's rows; B51's physics on)
 from generate_kinetic_core_b8_laplace import frozen_vector  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths, provenance  # noqa: E402
 from src.kinetic_core import engine, ph_state, sulfur  # noqa: E402
 from src.kinetic_core.ph_state import BufferSpec  # noqa: E402
 
 B23 = B51.B23
-ph_state.B51 = ph_state.B51_ALL_ON
+config.update({"ph.b51": ph_state.B51_ALL_ON})
 
 OUT = data_paths.VALIDATION_DIR / "kinetic_core_b60_verification.json"
 OUT_MD = data_paths.VALIDATION_DIR / "kinetic_core_b60_verification.md"
@@ -78,8 +79,8 @@ QUICK_CANDIDATES = ((9, 1e-5), (17, 1e-5), (17, 1e-6), (25, 1e-6), (41, 1e-6))
 
 
 def _observables(x: np.ndarray, quick: bool, nodes: int, grid: str, rtol: float = None) -> Dict[str, float]:
-    sulfur.PH_NODE_GRID = grid
-    sulfur.PH_FIXED_POINT = "fixed_sweeps" if grid == "uniform" else "relaxed_converged"
+    config.update({"ph.node_grid": grid})
+    config.update({"ph.fixed_point": "fixed_sweeps" if grid == "uniform" else "relaxed_converged"})
     original = B23.integrate_sulfur
     if rtol is not None:
         def _with_rtol(*a, **k):
@@ -100,7 +101,7 @@ def _observables(x: np.ndarray, quick: bool, nodes: int, grid: str, rtol: float 
             B23.PH_NODES_QUICK = saved
         else:
             B23.PH_NODES_CAREFUL = saved
-        sulfur.PH_NODE_GRID, sulfur.PH_FIXED_POINT = "log_and_linear", "relaxed_converged"
+        config.update({"ph.node_grid": "log_and_linear", "ph.fixed_point": "relaxed_converged"})
     return {k: float(v) for k, v in predicted.items()}
 
 
@@ -122,7 +123,7 @@ def _probe(name: str, nodes: int, grid: str):
         captured["args"] = (parameters, temperature_k, dict(state), kw)
         return original(parameters, temperature_k, state, times, **kw)
 
-    sulfur.PH_NODE_GRID = grid
+    config.update({"ph.node_grid": grid})
     engine.integrate_sulfur = _capture
     try:
         spec = engine.FormulationSpec(name=name, precursors=prec, process=engine.ProcessSpec(
@@ -132,7 +133,7 @@ def _probe(name: str, nodes: int, grid: str):
                                              dict(decl.mapped_precursors), spec.process)
     finally:
         engine.integrate_sulfur = original
-        sulfur.PH_NODE_GRID = "log_and_linear"
+        config.update({"ph.node_grid": "log_and_linear"})
     return {k: float(state.get(k, 0.0)) for k in PROBE_SPECIES}, captured["args"]
 
 
@@ -189,7 +190,7 @@ def main() -> int:
     for name, pot in PROBE_POTS.items():
         new, args = _probe(name, 41, "log_and_linear")
         refined, _ = _probe(name, REFINED_NODES, "log_and_linear")
-        sulfur.PH_FIXED_POINT = "relaxed_converged"
+        config.update({"ph.fixed_point": "relaxed_converged"})
         ref, _ = _probe(name, BRUTE_FORCE_NODES, "uniform")
         dev = {s: abs(math.log10((new[s] + FLOOR) / (refined[s] + FLOOR))) for s in PROBE_SPECIES}
         dev_uniform = {s: abs(math.log10((new[s] + FLOOR) / (ref[s] + FLOOR))) for s in PROBE_SPECIES}

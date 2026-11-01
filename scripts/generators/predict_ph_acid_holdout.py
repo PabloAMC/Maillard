@@ -31,7 +31,7 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
         sys.path.insert(0, entry)
 
 from src import data_paths, provenance  # noqa: E402
-from src.kinetic_core import fit_rows, observations, parallel, ph_state, sulfur  # noqa: E402
+from src.kinetic_core import config, fit_rows, observations, parallel, ph_state  # noqa: E402
 
 import build_submodel_probe as probe  # noqa: E402
 import fit_ph_acid_submodel as fit  # noqa: E402
@@ -67,10 +67,11 @@ def freeze(arm: str) -> int:
         raise SystemExit(f"{data_paths.rel(out)} exists: frozen predictions are written once")
     path = data_paths.VALIDATION_DIR / f"kinetic_core_ph_acid_submodel_fit_{arm}.json"
     report = json.loads(path.read_text())
-    sulfur.PH_COUPLING = "inline"
+    config.update({"ph.coupling": "inline"})
     keys = tuple(report["fit"]["theta"])
     jobs = jobs_for(report["fit"]["theta"], keys)
-    results = dict(zip(jobs, parallel.map_ordered(fit.run_task, list(jobs.values()))))
+    tasks = parallel.configured(list(jobs.values()), fit.job_config)   # each pot's Config, built here
+    results = dict(zip(jobs, parallel.map_ordered(fit.run_pot, tasks)))
     payload = {"artifact": out.stem, "arm": arm, "frozen_before_comparison": True, "grid_min": GRID,
                "provenance": provenance.provenance_block(out.stem, generated_by="scripts/generators/predict_ph_acid_holdout.py",
                                                          inputs=[path]),

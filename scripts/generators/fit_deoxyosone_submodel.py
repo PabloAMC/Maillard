@@ -118,22 +118,6 @@ def run_task(job: Dict[str, Any]):
     return run_pot(job)
 
 
-def configured_tasks(tasks: List[Dict[str, Any]], job_config_of) -> List["parallel.Configured"]:
-    """Every task with the Config it runs in, built in the CALLER from its state at this moment (what a forked
-    worker inherited before A3 phase 2), so a spawned or persistent worker computes the same answer."""
-    base = config.Config.from_globals()
-    return [parallel.Configured(t, job_config_of(t, base)) for t in tasks]
-
-
-def predicted_under(task: "parallel.Configured", predict):
-    """``predict()`` with the task's Config installed: an observation operator reads the pH switches (the trunk
-    solutes in the balance), so a row is predicted in the state its pot ran in. (Before A3 phase 2 the serial loop
-    predicted in the last task's state, the same for every switch an operator reads; a forked pool predicted in
-    the parent's, which left out the trunk solutes of the entry arms.)"""
-    with config.applied(task.config):
-        return predict()
-
-
 FAILURES: List[str] = []
 #: wall-clock limit per pot integration (normal pots take 1-3 s; a stiff corner of parameter space can hang)
 POT_SECONDS = 120
@@ -143,7 +127,8 @@ def make_raw_many(jobs_by_pot, keys):
     def raw_many(points, rows):
         pots = sorted({r.pot for r in rows})
         trials = [trial(x, keys) for x in points]
-        tasks = configured_tasks([dict(jobs_by_pot[p], **tr) for tr in trials for p in pots], job_config)
+        # each task carries its Config, built here (A3 phase 2); its rows are predicted in it (parallel.run_under)
+        tasks = parallel.configured([dict(jobs_by_pot[p], **tr) for tr in trials for p in pots], job_config)
         results = parallel.map_ordered(run_pot, tasks)
         out = []
         for i, tr in enumerate(trials):
@@ -155,8 +140,8 @@ def make_raw_many(jobs_by_pot, keys):
                     FAILURES.append(f"{r.pot}: {res[r.pot]['failed']}")
                     r_i.append(float("nan"))
                     continue
-                predicted = predicted_under(task[r.pot],
-                                            lambda: probe.predict(r, dict(jobs_by_pot[r.pot], **tr), res[r.pot]))
+                predicted = parallel.run_under(task[r.pot],
+                                               lambda: probe.predict(r, dict(jobs_by_pot[r.pot], **tr), res[r.pot]))
                 r_i.append(fit_rows.residual(r, predicted) if predicted > 0 else float("nan"))
             out.append(np.array(r_i, dtype=float))
         return out

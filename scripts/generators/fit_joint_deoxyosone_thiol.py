@@ -368,7 +368,7 @@ def make_raw_many(jobs, keys):
         trials = [trial(x, keys) for x in points]
         # each task carries its Config, built here from this process's state and the trial (A3 phase 2): no
         # worker reads this module's statics (STRECKER_SHARE, the arm's) or inherits the coupling
-        tasks = sm3.configured_tasks([dict(jobs[p], **tr) for tr in trials for p in pots], job_config)
+        tasks = parallel.configured([dict(jobs[p], **tr) for tr in trials for p in pots], job_config)
         results = parallel.map_ordered(run_pot, tasks)
         out = []
         for i, tr in enumerate(trials):
@@ -381,8 +381,8 @@ def make_raw_many(jobs, keys):
                     FAILURES.append(f"{key_of(r)}: {got['failed']}")
                     r_i.append(float("nan"))
                     continue
-                predicted = sm3.predicted_under(task[key_of(r)],
-                                                lambda: probe.predict(r, dict(jobs[key_of(r)], **tr), got))
+                predicted = parallel.run_under(task[key_of(r)],
+                                               lambda: probe.predict(r, dict(jobs[key_of(r)], **tr), got))
                 r_i.append(fit_rows.residual(r, predicted) if predicted > 0 else float("nan"))
             out.append(np.array(r_i, dtype=float))
         return out
@@ -476,7 +476,7 @@ def fed_norfuraneol_tracer(run) -> Dict[str, float]:
 def job_config(job, base=None):
     """The engine configuration a job runs in, as one ``Config`` (A3 phase 2): ``base`` (by default this process's
     state) with sub-model 3's switches (``sm3.job_config``) and this job's. It sets nothing: ``install`` does, and a
-    task built by ``sm3.configured_tasks`` carries it to its worker. The Strecker share is the job's, else
+    task built by ``parallel.configured`` carries it to its worker. The Strecker share is the job's, else
     ``STRECKER_SHARE`` read HERE, in the caller."""
     import dataclasses as _dc
     from src.kinetic_core import parameters_sulfur as _ps

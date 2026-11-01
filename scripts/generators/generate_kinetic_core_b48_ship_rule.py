@@ -37,11 +37,11 @@ HOLDOUT_BAND = (0.06, 0.21)
 
 
 def _child(enabled: bool) -> Dict[str, Any]:
-    from src.kinetic_core import lipid, parameters_lipid
+    from src.kinetic_core import config
 
-    step = dataclasses.replace(parameters_lipid.DECADIENAL_BREAKAGE, enabled=enabled)
-    parameters_lipid.DECADIENAL_BREAKAGE = step
-    lipid.DECADIENAL_BREAKAGE = step
+    base = config.Config.from_globals()   # both bindings (parameters_lipid's and lipid's) set by one install
+    config.install(base.replace({"lipid.decadienal_breakage": dataclasses.replace(base["lipid.decadienal_breakage"],
+                                                                                  enabled=enabled)}))
     from src.kinetic_core.directional import score_panel as score_directional
     from src.kinetic_core.scoring import score_panel
 

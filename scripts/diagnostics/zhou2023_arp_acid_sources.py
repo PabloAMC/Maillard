@@ -26,7 +26,7 @@ def main(argv=None) -> int:
     import fit_joint_deoxyosone_thiol as joint
     from build_sulfur_flux_attribution import _ranked
     from src import data_paths
-    from src.kinetic_core import fit_rows, sulfur
+    from src.kinetic_core import config, fit_rows, sulfur
 
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     parser.add_argument("--fit", default="s042")
@@ -35,7 +35,7 @@ def main(argv=None) -> int:
     theta = fit["fit"]["theta"]
     keys = tuple(theta)
     trial = joint.trial([theta[k] for k in keys], keys)
-    sulfur.PH_COUPLING = "inline"
+    config.update({"ph.coupling": "inline"})
     pots, rows = fit_rows.load("ph_acid_submodel")
     for j in probe.plan(pots, rows):
         if not j["pot"].startswith("zhou2023") or "skip" in j:

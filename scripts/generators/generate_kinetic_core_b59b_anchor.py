@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import engine as E  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
@@ -42,14 +43,14 @@ BUFFER = PH.BufferSpec(kind="phosphate", phosphate_mol_l=0.2, declared=True, sou
 
 
 def cao_run(parameters, drift, log10_k):
-    ps.CYS_AMADORI_ROUTE = dataclasses.replace(ps.CYS_AMADORI_ROUTE, enabled=True, k_form_ref_per_min=10.0 ** log10_k)
+    config.update({"sulfur.cys_amadori_route": dataclasses.replace(ps.CYS_AMADORI_ROUTE, enabled=True, k_form_ref_per_min=10.0 ** log10_k)})
     run = S.integrate_sulfur(parameters, 363.15, {"Cys": 400.0, "PENT": 400.0}, [0.0] + TIMES, ph=5.5,
                              buffer_spec=BUFFER, ph_drift=drift, rtol=1e-8, atol=1e-12)
     return {k: [float(run.series(k)[i + 1]) / 1000.0 for i in range(len(TIMES))] for k in ("CAMA", "TTCA", "Cys")}, run
 
 
 def main() -> int:
-    S.PH_COUPLING = "inline"
+    config.update({"ph.coupling": "inline"})
     parameters = E.core_parameters(E.SULFUR)
     drift = E.core_ph_drift()
     saved = ps.CYS_AMADORI_ROUTE
@@ -70,7 +71,7 @@ def main() -> int:
         r = S.integrate_sulfur(parameters, 373.15, {"CAMA": 10.0}, [0.0, 10.0], ph=ph,
                                buffer_spec=PH.BufferSpec(kind="clamped"), rtol=1e-10, atol=1e-14)
         v3[str(ph)] = -math.log(r.final("CAMA") / 10.0) / 10.0
-    ps.CYS_AMADORI_ROUTE = saved
+    config.update({"sulfur.cys_amadori_route": saved})
     report = {
         "artifact": "kinetic_core_b59b_anchor", "prereg": data_paths.rel(data_paths.VALIDATION_DIR / "kinetic_core_b59b_prereg.md"),
         "k_form_ref_per_min_90C": 10.0 ** best.x, "log10_k": best.x, "anchor_loss_sum_sq_dex": best.fun,

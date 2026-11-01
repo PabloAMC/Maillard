@@ -28,7 +28,7 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
         sys.path.insert(0, entry)
 
 from src import data_paths, provenance  # noqa: E402
-from src.kinetic_core import engine, fit_rows, parameters_sulfur, sulfur  # noqa: E402
+from src.kinetic_core import config, engine, fit_rows, parameters_sulfur, sulfur  # noqa: E402
 
 import build_submodel_probe as probe  # noqa: E402
 import fit_joint_deoxyosone_thiol as joint  # noqa: E402
@@ -50,12 +50,13 @@ FACTORS = {"pama_dpo_factor": 1.0, "pama_tdp_factor": 1.0}
 
 
 def _install(job: Dict[str, Any], k_entry: float, k_aa: float) -> None:
-    joint.sm3.install(job)
-    parameters_sulfur.STRECKER_SULFUR = dataclasses.replace(parameters_sulfur.STRECKER_SULFUR,
-                                                            h2s_share=float(job["strecker_share"]))
-    parameters_sulfur.PENTOSE_AMINE_ENTRY = parameters_sulfur.PentoseAmineEntry(
-        k_entry_l_per_mmol_min_100c_ph6=k_entry, entry_ph_slope=SLOPE, k_dpo_aa_per_min_100c_ph6=k_aa,
-        aa_ph_slope=SLOPE, **FACTORS)
+    cfg = joint.sm3.job_config(job, config.Config.from_globals())
+    config.install(cfg.replace({
+        "sulfur.strecker_sulfur": dataclasses.replace(cfg["sulfur.strecker_sulfur"],
+                                                      h2s_share=float(job["strecker_share"])),
+        "sulfur.pentose_amine_entry": parameters_sulfur.PentoseAmineEntry(
+            k_entry_l_per_mmol_min_100c_ph6=k_entry, entry_ph_slope=SLOPE, k_dpo_aa_per_min_100c_ph6=k_aa,
+            aa_ph_slope=SLOPE, **FACTORS)}))
 
 
 def main() -> int:
@@ -63,7 +64,7 @@ def main() -> int:
     theta = fit["fit"]["theta"]
     keys = tuple(theta)
     trial = joint.trial([theta[k] for k in keys], keys)
-    sulfur.PH_COUPLING = "inline"
+    config.update({"ph.coupling": "inline"})
     jobs: List[tuple] = []
     for table, prefix in POTS:
         pots, rows = fit_rows.load(table)

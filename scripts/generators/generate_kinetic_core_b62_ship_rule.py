@@ -35,6 +35,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src.kinetic_core import config  # noqa: E402
 from src import artifact_io, data_paths, provenance  # noqa: E402
 
 V = data_paths.VALIDATION_DIR
@@ -56,7 +57,7 @@ def _shipped_report() -> Path:
 def _child(mode: str, report: Path) -> Dict[str, Any]:
     from src.kinetic_core import engine, parameters_sulfur as ps
 
-    ps.FURFURAL_BARRIERS = dataclasses.replace(ps.FURFURAL_BARRIERS, enabled=(mode == "on"))
+    config.update({"sulfur.furfural_barriers": dataclasses.replace(ps.FURFURAL_BARRIERS, enabled=(mode == "on"))})
     engine._B2_FIT_REPORT = Path(report)
     from src.kinetic_core.directional import score_panel as score_directional
     from src.kinetic_core.scoring import score_panel
@@ -77,11 +78,11 @@ def _cost_child(mode: str, report: Path) -> Dict[str, Any]:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
     from src.kinetic_core import parameters_sulfur as ps
 
-    ps.FURFURAL_BARRIERS = dataclasses.replace(ps.FURFURAL_BARRIERS, enabled=(mode == "on"))
+    config.update({"sulfur.furfural_barriers": dataclasses.replace(ps.FURFURAL_BARRIERS, enabled=(mode == "on"))})
     import generate_kinetic_core_b62_fit as B62  # the shipped objective; its own switch is overridden next line
     from generate_kinetic_core_b8_laplace import frozen_vector
 
-    ps.FURFURAL_BARRIERS = dataclasses.replace(ps.FURFURAL_BARRIERS, enabled=(mode == "on"))
+    config.update({"sulfur.furfural_barriers": dataclasses.replace(ps.FURFURAL_BARRIERS, enabled=(mode == "on"))})
     r = B62.residual_vector(frozen_vector(json.loads(Path(report).read_text(encoding="utf-8"))), True)
     ids = [row["id"] for row in B62.B23.ACTIVE_FIT_ROWS]
     sig = {row["id"]: float(row["sigma_log"]) for row in B62.B23.ACTIVE_FIT_ROWS}

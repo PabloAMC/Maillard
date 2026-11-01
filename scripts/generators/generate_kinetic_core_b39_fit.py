@@ -29,7 +29,7 @@ if str(ROOT) not in sys.path:
 
 from src import data_paths, provenance  # noqa: E402
 from src.kinetic_core import parameters_dicarbonyl as PD  # noqa: E402
-from src.kinetic_core import trunk_conditions  # noqa: E402
+from src.kinetic_core import config, trunk_conditions  # noqa: E402
 from src.kinetic_core.engine import TRUNK, core_parameters  # noqa: E402
 from src.kinetic_core.integrate import integrate  # noqa: E402
 from src.kinetic_core.parameters_furanic import FURANIC_PARAMETERS  # noqa: E402
@@ -185,7 +185,7 @@ def build(quick: bool, max_nfev: int, starts: int) -> Dict[str, Any]:
     # B39 ran BEFORE the 3-DG exits had a pH term (B40/B41 added it and B41 shipped it, so the module
     # default is now True). Reproducing B39 means running without it; the B40/B41 wrappers set their own.
     if not getattr(build, "_term_set_by_wrapper", False):
-        trunk_conditions.THREE_DEOXY_EXIT_PH_TERM = False
+        config.update({"trunk.three_deoxy_exit_ph_term": False})
     before_x = np.array([_shipped_log10.get(k, -30.0) for k in KEYS])   # the inert 'before'
     before_obs = observables(before_x, quick)
     members = [fit_member(s, quick, max_nfev) for s in range(starts)]

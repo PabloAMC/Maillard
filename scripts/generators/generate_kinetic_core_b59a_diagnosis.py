@@ -23,6 +23,7 @@ for p in (ROOT, ROOT / "scripts" / "generators"):
 
 import generate_kinetic_core_b64_fit as B64  # noqa: E402
 from generate_kinetic_core_b59a_fit import best_member  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
 from src.kinetic_core import ph_state, sulfur  # noqa: E402
@@ -71,11 +72,11 @@ def main(argv=None) -> int:
         if not files:
             continue
         member = min((json.loads(f.read_text()) for f in files), key=lambda m: m["cost"])
-        ps.STRECKER_SULFUR = dataclasses.replace(saved, enabled=True, h2s_share=share)
+        config.update({"sulfur.strecker_sulfur": dataclasses.replace(saved, enabled=True, h2s_share=share)})
         try:
             report["arms"][f"B59a share {share:g}"] = {"cost": member["cost"], **diagnose(np.array(member["x_full"]), points)}
         finally:
-            ps.STRECKER_SULFUR = saved
+            config.update({"sulfur.strecker_sulfur": saved})
     out = data_paths.VALIDATION_DIR / f"kinetic_core_b59a_diagnosis_{args.baseline}.json"
     out.write_text(json.dumps(report, indent=2))
     for arm, r in report["arms"].items():

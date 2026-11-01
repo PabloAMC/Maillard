@@ -18,7 +18,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src import data_paths  # noqa: E402
-from src.kinetic_core import sulfur  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src.kinetic_core.scoring import score_panel  # noqa: E402
 
 OUT = data_paths.VALIDATION_DIR / "inline_coupling_panel_diff.json"
@@ -31,9 +31,9 @@ def _rows(payload):
 
 
 def main() -> int:
-    sulfur.PH_COUPLING = "fixed_point_nodes"
+    config.update({"ph.coupling": "fixed_point_nodes"})
     fixed = _rows(score_panel())
-    sulfur.PH_COUPLING = "inline"
+    config.update({"ph.coupling": "inline"})
     inline = _rows(score_panel())
     diffs = {f"{k[0]} | {k[1]}": abs(math.log10(inline[k] / fixed[k])) for k in fixed if k in inline}
     worst = max(diffs, key=diffs.get)
