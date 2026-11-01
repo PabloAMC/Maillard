@@ -117,7 +117,16 @@ A module that follows 1-3 ports onto A2 by wrapping it in the `Module` protocol,
    - a script's own module globals (`joint.TDP_EXIT_STATIC`, `sm3`'s trial), which still need the fork;
    - a new numeric tunable that no script sets: the scans cannot see it.
 
-   Phase 2 is next: the scripts build `Config.replace(...)`. Phase 3 is the persistent pool.
+   **Phase 2 (2026-11-01).** The owner's decisions and the phase 1 review:
+   - build-phase keys are read-only facts: `install` / `applied` / `update` refuse a non-shipped one (`BuildPhaseKeyError`);
+   - field-level `bands` on the dataclass keys that fits and feasibility draws sample, and type / band validation on construction;
+   - `Config.digest()`, a sha256 of a canonical serialisation;
+   - coverage: every UPPERCASE global an engine function reads at call time is a key binding or on the reviewed allowlist `tests/engine_constants.py` (the scan found `engine.RAMP_STEP_K`, now a key);
+   - `config.update(changes)` replaces every script's assignment of an engine global (every binding at once: CR-02's Q10 sweep had set only one);
+   - the sub-model fits (`fit_deoxyosone_submodel`, `fit_joint_deoxyosone_thiol`, `fit_ph_acid_submodel`, `build_submodel_probe`) build each task's Config in the caller (`parallel.configured`), so no worker reads a script static;
+   - `MAILLARD_POOL=persistent` (off by default): one spawned pool for the process, bit-identical to the fork.
+
+   Not migrated: `engine._B2_FIT_REPORT` (the fit-report path the ship rules swap; not a key), and the tests' own `monkeypatch.setattr` of switches.
 2. **A2a (bit-identical, time-boxed to 3 days).**
    - The trunk, sulfur, acrylamide and lipid lanes become modules.
    - The three legacy lanes become named compositions with their legacy layouts and operation order (derived rates in their current order; the B27 block last).

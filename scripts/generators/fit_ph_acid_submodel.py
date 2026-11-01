@@ -49,7 +49,7 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
         sys.path.insert(0, entry)
 
 from src import data_paths, provenance  # noqa: E402
-from src.kinetic_core import engine, fit_rows, fitting, parallel, ph_state, sulfur  # noqa: E402
+from src.kinetic_core import config, engine, fit_rows, fitting, parallel, sulfur  # noqa: E402
 from src.kinetic_core.ph_state import ACID_YIELD_BOUNDS, ARP_AMINE_PKA_BOUNDS, PhDrift  # noqa: E402
 
 import build_submodel_probe as probe  # noqa: E402
@@ -130,15 +130,25 @@ def trial(theta: Sequence[float], keys) -> Dict[str, Any]:
             "drift": PhDrift(acid_yield=t["acid_yield"], arp_amine_pka=t["arp_amine_pka"])}
 
 
-def run_task(job: Dict[str, Any]):
-    """One pot at one trial vector, in whichever process: the lane's switches and slopes are set here."""
-    sulfur.TRUNK_PH_TERMS = True
-    ph_state.TRUNK_SOLUTES_IN_BALANCE = True
-    sulfur.TRUNK_PH_EXPONENT_OVERRIDE = dict(job["slopes"])
+def job_config(job: Dict[str, Any], base: config.Config) -> config.Config:
+    """One pot at one trial vector as one Config (A3 phase 2): ``base`` with the trunk's pH terms and solutes on and
+    this trial's slopes. It reads no process state."""
+    return base.replace({"ph.trunk_terms": True, "ph.trunk_solutes_in_balance": True,
+                         "ph.trunk_exponent_override": dict(job["slopes"])})
+
+
+def run_pot(job: Dict[str, Any]):
+    """One pot in the state already installed (by ``run_task``, or by ``parallel.Configured`` in the worker)."""
     try:
         return probe.run_pot_limited(job, POT_SECONDS)
     except Exception as exc:  # noqa: BLE001 - a failed pot is counted and its rows become failed residuals
         return {"failed": f"{type(exc).__name__}: {exc}"}
+
+
+def run_task(job: Dict[str, Any]):
+    """One pot at one trial vector, in whichever process: ``job_config`` on this process's state, set and left."""
+    config.install(job_config(job, config.Config.from_globals()))
+    return run_pot(job)
 
 
 FAILURES: List[str] = []
@@ -152,11 +162,13 @@ def make_raw_many(jobs_by_pot: Dict[str, dict], keys):
     def raw_many(points, rows):
         pots = sorted({r.pot for r in rows})
         trials = [trial(x, keys) for x in points]
-        tasks = [dict(jobs_by_pot[p], **tr) for tr in trials for p in pots]
-        results = parallel.map_ordered(run_task, tasks)
+        # each task carries its Config, built here (A3 phase 2); its rows are predicted in it
+        tasks = parallel.configured([dict(jobs_by_pot[p], **tr) for tr in trials for p in pots], job_config)
+        results = parallel.map_ordered(run_pot, tasks)
         out = []
         for i, tr in enumerate(trials):
             res = dict(zip(pots, results[i * len(pots):(i + 1) * len(pots)]))
+            task = dict(zip(pots, tasks[i * len(pots):(i + 1) * len(pots)]))
             jobs = {p: dict(jobs_by_pot[p], **tr) for p in pots}
             r_i = []
             for r in rows:
@@ -164,7 +176,8 @@ def make_raw_many(jobs_by_pot: Dict[str, dict], keys):
                     FAILURES.append(f"{r.pot}: {res[r.pot]['failed']}")
                     r_i.append(float("nan"))
                 else:
-                    r_i.append(fit_rows.residual(r, probe.predict(r, jobs[r.pot], res[r.pot])))
+                    predicted = parallel.run_under(task[r.pot], lambda: probe.predict(r, jobs[r.pot], res[r.pot]))
+                    r_i.append(fit_rows.residual(r, predicted))
             out.append(np.array(r_i, dtype=float))
         return out
 
@@ -233,9 +246,7 @@ def main(argv=None) -> int:
     parser.add_argument("--ph-coupling", choices=("fixed_point_nodes", "inline"), default="inline")
     args = parser.parse_args(argv)
     t0 = time.time()
-    sulfur.PH_COUPLING = args.ph_coupling
-    sulfur.TRUNK_PH_TERMS = True
-    ph_state.TRUNK_SOLUTES_IN_BALANCE = True
+    config.update({"ph.coupling": args.ph_coupling, "ph.trunk_terms": True, "ph.trunk_solutes_in_balance": True})
     pots, all_rows = fit_rows.load(TABLE)
     jobs = {j["pot"]: j for j in probe.plan(pots, all_rows) if "skip" not in j and j["pot"] not in NOT_BLANKS}
     data = tuple(r for r in all_rows
@@ -292,9 +303,8 @@ def main(argv=None) -> int:
                             residuals=lambda th, rs: raw(th, rs)), best.theta, attr),
     }
     if args.ph_coupling != "fixed_point_nodes":
-        sulfur.PH_COUPLING = "fixed_point_nodes"
-        shipped = raw(best.theta, data)
-        sulfur.PH_COUPLING = args.ph_coupling
+        with config.applied(config.Config.from_globals().replace({"ph.coupling": "fixed_point_nodes"})):
+            shipped = raw(best.theta, data)
         report["shipped_coupling_max_abs_difference"] = float(np.nanmax(np.abs(shipped - raw_best)))
     if args.lolo:
         report["leave_one_laboratory_out"] = leave_one_lab_out(make_problem, model, raw, data, best.theta, keys, lap,

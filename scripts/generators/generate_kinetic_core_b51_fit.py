@@ -31,13 +31,14 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
 import generate_kinetic_core_b47_fit as B47  # noqa: E402  (installs B47's 52 rows into B23)
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import ph_state  # noqa: E402
 
 B9, B23, B8 = B47.B9, B47.B23, B47.B8
 
 #: Candidate (A): every B51 correction on, for the whole process.
-ph_state.B51 = ph_state.B51_ALL_ON
+config.update({"ph.b51": ph_state.B51_ALL_ON})
 
 WAVE = "B51"
 MEMBER_DIR = data_paths.VALIDATION_DIR / "kinetic_core_b51_members"

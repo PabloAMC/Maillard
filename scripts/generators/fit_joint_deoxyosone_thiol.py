@@ -40,7 +40,7 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
         sys.path.insert(0, entry)
 
 from src import data_paths, provenance  # noqa: E402
-from src.kinetic_core import engine, fit_rows, fitting, parallel, sulfur  # noqa: E402
+from src.kinetic_core import config, engine, fit_rows, fitting, parallel, sulfur  # noqa: E402
 from src.kinetic_core.parameters_sulfur import PentoseMgoRoutes as _PentoseMgoRoutes  # noqa: E402
 
 import build_submodel_probe as probe  # noqa: E402
@@ -290,12 +290,18 @@ def tdp_exit_static(arms, k_ref_per_min=None, ea_kj_mol=None) -> Dict[str, Any]:
     return _dc.asdict(_ps.TdpOwnDecay(enabled=True, **over))
 
 
-def run_task(job):
-    install(job)   # every switch set on every task: a worker runs many
+def run_pot(job):
+    """One pot in the state already installed (by ``install``, or by ``parallel.Configured`` in the worker)."""
     try:
         return probe.run_pot_limited(job, POT_SECONDS)
     except Exception as exc:  # noqa: BLE001 - counted; its rows become failed residuals
         return {"failed": f"{type(exc).__name__}: {exc}"}
+
+
+def run_task(job):
+    """``install(job)`` then the pot: for the direct callers (the scorers), which run in one process."""
+    install(job)   # every switch set on every task: a worker runs many
+    return run_pot(job)
 
 
 def key_of(row) -> str:
@@ -360,10 +366,14 @@ def make_raw_many(jobs, keys):
     def raw_many(points, rows):
         pots = sorted({key_of(r) for r in rows})
         trials = [trial(x, keys) for x in points]
-        results = parallel.map_ordered(run_task, [dict(jobs[p], **tr) for tr in trials for p in pots])
+        # each task carries its Config, built here from this process's state and the trial (A3 phase 2): no
+        # worker reads this module's statics (STRECKER_SHARE, the arm's) or inherits the coupling
+        tasks = parallel.configured([dict(jobs[p], **tr) for tr in trials for p in pots], job_config)
+        results = parallel.map_ordered(run_pot, tasks)
         out = []
         for i, tr in enumerate(trials):
             res = dict(zip(pots, results[i * len(pots):(i + 1) * len(pots)]))
+            task = dict(zip(pots, tasks[i * len(pots):(i + 1) * len(pots)]))
             r_i = []
             for r in rows:
                 got = res[key_of(r)]
@@ -371,7 +381,8 @@ def make_raw_many(jobs, keys):
                     FAILURES.append(f"{key_of(r)}: {got['failed']}")
                     r_i.append(float("nan"))
                     continue
-                predicted = probe.predict(r, dict(jobs[key_of(r)], **tr), got)
+                predicted = parallel.run_under(task[key_of(r)],
+                                               lambda: probe.predict(r, dict(jobs[key_of(r)], **tr), got))
                 r_i.append(fit_rows.residual(r, predicted) if predicted > 0 else float("nan"))
             out.append(np.array(r_i, dtype=float))
         return out
@@ -415,12 +426,12 @@ def cerny_route_checks(theta, keys) -> Dict[str, Any]:
                    charge=charge, dropped=[], notes=[], buffer="potassium phosphate 0.5 M",
                    strecker_share=STRECKER_SHARE,
                    times=sorted({0.0, *np.geomspace(1e-5, 240.0, 300).tolist(), *np.linspace(0.0, 240.0, 121).tolist()}))
-        install(job)
-        run = probe.integrate_pot(job)
-        flux = sulfur.reaction_flux_integrals(run)
+        with config.applied(job_config(job)):   # the pot's state for the run and its flux analysis, then back
+            run = probe.integrate_pot(job)
+            flux = sulfur.reaction_flux_integrals(run)
+            tracer = fed_norfuraneol_tracer(run) if charge.get("NF") else None
         made = _ranked(flux, "MFT")["made"]
         share = {t["reaction"]: t["share"] for t in made["top"]}
-        tracer = fed_norfuraneol_tracer(run) if charge.get("NF") else None
         out[pot] = {"mft_made_mmol_L": made["total_mmol_L"], "share_by_step": share,
                     "nf_route_flux_share": share.get("r_nf_mft", 0.0),
                     "c2_c3_route_share": share.get("r_ha_mp_mft", 0.0),
@@ -462,16 +473,16 @@ def fed_norfuraneol_tracer(run) -> Dict[str, float]:
             "fed_fraction_of_nf_pool_at_end": float(f[-1])}
 
 
-def job_config(job):
-    """The engine configuration a job runs in, as one ``Config`` (A3 phase 1): the process's globals once sub-model
-    3's switches are installed (still set as globals by ``sm3.install``: its migration is phase 2), with this job's
-    switches replaced."""
+def job_config(job, base=None):
+    """The engine configuration a job runs in, as one ``Config`` (A3 phase 2): ``base`` (by default this process's
+    state) with sub-model 3's switches (``sm3.job_config``) and this job's. It sets nothing: ``install`` does, and a
+    task built by ``parallel.configured`` carries it to its worker. The Strecker share is the job's, else
+    ``STRECKER_SHARE`` read HERE, in the caller."""
     import dataclasses as _dc
     from src.kinetic_core import parameters_sulfur as _ps
     from src.kinetic_core.config import Config
 
-    sm3.install(job)
-    base = Config.from_globals()
+    base = sm3.job_config(job, Config.from_globals() if base is None else base)
     # B7a: the split's pH law and TDP's own exit, the shipped defaults whenever the job does not carry them
     _default = _ps.CysAmadoriRoute()
     _split = job.get("cama_split", {})
@@ -592,7 +603,7 @@ def main(argv=None) -> int:
     if args.ea_nf_mft is not None:
         EA_STATIC["k_nf_mft"] = float(args.ea_nf_mft)
     t0 = time.time()
-    sulfur.PH_COUPLING = "inline"
+    config.update({"ph.coupling": "inline"})   # the base every task's Config is built on (make_raw_many)
     predictable = set(sulfur.SULFUR_STATE_KEYS)
     jobs, rows_all, pots_all = {}, [], {}
     extra = ((ACTZ_TABLE,) if "actz" in arms else ()) + ((ENTRY_TABLE, ENTRY_PH_TABLE) if "entry" in arms else ())
@@ -699,9 +710,8 @@ def main(argv=None) -> int:
             "label_pH": lambda r: float(pots_all[key_of(r)]["label_ph"]), "time_min": lambda r: r.t_min}),
     }
     if args.check_fixed_point:
-        sulfur.PH_COUPLING = "fixed_point_nodes"
-        report["shipped_coupling_max_abs_difference"] = float(np.nanmax(np.abs(raw(best.theta, data) - raw_best)))
-        sulfur.PH_COUPLING = "inline"
+        with config.applied(config.Config.from_globals().replace({"ph.coupling": "fixed_point_nodes"})):
+            report["shipped_coupling_max_abs_difference"] = float(np.nanmax(np.abs(raw(best.theta, data) - raw_best)))
     if args.lopo:
         out, sig = {}, np.array([lap["sigma"][k] for k in keys])
         for paper in sorted({sm3.paper_of(r) for r in data}):

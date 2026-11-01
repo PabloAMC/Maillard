@@ -46,7 +46,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src import data_paths, provenance  # noqa: E402
-from src.kinetic_core import engine, fit_rows, fitting, observations, parallel, parameters_sulfur, sulfur  # noqa: E402
+from src.kinetic_core import config, engine, fit_rows, fitting, observations, parallel, sulfur  # noqa: E402
 from src.kinetic_core import ph_state  # noqa: E402
 from src.kinetic_core.ph_state import LABEL_TEMPERATURE_K, BufferSpec  # noqa: E402
 from src.kinetic_core.sulfur import SULFUR_STATE_KEYS, integrate_sulfur  # noqa: E402
@@ -225,6 +225,21 @@ class _Residuals:
         return np.array([self._by[id(r)] for r in rows])
 
 
+def arm_config(args, base: config.Config) -> config.Config:
+    """The probe arm's engine state as one Config (A3 phase 2): ``base`` with the command line's coupling, trunk pH
+    terms, trunk solutes, ``--switch-on`` steps and ``--nf-mgo-share``. Every pot's job carries it."""
+    changes: Dict[str, Any] = {"ph.coupling": args.ph_coupling,
+                               "ph.trunk_solutes_in_balance": bool(args.trunk_solutes_in_balance),
+                               "ph.trunk_terms": bool(args.trunk_ph_dynamic)}
+    for name in args.switch_on:
+        key = config.KEY_OF_BINDING[("parameters_sulfur", name)]
+        changes[key] = dataclasses.replace(base[key], enabled=True)
+    if args.nf_mgo_share is not None:
+        key = "sulfur.nf_hydroxide_decay"
+        changes[key] = dataclasses.replace(changes.get(key, base[key]), mgo_share=float(args.nf_mgo_share))
+    return base.replace(changes)
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     parser.add_argument("--table", default="ph_acid_submodel")
@@ -243,16 +258,10 @@ def main(argv=None) -> int:
     parser.add_argument("--ph-coupling", choices=("fixed_point_nodes", "inline"), default=sulfur.PH_COUPLING,
                         help="the shipped coupling by default; 'inline' to check it against the shipped one on this table")
     args = parser.parse_args(argv)
-    sulfur.PH_COUPLING = args.ph_coupling
-    ph_state.TRUNK_SOLUTES_IN_BALANCE = bool(args.trunk_solutes_in_balance)
-    for name in args.switch_on:   # set here, never at import; the workers fork after it
-        setattr(parameters_sulfur, name, dataclasses.replace(getattr(parameters_sulfur, name), enabled=True))
-    if args.nf_mgo_share is not None:
-        parameters_sulfur.NF_HYDROXIDE_DECAY = dataclasses.replace(parameters_sulfur.NF_HYDROXIDE_DECAY,
-                                                                   mgo_share=float(args.nf_mgo_share))
+    cfg = arm_config(args, config.Config.from_globals())
+    config.install(cfg)   # set here, never at import; the predictions below run in this process
     base = engine.core_parameters(engine.SULFUR)
     k_ref_override = {k: base[k].k_ref * 10.0 ** float(v) for k, v in (kv.split("=") for kv in args.k_multiplier)}
-    sulfur.TRUNK_PH_TERMS = bool(args.trunk_ph_dynamic)   # set here, never at import; the workers fork after it
     arm = "_".join(([args.label] if args.label else []) + ["trunk_ph_dynamic"] * args.trunk_ph_dynamic + ["trunk_solutes"] * args.trunk_solutes_in_balance
                    + ([f"figure_scale_tau{args.scale_tau:g}"] if args.scale_group == "figure" else [])
                    + [f"with_{SWITCHES[n]}" for n in args.switch_on]
@@ -266,7 +275,7 @@ def main(argv=None) -> int:
         job["without"] = tuple(args.without)
         job["k_ref"] = dict(k_ref_override)
     runnable = [j for j in jobs if "skip" not in j]
-    results = dict(zip((j["pot"] for j in runnable), parallel.map_ordered(run_pot, runnable)))
+    results = dict(zip((j["pot"] for j in runnable), parallel.map_ordered(run_pot, runnable, config=cfg)))
     by_pot = {j["pot"]: j for j in jobs}
     records, scored, unpredictable = [], [], {}
     for row in rows:

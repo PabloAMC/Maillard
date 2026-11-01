@@ -38,6 +38,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src.kinetic_core import config  # noqa: E402
 from src import artifact_io, data_paths, provenance  # noqa: E402
 
 V = data_paths.VALIDATION_DIR
@@ -88,7 +89,7 @@ def _child(mode: str, report: Path, ea: Optional[float]) -> Dict[str, Any]:
     step = dataclasses.replace(ps.NF_HYDROXIDE_DECAY, enabled=(mode == "on"))
     if ea is not None:
         step = dataclasses.replace(step, ea_kj_mol=float(ea))
-    ps.NF_HYDROXIDE_DECAY = step
+    config.update({"sulfur.nf_hydroxide_decay": step})
     engine._B2_FIT_REPORT = Path(report)
     from src.kinetic_core.directional import score_panel as score_directional
     from src.kinetic_core.scoring import score_panel
@@ -115,7 +116,7 @@ def _cost_child(mode: str, report: Path) -> Dict[str, Any]:
     import generate_kinetic_core_b60_fit as B60
     from generate_kinetic_core_b8_laplace import frozen_vector
 
-    ps.NF_HYDROXIDE_DECAY = dataclasses.replace(ps.NF_HYDROXIDE_DECAY, enabled=(mode == "on"))
+    config.update({"sulfur.nf_hydroxide_decay": dataclasses.replace(ps.NF_HYDROXIDE_DECAY, enabled=(mode == "on"))})
     r = B60.residual_vector(frozen_vector(json.loads(Path(report).read_text(encoding="utf-8"))), True)
     return {"mode": mode, "report": str(report), "cost": 0.5 * float(r @ r)}
 

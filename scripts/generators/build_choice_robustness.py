@@ -18,7 +18,7 @@ import math
 import statistics
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Callable, Dict, List
 
 import yaml
 
@@ -30,7 +30,6 @@ for p in (ROOT, ROOT / "scripts" / "generators"):
 import build_contrast_scores as CONTRASTS  # noqa: E402
 import build_null_model_baselines as NULL  # noqa: E402
 from src import artifact_io, data_paths, provenance  # noqa: E402
-from src.kinetic_core import parameters_lipid  # noqa: E402
 
 REGISTER = ROOT / "docs" / "reference" / "choices_register.yml"
 OUT = data_paths.VALIDATION_DIR / "choice_robustness.json"
@@ -75,6 +74,22 @@ def _rescored() -> Dict[str, Any]:
     return score_panel()
 
 
+def q10_sweep(alternatives: List[Dict[str, Any]], measure: Callable[[], Any]) -> Dict[str, Any]:
+    """CR-02: ``measure()`` under each registered Q10, the alternative installed on EVERY binding of the switch
+    through a Config (src/kinetic_core/config.py). Until 2026-11-01 only ``parameters_lipid.Q10_ASSUMPTION`` was
+    set: the rate read it, but ``lipid.integrate_lipid`` reported ``q10_used`` and the extrapolation in decades from
+    its own re-imported binding, which kept the shipped value."""
+    from src.kinetic_core import config
+
+    base = config.Config.from_globals()
+    out = {}
+    for a in alternatives:
+        q10 = dataclasses.replace(base["lipid.q10_assumption"], default=float(a["value"]))
+        with config.applied(base.replace({"lipid.q10_assumption": q10})):
+            out[a["name"]] = measure()
+    return out
+
+
 def main() -> int:
     register = yaml.safe_load(REGISTER.read_text(encoding="utf-8"))["entries"]
     by_id = {e["id"]: e for e in register}
@@ -92,15 +107,7 @@ def main() -> int:
     CONTRASTS.NOISE_DEX = saved_noise
     report["CR-06"] = noise
 
-    q10 = {}
-    saved_q10 = parameters_lipid.Q10_ASSUMPTION
-    try:
-        for a in by_id["CR-02"]["alternatives"]:
-            parameters_lipid.Q10_ASSUMPTION = dataclasses.replace(saved_q10, default=float(a["value"]))
-            q10[a["name"]] = _headlines(_rescored(), 3.0)
-    finally:
-        parameters_lipid.Q10_ASSUMPTION = saved_q10
-    report["CR-02"] = q10
+    report["CR-02"] = q10_sweep(by_id["CR-02"]["alternatives"], lambda: _headlines(_rescored(), 3.0))
 
     verdicts = {}
     for entry in register:

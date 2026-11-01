@@ -23,6 +23,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
 import generate_kinetic_core_b51_ship_rule as B51R  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import artifact_io, data_paths, provenance  # noqa: E402
 
 V = data_paths.VALIDATION_DIR
@@ -39,7 +40,7 @@ def _config(mode: str):
 def _child(mode: str) -> Dict[str, Any]:
     from src.kinetic_core import engine, ph_state
 
-    ph_state.B51 = _config(mode)
+    config.update({"ph.b51": _config(mode)})
     engine._B2_FIT_REPORT = B51R.B9_REPORT
     from src.kinetic_core.directional import score_panel as score_directional
     from src.kinetic_core.scoring import score_panel
@@ -64,7 +65,7 @@ def _cost(mode: str) -> float:
     from generate_kinetic_core_b8_laplace import frozen_vector
     from src.kinetic_core import ph_state
 
-    ph_state.B51 = _config(mode)
+    config.update({"ph.b51": _config(mode)})
     r = B9.residual_vector(frozen_vector(B51R._read(B51R.B9_REPORT)), True)
     return 0.5 * float(np.dot(r, r))
 

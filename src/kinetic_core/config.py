@@ -32,14 +32,32 @@ configuration whatever a script has set before importing this module. ``tests/un
 against the modules as first imported, checks that every switch in the engine has a key (a new switch without one
 fails), and that a SPAWN-started worker given a Config reproduces a forked one with every switch flipped.
 
-Next (A3 phase 2): the scripts build ``Config.replace(...)`` instead of assigning globals; then the persistent pool.
+PHASE 2 (2026-11-01): THE OWNER'S DECISIONS AND THE REVIEW OF PHASE 1
+=====================================================================
+* ``"build"`` keys are READ-ONLY FACTS. Their tables are built at import, so installing one at run time would change
+  the call-time readers only and leave a half-switched engine. ``install`` / ``applied`` refuse a Config whose build
+  key differs from the shipped default, naming the key, and never set a build binding. A Config may still HOLD a
+  non-default build value (``from_globals`` reports what a process holds); it cannot be installed.
+* A key validates its value on construction: the type of the shipped default (any number stands, and is stored, as
+  a float where the default is a float; a bool is never a number), ``choices``, a scalar ``band``, and FIELD-LEVEL
+  ``bands`` ``{field: (lo, hi)}`` for the dataclass fields that fits and feasibility draws sample (``_BANDS``, with
+  its basis). The fields of a dataclass value are type-checked against the shipped instance's.
+* ``Config.digest()`` is a sha256 over a canonical serialisation (numbers as exact float hex, dataclasses with their
+  qualified type and every field), stable across processes, unlike ``hash()``.
+* ``update(changes)`` is what a script calls instead of assigning a global: the process's configuration with some
+  keys replaced, validated, installed on EVERY binding (a script that assigned one binding of a re-imported switch
+  left the other behind: build_choice_robustness's Q10, fixed 2026-11-01), and returned, so the script hands the
+  same value to its jobs (``parallel.map_ordered(..., config=cfg)``).
 """
 from __future__ import annotations
 
 import contextlib
 import dataclasses
+import hashlib
 import importlib
-from dataclasses import dataclass
+import json
+import math
+from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any, Dict, Iterator, Literal, Mapping, Optional, Tuple
 
@@ -52,11 +70,36 @@ Phase = Literal["build", "rate", "solver"]
 _PACKAGE = "src.kinetic_core"
 
 
+def _is_number(value: Any) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def _same_kind(shipped: Any, value: Any) -> bool:
+    """``value`` may stand where ``shipped`` stands: the same type, except that any number (never a bool) stands for
+    a float, any tuple for a tuple, and None on either side (an Optional field)."""
+    if shipped is None or value is None:
+        return True
+    if isinstance(shipped, bool) or isinstance(value, bool):
+        return type(shipped) is type(value)
+    if isinstance(shipped, float):
+        return _is_number(value)
+    if isinstance(shipped, int):
+        return isinstance(value, int)
+    if isinstance(shipped, tuple):
+        return isinstance(value, tuple)
+    return type(value) is type(shipped)
+
+
+def _in_band(value: Any, band: Tuple[float, float]) -> bool:
+    return _is_number(value) and not math.isnan(value) and band[0] <= value <= band[1]
+
+
 @dataclass(frozen=True)
 class ConfigKey:
     """One switch. ``bindings`` are ``(module, attribute)`` pairs, module relative to ``src.kinetic_core`` ("" for the
     package itself); the first is the one the engine's kinetics read. ``mapping`` keys hold a dict, kept in a Config
-    as a tuple of its items (hashable, order kept) and installed as a fresh dict."""
+    as a tuple of its items (hashable, order kept) and installed as a fresh dict. ``band`` bounds a scalar value,
+    ``bands`` named FIELDS of a dataclass value (``{field: (lo, hi)}``, inclusive)."""
 
     name: str
     bindings: Tuple[Tuple[str, str], ...]
@@ -66,20 +109,73 @@ class ConfigKey:
     band: Optional[Tuple[Any, Any]] = None
     choices: Optional[Tuple[Any, ...]] = None
     mapping: bool = False
+    bands: Mapping[str, Tuple[float, float]] = field(default_factory=lambda: MappingProxyType({}), hash=False)
 
     def freeze(self, value: Any) -> Any:
         if self.mapping:
             return tuple((k, v) for k, v in dict(value).items())
+        if isinstance(self.default, float) and _is_number(value):
+            return float(value)
         return value
 
     def thaw(self, value: Any) -> Any:
         return dict(value) if self.mapping else value
 
+    def validate(self, value: Any) -> None:
+        """Raise unless ``value`` (frozen) is one this key may take: its type, choices, band and field bands."""
+        if self.mapping:
+            if not isinstance(value, tuple) or not all(
+                    isinstance(item, tuple) and len(item) == 2 and isinstance(item[0], str) for item in value):
+                raise TypeError(f"{self.name}: a mapping from names, got {value!r}")
+        elif not _same_kind(self.default, value):
+            raise TypeError(f"{self.name}: a {type(self.default).__name__}, got {type(value).__name__} {value!r}")
+        if self.choices is not None and value not in self.choices:
+            raise ValueError(f"{self.name} = {value!r}: not one of {self.choices}")
+        if self.band is not None and not _in_band(value, self.band):
+            raise ValueError(f"{self.name} = {value!r}: outside its band {self.band}")
+        if dataclasses.is_dataclass(self.default):
+            for f in dataclasses.fields(self.default):
+                got, shipped = getattr(value, f.name), getattr(self.default, f.name)
+                if not _same_kind(shipped, got):
+                    raise TypeError(f"{self.name}.{f.name}: a {type(shipped).__name__}, got {got!r}")
+        for name, band in self.bands.items():
+            got = getattr(value, name)
+            if not _in_band(got, band):
+                raise ValueError(f"{self.name}.{name} = {got!r}: outside its band {band} (config._BANDS)")
+
 
 def _k(name: str, module: str, attr: str, default: Any, phase: Phase, basis: str, *, also: Tuple[str, ...] = (),
        band=None, choices=None, mapping: bool = False) -> ConfigKey:
     bindings = ((module, attr),) + tuple((m, attr) for m in also)
-    return ConfigKey(name, bindings, default, phase, basis, band=band, choices=choices, mapping=mapping)
+    return ConfigKey(name, bindings, default, phase, basis, band=band, choices=choices, mapping=mapping,
+                     bands=MappingProxyType(dict(_BANDS.get(name, {}))))
+
+
+#: FIELD BANDS (``ConfigKey.bands``, the owner's decision 6 of 2026-11-01): for every dataclass field a fit or a
+#: feasibility draw samples, the union of the boxes the scripts sample, in the field's own units (a log10 coordinate
+#: in [a, b] gives the band [0, 10**b]: 0 is the route off). Basis: the joint fit's coordinates
+#: (fit_joint_deoxyosone_thiol.py: ENTRY_COORDINATES, AA_PK_COORDINATE, SPLIT_COORDINATES, TDP_MGO_COORDINATE,
+#: TDP_CYS_TRAP_COORDINATE, MGO_STRECKER_BOUNDS, DDP_SLOPE_COORDINATE), sub-model 3's arms
+#: (fit_deoxyosone_submodel.coordinates: k_tdp_mgo to 1, k_pent_mgo to 0.1, both Ea 40 - 160) and the feasibility
+#: draws (feasibility_deoxyosone.BANDS, TDP_EXIT_BAND, and its +-1 dex about the fitted log10 k_dpo_aa, so 10**1.5);
+#: shares are [0, 1]; the Q10 is Q10Assumption's own lo / hi (CR-02's three alternatives). A job outside a band is
+#: refused: widen the band here, with its basis, before sampling outside it.
+_SHARE = (0.0, 1.0)
+_BANDS: Mapping[str, Mapping[str, Tuple[float, float]]] = {
+    "sulfur.nf_hydroxide_decay": {"mgo_share": _SHARE},
+    "sulfur.pentose_mgo_routes": {"k_tdp_mgo_100c_ph5": (0.0, 1.0), "ea_tdp_mgo_kj_mol": (40.0, 160.0),
+                                  "k_pent_mgo_100c_ph5": (0.0, 0.1), "ea_pent_mgo_kj_mol": (40.0, 160.0)},
+    "sulfur.pentose_amine_entry": {"k_entry_l_per_mmol_min_100c_ph6": (0.0, 1e-2), "entry_ph_slope": (-0.5, 1.5),
+                                   "k_dpo_aa_per_min_100c_ph6": (0.0, 10.0 ** 1.5), "aa_ph_slope": (-0.5, 1.5),
+                                   "aa_pk": (5.0, 7.5), "amine_return": _SHARE},
+    "sulfur.ddp_formation_ph": {"slope": (-1.0, 2.0)},
+    "sulfur.mgo_cysteine_strecker": {"k_l_per_mmol_min_100c_ph5": (0.0, 1.0)},
+    "sulfur.tdp_cysteine_trap": {"k_l_per_mmol_min_100c_ph5": (0.0, 1.0)},
+    "sulfur.strecker_sulfur": {"h2s_share": _SHARE},
+    "sulfur.cys_amadori_route": {"dpo_share": _SHARE, "split_ph_c": (5.0, 10.0)},
+    "sulfur.tdp_own_decay": {"k_ref_per_min": (0.0, 0.1), "ea_kj_mol": (30.0, 200.0)},
+    "lipid.q10_assumption": {"default": (1.6, 3.3)},
+}
 
 
 #: Every module-level switch of the engine. The default is the SHIPPED value, written here and checked against the
@@ -113,6 +209,8 @@ KEYS: Tuple[ConfigKey, ...] = (
        "B60; frozen waves set linear_rederived", choices=("closed", "linear_rederived")),
     _k("sulfur.profile_node_step_k", "sulfur", "PROFILE_NODE_STEP_K", 2.0, "solver",
        "B64: largest temperature step between two rate nodes along a recorded profile"),
+    _k("engine.ramp_step_k", "engine", "RAMP_STEP_K", 2.0, "solver",
+       "ThermalProgram.from_profile's default segment step (a call-time read found by the phase 2 coverage scan)"),
     # --- the sulfur lane's declared routes (parameters_sulfur.py), each OFF or at its shipped value
     _k("sulfur.ttca_formation", "parameters_sulfur", "TTCA_FORMATION", _ps.TtcaFormation(), "rate",
        "B58 (kinetic_core_b58_prereg.md)"),
@@ -180,16 +278,45 @@ KEYS: Tuple[ConfigKey, ...] = (
 KEY_BY_NAME: Mapping[str, ConfigKey] = MappingProxyType({key.name: key for key in KEYS})
 if len(KEY_BY_NAME) != len(KEYS):
     raise RuntimeError("duplicate ConfigKey names")
+if set(_BANDS) - set(KEY_BY_NAME):
+    raise RuntimeError(f"field bands for unknown keys: {sorted(set(_BANDS) - set(KEY_BY_NAME))}")
+for _key in KEYS:   # a shipped default is a value its own key accepts
+    _key.validate(_key.freeze(_key.default))
+BUILD_KEYS: Tuple[str, ...] = tuple(key.name for key in KEYS if key.phase == "build")
+#: ``(module, attribute) -> key name`` for every binding: how a script that named a global finds its key
+KEY_OF_BINDING: Mapping[Tuple[str, str], str] = MappingProxyType(
+    {binding: key.name for key in KEYS for binding in key.bindings})
 
 
 def _module(name: str):
     return importlib.import_module(f"{_PACKAGE}.{name}" if name else _PACKAGE)
 
 
+def _canonical(value: Any) -> Any:
+    """A JSON-serialisable form of a Config value that two equal values share, whatever process made them: numbers
+    as exact float hex (so 40 and 40.0, which are equal, agree), dataclasses tagged with their qualified type and
+    every field in declaration order, sequences in order, mappings sorted by their canonical key."""
+    if value is None or isinstance(value, (bool, str)):
+        return value
+    if _is_number(value):
+        return {"num": float(value).hex()}
+    if dataclasses.is_dataclass(value) and not isinstance(value, type):
+        return {"type": f"{type(value).__module__}.{type(value).__qualname__}",
+                "fields": [[f.name, _canonical(getattr(value, f.name))] for f in dataclasses.fields(value)]}
+    if isinstance(value, (tuple, list)):
+        return {"seq": [_canonical(v) for v in value]}
+    if isinstance(value, Mapping):
+        items = [[_canonical(k), _canonical(v)] for k, v in value.items()]
+        return {"map": sorted(items, key=lambda kv: json.dumps(kv[0], sort_keys=True))}
+    if isinstance(value, (frozenset, set)):
+        return {"set": sorted((_canonical(v) for v in value), key=lambda c: json.dumps(c, sort_keys=True))}
+    raise TypeError(f"no canonical form for a {type(value).__name__} ({value!r})")
+
+
 @dataclass(frozen=True)
 class Config:
-    """A value for EVERY ``ConfigKey``: frozen, hashable, picklable. Build one with ``shipped()``, ``from_globals()``
-    or ``replace``; never by hand."""
+    """A value for EVERY ``ConfigKey``: frozen, hashable, picklable, validated (type, choices, band, field bands) on
+    construction. Build one with ``shipped()``, ``from_globals()`` or ``replace``; never by hand."""
 
     items: Tuple[Tuple[str, Any], ...]
 
@@ -200,13 +327,18 @@ class Config:
             extra = sorted(set(names) - set(KEY_BY_NAME))
             raise ValueError(f"a Config sets every key once, in name order (missing {missing}, unknown {extra})")
         for name, value in self.items:
-            key = KEY_BY_NAME[name]
-            if key.choices is not None and value not in key.choices:
-                raise ValueError(f"{name} = {value!r}: not one of {key.choices}")
+            KEY_BY_NAME[name].validate(value)
             try:
                 hash(value)
             except TypeError as exc:
                 raise TypeError(f"{name}: a Config value must be hashable ({exc})") from None
+
+    def digest(self) -> str:
+        """A sha256 of the canonical serialisation: the same for equal Configs in any process (``hash()`` is not:
+        it is salted per process for strings). For records and cache keys."""
+        blob = json.dumps([[name, _canonical(value)] for name, value in self.items], sort_keys=True,
+                          separators=(",", ":"))
+        return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
     @classmethod
     def _of(cls, values: Mapping[str, Any]) -> "Config":
@@ -264,16 +396,45 @@ def _restore(snapshot: Mapping[Tuple[str, str], Any]) -> None:
         setattr(_module(m), a, value)
 
 
+class BuildPhaseKeyError(ValueError):
+    """A Config that changes a build-phase key was to be installed (the owner's decision 1, 2026-11-01)."""
+
+
+def _refuse_build_changes(config: Config) -> None:
+    changed = [name for name in BUILD_KEYS if config.values[name] != KEY_BY_NAME[name].freeze(KEY_BY_NAME[name].default)]
+    if changed:
+        detail = "; ".join(f"{name} = {config.values[name]!r} (shipped {KEY_BY_NAME[name].default!r}, "
+                           f"{', '.join(f'{m or _PACKAGE}.{a}' for m, a in KEY_BY_NAME[name].bindings)})"
+                           for name in changed)
+        raise BuildPhaseKeyError(
+            f"refusing to install build-phase key(s) at a non-shipped value: {detail}. Their tables are built at "
+            "import, so setting them at run time would switch only the call-time readers; change the shipped "
+            "default (in the module and here) or run in a process that imports them so")
+
+
 def install(config: Config) -> None:
-    """Set every switch (every binding of every key) from ``config``, and leave it set: what a worker does at the
-    start of a task, and what a script's ``install(job)`` does in the process that runs the job."""
+    """Set every run-time switch (every binding of every ``"rate"`` / ``"solver"`` key) from ``config``, and leave
+    it set: what a worker does at the start of a task. A build-phase key is a read-only fact: never set, and a
+    Config that changes one is refused (``BuildPhaseKeyError``), before anything is set."""
     if not isinstance(config, Config):
         raise TypeError(f"install takes a Config, not {type(config).__name__}")
+    _refuse_build_changes(config)
     values = dict(config.items)
     for key in KEYS:
+        if key.phase == "build":
+            continue
         value = key.thaw(values[key.name])
         for m, a in key.bindings:
             setattr(_module(m), a, value)
+
+
+def update(changes: Optional[Mapping[str, Any]] = None, **kw: Any) -> Config:
+    """What a script calls instead of assigning an engine global (A3 phase 2): the process's configuration with
+    ``changes`` replaced (validated; every binding; build keys refused), installed and returned, so the same value
+    can travel with the script's jobs (``parallel.map_ordered(fn, items, config=cfg)``)."""
+    config = Config.from_globals().replace(changes, **kw)
+    install(config)
+    return config
 
 
 @contextlib.contextmanager
@@ -287,4 +448,5 @@ def applied(config: Config) -> Iterator[Config]:
         _restore(snapshot)
 
 
-__all__ = ["Config", "ConfigKey", "KEYS", "KEY_BY_NAME", "applied", "install"]
+__all__ = ["BUILD_KEYS", "BuildPhaseKeyError", "Config", "ConfigKey", "KEYS", "KEY_BY_NAME", "KEY_OF_BINDING",
+           "applied", "install", "update"]

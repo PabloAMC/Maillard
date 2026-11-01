@@ -35,6 +35,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src.kinetic_core import config  # noqa: E402
 from src import artifact_io, data_paths, provenance  # noqa: E402
 
 V = data_paths.VALIDATION_DIR
@@ -55,7 +56,7 @@ def _child(mode: str, report: Path) -> Dict[str, Any]:
     from src.kinetic_core import engine, parameters_sulfur as ps
     from src.kinetic_core.ph_state import BufferSpec
 
-    ps.TTCA_FORMATION = dataclasses.replace(ps.TTCA_FORMATION, enabled=(mode == "on"))
+    config.update({"sulfur.ttca_formation": dataclasses.replace(ps.TTCA_FORMATION, enabled=(mode == "on"))})
     engine._B2_FIT_REPORT = Path(report)
     from src.kinetic_core.directional import score_panel as score_directional
     from src.kinetic_core.scoring import score_panel

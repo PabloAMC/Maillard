@@ -28,6 +28,13 @@ def _no_real_verification_files(tmp_path, monkeypatch):
     ("def f():\n    sulfur.PH_COUPLING = 'inline'\n", []),          # inside a function: fine
     ("class C:\n    def g(self):\n        ps.ROUTE = 1\n", []),
     ("sulfur.lower_case = 1\nx = 3\n", []),                         # not a switch
+    # A3 phase 2: the configuration's setters at import set switches as an assignment does
+    ("from src.kinetic_core import config\nconfig.update({'ph.coupling': 'inline'})\n", ["config.update(...)"]),
+    ("from src.kinetic_core import config as c\nCFG = c.install(x)\n", ["config.install(...)"]),
+    ("from src.kinetic_core.config import update\nif True:\n    update({})\n", ["config.update(...)"]),
+    ("setattr(ps, 'ROUTE', 1)\n", ["setattr(..., 'ROUTE')"]),
+    ("from src.kinetic_core import config\ndef f():\n    config.update({})\n", []),   # inside a function: fine
+    ("other.update({})\nd = {}\nd.update(x=1)\n", []),             # not the config module
 ])
 def test_switch_gate_finds_import_time_assignments(code, expected):
     hits = switch_gate._top_level_switch_assignments(ast.parse(code))

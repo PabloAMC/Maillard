@@ -37,6 +37,7 @@ if str(ROOT) not in sys.path:
 if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
+from src.kinetic_core import config  # noqa: E402
 from src import artifact_io, data_paths, provenance  # noqa: E402
 
 V = data_paths.VALIDATION_DIR
@@ -61,7 +62,7 @@ def _read(p: Path) -> Dict[str, Any]:
 def _set_switches(mode: str) -> None:
     from src.kinetic_core import ph_state
 
-    ph_state.B51 = ph_state.B51_ALL_ON if mode == "on" else ph_state.PhStateCorrections()
+    config.update({"ph.b51": ph_state.B51_ALL_ON if mode == "on" else ph_state.PhStateCorrections()})
 
 
 def _child(mode: str, report: Path) -> Dict[str, Any]:
@@ -99,11 +100,11 @@ def _attribution() -> Dict[str, Any]:
     out = {}
     for name in ("none",) + SWITCHES + ("all",):
         if name == "none":
-            ph_state.B51 = ph_state.PhStateCorrections()
+            config.update({"ph.b51": ph_state.PhStateCorrections()})
         elif name == "all":
-            ph_state.B51 = ph_state.B51_ALL_ON
+            config.update({"ph.b51": ph_state.B51_ALL_ON})
         else:
-            ph_state.B51 = ph_state.PhStateCorrections(**{name: True})
+            config.update({"ph.b51": ph_state.PhStateCorrections(**{name: True})})
         r = B9.residual_vector(x, True)
         out[name] = 0.5 * float(np.dot(r, r))
     return out
@@ -120,7 +121,7 @@ def _costs_on_b47_rows() -> Dict[str, Any]:
     xa = frozen_vector(_read(B51_REPORT))
     out = {}
     for arm, mode, x in (("baseline", "off", x9), ("A_refit", "on", xa), ("B_frozen_b9", "on", x9)):
-        ph_state.B51 = ph_state.B51_ALL_ON if mode == "on" else ph_state.PhStateCorrections()
+        config.update({"ph.b51": ph_state.B51_ALL_ON if mode == "on" else ph_state.PhStateCorrections()})
         r = B47.residual_vector(x, True)
         out[arm] = 0.5 * float(np.dot(r, r))
     return out

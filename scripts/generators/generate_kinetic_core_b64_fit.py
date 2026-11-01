@@ -36,6 +36,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
 
 import generate_kinetic_core_b60_fit as B60  # noqa: E402  (B51's rows and physics, B60's numerics and quick setting)
 from generate_kinetic_core_b8_laplace import frozen_vector  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import parallel, ph_state, sulfur  # noqa: E402
 
@@ -44,7 +45,7 @@ CELSIUS = 273.15
 
 #: B64 runs on the inline pH coupling (C5): the limit B60's node fixed point converges to, within
 #: 0.002 dex on the probe pots, without the node grid or the sweeps (kinetic_core_b64_prereg.md sec. 2).
-sulfur.PH_COUPLING = "inline"
+config.update({"ph.coupling": "inline"})
 
 WAVE = "B64"
 PREREG = data_paths.VALIDATION_DIR / "kinetic_core_b64_prereg.md"

@@ -31,6 +31,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
 from generate_kinetic_core_b8_laplace import frozen_vector  # noqa: E402
+from src.kinetic_core import config  # noqa: E402
 from src import data_paths  # noqa: E402
 from src.kinetic_core import engine  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
@@ -44,7 +45,7 @@ B60 = importlib.import_module("generate_" + SHIPPED_REPORT.name.replace("_fit_re
 B51, B9, B23, B8 = B60.B51, B60.B9, B60.B23, B60.B8
 
 #: Candidate (A): the shipped wave with furfural's measured barriers on, for the whole process.
-ps.FURFURAL_BARRIERS = dataclasses.replace(ps.FURFURAL_BARRIERS, enabled=True)
+config.update({"sulfur.furfural_barriers": dataclasses.replace(ps.FURFURAL_BARRIERS, enabled=True)})
 
 WAVE = "B62"
 MEMBER_DIR = data_paths.VALIDATION_DIR / "kinetic_core_b62_members"
