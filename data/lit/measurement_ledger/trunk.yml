@@ -8410,3 +8410,58 @@ entries:
     condition_quote: "The UV absorbance of the reaction solutions was measured at 294 nm for the UIPs and at 420 nm for the BPs"
     flags: [ph_start_only, internal_inconsistency, coarse_read]
     note: "Dilution-corrected absorbances (dilution 30-100x / 0-25x). No browning rate constant, order or Ea printed; Eq. 11 (browning proportional to [H3O+][ASA]T) is derived, not fitted, and contradicts Fig. 1 (pH 5.0 vs 9.5 only x1.2-1.3). A420 roughly proportional to [ASA]0 although the text calls browning independent of [ASA]. 150 C pH 7.0 / 9.5 curves figure-only."
+  # ---- zha2019 : Zha 2019 (pea hydrolysate + gum arabic, dry state) (ingested 2026-11-02) ----
+  - id: zha2019_fig3b_free_amino_groups_pph_gum_arabic_dry_state
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "pea protein hydrolysate (PURIS 870H, DH 12 %) alone, and PPH + gum arabic 1:4 w/w; hydrated, pH 7.0, freeze-dried; 5 g powder"
+    medium: "dry state, open 60 mL jar in desiccator over saturated KBr (79 % RH set point), air"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [free amino groups]
+    kind: time_series
+    location: "Fig. 3B (dossier sec. 4c digitisation, mmol/g protein); text -26.5 % / -9.8 % at 3 d"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "maintained at 79% by saturated KBr solution and 60 °C"
+    flags: [assay_not_named_in_paper, unit_implausible_high, amine_loss_exceeds_ga_reducing_ends, aw_set_point_not_measured, open_vessel, low_moisture_no_aw_term, "also_relevant: aroma_other"]
+    note: "Directional only: GA ~3x the amine loss of heated PPH, mostly in day 1. ~6.2 mmol/g protein at t0 is ~4x the DH-12 % ceiling; GA-attributable loss ~180x the GA reducing ends (dossier sec. 1)."
+  - id: zha2019_fig3a_a304_a420_pph_gum_arabic_dry_state
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "PPH alone and PPH + gum arabic 1:4 w/w, freeze-dried"
+    medium: "dry state, open jar, 79 % RH (saturated KBr), air; absorbance of a redissolved solution of unstated concentration"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [A304, A420]
+    kind: time_series
+    location: "Fig. 3A (dossier sec. 4d digitisation, two y-axes)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "measuring the absorbance of glyco-PPH solution at 304 and 420 nm"
+    flags: [sample_concentration_not_stated, a304_not_a294, aw_set_point_not_measured, open_vessel, low_moisture_no_aw_term]
+    note: "A304 (glyco) peaks at 3 d then falls; A420 rises monotonically to ~0.18 at 5 d vs ~0.045 for PPH alone."
+  - id: zha2019_fig3c_colour_lab_pph_gum_arabic_dry_state
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "PPH alone and PPH + gum arabic 1:4 w/w, freeze-dried powders"
+    medium: "dry state, open jar, 79 % RH, air; Minolta CR-310 on powder"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [L*, b*, a*]
+    kind: time_series
+    location: "Fig. 3C bubble chart (L* vs b*; a* as bubble size, not readable); dossier sec. 4e"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [a_star_not_readable, ga_dilutes_colour_at_t0, aw_set_point_not_measured]
+    note: "L* 83.6 -> 72.4 (PPH+GA) vs 82.8 -> 78.1 (PPH alone) over 5 d."

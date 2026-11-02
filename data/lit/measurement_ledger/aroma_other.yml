@@ -2812,3 +2812,77 @@ entries:
     condition_quote: "calibration curves were created to quantify the sugars"
     flags: [matrix_food, ph_start_only, quant_basis_conflict, internal_inconsistency, concentration_basis_inferred]
     note: "External-standard HPLC-RID sugars and OPA-HPLC-DAD amino acids, but the wet/dry basis of the mg/100 g rows is not stated: wet reading gives 113 % xylose recovery (> total carbohydrate), dry reading ~93 % xylose loss. Free cysteine by OPA with SD 12.03 on 16.76. Composition context only; not a consumption datum. Amino-acid LOD printed inconsistently (0.289 vs 1,358 mg/L)."
+  # ---- fang2020 : Fang 2020 (glutaminase-deamidated pea protein) (ingested 2026-11-02) ----
+  - id: fang2020_fig2_pea_protein_deamidation_degree_timecourse
+    dossier: fang2020_extraction.md
+    paper: "Fang, Xiang, Sun-Waterhouse, Cui & Lin 2020 J Agric Food Chem 68:1691 (10.1021/acs.jafc.9b06046)"
+    lab: "SCUT (Cui C / Sun-Waterhouse D)"
+    system: "commercial isoelectric pea protein isolate (74.5 % protein dry, N x 5.4), L-glutaminase EC 3.5.1.2 at 1:500 w/w enzyme:PPI"
+    medium: "PPI 1:10 w/w in deionised water, pH 9.0 with NaOH, unbuffered, shaking water bath; then pH 7.0, 90 C 10 min, freeze-dried, no dialysis"
+    temperature_c: [50]
+    ph: {initial: [9.0], measured_during: false, final: null}
+    time_min: [0, 1440]
+    species: [degree of deamidation (released / total amide ammonia), ammonia]
+    kind: time_series
+    location: "Fig. 2 (DD and per-interval increments at 0, 3, 6, 9, 12, 24 h; digitised in dossier sec. 4a); endpoints 17.89 % and 59.61 % in text, 56.1 % at 12 h in abstract; derived mM bracket in sec. 4b"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "incubated in a shaking water bath at 50 °C for different time intervals"
+    flags: [matrix_precursor_composition, matrix_food, ph_start_only, unbuffered, condition_uncertain, no_no_enzyme_control, assay_baseline_dd_17.9pct_at_t0, total_amide_not_printed, enzyme_ec_3.5.1.2_not_protein_glutaminase, "also_relevant: trunk", "also_relevant: acrylamide"]
+    note: "Only DD (%), a ratio of microdiffusion titres; neither the released nor the total ammonia is printed, so mM needs a borrowed amide-N content (dossier 4b: ~25-60 mM at ~70 g/L protein, +-40 %). One dose, one T, one start pH; no mock-processed control. Ammonia not removed before freeze-drying (retention unknown). No engine consumer: no NH3 species in src/kinetic_core."
+  # ---- zha2019 : Zha 2019 (pea hydrolysate + gum arabic, dry state) (ingested 2026-11-02) ----
+  - id: zha2019_tab1_sec_malls_pph_gum_arabic_conjugate_molar_mass
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "PPI, PPH, gum arabic, PPH+GA 1:4 mixture (0 d) and glyco-PPH after 1 / 3 / 5 d at 60 C / 79 % RH"
+    medium: "10 mM PBS pH 7.0, soluble fraction after 2000 g and 0.45 um filtration; SEC-UV-RI-MALLS, 22 C"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [Mw, Mn, Rg, Mw/Mn, mass fraction, N gum arabic per PPH]
+    kind: endpoint
+    location: "Table 1 (16 fraction rows; dossier sec. 4a); N ~1.2 in text and abstract"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The gum arabic refractive index increment (dn/dc) was set at 0.141 mL/g"
+    flags: [single_dndc_for_protein_and_polysaccharide, insoluble_fraction_discarded, n_not_a_graft_ratio, n_exceeds_available_ga, mass_recovery_column_over_100, no_viscometry_no_mark_houwink]
+    note: "The only real numbers behind the three repo records jafc_2019_ref21_pea_gum_arabic_architecture_* (whose values are not in the paper; dossier sec. 6). Fraction-1 Mw 2.48 MDa (0 d) -> 4.17 (1 d) -> 3.66 -> 3.36 MDa."
+  - id: zha2019_tab2_nonlipid_beany_markers_dry_incubation
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "PPH, gum arabic, PPH+GA 1:4 (0 d) and glyco-PPH 1 / 3 / 5 d (60 C, 79 % RH, open jar)"
+    medium: "powder, HS-SPME-GC-MS (parameters in Zha 2019 Food Hydrocoll ref. 16), external standard calibration"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [3-methyl-1-butanol, acetophenone]
+    kind: time_series
+    location: "Table 2 rows 2 and 6 (dossier sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [unit_footnote_contradicts_text, basis_per_sample_or_per_pph_unclear, no_heated_pph_alone_control, open_vessel, "also_relevant: matrix", "complements: zha2019_tab2_lipid_beany_markers_dry_incubation"]
+    note: "Alcohol and aryl ketone that cannot react with amines fall by the same ~60-67 % in day 1 as hexanal: evidence for physical loss over Maillard consumption."
+  - id: zha2019_si_tabs1_95_volatiles_glyco_pph
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "PPH, GA, PPH+GA (0 d), glyco-PPH 1 / 3 / 5 d"
+    medium: "powder, HS-SPME-GC-MS, relative content normalised to E-2-octenal"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [alkylpyrazines, 2-methylthiophene, 2-ethylthiophene, benzaldehyde, furfural, 5-methylfurfural, "4,5-dihydro-5-alkyl-2(3H)-furanones"]
+    kind: time_series
+    location: "Supporting Information Table S1 (ACS, DOI 10.1021/acs.jafc.9b04099); main text names compounds only"
+    status: supplement_missing
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [supplement_missing, internal_standard_normalised_only, open_vessel]
+    note: "95 volatiles (7 pyrazines, 2 thiophenes); pyrazines/Strecker aldehydes rise with time per text. Needed only if a dry-state protein-polysaccharide pyrazine check is wanted."

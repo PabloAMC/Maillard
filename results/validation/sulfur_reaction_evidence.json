@@ -2,11 +2,11 @@
   "artifact": "sulfur_reaction_evidence",
   "provenance": {
     "artifact": "sulfur_reaction_evidence",
-    "generated_on": "2026-11-01",
+    "generated_on": "2026-11-02",
     "git": {
-      "commit": "cad34f3ccfac5b98d83d331be980ed654d5a8908",
-      "short": "cad34f3c",
-      "branch": "lit-2026-11-01-three-papers",
+      "commit": "81785e906f970712bca31a401deab9cfb241234a",
+      "short": "81785e90",
+      "branch": "lit-2026-11-02-gfi-pea",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -49,15 +49,15 @@
       },
       {
         "path": "data/lit/measurement_ledger/aroma_other.yml",
-        "sha256": "44585422b285053745699065a5042e68e8cf12d4625ecb3927cc0d2bb91d1bce"
+        "sha256": "a13086aa5649e657ff991239eca989b075a17c333948a44fb733a42f91a2479d"
       },
       {
         "path": "data/lit/measurement_ledger/lipid.yml",
-        "sha256": "1d9933863a3c3878c77f4e1bc3f905bd2381aa7b3e179b8576725ef1b1732427"
+        "sha256": "2444b0f468acb6a745a60b68e93ec53916177b6e5608b80252ca8810f7d75965"
       },
       {
         "path": "data/lit/measurement_ledger/matrix.yml",
-        "sha256": "2c3df12cf72501671f24998df40b888180d06b3a574b7c90df4cec9cfce4f4cb"
+        "sha256": "ee135867ab34f778dca89cb9405a775aa32111f2a85838dd46433534d103564d"
       },
       {
         "path": "data/lit/measurement_ledger/sulfur.yml",
@@ -65,7 +65,7 @@
       },
       {
         "path": "data/lit/measurement_ledger/trunk.yml",
-        "sha256": "5383b65fa5c06aa9a7864c979e7a65b8bf10c64bf45bb1e701586debc4119f29"
+        "sha256": "6c56496d7f7ec98fb565100ef07bbb8ac3636f0101d5e18359d6c1d92a2e7fa6"
       }
     ]
   },
@@ -2080,8 +2080,8 @@
       },
       "ledger": {
         "FUR": {
-          "data_sets": 123,
-          "time_series": 32,
+          "data_sets": 124,
+          "time_series": 33,
           "used_by_the_model": 13
         },
         "TDP": {
@@ -2212,8 +2212,8 @@
           "used_by_the_model": 0
         },
         "FUR": {
-          "data_sets": 123,
-          "time_series": 32,
+          "data_sets": 124,
+          "time_series": 33,
           "used_by_the_model": 13
         }
       },
@@ -2252,8 +2252,8 @@
           "used_by_the_model": 30
         },
         "FUR": {
-          "data_sets": 123,
-          "time_series": 32,
+          "data_sets": 124,
+          "time_series": 33,
           "used_by_the_model": 13
         },
         "H2S": {
@@ -2395,8 +2395,8 @@
           "used_by_the_model": 30
         },
         "FUR": {
-          "data_sets": 123,
-          "time_series": 32,
+          "data_sets": 124,
+          "time_series": 33,
           "used_by_the_model": 13
         },
         "H2S": {
@@ -4677,8 +4677,8 @@
           "used_by_the_model": 0
         },
         "FUR": {
-          "data_sets": 123,
-          "time_series": 32,
+          "data_sets": 124,
+          "time_series": 33,
           "used_by_the_model": 13
         },
         "Glc": {

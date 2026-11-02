@@ -1449,3 +1449,114 @@ entries:
     condition_quote: ""
     flags: ["matrix_food", "peak_area_only", "ph_not_measured", "internal_inconsistency", "coarse_read", "also_relevant: sulfur"]
     note: "Lower priority (ledger-ready item 7): headspace retention of non-thiol volatiles (DMS, pyrrole, pentanedione) relative to a blank; dialysis doses probably swapped in the Methods. LSD ~12.5 points. arms: light vs medium vs dark roast; dialysis HMW vs LMW (same lab, same SPME assay)."
+  # ---- cui2020 : Cui 2020 (pea isolate co-spray-dried with cyclodextrin) (ingested 2026-11-02) ----
+  - id: cui2020_fig5_cyclodextrin_vs_starch_headspace_suppression
+    dossier: cui2020_extraction.md
+    paper: "Cui, Kimmel, Zhou, Rao & Chen 2020 Carbohydr Polym 245:116546"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "hexanal, 1-octen-3-ol, 1-octen-3-one spiked at 0.167 / 0.835 / 1.67 / 8.35 ppm onto 1 g corn starch or pure alpha-, beta-, gamma-cyclodextrin"
+    medium: "1 g matrix in 20 mL vial, equilibrated 3 days, then HS-SPME DVB/CAR/PDMS 60 C (3 g 20 % NaCl added: ambiguous)"
+    temperature_c: [60]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: [hexanal, 1-octen-3-ol, 1-octen-3-one]
+    kind: ratio
+    location: "Fig. 5A-C (raw peak areas, 4 matrices x 4 spike levels; digitised in dossier sec. 4d with CD/starch ratios)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "followed by equilibration for three days prior to analysis"
+    flags: [peak_area_only, no_free_partition_reference, spike_basis_not_stated, equilibration_temperature_not_stated, nacl_addition_ambiguous, beta_cd_solubility_limited, starch_curve_concave_not_linear, supplier_coauthors, "also_relevant: lipid"]
+    note: "Relative headspace suppression over pure CD vs corn starch, not a partition or inclusion constant. alpha-CD strongest for all three (CD/starch 0.01-0.2 for 1-octen-3-ol/-one, 0.08-0.38 hexanal); beta ~ gamma ~0.5 for hexanal. No protein. The PPI-matrix spike set (PPI, physical mix, co-spray-dried PPI-CD) is Fig. S3, SI not on disk; text says physical-mix CD at 10 % of DM did not lower spiked hexanal headspace."
+  # ---- moon2007a : Moon & Li-Chan 2007a (soy isolate vs beef reaction flavour, headspace) (ingested 2026-11-02) ----
+  - id: moon2007a_tab1_tab2_spi_headspace_suppression_beef_flavour
+    dossier: moon2007a_extraction.md
+    paper: "Moon & Li-Chan 2007 Food Res Int 40:1227 (10.1016/j.foodres.2007.08.002)"
+    lab: "UBC Vancouver (Li-Chan)"
+    system: "commercial vegetarian simulated beef flavour (Mastertaste F96x49, 500 mg) + commercial soy protein isolate (Solae, 89.3 % protein, DSC-denatured; 250 mg = ~43 g/L protein) +- 100 mg glucosamine / sucrose / PEG 8000 / ascorbic acid / ascorbic acid + PEG; SPI pre-incubated 20 min at 23 or 60 C before flavour addition; reference = flavour alone"
+    medium: "5 g 0.05 M Tris-HCl pH 7.4 in 15 mL vial, stirred; HS-SPME 50/30 um DVB/CAR/PDMS 60 min at 23 or 60 C; GC-FID; relative % peak area vs flavour alone"
+    temperature_c: [23, 60]
+    ph: {initial: [7.4], measured_during: false, final: null}
+    time_min: [20, 60]
+    species: [3-methylfuran, 2-acetylfuran, limonene, delta-3-carene, 2-ethyl-3,6-dimethylpyrazine, 2,3-diethyl-5-methylpyrazine, 4-terpineol, decanal, 2-isoamyl-6-methylpyrazine, delta-elemene, beta-cubebene, calamenene, unknown_beef_correlated_peaks]
+    kind: ratio
+    location: "Table 1 (RT adsorption, 17 peaks) and Table 2 (60 C adsorption, 53 peaks), pp. 1231-1233; SPIF column = protein effect; dossier sec. 4a-4c, apparent K_g sec. 4f"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "expressed as relative peak area (%) compared to the peak area of SBF"
+    flags: [peak_area_only, hs_spme_competitive_not_equilibrium, reference_leg_contains_yeast_extract, single_protein_level, no_sulfur_compound_identified, tentative_rt_identification, zeros_are_non_detections, spif_vs_sbf_not_tested, ascorbic_arms_ph_unmeasured_likely_acidified, ratios_above_100_pct_unexplained, protein_denatured_as_supplied, "also_relevant: aroma_other"]
+    note: "The corpus's only headspace series of a commercial meat (beef-type) reaction flavour against a plant protein. SPI at ~43 g/L leaves most beef-correlated peaks at ~40-60 % of flavour alone. Apparent single-site K_g (mine): 2-ethyl-3,6-dimethylpyrazine 0.013-0.020 L/g, decanal 0.018-0.020 L/g (6-7x below the dialysis-family extrapolation from kg_nonanal_soy; aldehyde method families are not pooled). Contact 23 vs 60 C: ratio flat for most peaks. No sulfur odorant identified (FID). Additive columns: ascorbic acid +- PEG raise several peaks, likely confounded by acidification (pH not measured). Simulable false: multicomponent flavour of unknown composition, no protein-free water leg."
+  - id: moon2007a_tab3_spi_sh_ss_surface_hydrophobicity
+    dossier: moon2007a_extraction.md
+    paper: "Moon & Li-Chan 2007 Food Res Int 40:1227 (10.1016/j.foodres.2007.08.002)"
+    lab: "UBC Vancouver (Li-Chan)"
+    system: "commercial soy protein isolate (Solae, 89.3 % protein, no DSC transition 25-180 C) +- glucosamine, sucrose, PEG 8000, ascorbic acid, ascorbic acid + PEG"
+    medium: "SH: Ellman DTNB in pH 8.0 Tris-glycine-EDTA, 10 mg/mL SDS; SH+SS: NTSB (Thannhauser); S0: PRODAN, 0.05 M Tris pH 7.4 after 60 C / 20 min"
+    temperature_c: [60]
+    ph: {initial: [7.4, 8.0], measured_during: false, final: null}
+    time_min: [20, 40]
+    species: [protein free thiol, protein disulfide, surface_hydrophobicity_S0]
+    kind: endpoint
+    location: "Table 3 (SH, SS n = 2 with letters; S0 mean +- SD n = 3), p. 1233; Raman Tables 4-5 (structure only) not part of this entry"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "should be considered with caution due to high values of the protein blanks"
+    flags: [protein_site_density_candidate, commercial_isolate_denatured_as_supplied, free_sh_8_to_13x_below_soy_isolate_band, blank_turbidity_caveat_by_authors, ascorbic_arms_ph_unmeasured, "also_relevant: sulfur"]
+    note: "Commercial SPI: free SH 0.6 and S-S 36.7 umol/g protein, i.e. at protein_matrices.yml soy_isolate heated_reference (Ruan 2014: 0.75 after 100 C / 30 min), far below the native free-SH band 4.7-8.0; S-S just below the 38-53 band. Evidence that a commercial isolate should be charged with heated-state thiol sites. Unused."
+  - id: moon2007a_fig2_sensory_ascorbic_peg_treated_spi
+    dossier: moon2007a_extraction.md
+    paper: "Moon & Li-Chan 2007 Food Res Int 40:1227 (10.1016/j.foodres.2007.08.002)"
+    lab: "UBC Vancouver (Li-Chan)"
+    system: "150 mg simulated beef flavour + 250 mg SPI (untreated, ascorbic-acid treated, ascorbic acid + PEG treated) in 5 g water; 7 panellists x 2 replications; 5 attributes"
+    medium: "15 mL vials, held 60 C / 20 min before serving; 15 cm unstructured line scale"
+    temperature_c: [60]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20, 20]
+    species: [roasted, beefy, yeasty, soymilk-like, cereal]
+    kind: ranking
+    location: "Fig. 2 cobweb (digitised +-0.3 cm, dossier sec. 4g); significance in text sec. 3.6"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [figure_only_digitised, sensory_medium_water_vs_gc_tris, sensory_dose_150mg_vs_gc_500mg, beefy_difference_not_significant, ph_not_stated]
+    note: "Ascorbic acid + PEG pre-treatment of SPI raises roasted (6.8 -> 9.4) and lowers soymilk (6.9 -> 3.7) and cereal (6.4 -> 4.2); beefy 6.7 -> 8.8 n.s. SPIF arm agrees with moon2007b S3 on beefy, soymilk and cereal within 0.4 cm. Unused."
+  # ---- moon2007b : Moon & Li-Chan 2007b (soy isolate vs beef reaction flavour, sensory) (ingested 2026-11-02) ----
+  - id: moon2007b_tab7_sensory_spi_dose_beef_flavour
+    dossier: moon2007b_extraction.md
+    paper: "Moon & Li-Chan 2007 Food Res Int 40:1239 (10.1016/j.foodres.2007.08.003)"
+    lab: "UBC Vancouver (Li-Chan)"
+    system: "commercial vegetarian simulated beef flavour (Mastertaste F96.49) 150 or 500 mg x commercial soy protein isolate (Solae, 89.3 % protein) 0 / 250 / 500 mg in 5 g water (~0 / 45 / 89 g/L protein) x unheated or 98 C / 30 min heated together; 6 panellists x 2 replications; roasted, beefy, yeasty, soymilk-like, cereal"
+    medium: "distilled deionised water, unbuffered; 15 mL vials held 60 C / 20 min before serving; 15 cm unstructured line scale, reference 150 mg SBF + 250 mg SPI = moderate"
+    temperature_c: [60, 98]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20, 30]
+    species: [roasted, beefy, yeasty, soymilk-like, cereal]
+    kind: ranking
+    location: "Table 7 (12 samples x 5 attributes, means with Duncan letters; dossier sec. 4d), Table 6 (r with SBF and SPI dose), Table 2 (ANOVA); Fig. 1 plots Table 7"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "the beefy related notes were substantially suppressed by increasing SPI content"
+    flags: [sensory_only_no_headspace_numbers, binding_vs_masking_confounded, ph_not_stated, unbuffered, flavour_composition_unknown, no_sulfur_compound_identified, heat_arm_cooks_flavour_with_protein, two_of_eight_panellists_excluded, batch_aliquoted_samples, "also_relevant: aroma_other"]
+    note: "The corpus's only protein-dose series (0 / ~4.2 / ~8.1 % SPI protein) of a meat flavour on a plant protein; sensory, not headspace. Beefy relative to no SPI: low flavour 1.00 / 0.79 / 0.30, high flavour 1.00 / 0.91 / 0.71 (unheated). Directional evidence against a zero protein correction for meat odorants on soy; no constant can be drawn. Headspace numbers of the same system (one SPI level): moon2007a_tab1_tab2_spi_headspace_suppression_beef_flavour. Unused."
+  - id: moon2007b_si_gc_peak_area_sensory_correlation_matrix
+    dossier: moon2007b_extraction.md
+    paper: "Moon & Li-Chan 2007 Food Res Int 40:1239 (10.1016/j.foodres.2007.08.003)"
+    lab: "UBC Vancouver (Li-Chan)"
+    system: "same 12 samples (2 SBF x 3 SPI x 2 heat), 112 GC peaks"
+    medium: "HS-SPME 50/30 um DVB/CAR/PDMS 60 min at 60 C, GC-FID, triplicate means"
+    temperature_c: [60]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60, 60]
+    species: [unknown_beef_correlated_peaks, 3-methylfuran, 2-acetylfuran, delta-3-carene, 2-ethyl-3,6-dimethylpyrazine, 2,3-diethyl-5-methylpyrazine, decanal, 2-isoamyl-6-methylpyrazine, delta-elemene, beta-cubebene, calamenene]
+    kind: other
+    location: "Appendix A supplementary data (correlation matrix of mean GC peak areas vs the five sensory means), online at the DOI; not on disk"
+    status: supplement_missing
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [si_not_on_disk, si_content_unknown_may_hold_only_coefficients, peak_area_only, "condition_not_stated: ph"]
+    note: "Only route to a headspace protein-dose series (0 / 250 / 500 mg SPI) for this flavour; worth fetching only if the SI prints per-sample peak areas (P ~25 %). Indicator-peak identities and r (Table 8) are in the dossier and get no entry (not a matrix quantity)."

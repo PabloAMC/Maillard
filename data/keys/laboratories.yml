@@ -41,3 +41,12 @@ groups:
   quest_givaudan:
     strings: ["Givaudan / Quest (Weenen / Kerler)", "Givaudan / Quest (Weenen / de Roos)"]
     evidence: "van Seeventer 2001 (Weenen, Winkel*, Kerler: Quest International, Naarden); de Roos's work from the same Quest flavour group"
+  ndsu_chen_rao:
+    strings: ["North Dakota State Univ. (Chen B / Rao J)", "North Dakota State Univ. / USDA-ARS Fargo (Rao)", "North Dakota State University / USDA-ARS Fargo (Rao)", "North Dakota State (Rao J.)"]
+    evidence: "Gao 2020 (Gao ... Chen B, Rao J*), Zha 2019 (Zha, Yang, Rao J, Chen B*) and Cui 2020 (Cui, Kimmel, Zhou, Rao J, Chen B*): Department of Plant Sciences, North Dakota State University, Fargo; Chen and Rao co-lead one plant-protein group with shared HS-SPME methods (2026-11-02)"
+  ubc_li_chan:
+    strings: ["UBC Vancouver (Li-Chan)"]
+    evidence: "Moon & Li-Chan 2007a / 2007b (Food Res Int 40): Eunice Li-Chan corresponding, Food, Nutrition and Health, University of British Columbia, Vancouver (2026-11-02)"
+  scut_cui_c:
+    strings: ["SCUT (Cui C / Sun-Waterhouse D)"]
+    evidence: "Fang 2020 (Fang, Xiang, Sun-Waterhouse, Cui C*, Lin): South China University of Technology; kept apart from 'South China University of Technology (Yu)' and '(Sun, Zhao)' (Cui C has co-authored with Zhao M: merging with Sun/Zhao is the conservative alternative; fang2020 dossier) (2026-11-02)"

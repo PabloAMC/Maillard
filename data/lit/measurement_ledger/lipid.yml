@@ -5210,3 +5210,59 @@ entries:
     condition_quote: "Twenty milliliters of goat viscera protein hydrolysate were transferred to 100 mL screw-on flasks"
     flags: [matrix_food, ph_start_only, unbuffered, single_is_no_response_factor, supplement_missing, internal_inconsistency, 'also_in_sulfur_ledger: desousafontes2024_tab2_sulfur_thiazoles_ph4_ph6_goat_hydrolysate']
     note: "Lipid-containing Maillard pot (organ lipid, fatty acids in missing Table S1): lipid aldehydes, 2-pentylfuran and ketones all HIGHER at initial pH 6 than pH 4 (hexanal x1.4, octanal x41, 2-pentylfuran x9.5), opposite in sign to madruga1995 beef (aldehydes rise as pH falls). No lipid-free or reactant-free arm with numbers. Letters inverted for nonanal and (Z)-2-nonenal."
+  # ---- cui2020 : Cui 2020 (pea isolate co-spray-dried with cyclodextrin) (ingested 2026-11-02) ----
+  - id: cui2020_fig4_heatmap_pea_isolate_cyclodextrin_volatiles
+    dossier: cui2020_extraction.md
+    paper: "Cui, Kimmel, Zhou, Rao & Chen 2020 Carbohydr Polym 245:116546"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "lab AE-IEP yellow pea isolate (pH 9.0 / pI 4.5, not defatted, 85 % protein, 2.03 % lipid) spray-dried 130/70 C alone or with alpha/beta/gamma-CD at CD:DM 5:95 or 10:90, vs physical mixtures 10:90"
+    medium: "1 g powder + 3 g 20 % NaCl in 20 mL vial, HS-SPME DVB/CAR/PDMS 60 C, 10 + 50 min"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [60]
+    species: [hexanal, nonanal, 2-octenal, decanal, 1-octen-3-ol, 1-octen-3-one, 2-pentylfuran, hexanoic acid, benzaldehyde, ethylpyrazine]
+    kind: ranking
+    location: "Fig. 4B heat map (log2 colour, +-14.3, 23 compounds x 10 groups; colour classes in dossier sec. 4c); Table 3 identities; Table 1 proximate"
+    status: figure_only
+    quant_class: other
+    simulable: false
+    condition_quote: "One-gram powder sample was added with 3 g of 20 % NaCl solution"
+    flags: [peak_area_only, colour_scale_saturated_likely_imputation, heatmap_baseline_not_stated, physical_mix_control_contradicts_partition_reading, no_mass_balance, lox_not_inactivated, matrix_food, cd_dilution_not_seen_in_table1, no_sensory, supplier_coauthors]
+    note: "Qualitative only: hexanal, nonanal, 2-pentylfuran present in control and physical mixes, near-absent in co-spray-dried PPI-CD; ethylpyrazine higher with CD (Maillard speculated, untested). ph.initial is the spray-dryer feed pH. Isolate lipid 2.03 +- 0.04 % as-is (Soxhlet), protein 84.97 % (Table 1) -- the only lipid-lane number. No native volatile level in any unit."
+  # ---- zha2019 : Zha 2019 (pea hydrolysate + gum arabic, dry state) (ingested 2026-11-02) ----
+  - id: zha2019_tab2_lipid_beany_markers_dry_incubation
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "PPH (~8 % lipid), gum arabic, PPH+GA 1:4 (0 d) and glyco-PPH 1 / 3 / 5 d (60 C, 79 % RH, open jar)"
+    medium: "powder, HS-SPME-GC-MS, external standard calibration (LOD 0.008-0.025 mg/L, recovery 92-98 %)"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [hexanal, 2-pentylfuran, 1-octen-3-one, 1-octen-3-ol]
+    kind: time_series
+    location: "Table 2 rows 1, 3, 4, 5 (dossier sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Units of milligrams per gram of dry weight"
+    flags: [unit_footnote_contradicts_text, basis_per_sample_or_per_pph_unclear, no_heated_pph_alone_control, open_vessel, matrix_food, "also_relevant: matrix", "complements: zha2019_tab2_nonlipid_beany_markers_dry_incubation"]
+    note: "Hexanal 3.17 -> 0.42 (ppm reading) over 5 d; loss mechanism (stripping vs retention vs consumption) not separable (dossier sec. 1 ans. 2)."
+  - id: zha2019_fig6_emulsion_looh_hexanal_37c
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "2 wt % corn oil (PUFA ~57 %) emulsions stabilised by 0.20 wt % PPH, PPH+GA mixture, or glyco-PPH-1; 0.04 % NaN3"
+    medium: "10 mM PBS pH 7.0, homogenised (5000/500 psi x3)"
+    temperature_c: [37]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 14400]
+    species: [lipid hydroperoxides, hexanal]
+    kind: time_series
+    location: "Fig. 6A (LOOH, uM) and 6B (hexanal, ng/mL; LOD 7.89) (dossier sec. 4f digitisation)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "measuring the formation of LOOH and hexanal in emulsion during storage at 37 °C"
+    flags: [x_axis_mislabelled_conjugation_time, emulsion_not_cooking, droplet_size_differs_between_arms]
+    note: "Hexanal lag ~4 d (PPH), ~7 d (mixture), ~9 d (glyco-PPH-1). Droplet d43 20.7 / 5.08 / 0.75 um differ, so interface area is confounded with emulsifier."
