@@ -123,18 +123,18 @@ Read it as three lines of work that meet at the end:
 
 ### W2. Chemistry: fix the mechanisms (the core)
 
-Ordered by expected gain for plant-based odorants. Each step names its evidence and the test it must pass. "E" numbers
+Ordered by expected gain for plant-based odorants. Each step names its evidence and its decisive data; how a step ships is sec. 7. "E" numbers
 refer to the ranked errors in ENGINE_VS_LITERATURE sec. 3 (and its amendments in secs. 5 and 7).
 
-| step | mechanism | what to build | evidence | test | effort |
+| step | mechanism | what to build | evidence | decisive data (sec. 7, item 4) | effort |
 |---|---|---|---|---|---|
-| **M1** | **Thiol loss and its oxidant; pH drift** (E12, CF-084) | An oxidant formed from the pot's reactive sugar intermediates (flow ~16x the thiols'); headspace O2; a reversible disulfide (Guth's release rate). The charge-balance pH on by default, with the trunk's acids. | Three removal steps failed because the decisive pots carry no oxidant ([INTRODUCTION sec. 7](INTRODUCTION.md)); weakening removal alone cuts an unseen lab's error 480x -> 18x | the 100 C reference pot keeps rising over 12 h; Yiltirak (unseen) below 18x, the error from weakening removal alone; disulfide share near the measured 7 - 10 % | 3 - 4 days |
-| **M2** | **MFT routes and cysteine binding** (E6 + E11 + E10 via B59b), one refit | Per-route barriers bounded by measured classes; the cysteine-Amadori route | labelling in 3 labs (Cerny, Givaudan, Hofmann); TTCA 18 - 89 % of cysteine in 2 labs | Cerny pot D norfuraneol share <= 0.15; Givaudan ribose / NF MFT >= 10; Hofmann 145 C within 3x; Zhai TTCA within 2x | 2 days + ~1 day on >= 8 cores |
+| **M1** | **Thiol loss and its oxidant; pH drift** (E12, CF-084) | An oxidant formed from the pot's reactive sugar intermediates (flow ~16x the thiols'); headspace O2; a reversible disulfide (Guth's release rate). The charge-balance pH on by default, with the trunk's acids. | Three removal steps failed because the decisive pots carry no oxidant ([INTRODUCTION sec. 7](INTRODUCTION.md)); weakening removal alone cuts an unseen lab's error 480x -> 18x | the 100 C reference pot over 12 h (measured: still rising; engine: peaks at 1 h); the disulfide share (measured 7 - 10 %); the Yiltirak ladder (an unseen laboratory) | 3 - 4 days |
+| **M2** | **MFT routes and cysteine binding** (E6 + E11 + E10 via B59b), one refit | Per-route barriers bounded by measured classes; the cysteine-Amadori route | labelling in 3 labs (Cerny, Givaudan, Hofmann); TTCA 18 - 89 % of cysteine in 2 labs | Cerny pot D norfuraneol share (measured 0.07, engine 0.98); Givaudan ribose vs norfuraneol MFT; Hofmann 145 C fed pots; Zhai TTCA | 2 days + ~1 day on >= 8 cores |
 | **M3** | **Strecker aldehydes** (E3) | Finish the forced-input layer (next step pre-registered after EX-051: one Amadori decay shared by the fed-ARP and glucose pots); then feed it from the network | DFA Garching's fed dicarbonyl series; Cremer, Balagiannis | Hofmann 2000 rows; the held-out TUM Becker contrast | 2 - 3 days |
-| **M4** | **Glucose to MFT; protein as the amine** (E1, E8, plan item "amine as a variable") | On the one network (W3): a glucose + cysteine -> 1-deoxyglucosone step; amine classes (free amino acids, cysteine, protein-bound lysine); amine catalysis of enolisation | ribose / glucose MFT 10.4 measured vs 4e10 in the engine; the FFT supply pH law 10 - 70x too steep | Hofmann ratios MFT 10.4 and FFT 4.3 within 3x; the FFT pH slope | 1 week (after W3) |
+| **M4** | **Glucose to MFT; protein as the amine** (E1, E8, plan item "amine as a variable") | On the one network (W3): a glucose + cysteine -> 1-deoxyglucosone step; amine classes (free amino acids, cysteine, protein-bound lysine); amine catalysis of enolisation | ribose / glucose MFT 10.4 measured vs 4e10 in the engine; the FFT supply pH law 10 - 70x too steep | Hofmann ribose / glucose ratios (MFT 10.4, FFT 4.3); the FFT pH slope | 1 week (after W3) |
 | **M5** | **Buffer, fat, water activity** (E5, E7) | Per-step phosphate factor, linear to 0.5 M (form settled in ENGINE_VS_LITERATURE sec. 7); oil-water partition of the thiols; a water-activity term from the low-a_w kinetics on file (Eichner, Bell, Roos) | phosphate x1.3 - 12 in >= 7 labs; fat lowers thiols 3 - 143x | Potman and Kallen (E5 TEST); the unseen fat contrasts (Kim 1996, Zamora 2015, Hidalgo 1993) | 1 week |
 | **M6** | **Pyrazines** (E13, E14, CF-095) | A dicarbonyl-amine adduct sink; finite aminoketone condensation with a pyrrole sink | Piloty / Sedehi consumption gap >= 1e3x; condensation declared instant today | Leahy's pH ratios; the four held-out E13 studies | 3 - 4 days |
-| **JR** | **Joint refit** | One refit after M1 - M6, not one per step | -- | every M-test still passes; held-out benchmark | ~1 day + compute |
+| **JR** | **Joint refit** | One refit after M1 - M6, not one per step | -- | all of the above, together | ~1 day + compute |
 
 **Already decided, not in the steps:** E4 (pyrazine pH law) is a declared band, no change (owner, 2026-11-01). CF-077
 (methylpyrazine cross-pair factor) is merged (PR #37).
@@ -208,15 +208,47 @@ the joint refit before H4; H4 (or its fallback) before the lever table.
 
 ## 7. How a change ships
 
-1. **Evidence to start.** A mechanism change starts when labelling, fed-intermediate, trapping or within-study evidence
-   supports it. (This replaces the 2026-11-01 gate of >= 2 held-out laboratories before any work.)
-2. **Its test, written first.** A short pre-registration names the test the change must pass. A fit also gets an
-   independent review.
-3. **Converged fits only.** No verdict from a fit that stopped on its evaluation budget.
-4. **Held-out benchmark not worse.** The current engine is scored first. A row may get worse only if a named open error
-   explains it, declared before the run. The frozen split is never re-cut to suit a change. Where no held-out
-   contrast exists, the model card says so.
-5. **Owner approval** if shipped predictions move. One PR per change.
+**Principle.** A change ships when the evidence favours it over the current model and over the other explanations,
+judged on the data that measure that mechanism most directly. The rule is written so that the decision does not
+depend on who makes it or on what they hope to find. It replaces the 2026-11-01 admission gate (>= 2 held-out
+laboratories before any work) and the owner-approval step.
+
+**The case.** One page in the PR. Items 1 - 5 are written BEFORE any result of the change is computed.
+
+1. **The claim.** Which mechanism, and which steps of the network change.
+2. **All the evidence, by kind.** The kinds rank by how directly they show a mechanism, and the rank is fixed:
+   isotope labelling; fed intermediates; trapping; measured intermediates and lifetimes; mass balance; one factor varied
+   inside one study; fitted time courses. The case lists every source on disk that bears on the claim, including those
+   against it. A source left out needs a stated reason.
+3. **The rivals.** The current model, the proposed change, and at least one other explanation of the same evidence.
+4. **The decisive data.** The measurements on which the rivals predict different things, chosen from those closest to
+   the mechanism: route shares from labelling, branching ratios, ratios that cancel scale, the sign of a within-study
+   contrast. End-point levels that other errors also move are not decisive. If the rivals predict the same thing on
+   every available measurement, the data cannot decide, and the case says so.
+5. **Tolerances from the data.** Each comparison uses the measurement's own reported noise; across laboratories, the
+   between-laboratory spread (H0). No round-number thresholds.
+
+Then:
+
+6. **The comparison.** Every rival is scored the same way, on the same data, under the same measurement model.
+   Constants come from measurements or same-class analogues where they exist. Only converged fits count. The result
+   is a comparison between rivals (likelihood on the decisive data), not a pass mark.
+7. **The side effects.** The full held-out benchmark, before and after, every row. A row that gets worse is expected
+   when the old model relied on a compensating error. The case names the suspected compensating error and registers it
+   (a CF entry). A loss does not block shipping. A large loss with no candidate explanation is a reason to look
+   further before shipping.
+8. **The adversarial review.** An independent reviewer whose task is to build the strongest case AGAINST the change.
+   The reviewer sees the evidence and the data, not the author's conclusion. Every objection is answered in the record,
+   or the change waits.
+9. **The decision.** The change ships if the decisive data favour it over every rival and no objection is left
+   unanswered. The decision and its basis go into the experiment register (an EX entry). A shipped change is reversed
+   when later evidence favours another rival.
+
+**Why this resists persuading ourselves.** The ranking of evidence is fixed in advance. The rivals and the decisive
+data are named before results exist. Tolerances come from the measurements. The decision is a comparison, not a
+threshold someone picked. Evidence against must be listed. The reviewer's job is to disagree.
+
+The working session applies this rule and ships. The owner sees a summary of what shipped and why.
 
 Working rules that stay: run through `./scripts/docker_maillard.sh run`; nothing writes into `data/` at runtime; one
 writer per shared file (registers, ledger, atlas); stage files by explicit path; check new CF / EX ids against
@@ -242,7 +274,7 @@ within 3x across laboratories for most rows, ~0.15 (not a goal).
 
 - New laboratory experiments and the designed-experiment brief (paused by the owner).
 - Broad literature searches and the consolidation wave V. Reading is limited to the papers named above and W6.
-- New engine switches without a test tied to an M-step.
+- New engine switches without a case (sec. 7).
 - The E6 + E11 refit queue on its own branch as a separate exercise: it becomes M2.
 
 ## 10. Glossary of codes
