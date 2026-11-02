@@ -83,6 +83,37 @@ triaged:
 
 pending:
   Liu2023: "Liu, Cadwallader & Drake 2023, Food Chem 406:134998 (pea-protein aroma); identified in liu2023b_extraction.md as not the LWT paper wanted, never read"
+  # downloaded 2026-11-02 11:33-12:11; triaged the same day from first pages only (DOI as printed, no Crossref check yet).
+  # Rank = what the plan's active order uses next (docs/guides/STATUS_AND_PLAN.md): A = Strecker E3 / MFT routes E6 /
+  # pyrazines E13-E14 or a check of a number shipped code cites; B = nucleotide (IMP/GMP) and yeast-extract precursor
+  # inputs, and the repo records citing them; C = thermal history / observation (mechanism item 8), water activity,
+  # acrylamide lane; D = background. Read in rank order.
+  munch1998: "A1. Muench & Schieberle 1998 JAFC 46:4695 (10.1021/jf980511t): SIDA quantitation of key odorants formed in thermally treated yeast extracts. Same DFA/TUM group as the Strecker layer's Hofmann 2000: a second system, not a second lab"
+  munch1997: "A2. Muench, Hofmann & Schieberle 1997 JAFC 45:1338: key odorants of heated commercial vs self-prepared yeast extracts vs amino-acid composition (DFA/TUM)"
+  alim2019: "A3. Alim, Song et al. 2019 LWT 112:108239 (10.1016/j.lwt.2019.06.006): CAMOLA carbon-module labelling of beef-meaty odorants from yeast extract; route shares (E6, E13). Cited in CITATION_CONTEXT_2026-10.md"
+  aliani2013: "A4. Aliani et al. 2013 Meat Sci 94:55 (10.1016/j.meatsci.2012.11.032): post-slaughter ATP metabolites and reducing / phosphorylated sugars in CHICKEN. Check the value src/cultivated_tissue_invariance.py cites via hwang2026, and the aroma_other.yml entry whose note says no PDF"
+  madruga1998: "A5. Madruga & Mottram 1998 J Braz Chem Soc 9:261: volatiles from heated 5'-IMP + cysteine vs pH (MFT from nucleotide ribose; E6, pH)"
+  matoba1988: "B1. Matoba, Kuchiba, Kimura & Hasegawa 1988 J Food Sci (10.1111/j.1365-2621.1988.tb13551.x): first-order IMP / GMP thermal degradation vs pH and T. Check computational_priors matoba_1988_nucleotide_hydrolysis(_v1) and its intake entry: the _v1 source string names 'Matoba, Terao & Fujimaki', not this paper's authors"
+  kuchiba1990: "B2. Kuchiba, Kaizaki, Matoba & Hasegawa 1990 JAFC 38(3): salts depress IMP / GMP thermal degradation (same group as matoba1988)"
+  shaoul1987: "B3. Shaoul & Sporns 1987 J Food Sci: IMP / GMP / AMP phosphate hydrolysis at 121 C, pH 3-8, half-lives (cited in zhang1991_extraction.md and LITERATURE_SEARCH_2026-10_ROUND3.md)"
+  kavitha2007: "B4. Kavitha & Modi 2007 LWT 40:1280 (10.1016/j.lwt.2006.07.014): IMP degradation vs a_w 0.7-0.9 and 80 / 120 C in a chicken-fibre model. Check its benchmark_intake_registry.json entry"
+  davidek1972: "B5. Davidek, Velisek & Janicek 1972 J Food Sci (research note, 2 pp.): stability of inosinic acid, inosine and hypoxanthine in water"
+  peer1968: "B6. Peer & van den Ouweland 1968 Recl Trav Chim 87:1017: 4-hydroxy-5-methyl-3(2H)-furanone (norfuraneol) from D-ribose 5-phosphate; the phosphate route to the MFT precursor (E6), yields not rates"
+  koruda1997: "B7. Kuroda, Nagaba, Tsubuku, Kawajiri & Ueda 1997 Food Sci Technol Int Tokyo 3:239 (2 pp.; file stem misspells Kuroda): glutathione, gamma-Glu-Cys and cysteine in commercial yeast extracts (sulfur precursor inputs)"
+  mahadevan2006: "B8. Mahadevan & Farmer 2006 JAFC 54:7242 (10.1021/jf061102x): key odour-impact compounds in three yeast-extract pastes (Belfast; a second lab for yeast-extract odorants)"
+  alim2018: "B9. Alim, Song et al. 2018 JSFA (10.1002/jsfa.8891), 29 pp.: aroma-active vs non-volatile compounds of thermally reacted yeast extracts"
+  devaere2022: "B10. Devaere, De Winne, Dewulf et al. 2022 Foods 11:1985 (10.3390/foods11131985): myoglobin and the aroma of soy-based plant-based burgers (heme; no heme species in the engine)"
+  kondjoyan2016: "C1. Kondjoyan et al. 2016 Food Chem 213:641 (10.1016/j.foodchem.2016.06.118): crust development vs heterocyclic amines when air-roasting a meat cylinder; measured T / crust (LITERATURE_SEARCH_2026-10_VARIABLES.md 'next in line')"
+  sprague2011: "C2. Sprague et al. 2011 Food Res Int 44:789 (10.1016/j.foodres.2011.01.011): mixture-enthalpy model of temperature and HAA formation in a frying beef patty (VARIABLES search)"
+  oroszvari2005: "C3. Oroszvari et al. 2005 J Food Eng (10.1016/j.jfoodeng.2004.10.013): heat and mass transfer (centre / sub-surface T, water and fat loss) of double-sided-fried beefburgers"
+  purlis2019: "C4. Purlis & Salvadori 2009 (NOT 2019; file stem kept for the gate) Food Res Int 42:865 (10.1016/j.foodres.2009.03.007): modelling bread browning during baking (VARIABLES search)"
+  buera1993: "C5. Buera & Karel 1993: WLF equation for the combined moisture and temperature effects on non-enzymatic browning rates (glass transition; B54 water activity)"
+  chan2020: "C6. Chan et al. 2020 Foods 9:200 (10.3390/foods9020200): heat / mass transfer coupled to acrylamide kinetics in frying French fries"
+  balagiannis2019: "C7. Balagiannis et al. 2019 Food Chem 284:236 (10.1016/j.foodchem.2019.01.075): kinetic model of acrylamide in finish-fried French fries vs maltose (Reading)"
+  parker2012b: "C8. Parker et al. 2012 JAFC (10.1021/jf302415n): acrylamide kinetic model in commercial French fries (Reading); the 'nearest real paper' to the quarantined Parker2012 benchmark (data/benchmarks/quarantined/README.md)"
+  bassama2011: "C9. Bassama et al. 2011 Food Res Int 44:1452 (10.1016/j.foodres.2011.03.018): acrylamide kinetics in plantain vs precursors and water activity"
+  jacob2019: "D1. Jacob et al. 2019 Eur Food Res Technol 245:1169 (10.1007/s00217-019-03237-9): yeast extract from spent brewer's yeast vs cell-disruption method (composition)"
+  tome2021: "D2. Tome 2021 ACS Food Sci Technol (10.1021/acsfoodscitech.0c00131): review of yeast extracts (composition, flavouring); background only"
   # downloaded 2026-10-27 23:27-23:34 from the citation-chaining and Sohail 2022 lists
   # (docs/guides/LITERATURE_SEARCH_2026-10.md; tasks/data_restructure_plan.md 2026-10-27)
   # downloaded 2026-10-27 23:56 onwards, while this table was being built
