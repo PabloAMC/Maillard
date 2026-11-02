@@ -1,5 +1,5 @@
 # Systematic Literature Review — Family 14: Ascorbic Acid Maillard
-**Last updated:** 2026-10-27  
+**Last updated:** 2026-11-02  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering ascorbic acid maillard.  
 **Strategic Posture:** `bounded_upstream_source`  
 **Runtime Concept:** `stealth_dicarbonyl_source`  
@@ -68,7 +68,7 @@
 
 ---
 
-### Feng et al. (2023)
+### Feng, Yang, Xie, Liu, Peng, Hu & Yu (2023), Frontiers in Nutrition 9:1022254
 - **DOI:** [10.3389/fnut.2022.1022254](https://doi.org/10.3389/fnut.2022.1022254)
 - **Matrix Family:** ascorbic_hcw_model
 - **Kind:** `calibration_reference`
@@ -96,12 +96,15 @@
 | `temperature_window_c` | `[150.0, 190.0]` |
 
 **What it supports:**
-- Primary Family 14 Arrhenius anchor for pH-sensitive ascorbic-acid degradation under extrusion-like thermal conditions
-- Explicit HCW calibration for AA-driven dicarbonyl release instead of treating AA as a static precursor burden
+- pH-sensitive pseudo-first-order loss of ascorbic acid alone in buffered water at 150-190 C (k Table 1; Ea 15.77 / 31.7 / 47.53 kJ/mol at pH 5.0 / 7.0 / 9.5 as printed)
+- Acid faster than alkaline: x1.8-2.3 at 150 C, only x1.1-1.2 at 190 C
 
 **What it does not support:**
 - Direct AGE endpoint closure in a real SPI or PPI extrudate
 - A full oxygen-transition model without additional barrel-state evidence
+- Dicarbonyl, DHA or furfural release (none measured)
+- Transfer to low-moisture extrusion (dilute aqueous buffer only)
+- Carrying the Ea as a constant (heat-up and supra-initial ASA artefacts; feng2022b dossier sec. 1)
 
 **Next Action:** Keep encoded as a bounded Arrhenius prior until a direct SPI/PPI ascorbate extrusion benchmark exists.
 
@@ -536,7 +539,7 @@ Total papers analyzed: **13** (Benchmark-eligible: **0**, Calibration references
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Yu et al. (2020) | 3/8 | ⚠️ Calibration | aqueous_model_system |
-| Feng et al. (2023) | 2/8 | ❌ Rejected | ascorbic_hcw_model |
+| Feng, Yang, Xie, Liu, Peng, Hu & Yu (2023), Frontiers in Nutrition 9:1022254 | 2/8 | ❌ Rejected | ascorbic_hcw_model |
 | Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537 | 2/8 | ❌ Rejected | ascorbic_amino_crosslink_model |
 | Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714 | 3/8 | ⚠️ Calibration | xylose_alanine_model_system |
 | Nemet & Monnier (2011) | 2/8 | ❌ Rejected | free_model_system |
@@ -569,7 +572,7 @@ Total papers analyzed: **13** (Benchmark-eligible: **0**, Calibration references
 - `Hsu et al. (2012), J. Agric. Food Chem. 60:10696` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Feng et al. (2023)` (Score: 2/8)
+- `Feng, Yang, Xie, Liu, Peng, Hu & Yu (2023), Frontiers in Nutrition 9:1022254` (Score: 2/8)
 - `Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537` (Score: 2/8)
 - `Nemet & Monnier (2011)` (Score: 2/8)
 
@@ -581,4 +584,4 @@ Total papers analyzed: **13** (Benchmark-eligible: **0**, Calibration references
 2. **Dynamic Calibration Offsets:** Apply the identified `bounded_upstream_source` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-11-02 using Maillard Ingestion Pipeline.*

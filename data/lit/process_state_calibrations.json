@@ -378,44 +378,6 @@
       "comment": "Use as a compact firmness-state calibration so HME texture optimization is not reduced to narrative-only guidance."
     },
     {
-      "id": "jafc_2019_ref21_pea_gum_arabic_architecture_state",
-      "kind": "melanoidin_architecture_state",
-      "protein_type": "pea_iso",
-      "source_citation": "Zha et al. (2019)",
-      "doi": "10.1021/acs.jafc.9b04099",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "pea_protein_hydrolysate_gum_arabic_conjugate",
-        "process_state": "heated_matrix",
-        "measurement_mode": "hpsec_mals_mark_houwink"
-      },
-      "numeric_anchors": {
-        "native_mw_kda": 290.0,
-        "conjugated_mw_kda_range": [
-          340.0,
-          359.0
-        ],
-        "native_radius_of_gyration_nm": 29.5,
-        "conjugated_radius_of_gyration_nm_range": [
-          30.5,
-          33.5
-        ],
-        "native_mark_houwink_exponent": 0.53,
-        "conjugated_mark_houwink_exponent": 0.4,
-        "native_pdi": 1.35,
-        "conjugated_pdi": 1.74
-      },
-      "what_it_supports": [
-        "A bounded Family 16 polymer-architecture shift for gum-arabic-mediated pea hydrolysate conjugation",
-        "Scientist-facing visibility that Maillard-driven polymer growth can increase trapping pressure without opening a full rheology solver"
-      ],
-      "what_it_does_not_support": [
-        "Universal transfer to every hydrolysate or polysaccharide system",
-        "A coupled texture-plus-volatile endpoint model in the current runtime"
-      ],
-      "comment": "Use as a compact Family 16 architecture calibration so polymer-growth and compaction cues are visible when hydrolysate plus gum arabic conditions are present."
-    },
-    {
       "id": "pmc5992167_amadori_pe_food_matrix_burden",
       "kind": "phospholipid_glycation_burden",
       "protein_type": "plant_protein_generic",

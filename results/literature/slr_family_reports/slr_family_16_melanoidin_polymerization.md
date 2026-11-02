@@ -1,5 +1,5 @@
 # Systematic Literature Review — Family 16: Melanoidin Polymerization
-**Last updated:** 2026-10-27  
+**Last updated:** 2026-11-02  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering melanoidin polymerization.  
 **Strategic Posture:** `trapping_burden_modifier`  
 **Runtime Concept:** `matrix_trapping_node`  
@@ -102,50 +102,6 @@
 - An Ogden-based constitutive solver in the current runtime
 
 **Next Action:** Keep encoded as the first direct HME firmness calibration anchor while the extrusion-mechanics solver remains bounded and report-first.
-
----
-
-### J. Agric. Food Chem. 2019 (Ref. 21)
-- **DOI:** [10.1021/acs.jafc.9b04099](https://doi.org/10.1021/acs.jafc.9b04099)
-- **Matrix Family:** pea_protein_hydrolysate_gum_arabic_conjugate
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `native_mw_kda` | `290.0` |
-| `conjugated_mw_kda_range` | `[340.0, 359.0]` |
-| `native_radius_of_gyration_nm` | `29.5` |
-| `conjugated_radius_of_gyration_nm_range` | `[30.5, 33.5]` |
-| `native_mark_houwink_exponent` | `0.53` |
-| `conjugated_mark_houwink_exponent` | `0.4` |
-| `native_pdi` | `1.35` |
-| `conjugated_pdi` | `1.74` |
-
-**What it supports:**
-- A compact Family 16 architecture anchor for Maillard-conjugated pea hydrolysate systems
-- Runtime visibility that gum arabic plus hydrolysate conditions can shift polymer size, gyration radius, and compaction toward higher trapping pressure
-
-**What it does not support:**
-- A universal hydrocolloid rule across all PBMA formulations
-- A full texture-and-headspace closure model in the current runtime
-
-**Next Action:** Use as a compact Family 16 architecture anchor so gum-arabic-mediated polymer growth becomes runtime-visible without opening a broad rheology solver.
 
 ---
 
@@ -452,13 +408,12 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 16
 
-Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references: **7**, Rejected: **4**)
+Total papers analyzed: **10** (Benchmark-eligible: **0**, Calibration references: **7**, Rejected: **3**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Snel et al. (2023) | 2/8 | ❌ Rejected | spi_ppi_hme_rework |
 | Cruz et al. (2025) | 2/8 | ❌ Rejected | spi_rice_hme_burger_analogues |
-| J. Agric. Food Chem. 2019 (Ref. 21) | 2/8 | ❌ Rejected | pea_protein_hydrolysate_gum_arabic_conjugate |
 | Gigl et al. (2021) | 2/8 | ❌ Rejected | free_model_system |
 | Brands et al. (2002) | 3/8 | ⚠️ Calibration | free_model_system |
 | Gigl et al. (2021) | 3/8 | ⚠️ Calibration | free_model_system |
@@ -487,7 +442,6 @@ Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references
 ### REJECTED (Score < 3)
 - `Snel et al. (2023)` (Score: 2/8)
 - `Cruz et al. (2025)` (Score: 2/8)
-- `J. Agric. Food Chem. 2019 (Ref. 21)` (Score: 2/8)
 - `Gigl et al. (2021)` (Score: 2/8)
 
 ---
@@ -498,4 +452,4 @@ Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references
 2. **Dynamic Calibration Offsets:** Apply the identified `trapping_burden_modifier` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-11-02 using Maillard Ingestion Pipeline.*
