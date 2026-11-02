@@ -813,7 +813,7 @@
     },
     {
       "id": "frontiers_2022_hcw_aa_arrhenius_anchor",
-      "citation": "Feng et al. (2023)",
+      "citation": "Feng, Yang, Xie, Liu, Peng, Hu & Yu (2023), Frontiers in Nutrition 9:1022254",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
       "slr_family_source": "14",
@@ -4129,50 +4129,6 @@
           "artifact_id": "hrncirik_2014_coconut_oil_thermal_profile",
           "path": "data/lit/process_state_calibrations.json",
           "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "jafc_2019_ref21_pea_gum_arabic_architecture_anchor",
-      "citation": "J. Agric. Food Chem. 2019 (Ref. 21)",
-      "kind": "calibration_reference",
-      "chemistry_family": "melanoidin_polymerization",
-      "slr_family_source": "16",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration",
-        "computational_prior"
-      ],
-      "matrix_family": "pea_protein_hydrolysate_gum_arabic_conjugate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a compact Family 16 architecture anchor so gum-arabic-mediated polymer growth becomes runtime-visible without opening a broad rheology solver.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "jafc_2019_ref21_pea_gum_arabic_architecture_state",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        },
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "jafc_2019_ref21_pea_gum_arabic_architecture_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "melanoidin_trapping_priors"
-          ],
-          "template_kind": "computational_prior",
           "exists": true
         }
       ]
@@ -6293,7 +6249,7 @@
     },
     {
       "id": "frontiers_2022_hcw_aa_arrhenius_anchor",
-      "citation": "Feng et al. (2023)",
+      "citation": "Feng, Yang, Xie, Liu, Peng, Hu & Yu (2023), Frontiers in Nutrition 9:1022254",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
       "slr_family_source": "14",
@@ -9614,50 +9570,6 @@
       ]
     },
     {
-      "id": "jafc_2019_ref21_pea_gum_arabic_architecture_anchor",
-      "citation": "J. Agric. Food Chem. 2019 (Ref. 21)",
-      "kind": "calibration_reference",
-      "chemistry_family": "melanoidin_polymerization",
-      "slr_family_source": "16",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration",
-        "computational_prior"
-      ],
-      "matrix_family": "pea_protein_hydrolysate_gum_arabic_conjugate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a compact Family 16 architecture anchor so gum-arabic-mediated polymer growth becomes runtime-visible without opening a broad rheology solver.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "jafc_2019_ref21_pea_gum_arabic_architecture_state",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        },
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "jafc_2019_ref21_pea_gum_arabic_architecture_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "melanoidin_trapping_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "li_2025",
       "citation": "Li et al. (2025)",
       "kind": "calibration_reference",
@@ -10921,8 +10833,8 @@
     "encoded_and_ready_ids": []
   },
   "summary": {
-    "intake_reference_count": 156,
-    "encoded_reference_count": 156,
+    "intake_reference_count": 155,
+    "encoded_reference_count": 155,
     "ready_runtime_count": 0,
     "ready_benchmark_count": 0,
     "wet_lab_blocked_count": 4,

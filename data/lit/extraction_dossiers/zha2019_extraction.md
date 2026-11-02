@@ -376,6 +376,13 @@ not in paper** (verdicts as in 6a). Further fields:
 conditions, or withdraw the three records; drop "trapping", "Mark-Houwink" and "melanoidin" labels; key the paper as
 `zha2019` in `data/keys/papers.yml` with this dossier.
 
+**Outcome (2026-11-02, owner: "do whatever is best long term").** The three records were WITHDRAWN (deleted from
+`process_state_calibrations.json`, `computational_priors.json` and `benchmark_intake_registry.json`), not corrected:
+their premise (conjugation raises trapping pressure) is the opposite of what the paper proposes, and the real
+Table 1 values live in the ledger entry `zha2019_tab1_sec_malls_pph_gum_arabic_conjugate_molar_mass`. "Zha et al.
+(2019)" and "J. Agric. Food Chem. 2019 (Ref. 21)" were added to `closed_citations` so the research queue does not
+re-encode the corpus values. Precedent: the Hidalgo & Zamora 2004 prior, deleted 2026-10-27 after its dossier.
+
 ## 7. Proposed ledger entries (YAML, not written into the ledgers)
 
 Ledger choice: free amines, A304/A420 and colour in **trunk.yml** (time-resolved browning and amine loss; the
