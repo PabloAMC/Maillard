@@ -2909,3 +2909,66 @@ entries:
     affects:
       - wolf1977a_response_surface_e_k100_soy_glycation
       - {file: src/kinetic_core/parameters_glycation.py, symbol: EA_GLYC_KJ_MOL}
+
+  - id: CF-101
+    kind: duplicate
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation, munch1997]
+    quantity: "FFT (and MFT) from cysteine / sugar, furfural + Cys / H2S and C2 / C3 fragment pots, 145 C, 20 min, phosphate"
+    observation: >-
+      Muench, Hofmann & Schieberle 1997 (JAFC 45:1338) Table 4, Table 5 (expt 3) and Table 6 (expts 1-3) report the same
+      runs as Hofmann & Schieberle 1998 (the source of hofmann1998_t2_ph_ladder, hofmann1998_t3_fft_c5_h2s and
+      hofmann1998_t8_c2c3_mft_fft_ph): same laboratory, reactants, amounts and FFT values (munch1997 dossier sec. 6).
+      Read 2026-11-03 against both PDFs.
+    explanations: ["One data set published twice by the DFA group (1997 yeast-extract paper, 1998 thiol paper)."]
+    tests: ["munch1997 dossier sec. 6 (value-by-value comparison with the hofmann1998 tables)."]
+    status: duplicate_confirmed
+    remedy: >-
+      Count once: munch1997_tab4_fft_cys_sugar_ph -> hofmann1998_t2_ph_ladder; munch1997_tab6_fft_c2c3_and_mgo_cys_ha
+      (expts 1-3) -> hofmann1998_t8_c2c3_mft_fft_ph; munch1997_tab5_fft_furfural_cys_h2s expt 3 ->
+      hofmann1998_t3_fft_c5_h2s. Its other rows (H2S dose; Cys vs H2S) are new. The munch1997 ledger entries carry
+      the flag duplicate_of. No fit row changes.
+    affects:
+      - hofmann1998_t2_ph_ladder
+      - hofmann1998_t3_fft_c5_h2s
+      - hofmann1998_t8_c2c3_mft_fft_ph
+
+  - id: CF-102
+    kind: conflict
+    scope: sulfur_rows
+    sources: [hofmann1998_reconciliation, munch1997]
+    quantity: "reaction volume of the fed-precursor pots (hence 20 vs 10 mM per reactant)"
+    observation: >-
+      hofmann1998_t3_fft_c5_h2s (in_model_fit, B2.3) runs 1 mmol each in 50 mL (20 mM). Hofmann & Schieberle 1998's
+      table footnotes print "An aqueous solution (50 mL) of hydrogen sulfide (1 mmol) and the precursor (1 mmol)";
+      Muench 1997's methods give one line for the precursor mixtures of its Tables 4-6, "phosphate buffer (100 mL;
+      0.5 M)", which would halve every concentration in the duplicated runs (CF-101). Both read from the PDFs
+      2026-11-03.
+    explanations:
+      - "Muench 1997's methods line is generic for three tables whose pots differ (the cysteine / carbohydrate pots are 100 mL in the reconciliation dossier); the table-specific footnote of the 1998 paper is the closer statement (P ~0.85 that 50 mL is right)."
+    tests: ["hofmann1998.pdf table footnotes (50 mL), munch1997.pdf Methods ('Model Studies on the Formation of 2-Furanmethanethiol')."]
+    status: not_an_error
+    remedy: "None: the fit row follows the table footnote of the primary source. Reopen if a third statement of the volume turns up."
+    affects:
+      - hofmann1998_t3_fft_c5_h2s
+
+  - id: CF-103
+    kind: conflict
+    scope: corpus
+    sources: [alim2019, wang2012, xu2013]
+    quantity: "carbon origin of FFT (and MFT) in [13C5]-xylose / xylose 1:1 CAMOLA pots with cysteine (BTBU, Song H)"
+    observation: >-
+      Alim 2019 Table 3 (Group VI: peptides + [13C5]-xylose / xylose + Cys, no thiamine, 135 C, 90 min) gives FFT
+      ~52 : 48 unlabelled : M+5, i.e. all FFT from intact xylose C5; the same group reported FFT 80 : 20 (Wang 2012) and
+      FFT and MFT unlabelled (Xu 2013) in pots that also held thiamine (~1.2 mM). None of the three corrects for
+      [M-H]+ or natural 13C (alim2019 dossier sec. 5: the furfural M+4 peak is the [M-H]+ of M+5).
+    explanations:
+      - "Thiamine in the earlier pots: a thiamine route dilutes the label for MFT, but FFT has no known thiamine route, so it does not explain FFT (P ~0.3)."
+      - "Uncorrected [M-H]+ / fragment overlap read differently in each paper (P ~0.4)."
+      - "Different peptides and pot make-up (labelled arms carry 2x xylose in Alim 2019)."
+    tests: []
+    status: open
+    remedy: "None now: all three ledger sets are digitised_in_dossier and feed no fit. Decider: one corrected isotopologue table (natural abundance and [M-H]+) for FFT in a pentose + Cys pot with and without thiamine."
+    affects:
+      - alim2019_table3_group_vi_camola_xylose_isotopomers
+      - wang2012_table3_camola_xylose_isotopomers

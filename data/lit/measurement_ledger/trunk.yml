@@ -8465,3 +8465,41 @@ entries:
     condition_quote: ""
     flags: [a_star_not_readable, ga_dilutes_colour_at_t0, aw_set_point_not_measured]
     note: "L* 83.6 -> 72.4 (PPH+GA) vs 82.8 -> 78.1 (PPH alone) over 5 d."
+  # ---- munch1998 : Muench & Schieberle 1998 (yeast-extract odorants by SIDA; Strecker pots at 145 C) (ingested 2026-11-03) ----
+  - id: munch1998_tab9_strecker_glucose_vs_mgo_145c
+    dossier: munch1998_extraction.md
+    paper: "Muench & Schieberle 1998 J Agric Food Chem 46:4695"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "L-leucine, L-phenylalanine or L-methionine 1 mmol + glucose 3 mmol or 2-oxopropanal 3 mmol in 30 mL (33 + 100 mM)"
+    medium: "phosphate buffer 0.1 mol/L pH 7.0, autoclave (closed), air not controlled"
+    temperature_c: [145]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [20]
+    species: [3-methylbutanal, phenylacetaldehyde, methional]
+    kind: endpoint
+    location: "Table 9 (dossier sec. 4h)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "The amino acid (1 mmol) and glucose (3 mmol) were dissolved in phosphate buffer (30 mL; 0.1 mol/L; pH 7.0) and reacted for 20 min at 145 °C in an autoclave."
+    flags: [ph_start_only, no_replicates, heat_up_not_reported, "met_mgo_row_ug_vs_molpct_inconsistent", engine_species_missing]
+    note: "6 cells; donor ratios on MGO (Leu 4.3 >> Phe 1.0 ~ Met 0.7-0.95 mol %) and MGO/glucose ratios (x10.8 / x3.7 / x3.3) are within-study contrasts. Same lab as hofmann2000 (98 C, 0.5 M phosphate, 1:1): a second temperature and buffer, not a second lab. Leu / Phe not engine species; Met -> methional is (B22). Phe + MGO row = Table 10 at 20 min."
+  - id: munch1998_tab10_phe_mgo_timecourse_145c
+    dossier: munch1998_extraction.md
+    paper: "Muench & Schieberle 1998 J Agric Food Chem 46:4695"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "L-phenylalanine 1 mmol + 2-oxopropanal 3 mmol in 30 mL (33 + 100 mM)"
+    medium: "phosphate buffer 0.1 mol/L pH 7.0, autoclave (closed), air not controlled"
+    temperature_c: [145]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [20, 30, 60, 90, 120, 150]
+    species: [phenylacetaldehyde, phenylalanine]
+    kind: time_series
+    location: "Table 10 (dossier sec. 4i)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: true
+    condition_quote: "L-Phenylalanine (1 mmol) and 2-oxopropanal (3 mmol) were dissolved in phosphate buffer (30 mL; pH 7.0; 0.1 mol/L)"
+    flags: [ph_start_only, no_replicates, phe_method_not_stated, footnote_time_contradicts_table, heat_up_not_reported, mgo_not_measured]
+    note: "6 times; PAA by SIDA ([13C2]), Phe loss method unstated (hence other). PAA plateaus ~43.5 umol from 90 min while Phe keeps falling (55 -> 70 %). 145 C partner of hofmann2000_table3_mgo_phe_timecourse (98 C, 0.5 M phosphate, 1:1); confounded contrast (T, buffer, Phe:MGO). PA = phenylalanine here (opposite of Hofmann 2000's PA)."
+  # sulfur.yml

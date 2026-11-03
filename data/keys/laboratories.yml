@@ -50,3 +50,9 @@ groups:
   scut_cui_c:
     strings: ["SCUT (Cui C / Sun-Waterhouse D)"]
     evidence: "Fang 2020 (Fang, Xiang, Sun-Waterhouse, Cui C*, Lin): South China University of Technology; kept apart from 'South China University of Technology (Yu)' and '(Sun, Zhao)' (Cui C has co-authored with Zhao M: merging with Sun/Zhao is the conservative alternative; fang2020 dossier) (2026-11-02)"
+  btbu_song:
+    strings: ["BTBU (Song H)"]
+    evidence: "Alim, Song H* et al. 2019 (LWT 112:108239) and the Wang 2012 / Xu 2013 / Raza 2020 ledger rows: Huanlu Song corresponding, Beijing Technology and Business University; its own group, apart from btbu_xie and 'BTBU (Cao Y)' (2026-11-03)"
+  afbi_belfast_farmer:
+    strings: ["AFBI Belfast (Farmer)"]
+    evidence: "Aliani 2013 (Meat Sci 94:55; Aliani, Farmer*, Kennedy, Moss, Gordon): Linda Farmer corresponding, Agri-Food and Biosciences Institute, Belfast. The 1990s 'AFRC Bristol (Mottram / Farmer)' strings are Mottram-era work and stay unmapped (2026-11-03)"
