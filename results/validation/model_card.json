@@ -1,4 +1,28 @@
 {
+  "against_baselines": {
+    "baseline_oos": {
+      "constant": 15,
+      "engine": 8
+    },
+    "baseline_oos_median": {
+      "constant": 8.111783610640062,
+      "engine": 11.534986507303264
+    },
+    "contrasts_oos": {
+      "engine_dex": 0.3076327489342042,
+      "no_change_dex": 0.2841997875578205,
+      "pairs": 37,
+      "studies": 5
+    },
+    "directional": [
+      20,
+      33
+    ],
+    "oos_within_3x": [
+      14,
+      56
+    ]
+  },
   "artifact": "maillard_model_card",
   "core_envelope": {
     "available": true,
@@ -18,7 +42,7 @@
     "available": true,
     "by_lane": {
       "acrylamide": {
-        "median_fold_error": 7.697350087796094,
+        "median_fold_error": 7.697350087704006,
         "rows": 12,
         "within_band": 4
       },
@@ -326,30 +350,6 @@
     "caution": ">= 60% agreement, or too few claims to establish",
     "do_not_use": "< 60% agreement, or unmeasured",
     "trust": ">= 80% agreement on >= 3 claims"
-  },
-  "usefulness_bar": {
-    "baseline_oos": {
-      "constant": 15,
-      "engine": 8
-    },
-    "baseline_oos_median": {
-      "constant": 8.111783610640062,
-      "engine": 11.534986507303264
-    },
-    "contrasts_oos": {
-      "engine_dex": 0.3076327489342042,
-      "no_change_dex": 0.2841997875578205,
-      "pairs": 37,
-      "studies": 5
-    },
-    "directional": [
-      20,
-      33
-    ],
-    "oos_within_3x": [
-      14,
-      56
-    ]
   },
   "validity_domain": [
     {

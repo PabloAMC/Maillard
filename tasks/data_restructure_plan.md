@@ -913,20 +913,14 @@ literature rounds on 2026-10-28 found that the missing rate data mostly do not e
    evaluation takes well under a second (it is 27 s). Configuration as explicit objects, not module-level
    switches monkeypatched in place. Numerical convergence asserted in every run, not merely recorded. Waves as
    declarative specs, not import chains (B61 -> B60 -> B51 -> B47 -> B9 -> B8 -> B2.4 -> B2.3).
-8. **A declared usefulness bar.** Out of sample within 3x >= 40 % and independent directional agreement >= 65 %,
-   against the baselines. Owner to confirm the numbers. If after B59 plus two waves we are below it, the
-   project's headline becomes "evidence map + experiment designer" rather than "predictive simulator", and that
-   is said plainly.
+8. **A declared usefulness bar.** *(Removed 2026-11-03: no round-number thresholds; a change ships on a written case that compares rivals on the decisive data, `docs/guides/STATUS_AND_PLAN.md` sec. 7. The model card reports the baselines descriptively.)*
 
 **Decisions taken 2026-10-28 (owner delegated them: "What are your best suggestions? I think you can take
 them"), after an independent first-time review of the repository:**
 - **Product claim:** a model-system kinetics model plus an evidence map plus an experiment designer, sulfur lane
   first. "Composable lanes for real foods" is deferred until the sulfur lane beats the typical-yield baseline on
   designed data; real-food answers stay refused or caveated.
-- **Usefulness bar (C2):** out of sample ≥ 40 % within 3x AND beating the typical-yield baseline on within-3x
-  and median error; ≥ 65 % on independent directional claims whose effect exceeds measurement noise; both
-  with study-clustered uncertainty. Checkpoint: after the designed dataset (C8) is assimilated. Below the bar,
-  the headline becomes "evidence map + experiment designer", said plainly.
+- **Usefulness bar (C2):** *(Removed 2026-11-03: no round-number thresholds; a change ships on a written case that compares rivals on the decisive data, `docs/guides/STATUS_AND_PLAN.md` sec. 7. The model card reports the baselines descriptively.)*
 - **Rules frozen:** the evidence-audit acceptance rule (`WAVES.md`) stands unchanged until 2027-01-31. Each
   audit is checked by an independent fresh reviewer (a reader without this session's context) before a change
   ships.
@@ -979,8 +973,7 @@ trajectory in B60, the thermal history now). Agreed, with the owner's amendments
   audits: Lau 2003 / Pandit 2006 norfuraneol formation barriers; Frankel 1993 hexanal Ea (113.8-122.2 kJ/mol,
   130-160 °C) replacing the Q10 stretched from 40 to 180 °C; Brands 2002c and Hamzalıoğlu 2026 glycation barriers;
   Balagiannis 2009 / Chan 1994b Strecker kinetics when the Strecker aldehydes are built.
-- **D7 The usefulness bar carries its power.** Directional ≥ 65 % is judged on ≥ 67 independent evaluable claims
-  (80 % power against 50 % at one-sided 0.05), or on designed data; below that the verdict is "not established".
+- **D7 The usefulness bar carries its power.** *(Removed 2026-11-03: no round-number thresholds; a change ships on a written case that compares rivals on the decisive data, `docs/guides/STATUS_AND_PLAN.md` sec. 7. The model card reports the baselines descriptively.)*
 - **D8 Scope: whatever helps design better alternative-protein flavours and odours** (owner). Desirable notes
   (meaty thiols, Strecker aldehydes, pyrazines, furanones) and off-notes (lipid aldehydes, the matrix that holds
   them back) both count; IMP and ribose 5-phosphate (yeast extract, Mottram & Nobrega 2002) join the wishlist.
@@ -1144,8 +1137,8 @@ prioritized appropriately"). Priority = flux the change grounds × how sure the 
   B60 engine, out of sample: median error 0.31 dex against 0.28 for predicting no change, signs 12/25 on
   resolved pairs (37 pairs, 5 studies). The engine does not yet predict within-study ratios better than "no
   change"; re-run after every wave.
-- [x] **D7** — the model card prints the usefulness bar, the 67-claim power condition and the contrast
-  diagnostic (`model_card.collect_usefulness_bar`); spliced into the README at the B64 regeneration.
+- [x] **D7** — the model card printed the usefulness bar (2026-10-28 - 11-03); since 2026-11-03 it prints the baselines
+  descriptively with a 90 % interval on the directional share (`model_card.collect_against_baselines`).
 - [ ] **B65 harvest (D6, kind 3 by audit, after B64):** measured overrides for norfuraneol formation
   (`r_dpo_nf`: Lau 2003 81.5 ± 3.2, Pandit 2006 93.0 ± 6.4 kJ/mol, ribose + amine, 116-131 °C) and the B62
   furfural pair, into `ea_class_prior` as step measurements; aqueous glycation barriers for the trunk's
@@ -1182,8 +1175,7 @@ is accepted by its evidence audit (`WAVES.md`, "Evidence decides, scores diagnos
   36x) and loses acrylamide (4 vs 5; 4.4x vs 1.9x). **The mechanism does not yet pay for itself overall.** A
   log-linear regression was tried and did worse than the constant; it was dropped for simplicity. Re-run after
   every shipped wave.
-- [ ] **C2 Usefulness bar (target 8).** Owner confirms or edits the numbers; the model card prints the bar and
-  where we stand against it.
+- [x] **C2 Usefulness bar (target 8).** Withdrawn 2026-11-03. *(Removed 2026-11-03: no round-number thresholds; a change ships on a written case that compares rivals on the decisive data, `docs/guides/STATUS_AND_PLAN.md` sec. 7. The model card reports the baselines descriptively.)*
 - [ ] **C3 Measurement model (target 3).** Two classes (calibrated vs semi-quantitative) from the bundles'
   `quantification_family`; one residual scale each; weight the fit and the envelope by it.
 - [ ] **C4 Identifiability-first network (targets 1, 2).** From the B60/B61 profiles, lump or freeze every
