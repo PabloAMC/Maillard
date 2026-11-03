@@ -4,10 +4,10 @@
     "artifact": "choice_robustness",
     "generated_on": "2026-11-03",
     "git": {
-      "commit": "35d373e891344a944905cf0cdc6734c07afa3b7a",
-      "short": "35d373e8",
+      "commit": "c2c15ab5a94c4d023246fab8aaef25986d7ae4f1",
+      "short": "c2c15ab5",
       "branch": "acrylamide-envelope-2026-11-03",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "scripts/generators/build_choice_robustness.py",
     "inputs": [

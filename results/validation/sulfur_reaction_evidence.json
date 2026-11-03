@@ -4,9 +4,9 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-03",
     "git": {
-      "commit": "5669473a1280692ef835d1bc8d3bcfe487013a83",
-      "short": "5669473a",
-      "branch": "conflicts-and-four-papers-2026-11-03",
+      "commit": "c2c15ab5a94c4d023246fab8aaef25986d7ae4f1",
+      "short": "c2c15ab5",
+      "branch": "acrylamide-envelope-2026-11-03",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "95d426cb6c214123e2d2534fc0dad728818550e9f34828c3ffe59dd218eca5ae"
+        "sha256": "26a4a6852d54fe93a76780f6c42c45f619b3b8f151166a3daa4031db15de182b"
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "ca3d15fe8e4098438cab53cb617d773f75401ee245e9e88d0f43c3f192e4ca55"
+        "sha256": "125d01521d49f9e9f2a4c1355366e42a6ab1c7d04226ff384ad84b3c9f7b2387"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
