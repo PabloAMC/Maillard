@@ -1024,6 +1024,29 @@ def _declared_band_priors() -> List[CorePrior]:
             sampled=True, reason="declared band: 0 = no elimination a_w effect, 1.2 = 1.2x De Vleeschouwer 2007's k_E shape (SEs up to 90 %)",
         )
     )
+    # CF-039 (2026-11-03): the two measured De Vleeschouwer Ea the envelope never drew. The formation step's
+    # spans the laboratories' estimates flat (a second-laboratory band, at ALL temperatures, k(160 C) held);
+    # the initiation step's carries its printed 95 % CI.
+    from .parameters_acrylamide import MEASURED_ACRYLAMIDE as _MA
+    out.append(
+        CorePrior(
+            key="acrylamide.k_int1_acr.ea_kj_mol", lane=ACRYLAMIDE, kind="declared_band", distribution="uniform",
+            centre=float(_MA["k_int1_acr"].ea_kj_mol), sigma=None,
+            band=(float(ac.EA_INT1_BAND_KJ_MOL[0]), float(ac.EA_INT1_BAND_KJ_MOL[1])),
+            unit="kJ/mol, Int1 -> acrylamide, k(160 C) held",
+            source=f"acrylamide_conditions.EA_INT1_BAND_KJ_MOL ({ac.EA_INT1_SOURCE[:60]}...)",
+            sampled=True, reason=SECOND_LABORATORY_BAND,
+        )
+    )
+    out.append(
+        CorePrior(
+            key="acrylamide.k_asn_glc.ea_kj_mol", lane=ACRYLAMIDE, kind="declared_band", distribution="normal",
+            centre=float(_MA["k_asn_glc"].ea_kj_mol), sigma=float(_MA["k_asn_glc"].ea_ci95_kj_mol) / 1.96, band=None,
+            unit="kJ/mol, Asn + Glc -> Schiff base, k(160 C) held",
+            source="parameters_acrylamide.MEASURED_ACRYLAMIDE['k_asn_glc'].ea_ci95_kj_mol (De Vleeschouwer 2009 Part I, Ea_INTg, 95 % CI)",
+            sampled=True, reason="declared band: the source's printed 95 % CI (CF-039)",
+        )
+    )
     out.append(
         CorePrior(
             key="acrylamide.ph_exponent_formation_decades_per_unit", lane=ACRYLAMIDE, kind="declared_band",
@@ -1238,6 +1261,8 @@ def draw_from_rng(
     trunk_ph_exponent = None
     acrylamide_aw_scale = None
     acrylamide_aw_elimination_scale = None
+    acrylamide_ea_int1 = None
+    acrylamide_ea_asn_glc = None
     acrylamide_ph_exponent_formation = None
     acrylamide_ph_exponent_elimination = None
     oxygen: Dict[str, float] = {}
@@ -1346,6 +1371,10 @@ def draw_from_rng(
             acrylamide_aw_scale = value
         elif p.key == "acrylamide.aw_elimination_deficit_scale":
             acrylamide_aw_elimination_scale = value
+        elif p.key == "acrylamide.k_int1_acr.ea_kj_mol":
+            acrylamide_ea_int1 = value
+        elif p.key == "acrylamide.k_asn_glc.ea_kj_mol":
+            acrylamide_ea_asn_glc = value
         elif p.key == "acrylamide.ph_exponent_formation_decades_per_unit":
             acrylamide_ph_exponent_formation = value
         elif p.key == "acrylamide.ph_exponent_elimination_decades_per_unit":
@@ -1412,6 +1441,8 @@ def draw_from_rng(
         trunk_ph_exponent=trunk_ph_exponent,
         acrylamide_aw_scale=acrylamide_aw_scale,
         acrylamide_aw_elimination_scale=acrylamide_aw_elimination_scale,
+        acrylamide_ea_int1=acrylamide_ea_int1,
+        acrylamide_ea_asn_glc=acrylamide_ea_asn_glc,
         acrylamide_ph_exponent_formation=acrylamide_ph_exponent_formation,
         acrylamide_ph_exponent_elimination=acrylamide_ph_exponent_elimination,
         oxygen_reservoir_scale=reservoir_scale,

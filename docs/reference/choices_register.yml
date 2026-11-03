@@ -266,3 +266,23 @@ entries:
       - {name: knol_ea, value: "84 kJ/mol (--tdp-exit-ea)", source: "Knol 2010 T2"}
     decided_by: "kinetic_core_dpo_partition_prereg.md sec. 8 as revised after its design review (2026-10-31): the trunk's k_tdg_fa is the declared transfer; the others are sensitivities"
     sensitivity: {status: untested}
+
+  - id: CR-17
+    what: the lower edge of the acrylamide lane's low-temperature refusal (CF-106)
+    where: {file: src/kinetic_core/acrylamide_conditions.py, symbol: LOW_T_REFUSAL_C}
+    kind: cutoff
+    current: "refuse a programme peaking inside (60, 120) C; at or below 60 C the lane's near-zero answer stands"
+    basis: >-
+      The upper edge, 120 C, is a fact: the floor of the constants' measured range (temperature_range_c 120-200 C).
+      The lower edge has no source: below ~60 C the lane predicts a negligible amount (the yields fall by orders of
+      magnitude per 20 C), and a near-zero answer there is the claim TEMP-02's 25 C control tests. Chosen by the
+      acrylamide red team (docs/history/conflict_resolution_2026-11-03/acrylamide/redteam.md) so that control stays
+      evaluable.
+    alternatives:
+      - {name: refuse_60_120, value: "(60, 120)"}
+      - {name: refuse_below_120, value: "(-inf, 120): also refuses the 25 C control"}
+      - {name: refuse_40_120, value: "(40, 120)"}
+    decided_by: "owner's go-ahead 2026-11-03 ('do whatever you believe is best long term') on the red team's verdict"
+    sensitivity:
+      status: harmless
+      result: "no panel row, directional arm or contrast has a programme peaking in 25-120 C except TEMP-02's 25 C control, which every alternative but refuse_below_120 keeps"

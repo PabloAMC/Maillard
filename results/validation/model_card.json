@@ -18,7 +18,7 @@
     "available": true,
     "by_lane": {
       "acrylamide": {
-        "median_fold_error": 7.697350087796094,
+        "median_fold_error": 7.697350087704006,
         "rows": 12,
         "within_band": 4
       },

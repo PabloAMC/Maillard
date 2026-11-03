@@ -93,6 +93,26 @@ AW_SOURCE = (
 )
 
 # ---------------------------------------------------------------------------
+# Temperature (CF-039 / CF-106, 2026-11-03)
+# ---------------------------------------------------------------------------
+
+#: Below its fit window (120-200 C) the lane's emergent formation Ea is ~296 kJ/mol against ~103 measured
+#: (Gokmen 2012 corrected for depletion; Knol 2005 k4 94.4, which the B3 fit already misses by +95), and its
+#: 60-min yields run x15 (120 C) to x2000 (90 C) low (CF-106; docs/history/conflict_resolution_2026-11-03/
+#: acrylamide/redteam.md). A thermal programme whose PEAK lies in this open interval is refused; at or below
+#: the lower edge the lane's near-zero answer stands (TEMP-02's 25 C control).
+LOW_T_REFUSAL_C: Tuple[float, float] = (60.0, 120.0)
+#: The formation step's (k_int1_acr) Ea across laboratories and estimators (CF-039): 95 kJ/mol = Gokmen 2012
+#: corrected for depletion, Knol 2005 k4 and De Vleeschouwer 2008's low values; 189 = the De Vleeschouwer
+#: 2009 CI upper bound. Drawn uniform at ALL temperatures with k(160 C) held (T_ref 160 C), so no central
+#: value moves; a band only where the lane misfits would be tuning in form (red team, P 0.7).
+EA_INT1_BAND_KJ_MOL: Tuple[float, float] = (95.0, 189.0)
+EA_INT1_SOURCE = (
+    "CF-039: Gokmen 2012 (depletion-corrected 95-109), Knol 2005 k4 94.4, De Vleeschouwer 2008 / 2009 "
+    "(159.2 +/- 29.5; CI to 188.7); docs/history/conflict_resolution_2026-11-03/acrylamide/"
+)
+
+# ---------------------------------------------------------------------------
 # pH
 # ---------------------------------------------------------------------------
 
@@ -139,9 +159,11 @@ def in_window(aw: Optional[float]) -> Optional[bool]:
 
 
 def aw_multiplier(aw: Optional[float], scale: Optional[float] = None) -> float:
-    """The FORMATION multiplier: 1.0 (flat) inside the window, drawn across the band by the envelope;
-    exactly 1.0 at a_w None and outside the window (no term there)."""
-    if in_window(aw) is not True:
+    """The FORMATION multiplier: 1.0 (flat) at any declared a_w, drawn across the band by the envelope;
+    exactly 1.0 at a_w None. Outside the window the centre is still 1.0 (no term there), but the band is
+    drawn too (CF-104, 2026-11-03): before, an a_w the source never measured dropped the band and so got a
+    NARROWER envelope than one it did."""
+    if aw is None:
         return 1.0
     return float(AW_MULTIPLIER if scale is None else scale)
 
@@ -197,8 +219,10 @@ def declarations(process) -> List[str]:
     elif state is False:
         out.append(
             f"WATER ACTIVITY (B14/B15): a_w {float(aw):.2f} is OUTSIDE the measured window "
-            f"{AW_WINDOW[0]:.2f}-{AW_WINDOW[1]:.2f} ({AW_SOURCE}). No a_w term applies here: the value is "
-            "recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            f"{AW_WINDOW[0]:.2f}-{AW_WINDOW[1]:.2f} ({AW_SOURCE}). No a_w term applies at the centre: the "
+            "value is recorded and changes no central rate, but the envelope still draws the formation band "
+            f"{AW_SCALE_BAND[0]:g}-{AW_SCALE_BAND[1]:g} (CF-104); a comparison that moves a_w across this "
+            "boundary is refused."
         )
     ph = getattr(process, "ph", None)
     if ph is not None and abs(float(ph) - REFERENCE_PH) > 1e-9:
@@ -226,8 +250,13 @@ def apply(
     aw_elimination_deficit_scale: float = 1.0,
     ph_exponent_formation: float = PH_EXPONENT_FORMATION,
     ph_exponent_elimination: float = PH_EXPONENT_ELIMINATION,
+    ea_overrides: Optional[Mapping[str, Optional[float]]] = None,
 ) -> Tuple[Dict[str, Any], List[str]]:
-    """A COPY of the acrylamide parameter dict with the declared terms applied, plus its declarations."""
+    """A COPY of the acrylamide parameter dict with the declared terms applied, plus its declarations.
+
+    ``ea_overrides`` (CF-039, 2026-11-03): envelope draws of a measured step's Ea, keyed by parameter;
+    k_ref is defined at T_ref (160 C), so replacing Ea holds k(160 C) and moves only the temperature law.
+    ``None`` entries (the shipped centre) change nothing."""
     aw = getattr(process, "water_activity", None)
     ph = getattr(process, "ph", None)
     factors: Dict[str, float] = {}
@@ -247,12 +276,17 @@ def apply(
             p = out.get(key)
             if p is not None and getattr(p, "k_ref", None) is not None:
                 out[key] = replace(p, k_ref=float(p.k_ref) * factor)
+    for key, ea in (ea_overrides or {}).items():
+        p = out.get(key)
+        if ea is not None and p is not None and getattr(p, "ea_kj_mol", None) is not None:
+            out[key] = replace(p, ea_kj_mol=float(ea))
     return out, declarations(process)
 
 
 __all__ = [
     "AW_WINDOW", "REFERENCE_AW", "SCALED_KEYS", "ELIMINATION_KEYS", "KF_TABLE", "KE_TABLE", "KF_2007", "KE_2007",
     "AW_MULTIPLIER", "AW_SCALE_BAND", "AW_ELIMINATION_TABLE", "AW_ELIMINATION_SCALE_BAND", "AW_SOURCE",
+    "LOW_T_REFUSAL_C", "EA_INT1_BAND_KJ_MOL", "EA_INT1_SOURCE",
     "REFERENCE_PH", "PH_WINDOW", "PH_EXPONENT_FORMATION", "PH_EXPONENT_ELIMINATION",
     "PH_EXPONENT_FORMATION_BAND", "PH_EXPONENT_ELIMINATION_BAND", "PH_FORMATION_KEYS", "PH_ELIMINATION_KEYS",
     "KF_PH_2006", "KE_PH_2006", "PH_SOURCE",
