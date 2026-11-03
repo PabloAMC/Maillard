@@ -5266,3 +5266,22 @@ entries:
     condition_quote: "measuring the formation of LOOH and hexanal in emulsion during storage at 37 °C"
     flags: [x_axis_mislabelled_conjugation_time, emulsion_not_cooking, droplet_size_differs_between_arms]
     note: "Hexanal lag ~4 d (PPH), ~7 d (mixture), ~9 d (glyco-PPH-1). Droplet d43 20.7 / 5.08 / 0.75 um differ, so interface area is confounded with emulsifier."
+  # ---- devaere2022 (ingested 2026-11-03) ----
+  - id: devaere2022_tab1_myoglobin_dose_lipid_volatiles
+    dossier: devaere2022_extraction.md
+    paper: "Devaere, De Winne, Dewulf, Fraeye, Soljic, Lauwers, de Jong & Sanctorum 2022 Foods 11:1985"
+    lab: "KU Leuven Ghent (Fraeye) / Paleo (Sanctorum)"
+    system: "TSP 25 % + sunflower oil 15 % + methylcellulose 1 % + salt 1.5 % + water 57.5 %, bovine myoglobin 0 / 0.5 / 1.0 % on top; raw vs oven-cooked"
+    medium: "30 g patties, combi oven 250 C air 12 min (core T not measured); HS-SPME DVB/CAR/PDMS 3 g in 20 mL vial, 45 C 20 + 40 min"
+    temperature_c: [250]
+    ph: {initial: [], measured_during: false, final: null}
+    time_min: [12]
+    species: [hexanal, heptanal, nonanal, decanal, 2-heptenal, 2-octenal, "(E,E)-2,4-nonadienal", 2-decenal, "(E,Z)-2,4-decadienal", "(E,E)-2,4-decadienal", 2-undecenal, 1-octen-3-ol, 1-hexanol, 2,3-octanedione, 2-heptanone, 2-pentylfuran, octanoic acid, nonanoic acid]
+    kind: endpoint
+    location: "Table 1 pp. 5-7 (n = 3, AU x 10^3, Tukey letters; dossier sec. 4a, fold changes sec. 4c)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "baked for 12 min at 250 °C in an oven"
+    flags: [matrix_food, peak_area_only, ph_not_stated, air_headspace, condition_uncertain, internal_inconsistency, no_heme_species_in_engine, spme_fibre_competition_suspected, industry_authored]
+    note: "Heme dose-response (0/0.5/1 % bovine Mb) of linoleate-type volatiles in a plant burger, raw AND cooked: hexanal x3.7/x4.5 raw, x9/x12 cooked; 2-alkenals, 2,4-dienals, 1-octen-3-ol, 2,3-octanedione rise; 2-pentylfuran and hexane fall (fibre displacement suspected). Directional check for a future heme / iron term (must act at <=45 C too). No IS, no PV, oil type and Mb purity not stated; 'grilled' in the paper = combi oven."

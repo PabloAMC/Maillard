@@ -3016,3 +3016,379 @@ entries:
     condition_quote: "The test was repeated three times under the same conditions."
     flags: [condition_uncertain, ph_start_only, volume_not_stated, unit_not_printed, no_sd, single_is_no_response_factor, matrix_food, "cell_outlier: 2,5-dimethylfuran Group I 20742697.3", "lipid_aldehydes_in_lipid_free_pot: Group IV hexanal 1380", "complements: alim2019_table2_sulfur_rows"]
     note: "Directional only. 3-ethyl-2,5-DMP dominates every peptide pot (818-33465); 2-ethyl-3,5- and 3-ethyl-2,5-DMP share RI 1427. Text counts (31 YE compounds, 12 in Group I) do not match the table (29, 10)."
+  # ---- kavitha2007 (ingested 2026-11-03) ----
+  - id: kavitha2007_tab3_chicken_muscle_fibre_imp_inosine_hx
+    dossier: kavitha2007_extraction.md
+    paper: "Kavitha & Modi 2007 LWT 40:1280"
+    lab: "CFTRI Mysore (Modi)"
+    system: "Indian country hen breast and leg: fresh muscle and 8x-phosphate-washed freeze-dried fibre"
+    medium: "raw muscle / dry fibre powder (moisture 3.25-3.50 g/100 g); no heating"
+    temperature_c: []
+    ph: {initial: [5.56, 5.49, 6.21, 6.43], measured_during: false, final: null}
+    time_min: []
+    species: [IMP, inosine, hypoxanthine]
+    kind: endpoint
+    location: "Table 3 (mg/100 g, mean +- SD n = 4); dossier sec. 4a"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Values are mean ± S.D. (n = 4)"
+    flags: [matrix_precursor_composition, matrix_food, basis_wet_vs_dry_not_stated, no_recovery_reported]
+    note: "Chicken nucleotide pools (layer hen). Abstract prints breast-fibre IMP 5.1 +- 1.20 vs Table 3 5.99 +- 0.24. Engine has no IMP species."
+  - id: kavitha2007_fig1_fig2_imp_inosine_hx_aw_temperature_1h
+    dossier: kavitha2007_extraction.md
+    paper: "Kavitha & Modi 2007 LWT 40:1280"
+    lab: "CFTRI Mysore (Modi)"
+    system: "washed freeze-dried chicken breast or leg fibre 7 g + IMP 120 mg/100 g (or none, control), 2 g in 5 mL screw-cap tube"
+    medium: "0.2 M pyrophosphate pH 5.8, 20 / 110 / 620 uL per 7 g fibre for nominal a_w 0.70 / 0.80 / 0.90 (~0.24 / 0.26 / 0.33 g water/g dry)"
+    temperature_c: [80, 120]
+    ph: {initial: [5.8], measured_during: false, final: null}
+    time_min: [60]
+    species: [IMP, inosine, hypoxanthine]
+    kind: endpoint
+    location: "Figs. 1A/1B (breast), 2A/2B (leg), bars read at 200 dpi; text reduction percentages pp. 1283-1285; dossier sec. 4b-4c"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "subjected to heat treatment for 1 h of 80 °C in a water bath"
+    flags: [single_time_point, no_recovery_control, figure_panels_duplicated_1A_2A_products, aw_nominal_not_measured, abstract_describes_control_panels, mass_balance_2_to_4_mol_pct, "also_relevant: trunk"]
+    note: "IMP 93-98 % lost in 1 h at 80 and 120 C in every cell; a_w effect < 10 % in apparent k; apparent Ea 7-10 kJ/mol; 300-600x the aqueous hydrolysis rate (Matoba 1988) at 80 C. Not a rate constant: recovery artefact or enzymatic loss likely. Not usable for B54. No ribose / R5P measured."
+  # ---- koruda1997 (ingested 2026-11-03) ----
+  - id: koruda1997_tab2_gsh_yeast_extract_thiols
+    dossier: koruda1997_extraction.md
+    paper: "Kuroda, Nagaba, Tsubuku, Kawajiri & Ueda 1997 Food Sci Technol Int Tokyo 3:239 (file stem koruda1997)"
+    lab: "Ajinomoto Food Research Labs (Kuroda / Ueda)"
+    system: "four commercial glutathione-enriched yeast extracts (brands A-D, Japan), unheated"
+    medium: "product dissolved in water (about 1 mg/mL), metaphosphoric acid / EDTA, neutralised with KOH"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [glutathione, gamma-glutamylcysteine, cysteine]
+    kind: other
+    location: "Table 2 (g/100 g; transcribed with molar conversions in dossier sec. 4a); Table 1 recoveries (sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "commercial GSH-YE purchased from four manufacturers (A-D)"
+    flags: [matrix_precursor_composition, matrix_food, reduced_thiols_only, basis_as_sold_moisture_not_reported, no_sd_per_brand, gsh_enriched_products_only, "also_relevant: sulfur"]
+    note: "GSH 0.46-5.02, gamma-Glu-Cys 0.057-0.50, free Cys 0.020-1.71 g/100 g product (HPLC, post-column NAM fluorescence, external standards, recovery 95.6-98.8 %). Reduced forms only (no GSSG, cystine). Product-to-product band for GSH-enriched YE (the class Raza 2020 heated), not for ordinary autolysed YE."
+  # ---- jacob2019 (ingested 2026-11-03) ----
+  - id: jacob2019_tab2_tab3_spent_yeast_extract_composition
+    dossier: jacob2019_extraction.md
+    paper: "Jacob, Striegel, Rychlik, Hutzler & Methner 2019 Eur Food Res Technol 245:1169"
+    lab: "TU Berlin Brewing (Jacob / Methner)"
+    system: "freeze-dried extracts of spent brewer's yeast TUM 68 (cell mill, sonotrode, autolysis 24 h 50 C) + one industrial autolysed yeast extract"
+    medium: "dry powders, analysed unheated (moisture 6.8-11.3 %)"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [free amino acids (sum), total amino acids (sum), free alpha-amino nitrogen, glucose, fructose, trehalose, glycogen, RNA, thiamine]
+    kind: other
+    location: "Table 2 (mg/g dw) and Table 3 (mg/100 g dw), mean +- 95 % CL, n = 3 (transcribed in dossier secs. 4a, 4b)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "a yeast extract powder was produced ... that had a residual water content of 10%"
+    flags: [matrix_precursor_composition, matrix_food, dry_weight_basis, amino_acids_sums_only, no_ribose_no_nucleotides, industrial_product_origin_unknown, "biotin_b12_units_implausible"]
+    note: "Reducing sugars low (glucose 1.7-3.2, fructose 0.5-1.0 mg/g dw); thiamine 5.2-7.5 mg/100 g dw; RNA 49-55 mg/g dw total (no 5'-nucleotides). Autolysis doubles free amino acids (306 vs 116-155 mg/g). Individual amino acids in the companion paper 10.1007/s00217-018-3143-z (not on disk)."
+  - id: jacob2019_fig4_glutathione_by_disruption_method
+    dossier: jacob2019_extraction.md
+    paper: "Jacob, Striegel, Rychlik, Hutzler & Methner 2019 Eur Food Res Technol 245:1169"
+    lab: "TU Berlin Brewing (Jacob / Methner)"
+    system: "as jacob2019_tab2_tab3_spent_yeast_extract_composition"
+    medium: "dry powders, analysed unheated"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [glutathione (Ellman total thiol)]
+    kind: other
+    location: "Fig. 4 stacked bars (digitised, +-0.15 mg/g, dossier sec. 4c)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "after reacting with Ellman's reagent ... the absorption was measured spectrophotometrically at 412 nm"
+    flags: [matrix_precursor_composition, matrix_food, dry_weight_basis, nonspecific_thiol_assay, figure_read, "also_relevant: sulfur"]
+    note: "GSH-equivalent thiol 12.9 / 13.2 mg/g dw (cell mill / sonotrode) vs 1.2 (lab autolysis) and 1.9 (industrial autolysate): autolysis loses ~90 %. DTNB reads all free SH (GSH, gamma-Glu-Cys, Cys), so an upper bound on reduced GSH."
+  # ---- tome2021 (ingested 2026-11-03) ----
+  - id: tome2021_tab1_tab2_yeast_extract_typical_composition
+    dossier: tome2021_extraction.md
+    paper: "Tome 2021 ACS Food Sci Technol 1:487 (review)"
+    lab: "AgroParisTech / INRAE (Tome D.), review"
+    system: "'typical' dried Saccharomyces cerevisiae yeast extract (Table 2); dried yeast, dried yeast extract, yeast-extract paste (Table 1)"
+    medium: "dry product / paste as sold; no production method per column"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [free amino acids (18), total amino acids (18), cystine, sugar, thiamine]
+    kind: other
+    location: "Table 2 (g/100 g DM; transcribed in dossier sec. 4a); Table 1 rows (per 100 g; sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "Typical Total and Free Amino Acid Content of Dried Saccharomyces cerevisiae Yeast Extract"
+    flags: [matrix_precursor_composition, matrix_food, review_compilation, sources_not_per_value, row_sums_do_not_match_totals, text_contradicts_table, no_free_cysteine_only_cystine, no_ribose_no_nucleotides_no_gsh]
+    note: "Secondary: Table 2 from refs 27, 28, 30, 31 (Podpora 2015/2016, Rozmierska 2001, Jacob, Hutzler & Methner 2019 EFRT 245:95) without per-value attribution. Free sum 34.6 (rows 34.3), total 48.0 (rows 48.7) g/100 g DM. Plausibility band only; key the primaries instead when ingested."
+  # ---- mahadevan2006 (ingested 2026-11-03) ----
+  - id: mahadevan2006_tab5_yeast_extract_precursors
+    dossier: mahadevan2006_extraction.md
+    paper: "Mahadevan & Farmer 2006 J Agric Food Chem 54:7242"
+    lab: "AFBI Belfast (Farmer)"
+    system: "three commercial S. cerevisiae yeast-extract pastes A, B, C (batch of A not stated)"
+    medium: "pastes as sold, before any further heating"
+    temperature_c: []
+    ph: {initial: 5.1, measured_during: false, final: null}
+    time_min: []
+    species: [thiamine, "5'-IMP", "5'-GMP", "5'-CMP", "5'-UMP", "5'-AMP", "5'-ADP", "5'-ATP", "2'-AMP", "3'-AMP", "3'-GMP", inosine, guanosine, adenosine, ribose, xylose, fructose, glucose]
+    kind: other
+    location: "Table 5 (dossier sec. 4d)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "quantities are quoted without correction for recovery"
+    flags: [matrix_food, dry_weight_basis, composition_incomplete, "ribose_recovery_72pct_uncorrected", "cmp_lettering_inconsistent_with_sem", "batch_of_paste_a_not_stated", "also_relevant: sulfur", "also_relevant: trunk"]
+    note: "mg/100 g DW, HPLC external standards, duplicate, SEM. Free reducing sugars only ~0.03 % DW while ribonucleotides + nucleosides ~5 % DW: a nucleotide-ribose pool for MFT. No amino acids, Cys, peptides. Complements munch1997/1998 (amino acids, no sugars or nucleotides)."
+  # ---- alim2018 (ingested 2026-11-03) ----
+  - id: alim2018_tab2_tab3_strecker_pyrazine_temperature
+    dossier: alim2018_extraction.md
+    paper: "Alim, Song, Liu, Zou, Zhang & Zhang 2018 J Sci Food Agric 98:3774"
+    lab: "BTBU (Song H)"
+    system: "yeast-extract paste LA00 (Angel Yeast) 6 g + 30 mL water"
+    medium: "unbuffered water, foil-sealed vial in Parr high-pressure reactor; food matrix"
+    temperature_c: [25, 100, 110, 120, 130, 140]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: [2-methylbutanal, 3-methylbutanal, methional, benzaldehyde, methylpyrazine, "2,6-dimethylpyrazine", trimethylpyrazine, "2-ethyl-5-methylpyrazine", "2-ethyl-3,6-dimethylpyrazine", "2,6-diethyl-3-methylpyrazine", "2,5-dimethyl-3-(3-methylbutyl)pyrazine"]
+    kind: endpoint
+    location: "Table 2 (SPME) and Table 3 (SAFE) (dossier secs. 4c, 4d)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "let it react at different temperatures (100 C, 110 C, 120 C, 130 C, 140 C) for 1 h"
+    flags: [matrix_food, ph_not_stated, single_is_no_response_factor, unit_basis_not_stated, "spme_vs_safe_10x_disagreement", "pyrazine_rows_non_monotonic", "identification_doubtful_rows", accepted_manuscript_not_vor, "phenylacetaldehyde_not_in_tables", "complements: alim2018_tab2_tab3_sulfur_volatiles_temperature", "also_relevant: trunk"]
+    note: "Strecker aldehydes rise 5-20x from 25 to 140 C (3-methylbutanal 5.28 -> 103.07 ug/L SPME); methional peaks at 120 C. Order-of-magnitude vs Muench 1998 CYE within x2-5 after an assumed x5-8 basis conversion (dossier sec. 1 ans. 5)."
+  - id: alim2018_tab1_fig1_yeast_extract_precursors_temperature
+    dossier: alim2018_extraction.md
+    paper: "Alim, Song, Liu, Zou, Zhang & Zhang 2018 J Sci Food Agric 98:3774"
+    lab: "BTBU (Song H)"
+    system: "yeast-extract paste LA00 (Angel Yeast) 3 g + 15 mL water"
+    medium: "unbuffered water, foil-sealed vial in Parr high-pressure reactor; food matrix"
+    temperature_c: [25, 100, 110, 120, 130, 140]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: [free amino acids (15), cysteine, ornithine, thiamine, "5'-CMP", "5'-GMP", "5'-IMP", "5'-AMP", peptide MW classes]
+    kind: endpoint
+    location: "Table 1 (amino acids, g/kg); Fig. 1a, 1b, 1d (digitised, dossier sec. 4b); nucleotide 25 / 140 C values in text"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "let it react in particular temperatures ... for 1 h"
+    flags: [matrix_food, ph_not_stated, unit_basis_not_stated, "amino_acid_losses_implausible_leu_minus56pct_100C", "thiamine_unit_ng_per_g_doubtful", "anova_letters_inconsistent_met_phe", accepted_manuscript_not_vor, "also_relevant: sulfur"]
+    note: "Only printed composition of LA00 (alim2019 prints none). 5'-IMP 0.733 -> 0.155 mg/g after 1 h at 140 C (apparent k 0.0025-0.026 /min, 100-140 C, Ea ~75 kJ/mol two-point, isothermal assumed) [dossier Z]. Cys -29 % at 140 C."
+  # ---- devaere2022 (ingested 2026-11-03) ----
+  - id: devaere2022_tab1_myoglobin_dose_pyrazines_strecker
+    dossier: devaere2022_extraction.md
+    paper: "Devaere, De Winne, Dewulf, Fraeye, Soljic, Lauwers, de Jong & Sanctorum 2022 Foods 11:1985"
+    lab: "KU Leuven Ghent (Fraeye) / Paleo (Sanctorum)"
+    system: "TSP 25 % + sunflower oil 15 % + methylcellulose 1 % + salt 1.5 % + water 57.5 %, bovine myoglobin 0 / 0.5 / 1.0 % on top; raw vs oven-cooked; no added sugar or amino acid"
+    medium: "30 g patties, combi oven 250 C air 12 min (core T not measured); HS-SPME DVB/CAR/PDMS 3 g in 20 mL vial, 45 C 20 + 40 min"
+    temperature_c: [250]
+    ph: {initial: [], measured_during: false, final: null}
+    time_min: [12]
+    species: [methylpyrazine, 2,5-dimethylpyrazine, 2-ethyl-6-methylpyrazine, 2-ethyl-5-methylpyrazine, 2,5-dimethyl-3-ethylpyrazine, 2-methyl-3,5-diethylpyrazine, 2-methylbutanal, 3-methylbutanal, benzaldehyde, furfural, furfuryl alcohol, pyrrole, maltol, guaiacol, 2-methoxy-4-vinylphenol]
+    kind: endpoint
+    location: "Table 1 pp. 5-7 (n = 3, AU x 10^3, Tukey letters; dossier sec. 4a, 4c)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "baked for 12 min at 250 °C in an oven"
+    flags: [matrix_food, peak_area_only, ph_not_stated, air_headspace, condition_uncertain, no_heme_species_in_engine, spme_fibre_competition_suspected, industry_authored, "complements: devaere2022_tab1_myoglobin_dose_lipid_volatiles"]
+    note: "Pyrazines carried in by the extruded TSP (raw ~300 AU, Mb-independent); cooking x12, and Mb raises cooked pyrazines x1.33/x2.24 while 2-/3-methylbutanal fall x0.38. No sulfur compound detected in any arm. Peak areas only; one cooking condition."
+  # ---- kondjoyan2016 (ingested 2026-11-03) ----
+  - id: kondjoyan2016_tab3_crust_haa_jet_temperature_time
+    dossier: kondjoyan2016_extraction.md
+    paper: "Kondjoyan, Chevolleau, Portanguen, Molina, Ikonic, Clerjon & Debrauwer 2016 Food Chem 213:641"
+    lab: "INRA Clermont QuaPA (Kondjoyan)"
+    system: "beef Longissimus thoracis cylinder 48 mm x 50-55 mm, top face under a hot-air jet; crust + <0.5 mm non-brown margin analysed"
+    medium: "whole muscle (composition not printed), open air jet, nozzle 36 mm, humidity and velocity not stated"
+    temperature_c: [124, 210]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20, 90]
+    species: [MeIQx, IQx, "4,8-DiMeIQx", PhIP, MeIQ, DMIP, Glu-P-2]
+    kind: time_series
+    location: "Table 3 (11 conditions, 4 jet T x 2-3 times), transcribed in dossier sec. 4a"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "air temperature at the pipe outlet was either 160, 190, 225, or 260 °C"
+    flags: [thermal_history, temperature_is_air_jet_not_product, product_T_not_reported, basis_ng_per_g_freeze_dried_crust, crust_mass_not_reported, analogue_internal_standard_TriMeIQx, replicates_analytical_only, text_35x_claim_contradicts_table, sixty_min_runs_missing, "also_relevant: thermal_history"]
+    note: "HAAs, not Maillard aroma; the engine has no HAA species. Use only as a thermal-history sanity check (reacting layer far colder than air; HAAs track crust thickness). Apparent Ea vs jet T ~92 kJ/mol [Z], not to be carried."
+  - id: kondjoyan2016_fig2_creatine_depth_profile
+    dossier: kondjoyan2016_extraction.md
+    paper: "Kondjoyan, Chevolleau, Portanguen, Molina, Ikonic, Clerjon & Debrauwer 2016 Food Chem 213:641"
+    lab: "INRA Clermont QuaPA (Kondjoyan)"
+    system: "same beef cylinder, 192 C jet, 60 min; slices at 2.5-20 mm depth"
+    medium: "whole muscle"
+    temperature_c: [192]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: [creatine]
+    kind: endpoint
+    location: "Fig. 2 (5 bars, digitised +-0.03 g/100 g DM, dossier sec. 4b); Table 2 present-study rows (raw, 192 C/20 min, 210 C/90 min)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Creatine content was measured on meat cylinders exposed to the hot air jet at 192 °C"
+    flags: [thermal_history, figure_only_digitised, creatinine_not_measured, slice_count_text_vs_figure, table2_basis_not_stated]
+    note: "Precursor depletion toward the surface (1.85 -> 0.70 g/100 g DM in the top 2.5 mm). A depth-resolved precursor gradient, the only one on disk for a roast; meat-only (creatine has no plant analogue)."
+  - id: kondjoyan2016_tab3_crust_thickness_vs_time
+    dossier: kondjoyan2016_extraction.md
+    paper: "Kondjoyan et al. 2016 Food Chem 213:641"
+    lab: "INRA Clermont QuaPA (Kondjoyan)"
+    product: "beef LT cylinder 48 mm x 50-55 mm, one face heated"
+    heating_mode: air_jet_impingement
+    setpoint: "pipe outlet 160/190/225/260 C; jet T 2 mm above surface 120-220 C"
+    boundary: {air_t_c: [124, 210], air_velocity_m_s: null, humidity: null, h_w_m2_k: null}
+    observable: crust_thickness_mm
+    positions: [coloured_crust]
+    time_min: [20, 90]
+    representation: data_points
+    location: "Table 3 crust column (dossier sec. 4a); Fig. 3 isotherm depths at 210 C/70 min [cited, Portanguen 2014]"
+    usable_as_programme: false
+    status: digitised_in_dossier
+    flags: [thermal_history, no_temperature_time_curve, air_T_only, crust_SD_not_printed, linearity_claim_cited_not_shown]
+  # ---- sprague2011 (ingested 2026-11-03) ----
+  - id: sprague2011_fig10_salmon2000_total_haa_vs_pan_temperature
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (data re-plotted from Salmon et al. 2000 J Natl Cancer Inst 92:1773)"
+    lab: "LLNL (Felton / Knize)"
+    system: "thawed 20 % fat ground-beef patty, R 45 mm x 15 mm, pan-fried to centre 70.6 C, flipped once (300 s) or every 60 s"
+    medium: "whole patty, open pan, air 20 C"
+    temperature_c: [160, 250]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [6.0, 8.9]
+    species: [total_HAA]
+    kind: endpoint
+    location: "Fig. 10 (individual patties, log axis, digitised +-12 %, dossier sec. 4d); Ea 25.3 kcal/mol in sec. 4.3 text"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "pan-fried with various initial pan temperatures until the center temperature reached 70.6 °C"
+    flags: [thermal_history, secondary_replot, temperature_is_initial_pan_T, haa_species_not_named, basis_uncooked_meat_per_nomenclature, model_normalised_at_160C, A_not_reported, zero_order_rate_law, "also_relevant: thermal_history"]
+    note: "Apparent Ea of total HAAs: 105.9 kJ/mol with this transport model vs 75.3 kJ/mol with Tran 2002's (same data). An Ea from cooked food depends on the thermal model behind it. No HAA chemistry in the engine."
+  - id: sprague2011_eq20_tran2002_pan_temperature_programme
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (pan record of Tran et al. 2002, unpublished there)"
+    lab: "LLNL (Felton / Knize)"
+    product: "beef patty R 47.5 mm x 25 mm, 20 % fat, T0 13.5 C"
+    heating_mode: pan_contact_single_sided
+    setpoint: "pan preheated to 146.9 C"
+    boundary: {air_t_c: 20, air_velocity_m_s: null, humidity: null, h_w_m2_k: {pan: 150, air: 40, pan_fitted: true}}
+    observable: pan_surface_temperature
+    positions: [pan_surface]
+    time_min: [0, 41.7]
+    representation: printed_fit
+    location: "Eq. 20 and Fig. 3 (dossier sec. 4a)"
+    usable_as_programme: boundary_only
+    status: digitised_in_dossier
+    flags: [thermal_history, pan_not_food_surface, secondary_replot]
+  - id: sprague2011_eq21_ikediala1996_pan_temperature_programme
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (pan record of Ikediala et al. 1996 J Food Sci 61:796)"
+    lab: "Ikediala / Correia (no id)"
+    product: "beef patty R 45 mm x 15 mm, X_fat 0.121, T0 7.0 C"
+    heating_mode: pan_contact_single_sided
+    setpoint: "pan 180 C"
+    boundary: {air_t_c: 20, air_velocity_m_s: null, humidity: null, h_w_m2_k: {pan: 150, air: 40, pan_fitted: true}}
+    observable: pan_surface_temperature
+    positions: [pan_surface]
+    time_min: [0, 8.0]
+    representation: printed_fit
+    location: "Eq. 21 and Fig. 9 (dossier sec. 4a); cubic, valid 0-480 s only"
+    usable_as_programme: boundary_only
+    status: digitised_in_dossier
+    flags: [thermal_history, pan_not_food_surface, secondary_replot, fit_diverges_beyond_480s]
+  - id: sprague2011_fig4_tran2002_interior_temperatures
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (thermocouples of Tran et al. 2002 Food Chem Toxicol 40:673)"
+    lab: "LLNL (Felton / Knize)"
+    product: "as sprague2011_eq20_tran2002_pan_temperature_programme"
+    heating_mode: pan_contact_single_sided
+    setpoint: "pan Eq. 20"
+    boundary: {air_t_c: 20, air_velocity_m_s: null, humidity: null, h_w_m2_k: {pan: 150, air: 40, pan_fitted: true}}
+    observable: product_temperature
+    positions: ["z 6 mm (2 probes)", "z 9 mm (3)", "z 12 mm (3)", "r ~ 0"]
+    time_min: [0, 41.7]
+    representation: data_points
+    location: "Fig. 4a-c (300 dpi, +-2 C, dossier sec. 4b)"
+    usable_as_programme: core_only
+    status: digitised_in_dossier
+    flags: [thermal_history, interior_below_100C, probe_spread_10C, used_to_fit_h_pan]
+  - id: sprague2011_fig8_ikediala1996_interior_temperatures
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (thermocouples of Ikediala et al. 1996)"
+    lab: "Ikediala / Correia (no id)"
+    product: "as sprague2011_eq21_ikediala1996_pan_temperature_programme"
+    heating_mode: pan_contact_single_sided
+    setpoint: "pan Eq. 21"
+    boundary: {air_t_c: 20, air_velocity_m_s: null, humidity: null, h_w_m2_k: {pan: 150, air: 40, pan_fitted: true}}
+    observable: product_temperature
+    positions: ["z 3.5 mm", "z 5.5 mm", "z 9.5 mm", "r ~ 0"]
+    time_min: [0, 8.0]
+    representation: data_points
+    location: "Fig. 8 (150 dpi, +-3 C, dossier sec. 4c)"
+    usable_as_programme: core_only
+    status: digitised_in_dossier
+    flags: [thermal_history, out_of_sample_test_of_h_pan, secondary_replot]
+  # ---- oroszvari2005 (ingested 2026-11-03) ----
+  - id: oroszvari2005_fig1_subsurface_centre_t_vs_time
+    dossier: oroszvari2005_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2005 J Food Eng 71:18"
+    lab: "Lund (Tornberg)"
+    product: "frozen minced-beef patty, fat brisket 39 % fat, 1.5 % NaCl, D = 10 cm (thickness ~10 mm, not printed)"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 100 / 150 / 175 C, stop at centre 72 C"
+    boundary: {pan_t_c: [100, 150, 175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: temperature_c
+    positions: [centre_5mm, subsurface_2mm]
+    time_min: [0, 3.2]
+    representation: data_points
+    location: "Fig. 1 (6 traces, one run each), digitised from vector paths in dossier sec. 4b"
+    usable_as_programme: partial
+    status: digitised_in_dossier
+    flags: [thermal_history, frozen_start, no_surface_or_crust_temperature, single_trace_per_condition, thickness_not_printed, text_fig1_frying_time_mismatch]
+    note: "Hottest measured point is 2 mm deep and ends at <= 100 C; a sub-crust programme at most, not a crust (Maillard) programme."
+  - id: oroszvari2005_tab3_tab4_figs2_4_endpoint_mass_loss
+    dossier: oroszvari2005_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2005 J Food Eng 71:18"
+    lab: "Lund (Tornberg)"
+    product: "frozen minced-beef patties, 4 cuts (fat 6.7-39 %), D = 3-12.7 cm"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 100 / 150 / 175 C, stop at centre 72 C (t72 90-190 s)"
+    boundary: {pan_t_c: [100, 150, 175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: [total_loss_pct, water_loss_pct, fat_loss_pct, water_flux_g_cm2_s, fat_flux_g_cm2_s, final_t_2mm_c, porosity, shrinkage_pct]
+    positions: [whole_patty, subsurface_2mm]
+    time_min: [1.5, 3.2]
+    representation: endpoint_lsmeans_and_cell_means
+    location: "Tables 3-4 (main-effect LS means, p-values) and Figs. 2-4 (18 cells, n = 2, SE bars), dossier sec. 4c-4f"
+    usable_as_programme: false
+    status: digitised_in_dossier
+    flags: [thermal_history, endpoint_only_no_time_course, lsmeans_not_cell_means, text_contradicts_table_total_loss_vs_pan_t, drip_share_rests_on_no_evaporation_assumption]
+    note: "Time-resolved water/fat loss is in Part 3 (Kovacsne Oroszvari 2006, 10.1016/j.jfoodeng.2005.05.018), not on disk."
+  # ---- purlis2019 (ingested 2026-11-03) ----
+  - id: purlis2019_fig4_fig6_simulated_surface_t_aw
+    dossier: purlis2019_extraction.md
+    paper: "Purlis & Salvadori 2009 Food Res Int 42:865 (repo key purlis2019)"
+    lab: "CIDCA La Plata (Purlis / Salvadori)"
+    product: "French bread, 100 g cylinder 0.04 m x 0.1 m"
+    heating_mode: oven_natural_or_forced_convection
+    setpoint: "oven air 180 / 200 / 220 C (+-3.3 C); v = 0 or 0.9 m/s"
+    boundary: {air_t_c: [180, 200, 220], air_velocity_m_s: [0, 0.9], humidity: null, h_w_m2_k: null}
+    observable: [surface_temperature_c, surface_water_activity]
+    positions: [surface]
+    time_min: [0, 40]
+    representation: simulation
+    location: "Fig. 4 (T, 0-40 min) and Fig. 6 (a_w, 10-40 min), model of Purlis & Salvadori 2009b; dossier sec. 4b-4c"
+    usable_as_programme: partial
+    status: digitised_in_dossier
+    flags: [thermal_history, simulated_not_measured, model_parameters_in_other_paper, bread_not_plant_protein, aw_non_monotonic_in_oven_t]
+    note: "A crust-shaped T(t) with a_w(t): 25 -> ~105-119 C in 5 min, 140-192 C by 30-40 min."
