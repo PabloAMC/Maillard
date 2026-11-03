@@ -2,18 +2,18 @@
   "artifact": "contrast_scores",
   "provenance": {
     "artifact": "contrast_scores",
-    "generated_on": "2026-10-29",
+    "generated_on": "2026-11-03",
     "git": {
-      "commit": "157e38dc56819be52104abf7cec5a5217acfdf33",
-      "short": "157e38dc",
-      "branch": "sulfur-route-and-tooling",
+      "commit": "35d373e891344a944905cf0cdc6734c07afa3b7a",
+      "short": "35d373e8",
+      "branch": "acrylamide-envelope-2026-11-03",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_contrast_scores.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "246d7e6f4ff966ffe6e7370cbcca928c2f17cd936ea4e94d87acf53607f230bd"
+        "sha256": "bb58086c86d573d5420866d4f5bc11ce7734addb78109defde7567e77d00520c"
       }
     ]
   },
@@ -570,7 +570,7 @@
       "a": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
       "b": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
       "measured_dex": -1.7168972605512325,
-      "engine_dex": 0.2202090174917986,
+      "engine_dex": 0.2202090174914923,
       "out_of_sample": true
     },
     {
@@ -580,7 +580,7 @@
       "a": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
       "b": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
       "measured_dex": -1.4729652949485048,
-      "engine_dex": 0.2202090174917986,
+      "engine_dex": 0.2202090174914923,
       "out_of_sample": true
     },
     {

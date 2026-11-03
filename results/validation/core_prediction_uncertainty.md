@@ -7,7 +7,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 * **honest literature coverage: 36/65 (0.554)**, median CI width 1.869 log10; 1 not evaluable; 0 fitted rows excluded
 * out-of-sample literature coverage: 29/55 (1 not evaluable); rows the core fit read: {'hits': 7, 'total': 10, 'not_evaluable': 0}
 * B55 single-temperature Ea prior: on (31 rows); B56 structural discrepancy: off
-* sampled priors 97, fixed 45; lanes with NO sampled fit uncertainty: none
+* sampled priors 99, fixed 45; lanes with NO sampled fit uncertainty: none
 * observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 25, extraction 41, undeclared 0
 
 ## Per panel
@@ -22,7 +22,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 
 | benchmark | panel | compound | unit | measured | point | p5 | p50 | p95 | inside | width | obs bands | lane | role |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | acrylamide | ppb | 150.000 | 0.016 | 0.00741 | 0.016 | 0.025 | no | 0.536 | no (extraction) | acrylamide | predictive |
+| acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | acrylamide | ppb | 150.000 | 0.016 | 0.00656 | 0.020 | 0.085 | no | 1.112 | no (extraction) | acrylamide | predictive |
 | hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 310.000 | 4.03e+03 | 3.05e+03 | 4.03e+03 | 4.07e+03 | no | 0.125 | no (extraction) | sulfur | predictive [in core fit] |
 | hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 5.36e+03 | 2.92e+03 | 2.11e+03 | 2.96e+03 | 3.45e+03 | no | 0.213 | no (extraction) | sulfur | predictive [in core fit] |
 | hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 6.23e+03 | 1.15e+03 | 537.211 | 1.18e+03 | 1.74e+03 | no | 0.510 | no (extraction) | sulfur | predictive [in core fit] |
@@ -49,17 +49,17 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 57.100 | 1.65e+03 | 20.615 | 348.926 | 3.95e+03 | yes | 2.282 | yes (headspace) | sulfur | external_holdout |
 | mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 270.000 | 110.837 | 0.024 | 4.762 | 576.440 | yes | 4.387 | yes (headspace) | sulfur | external_holdout |
 | mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c | maillard_path_holdout | Furfural | ppb | 575.000 | 16.172 | 0.021 | 4.112 | 325.617 | no | 4.190 | yes (headspace) | sulfur | external_holdout |
-| mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 68.996 | 199.516 | 565.424 | no | 0.914 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 62.851 | 178.706 | 621.838 | no | 0.995 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.97e+03 | 1.1e+03 | 1.88e+03 | 2.73e+03 | no | 0.395 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 5.73e+04 | 5.54e+04 | 8.91e+03 | 3.3e+04 | 1.59e+05 | yes | 1.253 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 5.89e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.01e+05 | 5.54e+04 | 8.91e+03 | 3.3e+04 | 1.59e+05 | yes | 1.253 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_asparagine_180C_10min_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 28.000 | 6.11e+03 | 1.94e+03 | 5.68e+03 | 1.42e+04 | no | 0.865 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_asparagine_180C_30min_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 1.46e+03 | 3.68e+03 | 1.25e+03 | 3.62e+03 | 1.03e+04 | yes | 0.915 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 832.000 | 3.68e+03 | 1.25e+03 | 3.62e+03 | 1.03e+04 | no | 0.915 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 7e+03 | 2.55e+03 | 1.12e+03 | 2.18e+03 | 1.21e+04 | yes | 1.031 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_asparagine_180C_Ye2024 | maillard_path_holdout | Acrylamide | umol_per_mol_limiting_precursor | 140.580 | 7e+03 | 2.43e+03 | 6.84e+03 | 1.94e+04 | no | 0.902 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_glucose_asparagine_180C_10min_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 28.000 | 6.11e+03 | 1.53e+03 | 4.8e+03 | 1.43e+04 | no | 0.968 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_glucose_asparagine_180C_30min_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 1.46e+03 | 3.68e+03 | 1.13e+03 | 3.23e+03 | 1.12e+04 | yes | 0.993 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 832.000 | 3.68e+03 | 1.13e+03 | 3.23e+03 | 1.12e+04 | no | 0.993 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 7e+03 | 2.55e+03 | 1.11e+03 | 2.18e+03 | 1.2e+04 | yes | 1.035 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_glucose_asparagine_180C_Ye2024 | maillard_path_holdout | Acrylamide | umol_per_mol_limiting_precursor | 140.580 | 7e+03 | 2.2e+03 | 6.21e+03 | 1.9e+04 | no | 0.938 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 1.87e+03 | 471.658 | 1.32e+03 | 4.41e+03 | no | 0.970 | no (extraction) | trunk | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3-deoxyglucosone | ppb | 5.22e+04 | 6.64e+04 | 1.68e+04 | 4.85e+04 | 1.57e+05 | yes | 0.969 | no (extraction) | trunk | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3,4-dideoxyglucosone | ppb | 5.55e+04 | 8.37e+03 | 2.1e+03 | 5.79e+03 | 2.04e+04 | no | 0.988 | no (extraction) | trunk | external_holdout |
@@ -233,6 +233,8 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | trunk.amadori_ph_exponent_decades_per_unit | trunk | declared_band | uniform | 0.690 | - | [0.370, 0.920] | yes | declared band: the six Martins 2003 per-step ratios span it |
 | acrylamide.aw_multiplier | acrylamide | declared_band | uniform | 1.000 | - | [0.410, 1.390] | yes | declared band: the source's a_w point estimates and the 0.92 column's 95 % HPD, relative to the shipped constant |
 | acrylamide.aw_elimination_deficit_scale | acrylamide | declared_band | uniform | 1.000 | - | [0.000, 1.200] | yes | declared band: 0 = no elimination a_w effect, 1.2 = 1.2x De Vleeschouwer 2007's k_E shape (SEs up to 90 %) |
+| acrylamide.k_int1_acr.ea_kj_mol | acrylamide | declared_band | uniform | 159.200 | - | [95.000, 189.000] | yes | two_laboratories_disagree: flat across the disagreement |
+| acrylamide.k_asn_glc.ea_kj_mol | acrylamide | declared_band | normal | 117.500 | 12.857 | - | yes | declared band: the source's printed 95 % CI (CF-039) |
 | acrylamide.ph_exponent_formation_decades_per_unit | acrylamide | declared_band | uniform | 0.235 | - | [0.114, 0.281] | yes | declared band: the potato-matrix slope minus its SE to the phosphate slope plus its SE |
 | acrylamide.ph_exponent_elimination_decades_per_unit | acrylamide | declared_band | uniform | 0.149 | - | [0.116, 0.155] | yes | declared band: the two measured slopes and their SEs |
 | sulfur.oxygen.k_cys_ox.log10_k | sulfur | declared_band | fixed | 0.000 | - | [-5.000, -1.000] | no | not a free coordinate of the shipped report (B11 not shipped): the consumer is zero by declaration and the structure ine |
