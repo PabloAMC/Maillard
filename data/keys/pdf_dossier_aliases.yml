@@ -88,11 +88,6 @@ pending:
   # pyrazines E13-E14 or a check of a number shipped code cites; B = nucleotide (IMP/GMP) and yeast-extract precursor
   # inputs, and the repo records citing them; C = thermal history / observation (mechanism item 8), water activity,
   # acrylamide lane; D = background. Read in rank order.
-  munch1998: "A1. Muench & Schieberle 1998 JAFC 46:4695 (10.1021/jf980511t): SIDA quantitation of key odorants formed in thermally treated yeast extracts. Same DFA/TUM group as the Strecker layer's Hofmann 2000: a second system, not a second lab"
-  munch1997: "A2. Muench, Hofmann & Schieberle 1997 JAFC 45:1338: key odorants of heated commercial vs self-prepared yeast extracts vs amino-acid composition (DFA/TUM)"
-  alim2019: "A3. Alim, Song et al. 2019 LWT 112:108239 (10.1016/j.lwt.2019.06.006): CAMOLA carbon-module labelling of beef-meaty odorants from yeast extract; route shares (E6, E13). Cited in CITATION_CONTEXT_2026-10.md"
-  aliani2013: "A4. Aliani et al. 2013 Meat Sci 94:55 (10.1016/j.meatsci.2012.11.032): post-slaughter ATP metabolites and reducing / phosphorylated sugars in CHICKEN. Check the value src/cultivated_tissue_invariance.py cites via hwang2026, and the aroma_other.yml entry whose note says no PDF"
-  madruga1998: "A5. Madruga & Mottram 1998 J Braz Chem Soc 9:261: volatiles from heated 5'-IMP + cysteine vs pH (MFT from nucleotide ribose; E6, pH)"
   matoba1988: "B1. Matoba, Kuchiba, Kimura & Hasegawa 1988 J Food Sci (10.1111/j.1365-2621.1988.tb13551.x): first-order IMP / GMP thermal degradation vs pH and T. Check computational_priors matoba_1988_nucleotide_hydrolysis(_v1) and its intake entry: the _v1 source string names 'Matoba, Terao & Fujimaki', not this paper's authors"
   kuchiba1990: "B2. Kuchiba, Kaizaki, Matoba & Hasegawa 1990 JAFC 38(3): salts depress IMP / GMP thermal degradation (same group as matoba1988)"
   shaoul1987: "B3. Shaoul & Sporns 1987 J Food Sci: IMP / GMP / AMP phosphate hydrolysis at 121 C, pH 3-8, half-lives (cited in zhang1991_extraction.md and LITERATURE_SEARCH_2026-10_ROUND3.md)"

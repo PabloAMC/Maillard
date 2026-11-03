@@ -158,8 +158,8 @@ BOX: Mapping[str, Mapping[str, Range]] = {
         "ribose": Range(0.33, 2.2, "sourced",
                         "Koutsidis 2008b Table 2: 0.25 mmol/kg at day 1 to 1.67 at day 21 (n = 16 steers, GC-MS), "
                         "0.33-2.2 mM at 75 % moisture; Koutsidis 2008a Table 1: 0.57-1.08 mmol/kg across 30 steers at "
-                        "10 d (0.76-1.44 mM) sits inside; the cited 0.26 mg/g point (Aliani 2013 via Hwang 2026, 2.3 mM) "
-                        "sits at the top edge and is no longer a corner",
+                        "10 d (0.76-1.44 mM) sits inside; a review point (Hwang 2026, 0.26 mg/g, 2.3 mM) sits at the top edge "
+                        "and is no longer a corner: the review attributes it to Aliani 2013, which does not contain it",
                         ("koutsidis2008b", "koutsidis2008a")),
         "cysteine": Range(0.002, 0.23, "sourced",
                           "Muroya 2019 Table 1: 1.6 nmol/g at D0 to 107 nmol/g at D14, n = 3 steers, CE-TOFMS (D0 at the "

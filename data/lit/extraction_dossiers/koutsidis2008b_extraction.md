@@ -84,7 +84,7 @@ Beef-side ranges for the composition box, converted to mM in tissue water at 75 
 (mmol/kg ÷ 0.75), spanning the day-1 and day-21 means:
 
 - **ribose (free)**: 0.25 to 1.67 mmol/kg → **0.33 to 2.2 mM**. The first PRIMARY beef ribose range on
-  file; it replaces the earlier construction (a cited 0.26 mg/g point from Aliani 2013 via Hwang 2026 as
+  file; it replaces the earlier construction (a 0.26 mg/g point Hwang 2026 attributes to Aliani 2013, which does not contain it (`aliani2013_extraction.md`), as
   the upper corner and one sixth of it as the lower). That cited point, 2.3 mM, sits at the top edge of
   the primary range. The companion paper's 10-day values (`koutsidis2008a`, 0.76 to 1.44 mM across 30
   animals) sit inside it.

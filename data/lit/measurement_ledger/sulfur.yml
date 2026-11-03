@@ -9331,3 +9331,153 @@ entries:
     condition_quote: "The pH of the medium was adjusted to values of 4.0 (F4) and 6.0 (F6) using 1 M HCl"
     flags: [matrix_food, ph_start_only, unbuffered, single_is_no_response_factor, internal_inconsistency, condition_uncertain, supplement_missing]
     note: "Two-point initial-pH contrast with thiamine present: MFT, FFT, MFT-MFT only at pH 4 (nd at pH 6, no LOD); 2-furfuryl methyl disulfide only at pH 6 (FFT not absent, re-speciated); HET x7.2 at pH 6 (opposite of cerny2007 T2). 1,2-dichlorobenzene IS, RF 1, no authentic standards. Final pH measured but never printed. Thiamine salt form not stated. No thiamine/Cys/Xyl/lipid omission arm with numbers (M4/M6 'data not shown'). Bears weakly on CF-012."
+  # ---- munch1997 : Muench, Hofmann & Schieberle 1997 (yeast-extract odorants; FFT model pots) (ingested 2026-11-03) ----
+  - id: munch1997_tab4_fft_cys_sugar_ph
+    dossier: munch1997_extraction.md
+    paper: "Muench, Hofmann & Schieberle 1997 J Agric Food Chem 45:1338"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "cysteine 3.3 mmol + ribose, glucose or rhamnose 10 mmol in 100 mL (33 + 100 mM)"
+    medium: "phosphate buffer 0.5 M, laboratory autoclave"
+    temperature_c: [145]
+    ph: {initial: [3.0, 5.0, 7.0], measured_during: false, final: null}
+    time_min: [20]
+    species: ["FFT"]
+    kind: endpoint
+    location: "Table 4 (dossier sec. 4d)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "reacted for 20 min at 145 °C in phosphate buffer (100 mL; 0.5 M)"
+    flags: ["duplicate_of: hofmann1998_t2_ph_ladder", no_replicates]
+    note: "Nine FFT cells identical to Hofmann & Schieberle 1998 Table 2 (same runs, published first here). Do not count as a second pot. MFT not reported here."
+  - id: munch1997_tab5_fft_furfural_cys_h2s
+    dossier: munch1997_extraction.md
+    paper: "Muench, Hofmann & Schieberle 1997 J Agric Food Chem 45:1338"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "furfural 1 mmol + cysteine 1 mmol, or + H2S 0.25 or 1 mmol; 100 mL per Methods (50 mL per Hofmann 1998 for expt 3)"
+    medium: "phosphate buffer 0.5 M per Methods; laboratory autoclave"
+    temperature_c: [145]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20]
+    species: ["FFT"]
+    kind: endpoint
+    location: "Table 5 (dossier sec. 4e)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: true
+    condition_quote: "The precursor mixtures detailed in Tables 4 to 6 were reacted for 20 min at 145 °C in phosphate buffer (100 mL; 0.5 M)."
+    flags: ["duplicate_of: hofmann1998_t3_fft_c5_h2s (expt 3)", condition_uncertain, ph_not_stated, pot_volume_conflict_with_hofmann1998]
+    note: "Expts 1 (Cys 25.3 ug) and 2 (0.25 mmol H2S 130.1 ug) are new: an H2S dose pair and a Cys-vs-H2S contrast on the fitted FUR + H2S row (x4 H2S -> x4.23 FFT; Cys x21.8 less than H2S). pH presumably 5.0. Volume 100 vs 50 mL unresolved."
+  - id: munch1997_tab6_fft_c2c3_and_mgo_cys_ha
+    dossier: munch1997_extraction.md
+    paper: "Muench, Hofmann & Schieberle 1997 J Agric Food Chem 45:1338"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "mercapto-2-propanone + hydroxyacetaldehyde 1 mmol each (expts 1-3); 2-oxopropanal 1 + cysteine 4 + hydroxyacetaldehyde 1 mmol (expt 4)"
+    medium: "phosphate buffer 0.5 M, 100 mL per Methods; laboratory autoclave"
+    temperature_c: [145]
+    ph: {initial: [3.0, 5.0, 7.0], measured_during: false, final: null}
+    time_min: [20]
+    species: ["FFT"]
+    kind: endpoint
+    location: "Table 6 (dossier sec. 4f)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: ""
+    flags: ["duplicate_of: hofmann1998_t8_c2c3_mft_fft_ph (expts 1-3)", pot_volume_conflict_with_hofmann1998, engine_species_missing]
+    note: "Mercapto-2-propanone is not an engine species (expts 1-3 not simulable); expt 4 (MGO + Cys + HA, pH 5.0, 9.2 ug, printed 0.007 mol% vs 0.0081 computed) is new and simulable in principle. 9.2 ug coincides with Hofmann 1998 Table 3 ribose + H2S."
+  # aroma_other.yml
+  # ---- munch1998 : Muench & Schieberle 1998 (yeast-extract odorants by SIDA; Strecker pots at 145 C) (ingested 2026-11-03) ----
+  - id: munch1998_tab3_4_5_yeast_extract_thiols
+    dossier: munch1998_extraction.md
+    paper: "Muench & Schieberle 1998 J Agric Food Chem 46:4695"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "commercial yeast extract, self-prepared autolysate, LMW (<1000 Da) baker's-yeast fractions I / II; 1 + 3 w/w in water"
+    medium: "aqueous slurry, unbuffered, pH not stated; laboratory autoclave"
+    temperature_c: [145]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20]
+    species: ["MFT", "FFT", "3-mercapto-2-pentanone"]
+    kind: endpoint
+    location: "Tables 3, 4, 5 (dossier secs. 4c, 4d)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "The freeze-dried material (5-50 g) was suspended in water (1 + 3 by weight) and thermally treated for 20 min at 145 °C"
+    flags: [matrix_food, ph_not_stated, composition_incomplete, dry_weight_basis, no_replicates]
+    note: "ug/kg dry material (CYE: per kg extract; SPYE / LMW: per kg DW yeast). CYE MFT 530 / FFT 580; SPYE 22 / 29; LMW FFT < 0.1, MFT not reported. No thiamine, ribose, nucleotides: no route shares. Cys only in munch1997 Table 3."
+  - id: munch1998_tab8_cye_glucose_mgo_addition
+    dossier: munch1998_extraction.md
+    paper: "Muench & Schieberle 1998 J Agric Food Chem 46:4695"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "commercial yeast extract alone, + glucose, or + 2-oxopropanal (doses not printed)"
+    medium: "aqueous slurry (1 + 3 w/w presumably), pH not stated; laboratory autoclave"
+    temperature_c: [145]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20]
+    species: ["MFT", "FFT", 3-methylbutanal, methional, phenylacetaldehyde, 2-acetyl-1-pyrroline]
+    kind: ratio
+    location: "Table 8 (dossier sec. 4g)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: ""
+    flags: [matrix_food, dose_not_stated, ph_not_stated, "also_relevant: aroma_other"]
+    note: "Directional only: glucose and MGO both lower MFT (x4.3, x3.4) and FFT (x3.6, x4.8) and raise the Strecker aldehydes (MGO: methional x26.5). One table, sulfur and Strecker rows together."
+  # aroma_other.yml
+  # ---- madruga1998 : Madruga & Mottram 1998 (IMP + cysteine vs pH, presence only) (ingested 2026-11-03) ----
+  - id: madruga1998_tab1_imp_cys_ph_presence
+    dossier: madruga1998_extraction.md
+    paper: "Madruga & Mottram 1998 J Braz Chem Soc 9:261"
+    lab: "Reading (Mottram)"
+    system: "5'-IMP 34.8 mg/mL + L-cysteine 12.1 mg/mL (~100 + 100 mM if IMP free acid), 1 mL in N2-flushed flame-sealed Pyrex ampoules"
+    medium: "pyrophosphate buffer (molarity not stated) at pH 3.0 / 4.5 / 6.0; CERTOclav autoclave 0.28 MPa"
+    temperature_c: [140]
+    ph: {initial: [3.0, 4.5, 6.0], measured_during: false, final: "decreased by less than 0.2 unit"}
+    time_min: [60]
+    species: [MFT, FFT, 2-methyl-3-thiophenethiol, 2-methyl-4,5-dihydro-3-furanthiol, 2-thiophenemethanethiol, bis(2-methyl-3-furyl) disulfide, MFT/FFT/thienyl mixed disulfides, mercaptoketones, thiophenones, thiophenes, trithiolanes, thiazoles, furfural, norfuraneol]
+    kind: other
+    location: "Table 1 (98 compounds, +/nd/* per pH; LRI DB-5 and CP-Wax; no amounts)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "Cysteine (0.121 g) and 5'-IMP (0.348 g) were dissolved in 10 mL of an appropriate pyrophosphate buffer"
+    flags: [presence_only, buffer_molarity_not_stated, internal_inconsistency, no_imp_species_in_engine, "also_relevant: trunk", "also_relevant: aroma_other"]
+    note: "Dynamic headspace (60 C, 1 h, Tenax), no internal standard; '+' = clear MS, no LOD. MFT, FFT, 2-methyl-3-thiophenethiol nd at pH 6.0, + at 4.5 and 3.0; disulfides 0/8/12 at pH 6.0/4.5/3.0; no pyrazine at any pH (abstract misstates 'inhibited at high pH'). Bench work at Reading (acknowledgment); same pots probably in the companion sensory paper (Cienc Tecnol Aliment 18(4) 1998) and Madruga's 1994 thesis - key once. IMP hydrolysis (ribose release) not measured, so the pH slope confounds release with sulfur chemistry; pH 3.0 outside the lane's 4.5-7 window. arms: pH 6.0 / 4.5 / 3.0 (same lab, same assay)."
+  # ---- alim2019 : Alim et al. 2019 (CAMOLA [13C5]-xylose + yeast-extract peptides) (ingested 2026-11-03) ----
+  - id: alim2019_table3_group_vi_camola_xylose_isotopomers
+    dossier: alim2019_extraction.md
+    paper: "Alim, Song, Liu, Zou, Zhang, Zhang & Raza 2019 LWT 112:108239"
+    lab: "BTBU (Song H)"
+    system: "synthetic YE peptide (Pro-Glu-Thr / Glu-Asn / Arg-Leu, which not stated) 100 umol + xylose 50 + [13C5]-xylose 50 umol + L-cysteine 50 umol, no thiamine (Group VI); volume not stated"
+    medium: "water, 'pH 6.0' (phosphate implied, strength not stated), vial sealed with aluminium foil inside a Parr high-pressure reactor"
+    temperature_c: [135]
+    ph: {initial: 6.0, measured_during: false, final: null}
+    time_min: [90]
+    species: ["MFT", "FFT", "2-methylthiophene", "ethylpyrazine"]
+    kind: ratio
+    location: "Table 3 (isotopologue %, Group VI rows); Fig. 1 ethylpyrazine spectrum"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "the following conditions: 90 min, 135 °C and pH 6.0."
+    flags: [condition_uncertain, ph_start_only, volume_not_stated, no_mh_correction, no_natural_abundance_correction, "row_sum_90: 2-methylthiophene", "row_sum_107: ethylpyrazine", "complements: alim2019_table3_group_v_vii_camola_pyrazines_furans"]
+    note: "MFT 25/34/41 (M/M+4/M+5), FFT 52/48, 2-methylthiophene 42/48: intact xylose C5 in a no-thiamine pentose + Cys pot (agrees with cerny2007b system F). M+4 is probably [M-H]+ of M+5 (shown for furfural, Fig. 2); MFT re-allocated 38:62. No thiamine share: labelled Group VIII has no rows. Ethylpyrazine row on the [M-H]+ mass axis: do not use. Labelled pot has 2x the xylose of unlabelled Group II. BTBU Song group, not independent of wang2012 / xu2013."
+  - id: alim2019_table2_sulfur_rows
+    dossier: alim2019_extraction.md
+    paper: "Alim, Song, Liu, Zou, Zhang, Zhang & Raza 2019 LWT 112:108239"
+    lab: "BTBU (Song H)"
+    system: "Groups I-IV: peptide 100 + xylose 50 umol +/- Cys 50 +/- thiamine 50 umol; and a YE paste LA00 + xylose + Cys + thiamine pot (amounts not stated)"
+    medium: "water, 'pH 6.0', foil-sealed vial in Parr reactor; YE column is a food matrix"
+    temperature_c: [135]
+    ph: {initial: 6.0, measured_during: false, final: null}
+    time_min: [90]
+    species: ["MFT", "FFT", "2-methylthiophene", "5-ethenyl-4-methylthiazole"]
+    kind: endpoint
+    location: "Table 2 (sulfur rows)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "The test was repeated three times under the same conditions."
+    flags: [condition_uncertain, ph_start_only, volume_not_stated, unit_not_printed, no_sd, single_is_no_response_factor, matrix_food, "is_concentration_inconsistent: 500 ng/g vs 0.816 ug in 8 mL", "complements: alim2019_table2_pyrazine_furan_rows"]
+    note: "IS ratio (2-methyl-3-heptanone, RF = 1), unit not printed. MFT / FFT / 2-MT only with Cys (II, IV); thiamine raises MFT 5.83 -> 18.45 and FFT 7.71 -> 249.12 (II -> IV), directional only. YE recipe and composition not printed (maybe Supplementary Table 1)."
