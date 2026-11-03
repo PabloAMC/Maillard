@@ -1263,7 +1263,7 @@ entries:
     status: open
     remedy: >-
       No change to the shipped constants (k_asn_glc 117.5, k_int1_acr 159.2: the lane already carries one value of
-      each cluster, one per step). [NOT applied 2026-11-03: the envelope bands are shipped; waits for a red team and owner sign-off.] Proposed: below 140 C (the fit window floor) declare a formation-Ea band of
+      each cluster, one per step). [Red team 2026-11-03 (acrylamide/redteam.md): this band is REFUTED as written -- edge-to-edge factors (x2.4 / x6.1 / x17.6 from the shipped centre at 140 / 120 / 100 C), rows DO move (the 130 C SPI extrusion row, TEMP-01 / TEMP-02 / ACR-02 arms), and a band only below 140 C widens only where the lane under-predicts (tuning in form, P 0.7). REPLACEMENT, awaiting the owner because every acrylamide envelope moves: refuse the lane for 60 < T < 120 C (CF-106); draw k_int1_acr's Ea uniform [95, 189] kJ/mol at all T with k(160 C) held (SECOND_LABORATORY_BAND), and k_asn_glc's Ea normal(117.5, 25.2 / 1.96); no central value moves.] Proposed: below 140 C (the fit window floor) declare a formation-Ea band of
       95-170 kJ/mol anchored at 160 C in the envelope, or refuse below 120 C; expected effect: central predictions
       unchanged, formation envelope wider by x2.7 at 140 C, x7.9 at 120 C, x26 at 100 C; no current score row moves
       (all 140-200 C). Ledger/dossier note for gokmen2012: record the estimator (not_rate_constants, mixed hold times).
@@ -3083,7 +3083,7 @@ entries:
         wet vs dry undecided (P wet 0.6).
     status: open
     remedy: >-
-      Keep AW_MULTIPLIER = 1.0. [NOT applied 2026-11-03: the envelope bands are shipped; waits for a red team and owner sign-off.] Proposed declaration changes (no constant changes): (1) the a_w window 0.34-0.99 is
+      Keep AW_MULTIPLIER = 1.0. [Red team 2026-11-03: flat multiplier upheld (P 0.75; DV's basis wet, P ~0.8); 'residual 1.01' weakened (one correlated k_F / k_E fit); 'flag out-of-window' refuted (no moisture input; out-of-window a_w DROPS the band). REPLACEMENT (no shipped number moves; NOT built: no row declares moisture): an optional moisture_wb input, > 0.35 draws the formation band (0.28, 1.39) without routing through in_window, with a 'bulk is not crust moisture' warning; and fix the out-of-window band-drop trap (owner: it changes envelopes for any out-of-window a_w).] Proposed declaration changes (no constant changes): (1) the a_w window 0.34-0.99 is
       calibrated on <= 34 % water; above ~40 % wb flag out-of-window or extend the formation band's lower edge from
       0.41 to 0.28 (95 % bound of Bassama's wet-arm residual); expected effect: no central prediction moves; for
       high-moisture plant-based matrices (55-70 % water) the formation envelope's low edge drops x0.68. (2) State that
@@ -3122,3 +3122,27 @@ entries:
       prefactor_audit.json, read by tests/unit/test_kinetic_core_b8.py) keeps the old wording. No engine number moves.
     affects:
       - {file: scripts/generators/generate_prefactor_audit.py, symbol: "unsourced: a code comment attributed"}
+
+  - id: CF-106
+    kind: conflict
+    scope: other_lane
+    sources: [gokmen2012, knol2005, devleeschouwer2009]
+    quantity: "the acrylamide lane's emergent formation Ea and yields at 90-120 C vs measured low-temperature data"
+    observation: >-
+      On Gokmen 2012's own estimator (60 min yield / hold time) the shipped lane's emergent formation Ea over 90-120 C is
+      ~296 kJ/mol against 103 in the data; its 60-min yields are x2000 low at 90 C and x15 low at 120 C (x60 at 90 C even
+      with Ea 95). results/validation/kinetic_core_b3_fit_report.md already shows the same sign: knol2005_EaF observed
+      94.4, predicted 189.5 kJ/mol. The lane's fit window is 120-200 C (temperature_range_c). Found by the acrylamide red
+      team 2026-11-03 (docs/history/conflict_resolution_2026-11-03/acrylamide/redteam.md, probes in its scratch dir).
+    explanations:
+      - "Curvature below the fit window: a second, lower-barrier route (or a different rate-limiting step) dominates below ~120 C."
+      - "Gokmen 2012's estimator inflates low-T yields relative to rate constants (partly; it halves Bassama's Ea, CF-039)."
+    tests: []
+    status: open
+    remedy: >-
+      Proposed (owner decision; changes shipped behaviour): refuse acrylamide-lane answers for 60 < T < 120 C at
+      declare_envelope / _acrylamide_warnings, keeping the near-zero at <= 60 C (TEMP-02's 25 C control). No panel arm
+      sits in 60-120 C today. Decider: acrylamide + asparagine time courses at >= 3 temperatures in 80-120 C in one
+      matrix, fitted by rate constants.
+    affects:
+      - gokmen2012_fig2b_fig3_acrylamide_temperature_ea
