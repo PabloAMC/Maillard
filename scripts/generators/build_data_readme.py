@@ -66,7 +66,7 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/lit/safety_reference_payloads.json": "43 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`.",
     "data/lit/extrusion_damage_reference_payloads.json": "4 damage-marker reference ranges (furosine, CML, CEL, LAL); `src/extrusion.py`. Merge into safety payloads planned.",
     "data/lit/retention_reference_payloads.json": "Volatile retention/release records per protein, incl. withdrawn (`unsourced_withdrawn`) rows; `src/headspace.py`, `literature_runtime`.",
-    "data/lit/process_state_calibrations.json": "26 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`.",
+    "data/lit/process_state_calibrations.json": "19 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`.",
     "data/lit/matrix_decision_panel.json": "Compound -> target class + evidence state truth table with aliases; seed of `compounds.yml`; `src/matrix_targets.py`.",
     "data/lit/matrix_family_coverage_registry.json": "The 8 canonical matrix families and what each supports; the intended closed vocabulary for `matrix_family`.",
     "data/lit/chemistry_family_scope_registry.json": "The 16 chemistry lanes as product scope (status, priority, next action).",

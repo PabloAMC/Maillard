@@ -2176,7 +2176,7 @@ entries:
     simulable: false
     condition_quote: "Amino acids by Biochrom 30+ analyser AFTER ACID HYDROLYSIS (1 g tissue, 6 M HCl, 110 °C, 24 h)"
     flags: [matrix_precursor_composition, matrix_food, status_uncertain, "conflicts_with: kim2024b"]
-    note: "Cattle CMT IMP sets the upper cultivated IMP corner of the composition BOX (src/cultivated_tissue_invariance.py). Amino acids are protein-bound %, not a free pool; wet/dry basis of Fig. 2 not stated. Cultured IMP disagrees with Kim 2024b by ~4 decades. Fig. 2 not digitised beyond 1 value."
+    note: "CF-041 (2026-11-03): Joo's TM IMP (~14 / ~24 mmol/kg) exceeds the adenine-derived pool of real meat, so its absolute scale is probably inflated; read its IMP as a ratio to its own TM. Cattle CMT IMP sets the upper cultivated IMP corner of the composition BOX (src/cultivated_tissue_invariance.py). Amino acids are protein-bound %, not a free pool; wet/dry basis of Fig. 2 not stated. Cultured IMP disagrees with Kim 2024b by ~4 decades. Fig. 2 not digitised beyond 1 value."
   - id: kim2024b_tab4_cultivated_pig_free_aa_nucleotides
     dossier: kim2024b_extraction.md
     paper: "Kim, Jung & Jo 2024 Food Sci Biotechnol 34:457"
@@ -2217,7 +2217,7 @@ entries:
     dossier: hwang2026_extraction.md
     paper: "Dashmaa, Xi, Van Ba, Dawoon & Hwang 2026 Food Sci Anim Resour 46:46 (review)"
     lab: "Chungbuk National Univ. (Hwang)"
-    system: "meat free glucose, fructose, ribose (cited from Aliani 2013, which measured chicken); resting-muscle ATP (cited from Feiner 2006)"
+    system: "meat free glucose, fructose, ribose (attributed to Aliani 2013, a chicken paper that does not contain these values); resting-muscle ATP (cited from Feiner 2006)"
     medium: "raw meat (chicken in the cited primary; the review says beef)"
     temperature_c: []
     ph: {initial: null, measured_during: false, final: null}
@@ -2230,7 +2230,7 @@ entries:
     simulable: false
     condition_quote: "Naturally, beef contains approximately 1.48, 0.33, and 0.26 mg/g of glucose, fructose, and ribose, respectively"
     flags: [matrix_precursor_composition, matrix_food, secondary_source, condition_uncertain]
-    note: "Primary Aliani et al. 2013 Meat Sci 94:55 is a CHICKEN post-slaughter paper (no dossier, no PDF); review misattributes it to beef. Once a corner of the composition BOX, superseded 2026-09-14 by Koutsidis 2008a/b and Bischof 2023; now unused."
+    note: "Read 2026-11-03 (aliani2013_extraction.md): Aliani et al. 2013 Meat Sci 94:55 is a CHICKEN breast paper and prints none of these three values (its free ribose <= 0.057 mg/g, glucose <= 0.19 mg/g, fructose not detected); the review's sentence is a wrong citation, source unresolved. Once a corner of the composition BOX, superseded 2026-09-14 by Koutsidis 2008a/b and Bischof 2023; now unused."
   - id: sun2022_tab2_meat_volatiles_relative_contents
     dossier: sun2022_extraction.md
     paper: "Sun, Wu, Soladoye, Aluko, Bak, Fu & Zhang 2022 Food Res Int 151:110823 (review)"
@@ -2812,3 +2812,487 @@ entries:
     condition_quote: "calibration curves were created to quantify the sugars"
     flags: [matrix_food, ph_start_only, quant_basis_conflict, internal_inconsistency, concentration_basis_inferred]
     note: "External-standard HPLC-RID sugars and OPA-HPLC-DAD amino acids, but the wet/dry basis of the mg/100 g rows is not stated: wet reading gives 113 % xylose recovery (> total carbohydrate), dry reading ~93 % xylose loss. Free cysteine by OPA with SD 12.03 on 16.76. Composition context only; not a consumption datum. Amino-acid LOD printed inconsistently (0.289 vs 1,358 mg/L)."
+  # ---- fang2020 : Fang 2020 (glutaminase-deamidated pea protein) (ingested 2026-11-02) ----
+  - id: fang2020_fig2_pea_protein_deamidation_degree_timecourse
+    dossier: fang2020_extraction.md
+    paper: "Fang, Xiang, Sun-Waterhouse, Cui & Lin 2020 J Agric Food Chem 68:1691 (10.1021/acs.jafc.9b06046)"
+    lab: "SCUT (Cui C / Sun-Waterhouse D)"
+    system: "commercial isoelectric pea protein isolate (74.5 % protein dry, N x 5.4), L-glutaminase EC 3.5.1.2 at 1:500 w/w enzyme:PPI"
+    medium: "PPI 1:10 w/w in deionised water, pH 9.0 with NaOH, unbuffered, shaking water bath; then pH 7.0, 90 C 10 min, freeze-dried, no dialysis"
+    temperature_c: [50]
+    ph: {initial: [9.0], measured_during: false, final: null}
+    time_min: [0, 1440]
+    species: [degree of deamidation (released / total amide ammonia), ammonia]
+    kind: time_series
+    location: "Fig. 2 (DD and per-interval increments at 0, 3, 6, 9, 12, 24 h; digitised in dossier sec. 4a); endpoints 17.89 % and 59.61 % in text, 56.1 % at 12 h in abstract; derived mM bracket in sec. 4b"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "incubated in a shaking water bath at 50 °C for different time intervals"
+    flags: [matrix_precursor_composition, matrix_food, ph_start_only, unbuffered, condition_uncertain, no_no_enzyme_control, assay_baseline_dd_17.9pct_at_t0, total_amide_not_printed, enzyme_ec_3.5.1.2_not_protein_glutaminase, "also_relevant: trunk", "also_relevant: acrylamide"]
+    note: "Only DD (%), a ratio of microdiffusion titres; neither the released nor the total ammonia is printed, so mM needs a borrowed amide-N content (dossier 4b: ~25-60 mM at ~70 g/L protein, +-40 %). One dose, one T, one start pH; no mock-processed control. Ammonia not removed before freeze-drying (retention unknown). No engine consumer: no NH3 species in src/kinetic_core."
+  # ---- zha2019 : Zha 2019 (pea hydrolysate + gum arabic, dry state) (ingested 2026-11-02) ----
+  - id: zha2019_tab1_sec_malls_pph_gum_arabic_conjugate_molar_mass
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "PPI, PPH, gum arabic, PPH+GA 1:4 mixture (0 d) and glyco-PPH after 1 / 3 / 5 d at 60 C / 79 % RH"
+    medium: "10 mM PBS pH 7.0, soluble fraction after 2000 g and 0.45 um filtration; SEC-UV-RI-MALLS, 22 C"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [Mw, Mn, Rg, Mw/Mn, mass fraction, N gum arabic per PPH]
+    kind: endpoint
+    location: "Table 1 (16 fraction rows; dossier sec. 4a); N ~1.2 in text and abstract"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The gum arabic refractive index increment (dn/dc) was set at 0.141 mL/g"
+    flags: [single_dndc_for_protein_and_polysaccharide, insoluble_fraction_discarded, n_not_a_graft_ratio, n_exceeds_available_ga, mass_recovery_column_over_100, no_viscometry_no_mark_houwink]
+    note: "The only real numbers behind the three repo records jafc_2019_ref21_pea_gum_arabic_architecture_* (whose values are not in the paper; dossier sec. 6). Fraction-1 Mw 2.48 MDa (0 d) -> 4.17 (1 d) -> 3.66 -> 3.36 MDa."
+  - id: zha2019_tab2_nonlipid_beany_markers_dry_incubation
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "PPH, gum arabic, PPH+GA 1:4 (0 d) and glyco-PPH 1 / 3 / 5 d (60 C, 79 % RH, open jar)"
+    medium: "powder, HS-SPME-GC-MS (parameters in Zha 2019 Food Hydrocoll ref. 16), external standard calibration"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [3-methyl-1-butanol, acetophenone]
+    kind: time_series
+    location: "Table 2 rows 2 and 6 (dossier sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [unit_footnote_contradicts_text, basis_per_sample_or_per_pph_unclear, no_heated_pph_alone_control, open_vessel, "also_relevant: matrix", "complements: zha2019_tab2_lipid_beany_markers_dry_incubation"]
+    note: "Alcohol and aryl ketone that cannot react with amines fall by the same ~60-67 % in day 1 as hexanal: evidence for physical loss over Maillard consumption."
+  - id: zha2019_si_tabs1_95_volatiles_glyco_pph
+    dossier: zha2019_extraction.md
+    paper: "Zha, Yang, Rao & Chen 2019 J Agric Food Chem 67:10195"
+    lab: "North Dakota State Univ. (Chen B / Rao J)"
+    system: "PPH, GA, PPH+GA (0 d), glyco-PPH 1 / 3 / 5 d"
+    medium: "powder, HS-SPME-GC-MS, relative content normalised to E-2-octenal"
+    temperature_c: [60]
+    ph: {initial: [7.0], measured_during: false, final: null}
+    time_min: [0, 1440, 4320, 7200]
+    species: [alkylpyrazines, 2-methylthiophene, 2-ethylthiophene, benzaldehyde, furfural, 5-methylfurfural, "4,5-dihydro-5-alkyl-2(3H)-furanones"]
+    kind: time_series
+    location: "Supporting Information Table S1 (ACS, DOI 10.1021/acs.jafc.9b04099); main text names compounds only"
+    status: supplement_missing
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: ""
+    flags: [supplement_missing, internal_standard_normalised_only, open_vessel]
+    note: "95 volatiles (7 pyrazines, 2 thiophenes); pyrazines/Strecker aldehydes rise with time per text. Needed only if a dry-state protein-polysaccharide pyrazine check is wanted."
+  # ---- aliani2013 : Aliani 2013 (chicken breast nucleotides and sugars post-slaughter) (ingested 2026-11-03) ----
+  - id: aliani2013_tab2_chicken_breast_nucleotides_sugars_chilled_storage
+    dossier: aliani2013_extraction.md
+    paper: "Aliani, Farmer, Kennedy, Moss & Gordon 2013 Meat Sci 94:55"
+    lab: "AFBI Belfast (Farmer)"
+    system: "raw chicken breast (M. pectoralis major), Ross 308, 6 birds sampled repeatedly"
+    medium: "raw muscle, whole overwrapped carcass held at 4 +/- 1 C; no heating"
+    temperature_c: [4]
+    ph: {initial: [6.19], measured_during: true, final: [6.33]}
+    time_min: [240, 12000]
+    species: [ATP, ADP, AMP, IMP, inosine, hypoxanthine, ribose, ribose phosphate, glucose, glucose phosphate]
+    kind: time_series
+    location: "Table 2 (umol/g wet weight, means of 6, pooled SEM; transcribed in dossier sec. 4b); Figs. 4-5 replot it"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "held at 4 +/- 1 C until the end of the experiment (200 h)"
+    flags: [matrix_precursor_composition, matrix_food, moisture_not_reported, enzymatic_not_thermal]
+    note: "CHICKEN breast precursor pools over the retail window (4-200 h post-slaughter). Fructose not detected. Phosphates are isomer sums (R5P, G6P dominant), CV 36-39 %. Stressed birds (pHu 6.2-6.3). Could set a chicken column of the composition BOX (none exists); IMP loss / Hx gain give 4 C enzymatic rates only."
+  - id: aliani2013_tab1_chicken_breast_nucleotides_sugars_processing_line
+    dossier: aliani2013_extraction.md
+    paper: "Aliani, Farmer, Kennedy, Moss & Gordon 2013 Meat Sci 94:55"
+    lab: "AFBI Belfast (Farmer)"
+    system: "raw chicken breast, Ross 308, 3 processing stages x 6 different birds"
+    medium: "raw muscle on a commercial line (air 15 C, then 7-8 C, then 1-2 C); frozen ~15, 33, 123 min"
+    temperature_c: [15, 8, 2]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [15, 33, 123]
+    species: [ATP, ADP, AMP, IMP, inosine, hypoxanthine, ribose, ribose phosphate, glucose, glucose phosphate]
+    kind: endpoint
+    location: "Table 1 (umol/g wet weight, means of 6, pooled SEM; transcribed in dossier sec. 4a)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "sample freezing times post-slaughter of ca. 15, 33 and 123 min"
+    flags: [matrix_precursor_composition, matrix_food, moisture_not_reported, condition_uncertain]
+    note: "Pre-rigor chicken breast; different extraction method and birds from Table 2 (total nucleotides 14.3 vs 8.6 umol/g), do not splice. Stage time labels inconsistent in the text (7/25/115 sampled vs 10/20/115 in discussion)."
+  # ---- munch1997 : Muench, Hofmann & Schieberle 1997 (yeast-extract odorants; FFT model pots) (ingested 2026-11-03) ----
+  - id: munch1997_tab3_7_9_yeast_free_amino_acids
+    dossier: munch1997_extraction.md
+    paper: "Muench, Hofmann & Schieberle 1997 J Agric Food Chem 45:1338"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "commercial baker's-yeast extract, self-prepared autolysate (24 h 50 C, NaCl), LMW (<1000 Da) fractions of fresh and fermented (NaCl + nutrients, 12 h 32 C) baker's yeast"
+    medium: "dry materials, analysed before heating (heated 1:5 w/v in tap water, 145 C / 20 min)"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [free amino acids (15), cysteine]
+    kind: other
+    location: "Tables 3, 7, 9 (dossier secs. 4c, 4g, 4i)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Concentrations are based on the dry weight of baker's yeast or the commercial yeast extract"
+    flags: [matrix_food, no_replicates, "table9_glycine_histidine_rows_identical", "also_relevant: sulfur"]
+    note: "Precursor composition (ninhydrin analyser; Cys as pyridylethyl-Cys). No sugars, ribose, nucleotides, thiamine, Glu/Asp. Odorants of these pots are FD only (Tables 1, 2, 8); SIDA amounts in munch1998 (different water ratio, 1 + 3 w/w)."
+  # ---- munch1998 : Muench & Schieberle 1998 (yeast-extract odorants by SIDA; Strecker pots at 145 C) (ingested 2026-11-03) ----
+  - id: munch1998_tab3_4_5_yeast_extract_odorants
+    dossier: munch1998_extraction.md
+    paper: "Muench & Schieberle 1998 J Agric Food Chem 46:4695"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "commercial yeast extract, self-prepared autolysate, LMW (<1000 Da) baker's-yeast fractions I / II; 1 + 3 w/w in water"
+    medium: "aqueous slurry, unbuffered, pH not stated; laboratory autoclave"
+    temperature_c: [145]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20]
+    species: [3-methylbutanal, 2-methylbutanal, methional, phenylacetaldehyde, 2-acetyl-1-pyrroline, "2,3-diethyl-5-methylpyrazine", "2,3-butanedione", furaneol, sotolon, 2-acetyl-2-thiazoline, 3-methylbutanoic acid, 2-methylbutanoic acid, phenylacetic acid, 2-phenylethanol, 3-methylbutanol]
+    kind: endpoint
+    location: "Tables 3, 4, 5 non-sulfur rows; Table 7 (dossier secs. 4c, 4d, 4f, 4j)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "The freeze-dried material (5-50 g) was suspended in water (1 + 3 by weight) and thermally treated for 20 min at 145 °C"
+    flags: ["complements: munch1998_tab3_4_5_yeast_extract_thiols", matrix_food, composition_incomplete, dry_weight_basis, isomer_standard_for_2_methylbutanal, "also_relevant: trunk"]
+    note: "Apparent amino-acid -> Strecker aldehyde conversions 0.016-0.037 % (CYE), 0.06-0.20 % (LMW-YE) [dossier sec. 4j]: a plausibility band for matrix Strecker yields, not a simulable pot (no sugars, dicarbonyls, pH)."
+  - id: munch1998_tab6_7_yeast_amino_acids_fermentation
+    dossier: munch1998_extraction.md
+    paper: "Muench & Schieberle 1998 J Agric Food Chem 46:4695"
+    lab: "DFA Garching (Hofmann / Schieberle)"
+    system: "LMW fraction of baker's yeast after 12 h at 32 C under O2 in nutrient medium +- glucose 100 g/L +- NaCl 35 g/L; plus CYE and SPYE"
+    medium: "dry materials, before heating"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [proline, ornithine, leucine, isoleucine, methionine, phenylalanine]
+    kind: other
+    location: "Tables 6, 7 (dossier secs. 4e, 4f)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Based on dry weight. Data are mean values of triplicates."
+    flags: [matrix_food, "lmw_ye_i_fresh_vs_control_fermentation_conflict", "cye_values_reused_from_munch1997_basis_changed"]
+    note: "Precursor composition for the Table 5 / 7 correlation (Orn x14 -> 2-AP x6.6; Leu x5 -> 3-methylbutanal x8). Six amino acids only; no SD printed."
+  # ---- alim2019 : Alim et al. 2019 (CAMOLA [13C5]-xylose + yeast-extract peptides) (ingested 2026-11-03) ----
+  - id: alim2019_table3_group_v_vii_camola_pyrazines_furans
+    dossier: alim2019_extraction.md
+    paper: "Alim, Song, Liu, Zou, Zhang, Zhang & Raza 2019 LWT 112:108239"
+    lab: "BTBU (Song H)"
+    system: "synthetic YE peptide 100 umol + xylose 50 + [13C5]-xylose 50 umol (Group V); + thiamine 50 umol (Group VII); volume not stated"
+    medium: "water, 'pH 6.0', foil-sealed vial in Parr reactor"
+    temperature_c: [135]
+    ph: {initial: 6.0, measured_during: false, final: null}
+    time_min: [90]
+    species: [methylpyrazine, "2,5-dimethylpyrazine", "2,6-dimethylpyrazine", "2-ethyl-5-methylpyrazine", trimethylpyrazine, furfural, 2-methylfuran, 2-acetylfuran, "4-(2-furanyl)-3-buten-2-one", 2-furanmethanol, "5-ethenyl-4-methylthiazole"]
+    kind: ratio
+    location: "Table 3 (Group V and VII rows); Fig. 2 furfural spectrum (digitised, dossier sec. 4c)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "A 1:1 fully labeled and unlabeled D-xylose, was selected"
+    flags: [condition_uncertain, ph_start_only, volume_not_stated, no_mh_correction, no_natural_abundance_correction, text_ratios_contradict_table, "row_sum_111: 2-ethyl-5-methylpyrazine", "row_sum_110: 2-acetylfuran", "complements: alim2019_table3_group_vi_camola_xylose_isotopomers"]
+    note: "Pyrazine carbon from xylose C2/C3 modules: methylpyrazine 18/23/25/34 (M/M+2/M+3/M+5) and 2,5-DMP 22/48/30 (M/M+3/M+6) near binomial 1:1 expectations; 2,6-DMP, 2-ethyl-5-methylpyrazine, trimethylpyrazine fit no simple module model. No N tracing. Furan M+4 = [M-H]+ of M+5 (Fig. 2). Thiazole 100 % unlabelled (thiamine). Labelled pots carry 2x the xylose of Groups I-IV."
+  - id: alim2019_table2_pyrazine_furan_rows
+    dossier: alim2019_extraction.md
+    paper: "Alim, Song, Liu, Zou, Zhang, Zhang & Raza 2019 LWT 112:108239"
+    lab: "BTBU (Song H)"
+    system: "Groups I-IV (peptide + xylose +/- Cys +/- thiamine) and a YE paste pot, as alim2019_table2_sulfur_rows"
+    medium: "water, 'pH 6.0', foil-sealed vial in Parr reactor; YE column is a food matrix"
+    temperature_c: [135]
+    ph: {initial: 6.0, measured_during: false, final: null}
+    time_min: [90]
+    species: [pyrazines (9), furans, 2-methylbutanal, benzaldehyde, hexanal, octanal, nonanal, 2-acetylpyrrole, indole]
+    kind: endpoint
+    location: "Table 2 (non-sulfur rows)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "The test was repeated three times under the same conditions."
+    flags: [condition_uncertain, ph_start_only, volume_not_stated, unit_not_printed, no_sd, single_is_no_response_factor, matrix_food, "cell_outlier: 2,5-dimethylfuran Group I 20742697.3", "lipid_aldehydes_in_lipid_free_pot: Group IV hexanal 1380", "complements: alim2019_table2_sulfur_rows"]
+    note: "Directional only. 3-ethyl-2,5-DMP dominates every peptide pot (818-33465); 2-ethyl-3,5- and 3-ethyl-2,5-DMP share RI 1427. Text counts (31 YE compounds, 12 in Group I) do not match the table (29, 10)."
+  # ---- kavitha2007 (ingested 2026-11-03) ----
+  - id: kavitha2007_tab3_chicken_muscle_fibre_imp_inosine_hx
+    dossier: kavitha2007_extraction.md
+    paper: "Kavitha & Modi 2007 LWT 40:1280"
+    lab: "CFTRI Mysore (Modi)"
+    system: "Indian country hen breast and leg: fresh muscle and 8x-phosphate-washed freeze-dried fibre"
+    medium: "raw muscle / dry fibre powder (moisture 3.25-3.50 g/100 g); no heating"
+    temperature_c: []
+    ph: {initial: [5.56, 5.49, 6.21, 6.43], measured_during: false, final: null}
+    time_min: []
+    species: [IMP, inosine, hypoxanthine]
+    kind: endpoint
+    location: "Table 3 (mg/100 g, mean +- SD n = 4); dossier sec. 4a"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Values are mean ± S.D. (n = 4)"
+    flags: [matrix_precursor_composition, matrix_food, basis_wet_vs_dry_not_stated, no_recovery_reported]
+    note: "Chicken nucleotide pools (layer hen). Abstract prints breast-fibre IMP 5.1 +- 1.20 vs Table 3 5.99 +- 0.24. Engine has no IMP species."
+  - id: kavitha2007_fig1_fig2_imp_inosine_hx_aw_temperature_1h
+    dossier: kavitha2007_extraction.md
+    paper: "Kavitha & Modi 2007 LWT 40:1280"
+    lab: "CFTRI Mysore (Modi)"
+    system: "washed freeze-dried chicken breast or leg fibre 7 g + IMP 120 mg/100 g (or none, control), 2 g in 5 mL screw-cap tube"
+    medium: "0.2 M pyrophosphate pH 5.8, 20 / 110 / 620 uL per 7 g fibre for nominal a_w 0.70 / 0.80 / 0.90 (~0.24 / 0.26 / 0.33 g water/g dry)"
+    temperature_c: [80, 120]
+    ph: {initial: [5.8], measured_during: false, final: null}
+    time_min: [60]
+    species: [IMP, inosine, hypoxanthine]
+    kind: endpoint
+    location: "Figs. 1A/1B (breast), 2A/2B (leg), bars read at 200 dpi; text reduction percentages pp. 1283-1285; dossier sec. 4b-4c"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "subjected to heat treatment for 1 h of 80 °C in a water bath"
+    flags: [single_time_point, no_recovery_control, figure_panels_duplicated_1A_2A_products, aw_nominal_not_measured, abstract_describes_control_panels, mass_balance_2_to_4_mol_pct, "also_relevant: trunk"]
+    note: "IMP 93-98 % lost in 1 h at 80 and 120 C in every cell; a_w effect < 10 % in apparent k; apparent Ea 7-10 kJ/mol; 300-600x the aqueous hydrolysis rate (Matoba 1988) at 80 C. Not a rate constant: recovery artefact or enzymatic loss likely. Not usable for B54. No ribose / R5P measured."
+  # ---- koruda1997 (ingested 2026-11-03) ----
+  - id: koruda1997_tab2_gsh_yeast_extract_thiols
+    dossier: koruda1997_extraction.md
+    paper: "Kuroda, Nagaba, Tsubuku, Kawajiri & Ueda 1997 Food Sci Technol Int Tokyo 3:239 (file stem koruda1997)"
+    lab: "Ajinomoto Food Research Labs (Kuroda / Ueda)"
+    system: "four commercial glutathione-enriched yeast extracts (brands A-D, Japan), unheated"
+    medium: "product dissolved in water (about 1 mg/mL), metaphosphoric acid / EDTA, neutralised with KOH"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [glutathione, gamma-glutamylcysteine, cysteine]
+    kind: other
+    location: "Table 2 (g/100 g; transcribed with molar conversions in dossier sec. 4a); Table 1 recoveries (sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "commercial GSH-YE purchased from four manufacturers (A-D)"
+    flags: [matrix_precursor_composition, matrix_food, reduced_thiols_only, basis_as_sold_moisture_not_reported, no_sd_per_brand, gsh_enriched_products_only, "also_relevant: sulfur"]
+    note: "GSH 0.46-5.02, gamma-Glu-Cys 0.057-0.50, free Cys 0.020-1.71 g/100 g product (HPLC, post-column NAM fluorescence, external standards, recovery 95.6-98.8 %). Reduced forms only (no GSSG, cystine). Product-to-product band for GSH-enriched YE (the class Raza 2020 heated), not for ordinary autolysed YE."
+  # ---- jacob2019 (ingested 2026-11-03) ----
+  - id: jacob2019_tab2_tab3_spent_yeast_extract_composition
+    dossier: jacob2019_extraction.md
+    paper: "Jacob, Striegel, Rychlik, Hutzler & Methner 2019 Eur Food Res Technol 245:1169"
+    lab: "TU Berlin Brewing (Jacob / Methner)"
+    system: "freeze-dried extracts of spent brewer's yeast TUM 68 (cell mill, sonotrode, autolysis 24 h 50 C) + one industrial autolysed yeast extract"
+    medium: "dry powders, analysed unheated (moisture 6.8-11.3 %)"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [free amino acids (sum), total amino acids (sum), free alpha-amino nitrogen, glucose, fructose, trehalose, glycogen, RNA, thiamine]
+    kind: other
+    location: "Table 2 (mg/g dw) and Table 3 (mg/100 g dw), mean +- 95 % CL, n = 3 (transcribed in dossier secs. 4a, 4b)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "a yeast extract powder was produced ... that had a residual water content of 10%"
+    flags: [matrix_precursor_composition, matrix_food, dry_weight_basis, amino_acids_sums_only, no_ribose_no_nucleotides, industrial_product_origin_unknown, "biotin_b12_units_implausible"]
+    note: "Reducing sugars low (glucose 1.7-3.2, fructose 0.5-1.0 mg/g dw); thiamine 5.2-7.5 mg/100 g dw; RNA 49-55 mg/g dw total (no 5'-nucleotides). Autolysis doubles free amino acids (306 vs 116-155 mg/g). Individual amino acids in the companion paper 10.1007/s00217-018-3143-z (read 2026-11-03: jacob2018_figs3_5_free_amino_acids_by_disruption_method)."
+  - id: jacob2019_fig4_glutathione_by_disruption_method
+    dossier: jacob2019_extraction.md
+    paper: "Jacob, Striegel, Rychlik, Hutzler & Methner 2019 Eur Food Res Technol 245:1169"
+    lab: "TU Berlin Brewing (Jacob / Methner)"
+    system: "as jacob2019_tab2_tab3_spent_yeast_extract_composition"
+    medium: "dry powders, analysed unheated"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [glutathione (Ellman total thiol)]
+    kind: other
+    location: "Fig. 4 stacked bars (digitised, +-0.15 mg/g, dossier sec. 4c)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "after reacting with Ellman's reagent ... the absorption was measured spectrophotometrically at 412 nm"
+    flags: [matrix_precursor_composition, matrix_food, dry_weight_basis, nonspecific_thiol_assay, figure_read, "also_relevant: sulfur"]
+    note: "GSH-equivalent thiol 12.9 / 13.2 mg/g dw (cell mill / sonotrode) vs 1.2 (lab autolysis) and 1.9 (industrial autolysate): autolysis loses ~90 %. DTNB reads all free SH (GSH, gamma-Glu-Cys, Cys), so an upper bound on reduced GSH."
+  # ---- tome2021 (ingested 2026-11-03) ----
+  - id: tome2021_tab1_tab2_yeast_extract_typical_composition
+    dossier: tome2021_extraction.md
+    paper: "Tome 2021 ACS Food Sci Technol 1:487 (review)"
+    lab: "AgroParisTech / INRAE (Tome D.), review"
+    system: "'typical' dried Saccharomyces cerevisiae yeast extract (Table 2); dried yeast, dried yeast extract, yeast-extract paste (Table 1)"
+    medium: "dry product / paste as sold; no production method per column"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [free amino acids (18), total amino acids (18), cystine, sugar, thiamine]
+    kind: other
+    location: "Table 2 (g/100 g DM; transcribed in dossier sec. 4a); Table 1 rows (per 100 g; sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "Typical Total and Free Amino Acid Content of Dried Saccharomyces cerevisiae Yeast Extract"
+    flags: [matrix_precursor_composition, matrix_food, review_compilation, sources_not_per_value, row_sums_do_not_match_totals, text_contradicts_table, no_free_cysteine_only_cystine, no_ribose_no_nucleotides_no_gsh]
+    note: "Secondary: Table 2 from refs 27, 28, 30, 31 (Podpora 2015/2016, Rozmierska 2001, Jacob, Hutzler & Methner 2019 EFRT 245:95) without per-value attribution. Free sum 34.6 (rows 34.3), total 48.0 (rows 48.7) g/100 g DM. Plausibility band only; key the primaries instead when ingested."
+  # ---- mahadevan2006 (ingested 2026-11-03) ----
+  - id: mahadevan2006_tab5_yeast_extract_precursors
+    dossier: mahadevan2006_extraction.md
+    paper: "Mahadevan & Farmer 2006 J Agric Food Chem 54:7242"
+    lab: "AFBI Belfast (Farmer)"
+    system: "three commercial S. cerevisiae yeast-extract pastes A, B, C (batch of A not stated)"
+    medium: "pastes as sold, before any further heating"
+    temperature_c: []
+    ph: {initial: 5.1, measured_during: false, final: null}
+    time_min: []
+    species: [thiamine, "5'-IMP", "5'-GMP", "5'-CMP", "5'-UMP", "5'-AMP", "5'-ADP", "5'-ATP", "2'-AMP", "3'-AMP", "3'-GMP", inosine, guanosine, adenosine, ribose, xylose, fructose, glucose]
+    kind: other
+    location: "Table 5 (dossier sec. 4d)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "quantities are quoted without correction for recovery"
+    flags: [matrix_food, dry_weight_basis, composition_incomplete, "ribose_recovery_72pct_uncorrected", "cmp_lettering_inconsistent_with_sem", "batch_of_paste_a_not_stated", "also_relevant: sulfur", "also_relevant: trunk"]
+    note: "mg/100 g DW, HPLC external standards, duplicate, SEM. Free reducing sugars only ~0.03 % DW while ribonucleotides + nucleosides ~5 % DW: a nucleotide-ribose pool for MFT. No amino acids, Cys, peptides. Complements munch1997/1998 (amino acids, no sugars or nucleotides)."
+  # ---- alim2018 (ingested 2026-11-03) ----
+  - id: alim2018_tab2_tab3_strecker_pyrazine_temperature
+    dossier: alim2018_extraction.md
+    paper: "Alim, Song, Liu, Zou, Zhang & Zhang 2018 J Sci Food Agric 98:3774"
+    lab: "BTBU (Song H)"
+    system: "yeast-extract paste LA00 (Angel Yeast) 6 g + 30 mL water"
+    medium: "unbuffered water, foil-sealed vial in Parr high-pressure reactor; food matrix"
+    temperature_c: [25, 100, 110, 120, 130, 140]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: [2-methylbutanal, 3-methylbutanal, methional, benzaldehyde, methylpyrazine, "2,6-dimethylpyrazine", trimethylpyrazine, "2-ethyl-5-methylpyrazine", "2-ethyl-3,6-dimethylpyrazine", "2,6-diethyl-3-methylpyrazine", "2,5-dimethyl-3-(3-methylbutyl)pyrazine"]
+    kind: endpoint
+    location: "Table 2 (SPME) and Table 3 (SAFE) (dossier secs. 4c, 4d)"
+    status: digitised_in_dossier
+    quant_class: semi_quantitative
+    simulable: false
+    condition_quote: "let it react at different temperatures (100 C, 110 C, 120 C, 130 C, 140 C) for 1 h"
+    flags: [matrix_food, ph_not_stated, single_is_no_response_factor, unit_basis_not_stated, "spme_vs_safe_10x_disagreement", "pyrazine_rows_non_monotonic", "identification_doubtful_rows", accepted_manuscript_not_vor, "phenylacetaldehyde_not_in_tables", "complements: alim2018_tab2_tab3_sulfur_volatiles_temperature", "also_relevant: trunk"]
+    note: "Strecker aldehydes rise 5-20x from 25 to 140 C (3-methylbutanal 5.28 -> 103.07 ug/L SPME); methional peaks at 120 C. Order-of-magnitude vs Muench 1998 CYE within x2-5 after an assumed x5-8 basis conversion (dossier sec. 1 ans. 5)."
+  - id: alim2018_tab1_fig1_yeast_extract_precursors_temperature
+    dossier: alim2018_extraction.md
+    paper: "Alim, Song, Liu, Zou, Zhang & Zhang 2018 J Sci Food Agric 98:3774"
+    lab: "BTBU (Song H)"
+    system: "yeast-extract paste LA00 (Angel Yeast) 3 g + 15 mL water"
+    medium: "unbuffered water, foil-sealed vial in Parr high-pressure reactor; food matrix"
+    temperature_c: [25, 100, 110, 120, 130, 140]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: [free amino acids (15), cysteine, ornithine, thiamine, "5'-CMP", "5'-GMP", "5'-IMP", "5'-AMP", peptide MW classes]
+    kind: endpoint
+    location: "Table 1 (amino acids, g/kg); Fig. 1a, 1b, 1d (digitised, dossier sec. 4b); nucleotide 25 / 140 C values in text"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "let it react in particular temperatures ... for 1 h"
+    flags: [matrix_food, ph_not_stated, unit_basis_not_stated, "amino_acid_losses_implausible_leu_minus56pct_100C", "thiamine_unit_ng_per_g_doubtful", "anova_letters_inconsistent_met_phe", accepted_manuscript_not_vor, "also_relevant: sulfur"]
+    note: "Only printed composition of LA00 (alim2019 prints none). 5'-IMP 0.733 -> 0.155 mg/g after 1 h at 140 C (apparent k 0.0025-0.026 /min, 100-140 C, Ea ~75 kJ/mol two-point, isothermal assumed) [dossier Z]. Cys -29 % at 140 C."
+  # ---- devaere2022 (ingested 2026-11-03) ----
+  - id: devaere2022_tab1_myoglobin_dose_pyrazines_strecker
+    dossier: devaere2022_extraction.md
+    paper: "Devaere, De Winne, Dewulf, Fraeye, Soljic, Lauwers, de Jong & Sanctorum 2022 Foods 11:1985"
+    lab: "KU Leuven Ghent (Fraeye) / Paleo (Sanctorum)"
+    system: "TSP 25 % + sunflower oil 15 % + methylcellulose 1 % + salt 1.5 % + water 57.5 %, bovine myoglobin 0 / 0.5 / 1.0 % on top; raw vs oven-cooked; no added sugar or amino acid"
+    medium: "30 g patties, combi oven 250 C air 12 min (core T not measured); HS-SPME DVB/CAR/PDMS 3 g in 20 mL vial, 45 C 20 + 40 min"
+    temperature_c: [250]
+    ph: {initial: [], measured_during: false, final: null}
+    time_min: [12]
+    species: [methylpyrazine, 2,5-dimethylpyrazine, 2-ethyl-6-methylpyrazine, 2-ethyl-5-methylpyrazine, 2,5-dimethyl-3-ethylpyrazine, 2-methyl-3,5-diethylpyrazine, 2-methylbutanal, 3-methylbutanal, benzaldehyde, furfural, furfuryl alcohol, pyrrole, maltol, guaiacol, 2-methoxy-4-vinylphenol]
+    kind: endpoint
+    location: "Table 1 pp. 5-7 (n = 3, AU x 10^3, Tukey letters; dossier sec. 4a, 4c)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "baked for 12 min at 250 °C in an oven"
+    flags: [matrix_food, peak_area_only, ph_not_stated, air_headspace, condition_uncertain, no_heme_species_in_engine, spme_fibre_competition_suspected, industry_authored, "complements: devaere2022_tab1_myoglobin_dose_lipid_volatiles"]
+    note: "Pyrazines carried in by the extruded TSP (raw ~300 AU, Mb-independent); cooking x12, and Mb raises cooked pyrazines x1.33/x2.24 while 2-/3-methylbutanal fall x0.38. No sulfur compound detected in any arm. Peak areas only; one cooking condition."
+  # ---- kondjoyan2016 (ingested 2026-11-03) ----
+  - id: kondjoyan2016_tab3_crust_haa_jet_temperature_time
+    dossier: kondjoyan2016_extraction.md
+    paper: "Kondjoyan, Chevolleau, Portanguen, Molina, Ikonic, Clerjon & Debrauwer 2016 Food Chem 213:641"
+    lab: "INRA Clermont QuaPA (Kondjoyan)"
+    system: "beef Longissimus thoracis cylinder 48 mm x 50-55 mm, top face under a hot-air jet; crust + <0.5 mm non-brown margin analysed"
+    medium: "whole muscle (composition not printed), open air jet, nozzle 36 mm, humidity and velocity not stated"
+    temperature_c: [124, 210]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [20, 90]
+    species: [MeIQx, IQx, "4,8-DiMeIQx", PhIP, MeIQ, DMIP, Glu-P-2]
+    kind: time_series
+    location: "Table 3 (11 conditions, 4 jet T x 2-3 times), transcribed in dossier sec. 4a"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "air temperature at the pipe outlet was either 160, 190, 225, or 260 °C"
+    flags: ["also_relevant: thermal_history", temperature_is_air_jet_not_product, product_T_not_reported, basis_ng_per_g_freeze_dried_crust, crust_mass_not_reported, analogue_internal_standard_TriMeIQx, replicates_analytical_only, text_35x_claim_contradicts_table, sixty_min_runs_missing, "also_relevant: thermal_history"]
+    note: "HAAs, not Maillard aroma; the engine has no HAA species. Use only as a thermal-history sanity check (reacting layer far colder than air; HAAs track crust thickness). Apparent Ea vs jet T ~92 kJ/mol [Z], not to be carried."
+  - id: kondjoyan2016_fig2_creatine_depth_profile
+    dossier: kondjoyan2016_extraction.md
+    paper: "Kondjoyan, Chevolleau, Portanguen, Molina, Ikonic, Clerjon & Debrauwer 2016 Food Chem 213:641"
+    lab: "INRA Clermont QuaPA (Kondjoyan)"
+    system: "same beef cylinder, 192 C jet, 60 min; slices at 2.5-20 mm depth"
+    medium: "whole muscle"
+    temperature_c: [192]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: [creatine]
+    kind: endpoint
+    location: "Fig. 2 (5 bars, digitised +-0.03 g/100 g DM, dossier sec. 4b); Table 2 present-study rows (raw, 192 C/20 min, 210 C/90 min)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Creatine content was measured on meat cylinders exposed to the hot air jet at 192 °C"
+    flags: ["also_relevant: thermal_history", figure_only_digitised, creatinine_not_measured, slice_count_text_vs_figure, table2_basis_not_stated]
+    note: "Precursor depletion toward the surface (1.85 -> 0.70 g/100 g DM in the top 2.5 mm). A depth-resolved precursor gradient, the only one on disk for a roast; meat-only (creatine has no plant analogue)."
+  # ---- sprague2011 (ingested 2026-11-03) ----
+  - id: sprague2011_fig10_salmon2000_total_haa_vs_pan_temperature
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (data re-plotted from Salmon et al. 2000 J Natl Cancer Inst 92:1773)"
+    lab: "LLNL (Felton / Knize)"
+    system: "thawed 20 % fat ground-beef patty, R 45 mm x 15 mm, pan-fried to centre 70.6 C, flipped once (300 s) or every 60 s"
+    medium: "whole patty, open pan, air 20 C"
+    temperature_c: [160, 250]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [6.0, 8.9]
+    species: [total_HAA]
+    kind: endpoint
+    location: "Fig. 10 (individual patties, log axis, digitised +-12 %, dossier sec. 4d); Ea 25.3 kcal/mol in sec. 4.3 text"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "pan-fried with various initial pan temperatures until the center temperature reached 70.6 °C"
+    flags: ["also_relevant: thermal_history", secondary_replot, temperature_is_initial_pan_T, haa_species_not_named, basis_uncooked_meat_per_nomenclature, model_normalised_at_160C, A_not_reported, zero_order_rate_law, "also_relevant: thermal_history"]
+    note: "Apparent Ea of total HAAs: 105.9 kJ/mol with this transport model vs 75.3 kJ/mol with Tran 2002's (same data). An Ea from cooked food depends on the thermal model behind it. No HAA chemistry in the engine."
+  # ---- jacob2018 (ingested 2026-11-03) ----
+  - id: jacob2018_figs3_5_free_amino_acids_by_disruption_method
+    dossier: jacob2018_extraction.md
+    paper: "Jacob, Hutzler & Methner 2018 Eur Food Res Technol 245:95 (online 2018, issue 2019)"
+    lab: "TU Berlin Brewing (Jacob / Methner)"
+    system: "freeze-dried extracts of spent brewer's yeast TUM 68 (cell mill, sonotrode, autolysis 24 h 50 C) + one industrial autolysed yeast extract"
+    medium: "dry powders (~10 % water), resuspended in water, analysed unheated within 12 h"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [Gln, His, Val, Ile, Leu, Pro, Cys, Asp, Glu, Asn, Ser, Gly, Thr, Ala, Arg, Tyr, Met, Trp, Phe, Lys, GABA, ornithine]
+    kind: other
+    location: "Figs. 3-5 bar charts (mg/g dry mass, mean +- 95 % CI, n = 3), digitised from vector paths in dossier secs. 4a-4b"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The free amino acids (except proline and cysteine) were quantified using ... HPLC"
+    flags: [matrix_precursor_composition, matrix_food, dry_weight_basis, figure_read, cys_redox_state_unknown, industrial_product_no_replicate_error, individual_sum_differs_from_printed_sum, "also_relevant: sulfur"]
+    note: "Free Cys 4.0 / 6.1 / 10.0 / 13.0 and Met 3.0 / 5.2 / 9.1 / 11.3 mg/g dw (CM / S / A / IP); autolysis frees x2-5 more of most amino acids. Lab-autolysate free Cys (82 umol/g) is >20x the companion's DTNB thiol, so treat it as cyst(e)ine total, not reduced Cys."
+  - id: jacob2018_figs6_8_tab2_total_amino_acids_and_protein
+    dossier: jacob2018_extraction.md
+    paper: "Jacob, Hutzler & Methner 2018 Eur Food Res Technol 245:95 (online 2018, issue 2019)"
+    lab: "TU Berlin Brewing (Jacob / Methner)"
+    system: "as jacob2018_figs3_5_free_amino_acids_by_disruption_method"
+    medium: "dry powders, acid-hydrolysed for total amino acids; Bradford protein"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [total amino acids (19 individual, no Trp), protein (Bradford), free amino acids (sum), total amino acids (sum)]
+    kind: other
+    location: "Figs. 6-7 (individual totals), Fig. 8 (protein / free / total sums), Table 2 (essential amino acids per g total amino acid), dossier secs. 4c-4e"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The resuspended yeast extracts underwent acid hydrolysis to determine all free and protein-bound amino acids"
+    flags: [matrix_precursor_composition, matrix_food, dry_weight_basis, figure_read, total_gln_asn_after_acid_hydrolysis_implausible, tab2_met_cys_is_met_only, nominal_error_bars]
+    note: "Totals do not differ by disruption method (ANOVA p > 0.05) except Glu; total amino acids 44-45 % dm (lab extracts), 63 % (industrial). Bradford protein 32 / 29 / 5 / 10 % dm misses < 3 kDa peptides in autolysates."

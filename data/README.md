@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **804**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **841**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -60,7 +60,7 @@ Literature-derived constants, priors, reference payloads and the intake registri
 | `matrix_decision_panel.json` | Compound -> target class + evidence state truth table with aliases; seed of `compounds.yml`; `src/matrix_targets.py`. |
 | `matrix_family_coverage_registry.json` | The 8 canonical matrix families and what each supports; the intended closed vocabulary for `matrix_family`. |
 | `process_gap_registry.json` | 5 structural gaps literature cannot close; overlaps `benchmark_intake_registry.structural_gaps`. |
-| `process_state_calibrations.json` | 26 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`. |
+| `process_state_calibrations.json` | 19 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`. |
 | `reaction_rules.yml` | The hypothesis layer's reaction rules: one SMIRKS per literature-described transformation with its dossier anchor, conditions and positive/negative controls (`src/network_hypotheses`); the engine never reads it. |
 | `retention_reference_payloads.json` | Volatile retention/release records per protein, incl. withdrawn (`unsourced_withdrawn`) rows; `src/headspace.py`, `literature_runtime`. |
 | `safety_reference_payloads.json` | 43 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`. |
@@ -130,7 +130,7 @@ Verified rows the network cannot execute (see README there); kept off the panel 
 
 Per-paper extraction records (verbatim quotes, digitised tables, unit reconciliations) cited as provenance strings by `src/kinetic_core/`. `k*_` and `research_round*` files are cross-paper syntheses.
 
-536 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2001_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `almhofer2022_extraction.md`, `ames2001_extraction.md`, `amranihemaimi1995_extraction.md` …
+572 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2001_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `aliani2013_extraction.md`, `alim2018_extraction.md`, `alim2019_extraction.md` …
 
 ## `data/lit/fit_rows`
 
@@ -138,7 +138,7 @@ Per-paper extraction records (verbatim quotes, digitised tables, unit reconcilia
 
 ## `data/lit/measurement_ledger`
 
-6 files covered by the directory description above: `acrylamide.yml`, `aroma_other.yml`, `lipid.yml`, `matrix.yml`, `sulfur.yml`, `trunk.yml`
+7 files covered by the directory description above: `acrylamide.yml`, `aroma_other.yml`, `lipid.yml`, `matrix.yml`, `sulfur.yml`, `thermal_history.yml`, `trunk.yml`
 
 ## `data/lit/source_verification`
 

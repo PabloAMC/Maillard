@@ -940,76 +940,6 @@
   ],
   "nucleotide_pathway_priors": [
     {
-      "id": "matoba_1988_nucleotide_hydrolysis_v1",
-      "source": "Matoba, Terao & Fujimaki 1988 IMP/GMP hydrolysis kinetics plus Mouritsen 2024 threshold-fold data, Yamaguchi & Ninomiya 2000 EUC constants, and Nakamura 1988 ribose-liberation context",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "yeast_extract_imp_share": 0.6,
-      "yeast_extract_gmp_share": 0.4,
-      "umami_weight": 0.6,
-      "ribose_weight": 0.4,
-      "imp_fold_reduction_at_3mm": 45.2,
-      "gmp_fold_reduction_at_3mm": 29.8,
-      "imp_relative_umami_unit": 1.0,
-      "gmp_relative_umami_unit": 2.3,
-      "umami_synergy_constant": 1218.0,
-      "imp_half_life_hours_at_100c_by_ph": {
-        "4.0": 8.7,
-        "5.0": 12.0,
-        "7.0": 13.1,
-        "9.0": 46.2
-      },
-      "gmp_half_life_hours_at_100c_by_ph": {
-        "4.0": 6.4,
-        "5.0": 9.0,
-        "7.0": 8.2,
-        "9.0": 38.5
-      },
-      "imp_half_life_hours_at_ph7_by_temp_c": {
-        "100.0": 13.1,
-        "110.0": 4.4,
-        "130.0": 0.5,
-        "150.0": 0.0583
-      },
-      "gmp_half_life_hours_at_ph7_by_temp_c": {
-        "100.0": 8.2,
-        "110.0": 2.7,
-        "130.0": 0.3,
-        "150.0": 0.0367
-      },
-      "default_extrusion_residence_minutes": 2.0,
-      "ribose_release_efficiency_multiplier": 2.3,
-      "max_ribose_delivery_fraction": 0.4,
-      "ribose_addition_threshold": 0.08,
-      "ribose_addition_ratio_scale": 0.35,
-      "reference_ribose_release_fraction_100c_30min": 0.06,
-      "notes": "Use for bounded Family 04 support scoring: preserve IMP/GMP as upstream umami support at mild thermal load, then shift part of that support toward ribose delivery as hydrolysis accelerates under extrusion-like severity.",
-      "doi": "10.1111/j.1365-2621.1988.tb13551.x",
-      "doi_propagation": {
-        "date": "2026-08-27",
-        "wave": "Wave T3 (audit remediation; Wave T1 finding T1-09 / section 4)",
-        "action": "provenance repair only -- a DOI was ADDED to a record that had none. NO numeric value, citation string, tier or flag was changed.",
-        "propagated_from": "matoba_1988_nucleotide_hydrolysis",
-        "propagated_from_file": "data/lit/benchmark_intake_registry.json",
-        "new": "10.1111/j.1365-2621.1988.tb13551.x",
-        "crossref_verified": {
-          "checked": "2026-08-27 via api.crossref.org/works",
-          "resolves": true,
-          "title": "Thermal Degradation of Flavor Enhancers, Inosine 5′‐monophosphate, and Guanosine 5′‐monophosphate in Aqueous Solution",
-          "authors": [
-            "MATOBA",
-            "KUCHIBA",
-            "KIMURA",
-            "HASEGAWA"
-          ],
-          "year": 1988,
-          "container": "Journal of Food Science"
-        },
-        "match_basis": "surname 'Matoba' present in DOI authors ['MATOBA', 'KUCHIBA', 'KIMURA', 'HASEGAWA']; year cp [1988, 2024, 2000, 1988] vs DOI 1988",
-        "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
-      }
-    },
-    {
       "id": "aliani_2005_donor_potency_nucleotide_context_v1",
       "source": "Aliani & Farmer (2005)",
       "provenance_tier": "literature_derived_transfer",
@@ -1058,19 +988,6 @@
       },
       "synergy_IMP_MSG_fold": 7.5,
       "notes": "Detection thresholds: IMP 0.25 mM, GMP 0.125 mM; IMP+MSG synergy 7.5-fold."
-    },
-    {
-      "id": "matoba_1988_nucleotide_hydrolysis",
-      "source": "Matoba et al. (1988)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "reference_conditions": {
-        "T_C": 80,
-        "pH": 6.0
-      },
-      "IMP_hydrolysis_k_1_per_min": 0.0035,
-      "IMP_to_inosine_Ea_kj_mol": 76.0,
-      "notes": "IMP hydrolysis to inosine: k=3.5×10⁻³ min⁻¹ at 80°C; Ea=76 kJ/mol."
     }
   ],
   "carbonyl_donor_priors": [
@@ -2355,56 +2272,6 @@
     }
   ],
   "melanoidin_trapping_priors": [
-    {
-      "id": "jafc_2019_ref21_pea_gum_arabic_architecture_v1",
-      "source": "Zha et al. (2019)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium_low",
-      "reference_conditions": {
-        "matrix": "pea_protein_hydrolysate_gum_arabic_conjugate",
-        "process_state": "heated_matrix",
-        "measurement_mode": "hpsec_mals_mark_houwink"
-      },
-      "native_mw_kda": 290.0,
-      "conjugated_mw_kda_range": [
-        340.0,
-        359.0
-      ],
-      "native_radius_of_gyration_nm": 29.5,
-      "conjugated_radius_of_gyration_nm_range": [
-        30.5,
-        33.5
-      ],
-      "native_mark_houwink_exponent": 0.53,
-      "conjugated_mark_houwink_exponent": 0.4,
-      "native_pdi": 1.35,
-      "conjugated_pdi": 1.74,
-      "notes": "Compact Family 16 architecture prior for Maillard-conjugated pea hydrolysate systems. Use to surface polymer-growth and trapping-risk direction when gum arabic and hydrolysate cues are present, not as a universal rheology solver.",
-      "doi": "10.1021/acs.jafc.9b04099",
-      "doi_propagation": {
-        "date": "2026-08-27",
-        "wave": "Wave T3 (audit remediation; Wave T1 finding T1-09 / section 4)",
-        "action": "provenance repair only -- a DOI was ADDED to a record that had none. NO numeric value, citation string, tier or flag was changed.",
-        "propagated_from": "jafc_2019_ref21_pea_gum_arabic_architecture_anchor",
-        "propagated_from_file": "data/lit/benchmark_intake_registry.json",
-        "new": "10.1021/acs.jafc.9b04099",
-        "crossref_verified": {
-          "checked": "2026-08-27 via api.crossref.org/works",
-          "resolves": true,
-          "title": "Gum Arabic-Mediated Synthesis of Glyco-pea Protein Hydrolysate via Maillard Reaction Improves Solubility, Flavor Profile, and Functionality of Plant Protein",
-          "authors": [
-            "Zha",
-            "Yang",
-            "Rao",
-            "Chen"
-          ],
-          "year": 2019,
-          "container": "Journal of Agricultural and Food Chemistry"
-        },
-        "match_basis": "surname 'Zha' present in DOI authors ['Zha', 'Yang', 'Rao', 'Chen']; year cp [2019] vs DOI 2019",
-        "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
-      }
-    },
     {
       "id": "jafc_2022_melanoidin_thiol_binding",
       "source": "Gigl et al. (2021)",

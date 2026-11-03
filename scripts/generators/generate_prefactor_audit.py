@@ -415,7 +415,7 @@ def collect_misc_pairs() -> List[Dict[str, Any]]:
         "shipped_ea_kj_mol": None if ea_e is None else ea_e / 1000.0,
         "shipped_a": a_e,
         "shipped_a_unit": "1/s",
-        "source_key": "Parker 2012 (comment: 'Ea_e typically ~90-110 kJ/mol'); no table cited",
+        "source_key": "unsourced: a code comment attributed 'Ea_e typically ~90-110 kJ/mol' to Parker 2012, which has no elimination step and fixes Ea at 100 kJ/mol (CF-105, parker2012b dossier)",
         "source_quality": "hardcoded_in_code",
         "a_is_placeholder_nan": False,
     })

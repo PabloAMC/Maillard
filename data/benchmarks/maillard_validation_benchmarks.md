@@ -496,6 +496,8 @@ PMC: [8271896](https://pmc.ncbi.nlm.nih.gov/articles/PMC8271896/)
 
 **Benchmark use (SECONDARY):** Upper bound for aldehyde generation during high-heat searing. The model's lipid oxidation module should predict qualitatively similar aldehyde increases under grilling conditions.
 
+> **[!] Checked 2026-11-03 against the PDF (`devaere2022_extraction.md`).** The authors are Devaere, De Winne, Dewulf, Fraeye, Šoljić, Lauwers, de Jong & Sanctorum (not "Van Loo"); the protein is textured soy protein, not SPI; "grilled" is a combi oven, 250 °C, 12 min. The "~3-4x" is the MYOGLOBIN effect in RAW batter (hexanal x3.7 / x4.5 at 0.5 / 1 % myoglobin; x9 / x12 cooked); WITHOUT myoglobin cooking LOWERED total saturated aldehydes (x0.49) and hexanal (x0.42). So it is not an upper bound for aldehydes from searing; it is a sign check for a heme-catalysis term the lipid lane lacks (ledger entry `devaere2022_tab1_myoglobin_dose_lipid_volatiles`).
+
 ---
 
 ### 3.6 He et al. (2021) — SECONDARY
@@ -764,7 +766,7 @@ All searches conducted 2026-03-13 across PubMed, Google Scholar, and ACS Publica
 | Pratap-Singh et al. (2021) | 10.3390/molecules26134104 |
 | Zhang et al. (2020) | 10.1016/j.foodchem.2020.127469 |
 | Immonen et al. (2021) | 10.3390/foods10071517 |
-| Van Loo et al. (2022) | 10.3390/foods11131985 |
+| Devaere et al. (2022) | 10.3390/foods11131985 |
 | He et al. (2021) | 10.1111/1750-3841.15594 |
 | Knol et al. (2005) | 10.1021/jf050504m |
 | Claeys et al. (2005) | 10.1021/jf051197n |
