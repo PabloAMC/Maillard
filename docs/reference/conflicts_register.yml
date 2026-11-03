@@ -3011,8 +3011,11 @@ entries:
       generator also reads src/safety.py, which no longer exists.
     explanations: ["Labels written from the audit-era benchmark, not from the paper (quarantined 2026-08-26)."]
     tests: ["parker2012b dossier sec. 6 (read 2026-11-03 from the PDF)."]
-    status: error_confirmed
-    remedy: "Relabel or retire the two generator entries (scripts: owner confirms before a script is edited or deleted). No engine number is affected."
+    status: fixed
+    remedy: >-
+      Fixed 2026-11-03 (owner's go-ahead): the prefactor-audit source_key now says the 90-110 kJ/mol is unsourced; the
+      gap-heatmap label of the deleted benchmark is removed (the heatmap regenerates unchanged). The audit generator
+      still parses the deleted src/safety.py, so it cannot be re-run; its frozen output (results/validation/
+      prefactor_audit.json, read by tests/unit/test_kinetic_core_b8.py) keeps the old wording. No engine number moves.
     affects:
-      - {file: scripts/generators/generate_prefactor_audit.py, symbol: "Ea_e typically ~90-110 kJ/mol"}
-      - {file: scripts/generators/generate_gap_heatmap.py, symbol: "Parker 2012 (Asparagine + Glucose)"}
+      - {file: scripts/generators/generate_prefactor_audit.py, symbol: "unsourced: a code comment attributed"}
