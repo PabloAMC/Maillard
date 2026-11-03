@@ -1076,3 +1076,241 @@ entries:
     condition_quote: ""
     flags: ["matrix_food", "open_system", "low_moisture_no_aw_term", "ph_measured_room_temperature"]
     note: "Glycine and citric-acid (pH) mitigation factors in one matrix; end moisture not stated; some 60 min arms not run. arms: control vs + glycine vs + citric acid vs both, 15 / 30 / 60 min (same lab, same SIDA assay)."
+  # ---- balagiannis2019 (ingested 2026-11-03) ----
+  - id: balagiannis2019_fig2_models1_2_constants_165c
+    dossier: balagiannis2019_extraction.md
+    paper: "Balagiannis, Mottram, Higley, Smith, Wedzicha & Parker 2019 Food Chem 284:236"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "par-fried Ranger Russet fries, maltose dip 0-14 % (this paper) + glucose / fructose dip 0-2 % (Parker 2012); Mal 16-164, Glc 3-63, Fru 6-72, FAA 130-240 mmol/kg defatted dry wt"
+    medium: "finish-fried in canola oil, pilot fryer, ~220 g lots"
+    temperature_c: [165, 175, 185]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 5]
+    species: [acrylamide, asparagine, glucose, fructose, maltose, total_free_amino_acids]
+    kind: rate_constant
+    location: "Fig. 2 table (Model 1: k1, k3, k6, k8, p, F_Asn, k1mal, k2mal; Model 2 adds kg, kf, km) with 95 % CI, all at 165 C (dossier sec. 4a)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "The rate constants correspond to a temperature of 165 C."
+    flags: [matrix_food, low_moisture_no_aw_term, ph_not_measured, no_replicates, "no_ea_printed", "local_constants_inside_slab_transfer_model", "complements: parker2012b_tab2_finish_fry_multiresponse_constants"]
+    note: "Refit of Parker 2012 data + maltose arms with a changed scheme (Glc -> Int2 in one step, no Fru->Glc, Asn explicit): k1 3.5x below Parker's, F_Asn redefined; do not mix with parker2012b constants. Transfer model (Balagiannis 2016 3-D) and Ea not in paper. km = 0 (no direct maltose-Asn route)."
+  - id: balagiannis2019_fig1_maltose_glucose_acrylamide_timecourses
+    dossier: balagiannis2019_extraction.md
+    paper: "Balagiannis, Mottram, Higley, Smith, Wedzicha & Parker 2019 Food Chem 284:236"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "par-fried fries, maltose dip 0/1/2/3/4/14 % (lot 1) and 2 % (lot 2)"
+    medium: "finish-fried in canola oil at 165 C (lot 1) and 175 / 185 C (lot 2), quenched in liquid N2"
+    temperature_c: [165, 175, 185]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 5]
+    species: [acrylamide, maltose, glucose]
+    kind: time_series
+    location: "Fig. 1 (8 arms x 11 times 0-300 s, with Model 1 lines); t = 0 and 300 s digitised (dossier sec. 4c)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Each batch (~220 g) was finish-fried at 165 C for 10 different time points"
+    flags: [matrix_food, low_moisture_no_aw_term, heating_up_included_in_time, no_replicates, ph_not_measured]
+    note: "Defatted dry-weight basis. Acrylamide plateaus at 20-24 umol/kg for 2-14 % maltose dips; Model 1 over-predicts M0 x3.5 and M14 x1.8. Fructose, FAA and Asn for these arms only in Fig. S1 (absent)."
+  - id: balagiannis2019_tab1_maltose_glucose_fructose_dip_endpoints
+    dossier: balagiannis2019_extraction.md
+    paper: "Balagiannis, Mottram, Higley, Smith, Wedzicha & Parker 2019 Food Chem 284:236"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "par-fried fries, maltose dip 0-14 % and (from Parker 2012) 2 % glucose and 2 % fructose dips"
+    medium: "finish-fried in canola oil, 165 C, 5 min"
+    temperature_c: [165]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [5]
+    species: [acrylamide, maltose, glucose, fructose, colour_agtron]
+    kind: endpoint
+    location: "Table 1 (added-sugar ini/fin/loss, acrylamide increase, Agtron colour) (dossier sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "after finish frying at 165 C for 5 min"
+    flags: [matrix_food, low_moisture_no_aw_term, no_replicates, "complements: balagiannis2019_fig1_maltose_glucose_acrylamide_timecourses"]
+    note: "Directional: per mole of added sugar lost, acrylamide yield maltose 0.03-0.15 % vs glucose 0.20 %, fructose 0.34 % (dossier Z); colour per sugar lost also lower for maltose. Glc/Fru columns are Parker 2012 data (also parker2012b_figs1_2_finish_fry_timecourses_165c)."
+  - id: balagiannis2019_figS1_all_responses_maltose_arms
+    dossier: balagiannis2019_extraction.md
+    paper: "Balagiannis, Mottram, Higley, Smith, Wedzicha & Parker 2019 Food Chem 284:236"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "par-fried fries, maltose dip 0-14 % (lot 1, 165 C) and 2 % (lot 2, 175 / 185 C)"
+    medium: "finish-fried in canola oil"
+    temperature_c: [165, 175, 185]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 5]
+    species: [fructose, sucrose, total_free_amino_acids, asparagine, acrylamide, maltose, glucose]
+    kind: time_series
+    location: "Appendix A, supplementary Fig. S1 (all responses); Figs. S2-S3 Model 2 fits"
+    status: supplement_missing
+    quant_class: sida
+    simulable: false
+    condition_quote: "The data are all displayed graphically in supplementary Fig. S1."
+    flags: [matrix_food, low_moisture_no_aw_term, supplement_missing_s1]
+    note: "Only source of Asn and fructose time courses for the maltose arms (Asn enters Model 1/2 explicitly). Download from the publisher's Appendix A if a fry hold-out is ever built."
+  # ---- parker2012b (ingested 2026-11-03) ----
+  - id: parker2012b_tab2_finish_fry_multiresponse_constants
+    dossier: parker2012b_extraction.md
+    paper: "Parker, Balagiannis, Higley, Smith, Wedzicha & Mottram 2012 J Agric Food Chem 60:9321"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "par-fried Ranger Russet shoestring fries (7.5 x 7.5 mm), glucose- or fructose-dipped 0-2 %; Glc 8-63, Fru 9-72, total free AA 160-200, Asn ~60 mmol/kg defatted dry wt"
+    medium: "finish-fried in canola oil (pilot Frymaster, ~225 g lots), frozen par-fried strips"
+    temperature_c: [165, 175, 185]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 5]
+    species: [acrylamide, glucose, fructose, total_free_amino_acids]
+    kind: rate_constant
+    location: "Table 2 (k1, k2, k6, k8, k9, F_Asn with 95 % HPD); scheme Fig. 5, rate laws Fig. 6, slab T/moisture Eqs. 1-2 (dossier sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "One universal value for the activation energy (Ea) could be applied to all kinetic steps"
+    flags: [matrix_food, low_moisture_no_aw_term, ph_not_measured, "local_constants_inside_slab_transfer_model", "ea_fixed_not_fitted", no_replicates, "complements: parker2012b_figs1_2_finish_fry_timecourses_165c"]
+    note: "Local surface-referenced constants inside a 1-D slab model with (1-M)^2 weighting; Ea FIXED at 100 kJ/mol for every step (not fitted); T_ref not printed (165 C likely); k1 unit typo in text (mol vs mmol). Acrylamide elimination returned zero and dropped. Not bulk kinetics; not transferable to the mmol/L lane without the transfer model."
+  - id: parker2012b_figs1_2_finish_fry_timecourses_165c
+    dossier: parker2012b_extraction.md
+    paper: "Parker, Balagiannis, Higley, Smith, Wedzicha & Mottram 2012 J Agric Food Chem 60:9321"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "par-fried fries, 5 glucose-dip (G1-G5) + 5 fructose-dip (F1-F5) arms, 0-2 % w/v; initial composition per arm at t = 0"
+    medium: "finish-fried in canola oil at 165 C, quenched in liquid N2"
+    temperature_c: [165]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 5]
+    species: [acrylamide, glucose, fructose, total_free_amino_acids]
+    kind: time_series
+    location: "Fig. 1 (G arms) and Fig. 2 (F arms), 11 times 0-300 s; t = 0 and 300 s digitised (dossier sec. 4c); Table 1 pre-processing composition (G only)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "were finish-fried at 165 C for different times (30 s intervals up to 5 min)"
+    flags: [matrix_food, low_moisture_no_aw_term, heating_up_included_in_time, no_replicates, ph_not_measured]
+    note: "Defatted dry-weight basis. Only endpoints digitised; full 11-point series figure-only. Acrylamide ~60 s lag; no acrylamide loss. Batch F pre-processing composition not tabulated. Needs a fry heat/mass-transfer model to simulate."
+  - id: parker2012b_fig8_finish_fry_175_185c
+    dossier: parker2012b_extraction.md
+    paper: "Parker, Balagiannis, Higley, Smith, Wedzicha & Mottram 2012 J Agric Food Chem 60:9321"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "par-fried fries, '0.5 % glucose' dip, undescribed third lot (t = 0: Glc ~19, Fru ~6, AA ~200 mmol/kg dry)"
+    medium: "finish-fried in canola oil at 175 and 185 C"
+    temperature_c: [175, 185]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 5]
+    species: [acrylamide, glucose, fructose, total_free_amino_acids]
+    kind: time_series
+    location: "Fig. 8 (2 T x 11 times); endpoints digitised (dossier sec. 4d)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "fries dipped in 0.5% glucose and cooked at 175 and 185 C"
+    flags: [matrix_food, low_moisture_no_aw_term, condition_uncertain, no_replicates]
+    note: "Presented as a prediction from a 165 C-only fit, but these data are also in the Table 2 fit; the 165 C-only parameters are not printed. Only T series in the paper (with fixed Ea it cannot identify an Ea)."
+  - id: parker2012b_tab1_preprocessing_precursors
+    dossier: parker2012b_extraction.md
+    paper: "Parker, Balagiannis, Higley, Smith, Wedzicha & Mottram 2012 J Agric Food Chem 60:9321"
+    lab: "Reading (Mottram / Parker / Elmore)"
+    system: "Ranger Russet strips, raw / pre-par-fry / post-par-fry, glucose dip 0-2 %"
+    medium: "pilot line: blanch 74 C 10 min, dip 70-75 C 30 s, dry 60 C, par-fry 190 C 50 s"
+    temperature_c: [190]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0.83]
+    species: [acrylamide, asparagine, glucose, fructose, sucrose, total_free_amino_acids, water content]
+    kind: endpoint
+    location: "Table 1 (dossier sec. 4a)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "They were dried at 60 C to achieve about a 10% weight loss before par-frying"
+    flags: [matrix_food, low_moisture_no_aw_term, no_replicates]
+    note: "Only Asn data in the paper (R_Asn = Asn/AA 0.36-0.37). Par-fry forms 1-8 umol/kg acrylamide. Batch F not tabulated."
+  # ---- chan2020 (ingested 2026-11-03) ----
+  - id: chan2020_figs2_4_gokmen2006_fries_170c_replot
+    dossier: chan2020_extraction.md
+    paper: "Chan 2020 Foods 9:200 (10.3390/foods9020200), re-plotting Gokmen, Palazoglu & Senyuva 2006 J Food Eng 77:972 (10.1016/j.jfoodeng.2005.08.030)"
+    lab: "Hacettepe (Gokmen)"
+    system: "potato strips 8.5 x 8.5 x 70 mm, 77.2 % water, reducing sugar 6.8 mol/m3 (as computed by Chan from ref. 15)"
+    medium: "deep-fat frying, 170 C, single strip per fry"
+    temperature_c: [170]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 9]
+    species: [acrylamide, water content, surface temperature, core temperature]
+    kind: time_series
+    location: "Fig. 2 (water, 4 pts), Fig. 3 (surface and core T, 9 pts each), Fig. 4 (acrylamide, 4 pts), 150 dpi (dossier sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "The result of mathematical modeling are compared with experimental data obtained from the study of Gokmen et al."
+    flags: [secondary_source, matrix_food, heating_up_included_in_time, low_moisture_no_aw_term, concentrations_not_stated]
+    note: "Measured T(t) at surface and core plus acrylamide and water at one frying T; re-key to the primary (Gokmen 2006) when on disk. Asn not given; basis of ug/kg not stated. Candidate frying hold-out on the measured-T(t) path (cf. knol2009_fig2_tab1_crisp_acrylamide_frying)."
+  - id: chan2020_tab1_lumped_sugar_acrylamide_constants
+    dossier: chan2020_extraction.md
+    paper: "Chan 2020 Foods 9:200 (10.3390/foods9020200)"
+    lab: "Lee-Ming Inst. Tech. (Chan DS)"
+    system: "French-fry strip model: reducing sugar -> acrylamide -> degraded products, first order, active at T >= 120 C"
+    medium: "2-D FEM heat and moisture transfer model (COMSOL 5.1); no experiment"
+    temperature_c: [170]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 9]
+    species: [acrylamide, reducing sugar]
+    kind: rate_constant
+    location: "Table 1: k0 22 /s (shared), Ea,AA 44.5, Ea,D 21.3 kJ/mol, all footnote e 'estimated' (dossier sec. 4a)"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: "The acrylamide formation can be described using the first-order reaction with respect to reducing sugar"
+    flags: [model_estimated_not_measured, no_uncertainty, secondary_source]
+    note: "Not a measurement: tuned to the Gokmen 2006 170 C curve, estimation method not described, one shared k0, no Asn. Recorded so it is not mistaken for a measured French-fry constant; do not fit or check against it."
+  # ---- bassama2011 (ingested 2026-11-03) ----
+  - id: bassama2011_tab2_acrylamide_kf_ke_ea_aw_plantain
+    dossier: bassama2011_extraction.md
+    paper: "Bassama, Brat, Bohuon, Hocine, Boulanger & Gunata 2011 Food Res Int 44:1452"
+    lab: "CIRAD / SupAgro QualiSud (Bohuon)"
+    system: "freeze-dried plantain flour (Musa AAB barraganete; Asn 32.3, Glc 8610, Fru 7420, Suc 20400 mg/100 g db), rehydrated to a_w 0.972 / 0.904 / 0.430"
+    medium: "~10 g paste in a hermetically sealed steel test cell, 250 C boost bath then stirred oil bath; measured centre T(t)"
+    temperature_c: [140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 90]
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Table 2: k_Fref (1e-5 /s), k_Eref (1e-2 /s) at T_ref 170 C, Ea_F, Ea_E, +- 95% asymptotic CI, per initial a_w (dossier sec. 4a)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Three initial water activities were chosen in order to perform experimentations: 0.972, 0.904, and 0.430."
+    flags: [matrix_food, aw_measured_25c_before_heating, single_response_fit, asn_and_sugars_t0_only, temperature_history_not_printed, "complements: bassama2011_fig3_acrylamide_timecourses_aw"]
+    note: "Lumped Asn->AA (k_F, first order in Asn, sugars ~600x molar excess) and AA->DP (k_E). k_F x8, k_E x14 from a_w 0.972 to 0.430, Ea flat: contradicts the lane's flat formation / dry-side-falling elimination (acrylamide_conditions.py, Leuven powders). B54 hold-out candidate, not a constant to adopt."
+  - id: bassama2011_fig3_acrylamide_timecourses_aw
+    dossier: bassama2011_extraction.md
+    paper: "Bassama, Brat, Bohuon, Hocine, Boulanger & Gunata 2011 Food Res Int 44:1452"
+    lab: "CIRAD / SupAgro QualiSud (Bohuon)"
+    system: "freeze-dried plantain flour rehydrated to a_w 0.972 / 0.904 / 0.430 (70 / 41 / 8 % water wb)"
+    medium: "sealed steel test cell in oil baths; measured centre T(t), not printed"
+    temperature_c: [140, 160, 180, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 90]
+    species: [acrylamide]
+    kind: time_series
+    location: "Fig. 3 left panels, 3 a_w x 4 T x 7-9 times, mg/kg dry basis, read at 400 dpi +-0.04 (dossier sec. 4c)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "The samples (plantain paste at different moisture content, weight ~10 g) were introduced into the hermetically sealed test cell"
+    flags: [matrix_food, aw_measured_25c_before_heating, heating_up_included_in_time, temperature_history_not_printed, no_replicates, dry_basis_definition_ambiguous]
+    note: "Rise-then-fall at 180/200 C in all a_w. Peak 1.61 / 1.48 / 0.92 mg/kg db (0.972 / 0.904 / 0.430) = ~0.5-0.9 mg/kg wb, ~0.9 mol% of Asn0. Not simulable until the lane has a plantain/starch matrix and the non-isothermal T(t); usable as a directional a_w check (peak time 30 / 15 / 5 min at 180 C)."
+  - id: bassama2011_tab1_fig1_asparagine_musa_ripening
+    dossier: bassama2011_extraction.md
+    paper: "Bassama, Brat, Bohuon, Hocine, Boulanger & Gunata 2011 Food Res Int 44:1452"
+    lab: "CIRAD / SupAgro QualiSud (Bohuon)"
+    system: "10 Musa cultivars (Colombia, 40 C oven-dried flours) and barraganete plantain ripened 0-11 d at 17 C after ethylene"
+    medium: "unheated flours"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [asparagine, glucose, fructose, sucrose]
+    kind: endpoint
+    location: "Table 1 (Asn, 10 cultivars), Fig. 1 (Asn vs ripening day, read +-2), sec. 3.3 text (Asn, Glc, Fru, Suc of the kinetics flour)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "the results were 32.3 +- 3.2, 8610 +- 700, 7420 +- 600 and 20400 +- 1600 mg/100 g dry basis"
+    flags: [matrix_food, not_a_kinetic_dataset]
+    note: "Precursor composition only; the sec. 3.3 values are the initial charge of the kinetics pots (which maturity aliquot is not stated)."

@@ -104,3 +104,9 @@ temperature other than boiling.
   inform the pH-3 enolisation law.
 - **Action:** if an R5P route is ever wanted, the quantitative source is Peer & van den Ouweland 1968,
   not this paper.
+- **[!] Checked 2026-11-03 against Peer & van den Ouweland 1968 (`peer1968_extraction.md`).** (ii) is contradicted:
+  buffer anions alone (acetate, citrate, phthalate, phosphate, 0.6-5 M, pH 5.5, no amine) give 43-47 % norfuraneol
+  from R5P in 2 h at 100 C, so no nitrogen partner is needed in concentrated buffer. The "R5P -> 1-deoxyosone
+  shortcut" is contradicted by Peer's 14C tracer: the norfuraneol methyl comes from C5 (phosphate elimination),
+  not C1. "Buffer catalysis is the operative variable" remains an inference: neither paper varies buffer
+  concentration at fixed pH.

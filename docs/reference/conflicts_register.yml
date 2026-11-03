@@ -2972,3 +2972,47 @@ entries:
     affects:
       - alim2019_table3_group_vi_camola_xylose_isotopomers
       - wang2012_table3_camola_xylose_isotopomers
+
+  - id: CF-104
+    kind: conflict
+    scope: other_lane
+    sources: [bassama2011, devleeschouwer2007, devleeschouwer2008]
+    quantity: "water-activity dependence of acrylamide formation (k_F) and elimination (k_E) in a food matrix, 140-200 C"
+    observation: >-
+      src/kinetic_core/acrylamide_conditions.py declares the formation a_w multiplier on k_int1_acr flat (1.0) over
+      a_w 0.34-0.99 and the elimination multiplier falling on the dry side (minimum at 0.82), both from De
+      Vleeschouwer's model powders. Bassama 2011 Table 2 (lyophilised plantain rehydrated to initial a_w 0.972 /
+      0.904 / 0.430 at 25 C, sealed cell, Asn -> AA -> DP single-response fit on the measured centre T(t), T_ref 170 C)
+      gives k_F 0.96 / 4.90 / 7.74 x 10^-5 s^-1 and k_E 0.14 / 0.85 / 2.02 x 10^-2 s^-1: formation x8.1 and elimination
+      x14 from 0.972 to 0.430, Ea unchanged within the CIs. Read 2026-11-03 against the PDF.
+    explanations:
+      - "Matrix: a real starchy food (plantain flour) vs De Vleeschouwer's model powders; a_w set at 25 C before heating, while the sealed-cell a_w at 140-200 C is unknown."
+      - "Bassama's k_F is a lumped, yield-weighted Asn -> AA rate from an acrylamide-only fit, not an Asn-loss rate; precursor loss was not measured."
+      - "Concentration effect: drier paste concentrates reactants, which a per-dry-matter rate law partly absorbs (bassama2011 dossier sec. 5)."
+    tests: []
+    status: open
+    remedy: "None now: a B54 (water activity) hold-out, not constants to adopt. Decider: an acrylamide + asparagine time course in one food matrix at >= 3 a_w with the a_w at temperature estimated."
+    affects:
+      - bassama2011_tab2_acrylamide_kf_ke_ea_aw_plantain
+      - {file: src/kinetic_core/acrylamide_conditions.py, symbol: AW_MULTIPLIER}
+      - {file: src/kinetic_core/acrylamide_conditions.py, symbol: AW_ELIMINATION_TABLE}
+
+  - id: CF-105
+    kind: code_mismatch
+    scope: corpus
+    sources: [parker2012b]
+    quantity: "what two generators attribute to Parker et al. 2012 (JAFC, 10.1021/jf302415n)"
+    observation: >-
+      generate_prefactor_audit.py records an elimination Ea "~90-110 kJ/mol" from Parker 2012; the paper has no
+      elimination step (fitted to zero) and fixes Ea at 100 kJ/mol for every formation step, not fitted
+      (parker2012b dossier sec. 1). generate_gap_heatmap.py labels the quarantined benchmark "Parker 2012
+      (Asparagine + Glucose)"; the paper is a finish-fried French-fry multiresponse model, and the deleted benchmark's
+      conditions (180 C, 20 min, pH 6.8, a_w 0.30, 10 mM) are in neither the paper nor any other source. The audit
+      generator also reads src/safety.py, which no longer exists.
+    explanations: ["Labels written from the audit-era benchmark, not from the paper (quarantined 2026-08-26)."]
+    tests: ["parker2012b dossier sec. 6 (read 2026-11-03 from the PDF)."]
+    status: error_confirmed
+    remedy: "Relabel or retire the two generator entries (scripts: owner confirms before a script is edited or deleted). No engine number is affected."
+    affects:
+      - {file: scripts/generators/generate_prefactor_audit.py, symbol: "Ea_e typically ~90-110 kJ/mol"}
+      - {file: scripts/generators/generate_gap_heatmap.py, symbol: "Parker 2012 (Asparagine + Glucose)"}

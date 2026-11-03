@@ -8503,3 +8503,353 @@ entries:
     flags: [ph_start_only, no_replicates, phe_method_not_stated, footnote_time_contradicts_table, heat_up_not_reported, mgo_not_measured]
     note: "6 times; PAA by SIDA ([13C2]), Phe loss method unstated (hence other). PAA plateaus ~43.5 umol from 90 min while Phe keeps falling (55 -> 70 %). 145 C partner of hofmann2000_table3_mgo_phe_timecourse (98 C, 0.5 M phosphate, 1:1); confounded contrast (T, buffer, Phe:MGO). PA = phenylalanine here (opposite of Hofmann 2000's PA)."
   # sulfur.yml
+  # ---- matoba1988 (ingested 2026-11-03) ----
+  - id: matoba1988_tab1_tab2_imp_gmp_first_order_k_ph_temperature
+    dossier: matoba1988_extraction.md
+    paper: "Matoba, Kuchiba, Kimura & Hasegawa 1988 J Food Sci 53:1156"
+    lab: "Nara Women's Univ. (Matoba / Hasegawa)"
+    system: "IMP or GMP 0.4 mM, no amine"
+    medium: "0.01 M sodium acetate pH 4.0 / 0.01 M MOPS pH 7.0 / 0.01 M CHES pH 9.0; sealed Pyrex tubes"
+    temperature_c: [80, 90, 95, 100]
+    ph: {initial: [4.0, 7.0, 9.0], measured_during: false, final: null}
+    time_min: [0, 450]
+    species: [IMP, GMP]
+    kind: rate_constant
+    location: "Tables 1-2 (k_obsd x10^-2 h^-1 +/-, t1/2, Ea per pH; dossier sec. 4a-4b)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "0.01 M sodium acetate at pH 4.0, 0.01M MOPS at pH 7.0"
+    flags: [ph_start_only, replicates_not_stated, plus_minus_undefined, table2_title_misprint, no_temperature_above_100c]
+    note: "16 k cells (2-3 T per pH); Ea 1.1-1.6e5 J/mol reproduce from the table; A not printed (dossier refit). Repo priors' pH 5 and 110-150 C half-lives are not here."
+  - id: matoba1988_tab3_phosphate_ester_hydrolysis_k
+    dossier: matoba1988_extraction.md
+    paper: "Matoba, Kuchiba, Kimura & Hasegawa 1988 J Food Sci 53:1156"
+    lab: "Nara Women's Univ. (Matoba / Hasegawa)"
+    system: "ribose 5-phosphate, O-phosphorylethanolamine or glycerophosphoric acid 2-3 mM"
+    medium: "0.01 M acetate pH 4 / MOPS pH 7 / CHES pH 9; sealed Pyrex tubes"
+    temperature_c: [80, 90, 95, 100]
+    ph: {initial: [4.0, 7.0, 9.0], measured_during: false, final: null}
+    time_min: [0, 450]
+    species: [ribose 5-phosphate, phosphate]
+    kind: rate_constant
+    location: "Table 3 (Pi release by Fiske-Subbarow; R5P at pH 4 only; dossier sec. 4c)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [ph_start_only, pi_release_only_not_r5p_loss, r5p_ph4_only]
+    note: "R5P dephosphorylation k 8.3/3.2/1.1e-2 h^-1 at 100/90/80 C, pH 4; Ea 1.2e5. The Pi assay misses non-hydrolytic R5P loss."
+  - id: matoba1988_fig2_fig4_nucleotide_nucleoside_base_time_courses
+    dossier: matoba1988_extraction.md
+    paper: "Matoba, Kuchiba, Kimura & Hasegawa 1988 J Food Sci 53:1156"
+    lab: "Nara Women's Univ. (Matoba / Hasegawa)"
+    system: "IMP, GMP, inosine or guanosine 0.4 mM"
+    medium: "0.01 M sodium acetate pH 4.0; sealed Pyrex tubes"
+    temperature_c: [100]
+    ph: {initial: [4.0], measured_during: false, final: null}
+    time_min: [0, 12000]
+    species: [IMP, inosine, hypoxanthine, GMP, guanosine, guanine]
+    kind: time_series
+    location: "Fig. 2 (0-200 h) and Figs. 3-4 (0-7.5 h), digitised dossier sec. 4d-4e; nucleoside N-glycosidic k in text p. 1159"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [figure_read_error_8uM, ribose_r5p_not_measured, imp_faster_than_first_order_after_7h, ph4_only]
+    note: "Two-pathway split (base + R5P direct ~18 % IMP / ~5 % GMP, dossier estimate) and nucleoside cleavage k 1.8e-2 (inosine) / 0.6e-2 (guanosine) h^-1; long-run tails ~1.8x faster."
+  # ---- kuchiba1990 (ingested 2026-11-03) ----
+  - id: kuchiba1990_tab1_salt_effect_imp_gmp_k
+    dossier: kuchiba1990_extraction.md
+    paper: "Kuchiba, Kaizaki, Matoba & Hasegawa 1990 J Agric Food Chem 38:593"
+    lab: "Nara Women's Univ. (Matoba / Hasegawa)"
+    system: "IMP or GMP 0.27 mM + salt 0.25 M (NaCl, KCl, CaCl2, MnCl2, MgCl2, CH3COONa, Na2SO4, NaH2PO4)"
+    medium: "0.01 M sodium acetate pH 4.0 or 0.01 M MOPS pH 7.0, pH readjusted after salt; sealed Pyrex tubes"
+    temperature_c: [100]
+    ph: {initial: [4.0, 7.0], measured_during: true, final: null}
+    time_min: [0, 450]
+    species: [IMP, GMP]
+    kind: rate_constant
+    location: "Table I (k_obsd x10^-2 h^-1 +/-; dossier sec. 4a, ratios sec. 1)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Concentration of added salt was 0.25 mol dm-3"
+    flags: [single_temperature, single_salt_dose, ionic_strength_confounded, mn_ph7_not_detected, plus_minus_undefined]
+    note: "NaCl/KCl 0.83-0.94x control; Ca/Mg/Mn 0.32-0.61x at pH 4, 0.05-0.27x at pH 7. pH 'insignificant change' stated without numbers. Same lab as matoba1988 (controls ~10 % lower)."
+  - id: kuchiba1990_tab2_salt_effect_r5p_inosine_k
+    dossier: kuchiba1990_extraction.md
+    paper: "Kuchiba, Kaizaki, Matoba & Hasegawa 1990 J Agric Food Chem 38:593"
+    lab: "Nara Women's Univ. (Matoba / Hasegawa)"
+    system: "ribose 5-phosphate or inosine 2-3 mM + salt 0.25 M (NaCl, CaCl2, MnCl2, Na2SO4)"
+    medium: "0.01 M sodium acetate pH 4.0; sealed Pyrex tubes"
+    temperature_c: [100, 115]
+    ph: {initial: [4.0], measured_during: true, final: null}
+    time_min: [0, 450]
+    species: [ribose 5-phosphate, phosphate, inosine]
+    kind: rate_constant
+    location: "Table II (R5P at 100 C by Pi release; inosine at 115 C by inosine loss; dossier sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [unit_scale_missing_read_as_1e-2_per_h, ca_r5p_not_detected, single_temperature_per_species]
+    note: "Inosine control 5.5e-2 h^-1 at 115 C + matoba1988 1.8e-2 at 100 C -> N-glycosidic Ea ~90 kJ/mol (dossier estimate, two papers)."
+  - id: kuchiba1990_fig1_fig2_imp_inosine_hx_time_courses_salts
+    dossier: kuchiba1990_extraction.md
+    paper: "Kuchiba, Kaizaki, Matoba & Hasegawa 1990 J Agric Food Chem 38:593"
+    lab: "Nara Women's Univ. (Matoba / Hasegawa)"
+    system: "IMP 0.27 mM + CaCl2 0 / 0.05 / 0.25 M (Fig. 1); + NaCl, CaCl2, MnCl2, Na2SO4 0.25 M (Fig. 2)"
+    medium: "0.01 M sodium acetate pH 4.0; sealed Pyrex tubes"
+    temperature_c: [100]
+    ph: {initial: [4.0], measured_during: true, final: null}
+    time_min: [0, 450]
+    species: [IMP, inosine, hypoxanthine]
+    kind: time_series
+    location: "Fig. 1 (ln IMP) and Fig. 2 (IMP, inosine, Hx); endpoints digitised dossier sec. 4c-4d"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [figure_read_error_4uM, endpoints_only_digitised, last_time_point_registration]
+    note: "Only source of a CaCl2 dose point (0.05 M, ~0.8x control) and of the product split under salt."
+  # ---- shaoul1987 (ingested 2026-11-03) ----
+  - id: shaoul1987_tab1_nucleotide_k_vs_ph_121c
+    dossier: shaoul1987_extraction.md
+    paper: "Shaoul & Sporns 1987 J Food Sci 52:810"
+    lab: "Univ. Alberta (Sporns)"
+    system: "IMP, GMP or AMP alone, 30 mg/mL (~57-86 mM)"
+    medium: "0.02 M phosphate; pH set at room temperature presumably, not re-measured; sealed Pyrex tubes, oil bath"
+    temperature_c: [121]
+    ph: {initial: [3.0, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 8.0], measured_during: false, final: null}
+    time_min: [0, 180]
+    species: [IMP, GMP, AMP]
+    kind: rate_constant
+    location: "Table 1 (k min-1, t1/2 min, r; 27 cells); Fig. 1 smooths the same points"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "buffered at the appropriate pH with 0.02M phosphate buffer"
+    flags: [ph_start_only, ph_not_measured, no_replicates, no_error_bars]
+    note: "Parent loss only (HPLC). Product at pH >= 4 is the nucleoside (inosine + Pi), not R5P; base also at pH 3. No IMP species in the engine yet; first step of a future IMP -> inosine -> ribose chain. Text layer misreads IMP pH 4.0 k; dossier value read by eye (0.0111)."
+  - id: shaoul1987_tab2_3_nucleotide_k_vs_t_ph5
+    dossier: shaoul1987_extraction.md
+    paper: "Shaoul & Sporns 1987 J Food Sci 52:810"
+    lab: "Univ. Alberta (Sporns)"
+    system: "IMP, GMP or AMP alone, 30 mg/mL (~57-86 mM)"
+    medium: "0.02 M phosphate, pH 5; sealed Pyrex tubes"
+    temperature_c: [53, 76, 91, 106, 121]
+    ph: {initial: [5.0], measured_during: false, final: null}
+    time_min: []
+    species: [IMP, GMP, AMP]
+    kind: rate_constant
+    location: "Table 2 (k h-1, t1/2 h, r); Table 3 Arrhenius slope/intercept (Ea 125.5 kJ/mol IMP); Table 4 shelf-life regression (same data)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The pH for these hydrolyses was set at 5"
+    flags: [ph_start_only, condition_not_stated:time_min, no_replicates, internal_inconsistency]
+    note: "Run until >= half hydrolysed (53 C ~4 months). 121 C row equals Table 1 pH 5 (likely same run). Ea at pH 5 only. internal_inconsistency = IMP shelf-life 3.99 yr vs 9.05 yr from Table 4 (no bearing on k)."
+  # ---- davidek1972 (ingested 2026-11-03) ----
+  - id: davidek1972_fig2_imp_inosine_hx_logk_vs_ph_90c
+    dossier: davidek1972_extraction.md
+    paper: "Davidek, Velisek & Janicek 1972 J Food Sci 37:789"
+    lab: "ICT Prague (Davidek / Velisek)"
+    system: "IMP 1 mg/mL, inosine 2 mg/mL or hypoxanthine 2 mg/mL, each alone"
+    medium: "aqueous buffers pH 2-12, I <= 0.20, species not stated (acetate at pH 4)"
+    temperature_c: [90]
+    ph: {initial: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], measured_during: false, final: null}
+    time_min: [0, 50000]
+    species: [IMP, inosine, hypoxanthine]
+    kind: rate_constant
+    location: "Fig. 2 (log k vs pH, three curves; dossier sec. 4.1, 13 pH read)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "All studies were made at 90°C."
+    flags: [units_inferred, coarse_read, ph_start_only, condition_uncertain, vessel_not_stated, no_replicates]
+    note: "k1 IMP -> inosine + Pi, k2 inosine -> hypoxanthine + ribose (the ribose-releasing step), k3 hypoxanthine -> products. Axis read as log10(k/s-1)+7 with Fig. 3 time in min (dossier answer 1, ~80 %). Buffer catalysis reported, buffers not given. Not the Nestle Davidek."
+  - id: davidek1972_fig3_imp_inosine_hx_time_courses_90c
+    dossier: davidek1972_extraction.md
+    paper: "Davidek, Velisek & Janicek 1972 J Food Sci 37:789"
+    lab: "ICT Prague (Davidek / Velisek)"
+    system: "IMP 1 mg/mL alone"
+    medium: "aqueous buffers, species not stated"
+    temperature_c: [90]
+    ph: {initial: [4, 6, 8], measured_during: false, final: null}
+    time_min: [0, 50000]
+    species: [IMP, inosine, hypoxanthine]
+    kind: time_series
+    location: "Fig. 3 (relative to [IMP]0; dossier sec. 4.2, 6-10 points per curve)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: ""
+    flags: [units_inferred, ph_start_only, condition_uncertain, vessel_not_stated, no_replicates]
+    note: "Consecutive IMP -> inosine -> hypoxanthine; mass balance 0.29 / 0.76 / 0.88 at 3e4 min (pH 4 / 6 / 8). Ribose not measured. Time axis unit inferred (min)."
+  - id: davidek1972_text_imp_ea_ph3_5
+    dossier: davidek1972_extraction.md
+    paper: "Davidek, Velisek & Janicek 1972 J Food Sci 37:789"
+    lab: "ICT Prague (Davidek / Velisek)"
+    system: "IMP 1 mg/mL alone"
+    medium: "aqueous buffers pH 3, 4, 5, species not stated"
+    temperature_c: [60, 98]
+    ph: {initial: [3, 4, 5], measured_during: false, final: null}
+    time_min: []
+    species: [IMP]
+    kind: rate_constant
+    location: "p. 790 text: Ea 34.0 / 30.4 / 28.1 kcal/mol (no k, no temperatures listed)"
+    status: text_only
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "in buffer solutions pH 3, 4 and 5 in the temperature region"
+    flags: [ph_start_only, condition_not_stated:time_min, no_error_bars]
+    note: "Ea of IMP loss only (142.3 / 127.2 / 117.6 kJ/mol); temperatures within 60-98 C not listed. No Ea for inosine or hypoxanthine."
+  # ---- peer1968 (ingested 2026-11-03) ----
+  - id: peer1968_table_norfuraneol_yield_r5p_four_buffers
+    dossier: peer1968_extraction.md
+    paper: "Peer & van den Ouweland 1968 Recl Trav Chim Pays-Bas 87:1017"
+    lab: "Unilever Duiven (Peer / van den Ouweland)"
+    system: "D-ribose 5-phosphate 1.77 mmol (11-30 mM), no amine"
+    medium: "NaOAc/AcOH 3.5 M, NaOH/citric acid 1.95 M citrate, NaOH/KH-phthalate 2.1 M, Na2HPO4/KH2PO4 4.9 M (60-155 mL)"
+    temperature_c: [100]
+    ph: {initial: [5.5], measured_during: false, final: null}
+    time_min: [120]
+    species: [norfuraneol]
+    kind: endpoint
+    location: "Table p. 1019 (yield %, read from a 250 dpi render); dossier sec. 4a"
+    status: digitised_in_dossier
+    quant_class: unknown
+    simulable: false
+    condition_quote: "heating 1.77 mmole of D-ribose 5-phosphate in various buffer solutions at pH 5.5 for 2 hours"
+    flags: [single_time_point, yield_method_not_stated, no_replicates, ph_reading_time_not_stated, concentrated_buffer_extreme_ionic_strength]
+    note: "NF 43-47 % per R5P, amine-free; buffer identity barely matters. Bounds R5P loss k >= 0.005 min-1 at 100 C. Engine has no R5P species. Contrast with tonsbeek1969_text_r5p_model (dilute, unbuffered: no NF)."
+  - id: peer1968_text_preparative_acetate_reflux_yield
+    dossier: peer1968_extraction.md
+    paper: "Peer & van den Ouweland 1968 Recl Trav Chim Pays-Bas 87:1017"
+    lab: "Unilever Duiven (Peer / van den Ouweland)"
+    system: "D-ribose 5-phosphate 0.18 mol (~30 mM) from acid-resin hydrolysis of IMP/GMP, no amine"
+    medium: "~3.5 M sodium acetate / 0.7 M acetic acid, ~5.5-6.5 L, open reflux in air"
+    temperature_c: [100]
+    ph: {initial: [5.4], measured_during: false, final: null}
+    time_min: [120]
+    species: [norfuraneol]
+    kind: endpoint
+    location: "Experimental p. 1019 (UV 43 %, GC 45 %, isolated 33.8 %); dossier sec. 4b"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "After refluxing for 2 hours the reaction mixture was cooled and extracted"
+    flags: [single_time_point, ph_nominal_from_recipe, reflux_above_100c, no_replicates]
+    note: "Reproduces the Table acetate row at 100x scale. pH 5.4 is Henderson-Hasselbalch from the recipe, not measured. NF lambda max 289 nm, epsilon 9200 (MeOH)."
+  - id: peer1968_text_1_14c_ribose5p_norfuraneol_label_position
+    dossier: peer1968_extraction.md
+    paper: "Peer & van den Ouweland 1968 Recl Trav Chim Pays-Bas 87:1017"
+    lab: "Unilever Duiven (Peer / van den Ouweland)"
+    system: "D-[1-14C]ribose 5-phosphate (1.51e6 dpm/mmol), conditions as the acetate preparation (not restated)"
+    medium: "NaOAc/AcOH buffer (presumed; not restated for the tracer run)"
+    temperature_c: [100]
+    ph: {initial: [5.5], measured_during: false, final: null}
+    time_min: []
+    species: [norfuraneol]
+    kind: other
+    location: "text pp. 1018 and 1020 (specific activities, Kuhn-Roth acetic acid 4.5 %); dossier sec. 4c"
+    status: text_only
+    quant_class: other
+    simulable: false
+    condition_quote: "the methyl group does not originate from the aldehyde group of the ribose"
+    flags: [labelling, condition_not_stated, c2_assignment_inferred]
+    note: "R5P route: ribose C1 kept (98 %), not in methyl/C5 (4.5 %); methyl from ribose C5 via beta-elimination of phosphate. Opposite topology to the amine / 1-deoxyosone route. Relevant to E6/E11 labelling cells only if R5P is present."
+  # ---- alim2018 (ingested 2026-11-03) ----
+  - id: alim2018_fig1c_tab2_sugars_furans_temperature
+    dossier: alim2018_extraction.md
+    paper: "Alim, Song, Liu, Zou, Zhang & Zhang 2018 J Sci Food Agric 98:3774"
+    lab: "BTBU (Song H)"
+    system: "yeast-extract paste LA00 (Angel Yeast) in water, 1 : 5 (sugars: 3 g + 15 mL; furans: 6 g + 30 mL)"
+    medium: "unbuffered water, foil-sealed vial in Parr high-pressure reactor; food matrix"
+    temperature_c: [25, 100, 110, 120, 130, 140]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [60]
+    species: [fructose, glucose, sucrose, furfural, 5-methylfurfural, 2-acetylfuran, 2-furanmethanol, "2,3-butanedione", acetic acid]
+    kind: endpoint
+    location: "Fig. 1c (sugars, digitised, dossier sec. 4b); Table 2 / Table 3 furan and dicarbonyl rows (secs. 4c, 4d)"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "let it react at different temperatures (100 C, 110 C, 120 C, 130 C, 140 C) for 1 h"
+    flags: [matrix_food, ph_not_stated, unit_basis_not_stated, "sucrose_called_reducing_sugar", "sugars_calibrated_furans_semi_quantitative", "safe_140C_column_zeros", accepted_manuscript_not_vor]
+    note: "Fructose 12.0 -> 5.7, glucose 7.6 -> 4.5 mg/g after 1 h at 140 C (read +-0.3). Furfural / 5-methylfurfural / 2-acetylfuran rise from 110-120 C (SPME, RF = 1). No HDMF, sotolon. Matrix plausibility only."
+  # ---- purlis2019 (ingested 2026-11-03) ----
+  - id: purlis2019_fig3_surface_lightness_vs_time
+    dossier: purlis2019_extraction.md
+    paper: "Purlis & Salvadori 2009 Food Res Int 42:865 (repo key purlis2019)"
+    lab: "CIDCA La Plata (Purlis / Salvadori)"
+    system: "French bread dough (flour 100, water 54.1, salt/sugar/margarine 1.6, yeast 1.2 parts), 100 g cylinders"
+    medium: "bread crust, electric static oven, natural or forced (0.9 m/s) convection; surface T and a_w simulated, not measured"
+    temperature_c: [180, 200, 220]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 40]
+    species: ["CIELAB L* (surface, computer vision)"]
+    kind: time_series
+    location: "Fig. 3 (6 conditions x 5-min points), Fig. 5 (0-10 min), Fig. 8a (forced, with fits); dossier sec. 4a"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "three constant oven temperatures: 180, 200 and 220 °C"
+    flags: [matrix_food, oven_air_temperature_not_product, product_temperature_simulated, no_error_bars, colour_not_chemistry, caramelisation_confounded]
+    note: "Lag 0-10 min (L* rises: surface smoothing); darkening once simulated surface T > 120 C and a_w < 0.6. Directional checks only; no L*-to-melanoidin operator."
+  - id: purlis2019_eq13_lightness_rate_constant_t_aw
+    dossier: purlis2019_extraction.md
+    paper: "Purlis & Salvadori 2009 Food Res Int 42:865 (repo key purlis2019)"
+    lab: "CIDCA La Plata (Purlis / Salvadori)"
+    system: "French bread crust (as above)"
+    medium: "bread crust; k(T, a_w) fitted against simulated surface T and a_w"
+    temperature_c: [120, 192]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [10, 40]
+    species: ["first-order L* decay constant k (min^-1)"]
+    kind: rate_constant
+    location: "Eq. 13 p. 869 (k1..k4 printed, no SE), Fig. 7 surface; dossier sec. 4d-4e"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "only data from the darkening phase was considered"
+    flags: [matrix_food, empirical_colour_kinetics, inputs_simulated, no_parameter_uncertainty, l_star_decays_to_zero, multiplication_signs_lost_in_print]
+    note: "Not an Ea (authors); A*R = 73-77 kJ/mol over 120-200 C [Z]. k max at a_w 0.1-0.2. n = 34, e_abs 3.6 %."
+  # ---- buera1993 (ingested 2026-11-03) ----
+  - id: buera1993_tab2_wlf_coefficients_neb_low_moisture
+    dossier: buera1993_extraction.md
+    paper: "Buera & Karel 1993 J Food Process Preserv 17:31"
+    lab: "Rutgers (Karel)"
+    system: "dehydrated carrot, cabbage, apple, onion, potato, nonfat milk, whey powder (literature NEB data, 0-20 % moisture d.b.) + PVP10/glucose/glycine 99:0.5:0.5 and PVP24/xylose/lysine 98:1:1 freeze-dried model systems at a_w 0.22"
+    medium: "low-moisture amorphous solids; model systems unbuffered in stoppered glass vials, air"
+    temperature_c: [20, 130]
+    ph: {initial: [null], measured_during: false, final: null}
+    time_min: []
+    species: ["WLF C1 and C2 of zero-order NEB rate constants (A420 or literature browning index), at To and shifted to Tg"]
+    kind: other
+    location: "Table 2 (p. 39, 220 dpi render; three cells from 400 dpi crops); dossier sec. 4a; derived Tg sec. 4b"
+    status: digitised_in_dossier
+    quant_class: other
+    simulable: false
+    condition_quote: "Zero order kinetics were assumed and the slopes were taken as reaction constants."
+    flags: [no_rate_constants_printed, tg_measured_not_printed, c2_set_by_convention_not_fitted, k0_per_moisture_no_moisture_prediction, equation_sign_typo, ph_not_stated, no_uncertainties]
+    note: "Only C1 at To is fitted (mean 7.9); C2g = Tg0 by construction (T_inf = Tg - Tg0), so C1g's moisture trend is algebraic. T - Tg ~0-120 K, storage 20-130 C. Diagnostic prior on low-moisture apparent Ea (Ea_eff 100-260 kJ/mol near Tg) for B54's glass gate; not a rate multiplier (no absolute k, k0 per moisture). arms: 9 systems x 1-7 moistures (different labs' primary data, one re-analysis)."
+  - id: buera1993_fig1_fig2_normalised_wlf_plots
+    dossier: buera1993_extraction.md
+    paper: "Buera & Karel 1993 J Food Process Preserv 17:31"
+    lab: "Rutgers (Karel)"
+    system: "carrot, cabbage, apple, onion (Fig. 1); + potato, nonfat milk, whey powder (Fig. 2)"
+    medium: "dehydrated foods, literature storage data"
+    temperature_c: [20, 130]
+    ph: {initial: [null], measured_during: false, final: null}
+    time_min: []
+    species: ["log10(k/k0) of NEB zero-order rate constants vs (T - To)/(T - T_inf)"]
+    kind: ratio
+    location: "Fig. 1 (p. 38, rotated) and Fig. 2 (p. 40); 150 dpi renders, read for form only"
+    status: figure_only
+    quant_class: other
+    simulable: false
+    condition_quote: ""
+    flags: [k0_per_system_and_moisture_unrecoverable, legend_moistures_differ_from_table2, replot_of_primary_sources]
+    note: "Ratios only; the absolute rates are in Legault 1951, Mizrahi 1970, Resnik & Chirife 1979, Samaniego 1991, Hendel 1955, Flink 1974, Franzen 1990, Saltmarch 1981 (none on disk). Ledger those if low-moisture browning k are needed."
