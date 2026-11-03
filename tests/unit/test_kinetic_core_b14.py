@@ -25,7 +25,9 @@ def test_the_band_and_window_are_the_source_table():
     assert ac.KF_TABLE[0.92] == (3.57, 1.38)          # the lane's shipped k_int1_acr, Table 2 a_w 0.92 column
     assert ac.AW_SCALE_BAND == (0.41, 1.39)           # 1.45/3.57 .. (3.57+1.38)/3.57
     assert ac.aw_multiplier(None) == 1.0 and ac.aw_multiplier(0.2) == 1.0 and ac.aw_multiplier(0.95) == 1.0
-    assert ac.aw_multiplier(0.95, 0.7) == 0.7 and ac.aw_multiplier(0.2, 0.7) == 1.0   # the draw acts only inside
+    # CF-104 (2026-11-03): the draw now acts at any DECLARED a_w; before, outside the window it dropped the band,
+    # so an unmeasured a_w got a narrower envelope than a measured one. The centre is 1.0 either way.
+    assert ac.aw_multiplier(0.95, 0.7) == 0.7 and ac.aw_multiplier(0.2, 0.7) == 0.7 and ac.aw_multiplier(None, 0.7) == 1.0
 
 
 def test_declarations_name_the_window_state():
@@ -42,8 +44,10 @@ def test_a_prediction_at_the_centre_is_unchanged_and_the_draw_moves_it():
     assert inside == pytest.approx(centre, rel=1e-9)            # the declared multiplier is exactly 1
     low = predict(_spec(0.95), [ACR], draw=CoreDraw(acrylamide_aw_scale=0.5)).concentrations_ug_per_l[ACR]
     assert 0 < low < inside
+    outside_centre = predict(_spec(0.2), [ACR]).concentrations_ug_per_l[ACR]
+    assert outside_centre == pytest.approx(centre, rel=1e-9)    # no central term outside the window
     outside = predict(_spec(0.2), [ACR], draw=CoreDraw(acrylamide_aw_scale=0.5)).concentrations_ug_per_l[ACR]
-    assert outside == pytest.approx(centre, rel=1e-9)           # no term outside the window, draw or not
+    assert 0 < outside < outside_centre                         # CF-104: but the band is drawn there too
 
 
 def test_the_axis_is_answered_inside_the_window_and_refused_across_it():

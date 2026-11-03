@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-11-01",
+    "generated_on": "2026-11-03",
     "git": {
-      "commit": "55d20af6813726ce4fef2d46b8b0030e17416c71",
-      "short": "55d20af6",
-      "branch": "cf077-pyrazine-cross-pair-factor",
+      "commit": "54befe0ad7b4ddc37da3cabccacaa041aad0f755",
+      "short": "54befe0a",
+      "branch": "acrylamide-envelope-2026-11-03",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/directional.py",
@@ -510,7 +510,7 @@
       "arm 'egg PC alone' refused": 1,
       "arm 'methionine alone' refused": 1
     },
-    "wall_seconds": 1347.4
+    "wall_seconds": 338.9
   },
   "claims": [
     {
@@ -4520,7 +4520,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY (B14/B15): a_w 1.00 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
+            "WATER ACTIVITY (B14/B15): a_w 1.00 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies at the centre: the value is recorded and changes no central rate, but the envelope still draws the formation band 0.41-1.39 (CF-104); a comparison that moves a_w across this boundary is refused.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x1.91 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x1.51 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "value_ug_per_l": 53102.88520321661
@@ -4548,7 +4548,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY (B14/B15): a_w 1.00 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
+            "WATER ACTIVITY (B14/B15): a_w 1.00 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies at the centre: the value is recorded and changes no central rate, but the envelope still draws the formation band 0.41-1.39 (CF-104); a comparison that moves a_w across this boundary is refused.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.22 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.38 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "value_ug_per_l": 27317.09300017654

@@ -2,18 +2,18 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-11-01",
+    "generated_on": "2026-11-03",
     "git": {
-      "commit": "55d20af6813726ce4fef2d46b8b0030e17416c71",
-      "short": "55d20af6",
-      "branch": "cf077-pyrazine-cross-pair-factor",
-      "dirty": true
+      "commit": "1425ded2034deb89a50cf8d0e3302df419401ad1",
+      "short": "1425ded2",
+      "branch": "acrylamide-envelope-2026-11-03",
+      "dirty": false
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "246d7e6f4ff966ffe6e7370cbcca928c2f17cd936ea4e94d87acf53607f230bd"
+        "sha256": "bb58086c86d573d5420866d4f5bc11ce7734addb78109defde7567e77d00520c"
       },
       {
         "path": "results/validation/kinetic_core_b60_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "e9159afa7f20f94bf8ed092c10ab3f03a65055fc69c1f6eb95c3e4e4584454b9"
+        "sha256": "7fa1439a3e5012a3773f41bdd728c6fa912eeebbba40cd17575805a7ffd09ec3"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "9b153bbe8a0324f1d3ae66021ea90624bb998e1ae9d6b3310cd9ea534c09aa2b"
+        "sha256": "00aaef1ffd9120c3c29be1218ba1f80cc5c00db827b4378b55f234eb8daf7606"
       },
       {
         "path": "results/validation/lane_offset_diagnostic.json",
@@ -702,8 +702,8 @@
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 9.608972543086537,
-      "envelope_miss_log10": 0.3679433274090078,
+      "voi_score": 9.60897254278074,
+      "envelope_miss_log10": 0.3679433273153335,
       "template": "free_precursor_sulfur_yield"
     },
     {

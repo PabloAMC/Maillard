@@ -1241,6 +1241,20 @@ def declare_envelope(
     lane = lanes[0] if lanes else None
     reasons.extend(lane_reasons)
 
+    # CF-106 (2026-11-03): the acrylamide lane is refused for a programme that peaks inside (60, 120) C, below
+    # its 120-200 C fit window, where its emergent formation Ea (~296 kJ/mol) and 60-min yields (x15-2000 low)
+    # are contradicted by the measured low-temperature data. At or below 60 C its near-zero answer stands.
+    if ACRYLAMIDE in lanes:
+        low, high = acrylamide_conditions.LOW_T_REFUSAL_C
+        peak = float(spec.process.thermal.peak_temperature_c)
+        if low < peak < high:
+            reasons.append(
+                f"ACRYLAMIDE BELOW ITS FIT WINDOW (CF-106): the programme peaks at {peak:.0f} C, inside "
+                f"{low:.0f}-{high:.0f} C. The lane's constants were measured over 120-200 C, and below 120 C its "
+                "emergent formation Ea (~296 kJ/mol) and 60-min yields (x15-2000 low) contradict the measured "
+                "data (Gokmen 2012, Knol 2005): the answer is refused rather than extrapolated."
+            )
+
     # B13: the dicarbonyl steps are trunk-only (the sulfur and acrylamide networks keep the
     # topology their fits were run on), so a dicarbonyl target on another lane is refused
     # by name instead of answered with the inert zero those state vectors carry.
@@ -2130,6 +2144,10 @@ class CoreDraw:
     acrylamide_aw_elimination_scale: Optional[float] = None
     acrylamide_ph_exponent_formation: Optional[float] = None
     acrylamide_ph_exponent_elimination: Optional[float] = None
+    #: CF-039 (2026-11-03): draws of the two measured acrylamide Ea (k_int1_acr, k_asn_glc), k(160 C) held.
+    #: ``None`` = the shipped constants.
+    acrylamide_ea_int1: Optional[float] = None
+    acrylamide_ea_asn_glc: Optional[float] = None
     #: B11: a multiplicative scale on the sulfur lane's oxygen reservoir (declared band
     #: OX_RESERVOIR_SCALE_BAND, spanning the saturation band and the unrecorded-vessel band).
     oxygen_reservoir_scale: Optional[float] = None
@@ -2637,6 +2655,7 @@ def _integrate_program(
                                        if d.get("ph_exponent_formation") is None else float(d["ph_exponent_formation"])),
                 ph_exponent_elimination=(acrylamide_conditions.PH_EXPONENT_ELIMINATION
                                          if d.get("ph_exponent_elimination") is None else float(d["ph_exponent_elimination"])),
+                ea_overrides={"k_int1_acr": d.get("ea_int1"), "k_asn_glc": d.get("ea_asn_glc")},
             )
             if condition_terms:
                 metadata.setdefault("condition_terms", list(condition_terms))
@@ -2749,7 +2768,8 @@ def predict(
         acrylamide_draw = (
             {"aw_scale": draw.acrylamide_aw_scale, "aw_elimination_scale": draw.acrylamide_aw_elimination_scale,
              "ph_exponent_formation": draw.acrylamide_ph_exponent_formation,
-             "ph_exponent_elimination": draw.acrylamide_ph_exponent_elimination}
+             "ph_exponent_elimination": draw.acrylamide_ph_exponent_elimination,
+             "ea_int1": draw.acrylamide_ea_int1, "ea_asn_glc": draw.acrylamide_ea_asn_glc}
             if draw is not None else None
         )
         final_state, metadata = _integrate_program(
