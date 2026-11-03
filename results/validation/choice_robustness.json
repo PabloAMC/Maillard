@@ -4,20 +4,20 @@
     "artifact": "choice_robustness",
     "generated_on": "2026-11-03",
     "git": {
-      "commit": "2324e19a0f6676a12ec7d55e762dd0f4dc0604ad",
-      "short": "2324e19a",
-      "branch": "plan-single-2026-11-03",
+      "commit": "c2c15ab5a94c4d023246fab8aaef25986d7ae4f1",
+      "short": "c2c15ab5",
+      "branch": "acrylamide-envelope-2026-11-03",
       "dirty": false
     },
     "generated_by": "scripts/generators/build_choice_robustness.py",
     "inputs": [
       {
         "path": "docs/reference/choices_register.yml",
-        "sha256": "d8e405e0ff8c993f9fc1972a7f2625ef2ee2f02ee427fdbfd00b61467f00e09f"
+        "sha256": "59740084ade44c87f978105316aaa512c6bdb43d2ecc1194483f991ee2bc72b5"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "246d7e6f4ff966ffe6e7370cbcca928c2f17cd936ea4e94d87acf53607f230bd"
+        "sha256": "bb58086c86d573d5420866d4f5bc11ce7734addb78109defde7567e77d00520c"
       }
     ]
   },
@@ -38,7 +38,8 @@
     "CR-13": "untested",
     "CR-14": "untested",
     "CR-15": "untested",
-    "CR-16": "untested"
+    "CR-16": "untested",
+    "CR-17": "harmless"
   },
   "sweeps": {
     "CR-05": {

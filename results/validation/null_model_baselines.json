@@ -2,18 +2,18 @@
   "artifact": "null_model_baselines",
   "provenance": {
     "artifact": "null_model_baselines",
-    "generated_on": "2026-10-29",
+    "generated_on": "2026-11-03",
     "git": {
-      "commit": "157e38dc56819be52104abf7cec5a5217acfdf33",
-      "short": "157e38dc",
-      "branch": "sulfur-route-and-tooling",
+      "commit": "c2c15ab5a94c4d023246fab8aaef25986d7ae4f1",
+      "short": "c2c15ab5",
+      "branch": "acrylamide-envelope-2026-11-03",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_null_model_baselines.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "246d7e6f4ff966ffe6e7370cbcca928c2f17cd936ea4e94d87acf53607f230bd"
+        "sha256": "bb58086c86d573d5420866d4f5bc11ce7734addb78109defde7567e77d00520c"
       }
     ]
   },
@@ -60,8 +60,8 @@
       "engine": {
         "rows": 9,
         "within_3x": 4,
-        "median_fold": 4.422943717922484,
-        "median_abs_log10": 0.6457114129958273
+        "median_fold": 4.4229437179256,
+        "median_abs_log10": 0.6457114129961332
       },
       "constant": {
         "rows": 9,
@@ -350,7 +350,7 @@
       "compound": "Acrylamide",
       "lane": "acrylamide",
       "measured": 1859.0,
-      "engine": 203.19417771198226,
+      "engine": 203.1941777160473,
       "constant": 287.15351792576547,
       "out_of_sample": true
     },
@@ -360,7 +360,7 @@
       "compound": "5-Hydroxymethylfurfural (HMF)",
       "lane": "acrylamide",
       "measured": 12280.0,
-      "engine": 1966.1162014099375,
+      "engine": 1966.1162014102977,
       "constant": 6669.80594770193,
       "out_of_sample": true
     },
@@ -370,7 +370,7 @@
       "compound": "DMHF",
       "lane": "acrylamide",
       "measured": 1153.17,
-      "engine": 21.840611810701176,
+      "engine": 21.840611810701297,
       "constant": null,
       "out_of_sample": true
     },
@@ -380,7 +380,7 @@
       "compound": "5-Hydroxymethylfurfural (HMF)",
       "lane": "acrylamide",
       "measured": 57253.94,
-      "engine": 55408.80970485064,
+      "engine": 55408.80970489688,
       "constant": 63063.06306306307,
       "out_of_sample": true
     },
@@ -390,7 +390,7 @@
       "compound": "DMHF",
       "lane": "acrylamide",
       "measured": 5893.98,
-      "engine": 21.840611810701176,
+      "engine": 21.840611810701297,
       "constant": null,
       "out_of_sample": true
     },
@@ -400,7 +400,7 @@
       "compound": "5-Hydroxymethylfurfural (HMF)",
       "lane": "acrylamide",
       "measured": 100635.78,
-      "engine": 55408.80970485064,
+      "engine": 55408.80970489688,
       "constant": 63063.06306306307,
       "out_of_sample": true
     },
@@ -410,7 +410,7 @@
       "compound": "Acrylamide",
       "lane": "acrylamide",
       "measured": 28.0,
-      "engine": 6110.035826794899,
+      "engine": 6110.035826794892,
       "constant": 429.23208008189295,
       "out_of_sample": true
     },
@@ -420,7 +420,7 @@
       "compound": "Acrylamide",
       "lane": "acrylamide",
       "measured": 1459.0,
-      "engine": 3679.8891733115074,
+      "engine": 3679.889173314099,
       "constant": 429.23208008189295,
       "out_of_sample": true
     },
@@ -430,7 +430,7 @@
       "compound": "Acrylamide",
       "lane": "acrylamide",
       "measured": 832.0,
-      "engine": 3679.8891733115074,
+      "engine": 3679.889173314099,
       "constant": 429.23208008189295,
       "out_of_sample": true
     },
@@ -440,7 +440,7 @@
       "compound": "5-Hydroxymethylfurfural (HMF)",
       "lane": "acrylamide",
       "measured": 7000.0,
-      "engine": 2551.248059781186,
+      "engine": 2551.2480597809717,
       "constant": 8425.620160307477,
       "out_of_sample": true
     },
