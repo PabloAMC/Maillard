@@ -617,19 +617,26 @@ entries:
       19.8). Schieberle 1998 Table IV, aqueous column II, the same pot ("based on 10 mmol of ribose"; FFT 121, MFT 198
       ug / 100 mmol, i.e. the Hofmann thiols x10 exactly): furan-2-aldehyde 52 ug / 100 mmol ribose = 5.2 ug per pot,
       13x below. The thiols of the two prints agree; the furfural does not. Hofmann's 67.5 is a fit row of the current
-      52-row objective (hofmann_ribose_FUR_insitu, sigma_log 0.5).
+      52-row objective (hofmann_ribose_FUR_insitu, sigma_log 0.5). (2026-11-03: the thiol, NF and mercaptoketone
+      cells of both prints are reprints of Schieberle 1996 Table 3; furfural is absent there, so each furfural number
+      is the only print in its paper family -- two determinations, not two readings of one.)
     explanations:
-      - "A typo or unit slip in one print (67.5 vs 6.75 would leave a 1.3x residual)."
-      - "Different workups: SIDA for furfural in Hofmann 1998 vs a purge-and-trap / AEDA quantification in the 1998 chapter."
+      - "A typo or unit slip in one print. Hofmann's side is excluded (2026-11-03); Schieberle's 52 printed per pot rather than per 100 mmol would leave a 1.3x residual."
+      - "Different workups: Hofmann's 5-methylfurfural internal standard added to the reaction mixture before ether extraction (recovery-corrected) vs an unstated furfural method in the 1998 chapter, whose SIDA standards are the thiols'."
     tests:
       - "root-cause analysis 2026-10-29 (conflict_analyses/CF-016.md): unresolved: Schieberle under-recovered 0.35, a 10x slip 0.25, Hofmann high 0.25; Hofmann's furfural is internal-standard (5-methylfurfural), not SIDA; Meynier's and Cerny's furfural / MFT ratios side with Schieberle. Test: three vials of Hofmann's exact pot."
       - "hofmann1998.pdf Table 5 and schieberle1998.pdf Table IV read 2026-10-29 (both quoted above); schieberle1998 ledger note already flags the 13-fold gap."
       - "Cluster 4 (2026-11-01, docs/history/conflict_resolution_2026-11-01/cluster4/results.md sec. 9): the two outside ratios are operator-biased, so neither sides with Schieberle. Cerny 2007's FUR/MFT 0.47 is an SPME GC-TIC peak-area ratio, not corrected for response or fibre partition (cerny2007 dossier, Quantification); with fibre response ~K_ow^0.6-1.0 (log K_ow 0.41 furfural vs 1.5-2.0 MFT) the molar ratio is 2.1-18 (central ~7), bracketing Hofmann's 3.4, not Schieberle's 0.26. Meynier 1995 (SDE after heating, octadecane in the solvent, no response factors) has no estimable correction. Room-temperature purge-and-trap strips ~1 % of furfural against most of the MFT, which predicts Schieberle low if no furfural isotopologue or matched calibration was used. Revised P: Schieberle under-recovered 0.45 (was 0.35), slip 0.25, Hofmann high 0.15 (was 0.25), run-to-run 0.15 -- none reaches 0.6, so the entry stays open. The 2026-10-29 line above ('Meynier's and Cerny's ratios side with Schieberle') is superseded."
+      - "Munich cluster (2026-11-03, docs/history/conflict_resolution_2026-11-03/munich_sulfur/results.md, pre-registered): (1) no third print: munch1997 Tables 4-5 (p. 1341, FFT only), munch1998 (furfural not analysed), hofmann1995 (FD factors only), schieberle1996 Table 3 (p. 178, no furfural row) and schieberle2000 Table III (no furfural row) -- read on the page; P 0.95 none exists in the corpus. (2) Hofmann single-cell slip rejected (P 0.03): Hofmann's p. 239 text says 'nearly 10 times more furan-2-aldehyde' from ribose than glucose, matching the table's 67.5 / 6.9 = 9.8. (3) FFT closure is non-discriminating: at either printed level free furfural is 19-5300x too low to make the pot's 12.1 ug FFT at the fed-pot rates (Munch T5). Revised P: Schieberle under-recovered 0.50, a slip (Schieberle's side only) 0.20, Hofmann column high 0.12, run-to-run 0.13, other 0.05; P(67.5 within 2x of truth) ~0.7, P(5.2 within 2x) ~0.2."
     status: open
     remedy: >-
-      Pending: until resolved, widen hofmann_ribose_FUR_insitu to cover both prints (target geometric mean, sigma >= 0.6
-      dex) or carry it as a two-valued choice (choices register); check Hofmann 1995 / Schieberle 1996 Table 3 for a
-      third print of the furfural level.
+      Keep hofmann_ribose_FUR_insitu as it is (67.5 ug / 100 mL, sigma_log 0.5; Schieberle's print sits at 2.2
+      sigma): do NOT move it to the geometric mean (18.7 ug), which would put the target where little probability
+      lies and averages two laboratories (OPERATING_PROCEDURE sec. 4). Carry Schieberle's 5.2 ug as the alternative in
+      the choices register (weight 0.2), run as an envelope scenario at the next envelope run. No shipped-scorecard
+      change (the row is +0.29 dex at B60). The third-print check is done and negative (2026-11-03). Decider: three
+      vials of Hofmann's exact pot with furfural by SIDA ([13C] or [2H4]-furfural) added before work-up; or an author
+      request for the 1998 chapter's furfural method.
     affects:
       - hofmann1998_t5_fa_nf_pairs
       - schieberle1998_t4_ribose_aqueous
@@ -1831,7 +1838,7 @@ entries:
   - id: CF-065
     kind: conflict
     scope: sulfur_rows
-    sources: [hofmann1998_reconciliation, zhai2023jafc]
+    sources: [hofmann1998_reconciliation, zhai2023jafc, munch1997]
     quantity: "molar yield of FFT from furfural + sulfide and of MFT from norfuraneol + sulfide"
     observation: >-
       FFT from furfural + H2S is 0.48 mol % in Hofmann & Schieberle 1998 Table 3 (20 mM each, 0.5 M phosphate pH 5,
@@ -1841,26 +1848,42 @@ entries:
       (thiol adjudication, 2026-10-29). (Corrected 2026-11-01: the Zhai source is the JAFC paper's Fig. 6, not Zhai 2023
       Food Chem, which has no fed-sulfide figure; and its sulfide is (NH4)2S, so NH3 is co-released -- not H2S alone.
       data/lit/source_verification/thiol_submodel.yml, ledger zhai2023jafc_fig6_sulfide_furanoids; zhai2023jafc
-      dossier sec. 3.3.)
+      dossier sec. 3.3.) Munch 1997 Table 5 reprints Hofmann's 0.48 % (expt 3, CF-101) and adds an H2S dose
+      (0.25 mmol: 130.1 ug, 0.12 %) and a cysteine arm (1 mmol: 25.3 ug, 0.02 %) on the same furfural pot.
     explanations:
       - "pH: at pH 7 a larger share of the sulfide is HS-, the nucleophile; predicts the gap shrinks at matched pH."
       - "Quantification: Zhai's thiols are semi-quantitative (no authentic-standard response factor); predicts the gap is a scale factor common to all of Zhai's thiol rows."
       - "A co-reactant: the NH3 / NH4+ released by Zhai's (NH4)2S (20 mM ammonium against 10 mM furanoid) opens a route Hofmann's binary H2S system lacks; predicts the gap depends on the ammonium charge."
-      - "Thiol loss during Hofmann's 20 min hold at 145 C (MFT less stable than FFT); post hoc (not pre-registered), unbounded without an Ea."
+      - "Thiol loss during Hofmann's 20 min hold at 145 C (MFT less stable than FFT); post hoc (not pre-registered), unbounded without an Ea. For FFT it predicts a cysteine-over-H2S FFT ratio ~0.2 in Munch T5 (the shipped engine is this world); 0.046 is observed (2026-11-03)."
     tests:
       - "Cluster 3 (2026-11-01, cf065_speciation.py, engine B51 as shipped): in-situ pH 5.34 (Hofmann, 145 C, 0.5 M phosphate) vs 6.33 (Zhai, 120 C; the 20 mM NH4+ buffers it down from the 7.0 label); HS- 9.6 % vs 47 % of dissolved sulfide (4.9x, not ~50x); dissolved sulfide 15-24 % (Vg/Vl 3) vs 34-70 %. Implied second-order gap log10(Zhai / Hofmann) at 120 C after temperature, headspace and speciation: FFT +1.38 [0.94, 1.83] dex, MFT +2.52 [1.96, 3.07] (median [5-95 %]); the condition corrections remove ~1.1 dex. P(gap <= 0.5 dex) = 0 for both. The residual differs between the thiols by 1.1 dex, so one common Zhai scale factor cannot be the whole residual. Negative controls pass (Hofmann T7 1 vs 2 mmol: operator 2.00x, measured 2.22x)."
+      - "Munich cluster (2026-11-03, docs/history/conflict_resolution_2026-11-03/munich_sulfur/results.md, pre-registered; munch1997.pdf Table 5 and hofmann1998.pdf Table 10 read on the page). (1) Order in H2S from Munch T5 expts 2 / 3: n = 1.04 [0.90, 1.18]; FFT is linear in sulfide up to 20 mM (no saturation, no threshold; fixed sink <= 1.8 % of the dose), so cluster 3's second-order transfer holds on a row outside the conflict. Shipped B60 engine: 3.95 vs 4.23 (-0.03 dex). (2) 0.11-0.48 % of the furfural (0.46-0.48 % of the H2S) ends as FFT: below 1 %, so formation is rate-limited if FFT survives. (3) Cysteine-over-H2S contrasts at 1 mmol each, 50 mL: FFT from furfural 0.046 (Munch T5 1 / 3), inside the Zheng-thermolysis donor band 0.028-0.075 at pH 5.0-5.34; MFT from NF 0.24 (Hofmann T10), 0.5-0.9 dex above it, so cysteine does more than release H2S on the NF route (reductant or MFT protection). (4) The shipped engine predicts the furfural contrast 0.234 (+0.71 dex; absolute +0.94 dex): it reaches Hofmann's 0.48 % by converting ~all 20 mM furfural to FFT within minutes and destroying ~99 % of it (r_fur_fft_hs integral 20.5 mM, closure 5.6 % on a 2001-point grid). The data favour slow formation with a surviving product, against product loss as the FFT half of the residual (unless the true Cys -> H2S rate at 145 C is ~5x below Zheng's extrapolation, P 0.3)."
     status: open
     remedy: >-
-      Explained in part (conditions ~1.1 dex); the residual stays open. Notes (P < 0.6, cluster 3): residual mainly
-      quantification (Zhai's RF = 1 scale) 0.45; product loss in Hofmann's hold 0.25; NH3 chemistry 0.2; other 0.1. Zhai
-      Fig. 6 stays shape-only: sub-model 4 fits Zhai's thiol rows shape-only (semi_quantitative, SCALE_TAU = inf), so
-      only the isotope-dilution rows set the absolute yield; the probe reports the two laboratories' residual levels
-      separately. Decider: one fed pot, furfural or norfuraneol + Na2S vs + (NH4)2S at matched in-situ pH, stated fill,
-      SIDA after cooling. Engine consequence (proposed, not applied): the B2.3 fed-sulfide rows charge 20 mM H2S as fully
-      dissolved, while at Hofmann's Vg/Vl = 3 and 145 C only 15-24 % is dissolved, so k_fur_fft_hs and k_nf_mft are
-      biased low by 0.6-0.8 dex against small-headspace pots; add an H2S vessel-partition operator (Kaw(T) from
-      henry_constants.yml, Vg/Vl per pot, declared band when unstated).
-    affects: [hofmann1998_t3_fft_c5_h2s, hofmann1998_t4_mft_ribose_nf_h2s, zhai2023jafc_fig6_sulfide_furanoids]
+      Explained in part (conditions ~1.1 dex, with the second-order law now checked on Munch's H2S dose); the residual
+      stays open. Notes (P < 0.6): FFT residual -- quantification (Zhai's RF = 1 scale) 0.50, NH3 chemistry 0.25,
+      product loss in Hofmann's hold 0.15 (was 0.25, lowered by the Munch cysteine contrast), other 0.10; MFT residual --
+      quantification 0.40, product loss / a depression that cysteine relieves 0.30 (was 0.25), NH3 0.20, other 0.10.
+      Zhai Fig. 6 stays shape-only: sub-model 4 fits Zhai's thiol rows shape-only (semi_quantitative, SCALE_TAU = inf),
+      so only the isotope-dilution rows set the absolute yield; the probe reports the two laboratories' residual levels
+      separately. Data (proposed, not applied): munch1997 Table 5 enters as two within-study ratio rows against expt 3
+      (count once, CF-101; sigma ~0.06 dex): the H2S-dose ratio (shipped engine passes, -0.03 dex) and the
+      cysteine-over-H2S ratio as a HELD-OUT DIAGNOSTIC (shipped engine fails, +0.71 dex), not a fit row, until the
+      engine's fed-pot FFT turnover is examined at the mechanism step; both ratios are robust to CF-102 (<= 0.09 dex
+      between 50 and 100 mL). No constant changes on this evidence (no tuning of k_fft_decay or k_cys_h2s). Deciders:
+      (i) one fed pot, furfural or norfuraneol + Na2S vs + (NH4)2S at matched in-situ pH, stated fill, SIDA after
+      cooling; (ii) residual free furfural and H2S at 20 min in Hofmann's fed furfural + H2S pot (engine ~0 for both;
+      slow formation > 90 % furfural left). Engine consequence (proposed, not applied): the B2.3 fed-sulfide rows
+      charge 20 mM H2S as fully dissolved, while at Hofmann's Vg/Vl = 3 and 145 C only 15-24 % is dissolved, so
+      k_fur_fft_hs and k_nf_mft are biased low by 0.6-0.8 dex against small-headspace pots; add an H2S vessel-partition
+      operator (Kaw(T) from henry_constants.yml, Vg/Vl per pot, declared band when unstated).
+    affects:
+      - hofmann1998_t3_fft_c5_h2s
+      - hofmann1998_t4_mft_ribose_nf_h2s
+      - zhai2023jafc_fig6_sulfide_furanoids
+      - munch1997_tab5_fft_furfural_cys_h2s
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: fed_furfural_h2s_FFT}
+      - {file: src/kinetic_core/parameters_sulfur.py, symbol: k_fur_fft_hs}
   - id: CF-066
     kind: duplicate
     scope: sulfur_rows
