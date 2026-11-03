@@ -4,10 +4,10 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-11-03",
     "git": {
-      "commit": "35d373e891344a944905cf0cdc6734c07afa3b7a",
-      "short": "35d373e8",
+      "commit": "1425ded2034deb89a50cf8d0e3302df419401ad1",
+      "short": "1425ded2",
       "branch": "acrylamide-envelope-2026-11-03",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
@@ -29,7 +29,7 @@
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "9b153bbe8a0324f1d3ae66021ea90624bb998e1ae9d6b3310cd9ea534c09aa2b"
+        "sha256": "00aaef1ffd9120c3c29be1218ba1f80cc5c00db827b4378b55f234eb8daf7606"
       },
       {
         "path": "results/validation/lane_offset_diagnostic.json",
@@ -702,8 +702,8 @@
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 9.608972543086537,
-      "envelope_miss_log10": 0.3679433274090078,
+      "voi_score": 9.60897254278074,
+      "envelope_miss_log10": 0.3679433273153335,
       "template": "free_precursor_sulfur_yield"
     },
     {
