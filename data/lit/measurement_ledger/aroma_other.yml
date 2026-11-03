@@ -2176,7 +2176,7 @@ entries:
     simulable: false
     condition_quote: "Amino acids by Biochrom 30+ analyser AFTER ACID HYDROLYSIS (1 g tissue, 6 M HCl, 110 °C, 24 h)"
     flags: [matrix_precursor_composition, matrix_food, status_uncertain, "conflicts_with: kim2024b"]
-    note: "Cattle CMT IMP sets the upper cultivated IMP corner of the composition BOX (src/cultivated_tissue_invariance.py). Amino acids are protein-bound %, not a free pool; wet/dry basis of Fig. 2 not stated. Cultured IMP disagrees with Kim 2024b by ~4 decades. Fig. 2 not digitised beyond 1 value."
+    note: "CF-041 (2026-11-03): Joo's TM IMP (~14 / ~24 mmol/kg) exceeds the adenine-derived pool of real meat, so its absolute scale is probably inflated; read its IMP as a ratio to its own TM. Cattle CMT IMP sets the upper cultivated IMP corner of the composition BOX (src/cultivated_tissue_invariance.py). Amino acids are protein-bound %, not a free pool; wet/dry basis of Fig. 2 not stated. Cultured IMP disagrees with Kim 2024b by ~4 decades. Fig. 2 not digitised beyond 1 value."
   - id: kim2024b_tab4_cultivated_pig_free_aa_nucleotides
     dossier: kim2024b_extraction.md
     paper: "Kim, Jung & Jo 2024 Food Sci Biotechnol 34:457"

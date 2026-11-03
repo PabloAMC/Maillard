@@ -29,8 +29,11 @@ electronic tongue.
   1.47 % vs TM 0.54 %; leucine 7.35 % vs 9.02 %; glycine 7.68 % vs 4.98 %. They are
   HYDROLYSED (total) amino acids, so the cysteine figure is protein cysteine plus any free cysteine,
   as a share of total amino acids; no absolute total is printed. Nothing converts to a free pool in mM.
-- Figure 2: IMP in cattle CMT about 1.98 mmol/kg; cattle TM higher (roughly 2.5 to 3, read from
-  the figure, not printed). AMP, inosine and hypoxanthine under 0.2 mmol/kg in CMT. Wet or dry
+- Figure 2: IMP in cattle CMT 1.98 mmol/kg and chicken CMT 0.81 (text); TM read from Fig. 2B **~14 (cattle) and
+  ~24 (chicken) mmol/kg** [corrected 2026-11-03 from the page render; the earlier "2.5 to 3" was wrong]. Those TM
+  values exceed every reference meat IMP (2.5-6.3) and the whole adenine-derived pool (8-15 umol/g), so Joo's
+  absolute scale is probably inflated (P ~0.65; CF-041): use its IMP as a ratio to its own TM (0.14 cattle, 0.034
+  chicken). AMP, inosine and hypoxanthine under 0.2 mmol/kg in CMT. Wet or dry
   basis not stated.
 
 ## 3. What the repo takes
