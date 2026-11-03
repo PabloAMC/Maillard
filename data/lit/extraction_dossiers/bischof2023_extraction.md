@@ -60,7 +60,8 @@ mean + SD across both breeds and both aging types over 0 to 28 days:
 - **glucose (free, α + β)**: 1.82 to 11.43 µmol/g → **2.4 to 15 mM** (means alone: 4.43 to 10.01 µmol/g,
   5.9 to 13.3 mM). The earlier dossier's "1.2 to 7.5 mM" was the anomer rows read as totals, which is
   why the box needed a cited review value as its upper corner; the primary sum covers Koutsidis 2008b's
-  GC-MS range (9.8 to 13.7 mM) and Aliani 2013's cited point (11 mM) without it.
+  GC-MS range (9.8 to 13.7 mM) and the review point Hwang 2026 attributes to Aliani 2013 (11 mM; not in that paper, `aliani2013_extraction.md`)
+  without it.
 - **leucine (free)**: 0.22 to 2.05 µmol/g → 0.29 to 2.7 mM (earlier: 0.64 to 2.4, from the wrong rows).
 - **IMP**: 0.80 to 3.61 µmol/g → 1.1 to 4.8 mM, inside Muroya 2019's 0.10 to 10 mM (earlier: 1.7 to 8.5,
   from the wrong rows).

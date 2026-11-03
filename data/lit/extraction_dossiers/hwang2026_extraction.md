@@ -1,4 +1,4 @@
-# Dashmaa et al. 2026 — EXTRACTION (review: flavoromics of meats; carries Aliani 2013's sugar values, which are CHICKEN)
+# Dashmaa et al. 2026 — EXTRACTION (review: flavoromics of meats; attributes beef sugar values to Aliani 2013, a CHICKEN paper that does not contain them)
 
 Stem `hwang2026` after the corresponding (last) author, Inho Hwang; the first author is Dashdorj Dashmaa and
 the PDF on disk is named after her. `scripts/reading_audit.py` carries the alias.
@@ -47,3 +47,11 @@ Aliani 2013 itself has no PDF on disk and no dossier, and needs none for the bee
 list shows it is a chicken paper, so the two cited points were never beef values and are not even
 cross-checks. That the chicken numbers happen to fall inside the beef ranges is a coincidence of similar
 muscle chemistry, not a confirmation.
+
+**[!] Corrected 2026-11-02/03, Aliani 2013 read from its PDF (`aliani2013_extraction.md`).** The three values are
+not in Aliani 2013 in any unit, tissue or time point: chicken breast free ribose is 0.02-0.38 umol/g (at most
+0.057 mg/g, Table 2), glucose 0.61-1.04 umol/g (Table 2; at most 0.19 mg/g), fructose not detected. So the review's
+sentence is a wrong citation, not only the wrong species, and the paragraph above is wrong twice: the cited points
+are not Aliani's chicken numbers, and the real chicken values (glucose ~0.8-1.4 mM, ribose <= 0.51 mM at 75 %
+moisture) sit BELOW the beef ranges, not inside them. Where the review's numbers come from is unresolved (they are
+beef-sized and close to Koutsidis 2008a/b; no single column matches all three).
