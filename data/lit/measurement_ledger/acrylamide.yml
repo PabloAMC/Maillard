@@ -1239,8 +1239,8 @@ entries:
     quant_class: unknown
     simulable: false
     condition_quote: "The result of mathematical modeling are compared with experimental data obtained from the study of Gokmen et al."
-    flags: [secondary_source, matrix_food, heating_up_included_in_time, low_moisture_no_aw_term, concentrations_not_stated]
-    note: "Measured T(t) at surface and core plus acrylamide and water at one frying T; re-key to the primary (Gokmen 2006) when on disk. Asn not given; basis of ug/kg not stated. Candidate frying hold-out on the measured-T(t) path (cf. knol2009_fig2_tab1_crisp_acrylamide_frying)."
+    flags: ["superseded_by: gokmen2006_fig3_whole_strip_acrylamide_moisture_150_170_190c", "superseded_by: gokmen2006_figs4_6_surface_core_temperature_acrylamide", secondary_source, matrix_food, heating_up_included_in_time, low_moisture_no_aw_term, concentrations_not_stated]
+    note: "SUPERSEDED 2026-11-03 by the primary (gokmen2006 dossier): Chan re-plotted the 170 C arm faithfully, but this entry\'s medium (six strips in duplicate, not one), system (the 6.8 mol/m3 sugar is Palazoglu 2008\'s lot) and temperature (the primary has 150 / 170 / 190 C) are wrong; use the gokmen2006 entries. Measured T(t) at surface and core plus acrylamide and water at one frying T; re-key to the primary (Gokmen 2006) when on disk. Asn not given; basis of ug/kg not stated. Candidate frying hold-out on the measured-T(t) path (cf. knol2009_fig2_tab1_crisp_acrylamide_frying)."
   - id: chan2020_tab1_lumped_sugar_acrylamide_constants
     dossier: chan2020_extraction.md
     paper: "Chan 2020 Foods 9:200 (10.3390/foods9020200)"
@@ -1314,3 +1314,95 @@ entries:
     condition_quote: "the results were 32.3 +- 3.2, 8610 +- 700, 7420 +- 600 and 20400 +- 1600 mg/100 g dry basis"
     flags: [matrix_food, not_a_kinetic_dataset]
     note: "Precursor composition only; the sec. 3.3 values are the initial charge of the kinetics pots (which maturity aliquot is not stated)."
+  # ---- gokmen2006 (ingested 2026-11-03) ----
+  - id: gokmen2006_fig3_whole_strip_acrylamide_moisture_150_170_190c
+    dossier: gokmen2006_extraction.md
+    paper: "Gokmen, Palazoglu & Senyuva 2006 J Food Eng 77:972 (10.1016/j.jfoodeng.2005.08.030)"
+    lab: "Hacettepe (Gokmen)"
+    system: "potato strips 8.5 x 8.5 x 70 mm, variety not named, ~77 % moisture at t0; Asn and sugars not measured"
+    medium: "deep-fat frying in sunflower oil, 5 L bath, six strips per fry, duplicates per time"
+    temperature_c: [150, 170, 190]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 9]
+    species: [acrylamide, water content]
+    kind: time_series
+    location: "Fig. 3 (= Fig. 2) whole-strip acrylamide and moisture at 3/6/9 min x 3 oil T; 9 min values printed p. 975 (dossier sec. 4a); 115 C x 40 min = 320 ng/g in text"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "Six potato strips were placed in the fryer and sampled in duplicates"
+    flags: [matrix_food, low_moisture_no_aw_term, heating_up_included_in_time, concentrations_not_stated]
+    note: "Primary of chan2020_figs2_4 (Chan used the 170 C arm). No precursor charge: simulable only with an assumed Asn/sugar (Palazoglu 2008 Agria lot is a different tuber batch). External-standard LC-MS, no IS, no LOD; 150 C values near zero. Moisture method not stated."
+  - id: gokmen2006_figs4_6_surface_core_temperature_acrylamide
+    dossier: gokmen2006_extraction.md
+    paper: "Gokmen, Palazoglu & Senyuva 2006 J Food Eng 77:972 (10.1016/j.jfoodeng.2005.08.030)"
+    lab: "Hacettepe (Gokmen)"
+    system: "potato strips 8.5 x 8.5 x 70 mm; 2 mm surface layer vs remaining core"
+    medium: "deep-fat frying in sunflower oil; type-T thermocouples flush with surface and at core, 1 s logging"
+    temperature_c: [150, 170, 190]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [0, 9]
+    species: [acrylamide, surface temperature, core temperature]
+    kind: time_series
+    location: "Figs. 4-6 (surface and core T every ~10 s marker, oil T; surface and core acrylamide at 3/6/9 min); 9 min values printed (dossier sec. 4b-4c)"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "A 2 mm surface layer (the surface sample) was removed from each strip"
+    flags: [matrix_food, low_moisture_no_aw_term, heating_up_included_in_time, concentrations_not_stated, mass_balance_inconsistent]
+    note: "Measured surface/core T(t) at three oil T: the thermal input for a measured-T(t) path. Surface + core acrylamide do not reconstruct the whole strip (surface share needed 0.14-0.17 vs >= ~0.4 for a 2 mm layer); use surface values as a profile index only."
+  # ---- palazoglu2008 (ingested 2026-11-03) ----
+  - id: palazoglu2008_fig2_temperature_programmed_frying
+    dossier: palazoglu2008_extraction.md
+    paper: "Palazoglu & Gokmen 2008 J Agric Food Chem 56:6162 (10.1021/jf073046l)"
+    lab: "Hacettepe (Gokmen)"
+    system: "potato strips cv. Agria 8.5 x 8.5 x 70 mm; reducing sugar 1.4 +- 0.2 g/kg, free Asn 7.2 +- 0.6 g/kg fresh"
+    medium: "deep-fat frying in sunflower oil, one strip per fry; 170 or 190 C stage (5 L bath) then 150 C (1 L beaker), 3 or 4 min total"
+    temperature_c: [150, 170, 190]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [3, 4]
+    species: [acrylamide]
+    kind: endpoint
+    location: "Fig. 2a/2b, 8 schedules, experimental (duplicates, bars) and model bars (dossier sec. 4a)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "the potato strip was quickly transferred into a 1 L oil bath"
+    flags: [matrix_food, low_moisture_no_aw_term, heating_up_included_in_time, near_loq]
+    note: "Measured precursor charge plus an oil-T step: a frying hold-out for a measured-T(t) path once one exists; no product T or moisture measured. Does not overlap Chan 2020's 9-min step schedules. Text '58 %' is the model's reduction (measured 63 %)."
+  - id: palazoglu2008_fig1_acrylamide_sugar_level_170c
+    dossier: palazoglu2008_extraction.md
+    paper: "Palazoglu & Gokmen 2008 J Agric Food Chem 56:6162 (10.1021/jf073046l)"
+    lab: "Hacettepe (Gokmen)"
+    system: "potato strips 8.5 x 8.5 x 70 mm at three reducing-sugar levels 0.6 / 1.4 / 2.4 g/kg (source of the 0.6 and 2.4 lots not described)"
+    medium: "deep-fat frying in sunflower oil, 170 C, one strip per fry"
+    temperature_c: [170]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: [3, 6]
+    species: [acrylamide]
+    kind: time_series
+    location: "Fig. 1 markers (3/4/6 min; 1.4 g/kg at 3 and 4 min only = Fig. 2 controls) and model lines (dossier sec. 4b)"
+    status: digitised_in_dossier
+    quant_class: sida
+    simulable: false
+    condition_quote: "Effect of initial total reducing sugar content and frying time on acrylamide level"
+    flags: [matrix_food, low_moisture_no_aw_term, heating_up_included_in_time]
+    note: "Sugar-dose response of fried-potato acrylamide at fixed oil T; Asn given only for the 1.4 g/kg lot. 1.4 g/kg points duplicate Fig. 2 controls."
+  - id: palazoglu2008_eq7_8_cited_fructose_asn_constants
+    dossier: palazoglu2008_extraction.md
+    paper: "Palazoglu & Gokmen 2008 J Agric Food Chem 56:6162, citing Gokmen & Senyuva 2006 Food Addit Contam 23:348"
+    lab: "Hacettepe (Gokmen)"
+    system: "fructose + asparagine model system (C_A0 5 umol), sugar -> acrylamide -> D, zero order in Asn"
+    medium: "not stated in this paper (source not on disk)"
+    temperature_c: [120, 200]
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [acrylamide]
+    kind: rate_constant
+    location: "Eqs. 7-8 p. 6164: ln k'1 = 15.438 - 11284/T, ln k2 = 7.4728 - 5950/T (Ea 93.8 / 49.5 kJ/mol derived, dossier sec. 4c)"
+    status: text_only
+    quant_class: unknown
+    simulable: false
+    condition_quote: "Because acrylamide formation was first order with respect to fructose and zeroth order"
+    flags: [secondary_source, units_not_stated]
+    note: "Same-lab apparent formation Ea 93.8 kJ/mol (CF-039 evidence). Re-key to Gokmen & Senyuva 2006 if downloaded; medium and units must be read there."

@@ -1236,17 +1236,45 @@ entries:
   - id: CF-039
     kind: conflict
     scope: other_lane
-    sources: [gokmen2012, claeys2005, devleeschouwer2009]
+    sources: [gokmen2012, claeys2005, devleeschouwer2009, devleeschouwer2007, devleeschouwer2008, bassama2011, knol2005, palazoglu2008]
     quantity: "activation energy of acrylamide formation"
-    observation: "84 kJ/mol (Gokmen 2012, silica-supported melt) vs 159-168 kJ/mol (Claeys 2005, De Vleeschouwer). Claeys is in_model_fit; Gokmen text-only."
+    observation: >-
+      83.94 kJ/mol (Gokmen 2012, Asn + Glc 0.01 mmol each on silica, 90-180 C) vs 154-182 kJ/mol from single-response
+      lumped fits (Claeys 2005 aqueous 168.3; De Vleeschouwer 2007 powders a_w 0.34-0.92 153.6-182.2; Bassama 2011
+      plantain a_w 0.43-0.97 168.5-177.8) and the Leuven multiresponse Int1 -> AA step (De Vleeschouwer 2008 / 2009 I,
+      136-172 in most columns; the lane's k_int1_acr 159.2). Other low values: Knol 2005 k4 94.4 / k3 102 (aqueous
+      0.2 M); Gokmen & Senyuva 2006 k'1 93.8 (cited as Palazoglu 2008 Eq. 7); Leuven k_INT 105-126 (lane k_asn_glc
+      117.5). Gokmen 2012's "k" is (AA / C0) / t_hold with t_hold 60 min at 90-150 C and 10 min at 180 C (reconstructed
+      from Fig. 2b to 0.07 in ln k, slope 84.5; read 2026-11-03 against the PDF).
     explanations:
-      - "Matrix and moisture (low-moisture silica melt vs aqueous / a_w 0.92 powders); apparent vs elementary barriers."
-    tests: []
+      - "Estimand: Gokmen's k is a yield per hold time, depletion-capped at 150-180 C; corrected or low-conversion (90-120 C) it is 95-109 (87-131 with read error), not 84."
+      - "Step / estimand split for the rest: ~95-120 where the condensation or early yield dominates (Knol k3/k4, Leuven k_INT, Gokmen low T, Gokmen & Senyuva k'1) vs ~146-182 for the slow Int1 -> AA step and lumped fits with co-fitted elimination. P 0.5; laboratory/method difference 0.3; Arrhenius curvature below 120 C 0.2."
+      - "Matrix and moisture (low-moisture silica melt vs aqueous / powders): REFUTED as the main cause (acrylamide cluster T1, 2026-11-03)."
+    tests:
+      - >-
+        Acrylamide cluster (2026-11-03, docs/history/conflict_resolution_2026-11-03/acrylamide/results.md,
+        pre-registered): T2a Gokmen's Fig. 3 ln k reproduced from Fig. 2b yields as (AA/C0)/t_hold (60 / 60 / 60 / 10
+        min), slope 84.5; with 60 min at 180 C as well, 60.9. T2b (outside) the same estimator on Bassama 2011 Fig. 3,
+        whose rate-constant Ea_F is 168-178, returns 66-69 (45-60 min holds) and 78-133 (~10 min holds): the estimator
+        can halve the Ea. T2c depletion-corrected Gokmen 95.0 (90-150 C), low-conversion 90-120 C 103 (87-131). T1
+        single-response Ea_F across aqueous / powders a_w 0.34-0.92 / plantain a_w 0.43-0.97: 153.6-182.2, slope 17
+        kJ/mol per unit a_w (medium falsified). T3 a 1.5-3 min come-up lag moves Gokmen's Ea by +2 to +4. T7 (outside,
+        food scale) Gokmen 2006 9-min yields give 104 vs 86 kJ/mol (170-190 C) referenced to oil vs measured surface T.
     status: open
-    remedy: "Pending."
+    remedy: >-
+      No change to the shipped constants (k_asn_glc 117.5, k_int1_acr 159.2: the lane already carries one value of
+      each cluster, one per step). [NOT applied 2026-11-03: the envelope bands are shipped; waits for a red team and owner sign-off.] Proposed: below 140 C (the fit window floor) declare a formation-Ea band of
+      95-170 kJ/mol anchored at 160 C in the envelope, or refuse below 120 C; expected effect: central predictions
+      unchanged, formation envelope wider by x2.7 at 140 C, x7.9 at 120 C, x26 at 100 C; no current score row moves
+      (all 140-200 C). Ledger/dossier note for gokmen2012: record the estimator (not_rate_constants, mixed hold times).
+      Decider: one pot with acrylamide AND asparagine time courses at >= 5 T over 100-180 C, fitted by rate constants
+      and by yield-per-time; or the Gokmen & Senyuva 2006 primary (10.1080/02652030500482355) for what k'1 is.
     affects:
       - gokmen2012_fig2b_fig3_acrylamide_temperature_ea
       - claeys2005_tab2_acrylamide_kf_ke_five_systems
+      - knol2005_tab1_acrylamide_k4_k6_ea
+      - bassama2011_tab2_acrylamide_kf_ke_ea_aw_plantain
+      - {file: src/kinetic_core/parameters_acrylamide.py, symbol: MEASURED_ACRYLAMIDE}
 
   - id: CF-040
     kind: duplicate
@@ -3028,20 +3056,46 @@ entries:
     observation: >-
       src/kinetic_core/acrylamide_conditions.py declares the formation a_w multiplier on k_int1_acr flat (1.0) over
       a_w 0.34-0.99 and the elimination multiplier falling on the dry side (minimum at 0.82), both from De
-      Vleeschouwer's model powders. Bassama 2011 Table 2 (lyophilised plantain rehydrated to initial a_w 0.972 /
-      0.904 / 0.430 at 25 C, sealed cell, Asn -> AA -> DP single-response fit on the measured centre T(t), T_ref 170 C)
-      gives k_F 0.96 / 4.90 / 7.74 x 10^-5 s^-1 and k_E 0.14 / 0.85 / 2.02 x 10^-2 s^-1: formation x8.1 and elimination
-      x14 from 0.972 to 0.430, Ea unchanged within the CIs. Read 2026-11-03 against the PDF.
+      Vleeschouwer's model powders (10.4-34.2 % water across a_w 0.88-0.99). Bassama 2011 Table 2 (lyophilised
+      plantain rehydrated to initial a_w 0.972 / 0.904 / 0.430 at 25 C = 70 / 41 / 8 % water wb, sealed cell, Asn ->
+      AA -> DP single-response fit on the measured centre T(t), T_ref 170 C) gives k_F 0.96 / 4.90 / 7.74 x 10^-5 s^-1
+      and k_E 0.14 / 0.85 / 2.02 x 10^-2 s^-1: formation x8.1 and elimination x14 from 0.972 to 0.430, Ea unchanged
+      within the CIs. Read 2026-11-03 against the PDF. On the lane's whole-sample (wet) concentration basis, with
+      sugars ~600 x Asn, mass action alone predicts k_F 1 : 1.97 : 3.07; residual 2.60 (0.904 vs 0.972) and 1.01
+      (0.430 vs 0.904).
     explanations:
-      - "Matrix: a real starchy food (plantain flour) vs De Vleeschouwer's model powders; a_w set at 25 C before heating, while the sealed-cell a_w at 140-200 C is unknown."
+      - "Concentration: drier paste concentrates the sugar; on the whole-sample basis the lane's mass action reproduces the 0.904 -> 0.430 step (residual 1.01, CI of the ratio 0.66-1.50). SUPPORTED for the two drier arms."
+      - "Moisture range: the lane's a_w window is calibrated on powders holding <= 34 % water; plantain at a_w 0.972 holds 70 %. The wet arm is 2.6x slower (CI 1.9-3.6) than any basis predicts and lies outside the calibrated moisture."
       - "Bassama's k_F is a lumped, yield-weighted Asn -> AA rate from an acrylamide-only fit, not an Asn-loss rate; precursor loss was not measured."
-      - "Concentration effect: drier paste concentrates reactants, which a per-dry-matter rate law partly absorbs (bassama2011 dossier sec. 5)."
-    tests: []
+      - "a_w set at 25 C before heating; the sealed-cell a_w at 140-200 C is unknown."
+      - "Elimination: unexplained. k_E rises x6.1 / x14.4 dry-side; the lane's shape falls (0.70 at a_w 0.43); residual x3.1 / x6.7 even if elimination is bimolecular with matrix amines."
+    tests:
+      - >-
+        Acrylamide cluster (2026-11-03, docs/history/conflict_resolution_2026-11-03/acrylamide/results.md,
+        pre-registered): T4 basis: observed k_F ratios 5.10 / 1.58 vs wet 1.97 / 1.56, dry 1 / 1, per-water 3.36 / 7.99;
+        wet-basis mass action fits the 0.430 / 0.904 ratio (likelihood ratio ~11 over a per-dry flat rate) and fails
+        the 0.904 / 0.972 ratio by x2.6. T5 (outside the conflict) De Vleeschouwer 2008 lumped formation
+        k_INT k_F / (k_F + k_M) flat within x2 over 10.4-34.2 % water (basic) and x1.4 over 18.5-25.0 % (potato-based).
+        T6 elimination residual > x3 on first-order and bimolecular readings. De Vleeschouwer's "M" basis read on 2008
+        Fig. 2 (Asn0 ~2650, Glc0 ~2300 mM at 29.6 % water; wet 2.25, dry 3.20, per-water 7.6 mol): per-water excluded,
+        wet vs dry undecided (P wet 0.6).
     status: open
-    remedy: "None now: a B54 (water activity) hold-out, not constants to adopt. Decider: an acrylamide + asparagine time course in one food matrix at >= 3 a_w with the a_w at temperature estimated."
+    remedy: >-
+      Keep AW_MULTIPLIER = 1.0. [NOT applied 2026-11-03: the envelope bands are shipped; waits for a red team and owner sign-off.] Proposed declaration changes (no constant changes): (1) the a_w window 0.34-0.99 is
+      calibrated on <= 34 % water; above ~40 % wb flag out-of-window or extend the formation band's lower edge from
+      0.41 to 0.28 (95 % bound of Bassama's wet-arm residual); expected effect: no central prediction moves; for
+      high-moisture plant-based matrices (55-70 % water) the formation envelope's low edge drops x0.68. (2) State that
+      the multiplier presumes pot concentrations per whole sample; per-dry-matter inputs lose the (1 - w) factor (x3
+      between 70 and 8 % water). (3) Elimination: no change (one matrix, a_w at 25 C); if Bassama transferred, dry-side
+      acrylamide would be over-predicted x3-7. B54 (water activity) hold-out, not constants to adopt. Decider: an
+      acrylamide + asparagine time course in one food matrix at >= 3 moistures spanning 10-70 % wb, with the a_w at
+      temperature estimated.
     affects:
       - bassama2011_tab2_acrylamide_kf_ke_ea_aw_plantain
+      - devleeschouwer2008_tab2_aw_multiresponse_constants
+      - devleeschouwer2008_tab3_aw_potato_constants
       - {file: src/kinetic_core/acrylamide_conditions.py, symbol: AW_MULTIPLIER}
+      - {file: src/kinetic_core/acrylamide_conditions.py, symbol: AW_SCALE_BAND}
       - {file: src/kinetic_core/acrylamide_conditions.py, symbol: AW_ELIMINATION_TABLE}
 
   - id: CF-105
