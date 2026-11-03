@@ -13,9 +13,9 @@
 - `r_dpo_nf` (DPO -> NF): fitted, B2.3 log10k unidentified, frozen since
 - `r_nf_decay` (NF -> FRAG_C): fitted, B2.3 log10k unidentified, frozen since
 - `r_h2s_loss` (H2S -> FRAG_S): fitted, B2.3 log10k unidentified, frozen since
-- `r_fur_fft_hs` (FUR + H2S -> FFT): fitted, B2.3 log10k unidentified, frozen since
+- `r_fur_fft_hs` (FUR + H2S -> FFT): fitted, B2.3 log10k unidentified, frozen since; conflicts: CF-065
 - `ch_mft_decay` (MFT -> FRAG_C + FRAG_S): fitted, B2.3 log10k unidentified, frozen since
-- `r_fur_fft` (FUR + H2S -> FFT): fitted, log10k unidentified
+- `r_fur_fft` (FUR + H2S -> FFT): fitted, log10k unidentified; conflicts: CF-065
 - `r_ddp_mft` (DDP + H2S -> MFT): fitted, B2.3 log10k unidentified, frozen since
 - `r_ddp_mft_hs` (DDP + H2S -> MFT): fitted, B2.3 log10k unidentified, frozen since
 
@@ -73,14 +73,14 @@ Fitted but not identified (by B60, or by B2.3 for a constant frozen since), on a
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `r_tdp_fur` | TDP -> FUR | fitted | log10k identified | 0.3% (cao2017) | 100% FUR made (hofmann1998) | FUR, TDP | — |
 | `r_nf_mft` | NF + H2S -> MFT | fitted | log10k identified | 0.0% (food) | 100% MFT made (food) | H2S, MFT, NF | — |
-| `r_fur_fft_hs` | FUR + H2S -> FFT | fitted | B2.3 log10k unidentified, frozen since | 0.0% (cao2017) | 100% FFT made (hofmann1998) | FFT, FUR, H2S | fitted, B2.3 log10k unidentified, frozen since |
+| `r_fur_fft_hs` | FUR + H2S -> FFT | fitted | B2.3 log10k unidentified, frozen since | 0.0% (cao2017) | 100% FFT made (hofmann1998) | FFT, FUR, H2S | fitted, B2.3 log10k unidentified, frozen since; conflicts: CF-065 |
 | `ch_mft_decay` | MFT -> FRAG_C + FRAG_S | fitted | B2.3 log10k unidentified, frozen since | 0.0% (food) | 100% MFT used (zhai2019) | MFT | fitted, B2.3 log10k unidentified, frozen since |
 | `r_fur_decay` | FUR -> FRAG_C | fitted | log10k identified | 0.2% (food) | 100% FUR used (hofmann1998) | FUR | — |
 | `ch_fft_decay` | FFT -> FRAG_C + FRAG_S | fitted | log10k identified | 0.0% (hofmann1998) | 99% FFT used (zhai2019) | FFT | — |
 | `r_h2s_loss` | H2S -> FRAG_S | fitted | B2.3 log10k unidentified, frozen since | 0.8% (food) | 97% H2S used (zhang2025b) | H2S | fitted, B2.3 log10k unidentified, frozen since |
 | `ch_thiolate_loss_fft` | FFT -> FRAG_C + FRAG_S | fitted | log10k identified | 0.0% (yiltirak) | 89% FFT used (hofmann1998) | FFT | — |
 | `ch_thiolate_loss_mft` | MFT -> FRAG_C + FRAG_S | fitted | log10k identified | 0.0% (hofmann1998) | 48% MFT used (hofmann1998) | MFT | — |
-| `r_fur_fft` | FUR + H2S -> FFT | fitted | log10k unidentified | 0.0% (cao2017) | 29% FFT made (cao2017) | FFT, FUR, H2S | fitted, log10k unidentified |
+| `r_fur_fft` | FUR + H2S -> FFT | fitted | log10k unidentified | 0.0% (cao2017) | 29% FFT made (cao2017) | FFT, FUR, H2S | fitted, log10k unidentified; conflicts: CF-065 |
 | `r_nf_mp3p` | NF + H2S -> MP3P | fitted | log10k identified | 0.0% (food) | 5% NF used (cao2017) | H2S, NF | — |
 | `r_ddp_mft_hs` | DDP + H2S -> MFT | fitted | B2.3 log10k unidentified, frozen since | 0.0% (zhang2025b) | 2% MFT made (zhang2025b) | H2S, MFT | fitted, B2.3 log10k unidentified, frozen since |
 | `r_ddp_mft` | DDP + H2S -> MFT | fitted | B2.3 log10k unidentified, frozen since | 0.0% (cao2017) | 1% MFT made (zhang2025b) | H2S, MFT | fitted, B2.3 log10k unidentified, frozen since |

@@ -310,7 +310,6 @@ def _short_benchmark(name: str) -> str:
         "cys_glucose_150C_Farmer1999": "Farmer 1999 (Cys + Glucose, 150°C)",
         "wheat_gluten_hvp_xylose_120C_PMC9905368": "PMC9905368 (Wheat Gluten + HVP + Xylose, 120°C)",
         "spi_hvp_xylose_120C_PMC9905368": "PMC9905368 (SPI + HVP + Xylose, 120°C)",
-        "acrylamide_asparagine_glucose_Parker2012": "Parker 2012 (Asparagine + Glucose)",
         "acrylamide_spi_extrusion_130C_ACSRef3": "ACSRef3 (SPI Extrusion, 130°C)",
         "cml_cel_commercial_pbma_Foods2023": "Foods 2023 (Commercial PBMA)",
         "cys_ribose_140C_Hofmann1998": "Hofmann 1998 (Cys + Ribose, 140°C)",

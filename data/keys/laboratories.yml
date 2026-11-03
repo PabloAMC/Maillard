@@ -56,3 +56,49 @@ groups:
   afbi_belfast_farmer:
     strings: ["AFBI Belfast (Farmer)"]
     evidence: "Aliani 2013 (Meat Sci 94:55; Aliani, Farmer*, Kennedy, Moss, Gordon): Linda Farmer corresponding, Agri-Food and Biosciences Institute, Belfast. The 1990s 'AFRC Bristol (Mottram / Farmer)' strings are Mottram-era work and stay unmapped (2026-11-03)"
+  # ---- added 2026-11-03 for the dossiers of 2026-11-02 / 03 (evidence: each dossier's Laboratory paragraph) ----
+  hacettepe_gokmen:
+    strings: ["Hacettepe (Gokmen)"]
+    evidence: "Gokmen 2006 / 2012, Palazoglu & Gokmen 2008: Vural Gokmen corresponding, Food Engineering, Hacettepe University, Ankara. 'University of Reading (Parker) / Hacettepe (Gokmen)' is a joint paper and stays unmapped"
+  karel_mit_rutgers:
+    strings: ["Rutgers (Karel)", "MIT (Karel)"]
+    evidence: "Buera & Karel 1993 (Rutgers) and the Eichner / Karel 1972 rows (MIT): Marcus Karel's group, which moved from MIT to Rutgers; merged as one laboratory, the conservative choice for leave-one-out"
+  unilever_duiven_van_den_ouweland:
+    strings: ["Unilever Duiven (Peer / van den Ouweland)", "Unilever (van den Ouweland)", "Unilever Duiven (Tonsbeek)"]
+    evidence: "Peer & van den Ouweland 1968, van den Ouweland & Peer 1975, Tonsbeek et al. 1968 / 1969: Unilever Research Laboratory, Duiven, one flavour group (P ~0.75 that Tonsbeek's work is the same group; merged, the conservative choice). 'Unilever Research Duiven (Schutte)' and the Vlaardingen strings stay apart"
+  nara_womens_matoba:
+    strings: ["Nara Women's Univ. (Matoba / Hasegawa)"]
+    evidence: "Matoba, Kuchiba, Kimura & Hasegawa 1988; Kuchiba, Kaizaki, Matoba & Hasegawa 1990 (Matoba corresponding)"
+  alberta_sporns:
+    strings: ["Univ. Alberta (Sporns)"]
+    evidence: "Shaoul & Sporns 1987: Peter Sporns, Food Science, University of Alberta"
+  ict_prague_velisek:
+    strings: ["ICT Prague (Davidek / Velisek)"]
+    evidence: "Davidek, Velisek & Janicek 1972: Dept. Food Chemistry & Analysis, Institute of Chemical Technology, Prague; NOT the Nestle Davidek (nestle_blank); the id used in docs/reference/contrast_benchmark/lab_ids.yml"
+  cftri_modi:
+    strings: ["CFTRI Mysore (Modi)"]
+    evidence: "Kavitha & Modi 2007: V.K. Modi, Central Food Technological Research Institute, Mysore. 'CFTRI Mysore / Nottingham (Taylor)' stays apart (a joint paper)"
+  ajinomoto_kuroda:
+    strings: ["Ajinomoto Food Research Labs (Kuroda / Ueda)"]
+    evidence: "Kuroda, Nagaba, Tsubuku, Kawajiri & Ueda 1997: Food Research Laboratories, Ajinomoto Co."
+  tu_berlin_methner:
+    strings: ["TU Berlin Brewing (Jacob / Methner)"]
+    evidence: "Jacob et al. 2018 / 2019: Chair of Brewing Science, TU Berlin (Methner)"
+  ku_leuven_ghent_fraeye:
+    strings: ["KU Leuven Ghent (Fraeye) / Paleo (Sanctorum)"]
+    evidence: "Devaere et al. 2022: Ilse Fraeye's meat-technology group, KU Leuven Ghent campus, with Paleo (myoglobin supplier); apart from the Leuven brewing group (bustillotrueba2018)"
+  inra_qpa_kondjoyan:
+    strings: ["INRA Clermont QuaPA (Kondjoyan)"]
+    evidence: "Kondjoyan et al. 2016: INRA QuaPA, Clermont-Ferrand, Kondjoyan's process team; same unit as 'INRA QuaPA (Berdague)' but a different team, kept apart"
+  llnl_felton_knize:
+    strings: ["LLNL (Felton / Knize)"]
+    evidence: "the Tran 2002 / Salmon 2000 frying data re-plotted by Sprague & Colvin 2011: Lawrence Livermore National Laboratory (Felton, Knize)"
+  lund_tornberg:
+    strings: ["Lund (Tornberg)"]
+    evidence: "Kovacsne Oroszvari et al. 2005 / 2006: Eva Tornberg, Food Technology, Lund University; apart from 'Copenhagen (Lund)' (a person named Lund) and 'Lund (Skog)'"
+  cidca_salvadori:
+    strings: ["CIDCA La Plata (Purlis / Salvadori)"]
+    evidence: "Purlis & Salvadori 2009: CIDCA (CONICET / UNLP), La Plata"
+  cirad_bohuon:
+    strings: ["CIRAD / SupAgro QualiSud (Bohuon)"]
+    evidence: "Bassama et al. 2011: UMR QualiSud (CIRAD / Montpellier SupAgro), Bohuon corresponding"

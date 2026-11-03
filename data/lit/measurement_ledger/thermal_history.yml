@@ -1,0 +1,203 @@
+# MEASUREMENT LEDGER -- thermal_history lane (created 2026-11-03).
+# One entry per data set in data/lit/extraction_dossiers/*.md that records HOW A FOOD HEATS OR DRIES during cooking:
+# measured or printed temperature-time programmes (surface, sub-surface, crust, core, pan / air boundary), water and
+# fat loss vs time, crust growth, and simulated surface temperature / water activity where no measurement exists.
+# The engine runs pots at fixed temperature (mechanism item 8 of docs/guides/STATUS_AND_PLAN.md is thermal
+# history); these are the candidate programmes and boundary conditions for that work. Chemistry measured in the
+# same cooking experiments (HAA, acrylamide, browning, volatiles) lives in its own lane with
+# "also_relevant: thermal_history" (rule of 2026-10-29: one entry per data set, in the ledger of the quantity it
+# measures).
+# Fields (from sprague2011_extraction.md sec. 7): product, heating_mode, setpoint, boundary {air_t_c,
+# air_velocity_m_s, humidity, h_w_m2_k}, observable, positions, time_min, representation (data_points |
+# printed_fit | model_output), location, usable_as_programme (crust | sub_surface | core | boundary_only | no),
+# status (as in trunk.yml), flags.
+# Records WHERE the data are and WHAT they are; never the values.
+lane: thermal_history
+built: 2026-11-03
+entries:
+  # ---- kondjoyan2016 ----
+  - id: kondjoyan2016_tab3_crust_thickness_vs_time
+    dossier: kondjoyan2016_extraction.md
+    paper: "Kondjoyan et al. 2016 Food Chem 213:641"
+    lab: "INRA Clermont QuaPA (Kondjoyan)"
+    product: "beef LT cylinder 48 mm x 50-55 mm, one face heated"
+    heating_mode: air_jet_impingement
+    setpoint: "pipe outlet 160/190/225/260 C; jet T 2 mm above surface 120-220 C"
+    boundary: {air_t_c: [124, 210], air_velocity_m_s: null, humidity: null, h_w_m2_k: null}
+    observable: crust_thickness_mm
+    positions: [coloured_crust]
+    time_min: [20, 90]
+    representation: data_points
+    location: "Table 3 crust column (dossier sec. 4a); Fig. 3 isotherm depths at 210 C/70 min [cited, Portanguen 2014]"
+    usable_as_programme: false
+    status: digitised_in_dossier
+    flags: [no_temperature_time_curve, air_T_only, crust_SD_not_printed, linearity_claim_cited_not_shown]
+  # ---- sprague2011 ----
+  - id: sprague2011_eq20_tran2002_pan_temperature_programme
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (pan record of Tran et al. 2002, unpublished there)"
+    lab: "LLNL (Felton / Knize)"
+    product: "beef patty R 47.5 mm x 25 mm, 20 % fat, T0 13.5 C"
+    heating_mode: pan_contact_single_sided
+    setpoint: "pan preheated to 146.9 C"
+    boundary: {air_t_c: 20, air_velocity_m_s: null, humidity: null, h_w_m2_k: {pan: 150, air: 40, pan_fitted: true}}
+    observable: pan_surface_temperature
+    positions: [pan_surface]
+    time_min: [0, 41.7]
+    representation: printed_fit
+    location: "Eq. 20 and Fig. 3 (dossier sec. 4a)"
+    usable_as_programme: boundary_only
+    status: digitised_in_dossier
+    flags: [pan_not_food_surface, secondary_replot]
+  - id: sprague2011_eq21_ikediala1996_pan_temperature_programme
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (pan record of Ikediala et al. 1996 J Food Sci 61:796)"
+    lab: "Ikediala / Correia (no id)"
+    product: "beef patty R 45 mm x 15 mm, X_fat 0.121, T0 7.0 C"
+    heating_mode: pan_contact_single_sided
+    setpoint: "pan 180 C"
+    boundary: {air_t_c: 20, air_velocity_m_s: null, humidity: null, h_w_m2_k: {pan: 150, air: 40, pan_fitted: true}}
+    observable: pan_surface_temperature
+    positions: [pan_surface]
+    time_min: [0, 8.0]
+    representation: printed_fit
+    location: "Eq. 21 and Fig. 9 (dossier sec. 4a); cubic, valid 0-480 s only"
+    usable_as_programme: boundary_only
+    status: digitised_in_dossier
+    flags: [pan_not_food_surface, secondary_replot, fit_diverges_beyond_480s]
+  - id: sprague2011_fig4_tran2002_interior_temperatures
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (thermocouples of Tran et al. 2002 Food Chem Toxicol 40:673)"
+    lab: "LLNL (Felton / Knize)"
+    product: "as sprague2011_eq20_tran2002_pan_temperature_programme"
+    heating_mode: pan_contact_single_sided
+    setpoint: "pan Eq. 20"
+    boundary: {air_t_c: 20, air_velocity_m_s: null, humidity: null, h_w_m2_k: {pan: 150, air: 40, pan_fitted: true}}
+    observable: product_temperature
+    positions: ["z 6 mm (2 probes)", "z 9 mm (3)", "z 12 mm (3)", "r ~ 0"]
+    time_min: [0, 41.7]
+    representation: data_points
+    location: "Fig. 4a-c (300 dpi, +-2 C, dossier sec. 4b)"
+    usable_as_programme: core_only
+    status: digitised_in_dossier
+    flags: [interior_below_100C, probe_spread_10C, used_to_fit_h_pan]
+  - id: sprague2011_fig8_ikediala1996_interior_temperatures
+    dossier: sprague2011_extraction.md
+    paper: "Sprague & Colvin 2011 Food Res Int 44:789 (thermocouples of Ikediala et al. 1996)"
+    lab: "Ikediala / Correia (no id)"
+    product: "as sprague2011_eq21_ikediala1996_pan_temperature_programme"
+    heating_mode: pan_contact_single_sided
+    setpoint: "pan Eq. 21"
+    boundary: {air_t_c: 20, air_velocity_m_s: null, humidity: null, h_w_m2_k: {pan: 150, air: 40, pan_fitted: true}}
+    observable: product_temperature
+    positions: ["z 3.5 mm", "z 5.5 mm", "z 9.5 mm", "r ~ 0"]
+    time_min: [0, 8.0]
+    representation: data_points
+    location: "Fig. 8 (150 dpi, +-3 C, dossier sec. 4c)"
+    usable_as_programme: core_only
+    status: digitised_in_dossier
+    flags: [out_of_sample_test_of_h_pan, secondary_replot]
+  # ---- oroszvari2005 ----
+  - id: oroszvari2005_fig1_subsurface_centre_t_vs_time
+    dossier: oroszvari2005_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2005 J Food Eng 71:18"
+    lab: "Lund (Tornberg)"
+    product: "frozen minced-beef patty, fat brisket 39 % fat, 1.5 % NaCl, D = 10 cm (thickness ~10 mm, not printed)"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 100 / 150 / 175 C, stop at centre 72 C"
+    boundary: {pan_t_c: [100, 150, 175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: temperature_c
+    positions: [centre_5mm, subsurface_2mm]
+    time_min: [0, 3.2]
+    representation: data_points
+    location: "Fig. 1 (6 traces, one run each), digitised from vector paths in dossier sec. 4b"
+    usable_as_programme: partial
+    status: digitised_in_dossier
+    flags: [frozen_start, no_surface_or_crust_temperature, single_trace_per_condition, thickness_not_printed, text_fig1_frying_time_mismatch]
+    note: "Hottest measured point is 2 mm deep and ends at <= 100 C; a sub-crust programme at most, not a crust (Maillard) programme."
+  - id: oroszvari2005_tab3_tab4_figs2_4_endpoint_mass_loss
+    dossier: oroszvari2005_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2005 J Food Eng 71:18"
+    lab: "Lund (Tornberg)"
+    product: "frozen minced-beef patties, 4 cuts (fat 6.7-39 %), D = 3-12.7 cm"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 100 / 150 / 175 C, stop at centre 72 C (t72 90-190 s)"
+    boundary: {pan_t_c: [100, 150, 175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: [total_loss_pct, water_loss_pct, fat_loss_pct, water_flux_g_cm2_s, fat_flux_g_cm2_s, final_t_2mm_c, porosity, shrinkage_pct]
+    positions: [whole_patty, subsurface_2mm]
+    time_min: [1.5, 3.2]
+    representation: endpoint_lsmeans_and_cell_means
+    location: "Tables 3-4 (main-effect LS means, p-values) and Figs. 2-4 (18 cells, n = 2, SE bars), dossier sec. 4c-4f"
+    usable_as_programme: false
+    status: digitised_in_dossier
+    flags: [endpoint_only_no_time_course, lsmeans_not_cell_means, text_contradicts_table_total_loss_vs_pan_t, drip_share_rests_on_no_evaporation_assumption]
+    note: "Time-resolved water/fat loss is in Part 3 (Kovacsne Oroszvari 2006, 10.1016/j.jfoodeng.2005.05.018); read 2026-11-03 (oroszvari2006_extraction.md, entries below)."
+  # ---- purlis2019 ----
+  - id: purlis2019_fig4_fig6_simulated_surface_t_aw
+    dossier: purlis2019_extraction.md
+    paper: "Purlis & Salvadori 2009 Food Res Int 42:865 (repo key purlis2019)"
+    lab: "CIDCA La Plata (Purlis / Salvadori)"
+    product: "French bread, 100 g cylinder 0.04 m x 0.1 m"
+    heating_mode: oven_natural_or_forced_convection
+    setpoint: "oven air 180 / 200 / 220 C (+-3.3 C); v = 0 or 0.9 m/s"
+    boundary: {air_t_c: [180, 200, 220], air_velocity_m_s: [0, 0.9], humidity: null, h_w_m2_k: null}
+    observable: [surface_temperature_c, surface_water_activity]
+    positions: [surface]
+    time_min: [0, 40]
+    representation: simulation
+    location: "Fig. 4 (T, 0-40 min) and Fig. 6 (a_w, 10-40 min), model of Purlis & Salvadori 2009b; dossier sec. 4b-4c"
+    usable_as_programme: partial
+    status: digitised_in_dossier
+    flags: [simulated_not_measured, model_parameters_in_other_paper, bread_not_plant_protein, aw_non_monotonic_in_oven_t]
+    note: "A crust-shaped T(t) with a_w(t): 25 -> ~105-119 C in 5 min, 140-192 C by 30-40 min."
+  # ---- oroszvari2006 (ingested 2026-11-03) ----
+  - id: oroszvari2006_fig1_subsurface_centre_t_vs_time_five_meats
+    dossier: oroszvari2006_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2006 J Food Eng 76:169"
+    lab: "Lund (Tornberg)"
+    product: "frozen minced-beef patties, 5 raw materials (fat 6.7-39 %, water 46-71 %), 1.5 % NaCl, D = 10 cm (thickness not printed)"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 175 C, stop at 30/60/90/120 s or centre 72 C (t72 121-151 s)"
+    boundary: {pan_t_c: [175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: temperature_c
+    positions: [centre_5mm, subsurface_2mm]
+    time_min: [0, 2.5]
+    representation: data_points
+    location: "Fig. 1 (10 series x 6 points, mean of n = 2, no SE), digitised from vector paths in dossier sec. 4a; Fig. 11 rounded means"
+    usable_as_programme: partial
+    status: digitised_in_dossier
+    flags: [frozen_start, no_surface_or_crust_temperature, thickness_not_printed, points_joined_by_straight_lines, contradicts_part2_fig1_same_condition]
+    note: "2 mm layer ends at 97-101 C; meats not significantly different. Fat brisket t72 151 s here vs 99 s in Part 2 Fig. 1 (same nominal condition)."
+  - id: oroszvari2006_figs2_3_water_fat_loss_vs_time
+    dossier: oroszvari2006_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2006 J Food Eng 76:169"
+    lab: "Lund (Tornberg)"
+    product: "as oroszvari2006_fig1_subsurface_centre_t_vs_time_five_meats"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 175 C, stop at 30/60/90/120 s or centre 72 C"
+    boundary: {pan_t_c: [175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: [water_loss_pct_of_initial_water, fat_loss_pct_of_initial_fat]
+    positions: [whole_patty]
+    time_min: [0.5, 2.5]
+    representation: data_points
+    location: "Figs. 2-3 (5 meats x 4-5 times, mean +- SE, n = 2), digitised in dossier sec. 4b; % of raw patty reconstructed in sec. 4c [derived]"
+    usable_as_programme: partial
+    status: digitised_in_dossier
+    flags: [frozen_start, total_loss_not_reported, normalised_losses_only, origin_point_assumed, x_axis_is_mean_of_two_thermocouples, single_pan_temperature]
+    note: "Whole-patty drying programme: WL/IW rises ~linearly to 40-46 % at t72 (0.4 % per C of Tm, R2 0.97); fat loss saturates for the two fattest meats. No local (crust) moisture."
+  - id: oroszvari2006_figs4_9_shrinkage_porosity_flux_vs_time
+    dossier: oroszvari2006_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2006 J Food Eng 76:169"
+    lab: "Lund (Tornberg)"
+    product: "as oroszvari2006_fig1_subsurface_centre_t_vs_time_five_meats"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 175 C"
+    boundary: {pan_t_c: [175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: [shrinkage_pct, porosity, total_flux_g_cm2_s, water_flux_g_cm2_s, fat_flux_g_cm2_s]
+    positions: [whole_patty]
+    time_min: [0.5, 2.5]
+    representation: data_points
+    location: "Figs. 4-9 (not digitised)"
+    usable_as_programme: false
+    status: figure_only
+    flags: [functional_property, derived_from_same_losses, height_not_printed]

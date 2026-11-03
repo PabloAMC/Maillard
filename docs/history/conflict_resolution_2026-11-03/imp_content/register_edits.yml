@@ -1,0 +1,46 @@
+# PROPOSED edit to docs/reference/conflicts_register.yml (cluster imp_content, 2026-11-03). Not applied: the
+# register's single writer applies it. Evidence: docs/history/conflict_resolution_2026-11-03/imp_content/{prereg.md,
+# results.md}; T4 script in the session scratchpad (conflicts/imp_content/t4_remap.py).
+
+# ---------------------------------------------------------------------------------------------------- CF-041
+  - id: CF-041
+    kind: conflict
+    scope: other_lane
+    sources: [joo2022, kim2024b]
+    quantity: "IMP content of cultured / cultivated meat"
+    observation: >-
+      As printed, both on an as-is (wet) basis, neither per protein nor per dry mass: Joo 2022 (Fig. 2, text) 1.98
+      (cattle) and 0.81 (chicken) mmol/kg in a scraped, PBS-washed, centrifuged 2D cell pellet; Kim 2024b (Table 4)
+      0.11 mg/kg (0.32 nmol/g) in a 3D gelatin-hydrogel construct (1e7 cells/mL, ~90 % moisture), by 1H NMR. Gap
+      10^3.8. Each paper's own conventional meat: Joo Fig. 2B ~24 (chicken) / ~14 (cattle) mmol/kg (read by eye);
+      Kim pork 792 mg/kg (2.28 umol/g). The joo2022 dossier misread cattle TM as 2.5-3 and omits chicken CMT 0.81.
+    explanations:
+      - "Joo's absolute scale is inflated 1.6-5x for every sample (undisclosed dry basis or a calculation factor): its TM exceeds the whole adenine-derived pool."
+      - "Kim's construct is mostly hydrogel (~3-30 % cells), diluting cell IMP 3-30x."
+      - "Harvest state: neither tissue runs the post-mortem ATP -> IMP route to completion; Joo's scrape-wash-spin handling lets part of it run, Kim's construct sits near living-state IMP."
+      - "Kim's 0.11 mg/kg is near the NMR quantification floor (factor 2-3 uncertainty)."
+    tests:
+      - >-
+        Cluster imp_content (2026-11-03, pre-registered T1-T4, results.md): T1 Kim's pork control 2.28 umol/g lies at
+        the edge of the reference meats (koutsidis2008a/b 2.5-6.3 mmol/kg, aliani2013 2.7-5.3 umol/g), so no unit slip
+        in Kim. T2 Joo's TM is 2.2-4.5x above every reference IMP and 1.6-1.7x above the total adenine-derived pool
+        (aliani2013 8.3-15 umol/g; muroya2019 ~8.5 umol/g), impossible on a wet basis (below the pre-registered 2x
+        margin: support, not proof). T3 muroya2019 pre-rigor IMP 78 nmol/g x 3-30 % cell fraction brackets Kim's
+        0.32 nmol/g within 0.85-1.9 decades. Decomposition (log10): Joo scale 0.2-0.65 + dilution 0.5-1.5 + harvest
+        state 1-2 +/- NMR floor 0.4 covers 3.8.
+    status: explained
+    remedy: >-
+      Use Joo's IMP only as a ratio to its own TM (0.14 cattle, 0.034 chicken), never as an absolute mM. In
+      src/cultivated_tissue_invariance.py BOX, cultivated_muscle IMP upper corner 3.0 -> 1.2 mM (0.14 x beef
+      2.5-6.3 umol/g at 75 % moisture, rounded up), lower corner 0.0003 kept and labelled as a hydrogel-construct
+      product-basis value near the NMR floor; STUB_BOX unchanged. Expected effect on the frozen
+      results/cultivated_tissue_invariance/measured_box_prediction.json (T4, same-quantile remap): no aggregate,
+      candidate ranking or verdict moves; naive_ranking_all_declared changes in 43/200 draws per programme. Not to
+      be regenerated for this alone. Fix the joo2022 dossier (TM ~24 / ~14 from Fig. 2B; chicken CMT 0.81; TM
+      exceeds the adenine pool) and both ledger notes. P(explanation right in kind) ~0.6; P(Joo scale inflated) ~0.65.
+      Decisive measurement: IMP of a washed cultured-muscle cell pellet on a stated wet basis, with and without a
+      post-harvest hold (already in the box's gap_map experiment).
+    affects:
+      - joo2022_tab1_fig2_cultured_meat_aa_nucleotides
+      - kim2024b_tab4_cultivated_pig_free_aa_nucleotides
+      - {file: src/cultivated_tissue_invariance.py, symbol: BOX}

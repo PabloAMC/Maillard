@@ -420,6 +420,7 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 ## 2026-11-01 — `git add -A` swept an agent's half-written files into a commit
 - **Pattern:** a docs-only commit (the queue made private) used `git add -A` while a leave-one-lab-out agent was writing in the same worktree; its unfinished prereg, generator and test were committed and pushed, and the next full suite failed on the undescribed prereg.
 - **Rule:** while any agent may write in a worktree, stage by explicit path (`git add <files>`), never `-A` / `.`; check `git status --short` against the intended file list before committing.
+- **Recurred 2026-11-03:** `git add data/lit` (a directory, not `-A`) swept two dossiers another agent was finishing into an ingest commit whose message did not name them (amended before push). A directory is not an explicit path: name the files.
 
 ## 2026-11-01 — A red team's number is a lead too
 - **Pattern:** the engine-error red team ranked E4 (the pyrazine pH law) as SUPPORTED on "methylpyrazine pH 7 / 5 = 170 vs Leahy's 14". 14 was pyrazine's ratio; methylpyrazine's is 215, so the shipped engine already matched. The premortem inherited the error, and only the pre-registration agent, reading the table for its test, caught it.
