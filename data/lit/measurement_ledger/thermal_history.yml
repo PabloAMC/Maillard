@@ -131,7 +131,7 @@ entries:
     usable_as_programme: false
     status: digitised_in_dossier
     flags: [endpoint_only_no_time_course, lsmeans_not_cell_means, text_contradicts_table_total_loss_vs_pan_t, drip_share_rests_on_no_evaporation_assumption]
-    note: "Time-resolved water/fat loss is in Part 3 (Kovacsne Oroszvari 2006, 10.1016/j.jfoodeng.2005.05.018), not on disk."
+    note: "Time-resolved water/fat loss is in Part 3 (Kovacsne Oroszvari 2006, 10.1016/j.jfoodeng.2005.05.018); read 2026-11-03 (oroszvari2006_extraction.md, entries below)."
   # ---- purlis2019 ----
   - id: purlis2019_fig4_fig6_simulated_surface_t_aw
     dossier: purlis2019_extraction.md
@@ -150,3 +150,54 @@ entries:
     status: digitised_in_dossier
     flags: [simulated_not_measured, model_parameters_in_other_paper, bread_not_plant_protein, aw_non_monotonic_in_oven_t]
     note: "A crust-shaped T(t) with a_w(t): 25 -> ~105-119 C in 5 min, 140-192 C by 30-40 min."
+  # ---- oroszvari2006 (ingested 2026-11-03) ----
+  - id: oroszvari2006_fig1_subsurface_centre_t_vs_time_five_meats
+    dossier: oroszvari2006_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2006 J Food Eng 76:169"
+    lab: "Lund (Tornberg)"
+    product: "frozen minced-beef patties, 5 raw materials (fat 6.7-39 %, water 46-71 %), 1.5 % NaCl, D = 10 cm (thickness not printed)"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 175 C, stop at 30/60/90/120 s or centre 72 C (t72 121-151 s)"
+    boundary: {pan_t_c: [175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: temperature_c
+    positions: [centre_5mm, subsurface_2mm]
+    time_min: [0, 2.5]
+    representation: data_points
+    location: "Fig. 1 (10 series x 6 points, mean of n = 2, no SE), digitised from vector paths in dossier sec. 4a; Fig. 11 rounded means"
+    usable_as_programme: partial
+    status: digitised_in_dossier
+    flags: [frozen_start, no_surface_or_crust_temperature, thickness_not_printed, points_joined_by_straight_lines, contradicts_part2_fig1_same_condition]
+    note: "2 mm layer ends at 97-101 C; meats not significantly different. Fat brisket t72 151 s here vs 99 s in Part 2 Fig. 1 (same nominal condition)."
+  - id: oroszvari2006_figs2_3_water_fat_loss_vs_time
+    dossier: oroszvari2006_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2006 J Food Eng 76:169"
+    lab: "Lund (Tornberg)"
+    product: "as oroszvari2006_fig1_subsurface_centre_t_vs_time_five_meats"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 175 C, stop at 30/60/90/120 s or centre 72 C"
+    boundary: {pan_t_c: [175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: [water_loss_pct_of_initial_water, fat_loss_pct_of_initial_fat]
+    positions: [whole_patty]
+    time_min: [0.5, 2.5]
+    representation: data_points
+    location: "Figs. 2-3 (5 meats x 4-5 times, mean +- SE, n = 2), digitised in dossier sec. 4b; % of raw patty reconstructed in sec. 4c [derived]"
+    usable_as_programme: partial
+    status: digitised_in_dossier
+    flags: [frozen_start, total_loss_not_reported, normalised_losses_only, origin_point_assumed, x_axis_is_mean_of_two_thermocouples, single_pan_temperature]
+    note: "Whole-patty drying programme: WL/IW rises ~linearly to 40-46 % at t72 (0.4 % per C of Tm, R2 0.97); fat loss saturates for the two fattest meats. No local (crust) moisture."
+  - id: oroszvari2006_figs4_9_shrinkage_porosity_flux_vs_time
+    dossier: oroszvari2006_extraction.md
+    paper: "Kovacsne Oroszvari, Bayod, Sjoholm & Tornberg 2006 J Food Eng 76:169"
+    lab: "Lund (Tornberg)"
+    product: "as oroszvari2006_fig1_subsurface_centre_t_vs_time_five_meats"
+    heating_mode: double_sided_contact_frying
+    setpoint: "pan 175 C"
+    boundary: {pan_t_c: [175], contact_pressure: null, h_w_m2_k: null, initial_t_c: -20}
+    observable: [shrinkage_pct, porosity, total_flux_g_cm2_s, water_flux_g_cm2_s, fat_flux_g_cm2_s]
+    positions: [whole_patty]
+    time_min: [0.5, 2.5]
+    representation: data_points
+    location: "Figs. 4-9 (not digitised)"
+    usable_as_programme: false
+    status: figure_only
+    flags: [functional_property, derived_from_same_losses, height_not_printed]

@@ -3090,7 +3090,7 @@ entries:
     simulable: false
     condition_quote: "a yeast extract powder was produced ... that had a residual water content of 10%"
     flags: [matrix_precursor_composition, matrix_food, dry_weight_basis, amino_acids_sums_only, no_ribose_no_nucleotides, industrial_product_origin_unknown, "biotin_b12_units_implausible"]
-    note: "Reducing sugars low (glucose 1.7-3.2, fructose 0.5-1.0 mg/g dw); thiamine 5.2-7.5 mg/100 g dw; RNA 49-55 mg/g dw total (no 5'-nucleotides). Autolysis doubles free amino acids (306 vs 116-155 mg/g). Individual amino acids in the companion paper 10.1007/s00217-018-3143-z (not on disk)."
+    note: "Reducing sugars low (glucose 1.7-3.2, fructose 0.5-1.0 mg/g dw); thiamine 5.2-7.5 mg/100 g dw; RNA 49-55 mg/g dw total (no 5'-nucleotides). Autolysis doubles free amino acids (306 vs 116-155 mg/g). Individual amino acids in the companion paper 10.1007/s00217-018-3143-z (read 2026-11-03: jacob2018_figs3_5_free_amino_acids_by_disruption_method)."
   - id: jacob2019_fig4_glutathione_by_disruption_method
     dossier: jacob2019_extraction.md
     paper: "Jacob, Striegel, Rychlik, Hutzler & Methner 2019 Eur Food Res Technol 245:1169"
@@ -3259,3 +3259,40 @@ entries:
     condition_quote: "pan-fried with various initial pan temperatures until the center temperature reached 70.6 °C"
     flags: ["also_relevant: thermal_history", secondary_replot, temperature_is_initial_pan_T, haa_species_not_named, basis_uncooked_meat_per_nomenclature, model_normalised_at_160C, A_not_reported, zero_order_rate_law, "also_relevant: thermal_history"]
     note: "Apparent Ea of total HAAs: 105.9 kJ/mol with this transport model vs 75.3 kJ/mol with Tran 2002's (same data). An Ea from cooked food depends on the thermal model behind it. No HAA chemistry in the engine."
+  # ---- jacob2018 (ingested 2026-11-03) ----
+  - id: jacob2018_figs3_5_free_amino_acids_by_disruption_method
+    dossier: jacob2018_extraction.md
+    paper: "Jacob, Hutzler & Methner 2018 Eur Food Res Technol 245:95 (online 2018, issue 2019)"
+    lab: "TU Berlin Brewing (Jacob / Methner)"
+    system: "freeze-dried extracts of spent brewer's yeast TUM 68 (cell mill, sonotrode, autolysis 24 h 50 C) + one industrial autolysed yeast extract"
+    medium: "dry powders (~10 % water), resuspended in water, analysed unheated within 12 h"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [Gln, His, Val, Ile, Leu, Pro, Cys, Asp, Glu, Asn, Ser, Gly, Thr, Ala, Arg, Tyr, Met, Trp, Phe, Lys, GABA, ornithine]
+    kind: other
+    location: "Figs. 3-5 bar charts (mg/g dry mass, mean +- 95 % CI, n = 3), digitised from vector paths in dossier secs. 4a-4b"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The free amino acids (except proline and cysteine) were quantified using ... HPLC"
+    flags: [matrix_precursor_composition, matrix_food, dry_weight_basis, figure_read, cys_redox_state_unknown, industrial_product_no_replicate_error, individual_sum_differs_from_printed_sum, "also_relevant: sulfur"]
+    note: "Free Cys 4.0 / 6.1 / 10.0 / 13.0 and Met 3.0 / 5.2 / 9.1 / 11.3 mg/g dw (CM / S / A / IP); autolysis frees x2-5 more of most amino acids. Lab-autolysate free Cys (82 umol/g) is >20x the companion's DTNB thiol, so treat it as cyst(e)ine total, not reduced Cys."
+  - id: jacob2018_figs6_8_tab2_total_amino_acids_and_protein
+    dossier: jacob2018_extraction.md
+    paper: "Jacob, Hutzler & Methner 2018 Eur Food Res Technol 245:95 (online 2018, issue 2019)"
+    lab: "TU Berlin Brewing (Jacob / Methner)"
+    system: "as jacob2018_figs3_5_free_amino_acids_by_disruption_method"
+    medium: "dry powders, acid-hydrolysed for total amino acids; Bradford protein"
+    temperature_c: []
+    ph: {initial: null, measured_during: false, final: null}
+    time_min: []
+    species: [total amino acids (19 individual, no Trp), protein (Bradford), free amino acids (sum), total amino acids (sum)]
+    kind: other
+    location: "Figs. 6-7 (individual totals), Fig. 8 (protein / free / total sums), Table 2 (essential amino acids per g total amino acid), dossier secs. 4c-4e"
+    status: digitised_in_dossier
+    quant_class: calibrated
+    simulable: false
+    condition_quote: "The resuspended yeast extracts underwent acid hydrolysis to determine all free and protein-bound amino acids"
+    flags: [matrix_precursor_composition, matrix_food, dry_weight_basis, figure_read, total_gln_asn_after_acid_hydrolysis_implausible, tab2_met_cys_is_met_only, nominal_error_bars]
+    note: "Totals do not differ by disruption method (ANOVA p > 0.05) except Glu; total amino acids 44-45 % dm (lab extracts), 63 % (industrial). Bradford protein 32 / 29 / 5 / 10 % dm misses < 3 kDa peptides in autolysates."
