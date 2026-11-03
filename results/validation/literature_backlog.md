@@ -2,8 +2,8 @@
 
 Queue policy: ready queues are exclusive to non-encoded intake rows; wet_lab_blocked comes only from structural gaps with closure_outcome=wet_lab_only
 
-Encoded references: 155
-Ready runtime: 0
+Encoded references: 150
+Ready runtime: 2
 Ready benchmark: 0
 Wet-lab blocked: 4
 Queue conflicts: 0
@@ -12,7 +12,8 @@ Queue conflicts: 0
 
 | ID | Template | Family | Matrix | Triage | Encoding | Next Action |
 | --- | --- | --- | --- | --- | --- | --- |
-| none | n/a | n/a | n/a | n/a | n/a | no runtime-only backlog remains in the curated intake registry |
+| soladoye_2020_sous_vide_euc_anchor | computational_prior | nucleotide_and_ribose_support | animal_meat_low_temperature_reference | ready_calibration | template_required | Use as a Family 04 mild-heating reference so long low-temperature windows report preserved-versus-collapsed EUC context explicitly while keeping PBMA transfer bounded. |
+| yamaguchi_ninomiya_2000_euc_anchor | computational_prior | nucleotide_and_ribose_support | aqueous_and_food_matrix_review | ready_calibration | template_required | Carry the EUC constant into the bounded Family 04 prior so the lane reports preserved umami support explicitly. |
 
 ## Ready Benchmark
 

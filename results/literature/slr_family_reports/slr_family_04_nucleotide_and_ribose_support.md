@@ -1,5 +1,5 @@
 # Systematic Literature Review — Family 4: Nucleotide degradation and ribose support
-**Last updated:** 2026-10-27  
+**Last updated:** 2026-11-03  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering nucleotide degradation and ribose support.  
 **Strategic Posture:** `high_value_support_lane`  
 **Runtime Concept:** `nucleotide_and_ribose_support`  
@@ -158,92 +158,6 @@
 
 ---
 
-### Matoba et al. (1988)
-- **DOI:** [10.1111/j.1365-2621.1988.tb13551.x](https://doi.org/10.1111/j.1365-2621.1988.tb13551.x)
-- **Matrix Family:** aqueous_model_system
-- **Kind:** `quantitative_benchmark`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `imp_half_life_h_at_100c_by_ph` | `{'4.0': 8.7, '5.0': 12.0, '7.0': 13.1, '9.0': 46.2}` |
-| `gmp_half_life_h_at_100c_by_ph` | `{'4.0': 6.4, '5.0': 9.0, '7.0': 8.2, '9.0': 38.5}` |
-| `imp_half_life_h_at_ph7_by_temp` | `{'100.0': 13.1, '110.0': 4.4, '130.0': 0.5, '150.0': 0.0583}` |
-| `gmp_half_life_h_at_ph7_by_temp` | `{'100.0': 8.2, '110.0': 2.7, '130.0': 0.3, '150.0': 0.0367}` |
-| `replicates` | `3` |
-| `assay_mode` | `hplc_uv` |
-
-**What it supports:**
-- Quantitative IMP and GMP survival under heating and extrusion-like severity
-- A benchmark-facing tradeoff between preserved umami support and hydrolysis-driven ribose delivery
-- Separate treatment of IMP and GMP instead of a pooled nucleotide bucket
-
-**What it does not support:**
-- Plant-matrix retention or encapsulation
-- Direct MFT or FFT yields in the same experiment
-- Complete ribose liberation kinetics after inosine cleavage
-
-**Next Action:** Use as the Family 04 thermal-severity anchor so nucleotide support survives mildly but shifts toward ribose delivery under extrusion-like conditions.
-
----
-
-### Kavitha & Modi (2007), LWT 40:1280
-- **DOI:** [10.1016/j.lwt.2006.07.014](https://doi.org/10.1016/j.lwt.2006.07.014)
-- **Matrix Family:** aqueous_and_food_matrix_comparison
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `imp_to_inosine_k_h_inv_at_100c_ph6_5` | `0.053` |
-| `inosine_to_ribose_k_h_inv_at_100c_ph6_5` | `0.018` |
-| `effective_ribose_release_fraction_at_100c_30min` | `0.06` |
-| `dominant_constraint` | `n_glycosidic_cleavage_rate_limiting` |
-
-**What it supports:**
-- A bounded ribose-release ceiling so Family 04 does not over-convert hydrolyzed IMP into immediate pentose delivery
-- Scientist-facing context that inosine cleavage remains the slow step under consumer-cook conditions
-- A distinction between preserved nucleotide pool and actual ribose-delivery shift
-
-**What it does not support:**
-- Extrusion residence-time reconstruction
-- IMP or GMP sensory synergy on its own
-- Matrix-specific nucleotide retention
-
-**Next Action:** Use as the bounded ribose-delivery anchor so Family 04 adds only modest ribose under mild cooking and larger support only under extrusion-like severity.
-
----
-
 ### Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067
 - **DOI:** [10.1021/jf050085t](https://doi.org/10.1021/jf050085t)
 - **Matrix Family:** meat_model_system
@@ -331,15 +245,13 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 4
 
-Total papers analyzed: **7** (Benchmark-eligible: **0**, Calibration references: **5**, Rejected: **2**)
+Total papers analyzed: **5** (Benchmark-eligible: **0**, Calibration references: **3**, Rejected: **2**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049 | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Yamaguchi & Ninomiya (2000) | 3/8 | ⚠️ Calibration | aqueous_and_food_matrix_review |
 | Hwang, Ismail & Joo (2020), Foods 9:251 | 3/8 | ⚠️ Calibration | animal_meat_low_temperature_reference |
-| Matoba et al. (1988) | 3/8 | ⚠️ Calibration | aqueous_model_system |
-| Kavitha & Modi (2007), LWT 40:1280 | 3/8 | ⚠️ Calibration | aqueous_and_food_matrix_comparison |
 | Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067 | 2/8 | ❌ Rejected | meat_model_system |
 | Finnigan, Wall, Wilde, Stephens et al. (2019), Curr. Dev. Nutr. 3:nzz021 | 2/8 | ❌ Rejected | mycoprotein |
 
@@ -354,8 +266,6 @@ Total papers analyzed: **7** (Benchmark-eligible: **0**, Calibration references:
 - `Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049` (Score: 3/8)
 - `Yamaguchi & Ninomiya (2000)` (Score: 3/8)
 - `Hwang, Ismail & Joo (2020), Foods 9:251` (Score: 3/8)
-- `Matoba et al. (1988)` (Score: 3/8)
-- `Kavitha & Modi (2007), LWT 40:1280` (Score: 3/8)
 
 ### REJECTED (Score < 3)
 - `Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067` (Score: 2/8)
@@ -369,4 +279,4 @@ Total papers analyzed: **7** (Benchmark-eligible: **0**, Calibration references:
 2. **Dynamic Calibration Offsets:** Apply the identified `high_value_support_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-11-03 using Maillard Ingestion Pipeline.*
