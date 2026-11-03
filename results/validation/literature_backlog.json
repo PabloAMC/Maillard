@@ -5157,158 +5157,9 @@
           "exists": true
         }
       ]
-    },
-    {
-      "id": "soladoye_2020_sous_vide_euc_anchor",
-      "citation": "Hwang, Ismail & Joo (2020), Foods 9:251",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "animal_meat_low_temperature_reference",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "template_required",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": false,
-      "backlog_queue": "ready_runtime",
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Use as a Family 04 mild-heating reference so long low-temperature windows report preserved-versus-collapsed EUC context explicitly while keeping PBMA transfer bounded.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": false
-        }
-      ]
-    },
-    {
-      "id": "yamaguchi_ninomiya_2000_euc_anchor",
-      "citation": "Yamaguchi & Ninomiya (2000)",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_and_food_matrix_review",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "template_required",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": false,
-      "backlog_queue": "ready_runtime",
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Carry the EUC constant into the bounded Family 04 prior so the lane reports preserved umami support explicitly.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": false
-        }
-      ]
     }
   ],
-  "ready_runtime": [
-    {
-      "id": "soladoye_2020_sous_vide_euc_anchor",
-      "citation": "Hwang, Ismail & Joo (2020), Foods 9:251",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "animal_meat_low_temperature_reference",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "template_required",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": false,
-      "backlog_queue": "ready_runtime",
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Use as a Family 04 mild-heating reference so long low-temperature windows report preserved-versus-collapsed EUC context explicitly while keeping PBMA transfer bounded.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": false
-        }
-      ]
-    },
-    {
-      "id": "yamaguchi_ninomiya_2000_euc_anchor",
-      "citation": "Yamaguchi & Ninomiya (2000)",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_and_food_matrix_review",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "template_required",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": false,
-      "backlog_queue": "ready_runtime",
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Carry the EUC constant into the bounded Family 04 prior so the lane reports preserved umami support explicitly.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": false
-        }
-      ]
-    }
-  ],
+  "ready_runtime": [],
   "ready_benchmark": [],
   "wet_lab_blocked": [
     {
@@ -10614,9 +10465,9 @@
     "encoded_and_ready_ids": []
   },
   "summary": {
-    "intake_reference_count": 152,
+    "intake_reference_count": 150,
     "encoded_reference_count": 150,
-    "ready_runtime_count": 2,
+    "ready_runtime_count": 0,
     "ready_benchmark_count": 0,
     "wet_lab_blocked_count": 4,
     "queue_conflict_count": 0

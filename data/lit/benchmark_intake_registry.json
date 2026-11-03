@@ -394,133 +394,6 @@
       }
     },
     {
-      "id": "yamaguchi_ninomiya_2000_euc_anchor",
-      "citation": "Yamaguchi & Ninomiya (2000)",
-      "doi": "10.1093/jn/130.4.921S",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "payload_role": "benchmark_intake",
-      "observable_panel_tags": [
-        "umami_support",
-        "euc_anchor",
-        "nucleotide_support"
-      ],
-      "process_state_scope": [
-        "ambient_slurry",
-        "heated_matrix"
-      ],
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "matrix_family": "aqueous_and_food_matrix_review",
-      "eligibility": "benchmark_eligible_parameter",
-      "status": "ready_for_calibration_encoding",
-      "what_it_supports": [
-        "The EUC synergy constant used to interpret IMP or GMP as multiplicative umami support rather than additive flavor mass",
-        "A conservative GMP relative-potency anchor for Family 04 scoring",
-        "Scientist-facing explanation for why low-dose nucleotide enrichment still matters"
-      ],
-      "what_it_does_not_support": [
-        "Thermal hydrolysis or ribose release kinetics",
-        "Matrix-specific nucleotide retention",
-        "A direct volatile benchmark"
-      ],
-      "key_values": {
-        "umami_synergy_constant": 1218.0,
-        "imp_relative_umami_unit": 1.0,
-        "gmp_relative_umami_unit": 2.3,
-        "amp_relative_umami_unit": 0.18,
-        "validated_food_matrices": 15
-      },
-      "repo_next_action": "Carry the EUC constant into the bounded Family 04 prior so the lane reports preserved umami support explicitly.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ]
-        }
-      ],
-      "requires_primary_data": false
-    },
-    {
-      "id": "soladoye_2020_sous_vide_euc_anchor",
-      "citation": "Hwang, Ismail & Joo (2020), Foods 9:251",
-      "doi": "10.3390/foods9030251",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "payload_role": "benchmark_intake",
-      "observable_panel_tags": [
-        "umami_support",
-        "euc_anchor",
-        "process_state_calibration",
-        "nucleotide_support"
-      ],
-      "process_state_scope": [
-        "heated_matrix"
-      ],
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "matrix_family": "animal_meat_low_temperature_reference",
-      "eligibility": "benchmark_eligible_parameter",
-      "status": "ready_for_calibration_encoding",
-      "what_it_supports": [
-        "A low-temperature Family 04 reference window for preserved IMP-driven EUC under long mild heating",
-        "Scientist-facing context that 60 C and 70 C holding do not collapse into the same nucleotide-support outcome",
-        "A bounded rationale for PBMA post-extrusion nucleotide addition or protection without claiming direct transfer from beef"
-      ],
-      "what_it_does_not_support": [
-        "Direct PBMA endpoint closure under extrusion or slurry conditions",
-        "Universal low-temperature kinetics for IMP and GMP across plant matrices",
-        "A standalone ribose-release model"
-      ],
-      "key_values": {
-        "raw_euc_percent_msg": 0.18,
-        "imp_mg_per_100g_by_condition": {
-          "60C_2h": 38.0,
-          "60C_12h": 6.0,
-          "70C_12h": 51.0
-        },
-        "glutamate_mg_per_100g_by_condition": {
-          "60C_2h": 14.0,
-          "60C_12h": 18.0,
-          "70C_12h": 15.0
-        },
-        "euc_percent_msg_by_condition": {
-          "60C_2h": 0.13,
-          "60C_12h": 0.04,
-          "70C_12h": 0.15
-        }
-      },
-      "repo_next_action": "Use as a Family 04 mild-heating reference so long low-temperature windows report preserved-versus-collapsed EUC context explicitly while keeping PBMA transfer bounded.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ]
-        }
-      ],
-      "requires_primary_data": false,
-      "citation_repair": {
-        "old": "Soladoye et al. (2020)",
-        "new": "Hwang, Ismail & Joo (2020), Foods 9:251",
-        "date": "2026-08-26",
-        "basis": "CrossRef metadata for 10.3390/foods9030251 is Hwang, Ismail & Joo (2020), sous-vide beef EUC; topic matches, author label did not."
-      }
-    },
-    {
       "id": "trikusuma_2019",
       "citation": "Trikusuma et al. (2020)",
       "doi": "10.1016/j.foodchem.2019.126082",
@@ -9311,7 +9184,9 @@
       "J. Agric. Food Chem. 2019 (Ref. 21)",
       "Matoba et al. (1988)",
       "Matoba, Terao & Fujimaki 1988",
-      "Kavitha & Modi (2007), LWT 40:1280"
+      "Kavitha & Modi (2007), LWT 40:1280",
+      "Yamaguchi & Ninomiya (2000)",
+      "Hwang, Ismail & Joo (2020), Foods 9:251"
     ]
   }
 }

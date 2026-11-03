@@ -34,10 +34,10 @@
 ---
 
 ## Summary Metrics
-- **Total Entries Evaluated**: 193
-- **DIGEST-ECHO (NOT VERIFICATION) — every number echoes the LLM digest corpus**: 50 (25.9%)
-- **PARTIAL DIGEST-ECHO (NOT VERIFICATION) — some numbers echo the corpus**: 39 (20.2%)
-- **NO DIGEST ECHO — origin unaccounted for even by the digests**: 104 (53.9%)
+- **Total Entries Evaluated**: 191
+- **DIGEST-ECHO (NOT VERIFICATION) — every number echoes the LLM digest corpus**: 50 (26.2%)
+- **PARTIAL DIGEST-ECHO (NOT VERIFICATION) — some numbers echo the corpus**: 37 (19.4%)
+- **NO DIGEST ECHO — origin unaccounted for even by the digests**: 104 (54.5%)
 
 ---
 
@@ -116,11 +116,11 @@ digests do not account for them, so their origin is unidentified by this script.
 | `li_2026_spi_wg_hme_hexanal_control_point` | Li et al. (2026), Foods 15(5):912 | flavor_reference_payloads.json | 605.6 |
 | `li_2026_spi_wg_hme_nonanal_control_point` | Li et al. (2026), Foods 15(5):912 | flavor_reference_payloads.json | 72.66 |
 | `liu_2020_egcg_arp_kinetics` | Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714 | computational_priors.json, benchmark_intake_registry.json | 8.5, 77.8 |
-| `liu_2022_ppi_oav_anchors` | Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | computational_priors.json, benchmark_intake_registry.json, flavor_reference_payloads.json | 0.002, 0.006, 543.0, 11656.0 |
+| `liu_2022_ppi_oav_anchors` | Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | computational_priors.json, flavor_reference_payloads.json, benchmark_intake_registry.json | 0.002, 0.006, 543.0, 11656.0 |
 | `liu_2023_ppi_hexanal_band` | Liu, Y. (2021), "Flavor Chemistry of Pea Proteins", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | flavor_reference_payloads.json | 543.0, 2445.0, 11656.0, 12181.0, 52454.0 |
 | `liu_2023_ppi_nonanal_band` | Liu, Y. (2021), "Flavor Chemistry of Pea Proteins", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | flavor_reference_payloads.json | 0.188, 3.42 |
 | `liu_2023_ppi_offnote_baseline` | Liu, Y. (2021), "Flavor Chemistry of Pea Proteins", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | benchmark_intake_registry.json | 0.188, 3.42, 6.126, 15.5, 25.5, 1628.0, 2445.0, 52454.0 |
-| `liu_cadwallader_2023_pea_aeda` | Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | benchmark_intake_registry.json, flavor_reference_payloads.json | 4096.0 |
+| `liu_cadwallader_2023_pea_aeda` | Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | flavor_reference_payloads.json, benchmark_intake_registry.json | 4096.0 |
 | `liu_cadwallader_2023_pea_aeda_anchor` | Liu et al. (2023), Food Chemistry 406:134998 | flavor_reference_payloads.json | 4096.0 |
 | `ma_2024_pbma_extrusion_damage` | Ma et al. (2024) | computational_priors.json, benchmark_intake_registry.json, safety_reference_payloads.json | 3.2, 18.5, 39, 101, 150, 160.0 |
 | `manso_2001_orange_juice_ascorbic_degradation` | Manso et al. (2001) | computational_priors.json, benchmark_intake_registry.json | 55.6 |
@@ -154,9 +154,9 @@ digests do not account for them, so their origin is unidentified by this script.
 | `pmid_1904866_pentosidine_equivalence_anchor` | PMID 1904866 pentosidine equivalence | computational_priors.json | 7.4, 13.2, 17.0, 37 |
 | `ramirez_jimenez_2000_furosine_crossover` | Ramírez-Jiménez et al. (2000) | safety_reference_payloads.json | 140.0 |
 | `ramirez_jimenez_2000_furosine_crossover_benchmark` | Ramírez-Jiménez et al. (2000) | benchmark_intake_registry.json, safety_reference_payloads.json | 140.0, 1250.0 |
-| `rawel_2002_cga_cysteine_blocking` | Rawel, Rohn, Kruse & Kroll (2002), Food Chemistry 78:443 | computational_priors.json, benchmark_intake_registry.json, flavor_reference_payloads.json | 2.9, 43.0, 85.0 |
+| `rawel_2002_cga_cysteine_blocking` | Rawel, Rohn, Kruse & Kroll (2002), Food Chemistry 78:443 | computational_priors.json, flavor_reference_payloads.json, benchmark_intake_registry.json | 2.9, 43.0, 85.0 |
 | `resconi_2023_pbma_beef_identity_benchmark` | Hernandez et al. (2023), Molecules 28:3151 | benchmark_intake_registry.json | 5.0, 7.65, 11.5, 12.9, 15.72, 17.5, 19.83, 30.45, 31.65, 38.1, 46.8, 50.0, 51.0, 141.0, 170.0, 560.0, 726.0, 1040.0 |
-| `researchgate_2023_pea_aeda` | Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | benchmark_intake_registry.json, flavor_reference_payloads.json | 4096.0 |
+| `researchgate_2023_pea_aeda` | Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | flavor_reference_payloads.json, benchmark_intake_registry.json | 4096.0 |
 | `researchgate_2023_pea_aeda_anchor` | Liu et al. (2023), Food Chemistry 406:134998 | flavor_reference_payloads.json | 4096.0 |
 | `richards_2009_hemoglobin_liposome_oxidation` | Carvajal et al. (2009), J. Agric. Food Chem. 57:8134 | computational_priors.json, benchmark_intake_registry.json | 0.67, 1.2, 3.8, 37, 56.6, 66.2 |
 | `rizzello_2024_fermentation_cleanup` | Flores et al. (2024), J. Agric. Food Chem. 72:5334 | benchmark_intake_registry.json | 1.42, 3.82, 15, 28.4, 382.0 |
@@ -165,7 +165,6 @@ digests do not account for them, so their origin is unidentified by this script.
 | `scielo_brasil_aa_crosslink_hierarchy_v1` | SciELO Brasil (Ref. 4) | computational_priors.json | 35.31, 50.08, 54.94 |
 | `shu_2019_cysteine_quinone_kinetics` | Shu et al. (2019) | computational_priors.json, benchmark_intake_registry.json | 100000.0, 1000000.0 |
 | `smagghe_2006_leghemoglobin_oxygen_dissociation` | Smagghe et al. (2005), Biochemistry 45:561 | computational_priors.json, benchmark_intake_registry.json | 0.024 |
-| `soladoye_2020_sous_vide_euc_anchor` | Hwang, Ismail & Joo (2020), Foods 9:251 | benchmark_intake_registry.json | 0.04, 0.15, 0.18 |
 | `solis_calero_2015_pe_glyoxal` | Solís-Calero et al. (2015) | computational_priors.json, benchmark_intake_registry.json | -5.3 |
 | `squeo_2023` | Squeo et al. (2023) | benchmark_intake_registry.json | 7, 24, 185, 451, 748 |
 | `squeo_2023_pbpi_acrylamide` | Squeo et al. (2023), Foods 12(6):1331 | safety_reference_payloads.json | 0.999, 7.0, 24.0, 185.0, 230.0, 451.0, 748.0 |
@@ -178,12 +177,11 @@ digests do not account for them, so their origin is unidentified by this script.
 | `van_boekel_2001_maillard_kinetics_review` | van Boekel (2001) | benchmark_intake_registry.json | 8.2, 98.4 |
 | `van_boekel_2001_maillard_kinetics_review_v1` | van Boekel (2001), DOI:10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9 | computational_priors.json | 0.075, 0.5, 0.65, 0.87, 1.5, 4.6, 5.9, 7.8, 8.2, 10.4, 18.2, 54.7, 71.3, 98.4, 104.0, 118.0, 132.0, 138.0 |
 | `voelker_2018_thiamine_salt_degradation` | Voelker et al. (2018) | computational_priors.json, benchmark_intake_registry.json | 96.5, 112.5 |
-| `vtechworks_2022_fava_hydrolysis` | Williams (2025) | benchmark_intake_registry.json, flavor_reference_payloads.json | 8192, 16384 |
+| `vtechworks_2022_fava_hydrolysis` | Williams (2025) | flavor_reference_payloads.json, benchmark_intake_registry.json | 8192, 16384 |
 | `wageningen_ref9_hme_rework_hydration_anchor` | Snel et al. (2023) | benchmark_intake_registry.json | -90.0, -65.0, -63.0, -17.0 |
 | `wang_2021_arg_lys_pyrazine_yield` | Wang et al. (2021), Foods 10:273 | flavor_reference_payloads.json | 73.83 |
 | `wang_2022_lab_hexanal_cleanup_oav_target` | Tao et al. (2022), Front. Microbiol. 13:1070773 | flavor_reference_payloads.json | 0.47, 0.957 |
 | `xu_2025_peptide_hierarchy` | Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1 | computational_priors.json, benchmark_intake_registry.json | 0.14, 2.25, 2.68 |
-| `yamaguchi_ninomiya_2000_euc_anchor` | Yamaguchi & Ninomiya (2000) | benchmark_intake_registry.json | 1218.0 |
 | `yu_2018_ascorbic_basic_amino_browning` | Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537 | benchmark_intake_registry.json | 35.31, 50.08, 54.94 |
 | `zha_2020_ppi_glycation_aggregation` | Zha et al. (2020) | safety_reference_payloads.json | 0.42, 2.8 |
 | `zhang_1993_protein_deamidation_ammonia` | Zhang et al. (1993) | computational_priors.json | 0.015 |
@@ -223,11 +221,11 @@ generated digest — i.e. the remediation worklist, not the safe list.
 | `kocadagli_2016_saponin_acrylamide_modifier` | Kocadağlı & Gökmen (2016) | safety_reference_payloads.json | 10.0 |
 | `lertsiri_1998_pe_glycation` | Lertsiri et al. (1998) | computational_priors.json, benchmark_intake_registry.json | 0.05, 0.12 |
 | `liu_2023_benzoquinone_lysine_kinetics` | Liu et al. (2023), Food Res. Int. 163:112187 | computational_priors.json, benchmark_intake_registry.json | 19.0 |
-| `mdpi_plants_2024_hemp_volatiles` | Chen, Oliveira, Dias & Ismail (2025), Plants 14:274 | benchmark_intake_registry.json, flavor_reference_payloads.json | 35.0 |
+| `mdpi_plants_2024_hemp_volatiles` | Chen, Oliveira, Dias & Ismail (2025), Plants 14:274 | flavor_reference_payloads.json, benchmark_intake_registry.json | 35.0 |
 | `monforte_2018_phenylacetaldehyde_quinones` | Monforte, Martins & Silva Ferreira (2017), J. Agric. Food Chem. 66:2459 | computational_priors.json, benchmark_intake_registry.json | 31.5, 32.9 |
 | `morel_2002_gluten_shear_aggregation` | Morel et al. (2002) | computational_priors.json, benchmark_intake_registry.json | 10.0, 33.7, 100.0 |
 | `mottram_1998_meat_flavour_strecker_v1` | Mottram (1998), Food Chemistry | flavor_reference_payloads.json | 38.0 |
-| `mottram_2001_bmfd_retention` | Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333 | benchmark_intake_registry.json, flavor_reference_payloads.json | 0.18, 8.0, 25.0, 98.5 |
+| `mottram_2001_bmfd_retention` | Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333 | flavor_reference_payloads.json, benchmark_intake_registry.json | 0.18, 8.0, 25.0, 98.5 |
 | `mottram_2001_bmfd_retention_prior` | Mottram et al. (2001) | computational_priors.json | 8.0, 25.0, 98.5 |
 | `mundt_wedzicha_2007_biscuit_browning` | Mundt & Wedzicha (2007), LWT 40:1078 | computational_priors.json, benchmark_intake_registry.json | 105.0 |
 | `munoz_2007_chlorogenic_oxidase_quinone` | Munoz et al. (2007) | computational_priors.json, benchmark_intake_registry.json | 2.73 |
@@ -243,9 +241,9 @@ generated digest — i.e. the remediation worklist, not the safe list.
 | `spier_2010_metal_naphthenate_peroxide_decomp` | West, Adams & Zabarnick (2011), Energy & Fuels 25:897 | computational_priors.json, benchmark_intake_registry.json | 11.0, 14.0, 23.0, 26.0 |
 | `sun_2015_ground_beef_ages` | Sun et al. (2015) | benchmark_intake_registry.json | 29.21, 61.01 |
 | `sun_2020_solid_matrix_cml_cel_accumulation` | Sun, Tang, Wang, Rasco, Lai & Huang (2016), Meat Science 116:1 | computational_priors.json, benchmark_intake_registry.json, safety_reference_payloads.json | 28.0, 40.971, 44.158 |
-| `tang_2013_thiamine_mft` | Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:326 (CrossRef issue year 2012) | benchmark_intake_registry.json, flavor_reference_payloads.json | 0.05 |
+| `tang_2013_thiamine_mft` | Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:326 (CrossRef issue year 2012) | flavor_reference_payloads.json, benchmark_intake_registry.json | 0.05 |
 | `vilanova_2012_pe_schiff_base` | Vilanova et al. (2012) | computational_priors.json, benchmark_intake_registry.json | 13.08, 54.7 |
-| `wang_2023_mft_retention` | Wang et al. (2023) | benchmark_intake_registry.json, flavor_reference_payloads.json | 7.0, 15.0, 25.0, 42.0, 85.0 |
+| `wang_2023_mft_retention` | Wang et al. (2023) | flavor_reference_payloads.json, benchmark_intake_registry.json | 7.0, 15.0, 25.0, 42.0, 85.0 |
 | `wang_2023_mft_retention_prior` | Wang et al. (2023) | computational_priors.json | 7.0, 25.0, 85.0 |
 | `yang_2021_ascorbic_glycine_kinetics` | Yang et al. (2021) | computational_priors.json, benchmark_intake_registry.json | 60.76, 70.16 |
 | `yu_2017_cml_cel_meat_review` | Sun, Tang, Wang, Rasco, Lai & Huang (2015), Food Chemistry 172:802 | benchmark_intake_registry.json, safety_reference_payloads.json | 29.21, 61.01 |
