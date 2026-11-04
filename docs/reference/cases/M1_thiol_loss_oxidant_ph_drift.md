@@ -1,5 +1,9 @@
 # Case M1: thiol loss and its oxidant; pH drift
 
+**Rescoped 2026-11-04.** This case drafted the plan's original M1 claim. An audit of the six refused sink waves
+(CF-107) then showed four of them are one degenerate fit optimum, so their refusals are not evidence against the
+structures; M1 now compares combinations C1 - C3. Its evidence led the plan to rescope M1 to "thiol loss or slow supply" (no-fit checks M1.0 first) and to move part D (the pH balance) into M1b; see STATUS_AND_PLAN sec. 5, W2. The claim below is kept as drafted.
+
 *Plan step M1 ([STATUS_AND_PLAN sec. 5, W2](../../guides/STATUS_AND_PLAN.md); errors E12 (F28-a, -b, -c) and CF-084).
 Items 1 - 5 of sec. 7, written 2026-11-04 before any result of the change exists. No engine was run for this case,
 with or without a changed switch. Items 6 - 9 are appended later and never edited into this part.*
@@ -152,10 +156,10 @@ Directions are read from each mechanism, not computed.
 | D1 | Schieberle 2000 Table IV, ratios MFT(360) / MFT(30) and MFT(720) / MFT(360) in one pot (scale cancels) | falls after ~1 h (INTRODUCTION fig. 01; B27 T1 at B9: MFT 360 / 30 = -1.80 dex) | adding oxidant and O2 makes free thiol loss FASTER; only the release slows it, and that is bounded by the disulfide share (D3). Net direction: not a rise unless the release dominates | rise continues (Cys 33 mM protects) | rise continues (slow supply) | R0 from R2 / R3; does NOT favour R1 |
 | D2 | free cysteine and sugar time courses: Cao 2017, Zhang 2025b, Zhai 2019 (measured intermediates) | consumed in seconds | as R0 | as R0 | consumed over hours | R3 from all others |
 | D3 | MFT disulfide share vs initial pH inside Zhou 2023 (pH 6 / 7 / 8; one species pair, so the response factor cancels across pH) | share rises with pH (thiolate law on `ch_dimer_*`; F28 engine note 6) | depends on the pH law of the oxidant-forming step; must be declared before the build (open question 1) | as R0 | as R0 | the sign of the slope tests R0's thiolate dimer |
-| D4 | the share's level: Zhou 2023, Zhang 2024 (cysteine arm), Whitfield 1999, the Zhou 2022 / Wang 2026b MFTD time courses | 0.04 - 0.9 % (B17 T3) | higher, rising with the oxidant | as R0 | as R0 | R1 from R0 / R2 / R3, but carries the cross-species response factor (HS-SPME, RF 1) |
+| D4 | the share's level: Zhou 2023, Zhang 2024 (cysteine arm), Whitfield 1999, the Zhou 2022 / Wang 2026b MFTD time courses | about a decade short at B9 (11x and 8.8x; B27 prereg); at B60 residuals -2.71 sigma (Zhou) and -1.99 sigma (Zhang cysteine arm). (0.04 - 0.9 % is B17's moved vector, not R0) | higher, rising with the oxidant | as R0 | as R0 | R1 from R0 / R2 / R3, but carries the cross-species response factor (HS-SPME, RF 1) |
 | D5 | Zhang 2024 cystine vs cysteine (an oxidant added, within study) | free MFT down with more oxidant (irreversible dimer) | share up, free MFT not down (reservoir) | no oxidant term | no oxidant term | R1's part C from R0; figure-only |
 | D6 | Whitfield 1999, fed NF + Cys vs + H2S (same paper, duplicates) | no oxidant in fed pots: no disulfide | dicarbonyl oxidant: disulfide in both; an aerial-O2 source predicts less at high H2S | -- | -- | part A from part B |
-| D7 | Yiltirak 2026 vs Schieberle 2000 at 100 C / 4 h (between laboratories; vessel air 17 mL over 3 mL vs a closed autoclave) | no vessel term, so no O2 gap (the joint thiol fit s042, not B60, predicts Yiltirak HIGHER, x3.7: CF-068) | O2 lowers Yiltirak | -- | -- | R1 vs R4: **not separable on disk** (no within-study O2 arm at process temperature; CF-068, F28 `unknown_regimes`) |
+| D7 | Yiltirak 2026 vs Schieberle 2000 at 100 C / 4 h (between laboratories; vessel air 17 mL over 3 mL vs a closed autoclave) | no vessel term, so no O2 gap (the joint thiol fit s042, not B60, predicts Yiltirak HIGHER, x3.7: CF-068) | O2 lowers Yiltirak | -- | -- | R1 vs R4: **not separable on disk** (no within-study O2 arm at process temperature; CF-068, F28 `unknown_regimes`), unless Xu 2010 (140 C, air vs 10 - 40 MPa N2: neither thiol nor disulfide changes) is such an arm: whether the N2 displaced the air is UNVERIFIED |
 | D8 | pH: Meynier 1995 drift <= 0.2 (buffered); Hou 2026 trajectory; Zhou 2023 label sensitivity | too acidic (Meynier -0.4 to -0.8); prompt acid (Hou) | adding trunk acids pushes MORE acidic: Meynier worse unless R5 is also built | -- | -- | R5 is tested by Meynier, R6 by Hou's late acid |
 
 **What the data cannot decide.** R1 against R4 on absolute levels (D7). R1's part B (O2) against part A

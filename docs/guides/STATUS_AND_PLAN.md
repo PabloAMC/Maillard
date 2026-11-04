@@ -69,7 +69,7 @@ Every task in this plan exists to fix one of these.
 |---|---|---|---|
 | R1 | **Wrong mechanisms in the meaty sulfur chemistry** | the model destroys thiols far faster than any pot; MFT runs 99.9 % through a route labelling puts at ~7 % | workstream W2, steps M1, M2 |
 | R2 | **Missing chemistry** | no Strecker aldehydes; glucose makes almost no MFT; pyrazines far too low | W2, steps M3, M4, M6 |
-| R3 | **Lab pots do not transfer to food** | constants measured in phosphate buffer at fixed pH; foods are unbuffered, fatty, drier, with protein as the main amine | W2 steps M1 (pH drift), M1b (pH in the sugar steps), M4, M5; W5 |
+| R3 | **Lab pots do not transfer to food** | constants measured in phosphate buffer at fixed pH; foods are unbuffered, fatty, drier, with protein as the main amine | W2 steps M1b (the pH balance and the pentose-side pH laws), M4, M5; W5 |
 | R4 | **The software cannot represent a whole recipe, and fits are slow** | four separate lanes that do not combine; one fit evaluation takes 2.5 - 21 s | W3 |
 | R5 | **Uncertainty is not honest for a new laboratory** | fitted constants absorb laboratory offsets; out-of-sample coverage 0.34 | W1 (H0), W4 |
 
@@ -81,7 +81,7 @@ uncertainty. W5 turns the engine into a tool for a formulator. W6 is the owner's
 ```mermaid
 graph TD
     W1["W1 Yardstick<br/>contrast benchmark, H0"]
-    M1["M1 Thiol loss + oxidant<br/>+ pH drift; M1b sugar-step pH"]
+    M1["M1 Thiol loss or slow supply;<br/>M1b pH balance + pentose pH"]
     M2["M2 MFT routes +<br/>cysteine binding (refit)"]
     M3["M3 Strecker aldehydes"]
     W3["W3 One network (A2)<br/>+ fast engine (H3)"]
@@ -139,9 +139,9 @@ refer to the ranked errors in ENGINE_VS_LITERATURE sec. 3 (and its amendments in
 
 | step | mechanism | what to build | evidence | decisive data (sec. 7, item 4) | effort |
 |---|---|---|---|---|---|
-| **M1** | **Thiol loss and its oxidant; pH drift** (E12, CF-084) | An oxidant formed from the pot's reactive sugar intermediates (flow ~16x the thiols'); headspace O2; a reversible disulfide (Guth's release rate). The charge-balance pH on by default, with the trunk's acids. | Three removal steps failed because the decisive pots carry no oxidant ([INTRODUCTION sec. 7](INTRODUCTION.md)); weakening removal alone cuts an unseen lab's error 480x -> 18x | the 100 C reference pot over 12 h (measured: still rising; engine: peaks at 1 h); the disulfide share (measured 7 - 10 %); the Yiltirak ladder (an unseen laboratory) | 3 - 4 days |
-| **M1b** | **pH in the sulfur lane's sugar steps** (E2, E16; added 2026-11-04 from the W1.1 score) | Give the sulfur lane's sugar (trunk) steps their pH dependence, so that M1's pH drift reaches the sugar-side products: the existing `ph.trunk_terms` switch with per-step Martins slopes in place of none. Rivals for the same data, in the case: the enolisation split moving with pH (E2); base-catalysed norfuraneol decay (E16, `NF_HYDROXIDE_DECAY` exists); a pH-dependent Amadori decay alone; and the current model | The shipped engine gives the same norfuraneol and furfural at pH 4.5 - 6.5 in Meynier's glycine-ribose pots (identical to 14 digits), while measured norfuraneol FALLS 0.4 - 1.2 dex across that ladder. Martins 2003 per-step slopes (one school; equal slopes at 120 C; red team P 0.55). Against or mixed: EX-001 - EX-003, the same slopes on the acids (acetic transfers, formic does not; the condensation-slope arm rejected on the hold-out) | Development data that separate the rivals: trapped deoxyosones vs pH (Martins), furfural vs norfuraneol shares across pH, norfuraneol loss at fixed supply. Meynier Table 1 is held-out: it is read only in item 7, never to choose a rival. The case declares that the step was prompted by the held-out score | 1 - 1.5 days; any refit folds into M2's |
-| **M2** | **MFT routes and cysteine binding** (E6 + E11 + E10 via B59b), one refit | Per-route barriers bounded by measured classes; the cysteine-Amadori route | labelling in 3 labs (Cerny, Givaudan, Hofmann); TTCA 18 - 89 % of cysteine in 2 labs | Cerny pot D norfuraneol share (measured 0.07, engine 0.98); Givaudan ribose vs norfuraneol MFT; Hofmann 145 C fed pots; Zhai TTCA | 2 days + ~1 day on >= 8 cores |
+| **M1** | **Thiol supply and loss, judged as combinations** (E10, E12; rescoped 2026-11-04 from its [case](../reference/cases/M1_thiol_loss_oxidant_ph_drift.md) and CF-107) | **M1.0, no fit:** does B27's gate G1 still hold at B60 (the dimer step uses < 1 % of the oxidant, so no oxidant SOURCE can move the disulfide share; P ~0.85 it holds); the engine at B60 on the decisive data below. Then three combinations, each with `k_ttca_cys` in the structure (Cao 2017's K, not frozen) and the frozen pot-independent sink `k_mft_decay` freed or banded: **C1** slow cysteine-Amadori / TTCA supply (B59b); **C2** C1 + a loss that free cysteine slows (EX-050's form); **C3** C2 + the disulfide side: Guth's release declared, not fitted, and the deoxypentosones as an oxidant POOL with a declared pH law (not B27's source). Out, with reasons: B17a (Stack's measured K(T) makes it inert at process temperature); B27 as built (G1 arithmetic); B11's O2 (no within-study O2 arm at process temperature; Xu 2010 at 140 C finds air vs N2 changes neither thiol nor disulfide) | CF-107: four refused sink waves (B16, B17b, B17a, B25) are one fit optimum in a degenerate state, 77 % of its cost from TTCA rows on the frozen `k_ttca_cys`, best starts unconverged; against instant supply and a frozen fast sink, every added sink structure was switched off. Whole-model refusals are therefore not evidence against C1 - C3. B16 with its barrier ceiling lifted (converged) still turns MFT over at 6 h: the 100 C rise is a supply problem. Guth 1995 measures disulfide release far faster than B17b's fitted floor | Schieberle 2000's own ratios (MFT 360 / 30 and 720 / 360 min; measured still rising) separate the incumbent from C1 - C3; free cysteine and sugar over time (Cao 2017, Zhang 2025b, Zhai 2019) separate C1 from C2; the disulfide share's pH slope inside Zhou 2023, Zhang 2024's cystine vs cysteine arms and Whitfield 1999's fed pots judge C3 | M1.0 ~3 - 4 h; C1 - C3 2 - 3 days |
+| **M1b** | **pH: the pot's balance (CF-084) and the pentose-side steps** (E16, E2; rescoped 2026-11-04 from its [case](../reference/cases/M1b_sugar_step_ph_sulfur_lane.md)) | (i) The charge-balance pH scores pots only once its two controls pass, with CF-084's two rivals built and compared: the released ammonia survives (less acid), or the acid forms after the Amadori product is gone. (ii) pH laws on the pentose-side steps for the rival the data need: base-catalysed norfuraneol decay (E16; B61's prereg, its fit stopped and owed on B64), the enolisation split carried to pentoses (E2), a pH-dependent pentose + amine entry, or a base-favoured 3-deoxypentosone removal (EX-045, EX-046). Not built: `ph.trunk_terms` on its own, which slopes only the three hexose Amadori steps and is inert in pentose pots; E2's hexose part waits with E2 | The shipped engine's norfuraneol and furfural are pH-free in glycine-pentose pots (identical to 14 digits on Meynier's ladder; the pentose + amine entry is off, the amine-free pentose steps and the norfuraneol decay carry no pH). CF-084: the balance fails both controls. EX-001 - EX-003: Martins' slopes on the acids (acetic transferred, formic did not) | Fed norfuraneol loss vs pH (Mikami 2017 at pH 8, 100 C; Nakamura 2020) for E16; the 3- / 1-deoxypentosone ratio vs pH inside Zhai 2021 and Hou 2026 (the engine has the wrong sign, EX-033); acetic acid vs pH (Davidek 2006a, 2008); the pH controls (Meynier's drift <= 0.2, Hou's trajectory). Meynier's norfuraneol ladder stays held-out (item 7 only). The split and the removal rivals cannot be separated without an in-situ pentose trap across pH (W6) | 2 - 3 days |
+| **M2** | **MFT route shares** (E6 + E11), in ONE refit with M1's combination | Per-route barriers bounded by measured classes, fitted together with the M1 combination the data favour (the two steps share rows, and their errors stack) | labelling in 3 labs (Cerny, Givaudan, Hofmann) | Cerny pot D norfuraneol share (measured 0.07, engine 0.98); Givaudan ribose vs norfuraneol MFT; Hofmann 145 C fed pots; Zhai TTCA | 2 days + ~1 day on >= 8 cores |
 | **M3** | **Strecker aldehydes** (E3) | Finish the forced-input layer (next step pre-registered after EX-051: one Amadori decay shared by the fed-ARP and glucose pots); then feed it from the network | DFA Garching's fed dicarbonyl series; Cremer, Balagiannis | Hofmann 2000 rows; the held-out TUM Becker contrast | 2 - 3 days |
 | **M4** | **Glucose to MFT; protein as the amine** (E1, E8, plan item "amine as a variable") | On the one network (W3): a glucose + cysteine -> 1-deoxyglucosone step; amine classes (free amino acids, cysteine, protein-bound lysine); amine catalysis of enolisation | ribose / glucose MFT 10.4 measured vs 4e10 in the engine; the FFT supply pH law 10 - 70x too steep | Hofmann ribose / glucose ratios (MFT 10.4, FFT 4.3); the FFT pH slope | 1 week (after W3) |
 | **M5** | **Buffer, fat, water activity** (E5, E7) | Per-step phosphate factor, linear to 0.5 M (form settled in ENGINE_VS_LITERATURE sec. 7); oil-water partition of the thiols; a water-activity term from the low-a_w kinetics on file (Eichner, Bell, Roos) | phosphate x1.3 - 12 in >= 7 labs; fat lowers thiols 3 - 143x | Potman and Kallen (E5 TEST); the unseen fat contrasts (Kim 1996, Zamora 2015, Hidalgo 1993) | 1 week |
@@ -151,7 +151,7 @@ refer to the ranked errors in ENGINE_VS_LITERATURE sec. 3 (and its amendments in
 **Already decided, not in the steps:** E4 (pyrazine pH law) is a declared band, no change (owner, 2026-11-01). CF-077
 (methylpyrazine cross-pair factor) is merged (PR #37).
 
-**Waiting for evidence:** E15, E17 - E20 (E2 and E16 entered W2 as M1b on 2026-11-04). Each enters W2 when a labelling, fed-intermediate,
+**Waiting for evidence:** E15, E17 - E20, and E2's hexose part (E2 and E16 enter W2 as rivals inside M1b, 2026-11-04). Each enters W2 when a labelling, fed-intermediate,
 trapping or within-study result discriminates its rivals, for instance from a W6 author reply.
 
 ### W3. Engine: one network, built to be fast
@@ -199,6 +199,8 @@ validated on a plant-based product.
 - Add requests for existing data that would test a W2 step (ENGINE_VS_LITERATURE sec. 3.1, the "Or" alternatives):
   Cerny's raw 145 C isotopologue data (M2); DFA's raw Table 4 and Quest's recovery (M3, CF-073); Zhou 2024's
   supplementary ion data (M6); the BTBU / CAAS MFT yields per glucose consumed (M4).
+- For M1b: whether any group holds in-situ trapped deoxypentosones across pH (none is on disk; ENGINE_VS_LITERATURE
+  sec. 3.1, E2). It would separate the split rival from the removal rival.
 - Literature keying only where a W2 step's test lacks held-out rows (E3, E10, E18 are one laboratory short).
 
 ## 6. Timeline: what runs in parallel
@@ -209,7 +211,7 @@ so it now follows A2 + H3 instead of running beside it, and the M1 / M1b / M2 bl
 
 | dates | W1 yardstick | W2 chemistry | W3 engine | W4 uncertainty | W5 product | W6 owner |
 |---|---|---|---|---|---|---|
-| 11-02 - 11-08 | benchmark scorer (done); H0; profile | M1 and M1b written down | -- | -- | -- | send requests |
+| 11-02 - 11-08 | benchmark scorer (done); H0; profile | M1 and M1b cases drafted (`docs/reference/cases/`); M1.0 checks | -- | -- | -- | send requests |
 | 11-09 - 11-20 | -- | M1 and M1b built and tested; M2 refit | -- | H1 spec (after M2) | -- | -- |
 | 11-21 - 11-27 | -- | M3 Strecker | design | H2 bake-off on M3 | W5.1 yeast extract (standalone) | -- |
 | 11-28 - 12-15 | -- | the cases for M4, M5, M6 written (sec. 7 items 1 - 5; no engine runs) | A2 + H3 | -- | W5.2 crust (standalone) | -- |
@@ -218,8 +220,8 @@ so it now follows A2 + H3 instead of running beside it, and the M1 / M1b / M2 bl
 | 01-01 - 01-08 | -- | M6; joint refit | -- | -- | -- | -- |
 | 01-09 - 01-22 | benchmark re-scored (coverage first; descriptive, see W1) | -- | -- | H4 posterior (sulfur lane, then the others) | W5.4 lever table | -- |
 
-Hard dependencies: M1 before M2's refit (same rows); M1b with M1 (M1's pH drift reaches the sugar steps only through
-M1b); M3 before H2 and W3; W3 before M4 and H4; M2 and H0 before H1; the joint refit before H4; H4 (or its fallback)
+Hard dependencies: M1.0 before M1's combinations; M1 and M2 in one refit (same rows; errors that stack are judged
+together, CF-107); M3 before H2 and W3; W3 before M4 and H4; M2 and H0 before H1; the joint refit before H4; H4 (or its fallback)
 before the lever table. While A2 + H3 is built, no chemistry step edits the lanes it is porting (one writer per file);
 the chemistry line writes the next three cases instead, which need no engine runs.
 
@@ -284,8 +286,8 @@ writer per shared file (registers, ledger, atlas); stage files by explicit path;
 | 01-08 | M5, M6 and the joint refit done | ~0.25 |
 | 01-22 | a posterior on the sulfur lane; the first lever table (Laplace intervals if H4 is not done); the held-out benchmark re-scored, coverage reported first | ~0.3 |
 
-Other odds: M1 noticeably improves the sulfur lane out of sample, ~0.5. The sulfur lane beats both null models after
-M1 + M2, ~0.4. Ranked relative predictions with honest intervals for most levers by the end of January, ~0.35. Absolute levels
+Other odds (lowered 2026-11-04: six earlier sink structures were refused, B11 - B27): M1 + M2 noticeably improve the
+sulfur lane out of sample, ~0.35. The sulfur lane beats both null models after M1 + M2, ~0.3. Ranked relative predictions with honest intervals for most levers by the end of January, ~0.35. Absolute levels
 within 3x across laboratories for most rows, ~0.15 (not a goal).
 
 ## 9. Not in the plan

@@ -1,5 +1,7 @@
 # Case M1b: pH in the sulfur lane's sugar steps
 
+**Rescoped 2026-11-04.** This case drafted the plan's original M1b claim. Its evidence led the plan to rescope M1b to "the pH balance (CF-084) and the pentose-side steps"; `ph.trunk_terms` alone is not built; see STATUS_AND_PLAN sec. 5, W2. The claim below is kept as drafted.
+
 *Plan step M1b ([STATUS_AND_PLAN sec. 5, W2](../../guides/STATUS_AND_PLAN.md); errors E2 (F06-a, F06-c), E16 (F13-a),
 with E8 (F06-b, F25) as context). Items 1 - 5 of sec. 7, written 2026-11-04 before any result of the change exists.
 No engine was run for this case. Items 6 - 9 are appended later and never edited into this part.*
