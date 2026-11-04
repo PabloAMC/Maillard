@@ -141,10 +141,13 @@ def check_runners(failures: List[str]) -> None:
 #: records of the same kind -- run at a commit, quoted by number in their pre-registration -- and are pinned likewise.
 #: 2026-10-31: so are the structural feasibility records (feasibility_*.py: sampled constants within declared bands, each
 #: run read in its pre-registration, e.g. dpo partition prereg secs. 17 - 22); a 600-draw run costs hours.
+#: 2026-11-04: so are the scoring records of a pre-registered run-once analysis (score_thiol_lolo_nested_tau.py, H0 /
+#: EX-059: its controls and its single scoring run, prereg sec. 7.5 "run once"); re-running them is forbidden, not
+#: merely costly, so they are pinned by the commit they were written at.
 FROZEN_RECORD_GENERATOR = re.compile(
     r"scripts/generators/(generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
     r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout|diagnose_\w+|probe_\w+|"
-    r"feasibility_\w+)\.py$")
+    r"feasibility_\w+|score_thiol_lolo_nested_tau)\.py$")
 
 
 #: 2026-10-30 (owner: "I am not sure regenerating the figure is needed until we have the engine finished"; strategy
