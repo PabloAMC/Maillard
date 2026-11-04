@@ -291,4 +291,4 @@ T2 (reported): corr(|outer level error|, tau(S)) strict / one-deep per outer lab
 27. Labels and flags (amendment A1): verdict 4 reads 'CALIBRATED, NOT SHOWN BETTER THAN A NULL (D3 power = x, engine and null errors simulated independent)'. The controls' N2 / N3 / N5 outcomes are carried into the report as flags (N2: the nested tau_ABS(S) flagged; N3: the real tau_ABS flagged 'may be inflated by outliers'; N5: D2's multi-row-group fallback). The pair runner's unit tests passed at the freeze commit; the scorer cannot re-run them and says so.
 28. Pair-record precondition (amendment A1): every one of the ten pair records must carry complete: true and the keys row_keys, held_engine_raw and train_engine_raw; otherwise --score refuses, naming the record and the key.
 
-*Wall time 239.6 s.*
+*Wall time 86.4 s.*

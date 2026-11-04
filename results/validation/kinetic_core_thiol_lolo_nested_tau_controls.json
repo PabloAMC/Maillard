@@ -1932,11 +1932,11 @@
   "Labels and flags (amendment A1): verdict 4 reads 'CALIBRATED, NOT SHOWN BETTER THAN A NULL (D3 power = x, engine and null errors simulated independent)'. The controls' N2 / N3 / N5 outcomes are carried into the report as flags (N2: the nested tau_ABS(S) flagged; N3: the real tau_ABS flagged 'may be inflated by outliers'; N5: D2's multi-row-group fallback). The pair runner's unit tests passed at the freeze commit; the scorer cannot re-run them and says so.",
   "Pair-record precondition (amendment A1): every one of the ten pair records must carry complete: true and the keys row_keys, held_engine_raw and train_engine_raw; otherwise --score refuses, naming the record and the key."
  ],
- "wall_seconds": 239.6,
+ "wall_seconds": 86.4,
  "provenance": {
   "artifact": "kinetic_core_thiol_lolo_nested_tau_controls",
   "generated_on": "2026-11-04",
-  "git": {"commit": "1fb63f5a39d80c292ba3108491d5cf95f34b9377", "short": "1fb63f5a", "branch": "h0-scorer-review-fixes", "dirty": true},
+  "git": {"commit": "f41048fa7e5fe9def9e14e8b10e5bec888b32e18", "short": "f41048fa", "branch": "h0-between-lab-tau", "dirty": false},
   "generated_by": "scripts/generators/score_thiol_lolo_nested_tau.py",
   "inputs": [
    {"path": "data/lit/fit_rows/deoxyosone_submodel.yml", "sha256": "4af9c953a653ef5ed8377a0b34efe81774111bf3a47706f5799cc182f5775853"},
@@ -1951,7 +1951,7 @@
    {"path": "results/validation/kinetic_core_thiol_lolo_nestle_blank.json", "sha256": "84d369d5257b671d56cc6f16222c14943116fdcec67a0aa52e44bfe9ff07ca18"},
    {"path": "results/validation/kinetic_core_thiol_lolo_ochanomizu_murata.json", "sha256": "a4e79146eddd36135ff206a2679ddc3818bba08bdd8dd77b720430b70374ff87"},
    {"path": "results/validation/kinetic_core_thiol_lolo_reading_mottram.json", "sha256": "204ed17a812760f06e79e2eca71fb81ac1c3a61ee8d7a6eca7ab86037ec3b8e1"},
-   {"path": "scripts/generators/score_thiol_lolo_nested_tau.py", "sha256": "de46bfac5c05a864010632976ad87a546f5fb5fb73f236f00f5791f8544e7d0a"},
+   {"path": "scripts/generators/score_thiol_lolo_nested_tau.py", "sha256": "d04a3b3fb4ddf1053dbca6f81198f507cfbb9caafce00d5d685a5fcda6779259"},
    {"path": "scripts/generators/fit_thiol_lolo.py", "sha256": "ec42a6dd133cda74e2011f5943793709179b8753932527d845ca11dc2585d385"},
    {"path": "scripts/generators/fit_thiol_lolo_pairs.py", "sha256": "4b35213fe43c0501b6fddce0867e6f904294d9806d3fff35bbd9c2b663f4bc67"},
    {"path": "src/kinetic_core/fitting.py", "sha256": "9b3572a68597b3e02408652b5463bc7afa9f1f76126d671bf301a74192f97b47"},
