@@ -3149,3 +3149,31 @@ entries:
     affects:
       - gokmen2012_fig2b_fig3_acrylamide_temperature_ea
       - {file: src/kinetic_core/acrylamide_conditions.py, symbol: LOW_T_REFUSAL_C}
+  - id: CF-107
+    kind: conflict
+    scope: sulfur_rows
+    sources: [schieberle2000, cao2017, guth1995, zhou2023, whitfield1999]
+    quantity: "whether whole-model fits B16 - B25 could judge any thiol-sink structure: one shared optimum pinned by a frozen pot-independent sink and instant supply"
+    observation: >-
+      Four refused sink waves (B16, B17 variant b, B17a, B25) end at one fit optimum (cost 930.98 - 931.27; T1 / T2 / T4
+      identical to two figures) in a degenerate state: k_pent_caramel at its ceiling (+0.50 vs B9 -2.53, B60 -2.25),
+      k_osone_decay switched off (-4.4 to -9.5 vs -1.2), k_ttca_deg ~5 decades low, k_dimer_* and the thiol-sink Ea on
+      their ceilings; the best starts budget-exhausted. 77 % of B16's cost (1437 of 1862, both members) is TTCA rows that
+      sit on the frozen, ~10x-fast k_ttca_cys (Cao 2017's K). The free-thiol sink k_mft_decay is frozen at log10 0.1341
+      (145 C) in every report from B9 to B60 (B49: "a constant no source pins"). Against instant supply plus that fixed
+      fast sink, an added loss is redundant (B25 switched off), a reservoir has nothing to hold (B17b release to its
+      floor while Guth 1995 measures release far faster), and an oxidant meets no free thiol (B27). B16 with its Ea
+      ceiling lifted (converged) still turns MFT over at 6 h because supply is spent by then: the 100 C rise is a supply
+      problem, not a sink one. Audit 2026-11-04 (docs/reference/cases/M1_thiol_loss_oxidant_ph_drift.md; plan M1).
+    explanations:
+      - "Compensation: instant supply over-makes thiol early and the frozen fast sink removes it; together they fit the 145 C levels for the wrong reason, so any single sink structure added to that pair is judged against a compensated model."
+      - "The refused structures are wrong on their own merits (holds only where mechanism-direct evidence says so: B17a's Stack K(T) makes it inert; B27-as-built fails its G1 arithmetic)."
+    tests: []
+    status: open
+    remedy: >-
+      Plan M1 (2026-11-04): judge thiol supply and loss as COMBINATIONS on mechanism-direct and scale-cancelling data, with
+      k_ttca_cys in the structure (not frozen) and k_mft_decay freed or banded: C1 slow supply; C2 C1 + a loss that
+      cysteine slows; C3 C2 + the disulfide side (Guth's release declared; the deoxypentosones as an oxidant pool). The
+      whole-model refusals of B11, B16, B17b and B25 are not evidence against those structures until then.
+    affects:
+      - {file: src/kinetic_core/parameters_sulfur.py, symbol: k_mft_decay}

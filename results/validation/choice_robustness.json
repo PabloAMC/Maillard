@@ -4,16 +4,16 @@
     "artifact": "choice_robustness",
     "generated_on": "2026-11-03",
     "git": {
-      "commit": "c2c15ab5a94c4d023246fab8aaef25986d7ae4f1",
-      "short": "c2c15ab5",
-      "branch": "acrylamide-envelope-2026-11-03",
+      "commit": "8df34b96357f690d83e1811e83dc7936eaaa7c4e",
+      "short": "8df34b96",
+      "branch": "plan-single-2026-11-03",
       "dirty": false
     },
     "generated_by": "scripts/generators/build_choice_robustness.py",
     "inputs": [
       {
         "path": "docs/reference/choices_register.yml",
-        "sha256": "59740084ade44c87f978105316aaa512c6bdb43d2ecc1194483f991ee2bc72b5"
+        "sha256": "bb0d98813d06a2d5530a741c53c999145d41115846e18d5d3b22524cacb4fede"
       },
       {
         "path": "results/validation/core_panel_scores.json",

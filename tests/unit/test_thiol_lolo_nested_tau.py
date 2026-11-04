@@ -168,6 +168,7 @@ def _pair_record(a, b, commit="abc1234"):
 
 def test_score_refuses_without_any_pair_record(tmp_path, monkeypatch):
     monkeypatch.setattr(h0, "PAIR_DIR", tmp_path)
+    monkeypatch.setattr(h0, "OUT_DIR", tmp_path / "out")  # the real primary record exists since 2026-11-04
     with pytest.raises(SystemExit) as exc:
         h0.main(["--score"])
     assert exc.value.code not in (0, None) and "refuses" in str(exc.value.code)
@@ -175,6 +176,7 @@ def test_score_refuses_without_any_pair_record(tmp_path, monkeypatch):
 
 def test_score_refuses_with_nine_of_ten_pair_records(tmp_path, monkeypatch):
     monkeypatch.setattr(h0, "PAIR_DIR", tmp_path)
+    monkeypatch.setattr(h0, "OUT_DIR", tmp_path / "out")  # the real primary record exists since 2026-11-04
     for a, b in pair_runner.pairs()[:9]:
         h0.pair_path(a, b, tmp_path).write_text(json.dumps(_pair_record(a, b)))
     with pytest.raises(SystemExit) as exc:
@@ -184,6 +186,7 @@ def test_score_refuses_with_nine_of_ten_pair_records(tmp_path, monkeypatch):
 
 def test_score_refuses_when_a_pair_record_has_no_freeze_commit(tmp_path, monkeypatch):
     monkeypatch.setattr(h0, "PAIR_DIR", tmp_path)
+    monkeypatch.setattr(h0, "OUT_DIR", tmp_path / "out")  # the real primary record exists since 2026-11-04
     ps = pair_runner.pairs()
     for i, (a, b) in enumerate(ps):
         h0.pair_path(a, b, tmp_path).write_text(json.dumps(_pair_record(a, b, commit="" if i == 3 else "abc1234")))
@@ -195,6 +198,7 @@ def test_score_refuses_when_a_pair_record_has_no_freeze_commit(tmp_path, monkeyp
 def test_score_refuses_a_pair_record_with_failed_pot_runs(tmp_path, monkeypatch):
     # amendment A2: a failed pot run (a wall-clock PotTimeout) makes the record depend on machine state
     monkeypatch.setattr(h0, "PAIR_DIR", tmp_path)
+    monkeypatch.setattr(h0, "OUT_DIR", tmp_path / "out")  # the real primary record exists since 2026-11-04
     for i, (a, b) in enumerate(pair_runner.pairs()):
         rec = _pair_record(a, b)
         rec["failed_pot_runs"] = 55 if i == 0 else 0

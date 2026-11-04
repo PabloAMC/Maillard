@@ -79,8 +79,8 @@ conflict the literature cannot.
 The core's time courses become FIT rows for the trunk (B59b): the first rows in the corpus that constrain
 timescales rather than endpoints. The fed arms enter as measured constants. Everything is pre-registered before
 the data arrive, and the model's blind predictions for every vial are frozen and sent first, as in the earlier
-blind test. Success criterion (the usefulness bar, `tasks/data_restructure_plan.md` sec. 7): the sulfur lane beats
-the typical-yield baseline on these new-laboratory data, out of sample.
+blind test. How the result is judged: `docs/guides/STATUS_AND_PLAN.md` sec. 7 (rivals compared on the decisive data, with the
+measurements' own noise; the typical-yield baseline among the rivals), out of sample on these new-laboratory data.
 
 ## Open points for Pablo
 
