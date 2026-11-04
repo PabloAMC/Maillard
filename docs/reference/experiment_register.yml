@@ -734,3 +734,18 @@ entries:
       citrate arm in CF-011's buffer arm C and on fed DFG decay; the designed E4 pot measures the Strecker aldehyde,
       not amino-acid loss; score or excuse the four E13 TEST contrasts; record the UC Davis papers read here as
       seen-by-designer for E13; Zhou 2024 raw ions (EX-052 open); a new split version for the F15#3 -> F07 move.
+  - id: EX-059
+    date: "2026-11-04"
+    kind: fit
+    question: "H0 (plan W1.2): how wide must the thiol lane's (R3En) prediction interval be for a laboratory it has never seen, estimated out of sample by strict leave-two-laboratories-out nesting, and at that width has it been shown to beat the two chemistry-free nulls?"
+    hypothesis: "Pre-registered (kinetic_core_between_lab_tau_h0_prereg.md v3, sec. 11): tau_ABS(all) > 0.8 dex (D2 branch (i), relative predictions only) P 0.5; (b) passes D1 P 0.45; shown better than both nulls P 0.05; verdict ADEQUATE / CALIBRATED-NOT-SHOWN-BETTER / NOT CALIBRATED / INCONCLUSIVE / INVALID 0.05 / 0.30 / 0.25 / 0.32 / 0.08."
+    design: "Prereg v3 plus its sec. 14 errata (written before the freeze). Ten leave-two-labs-out refits of R3En over the five scorable labs under EX-056's settings (residual-only runner fit_thiol_lolo_pairs.py; converged = status > 0); strict nulls retrained without both labs; omega by within-group shape, tau_ABS / tau_FIG by lab-weighted moments (score_thiol_lolo_nested_tau.py); arms (a) shipped, (b) nested, (c1) typical yield, (c2) no change; D1 coverage guard, D2 ship rule with a test-inversion bound, D3 paired LPD vs each null; verdict precedence INVALID > INCONCLUSIVE > NOT CALIBRATED > CALIBRATED-NOT-SHOWN-BETTER > ADEQUATE; PROVISIONAL. Guards: 4.1 bit-exact; engine 4.2 (a) - (c) passed on origin/main b981e8ac before the freeze (errata item 4). Controls on synthetic residuals, real design: P1, N1, T1, T1b all pass; P3 0.81; P5 0.63 (UNSTABLE uninformative); D3b power 0.054."
+    expected: "As the hypothesis; all 10 pair fits converge P 0.75; H0 scored by the 11-07 checkpoint P 0.65."
+    artifacts: [results/validation/kinetic_core_between_lab_tau_h0_prereg.md, results/validation/kinetic_core_between_lab_tau_h0_prereg_review.md,
+                results/validation/kinetic_core_thiol_lolo_nested_tau_controls.md, results/validation/kinetic_core_thiol_lolo_nested_tau_controls.json,
+                results/validation/kinetic_core_thiol_lolo_pair_guard_reading_mottram.json,
+                scripts/generators/fit_thiol_lolo_pairs.py, scripts/generators/score_thiol_lolo_nested_tau.py]
+    commit: pending
+    verdict: pending
+    conclusion: "Pending: the freeze commit, then the ten pair fits, then one scoring run."
+    follow_up: "Score once (score_thiol_lolo_nested_tau.py --score); independent review of the report; H1 reads the masking implications."
