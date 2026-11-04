@@ -127,7 +127,7 @@ refused (an operation the engine lacks 23, inputs missing 17, a species it does 
 curve). So it cannot show on its own that a W2 step helped:
 - **A step's verdict rests on its own decisive data** (sec. 7, item 4), never on the benchmark score.
 - **The benchmark is the side-effect record** (sec. 7, item 7): every held-out row, before and after each shipped step.
-- **The 01-10 re-score is descriptive.** It reports coverage first, then the direction and log-ratio scores on the items
+- **The January re-score is descriptive.** It reports coverage first, then the direction and log-ratio scores on the items
   answerable both times. It is read as evidence about the plan as a whole only where coverage has grown, for instance
   the Strecker and methional items after M3 (today the engine predicts no change on all 20 methionine items) or the yeast-extract
   pots after W5.1.
@@ -203,20 +203,25 @@ validated on a plant-based product.
 
 ## 6. Timeline: what runs in parallel
 
-Each row is a week. Columns are workstreams. Cells in one row run in parallel.
+Each row is a span of calendar days, sized from the effort column at about 5 working days a week; no holiday time is
+assumed. Columns are workstreams. Cells in one row run in parallel. Re-sequenced 2026-11-04: M4 needs the one network,
+so it now follows A2 + H3 instead of running beside it, and the M1 / M1b / M2 block takes its full ~8 working days.
 
-| week | W1 yardstick | W2 chemistry | W3 engine | W4 uncertainty | W5 product | W6 owner |
+| dates | W1 yardstick | W2 chemistry | W3 engine | W4 uncertainty | W5 product | W6 owner |
 |---|---|---|---|---|---|---|
-| 11-02 - 11-08 | benchmark scorer; H0; profile | M1 written down | -- | -- | -- | send requests |
-| 11-09 - 11-15 | -- | M1 and M1b built and tested; M2 refit | -- | H1 spec (after M2) | -- | -- |
-| 11-16 - 11-22 | -- | M3 Strecker | design | H2 bake-off on M3 | W5.1 yeast extract (standalone) | -- |
-| 11-23 - 12-06 | -- | M4 on the new network | A2 + H3 | -- | W5.2 crust (standalone) | -- |
-| 12-07 - 12-13 | -- | M5 | -- | -- | W5.1 / 5.2 joined to the network | -- |
-| 12-14 - 12-20 | -- | M6; joint refit | -- | H4 posterior (sulfur lane) | W5.3 heme | -- |
-| 12-21 - 01-10 | benchmark re-scored (coverage first; descriptive, see W1) | -- | -- | H4 other lanes | W5.4 lever table | -- |
+| 11-02 - 11-08 | benchmark scorer (done); H0; profile | M1 and M1b written down | -- | -- | -- | send requests |
+| 11-09 - 11-20 | -- | M1 and M1b built and tested; M2 refit | -- | H1 spec (after M2) | -- | -- |
+| 11-21 - 11-27 | -- | M3 Strecker | design | H2 bake-off on M3 | W5.1 yeast extract (standalone) | -- |
+| 11-28 - 12-15 | -- | the cases for M4, M5, M6 written (sec. 7 items 1 - 5; no engine runs) | A2 + H3 | -- | W5.2 crust (standalone) | -- |
+| 12-16 - 12-22 | -- | M4 on the new network | -- | -- | W5.1 / 5.2 joined to the network | -- |
+| 12-23 - 12-31 | -- | M5 | -- | -- | W5.3 heme | -- |
+| 01-01 - 01-08 | -- | M6; joint refit | -- | -- | -- | -- |
+| 01-09 - 01-22 | benchmark re-scored (coverage first; descriptive, see W1) | -- | -- | H4 posterior (sulfur lane, then the others) | W5.4 lever table | -- |
 
-Hard dependencies: M1 before M2's refit (same rows); M1b with M1 (M1's pH drift reaches the sugar steps only through M1b); M3 before H2 and W3; W3 before M4 and H4; M2 and H0 before H1;
-the joint refit before H4; H4 (or its fallback) before the lever table.
+Hard dependencies: M1 before M2's refit (same rows); M1b with M1 (M1's pH drift reaches the sugar steps only through
+M1b); M3 before H2 and W3; W3 before M4 and H4; M2 and H0 before H1; the joint refit before H4; H4 (or its fallback)
+before the lever table. While A2 + H3 is built, no chemistry step edits the lanes it is porting (one writer per file);
+the chemistry line writes the next three cases instead, which need no engine runs.
 
 ## 7. How a change ships
 
@@ -272,14 +277,15 @@ writer per shared file (registers, ledger, atlas); stage files by explicit path;
 | date | done means | P |
 |---|---|---|
 | 11-07 | benchmark scored; H0 scored; profile done | ~0.6 |
-| 11-15 | M1, M1b and M2 have verdicts | ~0.5 |
-| 11-22 | M3 has a verdict; H1 and H2 done | ~0.45 |
-| 12-06 | the one network runs bit-identical with exact gradients; M4 has a verdict | ~0.35 |
-| 12-20 | M5, M6 and the joint refit done; a posterior on the sulfur lane | ~0.25 |
-| 01-10 | the first lever table; the held-out benchmark re-scored, coverage reported first | ~0.3 |
+| 11-20 | M1, M1b and M2 have verdicts; H1 done | ~0.5 |
+| 11-27 | M3 has a verdict; H2 done | ~0.45 |
+| 12-15 | the one network runs bit-identical with exact gradients | ~0.35 |
+| 12-22 | M4 has a verdict | ~0.3 |
+| 01-08 | M5, M6 and the joint refit done | ~0.25 |
+| 01-22 | a posterior on the sulfur lane; the first lever table (Laplace intervals if H4 is not done); the held-out benchmark re-scored, coverage reported first | ~0.3 |
 
 Other odds: M1 noticeably improves the sulfur lane out of sample, ~0.5. The sulfur lane beats both null models after
-M1 + M2, ~0.4. Ranked relative predictions with honest intervals for most levers by mid-January, ~0.35. Absolute levels
+M1 + M2, ~0.4. Ranked relative predictions with honest intervals for most levers by the end of January, ~0.35. Absolute levels
 within 3x across laboratories for most rows, ~0.15 (not a goal).
 
 ## 9. Not in the plan
