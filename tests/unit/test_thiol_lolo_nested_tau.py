@@ -192,6 +192,18 @@ def test_score_refuses_when_a_pair_record_has_no_freeze_commit(tmp_path, monkeyp
     assert exc.value.code not in (0, None) and "freeze_commit" in str(exc.value.code)
 
 
+def test_score_refuses_a_pair_record_with_failed_pot_runs(tmp_path, monkeypatch):
+    # amendment A2: a failed pot run (a wall-clock PotTimeout) makes the record depend on machine state
+    monkeypatch.setattr(h0, "PAIR_DIR", tmp_path)
+    for i, (a, b) in enumerate(pair_runner.pairs()):
+        rec = _pair_record(a, b)
+        rec["failed_pot_runs"] = 55 if i == 0 else 0
+        h0.pair_path(a, b, tmp_path).write_text(json.dumps(rec))
+    with pytest.raises(SystemExit) as exc:
+        h0.main(["--score"])
+    assert exc.value.code not in (0, None) and "failed pot runs" in str(exc.value.code)
+
+
 def test_the_ten_complete_pair_records_pass_the_precondition(tmp_path, monkeypatch):
     for a, b in pair_runner.pairs():
         h0.pair_path(a, b, tmp_path).write_text(json.dumps(_pair_record(a, b)))

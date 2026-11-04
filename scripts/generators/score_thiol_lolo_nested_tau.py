@@ -717,6 +717,11 @@ def check_pair_records(directory: Optional[Path] = None) -> Dict[Tuple[str, str]
             problems.append(f"{p.name}: labs {rec.get('labs')} != {[a, b]}")
         if rec.get("complete") is not True:
             problems.append(f"{p.name}: not complete (complete: {rec.get('complete')!r}; the runner has not finished it)")
+        if int(rec.get("failed_pot_runs") or 0) > 0:
+            # amendment A2: a pot run that failed (in practice a wall-clock PotTimeout under a paused or
+            # memory-starved machine) enters the fit as a penalty residual, so the record depends on machine state
+            problems.append(f"{p.name}: {rec.get('failed_pot_runs')} failed pot runs (amendment A2: re-run it from "
+                            "the freeze commit, same settings, unpaused)")
         absent = [k for k in PAIR_RECORD_KEYS if k not in rec]
         if absent:
             problems.append(f"{p.name}: missing key(s) {absent}")
