@@ -35,7 +35,10 @@ The other seven records report 0 failed pot runs, as did every EX-056 fold.
   converged, the settings are identical, and the criterion is an engine failure count, not a residual or its effect
   on tau.
 - The three contaminated records are kept, unread, outside the repository (the session scratchpad), as the record of
-  what was replaced.
+  what was replaced. Their sha256 (added after the review): dalian + dfa 467c8c94268b8f0515c574debbbae59114bf89634aad65438853f29f7669b33e;
+  dalian + ochanomizu 8fbcec64af62f5a415daa5926921c6217ef86f64db284e27a8a52202307e8870;
+  dfa + ochanomizu e6a69b556a272aa799192e87fe810211868a603f467b00168a14ebaeac80cb7b. The re-runs were launched at
+  17:31, two minutes before this rule was committed (17:33); the rule was decided before either.
 - The scorer's precondition now refuses any pair record with `failed_pot_runs > 0` (a unit test pins it), so a
   timeout-contaminated record can never be scored silently.
 
