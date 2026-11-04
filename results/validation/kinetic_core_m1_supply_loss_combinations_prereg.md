@@ -339,7 +339,7 @@ in no objective and no decisive set.
   (a) at least two of its starts end with status > 0 and costs within **1.92 nats** of the lowest (Delta chi^2 3.84,
   one coordinate's 95 % profile interval; B60's two starts differ by 0.54 nats), and (b) their predictions on every
   decisive point (sec. 5) agree within max(sigma_decision of that point, the Laplace predictive sd at the better
-  optimum), compared without reading the data y. If (a) holds and (b) fails, the verdict (sec. 7) is computed at each
+  optimum), compared without reading the data y, under the isothermal reading at the scoring rtol (v3.3). If (a) holds and (b) fails, the verdict (sec. 7) is computed at each
   qualifying start after all fits have ended, and the rival is compared only if those verdicts agree. Otherwise it is
   **"not compared, flagged"**, with every start's cost, vector and decisive predictions listed.
 - **Fallbacks, declared now.** If R0 is not compared, the verdict uses R0's lowest converged start, flagged; if no R0
@@ -486,12 +486,15 @@ ratios by much more than 0.06 dex, with an unknown sign of the R0 - C1 differenc
 | reading | source | the Schieberle pot (100 C) | the reservoir pot (Zhang 2025b, 120 C) |
 |---|---|---|---|
 | isothermal | CR-03 `isothermal` (every wave through B63) | 100 C from t = 0 | 120 C from t = 0 |
-| ramp only, linear | CR-03 `ramp_only` + CR-04 `linear_no_cooling` | 20 -> 100 C at the Hofmann rate (125 K / 20 min = 6.25 K/min: 12.8 min), then 100 C; sampling times counted from the start of heating | the same rate, 20 -> 120 C in 16 min, a declared stand-in (the source states no come-up) |
-| ramp + hold | CR-03 `ramp_plus_hold` | the same come-up, then the stated time at 100 C | the same, at 120 C |
-| ramp only, Newtonian | CR-04 `newtonian_no_cooling`, at B64's two members tau 4 and 6.7 min | exponential approach from 20 C, times from the start of heating | the same |
+| ramp only, linear | CR-03 `ramp_only` + CR-04 `linear_no_cooling` | 20 -> 100 C at the Hofmann rate (125 K / 20 min = 6.25 K/min: 12.8 min), then 100 C; sampling times counted from the start of heating | isothermal (v3.3: no invented come-up; the stand-in ramp is a printed sensitivity only) |
+| ramp + hold | CR-03 `ramp_plus_hold` | the same come-up, then the stated time at 100 C | isothermal (v3.3) |
+| ramp only, Newtonian | CR-04 `newtonian_no_cooling`, at B64's two members tau 4 and 6.7 min | exponential approach from 20 C, times from the start of heating | isothermal (v3.3) |
 | ramp only, linear with cooling | CR-04 `linear_with_cooling` | reading 2 plus a cool-down of the ramp's duration after each sampling time | not applicable: an ice-water quench is stated |
 
-That is 6 readings on the Schieberle pot and 5 on the reservoir pot. A reading applies to both pots of the same
+That is 6 readings on the Schieberle pot. **The reservoir pot (Zhang 2025b, sealed vials) is isothermal under every
+reading (v3.3, final check):** its come-up is not stated, and B64's convention records such pots as isothermal, "no
+invented time constants". The Hofmann-rate stand-in ramp (20 -> 120 C in 16 min) is printed as a sensitivity OUTSIDE
+the agreement requirement, so an invented ramp cannot veto the only block that credits supply. A reading applies to both pots of the same
 evaluation pairwise by name (isothermal with isothermal, ...); the reservoir pot takes isothermal where its column says
 not applicable. **The verdict counts only if it is the same under every reading;** otherwise it is "not separated",
 with the reading(s) that disagree named (sec. 7).
@@ -532,12 +535,18 @@ is dropped (no decisive datum is in either objective).
 2. **C1 favoured** iff Delta L_reservoir > SE_reservoir (both reservoir units favour C1) AND Delta L_D1 >= -SE_D1 (C1 is
    not worse on the thiol shape: not both D1 units favour R0).
 3. **R0 favoured** iff Delta L_reservoir < -SE_reservoir (both reservoir units favour R0).
+   **Tie band (v3.3, final check):** with two units per block the rule is a sign test, so a unit "favours" a rival
+   only if the sign of its d_u is the same under the linearised and the plug-in densities and under the floor and
+   tau x0.5 / x2 sensitivities (all printed). Otherwise the unit is a tie. A tie in the reservoir block gives "not
+   separated"; a tie in the D1 block counts as "not worse".
 4. **Otherwise "not separated / conflict":** CF-107 stays open, no switch changes, and the result is **not evidence
    against C1**.
 5. The verdict counts only if it is the same under every thermal reading; otherwise "not separated", naming the
    readings. If `Ea_decay_thiol_sink` binds in either rival, D1 is labelled "conditional on the Gigl ceiling" (sec.
    2.6).
-6. **Credit:** supply is credited on the reservoir block only. A D1 gain of C1 is reported as "consistent with
+6. **Credit:** supply is credited on the reservoir block only. The verdict text states that the reservoir block is
+   one pot from one laboratory whose Cys and Xyl print one ELSD calibration curve (CF-063): "both units" is close to
+   one datum, so any supply credit rests on Zhang 2025b alone. A D1 gain of C1 is reported as "consistent with
    supply, not attributed" (C2 / R2 not run, sec. 5.1).
 7. **What ships:** C1's structure (the route switch on) ships if C1 is favoured, C1 was compared, the side-effect
    record (sec. 8) is complete with a candidate compensating error registered for each loss, no review objection (sec.
@@ -757,7 +766,7 @@ machine-hours row then is the wall clock).
 | V8 passes (inline cost smooth; fits stay on inline) | 0.5 |
 | C1 passes the feasibility rule without a confirmation fit | 0.65 |
 | R0 / C1 compared (sec. 4.3) | 0.8 / 0.7 |
-| verdict: C1 favoured / R0 favoured / not separated or conflict (incl. disagreement across readings) / no verdict (C1 not compared) | 0.25 / 0.10 / 0.45 / 0.20 |
+| verdict: C1 favoured / R0 favoured / not separated or conflict (incl. disagreement across readings) / no verdict (C1 not compared) | 0.22 / 0.08 / 0.40 / 0.30 |
 | the isothermal-reading verdict differs from at least one other reading's | 0.4 |
 | isothermal: both reservoir units favour C1 | 0.6 |
 | isothermal: C1 not worse on D1 (not both D1 units favour R0) | 0.5 |
@@ -883,3 +892,8 @@ asked to weigh. It does not test the fast 145 C sink (sec. 2.6).
 | MINOR 10 | `zhou_pH7_dimer_over_MFT` and `zhang_fig1_cys_dimer_over_MFT` are declared hold-outs in B60's objective | registered and tagged; kept in both objectives, with the reason (4.1, 8, 11 item 22) |
 | NOTE | the prior centre is exactly log10 0.0406 = -1.391; tag the lost independence for E18 (F27#5, F27#15 - 17) and E7 (`heldout_zhao2017b_tab1`) | centre corrected (2.6, 4.1); tags added (8, 11 item 23) |
 | owner question (numerics) | run on `ph.coupling = "inline"` | adopted for every computation, with V7 (agreement on the decisive pots and the 52 rows), V8 (smoothness, fixed-point fallback), R0-shipped (a) / (b), the numerics side-effect row and the shipping rule (2.5, 4.4, 8, 11 item 20, 12) |
+- v3.3, 2026-11-04 (final check: FREEZE with two edits before the first decisive number): the reservoir pot is
+  isothermal under every thermal reading (the stand-in ramp a sensitivity outside the agreement requirement); a tie band
+  on the two-unit sign rule; the CF-063 single-datum note in the verdict text; sec. 13's no-verdict odds made
+  consistent with P(C1 compared) 0.7; sec. 4.3's cross-start prediction check reads the isothermal reading at the
+  scoring rtol; if V8 fails, V7's diff is printed at the carried optima.
