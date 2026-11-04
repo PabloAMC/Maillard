@@ -2742,6 +2742,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--confirm", action="store_true", help="--probe: the stacking guard's re-check")
     ap.add_argument("--budget", type=int, default=BUDGET)
     ap.add_argument("--no-side-effects", dest="side_effects", action="store_false")
+    ap.add_argument("--side-effects-only", dest="side_effects_only", action="store_true",
+                    help="--score: run sec. 8's side effects only, without rewriting the decisive comparison")
     ap.add_argument("--log-dir", dest="log_dir", default="")
     args = ap.parse_args(argv)
     if config.Config.from_globals() != config.Config.shipped():
@@ -2764,6 +2766,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return 0
     if args.laplace:
         run_laplace(args.laplace, args.freeze_commit)
+        return 0
+    if args.score and args.side_effects_only:
+        if not COMPARISON_OUT.exists():
+            raise SystemExit("--side-effects-only needs the decisive comparison first (--score)")
+        forms, _ = forms_for_score(_read(CHECKS_OUT))
+        run_side_effects(forms, check_freeze(args.freeze_commit))
         return 0
     if args.score:
         run_score(args.freeze_commit, args.tau_abs, args.side_effects)

@@ -105,11 +105,11 @@
    "machine": {"load_average_1_5_15": [23.94, 21.13, 28.7], "cpu_count": 10, "free_memory_bytes": 2938486784, "swap": "vm.swapusage: total = 7168.00M  used = 6095.50M  free = 1072.50M  (encrypted)", "workers": 2, "time": "2026-11-04 19:50:15"}
   },
   "V4": {
-   "machine": {"load_average_1_5_15": [23.63, 21.4, 27.75], "cpu_count": 10, "free_memory_bytes": 3156639744, "swap": "vm.swapusage: total = 7168.00M  used = 6267.56M  free = 900.44M  (encrypted)", "workers": 2, "time": "2026-11-04 19:52:22"},
-   "R0": {"rival": "R0", "seconds_one_evaluation": 7.68, "seconds_workers_points_in_parallel": 11.96, "cost": 27.08412843271383, "peak_rss_parent_bytes": 166002688, "peak_rss_largest_child_bytes": 151535616, "workers": 2, "failed_pot_runs": 0, "peak_rss_estimate_one_fit_at_4_workers_bytes": 772145152, "measured_at_workers": 2},
-   "C1": {"rival": "C1", "seconds_one_evaluation": 17.03, "seconds_workers_points_in_parallel": 30.33, "cost": 255.01652709315016, "peak_rss_parent_bytes": 171835392, "peak_rss_largest_child_bytes": 160677888, "workers": 2, "failed_pot_runs": 0, "peak_rss_estimate_one_fit_at_4_workers_bytes": 814546944, "measured_at_workers": 2},
-   "peak_rss_one_fit_bytes": 814546944,
-   "note": "the estimate at 4 workers is parent + 4 x the largest child (a forked pool); measured at MAILLARD_WORKERS=2 under the machine state above. Re-run '--checks --only V4' at MAILLARD_WORKERS=4 before --all (prereg sec. 12: with the other fit running)",
+   "machine": {"load_average_1_5_15": [5.08, 3.89, 5.62], "cpu_count": 10, "free_memory_bytes": 4378820608, "swap": "vm.swapusage: total = 9216.00M  used = 7802.94M  free = 1413.06M  (encrypted)", "workers": 4, "time": "2026-11-04 21:00:09"},
+   "R0": {"rival": "R0", "seconds_one_evaluation": 2.15, "seconds_workers_points_in_parallel": 6.5, "cost": 27.08412843271383, "peak_rss_parent_bytes": 168542208, "peak_rss_largest_child_bytes": 153337856, "workers": 4, "failed_pot_runs": 0, "peak_rss_estimate_one_fit_at_4_workers_bytes": 781893632, "measured_at_workers": 4},
+   "C1": {"rival": "C1", "seconds_one_evaluation": 5.0, "seconds_workers_points_in_parallel": 17.74, "cost": 255.01652709315016, "peak_rss_parent_bytes": 174456832, "peak_rss_largest_child_bytes": 161841152, "workers": 4, "failed_pot_runs": 0, "peak_rss_estimate_one_fit_at_4_workers_bytes": 821821440, "measured_at_workers": 4},
+   "peak_rss_one_fit_bytes": 821821440,
+   "note": "the estimate at 4 workers is parent + 4 x the largest child (a forked pool); measured at MAILLARD_WORKERS=4 under the machine state above. Re-run '--checks --only V4' at MAILLARD_WORKERS=4 before --all (prereg sec. 12: with the other fit running)",
    "passed": true
   },
   "V5": {
@@ -383,7 +383,7 @@
  "provenance": {
   "artifact": "kinetic_core_m1_supply_combinations_checks",
   "generated_on": "2026-11-04",
-  "git": {"commit": "68247583a7556ef0d4cafb91be0e2e598709e841", "short": "68247583", "branch": "m1-build", "dirty": true},
+  "git": {"commit": "3ca42c3784d308818efd0dea1265c3cb95617105", "short": "3ca42c37", "branch": "m1-build", "dirty": false},
   "generated_by": "scripts/generators/fit_m1_supply_combinations.py",
   "inputs": [
    {"path": "results/validation/kinetic_core_m1_supply_loss_combinations_prereg.md", "sha256": "c63786e03b733a5eba316b97368ac53fc38f791a96cd6ce9cf3815eece500baf"},

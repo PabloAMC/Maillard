@@ -2,11 +2,11 @@
   "artifact": "kinetic_core_contrast_benchmark_items",
   "provenance": {
     "artifact": "kinetic_core_contrast_benchmark_items",
-    "generated_on": "2026-11-03",
+    "generated_on": "2026-11-04",
     "git": {
-      "commit": "baabb36d0fd748559ca8a70a525b2f9b2cbe09e2",
-      "short": "baabb36d",
-      "branch": "contrast-benchmark-scorer",
+      "commit": "bc40b9557536e0d60e7f3789c8d04fd73f4aed56",
+      "short": "bc40b955",
+      "branch": "m1-build",
       "dirty": true
     },
     "generated_by": "scripts/generators/score_contrast_benchmark.py",
@@ -78,7 +78,7 @@
     ]
   },
   "prereg": "results/validation/kinetic_core_contrast_benchmark_score_prereg.md (v6)",
-  "config_digest": "40b746476905786cd0d8d119973c2afdac399a798af38b2de7b5102e0f40c800",
+  "config_digest": "09d122f9f29354d3d16b4b7a0fe93ca4270e28a985b543dcd6c4b81bcf00e177",
   "atlas_table_sha256": "00910ba883287a40d4101fff0fb034a976ad392c992b48f055aa2551566f7c18",
   "name_map": {
     "precursors": {
@@ -278,8 +278,8 @@
       "precursor_unmapped": 7,
       "inputs_missing": 17,
       "species_absent": 12,
-      "refused_other": 1,
-      "answerable": 4,
+      "refused_other": 2,
+      "answerable": 3,
       "factor_not_translated": 1
     },
     "items": [
@@ -747,8 +747,8 @@
         "errors": [
           "E9"
         ],
-        "class": "answerable",
-        "reason": "the temperature leg (Asn 200 + Glc 100 mM, 0.1 M phosphate pH 7, 100 vs 130 C, 21 min); the mixture leg charges Trp, which has no engine name"
+        "class": "refused_other",
+        "reason": "ACRYLAMIDE BELOW ITS FIT WINDOW (CF-106): the programme peaks at 100 C, inside 60-120 C. The lane's constants were measured over 120-200 C, and below 120 C its emergent formation Ea (~296 kJ/mol) and 60-min yields (x15-2000 low) contradict the measured data (Gokmen 2012, Knol 2005): the answer is refused rather than extrapolated."
       },
       {
         "contrast": "F29#22@low2006",
