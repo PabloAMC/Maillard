@@ -41,8 +41,17 @@ The other seven records report 0 failed pot runs, as did every EX-056 fold.
 
 ## Outcome of the re-runs
 
-Filled in after the re-runs finish, from optimiser and engine fields only: each re-run's `failed_pot_runs`, status
-and evaluations.
+The three re-runs ran 17:31 - 20:00 on 2026-11-04 from a detached worktree at 1fb63f5a, three at a time, unpaused,
+after the virtual machine was closed. Read from optimiser and engine fields only:
+
+| pair | failed pot runs | optimiser | wall time |
+|---|---|---|---|
+| dalian_polytechnic_chen_d + dfa_hofmann_schieberle | 0 | warm 2 (203 ev), reset 2 | 8895 s |
+| dalian_polytechnic_chen_d + ochanomizu_murata | 0 | warm 3 (228 ev) | 3159 s |
+| dfa_hofmann_schieberle + ochanomizu_murata | 0 | warm 3 (262 ev), reset 3 | 8841 s |
+
+All ten pair records now report 0 failed pot runs, every fit converged (status > 0), and every record carries freeze
+commit 1fb63f5a. The timeouts were the pauses and the memory starvation, not the chemistry.
 
 ## Lesson
 
