@@ -626,17 +626,29 @@ def power_line(q2, tables) -> Dict[str, Any]:
 # --- score mode (prereg v6 secs. 3 - 6) -----------------------------------------------------------------------------
 
 
-def engine_value(table: str, pid: str, pot: Mapping[str, Any], species: str, *, clamped: bool) -> Tuple[Optional[float], bool]:
+def _sulfur_lane(spec: engine.FormulationSpec, target: str) -> bool:
+    """The lane ``engine.predict`` integrates a target on is the sulfur lane (its operative override is that lane's)."""
+    decl = engine.declare_envelope(spec, [target])
+    lanes = decl.lanes or ((decl.lane or engine.TRUNK),)
+    return next((lane for lane in lanes if lane in engine.MAILLARD_LANES), None) == engine.SULFUR
+
+
+def engine_value(table: str, pid: str, pot: Mapping[str, Any], species: str, *, clamped: bool,
+                 operative: Optional[Mapping[str, Any]] = None, drift: Any = None) -> Tuple[Optional[float], bool]:
     """(ug/L of `species` in `pid`, pH fixed point unconverged?). The value is None ONLY when the envelope refuses
     (prereg v6 sec. 4: a zero). Any other exception aborts the run: catching it would turn a bug into a 'zero' (the v4
-    review's B8)."""
+    review's B8). ``operative`` / ``drift`` (M1, 2026-11-04: a named rival's sulfur-lane vector) replace the shipped
+    sulfur constants and pH drift on a target the sulfur lane integrates; every other lane stays shipped."""
     spec = pot_spec(table, pid, pot, clamped=clamped)
     tg = target_name(species)
     if spec is None or tg is None:
         return None, False
+    override = {}
+    if operative is not None and _sulfur_lane(spec, tg):
+        override = {"parameters": operative, "draw": engine.CoreDraw(ph_drift=drift)}
     with warnings.catch_warnings(record=True) as caught:
         warnings.simplefilter("always")
-        pred = engine.predict(spec, [tg])
+        pred = engine.predict(spec, [tg], **override)
     unconverged = any(issubclass(w.category, PhFixedPointNotConverged) for w in caught)
     if not pred.answered:
         return None, unconverged
@@ -789,17 +801,20 @@ def readings(block: Mapping[str, Any], power: Mapping[str, Any]) -> Dict[str, An
     }
 
 
-def score_payload(items_record: Mapping[str, Any]) -> Dict[str, Any]:
+def score_payload(items_record: Mapping[str, Any], operative: Optional[Mapping[str, Any]] = None,
+                  drift: Any = None) -> Dict[str, Any]:
     tables = {n: load_table(n) for n in SCORED_TABLES}
+    over = {"operative": operative, "drift": drift}
     q2 = items_record["q2_items"]
     allowed_none = {(i["table"], i["refused_arm"], i["species"]) for i in q2 if i["refused_arm"]}
     keys = sorted({(it["table"], pid, it["species"]) for it in q2 for pid in (it["a"], it["b"])})
     tight_config = Config.from_globals().replace({"ph.fixed_point.tolerance": TIGHT_PH_TOLERANCE})
     out: Dict[str, Any] = {}
     for label, clamped in (("primary", False), ("sensitivity_clamped_ph", True)):
-        run = {k: engine_value(k[0], k[1], tables[k[0]]["pots"][k[1]], k[2], clamped=clamped) for k in keys}
+        run = {k: engine_value(k[0], k[1], tables[k[0]]["pots"][k[1]], k[2], clamped=clamped, **over) for k in keys}
         with applied(tight_config):
-            tight = {k: engine_value(k[0], k[1], tables[k[0]]["pots"][k[1]], k[2], clamped=clamped)[0] for k in keys}
+            tight = {k: engine_value(k[0], k[1], tables[k[0]]["pots"][k[1]], k[2], clamped=clamped, **over)[0]
+                     for k in keys}
         preds = {k: v for k, (v, _) in run.items()}
         unexpected = sorted("|".join(k) for k, v in preds.items() if v is None and k not in allowed_none)
         if unexpected and not clamped:
@@ -915,13 +930,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"atlas {payload['q1_atlas']['classes']}; keyed {payload['q1_keyed']['classes']}; "
               f"detection curve {payload['power']['curve']['per_pair']} on {payload['power']['items']} S items")
         return 0
-    record = data_access.load_json(ITEMS_OUT)
-    rederived = json.loads(artifact_io.dump_json(items_payload()))
-    if provenance.strip_volatile(rederived) != provenance.strip_volatile(record):
-        raise SystemExit("the items re-derived now differ from the committed items record: re-freeze first")
-    if record["atlas_table_sha256"] != atlas_table_sha256():
-        raise SystemExit("ATLAS_COVERAGE / ATLAS_SPECS changed since the items were frozen")
-    frozen_at = _committed_at(Path(__file__), ITEMS_OUT, ITEMS_OUT.with_suffix(".md"), PREREG)
+    record, frozen_at = frozen_items_record()
     payload = {
         "artifact": "kinetic_core_contrast_benchmark_score_v1",
         "provenance": provenance.provenance_block(
@@ -936,6 +945,46 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     artifact_io.write_artifact(payload, SCORE_OUT, render=render_score)
     print(json.dumps({k: v for k, v in payload["readings"].items() if k != "power_curve"}, indent=1))
     return 0
+
+
+def frozen_items_record() -> Tuple[Dict[str, Any], str]:
+    """The committed items record, checked against a re-derivation, the hand table's hash and the freeze commit."""
+    record = data_access.load_json(ITEMS_OUT)
+    rederived = json.loads(artifact_io.dump_json(items_payload()))
+    if provenance.strip_volatile(rederived) != provenance.strip_volatile(record):
+        raise SystemExit("the items re-derived now differ from the committed items record: re-freeze first")
+    if record["atlas_table_sha256"] != atlas_table_sha256():
+        raise SystemExit("ATLAS_COVERAGE / ATLAS_SPECS changed since the items were frozen")
+    return record, _committed_at(Path(__file__), ITEMS_OUT, ITEMS_OUT.with_suffix(".md"), PREREG)
+
+
+def score_named(tag: str, config: Config, operative: Optional[Mapping[str, Any]], drift: Any, label: str,
+                generated_by: str, inputs: Sequence[Path] = ()) -> Dict[str, Any]:
+    """The --score payload for a NAMED configuration and sulfur-lane vector (M1 sec. 8, 2026-11-04): the same frozen
+    items, hand table and rules, integrated under ``config`` with ``operative`` / ``drift`` on the sulfur lane (None:
+    the shipped constants). Writes kinetic_core_contrast_benchmark_score_<tag>.{json,md}; the frozen v1 record (the
+    shipped engine) is never touched. A side-effect record, never used to choose."""
+    if not tag or tag == "v1":
+        raise SystemExit("a named score needs its own tag (v1 is the frozen shipped record)")
+    out = data_paths.VALIDATION_DIR / f"kinetic_core_contrast_benchmark_score_{tag}.json"
+    record, frozen_at = frozen_items_record()
+    with applied(config):
+        scored = score_payload(record, operative=operative, drift=drift)
+    payload = {
+        "artifact": out.stem,
+        "provenance": provenance.provenance_block(
+            out.stem, generated_by=generated_by,
+            inputs=[ITEMS_OUT, PREREG, Path(__file__)] + [FIT_ROWS_DIR / f"{n}.yml" for n in SCORED_TABLES] + list(inputs)),
+        "prereg": record["prereg"], "named": label, "config_digest": config.digest(),
+        "config_diff_from_shipped": {k: [repr(a), repr(b)] for k, (a, b) in config.diff().items()},
+        "sulfur_vector_override": operative is not None,
+        "atlas_table_sha256": record["atlas_table_sha256"], "frozen_at_commit": frozen_at,
+        "coverage": {"atlas": record["q1_atlas"]["classes"], "keyed": record["q1_keyed"]["classes"]},
+        "power": record["power"],
+        **scored,
+    }
+    artifact_io.write_artifact(payload, out, render=render_score)
+    return payload
 
 
 def _committed_at(*paths: Path) -> str:

@@ -143,7 +143,8 @@ def integrate_pot(job: Dict[str, Any]):
     state0 = dict(job["charge"])
     state0.setdefault("OX", engine.OX_AMBIENT_MMOL_L)
     state0.setdefault("OXR", engine.OX_RESERVOIR_DEFAULT_UNITS)
-    parameters = engine.core_parameters(engine.SULFUR)
+    # a full operative parameter set (M1, 2026-11-04: a fit vector's B23.build_parameters), else the shipped one
+    parameters = dict(job["parameters"]) if job.get("parameters") is not None else engine.core_parameters(engine.SULFUR)
     for key in job.get("without", ()):
         parameters[key] = dataclasses.replace(parameters[key], k_ref=0.0)
     for key, k_ref in (job.get("k_ref") or {}).items():   # a fit's trial value (fit_ph_acid_submodel.py)
@@ -157,9 +158,15 @@ def integrate_pot(job: Dict[str, Any]):
         held, t_hot = _held(spec), job["t_c"] + CELSIUS
         sid = ph_state.strong_ion_difference(job["label_ph"], state0, _drift(job), held, label_temperature_k=t_hot)
         clamp_label = observations.ph_cooled(state0, sid, _drift(job), held)
+    profile = job.get("temperature_profile_c")   # M1: ((t_min, T_C), ...) from t = 0, a thermal reading (B64's form)
     return integrate_sulfur(parameters, job["t_c"] + CELSIUS, state0, np.array(job["times"]),
-                            ph=job["label_ph"], buffer_spec=spec, ph_drift=_drift(job), rtol=1e-8, atol=1e-14,
-                            clamp_ph_label=clamp_label)
+                            ph=job["label_ph"], buffer_spec=spec, ph_drift=_drift(job),
+                            rtol=float(job.get("rtol", 1e-8)), atol=float(job.get("atol", 1e-14)),
+                            clamp_ph_label=clamp_label,
+                            ph_nodes=int(job.get("ph_nodes", 41)), ph_iterations=int(job.get("ph_iterations", 3)),
+                            temperature_profile=None if profile is None else (
+                                np.array([t for t, _ in profile], dtype=float),
+                                np.array([c for _, c in profile], dtype=float) + CELSIUS))
 
 
 def _drift(job: Dict[str, Any]):

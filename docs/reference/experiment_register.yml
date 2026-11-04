@@ -759,3 +759,15 @@ entries:
       the cysteine is left (a third destroyed; the pot 1.06 accounted, none measurably destroyed). R0 forms no TTCA; its
       Zhai reservoir is the charged t = 0 TTCA dissociating. These are R0's numbers only; no rival is judged.
     follow_up: "M1's combinations C1 - C3 (STATUS_AND_PLAN sec. 5, W2) are scored against these R0 numbers on the same rows; the cause of G1's fall from B9 to B60 (which constant) was not resolved and is not needed for the gate."
+  - id: EX-061
+    date: "2026-11-04"
+    kind: fit
+    question: "Plan step M1: does the cysteine-pentose route's reservoir explain the thiol data the shipped structure cannot? Supply verdict R0 (the shipped structure, refitted) against C1 (sulfur.cys_amadori_route: the TTCA / cysteine-Amadori route), with three outcomes, on two pre-declared blocks (the Zhang 2025b reservoir, where supply is credited; the Schieberle 2000 thiol shape)."
+    hypothesis: "Prereg sec. 13 (not blind, sec. 0): C1 favoured / R0 favoured / not separated / no verdict P 0.22 / 0.08 / 0.40 / 0.30; isothermal, both reservoir units favour C1 P 0.6; V7 passes P 0.7; V8 passes P 0.5."
+    design: "results/validation/kinetic_core_m1_supply_loss_combinations_prereg.md v3.3, frozen at 68247583 (secs. 2 - 10). Both rivals on ph.coupling inline (fixed-point fallback if V8 fails), the encounter-limit ceiling on k_dimer_* (fit.dimer_encounter_ceiling, log10 9.47 at 145 C) and the weak k_mft_decay prior (fit.mft_decay_prior, centre log10 0.0406 /min, sd 1 dex); R0 17 coordinates on B60's 52 rows, C1 19 on the 52 rows plus the route block (route_submodel.yml less Zhang 2025b, the five Zhai 140 C pots and the Kang-reprinted Zhai 2023 Food Chem 120 C TTCA pot: 290 rows, 33 pots); three starts each, the 1.92-nat comparison rule with prediction agreement; Laplace, profiles, the linearised predictive with plug-in and Monte Carlo printed; the two-unit sign rule with the v3.3 tie band under every registered thermal reading (the reservoir pot isothermal in all); tau_ABS(all) from EX-059. Generator scripts/generators/fit_m1_supply_combinations.py (--checks, --probe, --fit, --laplace, --score, --all)."
+    expected: "See hypothesis (prereg sec. 13)."
+    artifacts: [scripts/generators/fit_m1_supply_combinations.py, tests/unit/test_m1_supply_combinations.py, results/validation/kinetic_core_m1_supply_loss_combinations_prereg.md, results/validation/kinetic_core_m1_supply_combinations_checks.json]
+    commit: pending
+    verdict: pending
+    conclusion: "Pending: built and the numerics checks run; the probe, the fits and the scoring are launched by the session after the freeze."
+    follow_up: "The C3 follow-up (the disulfide side) and the W6 loss-law data need are registered at the decision (prereg sec. 10 step 8)."
