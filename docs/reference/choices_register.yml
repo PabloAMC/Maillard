@@ -145,11 +145,16 @@ entries:
     sensitivity: {status: not_applicable}
 
   - id: CR-09
-    what: the usefulness bar and its power condition
-    where: {file: src/model_card.py, symbol: USEFULNESS_MIN_CLAIMS}
+    what: how the model card states where the model stands against its baselines (no pass mark)
+    where: {file: src/model_card.py, symbol: collect_against_baselines}
     kind: policy
-    current: out of sample >= 40 % within 3x and beating the typical-yield baseline; directional >= 65 % on >= 67 claims
-    basis: owner decisions of 2026-10-28 (north star C2, D7); 67 is the sample size for 80 % power against 50 %
+    current: >-
+      descriptive only -- the out-of-sample within-3x count beside the typical-yield baseline's, and the directional
+      share with its 90 % Wilson interval against chance; no MET / NOT MET verdict
+    basis: >-
+      owner, 2026-11-02 / 11-03: no round-number thresholds; a change ships on a written case comparing rivals on the
+      decisive data (docs/guides/STATUS_AND_PLAN.md sec. 7). Replaces the 2026-10-28 usefulness bar (>= 40 % within
+      3x; >= 65 % directional on >= 67 claims)
     alternatives: []
     decided_by: owner
     sensitivity: {status: not_applicable}
