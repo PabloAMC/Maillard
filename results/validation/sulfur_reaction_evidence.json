@@ -2,11 +2,11 @@
   "artifact": "sulfur_reaction_evidence",
   "provenance": {
     "artifact": "sulfur_reaction_evidence",
-    "generated_on": "2026-11-03",
+    "generated_on": "2026-11-04",
     "git": {
-      "commit": "c2c15ab5a94c4d023246fab8aaef25986d7ae4f1",
-      "short": "c2c15ab5",
-      "branch": "acrylamide-envelope-2026-11-03",
+      "commit": "8ce99365903983fe9f1b4d4d903a6351a18da3eb",
+      "short": "8ce99365",
+      "branch": "m1-thiol-loss-case",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "125d01521d49f9e9f2a4c1355366e42a6ab1c7d04226ff384ad84b3c9f7b2387"
+        "sha256": "cabc7e97f0b798ab28b160a2647ab1ab02963a98c0324d303c4940a701696a96"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -80,7 +80,7 @@
       "fitted": 9,
       "measured": 1
     },
-    "unclear_among_carrying": 6,
+    "unclear_among_carrying": 8,
     "on_the_odorant_path": 16,
     "odorant_path_species": [
       "MFT",
@@ -151,7 +151,7 @@
       "k_pent_dpo",
       "k_pent_tdp"
     ],
-    "unclear_among_steps_that_matter": 12,
+    "unclear_among_steps_that_matter": 14,
     "threshold": 0.01
   },
   "constants": {
@@ -1733,9 +1733,13 @@
       "species_measured_over_time": [
         "TDP"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-107"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-107"
+      ]
     },
     {
       "reaction": "r_osone_decay_ddp",
@@ -1776,10 +1780,13 @@
         }
       },
       "species_measured_over_time": [],
-      "conflicts": [],
+      "conflicts": [
+        "CF-107"
+      ],
       "unclear": true,
       "why_unclear": [
-        "no species of the step is measured over time in the corpus"
+        "no species of the step is measured over time in the corpus",
+        "conflicts: CF-107"
       ]
     },
     {
@@ -1917,9 +1924,13 @@
         "PENT",
         "TDP"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-107"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-107"
+      ]
     },
     {
       "reaction": "r_cys_h2s",
@@ -2143,9 +2154,13 @@
       "species_measured_over_time": [
         "DPO"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-107"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-107"
+      ]
     },
     {
       "reaction": "r_pent_thermal_dpo",
@@ -2368,10 +2383,13 @@
       "species_measured_over_time": [
         "MFT"
       ],
-      "conflicts": [],
+      "conflicts": [
+        "CF-107"
+      ],
       "unclear": true,
       "why_unclear": [
-        "fitted, B2.3 log10k unidentified, frozen since"
+        "fitted, B2.3 log10k unidentified, frozen since",
+        "conflicts: CF-107"
       ]
     },
     {
@@ -2778,9 +2796,13 @@
         }
       },
       "species_measured_over_time": [],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-107"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-107"
+      ]
     },
     {
       "reaction": "ch_thiolate_loss_mft",
@@ -4749,9 +4771,13 @@
       "species_measured_over_time": [
         "ARP"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-107"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-107"
+      ]
     },
     {
       "reaction": "r_nf_shet",
@@ -5103,9 +5129,13 @@
         "PENT",
         "TTCA"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-107"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-107"
+      ]
     },
     {
       "reaction": "r_ttca_deg",
@@ -5157,9 +5187,13 @@
         "DPO",
         "TTCA"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-107"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-107"
+      ]
     },
     {
       "reaction": "ch_thioether_mft",

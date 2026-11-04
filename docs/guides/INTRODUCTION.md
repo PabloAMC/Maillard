@@ -204,9 +204,10 @@ step on this series (orange, purple) does not reach the measurement and breaks t
 
 ![A pot the model was never tuned on](../assets/thiol_sink/04_yiltirak_ladder.png)
 
-*A pot from another laboratory that no version of the model has seen. Weakening the removal step
-alone cuts the error from 480 times to 18. Most of what looked like laboratories disagreeing is the
-same removal problem.*
+*A pot from another laboratory that no version of the model was fitted on (it is development data in
+the frozen split, and its scores have been read). Weakening the removal step alone (wave B16, not
+shipped: it broke the 145 °C fed pots) cut the worst error, FFT at 100 °C, from 477 times to 18, and
+the median over the ladder from 198 times to 14 (B16's record).*
 
 The model removes thiols far faster than any pot does, at 100 °C and at 140 °C alike. One removal
 step with one temperature dependence cannot fit both, so the step needs a different form. Three
@@ -242,6 +243,21 @@ way to its own products, on a flow about sixteen times larger than the thiols'. 
 has no step that makes one of those sugars from what it is fed, although the paper measures three of
 them in it. So the next thing to build is not a fourth removal step. It is the supply that all three
 were missing, and it is written down before it is run.
+
+**What happened when it was built (wave B27, 2026-09-11).** The supply was built, and its gate fired
+before any fit. In the pots that measure the disulfide, the step that makes it uses well under one
+percent of the oxidant those pots already carry, so no supply of oxidant, from the sugars or from the
+air, can raise the disulfide share to what is measured. What those measurements want is a faster step
+itself, and its rate already sits at the top of its measured band.
+
+**Why the earlier refusals do not settle it (audit, 2026-11-04; CF-107).** Four of the refused waves
+ended at the same fit, stuck in the same place: the thiol removal step was frozen at one fast value
+for every pot, the sugar chemistry fed the thiols in seconds, and most of the fit's error came from
+rows no free constant could fit. Against that pair, any added removal or reservoir is switched off,
+whether it is right or not. Several errors stack here, and fixing one at a time hides each fix. So the
+plan (STATUS_AND_PLAN, step M1) compares them in combination: a supply that runs over hours, plus a
+removal that free cysteine slows, plus the disulfide side, judged on the measurements nearest each
+mechanism rather than on the whole fit.
 
 ## 8. What is needed next
 
