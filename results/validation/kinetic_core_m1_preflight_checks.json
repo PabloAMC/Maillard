@@ -1,0 +1,1419 @@
+{
+  "artifact": "kinetic_core_m1_preflight_checks",
+  "provenance": {
+    "artifact": "kinetic_core_m1_preflight_checks",
+    "generated_on": "2026-11-04",
+    "git": {
+      "commit": "76880a44e30bea96180ddcbb9f5ee7f2f105dcd6",
+      "short": "76880a44",
+      "branch": "m1-preflight-checks",
+      "dirty": false
+    },
+    "generated_by": "scripts/generators/m1_preflight_checks.py",
+    "wave": "M1.0",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b60_fit_report.json",
+        "sha256": "8e33492dea4c5d84c36eac4f1f9f4c9a87143597367574b58ff0af5a183215c3"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b27_ship_rule.json",
+        "sha256": "8911490d34855988a4927acc0f720c4bb209889876cf2f3bd82a16cd7142865b"
+      },
+      {
+        "path": "results/validation/kinetic_core_joint_deoxyosone_thiol_fit_s042.json",
+        "sha256": "754a5cfffdf7992f6d764ab8745c66cb9ac89270dca555f6d03f9126c75b3b74"
+      },
+      {
+        "path": "docs/reference/cases/M1_thiol_loss_oxidant_ph_drift.md",
+        "sha256": "ea37bf13b6e1cdb771f948b0467e738e5f82cafaa4eda56b4959beddc0233989"
+      },
+      {
+        "path": "docs/reference/contrast_benchmark/split.yml",
+        "sha256": "1098b4b420330aa737497f6c855454c732dc394ce2007be6fd94dd9933cb36ac"
+      },
+      {
+        "path": "docs/reference/contrast_benchmark/split_v2_per_change.yml",
+        "sha256": "3defe9757fb1b23348e81d38111ada1d012f6813a6cc40a657858ef830267eb3"
+      },
+      {
+        "path": "data/lit/fit_rows/thiol_submodel.yml",
+        "sha256": "95b36cd13d0a84275e2331bf913ac1543217af34e8f92e0a86d3409f3c8ea4da"
+      },
+      {
+        "path": "data/lit/fit_rows/route_submodel.yml",
+        "sha256": "b1b23ba179d490fed35d55c5e999aac1174ff9776c4ec33d1468d1cf7a29d98a"
+      }
+    ]
+  },
+  "case": "docs/reference/cases/M1_thiol_loss_oxidant_ph_drift.md",
+  "b60_report": "results/validation/kinetic_core_b60_fit_report.json",
+  "config_digest": "40b746476905786cd0d8d119973c2afdac399a798af38b2de7b5102e0f40c800",
+  "fitted": false,
+  "split_status": {
+    "schieberle2000": {
+      "lab": "dfa_garching",
+      "v1_lab": "development",
+      "v1_contrasts": {
+        "F23#22@schieberle2000": "development"
+      },
+      "v2_test_contrasts": [],
+      "v2_calibration_input": true
+    },
+    "cao2017": {
+      "lab": "btbu_beijing",
+      "v1_lab": "development",
+      "v1_contrasts": {
+        "F04#18@cao2017": "development"
+      },
+      "v2_test_contrasts": [],
+      "v2_calibration_input": false
+    },
+    "zhang2025b": {
+      "lab": "btbu_beijing",
+      "v1_lab": "development",
+      "v1_contrasts": {
+        "F04#19@zhang2025b": "development"
+      },
+      "v2_test_contrasts": [],
+      "v2_calibration_input": false
+    },
+    "zhai2019": {
+      "lab": "ho_network",
+      "v1_lab": "development",
+      "v1_contrasts": {},
+      "v2_test_contrasts": [],
+      "v2_calibration_input": false
+    },
+    "zhou2023": {
+      "lab": "ho_network",
+      "v1_lab": "development",
+      "v1_contrasts": {
+        "F28#4@zhou2023": "development"
+      },
+      "v2_test_contrasts": [],
+      "v2_calibration_input": true
+    },
+    "Zhang2024": {
+      "lab": "btbu_beijing",
+      "v1_lab": "development",
+      "v1_contrasts": {
+        "F28#5@Zhang2024": "development"
+      },
+      "v2_test_contrasts": [],
+      "v2_calibration_input": true
+    },
+    "_v2_E10_development_labs": [
+      "btbu_beijing",
+      "ho_network",
+      "kallen_pennsylvania"
+    ],
+    "_v2_E12_development_labs": [
+      "dfa_garching",
+      "nestle_rc_and_cerny_firmenich",
+      "reading_mottram_parker"
+    ]
+  },
+  "not_read": [
+    {
+      "item": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b (Table 2 blank: MFT, FFT, MFT disulfide, 2-acetylthiazole at 50 min)",
+      "why": "frozen Maillard-path hold-out bundle (FIT_HOLDOUT_DECLARATION.md Amendment 45); D2 integrates that pot but reads and reports only cysteine, xylose, TTCA and cysteine-Amadori"
+    },
+    {
+      "item": "Kumazawa 2003 (F28#3), Esterbauer 1975 (F28#17), Stack 2018 (F28#18)",
+      "why": "contrast_split_v1 TEST; not used"
+    },
+    {
+      "item": "Ehrenberg 1989 (F28#8), Xu 2011 (F28#20), Wang 2022 (F28#25), Liu 2023b (F28#26)",
+      "why": "split_v2_per_change E12 TEST contrasts; not used"
+    }
+  ],
+  "G1": {
+    "pots": {
+      "zhou_arp_cys_pH7": {
+        "B60": {
+          "system": "zhou_arp_cys_pH7",
+          "anchor": "Zhou 2023 Table 1, ARP + Cys, pH 7 column",
+          "t_c": 120.0,
+          "minutes": 60.0,
+          "ph_label": 7.0,
+          "ox_charged_mmol_l": 1.0,
+          "ox_final_mmol_l": 0.9999960358617349,
+          "ox_consumed_b27_consumers": 3.964110564741178e-06,
+          "ox_consumed_all_reactions": 3.964110564741178e-06,
+          "ox_made": 0.0,
+          "consumed_fraction": 3.964110564741178e-06,
+          "consumed_fraction_b27_list": 3.964110564741178e-06,
+          "consumers": {
+            "ch_dimer_mft": 3.946986559843773e-06,
+            "ch_dimer_fft": 1.7124004897404388e-08
+          },
+          "mercaptoketone_flux_b27_sum_mmol_l": 0.0007663600708622549,
+          "r_nf_mp3p_flux_mmol_l": 0.0007662497851145093,
+          "rise_at_phi_1_b27_sum": 0.0007663600708622549,
+          "rise_at_phi_1_r_nf_mp3p_only": 0.0007662497851145093,
+          "dimer_flux_mmol_l": 3.964110564741178e-06,
+          "flux_closure": {
+            "OX": 2.7700347834187962e-11,
+            "MFT": 7.320707463695749e-07,
+            "FFT": 8.53772937067234e-06,
+            "Cys": 3.708774258903702e-06
+          },
+          "ph_final_in_situ": 4.249423896978825,
+          "ph_fixed_point_converged": true
+        },
+        "B9_as_recorded": {
+          "consumed_fraction": 1.3792504398566537e-05,
+          "rise_at_phi_1": 0.003506560161936008,
+          "dimer_flux_mmol_l": 1.3792504398566537e-05,
+          "basis": "kinetic_core_b27_ship_rule.json (2026-09-11: B9 vector, pre-B51 pH state, pre-B60 linear flux budget)"
+        },
+        "B9_vector_today_numerics": {
+          "consumed_fraction": 8.16949863206589e-05,
+          "consumed_fraction_b27_list": 8.16949863206589e-05,
+          "rise_at_phi_1_b27_sum": 0.0059148848485572345,
+          "rise_at_phi_1_r_nf_mp3p_only": 0.005914790424699712,
+          "dimer_flux_mmol_l": 8.16949863206589e-05
+        }
+      },
+      "zhang_fig1_cys": {
+        "B60": {
+          "system": "zhang_fig1_cys",
+          "anchor": "Zhang 2024 Fig. 1, VB1-Xyl-Cys",
+          "t_c": 115.0,
+          "minutes": 60.0,
+          "ph_label": 4.9,
+          "ox_charged_mmol_l": 1.0,
+          "ox_final_mmol_l": 0.9999087135117878,
+          "ox_consumed_b27_consumers": 9.128766376904646e-05,
+          "ox_consumed_all_reactions": 9.128766376904646e-05,
+          "ox_made": 0.0,
+          "consumed_fraction": 9.128766376904646e-05,
+          "consumed_fraction_b27_list": 9.128766376904646e-05,
+          "consumers": {
+            "ch_dimer_mft": 5.1095414253873606e-05,
+            "ch_dimer_fft": 4.019224951517286e-05
+          },
+          "mercaptoketone_flux_b27_sum_mmol_l": 0.0007478260455368615,
+          "r_nf_mp3p_flux_mmol_l": 0.0007477908620379095,
+          "rise_at_phi_1_b27_sum": 0.0007478260455368615,
+          "rise_at_phi_1_r_nf_mp3p_only": 0.0007477908620379095,
+          "dimer_flux_mmol_l": 9.128766376904646e-05,
+          "flux_closure": {
+            "OX": 1.1755568298313368e-09,
+            "MFT": 1.4851198602749717e-06,
+            "FFT": 3.147962894753964e-06,
+            "Cys": 0.00023209024693147078
+          },
+          "ph_final_in_situ": 4.163019151062329,
+          "ph_fixed_point_converged": true
+        },
+        "B9_as_recorded": {
+          "consumed_fraction": 0.004871217265641116,
+          "rise_at_phi_1": 0.0041002535533342195,
+          "dimer_flux_mmol_l": 0.004871217265641116,
+          "basis": "kinetic_core_b27_ship_rule.json (2026-09-11: B9 vector, pre-B51 pH state, pre-B60 linear flux budget)"
+        },
+        "B9_vector_today_numerics": {
+          "consumed_fraction": 0.013029628831991803,
+          "consumed_fraction_b27_list": 0.013029628831991803,
+          "rise_at_phi_1_b27_sum": 0.004949743156985915,
+          "rise_at_phi_1_r_nf_mp3p_only": 0.00494971540435537,
+          "dimer_flux_mmol_l": 0.013029628831991803
+        }
+      },
+      "zhang_fig1_gcys": {
+        "B60": {
+          "system": "zhang_fig1_gcys",
+          "anchor": "Zhang 2024 Fig. 1, VB1-Xyl-GCys (cystine)",
+          "t_c": 115.0,
+          "minutes": 60.0,
+          "ph_label": 4.9,
+          "ox_charged_mmol_l": 62.4,
+          "ox_final_mmol_l": 62.395193087554375,
+          "ox_consumed_b27_consumers": 0.004806964936922377,
+          "ox_consumed_all_reactions": 0.004806964936922377,
+          "ox_made": 0.0,
+          "consumed_fraction": 7.703469450196117e-05,
+          "consumed_fraction_b27_list": 7.703469450196117e-05,
+          "consumers": {
+            "ch_dimer_mft": 0.002433588620657928,
+            "ch_dimer_fft": 0.0023733763162644486
+          },
+          "mercaptoketone_flux_b27_sum_mmol_l": 0.0007488580480634742,
+          "r_nf_mp3p_flux_mmol_l": 0.0007488230478208624,
+          "rise_at_phi_1_b27_sum": 1.2000930257427473e-05,
+          "rise_at_phi_1_r_nf_mp3p_only": 1.2000369356103564e-05,
+          "dimer_flux_mmol_l": 0.004806964936922377,
+          "flux_closure": {
+            "OX": 8.412067148847044e-10,
+            "MFT": 1.4040950982848316e-06,
+            "FFT": 3.4217817496144455e-06,
+            "Cys": 0.00023028330398145176
+          },
+          "ph_final_in_situ": 4.161959387143955,
+          "ph_fixed_point_converged": true
+        },
+        "B9_as_recorded": {
+          "consumed_fraction": 0.0009973557489059675,
+          "rise_at_phi_1": 6.585245444160355e-05,
+          "dimer_flux_mmol_l": 0.06223499873173237,
+          "basis": "kinetic_core_b27_ship_rule.json (2026-09-11: B9 vector, pre-B51 pH state, pre-B60 linear flux budget)"
+        },
+        "B9_vector_today_numerics": {
+          "consumed_fraction": 0.0014329344383371924,
+          "consumed_fraction_b27_list": 0.0014329344383371924,
+          "rise_at_phi_1_b27_sum": 7.947882352702418e-05,
+          "rise_at_phi_1_r_nf_mp3p_only": 7.947838073846039e-05,
+          "dimer_flux_mmol_l": 0.08941510895224081
+        }
+      }
+    },
+    "needed_rise_for_one_decade": 9.0,
+    "max_consumed_fraction_B60": 9.128766376904646e-05,
+    "max_rise_at_phi_1_B60": 0.0007663600708622549,
+    "holds": true,
+    "criterion": "G1 holds when the consumers use < 1 % of the charged OX in every ambient pot and the whole mercaptoketone flux at phi = 1 would raise the pool by < 1 % (B27: < 1 % and < 0.5 %; a decade on the share needs ~9x)"
+  },
+  "D1": {
+    "pot": "schieberle2000_rib_cys_ph5_100C",
+    "species": {
+      "MFT": {
+        "measured_ug_l": {
+          "30": 45.0,
+          "60": 138.0,
+          "360": 1560.0,
+          "720": 1790.0
+        },
+        "measured_read_error_dex": {
+          "30": 0.0048,
+          "60": 0.0016,
+          "360": 0.0014,
+          "720": 0.0012
+        },
+        "R0_ug_l": {
+          "30": 12.616605057305254,
+          "60": 30.818638636383607,
+          "360": 35.19667662571395,
+          "720": 19.051852645629083
+        },
+        "R0_peak_min": 157.5188369243676,
+        "R0_peak_over_720": 2.918675825847744,
+        "R0_still_rising_6_to_12_h": false,
+        "measured_still_rising_6_to_12_h": true,
+        "ratios": {
+          "360_over_30": {
+            "measured": 34.666666666666664,
+            "measured_dex": 1.5399120845791179,
+            "R0": 2.7897105810833325,
+            "R0_dex": 0.4455591496684855,
+            "residual_dex": -1.0943529349106325,
+            "read_error_dex": 0.004999999999999999,
+            "residual_over_read_error": -218.87058698212653,
+            "B9_residual_dex": -1.7979941506348263
+          },
+          "720_over_360": {
+            "measured": 1.1474358974358974,
+            "measured_dex": 0.059728432625431545,
+            "R0": 0.5412969198265214,
+            "R0_dex": -0.2665644441931638,
+            "residual_dex": -0.3262928768185953,
+            "read_error_dex": 0.0018439088914585773,
+            "residual_over_read_error": -176.95715787806068,
+            "B9_residual_dex": null
+          },
+          "720_over_30": {
+            "measured": 39.77777777777778,
+            "measured_dex": 1.5996405172045496,
+            "R0": 1.510061744747863,
+            "R0_dex": 0.1789947054753217,
+            "residual_dex": -1.4206458117292278,
+            "read_error_dex": 0.004947726750741192,
+            "residual_over_read_error": -287.13101658583076,
+            "B9_residual_dex": -2.2078951029456637
+          }
+        }
+      },
+      "FFT": {
+        "measured_ug_l": {
+          "30": 20.0,
+          "60": 31.0,
+          "360": 1100.0,
+          "720": 1320.0
+        },
+        "measured_read_error_dex": {
+          "30": 0.0109,
+          "60": 0.007,
+          "360": 0.002,
+          "720": 0.0016
+        },
+        "R0_ug_l": {
+          "30": 18.041717510337932,
+          "60": 113.5518116398111,
+          "360": 2283.3101942250105,
+          "720": 2240.94647726813
+        },
+        "R0_peak_min": 499.2,
+        "R0_peak_over_720": 1.097895038635359,
+        "R0_still_rising_6_to_12_h": false,
+        "measured_still_rising_6_to_12_h": true,
+        "ratios": {
+          "360_over_30": {
+            "measured": 55.0,
+            "measured_dex": 1.7403626894942439,
+            "R0": 126.55725226363123,
+            "R0_dex": 2.1022870371104836,
+            "residual_dex": 0.36192434761623965,
+            "read_error_dex": 0.011081967334368028,
+            "residual_over_read_error": 32.658853495608064,
+            "B9_residual_dex": -0.8021645937164703
+          },
+          "720_over_360": {
+            "measured": 1.2,
+            "measured_dex": 0.07918124604762482,
+            "R0": 0.9814463592971171,
+            "R0_dex": -0.008133431670567516,
+            "residual_dex": -0.08731467771819233,
+            "read_error_dex": 0.0025612496949731396,
+            "residual_over_read_error": -34.090654218353365,
+            "B9_residual_dex": null
+          },
+          "720_over_30": {
+            "measured": 66.0,
+            "measured_dex": 1.8195439355418688,
+            "R0": 124.2091544767877,
+            "R0_dex": 2.094153605439916,
+            "residual_dex": 0.2746096698980473,
+            "read_error_dex": 0.011016805344563368,
+            "residual_over_read_error": 24.926433871645298,
+            "B9_residual_dex": -1.2074159427622306
+          }
+        }
+      }
+    },
+    "dense_vs_engine_endpoint_dex": {
+      "Cys": 0.0,
+      "PENT": 0.0,
+      "MFT": 0.0,
+      "FFT": 0.0
+    },
+    "noise": {
+      "source": "Table IV prints no SD and no n; the only stated error is the transcription error (half the last printed digit), 0.001 - 0.011 dex per point (thiol_submodel.yml); a ratio's error is the two in quadrature.",
+      "measurement_model_series_noise_dex": {
+        "MFT": 0.7968759799476677,
+        "FFT": 1.1552080912991263
+      },
+      "measurement_model_basis": "the per-series extra noise the joint thiol fit s042 estimated from its own residual scatter (fitting.estimate_series_noise): a property of that fit's misfit, not a measured replicate error; quoted as the case's sec. 5 says, not used to score"
+    },
+    "B9_as_recorded": {
+      "ratios_dex": {
+        "MFT_360_over_30": -1.7979941506348263,
+        "MFT_720_over_30": -2.2078951029456637,
+        "FFT_360_over_30": -0.8021645937164703,
+        "FFT_720_over_30": -1.2074159427622306
+      },
+      "still_rising_6_to_12_h": {
+        "MFT": false,
+        "FFT": false
+      },
+      "basis": "kinetic_core_b27_ship_rule.json b9_reference.T1 (residuals log10 model/measured)"
+    }
+  },
+  "D2": {
+    "cao2017_90C": {
+      "pot": "cao2017_blank_fig4",
+      "measured_pots": [
+        "cao2017_blank_fig4",
+        "cao2017_blank_fig5"
+      ],
+      "t_c": 90,
+      "minutes": 300,
+      "label_ph": 5.5,
+      "initial_mmol_l": {
+        "Cys": 400.0,
+        "PENT": 400.0
+      },
+      "charge_mmol_l": {
+        "Cys": 400.0,
+        "PENT": 400.0
+      },
+      "buffer": "Cao 2017: 0.2 M sodium phosphate, pH 5.5",
+      "R0_final_ph_in_situ": 3.5537456190677434,
+      "R0_ph_fixed_point_converged": true,
+      "dense_vs_engine_endpoint_dex": {
+        "Cys": 0.0,
+        "PENT": 0.0
+      },
+      "pools": {
+        "cysteine_free": {
+          "measured_fraction_of_charge": {
+            "30": 0.188,
+            "60": 0.1685,
+            "120": 0.1655,
+            "180": 0.15975,
+            "240": 0.15475,
+            "300": 0.14075
+          },
+          "measured_half": {
+            "t_half_min": null,
+            "upper_bound_min": 30.0,
+            "statement": "< 30 min (already 0.19 at the first measured time)"
+          },
+          "R0_fraction_at_measured_times": {
+            "30": 0.8025776693989205,
+            "60": 0.7861360563042561,
+            "120": 0.7542568194943555,
+            "180": 0.7236704342362589,
+            "240": 0.6943243868952018,
+            "300": 0.6661683717143464
+          },
+          "R0_half": {
+            "t_half_min": null,
+            "statement": "> 300 min (0.67 left at the end)"
+          },
+          "log10_R0_over_measured": {
+            "30": 0.6303292226657341,
+            "60": 0.6688978105377221,
+            "120": 0.6587212473582639,
+            "180": 0.6560999629320833,
+            "240": 0.6519317616447926,
+            "300": 0.6751356059245326
+          }
+        },
+        "pentose_free": {
+          "measured_fraction_of_charge": {
+            "30": 0.19625,
+            "60": 0.18725000000000003,
+            "120": 0.1805,
+            "180": 0.17575,
+            "240": 0.17350000000000002,
+            "300": 0.1725
+          },
+          "measured_half": {
+            "t_half_min": null,
+            "upper_bound_min": 30.0,
+            "statement": "< 30 min (already 0.20 at the first measured time)"
+          },
+          "R0_fraction_at_measured_times": {
+            "30": 0.0,
+            "60": 0.0,
+            "120": 0.0,
+            "180": 0.0,
+            "240": 0.0,
+            "300": 0.0
+          },
+          "R0_half": {
+            "t_half_min": 0.030336609390992378,
+            "t_half_s": 1.8201965634595427,
+            "statement": "1.82 s"
+          },
+          "log10_R0_over_measured": {
+            "30": -29.29280966541729,
+            "60": -29.272421826371502,
+            "120": -29.256477206241676,
+            "180": -29.24489533369186,
+            "240": -29.239299479126892,
+            "300": -29.236789099409293
+          }
+        },
+        "cysteine_free_plus_reservoir": {
+          "measured_fraction_of_charge": {
+            "30": 1.08825,
+            "60": 1.1665,
+            "120": 1.1095,
+            "180": 1.08975,
+            "240": 1.0585,
+            "300": 1.062
+          },
+          "measured_half": {
+            "t_half_min": null,
+            "lower_bound_min": 300.0,
+            "statement": "> 300 min (1.06 left at the last measured time)"
+          },
+          "R0_fraction_at_measured_times": {
+            "30": 0.8025776693989205,
+            "60": 0.7861360563042561,
+            "120": 0.7542568194943555,
+            "180": 0.7236704342362589,
+            "240": 0.6943243868952018,
+            "300": 0.6661683717143464
+          },
+          "R0_half": {
+            "t_half_min": null,
+            "statement": "> 300 min (0.67 left at the end)"
+          },
+          "log10_R0_over_measured": {
+            "30": -0.13224160390002185,
+            "60": -0.17138702738469191,
+            "120": -0.16760806109802567,
+            "180": -0.17778604792720054,
+            "240": -0.18312844301848263,
+            "300": -0.20254050729753387
+          }
+        },
+        "pentose_free_plus_reservoir": {
+          "measured_fraction_of_charge": {
+            "30": 1.0965,
+            "60": 1.1852500000000001,
+            "120": 1.1245,
+            "180": 1.1057499999999998,
+            "240": 1.07725,
+            "300": 1.09375
+          },
+          "measured_half": {
+            "t_half_min": null,
+            "lower_bound_min": 300.0,
+            "statement": "> 300 min (1.09 left at the last measured time)"
+          },
+          "R0_fraction_at_measured_times": {
+            "30": 0.0,
+            "60": 0.0,
+            "120": 0.0,
+            "180": 0.0,
+            "240": 0.0,
+            "300": 0.0
+          },
+          "R0_half": {
+            "t_half_min": 0.030336609390992378,
+            "t_half_s": 1.8201965634595427,
+            "statement": "1.82 s"
+          },
+          "log10_R0_over_measured": {
+            "30": -30.040008636013543,
+            "60": -30.073809963990993,
+            "120": -30.05095945977165,
+            "180": -30.04365694804164,
+            "240": -30.032316502760406,
+            "300": -30.03891806603037
+          }
+        }
+      },
+      "reservoir_measured_mmol_l": {
+        "30": 360.1,
+        "60": 399.20000000000005,
+        "120": 377.6,
+        "180": 372.0,
+        "240": 361.5,
+        "300": 368.5
+      },
+      "reservoir_R0_mmol_l": {
+        "30": 0.0,
+        "60": 0.0,
+        "120": 0.0,
+        "180": 0.0,
+        "240": 0.0,
+        "300": 0.0
+      },
+      "reservoir_lower_bound_on_cysteine_fraction": {
+        "30": 0.9002500000000001,
+        "60": 0.9980000000000001,
+        "120": 0.9440000000000001,
+        "180": 0.93,
+        "240": 0.90375,
+        "300": 0.92125
+      },
+      "R0_cysteine_free_plus_reservoir_fraction": {
+        "30": 0.8025776693989205,
+        "60": 0.7861360563042561,
+        "120": 0.7542568194943555,
+        "180": 0.7236704342362589,
+        "240": 0.6943243868952018,
+        "300": 0.6661683717143464
+      },
+      "R0_pentose_free_plus_reservoir_fraction": {
+        "30": 0.0,
+        "60": 0.0,
+        "120": 0.0,
+        "180": 0.0,
+        "240": 0.0,
+        "300": 0.0
+      },
+      "measurement_noise": [
+        "CAMA: sigma 0.021 dex (sd 4.2)",
+        "Cys: sigma 0.040 dex (sd 3.2)",
+        "PENT: sigma 0.138 dex (sd 21.5)",
+        "TTCA: sigma 0.009 dex (read error only)"
+      ]
+    },
+    "zhang2025b_120C": {
+      "pot": "zhang2025b_blank",
+      "measured_pots": [
+        "zhang2025b_blank_fig2gh",
+        "zhang2025b_blank"
+      ],
+      "t_c": 120,
+      "minutes": 50,
+      "label_ph": 6.5,
+      "initial_mmol_l": {
+        "Cys": 40.0,
+        "PENT": 40.0
+      },
+      "charge_mmol_l": {
+        "Cys": 40.0,
+        "PENT": 40.0
+      },
+      "buffer": "Zhang 2025b: 0.2 mol/L phosphate, pH 6.5",
+      "R0_final_ph_in_situ": 6.212663690339942,
+      "R0_ph_fixed_point_converged": true,
+      "dense_vs_engine_endpoint_dex": {
+        "Cys": 0.0,
+        "PENT": 0.0
+      },
+      "pools": {
+        "cysteine_free": {
+          "measured_fraction_of_charge": {
+            "5": 0.5065000000000001,
+            "10": 0.33275,
+            "15": 0.254,
+            "20": 0.182675,
+            "25": 0.135325,
+            "30": 0.10024999999999999,
+            "40": 0.038775,
+            "50": 0.02004
+          },
+          "measured_half": {
+            "t_half_min": 5.131349055154872,
+            "statement": "~5.13 min (log-time interpolation between measured points)"
+          },
+          "R0_fraction_at_measured_times": {
+            "5": 0.010876634448072894,
+            "10": 0.01060619718050754,
+            "15": 0.010428856179193475,
+            "20": 0.010255391704203067,
+            "25": 0.010084825976145373,
+            "30": 0.009917100232589958,
+            "40": 0.009589979492593773,
+            "50": 0.009273659617108711
+          },
+          "R0_half": {
+            "t_half_min": 0.008735508226382131,
+            "t_half_s": 0.5241304935829278,
+            "statement": "0.524 s"
+          },
+          "log10_R0_over_measured": {
+            "5": -1.6680849170863963,
+            "10": -1.4965583672919134,
+            "15": -1.3865970383281365,
+            "20": -1.2507268631387962,
+            "25": -1.1277096273394376,
+            "30": -1.004699678602246,
+            "40": -0.6067341280180951,
+            "50": -0.33464656580410024
+          }
+        },
+        "pentose_free": {
+          "measured_fraction_of_charge": {
+            "5": 0.46299999999999997,
+            "10": 0.29225,
+            "15": 0.21012499999999998,
+            "20": 0.162025,
+            "25": 0.11305000000000001,
+            "30": 0.08715,
+            "40": 0.043725,
+            "50": 0.0305
+          },
+          "measured_half": {
+            "t_half_min": null,
+            "upper_bound_min": 5.0,
+            "statement": "< 5 min (already 0.46 at the first measured time)"
+          },
+          "R0_fraction_at_measured_times": {
+            "5": 9.022523570968109e-05,
+            "10": 9.476904495988433e-07,
+            "15": 1.0835271179526024e-08,
+            "20": 1.3355589170071536e-10,
+            "25": 1.7723348796984218e-12,
+            "30": 2.5286590842306917e-14,
+            "40": 6.411655036355984e-18,
+            "50": 0.0
+          },
+          "R0_half": {
+            "t_half_min": 0.0050983838399150175,
+            "t_half_s": 0.3059030303949011,
+            "statement": "0.306 s"
+          },
+          "log10_R0_over_measured": {
+            "5": -3.710252965708629,
+            "10": -5.489088015812866,
+            "15": -7.287637941359482,
+            "20": -9.083918978826047,
+            "25": -10.80472478216405,
+            "30": -12.537377110072185,
+            "40": -15.833759670007787,
+            "50": -28.484299839346786
+          }
+        },
+        "cysteine_free_plus_reservoir": {
+          "measured_fraction_of_charge": {
+            "10": 0.6144999999999999,
+            "15": 0.61775,
+            "20": 0.594675,
+            "25": 0.583325,
+            "30": 0.58275,
+            "40": 0.531525,
+            "50": 0.51529
+          },
+          "measured_half": {
+            "t_half_min": null,
+            "lower_bound_min": 50.0,
+            "statement": "> 50 min (0.52 left at the last measured time)"
+          },
+          "R0_fraction_at_measured_times": {
+            "10": 0.01060619718050754,
+            "15": 0.010428856179193475,
+            "20": 0.010255391704203067,
+            "25": 0.010084825976145373,
+            "30": 0.009917100232589958,
+            "40": 0.009589979492593773,
+            "50": 0.009273659617108711
+          },
+          "R0_half": {
+            "t_half_min": 0.008735508226382131,
+            "t_half_s": 0.5241304935829278,
+            "statement": "0.524 s"
+          },
+          "log10_R0_over_measured": {
+            "10": -1.7629621903676735,
+            "15": -1.7725760757823155,
+            "20": -1.7633274283646143,
+            "25": -1.7622421812917701,
+            "30": -1.7690975795026405,
+            "40": -1.7437060176856694,
+            "50": -1.7448005629951375
+          }
+        },
+        "pentose_free_plus_reservoir": {
+          "measured_fraction_of_charge": {
+            "10": 0.574,
+            "15": 0.5738749999999999,
+            "20": 0.574025,
+            "25": 0.56105,
+            "30": 0.56965,
+            "40": 0.536475,
+            "50": 0.52575
+          },
+          "measured_half": {
+            "t_half_min": null,
+            "lower_bound_min": 50.0,
+            "statement": "> 50 min (0.53 left at the last measured time)"
+          },
+          "R0_fraction_at_measured_times": {
+            "10": 9.476904495988433e-07,
+            "15": 1.0835271179526024e-08,
+            "20": 1.3355589170071536e-10,
+            "25": 1.7723348796984218e-12,
+            "30": 2.5286590842306917e-14,
+            "40": 6.411655036355984e-18,
+            "50": 0.0
+          },
+          "R0_half": {
+            "t_half_min": 0.0050983838399150175,
+            "t_half_s": 0.3059030303949011,
+            "statement": "0.306 s"
+          },
+          "log10_R0_over_measured": {
+            "10": -5.782245388376962,
+            "15": -7.723977520686032,
+            "20": -9.633267755951817,
+            "25": -11.50045578218709,
+            "30": -13.352717820341844,
+            "40": -16.922579340293204,
+            "50": -29.720779281358357
+          }
+        }
+      },
+      "reservoir_measured_mmol_l": {
+        "5": 7.4,
+        "10": 11.27,
+        "15": 14.55,
+        "20": 16.48,
+        "25": 17.919999999999998,
+        "30": 19.3,
+        "40": 19.71,
+        "50": 19.81
+      },
+      "reservoir_R0_mmol_l": {
+        "5": 0.0,
+        "10": 0.0,
+        "15": 0.0,
+        "20": 0.0,
+        "25": 0.0,
+        "30": 0.0,
+        "40": 0.0,
+        "50": 0.0
+      },
+      "reservoir_lower_bound_on_cysteine_fraction": {
+        "5": 0.185,
+        "10": 0.28175,
+        "15": 0.36375,
+        "20": 0.41200000000000003,
+        "25": 0.44799999999999995,
+        "30": 0.48250000000000004,
+        "40": 0.49275,
+        "50": 0.49524999999999997
+      },
+      "R0_cysteine_free_plus_reservoir_fraction": {
+        "5": 0.010876634448072894,
+        "10": 0.01060619718050754,
+        "15": 0.010428856179193475,
+        "20": 0.010255391704203067,
+        "25": 0.010084825976145373,
+        "30": 0.009917100232589958,
+        "40": 0.009589979492593773,
+        "50": 0.009273659617108711
+      },
+      "R0_pentose_free_plus_reservoir_fraction": {
+        "5": 9.022523570968109e-05,
+        "10": 9.476904495988433e-07,
+        "15": 1.0835271179526024e-08,
+        "20": 1.3355589170071536e-10,
+        "25": 1.7723348796984218e-12,
+        "30": 2.5286590842306917e-14,
+        "40": 6.411655036355984e-18,
+        "50": 0.0
+      },
+      "measurement_noise": [
+        "CAMA: sigma 0.013 dex (read error only)",
+        "Cys: sigma 0.026 dex (read error only)",
+        "PENT: sigma 0.035 dex (read error only)",
+        "TTCA: sigma 0.007 dex (read error only)"
+      ]
+    },
+    "zhai2019_70C": {
+      "pot": "zhai2019_70c",
+      "measured_pots": [
+        "zhai2019_70c"
+      ],
+      "t_c": 70,
+      "minutes": 160,
+      "label_ph": 7.4,
+      "initial_mmol_l": {
+        "TTCA": 14.5,
+        "Cys": 68.1,
+        "PENT": 150.7
+      },
+      "charge_mmol_l": {
+        "Cys": 82.6,
+        "PENT": 165.2
+      },
+      "buffer": "Zhai 2019: deionized water, pH 7.4 set with NaOH",
+      "R0_final_ph_in_situ": 4.074870713482477,
+      "R0_ph_fixed_point_converged": true,
+      "dense_vs_engine_endpoint_dex": {
+        "Cys": 0.0,
+        "PENT": 0.0
+      },
+      "pools": {
+        "cysteine_free": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.62194373029553,
+            "t_half_s": 37.316623817731795,
+            "statement": "37.3 s"
+          }
+        },
+        "pentose_free": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.6350483010775423,
+            "t_half_s": 38.102898064652535,
+            "statement": "38.1 s"
+          }
+        },
+        "cysteine_free_plus_reservoir": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 4.651339916711108,
+            "t_half_s": 279.0803950026665,
+            "statement": "4.65 min"
+          }
+        },
+        "pentose_free_plus_reservoir": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.9497911756056235,
+            "t_half_s": 56.98747053633741,
+            "statement": "57 s"
+          }
+        }
+      },
+      "reservoir_measured_mmol_l": {
+        "20": 41.1,
+        "40": 51.0,
+        "60": 56.6,
+        "80": 55.3,
+        "100": 55.7,
+        "120": 55.0,
+        "140": 56.1,
+        "160": 57.099999999999994
+      },
+      "reservoir_R0_mmol_l": {
+        "20": 13.171226219456901,
+        "40": 11.964220698237524,
+        "60": 10.86782464524741,
+        "80": 9.871901856268316,
+        "100": 8.967245004491115,
+        "120": 8.14549051896497,
+        "140": 7.399041261947033,
+        "160": 6.7209962946482085
+      },
+      "reservoir_lower_bound_on_cysteine_fraction": {
+        "20": 0.49757869249394676,
+        "40": 0.6174334140435835,
+        "60": 0.6852300242130751,
+        "80": 0.6694915254237288,
+        "100": 0.6743341404358354,
+        "120": 0.665859564164649,
+        "140": 0.679176755447942,
+        "160": 0.6912832929782082
+      },
+      "R0_cysteine_free_plus_reservoir_fraction": {
+        "20": 0.4172914543143129,
+        "40": 0.40392772380594505,
+        "60": 0.40075414020490335,
+        "80": 0.39876066857911985,
+        "100": 0.396907117697603,
+        "120": 0.39507196728414895,
+        "140": 0.39324245552076714,
+        "160": 0.3914179428311819
+      },
+      "R0_pentose_free_plus_reservoir_fraction": {
+        "20": 0.08012038386077108,
+        "40": 0.07276207648811552,
+        "60": 0.06608100980230977,
+        "80": 0.06001524224961492,
+        "100": 0.05450767790880862,
+        "120": 0.04950656507131724,
+        "140": 0.044965061804048724,
+        "160": 0.04084073745150658
+      },
+      "measurement_noise": [
+        "CAMA: sigma 0.046 dex (read error only)",
+        "TTCA: sigma 0.006 dex (read error only)"
+      ]
+    },
+    "zhai2019_90C": {
+      "pot": "zhai2019_90c",
+      "measured_pots": [
+        "zhai2019_90c"
+      ],
+      "t_c": 90,
+      "minutes": 160,
+      "label_ph": 7.4,
+      "initial_mmol_l": {
+        "TTCA": 14.5,
+        "Cys": 68.1,
+        "PENT": 150.7
+      },
+      "charge_mmol_l": {
+        "Cys": 82.6,
+        "PENT": 165.2
+      },
+      "buffer": "Zhai 2019: deionized water, pH 7.4 set with NaOH",
+      "R0_final_ph_in_situ": 4.123234260721657,
+      "R0_ph_fixed_point_converged": true,
+      "dense_vs_engine_endpoint_dex": {
+        "Cys": 0.0,
+        "PENT": 0.0
+      },
+      "pools": {
+        "cysteine_free": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.25002372818348,
+            "t_half_s": 15.001423691008801,
+            "statement": "15 s"
+          }
+        },
+        "pentose_free": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.19296091260449005,
+            "t_half_s": 11.577654756269403,
+            "statement": "11.6 s"
+          }
+        },
+        "cysteine_free_plus_reservoir": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 1.6164649178807293,
+            "t_half_s": 96.98789507284376,
+            "statement": "1.62 min"
+          }
+        },
+        "pentose_free_plus_reservoir": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.2804996024863121,
+            "t_half_s": 16.829976149178727,
+            "statement": "16.8 s"
+          }
+        }
+      },
+      "reservoir_measured_mmol_l": {
+        "20": 49.199999999999996,
+        "40": 60.6,
+        "60": 59.400000000000006,
+        "80": 60.9,
+        "100": 60.9,
+        "120": 62.1,
+        "140": 65.3,
+        "160": 66.9
+      },
+      "reservoir_R0_mmol_l": {
+        "20": 10.412595889691733,
+        "40": 7.477389873418558,
+        "60": 5.369588901154514,
+        "80": 3.855955749092808,
+        "100": 2.7690005917699487,
+        "120": 1.9884471555005705,
+        "140": 1.4279239179331116,
+        "160": 1.0254065383297448
+      },
+      "reservoir_lower_bound_on_cysteine_fraction": {
+        "20": 0.5956416464891041,
+        "40": 0.7336561743341405,
+        "60": 0.7191283292978209,
+        "80": 0.7372881355932204,
+        "100": 0.7372881355932204,
+        "120": 0.75181598062954,
+        "140": 0.7905569007263923,
+        "160": 0.8099273607748185
+      },
+      "R0_cysteine_free_plus_reservoir_fraction": {
+        "20": 0.4142737248979225,
+        "40": 0.4082715983814075,
+        "60": 0.40244068383761716,
+        "80": 0.3967471981673513,
+        "100": 0.391180571414548,
+        "120": 0.38572817101179746,
+        "140": 0.3803785137536646,
+        "160": 0.3751222154678945
+      },
+      "R0_pentose_free_plus_reservoir_fraction": {
+        "20": 0.06332702502319956,
+        "40": 0.04545871403688674,
+        "60": 0.03263687391846355,
+        "80": 0.023433305626823067,
+        "100": 0.016825898459293175,
+        "120": 0.01208190518539812,
+        "140": 0.008675628330303269,
+        "160": 0.006229774316247157
+      },
+      "measurement_noise": [
+        "CAMA: sigma 0.035 dex (read error only)",
+        "TTCA: sigma 0.005 dex (read error only)"
+      ]
+    },
+    "zhai2019_110C": {
+      "pot": "zhai2019_110c",
+      "measured_pots": [
+        "zhai2019_110c"
+      ],
+      "t_c": 110,
+      "minutes": 160,
+      "label_ph": 7.4,
+      "initial_mmol_l": {
+        "TTCA": 14.5,
+        "Cys": 68.1,
+        "PENT": 150.7
+      },
+      "charge_mmol_l": {
+        "Cys": 82.6,
+        "PENT": 165.2
+      },
+      "buffer": "Zhai 2019: deionized water, pH 7.4 set with NaOH",
+      "R0_final_ph_in_situ": 4.129551983023372,
+      "R0_ph_fixed_point_converged": true,
+      "dense_vs_engine_endpoint_dex": {
+        "Cys": 0.0,
+        "PENT": 0.0
+      },
+      "pools": {
+        "cysteine_free": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.10809602138584476,
+            "t_half_s": 6.485761283150685,
+            "statement": "6.49 s"
+          }
+        },
+        "pentose_free": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.06571561267140018,
+            "t_half_s": 3.942936760284011,
+            "statement": "3.94 s"
+          }
+        },
+        "cysteine_free_plus_reservoir": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.6636671303159098,
+            "t_half_s": 39.82002781895459,
+            "statement": "39.8 s"
+          }
+        },
+        "pentose_free_plus_reservoir": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.0930136810905803,
+            "t_half_s": 5.580820865434817,
+            "statement": "5.58 s"
+          }
+        }
+      },
+      "reservoir_measured_mmol_l": {
+        "20": 60.8,
+        "40": 59.6,
+        "60": 59.5,
+        "80": 57.3,
+        "100": 57.599999999999994,
+        "120": 53.300000000000004,
+        "140": 46.800000000000004,
+        "160": 42.8
+      },
+      "reservoir_R0_mmol_l": {
+        "20": 5.320340493187496,
+        "40": 1.9521394705411017,
+        "60": 0.7162791057986833,
+        "80": 0.2628171721101595,
+        "100": 0.09643288842915068,
+        "120": 0.03538316066981645,
+        "140": 0.012982791263092886,
+        "160": 0.004763646439580583
+      },
+      "reservoir_lower_bound_on_cysteine_fraction": {
+        "20": 0.7360774818401937,
+        "40": 0.7215496368038742,
+        "60": 0.7203389830508475,
+        "80": 0.6937046004842615,
+        "100": 0.6973365617433414,
+        "120": 0.6452784503631962,
+        "140": 0.566585956416465,
+        "160": 0.5181598062953995
+      },
+      "R0_cysteine_free_plus_reservoir_fraction": {
+        "20": 0.4207953653456161,
+        "40": 0.40459742734306786,
+        "60": 0.38958685636290347,
+        "80": 0.3753554911820821,
+        "100": 0.3617210747024202,
+        "120": 0.3486075131025851,
+        "140": 0.33597774878966963,
+        "160": 0.32380829121313764
+      },
+      "R0_pentose_free_plus_reservoir_fraction": {
+        "20": 0.03235368706336237,
+        "40": 0.011869013433263662,
+        "60": 0.0043545581629778505,
+        "80": 0.001597670488734003,
+        "100": 0.0005861912515677925,
+        "120": 0.00021507923413333782,
+        "140": 7.891569784016132e-05,
+        "160": 2.8955646508922935e-05
+      },
+      "measurement_noise": [
+        "CAMA: sigma 0.034 dex (read error only)",
+        "TTCA: sigma 0.008 dex (read error only)"
+      ]
+    },
+    "zhai2019_130C": {
+      "pot": "zhai2019_130c",
+      "measured_pots": [
+        "zhai2019_130c"
+      ],
+      "t_c": 130,
+      "minutes": 160,
+      "label_ph": 7.4,
+      "initial_mmol_l": {
+        "TTCA": 14.5,
+        "Cys": 68.1,
+        "PENT": 150.7
+      },
+      "charge_mmol_l": {
+        "Cys": 82.6,
+        "PENT": 165.2
+      },
+      "buffer": "Zhai 2019: deionized water, pH 7.4 set with NaOH",
+      "R0_final_ph_in_situ": 4.080393388608041,
+      "R0_ph_fixed_point_converged": true,
+      "dense_vs_engine_endpoint_dex": {
+        "Cys": 0.0,
+        "PENT": 0.0
+      },
+      "pools": {
+        "cysteine_free": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.04933413772851701,
+            "t_half_s": 2.9600482637110206,
+            "statement": "2.96 s"
+          }
+        },
+        "pentose_free": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.024895805990397712,
+            "t_half_s": 1.4937483594238627,
+            "statement": "1.49 s"
+          }
+        },
+        "cysteine_free_plus_reservoir": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.30951417042965873,
+            "t_half_s": 18.570850225779523,
+            "statement": "18.6 s"
+          }
+        },
+        "pentose_free_plus_reservoir": {
+          "measured_fraction_of_charge": {},
+          "measured_half": {
+            "t_half_min": null,
+            "statement": "not measured"
+          },
+          "R0_fraction_at_measured_times": {},
+          "R0_half": {
+            "t_half_min": 0.03443557127779465,
+            "t_half_s": 2.066134276667679,
+            "statement": "2.07 s"
+          }
+        }
+      },
+      "reservoir_measured_mmol_l": {
+        "20": 50.0,
+        "40": 47.3,
+        "60": 38.4,
+        "80": 35.300000000000004,
+        "100": 22.8,
+        "120": 17.0,
+        "140": 11.3,
+        "160": 6.9
+      },
+      "reservoir_R0_mmol_l": {
+        "20": 0.9554385374536615,
+        "40": 0.06295607163088474,
+        "60": 0.0041483215281035895,
+        "80": 0.00027334253759527693,
+        "100": 1.8011172616673628e-05,
+        "120": 1.186797848576557e-06,
+        "140": 7.820082835715853e-08,
+        "160": 5.152824609778875e-09
+      },
+      "reservoir_lower_bound_on_cysteine_fraction": {
+        "20": 0.6053268765133172,
+        "40": 0.572639225181598,
+        "60": 0.4648910411622276,
+        "80": 0.427360774818402,
+        "100": 0.2760290556900727,
+        "120": 0.20581113801452786,
+        "140": 0.1368038740920097,
+        "160": 0.08353510895883778
+      },
+      "R0_cysteine_free_plus_reservoir_fraction": {
+        "20": 0.4112415277414753,
+        "40": 0.37348994824668563,
+        "60": 0.33955722797577653,
+        "80": 0.30872598906643045,
+        "100": 0.2806952296788541,
+        "120": 0.2552096113640038,
+        "140": 0.23203796678188401,
+        "160": 0.21097018644354898
+      },
+      "R0_pentose_free_plus_reservoir_fraction": {
+        "20": 0.005813736421177188,
+        "40": 0.0003830353016889097,
+        "60": 2.5237463450060256e-05,
+        "80": 1.6629848616306061e-06,
+        "100": 1.0958739380303039e-07,
+        "120": 7.22201716222018e-09,
+        "140": 4.759698664580209e-10,
+        "160": 3.137051815971879e-11
+      },
+      "measurement_noise": [
+        "TTCA: sigma 0.044 dex (read error only)"
+      ]
+    }
+  },
+  "wall_seconds": 234.47979426383972
+}
