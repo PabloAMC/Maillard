@@ -295,3 +295,37 @@ def test_the_rivals_coordinates_are_the_prereg_s(M):
     rows, jobs, _ = M.route_block()
     assert len(rows) == 296 - 6 and len(jobs) == 34 - 1      # the Kang duplicate pot dropped (sec. 4.1's check)
     assert not {r.pot for r in rows} & set(M.ROUTE_OUT_POTS)
+
+
+# --- amendment A1: deterministic exploratory pot failures ------------------------------------------------------------
+
+def _fit_rec(cost=10.0, n=1, seg=1, evals=100, pots=("b60:kang_freecys_100",)):
+    r = np.array([3.0, 3.0, 2.0])   # 0.5 * r.r = 11.0
+    scale = math.sqrt(cost / 11.0)
+    return {"artifact": "kinetic_core_m1_supply_combinations_fit_C1_s1", "cost": cost, "evaluations": evals,
+            "failed_pot_runs": n, "history": [{"failed_pot_runs_segment": seg}],
+            "residual_by_row": {f"r{i}": float(v * scale) for i, v in enumerate(r)},
+            "failures_sample": [{"pot": p, "reason": "exceeded 120 s", "timeout": True} for p in pots]}
+
+
+def test_a_reproduced_exploratory_failure_with_a_clean_optimum_is_accepted(M, tmp_path, monkeypatch):
+    monkeypatch.setattr(M.data_paths, "VALIDATION_DIR", tmp_path)
+    rec = _fit_rec()
+    (tmp_path / f"{rec['artifact']}_failed_run1.json").write_text(json.dumps(rec))
+    ok, why = M.failure_accepted(rec)
+    assert ok and "amendment A1" in why
+
+
+def test_a_failure_is_refused_without_reproduction_or_at_the_optimum(M, tmp_path, monkeypatch):
+    monkeypatch.setattr(M.data_paths, "VALIDATION_DIR", tmp_path)
+    rec = _fit_rec()
+    assert not M.failure_accepted(rec)[0]                                   # no same-settings re-run on disk
+    twin = dict(rec, cost=10.5)
+    (tmp_path / f"{rec['artifact']}_failed_run1.json").write_text(json.dumps(twin))
+    assert not M.failure_accepted(rec)[0]                                   # the re-run differs: machine state
+    (tmp_path / f"{rec['artifact']}_failed_run1.json").write_text(json.dumps(rec))
+    assert not M.failure_accepted(_fit_rec(n=2, seg=1))[0]                  # a failure at the optimum itself
+    bad = _fit_rec()
+    bad["cost"] = 12.0                                                       # residuals do not give the cost
+    assert not M.failure_accepted(bad)[0]
+    assert M.failure_accepted(_fit_rec(n=0, seg=0))[0]                      # no failure: nothing to accept

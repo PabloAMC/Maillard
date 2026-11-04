@@ -1012,6 +1012,36 @@ def _read(path: Path) -> Dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
 
+
+def failure_accepted(rec: Mapping[str, Any]) -> Tuple[bool, str]:
+    """Amendment A1 (2026-11-04, before any decisive number): a fit record with failed pot runs is ACCEPTED only if
+    (a) every failure happened inside the optimiser's segments, so the re-evaluation at the optimum was clean;
+    (b) the cost recomputed from the optimum's residuals equals the record's cost (relative 1e-9);
+    (c) a same-settings re-run reproduced it exactly (kept as ``<stem>_failed_run1.json``: the same cost to 1e-12
+        relative, the same evaluations, the same failure count and the same failed pots), i.e. the failure is a
+        deterministic exploratory point, not machine state. Otherwise the record must be re-run (sec. 4.3)."""
+    n = int(rec.get("failed_pot_runs", 0))
+    if n == 0:
+        return True, "no failed pot runs"
+    seg = sum(int(h.get("failed_pot_runs_segment", 0)) for h in rec.get("history", []))
+    if seg != n:
+        return False, f"{n - seg} failure(s) at the optimum's own evaluation"
+    res = np.array(list((rec.get("residual_by_row") or {}).values()), dtype=float)
+    cost = float(rec.get("cost", float("nan")))
+    if not res.size or not np.isfinite(cost) or abs(0.5 * float(res @ res) - cost) > 1e-9 * abs(cost):
+        return False, "the optimum's residuals do not reproduce its cost"
+    twin = data_paths.VALIDATION_DIR / f"{rec.get('artifact')}_failed_run1.json"
+    if not twin.exists():
+        return False, "no same-settings re-run to show the failure is deterministic"
+    t = json.loads(twin.read_text(encoding="utf-8"))
+    pots = lambda r: sorted(f.get("pot") for f in (r.get("failures_sample") or []))  # noqa: E731
+    same = (abs(float(t.get("cost", float("nan"))) - cost) <= 1e-12 * abs(cost)
+            and int(t.get("evaluations", -1)) == int(rec.get("evaluations", -2))
+            and int(t.get("failed_pot_runs", -1)) == n and pots(t) == pots(rec))
+    if not same:
+        return False, "the same-settings re-run did not reproduce the record"
+    return True, f"{n} deterministic exploratory failure(s) {pots(rec)}: optimum clean, reproduced (amendment A1)"
+
 def fit_path(rival: str, start: int) -> Path:
     return V / f"{STEM}_fit_{rival}_s{start}.json"
 
@@ -1076,8 +1106,9 @@ def score_refusals(freeze_commit: str, tau: Optional[float], records: Mapping[st
         elif not any(int(r.get("status", 0)) > 0 for r in recs):
             problems.append(f"{name}: no fit record with status > 0")
         for r in recs:
-            if int(r.get("failed_pot_runs", 0)) > 0:
-                problems.append(f"{name} start {r.get('start')}: failed_pot_runs {r['failed_pot_runs']} > 0 (re-run it)")
+            ok, why = failure_accepted(r)
+            if not ok:
+                problems.append(f"{name} start {r.get('start')}: failed_pot_runs {r['failed_pot_runs']} > 0, {why} (re-run it)")
         c = carried.get(name)
         if not c:
             problems.append(f"{name}: no carried record (run --laplace {name})")
@@ -1201,6 +1232,9 @@ def run_fit(rival_name: str, start: int, freeze_commit: str, budget: int = BUDGE
     numerics, fit_side = numerics_for_fits(checks), fit_side_from_checks(checks)
     out = fit_path(rival_name, start)
     state = _read(out)
+    if int(state.get("failed_pot_runs", 0)) > 0 and failure_accepted(state)[0]:
+        print(f"{out.name}: {failure_accepted(state)[1]}; not re-run", flush=True)
+        return state
     if int(state.get("failed_pot_runs", 0)) > 0:   # sec. 4.3: re-run with the same settings; the failed one kept, labelled
         k = 1
         while out.with_name(f"{out.stem}_failed_run{k}.json").exists():
@@ -1396,7 +1430,10 @@ def run_laplace(rival_name: str, freeze_commit: str) -> Dict[str, Any]:
     missing = [s for s, r in enumerate(recs) if not r.get("complete")]
     if missing:
         raise SystemExit(f"{rival_name}: starts {missing} have not ended")
-    bad = [r["start"] for r in recs if int(r.get("failed_pot_runs", 0)) > 0]
+    bad = [r["start"] for r in recs if not failure_accepted(r)[0]]
+    for r in recs:
+        if int(r.get("failed_pot_runs", 0)) > 0:
+            print(f"{rival_name} s{r['start']}: {failure_accepted(r)[1]}", flush=True)
     if bad:
         raise SystemExit(f"{rival_name}: starts {bad} have failed_pot_runs > 0: re-run them with --fit first")
     out = carried_path(rival_name)
