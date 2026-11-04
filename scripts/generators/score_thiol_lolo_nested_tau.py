@@ -18,9 +18,12 @@ results/validation/kinetic_core_thiol_lolo_nested_tau.{json,md}.
 Blinding (sec. 7; review N2). --guard rebuilds EX-056's published per-row values and prints pass / fail and the
 largest relative difference only. --design reads row keys, classes, groups and sigmas. --controls draws synthetic
 residuals on the real design (row sigma plus EX-056's saved class noise, a published aggregate). Only --score
-computes an H0 quantity from real residuals; it refuses to run unless all ten pair records exist, each with a
-non-empty freeze commit, the controls record exists, and no hard control failed. fit_thiol_lolo.py, the frozen
-EX-056 generator, is imported and never modified.
+computes an H0 quantity from real residuals; it refuses to run unless all ten pair records exist, each complete and
+with a non-empty freeze commit, the controls record exists, and no hard control failed. Before any nested number it
+checks that training_terms reproduces EX-056's saved terms and recomputes engine guard 4.2(c) from the guard record
+(amendment A1, `kinetic_core_thiol_lolo_nested_tau_amendment_A1.md`). It runs once: with the primary record present it
+refuses unless --amendment REASON is given, and then writes `..._amendment_<k>.{json,md}`. fit_thiol_lolo.py, the
+frozen EX-056 generator, is imported and never modified.
 """
 from __future__ import annotations
 
@@ -138,7 +141,11 @@ CHOICES = [
     "{0, 0.3}. In --score the grid is drawn at the real omega_hat(all) of each set.",
     "D2's bounds: U = the largest grid tau0 with P(tau_hat <= tau_obs | tau0) >= 0.05; L = the smallest tau0 with "
     "P(tau_hat >= tau_obs | tau0) >= 0.05 (the mirror); tau_hat is the TRUNCATED tau_ABS(all). U is computed per set "
-    "at that set's tau_obs and omega_hat(all), and the ship rule reads the larger U, as it reads the larger tau.",
+    "at that set's tau_obs and omega_hat(all), and the ship rule reads the larger U, as it reads the larger tau. "
+    "Grid edges (amendment A1): a U at the grid top is reported 'U >= 1.60' (and used as 1.60); a U that does not "
+    "exist because tau_obs is below the 5 % quantile even at tau0 = 0.10 is reported 'U <= 0.10' and used as 0.10; an "
+    "L at the grid bottom is reported 'L <= 0.10'; an L that does not exist (no grid tau0 qualifies) 'L: none'. Every "
+    "two-set maximum is NaN-safe and order-free; an undefined tau_ABS(all) refuses D2 rather than reading as small.",
     "UNSTABLE (sec. 3.7) compares the three drop-one estimates only (max t~ / min t~ > 2), and 'the other side of "
     "0.8' is relative to the full tau_ABS(all). For D2 the flag counts if it fires in either set; it acts only if "
     "the controls' P(UNSTABLE) at tau = 0.8 is <= 0.3 in EVERY configuration (f in {0, 0.5, 1}, omega in {0, 0.3}, "
@@ -165,10 +172,14 @@ CHOICES = [
     "observed mean minus 1e-12 (ties count).",
     "D-all (sec. 5.8): every finite engine row of each fold. (a) is EX-056's predictive model on those rows; (b) uses "
     "the laboratory's strict nested omega / tau(S) for the five scorable laboratories, and tau(all) / omega(all) "
-    "(S = the five, none of whose fits saw Nestle) for Nestle.",
+    "(S = the five scorable laboratories) for Nestle. Nestle is in EVERY EX-056 training set but its own fold, so "
+    "each of those five fits was trained with Nestle: Nestle's (b) calibration carries the one-deep kind of leak "
+    "(sec. 3.4), acceptable only because D-all is a diagnostic (corrected in amendment A1).",
     "The jackknife (FRAGILE) drops one outer laboratory from the SCORING (D1 and D3 recomputed on 4 laboratories, "
     "16 sign patterns, the same numeric threshold); the dropped laboratory stays an inner laboratory of the others' "
-    "calibrations.",
+    "calibrations. Per dropped laboratory the two sets' jackknife verdicts are combined by the same precedence as "
+    "the reported verdict; FRAGILE means that combined verdict differs from the reported combined verdict for some "
+    "dropped laboratory (amendment A1). The per-set comparison is reported beside it.",
     "Guard 4.1: relative difference |a - b| / max(|a|, |b|) (0 when equal); integer coverage counts must be equal. "
     "The curated-input check compares the provenance inputs under data/ with their EX-056 sha256. 'Read them at "
     "7b1bc7cd' is implemented for data/keys/laboratories.yml (changed since EX-056 by appended laboratory groups "
@@ -181,8 +192,39 @@ CHOICES = [
     "pair training rows) and divides L's synthetic data values by 10^3 (the nulls), then reruns the scoring step's "
     "calibration (training_terms, strict nulls, the estimator) for all three models and both sets.",
     "--score refuses unless every pair record carries the same freeze commit, that commit exists and is an ancestor "
-    "of HEAD, and this script, the pair runner, the controls record and the prereg are unchanged since it; a later "
-    "change runs only with --amendment REASON, which is recorded (prereg sec. 7.5).",
+    "of HEAD, and this script, the pair runner, the controls record, the prereg, fit_thiol_lolo.py, "
+    "fit_joint_deoxyosone_thiol.py, fit_deoxyosone_submodel.py, build_submodel_probe.py and src/kinetic_core/"
+    "fitting.py are unchanged since it; a later change runs only with --amendment REASON, which is recorded (prereg "
+    "sec. 7.5). Run once (amendment A1): --score refuses if the primary record exists, unless --amendment REASON is "
+    "given; then it writes `..._amendment_<k>.{json,md}` (the next free k). Without a primary record, --amendment "
+    "writes the primary record and stores the reason (a pre-scoring amendment).",
+    "Reproduction guards inside --score (amendment A1), before any nested number; a failure is INVALID (refusal): "
+    "(i) training_terms(null_residuals(kind, train, train), train, n) reproduces each of the 12 saved EX-056 null "
+    "terms (6 folds x 2 nulls) to a relative 1e-9; (ii) training_terms on the guard record's train_engine_raw['warm'] "
+    "(row keys equal to split(data, ('reading_mottram',))'s training rows) reproduces Reading's saved "
+    "models.engine_warm.terms to a relative 1e-9; (iii) engine guard 4.2(c) recomputed from the guard record against "
+    "EX-056's Reading record: the warm cost to a relative 1e-3, the held-out raw residuals to 0.01 dex with the same "
+    "finite mask. All three, and the freeze check, are recorded in the output.",
+    "One-deep mask (amendment A1): the one-deep sensitivity's inner blocks use the STRICT inner mask of sec. 3.2 (the "
+    "rows finite under every variant of the pair (L, L') AND answered by both strict nulls), intersected with fold "
+    "L''s paired rows where its residuals live, so |tau_onedeep - tau_strict| measures the leak and not a mask "
+    "difference. The controls' T2 one-deep path is the same code (Nesting.calibrate), so T2 uses it too.",
+    "Missing inner laboratories (amendment A1): only a NON-CONVERGED pair fit (or impossible strict nesting) caps a "
+    "set's verdict at INCONCLUSIVE. An inner laboratory whose rows are all removed by the strict masks leaves S and the "
+    "minimum-data rule of sec. 2 applies, flagged; it does not cap the verdict.",
+    "Widths (amendment A1): the coverage table's 'median of lab medians' is the per-laboratory median 90 % width, "
+    "then the median over the five laboratories (labelled so); beside it the pooled row median (every scored row of "
+    "the five laboratories) and the lab-weighted mean width (the mean over laboratories of each laboratory's mean "
+    "width).",
+    "Owner note on the relative branch (amendment A1): when D2 takes branch (i), the note fires unless the relative "
+    "branch is shown better than BOTH nulls in EVERY set (the sets combined by precedence, so the worse set governs).",
+    "Labels and flags (amendment A1): verdict 4 reads 'CALIBRATED, NOT SHOWN BETTER THAN A NULL (D3 power = x, engine "
+    "and null errors simulated independent)'. The controls' N2 / N3 / N5 outcomes are carried into the report as "
+    "flags (N2: the nested tau_ABS(S) flagged; N3: the real tau_ABS flagged 'may be inflated by outliers'; N5: D2's "
+    "multi-row-group fallback). The pair runner's unit tests passed at the freeze commit; the scorer cannot re-run "
+    "them and says so.",
+    "Pair-record precondition (amendment A1): every one of the ten pair records must carry complete: true and the keys "
+    "row_keys, held_engine_raw and train_engine_raw; otherwise --score refuses, naming the record and the key.",
 ]
 
 
@@ -648,9 +690,14 @@ def load_fold(lab: str, held: Sequence[Any], directory: Optional[Path] = None, r
                 record=rec if residuals else None)
 
 
+#: the keys every pair record must carry before --score reads it (amendment A1)
+PAIR_RECORD_KEYS = ("row_keys", "held_engine_raw", "train_engine_raw")
+
+
 def check_pair_records(directory: Optional[Path] = None) -> Dict[Tuple[str, str], Dict[str, Any]]:
-    """--score's precondition (blinding): all ten pair records exist, are not guard records, and each carries a
-    non-empty freeze commit. Otherwise SystemExit (non-zero), naming what is missing."""
+    """--score's precondition (blinding): all ten pair records exist, are not guard records, are complete, carry the
+    keys row_keys / held_engine_raw / train_engine_raw, and each carries a non-empty freeze commit. Otherwise
+    SystemExit (non-zero), naming what is missing."""
     problems, recs = [], {}
     for a, b in pair_runner.pairs():
         p = pair_path(a, b, directory)
@@ -668,6 +715,11 @@ def check_pair_records(directory: Optional[Path] = None) -> Dict[Tuple[str, str]
             problems.append(f"{p.name}: a guard record")
         if list(rec.get("labs") or []) != [a, b]:
             problems.append(f"{p.name}: labs {rec.get('labs')} != {[a, b]}")
+        if rec.get("complete") is not True:
+            problems.append(f"{p.name}: not complete (complete: {rec.get('complete')!r}; the runner has not finished it)")
+        absent = [k for k in PAIR_RECORD_KEYS if k not in rec]
+        if absent:
+            problems.append(f"{p.name}: missing key(s) {absent}")
         recs[(a, b)] = rec
     if problems:
         raise SystemExit("--score refuses to run (prereg sec. 7: the ten pair records, each with its freeze commit, "
@@ -835,16 +887,19 @@ class Nesting:
             self._cache[key] = finite & answers
         return self._cache[key]
 
-    def strict_inner(self, outer: str, inner: str, model: str, set_name: str) -> Tuple[Optional[Block], str]:
+    def strict_inner(self, outer: str, inner: str, model: str, set_name: str
+                     ) -> Tuple[Optional[Block], str, str]:
         """Sec. 3.1: inner L''s residuals from the fit trained without L AND L' (the pair record; for a null, the null
-        retrained on data minus both)."""
+        retrained on data minus both). Returns (block, note, kind); kind is '' (a block), 'not_converged' (the
+        engine's pair fit did not converge: caps the verdict, sec. 3.1) or 'mask_emptied' (every row removed by the
+        strict masks: the minimum-data rule, flagged, sec. 2)."""
         pair = self.pair_of(outer, inner)
         mask = self.inner_mask(outer, inner)
         rows = tuple(x for x, m in zip(pair.held[inner], mask) if m)
         if model == "engine":
             v = self.pair_variant(pair, set_name)
             if not pair.converged[v]:
-                return None, f"pair {'+'.join(pair.labs)} {v}: not converged (status <= 0)"
+                return None, f"pair {'+'.join(pair.labs)} {v}: not converged (status <= 0)", "not_converged"
             r = pair.raw_held[v][inner][:, mask]
             terms = self._pair_terms(pair, v, inner)
             mk = ("strict", pair.labs, inner, "engine", v, mask.tobytes())
@@ -853,24 +908,40 @@ class Nesting:
             terms = self._null_terms(model, pair)
             mk = ("strict", pair.labs, inner, model, mask.tobytes())
         if not rows:
-            return None, f"{inner}: no row left by the strict masks"
-        return Block(lab=inner, layout=self._layout(mk, rows), s2=self._s2(mk, terms, rows), r=r, rows=rows), ""
+            return None, f"{inner}: no row left by the strict masks", "mask_emptied"
+        return Block(lab=inner, layout=self._layout(mk, rows), s2=self._s2(mk, terms, rows), r=r, rows=rows), "", ""
+
+    def onedeep_inner(self, outer: str, inner: str, model: str, set_name: str) -> Tuple[Optional[Block], str, str]:
+        """Sec. 3.4: inner L''s residuals from EX-056's fold L' (trained WITH L), on the STRICT inner mask of sec. 3.2
+        (amendment A1) intersected with fold L''s paired rows, so that one-deep and strict differ by the leak only."""
+        fold = self.folds[inner]
+        key = self.fold_key(inner, model, set_name)
+        mask = fold.paired & self.inner_mask(outer, inner)
+        rows = tuple(x for x, m in zip(fold.held, mask) if m)
+        if not rows:
+            return None, f"{inner}: no row left by the strict masks (one-deep)", "mask_emptied"
+        mk = ("onedeep", outer, inner, key, mask.tobytes())
+        return Block(lab=inner, layout=self._layout(mk, rows), s2=self._s2(mk, fold.terms[key], rows),
+                     r=fold.raw[key][:, mask], rows=rows), "", ""
 
     def calibrate(self, outer: str, model: str, set_name: str, nesting: str = "strict",
                   inner_labs: Optional[Sequence[str]] = None, **kw) -> Dict[str, Any]:
         """omega(S), tau_ABS(S), tau_FIG(S) for outer L from the inner laboratories (every scorable laboratory but L).
-        A missing inner laboratory (non-converged pair fit, empty mask) leaves S, and the minimum-data rule applies."""
+        A missing inner laboratory leaves S, and the minimum-data rule applies. Only a non-converged pair fit is
+        listed in ``nonconverged_inner`` (it caps the verdict, sec. 3.1); a laboratory emptied by the strict masks is
+        flagged (sec. 2) and caps nothing (amendment A1)."""
         labs = [x for x in (inner_labs or SCORABLE) if x != outer]
-        blocks, notes = [], []
+        blocks, notes, nonconverged, emptied = [], [], [], []
         for lp in labs:
             if nesting == "strict":
-                blk, note = self.strict_inner(outer, lp, model, set_name)
+                blk, note, kind = self.strict_inner(outer, lp, model, set_name)
             elif nesting == "onedeep":
-                blk, note = self.outer(lp, model, set_name), ""
+                blk, note, kind = self.onedeep_inner(outer, lp, model, set_name)
             else:
                 raise ValueError(nesting)
             if blk is None:
                 notes.append(note)
+                (nonconverged if kind == "not_converged" else emptied).append(note)
             else:
                 blocks.append(blk)
         fold = self.folds[outer]
@@ -878,7 +949,9 @@ class Nesting:
         fallback = shipped_taus(fold.terms[key], tuple(x for x, m in zip(fold.held, fold.paired) if m))
         R = max([b.r.shape[0] for b in blocks] + [1])
         est = estimate(blocks, R, fallback_abs=fallback, **kw)
+        est["flags"] += [f"{n} -> left out of S; the minimum-data rule applies (sec. 2)" for n in emptied]
         est["missing_inner"] = notes
+        est["nonconverged_inner"] = nonconverged
         est["blocks"] = blocks
         return est
 
@@ -1814,6 +1887,7 @@ def _scal(x) -> Optional[float]:
 def _est_summary(est: Dict[str, Any]) -> Dict[str, Any]:
     out = {"omega": _scal(est["omega"]), "omega2_raw": _scal(est["omega2_raw"]), "omega_labs": est["omega_labs"],
            "labs": est["labs"], "flags": est["flags"], "missing_inner": est.get("missing_inner", []),
+           "nonconverged_inner": est.get("nonconverged_inner", []),
            "tau_fig_used": _scal(est["tau_fig_used"])}
     for cls in (ABS, FIG):
         rec = est[cls]
@@ -1935,7 +2009,8 @@ def _set_verdict(d1_pass: bool, d3: Dict[str, Dict[str, Any]], incomplete: bool,
     if not d1_pass:
         return "NOT CALIBRATED"
     if not all(r["lpd_pass"] for r in d3.values()):
-        return f"CALIBRATED, NOT SHOWN BETTER THAN A NULL (D3 power = {power:.2f})"
+        return (f"CALIBRATED, NOT SHOWN BETTER THAN A NULL (D3 power = {power:.2f}, engine and null errors simulated "
+                "independent)")
     return "ADEQUATE on EX-056's 5 labs, nested"
 
 
@@ -1944,6 +2019,92 @@ PRECEDENCE = ("INVALID", "INCONCLUSIVE", "NOT CALIBRATED", "CALIBRATED, NOT SHOW
 
 def _rank(v: str) -> int:
     return next(i for i, p in enumerate(PRECEDENCE) if v.startswith(p))
+
+
+def combine_by_precedence(verdicts: Sequence[str]) -> str:
+    """Sec. 6: the verdict that comes FIRST in the precedence (the worse set governs)."""
+    return min(verdicts, key=_rank)
+
+
+def combined_fragility(jack_by_set: Mapping[str, Mapping[str, str]], reported: str) -> Dict[str, Any]:
+    """FRAGILE (sec. 6; amendment A1): per dropped laboratory, the two sets' jackknife verdicts combined by precedence;
+    FRAGILE iff that combined verdict differs from the reported combined verdict for some dropped laboratory."""
+    drops = sorted({d for j in jack_by_set.values() for d in j})
+    combined = {d: combine_by_precedence([jack_by_set[s][d] for s in jack_by_set if d in jack_by_set[s]])
+                for d in drops}
+    changed = sorted(d for d, v in combined.items() if _rank(v) != _rank(reported))
+    return {"combined_per_drop": combined, "changes_when_dropped": changed, "fragile": bool(changed)}
+
+
+def relative_note_fires(branch: str, relative_by_set: Mapping[str, Mapping[str, Mapping[str, Any]]]) -> bool:
+    """Sec. 6 'reported, not ruled' (amendment A1): when D2 ships the relative branch (i), the owner is told that it has
+    no evidence of beating a null unless it is shown better than BOTH nulls in EVERY set (the worse set governs)."""
+    if branch != "(i)":
+        return False
+    shown = all(rel[null]["lpd_pass"] and not rel[null]["sign_trigger"]
+                for rel in relative_by_set.values() for null in NULLS)
+    return not shown
+
+
+def _num(x) -> float:
+    """None / NaN / array -> a float (NaN when undefined)."""
+    if x is None:
+        return float("nan")
+    a = np.asarray(x, dtype=float).ravel()
+    return float(a[0]) if a.size else float("nan")
+
+
+def _nanmax(values: Sequence[Any]) -> float:
+    """The maximum over the finite values, NaN if there is none: order-free, unlike max() with a NaN."""
+    v = [x for x in (_num(y) for y in values) if math.isfinite(x)]
+    return max(v) if v else float("nan")
+
+
+def d2_bound_report(U, L, grid: Sequence[float] = D2_GRID) -> Dict[str, Any]:
+    """D2's bounds as reported and used (amendment A1). U NaN means tau_obs lies below the 5 % quantile even at the
+    smallest tau0, so U <= grid[0] (used as grid[0]); U at the grid top is 'U >= top' (used as top). L NaN: 'L:
+    none'; L at the grid bottom: 'L <= bottom'."""
+    lo, hi = float(grid[0]), float(grid[-1])
+    u, l_ = _num(U), _num(L)
+    if not math.isfinite(u):
+        u_used, u_text = lo, f"U <= {lo:.2f}"
+    elif u >= hi - 1e-12:
+        u_used, u_text = u, f"U >= {hi:.2f}"
+    else:
+        u_used, u_text = u, f"U = {u:.2f}"
+    if not math.isfinite(l_):
+        l_text = "L: none"
+    elif l_ <= lo + 1e-12:
+        l_text = f"L <= {lo:.2f}"
+    else:
+        l_text = f"L = {l_:.2f}"
+    return {"U": None if not math.isfinite(u) else u, "L": None if not math.isfinite(l_) else l_, "U_used": u_used,
+            "U_text": u_text, "L_text": l_text}
+
+
+def d2_decision(per_set: Mapping[str, Mapping[str, Any]], n5_pass: bool, unstable_informative: bool
+                ) -> Dict[str, Any]:
+    """D2's branch from the per-set tau_ABS(all), U (f = 1, as used), multi-row-group tau and UNSTABLE, every two-set
+    maximum NaN-safe and order-free. An undefined tau_ABS(all) in any set refuses (it must not read as small)."""
+    taus = [_num(per_set[s]["tau_ABS_all"]) for s in per_set]
+    if not all(math.isfinite(t) for t in taus):
+        raise SystemExit(f"D2 refuses: tau_ABS(all) is undefined in a set ({dict(zip(per_set, taus))})")
+    tau_star = _nanmax(taus)
+    U_star = _nanmax([per_set[s]["f1"]["U_used"] for s in per_set])
+    multi_star = _nanmax([per_set[s]["multi_row_tau_ABS_all"] for s in per_set])
+    unstable = any(bool(per_set[s]["unstable"]) for s in per_set)
+    multi_ok = math.isfinite(multi_star) and multi_star > D2_LINE
+    if tau_star > D2_LINE and (n5_pass or multi_ok):
+        branch = "(i)"
+    elif U_star > D2_LINE:
+        branch = "(ii)"
+    else:
+        branch = "(iii)"
+    moved = False
+    if branch in ("(ii)", "(iii)") and unstable and unstable_informative:
+        branch, moved = "(i)", True
+    return {"tau_ABS_all_used": tau_star, "U_used": U_star, "multi_row_tau_ABS_all_used": multi_star,
+            "unstable_any_set": unstable, "moved_by_unstable": moved, "branch": branch}
 
 
 def score_set(nest: Nesting, set_name: str, gates: Dict[str, Any]) -> Dict[str, Any]:
@@ -2013,6 +2174,7 @@ def score_set(nest: Nesting, set_name: str, gates: Dict[str, Any]) -> Dict[str, 
                  "in_acceptance_band": ACCEPTANCE_BAND[0] <= lw <= ACCEPTANCE_BAND[1]}
     # coverage at every level, every arm, every model: lab-weighted and pooled
     cov_tab = {}
+    arm_key = {"a": "a", "b": "b", "b_onedeep": "b1"}
     for model in MODELS:
         for arm in ("a", "b", "b_onedeep"):
             row = {}
@@ -2020,8 +2182,14 @@ def score_set(nest: Nesting, set_name: str, gates: Dict[str, Any]) -> Dict[str, 
                 cs = [models[model]["per_lab"][lab][arm]["coverage"][f"{lv:.2f}"] for lab in SCORABLE]
                 row[f"{lv:.2f}"] = {"lab_weighted": float(np.mean([c["inside"] / c["scored"] for c in cs])),
                                     "pooled": sum(c["inside"] for c in cs) / sum(c["scored"] for c in cs)}
-            row["width90_mean"] = float(np.mean([models[model]["per_lab"][lab][arm]["width90_mean"] for lab in SCORABLE]))
-            row["width90_median"] = float(np.median([models[model]["per_lab"][lab][arm]["width90_median"] for lab in SCORABLE]))
+            # widths (amendment A1): the lab-weighted mean, the median of the per-lab medians, the pooled row median
+            row["width90_mean_lab_weighted"] = float(np.mean([models[model]["per_lab"][lab][arm]["width90_mean"]
+                                                              for lab in SCORABLE]))
+            row["width90_median_of_lab_medians"] = float(np.median([models[model]["per_lab"][lab][arm]["width90_median"]
+                                                                    for lab in SCORABLE]))
+            pooled_w = np.concatenate([2.0 * 1.6448536269514722 * np.sqrt(v[np.isfinite(v)])
+                                       for v in (lab_arms[model][lab][arm_key[arm]]["var"][0] for lab in SCORABLE)])
+            row["width90_median_pooled_rows"] = float(np.median(pooled_w)) if pooled_w.size else float("nan")
             row["lpd_lab_weighted"] = float(np.mean([models[model]["per_lab"][lab][arm]["lpd_per_row"] for lab in SCORABLE]))
             row["is90_lab_weighted"] = float(np.mean([models[model]["per_lab"][lab][arm]["is90"] for lab in SCORABLE]))
             cov_tab[f"{model}|{arm}"] = row
@@ -2077,9 +2245,13 @@ def score_set(nest: Nesting, set_name: str, gates: Dict[str, Any]) -> Dict[str, 
     dba = np.array([eng["per_lab"][lab]["b"]["lpd_per_row"] - eng["per_lab"][lab]["a"]["lpd_per_row"] for lab in SCORABLE])
     isba = np.array([eng["per_lab"][lab]["b"]["is90"] - eng["per_lab"][lab]["a"]["is90"] for lab in SCORABLE])
     out["b_vs_a_engine"] = _paired_summary(dba, isba, SCORABLE, threshold)
-    # incomplete strict nesting (sec. 3.1)
-    missing = sorted({n for m in models.values() for lab in SCORABLE for n in m["nested"][lab]["missing_inner"]})
+    # incomplete strict nesting (sec. 3.1): a NON-CONVERGED pair fit only; a laboratory emptied by the strict masks
+    # takes the minimum-data rule, flagged, and caps nothing (amendment A1)
+    missing = sorted({n for m in models.values() for lab in SCORABLE for n in m["nested"][lab]["nonconverged_inner"]})
     out["strict_nesting_incomplete"] = missing
+    out["strict_masks_emptied"] = sorted({f"outer {lab}, {model}: {n}" for model, m in models.items() for lab in SCORABLE
+                                          for n in m["nested"][lab]["missing_inner"]
+                                          if n not in m["nested"][lab]["nonconverged_inner"]})
     # the jackknife (FRAGILE)
     power = gates["D3b_power_x"]
     verdict = _set_verdict(out["D1"]["pass"], d3, bool(missing), gates["P3_pass"][set_name], power)
@@ -2098,7 +2270,8 @@ def score_set(nest: Nesting, set_name: str, gates: Dict[str, Any]) -> Dict[str, 
             d3j[null] = {"lpd_pass": bool(dec["lpd_pass"][0]), "sign_trigger": bool(dec["sign_trigger"][0])}
         jack[drop] = _set_verdict(lwj >= D1_FLOOR and pj >= D1_FLOOR, d3j, bool(missing), gates["P3_pass"][set_name], power)
     out["jackknife"] = jack
-    out["fragile"] = any(_rank(v) != _rank(verdict) for v in jack.values())
+    # reported only: FRAGILE itself is read on the two sets combined by precedence (run_score; amendment A1)
+    out["fragile_within_set"] = any(_rank(v) != _rank(verdict) for v in jack.values())
     # D-all (diagnostic, engine only, every finite held-out row, six laboratories)
     dall = {}
     est_all = nest.calibrate_all("engine", set_name)
@@ -2124,19 +2297,150 @@ def _git(*args) -> Optional[str]:
     return p.stdout.strip() if p.returncode == 0 else None
 
 
+#: the files whose change since the freeze makes --score an amendment (sec. 7.5); the engine files were added in A1
+FROZEN_FILES = (GENERATED_BY, "scripts/generators/fit_thiol_lolo_pairs.py", "scripts/generators/fit_thiol_lolo.py",
+                "scripts/generators/fit_joint_deoxyosone_thiol.py", "scripts/generators/fit_deoxyosone_submodel.py",
+                "scripts/generators/build_submodel_probe.py", "src/kinetic_core/fitting.py")
+
+
 def _freeze_check(commit: str) -> Dict[str, Any]:
     full = _git("rev-parse", "--verify", f"{commit}^{{commit}}")
-    out = {"freeze_commit": commit, "found": full is not None}
+    files = list(FROZEN_FILES) + [data_paths.rel(OUT_DIR / f"{CONTROLS_STEM}.json"), data_paths.rel(PREREG)]
+    out = {"freeze_commit": commit, "found": full is not None, "files_checked": files}
     if full:
-        changed = (_git("diff", "--name-only", full, "--", GENERATED_BY, "scripts/generators/fit_thiol_lolo_pairs.py",
-                        data_paths.rel(OUT_DIR / f"{CONTROLS_STEM}.json"), data_paths.rel(PREREG)) or "").split()
+        changed = (_git("diff", "--name-only", full, "--", *files) or "").split()
         out["changed_since_freeze"] = changed
         out["ancestor_of_head"] = subprocess.run(["git", "merge-base", "--is-ancestor", full, "HEAD"],
                                                  cwd=str(ROOT)).returncode == 0
     return out
 
 
-def run_score(amendment: str = "") -> Dict[str, Any]:
+# ---- the reproduction guards inside --score (amendment A1) ----------------------------------------------------
+
+#: the single-out fold re-run through the pair runner for engine guard 4.2(c)
+GUARD_RECORD_LAB = pair_runner.GUARD_FOLD
+
+
+def guard_record_path(directory: Optional[Path] = None) -> Path:
+    return Path(directory or PAIR_DIR) / f"{pair_runner.STEM}_guard_{GUARD_RECORD_LAB}.json"
+
+
+def _terms_rel(new: Any, saved: Any, path: str = "") -> Tuple[float, List[str]]:
+    """The largest relative difference between two terms structures (recursive; both-NaN and both-None count as
+    equal); a structural mismatch is returned as a problem."""
+    if isinstance(new, Mapping) or isinstance(saved, Mapping):
+        if not (isinstance(new, Mapping) and isinstance(saved, Mapping)):
+            return float("inf"), [f"{path or '/'}: one side is not a mapping"]
+        if set(new) != set(saved):
+            return float("inf"), [f"{path or '/'}: keys differ {sorted(set(new) ^ set(saved))}"]
+        worst, probs = 0.0, []
+        for k in sorted(saved):
+            w, p = _terms_rel(new[k], saved[k], f"{path}/{k}")
+            worst, probs = max(worst, w), probs + p
+        return worst, probs
+    if isinstance(new, (list, tuple)) or isinstance(saved, (list, tuple)):
+        if not (isinstance(new, (list, tuple)) and isinstance(saved, (list, tuple))) or len(new) != len(saved):
+            return float("inf"), [f"{path}: list lengths differ"]
+        worst, probs = 0.0, []
+        for i, (a, b) in enumerate(zip(new, saved)):
+            w, p = _terms_rel(a, b, f"{path}[{i}]")
+            worst, probs = max(worst, w), probs + p
+        return worst, probs
+    if new is None or saved is None:
+        return (0.0, []) if new is None and saved is None else (float("inf"), [f"{path}: None on one side"])
+    a, b = float(new), float(saved)
+    if math.isnan(a) and math.isnan(b):
+        return 0.0, []
+    return _rel(a, b), []
+
+
+def reproduction_guards(data: Sequence[Any], folds_rows: Mapping[str, Tuple[tuple, tuple]], folds: Mapping[str, Fold],
+                        pots_all, guard_rec: Mapping[str, Any], null_fn: Optional[Callable] = None,
+                        terms_fn: Optional[Callable] = None) -> Dict[str, Any]:
+    """Amendment A1, before any nested number. (i) training_terms(null_residuals(kind, train, train), train, n)
+    reproduces each saved EX-056 null `terms` (6 folds x 2 nulls) to a relative 1e-9; (ii) training_terms on the guard
+    record's train_engine_raw['warm'] (rows aligned to split(data, (Reading,))'s training rows) reproduces Reading's
+    saved models.engine_warm.terms to 1e-9; (iii) engine guard 4.2(c) recomputed from the guard record against EX-056's
+    Reading record (cost to a relative 1e-3; held-out raw to 0.01 dex, same finite mask). Returns the record; its
+    'pass' is False on any failure (the caller refuses: INVALID)."""
+    null_fn = null_fn or (lambda kind, train, rows: null_residuals(kind, train, rows, pots_all))
+    terms_fn = terms_fn or training_terms
+    checks: List[Dict[str, Any]] = []
+    for lab, (train, _) in sorted(folds_rows.items()):
+        for kind in NULLS:
+            raw, n = null_fn(kind, train, train)
+            rel, probs = _terms_rel(terms_fn(np.asarray(raw, dtype=float), train, n), folds[lab].terms[f"null_{kind}"])
+            checks.append({"fold": lab, "model": f"null_{kind}", "max_relative_difference": rel, "problems": probs,
+                           "pass": not probs and rel <= GUARD_TOL})
+    lab = GUARD_RECORD_LAB
+    problems: List[str] = []
+    train, held = pair_runner.split(data, (lab,))
+    if list(guard_rec.get("labs") or []) != [lab]:
+        problems.append(f"guard record labs {guard_rec.get('labs')} != {[lab]}")
+    if guard_rec.get("complete") is not True:
+        problems.append("guard record not complete")
+    keys = guard_rec.get("row_keys") or {}
+    if keys.get("train") != row_keys(train):
+        problems.append("guard record training row keys differ from split(data, (Reading,))'s training rows")
+    if (keys.get("held") or {}).get(lab) != row_keys(held[lab]):
+        problems.append("guard record held-out row keys differ from split(data, (Reading,))'s held-out rows")
+    engine_terms = {"fold": lab, "model": "engine_warm (guard record train_engine_raw['warm'])"}
+    cost = {"tolerance": float(lolo.REPRODUCTION_TOL)}
+    raw_c = {"tolerance_dex": float(pair_runner.GUARD_RAW_TOL_C)}
+    if not problems:
+        rel, probs = _terms_rel(terms_fn(np.asarray(guard_rec["train_engine_raw"]["warm"], dtype=float), train,
+                                         N_CONSTANTS_ENGINE), folds[lab].terms["engine_warm"])
+        engine_terms.update({"max_relative_difference": rel, "problems": probs, "pass": not probs and rel <= GUARD_TOL})
+        c_new, c_old = float(guard_rec["warm"]["fit"]["cost"]), float(folds[lab].record["warm"]["fit"]["cost"])
+        cost.update({"guard_record": c_new, "ex056": c_old, "relative_difference": abs(c_new - c_old) / abs(c_old)})
+        cost["pass"] = cost["relative_difference"] <= cost["tolerance"]
+        new = np.asarray(guard_rec["held_engine_raw"]["warm"][lab], dtype=float)
+        old = np.asarray(folds[lab].raw["engine_warm"][0], dtype=float)
+        same = new.shape == old.shape and bool(np.array_equal(np.isfinite(new), np.isfinite(old)))
+        diff = float(np.nanmax(np.abs(new - old))) if same and np.isfinite(new).any() else (0.0 if same else float("inf"))
+        raw_c.update({"same_finite_mask": same, "max_abs_difference_dex": diff,
+                      "pass": same and diff <= raw_c["tolerance_dex"]})
+    else:
+        engine_terms["pass"] = cost["pass"] = raw_c["pass"] = False
+    checks.append(engine_terms)
+    terms_ok = all(c["pass"] for c in checks)
+    out = {"terms": {"checks": checks, "n_checks": len(checks), "tolerance": GUARD_TOL, "pass": terms_ok,
+                     "max_relative_difference": max(c.get("max_relative_difference", float("inf")) for c in checks)},
+           "engine_guard_4_2c": {"fold": lab, "cost": cost, "held_out_raw": raw_c,
+                                 "pass": bool(cost["pass"] and raw_c["pass"])},
+           "guard_record_problems": problems}
+    out["pass"] = bool(terms_ok and out["engine_guard_4_2c"]["pass"] and not problems)
+    return out
+
+
+def _failed_guard_checks(rg: Mapping[str, Any]) -> List[str]:
+    failed = [f"{c['fold']} {c['model']}" for c in rg["terms"]["checks"] if not c["pass"]]
+    failed += [f"4.2(c) {k}" for k in ("cost", "held_out_raw") if not rg["engine_guard_4_2c"][k]["pass"]]
+    return failed + list(rg["guard_record_problems"])
+
+
+# ---- run once (sec. 7.5; amendment A1) ---------------------------------------------------------------------------
+
+def score_output(amendment: str = "", directory: Optional[Path] = None) -> Dict[str, Any]:
+    """Where --score writes, and under what label. Refuses if the primary record exists and no --amendment REASON is
+    given; with one, the next free `..._amendment_<k>`. Without a primary record, --amendment writes the primary
+    record with its reason (a pre-scoring amendment)."""
+    d = Path(directory or OUT_DIR)
+    reason = (amendment or "").strip()
+    primary = d / f"{STEM}.json"
+    if not primary.exists():
+        return {"stem": STEM, "kind": "pre-scoring amendment" if reason else "primary", "amendment": reason}
+    if not reason:
+        raise SystemExit(f"--score refuses to run: {primary.name} exists (prereg sec. 7.5: the scoring step runs "
+                         "once); a later run is an amendment: --amendment REASON, written to its own record")
+    k = 1
+    while (d / f"{STEM}_amendment_{k}.json").exists() or (d / f"{STEM}_amendment_{k}.md").exists():
+        k += 1
+    return {"stem": f"{STEM}_amendment_{k}", "kind": f"post-scoring amendment {k}", "amendment": reason, "k": k}
+
+
+def run_score(amendment: str = "", output: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    output = output or score_output(amendment)
     recs = check_pair_records()
     ctrl_path = OUT_DIR / f"{CONTROLS_STEM}.json"
     if not ctrl_path.exists():
@@ -2146,6 +2450,10 @@ def run_score(amendment: str = "") -> Dict[str, Any]:
     if gates["hard_failures"]:
         raise SystemExit(f"--score refuses to run: INVALID, hard control failures {gates['hard_failures']} (sec. 6): "
                          "repair the estimator or the code by amendment before any real number is read")
+    g_path = guard_record_path()
+    if not g_path.exists():
+        raise SystemExit(f"--score refuses to run: the engine-guard record {g_path.name} (sec. 4.2(c)) does not exist")
+    guard_rec = json.loads(g_path.read_text(encoding="utf-8"))
     t0 = time.time()
     data, _, pots_all = load_fit_table()
     folds_rows = make_folds(data)
@@ -2158,15 +2466,24 @@ def run_score(amendment: str = "") -> Dict[str, Any]:
     freeze = _freeze_check(commits.pop())
     if not freeze["found"] or not freeze.get("ancestor_of_head"):
         raise SystemExit(f"--score refuses to run: the freeze commit is missing or not an ancestor of HEAD: {freeze}")
-    if freeze.get("changed_since_freeze") and not amendment:
+    if freeze.get("changed_since_freeze") and not output["amendment"]:
         raise SystemExit(f"--score refuses to run: frozen files changed since the freeze {freeze['changed_since_freeze']}; "
                          "rerun with --amendment REASON (prereg sec. 7.5: an amendment, scored separately)")
-    freeze["amendment"] = amendment
+    freeze["amendment"] = output["amendment"]
     folds = {lab: load_fold(lab, held) for lab, (_, held) in folds_rows.items()}
+    # amendment A1: the functions the scorer recomputes fresh must reproduce EX-056, before any nested number
+    repro = reproduction_guards(data, folds_rows, folds, pots_all, guard_rec)
+    if not repro["pass"]:
+        raise SystemExit("--score stops: INVALID, a reproduction guard inside --score failed (training_terms or "
+                         f"engine guard 4.2(c)): {_failed_guard_checks(repro)}")
     pairs = {(a, b): load_pair(a, b, data, rec=recs[(a, b)]) for a, b in pair_runner.pairs()}
     nest = Nesting(data, folds, pairs, pots_all)
-    result: Dict[str, Any] = {"artifact": STEM, "prereg": PREREG.name, "guard": {"pass": ok, "max_relative_difference": worst},
-                              "freeze": freeze, "controls_gates": gates,
+    result: Dict[str, Any] = {"artifact": output["stem"], "prereg": PREREG.name, "run": output,
+                              "guard": {"pass": ok, "max_relative_difference": worst},
+                              "reproduction_guards": repro, "freeze": freeze, "controls_gates": gates,
+                              "runner_unit_tests": (f"tests/unit/test_thiol_lolo_pairs.py passed at the freeze commit "
+                                                    f"{freeze['freeze_commit']} (prereg secs. 4.3, 7.2); the scorer "
+                                                    "cannot re-run them"),
                               "pair_fits": {f"{a}__{b}": {v: p.converged[v] for v in p.converged}
                                             for (a, b), p in pairs.items()},
                               "sets": {}}
@@ -2175,35 +2492,26 @@ def run_score(amendment: str = "") -> Dict[str, Any]:
         print(f"score: set {set_name} done", flush=True)
     # D2 (the ship rule; not nested), with its test-inversion bounds at each set's omega_hat(all)
     design = Design()
-    d2 = {"per_set": {}}
+    d2: Dict[str, Any] = {"per_set": {}}
     for set_name in SETS:
         eng = result["sets"][set_name]["models"]["engine"]
-        t_obs = eng["all"][ABS]["tau"]
-        om = eng["all"]["omega"]
+        t_obs, om = _num(eng["all"][ABS]["tau"]), _num(eng["all"]["omega"])
+        if not (math.isfinite(t_obs) and math.isfinite(om)):
+            raise SystemExit(f"D2 refuses: tau_ABS(all) or omega(all) undefined in set {set_name} ({t_obs}, {om})")
         rec = {"tau_ABS_all": t_obs, "omega_all": om}
         for f in (1.0, 0.0):
             dist = d2_distribution(design, set_name, om, f, D2_REPLICATES, "d2score")
             U, L = invert(np.array([t_obs]), dist)
-            rec[f"f{int(f)}"] = {"U": _scal(U), "L": _scal(L)}
+            rec[f"f{int(f)}"] = d2_bound_report(U, L)
         rec["unstable"] = eng["unstable"]
-        rec["multi_row_tau_ABS_all"] = eng["tau_ABS_all_multi_row_groups"]
+        rec["multi_row_tau_ABS_all"] = _num(eng["tau_ABS_all_multi_row_groups"])
         d2["per_set"][set_name] = rec
-    tau_star = max(d2["per_set"][s]["tau_ABS_all"] for s in SETS)
-    U_star = max((d2["per_set"][s]["f1"]["U"] if d2["per_set"][s]["f1"]["U"] is not None else -1.0) for s in SETS)
-    multi_star = max((d2["per_set"][s]["multi_row_tau_ABS_all"] or 0.0) for s in SETS)
-    unstable = any(d2["per_set"][s]["unstable"] for s in SETS)
     informative = bool(gates["unstable_flag_informative"])
-    if tau_star > D2_LINE and (gates["N5_pass"] or multi_star > D2_LINE):
-        branch = "(i)"
-    elif U_star > D2_LINE:
-        branch = "(ii)"
-    else:
-        branch = "(iii)"
-    moved = False
-    if branch in ("(ii)", "(iii)") and unstable and informative:
-        branch, moved = "(i)", True
-    d2.update({"tau_ABS_all_used": tau_star, "U_used": U_star, "unstable_any_set": unstable,
-               "unstable_informative": informative, "moved_by_unstable": moved, "branch": branch,
+    dec = d2_decision(d2["per_set"], bool(gates["N5_pass"]), informative)
+    branch = dec["branch"]
+    # the reported U is the larger set's; on a tie a defined U is preferred (order-free)
+    best = sorted(SETS, key=lambda s: (-d2["per_set"][s]["f1"]["U_used"], d2["per_set"][s]["f1"]["U"] is None, s))[0]
+    d2.update({**dec, "U_text": d2["per_set"][best]["f1"]["U_text"], "unstable_informative": informative,
                "N5_fallback_applied": not gates["N5_pass"],
                "bounds_label": "" if gates["P2_pass"] else "anti-conservative (P2 failed); reported from f = 1",
                "unstable_note": ("" if informative else
@@ -2217,19 +2525,34 @@ def run_score(amendment: str = "") -> Dict[str, Any]:
                   "(iii)": "absolute predictions ship with tau_ABS-widened intervals, labelled provisional"}[branch]
     result["D2"] = d2
     sv = {s: result["sets"][s]["verdict"] for s in SETS}
-    final = min(sv.values(), key=_rank)
+    final = combine_by_precedence(list(sv.values()))
+    frag = combined_fragility({s: result["sets"][s]["jackknife"] for s in SETS}, final)
     result["verdict"] = {"per_set": sv, "reported": final, "sets_disagree": len({_rank(v) for v in sv.values()}) > 1,
-                         "fragile": any(result["sets"][s]["fragile"] for s in SETS), "provisional": True}
+                         "fragile": frag["fragile"], "fragility": frag,
+                         "fragile_within_set": {s: result["sets"][s]["fragile_within_set"] for s in SETS},
+                         "provisional": True}
     notes = []
-    om_all = max(result["sets"][s]["models"]["engine"]["all"]["omega"] for s in SETS)
-    if om_all > OMEGA_NOTICE:
+    om_all = _nanmax([result["sets"][s]["models"]["engine"]["all"]["omega"] for s in SETS])
+    if math.isfinite(om_all) and om_all > OMEGA_NOTICE:
         notes.append(f"omega(all) = {om_all:.2f} dex > 0.5: relative predictions also carry a large shape error")
-    if branch == "(i)" and not any(result["sets"][s]["relative_branch"][n]["lpd_pass"] for s in SETS for n in NULLS):
-        notes.append("D2 ships the relative branch, and the relative branch is not shown better than the nulls either")
+    if relative_note_fires(branch, {s: result["sets"][s]["relative_branch"] for s in SETS}):
+        notes.append("D2 ships the relative branch, and the relative branch is not shown better than both nulls in "
+                     "every set: it has no evidence of beating a null either")
     result["owner_notes"] = notes
+    flags = []
+    if not gates["N2_pass"]:
+        flags.append("N2 failed: each outer laboratory's nested tau_ABS(S) is flagged (it exceeds 0.3 dex too often "
+                     "under tau = 0)")
+    if not gates["N3_pass"]:
+        flags.append("N3 failed: the real tau_ABS is flagged 'may be inflated by outliers'")
+    if not gates["N5_pass"]:
+        flags.append("N5 failed: D2's multi-row-group fallback applies (branch (i) also needs the multi-row-group "
+                     "tau_ABS(all) > 0.8)")
+    result["control_flags"] = {"N2_pass": bool(gates["N2_pass"]), "N3_pass": bool(gates["N3_pass"]),
+                               "N5_pass": bool(gates["N5_pass"]), "flags": flags}
     result["choices"] = CHOICES
     result["wall_seconds"] = round(time.time() - t0, 1)
-    result["provenance"] = _provenance(STEM, score_inputs=True)
+    result["provenance"] = _provenance(output["stem"], score_inputs=True)
     return result
 
 
@@ -2244,7 +2567,8 @@ def _provenance(name: str, score_inputs: bool) -> Dict[str, Any]:
               + [ROOT / GENERATED_BY, ROOT / "scripts/generators/fit_thiol_lolo.py",
                  ROOT / "scripts/generators/fit_thiol_lolo_pairs.py", ROOT / "src/kinetic_core/fitting.py", PREREG, REVIEW])
     if score_inputs:
-        inputs += [OUT_DIR / f"{CONTROLS_STEM}.json"] + [pair_path(a, b) for a, b in pair_runner.pairs()]
+        inputs += ([OUT_DIR / f"{CONTROLS_STEM}.json"] + [pair_path(a, b) for a, b in pair_runner.pairs()]
+                   + [guard_record_path()])
     return provenance.provenance_block(name, generated_by=GENERATED_BY, inputs=inputs)
 
 
@@ -2370,24 +2694,44 @@ def render_controls(res: Dict[str, Any]) -> str:
 
 def render_score(res: Dict[str, Any]) -> str:
     v = res["verdict"]
-    L = ["# H0: out-of-sample between-laboratory tau for the thiol lane (R3En), nested", "",
+    run = res["run"]
+    rg = res["reproduction_guards"]
+    d2 = res["D2"]
+    L = ["# H0: out-of-sample between-laboratory tau for the thiol lane (R3En), nested"
+         + ("" if run["kind"] == "primary" else f" ({run['kind']})"), "",
          f"*Generated by `{GENERATED_BY} --score`; pre-registration `{PREREG.name}` (v3, frozen at "
          f"{res['freeze']['freeze_commit']}). Residual = predicted minus measured (dex). Every verdict is PROVISIONAL "
-         "(sec. 9).*", "",
-         f"**Verdict: {v['reported']} -- PROVISIONAL**" + (" (FRAGILE)" if v["fragile"] else "")
-         + (f"; the sets disagree: {v['per_set']}" if v["sets_disagree"] else ""), "",
-         f"- Guard 4.1: {_pf(res['guard']['pass'])} (max rel {res['guard']['max_relative_difference']:.1e}); "
-         f"controls: hard failures {res['controls_gates']['hard_failures'] or 'none'}",
-         f"- D2: tau_ABS(all) = {res['D2']['tau_ABS_all_used']:.3f} dex (larger set), U = {_f(res['D2']['U_used'])} -> "
-         f"branch {res['D2']['branch']}: {res['D2']['text']}" + (f" {res['D2']['bounds_label']}" if res['D2']['bounds_label'] else "")
-         + (f"; {res['D2']['unstable_note']}" if res['D2']['unstable_note'] else ""), ""]
+         "(sec. 9).*", ""]
+    if run["amendment"]:
+        L += [f"*{run['kind'].capitalize()}; reason: {run['amendment']}*", ""]
+    L += [f"**Verdict: {v['reported']} -- PROVISIONAL**" + (" (FRAGILE)" if v["fragile"] else "")
+          + (f"; the sets disagree: {v['per_set']}" if v["sets_disagree"] else ""), "",
+          f"- Guard 4.1: {_pf(res['guard']['pass'])} (max rel {res['guard']['max_relative_difference']:.1e}); "
+          f"controls: hard failures {res['controls_gates']['hard_failures'] or 'none'}",
+          f"- Reproduction guards inside --score: training_terms {_pf(rg['terms']['pass'])} ({rg['terms']['n_checks']} "
+          f"terms, max rel {rg['terms']['max_relative_difference']:.1e}); engine guard 4.2(c) "
+          f"{_pf(rg['engine_guard_4_2c']['pass'])} (cost rel {rg['engine_guard_4_2c']['cost']['relative_difference']:.1e}, "
+          f"held-out raw max {rg['engine_guard_4_2c']['held_out_raw']['max_abs_difference_dex']:.1e} dex); freeze files "
+          f"changed since {res['freeze']['freeze_commit']}: {res['freeze'].get('changed_since_freeze') or 'none'}",
+          f"- Pair runner: {res['runner_unit_tests']}",
+          f"- D2: tau_ABS(all) = {d2['tau_ABS_all_used']:.3f} dex (larger set), {d2['U_text']} -> "
+          f"branch {d2['branch']}: {d2['text']}" + (f" {d2['bounds_label']}" if d2['bounds_label'] else "")
+          + (f"; {d2['unstable_note']}" if d2['unstable_note'] else ""),
+          "- D2 bounds per set (f = 1 / f = 0): " + "; ".join(
+              f"{s} {x['f1']['U_text']}, {x['f1']['L_text']} / {x['f0']['U_text']}, {x['f0']['L_text']}"
+              for s, x in d2["per_set"].items()),
+          f"- FRAGILE (two sets combined by precedence per dropped laboratory): {v['fragility']['combined_per_drop']}", ""]
     L += [f"- owner: {n}" for n in res["owner_notes"]]
+    L += [f"- control flag: {n}" for n in res["control_flags"]["flags"]]
     for s, sr in res["sets"].items():
         eng = sr["models"]["engine"]
-        L += ["", f"## Set '{s}': {sr['verdict']}" + (" (FRAGILE)" if sr["fragile"] else ""), "",
+        L += ["", f"## Set '{s}': {sr['verdict']}"
+              + (" (its own jackknife changes the verdict)" if sr["fragile_within_set"] else ""), "",
               f"- D1: (b) 90 % coverage {sr['D1']['cov90_lab_weighted']:.3f} lab-weighted, {sr['D1']['cov90_pooled']:.3f} "
               f"pooled -> {_pf(sr['D1']['pass'])} (Acceptance band {ACCEPTANCE_BAND}: {sr['D1']['in_acceptance_band']})",
-              f"- strict nesting incomplete: {sr['strict_nesting_incomplete'] or 'no'}",
+              f"- strict nesting incomplete (non-converged pair fits): {sr['strict_nesting_incomplete'] or 'no'}",
+              f"- inner laboratories emptied by the strict masks (minimum-data rule, flagged): "
+              f"{sr['strict_masks_emptied'] or 'none'}",
               f"- engine tau_ABS(all) {_f(eng['all'][ABS]['tau'])}, omega(all) {_f(eng['all']['omega'])}, tau_FIG(all) "
               f"{_f(eng['all'][FIG]['tau'])}; drop-one ABS {eng['drop_one_ABS']}; UNSTABLE {eng['unstable']}; "
               f"multi-row-group tau_ABS(all) {_f(eng['tau_ABS_all_multi_row_groups'])}; sensitivities "
@@ -2403,12 +2747,13 @@ def render_score(res: Dict[str, Any]) -> str:
                 L.append(f"| {model} | {lab} | {_f(n_['omega'])} | {_f(n_[ABS]['tau'])} [{n_[ABS]['status']}] | "
                          f"{_f(n_['tau_fig_used'])} | {_f(o[ABS]['tau'])} / {_f(o[FIG]['tau'])} | "
                          f"{', '.join(k for k, x in leak.items() if x['measured_leak']) or '-'} |")
-        L += ["", "| model / arm | cov80 lw / pooled | cov90 lw / pooled | cov95 lw / pooled | mean / median 90 % width | "
-              "LPD lw | IS90 lw |", "|---|---|---|---|---|---|---|"]
+        L += ["", "| model / arm | cov80 lw / pooled | cov90 lw / pooled | cov95 lw / pooled | 90 % width: lab-weighted "
+              "mean / median of lab medians / pooled row median | LPD lw | IS90 lw |", "|---|---|---|---|---|---|---|"]
         for k, row in sr["coverage_table"].items():
             L.append(f"| {k} | " + " | ".join(f"{row[f'{lv:.2f}']['lab_weighted']:.2f} / {row[f'{lv:.2f}']['pooled']:.2f}"
                                              for lv in LEVELS)
-                     + f" | {row['width90_mean']:.2f} / {row['width90_median']:.2f} | {row['lpd_lab_weighted']:+.3f} | "
+                     + f" | {row['width90_mean_lab_weighted']:.2f} / {row['width90_median_of_lab_medians']:.2f} / "
+                     f"{row['width90_median_pooled_rows']:.2f} | {row['lpd_lab_weighted']:+.3f} | "
                      f"{row['is90_lab_weighted']:.3f} |")
         L += ["", "| comparison | mean | SE | sign-flip p | exact bootstrap 90 % | IS mean | result |", "|---|---|---|---|---|---|---|"]
         for null in NULLS:
@@ -2447,8 +2792,10 @@ def main(argv=None) -> int:
     parser.add_argument("--replicates", type=int, default=R_CONTROLS, help=argparse.SUPPRESS)
     parser.add_argument("--amendment", default="", help="--score after a frozen file changed: the recorded reason")
     args = parser.parse_args(argv)
-    if args.score:
-        check_pair_records()          # refuse before anything is loaded
+    output = None
+    if args.score:                    # refuse before anything is loaded
+        output = score_output(args.amendment)   # run once (sec. 7.5; amendment A1)
+        check_pair_records()
     with engine_state():
         if args.guard:
             ok, worst, failed = guard()
@@ -2465,9 +2812,9 @@ def main(argv=None) -> int:
             s = res["summary"]
             print(f"controls: hard failures {s['hard_failures'] or 'none'}; wrote {CONTROLS_STEM}.{{json,md}}")
             return 1 if s["hard_failures"] else 0
-        res = run_score(args.amendment)
-        _write(STEM, res, render_score(res))
-        print(f"score: {res['verdict']['reported']} (PROVISIONAL); wrote {STEM}.{{json,md}}")
+        res = run_score(args.amendment, output=output)
+        _write(output["stem"], res, render_score(res))
+        print(f"score: {res['verdict']['reported']} (PROVISIONAL); wrote {output['stem']}.{{json,md}}")
         return 0
 
 

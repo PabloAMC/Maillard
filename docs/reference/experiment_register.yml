@@ -744,6 +744,7 @@ entries:
     artifacts: [results/validation/kinetic_core_between_lab_tau_h0_prereg.md, results/validation/kinetic_core_between_lab_tau_h0_prereg_review.md,
                 results/validation/kinetic_core_thiol_lolo_nested_tau_controls.md, results/validation/kinetic_core_thiol_lolo_nested_tau_controls.json,
                 results/validation/kinetic_core_thiol_lolo_pair_guard_reading_mottram.json,
+                results/validation/kinetic_core_thiol_lolo_nested_tau_amendment_A1.md,
                 scripts/generators/fit_thiol_lolo_pairs.py, scripts/generators/score_thiol_lolo_nested_tau.py]
     commit: pending
     verdict: pending
