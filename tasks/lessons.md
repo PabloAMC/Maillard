@@ -495,3 +495,11 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 ## 2026-11-05 — Generated READMEs go stale when main moves under an open PR
 - **Pattern:** two PRs (#60, #63) failed their unit tests on `data/README.md` / `results/README.md` being stale. CI tests the PR merged into main; other PRs had merged new dossiers and results files meanwhile, and `data/README.md` counts committed files, so regenerating it before the commit that adds them leaves it one step behind.
 - **Rule:** last step before pushing any branch that touches `data/`, `results/` or the registries: merge `origin/main`, regenerate `build_paper_registry.py`, `build_data_readme.py` and `build_results_readme.py`, commit, then run each with `--check` (they must print "current"). Re-do it whenever a sibling PR merges first.
+
+## 2026-11-05 — Never write an author or file key that was not read from the record
+- **Pattern:** a side session named Lopez et al. 2019 "Zhou 2019" (and queued `zhou2019_mushroom.pdf`) from a title-only OpenAlex row; the PDF's first page shows Lopez, Kerley, Jenkinson, Luckett & Munafo.
+- **Rule:** author names and paper keys come from the authorship record (OpenAlex / Crossref authorships) or the PDF's first page, never from a title or memory. `openalex.py verify` (W1.4) checks every `papers.yml` entry.
+
+## 2026-11-05 — Run a literature search against the question, not the topic
+- **Pattern:** Round 3 read Vauthey 2000 for mechanism, filed it as "microemulsion", and skipped it. A forward-citation sweep keyed to H0's question (a second laboratory's absolute MFT / FFT) found it as the best lead on disk for lifting H0's refusal.
+- **Rule:** a case's sweep is keyed to its own decisive criterion (sec. 7 item 2). A source skipped for one question gets re-screened for another; record the skip reason with the question it answered.
