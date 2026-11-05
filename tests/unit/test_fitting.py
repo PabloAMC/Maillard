@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import math
+import platform
 import re
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -419,9 +421,32 @@ def test_compact_json_round_trips_and_writes_a_row_per_line():
 # M1.1 (2026-11-05): the opt-in central-difference polish and asserted convergence
 # ---------------------------------------------------------------------------------------------------------------------
 
+def _same_fit(a, b):
+    return ([float(x).hex() for x in a.theta] == [float(x).hex() for x in b.theta]
+            and float(a.cost).hex() == float(b.cost).hex() and (a.status, a.evaluations) == (b.status, b.evaluations))
+
+
+def test_default_fit_equals_every_new_option_off():
+    """Platform-independent: the default call is bit-identical to one with every option added in M1.1 set to its
+    off value, and no polish or convergence record is attached. (The bit pins against origin/main's fitting.py,
+    cc5cbb55, are platform-specific and live in the next test.)"""
+    start = np.array([0.0, -3.5, 80.0])
+    for budget in (None, 40):
+        kw = {} if budget is None else {"budget": budget}
+        f = fitting.fit(_problem(), start, **kw)
+        g = fitting.fit(_problem(), start, central_polish=0, require_converged=None, **kw)
+        assert _same_fit(f, g)
+        d = f.as_dict(_problem().keys)
+        assert "polish" not in d and "converged" not in d and f.polish is None and f.converged is None
+
+
+@pytest.mark.skipif(not (sys.platform == "darwin" and platform.machine() == "arm64"),
+                    reason="bit pins were taken on darwin-arm64; the optimiser path differs across BLAS / libm "
+                           "(Linux CI differs at ~2e-4 relative), so they are not portable")
 def test_default_fit_is_pinned_bit_for_bit():
     """The default path is unchanged: these bits are what origin/main's fitting.py (cc5cbb55) returns on the same
-    problems (checked against that file directly when the polish was added). Frozen records depend on it."""
+    problems on darwin-arm64 (checked against that file directly when the polish was added). Frozen records depend
+    on it."""
     f = fitting.fit(_problem(), np.array([0.0, -3.5, 80.0]))
     assert [float(x).hex() for x in f.theta] == ["0x1.fc87e72e4da5ep-1", "-0x1.ffc520a5c4ddbp+0", "0x1.4000000000000p+6"]
     assert float(f.cost).hex() == "0x1.e0a5545b31adap+2" and (f.status, f.evaluations) == (3, 87)
