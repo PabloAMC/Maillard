@@ -141,10 +141,18 @@ def check_runners(failures: List[str]) -> None:
 #: records of the same kind -- run at a commit, quoted by number in their pre-registration -- and are pinned likewise.
 #: 2026-10-31: so are the structural feasibility records (feasibility_*.py: sampled constants within declared bands, each
 #: run read in its pre-registration, e.g. dpo partition prereg secs. 17 - 22); a 600-draw run costs hours.
+#: 2026-11-04: so are the scoring records of a pre-registered run-once analysis (score_thiol_lolo_nested_tau.py, H0 /
+#: EX-059: its controls and its single scoring run, prereg sec. 7.5 "run once"); re-running them is forbidden, not
+#: merely costly, so they are pinned by the commit they were written at.
 FROZEN_RECORD_GENERATOR = re.compile(
     r"scripts/generators/(generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
     r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout|diagnose_\w+|probe_\w+|"
-    r"feasibility_\w+)\.py$")
+    r"feasibility_\w+|score_thiol_lolo_nested_tau|rescore_\w+)\.py$")
+#: 2026-11-05: frozen scoring records whose generator also writes LIVE files (score_contrast_benchmark.py writes the
+#: items record, re-derived and checked by the scorer itself before every use, and the named M1 scores): the v1 score
+#: is the benchmark's run-once "before" record (prereg v6), pinned by the commit it was written at. And the
+#: rescore_* records (held-out re-scores, each run at a commit and quoted in its prereg) are pinned by the pattern above.
+FROZEN_RECORD_FILES = frozenset({"results/validation/kinetic_core_contrast_benchmark_score_v1.json"})
 
 
 #: 2026-10-30 (owner: "I am not sure regenerating the figure is needed until we have the engine finished"; strategy
@@ -155,7 +163,8 @@ DEFERRED_TO_PHASE3 = ("results/validation/figure_inputs.json",)
 
 def is_frozen_record(relative: str, payload: Dict) -> bool:
     generated_by = str((payload.get("provenance") or {}).get("generated_by") or "")
-    return relative not in REGENERATE and bool(FROZEN_RECORD_GENERATOR.search(generated_by))
+    return relative not in REGENERATE and (relative in FROZEN_RECORD_FILES
+                                           or bool(FROZEN_RECORD_GENERATOR.search(generated_by)))
 
 
 def check_input_hashes(failures: List[str]) -> None:

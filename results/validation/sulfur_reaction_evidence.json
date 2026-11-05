@@ -4,9 +4,9 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-04",
     "git": {
-      "commit": "8ce99365903983fe9f1b4d4d903a6351a18da3eb",
-      "short": "8ce99365",
-      "branch": "m1-thiol-loss-case",
+      "commit": "102e29538d6fea4c86aae523eb57f104567c3039",
+      "short": "102e2953",
+      "branch": "m1-build",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -37,7 +37,7 @@
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "4728c9d75e015afb89d4a281530c22ed25670dc8f6d3ffbd4503cd8a04c1a180"
+        "sha256": "2fe25cb8cc06632336fbecb7d8caef8a9a824bd68e7e7fe5be0d3450a9f8a5f5"
       },
       {
         "path": "src/kinetic_core/parameters.py",
