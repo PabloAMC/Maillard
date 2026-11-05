@@ -1,5 +1,7 @@
 # Case M1c: the thiol supply structure (a base-favoured TTCA exit and Zhang 2025b's missing pool)
 
+**FROZEN 2026-11-05 (items 1–5), before any of the 11 new papers was read.**
+
 *Plan step M1c ([STATUS_AND_PLAN sec. 5, W2](../../guides/STATUS_AND_PLAN.md), as re-sequenced 2026-11-05; error E10,
 with E12 and CF-076 / CF-063 / CF-107). Items 1 - 5 of sec. 7, plus the bands every new coordinate carries, written
 2026-11-05 before any result of the change exists and before any newly downloaded thiol-supply paper was read. No
@@ -99,7 +101,7 @@ used in item 7 only.
 | Zhai 2020 (Jiangnan; spray-dried TTCA intermediate) | TTCA -> CAMA conversion favoured at pH 7.5 - 9.5 (CAMA 6 % -> 47 % at pH 9.5) | **for X-cama**, but at low water during dehydration | not run |
 | Zhai 2019 Fig. 3B; Zhai 2023c | dicarbonyls only; no TTCA time course | context | seen; not run |
 | Wei 2022 (Jiangnan; GX-ARP 5 + Cys 5 mM, water, label pH 7, 110 - 130 C) | at 120 C and 100 min, 4.24 mM Cys consumed and 0.48 mM TTCA formed (11 %). Free Cys 5 -> ~1.4 mM in 20 min | most consumed cysteine sits in no measured pool where little free xylose exists: for a cysteine-only sink (R-sink's cysteine arm) | not run; unkeyed |
-| Zhou 2022 (Jiangnan; Cys 20 mM alone, 120 C, label pH 7, unbuffered) | 94 / 86 / 79 / 74 % of the Cys left at 30 / 60 / 90 / 120 min | the cysteine-only sink in water: ~2.5e-3 /min at 120 C | engine status of this arm UNVERIFIED |
+| Zhou 2022 (Jiangnan; Cys 20 mM alone, 120 C, label pH 7, unbuffered) | 94 / 86 / 79 / 74 % of the Cys left at 30 / 60 / 90 / 120 min | the cysteine-only sink in water: ~2.5e-3 /min at 120 C | not run (only Zhou 2022's ARP + Cys rows are in the engine records) |
 | Liu 2022 (Cys 40 + MGO 20 mM, 120 C, label pH 7.5) | 26.7 mM Cys lost between 15 and 30 min against ~1.4 mM MGO | a fast cysteine + dicarbonyl sink | not run |
 
 ### 2.3 Trapping
@@ -224,11 +226,11 @@ Dossiers that mention neither thiazolidine nor TTCA were not screened.
 | id | explanation | (b) TTCA loss vs label pH | (c) Zhang's missing ~19 mM | (d) FFT shape |
 |---|---|---|---|---|
 | **R0** | instant supply, the incumbent (B60) | no TTCA in Cys + Xyl pots; fed TTCA's loss is pH-flat | no TTCA pool: reactants consumed in seconds | fits (the reference) |
-| **C1** | M1's reservoir, release free | pH-flat (ratio <= 1.01 in the screen) | TTCA lost when free Cys is low; no pool | lost at 30 min unless a faster release restores it |
+| **C1** | M1's reservoir, release free, with K(T) banded as in every rival here (sec. 5.2); M1's T-flat C1 is reported beside it as the M1 reference | pH-flat (ratio <= 1.01 in the screen) | TTCA lost when free Cys is low; no pool | lost at 30 min unless a faster release restores it |
 | **X** (the claim) | C1 + the exit (X-cama or X-deg) + reversible P1a, P1b, P2, P4a + irreversible P3, P4b | rises with pH; must also give the acceleration under the acid drift | what the members reach inside their bands: ~7 mM Cys and ~5 mM Xyl inside non-numerical bands (sec. 5.2) | open |
 | **X0** | C1 + the exit, no pool | as X | not reached; Zhang's blank declared not representable | as X |
 | **R-rel** | a base-favoured RELEASE (`k_ttca_cys` x 10^(n_r (pH_c - 5.5))) with K flat, so formation speeds up equally | TTCA re-forms unless free Cys is drained, so the loss rises only if the Cys sinks keep up | as C1 | open |
-| **R-cal** | X0 + a **time- or handling-dependent analytical loss** of free Cys and Xyl (mechanism unidentified, numerical band); variant R-cal+s adds a late sink | as X | no pool | as X |
+| **R-cal** | X0 + a **time- or handling-dependent analytical loss** of free Cys and Xyl after the quench, into an UNMEASURED product (a 1 : 1 loss into TTCA would raise the TTCA reading); mechanism unidentified, numerical band, which cannot be identified on Zhang because it prints no quench-to-injection times; variant R-cal+s adds a late sink | as X | no pool | as X |
 | **R-sink** | X0 + material destroyed: S3's 1 : 1 drain on free Cys and PENT, plus a cysteine-only sink | as X | destroyed, never returned | open |
 | **R-K** | Kallen-shaped K(pH) + the exit (CF-076's former lead) | K rising with pH stabilises TTCA, so the exit must outrun it | **fails by arithmetic**: the Kallen shape gives K(6.5) / K(4.4) = 3.4 - 18x for pKa_T 6.1 - 5.2, not the ~300x needed | open |
 
@@ -244,8 +246,8 @@ The columns need these notes:
   - At K = 0.060 L/mmol and TTCA 18.2 mM the free reactants should be sqrt(18.2 / 0.060) = 17.4 mM each. That closes
     the balance to (18.2 + 1.61 + 17.4) / 40 = 93 %.
   - Its strongest point: at full closure, Cao's K at Zhang's charge predicts a TTCA plateau of 18.3 - 20.1 mM for K
-    0.045 - 0.060. That is the measured plateau (17.7 / 18.2). The K(T) band of sec. 5.2 widens this to 15.6 - 25.1
-    mM.
+    0.045 - 0.060. That is the measured plateau (17.7 / 18.2). The K(T) band of sec. 5.2 widens this to 16.0 - 25.1
+    mM (K(120) 0.032 - 0.144 L/mmol).
 - **Against a static, level-dependent under-read:** it fails Zhang's own time course.
   - The 5-min deficit of 12 - 14 mM sits at free readings of 18 - 20 mM, where no low-end effect acts.
   - From 30 to 50 min, free Cys falls 4.0 -> 0.80 and Xyl 3.45 -> 1.21, while TTCA + CAMA rise only 0.5 mM.
@@ -259,15 +261,27 @@ simple forms.
 
 X, R-cal and R-sink can hold together in parts. The case asks which parts the decisive data need.
 
-**The stop rule, restated.** If no structure passes (b) and (d) within ~25 h, supply is "not identifiable on disk".
-(a) is a consistency check (sec. 5.1) and does not enter the rule.
-- **Pass, under M1.1, fixed before the screen:** posterior-predictive p > 0.05 on the unit's primary form, with the
-  exact density.
-- The screen's declared tolerances (80-min ratio >= half the measured 9.6; the FFT shape) are reported beside it.
-  Where the two disagree, the M1.1 form governs.
+**The stop rule, restated (v3).** If no structure passes (b) and (d) within ~25 h, supply is "not identifiable on
+disk". (a) is a consistency check (sec. 5.1) and does not enter the rule.
 
-(c) does not enter the rule. It **ranks X, X0, R-cal and R-sink on development data only**; it cannot both decide and
-be unable to ship.
+Feasibility and comparison are separate tests:
+- **Feasibility (the stop rule's "pass") is a test on measurement noise and read error only, WITHOUT omega.** A
+  structure passes a signature when both of these hold:
+  - it meets the screen's declared tolerance (b: the 80-min ln-fraction ratio pH 8 / 5.5 >= half the measured 9.6;
+    d: FFT 360 / 30 and 720 / 360 within the series' read-error band), or, equivalently, a posterior-predictive
+    p > 0.05 under the measurement noise and read error alone;
+  - it is not beaten on that signature by the pH-flat null (C1's exit, or R0's pH-flat `r_ttca_deg`) by more than the
+    comparison threshold, 1.92 nats (the 90 % half-width on one degree of freedom).
+- **Why not omega.** Under omega 0.419 a pH-flat rival scores p ~0.8 - 0.99 on (b), so C1 and even R0 would "pass"
+  (b), and R0 passes (d). The rule could then never fire.
+- **Which form governs.** The feasibility form governs the stop rule. Omega (sec. 5.1) is used only in the comparison
+  between rivals.
+
+On ranking versus deciding:
+- **(b) can rank but not decide.** Against the pH-flat null it carries ~2.7 nats under omega, against the 1.92-nat
+  threshold. That is a ranking, not a decision, consistent with the development-grade verdict.
+- **(c) does not enter the rule.** It **ranks X, X0, R-cal and R-sink on development data only**; it cannot both
+  decide and be unable to ship.
 
 ## 4. The decisive data
 
@@ -321,7 +335,7 @@ and the rivals ranked on (c), but nothing on disk can ship a supply structure as
 | sohn1995 (ammonia from amino acids heated in water) | band source: R-sink's cysteine-only arm; CF-084 (M1b) | -- | -- | -- |
 | davidek2004 (pentose-Amadori assay; xylose + glycine) | evidence only (glycine, not cysteine) | -- | -- | -- |
 
-The combined chance that at least one of the three candidates supplies a decisive measurement is **~0.3**
+The combined chance that at least one of the three candidates supplies a decisive measurement is **~0.25**
 (1 - 0.92 x 0.85 x 0.95 = 0.26). None of the eleven sets a band in this case. A band source enters only through an
 amendment registered before any engine result of M1c exists.
 
@@ -336,7 +350,7 @@ The design is one laboratory, three arms, with these conditions throughout:
 
 | arm | conditions | species | time points | decides |
 |---|---|---|---|---|
-| **1. the exit's pH law at held pH** | purified TTCA (equilibrium epimer mixture, NMR-characterised) 10 mmol/L. pH 4.5, 5.5, 6.5, 7.5, 8.0, held by pH-stat or in phosphate at 0.05 and 0.2 M (extrapolate the buffer term to zero). 100 and 120 C (90 C at pH 4.5 bridges to Cao). +- 10 mmol/L [13C5]xylose | TTCA (each epimer); CAMA (each isomer); free Cys derivatised at the quench (N-ethylmaleimide, labelled internal standard); free xylose (HPAEC-PAD); [13C5]-TTCA; cystine; H2S (trap); 1-DX / 3-DX; A420; pH. **Quench control:** TTCA standards through the same NEM quench at 0 / 10 / 30 / 60 min before injection, to show that the trap does not drain TTCA through its open chain (Schubert's iodoacetate trap freed cysteine from a thiazolidine at room temperature within ~0.5 h) | 0, 2, 5, 10, 20, 40, 60, 90, 120 min | n at fixed pH, with no drift. Which step carries it: CAMA appears (X-cama); deoxyosones or browning without CAMA (X-deg); free Cys appears and stays (R-rel). An induction at constant pH means a P1-type pool |
+| **1. the exit's pH law at held pH** | purified TTCA (equilibrium epimer mixture, NMR-characterised) 10 mmol/L. pH 4.5, 5.5, 6.5, 7.5, 8.0, held by pH-stat or in phosphate at 0.05 and 0.2 M (extrapolate the buffer term to zero). 100 and 120 C (90 C at pH 4.5 bridges to Cao). +- 10 mmol/L [13C5]xylose | TTCA (each epimer); CAMA (each isomer); free Cys derivatised at the quench (N-ethylmaleimide, labelled internal standard); free xylose (HPAEC-PAD); [13C5]-TTCA; cystine; H2S (trap); 1-DX / 3-DX; A420; pH. **Quench control:** TTCA standards through the same NEM quench at 0 / 10 / 30 / 60 min before injection, to show that the trap does not drain TTCA through its open chain (Schubert's iodoacetate trap freed cysteine from a thiazolidine at room temperature within ~0.5 h) | 0, 2, 5, 10, 20, 40, 60, 90, 120 min | n at fixed pH, with no drift. Which step carries it: CAMA appears (X-cama); deoxyosones or browning without CAMA (X-deg); free Cys and xylose rise transiently, with the xylose recovered (R-rel; the cysteine sinks drain the Cys, so it does not stay). An induction at constant pH means a P1-type pool |
 | **2. Zhang's pool in a second laboratory** | Cys + Xyl 40 + 40 mmol/L, 0.2 M phosphate pH 6.5, 120 C, 5 mL in 15 mL (Zhang's design). The 0.4 M / 90 C recipe (Cao's) as a bridge. A [13C5]xylose run | free Cys (as in Arm 1); free xylose (HPAEC-PAD); **split samples run by Zhang's own HPLC-ELSD method, with separate matrix-matched Cys and Xyl calibrations in 0.2 M phosphate over 0.2 - 40 mM**; TTCA (**epimers resolved**) and CAMA by LC-MS/MS with labelled standards; total releasable cysteine (a validated exchange checked on TTCA standards); cystine in solution and in any pellet; 13C NMR of [13C5]xylose samples quenched at 10 and 50 min; the 50-min sample diluted 20x at 120 C and followed for 30 min; cold dilution vs 4 C storage at 0 / 4 / 24 h | 0, 1, 2, 5, 10, 20, 30, 50 min | (c), as in the decision table below |
 | **3. K(pH) and K(T)** | Cys + Xyl equilibrated from both sides (from TTCA, and from Cys + Xyl) at pH 4.5, 5.5, 6.5, 7.5 and 25, 60, 90 C. At pH >= 6.5 above 60 C the exit drains TTCA during equilibration: there K is fitted with the exit in the model, or high-pH K is limited to <= 60 C. TTCA ring-N pKa titrated at 25 and 90 C | all four species, and pH at temperature | to a plateau (two successive samples agree) | flat K vs R-K and Zhao's drift; P1a's T-law; K(T) |
 
@@ -371,8 +385,8 @@ folded into Arm 1.
 | unit | role | value basis | reported noise | error terms in the primary | floor | note |
 |---|---|---|---|---|---|---|
 | (a) Cao 2017 and Zhao 2017b, log K_app vs measured pH | **consistency check only; not a likelihood unit** | a within-sample quotient of three absolute levels | n = 3, RSD < 10 % per species; read errors +-0.004 / 0.005 mol/L; +-0.03 pH | omega once per quotient: slope sd **0.95 dex / pH** (0.89 at 0.390) over Cao's pH spread | none needed | it separates no rival. C1, X, X0, R-cal and R-sink are flat by construction at pH ~4.4, and R-K moves <= 0.075 dex there. Reported: whether each structure's K_app stays inside Cao's and Zhao's measured ranges (58.5 - 64.6; 59 - 78 L/mol). Zhao's -0.29 dex / pH sits on a 6-fold-dilution pH scale |
-| (b) Zhai 2021 Fig. 4b | stop-rule unit | **primary: matched-time difference ln(C_pH(t) / C_5.5(t))** for pH 6, 7, 8 and the +Xyl series against their own pH 5.5. Any scale within one assay cancels; C0 is likely the nominal 10.00 mM | SD (n = 3) for TTCA alone at pH 5.5 / 6 / 7 only. For pH 8 and the +Xyl series, a transfer: the median printed relative SD of the same figure (~3 - 4 %), sensitivity x0.5 / x2. Read error +-0.005 mmol/L | omega per printed value (2 omega^2 per difference). **Sensitivity: a shared within-series error term** (omega split into a series-level part and a point part, half each), since independent omega per point overstates power | TTCA LOD 2.21 mg/L = 0.0087 mmol/L (Zhai's printed); "0.00" points censored | arithmetic on the measured series: against a pH-flat rival the pH 7 and 8 differences carry chi^2 5.5, **~2.7 nats** under omega 0.419. Modest, and less with the shared term. The pH 7 points at 100 / 120 min print SD 0 (not measured as SD): the transfer applies |
-| (b) product routing, Zhai 2021 Fig. 5 | **declared feasibility check** (not a likelihood unit) | standing 3-DX and 1-DX at pH 8, 100 C, 120 min, semi-quantitative (diacetyl surrogate) | as printed | -- | -- | a variant passes if its predicted 3-DX is <= 3x of 0.8 % of the TTCA lost and its 1-DX <= 3x of 106 umol/L. The factor 3 is the surrogate's declared response-factor uncertainty. A failure is reported; it does not veto |
+| (b) Zhai 2021 Fig. 4b | stop-rule unit | **primary: matched-time difference ln(C_pH(t) / C_5.5(t))** for pH 6, 7, 8 and the +Xyl series against their own pH 5.5. Any scale within one assay cancels; C0 is likely the nominal 10.00 mM | SD (n = 3) for TTCA alone at pH 5.5 / 6 / 7 only. For pH 8 and the +Xyl series, a transfer: the median printed relative SD of the same figure (~3 - 4 %), sensitivity x0.5 / x2. Read error +-0.005 mmol/L | omega per printed value (2 omega^2 per difference). **Sensitivity: a shared within-series error term** (omega split into a series-level part and a point part, half each), since independent omega per point overstates power | TTCA LOD 2.21 mg/L = 0.0087 mmol/L (Zhai's printed); "0.00" points censored | arithmetic on the measured series: against a pH-flat rival the pH 7 and 8 differences carry chi^2 5.5, **~2.7 nats** under omega 0.419. Modest, and less with the shared term: against the 1.92-nat threshold (b) can rank but cannot decide. Its stop-rule feasibility form is on measurement noise only (sec. 3). The pH 7 points at 100 / 120 min print SD 0 (not measured as SD): the transfer applies |
+| (b) product routing, Zhai 2021 Fig. 5 | **declared feasibility check** (not a likelihood unit) | standing 3-DX and 1-DX at pH 8, 100 C, 120 min, semi-quantitative (diacetyl surrogate) | as printed | -- | -- | a variant passes if its predicted 3-DX is <= 3x of 0.8 % of the TTCA lost and its 1-DX <= 3x of 106 umol/L. The factor 3 is the surrogate's declared response-factor uncertainty, left as declared. A failure is reported; the check vetoes nothing |
 | (c) Zhang 2025b | ranking unit (development) | **primary: the closure fraction** (Cys + TTCA + CAMA, and Xyl + TTCA + CAMA, over the 40 mM charge) at each time | n = 3, error bars small and not transcribed; read errors +-0.3 (TTCA), +-0.05 (CAMA) mmol/L | omega per printed value, plus a **per-assay calibration term**: TTCA 8 %, CAMA 20 %, Cys / Xyl ELSD 15 %. These are the Cao-vs-Zhao 2017b same-lab, between-run and between-assay spreads (zhao2017b dossier): noise terms, not model bands | **Zhang's own: 0.223 mmol/L** (the printed ELSD curve's zero-signal point) for Cys / Xyl; **0.1 mmol/L** for TTCA and CAMA (the lowest standard). Zhai 2021's 0.025 / 0.020 (UNVERIFIED for Cys / Xyl) is a sensitivity only | the K gap: Zhang's K_app 18.6 L/mmol against Cao's 0.060 is 2.49 dex. Data against data, on measurement noise only (~0.1 dex), that is ~25 sd. A flat-K model against Zhang's K_app needs one quotient's model error: **3.4 sd** with omega per printed value, **5.9 sd** with omega once (3.7 / 6.4 at 0.390). A large, one-pot discrepancy |
 | (d) Schieberle 2000 FFT and MFT ratios 360 / 30, 720 / 360 | stop-rule unit | ratios within one series (no tau); bivariate, sharing the 360-min point | no SD or n printed; M1's 0.094 ln per point | omega per point | 1 ug/L | as M1 and prereg v2 |
 | (d) B60's FFT rows | in-sample guard | absolute levels, several labs | each row's printed SD or transfer | omega + tau | each row's floor | -- |
@@ -396,7 +410,7 @@ or as a required-agreement sensitivity, never as a band, and the case says which
 | `k_ttca_cys`, the release | log10 k(145 C) = B60 +- 3 dex; Cao's floor (>= 7e-3 /min at 90 C) as a required-agreement sensitivity only | stage-1 convention; Cao arithmetic 4 | numerical (primary) |
 | R-rel: n_r, the release's pH slope | 0 - 1 | mechanism (one hydroxide); the analogues (Karpinski, Bustillo Trueba, Nagasawa) all say <= 0 above pH 6 | numerical; the analogues argue against any positive value |
 | K at 90 C | 0.060 L/mmol fixed; sensitivity **0.045 - 0.080** | Cao 2017 and Zhao 2017b: the only two cysteine-pentose K records on disk, from one laboratory and one recipe (Zhao's 59 - 78 widens the upper end) | measured constants from seen pots |
-| K(T): Delta H of ring formation | **-25 to +35 kJ/mol**, giving K(120) / K(90) 0.53 - 2.4 | Kim 1986 (aliphatic thiazolidine, +4.9 kJ/mol, 13 - 38 C) +- 30 | same-class anchor, numerical width. The R-cal arithmetic and the members' sizing assume K(120) = K(90) and are re-stated over this band |
+| K(T): Delta H of ring formation | **-25 to +35 kJ/mol**, giving K(120) / K(90) 0.53 - 2.4 | Kim 1986 (aliphatic thiazolidine, +4.9 kJ/mol, 13 - 38 C) +- 30 | same-class anchor, numerical width. Kim's Delta H is measured against a FREE aliphatic aldehyde. A sugar's apparent K also carries the sugar's (positive) ring-opening enthalpy, so the band's upper end may be low. The R-cal arithmetic and the members' sizing assume K(120) = K(90) and are re-stated over this band |
 | R-K: pKa_T | 5.2 - 6.1 | Radomski 1989 (inference, as CF-076); gajda1990 replaces it by amendment if read | inferred class |
 | P1a: f_oc = [open] / [TTCA] | 0 - 0.05 at <= 37 C; Delta H_open 0 - 60 kJ/mol | Radomski 1989 (not seen by NMR, 37 C); Karpinski 1990 (no open thiol, LOD ~1 uM) | same-class at <= 37 C; **numerical** in T |
 | P1a / P2 exchange speed | >= 2e-3 /min (neutral, room temperature), acid-catalysed | Nagasawa 1981 (penicillamine analogue); Radomski 1989 (~0.2 /min, 37 C) | class bound: fast on the pots' timescale |
@@ -405,9 +419,9 @@ or as a required-agreement sensitivity, never as a band, and the case says which
 | P3: Cys -> 1/2 cystine | first-order ceiling 7e-4 /min at 120 C (<= 8 % in 120 min); barrier 40 - 135 kJ/mol | Hou 2026 (Jiangnan, 120 C step); `sugar_trunk` class | same-network ceiling; numerical barrier |
 | P4a: second CAMA isomer outside the MRM | 0 - 1 of CAMA | Zhai 2021 SI and Zhai 2019 NMR show two CAMA forms; no share measured | numerical; a verdict that needs it does not ship |
 | P4b: 3-DX + Cys (`r_tdp_cys_trap`) | binding fast, 1 : 1 (not rate-limiting): ~0.016 /min at 10 C if first order in the osone (untested; zero order in Cys over 10 - 50 mM). Size capped by the 3-deoxypentosone supply | Wedzicha 1991 (3-deoxyhexosulose, pH 5.5); Edwards 1992 | same-class (hexosulose for pentosulose) |
-| R-cal: the time- or handling-dependent loss | 0 - 0.1 /min of the measured free Cys and Xyl after the quench | none on disk (hu2012, queued and unread, is a candidate class source for ELSD non-linearity) | **numerical** |
+| R-cal: the time- or handling-dependent loss | 0 - 0.1 /min of the measured free Cys and Xyl after the quench, into an unmeasured product | none on disk (hu2012, queued and unread, is a candidate class source for ELSD non-linearity). Not identifiable on Zhang, which prints no quench-to-injection times | **numerical** |
 | R-sink: the 1 : 1 drain | 1e-6 - 3e-3 /min at 90 C; barrier 40 - 135 kJ/mol | numerical; Zhao 2017b's ceiling 2e-4 /min at 90 C as a required-agreement check | numerical |
-| R-sink: the cysteine-only sink | 0 - 2e-4 /min at 90 C; at 120 C, Zhou 2022's ~2.5e-3 /min (Cys alone, water) as the upper corner | Zhao 2017b's ceiling (seen): sensitivity; Zhou 2022 (engine status UNVERIFIED); sohn1995 by amendment | numerical primary |
+| R-sink: the cysteine-only sink | 0 - 2e-4 /min at 90 C; at 120 C, Zhou 2022's ~2.5e-3 /min (Cys alone, water) as the upper corner | Zhao 2017b's ceiling (seen): sensitivity; Zhou 2022's Cys-alone arm (not run); sohn1995 by amendment | numerical primary |
 | pH trajectory, Zhai-design pots (cooled scale) | **three declared shapes, each run:** (i) no drift (label pH held: the bound that favours a base-favoured exit most); (ii) linear in time from the label to Kang's end pH at 120 min (5.1 / 4.9 / 4.7; 5.0 interpolated for 6); (iii) front-loaded, an exponential approach to Kang's end pH with tau 20 min | Kang 2026 p. 3242 for the end points (its temperature unresolved). The front-loaded time scale is from Hou 2026's measured unbuffered trajectory (Jiangnan, 2 pH units in 20 min, a different pot). The linear shape has no source | measured end points; declared shapes. A verdict that holds under only one shape is reported as shape-conditional |
 | pH trajectory, Cao 2017 | the keyed cooled readings (Fig. 4c) | Cao 2017 | measured |
 | pH, Zhang 2025b | label 6.5 (0.2 M phosphate; no reading printed); sensitivity: the engine's charge-balance pH | -- | declared |
@@ -480,3 +494,14 @@ decides.
   - omega 0.419.
   - New-paper roles conditioned on temperature and pot; combined P 0.3.
   - P(no unseen decisive data) re-stated after the screen.
+- **v3 (FROZEN), 2026-11-05**, after the confirmation pass. Still before any result. No new paper was opened, and no
+  engine was run.
+  - N1: feasibility (the stop rule's "pass") is now on measurement noise and read error only, without omega, and a
+    passing structure must not be beaten by the pH-flat null by more than 1.92 nats. Omega is kept for the comparison
+    between rivals. (b) ranks but does not decide.
+  - N2: Kim's Delta H caveat added; C1 carries K(T) banded; R-cal's lower plateau corrected to 16.0 mM.
+  - N3: R-rel's Arm-1 signature corrected.
+  - N6: Zhou 2022's Cys-alone arm marked not run.
+  - N7: R-cal's loss goes to an unmeasured product, and its band is unidentifiable on Zhang; the routing check vetoes
+    nothing.
+  - m8: combined P ~0.25.
