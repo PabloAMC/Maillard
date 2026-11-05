@@ -49,7 +49,7 @@ for entry in (str(ROOT), str(ROOT / "scripts" / "generators")):
 
 REFERENCE = ROOT / "results" / "validation" / "jax_network_infra_reference.json"
 OUT = ROOT / "results" / "validation" / "jax_network_infra"
-STAGES = ("forced", "fit", "draws")
+STAGES = ("forced", "fit", "draws", "paired")
 TIGHT = {"rtol": 1e-10, "atol": 1e-16}
 DEX_FLOOR = 1e-9
 DRAW_COUNTS = (64, 512, 2048)
@@ -193,7 +193,10 @@ def stage_forced(reference) -> Dict[str, Any]:
         ratios = [errs[i]["max_dex"] / max(errs[i + 1]["max_dex"], 1e-300) for i in range(len(errs) - 1)]
         return {"errors": errs, "ratios": ratios, "crossings": lin.crossings}
 
-    ph_knots, ph_vals = [0.0, 50.0], [7.6, 5.4]
+    # a ramp then a 10 min hold: at the end of a RAMP the fast (quasi-steady) pools -- 1-DG, AF -- track the current
+    # rate constants, and a midpoint staircase's last value lies half a step off the course, a FIRST-order error at
+    # the endpoint (measured before this hold was added: ratios 2.0 - 2.5 on ODG / AF); the hold lets them relax
+    ph_knots, ph_vals = [0.0, 40.0, 50.0], [7.6, 5.4, 5.4]
     PL = fz.Forcing(inputs=("t_c", "ph_label"), interpolation=(("t_c", "previous"),), ph_scale="label_25C")
     PS = fz.Forcing(inputs=("t_c", "ph_label"), interpolation=(("t_c", "previous"), ("ph_label", "previous")),
                     ph_scale="label_25C")
@@ -265,14 +268,15 @@ def stage_fit(reference) -> Dict[str, Any]:
     for lane in ("trunk", "lipid"):
         toy = reference[f"{lane}_toy"]
         eng = toy["polished"]
-        theta_e = np.asarray(list(eng["theta"].values()))
+        names = [f"{c['module']}.{c['coordinate']}" for c in toy["coordinates"]]   # the JSON sorts its keys
+        theta_e = np.asarray([eng["theta"][n] for n in names])
         row: Dict[str, Any] = {"engine": {"theta": theta_e.tolist(), "cost": eng["cost"],
                                           "wall_seconds": eng["wall_seconds"],
                                           "residual_evaluations": eng["residual_evaluations"],
                                           "seconds_per_residual_evaluation": toy["seconds_per_residual_evaluation"],
                                           "status": eng["status"], "polish": eng.get("polish", {}).get("carried"),
                                           "forward_only_cost": toy["forward_only"]["cost"],
-                                          "forward_only_theta": list(toy["forward_only"]["theta"].values()),
+                                          "forward_only_theta": [toy["forward_only"]["theta"][n] for n in names],
                                           "forward_only_wall_seconds": toy["forward_only"]["wall_seconds"]},
                                "keys": [f"{c['module']}.{c['coordinate']}" for c in toy["coordinates"]],
                                "truth": toy["truth"], "start": toy["start"]}
@@ -371,6 +375,59 @@ def stage_draws(reference) -> Dict[str, Any]:
     return out
 
 
+def stage_paired(reference) -> Dict[str, Any]:
+    """Engine and JAX BACK TO BACK in this process at the same machine load (the engine called here for the timing
+    only; every compared engine NUMBER comes from the core-env reference): the engine's draws on the trunk toy pot
+    against the Predictor's, and the engine's two fits of the trunk toy (``refgen.trunk_toy``, which rebuilds its data)
+    against the JAX fit's warm refit."""
+    import build_jax_network_infra_reference as ref
+    from src.kinetic_core_jax import densities, fit
+
+    toy = reference["trunk_toy"]
+    out: Dict[str, Any] = {"uptime_before": uptime()}
+    t0 = time.perf_counter()
+    eng_draws = ref.engine_draw_timing(toy)
+    out["engine_draws"] = eng_draws["rows"]
+    problem = toy_problem(toy, "trunk")
+    obs = [o for o in problem.observations if o.pot == 0]
+    start = np.asarray(toy["start"])
+    scale = np.asarray([0.1, 3.0, 0.1, 0.1, 0.05])
+    rng = np.random.default_rng(20261108)
+    rows = []
+    for rtol, atol in ((1e-8, 1e-14), (1e-6, 1e-12)):
+        pred = densities.Predictor(problem.net, [problem.pots[0]], obs, problem.keys, chunk=64, rtol=rtol, atol=atol)
+        pred(start + rng.normal(size=(64, len(start))) * scale)                    # compile
+        draws = start + rng.normal(size=(64, len(start))) * scale
+        t1 = time.perf_counter()
+        pred(draws)
+        dt = time.perf_counter() - t1
+        rows.append({"rtol": rtol, "draws": 64, "seconds": dt, "draws_per_second": 64 / dt})
+    out["jax_draws"] = rows
+    out["uptime_mid"] = uptime()
+    eng_fit = ref.trunk_toy()
+    out["engine_fit"] = {k: {"wall_seconds": eng_fit[k]["wall_seconds"], "evaluations": eng_fit[k]["residual_evaluations"],
+                             "cost": eng_fit[k]["cost"]} for k in ("forward_only", "polished")}
+    comp = fit.Compiled(problem)
+    fit.fit(problem, toy["start"], budget=200, compiled=comp)                     # compile
+    t1 = time.perf_counter()
+    again = fit.fit(problem, toy["start"], budget=200, compiled=comp)
+    out["jax_fit_warm"] = {"wall_seconds": time.perf_counter() - t1, "nfev": again.nfev, "njev": again.njev,
+                           "cost": again.cost}
+    t1 = time.perf_counter()
+    comp.residual(again.theta)
+    out["jax_residual_seconds"] = time.perf_counter() - t1
+    t1 = time.perf_counter()
+    comp.jacobian(again.theta)
+    out["jax_jacobian_seconds"] = time.perf_counter() - t1
+    out["engine_seconds_per_residual"] = eng_fit["seconds_per_residual_evaluation"]
+    out["uptime_after"] = uptime()
+    out["seconds"] = time.perf_counter() - t0
+    print(f"  paired: engine {eng_draws['rows'][0]['draws_per_second']:.1f} draws/s, JAX "
+          f"{rows[0]['draws_per_second']:.1f} / {rows[1]['draws_per_second']:.1f} (rtol 1e-8 / 1e-6); engine fit "
+          f"{out['engine_fit']['polished']['wall_seconds']:.1f} s, JAX warm {out['jax_fit_warm']['wall_seconds']:.1f} s")
+    return out
+
+
 # --------------------------------------------------------------------------- the write-up
 def _fmt(x: float) -> str:
     return f"{x:.2g}" if x != 0 else "0"
@@ -413,7 +470,7 @@ def write_markdown(report: Dict[str, Any]) -> str:
         "| course | n = 2 | 4 | 8 | 16 | 32 | ratios |",
         "|---|---|---|---|---|---|---|",
     ]
-    for key, label in (("linear_ph_vs_midpoint_staircase", "pH 7.6 -> 5.4 over 50 min at 125 C (trunk lane)"),
+    for key, label in (("linear_ph_vs_midpoint_staircase", "pH 7.6 -> 5.4 over 40 min, held 10 min, at 125 C (trunk lane)"),
                        ("linear_temperature_vs_midpoint_staircase", "T 25 -> 160 -> 160 -> 100 C (trunk lane)"),
                        ("lipid_ramp_across_window_vs_midpoint_staircase", "T 60 -> 160 C over 20 min (lipid, crosses "
                         "the 100 C window)")):
@@ -460,8 +517,26 @@ def write_markdown(report: Dict[str, Any]) -> str:
                  f"{r['draws_per_second']:.1f} | - | {eng['load_before'].split('load averages:')[-1].strip()} |")
     L += ["", f"The batch equals single solves to {_fmt(draws['batch_equals_single_solves_max_dex'])} dex; "
           f"`log_likelihoods` equals `gaussian_log_density` row by row to "
-          f"{_fmt(draws['log_likelihoods_vs_gaussian_log_density_max_abs'])} nats.", "",
-          "## 4. Findings", ""]
+          f"{_fmt(draws['log_likelihoods_vs_gaussian_log_density_max_abs'])} nats.", ""]
+    p = report.get("paired")
+    if p:
+        L += ["## 4. Paired timings (engine and JAX back to back in one process, same load)", "",
+              f"Load {p['uptime_before'].split('load averages:')[-1].strip()} before, "
+              f"{p['uptime_after'].split('load averages:')[-1].strip()} after (a shared machine; these are the "
+              "comparable numbers, the tables above are not paired).", "",
+              "| quantity | engine | JAX |", "|---|---|---|",
+              f"| draws/s, trunk toy pot, 64 draws | {p['engine_draws'][0]['draws_per_second']:.1f} (LSODA rtol 1e-8) | "
+              f"{p['jax_draws'][0]['draws_per_second']:.1f} (rtol 1e-8); {p['jax_draws'][1]['draws_per_second']:.1f} "
+              "(rtol 1e-6) |",
+              f"| one residual, 3 pots | {p['engine_seconds_per_residual']:.2f} s | {p['jax_residual_seconds']:.2f} s |",
+              f"| one Jacobian, 5 coordinates | {6 * p['engine_seconds_per_residual']:.2f} s forward FD (6 runs); "
+              f"{11 * p['engine_seconds_per_residual']:.2f} s central (11) | {p['jax_jacobian_seconds']:.2f} s exact |",
+              f"| trunk toy fit | {p['engine_fit']['polished']['wall_seconds']:.1f} s polished "
+              f"({p['engine_fit']['polished']['evaluations']} evaluations); "
+              f"{p['engine_fit']['forward_only']['wall_seconds']:.1f} s forward only | "
+              f"{p['jax_fit_warm']['wall_seconds']:.1f} s warm ({p['jax_fit_warm']['nfev']} residuals + "
+              f"{p['jax_fit_warm']['njev']} Jacobians) |", ""]
+    L += ["## 5. Findings", ""]
     L += [f"{i}. {t}" for i, t in enumerate(report.get("findings", []), 1)]
     return "\n".join(L) + "\n"
 
@@ -469,10 +544,18 @@ def write_markdown(report: Dict[str, Any]) -> str:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     parser.add_argument("--stage", action="append", choices=STAGES)
+    parser.add_argument("--markdown", action="store_true", help="rewrite the findings and the .md from the .json")
     args = parser.parse_args(argv)
     import diffrax
     import jax
 
+    if args.markdown:
+        path = OUT.with_suffix(".json")
+        report = json.loads(path.read_text())
+        report["findings"] = FINDINGS
+        path.write_text(json.dumps(report, default=float, indent=1) + "\n", encoding="utf-8")
+        OUT.with_suffix(".md").write_text(write_markdown(report), encoding="utf-8")
+        return 0
     reference = load_reference()
     stages = args.stage or list(STAGES)
     path = OUT.with_suffix(".json")
@@ -492,7 +575,43 @@ def main(argv=None) -> int:
 
 
 #: the write-up's closing section, edited by hand after reading the numbers (kept here so the .md regenerates)
-FINDINGS: List[str] = []
+FINDINGS: List[str] = [
+    "**The forced-input driver is exact where the engine can be compared and convergent where it cannot.** A forced "
+    "constant pH or temperature is bit-identical to the prescribed / segment mode (0 dex). A 'previous' pH + "
+    "temperature course reproduces the engine's per-segment staircase run (the only pH trajectory the engine can "
+    "run) to 4e-11 dex. Linear courses converge on midpoint staircases at second order (ratios -> 4), once the "
+    "course ends on a hold: at the end of a ramp the quasi-steady pools (1-DG, AF) track the current rate constants "
+    "and a staircase's last step is half a step off, a first-order endpoint error (ratios 2.0 - 2.5 before the hold "
+    "was added). The lipid ramp across the 100 C window converges erratically, as it must: the staircase misplaces "
+    "the jump by up to half a step, while the forced course has a knot exactly at the crossing.",
+    "**A forced species leaves the state cleanly.** A clamped constant glycine equals the network with glycine's row "
+    "removed (3e-15 dex), and the forced-exchange ledger closes C / N / S to 1e-15 of E . y0 on a falling course. "
+    "The exact Jacobian through a linear pH course crossing B18's knot equals column-scaled central differences to "
+    "7e-9: with the crossing a data-fixed knot there is no missing term.",
+    "**The fit driver reaches the engine's polished optimum.** Trunk-lane toy (55 steps, 3 pots, 5 coordinates): "
+    "cost 3e-8 relative, theta within 2.3e-4 Laplace sigma (5.6e-4 of the chi-square-scaled sigma); lipid toy (4 "
+    "coordinates): 4e-8, 1.1e-4 sigma. Both batch modes agree. The exact Jacobian equals central differences to "
+    "<= 2e-9 at the optimum and the residuals move <= 4e-6 dex between rtol 1e-6 and 1e-8 (sec. 2.6's rule passes). "
+    "One trf run on the exact Jacobian ends where the engine's forward fit plus its central polish ends. On these "
+    "well-conditioned toys the engine's forward fit alone was already close (0.015 sigma short on the trunk toy, "
+    "0.002 on the lipid one), so they do not show the polish's stiff-pot case.",
+    "**It is not faster on these toys (paired, same load).** One JAX forward solve of the 3 trunk pots costs ~3x "
+    "LSODA's; the exact 5-coordinate Jacobian costs about 1.6x the forward-difference one and about 0.9x the central "
+    "one. The JAX fit needs 6 iterations against the engine's 79 evaluations, and lands at about 1.2x the engine's "
+    "polished wall time (warm; compile adds ~23 s once per structure). On the lipid toy the engine's closed form wins "
+    "outright (0.5 s against 0.8 - 1.1 s warm). The bake-off's 2.5 - 6.6x was at 16 coordinates on the stiff sulfur "
+    "pot: forward mode's advantage grows with the coordinate count and with how poor the forward-difference Jacobian "
+    "is, and 5 well-conditioned coordinates are its worst case.",
+    "**Draws: no CPU gain at equal tolerance, about 2.4x at rtol 1e-6.** Paired: the engine 9.0 draws/s on the "
+    "trunk toy pot, the Predictor 7.5 (rtol 1e-8) and 21 (rtol 1e-6). Unpaired, under loads of 25 - 36: 4.8 - 5.1 "
+    "draws/s at 64, 512 and 2048 draws, flat in the batch size as the contract predicted (vmap removes dispatch "
+    "overhead only). The density bridge's value on CPU is exactness and one code path, not speed; at rtol 1e-6 "
+    "(allowed where the residual check passes) it is about 2.4x.",
+    "**What remains before sulfur:** nothing blocking. The charge-closure check is a typed stub that needs the "
+    "sulfur port's inventory; declared competition defaults to report (the ported modules carry undeclared pairs) "
+    "and becomes refuse with the sulfur port; the in-situ pH scale, the clamped mode and the sulfur profile mode come "
+    "with that port.",
+]
 
 
 if __name__ == "__main__":

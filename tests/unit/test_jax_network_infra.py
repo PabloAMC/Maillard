@@ -194,7 +194,7 @@ def test_the_fit_driver_reaches_the_engines_polished_optimum_on_the_lipid_toy(en
     fit, toy = env["fit"], env["reference"]["lipid_toy"]
     problem = env["bk"].toy_problem(toy, "lipid")
     result = fit.fit(problem, toy["start"], budget=200, require_converged="raise")
-    eng = np.asarray(list(toy["polished"]["theta"].values()))
+    eng = np.asarray([toy["polished"]["theta"][f"{c['module']}.{c['coordinate']}"] for c in toy["coordinates"]])
     sigma = fit.laplace(problem, result)["sigma"]
     assert np.max(np.abs(result.theta - eng) / sigma) < 1e-3
     assert abs(result.cost - toy["polished"]["cost"]) / toy["polished"]["cost"] < 1e-6
@@ -244,7 +244,7 @@ def test_predictor_equals_single_solves_and_the_likelihoods_equal_gaussian_log_d
     toy = env["reference"]["lipid_toy"]
     problem = env["bk"].toy_problem(toy, "lipid")
     net = problem.net
-    obs = [o for o in problem.observations if o.pot == 1]
+    obs = [dataclasses.replace(o, pot=0) for o in problem.observations if o.pot == 1]   # pot 1, alone
     rng = np.random.default_rng(3)
     draws = np.asarray(toy["start"]) + rng.normal(size=(5, 4)) * np.asarray([0.1, 3.0, 0.02, 0.05])
     draws[:, 2:] = np.clip(draws[:, 2:], 0.0, 0.9)

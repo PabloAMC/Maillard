@@ -217,6 +217,7 @@ run = forcing.integrate_forced(net, theta, fp.pot, F)    # ys (S, n), exchange (
 - **`log_likelihoods(pred, y, cov)`** is `gaussian_log_density` for every draw, with one Cholesky. It refuses failed draws unless the caller declares `on_failed="impossible"` (-inf, which `importance_lppd` counts).
 - **`log_integrand`** composes both with a log prior, as `quadrature_lppd`'s callback and `importance_lppd`'s array.
 - **Scope:** units whose pots the network covers, which today means the trunk, trunk-lane, acrylamide and lipid lanes. Not sulfur.
+- **Cost on CPU:** no gain at equal tolerance. Paired on a trunk-lane pot, the engine ran 9.0 draws/s against 7.5 at rtol 1e-8 and 21 at rtol 1e-6; draws/s are flat from 64 to 2048 draws. The bridge's value is exactness and one code path. Its speed is a GPU question (sec. 2.8).
 
 ## 3. Acceptance against today's lanes (replaces A2a's bit-identity)
 
@@ -301,11 +302,13 @@ A module that follows 1 - 3 ports onto the network as a `build(cfg) -> Module` i
    - amine classes;
    - declared Cys competition;
    - the union network at a stated tolerance, with the recorded diff.
-4. **The fit driver:**
+4. **The fit driver: done 2026-11-05 (v2.2, sec. 2.12)**:
    - least squares on forward-mode Jacobians;
    - per-pot failure flags;
-   - one compile cache per configuration;
+   - one compile per pot shape;
    - the rtol 1e-6 residual check (sec. 2.6).
+
+   On two synthetic toys it reaches `fitting.fit`'s central-polished optimum: cost to 4e-8 relative, theta to 2.3e-4 Laplace sigma. Paired with the engine at the same load it is NOT faster at 5 coordinates: the JAX solve costs ~3x LSODA, the exact Jacobian ~1.6x the forward-difference one and ~0.9x the central one, and a warm fit runs ~1.2x the polished engine fit ([jax_network_infra.md](../../results/validation/jax_network_infra.md) findings 3 - 5). Forward mode pays at many coordinates and on stiff pots where the forward-difference Jacobian is poor (the bake-off's 2.5 - 6.6x at 16 coordinates).
 
 **The hardest risks (v2).**
 - **Forward-solve cost.**
@@ -329,8 +332,8 @@ Revised estimates, in hours of agent work (finding 6 of [jax_lipid_module.md](..
 
 | work | hours |
 |---|---|
-| sulfur (every remaining switch, the pH solver in `integrate`, profile mode) | 5 - 10 |
 | ~~trunk lane's seven blocks~~ (done 2026-11-05: ~1 h of agent work plus ~1.5 h of unattended compute, against 3 - 6 h) | 0 |
-| network infrastructure (merged titratable table, declared competition, forced inputs, the fit driver) | 6 - 12 |
+| ~~network infrastructure~~ (done 2026-11-05: forced inputs, the fit driver, the density bridge, the competition and titratable hooks; the charge closure is a typed stub that lands with sulfur; ~2.5 h of agent work plus ~0.5 h of unattended compute, against 6 - 12 h) | 0 |
+| sulfur (every remaining switch, the pH solver in `integrate`, profile and clamped modes, the in-situ pH scale, the charge closure over the merged table, declared competition switched to "refuse") | 6 - 12 |
 | the pH-root performance step | 3 - 6 |
-| **total remaining** | **~14 - 28** (p ~0.6 of landing inside; finding 7 of [jax_trunk_lane_module.md](../../results/validation/jax_trunk_lane_module.md)); unattended compute on a shared machine adds ~1x |
+| **total remaining** | **~9 - 18** (p ~0.6 of landing inside); unattended compute on a shared machine adds ~1x |
