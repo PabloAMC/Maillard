@@ -676,9 +676,10 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
             + "; ".join(f"{s} {m:+.2f} nats/row ({label})" for s, m, label in r.relative_branch)
             + " -- in the reset set THE NULL IS BETTER (D3: below -2 SE, sign-flip p <= 2/32)"
             + f"; omega {r.omega_dex:.2f} + noise {r.class_noise_dex:.2f} dex per arm in the interval",
-            VERDICT_CAUTION,
-            "shipped by D2 branch (i), with the owner's note: no evidence of beating a null, and in one set the null "
-            "is better",
+            # owner, 2026-11-05: CAUTION -> DO-NOT-USE
+            VERDICT_DO_NOT_USE,
+            "the worse of H0's two sets governs (as for omega): in the reset set the null is shown better (D3: below "
+            "−2 SE); shipped by D2 branch (i) with this label until evidence (M1c / M2, H1) earns better",
         )
     )
     if env.get("available"):
