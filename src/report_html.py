@@ -1120,6 +1120,13 @@ def render_predict_report(payload: Mapping[str, Any]) -> str:
         f'<div class="card">{_declaration_block(declaration)}</div>',
         "</div>",
     ]
+    # 2026-11-05: the targets refused BY NAME (one refused target does not sink the others; since H0 / EX-059 the
+    # thiol lane's absolute levels among them) get their own card, as every other refusal does.
+    for refused in payload.get("refused_targets") or []:
+        body.append(
+            f'<div class="card refusal"><h4>Not answered, by name: <code>{esc(refused.get("target"))}</code></h4>'
+            f'<p>{esc(" ".join(refused.get("reasons") or []))}</p></div>'
+        )
 
     if not answered:
         body.append(
@@ -1436,6 +1443,11 @@ def render_compare_report(payload: Mapping[str, Any]) -> str:
             ratio_cell = "B only (A is zero)"
         else:
             ratio_cell = f"{ratio:.3g}&times;"
+        interval = row.get("interval_90_ratio_a_over_b")
+        if interval:
+            # H0 / EX-059: a thiol-lane ratio carries omega in each arm
+            ratio_cell += (f'<div class="tiny">90 %: {interval[0]:.3g}&ndash;{interval[1]:.3g}&times; '
+                           f"(omega {row['omega_dex_per_arm']:.2f} + noise {row['noise_dex_per_arm']:.2f} dex per arm)</div>")
         # An UNDEFINED ratio is a third state: it is neither resolved nor
         # unresolved, because there is no ratio to resolve. Badging it
         # "resolved" would read as a claim about a quantity that does not exist.
@@ -1461,13 +1473,21 @@ def render_compare_report(payload: Mapping[str, Any]) -> str:
         '<th class="num">A / B</th><th>direction</th><th>state</th><th>note</th>'
         "</tr></thead><tbody>" + "".join(table_rows) + "</tbody></table>"
     )
+    if comparison.get("relative_caveat"):
+        body.append(f'<div class="card warn"><p>{esc(comparison["relative_caveat"])}</p></div>')
+    if comparison.get("absolute_refused"):
+        body.append(
+            '<div class="card refusal"><h4>Absolute levels withheld, by name: '
+            + ", ".join(f"<code>{esc(c)}</code>" for c in comparison["absolute_refused"])
+            + f"</h4><p>{esc(next(iter(comparison['absolute_refused'].values())))}</p></div>"
+        )
 
     resolved_chart = [
         {
             "label": str(row.get("compound")),
             "point": float(row["ratio_a_over_b"]),
-            "lo": None,
-            "hi": None,
+            "lo": (row.get("interval_90_ratio_a_over_b") or [None, None])[0],
+            "hi": (row.get("interval_90_ratio_a_over_b") or [None, None])[1],
             "highlight": False,
             "tag": None if not row.get("within_reliability_band") else "NOT RESOLVED",
         }

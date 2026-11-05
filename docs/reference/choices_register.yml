@@ -291,3 +291,50 @@ entries:
     sensitivity:
       status: harmless
       result: "no panel row, directional arm or contrast has a programme peaking in 25-120 C except TEMP-02's 25 C control, which every alternative but refuse_below_120 keeps"
+
+  - id: CR-18
+    what: which observables the thiol lane's absolute refusal covers (H0 / EX-059, D2 branch (i))
+    where: {file: src/kinetic_core/thiol_relative_only.py, symbol: RELATIVE_ONLY_SPECIES}
+    kind: policy
+    current: "MFT, FFT, MFTD, FUR (furfural), NF (norfuraneol), MGO (methylglyoxal), each only when the sulfur lane runs: every species on EX-056's paired rows of the five scorable laboratories (the rows H0's ship-rule quantities are computed on) that the shipped sulfur lane answers for a pentose + cysteine pot"
+    basis: >-
+      D2 (kinetic_core_between_lab_tau_h0_prereg.md sec. 6) rules the lane: branch (i) ships relative within-laboratory
+      predictions only and refuses absolute concentrations for a new laboratory; tau_ABS(all) 0.964 dex (reset set, the
+      larger), U >= 1.60. The owner applied it on 2026-11-05 to exactly the set H0 scored. Read from the records (and
+      re-derived by tests/unit/test_thiol_relative_only.py): the paired rows hold MFT, FFT (DFA, sida), FUR, NF, MGO
+      (calibrated), TDP (figures) and MFTD (shape only); "answers" is read by running declare_envelope on a pentose +
+      cysteine pot, not from the target-lane table. MGO is in (review 2026-11-05: the sulfur lane answers it, 2.97 ug/L
+      in a ribose + cysteine pot, and it is most of tau_ABS's rows: Jiangnan 81, Ochanomizu 3); a trunk MGO, with no
+      sulfur charge, is another network H0 did not score and stays answered. TDP is not a target. Out because H0 did
+      not score them: 2-acetylthiazole (one unpaired Jiangnan row, D-all only), FFTD and DPO (unpaired, not targets),
+      Nestle's acetic acid and pentose rows (D-all only), H2S and methanethiol (not in the fit table). H0 scored R3En;
+      the shipped sulfur constants are B60's, so refusing their absolute levels is the conservative transfer. Readings not taken: the ABS class only (MFT, FFT, FUR, NF: would
+      ship an absolute MFTD that H0 tested only on shape, i.e. with no level evidence at all) and the thiols only (MFT,
+      FFT, MFTD: would drop furfural and norfuraneol, which H0 scored in the absolute class). A calibration made by
+      calibrate from the laboratory's own levels (a response factor with >= 1 row and sigma > 0, fit records, and
+      calibrate's provenance) is answered: the level is then that laboratory's; a hand-written or empty file is not.
+    alternatives: []
+    decided_by: "owner, 2026-11-05: apply D2 branch (i) to the shipped outputs, scoped to exactly what H0 scored"
+    sensitivity: {status: not_applicable}
+
+  - id: CR-19
+    what: the within-laboratory shape error omega in a thiol-lane ratio's interval (H0 / EX-059)
+    where: {file: src/kinetic_core/thiol_relative_only.py, symbol: omega_set}
+    kind: alternatives
+    current: "omega = 0.419 dex (the larger of H0's two sets, warm) and the measurement noise s = 0.097 dex (the smallest class noise of EX-056's largest training set, the Reading fold) in each arm: a two-arm ratio's 90 % half-width is 1.645 * sqrt(2 omega^2 + 2 s^2) = 1.00 dex (a factor 10.0 either way), and a ratio is resolved only when that interval excludes 1; a calibrated level (itself a two-row ratio) carries 1.645 * sqrt(sigma_rf^2 + omega^2 + omega^2 / n)"
+    basis: >-
+      H0's relative predictive centres a row on its group with variance s_i^2 - 1/W + c_i omega^2 (prereg sec. 2;
+      sec. 5, score 6), so a one-species ratio of two rows carries 2 omega^2 + s_a^2 + s_b^2. A ratio from compare names
+      no measurement method, so s is the smallest class noise on record (calibrated 0.097; sida 0.10, zhou_free 0.24,
+      semi_figure 0.30 in the same fold). H0 reports omega(all) 0.419 (warm) and 0.390 (reset); its ship rule reads the
+      larger set (prereg sec. 3.6 and D2; amendment A1 item 3), and the review notes the declared leaks bias omega low,
+      so the larger omega is the conservative reading. omega is R3En's (H0 scored R3En; the shipped constants are
+      B60's): it is borrowed, and no measurement of B60's own within-laboratory shape error exists. It enters once:
+      before this no interval in the engine carried a within-laboratory shape term.
+    alternatives:
+      - {name: larger_set, value: "omega 0.419 dex (warm): factor 10.0 at 90 %"}
+      - {name: d2_set, value: "omega 0.390 dex (reset, the set whose tau D2 read): factor 8.6 at 90 %"}
+    decided_by: "the prereg's two-set precedence for the ship rule (sec. 3.6 and D2; A1 item 3), applied to omega; 2026-11-05, revised after the branch review the same day"
+    sensitivity:
+      status: harmless
+      result: "no scored artifact reads the ratio interval or compare's 'resolved' flag: the scorecard, the contrast diagnostic, the directional panel and the contrast benchmark score levels, ratios or signs with their own noise rule"
