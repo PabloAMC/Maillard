@@ -216,7 +216,16 @@
       "incorporation_status": "encoded_modeled_shown",
       "next_action": "Keep as the native matrix-only off-flavour anchor.",
       "confidence_tier": "high",
-      "notes_on_limits": "Ambient slurry only; not a heated Maillard benchmark."
+      "notes_on_limits": "Ambient slurry only; not a heated Maillard benchmark.",
+      "citation_repair": {
+        "old": "Pratap-Singh et al. (2021), Molecules 26:4104",
+        "new": "Singh, Shi, Magreault, Kitts, Jarzębski, Siejak & Pratap-Singh (2021), Molecules 26:4104",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record: Pratap-Singh is the LAST author; the first author is Anika Singh. Author list read from the Crossref record of the DOI and matches the dossier singh2021_extraction.md and data/articles/singh2021.pdf. DOI and content are right (verified 2026-08-27 and 2026-09-11). Triage: results/validation/literature_metadata_triage_2026-11-05.md.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Singh, Shi, Magreault, Kitts, Jarzębski, Siejak & Pratap-Singh (2021), Molecules 26:4104"
     },
     {
       "slr_section": "2.1",

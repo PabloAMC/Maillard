@@ -114,7 +114,16 @@
         "basis": "PMID 37930115 in the source record resolved via NCBI ID Converter; verified against CrossRef",
         "confidence": "high",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Bacher, Eberhardt & M\u00fcller (2023)",
+        "new": "Rocchi, Wolkers-Rooijackers, Liao, Tempelaars & Smid (2023), Yeast 40:628-639",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMID 37930115 printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Strain diversity in Saccharomyces cerevisiae thiamine production capacity', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Rocchi, Wolkers-Rooijackers, Liao, Tempelaars & Smid (2023), Yeast 40:628-639"
     },
     {
       "citation": "Davidek et al. (2006)",
@@ -221,7 +230,16 @@
         "basis": "PMC12427843 in the source record resolved via NCBI ID Converter; verified against CrossRef",
         "confidence": "high",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Deng et al. (2024)",
+        "new": "Zhu, Zhu, Wang, Cao, Ren & Zhao (2025), Foods 14:3065",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMC12427843 printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Fermentation of Pea Protein Isolate by Enterococcus faecalis 07: A Strategy to Enhance Flavor and Functionality', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Zhu, Zhu, Wang, Cao, Ren & Zhao (2025), Foods 14:3065"
     },
     {
       "citation": "DOI ref. 40 in raw/11_maillard_lipid_crosstalk.md",
@@ -591,7 +609,16 @@
         "basis": "PMID 35749878 in the source record resolved via NCBI ID Converter; verified against CrossRef",
         "confidence": "medium",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Kocada\u011fl\u0131 & G\u00f6kmen (2016)",
+        "new": "Kaspchak, Toci, Menezes, Igarashi-Mafra & Mafra (2022), Food Chem. 394:133518",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMID 35749878 printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Effect of phytic acid, tannic acid and saponin on asparagine-glucose Maillard reaction', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md. The repo's label is a different paper: Kocada\u011fl\u0131 & G\u00f6kmen 2016 (10.1016/j.foodchem.2016.05.150, data/articles/Kocadagli2016.pdf) is a glucose/wheat-flour kinetic model with no saponin. The description's numbers (pyrazine skew >60%, DSC shift -6 C, LOQ 10 ug/kg) have NOT been checked against Kaspchak 2022.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Kaspchak, Toci, Menezes, Igarashi-Mafra & Mafra (2022), Food Chem. 394:133518"
     },
     {
       "citation": "Lee, Jo & Kim (1998)",
@@ -803,7 +830,16 @@
         "basis": "PMC8399179 in the source record resolved via NCBI ID Converter; verified against CrossRef",
         "confidence": "medium",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Noda, Tanaka & Takahashi (2003)",
+        "new": "Ito & Matsuyama (2021), J. Fungi 7:658",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMC8399179 (and 'MDPI Fungi 7:658') printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Koji Molds for Japanese Soy Sauce Brewing: Characteristics and Key Enzymes', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md. Year: 2021, not 2003.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Ito & Matsuyama (2021), J. Fungi 7:658"
     },
     {
       "citation": "Perdiguero et al. (2004)",
@@ -1414,7 +1450,16 @@
         "basis": "PMC10706403 in the source record resolved via NCBI ID Converter; verified against CrossRef",
         "confidence": "high",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Rietjens et al. (2023)",
+        "new": "Rodr\u00edguez Valer\u00f3n, Mak, Jahn, Arboleya & S\u00f6rensen (2023), Foods 12:4297",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMC10706403 printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Derivation of Kokumi \u03b3-Glutamyl Peptides and Volatile Aroma Compounds from Fermented Cereal Processing By-Products for Reducing Bitterness of Plant-Based Ingredients', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Rodr\u00edguez Valer\u00f3n, Mak, Jahn, Arboleya & S\u00f6rensen (2023), Foods 12:4297"
     },
     {
       "citation": "Rocha et al. (2024)",
@@ -1443,7 +1488,16 @@
         "basis": "citation gives Foods 13:1916; CrossRef record with that container/volume/first-page matched",
         "confidence": "high",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Rocha et al. (2024)",
+        "new": "Berzosa, Mar\u00edn-S\u00e1nchez, \u00c1lvarez, S\u00e1nchez-Gimeno & Raso (2024), Foods 13:1916",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from 'Foods 13:1916' printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Pulsed Electric Field Technology for the Extraction of Glutathione from Saccharomyces cerevisiae', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Berzosa, Mar\u00edn-S\u00e1nchez, \u00c1lvarez, S\u00e1nchez-Gimeno & Raso (2024), Foods 13:1916"
     },
     {
       "citation": "Ruiz-Aceituno et al. (compiled 2016)",
@@ -1922,7 +1976,16 @@
         "basis": "PMC12969450 in the source record resolved via NCBI ID Converter; verified against CrossRef",
         "confidence": "medium",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Ince et al. (2024)",
+        "new": "Ince, Condict, Ashton, Stockmann & Kasapis (2026), Food Chem. Mol. Sci. 12:100379",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMC12969450 printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Effect of temperature on interactions between soy 11S glycinin and hexanal \u2013 An off-flavour compound', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md. Year: the record is the June 2026 issue (Food Chem. Mol. Sci. 12); the scraped '2024' and 'Int J Biol Macromol' are both wrong.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Ince, Condict, Ashton, Stockmann & Kasapis (2026), Food Chem. Mol. Sci. 12:100379"
     },
     {
       "citation": "JAFC DOI:10.1021/acs.jafc.3c05991",
@@ -2991,7 +3054,16 @@
         "basis": "PMC9868338 in the source record resolved via NCBI ID Converter; verified against CrossRef",
         "confidence": "medium",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Huang et al. (2021)",
+        "new": "Zheng, Wei, Liu, Thakur, Zhang & Wei (2023), Curr. Res. Food Sci. 6:100445",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMC9868338 printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'GC-MS and GC\u00d7GC-ToF-MS analysis of roasted / broth flavors produced by Maillard reaction system of cysteine-xylose-glutamate', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md. Year: 2023 (Curr. Res. Food Sci. 6), not 2021.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Zheng, Wei, Liu, Thakur, Zhang & Wei (2023), Curr. Res. Food Sci. 6:100445"
     },
     {
       "citation": "J. Agric. Food Chem. 2019 (Ref. 21)",
@@ -3142,7 +3214,16 @@
         "basis": "PMC12484514 in the source record resolved via NCBI ID Converter; verified against CrossRef",
         "confidence": "medium",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Ordoudi et al. (2014 / PMC12484514)",
+        "new": "Chan, Mokhtar & Hong (2025), J. Food Sci. Technol. 62:1999-2012",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMC12484514 printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'A systematic review on the determination and analytical methods for furanic compounds in caramel models', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md. The DOI is the 2025 SYSTEMATIC REVIEW the description names, not Ordoudi et al. 2014; the HMF numbers are therefore at best secondary (review-reported) and have not been traced to a primary paper.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Chan, Mokhtar & Hong (2025), J. Food Sci. Technol. 62:1999-2012"
     },
     {
       "citation": "PMC 2024 (PMC12451096)",
@@ -3527,7 +3608,16 @@
         "basis": "citation gives Foods 9:251; CrossRef record with that container/volume/first-page matched",
         "confidence": "high",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Soladoye et al. (2020)",
+        "new": "Hwang, Ismail & Joo (2020), Foods 9:251",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from 'Foods 9:251' printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Identification of Umami Taste in Sous-Vide Beef by Chemical Analyses, Equivalent Umami Concentration, and Electronic Tongue System', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Hwang, Ismail & Joo (2020), Foods 9:251"
     },
     {
       "citation": "USPTO PTACTS (2023 compiled)",
@@ -3663,12 +3753,28 @@
       ],
       "registry_id": "wang_2012_gsh_xylose_sulfur_uplift",
       "runtime_artifact_count": 1,
-      "doi": "10.1016/j.foodchem.2011.07.044",
+      "doi": "10.1016/j.foodchem.2011.08.079",
       "doi_resolution": {
         "basis": "journal/volume/page given in the note (Food Chem 130:316) matched in CrossRef; note that the note's description (glutathione/xylose Maillard) does not match that record's subject, so the volume/page in the source citation is probably wrong",
         "confidence": "medium",
         "date": "2026-08-26"
-      }
+      },
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2011.07.044",
+        "new": "10.1016/j.foodchem.2011.08.079",
+        "date": "2026-11-05",
+        "basis": "The old DOI was matched on 2026-08-26 from the note's 'Food Chem 130:316' and resolves to Tsai, Yen & Chou, 'Changes in Muscovy duck breast muscle marinated with ginger extract' (Food Chem. 130:316-320), as that resolution's own basis already warned. The paper the item describes (a glutathione-xylose Maillard reaction, CAMOLA, Wang, Food Chem., 2012) is Wang, Yang & Song, 'Key meat flavour compounds formation mechanism in a glutathione-xylose Maillard reaction', Food Chem. 131:280-285 (2012): title, authors, year and venue read from the first page of data/articles/wang2012.pdf and confirmed on Crossref; the dossier is data/lit/extraction_dossiers/wang2012_extraction.md. Triage: results/validation/literature_metadata_triage_2026-11-05.md.",
+        "content_caveat": "The item's description is only partly in Wang, Yang & Song 2012. Confirmed: GSH + xylose, cysteine-bearing comparison pots (Glu+Cys+Gly, Cys+Gly, Cys-Gly; Table 1-2) and CAMOLA with [13C5]-xylose (Table 3). NOT in the paper: bis(2-methyl-3-furyl) disulfide is not reported (wang2012_extraction.md, 'Not reported'), and there is no SIDA (quantification is relative to the internal standard 2-methyl-3-heptanone). The '2.25x MFT' and '4.4x' ratios were not traced to Table 2. The DOI now names the right paper; the description's numbers remain unsourced."
+      },
+      "citation_repair": {
+        "old": "Wang, Z. et al. (2012)",
+        "new": "Wang, Yang & Song (2012), Food Chem. 131:280-285",
+        "date": "2026-11-05",
+        "basis": "Authors, year, venue and pages read from the first page of data/articles/wang2012.pdf (Ran Wang, Chao Yang, Huanlu Song). The scraped 'Z.' initial is not in the record. See doi_repair on this item.",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Wang, Yang & Song (2012), Food Chem. 131:280-285"
     },
     {
       "citation": "Yeo & Mottram (2023)",
@@ -3819,7 +3925,16 @@
         "basis": "PMC9998214 in the source record resolved via NCBI ID Converter; verified against CrossRef",
         "confidence": "medium",
         "date": "2026-08-26"
-      }
+      },
+      "citation_repair": {
+        "old": "Ahlberg & Mohammadi (2021)",
+        "new": "Tao, Yuan, Liu, Liu, Zhang, Liu, Jiang, Huang & Wang (2022), J. Microbiol. Biotechnol. 33:151-166",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMC9998214 printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Yeast Extract: Characteristics, Production, Applications and Future Perspectives', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md. Year: online 2022-10-17, issue 2023 (vol. 33).",
+        "new_field": "verified_citation",
+        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Tao, Yuan, Liu, Liu, Zhang, Liu, Jiang, Huang & Wang (2022), J. Microbiol. Biotechnol. 33:151-166"
     },
     {
       "citation": "Arabshahi & Lund (1988)",

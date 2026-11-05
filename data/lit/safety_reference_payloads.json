@@ -420,7 +420,16 @@
         "Direct finished-product endpoint benchmarking",
         "Exact process reconstruction for SPI or PPI matrices"
       ],
-      "comment": "Use as an extended process-modifier reference when additive composition or foaming-active fractions are expected to move both acrylamide and pyrazine posture."
+      "comment": "Use as an extended process-modifier reference when additive composition or foaming-active fractions are expected to move both acrylamide and pyrazine posture.",
+      "citation_repair": {
+        "old": "Kocadağlı & Gökmen (2016)",
+        "new": "Kaspchak, Toci, Menezes, Igarashi-Mafra & Mafra (2022), Food Chem. 394:133518",
+        "date": "2026-11-05",
+        "basis": "OpenAlex verify run 2026-11-05 flagged author_not_in_record. The DOI was resolved on 2026-08-26 from PMID 35749878 printed in the source record, and that identifier maps to this DOI in OpenAlex; the Crossref record is titled 'Effect of phytic acid, tannic acid and saponin on asparagine-glucose Maillard reaction', which matches the record's description, so the DOI is right and the scraped author/year label is not. Authors, year and venue read from the Crossref record. Triage: results/validation/literature_metadata_triage_2026-11-05.md. The repo's label is a different paper: Kocadağlı & Gökmen 2016 (10.1016/j.foodchem.2016.05.150, data/articles/Kocadagli2016.pdf) is a glucose/wheat-flour kinetic model with no saponin. The description's numbers (pyrazine skew >60%, DSC shift -6 C, LOQ 10 ug/kg) have NOT been checked against Kaspchak 2022.",
+        "new_field": "verified_citation",
+        "note": "The scraped `source_citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
+      },
+      "verified_citation": "Kaspchak, Toci, Menezes, Igarashi-Mafra & Mafra (2022), Food Chem. 394:133518"
     },
     {
       "id": "ramirez_jimenez_2000_furosine_crossover",
