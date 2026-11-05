@@ -391,9 +391,9 @@ def _anchor_tally(sulfur: Mapping[str, Any]) -> str:
     hit_oos = sum(1 for o in oos if o.get("within_3x"))
     if not rows:
         # 2026-11-05 (H0 / EX-059): the thiol lane's absolute levels are refused, so no anchor row is scored
-        return ("none of them as a scored absolute: since 2026-11-05 the thiol lane ships relative within-laboratory "
-                "predictions only (H0 / EX-059, D2 branch (i)), so every anchor row is refused for its level and "
-                "kept for the within-study contrasts")
+        return ("no scored anchor rows within 3x to report: since 2026-11-05 the thiol lane ships relative "
+                "within-laboratory predictions only (H0 / EX-059, D2 branch (i)), so every anchor row is refused for "
+                "its level, kept only for the within-study contrasts, and the branch has no scored absolute anchor")
     return (f"{hit} of its {len(rows)} scored anchor rows within 3x ({hit_oos} of the {len(oos)} that "
             f"no core fit read; the rest are fed-intermediate rows the sulfur fit read, which are not "
             f"evidence)")
