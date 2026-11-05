@@ -131,8 +131,12 @@ def test_exact_jacobian_equals_central_differences(setup):
     jac = np.asarray(jac)
     keys = [k for _, k in net.coordinates]
     cols = [keys.index(c) for c in fd["columns"]]
+    # the engine's differences are LSODA-noise-limited (~1e-7 dex per unit): relative on the columns above 1e-4 of
+    # the largest entry, absolute on all
     errors = bk.column_errors(jac[:, cols], np.asarray(fd["jacobian"]))
-    assert errors["worst"] < 1e-4, errors
+    assert errors["n_relative_columns"] >= 30
+    assert errors["worst"] < 2e-4, errors
+    assert errors["worst_absolute"] < 1e-6, errors
     # against the port's own central differences on a few columns
     f = jax.jit(lambda v: observe(network.integrate(net, network.theta_from_vector(net, v), pot,
                                                     rtol=1e-12, atol=1e-20).ys))

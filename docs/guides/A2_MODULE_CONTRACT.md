@@ -185,8 +185,8 @@ The JAX tests skip in the core env (`pytest.importorskip("jax")`). Bit-identity 
 |---|---|---|---|---|---|
 | sulfur | bake-off, R3En configuration only; every other switch refused | 7.1e-15 (252 points x 132 reactions) | 1.8e-11 dex fitted rows (Kvaerno5), stiff corners <= 5e-6 | <= 4e-6 vs own central FD | [jax_bakeoff_sulfur_lane.md](../../results/validation/jax_bakeoff_sulfur_lane.md) |
 | lipid | **ported as a contract module** (2026-11-05) | 1.3e-15 (4752 values: (T, Q10, donor) grid x 22 reactions) | 1.1e-9 dex all species, 4.5e-10 on the scored products (8 panel pots x point and 2 corners, Kvaerno5); profile 5.1e-8 | <= 5e-8 vs the engine's central FD (no solver noise), 4 pots | [jax_lipid_module.md](../../results/validation/jax_lipid_module.md) |
-| trunk | pending | | | | |
-| acrylamide | pending | | | | |
+| trunk (`network.REACTIONS`, the 26 steps the acrylamide lane runs) | **ported as a contract module** (2026-11-05); the trunk LANE's declared terms on these steps ported, its seven extra blocks not yet | 1.3e-15 (75 816 values: trunk-lane terms, (T, pH, a_w) grid x 26 reactions, shipped / perturbed / exit term off) | accepted inside the acrylamide lane (next row); the trunk lane's own trajectories wait on its seven blocks | (next row) | [jax_trunk_acrylamide_module.md](../../results/validation/jax_trunk_acrylamide_module.md) |
+| acrylamide (trunk + `ACRYLAMIDE_REACTIONS`, 42 steps) | **ported as a contract module** (2026-11-05), every `acrylamide_conditions` term; CF-106 refused at the pot | 1.2e-15 (81 648 values: (T, pH, a_w) grid x 42 reactions, shipped and perturbed) | 2.2e-9 dex all species, 1.9e-11 on ACR / HMF (6 panel pots x point and 2 band corners, Kvaerno5); profile with all 42 steps 3.3e-9; panel rows at rtol 1e-6 <= 6e-8 dex | <= 1.3e-6 vs own central FD; <= 8e-5 rel / 3.3e-7 abs vs the engine's (LSODA-noise-limited), 3 pots x 84 coordinates | [jax_trunk_acrylamide_module.md](../../results/validation/jax_trunk_acrylamide_module.md) |
 
 ## 4. What the cases need from the network
 
@@ -243,8 +243,8 @@ A module that follows 1 - 3 ports onto the network as a `build(cfg) -> Module` i
 2. **Lane ports (replaces A2a), each accepted under sec. 3, one writer per lane file.**
    1. lipid: done 2026-11-05 (pH-free; no running chemistry step touches it);
    2. sulfur: the bake-off becomes a contract module, every switch ported or refused, the pH solver moved into `network.integrate` (sec. 2.4), and profile mode added;
-   3. trunk;
-   4. acrylamide.
+   3. trunk: `network.REACTIONS` done 2026-11-05 (the acrylamide lane's trunk; the trunk lane's declared terms on it at the rate level); the trunk lane's seven blocks (dicarbonyl, pyrazine, glycation, aqueous glyoxal, methionine, proline, fed 3-deoxy) remain;
+   4. acrylamide: done 2026-11-05 (pH mode prescribed: the declared pH; Kvaerno4 takes ~0.6x Kvaerno5's steps on its pots).
    
    A lane whose chemistry a running step still reshapes (M1 / M1b / M2 on sulfur and trunk) is ported after that step's verdict, so the port does not chase it.
 3. **A2b (chemistry, judged by evidence, not identity).**
@@ -282,8 +282,7 @@ Revised estimates, in hours of agent work (finding 6 of [jax_lipid_module.md](..
 | work | hours |
 |---|---|
 | sulfur (every remaining switch, the pH solver in `integrate`, profile mode) | 12 - 20 |
-| trunk | 8 - 14 |
-| acrylamide | 5 - 9 |
+| trunk lane's seven blocks (the trunk core and acrylamide took ~1.5 h, 2026-11-05) | 3 - 6 |
 | network infrastructure (merged titratable table, declared competition, forced inputs, the fit driver) | 15 - 25 |
 | the pH-root performance step | 8 - 15 |
-| **total** | **~50 - 85** (p ~0.6 of landing inside) |
+| **total remaining** | **~40 - 65** (p ~0.6 of landing inside; finding 7 of [jax_trunk_acrylamide_module.md](../../results/validation/jax_trunk_acrylamide_module.md)) |

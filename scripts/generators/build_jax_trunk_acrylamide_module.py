@@ -221,16 +221,27 @@ def stage_trajectories(reference, net) -> Dict[str, Any]:
     return {"dex_floor_share_of_max_initial": DEX_FLOOR, "rows": rows}
 
 
-def column_errors(a: np.ndarray, b: np.ndarray, flat: float = 1e-6) -> Dict[str, Any]:
-    """Per column: max |a - b| / max |b| (absolute where the column's max |b| < ``flat``)."""
-    cols = []
+#: a column is compared RELATIVELY where its largest entry is at least this share of the whole Jacobian's largest;
+#: below it (|d log10 obs / d theta| ~ 1e-6, where a finite difference at rtol 1e-12 and step 1e-5 is noise-limited)
+#: the column is compared ABSOLUTELY, and the worst absolute difference over every column is reported too
+RELATIVE_COLUMN_SHARE = 1e-4
+
+
+def column_errors(a: np.ndarray, b: np.ndarray, share: float = RELATIVE_COLUMN_SHARE) -> Dict[str, Any]:
+    """Per column: max |a - b| / max |b| where max |b| >= share x max |b| overall, else max |a - b| (absolute);
+    plus the worst absolute difference over all columns."""
+    flat = share * float(np.max(np.abs(b)))
+    cols, absolute = [], []
     for c in range(b.shape[1]):
         scale = float(np.max(np.abs(b[:, c])))
         diff = float(np.max(np.abs(a[:, c] - b[:, c])))
         cols.append(diff / scale if scale >= flat else diff)
+        absolute.append(diff)
     flat_cols = [c for c in range(b.shape[1]) if float(np.max(np.abs(b[:, c]))) < flat]
     worst = int(np.argmax(cols))
-    return {"per_column": cols, "worst": float(cols[worst]), "worst_column": worst, "flat_columns_absolute": flat_cols}
+    return {"per_column": cols, "worst": float(cols[worst]), "worst_column": worst,
+            "worst_absolute": float(max(absolute)), "flat_columns_absolute": flat_cols,
+            "n_relative_columns": b.shape[1] - len(flat_cols)}
 
 
 def stage_jacobians(reference, net) -> Dict[str, Any]:
@@ -449,17 +460,21 @@ def write_markdown(report: Dict[str, Any]) -> str:
               "synthetic staircase (25 -> 180 -> 100 C, 2 K steps) with every competitor charged, at pH 5.0 and "
               "a_w 0.80, so all 42 steps and every condition term carry flux.", "",
               "## Exact Jacobian (forward mode) vs central differences, at an interior point", "",
-              "Worst column error = max over observables of |difference| / max |reference| in that column (absolute "
-              "on columns whose reference is below 1e-6). Observables: log10 ACR and HMF at the save rows. Every "
-              "coordinate is moved in the engine through its own arguments (a parameter dict, the acrylamide draw); "
-              "the engine's differences carry LSODA's noise at rtol 1e-12.", "",
-              "| pot | observables x coordinates | vs engine central FD (worst coordinate) | vs JAX central FD | JAX FD vs engine FD | fit tol vs tight | rtol 1e-6 vs tight |",
+              "Worst column error = max over observables of |difference| / max |reference| in that column, on the "
+              f"columns whose largest entry is at least {RELATIVE_COLUMN_SHARE:g} of the Jacobian's largest (\"rel\"); "
+              "the worst absolute difference over ALL columns, in dex per coordinate unit, beside it (\"abs\"). "
+              "Observables: log10 ACR and HMF at the save rows. Every coordinate is moved in the engine through its "
+              "own arguments (a parameter dict, the acrylamide draw); the engine's differences carry LSODA's noise "
+              "at rtol 1e-12, which the JAX-FD-vs-engine-FD column measures.", "",
+              "| pot | observables x coordinates (relative columns) | vs engine central FD: rel (worst coordinate) / abs | vs JAX central FD: rel / abs | JAX FD vs engine FD: rel / abs | fit tol vs tight | rtol 1e-6 vs tight |",
               "|---|---|---|---|---|---|---|"]
     for pot_id, r in jac.items():
         e = r["forward_tight_vs_engine_central_fd"]
-        lines.append(f"| {pot_id} | {r['n_observables']} x {r['n_coordinates']} | {e['worst']:.1e} "
-                     f"({e['worst_coordinate']}) | {r['forward_tight_vs_jax_central_fd']['worst']:.1e} | "
-                     f"{r['jax_central_fd_vs_engine_central_fd']['worst']:.1e} | "
+        o = r["forward_tight_vs_jax_central_fd"]
+        x = r["jax_central_fd_vs_engine_central_fd"]
+        lines.append(f"| {pot_id} | {r['n_observables']} x {r['n_coordinates']} ({e['n_relative_columns']}) | "
+                     f"{e['worst']:.1e} ({e['worst_coordinate']}) / {e['worst_absolute']:.1e} | "
+                     f"{o['worst']:.1e} / {o['worst_absolute']:.1e} | {x['worst']:.1e} / {x['worst_absolute']:.1e} | "
                      f"{r['forward_fit_tol_vs_forward_tight']['worst']:.1e} | "
                      f"{r['forward_loose_vs_forward_tight']['worst']:.1e} |")
     lines += ["", "## Panel predictions at fit tolerance vs `engine.predict` (log10 of each scored row's value)", "",
@@ -519,7 +534,61 @@ def main(argv=None) -> int:
 FINDINGS: List[str] = [
     "## Findings",
     "",
-    "(pending)",
+    "1. **Match: yes, at the contract's bar with margin.**",
+    "   - Rates equal the engine's functions to ~1e-15 relative: 81 648 values on the composed acrylamide lane (every "
+    "condition term on and off, a perturbed parameter set and draw), 75 816 on the trunk lane's declared terms.",
+    "   - Every acrylamide panel pot, at its point and both band corners, matches to <= 2.2e-9 dex at rtol 1e-10 "
+    "(Kvaerno5; Kvaerno4 1.4e-9); acrylamide and HMF to <= 1.9e-11. The staircase profile with all 42 steps: "
+    "3.3e-9. The worst species is a trace pool (glucose formed from fructose in the Lin pot, cysteine in the profile).",
+    "   - Panel predictions at the fits' tolerances equal `engine.predict`'s to <= 3e-9 dex at rtol 1e-8 and "
+    "<= 6e-8 dex at rtol 1e-6, against the contract's 1e-4; so rtol 1e-6 is licensed for fits on this lane.",
+    "   - C / N / S close to ~5e-15 relative on every pot.",
+    "2. **Exact Jacobian: correct.** On 3 pots x 84 coordinates (every log10 k_ref and Ea, and the four condition "
+    "coordinates), forward mode equals the port's own central differences to <= 1.3e-6 relative on the columns that "
+    "matter and <= 1e-9 dex per unit everywhere. Against the engine's central differences it is <= 8e-5 relative / "
+    "3.3e-7 absolute, and the JAX-FD-vs-engine-FD column shows the same numbers: that is the engine's LSODA noise "
+    "(rtol 1e-12, step 1e-5), not the port. Unlike the lipid lane, the engine here is an ODE solve, so its differences "
+    "are not noise-free; the contract's \"the port's own otherwise\" applies.",
+    "3. **Kvaerno4 vs Kvaerno5: Kvaerno4 here.** On this network Kvaerno4 takes ~0.6x the steps at every tolerance "
+    "(20 030 vs 33 368 on the panel at rtol 1e-8) at equal or better accuracy. The timing below is Kvaerno5 (the "
+    "contract default); the composed union decides on its own pots.",
+    "4. **atol drives the step count.** On the 30-min Chang pot at rtol 1e-8, Kvaerno5 takes 2248 steps at atol "
+    "1e-14, 947 at 1e-10 and 410 at 1e-8, with acrylamide within 1.4e-10 / 5.9e-10 dex of the engine at the last "
+    "two (Kvaerno4: 1328 / 709 / 462). Several pools stay at exactly zero or are depleted far below 1e-14. The "
+    "smallest scored species here (acrylamide, ~1e-4 mmol/L at 10 ppb) licenses atol ~1e-10 for fits: a further "
+    "2 - 3x on the solve and the Jacobian.",
+    "5. **Cost (provisional, Kvaerno5, rtol 1e-8, atol 1e-14, one core, load ~4 - 5).**",
+    "   - One solve: 0.6 - 0.8x the engine's time on the short extrusion pot and the staircase profile, ~3x slower on the "
+    "isothermal 30-min holds (LSODA is very good at one long stiff segment).",
+    "   - The Jacobian in all 84 coordinates: 2.8 - 2.9x faster than the engine's forward differences on the holds, "
+    "11x on the profile, 15x on the short pot. With atol 1e-10 and Kvaerno4 (findings 3 - 4) the holds should gain "
+    "another ~3x.",
+    "   - Compile: 1 - 2.4 s per solve, 2.5 - 5.4 s per Jacobian, once per configuration and segment count.",
+    "6. **What is and is not ported.**",
+    "   - Ported for every value: the acrylamide lane's terms (formation and elimination a_w, both pH factors with "
+    "the window hold, the CF-039 Ea draws, the CF-104 band outside the window), `panel.thermal_history` (the "
+    "programme is pot data), and on the trunk lane `trunk.three_deoxy_exit_ph_term` (on / off) and "
+    "`trunk.three_deoxy_exit_ph` for steps in this module.",
+    "   - Refused (`UnsupportedConfiguration`): a programme peaking in (60, 120) C (CF-106, as the engine); a charged "
+    "species the network does not carry; an exit term on a step outside `network.REACTIONS`; a non-air atmosphere "
+    "on the trunk lane; a non-unit statistical factor on a trunk step (the two engine paths disagree there).",
+    "   - Not ported: the trunk LANE's seven extra blocks (55 - 26 steps), its pyrazine / methionine / proline pH "
+    "terms and the atmosphere factor (they act on those blocks), and the engine's convention of folding MET / PRO "
+    "into Gly on the trunk lane. So the trunk lane's own trajectories are not yet accepted; its terms on these 26 "
+    "steps are, at the rate level.",
+    "   - Composition: the acrylamide module owns Cys, CBX, FRAG_N and FRAG_S, so `compose` refuses it with a "
+    "sulfur module (as `engine.resolve_lanes` refuses the two lanes); declared Cys competition is A2b's.",
+    "7. **Effort.** The two modules, the contract's pot scalars, the two generators and the tests took ~1.5 h of agent "
+    "work against the 13 - 23 h estimated: no pH state, a pure Arrhenius rate law with two derived steps, and a "
+    "reference path that is the engine's own per-segment functions. Remaining A2 + H3, revised:",
+    "   - the trunk lane's seven blocks and their terms (dicarbonyl, pyrazine, glycation, glyoxal, methionine, "
+    "proline, fed 3-deoxy; the Gly folding; the atmosphere factor): 3 - 6 h;",
+    "   - sulfur (every remaining switch, the pH solver in `integrate`, profile mode): 12 - 20 h;",
+    "   - network infrastructure (merged titratable table and charge closure, declared competition, forced inputs "
+    "including the trajectory form of `prescribed`, the fit driver): 15 - 25 h;",
+    "   - the pH-root performance step: 8 - 15 h.",
+    "   - Total remaining ~40 - 65 h (p ~0.6 of landing inside). The pH-coupled sulfur lane and the merge carry most "
+    "of the uncertainty; the pH-free ports have each come in far under estimate.",
     "",
 ]
 
