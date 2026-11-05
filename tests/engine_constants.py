@@ -259,6 +259,7 @@ CONSTANTS = {
         'uncertainty': 'B18_UNSAMPLED_REASON B55_REASON',
     },
     'label': {
+        'calibration': 'PAYLOAD_CHECKSUM_FIELD',
         'directional': 'INDEPENDENT NOT_EVALUABLE',
         'ea_class_prior': 'CARBOHYDRATE SULFUR_CLASS',
         'engine': 'ACRYLAMIDE B1_VARIANT HEXOSE_ENTRY_UNIDENTIFIED LIPID SULFUR TRUNK',

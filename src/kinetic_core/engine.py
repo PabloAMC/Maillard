@@ -3181,7 +3181,7 @@ def compare(
     if relative_only:
         out["relative_caveat"] = thiol_relative_only.relative_caveat()
     if withheld:
-        out["absolute_refused"] = {c: thiol_relative_only.refusal_text() for c in sorted(withheld)}
+        out["absolute_refused"] = {c: thiol_relative_only.refusal_text(calibration, c) for c in sorted(withheld)}
     return out
 
 
