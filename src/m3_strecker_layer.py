@@ -43,6 +43,15 @@ D-f  In the trapped pot acid comes from osone lost to non-trap channels plus the
 D-g  Finite O2 in the trapped pot uses the same headspace per 10 mL of solution as the closed vials.
 D-h  Phe liberated (U3) is the cumulative Phe released by the exits (sec. 3.2), not net of route-A consumption.
 D-i  U3's read error is the prereg's literal 0.011 umol/mmol (1.1e-5 mmol/mmol) plus 0.03 dex.
+
+OUTCOME AND REUSE (2026-11-05)
+==============================
+- Phase 1 was not frozen: undecidable on disk, moved to W6 (prereg sec. 23).
+- The density estimator built for it is reusable for other held-out densities of ~30 - 35 coordinates:
+  ``smc_lppd`` / ``smc_replicated`` in scripts/generators/fit_m3_strecker_layer.py, an adaptive-tempering SMC with
+  independence MH moves in logit space. V-SMC (a) and (b) pass.
+- Open diagnostic (a CF candidate, prereg sec. 23): every rival over-predicts Table 2's argon PA + PAA about 5-fold,
+  which points at the structure the rivals share.
 """
 from __future__ import annotations
 

@@ -1,7 +1,7 @@
 # M3 pre-registration: the Strecker-aldehyde layer. One shared ARP-Phe decay and two routes (phase 1), then the layer fed from the network (phase 2)
 
-**Status: v2.1 DRAFT (amendment of 2026-11-05, sec. 22, applied before its power check); freezes after that power
-check, before the keyed Figs. 2 - 3 are committed.** The v2 text below was written before any build; the v2 build,
+**Status: CLOSED, NOT FROZEN (2026-11-05, sec. 23): undecidable on disk, moved to W6.** v2.1 DRAFT (amendment sec. 22,
+applied before its power check). The v2 text below was written before any build; the v2 build,
 screen and power records and the reason for v2.1 are in sec. 22. Nothing decisive has been fitted or scored.
 
 - **What v2 is.** It answers an independent design review of v1 (a66fe933), which found MORE FIXES and asked for no
@@ -912,3 +912,62 @@ adequacy gate, Holm, required agreement, the outcome rows, the blinding (sec. 7)
 - The O2 / osone stoichiometry is labelled per arm in sec. 5 item 5's table and in sec. 19 (e) - (f). R2 needs:
   - in the air arm, ~0.5 - 0.7 mol osone per mol ARP, i.e. 250 - 700 umol O2;
   - in the copper (air + Cu 5 mM) arm, ~1.0 - 1.9 mol per mol, i.e. 500 - 1 900 umol O2.
+
+## 23. Closing (2026-11-05): not frozen; undecidable on disk; moved to W6
+
+**Decision (coordinator, 2026-11-05, under the rule set before the v2.1 run): phase 1 is NOT frozen. It is recorded as
+undecidable on disk and moves to W6.** Phase 2 (sec. 14) is not unlocked. Nothing decisive was fitted or scored.
+
+**The evidence: the v2.1 power record** (`kinetic_core_m3_phase1_power`, R = 200 per truth, 0 failed runs). Each
+cell is power vs false credit, under the "unresolved reads as a tie" rule:
+
+| Unit or contrast | Credit R1 | Credit R2 / R3 / R1-drift |
+|---|---|---|
+| U3 alone | 0 / 0 (no density resolved) | 0 / 0 |
+| U3b, primary + Cu law | 0.365 / 0.145 | 0.48 / 0.11 |
+| {U3a, U3b} block, primary + Cu law | 0.255 / 0.125 | 0.345 / 0.09 |
+| Route, four-form agreement | 0.065 / 0.01 | 0 |
+| Transfer | 0 | 0 |
+| Decay law | 0 | 0 |
+
+- By sec. 12.2's binomial rule the route survives only for crediting R1, and at low power.
+- R2 cannot be credited under four-form agreement: it has no feasible calibration under the 20 mL headspace form.
+- Ignoring the resolution rule, transfer and decay law stay undecidable.
+- **P(outcome row 5 | freeze and run) > 0.9**, so running it would not buy a verdict.
+
+**The W6 designs that would decide it:**
+- a fed 1-DG + Phe pot, which measures s_DG1 and k0_DG1 directly;
+- a fed ARP-Phe pot with ARP-Phe itself measured under argon and under air, with the headspace stated. That fixes
+  k_d, sigma_ox and the O2 budget that sigma-O2 turns on.
+
+**Blinding.** The keyed hofmann2000b Figs. 2 - 3 rows were never read and remain unused. They stay on their local
+branch, `key-hofmann2000b-fig2-fig3`, uncommitted to main. The V-blind check never passed, because nothing was frozen.
+
+**CF candidate (for the register session; not filed here): Table 2's argon PA + PAA is over-predicted by every rival.**
+- **The numbers.** The checks record gives, at 256 draws per rival, medians of 0.39 - 0.48 mM and q10 of 0.11 - 0.24 mM,
+  against a measured 0.09 mM. In the v2.1 draw sets (4 096 feasible draws per rival) the median is R1 0.48, R2 0.42 mM,
+  and only 5.7 % of R1 draws and 15 % of R2 draws come within 2x.
+- **What drives it.** A regression of log10 (argon total) on the coordinates over those draws (scratch diagnostic)
+  explains R^2 0.62 (R1) / 0.80 (R2). The terms that raise it:
+  - the share of decayed ARP that becomes a Strecker-active donor: the MGO fraction of the fragments m, the 3-DG
+    share a3, and 1-DG's Strecker share s_DG1;
+  - the amount decayed by 120 min.
+  Those that lower it are 1-DG's first-order loss k0_DG1 and, in R2 only, a large sigma_ox, which slows the argon decay.
+- **The draws that do come close.**
+  - R1's lowest 2 % decay 95 % of the ARP. They are low because that decay goes to 1-DG lost by k0 or to inert
+    fragments (a3 0.06, m 0.07).
+  - R2's lowest 2 % decay 79 %, with a high sigma_ox.
+- **My reading.** The structure every rival shares, not any rival, is wrong. The most likely piece is the ARP-Phe exits'
+  assumption that every anoxic exit yields a Strecker-active osone (1-DG, 3-DG, MGO from fragments) at the fed donors'
+  efficiencies. That gives ~0.5 % PA + PAA per ARP decayed, against the ~0.1 % the measured 0.09 mM allows.
+  - Even the k_d floor (0.005 /min, 45 % decayed) removes only ~2x of the 5x.
+  - So either most anoxic decay goes to Strecker-inert products (furanones, acids and C4 fragments, cyclised or
+    isomerised ARP: an inert exit the layer lacks), or route A's efficiency does not carry over from the 100 mM fed-donor
+    pots to sub-mM ARP-made osones (EX-049's calibration regime and the [D][Phe] sink of D-b).
+  - The first is the more likely. EX-049 matched argon only because it calibrated a lumped anoxic route (k_a0) directly
+    on these rows.
+  - The W6 fed 1-DG pot tests both.
+
+**The estimator survives the phase.** The adaptive-tempering SMC of v2.1 A3 passed V-SMC (a) and (b) and resolved U3
+at 32 - 35 coordinates in 4.5 - 10 min per density. It is reusable for other held-out densities of ~30 - 35 coordinates
+(scripts/generators/fit_m3_strecker_layer.py, `smc_replicated`).

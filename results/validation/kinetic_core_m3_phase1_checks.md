@@ -63,10 +63,10 @@
 | rival | coordinates | ms / draw | feasible share | failed |
 |---|---|---|---|---|
 | R0 | 2 | 0.02 | 1.000 | 0 |
-| R1 | 34 | 31.71 | 0.934 | 0 |
-| R2 | 32 | 31.8 | 0.102 | 0 |
-| R3 | 35 | 31.63 | 0.934 | 0 |
-| R4 | 35 | 34.38 | 0.957 | 0 |
+| R1 | 34 | 23.43 | 0.934 | 0 |
+| R2 | 32 | 23.12 | 0.102 | 0 |
+| R3 | 35 | 23.98 | 0.934 | 0 |
+| R4 | 35 | 26.89 | 0.957 | 0 |
 
 ## R1's pH drift in the 0.1 M pots (diagnostic): U1 points median |d| 0.012 dex (max 0.189); U4 points median 0.009; Fig. 1 pot pH at 500 min 6.75
 
@@ -74,7 +74,13 @@
 
 trapezoid 41x41 -0.0866; PSIS -0.0815 (k-hat -0.052, ESS 1020); Gauss-Hermite 20x20 in logit space -0.133 (agrees: True)
 
+**NOT FROZEN; UNDECIDABLE ON DISK (coordinator, 2026-11-05): under v2.1 no decisive contrast reaches usable power. The route credits R1 only, at 0.065 vs 0.01 under four-form agreement. Transfer and decay law are demoted. Phase 1 moves to W6 (prereg sec. 23). The keyed hofmann2000b Figs. 2 - 3 rows were never read and remain unused.**
+
+REUSABLE ESTIMATOR: the adaptive-tempering SMC (smc_lppd / smc_replicated; independence MH moves in logit space; k replicates for the stated error) passes V-SMC (a) against an exact grid and V-SMC (b) on a 32-dimension case with a known answer, where reweighting fails. It resolved U3 at 32 - 35 coordinates in 4.5 - 10 min per density, and is reusable for other held-out densities of ~30 - 35 coordinates.
+
 ## Open diagnostic: Table 2's argon PA + PAA (not a scored unit)
+
+CF CANDIDATE (for the register session; not filed here): every rival over-predicts Table 2's argon PA + PAA. The median is 0.39 - 0.48 mM and q10 0.11 - 0.24 mM, against a measured 0.09 mM. In the 4 096-draw sets only 5.7 % of R1 draws and 15 % of R2 draws come within 2x of it. The cause is shared structure (route A / EX-049's calibration, or the ARP-Phe exits), not the rivals: see prereg sec. 23 for the reading.
 
 | rival | predicted q10 / q50 / q90 (mM) | measured (mM) |
 |---|---|---|
@@ -92,9 +98,9 @@ trapezoid 41x41 -0.0866; PSIS -0.0815 (k-hat -0.052, ESS 1020); Gauss-Hermite 20
 
 | rival | coordinates | resolved | lppd +- se | steps | max k-hat | evaluations | wall s | reweighting (1 024) | projection 385 cells, h (1 / 4 workers) |
 |---|---|---|---|---|---|---|---|---|---|
-| R2 | 32 | True (ok) | -25.68 +- 0.26 [-25.4539, -25.9652] | [7, 7] | 0.35 | 8704 | 589.6 | k-hat 6.06, ESS 1.6 | 63.1 / 15.8 |
-| R3 | 35 | True (ok) | -33.00 +- 0.30 [-32.7431, -33.3347] | [5, 6] | 0.12 | 7168 | 270.3 | k-hat 3.09, ESS 2.5 | 28.9 / 7.2 |
-| R4 | 35 | True (ok) | -18.94 +- 0.15 [-18.7946, -19.0995] | [5, 5] | -0.05 | 6656 | 342.5 | k-hat 2.25, ESS 9.7 | 36.6 / 9.2 |
+| R2 | 32 | True (ok) | -25.68 +- 0.26 [-25.4539, -25.9652] | [7, 7] | 0.35 | 8704 | 532.9 | k-hat 6.06, ESS 1.6 | 57.0 / 14.2 |
+| R3 | 35 | True (ok) | -33.00 +- 0.30 [-32.7431, -33.3347] | [5, 6] | 0.12 | 7168 | 273.9 | k-hat 3.09, ESS 2.5 | 29.3 / 7.3 |
+| R4 | 35 | True (ok) | -18.94 +- 0.15 [-18.7946, -19.0995] | [5, 5] | -0.05 | 6656 | 267.3 | k-hat 2.25, ESS 9.7 | 28.6 / 7.1 |
 
 v2 pilot: superseded (v2.1 amendment): the v2 record at commit 5a6a30aa shows the Student-t PSIS pilot unresolved (R2: k-hat 2.5, ESS 1.2 at S = 4096)
 
@@ -121,4 +127,4 @@ v2 pilot: superseded (v2.1 amendment): the v2 record at commit 5a6a30aa shows th
 - D-h  Phe liberated (U3) is the cumulative Phe released by the exits (sec. 3.2), not net of route-A consumption.
 - D-i  U3's read error is the prereg's literal 0.011 umol/mmol (1.1e-5 mmol/mmol) plus 0.03 dex.
 
-Memory at launch: {'free_pct_at_launch': 58, 'swap_used_mb_at_launch': 7178.62, 'threshold_pct': 40, 'guard': True}; compute 0.378 h wall.
+Memory at launch: {'free_pct_at_launch': 44, 'swap_used_mb_at_launch': 8563.06, 'threshold_pct': 40, 'guard': True}; compute 0.333 h wall.

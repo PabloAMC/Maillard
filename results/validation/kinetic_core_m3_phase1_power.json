@@ -3,19 +3,19 @@
  "provenance": {
   "artifact": "kinetic_core_m3_phase1_power",
   "generated_on": "2026-11-05",
-  "git": {"commit": "e3f22ebc8bc8d1912c2666fb48ee19f6f14e2551", "short": "e3f22ebc", "branch": "m3-phase1-build", "dirty": true},
+  "git": {"commit": "3483389aff6068acbd008453962630abf4149c81", "short": "3483389a", "branch": "m3-phase1-build", "dirty": true},
   "generated_by": "scripts/generators/fit_m3_strecker_layer.py --power",
   "inputs": [
-   {"path": "src/m3_strecker_layer.py", "sha256": "bbf761ba823c888a1a41c7874d3203b6bdfdd3c330571550e9a7fff300e19c8d"},
-   {"path": "scripts/generators/fit_m3_strecker_layer.py", "sha256": "067a5b03d59a37d809a7a35039550ce735c917ca54dac482748f03da2869a43b"},
+   {"path": "src/m3_strecker_layer.py", "sha256": "9eb60ad5ad7dca59f637c65a20783a5dbfb8b675eb912010e306a532dec9b931"},
+   {"path": "scripts/generators/fit_m3_strecker_layer.py", "sha256": "6e2f6a03944056ccd889b4e1bb3de9cc8969069fc26ab9698deaa845581aa0a5"},
    {"path": "data/lit/fit_rows/strecker_hofmann2000.yml", "sha256": "0f8a8b70ee84ee85fbee129528935148149fb9d087d7fcf80b066bef2dbbeb34"},
    {"path": "data/lit/fit_rows/strecker_hofmann2000_fig2.yml", "sha256": "806fcb612924ba07057d4639bc72407f7c11fa74bb85297465d8d44dedf01ea3"},
    {"path": "data/lit/fit_rows/strecker_hofmann2000b.yml", "sha256": "e516886f8c41b8efa630b057aecfcb6826d8a6cc91000425de1f323dbbea01da"},
    {"path": "data/lit/fit_rows/strecker_hofmann2000b_fig1.yml", "sha256": "b3d154ede5f1f4721e207f94e7875964b20917166f008f187e521b45bb3b9bb3"}
   ]
  },
- "design": "results/validation/kinetic_core_m3_strecker_layer_prereg.md (v2 DRAFT; blob 564ed919cb57)",
- "memory": {"free_pct_at_launch": 45, "swap_used_mb_at_launch": 8205.5, "threshold_pct": 30, "guard": true},
+ "design": "results/validation/kinetic_core_m3_strecker_layer_prereg.md (v2 DRAFT; blob 72b9e6ac4a90)",
+ "memory": {"free_pct_at_launch": 40, "swap_used_mb_at_launch": 8547.06, "threshold_pct": 30, "guard": true},
  "parts": ["power_decay.json", "power_route.json", "power_transfer.json", "power_trapped.json"],
  "draw_sets": {
   "R4|primary": {"feasible": 4197, "drawn": 4352, "failed": 0, "wall_s": 172.3, "infeasible": {"no_sigma_ox_root": 29, "c_cu5_out_of_bound": 126, "route_a_calibration": 0}},
@@ -200,5 +200,8 @@
   },
   "truth_reweighting": "U4, U1e, U1l on real data (Table 2 enters through the calibrations); never U3"
  },
- "compute_wall_h": 3.493
+ "compute_wall_h": 3.493,
+ "outcome": "NOT FROZEN; UNDECIDABLE ON DISK (coordinator, 2026-11-05): under v2.1 no decisive contrast reaches usable power. The route credits R1 only, at 0.065 vs 0.01 under four-form agreement. Transfer and decay law are demoted. Phase 1 moves to W6 (prereg sec. 23). The keyed hofmann2000b Figs. 2 - 3 rows were never read and remain unused.",
+ "reusable_estimator": "REUSABLE ESTIMATOR: the adaptive-tempering SMC (smc_lppd / smc_replicated; independence MH moves in logit space; k replicates for the stated error) passes V-SMC (a) against an exact grid and V-SMC (b) on a 32-dimension case with a known answer, where reweighting fails. It resolved U3 at 32 - 35 coordinates in 4.5 - 10 min per density, and is reusable for other held-out densities of ~30 - 35 coordinates.",
+ "cf_candidate_argon": "CF CANDIDATE (for the register session; not filed here): every rival over-predicts Table 2's argon PA + PAA. The median is 0.39 - 0.48 mM and q10 0.11 - 0.24 mM, against a measured 0.09 mM. In the 4 096-draw sets only 5.7 % of R1 draws and 15 % of R2 draws come within 2x of it. The cause is shared structure (route A / EX-049's calibration, or the ARP-Phe exits), not the rivals: see prereg sec. 23 for the reading."
 }

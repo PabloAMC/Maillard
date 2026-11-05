@@ -27,6 +27,19 @@ Rules enforced here:
   commit an ancestor of HEAD, (iii) the keyed file's hash now equal to its hash at that commit (and no later commit
   changed it), before any real-data trapped-pot number exists (iv).
 Nothing here reads hofmann2000b Figs. 2 - 3 or the keyed file outside ``v_blind`` and the post-V-blind scorer.
+
+OUTCOME (2026-11-05): phase 1 was NOT frozen. The v2.1 power check left it undecidable on disk, and it moved to
+W6 (prereg sec. 23).
+
+A REUSABLE ESTIMATOR. ``smc_lppd`` / ``smc_replicated`` (prereg v2.1 A3) is generic: an adaptive-tempering
+sequential Monte Carlo for a held-out density lppd(u | cond) = log E_{p(theta | cond)} L_u(theta).
+- Its particles start from SIR of any band-prior draw set (``smc_sir_start``).
+- It uses independence Metropolis-Hastings moves in logit space and k replicates for an honest error.
+- It needs only an ``eval_fn(u) -> (log L_cond, log L_u)``.
+- It is validated: V-SMC (a) against an exact grid, and V-SMC (b) on a 32-dimension case with a known answer, where
+  plain reweighting fails with k-hat 72. At full dimension it resolved U3 under R2 / R3 / R4, 32 - 35 coordinates,
+  with k-hat <= 0.35 in 4.5 - 10 min per density (checks record).
+- It is reusable for other held-out densities of ~30 - 35 coordinates.
 """
 from __future__ import annotations
 
@@ -73,6 +86,22 @@ CONTRASTS = {
 POWER_FORMS = {"primary": L.PRIMARY, "o_ar_0.1": L.Form(o_ar=0.1), "cu_linear": L.Form(cu_law="linear"),
                "headspace_20mL": L.Form(headspace_ml=20.0)}
 
+
+#: Closing notes (2026-11-05), carried into the checks and power records.
+OUTCOME_NOTE = ("NOT FROZEN; UNDECIDABLE ON DISK (coordinator, 2026-11-05): under v2.1 no decisive contrast reaches "
+                "usable power. The route credits R1 only, at 0.065 vs 0.01 under four-form agreement. Transfer and "
+                "decay law are demoted. Phase 1 moves to W6 (prereg sec. 23). The keyed hofmann2000b Figs. 2 - 3 rows "
+                "were never read and remain unused.")
+REUSABLE_ESTIMATOR_NOTE = ("REUSABLE ESTIMATOR: the adaptive-tempering SMC (smc_lppd / smc_replicated; independence "
+                           "MH moves in logit space; k replicates for the stated error) passes V-SMC (a) against an "
+                           "exact grid and V-SMC (b) on a 32-dimension case with a known answer, where reweighting "
+                           "fails. It resolved U3 at 32 - 35 coordinates in 4.5 - 10 min per density, and is reusable "
+                           "for other held-out densities of ~30 - 35 coordinates.")
+CF_ARGON_NOTE = ("CF CANDIDATE (for the register session; not filed here): every rival over-predicts Table 2's argon "
+                 "PA + PAA. The median is 0.39 - 0.48 mM and q10 0.11 - 0.24 mM, against a measured 0.09 mM. In the "
+                 "4 096-draw sets only 5.7 % of R1 draws and 15 % of R2 draws come within 2x of it. The cause is "
+                 "shared structure (route A / EX-049's calibration, or the ARP-Phe exits), not the rivals: see prereg "
+                 "sec. 23 for the reading.")
 
 # =================================================================================================== guards
 
@@ -805,6 +834,8 @@ def run_checks(args) -> int:
                             "pilot unresolved (R2: k-hat 2.5, ESS 1.2 at S = 4096)")
     out["compute_wall_h"] = round(budget.elapsed_h(), 3)
     out["declared_choices"] = DECLARED
+    out["outcome"], out["reusable_estimator"], out["cf_candidate_argon"] = (OUTCOME_NOTE, REUSABLE_ESTIMATOR_NOTE,
+                                                                          CF_ARGON_NOTE)
     _record("checks", out, render_checks(out), args.out_dir, layer_inputs())
     return 0
 
@@ -844,7 +875,8 @@ def render_checks(o: Dict[str, Any]) -> str:
            f"trapezoid 41x41 {vd['lppd_trapezoid_41x41']}; PSIS {vd['lppd_psis']} (k-hat {vd['k_hat']:.3f}, ESS "
            f"{vd['ess']:.0f}); Gauss-Hermite 20x20 in logit space {vd['lppd_gauss_hermite_20_logit']} (agrees: "
            f"{vd['gh_pass']})", ""]
-    L_ += ["## Open diagnostic: Table 2's argon PA + PAA (not a scored unit)", "",
+    L_ += [f"**{o['outcome']}**", "", o["reusable_estimator"], "",
+           "## Open diagnostic: Table 2's argon PA + PAA (not a scored unit)", "", o["cf_candidate_argon"], "",
            "| rival | predicted q10 / q50 / q90 (mM) | measured (mM) |", "|---|---|---|"]
     for r, v in o["v_time"].items():
         if "t2_argon_total_mM_q10_50_90" in v:
@@ -1372,6 +1404,8 @@ def merge_power(args, mem) -> int:
     if out["failed_runs_total"]:
         out["refused"] = f"{out['failed_runs_total']} failed runs in the parts: every power result is refused"
     out["compute_wall_h"] = round(sum(out["compute_wall_h_parts"].values()), 3)
+    out["outcome"], out["reusable_estimator"], out["cf_candidate_argon"] = (OUTCOME_NOTE, REUSABLE_ESTIMATOR_NOTE,
+                                                                          CF_ARGON_NOTE)
     _record("power", out, render_power(out), args.out_dir, layer_inputs())
     return 0
 
@@ -1386,6 +1420,9 @@ def render_power(o: Dict[str, Any]) -> str:
         L_ += [f"**REFUSED: {o['refused']}**", ""]
     if o.get("compute_capped"):
         L_ += [f"**COMPUTE-CAPPED: {o['compute_capped']}**", ""]
+    for key in ("outcome", "reusable_estimator", "cf_candidate_argon"):
+        if o.get(key):
+            L_ += [f"**{o[key]}**" if key == "outcome" else o[key], ""]
     L_ += ["## Draw sets", "", "| set | feasible / drawn | failed | wall s |", "|---|---|---|---|"]
     for k, v in o["draw_sets"].items():
         L_.append(f"| {k} | {v['feasible']} / {v['drawn']} | {v['failed']} | {v['wall_s']} |")
