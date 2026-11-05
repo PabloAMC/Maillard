@@ -204,6 +204,15 @@ validated on a plant-based product.
 - For M1b: whether any group holds in-situ trapped deoxypentosones across pH (none is on disk; ENGINE_VS_LITERATURE
   sec. 3.1, E2). It would separate the split rival from the removal rival.
 - Literature keying only where a W2 step's test lacks held-out rows (E3, E10, E18 are one laboratory short).
+- For M1c (added 2026-11-05): a designed cysteine + xylose time course (free cysteine, xylose, TTCA and pH, cooled,
+  at two or three pH values) from any group able to run it; M1c's case names the design.
+
+**W6 is optional (owner, 2026-11-05).** No step waits on it; each step's stop rule covers its absence. Without it:
+M1c most likely ends "supply not identifiable on disk" (P ~0.6 that no unseen decisive data exist) and the thiol lane
+stays relative-only under H0 with the R0 / C1 supply envelope carried as uncertainty; M2 most likely reads "conflict:
+errors stack"; absolute thiol levels for a new laboratory stay refused until second-laboratory absolute data arrive
+(WUR blind test or a reply); M1b(ii)'s split and removal rivals stay unseparated. The odds that M1c + M2 noticeably
+improve the sulfur lane fall from ~0.25 to ~0.15. A reply that arrives later re-opens the step it names.
 
 ## 6. Timeline: what runs in parallel
 
