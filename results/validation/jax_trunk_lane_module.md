@@ -9,13 +9,13 @@
 
 ## Rates (no integration)
 
-- All 55 steps, 160380 values (972 (T, pH, a_w) points x 55 x 3 cases: shipped; perturbed parameters, conditions, aqueous-glyoxal mapping and exit exponent (Config), B22 / B24 on; exit term off): worst relative difference **1.3e-15** (at ['perturbed', None, 0.97, 25.0, 'r_amadori']).
+- All 55 steps, 160380 values (972 (T, pH, a_w) points x 55 x 3 cases: shipped; perturbed parameters, conditions, aqueous-glyoxal mapping and exit exponent (Config), B22 / B24 on; exit term off): worst relative difference **1.3e-15** (at ('perturbed', None, 0.97, 25.0, 'r_amadori')).
 
 | case | values | non-zero | worst relative | at |
 |---|---|---|---|---|
-| shipped | 53460 | 42768 | 1.0e-15 | [None, None, 160.0, 'r_fru_acids'] |
-| perturbed | 53460 | 49572 | 1.3e-15 | [None, 0.97, 25.0, 'r_amadori'] |
-| exit_term_off | 53460 | 42768 | 1.0e-15 | [None, None, 160.0, 'r_fru_acids'] |
+| shipped | 53460 | 42768 | 1.0e-15 | (None, None, 160.0, 'r_fru_acids') |
+| perturbed | 53460 | 49572 | 1.3e-15 | (None, 0.97, 25.0, 'r_amadori') |
+| exit_term_off | 53460 | 42768 | 1.0e-15 | (None, None, 160.0, 'r_fru_acids') |
 
 ## Trajectories (state after every refined segment vs the engine at LSODA rtol 1e-12; dex where the engine holds more than 1e-09 of the pot's largest initial charge)
 
@@ -50,13 +50,13 @@ Pots: the one panel bundle the engine routes to the trunk lane (Steinhagen 2021,
 
 ## Exact Jacobian (forward mode) vs central differences, at an interior point
 
-Worst column error = max over observables of |difference| / max |reference| in that column, on the columns whose largest entry is at least 0.0001 of the Jacobian's largest ("rel"); the worst absolute difference over ALL columns, in dex per coordinate unit, beside it ("abs"). The engine moves every log10 k_ref, Ea and condition coordinate through its arguments (the exit exponent through the Config); the linear k_ref coordinates of the zero-k steps are checked against the port's own central differences only.
+Worst column error = max over observables of |difference| / max |reference| in that column, on the columns whose largest entry is at least 0.0001 of the Jacobian's largest ("rel"); the worst absolute difference over ALL columns, in dex per coordinate unit, beside it ("abs"). The engine moves every log10 k_ref, Ea and condition coordinate through its arguments (the exit exponent through the Config); the linear k_ref coordinates of the zero-k steps are checked against the port's own differences only, with the step scaled to the column (h / max(1, max |J|); a linear k_ref has no natural unit) and ONE-SIDED at zero (a negative rate constant would push its products into the mass-action law's max(y, 0) clip).
 
 | pot | observables x coordinates (engine / all; relative columns) | vs engine central FD: rel (worst coordinate) / abs | vs JAX central FD: rel (worst) / abs | JAX FD vs engine FD: rel / abs | rtol 1e-8 vs tight | rtol 1e-8 atol 1e-10 vs tight | rtol 1e-6 vs tight |
 |---|---|---|---|---|---|---|---|
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | 24 x 98 / 109 (31) | 5.2e-05 (ea:k_fru_glc) / 1.7e-08 | 3.2e-07 (ea:k_dgal_ddg) / 6.8e-10 | 5.2e-05 / 1.7e-08 | 4.6e-08 | 7.8e-07 | 2.1e-06 |
 | synthetic_fed_glyoxal_methylglyoxal_glycine_120C | 16 x 98 / 109 (12) | 1.5e-06 (ea:k_cond) / 1.2e-08 | 7.6e-08 (ea:k_cond) / 6.3e-10 | 1.5e-06 / 1.2e-08 | 4.7e-08 | 1.3e-06 | 1.6e-06 |
-| synthetic_profile_trunk_lane_all_blocks_25_160_100 | 21 x 98 / 109 (64) | 4.7e-05 (ea:k_fru_int) / 3.2e-06 | 9.9e-01 (k_ref:k_go_met) / 1.5e+07 | 4.7e-05 / 3.2e-07 | 1.5e-05 | 1.5e-05 | 1.5e-05 |
+| synthetic_profile_trunk_lane_all_blocks_25_160_100 | 21 x 98 / 109 (64) | 4.7e-05 (ea:k_fru_int) / 3.2e-06 | 3.3e-06 (log10_k:k_schiff) / 2.8e-03 | 4.7e-05 / 3.2e-07 | 1.5e-05 | 1.5e-05 | 1.5e-05 |
 
 ## Panel predictions at fit tolerance vs `engine.predict` (log10 of each scored row's value)
 
@@ -83,5 +83,27 @@ The engine's forward-difference Jacobian is (1 + 109) lane runs, from the median
 
 ## Findings
 
-(pending)
+1. **Match: yes, at the contract's bar with margin.**
+   - Rates equal the engine's to 1.3e-15 relative: 160 380 values, all 55 steps on a (T, pH, a_w) grid that crosses the pyrazine knot (pH 7) and the a_w table, shipped, perturbed (parameters, the five condition coordinates, the aqueous-glyoxal mapping and the exit exponent through the Config, B22 / B24 on, k_da_sink off zero) and with the exit term off.
+   - Trajectories at rtol 1e-10: <= 1.2e-9 dex on every species above the floor (Kvaerno5; Kvaerno4 3.5e-10) on the panel pot at its point and both band corners, the four synthetic block pots and the profile at both settings; C / N / S close to <= 8e-15 relative. The worst species is a trace pool (DMHF in the switches-on profile, G in the panel pot).
+   - Panel predictions (Steinhagen 2021's six rows) equal `engine.predict`'s to 6.4e-9 dex at rtol 1e-8 and 5.3e-7 at rtol 1e-6, against the contract's 1e-4: rtol 1e-6 is licensed for fits on this lane.
+   - The trunk module's declared terms (a_w on `k_schiff`, the Amadori pH term, the 3-DG exit term), accepted at rate level by the previous port, now hold on trajectories: the panel pot runs at pH 4.36 and its corners move both exponents to their band ends; the profile runs at a_w 0.80 and pH 5.5.
+   - pH mode "prescribed" reproduces the engine's declared-pH scaling of k_ref exactly: the rates match at every grid pH (None included), and the trajectories at pH 4.36, 5.0, 5.5, 6.0, 6.8 and 8.0.
+2. **Exact Jacobian: correct.** On 3 pots (the panel pot, the fed dicarbonyl + glycine pot, the profile) x 109 coordinates, forward mode equals the port's own differences to <= 3.3e-6 relative on the columns that matter (<= 3.2e-7 on the two isothermal pots). Against the engine's central differences in its 98 movable coordinates it is <= 5.2e-5 relative / 3.2e-6 absolute, and the JAX-FD-vs-engine-FD column shows the same numbers: the engine's LSODA noise (rtol 1e-12, step 1e-5), as on the acrylamide lane. The 11 linear `k_ref:` columns at zero needed care in the CHECK, not in the Jacobian: a fixed linear step of 1e-5 L/(mmol min) on k_go_met is ~30x glycine's own Strecker constant, which made the first difference 0.5 - 7 relative off; scaled to the column (h / max |J|) and one-sided at zero, it matches to ~1e-9 (pinned by a unit test). The rtol 1e-8 Jacobian is within 5e-8 of the tight one on the isothermal pots and 1.5e-5 on the profile.
+3. **Kvaerno4 vs Kvaerno5: Kvaerno5 here, the reverse of the acrylamide lane.** At rtol 1e-8 / atol 1e-14 Kvaerno5 takes 0.2 - 0.7x Kvaerno4's steps on four of five timing pots (Steinhagen 56 vs 263, the profile 2122 vs 3027); the exception is the fed dicarbonyl + glycine pot (the declared-fast condensation, k_cond 1e4 L/(mmol min)), where Kvaerno4 takes 0.45x. The union network's choice must be made on its own pots, as the contract says.
+4. **The atol lever is real, and its price is on trace pools.** atol 1e-10 (Kvaerno5, rtol 1e-8) cuts steps 2 - 4x and the solve 1.4 - 3.4x, the Jacobian up to 3.9x (the fed dicarbonyl pot and the profile). The panel rows move <= 5.2e-8 dex. But trace pools far below 1e-10 mmol/L lose accuracy: up to 2e-5 dex on DMHF in the profile and 6e-6 dex on 1-DG in the panel pot's corner. So atol 1e-10 is licensed for the panel's rows, not for a trace species that is scored; atol is set per scored species, as the contract says.
+5. **What is ported and what is refused.**
+   - Ported for every value: `dicarbonyl.aqueous_glyoxal_parameters` (any mapping); `methionine.shipped_b22` and `proline.shipped_b24` (build phase: both values in any process, the block built by the engine's own `with_fitted_*` from FROZEN or INERT values; the reference checks True through `core_parameters`' override blocks); `dicarbonyl.shipped_b39` (moves no number); `trunk.three_deoxy_exit_ph_term` and `trunk.three_deoxy_exit_ph` on network.REACTIONS; `panel.thermal_history` (the programme is pot data; the one panel pot has no recorded heat-up, so both values give one programme); B18's pyrazine pH slopes (coordinates, also on the methionine and proline Strecker steps); the MET / PRO folding into Gly and the bound-lysine charge (`make_pot`, `lysp_charge`).
+   - Refused (`UnsupportedConfiguration`): `methionine.shipped_b22b` and `proline.shipped_b24b` at True (FROZEN_B22B / FROZEN_B24B are empty: the engine cannot build them either); an exit term naming a step outside network.REACTIONS (it is gated on the trunk module's Amadori factor, which another module cannot read); a non-air atmosphere (the engine raises too) and a non-air entry in ATMOSPHERE_FACTORS; a charged species the network does not carry.
+   - The parameters_* modules hold no other switch: pyrazine, glycation and furanic read none at call time (their fitted values are frozen literals, theta coordinates here).
+   - Steps the engine carries at exactly zero (k_da_sink; the unshipped B22 / B22b / B24 / B24b steps) have a linear `k_ref:` coordinate, so ENV-B13's draw of k_da_sink off zero is representable.
+6. **Cost (provisional: the machine ran at load 30 - 65 from other work during the timing; one core, niced).**
+   - One solve (Kvaerno5, rtol 1e-8, atol 1e-14): 2.7 - 4.5x faster than the engine on the panel pot and the glycation pot, 1.4x faster on the profile, 1.4x slower on the fed 3-DG pot and 4.6x slower on the fed dicarbonyl pot (the stiff condensation; Kvaerno4 with atol 1e-10 is 1.2x faster than the engine there).
+   - The Jacobian in all 109 coordinates against the engine's forward differences (110 runs): 30x faster on the panel pot, 44x on the glycation pot, 10x on the fed 3-DG pot, 12x on the profile (41x with atol 1e-10), 2.5x on the fed dicarbonyl pot (7.6x with Kvaerno4 and atol 1e-10).
+   - Compile: 3 - 9 s per solve, 5 - 23 s per Jacobian, once per configuration (the STRUCTURAL switches: B22, B24, the exit term) and segment count.
+7. **Effort.** The two modules, the zero-k coordinates, the two generators and the tests took ~2.5 h wall clock, of which ~1.5 h was unattended compute on a machine loaded 30 - 70 by other work (the engine's tight reference Jacobians and the port's own central differences are the long poles) and ~1 h of agent work, against the 3 - 6 h estimated. So this estimate was ~1.5 - 2.5x high, not the ~10x of the last two: the blocks were pure Arrhenius with one shared condition term and no pH state, and the cost moved from writing code to waiting on reference compute. Remaining A2 + H3, revised (hours of agent work; unattended compute on a shared machine adds ~1x on top):
+   - sulfur (every remaining switch, the bake-off's pH solver in `integrate`, profile mode): 5 - 10 h;
+   - network infrastructure (merged titratable table and charge closure, declared competition, forced inputs including the trajectory form of `prescribed`, the fit driver): 6 - 12 h;
+   - the pH-root performance step: 3 - 6 h.
+   - Total remaining ~14 - 28 h (p ~0.6 of landing inside). These are design and pH-coupled steps, not transliterations, so I do not carry the pH-free ports' 10x over to them.
 

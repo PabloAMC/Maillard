@@ -170,6 +170,31 @@ def test_exact_jacobian_equals_central_differences(setup):
         np.testing.assert_allclose(jac[:, c], col, rtol=1e-5, atol=1e-8, err_msg=name)
 
 
+def test_the_jacobian_in_a_linear_k_ref_at_zero_equals_a_one_sided_difference(setup):
+    """An unshipped step (k_go_met = 0, B22) has a LINEAR coordinate; its derivative at zero is the physical one-sided
+    one. The difference's step is scaled to the column: a fixed 1e-5 L/(mmol min) is ~30x glycine's own constant."""
+    trunk_lane, network, net = setup["trunk_lane"], setup["network"], setup["net"]
+    pot = trunk_lane.make_pot(net, {"GO": 5.0, "MGO": 5.0, "Gly": 5.0, "MET": 5.0}, [(5.0, 120.0), (5.0, 120.0)],
+                              ph=7.5, water_activity=None)
+    idx = jnp.asarray([net.index[s] for s in ("AKG", "PZ", "MPZ")])
+
+    def observe(ys):
+        return jnp.log10(ys[:, idx].ravel())
+
+    theta = network.theta_vector(net, net.theta0())
+    _, jac = network.jacobian(net, observe, rtol=1e-10, atol=1e-16)(theta, pot)
+    jac = np.asarray(jac)
+    keys = [k for _, k in net.coordinates]
+    c = keys.index("k_ref:k_go_met")
+    assert float(theta[c]) == 0.0 and np.max(np.abs(jac[:, c])) > 1.0
+    f = jax.jit(lambda v: observe(network.integrate(net, network.theta_from_vector(net, v), pot,
+                                                    rtol=1e-12, atol=1e-20).ys))
+    h = 1e-5 / float(np.max(np.abs(jac[:, c])))
+    e = jnp.zeros(len(theta)).at[c].set(h)
+    col = (-3.0 * np.asarray(f(theta)) + 4.0 * np.asarray(f(theta + e)) - np.asarray(f(theta + 2 * e))) / (2 * h)
+    np.testing.assert_allclose(jac[:, c], col, rtol=1e-6, atol=1e-6 * np.max(np.abs(col)))
+
+
 def test_panel_predictions_at_fit_tolerance_equal_the_engine(setup):
     out = setup["bk"].stage_residuals(setup["reference"], setup["net"])
     for row in out["rows"]:
