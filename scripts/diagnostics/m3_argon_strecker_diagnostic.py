@@ -289,11 +289,166 @@ def memory_free_pct() -> Optional[int]:
         return None
 
 
+#: the reading, written AFTER the run (the numbers it cites are the record's); rendered into the .md only
+READING = """
+**Baseline.** The medians are 0.39 - 0.48 mM against a measured 0.09 mM, as the checks record found (2026-11-05).
+The excess is in BOTH analytes:
+- PA is 0.30 - 0.37 mM against 0.06 measured.
+- PAA is 0.08 - 0.10 mM against 0.03 measured.
+
+Of the argon total, 3-DG gives a median 42 - 55 %, fragment MGO 22 - 25 % and 1-DG 6 - 14 %. The ARP is 87 - 99 %
+decayed by 120 min.
+
+**H1 (a first-order loss of the ARP-made donors): fails.**
+- With the fed-donor decays alone it closes 2 - 14 % of the log gap: 3-DG from Ghiron 1988, MGO from Kanzler 2026's
+  first-order reading.
+- With Martins 2005's fitted 3-DG -> FA and 1-DG -> AA it closes 35 - 43 %.
+- With the largest sourced values it closes 58 - 81 % (`H1_max`): Martins 2003 k5 + k6 for 3-DG (0.118 /min), its k9
+  for 1-DG, and Kanzler's fastest window for MGO. It passes only for R2, which has 11 % feasible draws.
+- Applied the same way to the fed-donor pots that calibrate route A (`H1_max_consistent`), the same losses close only
+  14 - 20 %. The Table 4 inversion gives most of the loss back by raising k_X.
+
+The algebra says why. A first-order loss competes with the Strecker step, which is also first order in [D], equally
+at any [D]. The only transfer lever left is the amine level: ~50 mM Phe in the ARP pot against 100 mM in the fed pot,
+worth at most ~2x. "Low [D]" cuts against EX-049's amine-free kappa [D]^2 sink, and that sink would RAISE the ARP-made
+donors' Strecker share. D-b's kappa [D][Phe] already removed it. So the rate-law-transfer reading of H1 does not hold.
+`H1_max` closes most of the gap only because the fed calibration does not carry the loss.
+
+**H2 (donor efficiency): fails.**
+- Giving 1-DG 3-DG's calibrated share closes 8 - 9 %.
+- Giving every anoxic donor 3-DG's share closes 17 - 37 %.
+- Giving them glucosone's share (the lowest measured) closes 24 - 27 %.
+
+Table 4's argon efficiencies span only 1.7x: MGO 15.8, GO 11.4, 3-DG 9.9 and glucosone 9.4 umol/mmol. Relabelling
+donors cannot remove a 5x miss. 1-DG has no Table 4 arm, so its own efficiency is unsourced. The layer draws it on
+[s_G, s_MGO 10^0.82].
+
+**H1 + H2 (`H12_max`) passes the numbers but not the rule.** Every rival's median lies within 2 s of 0.09 mM, and
+the air arm sits 0.01 - 0.02 dex from its measured value. The pass rests on two pieces that the rule does not admit:
+- `H1_max` applied without the fed-pot counterpart, which `H1_max_consistent` shows is mostly the asymmetry;
+- relabelling fragment MGO as a 3-DG-efficiency donor. No measurement says MGO from fragments is a weaker donor than
+  fed MGO, and the rule allows only constants from cited measurements.
+
+**H3 (an O2-independent PA sink): fails.** No measured PA loss rate is on disk. At the top of the layer's own k_loss
+band (1e-2 /min, re-inverted) it closes 2 - 10 %. Any PA-only sink also leaves PAA 2.8 - 3.5x too high. The excess is
+upstream, in the donor supply, not downstream of PA.
+
+**S1 (context, outside H1 - H3): fails.**
+- Martins 2003's fed-DFG exit split at 100 C, pH 6.8 puts only ~5 % of the Amadori decay into 3-DG, 40 % into 1-DG,
+  42 % into C_n fragments and 13 % back to the hexoses. Renormalised over the layer's three exits, it closes 8 - 11 %:
+  moving flux from 3-DG to 1-DG gains little, because 1-DG's drawn share is as large.
+- With `H1_max` (S1 + H1_max) it closes 51 - 63 %.
+
+**The air arm does not discriminate.** Its 2 s band (0.57 - 1.28 mM) holds every scenario's air median, including the
+baseline (0.13 - 0.16 dex high). sigma_ox carries the measured air excess by construction, so the in-sample air total
+rises and falls with the argon one.
+
+**Reading (probabilities over the shared piece mainly responsible; single laboratory throughout):**
+- The amount of ARP-Phe decayed anoxically by 120 min (k_d, measured in air, and the sigma_ox split): p ~ 0.35. R4
+  decays least (87 %) and over-predicts least. The prereg's k_d floor form removes ~2x.
+- The anoxic exits' Strecker-active share: inert exits the layer lacks, the unmeasured 1-DG efficiency and m_frag
+  uniform on [0, 1]: p ~ 0.35.
+- Route A's fed-to-ARP-made transfer: donor losses absorbed by the fed inversion, the amine level: p ~ 0.15.
+- Table 2's single argon vial reading low: p ~ 0.10.
+- Other: p ~ 0.05.
+
+**What a sec. 7 change would need.**
+- Rivals:
+  - (a) a slower anoxic ARP-Phe decay under argon;
+  - (b) an explicit Strecker-inert anoxic exit share;
+  - (c) a first-order loss of the ARP-made donors carried consistently into the fed calibration.
+- Decisive data (W6, or the reserved blind set once it is opened by its own protocol):
+  - ARP-Phe itself measured under argon at 100 C over 0 - 120 min, which separates (a) from (b) and (c);
+  - a fed 1-DG + Phe pot, for s_DG1 and k0_DG1;
+  - a fed 3-DG + Phe pot at low (~1 mM) 3-DG with the donor followed, which tests (c) directly;
+  - dicarbonyl yields per ARP decayed under argon, which test (b). The trapped-osone design of hofmann2000b Figs.
+    2 - 3 is this measurement; it stays blind here.
+
+**Constants that could not be sourced:**
+- 1-DG's Strecker efficiency;
+- a rate for donor + ARP (an amine sink on the ARP itself);
+- a measured PA loss;
+- a first-order MGO loss (Kanzler's data are second order, so 0.0098 / 0.0144 /min is a first-order reading used as a
+  bracket);
+- Ghiron's pot pH (unbuffered, unstated).
+
+The Martins constants are multiresponse fits of measured fed-DFG and glucose / glycine systems, not direct decays.
+"""
+
+
+#: scenarios whose numbers pass but whose constants the rule does not admit (reason in the reading)
+INADMISSIBLE = {"H12_max": "loss absent from the fed calibration; fragment MGO relabelled as a 3-DG-efficiency donor"}
+
+
+def verdict(name: str, passes: bool) -> str:
+    if not passes:
+        return "fail"
+    return f"numbers pass; NOT admissible ({INADMISSIBLE[name]})" if name in INADMISSIBLE else "PASS"
+
+
+def render(rec: Dict[str, Any]) -> str:
+    b = rec["noise_bands"]
+    L_ = [f"# {rec['title']}", "",
+          f"*Generated by `{rec['generated_by']} --render` from the .json. {rec['status']}. Layer "
+          f"`{rec['layer']['path_basename']}` sha256 `{rec['layer']['sha256'][:12]}` ({rec['layer']['branch']}); "
+          f"{rec['draws_per_rival']} scrambled Sobol draws per rival (seed {rec['sobol_seed']}), primary form, "
+          f"the same draws in every scenario; sigma_ox and c_Cu5 re-solved per draw. SINGLE LABORATORY "
+          f"(DFA Garching) for every Table 2 / Table 4 number.*", "",
+          "## Pass rule (declared and committed before any hypothesis was computed)", "",
+          "\n".join(ln for ln in rec["pass_rule"].splitlines() if not ln.startswith(("(", "==="))), "",
+          "## Noise bands (the layer's own measurement noise, no omega)", "",
+          "| arm | measured PA + PAA (mM) | s_read | CV_hi | sigma_run | s (dex) | 2s band (mM) |",
+          "|---|---|---|---|---|---|---|"]
+    for arm, v in b.items():
+        L_.append(f"| {arm} | {v['measured_mM']:.2f} (PA {v['PA_mM']}, PAA {v['PAA_mM']}) | {v['s_read_dex']:.3f} | "
+                  f"{v['cv_hi_dex']:.3f} | {v['sigma_run_dex']:.3f} | {v['s_dex']:.3f} | "
+                  f"[{v['lo_mM']:.3f}, {v['hi_mM']:.3f}] |")
+    L_ += ["", "## Results: argon PA + PAA at 120 min (mM; q10 / median / q90 over feasible draws)", "",
+           "| scenario | R1 | R2 | R3 | R4 | log gap closed (min - max) | air median off (dex, R1 / R4) | passes |",
+           "|---|---|---|---|---|---|---|---|"]
+    for name, s in rec["scenarios"].items():
+        cells = []
+        for rv in rec["rivals"]:
+            r = s["rivals"][rv]
+            a = r["argon_tot_q10_50_90_mM"]
+            cells.append(f"{a[0]} / **{a[1]}** / {a[2]} (feas {r['feasible_share']:.2f})")
+        g = s.get("log_gap_closed_range")
+        air = f"{s['rivals']['R1']['air_dev_dex']} / {s['rivals']['R4']['air_dev_dex']}"
+        L_.append(f"| `{name}` | " + " | ".join(cells) + f" | {g[0]:.2f} - {g[1]:.2f} | {air} | "
+                  f"{verdict(name, s['passes'])} |")
+    L_ += ["", "Scenario definitions:", ""]
+    L_ += [f"- `{n}`: {s['what']}" for n, s in rec["scenarios"].items()]
+    base = rec["scenarios"]["base"]["rivals"]
+    L_ += ["", "## Baseline anatomy (argon pot)", "",
+           "| rival | PA | PAA | ARP decayed | share from 3-DG | from fragment MGO | from 1-DG | within 2x |",
+           "|---|---|---|---|---|---|---|---|"]
+    for rv, r in base.items():
+        L_.append(f"| {rv} | {r['argon_PA_q10_50_90_mM']} | {r['argon_PAA_q10_50_90_mM']} | "
+                  f"{r['argon_decayed_q10_50_90']} | {r['argon_attribution_TDG_share_q10_50_90']} | "
+                  f"{r['argon_attribution_MGO_share_q10_50_90']} | {r['argon_attribution_DG1_share_q10_50_90']} | "
+                  f"{r['argon_within_2x_share']} |")
+    L_ += ["", "## Constants (each with its source; 'fed' = a fed-donor decay, 'fit' = a literature multiresponse "
+           "fit)", "", "| key | value (/min, 100 C) | kind | source |", "|---|---|---|---|"]
+    for kk, v in rec["constants"].items():
+        L_.append(f"| `{kk}` | {v['value']:.4g} | {v['kind']} | {v['source']} |")
+    sp = rec["martins2003_exit_split"]
+    L_ += ["", "Martins 2003 Table 3 col. C exit split (S1): " + ", ".join(f"{k_} {v:.3f}" for k_, v in sp.items()),
+           "", f"Fed calibration with k0 = 0 reproduces the layer's `calibrate_route_a` bit-exactly: "
+           f"{rec['calibration_with_k0_bit_exact_at_zero']}.", "", "## Reading", "", READING.strip(), ""]
+    return "\n".join(L_)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     ap.add_argument("--draws", type=int, default=N_DRAWS)
     ap.add_argument("--only", nargs="*", default=None, help="scenario names (default: all)")
+    ap.add_argument("--render", action="store_true", help="write the .md from the existing .json (no compute)")
     args = ap.parse_args(argv)
+    if args.render:
+        rec = json.loads(OUT_STEM.with_suffix(".json").read_text())
+        OUT_STEM.with_suffix(".md").write_text(render(rec))
+        print("wrote", OUT_STEM.with_suffix(".md"))
+        return 0
     free = memory_free_pct()
     if free is not None and free < 30:
         raise SystemExit(f"memory free {free} % < 30 %: not running")
@@ -355,7 +510,8 @@ def main(argv=None) -> int:
         "scenarios": res, "wall_s": round(time.time() - t0, 1), "memory_free_pct_at_launch": free,
     }
     OUT_STEM.with_suffix(".json").write_text(json.dumps(record, indent=1) + "\n")
-    print("wrote", OUT_STEM.with_suffix(".json"))
+    OUT_STEM.with_suffix(".md").write_text(render(json.loads(OUT_STEM.with_suffix(".json").read_text())))
+    print("wrote", OUT_STEM.with_suffix(".json"), "and .md")
     return 0
 
 
