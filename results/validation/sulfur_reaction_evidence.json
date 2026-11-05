@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-05",
     "git": {
-      "commit": "8b28d03140bed4224f57749925ed49c019dd7bc3",
-      "short": "8b28d031",
+      "commit": "a4b2504b575e24a4e5b6793c78bc8f530ed586e1",
+      "short": "a4b2504b",
       "branch": "h0-relative-only-thiols",
       "dirty": true
     },
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "6601ff9b901a389d75bd124df503beecb27e4944551306ab94cafefd52b74927"
+        "sha256": "86f7c4ab0cf8a49fb6ff0b03d45f70e2116a8c565b3a098bf95a1c2494577b5b"
       },
       {
         "path": "src/kinetic_core/sulfur.py",

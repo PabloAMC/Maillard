@@ -389,6 +389,11 @@ def _anchor_tally(sulfur: Mapping[str, Any]) -> str:
     oos = [o for o in rows if not o.get("in_core_fit")]
     hit = sum(1 for o in rows if o.get("within_3x"))
     hit_oos = sum(1 for o in oos if o.get("within_3x"))
+    if not rows:
+        # 2026-11-05 (H0 / EX-059): the thiol lane's absolute levels are refused, so no anchor row is scored
+        return ("none of them as a scored absolute: since 2026-11-05 the thiol lane ships relative within-laboratory "
+                "predictions only (H0 / EX-059, D2 branch (i)), so every anchor row is refused for its level and "
+                "kept for the within-study contrasts")
     return (f"{hit} of its {len(rows)} scored anchor rows within 3x ({hit_oos} of the {len(oos)} that "
             f"no core fit read; the rest are fed-intermediate rows the sulfur fit read, which are not "
             f"evidence)")
@@ -619,7 +624,9 @@ def _verdict_from_fraction(hits: Optional[int], total: Optional[int]) -> str:
 
 _LANE_SYSTEMS = {
     "trunk": "free precursor, sugar + amine browning / furanics",
-    "sulfur": "free precursor, cysteine / ribose meaty thiols",
+    # 2026-11-05: the thiol lane's own observables are refused for their level (H0 / EX-059); what the sulfur lane
+    # still scores absolutely is what H0 did not score (2-acetylthiazole)
+    "sulfur": "free precursor, sulfur-lane observables H0 did not score (2-acetylthiazole)",
     "acrylamide": "free precursor, asparagine + reducing sugar",
     "lipid": "protein matrix, lipid-derived aldehydes",
 }
@@ -667,9 +674,11 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
             "two conditions of one study (one laboratory)",
             "H0's relative branch, engine minus a chemistry-free null: "
             + "; ".join(f"{s} {m:+.2f} nats/row ({label})" for s, m, label in r.relative_branch)
-            + f"; omega {r.omega_dex:.2f} dex per arm in the interval",
+            + " -- in the reset set THE NULL IS BETTER (D3: below -2 SE, sign-flip p <= 2/32)"
+            + f"; omega {r.omega_dex:.2f} + noise {r.class_noise_dex:.2f} dex per arm in the interval",
             VERDICT_CAUTION,
-            "shipped by D2 branch (i), with the owner's note: no evidence of beating a null either",
+            "shipped by D2 branch (i), with the owner's note: no evidence of beating a null, and in one set the null "
+            "is better",
         )
     )
     if env.get("available"):

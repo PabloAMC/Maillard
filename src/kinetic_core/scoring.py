@@ -63,6 +63,7 @@ from .panel import (
     measured_value,
     panel_bundles,
     quantification_family,
+    study_key,
 )
 
 #: The hold-out's pre-registered pass band (cutover exam, B2.x prereg): a point
@@ -241,9 +242,12 @@ def score_benchmark(
                     # ... but what the lane DOES ship, a ratio between two pots of one study, still needs both
                     # numbers: the within-study contrast diagnostic (build_contrast_scores.py) reads them, and
                     # nothing that counts an absolute does.
+                    # score_panel replaces log10_predicted by its (study, compound)-centred value, so the tracked
+                    # scorecard carries no absolute level of these compounds (review m7)
                     **({"relative_use_only": {
                         "measured": float(measured),
-                        "predicted": core_native_value(run, compound, unit, limiting_molar),
+                        "log10_predicted": _log10_or_none(core_native_value(run, compound, unit, limiting_molar)),
+                        "study": study_key(bench, str(path)),
                         "in_core_fit": in_core_fit(benchmark_id, compound),
                         "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
                     }} if absolute_refused else {}),
@@ -414,6 +418,30 @@ def _close(bucket: Dict[str, Any]) -> Dict[str, Any]:
     return bucket
 
 
+def _log10_or_none(value: Optional[float]) -> Optional[float]:
+    return math.log10(float(value)) if value is not None and float(value) > 0.0 else None
+
+
+def _centre_relative_use_only(benches: Sequence[Dict[str, Any]]) -> None:
+    """2026-11-05 (H0 / EX-059, review m7): a refused thiol-lane row keeps, for the within-study contrast diagnostic,
+    only its log10 prediction minus the mean over its (study, compound) group. Differences inside a group are the
+    log ratios exactly; no absolute level can be read back."""
+    from src import compound_keys
+
+    groups: Dict[Tuple[str, str], List[Dict[str, Any]]] = {}
+    for b in benches:
+        for r in b.get("refused_compounds") or []:
+            rel = r.get("relative_use_only")
+            if rel is not None:
+                groups.setdefault((rel["study"], compound_keys.canonical_name(r["compound"])), []).append(rel)
+    for members in groups.values():
+        logs = [m["log10_predicted"] for m in members if m.get("log10_predicted") is not None]
+        mean = statistics.fmean(logs) if logs else None
+        for m in members:
+            value = m.pop("log10_predicted", None)
+            m["log10_predicted_minus_study_mean"] = None if value is None or mean is None else value - mean
+
+
 def score_panel(
     bundles: Optional[Sequence[Tuple[Path, str]]] = None, *, pass_band: float = PASS_BAND_LEVEL
 ) -> Dict[str, Any]:
@@ -424,6 +452,7 @@ def score_panel(
         bundles, skipped = list(bundles), []
 
     benches = [score_benchmark(path, tag, pass_band=pass_band) for path, tag in bundles]
+    _centre_relative_use_only(benches)
 
     by_panel: Dict[str, Dict[str, Any]] = {}
     by_role: Dict[str, Dict[str, Any]] = {}
@@ -563,6 +592,10 @@ def render_markdown(payload: Dict[str, Any]) -> str:
         f"* within {payload['pass_band_level']:.0f}x: {s['within_band_count']}/{s['matched_compound_count']} "
         f"({_fmt(s['within_band_rate'])}); median fold {_fmt(fs['median_fold_error'])}, "
         f"geometric mean {_fmt(fs['geometric_mean_fold'])}, worst {_fmt(fs['worst_fold_error'])}",
+        *([f"* **the denominator fell by refusal, not by any prediction improving**: since 2026-11-05 the "
+           f"{sum(1 for r in payload.get('refused_compounds') or [] if r.get('absolute_refused'))} rows whose absolute "
+           "level the thiol lane does not ship (H0 / EX-059, D2 branch (i)) are refused and out of every count here"]
+          if any(r.get("absolute_refused") for r in payload.get("refused_compounds") or []) else []),
         f"* evidence roles (core): {s['evidence_role_totals']}",
         f"* predictive benchmarks passing their contract: {', '.join(s['predictive_passes']) or 'NONE'}; "
         f"strict-ready: {', '.join(s['strict_ready']) or 'NONE'}",

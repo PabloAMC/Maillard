@@ -4,6 +4,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 
 * panel: **42** benchmarks, 13 scored, 29 fully refused; rows **27**, refused rows 66
 * within 3x: 11/27 (0.407); median fold 6.246, geometric mean 12.675, worst 9.63e+03
+* **the denominator fell by refusal, not by any prediction improving**: since 2026-11-05 the 39 rows whose absolute level the thiol lane does not ship (H0 / EX-059, D2 branch (i)) are refused and out of every count here
 * evidence roles (core): {'external_holdout': 26, 'predictive': 16}
 * predictive benchmarks passing their contract: NONE; strict-ready: NONE
 * **honest literature: 11/27 within band** (0.407), 13 benchmarks, median fold 6.246, geometric mean 12.675

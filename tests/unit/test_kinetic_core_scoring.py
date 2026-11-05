@@ -196,7 +196,9 @@ def test_refusals_use_the_engine_vocabulary_and_a_fully_refused_bundle_is_refuse
     # 2026-11-05 (H0 / EX-059): its MFT is answered by the engine and refused for its absolute level, with the
     # numbers kept for the within-study contrast diagnostic
     assert h2s["refused_compounds"] and all(r["absolute_refused"] for r in h2s["refused_compounds"])
-    assert all(r["relative_use_only"]["predicted"] > 0 for r in h2s["refused_compounds"])
+    # review m7: the panel keeps only the (study, compound)-centred log level, never a ppb level
+    assert all("predicted" not in r["relative_use_only"] and "log10_predicted" not in r["relative_use_only"]
+               and r["relative_use_only"]["log10_predicted_minus_study_mean"] is not None for r in h2s["refused_compounds"])
     from src.kinetic_core.engine import FormulationSpec, ProcessSpec, ThermalProgram, predict
 
     spec = FormulationSpec("tam", {"D-Ribose": 10.0, "Thioacetamide": 10.0},

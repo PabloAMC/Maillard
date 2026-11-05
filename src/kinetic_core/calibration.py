@@ -156,11 +156,14 @@ class Calibration:
                                    "matrix_of_records": self.matrix}
         # the factor's own uncertainty widens the interval: 1.645 sigma in decades for a 90 % band. 2026-11-05
         # (H0 / EX-059): a thiol-lane observable's calibrated level is the within-laboratory case the ruling
-        # ships, so its interval also carries one row's shape error omega, in quadrature, here and only here.
+        # ships, and it is a two-row ratio (the new condition against the fit rows' mean), so its interval also
+        # carries omega for the new row and omega / sqrt(n) for the anchor, in quadrature, here and only here.
+        # Whether the level is SHOWN at all is thiol_relative_only.calibration_rescues (made by calibrate, from data).
         from . import thiol_relative_only
 
         metadata["calibration_extra_decades"] = {
-            compound: (thiol_relative_only.calibrated_extra_decades(self.response_factors[compound].sigma)
+            compound: (thiol_relative_only.calibrated_extra_decades(self.response_factors[compound].sigma,
+                                                                    self.response_factors[compound].n_rows)
                        if thiol_relative_only.declared(run.declaration, compound)
                        else 1.645 * self.response_factors[compound].sigma)
             for compound in applied

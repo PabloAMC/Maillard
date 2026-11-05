@@ -23,6 +23,19 @@ from typing import Any, Dict, List, Mapping, Optional, Tuple
 from src import data_paths
 from src.kinetic_core.vessel import vessel_from_bundle
 
+
+def study_key(bench: Mapping[str, Any], bench_file: str) -> str:
+    """The study a bundle belongs to (its paper, else its citation, else its file): the unit a within-study contrast
+    pairs inside. Moved here from build_null_model_baselines.py (2026-11-05) so the scorecard can centre on it."""
+    from src import paper_keys
+
+    doi = bench.get("source_doi")
+    if doi:
+        key = paper_keys.for_doi(doi)
+        return key.paper_id if key else (paper_keys.normalise_doi(doi) or doi)
+    citation = (bench.get("source_metadata") or {}).get("citation", "")
+    return citation[:40] or Path(bench_file).stem
+
 # ---------------------------------------------------------------------------
 # Units
 # ---------------------------------------------------------------------------

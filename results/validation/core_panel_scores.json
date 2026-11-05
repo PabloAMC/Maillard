@@ -43,8 +43,8 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-11-05",
     "git": {
-      "commit": "8b28d03140bed4224f57749925ed49c019dd7bc3",
-      "short": "8b28d031",
+      "commit": "a4b2504b575e24a4e5b6793c78bc8f530ed586e1",
+      "short": "a4b2504b",
       "branch": "h0-relative-only-thiols",
       "dirty": true
     },
@@ -491,7 +491,7 @@
       "total": 18
     },
     "shared_with_holdout_panel": 0,
-    "wall_seconds": 194.0
+    "wall_seconds": 234.7
   },
   "benchmarks": [
     {
@@ -742,9 +742,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 310.0,
-            "predicted": 4030.203757362508,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 1.3696058949779175
           }
         }
       ],
@@ -839,9 +840,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 5362.0,
-            "predicted": 2919.6509380246657,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 1.2296098234152515
           }
         }
       ],
@@ -936,9 +938,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 6230.0,
-            "predicted": 1146.475919744765,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.8236438287658254
           }
         }
       ],
@@ -1117,9 +1120,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 11016.0,
-            "predicted": 17014.105990845805,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 1.8862680013564916
           }
         }
       ],
@@ -1298,9 +1302,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 1016.0,
-            "predicted": 1074.1357801881684,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.7953380748693797
           }
         }
       ],
@@ -1395,9 +1400,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 4224.0,
-            "predicted": 8269.39995364794,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 1.68175288870885
           }
         }
       ],
@@ -1496,9 +1502,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 121.0,
-            "predicted": 346.61680335656604,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.19530848010441737
           }
         },
         {
@@ -1513,9 +1520,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 198.0,
-            "predicted": 93.63341996131116,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.26429022231408905
           }
         }
       ],
@@ -1891,9 +1899,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 715.22,
-            "predicted": 46.45268582053923,
+            "study": "resconi_2023_pbma_beef_identity_benchmark",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.0
           }
         }
       ],
@@ -2051,9 +2060,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 11.7,
-            "predicted": 232.9157132486124,
+            "study": "hofmann_schieberle_grosch_1996",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.0
           }
         }
       ],
@@ -2127,9 +2137,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 8.1,
-            "predicted": 1305.955247122756,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.00948625131916847
           }
         },
         {
@@ -2144,9 +2155,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 116.0,
-            "predicted": 129.54014850126148,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.25421848246182055
           }
         },
         {
@@ -2161,9 +2173,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 716.0,
-            "predicted": 24.13759670405366,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.33270545324011813
           }
         }
       ],
@@ -2237,9 +2250,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 59.1,
-            "predicted": 844.8615542046919,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.19862899817544077
           }
         },
         {
@@ -2254,9 +2268,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 124.0,
-            "predicted": 25.670765152881717,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.44874709450377015
           }
         },
         {
@@ -2271,9 +2286,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 113.0,
-            "predicted": 4.594963993856148,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.3877064608902524
           }
         }
       ],
@@ -2347,9 +2363,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 64.1,
-            "predicted": 1748.8198103287987,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.11733051827043361
           }
         },
         {
@@ -2364,9 +2381,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 383.0,
-            "predicted": 73.48805571848523,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.00803084923552988
           }
         },
         {
@@ -2381,9 +2399,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 397.0,
-            "predicted": 8.835422550184978,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.1037612492121619
           }
         }
       ],
@@ -2457,9 +2476,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 57.1,
-            "predicted": 1645.1264207712672,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.09078473122417474
           }
         },
         {
@@ -2474,9 +2494,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 270.0,
-            "predicted": 110.83672146422113,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.1864977628064195
           }
         },
         {
@@ -2491,9 +2512,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 575.0,
-            "predicted": 16.17151955873745,
+            "study": "zhou2023c",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.15876225686229573
           }
         }
       ],
@@ -3766,9 +3788,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 229.0,
-            "predicted": 1523.2707418838477,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": false,
-            "shared_with": "hofmann_ribose_pH3_FFT"
+            "shared_with": "hofmann_ribose_pH3_FFT",
+            "log10_predicted_minus_study_mean": 0.8382359678880502
           }
         },
         {
@@ -3783,9 +3806,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 553.0,
-            "predicted": 24.707237554782857,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": false,
-            "shared_with": "hofmann_ribose_pH3_MFT"
+            "shared_with": "hofmann_ribose_pH3_MFT",
+            "log10_predicted_minus_study_mean": -0.8428969176991035
           }
         }
       ],
@@ -3862,9 +3886,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 12.0,
-            "predicted": 0.16959779562439883,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": false,
-            "shared_with": "hofmann_ribose_pH7_FFT"
+            "shared_with": "hofmann_ribose_pH7_FFT",
+            "log10_predicted_minus_study_mean": -3.1151209294533775
           }
         },
         {
@@ -3879,9 +3904,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 25.0,
-            "predicted": 0.005096217562612314,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": false,
-            "shared_with": "hofmann_ribose_pH7_MFT"
+            "shared_with": "hofmann_ribose_pH7_MFT",
+            "log10_predicted_minus_study_mean": -4.52847314840994
           }
         }
       ],
@@ -3980,9 +4006,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 96.0,
-            "predicted": 346.61680335656604,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.19530848010441737
           }
         },
         {
@@ -3997,9 +4024,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 143.0,
-            "predicted": 93.63341996131116,
+            "study": "hofmann_schieberle_1998_free_mft_fft",
             "in_core_fit": true,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.26429022231408905
           }
         }
       ],
@@ -4076,9 +4104,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 6.88,
-            "predicted": 10.3344470370659,
+            "study": "yiltirak2026",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.06231377225488188
           }
         },
         {
@@ -4093,9 +4122,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 1.28,
-            "predicted": 299.49868107611667,
+            "study": "yiltirak2026",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.20779273161954803
           }
         }
       ],
@@ -4172,9 +4202,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 3.29,
-            "predicted": 12.015187206643871,
+            "study": "yiltirak2026",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.0031295257204464466
           }
         },
         {
@@ -4189,9 +4220,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 1.46,
-            "predicted": 246.54231029249232,
+            "study": "yiltirak2026",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.12328927876426521
           }
         }
       ],
@@ -4268,9 +4300,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 2.4,
-            "predicted": 12.859461293680834,
+            "study": "yiltirak2026",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.03262175943760548
           }
         },
         {
@@ -4285,9 +4318,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 1.68,
-            "predicted": 167.26634676749305,
+            "study": "yiltirak2026",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.04519361091055352
           }
         }
       ],
@@ -4364,9 +4398,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 1.71,
-            "predicted": 12.681292014348603,
+            "study": "yiltirak2026",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.02656248709683018
           }
         },
         {
@@ -4381,9 +4416,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 1.62,
-            "predicted": 96.0978747403154,
+            "study": "yiltirak2026",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": -0.2858883994732597
           }
         }
       ],
@@ -4487,9 +4523,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 22.63,
-            "predicted": 0.5097742997445959,
+            "study": "zhang2025b",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.0
           }
         },
         {
@@ -4504,9 +4541,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 0.29,
-            "predicted": 2.4144238888040057,
+            "study": "zhang2025b",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.0
           }
         },
         {
@@ -4521,9 +4559,10 @@
           "absolute_refused": true,
           "relative_use_only": {
             "measured": 18.25,
-            "predicted": 0.0006363094359933459,
+            "study": "zhang2025b",
             "in_core_fit": false,
-            "shared_with": null
+            "shared_with": null,
+            "log10_predicted_minus_study_mean": 0.0
           }
         }
       ],
@@ -5042,9 +5081,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 310.0,
-        "predicted": 4030.203757362508,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 1.3696058949779175
       }
     },
     {
@@ -5059,9 +5099,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 5362.0,
-        "predicted": 2919.6509380246657,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 1.2296098234152515
       }
     },
     {
@@ -5076,9 +5117,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 6230.0,
-        "predicted": 1146.475919744765,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.8236438287658254
       }
     },
     {
@@ -5115,9 +5157,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 11016.0,
-        "predicted": 17014.105990845805,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 1.8862680013564916
       }
     },
     {
@@ -5154,9 +5197,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 1016.0,
-        "predicted": 1074.1357801881684,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.7953380748693797
       }
     },
     {
@@ -5171,9 +5215,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 4224.0,
-        "predicted": 8269.39995364794,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 1.68175288870885
       }
     },
     {
@@ -5188,9 +5233,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 121.0,
-        "predicted": 346.61680335656604,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.19530848010441737
       }
     },
     {
@@ -5205,9 +5251,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 198.0,
-        "predicted": 93.63341996131116,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.26429022231408905
       }
     },
     {
@@ -5277,9 +5324,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 715.22,
-        "predicted": 46.45268582053923,
+        "study": "resconi_2023_pbma_beef_identity_benchmark",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.0
       }
     },
     {
@@ -5316,9 +5364,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 11.7,
-        "predicted": 232.9157132486124,
+        "study": "hofmann_schieberle_grosch_1996",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.0
       }
     },
     {
@@ -5333,9 +5382,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 8.1,
-        "predicted": 1305.955247122756,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.00948625131916847
       }
     },
     {
@@ -5350,9 +5400,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 116.0,
-        "predicted": 129.54014850126148,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.25421848246182055
       }
     },
     {
@@ -5367,9 +5418,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 716.0,
-        "predicted": 24.13759670405366,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.33270545324011813
       }
     },
     {
@@ -5384,9 +5436,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 59.1,
-        "predicted": 844.8615542046919,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.19862899817544077
       }
     },
     {
@@ -5401,9 +5454,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 124.0,
-        "predicted": 25.670765152881717,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.44874709450377015
       }
     },
     {
@@ -5418,9 +5472,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 113.0,
-        "predicted": 4.594963993856148,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.3877064608902524
       }
     },
     {
@@ -5435,9 +5490,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 64.1,
-        "predicted": 1748.8198103287987,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.11733051827043361
       }
     },
     {
@@ -5452,9 +5508,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 383.0,
-        "predicted": 73.48805571848523,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.00803084923552988
       }
     },
     {
@@ -5469,9 +5526,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 397.0,
-        "predicted": 8.835422550184978,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.1037612492121619
       }
     },
     {
@@ -5486,9 +5544,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 57.1,
-        "predicted": 1645.1264207712672,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.09078473122417474
       }
     },
     {
@@ -5503,9 +5562,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 270.0,
-        "predicted": 110.83672146422113,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.1864977628064195
       }
     },
     {
@@ -5520,9 +5580,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 575.0,
-        "predicted": 16.17151955873745,
+        "study": "zhou2023c",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.15876225686229573
       }
     },
     {
@@ -5603,9 +5664,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 229.0,
-        "predicted": 1523.2707418838477,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": false,
-        "shared_with": "hofmann_ribose_pH3_FFT"
+        "shared_with": "hofmann_ribose_pH3_FFT",
+        "log10_predicted_minus_study_mean": 0.8382359678880502
       }
     },
     {
@@ -5620,9 +5682,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 553.0,
-        "predicted": 24.707237554782857,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": false,
-        "shared_with": "hofmann_ribose_pH3_MFT"
+        "shared_with": "hofmann_ribose_pH3_MFT",
+        "log10_predicted_minus_study_mean": -0.8428969176991035
       }
     },
     {
@@ -5637,9 +5700,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 12.0,
-        "predicted": 0.16959779562439883,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": false,
-        "shared_with": "hofmann_ribose_pH7_FFT"
+        "shared_with": "hofmann_ribose_pH7_FFT",
+        "log10_predicted_minus_study_mean": -3.1151209294533775
       }
     },
     {
@@ -5654,9 +5718,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 25.0,
-        "predicted": 0.005096217562612314,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": false,
-        "shared_with": "hofmann_ribose_pH7_MFT"
+        "shared_with": "hofmann_ribose_pH7_MFT",
+        "log10_predicted_minus_study_mean": -4.52847314840994
       }
     },
     {
@@ -5671,9 +5736,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 96.0,
-        "predicted": 346.61680335656604,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.19530848010441737
       }
     },
     {
@@ -5688,9 +5754,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 143.0,
-        "predicted": 93.63341996131116,
+        "study": "hofmann_schieberle_1998_free_mft_fft",
         "in_core_fit": true,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.26429022231408905
       }
     },
     {
@@ -5705,9 +5772,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 6.88,
-        "predicted": 10.3344470370659,
+        "study": "yiltirak2026",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.06231377225488188
       }
     },
     {
@@ -5722,9 +5790,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 1.28,
-        "predicted": 299.49868107611667,
+        "study": "yiltirak2026",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.20779273161954803
       }
     },
     {
@@ -5739,9 +5808,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 3.29,
-        "predicted": 12.015187206643871,
+        "study": "yiltirak2026",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.0031295257204464466
       }
     },
     {
@@ -5756,9 +5826,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 1.46,
-        "predicted": 246.54231029249232,
+        "study": "yiltirak2026",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.12328927876426521
       }
     },
     {
@@ -5773,9 +5844,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 2.4,
-        "predicted": 12.859461293680834,
+        "study": "yiltirak2026",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.03262175943760548
       }
     },
     {
@@ -5790,9 +5862,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 1.68,
-        "predicted": 167.26634676749305,
+        "study": "yiltirak2026",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.04519361091055352
       }
     },
     {
@@ -5807,9 +5880,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 1.71,
-        "predicted": 12.681292014348603,
+        "study": "yiltirak2026",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.02656248709683018
       }
     },
     {
@@ -5824,9 +5898,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 1.62,
-        "predicted": 96.0978747403154,
+        "study": "yiltirak2026",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": -0.2858883994732597
       }
     },
     {
@@ -5841,9 +5916,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 22.63,
-        "predicted": 0.5097742997445959,
+        "study": "zhang2025b",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.0
       }
     },
     {
@@ -5858,9 +5934,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 0.29,
-        "predicted": 2.4144238888040057,
+        "study": "zhang2025b",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.0
       }
     },
     {
@@ -5875,9 +5952,10 @@
       "absolute_refused": true,
       "relative_use_only": {
         "measured": 18.25,
-        "predicted": 0.0006363094359933459,
+        "study": "zhang2025b",
         "in_core_fit": false,
-        "shared_with": null
+        "shared_with": null,
+        "log10_predicted_minus_study_mean": 0.0
       }
     },
     {

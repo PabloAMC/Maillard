@@ -263,7 +263,7 @@ CONSTANTS = {
         'lipid': 'REFERENCE_AUTOXIDATION_SYSTEM REFERENCE_LINOLEATE_1981_COLUMN REFERENCE_OLEATE_1981_COLUMN',
         'panel': 'PANEL_EXTERNAL_MATRIX PANEL_MAILLARD_PATH_HOLDOUT PANEL_TRUST_LOOP SYNTHETIC_SNAPSHOT_SUFFIX',
         'parallel': 'POOL_MODES',
-        'thiol_relative_only': 'ABSOLUTE_REFUSED_TAG',
+        'thiol_relative_only': 'ABSOLUTE_REFUSED_TAG CALIBRATE_GENERATOR',
         'trunk_conditions': 'ATMOSPHERE_REFERENCE',
         'uncertainty': (
             'ACRYLAMIDE DEFINITIONAL_BAND EMPIRICAL_CLASS FROZEN_NOT_FREE LAPLACE_SAMPLED LIPID '
@@ -276,7 +276,7 @@ CONSTANTS = {
         'directional': 'PANEL_PATH',
         'fit_rows': 'FIT_ROWS_DIR LABORATORIES',
         'fit_targets': 'RECORD_GLOB',
-        'thiol_relative_only': 'H0_RECORD',
+        'thiol_relative_only': 'H0_RECORD NOISE_RECORD',
         'uncertainty': 'DISCREPANCY_PATH LAPLACE_PATH PROFILE_PATH',
         'user_scoring': 'USER_RESULTS_DIR',
     },

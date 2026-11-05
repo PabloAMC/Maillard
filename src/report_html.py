@@ -1447,7 +1447,7 @@ def render_compare_report(payload: Mapping[str, Any]) -> str:
         if interval:
             # H0 / EX-059: a thiol-lane ratio carries omega in each arm
             ratio_cell += (f'<div class="tiny">90 %: {interval[0]:.3g}&ndash;{interval[1]:.3g}&times; '
-                           f"(omega {row['omega_dex_per_arm']:.2f} dex per arm)</div>")
+                           f"(omega {row['omega_dex_per_arm']:.2f} + noise {row['noise_dex_per_arm']:.2f} dex per arm)</div>")
         # An UNDEFINED ratio is a third state: it is neither resolved nor
         # unresolved, because there is no ratio to resolve. Badging it
         # "resolved" would read as a claim about a quantity that does not exist.

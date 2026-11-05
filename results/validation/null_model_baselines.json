@@ -4,8 +4,8 @@
     "artifact": "null_model_baselines",
     "generated_on": "2026-11-05",
     "git": {
-      "commit": "8b28d03140bed4224f57749925ed49c019dd7bc3",
-      "short": "8b28d031",
+      "commit": "a4b2504b575e24a4e5b6793c78bc8f530ed586e1",
+      "short": "a4b2504b",
       "branch": "h0-relative-only-thiols",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "e7c1b94c30f9ad2fbda8f8804ce5804178a09fbb19ed09266627fd0325990c6f"
+        "sha256": "d444f932242d9853847d98d1eb9f2954e605044f11a3628a727566619690ed4b"
       }
     ]
   },
