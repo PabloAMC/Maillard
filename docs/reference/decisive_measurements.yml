@@ -21,27 +21,10 @@
 # Checked by src/decisive_measurements.py (tests/unit/test_decisive_measurements.py).
 
 pending_records:
-  CF-109: "PR #75 (branch registers-2026-11-05), unmerged"
-  CF-110: "PR #75 (branch registers-2026-11-05), unmerged"
-  CF-111: "PR #75 (branch registers-2026-11-05), unmerged"
-  CF-112: "PR #75 (branch registers-2026-11-05), unmerged"
-  CF-113: "PR #75 (branch registers-2026-11-05), unmerged"
-  CF-117: "PR #75 (branch registers-2026-11-05), unmerged"
-  CF-120: "PR #75 (branch registers-2026-11-05), unmerged"
-  CF-121: "PR #75 (branch registers-2026-11-05), unmerged"
-  CF-122: "PR #75 (branch registers-2026-11-05), unmerged"
-  CF-125: "PR #75 (branch registers-2026-11-05), unmerged"
-  EX-062: "PR #75 (branch registers-2026-11-05), unmerged"
-  EX-065: "PR #75 (branch registers-2026-11-05), unmerged"
-  EX-066: "PR #75 (branch registers-2026-11-05), unmerged"
-  EX-067: "PR #75 (branch registers-2026-11-05), unmerged"
   docs/reference/cases/M1c_thiol_supply_structure.md: "branch m1c-case (items 1 - 5 FROZEN at bd641ae8), unmerged"
   docs/reference/cases/M1c_amendment_A1_vauthey2000.md: "branch m1c-case (17710774), unmerged"
   results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md: "branch m1b-prereg (v3.6 DRAFT, d7cd3ab4), unmerged"
   results/validation/kinetic_core_m3_strecker_layer_prereg.md: "branch m3-phase1-build (v2.1 DRAFT, e3f22ebc; v2 at 8dda42e5 on m3-strecker-prereg), unmerged"
-  data/lit/extraction_dossiers/tressl1999_extraction.md: "PR #76 (branch lit-2026-11-05-m4-candidates), unmerged"
-  data/lit/extraction_dossiers/kanzler2021_extraction.md: "PR #76 (branch lit-2026-11-05-m4-candidates), unmerged"
-  data/lit/extraction_dossiers/pfeifer2013_extraction.md: "PR #76 (branch lit-2026-11-05-m4-candidates), unmerged"
 
 entries:
   - id: thiol_supply_structure

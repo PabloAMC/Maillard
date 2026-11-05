@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-11-05",
     "git": {
-      "commit": "02f4c96cccae8b5d590c19e605d1f5323d0bb22a",
-      "short": "02f4c96c",
+      "commit": "246654422930a9fcc27062cfe75fb6e7001dc423",
+      "short": "24665442",
       "branch": "decisive-measurements",
       "dirty": true
     },
@@ -41,7 +41,7 @@
       },
       {
         "path": "docs/reference/decisive_measurements.yml",
-        "sha256": "be6e68b4913a3e4e7a671c91d565ebb2bd4c6fc0b025d73ffbd14352e1e40794"
+        "sha256": "cbf6cfc659fcef1056462d11dee8a349e49b21883d86f56f078e7b8a26b9177e"
       }
     ]
   },
