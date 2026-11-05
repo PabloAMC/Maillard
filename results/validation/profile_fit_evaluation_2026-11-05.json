@@ -1,0 +1,5201 @@
+{
+ "artifact": "profile_fit_evaluation_2026-11-05",
+ "generated_by": "scripts/generators/profile_fit_evaluation.py",
+ "machine": {
+  "cpu_count": 10,
+  "platform": "darwin",
+  "machine": "arm64",
+  "cpu": "Apple M4",
+  "performance_cores": "4",
+  "efficiency_cores": "6",
+  "python": "3.12.14",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1"
+ },
+ "scaling_R0": {
+  "rival": "R0",
+  "n_free": 17,
+  "cold_first_evaluation_s": 4.662,
+  "n_residuals": 53,
+  "cost": 21.88293694591102,
+  "carried_cost": 21.88293694591102,
+  "cost_matches_carried": true,
+  "numerics": {
+   "name": "fit_inline_rtol1e-5",
+   "coupling": "inline",
+   "rtol": 1e-05,
+   "ph_nodes": 17,
+   "ph_iterations": 2,
+   "quick": true
+  },
+  "wall_by_workers": {
+   "1": {
+    "min_s": 3.9158,
+    "all_s": [
+     3.9158,
+     4.1035,
+     4.0771
+    ],
+    "speedup_vs_1": 1.0,
+    "efficiency": 1.0,
+    "load_1min": [
+     2.12,
+     2.01,
+     1.93
+    ],
+    "labels": []
+   },
+   "2": {
+    "min_s": 2.2767,
+    "all_s": [
+     2.2767,
+     2.3203,
+     2.2938
+    ],
+    "speedup_vs_1": 1.72,
+    "efficiency": 0.86,
+    "load_1min": [
+     2.11,
+     2.01,
+     1.94
+    ],
+    "labels": []
+   },
+   "4": {
+    "min_s": 1.6674,
+    "all_s": [
+     1.6723,
+     1.6674,
+     1.7006
+    ],
+    "speedup_vs_1": 2.348,
+    "efficiency": 0.587,
+    "load_1min": [
+     2.1,
+     2.01,
+     1.94
+    ],
+    "labels": []
+   },
+   "8": {
+    "min_s": 1.1797,
+    "all_s": [
+     1.2188,
+     1.1797,
+     1.2198
+    ],
+    "speedup_vs_1": 3.319,
+    "efficiency": 0.415,
+    "load_1min": [
+     2.1,
+     2.1,
+     2.18
+    ],
+    "labels": []
+   }
+  },
+  "best_run_analysis": {
+   "1": {
+    "calls": [
+     {
+      "phase": "_integrate_system",
+      "n_items": 37,
+      "workers": 1,
+      "wall_s": 3.5979,
+      "task_sum_s": 3.5898,
+      "slowest_task_s": 0.4631,
+      "slowest_task": "b60:hofmann_pentose_pH5",
+      "start_latency_s": 0.0001,
+      "tail_latency_s": 0.0001,
+      "busy_fraction_per_worker": [
+       0.998
+      ],
+      "mean_busy_fraction": 0.998,
+      "makespan_pool_order_no_overhead_s": 3.5898,
+      "makespan_longest_first_no_overhead_s": 3.5898,
+      "lower_bound_s": 3.5898
+     },
+     {
+      "phase": "budget_of",
+      "n_items": 1,
+      "workers": 1,
+      "wall_s": 0.315,
+      "task_sum_s": 0.3149,
+      "slowest_task_s": 0.3149,
+      "slowest_task": "flux:cerny_ternary",
+      "start_latency_s": 0.0,
+      "tail_latency_s": 0.0002,
+      "busy_fraction_per_worker": [
+       0.999
+      ],
+      "mean_busy_fraction": 0.999,
+      "makespan_pool_order_no_overhead_s": 0.3149,
+      "makespan_longest_first_no_overhead_s": 0.3149,
+      "lower_bound_s": 0.3149
+     }
+    ],
+    "wall_s": 3.9158,
+    "pool_calls_wall_s": 3.9129,
+    "outside_pool_s": 0.0029
+   },
+   "2": {
+    "calls": [
+     {
+      "phase": "_integrate_system",
+      "n_items": 37,
+      "workers": 2,
+      "wall_s": 1.9433,
+      "task_sum_s": 3.8067,
+      "slowest_task_s": 0.4821,
+      "slowest_task": "b60:hofmann_pentose_pH5",
+      "start_latency_s": 0.0168,
+      "tail_latency_s": 0.003,
+      "busy_fraction_per_worker": [
+       0.981,
+       0.978
+      ],
+      "mean_busy_fraction": 0.979,
+      "makespan_pool_order_no_overhead_s": 1.9089,
+      "makespan_longest_first_no_overhead_s": 1.9038,
+      "lower_bound_s": 1.9033
+     },
+     {
+      "phase": "budget_of",
+      "n_items": 1,
+      "workers": 1,
+      "wall_s": 0.3297,
+      "task_sum_s": 0.3295,
+      "slowest_task_s": 0.3295,
+      "slowest_task": "flux:cerny_ternary",
+      "start_latency_s": 0.0,
+      "tail_latency_s": 0.0001,
+      "busy_fraction_per_worker": [
+       0.999
+      ],
+      "mean_busy_fraction": 0.999,
+      "makespan_pool_order_no_overhead_s": 0.3295,
+      "makespan_longest_first_no_overhead_s": 0.3295,
+      "lower_bound_s": 0.3295
+     }
+    ],
+    "wall_s": 2.2767,
+    "pool_calls_wall_s": 2.273,
+    "outside_pool_s": 0.0037
+   },
+   "4": {
+    "calls": [
+     {
+      "phase": "_integrate_system",
+      "n_items": 37,
+      "workers": 4,
+      "wall_s": 1.3213,
+      "task_sum_s": 4.7653,
+      "slowest_task_s": 0.5343,
+      "slowest_task": "b60:hofmann_pentose_pH5",
+      "start_latency_s": 0.0151,
+      "tail_latency_s": 0.0083,
+      "busy_fraction_per_worker": [
+       0.945,
+       0.918,
+       0.887,
+       0.857
+      ],
+      "mean_busy_fraction": 0.902,
+      "makespan_pool_order_no_overhead_s": 1.2443,
+      "makespan_longest_first_no_overhead_s": 1.1996,
+      "lower_bound_s": 1.1913
+     },
+     {
+      "phase": "budget_of",
+      "n_items": 1,
+      "workers": 1,
+      "wall_s": 0.3417,
+      "task_sum_s": 0.3414,
+      "slowest_task_s": 0.3414,
+      "slowest_task": "flux:cerny_ternary",
+      "start_latency_s": 0.0,
+      "tail_latency_s": 0.0002,
+      "busy_fraction_per_worker": [
+       0.999
+      ],
+      "mean_busy_fraction": 0.999,
+      "makespan_pool_order_no_overhead_s": 0.3414,
+      "makespan_longest_first_no_overhead_s": 0.3414,
+      "lower_bound_s": 0.3414
+     }
+    ],
+    "wall_s": 1.6674,
+    "pool_calls_wall_s": 1.663,
+    "outside_pool_s": 0.0044
+   },
+   "8": {
+    "calls": [
+     {
+      "phase": "_integrate_system",
+      "n_items": 37,
+      "workers": 8,
+      "wall_s": 0.8399,
+      "task_sum_s": 5.5022,
+      "slowest_task_s": 0.7153,
+      "slowest_task": "b60:hofmann_pentose_pH5",
+      "start_latency_s": 0.0182,
+      "tail_latency_s": 0.0072,
+      "busy_fraction_per_worker": [
+       0.953,
+       0.9,
+       0.898,
+       0.852,
+       0.798,
+       0.788,
+       0.716,
+       0.646
+      ],
+      "mean_busy_fraction": 0.819,
+      "makespan_pool_order_no_overhead_s": 0.802,
+      "makespan_longest_first_no_overhead_s": 0.7153,
+      "lower_bound_s": 0.7153
+     },
+     {
+      "phase": "budget_of",
+      "n_items": 1,
+      "workers": 1,
+      "wall_s": 0.3349,
+      "task_sum_s": 0.3347,
+      "slowest_task_s": 0.3347,
+      "slowest_task": "flux:cerny_ternary",
+      "start_latency_s": 0.0,
+      "tail_latency_s": 0.0002,
+      "busy_fraction_per_worker": [
+       0.999
+      ],
+      "mean_busy_fraction": 0.999,
+      "makespan_pool_order_no_overhead_s": 0.3347,
+      "makespan_longest_first_no_overhead_s": 0.3347,
+      "lower_bound_s": 0.3347
+     }
+    ],
+    "wall_s": 1.1797,
+    "pool_calls_wall_s": 1.1748,
+    "outside_pool_s": 0.0049
+   }
+  },
+  "all_identical": true,
+  "failed_pots": 0,
+  "serial_pots": {
+   "n_tasks": 38,
+   "task_sum_s": 3.9047,
+   "per_phase": {
+    "_integrate_system": {
+     "n": 37,
+     "sum_s": 3.5898,
+     "median_s": 0.0667,
+     "max_s": 0.4631
+    },
+    "budget_of": {
+     "n": 1,
+     "sum_s": 0.3149,
+     "median_s": 0.3149,
+     "max_s": 0.3149
+    }
+   },
+   "quantiles_s": {
+    "10": 0.0256,
+    "25": 0.0399,
+    "50": 0.0683,
+    "75": 0.1274,
+    "90": 0.2023,
+    "100": 0.4631
+   },
+   "slowest_10": [
+    {
+     "phase": "_integrate_system",
+     "label": "b60:hofmann_pentose_pH5",
+     "seconds": 0.4631,
+     "share": 0.1186
+    },
+    {
+     "phase": "budget_of",
+     "label": "flux:cerny_ternary",
+     "seconds": 0.3149,
+     "share": 0.0806
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_ttca_120",
+     "seconds": 0.3105,
+     "share": 0.0795
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_drift_pH8",
+     "seconds": 0.2057,
+     "share": 0.0527
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:cerny_ternary",
+     "seconds": 0.2008,
+     "share": 0.0514
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhang_fig1_cys",
+     "seconds": 0.1941,
+     "share": 0.0497
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhang_fig1_gcys",
+     "seconds": 0.1866,
+     "share": 0.0478
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_arp_cys_pH7",
+     "seconds": 0.1647,
+     "share": 0.0422
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_drift_pH7",
+     "seconds": 0.1644,
+     "share": 0.0421
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:vanseeventer_130C",
+     "seconds": 0.1324,
+     "share": 0.0339
+    }
+   ],
+   "slowest_10_share": 0.5986,
+   "slowest_1_share": 0.1186,
+   "all": [
+    {
+     "phase": "_integrate_system",
+     "label": "b60:hofmann_pentose_pH5",
+     "seconds": 0.4631
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:hofmann_glucose_pH5",
+     "seconds": 0.0875
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:hofmann_fructose_pH5",
+     "seconds": 0.1125
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_ribose_h2s",
+     "seconds": 0.0718
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_tdp_h2s",
+     "seconds": 0.0574
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_furfural_h2s",
+     "seconds": 0.1021
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_nf_h2s",
+     "seconds": 0.0472
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_nf_cys",
+     "seconds": 0.0518
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_c2c3",
+     "seconds": 0.0403
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_c2c3_pH3",
+     "seconds": 0.041
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_c2c3_pH7",
+     "seconds": 0.0398
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_thiamine",
+     "seconds": 0.0391
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_mgo_h2s_1to1",
+     "seconds": 0.0256
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_mgo_h2s_1to2",
+     "seconds": 0.0255
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_arp_cys_pH7",
+     "seconds": 0.1647
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_arp_pH7",
+     "seconds": 0.0606
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:whitfield_nf_cys",
+     "seconds": 0.0667
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:whitfield_nf_h2s",
+     "seconds": 0.0703
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:vanseeventer_130C",
+     "seconds": 0.1324
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhang_fig1_cys",
+     "seconds": 0.1941
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhang_fig1_gcys",
+     "seconds": 0.1866
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:cerny_ternary",
+     "seconds": 0.2008
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_ttca_100",
+     "seconds": 0.1058
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_ttca_120",
+     "seconds": 0.3105
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_freecys_100",
+     "seconds": 0.0506
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_freecys_120",
+     "seconds": 0.07
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH3_0",
+     "seconds": 0.0229
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH4_0",
+     "seconds": 0.0231
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH5_0",
+     "seconds": 0.0248
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH5_4",
+     "seconds": 0.0258
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH6_0",
+     "seconds": 0.0285
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH6_4",
+     "seconds": 0.0303
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_drift_pH6",
+     "seconds": 0.1048
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_drift_pH7",
+     "seconds": 0.1644
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_drift_pH8",
+     "seconds": 0.2057
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:feng_arp_100",
+     "seconds": 0.0549
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:feng_arp_120",
+     "seconds": 0.0868
+    },
+    {
+     "phase": "budget_of",
+     "label": "flux:cerny_ternary",
+     "seconds": 0.3149
+    }
+   ]
+  }
+ },
+ "scaling_C1": {
+  "rival": "C1",
+  "n_free": 19,
+  "cold_first_evaluation_s": 10.7534,
+  "n_residuals": 343,
+  "cost": 186.75261362645986,
+  "carried_cost": 186.75261362645986,
+  "cost_matches_carried": true,
+  "numerics": {
+   "name": "fit_inline_rtol1e-5",
+   "coupling": "inline",
+   "rtol": 1e-05,
+   "ph_nodes": 17,
+   "ph_iterations": 2,
+   "quick": true
+  },
+  "wall_by_workers": {
+   "1": {
+    "min_s": 9.8611,
+    "all_s": [
+     9.8611,
+     10.1523,
+     10.1838
+    ],
+    "speedup_vs_1": 1.0,
+    "efficiency": 1.0,
+    "load_1min": [
+     2.12,
+     2.91,
+     2.77
+    ],
+    "labels": []
+   },
+   "2": {
+    "min_s": 5.4229,
+    "all_s": [
+     5.4857,
+     5.5213,
+     5.4229
+    ],
+    "speedup_vs_1": 1.818,
+    "efficiency": 0.909,
+    "load_1min": [
+     2.33,
+     2.99,
+     2.57
+    ],
+    "labels": []
+   },
+   "4": {
+    "min_s": 3.221,
+    "all_s": [
+     3.221,
+     3.8783,
+     3.9556
+    ],
+    "speedup_vs_1": 3.062,
+    "efficiency": 0.765,
+    "load_1min": [
+     2.3,
+     3.16,
+     2.52
+    ],
+    "labels": []
+   },
+   "8": {
+    "min_s": 2.9184,
+    "all_s": [
+     2.9583,
+     2.9184,
+     3.1982
+    ],
+    "speedup_vs_1": 3.379,
+    "efficiency": 0.422,
+    "load_1min": [
+     3.0,
+     3.16,
+     2.48
+    ],
+    "labels": []
+   }
+  },
+  "best_run_analysis": {
+   "1": {
+    "calls": [
+     {
+      "phase": "_integrate_system",
+      "n_items": 37,
+      "workers": 1,
+      "wall_s": 3.6925,
+      "task_sum_s": 3.6845,
+      "slowest_task_s": 0.4854,
+      "slowest_task": "b60:kang_ttca_120",
+      "start_latency_s": 0.0001,
+      "tail_latency_s": 0.0001,
+      "busy_fraction_per_worker": [
+       0.998
+      ],
+      "mean_busy_fraction": 0.998,
+      "makespan_pool_order_no_overhead_s": 3.6845,
+      "makespan_longest_first_no_overhead_s": 3.6845,
+      "lower_bound_s": 3.6845
+     },
+     {
+      "phase": "budget_of",
+      "n_items": 1,
+      "workers": 1,
+      "wall_s": 0.2824,
+      "task_sum_s": 0.2823,
+      "slowest_task_s": 0.2823,
+      "slowest_task": "flux:cerny_ternary",
+      "start_latency_s": 0.0,
+      "tail_latency_s": 0.0001,
+      "busy_fraction_per_worker": [
+       1.0
+      ],
+      "mean_busy_fraction": 1.0,
+      "makespan_pool_order_no_overhead_s": 0.2823,
+      "makespan_longest_first_no_overhead_s": 0.2823,
+      "lower_bound_s": 0.2823
+     },
+     {
+      "phase": "_run_pot_safe",
+      "n_items": 33,
+      "workers": 1,
+      "wall_s": 5.8809,
+      "task_sum_s": 5.8727,
+      "slowest_task_s": 0.6145,
+      "slowest_task": "route:zhai2023jafc_ttca_ph7_120c_fig5a",
+      "start_latency_s": 0.0001,
+      "tail_latency_s": 0.0002,
+      "busy_fraction_per_worker": [
+       0.999
+      ],
+      "mean_busy_fraction": 0.999,
+      "makespan_pool_order_no_overhead_s": 5.8727,
+      "makespan_longest_first_no_overhead_s": 5.8727,
+      "lower_bound_s": 5.8727
+     }
+    ],
+    "wall_s": 9.8611,
+    "pool_calls_wall_s": 9.8558,
+    "outside_pool_s": 0.0053
+   },
+   "2": {
+    "calls": [
+     {
+      "phase": "_integrate_system",
+      "n_items": 37,
+      "workers": 2,
+      "wall_s": 1.9763,
+      "task_sum_s": 3.8721,
+      "slowest_task_s": 0.5066,
+      "slowest_task": "b60:kang_ttca_120",
+      "start_latency_s": 0.0088,
+      "tail_latency_s": 0.0031,
+      "busy_fraction_per_worker": [
+       0.984,
+       0.975
+      ],
+      "mean_busy_fraction": 0.98,
+      "makespan_pool_order_no_overhead_s": 1.9444,
+      "makespan_longest_first_no_overhead_s": 1.9363,
+      "lower_bound_s": 1.936
+     },
+     {
+      "phase": "budget_of",
+      "n_items": 1,
+      "workers": 1,
+      "wall_s": 0.2948,
+      "task_sum_s": 0.2946,
+      "slowest_task_s": 0.2946,
+      "slowest_task": "flux:cerny_ternary",
+      "start_latency_s": 0.0,
+      "tail_latency_s": 0.0002,
+      "busy_fraction_per_worker": [
+       0.999
+      ],
+      "mean_busy_fraction": 0.999,
+      "makespan_pool_order_no_overhead_s": 0.2946,
+      "makespan_longest_first_no_overhead_s": 0.2946,
+      "lower_bound_s": 0.2946
+     },
+     {
+      "phase": "_run_pot_safe",
+      "n_items": 33,
+      "workers": 2,
+      "wall_s": 3.1444,
+      "task_sum_s": 6.1518,
+      "slowest_task_s": 0.6566,
+      "slowest_task": "route:zhai2023jafc_ttca_ph7_120c_fig5a",
+      "start_latency_s": 0.0093,
+      "tail_latency_s": 0.0034,
+      "busy_fraction_per_worker": [
+       0.992,
+       0.964
+      ],
+      "mean_busy_fraction": 0.978,
+      "makespan_pool_order_no_overhead_s": 3.1205,
+      "makespan_longest_first_no_overhead_s": 3.0871,
+      "lower_bound_s": 3.0759
+     }
+    ],
+    "wall_s": 5.4229,
+    "pool_calls_wall_s": 5.4155,
+    "outside_pool_s": 0.0074
+   },
+   "4": {
+    "calls": [
+     {
+      "phase": "_integrate_system",
+      "n_items": 37,
+      "workers": 4,
+      "wall_s": 1.07,
+      "task_sum_s": 3.9785,
+      "slowest_task_s": 0.5327,
+      "slowest_task": "b60:kang_ttca_120",
+      "start_latency_s": 0.009,
+      "tail_latency_s": 0.0039,
+      "busy_fraction_per_worker": [
+       0.981,
+       0.944,
+       0.92,
+       0.874
+      ],
+      "mean_busy_fraction": 0.93,
+      "makespan_pool_order_no_overhead_s": 1.0491,
+      "makespan_longest_first_no_overhead_s": 1.0027,
+      "lower_bound_s": 0.9946
+     },
+     {
+      "phase": "budget_of",
+      "n_items": 1,
+      "workers": 1,
+      "wall_s": 0.3064,
+      "task_sum_s": 0.3063,
+      "slowest_task_s": 0.3063,
+      "slowest_task": "flux:cerny_ternary",
+      "start_latency_s": 0.0,
+      "tail_latency_s": 0.0002,
+      "busy_fraction_per_worker": [
+       0.999
+      ],
+      "mean_busy_fraction": 0.999,
+      "makespan_pool_order_no_overhead_s": 0.3063,
+      "makespan_longest_first_no_overhead_s": 0.3063,
+      "lower_bound_s": 0.3063
+     },
+     {
+      "phase": "_run_pot_safe",
+      "n_items": 33,
+      "workers": 4,
+      "wall_s": 1.8368,
+      "task_sum_s": 6.5762,
+      "slowest_task_s": 0.7159,
+      "slowest_task": "route:zhai2023jafc_ttca_ph7_120c_fig5a",
+      "start_latency_s": 0.0106,
+      "tail_latency_s": 0.003,
+      "busy_fraction_per_worker": [
+       0.99,
+       0.957,
+       0.846,
+       0.788
+      ],
+      "mean_busy_fraction": 0.895,
+      "makespan_pool_order_no_overhead_s": 1.8176,
+      "makespan_longest_first_no_overhead_s": 1.6647,
+      "lower_bound_s": 1.644
+     }
+    ],
+    "wall_s": 3.221,
+    "pool_calls_wall_s": 3.2132,
+    "outside_pool_s": 0.0078
+   },
+   "8": {
+    "calls": [
+     {
+      "phase": "_integrate_system",
+      "n_items": 37,
+      "workers": 8,
+      "wall_s": 1.0311,
+      "task_sum_s": 6.019,
+      "slowest_task_s": 0.7255,
+      "slowest_task": "b60:kang_ttca_120",
+      "start_latency_s": 0.0129,
+      "tail_latency_s": 0.0048,
+      "busy_fraction_per_worker": [
+       0.974,
+       0.876,
+       0.813,
+       0.722,
+       0.694,
+       0.612,
+       0.593,
+       0.553
+      ],
+      "mean_busy_fraction": 0.73,
+      "makespan_pool_order_no_overhead_s": 1.0045,
+      "makespan_longest_first_no_overhead_s": 0.767,
+      "lower_bound_s": 0.7524
+     },
+     {
+      "phase": "budget_of",
+      "n_items": 1,
+      "workers": 1,
+      "wall_s": 0.3097,
+      "task_sum_s": 0.3095,
+      "slowest_task_s": 0.3095,
+      "slowest_task": "flux:cerny_ternary",
+      "start_latency_s": 0.0,
+      "tail_latency_s": 0.0002,
+      "busy_fraction_per_worker": [
+       0.999
+      ],
+      "mean_busy_fraction": 0.999,
+      "makespan_pool_order_no_overhead_s": 0.3095,
+      "makespan_longest_first_no_overhead_s": 0.3095,
+      "lower_bound_s": 0.3095
+     },
+     {
+      "phase": "_run_pot_safe",
+      "n_items": 33,
+      "workers": 8,
+      "wall_s": 1.5689,
+      "task_sum_s": 9.2605,
+      "slowest_task_s": 0.8618,
+      "slowest_task": "route:zhai2023jafc_ttca_ph7_120c_fig5a",
+      "start_latency_s": 0.018,
+      "tail_latency_s": 0.0046,
+      "busy_fraction_per_worker": [
+       0.981,
+       0.911,
+       0.838,
+       0.701,
+       0.69,
+       0.636,
+       0.581,
+       0.565
+      ],
+      "mean_busy_fraction": 0.738,
+      "makespan_pool_order_no_overhead_s": 1.5387,
+      "makespan_longest_first_no_overhead_s": 1.1889,
+      "lower_bound_s": 1.1576
+     }
+    ],
+    "wall_s": 2.9184,
+    "pool_calls_wall_s": 2.9097,
+    "outside_pool_s": 0.0087
+   }
+  },
+  "all_identical": true,
+  "failed_pots": 0,
+  "serial_pots": {
+   "n_tasks": 71,
+   "task_sum_s": 9.8397,
+   "per_phase": {
+    "_integrate_system": {
+     "n": 37,
+     "sum_s": 3.6847,
+     "median_s": 0.0711,
+     "max_s": 0.4854
+    },
+    "budget_of": {
+     "n": 1,
+     "sum_s": 0.2823,
+     "median_s": 0.2823,
+     "max_s": 0.2823
+    },
+    "_run_pot_safe": {
+     "n": 33,
+     "sum_s": 5.8727,
+     "median_s": 0.1243,
+     "max_s": 0.6145
+    }
+   },
+   "quantiles_s": {
+    "10": 0.0309,
+    "25": 0.0489,
+    "50": 0.0936,
+    "75": 0.1974,
+    "90": 0.2533,
+    "100": 0.6145
+   },
+   "slowest_10": [
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2023jafc_ttca_ph7_120c_fig5a",
+     "seconds": 0.6145,
+     "share": 0.0625
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_ttca_120",
+     "seconds": 0.4854,
+     "share": 0.0493
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2023jafc_ttcacys_ph7_120c_fig5a",
+     "seconds": 0.4849,
+     "share": 0.0493
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2023foodchem_ttcaxyl_ph7_120c_fig3a",
+     "seconds": 0.4224,
+     "share": 0.0429
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2019_110c",
+     "seconds": 0.4115,
+     "share": 0.0418
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2019_130c",
+     "seconds": 0.306,
+     "share": 0.0311
+    },
+    {
+     "phase": "budget_of",
+     "label": "flux:cerny_ternary",
+     "seconds": 0.2823,
+     "share": 0.0287
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_drift_pH8",
+     "seconds": 0.2533,
+     "share": 0.0257
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2023jafc_ttca_ph7_100c_fig5a",
+     "seconds": 0.2414,
+     "share": 0.0245
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttcaxyl_ph8_100c_fig6",
+     "seconds": 0.239,
+     "share": 0.0243
+    }
+   ],
+   "slowest_10_share": 0.3802,
+   "slowest_1_share": 0.0625,
+   "all": [
+    {
+     "phase": "_integrate_system",
+     "label": "b60:hofmann_pentose_pH5",
+     "seconds": 0.1541
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:hofmann_glucose_pH5",
+     "seconds": 0.084
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:hofmann_fructose_pH5",
+     "seconds": 0.1125
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_ribose_h2s",
+     "seconds": 0.101
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_tdp_h2s",
+     "seconds": 0.0809
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_furfural_h2s",
+     "seconds": 0.0801
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_nf_h2s",
+     "seconds": 0.0466
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_nf_cys",
+     "seconds": 0.0475
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_c2c3",
+     "seconds": 0.041
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_c2c3_pH3",
+     "seconds": 0.0424
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_c2c3_pH7",
+     "seconds": 0.0413
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_thiamine",
+     "seconds": 0.0406
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_mgo_h2s_1to1",
+     "seconds": 0.0262
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:fed_mgo_h2s_1to2",
+     "seconds": 0.0264
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_arp_cys_pH7",
+     "seconds": 0.2029
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_arp_pH7",
+     "seconds": 0.0666
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:whitfield_nf_cys",
+     "seconds": 0.0662
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:whitfield_nf_h2s",
+     "seconds": 0.0711
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:vanseeventer_130C",
+     "seconds": 0.1426
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhang_fig1_cys",
+     "seconds": 0.1842
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhang_fig1_gcys",
+     "seconds": 0.1919
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:cerny_ternary",
+     "seconds": 0.1379
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_ttca_100",
+     "seconds": 0.1897
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_ttca_120",
+     "seconds": 0.4854
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_freecys_100",
+     "seconds": 0.0502
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kang_freecys_120",
+     "seconds": 0.0719
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH3_0",
+     "seconds": 0.023
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH4_0",
+     "seconds": 0.0232
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH5_0",
+     "seconds": 0.0251
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH5_4",
+     "seconds": 0.026
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH6_0",
+     "seconds": 0.0291
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:kumazawa_pH6_4",
+     "seconds": 0.0309
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_drift_pH6",
+     "seconds": 0.1364
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_drift_pH7",
+     "seconds": 0.2031
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:zhou_drift_pH8",
+     "seconds": 0.2533
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:feng_arp_100",
+     "seconds": 0.054
+    },
+    {
+     "phase": "_integrate_system",
+     "label": "b60:feng_arp_120",
+     "seconds": 0.0954
+    },
+    {
+     "phase": "budget_of",
+     "label": "flux:cerny_ternary",
+     "seconds": 0.2823
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:cao2017_blank_fig4",
+     "seconds": 0.2188
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:cao2017_blank_fig5",
+     "seconds": 0.2192
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2019_110c",
+     "seconds": 0.4115
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2019_130c",
+     "seconds": 0.306
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2019_70c",
+     "seconds": 0.0936
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2019_90c",
+     "seconds": 0.1394
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttca_ph55_100c_fig4b",
+     "seconds": 0.0735
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttca_ph55_100c_fig6",
+     "seconds": 0.0735
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttca_ph55_120c_fig3a",
+     "seconds": 0.1067
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttca_ph6_100c_fig4b",
+     "seconds": 0.0787
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttca_ph6_100c_fig6",
+     "seconds": 0.0786
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttca_ph7_100c_fig4b",
+     "seconds": 0.1855
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttca_ph7_100c_fig6",
+     "seconds": 0.1854
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttca_ph8_100c_fig4b",
+     "seconds": 0.2217
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttca_ph8_100c_fig6",
+     "seconds": 0.2349
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttcaxyl_ph55_100c_fig4b",
+     "seconds": 0.0698
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttcaxyl_ph55_100c_fig6",
+     "seconds": 0.0697
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttcaxyl_ph6_100c_fig4b",
+     "seconds": 0.0834
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttcaxyl_ph6_100c_fig6",
+     "seconds": 0.083
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttcaxyl_ph7_100c_fig4b",
+     "seconds": 0.0994
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttcaxyl_ph7_100c_fig6",
+     "seconds": 0.1151
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttcaxyl_ph8_100c_fig4b",
+     "seconds": 0.2038
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_ttcaxyl_ph8_100c_fig6",
+     "seconds": 0.239
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_xyl_ph55_100c_fig6",
+     "seconds": 0.044
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_xyl_ph6_100c_fig6",
+     "seconds": 0.0439
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_xyl_ph7_100c_fig6",
+     "seconds": 0.0438
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2021_xyl_ph8_100c_fig6",
+     "seconds": 0.0436
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2023foodchem_ttcaxyl_ph7_120c_fig3a",
+     "seconds": 0.4224
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2023jafc_ttca_ph7_100c_fig5a",
+     "seconds": 0.2414
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2023jafc_ttca_ph7_120c_fig5a",
+     "seconds": 0.6145
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2023jafc_ttcacys_ph7_100c_fig5a",
+     "seconds": 0.1243
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhai2023jafc_ttcacys_ph7_120c_fig5a",
+     "seconds": 0.4849
+    },
+    {
+     "phase": "_run_pot_safe",
+     "label": "route:zhao2017b_blank",
+     "seconds": 0.2197
+    }
+   ]
+  }
+ },
+ "jacobian_R0_w4": {
+  "rival": "R0",
+  "workers": 4,
+  "n_points": 18,
+  "wall_s": 30.462,
+  "env_threads": {
+   "OPENBLAS_NUM_THREADS": null,
+   "OMP_NUM_THREADS": null
+  },
+  "point_cpu_seconds": [
+   6.929,
+   7.133,
+   7.072,
+   6.962,
+   6.095,
+   6.136,
+   6.233,
+   6.055,
+   6.143,
+   6.322,
+   5.871,
+   6.153,
+   6.106,
+   6.096,
+   6.144,
+   6.126,
+   4.541,
+   4.749
+  ],
+  "cpu_over_wall": 0.985,
+  "pool_window_s": 30.461,
+  "point_seconds": [
+   7.311,
+   7.511,
+   7.453,
+   7.343,
+   6.109,
+   6.145,
+   6.248,
+   6.067,
+   6.164,
+   6.346,
+   5.89,
+   6.167,
+   6.116,
+   6.103,
+   6.154,
+   6.132,
+   4.542,
+   4.75
+  ],
+  "point_mean_s": 6.253,
+  "point_cv": 0.124,
+  "rounds": 5,
+  "per_worker": [
+   {
+    "points": [
+     0,
+     4,
+     8,
+     13,
+     17
+    ],
+    "busy_s": 30.438,
+    "idle_s": 0.024,
+    "busy_fraction": 0.999,
+    "first_start_s": 0.016,
+    "last_end_s": 30.455
+   },
+   {
+    "points": [
+     1,
+     7,
+     10,
+     12,
+     16
+    ],
+    "busy_s": 30.126,
+    "idle_s": 0.335,
+    "busy_fraction": 0.989,
+    "first_start_s": 0.017,
+    "last_end_s": 30.143
+   },
+   {
+    "points": [
+     2,
+     6,
+     11,
+     15
+    ],
+    "busy_s": 26.001,
+    "idle_s": 4.46,
+    "busy_fraction": 0.854,
+    "first_start_s": 0.017,
+    "last_end_s": 26.018
+   },
+   {
+    "points": [
+     3,
+     5,
+     9,
+     14
+    ],
+    "busy_s": 25.987,
+    "idle_s": 4.474,
+    "busy_fraction": 0.853,
+    "first_start_s": 0.017,
+    "last_end_s": 26.005
+   }
+  ],
+  "mean_busy_fraction": 0.924,
+  "makespan_pool_order_no_overhead_s": 30.438,
+  "makespan_longest_first_no_overhead_s": 30.431,
+  "lower_bound_s": 28.138,
+  "jacobian_finite": true,
+  "load_1min": 2.88,
+  "load_5min": 2.9,
+  "load_15min": 3.11,
+  "load_tries": [
+   2.88
+  ],
+  "clean": true,
+  "label": null
+ },
+ "jacobian_C1_w4": {
+  "rival": "C1",
+  "workers": 4,
+  "n_points": 20,
+  "wall_s": 74.771,
+  "pool_window_s": 74.77,
+  "point_seconds": [
+   15.243,
+   14.568,
+   15.42,
+   15.262,
+   14.661,
+   14.745,
+   15.462,
+   15.543,
+   14.035,
+   15.042,
+   14.363,
+   13.624,
+   14.644,
+   15.071,
+   14.52,
+   15.116,
+   15.314,
+   13.885,
+   14.553,
+   14.537
+  ],
+  "point_mean_s": 14.78,
+  "point_cv": 0.036,
+  "rounds": 5,
+  "per_worker": [
+   {
+    "points": [
+     0,
+     5,
+     9,
+     14,
+     17
+    ],
+    "busy_s": 73.436,
+    "idle_s": 1.334,
+    "busy_fraction": 0.982,
+    "first_start_s": 0.016,
+    "last_end_s": 73.452
+   },
+   {
+    "points": [
+     1,
+     4,
+     8,
+     12,
+     16
+    ],
+    "busy_s": 73.222,
+    "idle_s": 1.548,
+    "busy_fraction": 0.979,
+    "first_start_s": 0.016,
+    "last_end_s": 73.239
+   },
+   {
+    "points": [
+     2,
+     7,
+     11,
+     13,
+     18
+    ],
+    "busy_s": 74.212,
+    "idle_s": 0.558,
+    "busy_fraction": 0.993,
+    "first_start_s": 0.016,
+    "last_end_s": 74.229
+   },
+   {
+    "points": [
+     3,
+     6,
+     10,
+     15,
+     19
+    ],
+    "busy_s": 74.74,
+    "idle_s": 0.03,
+    "busy_fraction": 1.0,
+    "first_start_s": 0.016,
+    "last_end_s": 74.758
+   }
+  ],
+  "mean_busy_fraction": 0.988,
+  "makespan_pool_order_no_overhead_s": 74.74,
+  "makespan_longest_first_no_overhead_s": 74.205,
+  "lower_bound_s": 73.902,
+  "jacobian_finite": true,
+  "load_1min": 3.04,
+  "load_5min": 2.51,
+  "load_15min": 3.05,
+  "load_tries": [
+   3.04
+  ],
+  "clean": true,
+  "label": null
+ },
+ "inside_R0": {
+  "b60:hofmann_pentose_pH5": {
+   "wall_s_min": 0.4605,
+   "wall_s_all": [
+    0.4609,
+    0.4625,
+    0.4607,
+    0.4605,
+    0.4614
+   ],
+   "wall_s_with_timers": 0.4736,
+   "wall_s_under_cprofile": 1.1023,
+   "timers_exclusive": {
+    "sulfur.sulfur_rate_constants_at": {
+     "seconds": 0.22929,
+     "calls": 1694,
+     "share_of_wrapped_wall": 0.4841
+    },
+    "ph_state.solve_ph_and_ionic_strength_compiled": {
+     "seconds": 0.14421,
+     "calls": 3386,
+     "share_of_wrapped_wall": 0.3045
+    },
+    "sulfur._rates_vectorised": {
+     "seconds": 0.01823,
+     "calls": 1443,
+     "share_of_wrapped_wall": 0.0385
+    },
+    "sulfur.rate_vector": {
+     "seconds": 0.01561,
+     "calls": 1694,
+     "share_of_wrapped_wall": 0.033
+    },
+    "sulfur._rate_jacobian": {
+     "seconds": 0.01021,
+     "calls": 218,
+     "share_of_wrapped_wall": 0.0216
+    },
+    "ph_state.solve_ph_and_ionic_strength": {
+     "seconds": 0.00397,
+     "calls": 5,
+     "share_of_wrapped_wall": 0.0084
+    },
+    "ph_state.titratable_inventory": {
+     "seconds": 0.00349,
+     "calls": 1700,
+     "share_of_wrapped_wall": 0.0074
+    }
+   },
+   "result_pickle_bytes": 117109,
+   "result_pickle_s": 0.00026,
+   "load_1min": 3.15,
+   "load_5min": 3.04,
+   "load_15min": 3.2,
+   "load_tries": [
+    3.15
+   ],
+   "clean": true,
+   "label": null,
+   "cprofile": {
+    "functions": {
+     "rhs": {
+      "calls": 1443,
+      "tottime_s": 0.0065,
+      "cumtime_s": 0.8907,
+      "callers": {
+       "fun_wrapped": {
+        "calls": 1443,
+        "cumtime_s": 0.8907
+       }
+      }
+     },
+     "jac": {
+      "calls": 218,
+      "tottime_s": 0.0139,
+      "cumtime_s": 0.1564,
+      "callers": {
+       "<built-in method scipy.integrate._odepack.lsoda>": {
+        "calls": 218,
+        "cumtime_s": 0.1564
+       }
+      }
+     },
+     "_rates_vectorised": {
+      "calls": 1443,
+      "tottime_s": 0.009,
+      "cumtime_s": 0.0291,
+      "callers": {
+       "rhs": {
+        "calls": 1443,
+        "cumtime_s": 0.0291
+       }
+      }
+     },
+     "constants": {
+      "calls": 1661,
+      "tottime_s": 0.004,
+      "cumtime_s": 0.9826,
+      "callers": {
+       "rhs": {
+        "calls": 1443,
+        "cumtime_s": 0.8552
+       },
+       "jac": {
+        "calls": 218,
+        "cumtime_s": 0.1274
+       }
+      }
+     },
+     "rate_vector": {
+      "calls": 1694,
+      "tottime_s": 0.0172,
+      "cumtime_s": 0.0236,
+      "callers": {
+       "constants": {
+        "calls": 1661,
+        "cumtime_s": 0.0232
+       },
+       "_integrate_inline_ph": {
+        "calls": 33,
+        "cumtime_s": 0.0005
+       }
+      }
+     },
+     "titratable_inventory": {
+      "calls": 1700,
+      "tottime_s": 0.0083,
+      "cumtime_s": 0.0129,
+      "callers": {
+       "ph_of_state": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "ph_and_ionic_strength_of_state": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "strong_ion_difference": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "buffer_capacity_mmol_per_ph": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "state_ph": {
+        "calls": 1694,
+        "cumtime_s": 0.0129
+       }
+      }
+     },
+     "integrate_sulfur": {
+      "calls": 1,
+      "tottime_s": 0.0002,
+      "cumtime_s": 1.1016,
+      "callers": {
+       "_quick_rtol": {
+        "calls": 1,
+        "cumtime_s": 1.1016
+       }
+      }
+     },
+     "_integrate_inline_ph": {
+      "calls": 1,
+      "tottime_s": 0.0002,
+      "cumtime_s": 1.092,
+      "callers": {
+       "integrate_sulfur": {
+        "calls": 1,
+        "cumtime_s": 1.092
+       }
+      }
+     },
+     "solve_ph_and_ionic_strength_compiled": {
+      "calls": 3386,
+      "tottime_s": 0.1453,
+      "cumtime_s": 0.2188,
+      "callers": {
+       "state_ph": {
+        "calls": 3386,
+        "cumtime_s": 0.2188
+       }
+      }
+     },
+     "sulfur_rate_constants_at": {
+      "calls": 1694,
+      "tottime_s": 0.2777,
+      "cumtime_s": 0.728,
+      "callers": {
+       "constants": {
+        "calls": 1661,
+        "cumtime_s": 0.7139
+       },
+       "_integrate_inline_ph": {
+        "calls": 33,
+        "cumtime_s": 0.014
+       }
+      }
+     },
+     "_call_impl": {
+      "calls": 33,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.0002,
+      "callers": {
+       "__call__": {
+        "calls": 33,
+        "cumtime_s": 0.0002
+       }
+      }
+     },
+     "dense_output": {
+      "calls": 33,
+      "tottime_s": 0.0,
+      "cumtime_s": 0.0004,
+      "callers": {
+       "solve_ivp": {
+        "calls": 33,
+        "cumtime_s": 0.0004
+       }
+      }
+     },
+     "_step_impl": {
+      "calls": 900,
+      "tottime_s": 0.0016,
+      "cumtime_s": 1.0651,
+      "callers": {
+       "step": {
+        "calls": 900,
+        "cumtime_s": 1.0651
+       }
+      }
+     },
+     "solve_ivp": {
+      "calls": 1,
+      "tottime_s": 0.002,
+      "cumtime_s": 1.0712,
+      "callers": {
+       "_integrate_inline_ph": {
+        "calls": 1,
+        "cumtime_s": 1.0712
+       }
+      }
+     },
+     "_rate_jacobian": {
+      "calls": 218,
+      "tottime_s": 0.0062,
+      "cumtime_s": 0.0151,
+      "callers": {
+       "jac": {
+        "calls": 218,
+        "cumtime_s": 0.0151
+       }
+      }
+     },
+     "state_ph": {
+      "calls": 1694,
+      "tottime_s": 0.0096,
+      "cumtime_s": 0.2474,
+      "callers": {
+       "constants": {
+        "calls": 1661,
+        "cumtime_s": 0.2413
+       },
+       "_integrate_inline_ph": {
+        "calls": 33,
+        "cumtime_s": 0.0062
+       }
+      }
+     }
+    },
+    "top_builtins_by_tottime": [
+     {
+      "func": "<method 'get' of 'dict' objects>",
+      "calls": 547358,
+      "tottime_s": 0.0609
+     },
+     {
+      "func": "<built-in method math.log>",
+      "calls": 253789,
+      "tottime_s": 0.0257
+     },
+     {
+      "func": "<built-in method builtins.isinstance>",
+      "calls": 186416,
+      "tottime_s": 0.0196
+     },
+     {
+      "func": "<built-in method math.exp>",
+      "calls": 181258,
+      "tottime_s": 0.0192
+     },
+     {
+      "func": "<built-in method scipy.integrate._odepack.lsoda>",
+      "calls": 900,
+      "tottime_s": 0.0125
+     },
+     {
+      "func": "<built-in method builtins.max>",
+      "calls": 19794,
+      "tottime_s": 0.0087
+     },
+     {
+      "func": "<built-in method math.sqrt>",
+      "calls": 71520,
+      "tottime_s": 0.0078
+     },
+     {
+      "func": "<built-in method numpy.array>",
+      "calls": 1702,
+      "tottime_s": 0.0065
+     },
+     {
+      "func": "<built-in method builtins.len>",
+      "calls": 60115,
+      "tottime_s": 0.0063
+     },
+     {
+      "func": "<built-in method numpy.zeros>",
+      "calls": 13770,
+      "tottime_s": 0.0045
+     },
+     {
+      "func": "<method 'reduce' of 'numpy.ufunc' objects>",
+      "calls": 1892,
+      "tottime_s": 0.0041
+     },
+     {
+      "func": "<method 'append' of 'list' objects>",
+      "calls": 16842,
+      "tottime_s": 0.0022
+     }
+    ],
+    "top_by_tottime": [
+     {
+      "func": "sulfur.py:1296:sulfur_rate_constants_at",
+      "calls": 1694,
+      "tottime_s": 0.2777,
+      "cumtime_s": 0.728
+     },
+     {
+      "func": "ph_state.py:965:solve_ph_and_ionic_strength_compiled",
+      "calls": 3386,
+      "tottime_s": 0.1453,
+      "cumtime_s": 0.2188
+     },
+     {
+      "func": "~:0:<method 'get' of 'dict' objects>",
+      "calls": 547358,
+      "tottime_s": 0.0609,
+      "cumtime_s": 0.0609
+     },
+     {
+      "func": "parameters_sulfur.py:144:k_at",
+      "calls": 125356,
+      "tottime_s": 0.0593,
+      "cumtime_s": 0.0706
+     },
+     {
+      "func": "ph_state.py:183:pk_at",
+      "calls": 74432,
+      "tottime_s": 0.0549,
+      "cumtime_s": 0.0774
+     },
+     {
+      "func": "parameters_sulfur.py:992:ph_factor",
+      "calls": 182952,
+      "tottime_s": 0.051,
+      "cumtime_s": 0.2519
+     },
+     {
+      "func": "parameters_sulfur.py:935:pka_at",
+      "calls": 67763,
+      "tottime_s": 0.037,
+      "cumtime_s": 0.1727
+     },
+     {
+      "func": "ph_state.py:201:_interp",
+      "calls": 37453,
+      "tottime_s": 0.0303,
+      "cumtime_s": 0.0303
+     },
+     {
+      "func": "ph_state.py:212:davies_a",
+      "calls": 37453,
+      "tottime_s": 0.0263,
+      "cumtime_s": 0.0606
+     },
+     {
+      "func": "~:0:<built-in method math.log>",
+      "calls": 253789,
+      "tottime_s": 0.0257,
+      "cumtime_s": 0.0257
+     },
+     {
+      "func": "parameters.py:138:k_at",
+      "calls": 52514,
+      "tottime_s": 0.0252,
+      "cumtime_s": 0.0311
+     },
+     {
+      "func": "ph_state.py:225:davies_term",
+      "calls": 68018,
+      "tottime_s": 0.024,
+      "cumtime_s": 0.0827
+     },
+     {
+      "func": "~:0:<built-in method builtins.isinstance>",
+      "calls": 186416,
+      "tottime_s": 0.0196,
+      "cumtime_s": 0.0196
+     },
+     {
+      "func": "~:0:<built-in method math.exp>",
+      "calls": 181258,
+      "tottime_s": 0.0192,
+      "cumtime_s": 0.0192
+     },
+     {
+      "func": "sulfur.py:1549:rate_vector",
+      "calls": 1694,
+      "tottime_s": 0.0172,
+      "cumtime_s": 0.0236
+     },
+     {
+      "func": "sulfur.py:1836:jac",
+      "calls": 218,
+      "tottime_s": 0.0139,
+      "cumtime_s": 0.1564
+     },
+     {
+      "func": "~:0:<built-in method scipy.integrate._odepack.lsoda>",
+      "calls": 900,
+      "tottime_s": 0.0125,
+      "cumtime_s": 1.0619
+     },
+     {
+      "func": "parameters_sulfur.py:966:neutral_h2s_fraction",
+      "calls": 30492,
+      "tottime_s": 0.0111,
+      "cumtime_s": 0.0764
+     },
+     {
+      "func": "parameters_sulfur.py:920:h2s_pk1_suleimenov_seward",
+      "calls": 30493,
+      "tottime_s": 0.0098,
+      "cumtime_s": 0.013
+     },
+     {
+      "func": "sulfur.py:1812:state_ph",
+      "calls": 1694,
+      "tottime_s": 0.0096,
+      "cumtime_s": 0.2474
+     },
+     {
+      "func": "sulfur.py:1530:_rates_vectorised",
+      "calls": 1443,
+      "tottime_s": 0.009,
+      "cumtime_s": 0.0291
+     },
+     {
+      "func": "~:0:<built-in method builtins.max>",
+      "calls": 19794,
+      "tottime_s": 0.0087,
+      "cumtime_s": 0.0166
+     },
+     {
+      "func": "ph_state.py:653:titratable_inventory",
+      "calls": 1700,
+      "tottime_s": 0.0083,
+      "cumtime_s": 0.0129
+     },
+     {
+      "func": "parameters_sulfur.py:978:free_amine_fraction",
+      "calls": 20328,
+      "tottime_s": 0.0078,
+      "cumtime_s": 0.0667
+     },
+     {
+      "func": "~:0:<built-in method math.sqrt>",
+      "calls": 71520,
+      "tottime_s": 0.0078,
+      "cumtime_s": 0.0078
+     }
+    ]
+   }
+  },
+  "b60:whitfield_nf_cys": {
+   "wall_s_min": 0.0678,
+   "wall_s_all": [
+    0.0678,
+    0.072,
+    0.0785,
+    0.0751,
+    0.0683
+   ],
+   "wall_s_with_timers": 0.0698,
+   "wall_s_under_cprofile": 0.17,
+   "timers_exclusive": {
+    "sulfur.sulfur_rate_constants_at": {
+     "seconds": 0.03637,
+     "calls": 264,
+     "share_of_wrapped_wall": 0.5211
+    },
+    "ph_state.solve_ph_and_ionic_strength_compiled": {
+     "seconds": 0.01856,
+     "calls": 526,
+     "share_of_wrapped_wall": 0.2659
+    },
+    "ph_state.solve_ph_and_ionic_strength": {
+     "seconds": 0.00345,
+     "calls": 5,
+     "share_of_wrapped_wall": 0.0494
+    },
+    "sulfur._rates_vectorised": {
+     "seconds": 0.00296,
+     "calls": 231,
+     "share_of_wrapped_wall": 0.0424
+    },
+    "sulfur.rate_vector": {
+     "seconds": 0.00251,
+     "calls": 264,
+     "share_of_wrapped_wall": 0.0359
+    },
+    "ph_state.titratable_inventory": {
+     "seconds": 0.00053,
+     "calls": 270,
+     "share_of_wrapped_wall": 0.0076
+    }
+   },
+   "result_pickle_bytes": 116024,
+   "result_pickle_s": 0.00022,
+   "load_1min": 3.15,
+   "load_5min": 3.04,
+   "load_15min": 3.2,
+   "load_tries": [
+    3.15
+   ],
+   "clean": true,
+   "label": null,
+   "cprofile": {
+    "functions": {
+     "rhs": {
+      "calls": 231,
+      "tottime_s": 0.0011,
+      "cumtime_s": 0.1381,
+      "callers": {
+       "fun_wrapped": {
+        "calls": 231,
+        "cumtime_s": 0.1381
+       }
+      }
+     },
+     "_rates_vectorised": {
+      "calls": 231,
+      "tottime_s": 0.0014,
+      "cumtime_s": 0.0046,
+      "callers": {
+       "rhs": {
+        "calls": 231,
+        "cumtime_s": 0.0046
+       }
+      }
+     },
+     "constants": {
+      "calls": 231,
+      "tottime_s": 0.0006,
+      "cumtime_s": 0.1323,
+      "callers": {
+       "rhs": {
+        "calls": 231,
+        "cumtime_s": 0.1323
+       }
+      }
+     },
+     "rate_vector": {
+      "calls": 264,
+      "tottime_s": 0.0028,
+      "cumtime_s": 0.0038,
+      "callers": {
+       "constants": {
+        "calls": 231,
+        "cumtime_s": 0.0033
+       },
+       "_integrate_inline_ph": {
+        "calls": 33,
+        "cumtime_s": 0.0005
+       }
+      }
+     },
+     "titratable_inventory": {
+      "calls": 270,
+      "tottime_s": 0.0012,
+      "cumtime_s": 0.0018,
+      "callers": {
+       "ph_of_state": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "ph_and_ionic_strength_of_state": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "strong_ion_difference": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "buffer_capacity_mmol_per_ph": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "state_ph": {
+        "calls": 264,
+        "cumtime_s": 0.0018
+       }
+      }
+     },
+     "integrate_sulfur": {
+      "calls": 1,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.1693,
+      "callers": {
+       "_quick_rtol": {
+        "calls": 1,
+        "cumtime_s": 0.1693
+       }
+      }
+     },
+     "_integrate_inline_ph": {
+      "calls": 1,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.1612,
+      "callers": {
+       "integrate_sulfur": {
+        "calls": 1,
+        "cumtime_s": 0.1612
+       }
+      }
+     },
+     "solve_ph_and_ionic_strength_compiled": {
+      "calls": 526,
+      "tottime_s": 0.0183,
+      "cumtime_s": 0.0275,
+      "callers": {
+       "state_ph": {
+        "calls": 526,
+        "cumtime_s": 0.0275
+       }
+      }
+     },
+     "sulfur_rate_constants_at": {
+      "calls": 264,
+      "tottime_s": 0.0436,
+      "cumtime_s": 0.1138,
+      "callers": {
+       "constants": {
+        "calls": 231,
+        "cumtime_s": 0.0996
+       },
+       "_integrate_inline_ph": {
+        "calls": 33,
+        "cumtime_s": 0.0142
+       }
+      }
+     },
+     "_call_impl": {
+      "calls": 32,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.0002,
+      "callers": {
+       "__call__": {
+        "calls": 32,
+        "cumtime_s": 0.0002
+       }
+      }
+     },
+     "dense_output": {
+      "calls": 32,
+      "tottime_s": 0.0,
+      "cumtime_s": 0.0003,
+      "callers": {
+       "solve_ivp": {
+        "calls": 32,
+        "cumtime_s": 0.0003
+       }
+      }
+     },
+     "_step_impl": {
+      "calls": 116,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.1393,
+      "callers": {
+       "step": {
+        "calls": 116,
+        "cumtime_s": 0.1393
+       }
+      }
+     },
+     "solve_ivp": {
+      "calls": 1,
+      "tottime_s": 0.0004,
+      "cumtime_s": 0.1408,
+      "callers": {
+       "_integrate_inline_ph": {
+        "calls": 1,
+        "cumtime_s": 0.1408
+       }
+      }
+     },
+     "state_ph": {
+      "calls": 264,
+      "tottime_s": 0.0015,
+      "cumtime_s": 0.0343,
+      "callers": {
+       "constants": {
+        "calls": 231,
+        "cumtime_s": 0.0288
+       },
+       "_integrate_inline_ph": {
+        "calls": 33,
+        "cumtime_s": 0.0055
+       }
+      }
+     }
+    },
+    "top_builtins_by_tottime": [
+     {
+      "func": "<method 'get' of 'dict' objects>",
+      "calls": 85468,
+      "tottime_s": 0.0096
+     },
+     {
+      "func": "<built-in method math.log>",
+      "calls": 36037,
+      "tottime_s": 0.0037
+     },
+     {
+      "func": "<built-in method builtins.isinstance>",
+      "calls": 29238,
+      "tottime_s": 0.0031
+     },
+     {
+      "func": "<built-in method math.exp>",
+      "calls": 28248,
+      "tottime_s": 0.003
+     },
+     {
+      "func": "<built-in method builtins.sum>",
+      "calls": 4514,
+      "tottime_s": 0.0016
+     },
+     {
+      "func": "<built-in method builtins.max>",
+      "calls": 4932,
+      "tottime_s": 0.0014
+     },
+     {
+      "func": "<built-in method math.sqrt>",
+      "calls": 11412,
+      "tottime_s": 0.0013
+     },
+     {
+      "func": "<built-in method numpy.array>",
+      "calls": 272,
+      "tottime_s": 0.001
+     },
+     {
+      "func": "<method 'append' of 'list' objects>",
+      "calls": 7159,
+      "tottime_s": 0.0007
+     },
+     {
+      "func": "<built-in method builtins.len>",
+      "calls": 6321,
+      "tottime_s": 0.0007
+     },
+     {
+      "func": "<built-in method numpy.zeros>",
+      "calls": 2112,
+      "tottime_s": 0.0007
+     },
+     {
+      "func": "<method 'reduce' of 'numpy.ufunc' objects>",
+      "calls": 244,
+      "tottime_s": 0.0006
+     }
+    ],
+    "top_by_tottime": [
+     {
+      "func": "sulfur.py:1296:sulfur_rate_constants_at",
+      "calls": 264,
+      "tottime_s": 0.0436,
+      "cumtime_s": 0.1138
+     },
+     {
+      "func": "ph_state.py:965:solve_ph_and_ionic_strength_compiled",
+      "calls": 526,
+      "tottime_s": 0.0183,
+      "cumtime_s": 0.0275
+     },
+     {
+      "func": "~:0:<method 'get' of 'dict' objects>",
+      "calls": 85468,
+      "tottime_s": 0.0096,
+      "cumtime_s": 0.0096
+     },
+     {
+      "func": "parameters_sulfur.py:144:k_at",
+      "calls": 19536,
+      "tottime_s": 0.0094,
+      "cumtime_s": 0.0112
+     },
+     {
+      "func": "parameters_sulfur.py:992:ph_factor",
+      "calls": 28512,
+      "tottime_s": 0.0079,
+      "cumtime_s": 0.0391
+     },
+     {
+      "func": "ph_state.py:183:pk_at",
+      "calls": 10428,
+      "tottime_s": 0.0077,
+      "cumtime_s": 0.0109
+     },
+     {
+      "func": "parameters_sulfur.py:935:pka_at",
+      "calls": 10563,
+      "tottime_s": 0.0058,
+      "cumtime_s": 0.0268
+     },
+     {
+      "func": "ph_state.py:201:_interp",
+      "calls": 5969,
+      "tottime_s": 0.0048,
+      "cumtime_s": 0.0048
+     },
+     {
+      "func": "ph_state.py:212:davies_a",
+      "calls": 5969,
+      "tottime_s": 0.0042,
+      "cumtime_s": 0.0096
+     },
+     {
+      "func": "parameters.py:138:k_at",
+      "calls": 8184,
+      "tottime_s": 0.0039,
+      "cumtime_s": 0.0048
+     },
+     {
+      "func": "ph_state.py:225:davies_term",
+      "calls": 10782,
+      "tottime_s": 0.0038,
+      "cumtime_s": 0.0132
+     },
+     {
+      "func": "~:0:<built-in method math.log>",
+      "calls": 36037,
+      "tottime_s": 0.0037,
+      "cumtime_s": 0.0037
+     },
+     {
+      "func": "ph_state.py:827:residual",
+      "calls": 900,
+      "tottime_s": 0.0032,
+      "cumtime_s": 0.0065
+     },
+     {
+      "func": "~:0:<built-in method builtins.isinstance>",
+      "calls": 29238,
+      "tottime_s": 0.0031,
+      "cumtime_s": 0.0031
+     },
+     {
+      "func": "~:0:<built-in method math.exp>",
+      "calls": 28248,
+      "tottime_s": 0.003,
+      "cumtime_s": 0.003
+     },
+     {
+      "func": "sulfur.py:1549:rate_vector",
+      "calls": 264,
+      "tottime_s": 0.0028,
+      "cumtime_s": 0.0038
+     },
+     {
+      "func": "parameters_sulfur.py:966:neutral_h2s_fraction",
+      "calls": 4752,
+      "tottime_s": 0.0017,
+      "cumtime_s": 0.0118
+     },
+     {
+      "func": "~:0:<built-in method builtins.sum>",
+      "calls": 4514,
+      "tottime_s": 0.0016,
+      "cumtime_s": 0.0026
+     },
+     {
+      "func": "parameters_sulfur.py:920:h2s_pk1_suleimenov_seward",
+      "calls": 4753,
+      "tottime_s": 0.0015,
+      "cumtime_s": 0.002
+     },
+     {
+      "func": "sulfur.py:1812:state_ph",
+      "calls": 264,
+      "tottime_s": 0.0015,
+      "cumtime_s": 0.0343
+     },
+     {
+      "func": "~:0:<built-in method builtins.max>",
+      "calls": 4932,
+      "tottime_s": 0.0014,
+      "cumtime_s": 0.0023
+     },
+     {
+      "func": "sulfur.py:1530:_rates_vectorised",
+      "calls": 231,
+      "tottime_s": 0.0014,
+      "cumtime_s": 0.0046
+     },
+     {
+      "func": "~:0:<built-in method math.sqrt>",
+      "calls": 11412,
+      "tottime_s": 0.0013,
+      "cumtime_s": 0.0013
+     },
+     {
+      "func": "parameters_sulfur.py:978:free_amine_fraction",
+      "calls": 3168,
+      "tottime_s": 0.0012,
+      "cumtime_s": 0.0104
+     },
+     {
+      "func": "ph_state.py:653:titratable_inventory",
+      "calls": 270,
+      "tottime_s": 0.0012,
+      "cumtime_s": 0.0018
+     }
+    ]
+   }
+  },
+  "flux:cerny_ternary": {
+   "wall_s_min": 0.3167,
+   "wall_s_all": [
+    0.3205,
+    0.3198,
+    0.317,
+    0.3168,
+    0.3167
+   ],
+   "wall_s_with_timers": 0.3237,
+   "wall_s_under_cprofile": 0.7705,
+   "timers_exclusive": {
+    "sulfur.sulfur_rate_constants_at": {
+     "seconds": 0.16824,
+     "calls": 1238,
+     "share_of_wrapped_wall": 0.5198
+    },
+    "ph_state.solve_ph_and_ionic_strength_compiled": {
+     "seconds": 0.09983,
+     "calls": 2474,
+     "share_of_wrapped_wall": 0.3084
+    },
+    "sulfur._rates_vectorised": {
+     "seconds": 0.01446,
+     "calls": 1139,
+     "share_of_wrapped_wall": 0.0447
+    },
+    "sulfur.rate_vector": {
+     "seconds": 0.01132,
+     "calls": 1238,
+     "share_of_wrapped_wall": 0.035
+    },
+    "ph_state.solve_ph_and_ionic_strength": {
+     "seconds": 0.00383,
+     "calls": 5,
+     "share_of_wrapped_wall": 0.0118
+    },
+    "ph_state.titratable_inventory": {
+     "seconds": 0.00251,
+     "calls": 1244,
+     "share_of_wrapped_wall": 0.0077
+    },
+    "sulfur.sulfur_reaction_rates": {
+     "seconds": 0.00138,
+     "calls": 41,
+     "share_of_wrapped_wall": 0.0043
+    },
+    "sulfur.rate_vector_at": {
+     "seconds": 0.00019,
+     "calls": 41,
+     "share_of_wrapped_wall": 0.0006
+    },
+    "sulfur.reaction_flux_integrals": {
+     "seconds": 0.00012,
+     "calls": 1,
+     "share_of_wrapped_wall": 0.0004
+    }
+   },
+   "result_pickle_bytes": 3125,
+   "result_pickle_s": 2e-05,
+   "load_1min": 3.22,
+   "load_5min": 3.05,
+   "load_15min": 3.21,
+   "load_tries": [
+    3.22
+   ],
+   "clean": true,
+   "label": null,
+   "cprofile": {
+    "functions": {
+     "rhs": {
+      "calls": 1139,
+      "tottime_s": 0.0054,
+      "cumtime_s": 0.6848,
+      "callers": {
+       "fun_wrapped": {
+        "calls": 1139,
+        "cumtime_s": 0.6848
+       }
+      }
+     },
+     "_rates_vectorised": {
+      "calls": 1139,
+      "tottime_s": 0.0071,
+      "cumtime_s": 0.0226,
+      "callers": {
+       "rhs": {
+        "calls": 1139,
+        "cumtime_s": 0.0226
+       }
+      }
+     },
+     "constants": {
+      "calls": 1139,
+      "tottime_s": 0.0028,
+      "cumtime_s": 0.6568,
+      "callers": {
+       "rhs": {
+        "calls": 1139,
+        "cumtime_s": 0.6568
+       }
+      }
+     },
+     "rate_vector": {
+      "calls": 1238,
+      "tottime_s": 0.0126,
+      "cumtime_s": 0.0173,
+      "callers": {
+       "constants": {
+        "calls": 1139,
+        "cumtime_s": 0.0159
+       },
+       "_integrate_inline_ph": {
+        "calls": 99,
+        "cumtime_s": 0.0014
+       }
+      }
+     },
+     "titratable_inventory": {
+      "calls": 1244,
+      "tottime_s": 0.0059,
+      "cumtime_s": 0.0091,
+      "callers": {
+       "ph_of_state": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "ph_and_ionic_strength_of_state": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "strong_ion_difference": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "buffer_capacity_mmol_per_ph": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "state_ph": {
+        "calls": 1238,
+        "cumtime_s": 0.009
+       }
+      }
+     },
+     "integrate_sulfur": {
+      "calls": 1,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.7678,
+      "callers": {
+       "sulfur_flux_budget": {
+        "calls": 1,
+        "cumtime_s": 0.7678
+       }
+      }
+     },
+     "_integrate_inline_ph": {
+      "calls": 1,
+      "tottime_s": 0.0004,
+      "cumtime_s": 0.755,
+      "callers": {
+       "integrate_sulfur": {
+        "calls": 1,
+        "cumtime_s": 0.755
+       }
+      }
+     },
+     "solve_ph_and_ionic_strength_compiled": {
+      "calls": 2474,
+      "tottime_s": 0.0985,
+      "cumtime_s": 0.1486,
+      "callers": {
+       "state_ph": {
+        "calls": 2474,
+        "cumtime_s": 0.1486
+       }
+      }
+     },
+     "sulfur_rate_constants_at": {
+      "calls": 1238,
+      "tottime_s": 0.2011,
+      "cumtime_s": 0.5252,
+      "callers": {
+       "constants": {
+        "calls": 1139,
+        "cumtime_s": 0.4834
+       },
+       "_integrate_inline_ph": {
+        "calls": 99,
+        "cumtime_s": 0.0418
+       }
+      }
+     },
+     "_call_impl": {
+      "calls": 94,
+      "tottime_s": 0.0006,
+      "cumtime_s": 0.0006,
+      "callers": {
+       "__call__": {
+        "calls": 94,
+        "cumtime_s": 0.0006
+       }
+      }
+     },
+     "dense_output": {
+      "calls": 94,
+      "tottime_s": 0.0001,
+      "cumtime_s": 0.001,
+      "callers": {
+       "solve_ivp": {
+        "calls": 94,
+        "cumtime_s": 0.001
+       }
+      }
+     },
+     "_step_impl": {
+      "calls": 566,
+      "tottime_s": 0.001,
+      "cumtime_s": 0.6909,
+      "callers": {
+       "step": {
+        "calls": 566,
+        "cumtime_s": 0.6909
+       }
+      }
+     },
+     "solve_ivp": {
+      "calls": 1,
+      "tottime_s": 0.0014,
+      "cumtime_s": 0.6963,
+      "callers": {
+       "_integrate_inline_ph": {
+        "calls": 1,
+        "cumtime_s": 0.6963
+       }
+      }
+     },
+     "rate_vector_at": {
+      "calls": 41,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.0003,
+      "callers": {
+       "reaction_flux_integrals": {
+        "calls": 41,
+        "cumtime_s": 0.0003
+       }
+      }
+     },
+     "sulfur_reaction_rates": {
+      "calls": 41,
+      "tottime_s": 0.0015,
+      "cumtime_s": 0.0016,
+      "callers": {
+       "reaction_flux_integrals": {
+        "calls": 41,
+        "cumtime_s": 0.0016
+       }
+      }
+     },
+     "reaction_flux_integrals": {
+      "calls": 1,
+      "tottime_s": 0.0001,
+      "cumtime_s": 0.002,
+      "callers": {
+       "sulfur_flux_budget": {
+        "calls": 1,
+        "cumtime_s": 0.002
+       }
+      }
+     },
+     "state_ph": {
+      "calls": 1238,
+      "tottime_s": 0.0069,
+      "cumtime_s": 0.1697,
+      "callers": {
+       "constants": {
+        "calls": 1139,
+        "cumtime_s": 0.1546
+       },
+       "_integrate_inline_ph": {
+        "calls": 99,
+        "cumtime_s": 0.0151
+       }
+      }
+     }
+    },
+    "top_builtins_by_tottime": [
+     {
+      "func": "<method 'get' of 'dict' objects>",
+      "calls": 400068,
+      "tottime_s": 0.0435
+     },
+     {
+      "func": "<built-in method math.log>",
+      "calls": 179497,
+      "tottime_s": 0.0178
+     },
+     {
+      "func": "<built-in method builtins.isinstance>",
+      "calls": 135380,
+      "tottime_s": 0.0139
+     },
+     {
+      "func": "<built-in method math.exp>",
+      "calls": 132466,
+      "tottime_s": 0.0138
+     },
+     {
+      "func": "<built-in method builtins.max>",
+      "calls": 15190,
+      "tottime_s": 0.006
+     },
+     {
+      "func": "<built-in method math.sqrt>",
+      "calls": 52352,
+      "tottime_s": 0.0056
+     },
+     {
+      "func": "<built-in method numpy.array>",
+      "calls": 1246,
+      "tottime_s": 0.0047
+     },
+     {
+      "func": "<built-in method builtins.len>",
+      "calls": 39662,
+      "tottime_s": 0.0042
+     },
+     {
+      "func": "<built-in method numpy.zeros>",
+      "calls": 9905,
+      "tottime_s": 0.003
+     },
+     {
+      "func": "<method 'reduce' of 'numpy.ufunc' objects>",
+      "calls": 1196,
+      "tottime_s": 0.0027
+     },
+     {
+      "func": "<built-in method scipy.integrate._odepack.lsoda>",
+      "calls": 566,
+      "tottime_s": 0.0025
+     },
+     {
+      "func": "<built-in method builtins.sum>",
+      "calls": 5379,
+      "tottime_s": 0.0023
+     }
+    ],
+    "top_by_tottime": [
+     {
+      "func": "sulfur.py:1296:sulfur_rate_constants_at",
+      "calls": 1238,
+      "tottime_s": 0.2011,
+      "cumtime_s": 0.5252
+     },
+     {
+      "func": "ph_state.py:965:solve_ph_and_ionic_strength_compiled",
+      "calls": 2474,
+      "tottime_s": 0.0985,
+      "cumtime_s": 0.1486
+     },
+     {
+      "func": "~:0:<method 'get' of 'dict' objects>",
+      "calls": 400068,
+      "tottime_s": 0.0435,
+      "cumtime_s": 0.0435
+     },
+     {
+      "func": "parameters_sulfur.py:144:k_at",
+      "calls": 91612,
+      "tottime_s": 0.0426,
+      "cumtime_s": 0.0507
+     },
+     {
+      "func": "ph_state.py:183:pk_at",
+      "calls": 52404,
+      "tottime_s": 0.0388,
+      "cumtime_s": 0.0543
+     },
+     {
+      "func": "parameters_sulfur.py:992:ph_factor",
+      "calls": 133704,
+      "tottime_s": 0.0373,
+      "cumtime_s": 0.1817
+     },
+     {
+      "func": "parameters_sulfur.py:935:pka_at",
+      "calls": 49523,
+      "tottime_s": 0.0261,
+      "cumtime_s": 0.1242
+     },
+     {
+      "func": "ph_state.py:201:_interp",
+      "calls": 27413,
+      "tottime_s": 0.0219,
+      "cumtime_s": 0.0219
+     },
+     {
+      "func": "ph_state.py:212:davies_a",
+      "calls": 27413,
+      "tottime_s": 0.019,
+      "cumtime_s": 0.0438
+     },
+     {
+      "func": "parameters.py:138:k_at",
+      "calls": 38378,
+      "tottime_s": 0.0181,
+      "cumtime_s": 0.0224
+     },
+     {
+      "func": "~:0:<built-in method math.log>",
+      "calls": 179497,
+      "tottime_s": 0.0178,
+      "cumtime_s": 0.0178
+     },
+     {
+      "func": "ph_state.py:225:davies_term",
+      "calls": 49766,
+      "tottime_s": 0.0173,
+      "cumtime_s": 0.0597
+     },
+     {
+      "func": "~:0:<built-in method builtins.isinstance>",
+      "calls": 135380,
+      "tottime_s": 0.0139,
+      "cumtime_s": 0.0139
+     },
+     {
+      "func": "~:0:<built-in method math.exp>",
+      "calls": 132466,
+      "tottime_s": 0.0138,
+      "cumtime_s": 0.0138
+     },
+     {
+      "func": "sulfur.py:1549:rate_vector",
+      "calls": 1238,
+      "tottime_s": 0.0126,
+      "cumtime_s": 0.0173
+     },
+     {
+      "func": "parameters_sulfur.py:966:neutral_h2s_fraction",
+      "calls": 22284,
+      "tottime_s": 0.0079,
+      "cumtime_s": 0.0548
+     },
+     {
+      "func": "sulfur.py:1530:_rates_vectorised",
+      "calls": 1139,
+      "tottime_s": 0.0071,
+      "cumtime_s": 0.0226
+     },
+     {
+      "func": "parameters_sulfur.py:920:h2s_pk1_suleimenov_seward",
+      "calls": 22285,
+      "tottime_s": 0.0071,
+      "cumtime_s": 0.0094
+     },
+     {
+      "func": "sulfur.py:1812:state_ph",
+      "calls": 1238,
+      "tottime_s": 0.0069,
+      "cumtime_s": 0.1697
+     },
+     {
+      "func": "~:0:<built-in method builtins.max>",
+      "calls": 15190,
+      "tottime_s": 0.006,
+      "cumtime_s": 0.0112
+     },
+     {
+      "func": "ph_state.py:653:titratable_inventory",
+      "calls": 1244,
+      "tottime_s": 0.0059,
+      "cumtime_s": 0.0091
+     },
+     {
+      "func": "parameters_sulfur.py:978:free_amine_fraction",
+      "calls": 14856,
+      "tottime_s": 0.0057,
+      "cumtime_s": 0.0481
+     },
+     {
+      "func": "~:0:<built-in method math.sqrt>",
+      "calls": 52352,
+      "tottime_s": 0.0056,
+      "cumtime_s": 0.0056
+     },
+     {
+      "func": "sulfur.py:1833:rhs",
+      "calls": 1139,
+      "tottime_s": 0.0054,
+      "cumtime_s": 0.6848
+     },
+     {
+      "func": "~:0:<built-in method numpy.array>",
+      "calls": 1246,
+      "tottime_s": 0.0047,
+      "cumtime_s": 0.0047
+     }
+    ]
+   }
+  }
+ },
+ "inside_C1": {
+  "route:zhai2023jafc_ttca_ph7_120c_fig5a": {
+   "wall_s_min": 0.6085,
+   "wall_s_all": [
+    0.6085,
+    0.6151,
+    0.6178,
+    0.6087,
+    0.61
+   ],
+   "wall_s_with_timers": 0.626,
+   "wall_s_under_cprofile": 1.4508,
+   "timers_exclusive": {
+    "sulfur.sulfur_rate_constants_at": {
+     "seconds": 0.29673,
+     "calls": 2116,
+     "share_of_wrapped_wall": 0.474
+    },
+    "ph_state.solve_ph_and_ionic_strength_compiled": {
+     "seconds": 0.18856,
+     "calls": 4230,
+     "share_of_wrapped_wall": 0.3012
+    },
+    "sulfur._rates_vectorised": {
+     "seconds": 0.02317,
+     "calls": 1729,
+     "share_of_wrapped_wall": 0.037
+    },
+    "sulfur.rate_vector": {
+     "seconds": 0.01951,
+     "calls": 2116,
+     "share_of_wrapped_wall": 0.0312
+    },
+    "sulfur._rate_jacobian": {
+     "seconds": 0.01681,
+     "calls": 354,
+     "share_of_wrapped_wall": 0.0268
+    },
+    "ph_state.titratable_inventory": {
+     "seconds": 0.00991,
+     "calls": 2122,
+     "share_of_wrapped_wall": 0.0158
+    },
+    "ph_state.solve_ph_and_ionic_strength": {
+     "seconds": 0.00236,
+     "calls": 5,
+     "share_of_wrapped_wall": 0.0038
+    }
+   },
+   "result_pickle_bytes": 6627,
+   "result_pickle_s": 3e-05,
+   "load_1min": 3.2,
+   "load_5min": 3.05,
+   "load_15min": 3.2,
+   "load_tries": [
+    3.2
+   ],
+   "clean": true,
+   "label": null,
+   "cprofile": {
+    "functions": {
+     "rhs": {
+      "calls": 1729,
+      "tottime_s": 0.0083,
+      "cumtime_s": 1.1246,
+      "callers": {
+       "fun_wrapped": {
+        "calls": 1729,
+        "cumtime_s": 1.1246
+       }
+      }
+     },
+     "jac": {
+      "calls": 354,
+      "tottime_s": 0.0226,
+      "cumtime_s": 0.2657,
+      "callers": {
+       "<built-in method scipy.integrate._odepack.lsoda>": {
+        "calls": 354,
+        "cumtime_s": 0.2657
+       }
+      }
+     },
+     "_rates_vectorised": {
+      "calls": 1729,
+      "tottime_s": 0.0111,
+      "cumtime_s": 0.0356,
+      "callers": {
+       "rhs": {
+        "calls": 1729,
+        "cumtime_s": 0.0356
+       }
+      }
+     },
+     "constants": {
+      "calls": 2083,
+      "tottime_s": 0.0054,
+      "cumtime_s": 1.2995,
+      "callers": {
+       "rhs": {
+        "calls": 1729,
+        "cumtime_s": 1.0807
+       },
+       "jac": {
+        "calls": 354,
+        "cumtime_s": 0.2188
+       }
+      }
+     },
+     "rate_vector": {
+      "calls": 2116,
+      "tottime_s": 0.0218,
+      "cumtime_s": 0.0298,
+      "callers": {
+       "constants": {
+        "calls": 2083,
+        "cumtime_s": 0.0293
+       },
+       "_integrate_inline_ph": {
+        "calls": 33,
+        "cumtime_s": 0.0005
+       }
+      }
+     },
+     "_rate_jacobian": {
+      "calls": 354,
+      "tottime_s": 0.01,
+      "cumtime_s": 0.0243,
+      "callers": {
+       "jac": {
+        "calls": 354,
+        "cumtime_s": 0.0243
+       }
+      }
+     },
+     "state_ph": {
+      "calls": 2116,
+      "tottime_s": 0.0124,
+      "cumtime_s": 0.3381,
+      "callers": {
+       "constants": {
+        "calls": 2083,
+        "cumtime_s": 0.3324
+       },
+       "_integrate_inline_ph": {
+        "calls": 33,
+        "cumtime_s": 0.0056
+       }
+      }
+     },
+     "solve_ph_and_ionic_strength_compiled": {
+      "calls": 4230,
+      "tottime_s": 0.1898,
+      "cumtime_s": 0.2889,
+      "callers": {
+       "state_ph": {
+        "calls": 4230,
+        "cumtime_s": 0.2889
+       }
+      }
+     },
+     "sulfur_rate_constants_at": {
+      "calls": 2116,
+      "tottime_s": 0.3575,
+      "cumtime_s": 0.9468,
+      "callers": {
+       "constants": {
+        "calls": 2083,
+        "cumtime_s": 0.9321
+       },
+       "_integrate_inline_ph": {
+        "calls": 33,
+        "cumtime_s": 0.0147
+       }
+      }
+     },
+     "_integrate_inline_ph": {
+      "calls": 1,
+      "tottime_s": 0.0002,
+      "cumtime_s": 1.4419,
+      "callers": {
+       "integrate_sulfur": {
+        "calls": 1,
+        "cumtime_s": 1.4419
+       }
+      }
+     },
+     "titratable_inventory": {
+      "calls": 2122,
+      "tottime_s": 0.0128,
+      "cumtime_s": 0.0314,
+      "callers": {
+       "ph_of_state": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "ph_and_ionic_strength_of_state": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "strong_ion_difference": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "buffer_capacity_mmol_per_ph": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "state_ph": {
+        "calls": 2116,
+        "cumtime_s": 0.0314
+       }
+      }
+     },
+     "integrate_sulfur": {
+      "calls": 1,
+      "tottime_s": 0.0002,
+      "cumtime_s": 1.4498,
+      "callers": {
+       "integrate_pot": {
+        "calls": 1,
+        "cumtime_s": 1.4498
+       }
+      }
+     },
+     "solve_ivp": {
+      "calls": 1,
+      "tottime_s": 0.0022,
+      "cumtime_s": 1.4208,
+      "callers": {
+       "_integrate_inline_ph": {
+        "calls": 1,
+        "cumtime_s": 1.4208
+       }
+      }
+     },
+     "_call_impl": {
+      "calls": 33,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.0002,
+      "callers": {
+       "__call__": {
+        "calls": 33,
+        "cumtime_s": 0.0002
+       }
+      }
+     },
+     "_step_impl": {
+      "calls": 940,
+      "tottime_s": 0.0018,
+      "cumtime_s": 1.4142,
+      "callers": {
+       "step": {
+        "calls": 940,
+        "cumtime_s": 1.4142
+       }
+      }
+     },
+     "dense_output": {
+      "calls": 33,
+      "tottime_s": 0.0,
+      "cumtime_s": 0.0004,
+      "callers": {
+       "solve_ivp": {
+        "calls": 33,
+        "cumtime_s": 0.0004
+       }
+      }
+     }
+    },
+    "top_builtins_by_tottime": [
+     {
+      "func": "<method 'get' of 'dict' objects>",
+      "calls": 683675,
+      "tottime_s": 0.0797
+     },
+     {
+      "func": "<built-in method math.log>",
+      "calls": 328963,
+      "tottime_s": 0.0336
+     },
+     {
+      "func": "<built-in method builtins.isinstance>",
+      "calls": 233230,
+      "tottime_s": 0.0254
+     },
+     {
+      "func": "<built-in method math.exp>",
+      "calls": 230644,
+      "tottime_s": 0.0251
+     },
+     {
+      "func": "<built-in method scipy.integrate._odepack.lsoda>",
+      "calls": 940,
+      "tottime_s": 0.0176
+     },
+     {
+      "func": "<built-in method builtins.max>",
+      "calls": 23004,
+      "tottime_s": 0.011
+     },
+     {
+      "func": "<built-in method math.sqrt>",
+      "calls": 89110,
+      "tottime_s": 0.0099
+     },
+     {
+      "func": "<built-in method builtins.len>",
+      "calls": 94605,
+      "tottime_s": 0.0098
+     },
+     {
+      "func": "<built-in method numpy.array>",
+      "calls": 2124,
+      "tottime_s": 0.0079
+     },
+     {
+      "func": "<built-in method numpy.zeros>",
+      "calls": 17282,
+      "tottime_s": 0.0058
+     },
+     {
+      "func": "<method 'reduce' of 'numpy.ufunc' objects>",
+      "calls": 2450,
+      "tottime_s": 0.0054
+     },
+     {
+      "func": "<built-in method math.log10>",
+      "calls": 25401,
+      "tottime_s": 0.0032
+     }
+    ],
+    "top_by_tottime": [
+     {
+      "func": "sulfur.py:1296:sulfur_rate_constants_at",
+      "calls": 2116,
+      "tottime_s": 0.3575,
+      "cumtime_s": 0.9468
+     },
+     {
+      "func": "ph_state.py:965:solve_ph_and_ionic_strength_compiled",
+      "calls": 4230,
+      "tottime_s": 0.1898,
+      "cumtime_s": 0.2889
+     },
+     {
+      "func": "~:0:<method 'get' of 'dict' objects>",
+      "calls": 683675,
+      "tottime_s": 0.0797,
+      "cumtime_s": 0.0797
+     },
+     {
+      "func": "parameters_sulfur.py:144:k_at",
+      "calls": 156584,
+      "tottime_s": 0.0753,
+      "cumtime_s": 0.0899
+     },
+     {
+      "func": "ph_state.py:183:pk_at",
+      "calls": 96958,
+      "tottime_s": 0.0738,
+      "cumtime_s": 0.1034
+     },
+     {
+      "func": "parameters_sulfur.py:992:ph_factor",
+      "calls": 228528,
+      "tottime_s": 0.0638,
+      "cumtime_s": 0.3187
+     },
+     {
+      "func": "parameters_sulfur.py:935:pka_at",
+      "calls": 84643,
+      "tottime_s": 0.0485,
+      "cumtime_s": 0.2184
+     },
+     {
+      "func": "ph_state.py:201:_interp",
+      "calls": 46670,
+      "tottime_s": 0.0357,
+      "cumtime_s": 0.0357
+     },
+     {
+      "func": "~:0:<built-in method math.log>",
+      "calls": 328963,
+      "tottime_s": 0.0336,
+      "cumtime_s": 0.0336
+     },
+     {
+      "func": "ph_state.py:212:davies_a",
+      "calls": 46670,
+      "tottime_s": 0.0331,
+      "cumtime_s": 0.0738
+     },
+     {
+      "func": "parameters.py:138:k_at",
+      "calls": 65596,
+      "tottime_s": 0.0316,
+      "cumtime_s": 0.0392
+     },
+     {
+      "func": "ph_state.py:225:davies_term",
+      "calls": 84823,
+      "tottime_s": 0.03,
+      "cumtime_s": 0.1017
+     },
+     {
+      "func": "~:0:<built-in method builtins.isinstance>",
+      "calls": 233230,
+      "tottime_s": 0.0254,
+      "cumtime_s": 0.0254
+     },
+     {
+      "func": "~:0:<built-in method math.exp>",
+      "calls": 230644,
+      "tottime_s": 0.0251,
+      "cumtime_s": 0.0251
+     },
+     {
+      "func": "sulfur.py:1836:jac",
+      "calls": 354,
+      "tottime_s": 0.0226,
+      "cumtime_s": 0.2657
+     },
+     {
+      "func": "sulfur.py:1549:rate_vector",
+      "calls": 2116,
+      "tottime_s": 0.0218,
+      "cumtime_s": 0.0298
+     },
+     {
+      "func": "~:0:<built-in method scipy.integrate._odepack.lsoda>",
+      "calls": 940,
+      "tottime_s": 0.0176,
+      "cumtime_s": 1.4107
+     },
+     {
+      "func": "parameters_sulfur.py:966:neutral_h2s_fraction",
+      "calls": 38088,
+      "tottime_s": 0.0143,
+      "cumtime_s": 0.0959
+     },
+     {
+      "func": "ph_state.py:653:titratable_inventory",
+      "calls": 2122,
+      "tottime_s": 0.0128,
+      "cumtime_s": 0.0314
+     },
+     {
+      "func": "parameters_sulfur.py:920:h2s_pk1_suleimenov_seward",
+      "calls": 38089,
+      "tottime_s": 0.0125,
+      "cumtime_s": 0.0165
+     },
+     {
+      "func": "sulfur.py:1812:state_ph",
+      "calls": 2116,
+      "tottime_s": 0.0124,
+      "cumtime_s": 0.3381
+     },
+     {
+      "func": "sulfur.py:1530:_rates_vectorised",
+      "calls": 1729,
+      "tottime_s": 0.0111,
+      "cumtime_s": 0.0356
+     },
+     {
+      "func": "~:0:<built-in method builtins.max>",
+      "calls": 23004,
+      "tottime_s": 0.011,
+      "cumtime_s": 0.0217
+     },
+     {
+      "func": "parameters_sulfur.py:978:free_amine_fraction",
+      "calls": 25392,
+      "tottime_s": 0.0101,
+      "cumtime_s": 0.0854
+     },
+     {
+      "func": "sulfur.py:1536:_rate_jacobian",
+      "calls": 354,
+      "tottime_s": 0.01,
+      "cumtime_s": 0.0243
+     }
+    ]
+   }
+  },
+  "route:zhai2023jafc_ttcacys_ph7_100c_fig5a": {
+   "wall_s_min": 0.1254,
+   "wall_s_all": [
+    0.1254,
+    0.1255,
+    0.1254,
+    0.1256,
+    0.1254
+   ],
+   "wall_s_with_timers": 0.1285,
+   "wall_s_under_cprofile": 0.3063,
+   "timers_exclusive": {
+    "sulfur.sulfur_rate_constants_at": {
+     "seconds": 0.06378,
+     "calls": 448,
+     "share_of_wrapped_wall": 0.4963
+    },
+    "ph_state.solve_ph_and_ionic_strength_compiled": {
+     "seconds": 0.03554,
+     "calls": 894,
+     "share_of_wrapped_wall": 0.2766
+    },
+    "sulfur._rates_vectorised": {
+     "seconds": 0.00511,
+     "calls": 372,
+     "share_of_wrapped_wall": 0.0397
+    },
+    "sulfur.rate_vector": {
+     "seconds": 0.00421,
+     "calls": 448,
+     "share_of_wrapped_wall": 0.0327
+    },
+    "ph_state.solve_ph_and_ionic_strength": {
+     "seconds": 0.00307,
+     "calls": 5,
+     "share_of_wrapped_wall": 0.0239
+    },
+    "ph_state.titratable_inventory": {
+     "seconds": 0.00221,
+     "calls": 454,
+     "share_of_wrapped_wall": 0.0172
+    },
+    "sulfur._rate_jacobian": {
+     "seconds": 0.00172,
+     "calls": 35,
+     "share_of_wrapped_wall": 0.0134
+    }
+   },
+   "result_pickle_bytes": 7322,
+   "result_pickle_s": 3e-05,
+   "load_1min": 3.19,
+   "load_5min": 3.05,
+   "load_15min": 3.2,
+   "load_tries": [
+    3.19
+   ],
+   "clean": true,
+   "label": null,
+   "cprofile": {
+    "functions": {
+     "rhs": {
+      "calls": 372,
+      "tottime_s": 0.0017,
+      "cumtime_s": 0.2384,
+      "callers": {
+       "fun_wrapped": {
+        "calls": 372,
+        "cumtime_s": 0.2384
+       }
+      }
+     },
+     "jac": {
+      "calls": 35,
+      "tottime_s": 0.0022,
+      "cumtime_s": 0.0259,
+      "callers": {
+       "<built-in method scipy.integrate._odepack.lsoda>": {
+        "calls": 35,
+        "cumtime_s": 0.0259
+       }
+      }
+     },
+     "_rates_vectorised": {
+      "calls": 372,
+      "tottime_s": 0.0024,
+      "cumtime_s": 0.0077,
+      "callers": {
+       "rhs": {
+        "calls": 372,
+        "cumtime_s": 0.0077
+       }
+      }
+     },
+     "constants": {
+      "calls": 407,
+      "tottime_s": 0.0011,
+      "cumtime_s": 0.2501,
+      "callers": {
+       "rhs": {
+        "calls": 372,
+        "cumtime_s": 0.2289
+       },
+       "jac": {
+        "calls": 35,
+        "cumtime_s": 0.0212
+       }
+      }
+     },
+     "rate_vector": {
+      "calls": 448,
+      "tottime_s": 0.0045,
+      "cumtime_s": 0.0062,
+      "callers": {
+       "constants": {
+        "calls": 407,
+        "cumtime_s": 0.0056
+       },
+       "_integrate_inline_ph": {
+        "calls": 41,
+        "cumtime_s": 0.0006
+       }
+      }
+     },
+     "_rate_jacobian": {
+      "calls": 35,
+      "tottime_s": 0.001,
+      "cumtime_s": 0.0025,
+      "callers": {
+       "jac": {
+        "calls": 35,
+        "cumtime_s": 0.0025
+       }
+      }
+     },
+     "state_ph": {
+      "calls": 448,
+      "tottime_s": 0.0027,
+      "cumtime_s": 0.068,
+      "callers": {
+       "constants": {
+        "calls": 407,
+        "cumtime_s": 0.0609
+       },
+       "_integrate_inline_ph": {
+        "calls": 41,
+        "cumtime_s": 0.0071
+       }
+      }
+     },
+     "solve_ph_and_ionic_strength_compiled": {
+      "calls": 894,
+      "tottime_s": 0.0357,
+      "cumtime_s": 0.0557,
+      "callers": {
+       "state_ph": {
+        "calls": 894,
+        "cumtime_s": 0.0557
+       }
+      }
+     },
+     "sulfur_rate_constants_at": {
+      "calls": 448,
+      "tottime_s": 0.0765,
+      "cumtime_s": 0.2006,
+      "callers": {
+       "constants": {
+        "calls": 407,
+        "cumtime_s": 0.1824
+       },
+       "_integrate_inline_ph": {
+        "calls": 41,
+        "cumtime_s": 0.0182
+       }
+      }
+     },
+     "_integrate_inline_ph": {
+      "calls": 1,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.2967,
+      "callers": {
+       "integrate_sulfur": {
+        "calls": 1,
+        "cumtime_s": 0.2967
+       }
+      }
+     },
+     "titratable_inventory": {
+      "calls": 454,
+      "tottime_s": 0.0027,
+      "cumtime_s": 0.0066,
+      "callers": {
+       "ph_of_state": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "ph_and_ionic_strength_of_state": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "strong_ion_difference": {
+        "calls": 1,
+        "cumtime_s": 0.0
+       },
+       "buffer_capacity_mmol_per_ph": {
+        "calls": 2,
+        "cumtime_s": 0.0
+       },
+       "state_ph": {
+        "calls": 448,
+        "cumtime_s": 0.0065
+       }
+      }
+     },
+     "integrate_sulfur": {
+      "calls": 1,
+      "tottime_s": 0.0002,
+      "cumtime_s": 0.3054,
+      "callers": {
+       "integrate_pot": {
+        "calls": 1,
+        "cumtime_s": 0.3054
+       }
+      }
+     },
+     "solve_ivp": {
+      "calls": 1,
+      "tottime_s": 0.0006,
+      "cumtime_s": 0.2705,
+      "callers": {
+       "_integrate_inline_ph": {
+        "calls": 1,
+        "cumtime_s": 0.2705
+       }
+      }
+     },
+     "_call_impl": {
+      "calls": 41,
+      "tottime_s": 0.0003,
+      "cumtime_s": 0.0003,
+      "callers": {
+       "__call__": {
+        "calls": 41,
+        "cumtime_s": 0.0003
+       }
+      }
+     },
+     "_step_impl": {
+      "calls": 231,
+      "tottime_s": 0.0004,
+      "cumtime_s": 0.2681,
+      "callers": {
+       "step": {
+        "calls": 231,
+        "cumtime_s": 0.2681
+       }
+      }
+     },
+     "dense_output": {
+      "calls": 41,
+      "tottime_s": 0.0,
+      "cumtime_s": 0.0005,
+      "callers": {
+       "solve_ivp": {
+        "calls": 41,
+        "cumtime_s": 0.0005
+       }
+      }
+     }
+    },
+    "top_builtins_by_tottime": [
+     {
+      "func": "<method 'get' of 'dict' objects>",
+      "calls": 144911,
+      "tottime_s": 0.0166
+     },
+     {
+      "func": "<built-in method math.log>",
+      "calls": 68872,
+      "tottime_s": 0.007
+     },
+     {
+      "func": "<built-in method builtins.isinstance>",
+      "calls": 49496,
+      "tottime_s": 0.0053
+     },
+     {
+      "func": "<built-in method math.exp>",
+      "calls": 48832,
+      "tottime_s": 0.0052
+     },
+     {
+      "func": "<built-in method builtins.max>",
+      "calls": 6787,
+      "tottime_s": 0.0026
+     },
+     {
+      "func": "<built-in method scipy.integrate._odepack.lsoda>",
+      "calls": 231,
+      "tottime_s": 0.0024
+     },
+     {
+      "func": "<built-in method math.sqrt>",
+      "calls": 19108,
+      "tottime_s": 0.0021
+     },
+     {
+      "func": "<built-in method builtins.len>",
+      "calls": 19110,
+      "tottime_s": 0.002
+     },
+     {
+      "func": "<built-in method numpy.array>",
+      "calls": 456,
+      "tottime_s": 0.0017
+     },
+     {
+      "func": "<built-in method builtins.sum>",
+      "calls": 4550,
+      "tottime_s": 0.0016
+     },
+     {
+      "func": "<built-in method numpy.zeros>",
+      "calls": 3619,
+      "tottime_s": 0.0012
+     },
+     {
+      "func": "<method 'append' of 'list' objects>",
+      "calls": 8370,
+      "tottime_s": 0.001
+     }
+    ],
+    "top_by_tottime": [
+     {
+      "func": "sulfur.py:1296:sulfur_rate_constants_at",
+      "calls": 448,
+      "tottime_s": 0.0765,
+      "cumtime_s": 0.2006
+     },
+     {
+      "func": "ph_state.py:965:solve_ph_and_ionic_strength_compiled",
+      "calls": 894,
+      "tottime_s": 0.0357,
+      "cumtime_s": 0.0557
+     },
+     {
+      "func": "~:0:<method 'get' of 'dict' objects>",
+      "calls": 144911,
+      "tottime_s": 0.0166,
+      "cumtime_s": 0.0166
+     },
+     {
+      "func": "parameters_sulfur.py:144:k_at",
+      "calls": 33152,
+      "tottime_s": 0.0158,
+      "cumtime_s": 0.0188
+     },
+     {
+      "func": "ph_state.py:183:pk_at",
+      "calls": 20269,
+      "tottime_s": 0.0151,
+      "cumtime_s": 0.0213
+     },
+     {
+      "func": "parameters_sulfur.py:992:ph_factor",
+      "calls": 48384,
+      "tottime_s": 0.0136,
+      "cumtime_s": 0.0668
+     },
+     {
+      "func": "parameters_sulfur.py:935:pka_at",
+      "calls": 17923,
+      "tottime_s": 0.0102,
+      "cumtime_s": 0.0457
+     },
+     {
+      "func": "ph_state.py:201:_interp",
+      "calls": 10001,
+      "tottime_s": 0.0072,
+      "cumtime_s": 0.0072
+     },
+     {
+      "func": "ph_state.py:212:davies_a",
+      "calls": 10001,
+      "tottime_s": 0.0071,
+      "cumtime_s": 0.0154
+     },
+     {
+      "func": "~:0:<built-in method math.log>",
+      "calls": 68872,
+      "tottime_s": 0.007,
+      "cumtime_s": 0.007
+     },
+     {
+      "func": "parameters.py:138:k_at",
+      "calls": 13888,
+      "tottime_s": 0.0067,
+      "cumtime_s": 0.0083
+     },
+     {
+      "func": "ph_state.py:225:davies_term",
+      "calls": 18138,
+      "tottime_s": 0.0065,
+      "cumtime_s": 0.0215
+     },
+     {
+      "func": "~:0:<built-in method builtins.isinstance>",
+      "calls": 49496,
+      "tottime_s": 0.0053,
+      "cumtime_s": 0.0053
+     },
+     {
+      "func": "~:0:<built-in method math.exp>",
+      "calls": 48832,
+      "tottime_s": 0.0052,
+      "cumtime_s": 0.0052
+     },
+     {
+      "func": "sulfur.py:1549:rate_vector",
+      "calls": 448,
+      "tottime_s": 0.0045,
+      "cumtime_s": 0.0062
+     },
+     {
+      "func": "parameters_sulfur.py:966:neutral_h2s_fraction",
+      "calls": 8064,
+      "tottime_s": 0.003,
+      "cumtime_s": 0.0201
+     },
+     {
+      "func": "ph_state.py:827:residual",
+      "calls": 720,
+      "tottime_s": 0.0029,
+      "cumtime_s": 0.0058
+     },
+     {
+      "func": "ph_state.py:653:titratable_inventory",
+      "calls": 454,
+      "tottime_s": 0.0027,
+      "cumtime_s": 0.0066
+     },
+     {
+      "func": "sulfur.py:1812:state_ph",
+      "calls": 448,
+      "tottime_s": 0.0027,
+      "cumtime_s": 0.068
+     },
+     {
+      "func": "parameters_sulfur.py:920:h2s_pk1_suleimenov_seward",
+      "calls": 8065,
+      "tottime_s": 0.0026,
+      "cumtime_s": 0.0035
+     },
+     {
+      "func": "~:0:<built-in method builtins.max>",
+      "calls": 6787,
+      "tottime_s": 0.0026,
+      "cumtime_s": 0.0047
+     },
+     {
+      "func": "sulfur.py:1530:_rates_vectorised",
+      "calls": 372,
+      "tottime_s": 0.0024,
+      "cumtime_s": 0.0077
+     },
+     {
+      "func": "~:0:<built-in method scipy.integrate._odepack.lsoda>",
+      "calls": 231,
+      "tottime_s": 0.0024,
+      "cumtime_s": 0.2672
+     },
+     {
+      "func": "sulfur.py:1836:jac",
+      "calls": 35,
+      "tottime_s": 0.0022,
+      "cumtime_s": 0.0259
+     },
+     {
+      "func": "parameters_sulfur.py:978:free_amine_fraction",
+      "calls": 5376,
+      "tottime_s": 0.0021,
+      "cumtime_s": 0.0178
+     }
+    ]
+   }
+  }
+ },
+ "jacobian_R0_w4_openblas1": {
+  "rival": "R0",
+  "workers": 4,
+  "n_points": 18,
+  "wall_s": 30.457,
+  "env_threads": {
+   "OPENBLAS_NUM_THREADS": "1",
+   "OMP_NUM_THREADS": null
+  },
+  "point_cpu_seconds": [
+   7.01,
+   7.226,
+   7.169,
+   7.015,
+   6.112,
+   6.164,
+   6.29,
+   6.099,
+   6.182,
+   6.35,
+   5.913,
+   6.238,
+   6.163,
+   6.102,
+   6.157,
+   6.173,
+   4.53,
+   4.855
+  ],
+  "cpu_over_wall": 0.994,
+  "pool_window_s": 30.456,
+  "point_seconds": [
+   7.15,
+   7.377,
+   7.315,
+   7.164,
+   6.119,
+   6.172,
+   6.297,
+   6.105,
+   6.192,
+   6.363,
+   5.922,
+   6.253,
+   6.17,
+   6.112,
+   6.168,
+   6.181,
+   4.532,
+   4.856
+  ],
+  "point_mean_s": 6.247,
+  "point_cv": 0.114,
+  "rounds": 5,
+  "per_worker": [
+   {
+    "points": [
+     0,
+     4,
+     8,
+     13,
+     16
+    ],
+    "busy_s": 30.105,
+    "idle_s": 0.35,
+    "busy_fraction": 0.988,
+    "first_start_s": 0.014,
+    "last_end_s": 30.12
+   },
+   {
+    "points": [
+     1,
+     7,
+     10,
+     12,
+     17
+    ],
+    "busy_s": 30.43,
+    "idle_s": 0.026,
+    "busy_fraction": 0.999,
+    "first_start_s": 0.014,
+    "last_end_s": 30.445
+   },
+   {
+    "points": [
+     2,
+     6,
+     11,
+     15
+    ],
+    "busy_s": 26.046,
+    "idle_s": 4.41,
+    "busy_fraction": 0.855,
+    "first_start_s": 0.014,
+    "last_end_s": 26.061
+   },
+   {
+    "points": [
+     3,
+     5,
+     9,
+     14
+    ],
+    "busy_s": 25.866,
+    "idle_s": 4.589,
+    "busy_fraction": 0.849,
+    "first_start_s": 0.015,
+    "last_end_s": 25.882
+   }
+  ],
+  "mean_busy_fraction": 0.923,
+  "makespan_pool_order_no_overhead_s": 30.43,
+  "makespan_longest_first_no_overhead_s": 30.516,
+  "lower_bound_s": 28.112,
+  "jacobian_finite": true,
+  "load_1min": 3.61,
+  "load_5min": 3.08,
+  "load_15min": 3.17,
+  "load_tries": [
+   3.61
+  ],
+  "clean": true,
+  "label": null
+ },
+ "jacobian_R0_w2": {
+  "rival": "R0",
+  "workers": 2,
+  "n_points": 18,
+  "wall_s": 43.477,
+  "env_threads": {
+   "OPENBLAS_NUM_THREADS": null,
+   "OMP_NUM_THREADS": null
+  },
+  "point_cpu_seconds": [
+   5.337,
+   5.474,
+   4.718,
+   4.625,
+   4.693,
+   4.704,
+   4.796,
+   4.666,
+   4.697,
+   4.816,
+   4.646,
+   4.946,
+   4.684,
+   4.667,
+   4.684,
+   4.66,
+   4.429,
+   4.666
+  ],
+  "cpu_over_wall": 0.996,
+  "pool_window_s": 43.476,
+  "point_seconds": [
+   5.476,
+   5.613,
+   4.719,
+   4.626,
+   4.694,
+   4.705,
+   4.796,
+   4.666,
+   4.698,
+   4.817,
+   4.659,
+   4.958,
+   4.684,
+   4.668,
+   4.685,
+   4.66,
+   4.43,
+   4.667
+  ],
+  "point_mean_s": 4.79,
+  "point_cv": 0.06,
+  "rounds": 9,
+  "per_worker": [
+   {
+    "points": [
+     0,
+     2,
+     4,
+     6,
+     9,
+     11,
+     13,
+     15,
+     17
+    ],
+    "busy_s": 43.455,
+    "idle_s": 0.021,
+    "busy_fraction": 1.0,
+    "first_start_s": 0.013,
+    "last_end_s": 43.47
+   },
+   {
+    "points": [
+     1,
+     3,
+     5,
+     7,
+     8,
+     10,
+     12,
+     14,
+     16
+    ],
+    "busy_s": 42.765,
+    "idle_s": 0.712,
+    "busy_fraction": 0.984,
+    "first_start_s": 0.013,
+    "last_end_s": 42.78
+   }
+  ],
+  "mean_busy_fraction": 0.992,
+  "makespan_pool_order_no_overhead_s": 43.455,
+  "makespan_longest_first_no_overhead_s": 43.188,
+  "lower_bound_s": 43.11,
+  "jacobian_finite": true,
+  "load_1min": 3.69,
+  "load_5min": 3.21,
+  "load_15min": 3.22,
+  "load_tries": [
+   3.69
+  ],
+  "clean": true,
+  "label": null
+ },
+ "jacobian_R0_w6": {
+  "rival": "R0",
+  "workers": 6,
+  "n_points": 18,
+  "wall_s": 22.113,
+  "env_threads": {
+   "OPENBLAS_NUM_THREADS": null,
+   "OMP_NUM_THREADS": null
+  },
+  "point_cpu_seconds": [
+   7.485,
+   7.696,
+   7.666,
+   7.513,
+   7.538,
+   7.606,
+   6.804,
+   6.673,
+   6.764,
+   6.904,
+   6.471,
+   6.791,
+   6.63,
+   6.587,
+   6.616,
+   6.587,
+   6.277,
+   6.595
+  ],
+  "cpu_over_wall": 0.956,
+  "pool_window_s": 22.112,
+  "point_seconds": [
+   7.735,
+   7.957,
+   7.924,
+   7.754,
+   7.791,
+   7.866,
+   7.373,
+   7.178,
+   7.302,
+   7.483,
+   7.037,
+   7.305,
+   6.787,
+   6.746,
+   6.779,
+   6.741,
+   6.419,
+   6.738
+  ],
+  "point_mean_s": 7.273,
+  "point_cv": 0.066,
+  "rounds": 3,
+  "per_worker": [
+   {
+    "points": [
+     0,
+     6,
+     15
+    ],
+    "busy_s": 21.848,
+    "idle_s": 0.264,
+    "busy_fraction": 0.988,
+    "first_start_s": 0.016,
+    "last_end_s": 21.864
+   },
+   {
+    "points": [
+     1,
+     11,
+     16
+    ],
+    "busy_s": 21.681,
+    "idle_s": 0.431,
+    "busy_fraction": 0.981,
+    "first_start_s": 0.016,
+    "last_end_s": 21.697
+   },
+   {
+    "points": [
+     2,
+     10,
+     13
+    ],
+    "busy_s": 21.707,
+    "idle_s": 0.405,
+    "busy_fraction": 0.982,
+    "first_start_s": 0.016,
+    "last_end_s": 21.724
+   },
+   {
+    "points": [
+     3,
+     7,
+     12
+    ],
+    "busy_s": 21.719,
+    "idle_s": 0.393,
+    "busy_fraction": 0.982,
+    "first_start_s": 0.016,
+    "last_end_s": 21.736
+   },
+   {
+    "points": [
+     4,
+     8,
+     14
+    ],
+    "busy_s": 21.872,
+    "idle_s": 0.24,
+    "busy_fraction": 0.989,
+    "first_start_s": 0.016,
+    "last_end_s": 21.889
+   },
+   {
+    "points": [
+     5,
+     9,
+     17
+    ],
+    "busy_s": 22.087,
+    "idle_s": 0.024,
+    "busy_fraction": 0.999,
+    "first_start_s": 0.016,
+    "last_end_s": 22.104
+   }
+  ],
+  "mean_busy_fraction": 0.987,
+  "makespan_pool_order_no_overhead_s": 22.087,
+  "makespan_longest_first_no_overhead_s": 21.906,
+  "lower_bound_s": 21.819,
+  "jacobian_finite": true,
+  "load_1min": 3.73,
+  "load_5min": 3.28,
+  "load_15min": 3.24,
+  "load_tries": [
+   3.73
+  ],
+  "clean": true,
+  "label": null
+ },
+ "jacobian_R0_w8": {
+  "rival": "R0",
+  "workers": 8,
+  "n_points": 18,
+  "wall_s": 22.158,
+  "env_threads": {
+   "OPENBLAS_NUM_THREADS": null,
+   "OMP_NUM_THREADS": null
+  },
+  "point_cpu_seconds": [
+   7.64,
+   7.842,
+   7.856,
+   7.655,
+   7.724,
+   7.732,
+   7.881,
+   7.669,
+   6.633,
+   6.772,
+   6.303,
+   6.651,
+   6.612,
+   6.564,
+   6.585,
+   6.571,
+   4.63,
+   4.813
+  ],
+  "cpu_over_wall": 0.836,
+  "pool_window_s": 22.157,
+  "point_seconds": [
+   9.35,
+   9.623,
+   9.611,
+   9.512,
+   9.5,
+   9.453,
+   9.696,
+   9.419,
+   7.944,
+   8.082,
+   7.517,
+   7.994,
+   7.861,
+   7.805,
+   7.85,
+   7.817,
+   4.702,
+   4.832
+  ],
+  "point_mean_s": 8.254,
+  "point_cv": 0.178,
+  "rounds": 3,
+  "per_worker": [
+   {
+    "points": [
+     0,
+     8,
+     17
+    ],
+    "busy_s": 22.126,
+    "idle_s": 0.03,
+    "busy_fraction": 0.999,
+    "first_start_s": 0.021,
+    "last_end_s": 22.148
+   },
+   {
+    "points": [
+     1,
+     14
+    ],
+    "busy_s": 17.473,
+    "idle_s": 4.684,
+    "busy_fraction": 0.789,
+    "first_start_s": 0.021,
+    "last_end_s": 17.494
+   },
+   {
+    "points": [
+     2,
+     13
+    ],
+    "busy_s": 17.417,
+    "idle_s": 4.74,
+    "busy_fraction": 0.786,
+    "first_start_s": 0.021,
+    "last_end_s": 17.439
+   },
+   {
+    "points": [
+     3,
+     12
+    ],
+    "busy_s": 17.373,
+    "idle_s": 4.784,
+    "busy_fraction": 0.784,
+    "first_start_s": 0.022,
+    "last_end_s": 17.395
+   },
+   {
+    "points": [
+     4,
+     11
+    ],
+    "busy_s": 17.494,
+    "idle_s": 4.662,
+    "busy_fraction": 0.79,
+    "first_start_s": 0.022,
+    "last_end_s": 17.517
+   },
+   {
+    "points": [
+     5,
+     10,
+     16
+    ],
+    "busy_s": 21.672,
+    "idle_s": 0.485,
+    "busy_fraction": 0.978,
+    "first_start_s": 0.023,
+    "last_end_s": 21.695
+   },
+   {
+    "points": [
+     6,
+     15
+    ],
+    "busy_s": 17.513,
+    "idle_s": 4.644,
+    "busy_fraction": 0.79,
+    "first_start_s": 0.023,
+    "last_end_s": 17.536
+   },
+   {
+    "points": [
+     7,
+     9
+    ],
+    "busy_s": 17.501,
+    "idle_s": 4.656,
+    "busy_fraction": 0.79,
+    "first_start_s": 0.024,
+    "last_end_s": 17.525
+   }
+  ],
+  "mean_busy_fraction": 0.838,
+  "makespan_pool_order_no_overhead_s": 22.126,
+  "makespan_longest_first_no_overhead_s": 22.063,
+  "lower_bound_s": 18.571,
+  "jacobian_finite": true,
+  "load_1min": 3.73,
+  "load_5min": 3.99,
+  "load_15min": 3.57,
+  "load_tries": [
+   9.58,
+   3.73
+  ],
+  "clean": true,
+  "label": null
+ },
+ "fixed_point_R0": {
+  "rival": "R0",
+  "numerics": {
+   "name": "fit_fixed_point_quick",
+   "coupling": "fixed_point_nodes",
+   "rtol": 1e-05,
+   "ph_nodes": 17,
+   "ph_iterations": 2,
+   "quick": true
+  },
+  "workers": 4,
+  "wall_s": 14.6047,
+  "cost": 21.929608044666,
+  "failed_pots": 0,
+  "analysis": {
+   "calls": [
+    {
+     "phase": "_integrate_system",
+     "n_items": 37,
+     "workers": 4,
+     "wall_s": 11.6035,
+     "task_sum_s": 40.1994,
+     "task_cpu_sum_s": 39.8612,
+     "slowest_task_s": 4.5776,
+     "slowest_task": "b60:zhou_drift_pH8",
+     "start_latency_s": 0.0237,
+     "tail_latency_s": 0.0078,
+     "busy_fraction_per_worker": [
+      0.995,
+      0.86,
+      0.81,
+      0.799
+     ],
+     "mean_busy_fraction": 0.866,
+     "makespan_pool_order_no_overhead_s": 11.5463,
+     "makespan_longest_first_no_overhead_s": 10.109,
+     "lower_bound_s": 10.0499
+    },
+    {
+     "phase": "budget_of",
+     "n_items": 1,
+     "workers": 1,
+     "wall_s": 2.9976,
+     "task_sum_s": 2.9974,
+     "task_cpu_sum_s": 2.9934,
+     "slowest_task_s": 2.9974,
+     "slowest_task": "flux:cerny_ternary",
+     "start_latency_s": 0.0,
+     "tail_latency_s": 0.0002,
+     "busy_fraction_per_worker": [
+      1.0
+     ],
+     "mean_busy_fraction": 1.0,
+     "makespan_pool_order_no_overhead_s": 2.9974,
+     "makespan_longest_first_no_overhead_s": 2.9974,
+     "lower_bound_s": 2.9974
+    }
+   ],
+   "wall_s": 14.6047,
+   "pool_calls_wall_s": 14.6011,
+   "outside_pool_s": 0.0036
+  },
+  "task_sum_s": 43.197,
+  "slowest_5": [
+   {
+    "phase": "_integrate_system",
+    "label": "b60:zhou_drift_pH8",
+    "seconds": 4.5776,
+    "cpu_s": 4.5674
+   },
+   {
+    "phase": "_integrate_system",
+    "label": "b60:hofmann_glucose_pH5",
+    "seconds": 3.9114,
+    "cpu_s": 3.8423
+   },
+   {
+    "phase": "_integrate_system",
+    "label": "b60:hofmann_fructose_pH5",
+    "seconds": 3.5221,
+    "cpu_s": 3.4505
+   },
+   {
+    "phase": "budget_of",
+    "label": "flux:cerny_ternary",
+    "seconds": 2.9974,
+    "cpu_s": 2.9934
+   },
+   {
+    "phase": "_integrate_system",
+    "label": "b60:kang_ttca_120",
+    "seconds": 2.9479,
+    "cpu_s": 2.9436
+   }
+  ],
+  "load_1min": 3.34,
+  "load_5min": 3.69,
+  "load_15min": 3.55,
+  "load_tries": [
+   3.34
+  ],
+  "clean": true,
+  "label": null
+ },
+ "jacobian_C1_w5": {
+  "rival": "C1",
+  "workers": 5,
+  "n_points": 20,
+  "wall_s": 63.498,
+  "env_threads": {
+   "OPENBLAS_NUM_THREADS": null,
+   "OMP_NUM_THREADS": null
+  },
+  "point_cpu_seconds": [
+   16.683,
+   16.002,
+   16.839,
+   16.696,
+   15.988,
+   15.092,
+   15.836,
+   15.885,
+   14.736,
+   15.685,
+   14.893,
+   14.104,
+   15.144,
+   15.583,
+   14.968,
+   15.504,
+   15.684,
+   14.223,
+   14.865,
+   14.855
+  ],
+  "cpu_over_wall": 0.992,
+  "pool_window_s": 63.496,
+  "point_seconds": [
+   17.071,
+   16.394,
+   17.227,
+   17.096,
+   16.378,
+   15.129,
+   15.869,
+   15.918,
+   14.769,
+   15.72,
+   14.951,
+   14.159,
+   15.198,
+   15.644,
+   15.027,
+   15.54,
+   15.723,
+   14.263,
+   14.896,
+   14.878
+  ],
+  "point_mean_s": 15.593,
+  "point_cv": 0.056,
+  "rounds": 4,
+  "per_worker": [
+   {
+    "points": [
+     0,
+     7,
+     14,
+     18
+    ],
+    "busy_s": 62.913,
+    "idle_s": 0.584,
+    "busy_fraction": 0.991,
+    "first_start_s": 0.018,
+    "last_end_s": 62.932
+   },
+   {
+    "points": [
+     1,
+     6,
+     12,
+     17
+    ],
+    "busy_s": 61.723,
+    "idle_s": 1.773,
+    "busy_fraction": 0.972,
+    "first_start_s": 0.018,
+    "last_end_s": 61.743
+   },
+   {
+    "points": [
+     2,
+     9,
+     13,
+     19
+    ],
+    "busy_s": 63.469,
+    "idle_s": 0.027,
+    "busy_fraction": 1.0,
+    "first_start_s": 0.019,
+    "last_end_s": 63.489
+   },
+   {
+    "points": [
+     3,
+     8,
+     11,
+     15
+    ],
+    "busy_s": 61.565,
+    "idle_s": 1.932,
+    "busy_fraction": 0.97,
+    "first_start_s": 0.019,
+    "last_end_s": 61.585
+   },
+   {
+    "points": [
+     4,
+     5,
+     10,
+     16
+    ],
+    "busy_s": 62.18,
+    "idle_s": 1.316,
+    "busy_fraction": 0.979,
+    "first_start_s": 0.019,
+    "last_end_s": 62.2
+   }
+  ],
+  "mean_busy_fraction": 0.982,
+  "makespan_pool_order_no_overhead_s": 63.469,
+  "makespan_longest_first_no_overhead_s": 62.681,
+  "lower_bound_s": 62.37,
+  "jacobian_finite": true,
+  "load_1min": 3.34,
+  "load_5min": 3.67,
+  "load_15min": 3.55,
+  "load_tries": [
+   3.34
+  ],
+  "clean": true,
+  "label": null
+ },
+ "jacobian_C1_w8": {
+  "rival": "C1",
+  "workers": 8,
+  "n_points": 20,
+  "wall_s": 54.306,
+  "env_threads": {
+   "OPENBLAS_NUM_THREADS": null,
+   "OMP_NUM_THREADS": null
+  },
+  "point_cpu_seconds": [
+   17.593,
+   16.781,
+   17.689,
+   17.571,
+   16.843,
+   17.004,
+   17.812,
+   17.867,
+   15.349,
+   16.409,
+   15.508,
+   14.566,
+   15.694,
+   16.148,
+   15.593,
+   16.182,
+   15.171,
+   13.759,
+   14.73,
+   14.58
+  ],
+  "cpu_over_wall": 0.862,
+  "pool_window_s": 54.304,
+  "point_seconds": [
+   20.868,
+   19.832,
+   20.957,
+   20.867,
+   20.025,
+   20.08,
+   21.032,
+   21.169,
+   18.387,
+   19.637,
+   18.513,
+   17.43,
+   18.776,
+   19.44,
+   18.781,
+   19.388,
+   15.575,
+   13.996,
+   14.998,
+   14.61
+  ],
+  "point_mean_s": 18.718,
+  "point_cv": 0.118,
+  "rounds": 3,
+  "per_worker": [
+   {
+    "points": [
+     0,
+     11,
+     17
+    ],
+    "busy_s": 52.294,
+    "idle_s": 2.01,
+    "busy_fraction": 0.963,
+    "first_start_s": 0.039,
+    "last_end_s": 52.334
+   },
+   {
+    "points": [
+     1,
+     8,
+     16
+    ],
+    "busy_s": 53.795,
+    "idle_s": 0.509,
+    "busy_fraction": 0.991,
+    "first_start_s": 0.039,
+    "last_end_s": 53.835
+   },
+   {
+    "points": [
+     2,
+     13
+    ],
+    "busy_s": 40.397,
+    "idle_s": 13.906,
+    "busy_fraction": 0.744,
+    "first_start_s": 0.039,
+    "last_end_s": 40.437
+   },
+   {
+    "points": [
+     3,
+     12,
+     19
+    ],
+    "busy_s": 54.254,
+    "idle_s": 0.05,
+    "busy_fraction": 0.999,
+    "first_start_s": 0.04,
+    "last_end_s": 54.294
+   },
+   {
+    "points": [
+     5,
+     10,
+     18
+    ],
+    "busy_s": 53.591,
+    "idle_s": 0.713,
+    "busy_fraction": 0.987,
+    "first_start_s": 0.041,
+    "last_end_s": 53.633
+   },
+   {
+    "points": [
+     4,
+     9
+    ],
+    "busy_s": 39.662,
+    "idle_s": 14.641,
+    "busy_fraction": 0.73,
+    "first_start_s": 0.041,
+    "last_end_s": 39.704
+   },
+   {
+    "points": [
+     6,
+     14
+    ],
+    "busy_s": 39.813,
+    "idle_s": 14.49,
+    "busy_fraction": 0.733,
+    "first_start_s": 0.042,
+    "last_end_s": 39.855
+   },
+   {
+    "points": [
+     7,
+     15
+    ],
+    "busy_s": 40.557,
+    "idle_s": 13.747,
+    "busy_fraction": 0.747,
+    "first_start_s": 0.042,
+    "last_end_s": 40.599
+   }
+  ],
+  "mean_busy_fraction": 0.862,
+  "makespan_pool_order_no_overhead_s": 54.254,
+  "makespan_longest_first_no_overhead_s": 54.418,
+  "lower_bound_s": 46.795,
+  "jacobian_finite": true,
+  "load_1min": 2.41,
+  "load_5min": 3.6,
+  "load_15min": 3.57,
+  "load_tries": [
+   5.73,
+   2.41
+  ],
+  "clean": true,
+  "label": null
+ },
+ "percall_R0": {
+  "rival": "R0",
+  "pot": "b60:hofmann_pentose_pH5",
+  "microseconds_per_call": {
+   "rate_constants": 127.34,
+   "rate_vector": 7.7,
+   "ph_solve_wrapper_and_kernel": 29.83,
+   "ph_kernel_alone": 16.91,
+   "mass_action_rhs": 12.3,
+   "analytic_jacobian": 96.79
+  },
+  "ph_solves_per_rhs": 2,
+  "microseconds_per_rhs_call": 207.0,
+  "shares_of_one_rhs_call": {
+   "rate_constants_python": 0.652,
+   "ph_solves": 0.288,
+   "of_which_numba_kernel": 0.163,
+   "mass_action_rhs": 0.059
+  },
+  "ph_kernel_compiled": true,
+  "captured_calls": {
+   "ph_solve": 3386,
+   "rate_constants": 1694
+  },
+  "load_1min": 3.32,
+  "load_5min": 5.15,
+  "load_15min": 4.38,
+  "load_tries": [
+   9.48,
+   3.32
+  ],
+  "clean": true,
+  "label": null
+ },
+ "memo_R0": {
+  "pots": {
+   "b60:hofmann_pentose_pH5": {
+    "before_s": 0.4648,
+    "after_s": 0.4136,
+    "factor": 1.124,
+    "bit_identical": true
+   },
+   "b60:whitfield_nf_cys": {
+    "before_s": 0.0662,
+    "after_s": 0.0584,
+    "factor": 1.134,
+    "bit_identical": true
+   },
+   "flux:cerny_ternary": {
+    "before_s": 0.3116,
+    "after_s": 0.2732,
+    "factor": 1.141,
+    "bit_identical": true
+   }
+  },
+  "evaluation_serial": {
+   "before_s": 3.9092,
+   "after_s": 3.4535,
+   "factor": 1.132,
+   "residuals_bit_identical": true
+  },
+  "load_1min": 3.32,
+  "load_5min": 5.15,
+  "load_15min": 4.38,
+  "load_tries": [
+   3.32
+  ],
+  "clean": true,
+  "label": null
+ },
+ "memo_C1": {
+  "pots": {
+   "route:zhai2023jafc_ttca_ph7_120c_fig5a": {
+    "before_s": 0.6108,
+    "after_s": 0.5462,
+    "factor": 1.118,
+    "bit_identical": true
+   },
+   "route:zhai2023jafc_ttcacys_ph7_100c_fig5a": {
+    "before_s": 0.124,
+    "after_s": 0.1101,
+    "factor": 1.125,
+    "bit_identical": true
+   }
+  },
+  "evaluation_serial": {
+   "before_s": 10.2012,
+   "after_s": 8.6918,
+   "factor": 1.174,
+   "residuals_bit_identical": true
+  },
+  "load_1min": 2.98,
+  "load_5min": 4.9,
+  "load_15min": 4.31,
+  "load_tries": [
+   2.98
+  ],
+  "clean": true,
+  "label": null
+ },
+ "findings": [
+  "One evaluation: R0 3.92 s serial -> 2.28 / 1.67 / 1.18 s at 2 / 4 / 8 workers (efficiency 0.86 / 0.59 / 0.41); C1 9.86 s -> 5.42 / 3.22 / 2.92 s (0.91 / 0.77 / 0.42; C1's other W=4 repeats 3.88 - 3.96 s at load ~3).",
+  "Stragglers are NOT what limits an evaluation. R0's 38 serial tasks: median 0.068 s, the slowest (b60:hofmann_pentose_pH5, 0.46 s) 12 % of the total, the slowest 10 60 %. At W=4 the systems phase is 90 % busy and within 4 % of a longest-first schedule (1.24 vs 1.20 s; lower bound 1.19 s). C1's route phase at W=4 is 89 % busy (longest first: 1.82 -> 1.66 s); only at W=8 does order matter (1.54 -> 1.19 s).",
+  "What does limit it: (a) every task runs slower when several run at once -- R0's pot-time sum is 3.59 s serial, 4.77 s at W=4 (+33 %), 5.50 s at W=8 (+53 %), with CPU time = wall time, i.e. slower cores (4 performance + 6 efficiency cores, background load 2 - 3), not waiting; (b) the one flux budget (cerny_ternary, 0.31 s: it re-integrates the pot at the engine's default rtol 1e-9, not the fit's 1e-5) runs alone after the systems, a second barrier worth 20 % of R0's wall at W=4 and 28 % at W=8.",
+  "Pool overhead is negligible: fork + first task 9 - 24 ms, tail 3 - 8 ms per pool call (<= 2 % of an evaluation, < 0.1 % of a Jacobian); results pickle in < 0.3 ms (3 - 117 kB). A persistent pool would buy ~1 %.",
+  "The finite-difference Jacobian is the fit's cost (~90 % of its wall: R0 s0's 161 evaluations are ~8 Jacobians of 18 points + ~17 single evaluations). Its points are equal-sized (CV 4 - 14 %) and the pool is 92 % (R0, 18 points on 4 workers: the 5th round half empty) to 99 % (C1, 20 points) busy. The wall follows the per-point slow-down: R0's point takes 3.9 s alone, 4.8 / 6.3 / 7.3 / 8.3 s with 2 / 4 / 6 / 8 running; the Jacobian takes 43.5 / 30.5 / 22.1 / 22.2 s. C1: 74.8 s (W=4), 63.5 s (W=5, 4 full rounds), 54.3 s (W=8). The machine delivers ~3.5 - 4 serial-equivalents however many workers; OPENBLAS_NUM_THREADS=1 changes nothing (30.46 vs 30.46 s).",
+  "The '~25 % busy' of M1's fits: their records give a serial-equivalent utilisation of 37 - 57 % (evaluations x the serial evaluation time / (seconds x 4 workers)). The deficit is the per-core slowdown -- R0's and C1's lanes ran together, 8 processes, each point ~2.1x slower than alone -- plus R0's half-empty last round; it is not workers idling behind a straggler.",
+  "Inside a pot, single process (timer-wrapped functions; the same in the slow and the typical pot): ~52 % is Python building the rate constants (sulfur_rate_constants_at re-derives all 132 from the parameter registry at every RHS and Jacobian call, 127 us), ~30 % the two pH solves per call (in-situ and the 25 C label pH, 30 us each: 17 us the numba kernel, 13 us the Python setup), 4 - 6 % mass action, 2 - 3 % the analytic Jacobian, ~10 % LSODA's Fortran, solve_ivp's per-step Python and the closures. hofmann_pentose_pH5: 900 steps, 1443 RHS, 218 Jacobian calls; whitfield_nf_cys (typical): 116 steps, 231 RHS, 0 Jacobians (LSODA stays in Adams mode); the slowest route pot: 940 steps, 1729 RHS, 354 Jacobians.",
+  "The fixed-point coupling at R0's optimum, W=4: 14.6 s against 1.67 s inline (8.8x slower); its flux budget alone is 3.0 s.",
+  "Nothing was implemented: no change that is small and bit-identical reaches 1.5x. The best one, memoising the pure functions of temperature, is bit-identical and gives 1.12 - 1.14x per pot, 1.13x (R0) / 1.17x (C1) per serial evaluation. The large factors (compiled constants + pH, exact gradients) change numbers at the rounding level and belong to the rewrite (W3)."
+ ],
+ "ranked_speedups": [
+  {
+   "rank": "1",
+   "change": "Compiled RHS path: the rate constants (T-stage once per pot, pH-stage per call), both pH solves and mass action in one numba (or JAX) kernel; scipy's LSODA called without the per-step Python loop",
+   "factor": "5-10x per pot (est.)",
+   "evidence": "rate constants + pH solves are ~80 % of every pot (inside_*: timers; percall: ~200 us of ~215 us per RHS call is Python); integrator + glue ~10 %",
+   "effort_h": "16-30",
+   "bit_identical": "no (same physics to ~1e-12 relative; trajectories to tolerance)"
+  },
+  {
+   "rank": "2",
+   "change": "Exact gradients (forward sensitivities: JAX + diffrax, or CVODES-style staggered) in place of the forward-difference Jacobian",
+   "factor": "3-6x on Jacobians (est.), on top of 1",
+   "evidence": "a Jacobian is 18 (R0) / 20 (C1) full evaluations and ~90 % of a fit's wall; a sensitivity solve shares the step and factorisation, ~2-5 solve-equivalents for 17-19 parameters; also removes FD noise",
+   "effort_h": "40-80 (plan W3)",
+   "bit_identical": "no (a better Jacobian; the optimiser path changes)"
+  },
+  {
+   "rank": "3",
+   "change": "Worker count matched to the Jacobian's points (R0: 6 for 18 points; C1: 5 for 20), and the two rivals' lanes run one after the other at that count",
+   "factor": "1.38x R0 (W=6), 1.18x C1 (W=5), measured against W=4 alone; ~1.1-1.2x against M1's two concurrent 4-worker lanes (est.)",
+   "evidence": "jacobian_R0_w{2,4,6,8}: 43.5 / 30.5 / 22.1 / 22.2 s; per-point time 4.8 / 6.3 / 7.3 / 8.3 s (serial 3.9 s): the M4's 4 P + 6 E cores give ~3.5-4 serial-equivalents, so W > 6 buys nothing",
+   "effort_h": "0 (a setting)",
+   "bit_identical": "yes"
+  },
+  {
+   "rank": "4",
+   "change": "Memoise the pure functions of temperature (pK(T), pKw(T), Davies A(T), pka_at's temperature part)",
+   "factor": "1.13-1.15x (measured)",
+   "evidence": "memo: bit-identical pots and residuals",
+   "effort_h": "2-3",
+   "bit_identical": "yes"
+  },
+  {
+   "rank": "5",
+   "change": "One pool per evaluation: the flux budget and the route pots scheduled with B60's systems, longest first (by the previous evaluation's times)",
+   "factor": "1.15-1.4x per single evaluation; ~1.02x per fit",
+   "evidence": "scaling_*: the lone flux budget (0.31 s at rtol 1e-9) is a second barrier, 20 % of R0's wall at W=4; longest-first makespans in best_run_analysis; single evaluations are ~10 % of a fit",
+   "effort_h": "3-5 (in M1's runner: B23's generator is frozen)",
+   "bit_identical": "yes"
+  },
+  {
+   "rank": "6",
+   "change": "Flatten a Jacobian's points x pots into one longest-first pool",
+   "factor": "1.0-1.08x",
+   "evidence": "jacobian_*: point-level busy 92 % (R0, W=4: last round half empty) and 99 % (C1); rank 3 recovers most of it for free",
+   "effort_h": "4-6",
+   "bit_identical": "yes"
+  },
+  {
+   "rank": "7",
+   "change": "Reuse the centre: least_squares has just evaluated f(x) when it asks for jac(x)",
+   "factor": "1.0-1.06x",
+   "evidence": "1 of 18 / 20 points; saves wall only when it removes a round",
+   "effort_h": "1",
+   "bit_identical": "yes (residuals); the evaluation count in the records changes"
+  },
+  {
+   "rank": "8",
+   "change": "Sparse analytic Jacobian (precomputed nonzeros of S dr/dy)",
+   "factor": "~1.03x",
+   "evidence": "percall: 99 us per Jacobian vs 13 us per RHS, but LSODA asks for it ~1 in 7 RHS calls in stiff pots and never in the typical (Adams-mode) pot; at n = 62 a sparse LU does not pay",
+   "effort_h": "2",
+   "bit_identical": "no (summation order)"
+  },
+  {
+   "rank": "9",
+   "change": "Fewer pH solves: the Jacobian call reuses its RHS call's pH (same t, y)",
+   "factor": "~1.05x",
+   "evidence": "13 % of solves in stiff pots; not bit-identical (the warm-started bisection lands elsewhere within its 1e-10 tolerance). The label-scale (25 C) solve is physics (B51) and stays; a pH state solved as an algebraic variable belongs to the rewrite",
+   "effort_h": "1",
+   "bit_identical": "no"
+  },
+  {
+   "rank": "10",
+   "change": "Persistent worker pool (MAILLARD_POOL=persistent)",
+   "factor": "~1.01x",
+   "evidence": "fork + start latency 10-24 ms and tail 3-8 ms per pool call against 1.7-30 s; result pickles 7-117 kB in < 0.3 ms",
+   "effort_h": "0 (exists)",
+   "bit_identical": "yes"
+  }
+ ],
+ "m1_fit_utilisation": [
+  {
+   "fit": "R0 s0",
+   "evaluations": 161,
+   "seconds": 431.3,
+   "workers": 4,
+   "seconds_per_evaluation": 2.68,
+   "utilisation": 0.365
+  },
+  {
+   "fit": "R0 s1",
+   "evaluations": 280,
+   "seconds": 718.1,
+   "workers": 4,
+   "seconds_per_evaluation": 2.56,
+   "utilisation": 0.382
+  },
+  {
+   "fit": "R0 s2",
+   "evaluations": 146,
+   "seconds": 309.0,
+   "workers": 4,
+   "seconds_per_evaluation": 2.12,
+   "utilisation": 0.463
+  },
+  {
+   "fit": "C1 s0",
+   "evaluations": 179,
+   "seconds": 1115.3,
+   "workers": 4,
+   "seconds_per_evaluation": 6.23,
+   "utilisation": 0.396
+  },
+  {
+   "fit": "C1 s1",
+   "evaluations": 226,
+   "seconds": 970.4,
+   "workers": 4,
+   "seconds_per_evaluation": 4.29,
+   "utilisation": 0.574
+  },
+  {
+   "fit": "C1 s2",
+   "evaluations": 202,
+   "seconds": 878.5,
+   "workers": 4,
+   "seconds_per_evaluation": 4.35,
+   "utilisation": 0.567
+  }
+ ]
+}
