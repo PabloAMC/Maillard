@@ -168,3 +168,15 @@ pots, (3) no temperature series for NF alone, (4) NF self-reaction with its own 
 | new NF-alone k | **none** (nothing to compare with `bork2022`'s 4.91 ± 0.23 × 10⁻³ min⁻¹) |
 
 **Net:** E16 stays "undecidable on disk"; this paper is neutral for it.
+
+## Scope note (coordinator, 2026-11-05)
+
+"Not simulable / outside every sub-model" above is a judgement, not the engine's rule, and is narrowed here:
+- **Phenolic arms (caffeic / ferulic acid + partner):** outside the engine's declared envelope BY RULE: the phenolic acids
+  are not species in any core lane (`declare_envelope` refuses an unnamed reactant).
+- **Single-compound controls (HMF, furfural, pyrrole-2-carbaldehyde, glyoxal, MGO, diacetyl alone, heated neat or near-dry
+  at 220 C):** these species exist in the engine, and no envelope rule refuses them. Only the acrylamide lane has an a_w
+  window (0.34-0.99); the trunk's a_w term has no declared window. They are outside the engine's VALIDATED domain (dilute
+  aqueous kinetics; no solvent, a_w undefined), not outside its rules. Tagged as **candidate data for plan step W5.2
+  (crust, low-moisture high-temperature)**, to be judged there. Register item: give the trunk lane an a_w window, so a
+  dry-state question is refused rather than extrapolated.
