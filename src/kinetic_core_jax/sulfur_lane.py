@@ -267,7 +267,8 @@ class PhSolver:
 
     def __init__(self, balance: ChargeBalance):
         self.b = balance
-        self.zmax = jnp.asarray(balance.zmax)
+        # numpy only: a jnp array made here (inside a trace) would be a tracer the custom JVP closes over
+        self.zmax = np.asarray(balance.zmax, dtype=float)
         c = balance.const
 
         @jax.custom_jvp
@@ -295,14 +296,15 @@ class PhSolver:
 
     def _group_pk(self, ionic_m, tt):
         af = davies(ionic_m, tt["a"])
-        return tt["pk0"] + af * (2.0 * (self.zmax[:, None] - jnp.arange(float(GROUP_WIDTH))) - 1.0), af
+        return tt["pk0"] + af * (2.0 * (jnp.asarray(self.zmax)[:, None] - jnp.arange(float(GROUP_WIDTH))) - 1.0), af
 
     def _group_terms(self, ph, pk):
         log_w = jnp.concatenate([jnp.zeros((pk.shape[0], 1)), jnp.cumsum(ph - pk, axis=1)], axis=1)
         w = 10.0 ** (log_w - jnp.max(log_w, axis=1, keepdims=True))
         w = w / jnp.sum(w, axis=1, keepdims=True)
         i = jnp.arange(GROUP_WIDTH + 1.0)
-        return self.zmax - jnp.sum(i * w, axis=1), jnp.sum(w * (self.zmax[:, None] - i) ** 2, axis=1)
+        z = jnp.asarray(self.zmax)
+        return z - jnp.sum(i * w, axis=1), jnp.sum(w * (z[:, None] - i) ** 2, axis=1)
 
     def _residual_given(self, ph, pk, af, pkw, sid, conc):
         charge, ionic = self._group_terms(ph, pk)
@@ -782,16 +784,21 @@ def _interp_rows(s, grid, rows):
     return rows[lo] * (1.0 - w) + rows[lo + 1] * w
 
 
-def _solve(net: Network, rhs_k, y0, duration, save_s, jumps, *, rtol, atol, solver, adjoint, max_steps, throw):
+def _solve(net: Network, rhs_k, data, y0, duration, save_s, jumps, *, rtol, atol, solver, adjoint, max_steps,
+           throw):
+    """One solve on s in [0, 1] (the right-hand side scaled by ``duration``), the rate constants ``rhs_k(s, y, data)``.
+    Every traced number reaches the vector field through diffrax's ``args`` (``data``, ``duration``), never by
+    closure, so the discrete adjoint can differentiate it."""
     import diffrax
 
     stoich = jnp.asarray(net.stoichiometry)
 
     def f(s, y, args):
-        return duration * (stoich @ (rhs_k(s, y) * mass_action(y, net)))
+        data_, duration_ = args
+        return duration_ * (stoich @ (rhs_k(s, y, data_) * mass_action(y, net)))
 
     controller = diffrax.ClipStepSizeController(diffrax.PIDController(rtol=rtol, atol=atol), jump_ts=jumps)
-    sol = diffrax.diffeqsolve(diffrax.ODETerm(f), solver, t0=0.0, t1=1.0, dt0=None, y0=y0,
+    sol = diffrax.diffeqsolve(diffrax.ODETerm(f), solver, t0=0.0, t1=1.0, dt0=None, y0=y0, args=(data, duration),
                               saveat=diffrax.SaveAt(ts=save_s), stepsize_controller=controller,
                               max_steps=max_steps, adjoint=adjoint, throw=throw)
     return sol.ys, sol.stats["num_steps"], sol.result != diffrax.RESULTS.successful
@@ -831,31 +838,41 @@ def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 
         if mode == "clamped":
             t_k = knot_tc[0] + CELSIUS
             k0 = rates(t_k, a["label_ph"], 0.0, jnp.nan)
-            ys, steps, bad = _solve(net, lambda s, y: k0, y_start, duration, node_s, node_s, **kw)
+            ys, steps, bad = _solve(net, lambda s, y, k: k, k0, y_start, duration, node_s, node_s, **kw)
             ys = jnp.maximum(ys, 0.0)
             n = node_s.shape[0]
             return ys[-1], (ys, jnp.full(n, a["label_ph"]), jnp.zeros(n), jnp.full(n, a["label_ph"]),
                             jnp.asarray(0), jnp.asarray(0.0), steps, bad)
         if st.coupling == "inline":
-            def rhs_k(s, y):
-                t_k = jnp.interp(s, knot_s, knot_tc) + CELSIUS
-                ph, ionic, cool = bal.state(y, t_k, sid, th, a["buffer"])
-                return rates(t_k, ph, ionic, cool)
+            def rhs_k(s, y, d):
+                theta_, sid_, buffer_, knot_s_, knot_tc_ = d
+                t_k = jnp.interp(s, knot_s_, knot_tc_) + CELSIUS
+                ph, ionic, cool = bal.state(y, t_k, sid_, theta_[NAME], buffer_)
+                return net.rate_constants(theta_, RateCtx(t_c=t_k - CELSIUS, t_k=t_k, ph=ph, ph_label=cool,
+                                                          ionic_m=ionic))
 
-            ys, steps, bad = _solve(net, rhs_k, y_start, duration, node_s, knot_s, **kw)
+            ys, steps, bad = _solve(net, rhs_k, (theta, sid, a["buffer"], knot_s, knot_tc), y_start, duration,
+                                    node_s, knot_s, **kw)
             ys = jnp.maximum(ys, 0.0)
             ph, ionic, cool = node_states(ys, node_tk)
             return ys[-1], (ys, ph, ionic, cool, jnp.asarray(0), jnp.asarray(0.0), steps, bad)
         # fixed_point_nodes (shipped): B64's per-node starts (identical at every node of an isothermal segment)
         p0, i0, c0 = node_states(jnp.broadcast_to(y_start, (node_s.shape[0],) + y_start.shape), node_tk)
 
-        def sweep(carry):
+        # every traced number enters the sweep as an OPERAND, never by closure: lax.cond's reverse-mode lowering
+        # cannot carry a closed-over tracer (the branch would hold it as a constant)
+        data = (theta, sid, a["buffer"], y_start, duration, node_s, node_tk)
+
+        def sweep(carry, d):
+            theta_, sid_, buffer_, y_start_, duration_, node_s_, node_tk_ = d
             count, node_ph, node_i, node_cool, _ys, _res, _done, steps, bad = carry
-            k_nodes = jax.vmap(rates)(node_tk, node_ph, node_i, node_cool)
-            ys, n_steps, failed = _solve(net, lambda s, y: _interp_rows(s, node_s, k_nodes), y_start, duration,
-                                         node_s, node_s, **kw)
+            k_nodes = jax.vmap(lambda t, p, i, c: net.rate_constants(
+                theta_, RateCtx(t_c=t - CELSIUS, t_k=t, ph=p, ph_label=c, ionic_m=i)))(node_tk_, node_ph, node_i,
+                                                                                         node_cool)
+            ys, n_steps, failed = _solve(net, lambda s, y, dd: _interp_rows(s, dd[0], dd[1]), (node_s_, k_nodes),
+                                         y_start_, duration_, node_s_, node_s_, **kw)
             ys = jnp.maximum(ys, 0.0)
-            fresh, fi, fc = node_states(ys, node_tk)
+            fresh, fi, fc = jax.vmap(lambda y, t: bal.state(y, t, sid_, theta_[NAME], buffer_))(ys, node_tk_)
             res = jnp.max(jnp.abs(fresh - node_ph))
             count = count + 1
             if relaxed:
@@ -871,11 +888,11 @@ def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 
                 jnp.asarray(False), jnp.asarray(0), jnp.asarray(False))
         if reverse:
             def body(carry, _):
-                return jax.lax.cond(carry[6], lambda c: c, sweep, carry), None
+                return jax.lax.cond(carry[6], lambda c, d: c, sweep, carry, data), None
 
             out, _ = jax.lax.scan(body, init, None, length=max_sweeps)
         else:
-            out = jax.lax.while_loop(lambda c: ~c[6], sweep, init)
+            out = jax.lax.while_loop(lambda c: ~c[6], lambda c: sweep(c, data), init)
         count, node_ph, node_i, node_cool, ys, res, _, steps, bad = out
         return ys[-1], (ys, node_ph, node_i, node_cool, count, res, steps, bad)
 
