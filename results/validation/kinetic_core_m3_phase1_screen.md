@@ -88,4 +88,4 @@
 
 R0-pinned glucose-pot PA (median, mM) at Fig. 2's times: {"PA_fig2_times_median_mM": {"10.0": 1.8021923241415253e-05, "30.0": 0.0002655007726601173, "60.0": 0.0008792863761475328, "120.0": 0.0018289708753873746, "240.0": 0.0029800550079901273, "500.0": 0.004374384000510835}, "measured_PA_mM": {"10.0": 0.01956, "30.0": 0.04942, "60.0": 0.08969, "120.0": 0.13991, "240.0": 0.20054, "500.0": 0.22044}}
 
-Memory at launch: {'free_pct_at_launch': 60, 'swap_used_mb_at_launch': 7707.0, 'threshold_pct': 30, 'guard': True}; compute 0.17 h wall. sigma-trap (runs after the keying commit, demotion only).
+Memory at launch: {'free_pct_at_launch': 44, 'swap_used_mb_at_launch': 8277.5, 'threshold_pct': 40, 'guard': True}; compute 0.154 h wall. sigma-trap (runs after the keying commit, demotion only).

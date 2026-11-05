@@ -63,10 +63,10 @@
 | rival | coordinates | ms / draw | feasible share | failed |
 |---|---|---|---|---|
 | R0 | 2 | 0.02 | 1.000 | 0 |
-| R1 | 34 | 53.16 | 0.934 | 0 |
-| R2 | 32 | 39.17 | 0.102 | 0 |
-| R3 | 35 | 43.79 | 0.934 | 0 |
-| R4 | 35 | 43.19 | 0.957 | 0 |
+| R1 | 34 | 31.71 | 0.934 | 0 |
+| R2 | 32 | 31.8 | 0.102 | 0 |
+| R3 | 35 | 31.63 | 0.934 | 0 |
+| R4 | 35 | 34.38 | 0.957 | 0 |
 
 ## R1's pH drift in the 0.1 M pots (diagnostic): U1 points median |d| 0.012 dex (max 0.189); U4 points median 0.009; Fig. 1 pot pH at 500 min 6.75
 
@@ -74,54 +74,29 @@
 
 trapezoid 41x41 -0.0866; PSIS -0.0815 (k-hat -0.052, ESS 1020); Gauss-Hermite 20x20 in logit space -0.133 (agrees: True)
 
-## One-unit PSIS pilot at full dimension (U3 under R2, synthetic U3)
+## Open diagnostic: Table 2's argon PA + PAA (not a scored unit)
 
-```
-{
- "rival": "R2",
- "dimension": 32,
- "unit": "U3 | U4, U1e, U1l (synthetic U3)",
- "mode_search": [
-  {
-   "cost": 0.4735295732797236,
-   "status": 0,
-   "evaluations": 273,
-   "converged": false,
-   "polish_flagged": true
-  },
-  {
-   "cost": 0.6136113449261311,
-   "status": 0,
-   "evaluations": 272,
-   "converged": false,
-   "polish_flagged": true
-  },
-  {
-   "cost": 0.8213963897915141,
-   "status": 0,
-   "evaluations": 273,
-   "converged": false,
-   "polish_flagged": true
-  }
- ],
- "proposal": "Student-t 5 df in logit space at the best mode; Gauss-Newton covariance x 4, eigenvalues clipped to [0.01, pi^2 / 3]",
- "psis": {
-  "S": 4096,
-  "k_hat": 2.5459670955289884,
-  "ess": 1.19948861715275,
-  "accepted": false,
-  "lppd": -62.49747059812576,
-  "mc_se": 0.9130432620810922,
-  "reason": "k-hat 2.55 >= 0.7; ESS 1.2 < 100.0",
-  "zero_weight_draws": 1792
- },
- "evaluations": 4979,
- "infeasible_evaluations": 1793,
- "wall_s": 534.9,
- "projection_385_cells_h_one_worker": 57.2,
- "exceeds_24h_cap": true
-}
-```
+| rival | predicted q10 / q50 / q90 (mM) | measured (mM) |
+|---|---|---|
+| R1 | [0.244, 0.4679, 0.7657] | 0.09 |
+| R2 | [0.1063, 0.4645, 0.805] | 0.09 |
+| R3 | [0.2129, 0.4792, 0.797] | 0.09 |
+| R4 | [0.1688, 0.3867, 0.7057] | 0.09 |
+
+## v2.1 estimator: adaptive-tempering SMC
+
+- V-SMC (a), two-coordinate R3 toy against the grid: PASS (grid -0.0866, SMC -0.1067 +- 0.0152, steps 1, max k-hat 0.0862, resolved True)
+- V-SMC (b), 32-dim Gaussian with a known answer: PASS (exact 12.4021, SMC 12.9485 +- 0.2344 over 4 replicates [12.9374, 12.2015, 13.2594, 13.1077], max k-hat 0.455, min step ESS 256; plain reweighting of 8 192 draws: {'lppd': -661.8659, 'k_hat': 72.51775513274771, 'ess': 1.0, 'resolved': False})
+
+## SMC pilot at full dimension (U3 | U4, U1e, U1l, synthetic U3)
+
+| rival | coordinates | resolved | lppd +- se | steps | max k-hat | evaluations | wall s | reweighting (1 024) | projection 385 cells, h (1 / 4 workers) |
+|---|---|---|---|---|---|---|---|---|---|
+| R2 | 32 | True (ok) | -25.68 +- 0.26 [-25.4539, -25.9652] | [7, 7] | 0.35 | 8704 | 589.6 | k-hat 6.06, ESS 1.6 | 63.1 / 15.8 |
+| R3 | 35 | True (ok) | -33.00 +- 0.30 [-32.7431, -33.3347] | [5, 6] | 0.12 | 7168 | 270.3 | k-hat 3.09, ESS 2.5 | 28.9 / 7.2 |
+| R4 | 35 | True (ok) | -18.94 +- 0.15 [-18.7946, -19.0995] | [5, 5] | -0.05 | 6656 | 342.5 | k-hat 2.25, ESS 9.7 | 36.6 / 9.2 |
+
+v2 pilot: superseded (v2.1 amendment): the v2 record at commit 5a6a30aa shows the Student-t PSIS pilot unresolved (R2: k-hat 2.5, ESS 1.2 at S = 4096)
 
 ## V-blind (blind-order) stub
 
@@ -146,4 +121,4 @@ trapezoid 41x41 -0.0866; PSIS -0.0815 (k-hat -0.052, ESS 1020); Gauss-Hermite 20
 - D-h  Phe liberated (U3) is the cumulative Phe released by the exits (sec. 3.2), not net of route-A consumption.
 - D-i  U3's read error is the prereg's literal 0.011 umol/mmol (1.1e-5 mmol/mmol) plus 0.03 dex.
 
-Memory at launch: {'free_pct_at_launch': 60, 'swap_used_mb_at_launch': 7707.0, 'threshold_pct': 30, 'guard': True}; compute 0.187 h wall.
+Memory at launch: {'free_pct_at_launch': 58, 'swap_used_mb_at_launch': 7178.62, 'threshold_pct': 40, 'guard': True}; compute 0.378 h wall.

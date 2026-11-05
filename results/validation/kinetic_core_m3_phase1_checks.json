@@ -3,19 +3,19 @@
  "provenance": {
   "artifact": "kinetic_core_m3_phase1_checks",
   "generated_on": "2026-11-05",
-  "git": {"commit": "e45e7e28cb4b60f42a5ee5a52b9af0d2d7eb2323", "short": "e45e7e28", "branch": "m3-phase1-build", "dirty": true},
+  "git": {"commit": "e3f22ebc8bc8d1912c2666fb48ee19f6f14e2551", "short": "e3f22ebc", "branch": "m3-phase1-build", "dirty": false},
   "generated_by": "scripts/generators/fit_m3_strecker_layer.py --checks",
   "inputs": [
-   {"path": "src/m3_strecker_layer.py", "sha256": "a08273991690fa3a6938299325292e6e7c799b8054326070fa7fde50c9ce3b0f"},
-   {"path": "scripts/generators/fit_m3_strecker_layer.py", "sha256": "825138173eba664df2f808adc08138e9a8e74ef964c23806e3044dbcc78722c6"},
+   {"path": "src/m3_strecker_layer.py", "sha256": "bbf761ba823c888a1a41c7874d3203b6bdfdd3c330571550e9a7fff300e19c8d"},
+   {"path": "scripts/generators/fit_m3_strecker_layer.py", "sha256": "067a5b03d59a37d809a7a35039550ce735c917ca54dac482748f03da2869a43b"},
    {"path": "data/lit/fit_rows/strecker_hofmann2000.yml", "sha256": "0f8a8b70ee84ee85fbee129528935148149fb9d087d7fcf80b066bef2dbbeb34"},
    {"path": "data/lit/fit_rows/strecker_hofmann2000_fig2.yml", "sha256": "806fcb612924ba07057d4639bc72407f7c11fa74bb85297465d8d44dedf01ea3"},
    {"path": "data/lit/fit_rows/strecker_hofmann2000b.yml", "sha256": "e516886f8c41b8efa630b057aecfcb6826d8a6cc91000425de1f323dbbea01da"},
    {"path": "data/lit/fit_rows/strecker_hofmann2000b_fig1.yml", "sha256": "b3d154ede5f1f4721e207f94e7875964b20917166f008f187e521b45bb3b9bb3"}
   ]
  },
- "design": "results/validation/kinetic_core_m3_strecker_layer_prereg.md (v2 DRAFT; blob d19c3f50adfb)",
- "memory": {"free_pct_at_launch": 60, "swap_used_mb_at_launch": 7707.0, "threshold_pct": 30, "guard": true},
+ "design": "results/validation/kinetic_core_m3_strecker_layer_prereg.md (v2 DRAFT; blob 564ed919cb57)",
+ "memory": {"free_pct_at_launch": 58, "swap_used_mb_at_launch": 7178.62, "threshold_pct": 40, "guard": true},
  "ph_scale": "label_25C",
  "v_acid": {
   "rows": [
@@ -49,28 +49,66 @@
  "v5_ph_scale": {"scale": "label_25C", "note": "every dpH is on the 25 C label scale from label pH 7.0 (rule 13)"},
  "v_time": {
   "R0": {"ms_per_draw": 0.02, "batch": 256, "feasible_share": 1.0, "failed": 0, "coordinates": 2},
-  "R1": {"ms_per_draw": 53.16, "batch": 256, "feasible_share": 0.93359375, "failed": 0, "coordinates": 34},
-  "R2": {"ms_per_draw": 39.17, "batch": 256, "feasible_share": 0.1015625, "failed": 0, "coordinates": 32},
-  "R3": {"ms_per_draw": 43.79, "batch": 256, "feasible_share": 0.93359375, "failed": 0, "coordinates": 35},
-  "R4": {"ms_per_draw": 43.19, "batch": 256, "feasible_share": 0.95703125, "failed": 0, "coordinates": 35}
+  "R1": {"ms_per_draw": 31.71, "batch": 256, "feasible_share": 0.93359375, "failed": 0, "coordinates": 34, "t2_argon_total_mM_q10_50_90": [0.244, 0.4679, 0.7657], "t2_argon_total_measured_mM": 0.09},
+  "R2": {"ms_per_draw": 31.8, "batch": 256, "feasible_share": 0.1015625, "failed": 0, "coordinates": 32, "t2_argon_total_mM_q10_50_90": [0.1063, 0.4645, 0.805], "t2_argon_total_measured_mM": 0.09},
+  "R3": {"ms_per_draw": 31.63, "batch": 256, "feasible_share": 0.93359375, "failed": 0, "coordinates": 35, "t2_argon_total_mM_q10_50_90": [0.2129, 0.4792, 0.797], "t2_argon_total_measured_mM": 0.09},
+  "R4": {"ms_per_draw": 34.38, "batch": 256, "feasible_share": 0.95703125, "failed": 0, "coordinates": 35, "t2_argon_total_mM_q10_50_90": [0.1688, 0.3867, 0.7057], "t2_argon_total_measured_mM": 0.09}
  },
  "r1_drift_in_0.1M_pots": {"draws": 126, "U1_points_dex_median_abs": 0.011696571126073307, "U1_points_dex_max_abs": 0.18920995016995934, "U4_points_dex_median_abs": 0.008931688804020593, "fig1_pH_500_min_median": 6.748493291159297},
  "v_density": {"lppd_trapezoid_41x41": -0.0866, "lppd_psis": -0.0815, "k_hat": -0.05227077138317778, "ess": 1020.1060499729796, "mc_se": 0.02218669289597125, "lppd_gauss_hermite_20_logit": -0.133, "psis_minus_grid": 0.0051, "gh_minus_grid": -0.0464, "pass": true, "gh_pass": true},
  "blind_order_stub": {"keyed_file": "data/lit/fit_rows/strecker_hofmann2000b_fig2_fig3.yml", "keyed_file_present_on_disk": false, "refusal": "prereg not frozen: sec. 20 names no freeze commit (v2 is a DRAFT)", "score_refused": true},
- "psis_pilot": {
-  "rival": "R2",
+ "v_smc_grid": {"lppd_grid": -0.0866, "smc": {"lppd": -0.1067, "resolved": true, "reason": "", "steps": 1, "evaluations": 1280, "max_k_hat": 0.0862, "min_ess": 241.6785, "final_acceptance": 0.6855, "se": 0.0152}, "smc_minus_grid": -0.0201, "wall_s": 40.0, "pass": true},
+ "v_smc_gaussian_32": {
   "dimension": 32,
-  "unit": "U3 | U4, U1e, U1l (synthetic U3)",
-  "mode_search": [{"cost": 0.4735295732797236, "status": 0, "evaluations": 273, "converged": false, "polish_flagged": true}, {"cost": 0.6136113449261311, "status": 0, "evaluations": 272, "converged": false, "polish_flagged": true}, {"cost": 0.8213963897915141, "status": 0, "evaluations": 273, "converged": false, "polish_flagged": true}],
-  "proposal": "Student-t 5 df in logit space at the best mode; Gauss-Newton covariance x 4, eigenvalues clipped to [0.01, pi^2 / 3]",
-  "psis": {"S": 4096, "k_hat": 2.5459670955289884, "ess": 1.19948861715275, "accepted": false, "lppd": -62.49747059812576, "mc_se": 0.9130432620810922, "reason": "k-hat 2.55 >= 0.7; ESS 1.2 < 100.0", "zero_weight_draws": 1792},
-  "evaluations": 4979,
-  "infeasible_evaluations": 1793,
-  "wall_s": 534.9,
-  "projection_385_cells_h_one_worker": 57.2,
-  "exceeds_24h_cap": true
+  "particles": 512,
+  "replicates": 4,
+  "exact_lppd": 12.4021,
+  "smc": {"lppd": 12.94850603364078, "se_replicates": 0.23441509749288575, "replicates": [12.9374, 12.2015, 13.2594, 13.1077], "resolved": true, "reasons": [], "steps": [23, 23, 23, 23], "evaluations": 100352, "max_k_hat": 0.4552744551414181, "min_ess": 256.0, "final_acceptance": [0.315, 0.348, 0.321, 0.337]},
+  "smc_minus_exact": 0.5464,
+  "smc_within_3se": true,
+  "reweighting_8192": {"lppd": -661.8659, "k_hat": 72.51775513274771, "ess": 1.0, "resolved": false},
+  "pass": true
  },
- "compute_wall_h": 0.187,
+ "smc_pilot": {
+  "R2": {
+   "rival": "R2",
+   "dimension": 32,
+   "particles": 256,
+   "unit": "U3 | U4, U1e, U1l (synthetic U3)",
+   "reweighting_1024": {"lppd": -22.055578913826153, "k_hat": 6.06180317666101, "ess": 1.6307300177124449, "resolved": false},
+   "smc": {"lppd": -25.677237861078265, "se_replicates": 0.2556515650468789, "replicates": [-25.4539, -25.9652], "resolved": true, "reasons": [], "steps": [7, 7], "evaluations": 8704, "max_k_hat": 0.3488851188469789, "min_ess": 127.99999999999997, "final_acceptance": [0.268, 0.264]},
+   "wall_s": 589.6,
+   "wall_per_density_s": 589.6,
+   "projection_385_cells_h_one_worker": 63.1,
+   "projection_385_cells_h_four_workers": 15.8
+  },
+  "R3": {
+   "rival": "R3",
+   "dimension": 35,
+   "particles": 256,
+   "unit": "U3 | U4, U1e, U1l (synthetic U3)",
+   "reweighting_1024": {"lppd": -31.72496720169595, "k_hat": 3.0903607639826167, "ess": 2.485657262474488, "resolved": false},
+   "smc": {"lppd": -32.995766028511824, "se_replicates": 0.29577240931404697, "replicates": [-32.7431, -33.3347], "resolved": true, "reasons": [], "steps": [5, 6], "evaluations": 7168, "max_k_hat": 0.11662858909632697, "min_ess": 128.00000000000003, "final_acceptance": [0.279, 0.307]},
+   "wall_s": 270.3,
+   "wall_per_density_s": 270.3,
+   "projection_385_cells_h_one_worker": 28.9,
+   "projection_385_cells_h_four_workers": 7.2
+  },
+  "R4": {
+   "rival": "R4",
+   "dimension": 35,
+   "particles": 256,
+   "unit": "U3 | U4, U1e, U1l (synthetic U3)",
+   "reweighting_1024": {"lppd": -17.759381766710977, "k_hat": 2.2480365352361305, "ess": 9.706841966329744, "resolved": false},
+   "smc": {"lppd": -18.935462004502547, "se_replicates": 0.15244351134712805, "replicates": [-18.7946, -19.0995], "resolved": true, "reasons": [], "steps": [5, 5], "evaluations": 6656, "max_k_hat": -0.05095964182944698, "min_ess": 127.99999999999997, "final_acceptance": [0.291, 0.322]},
+   "wall_s": 342.5,
+   "wall_per_density_s": 342.5,
+   "projection_385_cells_h_one_worker": 36.6,
+   "projection_385_cells_h_four_workers": 9.2
+  }
+ },
+ "v2_psis_pilot": "superseded (v2.1 amendment): the v2 record at commit 5a6a30aa shows the Student-t PSIS pilot unresolved (R2: k-hat 2.5, ESS 1.2 at S = 4096)",
+ "compute_wall_h": 0.378,
  "declared_choices": [
   "D-a  Past HPO4^2- exhaustion the pH is floored at 4.76 (acetic acid's pKa: the acids formed buffer there); flagged.",
   "D-b  The ARP-made donors' sink is kappa_D [D][Phe] (sec. 3.1); the FED-DONOR calibration keeps EX-049's amine-free",
