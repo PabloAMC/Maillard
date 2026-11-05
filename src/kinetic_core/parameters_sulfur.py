@@ -3449,3 +3449,88 @@ def sulfur_registry_metadata(
         "dft_free": True,
         "parameters": {k: p.as_metadata() for k, p in sorted(parameters.items())},
     }
+
+
+# ---------------------------------------------------------------------------
+# PLAN STEP M1 (2026-11-04): TWO FIT-SIDE DECLARATIONS, OFF BY DEFAULT
+# ---------------------------------------------------------------------------
+# results/validation/kinetic_core_m1_supply_loss_combinations_prereg.md secs. 2.5 and 2.6. Neither is a model
+# constant: nothing in the kinetics reads them, so the shipped engine is the same whatever they hold. They are keyed
+# (config.py: ``fit.dimer_encounter_ceiling``, ``fit.mft_decay_prior``) so a fit's Config, and its digest, carry the
+# bound and the prior it was fitted under. Read by scripts/generators/fit_m1_supply_combinations.py.
+
+
+@dataclass(frozen=True)
+class DimerEncounterCeiling:
+    """
+    M1 sec. 2.5 (review B4): a PHYSICAL ceiling on log10 k_dimer_* (L/mmol)^2/min at 145 C, replacing the numerical
+    upper bound of ``FITTED_SULFUR_BOUNDS_LOG10K`` (log10 0.5) in a fit. ``ch_dimer_mft`` is 2 MFT + OX -> MFTD at
+    rate k theta [MFT]^2 [OX]; the rate-limiting step of a thiol oxidation is bimolecular (thiolate + oxidant), so the
+    true rate is at most k_enc theta [MFT][OX] and k <= k_enc / [MFT] (theta cancels). k_enc = 8RT / (3 eta), the
+    Smoluchowski encounter limit, with water's viscosity from Vogel's equation (eta = A 10^(B / (T - C)); A, B, C the
+    standard fit to water, 0.19 mPa s at 145 C). [MFT] is capped at ``mft_cap_mmol_l`` (declared, >= 10x the panel's
+    maximum; the prereg's V5 prints that maximum). The ceiling is carried to 145 C with the measured barrier (Zhang
+    2026 k17, 122.2 kJ/mol) and is the MINIMUM over the objective's pot temperatures (above 145 C the Arrhenius factor
+    outgrows k_enc). At 145 C alone it is log10 9.47. Valid but loose: it removes a numerical bound, it does not
+    constrain the step. Off (``enabled`` False): no fit changes.
+    """
+
+    enabled: bool = False
+    mft_cap_mmol_l: float = 1.0
+    ea_kj_mol: float = ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL
+    t_ref_c: float = 145.0
+    vogel_a_pa_s: float = 2.414e-5
+    vogel_b_k: float = 247.8
+    vogel_c_k: float = 140.0
+    source: str = ("M1 prereg sec. 2.5: Smoluchowski k_enc = 8RT / (3 eta); water viscosity, Vogel equation "
+                   "(A 2.414e-5 Pa s, B 247.8 K, C 140 K); barrier Zhang 2026 k17 122.2 kJ/mol")
+
+    def water_viscosity_pa_s(self, temperature_k: float) -> float:
+        return self.vogel_a_pa_s * 10.0 ** (self.vogel_b_k / (float(temperature_k) - self.vogel_c_k))
+
+    def encounter_limit_l_per_mmol_min(self, temperature_k: float) -> float:
+        """k_enc in L/(mmol min): 8RT / (3 eta) is m^3/(mol s), numerically L/(mmol s)."""
+        t = float(temperature_k)
+        return 60.0 * 8.0 * (1000.0 * R_KJ) * t / (3.0 * self.water_viscosity_pa_s(t))
+
+    def log10_ceiling_at(self, temperature_c: float) -> float:
+        """log10 of the largest k_dimer at ``t_ref_c`` that the encounter limit allows at ``temperature_c``."""
+        t, t_ref = float(temperature_c) + 273.15, float(self.t_ref_c) + 273.15
+        k_at_t = self.encounter_limit_l_per_mmol_min(t) / float(self.mft_cap_mmol_l)
+        return math.log10(k_at_t) + self.ea_kj_mol / (R_KJ * math.log(10.0)) * (1.0 / t - 1.0 / t_ref)
+
+    def log10_ceiling(self, temperatures_c) -> float:
+        """The ceiling over a set of pot temperatures: the minimum (one number)."""
+        return min(self.log10_ceiling_at(t) for t in temperatures_c)
+
+
+@dataclass(frozen=True)
+class MftDecayPrior:
+    """
+    M1 sec. 2.6: a declared WEAK Gaussian prior on log10 lambda_mft(100 C), the free-MFT loss rate (``k_mft_decay`` at
+    100 C through its own barrier, the thiol-sink family's ``Ea_decay_thiol_sink``). Centre log10 0.0406 /min = -1.391
+    (the shipped value, B60: the incumbent's, so the prior moves no rival from R0's value), sd 1.0 dex (2 sd: 4e-4 to
+    4 /min). Physical basis: covalent capture by the pot's electrophiles plus oxidation; no development-only measurement
+    sets its rate at process temperature (prereg sec. 2.6), so the prior states only the order of magnitude. Not blind
+    (the author has seen Grosch 1992's inferred 0.03 - 0.05 /min). One residual (x - centre) / sd in a fit's
+    objective; off (``enabled`` False): no term.
+    """
+
+    enabled: bool = False
+    centre_log10_per_min: float = math.log10(0.0406)
+    sd_dex: float = 1.0
+    t_eval_c: float = 100.0
+    source: str = "M1 prereg sec. 2.6: centre B60's shipped lambda_mft(100 C) = 0.0406 /min, sd 1.0 dex (declared)"
+
+    def log10_rate(self, k_ref_per_min: float, ea_kj_mol: float, t_ref_k: float) -> float:
+        """log10 lambda at ``t_eval_c`` from the step's k_ref at ``t_ref_k`` and its barrier (the engine's form)."""
+        t = float(self.t_eval_c) + 273.15
+        return math.log10(float(k_ref_per_min)) - float(ea_kj_mol) / (R_KJ * math.log(10.0)) * (
+            1.0 / t - 1.0 / float(t_ref_k))
+
+    def residual(self, log10_rate: float) -> float:
+        return (float(log10_rate) - self.centre_log10_per_min) / self.sd_dex
+
+
+DIMER_ENCOUNTER_CEILING = DimerEncounterCeiling()
+MFT_DECAY_PRIOR = MftDecayPrior()

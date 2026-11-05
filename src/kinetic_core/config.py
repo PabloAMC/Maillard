@@ -172,7 +172,14 @@ _BANDS: Mapping[str, Mapping[str, Tuple[float, float]]] = {
     "sulfur.mgo_cysteine_strecker": {"k_l_per_mmol_min_100c_ph5": (0.0, 1.0)},
     "sulfur.tdp_cysteine_trap": {"k_l_per_mmol_min_100c_ph5": (0.0, 1.0)},
     "sulfur.strecker_sulfur": {"h2s_share": _SHARE},
-    "sulfur.cys_amadori_route": {"dpo_share": _SHARE, "split_ph_c": (5.0, 10.0)},
+    # M1 (2026-11-04; kinetic_core_m1_supply_loss_combinations_prereg.md secs. 2.2, 3): ea_form FITTED in 40 - 135
+    # kJ/mol (the sugar_trunk class band, as stage 1), ea_decay drawn in the same band by the feasibility probe; the
+    # route calibration samples both in FORMATION_EA_BOUNDS_BY_ROUTE["sugar_trunk"] (40, 135) too. k_form: the union of
+    # the B59b anchor's search (log10 -6 .. -1), the route calibration's +-3 dex about 3.29e-3 and M1's +-0.44 dex.
+    "sulfur.cys_amadori_route": {"dpo_share": _SHARE, "split_ph_c": (5.0, 10.0), "ea_form_kj_mol": (40.0, 135.0),
+                                 "ea_decay_kj_mol": (40.0, 135.0), "k_form_ref_per_min": (1e-6, 3.3)},
+    # K: the route calibration's box (0.019 .. its k_upper 0.6 sensitivity, run log 2); M1's probe draws 0.045 - 0.075
+    "sulfur.ttca_formation": {"k_l_per_mmol": (0.019, 0.6)},
     "sulfur.tdp_own_decay": {"k_ref_per_min": (0.0, 0.1), "ea_kj_mol": (30.0, 200.0)},
     "lipid.q10_assumption": {"default": (1.6, 3.3)},
 }
@@ -238,6 +245,11 @@ KEYS: Tuple[ConfigKey, ...] = (
        "B62 (kinetic_core_b62_prereg.md)"),
     _k("sulfur.single_temperature_barriers", "parameters_sulfur", "SINGLE_TEMPERATURE_BARRIERS",
        _ps.SingleTemperatureBarriers(), "rate", "B63 route-class median barriers"),
+    # --- fit-side declarations of plan step M1 (parameters_sulfur.py): read by fit code only, never by the kinetics
+    _k("fit.dimer_encounter_ceiling", "parameters_sulfur", "DIMER_ENCOUNTER_CEILING", _ps.DimerEncounterCeiling(),
+       "rate", "M1 prereg sec. 2.5: the encounter-limit ceiling on k_dimer_* replaces the numerical bound in a fit"),
+    _k("fit.mft_decay_prior", "parameters_sulfur", "MFT_DECAY_PRIOR", _ps.MftDecayPrior(), "rate",
+       "M1 prereg sec. 2.6: a weak Gaussian prior on log10 lambda_mft(100 C) as one residual of a fit's objective"),
     # --- the trunk (trunk_conditions.py)
     _k("trunk.three_deoxy_exit_ph_term", "trunk_conditions", "THREE_DEOXY_EXIT_PH_TERM", True, "rate",
        "B40: the measured 3-DG exit pH terms"),

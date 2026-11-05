@@ -195,10 +195,12 @@ def _forward_jacobian(problem: Problem, theta, lower, upper, f_many) -> np.ndarr
 
 
 def laplace(problem: Problem, theta: np.ndarray, rows: Optional[Tuple[Any, ...]] = None,
-            upper: Optional[np.ndarray] = None) -> Dict[str, Any]:
+            upper: Optional[np.ndarray] = None, covariance: bool = False) -> Dict[str, Any]:
     """B8's Laplace at ``theta``: a central-difference Jacobian with a step per coordinate kind (one-sided at a
     bound), JtJ inverted on its eigenbasis, scaled by the reduced chi-square; a coordinate with weight in the
-    dropped subspace gets an infinite sigma; B8's identification rule."""
+    dropped subspace gets an infinite sigma; B8's identification rule. ``covariance`` (M1, 2026-11-04) adds the
+    unrounded covariance matrix (the eigenbasis pseudo-inverse, before infinite sigmas are set) for a caller that
+    propagates it; off, the record is exactly as before."""
     upper = np.asarray(problem.upper if upper is None else upper, dtype=float)
     lower = np.asarray(problem.lower, dtype=float)
     theta = np.asarray(theta, dtype=float)
@@ -233,9 +235,12 @@ def laplace(problem: Problem, theta: np.ndarray, rows: Optional[Tuple[Any, ...]]
     with np.errstate(invalid="ignore", divide="ignore"):
         corr = cov / np.outer(sigma, sigma)
     flags = identification(problem, theta, sigma, upper)
-    return {"chi2_red": chi2_red, "sigma_common": float(np.sqrt(chi2_red)),
-            "sigma": dict(zip(problem.keys, map(float, sigma))), **flags,
-            "correlation": np.where(np.isfinite(corr), corr, np.nan).round(3).tolist()}
+    out = {"chi2_red": chi2_red, "sigma_common": float(np.sqrt(chi2_red)),
+           "sigma": dict(zip(problem.keys, map(float, sigma))), **flags,
+           "correlation": np.where(np.isfinite(corr), corr, np.nan).round(3).tolist()}
+    if covariance:
+        out["covariance"] = cov.tolist()
+    return out
 
 
 def identification(problem: Problem, theta, sigma, upper: Optional[np.ndarray] = None) -> Dict[str, Dict[str, bool]]:
