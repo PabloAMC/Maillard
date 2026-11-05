@@ -34,6 +34,9 @@ sweeps them. Writes results/validation/choice_robustness.{json,md}.
 | CR-17 | harmless |
 | CR-18 | not_applicable |
 | CR-19 | harmless |
+| CR-20 | untested |
+| CR-21 | untested |
+| CR-22 | untested |
 
 ## CR-05
 

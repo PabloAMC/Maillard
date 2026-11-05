@@ -4,16 +4,16 @@
     "artifact": "choice_robustness",
     "generated_on": "2026-11-05",
     "git": {
-      "commit": "a4b2504b575e24a4e5b6793c78bc8f530ed586e1",
-      "short": "a4b2504b",
-      "branch": "h0-relative-only-thiols",
-      "dirty": true
+      "commit": "f6b45006080b1343280c2ba40f45b53b42268f33",
+      "short": "f6b45006",
+      "branch": "registers-2026-11-05",
+      "dirty": false
     },
     "generated_by": "scripts/generators/build_choice_robustness.py",
     "inputs": [
       {
         "path": "docs/reference/choices_register.yml",
-        "sha256": "a415ac4452056b77d495869a1f43dc15565a18f7c6a338cf9a6db6c2c5637189"
+        "sha256": "8ded34a30519cc18998baf1e833dd2d69d18a7c7a40fd961abb42d39fa0f0606"
       },
       {
         "path": "results/validation/core_panel_scores.json",
@@ -41,7 +41,10 @@
     "CR-16": "untested",
     "CR-17": "harmless",
     "CR-18": "not_applicable",
-    "CR-19": "harmless"
+    "CR-19": "harmless",
+    "CR-20": "untested",
+    "CR-21": "untested",
+    "CR-22": "untested"
   },
   "sweeps": {
     "CR-05": {
