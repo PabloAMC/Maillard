@@ -144,10 +144,13 @@ def check_runners(failures: List[str]) -> None:
 #: 2026-11-04: so are the scoring records of a pre-registered run-once analysis (score_thiol_lolo_nested_tau.py, H0 /
 #: EX-059: its controls and its single scoring run, prereg sec. 7.5 "run once"); re-running them is forbidden, not
 #: merely costly, so they are pinned by the commit they were written at.
+#: 2026-11-05: the supply-structure signature screen (supply_structure_signature_screen.py) is a pre-design feasibility
+#: record of the same kind as feasibility_*: plug-in runs read in its pre-registration (M1 + M2 prereg sec. 0B), pinned
+#: by the commit that wrote it.
 FROZEN_RECORD_GENERATOR = re.compile(
     r"scripts/generators/(generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
     r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout|diagnose_\w+|probe_\w+|"
-    r"feasibility_\w+|score_thiol_lolo_nested_tau|rescore_\w+)\.py$")
+    r"feasibility_\w+|score_thiol_lolo_nested_tau|rescore_\w+|supply_structure_signature_screen)\.py$")
 #: 2026-11-05: frozen scoring records whose generator also writes LIVE files (score_contrast_benchmark.py writes the
 #: items record, re-derived and checked by the scorer itself before every use, and the named M1 scores): the v1 score
 #: is the benchmark's run-once "before" record (prereg v6), pinned by the commit it was written at. And the
