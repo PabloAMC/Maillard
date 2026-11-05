@@ -3598,7 +3598,7 @@ entries:
   - id: CF-122
     kind: conflict
     scope: other_lane
-    sources: [kanzler2026, bork2022]
+    sources: [kanzler2026, bork2022, kanzler2021, pfeifer2013]
     quantity: "methylglyoxal (MGO) loss: the trunk's fitted k_mgo_mel (first order, Ea 20 kJ/mol) vs Kanzler 2026's measured MGO loss (pH 5 unbuffered, MGO 100 mM, 60 - 140 C)"
     observation: >-
       The shipped k_mgo_mel (B1 fit: k_ref 0.0227 /min, Ea 20.04 kJ/mol at the lower edge of FITTED_EA_BOUNDS (20, 260);
@@ -3610,6 +3610,18 @@ entries:
       excess over MGO alone scales as [Ala]^0.75 (0.84 on 0 - 120 min), assuming the MGO-alone channel adds. Kanzler's
       Ea lies above even B1's CI. pH drift and O2 unstated, no come-up correction. CF-095 covers the missing MGO + amine
       consumption, not the barrier or the order.
+      [Added 2026-11-05, two notes, each checked against its dossier. (1) Kanzler 2021 (kanzler2021 dossier sec. 4 items
+      1 - 4; same laboratory and nominally the same pot: MGO 100 mM alone, pH 5.0 unbuffered, 100 C, triplicates) gives
+      MGO-alone k2 ~5.9e-4 /mM/min (second order, constant to 180 min within 7 %), x3.2 (0.51 dex) Kanzler 2026's 1.85e-4,
+      outside both papers' SDs. With Kanzler 2021's k2 the cross-paper MGO-alone Ea against Bork 2022 becomes ~47 - 66
+      kJ/mol, not ~95 - 113; the MGO + amino acid apparent Ea (95 - 121, within Kanzler 2026) is unaffected. Within one
+      laboratory the between-paper spread of the MGO-alone k2 is 0.5 dex. (2) Pfeifer, Haase & Kroh 2013 (pfeifer2013
+      dossier secs. 0 and 4): MGO alone, pH 5 (initial), 130 C, aerated, ~10 mM: first order, k1 ~0.0053 /min (range
+      0.0042 - 0.0065, no replicates); the shipped k_mgo_mel gives 0.0368 /min at 130 C, x7 faster than this amine-free
+      loss (k_mgo_mel lumps the amine channel, so this bounds the MGO-alone part only). Pfeifer 2013 is the same
+      laboratory lineage as Kanzler / Bork (TU Berlin food chemistry, shared corresponding author Haase, same address and
+      OPD method), not a second laboratory: all MGO-alone evidence here rests on one laboratory (laboratory id
+      tu_berlin_kanzler, to be added to data/keys/laboratories.yml when these papers' ledger rows are keyed).]
     explanations:
       - "k_mgo_mel lumps MGO + amine chemistry into a first-order pH-free sink; its Ea was never identified (B1's CI spans zero)."
       - "Concentration: Kanzler's 100 mM MGO pots are second-order dominated; the trunk's pots are ~1000x more dilute."
