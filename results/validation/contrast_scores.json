@@ -2,18 +2,18 @@
   "artifact": "contrast_scores",
   "provenance": {
     "artifact": "contrast_scores",
-    "generated_on": "2026-11-03",
+    "generated_on": "2026-11-05",
     "git": {
-      "commit": "35d373e891344a944905cf0cdc6734c07afa3b7a",
-      "short": "35d373e8",
-      "branch": "acrylamide-envelope-2026-11-03",
+      "commit": "8b28d03140bed4224f57749925ed49c019dd7bc3",
+      "short": "8b28d031",
+      "branch": "h0-relative-only-thiols",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_contrast_scores.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "bb58086c86d573d5420866d4f5bc11ce7734addb78109defde7567e77d00520c"
+        "sha256": "e7c1b94c30f9ad2fbda8f8804ce5804178a09fbb19ed09266627fd0325990c6f"
       }
     ]
   },

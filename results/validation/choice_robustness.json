@@ -2,22 +2,22 @@
   "artifact": "choice_robustness",
   "provenance": {
     "artifact": "choice_robustness",
-    "generated_on": "2026-11-03",
+    "generated_on": "2026-11-05",
     "git": {
-      "commit": "8df34b96357f690d83e1811e83dc7936eaaa7c4e",
-      "short": "8df34b96",
-      "branch": "plan-single-2026-11-03",
-      "dirty": false
+      "commit": "8b28d03140bed4224f57749925ed49c019dd7bc3",
+      "short": "8b28d031",
+      "branch": "h0-relative-only-thiols",
+      "dirty": true
     },
     "generated_by": "scripts/generators/build_choice_robustness.py",
     "inputs": [
       {
         "path": "docs/reference/choices_register.yml",
-        "sha256": "bb0d98813d06a2d5530a741c53c999145d41115846e18d5d3b22524cacb4fede"
+        "sha256": "41ae783e0cc361e71e008797a6d41d63054e3f62eb4bcf2249bd0f78761b40c0"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "bb58086c86d573d5420866d4f5bc11ce7734addb78109defde7567e77d00520c"
+        "sha256": "e7c1b94c30f9ad2fbda8f8804ce5804178a09fbb19ed09266627fd0325990c6f"
       }
     ]
   },
@@ -39,47 +39,49 @@
     "CR-14": "untested",
     "CR-15": "untested",
     "CR-16": "untested",
-    "CR-17": "harmless"
+    "CR-17": "harmless",
+    "CR-18": "not_applicable",
+    "CR-19": "harmless"
   },
   "sweeps": {
     "CR-05": {
       "twofold": {
-        "oos_rows": 56,
-        "oos_within": 8,
-        "oos_median_fold": 11.801511781085374,
+        "oos_rows": 27,
+        "oos_within": 6,
+        "oos_median_fold": 6.245815985439488,
         "by_lane_within": {
           "acrylamide": 2,
           "lipid": 2,
-          "sulfur": 2,
-          "trunk": 2
+          "trunk": 2,
+          "sulfur": 0
         },
         "contrast_median_dex": 0.3076327489342042,
         "contrast_signs": 12,
         "contrast_resolved": 25
       },
       "threefold": {
-        "oos_rows": 56,
-        "oos_within": 14,
-        "oos_median_fold": 11.801511781085374,
+        "oos_rows": 27,
+        "oos_within": 11,
+        "oos_median_fold": 6.245815985439488,
         "by_lane_within": {
           "acrylamide": 4,
           "lipid": 5,
-          "sulfur": 3,
-          "trunk": 2
+          "trunk": 2,
+          "sulfur": 0
         },
         "contrast_median_dex": 0.3076327489342042,
         "contrast_signs": 12,
         "contrast_resolved": 25
       },
       "fivefold": {
-        "oos_rows": 56,
-        "oos_within": 18,
-        "oos_median_fold": 11.801511781085374,
+        "oos_rows": 27,
+        "oos_within": 13,
+        "oos_median_fold": 6.245815985439488,
         "by_lane_within": {
           "acrylamide": 5,
           "lipid": 6,
-          "sulfur": 5,
-          "trunk": 2
+          "trunk": 2,
+          "sulfur": 0
         },
         "contrast_median_dex": 0.3076327489342042,
         "contrast_signs": 12,
@@ -88,42 +90,42 @@
     },
     "CR-06": {
       "one_cv": {
-        "oos_rows": 56,
-        "oos_within": 14,
-        "oos_median_fold": 11.801511781085374,
+        "oos_rows": 27,
+        "oos_within": 11,
+        "oos_median_fold": 6.245815985439488,
         "by_lane_within": {
           "acrylamide": 4,
           "lipid": 5,
-          "sulfur": 3,
-          "trunk": 2
+          "trunk": 2,
+          "sulfur": 0
         },
         "contrast_median_dex": 0.3076327489342042,
         "contrast_signs": 13,
         "contrast_resolved": 29
       },
       "two_cv": {
-        "oos_rows": 56,
-        "oos_within": 14,
-        "oos_median_fold": 11.801511781085374,
+        "oos_rows": 27,
+        "oos_within": 11,
+        "oos_median_fold": 6.245815985439488,
         "by_lane_within": {
           "acrylamide": 4,
           "lipid": 5,
-          "sulfur": 3,
-          "trunk": 2
+          "trunk": 2,
+          "sulfur": 0
         },
         "contrast_median_dex": 0.3076327489342042,
         "contrast_signs": 12,
         "contrast_resolved": 25
       },
       "twofold": {
-        "oos_rows": 56,
-        "oos_within": 14,
-        "oos_median_fold": 11.801511781085374,
+        "oos_rows": 27,
+        "oos_within": 11,
+        "oos_median_fold": 6.245815985439488,
         "by_lane_within": {
           "acrylamide": 4,
           "lipid": 5,
-          "sulfur": 3,
-          "trunk": 2
+          "trunk": 2,
+          "sulfur": 0
         },
         "contrast_median_dex": 0.3076327489342042,
         "contrast_signs": 9,
@@ -132,42 +134,42 @@
     },
     "CR-02": {
       "moist_matrix": {
-        "oos_rows": 56,
-        "oos_within": 12,
-        "oos_median_fold": 21.144715758625303,
+        "oos_rows": 27,
+        "oos_within": 9,
+        "oos_median_fold": 9.148884189968525,
         "by_lane_within": {
           "acrylamide": 4,
           "lipid": 3,
-          "sulfur": 3,
-          "trunk": 2
+          "trunk": 2,
+          "sulfur": 0
         },
         "contrast_median_dex": 0.3076327489342042,
         "contrast_signs": 12,
         "contrast_resolved": 25
       },
       "centre": {
-        "oos_rows": 56,
-        "oos_within": 14,
-        "oos_median_fold": 11.801511781085374,
+        "oos_rows": 27,
+        "oos_within": 11,
+        "oos_median_fold": 6.245815985439488,
         "by_lane_within": {
           "acrylamide": 4,
           "lipid": 5,
-          "sulfur": 3,
-          "trunk": 2
+          "trunk": 2,
+          "sulfur": 0
         },
         "contrast_median_dex": 0.3076327489342042,
         "contrast_signs": 12,
         "contrast_resolved": 25
       },
       "bulk_oil": {
-        "oos_rows": 56,
-        "oos_within": 13,
-        "oos_median_fold": 11.801511781085374,
+        "oos_rows": 27,
+        "oos_within": 10,
+        "oos_median_fold": 6.245815985439488,
         "by_lane_within": {
           "acrylamide": 4,
           "lipid": 4,
-          "sulfur": 3,
-          "trunk": 2
+          "trunk": 2,
+          "sulfur": 0
         },
         "contrast_median_dex": 0.3076327489342042,
         "contrast_signs": 12,

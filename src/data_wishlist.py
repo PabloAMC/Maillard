@@ -372,7 +372,7 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
                 ),
             })
     if abs_refused:
-        compounds = sorted({r["compound"] for r in abs_refused})
+        compounds = sorted({r["compound"].lower(): r["compound"] for r in abs_refused}.values(), key=str.lower)
         unlocked.insert(0, {
             "if_measured": ("absolute levels of the thiol lane's observables from a second independent laboratory "
                             "(for example the pending WUR blind-test samples), re-scored under H0's rule (H0')"),
