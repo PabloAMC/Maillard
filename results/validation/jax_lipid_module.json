@@ -1,0 +1,873 @@
+{
+ "artifact": "jax_lipid_module",
+ "generated_by": "scripts/generators/build_jax_lipid_module.py",
+ "env": "maillard-jax",
+ "jax_version": "0.12.0.1",
+ "diffrax_version": "0.7.2",
+ "n_species": 14,
+ "n_reactions": 22,
+ "coordinates": [
+  "q10",
+  "log10_k_looh",
+  "donor",
+  "log10_k_decadienal",
+  "ea_decadienal_kj_mol",
+  "share_hexanal_from_decadienal"
+ ],
+ "reactions": [
+  "lipid_decomp_LOOH_13_ct",
+  "lipid_decomp_LOOH_13_tt",
+  "lipid_decomp_LOOH_9_ct",
+  "lipid_decomp_LOOH_9_tt",
+  "lipid_decomp_LOOH_OL",
+  "lipid_slate_LOOH_13_ct_PENTANE",
+  "lipid_slate_LOOH_13_ct_HEXANAL",
+  "lipid_slate_LOOH_13_ct_ME_13_OXO_TRIDECADIENOATE",
+  "lipid_pentylfuran_LOOH_13_ct",
+  "lipid_slate_LOOH_13_tt_PENTANE",
+  "lipid_slate_LOOH_13_tt_HEXANAL",
+  "lipid_slate_LOOH_13_tt_ME_13_OXO_TRIDECADIENOATE",
+  "lipid_pentylfuran_LOOH_13_tt",
+  "lipid_slate_LOOH_9_ct_ME_OCTANOATE",
+  "lipid_slate_LOOH_9_ct_DECADIENAL",
+  "lipid_slate_LOOH_9_ct_ME_9_OXONONANOATE",
+  "lipid_slate_LOOH_9_tt_ME_OCTANOATE",
+  "lipid_slate_LOOH_9_tt_DECADIENAL",
+  "lipid_slate_LOOH_9_tt_ME_9_OXONONANOATE",
+  "lipid_nonanal_LOOH_OL",
+  "lipid_decadienal_loss",
+  "lipid_decadienal_hexanal"
+ ],
+ "config_digest": "09d122f9f29354d3d16b4b7a0fe93ca4270e28a985b543dcd6c4b81bcf00e177",
+ "rates": {
+  "n_rate_values": 4752,
+  "worst_relative": 1.3074980969214677e-15,
+  "worst_at": [
+   "shipped",
+   3.3,
+   0.9,
+   99.9,
+   "lipid_nonanal_LOOH_OL"
+  ]
+ },
+ "jacobians": {
+  "pea_isolate_40C_PratapSingh2021": {
+   "rows": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "theta": {
+    "q10": 2.8,
+    "log10_k_looh": 0.0,
+    "donor": 0.25,
+    "log10_k_decadienal": 0.1,
+    "ea_decadienal_kj_mol": 30.0,
+    "share_hexanal_from_decadienal": 0.13
+   },
+   "n_observables": 16,
+   "engine_columns": [
+    "q10",
+    "donor",
+    "log10_k_decadienal",
+    "ea_decadienal_kj_mol",
+    "share_hexanal_from_decadienal"
+   ],
+   "forward_tight_vs_engine_central_fd": {
+    "per_column": [
+     4.971915595837871e-08,
+     9.277254457851526e-11,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "worst": 4.971915595837871e-08,
+    "flat_columns_absolute": [
+     2,
+     3,
+     4
+    ]
+   },
+   "forward_tight_vs_jax_central_fd": {
+    "per_column": [
+     1.8261162285484636e-10,
+     1.1004521960556371e-10,
+     2.104662762907312e-10,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "worst": 2.104662762907312e-10,
+    "flat_columns_absolute": [
+     3,
+     4,
+     5
+    ]
+   },
+   "jax_central_fd_vs_engine_central_fd": {
+    "per_column": [
+     4.9901767351732404e-08,
+     1.533829791698091e-10,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "worst": 4.9901767351732404e-08,
+    "flat_columns_absolute": [
+     2,
+     3,
+     4
+    ]
+   },
+   "forward_fit_tol_vs_forward_tight": {
+    "per_column": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "worst": 0.0,
+    "flat_columns_absolute": [
+     3,
+     4,
+     5
+    ]
+   },
+   "forward_loose_vs_forward_tight": {
+    "per_column": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "worst": 0.0,
+    "flat_columns_absolute": [
+     3,
+     4,
+     5
+    ]
+   },
+   "max_abs_jacobian_per_column": {
+    "q10": 0.23265230785252597,
+    "log10_k_looh": 0.999976573702191,
+    "donor": 0.5790593092043357,
+    "log10_k_decadienal": 0.0,
+    "ea_decadienal_kj_mol": 0.0,
+    "share_hexanal_from_decadienal": 0.0
+   }
+  },
+  "pea_isolate_uht_140C_Trikusuma2019": {
+   "rows": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "theta": {
+    "q10": 2.8,
+    "log10_k_looh": 0.0,
+    "donor": 0.25,
+    "log10_k_decadienal": 0.1,
+    "ea_decadienal_kj_mol": 30.0,
+    "share_hexanal_from_decadienal": 0.13
+   },
+   "n_observables": 16,
+   "engine_columns": [
+    "q10",
+    "donor",
+    "log10_k_decadienal",
+    "ea_decadienal_kj_mol",
+    "share_hexanal_from_decadienal"
+   ],
+   "forward_tight_vs_engine_central_fd": {
+    "per_column": [
+     1.531339035068167e-10,
+     9.277254457851526e-11,
+     7.234289767809099e-09,
+     1.4764316079422597e-08,
+     8.221307429460939e-09
+    ],
+    "worst": 1.4764316079422597e-08,
+    "flat_columns_absolute": []
+   },
+   "forward_tight_vs_jax_central_fd": {
+    "per_column": [
+     1.5616085360032393e-10,
+     1.8031929127138908e-10,
+     9.630006550633492e-11,
+     1.0269502028252323e-08,
+     2.1351744116684376e-08,
+     1.4458231557021992e-08
+    ],
+    "worst": 2.1351744116684376e-08,
+    "flat_columns_absolute": []
+   },
+   "jax_central_fd_vs_engine_central_fd": {
+    "per_column": [
+     8.953805496599131e-12,
+     7.669148958490455e-11,
+     1.0269502028252324e-08,
+     2.1351744116938913e-08,
+     1.4458231661542223e-08
+    ],
+    "worst": 2.1351744116938913e-08,
+    "flat_columns_absolute": []
+   },
+   "forward_fit_tol_vs_forward_tight": {
+    "per_column": [
+     1.738694680909397e-08,
+     1.7386946805941657e-08,
+     8.413010348414354e-12,
+     9.236940701692525e-09,
+     9.23694099971138e-09,
+     9.15034185854641e-09
+    ],
+    "worst": 1.738694680909397e-08,
+    "flat_columns_absolute": []
+   },
+   "forward_loose_vs_forward_tight": {
+    "per_column": [
+     1.09386705979196e-06,
+     1.0938670596663151e-06,
+     5.384384102283013e-10,
+     5.911705619707657e-07,
+     5.911705622592632e-07,
+     5.856281576881954e-07
+    ],
+    "worst": 1.09386705979196e-06,
+    "flat_columns_absolute": []
+   },
+   "max_abs_jacobian_per_column": {
+    "q10": 1.7713612486740404,
+    "log10_k_looh": 0.9930772187314487,
+    "donor": 0.5790593092043358,
+    "log10_k_decadienal": 0.004324349991179042,
+    "ea_decadienal_kj_mol": 6.932910782431348e-05,
+    "share_hexanal_from_decadienal": 0.003071531995281698
+   }
+  },
+  "external_validation_bi_2020_roasted_pea_hexanal": {
+   "rows": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "theta": {
+    "q10": 2.8,
+    "log10_k_looh": 0.0,
+    "donor": 0.25,
+    "log10_k_decadienal": 0.1,
+    "ea_decadienal_kj_mol": 30.0,
+    "share_hexanal_from_decadienal": 0.13
+   },
+   "n_observables": 16,
+   "engine_columns": [
+    "q10",
+    "donor",
+    "log10_k_decadienal",
+    "ea_decadienal_kj_mol",
+    "share_hexanal_from_decadienal"
+   ],
+   "forward_tight_vs_engine_central_fd": {
+    "per_column": [
+     4.670548587855471e-09,
+     9.277254457851526e-11,
+     2.3723033478071777e-09,
+     2.2691838252085788e-09,
+     1.597360387638011e-10
+    ],
+    "worst": 4.670548587855471e-09,
+    "flat_columns_absolute": []
+   },
+   "forward_tight_vs_jax_central_fd": {
+    "per_column": [
+     1.8668073742619688e-08,
+     5.290554770133518e-08,
+     9.277331149341111e-11,
+     2.3723033478071777e-09,
+     2.314932477779953e-09,
+     7.837348599704136e-11
+    ],
+    "worst": 5.290554770133518e-08,
+    "flat_columns_absolute": []
+   },
+   "jax_central_fd_vs_engine_central_fd": {
+    "per_column": [
+     1.9448851416385154e-08,
+     3.8345744792452275e-11,
+     2.79835747017798e-11,
+     6.862308623949105e-11,
+     1.1756022898132017e-10
+    ],
+    "worst": 1.9448851416385154e-08,
+    "flat_columns_absolute": []
+   },
+   "forward_fit_tol_vs_forward_tight": {
+    "per_column": [
+     1.896830080870125e-09,
+     1.8969825926228094e-09,
+     1.5814664469734756e-09,
+     2.1015759361300966e-07,
+     2.101575936987786e-07,
+     9.323949127787993e-09
+    ],
+    "worst": 2.101575936987786e-07,
+    "flat_columns_absolute": []
+   },
+   "forward_loose_vs_forward_tight": {
+    "per_column": [
+     1.1266508687962285e-07,
+     1.1266383621110488e-07,
+     9.289906955956647e-08,
+     1.733813970598614e-05,
+     1.733813970580936e-05,
+     5.477107475447896e-07
+    ],
+    "worst": 1.733813970598614e-05,
+    "flat_columns_absolute": []
+   },
+   "max_abs_jacobian_per_column": {
+    "q10": 0.0020387230855835052,
+    "log10_k_looh": 0.0009736395170148403,
+    "donor": 0.5790593092043357,
+    "log10_k_decadienal": 3.17392765955883,
+    "ea_decadienal_kj_mol": 0.032357128859848566,
+    "share_hexanal_from_decadienal": 0.5666319472821408
+   }
+  },
+  "synthetic_profile_pea_soy_25_160_60": {
+   "rows": [
+    29,
+    59,
+    118
+   ],
+   "theta": {
+    "q10": 2.8,
+    "log10_k_looh": 0.0,
+    "donor": 0.25,
+    "log10_k_decadienal": 0.1,
+    "ea_decadienal_kj_mol": 30.0,
+    "share_hexanal_from_decadienal": 0.13
+   },
+   "n_observables": 12,
+   "engine_columns": [
+    "q10",
+    "donor",
+    "log10_k_decadienal",
+    "ea_decadienal_kj_mol",
+    "share_hexanal_from_decadienal"
+   ],
+   "forward_tight_vs_engine_central_fd": {
+    "per_column": [
+     2.536158983561552e-11,
+     9.277273630723923e-11,
+     1.926234508286743e-09,
+     1.6308564535456154e-09,
+     1.243286120461783e-10
+    ],
+    "worst": 1.926234508286743e-09,
+    "flat_columns_absolute": []
+   },
+   "forward_tight_vs_jax_central_fd": {
+    "per_column": [
+     2.0908876056416706e-11,
+     1.247422183399494e-10,
+     1.721181348760294e-10,
+     1.9510204096206088e-09,
+     1.6783703614869273e-09,
+     1.6040280101650374e-10
+    ],
+    "worst": 1.9510204096206088e-09,
+    "flat_columns_absolute": []
+   },
+   "jax_central_fd_vs_engine_central_fd": {
+    "per_column": [
+     3.132822885942654e-11,
+     2.3007446875471365e-10,
+     2.478590138222365e-11,
+     4.751390802105776e-11,
+     1.6040280097945533e-10
+    ],
+    "worst": 2.3007446875471365e-10,
+    "flat_columns_absolute": []
+   },
+   "forward_fit_tol_vs_forward_tight": {
+    "per_column": [
+     4.440020768850782e-10,
+     2.332306652489319e-10,
+     8.186032343466996e-10,
+     1.7887165094816158e-07,
+     1.5726433679582226e-07,
+     4.938855175695795e-09
+    ],
+    "worst": 1.7887165094816158e-07,
+    "flat_columns_absolute": []
+   },
+   "forward_loose_vs_forward_tight": {
+    "per_column": [
+     8.120528569848756e-09,
+     3.784277856077213e-09,
+     7.140172439054828e-08,
+     1.53494465692394e-05,
+     1.3497914032466468e-05,
+     4.307858069654604e-07
+    ],
+    "worst": 1.53494465692394e-05,
+    "flat_columns_absolute": []
+   },
+   "max_abs_jacobian_per_column": {
+    "q10": 0.7593949040822353,
+    "log10_k_looh": 0.9803308464084485,
+    "donor": 0.5790593092043356,
+    "log10_k_decadienal": 2.6875512946634754,
+    "ea_decadienal_kj_mol": 0.031155057158821425,
+    "share_hexanal_from_decadienal": 0.5537175249847779
+   }
+  }
+ },
+ "findings": [
+  "## Findings",
+  "",
+  "1. **Match: yes, at the contract's bar with margin.**",
+  "   - Rates equal the engine's functions to ~1e-15 relative.",
+  "   - Every lipid panel pot, at its point and both corners, matches to <= 1.1e-9 dex at rtol 1e-10 (Kvaerno5); the scored products (hexanal, 2-pentylfuran, nonanal, decadienal) match to <= 4.5e-10. At the fits' rtol 1e-8 the scored products match to <= 4.3e-8, at rtol 1e-6 to <= 3.6e-6.",
+  "   - The worst species is always a hydroperoxide pool depleted to ~1e-9 of its start. The engine's own split-vs-unsplit noise there is ~1.7e-11 relative: it computes the pool as state - consumed.",
+  "2. **Exact Jacobian: correct.**",
+  "   - Forward mode equals the engine's central differences to <= 5e-8 per column on four pots. The lane is analytic in the engine, so those differences carry no solver noise and this is a clean check.",
+  "   - The check covers the five coordinates the engine can move. `log10_k_looh` multiplies a constant that is not a ConfigKey, so it is checked against the port's own central differences (<= 5.3e-8).",
+  "   - Columns the physics zeroes (the decadienal law below 100 C) come out exactly 0.",
+  "   - The rtol 1e-6 Jacobian is within 1.7e-5 of the tight one.",
+  "3. **Kvaerno4 vs Kvaerno5: neither dominates.** On these pots Kvaerno5 takes ~4x fewer steps (973 vs 4216 on the panel at rtol 1e-8; 158 vs 794 on the 160 C / 30 min pot). Kvaerno4 stalls on pools driven far below atol. The bake-off found the opposite on the sulfur pot, so the contract makes the solver a declared per-network choice (`compose(..., solver=)`, default Kvaerno5).",
+  "4. **Cost: the engine is faster for this lane alone, as a closed form must be.**",
+  "   - One solve: 7x (UHT 140 C, 0.1 min) to ~170x (160 C, 30 min) slower.",
+  "   - The Jacobian: ~3x to ~50x slower than seven engine runs.",
+  "   - The staircase profile (119 segments): 10x per solve, 4x per Jacobian.",
+  "   - Compile: ~2 s per solve, ~3 s per Jacobian, once per segment count.",
+  "   - Hours are not at stake: the lane costs milliseconds either way. The port buys composition (the lane can now share species with sulfur, which M5 needs), exact gradients, and batches. A pH-free linear network has a cheaper exact path, a matrix exponential per segment, which this port does not take: the contract wants one integrator for the union.",
+  "5. **Batches on CPU do not amortise.** The cost per draw is flat from 1 to 1024 draws (~10 - 12 ms on the 160 C pot). vmap removes dispatch overhead only, and the arithmetic is serial on one core. A GPU could change this only with float64 throughput (A100 / H100 class, not T4 / L4); the harness above is ready for that run.",
+  "6. **Effort.** The lipid port took about 1 h of agent work: the contract runtime (network.py), the module, the reference generator, the builder and the tests.",
+  "   - The lane is the easiest one: pH-free, 22 linear reactions, no derived-rate chain, two switches.",
+  "   - So this measures the per-lane fixed cost (reference generator + tests + builder ~0.5 h), not the chemistry cost.",
+  "   - Remaining A2 + H3 estimates, given this:",
+  "     - sulfur: every remaining switch, the pH solver moved into `integrate`, profile mode; 12 - 20 h;",
+  "     - trunk: declared-pH scaling, trunk arms, methionine / proline, the a_w steps; 8 - 14 h;",
+  "     - acrylamide: 5 - 9 h;",
+  "     - network infrastructure: merged titratable table and charge closure, declared competition, forced inputs, the fit driver; 15 - 25 h;",
+  "     - the pH-root performance step: 8 - 15 h.",
+  "   - Total ~50 - 85 h, against the bake-off's 75 - 115 h. Confidence that the total lands inside that range: ~0.6. The sulfur switches and the pH merge carry most of the uncertainty.",
+  ""
+ ],
+ "trajectories": {
+  "dex_floor_share_of_initial_looh": 1e-09,
+  "rows": [
+   {
+    "solver": "Kvaerno4",
+    "tolerance": "tight_1e-10",
+    "group": "panel",
+    "n_pots": 24,
+    "max_dex": 3.178710628048975e-10,
+    "worst": {
+     "max_dex": 3.178710628048975e-10,
+     "worst_species": "LOOH_OL",
+     "worst_row": 3,
+     "max_dex_scored_products": 6.037170763306676e-12,
+     "max_abs_below_floor_share_of_y0": 8.327530066105038e-38,
+     "pot": "acrylamide_spi_extrusion_130C_ACSRef3:upper"
+    },
+    "steps_total": 12809,
+    "max_dex_scored_products": 1.3441425750215785e-10,
+    "max_abs_below_floor_share_of_y0": 3.3671272034677887e-16,
+    "wall_s_all_pots_after_jit": 0.6383556250366382
+   },
+   {
+    "solver": "Kvaerno4",
+    "tolerance": "tight_1e-10",
+    "group": "profile",
+    "n_pots": 1,
+    "max_dex": 1.8330990059212127e-08,
+    "worst": {
+     "max_dex": 1.8330990059212127e-08,
+     "worst_species": "LOOH_13_ct",
+     "worst_row": 67,
+     "max_dex_scored_products": 9.155742830557756e-11,
+     "max_abs_below_floor_share_of_y0": 2.910922534776457e-17,
+     "pot": "synthetic_profile_pea_soy_25_160_60:point"
+    },
+    "steps_total": 2747,
+    "max_dex_scored_products": 9.155742830557756e-11,
+    "max_abs_below_floor_share_of_y0": 2.910922534776457e-17,
+    "wall_s_all_pots_after_jit": 0.12528741601272486
+   },
+   {
+    "solver": "Kvaerno4",
+    "tolerance": "fit_tol_1e-8",
+    "group": "panel",
+    "n_pots": 24,
+    "max_dex": 3.555791217024762e-08,
+    "worst": {
+     "max_dex": 3.555791217024762e-08,
+     "worst_species": "LOOH_OL",
+     "worst_row": 3,
+     "max_dex_scored_products": 5.936164892972329e-10,
+     "max_abs_below_floor_share_of_y0": 8.188222394955114e-36,
+     "pot": "acrylamide_spi_extrusion_130C_ACSRef3:upper"
+    },
+    "steps_total": 4216,
+    "max_dex_scored_products": 1.3152904543289878e-08,
+    "max_abs_below_floor_share_of_y0": 6.980759176999291e-14,
+    "wall_s_all_pots_after_jit": 0.2067805439583026
+   },
+   {
+    "solver": "Kvaerno4",
+    "tolerance": "fit_tol_1e-8",
+    "group": "profile",
+    "n_pots": 1,
+    "max_dex": 1.6711047745587848e-06,
+    "worst": {
+     "max_dex": 1.6711047745587848e-06,
+     "worst_species": "LOOH_OL",
+     "worst_row": 67,
+     "max_dex_scored_products": 8.597058620551934e-09,
+     "max_abs_below_floor_share_of_y0": 1.2786583793674597e-14,
+     "pot": "synthetic_profile_pea_soy_25_160_60:point"
+    },
+    "steps_total": 1092,
+    "max_dex_scored_products": 8.597058620551934e-09,
+    "max_abs_below_floor_share_of_y0": 1.2786583793674597e-14,
+    "wall_s_all_pots_after_jit": 0.05025358300190419
+   },
+   {
+    "solver": "Kvaerno4",
+    "tolerance": "loose_1e-6",
+    "group": "panel",
+    "n_pots": 24,
+    "max_dex": 4.457753818520871e-06,
+    "worst": {
+     "max_dex": 4.457753818520871e-06,
+     "worst_species": "LOOH_OL",
+     "worst_row": 3,
+     "max_dex_scored_products": 5.6084582089610535e-08,
+     "max_abs_below_floor_share_of_y0": 7.736188865006487e-34,
+     "pot": "acrylamide_spi_extrusion_130C_ACSRef3:upper"
+    },
+    "steps_total": 1562,
+    "max_dex_scored_products": 1.2714488692999737e-06,
+    "max_abs_below_floor_share_of_y0": 5.450776790236129e-13,
+    "wall_s_all_pots_after_jit": 0.08211999796913005
+   },
+   {
+    "solver": "Kvaerno4",
+    "tolerance": "loose_1e-6",
+    "group": "profile",
+    "n_pots": 1,
+    "max_dex": 0.00013083521243117957,
+    "worst": {
+     "max_dex": 0.00013083521243117957,
+     "worst_species": "LOOH_OL",
+     "worst_row": 67,
+     "max_dex_scored_products": 8.656209682378346e-07,
+     "max_abs_below_floor_share_of_y0": 9.978781725010395e-14,
+     "pot": "synthetic_profile_pea_soy_25_160_60:point"
+    },
+    "steps_total": 595,
+    "max_dex_scored_products": 8.656209682378346e-07,
+    "max_abs_below_floor_share_of_y0": 9.978781725010395e-14,
+    "wall_s_all_pots_after_jit": 0.02860333299031481
+   },
+   {
+    "solver": "Kvaerno5",
+    "tolerance": "tight_1e-10",
+    "group": "panel",
+    "n_pots": 24,
+    "max_dex": 1.110668890191846e-09,
+    "worst": {
+     "max_dex": 1.110668890191846e-09,
+     "worst_species": "LOOH_13_ct",
+     "worst_row": 3,
+     "max_dex_scored_products": 1.9364732040116905e-11,
+     "max_abs_below_floor_share_of_y0": 2.67110106430324e-37,
+     "pot": "acrylamide_spi_extrusion_130C_ACSRef3:upper"
+    },
+    "steps_total": 1968,
+    "max_dex_scored_products": 4.492508587361499e-10,
+    "max_abs_below_floor_share_of_y0": 1.0686739721324129e-17,
+    "wall_s_all_pots_after_jit": 0.12071917194407433
+   },
+   {
+    "solver": "Kvaerno5",
+    "tolerance": "tight_1e-10",
+    "group": "profile",
+    "n_pots": 1,
+    "max_dex": 5.053307106095417e-08,
+    "worst": {
+     "max_dex": 5.053307106095417e-08,
+     "worst_species": "LOOH_9_ct",
+     "worst_row": 67,
+     "max_dex_scored_products": 2.868243420550698e-10,
+     "max_abs_below_floor_share_of_y0": 1.637005590231048e-17,
+     "pot": "synthetic_profile_pea_soy_25_160_60:point"
+    },
+    "steps_total": 661,
+    "max_dex_scored_products": 2.868243420550698e-10,
+    "max_abs_below_floor_share_of_y0": 1.637005590231048e-17,
+    "wall_s_all_pots_after_jit": 0.03898104198742658
+   },
+   {
+    "solver": "Kvaerno5",
+    "tolerance": "fit_tol_1e-8",
+    "group": "panel",
+    "n_pots": 24,
+    "max_dex": 1.0898273217208043e-07,
+    "worst": {
+     "max_dex": 1.0898273217208043e-07,
+     "worst_species": "LOOH_13_ct",
+     "worst_row": 3,
+     "max_dex_scored_products": 1.6368919553144679e-09,
+     "max_abs_below_floor_share_of_y0": 2.2578938164228278e-35,
+     "pot": "acrylamide_spi_extrusion_130C_ACSRef3:upper"
+    },
+    "steps_total": 973,
+    "max_dex_scored_products": 4.3181050290996836e-08,
+    "max_abs_below_floor_share_of_y0": 2.9738100581628984e-15,
+    "wall_s_all_pots_after_jit": 0.0690522050135769
+   },
+   {
+    "solver": "Kvaerno5",
+    "tolerance": "fit_tol_1e-8",
+    "group": "profile",
+    "n_pots": 1,
+    "max_dex": 3.983580334931958e-06,
+    "worst": {
+     "max_dex": 3.983580334931958e-06,
+     "worst_species": "LOOH_9_ct",
+     "worst_row": 67,
+     "max_dex_scored_products": 2.8046324374031428e-08,
+     "max_abs_below_floor_share_of_y0": 9.673071683291607e-16,
+     "pot": "synthetic_profile_pea_soy_25_160_60:point"
+    },
+    "steps_total": 479,
+    "max_dex_scored_products": 2.8046324374031428e-08,
+    "max_abs_below_floor_share_of_y0": 9.673071683291607e-16,
+    "wall_s_all_pots_after_jit": 0.028664708021096885
+   },
+   {
+    "solver": "Kvaerno5",
+    "tolerance": "loose_1e-6",
+    "group": "panel",
+    "n_pots": 24,
+    "max_dex": 1.097336080579936e-05,
+    "worst": {
+     "max_dex": 1.097336080579936e-05,
+     "worst_species": "LOOH_13_ct",
+     "worst_row": 3,
+     "max_dex_scored_products": 1.0950446571733607e-07,
+     "max_abs_below_floor_share_of_y0": 1.5104811853686325e-33,
+     "pot": "acrylamide_spi_extrusion_130C_ACSRef3:upper"
+    },
+    "steps_total": 601,
+    "max_dex_scored_products": 3.5588023412636005e-06,
+    "max_abs_below_floor_share_of_y0": 2.7454860497223206e-13,
+    "wall_s_all_pots_after_jit": 0.04518645707867108
+   },
+   {
+    "solver": "Kvaerno5",
+    "tolerance": "loose_1e-6",
+    "group": "profile",
+    "n_pots": 1,
+    "max_dex": 0.00024064417063129895,
+    "worst": {
+     "max_dex": 0.00024064417063129895,
+     "worst_species": "LOOH_13_ct",
+     "worst_row": 67,
+     "max_dex_scored_products": 2.8852501290366206e-06,
+     "max_abs_below_floor_share_of_y0": 2.0514835126453986e-14,
+     "pot": "synthetic_profile_pea_soy_25_160_60:point"
+    },
+    "steps_total": 414,
+    "max_dex_scored_products": 2.8852501290366206e-06,
+    "max_abs_below_floor_share_of_y0": 2.0514835126453986e-14,
+    "wall_s_all_pots_after_jit": 0.02488095802254975
+   }
+  ]
+ },
+ "timing": {
+  "rows": [
+   {
+    "pot": "pea_isolate_uht_140C_Trikusuma2019",
+    "n_segments": 1,
+    "engine": {
+     "pot": "pea_isolate_uht_140C_Trikusuma2019",
+     "lane_run_s": [
+      0.0001018339826259762,
+      0.000144416990224272,
+      0.0001544170081615448,
+      0.00010370899690315127,
+      7.958302740007639e-05,
+      7.487498805858195e-05,
+      6.975000724196434e-05,
+      6.799999391660094e-05,
+      6.754198693670332e-05,
+      6.600000779144466e-05,
+      6.941700121387839e-05,
+      6.729099550284445e-05,
+      6.637501064687967e-05,
+      6.624998059123755e-05,
+      6.466600461862981e-05,
+      6.462499732151628e-05,
+      6.52919989079237e-05,
+      6.545800715684891e-05,
+      6.437499541789293e-05,
+      6.591700366698205e-05
+     ],
+     "lane_run_median_s": 6.741649121977389e-05,
+     "forward_fd_jacobian_s": 0.0004816354005015455,
+     "fd_runs": 7,
+     "uptime": "12:04  up 3 days, 19:13, 1 user, load averages: 60.90 38.03 28.92"
+    },
+    "jax": {
+     "fit_tol_1e-8": {
+      "solve_median_s": 0.0004621874977601692,
+      "solve_compile_s": 2.1097576249740086,
+      "jacobian_median_s": 0.0013354164984775707,
+      "jacobian_compile_s": 2.785604916018201
+     },
+     "loose_1e-6": {
+      "solve_median_s": 0.00035466648114379495,
+      "solve_compile_s": 2.6541689579898957,
+      "jacobian_median_s": 0.0007861664926167578,
+      "jacobian_compile_s": 2.5824622079962865
+     }
+    },
+    "uptime": "12:04  up 3 days, 19:14, 1 user, load averages: 67.35 40.12 29.77"
+   },
+   {
+    "pot": "external_validation_bi_2020_roasted_pea_hexanal",
+    "n_segments": 1,
+    "engine": {
+     "pot": "external_validation_bi_2020_roasted_pea_hexanal",
+     "lane_run_s": [
+      0.00011824999819509685,
+      8.241599425673485e-05,
+      7.358301081694663e-05,
+      7.112498860806227e-05,
+      8.462500409223139e-05,
+      7.141698733903468e-05,
+      6.920899613760412e-05,
+      6.849999772384763e-05,
+      6.666700937785208e-05,
+      6.670798757113516e-05,
+      6.608301191590726e-05,
+      6.591700366698205e-05,
+      6.554200081154704e-05,
+      6.587500683963299e-05,
+      6.554101128131151e-05,
+      6.500000017695129e-05,
+      6.504199700430036e-05,
+      6.53750030323863e-05,
+      6.525000208057463e-05,
+      6.591601413674653e-05
+     ],
+     "lane_run_median_s": 6.637501064687967e-05,
+     "forward_fd_jacobian_s": 0.0005041083510150202,
+     "fd_runs": 7,
+     "uptime": "12:04  up 3 days, 19:14, 1 user, load averages: 67.35 40.12 29.77"
+    },
+    "jax": {
+     "fit_tol_1e-8": {
+      "solve_median_s": 0.01124810399778653,
+      "solve_compile_s": 1.7810710410121828,
+      "jacobian_median_s": 0.025065228503081016,
+      "jacobian_compile_s": 3.8218754999979865
+     },
+     "loose_1e-6": {
+      "solve_median_s": 0.005250250003882684,
+      "solve_compile_s": 2.172280375001719,
+      "jacobian_median_s": 0.0135838750138646,
+      "jacobian_compile_s": 3.411368458007928
+     }
+    },
+    "uptime": "12:04  up 3 days, 19:14, 1 user, load averages: 74.56 43.06 31.00"
+   },
+   {
+    "pot": "synthetic_profile_pea_soy_25_160_60",
+    "n_segments": 119,
+    "engine": {
+     "pot": "synthetic_profile_pea_soy_25_160_60",
+     "lane_run_median_s": 0.0027864584990311414,
+     "forward_fd_jacobian_s": 0.01950520949321799,
+     "fd_runs": 7,
+     "note": "integrate_lipid per carrier; FD Jacobian = 7 runs"
+    },
+    "jax": {
+     "fit_tol_1e-8": {
+      "solve_median_s": 0.027994874501018785,
+      "solve_compile_s": 1.9050185829983093,
+      "jacobian_median_s": 0.07633666701440234,
+      "jacobian_compile_s": 2.7240787080081645
+     },
+     "loose_1e-6": {
+      "solve_median_s": 0.024958291498478502,
+      "solve_compile_s": 1.8851376669772435,
+      "jacobian_median_s": 0.06781885400414467,
+      "jacobian_compile_s": 3.1198504579951987
+     }
+    },
+    "uptime": "12:05  up 3 days, 19:14, 1 user, load averages: 78.88 44.99 31.82"
+   }
+  ]
+ },
+ "batch": {
+  "pot": "external_validation_bi_2020_roasted_pea_hexanal",
+  "tolerance": "fit_tol_1e-8",
+  "sizes": [
+   {
+    "draws": 1,
+    "wall_s": 0.0100635830021929,
+    "per_draw_s": 0.0100635830021929,
+    "compile_s": 3.3880396249878686,
+    "batch_vs_single_max_dex": 0.0
+   },
+   {
+    "draws": 16,
+    "wall_s": 0.16454279198660515,
+    "per_draw_s": 0.010283924499162822,
+    "compile_s": 2.896473666012753,
+    "batch_vs_single_max_dex": 2.220446049250313e-15
+   },
+   {
+    "draws": 128,
+    "wall_s": 1.3571618749992922,
+    "per_draw_s": 0.01060282714843197,
+    "compile_s": 3.8330299590015784,
+    "batch_vs_single_max_dex": 1.7763568394002505e-15
+   },
+   {
+    "draws": 1024,
+    "wall_s": 12.296505500009516,
+    "per_draw_s": 0.012008306152353043,
+    "compile_s": 13.788808707991848,
+    "batch_vs_single_max_dex": 1.7763568394002505e-15
+   }
+  ],
+  "grid": {
+   "pots": 8,
+   "draws": 64,
+   "shape": [
+    8,
+    64,
+    4,
+    14
+   ],
+   "wall_s": 5.786696540977573,
+   "compile_s": 10.542885250004474,
+   "per_member_s": 0.011302141681596822
+  },
+  "uptime": "12:03  up 3 days, 19:12, 1 user, load averages: 27.59 26.18 24.16"
+ }
+}
