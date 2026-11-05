@@ -4,9 +4,9 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-05",
     "git": {
-      "commit": "a4b2504b575e24a4e5b6793c78bc8f530ed586e1",
-      "short": "a4b2504b",
-      "branch": "h0-relative-only-thiols",
+      "commit": "35d8ed272204797182b384cf6d468f1f1b67c23f",
+      "short": "35d8ed27",
+      "branch": "lit-2026-11-05-m4-candidates",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "86f7c4ab0cf8a49fb6ff0b03d45f70e2116a8c565b3a098bf95a1c2494577b5b"
+        "sha256": "06f90c9f4eab26bda5510ff09f428692d409c2a8a59cca570c2615da0782ad0f"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -2024,10 +2024,13 @@
       "species_measured_over_time": [
         "NF"
       ],
-      "conflicts": [],
+      "conflicts": [
+        "CF-112"
+      ],
       "unclear": true,
       "why_unclear": [
-        "fitted, B2.3 log10k unidentified, frozen since"
+        "fitted, B2.3 log10k unidentified, frozen since",
+        "conflicts: CF-112"
       ]
     },
     {
@@ -2570,9 +2573,13 @@
       "species_measured_over_time": [
         "MGO"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-122"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-122"
+      ]
     },
     {
       "reaction": "r_nf_mp3p",
@@ -5188,11 +5195,13 @@
         "TTCA"
       ],
       "conflicts": [
-        "CF-107"
+        "CF-107",
+        "CF-108",
+        "CF-110"
       ],
       "unclear": true,
       "why_unclear": [
-        "conflicts: CF-107"
+        "conflicts: CF-107, CF-108, CF-110"
       ]
     },
     {
