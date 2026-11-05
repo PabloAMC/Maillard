@@ -93,3 +93,16 @@ None: a method paper with no reaction. If the measurement-model work wants a rec
 ## 7. Supplementary material
 
 None.
+
+## Second reader (2026-11-05)
+
+**Independent second reading** by `agent-second-reader-2026-11-05`, PDF read before this dossier. Source:
+`data/articles/hu2012.pdf` (Chin. J. Chromatogr. 30:298), Table 2 and Table 5 (bilingual captions). Printed numbers.
+
+| item | location | first reader | second reader | verdict |
+|---|---|---|---|---|
+| xylose LOD | Table 2, sec. 2.2.1 | 19 mg/L, S/N = 3 | **19 mg/L, S/N = 3** (by serial dilution of the standards); 19 / 150.13 = 127 µM | AGREE |
+| calibration form | Table 2 footnote | ln A = 8.44 + 2.00 ln c, c in g/L | **lnY = 8.44 + 2.00 lnX, Y = peak area, X = mass concentration in g/L** (double-log) | AGREE |
+| linear range, r² | Table 2 | 0.064-1.278 g/L, 0.9984 | **0.064-1.278 g/L, r² 0.9984** | AGREE |
+| conditions | sec. 1.2, abstract | Prevail Carbohydrate ES 250 × 4.6 mm 5 µm, MeCN / water 75:25, 1.0 mL/min, 5 µL, drift tube 79 °C, N2 2.0 L/min | same; Agilent 1200 + Alltech 2000 ELSD | AGREE |
+| other mobile phases | Table 5 | 80:20: 7.41 + 1.94, 0.128-1.278; 70:30: 8.71 + 1.94, 0.032-1.278 | same | AGREE |
