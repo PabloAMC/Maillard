@@ -1,6 +1,8 @@
 """scripts/tools/openalex.py (plan W1.4): pure helpers and the three subcommands on recorded fixtures (no network)."""
 from __future__ import annotations
 
+import pytest
+
 from scripts.tools import openalex as oa
 
 
@@ -92,7 +94,13 @@ def test_run_labs_reads_institutions():
     assert rows[1] == {"doi": "10.1000/missing", "found": False, "authorships": []}
 
 
-def test_sweep_refuses_output_under_data(tmp_path):
-    import pytest
+@pytest.mark.parametrize("args", [
+    ["verify"],
+    ["sweep", "--seed", "10.1021/jf991254a"],
+    ["labs", "--doi", "10.1021/jf991254a"],
+])
+def test_every_command_refuses_output_under_data(args, monkeypatch):
+    # The guard runs before any fetch or registry read: a refusal must never touch the network.
+    monkeypatch.setattr(oa, "make_fetch", lambda **kw: pytest.fail("fetched before refusing"))
     with pytest.raises(SystemExit):
-        oa.main(["sweep", "--seed", "10.1021/jf991254a", "--out", str(oa.data_paths.DATA_ROOT / "x.json")])
+        oa.main(args + ["--out", str(oa.data_paths.DATA_ROOT / "x.json")])

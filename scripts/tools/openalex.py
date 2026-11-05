@@ -252,6 +252,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     for p in (v, s, lab):
         p.add_argument("--delay", type=float, default=1.1)
     a = ap.parse_args(argv)
+    if a.out is not None and a.out.resolve().is_relative_to(data_paths.DATA_ROOT.resolve()):
+        ap.error(f"{a.cmd} output must not go under data/")
     fetch = make_fetch(delay=a.delay)
     registry = data_access.load_yaml(data_paths.PAPER_REGISTRY)
     if a.cmd == "verify":
@@ -265,8 +267,6 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         stem.with_suffix(".md").write_text(render_verify_markdown(payload))
         print(f"verify: {payload['checked']} checked, {payload['clean']} clean, flags {payload['flag_counts']} -> {stem}.{{json,md}}")
     elif a.cmd == "sweep":
-        if str(a.out.resolve()).startswith(str(data_paths.DATA_ROOT.resolve())):
-            ap.error("sweep output must not go under data/")
         payload = run_sweep(a.seed, fetch, known_dois(registry), a.direction)
         a.out.write_text(json.dumps(payload, indent=1, ensure_ascii=False) + "\n")
         print(f"sweep: {payload['n_works']} works ({payload['n_held']} already held) -> {a.out}")
