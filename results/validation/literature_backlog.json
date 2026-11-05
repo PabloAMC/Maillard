@@ -3916,40 +3916,6 @@
       ]
     },
     {
-      "id": "hrncirik_2014_coconut_oil_thermal_profile",
-      "citation": "Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "coconut_oil_co_matrix",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "lipid_oxidation",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a coconut-oil co-matrix thermal-profile calibration so lipid-rich formulations are not interpreted with PUFA-only oxidation context.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "hrncirik_2014_coconut_oil_thermal_profile",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "li_2025",
       "citation": "Li et al. (2025)",
       "kind": "calibration_reference",
@@ -9168,40 +9134,6 @@
       ]
     },
     {
-      "id": "hrncirik_2014_coconut_oil_thermal_profile",
-      "citation": "Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "coconut_oil_co_matrix",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "lipid_oxidation",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a coconut-oil co-matrix thermal-profile calibration so lipid-rich formulations are not interpreted with PUFA-only oxidation context.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "hrncirik_2014_coconut_oil_thermal_profile",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "li_2025",
       "citation": "Li et al. (2025)",
       "kind": "calibration_reference",
@@ -10465,8 +10397,8 @@
     "encoded_and_ready_ids": []
   },
   "summary": {
-    "intake_reference_count": 150,
-    "encoded_reference_count": 150,
+    "intake_reference_count": 149,
+    "encoded_reference_count": 149,
     "ready_runtime_count": 0,
     "ready_benchmark_count": 0,
     "wet_lab_blocked_count": 4,

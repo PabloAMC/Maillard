@@ -390,39 +390,6 @@
       "comment": "Use as an extended mitigation reference for safety interpretation, not as a substitute for temperature-time kinetics."
     },
     {
-      "id": "kocadagli_2016_saponin_acrylamide_modifier",
-      "kind": "contextual_process_modifier",
-      "report_visibility": "extended",
-      "target_module": "safety",
-      "chemistry_family": "off_note_and_maillard_suppression",
-      "slr_family_source": "08",
-      "source_citation": "Kocadağlı & Gökmen (2016)",
-      "doi": "10.1016/j.foodchem.2022.133518",
-      "analyte": "acrylamide",
-      "method": {
-        "instrument": "reported in source summary",
-        "lod_units": "ug_per_kg",
-        "lod_point": 10.0,
-        "notes": "Backlog summary reports a saponin dose-acrylamide relationship plus DSC shift and pyrazine skew"
-      },
-      "matrix_reference_ranges": [
-        {
-          "matrix_family": "saponin_modified_model_system",
-          "units": "qualitative_modifier",
-          "comment": "Dose-responsive acrylamide modulation with simultaneous pyrazine skew and approximately 6 C thermal shift"
-        }
-      ],
-      "what_it_supports": [
-        "Bounded process-modifier context linking saponin load to acrylamide interpretation",
-        "Safety and flavour trade-off framing where pyrazine skew accompanies the acrylamide response"
-      ],
-      "what_it_does_not_support": [
-        "Direct finished-product endpoint benchmarking",
-        "Exact process reconstruction for SPI or PPI matrices"
-      ],
-      "comment": "Use as an extended process-modifier reference when additive composition or foaming-active fractions are expected to move both acrylamide and pyrazine posture."
-    },
-    {
       "id": "ramirez_jimenez_2000_furosine_crossover",
       "kind": "kinetic_model_reference",
       "report_visibility": "default",
