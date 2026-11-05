@@ -228,7 +228,7 @@ sulfur module last. The block grows by ~40 - 70 h; with M3 phase 1 in the waits,
 | dates | W1 yardstick | W2 chemistry | W3 engine | W4 uncertainty | W5 product | W6 owner |
 |---|---|---|---|---|---|---|
 | 11-02 - 11-08 | benchmark scorer (done); H0 (done, applied); profile (done) | M1 run (EX-061); supply screen; M1.1; Cao input audit; M1c case items 1 - 5 frozen; M1b and M2 preregs drafted | JAX bake-off (done) | -- | -- | send requests, incl. designed thiol-supply data |
-| 11-09 - 11-20 | -- | M1b(i) (timeboxed); M1c screen, build and fit; M3 phase 1 in the compute waits | A2 module contract (design only) | -- | -- | -- |
+| 11-09 - 11-20 | -- | M1b(i) (timeboxed); M1c screen, build and fit; M3 phase 1 in the compute waits | A2 contract v2 (from the bake-off) and the lipid module ported (pH-free, untouched by M1 - M3; started 2026-11-05) | -- | -- | -- |
 | 11-21 - 12-05 | -- | joint M1c + M2 (+ M1b(ii)) refit; M3 layer | -- | H1 spec (after M2) | W5.1 yeast extract (standalone) | -- |
 | 12-06 - 12-26 | -- | M3 verdict; the cases for M4, M5, M6 written (sec. 7 items 1 - 5; no engine runs) | A2 + H3 (non-sulfur modules first, sulfur last) | H2 on M3 | W5.2 crust (standalone) | -- |
 | 12-27 - 01-02 | -- | M4 on the new network | -- | -- | W5.1 / 5.2 joined to the network | -- |
