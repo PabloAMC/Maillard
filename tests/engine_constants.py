@@ -59,6 +59,7 @@ CONSTANTS = {
         'parameters_lipid': 'MEQ_O2_PER_MMOL_LOOH',
         'parameters_sulfur': 'PKA_REFERENCE_T_K R_KJ T_REF_S_K',
         'ph_state': 'LABEL_TEMPERATURE_K PKA_REFERENCE_T_K R_KJ',
+        'predictive_densities': 'LN10',
         'sulfur': 'LABEL_TEMPERATURE_K T_REF_S_K',
         'uncertainty': 'R_KJ_PER_MOL_K',
         'vessel': 'DISSOLVED_O2_MM_AT_20C O2_MMOL_PER_ML_HEADSPACE',
@@ -67,7 +68,7 @@ CONSTANTS = {
         'acrylamide_conditions': 'AW_MULTIPLIER PH_EXPONENT_ELIMINATION PH_EXPONENT_FORMATION REFERENCE_PH',
         'directional': 'MEASUREMENT_NOISE_FOLD ZERO_FLOOR_UG_PER_L',
         'engine': 'NETWORK_PH OX_AMBIENT_MMOL_L OX_RESERVOIR_DEFAULT_UNITS OX_SAT_MMOL_L',
-        'fitting': 'BOUND_FRACTION COST_AGREEMENT DIAGNOSTIC_MEAN_SE DIAGNOSTIC_TREND_P NULL_WEIGHT_TOL',
+        'fitting': 'BOUND_FRACTION COST_AGREEMENT DIAGNOSTIC_MEAN_SE DIAGNOSTIC_TREND_P NULL_WEIGHT_TOL POLISH_BUDGET',
         'furanic': (
             'BLANK_PH BLANK_STATED_MAX_SD_FRACTION BLANK_SUGAR_LOADING_MMOL_PER_L BLANK_TEMPERATURE_C '
             'BLANK_TIME_MIN'
@@ -101,6 +102,7 @@ CONSTANTS = {
             'ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL ZHENG_MECHANISM_BOUNDARY_PH'
         ),
         'ph_state': 'ARP_CARBOXYL_DH ARP_CARBOXYL_PKA',
+        'predictive_densities': 'ESS_MIN FLOOR_DATA_RTOL K_HAT_MAX OMEGA_DEX Z_90',
         'scoring': 'PASS_BAND_LEVEL',
         'thermal_history': 'DEFAULT_START_C',
         'thiol_relative_only': 'Z90',
@@ -263,6 +265,7 @@ CONSTANTS = {
         'lipid': 'REFERENCE_AUTOXIDATION_SYSTEM REFERENCE_LINOLEATE_1981_COLUMN REFERENCE_OLEATE_1981_COLUMN',
         'panel': 'PANEL_EXTERNAL_MATRIX PANEL_MAILLARD_PATH_HOLDOUT PANEL_TRUST_LOOP SYNTHETIC_SNAPSHOT_SUFFIX',
         'parallel': 'POOL_MODES',
+        'predictive_densities': 'BASES PH_SCALES VALUE_BASES',
         'thiol_relative_only': 'ABSOLUTE_REFUSED_TAG CALIBRATE_GENERATOR',
         'trunk_conditions': 'ATMOSPHERE_REFERENCE',
         'uncertainty': (

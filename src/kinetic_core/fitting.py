@@ -20,7 +20,8 @@ convergence); ``laplace`` builds B8's central-difference Jacobian, its eigenbasi
 directions get an infinite sigma, not zero) and B8's identification rule; ``leave_one_group_out`` refits without
 each group of rows (a source, a laboratory) from the full optimum and reports every constant's shift in sigmas
 and every bound it hits; ``cost_drop_is_significant`` is the chi-square rule the envelope and the pre-registrations
-use. Nothing here knows chemistry.
+use. Nothing here knows chemistry. Opt-in since 2026-11-05 (M1.1): ``fit``'s central-difference polish and its
+asserted-convergence check (the defaults are bit-identical to before; ``tests/unit/test_fitting.py`` pins them).
 """
 from __future__ import annotations
 
@@ -113,23 +114,65 @@ class Fit:
     budget: int
     seconds: float
     residuals: np.ndarray
+    #: M1.1 (2026-11-05), opt-in only: the central-difference polish's record (None when not asked for) and the
+    #: asserted-convergence flag (None unless ``require_converged="flag"``). Absent from ``as_dict`` when None, so a
+    #: default fit's record is exactly as before.
+    polish: Optional[Dict[str, Any]] = None
+    converged: Optional[bool] = None
 
     @property
     def budget_exhausted(self) -> bool:
         return self.status == 0
 
     def as_dict(self, keys: Sequence[str]) -> Dict[str, Any]:
-        return {"theta": dict(zip(keys, map(float, self.theta))), "cost": self.cost, "start_cost": self.start_cost,
-                "start": dict(zip(keys, map(float, self.start))), "status": self.status,
-                "budget_exhausted": self.budget_exhausted, "evaluations": self.evaluations, "budget": self.budget,
-                "seconds": self.seconds}
+        out = {"theta": dict(zip(keys, map(float, self.theta))), "cost": self.cost, "start_cost": self.start_cost,
+               "start": dict(zip(keys, map(float, self.start))), "status": self.status,
+               "budget_exhausted": self.budget_exhausted, "evaluations": self.evaluations, "budget": self.budget,
+               "seconds": self.seconds}
+        if self.polish is not None:
+            out["polish"] = {k: (dict(zip(keys, map(float, v))) if k == "forward_theta" else v)
+                             for k, v in self.polish.items()}
+        if self.converged is not None:
+            out["converged"] = self.converged
+        return out
+
+
+class FitNotConverged(RuntimeError):
+    """``fit(..., require_converged="raise")`` ended with status <= 0 (budget exhausted or improper input), or with
+    an exhausted central polish. Carries the Fit."""
+
+    def __init__(self, message: str, result: "Fit"):
+        super().__init__(message)
+        self.fit = result
+
+
+#: the central polish's per-call evaluation budget (M1c + M2 prereg v2 sec. 4.2: <= 300 per start)
+POLISH_BUDGET = 300
 
 
 def fit(problem: Problem, start: np.ndarray, budget: int = 1200, rows: Optional[Tuple[Any, ...]] = None,
-        upper: Optional[np.ndarray] = None, ftol: Optional[float] = None) -> Fit:
+        upper: Optional[np.ndarray] = None, ftol: Optional[float] = None, central_polish: int = 0,
+        polish_budget: int = POLISH_BUDGET, on_polish_exhausted: str = "carry_forward",
+        require_converged: Optional[str] = None) -> Fit:
     """One least-squares fit with the codebase's settings. ``budget`` counts every evaluation, Jacobian columns
     included (least_squares' max_nfev does not count them). ``ftol`` overrides the settings' relative cost tolerance
-    (a convergence re-fit's declared stopping rule, 2026-10-31)."""
+    (a convergence re-fit's declared stopping rule, 2026-10-31).
+
+    Opt-in (M1.1, 2026-11-05; the defaults leave the fit bit-identical to before):
+    - ``central_polish`` = N > 0: after the forward-difference optimiser stops, continue from its endpoint with a
+      CENTRAL-difference Jacobian (``central_jacobian``: 2 evaluations per coordinate, the kind's absolute step,
+      one-sided at a bound). Each call gets ``polish_budget`` evaluations, all counted: one is kept for the final
+      residual and the rest pass as max_nfev = (polish_budget - 1) // (2n + 1), since an iteration costs one
+      residual evaluation plus a Jacobian of <= 2n. A further call is made only while a call ends with status 0
+      (budget exhausted), up to N calls. If the last still ends at 0, ``on_polish_exhausted="carry_forward"`` (the
+      prereg's rule) carries the forward endpoint and flags it; "keep_polished" keeps the polished point, flagged.
+      A polished cost above the forward cost is never kept. The record is ``Fit.polish``.
+    - ``require_converged``: "raise" raises ``FitNotConverged`` when the reported status is <= 0 or the polish was
+      exhausted; "flag" sets ``Fit.converged`` instead."""
+    if require_converged not in (None, "raise", "flag"):
+        raise ValueError(f"require_converged must be None, 'raise' or 'flag', got {require_converged!r}")
+    if on_polish_exhausted not in ("carry_forward", "keep_polished"):
+        raise ValueError(f"on_polish_exhausted must be 'carry_forward' or 'keep_polished', got {on_polish_exhausted!r}")
     from scipy.optimize import least_squares
 
     upper = np.asarray(problem.upper if upper is None else upper, dtype=float)
@@ -154,9 +197,114 @@ def fit(problem: Problem, start: np.ndarray, budget: int = 1200, rows: Optional[
                            max_nfev=max(1, budget // (len(problem.keys) + 1)),
                            **{**LEAST_SQUARES_SETTINGS, **({} if ftol is None else {"ftol": ftol})})
     r = f(result.x)
-    return Fit(theta=np.asarray(result.x, dtype=float), cost=float(0.5 * r @ r), start=start,
-               start_cost=float(0.5 * r0 @ r0), status=int(result.status), evaluations=count["n"], budget=budget,
-               seconds=round(time.time() - t0, 1), residuals=r)
+    out = Fit(theta=np.asarray(result.x, dtype=float), cost=float(0.5 * r @ r), start=start,
+              start_cost=float(0.5 * r0 @ r0), status=int(result.status), evaluations=count["n"], budget=budget,
+              seconds=round(time.time() - t0, 1), residuals=r)
+    if central_polish:
+        out = _polish(problem, out, rows, lower, upper, int(central_polish), int(polish_budget), on_polish_exhausted,
+                      ftol, t0)
+    if require_converged is not None:
+        ok = out.status > 0 and not (out.polish or {}).get("flagged", False)
+        if require_converged == "raise" and not ok:
+            raise FitNotConverged(f"fit not converged: status {out.status}"
+                                  f"{'; polish exhausted' if (out.polish or {}).get('flagged') else ''}", out)
+        if require_converged == "flag":
+            out.converged = bool(ok)
+    return out
+
+
+def _polish(problem: Problem, forward: Fit, rows, lower: np.ndarray, upper: np.ndarray, calls: int, budget: int,
+            on_exhausted: str, ftol: Optional[float], t0: float) -> Fit:
+    """``fit``'s opt-in central-difference polish (see there). Counts its own evaluations; never exceeds
+    ``calls`` x ``budget``."""
+    from scipy.optimize import least_squares
+
+    n = len(problem.keys)
+    per_call = 2 * n + 1
+    if budget < per_call + 1:
+        raise ValueError(f"polish_budget {budget} cannot pay one central iteration ({per_call}) and the final residual")
+    count = {"n": 0}
+
+    def f(theta):
+        count["n"] += 1
+        return problem.evaluate(theta, rows)
+
+    def f_many(points):
+        count["n"] += len(points)
+        return _evaluate_all(problem, points, rows)
+
+    def jac(theta):
+        return central_jacobian(problem, theta, lower, upper, f_many)
+
+    settings = {**LEAST_SQUARES_SETTINGS, **({} if ftol is None else {"ftol": ftol})}
+    x, log = forward.theta.copy(), []
+    status = None
+    for _ in range(calls):
+        start_n = count["n"]
+        res = least_squares(f, x, jac=jac, bounds=(lower, upper), max_nfev=max(1, (budget - 1) // per_call), **settings)
+        x, status = np.asarray(res.x, dtype=float), int(res.status)
+        log.append({"status": status, "nfev": int(res.nfev), "njev": int(res.njev or 0),
+                    "evaluations": count["n"] - start_n})
+        if status != 0:
+            break
+    r = f(x)
+    cost = float(0.5 * r @ r)
+    exhausted = status == 0
+    raised = cost > forward.cost
+    keep_polished = not raised and not (exhausted and on_exhausted == "carry_forward")
+    rec = {"calls": log, "evaluations": count["n"], "budget_per_call": budget, "budget_total": calls * budget,
+           "forward_theta": forward.theta.tolist(), "forward_cost": forward.cost, "forward_status": forward.status,
+           "polished_cost": cost, "polished_status": status, "exhausted": bool(exhausted),
+           "raised_cost": bool(raised), "carried": "polished" if keep_polished else "forward",
+           "flagged": bool(exhausted or raised)}
+    assert rec["evaluations"] <= rec["budget_total"], rec
+    common = dict(start=forward.start, start_cost=forward.start_cost, evaluations=forward.evaluations + count["n"],
+                  budget=forward.budget, seconds=round(time.time() - t0, 1), polish=rec)
+    if keep_polished:
+        return Fit(theta=x, cost=cost, status=status, residuals=r, **common)
+    return Fit(theta=forward.theta, cost=forward.cost, status=forward.status, residuals=forward.residuals, **common)
+
+
+def central_jacobian(problem: Problem, theta, lower, upper, f_many: Optional[Callable] = None) -> np.ndarray:
+    """Central differences with B8's absolute step per coordinate kind ((r(x + h) - r(x - h)) / 2h); where a bound
+    blocks one side, the one-sided difference against the centre (as ``laplace``). Costs 2 evaluations per two-sided
+    coordinate, 1 per one-sided one, plus the centre only when some coordinate is one-sided: <= 2n in all.
+    ``f_many`` evaluates a list of points (default: ``problem.evaluate`` at each, parallel when asked)."""
+    theta = np.asarray(theta, dtype=float)
+    lower, upper = np.asarray(lower, dtype=float), np.asarray(upper, dtype=float)
+    f_many = f_many or (lambda pts: _evaluate_all(problem, pts, None))
+    plan, points = [], []
+    one_sided = False
+    for j, kind in enumerate(problem.kinds):
+        h = _step(kind)
+        up, down = theta[j] + h <= upper[j], theta[j] - h >= lower[j]
+        if not (up or down):
+            raise ValueError(f"coordinate {problem.keys[j]}: band narrower than its step {h}")
+        xp, xm = theta.copy(), theta.copy()
+        xp[j] += h
+        xm[j] -= h
+        i_up = i_down = None
+        if up:
+            i_up = len(points)
+            points.append(xp)
+        if down:
+            i_down = len(points)
+            points.append(xm)
+        one_sided = one_sided or not (up and down)
+        plan.append((h, i_up, i_down))
+    if one_sided:
+        points.append(theta)
+    values = f_many(points)
+    r0 = values[-1] if one_sided else None
+    jac = np.zeros((len(values[0]), len(theta)))
+    for j, (h, i_up, i_down) in enumerate(plan):
+        if i_up is not None and i_down is not None:
+            jac[:, j] = (values[i_up] - values[i_down]) / (2 * h)
+        elif i_up is not None:
+            jac[:, j] = (values[i_up] - r0) / h
+        else:
+            jac[:, j] = (r0 - values[i_down]) / h
+    return jac
 
 
 def _evaluate_all(problem: Problem, points: Sequence[np.ndarray], rows) -> List[np.ndarray]:
