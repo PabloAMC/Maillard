@@ -214,6 +214,32 @@ class DrawSet:
 UNIT_NAMES = ("U4", "U1e", "U1l", "U3", "U5a", "U5b", "U5a_PA_shape", "U5b_PA_shape", "GT3")
 
 
+def cached_draw_set(cache: Optional[Path], rival: str, form: L.Form, data: L.Data, target_feasible: int, seed: int,
+                    **kw) -> DrawSet:
+    """``make_draw_set`` with an on-disk cache (pickle, written by this generator only) keyed by everything that
+    determines the set, the layer's hash and make_draw_set's source, so a restarted or second process reuses it."""
+    if cache is None:
+        return make_draw_set(rival, form, data, target_feasible, seed, **kw)
+    import inspect
+    import pickle
+    h = hashlib.sha256()
+    h.update((ROOT / "src" / "m3_strecker_layer.py").read_bytes())
+    h.update(inspect.getsource(make_draw_set).encode())
+    h.update(repr((rival, form, target_feasible, seed, sorted((k, v) for k, v in kw.items() if k != "budget")))
+             .encode())
+    path = cache / f"drawset_{rival}_{h.hexdigest()[:16]}.pkl"
+    if path.exists():
+        with path.open("rb") as fh:
+            return pickle.load(fh)
+    ds = make_draw_set(rival, form, data, target_feasible, seed, **kw)
+    cache.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".tmp")
+    with tmp.open("wb") as fh:
+        pickle.dump(ds, fh)
+    tmp.rename(path)
+    return ds
+
+
 def make_draw_set(rival: str, form: L.Form, data: L.Data, target_feasible: int, seed: int, batch: int = 256,
                   max_draws: int = 12288, keep_k: bool = False, budget: Optional[Budget] = None,
                   trapped: bool = True, min_draws: int = 0) -> DrawSet:
@@ -377,13 +403,36 @@ def sample_truths(ds: DrawSet, log_w: np.ndarray, r: int, rng: np.random.Generat
 
 # ============================================================================================= decisions
 
+def _representable(ds: DrawSet, cond_ll: np.ndarray, unit_ll: Optional[np.ndarray] = None) -> bool:
+    """A rival represents the conditioning (and unit) data iff it has a feasible draw with finite weight."""
+    if ds.n == 0:
+        return False
+    w = cond_ll if unit_ll is None else cond_ll + unit_ll
+    return bool(np.any(np.isfinite(w)))
+
+
+def _one_sided(a_ok: bool, b_ok: bool) -> Dict[str, Any]:
+    """A rival whose calibration is infeasible under a form (no feasible draw: sigma-stoich / sigma-O2 there) has
+    lppd = -inf; the other side is read as favoured (flagged; its adequacy is not tested: optimistic)."""
+    side = "a" if a_ok and not b_ok else "b" if b_ok and not a_ok else "tie"
+    d = math.inf if side == "a" else -math.inf if side == "b" else math.nan
+    return {"d": d, "band": math.nan, "sd_rep": math.nan, "reading": side, "reading_raw": side, "resolved": True,
+            "by_infeasibility": True, "p_a": math.nan, "p_b": math.nan, "k_hat_a": None, "k_hat_b": None,
+            "ess_a": None, "ess_b": None}
+
+
 def unit_verdict(a: DrawSet, b: DrawSet, unit: str, cond: Sequence[str], obs: Obs, data: L.Data, form: L.Form,
                  rng: np.random.Generator, n_tie: int, psis_rule: bool = True) -> Dict[str, Any]:
     """One unit's reading between rivals a and b: d = lppd_a - lppd_b (prequential: conditioned on ``cond``), the tie
     band from measurement-noise redraws (sec. 9.2), adequacy (sec. 9.4), "density not resolved" -> tie."""
+    if a.n == 0 or b.n == 0:
+        return _one_sided(a.n > 0, b.n > 0)
     ca = weights_from(a, cond, obs, form, data)
     cb = weights_from(b, cond, obs, form, data)
     la, lb = loglik(a, unit, obs, form, data), loglik(b, unit, obs, form, data)
+    ra, rb = _representable(a, ca, la), _representable(b, cb, lb)
+    if not (ra and rb):
+        return _one_sided(ra, rb)
     ea, eb = conditional_lppd(ca, la, psis_rule), conditional_lppd(cb, lb, psis_rule)
     d = ea["lppd"] - eb["lppd"]
     reps = []
@@ -439,8 +488,13 @@ def block_verdict(a: DrawSet, b: DrawSet, block: Sequence[str], cond: Sequence[s
                   form: L.Form, rng: np.random.Generator, n_tie: int, psis_rule: bool = True) -> Dict[str, Any]:
     """The summed block's reading (transfer / decay law primary): d = lppd_a(block | cond) - lppd_b(block | cond),
     with its own tie band (all of the block's data redrawn)."""
+    if a.n == 0 or b.n == 0:
+        return _one_sided(a.n > 0, b.n > 0)
     ca, cb = weights_from(a, cond, obs, form, data), weights_from(b, cond, obs, form, data)
     ba, bb = weights_from(a, block, obs, form, data), weights_from(b, block, obs, form, data)
+    ra, rb = _representable(a, ca, ba), _representable(b, cb, bb)
+    if not (ra and rb):
+        return _one_sided(ra, rb)
     ea, eb = conditional_lppd(ca, ba, psis_rule), conditional_lppd(cb, bb, psis_rule)
     d = ea["lppd"] - eb["lppd"]
     reps = []
@@ -886,7 +940,7 @@ def run_screen(args) -> int:
     for rival in ("R1", "R2", "R3", "R4"):
         res[rival] = {}
         forms = {k: SCREEN_FORMS[k] for k in forms_for[rival]}
-        if rival == "R2":
+        if rival in ("R1", "R2"):
             forms.update(O2_FORMS)
         for fname, form in forms.items():
             budget.check(f"screen {rival} {fname}")
@@ -949,11 +1003,11 @@ def screen_kills(res: Dict[str, Any]) -> Tuple[Dict[str, Any], List[str]]:
         r = res[rival]
         main = [f for f in r if not f.startswith("headspace_") or f == "headspace_100mL"]
         killed = all(r[f]["joint_pass"] == 0 for f in main)
-        o2_killed = rival == "R2" and all(r[f]["joint_pass"] == 0 for f in r if f.startswith("headspace_"))
+        o2_killed = all(r[f]["joint_pass"] == 0 for f in r if f.startswith("headspace_") and f != "headspace_100mL")
         kills[rival] = {"killed_by_sampling_under_every_form": bool(killed),
                         "forms_with_zero_joint_pass": [f for f in r if r[f]["joint_pass"] == 0],
                         "needs_violation_search_confirmation": bool(killed),
-                        "sigma_O2_kill_every_budget_form": bool(o2_killed) if rival == "R2" else None,
+                        "sigma_O2_kill_every_budget_form": bool(o2_killed) if rival in ("R1", "R2") else None,
                         "feasible_share_primary": round(1 - sum(r["primary"]["infeasible"].values()) /
                                                         r["primary"]["draws"], 3),
                         "precondition_10pct": bool(1 - sum(r["primary"]["infeasible"].values()) /
@@ -1059,7 +1113,8 @@ def _reading(v: Dict[str, Any], psis_rule: bool) -> str:
 
 
 def power_pairs(data: L.Data, sets: Mapping[Tuple[str, str], DrawSet], truths: Mapping[str, DrawSet], r: int,
-                rng: np.random.Generator, n_tie: int, budget: Budget) -> Dict[str, Any]:
+                rng: np.random.Generator, n_tie: int, budget: Budget,
+                contrasts: Sequence[str] = tuple(CONTRASTS)) -> Dict[str, Any]:
     """Sec. 12.2: the three pairs. Synthetic claim units from a truth (truths reweighted by the real units outside the
     pair's claim set); the non-claim conditioning units real, except U3 (synthetic from the same truth: it is blind).
     Scored under the primary and the three forms with precomputed draw sets (o_Ar 0.1, Cu law, 20 mL headspace);
@@ -1069,6 +1124,8 @@ def power_pairs(data: L.Data, sets: Mapping[Tuple[str, str], DrawSet], truths: M
     pair_sets = {"route": ("R1", "R2"), "transfer": ("R1", "R3"), "decay_law": ("R4", "R1drift")}
     reweight = {"route": ("U1l",), "transfer": ("U4", "U1e", "U1l"), "decay_law": ("U4", "U1e", "U1l")}
     for cname, spec in CONTRASTS.items():
+        if cname not in contrasts:
+            continue
         a_name, b_name = pair_sets[cname]
         readings: Dict[str, List[Dict[str, str]]] = {}
         for truth in (a_name, b_name):
@@ -1151,21 +1208,26 @@ def run_power(args) -> int:
     drift = L.Form(ph_drift_trapped=True)
     rivals = {"R1": L.PRIMARY, "R2": L.PRIMARY, "R3": L.PRIMARY, "R4": L.PRIMARY, "R1drift": drift}
     part = args.power_part
-    want = ("R1", "R2") if part == "u3" else tuple(rivals)
-    forms = ("primary", "cu_linear") if part == "u3" else tuple(POWER_FORMS)
-    for i, name in enumerate(want):
+    need = {"route": ("R1", "R2"), "transfer": ("R1", "R3"), "decay_law": ("R4", "R1drift")}
+    want = ("R1", "R2") if part == "u3" else tuple(dict.fromkeys(
+        (["R1", "R2"] if part == "all" else []) + [r for c in args.contrasts.split(",") for r in need[c]]))
+    forms = tuple(POWER_FORMS)          # U3's check uses primary and cu_linear; the pairs all four
+    for name in want:
+        i = list(rivals).index(name)
         base = rivals[name]
         rival = "R1" if name == "R1drift" else name
-        for k, fname in enumerate(forms):
+        for fname in forms:
+            k = list(POWER_FORMS).index(fname)
             f = replace(POWER_FORMS[fname], ph_drift_trapped=base.ph_drift_trapped)
-            ds = make_draw_set(rival, f, data, args.score_feasible, seed=args.seed + 1000 * i + 10 * k, budget=budget)
+            ds = cached_draw_set(args.cache_dir, rival, f, data, args.score_feasible, seed=args.seed + 1000 * i + 10 * k,
+                                 budget=budget)
             sets[(name, fname)] = ds
             set_log[f"{name}|{fname}"] = {"feasible": ds.n, "drawn": ds.n_drawn, "failed": ds.n_failed,
                                           "wall_s": ds.wall_s, "infeasible": ds.reasons}
             print("set", name, fname, ds.n, "/", ds.n_drawn, "failed", ds.n_failed, f"{ds.wall_s}s", flush=True)
         tf = replace(L.PRIMARY, ph_drift_trapped=base.ph_drift_trapped)
-        ts = make_draw_set(rival, tf, data, args.truth_feasible, seed=args.seed + 7000 + 100 * i, budget=budget,
-                           keep_k=True)
+        ts = cached_draw_set(args.cache_dir, rival, tf, data, args.truth_feasible, seed=args.seed + 7000 + 100 * i,
+                             budget=budget, keep_k=True)
         truths[name] = ts
         set_log[f"{name}|truth"] = {"feasible": ts.n, "drawn": ts.n_drawn, "failed": ts.n_failed, "wall_s": ts.wall_s}
         print("truth", name, ts.n, "/", ts.n_drawn, flush=True)
@@ -1176,9 +1238,11 @@ def run_power(args) -> int:
         out["refused"] = f"{failed} failed runs in the draw sets: every power result is refused"
     else:
         try:
-            out["u3_synthetic_12_1"] = power_u3(data, sets, truths, args.reps, rng, args.tie_redraws, budget)
-            if part != "u3":
-                out["pairs_12_2"] = power_pairs(data, sets, truths, args.reps, rng, args.tie_redraws, budget)
+            if part in ("u3", "all"):
+                out["u3_synthetic_12_1"] = power_u3(data, sets, truths, args.reps, rng, args.tie_redraws, budget)
+            if part in ("pairs", "all") and args.contrasts:
+                out["pairs_12_2"] = power_pairs(data, sets, truths, args.reps, rng, args.tie_redraws, budget,
+                                                contrasts=tuple(args.contrasts.split(",")))
         except Refusal as e:
             out["compute_capped"] = str(e)
     out["compute_wall_h"] = round(budget.elapsed_h(), 3)
@@ -1190,8 +1254,13 @@ def run_power(args) -> int:
         "censored U3 values: product of conditional marginals (exact for one); adequacy leaves them out",
         "Holm's guard step is not simulated: power is optimistic on that account",
         "synthetic sets are generated from the truth's primary-form predictions and scored under each form",
+        "a rival with no feasible draw under a form (its calibration infeasible there) has lppd -inf: the other side is "
+        "read as favoured under that form without its adequacy test (flagged by_infeasibility; optimistic)",
     ]
-    _record("power" if part != "u3" else "power_u3", out, render_power(out), args.out_dir, layer_inputs())
+    name = "power" if part != "u3" else "power_u3"
+    if args.record_suffix:
+        name += f"_{args.record_suffix}"
+    _record(name, out, render_power(out), args.out_dir, layer_inputs())
     return 0
 
 
@@ -1348,7 +1417,10 @@ def main(argv=None) -> int:
     ap.add_argument("--tie-redraws", type=int, default=40)
     ap.add_argument("--score-feasible", type=int, default=1024)
     ap.add_argument("--truth-feasible", type=int, default=512)
-    ap.add_argument("--power-part", choices=("u3", "all"), default="all")
+    ap.add_argument("--power-part", choices=("u3", "pairs", "all"), default="all")
+    ap.add_argument("--contrasts", default="route,transfer,decay_law", help="power: the 12.2 pairs to run")
+    ap.add_argument("--record-suffix", default="", help="power: a part's record name suffix (merged later)")
+    ap.add_argument("--cache-dir", type=Path, default=None, help="draw-set cache (scratch; never under data/)")
     ap.add_argument("--cap-hours", type=float, default=None)
     ap.add_argument("--no-memory-guard", action="store_true")
     ap.add_argument("--out-dir", type=Path, default=data_paths.VALIDATION_DIR)

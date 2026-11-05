@@ -334,6 +334,14 @@ def test_binomial_decision_and_the_outcome_rows():
     assert G.contrast_credit({"reading": "a"}, {"U1e": {"reading": "b"}}) == "none"
 
 
+def test_a_rival_with_no_feasible_draw_reads_one_sided(data):
+    empty = G.DrawSet("R2", L.PRIMARY, 0, 100, np.zeros((0, 3)), {}, None, None, None, None, {}, {}, 0, 0.0, {})
+    full = G.DrawSet("R1", L.PRIMARY, 0, 1, np.zeros((1, 3)), {}, None, None, None, None, {}, {}, 0, 0.0, {})
+    v = G.unit_verdict(full, empty, "U3", (), G.Obs({}, np.zeros((1, 4))), data, L.PRIMARY,
+                       np.random.default_rng(0), 2)
+    assert v["reading"] == "a" and v["by_infeasibility"] and v["d"] == math.inf
+
+
 def test_score_contrast_needs_agreement_adequacy_and_the_primary():
     d = {"U3": {"primary": 5.0, "cu": 4.0}, "U1e": {"primary": 0.1, "cu": 0.0}}
     b = {"U3": {"primary": 1.0, "cu": 1.0}, "U1e": {"primary": 1.0, "cu": 1.0}}
