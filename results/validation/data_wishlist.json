@@ -2,12 +2,12 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-11-03",
+    "generated_on": "2026-11-05",
     "git": {
-      "commit": "1425ded2034deb89a50cf8d0e3302df419401ad1",
-      "short": "1425ded2",
-      "branch": "acrylamide-envelope-2026-11-03",
-      "dirty": false
+      "commit": "0226cbc02b037f4884733f15d91b777b019cca30",
+      "short": "0226cbc0",
+      "branch": "m1b-part-i-build",
+      "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
@@ -37,7 +37,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "c64e61c187eaf92acbb5003869f326df4bfed9dc79dc433fe81d728756509832"
+        "sha256": "27f01227400d0bae49f14f0eb91ee3d4ba055048ee0890128a87470e2fb8b1a3"
       }
     ]
   },

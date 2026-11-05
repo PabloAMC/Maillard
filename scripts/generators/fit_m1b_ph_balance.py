@@ -119,7 +119,8 @@ ADEQUACY_P = 0.05
 POT_SECONDS = 120
 ATOL = 1e-14
 SCORE_RTOL = 1e-8                             # sec. 3.5: scoring rtol 1e-8, inline
-MIN_FREE_PERCENT = 40.0
+MIN_FREE_PERCENT = 30.0          # the coordinator's gate after the owner's VM stopped (2026-11-05)
+MAX_WORKERS = 4                  # the coordinator's cap (M3's power check runs alongside at <= 4)
 PAIRS: Tuple[Tuple[str, str], ...] = (("B1", "B0"), ("B2", "B0"), ("B3", "B0"), ("B13", "B0"), ("B13", "B3"))
 RIVAL_NAMES = ("B0", "B1", "B2", "B3", "B13")
 
@@ -1378,7 +1379,7 @@ def run_screen(min_free: float) -> Dict[str, Any]:
     _init_pots()
     br = tuple(checks["davidek_breakpoints_in_situ"])
     b0_spread = float(checks["checks"]["V6"]["b0_pinned_zhou_spread"])
-    workers_max = min(2, parallel.workers(2))
+    workers_max = min(MAX_WORKERS, parallel.workers(1))
     gate = memory_gate(0.0)
     partial = json.loads(SCREEN_PARTIAL.read_text(encoding="utf-8")) if SCREEN_PARTIAL.exists() else {}
     failures: List[Dict[str, Any]] = list(partial.get("_failures", []))
