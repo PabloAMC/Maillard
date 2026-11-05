@@ -321,9 +321,16 @@ def run_arm(precursors: Mapping[str, float], temp_c: float, time_min: float, nam
     )
     if not run.answered:
         return ArmResult(False, decl.state, None, {}, {}, refusals)
+    # 2026-11-05 (H0 / EX-059, D2 branch (i)): the thiol lane's absolute levels (MFT, FFT, furfural, ...) are not
+    # shipped, and a summed OAV across compounds is built from them, so they leave the arm by name.
+    withheld = tuple(decl.absolute_refused_targets)
+    if withheld:
+        refusals = refusals + tuple(f"absolute level refused (H0 / EX-059): {t}" for t in withheld)
     ug: Dict[str, float] = {}
     oav: Dict[str, Optional[float]] = {}
     for row in run.interval_rows():
+        if row["compound"] in withheld:
+            continue
         ug[row["compound"]] = float(row["predicted_ug_per_l"])
         if row["compound"] in METRIC_TARGETS:
             entry = row["oav"] or {}

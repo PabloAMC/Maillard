@@ -389,6 +389,11 @@ def _anchor_tally(sulfur: Mapping[str, Any]) -> str:
     oos = [o for o in rows if not o.get("in_core_fit")]
     hit = sum(1 for o in rows if o.get("within_3x"))
     hit_oos = sum(1 for o in oos if o.get("within_3x"))
+    if not rows:
+        # 2026-11-05 (H0 / EX-059): the thiol lane's absolute levels are refused, so no anchor row is scored
+        return ("no scored anchor rows within 3x to report: since 2026-11-05 the thiol lane ships relative "
+                "within-laboratory predictions only (H0 / EX-059, D2 branch (i)), so every anchor row is refused for "
+                "its level, kept only for the within-study contrasts, and the branch has no scored absolute anchor")
     return (f"{hit} of its {len(rows)} scored anchor rows within 3x ({hit_oos} of the {len(oos)} that "
             f"no core fit read; the rest are fed-intermediate rows the sulfur fit read, which are not "
             f"evidence)")
@@ -619,7 +624,9 @@ def _verdict_from_fraction(hits: Optional[int], total: Optional[int]) -> str:
 
 _LANE_SYSTEMS = {
     "trunk": "free precursor, sugar + amine browning / furanics",
-    "sulfur": "free precursor, cysteine / ribose meaty thiols",
+    # 2026-11-05: the thiol lane's own observables are refused for their level (H0 / EX-059); what the sulfur lane
+    # still scores absolutely is what H0 did not score (2-acetylthiazole)
+    "sulfur": "free precursor, sulfur-lane observables H0 did not score (2-acetylthiazole)",
     "acrylamide": "free precursor, asparagine + reducing sugar",
     "lipid": "protein matrix, lipid-derived aldehydes",
 }
@@ -645,6 +652,36 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
                     "recomputed live on the union panel; an absolute is never trust by rule",
                 )
             )
+    # --- 2026-11-05: the thiol lane ships relative predictions only (H0 / EX-059, D2 branch (i)) ----------------
+    from src.kinetic_core import thiol_relative_only as h0
+
+    r = h0.ruling()
+    scope = ", ".join(sorted(h0.RELATIVE_ONLY_SPECIES))
+    cells.append(
+        DomainCell(
+            "Absolute concentration (ppb)",
+            f"thiol-lane observables {scope}, for a new laboratory [sulfur lane]",
+            f"REFUSED by name: out-of-sample tau_ABS {r.tau_abs_dex:.3f} dex, {r.upper_bound_text} "
+            "(leave-two-laboratories-out); absolute thiol evidence from one laboratory",
+            VERDICT_DO_NOT_USE,
+            f"{data_paths.rel(h0.H0_RECORD)} (D2 branch (i)); lifted only by a second independent laboratory's "
+            "absolute measurements re-scored under H0's rule",
+        )
+    )
+    cells.append(
+        DomainCell(
+            "Within-study ratio, rank or shape of one thiol-lane compound",
+            "two conditions of one study (one laboratory)",
+            "H0's relative branch, engine minus a chemistry-free null: "
+            + "; ".join(f"{s} {m:+.2f} nats/row ({label})" for s, m, label in r.relative_branch)
+            + " -- in the reset set THE NULL IS BETTER (D3: below -2 SE, sign-flip p <= 2/32)"
+            + f"; omega {r.omega_dex:.2f} + noise {r.class_noise_dex:.2f} dex per arm in the interval",
+            # owner, 2026-11-05: CAUTION -> DO-NOT-USE
+            VERDICT_DO_NOT_USE,
+            "the worse of H0's two sets governs (as for omega): in the reset set the null is shown better (D3: below "
+            "−2 SE); shipped by D2 branch (i) with this label until evidence (M1c / M2, H1) earns better",
+        )
+    )
     if env.get("available"):
         cells.append(
             DomainCell(

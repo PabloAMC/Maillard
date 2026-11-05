@@ -154,7 +154,7 @@ def run_wishlist(args: argparse.Namespace) -> int:
     md_path = data_paths.DATA_WISHLIST.with_suffix(".md")
     if not data_paths.DATA_WISHLIST.exists() or not md_path.exists():
         print(
-            "The data wishlist is not generated. Run: ./scripts/docker_maillard.sh wishlist "
+            "The data wishlist is not generated. Run: ./scripts/docker_maillard.sh wishlist-build "
             "(or python scripts/generators/generate_data_wishlist.py).", file=sys.stderr,
         )
         return 2
