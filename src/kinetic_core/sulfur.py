@@ -153,6 +153,7 @@ from .ph_state import (
     validate_charge_closure,
 )
 from . import ph_state as _ph
+from . import ph_balance_rivals as _pbr   # M1b part (i): every rival off by default (never entered then)
 from .species_sulfur import (
     N_SULFUR_STATE,
     SITE_POOLS,
@@ -1946,6 +1947,13 @@ def integrate_sulfur(
 
     spec = buffer_spec if buffer_spec is not None else DEFAULT_BUFFER
     dynamic = ph_drift is not None and not spec.is_clamped
+    # M1b part (i): a charge-balance rival (ph_balance_rivals, every switch off by default) runs only inline
+    rivals = _pbr.any_active()
+    if rivals and not (dynamic and PH_COUPLING == "inline"):
+        raise ValueError("an M1b charge-balance rival (ph_balance_rivals) runs only on the inline dynamic pH; "
+                         f"this run is {'dynamic' if dynamic else 'clamped or prescribed'} on {PH_COUPLING!r}")
+    rival_pools: Optional[Dict[str, np.ndarray]] = None
+    rival_diagnostics: Optional[Dict[str, Any]] = None
     ph_notes: list = []
     if buffer_spec is None and ph_drift is not None:
         ph_notes.append(BUFFER_ABSENT_WARNING)
@@ -2016,9 +2024,14 @@ def integrate_sulfur(
             else:
                 def temperature_of(t):
                     return float(np.interp(t, profile[0], profile[1]))
-            solution, node_ph, node_i, node_cool, k_nodes = _integrate_inline_ph(
-                parameters, y0, eval_times, duration, temperature_of, sid, ph_drift, spec,
-                method, rtol, atol)
+            if rivals:
+                solution, node_ph, node_i, node_cool, k_nodes, rival_pools, rival_diagnostics = (
+                    _pbr.integrate_inline(parameters, y0, eval_times, duration, temperature_of, sid, ph_drift,
+                                          spec, method, rtol, atol))
+            else:
+                solution, node_ph, node_i, node_cool, k_nodes = _integrate_inline_ph(
+                    parameters, y0, eval_times, duration, temperature_of, sid, ph_drift, spec,
+                    method, rtol, atol)
             node_times = eval_times
             n_nodes = len(node_times)
             ph_convergence = 0.0
@@ -2137,6 +2150,18 @@ def integrate_sulfur(
             key: float(concentrations[-1, SULFUR_INDEX[key]])
             for key in SULFUR_STATE_KEYS
         }
+        if rival_pools is not None:
+            # M1b part (i): the rival's pools, at the requested grid (the network's state matrix never holds them)
+            pool_grid = {k: np.clip(v[keep], 0.0, None) for k, v in rival_pools.items()}
+            final_map.update(_pbr.balance_pools({k: float(v[-1]) for k, v in pool_grid.items()}))
+            metadata["ph_balance_rivals"] = {
+                "switches": _pbr.switches_record(),
+                "pools": {k: [float(x) for x in v] for k, v in pool_grid.items()},
+                "diagnostics": rival_diagnostics,
+                "note": ("the pools are bookkeeping, not network species: read them with the state "
+                         "(ph_balance_rivals.balance_pools) for any pH; LAA's two acetic carbons are outside the "
+                         "element audit while latent; the flux audit (rate_nodes) is the unmodified mass action"),
+            }
         ph_final_cooled = ph_of_state(
             final_map, LABEL_TEMPERATURE_K, float(sid), ph_drift, spec
         )

@@ -434,6 +434,15 @@ DFG_GROUP = TitratableGroup(
     "carried as the class value (Mossine prints no enthalpy)",
     (-139.0, -57.0))
 
+#: M1b part (i) (2026-11-05; ph_balance_rivals, off by default): the surviving ammonium of rival B1, at the pKa 9.25
+#: AMINE_FATE_BASIS names. pK 9.245, dH_ion 52.21 kJ/mol, dCp 8 J/(K mol): the textbook NH4+ values [CRC; GKL's
+#: ammonia entry, quoted from memory and not re-checked against the table on disk: FLAG]. Read only from the ``NH4``
+#: pool a rival's run supplies; no network species carries it.
+AMMONIUM = TitratableGroup(
+    "ammonium", "ammonium (NH4+)", (9.245,), (52.21,), 1.0,
+    "pK 9.245, dH_ion 52.21 kJ/mol, dCp 8 J/(K mol) [CRC; GKL ammonia, not re-checked on disk: FLAG]",
+    (8.0,))
+
 #: --- the BUFFERS ----------------------------------------------------------
 PHOSPHATE = TitratableGroup(
     "phosphate", "orthophosphate (H3PO4)",
@@ -704,6 +713,14 @@ def titratable_inventory(
             amount = float(concentrations.get(key, 0.0))
             if amount > 0.0:
                 out.append((DFG_GROUP, amount))
+    # M1b part (i) (ph_balance_rivals, off by default): a rival's own pools, present only in a rival's run. ``NH4``
+    # is B1's surviving ammonium; ``RET_AA`` is B2's returned amino acid, titrated as glycine (its zwitterion).
+    nh4 = float(concentrations.get("NH4", 0.0))
+    if nh4 > 0.0:
+        out.append((AMMONIUM, nh4))
+    returned = float(concentrations.get("RET_AA", 0.0))
+    if returned > 0.0:
+        out.append((GLYCINE, returned))
 
     # -- B2.3: the carboxyl centres the sinks CARRY OUT of a consumed --------
     #    molecule. FULL STRENGTH: a carboxyl carried out of a molecule that
