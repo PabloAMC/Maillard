@@ -52,9 +52,11 @@ def panel(g, h):
     return [h.prepare(p) for p in g.panel_pots()]
 
 
-def _check(g, run, eng, what, **kw):
-    tol = {"rtol": g.FIT_TOL[0], "atol": g.FIT_TOL[1], **kw}
-    c = g.compare(run, eng, rtol=tol["rtol"], atol=tol["atol"])
+def _check(g, h, pot, run, eng, what, theta=None, drift=None):
+    """``Harness.matched`` (a sweep-count tie at the fixed point's tolerance is rerun at the engine's count) then the
+    tolerance checks."""
+    tol = {"rtol": g.FIT_TOL[0], "atol": g.FIT_TOL[1]}
+    _, c = h.matched(pot, run, eng, theta, drift=drift, **tol)
     bad = g.within(c, **tol)
     assert not bad, f"{what}: {bad} -- {UPDATE}"
     return c
@@ -102,7 +104,7 @@ def test_every_panel_pot_the_sulfur_lane_answers_matches_the_engine(g, h, panel)
     for pot in panel:
         run, _ = h.solve(pot)
         eng = g.engine_run(h.lane, pot, params, drift, rtol=g.FIT_TOL[0], atol=g.FIT_TOL[1])
-        _check(g, run, eng, pot["id"])
+        _check(g, h, pot, run, eng, pot["id"])
         assert not bool(np.any(np.asarray(run.failed)))
         e = h.lane.network.element_matrix
         np.testing.assert_allclose(e @ np.asarray(run.ys)[-1, -1], e @ pot["jax"]["y0"], rtol=1e-7, atol=1e-10)
@@ -133,7 +135,7 @@ def test_random_parameter_draws_match_the_engine(g, h, panel):
         for pot in pots:
             run, _ = h.solve(pot, theta)
             eng = g.engine_run(h.lane, pot, params, drift, rtol=g.FIT_TOL[0], atol=g.FIT_TOL[1])
-            _check(g, run, eng, f"draw {seed}, {pot['id']}")
+            _check(g, h, pot, run, eng, f"draw {seed}, {pot['id']}", theta, drift)
 
 
 def test_profile_staircase_clamped_and_inline_match_the_engine(g, h, panel):
@@ -142,7 +144,7 @@ def test_profile_staircase_clamped_and_inline_match_the_engine(g, h, panel):
     params, drift = engine.core_parameters(engine.SULFUR), engine.core_ph_drift()
     for pot in [h.prepare(p) for p in g.synthetic_pots()]:
         run, _ = h.solve(pot)
-        _check(g, run, g.engine_run(h.lane, pot, params, drift, rtol=g.FIT_TOL[0], atol=g.FIT_TOL[1]), pot["id"])
+        _check(g, h, pot, run, g.engine_run(h.lane, pot, params, drift, rtol=g.FIT_TOL[0], atol=g.FIT_TOL[1]), pot["id"])
     cfg = config.Config.from_globals().replace({"ph.coupling": "inline"})
     inline = g.Harness(cfg)
     for pot in [inline.prepare(p) for p in g.panel_pots() if p["id"] == g.DRAW_POTS[0]]:

@@ -728,6 +728,11 @@ def make_pot(lane: SulfurLane, initial: Mapping[str, float], process, *, prelude
     spec = process.buffer if getattr(process, "buffer", None) is not None else ph.DEFAULT_BUFFER
     mode = "clamped" if spec.is_clamped else "dynamic"
     thermal = process.thermal
+    if mode == "clamped" and thermal.profile is not None:
+        raise UnsupportedConfiguration("a clamped pH along a temperature profile (the engine's node-interpolated "
+                                       "constants at T(t)) is not ported")
+    if mode == "clamped" and process.ph_final is not None and float(process.ph_final) != float(process.ph):
+        raise UnsupportedConfiguration("a prescribed pH line between two measured endpoints (B2.1) is not ported")
     if thermal.profile is not None:
         times = np.array([t for t, _ in thermal.profile], dtype=float)
         temps = np.array([c for _, c in thermal.profile], dtype=float)
@@ -753,13 +758,17 @@ def make_pot(lane: SulfurLane, initial: Mapping[str, float], process, *, prelude
             "node_s": np.stack([s[1] / s[0] for s in segments]), "node_tc": np.stack([s[2] for s in segments]),
             "knot_s": np.stack([pad(s[3] / s[0], k_width) for s in segments]),
             "knot_tc": np.stack([pad(s[4], k_width) for s in segments]),
+            "label_nudge": np.zeros((len(segments), len(segments[0][1]))),
             "node_minutes": [s[1] for s in segments], "dropped": dropped, "buffer_spec": spec}
 
 
 def pot_arrays(pot: Mapping[str, Any]) -> Dict[str, Any]:
-    """The numeric part of a pot (the compiled functions' argument)."""
+    """The numeric part of a pot (the compiled functions' argument). ``label_nudge`` (S, N; zero) is added to the
+    nodes' cooled pH where the measured tables read it -- only a parity check sets it, to put a node whose cooled pH
+    sits ON a table's jump (a pot declared at exactly label pH 5.0, Zheng & Ho's boundary) on the engine's side of
+    the jump, which there is decided by the root-finders' last digits."""
     return {k: jnp.asarray(pot[k], dtype=jnp.float64) for k in ("y0", "label_ph", "buffer", "durations", "node_s",
-                                                                  "node_tc", "knot_s", "knot_tc")}
+                                                                  "node_tc", "knot_s", "knot_tc", "label_nudge")}
 
 
 # --------------------------------------------------------------------------- integration
@@ -806,10 +815,12 @@ def _solve(net: Network, rhs_k, data, y0, duration, save_s, jumps, *, rtol, atol
 
 def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 1e-8, atol: float = 1e-14,
               solver=None, adjoint=None, reverse: bool = False, max_steps: int = 200_000,
-              throw: bool = True) -> SulfurRun:
+              throw: bool = True, force_sweeps: Optional[int] = None) -> SulfurRun:
     """One pot through its programme with the Config's pH coupling (``pot["mode"]`` "clamped" holds the declared pH).
     ``reverse=True`` runs the fixed point's sweeps as a scan (``jax.grad``); otherwise a while loop (forward mode,
-    ``vmap``). ``adjoint`` defaults to diffrax's discrete adjoint (``diffrax.ForwardMode()`` for ``jax.jacfwd``)."""
+    ``vmap``). ``adjoint`` defaults to diffrax's discrete adjoint (``diffrax.ForwardMode()`` for ``jax.jacfwd``).
+    ``force_sweeps`` replaces the stopping rule by a fixed sweep count (every segment): for a parity check on a pot
+    whose last residual sits at the tolerance, where solver noise alone decides one sweep more or less."""
     import diffrax
 
     net, bal, st = lane.network, PhSolver(lane.balance), lane.settings
@@ -831,9 +842,13 @@ def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 
     min_sweeps = max(int(st.ph_iterations), 1)
     relaxed = st.fixed_point == "relaxed_converged"
     max_sweeps = max(min_sweeps, int(st.max_sweeps)) if relaxed else min_sweeps
+    if force_sweeps is not None:
+        if not 1 <= int(force_sweeps) <= max_sweeps:
+            raise ValueError(f"force_sweeps must lie in [1, {max_sweeps}]")
+        min_sweeps = max_sweeps = int(force_sweeps)
 
     def segment(y_start, seg):
-        duration, node_s, node_tc, knot_s, knot_tc = seg
+        duration, node_s, node_tc, knot_s, knot_tc, nudge = seg
         node_tk = node_tc + CELSIUS
         if mode == "clamped":
             t_k = knot_tc[0] + CELSIUS
@@ -861,14 +876,14 @@ def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 
 
         # every traced number enters the sweep as an OPERAND, never by closure: lax.cond's reverse-mode lowering
         # cannot carry a closed-over tracer (the branch would hold it as a constant)
-        data = (theta, sid, a["buffer"], y_start, duration, node_s, node_tk)
+        data = (theta, sid, a["buffer"], y_start, duration, node_s, node_tk, nudge)
 
         def sweep(carry, d):
-            theta_, sid_, buffer_, y_start_, duration_, node_s_, node_tk_ = d
+            theta_, sid_, buffer_, y_start_, duration_, node_s_, node_tk_, nudge_ = d
             count, node_ph, node_i, node_cool, _ys, _res, _done, steps, bad = carry
             k_nodes = jax.vmap(lambda t, p, i, c: net.rate_constants(
                 theta_, RateCtx(t_c=t - CELSIUS, t_k=t, ph=p, ph_label=c, ionic_m=i)))(node_tk_, node_ph, node_i,
-                                                                                         node_cool)
+                                                                                         node_cool + nudge_)
             ys, n_steps, failed = _solve(net, lambda s, y, dd: _interp_rows(s, dd[0], dd[1]), (node_s_, k_nodes),
                                          y_start_, duration_, node_s_, node_s_, **kw)
             ys = jnp.maximum(ys, 0.0)
@@ -881,6 +896,8 @@ def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 
             else:
                 new_ph = fresh
                 done = (res < FIXED_SWEEPS_STOP) | (count >= max_sweeps)
+            if force_sweeps is not None:
+                done = count >= max_sweeps
             return (count, new_ph, fi, fc, ys, res, done, steps + n_steps, bad | failed)
 
         n = node_s.shape[0]
@@ -896,7 +913,7 @@ def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 
         count, node_ph, node_i, node_cool, ys, res, _, steps, bad = out
         return ys[-1], (ys, node_ph, node_i, node_cool, count, res, steps, bad)
 
-    segs = (a["durations"], a["node_s"], a["node_tc"], a["knot_s"], a["knot_tc"])
+    segs = (a["durations"], a["node_s"], a["node_tc"], a["knot_s"], a["knot_tc"], a["label_nudge"])
     _, (ys, ph, ionic, cool, count, res, steps, bad) = jax.lax.scan(segment, y0, segs)
     return SulfurRun(ys=ys, ph=ph, ionic=ionic, ph_cool=cool, sweeps=count, residual=res, num_steps=steps,
                      failed=bad, sid=sid)
