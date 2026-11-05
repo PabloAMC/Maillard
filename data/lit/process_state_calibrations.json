@@ -277,41 +277,6 @@
       "comment": "Use as a process-state calibration for fermentation-mediated donor release rather than as a direct flavor benchmark."
     },
     {
-      "id": "hrncirik_2014_coconut_oil_thermal_profile",
-      "kind": "lipid_co_matrix_thermal_profile",
-      "protein_type": "plant_protein_generic",
-      "source_citation": "Hrncirik & Zeelenberg (2014)",
-      "doi": "10.1007/s11746-013-2401-2",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "coconut oil thermal model",
-        "process_state": "heated_matrix",
-        "temperature_variable": true,
-        "comparative_reference": "pufa_rich_oils"
-      },
-      "numeric_anchors": {
-        "delta_decalactone_oav_reported": true,
-        "coconut_oil_relative_thermal_stability_reported": true,
-        "comparative_to_pufa_oils": true
-      },
-      "what_it_supports": [
-        "Coconut-oil thermal stability context for lipid-rich co-matrix calibration",
-        "Bounded lactone support via delta-decalactone odor-activity reporting"
-      ],
-      "what_it_does_not_support": [
-        "Exact volatile concentration closure in a plant-protein matrix",
-        "A full lipid degradation mechanism outside coconut-oil-like systems"
-      ],
-      "comment": "Use as a co-matrix thermal-profile anchor for coconut-oil-rich systems so lipid-rich plant formulations are not forced onto PUFA-heavy oxidation assumptions.",
-      "doi_repair": {
-        "old": "10.1016/j.foodchem.2013.11.082",
-        "new": "10.1007/s11746-013-2401-2",
-        "date": "2026-11-05",
-        "basis": "The old DOI resolves to Mashhadizadeh, Amoli-Diva, Shapouri & Afruzi, solid-phase extraction of trace metals with modified Fe3O4 nanoparticles (Food Chem.; OpenAlex year 2013). The 2026-08-26 repair moved the twin record hrncirik_2014_coconut_oil_thermal_profile in data/lit/benchmark_intake_registry.json to 10.1007/s11746-013-2401-2 and left this one; this propagates it. Crossref: Hrncirik & Zeelenberg, 'Stability of Essential Fatty Acids and Formation of Nutritionally Undesirable Compounds in Baking and Shallow Frying', J. Am. Oil Chem. Soc. 91:591-598 (online 2013-12-27, issue 2014). Triage: results/validation/literature_metadata_triage_2026-11-05.md.",
-        "content_caveat": "The repaired DOI names the paper the citation names, NOT a source for this record's content: the paper's abstract (OpenAlex) studies sunflower oil, rapeseed oil, margarines and butter in sponge cake and shallow-fried potatoes (essential fatty acids, trans fatty acids, polymerised TAG); it names no coconut oil and no delta-decalactone. No numeric value in this record was changed; whether to withdraw it is an owner decision listed in the triage."
-      }
-    },
-    {
       "id": "wageningen_ref9_hme_rework_hydration_collapse",
       "kind": "hme_rework_hydration_state",
       "protein_type": "plant_protein_generic",

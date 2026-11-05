@@ -592,14 +592,14 @@
         "08_off_note_chemistry.md"
       ],
       "descriptions": [
-        "PubMed PMID:35749878 \u2014 saponin dose\u2013acrylamide relationship; pyrazine skew >60%; DSC melting point shift \u22126\u00b0C; LOQ 10 \u00b5g/kg."
+        "PubMed PMID:35749878 \u2014 saponin and acrylamide in an asparagine\u2013glucose Maillard reaction."
       ],
       "occurrences": [
         {
           "file": "08_off_note_chemistry.md",
           "line": 706,
-          "description": "PubMed PMID:35749878 \u2014 saponin dose\u2013acrylamide relationship; pyrazine skew >60%; DSC melting point shift \u22126\u00b0C; LOQ 10 \u00b5g/kg.",
-          "raw_line": "6. `Kocada\u011fl\u0131 & G\u00f6kmen (2016)` \u2014 PubMed PMID:35749878 \u2014 saponin dose\u2013acrylamide relationship; pyrazine skew >60%; DSC melting point shift \u22126\u00b0C; LOQ 10 \u00b5g/kg. 7/8."
+          "description": "PubMed PMID:35749878 \u2014 saponin and acrylamide in an asparagine\u2013glucose Maillard reaction.",
+          "raw_line": "6. `Kocada\u011fl\u0131 & G\u00f6kmen (2016)` \u2014 PubMed PMID:35749878 \u2014 saponin and acrylamide in an asparagine\u2013glucose Maillard reaction. 7/8."
         }
       ],
       "registry_id": null,
@@ -618,7 +618,18 @@
         "new_field": "verified_citation",
         "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
       },
-      "verified_citation": "Kaspchak, Toci, Menezes, Igarashi-Mafra & Mafra (2022), Food Chem. 394:133518"
+      "verified_citation": "Kaspchak, Toci, Menezes, Igarashi-Mafra & Mafra (2022), Food Chem. 394:133518",
+      "value_withdrawal": {
+        "date": "2026-11-05",
+        "rule": "owner 2026-11-02: a value that is not in the cited paper is deleted, the citation is closed, the real values go to the ledger",
+        "withdrawn": [
+          "saponin dose\u2013acrylamide relationship",
+          "pyrazine skew >60%",
+          "DSC melting point shift \u22126\u00b0C",
+          "LOQ 10 \u00b5g/kg"
+        ],
+        "basis": "The PDF of Kaspchak, Toci, Menezes, Igarashi-Mafra & Mafra (2022), Food Chem. 394:133518 is NOT held; checked against its abstract (Europe PMC, PMID 35749878, read 2026-11-05). The abstract reports 0-1 mM antinutrient, 3-30 min at 150 C, more melanoidins, acrylamide INCREASED with saponin and phytic acid, volatiles mainly pyrazines (>50% of the profile, similar among samples), and that saponin and phytic acid changed the thermal behaviour (DSC) of asparagine and glucose. It gives no LOD/LOQ, no melting-point shift in C, no >60% pyrazine figure and no dose-response. Not in the abstract and unchecked against the full text, or contradicted by it (>60% against >50%), so withdrawn as unchecked values (the 2026-10-27 precedent). The side-layer payload kocadagli_2016_saponin_acrylamide_modifier (data/lit/safety_reference_payloads.json) that carried them was deleted. No ledger entry: an abstract is not a table read from the PDF (tasks/lessons.md, 2026-09-14). Both citation strings are closed in benchmark_intake_registry.json. The raw_line is redacted the same way; the digest line is 08_off_note_chemistry.md line 706. Triage: results/validation/literature_metadata_triage_2026-11-05.md (e4)."
+      }
     },
     {
       "citation": "Lee, Jo & Kim (1998)",
@@ -3741,14 +3752,14 @@
         "05_glutathione_peptides.md"
       ],
       "descriptions": [
-        "Food Chem 130:316 \u2014 GSH+xylose vs. free Cys+xylose; MFT 2.25\u00d7, bis(furyl)disulfide 4.4\u00d7; CAMOLA; SIDA."
+        "Food Chem 130:316 \u2014 GSH+xylose vs. free Cys+xylose; CAMOLA."
       ],
       "occurrences": [
         {
           "file": "05_glutathione_peptides.md",
           "line": 521,
-          "description": "Food Chem 130:316 \u2014 GSH+xylose vs. free Cys+xylose; MFT 2.25\u00d7, bis(furyl)disulfide 4.4\u00d7; CAMOLA; SIDA.",
-          "raw_line": "1. `Wang, Z. et al. (2012)` \u2014 Food Chem 130:316 \u2014 GSH+xylose vs. free Cys+xylose; MFT 2.25\u00d7, bis(furyl)disulfide 4.4\u00d7; CAMOLA; SIDA. 8/8."
+          "description": "Food Chem 130:316 \u2014 GSH+xylose vs. free Cys+xylose; CAMOLA.",
+          "raw_line": "1. `Wang, Z. et al. (2012)` \u2014 Food Chem 130:316 \u2014 GSH+xylose vs. free Cys+xylose; CAMOLA. 8/8."
         }
       ],
       "registry_id": "wang_2012_gsh_xylose_sulfur_uplift",
@@ -3774,7 +3785,18 @@
         "new_field": "verified_citation",
         "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
       },
-      "verified_citation": "Wang, Yang & Song (2012), Food Chem. 131:280-285"
+      "verified_citation": "Wang, Yang & Song (2012), Food Chem. 131:280-285",
+      "value_withdrawal": {
+        "date": "2026-11-05",
+        "rule": "owner 2026-11-02: a value that is not in the cited paper is deleted, the citation is closed, the real values go to the ledger",
+        "withdrawn": [
+          "MFT 2.25\u00d7",
+          "bis(furyl)disulfide 4.4\u00d7",
+          "SIDA"
+        ],
+        "basis": "Read against data/articles/wang2012.pdf (Wang, Yang & Song 2012, Food Chem. 131:280), Table 2, by eye. 2-Methyl-3-furanthiol, relative concentration: A (GSH) 0.021, B (Glu+Cys+Gly) 0.082, C (Cys+Gly) 0.118, D (Glu+Cys-Gly) 0.179, E (Cys-Gly) 0.034; no pot pair gives 2.25, and GSH against free Cys (A/B) is 0.26, the opposite direction to an uplift. No bis(furyl) disulfide is in Table 2 (the only disulfide is dimethyl disulphide), so no 4.4\u00d7 exists. Quantification uses one internal standard (2-methyl-3-heptanone, sec. 2.3): no stable-isotope dilution; the [13C5]-xylose is for CAMOLA (Table 3). Kept: GSH + xylose against cysteine-bearing pots and CAMOLA are the paper's design. The paper's real values are already in the measurement ledger from the PDF (sulfur.yml wang2012_table2_gsh_cys_cysgly_xylose_thiamine_volatiles, wang2012_table3_camola_xylose_isotopomers, wang2012_table4_cysgly_diketopiperazine; lipid.yml wang2012_table2_lipid_type_volatiles_no_lipid). The raw_line is redacted the same way; the digest line is 05_glutathione_peptides.md line 521. The scraped citation is closed in benchmark_intake_registry.json closed_citations. Triage: results/validation/literature_metadata_triage_2026-11-05.md.",
+        "not_changed": "status RUNTIME_BOUND and registry_id are stale (the registry_id names no record; triage a1) and were left as found"
+      }
     },
     {
       "citation": "Yeo & Mottram (2023)",
