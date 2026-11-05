@@ -1,0 +1,33 @@
+# Maillard JAX bake-off environment (plan W4 step H2, pulled forward; 2026-11-04).
+#
+# A SEPARATE env, `maillard-jax`: environment.yml's package set plus JAX (CPU, float64) and
+# diffrax / equinox / optimistix. It backs ONLY results/validation/jax_bakeoff_sulfur_lane.* and
+# src/kinetic_core_jax/. The core `maillard` env, whose package set backs every other number in
+# results/validation/, is not touched. Create with
+#     mamba env create -f environment-jax.yml     (or: conda env create -f environment-jax.yml)
+# and run as the native backend does:  source <conda.sh>; conda activate maillard-jax; ...
+name: maillard-jax
+channels:
+  - conda-forge
+dependencies:
+  # --- environment.yml, verbatim ---
+  - python=3.12
+  - pip
+  - setuptools
+  - pytest
+  - coverage
+  - numpy>=2.0
+  - scipy
+  - numba
+  - matplotlib
+  - networkx
+  - pyyaml
+  - jsonschema
+  - rdkit
+  # --- the bake-off's additions ---
+  - jax
+  - jaxlib     # CPU build
+  - pip:
+      - diffrax
+      - equinox
+      - optimistix

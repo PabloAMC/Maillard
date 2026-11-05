@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **914**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **917**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -67,6 +67,7 @@ Tracked files: **914**. Local-only (gitignored): scratch runs under `results/qui
 | `gap_heatmap.png` | Heat map of the experiment-value ranking (`generate_gap_heatmap.py`). |
 | `holdout_frozen/` (2 files) | Hong 2020 hold-out rows frozen before B4; read by the B4 fit generator and `parameters_matrix.py`. |
 | `inline_coupling_panel_diff.json` | C5: every panel row under the inline pH coupling against the node fixed point (max 0.005 dex). |
+| `jax_bakeoff_sulfur_lane*` (3): `jax_bakeoff_sulfur_lane.json`, `jax_bakeoff_sulfur_lane.md`, `jax_bakeoff_sulfur_lane_reference.json` | Plan W4 step H2, pulled forward (2026-11-04): the JAX bake-off of the sulfur lane. The lane's rate laws, pH factors and inline charge balance ported to JAX (`src/kinetic_core_jax/`, separate `maillard-jax` env, environment-jax.yml) and integrated with diffrax on Schieberle 2000's 100 C pot at the R3En optimum: trajectory match, exact gradients (forward mode, discrete and continuous adjoints) against finite differences, timings against the engine's finite-difference Jacobian (provisional, with machine load), stiff corners, and the recommendation for A2 + H3. `_reference.json` holds the core engine's numbers (core env, `build_jax_bakeoff_reference.py`); the rest is written by `build_jax_bakeoff.py`. No shipped number moves. |
 | `key_value_trace_report.md` | Where every key numeric value in the core comes from (`scripts/trace_key_values.py`). Read by people. |
 | `kinetic_core_*_submodel_fit_*` (12): `kinetic_core_deoxyosone_submodel_fit_A2.json`, `kinetic_core_deoxyosone_submodel_fit_A2.md`, `kinetic_core_deoxyosone_submodel_fit_A3.json`, `kinetic_core_deoxyosone_submodel_fit_A3.md` … | A sub-model's fit arm (pre-registered in its prereg): constants with Laplace sigmas and identification, two starts, raw residuals per data set against the declared tolerances, leave-one-laboratory (or paper)-out, diagnostics. Written by `scripts/generators/fit_ph_acid_submodel.py --arm <A|B|C>` and `scripts/generators/fit_deoxyosone_submodel.py --arm <A1-A4>`; `_superseded_*` keeps a run an amendment replaced. |
 | `kinetic_core_*_submodel_prereg.md` (4): `kinetic_core_deoxyosone_submodel_prereg.md`, `kinetic_core_ph_acid_submodel_prereg.md`, `kinetic_core_route_submodel_prereg.md`, `kinetic_core_thiol_submodel_prereg.md` | A sub-model's pre-registration (strategy 2026-10-29, Phase 2; docs/guides/OPERATING_PROCEDURE.md): frame, data, cheap probe, design, review, amendments, written before its fit. Sub-models: ph_acid (1), route (2), deoxyosone (3), thiol (4). |
