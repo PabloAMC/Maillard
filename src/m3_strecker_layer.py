@@ -1156,6 +1156,64 @@ def u3_unit(y_lin: np.ndarray, censor: float = U3_CENSOR) -> Unit:
                 log_floor=np.full(len(lay), math.log10(censor)), role="claim")
 
 
+def _u3_cols(arm: str, sp: str) -> List[int]:
+    return [k for k, (a, s, _) in enumerate(u3_layout()) if a == arm and s == sp]
+
+
+def u3a_points(u3_points: np.ndarray, u4_points: np.ndarray) -> np.ndarray:
+    """U3a's points (n, 6): the argon arm's trapped 1-DG log yields at the 5 times, then Table 2's argon fed PA as
+    a log yield per mol ARP (log10 mM - 2: 1 umol/mmol = 0.1 mM at 100 mM charged)."""
+    return np.concatenate([np.atleast_2d(u3_points)[:, _u3_cols("argon", "DG1")],
+                           np.atleast_2d(u4_points)[:, [0]] - 2.0], axis=1)
+
+
+def u3b_points(u3_points: np.ndarray) -> np.ndarray:
+    """U3b's points (n, 10): the air + Cu arm's trapped glucosone, then its Phe liberated, log yields at 5 times."""
+    u = np.atleast_2d(u3_points)
+    return np.concatenate([u[:, _u3_cols("air_cu25", "G")], u[:, _u3_cols("air_cu25", "PHE")]], axis=1)
+
+
+def u3a_unit(y_lin_u3: np.ndarray, pa_argon_mM: float, pa_err_dex: float, censor: float = U3_CENSOR) -> Unit:
+    """U3a (prereg sec. 6, v2.1 amendment): the argon arm's trapped 1-DG yield against the argon fed PA (Table 2,
+    100 C): log10 y_DG1(t) - log10 PA_argon, a cross-pot ratio. Free of the Cu law. Noise: U3's read error on the
+    1-DG points, Table 2's print error and s_rep on PA; one run offset per pot (the trapped arm's and the Table 2
+    vial's: they do not cancel across pots, so the basis is 'contrast'); the 1-DG calibration coordinate (0.20 dex,
+    form 0.30); omega per point through the shared-reference design (2 omega^2 per value). A 1-DG point below the
+    axis resolution is left-censored."""
+    y_lin_u3 = np.asarray(y_lin_u3, float)
+    dg = y_lin_u3[_u3_cols("argon", "DG1")]
+    cens = dg < censor
+    ldg = np.log10(np.where(cens, censor, dg))
+    lpa = math.log10(pa_argon_mM) - 2.0
+    sd = np.concatenate([np.sqrt(U3_READ_DEX ** 2 + (U3_READ_ABS / np.maximum(dg, censor) / math.log(10.0)) ** 2),
+                         [math.hypot(pa_err_dex, S_REP_DEX)]])
+    a = _ratio_design(6, 5, range(5))
+    return Unit("U3a", "contrast", ldg - lpa, sd, a, run_offset_dex=SIGMA_RUN_DEX,
+                run_groups=np.array([0] * 5 + [1]), cal_groups=np.array([0] * 5 + [1]),
+                cal_sd=np.array([U3_CAL_SD["DG1"], 0.0]), censored=cens,
+                log_floor=np.full(5, math.log10(censor)) - lpa, role="claim", c=2.0)
+
+
+def u3b_unit(y_lin_u3: np.ndarray, censor: float = U3_CENSOR) -> Unit:
+    """U3b (prereg sec. 6, v2.1 amendment): glucosone trapped per Phe liberated within Fig. 3 (air + Cu): log10
+    y_G(t) - log10 y_Phe(t), a within-run ratio (the run offset cancels). Free of the Cu law's level. Noise: U3's
+    read errors, the glucosone (0.10) and Phe (0.05) calibration coordinates (different analytes: they do not
+    cancel), omega per point (2 omega^2 per value). A glucosone point below the axis resolution is left-censored."""
+    y_lin_u3 = np.asarray(y_lin_u3, float)
+    g = y_lin_u3[_u3_cols("air_cu25", "G")]
+    ph = np.maximum(y_lin_u3[_u3_cols("air_cu25", "PHE")], censor)
+    cens = g < censor
+    lg_ = np.log10(np.where(cens, censor, g))
+    lph = np.log10(ph)
+    sd = np.sqrt(U3_READ_DEX ** 2 + (U3_READ_ABS / np.concatenate([np.maximum(g, censor), ph]) / math.log(10.0)) ** 2)
+    a = np.zeros((5, 10))
+    for i in range(5):
+        a[i, i], a[i, 5 + i] = 1.0, -1.0
+    return Unit("U3b", "ratio", lg_ - lph, sd, a, cal_groups=np.array([0] * 5 + [1] * 5),
+                cal_sd=np.array([U3_CAL_SD["G"], U3_CAL_SD["PHE"]]), censored=cens,
+                log_floor=math.log10(censor) - lph, role="claim", c=2.0)
+
+
 def unit_covariance(unit: Unit, form: Form = PRIMARY, measurement_only: bool = False) -> np.ndarray:
     """Sigma_u in dex^2 on the unit's values: A [diag(sd^2 (+ between-points sigma_run^2)) + omega^2 R] A^T, plus the
     run offset (absolute bases only, per run group) and the shared calibration offsets. omega's within-pot
@@ -1172,7 +1230,7 @@ def unit_covariance(unit: Unit, form: Form = PRIMARY, measurement_only: bool = F
         r = (1.0 - form.rho) * np.eye(m) + form.rho * np.ones((m, m))
         cov_p = cov_p + om ** 2 * r
     if unit.run_offset_dex:
-        if unit.value_basis != "absolute":
+        if unit.value_basis not in ("absolute", "contrast"):     # a cross-pot contrast keeps each pot's offset
             raise MeasurementModelRefusal(f"{unit.name}: a run offset on a {unit.value_basis!r} basis cancels")
         grp = unit.run_groups if unit.run_groups is not None else np.zeros(m, int)
         cov_p = cov_p + unit.run_offset_dex ** 2 * (grp[:, None] == grp[None, :])
@@ -1180,6 +1238,8 @@ def unit_covariance(unit: Unit, form: Form = PRIMARY, measurement_only: bool = F
         sdc = unit.cal_sd.copy()
         if unit.name == "U3":
             sdc[U3_SPECIES.index("DG1")] = form.dg1_cal_sd
+        elif unit.name == "U3a":
+            sdc[0] = form.dg1_cal_sd
         cg = unit.cal_groups
         cov_p = cov_p + (sdc[cg][:, None] * sdc[cg][None, :]) * (cg[:, None] == cg[None, :])
     cov = a @ cov_p @ a.T
@@ -1313,6 +1373,10 @@ def points_for(unit: str, ev: Evaluation) -> np.ndarray:
         return pr["T1"]
     if unit == "U3":
         return np.log10(np.maximum(pr["U3_lin"], 1e-300))
+    if unit == "U3a":
+        return u3a_points(np.log10(np.maximum(pr["U3_lin"], 1e-300)), pr["U4"])
+    if unit == "U3b":
+        return u3b_points(np.log10(np.maximum(pr["U3_lin"], 1e-300)))
     if unit in ("U5a", "U5b"):
         times = FIG2_T if unit == "U5a" else FIG1_T
         cols = [GLC_T.index(t) for t in times]

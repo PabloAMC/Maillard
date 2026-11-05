@@ -213,6 +213,39 @@ def test_u3_unit_censors_at_the_axis_resolution_and_the_censored_density_is_a_pr
     assert ll[1] > ll[0]
 
 
+def test_u3a_and_u3b_units_follow_the_amendment():
+    y = np.linspace(0.01, 0.6, 40)
+    lay = L.u3_layout()
+    ua = L.u3a_unit(y, 0.06, 0.03)
+    dg = [k for k, (a, s, _) in enumerate(lay) if a == "argon" and s == "DG1"]
+    assert np.allclose(ua.y, np.log10(y[dg]) - (math.log10(0.06) - 2.0))
+    assert ua.value_basis == "contrast" and ua.design.shape == (5, 6)
+    cov = L.unit_covariance(ua)
+    om2 = L.OMEGA_DEX ** 2
+    # off-diagonal: the shared PA point (omega^2 + its sd^2), both pots' run offsets, the 1-DG calibration
+    assert cov[0, 1] == pytest.approx(om2 + ua.point_sd[5] ** 2 + 2 * L.SIGMA_RUN_DEX ** 2 + 0.20 ** 2)
+    assert L.unit_covariance(ua, L.Form(dg1_cal_sd=0.30))[0, 1] - cov[0, 1] == pytest.approx(0.30 ** 2 - 0.20 ** 2)
+    ub = L.u3b_unit(y)
+    g = [k for k, (a, s, _) in enumerate(lay) if a == "air_cu25" and s == "G"]
+    ph = [k for k, (a, s, _) in enumerate(lay) if a == "air_cu25" and s == "PHE"]
+    assert np.allclose(ub.y, np.log10(y[g]) - np.log10(y[ph]))
+    cb = L.unit_covariance(ub)
+    assert cb[0, 1] == pytest.approx(0.10 ** 2 + 0.05 ** 2)           # the two analytes' calibrations; no run offset
+    pts = np.log10(np.tile(y, (2, 1)))
+    u4 = np.zeros((2, 20))
+    u4[:, 0] = math.log10(0.06)
+    assert np.allclose(L.unit_loglik(ua, L.u3a_points(pts, u4)), L.unit_loglik(ua, L.u3a_points(pts, u4))[0])
+    yc = y.copy()
+    yc[g[0]] = 0.001
+    assert L.u3b_unit(yc).censored.sum() == 1
+
+
+def test_smc_recovers_a_32_dim_gaussian_where_reweighting_fails():
+    out = G.v_smc_gaussian_32(np.random.default_rng(3), n=512, k=4)
+    assert not out["reweighting_8192"]["resolved"]
+    assert out["smc"]["resolved"] and out["pass"], out
+
+
 def test_uarp_likelihood_rises_with_the_allowed_decay(data):
     y = L.arp_interval_measured(data)
     c_lo = np.zeros((1, 4)) + 0.0

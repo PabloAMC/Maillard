@@ -1,7 +1,8 @@
 # M3 pre-registration: the Strecker-aldehyde layer. One shared ARP-Phe decay and two routes (phase 1), then the layer fed from the network (phase 2)
 
-**Status: v2 DRAFT; freezes after its power check, before the keyed Figs. 2 - 3 are committed.** Nothing has been
-built, screened, fitted or scored. No engine and no layer was run to write this file.
+**Status: v2.1 DRAFT (amendment of 2026-11-05, sec. 22, applied before its power check); freezes after that power
+check, before the keyed Figs. 2 - 3 are committed.** The v2 text below was written before any build; the v2 build,
+screen and power records and the reason for v2.1 are in sec. 22. Nothing decisive has been fitted or scored.
 
 - **What v2 is.** It answers an independent design review of v1 (a66fe933), which found MORE FIXES and asked for no
   redesign. The coordinator's decisions are applied (sec. 21).
@@ -827,3 +828,78 @@ the first number exists)*
   briefed. It runs at build, before the freeze and before the keyed commit (sec. 12.1).
 - **The acid-load numbers were not computed by the layer.** They come from a standalone Henderson-Hasselbalch script,
   not the layer's own pH routine; V-acid checks the two against each other at build.
+
+## 22. Amendment v2.1 (2026-11-05): U3a / U3b and a density estimator that resolves at full dimension
+
+**Authority and timing.** A pre-freeze design amendment, decided by the coordinator on 2026-11-05 (nothing is frozen;
+no decisive datum has been read). It is committed BEFORE the power check it governs. **No hofmann2000b Fig. 2 - 3 data
+were read**: the keyed file is not committed, the keying files and branch were not opened, and the trapped pot has
+run only on synthetic inputs.
+
+**Why (the v2 build records, commit 5a6a30aa).**
+- `kinetic_core_m3_phase1_checks`: the Student-t PSIS pilot at full dimension (U3 under R2, 32 coordinates,
+  synthetic U3) did not resolve (k-hat 2.5, ESS 1.2 at S = 4 096; no mode search converged in 300 evaluations).
+- `kinetic_core_m3_phase1_power`: under the "unresolved reads as a tie" rule, every contrast had power 0 and was
+  demoted; not one U3 density was resolved by reweighting ~1 000 feasible draws per rival. Ignoring that rule, U3
+  alone separated at low power (credit R1 0.33 vs 0.03 false; credit R2 0.39 vs 0.05). Sec. 12.1's fallback
+  ("if U3 cannot separate, U3a and U3b are added before the freeze") is therefore triggered.
+- A diagnosis on those draw sets: the fed conditioning keeps an ESS of 40 - 60 % of the set; U3's 40 values cut it to
+  2.6 - 62; one arm-species slice of 5 values keeps 40 - 620. The 40-value joint, not the fed block, is the obstacle.
+
+**A1. U3a and U3b (sec. 6's rows, made concrete; free of the Cu law).**
+- **U3a**: the argon arm's trapped 1-DG yield against the argon fed PA of Table 2 (100 C):
+  log10 y_DG1(t) - log10 (PA_argon / 100 mM), t = 20 / 40 / 80 / 160 / 320 min. Basis: a cross-pot contrast (each
+  pot keeps its sigma_run = 0.075 dex offset: the trapped arm's and the Table 2 vial's). Noise: U3's read error on
+  the 1-DG points; Table 2's print error and s_rep on PA; the 1-DG calibration coordinate N(0, 0.20) (form 0.30);
+  omega per point through the shared-reference design (2 omega^2 per value). A 1-DG point below the axis resolution
+  is left-censored.
+- **U3b**: glucosone trapped per Phe liberated within Fig. 3 (air + Cu 25 mM): log10 y_G(t) - log10 y_Phe(t), the
+  same times. Basis: within-run ratio (the run offset cancels). Noise: the read errors, the glucosone N(0, 0.10) and
+  Phe N(0, 0.05) calibration coordinates (different analytes, they do not cancel), 2 omega^2 per value. A glucosone
+  point below the axis resolution is left-censored.
+- Each gets its own synthetic check (sec. 12.1's design: each alone, the route rule, R = 200 per truth, primary and
+  Cu-law forms in required agreement, the binomial rule of sec. 12.2).
+
+**A2. The route contrast (sec. 10.1).** Claim units: U3, U3a, U3b, U1e, U4. **The primary claim unit is the {U3a, U3b}
+block** (summed, its own tie band; conditioned on U4, U1e, U1l). U3 stays a claim unit and is read on its own; no
+claim unit may favour the other side. Reason: a fallback that cannot carry the primary is vacuous. U3a and U3b use
+disjoint data, so they sum. U3 overlaps both, so it is never summed with them. The literal v2 primary (U3) is
+reported beside it and not used. Guards, Holm, adequacy, required agreement, nulls and outcome rows: unchanged. The
+transfer and decay-law contrasts are unchanged. The decay law keeps U3 with the pH-drift form.
+
+**A3. The density estimator (replaces sec. 9.1's Student-t PSIS).** Per unit density lppd(u | conditioning):
+- (i) Reweighting of the fed-conditioned draw set (scrambled-Sobol band-prior draws, feasible under the
+  calibrations), accepted under sec. 9.1's rule (PSIS k-hat < 0.7, ESS >= 100).
+- (ii) If (i) does not resolve: adaptive-tempering sequential Monte Carlo from the conditioned posterior.
+  - The particles come from sampling-importance-resampling the draw set by its conditioning weights.
+  - The targets are p(theta | cond) L_u^beta, with beta chosen so that each step's incremental-weight ESS is 0.5 N.
+  - The resampling is systematic.
+  - Each step makes two independence Metropolis-Hastings moves in logit space. The proposal is a Student-t (5 df)
+    fitted to the particles, covariance x 1.5. A random walk mixes in O(d) moves; the independence kernel does not.
+  - N = 256 particles. k = 2 independent replicates: lppd = log of their mean Z, the stated error is the replicates'
+    SE.
+  - Resolved iff, in every replicate, every step's incremental weights have PSIS k-hat < 0.7, every step's ESS is
+    >= 100, and the last moves' acceptance is >= 0.05.
+- Otherwise the density reads **"not resolved" -> a tie (the rule is unchanged)**.
+- Gauss-Hermite on <= 2 coordinates is kept as the fallback, now in logit space (V-density).
+- **Validation before use** (the checks record): (a) V-SMC against the exact 41 x 41 grid on the two-coordinate R3
+  toy; (b) V-SMC on a synthetic 32-dimension case with a known answer, where reweighting fails. If either fails, A3 is
+  not used, and the decisive densities stay as v2.
+
+**A4. The power check (sec. 12) under v2.1.**
+- Draw sets are enlarged to 4 096 feasible draws per rival and form, and to 2 048 for the truths.
+- Densities use estimator (i) only. (ii) is not run per synthetic set: its measured cost per density, in the checks
+  record, makes R = 200 unaffordable. An unresolved density therefore stays a tie in the power check, which makes the
+  power conservative.
+- R = 200 per truth; 40 tie redraws per unit and set; the forms are unchanged (primary, o_Ar 0.1, Cu law, 20 mL).
+- A set with no feasible draw by 12 288 draws stops there (that form makes the rival's calibration infeasible).
+
+**A5. Compute.** The PSIS plan of sec. 15 is re-estimated from the SMC pilot (checks record: R2, R3, R4 at full
+dimension), which also gives the per-density cost behind A4.
+
+**A6. An open diagnostic, not a unit.** In a 64-draw smoke run, Table 2's argon PA + PAA was predicted at about 5x the
+measured 0.09 mM under R1 and R2. The checks record prints its quantiles per rival. No band, unit or rule changes for
+it.
+
+**Not changed:** every band, start, form, unit other than U3a / U3b, the screen and its kill rule, the tie rule, the
+adequacy gate, Holm, required agreement, the outcome rows, the blinding (sec. 7) and the freeze order (sec. 13).

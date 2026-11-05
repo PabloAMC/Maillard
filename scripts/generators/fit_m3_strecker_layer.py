@@ -62,7 +62,9 @@ Z975 = 1.959963984540054
 FED_ORDER = ("U4", "U1e", "U1l", "U3")
 GLC_ORDER = ("U5a", "U5b", "UARP")
 CONTRASTS = {
-    "route": {"a": "R1", "b": "R2", "claim": ("U3", "U1e", "U4"), "primary": "U3", "guards": ("U1l", "GT3")},
+    # v2.1 amendment: U3a / U3b added; the route primary is the {U3a, U3b} block (U3 stays a claim unit)
+    "route": {"a": "R1", "b": "R2", "claim": ("U3", "U3a", "U3b", "U1e", "U4"), "primary": "U3a+U3b",
+              "guards": ("U1l", "GT3")},
     "transfer": {"a": "R1", "b": "R3", "claim": ("U5a", "U5b", "UARP"), "primary": "block",
                  "guards": ("U1e", "U1l", "U4", "GT3")},
     "decay_law": {"a": "R4", "b": "R1", "claim": ("U3", "U5a", "U5b", "UARP"), "primary": "block",
@@ -211,7 +213,7 @@ class DrawSet:
         return self.u.shape[0]
 
 
-UNIT_NAMES = ("U4", "U1e", "U1l", "U3", "U5a", "U5b", "U5a_PA_shape", "U5b_PA_shape", "GT3")
+UNIT_NAMES = ("U4", "U1e", "U1l", "U3", "U3a", "U3b", "U5a", "U5b", "U5a_PA_shape", "U5b_PA_shape", "GT3")
 
 
 def cached_draw_set(cache: Optional[Path], rival: str, form: L.Form, data: L.Data, target_feasible: int, seed: int,
@@ -252,7 +254,8 @@ def make_draw_set(rival: str, form: L.Form, data: L.Data, target_feasible: int, 
     us, ths, diags, cs, cvs, fis, ks = [], [], [], [], [], [], []
     n_drawn, n_feas, n_failed = 0, 0, 0
     reasons: Dict[str, int] = {}
-    while n_drawn < max_draws and (n_feas < target_feasible or n_drawn < min_draws):
+    while n_drawn < max_draws and (n_feas < target_feasible or n_drawn < min_draws) and \
+            not (n_feas == 0 and n_drawn >= 12288):
         if budget is not None:
             budget.check(f"draw set {rival} {form.label()}")
         u = u_all[n_drawn:n_drawn + batch]
@@ -626,6 +629,10 @@ def v_time(data: L.Data, n: int = 256) -> Dict[str, Any]:
         dt = time.time() - t
         out[rival] = {"ms_per_draw": round(1000 * dt / n, 2), "batch": n, "feasible_share": float(ev.feasible.mean()),
                       "failed": ev.failed, "coordinates": len(L.coords(rival))}
+        if rival != "R0":    # OPEN DIAGNOSTIC (not a scored unit): Table 2's argon PA + PAA, predicted vs measured
+            f = ev.feasible
+            out[rival]["t2_argon_total_mM_q10_50_90"] = _q(ev.diag["t2_total"][f, 0])
+            out[rival]["t2_argon_total_measured_mM"] = round(sum(data.arp_t2["argon"]), 3)
     return out
 
 
@@ -786,10 +793,16 @@ def run_checks(args) -> int:
     out["r1_drift_in_0.1M_pots"] = r1_drift_diagnostic(data)
     out["v_density"] = v_density_toy(data, rng)
     out["blind_order_stub"] = blind_order_stub()
-    try:
-        out["psis_pilot"] = psis_pilot(data, rng, budget)
-    except Refusal as e:
-        out["psis_pilot"] = {"refused": str(e)}
+    out["v_smc_grid"] = v_smc_grid(data, rng)
+    out["v_smc_gaussian_32"] = v_smc_gaussian_32(rng)
+    out["smc_pilot"] = {}
+    for rival in ("R2", "R3", "R4"):
+        try:
+            out["smc_pilot"][rival] = smc_pilot(data, rival, rng, budget)
+        except Refusal as e:
+            out["smc_pilot"][rival] = {"refused": str(e)}
+    out["v2_psis_pilot"] = ("superseded (v2.1 amendment): the v2 record at commit 5a6a30aa shows the Student-t PSIS "
+                            "pilot unresolved (R2: k-hat 2.5, ESS 1.2 at S = 4096)")
     out["compute_wall_h"] = round(budget.elapsed_h(), 3)
     out["declared_choices"] = DECLARED
     _record("checks", out, render_checks(out), args.out_dir, layer_inputs())
@@ -831,10 +844,35 @@ def render_checks(o: Dict[str, Any]) -> str:
            f"trapezoid 41x41 {vd['lppd_trapezoid_41x41']}; PSIS {vd['lppd_psis']} (k-hat {vd['k_hat']:.3f}, ESS "
            f"{vd['ess']:.0f}); Gauss-Hermite 20x20 in logit space {vd['lppd_gauss_hermite_20_logit']} (agrees: "
            f"{vd['gh_pass']})", ""]
-    pp = o["psis_pilot"]
-    L_ += ["## One-unit PSIS pilot at full dimension (U3 under R2, synthetic U3)", "", "```", json.dumps(pp, indent=1,
-                                                                                                       default=str),
-           "```", "", "## V-blind (blind-order) stub", "", "```", json.dumps(o["blind_order_stub"], indent=1), "```", "",
+    L_ += ["## Open diagnostic: Table 2's argon PA + PAA (not a scored unit)", "",
+           "| rival | predicted q10 / q50 / q90 (mM) | measured (mM) |", "|---|---|---|"]
+    for r, v in o["v_time"].items():
+        if "t2_argon_total_mM_q10_50_90" in v:
+            L_.append(f"| {r} | {v['t2_argon_total_mM_q10_50_90']} | {v['t2_argon_total_measured_mM']} |")
+    vs, vg = o["v_smc_grid"], o["v_smc_gaussian_32"]
+    L_ += ["", "## v2.1 estimator: adaptive-tempering SMC", "",
+           f"- V-SMC (a), two-coordinate R3 toy against the grid: {'PASS' if vs['pass'] else 'FAIL'} (grid "
+           f"{vs['lppd_grid']}, SMC {vs['smc']['lppd']} +- {vs['smc']['se']}, steps {vs['smc']['steps']}, max k-hat "
+           f"{vs['smc']['max_k_hat']}, resolved {vs['smc']['resolved']})",
+           f"- V-SMC (b), 32-dim Gaussian with a known answer: {'PASS' if vg['pass'] else 'FAIL'} (exact "
+           f"{vg['exact_lppd']}, SMC {vg['smc']['lppd']:.4f} +- {vg['smc']['se_replicates']:.4f} over "
+           f"{vg['replicates']} replicates {vg['smc']['replicates']}, max k-hat {vg['smc']['max_k_hat']:.3f}, min step "
+           f"ESS {vg['smc']['min_ess']:.0f}; plain reweighting of 8 192 draws: {vg['reweighting_8192']})", "",
+           "## SMC pilot at full dimension (U3 | U4, U1e, U1l, synthetic U3)", "",
+           "| rival | coordinates | resolved | lppd +- se | steps | max k-hat | evaluations | wall s | reweighting "
+           "(1 024) | projection 385 cells, h (1 / 4 workers) |", "|---|---|---|---|---|---|---|---|---|---|"]
+    for r, v in o["smc_pilot"].items():
+        if "smc" not in v:
+            L_.append(f"| {r} | refused: {v.get('refused')} | | | | | | | | |")
+            continue
+        sm = v["smc"]
+        L_.append(f"| {r} | {v['dimension']} | {sm['resolved']} ({'; '.join(sm['reasons']) or 'ok'}) | "
+                  f"{sm['lppd']:.2f} +- {sm['se_replicates']:.2f} {sm['replicates']} | {sm['steps']} | "
+                  f"{sm['max_k_hat']:.2f} | {sm['evaluations']} | {v['wall_s']} | "
+                  f"k-hat {v['reweighting_1024']['k_hat']:.2f}, ESS {v['reweighting_1024']['ess']:.1f} | "
+                  f"{v['projection_385_cells_h_one_worker']} / {v['projection_385_cells_h_four_workers']} |")
+    L_ += ["", f"v2 pilot: {o['v2_psis_pilot']}", "",
+           "## V-blind (blind-order) stub", "", "```", json.dumps(o["blind_order_stub"], indent=1), "```", "",
            "## Declared choices where the prereg is silent", ""] + [f"- {d}" for d in o["declared_choices"]]
     L_ += ["", f"Memory at launch: {o['memory']}; compute {o['compute_wall_h']} h wall."]
     return "\n".join(L_)
@@ -1036,55 +1074,73 @@ def binomial_decision(hits: int, false_hits: int, r: int, alpha: float = 0.05) -
             "fisher_p_one_sided": p, "decidable": bool(p < alpha), "low_power": bool(hits / r < 0.5), "R": r}
 
 
-def power_u3(data: L.Data, sets: Mapping[Tuple[str, str], DrawSet], truths: Mapping[str, DrawSet], r: int,
-             rng: np.random.Generator, n_tie: int, budget: Budget) -> Dict[str, Any]:
-    """Sec. 12.1: U3 alone, route rule (R1 vs R2), on SYNTHETIC data at the design times; truths from each rival's
-    prior reweighted by the non-U3 fed units (U4, U1e, U1l; Table 2 is the calibration); scored under the primary
-    and the Cu-law form (required agreement), conditioned on the real non-U3 fed units."""
+def synth_trapped(tset: DrawSet, j: int, data: L.Data, rng: np.random.Generator) -> Dict[str, L.Unit]:
+    """The trapped pot's SYNTHETIC units from one truth (v2.1): U3 (full Sigma_u), and U3a / U3b built from the SAME
+    synthetic trapped data; U3a's Table 2 argon PA is synthetic too (the truth's prediction with print error, s_rep,
+    the vial's run offset and omega)."""
+    f3 = tset.points["U3"][j]
+    u3 = synth_unit(L.u3_unit(10.0 ** f3), f3, rng)
+    y_lin = 10.0 ** u3.y
+    y_lin = np.where(u3.censored, 0.5 * L.U3_CENSOR, y_lin)
+    err = data.arp_t2_err["argon"][0]
+    sd = math.sqrt(err ** 2 + L.S_REP_DEX ** 2 + L.SIGMA_RUN_DEX ** 2 + L.OMEGA_DEX ** 2)
+    pa = 10.0 ** (tset.points["U4"][j][0] + sd * rng.standard_normal())
+    return {"U3": u3, "U3a": L.u3a_unit(y_lin, pa, err), "U3b": L.u3b_unit(y_lin)}
+
+
+TRAPPED_CHECKS = {"U3": ("U3",), "U3a": ("U3a",), "U3b": ("U3b",), "U3a+U3b": ("U3a", "U3b")}
+
+
+def power_trapped(data: L.Data, sets: Mapping[Tuple[str, str], DrawSet], truths: Mapping[str, DrawSet], r: int,
+                  rng: np.random.Generator, n_tie: int, budget: Budget) -> Dict[str, Any]:
+    """Sec. 12.1 and the v2.1 amendment: the trapped pot's units, each ALONE by the route rule (R1 vs R2), and the
+    {U3a, U3b} block (the amended route primary), on SYNTHETIC data at the design times. Truths from each rival's
+    prior reweighted by the non-U3 fed units (U4, U1e, U1l on real data; Table 2 through the calibrations); scored
+    under the primary and the Cu-law form (required agreement), conditioned on the real fed units."""
     obs = real_obs(data)
-    out: Dict[str, Any] = {}
-    readings = {}
+    fed = ("U4", "U1e", "U1l")
+    readings: Dict[str, List[Dict[str, Dict[str, Any]]]] = {}
     for truth in ("R1", "R2"):
         tset = truths[truth]
-        lw = weights_from(tset, ("U4", "U1e", "U1l"), obs, L.PRIMARY, data)
-        picks = sample_truths(tset, lw, r, rng)
+        lw = weights_from(tset, fed, obs, L.PRIMARY, data)
         per = []
-        for i, j in enumerate(picks):
-            budget.check("U3 power")
-            u3 = synth_unit(L.u3_unit(10.0 ** tset.points["U3"][j]), tset.points["U3"][j], rng)
-            o = Obs({**obs.units, "U3": u3}, obs.uarp_y)
-            rec = {}
+        for j in sample_truths(tset, lw, r, rng):
+            budget.check("trapped-pot power")
+            o = Obs({**obs.units, **synth_trapped(tset, j, data, rng)}, obs.uarp_y)
+            rec: Dict[str, Dict[str, Any]] = {}
             for fname in ("primary", "cu_linear"):
-                v = unit_verdict(sets[("R1", fname)], sets[("R2", fname)], "U3", ("U4", "U1e", "U1l"), o, data,
-                                 POWER_FORMS[fname], rng, n_tie)
-                rec[fname] = v
+                a, b = sets[("R1", fname)], sets[("R2", fname)]
+                form = POWER_FORMS[fname]
+                for check, units in TRAPPED_CHECKS.items():
+                    v = (unit_verdict(a, b, units[0], fed, o, data, form, rng, n_tie) if len(units) == 1 else
+                         block_verdict(a, b, units, fed, o, data, form, rng, n_tie))
+                    rec[f"{check}|{fname}"] = v
             per.append(rec)
+            if len(per) % 20 == 0:
+                print(f"trapped power truth {truth}: {len(per)} / {r}, {budget.elapsed_h():.2f} h", flush=True)
         readings[truth] = per
-    for fname_set, label in ((("primary",), "primary_only"), (("primary", "cu_linear"), "primary_and_cu_law")):
-        for psis_rule in (True, False):
-            key = f"{label}{'' if psis_rule else '_ignoring_resolution'}"
-            res = {}
-            for credit in ("a", "b"):
-                def credited(rec):
-                    rs = [_reading(rec[f], psis_rule) for f in fname_set]
-                    return all(x == credit for x in rs)
-                hits = sum(credited(rec) for rec in readings["R1" if credit == "a" else "R2"])
-                false = sum(credited(rec) for rec in readings["R2" if credit == "a" else "R1"])
-                res[f"credit_{'R1' if credit == 'a' else 'R2'}"] = binomial_decision(hits, false, r)
-            out[key] = res
-    out["resolution_rate"] = {t: float(np.mean([rec["primary"]["resolved"] for rec in readings[t]])) for t in readings}
-    out["d_quantiles"] = {t: _q([rec["primary"]["d"] for rec in readings[t]]) for t in readings}
-    out["band_quantiles"] = {t: _q([rec["primary"]["band"] for rec in readings[t]]) for t in readings}
-    out["k_hat_quantiles"] = {t: _q([max(rec["primary"]["k_hat_a"] or 0, rec["primary"]["k_hat_b"] or 0)
-                                     for rec in readings[t]]) for t in readings}
+    out: Dict[str, Any] = {}
+    for check in TRAPPED_CHECKS:
+        res = {}
+        for forms, label in ((("primary",), "primary_only"), (("primary", "cu_linear"), "primary_and_cu_law")):
+            for key, suffix in (("reading", ""), ("reading_raw", "_ignoring_resolution")):
+                for credit, hit, false_t in (("a", "R1", "R2"), ("b", "R2", "R1")):
+                    def credited(rec):
+                        return all(rec[f"{check}|{f}"][key] == credit for f in forms)
+                    res[f"{label}{suffix}|credit_{hit}"] = binomial_decision(
+                        sum(credited(x) for x in readings[hit]), sum(credited(x) for x in readings[false_t]), r)
+        prim = [f"{check}|primary"]
+        out[check] = {"results": res,
+                      "resolution_rate": {t: float(np.mean([x[prim[0]]["resolved"] for x in readings[t]]))
+                                          for t in readings},
+                      "d_quantiles": {t: _q([x[prim[0]]["d"] for x in readings[t]]) for t in readings},
+                      "band_quantiles": {t: _q([x[prim[0]]["band"] for x in readings[t]]) for t in readings},
+                      "decidable_under_the_rule": any(v["decidable"] for k, v in res.items()
+                                                      if k.startswith("primary_and_cu_law|")),
+                      "reaches_power_bar": any(v["decidable"] and not v["low_power"] for k, v in res.items()
+                                               if k.startswith("primary_and_cu_law|"))}
     out["truth_reweighting"] = "U4, U1e, U1l on real data (Table 2 enters through the calibrations); never U3"
     return out
-
-
-def _reading(v: Dict[str, Any], psis_rule: bool) -> str:
-    if psis_rule:
-        return v["reading"]
-    return v["reading_raw"]
 
 
 def power_pairs(data: L.Data, sets: Mapping[Tuple[str, str], DrawSet], truths: Mapping[str, DrawSet], r: int,
@@ -1093,7 +1149,8 @@ def power_pairs(data: L.Data, sets: Mapping[Tuple[str, str], DrawSet], truths: M
     """Sec. 12.2: the three pairs. Synthetic claim units from a truth (truths reweighted by the real units outside the
     pair's claim set); the non-claim conditioning units real, except U3 (synthetic from the same truth: it is blind).
     Scored under the primary and the three forms with precomputed draw sets (o_Ar 0.1, Cu law, 20 mL headspace);
-    the other forms are 'primary-only, optimistic'. Holm's guard step is not simulated (optimistic)."""
+    the other forms are 'primary-only, optimistic'. Holm's guard step is not simulated (optimistic). The route
+    contrast is read with the v2.1 primary (the {U3a, U3b} block) and, beside it, the literal v2 primary (U3)."""
     obs = real_obs(data)
     out: Dict[str, Any] = {}
     pair_sets = {"route": ("R1", "R2"), "transfer": ("R1", "R3"), "decay_law": ("R4", "R1drift")}
@@ -1102,66 +1159,65 @@ def power_pairs(data: L.Data, sets: Mapping[Tuple[str, str], DrawSet], truths: M
         if cname not in contrasts:
             continue
         a_name, b_name = pair_sets[cname]
-        readings: Dict[str, List[Dict[str, str]]] = {}
+        readings: Dict[str, List[Dict[str, Dict[str, str]]]] = {}
         for truth in (a_name, b_name):
             tset = truths[truth]
             lw = weights_from(tset, reweight[cname], obs, L.PRIMARY, data)
-            picks = sample_truths(tset, lw, r, rng)
             per = []
-            for j in picks:
+            for j in sample_truths(tset, lw, r, rng):
                 budget.check(f"power {cname}")
-                o = obs
-                syn_units = dict(o.units)
+                syn = dict(obs.units)
+                syn.update(synth_trapped(tset, j, data, rng))
                 for u in spec["claim"]:
-                    if u in ("U3",):
-                        syn_units[u] = synth_unit(L.u3_unit(10.0 ** tset.points["U3"][j]), tset.points["U3"][j], rng)
-                    elif u != "UARP":
-                        syn_units[u] = synth_unit(o.units[u], tset.points[u][j], rng)
-                if "U3" not in spec["claim"]:
-                    syn_units["U3"] = synth_unit(L.u3_unit(10.0 ** tset.points["U3"][j]), tset.points["U3"][j], rng)
-                uarp_y = synth_uarp(data, tset.k_glc[j], rng) if "UARP" in spec["claim"] else o.uarp_y
-                os_ = Obs(syn_units, uarp_y)
-                rec = {}
-                for fname, form in POWER_FORMS.items():
-                    a, b = sets[(a_name, fname)], sets[(b_name, fname)]
-                    rec[fname] = _contrast_on(cname, spec, a, b, os_, data, form, rng, n_tie)
-                per.append(rec)
+                    if u not in ("U3", "U3a", "U3b", "UARP"):
+                        syn[u] = synth_unit(obs.units[u], tset.points[u][j], rng)
+                uarp_y = synth_uarp(data, tset.k_glc[j], rng) if "UARP" in spec["claim"] else obs.uarp_y
+                os_ = Obs(syn, uarp_y)
+                per.append({fname: _contrast_on(cname, spec, sets[(a_name, fname)], sets[(b_name, fname)], os_, data,
+                                                form, rng, n_tie) for fname, form in POWER_FORMS.items()})
                 if len(per) % 20 == 0:
                     print(f"power {cname} truth {truth}: {len(per)} / {r} sets, {budget.elapsed_h():.2f} h", flush=True)
             readings[truth] = per
+        keys = list(readings[a_name][0]["primary"])
         res = {}
-        for key, suffix in (("rule", ""), ("raw", "|ignoring_resolution")):
+        for key in keys:
+            suffix = {"rule": "", "raw": "|ignoring_resolution", "rule_literal": "|literal_U3_primary",
+                      "raw_literal": "|literal_U3_primary|ignoring_resolution"}[key]
             for label, forms in (("primary_only", ("primary",)),
                                  ("four_forms_required_agreement", tuple(POWER_FORMS))):
                 for credit, truth_hit, truth_false in (("a", a_name, b_name), ("b", b_name, a_name)):
                     hits = sum(all(rec[f][key] == credit for f in forms) for rec in readings[truth_hit])
                     false = sum(all(rec[f][key] == credit for f in forms) for rec in readings[truth_false])
                     res[f"{label}{suffix}|credit_{truth_hit}"] = binomial_decision(hits, false, r)
+
+        def decided(pred):
+            return any(v["decidable"] for k, v in res.items() if k.startswith("four_forms") and pred(k))
+
+        strict = lambda k: "ignoring" not in k and "literal" not in k  # noqa: E731
         out[cname] = {"pair": [a_name, b_name], "claim_units": list(spec["claim"]), "truth_reweighting": reweight[cname],
-                      "results": res,
-                      "decidable_any_direction": any(v["decidable"] for k, v in res.items()
-                                                     if k.startswith("four_forms") and "ignoring" not in k),
-                      "demoted": not any(v["decidable"] for k, v in res.items()
-                                         if k.startswith("four_forms") and "ignoring" not in k),
-                      "decidable_ignoring_resolution": any(v["decidable"] for k, v in res.items()
-                                                           if k.startswith("four_forms") and "ignoring" in k)}
+                      "results": res, "demoted": not decided(strict),
+                      "reaches_power_bar": any(v["decidable"] and not v["low_power"] for k, v in res.items()
+                                               if k.startswith("four_forms") and strict(k)),
+                      "decidable_ignoring_resolution": decided(lambda k: "ignoring" in k and "literal" not in k)}
+        if cname == "route":
+            out[cname]["decidable_literal_U3_primary"] = decided(lambda k: "literal" in k and "ignoring" not in k)
     return out
 
 
 def _contrast_on(cname: str, spec, a: DrawSet, b: DrawSet, obs: Obs, data: L.Data, form: L.Form,
                  rng: np.random.Generator, n_tie: int) -> Dict[str, str]:
     """One synthetic set's contrast credit under one form: with the density-resolution rule ("rule") and ignoring
-    it ("raw", a diagnostic)."""
-    claim = spec["claim"]
+    it ("raw", a diagnostic); the route contrast also under its literal v2 primary (U3)."""
 
-    def both(prim, per):
-        return {"rule": contrast_credit(prim, per), "raw": contrast_credit(prim, per, "reading_raw")}
+    def both(prim, per, tag=""):
+        return {f"rule{tag}": contrast_credit(prim, per), f"raw{tag}": contrast_credit(prim, per, "reading_raw")}
 
-    if cname == "route":
-        cond = {"U4": (), "U1e": ("U4",), "U3": ("U4", "U1e", "U1l")}
-        per = {u: unit_verdict(a, b, u, cond[u], obs, data, form, rng, n_tie) for u in claim}
-        return both(per["U3"], per)
     fed = ("U4", "U1e", "U1l")
+    if cname == "route":
+        cond = {"U4": (), "U1e": ("U4",), "U3": fed, "U3a": fed, "U3b": fed}
+        per = {u: unit_verdict(a, b, u, cond[u], obs, data, form, rng, n_tie) for u in spec["claim"]}
+        block = block_verdict(a, b, ("U3a", "U3b"), fed, obs, data, form, rng, n_tie)
+        return {**both(block, per), **both(per["U3"], per, "_literal")}
     if cname == "decay_law":
         block = ("U3", "U5a", "U5b", "UARP")
         per = {}
@@ -1169,9 +1225,7 @@ def _contrast_on(cname: str, spec, a: DrawSet, b: DrawSet, obs: Obs, data: L.Dat
         for u in block:
             per[u] = unit_verdict(a, b, u, prev, obs, data, form, rng, n_tie)
             prev = prev + (u,)
-        prim = block_verdict(a, b, block, fed, obs, data, form, rng, n_tie)
-        return both(prim, per)
-    # transfer: (F) with U3 in the conditioning, (T) without; required agreement, else "confounded" (none)
+        return both(block_verdict(a, b, block, fed, obs, data, form, rng, n_tie), per)
     sides = []
     for cond0 in (fed + ("U3",), fed):
         per = {}
@@ -1179,47 +1233,71 @@ def _contrast_on(cname: str, spec, a: DrawSet, b: DrawSet, obs: Obs, data: L.Dat
         for u in GLC_ORDER:
             per[u] = unit_verdict(a, b, u, prev, obs, data, form, rng, n_tie)
             prev = prev + (u,)
-        prim = block_verdict(a, b, GLC_ORDER, cond0, obs, data, form, rng, n_tie)
-        sides.append(both(prim, per))
+        sides.append(both(block_verdict(a, b, GLC_ORDER, cond0, obs, data, form, rng, n_tie), per))
     return {k: (sides[0][k] if sides[0][k] == sides[1][k] else "none") for k in ("rule", "raw")}
+
+
+POWER_RIVALS = {"R1": L.PRIMARY, "R2": L.PRIMARY, "R3": L.PRIMARY, "R4": L.PRIMARY,
+                "R1drift": L.Form(ph_drift_trapped=True)}
+
+
+def power_set_specs(args, want: Sequence[str]) -> List[Dict[str, Any]]:
+    """Every draw set the power parts need, with a stable seed (identical across processes: the cache key)."""
+    specs = []
+    for name in want:
+        i = list(POWER_RIVALS).index(name)
+        base = POWER_RIVALS[name]
+        rival = "R1" if name == "R1drift" else name
+        for fname, form in POWER_FORMS.items():
+            k = list(POWER_FORMS).index(fname)
+            specs.append({"key": (name, fname), "rival": rival,
+                          "form": replace(form, ph_drift_trapped=base.ph_drift_trapped),
+                          "target": args.score_feasible, "seed": args.seed + 1000 * i + 10 * k, "keep_k": False})
+        specs.append({"key": (name, "truth"), "rival": rival,
+                      "form": replace(L.PRIMARY, ph_drift_trapped=base.ph_drift_trapped),
+                      "target": args.truth_feasible, "seed": args.seed + 7000 + 100 * i, "keep_k": True})
+    return specs
 
 
 def run_power(args) -> int:
     budget = Budget(args.cap_hours or 6.0)
     mem = memory_guard(not args.no_memory_guard, args.memory_min_free)
     data = L.load_data()
-    rng = np.random.default_rng(args.seed + 1)
     t0 = time.time()
+    part = args.power_part
+    if part == "merge":
+        return merge_power(args, mem)
+    need = {"route": ("R1", "R2"), "transfer": ("R1", "R3"), "decay_law": ("R4", "R1drift")}
+    contrasts = tuple(c for c in args.contrasts.split(",") if c)
+    if part in ("u3", "trapped"):
+        want: Tuple[str, ...] = ("R1", "R2")
+    elif part == "sets":
+        want = tuple(POWER_RIVALS)
+    else:
+        want = tuple(dict.fromkeys((["R1", "R2"] if part == "all" else []) + [r for c in contrasts for r in need[c]]))
+    specs = power_set_specs(args, want)
+    if part == "sets":
+        i_shard, n_shard = (int(x) for x in args.shard.split("/"))
+        specs = specs[i_shard::n_shard]
     sets: Dict[Tuple[str, str], DrawSet] = {}
     truths: Dict[str, DrawSet] = {}
     set_log = {}
-    drift = L.Form(ph_drift_trapped=True)
-    rivals = {"R1": L.PRIMARY, "R2": L.PRIMARY, "R3": L.PRIMARY, "R4": L.PRIMARY, "R1drift": drift}
-    part = args.power_part
-    need = {"route": ("R1", "R2"), "transfer": ("R1", "R3"), "decay_law": ("R4", "R1drift")}
-    want = ("R1", "R2") if part == "u3" else tuple(dict.fromkeys(
-        (["R1", "R2"] if part == "all" else []) + [r for c in args.contrasts.split(",") for r in need[c]]))
-    forms = tuple(POWER_FORMS)          # U3's check uses primary and cu_linear; the pairs all four
-    for name in want:
-        i = list(rivals).index(name)
-        base = rivals[name]
-        rival = "R1" if name == "R1drift" else name
-        for fname in forms:
-            k = list(POWER_FORMS).index(fname)
-            f = replace(POWER_FORMS[fname], ph_drift_trapped=base.ph_drift_trapped)
-            ds = cached_draw_set(args.cache_dir, rival, f, data, args.score_feasible, seed=args.seed + 1000 * i + 10 * k,
-                                 max_draws=args.max_draws,
-                                 budget=budget)
+    for sp in specs:
+        ds = cached_draw_set(args.cache_dir, sp["rival"], sp["form"], data, sp["target"], seed=sp["seed"],
+                             max_draws=args.max_draws, keep_k=sp["keep_k"], budget=budget)
+        name, fname = sp["key"]
+        if fname == "truth":
+            truths[name] = ds
+        else:
             sets[(name, fname)] = ds
-            set_log[f"{name}|{fname}"] = {"feasible": ds.n, "drawn": ds.n_drawn, "failed": ds.n_failed,
-                                          "wall_s": ds.wall_s, "infeasible": ds.reasons}
-            print("set", name, fname, ds.n, "/", ds.n_drawn, "failed", ds.n_failed, f"{ds.wall_s}s", flush=True)
-        tf = replace(L.PRIMARY, ph_drift_trapped=base.ph_drift_trapped)
-        ts = cached_draw_set(args.cache_dir, rival, tf, data, args.truth_feasible, seed=args.seed + 7000 + 100 * i,
-                             budget=budget, keep_k=True, max_draws=args.max_draws)
-        truths[name] = ts
-        set_log[f"{name}|truth"] = {"feasible": ts.n, "drawn": ts.n_drawn, "failed": ts.n_failed, "wall_s": ts.wall_s}
-        print("truth", name, ts.n, "/", ts.n_drawn, flush=True)
+        set_log[f"{name}|{fname}"] = {"feasible": ds.n, "drawn": ds.n_drawn, "failed": ds.n_failed,
+                                      "wall_s": ds.wall_s, "infeasible": ds.reasons}
+        print("set", name, fname, ds.n, "/", ds.n_drawn, "failed", ds.n_failed, f"{ds.wall_s}s", flush=True)
+    if part == "sets":
+        print(f"sets shard {args.shard} done in {time.time() - t0:.0f} s", flush=True)
+        return 0
+    rng = np.random.default_rng(args.seed + 1 + 101 * ("trapped", "pairs", "all", "u3").index(part)
+                                + sum(ord(c) for c in ",".join(contrasts)))
     failed = sum(v["failed"] for v in set_log.values())
     out: Dict[str, Any] = {"memory": mem, "R": args.reps, "tie_redraws": args.tie_redraws, "draw_sets": set_log,
                            "failed_runs_total": failed, "sets_wall_s": round(time.time() - t0, 1)}
@@ -1227,37 +1305,83 @@ def run_power(args) -> int:
         out["refused"] = f"{failed} failed runs in the draw sets: every power result is refused"
     else:
         try:
-            if part in ("u3", "all"):
-                out["u3_synthetic_12_1"] = power_u3(data, sets, truths, args.reps, rng, args.tie_redraws, budget)
-            if part in ("pairs", "all") and args.contrasts:
+            if part in ("u3", "trapped", "all"):
+                out["trapped_12_1_and_v2_1"] = power_trapped(data, sets, truths, args.reps, rng, args.tie_redraws,
+                                                             budget)
+            if part in ("pairs", "all") and contrasts:
                 out["pairs_12_2"] = power_pairs(data, sets, truths, args.reps, rng, args.tie_redraws, budget,
-                                                contrasts=tuple(args.contrasts.split(",")))
+                                                contrasts=contrasts)
         except Refusal as e:
             out["compute_capped"] = str(e)
     out["compute_wall_h"] = round(budget.elapsed_h(), 3)
-    out["approximations"] = [
+    out["approximations"] = POWER_APPROXIMATIONS(args)
+    if args.record_suffix:      # a part: written to the cache dir (scratch) and merged into the record later
+        part_dir = (args.cache_dir or args.out_dir) / "parts"
+        part_dir.mkdir(parents=True, exist_ok=True)
+        (part_dir / f"power_{args.record_suffix}.json").write_text(
+            provenance.dumps_compact(out, default=_jsonable) + "\n")
+        print(f"wrote part {args.record_suffix}", flush=True)
+        return 0
+    _record("power", out, render_power(out), args.out_dir, layer_inputs())
+    return 0
+
+
+def POWER_APPROXIMATIONS(args) -> List[str]:  # noqa: N802
+    return [
         "draw sets are scrambled-Sobol prior draws conditioned on the calibrations (feasible only), reweighted per "
         "synthetic set (sec. 12.2's 'by reweighting'); a density whose PSIS k-hat >= 0.7 or ESS < 100 reads 'not "
-        "resolved' (a tie); results ignoring that rule are reported beside",
+        "resolved' (a tie, unchanged rule); results ignoring that rule are reported beside",
+        f"draw sets enlarged to {args.score_feasible} feasible draws per rival and form ({args.truth_feasible} for the "
+        "truths) under the v2.1 amendment; the SMC fallback (v2.1) is NOT run per synthetic set (its measured cost: "
+        "checks record), so an unresolved density stays a tie here: power is conservative on that account",
         f"tie bands from {args.tie_redraws} measurement-noise redraws per unit and set (the prereg's 4 000 for scoring)",
         "censored U3 values: product of conditional marginals (exact for one); adequacy leaves them out",
         "Holm's guard step is not simulated: power is optimistic on that account",
         "synthetic sets are generated from the truth's primary-form predictions and scored under each form",
         "a rival with no feasible draw under a form (its calibration infeasible there) has lppd -inf: the other side is "
         "read as favoured under that form without its adequacy test (flagged by_infeasibility; optimistic)",
+        "U3a / U3b are built from the same synthetic trapped data as U3; U3a's Table 2 argon PA is synthetic from the "
+        "truth (its print error, s_rep, run offset and omega)",
     ]
-    name = "power" if part != "u3" else "power_u3"
-    if args.record_suffix:
-        name += f"_{args.record_suffix}"
-    _record(name, out, render_power(out), args.out_dir, layer_inputs())
+
+
+def merge_power(args, mem) -> int:
+    """Merge the power parts (written by --record-suffix runs into <cache>/parts) into the one record; refuses if a
+    part refused or lost runs."""
+    part_dir = (args.cache_dir or args.out_dir) / "parts"
+    parts = sorted(part_dir.glob("power_*.json"))
+    if not parts:
+        raise Refusal(f"no power parts under {part_dir}")
+    out: Dict[str, Any] = {"memory": mem, "parts": [p.name for p in parts], "draw_sets": {}, "failed_runs_total": 0,
+                           "compute_wall_h_parts": {}}
+    for p in parts:
+        d = json.loads(p.read_text())
+        out["R"], out["tie_redraws"] = d["R"], d["tie_redraws"]
+        out["draw_sets"].update(d["draw_sets"])
+        out["failed_runs_total"] += d["failed_runs_total"]
+        out["compute_wall_h_parts"][p.stem] = d["compute_wall_h"]
+        out["part_memory"] = {**out.get("part_memory", {}), p.stem: d["memory"]}
+        for k in ("refused", "compute_capped"):
+            if d.get(k):
+                out[k] = f"{out.get(k, '')} {p.stem}: {d[k]}".strip()
+        if "trapped_12_1_and_v2_1" in d:
+            out["trapped_12_1_and_v2_1"] = d["trapped_12_1_and_v2_1"]
+        for c, v in (d.get("pairs_12_2") or {}).items():
+            out.setdefault("pairs_12_2", {})[c] = v
+        out["approximations"] = d["approximations"]
+    if out["failed_runs_total"]:
+        out["refused"] = f"{out['failed_runs_total']} failed runs in the parts: every power result is refused"
+    out["compute_wall_h"] = round(sum(out["compute_wall_h_parts"].values()), 3)
+    _record("power", out, render_power(out), args.out_dir, layer_inputs())
     return 0
 
 
 def render_power(o: Dict[str, Any]) -> str:
-    L_ = ["# M3 phase 1: power checks (sec. 12.1 U3 synthetic; sec. 12.2 three pairs)", "",
+    L_ = ["# M3 phase 1: power checks (v2.1; sec. 12.1 trapped pot, synthetic; sec. 12.2 three pairs)", "",
           f"*Generated by `scripts/generators/fit_m3_strecker_layer.py --power`. R = {o['R']} synthetic sets per truth; "
-          "binomial demotion rule: one-sided Fisher exact test of power against false credit at 0.05. U3 on SYNTHETIC "
-          "data at 20 / 40 / 80 / 160 / 320 min (the keyed Figs. 2 - 3 were not opened). SINGLE LABORATORY.*", ""]
+          "binomial demotion rule: one-sided Fisher exact test of power against false credit at 0.05; power < 0.5 is "
+          "'low power'. The trapped pot on SYNTHETIC data at 20 / 40 / 80 / 160 / 320 min (the keyed Figs. 2 - 3 were "
+          "not opened). Design: prereg v2 + the v2.1 amendment (sec. 22). SINGLE LABORATORY.*", ""]
     if o.get("refused"):
         L_ += [f"**REFUSED: {o['refused']}**", ""]
     if o.get("compute_capped"):
@@ -1265,32 +1389,35 @@ def render_power(o: Dict[str, Any]) -> str:
     L_ += ["## Draw sets", "", "| set | feasible / drawn | failed | wall s |", "|---|---|---|---|"]
     for k, v in o["draw_sets"].items():
         L_.append(f"| {k} | {v['feasible']} / {v['drawn']} | {v['failed']} | {v['wall_s']} |")
-    if "u3_synthetic_12_1" in o:
-        u3 = o["u3_synthetic_12_1"]
-        L_ += ["", "## Sec. 12.1: U3 alone (route rule, R1 vs R2)", "",
-               "| scoring | credit | power [95 % CI] | false credit [95 % CI] | Fisher p | decidable | low power |",
-               "|---|---|---|---|---|---|---|"]
-        for key, res in u3.items():
-            if not isinstance(res, dict) or "credit_R1" not in res:
+    hdr = ["| scoring and credit | power [95 % CI] | false credit [95 % CI] | Fisher p | decidable | low power |",
+           "|---|---|---|---|---|---|"]
+    if "trapped_12_1_and_v2_1" in o:
+        L_ += ["", "## The trapped pot's units alone and the {U3a, U3b} block (route rule, R1 vs R2)"]
+        for check, v in o["trapped_12_1_and_v2_1"].items():
+            if not isinstance(v, dict) or "results" not in v:
                 continue
-            for c, v in res.items():
-                L_.append(f"| {key} | {c} | {v['power']:.3f} {v['power_ci95']} | {v['false_credit']:.3f} "
-                          f"{v['false_credit_ci95']} | {v['fisher_p_one_sided']:.3g} | {v['decidable']} | "
-                          f"{v['low_power']} |")
-        L_ += ["", f"resolution rate (primary): {u3['resolution_rate']}; d quantiles {u3['d_quantiles']}; tie band "
-               f"quantiles {u3['band_quantiles']}; max k-hat quantiles {u3['k_hat_quantiles']}"]
-    if "pairs_12_2" in o:
-        L_ += ["", "## Sec. 12.2: the three pairs", "",
-               "| contrast | scoring and credit | power [95 % CI] | false credit [95 % CI] | Fisher p | decidable |",
-               "|---|---|---|---|---|---|"]
-        for c, v in o["pairs_12_2"].items():
+            L_ += ["", f"### {check}: decidable under the rule (primary and Cu law) {v['decidable_under_the_rule']}; "
+                   f"reaches the power bar {v['reaches_power_bar']}", "",
+                   f"resolution rate {v['resolution_rate']}; d quantiles {v['d_quantiles']}; tie band quantiles "
+                   f"{v['band_quantiles']}", ""] + hdr
             for k, r in v["results"].items():
-                L_.append(f"| {c} | {k} | {r['power']:.3f} {r['power_ci95']} | {r['false_credit']:.3f} "
-                          f"{r['false_credit_ci95']} | {r['fisher_p_one_sided']:.3g} | {r['decidable']} |")
-            L_.append(f"| {c} | **demoted: {v['demoted']}** (decidable ignoring the resolution rule: "
-                      f"{v['decidable_ignoring_resolution']}) | | | | |")
+                L_.append(f"| {k} | {r['power']:.3f} {r['power_ci95']} | {r['false_credit']:.3f} "
+                          f"{r['false_credit_ci95']} | {r['fisher_p_one_sided']:.3g} | {r['decidable']} | "
+                          f"{r['low_power']} |")
+    if "pairs_12_2" in o:
+        L_ += ["", "## Sec. 12.2: the three pairs"]
+        for c, v in o["pairs_12_2"].items():
+            L_ += ["", f"### {c} ({' vs '.join(v['pair'])}): demoted {v['demoted']}; reaches the power bar "
+                   f"{v['reaches_power_bar']}; decidable ignoring the resolution rule "
+                   f"{v['decidable_ignoring_resolution']}"
+                   + (f"; decidable under the literal U3 primary {v['decidable_literal_U3_primary']}"
+                      if "decidable_literal_U3_primary" in v else ""), ""] + hdr
+            for k, r in v["results"].items():
+                L_.append(f"| {k} | {r['power']:.3f} {r['power_ci95']} | {r['false_credit']:.3f} "
+                          f"{r['false_credit_ci95']} | {r['fisher_p_one_sided']:.3g} | {r['decidable']} | "
+                          f"{r['low_power']} |")
     L_ += ["", "## Approximations (declared)", ""] + [f"- {a}" for a in o["approximations"]]
-    L_ += ["", f"Memory at launch: {o['memory']}; compute {o['compute_wall_h']} h wall."]
+    L_ += ["", f"Memory at launch: {o['memory']}; compute {o['compute_wall_h']} h wall (sum over parts)."]
     return "\n".join(L_)
 
 
@@ -1372,6 +1499,278 @@ def fit_cell(evaluate_points: Callable[[np.ndarray], Tuple[np.ndarray, np.ndarra
             "not_resolved": not est.accepted, "evaluations": sum(f.evaluations for f in fits)}
 
 
+# ===================================================================== the v2.1 estimator: adaptive-tempering SMC
+
+@dataclass
+class SMCResult:
+    lppd: float
+    resolved: bool
+    reason: str
+    steps: int
+    evaluations: int
+    max_k_hat: float
+    min_ess: float
+    final_acceptance: float
+    se: float
+    betas: List[float]
+    particles_u: np.ndarray
+    log_cond: np.ndarray
+    log_unit: np.ndarray
+    extra: Dict[str, Any] = field(default_factory=dict)
+
+    def as_dict(self) -> Dict[str, Any]:
+        return {"lppd": self.lppd, "resolved": self.resolved, "reason": self.reason, "steps": self.steps,
+                "evaluations": self.evaluations, "max_k_hat": self.max_k_hat, "min_ess": self.min_ess,
+                "final_acceptance": self.final_acceptance, "se": self.se, **self.extra}
+
+
+def _systematic(w: np.ndarray, n: int, rng: np.random.Generator) -> np.ndarray:
+    c = np.cumsum(w / w.sum())
+    c[-1] = 1.0
+    return np.searchsorted(c, (rng.random() + np.arange(n)) / n)
+
+
+def _log_jac_z(z: np.ndarray) -> np.ndarray:
+    return np.sum(-np.abs(z) - 2.0 * np.log1p(np.exp(-np.abs(z))), axis=1)
+
+
+def smc_lppd(eval_fn: Callable[[np.ndarray], Tuple[np.ndarray, np.ndarray]], u_init: np.ndarray,
+             rng: np.random.Generator, n_moves: int = 2, ess_frac: float = 0.5, max_steps: int = 60,
+             k_max: float = pd.K_HAT_MAX, ess_min: float = pd.ESS_MIN, acc_min: float = 0.05,
+             budget: Optional[Budget] = None) -> SMCResult:
+    """lppd(u | cond) = log E_{p(theta | cond)} L_u(theta) by adaptive-tempering sequential Monte Carlo (Del Moral,
+    Doucet & Jasra 2006; Chopin 2002): particles from p(theta | cond) (``u_init``, unit-cube points), the targets
+    p(theta | cond) L_u^beta with beta 0 -> 1 chosen so that each step's incremental-weight ESS is ``ess_frac`` N,
+    systematic resampling, and ``n_moves`` independence Metropolis-Hastings moves per step in LOGIT space (a
+    Student-t fitted to the particles, covariance x 1.5; the uniform band prior carried by the Jacobian).
+    log Z = sum_t log mean_i W_i exp(d_beta l_i). ``eval_fn`` maps (n, d) unit-cube points to (log L_cond,
+    log L_u), -inf for an infeasible draw. Resolved iff every step's incremental weights have PSIS k-hat < k_max,
+    the particle ESS stays >= max(ess_min, ...) and the last moves' acceptance >= acc_min; else "density not
+    resolved" (a tie, unchanged rule). The SE is the delta-method sum over steps (independent-steps approximation,
+    declared)."""
+    u = np.clip(np.asarray(u_init, float), 1e-9, 1 - 1e-9)
+    n, d = u.shape
+    lc, lu = eval_fn(u)
+    n_eval = n
+    beta, log_z, var_z = 0.0, 0.0, 0.0
+    betas, khats, esss = [0.0], [], []
+    scale = 1.5                      # the independence proposal's covariance inflation
+    acc = float("nan")
+    reason = ""
+
+    def moves(u, lc, lu, beta, scale):
+        """Independence Metropolis-Hastings: a Student-t (5 df) fitted to the particle cloud in logit space (its
+        covariance x ``scale``); one accepted move is a fresh draw, so mixing does not degrade with d as a random
+        walk's does (South, Pettitt & Drovandi 2019)."""
+        from scipy.stats import multivariate_t
+        nonlocal n_eval
+        z = np.log(u) - np.log1p(-u)
+        mu = z.mean(axis=0)
+        cov = _clip_eigen(np.cov(z.T) * scale + 1e-6 * np.eye(d), 1e-6, LOGIT_PRIOR_VAR * 4)
+        q = multivariate_t(loc=mu, shape=cov, df=5)
+        lq_z = np.atleast_1d(q.logpdf(z))
+        accs = []
+        for _ in range(n_moves):
+            zp = np.atleast_2d(q.rvs(size=n, random_state=rng)).reshape(n, d)
+            lq_p = np.atleast_1d(q.logpdf(zp))
+            up = np.clip(1.0 / (1.0 + np.exp(-zp)), 1e-12, 1 - 1e-12)
+            lcp, lup = eval_fn(up)
+            n_eval += n
+            cur = lc + beta * lu + _log_jac_z(z) - lq_z
+            new = lcp + beta * lup + _log_jac_z(zp) - lq_p
+            with np.errstate(invalid="ignore"):
+                acc_ = np.isfinite(new) & (np.log(rng.random(n)) < new - cur)
+            z, u = np.where(acc_[:, None], zp, z), np.where(acc_[:, None], up, u)
+            lc, lu = np.where(acc_, lcp, lc), np.where(acc_, lup, lu)
+            lq_z = np.where(acc_, lq_p, lq_z)
+            accs.append(float(acc_.mean()))
+        return u, lc, lu, scale, float(np.mean(accs))
+
+    if not np.all(np.isfinite(lc) & np.isfinite(lu)):
+        keep = np.isfinite(lc) & np.isfinite(lu)
+        if not keep.any():
+            return SMCResult(-math.inf, False, "no finite initial particle", 0, n_eval, math.inf, 0.0, 0.0,
+                             math.inf, betas, u, lc, lu)
+        idx = rng.choice(np.flatnonzero(keep), size=n, replace=True)
+        u, lc, lu = u[idx], lc[idx], lu[idx]
+    u, lc, lu, scale, acc = moves(u, lc, lu, 0.0, scale)     # rejuvenate the (resampled) start at beta = 0
+    for step in range(max_steps):
+        if budget is not None:
+            budget.check("SMC")
+
+        def ess_at(b):
+            w = np.exp((b - beta) * (lu - np.max(lu)))
+            return w.sum() ** 2 / (w ** 2).sum()
+
+        if ess_at(1.0) >= ess_frac * n:
+            nb = 1.0
+        else:
+            lo, hi = beta, 1.0
+            for _ in range(50):
+                mid = 0.5 * (lo + hi)
+                lo, hi = (mid, hi) if ess_at(mid) >= ess_frac * n else (lo, mid)
+            nb = max(lo, beta + 1e-6)
+        inc = (nb - beta) * lu
+        m = float(np.max(inc))
+        w = np.exp(inc - m)
+        mean_w = float(w.mean())
+        log_z += m + math.log(mean_w)
+        var_z += float(np.var(w, ddof=1) / (n * mean_w ** 2))
+        _, k = pd.psis(inc)
+        khats.append(float(k))
+        esss.append(float(w.sum() ** 2 / (w ** 2).sum()))
+        idx = _systematic(w, n, rng)
+        u, lc, lu = u[idx], lc[idx], lu[idx]
+        beta = nb
+        betas.append(beta)
+        u, lc, lu, scale, acc = moves(u, lc, lu, beta, scale)
+        if beta >= 1.0:
+            break
+    else:
+        reason = f"beta reached only {beta:.3g} in {max_steps} steps"
+    max_k = max(khats) if khats else math.inf
+    min_ess = min(esss) if esss else 0.0
+    reasons = [reason] if reason else []
+    if not max_k < k_max:
+        reasons.append(f"max step k-hat {max_k:.3g} >= {k_max}")
+    if min_ess < ess_min:
+        reasons.append(f"step ESS {min_ess:.1f} < {ess_min}")
+    if not acc >= acc_min:
+        reasons.append(f"final acceptance {acc:.3f} < {acc_min}")
+    return SMCResult(log_z, not reasons, "; ".join(reasons), len(khats), n_eval, max_k, min_ess, acc,
+                     math.sqrt(var_z), betas, u, lc, lu)
+
+
+def smc_replicated(eval_fn, start_fn: Callable[[np.random.Generator], np.ndarray], rng: np.random.Generator,
+                   k: int = 2, budget: Optional[Budget] = None, **kw) -> Dict[str, Any]:
+    """``k`` independent SMC runs (each from its own SIR start): lppd = log of the mean of their Z (Z is unbiased,
+    log Z is not), the stated error from the replicates' spread (the single-run delta-method SE is optimistic by
+    ~1.5x at 32 dimensions: V-SMC (b)); resolved iff every replicate is."""
+    runs = [smc_lppd(eval_fn, start_fn(rng), rng, budget=budget, **kw) for _ in range(k)]
+    lz = np.array([r.lppd for r in runs])
+    m = float(np.max(lz))
+    lppd = m + math.log(float(np.mean(np.exp(lz - m)))) if np.isfinite(m) else -math.inf
+    se = float(np.std(lz, ddof=1) / math.sqrt(k)) if k > 1 else runs[0].se
+    return {"lppd": lppd, "se_replicates": se, "replicates": [round(float(x), 4) for x in lz],
+            "resolved": all(r.resolved for r in runs), "reasons": [r.reason for r in runs if r.reason],
+            "steps": [r.steps for r in runs], "evaluations": int(sum(r.evaluations for r in runs)),
+            "max_k_hat": float(max(r.max_k_hat for r in runs)), "min_ess": float(min(r.min_ess for r in runs)),
+            "final_acceptance": [round(r.final_acceptance, 3) for r in runs], "runs": runs}
+
+
+def smc_sir_start(draws_u: np.ndarray, log_cond: np.ndarray, n: int, rng: np.random.Generator) -> np.ndarray:
+    """Particles from p(theta | cond) by sampling-importance-resampling a prior draw set by its conditioning weights
+    (the fed units' ESS is ~40 - 60 % of the set: checks record); the SMC's beta = 0 moves then rejuvenate them."""
+    w = np.exp(log_cond - np.max(log_cond[np.isfinite(log_cond)]))
+    w = np.where(np.isfinite(w), w, 0.0)
+    return draws_u[_systematic(w, n, rng)]
+
+
+def gaussian_toy_lppd(y: np.ndarray, s: float, m0: float, s0: float) -> float:
+    """The 32-dim validation's exact answer: u_k ~ U[0, 1], cond N(u_k; m0, s0^2) (as a likelihood), unit
+    N(y_k; u_k, s^2): lppd = sum_k log [int_0^1 N(y_k; u, s^2) N(u; m0, s0^2) du / int_0^1 N(u; m0, s0^2) du]."""
+    from scipy.stats import norm
+    out = 0.0
+    for yk in np.atleast_1d(y):
+        v = 1.0 / (1.0 / s ** 2 + 1.0 / s0 ** 2)
+        mu = v * (yk / s ** 2 + m0 / s0 ** 2)
+        lnorm = norm.logpdf(yk, m0, math.sqrt(s ** 2 + s0 ** 2))
+        mass = norm.cdf(1.0, mu, math.sqrt(v)) - norm.cdf(0.0, mu, math.sqrt(v))
+        den = norm.cdf(1.0, m0, s0) - norm.cdf(0.0, m0, s0)
+        out += lnorm + math.log(mass) - math.log(den)
+    return float(out)
+
+
+def v_smc_gaussian_32(rng: np.random.Generator, d: int = 32, n: int = 512, k: int = 4) -> Dict[str, Any]:
+    """V-SMC (b): a synthetic 32-dim case with a known answer (``gaussian_toy_lppd``). Plain reweighting of 8 192
+    conditioned draws (the power check's estimator) is shown beside the replicated SMC (k runs of N particles, each
+    from SIR of those draws). Pass: every replicate resolved and |lppd - exact| <= 3 x the replicates' SE."""
+    m0, s0, s = 0.5, 0.25, 0.03
+    y = rng.uniform(0.25, 0.75, d)
+    exact = gaussian_toy_lppd(y, s, m0, s0)
+
+    def eval_fn(u):
+        lc = np.sum(-0.5 * ((u - m0) / s0) ** 2, axis=1)                 # unnormalised: cancels in the ratio
+        lu = np.sum(-0.5 * ((y - u) / s) ** 2 - math.log(s * math.sqrt(2 * math.pi)), axis=1)
+        return lc, lu
+
+    prior = rng.random((8192, d))
+    lc0, lu0 = eval_fn(prior)
+    rw = conditional_lppd(lc0, lu0)
+    res = smc_replicated(eval_fn, lambda r: smc_sir_start(prior, lc0, n, r), rng, k=k)
+    err = res["lppd"] - exact
+    out = {k_: v for k_, v in res.items() if k_ != "runs"}
+    return {"dimension": d, "particles": n, "replicates": k, "exact_lppd": round(exact, 4), "smc": out,
+            "smc_minus_exact": round(err, 4), "smc_within_3se": bool(abs(err) <= 3 * res["se_replicates"]),
+            "reweighting_8192": {"lppd": round(rw["lppd"], 4), "k_hat": rw["k_hat"], "ess": rw["ess"],
+                                 "resolved": rw["resolved"]},
+            "pass": bool(res["resolved"] and abs(err) <= 3 * res["se_replicates"])}
+
+
+def v_smc_grid(data: L.Data, rng: np.random.Generator, n: int = 256) -> Dict[str, Any]:
+    """V-SMC (a): the V-density R3 toy (two coordinates, U-ARPglc) by SMC from the uniform prior, against the
+    41 x 41 trapezoid grid."""
+    cs = L.coords("R3")
+    names = [c.name for c in cs]
+    i1, i2 = names.index("log10_kd7"), names.index("log10_kd7_glc")
+    meas = L.arp_interval_measured(data)
+
+    def eval_fn(u2):
+        up = np.full((u2.shape[0], len(cs)), 0.5)
+        up[:, i1], up[:, i2] = u2[:, 0], u2[:, 1]
+        e = L.evaluate(up, "R3", L.PRIMARY, data, trapped=False)
+        v = L.uarp_loglik(data, e.pred["UARP_c"], e.theta["cv_arp"], L.PRIMARY, measured=meas)
+        return np.where(e.feasible, 0.0, -np.inf), np.where(e.feasible, v, -np.inf)
+
+    g = 41
+    grid = np.linspace(0.0, 1.0, g)
+    m1, m2 = np.meshgrid(grid, grid, indexing="ij")
+    lc_g, lu_g = eval_fn(np.column_stack([m1.ravel(), m2.ravel()]))
+    ll = np.where(np.isfinite(lc_g), lu_g, -np.inf).reshape(g, g)
+    lmax = np.max(ll[np.isfinite(ll)])
+    lppd_grid = math.log(np.trapezoid(np.trapezoid(np.exp(ll - lmax), grid, axis=1), grid)) + lmax
+    t = time.time()
+    res = smc_lppd(eval_fn, rng.random((n, 2)), rng)
+    return {"lppd_grid": round(lppd_grid, 4), "smc": {k: (round(v, 4) if isinstance(v, float) else v)
+                                                      for k, v in res.as_dict().items()},
+            "smc_minus_grid": round(res.lppd - lppd_grid, 4), "wall_s": round(time.time() - t, 1),
+            "pass": bool(res.resolved and abs(res.lppd - lppd_grid) <= max(0.05, 3 * res.se))}
+
+
+def smc_pilot(data: L.Data, rival: str, rng: np.random.Generator, budget: Budget, n: int = 256) -> Dict[str, Any]:
+    """The v2.1 PSIS-pilot replacement: U3 | U4, U1e, U1l under ``rival`` at full dimension on SYNTHETIC U3 (a truth
+    from the rival's fed-reweighted prior), by SMC from SIR particles. Records resolution, steps, evaluations, wall
+    time, and the projection to the decisive plan's cells."""
+    t0 = time.time()
+    obs = real_obs(data)
+    prior = make_draw_set(rival, L.PRIMARY, data, 1024, seed=903 + RIVAL_INDEX[rival], budget=budget)
+    lw = weights_from(prior, ("U4", "U1e", "U1l"), obs, L.PRIMARY, data)
+    j = int(sample_truths(prior, lw, 1, rng)[0])
+    u3 = synth_unit(L.u3_unit(10.0 ** prior.points["U3"][j]), prior.points["U3"][j], rng)
+    obs_syn = Obs({**obs.units, "U3": u3}, obs.uarp_y)
+    rw = conditional_lppd(lw, L.unit_loglik(u3, prior.points["U3"]))
+
+    def eval_fn(u):
+        ev = L.evaluate(u, rival, L.PRIMARY, data)
+        lc = np.zeros(len(u))
+        for un in ("U4", "U1e", "U1l"):
+            lc = lc + L.unit_loglik(obs_syn.units[un], L.points_for(un, ev))
+        lu = L.unit_loglik(u3, L.points_for("U3", ev))
+        ok = ev.feasible & ~ev.diag["failed_mask"]
+        return np.where(ok, lc, -np.inf), np.where(ok, lu, -np.inf)
+
+    res = smc_replicated(eval_fn, lambda r: smc_sir_start(prior.u, lw, n, r), rng, k=2, budget=budget)
+    res = {k: v for k, v in res.items() if k != "runs"}
+    wall = time.time() - t0
+    return {"rival": rival, "dimension": len(L.coords(rival)), "particles": n,
+            "unit": "U3 | U4, U1e, U1l (synthetic U3)", "reweighting_1024": {k: rw[k] for k in
+                                                                            ("lppd", "k_hat", "ess", "resolved")},
+            "smc": res, "wall_s": round(wall, 1),
+            "wall_per_density_s": round(wall, 1),
+            "projection_385_cells_h_one_worker": round(385 * wall / 3600.0, 1),
+            "projection_385_cells_h_four_workers": round(385 * wall / 3600.0 / 4.0, 1)}
+
+
 def score_contrast(d_by_unit: Mapping[str, Mapping[str, float]], band_by_unit: Mapping[str, Mapping[str, float]],
                    adequate: Mapping[str, Mapping[str, bool]], primary: str, holm_p: Mapping[str, float]
                    ) -> Dict[str, Any]:
@@ -1436,7 +1835,8 @@ def main(argv=None) -> int:
     ap.add_argument("--tie-redraws", type=int, default=40)
     ap.add_argument("--score-feasible", type=int, default=1024)
     ap.add_argument("--truth-feasible", type=int, default=512)
-    ap.add_argument("--power-part", choices=("u3", "pairs", "all"), default="all")
+    ap.add_argument("--power-part", choices=("u3", "trapped", "pairs", "all", "sets", "merge"), default="all")
+    ap.add_argument("--shard", default="0/1", help="power --power-part sets: build shard i of k")
     ap.add_argument("--contrasts", default="route,transfer,decay_law", help="power: the 12.2 pairs to run")
     ap.add_argument("--record-suffix", default="", help="power: a part's record name suffix (merged later)")
     ap.add_argument("--cache-dir", type=Path, default=None, help="draw-set cache (scratch; never under data/)")
