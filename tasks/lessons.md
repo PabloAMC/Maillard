@@ -504,3 +504,7 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 ## 2026-11-05 — Run a literature search against the question, not the topic
 - **Pattern:** Round 3 read Vauthey 2000 for mechanism, filed it as "microemulsion", and skipped it. A forward-citation sweep keyed to H0's question (a second laboratory's absolute MFT / FFT) found it as the best lead on disk for lifting H0's refusal.
 - **Rule:** a case's sweep is keyed to its own decisive criterion (sec. 7 item 2). A source skipped for one question gets re-screened for another; record the skip reason with the question it answered.
+
+## 2026-11-05 — "Out of scope" must cite the envelope rule, or say it is a judgement
+- **Pattern:** an extraction agent called Bork 2024 / 2024b "outside the model's scope", and I relayed it. Asked why, the engine's envelope said otherwise for half the data: the phenolic arms are refused by rule (reactants not in any lane), but the single-compound dry controls are engine species that no rule refuses (the trunk's a_w term has no window). They were outside the validated domain, and are W5.2 (crust) data.
+- **Rule:** a scope claim names its basis: the `declare_envelope` rule that refuses it, or "judgement: outside the validated domain because …". Never drop data as "out of scope" without naming the plan step it could serve.
