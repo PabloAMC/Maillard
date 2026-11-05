@@ -63,10 +63,12 @@ class Module:                       # src/kinetic_core_jax/network.py
     needs_ph: bool = False
     config_digest: str = ""                                  # Config.digest() the module was built from
     notes: tuple[str, ...] = ()
+    pot_inputs: tuple[str, ...] = ()                         # (v2.1) pot scalars read via RateCtx: "ph_label", "aw"
 
 class RateCtx(NamedTuple):          # what a rate function may read besides theta
     t_c; t_k                        # T_K = T_C + 273.15, as the engine computes it
     ph = None; ph_label = None; ionic_m = None               # pH modules only (sec. 2.4)
+    aw = None                                                # (v2.1) the pot's declared a_w; NaN = the engine's None
 
 def build(cfg: Config) -> Module    # one per module file, e.g. src/kinetic_core_jax/lipid.py
 ```
@@ -100,6 +102,7 @@ Rules for a module:
 - **The root is solved inside the right-hand side.** The bake-off solves `F(u; c) = 0`, with u = (pH, I) and c the titratable inventory, at every right-hand-side call: a bisection (the residual is monotone in pH), then Newton on the coupled (pH, I). It solves twice, at the reaction temperature and at the cooled 25 C label. Its derivative is a custom JVP: du = -(dF/du)^-1 (dF/dc) dc, a 2 x 2 solve, and reverse mode transposes it with no extra code ([`model.make_ph_solver`](../../src/kinetic_core_jax/model.py)). There is no DAE state: diffrax has no DAE solver, and a relaxation would change the model.
 - **Modes:** `none` (pH-free modules; the lipid module), `inline` (the above), `prescribed` (a measured pH trajectory read as a forced input; M1c: Cao 2017, Kang 2026), and `clamped` (pH-stat).
 - **Status.** A network with any `needs_ph` module is refused by `integrate` until the sulfur module is ported, and that port reuses the bake-off's solver.
+- **(v2.1) `prescribed` runs in its constant form** (the trunk and acrylamide ports, 2026-11-05): a module that lists `"ph_label"` in `Module.pot_inputs` reads the pot's DECLARED pH (`pot["ph_label"]`, NaN for None) through `RateCtx.ph_label`, constant over the programme. This is exactly the engine's declared-pH scaling of k_ref (trunk B12 / B40, acrylamide B15), which has no pH trajectory; `Network.ph_mode` reports it. The trajectory form (M1c's measured pH courses) still waits on the forced-input driver. `"aw"` is read the same way (`RateCtx.aw`), the first piece of sec. 4's water hook. `integrate` refuses a pot that lacks a scalar its modules read.
 - **Cost.** The root-find was ~75 % of the bake-off's forward solve (2.1 vs 0.5 ms per step). It gets one focused step: a cheaper residual (a precomputed pK table, fewer exps), and one root per step reused across stages.
 - **Measured pH tables with jumps** (Zheng & Ho's mechanism boundary at label pH 5.0, the thiamine share's floor at 6.25, the lipid breakage window at 100 C in temperature) are ported exactly with `jnp.where`. An exact derivative omits the jump-crossing term, which a finite difference across the boundary would see. Rule: a module whose table has a jump declares it, and the fit driver reports every pot whose trajectory crosses one, so a Jacobian there is read as one-sided. No compared column crossed a boundary in the bake-off or in the lipid port: the lipid window switches between segments, never inside one.
 
