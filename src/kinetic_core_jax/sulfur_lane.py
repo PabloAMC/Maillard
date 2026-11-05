@@ -759,7 +759,25 @@ def make_pot(lane: SulfurLane, initial: Mapping[str, float], process, *, prelude
             "knot_s": np.stack([pad(s[3] / s[0], k_width) for s in segments]),
             "knot_tc": np.stack([pad(s[4], k_width) for s in segments]),
             "label_nudge": np.zeros((len(segments), len(segments[0][1]))),
+            "jump_s": np.stack([_jump_grid(s[1] / s[0]) for s in segments]),
             "node_minutes": [s[1] for s in segments], "dropped": dropped, "buffer_spec": spec}
+
+
+#: nodes closer than this (as a fraction of the segment) are one kink of the rate vector for the step controller
+JUMP_MERGE = 1e-12
+
+
+def _jump_grid(node_s: np.ndarray) -> np.ndarray:
+    """The nodes as diffrax ``jump_ts``, with near-coincident nodes merged onto their predecessor. ``np.unique`` keeps
+    two nodes 1.8e-15 min apart where a linspace and a geomspace node meet in floating point (9.0 and
+    9.000000000000002 on a 90 min run); a jump that narrow stalls the step clipping. The rate vector between them
+    changes by nothing, so the merged grid is the same kink set; the nodes themselves (saved states, interpolation)
+    are untouched."""
+    out = np.asarray(node_s, dtype=float).copy()
+    for i in range(1, len(out)):
+        if out[i] - out[i - 1] < JUMP_MERGE:
+            out[i] = out[i - 1]
+    return out
 
 
 def pot_arrays(pot: Mapping[str, Any]) -> Dict[str, Any]:
@@ -768,7 +786,7 @@ def pot_arrays(pot: Mapping[str, Any]) -> Dict[str, Any]:
     sits ON a table's jump (a pot declared at exactly label pH 5.0, Zheng & Ho's boundary) on the engine's side of
     the jump, which there is decided by the root-finders' last digits."""
     return {k: jnp.asarray(pot[k], dtype=jnp.float64) for k in ("y0", "label_ph", "buffer", "durations", "node_s",
-                                                                  "node_tc", "knot_s", "knot_tc", "label_nudge")}
+                                                                  "node_tc", "knot_s", "knot_tc", "label_nudge", "jump_s")}
 
 
 # --------------------------------------------------------------------------- integration
@@ -848,12 +866,12 @@ def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 
         min_sweeps = max_sweeps = int(force_sweeps)
 
     def segment(y_start, seg):
-        duration, node_s, node_tc, knot_s, knot_tc, nudge = seg
+        duration, node_s, node_tc, knot_s, knot_tc, nudge, jump_s = seg
         node_tk = node_tc + CELSIUS
         if mode == "clamped":
             t_k = knot_tc[0] + CELSIUS
             k0 = rates(t_k, a["label_ph"], 0.0, jnp.nan)
-            ys, steps, bad = _solve(net, lambda s, y, k: k, k0, y_start, duration, node_s, node_s, **kw)
+            ys, steps, bad = _solve(net, lambda s, y, k: k, k0, y_start, duration, node_s, jump_s, **kw)
             ys = jnp.maximum(ys, 0.0)
             n = node_s.shape[0]
             return ys[-1], (ys, jnp.full(n, a["label_ph"]), jnp.zeros(n), jnp.full(n, a["label_ph"]),
@@ -876,16 +894,16 @@ def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 
 
         # every traced number enters the sweep as an OPERAND, never by closure: lax.cond's reverse-mode lowering
         # cannot carry a closed-over tracer (the branch would hold it as a constant)
-        data = (theta, sid, a["buffer"], y_start, duration, node_s, node_tk, nudge)
+        data = (theta, sid, a["buffer"], y_start, duration, node_s, node_tk, nudge, jump_s)
 
         def sweep(carry, d):
-            theta_, sid_, buffer_, y_start_, duration_, node_s_, node_tk_, nudge_ = d
+            theta_, sid_, buffer_, y_start_, duration_, node_s_, node_tk_, nudge_, jump_s_ = d
             count, node_ph, node_i, node_cool, _ys, _res, _done, steps, bad = carry
             k_nodes = jax.vmap(lambda t, p, i, c: net.rate_constants(
                 theta_, RateCtx(t_c=t - CELSIUS, t_k=t, ph=p, ph_label=c, ionic_m=i)))(node_tk_, node_ph, node_i,
                                                                                          node_cool + nudge_)
             ys, n_steps, failed = _solve(net, lambda s, y, dd: _interp_rows(s, dd[0], dd[1]), (node_s_, k_nodes),
-                                         y_start_, duration_, node_s_, node_s_, **kw)
+                                         y_start_, duration_, node_s_, jump_s_, **kw)
             ys = jnp.maximum(ys, 0.0)
             fresh, fi, fc = jax.vmap(lambda y, t: bal.state(y, t, sid_, theta_[NAME], buffer_))(ys, node_tk_)
             res = jnp.max(jnp.abs(fresh - node_ph))
@@ -913,7 +931,7 @@ def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 
         count, node_ph, node_i, node_cool, ys, res, _, steps, bad = out
         return ys[-1], (ys, node_ph, node_i, node_cool, count, res, steps, bad)
 
-    segs = (a["durations"], a["node_s"], a["node_tc"], a["knot_s"], a["knot_tc"], a["label_nudge"])
+    segs = (a["durations"], a["node_s"], a["node_tc"], a["knot_s"], a["knot_tc"], a["label_nudge"], a["jump_s"])
     _, (ys, ph, ionic, cool, count, res, steps, bad) = jax.lax.scan(segment, y0, segs)
     return SulfurRun(ys=ys, ph=ph, ionic=ionic, ph_cool=cool, sweeps=count, residual=res, num_steps=steps,
                      failed=bad, sid=sid)

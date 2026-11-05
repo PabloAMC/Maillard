@@ -26,7 +26,9 @@ steps per run (the engine's LSODA and the port's ESDIRK both take 1e2 - 1e4 on t
 whose level is above atol / rtol = 1e-6 mmol/L (where the relative term controls the step); below it the bound is
 absolute, 2 N atol = 2e-10 mmol/L. The pH is -log10 of the H+ activity, a function of those levels: its bound is the
 same 1e-4 (in pH units), the engine's own root tolerance (1e-9 pH) being negligible. The fixed point's sweep count
-must be EQUAL (it is a discrete stopping rule; a different count is a different model, never inside a tolerance).
+must be EQUAL (it is a discrete stopping rule; a different count is a different model, never inside a tolerance),
+with the two recorded tie-breaks of ``Harness.matched`` where the engine's own discontinuities make the outcome a
+matter of solver noise (a last residual at the fixed point's tolerance; a pot declared exactly at a table's jump).
 At tight tolerance (rtol 1e-10 / atol 1e-16) the same argument gives the contract's 1e-6 dex (sec. 3), recorded here
 on a subset.
 """
@@ -654,6 +656,24 @@ def _fmt(x, p=2):
         else f"{x:.{p}f}" if isinstance(x, float) else str(x)
 
 
+def exceptions(rows) -> List[str]:
+    """One line per row where ``Harness.matched`` used a tie-break."""
+    out = []
+    for p in rows:
+        tag = f"{p['id']}" + (f" (draw {p['seed']})" if "seed" in p else "")
+        j = p.get("jump_side_matched")
+        if j:
+            out.append(f"- {tag}: declared at a table jump; the first node's cooled pH is {j['port_first_node_cooled_ph']:.15f} "
+                       f"in the port and {j['engine_first_node_cooled_ph']:.15f} in the engine, opposite sides of the "
+                       f"jump (unmatched: {j['unnudged_max_dex']:.2e} dex); read on the engine's side.")
+        if p.get("tie_broken"):
+            out.append(f"- {tag}: unforced, the port ran {p['unforced_jax_sweeps'][0]} sweeps and the engine "
+                       f"{p['engine_sweeps'][0]}; at sweep {p['engine_sweeps'][0]} the residuals are "
+                       f"{p['residual_jax_at_engine_count']:.6f} (port) and {p['residual_engine']:.6f} (engine), "
+                       "either side of the 1e-3 tolerance; rerun at the engine's count.")
+    return out
+
+
 def markdown(r: Mapping[str, Any]) -> str:
     import diffrax
     import jax
@@ -712,22 +732,21 @@ def markdown(r: Mapping[str, Any]) -> str:
           "the engine stops at a sweep whose residual is below the fixed point's tolerance (1e-3 pH) and the port's "
           f"residual at that sweep is above it by less than {tie_tolerance(FIT_TOL[0]):g} pH (twice the pH bound: "
           "solver noise alone decided), the port is rerun at the engine's sweep count and compared at the same "
-          "tolerance (marked * below, with both residuals).",
+          "tolerance (marked * below, with both residuals). A second, for pots DECLARED at a table jump (label pH 5.0 is "
+          "Zheng & Ho's mechanism boundary): the first node's cooled pH equals the declared label up to the "
+          "root-finders' last digits, so which side of the jump it reads is noise on both sides; where they differ the "
+          "port reads the engine's side (marked j).",
           "",
           f"**{sum(p['pass'] for p in pots)} / {len(pots)} pots pass.** Largest difference: {worst['max_dex']:.2e} dex "
           f"({worst['worst_species']}, {worst['id']}).",
           ""]
-    for p in pots:
-        if p.get("tie_broken"):
-            L.append(f"\\* {p['id']}: unforced, the port ran {p['unforced_jax_sweeps'][0]} sweeps and the engine "
-                     f"{p['engine_sweeps'][0]}; at sweep {p['engine_sweeps'][0]} the residuals are "
-                     f"{p['residual_jax_at_engine_count']:.6f} (port) and {p['residual_engine']:.6f} (engine), "
-                     "either side of the 1e-3 tolerance.")
+    L += exceptions(pots)
     L += ["",
           "| pot | sweeps (JAX / engine) | max dex | worst species | max pH diff (node / cooled) | final vs `_integrate_program` dex | JAX K5 s (steps) | JAX K4 s (steps; max dex) | engine s | load |",
           "|---|---|---|---|---|---|---|---|---|---|"]
     for p in pots:
-        L.append(f"| {p['id']} | {p['jax_sweeps'][0]}{'*' if p.get('tie_broken') else ''} / {p['engine_sweeps'][0]}"
+        mark = ("*" if p.get("tie_broken") else "") + ("j" if p.get("jump_side_matched") else "")
+        L.append(f"| {p['id']} | {p['jax_sweeps'][0]}{mark} / {p['engine_sweeps'][0]}"
                  f" | {p['max_dex']:.1e} | "
                  f"{p['worst_species']} | {p['max_abs_node_ph']:.1e} / {p['max_abs_cooled_ph']:.1e} | "
                  f"{p['final_vs_integrate_program_dex']:.1e} | {p.get('jax_k5_s', float('nan')):.2f} ({p['jax_steps']}) | "
@@ -745,7 +764,7 @@ def markdown(r: Mapping[str, Any]) -> str:
     d = r["draws"]
     L += ["", "## Random parameter draws (the engine's own envelope draw, `uncertainty.sulfur_joint_draw`)", "",
           f"{sum(x['pass'] for x in d['rows'])} / {len(d['rows'])} (draw, pot) pairs pass at the same tolerance; "
-          f"largest {max(x['max_dex'] for x in d['rows']):.2e} dex.", "",
+          f"largest {max(x['max_dex'] for x in d['rows']):.2e} dex.", ""] + exceptions(d["rows"]) + ["",
           "| seed | pot | drawn coordinates | sweeps (JAX / engine) | max dex | worst species | max pH diff |",
           "|---|---|---|---|---|---|---|"]
     for x in d["rows"]:
@@ -804,10 +823,14 @@ def markdown(r: Mapping[str, Any]) -> str:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     parser.add_argument("--stage", nargs="*", choices=STAGES, help="run only these stages (merged into the record)")
+    parser.add_argument("--render", action="store_true", help="rewrite the .md from the .json only")
     args = parser.parse_args(argv)
     import jax
 
     path = OUT.with_suffix(".json")
+    if args.render:
+        OUT.with_suffix(".md").write_text(markdown(json.loads(path.read_text())), encoding="utf-8")
+        return 0
     report = json.loads(path.read_text()) if path.exists() and args.stage else {}
     report.update({"artifact": "jax_sulfur_lane_module", "generated_by": "scripts/generators/build_jax_sulfur_lane_module.py",
                    "env": "maillard-jax", "jax_version": jax.__version__, "uptime_start": uptime()})

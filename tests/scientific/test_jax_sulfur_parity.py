@@ -12,7 +12,11 @@ THE TOLERANCE, from the solvers' own tolerances (``build_jax_sulfur_lane_module`
 engine's shipped rtol 1e-8 / atol 1e-14; local error per step <= rtol |y| + atol, no growth in a dissipative
 mass-action network, at most 1e4 steps per run: <= 1e-4 relative per side, 8.7e-5 dex for the pair, so 1e-4 dex on
 every species above atol / rtol = 1e-6 mmol/L at every pH node, 2e-10 mmol/L absolute below, 1e-4 on the pH (a log10
-quantity), and the fixed point's sweep count EQUAL.
+quantity), and the fixed point's sweep count EQUAL -- except where the engine's own discontinuities hand the outcome to
+solver noise, which ``Harness.matched`` breaks in the engine's favour and records: a last fixed-point residual within
+2e-4 pH of the 1e-3 tolerance (rerun at the engine's sweep count), and a pot declared exactly at a measured table's
+jump (label pH 5.0, Zheng & Ho's boundary: the first node read on the engine's side). Everything is then held to the
+same bound.
 """
 from __future__ import annotations
 
