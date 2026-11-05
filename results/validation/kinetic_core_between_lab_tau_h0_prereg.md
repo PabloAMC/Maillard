@@ -518,3 +518,32 @@ The design has a small-K problem that no estimator removes:
 | 19 | the reproduction guard names the joint `log_density` as the grouping check and covers the D-all rows (sec. 4.1) | 7 |
 | 20 | wording: "lower bound" -> "biased low by the declared leaks; sampling error dominates; point estimate"; "NOT BETTER" -> "NOT SHOWN BETTER (D3 power = x)"; "ADEQUATE on EX-056's 5 labs, nested"; PROVISIONAL kept; H0''s own power stated | 6 |
 | 21 | compute and expectations revised (sec. 10, 11); the 11-07 forecast lowered to 0.65 because of the refits | consequence of 1 |
+
+## 14. Errata from the design table (2026-11-04, before the freeze and before any pair fit)
+
+Found by the design table and the controls on synthetic residuals (sec. 7.1 - 7.2); no H0 number had been computed,
+and no pair fit had been launched. None changes an estimator, a rule or a threshold.
+
+1. **"Every outer lab has exactly 2 inner labs for ABS and for FIG" (secs. 1, 2) is false for four nests.** Outer
+   Dalian and Reading have 3 inner ABS labs (DFA, Jiangnan, Ochanomizu); outer DFA and Ochanomizu have 3 inner FIG labs
+   (Dalian, Jiangnan, Reading). The strict masks (sec. 3.2) then cut two nests further:
+   - outer Ochanomizu: the strict nulls answer none of Jiangnan's 81 ABS rows (species only those two labs measured),
+     so its tau_ABS(S) rests on DFA alone: a flagged "single-lab tau" (sec. 2, minimum-data rule);
+   - outer Reading: all 123 Jiangnan FIG rows are lost, Dalian's one FIG group remains (< 2 groups), so tau_FIG(S)
+     takes the fallback (0.30), flagged.
+   The chi^2_2/2 statement of sec. 1 holds for the nests with 2 inner labs. St's df is the number of inner labs
+   holding the class. P1 and P3 ran on this real design, so they already measure these nests (P1: 0 of 144 checks
+   failed; the single-lab Ochanomizu nest's tau_hat/tau has median ~0.65, 5 - 95 % 0 - 1.9).
+2. **Row counts.** EX-056 pairs 386 held-out rows (Jiangnan 341); 383 of them get an interval (three single-row free
+   groups have none). "341 of 383" in sec. 2 reads "341 of the 386 paired rows".
+3. **Curated input.** `data/keys/laboratories.yml` has gained 61 laboratory groups for unrelated sources since EX-056,
+   so its sha256 differs. As sec. 4.1 says, the guard reads it at 7b1bc7cd: that version hashes as EX-056 recorded,
+   and the fit table loaded with it equals today's row for row (laboratory field included).
+4. **Order of operations.** Engine guards 4.2 (b) and (c) were run on 2026-11-04 BEFORE the freeze (sec. 7 puts them
+   after). They compute no score and read only EX-056's published residuals: (a) cost 1075.6609, relative difference
+   2e-10; (b) Reading and DFA warm folds re-predicted with max |difference| 0 dex; (c) Reading's single-out fold
+   through the pair runner: cost and held-out raw residuals identical (difference 0). The refits therefore run on the
+   current engine (origin/main at b981e8ac), not the 2e031fdb pin.
+5. **Controls outcome relevant to the rules** (recorded so that the rules are read as written): P5 gives
+   P(UNSTABLE | homogeneous truth, tau = 0.8) up to 0.63 > 0.3, so UNSTABLE is reported and changes nothing (D2); D3b
+   power is 0.054 (engine 0.8 vs null 1.2), so a D3 failure is "NOT SHOWN BETTER (D3 power = 0.05)".

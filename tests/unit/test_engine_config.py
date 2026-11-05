@@ -78,6 +78,8 @@ FLIPPED = {
     "sulfur.tdp_own_decay": ps.TdpOwnDecay(enabled=True),
     "sulfur.furfural_barriers": ps.FurfuralBarriers(enabled=True),
     "sulfur.single_temperature_barriers": ps.SingleTemperatureBarriers(enabled=True),
+    "fit.dimer_encounter_ceiling": dataclasses.replace(ps.DimerEncounterCeiling(), enabled=True, mft_cap_mmol_l=2.0),
+    "fit.mft_decay_prior": dataclasses.replace(ps.MftDecayPrior(), enabled=True, sd_dex=0.5),
     "trunk.three_deoxy_exit_ph_term": False,
     "trunk.three_deoxy_exit_ph": {"k_tdg_fa": (0.5, (0.4, 0.6), "flipped for the test"),
                                   "k_tdg_mgo": (0.63, (0.37, 0.92), "flipped for the test")},
