@@ -136,3 +136,18 @@ the 25 °C solubility by ~5-8 % to ~0.74-0.76 mmol/L.
   ceiling on measured dissolved cystine.
 - **Transfer:** the compound itself; 25 °C only, so it applies to the cooled sample, not the hot pot.
 - **Not decisive.** It measures nothing the case would call decisive.
+
+## Second reader (2026-11-05)
+
+**Independent second reading** by `agent-second-reader-2026-11-05`, PDF read before this dossier. Source:
+`data/articles/carta1996.pdf` (J. Chem. Eng. Data 41:414); Tables 1-3 checked against a 130 dpi image of p. 415. Printed
+numbers; the paper's own maximum deviation is ±1 × 10⁻⁵ mol/dm³ for L-cystine.
+
+| item | location | first reader | second reader | verdict |
+|---|---|---|---|---|
+| L-cystine in water, 25 °C, initial pH 3.04-8.61 | Table 1 | 0.69-0.71 mM | **0.70 / 0.70 / 0.70 / 0.71 / 0.69 / 0.70 mM** at pH 3.04 / 3.42 / 4.02 / 5.08 / 7.00 / 8.61 | AGREE |
+| same in g/L | [Z] | 0.168 g/L | **0.70 mM × 240.3 g/mol = 0.168 g/L** | AGREE |
+| 1 M NaCl plateau | Table 2 | 0.83-0.87 mM (pH 4.2-9.3) | **0.85 / 0.84 / 0.84 / 0.85 / 0.83 / 0.87 mM** at pH 4.16-9.28 (0.95 at pH 2.96, on the acid limb) | AGREE |
+| 3 M NaCl plateau | Table 3 | 1.09-1.10 mM (pH 4.0-8.6) | **1.10 / 1.10 / 1.10 / 1.09 mM** at pH 3.97-8.61 (1.13 at pH 2.91) | AGREE |
+| zwitterion K8; salting constant | Tables 4, 6 | 6.92 × 10⁻⁴ M; +0.068 | **6.92 × 10⁻⁴ M; +0.068** | AGREE |
+| pH basis | Experimental | initial solution, not the saturated one | same: "not the equilibrium values, but those of the initial solutions" | AGREE |
