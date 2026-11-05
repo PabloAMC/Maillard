@@ -1217,10 +1217,10 @@ def v7_forcing(breakpoints) -> Dict[str, Any]:
 def v_density() -> Dict[str, Any]:
     """V-density: the estimator reproduces M1's known case (R0's RES_Cys, alternative floor, ~ -746): M1.1's tests on
     its engine-scan fixture, run here."""
-    r = subprocess.run([sys.executable, "-m", "pytest", "-q", "tests/unit/test_predictive_densities.py", "-k", "746"],
+    r = subprocess.run([sys.executable, "-m", "pytest", "-q", "tests/unit/test_predictive_densities.py", "-k", "exact_density_of_r0_cys"],
                        cwd=str(ROOT), capture_output=True, text=True)
     tail = r.stdout.strip().splitlines()[-1] if r.stdout.strip() else r.stderr[-300:]
-    return {"what": "tests/unit/test_predictive_densities.py -k 746 (M1.1's -746 by quadrature from an engine scan; "
+    return {"what": "tests/unit/test_predictive_densities.py -k exact_density_of_r0_cys (M1.1's -746 by quadrature from an engine scan; "
                     "PSIS with a width-scaled proposal agrees)", "returncode": r.returncode, "summary": tail,
             "passed": r.returncode == 0}
 
