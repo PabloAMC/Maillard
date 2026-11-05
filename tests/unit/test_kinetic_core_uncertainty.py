@@ -508,13 +508,12 @@ def test_artifact_contract_fields(small_artifact):
 
 
 def test_shared_hofmann_rows_carry_shared_with(small_artifact):
-    rows = {
-        (b["benchmark_id"], c["compound"]): c
-        for b in small_artifact["benchmarks"] for c in b["compounds"]
-    }
-    key = ("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7", MFT)
-    assert rows[key]["shared_with"] == "hofmann_ribose_pH7_MFT"
-    assert rows[("hofmann1998_ribose_cysteine_145C_20min_pH5", MFT)]["shared_with"] is None
+    # 2026-11-05 (H0 / EX-059): both Hofmann MFT rows are now refused for their absolute level, so the envelope
+    # draws no interval for them (the scorecard keeps the shared_with link, tests/unit/test_kinetic_core_scoring.py)
+    refused = {(r["benchmark_id"], r["compound"]): r for r in small_artifact["refused_compounds"]}
+    for key in (("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7", MFT),
+                ("hofmann1998_ribose_cysteine_145C_20min_pH5", MFT)):
+        assert refused[key]["reason"].startswith("NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059)")
 
 
 def test_predicted_point_is_the_deterministic_prediction(small_artifact):
@@ -532,7 +531,8 @@ def test_refused_rows_use_the_engine_refusal_vocabulary(small_artifact):
     # 2026-10-27: H2S + norfuraneol used to be refused here (hydrogen sulfide was not chargeable); it is
     # now a nameable precursor and the row is scored, so it is no longer an example of a refusal.
     key = ("hofmann1998_norfuraneol_h2s_145C_20min_pH5", MFT)
-    assert key not in refused
+    # 2026-11-05: ... and it is refused again, for its absolute level (H0 / EX-059), not for its precursor
+    assert refused[key]["reason"].startswith("NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059)")
     # 2026-09-10: this asserted that 2-pentylfuran was on the named unrepresented list. Wave B28
     # answers it, so the row is scored rather than refused and no longer exercises the vocabulary.
     # 1-hexanol is checked instead, and it is the better example: it is unrepresented because no
@@ -558,10 +558,13 @@ def test_refused_rows_use_the_engine_refusal_vocabulary(small_artifact):
 
 
 def test_same_seed_gives_an_identical_artifact():
-    a = unc.propagate_panel(_SMALL_PANEL[:1], n_samples=6, seed=11, workers=1)
-    b = unc.propagate_panel(_SMALL_PANEL[:1], n_samples=6, seed=11, workers=1)
+    # 2026-11-05: the pea isolate bundle, because the first (ribose + cysteine) has only thiol-lane rows, which
+    # H0 / EX-059 refuses for their absolute level, so no seed would move it
+    one = _SMALL_PANEL[2:3]
+    a = unc.propagate_panel(one, n_samples=6, seed=11, workers=1)
+    b = unc.propagate_panel(one, n_samples=6, seed=11, workers=1)
     assert json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)
-    c = unc.propagate_panel(_SMALL_PANEL[:1], n_samples=6, seed=12, workers=1)
+    c = unc.propagate_panel(one, n_samples=6, seed=12, workers=1)
     assert json.dumps(a["benchmarks"], sort_keys=True) != json.dumps(c["benchmarks"], sort_keys=True)
 
 

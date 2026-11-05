@@ -199,3 +199,28 @@ replacement for Radomski's inferred pKa_T band, by amendment.
   a release rate at ≥ 90 °C).
 - **Secondary (qualitative):** P1a f_oc ~0 at room temperature by NMR (consistent with the 0-0.05 band, no
   detection limit, so it cannot narrow it).
+
+## Second reader (2026-11-05)
+
+**Independent second reading** by `agent-second-reader-2026-11-05`, PDF read before this dossier. Source:
+`data/articles/gajda1990.pdf` (J. Chem. Soc. Dalton Trans. 1990, 3155); Table 2 and Table 3 checked against the page image
+(p. 3157-3158), Fig. 1 read from a 150 dpi render of p. 3156. Printed numbers, so no read error beyond the printed ±.
+
+**Ligand assignment, done before reading sec. "Ligand key" above.** In each Fischer projection the top carbon C-1' is the
+former aldose C-2. Reading the OH side at C-1' / C-2' / C-3' (and C-4' for hexoses), with the terminal CH2OH, CH3 or CH2:
+L1 L/L/R = D-lyxose; L2 L/L/R/R = D-mannose; **L3 R/L/R + CH2OH = D-xylose**; L4 R/L/R/R = D-glucose; L5 L/R/R = D-arabinose;
+L6 R/R/R = D-ribose; **L7 R/L/L = L-arabinose**; L8 R/L/L/R = D-galactose; L9 R/R/L/L + CH3 = L-rhamnose; L10 CH2 then
+L/R/R = 2-deoxy-D-glucose; **L11 = propyl (butanal)**; L12 = H (formaldehyde, thiaproline). Checks: the seven sugars named
+in the synthesis map one to one; the authors' pairs "L1 and L2, L3 and L4, L7 and L8" share C-1'-C-3' configurations only
+under this key; Table 1's calc. M separates pentose (253.3), hexose (283.3, or 301.3 as the monohydrate), deoxyhexose (268.3)
+and propyl (175.3) rings, except the L6 / L7 slip the first reader flags (263.3 printed; I see it too). **My P(L3 is the
+D-xylose ring) ≈ 0.97** (first reader ~0.95). AGREE.
+
+| item | location | first reader | second reader | verdict |
+|---|---|---|---|---|
+| L3 (D-xylose) ring-N log β011 | Table 2 p. 3157 | 5.32 ± 0.02 | **5.32 ± 0.02** | AGREE |
+| L3 log β012 → carboxyl pKa | Table 2 | 6.78 − 5.32 = 1.46 | **6.78 ± 0.05 − 5.32 = 1.46** (authors: log K_CO2H ≈ 1.5 for all) | AGREE |
+| L7 (L-arabinose) ring-N | Table 2 | 5.50 ± 0.02 | **5.50 ± 0.02** (β012 6.93; carboxyl 1.43) | AGREE |
+| L11 (2-propyl) ring-N | Table 2 | 6.25 ± 0.02 | **6.25 ± 0.02** (β012 7.84; carboxyl 1.59) | AGREE |
+| ring-N protonation ΔH° | Table 3 p. 3158 | −20.0 to −32.3 kJ/mol, five ligands, not L3 | **L1 −20.0 ± 0.4, L5 −25.2 ± 0.5, L7 −27.8 ± 0.4, L9 −27.5 ± 0.5, L10 −32.3 ± 0.5 kJ/mol; no L3 row** | AGREE |
+| conditions | Experimental p. 3155-3156 | 25.0 ± 0.1 °C, I = 0.1 M NaClO4, potentiometric, six titrations, pH 1.5-8 | same (atmosphere and electrode model not re-checked by me) | AGREE |

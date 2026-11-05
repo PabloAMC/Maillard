@@ -126,3 +126,22 @@ CF-084 (M1b).
   (180 °C) in 2 h; this argues against declaring that amine destroyed for the cysteine-only sink's share.
 - **Not decisive.** A cysteine-only sink cannot make the 1 : 1 Cys : Xyl deficit (case sec. 2.9 and 4.2), so by the
   case's own logic nothing here can be decisive for (c).
+
+## Second reader (2026-11-05)
+
+**Independent second reading** by `agent-second-reader-2026-11-05`, PDF read before this dossier. Source:
+`data/articles/sohn1995.pdf` (JAFC 43:3001). Fig. 2 (p. 3003) digitised from a 600 dpi crop; y axis calibrated on the
+0.00-0.08 tick marks (16 975 px per mol/L; ticks at 0.02 intervals agree to 1 px); cysteine = filled squares (legend order
+and the text's 82 % at 180 °C fix the series). **Read error ±0.0007 M NH3 (±1.4 % yield).**
+
+| item | location | first reader | second reader | verdict |
+|---|---|---|---|---|
+| Cys NH3 yield, 110 °C, 2 h | Fig. 2 | 0.0070 M (14 %) | **0.0071 M (14.1 %)** | AGREE |
+| Cys NH3 yield, 150 °C, 2 h | Fig. 2 | 0.0381 M (76 %) | **0.0378 M (75.6 %)** | AGREE |
+| Cys NH3 yield, 180 °C, 2 h | Fig. 2; text p. 3003 "82%" | 0.0410 M (82 %) | **0.0407 M (81.4 %)**, bar ±0.0013 M (±2.7 %); printed **82 %** | AGREE |
+| concentration | Methods p. 3002; Fig. 2 caption | 0.05 M (Fig. 2); Fig. 1: 2 g / 250 mL, "on the basis of 0.1 M" | same | AGREE |
+| pH | Methods | initial pH 8, 0.1-1 N NaOH, no buffer | same; no pH after heating | AGREE |
+| reactor / heating | Methods | 0.3 L stainless-steel reactor (Hoke), drying oven at preset T, 2 h, ice-bath quench | same. The fill volume of the 0.05 M runs is not printed; the 250 mL charge is stated for the Fig. 1 runs only, so the ~50 mL headspace is an inference for both | AGREE |
+| assay / replicates | Methods | Orion 95-12 ammonia electrode, ISA added; ≥ triplicate | same | AGREE |
+
+Only the 82 % is printed; 14 and 76 % are figure reads by both readers.

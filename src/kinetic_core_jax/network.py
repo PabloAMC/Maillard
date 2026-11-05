@@ -43,13 +43,19 @@ BALANCE_TOL = 1e-9
 class RateCtx(NamedTuple):
     """What a module's rate function may read besides its own coordinates: the segment's temperature (both scales,
     T_K = T_C + 273.15 exactly as the engine computes it) and, for pH-coupled networks, the in-situ pH, the cooled
-    label pH and the ionic strength (None in a pH-free network)."""
+    label pH and the ionic strength (None in a pH-free network).
+
+    In pH mode "prescribed" (contract v2 sec. 2.4) ``ph_label`` is the pot's DECLARED pH, read from the pot data
+    (``pot["ph_label"]``) and constant over the programme -- the engine's declared-pH factors (trunk B12 / B40,
+    acrylamide B15) -- and ``ph`` stays None. ``aw`` is the pot's declared water activity (``pot["aw"]``). Both are
+    NaN where the engine's value is None; a module reads them only if it lists them in ``Module.pot_inputs``."""
 
     t_c: Any
     t_k: Any
     ph: Any = None
     ph_label: Any = None
     ionic_m: Any = None
+    aw: Any = None
 
 
 @dataclass(frozen=True)
@@ -75,6 +81,13 @@ class Module:
     needs_ph: bool = False
     config_digest: str = ""
     notes: Tuple[str, ...] = ()
+    #: pot scalars the rate function reads through ``RateCtx`` (a subset of ``POT_INPUTS``); ``integrate`` refuses a
+    #: pot that lacks one. "ph_label" makes the network's pH mode "prescribed" (a declared, constant pH).
+    pot_inputs: Tuple[str, ...] = ()
+
+
+#: the pot scalars a module may read (``pot[name]``, NaN for the engine's None)
+POT_INPUTS = ("ph_label", "aw")
 
 
 @dataclass(frozen=True)
@@ -99,6 +112,18 @@ class Network:
     @property
     def n_species(self) -> int:
         return len(self.species)
+
+    @property
+    def pot_inputs(self) -> Tuple[str, ...]:
+        return tuple(sorted({x for m in self.modules for x in m.pot_inputs}))
+
+    @property
+    def ph_mode(self) -> str:
+        """Contract v2 sec. 2.4: "inline" (a charge balance in the RHS), "prescribed" (a declared pH read from the
+        pot; constant over the programme in every module ported so far) or "none"."""
+        if self.needs_ph:
+            return "inline"
+        return "prescribed" if "ph_label" in self.pot_inputs else "none"
 
     def theta0(self) -> Dict[str, Dict[str, Any]]:
         """The shipped coordinates as the pytree the solvers take."""
@@ -128,6 +153,9 @@ def compose(modules: Sequence[Module], *, layout: Optional[Sequence[str]] = None
         missing = [r for r in m.requires if r not in names]
         if missing:
             raise ValueError(f"module {m.name} requires {missing}")
+        unknown = [x for x in m.pot_inputs if x not in POT_INPUTS]
+        if unknown:
+            raise ValueError(f"module {m.name} reads unknown pot inputs {unknown} (declared: {POT_INPUTS})")
     owner: Dict[str, str] = {}
     for m in modules:
         for s in m.species:
@@ -257,17 +285,23 @@ def _solver_of(net: Network):
 
 def integrate(net: Network, theta, pot: Mapping[str, Any], *, solver=None, rtol: float = 1e-8, atol: float = 1e-14,
               adjoint=None, max_steps: int = 100_000, throw: bool = True) -> Run:
-    """One pot (``{"y0": (n,), "segments": (S, 2)}``) through its thermal program.
+    """One pot (``{"y0": (n,), "segments": (S, 2)}``, plus the scalars in ``net.pot_inputs``) through its thermal
+    program.
 
-    Rate constants are evaluated once per segment (temperature is constant on it; a pH-free network has no state
-    dependence in its constants). ``throw=False`` flags a failed pot (``Run.failed``) instead of raising, which is what
-    a fit over many pots needs (XLA cannot be interrupted by a signal)."""
+    Rate constants are evaluated once per segment (temperature is constant on it, and so are the declared pot
+    scalars; a network without inline pH has no state dependence in its constants). ``throw=False`` flags a failed
+    pot (``Run.failed``) instead of raising, which is what a fit over many pots needs (XLA cannot be interrupted by
+    a signal)."""
     import diffrax
 
     if net.needs_ph:
         raise UnsupportedConfiguration(
             "the composed network's pH coupling (charge balance inside the RHS, contract v2 sec. 2.4) is not ported "
             "yet; the sulfur bake-off (lane.py / model.py) carries it standalone")
+    missing = [x for x in net.pot_inputs if x not in pot]
+    if missing:
+        raise ValueError(f"the pot lacks {missing}, which the network's modules read (NaN stands for None)")
+    scalars = {x: jnp.asarray(pot[x], dtype=jnp.float64) for x in net.pot_inputs}
     stoich = jnp.asarray(net.stoichiometry)
     term = diffrax.ODETerm(lambda s, y, args: args[1] * (stoich @ (args[0] * mass_action(y, net))))
     solver = solver or _solver_of(net)
@@ -276,7 +310,7 @@ def integrate(net: Network, theta, pot: Mapping[str, Any], *, solver=None, rtol:
 
     def segment(y, seg):
         duration, t_c = seg[0], seg[1]
-        k = net.rate_constants(theta, RateCtx(t_c=t_c, t_k=t_c + CELSIUS))
+        k = net.rate_constants(theta, RateCtx(t_c=t_c, t_k=t_c + CELSIUS, **scalars))
         sol = diffrax.diffeqsolve(term, solver, t0=0.0, t1=1.0, dt0=None, y0=y, args=(k, duration),
                                   saveat=diffrax.SaveAt(t1=True), stepsize_controller=controller,
                                   max_steps=max_steps, adjoint=adjoint, throw=throw)

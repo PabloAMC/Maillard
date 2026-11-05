@@ -759,7 +759,14 @@ entries:
       same-lab replicate (NF 0.735 vs 0.63 mM, MGO 0.038 vs 0.011 mM at 0.5 h; OPD 1 h RT vs 5 h at 20 C), whose decay
       constant agrees (0.034 vs 0.032 /min): it supports the B61 anchor as one laboratory, never as a second
       independent lab. (d) lee2024 / lee2022 -- NOT a duplicate (P 0.9): one experiment published in two halves with
-      disjoint species (non-volatile markers vs oven-vapour volatiles); no cell to double-count.
+      disjoint species (non-volatile markers vs oven-vapour volatiles); no cell to double-count. [Added 2026-11-05, M1b
+      prereg v3.6 DRAFT sec. 17 item 1, checked against the dossiers: fed norfuraneol ALONE with a measured loss exists on
+      disk at one pH per laboratory. Mikami 2017 Fig. 6B and every fed-NF run of Nakamura 2020 (Fig. 3, D / E / G) are one
+      design, ~1.8 mM in 0.2 M phosphate pH 8.0, 100 C; the only other series is Bork 2022 / 2023, pH 5 initial,
+      unbuffered, 130 C (TU Berlin; CF-112), another laboratory and temperature. So no within-laboratory fed-NF pH
+      contrast exists. Fed NF with a partner (Hofmann 1998 + Cys / H2S at pH 5; Zhai 2023 JAFC + (NH4)2S at pH 7; Bork's
+      binary pots at pH 5) is not an NF-alone decay. Part (c) stands: the prereg's "a data copy (CF-019)" for Nakamura
+      Fig. 3 is wrong; it is a same-lab replicate.]
     explanations:
       - "Same laboratory reusing control arms or reference series in later papers."
       - "(a) leahy1989a's pH 9.0 rows (Table I) and pH 9.0 column (Table III) reprint ch. 7's lysine-glucose block, with typescript slips in secondary cells."
@@ -1756,7 +1763,11 @@ entries:
       Zhou 2022 and Zhou 2024 (not only 2024 / 2025b); flag Zhou 2022 and Zhou 2024 dicarbonyl rows
       'nitrogen_closure_violated'. Decided by: the OPD-step dilution factor of each paper (authors or raw
       chromatograms), Zhou 2024b Fig. S2 (pH) and the Zhou 2024 SI. Ask the authors (Zhang X, Jiangnan) which print is
-      right; until then no absolute dicarbonyl level from this laboratory constrains a constant.
+      right; until then no absolute dicarbonyl level from this laboratory constrains a constant. Consequence added
+      2026-11-05 (M1b prereg v3.6 DRAFT sec. 17 item 7): the two pH 8 pots are one nominal design (unbuffered water, NaOH
+      to pH 8, AX-ARP 20 mM, 120 C) whose measured pH trajectories differ by 0.91 / 0.73 / 0.47 / 0.42 units at 30 - 120
+      min; unless they are different pots in fact (explanation 3), that is this laboratory's reproducibility of an
+      unbuffered pH trajectory, and any pH control from this group carries it (+-0.4 - 0.9 pH), not the read error.
     affects: [zhou2024_fig3_fig4_axarp_dicarbonyls_ph, zhou2024_fig3cd_deoxyxylosones_arp_ala, zhou2025b_figs1_3_axarp_xylose_120c, zhou2025b_fig2bc_deoxyxylosones_axarp_xylose, zhou2022_fig1cd_deoxypentosones_arp_cys, zhou2023c_fig4ab_deoxypentosones_arp_gsh]
 
   - id: CF-061
@@ -1847,8 +1858,17 @@ entries:
       exclude cystine or H2S, which take cysteine only, and sugar degradation, which takes xylose only): most likely an
       unmeasured Cys-Xyl adduct in fast exchange (open-chain / Schiff-base / hemithioacetal or a TTCA isomer outside the
       MRM transition), which is CF-076's question -- passed there as "a fast, reversible-looking 1 : 1 pool of ~30-50 %
-      of the charge", not as a slow irreversible sink. P(adduct rather than a destructive sink) ~0.65.
-    affects: []
+      of the charge", not as a slow irreversible sink. P(adduct rather than a destructive sink) ~0.65. Extended 2026-11-05
+      (M1 + M2 refit prereg, results/validation/kinetic_core_m1m2_supply_routes_refit_prereg.md sec. 0A and sec. 17 (c);
+      PDF p. 7 at 400 dpi): the blank is re-confirmed (keyed ln(C/C0) -0.680 ... -3.910 match the 400-dpi read; OLS 5 - 50
+      min k 0.0715, b -0.297; the printed line misses by +0.375 at 5 min, +0.23 at 30, -0.20 at 50; no window reproduces
+      it, the prereg's search). Every printed cysteine intercept, x1 - x16, is -0.632 to -0.900 (xylose -0.303 to
+      -0.337), and the x1 line misses its points by about +0.4 at 5 - 10 min and -0.6 at 50 min, read by eye at 400 dpi
+      (the prereg marks this UNVERIFIED beyond eyeball; no lysine-arm point is keyed). So the cysteine fits misfit the
+      panel, the lysine arms likely included; a label swap with another panel is P ~0.15 (the prereg's estimate). The
+      cysteine part stays "never used"; the lysine arms' points are keyed before any claim rests on them. See also CF-109
+      (the high-lysine arms below the ELSD curve's zero point).
+    affects: [zhang2025b_fig2dh_rate_fits]
   - id: CF-064
     kind: self_contradiction
     scope: sulfur_rows
@@ -1998,12 +2018,23 @@ entries:
     remedy: >-
       Both stay as data: Schieberle in the joint fit, Yiltirak a declared hold-out. Neither is down-weighted; the spread
       is reported as between-laboratory error if the thiol layer ships as a declared limitation (thiol prereg sec. 6).
+      [APPLIED 2026-11-05 in its out-of-sample form (H0 / EX-059, D2 branch (i); owner-approved): the between-laboratory
+      level error was estimated by leave-two-laboratories-out, tau_ABS(all) 0.964 dex, U >= 1.60, so the thiol lane's
+      absolute levels for a new laboratory are REFUSED by name (thiol_relative_only.RELATIVE_ONLY_SPECIES: MFT, FFT, MFTD,
+      furfural, norfuraneol, and methylglyoxal on the sulfur lane) and only within-study ratios ship, with omega 0.42 dex
+      and measurement noise per arm in their interval; choices
+      register CR-18 / CR-19. This conflict is unchanged by it: the 2.1 dex gap between the two laboratories is exactly
+      the kind of level error the refusal declines to hide, and a third laboratory's SIDA pot (the first test below) is
+      also what H0' needs to lift it.]
       Proposed 2026-11-01 (cluster 4): that declared between-laboratory band for absolute MFT levels is 0.5-0.75 dex (1
       SD), from the four isotope-quantified laboratories' residual scatter; an O2-consumer arm (OX charged from the
       vessel block, k_cys_ox in Ehrenberg 1989's form) is a declared, unfitted arm. Decider (designed): Yiltirak's recipe
       (25 / 25 mM, pH 5.5, 100 C, 4 h) in 3 vs 15 mL fills, argon vs air, SIDA for MFT and bis(2-methyl-3-furyl)
       disulfide. Author requests: Elmore (disulfides / chromatograms), DFA (the Table IV autoclave fill).
-    affects: [schieberle2000_t4_100c_time_course, yiltirak2026_tables3_buffer_arm_mft_fft]
+    affects:
+      - schieberle2000_t4_100c_time_course
+      - yiltirak2026_tables3_buffer_arm_mft_fft
+      - {file: src/kinetic_core/thiol_relative_only.py, symbol: RELATIVE_ONLY_SPECIES}
   - id: CF-069
     kind: conflict
     scope: corpus
@@ -2057,7 +2088,7 @@ entries:
   - id: CF-071
     kind: conflict
     scope: corpus
-    sources: [zhai2019, zhai2023jafc, zhou2022, zhou2023c, hou2026, wei2022, zhou2024b, zhou2024]
+    sources: [zhai2019, zhai2023jafc, zhou2022, zhou2023c, hou2026, wei2022, zhou2024b, zhou2024, carta1996]
     quantity: "an additive's effect on the 3- / 1-deoxypentosone ratio: double ratio DR = (TDP / DPO) with additive over without (signature iii)"
     observation: >-
       Zhai 2019 Fig. 3b (fed TTCA +- cysteine, 120 C) gives a double ratio of 0.45 (0.32 - 0.60): cysteine lowers TDP
@@ -2089,7 +2120,9 @@ entries:
       3-DX; it is reported, never decisive, in every arm (B7a: kinetic_core_dpo_partition_prereg.md sec. 7). Hou 2026
       cystine is a held-out NEGATIVE control for any trap structure (a thiol-specific trap must not reproduce it, or must
       explain it; note, P < 0.6: in-situ reduction of cystine, P ~0.2). Cystine at 5 mM exceeds its room-temperature
-      solubility ~10x (a suspension): weight the cystine arm 0.5.
+      solubility ~7x (a suspension): weight the cystine arm 0.5. [Corrected 2026-11-05: was "~10x"; Carta 1996 measures
+      L-cystine at 0.69 - 0.71 mmol/L (0.168 g/L) in water at 25 C over pH 3 - 8.6 (carta1996 dossier); the solubility at
+      120 C is not measured.]
     affects: [zhai2019_fig3b_dicarbonyls_ttca, zhai2023jafc_fig5_arp_dicarbonyls]
   - id: CF-072
     kind: code_mismatch
@@ -2194,7 +2227,7 @@ entries:
   - id: CF-076
     kind: conflict
     scope: other_lane
-    sources: [zhai2021, zhai2019, cao2017, zhang2025b, kallen1971, kallen1971b, hou2026, karpinski1990, radomski1989, bustillotrueba2018, kallen1973, goldberg2002]
+    sources: [zhai2021, zhai2019, cao2017, zhang2025b, kallen1971, kallen1971b, hou2026, karpinski1990, radomski1989, bustillotrueba2018, kallen1973, goldberg2002, belikov1967, wlodek1993]
     quantity: "the cysteine / xylose <-> TTCA exchange (thiazolidine formation k_f, its reverse k_ttca_cys, K) across dilute and concentrated pots"
     observation: >-
       Zhai 2021's dilute fed-TTCA pots (~10 mM, unbuffered water, pH 5.5 - 8) and their +/- xylose contrast want slow exchange: a
@@ -2207,6 +2240,27 @@ entries:
       TTCA is lost); catalysed exchange + in-situ pH passes only if one test that fails every structure is dropped (post
       hoc). The conflict is inside ONE laboratory (Zhai 2021 vs Zhai 2019); Cao 2017 adds little; Kang 2026 Fig. S3 is a
       copy of Zhai 2021 Fig. 6 (not independent).
+      [Added 2026-11-05, three notes, each checked against its dossier. (1) M1 + M2 refit prereg sec. 17 (a): inside the
+      Xie laboratory (BTBU; Cao 2017 and Zhang 2025b are both Xie's, not Jiangnan's) Cao's quotient is 58.5 - 64.6 L/mol at
+      90 C, cooled pH ~4.4, while Zhang 2025b's face-value [TTCA] / ([Cys][Xyl]) reaches 18.2 / (0.80 x 1.22) = ~18 600
+      L/mol at 50 min, 120 C, phosphate label 6.5 (pH never measured), and is not stationary (it rises through Cao's 60
+      near 10 min; arithmetic on the keyed route rows). Case M1c (frozen, sec. 3, rival R-cal) cuts against reading this
+      as "no single K": at full closure Cao's K reproduces
+      Zhang's TTCA plateau (18.3 - 20.1 vs measured 17.7 / 18.2 mM), so the conflict holds only if Zhang's free Cys / Xyl
+      are taken at face value (they fall below the ELSD floor, CF-109); the supply screen finds no banded form that reaches
+      Zhang's blank (EX-062). (2) Belikov 1967 (belikov1967 dossier sec. 6 item 2; Table 1): L-arabinose thiazolidine
+      tau1/2 28.9 h at pH 3.16 and 29.1 h at pH 4.99, 50 C, i.e. 4.0e-4 /min, already above the run's feasible k_r(100 C,
+      pH 4.5) of 0.9 - 3.2e-4 (x1.25 at 50 C; any positive Ea widens it) and inside the declared [2e-4, 8e-4]. Caveats: the
+      observable is net sugar appearance, not cysteine release; a cysteine sink runs; L-arabinose, pH 4.99, one
+      temperature. P ~0.5 that it is a real conflict with the feasible ridge once the definitions are aligned (the
+      dossier's). (3) The L-arabinose ring across three laboratories (wlodek1993 sec. 6 item 1; belikov1967 sec. 6 item 1):
+      Karpinski 1990 AThz (25 C, argon, voltammetric Cys) 1.8e-4 /min at pH 6.0, 4.8e-5 at pH 7.4; Wlodek 1993 CAr(L) (37
+      C, pH 7.4, air, DTNB thiol) 2.7 - 3.7e-4; Belikov 4.0e-4 (50 C, pH 4.99). Apparent Ea: Karpinski -> Wlodek at matched
+      pH 7.4, 111 - 131 kJ/mol; Karpinski pH 6.0 -> Belikov pH 4.99, ~26; Wlodek -> Belikov 5 - 24 (pH unmatched). The
+      observables, atmospheres and pH differ, so both dossiers call it not a conflict of kind; Karpinski's own air vs argon
+      (Thz x4.3 at pH 6.0) explains part of Wlodek's speed. It bears on explanation 1's (k25, Ea) ridge: no pair of these
+      pins a release Ea. Dossier slip, not corrected here: belikov1967's "~45 kJ/mol if Karpinski's PrThz pH shape
+      (0.29)" gives ~65 with 0.29; ~40 - 47 needs the shape interpolated to pH 4.99 - 5.2.]
     explanations:
       # rewritten 2026-11-01 after the cluster-5 re-run of EX-054 (P from docs/history/conflict_resolution_2026-11-01/cluster5/verdict.md sec. 5)
       - "In-situ pH with Kallen-shaped K(pH) and k_r(pH), fitted effective pKa_T 5.2-5.5 (T-independent in the battery; not a measured pKa): the concentrated unbuffered pots and Zhang 2025b's phosphate pH 6.5 pot sit at higher K and faster release than Cao (pH 4.2-4.7) and the drifting dilute pots (~4.5-5.5). Revised 2026-11-01 (resolve2_sulfur and its red team): with the release rate anchored at 25 C by a pentose-Cys ring (Karpinski 1990, AThz / Thz ~1), feasible only along a (k25, Ea) RIDGE -- Karpinski's printed rate needs a release Ea of ~26 kJ/mol, the band's mid-point ~32, the x6-deflated floor ~41 (E4c) to ~49 (E2c). The x6 deflation is not self-consistent with E2c (no catalysis term) and exceeds E4c's own phosphate factor at Karpinski's conditions (~1.6); the feasible corner sits below every pH-4.5 analogue with three bounds active (a misfit signature: P ~0.5 that 'slow release' stands in for an unmodelled sink, TTCA quantification or K). No thiazolidine release Ea is measured: P(effective release Ea at fixed pH <= 32) ~0.1, <= 45 ~0.25, <= 50 ~0.35. Admitted provisionally, CONDITIONAL on a low release Ea; P 0.25 (was 0.45; the resolution's 0.35, red team 0.25)."
@@ -2467,7 +2521,7 @@ entries:
   - id: CF-084
     kind: code_mismatch
     scope: sulfur_rows
-    sources: [meynier1995, hou2026, zhou2023]
+    sources: [meynier1995, hou2026, zhou2023, sohn1995, cao2017]
     quantity: "cooled pH after heating: the engine's charge balance (ph_state, B51 as shipped) vs measured pots"
     observation: >-
       Negative control: Meynier 1995 (cysteine 50 + ribose 35 mM, 0.2 M pyrophosphate, 140 C, 1 h) measured a drift of
@@ -2479,6 +2533,27 @@ entries:
       promptly with ARP loss, the measured acid keeps coming after the ARP is gone. Within-lab: Zhou 2023 ARP 20 mM
       alone, labels 6 / 7 / 8 -> 3.99 / 4.13 / 4.99 measured (zhou2023 dossier Fig. 2) against engine 3.19 / 4.55 /
       7.09: label sensitivity ~4x too large. Found by cluster 3 (2026-11-01).
+      [Added 2026-11-05, four notes, checked against their sources. (1) Sohn & Ho 1995 (sohn1995 dossier Fig. 2):
+      cysteine 0.05 M alone, initial pH 8 (NaOH, unbuffered), sealed, 2 h, releases 14 / 76 / 82 % of its amine N as NH3
+      at 110 / 150 / 180 C (82 % printed): the cysteine amine leaves as a base, not destroyed. AMINE_FATE_BASIS declares
+      the amine "non-titratable at the point of release", and CENTRE_LEDGER applies amine -1 to r_cys_h2s (whose own basis
+      text reads "H2S + NH3 + pyruvic acid"), r_cys_thermal and ch_cys_ox: direct support for explanation 1, in an
+      unbuffered, sugar-free pot. (Its rate conflicts with Mizutani 1960: CF-116.) (2) Hou 2026 Fig. 3A / 3H (calibrated):
+      glycine released per GX-ARP consumed 0.40 / 0.32 / 0.29 / 0.27 / 0.25 at 20 - 120 min (0.719 mM Gly vs 1.80 mM ARP
+      lost at 20 min), against r_arp_dpo / r_arp_tdp (and their thermal forms), which return no amino acid (amine -1 on
+      AMINE_FATE_BASIS; products DPO / TDP + CBX + FRAG): explanation 1 again, for the ARP's amine. (3) The balance's two
+      fitted constants, ACID_YIELD_PER_SINK_EVENT and ARP_AMINE_PKA (ph_state.py "WHAT IS FITTED HERE"; live fields
+      PhDrift.acid_yield / arp_amine_pka), are calibrated on the three anchors of ONE arm, Zhou 2023 Fig. 2 ARP + Cys
+      (initial 6 / 7 / 8 -> final 3.22 / 3.42 / 5.07); B60's only pH rows are those three, and B60 puts the acid yield ON
+      ITS LOWER BOUND (7.50e-5; kinetic_core_b60_fit_report.json "bound": "lower"; bound_limited in kinetic_core_b60_profile.md):
+      a bound-active calibration from one arm, so the balance's acid supply is not identified, and explanation 3's pKa
+      7.07 comes from the same three numbers. (4) Cao 2017 on the cooled scale (Cao pot-input audit 2026-11-05, recorded in
+      plan-resequence-2026-11-05 commit 2ff2bcd8; M1b prereg sec. 17 item 2; refit prereg sec. 17 (e)): the engine starts
+      at cooled 5.500 against 5.50 measured and reads 4.476 against 4.679 at 30 min with the cysteine-Amadori route on at
+      B60's constants (4.427 with M1's carried C1 optimum; kinetic_core_supply_structure_signature_screen.md, Cao's pH on
+      the cooled scale, 0.2 - 0.4 low from 30 min); the audit's -0.20 is all 7.9 mM of
+      cysteine carboxyl carried out with its amine declared destroyed (without it 4.665), i.e. explanation 1. The earlier
+      "in-situ 3.86 -> 3.89 vs measured 4.67 -> 4.15" compared an in-situ value with cooled readings and is withdrawn.]
     explanations:
       - "Amine fate: released NH3 survives in buffered cysteine pots (AMINE_FATE_BASIS's own named failure direction, 'too acidic')."
       - "Acid timing: acid forms downstream of the ARP with a lag, not with the carboxyl carried out at ARP loss."
@@ -2494,7 +2569,11 @@ entries:
     affects:
       - meynier1995_table3_cys_ribose_ph_ladder
       - zhou2023_fig2_final_ph
+      - cao2017_fig4c_ph
+      - hou2026_fig3a_fig3h_gx_arp_decay_glycine_release
       - {file: src/kinetic_core/ph_state.py, symbol: AMINE_FATE_BASIS}
+      - {file: src/kinetic_core/ph_state.py, symbol: PhDrift}
+      - {file: src/kinetic_core/sulfur.py, symbol: CENTRE_LEDGER}
 
   - id: CF-085
     kind: duplicate
@@ -3177,3 +3256,439 @@ entries:
       whole-model refusals of B11, B16, B17b and B25 are not evidence against those structures until then.
     affects:
       - {file: src/kinetic_core/parameters_sulfur.py, symbol: k_mft_decay}
+
+  # ---- registered 2026-11-05 from the day's design records (M1 + M2 refit prereg sec. 17, M1b prereg v3.6 DRAFT
+  # sec. 17, M3 prereg v2 DRAFT sec. 19, case M1c and its amendment A1) and the 11-05 dossiers; each re-read against
+  # its dossier (and where named, the PDF text layer) before filing. Appends to CF-019 / 060 / 063 / 071 / 076 / 084
+  # are dated in those entries. ----
+
+  - id: CF-108
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [zhai2021]
+    quantity: "the activation energy of TTCA degradation in Zhai 2021 (fed TTCA, unbuffered water, natural pH 5.5, 100 / 120 / 140 C)"
+    observation: >-
+      Zhai 2021 prints the three first-order lines y = -0.0271x + 10.331 (100 C), -0.0651x + 9.9718 (120 C) and
+      -0.0813x + 9.3375 (140 C) and an Ea "calculated to be 80.99 kJ/mol" (PDF text; zhai2021 dossier sec. 2). An
+      Arrhenius regression on its own k 0.0271 / 0.0651 / 0.0813 /min gives ~35.5 kJ/mol (35.2 with the dossier's
+      suspected 0.0274 at 100 C); pairwise 53.4 (100 -> 120 C) and 15.0 (120 -> 140 C), so the series is also not
+      Arrhenius-straight. The series is the pH 5.5 one (CF-010), not pH 7. Found by the M1 + M2 refit prereg sec. 17 (b);
+      re-derived 2026-11-05 from the dossier table.
+    explanations:
+      - "A typo or a different fit (another unit, another data set) behind the printed Ea; the k values plot as printed."
+      - "The Ea was fitted on concentrations rather than on the printed slopes (not reconstructable from the paper)."
+    tests: []
+    status: open
+    remedy: "Use the printed k, never the printed Ea, for any TTCA-degradation barrier; no shipped constant reads the 80.99. Decider: the authors' fit, or a re-read of Fig. 3a by two readers."
+    affects:
+      - zhai2021_fig3a_ttca_tladder
+      - {file: src/kinetic_core/parameters_sulfur.py, symbol: k_ttca_deg}
+
+  - id: CF-109
+    kind: self_contradiction
+    scope: sulfur_rows
+    sources: [zhang2025b]
+    quantity: "free cysteine in Zhang 2025b's high-lysine arms (Figs. 2d-h) against the zero-signal point of its printed ELSD calibration"
+    observation: >-
+      Zhang 2025b prints one ELSD calibration for cysteine and for xylose, y = 263.28 x - 58.733 (identical for both
+      analytes; zhang2025b dossier sec. 2), whose zero-signal point is 58.733 / 263.28 = 0.223 mmol/L. The printed
+      first-order fit lines of the high-lysine arms run below it inside their windows: x16 (k 0.328, b -0.900) gives
+      0.12 mM at 15 min and 0.023 mM at 20 min; x8 gives 0.056 mM at 25 min; the dossier records that the x16 fits stop
+      at 15 - 25 min because the concentrations fall below detection. The M1 + M2 refit prereg sec. 17 (d) reads the
+      plotted points at ~0.03 - 0.06 mmol/L; those points are not keyed (not in the dossier, the ledger or the fit rows),
+      so that reading is not verified here. The identical two-analyte curve is itself unexplained.
+    explanations:
+      - "Points extrapolated from the fit lines rather than measured (consistent with the fits stopping where the signal is lost)."
+      - "A separate low-range calibration not printed."
+      - "One curve printed twice in error (the two analytes would not share a response)."
+    tests: []
+    status: open
+    remedy: "Treat Zhang 2025b free Cys / Xyl below 0.223 mmol/L as censored at the ELSD curve's zero point (as case M1c sec. 6 declares); no constant moves. Decider: the authors' calibration data or raw chromatograms."
+    affects:
+      - zhang2025b_fig2dh_rate_fits
+
+  - id: CF-110
+    kind: conflict
+    scope: sulfur_rows
+    sources: [zhai2021]
+    quantity: "the pH dependence of fed-TTCA loss (Zhai 2021 Fig. 4b, 100 C, pH 5.5 -> 8) against every engine and candidate supply structure"
+    observation: >-
+      Zhai 2021 Fig. 4b at 80 min: TTCA 8.19 / 10 left at pH 5.5 and 1.47 / 10 at pH 8, a loss ratio ln(0.147) /
+      ln(0.819) = 9.60. The supply-structure signature screen (results/validation/kinetic_core_supply_structure_signature_screen.md)
+      finds the maximal pH 8 / 5.5 loss ratio 1.01 / 1.00 / 1.36 / 1.00 for the candidates S1 / S2pow_rel / S2k3 / S3:
+      none has a TTCA exit faster at high pH. Only the diagnostics S3X (12.29) and S2k3X (13.23) reach it, by a
+      declared, unsourced exit law. In the engine REACTION_PH_FACTOR has no entry for r_ttca_deg, r_cama_form or
+      r_ttca_cys. The atlas row F04-b (engine_vs_literature.yml) records the same gap without a CF.
+    explanations:
+      - "A base-favoured TTCA exit (ring opening through the deprotonated ring N, or a base-catalysed Amadori step) that no structure carries."
+      - "In-situ pH: the unbuffered pH 8 pot drifts acid (CF-010), so the effective contrast is smaller than 5.5 -> 8, which makes the needed exit steeper, not shallower."
+    tests:
+      - "Supply-structure signature screen (EX-062): signature (b) fails for every candidate; the record's verdict reads 'needs a TTCA exit that is faster at high pH, which no candidate has'."
+    status: open
+    remedy: "No engine change. A new engine-error candidate for the atlas (E10-adjacent). Decider: a measured TTCA loss across pH with the pH held (pH-stat) at one temperature, or the authors' in-pot pH."
+    affects:
+      - zhai2021_fig4b_ttca_ph_ladder
+      - {file: src/kinetic_core/sulfur.py, symbol: REACTION_PH_FACTOR}
+      - {file: src/kinetic_core/sulfur.py, symbol: r_ttca_deg}
+      - {file: src/kinetic_core/parameters_sulfur.py, symbol: k_ttca_deg}
+
+  - id: CF-111
+    kind: conflict
+    scope: sulfur_rows
+    sources: [zhao2017b, cao2017]
+    quantity: "the pH dependence of the apparent TTCA quotient K_app = [TTCA] / ([Cys][Xyl]) in the BTBU 0.4 M Cys + Xyl, 0.2 M phosphate pots at 90 C"
+    observation: >-
+      Zhao 2017b's blank (a same-lab sibling run of Cao 2017's) gives K_app 59.2 / 60.3 / 62.6 / 66.8 / 71.2 / 78.0 L/mol
+      at 0.5 - 5 h while its pH (6x dilution read at 25 C) falls 4.51 -> 4.10 (zhao2017b dossier arithmetic 1 and the
+      pH table): OLS slope of log10 K on pH -0.290 dex/pH, residual se 0.019, 90 % CI -0.33 to -0.25 (case M1c, unit a).
+      Cao 2017's K_app stays 58.5 - 64.6 L/mol (slope +0.013, CI -0.155 to +0.180), the "flat K" that CF-011 / CF-076
+      and TTCA_FORMATION use. The two CIs are not like for like: Zhao's is residual only; with the dossier's +-8 % read
+      error per K it widens to about -0.50 to -0.08 (independent errors assumed), still excluding 0 but overlapping
+      Cao's. The pH scales differ (Zhao a cooled 6x dilution, Cao the undiluted cooled sample), and the dossier puts P
+      0.70 on separate physical runs.
+    explanations:
+      - "K depends on pH through the ring-N / thiol speciation (Kallen's bookkeeping): Zhao's wider pH fall shows it, Cao's narrower one does not."
+      - "Read error in Zhao's late, low free-Cys points inflates the quotient (the late K uses the smallest denominators)."
+      - "A slow non-equilibrium drift (Cys-Amadori growth) masquerading as a K trend."
+    tests: []
+    status: open
+    remedy: "Case M1c scores unit (a) as a consistency check only (frozen). No constant moves; TTCA_FORMATION keeps Cao's K with this conflict named. Decider: K_app at two pH values held constant (pH-stat) in one pot design."
+    affects:
+      - zhao2017b_fig2abde_xyl_cys_ttca_cama
+      - zhao2017b_fig2c_ph_diluted
+      - cao2017_fig4ab_cys_xyl
+      - cao2017_fig5_ttca_cama_glyarp
+      - cao2017_fig4c_ph
+      - {file: src/kinetic_core/parameters_sulfur.py, symbol: TTCA_FORMATION}
+
+  - id: CF-112
+    kind: conflict
+    scope: sulfur_rows
+    sources: [bork2022, bork2023, mikami2017]
+    quantity: "norfuraneol (NF) loss when fed alone at pH 5 (initial, unbuffered), 130 C: Bork 2022 / 2023 vs the shipped pH-free r_nf_decay"
+    observation: >-
+      Bork 2022 Fig. 1D (NF alone 20 mM, 130 C, pH 5 initial, unbuffered; 100 / 85.9 / 75.1 / 59.2 / 42.2 / 20.0 % at
+      0 - 300 min) gives k 4.80e-3 +- 0.18e-3 /min weighted (4.9e-3 quoted; 5.1e-3 unweighted; second reader agrees);
+      the 0 - 120 min two-point value is 4.4e-3, and Bork 2023 Fig. 4B (48 % left at 120 min) gives 6.1e-3. The shipped
+      k_nf_decay (log10 k(145 C) -2.182 /min, carbonyl-sink barrier 143.5 kJ/mol; core_prediction_uncertainty.md) gives
+      1.415e-3 /min at 130 C, so the engine is 3.1 - 4.3x too slow (3.5x at 4.9e-3), independent of any pH law. B61's
+      hydroxide term (NF_HYDROXIDE_DECAY, 3.2e-4 at pH 5, 130 C) is OFF in the shipped engine; the bork2022 dossier's
+      proposed text "engine 1.4e-3 (pH-free) + 3e-4 (B61)" counts it in, and even with it the gap is 2.8x. B61's anchor
+      (Mikami 2017 Fig. 6B, pH 8, 100 C) is a different pH and temperature. One laboratory (TU Berlin), unbuffered,
+      headspace / O2 not stated.
+    explanations:
+      - "The pH-free carbonyl-sink constant is too slow at acid pH (it was never fitted to a fed-NF pot)."
+      - "An acid-side or O2 / metal route (CF-117) that the engine lacks."
+      - "Assay or vessel differences in Bork's ampoules (CF-113's within-lab spread is ~x1.4 in k)."
+    tests: []
+    status: open
+    remedy: "No engine change now; M1b part (ii) carries Bork as a band (prereg v3.4 - v3.6). Ledger rows proposed in the bork2022 / bork2023 dossiers (bork2022_fig1d_norfuraneol_alone_decay_ph5_130c, bork2023_fig4_norfuraneol_methylglyoxal_left_120min_ph5_130c) are not yet written. Decider: fed NF at two pH values in one lab with the pH and O2 recorded."
+    affects:
+      - mikami2017_fig6b_norfuraneol_decay_ph8
+      - {file: src/kinetic_core/sulfur.py, symbol: r_nf_decay}
+      - {file: src/kinetic_core/parameters_sulfur.py, symbol: k_nf_decay}
+      - {file: src/kinetic_core/parameters_sulfur.py, symbol: NF_HYDROXIDE_DECAY}
+
+  - id: CF-113
+    kind: conflict
+    scope: corpus
+    sources: [bork2022, bork2023]
+    quantity: "NF left at 120 min when fed alone at pH 5, 130 C, in two papers of one laboratory (Bork 2022 Fig. 1D vs Bork 2023 Fig. 4B)"
+    observation: >-
+      Bork 2022: 59.2 +- 3 % at 120 min (second reader 59.0 +- 3.3; the vol. 395 SI prints +-4.7 for the same point);
+      Bork 2023: 47.8 +- 3.9 % (text "around 48%"; second reader 47.7 +- 4.1). The 11.2-point gap is 2.2 sigma on the
+      combined SD (1.8 sigma with +-4.7), k(0 - 120) 4.4e-3 vs 6.1e-3 /min (x1.4). Recorded in both dossiers (bork2022
+      sec. 6 item 3; bork2023 sec. 6).
+    explanations:
+      - "Different assays: Bork 2023 relative to its own t = 0, Bork 2022 against an external calibration."
+      - "Unstated ampoule headspace (O2) between the two series (cf. CF-117)."
+    tests: []
+    status: open
+    remedy: "Carry the two as one laboratory's spread (x1.4 in k) wherever Bork bands NF decay (CF-112); never as two labs. No ledger row yet."
+    affects: []
+
+  - id: CF-114
+    kind: conflict
+    scope: corpus
+    sources: [chen2026, hu2012, deng2022]
+    quantity: "HPLC-ELSD detection limits for small polar analytes (amino acids, ARPs, sugars)"
+    observation: >-
+      Chen 2026 prints ELSD LODs of 0.199 umol/L (Thr-ARP, LOQ 0.601) and 0.421 (Thr, LOQ 1.223), from linear
+      calibrations at 8 uL injection (PDF text; chen2026 dossier). Hu 2012 (a sugar ELSD method paper) gives xylose LOD
+      19 mg/L = 127 uM at S/N 3 (all seven sugars 64 - 158 uM) with a double-log calibration; Deng 2022 gives Met LOD
+      0.0897 mmol/L with a log-log calibration (exponent 1.4745). Chen's are ~210 - 640x lower. Different analytes and
+      columns, so not one quantity measured twice; the conflict is one of physical plausibility: ELSD responses are
+      non-linear near the floor, and Chen cites the Jiangnan (Deng) ELSD method family.
+    explanations:
+      - "Chen's LODs are extrapolated from a linear calibration (S/N not measured at the floor)."
+      - "A unit slip (umol vs mmol) in Chen's table."
+    tests: []
+    status: open
+    remedy: "Do not use Chen 2026's ELSD LODs as a censoring floor; use the assay's own lowest standard or Hu / Deng's class floors with a stated basis. No ledger row reads them (chen2026_methods_lod_loq_elsd_opd_furfural is proposed, not written)."
+    affects:
+      - deng2022_fig4_methionine_loss
+
+  - id: CF-115
+    kind: self_contradiction
+    scope: corpus
+    sources: [gupta2011, pandit2006]
+    quantity: "the identity of the M-2 (norfuraneol) calibration standard in Gupta 2011 (whey-gel chemical marker, 105 C)"
+    observation: >-
+      Gupta 2011's methods name the standard twice as 4-hydroxy-2,5-dimethyl-3(2H)-furanone (furaneol; Sigma, purum),
+      but its Fig. 1 caption and sec. 3.1 call the chromatographed standard 4-hydroxy-5-methyl-3(2H)-furanone
+      (norfuraneol) (PDF; gupta2011 dossier). The gupta2011 dossier left open whether Pandit 2006 shares a furaneol
+      basis; checked 2026-11-05: Pandit 2006 used "chemical marker M-2 obtained from Givaudan" and its Fig. 2 calibration
+      is captioned M-2 (4-hydroxy-5-methyl-3(2H)-furanone), i.e. norfuraneol from another supplier, so no shared
+      furaneol basis is evidenced (the gupta2011 dossier's quote of the pandit2006 dossier, "a commercial standard", is
+      incomplete).
+    explanations:
+      - "The methods text names the wrong compound (a slip); the figure caption is right."
+      - "Gupta calibrated on furaneol as a surrogate (response-factor error on every NF value)."
+    tests: ["pandit2006.pdf methods and Fig. 2 caption (read 2026-11-05): norfuraneol M-2 from Givaudan."]
+    status: open
+    remedy: "Gupta 2011's NF levels are relative only (shape) until the standard is settled; Pandit 2006 unaffected. Decider: the authors. No ledger row for Gupta yet (gupta2011_fig2_fig3_norfuraneol_whey_gel_105c_ph61_ph83 proposed)."
+    affects:
+      - pandit2006_mashed_potato_norfuraneol
+
+  - id: CF-116
+    kind: conflict
+    scope: sulfur_rows
+    sources: [sohn1995, mizutani1960]
+    quantity: "the rate of ammonia release (deamination) from free cysteine heated in water"
+    observation: >-
+      Sohn & Ho 1995 (cysteine 0.05 M, initial pH 8 with NaOH, unbuffered, sealed, 2 h): NH3 release 14 / 76 / 82 % at
+      110 / 150 / 180 C (82 % printed, the others figure reads; sohn1995 dossier Fig. 2): a first-order equivalent of
+      1.26e-3 /min at 110 C. Mizutani 1960 Table II (cysteine 0.1 M in water, oil bath 120 C, 3 and 6 h): 127 / 228 ug
+      NH3 from 14 mg N, 0.75 / 1.34 %, i.e. 4.2e-5 / 3.8e-5 /min: ~30x slower than Sohn at 110 C and ~57x against Sohn
+      extrapolated to 120 C. Corrections to how the M1b prereg (sec. 17, 6c) describes Mizutani: the NH3 runs were
+      swept with ammonia-free AIR (N2 gave the same; the CO2 sweep is the H2S runs; PDF p. 384-385); the pH is not
+      measured (the dossier estimates 4 - 5.5); and the solution in the open, swept flask is ~100 C, not the bath's 120
+      C (mizutani1960 dossier), at which the gap is ~16x.
+    explanations:
+      - "pH: deamination of cysteine (beta-elimination) is base-favoured; pH 8 vs ~4 - 5.5 spans the effect."
+      - "Temperature: Mizutani's solution is at ~100 C, not 120 C."
+      - "Vessel: sealed vs open-swept (volatile partners leave Mizutani's flask)."
+    tests: []
+    status: open
+    remedy: "No engine change (r_cys_h2s / r_cys_thermal carry no pH term). Use neither as a pH-free rate. Decider: NH3 from cysteine at two pH values in one sealed design at one temperature."
+    affects:
+      - mizutani1960_table2_nh3_from_cys_thiazolidines
+
+  - id: CF-117
+    kind: conflict
+    scope: sulfur_rows
+    sources: [nakamura2020, mikami2017]
+    quantity: "the mechanism of fed-norfuraneol decay at pH 8, 100 C: metal / O2-dependent (Nakamura 2020 Fig. 7) vs specific-base hydrolysis (B61)"
+    observation: >-
+      Nakamura 2020 (1.8 mM HMFO = NF, 0.2 M phosphate pH 8.0, 100 C, 3 h): "These decomposition of HMFO and formation
+      of DA were strongly repressed by the addition of DTPA and by degassing" (40 mM DTPA; 5 min N2) (nakamura2020
+      dossier sec. 6d; Fig. 7 is chromatograms only, the suppression is not quantified; the degassing panel rests on the
+      text). B61 (results/validation/kinetic_core_b61_prereg.md; parameters_sulfur.NF_HYDROXIDE_DECAY; sulfur.r_nf_decay_oh)
+      encodes Mikami 2017's pH 8 decay as specific-base (hydroxide) catalysis, 10^(pH - 5), with no O2 or metal term;
+      the B61 prereg does not mention O2, metals or Nakamura. Same laboratory as its anchor (CF-019 (c)).
+    explanations:
+      - "Metal-catalysed autoxidation of the enolate: base-favoured AND O2 / metal-dependent; B61's pH shape could then hold only at the anchor's O2 and metal level."
+      - "Specific-base hydrolysis with a chelator / degassing artefact (DTPA at 40 mM changes ionic strength and buffer)."
+    tests: []
+    status: open
+    remedy: "B61 stays a switch (off in the shipped engine); M1b part (ii) carries the metal / O2 reading as rival P1'. Decider: fed NF at pH 8 with O2 and metals controlled (argon vs air, +-DTPA), quantified."
+    affects:
+      - nakamura2020_fig3_norfuraneol_alone_fragments
+      - mikami2017_fig6b_norfuraneol_decay_ph8
+      - {file: src/kinetic_core/parameters_sulfur.py, symbol: NF_HYDROXIDE_DECAY}
+      - {file: src/kinetic_core/sulfur.py, symbol: r_nf_decay_oh}
+
+  - id: CF-118
+    kind: condition_error
+    scope: other_lane
+    sources: [martins2003, martins2003b, martins2005b]
+    quantity: "the pH basis of Martins' Amadori-decay pH slopes (DFG, 100 - 120 C), regressed on the initial label pH of drifting pots"
+    observation: >-
+      Martins 2003's total DFG-decay slope at 100 C from Table 3 is log10[(0.57 + 1.56 + 1.55) / (0.19 + 0.10 + 0.18)] /
+      1.3 = 0.69 per pH unit (0.71 at 120 C), regressed on the initial labels 5.5 and 6.8. The pots drifted: 0.19 / 0.21
+      units at 6.8 and 0.8 / 0.9 at 5.5 (martins2003 dossier; text only, no time course), so on the time-averaged pH the
+      slope is ~0.55 (0.54 - 0.56, linear drift assumed). Martins 2005b Fig. 4 (+-0.15 pH, "indicative only") shows the
+      opposite asymmetry (the drop is larger at higher label pH: 4.8 / 5.5 / 6.0 / 6.8 / 7.5 -> 4.65 / 5.25 / 5.55 / 5.9 /
+      6.1 at 240 min), so its slopes on the mean pH steepen (label-on-mean regression slope 1.47). Every Martins slope
+      the repo uses is on the initial label pH. Found by the M1b prereg (v3.3, sec. 4.3.1) and the M3 prereg (sec. 19).
+    explanations:
+      - "Initial-label regression of drifting pots: the direction of the bias depends on which arm drifts more."
+    tests: []
+    status: open
+    remedy: "Re-express a Martins slope on the time-averaged pH wherever it enters a band (M1b prereg v3.3 does); report both. No shipped number moves (the trunk's ph.trunk_terms switch is off by default)."
+    affects:
+      - martins2003_tab3_dfg_rate_constants
+      - martins2003b_fig7_ph_drift
+      - martins2005b_tab3_ph_exponents
+      - martins2005b_tab2_ph_ladder_rate_constants
+      - martins2005b_fig4_ph_drift_ladder
+      - {file: src/kinetic_core/trunk_conditions.py, symbol: PH_STEPS}
+
+  - id: CF-119
+    kind: self_contradiction
+    scope: corpus
+    sources: [bork2022]
+    quantity: "diacetyl (DA) left in the NF + DA pot at 130 C, Bork 2022 (Food Chem 380:131852): text vs SI Fig. S-2A"
+    observation: >-
+      The text says DA "was at around 40%" while NF was fully converted, and in the SEC section "after 300 min of heating
+      at 130 C 40% of the initial amount of diacetyl was still available". SI Fig. S-2A (bork2022 dossier sec. 8.2; first
+      reader, +-1 mol %) shows DA 69.0 / 56.6 / 40.2 / 32.7 / 28.7 % at 30 / 60 / 120 / 180 / 300 min: 40 % at 120 min,
+      28 - 29 % at 300 min. File naming: the vol. 380 paper's PDF is bork2022b.pdf and its SI bork2022b_supplementary.docx
+      on disk (data/keys/pdf_dossier_aliases.yml maps the crossed names).
+    explanations:
+      - "The text quotes the 120 min value as if at 300 min."
+    tests: []
+    status: open
+    remedy: "Use the SI time course, not the text's 40 % at 300 min. No ledger row yet."
+    affects: []
+
+  - id: CF-120
+    kind: conflict
+    scope: other_lane
+    sources: [deng2021, hofmann2000b, martins2003]
+    quantity: "phosphate acceleration of Amadori (ARP) decay at pH ~7, 100 C: Deng 2021's 0.1 M arm extrapolated to 0.5 M vs EX-049 / EX-051's fitted ARP-Phe decay in 0.5 M phosphate"
+    observation: >-
+      Deng 2021 (Met-Glc ARP, 100 C): k 0.0117 /min unbuffered at initial pH 7.5 (0.0048 at 5.5) and 0.020 - 0.022 in
+      0.1 M phosphate (~1.8x); its own text leaves "either the unbuffered pot acidifies fast ... or phosphate catalyses"
+      open (deng2021 dossier). A linear phosphate law extrapolated to 0.5 M gives 0.053 - 0.063 (~0.057), which the M3
+      prereg (v2 DRAFT sec. 2 item 3, sec. 19 (a)) calls "consistent with" EX-049's 0.058 - 0.069 /min, downgraded
+      because acidification confounds it. Checked 2026-11-05: Deng is at initial pH 7.5, Hofmann at 7.0; the prereg's
+      own sec. 4.2 moves Deng's 0.021 to 0.0113 - 0.0167 at pH 7.0, on which the 0.5 M extrapolation is ~0.031 - 0.045,
+      below 0.058 - 0.069. The consistency rests on Martins' leg (0.113 - 0.132 at pH 7.0) or on Deng at pH 7.5, and it
+      transfers a Met-ARP law to ARP-Phe.
+    explanations:
+      - "Phosphate catalysis is real and ~linear to 0.5 M (E5 non-saturating, EX-058): consistent only at Deng's pH."
+      - "Deng's buffered arm is faster because it stays less acidic, not because phosphate catalyses."
+    tests: []
+    status: open
+    remedy: "Report as weak support at most ('not inconsistent at pH 7.5'), never as evidence for EX-049's rate at pH 7.0. Decider: ARP decay at 0 / 0.1 / 0.5 M phosphate with the pH held, one ARP."
+    affects:
+      - deng2021_fig3_met_arp_decay
+      - deng2021_fig6_phosphate_100c
+      - martins2003_tab3_dfg_rate_constants
+
+  - id: CF-121
+    kind: conflict
+    scope: other_lane
+    sources: [hofmann2000b]
+    quantity: "the decay rate of ARP-Phe (Phe-Amadori) at 100 C, 0.5 M phosphate pH 7: formed in situ in the glucose + Phe pot vs fed purified ARP-Phe"
+    observation: >-
+      In the glucose + Phe pot (Table 3: ARP-Phe 42 / 48 / 32 / 21 / 9 umol at 10 / 30 / 60 / 120 / 300 min) the fall
+      from 30 to 60 min alone needs k_d >= ln(48 / 32) / 30 = 0.0135 /min (0.0126 - 0.0144 within print rounding),
+      whatever the formation, because formation can only slow the net fall (hofmann2000b dossier; M3 prereg v2 DRAFT
+      secs. 2, 5, 19 (b)). Fed ARP-Phe reads slower: Fig. 1's late PA shape ~0.0078 /min (PA 6.21 at 120 min, 10.0 at
+      500 min), EX-051's ~0.010 /min for Fig. 1's course, and the trapped pot's Phe liberation (~55 % at 320 min, 85 C,
+      0.5 M ARP; 0.0025 /min, 0.006 - 0.008 scaled to 100 C at Ea 65 - 85). Checked 2026-11-05: these are TWO fed designs
+      (Fig. 1 and the trapped pot; EX-051's 0.010 is Fig. 1), not three; the trapped-pot value counts Phe liberated, a
+      lower bound on ARP decay (ARP purity ~90 %); and at a 10 % analyser CV per value sd(ln ratio) ~0.14 (~0.005 /min),
+      so the margin of the in-pot floor over 0.010 (x1.26 - 1.44) does not survive the upper end of the prereg's CV band.
+      The in-pot ARP is ~5 mM, the fed pot 0.1 - 0.5 M (order).
+    explanations:
+      - "One constant cannot serve both pots under first-order decay: an order or a vessel effect (O2-limited reflux in Fig. 1, EX-051)."
+      - "Acidification: the 0.5 M ARP trapped pot carries a heavy acid load (M3 prereg sec. 3.4: 0.07 - 0.7 dex) and an ambiguous phosphate print (0.5 mmol/L in the methods vs 0.5 mol/L in the footnotes)."
+      - "Noise: the in-pot floor is within the analyser's CV of 0.010."
+    tests: []
+    status: open
+    remedy: "M3 (v2 DRAFT) declares the shared ARP-Phe decay and must state which reading governs before freezing; recheck the fed rates after Fig. 2 - 3 are keyed. Designed: fed ARP-Phe with the ARP measured, under argon and air (W6 candidate)."
+    affects:
+      - hofmann2000b_table3_arp_phe_formation
+      - hofmann2000b_fig1_pa_paa_timecourse
+      - hofmann2000b_fig2_fig3_arp_phe_dicarbonyls
+
+  - id: CF-122
+    kind: conflict
+    scope: other_lane
+    sources: [kanzler2026, bork2022]
+    quantity: "methylglyoxal (MGO) loss: the trunk's fitted k_mgo_mel (first order, Ea 20 kJ/mol) vs Kanzler 2026's measured MGO loss (pH 5 unbuffered, MGO 100 mM, 60 - 140 C)"
+    observation: >-
+      The shipped k_mgo_mel (B1 fit: k_ref 0.0227 /min, Ea 20.04 kJ/mol at the lower edge of FITTED_EA_BOUNDS (20, 260);
+      B1's 95 % CI -42 to 82 kJ/mol, 'unconstrained sign') gives 0.0158 /min at 80 C. Kanzler 2026 (kanzler2026 dossier
+      secs. 4.7 - 6, Figs. 1D / 2B / 2D / 2F, figure reads): MGO + Ala / Phe / Pro 100 mM, 30 min: apparent Ea(80 -> 100 C)
+      121 / 95 / 97 kJ/mol (MGO + amino acid, not MGO alone; MGO alone has no temperature series, ~95 - 113 only as a
+      cross-paper estimate with Bork 2022); MGO alone 65 / 31 % left at 30 / 120 min fits second order, k2 ~1.8 - 1.9e-4
+      /mM/min ("suggested, not identified": two time points); amino acids speed MGO loss 2.6 - 9.7x at 30 min; the
+      excess over MGO alone scales as [Ala]^0.75 (0.84 on 0 - 120 min), assuming the MGO-alone channel adds. Kanzler's
+      Ea lies above even B1's CI. pH drift and O2 unstated, no come-up correction. CF-095 covers the missing MGO + amine
+      consumption, not the barrier or the order.
+    explanations:
+      - "k_mgo_mel lumps MGO + amine chemistry into a first-order pH-free sink; its Ea was never identified (B1's CI spans zero)."
+      - "Concentration: Kanzler's 100 mM MGO pots are second-order dominated; the trunk's pots are ~1000x more dilute."
+    tests: []
+    status: open
+    remedy: "No engine change. Kanzler is a band source for any MGO-sink rival (order and amine dependence measured, Ea apparent). Ledger rows proposed in the kanzler2026 dossier sec. 7, not written. Decider: MGO loss at <= 1 mM with and without an amino acid at three temperatures, pH held."
+    affects:
+      - {file: src/kinetic_core/parameters.py, symbol: k_mgo_mel}
+      - {file: src/kinetic_core/parameters.py, symbol: FITTED_EA_BOUNDS}
+      - {file: src/kinetic_core/network.py, symbol: r_mgo_mel}
+
+  - id: CF-123
+    kind: self_contradiction
+    scope: corpus
+    sources: [kanzler2026]
+    quantity: "MGO left after 30 min at 100 C in MGO + Ala 100 mM: Kanzler 2026 SI Fig. S3 (water-content series) vs the main-text pots"
+    observation: >-
+      SI Fig. S3 at 98.4 wt % water (the main pots' water content) reads 60.2 % MGO remaining (read from the SI's vector
+      records, +-0.5 %), colour 0.9; the main-text pots read 31.8 % (Figs. 1D / 2B / 2F) and 26.5 % (Fig. 2D), colour ~5
+      (kanzler2026 dossier sec. 8.2). The S3 caption says 120 min, the text 30 min; at 120 min the main pots give 4.3 %,
+      so S3 matches neither time.
+    explanations:
+      - "A different batch or vessel for the water series."
+      - "A caption / time error together with a different reference."
+    tests: []
+    status: open
+    remedy: "Use Fig. S3 only within itself (the dossier's advice); never as a point on the main series."
+    affects: []
+
+  - id: CF-124
+    kind: self_contradiction
+    scope: corpus
+    sources: [wietstock2016]
+    quantity: "Strecker aldehyde increases in forced-aged beer (28 C, 30 weeks): Wietstock 2016 text vs its Fig. 1"
+    observation: >-
+      The text gives "phenylacetaldehyde (+64%), and benzaldehyde (+583%)"; Fig. 1 at week 30 reads phenylacetaldehyde
+      4.0 -> 28.0 ug/L (+600 %) and benzaldehyde 20.0 -> 26.0 (+30 %; +35 % with Fe), read error +-0.5 ug/L
+      (wietstock2016 dossier). Checked 2026-11-05: +583 % matches PAL's figure value within read error, but +64 % matches
+      no benzaldehyde arm (it would need 32.8 ug/L), so a swap explains only half.
+    explanations:
+      - "The two percentages swapped in the text, with the benzaldehyde value from another arm or time."
+    tests: []
+    status: open
+    remedy: "Use the figure. Beer at 28 C is outside the engine's scope; no ledger row."
+    affects: []
+
+  - id: CF-125
+    kind: self_contradiction
+    scope: corpus
+    sources: [vauthey2000]
+    quantity: "how Vauthey 2000 quantified MFT / FFT in water, microemulsion and cubic-phase Cys + ribose / furfural pots"
+    observation: >-
+      The paper states both that results were "not corrected for ... FID responses and recovery" and that "A multiple
+      standard addition method was used"; Table 2 prints FFT in water as "trd" but has footnotes a - c only (no d)
+      (PDF; vauthey2000 dossier). Two repo readings of the paper corrected 2026-11-05 (dossier): "~50 % of the MFT was
+      dimerized" is a mass ratio (8.3 / 18.4 = 0.45 dimer to free); molar 2 x 0.0367 / (0.161 + 0.0734) = 0.31; and the
+      FFT gain is 4.8x (microemulsion) / 6.4x (cubic) over water (Table 1: 1.8 / 8.7 / 11.6 ug), Cys + furfural only
+      (Cys + ribose water FFT is "tr", so no ratio exists), not the "5 - 7x" of docs/guides/LITERATURE_SEARCH_2026-10_ROUND3.md.
+    explanations:
+      - "Standard addition applied to some analytes only; the 'not corrected' sentence describes the rest."
+    tests: []
+    status: open
+    remedy: "Vauthey's values stay RESERVED (case M1c amendment A1: roles 1 - 2 NOT MET; evidence only). The proposed merge of the paper into the nestle_blank laboratory is an owner call, not applied."
+    affects: []
+
+  - id: CF-126
+    kind: self_contradiction
+    scope: corpus
+    sources: [bork2024, bork2024b]
+    quantity: "furfural (FF) recovery against its own unheated reference in Bork 2024's dry pots (220 C) and the pots' 'pH'"
+    observation: >-
+      Fig. S-4B: FF alone reads 125.5 (+-1) / 117 / 111 / 114 % of its unheated reference at 2.5 - 10 min; Fig. 3B, FF in
+      FA / FF 115 - 128 % (figure reads +-2 %, first reader only; bork2024 dossier). A reactant cannot exceed its
+      unheated amount: an assay bias of ~+15 - 25 %. The paper says only that "the pH value of the reaction mixtures was
+      analyzed" for neat solids taken up in methanol, with no meter, solvent or dilution stated; Bork 2024b measures no
+      pH. Out of the engine's scope (dry, 220 C; W5.2 crust candidates only).
+    explanations:
+      - "Calibration or extraction-recovery bias between heated and unheated samples."
+    tests: []
+    status: open
+    remedy: "Read Bork 2024 FF as relative to its own heated series only; treat its 'pH' as unstated. No ledger row."
+    affects: []

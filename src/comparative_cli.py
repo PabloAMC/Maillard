@@ -32,6 +32,16 @@ RATIO_CAVEAT = (
     "been measured is the direction, per axis, in the reliability column."
 )
 
+#: 2026-11-05 (review m2): the thiol lane's rows DO carry an interval, so the sentence above cannot stand beside it.
+RATIO_CAVEAT_WITH_THIOL_ROWS = (
+    "Ratios are the reported quantity because comparisons cancel the systematic scale error. A thiol-lane row "
+    "(H0 / EX-059) prints its own 90 % interval: the out-of-sample within-laboratory shape error omega and the "
+    "measurement noise in each arm, from H0's relative predictive; it is resolved only when that interval excludes "
+    "1. Every other row carries no interval: the two arms' errors are correlated by the comparative argument, the "
+    "correlation has never been measured, and no interval is claimed. What HAS been measured is the direction, "
+    "per axis, in the reliability column."
+)
+
 
 # ---------------------------------------------------------------------------------------
 # Input specs
@@ -446,10 +456,30 @@ def predict_core(
                 refused_targets = [{"target": t, "reasons": list(alone[t].declaration.reasons)}
                                    for t in requested if t not in answerable]
                 run = subset
+    # 2026-11-05 (H0 / EX-059, D2 branch (i)): the thiol lane ships relative within-laboratory predictions only.
+    # Its absolute levels are refused BY NAME through the same list, and the other targets are answered. A
+    # calibration carrying the compound's response factor is the within-laboratory case and is answered.
+    from src.kinetic_core import thiol_relative_only
+
+    absolute_refused = [c for c in run.concentrations_ug_per_l
+                        if run.answered and thiol_relative_only.refused_for(run.declaration, c, calibration)]
+    refused_targets += [{"target": c, "reasons": [thiol_relative_only.refusal_text()], "absolute_refused": True}
+                        for c in absolute_refused]
+    answered = bool(run.answered) and any(c not in absolute_refused for c in run.concentrations_ug_per_l)
     rows: List[Dict[str, Any]] = []
     oav_payload: Dict[str, Any] = {}
-    if run.answered:
+    if answered:
         oav_payload = dict(run.oav())
+        if absolute_refused:
+            # the OAV table is keyed by B4 key (kinetic_core.keyspaces), not by species key
+            from src.kinetic_core.keyspaces import b4_key, keys_for
+
+            withheld = {keys_for(c, run.declaration.mapped_targets).b4 for c in absolute_refused} - {None}
+            oav_payload["per_species"] = {k: v for k, v in dict(oav_payload.get("per_species") or {}).items()
+                                          if k not in withheld}
+            oav_payload["ranking_by_OAV"] = [k for k in oav_payload.get("ranking_by_OAV") or [] if k not in withheld]
+            if withheld & {b4_key("MFT"), b4_key("MFTD")}:
+                oav_payload.pop("dimer_over_monomer_OAV", None)
         # Q1: the rows come from the ENGINE, already carrying their interval and
         # their OAV entry, instead of being assembled here against a table keyed
         # in a different key-space. The hand-rolled version did
@@ -460,6 +490,8 @@ def predict_core(
         # threshold" for two compounds that have a measured one. See
         # ``kinetic_core.keyspaces`` for why that failure is always silent.
         for row in run.interval_rows():
+            if row["compound"] in absolute_refused:
+                continue
             rows.append(
                 {
                     "compound": row["compound"],
@@ -482,7 +514,7 @@ def predict_core(
         "lane": "core",
         "lane_label": "KINETIC CORE",
         "system": {"name": core_spec.name, "spec": dict(spec)},
-        "answered": run.answered,
+        "answered": answered,
         "declaration": run.declaration.as_dict(),
         "refused_targets": refused_targets,
         "rows": rows,
@@ -557,7 +589,7 @@ def compare_core(
 
     core_a, core_b = spec_to_core(spec_a), spec_to_core(spec_b)
     requested = _core_targets(spec_a, targets) or _core_targets(spec_b, targets)
-    payload = core_compare(core_a, core_b, requested, predict_fn=predict_fn) if requested else {
+    payload = core_compare(core_a, core_b, requested, predict_fn=predict_fn, calibration=calibration) if requested else {
         "comparable": False,
         "reason": "no precursor in either arm maps to a core species",
         "declaration_a": {},
@@ -571,7 +603,9 @@ def compare_core(
         "b": {"name": core_b.name, "spec": dict(spec_b)},
         "comparison": payload,
         "reliability": _reliability_block(spec_a, spec_b),
-        "caveats": {"core": CORE_CAVEAT, "ratio": RATIO_CAVEAT},
+        "caveats": {"core": CORE_CAVEAT,
+                    "ratio": RATIO_CAVEAT_WITH_THIOL_ROWS if payload.get("relative_caveat") else RATIO_CAVEAT}
+        | ({"thiol_relative_only": payload["relative_caveat"]} if payload.get("relative_caveat") else {}),
         "engine": engine_metadata(),
     }
 
@@ -683,8 +717,8 @@ def render_predict_core_text(payload: Mapping[str, Any]) -> str:
     _render_declaration(payload.get("declaration") or {}, out)
     out.append("")
     for refused in payload.get("refused_targets") or []:
-        out.append(_wrap(f"NOT ANSWERED, BY NAME: {refused['target']!r} -- "
-                         + " ".join(refused["reasons"]) + " The other targets are answered below."))
+        out.append(_wrap(f"NOT ANSWERED, BY NAME: {refused['target']!r} -- " + " ".join(refused["reasons"])
+                         + (" The other targets are answered below." if payload.get("answered") else "")))
         out.append("")
     if not payload.get("answered"):
         out.append("  NO NUMBER IS EMITTED. The core declined this request above.")
@@ -821,6 +855,8 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
         if str(row.get("direction")) == "undefined" or not isinstance(ratio, (int, float)) \
                 or ratio != ratio or ratio in (float("inf"), float("-inf")) or ratio == 0.0:
             resolved = "n/a -- undefined"
+        elif row.get("interval_spans_one"):
+            resolved = "no -- 90 % interval spans 1"
         elif row.get("within_reliability_band"):
             resolved = "no -- inside band"
         else:
@@ -829,7 +865,20 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
             f"  {str(row.get('compound', '?'))[:37]:<38} {ratio_text:>12} "
             f"{str(row.get('direction', '-')):<14} {resolved}"
         )
+        interval = row.get("interval_90_ratio_a_over_b")
+        if interval:
+            out.append(f"  {'':<38} {'90 % ' + f'{interval[0]:.3g}-{interval[1]:.3g}x':>12} "
+                       f"(omega {row['omega_dex_per_arm']:.2f} + noise {row['noise_dex_per_arm']:.2f} dex per arm; "
+                       "relative only, H0 / EX-059)")
     out.append("")
+    if comparison.get("absolute_refused"):
+        out.append(_wrap("ABSOLUTE LEVELS WITHHELD, BY NAME: "
+                         + ", ".join(repr(c) for c in comparison["absolute_refused"]) + " -- "
+                         + next(iter(comparison["absolute_refused"].values()))))
+        out.append("")
+    if payload["caveats"].get("thiol_relative_only"):
+        out.append(_wrap(payload["caveats"]["thiol_relative_only"]))
+        out.append("")
     out.append(_wrap(payload["caveats"]["ratio"]))
     out.append("")
     out.append(_wrap(payload["caveats"]["core"]))

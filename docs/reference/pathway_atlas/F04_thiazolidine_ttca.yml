@@ -8,6 +8,11 @@
 # Duplicates counted once: Kang 2026 SI Fig. S3 = Zhai 2021 Fig. 6 (pH 7 arm, CF-076); Zhai 2021 / Zhai 2023 Food Chem /
 # Zhai 2023 JAFC dicarbonyl arms (CF-066); Zhao 2017b is a same-lab sibling run of Cao 2017's blank (not a second lab).
 # ph key "not_stated" is used where the source states no pH (solid storage, CO2-swept pots); it is outside the bins on purpose.
+# ph_basis "cooled" = read at room temperature on the cooled sample after heating (not at reaction temperature).
+# Corrected 2026-11-05: Cao 2017's and Zhao 2017b's pH cells were tagged in_situ; both papers measured the pH after the
+# vials were "cooled immediately by a stream of tap water" (Cao, PHSJ-5 meter; Zhao on a 0.5 -> 3 mL dilution at 25 C),
+# so they are cooled readings (the 2026-11-05 Cao pot-input audit, recorded in plan-resequence-2026-11-05 commit
+# 2ff2bcd8; the engine's in-situ pH for the same pot sits ~0.8 below the cooled reading). No key bin changes.
 
 family: F04_thiazolidine_ttca
 definition: "cysteine + sugar / carbonyl -> thiazolidine (TTCA) and its ring opening / Cys-Amadori"
@@ -116,8 +121,8 @@ cells:
     dossiers: [zhai2019_extraction.md]
     where: "Fig. 3A, t = 0 [D]"
   - key: {ph: acid, temperature: moderate, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
-    contrast: "time 0.5 -> 5 h: K_app flat (58.5-64.6 L/mol) while TTCA falls a third and the in-situ pH drifts 5.49 -> 4.67 (0.5 h) -> 4.15 (5 h)"
+    tags: {ph_basis: cooled, T_C: 90, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "time 0.5 -> 5 h: K_app flat (58.5-64.6 L/mol) while TTCA falls a third and the cooled pH drifts 5.49 -> 4.67 (0.5 h) -> 4.15 (5 h)"
     status: operating
     quote: "58.5-64.6 L/mol at every one of the six sample times from 0.5 to"
     quantity: "TTCA 0.356 mol/L = 89 % of Cys by 0.5 h (0.4 M Cys + Xyl, 0.2 M phosphate); K_app ~60 L/mol (45-75); status capped at operating (no label), though it holds most of the cysteine"
@@ -127,7 +132,7 @@ cells:
     where: "Figs. 4-5 [D], arithmetic 1-2; Zhao 2017b sibling run 0.355 mol/L at 0.5 h"
     conflict: CF-011
   - key: {ph: acid, temperature: moderate, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: cooled, ph_note: "6x dilution read at 25 C after cooling", T_C: 90, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "blank vs + (E)-2-heptenal 0.10 M: 0.5 h TTCA 0.355 -> 0.255 mol/L, free Cys 0.081 -> 0.033 mol/L (lipid aldehyde takes cysteine from xylose)"
     status: operating
     quote: "heptenal lowers 0.5 h TTCA from 0.355 to 0.255"
@@ -204,7 +209,7 @@ cells:
     where: "sec. 1 (2); Tables 1-2"
   # ---------------- TTCA -> Cys-Amadori (de Roos route) ----------------
   - key: {ph: acid, temperature: moderate, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    tags: {ph_basis: cooled, T_C: 90, sugar: pentose, amine: cysteine, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
     contrast: "time 0.5 -> 5 h: TTCA 0.356 -> 0.236 mol/L while Cys-Amadori 0.006 -> 0.133 mol/L and free Cys flat at 0.06-0.08 mol/L; the Cys-bearing pool conserved"
     status: operating
     quote: "TTCA's dominant fate at 90 °C / pH 4-5 is isomerisation"
@@ -215,8 +220,8 @@ cells:
     where: "Fig. 5 [D], arithmetic 2-3"
     conflict: CF-011
   - key: {ph: acid, temperature: moderate, water: concentrated}
-    tags: {ph_basis: in_situ, T_C: 90, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
-    contrast: "glycine 0 -> 16-24 x Cys: TTCA drained to ~0.03 mol/L by 2 h; in-situ pH 5.42 -> 4.03 (x24 arm) vs 5.49 -> 4.15 (blank)"
+    tags: {ph_basis: cooled, T_C: 90, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: phosphate, metals: not_controlled}
+    contrast: "glycine 0 -> 16-24 x Cys: TTCA drained to ~0.03 mol/L by 2 h; cooled pH 5.42 -> 4.03 (x24 arm) vs 5.49 -> 4.15 (blank)"
     status: operating
     quote: "Glycine accelerates the TTCA drain"
     quantity: "authors read it as glycine catalysing TTCA -> Cys-Amadori plus competition for xylose; glycine not measured, so the two are not separated"
@@ -311,7 +316,7 @@ cells:
 condition_dependence: >-
   SHOWN: (1) Formation is fast and extensive wherever free cysteine meets a pentose at >= 80 mM: 18 % of Cys bound at
   room temperature before heating (Zhai 2019), 65-89 % within 0.5 h at 70-90 C (Zhai 2019 Fig. 3A; Cao 2017 / Zhao 2017b),
-  ~45 % at 120 C in phosphate (Zhang 2025b), with a constant mass-action quotient (~60 L/mol, Cao, in-situ pH 4.2-4.7).
+  ~45 % at 120 C in phosphate (Zhang 2025b), with a constant mass-action quotient (~60 L/mol, Cao, cooled pH 4.2-4.7).
   Two sugar labs (BTBU, Jiangnan) plus Givaudan's qualitative 50 C pre-equilibrium. (2) Temperature: above ~110 C the
   TTCA pool peaks and drains (Zhai 2019, 130 C: 46 -> 6.9 mM); released free Cys stays <= 16 mol % of fed TTCA at
   100-140 C (one data set, Kang S3 = Zhai 2021 Fig. 6). (3) pH: fed-TTCA loss rises x10 from label pH 5.5 to 8 (Zhai 2021,
@@ -338,7 +343,7 @@ best_supported_regimes:
   - "analogue physical chemistry (formaldehyde, aryl aldehydes, 25-90 C, pH 1-12): mechanism and pH shape only (Kallen, Fife, Pesek, Schubert, Kim; 5 labs)"
 unknown_regimes:
   - "hexose aldose + free cysteine thiazolidine at any condition (only de Roos's Table II glucose Cys-Amadori yields; no hexose TTCA concentration time course on disk)"
-  - "K(pH) and K(T) for any cysteine-sugar thiazolidine; Cao's K is one temperature (90 C) and one in-situ pH band (4.2-4.7)"
+  - "K(pH) and K(T) for any cysteine-sugar thiazolidine; Cao's K is one temperature (90 C) and one cooled pH band (4.2-4.7)"
   - "alkaline (> 7.5, in situ) at process temperature: only label pH 8 pots that drift acid"
   - "very_high (> 140 C) in solution; only spray-drying (Zhai 2020)"
   - "intermediate a_w at process temperature (de Roos 20-40 % water is the only one, a_w unmeasured); low a_w only as 25 C storage (Kang) and spray-drying"

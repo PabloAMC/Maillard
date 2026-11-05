@@ -531,9 +531,14 @@ def test_one_refused_target_does_not_sink_the_others():
     listed by name with its own reason."""
     spec = {"name": "partial", "precursors": {"D-Ribose": 50.0, "L-Cysteine": 10.0, "L-Methionine": 10.0},
             "temp_C": 150.0, "time_min": 10.0, "ph": 6.0, "aw": 0.98}
-    targets = ["2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "Methional (3-(methylthio)propanal)"]
+    # 2026-11-05 (H0 / EX-059): MFT and FFT are now refused by name too, for their absolute level; the
+    # out-of-scope 2-acetylthiazole carries the "answered together" half of the test.
+    targets = ["2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "2-acetylthiazole",
+               "Methional (3-(methylthio)propanal)"]
     payload = comparative_cli.predict_core(spec, targets=targets)
     assert payload["answered"]
-    assert {r["compound"] for r in payload["rows"]} >= {"2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)"}
-    refused = {r["target"] for r in payload["refused_targets"]}
-    assert len(refused) == 1 and "methional" in next(iter(refused)).lower()
+    assert {r["compound"] for r in payload["rows"]} == {"2-acetylthiazole"}
+    refused = {r["target"]: r for r in payload["refused_targets"]}
+    assert set(refused) == {"2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "Methional (3-(methylthio)propanal)"}
+    assert not refused["Methional (3-(methylthio)propanal)"].get("absolute_refused")
+    assert refused["2-Methyl-3-furanthiol (MFT)"]["absolute_refused"] and refused["2-Furfurylthiol (FFT)"]["absolute_refused"]
