@@ -5,6 +5,8 @@
 # SciencePlots, hypothesis and the notebook stack left on 2026-09-08 because nothing imports
 # them. Do not add a dependency without a consumer. jsonschema is the schema gate's;
 # rdkit rebuilds the compound registry and backs one unit test.
+# arviz (2026-11-05, M1.1) supplies PSIS behind src/kinetic_core/predictive_densities.py; pinned to 0.23.x,
+# whose psislw(log_weights, reff) array API the wrapper uses (1.x moved it to arviz-stats).
 name: maillard
 channels:
   - conda-forge
@@ -22,3 +24,4 @@ dependencies:
   - pyyaml
   - jsonschema
   - rdkit
+  - arviz=0.23.4  # PSIS (Pareto-smoothed importance sampling) for src/kinetic_core/predictive_densities.py (M1.1)
