@@ -324,7 +324,7 @@ All values are at 100 C, on the initial 25 C label pH. They are moved to label p
    | rival | O2 needed at 120 min, air | at air + Cu 5 mM | headspace air that supplies it |
    |---|---|---|---|
    | R1 (route B events only: air excess PA + PAA 7.6 umol; Cu 20.5) | 3.8 - 7.6 umol (+ any eG / eFox it draws) | 10 - 21 umol | **5 mL (43 umol) suffices** |
-   | R2 (>= 0.5 - 0.7 mol osone per mol ARP; Cu 1.0 - 1.9) | **250 - 700 umol** | 500 - 1 900 umol | 29 - 82 mL in air; 58 - 222 mL in Cu |
+   | R2 (>= 0.5 - 0.7 mol osone per mol ARP in the air arm; 1.0 - 1.9 in the copper arm) | **250 - 700 umol** (air arm) | **500 - 1 900 umol** (copper arm) | 29 - 82 mL in air; 58 - 222 mL in Cu |
 
    A closed vial holding 10 mL of solution rarely has 30 - 220 mL of headspace. **Under the 5 and 20 mL forms, R2's air
    excess is infeasible** at measured efficiencies. Under 100 mL (or pure O2) it is feasible. Hence these are
@@ -760,11 +760,14 @@ separated) = 0.55. Row 1 = 0.40 x 0.2 x 0.9; row 2 = 0.40 x 0.2.
   factor carries a pH confound.
 - (b) The glucose pot's ARP-Phe fall (30 -> 60 min) needs k_d >= 0.0126 - 0.0144 /min at face value. It weakens under
   analyser CV and vessel-per-time noise.
-- (c) Fed decays look slow in DFA's fed designs: Fig. 1's late shape ~0.008; the trapped pot's text ~0.006 - 0.008. The
+- (c) Fed decays look slow in both of DFA's fed designs (two: Fig. 1's reflux pot and the trapped pot): Fig. 1's late
+  shape ~0.008; the trapped pot's text ~0.006 - 0.008. The
   trapped pot's acidification (0.07 - 0.7 dex) and the order are confounders.
 - (d) EX-049's anoxic-route bookkeeping (note on EX-049).
-- (e) R2's stoichiometric need (air ~0.5 - 0.7, Cu ~1.0 - 1.9 mol osone / mol ARP).
-- (f) **NEW: R2's O2 demand** of 250 - 700 umol in air for a 1 mmol pot (29 - 82 mL of headspace air), against R1's
+- (e) R2's stoichiometric need, per arm: the air arm ~0.5 - 0.7 and the air + Cu 5 mM (copper) arm ~1.0 - 1.9 mol
+  osone / mol ARP.
+- (f) **NEW: R2's O2 demand**, per arm, for a 1 mmol pot (osone x nu_O2 0.5 - 1): the air arm 250 - 700 umol (29 - 82 mL
+  of headspace air); the air + Cu 5 mM (copper) arm 500 - 1 900 umol (58 - 222 mL). Against R1's
   4 - 8 umol. Table 2's headspace is unprinted.
 - (g) **NEW: the acid load of the trapped pot** (0.5 M ARP in 0.5 M phosphate): a pH drop of 0.35 to >= 1.1, or an
   unbuffered pot under the Methods' "0.5 mmol/L". Its decay is not the 100 C pots' decay.
@@ -903,3 +906,9 @@ it.
 
 **Not changed:** every band, start, form, unit other than U3a / U3b, the screen and its kill rule, the tie rule, the
 adequacy gate, Holm, required agreement, the outcome rows, the blinding (sec. 7) and the freeze order (sec. 13).
+
+**A7. Wording fixes (coordinator, 2026-11-05; no design change).**
+- Sec. 19 (c): DFA's fed designs are two, Fig. 1's reflux pot and the trapped pot.
+- The O2 / osone stoichiometry is labelled per arm in sec. 5 item 5's table and in sec. 19 (e) - (f). R2 needs:
+  - in the air arm, ~0.5 - 0.7 mol osone per mol ARP, i.e. 250 - 700 umol O2;
+  - in the copper (air + Cu 5 mM) arm, ~1.0 - 1.9 mol per mol, i.e. 500 - 1 900 umol O2.
