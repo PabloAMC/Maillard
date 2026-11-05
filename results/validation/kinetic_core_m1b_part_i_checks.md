@@ -11,6 +11,7 @@
 | V5 | True |  |
 | V6 | None | CF-084's numbers re-printed at B60 (B0-pinned: yield 7.5e-05, pKa 7.0679), cooled, inline, rtol 1e-8 |
 | V7 | True |  |
+| V_solver | True | LSODA vs the declared BDF fallback on every control pot (B0-pinned, a mid-band B13 draw); BDF vs Radau at LSODA's stall draw |
 | V_density | True | tests/unit/test_predictive_densities.py -k exact_density_of_r0_cys (M1.1's -746 by quadrature from an engine scan; PSIS with a width-scaled proposal agrees) |
 
 ## V6: CF-084's numbers at B60 (B0-pinned, cooled 25 C, inline)

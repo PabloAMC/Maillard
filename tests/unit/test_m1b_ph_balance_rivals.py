@@ -263,6 +263,24 @@ def test_power_and_screen_refuse_a_screen_with_failed_pots(G, monkeypatch):
         G.run_power()
 
 
+def test_an_lsoda_failure_is_retried_once_with_bdf_and_recorded(G, monkeypatch):
+    G._init_pots()
+    real = G.sulfur.integrate_sulfur
+
+    def lsoda_stalls(*a, **k):
+        if k.get("method", "LSODA") == "LSODA":
+            raise RuntimeError("stalled")
+        return real(*a, **k)
+
+    monkeypatch.setattr(G.sulfur, "integrate_sulfur", lsoda_stalls)
+    failures = []
+    pot = G.POTS_BY_NAME["zhou_arp_pH7"]
+    out = G.run_jobs(G.build_tasks("B0_pinned", "primary", [{}], BREAKPOINTS, [pot]), failures)
+    assert not failures and out[0]["solver_fallback"]["to"] == "BDF"
+    ens = G.assemble("B0_pinned", "primary", [{}], out)
+    assert ens.failed == 0 and len(ens.fallbacks) == 1
+
+
 def test_a_failed_pot_is_counted_not_raised(G, monkeypatch):
     G._init_pots()
 

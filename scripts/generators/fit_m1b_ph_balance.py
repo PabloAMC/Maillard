@@ -40,6 +40,11 @@ DECLARED READINGS (where the prereg is not explicit; each is printed in the reco
     r_pent_thermal_dpo -> r_osone_decay_dpo, so the prereg's "~0 drift" for B0 / B1 / B2 is printed, not assumed.
   * Hou's ARP, pH and glycine (Fig. 3, hou2026_extraction.md) are not keyed in data/lit/fit_rows; they are carried
     here as the dossier prints them (``HOU``), flagged.
+  * Numerics: LSODA, with ONE declared BDF re-integration of a pot whose LSODA run fails or times out
+    (``integrate_with_fallback``; LSODA stalled deterministically at an ordinary B0 draw on Meynier Cys pH 5.5).
+    Every fallback is listed in the record; a pot failing both is a failed pot run. V-solver measures the agreement.
+  * C-Mey's replicate-drawn edge (0.2 + N(0, 2 r^2)) is floored at 1e-3 (a negative edge is a statement no drift
+    can meet).
 """
 from __future__ import annotations
 
@@ -427,10 +432,10 @@ def _pot_task(item) -> Dict[str, Any]:
     pot = POTS_BY_NAME[pot_name]
     drift = PhDrift(**drift_values)
     t0 = time.time()
+    fallback = None
     try:
-        run = M1.with_alarm(POT_SECONDS, lambda: sulfur.integrate_sulfur(
-            b60()[1], pot.t_c + CELSIUS, pot.initial_map(), np.array(pot.times, dtype=float), ph=pot.label_ph,
-            buffer_spec=pot.buffer, ph_drift=drift, rtol=SCORE_RTOL, atol=ATOL))
+        run = integrate_with_fallback(pot, drift)
+        fallback = run.metadata.get("m1b_solver_fallback")
     except M1._Timeout as exc:
         return {"tag": tag, "pot": pot_name, "failed": str(exc), "timeout": True}
     except Exception as exc:  # noqa: BLE001 - counted by the caller
@@ -463,8 +468,32 @@ def _pot_task(item) -> Dict[str, Any]:
                                              "forced_unresolvable_calls", "dpo_total_rel_dev_max",
                                              "added_sink_cap_reached", "supply_share_min", "supply_share_max")}
     res["ph_fixed_point_converged"] = run.metadata.get("ph_fixed_point_converged")
+    res["solver_fallback"] = fallback
     res["seconds"] = round(time.time() - t0, 3)
     return res
+
+
+#: Declared numerics (2026-11-05, before any screen record): LSODA (the lane's default, M1's) stalls
+#: deterministically at ordinary draws (B0, yield 0.395, pKa 7.63, Meynier Cys pH 5.5: > 600 s), where BDF solves
+#: the same pot in ~3 s and Radau agrees with it to 3e-9 pH. A pot whose LSODA run fails or exceeds its alarm is
+#: re-integrated ONCE with BDF under the same alarm; the fallback is recorded per pot and counted per part; a pot
+#: that fails both is a failed pot run (the part refuses). --checks' V-solver measures LSODA vs BDF agreement.
+FALLBACK_METHOD = "BDF"
+
+
+def integrate_with_fallback(pot: Pot, drift: PhDrift, method: str = "LSODA"):
+    def run(m):
+        return M1.with_alarm(POT_SECONDS, lambda: sulfur.integrate_sulfur(
+            b60()[1], pot.t_c + CELSIUS, pot.initial_map(), np.array(pot.times, dtype=float), ph=pot.label_ph,
+            buffer_spec=pot.buffer, ph_drift=drift, rtol=SCORE_RTOL, atol=ATOL, method=m))
+
+    try:
+        return run(method)
+    except Exception as first:  # noqa: BLE001 - one declared retry; a second failure propagates
+        out = run(FALLBACK_METHOD)
+        out.metadata["m1b_solver_fallback"] = {"from": method, "to": FALLBACK_METHOD,
+                                               "reason": f"{type(first).__name__}: {first}"[:200]}
+        return out
 
 
 POTS: List[Pot] = []
@@ -531,6 +560,7 @@ class Ensemble:
     delta: Dict[str, Dict[str, np.ndarray]] = field(default_factory=dict)   # unit -> omega form -> (S, m)
     extra: Dict[str, np.ndarray] = field(default_factory=dict)
     failed: int = 0
+    fallbacks: List[Dict[str, Any]] = field(default_factory=list)   # pots solved by the declared BDF fallback
 
     @property
     def size(self) -> int:
@@ -541,7 +571,7 @@ class Ensemble:
         return Ensemble(self.rival, self.form, [self.draws[i] for i in ix],
                         {u: a[ix] for u, a in self.f.items()},
                         {u: {k: a[ix] for k, a in d.items()} for u, d in self.delta.items()},
-                        {u: a[ix] for u, a in self.extra.items()}, self.failed)
+                        {u: a[ix] for u, a in self.extra.items()}, self.failed, list(self.fallbacks))
 
 
 UNIT_POTS = {"C-Mey-Cys": [f"mey_cys_pH{x:g}" for x in MEYNIER_LABELS],
@@ -556,6 +586,8 @@ def assemble(rival: str, form: str, draws: List[Dict[str, float]], results: Sequ
     by = {(r["tag"][2], r["pot"]): r for r in results}
     ens = Ensemble(rival, form, list(draws))
     ens.failed = sum(1 for r in results if "failed" in r)
+    ens.fallbacks = [{"pot": r["pot"], "coordinates": draws[r["tag"][2]], **r["solver_fallback"]} for r in results
+                     if r.get("solver_fallback")]
     for unit, pots in UNIT_POTS.items():
         if not all((0, p) in by for p in pots):
             continue
@@ -602,14 +634,15 @@ def ensemble_to_json(ens: Ensemble) -> Dict[str, Any]:
     return {"rival": ens.rival, "form": ens.form, "draws": ens.draws, "failed_pot_runs": ens.failed,
             "f": {u: a.tolist() for u, a in ens.f.items()},
             "delta": {u: {k: a.tolist() for k, a in d.items()} for u, d in ens.delta.items()},
-            "extra": {u: a.tolist() for u, a in ens.extra.items()}}
+            "extra": {u: a.tolist() for u, a in ens.extra.items()}, "solver_fallbacks": ens.fallbacks}
 
 
 def ensemble_from_json(d: Mapping[str, Any]) -> Ensemble:
     return Ensemble(d["rival"], d["form"], list(d["draws"]),
                     {u: np.array(a, dtype=float) for u, a in d["f"].items()},
                     {u: {k: np.array(a, dtype=float) for k, a in dd.items()} for u, dd in d["delta"].items()},
-                    {u: np.array(a, dtype=float) for u, a in d["extra"].items()}, int(d.get("failed_pot_runs", 0)))
+                    {u: np.array(a, dtype=float) for u, a in d["extra"].items()}, int(d.get("failed_pot_runs", 0)),
+                    list(d.get("solver_fallbacks", [])))
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -1215,6 +1248,51 @@ def v7_forcing(breakpoints) -> Dict[str, Any]:
     return out
 
 
+V_SOLVER_TOL_PH = 1e-4
+#: the draw at which LSODA stalled in the first screen attempt (2026-11-05; the attempt was stopped and discarded)
+LSODA_STALL_DRAW = ("B0", {"acid_yield": 0.3952675089240074, "arp_amine_pka": 7.62728870975785}, "mey_cys_pH5.5")
+
+
+def v_solver(breakpoints) -> Dict[str, Any]:
+    """V-solver: the declared BDF fallback agrees with LSODA (cooled pH) on every control pot at B0-pinned and at a
+    mid-band B13 draw, and with Radau at the draw where LSODA stalled."""
+    _init_pots()
+    out: Dict[str, Any] = {"per_pot": {}}
+    worst = 0.0
+    mid13 = {"arp_amine_pka": 7.6, "y5": 0.3, "y6": 0.6, "y_hi": 0.8, "k_iso": 0.08, "phi_cys": 0.5, "phi_arp": 0.5}
+    for rival, vals in (("B0_pinned", {}), ("B13", mid13)):
+        for p in POTS:
+            changes, drift = rival_changes(rival, "primary", vals, p.forced, breakpoints)
+            got = {}
+            for m in ("LSODA", FALLBACK_METHOD):
+                with config.applied(config.Config.shipped().replace(changes)):
+                    run = integrate_with_fallback(p, drift, method=m)
+                sid = float(run.metadata["strong_ion_difference_mmol_L"])
+                got[m] = np.array([observations.ph_cooled(state_at(run, i), sid, drift, p.buffer)
+                                   for i in range(len(p.times))])
+            d = float(np.max(np.abs(got["LSODA"] - got[FALLBACK_METHOD])))
+            out["per_pot"][f"{rival}|{p.name}"] = d
+            worst = max(worst, d)
+    rival, vals, pot = LSODA_STALL_DRAW
+    p = POTS_BY_NAME[pot]
+    changes, drift = rival_changes(rival, "primary", vals, False, breakpoints)
+    finals = {}
+    for m in (FALLBACK_METHOD, "Radau"):
+        with config.applied(config.Config.shipped().replace(changes)):
+            run = M1.with_alarm(600, lambda: sulfur.integrate_sulfur(
+                b60()[1], p.t_c + CELSIUS, p.initial_map(), np.array(p.times, float), ph=p.label_ph,
+                buffer_spec=p.buffer, ph_drift=drift, rtol=SCORE_RTOL, atol=ATOL, method=m))
+        sid = float(run.metadata["strong_ion_difference_mmol_L"])
+        finals[m] = float(observations.ph_cooled(state_at(run, len(p.times) - 1), sid, drift, p.buffer))
+    stall = abs(finals[FALLBACK_METHOD] - finals["Radau"])
+    out.update({"max_abs_lsoda_vs_bdf_ph": worst, "stall_draw": {"rival": rival, "coordinates": vals, "pot": pot,
+                "cooled_ph": finals, "bdf_vs_radau_ph": stall},
+                "tolerance_ph": V_SOLVER_TOL_PH, "passed": bool(worst <= V_SOLVER_TOL_PH and stall <= V_SOLVER_TOL_PH),
+                "what": "LSODA vs the declared BDF fallback on every control pot (B0-pinned, a mid-band B13 draw); "
+                        "BDF vs Radau at LSODA's stall draw"})
+    return out
+
+
 def v_density() -> Dict[str, Any]:
     """V-density: the estimator reproduces M1's known case (R0's RES_Cys, alternative floor, ~ -746): M1.1's tests on
     its engine-scan fixture, run here."""
@@ -1254,7 +1332,7 @@ def run_checks(base: Optional[str]) -> Dict[str, Any]:
     checks: Dict[str, Any] = {}
     for name, fn in (("BIT", lambda: bit_identity(base)), ("V1", v1_cost), ("V2_V3", lambda: corner_checks(br)),
                      ("V4", lambda: sid_invariance(br)), ("V5", lambda: v5_scales(bp)),
-                     ("V6", lambda: v6_reprint(br)), ("V7", lambda: v7_forcing(br)), ("V_density", v_density)):
+                     ("V6", lambda: v6_reprint(br)), ("V7", lambda: v7_forcing(br)), ("V_solver", lambda: v_solver(br)), ("V_density", v_density)):
         s = time.time()
         print(f"--checks {name} ...", flush=True)
         checks[name] = fn()
@@ -1313,7 +1391,7 @@ def concat(a: Optional[Ensemble], b: Ensemble) -> Ensemble:
         return b
     return Ensemble(a.rival, a.form, a.draws + b.draws, {u: np.vstack([a.f[u], b.f[u]]) for u in a.f},
                     {u: {k: np.vstack([a.delta[u][k], b.delta[u][k]]) for k in a.delta[u]} for u in a.delta},
-                    {u: np.vstack([a.extra[u], b.extra[u]]) for u in a.extra}, a.failed + b.failed)
+                    {u: np.vstack([a.extra[u], b.extra[u]]) for u in a.extra}, a.failed + b.failed, a.fallbacks + b.fallbacks)
 
 
 def screen_draws(rival: str, n: int) -> List[Dict[str, float]]:
@@ -1408,7 +1486,7 @@ def run_screen(min_free: float) -> Dict[str, Any]:
         inversion = best_draw_extras(rival, ens, best, br, failures)
         per[rival] = {
             "draws": ens.size, "doubled_for_coverage": doubled, "seconds": round(secs, 1),
-            "failed_pot_runs": ens.failed, "memory": memory_events, "hou_inversion_at_best_draw": inversion,
+            "failed_pot_runs": ens.failed, "solver_fallbacks": ens.fallbacks, "memory": memory_events, "hou_inversion_at_best_draw": inversion,
             "pass_fraction": {k: float(np.mean(sig[k])) for k in ("sigma_hou_level", "sigma_hou_shape", "sigma_mey",
                                                                    "sigma_zhou", "all")},
             "pass_fraction_unforced_hou": {k: float(np.mean(sig_u[k])) for k in ("sigma_hou_level", "sigma_hou_shape",

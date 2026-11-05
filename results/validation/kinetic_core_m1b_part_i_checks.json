@@ -47,9 +47,9 @@
      "zhou_cys_pH8": "da2b8faedb20c241c7ae71e6a51a7f8a9f6c6454f65627cdf8fbb42a31eb241e"
     }
    },
-   "seconds": 61.0
+   "seconds": 27.6
   },
-  "V1": {"what": "every new key off: R0 at B60's vector, inline, fit tolerance, ceiling + prior (M1's V6 reference)", "cost": 27.08412843271383, "m1_v6_reference": 27.08412843271383, "relative_difference": 0.0, "bit_identical": true, "tolerance": 0.001, "passed": true, "failed_pot_runs": 0, "seconds": 18.0},
+  "V1": {"what": "every new key off: R0 at B60's vector, inline, fit tolerance, ceiling + prior (M1's V6 reference)", "cost": 27.08412843271383, "m1_v6_reference": 27.08412843271383, "relative_difference": 0.0, "bit_identical": true, "tolerance": 0.001, "passed": true, "failed_pot_runs": 0, "seconds": 7.5},
   "V2_V3": {
    "V3_B1_phi0": {
     "max_abs_diff_ph": 0.0,
@@ -111,13 +111,13 @@
    },
    "passed": true,
    "note": "V2's prereg form is 'k_lag at its fast end'; the band's numerical end is 10 /min (lifetime 0.1 min), which leaves a latent carboxyl of ~(ARP loss rate / k_lag) at every time: the 1e-6 test is run at k_lag 1e6 /min and the 10 /min distance printed beside it",
-   "seconds": 139.7
+   "seconds": 68.5
   },
   "V4": {
    "max_abs_insitu_ph_resolve_diff": {"B0": 4.889573190780538e-10, "B1": 4.6565595823722106e-10, "B2": 4.3073011823935303e-10, "B3": 4.889386673312401e-10, "B13": 3.2597213817098236e-10},
    "passed": true,
    "what": "the in-situ pH re-solved at the run's single conserved SID from every grid state equals the run's in-situ pH (a mid-band draw of each rival; Meynier Cys pH 5.5, Hou forced, Zhou Cys pH 7)",
-   "seconds": 26.6
+   "seconds": 11.3
   },
   "V5": {
    "comparisons": [
@@ -230,7 +230,7 @@
     "zhou_cys_pH8": {"label_ph": 8.0, "times": [0.0, 60.0], "cooled_ph": [7.999999999534339, 5.090842294041067], "scale": "cooled", "T_C_reading": 25.0}
    },
    "b0_pinned_zhou_spread": 3.907104667276144,
-   "seconds": 50.1
+   "seconds": 19.7
   },
   "V7": {
    "B0": {"forced_arp_max_rel_error": 8.286975517566557e-09, "forced_loss_never_negative": true, "forced_unresolvable_calls": 0, "forcing_off_bit_identical_to_unforced": true, "forced_arp": [5.0, 3.1999999962418757, 2.1799999947770505, 1.269999994412236, 1.0999999944166514, 0.749999994364199, 0.6799999943648567], "measured_arp": [5.0, 3.2, 2.18, 1.27, 1.1, 0.75, 0.68]},
@@ -245,19 +245,65 @@
     "dpo_total_rel_dev_max_meynier_pH6.5": 2.138739897139333e-16
    },
    "passed": true,
-   "seconds": 27.7
+   "seconds": 8.3
   },
-  "V_density": {"what": "tests/unit/test_predictive_densities.py -k exact_density_of_r0_cys (M1.1's -746 by quadrature from an engine scan; PSIS with a width-scaled proposal agrees)", "returncode": 0, "summary": "1 passed, 21 deselected in 20.47s", "passed": true, "seconds": 25.6}
+  "V_solver": {
+   "per_pot": {
+    "B0_pinned|mey_cys_pH4.5": 9.313225746154785e-10,
+    "B0_pinned|mey_gly_pH4.5": 0.0,
+    "B0_pinned|mey_cys_pH5": 1.0244548320770264e-08,
+    "B0_pinned|mey_gly_pH5": 0.0,
+    "B0_pinned|mey_cys_pH5.5": 5.587935447692871e-09,
+    "B0_pinned|mey_gly_pH5.5": 0.0,
+    "B0_pinned|mey_cys_pH6": 0.0,
+    "B0_pinned|mey_gly_pH6": 0.0,
+    "B0_pinned|mey_cys_pH6.5": 0.0,
+    "B0_pinned|mey_gly_pH6.5": 0.0,
+    "B0_pinned|hou_forced": 2.9802322387695312e-08,
+    "B0_pinned|hou_unforced": 3.632158041000366e-08,
+    "B0_pinned|zhou_arp_pH6": 1.6763806343078613e-08,
+    "B0_pinned|zhou_cys_pH6": 2.7939677238464355e-09,
+    "B0_pinned|zhou_arp_pH7": 9.313225746154785e-10,
+    "B0_pinned|zhou_cys_pH7": 3.725290298461914e-09,
+    "B0_pinned|zhou_arp_pH8": 6.612390279769897e-08,
+    "B0_pinned|zhou_cys_pH8": 7.729977369308472e-08,
+    "B13|mey_cys_pH4.5": 0.0,
+    "B13|mey_gly_pH4.5": 0.0,
+    "B13|mey_cys_pH5": 0.0,
+    "B13|mey_gly_pH5": 0.0,
+    "B13|mey_cys_pH5.5": 0.0,
+    "B13|mey_gly_pH5.5": 0.0,
+    "B13|mey_cys_pH6": 0.0,
+    "B13|mey_gly_pH6": 0.0,
+    "B13|mey_cys_pH6.5": 0.0,
+    "B13|mey_gly_pH6.5": 0.0,
+    "B13|hou_forced": 3.166496753692627e-08,
+    "B13|hou_unforced": 2.60770320892334e-08,
+    "B13|zhou_arp_pH6": 1.210719347000122e-08,
+    "B13|zhou_cys_pH6": 2.7939677238464355e-09,
+    "B13|zhou_arp_pH7": 2.421438694000244e-08,
+    "B13|zhou_cys_pH7": 2.1420419216156006e-08,
+    "B13|zhou_arp_pH8": 4.6566128730773926e-08,
+    "B13|zhou_cys_pH8": 3.818422555923462e-08
+   },
+   "max_abs_lsoda_vs_bdf_ph": 7.729977369308472e-08,
+   "stall_draw": {"rival": "B0", "coordinates": {"acid_yield": 0.3952675089240074, "arp_amine_pka": 7.62728870975785}, "pot": "mey_cys_pH5.5", "cooled_ph": {"BDF": 4.586565264035016, "Radau": 4.586565260309726}, "bdf_vs_radau_ph": 3.725290298461914e-09},
+   "tolerance_ph": 0.0001,
+   "passed": true,
+   "what": "LSODA vs the declared BDF fallback on every control pot (B0-pinned, a mid-band B13 draw); BDF vs Radau at LSODA's stall draw",
+   "seconds": 179.1
+  },
+  "V_density": {"what": "tests/unit/test_predictive_densities.py -k exact_density_of_r0_cys (M1.1's -746 by quadrature from an engine scan; PSIS with a width-scaled proposal agrees)", "returncode": 0, "summary": "1 passed, 21 deselected in 10.32s", "passed": true, "seconds": 13.1}
  },
  "davidek_breakpoints_in_situ": [5.22011388791725, 6.180802797432989, 6.676454670261592],
- "machine": {"load_average_1_5_15": [90.92, 54.2, 47.13], "cpu_count": 10, "free_memory_bytes": 2879111168, "swap": "vm.swapusage: total = 15360.00M  used = 14224.31M  free = 1135.69M  (encrypted)", "workers": 1, "time": "2026-11-05 16:02:28"},
- "seconds": 349.0,
+ "machine": {"load_average_1_5_15": [11.52, 10.21, 11.24], "cpu_count": 10, "free_memory_bytes": 4271570944, "swap": "vm.swapusage: total = 8192.00M  used = 7114.62M  free = 1077.38M  (encrypted)", "workers": 1, "time": "2026-11-05 21:22:52"},
+ "seconds": 335.3,
  "passed": true,
  "failed_pot_runs": 0,
  "provenance": {
   "artifact": "kinetic_core_m1b_part_i_checks",
   "generated_on": "2026-11-05",
-  "git": {"commit": "6d3022d255ae16dd755b6f4cb3f6051305964b8a", "short": "6d3022d2", "branch": "m1b-part-i-build", "dirty": true},
+  "git": {"commit": "e9df71476d20b71156f3c24b29a80b5a8d0e18bc", "short": "e9df7147", "branch": "m1b-part-i-build", "dirty": true},
   "generated_by": "scripts/generators/fit_m1b_ph_balance.py",
   "wave": "M1b part (i)",
   "inputs": [
@@ -270,7 +316,7 @@
    {"path": "src/kinetic_core/sulfur.py", "sha256": "27f01227400d0bae49f14f0eb91ee3d4ba055048ee0890128a87470e2fb8b1a3"},
    {"path": "src/kinetic_core/predictive_densities.py", "sha256": "79c4ec45a4e9d34caa01d7607aa473d6dcfe40f16d26313a47df3876575192ec"},
    {"path": "src/kinetic_core/config.py", "sha256": "7a4e05f299f145acc300dd86be440254390e1fd11307ddbc3e6c2e6af75d75aa"},
-   {"path": "scripts/generators/fit_m1b_ph_balance.py", "sha256": "6db170682d2278a8539edc85621024d282b7fc55748628920edc7ac755aeed08"}
+   {"path": "scripts/generators/fit_m1b_ph_balance.py", "sha256": "9e45d403b334cb385b40fe6595847bf0b306f5bdc6cffdb692064bb88a1849a9"}
   ]
  }
 }
