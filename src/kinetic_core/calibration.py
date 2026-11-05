@@ -154,9 +154,16 @@ class Calibration:
         metadata = dict(run.run_metadata)
         metadata["calibration"] = {"lab": self.lab, "response_factors_applied": applied,
                                    "matrix_of_records": self.matrix}
-        # the factor's own uncertainty widens the interval: 1.645 sigma in decades for a 90 % band
+        # the factor's own uncertainty widens the interval: 1.645 sigma in decades for a 90 % band. 2026-11-05
+        # (H0 / EX-059): a thiol-lane observable's calibrated level is the within-laboratory case the ruling
+        # ships, so its interval also carries one row's shape error omega, in quadrature, here and only here.
+        from . import thiol_relative_only
+
         metadata["calibration_extra_decades"] = {
-            compound: 1.645 * self.response_factors[compound].sigma for compound in applied
+            compound: (thiol_relative_only.calibrated_extra_decades(self.response_factors[compound].sigma)
+                       if thiol_relative_only.declared(run.declaration, compound)
+                       else 1.645 * self.response_factors[compound].sigma)
+            for compound in applied
         }
         spec_matrix = str(getattr(run.spec.process, "matrix", "water") or "water")
         if spec_matrix != self.matrix:

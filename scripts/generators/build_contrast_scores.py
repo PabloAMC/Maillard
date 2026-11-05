@@ -74,7 +74,7 @@ def _score(pairs: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def main() -> int:
-    rows, _excluded = NULL._rows()
+    rows, _excluded = NULL._rows(include_relative_only=True)   # 2026-11-05: ratios of the thiol lane ship (H0 / EX-059)
     pairs = _pairs(rows)
     scores = {"all_pairs": _score(pairs), "out_of_sample": _score([p for p in pairs if p["out_of_sample"]])}
     by_lane = {lane: _score([p for p in pairs if p["lane"] == lane]) for lane in sorted({p["lane"] for p in pairs})}

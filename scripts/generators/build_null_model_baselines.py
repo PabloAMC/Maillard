@@ -48,19 +48,26 @@ def _study(bench: Dict[str, Any], bench_file: str) -> str:
     return citation[:40] or Path(bench_file).stem
 
 
-def _rows(scores: Optional[Dict[str, Any]] = None) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
-    """The scored ppb rows of ``scores`` (default: the tracked scorecard)."""
+def _rows(scores: Optional[Dict[str, Any]] = None, *,
+          include_relative_only: bool = False) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
+    """The scored ppb rows of ``scores`` (default: the tracked scorecard).
+
+    ``include_relative_only`` (2026-11-05, H0 / EX-059): also the rows whose ABSOLUTE level the thiol lane does not
+    ship. They carry their numbers under ``relative_use_only`` and serve a within-study ratio (the contrast
+    diagnostic) only; the null baselines, which compare absolute levels, never read them."""
     if scores is None:
         scores = json.loads(SCORES.read_text(encoding="utf-8"))
     rows, excluded = [], defaultdict(int)
     for b in scores["benchmarks"]:
-        if not b["compounds"]:
+        relative = [dict(r, **r["relative_use_only"]) for r in b.get("refused_compounds") or []
+                    if include_relative_only and r.get("relative_use_only")]
+        if not b["compounds"] and not relative:
             continue
         bench = load_bundle(ROOT / b["bench_file"])
         _, limiting = limiting_precursor_molar(bench)
         c = b["conditions"]
         literature = b["signal_origin"] == "external_literature" and b["evidence_role"] != "fit_recovery"
-        for r in b["compounds"]:
+        for r in [*b["compounds"], *relative]:
             if r["target_unit"] != "ppb":
                 excluded["ratio_or_non_ppb_rows"] += 1
                 continue

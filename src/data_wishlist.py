@@ -194,11 +194,17 @@ def not_evaluable_rows(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
     return [{"benchmark_id": r["benchmark_id"], "compound": r["compound"], "panel": r["panel"]} for r in rows]
 
 
+def absolute_refused_rows(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
+    """Rows the engine answers but whose ABSOLUTE level the thiol lane does not ship (H0 / EX-059, D2 branch (i))."""
+    rows = [r for r in scorecard.get("refused_compounds", []) if r.get("absolute_refused")]
+    return [{"benchmark_id": r["benchmark_id"], "compound": r["compound"], "panel": r["panel"]} for r in rows]
+
+
 def refused_targets(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
     """What the panel asks for that no lane can represent, grouped by the engine's own reason."""
     groups: Dict[str, Dict[str, Any]] = {}
     for r in scorecard.get("refused_compounds", []):
-        if r.get("unidentified_route"):
+        if r.get("unidentified_route") or r.get("absolute_refused"):
             continue
         reason = str(r.get("reason", ""))
         head = reason.split(" -- ")[0][:120]
@@ -337,22 +343,45 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
     reactions = sulfur_reactions(sulfur_source)
     coords = unidentified_coordinates(profile, laplace, reactions)
     nev = not_evaluable_rows(scorecard)
+    abs_refused = absolute_refused_rows(scorecard)
     refused = refused_targets(scorecard)
     axes = thin_axes(directional)
     misses = largest_misses(ranking)
     offsets = data_access.load_json(LANE_OFFSETS_PATH, missing_ok=True)
     design_gaps = lane_design_gaps(offsets)
     unlocked = []
+    from src.kinetic_core.thiol_relative_only import RELATIVE_ONLY_SPECIES, ruling
+
     for c in coords:
         if c["unlocks_observables"]:
+            # 2026-11-05 (H0 / EX-059): a fitted rate gives the thiol lane's observables a fitted SHAPE; their absolute
+            # level stays refused for a new laboratory whatever the rate, so the sentence must not promise one.
+            absolute = [o for o in c["unlocks_observables"] if o not in RELATIVE_ONLY_SPECIES]
+            relative = [o for o in c["unlocks_observables"] if o in RELATIVE_ONLY_SPECIES]
+            what = "; ".join(x for x in (
+                f"absolute {', '.join(absolute)}" if absolute else "",
+                f"within-study ratios and shapes of {', '.join(relative)} (their absolute levels stay refused, H0 / EX-059)"
+                if relative else "",
+            ) if x)
             unlocked.append({
                 "if_measured": c["key"],
                 "you_could_predict": (
-                    f"absolute {', '.join(c['unlocks_observables'])} from charges containing "
+                    f"{what} from charges containing "
                     f"{', '.join(c['unlocks_from_charges']) or 'its reactants'}, as a fitted value instead of a band artefact"
                     + (f"; {len(nev)} panel rows now NOT EVALUABLE would return to the scorecard" if c["key"] == "k_glc_ha" and nev else "")
                 ),
             })
+    if abs_refused:
+        compounds = sorted({r["compound"] for r in abs_refused})
+        unlocked.insert(0, {
+            "if_measured": ("absolute levels of the thiol lane's observables from a second independent laboratory "
+                            "(for example the pending WUR blind-test samples), re-scored under H0's rule (H0')"),
+            "you_could_predict": (
+                f"absolute {', '.join(compounds)} for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex "
+                f"(today {ruling().tau_abs_dex:.3f}, {ruling().upper_bound_text}; D2's branches (ii) / (iii)); "
+                f"{len(abs_refused)} panel rows now refused for their absolute level would return to the scorecard"
+            ),
+        })
     for a in axes:
         if a["additional_agreeing_claims_to_trust"] is not None and not a["structural_block"]:
             unlocked.append({
@@ -377,6 +406,7 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
         ),
         "unidentified_coordinates": coords,
         "not_evaluable_rows": nev,
+        "absolute_refused_rows": abs_refused,
         "refused_targets": refused,
         "thin_axes": axes,
         "largest_misses": misses,
@@ -385,6 +415,7 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
         "summary": {
             "unidentified_coordinates": len(coords),
             "not_evaluable_rows": len(nev),
+            "absolute_refused_rows": len(abs_refused),
             "refused_row_count": sum(g["row_count"] for g in refused),
             "axes_below_trust": len(axes),
             "lanes_that_cannot_support_a_trend": len(design_gaps),
@@ -406,7 +437,9 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
         payload["how_to_read"],
         "",
         f"**At a glance:** {s['unidentified_coordinates']} fitted coordinates unidentified by primary evidence · "
-        f"{s['not_evaluable_rows']} panel rows answered but not evaluable · {s['refused_row_count']} panel rows refused "
+        f"{s['not_evaluable_rows']} panel rows answered but not evaluable · "
+        f"{s.get('absolute_refused_rows', 0)} panel rows whose absolute level is refused (H0 / EX-059) · "
+        f"{s['refused_row_count']} panel rows refused "
         f"(targets no lane represents) · {s['axes_below_trust']} directional axes below 'trust' ({s['trust_rule']}).",
         "",
         "## 1. Fitted coordinates the data do not identify",
@@ -428,6 +461,13 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
             lines.append(f"- `{r['benchmark_id']}` / {r['compound']} ({r['panel']})")
     else:
         lines.append("None.")
+    if payload.get("absolute_refused_rows"):
+        lines += ["", "The engine also computes these, but the thiol lane ships relative within-laboratory predictions "
+                  "only (H0 / EX-059, D2 branch (i)), so their absolute level is refused and they leave the absolute "
+                  "count until a second independent laboratory's absolute measurements, re-scored under H0's rule, "
+                  "say otherwise (section 6):", ""]
+        for r in payload["absolute_refused_rows"]:
+            lines.append(f"- `{r['benchmark_id']}` / {r['compound']} ({r['panel']})")
     lines += ["", "## 3. What the panel asks for that no lane represents", "", "| what | rows | the engine's reason | the hypothesis layer |", "|---|---|---|---|"]
     for g in payload["refused_targets"]:
         lines.append(f"| {g['what']} | {g['row_count']} | {g['reason'][:260]} | {g.get('hypothesis_layer', '')} |")

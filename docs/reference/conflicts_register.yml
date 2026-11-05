@@ -1998,12 +1998,22 @@ entries:
     remedy: >-
       Both stay as data: Schieberle in the joint fit, Yiltirak a declared hold-out. Neither is down-weighted; the spread
       is reported as between-laboratory error if the thiol layer ships as a declared limitation (thiol prereg sec. 6).
+      [APPLIED 2026-11-05 in its out-of-sample form (H0 / EX-059, D2 branch (i); owner-approved): the between-laboratory
+      level error was estimated by leave-two-laboratories-out, tau_ABS(all) 0.964 dex, U >= 1.60, so the thiol lane's
+      absolute levels for a new laboratory are REFUSED by name (thiol_relative_only.RELATIVE_ONLY_SPECIES: MFT, FFT, MFTD,
+      furfural, norfuraneol) and only within-study ratios ship, with omega 0.42 dex per arm in their interval; choices
+      register CR-18 / CR-19. This conflict is unchanged by it: the 2.1 dex gap between the two laboratories is exactly
+      the kind of level error the refusal declines to hide, and a third laboratory's SIDA pot (the first test below) is
+      also what H0' needs to lift it.]
       Proposed 2026-11-01 (cluster 4): that declared between-laboratory band for absolute MFT levels is 0.5-0.75 dex (1
       SD), from the four isotope-quantified laboratories' residual scatter; an O2-consumer arm (OX charged from the
       vessel block, k_cys_ox in Ehrenberg 1989's form) is a declared, unfitted arm. Decider (designed): Yiltirak's recipe
       (25 / 25 mM, pH 5.5, 100 C, 4 h) in 3 vs 15 mL fills, argon vs air, SIDA for MFT and bis(2-methyl-3-furyl)
       disulfide. Author requests: Elmore (disulfides / chromatograms), DFA (the Table IV autoclave fill).
-    affects: [schieberle2000_t4_100c_time_course, yiltirak2026_tables3_buffer_arm_mft_fft]
+    affects:
+      - schieberle2000_t4_100c_time_course
+      - yiltirak2026_tables3_buffer_arm_mft_fft
+      - {file: src/kinetic_core/thiol_relative_only.py, symbol: RELATIVE_ONLY_SPECIES}
   - id: CF-069
     kind: conflict
     scope: corpus

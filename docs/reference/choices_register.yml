@@ -291,3 +291,42 @@ entries:
     sensitivity:
       status: harmless
       result: "no panel row, directional arm or contrast has a programme peaking in 25-120 C except TEMP-02's 25 C control, which every alternative but refuse_below_120 keeps"
+
+  - id: CR-18
+    what: which observables the thiol lane's absolute refusal covers (H0 / EX-059, D2 branch (i))
+    where: {file: src/kinetic_core/thiol_relative_only.py, symbol: RELATIVE_ONLY_SPECIES}
+    kind: policy
+    current: "MFT, FFT, MFTD, FUR (furfural), NF (norfuraneol): every species on EX-056's paired rows of the five scorable laboratories (the rows H0's ship-rule quantities are computed on) that the shipped sulfur lane answers as a target"
+    basis: >-
+      D2 (kinetic_core_between_lab_tau_h0_prereg.md sec. 6) rules the lane: branch (i) ships relative within-laboratory
+      predictions only and refuses absolute concentrations for a new laboratory; tau_ABS(all) 0.964 dex (reset set, the
+      larger), U >= 1.60. The owner applied it on 2026-11-05 to exactly the set H0 scored. Read from the records (and
+      re-derived by tests/unit/test_thiol_relative_only.py): the paired rows hold MFT, FFT (DFA, sida), FUR, NF, MGO
+      (calibrated), TDP (figures) and MFTD (shape only). MGO is already refused on the sulfur lane (B13) and TDP is not a
+      target, so neither needs anything. Out because H0 did not score them: 2-acetylthiazole (one unpaired Jiangnan
+      row, D-all only), FFTD and DPO (unpaired, not targets), cysteine / pentose / acetic acid (Nestle, D-all only),
+      H2S and methanethiol (not in the fit table). Readings not taken: the ABS class only (MFT, FFT, FUR, NF: would
+      ship an absolute MFTD that H0 tested only on shape, i.e. with no level evidence at all) and the thiols only (MFT,
+      FFT, MFTD: would drop furfural and norfuraneol, which H0 scored in the absolute class). A calibration carrying
+      the compound's response factor is answered (the laboratory's own level).
+    alternatives: []
+    decided_by: "owner, 2026-11-05: apply D2 branch (i) to the shipped outputs, scoped to exactly what H0 scored"
+    sensitivity: {status: not_applicable}
+
+  - id: CR-19
+    what: the within-laboratory shape error omega in a thiol-lane ratio's interval (H0 / EX-059)
+    where: {file: src/kinetic_core/thiol_relative_only.py, symbol: omega_set}
+    kind: alternatives
+    current: "omega = 0.419 dex (the larger of H0's two sets, warm) in each arm: a two-arm ratio's 90 % half-width is 1.645 * sqrt(2) * omega = 0.974 dex (a factor 9.4 either way); a calibrated level carries one row's omega"
+    basis: >-
+      H0 reports omega(all) 0.419 (warm) and 0.390 (reset). Its ship rule reads the larger tau of the two sets, and the
+      independent review notes the declared leaks bias omega low, so the larger omega is the conservative reading.
+      omega enters once: before this no interval in the engine carried a within-laboratory shape term (compare's ratios
+      had none; the dispersion band decides only 'resolved').
+    alternatives:
+      - {name: larger_set, value: "0.419 dex (warm): factor 9.4 at 90 %"}
+      - {name: d2_set, value: "0.390 dex (reset, the set whose tau D2 read): factor 8.1 at 90 %"}
+    decided_by: "the prereg's two-set precedence for the ship rule (sec. 6), applied to omega; 2026-11-05"
+    sensitivity:
+      status: harmless
+      result: "no scored artifact reads the ratio interval: the scorecard, the contrast diagnostic, the directional panel and the contrast benchmark score levels, ratios or signs, never this interval"

@@ -645,6 +645,33 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
                     "recomputed live on the union panel; an absolute is never trust by rule",
                 )
             )
+    # --- 2026-11-05: the thiol lane ships relative predictions only (H0 / EX-059, D2 branch (i)) ----------------
+    from src.kinetic_core import thiol_relative_only as h0
+
+    r = h0.ruling()
+    scope = ", ".join(sorted(h0.RELATIVE_ONLY_SPECIES))
+    cells.append(
+        DomainCell(
+            "Absolute concentration (ppb)",
+            f"thiol-lane observables {scope}, for a new laboratory [sulfur lane]",
+            f"REFUSED by name: out-of-sample tau_ABS {r.tau_abs_dex:.3f} dex, {r.upper_bound_text} "
+            "(leave-two-laboratories-out); absolute thiol evidence from one laboratory",
+            VERDICT_DO_NOT_USE,
+            f"{data_paths.rel(h0.H0_RECORD)} (D2 branch (i)); lifted only by a second independent laboratory's "
+            "absolute measurements re-scored under H0's rule",
+        )
+    )
+    cells.append(
+        DomainCell(
+            "Within-study ratio, rank or shape of one thiol-lane compound",
+            "two conditions of one study (one laboratory)",
+            "H0's relative branch, engine minus a chemistry-free null: "
+            + "; ".join(f"{s} {m:+.2f} nats/row ({label})" for s, m, label in r.relative_branch)
+            + f"; omega {r.omega_dex:.2f} dex per arm in the interval",
+            VERDICT_CAUTION,
+            "shipped by D2 branch (i), with the owner's note: no evidence of beating a null either",
+        )
+    )
     if env.get("available"):
         cells.append(
             DomainCell(

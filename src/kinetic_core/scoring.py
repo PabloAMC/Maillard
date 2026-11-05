@@ -48,6 +48,7 @@ from src.benchmark_metadata import (
 )
 from src.validation_contract import DEFAULT_VALIDATION_CONTRACT
 
+from . import thiol_relative_only
 from .engine import declared_unidentified, engine_metadata, fit_report_paths, predict
 from .fit_targets import core_evidence_role, core_fit_targets, fit_target_of, in_core_fit
 from .vessel import format_o2_to_thiol, oxygen_record
@@ -224,13 +225,28 @@ def score_benchmark(
             reason = "NOT EVALUABLE: " + next(
                 w for w in declaration.warnings if w.startswith("HEXOSE ENTRY UNIDENTIFIED")
             )
+        elif thiol_relative_only.declared(declaration, compound):
+            # 2026-11-05 (H0 / EX-059, D2 branch (i)): the thiol lane's absolute levels are refused; the panel
+            # scores what the model ships, so the row leaves the absolute count with its reason.
+            reason = "NOT EVALUABLE: " + thiol_relative_only.short_reason()
         if reason is not None:
+            absolute_refused = reason.startswith("NOT EVALUABLE: " + thiol_relative_only.ABSOLUTE_REFUSED_TAG)
             refused.append(
                 {
                     "benchmark_id": benchmark_id, "panel": panel_tag, "compound": compound,
                     "target_unit": unit, "reason": reason,
                     "envelope_state": declaration.state, "lane": declaration.lane,
                     "unidentified_route": reason.startswith("NOT EVALUABLE: HEXOSE"),
+                    "absolute_refused": absolute_refused,
+                    # ... but what the lane DOES ship, a ratio between two pots of one study, still needs both
+                    # numbers: the within-study contrast diagnostic (build_contrast_scores.py) reads them, and
+                    # nothing that counts an absolute does.
+                    **({"relative_use_only": {
+                        "measured": float(measured),
+                        "predicted": core_native_value(run, compound, unit, limiting_molar),
+                        "in_core_fit": in_core_fit(benchmark_id, compound),
+                        "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
+                    }} if absolute_refused else {}),
                 }
             )
             continue
