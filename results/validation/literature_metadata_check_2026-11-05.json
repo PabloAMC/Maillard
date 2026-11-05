@@ -1,0 +1,404 @@
+{
+ "checked": 713,
+ "flag_counts": {
+  "author_not_in_record": 33,
+  "year_mismatch": 7,
+  "doi_not_found": 1
+ },
+ "flagged": [
+  {
+   "paper_id": "kamal_eldin_2003_triolein_scission",
+   "doi": "10.1002/ejlt.200390032",
+   "citation": "Kamal-Eldin, Velasco & Dobarganes (2003), Eur. J. Lipid Sci. Technol. 105:329",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Oxidation of mixtures of triolein and trilinolein at elevated temperatures",
+   "openalex_year": 2003,
+   "openalex_first_author": "Afaf Kamal‐Eldin"
+  },
+  {
+   "paper_id": "doi_10_1002_yea_3906",
+   "doi": "10.1002/yea.3906",
+   "citation": "Bacher, Eberhardt & Müller (2023)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Strain diversity in Saccharomyces cerevisiae thiamine production capacity",
+   "openalex_year": 2023,
+   "openalex_first_author": "Rebecca Rocchi"
+  },
+  {
+   "paper_id": "pmc9905368_spi_hvp_xylose_benchmark",
+   "doi": "10.1007/s10068-022-01194-w",
+   "citation": "PMC9905368 (2023)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Study on volatile compounds formed from the thermal interaction of hydrolyzed vegetable proteins with reducing sugars",
+   "openalex_year": 2022,
+   "openalex_first_author": "Hyunsu Cho"
+  },
+  {
+   "paper_id": "doi_10_1007_s13197_025_06419_4",
+   "doi": "10.1007/s13197-025-06419-4",
+   "citation": "Ordoudi et al. (2014 / PMC12484514)",
+   "flags": [
+    "year_mismatch",
+    "author_not_in_record"
+   ],
+   "openalex_title": "A systematic review on the determination and analytical methods for furanic compounds in caramel models",
+   "openalex_year": 2025,
+   "openalex_first_author": "Ai Chee Chan"
+  },
+  {
+   "paper_id": "doi_10_1016_j_crfs_2023_100445",
+   "doi": "10.1016/j.crfs.2023.100445",
+   "citation": "Huang et al. (2021)",
+   "flags": [
+    "year_mismatch",
+    "author_not_in_record"
+   ],
+   "openalex_title": "GC-MS and GC×GC-ToF-MS analysis of roasted / broth flavors produced by Maillard reaction system of cysteine-xylose-glutamate",
+   "openalex_year": 2023,
+   "openalex_first_author": "Anran Zheng"
+  },
+  {
+   "paper_id": "doi_10_1016_j_fochms_2026_100379",
+   "doi": "10.1016/j.fochms.2026.100379",
+   "citation": "Ince et al. (2024)",
+   "flags": [
+    "year_mismatch"
+   ],
+   "openalex_title": "Effect of temperature on interactions between soy 11S glycinin and hexanal – An off-flavour compound",
+   "openalex_year": 2026,
+   "openalex_first_author": "Cameron Ince"
+  },
+  {
+   "paper_id": "doi_10_1016_j_foodchem_2011_07_044",
+   "doi": "10.1016/j.foodchem.2011.07.044",
+   "citation": "Wang, Z. et al. (2012)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Changes in Muscovy duck breast muscle marinated with ginger extract",
+   "openalex_year": 2011,
+   "openalex_first_author": "Long-Li Tsai"
+  },
+  {
+   "paper_id": "doi_10_1016_j_foodchem_2013_11_082",
+   "doi": "10.1016/j.foodchem.2013.11.082",
+   "citation": "Hrncirik & Zeelenberg (2014)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Solid phase extraction of trace amounts of silver, cadmium, copper, mercury, and lead in various food samples based on ethylene glycol bis-mercaptoacetate modified 3-(trimethoxysilyl)-1-propanethiol coated Fe3O4 nanoparticles",
+   "openalex_year": 2013,
+   "openalex_first_author": "Mohammad Hossein Mashhadizadeh"
+  },
+  {
+   "paper_id": "doi_10_1016_j_foodchem_2014_03_113",
+   "doi": "10.1016/j.foodchem.2014.03.113",
+   "citation": "PubMed PMID:24837915 (Ref. 24)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Antioxidant activity of Maillard type reaction products between phosphatidylethanolamine and glucose",
+   "openalex_year": 2014,
+   "openalex_first_author": "Kshitij Shrestha"
+  },
+  {
+   "paper_id": "doi_10_1016_j_foodchem_2022_133518",
+   "doi": "10.1016/j.foodchem.2022.133518",
+   "citation": "Kocadağlı & Gökmen (2016)",
+   "flags": [
+    "year_mismatch",
+    "author_not_in_record"
+   ],
+   "openalex_title": "Effect of phytic acid, tannic acid and saponin on asparagine-glucose Maillard reaction",
+   "openalex_year": 2022,
+   "openalex_first_author": "Elaine Kaspchak"
+  },
+  {
+   "paper_id": "weerawatanakorn2015",
+   "doi": "10.1016/j.jfda.2015.02.001",
+   "citation": "PMC PMCID:PMC9351765 (Ref. 12)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Reactivity and stability of selected flavor compounds",
+   "openalex_year": 2015,
+   "openalex_first_author": "Monthana Weerawatanakorn"
+  },
+  {
+   "paper_id": "doi_10_1016_s0006_3495_85_83868_6",
+   "doi": "10.1016/s0006-3495(85)83868-6",
+   "citation": "PMC PMCID:PMC1329438 (Refs. 36/37)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Kinetics of proton exchange of phosphatidylethanolamine in phospholipid vesicles",
+   "openalex_year": 1985,
+   "openalex_first_author": "Earle K. Ralph"
+  },
+  {
+   "paper_id": "doi_10_1021_acs_jafc_3c07476",
+   "doi": "10.1021/acs.jafc.3c07476",
+   "citation": "Zhao, Z. et al. (2023)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Light-Colored Maillard Peptides: Formation from Reduced Fluorescent Precursors of Browning and Enhancement of Saltiness Perception",
+   "openalex_year": 2023,
+   "openalex_first_author": "Yanqun Zhang"
+  },
+  {
+   "paper_id": "hamzalioglu_2026_milk_uht_ages",
+   "doi": "10.1021/acs.jafc.5c14296",
+   "citation": "Hamzalioglu et al. (2026)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Multi-Response Kinetic Modeling of the Maillard Reaction in Milk During Heating at Ultra-High-Temperature Range",
+   "openalex_year": 2026,
+   "openalex_first_author": "Aytül Hamzalıoğlu"
+  },
+  {
+   "paper_id": "zha2019",
+   "doi": "10.1021/acs.jafc.9b04099",
+   "citation": "ACS JAFC 9b04099",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Gum Arabic-Mediated Synthesis of Glyco-pea Protein Hydrolysate via Maillard Reaction Improves Solubility, Flavor Profile, and Functionality of Plant Protein",
+   "openalex_year": 2019,
+   "openalex_first_author": "Fengchao Zha"
+  },
+  {
+   "paper_id": "zheng1994",
+   "doi": "10.1021/bk-1994-0564.ch011",
+   "citation": "Ruiz-Aceituno et al. (compiled 2016)",
+   "flags": [
+    "year_mismatch",
+    "author_not_in_record"
+   ],
+   "openalex_title": "Kinetics of the Release of Hydrogen Sulfide from Cysteine and Glutathione During Thermal Treatment",
+   "openalex_year": 1994,
+   "openalex_first_author": "Yan Qing Zheng"
+  },
+  {
+   "paper_id": "doi_10_1021_jf0510687",
+   "doi": "10.1021/jf0510687",
+   "citation": "PubMed PMID:16248560 (Ref. 23)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Characterization and Quantification of Proteins in Lecithins",
+   "openalex_year": 2005,
+   "openalex_first_author": "Carmen Martín-Hernández"
+  },
+  {
+   "paper_id": "doi_10_1021_jf100649z",
+   "doi": "10.1021/jf100649z",
+   "citation": "PubMed PMID:20420424 (Ref. 35)",
+   "flags": [
+    "year_mismatch",
+    "author_not_in_record"
+   ],
+   "openalex_title": "Determination of Furan Precursors and Some Thermal Damage Markers in Baby Foods: Ascorbic Acid, Dehydroascorbic Acid, Hydroxymethylfurfural and Furfural",
+   "openalex_year": 2010,
+   "openalex_first_author": "Marta Mesías"
+  },
+  {
+   "paper_id": "tai1998",
+   "doi": "10.1021/jf971111t",
+   "citation": "Lee, Jo & Kim (1998)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Influence of Glutathione Oxidation and pH on Thermal Formation of Maillard-Type Volatile Compounds",
+   "openalex_year": 1998,
+   "openalex_first_author": "Chao-Ying Tai"
+  },
+  {
+   "paper_id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
+   "doi": "10.1021/jf9907687",
+   "citation": "Ramírez-Jiménez et al. (2000)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Browning Indicators in Bread",
+   "openalex_year": 2000,
+   "openalex_first_author": "Antonio Ramı́rez-Jiménez"
+  },
+  {
+   "paper_id": "solis_calero_2013_pe_amadori",
+   "doi": "10.1021/jp401488j",
+   "citation": "Solís-Calero et al. (2013)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "A DFT Study of the Amadori Rearrangement above a Phosphatidylethanolamine Surface: Comparison to Reactions in Aqueous Environment",
+   "openalex_year": 2013,
+   "openalex_first_author": "Christian Solís Calero"
+  },
+  {
+   "paper_id": "solis_calero_2015_pe_glyoxal",
+   "doi": "10.1039/c4cp05360e",
+   "citation": "Solís-Calero et al. (2015)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "A DFT study of the carboxymethyl-phosphatidylethanolamine formation from glyoxal and phosphatidylethanolamine surface. Comparison with the formation of N(ε)-(carboxymethyl)lysine from glyoxal and l -lysine",
+   "openalex_year": 2015,
+   "openalex_first_author": "Christian Solís Calero"
+  },
+  {
+   "paper_id": "pmc_4419266_pe_interfacial_maillard_kinetics",
+   "doi": "10.1155/2015/319505",
+   "citation": "Solís-Calero et al. (2015)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Nonenzymatic Reactions above Phospholipid Surfaces of Biological Membranes: Reactivity of Phospholipids and Their Oxidation Derivatives",
+   "openalex_year": 2015,
+   "openalex_first_author": "Christian Solís Calero"
+  },
+  {
+   "paper_id": "doi_10_31274_rtd_180813_12611",
+   "doi": "10.31274/rtd-180813-12611",
+   "citation": "O'Keefe, S.F. (1988). \"Binding of volatile flavor compounds to purified soy proteins in an aqueous model system\", PhD dissertation, Iowa State University. Published as O'Keefe, Wilson, Resurreccion & Murphy (1991), J. Agric. Food Chem. 39:1022-1028 (10.1021/jf00006a003) and O'Keefe, Resurreccion, Wilson & Murphy (1991), J. Food Sci. 56:802-806 (10.1111/j.1365-2621.1991.tb05386.x).",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Binding of volatile flavor compounds to purified soy proteins in an aqueous model system",
+   "openalex_year": 1988,
+   "openalex_first_author": "Sean F. O’Keefe"
+  },
+  {
+   "paper_id": "foods_2022_spi_free_sh",
+   "doi": "10.3390/foods11213505",
+   "citation": "Foods 11(21):3505 (2022)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Structural Characteristics and Emulsifying Properties of Soy Protein Isolate Glycated with Galacto-Oligosaccharides under High-Pressure Homogenization",
+   "openalex_year": 2022,
+   "openalex_first_author": "Yitong Xie"
+  },
+  {
+   "paper_id": "doi_10_3390_foods12234297",
+   "doi": "10.3390/foods12234297",
+   "citation": "Rietjens et al. (2023)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Derivation of Kokumi γ-Glutamyl Peptides and Volatile Aroma Compounds from Fermented Cereal Processing By-Products for Reducing Bitterness of Plant-Based Ingredients",
+   "openalex_year": 2023,
+   "openalex_first_author": "Nabila Rodríguez Valerón"
+  },
+  {
+   "paper_id": "doi_10_3390_foods13121916",
+   "doi": "10.3390/foods13121916",
+   "citation": "Rocha et al. (2024)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Pulsed Electric Field Technology for the Extraction of Glutathione from Saccharomyces cerevisiae",
+   "openalex_year": 2024,
+   "openalex_first_author": "Alejandro Berzosa"
+  },
+  {
+   "paper_id": "doi_10_3390_foods14162787",
+   "doi": "10.3390/foods14162787",
+   "citation": "PMC PMCID:PMC12386030 (Ref. 22)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "The Contribution of Melanoidins to Soy Sauce Antioxidant Activities and Their Structure Characteristics",
+   "openalex_year": 2025,
+   "openalex_first_author": "Han-Han Li"
+  },
+  {
+   "paper_id": "doi_10_3390_foods14173065",
+   "doi": "10.3390/foods14173065",
+   "citation": "Deng et al. (2024)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Fermentation of Pea Protein Isolate by Enterococcus faecalis 07: A Strategy to Enhance Flavor and Functionality",
+   "openalex_year": 2025,
+   "openalex_first_author": "Zhunyao Zhu"
+  },
+  {
+   "paper_id": "doi_10_3390_foods9030251",
+   "doi": "10.3390/foods9030251",
+   "citation": "Soladoye et al. (2020)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Identification of Umami Taste in Sous-Vide Beef by Chemical Analyses, Equivalent Umami Concentration, and Electronic Tongue System",
+   "openalex_year": 2020,
+   "openalex_first_author": "Young-Hwa Hwang"
+  },
+  {
+   "paper_id": "doi_10_3390_jof7080658",
+   "doi": "10.3390/jof7080658",
+   "citation": "Noda, Tanaka & Takahashi (2003)",
+   "flags": [
+    "year_mismatch",
+    "author_not_in_record"
+   ],
+   "openalex_title": "Koji Molds for Japanese Soy Sauce Brewing: Characteristics and Key Enzymes",
+   "openalex_year": 2021,
+   "openalex_first_author": "Kotaro Ito"
+  },
+  {
+   "paper_id": "pratap_singh_2021_native_ppi_spi",
+   "doi": "10.3390/molecules26134104",
+   "citation": "Pratap-Singh et al. (2021), Molecules 26:4104",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "A Rapid Gas-Chromatography/Mass-Spectrometry Technique for Determining Odour Activity Values of Volatile Compounds in Plant Proteins: Soy, and Allergen-Free Pea and Brown Rice Protein",
+   "openalex_year": 2021,
+   "openalex_first_author": "Anika Singh"
+  },
+  {
+   "paper_id": "doi_10_3390_molecules31020287",
+   "doi": "10.3390/molecules31020287",
+   "citation": "PMC PMCID:PMC12844103 (Ref. 3)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Recent Insights into Protein-Polyphenol Complexes: Molecular Mechanisms, Processing Technologies, Synergistic Bioactivities, and Food Applications",
+   "openalex_year": 2026,
+   "openalex_first_author": "Hoang Duy Huynh"
+  },
+  {
+   "paper_id": "doi_10_4014_jmb_2207_07057",
+   "doi": "10.4014/jmb.2207.07057",
+   "citation": "Ahlberg & Mohammadi (2021)",
+   "flags": [
+    "author_not_in_record"
+   ],
+   "openalex_title": "Yeast Extract: Characteristics, Production, Applications and Future Perspectives",
+   "openalex_year": 2022,
+   "openalex_first_author": "Zekun Tao"
+  },
+  {
+   "paper_id": "xu2022",
+   "doi": "10.7506/spkx1002-6630-20220613-128",
+   "citation": null,
+   "flags": [
+    "doi_not_found"
+   ]
+  }
+ ],
+ "clean": 678,
+ "date": "2026-11-05",
+ "registry": "data/keys/papers.yml",
+ "registry_sha256": "dce659c7df71e49861c5ebbdd4010a9b60c5a37a4b55d8f574993574efb5716c",
+ "generated_by": "scripts/tools/openalex.py verify",
+ "source": "OpenAlex (api.openalex.org)"
+}
