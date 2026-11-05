@@ -223,7 +223,7 @@ release reliably (closure > 100 %); give any pyrazine LOD; give O2 status.
     status: text_only
     quant_class: other
     simulable: false
-    read_by: "first reader 2026-11-05; second reader pending"
+    read_by: "first reader 2026-11-05; second reader 2026-11-05 AGREES on the OPD LODs and LOQs (see Second reader section)"
     condition_quote: "detection limit (LOD) and quantitation limit (LOQ) values were determined to be 0.199"
     flags: [lod_method_not_stated, elsd_linear_calibration, elsd_lod_implausible_vs_hu2012_deng2022]
     note: "LOD/LOQ uM: Thr-ARP 0.199/0.601, Thr 0.421/1.223, 3-DX 0.59/2.03, 1-DX 0.58/2.29, GO 0.57/2.32, MGO 0.47/2.08, furfural 0.531/1.438. ELSD values ~200-600x below hu2012/deng2022: do not use as floors."
@@ -233,3 +233,20 @@ release reliably (closure > 100 %); give any pyrazine LOD; give O2 status.
 
 Not on disk: Fig. S1 (furfural vs time, all five xylose levels). The 10 and 30 mM xylose arms' time courses are not in the
 paper at all.
+
+## Second reader (2026-11-05)
+
+**Independent second reading** by `agent-second-reader-2026-11-05`, PDF read before this dossier. Source:
+`data/articles/chen2026.pdf` (Curr. Res. Food Sci. 12:101433), sec. 2.5 (OPD quinoxalines, HPLC-DAD 315 nm). Printed numbers.
+
+| analyte | first reader LOD / LOQ (µM) | second reader LOD / LOQ (µM) | calibration as printed (both readers) | verdict |
+|---|---|---|---|---|
+| 3-DX | 0.59 / 2.03 | **0.59 / 2.03** | y = 4.79 × 10⁶ x − 2.19 × 10⁴ | AGREE |
+| 1-DX | 0.58 / 2.29 | **0.58 / 2.29** | y = 4.78 × 10⁶ x − 3.22 × 10⁴ | AGREE |
+| GO | 0.57 / 2.32 | **0.57 / 2.32** | y = 2.47 × 10³ x − 7.83 × 10⁴ | AGREE |
+| MGO | 0.47 / 2.08 | **0.47 / 2.08** | y = 3.46 × 10³ x − 1.44 × 10⁴ | AGREE |
+
+Range 0.47-0.59 µM: AGREE. I see the same defects the first reader flags: x is printed as peak area and y as mmol/L, which
+cannot be right for 4.79 × 10⁶; the 3-DX / 1-DX and GO / MGO slopes differ by 10³; the LOD criterion (S/N or blank SD) and
+the basis (pot or derivatised solution, diluted 1:1 with reagent) are not printed. I also note that sec. 2.5 gives the
+column temperature as 30 °C and, a few lines later, the oven as 35 °C.
