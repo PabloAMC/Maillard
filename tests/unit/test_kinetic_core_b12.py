@@ -93,7 +93,8 @@ def test_a_trunk_prediction_at_the_references_is_unchanged_and_moves_off_them():
 
 def test_the_axes_are_now_answerable_on_the_trunk_and_still_refused_elsewhere():
     assert TRUNK not in NO_PH_TERM_LANES and TRUNK in AW_TERM_LANES
-    a, b = _spec(aw=0.3, name="a"), _spec(aw=0.6, name="b")
+    # 2026-11-05 (trunk a_w window): the arms were 0.3 / 0.6; 0.3 is below the window, so 0.4 / 0.6 now
+    a, b = _spec(aw=0.4, name="a"), _spec(aw=0.6, name="b")
     da, db = declare_envelope(a, ["5-HMF"]), declare_envelope(b, ["5-HMF"])
     assert axis_refusal(a, b, da, db) is None
     c, d = _spec(ph=5.5, name="c"), _spec(ph=6.8, name="d")
@@ -102,4 +103,38 @@ def test_the_axes_are_now_answerable_on_the_trunk_and_still_refused_elsewhere():
                                         process=ProcessSpec(thermal=ThermalProgram.isothermal(150.0, 20.0), ph=6.0, water_activity=aw))
     e, f = acr(0.3, "e"), acr(0.6, "f")
     reason = axis_refusal(e, f, declare_envelope(e, ["Acrylamide"]), declare_envelope(f, ["Acrylamide"]))
-    assert reason and "WATER ACTIVITY" in reason
+    assert reason and "WATER ACTIVITY" in reason and "De Vleeschouwer 2008, B14" in reason
+
+
+def test_the_trunk_aw_window_refuses_a_comparison_with_a_dry_arm_only():
+    """2026-11-05 (H0 follow-up, owner-approved): the trunk's a_w window is 0.33-1.00. The lower edge is the driest
+    row its multiplier table was built on (Pereyra Gonzales 2010 Table 1, a_w 0.33 at 50 / 60 C); the upper edge is
+    the base constants' own solution state (Martins 2005, a_w ~0.98-1.0), so a dilute arm is not refused. A
+    single-pot prediction below the window is still answered (a known limitation, as on the acrylamide lane)."""
+    assert tc.AW_WINDOW == (tc.AW_MULTIPLIER_TABLE[0][0], 1.0) == (0.33, 1.0)
+    assert engine.AW_TERM_WINDOWS[TRUNK] == tc.AW_WINDOW
+    source, outside = engine.AW_TERM_WINDOW_SOURCES[TRUNK]
+    assert "Pereyra Gonzales 2010 Table 1" in source and "0.05" in source and "Martins 2005" in source
+    inside = [_spec(aw=aw, name=f"in_{aw}") for aw in (0.33, 0.65, 0.98, 1.0)]
+    for x, y in zip(inside, inside[1:]):
+        assert axis_refusal(x, y, declare_envelope(x, ["5-HMF"]), declare_envelope(y, ["5-HMF"])) is None
+    x, y = _spec(aw=0.25, name="x"), _spec(aw=0.65, name="y")   # a dry-state arm
+    reason = axis_refusal(x, y, declare_envelope(x, ["5-HMF"]), declare_envelope(y, ["5-HMF"]))
+    assert reason and "trunk lane's a_w term is measured only inside 0.33-1.00" in reason
+    assert "Pereyra Gonzales 2010 Table 1" in reason and "still answered" in reason
+    same = _spec(aw=0.25, name="same")                       # a_w held fixed: no axis is moved, nothing refused
+    assert axis_refusal(same, _spec(aw=0.25, name="same2", ph=5.5), declare_envelope(same, ["5-HMF"]),
+                        declare_envelope(same, ["5-HMF"])) is None
+    single = predict(same, ["5-HMF"])                          # the single pot below the window: answered
+    assert single.answered and any("at or below the lowest measured point" in w for w in single.declaration.warnings)
+
+
+def test_the_no_aw_term_refusal_quotes_the_live_windows():
+    """The refusal for a lane with no a_w term used to say the acrylamide window was 0.88-0.99 (B14's, before B15
+    extended it to 0.34)."""
+    sulfur = lambda aw, n: FormulationSpec(name=n, precursors={"L-Cysteine": 10.0, "D-Ribose": 10.0},  # noqa: E731
+                                           process=ProcessSpec(thermal=ThermalProgram.isothermal(145.0, 20.0), ph=5.0, water_activity=aw))
+    a, b = sulfur(0.6, "a"), sulfur(0.9, "b")
+    reason = axis_refusal(a, b, declare_envelope(a, ["2-methyl-3-furanthiol"]), declare_envelope(b, ["2-methyl-3-furanthiol"]))
+    assert reason and "carry no a_w term" in reason
+    assert "inside a_w 0.34-0.99 (B14/B15)" in reason and "inside a_w 0.33-1.00 (B12)" in reason and "0.88" not in reason

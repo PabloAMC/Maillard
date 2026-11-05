@@ -268,7 +268,8 @@ def thin_axes(directional: Mapping[str, Any]) -> List[Dict[str, Any]]:
             "wilson_lower_bound": round(wilson_lower(agree, evaluable), 3) if evaluable else None,
             "additional_agreeing_claims_to_trust": _claims_to_trust(agree, evaluable),
             "structural_block": (
-                "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); "
+                "only the trunk lane carries a water-activity term (a declared multiplier, wave B12), and only "
+                "inside a_w 0.33-1.00 (a comparison with an arm below 0.33 is refused; a single recipe there is still answered); "
                 "the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w "
                 "comparisons, so claims on those lanes cannot help until a moisture-dependent step is "
                 "measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"

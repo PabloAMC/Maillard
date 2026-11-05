@@ -4,9 +4,9 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-11-05",
     "git": {
-      "commit": "a4b2504b575e24a4e5b6793c78bc8f530ed586e1",
-      "short": "a4b2504b",
-      "branch": "h0-relative-only-thiols",
+      "commit": "3dd7448d9c37a5ce3a17065b5e0396ece690f691",
+      "short": "3dd7448d",
+      "branch": "h0-followups",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "7fa1439a3e5012a3773f41bdd728c6fa912eeebbba40cd17575805a7ffd09ec3"
+        "sha256": "8c224cfdd8d32f56da0a629f7ae2f8a42d2f218fe87b9ff4a273563fecc72cd7"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -753,6 +753,16 @@
       "structural_block": null
     },
     {
+      "axis": "moisture_aw",
+      "agree": 0,
+      "evaluable": 0,
+      "not_evaluable": 4,
+      "verdict": "no evaluable claim",
+      "wilson_lower_bound": null,
+      "additional_agreeing_claims_to_trust": 4,
+      "structural_block": "only the trunk lane carries a water-activity term (a declared multiplier, wave B12), and only inside a_w 0.33-1.00 (a comparison with an arm below 0.33 is refused; a single recipe there is still answered); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
+    },
+    {
       "axis": "process_heating",
       "agree": 0,
       "evaluable": 0,
@@ -791,16 +801,6 @@
       "wilson_lower_bound": 0.207,
       "additional_agreeing_claims_to_trust": 3,
       "structural_block": null
-    },
-    {
-      "axis": "moisture_aw",
-      "agree": 1,
-      "evaluable": 1,
-      "not_evaluable": 3,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.207,
-      "additional_agreeing_claims_to_trust": 3,
-      "structural_block": "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
     },
     {
       "axis": "sulfur_donor",

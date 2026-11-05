@@ -98,11 +98,11 @@ The engine also computes these, but the thiol lane ships relative within-laborat
 | additive_amine | 0 / 0 | 2 | no evaluable claim | — | 4 |
 | lipid_lane | 0 / 0 | 3 | no evaluable claim | — | 4 |
 | matrix_identity | 0 / 0 | 1 | no evaluable claim | — | 4 |
+| moisture_aw | 0 / 0 | 4 | no evaluable claim | — | blocked: only the trunk lane carries a water-activity term (a declared multiplier, wave B12), and only inside a_w 0.33-1.00 (a comparison with an arm below 0.33 is refused; a single recipe there is still answered); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source) |
 | process_heating | 0 / 0 | 1 | no evaluable claim | — | 4 |
 | ranking | 0 / 0 | 4 | no evaluable claim | — | 4 |
 | scope | 0 / 0 | 3 | no evaluable claim | — | 4 |
 | additive_cysteine | 1 / 1 | 4 | caution | 0.207 | 3 |
-| moisture_aw | 1 / 1 | 3 | caution | 0.207 | blocked: only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source) |
 | sulfur_donor | 2 / 2 | 3 | caution | 0.342 | 2 |
 | time | 2 / 3 | 2 | caution | 0.208 | 5 |
 | sugar_identity | 4 / 8 | 8 | do-not-use | 0.215 | 12 |
