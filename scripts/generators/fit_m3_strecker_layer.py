@@ -96,12 +96,12 @@ def swap_used_mb() -> Optional[float]:
     return float(m.group(1)) if m else None
 
 
-def memory_guard(enabled: bool) -> Dict[str, Any]:
+def memory_guard(enabled: bool, min_free: int = MEMORY_MIN_FREE_PCT) -> Dict[str, Any]:
     free, swap = memory_free_pct(), swap_used_mb()
-    rec = {"free_pct_at_launch": free, "swap_used_mb_at_launch": swap, "threshold_pct": MEMORY_MIN_FREE_PCT,
+    rec = {"free_pct_at_launch": free, "swap_used_mb_at_launch": swap, "threshold_pct": min_free,
            "guard": enabled}
-    if enabled and (free is None or free < MEMORY_MIN_FREE_PCT):
-        raise Refusal(f"memory guard: free {free} % < {MEMORY_MIN_FREE_PCT} %; wait (check at most every 10 min)")
+    if enabled and (free is None or free < min_free):
+        raise Refusal(f"memory guard: free {free} % < {min_free} %; wait (check at most every 10 min)")
     return rec
 
 
@@ -508,16 +508,18 @@ def block_verdict(a: DrawSet, b: DrawSet, block: Sequence[str], cond: Sequence[s
     sd_rep = float(np.std(reps, ddof=1)) if reps.size > 2 else float("nan")
     band = pd.Z_90 * sd_rep
     resolved = (ea.get("resolved", True) and eb.get("resolved", True)) if psis_rule else True
-    reading = "tie" if (not resolved or not (np.isfinite(d) and abs(d) > band)) else ("a" if d > 0 else "b")
-    return {"d": d, "band": band, "reading": reading, "resolved": bool(resolved)}
+    raw = "tie" if not (np.isfinite(d) and abs(d) > band) else ("a" if d > 0 else "b")
+    reading = raw if resolved else "tie"
+    return {"d": d, "band": band, "reading": reading, "reading_raw": raw, "resolved": bool(resolved)}
 
 
-def contrast_credit(primary: Dict[str, Any], per_unit: Mapping[str, Dict[str, Any]]) -> str:
+def contrast_credit(primary: Dict[str, Any], per_unit: Mapping[str, Dict[str, Any]], key: str = "reading") -> str:
     """Sec. 10.1's rule on the claim units (Holm's guard step is NOT simulated in the power check: optimistic):
-    credit a iff the primary favours a and no claim unit favours b; symmetric for b; else none."""
-    if primary["reading"] == "a" and not any(v["reading"] == "b" for v in per_unit.values()):
+    credit a iff the primary favours a and no claim unit favours b; symmetric for b; else none. ``key`` =
+    "reading_raw" reads the units ignoring the density-resolution rule (a diagnostic)."""
+    if primary[key] == "a" and not any(v[key] == "b" for v in per_unit.values()):
         return "a"
-    if primary["reading"] == "b" and not any(v["reading"] == "a" for v in per_unit.values()):
+    if primary[key] == "b" and not any(v[key] == "a" for v in per_unit.values()):
         return "b"
     return "none"
 
@@ -660,32 +662,34 @@ def v_density_toy(data: L.Data, rng: np.random.Generator) -> Dict[str, Any]:
     li = np.where(inside & ev2.feasible, l2, -np.inf)            # uniform prior on the unit square: log p = 0
     est = pd.importance_lppd(li, lq)
 
-    def gh(pts):
-        upp = np.full((pts.shape[0], len(cs)), 0.5)
-        upp[:, i1], upp[:, i2] = np.clip(pts[:, 0], 0, 1), np.clip(pts[:, 1], 0, 1)
+    def gh(zpts):                                   # Gauss-Hermite in logit space, with the Jacobian
+        uz = _sigmoid(zpts)
+        upp = np.full((zpts.shape[0], len(cs)), 0.5)
+        upp[:, i1], upp[:, i2] = uz[:, 0], uz[:, 1]
         e = L.evaluate(upp, "R3", L.PRIMARY, data, trapped=False)
         v = L.uarp_loglik(data, e.pred["UARP_c"], e.theta["cv_arp"], L.PRIMARY, measured=L.arp_interval_measured(data))
-        ok = np.all((pts >= 0) & (pts <= 1), axis=1) & e.feasible
-        return np.where(ok, v, -1e300)
+        jac = np.sum(-np.abs(zpts) - 2.0 * np.log1p(np.exp(-np.abs(zpts))), axis=1)
+        return np.where(e.feasible, v + jac, -1e300)
 
-    q = pd.quadrature_lppd(gh, mean, cov / 2.0, n_nodes=20)
+    zg = _logit(np.column_stack([m1.ravel(), m2.ravel()]))
+    zmean = wn.ravel() @ zg
+    zcov = np.cov(zg.T, aweights=wn.ravel() + 1e-300) + 1e-3 * np.eye(2)
+    q = pd.quadrature_lppd(gh, zmean, zcov, n_nodes=20)
     return {"lppd_trapezoid_41x41": round(lppd_grid, 4), "lppd_psis": round(est.lppd, 4), "k_hat": est.k_hat,
-            "ess": est.ess, "mc_se": est.mc_se, "lppd_gauss_hermite_20": round(q.lppd, 4),
+            "ess": est.ess, "mc_se": est.mc_se, "lppd_gauss_hermite_20_logit": round(q.lppd, 4),
             "psis_minus_grid": round(est.lppd - lppd_grid, 4), "gh_minus_grid": round(q.lppd - lppd_grid, 4),
-            "pass": bool(abs(est.lppd - lppd_grid) < max(0.05, 3 * (est.mc_se or 0)))}
+            "pass": bool(abs(est.lppd - lppd_grid) < max(0.05, 3 * (est.mc_se or 0))),
+            "gh_pass": bool(abs(q.lppd - lppd_grid) < 0.05)}
 
 
 def psis_pilot(data: L.Data, rng: np.random.Generator, budget: Budget, evals: int = 300) -> Dict[str, Any]:
     """The one-unit PSIS pilot at full dimension (sec. 13 item 2): U3 under R2 on SYNTHETIC data (a truth drawn from
-    R2's prior reweighted by the non-U3 fed units), conditioned on U4, U1e, U1l. The mode of log(L x p) is searched
-    from three starts with fitting.fit (central polish, require_converged='flag'), <= ``evals`` evaluations each; a
-    Student-t (5 df) proposal at the best mode, scaled from the integrand's width; S = 256 -> 4096. Records k-hat,
-    ESS, wall time and the projection to the full PSIS plan (385 cells)."""
-    from src.kinetic_core import fitting
+    R2's prior reweighted by the non-U3 fed units), conditioned on U4, U1e, U1l: the numerator integral
+    int L(U4, U1e, U1l, U3) p by ``fit_cell`` (the decisive fits' estimator) from three starts (the prior draws with
+    the largest weights). Records k-hat, ESS, wall time and the projection to the PSIS plan (385 cells)."""
     t_start = time.time()
     rival = "R2"
-    cs = L.coords(rival)
-    d = len(cs)
+    d = len(L.coords(rival))
     obs = real_obs(data)
     prior = make_draw_set(rival, L.PRIMARY, data, 256, seed=901, budget=budget)
     lw = weights_from(prior, ("U4", "U1e", "U1l"), obs, L.PRIMARY, data)
@@ -694,77 +698,47 @@ def psis_pilot(data: L.Data, rng: np.random.Generator, budget: Budget, evals: in
     u3 = synth_unit(L.u3_unit(10.0 ** truth_u3), truth_u3, rng)
     obs_syn = Obs({**obs.units, "U3": u3}, obs.uarp_y)
     units = ("U4", "U1e", "U1l", "U3")
-    covs = {u: L.unit_covariance(obs_syn.units[u]) for u in units}
-    chol = {u: np.linalg.cholesky(covs[u]) for u in units if u != "U3"}
+    chol = {u: np.linalg.cholesky(L.unit_covariance(obs_syn.units[u])) for u in units if u != "U3"}
+    ll_ref = float(np.max(L.unit_loglik(u3, prior.points["U3"])))
+    n_ev = {"n": 0, "infeasible": 0}
 
-    def residuals_many(points_u: np.ndarray) -> np.ndarray:
-        ev = L.evaluate(np.clip(points_u, 0.0, 1.0), rival, L.PRIMARY, data)
+    def evaluate_points(pts: np.ndarray):
+        ev = L.evaluate(pts, rival, L.PRIMARY, data)
+        n_ev["n"] += len(pts)
+        n_ev["infeasible"] += int(np.sum(~ev.feasible))
+        ll = np.zeros(len(pts))
         res = []
         for u in units:
-            pts = L.points_for(u, ev)
+            p_ = L.points_for(u, ev)
+            l_ = L.unit_loglik(obs_syn.units[u], p_)
+            ll = ll + l_
             if u == "U3":
-                ll = L.unit_loglik(obs_syn.units[u], pts)
-                res.append(np.sqrt(np.maximum(-2.0 * (ll - _ll_max_u3), 0.0))[:, None])
+                res.append(np.sqrt(np.maximum(-2.0 * (l_ - ll_ref), 0.0))[:, None])
             else:
                 un = obs_syn.units[u]
-                r = (un.y[None, :] - pts @ un.design.T)
-                res.append(np.linalg.solve(chol[u], r.T).T)
+                res.append(np.linalg.solve(chol[u], (un.y[None, :] - p_ @ un.design.T).T).T)
         r = np.concatenate(res, axis=1)
-        return np.where(ev.feasible[:, None] & np.isfinite(r), r, 25.0)
+        ok = ev.feasible & ~ev.diag["failed_mask"]
+        return np.where(ok, ll, -np.inf), np.where(ok[:, None] & np.isfinite(r), r, 25.0)
 
-    _ll_max_u3 = float(np.max(L.unit_loglik(u3, prior.points["U3"])))
-    k_res = residuals_many(np.full((1, d), 0.5)).shape[1]
-    prob = fitting.Problem(keys=tuple(c.name for c in cs), kinds=("acid_yield",) * d, lower=np.zeros(d),
-                           upper=np.ones(d), rows=tuple(range(k_res)),
-                           residuals=lambda th, rows: residuals_many(th[None, :])[0],
-                           evaluate_many=lambda pts, rows: list(residuals_many(np.array(pts))))
-    starts = [np.full(d, 0.5), prior.u[int(np.argmax(lw))], prior.u[j]]
-    fits = []
-    for s in starts:
-        budget.check("PSIS pilot mode search")
-        f = fitting.fit(prob, s, budget=evals, central_polish=1, polish_budget=max(2 * d + 2, 80),
-                        require_converged="flag")
-        fits.append(f)
-    best = min(fits, key=lambda f: f.cost)
-    t_mode = time.time() - t_start
-    # proposal: scale from the integrand's width (the prior draws' weighted spread near the mode), never only the
-    # point curvature (lesson 2026-11-05)
-    lw_all = lw + L.unit_loglik(u3, prior.points["U3"])
-    wn = np.exp(lw_all - np.max(lw_all))
-    wn = wn / wn.sum()
-    spread = np.cov(prior.u.T, aweights=wn) + 1e-4 * np.eye(d)
-    out_s = {}
-    draws_u, lq_all, li_all = [], [], []
-    for s_target in (256, 1024, 4096):
-        budget.check("PSIS pilot sampling")
-        need = s_target - sum(len(x) for x in draws_u)
-        x, lq = pd.multivariate_t_draws(best.theta, spread, need, rng)
-        inside = np.all((x >= 0) & (x <= 1), axis=1)
-        ev = L.evaluate(np.clip(x, 0, 1), rival, L.PRIMARY, data)
-        li = np.zeros(need)
-        for u in units:
-            li = li + L.unit_loglik(obs_syn.units[u], L.points_for(u, ev))
-        li = np.where(inside & ev.feasible, li, -np.inf)
-        draws_u.append(x)
-        lq_all.append(lq)
-        li_all.append(li)
-        est = pd.importance_lppd(np.concatenate(li_all), np.concatenate(lq_all))
-        out_s[s_target] = {"k_hat": est.k_hat, "ess": est.ess, "accepted": est.accepted, "lppd": est.lppd,
-                           "mc_se": est.mc_se, "reason": est.reason, "nonfinite": est.n_nonfinite}
-        if est.accepted:
-            break
+    w_all = lw + L.unit_loglik(u3, prior.points["U3"])
+    starts = [prior.u[i] for i in np.argsort(-w_all)[:3]]
+    cell = fit_cell(evaluate_points, d, starts, rng, evals=evals, budget=budget)
+    est = cell["estimate"]
     wall = time.time() - t_start
-    n_eval = sum(f.evaluations for f in fits) + sum(len(x) for x in draws_u)
     per_cell_h = wall / 3600.0
     return {"rival": rival, "dimension": d, "unit": "U3 | U4, U1e, U1l (synthetic U3)",
-            "mode_search": [{"cost": f.cost, "status": f.status, "evaluations": f.evaluations,
-                             "converged": f.converged, "polish_flagged": (f.polish or {}).get("flagged")}
-                            for f in fits],
-            "proposal_scale": "the prior draws' U3 x fed-weighted spread (integrand width), Student-t 5 df",
-            "psis_by_S": out_s, "mode_search_wall_s": round(t_mode, 1), "wall_s": round(wall, 1),
-            "evaluations": n_eval, "projection_385_cells_h_serial": round(385 * per_cell_h, 1),
-            "projection_385_cells_h_wall_2_workers": round(385 * per_cell_h / 1.8, 1),
-            "exceeds_24h_cap": bool(385 * per_cell_h / 1.8 > 24.0)}
+            "mode_search": [{"cost": f["cost"], "status": f["status"], "evaluations": f["evaluations"],
+                             "converged": f.get("converged"), "polish_flagged": (f.get("polish") or {}).get("flagged")}
+                            for f in cell["fits"]],
+            "proposal": "Student-t 5 df in logit space at the best mode; Gauss-Newton covariance x 4, eigenvalues "
+                        "clipped to [0.01, pi^2 / 3]",
+            "psis": {"S": est.n_draws, "k_hat": est.k_hat, "ess": est.ess, "accepted": est.accepted,
+                     "lppd": est.lppd, "mc_se": est.mc_se, "reason": est.reason,
+                     "zero_weight_draws": est.n_nonfinite},
+            "evaluations": n_ev["n"], "infeasible_evaluations": n_ev["infeasible"],
+            "wall_s": round(wall, 1), "projection_385_cells_h_one_worker": round(385 * per_cell_h, 1),
+            "exceeds_24h_cap": bool(385 * per_cell_h > 24.0)}
 
 
 def blind_order_stub() -> Dict[str, Any]:
@@ -795,7 +769,7 @@ def r1_drift_diagnostic(data: L.Data) -> Dict[str, Any]:
 
 def run_checks(args) -> int:
     budget = Budget(args.cap_hours or 6.0)
-    mem = memory_guard(not args.no_memory_guard)
+    mem = memory_guard(not args.no_memory_guard, args.memory_min_free)
     data = L.load_data()
     rng = np.random.default_rng(args.seed)
     out: Dict[str, Any] = {"memory": mem, "ph_scale": L.PH_SCALE}
@@ -855,7 +829,8 @@ def render_checks(o: Dict[str, Any]) -> str:
     vd = o["v_density"]
     L_ += [f"## V-density (two-coordinate R3 toy, U-ARPglc): {'PASS' if vd['pass'] else 'FAIL'}", "",
            f"trapezoid 41x41 {vd['lppd_trapezoid_41x41']}; PSIS {vd['lppd_psis']} (k-hat {vd['k_hat']:.3f}, ESS "
-           f"{vd['ess']:.0f}); Gauss-Hermite 20x20 {vd['lppd_gauss_hermite_20']}", ""]
+           f"{vd['ess']:.0f}); Gauss-Hermite 20x20 in logit space {vd['lppd_gauss_hermite_20_logit']} (agrees: "
+           f"{vd['gh_pass']})", ""]
     pp = o["psis_pilot"]
     L_ += ["## One-unit PSIS pilot at full dimension (U3 under R2, synthetic U3)", "", "```", json.dumps(pp, indent=1,
                                                                                                        default=str),
@@ -867,7 +842,7 @@ def render_checks(o: Dict[str, Any]) -> str:
 
 # ============================================================================================ the screen
 
-SIG_BEARS = {"R1": ("stoich", "ARP", "cross", "early"), "R2": ("stoich", "O2", "lag", "fp", "cross", "early"),
+SIG_BEARS = {"R1": ("stoich", "ARP", "cross", "early"), "R2": ("stoich", "lag", "fp", "cross", "early"),  # sigma-O2: the budget forms
              "R3": ("stoich", "cross", "early"), "R4": ("stoich", "cross", "early")}
 SCREEN_FORMS = {"primary": L.PRIMARY, "cf073": L.Form(cf073=True), "voigt": L.Form(voigt=True),
                 "o_ar_0.1": L.Form(o_ar=0.1), "headspace_100mL": L.Form(headspace_ml=100.0),
@@ -927,7 +902,7 @@ def screen_signatures(ev: L.Evaluation, data: L.Data, form: L.Form) -> Dict[str,
 
 def run_screen(args) -> int:
     budget = Budget(args.cap_hours or 6.0)
-    mem = memory_guard(not args.no_memory_guard)
+    mem = memory_guard(not args.no_memory_guard, args.memory_min_free)
     data = L.load_data()
     n = max(600, args.draws)
     res: Dict[str, Any] = {}
@@ -1151,39 +1126,52 @@ def power_pairs(data: L.Data, sets: Mapping[Tuple[str, str], DrawSet], truths: M
                     a, b = sets[(a_name, fname)], sets[(b_name, fname)]
                     rec[fname] = _contrast_on(cname, spec, a, b, os_, data, form, rng, n_tie)
                 per.append(rec)
+                if len(per) % 20 == 0:
+                    print(f"power {cname} truth {truth}: {len(per)} / {r} sets, {budget.elapsed_h():.2f} h", flush=True)
             readings[truth] = per
         res = {}
-        for label, forms in (("primary_only", ("primary",)), ("four_forms_required_agreement", tuple(POWER_FORMS))):
-            for credit, truth_hit, truth_false in (("a", a_name, b_name), ("b", b_name, a_name)):
-                hits = sum(all(rec[f] == credit for f in forms) for rec in readings[truth_hit])
-                false = sum(all(rec[f] == credit for f in forms) for rec in readings[truth_false])
-                res[f"{label}|credit_{truth_hit}"] = binomial_decision(hits, false, r)
+        for key, suffix in (("rule", ""), ("raw", "|ignoring_resolution")):
+            for label, forms in (("primary_only", ("primary",)),
+                                 ("four_forms_required_agreement", tuple(POWER_FORMS))):
+                for credit, truth_hit, truth_false in (("a", a_name, b_name), ("b", b_name, a_name)):
+                    hits = sum(all(rec[f][key] == credit for f in forms) for rec in readings[truth_hit])
+                    false = sum(all(rec[f][key] == credit for f in forms) for rec in readings[truth_false])
+                    res[f"{label}{suffix}|credit_{truth_hit}"] = binomial_decision(hits, false, r)
         out[cname] = {"pair": [a_name, b_name], "claim_units": list(spec["claim"]), "truth_reweighting": reweight[cname],
                       "results": res,
                       "decidable_any_direction": any(v["decidable"] for k, v in res.items()
-                                                     if k.startswith("four_forms")),
-                      "demoted": not any(v["decidable"] for k, v in res.items() if k.startswith("four_forms"))}
+                                                     if k.startswith("four_forms") and "ignoring" not in k),
+                      "demoted": not any(v["decidable"] for k, v in res.items()
+                                         if k.startswith("four_forms") and "ignoring" not in k),
+                      "decidable_ignoring_resolution": any(v["decidable"] for k, v in res.items()
+                                                           if k.startswith("four_forms") and "ignoring" in k)}
     return out
 
 
 def _contrast_on(cname: str, spec, a: DrawSet, b: DrawSet, obs: Obs, data: L.Data, form: L.Form,
-                 rng: np.random.Generator, n_tie: int) -> str:
+                 rng: np.random.Generator, n_tie: int) -> Dict[str, str]:
+    """One synthetic set's contrast credit under one form: with the density-resolution rule ("rule") and ignoring
+    it ("raw", a diagnostic)."""
     claim = spec["claim"]
+
+    def both(prim, per):
+        return {"rule": contrast_credit(prim, per), "raw": contrast_credit(prim, per, "reading_raw")}
+
     if cname == "route":
         cond = {"U4": (), "U1e": ("U4",), "U3": ("U4", "U1e", "U1l")}
         per = {u: unit_verdict(a, b, u, cond[u], obs, data, form, rng, n_tie) for u in claim}
-        return contrast_credit(per["U3"], per)
-    fed = ("U4", "U1e", "U1l", "U3") if cname == "decay_law" else ("U4", "U1e", "U1l")
+        return both(per["U3"], per)
+    fed = ("U4", "U1e", "U1l")
     if cname == "decay_law":
-        block, cond0 = ("U3", "U5a", "U5b", "UARP"), ("U4", "U1e", "U1l")
+        block = ("U3", "U5a", "U5b", "UARP")
         per = {}
-        prev: Tuple[str, ...] = cond0
+        prev: Tuple[str, ...] = fed
         for u in block:
             per[u] = unit_verdict(a, b, u, prev, obs, data, form, rng, n_tie)
             prev = prev + (u,)
-        prim = block_verdict(a, b, block, cond0, obs, data, form, rng, n_tie)
-        return contrast_credit(prim, per)
-    # transfer: (F) with U3 in the conditioning, (T) without; required agreement
+        prim = block_verdict(a, b, block, fed, obs, data, form, rng, n_tie)
+        return both(prim, per)
+    # transfer: (F) with U3 in the conditioning, (T) without; required agreement, else "confounded" (none)
     sides = []
     for cond0 in (fed + ("U3",), fed):
         per = {}
@@ -1192,13 +1180,13 @@ def _contrast_on(cname: str, spec, a: DrawSet, b: DrawSet, obs: Obs, data: L.Dat
             per[u] = unit_verdict(a, b, u, prev, obs, data, form, rng, n_tie)
             prev = prev + (u,)
         prim = block_verdict(a, b, GLC_ORDER, cond0, obs, data, form, rng, n_tie)
-        sides.append(contrast_credit(prim, per))
-    return sides[0] if sides[0] == sides[1] else "none"
+        sides.append(both(prim, per))
+    return {k: (sides[0][k] if sides[0][k] == sides[1][k] else "none") for k in ("rule", "raw")}
 
 
 def run_power(args) -> int:
     budget = Budget(args.cap_hours or 6.0)
-    mem = memory_guard(not args.no_memory_guard)
+    mem = memory_guard(not args.no_memory_guard, args.memory_min_free)
     data = L.load_data()
     rng = np.random.default_rng(args.seed + 1)
     t0 = time.time()
@@ -1220,6 +1208,7 @@ def run_power(args) -> int:
             k = list(POWER_FORMS).index(fname)
             f = replace(POWER_FORMS[fname], ph_drift_trapped=base.ph_drift_trapped)
             ds = cached_draw_set(args.cache_dir, rival, f, data, args.score_feasible, seed=args.seed + 1000 * i + 10 * k,
+                                 max_draws=args.max_draws,
                                  budget=budget)
             sets[(name, fname)] = ds
             set_log[f"{name}|{fname}"] = {"feasible": ds.n, "drawn": ds.n_drawn, "failed": ds.n_failed,
@@ -1227,7 +1216,7 @@ def run_power(args) -> int:
             print("set", name, fname, ds.n, "/", ds.n_drawn, "failed", ds.n_failed, f"{ds.wall_s}s", flush=True)
         tf = replace(L.PRIMARY, ph_drift_trapped=base.ph_drift_trapped)
         ts = cached_draw_set(args.cache_dir, rival, tf, data, args.truth_feasible, seed=args.seed + 7000 + 100 * i,
-                             budget=budget, keep_k=True)
+                             budget=budget, keep_k=True, max_draws=args.max_draws)
         truths[name] = ts
         set_log[f"{name}|truth"] = {"feasible": ts.n, "drawn": ts.n_drawn, "failed": ts.n_failed, "wall_s": ts.wall_s}
         print("truth", name, ts.n, "/", ts.n_drawn, flush=True)
@@ -1298,7 +1287,8 @@ def render_power(o: Dict[str, Any]) -> str:
             for k, r in v["results"].items():
                 L_.append(f"| {c} | {k} | {r['power']:.3f} {r['power_ci95']} | {r['false_credit']:.3f} "
                           f"{r['false_credit_ci95']} | {r['fisher_p_one_sided']:.3g} | {r['decidable']} |")
-            L_.append(f"| {c} | **demoted: {v['demoted']}** | | | | |")
+            L_.append(f"| {c} | **demoted: {v['demoted']}** (decidable ignoring the resolution rule: "
+                      f"{v['decidable_ignoring_resolution']}) | | | | |")
     L_ += ["", "## Approximations (declared)", ""] + [f"- {a}" for a in o["approximations"]]
     L_ += ["", f"Memory at launch: {o['memory']}; compute {o['compute_wall_h']} h wall."]
     return "\n".join(L_)
@@ -1306,15 +1296,36 @@ def render_power(o: Dict[str, Any]) -> str:
 
 # =========================================================================== the decisive fits and scoring
 
+def _logit(u):
+    u = np.clip(u, 1e-9, 1 - 1e-9)
+    return np.log(u) - np.log1p(-u)
+
+
+def _sigmoid(z):
+    return 1.0 / (1.0 + np.exp(-z))
+
+
+def _clip_eigen(cov: np.ndarray, lo: float, hi: float) -> np.ndarray:
+    w, v = np.linalg.eigh(0.5 * (cov + cov.T))
+    w = np.clip(np.where(np.isfinite(w), w, hi), lo, hi)
+    return (v * w) @ v.T
+
+
+LOGIT_PRIOR_VAR = math.pi ** 2 / 3.0        # a uniform coordinate's variance in logit space
+
+
 def fit_cell(evaluate_points: Callable[[np.ndarray], Tuple[np.ndarray, np.ndarray]], d: int, starts: Sequence[np.ndarray],
              rng: np.random.Generator, evals: int = 300, s_schedule: Sequence[int] = (256, 1024, 4096),
-             spread: Optional[np.ndarray] = None) -> Dict[str, Any]:
-    """One (unit set, form, rival) cell of the decisive fits (sec. 9.1): the mode of log(L x p) on the unit cube from
-    the three starts (fitting.fit, central polish, require_converged='flag'; <= ``evals`` evaluations each), then a
-    Student-t (5 df) proposal at the best mode whose scale is the integrand's width (``spread``) or, failing it, the
-    Laplace covariance widened x 4; S runs through ``s_schedule`` until PSIS accepts. ``evaluate_points`` maps
-    (n, d) unit-cube points to (log L per draw, whitened residual matrix (n, k)): the residuals drive the mode
-    search, the log L the density. Returns the draws, log q, log L and the acceptance."""
+             spread_z: Optional[np.ndarray] = None, widen: float = 4.0,
+             budget: Optional[Budget] = None) -> Dict[str, Any]:
+    """One (unit set, form, rival) cell of the decisive fits (sec. 9.1). The mode of log(L x p) on the unit cube from
+    the three starts (fitting.fit, central polish, require_converged='flag'; each start <= ``evals`` evaluations,
+    the polish included); then a Student-t (5 df) proposal at the best mode IN LOGIT SPACE (every draw stays inside
+    the bands; the density is carried back with the Jacobian), scaled by the Gauss-Newton covariance widened x
+    ``widen`` with its eigenvalues clipped to [0.01, the uniform prior's logit variance] (a point curvature can be
+    too narrow at a kink: lesson 2026-11-05; PSIS's k-hat is the check), or by ``spread_z``. S runs through
+    ``s_schedule`` until PSIS accepts. ``evaluate_points`` maps (n, d) unit-cube points to (log L per draw, whitened
+    residuals (n, k)): the residuals drive the mode search, log L the density (log p = 0 on the cube)."""
     from src.kinetic_core import fitting
 
     def res_many(pts):
@@ -1326,31 +1337,39 @@ def fit_cell(evaluate_points: Callable[[np.ndarray], Tuple[np.ndarray, np.ndarra
                            upper=np.ones(d), rows=tuple(range(k_rows)),
                            residuals=lambda th, rows: res_many(th[None, :])[0],
                            evaluate_many=lambda pts, rows: res_many(pts))
-    fits = [fitting.fit(prob, s, budget=evals, central_polish=1, polish_budget=max(2 * d + 2, 20),
-                        require_converged="flag") for s in starts]
+    polish = 2 * d + 3
+    fits = []
+    for s0 in starts:
+        if budget is not None:
+            budget.check("mode search")
+        fits.append(fitting.fit(prob, s0, budget=max(evals - polish, d + 2), central_polish=1, polish_budget=polish,
+                                require_converged="flag"))
     best = min(fits, key=lambda f: f.cost)
-    if spread is None:
-        # the unscaled Gauss-Newton covariance (J^T J)^-1 of the whitened residuals, widened x 4 (a kink at the mode
-        # makes a point curvature too narrow: lesson 2026-11-05; PSIS's k-hat is the check)
-        jac = fitting.central_jacobian(prob, best.theta, prob.lower, prob.upper)
-        cov = np.linalg.pinv(jac.T @ jac)
-        spread = 4.0 * np.minimum(cov, 1.0) + 1e-4 * np.eye(d)
+    u0 = np.clip(best.theta, 1e-6, 1 - 1e-6)
+    z0 = _logit(u0)
+    if spread_z is None:
+        jac = fitting.central_jacobian(prob, u0, np.full(d, 1e-9), np.full(d, 1 - 1e-9)) * (u0 * (1 - u0))[None, :]
+        spread_z = _clip_eigen(widen * np.linalg.pinv(jac.T @ jac), 1e-2, LOGIT_PRIOR_VAR)
     xs, lqs, lls = [], [], []
     est = None
-    for s in s_schedule:
-        need = s - sum(len(x) for x in xs)
-        x, lq = pd.multivariate_t_draws(best.theta, spread, need, rng)
-        inside = np.all((x >= 0) & (x <= 1), axis=1)
-        ll, _ = evaluate_points(np.clip(x, 0, 1))
-        xs.append(x)
+    for s_n in s_schedule:
+        if budget is not None:
+            budget.check("PSIS sampling")
+        need = s_n - sum(len(x) for x in xs)
+        z, lqz = pd.multivariate_t_draws(z0, spread_z, need, rng)
+        u = np.clip(_sigmoid(z), 1e-12, 1 - 1e-12)
+        log_jac = -np.abs(z) - 2.0 * np.log1p(np.exp(-np.abs(z)))      # log u (1 - u), stable for any z
+        lq = lqz - np.sum(log_jac, axis=1)                             # q in u-space: q_z / |du/dz|
+        ll, _ = evaluate_points(u)
+        xs.append(u)
         lqs.append(lq)
-        lls.append(np.where(inside, ll, -np.inf))
+        lls.append(np.where(np.isfinite(ll), ll, -np.inf))
         est = pd.importance_lppd(np.concatenate(lls), np.concatenate(lqs))
         if est.accepted:
             break
     return {"theta_mode": best.theta, "fits": [f.as_dict(prob.keys) for f in fits], "draws": np.concatenate(xs),
             "log_q": np.concatenate(lqs), "log_lik": np.concatenate(lls), "estimate": est,
-            "not_resolved": not est.accepted}
+            "not_resolved": not est.accepted, "evaluations": sum(f.evaluations for f in fits)}
 
 
 def score_contrast(d_by_unit: Mapping[str, Mapping[str, float]], band_by_unit: Mapping[str, Mapping[str, float]],
@@ -1392,7 +1411,7 @@ def outcome_row(route: str, transfer: str, decay: str, r1_beats_nulls_and_r0: bo
 def run_fit(args) -> int:
     run_once(args.out_dir / f"{STEM}_fit.json")
     freeze = freeze_check()
-    mem = memory_guard(not args.no_memory_guard)
+    mem = memory_guard(not args.no_memory_guard, args.memory_min_free)
     raise Refusal(f"--fit is built and tested but deliberately not wired to run in this build (freeze {freeze}, "
                   f"memory {mem}): the coordinator launches the decisive fits after the freeze")
 
@@ -1421,8 +1440,11 @@ def main(argv=None) -> int:
     ap.add_argument("--contrasts", default="route,transfer,decay_law", help="power: the 12.2 pairs to run")
     ap.add_argument("--record-suffix", default="", help="power: a part's record name suffix (merged later)")
     ap.add_argument("--cache-dir", type=Path, default=None, help="draw-set cache (scratch; never under data/)")
+    ap.add_argument("--max-draws", type=int, default=12288, help="power: draws per set at most")
     ap.add_argument("--cap-hours", type=float, default=None)
     ap.add_argument("--no-memory-guard", action="store_true")
+    ap.add_argument("--memory-min-free", type=int, default=MEMORY_MIN_FREE_PCT,
+                    help="memory guard threshold, % free (coordinator 2026-11-05: 30 with one worker)")
     ap.add_argument("--out-dir", type=Path, default=data_paths.VALIDATION_DIR)
     args = ap.parse_args(argv)
     os.environ.setdefault("OMP_NUM_THREADS", "1")

@@ -1,0 +1,132 @@
+{
+ "artifact": "kinetic_core_m3_phase1_power",
+ "provenance": {
+  "artifact": "kinetic_core_m3_phase1_power",
+  "generated_on": "2026-11-05",
+  "git": {"commit": "e45e7e28cb4b60f42a5ee5a52b9af0d2d7eb2323", "short": "e45e7e28", "branch": "m3-phase1-build", "dirty": true},
+  "generated_by": "scripts/generators/fit_m3_strecker_layer.py --power",
+  "inputs": [
+   {"path": "src/m3_strecker_layer.py", "sha256": "a08273991690fa3a6938299325292e6e7c799b8054326070fa7fde50c9ce3b0f"},
+   {"path": "scripts/generators/fit_m3_strecker_layer.py", "sha256": "825138173eba664df2f808adc08138e9a8e74ef964c23806e3044dbcc78722c6"},
+   {"path": "data/lit/fit_rows/strecker_hofmann2000.yml", "sha256": "0f8a8b70ee84ee85fbee129528935148149fb9d087d7fcf80b066bef2dbbeb34"},
+   {"path": "data/lit/fit_rows/strecker_hofmann2000_fig2.yml", "sha256": "806fcb612924ba07057d4639bc72407f7c11fa74bb85297465d8d44dedf01ea3"},
+   {"path": "data/lit/fit_rows/strecker_hofmann2000b.yml", "sha256": "e516886f8c41b8efa630b057aecfcb6826d8a6cc91000425de1f323dbbea01da"},
+   {"path": "data/lit/fit_rows/strecker_hofmann2000b_fig1.yml", "sha256": "b3d154ede5f1f4721e207f94e7875964b20917166f008f187e521b45bb3b9bb3"}
+  ]
+ },
+ "design": "results/validation/kinetic_core_m3_strecker_layer_prereg.md (v2 DRAFT; blob d19c3f50adfb)",
+ "memory": {"free_pct_at_launch": 36, "swap_used_mb_at_launch": 12292.56, "threshold_pct": 30, "guard": true},
+ "R": 200,
+ "tie_redraws": 40,
+ "draw_sets": {
+  "R1|primary": {"feasible": 1213, "drawn": 1280, "failed": 0, "wall_s": 23.2, "infeasible": {"no_sigma_ox_root": 18, "c_cu5_out_of_bound": 49, "route_a_calibration": 0}},
+  "R1|o_ar_0.1": {"feasible": 1215, "drawn": 1280, "failed": 0, "wall_s": 24.6, "infeasible": {"no_sigma_ox_root": 16, "c_cu5_out_of_bound": 49, "route_a_calibration": 0}},
+  "R1|cu_linear": {"feasible": 1219, "drawn": 1280, "failed": 0, "wall_s": 25.5, "infeasible": {"no_sigma_ox_root": 17, "c_cu5_out_of_bound": 44, "route_a_calibration": 0}},
+  "R1|headspace_20mL": {"feasible": 1209, "drawn": 1536, "failed": 0, "wall_s": 33.1, "infeasible": {"no_sigma_ox_root": 143, "c_cu5_out_of_bound": 184, "route_a_calibration": 0}},
+  "R1|truth": {"feasible": 731, "drawn": 768, "failed": 0, "wall_s": 15.5},
+  "R2|primary": {"feasible": 1044, "drawn": 9472, "failed": 0, "wall_s": 202.1, "infeasible": {"no_sigma_ox_root": 2793, "c_cu5_out_of_bound": 5635, "route_a_calibration": 0}},
+  "R2|o_ar_0.1": {"feasible": 1034, "drawn": 8960, "failed": 0, "wall_s": 212.1, "infeasible": {"no_sigma_ox_root": 3816, "c_cu5_out_of_bound": 4110, "route_a_calibration": 0}},
+  "R2|cu_linear": {"feasible": 1030, "drawn": 8960, "failed": 0, "wall_s": 214.9, "infeasible": {"no_sigma_ox_root": 2611, "c_cu5_out_of_bound": 5319, "route_a_calibration": 0}},
+  "R2|headspace_20mL": {"feasible": 0, "drawn": 12288, "failed": 0, "wall_s": 319.7, "infeasible": {"no_sigma_ox_root": 12154, "c_cu5_out_of_bound": 134, "route_a_calibration": 0}},
+  "R2|truth": {"feasible": 521, "drawn": 4608, "failed": 0, "wall_s": 93.7},
+  "R3|primary": {"feasible": 1211, "drawn": 1280, "failed": 0, "wall_s": 32.3, "infeasible": {"no_sigma_ox_root": 18, "c_cu5_out_of_bound": 51, "route_a_calibration": 0}},
+  "R3|o_ar_0.1": {"feasible": 1213, "drawn": 1280, "failed": 0, "wall_s": 33.6, "infeasible": {"no_sigma_ox_root": 15, "c_cu5_out_of_bound": 52, "route_a_calibration": 0}},
+  "R3|cu_linear": {"feasible": 1210, "drawn": 1280, "failed": 0, "wall_s": 36.4, "infeasible": {"no_sigma_ox_root": 21, "c_cu5_out_of_bound": 49, "route_a_calibration": 0}},
+  "R3|headspace_20mL": {"feasible": 1209, "drawn": 1536, "failed": 0, "wall_s": 62.9, "infeasible": {"no_sigma_ox_root": 131, "c_cu5_out_of_bound": 196, "route_a_calibration": 0}},
+  "R3|truth": {"feasible": 729, "drawn": 768, "failed": 0, "wall_s": 30.6},
+  "R4|primary": {"feasible": 1237, "drawn": 1280, "failed": 0, "wall_s": 60.9, "infeasible": {"no_sigma_ox_root": 13, "c_cu5_out_of_bound": 30, "route_a_calibration": 0}},
+  "R4|o_ar_0.1": {"feasible": 1237, "drawn": 1280, "failed": 0, "wall_s": 65.3, "infeasible": {"no_sigma_ox_root": 14, "c_cu5_out_of_bound": 29, "route_a_calibration": 0}},
+  "R4|cu_linear": {"feasible": 1239, "drawn": 1280, "failed": 0, "wall_s": 49.0, "infeasible": {"no_sigma_ox_root": 4, "c_cu5_out_of_bound": 37, "route_a_calibration": 0}},
+  "R4|headspace_20mL": {"feasible": 1216, "drawn": 1536, "failed": 0, "wall_s": 68.2, "infeasible": {"no_sigma_ox_root": 130, "c_cu5_out_of_bound": 190, "route_a_calibration": 0}},
+  "R4|truth": {"feasible": 742, "drawn": 768, "failed": 0, "wall_s": 45.4},
+  "R1drift|primary": {"feasible": 1214, "drawn": 1280, "failed": 0, "wall_s": 76.8, "infeasible": {"no_sigma_ox_root": 12, "c_cu5_out_of_bound": 54, "route_a_calibration": 0}},
+  "R1drift|o_ar_0.1": {"feasible": 1211, "drawn": 1280, "failed": 0, "wall_s": 79.6, "infeasible": {"no_sigma_ox_root": 18, "c_cu5_out_of_bound": 51, "route_a_calibration": 0}},
+  "R1drift|cu_linear": {"feasible": 1216, "drawn": 1280, "failed": 0, "wall_s": 80.2, "infeasible": {"no_sigma_ox_root": 17, "c_cu5_out_of_bound": 47, "route_a_calibration": 0}},
+  "R1drift|headspace_20mL": {"feasible": 1225, "drawn": 1536, "failed": 0, "wall_s": 86.2, "infeasible": {"no_sigma_ox_root": 137, "c_cu5_out_of_bound": 174, "route_a_calibration": 0}},
+  "R1drift|truth": {"feasible": 731, "drawn": 768, "failed": 0, "wall_s": 37.8}
+ },
+ "failed_runs_total": 0,
+ "sets_wall_s": 2011.0,
+ "u3_synthetic_12_1": {
+  "primary_only": {"credit_R1": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200}, "credit_R2": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200}},
+  "primary_only_ignoring_resolution": {
+   "credit_R1": {"power": 0.325, "power_ci95": [0.261, 0.395], "false_credit": 0.025, "false_credit_ci95": [0.008, 0.057], "fisher_p_one_sided": 5.0197005912483e-17, "decidable": true, "low_power": true, "R": 200},
+   "credit_R2": {"power": 0.39, "power_ci95": [0.322, 0.461], "false_credit": 0.045, "false_credit_ci95": [0.021, 0.084], "fisher_p_one_sided": 1.9338340317388725e-18, "decidable": true, "low_power": true, "R": 200}
+  },
+  "primary_and_cu_law": {"credit_R1": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200}, "credit_R2": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200}},
+  "primary_and_cu_law_ignoring_resolution": {
+   "credit_R1": {"power": 0.165, "power_ci95": [0.116, 0.224], "false_credit": 0.015, "false_credit_ci95": [0.003, 0.043], "fisher_p_one_sided": 3.4172345564353645e-08, "decidable": true, "low_power": true, "R": 200},
+   "credit_R2": {"power": 0.13, "power_ci95": [0.087, 0.185], "false_credit": 0.005, "false_credit_ci95": [0.0, 0.028], "fisher_p_one_sided": 9.318229773778372e-08, "decidable": true, "low_power": true, "R": 200}
+  },
+  "resolution_rate": {"R1": 0.0, "R2": 0.0},
+  "d_quantiles": {"R1": [-0.5354, 2.9126, 6.663], "R2": [-6.2469, -3.0093, 0.0473]},
+  "band_quantiles": {"R1": [0.8579, 55.7837, 273.4567], "R2": [0.7515, 50.2293, 263.2311]},
+  "k_hat_quantiles": {"R1": [1.7137, 3.9874, 5.9867], "R2": [1.5458, 3.4656, 6.0629]},
+  "truth_reweighting": "U4, U1e, U1l on real data (Table 2 enters through the calibrations); never U3"
+ },
+ "pairs_12_2": {
+  "route": {
+   "pair": ["R1", "R2"],
+   "claim_units": ["U3", "U1e", "U4"],
+   "truth_reweighting": ["U1l"],
+   "results": {
+    "primary_only|credit_R1": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "primary_only|credit_R2": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|credit_R1": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|credit_R2": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "primary_only|ignoring_resolution|credit_R1": {"power": 0.135, "power_ci95": [0.091, 0.19], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 2.908812308283883e-09, "decidable": true, "low_power": true, "R": 200},
+    "primary_only|ignoring_resolution|credit_R2": {"power": 0.19, "power_ci95": [0.138, 0.251], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 5.213406753735103e-13, "decidable": true, "low_power": true, "R": 200},
+    "four_forms_required_agreement|ignoring_resolution|credit_R1": {"power": 0.06, "power_ci95": [0.031, 0.102], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 0.0002059916701724815, "decidable": true, "low_power": true, "R": 200},
+    "four_forms_required_agreement|ignoring_resolution|credit_R2": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200}
+   },
+   "decidable_any_direction": false,
+   "demoted": true,
+   "decidable_ignoring_resolution": true
+  },
+  "transfer": {
+   "pair": ["R1", "R3"],
+   "claim_units": ["U5a", "U5b", "UARP"],
+   "truth_reweighting": ["U4", "U1e", "U1l"],
+   "results": {
+    "primary_only|credit_R1": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "primary_only|credit_R3": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|credit_R1": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|credit_R3": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "primary_only|ignoring_resolution|credit_R1": {"power": 0.1, "power_ci95": [0.062, 0.15], "false_credit": 0.055, "false_credit_ci95": [0.028, 0.096], "fisher_p_one_sided": 0.06678572116488278, "decidable": false, "low_power": true, "R": 200},
+    "primary_only|ignoring_resolution|credit_R3": {"power": 0.075, "power_ci95": [0.043, 0.121], "false_credit": 0.045, "false_credit_ci95": [0.021, 0.084], "fisher_p_one_sided": 0.1462055541746169, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|ignoring_resolution|credit_R1": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|ignoring_resolution|credit_R3": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.005, "false_credit_ci95": [0.0, 0.028], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200}
+   },
+   "decidable_any_direction": false,
+   "demoted": true,
+   "decidable_ignoring_resolution": false
+  },
+  "decay_law": {
+   "pair": ["R4", "R1drift"],
+   "claim_units": ["U3", "U5a", "U5b", "UARP"],
+   "truth_reweighting": ["U4", "U1e", "U1l"],
+   "results": {
+    "primary_only|credit_R4": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "primary_only|credit_R1drift": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|credit_R4": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|credit_R1drift": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "primary_only|ignoring_resolution|credit_R4": {"power": 0.02, "power_ci95": [0.005, 0.05], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 0.06156133406564269, "decidable": false, "low_power": true, "R": 200},
+    "primary_only|ignoring_resolution|credit_R1drift": {"power": 0.18, "power_ci95": [0.129, 0.24], "false_credit": 0.12, "false_credit_ci95": [0.078, 0.173], "fisher_p_one_sided": 0.06148510565700776, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|ignoring_resolution|credit_R4": {"power": 0.0, "power_ci95": [0.0, 0.018], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 1.0, "decidable": false, "low_power": true, "R": 200},
+    "four_forms_required_agreement|ignoring_resolution|credit_R1drift": {"power": 0.01, "power_ci95": [0.001, 0.036], "false_credit": 0.0, "false_credit_ci95": [0.0, 0.018], "fisher_p_one_sided": 0.24937343358395989, "decidable": false, "low_power": true, "R": 200}
+   },
+   "decidable_any_direction": false,
+   "demoted": true,
+   "decidable_ignoring_resolution": false
+  }
+ },
+ "compute_wall_h": 1.667,
+ "approximations": [
+  "draw sets are scrambled-Sobol prior draws conditioned on the calibrations (feasible only), reweighted per synthetic set (sec. 12.2's 'by reweighting'); a density whose PSIS k-hat >= 0.7 or ESS < 100 reads 'not resolved' (a tie); results ignoring that rule are reported beside",
+  "tie bands from 40 measurement-noise redraws per unit and set (the prereg's 4 000 for scoring)",
+  "censored U3 values: product of conditional marginals (exact for one); adequacy leaves them out",
+  "Holm's guard step is not simulated: power is optimistic on that account",
+  "synthetic sets are generated from the truth's primary-form predictions and scored under each form",
+  "a rival with no feasible draw under a form (its calibration infeasible there) has lppd -inf: the other side is read as favoured under that form without its adequacy test (flagged by_infeasibility; optimistic)"
+ ]
+}
