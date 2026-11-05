@@ -5,20 +5,31 @@
 # SciencePlots, hypothesis and the notebook stack left on 2026-09-08 because nothing imports
 # them. Do not add a dependency without a consumer. jsonschema is the schema gate's;
 # rdkit rebuilds the compound registry and backs one unit test.
+# arviz (2026-11-05, M1.1) supplies PSIS behind src/kinetic_core/predictive_densities.py; pinned to 0.23.x,
+# whose psislw(log_weights, reff) array API the wrapper uses (1.x moved it to arviz-stats).
+# 2026-11-05 (M1.1): `conda env update` (bootstrap) upgraded every unpinned package when arviz was added
+# (numpy 2.5.3 -> 2.5.4, numba, networkx, pytest, pip, setuptools, coverage; new builds of scipy and pyyaml).
+# The versions below are the ones the env held, so the numbers in results/validation/ keep their package set.
+# Build HASHES are platform-specific (this file also builds the Linux container and CI), so scipy and pyyaml,
+# which bootstrap otherwise moved to a rebuild of the same version, pin the build NUMBER (`=*_0`, `=*_1`; both
+# exist on osx-arm64, linux-64 and linux-aarch64). Packages not listed with a version can still move: diff
+# `conda list --export` around a bootstrap. Upgrade a pin deliberately, in its own commit, after checking the
+# frozen numbers.
 name: maillard
 channels:
   - conda-forge
 dependencies:
   - python=3.12
-  - pip
-  - setuptools
-  - pytest
-  - coverage
-  - numpy>=2.0
-  - scipy
-  - numba        # optional: compiles the charge balance (src/kinetic_core/ph_kernel.py); results are identical without it
+  - pip=26.2.1
+  - setuptools=84.0.0
+  - pytest=9.1.1
+  - coverage=7.16.0
+  - numpy=2.5.3
+  - scipy=1.18.1=*_0
+  - numba=0.68.0  # optional: compiles the charge balance (src/kinetic_core/ph_kernel.py); results are identical without it
   - matplotlib
-  - networkx
-  - pyyaml
+  - networkx=3.6.1
+  - pyyaml=6.0.3=*_1
   - jsonschema
   - rdkit
+  - arviz=0.23.4  # PSIS (Pareto-smoothed importance sampling) for src/kinetic_core/predictive_densities.py (M1.1)

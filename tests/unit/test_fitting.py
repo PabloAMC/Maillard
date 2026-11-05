@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import math
+import platform
 import re
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -413,3 +415,125 @@ def test_compact_json_round_trips_and_writes_a_row_per_line():
     text = dumps_compact(payload)
     assert json.loads(text) == payload
     assert len(text.splitlines()) <= 50 + 6
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# M1.1 (2026-11-05): the opt-in central-difference polish and asserted convergence
+# ---------------------------------------------------------------------------------------------------------------------
+
+def _same_fit(a, b):
+    return ([float(x).hex() for x in a.theta] == [float(x).hex() for x in b.theta]
+            and float(a.cost).hex() == float(b.cost).hex() and (a.status, a.evaluations) == (b.status, b.evaluations))
+
+
+def test_default_fit_equals_every_new_option_off():
+    """Platform-independent: the default call is bit-identical to one with every option added in M1.1 set to its
+    off value, and no polish or convergence record is attached. (The bit pins against origin/main's fitting.py,
+    cc5cbb55, are platform-specific and live in the next test.)"""
+    start = np.array([0.0, -3.5, 80.0])
+    for budget in (None, 40):
+        kw = {} if budget is None else {"budget": budget}
+        f = fitting.fit(_problem(), start, **kw)
+        g = fitting.fit(_problem(), start, central_polish=0, require_converged=None, **kw)
+        assert _same_fit(f, g)
+        d = f.as_dict(_problem().keys)
+        assert "polish" not in d and "converged" not in d and f.polish is None and f.converged is None
+
+
+@pytest.mark.skipif(not (sys.platform == "darwin" and platform.machine() == "arm64"),
+                    reason="bit pins were taken on darwin-arm64; the optimiser path differs across BLAS / libm "
+                           "(Linux CI differs at ~2e-4 relative), so they are not portable")
+def test_default_fit_is_pinned_bit_for_bit():
+    """The default path is unchanged: these bits are what origin/main's fitting.py (cc5cbb55) returns on the same
+    problems on darwin-arm64 (checked against that file directly when the polish was added). Frozen records depend
+    on it."""
+    f = fitting.fit(_problem(), np.array([0.0, -3.5, 80.0]))
+    assert [float(x).hex() for x in f.theta] == ["0x1.fc87e72e4da5ep-1", "-0x1.ffc520a5c4ddbp+0", "0x1.4000000000000p+6"]
+    assert float(f.cost).hex() == "0x1.e0a5545b31adap+2" and (f.status, f.evaluations) == (3, 87)
+    short = fitting.fit(_problem(), np.array([0.0, -3.5, 80.0]), budget=40)
+    assert float(short.cost).hex() == "0x1.81561cc6a5cd9p+5" and (short.status, short.evaluations) == (0, 36)
+    d = f.as_dict(_problem().keys)
+    assert "polish" not in d and "converged" not in d and f.polish is None and f.converged is None
+
+
+def _curved_residuals(theta, rows):
+    a, b = theta
+    return np.array([math.exp(3.0 * a) - 2.0, 4.0 * (a - 0.5), b - 0.1, 0.5 * a * b])
+
+
+def _curved_problem():
+    """An exponential residual whose forward difference at the log10k step (0.05) is biased by ~7.5 % (the bake-off's
+    FD error), plus conflicting residuals, so the forward optimiser's fixed point (J_fd^T r = 0) is not the optimum
+    (J^T r = 0)."""
+    return fitting.Problem(keys=("a", "b"), kinds=("log10k", "log10k"), lower=np.array([-2.0, -2.0]),
+                           upper=np.array([2.0, 2.0]), rows=(None,) * 4, residuals=_curved_residuals)
+
+
+def _true_gradient(theta):
+    a, b = theta
+    j = np.array([[3.0 * math.exp(3.0 * a), 0.0], [4.0, 0.0], [0.0, 1.0], [0.5 * b, 0.5 * a]])
+    return j.T @ _curved_residuals(theta, None), j
+
+
+def test_central_jacobian_is_more_accurate_than_forward():
+    p = _curved_problem()
+    theta = np.array([0.2, 0.3])
+    _, exact = _true_gradient(theta)
+    fwd = fitting._forward_jacobian(p, theta, p.lower, p.upper, lambda pts: [p.evaluate(x) for x in pts])
+    cen = fitting.central_jacobian(p, theta, p.lower, p.upper)
+    err_f, err_c = np.max(np.abs(fwd - exact)), np.max(np.abs(cen - exact))
+    assert err_c < 0.1 * err_f                              # O(h^2) against O(h): ~20x at h 0.05
+    assert abs(fwd[0, 0] / exact[0, 0] - 1.0) > 0.07          # the forward bias the polish removes
+    # within a step of a bound the difference is one-sided, inward, against the centre (as laplace)
+    jb = fitting.central_jacobian(p, np.array([2.0 - 0.01, 0.3]), p.lower, p.upper)
+    assert np.all(np.isfinite(jb)) and jb[1, 0] == pytest.approx(4.0)
+
+
+def test_central_polish_reaches_the_optimum_within_its_budget():
+    p = _curved_problem()
+    start = np.array([0.0, 0.0])
+    plain = fitting.fit(p, start)
+    pol = fitting.fit(p, start, central_polish=2, polish_budget=60)
+    g_plain, _ = _true_gradient(plain.theta)
+    g_pol, _ = _true_gradient(pol.theta)
+    assert np.max(np.abs(g_pol)) < 0.1 * np.max(np.abs(g_plain))     # ~14x closer to J^T r = 0
+    assert pol.cost <= plain.cost
+    rec = pol.polish
+    assert rec["carried"] == "polished" and not rec["flagged"] and rec["forward_cost"] == plain.cost
+    assert rec["evaluations"] <= rec["budget_total"]
+    assert all(c["evaluations"] <= 60 for c in rec["calls"])
+    assert pol.evaluations == plain.evaluations + rec["evaluations"]
+    # the forward part of a polished fit is the default fit, bit for bit
+    assert np.array(rec["forward_theta"]).tobytes() == plain.theta.tobytes()
+    assert set(pol.as_dict(p.keys)["polish"]["forward_theta"]) == {"a", "b"}
+
+
+def test_an_exhausted_polish_carries_the_forward_endpoint_flagged_and_counts_its_budget():
+    p = _curved_problem()
+    start = np.array([0.0, 0.0])
+    plain = fitting.fit(p, start)
+    n = len(p.keys)
+    tight = fitting.fit(p, start, central_polish=2, polish_budget=2 * n + 2)   # one iteration per call
+    rec = tight.polish
+    assert rec["exhausted"] and rec["flagged"] and rec["carried"] == "forward" and len(rec["calls"]) == 2
+    assert tight.theta.tobytes() == plain.theta.tobytes() and tight.cost == plain.cost
+    assert rec["evaluations"] <= 2 * (2 * n + 2)
+    kept = fitting.fit(p, start, central_polish=1, polish_budget=2 * n + 2, on_polish_exhausted="keep_polished")
+    assert kept.polish["carried"] == "polished" and kept.polish["flagged"] and kept.cost <= plain.cost
+    with pytest.raises(ValueError):
+        fitting.fit(p, start, central_polish=1, polish_budget=2 * n)
+    with pytest.raises(fitting.FitNotConverged):
+        fitting.fit(p, start, central_polish=2, polish_budget=2 * n + 2, require_converged="raise")
+    assert fitting.fit(p, start, central_polish=2, polish_budget=2 * n + 2, require_converged="flag").converged is False
+
+
+def test_asserted_convergence_raises_or_flags_on_status_zero():
+    short = fitting.fit(_problem(), np.array([0.0, -3.5, 80.0]), budget=40, require_converged="flag")
+    assert short.status == 0 and short.converged is False and short.as_dict(_problem().keys)["converged"] is False
+    with pytest.raises(fitting.FitNotConverged) as exc:
+        fitting.fit(_problem(), np.array([0.0, -3.5, 80.0]), budget=40, require_converged="raise")
+    assert exc.value.fit.status == 0
+    ok = fitting.fit(_problem(), np.array([0.0, -3.5, 80.0]), require_converged="raise")
+    assert ok.status > 0 and ok.converged is None
+    with pytest.raises(ValueError):
+        fitting.fit(_problem(), np.array([0.0, -3.5, 80.0]), require_converged="yes")

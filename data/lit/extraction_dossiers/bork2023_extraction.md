@@ -6,7 +6,8 @@
 second, overlaid "FOR PEER REVIEW" text layer on several pages, so `pdftotext -layout` interleaves two versions; the
 prose was taken from `pdftotext -raw` and checked against 130 dpi page renders. **Fig. 4 read from a 400 dpi crop of
 p. 9** (scratchpad `img/bork23_fig4b-09.png`): 7.70 px per %, read error ±1 % of scale; the text prints the same values.
-Supplementary material (Figs. S1-S7; Fig. S4 = conversion of FF / PA / MAL alone) is **NOT on disk**.
+Supplementary material (Figs. S1-S7, one PDF inside `bork2023_supplementary.zip`) read 2026-11-05 into **sec. 8**: no NF
+time points beyond 120 min's, no vessel / O2 / final-pH detail; Fig. S4 gives the partners alone.
 
 **Legend.** **[V]** verbatim (quote < 15 words) · **[M]** number printed in this paper · **[F]** read off a figure ·
 **[Q]** qualitative statement by the authors · **[C]** cited · **[P]** proposed, not shown · **[Z]** derived by me ·
@@ -139,7 +140,39 @@ absolute concentrations (relative assay); the antioxidant / colour results have 
 `quant_class: semi_quantitative` because the assay is relative to t = 0 (no calibration); for a fraction-remaining
 observable that is adequate, but it is not an absolute concentration.
 
-## 8. Supplementary material
+## 8. Supplementary material (read 2026-11-05, first reader)
 
-Not on disk. Fig. S4 (FF / PA / MAL alone, conversion at 120 min) would complete the partner baselines; nothing else is
-model-relevant.
+**Source.** `data/articles/bork2023_supplementary.zip`, one member, `antioxidants-2627216-supplementary.pdf` (8 pp.,
+Figs. S1-S7, no tables); archive listed before extraction (one file, no path components), extracted into a scratch
+directory. Identified by content: title, authors and pots (MGO or NF with FF / MAL / PA) are this paper's; the member's
+name carries the journal (Antioxidants). No name crossing for this paper. Text by `pdftotext`; figures from 80 and 300 dpi
+renders; **Fig. S4 digitised at 300 dpi** (4.74 px per %, axis from its ticks; bar tops at the outline centre; read error
+±1 %). Other bar charts read by eye (read error stated per row). Script: scratchpad `bork_tools/bars.py`.
+
+### 8.1 Items asked for
+
+| item | found? | value |
+|---|---|---|
+| ampoule / vial volume, fill, headspace, degassing, atmosphere, chelator / metals | **NOT found** | no methods text in the SI |
+| pH after heating | **NOT found** | captions: "pH 5" (initial) only |
+| **NF alone vs time; the 0 / 30 / 60 min NF samples of the methods** | **NOT found** | the SI reports nothing at 30 or 60 min for any species; NF alone appears only as 0 min colour (Figs. S1, S3) and in an HRMS spectrum (Fig. S7). The 120 min point (48 ± 4 %) remains the only NF number |
+| NF temperature or pH series | **NOT found** | 130 °C, pH 5 only |
+
+### 8.2 Every figure
+
+| item | caption (paraphrased) | content / values | tag |
+|---|---|---|---|
+| Fig. S1 | browning (A420 × dilution) of (A) the unheated starting solutions, binary and single, aqueous and ethyl acetate (EE) extracts, pH 5; (B) FF, MAL, PA heated alone, 130 °C, 120 min | read ±0.02: (A) 0 min aqueous: MGO / NF 0.49, NF / FF 0.25, NF / PA 0.18, NF / MAL 0.13, **NF alone 0.20 (SD ≈ 0.06)**, MGO / FF 0.07, FF 0.06, others ≈ 0; EE ≤ ±0.05 with large SD. (B) 120 min aqueous FF 0.10, MAL 0.005, PA 0.007; EE −0.02 to −0.04 (SD ≈ 0.08-0.1, i.e. zero) | [F] |
+| Fig. S2 | lightness L* of the starting solutions (0 min) and after 120 min, aqueous and EE | **[!] the graphic is a copy of Fig. S1 (A420 axis, same bars); no L* data are in the SI.** Figure / caption mismatch | [!] |
+| Fig. S3 | a* and b* of the starting solutions (A, B) and of MAL and PA heated alone, 130 °C, 120 min (C, D) | read ±0.3 (A, B): b* at 0 min MGO / NF 31.5, NF alone 14 (SD ≈ 3), NF / FF 14, NF / MAL 12.5, NF / PA 10, MGO / FF 4, FF 3.3; a* MGO / NF −6.8, NF alone −2.8, NF / FF −3.0, NF / MAL −2.3, NF / PA −1.9. (C, D) MAL / PA after heating: a*, b* within ±0.1 / ±0.4 of zero | [F] |
+| **Fig. S4** | conversion of FF, PA and MAL heated alone, 130 °C, pH (5), 120 min | relative concentration (vs t = 0): **FF 103 % (SD ≈ 6), PA 98 % (SD ≈ 6), MAL 111 % (SD ≈ 12)** — no loss of any heterocycle alone within SD [F ±1 %] | [F] |
+| Fig. S5 | SEC (RI and 420 nm) of FF, MAL, PA heated alone | traces at half the scale of the main Fig. 4; weak RI signals ~16-18 min and ~22 min; no colour above 10 kDa | [Q] |
+| Fig. S6 | antioxidant activity of MGO, FF, PA at 0 and 120 min (130 °C, pH 5): (A) TEAC aqueous, (B) DPPH of EE extracts | read ±0.03 mmol TE/L: TEAC MGO 0.13 → **1.40 (SD ≈ 0.18)**, FF 0.13 → 0.17, PA 0.07 → 0.03; DPPH MGO 0.30 → 0.38, FF 0.32 → 0.30, PA 0.10 → 0.41 (SDs 0.1-0.27) | [F] |
+| Fig. S7 | HR-ESI-MS of the EE extracts of all binary pots and MGO, NF alone (solvent dimer removed in three spectra) | spectra, m/z 100-1000; not digitised | [Q] |
+
+**For the model.** (i) Fig. S4 closes the partner baselines of sec. 4.1: FF, PA and MAL do not decay alone at
+pH 5 / 130 °C / 120 min, so **FF's 33 % loss and PA's 19 % loss in the NF pots are cross-reaction with NF** [Z].
+(ii) The unheated NF solution is already yellow (b* ≈ 14, A420 ≈ 0.2): the colour baseline is not zero at t = 0 — a
+colour-assay caveat only. (iii) **Nothing on O2, final pH, NF at 30 / 60 min, or temperature.** The k of sec. 4.3
+(6.1 × 10⁻³ min⁻¹, two-point, 0-120 min) stands unchanged, and the within-lab conflict with `bork2022` (sec. 6 item 1)
+is neither resolved nor sharpened by the SI.
