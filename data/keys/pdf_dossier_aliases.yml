@@ -78,6 +78,10 @@ aliases:
   zhang2024_supplementary: Zhang2024
   zhang2026_supplementary1: zhang2026
   zhang2026_supplementary2: zhang2026
+  # downloaded 2026-11-05, read the same day into each dossier's "Supplementary material" section; crossed like the PDFs
+  # (identified by title and content). bork2023_supplementary.zip is an archive, which the gate does not list.
+  bork2022_supplementary: bork2022b          # SI of Food Chem 395:133592 (exact title on its first line)
+  bork2022b_supplementary: bork2022          # SI of Food Chem 380:131852 (pre-publication title; NF / DA, NF / MGO pots)
 
 triaged:
   yang2011: "read 2026-10-09 and set aside: thiamine is held fixed in every run, so it cannot inform the thiamine row (tasks/data_restructure_plan.md, thiamine-row reading)"
