@@ -618,7 +618,7 @@ entries:
     commit: pending
     verdict: partial
     conclusion: "SINGLE LABORATORY. DC-only NOT feasible (min violation 3.9; 1.3 without Fig. 2's 10-min point; recovery rejects it 6 / 6 when the ARP route is real) -> the prereg's arm B is rejected without a fit. ARP-only fails (G6b). Removing omega fails (2.2); the A' oxygen hold-outs pass (GO 0.045, G 0.156 dex); O3 exact fails but is underpowered (truth 0.63). The two-route layer is INCONCLUSIVE: it fails the primary (1.75) on the 10-min point vs the PA = PAA crossover; passes post hoc (no 10-min point 0.52; early-step forcing 0.70) at band walls (O2 ~1, fastest ARP decay, cal_ARP ~+0.2), needing the ARP route at 45 - 65 % of PA at 120 min and over-predicting the level (R30 0.38 - 0.49). Flat (time-averaged) forcing also passes the joint set by search: the glucose-pot shapes have weak power against forcing with no time structure. The prereg's T1 tolerance (0.10) fails its own truth 1/3 of the time at realistic noise -> 0.15; at 0.15-dex noise the set has no power. Free-amine slope-1 law fails by 3.4 - 3.9 dex (negative control works)."
-    follow_up: "Key hofmann2000b Fig. 1 (two readers) and pre-declare the early-time forcing treatment before any two-route fit; bound the fed-ARP route's transfer (O2 limitation at 100 mmol/L); freeze O3' (class order) and T1 0.15 for the fit's prereg."
+    follow_up: "Key hofmann2000b Fig. 1 (two readers) and pre-declare the early-time forcing treatment before any two-route fit; bound the fed-ARP route's transfer (O2 limitation at 100 mmol/L); freeze O3' (class order) and T1 0.15 for the fit's prereg. NOTE 2026-11-05 (M3 prereg v2 DRAFT sec. 19 (d), checked in feasibility_strecker_forced_input.py: r_arp_anox_aldehyde / r_arp_anox_acid and calibrate()): the fed ARP pot's argon PA was put on a lumped anoxic direct route (k_a0, psi0: the ARP's own dicarbonyls plus released Phe), and the air excess went wholly to k_ox / psi, with no dicarbonyl (route A) term in the fed pot; so this layer could not express R2 (air excess via osones), and its air-arm conclusions are conditional on that bookkeeping. Also: the Table 2 air ratio was in-sample (psi calibrated on it)."
   - id: EX-050
     date: "2026-10-31"
     kind: probe
@@ -790,3 +790,111 @@ entries:
     verdict: inconclusive
     conclusion: "NOT SEPARATED / CONFLICT under the frozen rule (prereg v3.3, amendment A1), under every thermal reading: RES_PENT favours C1 (+303), RES_Cys a tie (C1 except under the alternative floor), D1_MFT favours C1 (+459; tie in ramp readings), D1_FFT favours R0 (-14 to -54). Independent results review (kinetic_core_m1_results_review.md): the tie rests on R0's linearised Cys lppd under the alternative floor (-175), a linearisation artefact (exact ~ -746); evaluated exactly the rule would read C1 favoured. The verdict stands, recorded as artefact-driven. The data: a reservoir is real (R0 loses ~99 % of Cys and pentose within 5 min at 120 C; measured ~50 % left at 50 min), but C1's is 3 - 5x too slow, costs 36 nats on B60's rows and loses the FFT shape R0 fits. Side effects: the held-out contrast benchmark unchanged in every form."
     follow_up: "Before M2: fix the measurement model (no between-lab tau on C/C0 series; floors that are not data points; exact or MC densities on every floor sensitivity); give the reservoir release a rate free to be 3 - 5x faster than C1's; carry the compensating coordinates (k_fur_decay, k_osone_decay, k_arp_dpo) into M2's joint refit; loss law remains a W6 data need."
+  - id: EX-062
+    date: "2026-11-05"
+    kind: probe
+    question: "Before any M1 + M2 refit: is any candidate thiol-supply structure feasible on three mechanism signatures at once: (a) Cao 2017's flat K_app over its pH drift, (b) Zhai 2021 Fig. 4b's ~10x faster fed-TTCA loss at pH 8 than 5.5, (c) Zhang 2025b's blank mass balance (TTCA ~18 mM with free Cys / Xyl near 1 mM)?"
+    hypothesis: "Neutral screen (M1 + M2 refit prereg v2 sec. 0B, plug-in, no fits); the prereg's expectation that a re-review accepts 'no supply structure feasible' P 0.7 was written after the scratch run."
+    design: "results/validation/kinetic_core_m1m2_supply_routes_refit_prereg.md sec. 0B; scripts/generators/supply_structure_signature_screen.py: candidates S1 (M1's C1), S2pow_rel (K ~ 10^(m pH)), S2k3 (CF-076's Kallen-shaped K + drain), S3 (flat K + 1 : 1 Cys / Xyl drain), diagnostics S3X / S2k3X (a declared base-favoured TTCA exit); every other constant at M1's carried C1 optimum; bounded least-squares search, 260 - 323 evaluations per structure (1 778 total, ~0.8 h, <= 6 cores); feasible on a signature if any evaluated point meets the declared screen tolerance."
+    expected: "None pre-registered numerically (a pre-design screen)."
+    artifacts: [results/validation/kinetic_core_supply_structure_signature_screen.md, results/validation/kinetic_core_supply_structure_signature_screen.json, scripts/generators/supply_structure_signature_screen.py, tests/unit/test_supply_structure_signature_screen.py]
+    commit: 7729e1f0
+    verdict: rejected
+    conclusion: "Status: DONE (record on main). No candidate is feasible on all three signatures. Every candidate passes (a); none passes (b): the maximal pH 8 / 5.5 loss ratio is 1.01 / 1.00 / 1.36 / 1.00 against a measured 9.60, because no candidate has a TTCA exit faster at high pH (CF-110); only the diagnostics with a declared exit reach it (12.29 / 13.23). None reaches (c) inside bands set from data other than Zhang 2025b: an 18 mM TTCA plateau with free reactants near 1 mM needs K_app >= ~19 L/mmol against Cao's 0.060. The record also prints Cao's pH on the cooled scale: the engine reads 0.2 - 0.4 below the measured readings from 30 min (CF-084 note 4). Blinding: the session has seen engine predictions on Zhang 2025b's blank, so that pot is development data for any later supply design."
+    follow_up: "Owner chose option (b) (refit prereg sec. 16.1): M2 parked (EX-063) until a supply case exists; the case is M1c (EX-066). Register entries CF-110, CF-111; CF-076 / CF-084 notes."
+  - id: EX-063
+    date: "2026-11-05"
+    kind: fit
+    question: "Plan steps M1 + M2 in one refit: at <= 100 C does MFT form mostly not through free norfuraneol but through the 1,4-dideoxyosone + H2S route, with route barriers that let the mix move with temperature (E6 + E11), judged with the supply question screened first?"
+    hypothesis: "Prereg v2 sec. 15 (not blind): route contrast credited / not separated or conflict / Q0 credited P 0.12 / 0.83 / 0.05; Rt-D favours Q1 P 0.55, Rt-H P 0.15; anything ships P 0.1."
+    design: "results/validation/kinetic_core_m1m2_supply_routes_refit_prereg.md v2 DRAFT (after the v1 review's REDESIGN; secs. 0A - 0B pre-design checks; five fitted combinations, Q1 vs Q2; decisive Cerny pot D and Hofmann, held out of every objective; synthetic power check sec. 12.1 before any freeze)."
+    expected: "As the hypothesis."
+    artifacts: [results/validation/kinetic_core_m1m2_supply_routes_refit_prereg.md]
+    commit: 7729e1f0
+    verdict: pending
+    conclusion: "Status: PARKED 2026-11-05 (owner, option (b) of sec. 16.1): it must not run at instant supply (CF-107's common compensator) and waits for a supply structure feasible on the three signatures (EX-062) and for M1b part (i). No build, fit or score exists. Sec. 0A: Zhang 2025b's cysteine-panel fits are off panel-wide, not a label swap (P ~0.15; CF-063 extension)."
+    follow_up: "Unpark after M1b(i) and the M1c supply case; then re-review, the synthetic power check and a freeze commit. Plan wording errors listed in its sec. 17 go to the plan owner."
+  - id: EX-064
+    date: "2026-11-05"
+    kind: diagnosis
+    question: "Plan step M1.1: build the measurement model and fit-driver infrastructure M1b, M1c and M1c + M2 need, so that the faults behind M1's artefact-driven verdict (EX-061: floors at data points, a between-lab tau on C/C0 series, a linearised density at a kinked peak) cannot recur."
+    hypothesis: "The old settings reproduce M1's decisive numbers; the exact density of R0's RES_Cys under the alternative floor is ~ -746 (the results review), not the linearised -175."
+    design: "src/kinetic_core/predictive_densities.py (pure functions: series covariance with omega per predicted value and tau refused on relative bases; Gaussian and censored likelihoods; assay floors and the floor-at-a-datum refusal; plug-in, linearised, PSIS with k-hat / ESS, adaptive Gauss-Hermite; tie band; adequacy; Holm; required agreement; the exact per-species pH discrepancy and pH-scale guard); fitting.fit opt-in central-difference polish and asserted convergence (defaults bit-identical); the R0 cysteine thermal engine scan; environment pins (arviz 0.23.4 added only). PR #61."
+    expected: "M1's numbers reproduced; the -746 check from an engine scan."
+    artifacts: [src/kinetic_core/predictive_densities.py, scripts/generators/scan_m1_r0_cysteine_thermal.py, tests/fixtures/m1_r0_cysteine_thermal_scan.json, tests/unit/test_predictive_densities.py]
+    commit: 5d62fc22
+    verdict: supported
+    conclusion: "Status: DONE (PR #61 merged). The old settings reproduce the decisive table's RES_Cys R0 vs C1 numbers to 1e-9 relative; R0's alternative-floor density by exact integration is -746.7 (linearised -175.4), and a proposal as wide as the integrand agrees with a fine trapezoid (-747.4 vs -747.5) where the curvature-tuned one fails PSIS (k-hat 0.92). omega defaults to 0.419 dex (H0's ship value, OMEGA_DEX). fitting.fit defaults are bit-identical (darwin-arm64 pins; a platform-independent test checks the default)."
+    follow_up: "Used by M1b (EX-065), M1c (EX-066) and M3 (EX-067); their floors and transfers are CR-20 - CR-22."
+  - id: EX-065
+    date: "2026-11-05"
+    kind: fit
+    question: "Plan step M1b: (i) does a charge balance with a declared amine fate and acid supply reproduce the measured cooled pH of the thiol-lane pots (Meynier, Hou, Zhou 2023), and (ii) conditionally, do pentose-side pH laws (the 1-DX : 3-DX split, the amine entry, a base-favoured 3-DX removal) explain the pH-dependent dicarbonyl and acid data?"
+    hypothesis: "Not yet frozen; expectations in prereg sec. 14 (not blind)."
+    design: "kinetic_core_m1b_ph_balance_pentose_steps_prereg.md v3.6 DRAFT on branch m1b-prereg (d7cd3ab4, unmerged): part (i) rivals B0 - B3 / B13 (amine survival phi_Cys, acid supply through a latent 2,4-diulose step), units C-Mey (censored at 0.2 pH), C-Hou, C-Hou-Gly, C-Zhou; part (ii) rivals P0 - P4 and P1' on U-Zhai, U-Hou-DX, U-Dav, U-Mik / U-Nak; omega 0.419 dex as a declared transfer carried into pH by exact re-solves; E16 (norfuraneol pH law) undecidable on disk, Bork 2022 / 2023 a band only."
+    expected: "See prereg sec. 14."
+    artifacts: []
+    commit: d7cd3ab4
+    verdict: pending
+    conclusion: "Status: DRAFT v3.6 (not frozen). Part (i) freezes after its screen and power check (secs. 3.5 - 3.6); part (ii) is a pre-declared conditional. No build, screen, fit or score of any rival exists in this design (part (i)'s --checks record, BIT and V1 - V7 / V-density, sits on branch m1b-part-i-build, 0226cbc0, unmerged). Spent-data note (not a CF: no two sources disagree): Zhai 2021 Fig. 5 shaped P4 (EX-045 / 046 rest on its two 100 C ladders) and is P4's only claim unit (sign s1); Hou Fig. 3C is a sign guard on P4, so 'its only test' overstates it. Register entries from its sec. 17: CF-084 notes 1 - 4, CF-112, CF-116, CF-117, CF-060 consequence, CF-019 note, CF-071 correction, CF-118; CR-21."
+    follow_up: "Freeze part (i) after the power check; the wording errors of its sec. 17 go to the plan / case owners; W6 candidates: an in-situ pentose trap across pH (split vs removal); a fed-NF temperature series at one pH and two pH values with O2 controlled (E16)."
+  - id: EX-066
+    date: "2026-11-05"
+    kind: fit
+    question: "Plan step M1c (case): what thiol supply structure (a base-favoured TTCA exit, an account of Zhang 2025b's missing ~19 mM pool) can be judged on mechanism-direct data, and which unseen data could decide it?"
+    hypothesis: "Case items 1 - 5 written blind (no engine run for the case); rivals R-cal, R-sink, R-K, R-rel and the pool members P4a / P4b with bands from data other than their scored tests."
+    design: "docs/reference/cases/M1c_thiol_supply_structure.md on branch m1c-case: v1 88457d7e, blind review FREEZE AFTER FIXES, v2 FROZEN at bd641ae8 before any of the 11 new papers was read; amendment A1 (17710774, docs/reference/cases/M1c_amendment_A1_vauthey2000.md) declares Vauthey 2000's roles and criteria before its data were read. Measurement model sec. 5.1 (CR-20); designed experiment sec. 4.4 (three arms)."
+    expected: "Not yet a prereg; the case fixes the decisive data and bands in advance."
+    artifacts: []
+    commit: bd641ae8
+    verdict: pending
+    conclusion: "Status: case FROZEN (items 1 - 5); A1 frozen before reading. A1 outcome (read on main, vauthey2000 dossier, 76d19023): role 1 (decisive FFT-shape unit) NOT MET (one heating time; MFT nd, FFT tr in the aqueous control) and role 2 (second-laboratory absolute thiols for H0) NOT MET (Cys + ribose MFT nd, FFT tr: no number; recovery never measured): Vauthey is evidence only and M1c's verdict stays development-grade on that unit. Register entries: CF-109, CF-111, CF-076 notes 1 - 3, CF-125; CR-20."
+    follow_up: "Items 6 - 9 (results) appended later, never edited into items 1 - 5; the prereg follows M1b(i). W6 candidate: the designed cysteine + xylose experiment (three arms). Owner call: merging Vauthey 2000 into the nestle_blank laboratory (proposed in its dossier, not applied)."
+  - id: EX-067
+    date: "2026-11-05"
+    kind: fit
+    question: "Plan step M3 (phase 1): does one shared ARP-Phe decay with two Strecker routes (the dicarbonyl route A and the Amadori oxidative route B) reproduce Hofmann 2000b's glucose + Phe and fed ARP-Phe pots under argon, air and air + Cu, and (phase 2, conditional) the layer fed from the network?"
+    hypothesis: "Not yet frozen; expectations in prereg sec. 16 (not blind)."
+    design: "kinetic_core_m3_strecker_layer_prereg.md v2 DRAFT on branch m3-strecker-prereg (8dda42e5, unmerged; v1 a66fe933, design review MORE FIXES, decisions applied sec. 21): build and V-checks, the U3 synthetic power check, the mechanism screen (>= 600 Sobol draws per rival), the full power check, then freeze; the keyed Figs. 2 - 3 (two blind readers, coordinator's scratchpad) are committed only on top of the freeze. Measurement model sec. 6 (CR-22)."
+    expected: "See prereg sec. 16."
+    artifacts: []
+    commit: 8dda42e5
+    verdict: pending
+    conclusion: "Status: DRAFT v2 (not frozen); nothing built, screened, fitted or scored in this design (phase-1 build checks sit on branch m3-phase1-build, e45e7e28, unmerged). Register entries from its sec. 19: CF-120 (a, downgraded), CF-121 ((b), (c) and (g) together: two fed designs, not three), CF-118 ((j)); (h) is CR-22; (d) is a note on EX-049. Not filed as CFs: (e) / (f) R2's osone and O2 stoichiometry, because Table 2's headspace is unprinted, so no conflict can be established; it is a feasibility condition on R2 (checked 2026-11-05: 250 - 700 umol O2 is the AIR arm; the Cu arm needs 500 - 1 900 umol, and the printed Cu lower end 1.0 mol osone / mol ARP did not reproduce from the printed efficiencies, 1.19 - 1.91); (i) a check, not a conflict."
+    follow_up: "FREEZE CHECKLIST (added 2026-11-05): Wietstock 2016 (wietstock2016 dossier) documents a third O2-dependent Strecker route, free amino acid + O2 + trace metal, EDTA-suppressible and sugar-independent (D5-Phe -> D5-PAL linear in O2; beer, pH 4.4, 28 C, weeks); in M3's air + Cu arm released Phe could be oxidised directly, so before freezing the design must represent it or argue with numbers that it is negligible at 100 C (the dossier: neither its rate nor its yield per O2 transfers; the EDTA comparison crosses designs). Also: the re-check of the fed decay rates after Figs. 2 - 3 are keyed (CF-121); a FIT_HOLDOUT_DECLARATION amendment for M3's rows. W6 candidates: a fed 1-DG + Phe pot; fed ARP-Phe with the ARP measured under argon and air, headspace stated."
+  - id: EX-068
+    date: "2026-11-05"
+    kind: diagnosis
+    question: "Plan step A2 + H3: does the lipid lane, ported as an A2 contract v2 module to JAX + diffrax, reproduce the engine (rates, trajectories, exact Jacobian), and what does it cost?"
+    hypothesis: "Match at the contract's bar; the per-lane fixed cost is small for a pH-free linear lane."
+    design: "docs/guides/A2_MODULE_CONTRACT.md v2; src/kinetic_core_jax/lipid.py and network.py in the separate maillard-jax env (jax 0.12.0.1, diffrax 0.7.2, float64, CPU); the engine's numbers from build_jax_lipid_module_reference.py (core env); PR #58. Not imported by src/kinetic_core; nothing shipped moves."
+    expected: "Rates to ~1e-15; trajectories within the contract tolerance."
+    artifacts: [results/validation/jax_lipid_module.md, results/validation/jax_lipid_module.json, results/validation/jax_lipid_module_reference.json, scripts/generators/build_jax_lipid_module.py, scripts/generators/build_jax_lipid_module_reference.py, tests/unit/test_jax_lipid_module.py]
+    commit: d03e7f47
+    verdict: supported
+    conclusion: "Status: DONE (PR #58 merged). Rates equal the engine's to 1.3e-15 relative (4 752 values); every panel pot matches to <= 1.1e-9 dex at rtol 1e-10 (Kvaerno5), the scored products to <= 4.5e-10, <= 4.3e-8 at the fits' rtol 1e-8. Forward-mode Jacobian equals the engine's central differences to <= 5e-8 per column (log10_k_looh, not a ConfigKey, against the port's own differences). Kvaerno5 takes ~4x fewer steps than Kvaerno4 here (the reverse of the sulfur bake-off): the solver is a per-network choice. The engine is faster for this analytic lane alone (7 - 170x per solve); the port buys composition, exact gradients and batches; CPU batches do not amortise. ~1 h of agent work."
+    follow_up: "The trunk + acrylamide port (EX-069) and the trunk lane's blocks (EX-070); lesson 2026-11-05 (a reference generator moves the engine only through Config or arguments)."
+  - id: EX-069
+    date: "2026-11-05"
+    kind: diagnosis
+    question: "Plan step A2 + H3: do the trunk (network.REACTIONS, 26 steps) and the acrylamide lane (16 steps and every shipped condition term), ported as contract modules, reproduce the engine, and what does the exact Jacobian cost against the engine's finite differences?"
+    hypothesis: "Match at the contract's bar; the Jacobian is where the port pays."
+    design: "src/kinetic_core_jax/trunk.py, acrylamide.py, network.py (pot scalars as arguments; pH mode 'prescribed'); reference from build_jax_trunk_acrylamide_reference.py (core env); PR #65. Not imported by src/kinetic_core."
+    expected: "Rates to ~1e-15; panel predictions within the contract's 1e-4 dex."
+    artifacts: [results/validation/jax_trunk_acrylamide_module.md, results/validation/jax_trunk_acrylamide_module.json, scripts/generators/build_jax_trunk_acrylamide_module.py, tests/unit/test_jax_trunk_acrylamide.py]
+    commit: 72d63b88
+    verdict: supported
+    conclusion: "Status: DONE (PR #65 merged). Rates to ~1e-15 (81 648 acrylamide-lane values, 75 816 trunk-lane-term values); every acrylamide panel pot <= 2.2e-9 dex at rtol 1e-10, acrylamide and HMF <= 1.9e-11; panel predictions equal engine.predict's to <= 3e-9 dex at rtol 1e-8 and <= 6e-8 at 1e-6 (contract 1e-4), so rtol 1e-6 is licensed for fits on this lane; C / N / S close to ~5e-15. Exact Jacobian (3 pots x 84 coordinates) agrees with the port's central differences to <= 1.3e-6 relative. Kvaerno4 wins on this network (~0.6x the steps); atol drives the step count. Cost: one solve 0.6 - 3x the engine's time; the 84-coordinate Jacobian 2.8 - 15x faster than the engine's forward differences. Refused as in the engine: a programme peaking in (60, 120) C (CF-106)."
+    follow_up: "The trunk lane's seven blocks (EX-070); sulfur and the network infrastructure remain (A2 estimates in the record)."
+  - id: EX-070
+    date: "2026-11-05"
+    kind: diagnosis
+    question: "Plan step A2 + H3: do the trunk lane's seven blocks (dicarbonyl, pyrazine, glycation, aqueous glyoxal, methionine, proline; fed 3-deoxy), ported as the modules trunk_lane and fed_3deoxy and composed on the trunk, reproduce network.TRUNK_REACTIONS (55 steps) on rates, trajectories and the Jacobian?"
+    hypothesis: "Match at the contract's bar, including the trunk module's declared terms on trajectories."
+    design: "src/kinetic_core_jax/trunk_lane.py, build_jax_trunk_lane_module.py / build_jax_trunk_lane_reference.py, tests/unit/test_jax_trunk_lane.py and results/validation/jax_trunk_lane_module.md on branch a2-trunk-lane-blocks (ffefa77d, unmerged); contract v2.1."
+    expected: "Rates to ~1e-15; trajectories <= ~1e-9 dex at rtol 1e-10."
+    artifacts: []
+    commit: ffefa77d
+    verdict: pending
+    conclusion: "Status: DONE on branch a2-trunk-lane-blocks (ffefa77d), NOT MERGED; its record is not on this branch, so the entry lists no artifact and reads pending until the merge. Its record: rates to 1.3e-15 (160 380 values, all 55 steps); trajectories at rtol 1e-10 <= 1.2e-9 dex on every species above the floor (Kvaerno5), C / N / S <= 8e-15; Steinhagen 2021's six panel rows equal engine.predict's to 6.4e-9 dex at rtol 1e-8 and 5.3e-7 at 1e-6; the declared a_w / Amadori pH / 3-DG exit terms hold on trajectories; 'prescribed' pH reproduces the engine's declared-pH scaling. Jacobian (3 pots x 109 coordinates) correct; 10 - 44x faster than the engine's forward differences. Kvaerno5 wins here (the reverse of acrylamide). Refused as the engine: shipped_b22b / b24b (empty frozen sets). ~2.5 h wall (1 h agent work)."
+    follow_up: "On merge: list results/validation/jax_trunk_lane_module.md / .json / _reference.json and the generators and test as artifacts, verdict supported. Remaining A2 + H3 ~14 - 28 h (sulfur, network infrastructure, the pH-root step)."
