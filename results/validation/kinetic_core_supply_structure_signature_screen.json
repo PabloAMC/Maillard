@@ -1,0 +1,540 @@
+{
+ "provenance": {
+  "artifact": "results/validation/kinetic_core_supply_structure_signature_screen.json",
+  "generated_on": "2026-11-05",
+  "git": {"commit": "6a79ccc6f64217750d2baf50e67b870a1227e075", "short": "6a79ccc6", "branch": "m2-refit-prereg", "dirty": true},
+  "generated_by": "scripts/generators/supply_structure_signature_screen.py",
+  "inputs": [{"path": "results/validation/kinetic_core_m1_supply_combinations_carried_C1.json", "sha256": "16e21d95e0e528052696e949bd36c4e249266126b1327fee809ad0e00b46f7ca"}, {"path": "data/lit/fit_rows/route_submodel.yml", "sha256": "b1b23ba179d490fed35d55c5e999aac1174ff9776c4ec33d1468d1cf7a29d98a"}]
+ },
+ "purpose": "pre-design feasibility of the thiol supply structures on three mechanism signatures (M1 + M2 prereg v2 sec. 0B); plug-in engine runs, no fits; decides only which structures may enter a supply design",
+ "blinding": "The session that ran this screen has seen engine predictions on Zhang 2025b's blank pot (free Cys, free Xyl, TTCA, CAMA at 5 - 50 min, for every screened structure). That pot is development data for any later supply design; the decisive reservoir data of that design must be others.",
+ "signatures": {
+  "a": {"what": "Cao 2017 blank, 90 C, 400 + 400 mmol/L, 0.2 M phosphate pH 5.5: K_app = [TTCA]/([Cys][Xyl]) at 0.5 - 5 h", "measured_K_app_L_per_mol": [58.6, 64.6, 60.2, 59.0, 58.5, 61.1], "measured_pH": [4.67, 4.56, 4.49, 4.33, 4.26, 4.15], "source": "cao2017_extraction.md arithmetic 1 (digitised Figs. 4 - 5); route_submodel.yml", "tolerance": "mean in (45.0, 75.0) L/mol and range <= 0.1 dex"},
+  "b": {"what": "Zhai 2021 Fig. 4b, TTCA 10 mmol/L alone, 100 C, unbuffered: fraction left at 80 min, pH 8 vs 5.5", "measured_fraction_left_80min": {"5.5": 0.819, "8": 0.147}, "measured_loss_ratio": 9.602400040546867, "source": "zhai2021_extraction.md secs. 2, 5; route_submodel.yml zhai2021_*_fig4b", "tolerance": "predicted loss ratio >= 0.5 x measured"},
+  "c": {"what": "Zhang 2025b blank, 120 C, 40 + 40 mmol/L, 0.2 M phosphate pH 6.5", "measured": {"TTCA30": 17.7, "TTCA50": 18.2, "CAMA50": 1.61, "Cys50": 0.8016, "PENT50": 1.22}, "source": "zhang2025b_extraction.md secs. 3.3 - 3.4; route_submodel.yml zhang2025b_blank(_fig2gh); CF-063, CF-076", "tolerance": "TTCA 30 / 50 min within 20%; CAMA 50 and free Cys / Xyl 50 within x2 -- all at one point"}
+ },
+ "bounds": {
+  "cao_K_pH_slope": {"slope": 0.012661770247821436, "se_residual": 0.04126123620763664, "se_read": 0.06688503751813413, "ci90_lo": -0.1548761320533601, "ci90_hi": 0.180199672549003, "dof": 4, "note": "log10 K_app regressed on the measured pH (after cooling), residual and +-7 % read error in quadrature, t with 4 dof: m <= ci90_hi"},
+  "kallen_shift_over_cao_drift_dex": {"5.2": 0.0752325550052575, "5.4": 0.05040091222053977, "6.1": 0.010997317063993428, "6.24": 0.008018836195494039},
+  "s3_drain_ceiling_per_min_90C": 0.003076923076923077,
+  "s3_drain_note": "Cao 2017's cysteine pool (Cys + TTCA + CAMA) closes within its 6 - 17 % over-closure over 5 h (dossier arithmetic 2): ~60 mmol/L / (65 mmol/L free Cys x 300 min); the band uses 3e-3 /min"
+ },
+ "cao_pH": {
+  "times_min": [0, 30, 60, 120, 180, 240, 300],
+  "measured_cooled": [5.5, 4.679, 4.559, 4.482, 4.324, 4.253, 4.148],
+  "C1_carried": {
+   "engine_cooled": [5.499999999534339, 4.426609912421554, 4.242857810575515, 4.074947981629521, 3.982656657230109, 3.9146291776560247, 3.857543672900647],
+   "residual_cooled": [-4.656612873077393e-10, -0.25239008757844594, -0.31614218942448513, -0.40705201837047955, -0.34134334276989087, -0.3383708223439754, -0.29045632709935276],
+   "engine_in_situ_90C_not_comparable": [5.276647236663848, 3.862588693585704, 3.860511615977143, 3.8847746295039363, 3.893594259687214, 3.8887213131529084, 3.874870978121165],
+   "failed_pot_runs": []
+  },
+  "route_on_B60": {
+   "engine_cooled": [5.499999999534339, 4.4759110934101045, 4.364943734835833, 4.210145473014563, 4.107950021978468, 4.030407995451242, 3.965681236702949],
+   "residual_cooled": [-4.656612873077393e-10, -0.20308890658989576, -0.19405626516416685, -0.2718545269854369, -0.21604997802153214, -0.22259200454875838, -0.18231876329705088],
+   "engine_in_situ_90C_not_comparable": [5.276647236663848, 3.8526883818092763, 3.8917589969816664, 3.9358220914262327, 3.9524055399815587, 3.9528646971914068, 3.9429861193406497],
+   "failed_pot_runs": []
+  },
+  "note": "C1_carried is M1's carried C1 optimum (the point the screen holds); route_on_B60 is B60's constants with the route on (the setting of the 2026-11-05 pot-input audit). On the cooled scale Cao measured (tap-water cooling, then the meter) both start at the measured 5.50 and, from 30 min, drift by about the measured amount while reading below it (the audit traced its ~0.2 to cysteine carboxyl carried with its amine declared destroyed, ph_state.AMINE_FATE_BASIS; CF-084 explanation 1); the drift-size match rests on compensating errors (TTCA at 5 h far below the measured 236 mmol/L). The in-situ (90 C) trajectory is not comparable with Cao's readings and is listed only as such. The screen's pH laws act on the engine's in-situ pH, so the slope bound on K comes from the measured drift, not from the engine."
+ },
+ "structures": {
+  "S1": {
+   "role": "candidate",
+   "what": "M1's C1: K 0.060 L/mmol (Cao 2017), pH- and T-flat; the ring opening k_ttca_cys searched",
+   "bands": "k_ttca_cys B60 +-3 dex (stage-1 convention); ea_form 40 - 135 (sugar_trunk class); the rest B60's bounds",
+   "evaluations": 323,
+   "failed_pot_runs": 0,
+   "wall_seconds": 935.6,
+   "any_point_flags": {"a_level": true, "a_flat": true, "b_ph_order": false, "c_ttca": false, "c_cama": true, "c_free": false},
+   "any_point_signature": {"a": true, "b": false, "c": false},
+   "joint_at_one_point": false,
+   "max_zhai_loss_ratio": 1.0148283941320093,
+   "min_free_cys50_with_ttca_and_cama_ok": null,
+   "min_free_pent50_with_ttca_and_cama_ok": null,
+   "best_by_signature": {
+    "a": {
+     "chi2_per_point": 14.081458315350394,
+     "x": {"k_ttca_cys": -1.03279808004026, "ea_form_kj_mol": 89.73872086674552, "k_pent_caramel": -8.808921754279659, "k_cys_thermal": -1.7949992822996446, "k_ttca_deg": -9.188976410144722},
+     "sig": {
+      "cao_K_mean": 48.289463490981085,
+      "cao_K_range_dex": 0.2502261006780689,
+      "cao_Cys300": 62.69748730042348,
+      "cao_PENT300": 44.82652539928895,
+      "cao_TTCA30": 279.53565225014864,
+      "cao_TTCA300": 146.0059962212534,
+      "cao_CAMA300": 143.72396485729925,
+      "zhai_frac80_ph5.5": 0.2760614967402065,
+      "zhai_frac80_ph7": 0.2834647683475597,
+      "zhai_frac80_ph8": 0.28435329427716416,
+      "zhai_lossratio_8_over_55": 0.9770079428907773,
+      "zh_TTCA30": 11.565465421054162,
+      "zh_TTCA50": 8.83645357157596,
+      "zh_CAMA50": 3.1343454827594477,
+      "zh_Cys50": 16.79436938956569,
+      "zh_PENT50": 14.208646444074859
+     }
+    },
+    "b": {
+     "chi2_per_point": 151.14290073765517,
+     "x": {"k_ttca_cys": -1.731364484900272, "ea_form_kj_mol": 40.00000151245883, "k_pent_caramel": -1.8339153694392396, "k_cys_thermal": -2.1153087220491784, "k_ttca_deg": -1.4365665931803966},
+     "sig": {
+      "cao_K_mean": 15.690145349754962,
+      "cao_K_range_dex": 0.9584728478233993,
+      "cao_Cys300": 43.68165195338319,
+      "cao_PENT300": 61.67063740902575,
+      "cao_TTCA30": 157.4434413095586,
+      "cao_TTCA300": 79.21131901284652,
+      "cao_CAMA300": 91.83114167026238,
+      "zhai_frac80_ph5.5": 0.4264349498735346,
+      "zhai_frac80_ph7": 0.4262502535215922,
+      "zhai_frac80_ph8": 0.4262749268644906,
+      "zhai_lossratio_8_over_55": 1.000440373293058,
+      "zh_TTCA30": 6.967712755390008,
+      "zh_TTCA50": 6.902651502788049,
+      "zh_CAMA50": 0.585863086251211,
+      "zh_Cys50": 20.234464946229476,
+      "zh_PENT50": 20.757203879098117
+     }
+    },
+    "c": {
+     "chi2_per_point": 175.3986238551613,
+     "x": {"k_ttca_cys": -0.9634204253607411, "ea_form_kj_mol": 55.14994891345122, "k_pent_caramel": -1.013046910862963, "k_cys_thermal": -0.8392629093130769, "k_ttca_deg": -4.388492262950682},
+     "sig": {
+      "cao_K_mean": 67.49725177249157,
+      "cao_K_range_dex": 0.23278589613792466,
+      "cao_Cys300": 27.458567162860657,
+      "cao_PENT300": 38.61296575577587,
+      "cao_TTCA30": 259.6495680704659,
+      "cao_TTCA300": 78.70196710543688,
+      "cao_CAMA300": 105.24909981105148,
+      "zhai_frac80_ph5.5": 0.2706397439321563,
+      "zhai_frac80_ph7": 0.27373011786880774,
+      "zhai_frac80_ph8": 0.27406453891753135,
+      "zhai_lossratio_8_over_55": 0.9903784512451964,
+      "zh_TTCA30": 7.727528834512167,
+      "zh_TTCA50": 4.2704634683773905,
+      "zh_CAMA50": 0.9130058427831413,
+      "zh_Cys50": 4.205896043435944,
+      "zh_PENT50": 7.684215123298674
+     }
+    }
+   }
+  },
+  "S2pow_rel": {
+   "role": "candidate",
+   "what": "K ~ 10^(m pH) about the engine's in-situ pH in Cao's pot (3.88), the slope carried on the ring opening",
+   "bands": "m 0 - 1 (one proton; v1's declared band)",
+   "evaluations": 260,
+   "failed_pot_runs": 0,
+   "wall_seconds": 1478.9,
+   "any_point_flags": {"a_level": true, "a_flat": true, "b_ph_order": false, "c_ttca": true, "c_cama": true, "c_free": true},
+   "any_point_signature": {"a": true, "b": false, "c": false},
+   "joint_at_one_point": false,
+   "max_zhai_loss_ratio": 0.9990787095090914,
+   "min_free_cys50_with_ttca_and_cama_ok": 3.233658741887403,
+   "min_free_pent50_with_ttca_and_cama_ok": 3.035155268250592,
+   "best_by_signature": {
+    "a": {
+     "chi2_per_point": 14.081457608793542,
+     "x": {"k_ttca_cys": -1.0327914538174154, "ea_form_kj_mol": 126.80107831139746, "k_pent_caramel": -9.504099512218032, "k_cys_thermal": -1.795026627998079, "k_ttca_deg": -9.31710055450529, "m": 3.645885990846183e-09},
+     "sig": {
+      "cao_K_mean": 48.28965711015316,
+      "cao_K_range_dex": 0.2502194365662134,
+      "cao_Cys300": 62.6985689377773,
+      "cao_PENT300": 44.8257714948444,
+      "cao_TTCA30": 279.53640412560657,
+      "cao_TTCA300": 146.0063349274477,
+      "cao_CAMA300": 143.72426547622393,
+      "zhai_frac80_ph5.5": 0.2214918214847308,
+      "zhai_frac80_ph7": 0.2301028821434362,
+      "zhai_frac80_ph8": 0.2309789247835595,
+      "zhai_lossratio_8_over_55": 0.9721761631673668,
+      "zh_TTCA30": 6.202923595737153,
+      "zh_TTCA50": 3.716858343344288,
+      "zh_CAMA50": 3.7737420974112976,
+      "zh_Cys50": 18.326047149002548,
+      "zh_PENT50": 9.988951741122051
+     }
+    },
+    "b": {
+     "chi2_per_point": 151.41522619345636,
+     "x": {"k_ttca_cys": -3.57865171757623, "ea_form_kj_mol": 65.61176057392044, "k_pent_caramel": 0.2261832117341532, "k_cys_thermal": -9.88561670749484, "k_ttca_deg": -1.3595785923066745, "m": 0.9999607730520151},
+     "sig": {
+      "cao_K_mean": 1507.551169793595,
+      "cao_K_range_dex": 6.2276107878581035,
+      "cao_Cys300": 396.56492692138755,
+      "cao_PENT300": 2.2969465425152527e-06,
+      "cao_TTCA30": 1.255926453149604,
+      "cao_TTCA300": 0.26464003565503424,
+      "cao_CAMA300": 0.4501176038284665,
+      "zhai_frac80_ph5.5": 0.42703316656105034,
+      "zhai_frac80_ph7": 0.42750036076374015,
+      "zhai_frac80_ph8": 0.42751230667682016,
+      "zhai_lossratio_8_over_55": 0.99868210095897,
+      "zh_TTCA30": 0.006328849465259093,
+      "zh_TTCA50": 0.0034179087384371767,
+      "zh_CAMA50": 0.0006276176030420605,
+      "zh_Cys50": 38.20679346340214,
+      "zh_PENT50": 1.4753070545902364e-09
+     }
+    },
+    "c": {
+     "chi2_per_point": 20.26870346099489,
+     "x": {"k_ttca_cys": -0.7878112257592107, "ea_form_kj_mol": 40.0001103287751, "k_pent_caramel": -0.8293837534366327, "k_cys_thermal": -0.8614395462028147, "k_ttca_deg": -1.9702601346596325, "m": 0.9999999999922103},
+     "sig": {
+      "cao_K_mean": 39.933376330889956,
+      "cao_K_range_dex": 0.16808694714991868,
+      "cao_Cys300": 33.048626559177755,
+      "cao_PENT300": 34.18708593810496,
+      "cao_TTCA30": 254.26781608883707,
+      "cao_TTCA300": 36.228567209109,
+      "cao_CAMA300": 80.38822057390725,
+      "zhai_frac80_ph5.5": 0.34962767346367046,
+      "zhai_frac80_ph7": 0.6154627404729481,
+      "zhai_frac80_ph8": 0.625677134409246,
+      "zhai_lossratio_8_over_55": 0.4462145143323837,
+      "zh_TTCA30": 14.42771688616142,
+      "zh_TTCA50": 11.484426347017116,
+      "zh_CAMA50": 1.4087365654065171,
+      "zh_Cys50": 1.5628808675835062,
+      "zh_PENT50": 1.293880028062954
+     }
+    }
+   }
+  },
+  "S2k3": {
+   "role": "candidate",
+   "what": "CF-076's Kallen-shaped K(pH) ~ (1 + 10^(pKa_T - pH)) 10^pH on the ring opening, plus S3's drain",
+   "bands": "pKa_T 5.2 - 6.1 (Radomski 1989, as CF-076); drain as S3",
+   "evaluations": 274,
+   "failed_pot_runs": 0,
+   "wall_seconds": 935.9,
+   "any_point_flags": {"a_level": true, "a_flat": true, "b_ph_order": false, "c_ttca": true, "c_cama": true, "c_free": true},
+   "any_point_signature": {"a": true, "b": false, "c": false},
+   "joint_at_one_point": false,
+   "max_zhai_loss_ratio": 1.3632455125178056,
+   "min_free_cys50_with_ttca_and_cama_ok": 9.647987305973865,
+   "min_free_pent50_with_ttca_and_cama_ok": 9.472742310986828,
+   "best_by_signature": {
+    "a": {
+     "chi2_per_point": 14.09253698229223,
+     "x": {"k_ttca_cys": -1.0343931077728117, "ea_form_kj_mol": 40.00000164631729, "k_pent_caramel": -6.269814287897966, "k_cys_thermal": -1.794528849189631, "k_ttca_deg": -6.675266531208099, "pKa_T": 5.468183510743361, "log10_drain90": -5.714411858352676, "Ea_drain": 64.08},
+     "sig": {
+      "cao_K_mean": 48.39778901545198,
+      "cao_K_range_dex": 0.2532059873838071,
+      "cao_Cys300": 62.55388385787308,
+      "cao_PENT300": 44.68608127468713,
+      "cao_TTCA30": 279.36768873518815,
+      "cao_TTCA300": 146.0785472013266,
+      "cao_CAMA300": 143.75209089545194,
+      "zhai_frac80_ph5.5": 0.3519508430834155,
+      "zhai_frac80_ph7": 0.6096504018942523,
+      "zhai_frac80_ph8": 0.6804408939933313,
+      "zhai_lossratio_8_over_55": 0.3686945107788841,
+      "zh_TTCA30": 20.840187505356845,
+      "zh_TTCA50": 20.481790653693754,
+      "zh_CAMA50": 1.9715986245251926,
+      "zh_Cys50": 10.020440014436788,
+      "zh_PENT50": 11.389822014348
+     }
+    },
+    "b": {
+     "chi2_per_point": 151.42396977636037,
+     "x": {"k_ttca_cys": -3.5786508558712944, "ea_form_kj_mol": 42.35208108898239, "k_pent_caramel": -9.999746538312781, "k_cys_thermal": 0.49999659623650516, "k_ttca_deg": -1.2698170228571701, "pKa_T": 6.099999957142354, "log10_drain90": -2.5228800923175947, "Ea_drain": 134.99900571065683},
+     "sig": {
+      "cao_K_mean": 362.95279566654006,
+      "cao_K_range_dex": 1.945398912139808,
+      "cao_Cys300": 0.0012578342050574053,
+      "cao_PENT300": 161.32351807056588,
+      "cao_TTCA30": 0.44418049657472775,
+      "cao_TTCA300": 0.0747808152076127,
+      "cao_CAMA300": 0.1402558402287495,
+      "zhai_frac80_ph5.5": 0.4269551446905033,
+      "zhai_frac80_ph7": 0.427220871271095,
+      "zhai_frac80_ph8": 0.427727896637388,
+      "zhai_lossratio_8_over_55": 0.9978753048394098,
+      "zh_TTCA30": 0.0027197669403273127,
+      "zh_TTCA50": 0.0016082180545277098,
+      "zh_CAMA50": 0.0002730746693263179,
+      "zh_Cys50": 1.7532528709089243e-05,
+      "zh_PENT50": 0.4212543536239653
+     }
+    },
+    "c": {
+     "chi2_per_point": 34.39359188124104,
+     "x": {"k_ttca_cys": -0.8127348206741868, "ea_form_kj_mol": 43.101069789680515, "k_pent_caramel": -0.8404133938524945, "k_cys_thermal": -0.8198494549909763, "k_ttca_deg": -2.914396507354766, "pKa_T": 5.312075431628913, "log10_drain90": -2.82997922314752, "Ea_drain": 77.63331371547895},
+     "sig": {
+      "cao_K_mean": 74.87149469027973,
+      "cao_K_range_dex": 0.14235919380451414,
+      "cao_Cys300": 27.22740674350077,
+      "cao_PENT300": 25.678125328173095,
+      "cao_TTCA30": 261.87302111949407,
+      "cao_TTCA300": 57.189171619261366,
+      "cao_CAMA300": 94.07247101832135,
+      "zhai_frac80_ph5.5": 0.20984973136553386,
+      "zhai_frac80_ph7": 0.5436972828016136,
+      "zhai_frac80_ph8": 0.6636910107284228,
+      "zhai_lossratio_8_over_55": 0.26255165110390677,
+      "zh_TTCA30": 12.390650126697217,
+      "zh_TTCA50": 9.429389974631725,
+      "zh_CAMA50": 1.2778947981750743,
+      "zh_Cys50": 2.125189724816008,
+      "zh_PENT50": 1.7026059718144553
+     }
+    }
+   }
+  },
+  "S3": {
+   "role": "candidate",
+   "what": "K pH-flat inside Cao's band plus an equal first-order drain on free Cys and free PENT (1 : 1 at equal free levels; added to r_cys_thermal and r_pent_caramel)",
+   "bands": "K 0.045 - 0.075 (Cao 2017); drain at 90 C <= 3e-3 /min (Cao's pool closure, see bounds); barrier 40 - 135 (sugar_trunk class)",
+   "evaluations": 318,
+   "failed_pot_runs": 0,
+   "wall_seconds": 3097.9,
+   "any_point_flags": {"a_level": true, "a_flat": true, "b_ph_order": false, "c_ttca": true, "c_cama": true, "c_free": false},
+   "any_point_signature": {"a": true, "b": false, "c": false},
+   "joint_at_one_point": false,
+   "max_zhai_loss_ratio": 1.000572686759871,
+   "min_free_cys50_with_ttca_and_cama_ok": 14.951260790990087,
+   "min_free_pent50_with_ttca_and_cama_ok": 18.083463997274563,
+   "best_by_signature": {
+    "a": {
+     "chi2_per_point": 14.063147258122951,
+     "x": {"k_ttca_cys": -0.9879796946364905, "ea_form_kj_mol": 107.09925269274721, "k_pent_caramel": -9.98439735769605, "k_cys_thermal": -1.7975336310050798, "k_ttca_deg": -9.990678850059853, "K": 0.05737238933515257, "log10_drain90": -5.999927564737324, "Ea_drain": 64.08},
+     "sig": {
+      "cao_K_mean": 47.42931079344468,
+      "cao_K_range_dex": 0.21607774036634922,
+      "cao_Cys300": 63.45016749158741,
+      "cao_PENT300": 45.603493767442316,
+      "cao_TTCA30": 281.035258225968,
+      "cao_TTCA300": 145.49449384502273,
+      "cao_CAMA300": 143.4270161072904,
+      "zhai_frac80_ph5.5": 0.23672994587831223,
+      "zhai_frac80_ph7": 0.24542514678174024,
+      "zhai_frac80_ph8": 0.246276787077155,
+      "zhai_lossratio_8_over_55": 0.972560338602131,
+      "zh_TTCA30": 9.08927845301219,
+      "zh_TTCA50": 6.213278390666946,
+      "zh_CAMA50": 3.5948727329850736,
+      "zh_Cys50": 17.57567464236557,
+      "zh_PENT50": 12.028969126767207
+     }
+    },
+    "b": {
+     "chi2_per_point": 151.14776580439644,
+     "x": {"k_ttca_cys": -1.6962625415797328, "ea_form_kj_mol": 40.000001494961204, "k_pent_caramel": -1.918603815411324, "k_cys_thermal": -2.185022736146802, "k_ttca_deg": -1.45625484634424, "K": 0.06008355454889082, "log10_drain90": -3.0396490505652896, "Ea_drain": 64.14060970475695},
+     "sig": {
+      "cao_K_mean": 18.55157494821749,
+      "cao_K_range_dex": 0.9753942966761723,
+      "cao_Cys300": 40.92318896484375,
+      "cao_PENT300": 51.90432846173781,
+      "cao_TTCA30": 162.0006141831269,
+      "cao_TTCA300": 74.6693421217551,
+      "cao_CAMA300": 89.78216698403286,
+      "zhai_frac80_ph5.5": 0.4267174957980989,
+      "zhai_frac80_ph7": 0.4265186861036859,
+      "zhai_frac80_ph8": 0.42656144185250433,
+      "zhai_lossratio_8_over_55": 1.0004294980560466,
+      "zh_TTCA30": 6.666307002379282,
+      "zh_TTCA50": 6.163205714687653,
+      "zh_CAMA50": 0.5582979685305668,
+      "zh_Cys50": 16.642566211446756,
+      "zh_PENT50": 17.43070176695295
+     }
+    },
+    "c": {
+     "chi2_per_point": 148.50072848415138,
+     "x": {"k_ttca_cys": -1.0672855726210393, "ea_form_kj_mol": 51.38496148478839, "k_pent_caramel": -1.1928985821349058, "k_cys_thermal": -0.9747318539654037, "k_ttca_deg": -8.113871661694953, "K": 0.0749698297169322, "log10_drain90": -2.628085919849437, "Ea_drain": 79.74224249734252},
+     "sig": {
+      "cao_K_mean": 82.19387881149997,
+      "cao_K_range_dex": 0.2980031865983415,
+      "cao_Cys300": 29.198454987028533,
+      "cao_PENT300": 31.690576413244134,
+      "cao_TTCA30": 263.90734918817026,
+      "cao_TTCA300": 86.37568860876665,
+      "cao_CAMA300": 110.81081615639907,
+      "zhai_frac80_ph5.5": 0.3274377625444206,
+      "zhai_frac80_ph7": 0.33016652275708214,
+      "zhai_frac80_ph8": 0.33066887795933997,
+      "zhai_lossratio_8_over_55": 0.9912047624536403,
+      "zh_TTCA30": 7.974809556327217,
+      "zh_TTCA50": 4.594344246552404,
+      "zh_CAMA50": 0.8778980258597602,
+      "zh_Cys50": 3.7335680982428174,
+      "zh_PENT50": 5.62973730227235
+     }
+    }
+   }
+  },
+  "S3X": {
+   "role": "diagnostic",
+   "what": "S3 plus a base-favoured TTCA exit: r_cama_form and r_ttca_deg x 10^(n (pH - 5.5))",
+   "bands": "n 0 - 1 (declared; diagnostic only)",
+   "evaluations": 321,
+   "failed_pot_runs": 0,
+   "wall_seconds": 3130.5,
+   "any_point_flags": {"a_level": true, "a_flat": true, "b_ph_order": true, "c_ttca": false, "c_cama": true, "c_free": true},
+   "any_point_signature": {"a": true, "b": true, "c": false},
+   "joint_at_one_point": false,
+   "max_zhai_loss_ratio": 12.294958688439133,
+   "min_free_cys50_with_ttca_and_cama_ok": null,
+   "min_free_pent50_with_ttca_and_cama_ok": null,
+   "best_by_signature": {
+    "a": {
+     "chi2_per_point": 6.564751188795664,
+     "x": {"k_ttca_cys": 1.4816148610183884, "ea_form_kj_mol": 93.72496166266691, "k_pent_caramel": -9.56575207234059, "k_cys_thermal": -1.7870284325903405, "k_ttca_deg": -9.666261494808136, "K": 0.05796500976784323, "log10_drain90": -5.996530089567031, "Ea_drain": 64.08, "exit_n": 0.10157212925125841},
+     "sig": {
+      "cao_K_mean": 57.9541038430992,
+      "cao_K_range_dex": 9.899443461204252e-05,
+      "cao_Cys300": 61.92285692282724,
+      "cao_PENT300": 50.846910350515635,
+      "cao_TTCA30": 305.0620047339615,
+      "cao_TTCA300": 182.45324334921094,
+      "cao_CAMA300": 114.78622863845669,
+      "zhai_frac80_ph5.5": 0.21178109282221236,
+      "zhai_frac80_ph7": 0.19175007553642842,
+      "zhai_frac80_ph8": 0.1849426269346961,
+      "zhai_lossratio_8_over_55": 1.087300169366196,
+      "zh_TTCA30": 10.342786056324993,
+      "zh_TTCA50": 6.766324789144653,
+      "zh_CAMA50": 3.6257306729024346,
+      "zh_Cys50": 16.994096367451675,
+      "zh_PENT50": 6.884691935194654
+     }
+    },
+    "b": {
+     "chi2_per_point": 34.69582206785761,
+     "x": {"k_ttca_cys": -1.6291539922914884, "ea_form_kj_mol": 44.7220467932004, "k_pent_caramel": 0.011516059183314442, "k_cys_thermal": -6.68552910314421, "k_ttca_deg": -7.790006164145999, "K": 0.04755190112211802, "log10_drain90": -5.99917084415613, "Ea_drain": 47.48440256770556, "exit_n": 0.2578253996105583},
+     "sig": {
+      "cao_K_mean": 96.56790469264004,
+      "cao_K_range_dex": 1.269019714021117,
+      "cao_Cys300": 321.35464003493774,
+      "cao_PENT300": 0.8859860017910571,
+      "cao_TTCA30": 95.36655875957534,
+      "cao_TTCA300": 50.586618453110674,
+      "cao_CAMA300": 24.07759909421413,
+      "zhai_frac80_ph5.5": 0.6744681767005767,
+      "zhai_frac80_ph7": 0.38114193447895345,
+      "zhai_frac80_ph8": 0.14664298139524873,
+      "zhai_lossratio_8_over_55": 4.874566482011794,
+      "zh_TTCA30": 0.8164271132966484,
+      "zh_TTCA50": 0.48882377635649243,
+      "zh_CAMA50": 0.0929047774901476,
+      "zh_Cys50": 37.46721751867741,
+      "zh_PENT50": 0.011642598500079636
+     }
+    },
+    "c": {
+     "chi2_per_point": 154.29083339511112,
+     "x": {"k_ttca_cys": -1.1348125445246764, "ea_form_kj_mol": 40.89271037221261, "k_pent_caramel": -8.86650079442116, "k_cys_thermal": -1.6411528872842827, "k_ttca_deg": -9.837088070935431, "K": 0.07499987719566514, "log10_drain90": -2.861894482616865, "Ea_drain": 134.99740189254078, "exit_n": 0.16236490860172514},
+     "sig": {
+      "cao_K_mean": 65.0470519499623,
+      "cao_K_range_dex": 0.33717689622782415,
+      "cao_Cys300": 48.31767881556249,
+      "cao_PENT300": 52.69227910590296,
+      "cao_TTCA30": 286.2012928503566,
+      "cao_TTCA300": 189.49515734287098,
+      "cao_CAMA300": 88.28795420247185,
+      "zhai_frac80_ph5.5": 0.43368115316352435,
+      "zhai_frac80_ph7": 0.2956949324690159,
+      "zhai_frac80_ph8": 0.21988490818789472,
+      "zhai_lossratio_8_over_55": 1.812985621072866,
+      "zh_TTCA30": 7.742062072339456,
+      "zh_TTCA50": 4.617307148609528,
+      "zh_CAMA50": 0.8735713804563221,
+      "zh_Cys50": 4.274359070396041,
+      "zh_PENT50": 4.552402006972995
+     }
+    }
+   }
+  },
+  "S2k3X": {
+   "role": "diagnostic",
+   "what": "the Kallen-shaped K + drain + the base-favoured exit",
+   "bands": "as S2k3 and S3X (diagnostic only)",
+   "evaluations": 282,
+   "failed_pot_runs": 0,
+   "wall_seconds": 865.1,
+   "any_point_flags": {"a_level": true, "a_flat": true, "b_ph_order": true, "c_ttca": true, "c_cama": true, "c_free": true},
+   "any_point_signature": {"a": true, "b": true, "c": false},
+   "joint_at_one_point": false,
+   "max_zhai_loss_ratio": 13.23302143499969,
+   "min_free_cys50_with_ttca_and_cama_ok": 10.426177839147156,
+   "min_free_pent50_with_ttca_and_cama_ok": 3.946663821881741,
+   "best_by_signature": {
+    "a": {
+     "chi2_per_point": 6.942940694372592,
+     "x": {"k_ttca_cys": 0.6655803573720929, "ea_form_kj_mol": 106.17454990826911, "k_pent_caramel": -8.279544198668308, "k_cys_thermal": -1.794912433422464, "k_ttca_deg": -6.846733569643179, "pKa_T": 6.099308998834369, "log10_drain90": -5.042900961416787, "Ea_drain": 64.08, "exit_n": 0.12215761577988825},
+     "sig": {
+      "cao_K_mean": 59.95958381389031,
+      "cao_K_range_dex": 0.00017170947475384388,
+      "cao_Cys300": 61.30027432455519,
+      "cao_PENT300": 51.79901974334243,
+      "cao_TTCA30": 307.56094068154874,
+      "cao_TTCA300": 190.35725478729375,
+      "cao_CAMA300": 108.84026221067275,
+      "zhai_frac80_ph5.5": 0.21357038911980214,
+      "zhai_frac80_ph7": 0.3496365694128697,
+      "zhai_frac80_ph8": 0.27058782573784745,
+      "zhai_lossratio_8_over_55": 0.8467210970382056,
+      "zh_TTCA30": 8.424538985616552,
+      "zh_TTCA50": 3.574594208618731,
+      "zh_CAMA50": 3.5921207241586073,
+      "zh_Cys50": 18.404569911479175,
+      "zh_PENT50": 1.1353202852447055
+     }
+    },
+    "b": {
+     "chi2_per_point": 35.80440144121564,
+     "x": {"k_ttca_cys": -2.156440026883315, "ea_form_kj_mol": 94.7444067624567, "k_pent_caramel": 0.1762741340496806, "k_cys_thermal": -9.756537156045926, "k_ttca_deg": -9.904175338569198, "pKa_T": 6.073052331030238, "log10_drain90": -5.843513793182784, "Ea_drain": 40.360991939442435, "exit_n": 0.20770512548586473},
+     "sig": {
+      "cao_K_mean": 206.84178924247627,
+      "cao_K_range_dex": 2.1152210453927833,
+      "cao_Cys300": 366.6612133769298,
+      "cao_PENT300": 0.07805666012213588,
+      "cao_TTCA30": 34.64772178547535,
+      "cao_TTCA300": 18.57309349188298,
+      "cao_CAMA300": 11.924286541011917,
+      "zhai_frac80_ph5.5": 0.6695513845420338,
+      "zhai_frac80_ph7": 0.39360185097308503,
+      "zhai_frac80_ph8": 0.14014611785239087,
+      "zhai_lossratio_8_over_55": 4.898622968532435,
+      "zh_TTCA30": 0.08390039713401261,
+      "zh_TTCA50": 0.025540042015307778,
+      "zh_CAMA50": 0.022333036313709757,
+      "zh_Cys50": 38.06410999936322,
+      "zh_PENT50": 3.533836145414768e-05
+     }
+    },
+    "c": {
+     "chi2_per_point": 41.17346961416556,
+     "x": {"k_ttca_cys": -0.8389735192767301, "ea_form_kj_mol": 40.022193332979754, "k_pent_caramel": -0.9678847231557389, "k_cys_thermal": -0.9156216036779752, "k_ttca_deg": -2.4103485214844476, "pKa_T": 5.298420309523515, "log10_drain90": -2.7681807946794637, "Ea_drain": 95.34397476502406, "exit_n": 0.19893269280089046},
+     "sig": {
+      "cao_K_mean": 72.43638644841019,
+      "cao_K_range_dex": 0.1473317999203339,
+      "cao_Cys300": 32.71883686059958,
+      "cao_PENT300": 42.531230044479265,
+      "cao_TTCA30": 277.07556250532326,
+      "cao_TTCA300": 109.50673706695592,
+      "cao_CAMA300": 52.80391971755617,
+      "zhai_frac80_ph5.5": 0.2667442216411179,
+      "zhai_frac80_ph7": 0.48424132147286264,
+      "zhai_frac80_ph8": 0.32660401098563907,
+      "zhai_lossratio_8_over_55": 0.8467925932254773,
+      "zh_TTCA30": 11.072047041252807,
+      "zh_TTCA50": 7.856466560586167,
+      "zh_CAMA50": 1.445700446177859,
+      "zh_Cys50": 2.114888439219543,
+      "zh_PENT50": 1.729849603325875
+     }
+    }
+   }
+  }
+ },
+ "settings": {
+  "pots": {"cao2017_blank_fig5": [30, 60, 120, 180, 240, 300], "zhai2021_ttca_ph55_100c_fig4b": [20, 40, 60, 80, 100, 120], "zhai2021_ttca_ph7_100c_fig4b": [20, 40, 60, 80, 100, 120], "zhai2021_ttca_ph8_100c_fig4b": [20, 40, 60, 80], "zhang2025b_blank": [5, 10, 15, 20, 25, 30, 40, 50]},
+  "searched_base": ["k_ttca_cys", "ea_form_kj_mol", "k_pent_caramel", "k_cys_thermal", "k_ttca_deg"],
+  "search_budget": {"joint": 150, "a": 60, "b": 60, "c": 60},
+  "held": "every other constant at M1's carried C1 optimum",
+  "numerics": "inline pH, scoring rtol (fit_m1_supply_combinations.score_inline)"
+ }
+}
