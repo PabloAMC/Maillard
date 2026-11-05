@@ -48,7 +48,7 @@ Literature-derived constants, priors, reference payloads and the intake registri
 |---|---|
 | `README.md` | How to register a paper and run the literature learning loop. |
 | `arrhenius_params.yml` | Pre-exponential factors and activation energies per reaction family (Cantera export lane); its header records a known kJ/kcal collision with `FAST_BARRIERS`. |
-| `benchmark_intake_registry.json` | The paper catalogue: 205 references scored against the C1-C8 intake criteria, with repair ledgers. `paper_id` of choice for `papers.yml`. |
+| `benchmark_intake_registry.json` | The paper catalogue: 155 references scored against the C1-C8 intake criteria, with repair ledgers. `paper_id` of choice for `papers.yml`. |
 | `binding_constants.yml` | Measured protein-flavour binding constants with verbatim source quotes and verification status; `src/protein_binding.py`. The record shape the rest of this directory should converge on. |
 | `chemistry_family_scope_registry.json` | The 16 chemistry lanes as product scope (status, priority, next action). |
 | `computational_priors.json` | 22 prior tables in one file (accessibility windows, class profiles, per-family priors, DFT-era kinetic priors); read by 10 modules. Split planned (Phase 4). |
@@ -60,10 +60,10 @@ Literature-derived constants, priors, reference payloads and the intake registri
 | `matrix_decision_panel.json` | Compound -> target class + evidence state truth table with aliases; seed of `compounds.yml`; `src/matrix_targets.py`. |
 | `matrix_family_coverage_registry.json` | The 8 canonical matrix families and what each supports; the intended closed vocabulary for `matrix_family`. |
 | `process_gap_registry.json` | 5 structural gaps literature cannot close; overlaps `benchmark_intake_registry.structural_gaps`. |
-| `process_state_calibrations.json` | 19 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`. |
+| `process_state_calibrations.json` | 18 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`. |
 | `reaction_rules.yml` | The hypothesis layer's reaction rules: one SMIRKS per literature-described transformation with its dossier anchor, conditions and positive/negative controls (`src/network_hypotheses`); the engine never reads it. |
 | `retention_reference_payloads.json` | Volatile retention/release records per protein, incl. withdrawn (`unsourced_withdrawn`) rows; `src/headspace.py`, `literature_runtime`. |
-| `safety_reference_payloads.json` | 43 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`. |
+| `safety_reference_payloads.json` | 41 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`. |
 
 1 files covered by the directory description above: `source_verification.yml`
 

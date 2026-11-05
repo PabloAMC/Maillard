@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **972**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **973**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -208,6 +208,7 @@ Tracked files: **972**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_thiol_lolo_pair_*` (11): `kinetic_core_thiol_lolo_pair_dalian_polytechnic_chen_d__dfa_hofmann_schieberle.json`, `kinetic_core_thiol_lolo_pair_dalian_polytechnic_chen_d__jiangnan_zhang_x.json`, `kinetic_core_thiol_lolo_pair_dalian_polytechnic_chen_d__ochanomizu_murata.json`, `kinetic_core_thiol_lolo_pair_dalian_polytechnic_chen_d__reading_mottram.json` … | H0 (EX-059, plan W1.2): the leave-two-laboratories-out refits of the thiol lane (`fit_thiol_lolo_pairs.py`), one per pair of the five scorable labs plus the engine-guard record: optimiser fields and RAW residuals only, written blind under the freeze commit; scored once by `score_thiol_lolo_nested_tau.py`. |
 | `lane_offset_diagnostic.*` (2): `lane_offset_diagnostic.json`, `lane_offset_diagnostic.md` | Wave B46: the SIGNED offset log10(predicted/measured) per lane, its sign consistency, and its rank correlation against each condition the bundles state, with the number of distinct pots and covariate levels each number rests on. A diagnostic, not a fit: nothing is scored and no constant moves. Its one claim with a design behind it is that the sulfur lane over-predicts the meaty thiols and the over-prediction shrinks with temperature (`generate_lane_offset_diagnostic.py`). |
 | `literature_backlog.*` (2): `literature_backlog.json`, `literature_backlog.md` | Encoded / ready / wet-lab queues over the intake registry (`src/literature_intake_registry.py`). |
+| `literature_metadata_triage_2026-11-05.md` | Hand triage (2026-11-05) of the 41 flags of the OpenAlex `verify` run on 713 DOIs (PR #70's `literature_metadata_check_2026-11-05`): one row per flagged entry with its class (wrong DOI, wrong citation label, false positive, year, unresolved), the evidence, the source fix and the model rows it touches. Read by people; the fixes live in the cited records. |
 | `matrix_family_coverage.*` (2): `matrix_family_coverage.json`, `matrix_family_coverage.md` | Matrix families: explicit vs indirect support (`src/matrix_family_coverage.py`; alias `matrix-family-coverage`). |
 | `matrix_family_next_action.*` (2): `matrix_family_next_action.json`, `matrix_family_next_action.md` | Which bounded matrix family advances next (`src/matrix_family_next_action.py`; alias `family-next-action`). |
 | `matrix_family_priority_ranking.*` (2): `matrix_family_priority_ranking.json`, `matrix_family_priority_ranking.md` | The seven matrix families ranked by scope priority, impact and how closable the gap is, each with its primary blocker and the next action (`generate_matrix_family_priority_ranking.py`). Written for the first time on 2026-09-09: its generator was in the repository and had never been run, so the ranking existed only as code. |

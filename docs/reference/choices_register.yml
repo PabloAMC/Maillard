@@ -338,3 +338,106 @@ entries:
     sensitivity:
       status: harmless
       result: "no scored artifact reads the ratio interval or compare's 'resolved' flag: the scorecard, the contrast diagnostic, the directional panel and the contrast benchmark score levels, ratios or signs with their own noise rule"
+
+  # ---- registered 2026-11-05: the declared floors and noise transfers of the day's three designs. The values live in
+  # the design documents (two on unmerged branches, named in each entry); the rules they follow are the M1.1
+  # measurement model (src/kinetic_core/predictive_densities.py: omega per predicted value, tau only where the value
+  # basis keeps an offset, floors from the assay and never at a datum). Nothing here has been run. ----
+
+  - id: CR-20
+    what: the detection floors and noise transfers of case M1c (thiol supply structure) and its amendment A1
+    where: {file: src/kinetic_core/predictive_densities.py, symbol: assay_floor}
+    kind: alternatives
+    current: >-
+      Case M1c v2 (FROZEN 2026-11-05, bd641ae8 on branch m1c-case, sec. 5.1) per unit: (a) Cao / Zhao 2017b log K_app, a
+      consistency check: n = 3, RSD < 10 %, read errors +-0.004 / 0.005 mol/L and +-0.03 pH, omega once per quotient, no
+      floor; (b) Zhai 2021 Fig. 4b: printed SD (n = 3) at pH 5.5 / 6 / 7; at pH 8, +Xyl and the pH 7 points printing SD 0,
+      a TRANSFER of the figure's median relative SD (~3 - 4 %); read error +-0.005 mmol/L; floor the TTCA LOD 2.21 mg/L =
+      0.0087 mmol/L with "0.00" points censored; the Fig. 5 routing check carries a factor 3 for the diacetyl surrogate's
+      response factor; (c) Zhang 2025b: read errors +-0.3 (TTCA) / +-0.05 (CAMA) mmol/L, per-assay calibration terms
+      TTCA 8 %, CAMA 20 %, Cys / Xyl ELSD 15 % (from the Cao vs Zhao 2017b spreads); floors 0.223 mmol/L for Cys / Xyl
+      (the printed ELSD curve's zero-signal point, 58.733 / 263.28) and 0.1 mmol/L for TTCA / CAMA (the lowest
+      standard); (d) Schieberle 2000 FFT / MFT ratios: a TRANSFER of M1's 0.094 ln per point, floor 1 ug/L "as M1";
+      Belikov 1967 / Wlodek 1993 if decisive: printed noise, else a TRANSFER of RSD 10 % per species. omega 0.419 dex
+      per printed value everywhere (0.390 a sensitivity); tau_ABS 0.964 dex only on absolute cross-laboratory levels;
+      feasibility judged without omega (1.92-nat null threshold). Amendment A1 (17710774): Vauthey 2000 scored with
+      omega 0.419 and the paper's own LOD (~0.5 ug / 5 g cubic phase; no LOQ, "tr" undefined); its roles 1 - 2 were
+      NOT MET on reading (vauthey2000 dossier), so no Vauthey floor is used.
+    basis: >-
+      The rule (lesson 2026-11-05, M1.1): floors from the assay's LOD / LOQ or calibration range, never a data point;
+      noise from the printed replicate SD, else a declared transfer with its sensitivity. Sources: zhai2021 dossier
+      (LOD 2.21 mg/L); zhang2025b dossier sec. 2 (the curve, printed identically for both analytes, CF-109); cao2017 /
+      zhao2017b dossiers (the calibration spreads); EX-059 (omega, tau_ABS). Not verified here: the Schieberle 2000 floor
+      of 1 ug/L is stated "as M1" and was not found in the schieberle2000 dossier.
+    alternatives:
+      - {name: primary, value: "as current"}
+      - {name: noise_transfer_half_double, value: "every transferred relative SD x0.5 and x2 (Zhai pH 8 / +Xyl 3 - 4 %; Belikov / Wlodek 10 %)", source: "case M1c sec. 5.1"}
+      - {name: zhang_floor_zhai, value: "Cys / Xyl floors 0.025 / 0.020 mmol/L (Zhai's ELSD LODs; sensitivity only, unverified)", source: "case M1c sec. 5.1"}
+      - {name: omega_reset, value: "omega 0.390 dex (H0's reset set; a sensitivity)", source: "EX-059"}
+      - {name: rate_floor_sensitivities, value: "Zhao 2017b ~7e-4 /min on X-cama (anchor 3.29e-3 x 0.2; required agreement); Cao's k_ttca_cys >= 7e-3 /min at 90 C (sensitivity only)", source: "case M1c sec. 5.2"}
+    decided_by: "case M1c v2, frozen 2026-11-05 after its blind review (FREEZE AFTER FIXES); A1 written before Vauthey's data were read"
+    sensitivity: {status: untested}
+
+  - id: CR-21
+    what: the detection floors, noise terms and the omega transfer of the M1b pre-registration (pH balance and pentose-side pH laws)
+    where: {file: src/kinetic_core/predictive_densities.py, symbol: OMEGA_DEX}
+    kind: alternatives
+    current: >-
+      M1b prereg v3.6 DRAFT (branch m1b-prereg, d7cd3ab4; not frozen), sec. 3.3 and sec. 4.6. pH units: measurement the
+      printed replicate SD, else max(read error, meter repeatability r), r = 0.05 pH (decided); discrepancy omega 0.419
+      dex (ln 0.965), a DECLARED TRANSFER from the thiol lane (H0's worse set), carried into pH by two exact balance
+      re-solves per draw with every produced titratable species scaled by 10^(+-omega) (2.62x / 0.381x), delta-pH = half
+      the spread; no tau; no floors (C-Mey is censored at Meynier's printed 0.2 pH bound). C-Hou-Gly carries 2 omega^2 =
+      0.351 dex^2 (a ratio of two predicted points). Pentose units: U-Zhai-T / TX floor 1.50 umol/L (LOD 0.306 mg/L for
+      both quinoxalines, PDF p. 10650, / 204.2 g/mol; LOQ 5.20); U-Hou-DX a TRANSFER of Zhai 2021's quinoxaline LOD;
+      U-Dav-AA read error with a TRANSFERRED CV 10 % (Davidek 2006a / b; 2008's own unstated), floor none (sensitivity 1
+      mol %, the papers' reporting resolution); U-Dav-X / Y a TRANSFER of Zhai 2021's Xyl LOD 0.020 mmol/L (LOQ 0.070);
+      U-Mik / U-Nak a TRANSFER of Zhai 2021's DAD LOD as molar, 2.7 umol/L (x10 sensitivity).
+    basis: >-
+      omega: EX-059 (kinetic_core_thiol_lolo_nested_tau.md l. 23 warm 0.419, l. 80 reset 0.390); the worse set governs
+      (H0 prereg sec. 3.6 / D2, amendment A1 item 3), as CR-19 for the shipped ratio interval. It is a transfer: H0
+      measured the within-laboratory shape error of R3En's thiols, not of pH or of pentose dicarbonyls; no measurement
+      of either exists. The floors are each assay's own LOD where printed, else another laboratory's LOD for the same
+      analyte class, declared as a transfer (prereg sec. 16 open item 6: Zhai 2021's LOD basis, pot vs derivatised
+      solution, is unstated).
+    alternatives:
+      - {name: primary, value: "as current"}
+      - {name: omega_half_double, value: "omega 0.210 / 0.838 dex (required agreement)", source: "M1b prereg sec. 3.3"}
+      - {name: omega_reset, value: "omega 0.390 dex (printed sensitivity only, never required agreement)", source: "EX-059"}
+      - {name: meter_r, value: "r = 0.02 pH (required agreement)", source: "M1b prereg sec. 3.3"}
+      - {name: floor_sensitivities, value: "U-Dav-AA 1 mol %; U-Mik / U-Nak floor x10", source: "M1b prereg sec. 4.6"}
+    decided_by: "M1b prereg v3.2 - v3.6 (coordinator's alignment on omega 0.419, 2026-11-05); freezes after part (i)'s screen and power check"
+    sensitivity: {status: untested}
+
+  - id: CR-22
+    what: the detection floors, noise transfers and the omega transfer (thiols -> Strecker species) of the M3 pre-registration
+    where: {file: src/kinetic_core/predictive_densities.py, symbol: series_covariance}
+    kind: alternatives
+    current: >-
+      M3 prereg v2 DRAFT (branch m3-strecker-prereg, 8dda42e5; not frozen), sec. 6. omega 0.419 dex per predicted point,
+      a DECLARED TRANSFER of H0's within-laboratory shape error (thiol lane, R3En) onto phenylacetaldehyde / phenylacetic
+      acid and the ARP, covariance omega^2 (I + 11^T), a ratio carrying 2 omega^2, within-pot rho 0 (primary); no
+      between-laboratory tau in phase 1. Noise: s_rep 0.025 dex from Granvogl 2006's PA RSD 1.7 - 5.9 % (a transfer from
+      170 C, 5 mM MGO pots; that range is model B only, model A's PA RSDs run 0.5 - 13.4 %, up to 0.055 dex); print
+      rounding +-0.05 umol/mmol (sd 0.029) for Fig. 1 and Table 2; sigma_run 0.075 dex (CF-074 / CF-075's 7 - 18 % run
+      scatter); an analyser CV integrated over [2, 10] % (no source; band ends as forms) plus integer rounding +-0.5 umol;
+      U3 calibration coordinates N(0, 0.10) for 3-DG and glucosone, N(0, 0.20) for 1-DG (unsourced), N(0, 0.05) for Phe;
+      the power design's keyed read error <= 0.011 umol/mmol + 0.03 dex. Floors: PA / PAA none (every decisive value is
+      quantified); U3 left-censored at the axis read resolution ~0.003 - 0.005 mmol/mmol ARP (set by the keying record;
+      0.004 in the synthetic design); R-D2X / R-Deng (reported only) the ARP LOD 0.18 mM (Deng 2021). A floor never clips
+      a prediction and is never set at a data point.
+    basis: >-
+      omega: EX-059 (as CR-19 / CR-21), the larger set; a transfer across species classes with no measurement of the
+      Strecker layer's own shape error (the prereg's CF candidate (h)). The prereg states that U4, sigma-fp and the shape
+      screens are powerless under omega, so kills come only from the feasibility signatures (judged without omega).
+      Floors from the assay or the read resolution (M1.1 rule); Deng's LOD is not used for U3. Unsourced choices the
+      prereg lists itself: nu_O2, the 1-DG calibration sd, the analyser CV band.
+    alternatives:
+      - {name: primary, value: "as current"}
+      - {name: omega_half_double, value: "omega 0.210 / 0.838 dex (forms)", source: "M3 prereg sec. 6"}
+      - {name: within_pot_rho, value: "rho 0.5 (form)", source: "M3 prereg sec. 6"}
+      - {name: sigma_run_between_points, value: "sigma_run per time point (vessel per point; required agreement)", source: "M3 prereg sec. 6"}
+      - {name: u3_floor_double, value: "U3 floor x2 (required agreement)", source: "M3 prereg sec. 6"}
+      - {name: isomers, value: "f_iso in [0, 0.3] (form)", source: "M3 prereg sec. 6"}
+    decided_by: "M3 prereg v2 DRAFT after its design review (MORE FIXES); freezes after the U3 and full power checks, before the keyed Figs. 2 - 3 are committed"
+    sensitivity: {status: untested}
