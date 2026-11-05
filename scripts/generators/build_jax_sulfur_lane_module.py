@@ -189,6 +189,15 @@ def compare(jax_run, eng: Mapping[str, Any], *, rtol: float, atol: float) -> Dic
     return out
 
 
+def table_jumps() -> Tuple[float, ...]:
+    """The label pH values where a measured table JUMPS (not merely kinks): Zheng & Ho's mechanism boundary (the
+    cysteine and glutathione sets switch to the pH-3 pair below it) and the thiamine share's floor."""
+    from src.kinetic_core_jax import sulfur_lane as sl
+
+    c = sl._term_constants()
+    return (float(c["zheng_boundary"]), float(c["thi_share_floor"]))
+
+
 def tie_tolerance(rtol: float) -> float:
     """How far apart the two sides' last fixed-point residuals may be by solver noise alone: the residual is a max of
     |fresh - node pH| over the nodes, each fresh pH within the pH bound of the other side's, so 2 x PH_TOL at the fit
@@ -273,7 +282,7 @@ class Harness:
         from src.kinetic_core import engine, ph_state
 
         label = float(pot["process"].ph)
-        near = [b for b in self.lane.module.breakpoints.get("ph_label", ()) if abs(label - b) < 1e-9]
+        near = [b for b in table_jumps() if abs(label - b) < 1e-9]
         if not near or eng.get("sid") is None:
             return None
         y0 = pot["jax"]["y0"]
@@ -778,13 +787,14 @@ def markdown(r: Mapping[str, Any]) -> str:
                  f"{x['worst_species']} | {max(x['max_abs_node_ph'], x['max_abs_cooled_ph']):.1e} | {x['pass']} |")
     t = r["tight"]
     L += ["", f"## Tight tolerance (rtol {TIGHT_TOL[0]:g} / atol {TIGHT_TOL[1]:g}; contract sec. 3's 1e-6 dex)", "",
-          "| pot | max dex | worst species | max pH diff | JAX s | engine s | pass |", "|---|---|---|---|---|---|---|"]
+          "| pot | max dex | worst species | max pH diff | JAX s (first call, compile included) | engine s | pass |", "|---|---|---|---|---|---|---|"]
     for x in t["rows"]:
         L.append(f"| {x['id']} | {x['max_dex']:.1e} | {x['worst_species']} | "
                  f"{max(x['max_abs_node_ph'], x['max_abs_cooled_ph']):.1e} | {x['jax_s']:.2f} | {x['engine_s']:.2f} | {x['pass']} |")
     g = r["gradient"]
     L += ["", "## Gradient (`jax.grad`, reverse mode through the fixed point)", "",
-          f"Scalar: a weighted sum of log10 MFT / FFT / Cys / NF at the end of {g['pot']} plus the final cooled pH, at "
+          f"Scalar: a weighted sum of log10 {' / '.join(GRADIENT_SPECIES)} at the end of {g['pot']} plus the final "
+          "cooled pH, at "
           f"rtol {g['rtol']:g}. Finite: {g['finite']}.", "",
           "| coordinate | jax.grad | forward mode | central FD (step) | rel. grad vs FD | rel. grad vs forward |",
           "|---|---|---|---|---|---|"]
@@ -804,8 +814,11 @@ def markdown(r: Mapping[str, Any]) -> str:
           f"| engine, central differences ({f['engine_runs_central']} runs) | {f['engine_central_fd_s']:.2f} |",
           "", f"JAX exact / engine forward FD: {f['jax_jacobian_s'] / f['engine_forward_fd_s']:.2f}x; / central: "
               f"{f['jax_jacobian_s'] / f['engine_central_fd_s']:.2f}x. Column error of the exact Jacobian against the "
-              f"engine's central FD {f['max_col_rel_jax_vs_engine_central']:.1e} (the FD's own truncation and solver "
-              f"noise); the engine's forward FD against its central {f['max_col_rel_engine_forward_vs_central']:.1e}. "
+              f"engine's central FD at these (fit-sized) steps {f['max_col_rel_jax_vs_engine_central']:.1e}; the engine's "
+              f"forward FD against its own central {f['max_col_rel_engine_forward_vs_central']:.1e}, so at these steps "
+              "the differences disagree with each other by as much (truncation over the large steps, and a step can "
+              "move the fixed point's sweep count); at small steps the exact gradient equals central differences to "
+              f"{max(r['gradient']['rel_grad_vs_fd']):.1e} (gradient section). "
               f"Load: {f['load']}.",
           "", "## What remains (not in this port)", "",
           "- Every off-by-default rival (B58 / B59a / B59b / B61, the pentose MGO routes, the MGO Strecker, the 3-DX trap, "
@@ -816,7 +829,7 @@ def markdown(r: Mapping[str, Any]) -> str:
           "still the typed stub. The fit driver (`fit.py`) and the density bridge call `network.integrate`, so they do "
           "not take the sulfur lane yet.",
           "- Composing this module with `trunk` / `fed_3deoxy` (one owner per species) is A2b's union network.",
-          "", f"Machine load: start {r.get('uptime_start', '')}; end {r.get('uptime_end', '')}.", ""]
+          "", f"Machine load (the last stage run): start {r.get('uptime_start', '')}; end {r.get('uptime_end', '')}.", ""]
     return "\n".join(L)
 
 
