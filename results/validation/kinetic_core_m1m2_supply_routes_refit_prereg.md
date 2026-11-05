@@ -1,10 +1,21 @@
-# M1 + M2 pre-registration: MFT route shares with the supply question screened first (v2 DRAFT)
+# M1 + M2 pre-registration: MFT route shares with the supply question screened first (v2 DRAFT, PARKED)
 
-**Status: v2 DRAFT, not frozen.** v1 (9bc55883) went to an independent adversarial review, which returned REDESIGN.
-The coordinator decided each finding (sec. 20.1). v2 adds two pre-design checks (sec. 0A, 0B) and applies those
-decisions. Freezing needs: a re-review of v2; the synthetic power check (sec. 12.1); the owner's decision on the supply
-axis (sec. 16.1 item 1); and a freeze commit. No build, fit or score of any rival here exists. The pre-design screen
-(sec. 0B) ran plug-in engine evaluations with no fits, in the session scratchpad.
+**Status: v2 DRAFT, PARKED.** Parked 2026-11-05: the route design waits for a supply structure feasible on the three
+signatures (see the screen record,
+[kinetic_core_supply_structure_signature_screen.md](kinetic_core_supply_structure_signature_screen.md)) and for M1b(i);
+it is not to run at instant supply (CF-107). The owner chose option (b) of sec. 16.1 item 1. The plan is re-sequenced:
+M1b(i), the pH balance, first (any pH-dependent TTCA exit or K law acts on the pH the balance computes; on Cao's pot
+the engine reads 0.2 - 0.4 below the measured cooled pH from 30 min, through the CF-084 acid allocation, and matches
+the drift's size only by compensating errors: the screen record); then a new supply case built from the literature
+(its inputs in sec. 16.2); then the joint M1 + M2 refit using this file's route design. Correction 2026-11-05: an
+earlier wording of this line compared the engine's IN-SITU (90 C) pH, 3.86 -> 3.89, with Cao's COOLED readings,
+4.67 -> 4.15. The two scales are not comparable; the comparison is now made on the cooled scale only.
+
+v1 (9bc55883) went to an independent adversarial review, which returned REDESIGN. The coordinator decided each finding
+(sec. 20.1). v2 adds two pre-design checks (sec. 0A, 0B) and applies those decisions. When unparked, freezing needs: a
+re-review; the synthetic power check (sec. 12.1); and a freeze commit. No build, fit or score of any rival here exists.
+The pre-design screen (sec. 0B) ran plug-in engine evaluations with no fits. It is now a generator,
+`scripts/generators/supply_structure_signature_screen.py`, re-run through the wrapper; its record is linked above.
 
 *Plan steps M1 and M2 ([STATUS_AND_PLAN](../../docs/guides/STATUS_AND_PLAN.md) sec. 5, W2, rows M1 and M2; sec. 7 items
 1 - 9; sec. 6, "M1 and M2 in one refit"). Predecessors: M1 (EX-061), its frozen prereg
@@ -72,8 +83,9 @@ constant at M1's carried C1 optimum except those searched. Each structure was im
 - **Search:** a bounded least-squares search, 150 evaluations on the three signatures jointly plus 60 on each alone;
   260 - 323 evaluations per structure.
 - **Feasibility:** a structure is feasible on a signature if any evaluated point meets its declared screen tolerance.
-- **Cost:** 1 778 evaluations in about 0.8 h wall (two processes x 3 workers, nice'd; <= 6 cores). Scripts and records are in the
-  session scratchpad (`screen/screen.py`, `screen2.py`, `out_*.json`), not in the repo.
+- **Cost:** 1 778 evaluations in about 0.8 h wall (two processes x 3 workers, nice'd; <= 6 cores). First run in the
+  session scratchpad; promoted to `scripts/generators/supply_structure_signature_screen.py` and re-run there (record:
+  [kinetic_core_supply_structure_signature_screen.md](kinetic_core_supply_structure_signature_screen.md)).
 
 **The signatures and their screen tolerances:**
 - **(a) Cao 2017 blank, 90 C:** the mean of K_app = [TTCA] / ([Cys][Xyl]) inside 45 - 75 L/mol, and flat (range <= 0.10
@@ -87,8 +99,8 @@ constant at M1's carried C1 optimum except those searched. Each structure was im
 | structure | coordinates and bands (none from Zhang) | (a) | (b) | (c) |
 |---|---|---|---|---|
 | **S1** (C1) | K 0.060 pH- and T-flat | feasible | **no**: pH 8 / 5.5 loss ratio <= 1.01 at every point (measured 9.6) | **no**: no point puts TTCA within 20 % (best TTCA 11.6 / 8.8); with free Cys low, TTCA is lost too |
-| **S2, power law** K ∝ 10^(m pH), slope on the ring opening | m 0 - 1 | feasible in the engine only because the engine's in-situ pH in Cao's pot barely drifts (3.86 -> 3.89, against the measured 4.67 -> 4.15). **On the measured drift (arithmetic): the slope of log10 K_app on pH is +0.013, 90 % CI -0.155 to +0.180** (residual and read errors in quadrature, t4). So m <= 0.18 | **no**: K rising with pH stabilises TTCA; ratio <= 1.0, 0.45 at m = 1 (the wrong sign) | closest of all (chi^2 / point 20) but only at **m = 1**, which (a) excludes; and when TTCA and CAMA pass, free Cys stays >= 3.2 mmol/L |
-| **S2, Kallen-shaped** (CF-076's form: K ∝ (1 + 10^(pKa_T - pH)) 10^pH, flat below pKa_T), with S3's drain | pKa_T 5.2 - 6.1 (Radomski 1989, as CF-076); drain as S3 | feasible; on the measured drift K moves <= 0.07 dex for pKa_T >= 5.2 (arithmetic), inside the bound | **no**: ratio <= 1.36 | **no**: when TTCA and CAMA pass, free Cys ~10 mmol/L (chi^2 / point 34) |
+| **S2, power law** K ∝ 10^(m pH), slope on the ring opening | m 0 - 1 | feasible in the engine, but weak evidence about m: the S2 laws act on the engine's in-situ (90 C) pH, which is not the scale Cao measured (cooled), and whose drift in this pot is small. **On the measured drift (arithmetic): the slope of log10 K_app on pH is +0.013, 90 % CI -0.155 to +0.180** (residual and read errors in quadrature, t4). So m <= 0.18 | **no**: K rising with pH stabilises TTCA; ratio <= 1.0, 0.45 at m = 1 (the wrong sign) | closest of all (chi^2 / point 20) but only at **m = 1**, which (a) excludes; and when TTCA and CAMA pass, free Cys stays >= 3.2 mmol/L |
+| **S2, Kallen-shaped** (CF-076's form: K ∝ (1 + 10^(pKa_T - pH)) 10^pH, flat below pKa_T), with S3's drain | pKa_T 5.2 - 6.1 (Radomski 1989, as CF-076); drain as S3 | feasible; on the measured drift K moves <= 0.075 dex for pKa_T >= 5.2 (arithmetic), inside the bound | **no**: ratio <= 1.36 | **no**: when TTCA and CAMA pass, free Cys ~10 mmol/L (chi^2 / point 34) |
 | **S3**: K pH-flat in Cao's band + an equal first-order drain on free Cys and free PENT (a 1 : 1 drain at equal free levels) | K 0.045 - 0.075; drain at 90 C <= 3e-3 /min (Cao's pool closes within its 6 - 17 % over-closure over 5 h: arithmetic, about 60 mM / (65 mM x 300 min)), barrier 40 - 135 kJ/mol (`sugar_trunk` class) | feasible | **no**: ratio <= 1.00 | **no**: when TTCA and CAMA pass, free Cys 15 / Xyl 18 mmol/L |
 | *diagnostic* S3 + a base-favoured TTCA exit (`r_cama_form`, `r_ttca_deg` x 10^(n (pH - 5.5))) | n 0 - 1 | feasible | **feasible** (ratio up to 12.3) | no |
 | *diagnostic* Kallen-shaped + drain + exit | as above | feasible | feasible (13.2) | **no**: each part of (c) is reached alone, never together (TTCA and CAMA pass -> free Cys >= 10; free low -> TTCA lost) |
@@ -110,7 +122,7 @@ constant at M1's carried C1 optimum except those searched. Each structure was im
    a slow release makes formation equally slow, since k_f = K k_r). P(a full fit inside the same bands reaches (c))
    ~0.1.
 
-**Consequence for this design (the owner decides: sec. 16.1 item 1).** v2 does not judge supply. The route question
+**Consequence for this design (decided 2026-11-05: option (b), sec. 16.1 item 1; this file is parked).** v2 does not judge supply. The route question
 (M2) is pre-registered at the incumbent's instant supply (S0), the only supply form on which the shipped constants were
 fitted. M1's C1 (S1) is carried as a reported robustness check of the route verdict ("errors stack"), never as a supply
 candidate. The supply question returns to the owner with the screen's diagnosis: a candidate needs a base-favoured TTCA
@@ -522,8 +534,8 @@ That is the main thing the check measures.
 
 ## 13. Differences from the plan, M1, v1 and the 2026-11-01 proposal
 
-1. **Supply is not judged here** (sec. 0B). The plan's "one refit with M1's combination" becomes: routes refit at
-   instant supply, with M1's C1 as a robustness pair. The supply step needs a new case (sec. 16.1 item 1).
+1. **Supply is not judged here** (sec. 0B), and the route design does not run at instant supply (parked; sec. 16.1
+   item 1, option (b)). It is carried to the joint M1 + M2 refit after M1b(i) and a new supply case (sec. 16.2).
 2. **Zhang 2025b cannot be decisive in any later supply design** run by this author's session: its engine predictions
    were read in the screen. A later design must take its reservoir block from elsewhere, or have an independent author
    who did not see sec. 0B's numbers.
@@ -587,24 +599,49 @@ under `caffeinate -i` with checkpoints (sec. 4.2), nice'd, memory checked at lau
 
 1. **The supply axis.** No screened structure is feasible on Cao's drift, Zhai's pH series and Zhang's mass balance
    together (sec. 0B). The options:
-   - **(a), the default:** run M2 at instant supply now, as written, and open a new supply case. The case: a
+   - **(a), the author's default, NOT taken:** run M2 at instant supply now, as written, and open a new supply case. The case: a
      base-favoured TTCA exit; an account of Zhang's ~19 mM missing pool (a fourth state, a TTCA quantification bias, or
      the pot declared not representable); a decisive reservoir block that this session has not seen.
-   - **(b):** pause M2 until that supply case exists (the plan's "one refit" literally).
+   - **(b), DECIDED 2026-11-05:** pause M2 until that supply case exists (the plan's "one refit" literally). Reason
+     (coordinator): instant supply is half of CF-107's common compensator, so a route verdict on top of it would be
+     confounded, and P(ship) ~0.1 does not justify the cost.
    - **(c):** widen bands on Zhang's numbers. Excluded by the coordinator's decision (bands never from Zhang).
 2. **Whether to run at all after the power check** (sec. 12.1). If "Rt-D AND Rt-H" is nearly unattainable under omega,
    the run can only return "not separated". The alternative is a claim set without Rt-H, which is a design change for
    the re-review.
 3. **The M1b dependency** (sec. 3.3): stated; no decision unless M1b runs first.
 
-### 16.2 Carried for the supply case (review MAJOR 2, ready to apply when a feasible structure exists)
+### 16.2 Inputs for the next supply case
 
-- C1F vs C1 as a required pair, with S-Cys, S-Xyl and S-TTCA all counting.
-- S3 added if feasible.
-- Cao's floor k_r >= 7e-3 /min at 90 C as a bound (log10 `k_ttca_cys`(145 C) >= -0.94 at 64.08 kJ/mol).
-- A verdict conditional on a declared slope ceiling classed as numerical.
-- Bands from Cao and the mechanism, never from Zhang.
-- Item 2's evidence against: Cao's drift, Zhai's pH series, Zhang's mass balance.
+**This section is input to the NEW supply case (after M1b(i)), not part of this route design.** Collected from the
+review of v1 (MAJOR 2), the screen and the coordinator's decisions; to be applied when a supply structure exists that is
+feasible on the three signatures.
+
+1. **The signatures any candidate must pass first** (the screen record): (a) Cao 2017's K_app flat while the measured pH
+   drifts 4.67 -> 4.15 (slope bound m <= 0.18, 90 %); (b) Zhai 2021 Fig. 4b, TTCA lost ~10x faster at pH 7 - 8 than at
+   5.5; (c) Zhang 2025b's mass balance (TTCA plateau 18.2, CAMA 1.6, free reactants ~1 mmol/L, ~19 mmol/L of each in no
+   measured pool).
+2. **What the screen says a candidate needs:** a TTCA exit that is faster at high pH (TTCA -> CAMA or TTCA -> DPO), and an
+   account of Zhang's missing pool (a measured fourth state, a TTCA quantification bias, or the pot declared not
+   representable). A K that rises with pH alone moves (b) the wrong way.
+3. **Upstream first: M1b(i).** Any pH law on the reservoir acts on the pH the balance computes. On Cao's pot, on the
+   cooled scale Cao measured, the engine starts at the measured 5.50. From 30 min it reads about 0.2 low at B60's
+   constants with the route on (4.476 vs 4.679 at 30 min) and 0.25 - 0.41 low at M1's carried C1 optimum. The audit
+   traced this to cysteine carboxyl carried with its amine declared destroyed (`ph_state.AMINE_FATE_BASIS`, CF-084
+   explanation 1). The drift's size matches (about -0.5 vs -0.53 from 30 min) only by compensating errors (TTCA at 5 h
+   far below the measured 236 mmol/L). The in-situ (90 C) pH is not comparable with Cao's readings.
+4. **Blinding.** This session has seen engine predictions on Zhang 2025b's blank pot. For the new case that pot is
+   development data; its decisive reservoir data must be others (or the case needs an author who has not seen sec. 0B).
+5. **The pairs and bounds (review MAJOR 2):** the new structure against M1's C1 as a required pair, with every reservoir
+   unit counting; S3 (the 1 : 1 drain, band from Cao's pool closure, <= 3e-3 /min at 90 C) added if feasible; Cao's floor
+   k_r >= 7e-3 /min at 90 C as a bound (log10 `k_ttca_cys`(145 C) >= -0.94 at 64.08 kJ/mol); a verdict conditional on a
+   declared slope ceiling classed as numerical (does not ship).
+6. **Bands from Cao, Zhai 2021 and the mechanism, never from Zhang** (coordinator, decided).
+7. **Evidence against the v1 supply design, to be listed in the new case's item 2:** Cao's drift, Zhai's pH series,
+   Zhang's mass balance; CF-076's battery (EX-054, cluster 5, resolve2_sulfur) and its literature (Kallen 1971 / 1971b,
+   Karpinski 1990, Radomski 1989).
+8. **Literature needs:** a measured thiazolidine ring-chain pH law; a measured TTCA -> Cys-Amadori rate across pH; any
+   pot that quantifies Zhang-type missing cysteine (cystine, open-chain TTCA, oligomers).
 
 ## 17. For the register session (not written here)
 
@@ -618,8 +655,10 @@ under `caffeinate -i` with checkpoints (sec. 4.2), nice'd, memory checked at lau
   arms included. Not a label swap (sec. 0A, P ~0.15).
 - (d) **Zhang 2025b's high-lysine arms** plot free cysteine (~0.03 - 0.06 mmol/L) below the zero-signal point of the
   printed ELSD curve (0.223 mmol/L).
-- (e) **The engine's in-situ pH in Cao's pot** barely drifts (3.86 -> 3.89) while the measured pH falls 4.67 -> 4.15.
-  This is M1b's balance error (CF-084) showing on a route pot, and it makes the engine blind to K's pH slope there.
+- (e) **Cao 2017's pH on the cooled scale:** the engine reads 0.2 - 0.4 below the measured readings from 30 min, from
+  the CF-084 acid allocation (cysteine carboxyl with its amine declared destroyed). The drift size matches only through
+  compensating errors. The screen record has the numbers. Correction: v2's earlier "in-situ 3.86 -> 3.89 vs measured
+  4.67 -> 4.15" mixed the in-situ and cooled scales and is withdrawn.
 - (f) **Zhai 2021 Fig. 4b:** TTCA is lost ~10x faster at pH 7 - 8 than at 5.5, and no engine structure has a
   base-favoured TTCA exit (a new engine-error candidate for the atlas, E10-adjacent).
 
@@ -661,7 +700,9 @@ supply structure feasible").
 ## 20. Revision log
 
 - v1 DRAFT, 2026-11-05 (9bc55883): first version.
-- **v2 DRAFT, 2026-11-05:**
+- **v2 DRAFT, PARKED 2026-11-05:** parked by the owner's option (b) (status line); the supply-axis material moved
+  to sec. 16.2 as inputs for the next supply case; the screen promoted to a generator and its record (0.07 -> 0.075 dex
+  for the Kallen law's shift over Cao's drift, the generator's exact arithmetic). Earlier the same day, v2 DRAFT:
   - step 1 (no label swap); step 2 (no feasible supply structure);
   - routes at instant supply with an S1 robustness pair;
   - Cerny 2007 into the objective; furfural barriers held; T as 140 C shapes; Givaudan reported;
