@@ -5,11 +5,11 @@ note: 'One row per DOI cited anywhere under data/. paper_id is the intake-regist
   Derived, not curated: this file asserts which records share a paper, not that the DOI is right (scripts/ci/citation_gate.py
   does that). Do not hand-edit: re-run the generator.'
 counts:
-  papers: 702
-  with_dossier: 527
+  papers: 709
+  with_dossier: 534
   with_intake_id: 139
   cited_in_more_than_one_file: 167
-  cited_only_from_code_or_dossier: 472
+  cited_only_from_code_or_dossier: 479
 dossiers_without_printed_doi:
 - data/lit/extraction_dossiers/Zhang2024_extraction.md
 - data/lit/extraction_dossiers/aliani2013_extraction.md
