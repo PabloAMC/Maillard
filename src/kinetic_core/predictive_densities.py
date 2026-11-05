@@ -56,8 +56,11 @@ import numpy as np
 # ----------------------------------------------------------------------------------------------------------------
 
 LN10 = math.log(10.0)
-#: H0 (EX-059, reset set): the within-laboratory model discrepancy, a fractional error per predicted value, in dex.
-OMEGA_DEX = 0.390
+#: H0 (EX-059): the within-laboratory model discrepancy, a fractional error per predicted value, in dex. The ship
+#: value is the WORSE of H0's two sets, 0.419 (warm; H0 prereg sec. 3.6 / D2, amendment A1 item 3): the plan, the H0
+#: application and the M1b / M1c / M3 preregs use it. The reset set's 0.390 is a named sensitivity.
+OMEGA_DEX = 0.419
+OMEGA_DEX_RESET = 0.390
 OMEGA_LN = OMEGA_DEX * LN10
 #: H0's tau_ABS(all), dex: the between-laboratory offset of an ABSOLUTE level. The caller decides per series.
 TAU_ABS_DEX = 0.964

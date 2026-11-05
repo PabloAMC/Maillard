@@ -130,7 +130,10 @@ def test_dex_and_ln_densities_differ_by_n_ln_ln10():
     l_ln = pdn.gaussian_log_density(pdn.dex_to_ln(y), pdn.dex_to_ln(f), cov_ln)
     assert l_ln == pytest.approx(pdn.log_density_dex_to_ln(l_dex, 3))
     assert pdn.log_density_ln_to_dex(l_ln, 3) == pytest.approx(l_dex)
-    assert pdn.OMEGA_LN == pytest.approx(0.898, abs=1e-3)     # M1c + M2 prereg sec. 6: 0.390 dex = 0.898 ln
+    # the default is H0's ship value (the worse set, 0.419 dex); the reset set's 0.390 is the named sensitivity
+    assert (pdn.OMEGA_DEX, pdn.OMEGA_DEX_RESET) == (0.419, 0.390)
+    assert pdn.OMEGA_LN == pytest.approx(0.965, abs=1e-3)
+    assert pdn.dex_to_ln(pdn.OMEGA_DEX_RESET) == pytest.approx(0.898, abs=1e-3)   # M1c + M2 prereg sec. 6's figure
 
 
 def test_series_covariance_ratio_design_and_omega():
@@ -140,8 +143,11 @@ def test_series_covariance_ratio_design_and_omega():
     a = np.array([[-1.0, 1.0, 0.0], [0.0, -1.0, 1.0]])
     m1 = np.array([[v[360] + v[30], -v[360]], [-v[360], v[720] + v[360]]])
     assert np.allclose(pdn.series_covariance(sd, "ratio", omega_dex=None, design=a), m1)
-    om = 0.39 ** 2
+    om = 0.419 ** 2                                          # the default omega
     assert np.allclose(pdn.series_covariance(sd, "ratio", design=a), m1 + om * np.array([[2.0, -1.0], [-1.0, 2.0]]))
+    om = 0.390 ** 2                                          # the reset-set sensitivity, passed explicitly
+    assert np.allclose(pdn.series_covariance(sd, "ratio", omega_dex=pdn.OMEGA_DEX_RESET, design=a),
+                       m1 + om * np.array([[2.0, -1.0], [-1.0, 2.0]]))
 
 
 def test_censored_likelihood_against_analytic_cases():
@@ -249,7 +255,8 @@ def _toy_balance(amounts):
 def test_ph_species_discrepancy_is_the_half_spread_of_the_corners():
     produced = {"HA": 2e-3, "B": 1e-3}
     out = pdn.ph_species_discrepancy(_toy_balance, produced, acids={"HA"}, per_species=True)
-    up, dn = 10 ** 0.39, 10 ** -0.39
+    assert out["omega_dex"] == 0.419                       # the default: H0's ship value
+    up, dn = 10 ** 0.419, 10 ** -0.419
     ph_a = _toy_balance({"HA": 2e-3 * up, "B": 1e-3 * dn})
     ph_b = _toy_balance({"HA": 2e-3 * dn, "B": 1e-3 * up})
     assert out["delta_ph"] == pytest.approx(0.5 * abs(ph_b - ph_a))
@@ -367,72 +374,74 @@ def test_m1_old_settings_reproduce_the_decisive_table_for_res_cys(m1):
         pdn.check_floor_not_data(RES_FLOOR["PENT"], [r.value for r in data["PENT"]])
 
 
-#: NOT IN M1's RECORDS. The decisive record stores R0's levels and Jacobian at the carried optimum only; the exact
-#: 1-D predictive along k_cys_thermal needs the engine at shifted points. These are the engine's R0 Cys levels (mmol/L,
-#: isothermal, printed to 3 decimals) at k_cys_thermal + delta dex, from the M1 results reviewer's engine probe
-#: (session scratchpad engine_probe.py, 2026-11-05; the run that printed "plug alt -742.8" at +0.50). delta = 0 is
-#: taken from the record itself at full precision.
-R0_CYS_PROBE_MM = {
-    0.50: (0.393, 0.359, 0.331, 0.306, 0.283, 0.261, 0.223, 0.191),
-    1.00: (0.299, 0.228, 0.178, 0.140, 0.110, 0.086, 0.053, 0.033),
-    1.15: (0.253, 0.172, 0.121, 0.086, 0.061, 0.043, 0.022, 0.011),
-    1.50: (0.121, 0.048, 0.022, 0.010, 0.005, 0.002, 0.0005, 0.0005),   # "0." printed: below 5e-4, floored anyway
-}
+#: The engine scan (scripts/generators/scan_m1_r0_cysteine_thermal.py): R0's decisive levels at k_cys_thermal + delta
+#: dex, delta = -1.2 ... +1.2 in steps of 0.1, the other coordinates at R0's carried M1 optimum, M1's scoring numerics.
+SCAN = ROOT / "tests" / "fixtures" / "m1_r0_cysteine_thermal_scan.json"
 
 
-def test_m1_exact_density_of_r0_cys_under_the_alternative_floor_is_about_minus_746(m1):
-    """The review's finding, by this module's estimators: R0's RES_Cys predictive under the alternative floor
-    (old form otherwise: prediction floored at 0.22 mM, tau 0.964 on the series), integrated exactly over the one
-    identified coordinate that moves R0's cysteine (k_cys_thermal, Laplace sd 0.279), is about -746, not the
-    linearised -175. The integrand between the probe's engine points is a cubic spline in delta of each log level
-    (declared approximation); for delta < 0 the delta = 0 levels are held (that side's integrand is below e^-200 of
-    the peak). A fine trapezoid gives -746.7; PSIS with a Student-t proposal as wide as the integrand and adaptive
-    Gauss-Hermite agree with it; PSIS refuses the proposal built from the local Hessian at the kinked peak."""
+@pytest.fixture(scope="module")
+def scan():
+    return json.loads(SCAN.read_text())
+
+
+def test_m1_exact_density_of_r0_cys_under_the_alternative_floor_from_the_engine_scan(m1, scan):
+    """The review's finding, from engine values: R0's RES_Cys predictive under the alternative floor (the old form
+    otherwise: prediction floored at 0.22 mM, tau 0.964 on the series, no omega), integrated over the one identified
+    coordinate that moves R0's cysteine (k_cys_thermal, Laplace sd 0.279), is about -746, not the linearised -175.
+    A trapezoid on the 25 engine points (the review's construction) and, between them, a cubic spline in delta of each
+    log level feeding a fine trapezoid, PSIS and adaptive Gauss-Hermite: all agree. The integrand has a kink at its
+    peak (the legacy-floored 50 min prediction crosses 0.22 mM), and PSIS refuses a proposal scaled from the local
+    Hessian there."""
     from scipy.interpolate import CubicSpline
     from scipy.optimize import minimize_scalar
 
     dec, carried, data = m1
     tau = dec["tau_ABS_all"]
     sd = carried["R0"]["laplace"]["sigma"]["k_cys_thermal"]
-    assert sd == pytest.approx(0.2793, abs=1e-4)
+    assert scan["laplace_sd"] == sd and scan["failed_pot_runs"] == 0
+    assert scan["carried_theta"] == carried["R0"]["carried_theta"]["k_cys_thermal"]
+    assert scan["point_labels"] == dec["point_labels"] and scan["numerics"] == dec["forms"]["R0"]["numerics"]
+    deltas = np.asarray(scan["deltas"])
+    levels = np.asarray(scan["levels"], dtype=float)
+    # the scan's centre IS the record's optimum: the engine reproduces M1's levels exactly
+    assert np.array_equal(levels[int(np.argmin(np.abs(deltas)))], np.asarray(dec["levels"]["R0"]["isothermal"]["levels"]))
+    idx = {lbl: i for i, lbl in enumerate(scan["point_labels"])}
     rs = data["Cys"]
+    cols = [idx[f"RES|Cys|{r.t_min:g}"] for r in rs]
     y = np.log10([r.value for r in rs])
     cov = pdn.series_covariance([float(r.sigma) for r in rs], "c_over_c0", omega_dex=None, tau_dex=tau,
                                 legacy_tau_override=True)
     lf = math.log10(RES_FLOOR_ALT["Cys"])
-    lv0 = _old_unit(dec, carried, data, "R0", "Cys", RES_FLOOR_ALT, tau)["levels"]
-    deltas = np.array([0.0, *R0_CYS_PROBE_MM])
-    grid = np.vstack([lv0, *[np.log10(v) for v in R0_CYS_PROBE_MM.values()]])
-    spline = CubicSpline(deltas, grid, axis=0)
 
-    def plug(delta):
-        lv = spline(min(max(delta, 0.0), 1.5))
-        f, _ = pdn.legacy_floored_prediction(lv, lf)
-        return pdn.gaussian_log_density(y, f, cov)
+    def plug_of(lv):
+        return pdn.gaussian_log_density(y, pdn.legacy_floored_prediction(lv, lf)[0], cov)
 
-    # the probe at delta 0 (the record's levels) and +0.5: the reviewer's printed plug-in values
-    assert plug(0.0) == pytest.approx(-966.1, abs=0.2)
-    assert plug(0.5) == pytest.approx(-742.8, abs=2.0)
+    prior = stats.norm(0.0, sd)
+    on_grid = np.array([plug_of(lv[cols]) for lv in levels])
+    assert on_grid[int(np.argmin(np.abs(deltas)))] == pytest.approx(-966.1, abs=0.1)    # the review's delta-0 value
+    g_grid = on_grid + prior.logpdf(deltas)
+    coarse = float(np.max(g_grid) + math.log(np.trapezoid(np.exp(g_grid - np.max(g_grid)), deltas)))
+    assert coarse == pytest.approx(-746.0, abs=1.5)                    # the review's construction: "about -746"
+
+    spline = CubicSpline(deltas, levels[:, cols], axis=0)
 
     def g(points):
         d = np.asarray(points, dtype=float)[:, 0]
-        return np.array([plug(x) for x in d]) + stats.norm(0.0, sd).logpdf(d)
+        return np.array([plug_of(spline(min(max(x, deltas[0]), deltas[-1]))) for x in d]) + prior.logpdf(d)
 
-    # the reference: a fine trapezoid over the probed range (delta < 0 adds < e^-200 of the peak)
-    xs = np.linspace(0.0, 1.5, 30001)
+    xs = np.linspace(deltas[0], deltas[-1], 48001)
     gs = g(xs[:, None])
     ref = float(np.max(gs) + math.log(np.trapezoid(np.exp(gs - np.max(gs)), xs)))
-    assert ref == pytest.approx(-746.0, abs=1.5)                          # the review: "about -746"
-    # the integrand has a kink at its peak (the 50 min prediction crosses the 0.22 mM floor of the legacy form near
-    # delta 0.47), so the local inverse Hessian (sd ~ 0.002) is ~20x narrower than the integrand (~0.03 - 0.04):
-    mode = minimize_scalar(lambda d: -g([[d]])[0], bounds=(0.0, 1.5), method="bounded", options={"xatol": 1e-6}).x
+    assert ref == pytest.approx(-746.0, abs=1.5) and ref == pytest.approx(coarse, abs=1.5)
+    mode = minimize_scalar(lambda d: -g([[d]])[0], bounds=(0.0, 1.2), method="bounded", options={"xatol": 1e-6}).x
+    # the kink: the local inverse Hessian is far narrower than the integrand, and PSIS refuses that proposal
     h = 1e-3
     local = 1.0 / (-(g([[mode + h]])[0] - 2 * g([[mode]])[0] + g([[mode - h]])[0]) / h ** 2)
-    assert math.sqrt(local) < 0.005
+    assert math.sqrt(local) < 0.01
     rng = np.random.default_rng(746)
     x, lq = pdn.multivariate_t_draws([mode], [[local]], 2000, rng)
     narrow = pdn.importance_lppd(g(x), lq)
-    assert not narrow.accepted and narrow.k_hat >= pdn.K_HAT_MAX           # PSIS catches the too-narrow proposal
+    assert not narrow.accepted and narrow.k_hat >= pdn.K_HAT_MAX
     # a proposal as wide as the integrand is accepted and agrees with the reference
     x, lq = pdn.multivariate_t_draws([mode], [[0.05 ** 2]], 2000, rng)
     est = pdn.importance_lppd(g(x), lq)
@@ -443,7 +452,7 @@ def test_m1_exact_density_of_r0_cys_under_the_alternative_floor_is_about_minus_7
     assert quad.accepted and quad.lppd == pytest.approx(ref, abs=0.5)
     # the prior as proposal (an untuned IS) is not accepted either
     xp = rng.normal(0.0, sd, size=2000)[:, None]
-    assert not pdn.importance_lppd(g(xp), stats.norm(0.0, sd).logpdf(xp[:, 0])).accepted
+    assert not pdn.importance_lppd(g(xp), prior.logpdf(xp[:, 0])).accepted
     # the linearised value it replaces
     lin = _old_unit(dec, carried, data, "R0", "Cys", RES_FLOOR_ALT, tau)["linearised"]
     assert lin - ref > 500.0
