@@ -242,17 +242,18 @@ model) first; M1b(i) and M1c next, neither gating the other; M2 only in the join
 first phase (prereg EX-051, keying Hofmann 2000b; Strecker files only) runs in M1c's compute waits; A2 + H3 stays
 after M3 (the lanes are still being reshaped, more so now), its module contract is drafted early, and it ports the
 sulfur module last. The block grows by ~40 - 70 h; with M3 phase 1 in the waits, A2 + H3 slips by ~0 - 15 h only.
+Re-dated 2026-11-05 (evening): M3 phase 1 closed early (undecidable on disk) and every JAX lane but sulfur is already
+ported, so the M4 - M6 cases (no engine runs) and the network join move into November, M4 follows in late November,
+and the end moves from 02-05 to ~01-23. No holidays are assumed; treat 02-05 as the buffer.
 
 | dates | W1 yardstick | W2 chemistry | W3 engine | W4 uncertainty | W5 product | W6 owner |
 |---|---|---|---|---|---|---|
-| 11-02 - 11-08 | benchmark scorer (done); H0 (done, applied); profile (done) | M1 run (EX-061); supply screen; M1.1; Cao input audit; M1c case items 1 - 5 frozen; M1b and M2 preregs drafted | JAX bake-off (done) | -- | -- | send requests, incl. designed thiol-supply data |
-| 11-09 - 11-20 | -- | M1b(i) (timeboxed); M1c screen, build and fit; M0 inventory and its checks (every leading candidate) in the compute waits (M3 phase 1 closed 11-05, undecidable on disk) | A2 contract v2 (from the bake-off) and the lipid module ported (pH-free, untouched by M1 - M3; done 2026-11-05, PR #58); then the trunk and acrylamide modules (no running step edits them; M3 phase 2 will edit the trunk's Strecker steps later, and must then edit the JAX trunk too) | -- | -- | -- |
-| 11-21 - 12-05 | -- | joint M1c + M2 (+ M1b(ii)) refit; a case for any shared structure M0 nominates (sec. 7 items 1 - 5 first) | -- | H1 spec (after M2) | W5.1 yeast extract (standalone) | -- |
-| 12-06 - 12-26 | -- | the cases for M4, M5, M6 written, ordered and shaped by M0's groups (sec. 7 items 1 - 5; no engine runs) | A2 + H3 joined into one network (all lanes ported; sulfur started 11-05) | H2 (the rest: NumPyro, simulation-based calibration, a wrong structure caught) on the next layer | W5.2 crust (standalone) | -- |
-| 12-27 - 01-02 | -- | M4 on the new network | -- | -- | W5.1 / 5.2 joined to the network | -- |
-| 01-03 - 01-09 | -- | M5 | -- | -- | W5.3 heme | -- |
-| 01-10 - 01-16 | -- | M6; joint refit | -- | -- | -- | -- |
-| 01-17 - 02-05 | benchmark re-scored (coverage first; descriptive, see W1) | -- | -- | H4 posterior (sulfur lane, then the others) | W5.4 lever table | -- |
+| 11-02 - 11-08 | benchmark scorer (done); H0 (done, applied); profile (done) | M1 run (EX-061); supply screen; M1.1; Cao input audit; M1c case items 1 - 5 frozen; M1b and M2 preregs drafted; M3 phase 1 built, power-checked and closed (undecidable on disk, 11-05); M0 inventory started | JAX bake-off; contract v2.2; lipid, trunk + acrylamide, trunk lane and network infrastructure ported (PRs #58, #65, #71, #74); sulfur port started (11-05) | -- | -- | -- (W6 last) |
+| 11-09 - 11-20 | -- | M1b(i) (timeboxed); M1c screen, build and fit; M0's checks (every leading candidate) in the compute waits; the cases for M4, M5, M6 written, ordered and shaped by M0's groups (sec. 7 items 1 - 5; no engine runs) | sulfur port lands (parity test in CI); the lanes joined into one network with exact gradients | H2's rest (NumPyro, simulation-based calibration, a wrong structure caught) on the network | -- | -- |
+| 11-21 - 12-05 | -- | joint M1c + M2 (+ M1b(ii)) refit; M4 on the network (its build starts once M1c's build has merged: both touch the sulfur steps); a case for any shared structure M0 nominates | -- | H1 spec (after M2) | W5.1 yeast extract (standalone) | -- |
+| 12-06 - 12-19 | -- | M5; M6 | -- | -- | W5.2 crust (standalone); W5.1 / 5.2 joined to the network | -- |
+| 12-20 - 01-09 | -- | joint refit | -- | H4 posterior (sulfur lane first) | W5.3 heme | -- |
+| 01-10 - 01-23 | benchmark re-scored (coverage first; descriptive, see W1) | -- | -- | H4 (the other lanes) | W5.4 lever table | -- |
 
 Hard dependencies: M1.0 before M1's combinations; M1.1 before any thiol refit; M1c's structure, M2 and M1b(ii)'s
 chosen rival in one refit (same rows; errors that stack are judged together, CF-107), never M2 at instant supply;
@@ -320,13 +321,13 @@ writer per shared file (registers, ledger, atlas); stage files by explicit path;
 
 | date | done means | P |
 |---|---|---|
-| 11-07 | benchmark scored; H0 scored and applied; profile done (re-dated 2026-11-05: done but for H0's application) | ~0.8 |
+| 11-07 | benchmark scored; H0 scored and applied; profile done (re-dated 2026-11-05: done but for H0's application). M3 phase 1 reached its verdict early, on 11-05: undecidable on disk, moved to W6 | ~0.8 |
+| 11-20 | M0's checks run on every leading candidate, the misfits they leave grouped by shared structure; the M4 - M6 cases frozen (items 1 - 5); the one network runs with exact gradients, sulfur included (rates to 1e-12, trajectories to 1e-6 dex of today's lanes) | ~0.5 |
 | 12-05 | M1c, M1b(i) and M2 have verdicts (or M1c's stop rule fired); H1 spec | ~0.45 |
-| 12-08 | M3 has a verdict (reached 2026-11-05: phase 1 undecidable on disk, moved to W6); M0's checks run on every leading candidate, with the misfits they leave grouped by shared structure; H2 done | ~0.6 |
-| 12-26 | the one network runs with exact gradients (rates to 1e-12, trajectories to 1e-6 dex of today's lanes) | ~0.35 |
-| 01-02 | M4 has a verdict | ~0.3 |
-| 01-16 | M5, M6 and the joint refit done | ~0.25 |
-| 02-05 | a posterior on the sulfur lane; the first lever table (Laplace intervals if H4 is not done); the held-out benchmark re-scored, coverage reported first (was 01-22; moved 2026-11-05 by the M1 re-sequence) | ~0.3 |
+| 12-12 | M4 has a verdict | ~0.35 |
+| 12-19 | M5 and M6 done | ~0.3 |
+| 01-09 | the joint refit done | ~0.3 |
+| 01-23 | a posterior on the sulfur lane; the first lever table (Laplace intervals if H4 is not done); the held-out benchmark re-scored, coverage reported first (was 02-05; moved earlier 2026-11-05 evening) | ~0.3 |
 
 Other odds (lowered 2026-11-04: six earlier sink structures were refused, B11 - B27; lowered again 2026-11-05: no
 supply structure on disk passes the screen, and P ~0.6 that no unseen decisive supply data exist): M1c + M2 noticeably

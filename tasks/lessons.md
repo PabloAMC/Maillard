@@ -508,3 +508,10 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 ## 2026-11-05 — "Out of scope" must cite the envelope rule, or say it is a judgement
 - **Pattern:** an extraction agent called Bork 2024 / 2024b "outside the model's scope", and I relayed it. Asked why, the engine's envelope said otherwise for half the data: the phenolic arms are refused by rule (reactants not in any lane), but the single-compound dry controls are engine species that no rule refuses (the trunk's a_w term has no window). They were outside the validated domain, and are W5.2 (crust) data.
 - **Rule:** a scope claim names its basis: the `declare_envelope` rule that refuses it, or "judgement: outside the validated domain because …". Never drop data as "out of scope" without naming the plan step it could serve.
+
+## 2026-11-05 — Never stop your own job with `pkill -f "<pattern>"` while other agents run
+- **What happened:** I stopped my gate run with `pkill -f "docker_maillard.sh gates"`. Five agents shared the machine
+  and several run the same command, so the pattern could kill theirs too; I had to warn each one to rerun.
+- **Rule:** stop a job by its own handle: its PID (`$!` at launch, or the PID the harness reports), or the harness's
+  stop tool for a background task. Never by a command pattern that other agents' jobs can share. A killed run
+  (exit 143 / 144) is neither a pass nor a failure: rerun it.
