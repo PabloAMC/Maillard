@@ -386,11 +386,11 @@
       "verdict": "do-not-use"
     },
     {
-      "basis": "shipped by D2 branch (i), with the owner's note: no evidence of beating a null, and in one set the null is better",
+      "basis": "the worse of H0's two sets governs (as for omega): in the reset set the null is shown better (D3: below \u22122 SE); shipped by D2 branch (i) with this label until evidence (M1c / M2, H1) earns better",
       "claim_type": "Within-study ratio, rank or shape of one thiol-lane compound",
       "evidence": "H0's relative branch, engine minus a chemistry-free null: warm -0.26 nats/row (not shown better); reset_where_leak_prone -0.20 nats/row (the null is better) -- in the reset set THE NULL IS BETTER (D3: below -2 SE, sign-flip p <= 2/32); omega 0.42 + noise 0.10 dex per arm in the interval",
       "system_class": "two conditions of one study (one laboratory)",
-      "verdict": "caution"
+      "verdict": "do-not-use"
     },
     {
       "basis": "results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty",
