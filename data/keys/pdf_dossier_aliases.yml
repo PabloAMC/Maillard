@@ -82,6 +82,12 @@ aliases:
   # (identified by title and content). bork2023_supplementary.zip is an archive, which the gate does not list.
   bork2022_supplementary: bork2022b          # SI of Food Chem 395:133592 (exact title on its first line)
   bork2022b_supplementary: bork2022          # SI of Food Chem 380:131852 (pre-publication title; NF / DA, NF / MGO pots)
+  # downloaded 2026-11-05 (citation sweep), read the same day into each dossier's "Supplementary material" section;
+  # identified by title and authors on the first page (none crossed)
+  bork2024_supplementary: bork2024           # SI of Food Chem 449:139189 (Figs. S-1 to S-8, Table S-1)
+  bork2024b_supplementary: bork2024b         # SI of JAFC 72:1708, 10.1021/acs.jafc.3c07168 (pre-publication title)
+  kanzler2026_supplementary: kanzler2026     # SI of Food Chem 529:151175 (.docx; Figs. S1-S6, Tables S1-S6)
+  Wietstock2016_supplementary: wietstock2016 # SI of JAFC 64:8035 (capital W on disk; PDF metadata title belongs to another manuscript)
 
 triaged:
   yang2011: "read 2026-10-09 and set aside: thiamine is held fixed in every run, so it cannot inform the thiamine row (tasks/data_restructure_plan.md, thiamine-row reading)"
