@@ -1,5 +1,5 @@
 # Systematic Literature Review — Family 2: Lipid oxidation and carbonylic crosstalk
-**Last updated:** 2026-10-27  
+**Last updated:** 2026-11-05  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering lipid oxidation and carbonylic crosstalk.  
 **Strategic Posture:** `immediate_expansion_lane`  
 **Runtime Concept:** `lipid_crosstalk_lane`  
@@ -114,45 +114,6 @@
 - A full oxidation mechanism
 
 **Next Action:** Use as a lipid off-note guardrail in bounded runtime and reporting lanes.
-
----
-
-### Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591
-- **DOI:** [10.1007/s11746-013-2401-2](https://doi.org/10.1007/s11746-013-2401-2)
-- **Matrix Family:** coconut_oil_co_matrix
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `journal_volume_page` | `62:9666` |
-| `delta_decalactone_oav_reported` | `True` |
-| `comparative_to_pufa_oils` | `True` |
-
-**What it supports:**
-- Thermal-stability context for coconut-oil-rich co-matrices against PUFA-rich oils
-- Bounded delta-decalactone support for lipid-rich aroma interpretation
-
-**What it does not support:**
-- Exact plant-matrix volatile concentration closure
-- A full lipid degradation mechanism outside coconut-oil-like systems
-
-**Next Action:** Use as a coconut-oil co-matrix thermal-profile calibration so lipid-rich formulations are not interpreted with PUFA-only oxidation context.
 
 ---
 
@@ -463,13 +424,12 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 2
 
-Total papers analyzed: **11** (Benchmark-eligible: **1**, Calibration references: **6**, Rejected: **4**)
+Total papers analyzed: **10** (Benchmark-eligible: **1**, Calibration references: **5**, Rejected: **4**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Trikusuma et al. (2020) | 6/8 | ✅ Eligible | pea_uht_beverage |
 | Lin, Fay, Welti & Blank (2001), Lipids 36:749 | 3/8 | ⚠️ Calibration | lipid_rich_model_system |
-| Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591 | 3/8 | ⚠️ Calibration | coconut_oil_co_matrix |
 | Belitz, Grosch & Schieberle (2009), Food Chemistry, 4th rev. ed., Springer (aroma-threshold tables, Ch. 5) | 3/8 | ⚠️ Calibration | free_model_system |
 | Frankel (1983), Prog. Lipid Res. 22:1 | 2/8 | ❌ Rejected | free_model_system |
 | Farmer & Patterson (1991), Food Chemistry 40:201 | 2/8 | ❌ Rejected | free_model_system |
@@ -488,7 +448,6 @@ Total papers analyzed: **11** (Benchmark-eligible: **1**, Calibration references
 
 ### CALIBRATION (Score 3-5)
 - `Lin, Fay, Welti & Blank (2001), Lipids 36:749` (Score: 3/8)
-- `Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591` (Score: 3/8)
 - `Belitz, Grosch & Schieberle (2009), Food Chemistry, 4th rev. ed., Springer (aroma-threshold tables, Ch. 5)` (Score: 3/8)
 - `Tan, Che Man, Selamat & Yusoff (2001), J. Am. Oil Chem. Soc. 78:1133` (Score: 3/8)
 - `Kavran, Yucel, Bakkalbasi & Gulec (2024), Grasas y Aceites 75:e546` (Score: 3/8)
@@ -508,4 +467,4 @@ Total papers analyzed: **11** (Benchmark-eligible: **1**, Calibration references
 2. **Dynamic Calibration Offsets:** Apply the identified `immediate_expansion_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-11-05 using Maillard Ingestion Pipeline.*
