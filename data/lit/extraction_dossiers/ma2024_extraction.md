@@ -62,3 +62,15 @@ amount *formed* in the 130 °C arm is ≈112 µg/kg, not 150. Declaring the 38 a
 cure Trikusuma took in B35, but here it is a figure read on a FIT row with a frozen B3 report, and a
 25 % change in the formed amount on a row that is 4 247× low moves no verdict. Recorded here and in
 `docs/guides/EXPERIMENTS.md`; not applied.
+
+## 5. M0 data corrections, batch 1 (2026-11-06; CF-131)
+
+The bundle's charge {SPI 50, L-Asn 42, D-Glc 42 mM}, pH 6.0 and a_w 0.35 are **not in this paper** (first reader:
+`m0_integrity_batch1_other_lanes`, MF-39; second reader 2026-11-06 against the PDF). Secs. 3.1-3.2 name soy protein
+isolate and corn starch (9:1 w/w) as the only extrusion materials -- no asparagine or glucose is added -- and Table 1
+prints water, protein and total amino acids only. "Water activity" occurs nowhere; the only pH values are an amino-acid
+hydrolysate's (6-8) and an assay buffer's (7). No specific mechanical energy is printed either (the bundle's 250 kJ/kg).
+Applied: the charge and a_w withdrawn (nulls with notes, `value_withdrawal`), the acrylamide row REFUSED
+(`scoring_refused`: "precursor charge not printed"). The pH stays as a number only because the schema requires one
+(`ph_note`). Fig. 2D re-read: 130 C bar ~150 ug/kg, kept as the datum. The frozen B3 report still carries the row
+(CF-131, open).

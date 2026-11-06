@@ -36,31 +36,47 @@
   "precursor_concentration_provenance": {
     "status": "STATED_IN_SOURCE",
     "derivation": "10% (w/v) glucose = 100 g/L / 180.16 g/mol = 555.1 mM. Rounded to 555.0 mM.",
-    "residual_caveats": "pH 4.36 is the value MEASURED after autoclaving (Table 3), not before; the paper reports 4.98 for the non-autoclaved solution. The post-autoclave value is used because it is the one the paper attaches to the scored run, and this is stated rather than silently chosen."
+    "residual_caveats": "2026-11-06 (CF-128): conditions.ph is now the START pH, 4.98 (Table 3, non-autoclaved, room temperature); the 4.36 used until today is the END pH after autoclaving and cooling and is kept as conditions.ph_end_measured. Glucose: 'glucose monohydrate' was used for the 10 % (w/v) solution; if the 10 % refers to the monohydrate the charge is 505 mM, not 555 (-0.04 dex), not changed. ||| PRIOR CAVEAT, SUPERSEDED: pH 4.36 is the value MEASURED after autoclaving (Table 3), not before; the paper reports 4.98 for the non-autoclaved solution. The post-autoclave value is used because it is the one the paper attaches to the scored run, and this is stated rather than silently chosen."
   },
   "conditions": {
     "temp_C": 121.0,
-    "ph": 4.36,
+    "ph": 4.98,
+    "ph_basis": "initial",
+    "ph_end_measured": {
+      "value": 4.36,
+      "scale": "bench_cooled",
+      "anchor": "Leitzen 2021 Table 3, '10% PP Bottle (Scheme A)', 121 C row: '4.36 +/- 0.0'; sec. 2.2: the solutions 'were all cooled down to room temperature after heat sterilization ... and then the pH of these solutions was determined at room temperature'. Recorded, not read by the engine.",
+      "corrected": "2026-11-06 (M0 data corrections, batch 1; CF-128): this END pH was keyed as conditions.ph (the start) with initial_ph_scale at_temperature until today."
+    },
+    "ph_note": "4.98 is the NON-AUTOCLAVED 10 % glucose solution, measured at room temperature (Table 3, 'non-autoclaved (room temperature)' row: '4.98 +/- 0.0'): the start of the pot, bench_cooled scale.",
     "water_activity": 0.99,
     "time_min": 18.0,
+    "time_min_note": "2026-11-06 (CF-128): the 18 min is F0, not an isothermal hold. Sec. 4.2.2: 'The total F0 value of a process (unit: minutes) takes into account the heating and cooling phases of the cycle' (z = 10 C, reference 121 C); scheme B adds the heating and cooling F0 to the hold, so the real scheme-A cycle at 121 C is a heat-up, a hold shorter than 18 min and a cool-down whose profile is not printed. The bundle still runs 18 min isothermal (THERMAL_HISTORY isothermal); a declared cycle band is CK-03 step 2. The content_verification note that 'at 121 degC F0 is numerically the hold time' is superseded.",
     "buffer": {
       "species": "buffer_unknown",
       "concentration_M": null,
-      "initial_ph_scale": "at_temperature",
+      "initial_ph_scale": "bench_cooled",
       "provenance_class": "unknown",
-      "provenance_note": "WAVE B34 (2026-09-11): THE SOURCE IS ON DISK and the previous note saying otherwise was wrong. Leitzen et al. 2021 (Pharmaceuticals 14:1121, data/articles/Leitzen2021.pdf), Methods: 10 % (w/v) glucose in water in PP bottles, autoclaved; NO BUFFER is added, and the paper measures the pH itself -- 4.98 before autoclaving and 4.4-5.2 after (scheme A). This bundle's conditions.ph of 4.36 is BELOW the range the paper prints and is left unedited, because changing an executable condition is outside the licence an extraction correction carries; it is reported here instead. ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD -- its claim that the source is not on disk was false when written and is false now: Steinhagen et al. 2021, Pharmaceuticals 14(11):1121. SOURCE PAPER NOT ON DISK and the repo carries no verbatim statement of the medium beyond '10% (w/v) glucose solution ... autoclaved at 111, 116, and 121 degC'. An unbuffered infusion solution is the LIKELY reading and it is exactly the reading this field refuses to record, because likely is not stated. ph_disagreement, AND IT IS THE ONE THAT BRE",
-      "ph_disagreement": "conditions.ph = 4.36 sits below Leitzen's printed 4.4-5.2 post-autoclave range (4.98 before). Reported, not edited."
+      "provenance_note": "M0 DATA CORRECTIONS, BATCH 1 (2026-11-06; CF-128; second reader against the PDF): Leitzen et al. 2021 (Pharmaceuticals 14:1121, dossier leitzen2021_extraction.md), sec. 4.2.1: 10 % (w/v) glucose monohydrate in double-distilled water, sterile-filtered into the PP bottles; NO BUFFER is added. Table 3 prints the pH of the 10 % solution as 4.98 non-autoclaved and, after scheme-A autoclaving and cooling to room temperature, 5.17 / 4.67 / 4.36 at 111 / 116 / 121 C. conditions.ph is now the start, 4.98 (bench_cooled); 4.36 is recorded as conditions.ph_end_measured. The superseded note below said the paper prints '4.4-5.2' after autoclaving and that 4.36 lies below it: Table 3 prints no such range and does print 4.36. ||| PRIOR NOTE, SUPERSEDED 2026-11-06 AND RETAINED AS THE AUDIT RECORD: WAVE B34 (2026-09-11): THE SOURCE IS ON DISK and the previous note saying otherwise was wrong. Leitzen et al. 2021 (Pharmaceuticals 14:1121, data/articles/Leitzen2021.pdf), Methods: 10 % (w/v) glucose in water in PP bottles, autoclaved; NO BUFFER is added, and the paper measures the pH itself -- 4.98 before autoclaving and 4.4-5.2 after (scheme A). This bundle's conditions.ph of 4.36 is BELOW the range the paper prints and is left unedited, because changing an executable condition is outside the licence an extraction correction carries; it is reported here instead. ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD -- its claim that the source is not on disk was false when written and is false now: Steinhagen et al. 2021, Pharmaceuticals 14(11):1121. SOURCE PAPER NOT ON DISK and the repo carries no verbatim statement of the medium beyond '10% (w/v) glucose solution ... autoclaved at 111, 116, and 121 degC'. An unbuffered infusion solution is the LIKELY reading and it is exactly the reading this field refuses to record, because likely is not stated. ph_disagreement, AND IT IS THE ONE THAT BRE",
+      "ph_disagreement": "Resolved 2026-11-06 (CF-128): 4.36 is Table 3's measured END pH (scheme A, 121 C, cooled); the start is 4.98. The earlier text ('4.36 sits below Leitzen's printed 4.4-5.2 post-autoclave range') was wrong: no such range is printed."
     },
     "vessel": {
-      "fill_mL": null,
-      "vessel_mL": null,
-      "closure": "not stated (autoclaved)",
-      "atmosphere": "unstated",
-      "water_source": "unstated",
+      "fill_mL": 200.0,
+      "vessel_mL": 225.0,
+      "closure": "PP bottle (Kautex), closed, autoclaved",
+      "atmosphere": "air_by_default",
+      "water_source": "distilled",
       "stirred": null,
-      "provenance_class": "repo_verbatim_methods_quote",
-      "provenance_note": "WAVE B35 (2026-09-11): THE SOURCE IS ON DISK -- Leitzen et al. 2021 (Pharmaceuticals 14:1121), data/articles/Leitzen2021.pdf, dossier leitzen2021_extraction.md. ||| PRIOR NOTE, SUPERSEDED AND RETAINED AS THE AUDIT RECORD: Steinhagen et al. 2021, SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification.quoted_method: 'Glucose solutions (10%, w/v) were autoclaved at 111 degC, 116 degC, and 121 degC for different durations.' The quotation gives neither the vessel, the fill nor the closure; autoclaving implies a vented or loosely closed container but that is an inference, so everything is unstated."
-    }
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "M0 DATA CORRECTIONS, BATCH 1 (2026-11-06; CF-128): Leitzen et al. 2021, sec. 4.2.1, read from the PDF: 'The final containers to be sterilized were 225 mL PP bottles (Kautex), each filled with 200 mL glucose solution'; 'Double distilled water and glucose monohydrate were used'. 25 mL of headspace; no gas is named, so the atmosphere is air by default (about 0.21 mmol O2, ~1.1 mM if all of it dissolved). ||| PRIOR NOTE, SUPERSEDED AND RETAINED AS THE AUDIT RECORD: WAVE B35 (2026-09-11): THE SOURCE IS ON DISK -- Leitzen et al. 2021 (Pharmaceuticals 14:1121), data/articles/Leitzen2021.pdf, dossier leitzen2021_extraction.md. ||| PRIOR NOTE, SUPERSEDED AND RETAINED AS THE AUDIT RECORD: Steinhagen et al. 2021, SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification.quoted_method: 'Glucose solutions (10%, w/v) were autoclaved at 111 degC, 116 degC, and 121 degC for different durations.' The quotation gives neither the vessel, the fill nor the closure; autoclaving implies a vented or loosely closed container but that is an inference, so everything is unstated."
+    },
+    "carried_volatiles": {
+      "glyoxal": 1000.0,
+      "methylglyoxal": 900.0,
+      "glucosone": 100.0,
+      "5-Hydroxymethylfurfural (HMF)": 100.0
+    },
+    "carried_volatiles_anchor": "Leitzen 2021 Table 6, 'Concentrations of GDPs in 10% (w/v) glucose solutions in PP bottles that were not heat sterilized (reference value)', n = 3, ug/mL: GO 1.0 +/- 0.5, MGO 0.9 +/- 0.1, 2-KDG (glucosone) 0.1 +/- 0.0, 5-HMF 0.1 +/- 0.0; 3-DG/3-DGal and 3,4-DGE n.d. (LOD < 0.078 ug/mL), not declared. Same solution, same PP bottles, same units as the scored Table 4 row (1 ug/mL = 1000 ug/L). Added 2026-11-06 (CF-128)."
   },
   "metadata": {
     "tier": "REFERENCE",

@@ -951,8 +951,29 @@ _B45_TAP_WATER = (
 )
 
 
+#: M0 data corrections, batch 1 (2026-11-06; CF-128): Leitzen 2021's pH was keyed as the END pH (Table 3, 4.36) with
+#: an at-temperature scale; the bundle now starts at the printed 4.98 (bench_cooled), and the B34 note that claimed a
+#: printed '4.4-5.2' range is superseded. Carried here so that ``--check`` reproduces the bundle.
+_M0_BATCH1_STEINHAGEN = "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021"
+_M0_BATCH1_PREFIX = (
+    "M0 DATA CORRECTIONS, BATCH 1 (2026-11-06; CF-128; second reader against the PDF): Leitzen et al. 2021 "
+    "(Pharmaceuticals 14:1121, dossier leitzen2021_extraction.md), sec. 4.2.1: 10 % (w/v) glucose monohydrate in "
+    "double-distilled water, sterile-filtered into the PP bottles; NO BUFFER is added. Table 3 prints the pH of the "
+    "10 % solution as 4.98 non-autoclaved and, after scheme-A autoclaving and cooling to room temperature, 5.17 / "
+    "4.67 / 4.36 at 111 / 116 / 121 C. conditions.ph is now the start, 4.98 (bench_cooled); 4.36 is recorded as "
+    "conditions.ph_end_measured. The superseded note below said the paper prints '4.4-5.2' after autoclaving and "
+    "that 4.36 lies below it: Table 3 prints no such range and does print 4.36. ||| PRIOR NOTE, SUPERSEDED "
+    "2026-11-06 AND RETAINED AS THE AUDIT RECORD: "
+)
+_M0_BATCH1_DISAGREEMENT = (
+    "Resolved 2026-11-06 (CF-128): 4.36 is Table 3's measured END pH (scheme A, 121 C, cooled); the start is 4.98. "
+    "The earlier text ('4.36 sits below Leitzen's printed 4.4-5.2 post-autoclave range') was wrong: no such range "
+    "is printed."
+)
+
+
 def current_record(key: str, record: Dict[str, Any]) -> Dict[str, Any]:
-    """The buffer block a bundle must carry: base record, in-place edits, the B36 reading, the B45 clause."""
+    """The buffer block a bundle must carry: base record, in-place edits, the B36 reading, the B45 clause, M0 batch 1."""
     out = dict(record)
     out.update(_EDITED_IN_PLACE.get(key, {}))
     hit = _B36_ON_DISK.get(key)
@@ -962,6 +983,10 @@ def current_record(key: str, record: Dict[str, Any]) -> Dict[str, Any]:
         out["provenance_note"] = prefix + _B36_SUPERSEDED + out["provenance_note"]
     if key in _B45_TAP_WATER:
         out["provenance_note"] = out["provenance_note"] + _B45_TAP_WATER_FLOOR
+    if key == _M0_BATCH1_STEINHAGEN:
+        out["initial_ph_scale"] = "bench_cooled"
+        out["provenance_note"] = _M0_BATCH1_PREFIX + out["provenance_note"]
+        out["ph_disagreement"] = _M0_BATCH1_DISAGREEMENT
     return out
 
 
