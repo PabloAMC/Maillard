@@ -176,10 +176,12 @@ def _block_module(name: str, reactions, parameters, cfg, *, exclude: Sequence[st
     params = block.coordinates()
     bands, basis = block.bands_and_basis()
     pot_inputs: Tuple[str, ...] = ()
+    breaks: Dict[str, Tuple[float, ...]] = {}
     if factor_rows is not None:
         from src.kinetic_core import parameters_pyrazine as pz
 
         knot, ref = float(pz.PYRAZINE_PH_KNOT), float(pz.PYRAZINE_REFERENCE_PH)
+        breaks = {"ph_label": (knot,)}          # B18's two-slope term kinks at its knot
         rows = jnp.asarray(factor_rows)
         params.update(dict(zip(SLOPE_COORDINATES, (float(s) for s in slopes))))
         bands.update({c: None for c in SLOPE_COORDINATES})
@@ -214,7 +216,7 @@ def _block_module(name: str, reactions, parameters, cfg, *, exclude: Sequence[st
         stoichiometry=stoich, reactants=reactants, params=params, bands=bands, basis=basis,
         rate_constants=rate_constants, observables=observables_for(species), requires=("trunk",),
         needs_ph=False, config_digest=digest, notes=tuple(notes) + (f"zero-k (linear) steps: {block.linear}",),
-        pot_inputs=pot_inputs)
+        pot_inputs=pot_inputs, breakpoints=breaks)
 
 
 def build(cfg=None) -> Module:

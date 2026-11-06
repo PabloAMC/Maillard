@@ -9,7 +9,11 @@ Two layers, side by side:
   modules: ``lipid.py`` (the lipid lane, the first module; 2026-11-05; results/validation/jax_lipid_module.{json,md}),
   ``trunk.py`` (``network.REACTIONS``, the trunk the acrylamide lane runs, and the trunk lane's declared terms on it)
   and ``acrylamide.py`` (the acrylamide block and its condition terms; composed after the trunk it is the acrylamide
-  lane; 2026-11-05; results/validation/jax_trunk_acrylamide_module.{json,md}).
+  lane; 2026-11-05; results/validation/jax_trunk_acrylamide_module.{json,md}), ``trunk_lane.py`` (the trunk LANE's
+  seven blocks). The network infrastructure (contract v2.2; 2026-11-05; results/validation/jax_network_infra.{json,md}):
+  ``forcing.py`` (forced inputs: measured pH / temperature / a_w / species courses), ``fit.py`` (the fit driver:
+  least squares on the exact Jacobian) and ``densities.py`` (per-draw predictions for M1.1's predictive densities);
+  ``network.compose`` carries the declared-competition and titratable-table hooks.
 * the sulfur-lane BAKE-OFF port (STATUS_AND_PLAN W4 step H2, pulled forward; 2026-11-04), ``lane.py`` / ``model.py``:
   the lane's 62 species and 132 reactions, its rate laws and pH factors, and its inline charge balance (in-situ pH
   and ionic strength at the reaction temperature, and the cooled 25 C label pH the measured pH tables read), with the

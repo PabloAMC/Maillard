@@ -229,6 +229,7 @@ def build(cfg=None, *, lane: str = "acrylamide") -> Module:
     bands, basis = block.bands_and_basis()
     notes: List[str] = [f"lane context: {lane}"]
     pot_inputs: Tuple[str, ...] = ()
+    breaks: Dict[str, Tuple[float, ...]] = {}
     n_par = len(block.keys)
     if lane == "trunk":
         exits = {k: v for k, v in values["exit_ph"].items()} if values["exit_term"] else {}
@@ -256,6 +257,8 @@ def build(cfg=None, *, lane: str = "acrylamide") -> Module:
             basis[f"ph_exponent_exit:{e}"] = f"trunk.three_deoxy_exit_ph ({source[:70]})"
         ref_ph, ref_aw, floor = float(tc.REFERENCE_PH), float(tc.REFERENCE_AW), float(tc.AW_TABLE_FLOOR)
         pot_inputs = ("ph_label", "aw")
+        # the a_w multiplier's kinks: the table's knots, its floor and the reference (1 above it)
+        breaks = {"aw": tuple(sorted({float(a) for a in aw_table} | {floor, ref_aw}))}
         notes += [f"trunk_conditions: a_w on {tc.AW_STEPS}, pH on {tc.PH_STEPS}, exit terms on {exit_keys}",
                   "pH mode prescribed (the declared pH, constant over the programme)"]
 
@@ -287,7 +290,7 @@ def build(cfg=None, *, lane: str = "acrylamide") -> Module:
         name=NAME, species=species, elements=element_table(species), reactions=tuple(r.key for r in reactions),
         stoichiometry=stoich, reactants=reactants, params=params, bands=bands, basis=basis,
         rate_constants=rate_constants, observables=observables_for(species), requires=(), needs_ph=False,
-        config_digest=values["digest"], notes=tuple(notes), pot_inputs=pot_inputs)
+        config_digest=values["digest"], notes=tuple(notes), pot_inputs=pot_inputs, breakpoints=breaks)
 
 
 def theta_from_parameters(module: Module, parameters: Mapping[str, Any]) -> Dict[str, float]:

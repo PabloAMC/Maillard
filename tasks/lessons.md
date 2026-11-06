@@ -495,23 +495,25 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 ## 2026-11-05 — A finite-difference check needs a step in the coordinate's own scale
 - **Pattern:** the JAX trunk lane's own-FD check of the Jacobian failed (0.99, then 7.4 relative) on the LINEAR `k_ref:` coordinates of the unshipped methionine steps. I first blamed a clipping kink at k = 0 and spent a 35-min rerun on a one-sided difference; the real cause was the step: 1e-5 L/(mmol min) on k_go_met is ~30x glycine's own Strecker constant, so the difference was nowhere near linear. Scaled to the column (h / max |J|) it matched to 1e-9.
 - **Rule:** before rerunning a slow check on a hypothesis, test the hypothesis on the failing columns alone (a 1-min scratch run). A coordinate with no natural unit (linear rate constants, shares at a bound) gets a step scaled to its column or to a sibling constant, never a fixed absolute step.
+
+## 2026-11-05 — A parameter vector stored as a JSON dict comes back in sorted order; a staircase check needs a hold at its end
+- **Pattern (order):** the network-infrastructure reference stored the engine's optimum as `Fit.as_dict` (a dict keyed by coordinate) and wrote it with `json.dumps(sort_keys=True)`; the builder read it back with `list(d.values())`, i.e. in ALPHABETICAL order, and would have compared the JAX optimum against a permuted engine vector. Caught by eye on the printed dict before the comparison ran.
+- **Rule:** a vector stored as a dict is read back BY NAME, in the order of the problem's own key list (`[d[k] for k in keys]`), never by `.values()`.
+- **Pattern (convergence):** a linear pH course against midpoint staircases converged at first order (ratios 2.0 - 2.5), not the second order the rule should give. The cause was not the driver: at the end of a RAMP the quasi-steady pools (1-DG, AF) track the current rate constants, and a staircase's last value lies half a step off the course. With a 10-min hold at the end the ratios went to 4.
+- **Rule:** a convergence check of a time discretisation compares at a point where the fast pools have relaxed (end on a hold), or compares only slow, cumulative species; name which.
 ## 2026-11-05 — Generated READMEs go stale when main moves under an open PR
 - **Pattern:** two PRs (#60, #63) failed their unit tests on `data/README.md` / `results/README.md` being stale. CI tests the PR merged into main; other PRs had merged new dossiers and results files meanwhile, and `data/README.md` counts committed files, so regenerating it before the commit that adds them leaves it one step behind.
 - **Rule:** last step before pushing any branch that touches `data/`, `results/` or the registries: merge `origin/main`, regenerate `build_paper_registry.py`, `build_data_readme.py` and `build_results_readme.py`, commit, then run each with `--check` (they must print "current"). Re-do it whenever a sibling PR merges first.
 - **And when merging:** merge PRs that touch `data/` or `results/` one at a time. Before each merge, confirm the PR branch contains the current `origin/main` (`git merge-base --is-ancestor origin/main origin/<branch>`); if not, update it and wait for CI. On 2026-11-05 #63 and #65 merged minutes apart, each regenerated without the other, and main itself went stale (fixed in #67). In shell commands, never put backticked text inside double quotes: the shell runs it.
-
 ## 2026-11-05 — Never write an author or file key that was not read from the record
 - **Pattern:** a side session named Lopez et al. 2019 "Zhou 2019" (and queued `zhou2019_mushroom.pdf`) from a title-only OpenAlex row; the PDF's first page shows Lopez, Kerley, Jenkinson, Luckett & Munafo.
 - **Rule:** author names and paper keys come from the authorship record (OpenAlex / Crossref authorships) or the PDF's first page, never from a title or memory. `openalex.py verify` (W1.4) checks every `papers.yml` entry.
-
 ## 2026-11-05 — Run a literature search against the question, not the topic
 - **Pattern:** Round 3 read Vauthey 2000 for mechanism, filed it as "microemulsion", and skipped it. A forward-citation sweep keyed to H0's question (a second laboratory's absolute MFT / FFT) found it as the best lead on disk for lifting H0's refusal.
 - **Rule:** a case's sweep is keyed to its own decisive criterion (sec. 7 item 2). A source skipped for one question gets re-screened for another; record the skip reason with the question it answered.
-
 ## 2026-11-05 — "Out of scope" must cite the envelope rule, or say it is a judgement
 - **Pattern:** an extraction agent called Bork 2024 / 2024b "outside the model's scope", and I relayed it. Asked why, the engine's envelope said otherwise for half the data: the phenolic arms are refused by rule (reactants not in any lane), but the single-compound dry controls are engine species that no rule refuses (the trunk's a_w term has no window). They were outside the validated domain, and are W5.2 (crust) data.
 - **Rule:** a scope claim names its basis: the `declare_envelope` rule that refuses it, or "judgement: outside the validated domain because …". Never drop data as "out of scope" without naming the plan step it could serve.
-
 ## 2026-11-05 — A "pending" citation must pass every gate that reads citations, not only its own loader
 - **What happened:** PR #79's record let citations to unmerged records through as `pending_records`, and its own
   loader accepted them. `dossier_coverage_gate` reads every dossier path cited anywhere and failed CI on three
@@ -525,7 +527,6 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** stop a job by its own handle: its PID (`$!` at launch, or the PID the harness reports), or the harness's
   stop tool for a background task. Never by a command pattern that other agents' jobs can share. A killed run
   (exit 143 / 144) is neither a pass nor a failure: rerun it.
-
 ## 2026-11-06 — Regenerate generated files only after the conflicts are staged
 - **What happened:**
   - On PR #77 I took `--theirs` for a conflicted `data_wishlist.json`, then regenerated `results/README.md` before `git add`.
@@ -536,11 +537,9 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
   2. `git add` each one; `git diff --name-only --diff-filter=U` must come back empty.
   3. Run the generators.
   4. Run their `--check`s.
-
 ## 2026-11-06 — Never redirect a bare `cat >>` without input
 - **What happened:** a stray `cat >> file` with no heredoc waited on stdin and hung the command.
 - **Rule:** every `cat >>` in a command needs its own heredoc or input file.
-
 ## 2026-11-06 — A job started with `&` inside a foreground call dies with it
 - **What happened:** I launched the records branch's regenerate-and-gates run with a trailing `&` in a normal Bash call. The harness ended the shell when the call returned, which killed the job after three steps. No notification came, so I found it only by reading the log.
 - **Rule:** start long jobs only with the tool's background mode (`run_in_background`), never with `&`.
