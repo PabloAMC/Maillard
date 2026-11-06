@@ -26,7 +26,7 @@ import jax.numpy as jnp
 import numpy as np
 
 from .fit import LOG_FLOOR, Observation
-from .network import Network, integrate, theta_from_vector, theta_vector
+from .network import Network, integrate, pot_arrays, pot_mode, theta_from_vector, theta_vector
 
 FAILED_POLICIES = ("refuse", "impossible")
 
@@ -38,7 +38,7 @@ class Predictor:
 
     def __init__(self, net: Network, pots: Sequence[Mapping[str, Any]], observations: Sequence[Observation],
                  keys: Sequence[Tuple[str, str]], *, theta=None, forcing=None, chunk: int = 512,
-                 rtol: float = 1e-8, atol: float = 1e-14, solver=None, max_steps: int = 100_000):
+                 rtol: float = 1e-8, atol: float = 1e-14, solver=None, max_steps: Optional[int] = None):
         self.net, self.pots, self.observations = net, list(pots), list(observations)
         self.keys = [tuple(k) for k in keys]
         where = {c: i for i, c in enumerate(net.coordinates)}
@@ -52,19 +52,27 @@ class Predictor:
         unknown = sorted({o.observable for o in self.observations} - set(table))
         if unknown:
             raise ValueError(f"unknown observables {unknown}")
+        if max_steps is None and forcing is not None:
+            max_steps = 100_000                     # integrate picks its own default (pH-free 1e5, inline pH 2e5)
         solve_kw = dict(rtol=rtol, atol=atol, solver=solver, max_steps=max_steps, throw=False)
 
-        def one(x, pot):
-            th = theta_from_vector(net, base.at[free].set(x))
-            if forcing is None:
-                run = integrate(net, th, pot, **solve_kw)
-            else:
-                from .forcing import integrate_forced
+        def batch_for(mode):
+            def one(x, pot):
+                th = theta_from_vector(net, base.at[free].set(x))
+                if forcing is None:
+                    run = integrate(net, th, pot, mode=mode, **solve_kw)
+                else:
+                    from .forcing import integrate_forced
 
-                run = integrate_forced(net, th, pot, forcing, **solve_kw)
-            return run.ys, jnp.any(run.failed)
+                    run = integrate_forced(net, th, pot, forcing, **solve_kw)
+                return run.ys, jnp.any(run.failed)
 
-        self._batch = jax.jit(jax.vmap(one, in_axes=(0, None)))
+            return jax.jit(jax.vmap(one, in_axes=(0, None)))
+
+        # (v2.3) an inline-pH pot's static mode is a compile key; its numeric arrays are the argument
+        self._modes = [pot_mode(net, p) for p in self.pots]
+        self._arrays = [pot_arrays(net, p) for p in self.pots]
+        self._batch = {mode: batch_for(mode) for mode in dict.fromkeys(self._modes)}
         # per pot: the rows it holds, evaluated on the (D, S, n) batch at once
         self._rows: Dict[int, List[Tuple[int, int, Callable, bool]]] = {}
         for i, o in enumerate(self.observations):
@@ -92,14 +100,14 @@ class Predictor:
         failed = np.zeros(d, dtype=bool)
         t0 = time.perf_counter()
         for p, rows in self._rows.items():
-            pot = {k: jnp.asarray(v, dtype=jnp.float64) for k, v in self.pots[p].items()}
+            pot, batch = self._arrays[p], self._batch[self._modes[p]]
             cols = [i for i, *_ in rows]
             for a in range(0, d, self.chunk):
                 block = draws[a: a + self.chunk]
                 n = block.shape[0]
                 if n < self.chunk and d > self.chunk:      # pad the last chunk: one compile per chunk size
                     block = np.concatenate([block, np.repeat(block[-1:], self.chunk - n, axis=0)])
-                ys, bad = self._batch(jnp.asarray(block), pot)
+                ys, bad = batch(jnp.asarray(block), pot)
                 values = np.asarray(self._obs[p](ys))[:n]
                 bad = np.asarray(bad)[:n]
                 out[a: a + n, cols] = values

@@ -34,7 +34,7 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-from .network import Network, integrate, theta_from_vector, theta_vector
+from .network import Network, integrate, pot_arrays, pot_mode, theta_from_vector, theta_vector
 
 #: coordinate kinds: the engine's (``fitting.THRESHOLDS`` / ``EXTRA_THRESHOLDS``) plus "linear" (a k_ref the engine
 #: carries at zero, ``ArrheniusBlock(allow_zero=True)``; bounded below by 0) and "share" (a fraction in [0, 1])
@@ -147,15 +147,19 @@ class Compiled:
         unknown = sorted({o.observable for o in problem.observations} - set(table))
         if unknown:
             raise ValueError(f"unknown observables {unknown}")
+        # (v2.3) an inline-pH pot carries static entries (its "dynamic" / "clamped" mode, node minutes): the solve
+        # takes its numeric arrays, and the mode is part of the compile key
+        arrays = [pot_arrays(net, p) for p in problem.pots]
+        modes = [pot_mode(net, p) for p in problem.pots]
         groups: Dict[Tuple, List[int]] = {}
-        for i, pot in enumerate(problem.pots):
-            groups.setdefault(_signature(pot) if problem.batch == "vmap" else (i,), []).append(i)
+        for i, pot in enumerate(arrays):
+            groups.setdefault((_signature(pot), modes[i]) if problem.batch == "vmap" else (i,), []).append(i)
         self.groups = list(groups.values())
+        self.modes = [modes[g[0]] for g in self.groups]
         if problem.batch == "vmap":
-            self.data = [_stack([problem.pots[i] for i in g]) for g in self.groups]
+            self.data = [_stack([arrays[i] for i in g]) for g in self.groups]
         else:
-            self.data = [{k: jnp.asarray(v, dtype=jnp.float64) for k, v in problem.pots[g[0]].items()}
-                         for g in self.groups]
+            self.data = [arrays[g[0]] for g in self.groups]
         self.observables = {name: jax.jit(lambda y, fn=table[name]: (fn(y, net.index),
                                                                      jax.grad(lambda z: fn(z, net.index))(y)))
                             for name in sorted({o.observable for o in problem.observations})}
@@ -163,44 +167,46 @@ class Compiled:
         free = jnp.asarray(problem.free_index())
         forcing = problem.forcing
 
-        def solve_one(x, pot, adjoint):
+        def solve_one(x, pot, adjoint, mode):
             theta = theta_from_vector(net, base.at[free].set(x))
             if forcing is None:
-                run = integrate(net, theta, pot, adjoint=adjoint, throw=False, **solve)
+                run = integrate(net, theta, pot, adjoint=adjoint, throw=False, mode=mode, **solve)
             else:
                 from .forcing import integrate_forced
 
                 run = integrate_forced(net, theta, pot, forcing, adjoint=adjoint, throw=False, **solve)
             return run.ys, jnp.any(run.failed)
 
-        def states(x, pot):
-            return solve_one(x, pot, diffrax.RecursiveCheckpointAdjoint())
+        def compile_for(mode):
+            def states(x, pot):
+                return solve_one(x, pot, diffrax.RecursiveCheckpointAdjoint(), mode)
 
-        def states_and_jac(x, pot):
-            def f(x_):
-                ys, failed = solve_one(x_, pot, diffrax.ForwardMode())
-                return ys, (ys, failed)
+            def states_and_jac(x, pot):
+                def f(x_):
+                    ys, failed = solve_one(x_, pot, diffrax.ForwardMode(), mode)
+                    return ys, (ys, failed)
 
-            dys, (ys, failed) = jax.jacfwd(f, has_aux=True)(x)
-            return ys, dys, failed
+                dys, (ys, failed) = jax.jacfwd(f, has_aux=True)(x)
+                return ys, dys, failed
 
-        if problem.batch == "vmap":
-            self._states = jax.jit(jax.vmap(states, in_axes=(None, 0)))
-            self._states_jac = jax.jit(jax.vmap(states_and_jac, in_axes=(None, 0)))
-        else:
-            self._states = jax.jit(states)
-            self._states_jac = jax.jit(states_and_jac)
+            if problem.batch == "vmap":
+                return jax.jit(jax.vmap(states, in_axes=(None, 0))), jax.jit(jax.vmap(states_and_jac,
+                                                                                     in_axes=(None, 0)))
+            return jax.jit(states), jax.jit(states_and_jac)
+
+        self._compiled = {mode: compile_for(mode) for mode in dict.fromkeys(self.modes)}
         self.calls = {"residual": 0, "jacobian": 0}
         self.compile_seconds: Dict[str, Optional[float]] = {"residual": None, "jacobian": None}
 
     def _per_pot(self, with_jac: bool, x):
         """{pot: (ys, dys or None, failed)} for every pot."""
         out = {}
-        for g, d in zip(self.groups, self.data):
+        for g, d, mode in zip(self.groups, self.data, self.modes):
+            states, states_jac = self._compiled[mode]
             if with_jac:
-                ys, dys, failed = self._states_jac(x, d)
+                ys, dys, failed = states_jac(x, d)
             else:
-                (ys, failed), dys = self._states(x, d), None
+                (ys, failed), dys = states(x, d), None
             ys, failed = np.asarray(ys), np.asarray(failed)
             dys = None if dys is None else np.asarray(dys)
             if self.problem.batch == "vmap":

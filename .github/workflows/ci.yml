@@ -276,7 +276,7 @@ jobs:
         run: conda env update -n maillard-jax --file environment-jax.yml
 
       - name: JAX sulfur lane against the NumPy lane
-        run: python -m pytest tests/unit/test_jax_sulfur_structure.py tests/scientific/test_jax_sulfur_parity.py -q
+        run: python -m pytest tests/unit/test_jax_sulfur_structure.py tests/unit/test_jax_network_join.py tests/scientific/test_jax_sulfur_parity.py tests/scientific/test_jax_network_join.py -q
 
       - name: data/ untouched by the JAX parity tier
         if: always()

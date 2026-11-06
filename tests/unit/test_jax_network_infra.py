@@ -185,8 +185,19 @@ def test_declared_competition_and_the_titratable_table(env):
     with pytest.raises(ValueError, match="charge states"):
         network.compose([dataclasses.replace(mods[0], titratables=(network.Titratable("Gly", (2.3,), (1,)),)),
                          mods[1], mods[2]])
-    with pytest.raises(UnsupportedConfiguration):
-        network.charge_closure(with_t)
+    # (v2.3) the closure check over the merged table: once glycine titrates, every trunk step that moves it must be
+    # declared -- v1's Gly / AMA / SB / PAMA gap, now reported instead of invisible
+    report = network.charge_closure(with_t)
+    assert not report["closes"] and "r_schiff" in report["moved"], report
+    assert any("r_schiff" in p and "not declared" in p for p in report["problems"])
+    with pytest.raises(ValueError, match="charge closure fails"):
+        network.charge_closure(with_t, strict=True)
+    assert network.charge_closure(net)["closes"] and network.charge_closure(net)["pools"] == 0
+    with pytest.raises(ValueError, match="one charge less"):
+        network.compose([dataclasses.replace(mods[0], titratables=(network.Titratable("Gly", (2.3,), (1, 1)),)),
+                         mods[1], mods[2]])
+    with pytest.raises(UnsupportedConfiguration, match="two things"):
+        network.compose([dataclasses.replace(mods[0], needs_ph=True)] + list(mods[1:]))
 
 
 # --------------------------------------------------------------------------- the fit driver
