@@ -431,3 +431,13 @@ def test_a2_meynier_deviance_is_smallest_inside_the_edge():
 
     r = G.mey_deviance([0.0, -0.2, -0.5, -1.0], 0.135)
     assert np.all(np.diff(r) > 0)
+
+
+def test_a2_s3_clip_changes_nothing_or_refuses():
+    import fit_m1b_ph_balance as G
+
+    keys, lo, hi = ("a", "b"), [0.0, -1.0], [1.0, 1.0]
+    out = G.clip_changes_nothing(keys, [0.0, 1.0], lo, hi, "t")     # on the bounds: unchanged
+    assert out.tolist() == [0.0, 1.0]
+    with pytest.raises(AssertionError, match="'b'"):
+        G.clip_changes_nothing(keys, [0.5, 1.0 + 1e-12], lo, hi, "t")

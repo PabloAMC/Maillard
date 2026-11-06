@@ -3027,6 +3027,20 @@ def s3_for_fit(name: str, obj: ConfirmObjective, theta: np.ndarray, rival: str, 
             "failed_pot_runs": len(failures) + lap_failures, "seconds": round(time.time() - t0, 1)}
 
 
+def clip_changes_nothing(keys: Sequence[str], theta: Sequence[float], lower: Sequence[float],
+                         upper: Sequence[float], what: str) -> np.ndarray:
+    """S3 reads a stored optimum at its own point (sec. 21.3): the clip to the objective's bounds is a guard, never a
+    move. A coordinate the clip would change means the record and the bounds disagree, so the point S3 would test is
+    not the fit's; that is refused, naming the coordinates, rather than tested silently (A2 confirmation, item 7)."""
+    raw = np.asarray(theta, dtype=float)
+    clipped = np.clip(raw, np.asarray(lower, dtype=float), np.asarray(upper, dtype=float))
+    moved = {k: (float(r), float(c)) for k, r, c in zip(keys, raw, clipped) if r != c}
+    if moved:
+        raise AssertionError(f"{what}: the clip to the bounds would move {moved} (stored, clipped); the stored "
+                             "optimum lies outside its own objective's bounds")
+    return clipped
+
+
 def run_a2_s3() -> Dict[str, Any]:
     problems = a2_refusals("a2_s3")
     if not read_record("a2_attribution_fit"):
@@ -3049,7 +3063,8 @@ def run_a2_s3() -> Dict[str, Any]:
     for i, rival in enumerate(("B0", "B2", "B3")):
         conf = json.loads(confirm_path(rival).read_text(encoding="utf-8"))
         cobj = ConfirmObjective(rival, numerics, fit_side, br)
-        theta = np.clip(np.array([conf["theta"][k] for k in cobj.keys]), cobj.lower, cobj.upper)
+        theta = clip_changes_nothing(cobj.keys, [conf["theta"][k] for k in cobj.keys], cobj.lower, cobj.upper,
+                                     f"{rival}'s confirmation fit")
         fits[f"{rival}_confirmation_fit"] = s3_for_fit(f"{rival}_confirmation_fit", cobj, theta, rival, br, choices,
                                                        A2_SEED + 1 + i)
     rec = {"artifact": f"{STEM}_a2_s3", "prereg": data_paths.rel(PREREG), "amendment": "A2 sec. 21.3",
