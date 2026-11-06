@@ -1,28 +1,44 @@
 # Case M4: glucose to MFT; protein and other amines as classes
 
-**READY TO FREEZE (items 1 - 5), not frozen** (2026-11-06). Items 1 - 5 are complete under this week's rules. They
-freeze when three things have happened, in this order:
-1. the independent review (one round plus one confirmation) has answered the questions in "What should block the
-   freeze" (end of this file);
-2. the synthetic power check of sec. 5.4 has run on the first build of the one network (W3);
-3. the demotions it orders are written in.
+**READY TO FREEZE as development grade, decider W6: pending the reduced-model power check** (2026-11-06; not
+frozen). Items 1 - 5 are complete under this week's rules. They freeze when three things have happened, in this order:
+1. the reduced forced-input mini-model power check of sec. 5.4 has run (it is specified there, not built);
+2. the demotions it orders are written in;
+3. the independent review (one round plus one confirmation) has answered what remains under "What should block the
+   freeze" (end of this file).
 
 No engine was run for this case, on any pot. The changelog is at the end.
 
-**Coordinator rulings (2026-11-06), applied here.**
-1. **The power check waits for the one JAX network (W3).** Sec. 5.4 cannot run before it.
-2. **D1 and D2 are spent for part G.** Hofmann 1998's glucose pots (Table 5 NF / MFT; Table 2 MFT at pH 3 / 5 / 7)
-   are the E1 misfit that nominated the claim, so testing the claim on them is circular (sec. 7 item 2).
-   - They stay as **scored development units: reported, never credited**.
-   - On disk, part G is **development grade**. It can still eliminate R3 (D3, a measured label share) and R4 (D5,
-     structural).
-   - **R1 cannot ship over R0 from disk.**
-   - The decider is the designed experiment (sec. 4.4; decisive-measurements entry `glucose_mft_carbon_origin`).
+**Coordinator rulings (2026-11-06), as corrected by the adopted premortem (FM1 - FM9).**
+1. **The power check runs on a reduced forced-input mini-model** (sec. 5.4, ~1 day, M3-layer style), not on the full
+   network. The full network (W3) is still needed for the M4 build itself. *(Supersedes "the power check waits for W3".)*
+2. **The spent-data rule, as applied here (FM2): spent or seen data may FALSIFY a rival whose prediction there is
+   constant-free (structural), and never CREDIT one.**
+   - **D3** (the BTBU / CAAS label shares, F23#7 / #8; ENGINE_VS_LITERATURE l. 259 / 298) is what nominated E1, so it
+     is spent.
+   - **D1** was seen through R0's no-refit probe.
+   - **D2's pH 3 / 7 arms** are MF-12 observations.
+   - So none of the three can credit a rival. A structural prediction they contradict is falsified:
+     - **C2 + C3 as the hexose MFT route is falsified**, both as R0's route (`r_glc_c2c3`) and as R3, by D3's
+       constant-free label share;
+     - **R4-as-written is falsified** by D5 (no pool).
+   - **No rival is credited on disk.** Part G is **development grade**, and the decider is the designed experiment
+     (sec. 4.4; decisive-measurements entry `glucose_mft_carbon_origin`).
+   - D1 and D2 are scored and reported as development units.
+   - *(This corrects the earlier basis, "D1 / D2 are the misfit that nominated the claim".)*
 3. **The older hold-out declaration binds against fitting.** No rival's constants may be fitted on the glucose pH 3 / 7
-   bundles; they are scored only, and spent under ruling 2.
+   bundles; they are scored only (falsify-only under ruling 2).
 4. **The claim is restated** as "a hexose C5 entry into 1-DPO; carbon origin (C-1 retained vs lost) undecided"
    (sec. 1). R1 (C-1 retained, through 1-DG) vs R5 (C-1 lost, through glucosone) is an explicit pair that **cannot be
    decided on disk**.
+5. **Premortem additions:**
+   - **FM3:** rival R4' (sec. 3).
+   - **FM4 / FM5:** temperature-dependent mixtures, O2 on 1-DG, and the label / OPD / standard fixes (secs. 4.4, 5.1,
+     5.4).
+   - **FM6:** R5's band (sec. 5.2).
+   - **FM7:** part A is an engine-structure requirement only (sec. 1).
+   - **FM8:** **no M4 comparison runs before M2's verdict**.
+   - **FM9:** the reservoir notes and one Cys-sugar Amadori class module (secs. 5.2, 6).
 
 *Plan step M4 ([STATUS_AND_PLAN sec. 5, W2](../../guides/STATUS_AND_PLAN.md)). It covers:*
 - *errors E1 (F23-a, F24-a) and E8 (F25-a, -b, F06-b) of
@@ -90,7 +106,7 @@ Two cautions:
   hold-out bundles (`data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH{3,7}.json`).
   The pH 5 arm is a trust-loop predictive row, not a B60 fit row (`kinetic_core_b60_fit_targets.json` holds only the
   ribose and xylose T1 rows). **Ruling 3:** the hold-out declaration binds against fitting. No rival's constants are
-  fitted on the pH 3 / 7 bundles; they are scored only, and are spent for part G (ruling 2).
+  fitted on the pH 3 / 7 bundles; they are scored only, falsify-only for part G (ruling 2).
 
 ## 0. What has been seen under the engine
 
@@ -126,8 +142,9 @@ engine output.
 - "Seen" = an engine number on that pot exists in a record (fit row, probe or screen), so the pot cannot be decisive
   here.
 - "Run under R0 only" = the incumbent's no-refit probe has a number there and no other structure has run. The
-  2026-11-05 refresh kept such pots decisive between the new rivals. **Ruling 2 overrides that:** they are the
-  misfit that nominated the claim, so they are spent, scored as development units and never credited.
+  2026-11-05 refresh kept such pots decisive between the new rivals. **Ruling 2 overrides that:** seen data
+  (D1 through R0's probe; D2's pH 3 / 7 arms as MF-12 observations) may falsify a structural prediction but never
+  credit a rival. They are scored as development units.
 
 | pot (record) | status | where |
 |---|---|---|
@@ -135,7 +152,7 @@ engine output.
 | Hofmann 1998 Table 2, ribose pH 3 / 7 | **seen** | `thiol_submodel.yml` rows; probes B and D in shape (30 mM design) |
 | Hofmann 1998 Table 2, **glucose pH 3 / 7** | **run under R0 only; spent** (ruling 2: the E1 misfit; never fitted, ruling 3) | mp hold-out bundles; `thiol_submodel.yml` rows `hofmann1998_cys_glucose_ph{3,7}` |
 | Hofmann 1998 Table 5, ribose NF and furfural | **seen** | B60 fit rows |
-| Hofmann 1998 Table 5, **glucose NF / furfural** | **run under R0 only; spent** (ruling 2); rhamnose not run | `hofmann1998_cys_glucose_ph5_fa_nf` |
+| Hofmann 1998 Table 5, **glucose NF / furfural** | **run under R0 only; seen, falsify-only** (ruling 2); rhamnose not run | `hofmann1998_cys_glucose_ph5_fa_nf` |
 | Hofmann 1998 Tables 3, 4, 8, 10 (fed ribose / NF / furfural + H2S, HA + MP) | **seen** | B60 fit rows (`hofmann1998_c2c3_recombination_*` = Table 8) and `thiol_submodel.yml` rows |
 | Hofmann 1998 Tables 6, 7 (HA + MGO -> NF / furfural; MGO + H2S -> MP) | **not run** | -- |
 | Hofmann 1998 Table 9 (1-mercapto-2-propanone, glucose + Cys, pH 3 / 5 / 7) | **seen** | `thiol_submodel.yml` rows; thiol sub-model probes |
@@ -194,6 +211,24 @@ CF-133).** M0a read the code and found two gaps that part A must close.
 
   M0a's rivals and decisive data (Schibilsky 2019's glucose + Ala DMHF pH response, spent there) are not re-argued
   here. Part A inherits M0a's spent list.
+- **The pH scale, resolved (FM7).** The one pH module reads the **in-situ pH** wherever the lane carries a pH state (the
+  sulfur lane, Amendment 1 of sub-model 1). Elsewhere it reads the **declared initial (label) pH**, held over the
+  programme, as the trunk lane does today. P7 (`ph_final`) is honoured only where a programme declares it. Every
+  comparison is made on the measurement's own scale (label, cooled or in situ; `observations.ph_cooled`). A lane that
+  switches from label to in situ is a part-A case of its own, not a silent change.
+- **M0a's sweep candidates, carried into part A with M0a's fixed roles** (unseen; none is read here):
+  - Wang Y. 2019, 10.1016/j.foodres.2019.05.001 (HMF at >= 2 pH, Asn + hexose);
+  - Wang P. 2022, 10.1002/jsfa.12149;
+  - Ajandouz & Puigserver 1999, 10.1021/jf980928z;
+  - Ajandouz 2001, 10.1111/j.1365-2621.2001.tb08213.x;
+  - Chen 2011, 10.1016/j.foodres.2011.06.002;
+  - Hollnagel & Kroh 1998, 10.1007/s002170050294.
+
+  Each enters only by amendment, declared before its data are read.
+- **Hollnagel & Kroh 1998, reconciled.** M0a lists it as a part-A evidence candidate: dicarbonyls at >= 2 pH with a
+  non-glycine amine, from the Schibilsky laboratory, so it is not independent of the spent Schibilsky pots. This case's
+  sweep 2 excluded it for **part G** under criteria (f) - (h): no thiol, no O2 contrast at >= 100 C, no fed C6. Both
+  decisions stand. It is out of part G and a part-A evidence candidate under M0a's role.
 
 **Why the claim is stated as a C5 entry with its carbon origin open (2026-11-06).** The 2026-11-05 claim named one
 C5 step, 1-DG -> 1-DPO + C1, which keeps glucose C-1 as MFT's methyl. Two laboratories' positional labels speak
@@ -211,8 +246,17 @@ The claim is therefore what both forms share: the Cys-hexose Amadori pool feeds 
 MFT steps. Which carbon is lost is left to the designed experiment (sec. 4.4, arms 1 and 2). R1 vs R5 is reported as
 an explicit "cannot decide on disk" pair.
 
-**What can ship from disk.** Nothing in part G (ruling 2): R1 / R5 cannot ship over R0 from disk. The on-disk
-comparison can eliminate R3 (D3) and R4 (D5), and reports D1 / D2 as development units.
+**What can ship from disk.** Nothing in part G (ruling 2): no rival is credited on disk, so R1 / R5 cannot ship over
+R0. The on-disk comparison can only falsify structural predictions:
+- **C2 + C3 as the hexose MFT route is falsified** by D3's constant-free label share, both as R0's route
+  (`r_glc_c2c3`) and as R3;
+- **R4-as-written is falsified** by D5.
+
+It reports D1 / D2 as development units.
+
+**Part A is an engine-structure requirement only (FM7).** It is built in W3 at parity with today's engine and off by
+default. Switching it on (any amine-class constant moving a shipped output) is a separate part-A case with its own
+items 1 - 9. Nothing in part A is decided in this case.
 
 **Part E depends on M1.** Enabling `CYS_AMADORI_ROUTE` (M1's combination C1) retires `r_pent_dpo` / `r_pent_tdp`
 (`inactive_reactions`, sulfur.py ~975 - 978). It also carries the pentose supply on de Roos 2005 Fig. 4's measured,
@@ -525,12 +569,18 @@ the case had missed that speaks against a rival (sec. 2.6).
 
 ### 2.10 Spent data (sec. 7 item 2)
 
+**The rule (FM2, adopted 2026-11-06).** Spent or seen data may **falsify** a rival whose prediction there is
+constant-free (structural: a label share a route must leave, a species a structure lacks). They never **credit** a
+rival. The rule applies to R0's route exactly as to the new rivals.
+
 **Spent: these data nominated a rival, and are development evidence for it.**
 
 | data | spent by | spent for | consequence |
 |---|---|---|---|
 | Hofmann 1998 Table 1 (all arms) and the T1 design | atlas E1; probes C and E; the red-team probe; M0 CK-41 (MF-12's size); B8 - B51.1 level rows | R1, R4 (the claim and the band-now fix were nominated on it) | D4 is side evidence only; S3 is a screen signature |
-| **Hofmann 1998 Table 2 glucose MFT at pH 3 / 5 / 7 (D2) and Table 5 glucose NF / MFT (D1)** (ruling 2, 2026-11-06) | the E1 misfit (atlas E1, F23-a / F24-a; ENGINE_VS_LITERATURE sec. 3) that nominated the claim; R0's no-refit probe | R1 / R5 (the claim), R2, and every R-vs-R0 comparison in part G | **scored development units: reported, never credited.** The pH 3 / 7 bundles are also never fitted (ruling 3) |
+| **Du 2023 / Zhao 2019b label shares (D3; F23#7 / #8)** | **the data that nominated E1** (ENGINE_VS_LITERATURE l. 259 / 298; corrected by FM2) | the claim (the hexose route is an intact C5) | **falsify-only:** D3 falsifies C2 + C3 as the hexose MFT route (R0's route and R3; constant-free), credits nothing. Label arithmetic only; no engine run on these pots (M2's TEST) |
+| **Hofmann 1998 Table 5 glucose NF / MFT (D1)** | seen through R0's no-refit probe | -- | **falsify-only** development unit: reported, never credited |
+| **Hofmann 1998 Table 2 glucose MFT at pH 3 / 7 (D2)** | MF-12 observations (M0); R0's probe | -- | **falsify-only** development unit; never fitted (ruling 3) |
 | Bolton 1993 / 1994 | core panel; M0 MF-15 | -- (no M4 rival was nominated on it) | S4 only |
 | Glomb 2010 Table I and its label statements | the 2026-11-05 dossier, which nominated R5 | R5 | never decisive (it is not a thiol pot anyway) |
 | Steinhagen 2021 (glucose alone, 121 C) | M0 MF-23 (read for sec. 2.11) | R5's oxidative piece | sign evidence only |
@@ -539,7 +589,6 @@ the case had missed that speaks against a rival (sec. 2.6).
 | Hofmann 1998 Tables 6, 8 | the 2026-11-05 R3 correction | R3 | fixed measured constants for R3, never scored |
 | **Yu 2017** (glucose + Lys / Arg / Gly / Pro, MGO vs pH, 120 C) | this case (R3's fragment pH band; part A's within-class spread; sec. 2.11's MF-34 reading) | R3, part A | **SEEN / spent: never credited as decisive anywhere** (here, in M6 or in M0a). Band and evidence only |
 | Schibilsky 2019 (glucose + Ala DMHF, two pH arms) and M0a's other spent data | M0a (CK-06, sec. 2.8), now folded into part A | part A's pH module | spent for part A |
-| Du 2023 / Zhao 2019b route pattern (published tables, no engine run) | the 2026-11-04 case | R3's rejection | D3 rejects R3 as a measured share; no engine number on them before M2's item 7 |
 
 **Seen but not spent.** These have engine numbers on record but nominated no rival here.
 - Li 2011, Deng 2021, Martins, Davidek 2006a, Zhang 2026: seen in other records; band sources here, never scored.
@@ -588,15 +637,19 @@ M6. The checks owned by M4 are CK-41 (done) and nothing else.
 | R1 | **the claim, C-1-retained form**: Glc + Cys -> Cys-hexose Amadori -> 1-DG + Cys -> 1-DPO + C1 (C-6 lost; MFT's methyl = glucose C-1) -> the pentose steps (NF and DDP shares as M2 sets them) | amine-catalysed 1,2-enolisation, flat or weakly rising, plus an acid limb | A-R1: classes with own constants; competition declared; catalysis of dicarbonyl loss separate from consumption |
 | R2 | the same supply, entering **below norfuraneol**: 1-DG + amino acid (Strecker / reduction) -> a 1,4-dideoxy C6 (Huber 1990, CF-099) -> a 1,4-dideoxy C5 (DDP) -> MFT | M1's C1: the supply carries de Roos Fig. 4's measured U-shape (flat pH 3 - 5, rising above 5.5) and the split's pH law; no separate E8 term | -- |
 | R3 | **declared-failing control**: C2 + C3 recombination (B47's opened `k_glc_ha`), carrying Hofmann Table 6's measured HA + MGO -> NF and MGO's banded loss law (sec. 5.2) | the supply law is right; the steepness sits downstream (furfural loss, the HS- branch) | A-R3: one constant per alpha-amino group, whatever the carrier |
-| R4 | **declared-failing control**: the entry alone on the existing amine-free 1-DG supply (the red team's band-now fix) | -- | -- |
+| R4 | **R4-as-written, the band-now record only**: the entry alone on the existing amine-free 1-DG supply (the red team's band-now fix), with no Cys-hexose Amadori pool. Falsified by D5 | -- | -- |
+| **R4'** | **new 2026-11-06 (premortem FM3)**: the Cys-hexose Amadori pool exists, but **only as a cysteine sink**, returning cysteine and feeding no C5. The C5 entry into 1-DPO is fed by **cysteine-catalysed or amine-free enolisation** of glucose / 1-DG, not through the pool. **Decider: arm 3** (MFT per mol of fed Amadori compound consumed, against the glucose + Cys pot at matched conditions: R4' predicts the fed Amadori pot gives far less MFT per mol consumed than the sugar pot; R1 / R5 predict comparable or more) | -- | -- |
 | **R5** | **the claim, C-1-lost form** (new 2026-11-06; Glomb 2010's oxidative route): Glc + Cys -> Cys-hexose Amadori (as R1) -> glucosone + Cys (B21's `r_ama_g`, oxidative) -> hydrolytic beta-cleavage: formic acid (C-1) + the C5 1,2-enediol -> 3-DPO / 1-DPO (C2 - C6; MFT's methyl = glucose C-2) -> the shared pentose steps | (its 3-DPO feeds furfural / FFT with C-1 lost, as Tressl 1994's furfuryl alcohol) | -- |
 
 **The claim is {R1, R5}** (ruling 4). Item 6 scores R1 and R5 separately and reports **R1 vs R5 as a pair that
-cannot be decided on disk** (sec. 4.3). A part-G verdict on disk can be at most "the claim (R1 or R5) or R2, not R3 or
-R4", development grade, with R0 not displaced (ruling 2).
+cannot be decided on disk** (sec. 4.3). On disk, part G can record only falsifications:
+- "C2 + C3 as the hexose MFT route is falsified (R0's route and R3)";
+- "R4-as-written is falsified";
+- "no rival credited" (ruling 2). R0 is not displaced by any credited rival.
 
-**Why R3 and R4 are kept as declared-failing controls.** Each is already known to fail on development data. They are
-scored and reported in item 6 like every rival, but cannot be favoured.
+**Why R3 and R4 are kept as declared-failing controls.** Each is already falsified by a constant-free prediction on
+spent or seen data (ruling 2: falsify, never credit). They are scored and reported in item 6 like every rival, but
+cannot be favoured. R4' (sec. 3 table) is a live rival, not a control.
 - **R3** fails a measured share. In both hexose pots that label MFT (Du 2023, Zhao 2019b; DEV for E1), C2 + C3 would
   leave ~50 % mixed isotopomers in a 1:1 pool, and the measured mixed share is <= ~1 %. It stays because it is the only
   rival whose MGO law Kanzler moves materially, and because the comparison should show the rejection in the record.
@@ -605,13 +658,20 @@ scored and reported in item 6 like every rival, but cannot be favoured.
     R1 + f R3 with f free in [0, 0.1] as a sensitivity.
 - **R4** fails structurally. It has no Cys-hexose Amadori compound, so it cannot carry the pool measured at 90 C (de
   Roos Table II) and at 145 C (Du 2024b, ~62 % of the cysteine within 10 min). That is known without a run. It stays as
-  the record of the band-now fix (ENGINE_VS_LITERATURE sec. 5) and as the control that shows whether the amine-borne
-  entry matters on D1 / D2.
+  the record of the band-now fix (ENGINE_VS_LITERATURE sec. 5) only. The pool-as-sink variant is R4'.
 
 **Notes on the rivals.**
 - **R1 and R2 keep glucose C-1 as MFT's methyl; R5 keeps C-2.** A positional label on MFT separates them, unless the
-  label equilibrates between C-1 and C-6 before cleavage, as Tressl 1999 Fig. 14 draws for the 3-DG side. Sec. 4.4,
-  arm 1, adds an N2 / air contrast for that case.
+  label equilibrates between C-1 and C-6 before cleavage, as Tressl 1999 Fig. 14 draws for the 3-DG side.
+- **O2 does not single out R5 (FM5).** Air also drains 1-DG: x3.4 lower at 50 C (Gobert 2009), x4.4 lower in Glomb
+  2010. An air / N2 contrast therefore moves R1 too, in the opposite direction.
+  - The generators carry O2 on both exits.
+  - The cleaner splits are arm 2's fed 1-DG vs fed glucosone under N2, and a methyl-locating label ([2-13C] or
+    [1,2-13C2]-glucose; sec. 4.4).
+- **The R1 / R5 mix may move with temperature (FM4).** Glomb's C-1 loss is at 50 C and Tressl's absence at 160 C, so
+  the power check's generators include a temperature-dependent R1 / R5 mixture (sec. 5.4).
+- **R4' and R1 / R5 share the pool and differ in what feeds 1-DPO.** D1 and D2 do not separate them (all three reach
+  the same 1-DPO). Arm 3's MFT yield per mol of fed Amadori compound consumed does.
 - **Corrected 2026-11-06.** The refresh said a C-1-lost route to MFT "is not proposed by any source on disk". Glomb
   2010 proposes and labels one: a C-1-lost 1-DPO, already methyl-bearing, with no reduction needed. R5 is that route.
   The decisive-measurements entry `glucose_mft_carbon_origin` still lists it as "unlisted"; its update is proposed at
@@ -635,8 +695,9 @@ scored and reported in item 6 like every rival, but cannot be favoured.
 
 ### 4.1 What cannot decide here
 
-- **D1 and D2 (ruling 2).** They are spent: the E1 misfit that nominated the claim. They are scored and reported as
-  development units, never credited, and the pH 3 / 7 bundles are never fitted (ruling 3).
+- **D1, D2 and D3 credit nothing (ruling 2, FM2).** D3 nominated E1. D1 was seen through R0's probe. D2's pH 3 / 7
+  arms are MF-12 observations. Each may falsify a constant-free prediction and is otherwise reported as a development
+  unit. The pH 3 / 7 bundles are never fitted (ruling 3).
 - **Seen pots** (sec. 0) and **spent data** (sec. 2.10) can only test feasibility (development grade): Hofmann Table 1
   (D4); the ribose half of D1; Hofmann Tables 3, 4, 8, 9, 10; Zhang 2026; de Roos Fig. 4; Bolton; Meynier; Deng 2021;
   Davidek 2006a; Xia 2022; Li 2011; Steinhagen 2021.
@@ -645,17 +706,17 @@ scored and reported in item 6 like every rival, but cannot be favoured.
 - **Band sources** (sec. 5.2) never decide, and decisive units never set a band.
 - **Not simulable:** Ames 2001 (extrusion) and Cannon 2023 (no recovery, no NF). Evidence only.
 
-### 4.2 The rows (D1, D2: spent development units; D3, D5: eliminate on disk)
+### 4.2 The rows (all falsify-only: D3, D5 falsify structural predictions; D1, D2 are development units)
 
 Directions follow from each structure. "[dry]" marks arithmetic on printed values.
 
 | # | measurement (record) | value basis; engine status | R1 | R2 | R3 (control) | R4 (control) | R5 | separates |
 |---|---|---|---|---|---|---|---|---|
-| D1 | **NF / MFT in the glucose pot** (Hofmann 1998 Table 5: 7.1), with the ribose pot's 2754 as in-sample context | within-pot ratio of two printed values, no tau; **spent (ruling 2): a development unit, reported, never credited**; ribose cells seen (fit rows) | glucose's 1-DPO feeds NF and MFT as ribose's does, so glucose NF / MFT equals the DPO-derived ratio M2 sets. [dry] The measured NF ratio glucose / ribose is 2.5e-4 and the MFT ratio 0.096, 390x apart, so R1 needs most ribose NF to come from pentose-only routes | glucose MFT bypasses NF; NF / MFT is set only by glucose NF from other routes | NF from HA + MGO (Table 6) over MFT from HA + MP (Table 8); follows MGO's standing level, hence Kanzler's law | as R1 | **as R1** (the same 1-DPO entry and downstream shares) | R2 from R1 / R5 in development only (scale-free; nearest the intermediate). **Does not separate R1 from R5** |
-| D2 | **glucose MFT pH shape** (Hofmann Table 2: 0.3 / 1.9 / 0.4 at pH 3 / 5 / 7; ribose 55.3 / 19.8 / 2.5) | within-study contrasts log10(MFT_pH / MFT_5), no tau; **spent (ruling 2): a development unit**; pH 3 / 7 never fitted (ruling 3) | low at pH 3 (2,3-enolisation minor in acid), falling at pH 7 as beta-cleavage takes 1-DG (Davidek 2006a) | as R1 below 5; above 5 set by the Strecker step's pH law | rising to pH 7, like fed HA + MP (Table 8) and the fragment supply (Hayashi, Yu) | set by the amine-free 1-DG supply's pH law, which no measurement fixes | set by the Amadori -> glucosone pH law, **which no measurement at >= 100 C fixes** (`k_ama_g` is licensed at pH 6.7 only); downstream as R1 | R3 from R1 / R2 by sign on the 5 -> 7 limb; the hexose shape against the pentose shape on the 3 -> 5 limb. R5 only through its declared pH sensitivity |
-| D3 | **mixed isotopomers** (Du 2023, Zhao 2019b) | label share, no tau, no omega on the share (sec. 5.1); **reserved** | intact C5 | intact C5 | ~50 % mixed in a 1:1 pool | intact C5 | intact C5 | **rejects R3 by a measured share**; does not separate R1, R2, R4, R5 |
+| D1 | **NF / MFT in the glucose pot** (Hofmann 1998 Table 5: 7.1), with the ribose pot's 2754 as in-sample context | within-pot ratio of two printed values, no tau; **seen, falsify-only (ruling 2): a development unit, reported, never credited**; ribose cells seen (fit rows) | glucose's 1-DPO feeds NF and MFT as ribose's does, so glucose NF / MFT equals the DPO-derived ratio M2 sets. [dry] The measured NF ratio glucose / ribose is 2.5e-4 and the MFT ratio 0.096, 390x apart, so R1 needs most ribose NF to come from pentose-only routes | glucose MFT bypasses NF; NF / MFT is set only by glucose NF from other routes | NF from HA + MGO (Table 6) over MFT from HA + MP (Table 8); follows MGO's standing level, hence Kanzler's law | as R1 | **as R1** (the same 1-DPO entry and downstream shares) | R2 from R1 / R5 in development only (scale-free; nearest the intermediate). **Does not separate R1 from R5** |
+| D2 | **glucose MFT pH shape** (Hofmann Table 2: 0.3 / 1.9 / 0.4 at pH 3 / 5 / 7; ribose 55.3 / 19.8 / 2.5) | within-study contrasts log10(MFT_pH / MFT_5), no tau; **seen, falsify-only (ruling 2): a development unit**; pH 3 / 7 never fitted (ruling 3) | low at pH 3 (2,3-enolisation minor in acid), falling at pH 7 as beta-cleavage takes 1-DG (Davidek 2006a) | as R1 below 5; above 5 set by the Strecker step's pH law | rising to pH 7, like fed HA + MP (Table 8) and the fragment supply (Hayashi, Yu) | set by the amine-free 1-DG supply's pH law, which no measurement fixes | set by the Amadori -> glucosone pH law, **which no measurement at >= 100 C fixes** (`k_ama_g` is licensed at pH 6.7 only); downstream as R1 | R3 from R1 / R2 by sign on the 5 -> 7 limb; the hexose shape against the pentose shape on the 3 -> 5 limb. R5 only through its declared pH sensitivity |
+| D3 | **mixed isotopomers** (Du 2023, Zhao 2019b) | label share, no tau, no omega on the share (sec. 5.1); **reserved** (M2's TEST: label arithmetic only, no engine run); **spent** (nominated E1): falsify-only | intact C5 | intact C5 | ~50 % mixed in a 1:1 pool | intact C5 | intact C5 | **falsifies C2 + C3 as the hexose MFT route (R3 and R0's route), constant-free**; credits nothing; does not separate R1, R2, R4', R5 |
 | D4 | **ribose / glucose MFT 10.4 and FFT 4.3** (Table 1), and the trend from > 870 at ~100 C (de Roos Table I) to 10.4 at 145 C | endpoint ratios; **seen, spent** | follows the entry's barrier. [dry] If the two labs' pots were comparable, the hexose route's apparent barrier would exceed the pentose route's by >= ~128 kJ/mol. They are not comparable (37 % water lactate vs 0.5 M phosphate) | as R1 | also follows MGO's loss law: with Ea 47 - 121 the C3 pool falls x2.5 - 33 faster at 145 C | the probe gave 45 - 78 at 145 C | as R1, plus R5's O2 budget | side evidence only |
-| D5 | **the Cys-hexose Amadori pool** (de Roos Table II, 90 C; Du 2024b, 145 C; Zhang 2026 Fig. 3) with no hexose MFT at ~100 C (de Roos Table I, < 0.05 mg/mol Cys) | relative areas (II); a censored ratio > 870 (I); Du a C/C0 peak; de Roos I glucose arm **not run**, Zhang seen | the pool exists; its decay to 1-DG is the slow step at 100 C | as R1 | no Amadori step needed | no pool: fails structurally | the pool exists; its oxidative exit needs O2 | R1 / R2 / R5 from R4. Screen signatures (sec. 5.5): development grade after the screen |
+| D5 | **the Cys-hexose Amadori pool** (de Roos Table II, 90 C; Du 2024b, 145 C; Zhang 2026 Fig. 3) with no hexose MFT at ~100 C (de Roos Table I, < 0.05 mg/mol Cys) | relative areas (II); a censored ratio > 870 (I); Du a C/C0 peak; de Roos I glucose arm **not run**, Zhang seen | the pool exists; its decay to 1-DG is the slow step at 100 C | as R1 | no Amadori step needed | no pool: fails structurally | the pool exists; its oxidative exit needs O2 | falsifies R4-as-written (structural). **R4' also carries the pool (as a cysteine sink), so D5 does not separate it** from R1 / R2 / R5; arm 3 does. Screen signatures (sec. 5.5): development grade after the screen |
 | D6 | **FFT vs furfural vs pH** (Meynier Table 3; Hofmann F25#8) | within-study contrasts; seen | (part E, deferred) | | | | | deferred with part E |
 | D7 | **amine class at fixed sugar**. Xia 2022: TriG-ARP x5 - 7, separate pots. Luo 2022: in-pot peptide / Gly-ARP ~1 at 80 - 100 C. de Roos Table II: Fru-Cys / Fru-Gly 1 -> 4 - 5 with dilution. Brands 2001: casein leaves glucose loss unchanged. Kanzler 2026: amines catalyse MGO loss without consumption. Yu 2017: within-class x2 - 7 | within-study ratios; Xia seen; Luo, de Roos II, Kanzler not run | (A-R1) each class its own constant and dilution law; catalysis declared | -- | (A-R3) equal per alpha-amine: Luo 2022 agrees at 80 - 100 C, pH 3 - 7; Xia and de Roos's dilution law disagree | -- | -- | **does not separate A-R1 from A-R3 on disk**: the same network's two studies point opposite ways, and within-class spread is as large as the contrast |
 
@@ -665,13 +726,16 @@ Directions follow from each structure. "[dry]" marks arithmetic on printed value
 
 ### 4.3 The decisive data on disk, or their absence
 
-- **Against R0: nothing decides on disk (ruling 2).** R0's no-refit residuals on D1 / D2 are -6 to -25 dex. But those
-  pots are the misfit that nominated the claim, so a rival beating R0 there is reported and never credited. **R1 / R5
-  cannot ship over R0 from disk.**
-- **R3 (control): eliminated on disk** by D3's measured share, a label share that did not nominate the claim. D2's
-  5 -> 7 limb agrees in sign (development only).
-- **R4 (control): eliminated on disk** by D5, structurally.
-- **The claim against R2 (the bypass): development grade only.** D1 would separate them, but D1 is spent. Under omega it
+- **R0: its hexose route is falsified, and no rival is credited over it (ruling 2, FM2).** R0's only hexose MFT route
+  is C2 + C3 (`r_glc_c2c3`). D3's constant-free label share falsifies that route, as it falsifies R3. R0's
+  no-refit residuals on D1 / D2 (-6 to -25 dex) are seen data and are reported only. **No rival is credited on disk,
+  so R1 / R5 cannot ship over R0 from disk.** Recorded: "C2 + C3 as the hexose MFT route is falsified (R0's route and
+  R3); no rival credited".
+- **R3 (control): falsified on disk** by D3 (as above). D2's 5 -> 7 limb agrees in sign (development only).
+- **R4-as-written (control): falsified on disk** by D5, structurally. **R4' is not**: it carries the pool as a
+  cysteine sink (sec. 3), and its decider is arm 3.
+- **The claim against R2 (the bypass): development grade only.** D1 would separate them, but D1 is seen and credits
+  nothing. Under omega it
   needs >= 1.16 dex (x14) between the rivals' predictions (sec. 5.4), and its reading is reported, not credited. D2
   does not separate the two (both predict the same sign on both limbs).
 - **R1 against R5 (the claim's two carbon-origin forms): cannot decide on disk, an explicit pair.**
@@ -687,13 +751,17 @@ Directions follow from each structure. "[dry]" marks arithmetic on printed value
   sugar, pH and temperature. Development grade at best.
 
 **Therefore:**
-- **Part G is development grade on disk.** On disk it can eliminate R3 (D3) and R4 (D5). It reports D1 / D2 for R0, R1,
-  R2 and R5, credited to none.
+- **Part G is development grade on disk.**
+  - On disk it falsifies C2 + C3 as the hexose MFT route (R0's route and R3; D3) and R4-as-written (D5).
+  - It credits no rival. It reports D1 / D2 for R0, R1, R2, R4' and R5.
 - **Nothing in part G ships over R0 from disk.** The decider is the designed experiment (sec. 4.4; decisive-measurements
   entry `glucose_mft_carbon_origin`):
   - arms 1 and 3 test the claim against R0 and R2;
-  - arm 1 with N2 / air, or arm 2's fed glucosone, splits R1 from R5.
-- Part A stays as declared bands.
+  - arm 3 tests the claim against R4';
+  - arm 2 (fed 1-DG vs fed glucosone under N2) and arm 1's labels split R1 from R5.
+- **No M4 comparison runs before M2's verdict (FM8).** D1's prediction and every arm's NF / MFT read through M2's
+  NF / DDP shares.
+- Part A is an engine-structure requirement only (FM7, sec. 1).
 
 ### 4.4 The designed experiment (W6)
 
@@ -704,21 +772,36 @@ One laboratory, three arms. Throughout:
 - every assay's LOD / LOQ and recovery reported;
 - SIDA with labelled standards for MFT, FFT and NF.
 
+The label, OPD and standard fixes (FM5, new 2026-11-06):
+- **Quantify from unlabelled replicate pots.** In labelled pots, report isotopologue shares only. A d3-MFT internal
+  standard collides with 13C-MFT's M+3 channel, so labelled pots carry no d3 standard, or use a 13C / 34S standard
+  with no channel overlap.
+- **OPD trapping under argon with 1 mM DTPA, with sugar + OPD and Amadori + OPD blanks** (continuous OPD makes glucosone
+  from the Amadori compound; Glomb 2010). Post-incubation trapping is the primary.
+- **A methyl-locating label:** [2-13C]- or [1,2-13C2]-glucose, read through an MFT fragment that keeps the methyl
+  carbon. It separates C-1 (R1 / R2) from C-2 (R5) as the methyl directly, so it is not hostage to C-1 / C-6
+  equilibration.
+
 | arm | conditions | species | decides |
 |---|---|---|---|
-| **1. which carbon** | Hofmann's design: Cys 33 + glucose 100 mM, 0.5 M phosphate pH 3 / 5 / 7, 145 C, 20 min; glucose as [1-13C], [6-13C] and 1:1 [13C6] / [12C6] (and unlabelled); **each under air and under N2 (degassed, argon headspace)** (new 2026-11-06) | MFT, NF, FFT, furfural, MP, each isotopologue-resolved | see the outcome list below |
-| **2. fed C6 dicarbonyls** | synthetic 1-DG (Glomb 2000 route) **or synthetic glucosone** (new 2026-11-06), 2 mM, + Na2S or Cys 6 mM, +- glycine 33 mM, 0.5 M phosphate pH 5 and 7, 145 C, 2 - 20 min, N2 and air arms | MFT, NF, DDP, 1-DPO and 3-DPO (OPD quinoxalines), acetic and formic acid, residual dicarbonyl | see the outcome list below |
-| **3. fed Cys-hexose Amadori** | synthetic D-fructose-L-cysteine (de Roos's preparation) 10 mM, 0.5 M phosphate pH 3 / 5 / 7, 100 and 145 C, 0 - 60 min, N2 and air | the Amadori compound, free Cys, glucosone, 1-DG and 3-DG (OPD), MFT, NF | part G's supply constants (formation, decay, Cys return, oxidative exit) and the mechanism of D2's pH maximum |
+| **1. which carbon** | Hofmann's design: Cys 33 + glucose 100 mM, 0.5 M phosphate pH 3 / 5 / 7, 145 C, 20 min. Glucose as [1-13C], [6-13C], [2-13C] or [1,2-13C2], and 1:1 [13C6] / [12C6] (and unlabelled). **Each under air and under N2** (degassed, argon headspace). **Plus a second temperature, 120 C** (FM4), for [1-13C] and [2-13C] glucose with the N2 / air pair at pH 5 | MFT, NF, FFT, furfural, MP, each isotopologue-resolved, plus a methyl-locating MFT fragment | see the outcome list below |
+| **2. fed C6 dicarbonyls** | synthetic 1-DG (Glomb 2000 route) **or synthetic glucosone**, 2 mM, + Na2S or Cys 6 mM, +- glycine 33 mM, 0.5 M phosphate pH 5 and 7, 145 C, 2 - 20 min, **N2 primary** (air as a secondary arm) | MFT, NF, DDP, 1-DPO and 3-DPO (OPD quinoxalines, argon + DTPA), acetic and formic acid, residual dicarbonyl | see the outcome list below; under N2 it is the cleanest R1 / R5 split (FM5) |
+| **3. fed Cys-hexose Amadori** | synthetic D-fructose-L-cysteine (de Roos's preparation) 10 mM, 0.5 M phosphate pH 3 / 5 / 7, 100 and 145 C, 0 - 60 min, N2 and air; **beside a glucose + Cys pot at matched Cys, pH and temperature** | the Amadori compound, free Cys, glucosone, 1-DG and 3-DG (OPD), MFT, NF | part G's supply constants (formation, decay, Cys return, oxidative exit), the mechanism of D2's pH maximum, and **R4' vs the claim**: MFT per mol of Amadori consumed against MFT per mol of glucose-bound Cys in the sugar pot |
 
 What each outcome decides:
 - **Arm 1, [1-13C] gives a labelled MFT methyl and [6-13C] unlabelled MFT:** C-6 lost, so R1 or R2.
 - **Arm 1, the reverse:** C-1 lost, so R5.
-- **Arm 1, ~50 % from both:** C-1 / C-6 equilibration (Tressl 1999 Fig. 14), and the N2 / air contrast decides. R5
-  needs O2; R1 and R2 do not.
+- **Arm 1, ~50 % from both:** C-1 / C-6 equilibration (Tressl 1999 Fig. 14). The methyl-locating label then decides:
+  [2-13C] in the methyl means R5; [2-13C] in the ring with C-1 methyl means R1 / R2. The N2 / air contrast is
+  secondary, because O2 drains 1-DG as well (FM5).
+- **Arm 1 at 120 C against 145 C:** whether the R1 / R5 share moves with temperature (FM4).
+- **Arm 3, the fed Amadori compound gives far less MFT per mol consumed than the glucose + Cys pot:** R4' (the pool is
+  a sink). Comparable or more: R1 / R5 (the pool feeds 1-DPO).
 - **Arm 1, NF's pattern equal to MFT's:** R1 or R5. Independent of it: R2. A mixed pattern: R3.
 - **Arm 2, MFT forms from fed 1-DG without the amino acid, through 1-DPO and NF:** R1.
 - **Arm 2, MFT needs the amino acid, with a 1,4-dideoxy quinoxaline and no NF:** R2.
-- **Arm 2, MFT and C-1-lost 1-DPO form from fed glucosone, under air or not:** R5.
+- **Arm 2, MFT and C-1-lost 1-DPO form from fed glucosone under N2:** R5. **Fed 1-DG under N2 gives 1-DPO and MFT,
+  and fed glucosone does not:** R1.
 - **Arm 1, read again at pH 3 / 5 / 7:** D1 and D2 in a second laboratory.
 
 Request through W6, beside the BTBU / CAAS request for MFT per glucose consumed (ENGINE_VS_LITERATURE sec. 3.1, E1).
@@ -745,10 +828,12 @@ P(it holds a glucose + Cys CAMOLA on MFT) ~0.2, unchanged. It is not a freeze bl
 
 | unit | role | value basis | reported noise | error terms in the primary | floor | density |
 |---|---|---|---|---|---|---|
-| D1 glucose NF / MFT (Hofmann T5) | development unit (spent, ruling 2): reported, never credited | within-pot ratio | triplicates "differ by <= 10 %" (SIDA, MFT). NF method not stated: the same 10 % as a declared transfer, sensitivity x2 | omega per printed value (2 omega^2 on the ratio); no tau | MFT, NF: none printed; declared transfer 1 % of the lowest printed value in the table, required agreement over x0.1 - x10 (sec. 5.3) | exact log-normal; censored form exact |
+| D1 glucose NF / MFT (Hofmann T5) | development unit (falsify-only, ruling 2): reported, never credited | within-pot ratio | triplicates "differ by <= 10 %" (SIDA, MFT). NF method not stated: the same 10 % as a declared transfer, sensitivity x2 | omega per printed value (2 omega^2 on the ratio); no tau | MFT, NF: none printed; declared transfer 1 % of the lowest printed value in the table, required agreement over x0.1 - x10 (sec. 5.3) | exact log-normal; censored form exact |
 | D1 ribose NF / MFT | context (in-sample) | within-pot ratio | as above | as above | as above | reported, not scored |
-| D2 glucose MFT pH 3 / 7 against pH 5 (Hofmann T2) | development unit (spent, ruling 2; never fitted, ruling 3) | two within-study contrasts sharing the pH 5 point (bivariate, correlation 0.5) | <= 10 % | omega per printed value; no tau | as D1 | exact bivariate normal in log10; censored where a rival predicts below the floor |
+| D2 glucose MFT pH 3 / 7 against pH 5 (Hofmann T2) | development unit (falsify-only, ruling 2; never fitted, ruling 3) | two within-study contrasts sharing the pH 5 point (bivariate, correlation 0.5) | <= 10 % | omega per printed value; no tau | as D1 | exact bivariate normal in log10; censored where a rival predicts below the floor |
 | D3 isotopomer shares (Du 2023, Zhao 2019b) | decisive on disk: eliminates R3 | label share | Du: no SD, two blind readers identical; Zhao: triplicate means | binomial-type share error from the printed precision (+-1 % absolute) plus a mixed-channel floor of 1 %. Omega is a level error and does not apply to a share | M+1 - M+4 channels: 1 % (the printed "< 1" cells) | exact |
+| designed arms: labelled MFT (arm 1) | the decider (W6) | isotopologue share | as the request's SIDA (CV 10 %, n = 3); label read to +-1 % absolute | the **d3-MFT / M+3 collision** declared. Labelled pots report shares only; levels come from unlabelled replicate pots, and the standard's channel overlap enters as a term, or the standard is replaced | the request's LOD | exact |
+| designed arms: OPD-trapped dicarbonyls (arms 2, 3) | the decider (W6) | level, ratio | as reported | an **OPD artefact term** (glucosone made from the Amadori compound under continuous trapping), measured by the sugar + OPD and Amadori + OPD blanks and subtracted with its own variance | the request's LOD | exact |
 | D5 de Roos Table I (glucose < 0.05, ribose 43.5) | screen signature | censored ratio | not stated | omega per printed value on ribose; censored glucose | **0.05 mg/mol Cys (the paper's reporting limit)** | exact censored |
 | D5 de Roos Table II | screen signature | relative RI areas (ratio) | response factors not given (mol ratios within ~x1.5, dossier) | omega per value plus the x1.5 response term | -- | exact |
 | D5 Du 2024b pool (S5) | screen signature | peak C/C0 of the Cys-Amadori compound; post-peak loss | triplicates (figure only); the mass balance exceeds the charge by 40 % | omega per value combined with the x1.4 mass-balance term (0.444 dex in log10) | -- | exact |
@@ -761,7 +846,7 @@ P(it holds a glucose + Cys CAMOLA on MFT) ~0.2, unchanged. It is not a freeze bl
 ### 5.2 Bands and their sources
 
 No band below comes from:
-- Hofmann Tables 2 or 5 (spent development units, ruling 2);
+- Hofmann Tables 2 or 5 (seen development units, falsify-only, ruling 2);
 - Du 2023 or Zhao 2019b (reserved);
 - the screen's pots (de Roos Tables I and II, Hofmann Table 1, Bolton, Du 2024b).
 
@@ -772,11 +857,13 @@ required agreement. First-reader sources carry the rule stated at the top.
 
 | coordinate | band | source | kind |
 |---|---|---|---|
-| Glc + Cys -> Cys-hexose Amadori, formation | centred so the predicted free-cysteine first-order loss at Li 2011's conditions (0.2 M each, pH 7, 100 - 130 C) matches its printed k (0.0011 /min at 100 C), x0.3 - 3; Ea 86 - 136 kJ/mol (Zhang 2026's ~101 to Li's 121, +-15) | Li 2011 (glucose + Cys itself; free-Cys loss is a lower bound on net formation); Zhang 2026 (BTBU, units not printed: the barrier only) | same pot class; the width is **unsourced: required agreement** at both ends. Replaces the 2026-11-05 transfer from the trunk's Glc + Gly constant, which is kept as the required-agreement alternative |
+| Glc + Cys -> Cys-hexose Amadori, formation | centred so the predicted free-cysteine first-order loss at Li 2011's conditions (0.2 M each, pH 7, 100 - 130 C) matches its printed k (0.0011 /min at 100 C), x0.3 - 3; Ea 86 - 136 kJ/mol (Zhang 2026's ~101 to Li's 121, +-15) | Li 2011 (glucose + Cys itself). **FM9:** free-Cys loss also counts the thiazolidine and cystine, so it bounds net Amadori formation from **above**, not below; the band's low end therefore extends to x0.1. Du 2024b's 40 % over-closure is carried in S5's tolerance. Zhang 2026 (BTBU, units not printed: the barrier only). **One Cys-sugar Amadori class module shared with M1c** (sugar-specific factors; sec. 6) | same pot class; the width is **unsourced: required agreement** at both ends. Replaces the 2026-11-05 transfer from the trunk's Glc + Gly constant, which is kept as the required-agreement alternative |
 | Cys-hexose Amadori -> 1-DG + Cys, decay | Deng 2021's Met-glucose ARP decay 0.0048 /min at 100 C (label pH 5.5), pH slope from its 7.5 arm, x0.3 - 3; **Ea 34 - 107 kJ/mol** | Deng 2021; Zhang 2026 (85.7); Martins 2005 (97 - 107); **Luo 2023 (Gly-ARP, 34 - 56; first reader)** | same class (hexose amino-acid ARP); the width unsourced: required agreement. Luo's decay is fast-then-slow; a two-pool form is not a rival here (no redesign) |
 | Cys returned per Amadori decay | **0.54 - 1.0** | Martins 2003b, Davidek 2002 / 2005 (71 - 96 %); Deng 2021 (~1); Luo 2023 (0.54 - 1.0; first reader) | measured, same class |
 | `r_odg_dpo` (1-DG -> 1-DPO + C1; R1) | 0 to a ceiling: the share of fed 1-DG not accounted for by the measured exits (Davidek 2006a; Voigt 2009; Smuda 2010) at their own conditions; barrier 40 - 135 kJ/mol | measured exits bound it from above only; Tressl 1994 and Glomb 2010 report no 1-DG C5 (no floor) | numerical above zero: **a verdict that needs a value off the floor does not ship without arm 2** |
-| Cys-hexose Amadori -> glucosone + Cys (R5) | B21's shipped `k_ama_g` (Amadori -> glucosone + amine) at its value +-0.5 dex (its declared transfer LacLys -> fructosyl-glycine); pH-flat as shipped (licensed at pH 6.7), sensitivity at the 2,3-enolisation slope (Beck / Nedvidek, ~0.44 dex/pH); O2 factor 1.0 (air), sensitivity 0 once the cysteine budget closes the O2 (sec. 3) | the shipped constant; no Hamzalioglu value read here | shipped constant, transfer declared; the pH and O2 laws are **unsourced: required agreement** |
+| Cys-hexose Amadori -> glucosone + Cys (R5) | **0 to a ceiling (FM6)**. The ceiling is B21's shipped `k_ama_g` (Amadori -> glucosone + amine) +1.5 dex; required agreement at the floor, at the shipped value and at the ceiling. The 2026-11-06 band (the LacLys value +-0.5 dex) was too narrow for a lysine-lactulose-to-cysteine-glucose transfer. pH-flat as shipped (licensed at pH 6.7), sensitivity at the 2,3-enolisation slope (Beck / Nedvidek, ~0.44 dex/pH). O2 factor 1.0 (air), sensitivity 0 once the cysteine budget closes the O2 (sec. 3) | the shipped constant as a scale only; no Hamzalioglu value read here | numerical above zero: **unsourced, required agreement**; a verdict that needs it off the floor does not ship without arm 2's fed glucosone |
+| R4''s supply (FM3) | the pool's formation, decay and Cys return as above, with **no exit to 1-DG / glucosone** (a sink that returns Cys). The 1-DPO entry is fed from glucose's amine-free enolisation (the trunk's amine-free sugar steps at their shipped values) times a cysteine-catalysis factor of 1 - 10, then `r_odg_dpo` within its band | the trunk's shipped amine-free steps; the catalysis factor has no source | unsourced: required agreement at both ends |
+| O2 on the 1-DG exit (R1, and all rivals through the shared 1-DG pool) (FM5) | air drains 1-DG: x3.4 (Gobert 2009, 50 C) to x4.4 (Glomb 2010); carried as an O2-dependent 1-DG loss term, 0 to x4.4 at air, and absent under N2 | Gobert 2009; Glomb 2010 (first reader) | low-T transfer; required agreement |
 | glucosone -> formic + C5 enediol -> 3-DPO / 1-DPO (R5) | 0 to a ceiling: glucosone's total measured loss at 50 C, pH 7.4 + Lys (Glomb 2010: t1/2 8 h, k ~1.4e-3 /min); barrier 40 - 135 kJ/mol; the 3-DPO : 1-DPO split as the network's pentose enediol split; on the one glucosone pool, competing with `r_g_go` | Glomb 2010 (first reader; ratio "as in glucose reactions", no numbers) | numerical above zero: **a verdict that needs a value off the floor does not ship without arm 2's fed glucosone** |
 | R2's Strecker / reduction step on 1-DG | 0 to the trunk's dicarbonyl + amino-acid Strecker class constant | M3's class. M3 phase 1 ended undecidable on disk (no verdict), and M0's MF-29 finds route A's rate law, carried from fed-dicarbonyl pots, ~5x high in the argon pot, so the upper edge is suspect | class bound; required agreement |
 | NF and DDP shares downstream of 1-DPO | as M2 leaves them; if M2 has no verdict, M2's rivals carried as a factor | M2 | inherited |
@@ -784,7 +871,7 @@ required agreement. First-reader sources carry the rule stated at the top.
 | amine catalysis of MGO loss (part A) | excess k proportional to [amine]^0.75 - 0.84 (Ala); Lys x5 at 100 mM | Kanzler 2026 | one laboratory; part A evidence; no class constant fitted on flavour rows |
 | R3's HA + MGO -> NF | Hofmann Table 6 yields at pH 3 / 5 / 7 | Hofmann 1998 Table 6 (not run, not scored; the same paper as D1 / D2 but other pots), a fixed measured constant | measured constant |
 | R3's fragment-supply pH law (`k_glc_ha` vs pH) | **0.28 - 0.76 dex per pH unit, rising** | Hayashi 1986 (acid limb >= 0.28, C3 0.33 - 0.41); Yu 2017 (MGO standing level 0.50 - 0.76 on 5 -> 7); both first reader | measured range, standing levels not supply constants: required agreement at both ends |
-| part A class constants | peptide / amino-acid ARP formation ratio 0.43 - 7 (Luo 2022 in-pot to Xia 2022 separate pots); Lys / Gly dicarbonyl factor 2 - 7 (Yu 2017); protein lysine from B20 | Luo 2022, Xia 2022, Yu 2017, B20 | declared bands per class; never fitted on flavour rows |
+| part A class constants (structure only: built at parity, off by default; FM7) | peptide / amino-acid ARP formation ratio 0.43 - 7 (Luo 2022 in-pot to Xia 2022 separate pots); Lys / Gly dicarbonyl factor 2 - 7 (Yu 2017); protein lysine from B20 | Luo 2022, Xia 2022, Yu 2017, B20 | declared bands per class; never fitted on flavour rows |
 | omega | 0.419 dex; sensitivity 0.390 | H0 (EX-059) | measured |
 
 ### 5.3 Floors
@@ -816,65 +903,108 @@ nats; a favoured rival exactly at the datum reaches it only if the other rival m
   point makes the bivariate form a little weaker). That is a development reading only, under ruling 2.
 - **D3:** a 1 % mixed channel against R3's ~50 %: decisive at any omega (a share, not a level).
 
-**What the synthetic power check must simulate.** It is required before the freeze, and **it waits for the one JAX
-network (W3, ruling 1)**: it runs on the first build of the network rivals and cannot run before it. Synthetic data
-only. R0 at its shipped constants may be evaluated on the designs (as the M2 prereg did). No measured value of any
-unit is read.
+**The power check: a reduced forced-input mini-model (SPEC; not built).** The check runs on a reduced model, not on
+the full network (ruling 1 as corrected; premortem adopted 2026-11-06). It is required before the freeze. Synthetic
+data only: no measured value of any unit is read, and no engine run on D3's pots (M2's TEST).
+- **Precedent:** M3 phase 1's forced-input layer (EX-049 reproduced bit-exact, mass balance to ~1e-14, the
+  adaptive-tempering SMC density estimator).
+- **Sizing:** ~1 day of work.
+- **Ordering:** it is a power check, not a comparison, so FM8 (no M4 comparison before M2's verdict) does not block it.
+  M2's NF / DDP shares enter as a factor.
 
-Since D1 and D2 are spent (ruling 2), the check has three jobs:
-- **(a) On disk:** confirm that D3 eliminates R3, and that D5 / S5 demote R4, at every band corner. These are the only
-  on-disk eliminations.
-- **(b) Development record:** report D1's and D2's power, which is never credited.
-- **(c) The decider:** the design power of the sec. 4.4 experiment. For each arm, give P(it separates the claim from
-  R0, the claim from R2, and R1 from R5) at n = 3 and at n = 6 heatings per cell. This sets the W6 request.
+**Its jobs** (ruling 2: falsify, never credit):
+- **(a) The on-disk falsifications hold at every band corner.**
+  - R3 / R0's C2 + C3 route against D3: label arithmetic only. A C2 + C3 route in a 1:1 [13C6] / [12C6] pool leaves
+    a binomial mixed share, compared with the printed <= 1 %. No engine run on Du 2023 / Zhao 2019b.
+  - R4-as-written against D5: structural, no run needed.
+- **(b) Development record:** D1's and D2's power, reported and never credited.
+- **(c) The decider's design power.** For each arm of sec. 4.4, at n = 3 and n = 6 heatings per cell, give P(it
+  separates):
+  - the claim from R0;
+  - the claim from R2;
+  - the claim from R4';
+  - R1 from R5.
 
-The specification:
-1. **Generating rivals:** R0 (pinned and refitted), R1, R2, R5, and the controls R3 and R4. Also two mixtures:
-   R1 + R5 at 0.5 each, and R1 + f R3 with f = 0.05 and 0.1 at pH 7. The mixtures show whether a unit misattributes a
-   mixed truth.
-2. **Draws:** Monte Carlo over every sec. 5.2 band, including both ends of each required-agreement range, the first
-   readers' pre-dossier bands, and:
-   - M2's rivals as a factor (D1's R1 / R5 prediction depends on M2's NF / DDP shares);
-   - the MGO law at Ea 47, 121 and 20, at orders 1 and 2;
-   - R5's O2 factor at 1 and at the cysteine-closed budget;
-   - R5's pH law flat and at the 2,3-enolisation slope.
-3. **Designs, exactly as printed:**
-   - D1 and D2: Hofmann's aqueous arm. Cys 3.3 mmol + glucose 10 mmol in 100 mL 0.5 M phosphate, pH 3 / 5 / 7 label,
-     145 C, 20 min, 200 mL autoclave.
-   - D3: Du 2023's (Cys 1 mmol + 1:1 [13C6] / [12C6] glucose, 0.2 M phosphate pH 6.5, 150 C, 120 min) and Zhao 2019b's
-     GSH design, through the isotopologue pools of sec. 6.
-   - The designed arms (sec. 4.4): arm 1's positional labels under air and N2, arm 2's fed 1-DG and fed glucosone, and
-     arm 3's fed Cys-hexose Amadori. Use the SIDA noise the request will ask for (n = 3, CV 10 %), with the label
-     resolved to +-1 % absolute. Include the C-1 / C-6 equilibration case (Tressl 1999 Fig. 14) as a generating
-     variant.
-4. **Noise:** sec. 5.1 exactly.
-   - omega 0.419 per value (0.390 as a sensitivity), and the NF-assay noise at x1 and x2;
-   - floors at x0.1, x1 and x10 of the declared transfer;
-   - D3's +-1 % absolute and 1 % mixed floor;
-   - the correlation of 0.5 between D2's two contrasts.
-5. **Scoring:** the same densities, adequacy rule, pinned-R0 rule and Holm correction as item 6.
-6. **Report:** for each unit and each pair, P(the generating rival wins by > 1.92 nats), and P(a "both inadequate"
-   reading).
-   - A unit whose power is < 0.5 for a pair is demoted to "ranks, does not decide" for that pair. This happens before
-     any measured decisive value is compared with a rival.
-   - The expected outcome is written in sec. 4.3: D1 has zero power for R1 vs R5 by construction, and D1 / D2 are
-     development units whatever their power.
-7. **Cost:** ~5 - 8 h of work plus ~3 - 8 h of unattended compute, once the network rivals exist.
+  This sizes the W6 request.
 
-**P(the data on disk can separate the rivals), after the rulings.**
-- R3 eliminated by D3: ~0.95 (the Schieberle 2003 transfer caveat).
-- R4 eliminated by D5 (structural): ~0.9.
-- The claim (R1 / R5) over R0: **0**. D1 / D2 are spent (ruling 2); nothing else on disk measures the hexose route.
-- The claim from R2: **0** for a credited verdict. D1 is spent; as a development reading, P(D1's power >= 0.5) ~0.45.
+**The mini-model.**
+1. **Species** (one well-mixed aqueous pot, isothermal at the declared temperature):
+   - glucose (forced input: its consumption clamped to a declared first-order course within Li 2011's band, or held
+     at charge);
+   - free Cys (state);
+   - the Cys-hexose Amadori pool (state);
+   - 1-DG, glucosone and 3-DG (states);
+   - the C5 1,2-enediol (lumped into 3-DPO / 1-DPO at the declared split);
+   - 1-DPO, NF, DDP (for R2), MFT and formic acid (states);
+   - a lumped "other exits" sink per dicarbonyl (acetic acid and C4 fragments for 1-DG; glyoxal for glucosone through
+     `r_g_go`'s band);
+   - H2S, as a forced input proportional to Cys loss within the M1 envelope, declared.
+2. **Steps per rival** (bands from sec. 5.2; no fitted constant from any pot scored here):
+   - **R1:** pool -> 1-DG + Cys -> 1-DPO + C1 (C-6 lost).
+   - **R5:** pool -> glucosone + Cys -> formic (C-1) + C5 enediol -> 1-DPO / 3-DPO.
+   - **R2:** 1-DG + amino acid -> 1,4-dideoxy C6 -> DDP -> MFT.
+   - **R4':** the pool is a Cys sink only; glucose -> 1-DG by amine-free enolisation x the Cys-catalysis factor.
+   - **R0:** no entry; C2 + C3 only, at its shipped `k_glc_ha`.
+   - **Shared downstream:** 1-DPO -> NF and 1-DPO -> MFT directly, NF + H2S -> MFT, all at M2's shares carried as a
+     factor (each M2 rival, or M2's verdict once it exists).
+   - O2 enters as a declared factor on the oxidative steps (`r_ama_g`-like) and on the 1-DG drain (FM5). It is 1 under
+     air and 0 under N2, with the cysteine-budget sensitivity.
+3. **Label maps.** Every carbon of glucose (C-1 ... C-6) is tracked through each step as a position vector:
+   - 1-DG keeps C1 - C6 (methyl = C-1);
+   - R1's 1-DPO drops C-6;
+   - R5's glucosone loses C-1 to formic acid, so its 1-DPO methyl = C-2;
+   - C2 + C3 pairs fragments at random from the labelled and unlabelled pools.
+
+   MFT's carbons, and the methyl-locating fragment's, are read from the 1-DPO map. Generating variants:
+   - **C-1 / C-6 equilibration before cleavage** (Tressl 1999 Fig. 14) is a variant: a 50 % swap on the hexosulose.
+   - **Temperature-dependent R1 / R5 mixture (FM4):** the share of 1-DPO from R5 is f(T) = logistic in 1/T, with f
+     at 145 C drawn on [0, 1] and dEa(R5 - R1) drawn on [-60, +60] kJ/mol. Arm 1's 120 C cells test whether f moves.
+4. **Designs:** sec. 4.4's arms exactly (charges, buffer, pH label, temperature, time, headspace), plus Hofmann's
+   aqueous arm for (b).
+5. **Measurement model:** sec. 5.1 exactly:
+   - omega per value (0.390 as a sensitivity);
+   - SIDA CV 10 %, n = 3 or 6;
+   - label shares +-1 % absolute;
+   - the d3-MFT / M+3 channel collision as a declared overlap term in labelled pots (levels taken from the unlabelled
+     replicate pots);
+   - the OPD artefact as a blank-subtracted term with its own variance;
+   - floors from the request's LODs.
+6. **Draws:** Monte Carlo over every sec. 5.2 band and both ends of each required-agreement range, including:
+   - the first readers' pre-dossier bands;
+   - the MGO law at Ea 47 / 121 / 20, orders 1 and 2;
+   - R5's `k_ama_g`-scaled band from 0 to the ceiling;
+   - the O2 factors;
+   - the R4' catalysis factor;
+   - M2's shares.
+7. **Scoring:** exact densities where closed-form (label shares, log-normal levels), else the M3 SMC estimator
+   (PSIS k-hat < 0.7, ESS >= 100). Also the adequacy rule, Holm across arms, and a threshold of 1.92 nats.
+8. **Checks before any result is read:**
+   - mass and carbon balance per run to < 1e-10;
+   - label conservation (every carbon accounted for at every step);
+   - a hand-computed label table for each rival at one parameter point, reproduced exactly;
+   - R0's C2 + C3 mixed share reproduced against the binomial arithmetic.
+9. **Report:**
+   - per arm, per pair, and per n, P(the generating rival wins by > 1.92 nats) and P("both inadequate");
+   - the arms ranked by design power per heating.
+
+   A unit or arm below 0.5 power for a pair is marked "ranks, does not decide" for that pair. **Demotions only.**
+10. **Cost (~1 day):** build 3 - 4 h; checks 2 h; runs 2 - 4 h unattended (1 core, niced); write-up 1 - 2 h.
+11. **Out of scope:** the full network (W3), pH in situ (the label pH is used, as each design states it), and part A.
+
+**P(the data on disk can separate the rivals), after the rulings and the premortem.**
+- C2 + C3 as the hexose MFT route falsified (R3 and R0's route) by D3: ~0.95 (the Schieberle 2003 transfer caveat).
+- R4-as-written falsified by D5: ~0.95 (structural). R4' is not separable on disk (~0.02).
+- The claim (R1 / R5) credited over R0: **0**. Nothing on disk can credit a rival (ruling 2).
+- The claim from R2: **0** for a credited verdict. As a development reading, P(D1's power >= 0.5) ~0.45.
 - R1 from R5: **~0.02** (an explicit "cannot decide on disk" pair).
-- Part A: ~0.05.
+- Part A: not decided here (structure only, FM7).
 - P(part G ships anything from disk): **~0**.
-- Expected on-disk outcome (P ~0.85): "development grade. R3 and R4 eliminated. The claim (R1 or R5) and R2 not
-  separated from R0 on credited data. Decider: the designed experiment."
-- **If the designed experiment is run as written** (all three arms, n = 3, before the power check sizes them):
-  - P(arm 1 separates R1 from R5) ~0.7. Without equilibration the label decides; with it, the N2 / air contrast must
-    carry it.
-  - P(arm 1 or 3 separates the claim from R0) ~0.8.
+- Expected on-disk outcome (P ~0.85): "development grade. C2 + C3 falsified as the hexose MFT route (R0's route and
+  R3), R4-as-written falsified, no rival credited. Decider: the designed experiment."
+- **If the designed experiment is run as amended** (all three arms, n = 3; before the mini-model sizes them):
+  - P(arm 1's methyl-locating label or arm 2 under N2 separates R1 from R5) ~0.75;
+  - P(arm 1 or 3 separates the claim from R0) ~0.8;
+  - P(arm 3 separates the claim from R4') ~0.65;
   - P(arm 2 separates the claim from R2) ~0.6.
 
 ### 5.5 The mechanism-signature screen (before any fit; demotions only)
@@ -896,7 +1026,7 @@ one paper's pots cannot both set a band and screen it.
 After the screen, a rival that fails a signature inside all its bands is demoted (reported, not dropped). None is
 added, promoted or redesigned around the screen. The screen's pots are then declared seen; D1 and D2 (spent development units) are untouched.
 
-**Stop rule.** If no rival among R1, R2 and R5 passes S1, S2 and S5 inside its bands within ~15 h, part G reads "hexose
+**Stop rule.** If no rival among R1, R2, R4' and R5 passes S1, S2 and S5 inside its bands within ~15 h, part G reads "hexose
 entry not identifiable on disk" and the designed experiment goes out.
 
 ## 6. What M4 needs from the one network (W3)
@@ -910,6 +1040,13 @@ entry not identifiable on disk" and the designed experiment goes out.
 - **An O2 dose term** on the oxidative steps (`r_ama_g` and R5's exit), or at least the air factor with a
   cysteine-budget sensitivity. Today `ATMOSPHERE_FACTORS` = {air: 1.0}; this is the vessel / headspace operator of M0's
   G9.
+- **ONE Cys-sugar Amadori class module, shared with M1c (FM9).** The cysteine-pentose (M1c's `r_cama_form`,
+  `CYS_AMADORI_ROUTE`) and cysteine-hexose Amadori compounds are one class.
+  - It has sugar-specific factors on formation, decay, Cys return and exits, and one pKa table.
+  - Its constants are judged once, in the joint refit.
+  - M4's bands still never come from M1c's fitted constants (sec. 2.11).
+- **Part A is structure only (FM7):** built in W3 at parity with today's engine, and off by default. Switching it on
+  is a separate part-A case.
 - **Amine classes as species, not a convention:**
   - free alpha-amino acid (with identity factors), cysteine, peptide (GSH, diglycine) and protein-bound lysine (one
     key, A2b);
@@ -935,9 +1072,10 @@ entry not identifiable on disk" and the designed experiment goes out.
 ## Open questions for the build
 
 1. **Order with M1 and M2.** Part G feeds the pentose steps whose NF / DDP shares M2 refits and whose supply M1's C1
-   replaces. D1 is read on the network after M2's verdict, or with M2's rivals carried as a factor.
+   replaces. **No M4 comparison runs before M2's verdict (FM8).** Only the reduced-model power check (synthetic)
+   carries M2's rivals as a factor.
 2. **The Hofmann glucose pH 3 / 7 arms. Resolved (ruling 3).** The older hold-out declaration binds against
-   fitting. No rival's constants are fitted on them; they are scored only, as spent development units (ruling 2).
+   fitting. No rival's constants are fitted on them; they are scored only, as falsify-only development units (ruling 2).
 3. **The Cys-hexose Amadori step's constants.** Li 2011 now centres the formation (free-Cys loss) and Du 2024b screens
    it at 145 C. The multiplier width stays unsourced (required agreement).
 4. **E8 after M1.** If C1 ships, does part E survive for `r_glc_fur` and `r_arp_tdp` alone? Decide before building the
@@ -959,38 +1097,80 @@ entry not identifiable on disk" and the designed experiment goes out.
 
 ## What should block the freeze (for the review and the coordinator)
 
-The coordinator's rulings of 2026-11-06 settled the first round. What remains:
-1. **The synthetic power check waits for the one JAX network (W3; ruling 1).** The network infrastructure (PR #74) and
-   the sulfur port are not merged. The freeze waits on W3, by the plan's own dependency (W3 before M4).
-2. **Resolved:** D1 / D2 are spent development units (ruling 2), and the pH 3 / 7 bundles are never fitted (ruling 3).
-3. **Resolved:** the claim is restated as "a hexose C5 entry into 1-DPO; carbon origin undecided", with R1 vs R5 an
-   explicit "cannot decide on disk" pair (ruling 4).
-4. **For the premortem and the review.** Test the R5 form:
+The coordinator's rulings and the adopted premortem (FM1 - FM9) settled the first rounds. What remains:
+1. **The reduced forced-input mini-model power check (sec. 5.4)** must be built (~1 day) and run, and its demotions
+   written in. It is specified, not built. The full network (W3) is needed for the M4 build, not for the power check.
+2. **Resolved:**
+   - the spent-data rule (ruling 2 as corrected by FM2: spent or seen data falsify constant-free predictions, never
+     credit);
+   - the pH 3 / 7 bundles are never fitted (ruling 3);
+   - the claim is restated with R1 vs R5 as a cannot-decide-on-disk pair (ruling 4);
+   - R4' is added (FM3);
+   - R5's band is widened (FM6);
+   - part A is structure only (FM7);
+   - no comparison before M2 (FM8);
+   - the reservoir notes and the one class module (FM9).
+3. **For the review.** Test the R5 form:
    - whether glucosone from the Cys-hexose Amadori compound at 145 C is plausible while cysteine scavenges the O2;
-   - whether B21's `k_ama_g` (licensed at pH 6.7, fitted on LacLys) may be used at its shipped value.
-5. **Not blockers, but the owner should know:**
-   - On disk, nothing in part G can ship over R0, and the expected outcome is development grade (P ~0.85).
-   - M4's part G is decided only by the designed experiment, which comes last by the owner's ruling (2026-11-05).
-   - The M4 build would still be worth running for its eliminations (R3, R4), the network pieces M5 / M6 reuse, and the
-     design power that sizes the W6 request.
+   - whether the methyl-locating fragment of MFT is measurable (a fragment keeping the 2-methyl carbon) in the
+     requesting laboratory's MS.
+4. **Not blockers, but the owner should know:**
+   - On disk, part G credits no rival and ships nothing over R0. It records only falsifications: C2 + C3 as the hexose
+     MFT route (R0's route and R3), and R4-as-written.
+   - The decider is the designed experiment, which comes last by the owner's ruling (2026-11-05).
+   - The M4 build is still worth its network pieces (M5 / M6 reuse them, as does the one Cys-sugar Amadori module
+     shared with M1c), and the mini-model sizes the W6 request.
 
 ## Proposed update to `docs/reference/decisive_measurements.yml` (entry `glucose_mft_carbon_origin`)
 
-To be applied at the freeze by that file's one writer; not applied here.
-- Replace the rival "unlisted: a route through a C-1-lost C5 (no source on disk proposes it ...)" with "R5: the
-  oxidative route, Cys-hexose Amadori -> glucosone -> beta-cleavage (C-1 lost as formic acid) -> 1-DPO -> the pentose
-  steps (Glomb 2010)".
+To be applied at the freeze by that file's one writer; not applied here. The same text is in PR #90's body.
+
+**Rivals.**
+- Replace "unlisted: a route through a C-1-lost C5 ..." with "R5: the oxidative route, Cys-hexose Amadori ->
+  glucosone -> beta-cleavage (C-1 lost as formic acid) -> 1-DPO -> the pentose steps (Glomb 2010)".
 - Restate R1 and R5 as the claim's two carbon-origin forms ("a hexose C5 entry into 1-DPO; C-1 retained vs lost"), an
   explicit pair that cannot be decided on disk.
-- Mark R3 and R4 as declared-failing controls, eliminated on disk by D3 and D5.
-- `why_not_on_disk`: Hofmann 1998's glucose pots (Table 5 NF / MFT; Table 2 pH 3 / 5 / 7) are spent. They are the E1
-  misfit that nominated the claim (coordinator ruling, 2026-11-06), so no on-disk unit can credit the claim over R0.
-- Arm 1: add the air / N2 sub-arms (o2: "air and N2 arms, stated headspace").
-- Arm 2: add synthetic glucosone beside 1-DG, with 3-DPO and 1-DPO measured.
-- Outcomes: "C-1 lost" now means R5, not "an unlisted 3-DG-side route". "~50 % from both labels" means equilibration,
-  and the N2 / air contrast decides.
-- `why_not_on_disk`: add "Glomb 2010 (Halle, 50 C) labels the hexose 1-DPO as C-1-lost via glucosone; no source at
-  >= 100 C measures it".
+- Add "R4': the Cys-hexose pool exists as a cysteine sink only; the C5 entry is fed by cysteine-catalysed or amine-free
+  enolisation, not through the pool". Its decider is arm 3.
+- Keep R4-as-written as the band-now record, falsified by D5.
+- Record "C2 + C3 as the hexose MFT route is falsified (R0's route and R3) by D3's label share; no rival credited".
+
+**`why_not_on_disk`.**
+- The spent-data rule: spent or seen data may falsify a constant-free prediction, never credit a rival.
+  - D3 (BTBU / CAAS label shares) nominated E1.
+  - D1 (Hofmann Table 5) was seen through R0's probe.
+  - D2's pH 3 / 7 arms are MF-12 observations.
+- Glomb 2010 (Halle, 50 C) labels the hexose 1-DPO as C-1-lost via glucosone; nothing at >= 100 C measures it.
+- O2 drains 1-DG too (Gobert 2009, Glomb 2010), so air / N2 does not single out R5.
+
+**Arm 1.**
+- Add [2-13C] or [1,2-13C2]-glucose, read through a methyl-locating MFT fragment, beside [1-13C], [6-13C] and the 1:1
+  [13C6] / [12C6].
+- Air / N2 sub-arms (o2: "air and N2 arms, degassed with argon headspace").
+- **A second temperature, 120 C**, for the [1-13C] and [2-13C] glucose cells with the N2 / air pair at pH 5
+  (temperatures_C: [120, 145]).
+
+**Arm 2.**
+- Synthetic glucosone beside 1-DG, N2 primary, with 3-DPO and 1-DPO measured.
+- "Fed 1-DG vs fed glucosone under N2" is the cleanest R1 / R5 split.
+
+**Arm 3.**
+- Add a glucose + Cys pot at matched Cys, pH and temperature.
+- The outcome "MFT per mol of fed Amadori consumed, far below the sugar pot's" means R4'; comparable or more means
+  R1 / R5.
+
+**Measurement requirements (all arms).**
+- Levels come from unlabelled replicate pots. Labelled pots report shares only, with no d3-MFT standard: d3 collides
+  with 13C-MFT's M+3 channel, so use a non-overlapping standard.
+- OPD trapping under argon with 1 mM DTPA, post-incubation primary, with sugar + OPD and Amadori + OPD blanks (the
+  continuous-trapping glucosone artefact).
+- LOD / LOQ and recovery per assay.
+
+**Outcomes.**
+- "C-1 lost" (unlabelled methyl from [1-13C], labelled from [2-13C]) means R5.
+- "C-1 retained" means R1 / R2.
+- "~50 % from both positional labels" means C-1 / C-6 equilibration, and the methyl-locating label decides.
+- A shift between 120 and 145 C means a temperature-dependent R1 / R5 mixture.
 
 ## Revision log
 
@@ -1078,3 +1258,44 @@ Still before any result of the change; no engine run on any pot. Started from th
   - Part A inherits M0a's spent data.
 - **Yu 2017 is listed as SEEN / spent** (sec. 2.10). It was used for R3's fragment pH band and part A's within-class
   spread, so it is credited as decisive nowhere.
+
+### Changelog: 2026-11-06 (premortem adopted, FM1 - FM9); READY TO FREEZE as development grade, decider W6, pending the reduced-model power check
+
+- **Status** changed to "READY TO FREEZE as development grade, decider W6: pending the reduced-model power check".
+- **FM2 corrects ruling 2's basis.** D3 (the BTBU / CAAS label shares) is what nominated E1. D1 was only seen through
+  R0's probe, and D2's pH 3 / 7 arms are MF-12 observations.
+  - **The rule:** spent or seen data may falsify a rival whose prediction is constant-free, never credit one. It
+    applies to R0's route as to R3.
+  - **Recorded:** "C2 + C3 as the hexose MFT route is falsified (R0's route and R3); no rival credited".
+    R4-as-written is falsified by D5.
+- **FM3:** new rival R4' (the pool as a cysteine sink; the C5 entry from cysteine-catalysed or amine-free enolisation).
+  Its decider is arm 3 (MFT per mol of fed Amadori consumed against a matched glucose + Cys pot). R4-as-written is kept
+  as the band-now record only.
+- **FM4:** a temperature-dependent R1 / R5 mixture in the generators; arm 1 gains a 120 C cell ([1-13C], [2-13C]
+  glucose, N2 / air, pH 5).
+- **FM5:**
+  - O2 drains 1-DG too (Gobert, Glomb), so air / N2 no longer singles out R5;
+  - a methyl-locating [2-13C] / [1,2-13C2] label added;
+  - arm 2 under N2 is the primary R1 / R5 split;
+  - OPD under argon + DTPA with sugar / Amadori + OPD blanks;
+  - levels taken from unlabelled replicate pots;
+  - the OPD artefact and the d3-MFT / M+3 collision added to the measurement model.
+- **FM6:** R5's Amadori -> glucosone step is banded "0 to a ceiling" (shipped `k_ama_g` + 1.5 dex), not the LacLys
+  value +-0.5.
+- **FM7:**
+  - part A is an engine-structure requirement only (W3, at parity, off by default; switching on is a part-A case);
+  - M0a's sweep candidates are carried into part A with M0a's roles (Wang Y. 2019, 10.1016/j.foodres.2019.05.001,
+    among them);
+  - the pH scale is resolved: in situ where a lane has a pH state, the declared label pH elsewhere;
+  - Hollnagel & Kroh 1998 is reconciled: out of part G, an evidence candidate for part A.
+- **FM8:** no M4 comparison runs before M2's verdict.
+- **FM9:**
+  - Li 2011's free-Cys loss includes thiazolidine and cystine, so it bounds Amadori formation from above (the band's
+    low end goes to x0.1);
+  - Du 2024b's 40 % over-closure is kept in S5;
+  - one Cys-sugar Amadori class module with sugar-specific factors is shared with M1c.
+- **Sec. 5.4** now specifies the reduced forced-input mini-model power check (pool -> 1-DG / glucosone -> 1-DPO ->
+  NF -> MFT with carbon label maps, M3-layer style, ~1 day). It is not built. The D3-design engine runs are dropped
+  (M2's TEST; label arithmetic suffices). The odds are rewritten.
+- **The decisive-measurements proposal** is updated: R4', arm 3's matched pot, the label / OPD / standard fixes, and the
+  second temperature. It is in the PR body too.
