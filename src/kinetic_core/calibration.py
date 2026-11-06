@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import copy
 import dataclasses
+import hashlib
 import json
 import math
 from dataclasses import dataclass, field
@@ -29,6 +30,11 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 from src import data_paths
 
 USER_RESULTS_DIR: Path = data_paths.RESULTS_ROOT / "user"
+
+#: The provenance field where ``user_fit.calibrate`` writes the sha256 of the calibration's fitted payload
+#: (:meth:`Calibration.payload_checksum`; 2026-11-05, H0 follow-up). It is an INTEGRITY check, not an authentication:
+#: it catches a hand edit and a provenance block copied onto other numbers, not a forger who re-computes it.
+PAYLOAD_CHECKSUM_FIELD = "payload_sha256"
 
 
 @dataclass(frozen=True)
@@ -154,9 +160,19 @@ class Calibration:
         metadata = dict(run.run_metadata)
         metadata["calibration"] = {"lab": self.lab, "response_factors_applied": applied,
                                    "matrix_of_records": self.matrix}
-        # the factor's own uncertainty widens the interval: 1.645 sigma in decades for a 90 % band
+        # the factor's own uncertainty widens the interval: 1.645 sigma in decades for a 90 % band. 2026-11-05
+        # (H0 / EX-059): a thiol-lane observable's calibrated level is the within-laboratory case the ruling
+        # ships, and it is a two-row ratio (the new condition against the fit rows' mean), so its interval also
+        # carries omega for the new row and omega / sqrt(n) for the anchor, in quadrature, here and only here.
+        # Whether the level is SHOWN at all is thiol_relative_only.calibration_rescues (made by calibrate, from data).
+        from . import thiol_relative_only
+
         metadata["calibration_extra_decades"] = {
-            compound: 1.645 * self.response_factors[compound].sigma for compound in applied
+            compound: (thiol_relative_only.calibrated_extra_decades(self.response_factors[compound].sigma,
+                                                                    self.response_factors[compound].n_rows)
+                       if thiol_relative_only.declared(run.declaration, compound)
+                       else 1.645 * self.response_factors[compound].sigma)
+            for compound in applied
         }
         spec_matrix = str(getattr(run.spec.process, "matrix", "water") or "water")
         if spec_matrix != self.matrix:
@@ -165,6 +181,42 @@ class Calibration:
                 f"{spec_matrix!r}. A response factor does not transfer across matrices."
             )
         return dataclasses.replace(run, concentrations_ug_per_l=scaled, run_metadata=metadata)
+
+    # -- integrity ----------------------------------------------------------------------------
+    def fitted_payload(self) -> Dict[str, Any]:
+        """What ``calibrate`` fitted and what decides a calibrated level: every response factor (its compound,
+        log10, sigma and row count), every override (its coordinate and posterior), the fit and validate records'
+        names, the base wave and the matrix. Lab name, date, notes and provenance are not in it."""
+        return {
+            "base_wave": self.base_wave,
+            "matrix": self.matrix,
+            "response_factors": {c: {"log10": float(rf.log10), "sigma_log10": float(rf.sigma), "n_rows": int(rf.n_rows)}
+                                 for c, rf in sorted(self.response_factors.items())},
+            "overrides": [{"coordinate": dataclasses.asdict(o.coordinate), "prior_value": float(o.prior_value),
+                           "prior_sigma": float(o.prior_sigma), "value": float(o.value), "sigma": float(o.sigma),
+                           "band": [float(x) for x in o.band] if o.band else None} for o in self.overrides],
+            "fit_records": [str(r) for r in self.fit_records],
+            "validate_records": [str(r) for r in self.validate_records],
+        }
+
+    def payload_checksum(self) -> str:
+        """sha256 of :meth:`fitted_payload` as canonical JSON (sorted keys, no whitespace; floats round-trip
+        exactly through ``json``, so a saved and re-loaded file gives the same digest)."""
+        text = json.dumps(self.fitted_payload(), sort_keys=True, separators=(",", ":"))
+        return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+    def checksum_problem(self) -> Optional[str]:
+        """``None`` when the provenance's checksum matches the payload; otherwise why it does not."""
+        recorded = (self.provenance or {}).get(PAYLOAD_CHECKSUM_FIELD)
+        if not recorded:
+            return (f"the calibration file carries no content checksum (provenance.{PAYLOAD_CHECKSUM_FIELD}), so it "
+                    "cannot be verified as made by `calibrate`: a file written before 2026-11-05 or by hand. Re-run "
+                    "`calibrate` on your records to make a verifiable one")
+        if str(recorded) != self.payload_checksum():
+            return (f"the calibration file's content checksum (provenance.{PAYLOAD_CHECKSUM_FIELD}) does not match "
+                    "its response factors, overrides and records: the file was edited after `calibrate` wrote it, "
+                    "or its provenance was copied from another calibration. Re-run `calibrate` on your records")
+        return None
 
     # -- serialisation ------------------------------------------------------------------------
     def as_dict(self) -> Dict[str, Any]:

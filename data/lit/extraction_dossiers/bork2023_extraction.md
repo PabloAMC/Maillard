@@ -131,7 +131,7 @@ absolute concentrations (relative assay); the antioxidant / colour results have 
     status: digitised_in_dossier
     quant_class: semi_quantitative
     simulable: true
-    read_by: "first reader 2026-11-05; second reader pending"
+    read_by: "first reader 2026-11-05; second reader 2026-11-05 AGREES on NF alone 48 % and the conditions (see Second reader section); MGO values not second-read"
     condition_quote: "heated separately or as mixtures in sealed ampoules at 130 C after adjusting the pH to 5.0"
     flags: [ph_start_only, unbuffered, o2_not_stated, single_time_point, relative_to_t0, same_lab_as_bork2022]
     note: "NF alone 48 +- 4 % at 120 min (k(0-120) 6.1e-3 if first order); bork2022 Fig. 1D same pot 59 % -> lab range 4.4-6.1e-3. MGO alone 16 %."
@@ -176,3 +176,22 @@ pH 5 / 130 °C / 120 min, so **FF's 33 % loss and PA's 19 % loss in the NF pots 
 colour-assay caveat only. (iii) **Nothing on O2, final pH, NF at 30 / 60 min, or temperature.** The k of sec. 4.3
 (6.1 × 10⁻³ min⁻¹, two-point, 0-120 min) stands unchanged, and the within-lab conflict with `bork2022` (sec. 6 item 1)
 is neither resolved nor sharpened by the SI.
+
+## Second reader (2026-11-05)
+
+**Independent second reading** by `agent-second-reader-2026-11-05`, PDF read before this dossier. Source:
+`data/articles/bork2023.pdf` (Antioxidants 12:1788). Fig. 4B digitised from a 600 dpi crop of p. 9; axis calibrated on the
+0 / 25 / 50 / 75 / 100 tick marks (11.57 px per %); bar value = centre of the bar's top outline, SD = cap minus bar top
+(one-sided bar). **Read error ±0.3 %.**
+
+| item | location | first reader | second reader | verdict |
+|---|---|---|---|---|
+| NF alone, % left at 120 min | Fig. 4B p. 9 (bar "NF", letter f); text p. 8 "around 48% of NF was left after its individual treatment" | 48 ± 4 (47.8, SD ≈ 3.9) | **47.7, SD ≈ 4.1**; text 48 % | AGREE |
+| pot | sec. 2.2 p. 3 | NF 57.0 mg in 25 mL water = 20 mM | NF 57.0 mg, 25 mL water, "Equimolar (20 mmol/L)" | AGREE |
+| pH | sec. 2.2 | 5.0 ± 0.1, set before heating, no buffer | "after adjusting the pH to 5.0 ± 0.1"; no buffer named; HCl listed among chemicals (NaOH not checked by me) | AGREE |
+| vessel / T / times | sec. 2.2 | sealed ampoules, 130 °C, 0 / 30 / 60 / 120 min, freezer quench | same; only 120 min is reported for NF | AGREE |
+| replicates | sec. 2.2 p. 4 | triplicate, mean ± SD | triplicate, mean ± SD; two-way ANOVA + Tukey (Fig. 4 caption) | AGREE |
+| assay | sec. 2.4 | HPLC-DAD 285 nm, relative to t = 0 (no calibration) | "quantified relative to the unheated samples (t = 0 min)"; Nucleosil 120-5 C18, 45 °C, 0.075 % acetic acid / MeOH, 285 nm | AGREE |
+
+k(0-120 min) if first order from t = 0: ln(1/0.477)/120 = 6.2 × 10⁻³ min⁻¹ (5.4-7.0 × 10⁻³ for ±1 SD); the first reader's
+6.1 × 10⁻³ (5.5-6.8) — AGREE. The within-lab conflict with `bork2022` (59.0 % at 120 min there, second reading) stands.

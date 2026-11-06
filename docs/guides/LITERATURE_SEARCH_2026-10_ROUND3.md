@@ -247,7 +247,7 @@ covered by rounds 1-2. de Roos 1992 and Mizutani 1960 add the pH dependence and 
 | Belikov 1967 | Stability of the products of condensation of L-cysteine with carbohydrates | [10.1007/bf01171720](https://doi.org/10.1007/bf01171720) | kw | 0 / 1 | ? | title fits exactly; Russian, 1 citer, no abstract | MAYBE |
 | Fan 2011 | Kinetics of Maillard reaction in glucose/L-cysteine model systems (Chinese) | no DOI | kw (OpenAlex record without DOI) | - | Qa | abstract: glucose and cysteine loss first order at several temperatures; browning Ea 164.8 kJ/mol, pH-drop Ea 149.2 kJ/mol. No DOI; access uncertain | MAYBE |
 | Hou 2008 | Kinetics of the L-arabinose/cysteine Maillard reaction (Chinese thesis) | no DOI | kw (OpenAlex record without DOI) | - | Qa | arabinose loss by HPLC-ELSD under several conditions; arabinose not a modelled sugar | SKIP |
-| Vauthey 2000 | Structured fluids as microreactors (cysteine/furfural, cysteine/ribose) | [10.1021/jf991254a](https://doi.org/10.1021/jf991254a) | kw; P1 rank 382 (4 corpus citers) | 12 / 65 | Q | FFT 5-7x higher in L2/cubic phases than water; microemulsion (corpus has Yaghmur) | SKIP |
+| Vauthey 2000 | Structured fluids as microreactors (cysteine/furfural, cysteine/ribose) | [10.1021/jf991254a](https://doi.org/10.1021/jf991254a) | kw; P1 rank 382 (4 corpus citers) | 12 / 65 | Q | FFT 4.8x (microemulsion) / 6.4x (cubic) higher than water, Cys + furfural only (corrected 2026-11-05 from "5-7x", CF-125); microemulsion (corpus has Yaghmur) | SKIP |
 
 ### G3 cysteine + dicarbonyl kinetics
 

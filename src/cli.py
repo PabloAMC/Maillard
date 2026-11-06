@@ -154,7 +154,7 @@ def run_wishlist(args: argparse.Namespace) -> int:
     md_path = data_paths.DATA_WISHLIST.with_suffix(".md")
     if not data_paths.DATA_WISHLIST.exists() or not md_path.exists():
         print(
-            "The data wishlist is not generated. Run: ./scripts/docker_maillard.sh wishlist "
+            "The data wishlist is not generated. Run: ./scripts/docker_maillard.sh wishlist-build "
             "(or python scripts/generators/generate_data_wishlist.py).", file=sys.stderr,
         )
         return 2
@@ -427,7 +427,9 @@ def build_parser() -> argparse.ArgumentParser:
             "What new data would improve this model most, and what each measurement would let you\n"
             "predict. Read from results/validation/data_wishlist.md, which is generated from the\n"
             "scorecard, the slice profile, the directional scorecard and the value-of-information\n"
-            "ranking (src/data_wishlist.py). Nothing here is typed by hand."
+            "ranking (src/data_wishlist.py). Sections 1 - 7 are derived, nothing typed by hand; the last\n"
+            "section (structural questions the literature on disk cannot decide) is rendered from the\n"
+            "hand-kept, citation-checked record docs/reference/decisive_measurements.yml."
         ),
     )
     wishlist.add_argument("--json", action="store_true", help="print the machine-readable payload instead")

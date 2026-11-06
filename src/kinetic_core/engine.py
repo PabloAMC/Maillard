@@ -82,7 +82,7 @@ from .parameters_sulfur import (
     MEASURED_SULFUR, OX_AMBIENT_MMOL_L, OX_RESERVOIR_DEFAULT_UNITS, OX_SAT_MMOL_L,
     oxygen_parameters, with_fitted_sulfur,
 )
-from . import acrylamide_conditions, trunk_conditions
+from . import acrylamide_conditions, thiol_relative_only, trunk_conditions
 from .species import SPECIES_KEYS
 from .species_acrylamide import ACRYLAMIDE_INDEX, acrylamide_ppb
 from .species_sulfur import (
@@ -884,6 +884,11 @@ class EnvelopeDeclaration:
     lanes: Tuple[str, ...] = ()
     #: B6. The lipid carriers this charge declares, and where each came from.
     lipid_carriers: Tuple[str, ...] = ()
+    #: 2026-11-05 (H0 / EX-059, D2 branch (i); thiol_relative_only): requested names whose ABSOLUTE level the
+    #: thiol lane does not ship. The engine still integrates them -- a between-condition ratio needs the number --
+    #: and every output that would emit the level refuses it by name; ``compare`` answers their ratios with
+    #: omega in the interval.
+    absolute_refused_targets: Tuple[str, ...] = ()
 
     @property
     def is_answerable(self) -> bool:
@@ -938,6 +943,7 @@ class EnvelopeDeclaration:
             "mapped_precursors": dict(self.mapped_precursors),
             "mapped_targets": dict(self.mapped_targets),
             "lipid_carriers": list(self.lipid_carriers),
+            "absolute_refused_targets": list(self.absolute_refused_targets),
         }
 
 
@@ -1532,6 +1538,21 @@ def declare_envelope(
                 "declare the precursor this compound is made from."
             )
 
+    # --- 2026-11-05: H0 / EX-059, D2 branch (i) -----------------------------
+    # The thiol lane ships relative within-laboratory predictions only: the absolute level of every lane
+    # observable H0 scored (thiol_relative_only.RELATIVE_ONLY_SPECIES) is refused for a new laboratory. The
+    # number is still integrated, because compare's ratios need it; the declaration names the targets, and each
+    # output that would emit a level refuses them by name with thiol_relative_only.refusal_text() (comparative_cli,
+    # scoring, uncertainty, user_scoring, user_fit, cultivated_tissue_invariance). MGO counts here only because the
+    # sulfur lane runs: a trunk MGO is another network, which H0 did not score. It is a field, not a warning: it is not an extrapolation of the
+    # request, so it leaves the envelope state alone.
+    absolute_refused: Tuple[str, ...] = ()
+    if SULFUR in lanes:
+        absolute_refused = tuple(
+            name for name, key in mapped_targets.items()
+            if thiol_relative_only.in_scope(key) and name not in unreachable_targets
+        )
+
     # --- conditions ------------------------------------------------------
     peak = spec.process.thermal.peak_temperature_c
     low = spec.process.thermal.min_temperature_c
@@ -1718,6 +1739,7 @@ def declare_envelope(
         mapped_targets=mapped_targets,
         lipid_carriers=tuple(carriers),
         unreachable_targets=unreachable_targets,
+        absolute_refused_targets=absolute_refused,
     )
 
 
@@ -2973,7 +2995,19 @@ PH_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.PH_WINDOW}
 #: Lanes that carry a water-activity term (B12: the trunk's declared multiplier).
 AW_TERM_LANES = frozenset({TRUNK, ACRYLAMIDE})
 #: B14: lanes whose a_w term exists only inside a measured window (outside it the axis is refused).
-AW_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.AW_WINDOW}
+#: 2026-11-05 (H0 follow-up, owner-approved): the trunk's too, a_w 0.33-1.00 (trunk_conditions.AW_WINDOW: the
+#: lower edge is the driest row its multiplier was built on, the upper edge the base constants' solution state).
+#: Only COMPARISONS are refused: a single-pot prediction outside a window is still answered, with its declaration,
+#: on both lanes (a known limitation; owner, 2026-11-05).
+AW_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.AW_WINDOW, TRUNK: trunk_conditions.AW_WINDOW}
+#: Per window: the basis of its edges, and what the lane does outside it (both named in the refusal).
+AW_TERM_WINDOW_SOURCES = {
+    ACRYLAMIDE: ("De Vleeschouwer 2008, B14", "outside it the lane carries no term and would return identical arms"),
+    TRUNK: (trunk_conditions.AW_WINDOW_SOURCE,
+            "below it the multiplier is held at the lowest measured point and the glass collapse is not sized, so "
+            "the arms' difference would be an extrapolation (a single recipe there is still answered, with the held "
+            "multiplier and a glass warning)"),
+}
 
 
 def _lanes_of(declaration) -> Tuple[str, ...]:
@@ -2988,9 +3022,15 @@ def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
     2026-09-03 (owner decision, step 5): a comparison that moves an axis the resolved
     lane carries no term for is REFUSED, not answered with two identical numbers.
 
-    * water activity differs between the arms: NO lane carries an a_w term.
+    * water activity differs between the arms: the sulfur and lipid lanes carry no a_w term; the trunk
+      (B12) and acrylamide (B14/B15) lanes carry one only inside AW_TERM_WINDOWS, and a comparison with
+      an arm outside its lane's window is refused.
     * pH differs and every resolved lane is trunk / acrylamide / lipid: those lanes are
       homogeneous in pH by declaration; only the sulfur lane carries a pH trajectory.
+
+    Only comparisons are refused here. A single-pot prediction outside an a_w window is still
+    answered, with the lane's declaration (trunk: the multiplier held at 0.33 and a glass warning;
+    acrylamide: no central term): a known limitation (owner, 2026-11-05; a register item to file).
 
     Returns the refusal reason, or None when the comparison is answerable.
     """
@@ -3003,16 +3043,17 @@ def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
                 f"REFUSED -- the two arms differ in WATER ACTIVITY and the resolved lane(s) "
                 f"({', '.join(sorted(lanes)) or 'none'}) carry no a_w term; the model would return "
                 "identical arms and call it a comparison. The trunk lane carries a declared a_w term "
-                "(B12) and the acrylamide lane a declared flat one inside a_w 0.88-0.99 (B14). Hold "
-                "a_w fixed, or bring a measurement."
+                f"inside a_w {AW_TERM_WINDOWS[TRUNK][0]:.2f}-{AW_TERM_WINDOWS[TRUNK][1]:.2f} (B12) and the "
+                f"acrylamide lane a declared flat one inside a_w {AW_TERM_WINDOWS[ACRYLAMIDE][0]:.2f}-"
+                f"{AW_TERM_WINDOWS[ACRYLAMIDE][1]:.2f} (B14/B15). Hold a_w fixed, or bring a measurement."
             )
         for lane_name, (lo, hi) in AW_TERM_WINDOWS.items():
             if lane_name in lanes and not all(lo - 1e-9 <= float(a) <= hi + 1e-9 for a in (aw_a, aw_b)):
+                source, outside = AW_TERM_WINDOW_SOURCES[lane_name]
                 return (
                     f"REFUSED -- the two arms differ in WATER ACTIVITY ({float(aw_a):.2f} vs {float(aw_b):.2f}) "
                     f"and the {lane_name} lane's a_w term is measured only inside {lo:.2f}-{hi:.2f} "
-                    f"(De Vleeschouwer 2008, B14): outside it the lane carries no term and would return "
-                    "identical arms. Keep both arms inside the window, or bring a measurement."
+                    f"({source}): {outside}. Keep both arms inside the window, or bring a measurement."
                 )
     if abs(float(pa.ph) - float(pb.ph)) > 1e-9:
         if lanes and lanes <= NO_PH_TERM_LANES:
@@ -3040,9 +3081,14 @@ def compare(
     targets: Sequence[str],
     *,
     predict_fn: Optional[Callable[..., "CorePrediction"]] = None,
+    calibration: Any = None,
 ) -> Dict[str, Any]:
     """
     Per-compound RATIOS between two formulations, via the B4 layer.
+
+    ``calibration`` (2026-11-05): only to decide, as ``predict`` does, whether a calibrated arm may SHOW the thiol
+    lane's absolute level (thiol_relative_only.calibration_rescues); the prediction itself goes through
+    ``predict_fn``.
 
     A ratio is the layer's primary unit because the two dominant error sources
     -- the HS-SPME calibration offset and the air/water partition constant --
@@ -3112,10 +3158,27 @@ def compare(
                 "band-floor artefact, so no ratio is claimed; the model supports the ordering "
                 "'pentose above hexose' structurally, not a magnitude"
             )
+    # 2026-11-05 (H0 / EX-059, D2 branch (i)): a ratio of a thiol-lane observable is what the lane ships, with
+    # the within-laboratory shape error omega in each arm -- added HERE and nowhere else, since no other interval
+    # carries it -- and the owner's caveat that the relative branch has not been shown better than a null.
+    # A ratio inside that interval is not resolved, whatever the dispersion band says (review m1).
+    relative_only = set(run_a.declaration.absolute_refused_targets) | set(run_b.declaration.absolute_refused_targets)
+    for row in payload.get("rows", []):
+        if str(row["compound"]) not in relative_only or row.get("direction") == "undefined":
+            continue
+        interval = thiol_relative_only.ratio_interval(row.get("ratio_a_over_b"))
+        row["interval_90_ratio_a_over_b"] = list(interval) if interval else None
+        row["omega_dex_per_arm"] = thiol_relative_only.ruling().omega_dex
+        row["noise_dex_per_arm"] = thiol_relative_only.ruling().class_noise_dex
+        row["relative_caveat"] = thiol_relative_only.relative_caveat()
+        if interval and interval[0] <= 1.0 <= interval[1]:
+            row["within_reliability_band"] = True
+            row["interval_spans_one"] = True
+            row["note"] = "NOT RESOLVED: the 90 % interval (omega and measurement noise in each arm, H0 / EX-059) includes 1"
     rows_ = payload.get("rows", [])
     payload["n_undefined"] = sum(1 for r in rows_ if r.get("direction") == "undefined")
     payload["n_resolved"] = sum(1 for r in rows_ if r.get("direction") != "undefined" and not r.get("within_reliability_band"))
-    return {
+    out = {
         "comparable": True,
         "ratios": payload,
         "declaration_a": run_a.declaration.as_dict(),
@@ -3128,6 +3191,42 @@ def compare(
         "rows_a": [dict(r) for r in run_a.interval_rows()],
         "rows_b": [dict(r) for r in run_b.interval_rows()],
     }
+    # ... and the arms' absolute levels of those compounds are withheld: an arm's level, its OAV or its state
+    # vector IS the absolute concentration the ruling refuses.
+    withheld = set()
+    for arm, run in (("a", run_a), ("b", run_b)):
+        if SULFUR in (run.declaration.lanes or (run.declaration.lane,)):
+            withheld |= _withhold_absolutes(out, arm, run.declaration, calibration)
+    if relative_only:
+        out["relative_caveat"] = thiol_relative_only.relative_caveat()
+    if withheld:
+        out["absolute_refused"] = {c: thiol_relative_only.refusal_text(calibration, c) for c in sorted(withheld)}
+    return out
+
+
+def _withhold_absolutes(payload: Dict[str, Any], arm: str, declaration: "EnvelopeDeclaration",
+                        calibration: Any = None) -> set:
+    """Remove the in-scope species' absolute levels from one arm of a compare payload (H0 / EX-059): the
+    concentration of ``run_<arm>``, its interval rows and its OAV table for every refused name (a calibration made
+    by ``calibrate`` rescues its own compounds, as in ``predict``), and the in-scope species of the state vector
+    always (it is never calibrated). Returns the names withheld."""
+    from .keyspaces import b4_key, keys_for
+
+    names = {n for n in declaration.absolute_refused_targets
+             if thiol_relative_only.refused_for(declaration, n, calibration)}
+    b4 = {keys_for(n, declaration.mapped_targets).b4 for n in names} - {None}
+    run = payload[f"run_{arm}"]
+    run["concentrations_ug_per_l"] = {c: v for c, v in run["concentrations_ug_per_l"].items() if c not in names}
+    run["species_mmol_per_l"] = {k: v for k, v in run["species_mmol_per_l"].items()
+                                 if k not in thiol_relative_only.RELATIVE_ONLY_SPECIES}
+    payload[f"rows_{arm}"] = [r for r in payload[f"rows_{arm}"] if r.get("compound") not in names]
+    table = payload[f"oav_table_{arm}"]
+    if table and b4:
+        table["per_species"] = {k: v for k, v in dict(table.get("per_species") or {}).items() if k not in b4}
+        table["ranking_by_OAV"] = [k for k in table.get("ranking_by_OAV") or [] if k not in b4]
+        if b4 & {b4_key("MFT"), b4_key("MFTD")}:
+            table.pop("dimer_over_monomer_OAV", None)   # a ratio of two of these absolute OAVs, across species
+    return names
 
 
 def residual_report(
@@ -3249,6 +3348,7 @@ __all__ = [
     "axis_refusal",
     "AW_TERM_LANES",
     "AW_TERM_WINDOWS",
+    "AW_TERM_WINDOW_SOURCES",
     "PH_TERM_WINDOWS",
     "NO_PH_TERM_LANES",
     "TRUNK",

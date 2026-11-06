@@ -12,7 +12,7 @@
     },
     {
       "citation": "Hrncirik & Zeelenberg (2014)",
-      "reason": "already_landed_in_runtime_registry"
+      "reason": "closed_no_verified_value"
     },
     {
       "citation": "Aliani & Farmer (2005)",
@@ -47,7 +47,7 @@
     "process_state_calibration_count": 0,
     "safety_reference_count": 0,
     "computational_prior_count": 0,
-    "landed_runtime_citation_count": 3,
+    "landed_runtime_citation_count": 2,
     "excluded_candidate_count": 6,
     "themes": {}
   }

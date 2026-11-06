@@ -1,0 +1,121 @@
+{
+  "artifact": "m0_checks_batch2.json",
+  "companion": "m0_checks_batch2.md",
+  "numbers": "m0_checks_batch2_diagnostics.json (written by scripts/diagnostics/m0_checks_batch2.py)",
+  "date": "2026-11-06",
+  "branch": "m0-checks-batch2",
+  "base": "origin/main fdea5cf0",
+  "inventory": "docs/reference/misfit_inventory.md on PR #82 (branch misfit-inventory), secs. 3 and 5",
+  "procedure": "OPERATING_PROCEDURE.md sec. 4. Selection and every pass rule committed before any number was computed (commit 4113901d). Constants from cited measurements or declared assumptions with bands; no constant tuned; nothing shipped.",
+  "blinding": "Not read: B59b hold-outs (US 10,076,126 MFT shape), van Seeventer 2001 Table 1 (FIT_HOLDOUT hold-out), hofmann2000b Figs. 2-3, E7 / E13 / E14 TEST, WUR. Not computed under any variant: fed_nf_cys and the 145 C ribose + Cys pot (M2 Rt-H), Cerny pot D (M2 Rt-D), Zhai 2023 JAFC 140 C pots (M2 T-140), Whitfield 1999 (M1 D6), Zhou 2023 / Zhang 2024 pots (M1 D3 - D5), the US 10,076,126 pot.",
+  "excluded": [
+    {"check": "CK-06, CK-01 + CK-50, CK-02", "reason": "done (batch 1, PR #86)"},
+    {"check": "CK-12", "reason": "spends M1b part (i)'s controls (Hou 2026 Fig. 3, Zhou 2023 Fig. 2, the Meynier pH statement; CF-084)"},
+    {"check": "CK-43 / CK-44", "reason": "done / parked (PRs #81, #86, #87)"},
+    {"check": "CK-46", "reason": "spends Piloty 1979 (M6 D3)"},
+    {"check": "CK-26 / CK-27", "reason": "the Zhai 2023 JAFC T-order includes the 140 C pots = M2's decisive T-140 / T-140c; Cerny pot D = M2 Rt-D; CK-27 is M2's sec. 5 Gigl-ceiling requirement. The remaining 100 / 120 C cells are B60 in-sample and cannot discriminate. Proposed: mark owned by M2"},
+    {"check": "CK-13", "reason": "Hou 2026 (M1b C-Hou)"},
+    {"check": "CK-15", "reason": "Hofmann 1998 T2 / T5 (M4 D1 / D2); needs CK-12"},
+    {"check": "CK-22", "reason": "Xu 2007 keyed held-out for M4 item 7"},
+    {"check": "CK-28", "reason": "Zhou 2023 Table 1 / Zhang 2024 shares are M1's D3 / D4 (part C never run)"},
+    {"check": "CK-29, CK-37", "reason": "Elmore 2002 / Yiltirak 2026 (M5 D5); US 8,920,862 (B59b); Xu 2011 (E12 TEST)"},
+    {"check": "CK-45", "reason": "Hofmann's fed MGO + Phe rate is M6 D4's quantity"},
+    {"check": "CK-52", "reason": "Leahy ratios are M6 D6"},
+    {"check": "CK-16, -17, -19, -25, -33, -39, -40, -41, -51, -54", "reason": "owned by a case (inventory)"},
+    {"check": "CK-18, -21, -35, -47, -48, -57 - -59, -62", "reason": "lower-ranked or waiting on a batch-1 owner decision"}
+  ],
+  "checks": [
+    {
+      "id": "CK-23",
+      "misfit": "MF-01 (a)",
+      "selection_reason": "rank 8; the highest-ranked eligible thiol-sink check (G3). Schieberle T4 is SEEN everywhere (M1 D1 spent by EX-061; M2 D1 guard units, not claim units; M1c development signature (d)) and decisive in no open case.",
+      "pass_rule": "Bound lambda_max(110 C) = ln(1 / f_min) / 240 min from the co-heated standards, f_min in [1e-6, 1e-2] declared. Shipped sink REFUTED if above lambda_max at f_min 1e-6; consistent if below at 1e-2. Forward Schieberle T4 (MFT 360/30, 720/30; noise 0.06 dex per ratio from the lab's <= 10 % SIDA reproducibility) with k_mft_decay at the two corners (Ea held), at 0, and with Gigl's central Ea; EXPLAINS if both ratios within 0.06 dex and no B60 in-sample row moves out (|r| grows > 1 and ends > 2); REFUTES (a) as sufficient if even k_mft_decay = 0 leaves 360/30 > 0.12 dex low.",
+      "constants": [
+        {"name": "standards before heating; no amounts / recovery / LOD printed", "source": "US 10,076,126 Example 1 (CF-013 analysis; us10076126 dossier sec. 2)"},
+        {"name": "f_min band 1e-6 - 1e-2", "source": "declared assumption (SIM dynamic range)"},
+        {"name": "Ea range 7.2 - 102.4, central 60.2 kJ/mol", "source": "Gigl 2021 (gigl2021 dossier sec. 6d)"},
+        {"name": "in-pot MFT loss at 100 C 0.044 (0.035 - 0.053) / 0.034 (0.026 - 0.041) /min", "source": "Grosch 1992 Table VIII, inferred (grosch1992 dossier sec. 3, assumption-laden)"}
+      ],
+      "outcome": "Shipped MFT sink REFUTED as too fast at 110 C: lone-standard loss 0.107 /min vs lambda_max 0.058 / 0.019 (1.86x / 5.58x); FFT 0.022 /min consistent / inconclusive. MF-01 NOT EXPLAINED: Schieberle 360/30, 720/30 residuals -0.83 / -1.17 (loose bound; no row out), -0.23 / -0.38 (tight bound; 5 rows out), -0.03 / +0.06 (k_mft_decay 0; 7 rows out), -0.96 / -1.30 (Gigl central Ea; 3 rows out). Candidate (a) NOT refuted as sufficient. A temperature-only law needs Ea ~176 kJ/mol (outside Gigl's range); the cysteine ordering of the pots points to M1's C2.",
+      "data_spent": ["US 10,076,126 Methods (standard timing)", "Schieberle 2000 Table IV", "Grosch 1992 Table VIII", "B60 rows of GUARD_SYSTEMS_CK23"],
+      "nominated": ["M1's C2: a thiol loss slowed by free cysteine (for M1c / the joint refit), judged jointly with the supply structure"],
+      "retired": ["a frozen pot-independent k_mft_decay as the sole answer to MF-01"],
+      "decisive_data": "not on disk: [2H3]-MFT charged before heating in sister vials at two cysteine levels (0 and >= 30 mM) at 100 and 120 C (CF-013's protocol); atlas E12",
+      "proposed_cf_text": "CF-013 tests, add: the co-heated [2H3]-MFT standard bounds lambda(110 C) <= 0.019 - 0.058 /min (f_min 1e-2 - 1e-6, declared; no standard amount printed); the shipped engine's 0.107 /min is 1.9 - 5.6x too fast; the earlier '>= 5x' used the patent's 4 h level (B59b shape) and holds only at the tight corner; FFT within the bound. No pot-independent sink inside the bound fits Schieberle and keeps B60's 145 C fed rows; the pots order by cysteine (fast sink in cysteine-free fed pots, ~0.04 /min at 0 - 0.65 mM, <~0.003 needed at 33 mM under the shipped supply, <= 0.019 - 0.058 at 250 mM), pointing to M1's C2; a temperature-only law needs Ea ~176 kJ/mol, outside Gigl's measured 7 - 102."
+    },
+    {
+      "id": "CK-34",
+      "misfit": "MF-13 (a)",
+      "selection_reason": "rank 9; G9 / G10; CF-065's proposed operator. Hofmann T10's NF + Cys cell (M2 Rt-H) excluded, so the T10 NF contrast is not computed; Whitfield (M1 D6) excluded.",
+      "pass_rule": "phi = 1 / (1 + Kaw(T) alpha0 Vg/Vl) on every H2S-consuming step (r_h2s_loss unscaled as a sensitivity); Vg/Vl 3 (Hofmann, 50 mL in 200 mL) and 1 (Munch 100 mL reading). EXPLAINS if the Munch contrast is within 0.10 dex of 0.046, the dose ratio within 0.10 of 4.23, and no B60 fed-sulfide row moves out; REFUTES (a) if the best reading misses the contrast by > 0.20 dex high. Bias on k_fur_fft(+hs) / k_nf_mft reported, not proposed.",
+      "constants": [
+        {"name": "Kaw(25 C) 0.403, delta_H_sol -17.5 kJ/mol", "source": "henry_constants.yml (Sander 5.0.0)"},
+        {"name": "pK1(T)", "source": "Suleimenov & Seward 1997 (parameters_sulfur.h2s_pk1_suleimenov_seward)"},
+        {"name": "vessel 200 mL, fed pots 50 mL", "source": "hofmann1998_reconciliation dossier; munch1997 dossier sec. 5 flag 3"}
+      ],
+      "outcome": "REFUTED as the explanation of the contrast. phi 0.141 (Vg/Vl 3) / 0.330 (1). Contrast 0.234 -> 0.148 - 0.157 (+0.51 to +0.53 dex; baseline +0.71); dose ratio 3.70 - 3.75 (passes). Furfural fully consumed in both arms; the H2S arm is saturated. No in-sample row moves out, but fed_ribose_h2s_MFT -0.83 -> -1.84 and fed_mgo_h2s MP rows ~0 -> -1.7 / -1.8. Bias: k_fur_fft + k_fur_fft_hs x10^0.84 (~1 / phi) restores the furfural row and returns the contrast to +0.71; k_nf_mft x10^0.23.",
+      "data_spent": ["Hofmann 1998 T3 / T4 / T6 / T7 fed-sulfide rows (B60)", "Munch 1997 Table 5"],
+      "nominated": ["MF-13 (b): furfural lifetime in the cysteine arm (k_fur_decay)", "MF-13 (c): FFT survival in the hold"],
+      "retired": ["MF-13 (a): an H2S vessel partition as the cause of the contrast (kept as a conditions term the fitted furfural constants absorb)"],
+      "decisive_data": "CF-065 deciders (ii) residual furfural and H2S at 20 min in Hofmann's fed furfural + H2S pot, (iii) authentic FFT heated alone; not on disk",
+      "proposed_cf_text": "CF-065 tests, add: an H2S vessel partition (phi 0.141 at Vg/Vl 3, 0.330 at 1; Kaw(145 C) 2.18, pK1 6.49, in-situ pH 5.34) moves Munch's cysteine-over-H2S FFT contrast only to 0.148 - 0.157 (+0.51 to +0.53 dex); the dose ratio passes (3.70 - 3.75). Restoring fed_furfural_h2s_FFT needs k_fur_fft / k_fur_fft_hs x10^0.84 (~1 / phi), returning the contrast to +0.71; k_nf_mft's bias is +0.23 dex, not 0.6 - 0.8. The partition is a correct conditions term absorbed by the fitted furfural constants; it does not explain the contrast."
+    },
+    {
+      "id": "CK-42",
+      "misfit": "MF-15 (a)",
+      "selection_reason": "rank 10; engine-free; Th x cys / Th x thi levers. Grosch's atlas cells F27#15-17 are v2 TEST(E18) but already scored (W1.1) and engine-run (batch 1 CK-10): re-spent at no new loss.",
+      "pass_rule": "Rising limb: the H2S part EXPLAINS only if Cys-derived sulfide at Zheng & Ho's rate (Ea 123 - 135) reaches the Table VI arm's dissolved sulfide (0.1 - 100 % of 26.8 mmol in 500 mL) somewhere in the bands; REFUTED if the needed rate factor exceeds 10 everywhere. Falling limb: MFT ~ F / (lambda0 + k_c c^n); n REFUTED if its predicted lambda(0.65 mM) exceeds Table VIII's 0.041 /min.",
+      "constants": [
+        {"name": "k_cys_h2s (k_ref 0.00282 /min at 145 C, Ea 133; band 123 - 135)", "source": "Zheng & Ho 1994 (shipped, measured_activation_energy)"},
+        {"name": "Grosch Tables II, III, VI, VIII", "source": "grosch1992 dossier sec. 3"}
+      ],
+      "outcome": "H2S half REFUTED: 2.0 - 3.1 uM sulfide from 0.65 mM Cys in 2 h vs >= 54 uM in the Table VI arm (needs >= 17x the measured rate); Table VI's dose gave x3.2 while Cys gave x7.0 with no ribose; a thiamine-capped dicarbonyl route (<= 60 uM) cannot either. Capture n = 1 refuted everywhere (its ceiling fall x8.37 < x9.5; where feasible lambda(0.65) >= 0.084); n = 2 refuted at the central values (0.050) but survives at lambda0 0.035 (0.037 - 0.040). Table VIII's lambda is lower with Cys (0.034) than without (0.044).",
+      "data_spent": ["Grosch 1992 Tables II, III, VI, VIII"],
+      "nominated": ["a non-sulfide cysteine term on the thiamine route (CK-42b)", "a high-dose depression of order >= 2 in cysteine, or cysteine inhibition of thiamine degradation (Arnold 1971, qualitative)"],
+      "retired": ["cysteine acting on thiamine-MFT through its H2S release", "a first-order cysteine capture of MFT"],
+      "decisive_data": "CF-089's cysteine x thiamine series with thiamine measured; not on disk",
+      "proposed_cf_text": "see CK-42b (one CF-089 addition covers both)"
+    },
+    {
+      "id": "CK-42b",
+      "misfit": "MF-15 (a)",
+      "selection_reason": "new: the thiamine route's missing cysteine term found by batch 1's CK-10 (the engine predicts no. 4 / no. 1 = 1.0002 against x7).",
+      "pass_rule": "Ratio vs concentration: discriminates if the thiamine 6 umol series' optimum lies outside one law's predicted range by > one grid step (ratio law 34 - 65 umol; concentration law 170 - 340). Total-thiol law from Table III predicts Table II nos. 7, 8 (and no. 6 as a same-design check): PASS if within 2 x sqrt((SD / mean / ln 10)^2 + 0.05^2). pH artefact RETIRED if |delta-pH| x 1 dex/pH < 0.5 dex.",
+      "constants": [
+        {"name": "pyrophosphate pKa3 6.6 (declared textbook value); Cys.HCl charges", "source": "grosch1992 dossier sec. 2"},
+        {"name": "thiamine loss <= 2 % below pH 6, 14 - 17 % at pH 7 (~1 dex per pH unit at most)", "source": "Dwivedi & Arnold 1971 Fig. 2 (arnold1971 dossier)"}
+      ],
+      "outcome": "Concentration law: the 6 umol optimum is at 340 umol (series rises 170 -> 340 by +0.12 dex where the ratio law predicts a ~0.35 dex fall); the ratio law is REFUTED. Total-thiol law PASSES: no. 7 -0.106 (tol 0.110), no. 8 +0.108 (tol 0.288), no. 6 -0.058 (tol 0.152). pH artefact RETIRED (delta-pH -0.13).",
+      "data_spent": ["Grosch 1992 Tables II, III", "Arnold 1971 text (CF-089)"],
+      "nominated": ["the thiamine -> MFT steps carry g(total free thiol): x2.7 - 3.5 from 0 to 0.17 - 0.34 mM, flat to ~0.65 mM, then ~c^-1.2 to c^-1.7; GSH counts as thiol; not through H2S"],
+      "retired": ["a Cys : thiamine stoichiometric (ratio) term", "the Cys.HCl pH artefact"],
+      "decisive_data": "CF-089's designed series plus a non-amine thiol arm (N-acetylcysteine or 2-mercaptoethanol) at the optimum, thiamine measured; not on disk (Grosch is spent)",
+      "proposed_cf_text": "CF-089 tests and remedy, add: engine-free on Grosch Tables II, III, VI, VIII: cysteine's x7 on thiamine-MFT is not its H2S release (0.65 mM Cys releases 2 - 3 uM sulfide in 2 h at Zheng & Ho's rate, >= 17x less than the Table VI arm, which gave only x3.2; Table II no. 4 has no ribose); the dose optimum sits at 170 - 340 umol cysteine at both 30 and 6 umol thiamine (a concentration law, not a Cys : thiamine ratio law); a total-thiol concentration law built on Table III predicts the GSH pots (no. 7 -0.11, no. 8 +0.11 dex) within their SDs; a first-order cysteine capture cannot make the high-dose fall; the pH shift from Cys.HCl is -0.13. Remedy: model the cysteine effect on the thiamine route as a factor g(total free thiol), GSH counted, sized by a designed series with a non-amine thiol arm and thiamine measured."
+    },
+    {
+      "id": "CK-56",
+      "misfit": "MF-27 (a)",
+      "selection_reason": "unranked (batch J); engine-free; no case owns the glycation barrier (Wolf 1977a is M4 sec. 2.7 development evidence).",
+      "pass_rule": "E(105 -> 125) from the measured phase-one k(105 C) (0.024 / 0.026) and the surface's k(125 C) at the same composition (Case 1, Case 2; G +1.68, +2.0). Band = max(Wolf's E residual SD 8.4 kJ/mol, propagated SD). EXPLAINS (a) if within one band of 96.8; REFUTES (a) if above 96.8 by > two bands.",
+      "constants": [
+        {"name": "k(105 C) 0.024, 0.026 /min; Case 1 / 2 response surfaces; Table 4 SDs", "source": "Wolf 1977a pp. 1541-1543 (wolf1977a dossier secs. 3.2-3.3)"},
+        {"name": "pass 1 at 125 C, 9.6 -> 5.0 mg/g in 2 min (side reading)", "source": "Wolf 1977 companion (CF-096)"}
+      ],
+      "outcome": "REFUTED. E(105 -> 125) = 156.7 / 156.0 (Case 1, G 1.68 / 2.0), 169.8 / 196.0 (Case 2), bands 13 - 14.5 kJ/mol; all > 96.8 + 2 bands. Companion side reading 161. The 80 -> 105 C segment (with the surface's k80) is 115 - 125, lower: the apparent barrier rises with temperature, the opposite sign to the plateau story. Come-up lag and an early plateau at 125 C both bias E low.",
+      "data_spent": ["Wolf 1977a secs. 3.2 - 3.3", "Wolf 1977 pass 1"],
+      "nominated": ["MF-27 (c): water-phase glucose / glass changing with temperature (carries the rising-E signature)", "MF-27 (b): a genuine protein-bound-lysine barrier (alone predicts one E; contradicted by the two segments unless the 80 C point is biased)"],
+      "retired": ["MF-27 (a): plateau-capped end points inflating E"],
+      "decisive_data": "CF-100's soy or pea time course at >= 3 temperatures with moisture printed, plus Tg or a_w at each temperature; not on disk",
+      "proposed_cf_text": "CF-100 tests, add: explanation 1 (plateau-capped 80 C end points) refuted: the plateau-free pair (measured 105 C phase-one k 0.024 / 0.026; the surface's 125 C k) gives E 154 - 196 kJ/mol, above the published 137.7 and far above the engine's 96.8; the 80 -> 105 C segment is lower (115 - 125), so the apparent barrier rises with temperature, the signature of explanation 3 (water-phase glucose / glass)."
+    }
+  ],
+  "inventory_corrections": [
+    "Mark CK-26 and CK-27 'owned by M2' (Zhai 140 C cells = T-140 / T-140c; pot D = Rt-D; CK-27 = M2 sec. 5's Gigl-ceiling requirement).",
+    "Mark CK-28 'held while M1's C3 is unrun' (M1 D3 / D4).",
+    "Record CK-23 / 34 / 42 / 56 and the new CK-42b with this record's path; add 'v2 TEST(E18) F27#15-17, already scored' to CK-42's spends."
+  ],
+  "owner_calls": [
+    "Whether M1's C2 (a cysteine-slowed thiol loss) enters M1c's or the joint refit's rival set (CK-23).",
+    "Declare Grosch's F27#15-17 spent in split_v2_per_change.yml (scored in W1.1, engine-run in batch 1)."
+  ]
+}

@@ -41,6 +41,7 @@ import yaml
 
 from src import data_paths
 
+from . import thiol_relative_only
 from .engine import engine_metadata, predict
 from .scoring import PASS_BAND_LEVEL, fold_error, summarise_folds
 
@@ -158,6 +159,15 @@ def score_system(spec: Mapping[str, Any], *, pass_band: float = PASS_BAND_LEVEL,
                 {"compound": compound, "measured_ppb": rec["value"],
                  "reason": " | ".join(declaration.reasons) or "out of envelope",
                  "lane": declaration.lane, "envelope_state": declaration.state}
+            )
+            continue
+        if thiol_relative_only.refused_for(declaration, compound, calibration):
+            # 2026-11-05 (H0 / EX-059): no absolute level of a thiol-lane observable ships for a new laboratory, so
+            # none is scored against yours. The measurement is kept in the record: a second laboratory's absolute
+            # values are exactly what would lift the refusal (re-scored under H0's rule, not here).
+            refused.append(
+                {"compound": compound, "measured_ppb": rec["value"], "reason": thiol_relative_only.refusal_text(calibration, compound),
+                 "lane": declaration.lane, "envelope_state": declaration.state, "absolute_refused": True}
             )
             continue
         predicted = float(run.concentrations_ug_per_l[compound])
