@@ -664,8 +664,8 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
             f"REFUSED by name: out-of-sample tau_ABS {r.tau_abs_dex:.3f} dex, {r.upper_bound_text} "
             "(leave-two-laboratories-out); absolute thiol evidence from one laboratory",
             VERDICT_DO_NOT_USE,
-            f"{data_paths.rel(h0.H0_RECORD)} (D2 branch (i)); lifted only by a second independent laboratory's "
-            "absolute measurements re-scored under H0's rule",
+            f"{data_paths.rel(h0.H0_RECORD)} (D2 branch (i)); lifted only by absolute measurements from at least "
+            "two new independent laboratories re-scored under H0's rule (H0')",
         )
     )
     cells.append(

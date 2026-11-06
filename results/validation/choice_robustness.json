@@ -4,9 +4,9 @@
     "artifact": "choice_robustness",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
-      "short": "56861a85",
-      "branch": "m0-data-corrections-batch1",
+      "commit": "06830fd78b48e16bd49dfec4a69c1e75028ddb36",
+      "short": "06830fd7",
+      "branch": "register-pass-2026-11-06",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_choice_robustness.py",
@@ -17,7 +17,7 @@
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "85d525b15fe7944c2405e9771d74a8decfdba39efd10a7d7f8a2209dfdb7c8ed"
+        "sha256": "5ce9814c694e0af2bd79386edc283ac85bff34f1a7a45ae788c434f88a951e8c"
       }
     ]
   },

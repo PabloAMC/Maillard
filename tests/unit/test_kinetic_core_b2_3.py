@@ -363,14 +363,19 @@ BUNDLE_BASELINES = {
     # re-pinned 2026-09-06 (programme step R0): the four Yiltirak bundles gained an on-disk
     # verification block (PDF + supplementary docx read in full; Table S3 exact) and their buffer
     # provenance moved from second-hand to primary_source_pdf; targets untouched.
+    # RE-BASELINED 2026-11-06 (register pass): each bundle gained one provenance key, fit_holdout_status
+    # ("SEEN (CF-031), SPENT": CF-031 prints the buffer-arm values; the ladder's folds are B10 fit rows). Dropping that
+    # key reproduces the previous pins exactly, so no value moved. Previous, in order:
+    # 8af70f3bb7e6a62c58b403267cac7e70ab4f2bef663c2be1d1282b2c5bc545ce, 6b09efd75b9046f3c69f84b4766acb2cd90935c3f2ae1dc8df28beeddaed756b,
+    # 47712c8d178915737e458773de87e05d26e47836722fba2592855acebf5758d8, 18303ba16cd36934e750b0ae95c7986f782fd54575740c41fba7d65e18750d69
     "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026":
-        "8af70f3bb7e6a62c58b403267cac7e70ab4f2bef663c2be1d1282b2c5bc545ce",
+        "efb7ed0f26062df0663e52d48783b8a9263ad1c26efc965a4aa0665dc254a2c2",
     "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026":
-        "6b09efd75b9046f3c69f84b4766acb2cd90935c3f2ae1dc8df28beeddaed756b",
+        "fcc978f57c21c1921bf9be005e8ad099cf4eeb62ee75ac24800d2bc486d9feae",
     "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026":
-        "47712c8d178915737e458773de87e05d26e47836722fba2592855acebf5758d8",
+        "3d773c2dfb4f4af8dd21b9e45e8519f5be6a9f70704f9680a7b8a5eb3d30faa5",
     "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026":
-        "18303ba16cd36934e750b0ae95c7986f782fd54575740c41fba7d65e18750d69",
+        "a2dc55e607c1f7ceb64dc985811fbd6c827ddc2a0b05114ebdacf3360946b635",
     # pinned 2026-10-28 (FIT_HOLDOUT_DECLARATION.md Amendment 45): five hold-outs added BLIND
     # (no prediction or score run before they were frozen). First pin, not a re-pin.
     # RE-BASELINED 2026-11-06 (M0 integrity batch 1, CK-07; CF-009 note): the stale fit_holdout_status provenance

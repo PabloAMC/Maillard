@@ -120,7 +120,7 @@ cells:
     note: "a C2 unit from MGO (authors speculate Cys-driven MGO -> GO) or an extra MPZ route; no marker separates them."
   # ---- methylpyrazine extra route ----------------------------------------------------------------------------------
   - key: {ph: acid, temperature: high, water: dilute}
-    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose ARP 20 mM + 15N-alanine 20 mM", ph_note: "label 8; in situ 5.13 -> 4.08 over 30-120 min (Zhou 2024 Fig. 3b via CF-060)"}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose ARP 20 mM + 15N-alanine 20 mM", ph_note: "label 8; the in-situ 5.13 -> 4.08 over 30-120 min (Zhou 2024 Fig. 3b, read in CF-060) is the AX-ARP-ALONE arm's trajectory, not this +15N-alanine arm's (corrected 2026-11-06); the ARP + Ala model's own pH (Fig. 3) is not read, the text says it falls more slowly with added Ala, so the key's pH bin, which rests on the sister arm, may read this arm too acidic"}
     contrast: "methylpyrazine vs pyrazine and 2,5-DMP in the same pot: MPZ 15N share 37.1 % vs mean of PZ and DMP 48.9 % at 30 min (deficit 11.7 points; 8.2 at 120 min)"
     status: operating
     quote: "Methylpyrazine 14N share = (2 x 39.73 + 46.29)/200 = 62.9 %"
@@ -131,7 +131,7 @@ cells:
     where: "Table 1; red_team.md sec. 8 (post hoc test)"
     note: "post hoc (not pre-registered); the [M-H]+ correction status of the isotopomers is the open reading task (SI)."
   - key: {ph: mild_acid, temperature: high, water: dilute}
-    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose ARP 20 mM + 13C5-xylose 20 mM", ph_note: "label 8; in situ 6.04 -> 4.50 (Zhou 2025b Fig. 3d via CF-060)"}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose ARP 20 mM + 13C5-xylose 20 mM", ph_note: "label 8; the in-situ 6.04 -> 4.50 over 30-120 min (Zhou 2025b Fig. 3d, read in CF-060) is the AX-ARP-ALONE arm's trajectory, not this +13C5-xylose arm's (corrected 2026-11-06); this arm's own pH is not read, and the key's pH bin rests on the sister arm"}
     contrast: "time: methylpyrazine M+3 (an intact labelled C3) absent at 30 / 60 min, 4.56 / 4.36 % at 90 / 120 min"
     status: minor
     quote: "labelled xylose) appears only at 90 and 120 min"
