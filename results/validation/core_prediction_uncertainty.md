@@ -2,33 +2,31 @@
 
 n_samples = 200, seed = 0, CI level = 90 %.
 
-* benchmarks with an envelope: **13** of 42 on the panel; matched rows **27**; refused rows 66
-* mixed-population coverage: 13/27 (0.481)
-* **honest literature coverage: 13/26 (0.500)**, median CI width 1.015 log10; 1 not evaluable; 0 fitted rows excluded
-* out-of-sample literature coverage: 13/26 (1 not evaluable); rows the core fit read: {'hits': 0, 'total': 0, 'not_evaluable': 0}
+* benchmarks with an envelope: **11** of 42 on the panel; matched rows **24**; refused rows 69
+* mixed-population coverage: 12/24 (0.500)
+* **honest literature coverage: 12/23 (0.522)**, median CI width 0.995 log10; 1 not evaluable; 0 fitted rows excluded
+* out-of-sample literature coverage: 12/23 (1 not evaluable); rows the core fit read: {'hits': 0, 'total': 0, 'not_evaluable': 0}
 * B55 single-temperature Ea prior: on (31 rows); B56 structural discrepancy: off
 * sampled priors 99, fixed 45; lanes with NO sampled fit uncertainty: none
-* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 9, extraction 18, undeclared 0
+* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 8, extraction 16, undeclared 0
 
 ## Per panel
 
 | panel | hits | total | rate | median width (log10) | not evaluable |
 |---|---|---|---|---|---|
-| external_matrix | 3 | 4 | 0.750 | 2.743 | 0 |
-| maillard_path_holdout | 6 | 17 | 0.353 | 0.970 | 1 |
-| trust_loop | 4 | 5 | 0.800 | 1.543 | 0 |
+| external_matrix | 2 | 3 | 0.667 | 2.743 | 0 |
+| maillard_path_holdout | 6 | 16 | 0.375 | 0.979 | 1 |
+| trust_loop | 4 | 4 | 1.000 | 1.705 | 0 |
 
 ## Rows
 
 | benchmark | panel | compound | unit | measured | point | p5 | p50 | p95 | inside | width | obs bands | lane | role |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | acrylamide | ppb | 150.000 | 0.016 | 0.00656 | 0.020 | 0.085 | no | 1.112 | no (extraction) | acrylamide | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 353.858 | 66.630 | 370.533 | 2.28e+03 | yes | 1.535 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 12.070 | 68.931 | 421.024 | yes | 1.543 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.127 | 16.259 | 156.922 | yes | 1.868 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | (E,E)-2,4-decadienal | ppb | 46.900 | 75.702 | 0.503 | 49.524 | 1.43e+03 | yes | 3.452 | yes (headspace) | lipid | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 62.851 | 178.706 | 621.838 | no | 0.995 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.97e+03 | 1.1e+03 | 1.88e+03 | 2.73e+03 | no | 0.395 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 5.73e+04 | 5.54e+04 | 8.91e+03 | 3.3e+04 | 1.59e+05 | yes | 1.253 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 5.89e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |
@@ -38,14 +36,13 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 832.000 | 3.68e+03 | 1.13e+03 | 3.23e+03 | 1.12e+04 | no | 0.993 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 7e+03 | 2.55e+03 | 1.11e+03 | 2.18e+03 | 1.2e+04 | yes | 1.035 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_asparagine_180C_Ye2024 | maillard_path_holdout | Acrylamide | umol_per_mol_limiting_precursor | 140.580 | 7e+03 | 2.2e+03 | 6.21e+03 | 1.9e+04 | no | 0.938 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 1.87e+03 | 471.658 | 1.32e+03 | 4.41e+03 | no | 0.970 | no (extraction) | trunk | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3-deoxyglucosone | ppb | 5.22e+04 | 6.64e+04 | 1.68e+04 | 4.85e+04 | 1.57e+05 | yes | 0.969 | no (extraction) | trunk | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3,4-dideoxyglucosone | ppb | 5.55e+04 | 8.37e+03 | 2.1e+03 | 5.79e+03 | 2.04e+04 | no | 0.988 | no (extraction) | trunk | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glucosone | ppb | 7.5e+03 | 119.059 | 118.920 | 119.086 | 119.141 | no | 0.000807 | no (extraction) | trunk | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glyoxal | ppb | 5.6e+03 | 160.794 | 168.424 | 200.190 | 205.037 | no | 0.085 | no (extraction) | trunk | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | methylglyoxal | ppb | 2.6e+03 | 2.57e+03 | 622.049 | 1.72e+03 | 5.59e+03 | yes | 0.953 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 1.96e+03 | 568.475 | 1.41e+03 | 4.48e+03 | no | 0.896 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3-deoxyglucosone | ppb | 5.22e+04 | 6.55e+04 | 1.66e+04 | 4.79e+04 | 1.55e+05 | yes | 0.970 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3,4-dideoxyglucosone | ppb | 5.55e+04 | 8.3e+03 | 2.08e+03 | 5.74e+03 | 2.02e+04 | no | 0.988 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glucosone | ppb | 7.5e+03 | 219.059 | 218.920 | 219.086 | 219.141 | no | 0.000439 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glyoxal | ppb | 5.6e+03 | 1.16e+03 | 1.17e+03 | 1.2e+03 | 1.21e+03 | no | 0.013 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | methylglyoxal | ppb | 2.6e+03 | 3.45e+03 | 1.52e+03 | 2.6e+03 | 6.44e+03 | yes | 0.628 | no (extraction) | trunk | external_holdout |
 | mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b | maillard_path_holdout | 2-Acetylthiazole | ppb | 114.130 | 0.065 | 0.00455 | 0.049 | 0.455 | no | 1.999 | yes (headspace) | sulfur | external_holdout |
-| external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 109.490 | 9.228 | 105.942 | 1.51e+03 | yes | 2.214 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 0.273 | 7.776 | 151.018 | no | 2.743 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 70.264 | 1.242 | 35.471 | 690.403 | yes | 2.745 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | nonanal | ppb | 74.370 | 23.885 | 0.424 | 12.070 | 234.417 | yes | 2.743 | yes (headspace) | lipid | external_holdout |
@@ -54,6 +51,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 
 | benchmark | panel | compound | reason |
 |---|---|---|---|
+| acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | acrylamide | REFUSED BY THE DATA: precursor charge not printed. Ma 2024 (secs. 3.1-3.2, Table 1) adds no asparagine or glucose and prints no free asparagine, reducing sugar, pH or water activity, so the pot the row was integrated at  |
 | cml_cel_commercial_pbma_Foods2023 | trust_loop | Nε-(Carboxymethyl)lysine (CML) | GLYCATION TARGETS 'Nε-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + ami |
 | cml_cel_commercial_pbma_Foods2023 | trust_loop | Nε-(Carboxyethyl)lysine (CEL) | GLYCATION TARGETS 'Nε-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amin |
 | hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | 2-Methyl-3-furanthiol (MFT) | NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independe |
@@ -89,6 +87,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independe |
 | mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c | maillard_path_holdout | 2-Furfurylthiol (FFT) | NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independe |
 | mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c | maillard_path_holdout | Furfural | NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independe |
+| mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | REFUSED BY THE DATA: within-source conflict (CF-127): the prose prints 12.28 ppm citing Fig. 4A, but Fig. 4A's asparagine + fructose 30-min bar (water) reads ~5.0 ppm (SD to ~6) on an axis checked against the printed 91. |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | Furfural | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would s |
 | mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | Furfural | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would s |
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
@@ -114,6 +113,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b | maillard_path_holdout | Bis(2-methyl-3-furyl) disulfide | NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independe |
 | external_validation_bi_2020_raw_pea_hexanal | external_matrix | hexanal | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace in |
 | external_validation_bi_2020_raw_pea_hexanal | external_matrix | nonanal | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace in |
+| external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | REFUSED BY THE DATA: net loss of a carried level (CF-129): raw peas carry 1260 +/- 114 ug/kg hexanal and the roasted peas measure 324 +/- 34.3 (Bi 2020 Table 4), a 3.9x loss on roasting. The lipid lane adds a carried lev |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | furaneol | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | 2,5-dimethylpyrazine | PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that reso |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | furfural | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk |

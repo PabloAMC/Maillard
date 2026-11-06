@@ -1,0 +1,4890 @@
+{
+ "artifact": "s4_band_sources",
+ "provenance": {
+  "artifact": "s4_band_sources",
+  "generated_on": "2026-11-06",
+  "git": {
+   "commit": "689be58d0245680ff869bfa67fc9eb702bd51b28",
+   "short": "689be58d",
+   "branch": "s4-band-sources",
+   "dirty": false
+  },
+  "generated_by": "scripts/generators/build_s4_band_sources.py",
+  "inputs": [
+   {
+    "path": "results/validation/incumbent_evidence_tiers.json",
+    "sha256": "a47b400b78c5a62a2886314aca9d0595e9c8821fbf371ef2abf42c21b7666a6a"
+   },
+   {
+    "path": "src/kinetic_core/ea_class_prior.py",
+    "sha256": "884414780b107b28b5dbfc5fa238de81cbd77ccfe9a1abf85ea142580bf4d761"
+   },
+   {
+    "path": "scripts/generators/build_s4_band_sources.py",
+    "sha256": "520b1aff4cdcbd4c937684c0b9e22c006f3f3ac0de2238e1c52ed8e1fd947243"
+   }
+  ]
+ },
+ "rules": {
+  "s4": "a band comes from measured bounds, a same-class analogue, or the reaction-class distribution of measured constants; a search bound is never a band; with no class, the output is refused (sec. 7 S4, 066684b7)",
+  "edge_95": "a bound's 95 % edge: 1.96 x the quadrature of the reported noise, the within-lab between-paper and assay spreads and the between-lab term (the lane's, S2 (b)); undefined for a lane without one",
+  "transport": "a bound at temperature T is carried to the reference temperature over the whole Ea band of the coordinate's class, at its loose edge (k and Ea are sampled jointly)",
+  "reader": "a source's `reader` is the reading of its NUMBER from the paper (second = a verification file or register records two readers); every row of this record was re-read by the S1 second reader on 2026-11-06 and its corrections are applied (`second_reading` per row)",
+  "joint_check": "the SHIPPED (k, Ea) pair is checked against every bound at the bound's own temperature and pot (the engine's pH factor included); a violation is reported against the raw margin and the S2 (b) 95 % margin",
+  "heldout": "a declared hold-out row is never a band source (coordinator ruling)",
+  "lane_between_lab_dex": {
+   "sulfur": 0.964,
+   "acrylamide": 0.10073815052881968
+  },
+  "lane_between_lab_source": {
+   "sulfur": "H0 / EX-059 D2 branch (i): tau_ABS 0.964 dex (results/validation/core_panel_scores.md); other lanes: no H0 and no pooled reaction-class spread on record yet",
+   "acrylamide": "acrylamide elimination at 160 C, Knol 2005 (Wageningen) vs Claeys 2005 (Leuven), 0.10 dex apart (coordinator ruling under S2 (b): the reaction class's measured spread with >= 2 laboratories)"
+  },
+  "dex_per_kj_mol_100_145C": 0.0150642353797326
+ },
+ "classes": {
+  "carbohydrate": {
+   "n": 19,
+   "median": 107.0,
+   "lo": 30.0,
+   "hi": 237.0
+  },
+  "sulfur": {
+   "n": 16,
+   "median": 93.30000000000001,
+   "lo": 29.675,
+   "hi": 133.0
+  }
+ },
+ "b55_classes": {
+  "carbohydrate": {
+   "n": 20,
+   "median": 103.7,
+   "lo": 30.0,
+   "hi": 237.0
+  },
+  "sulfur": {
+   "n": 15,
+   "median": 100.9,
+   "lo": 29.675,
+   "hi": 133.0
+  }
+ },
+ "class_ruling": "S1 (both readers, 2026-11-06), B55's own definition: a step with a sulfur-bearing reactant is class sulfur. B55's route map (FORMATION_ROUTE_OF) and CLASS_OF_ROUTE conflated two principles, the route a constant serves and its step's reactant chemistry: k_ttca_deg, k_pent_tdp, k_pent_dpo and k_dpo_ddp go to sulfur, and the class member Zhang 2026 k16 (Cys-Amadori -> alpha-dicarbonyl) moves to sulfur (ranges unchanged; n 19 / 16). src/kinetic_core/ea_class_prior.py is unchanged here: an S4 case applies the ruling",
+ "coordinates": [
+  {
+   "coordinate": "k_dpo_nf.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": 0.43445392481376577,
+   "unit": "log10(1/min)",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_dpo_nf.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "DPO",
+     "NF"
+    ],
+    "max_odorant_path_share": 1.0,
+    "max_pot_flux_share": 0.11598933670503443,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [
+    {
+     "source": "hou2026_1dx_exit",
+     "side": "upper",
+     "temperature_c": 120.0,
+     "excess_dex": 0.4630325169327486,
+     "margin_95_dex": 1.88944,
+     "beyond_95": false
+    },
+    {
+     "source": "zhou2024b_1dx_exit",
+     "side": "upper",
+     "temperature_c": 120.0,
+     "excess_dex": 0.7793024791534666,
+     "margin_95_dex": 1.88944,
+     "beyond_95": false
+    }
+   ],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "A7: CF-062 semi-quantitative 1-DX flag; Hou's pH was measured (~4.5)"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": false,
+   "sources": [
+    {
+     "paper_keys": [
+      "hou2026"
+     ],
+     "where": "hou2026_extraction (lifetime bounds, 40-60 min window)",
+     "lab": "jiangnan",
+     "conditions": "glycine-xylose ARP 5 mM fed, initial pH 7.0, 120 C; pH MEASURED (~4.5 over the 40-60 min window); 1-DX by ex-situ OPD, semi-quantitative (CF-062)",
+     "relation": "upper",
+     "value": 0.29,
+     "temperature_c": 120.0,
+     "conversion": "upper end of the 1-DX lifetime bracket (all ARP loss routed to 1-DX): total 1-DX exit <= 0.29 /min, so each exit channel (r_dpo_nf) <= 0.29 /min",
+     "terms": {},
+     "record": "dossier only",
+     "reader": "first",
+     "usable": true,
+     "why": "a superset (total exit) bounds the channel above",
+     "id": "hou2026_1dx_exit",
+     "evaluation": {
+      "log10_at_measured_T": -0.5376020021010439,
+      "transport_dex": [
+       0.23829833532354966,
+       1.882556849056042
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "upper": {
+       "raw_edge": 1.3449548469549981,
+       "edge_95": 3.234394846954998,
+       "binding": false,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -0.07456948516829531,
+       "bound_log10_k_at_T": -0.5376020021010439,
+       "temperature_c": 120.0,
+       "shipped_ea": 64.0822869313293,
+       "upper": {
+        "excess_dex": 0.4630325169327486,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": true,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "zhou2024b"
+     ],
+     "where": "zhou2024b_extraction (derived lifetimes, 90-120 min window)",
+     "lab": "jiangnan",
+     "conditions": "ARP fed with Gly / Ala, 120 C, in-situ pH < 7 unknown; 1-DX by OPD, semi-quantitative (CF-062)",
+     "relation": "upper",
+     "value": 0.14,
+     "temperature_c": 120.0,
+     "conversion": "upper end of k1 bracket (all ARP loss -> 1-DX): total 1-DX exit <= 0.14 /min",
+     "terms": {},
+     "record": "dossier only",
+     "reader": "first",
+     "usable": true,
+     "why": "a superset (total exit) bounds the channel above",
+     "id": "zhou2024b_1dx_exit",
+     "evaluation": {
+      "log10_at_measured_T": -0.8538719643217619,
+      "transport_dex": [
+       0.23829833532354966,
+       1.882556849056042
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "upper": {
+       "raw_edge": 1.0286848847342802,
+       "edge_95": 2.9181248847342802,
+       "binding": false,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -0.07456948516829531,
+       "bound_log10_k_at_T": -0.8538719643217619,
+       "temperature_c": 120.0,
+       "shipped_ea": 64.0822869313293,
+       "upper": {
+        "excess_dex": 0.7793024791534666,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": true,
+        "violates_95": false
+       }
+      }
+     }
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": 2.9181248847342802,
+    "lo_from": null,
+    "hi_from": "zhou2024b_1dx_exit",
+    "transport_class": "carbohydrate",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": false,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge (outside the fit's search box: it trims nothing of today's search range); the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the SHIPPED (k, Ea) pair is 0.46 dex beyond hou2026_1dx_exit's upper bound at 120 C (inside the 95 % margin, 1.89 dex)",
+    "the SHIPPED (k, Ea) pair is 0.78 dex beyond zhou2024b_1dx_exit's upper bound at 120 C (inside the 95 % margin, 1.89 dex)",
+    "the band rests on a single laboratory (jiangnan)",
+    "the band rests on a first-reader reading",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_nf_decay.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -2.181605124250818,
+   "unit": "log10(1/min)",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_nf_decay.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "NF"
+    ],
+    "max_odorant_path_share": 0.9999961642772432,
+    "max_pot_flux_share": 0.013913922736878656,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [
+    {
+     "source": "bork_nf_alone",
+     "side": "lower",
+     "temperature_c": 130.0,
+     "excess_dex": 0.5299752411493004,
+     "margin_95_dex": 1.9112814376128766,
+     "beyond_95": false
+    }
+   ],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "A1: one-sided LOWER bound by the subset rule; CF-113's x1.4 counted once"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "bork2022",
+      "bork2023"
+     ],
+     "dm": "DM-01",
+     "where": "Bork 2022 Fig. 1D (bork2022_extraction / bork2022b_extraction sec. 4.3); Bork 2023 Fig. 4B (bork2023_extraction sec. 4.3); CF-112, CF-113",
+     "lab": "tu_berlin_kanzler",
+     "conditions": "NF 20 mM alone in water, pH 5 initial, unbuffered, 130 C, 0-300 min; pH drift and O2 / headspace unstated",
+     "relation": "lower",
+     "value": 0.0048,
+     "temperature_c": 130.0,
+     "conversion": "first-order k, weighted fit 0-300 min (4.9e-3 refit, 5.1e-3 unweighted); Bork 2023 two-point 0-120 min 6.1e-3",
+     "terms": {
+      "noise": 0.015988105384130355,
+      "within_lab_between_paper": 0.146128035678238
+     },
+     "record": "no ledger row (proposed in the bork2022 / bork2023 dossiers, CF-112)",
+     "reader": "second",
+     "reader_note": "CF-112: second reader agrees on Fig. 1D; Bork 2023 Fig. 4B first reader",
+     "usable": true,
+     "why": "the subset rule applied consistently: k_nf_decay lumps the carbonyl-sink family, and Bork 2022's NF + MGO pot shows a co-reactant channel the engine lacks, so the NF-alone loss is a SUBSET of the lumped step: a lower bound (S1 second reading; the first reading took it as two-sided)",
+     "id": "bork_nf_alone",
+     "evaluation": {
+      "log10_at_measured_T": -2.318758762624413,
+      "transport_dex": [
+       0.1394324552138714,
+       1.1015163961895842
+      ],
+      "sigma_raw_dex": 0.14700007593519962,
+      "sigma_95_dex": 0.9751435906188146,
+      "lower": {
+       "raw_edge": -2.467446456243533,
+       "edge_95": -4.090607745023418,
+       "binding": true,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -2.848734003773713,
+       "bound_log10_k_at_T": -2.318758762624413,
+       "temperature_c": 130.0,
+       "shipped_ea": 143.53807623187993,
+       "lower": {
+        "excess_dex": 0.5299752411493004,
+        "margin_raw_dex": 0.28812014883299125,
+        "margin_95_dex": 1.9112814376128766,
+        "violates_raw": true,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "mikami2017"
+     ],
+     "where": "mikami2017_extraction; ledger trunk.yml (Mikami NF loss); source_verification/deoxyosone_submodel.yml",
+     "lab": "ochanomizu",
+     "conditions": "NF at pH 8, 100 C: 0.032 /min",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "a different pH: carrying it to the engine's pH-free step needs a pH law (B61's hydroxide term is off): a rival structure (S3), not a band; CF-117 records an O2 / metal rival",
+     "id": "mikami_nf_ph8",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "lau2003",
+      "pandit2006"
+     ],
+     "where": "lau2003_extraction, pandit2006_extraction",
+     "lab": "wsu_tang",
+     "conditions": "NF in a gel / mashed potato, 116-121 C, pH not reported",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a matrix, pH unreported, a loss inferred from a formation plateau (<~6e-3 /min): recorded, not used",
+     "id": "lau_pandit_nf_matrix",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_lower",
+    "lo": -4.090607745023418,
+    "hi": null,
+    "lo_from": "bork_nf_alone",
+    "hi_from": null,
+    "transport_class": "carbohydrate",
+    "lo_inside_search_box": true,
+    "hi_inside_search_box": null,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge; the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the SHIPPED (k, Ea) pair is 0.53 dex beyond bork_nf_alone's lower bound at 130 C (inside the 95 % margin, 1.91 dex)",
+    "the band rests on a single laboratory (tu_berlin_kanzler)",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": [
+    "DM-01"
+   ]
+  },
+  {
+   "coordinate": "k_fur_fft_hs.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -0.009550422129147983,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_fur_fft_hs.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": "k_ref is normalised at pH 5: the engine's HS- factor at the in-situ pH 6.33, 120 C carries the bound to the coordinate (S1 second reading; with Suleimenov's pK1 6.45 the second reader gets x13.8 and raw -1.44; at the label pH 7.0, raw -1.67, 95 % 0.22)",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FFT",
+     "FUR",
+     "H2S"
+    ],
+    "max_odorant_path_share": 0.9998970622365984,
+    "max_pot_flux_share": 0.00035326770473953403,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [
+    {
+     "source": "zhai2023_fur_sulfide",
+     "side": "upper",
+     "temperature_c": 120.0,
+     "excess_dex": 1.934288261082195,
+     "margin_95_dex": 1.88944,
+     "beyond_95": true
+    }
+   ],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "A2: the HS- speciation factor (k_ref normalised at pH 5) carries the bound"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "zhai2023jafc"
+     ],
+     "where": "zhai2023jafc_extraction sec. 11, Fig. 6a; ledger sulfur.yml; source_verification/thiol_submodel.yml (verified)",
+     "lab": "jiangnan",
+     "conditions": "furfural + (NH4)2S 10 mM each, label pH 7.0 (in situ 6.33), 120 C; dissolved sulfide not measured (34-70 %, CF-065)",
+     "relation": "upper",
+     "value": 0.0445331686067581,
+     "temperature_c": 120.0,
+     "conversion": "total furfural loss ln(1.00/0.22)/10 min = 0.151 /min over dissolved sulfide 10 mM x 0.34 (the loose end of CF-065's range); a ceiling on the SUM of the furfural + sulfide channels, taken per channel at speciation weight 1 (the tightest case)",
+     "terms": {},
+     "record": "ledger",
+     "reader": "second",
+     "usable": true,
+     "why": "a total loss bounds each furfural + sulfide channel above",
+     "id": "zhai2023_fur_sulfide",
+     "evaluation": {
+      "log10_at_measured_T": -2.452862093193404,
+      "transport_dex": [
+       0.23571677002421118,
+       1.0564559532677367
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "upper": {
+       "raw_edge": -1.3964061399256675,
+       "edge_95": 0.4930338600743325,
+       "binding": true,
+       "shipped_outside_raw": true,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 12.634140149438778,
+      "engine_factor_note": "the engine's hs_anion factor at pH 6.33, 120 C: 12.6 (the smallest taken)",
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -0.5185738321112091,
+       "bound_log10_k_at_T": -2.452862093193404,
+       "temperature_c": 120.0,
+       "shipped_ea": 64.0822869313293,
+       "upper": {
+        "excess_dex": 1.934288261082195,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": true,
+        "violates_95": true
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "munch1997"
+     ],
+     "where": "ledger sulfur.yml (Munch 1997 T5: order in H2S 1.04 [0.90, 1.18]); CF-065",
+     "lab": "dfa_garching",
+     "conditions": "furfural + H2S",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a measured LAW (first order in H2S) that supports the rate law; not a value",
+     "id": "munch1997_order",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": 0.4930338600743325,
+    "lo_from": null,
+    "hi_from": "zhai2023_fur_sulfide",
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": true,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge; the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the SHIPPED (k, Ea) pair is 1.93 dex beyond zhai2023_fur_sulfide's upper bound at 120 C (beyond the 95 % margin, 1.89 dex)",
+    "the band rests on a single laboratory (jiangnan)",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_mft_decay.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": 0.1341125214450892,
+   "unit": "log10(1/min)",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_mft_decay.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "MFT"
+    ],
+    "max_odorant_path_share": 0.9986273141036218,
+    "max_pot_flux_share": 0.00016921103788521073,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [
+    {
+     "source": "patent_mft_standard",
+     "side": "upper",
+     "temperature_c": 110.0,
+     "excess_dex": 0.2152894163380321,
+     "margin_95_dex": 1.88944,
+     "beyond_95": false
+    }
+   ],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "A3: Grosch 1992 removed as an upper source; the edge stands on the patent alone"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "grosch1992"
+     ],
+     "where": "grosch1992_extraction Table VIII (inferred in-pot lambda 0.044, 0.035-0.053 /min at 100 C); ledger sulfur.yml grosch1992 row",
+     "lab": "dfa_garching",
+     "conditions": "cysteine / ribose pot, 100 C; loss inferred from formation and level",
+     "relation": "upper",
+     "record": "ledger",
+     "reader": "first",
+     "usable": false,
+     "why": "removed as an upper source (S1 second reading): the lambdas are inferred under constant formation and read closer to LOWER bounds on the in-pot loss; the 0.044 /min is the thiamine-only pot, not a cysteine / ribose pot; the Method I rows are a declared hold-out (heldout_grosch1992_tab2.yml)",
+     "id": "grosch1992_mft_inpot",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "us10076126"
+     ],
+     "dm": "DM-02",
+     "where": "us10076126 Methods (co-heated [2H3]-MFT survives 240 min); results/validation/m0_checks_batch2.md CK-23; ledger us10076126_fig1_mft_time_course",
+     "lab": "patent_assignee",
+     "conditions": "xylose + cysteine 0.25 M, 0.2 M phosphate pH 5.5, 110 C",
+     "relation": "upper",
+     "value": 0.058,
+     "temperature_c": 110.0,
+     "conversion": "lambda <= ln(1/f_min)/240 min at the loose corner f_min 1e-6 (declared, not printed)",
+     "terms": {},
+     "record": "ledger",
+     "reader": "second",
+     "usable": true,
+     "why": "a patent counts as a bound only (S2 (d)); with Grosch 1992 it nominates a cysteine-slowed loss (case M1 C2): a rival route source as well",
+     "id": "patent_mft_standard",
+     "evaluation": {
+      "log10_at_measured_T": -1.2365720064370627,
+      "transport_dex": [
+       0.33861638363311053,
+       1.5176404051627195
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "upper": {
+       "raw_edge": 0.2810683987256568,
+       "edge_95": 2.170508398725657,
+       "binding": false,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -1.0212825900990306,
+       "bound_log10_k_at_T": -1.2365720064370627,
+       "temperature_c": 110.0,
+       "shipped_ea": 101.25425582543835,
+       "upper": {
+        "excess_dex": 0.2152894163380321,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": true,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "vanseeventer2001"
+     ],
+     "where": "vanseeventer2001_extraction Table 1 (MFT 59 %/day, FFT 28 %/day, 50 C)",
+     "lab": "nestle",
+     "conditions": "process flavour, pH 5.0, 0.5 M phosphate",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "MFT loss by C-5 oligomerisation (ch_oligomer, carried at zero rate): a rival structure; a declared hold-out",
+     "id": "vanseeventer_mft",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "zhai2023jafc",
+      "zhang2024"
+     ],
+     "where": "k6a_sulfur_ladders_synthesis (Zhai 140 C k_net MFT 0.0065, FFT 0.0141 /min); Zhang2024_extraction (21-55 % in 60 min, 115 C)",
+     "lab": "jiangnan",
+     "conditions": "net thiol turnover in pots",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a net loss is a LOWER bound on the total loss, which bounds no single channel from below",
+     "id": "thiol_net_loss",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": 2.170508398725657,
+    "lo_from": null,
+    "hi_from": "patent_mft_standard",
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": false,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge (outside the fit's search box: it trims nothing of today's search range); the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the SHIPPED (k, Ea) pair is 0.22 dex beyond patent_mft_standard's upper bound at 110 C (inside the 95 % margin, 1.89 dex)",
+    "the band rests on a single laboratory (patent_assignee)",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": [
+    "DM-02"
+   ]
+  },
+  {
+   "coordinate": "k_h2s_loss.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -1.3506222526942775,
+   "unit": "log10(1/min)",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_h2s_loss.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "H2S"
+    ],
+    "max_odorant_path_share": 0.970723603479333,
+    "max_pot_flux_share": 0.007680097551828477,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "meets_s1_two_readers": null,
+   "sources": [
+    {
+     "paper_keys": [
+      "li2022"
+     ],
+     "where": "li2022_extraction (sink 0.023-0.031 /min if all release deficit is loss); ledger sulfur.yml",
+     "lab": "copenhagen_arla",
+     "conditions": "Cys 5.7 mM, pH 7, 10 mM phosphate, sealed vial, air headspace, 90 C, n = 1",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "inferred through the Zheng & Ho release law (model-conditional), not a measured bound",
+     "id": "li2022_h2s",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "cheng2020"
+     ],
+     "where": "cheng2020_extraction (H2S falls 3-36 %, 100 C, 60-90 s); ledger sulfur.yml",
+     "lab": "cheng_lab",
+     "conditions": "mandarin juice, sealed vial, semi-quantitative (EMS)",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a net loss in a matrix (metals, ascorbate): a lower bound on a total, not the channel",
+     "id": "cheng2020_h2s",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "refused",
+    "lo": null,
+    "hi": null,
+    "lo_from": null,
+    "hi_from": null,
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": null,
+    "basis": "no measured bound, analogue with a measured law, or class distribution of k on disk; the dependent outputs are refused"
+   },
+   "consequence": "refuse",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_pent_tdp.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -0.5022095511358302,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_pent_tdp.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "Cys",
+     "PENT",
+     "TDP"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.5861110672008492,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [
+    {
+     "source": "cao2017_xylose_pool",
+     "side": "upper",
+     "temperature_c": 90.0,
+     "excess_dex": 2.9954642802923375,
+     "margin_95_dex": 1.88944,
+     "beyond_95": true
+    }
+   ],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "D: Cao 2017's blank-pot xylose-pool ceiling (not refused)"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "cao2017"
+     ],
+     "where": "cao2017_extraction Figs. 4-5 (blank pot: Xyl + TTCA + Cys-Amadori 0.478 M at 1 h -> 0.438 M at 5 h; free Xyl 0.077 -> 0.069, free Cys 0.068 -> 0.056 M; pH 4.56 -> 4.15)",
+     "lab": "jiangnan",
+     "conditions": "xylose + cysteine 0.40 M each, blank (no glycine), 90 C, pH 5.49 -> 4.15",
+     "relation": "upper",
+     "value": 5.369862725493087e-05,
+     "temperature_c": 90.0,
+     "conversion": "closed-form superset ceiling: every xylose-destroying channel (the pool decline plus its read error, 0.040 + 0.010 M over 240 min) over the lowest free [Xyl][Cys] (69 x 56 mM^2) bounds k x f_pH; the engine's pH factor is taken at its smallest over the window's pH 4.15-4.56 (the loose edge)",
+     "terms": {},
+     "record": "dossier (digitised Figs. 4-5)",
+     "reader": "second",
+     "reader_note": "Cao 2017 Figs. 4-5 read by two readers (dossier); the ceiling is the S1 second reader's, re-derived here",
+     "usable": true,
+     "why": "a closed xylose pool: its decline bounds every pentose-consuming channel above, so each enolisation step (r_pent_tdp, r_pent_dpo) is bounded",
+     "id": "cao2017_xylose_pool",
+     "evaluation": {
+      "log10_at_measured_T": -4.710036816408988,
+      "transport_dex": [
+       0.5614167861683639,
+       2.516206657468994
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "upper": {
+       "raw_edge": -2.1938301589399942,
+       "edge_95": -0.3043901589399942,
+       "binding": true,
+       "shipped_outside_raw": true,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 2.754228703338169,
+      "engine_factor_note": "the engine's acid factor at pH 4.15-4.56, 90 C: 7.08, 2.75 (the smallest taken)",
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -1.7145725361166506,
+       "bound_log10_k_at_T": -4.710036816408988,
+       "temperature_c": 90.0,
+       "shipped_ea": 64.0822869313293,
+       "upper": {
+        "excess_dex": 2.9954642802923375,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": true,
+        "violates_95": true
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "zhang2025b"
+     ],
+     "where": "zhang2025b_extraction (printed k_Xyl 0.073 /min; verified points ~0.061); ledger sulfur.yml; source_verification/route_submodel.yml (units corrected)",
+     "lab": "btbu_xie",
+     "conditions": "Cys 40 + Xyl 40 mM, 0.2 M phosphate pH 6.5, 120 C",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "a superset upper bound on k x f_pH x [Cys]free (~20 mM at 5 min) whose free-cysteine trajectory needs an engine evaluation; Cao 2017's blank pot gives the closed-form ceiling instead",
+     "id": "zhang2025b_xylose_loss",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "balagiannis2010",
+      "blank2006",
+      "us8920862",
+      "desclaux2006"
+     ],
+     "where": "balagiannis2010 (ribose 5.2e-2 /min, 130 C, beef extract); blank2006 (Xyl + Gly 1.1e-3 /min, 70 C); us8920862 (Xyl + Gly 0.50 /h, 120 C, pH 6); desclaux2006 (ARP -> 1-DX 2.79e-2, -> 3-DX 5.5e-4 /min, 100 C)",
+     "lab": "several",
+     "conditions": "pentose with amines other than cysteine",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "the amine is not cysteine and no measured law transfers between amines",
+     "id": "pentose_amine_analogues",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": -0.3043901589399942,
+    "lo_from": null,
+    "hi_from": "cao2017_xylose_pool",
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": true,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge; the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the SHIPPED (k, Ea) pair is 3.00 dex beyond cao2017_xylose_pool's upper bound at 90 C (beyond the 95 % margin, 1.89 dex)",
+    "the band rests on a single laboratory (jiangnan)",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_pent_dpo.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -0.5446463072676107,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_pent_dpo.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "Cys",
+     "DPO",
+     "PENT"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.45004351916962587,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [
+    {
+     "source": "cao2017_xylose_pool",
+     "side": "upper",
+     "temperature_c": 90.0,
+     "excess_dex": 1.6630324979614255,
+     "margin_95_dex": 1.88944,
+     "beyond_95": false
+    }
+   ],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "D: Cao 2017's blank-pot xylose-pool ceiling (not refused)"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "cao2017"
+     ],
+     "where": "cao2017_extraction Figs. 4-5 (blank pot: Xyl + TTCA + Cys-Amadori 0.478 M at 1 h -> 0.438 M at 5 h; free Xyl 0.077 -> 0.069, free Cys 0.068 -> 0.056 M; pH 4.56 -> 4.15)",
+     "lab": "jiangnan",
+     "conditions": "xylose + cysteine 0.40 M each, blank (no glycine), 90 C, pH 5.49 -> 4.15",
+     "relation": "upper",
+     "value": 5.369862725493087e-05,
+     "temperature_c": 90.0,
+     "conversion": "closed-form superset ceiling: every xylose-destroying channel (the pool decline plus its read error, 0.040 + 0.010 M over 240 min) over the lowest free [Xyl][Cys] (69 x 56 mM^2) bounds k x f_pH; the engine's pH factor is taken at its smallest over the window's pH 4.15-4.56 (the loose edge)",
+     "terms": {},
+     "record": "dossier (digitised Figs. 4-5)",
+     "reader": "second",
+     "reader_note": "Cao 2017 Figs. 4-5 read by two readers (dossier); the ceiling is the S1 second reader's, re-derived here",
+     "usable": true,
+     "why": "a closed xylose pool: its decline bounds every pentose-consuming channel above, so each enolisation step (r_pent_tdp, r_pent_dpo) is bounded",
+     "id": "cao2017_xylose_pool",
+     "evaluation": {
+      "log10_at_measured_T": -3.4200417902098565,
+      "transport_dex": [
+       0.5614167861683639,
+       2.516206657468994
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "upper": {
+       "raw_edge": -0.9038351327408627,
+       "edge_95": 0.9856048672591373,
+       "binding": false,
+       "shipped_outside_raw": true,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 0.14125537219424994,
+      "engine_factor_note": "the engine's base factor at pH 4.15-4.56, 90 C: 0.141, 0.363 (the smallest taken)",
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -1.757009292248431,
+       "bound_log10_k_at_T": -3.4200417902098565,
+       "temperature_c": 90.0,
+       "shipped_ea": 64.0822869313293,
+       "upper": {
+        "excess_dex": 1.6630324979614255,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": true,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "zhang2025b"
+     ],
+     "where": "zhang2025b_extraction (printed k_Xyl 0.073 /min; verified points ~0.061); ledger sulfur.yml; source_verification/route_submodel.yml (units corrected)",
+     "lab": "btbu_xie",
+     "conditions": "Cys 40 + Xyl 40 mM, 0.2 M phosphate pH 6.5, 120 C",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "a superset upper bound on k x f_pH x [Cys]free (~20 mM at 5 min) whose free-cysteine trajectory needs an engine evaluation; Cao 2017's blank pot gives the closed-form ceiling instead",
+     "id": "zhang2025b_xylose_loss",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "balagiannis2010",
+      "blank2006",
+      "us8920862",
+      "desclaux2006"
+     ],
+     "where": "balagiannis2010 (ribose 5.2e-2 /min, 130 C, beef extract); blank2006 (Xyl + Gly 1.1e-3 /min, 70 C); us8920862 (Xyl + Gly 0.50 /h, 120 C, pH 6); desclaux2006 (ARP -> 1-DX 2.79e-2, -> 3-DX 5.5e-4 /min, 100 C)",
+     "lab": "several",
+     "conditions": "pentose with amines other than cysteine",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "the amine is not cysteine and no measured law transfers between amines",
+     "id": "pentose_amine_analogues",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": 0.9856048672591373,
+    "lo_from": null,
+    "hi_from": "cao2017_xylose_pool",
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": false,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge (outside the fit's search box: it trims nothing of today's search range); the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the SHIPPED (k, Ea) pair is 1.66 dex beyond cao2017_xylose_pool's upper bound at 90 C (inside the 95 % margin, 1.89 dex)",
+    "the band rests on a single laboratory (jiangnan)",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_dpo_ddp.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": 0.041723027569463354,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_dpo_ddp.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "Cys",
+     "DDP",
+     "DPO"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.4455943088597869,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "C: transported over the sulfur class"
+   },
+   "upgrade": false,
+   "meets_s1_two_readers": null,
+   "sources": [
+    {
+     "paper_keys": [
+      "cao2017"
+     ],
+     "where": "cao2017_extraction (every cysteine-destroying channel <= ~4e-4 /min at 90 C)",
+     "lab": "jiangnan",
+     "conditions": "pH 4.2-4.6, 90 C",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "bounds k x [DPO], and DPO was not measured: no bound on k alone",
+     "id": "cao2017_cys_ceiling",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "wedzicha1991",
+      "edwards1992"
+     ],
+     "where": "wedzicha1991_extraction, edwards1992_extraction; ledger sulfur.yml",
+     "lab": "leeds",
+     "conditions": "3-deoxyhexosulose + Cys, thiol liberation ~0.07 /h, 55 C, pH 5.5",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a hexose deoxyosone at 55 C, no measured transfer law to DPO + Cys at 145 C",
+     "id": "hexosulose_cys_analogue",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "refused",
+    "lo": null,
+    "hi": null,
+    "lo_from": null,
+    "hi_from": null,
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": null,
+    "basis": "no measured bound, analogue with a measured law, or class distribution of k on disk; the dependent outputs are refused"
+   },
+   "consequence": "refuse",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_acr_gln.log10_k_ref",
+   "lane": "acrylamide",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -1.894602070316578,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 160.0,
+   "search_bounds": [
+    -9.0,
+    0.0
+   ],
+   "current_band": {
+    "source": "envelope prior b3.k_acr_gln.log10_k_ref_160C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.10073815052881968,
+   "outputs": {
+    "species": [
+     "ACR",
+     "Gln"
+    ],
+    "max_odorant_path_share": null,
+    "max_pot_flux_share": null,
+    "b38_sensitivity_norm": 2.307896028825036
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "D: the acrylamide-class between-lab term (Knol 2005 vs Claeys 2005) defines the edge"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": false,
+   "sources": [
+    {
+     "paper_keys": [
+      "claeys2005"
+     ],
+     "where": "claeys2005_extraction Table 2 (glutamine row: k_Eref 274.1 +/- 81.6 e-3 /min at T_ref 160 C); ledger acrylamide.yml claeys2005 rows",
+     "lab": "ku_leuven",
+     "conditions": "Asn + Glc 0.01 M, + Gln 0.01 M, 0.05 M citrate pH 6, 140-200 C",
+     "relation": "upper",
+     "value": 0.02741,
+     "temperature_c": 160.0,
+     "conversion": "lumped first-order elimination k_E over [Gln] 10 mM (the bound holds while [Gln] stays near 10 mM; glucose consumes it)",
+     "terms": {
+      "noise": 0.11317482964628198
+     },
+     "record": "ledger",
+     "reader": "first",
+     "usable": true,
+     "why": "the lumped elimination k_E includes every acrylamide loss: a ceiling on the Gln channel",
+     "id": "claeys2005_gln",
+     "evaluation": {
+      "log10_at_measured_T": -1.5620909644605017,
+      "transport_dex": [
+       0.0,
+       0.0
+      ],
+      "sigma_raw_dex": 0.11317482964628198,
+      "sigma_95_dex": 0.15151474198054815,
+      "upper": {
+       "raw_edge": -1.340268298353789,
+       "edge_95": -1.2651220701786272,
+       "binding": true,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -1.894602070316578,
+       "bound_log10_k_at_T": -1.5620909644605017,
+       "temperature_c": 160.0,
+       "shipped_ea": 51.3,
+       "upper": {
+        "excess_dex": -0.33251110585607635,
+        "margin_raw_dex": 0.22182266610671267,
+        "margin_95_dex": 0.2969688942818744,
+        "violates_raw": false,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "devleeschouwer2009"
+     ],
+     "where": "devleeschouwer2009_extraction Table 3 (Gln column; k_E2 not in the model)",
+     "lab": "ku_leuven",
+     "conditions": "freeze-dried powder, a_w 0.92, 160 C",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "glutamine deamidates (half-life ~1 min), so no floor on [Gln]; a declared hold-out; a different a_w",
+     "id": "devleeschouwer2009_gln",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "devleeschouwer2009",
+      "claeys2005",
+      "zamora2010"
+     ],
+     "where": "devleeschouwer2009 Table 3 Cys column (49.36 +/- 1.18 /M/min, Ea 51.3 +/- 1.5); zamora2010_extraction (Ea Gly 52, butylamine 44; rates figure-only)",
+     "lab": "ku_leuven / seville",
+     "conditions": "acrylamide + Cys / amines",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a same-class analogue with no measured thiol -> amine law (Friedman's 100-300x is quoted inside Claeys, not measured in the corpus); Zamora's rates are figure-only",
+     "id": "acr_cys_analogue",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": -1.2651220701786272,
+    "lo_from": null,
+    "hi_from": "claeys2005_gln",
+    "transport_class": null,
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": true,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge; the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the band rests on a single laboratory (ku_leuven)",
+    "the band rests on a first-reader reading",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_acr_lys.log10_k_ref",
+   "lane": "acrylamide",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -2.4915117796873094,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 160.0,
+   "search_bounds": [
+    -9.0,
+    0.0
+   ],
+   "current_band": {
+    "source": "envelope prior b3.k_acr_lys.log10_k_ref_160C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.10073815052881968,
+   "outputs": {
+    "species": [
+     "ACR",
+     "Lys"
+    ],
+    "max_odorant_path_share": null,
+    "max_pot_flux_share": null,
+    "b38_sensitivity_norm": 1.0677020766337264
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "D: the acrylamide-class between-lab term (Knol 2005 vs Claeys 2005) defines the edge"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": false,
+   "sources": [
+    {
+     "paper_keys": [
+      "claeys2005"
+     ],
+     "where": "claeys2005_extraction Table 2 (lysine row: k_Eref 280.2 +/- 43.4 e-3 /min at T_ref 160 C)",
+     "lab": "ku_leuven",
+     "conditions": "Asn + Glc 0.01 M, + Lys 0.01 M, 0.05 M citrate pH 6",
+     "relation": "upper",
+     "value": 0.02802,
+     "temperature_c": 160.0,
+     "conversion": "k_E over [Lys] 10 mM",
+     "terms": {
+      "noise": 0.0625403819904789
+     },
+     "record": "ledger",
+     "reader": "first",
+     "usable": true,
+     "why": "a ceiling on the Lys channel",
+     "id": "claeys2005_lys",
+     "evaluation": {
+      "log10_at_measured_T": -1.5525318690502443,
+      "transport_dex": [
+       0.0,
+       0.0
+      ],
+      "sigma_raw_dex": 0.0625403819904789,
+      "sigma_95_dex": 0.11857265431574918,
+      "upper": {
+       "raw_edge": -1.4299527203489057,
+       "edge_95": -1.3201294665913759,
+       "binding": true,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -2.4915117796873094,
+       "bound_log10_k_at_T": -1.5525318690502443,
+       "temperature_c": 160.0,
+       "shipped_ea": 51.3,
+       "upper": {
+        "excess_dex": -0.9389799106370651,
+        "margin_raw_dex": 0.12257914870133864,
+        "margin_95_dex": 0.23240240245886837,
+        "violates_raw": false,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "devleeschouwer2009",
+      "claeys2005",
+      "zamora2010"
+     ],
+     "where": "devleeschouwer2009 Table 3 Cys column (49.36 +/- 1.18 /M/min, Ea 51.3 +/- 1.5); zamora2010_extraction (Ea Gly 52, butylamine 44; rates figure-only)",
+     "lab": "ku_leuven / seville",
+     "conditions": "acrylamide + Cys / amines",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a same-class analogue with no measured thiol -> amine law (Friedman's 100-300x is quoted inside Claeys, not measured in the corpus); Zamora's rates are figure-only",
+     "id": "acr_cys_analogue",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": -1.3201294665913759,
+    "lo_from": null,
+    "hi_from": "claeys2005_lys",
+    "transport_class": null,
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": true,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge; the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the band rests on a single laboratory (ku_leuven)",
+    "the band rests on a first-reader reading",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_ddp_mft_hs.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -7.69250097808771,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_ddp_mft_hs.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": "nothing on disk beyond the search bound (no fed 1,4-dideoxyosone anywhere; Cerny 2003 route shares are ratios)",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "DDP",
+     "H2S",
+     "MFT"
+    ],
+    "max_odorant_path_share": 0.01919524085801849,
+    "max_pot_flux_share": 9.571543914923726e-09,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "meets_s1_two_readers": null,
+   "sources": [],
+   "proposal": {
+    "route": "refused",
+    "lo": null,
+    "hi": null,
+    "lo_from": null,
+    "hi_from": null,
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": null,
+    "basis": "no measured bound, analogue with a measured law, or class distribution of k on disk; the dependent outputs are refused"
+   },
+   "consequence": "refuse",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_ddp_mft.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -6.540581367427349,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_ddp_mft.log10_k_ref_145C",
+    "distribution": "fixed",
+    "lo": null,
+    "hi": null,
+    "sigma": null,
+    "sampled": false,
+    "width_dex": null,
+    "legitimate_under_s4": false,
+    "why": "fixed: no band"
+   },
+   "note": "nothing on disk beyond the search bound (as k_ddp_mft_hs)",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "DDP",
+     "H2S",
+     "MFT"
+    ],
+    "max_odorant_path_share": 0.01137862018133168,
+    "max_pot_flux_share": 1.3608181148261837e-07,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "meets_s1_two_readers": null,
+   "sources": [],
+   "proposal": {
+    "route": "refused",
+    "lo": null,
+    "hi": null,
+    "lo_from": null,
+    "hi_from": null,
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": null,
+    "basis": "no measured bound, analogue with a measured law, or class distribution of k on disk; the dependent outputs are refused"
+   },
+   "consequence": "refuse",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_fur_decay.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -0.4171289631108395,
+   "unit": "log10(1/min)",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_fur_decay.log10_k_ref_145C",
+    "distribution": "normal_log10",
+    "lo": -10.0,
+    "hi": 0.5,
+    "sigma": 0.8843152029222437,
+    "sampled": true,
+    "width_dex": 2.909397017614182,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FUR"
+    ],
+    "max_odorant_path_share": 0.9953723850880519,
+    "max_pot_flux_share": 0.0017350470937363906,
+    "b38_sensitivity_norm": 8.70884536538259
+   },
+   "joint_violations": [
+    {
+     "source": "balagiannis_fur_k9",
+     "side": "upper",
+     "temperature_c": 130.0,
+     "excess_dex": 0.47957951032550916,
+     "margin_95_dex": 1.8930758226718711,
+     "beyond_95": false
+    }
+   ],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "A4: Balagiannis's +/- 31 % is a 95 % HPD; Almhofer's steel-wall term and k9's inferred status noted"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": false,
+   "sources": [
+    {
+     "paper_keys": [
+      "almhofer2022"
+     ],
+     "where": "almhofer2022_extraction Fig. 2B (printed Arrhenius fit; 145 C interpolated); ledger trunk.yml almhofer2022_fig2_furfural_loss_arrhenius_water",
+     "lab": "jku_linz",
+     "conditions": "furfural 52-520 mM in water only, 125-200 C, order 0.8-1.3",
+     "relation": "lower",
+     "value": 0.000187,
+     "temperature_c": 145.0,
+     "conversion": "the printed fit at 145 C (inside the measured 125-200 C)",
+     "terms": {},
+     "record": "ledger",
+     "reader": "first",
+     "usable": true,
+     "why": "the water-only channel is a SUBSET of the lumped pot-independent furfural loss: a lower bound. Caveat: stainless-steel batch reactors; wall catalysis is a vessel term the bound carries unseparated",
+     "id": "almhofer_fur_water",
+     "evaluation": {
+      "log10_at_measured_T": -3.728158393463501,
+      "transport_dex": [
+       0.0,
+       0.0
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "lower": {
+       "raw_edge": -3.728158393463501,
+       "edge_95": -5.617598393463501,
+       "binding": true,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -0.4171289631108395,
+       "bound_log10_k_at_T": -3.728158393463501,
+       "temperature_c": 145.0,
+       "shipped_ea": 143.53807623187993,
+       "lower": {
+        "excess_dex": -3.3110294303526615,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": false,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "balagiannis2010"
+     ],
+     "where": "balagiannis2010_extraction Table I (k9: furfural t1/2 25.4 min)",
+     "lab": "reading",
+     "conditions": "1:1 beef-sirloin / water extract, 130 C, pH not reported",
+     "relation": "upper",
+     "value": 0.0273,
+     "temperature_c": 130.0,
+     "conversion": "first-order k9 +/- 31 % as a 95 % HPD interval (one sigma = log10(1.31) / 1.96)",
+     "terms": {
+      "noise": 0.05983229370192055
+     },
+     "record": "dossier (k9); ledger trunk.yml has the ribose row only",
+     "reader": "first",
+     "usable": true,
+     "why": "total furfural loss in a matrix (amines, thiols present) is a superset of the pot-independent channel. Caveat: k9 is a fitted constant of a nine-step lumped scheme, so the bound is inferred, not a direct measurement",
+     "id": "balagiannis_fur_k9",
+     "evaluation": {
+      "log10_at_measured_T": -1.563837352959244,
+      "transport_dex": [
+       0.1394324552138714,
+       1.1015163961895842
+      ],
+      "sigma_raw_dex": 0.05983229370192055,
+      "sigma_95_dex": 0.9658550115672812,
+      "upper": {
+       "raw_edge": -0.3450496611138955,
+       "edge_95": 1.4307548659022113,
+       "binding": false,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -1.0842578426337348,
+       "bound_log10_k_at_T": -1.563837352959244,
+       "temperature_c": 130.0,
+       "shipped_ea": 143.53807623187993,
+       "upper": {
+        "excess_dex": 0.47957951032550916,
+        "margin_raw_dex": 0.11727129565576427,
+        "margin_95_dex": 1.8930758226718711,
+        "violates_raw": true,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "yaghmur2005"
+     ],
+     "dm": "DM-08",
+     "where": "yaghmur2005_extraction (k_obs 3.2 / 6.7 / 12.6 / 16.0 e-2 /h at 40-70 C; Ea 46.5 kJ/mol); ledger sulfur.yml yaghmur rows",
+     "lab": "hebrew_university",
+     "conditions": "furfural + ~600 mM cysteine, pH 5, 40-70 C",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "k_obs is proportional to [Cys] (a different rate law): a rival (B62's furfural barriers), not a band; note that B62 as built (k(145 C) held, Ea 46.5) gives ~0.021 /min at 70 C, ~0.9 dex above Yaghmur's own total-loss value there",
+     "id": "yaghmur_fur_cys",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_two_sided",
+    "lo": -5.617598393463501,
+    "hi": 1.4307548659022113,
+    "lo_from": "almhofer_fur_water",
+    "hi_from": "balagiannis_fur_k9",
+    "transport_class": "carbohydrate",
+    "lo_inside_search_box": true,
+    "hi_inside_search_box": false,
+    "width_dex": 7.0483532593657126,
+    "basis": "a measured two-sided band at S2 (b)'s 95 % edges, carried over the class's Ea band",
+    "shipped_inside": true
+   },
+   "consequence": "widen",
+   "flags": [
+    "the SHIPPED (k, Ea) pair is 0.48 dex beyond balagiannis_fur_k9's upper bound at 130 C (inside the 95 % margin, 1.89 dex)",
+    "the band rests on a first-reader reading",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": [
+    "DM-08"
+   ]
+  },
+  {
+   "coordinate": "k_ttca_deg.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -2.2120207251222017,
+   "unit": "log10(1/min)",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_ttca_deg.log10_k_ref_145C",
+    "distribution": "normal_log10",
+    "lo": -10.0,
+    "hi": 0.5,
+    "sigma": 1.8915113021885022,
+    "sampled": true,
+    "width_dex": 6.223072184200173,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "DPO",
+     "TTCA"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.0,
+    "b38_sensitivity_norm": 8.37068012197227
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "A5: the early first-order rate (0.0138 /min), carried over the sulfur class"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "zhai2021"
+     ],
+     "dm": "DM-07",
+     "where": "zhai2021_extraction (zero-order fits; first-order equivalents 0.0027 / 0.0065 / 0.0081 /min at 100 / 120 / 140 C); ledger sulfur.yml zhai2021_fig3a_ttca_tladder; source_verification/route_submodel.yml (second reader)",
+     "lab": "jiangnan",
+     "conditions": "fed TTCA ~10 mM, unbuffered water, natural pH 5.5, 100-140 C (x9.6 faster at pH 8, CF-110)",
+     "relation": "upper",
+     "value": 0.013787675079325356,
+     "temperature_c": 140.0,
+     "conversion": "the EARLY first-order rate, Fig. 3a 140 C: 10 -> 7.59 mM in 20 min (0.0138 /min; local 20-40 min 0.0128), not the zero-order line's 0.0081 (S1 second reading)",
+     "terms": {},
+     "record": "ledger",
+     "reader": "second",
+     "usable": true,
+     "why": "every TTCA loss (a superset of r_ttca_deg) bounds it above",
+     "id": "zhai2021_ttca",
+     "evaluation": {
+      "log10_at_measured_T": -1.860508959737455,
+      "transport_dex": [
+       0.04486121173182584,
+       0.20106288661610233
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "upper": {
+       "raw_edge": -1.6594460731213525,
+       "edge_95": 0.2299939268786475,
+       "binding": true,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -2.3088971882152425,
+       "bound_log10_k_at_T": -1.860508959737455,
+       "temperature_c": 140.0,
+       "shipped_ea": 64.0822869313293,
+       "upper": {
+        "excess_dex": -0.4483882284777876,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": false,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "cao2017"
+     ],
+     "where": "cao2017_extraction (TTCA -> Cys-Amadori >= ~1.0e-3 /min at 90 C)",
+     "lab": "jiangnan",
+     "conditions": "90 C, pH 4.2-4.6",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "counts toward k_ttca_deg only if the Cys-Amadori route is non-releasing; the engine's r_cama_* release Cys: model-conditional",
+     "id": "cao2017_ttca_amadori",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": 0.2299939268786475,
+    "lo_from": null,
+    "hi_from": "zhai2021_ttca",
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": true,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge; the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the band rests on a single laboratory (jiangnan)",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": [
+    "DM-07"
+   ]
+  },
+  {
+   "coordinate": "k_glc_ha.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -8.589075847746692,
+   "unit": "log10(1/min)",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_glc_ha.log10_k_ref_145C",
+    "distribution": "uniform_band",
+    "lo": -10.0,
+    "hi": 0.5,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 10.5,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "Glc",
+     "HA",
+     "MGO"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.0,
+    "b38_sensitivity_norm": 8.062093836971155
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": false,
+   "sources": [
+    {
+     "paper_keys": [
+      "li2011"
+     ],
+     "where": "li2011_extraction sec. 4 (K_glc 0.0013 / 0.0032 / 0.0073 / 0.0151 /min at 100-130 C); ledger sulfur.yml li2011 rows",
+     "lab": "jiangnan_chen",
+     "conditions": "glucose + cysteine, 100-130 C",
+     "relation": "upper",
+     "value": 0.0151,
+     "temperature_c": 130.0,
+     "conversion": "total first-order glucose loss",
+     "terms": {},
+     "record": "ledger",
+     "reader": "first",
+     "usable": true,
+     "why": "total glucose loss is a superset of the C2/C3 cleavage",
+     "id": "li2011_glucose_loss",
+     "evaluation": {
+      "log10_at_measured_T": -1.8210230527068305,
+      "transport_dex": [
+       0.1394324552138714,
+       1.1015163961895842
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "upper": {
+       "raw_edge": -0.7195066565172463,
+       "edge_95": 1.1699333434827537,
+       "binding": false,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -8.886914201165192,
+       "bound_log10_k_at_T": -1.8210230527068305,
+       "temperature_c": 130.0,
+       "shipped_ea": 64.0822869313293,
+       "upper": {
+        "excess_dex": -7.065891148458362,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": false,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "thornalley1999"
+     ],
+     "where": "thornalley1999_extraction (glucose 50 mM, MGO initial rate 0.098 +/- 0.003 uM/day); data/lit/fit_rows/heldout_thornalley1999_figs1b_2e_2f_3c.yml",
+     "lab": "essex",
+     "conditions": "glucose alone, 100 mM phosphate pH 7.4, 37 C",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "heldout": true,
+     "why": "a lower bound (~1.4e-9 /min) only if the engine's other glucose -> MGO routes are minor (model-conditional), and a declared hold-out TEST row: using it as a band source spends it (a plan-level call)",
+     "id": "thornalley1999_mgo",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": 1.1699333434827537,
+    "lo_from": null,
+    "hi_from": "li2011_glucose_loss",
+    "transport_class": "carbohydrate",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": false,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge (outside the fit's search box: it trims nothing of today's search range); the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the band rests on a single laboratory (jiangnan_chen)",
+    "the band rests on a first-reader reading",
+    "an upgrade from no legitimate band: S1's second reader agreed"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_fur_fft.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -1.6429583696749852,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_fur_fft.log10_k_ref_145C",
+    "distribution": "uniform_band",
+    "lo": -10.0,
+    "hi": 0.5,
+    "sigma": 15.717675463144431,
+    "sampled": true,
+    "width_dex": 10.5,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": "the engine's neutral-H2S factor at pH 6.33, 120 C (the second reader's 0.55)",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FFT",
+     "FUR",
+     "H2S"
+    ],
+    "max_odorant_path_share": 0.28680461734728374,
+    "max_pot_flux_share": 0.00014206318681161668,
+    "b38_sensitivity_norm": 5.2876937058399935
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "A6: the neutral-H2S factor at pH 6.33 carries the bound"
+   },
+   "upgrade": true,
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "zhai2023jafc"
+     ],
+     "where": "zhai2023jafc_extraction sec. 11, Fig. 6a; ledger sulfur.yml; source_verification/thiol_submodel.yml (verified)",
+     "lab": "jiangnan",
+     "conditions": "furfural + (NH4)2S 10 mM each, label pH 7.0 (in situ 6.33), 120 C; dissolved sulfide not measured (34-70 %, CF-065)",
+     "relation": "upper",
+     "value": 0.0445331686067581,
+     "temperature_c": 120.0,
+     "conversion": "total furfural loss ln(1.00/0.22)/10 min = 0.151 /min over dissolved sulfide 10 mM x 0.34 (the loose end of CF-065's range); a ceiling on the SUM of the furfural + sulfide channels, taken per channel at speciation weight 1 (the tightest case)",
+     "terms": {},
+     "record": "ledger",
+     "reader": "second",
+     "usable": true,
+     "why": "a total loss bounds each furfural + sulfide channel above",
+     "id": "zhai2023_fur_sulfide",
+     "evaluation": {
+      "log10_at_measured_T": -1.1228620931934035,
+      "transport_dex": [
+       0.23571677002421118,
+       1.0564559532677367
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": 0.964,
+      "upper": {
+       "raw_edge": -0.0664061399256668,
+       "edge_95": 1.8230338600743332,
+       "binding": false,
+       "shipped_outside_raw": false,
+       "shipped_outside_95": false
+      },
+      "engine_factor": 0.5909431327839998,
+      "engine_factor_note": "the engine's neutral_h2s factor at pH 6.33, 120 C: 0.591 (the smallest taken)",
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -2.151981779657046,
+       "bound_log10_k_at_T": -1.1228620931934035,
+       "temperature_c": 120.0,
+       "shipped_ea": 64.0822869313293,
+       "upper": {
+        "excess_dex": -1.0291196864636427,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": 1.88944,
+        "violates_raw": false,
+        "violates_95": false
+       }
+      }
+     }
+    },
+    {
+     "paper_keys": [
+      "munch1997"
+     ],
+     "where": "ledger sulfur.yml (Munch 1997 T5: order in H2S 1.04 [0.90, 1.18]); CF-065",
+     "lab": "dfa_garching",
+     "conditions": "furfural + H2S",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a measured LAW (first order in H2S) that supports the rate law; not a value",
+     "id": "munch1997_order",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "measurement_one_sided_upper",
+    "lo": null,
+    "hi": 1.8230338600743332,
+    "lo_from": null,
+    "hi_from": "zhai2023_fur_sulfide",
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": false,
+    "basis": "a one-sided measured bound at S2 (b)'s 95 % edge (outside the fit's search box: it trims nothing of today's search range); the other side has no source and is refused",
+    "shipped_inside": true
+   },
+   "consequence": "one_sided",
+   "flags": [
+    "the band rests on a single laboratory (jiangnan)",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_dimer_mft.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": 0.49999999993490574,
+   "unit": "log10(L^2/(mmol^2*min))",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_dimer_mft.log10_k_ref_145C",
+    "distribution": "normal_log10",
+    "lo": -10.0,
+    "hi": 0.5,
+    "sigma": 0.40439558646923024,
+    "sampled": true,
+    "width_dex": 1.3304614794837675,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "MFT",
+     "MFTD",
+     "OX"
+    ],
+    "max_odorant_path_share": 0.0013658606985017731,
+    "max_pot_flux_share": 5.03629708592298e-08,
+    "b38_sensitivity_norm": 4.243877874537745
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "meets_s1_two_readers": null,
+   "sources": [
+    {
+     "paper_keys": [
+      "zhang2024",
+      "zhou2023",
+      "kumazawa2003",
+      "hofmann2001"
+     ],
+     "where": "Zhang2024_extraction Fig. 1 (dimer shares, 115 C; verification conditions FAIL); ledger sulfur.yml zhou2023 (6.5-9.6 %, pH-invariant); kumazawa2003 Table 3; hofmann2001 (< 1.5 % at 30 C)",
+     "lab": "several",
+     "conditions": "disulfide shares",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "the oxidant pool OX is never measured, so k (L^2/mmol^2/min) cannot be separated from [OX]; a share bounds the cumulative flux, not k; the encounter ceiling (log10 9.47) is physical and non-binding",
+     "id": "dimer_subset",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "refused",
+    "lo": null,
+    "hi": null,
+    "lo_from": null,
+    "hi_from": null,
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": null,
+    "basis": "no measured bound, analogue with a measured law, or class distribution of k on disk; the dependent outputs are refused"
+   },
+   "consequence": "refuse",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_go_ak.log10_k_ref",
+   "lane": "trunk",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -6.5415452891122525,
+   "unit": "log10(L/(mmol*min))",
+   "reference_temperature_c": 100.0,
+   "search_bounds": [
+    -9.191114581712858,
+    -5.191114581712858
+   ],
+   "current_band": {
+    "source": "envelope prior b18.log10_k_go_ak_100C",
+    "distribution": "normal_log10",
+    "lo": -9.191114581712858,
+    "hi": -5.191114581712858,
+    "sigma": 0.08183260861717218,
+    "sampled": true,
+    "width_dex": 0.2692292823504965,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": null,
+   "outputs": {
+    "species": [
+     "AKG",
+     "GO",
+     "Gly"
+    ],
+    "max_odorant_path_share": null,
+    "max_pot_flux_share": null,
+    "b38_sensitivity_norm": 17.88161144939979
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "D: Sedehi 2013 dropped (a held-out row is never a band source); stays refused"
+   },
+   "upgrade": false,
+   "meets_s1_two_readers": null,
+   "sources": [
+    {
+     "paper_keys": [
+      "sedehi2013"
+     ],
+     "where": "sedehi2013_extraction (transport to 100 C with the class Ea 50 +/- 11); data/lit/fit_rows/heldout_sedehi2013_tab1.yml (second reader)",
+     "lab": "usd_dehaan",
+     "conditions": "GO + Gly total consumption, 4-25 C, 0.2-1.5 M, D2O, pH 2-7",
+     "relation": "upper",
+     "heldout": true,
+     "record": "hold-out fit row",
+     "reader": "second",
+     "usable": false,
+     "why": "a declared hold-out row (heldout_sedehi2013_tab1.yml): held-out rows are never band sources (coordinator ruling, as Thornalley 1999 and Larralde 1995). As a ceiling it would be ~-3.7 at 100 C (central -4.4), above the search box anyway",
+     "id": "sedehi2013_gly",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "zhou2024"
+     ],
+     "where": "zhou2024_extraction Table 2 (pyrazine 0.0279, 2,5-DMP 0.0035 umol/L/min at 100 C); ledger trunk.yml (in_model_fit)",
+     "lab": "jiangnan_zhang_ho",
+     "conditions": "GO / MGO + alanine 20 + 20 mM, water, initial pH 8, 100-120 C; no SE printed",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a lower bound for ALANINE at pH 8 (>= -6.85 for GO); the alanine -> glycine transfer is declared (+/- 0.5 dex), not measured: no analogue band",
+     "id": "zhou2024_ala",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "hofmann2000"
+     ],
+     "where": "hofmann2000 Tables 3-4; source_verification/strecker_hofmann2000.yml (second reader + adjudicator)",
+     "lab": "dfa_garching",
+     "conditions": "GO / MGO + Phe 100 + 100 mM, phosphate pH 7, 98 C",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "Strecker products are a subset: lower bounds for PHENYLALANINE (>= -5.72 GO, argon); no Phe -> Gly law",
+     "id": "hofmann2000_phe",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "refused",
+    "lo": null,
+    "hi": null,
+    "lo_from": null,
+    "hi_from": null,
+    "transport_class": "carbohydrate",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": null,
+    "basis": "no measured bound, analogue with a measured law, or class distribution of k on disk; the dependent outputs are refused"
+   },
+   "consequence": "refuse",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_fft_decay.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 101.25425582543835,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    7.0,
+    102.0
+   ],
+   "current_band": {
+    "source": "envelope prior b8.decay_Ea_kJ_mol.thiol_sink",
+    "distribution": "normal",
+    "lo": 7.0,
+    "hi": 102.0,
+    "sigma": 32.82241421959611,
+    "sampled": true,
+    "width_dex": 1.626722646930407,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FFT"
+    ],
+    "max_odorant_path_share": 0.9888777961049899,
+    "max_pot_flux_share": 0.00013643917747877218,
+    "b38_sensitivity_norm": 13.250926541203551
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": true,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "gigl2021"
+     ],
+     "where": "k6a_sulfur_ladders_synthesis (k 1.17e-5 / 2.57e-4 / 7.83e-4 /min at 279-333 K; Ea 60.2, range 7-102); ledger sulfur.yml; source_verification/thiol_submodel.yml (conditions FAIL; Fig. 4 not read by the second reader)",
+     "lab": "tu_munich",
+     "conditions": "FFT covalent capture by coffee melanoidins, 6-60 C",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a same-class analogue with no measured transfer law (melanoidin capture at 6-60 C to a pot-independent sink at 100-145 C, 3-5 decades): not a legitimate analogue band; its central value is already a member of the sulfur class",
+     "id": "gigl2021_capture",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "kumazawa2003"
+     ],
+     "where": "kumazawa2003_extraction Fig. 3 (pH 3.0: 99.5 % residual, read error +/- 1.5 pp); ledger sulfur.yml (in_model_fit); source_verification/thiol_submodel.yml (adjudicator re-digitised)",
+     "lab": "ogawa",
+     "conditions": "FFT 1 ppm in McIlvaine buffer pH 3.0, 121 C, 10 min, canned in air",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "bounds k_fft_decay.log10_k_ref (not one of the 43) jointly with the family barrier: see the joint note",
+     "id": "kumazawa_fft_ph3",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held; one draw for the whole thiol_sink family (one shared barrier)",
+    "shipped_inside": true
+   },
+   "consequence": "shift",
+   "flags": [
+    "narrower than today's band on one side (7.0-102.0 -> 29.7-133.0 kJ/mol): an upgrade on that side",
+    "B55's route map already assigns it (route thiol_assembly -> class sulfur), but B55 does not sample decay-family barriers; class agreed by both readers",
+    "an upgrade from no legitimate band: S1's second reader agreed"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_mft_decay.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 101.25425582543835,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    7.0,
+    102.0
+   ],
+   "current_band": {
+    "source": "envelope prior b8.decay_Ea_kJ_mol.thiol_sink",
+    "distribution": "normal",
+    "lo": 7.0,
+    "hi": 102.0,
+    "sigma": 32.82241421959611,
+    "sampled": true,
+    "width_dex": 1.626722646930407,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "MFT"
+    ],
+    "max_odorant_path_share": 0.9986273141036218,
+    "max_pot_flux_share": 0.00016921103788521073,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": true,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "gigl2021"
+     ],
+     "where": "k6a_sulfur_ladders_synthesis (k 1.17e-5 / 2.57e-4 / 7.83e-4 /min at 279-333 K; Ea 60.2, range 7-102); ledger sulfur.yml; source_verification/thiol_submodel.yml (conditions FAIL; Fig. 4 not read by the second reader)",
+     "lab": "tu_munich",
+     "conditions": "FFT covalent capture by coffee melanoidins, 6-60 C",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a same-class analogue with no measured transfer law (melanoidin capture at 6-60 C to a pot-independent sink at 100-145 C, 3-5 decades): not a legitimate analogue band; its central value is already a member of the sulfur class",
+     "id": "gigl2021_capture",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held; one draw for the whole thiol_sink family (one shared barrier)",
+    "shipped_inside": true
+   },
+   "consequence": "shift",
+   "flags": [
+    "narrower than today's band on one side (7.0-102.0 -> 29.7-133.0 kJ/mol): an upgrade on that side",
+    "B55's route map already assigns it (route thiol_assembly -> class sulfur), but B55 does not sample decay-family barriers; class agreed by both readers",
+    "an upgrade from no legitimate band: S1's second reader agreed"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_thiolate_loss.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 101.25425582543835,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    7.0,
+    102.0
+   ],
+   "current_band": {
+    "source": "envelope prior b8.decay_Ea_kJ_mol.thiol_sink",
+    "distribution": "normal",
+    "lo": 7.0,
+    "hi": 102.0,
+    "sigma": 32.82241421959611,
+    "sampled": true,
+    "width_dex": 1.626722646930407,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FFT",
+     "MFT"
+    ],
+    "max_odorant_path_share": 0.8928418096877629,
+    "max_pot_flux_share": 5.911723610295525e-06,
+    "b38_sensitivity_norm": 4.184665364234764
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": true,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "gigl2021"
+     ],
+     "where": "k6a_sulfur_ladders_synthesis (k 1.17e-5 / 2.57e-4 / 7.83e-4 /min at 279-333 K; Ea 60.2, range 7-102); ledger sulfur.yml; source_verification/thiol_submodel.yml (conditions FAIL; Fig. 4 not read by the second reader)",
+     "lab": "tu_munich",
+     "conditions": "FFT covalent capture by coffee melanoidins, 6-60 C",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "a same-class analogue with no measured transfer law (melanoidin capture at 6-60 C to a pot-independent sink at 100-145 C, 3-5 decades): not a legitimate analogue band; its central value is already a member of the sulfur class",
+     "id": "gigl2021_capture",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held; one draw for the whole thiol_sink family (one shared barrier)",
+    "shipped_inside": true
+   },
+   "consequence": "shift",
+   "flags": [
+    "narrower than today's band on one side (7.0-102.0 -> 29.7-133.0 kJ/mol): an upgrade on that side",
+    "B55's route map already assigns it (route thiol_assembly -> class sulfur), but B55 does not sample decay-family barriers; class agreed by both readers",
+    "an upgrade from no legitimate band: S1's second reader agreed"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_mgo_ak.ea_kj_mol",
+   "lane": "trunk",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 114.89999999999999,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 100.0,
+   "search_bounds": [
+    111.66,
+    114.9
+   ],
+   "current_band": {
+    "source": "envelope prior b18.ea_mgo_ak_kj_mol",
+    "distribution": "uniform_band",
+    "lo": 111.66,
+    "hi": 114.9,
+    "sigma": 16.096566410277887,
+    "sampled": true,
+    "width_dex": 0.04880812263033376,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": null,
+   "outputs": {
+    "species": [
+     "AKM",
+     "Gly",
+     "MGO"
+    ],
+    "max_odorant_path_share": null,
+    "max_pot_flux_share": null,
+    "b38_sensitivity_norm": 18.00082839544735
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "zhou2024",
+      "cremer2000",
+      "yu2018",
+      "leahy1989"
+     ],
+     "where": "zhou2024 printed Ea (no SE; printed vs refit gives the B18 bands); cremer2000 (115-124); yu2018 (99.8 +/- 6.7, 104.1 +/- 5.1, pH 10); leahy1989 (150-177)",
+     "lab": "several",
+     "conditions": "pyrazine-cascade barriers",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "the alanine barrier has no measured transfer to glycine; the rest are cascade barriers (rival structures); all lie inside the class band",
+     "id": "strecker_cascade_ea",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "widen",
+   "flags": [
+    "class assignment new in this record (not in B55's route map); agreed by both readers"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_go_ak.ea_kj_mol",
+   "lane": "trunk",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 103.0999999999812,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 100.0,
+   "search_bounds": [
+    100.59,
+    103.1
+   ],
+   "current_band": {
+    "source": "envelope prior b18.ea_go_ak_kj_mol",
+    "distribution": "uniform_band",
+    "lo": 100.59,
+    "hi": 103.1,
+    "sigma": 16.157518353952135,
+    "sampled": true,
+    "width_dex": 0.03781123080312869,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": null,
+   "outputs": {
+    "species": [
+     "AKG",
+     "GO",
+     "Gly"
+    ],
+    "max_odorant_path_share": null,
+    "max_pot_flux_share": null,
+    "b38_sensitivity_norm": 17.88161144939979
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "zhou2024",
+      "cremer2000",
+      "yu2018",
+      "leahy1989"
+     ],
+     "where": "zhou2024 printed Ea (no SE; printed vs refit gives the B18 bands); cremer2000 (115-124); yu2018 (99.8 +/- 6.7, 104.1 +/- 5.1, pH 10); leahy1989 (150-177)",
+     "lab": "several",
+     "conditions": "pyrazine-cascade barriers",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "the alanine barrier has no measured transfer to glycine; the rest are cascade barriers (rival structures); all lie inside the class band",
+     "id": "strecker_cascade_ea",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "widen",
+   "flags": [
+    "class assignment new in this record (not in B55's route map); agreed by both readers"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_dpo_nf.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_dpo_nf.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 30.0,
+    "hi": 237.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 3.118296723604648,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "DPO",
+     "NF"
+    ],
+    "max_odorant_path_share": 1.0,
+    "max_pot_flux_share": 0.11598933670503443,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "lau2003",
+      "pandit2006",
+      "bornhorst2017b"
+     ],
+     "where": "lau2003_extraction (81.5 +/- 3.2 kJ/mol), pandit2006_extraction (93.0 +/- 6.4), bornhorst2017b_extraction (104.9-122.3 at pH 8.4-9.5); ledger trunk.yml NF rows (status_uncertain)",
+     "lab": "wsu_tang",
+     "conditions": "ribose + amine -> NF, overall appearance",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "the barrier of OVERALL NF appearance (supply + formation + loss): a rival structure, not the step's Ea",
+     "id": "nf_appearance_ea_wsu",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_tdp_fur.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_tdp_fur.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 30.0,
+    "hi": 237.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 3.118296723604648,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FUR",
+     "TDP"
+    ],
+    "max_odorant_path_share": 1.0,
+    "max_pot_flux_share": 0.0033983491745986204,
+    "b38_sensitivity_norm": 9.329483640578083
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "schirlekeller1992",
+      "garrett1969",
+      "kang2026"
+     ],
+     "where": "ledger sulfur.yml (Schirle-Keller 147, refit 156; B62); garrett1969_extraction (128.9 kJ/mol, specific-acid route, pH ~0); kang2026_SI_extraction (37.9 from a net 120-min level)",
+     "lab": "minnesota / florida / jiangnan",
+     "conditions": "net furfural formation from pentose",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "net-formation barriers lump supply and loss (rival structures); they lie inside the class band",
+     "id": "furfural_formation_ea",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_dimer_fft.log10_k_ref",
+   "lane": "sulfur",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -1.4602353390419023,
+   "unit": "log10(L^2/(mmol^2*min))",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    -10.0,
+    0.5
+   ],
+   "current_band": {
+    "source": "envelope prior b8.k_dimer_fft.log10_k_ref_145C",
+    "distribution": "uniform_band",
+    "lo": -10.0,
+    "hi": 0.4408241156585113,
+    "sigma": 67.99704185621894,
+    "sampled": true,
+    "width_dex": 10.440824115658511,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FFT",
+     "FFTD",
+     "OX"
+    ],
+    "max_odorant_path_share": 0.0014696849593048118,
+    "max_pot_flux_share": 5.86912678057627e-08,
+    "b38_sensitivity_norm": 2.944569563566239
+   },
+   "joint_violations": [],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "meets_s1_two_readers": null,
+   "sources": [
+    {
+     "paper_keys": [
+      "zhang2024",
+      "zhou2023",
+      "kumazawa2003",
+      "hofmann2001"
+     ],
+     "where": "Zhang2024_extraction Fig. 1 (dimer shares, 115 C; verification conditions FAIL); ledger sulfur.yml zhou2023 (6.5-9.6 %, pH-invariant); kumazawa2003 Table 3; hofmann2001 (< 1.5 % at 30 C)",
+     "lab": "several",
+     "conditions": "disulfide shares",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "the oxidant pool OX is never measured, so k (L^2/mmol^2/min) cannot be separated from [OX]; a share bounds the cumulative flux, not k; the encounter ceiling (log10 9.47) is physical and non-binding",
+     "id": "dimer_subset",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "refused",
+    "lo": null,
+    "hi": null,
+    "lo_from": null,
+    "hi_from": null,
+    "transport_class": "sulfur",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": null,
+    "basis": "no measured bound, analogue with a measured law, or class distribution of k on disk; the dependent outputs are refused"
+   },
+   "consequence": "refuse",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_ttca_deg.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_ttca_deg.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 30.0,
+    "hi": 237.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 3.118296723604648,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "DPO",
+     "TTCA"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.0,
+    "b38_sensitivity_norm": 8.37068012197227
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "C: class sulfur (B55's own definition)"
+   },
+   "upgrade": true,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "zhai2021"
+     ],
+     "where": "zhai2021_extraction; CF-108 (printed 80.99 not reproducible; slope ratio ~35; first-order whole-window ~70)",
+     "lab": "jiangnan",
+     "conditions": "fed TTCA 100-140 C",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "a SUPERSET barrier that depends on the assumed rate law",
+     "id": "zhai2021_ttca_ea",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "shift",
+   "flags": [
+    "narrower than today's band on one side (30.0-237.0 -> 29.7-133.0 kJ/mol): an upgrade on that side",
+    "class ruling (S1, both readers): a sulfur-bearing reactant puts it in class sulfur by B55's own definition; B55's route map (sugar_trunk -> carbohydrate) conflated the route served with the step's chemistry",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_glc_ha.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_glc_ha.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 30.0,
+    "hi": 237.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 3.118296723604648,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "Glc",
+     "HA",
+     "MGO"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.0,
+    "b38_sensitivity_norm": 8.062093836971155
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "li2011",
+      "martins2005"
+     ],
+     "where": "li2011 (refit 102.4; printed 87.85 does not reproduce); martins2005 (Glc -> FA + AA 236.7 +/- 63.4; DFG -> MG 124.5)",
+     "lab": "jiangnan / wageningen",
+     "conditions": "glucose loss barriers",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "superset or different-step barriers; inside the class band",
+     "id": "glucose_ea_rivals",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_pent_tdp.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_pent_tdp.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 30.0,
+    "hi": 237.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 3.118296723604648,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "Cys",
+     "PENT",
+     "TDP"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.5861110672008492,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "C: class sulfur (B55's own definition)"
+   },
+   "upgrade": true,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "tang2019",
+      "zhang2026",
+      "martins2005"
+     ],
+     "where": "tang2019 (110.5 / 124.3), zhang2026 k16 (85.7), martins2005 (DFG -> 3-DG 97.1, -> 1-DG 107.3)",
+     "lab": "jiangnan / wageningen",
+     "conditions": "Amadori-step barriers",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "Amadori decay, not free pentose + Cys: a rival structure (the route sub-model)",
+     "id": "amadori_step_ea",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "shift",
+   "flags": [
+    "narrower than today's band on one side (30.0-237.0 -> 29.7-133.0 kJ/mol): an upgrade on that side",
+    "class ruling (S1, both readers): a sulfur-bearing reactant puts it in class sulfur by B55's own definition; B55's route map (sugar_trunk -> carbohydrate) conflated the route served with the step's chemistry",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_nf_mft.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_nf_mft.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 29.675,
+    "hi": 133.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 1.556512120610871,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "H2S",
+     "MFT",
+     "NF"
+    ],
+    "max_odorant_path_share": 0.9999354380845586,
+    "max_pot_flux_share": 0.00017886892009771874,
+    "b38_sensitivity_norm": 9.726669829741587
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "meng",
+      "feng2022",
+      "zhai2023jafc",
+      "ames"
+     ],
+     "where": "k6a_sulfur_ladders_synthesis (net-yield barriers: Meng 57.8 / 72.9, Feng 30.3 / 44.4, Zhai 14.5-74.8, Ames 103.5 / 107.7)",
+     "lab": "several",
+     "conditions": "apparent thiol net-yield barriers",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "net-yield barriers lump supply, formation and loss: rival structures",
+     "id": "formation_ea_rivals",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "zhai2023jafc"
+     ],
+     "where": "zhai2023jafc_extraction Fig. 6b (NF 10.6 mM gone by 10 min; MFT 3.2 mM at 10 min)",
+     "lab": "jiangnan",
+     "conditions": "NF + (NH4)2S, 120 C",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "bounds k_nf_mft.log10_k_ref (not one of the 43) from below; product rising after the substrate is gone points to an intermediate (a rival to the one-step route)",
+     "id": "zhai2023_nf_mft",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_fur_fft_hs.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_fur_fft_hs.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 29.675,
+    "hi": 133.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 1.556512120610871,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FFT",
+     "FUR",
+     "H2S"
+    ],
+    "max_odorant_path_share": 0.9998970622365984,
+    "max_pot_flux_share": 0.00035326770473953403,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "meng",
+      "feng2022",
+      "zhai2023jafc",
+      "ames"
+     ],
+     "where": "k6a_sulfur_ladders_synthesis (net-yield barriers: Meng 57.8 / 72.9, Feng 30.3 / 44.4, Zhai 14.5-74.8, Ames 103.5 / 107.7)",
+     "lab": "several",
+     "conditions": "apparent thiol net-yield barriers",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "net-yield barriers lump supply, formation and loss: rival structures",
+     "id": "formation_ea_rivals",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_h2s_loss.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_h2s_loss.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 29.675,
+    "hi": 133.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 1.556512120610871,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": "no measured H2S-loss barrier; no class member is an H2S-loss step",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "H2S"
+    ],
+    "max_odorant_path_share": 0.970723603479333,
+    "max_pot_flux_share": 0.007680097551828477,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_nf_decay.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 143.53807623187993,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b8.decay_Ea_kJ_mol.carbonyl_sink",
+    "distribution": "uniform_band",
+    "lo": 95.50579368736618,
+    "hi": 191.57035877639368,
+    "sigma": 140.10220270082885,
+    "sampled": true,
+    "width_dex": 1.447139220152753,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": "no measured NF-decay barrier (Mikami 2017, Bork print none)",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "NF"
+    ],
+    "max_odorant_path_share": 0.9999961642772432,
+    "max_pot_flux_share": 0.013913922736878656,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held; one draw for the whole carbonyl_sink family (one shared barrier)",
+    "shipped_inside": true
+   },
+   "consequence": "widen",
+   "flags": [
+    "B55's route map already assigns it (route sugar_trunk -> class carbohydrate), but B55 does not sample decay-family barriers; class agreed by both readers"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_fur_decay.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 143.53807623187993,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b8.decay_Ea_kJ_mol.carbonyl_sink",
+    "distribution": "uniform_band",
+    "lo": 95.50579368736618,
+    "hi": 191.57035877639368,
+    "sigma": 140.10220270082885,
+    "sampled": true,
+    "width_dex": 1.447139220152753,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FUR"
+    ],
+    "max_odorant_path_share": 0.9953723850880519,
+    "max_pot_flux_share": 0.0017350470937363906,
+    "b38_sensitivity_norm": 8.70884536538259
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "yaghmur2005"
+     ],
+     "dm": "DM-08",
+     "where": "yaghmur2005_extraction (k_obs 3.2 / 6.7 / 12.6 / 16.0 e-2 /h at 40-70 C; Ea 46.5 kJ/mol); ledger sulfur.yml yaghmur rows",
+     "lab": "hebrew_university",
+     "conditions": "furfural + ~600 mM cysteine, pH 5, 40-70 C",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "k_obs is proportional to [Cys] (a different rate law): a rival (B62's furfural barriers), not a band; note that B62 as built (k(145 C) held, Ea 46.5) gives ~0.021 /min at 70 C, ~0.9 dex above Yaghmur's own total-loss value there",
+     "id": "yaghmur_fur_cys",
+     "evaluation": null
+    },
+    {
+     "paper_keys": [
+      "almhofer2022",
+      "garrett1969"
+     ],
+     "where": "almhofer2022_extraction (49.8 +/- 3.6, water-only); garrett1969_extraction (89.1, acid solvolysis); ledger trunk.yml Danon 2014 review (48-135: a quote of quotes)",
+     "lab": "jku_linz / florida",
+     "conditions": "furfural loss channels",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "barriers of SUBSET channels bound nothing on the lumped barrier; carried with DM-08 as the B62 rival (S3)",
+     "id": "furfural_loss_ea_other",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held; one draw for the whole carbonyl_sink family (one shared barrier)",
+    "shipped_inside": true
+   },
+   "consequence": "widen",
+   "flags": [
+    "B55's route map already assigns it (route sugar_trunk -> class carbohydrate), but B55 does not sample decay-family barriers; class agreed by both readers"
+   ],
+   "dm": [
+    "DM-08"
+   ]
+  },
+  {
+   "coordinate": "k_pent_dpo.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_pent_dpo.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 30.0,
+    "hi": 237.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 3.118296723604648,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "Cys",
+     "DPO",
+     "PENT"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.45004351916962587,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "C: class sulfur (B55's own definition)"
+   },
+   "upgrade": true,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "tang2019",
+      "zhang2026",
+      "martins2005"
+     ],
+     "where": "tang2019 (110.5 / 124.3), zhang2026 k16 (85.7), martins2005 (DFG -> 3-DG 97.1, -> 1-DG 107.3)",
+     "lab": "jiangnan / wageningen",
+     "conditions": "Amadori-step barriers",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "Amadori decay, not free pentose + Cys: a rival structure (the route sub-model)",
+     "id": "amadori_step_ea",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "shift",
+   "flags": [
+    "narrower than today's band on one side (30.0-237.0 -> 29.7-133.0 kJ/mol): an upgrade on that side",
+    "class ruling (S1, both readers): a sulfur-bearing reactant puts it in class sulfur by B55's own definition; B55's route map (sugar_trunk -> carbohydrate) conflated the route served with the step's chemistry",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_dpo_ddp.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_dpo_ddp.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 30.0,
+    "hi": 237.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 3.118296723604648,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": "no measured barrier",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "Cys",
+     "DDP",
+     "DPO"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.4455943088597869,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "corrected and applied",
+    "correction": "C: class sulfur (B55's own definition)"
+   },
+   "upgrade": true,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "shift",
+   "flags": [
+    "narrower than today's band on one side (30.0-237.0 -> 29.7-133.0 kJ/mol): an upgrade on that side",
+    "class ruling (S1, both readers): a sulfur-bearing reactant puts it in class sulfur by B55's own definition; B55's route map (sugar_trunk -> carbohydrate) conflated the route served with the step's chemistry",
+    "an upgrade from no legitimate band: S1's second reader corrected it (applied)"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_fur_fft.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_fur_fft.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 29.675,
+    "hi": 133.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 1.556512120610871,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "FFT",
+     "FUR",
+     "H2S"
+    ],
+    "max_odorant_path_share": 0.28680461734728374,
+    "max_pot_flux_share": 0.00014206318681161668,
+    "b38_sensitivity_norm": 5.2876937058399935
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "meng",
+      "feng2022",
+      "zhai2023jafc",
+      "ames"
+     ],
+     "where": "k6a_sulfur_ladders_synthesis (net-yield barriers: Meng 57.8 / 72.9, Feng 30.3 / 44.4, Zhai 14.5-74.8, Ames 103.5 / 107.7)",
+     "lab": "several",
+     "conditions": "apparent thiol net-yield barriers",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "net-yield barriers lump supply, formation and loss: rival structures",
+     "id": "formation_ea_rivals",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_mgo_mp.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_mgo_mp.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 29.675,
+    "hi": 133.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 1.556512120610871,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "H2S",
+     "MGO",
+     "MP"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 1.5263511408218773e-09,
+    "b38_sensitivity_norm": 5.216056776861445
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "zhai2023jafc"
+     ],
+     "where": "zhai2023jafc_extraction Fig. 6e (MGO + GO 0.67 -> 0.27 g/L in 30 min)",
+     "lab": "jiangnan",
+     "conditions": "dicarbonyls + (NH4)2S, 120 C; MP not measured",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "why": "bounds k_mgo_mp.log10_k_ref (not one of the 43); non-binding",
+     "id": "zhai2023_mgo_sulfide",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_osone_decay.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 143.53807623187993,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b8.decay_Ea_kJ_mol.carbonyl_sink",
+    "distribution": "uniform_band",
+    "lo": 95.50579368736618,
+    "hi": 191.57035877639368,
+    "sigma": 140.10220270082885,
+    "sampled": true,
+    "width_dex": 1.447139220152753,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "ARP",
+     "DDP",
+     "DPO",
+     "PTR",
+     "TDP"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.40842212803860944,
+    "b38_sensitivity_norm": 5.268848904575401
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "martins2005",
+      "knol2010",
+      "deng2021",
+      "tang2019"
+     ],
+     "where": "martins2005_extraction (3-DG -> FA 29.6, 1-DG -> AA 75.7); knol2010 (75 +/- 10); deng2021_extraction (pentose ARP ~75 +/- 10); tang2019_extraction (GSH-xylose ARP -> 3-DX 110.5, -> 1-DX 124.3, zero order)",
+     "lab": "wageningen / jiangnan",
+     "conditions": "deoxyosone / Amadori decay barriers",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "no pentose-deoxyosone decay barrier exists; the hexose values are already members of the class",
+     "id": "hexose_osone_ea",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held; one draw for the whole carbonyl_sink family (one shared barrier)",
+    "shipped_inside": true
+   },
+   "consequence": "widen",
+   "flags": [
+    "B55's route map already assigns it (route sugar_trunk -> class carbohydrate), but B55 does not sample decay-family barriers; class agreed by both readers"
+   ],
+   "dm": []
+  },
+  {
+   "coordinate": "k_pent_caramel.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_pent_caramel.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 30.0,
+    "hi": 237.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 3.118296723604648,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": null,
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "PENT",
+     "TDP"
+    ],
+    "max_odorant_path_share": 0.0,
+    "max_pot_flux_share": 0.04156713103199599,
+    "b38_sensitivity_norm": 2.3438142082187183
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "larralde1995"
+     ],
+     "where": "larralde1995_extraction (Ea 107.4 kJ/mol; k0 2.86e-3 /min at 100 C); data/lit/fit_rows/heldout_larralde1995.yml",
+     "lab": "ucsd_miller",
+     "conditions": "amine-free ribose total loss, pD 7.4 phosphate, 60-118 C",
+     "relation": "none",
+     "reader": "second",
+     "usable": false,
+     "heldout": true,
+     "why": "a SUPERSET barrier (all ribose losses) bounds nothing on one channel's barrier; a declared hold-out (TEST) row",
+     "id": "larralde_ribose",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_nf_mp3p.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_nf_mp3p.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 29.675,
+    "hi": 133.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 1.556512120610871,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": "no measured barrier",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "H2S",
+     "MP3P",
+     "NF"
+    ],
+    "max_odorant_path_share": 0.04818129132095068,
+    "max_pot_flux_share": 1.334490553153788e-05,
+    "b38_sensitivity_norm": 3.2335492822140557
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_ddp_mft_hs.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_ddp_mft_hs.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 29.675,
+    "hi": 133.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 1.556512120610871,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": "no measured barrier",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "DDP",
+     "H2S",
+     "MFT"
+    ],
+    "max_odorant_path_share": 0.01919524085801849,
+    "max_pot_flux_share": 9.571543914923726e-09,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  },
+  {
+   "coordinate": "k_ddp_mft.ea_kj_mol",
+   "lane": "sulfur",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 64.0822869313293,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 145.0,
+   "search_bounds": [
+    20.0,
+    250.0
+   ],
+   "current_band": {
+    "source": "envelope prior b55.k_ddp_mft.ea_kj_mol",
+    "distribution": "empirical_measured_class",
+    "lo": 29.675,
+    "hi": 133.0,
+    "sigma": null,
+    "sampled": true,
+    "width_dex": 1.556512120610871,
+    "legitimate_under_s4": true,
+    "why": "a B55 measured-class distribution"
+   },
+   "note": "no measured barrier",
+   "lane_between_lab_dex": 0.964,
+   "outputs": {
+    "species": [
+     "DDP",
+     "H2S",
+     "MFT"
+    ],
+    "max_odorant_path_share": 0.01137862018133168,
+    "max_pot_flux_share": 1.3608181148261837e-07,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "sulfur",
+    "lo": 29.675,
+    "hi": 133.0,
+    "n": 16,
+    "median": 93.30000000000001,
+    "width_dex": 1.556512120610871,
+    "basis": "the empirical distribution of the 16 measured barriers of the sulfur class (src/kinetic_core/ea_class_prior.py, B55): a sulfur-bearing reactant (B55's sulfur class); k at the reference temperature held",
+    "shipped_inside": true
+   },
+   "consequence": "unchanged",
+   "flags": [],
+   "dm": []
+  }
+ ],
+ "extra_dm_coordinates": [
+  {
+   "coordinate": "k_aa_frag.log10_k_ref",
+   "lane": "trunk",
+   "coordinate_kind": "log10_k_ref",
+   "shipped_value": -1.9276399911739752,
+   "unit": "log10(1/min)",
+   "reference_temperature_c": 100.0,
+   "search_bounds": [
+    -8.0,
+    0.0
+   ],
+   "current_band": {
+    "source": "envelope prior b1.k_aa_frag.log10_k_ref_100C",
+    "distribution": "normal_log10",
+    "lo": null,
+    "hi": null,
+    "sigma": 0.08200180308143928,
+    "sampled": true,
+    "width_dex": 0.2697859321379352,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": null,
+   "outputs": {
+    "species": [
+     "AA"
+    ],
+    "max_odorant_path_share": null,
+    "max_pot_flux_share": null,
+    "b38_sensitivity_norm": null
+   },
+   "joint_violations": [
+    {
+     "source": "davidek2008_aa",
+     "side": "upper",
+     "temperature_c": 120.0,
+     "excess_dex": 1.6127191692816896,
+     "margin_95_dex": null,
+     "beyond_95": null
+    }
+   ],
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": false,
+   "meets_s1_two_readers": null,
+   "sources": [
+    {
+     "paper_keys": [
+      "davidek2008"
+     ],
+     "dm": "DM-03",
+     "where": "davidek2008 (acetic acid plateau 26.9 -> 27.6 mol %, 60-240 min); CF-069",
+     "lab": "nestle_davidek",
+     "conditions": "xylose + glycine, 0.2 M phosphate pH 8, 120 C",
+     "relation": "upper",
+     "value": 0.0004,
+     "temperature_c": 120.0,
+     "conversion": "loss <= ~4e-4 /min if formation has stopped",
+     "terms": {},
+     "record": "no ledger row",
+     "reader": "first",
+     "usable": true,
+     "why": "an inferred ceiling (formation over the plateau unstated); pentose and pH 8 vs the fit's glucose, pH 6.8",
+     "id": "davidek2008_aa",
+     "evaluation": {
+      "log10_at_measured_T": -3.3979400086720375,
+      "transport_dex": [
+       -1.687666935940584,
+       -0.21362872606842837
+      ],
+      "sigma_raw_dex": 0.0,
+      "sigma_95_dex": null,
+      "upper": {
+       "raw_edge": -3.611568734740466,
+       "edge_95": null,
+       "binding": null,
+       "shipped_outside_raw": true,
+       "shipped_outside_95": null
+      },
+      "engine_factor": 1.0,
+      "engine_factor_note": null,
+      "joint_shipped": {
+       "shipped_log10_k_at_T": -1.785220839390348,
+       "bound_log10_k_at_T": -3.3979400086720375,
+       "temperature_c": 120.0,
+       "shipped_ea": 20.000000150449104,
+       "upper": {
+        "excess_dex": 1.6127191692816896,
+        "margin_raw_dex": 0.0,
+        "margin_95_dex": null,
+        "violates_raw": true,
+        "violates_95": null
+       }
+      }
+     }
+    }
+   ],
+   "proposal": {
+    "route": "refused",
+    "lo": null,
+    "hi": null,
+    "lo_from": null,
+    "hi_from": null,
+    "transport_class": "carbohydrate",
+    "lo_inside_search_box": null,
+    "hi_inside_search_box": null,
+    "basis": "only a raw measured bound: its 95 % edge is undefined because the lane has no between-lab term (no H0, no pooled class spread in the S1 record); no band, the dependent outputs are refused"
+   },
+   "consequence": "refuse",
+   "flags": [
+    "the SHIPPED (k, Ea) pair is 1.61 dex beyond davidek2008_aa's upper bound at 120 C (95 % margin undefined)"
+   ],
+   "dm": [
+    "DM-03"
+   ]
+  },
+  {
+   "coordinate": "k_mgo_mel.ea_kj_mol",
+   "lane": "trunk",
+   "coordinate_kind": "ea_kj_mol",
+   "shipped_value": 20.043206355884948,
+   "unit": "kJ/mol",
+   "reference_temperature_c": 100.0,
+   "search_bounds": [
+    20.0,
+    260.0
+   ],
+   "current_band": {
+    "source": "envelope prior b1.k_mgo_mel.ea_kj_mol",
+    "distribution": "normal",
+    "lo": 20.0,
+    "hi": 260.0,
+    "sigma": 31.4144938602754,
+    "sampled": true,
+    "width_dex": 1.5569442351945022,
+    "legitimate_under_s4": false,
+    "why": "a fit interval, a search bound or a search bound clipped by the declared prefactor span: never a band under S4"
+   },
+   "note": null,
+   "lane_between_lab_dex": null,
+   "outputs": {
+    "species": [
+     "MGO"
+    ],
+    "max_odorant_path_share": null,
+    "max_pot_flux_share": null,
+    "b38_sensitivity_norm": null
+   },
+   "second_reading": {
+    "date": "2026-11-06",
+    "verdict": "agreed",
+    "correction": null
+   },
+   "upgrade": true,
+   "joint_violations": [],
+   "meets_s1_two_readers": true,
+   "sources": [
+    {
+     "paper_keys": [
+      "kanzler2026",
+      "kanzler2021"
+     ],
+     "dm": "DM-04",
+     "where": "kanzler2026_extraction secs. 4.7-6; CF-122",
+     "lab": "tu_berlin_kanzler",
+     "conditions": "MGO + Ala / Phe / Pro 100 mM, pH 5 unbuffered, 60-140 C",
+     "relation": "none",
+     "reader": "first",
+     "usable": false,
+     "why": "second order in MGO, ~[amine]^0.75: a rival MGO-sink structure (CF-122); inside the class band",
+     "id": "kanzler_mgo_ea",
+     "evaluation": null
+    }
+   ],
+   "proposal": {
+    "route": "class_distribution",
+    "class": "carbohydrate",
+    "lo": 30.0,
+    "hi": 237.0,
+    "n": 19,
+    "median": 107.0,
+    "width_dex": 3.118296723604648,
+    "basis": "the empirical distribution of the 19 measured barriers of the carbohydrate class (src/kinetic_core/ea_class_prior.py, B55): a sugar-derived carbonyl or dicarbonyl reactant and no sulfur-bearing reactant (B55's carbohydrate class); k at the reference temperature held",
+    "shipped_inside": false
+   },
+   "consequence": "shift",
+   "flags": [
+    "narrower than today's band on one side (20.0-260.0 -> 30.0-237.0 kJ/mol): an upgrade on that side",
+    "class assignment new in this record (not in B55's route map); agreed by both readers",
+    "the SHIPPED barrier (20.0) lies outside the class's measured range: an S4 case moves the point as well as the band",
+    "an upgrade from no legitimate band: S1's second reader agreed"
+   ],
+   "dm": [
+    "DM-04"
+   ]
+  }
+ ],
+ "joint_constraints": [
+  {
+   "source": "kumazawa_fft_ph3",
+   "k_fft_decay_log10_k_145C": -0.8284899807292461,
+   "bound_log10_k_121C": -2.6945904278665127,
+   "ea_needed_raw_kj_mol": 245.33938992587645,
+   "ea_needed_95_kj_mol": 0.0,
+   "reading": "with k(145 C) held, the pH 3 survival ceiling at 121 C needs the thiol-sink barrier >= 245 kJ/mol at its raw edge (outside every class value; B60 scores the row in dex of survival, where the 1.1 dex rate gap shows as -0.11 dex); once the lane's between-lab term is added it binds nothing. A joint (k, Ea) constraint for the S4 case to sample within, and an S2 (b) record for k_fft_decay.log10_k_ref (not one of the 43)"
+  }
+ ],
+ "audit_record_corrections": [
+  {
+   "record": "incumbent_evidence_tiers DM-07 (k_ttca_deg.log10_k_ref)",
+   "issue": "Zhai 2021's 0.0271 is a ZERO-order slope in mmol/L/min (c = 10.331 - 0.0271 t; probably 0.0274, zhai2021_extraction), not a first-order constant: its first-order equivalent at 10 mM is ~0.0027 /min. The record reads it as 'first order, k 0.0271 /min'. This record uses the early first-order rate at 140 C instead (0.0138 /min)",
+   "effect": "none on the verdict (the bound stays satisfied); the S1 record's DM-07 text should read 'zero order, 0.0271 (probably 0.0274) mmol/L/min'"
+  }
+ ],
+ "summary": {
+  "coordinates": 43,
+  "by_route": {
+   "measurement_one_sided_upper": 10,
+   "measurement_one_sided_lower": 1,
+   "refused": 7,
+   "measurement_two_sided": 1,
+   "class_distribution": 24
+  },
+  "banded_from_measurement": 12,
+  "banded_from_class_distribution": 24,
+  "refused": 7,
+  "measured_edge_inside_search_box": [
+   "k_nf_decay.log10_k_ref",
+   "k_fur_fft_hs.log10_k_ref",
+   "k_pent_tdp.log10_k_ref",
+   "k_acr_gln.log10_k_ref",
+   "k_acr_lys.log10_k_ref",
+   "k_fur_decay.log10_k_ref",
+   "k_ttca_deg.log10_k_ref"
+  ],
+  "by_consequence": {
+   "refuse": 7,
+   "one_sided": 11,
+   "widen": 6,
+   "shift": 7,
+   "narrow": 0,
+   "unchanged": 12
+  },
+  "extra_dm_by_route": {
+   "refused": 1,
+   "class_distribution": 1
+  },
+  "no_legitimate_band": [
+   "k_h2s_loss.log10_k_ref",
+   "k_dpo_ddp.log10_k_ref",
+   "k_ddp_mft_hs.log10_k_ref",
+   "k_ddp_mft.log10_k_ref",
+   "k_dimer_mft.log10_k_ref",
+   "k_go_ak.log10_k_ref",
+   "k_dimer_fft.log10_k_ref"
+  ],
+  "most_outputs_moved": [
+   {
+    "coordinate": "k_go_ak.log10_k_ref",
+    "consequence": "refuse",
+    "weight": 1.0,
+    "species": [
+     "AKG",
+     "GO",
+     "Gly"
+    ]
+   },
+   {
+    "coordinate": "k_h2s_loss.log10_k_ref",
+    "consequence": "refuse",
+    "weight": 0.970723603479333,
+    "species": [
+     "H2S"
+    ]
+   },
+   {
+    "coordinate": "k_dpo_ddp.log10_k_ref",
+    "consequence": "refuse",
+    "weight": 0.4455943088597869,
+    "species": [
+     "Cys",
+     "DDP",
+     "DPO"
+    ]
+   },
+   {
+    "coordinate": "k_ddp_mft_hs.log10_k_ref",
+    "consequence": "refuse",
+    "weight": 0.01919524085801849,
+    "species": [
+     "DDP",
+     "H2S",
+     "MFT"
+    ]
+   },
+   {
+    "coordinate": "k_ddp_mft.log10_k_ref",
+    "consequence": "refuse",
+    "weight": 0.01137862018133168,
+    "species": [
+     "DDP",
+     "H2S",
+     "MFT"
+    ]
+   },
+   {
+    "coordinate": "k_dimer_fft.log10_k_ref",
+    "consequence": "refuse",
+    "weight": 0.0014696849593048118,
+    "species": [
+     "FFT",
+     "FFTD",
+     "OX"
+    ]
+   },
+   {
+    "coordinate": "k_dimer_mft.log10_k_ref",
+    "consequence": "refuse",
+    "weight": 0.0013658606985017731,
+    "species": [
+     "MFT",
+     "MFTD",
+     "OX"
+    ]
+   },
+   {
+    "coordinate": "k_dpo_nf.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 1.0,
+    "species": [
+     "DPO",
+     "NF"
+    ]
+   },
+   {
+    "coordinate": "k_nf_decay.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.9999961642772432,
+    "species": [
+     "NF"
+    ]
+   },
+   {
+    "coordinate": "k_fur_fft_hs.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.9998970622365984,
+    "species": [
+     "FFT",
+     "FUR",
+     "H2S"
+    ]
+   },
+   {
+    "coordinate": "k_mft_decay.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.9986273141036218,
+    "species": [
+     "MFT"
+    ]
+   },
+   {
+    "coordinate": "k_pent_tdp.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.5861110672008492,
+    "species": [
+     "Cys",
+     "PENT",
+     "TDP"
+    ]
+   },
+   {
+    "coordinate": "k_pent_dpo.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.45004351916962587,
+    "species": [
+     "Cys",
+     "DPO",
+     "PENT"
+    ]
+   },
+   {
+    "coordinate": "k_fur_fft.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.28680461734728374,
+    "species": [
+     "FFT",
+     "FUR",
+     "H2S"
+    ]
+   },
+   {
+    "coordinate": "k_acr_gln.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.2307896028825036,
+    "species": [
+     "ACR",
+     "Gln"
+    ]
+   },
+   {
+    "coordinate": "k_acr_lys.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.10677020766337264,
+    "species": [
+     "ACR",
+     "Lys"
+    ]
+   },
+   {
+    "coordinate": "k_ttca_deg.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.0,
+    "species": [
+     "DPO",
+     "TTCA"
+    ]
+   },
+   {
+    "coordinate": "k_glc_ha.log10_k_ref",
+    "consequence": "one_sided",
+    "weight": 0.0,
+    "species": [
+     "Glc",
+     "HA",
+     "MGO"
+    ]
+   },
+   {
+    "coordinate": "k_mgo_ak.ea_kj_mol",
+    "consequence": "widen",
+    "weight": 1.0,
+    "species": [
+     "AKM",
+     "Gly",
+     "MGO"
+    ]
+   },
+   {
+    "coordinate": "k_go_ak.ea_kj_mol",
+    "consequence": "widen",
+    "weight": 1.0,
+    "species": [
+     "AKG",
+     "GO",
+     "Gly"
+    ]
+   },
+   {
+    "coordinate": "k_nf_decay.ea_kj_mol",
+    "consequence": "widen",
+    "weight": 0.9999961642772432,
+    "species": [
+     "NF"
+    ]
+   },
+   {
+    "coordinate": "k_fur_decay.log10_k_ref",
+    "consequence": "widen",
+    "weight": 0.9953723850880519,
+    "species": [
+     "FUR"
+    ]
+   },
+   {
+    "coordinate": "k_fur_decay.ea_kj_mol",
+    "consequence": "widen",
+    "weight": 0.9953723850880519,
+    "species": [
+     "FUR"
+    ]
+   },
+   {
+    "coordinate": "k_osone_decay.ea_kj_mol",
+    "consequence": "widen",
+    "weight": 0.40842212803860944,
+    "species": [
+     "ARP",
+     "DDP",
+     "DPO",
+     "PTR",
+     "TDP"
+    ]
+   },
+   {
+    "coordinate": "k_mft_decay.ea_kj_mol",
+    "consequence": "shift",
+    "weight": 0.9986273141036218,
+    "species": [
+     "MFT"
+    ]
+   },
+   {
+    "coordinate": "k_fft_decay.ea_kj_mol",
+    "consequence": "shift",
+    "weight": 0.9888777961049899,
+    "species": [
+     "FFT"
+    ]
+   },
+   {
+    "coordinate": "k_thiolate_loss.ea_kj_mol",
+    "consequence": "shift",
+    "weight": 0.8928418096877629,
+    "species": [
+     "FFT",
+     "MFT"
+    ]
+   },
+   {
+    "coordinate": "k_pent_tdp.ea_kj_mol",
+    "consequence": "shift",
+    "weight": 0.5861110672008492,
+    "species": [
+     "Cys",
+     "PENT",
+     "TDP"
+    ]
+   },
+   {
+    "coordinate": "k_pent_dpo.ea_kj_mol",
+    "consequence": "shift",
+    "weight": 0.45004351916962587,
+    "species": [
+     "Cys",
+     "DPO",
+     "PENT"
+    ]
+   },
+   {
+    "coordinate": "k_dpo_ddp.ea_kj_mol",
+    "consequence": "shift",
+    "weight": 0.4455943088597869,
+    "species": [
+     "Cys",
+     "DDP",
+     "DPO"
+    ]
+   },
+   {
+    "coordinate": "k_ttca_deg.ea_kj_mol",
+    "consequence": "shift",
+    "weight": 0.0,
+    "species": [
+     "DPO",
+     "TTCA"
+    ]
+   }
+  ],
+  "single_lab_or_first_reader": [
+   "k_dpo_nf.log10_k_ref",
+   "k_nf_decay.log10_k_ref",
+   "k_fur_fft_hs.log10_k_ref",
+   "k_mft_decay.log10_k_ref",
+   "k_pent_tdp.log10_k_ref",
+   "k_pent_dpo.log10_k_ref",
+   "k_acr_gln.log10_k_ref",
+   "k_acr_lys.log10_k_ref",
+   "k_fur_decay.log10_k_ref",
+   "k_ttca_deg.log10_k_ref",
+   "k_glc_ha.log10_k_ref",
+   "k_fur_fft.log10_k_ref"
+  ],
+  "class_ruling_coordinates": [
+   "k_ttca_deg.ea_kj_mol",
+   "k_pent_tdp.ea_kj_mol",
+   "k_pent_dpo.ea_kj_mol",
+   "k_dpo_ddp.ea_kj_mol"
+  ],
+  "joint_violations": [
+   {
+    "coordinate": "k_dpo_nf.log10_k_ref",
+    "source": "hou2026_1dx_exit",
+    "side": "upper",
+    "temperature_c": 120.0,
+    "excess_dex": 0.4630325169327486,
+    "margin_95_dex": 1.88944,
+    "beyond_95": false
+   },
+   {
+    "coordinate": "k_dpo_nf.log10_k_ref",
+    "source": "zhou2024b_1dx_exit",
+    "side": "upper",
+    "temperature_c": 120.0,
+    "excess_dex": 0.7793024791534666,
+    "margin_95_dex": 1.88944,
+    "beyond_95": false
+   },
+   {
+    "coordinate": "k_nf_decay.log10_k_ref",
+    "source": "bork_nf_alone",
+    "side": "lower",
+    "temperature_c": 130.0,
+    "excess_dex": 0.5299752411493004,
+    "margin_95_dex": 1.9112814376128766,
+    "beyond_95": false
+   },
+   {
+    "coordinate": "k_fur_fft_hs.log10_k_ref",
+    "source": "zhai2023_fur_sulfide",
+    "side": "upper",
+    "temperature_c": 120.0,
+    "excess_dex": 1.934288261082195,
+    "margin_95_dex": 1.88944,
+    "beyond_95": true
+   },
+   {
+    "coordinate": "k_mft_decay.log10_k_ref",
+    "source": "patent_mft_standard",
+    "side": "upper",
+    "temperature_c": 110.0,
+    "excess_dex": 0.2152894163380321,
+    "margin_95_dex": 1.88944,
+    "beyond_95": false
+   },
+   {
+    "coordinate": "k_pent_tdp.log10_k_ref",
+    "source": "cao2017_xylose_pool",
+    "side": "upper",
+    "temperature_c": 90.0,
+    "excess_dex": 2.9954642802923375,
+    "margin_95_dex": 1.88944,
+    "beyond_95": true
+   },
+   {
+    "coordinate": "k_pent_dpo.log10_k_ref",
+    "source": "cao2017_xylose_pool",
+    "side": "upper",
+    "temperature_c": 90.0,
+    "excess_dex": 1.6630324979614255,
+    "margin_95_dex": 1.88944,
+    "beyond_95": false
+   },
+   {
+    "coordinate": "k_fur_decay.log10_k_ref",
+    "source": "balagiannis_fur_k9",
+    "side": "upper",
+    "temperature_c": 130.0,
+    "excess_dex": 0.47957951032550916,
+    "margin_95_dex": 1.8930758226718711,
+    "beyond_95": false
+   },
+   {
+    "coordinate": "k_aa_frag.log10_k_ref",
+    "source": "davidek2008_aa",
+    "side": "upper",
+    "temperature_c": 120.0,
+    "excess_dex": 1.6127191692816896,
+    "margin_95_dex": null,
+    "beyond_95": null
+   }
+  ],
+  "second_reading_corrected": [
+   "k_acr_gln.log10_k_ref",
+   "k_acr_lys.log10_k_ref",
+   "k_dpo_ddp.ea_kj_mol",
+   "k_dpo_ddp.log10_k_ref",
+   "k_dpo_nf.log10_k_ref",
+   "k_fur_decay.log10_k_ref",
+   "k_fur_fft.log10_k_ref",
+   "k_fur_fft_hs.log10_k_ref",
+   "k_go_ak.log10_k_ref",
+   "k_mft_decay.log10_k_ref",
+   "k_nf_decay.log10_k_ref",
+   "k_pent_dpo.ea_kj_mol",
+   "k_pent_dpo.log10_k_ref",
+   "k_pent_tdp.ea_kj_mol",
+   "k_pent_tdp.log10_k_ref",
+   "k_ttca_deg.ea_kj_mol",
+   "k_ttca_deg.log10_k_ref"
+  ],
+  "meets_s1_two_readers": [
+   "k_nf_decay.log10_k_ref",
+   "k_fur_fft_hs.log10_k_ref",
+   "k_mft_decay.log10_k_ref",
+   "k_pent_tdp.log10_k_ref",
+   "k_pent_dpo.log10_k_ref",
+   "k_ttca_deg.log10_k_ref",
+   "k_fur_fft.log10_k_ref",
+   "k_fft_decay.ea_kj_mol",
+   "k_mft_decay.ea_kj_mol",
+   "k_thiolate_loss.ea_kj_mol",
+   "k_mgo_ak.ea_kj_mol",
+   "k_go_ak.ea_kj_mol",
+   "k_dpo_nf.ea_kj_mol",
+   "k_tdp_fur.ea_kj_mol",
+   "k_ttca_deg.ea_kj_mol",
+   "k_glc_ha.ea_kj_mol",
+   "k_pent_tdp.ea_kj_mol",
+   "k_nf_mft.ea_kj_mol",
+   "k_fur_fft_hs.ea_kj_mol",
+   "k_h2s_loss.ea_kj_mol",
+   "k_nf_decay.ea_kj_mol",
+   "k_fur_decay.ea_kj_mol",
+   "k_pent_dpo.ea_kj_mol",
+   "k_dpo_ddp.ea_kj_mol",
+   "k_fur_fft.ea_kj_mol",
+   "k_mgo_mp.ea_kj_mol",
+   "k_osone_decay.ea_kj_mol",
+   "k_pent_caramel.ea_kj_mol",
+   "k_nf_mp3p.ea_kj_mol",
+   "k_ddp_mft_hs.ea_kj_mol",
+   "k_ddp_mft.ea_kj_mol"
+  ],
+  "band_without_two_source_readers": [
+   "k_dpo_nf.log10_k_ref",
+   "k_acr_gln.log10_k_ref",
+   "k_acr_lys.log10_k_ref",
+   "k_fur_decay.log10_k_ref",
+   "k_glc_ha.log10_k_ref"
+  ]
+ }
+}

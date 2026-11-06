@@ -385,6 +385,13 @@ entries:
       the semi-quantitative class and reads the fold error against a x3 band (0.48 dex), wider than the largest
       possible double count (0.30 dex) -- but the bundle still scores levels, not shape only, and the cause is not
       decided, so no resolved status fits.
+      Note 2026-11-06 (M0 integrity batch 1, CK-07 / MF-17; m0_integrity_batch1_strecker_sulfur, draft PR #86): the
+      2-acetylthiazole row (blank column 114.13 ng/mL, re-read from Table 2 by the register writer; predicted 0.065 ppb,
+      -3.245 dex) is a DECLARED BLIND HOLD-OUT (Amendment 45, bundle added 0e6e6097 2026-10-28 01:21), scored once as
+      declared (first scorecard ab1fcc55, 2026-10-28 12:31); no fit reads it (k_cys_actz is fitted on Zhou 2023's pH 7
+      row only). It is now SPENT: no ACTZ route candidate (R37 - R39, the NH3 thiazole route) may claim it as
+      out-of-sample confirmation. This footnote's double count (<= 0.30 dex) cannot carry the -3.25 dex miss. The
+      bundle's fit_holdout_status was reworded the same day ("row-independent; same-pot intermediates seen at design").
     affects:
       - zhang2025b_table2_volatiles_50min
       - {file: data/benchmarks/external_validation/maillard_path/mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json, symbol: "sums detected from both"}
@@ -1739,6 +1746,15 @@ entries:
       ~10x: Zhou 2022 (pH 7) 4.3-6.1 mM, Zhou 2024b (pH 7, the methods reference of Zhou 2024) 1.4-2.1, Zhou 2023c (pH
       7.5) 0.64-1.13, Zhou 2024 (pH 8) 3.7-5.3, Zhou 2025b (pH 8) 0.37-0.55. The pH 7 pair (Zhou 2022 vs 2024b) is
       registered separately as CF-082.
+      [Added 2026-11-06 (M0 integrity batch 1, CK-02 / MF-21; m0_integrity_batch1_strecker_sulfur, draft PR #86): the
+      zhou2025b xylose-alone misfit is NOT a zero or floor prediction. Its four rows are MGO
+      (zhou2025b_fig2a_xylose_alone_dicarbonyls | MGO): raw at the R3En optimum -0.407 dex, -1.016 dex after the free MGO
+      scale this paper shares with its own AX-ARP pots (zhou2025b_figs1_3_axarp_xylose_120c | MGO, raw +0.863 dex), i.e. a
+      within-paper ratio error of ~1.27 dex between MGO from AX-ARP and MGO from free xylose (numbers re-read by the
+      register writer from kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en.json: raw_at_optimum -0.4073, after_scale
+      -1.0163, AX-ARP raw +0.8626). Integrity holds (Fig. 2a / 2e markers agree with the keyed rows; 120-min dicarbonyls
+      sum to 1.18 % of 20 mM against the printed "Only 1.1 %"). This entry's laboratory scale cancels inside one paper, so
+      it is NOT the cause; candidates: the AX-ARP route to MGO too fast, or free-xylose fragmentation to MGO too slow.]
     explanations:
       - "A unit or dilution slip in the OPD step of one paper; predicts a constant ratio across the four dicarbonyls and times, and none on Ala / ARP. The pH 8 pair is NEAR this: all four dicarbonyls +0.80 to +1.37 dex (mean 1.08, sd 0.16; 30 min 0.80-1.01), ARP +0.15, Ala -0.28."
       - "Different derivatisation / quantification of 3-DX / 1-DX only (CF-062); predicts the spread is confined to 3-DX / 1-DX; refuted: GO and MGO (purchased standards) differ ~10x in the pH 8 pair and GO x3.3 in the pH 7 pair."
@@ -3704,3 +3720,214 @@ entries:
     status: open
     remedy: "Read Bork 2024 FF as relative to its own heated series only; treat its 'pH' as unstated. No ledger row."
     affects: []
+
+  # ===================================================================================================================
+  # M0 INTEGRITY BATCH 1 (2026-11-06): pot-definition errors found by the source re-reads of
+  # results/validation/m0_integrity_batch1_other_lanes.md (draft PR #84), each re-read by a second reader against the
+  # PDF before the data corrections of branch m0-data-corrections-batch1 were applied.
+  # ===================================================================================================================
+
+  - id: CF-127
+    kind: self_contradiction
+    scope: other_lane
+    sources: [lin2022, lin2021]
+    quantity: "HMF in the asparagine + fructose Maillard arm (water, pH 6.0, 180 C, 30 min), Lin 2022; and Lin 2022's quotation of Lin 2021's asparagine + glucose arm"
+    observation: >-
+      Lin 2022's prose (sec. 3.2) prints "12.28 ppm (Figure 4A)" for the asparagine + fructose arm at 30 min, but the
+      AF 30-min bar of Fig. 4A reads 5.0 ppm (SD to ~6). The axis is calibrated on the same panel's fructose-only 30-min
+      bar, which reads 91.6 against the printed 91.56; no bar in Fig. 4A or 4B is near 12.28 (Fig. 4B, acetic acid,
+      reads ~4.9). The same sentence quotes the group's earlier paper as "5.13 ppm [18]", while Lin 2021 prints 7 ppm
+      (its Fig. 4A reads ~7.2 ppm at 30 min and ~5.4 at 20 min). First reader: m0_integrity_batch1_other_lanes.md
+      (MF-38), Fig. 4 read at 400 dpi; second reader (2026-11-06): Fig. 4A re-rendered at 400 dpi, AF 30-min bar 5.1
+      ppm on the same axis, whisker ~6; Lin 2021's "7 ppm" confirmed in its text. On the figure value the row's
+      residual would be -0.41 dex (log10(1966 / 5000)) against -0.80 on the prose value.
+    explanations:
+      - "A prose transcription error in Lin 2022: 12.28 belongs to no bar."
+      - "A different time or arm was meant in the sentence."
+    tests: []
+    status: fixed
+    remedy: >-
+      Coordinator ruling 2026-11-06: the HMF cell of mp_holdout_fructose_asparagine_180C_Lin2022 is DEMOTED (not
+      scored; holdout_targets entry carries scoring_refused naming this entry; 12280 ppb kept as printed, the 5000 ppb
+      figure read-off recorded beside it). The acrylamide row (1859 ppb) holds and stays scored. Reinstate only on an
+      author reply or a second source for this arm. Lin 2022's quotations of Lin 2021 (5.13 and 34.51 ppm) are not to be
+      used as Lin 2021 values; Lin 2021's own print governs.
+    affects:
+      - {file: data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json, symbol: scoring_refused}
+
+  - id: CF-128
+    kind: condition_error
+    scope: other_lane
+    sources: [leitzen2021]
+    quantity: "the starting state and thermal history of the 10 % (w/v) glucose, 121 C autoclave pot (scheme A), bundle mp_holdout_glucose_only_autoclave_121C_Steinhagen2021"
+    observation: >-
+      Four pot-definition errors, every keyed value holding (Table 4, scheme A, 121 C). (1) The scored 18 min is F0, the
+      z = 10 C lethality integrated over the heating and cooling phases (sec. 4.2.2: "The total F0 value of a process ...
+      takes into account the heating and cooling phases of the cycle"), not an isothermal hold; the cycle profile is not
+      printed. (2) The unheated solution already carries GO 1.0 +/- 0.5, MGO 0.9 +/- 0.1, 2-KDG (glucosone) 0.1 and
+      5-HMF 0.1 ug/mL, 3-DG and 3,4-DGE n.d. (Table 6), undeclared in the bundle. (3) The keyed pH 4.36 is the END pH
+      measured at room temperature after cooling (Table 3, scheme A, 121 C; sec. 2.2); the unheated solution is 4.98.
+      The bundle keyed 4.36 as the start, with a provenance note claiming a printed "4.4 - 5.2" range that the paper
+      does not print. (4) 200 mL in a 225 mL PP bottle (Kautex; sec. 4.2.1): 25 mL of headspace, air by default (~0.21
+      mmol O2, ~1.1 mM if all dissolved, against ~0.14 mM needed for the measured glucosone and glyoxal); keyed as
+      unstated. Corrected residuals by arithmetic on the recorded predictions (first reader, MF-23): glucosone -1.80 ->
+      -1.53, glyoxal -1.54 -> -0.68 (-1.46 if the carried GO is consumed), 5-HMF -0.97 -> -0.95, MGO 0.00 -> +0.13; 3-DG
+      +0.10 and 3,4-DGE -0.82 unchanged. Second reader (2026-11-06) confirmed Tables 3 and 6 and secs. 2.2, 4.2.1 and
+      4.2.2 against the PDF. The forward-run residuals with the start pH 4.98 and the carried levels applied are in the
+      PR record of branch m0-data-corrections-batch1.
+    explanations:
+      - "MF-23's oxidative deficit is partly a pot-definition artefact: the glyoxal half shrinks by about 0.9 dex once the carried GO is declared."
+      - "The rest is structural: the glucosone deficit (-1.5 dex) stands after the correction."
+    tests: []
+    status: fixed
+    remedy: >-
+      Applied 2026-11-06 (branch m0-data-corrections-batch1): conditions.carried_volatiles {glyoxal 1000, methylglyoxal
+      900, glucosone 100, 5-HMF 100} ppb anchored to Table 6; conditions.ph 4.36 -> 4.98 (initial, bench_cooled) with
+      4.36 recorded as the measured end pH; the wrong "4.4 - 5.2" note corrected; vessel 200 mL in 225 mL PP bottle, air
+      by default; a note that 18 min is F0, not a hold; the buffer recorded as none added (sec. 4.2.1: glucose
+      monohydrate in double-distilled water, nothing else), not buffer_unknown. Still open (CK-03 step 2): the unprinted cycle profile needs a
+      declared heating / cooling band and a forward run under THERMAL_HISTORY as_recorded.
+    affects:
+      - {file: data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json, symbol: carried_volatiles}
+
+  - id: CF-129
+    kind: condition_error
+    scope: other_lane
+    sources: [bi2020]
+    quantity: "hexanal on roasting whole peas (forced-air oven, 160 C / 30 min), bundle external_validation_bi_2020_roasted_pea_hexanal"
+    observation: >-
+      Bi 2020 Table 4 prints raw peas at hexanal 1260 +/- 114 ug/kg and nonanal 69.8 +/- 7.39, roasted peas at hexanal
+      324 +/- 34.3 and nonanal not reported ("_"); the text: "A heat-induced decrease in the content of hexanal". The
+      roasted hexanal is a net 3.9x loss of a carried level, while the panel scored it as formation from zero (residual
+      -0.47 dex recorded; +0.63 with the carried 1260 added and no loss term in the lane; matching needs ~17 % survival
+      of the carried level). First reader: m0_integrity_batch1_other_lanes.md (MF-42); second reader (2026-11-06): Table
+      4 raw and roasted columns re-read from the PDF.
+    explanations:
+      - "Volatilisation of the carried hexanal in the open forced-air oven."
+      - "Consumption of the carried hexanal (oxidation, binding, Schiff-base / Strecker sinks) during roasting."
+    tests: []
+    status: fixed
+    remedy: >-
+      Applied 2026-11-06: the carried raw levels {hexanal 1260, nonanal 69.8} ppb declared in conditions.carried_volatiles
+      (Table 4, raw column) and the hexanal row REFUSED (scoring_refused): the measured value is a net loss of a carried
+      level, which the lipid lane cannot represent (it has no loss term). Score it again, as a loss, once the lane has a
+      volatilisation or consumption term with a declared band.
+    affects:
+      - {file: data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json, symbol: scoring_refused}
+
+  - id: CF-130
+    kind: condition_error
+    scope: other_lane
+    sources: [trikusuma2020, li2026]
+    quantity: "the hydroperoxide pool of a matrix pot: the lipid lane's carrier charge against the printed carrier dilution"
+    observation: >-
+      The lipid lane turns a carrier into a hydroperoxide pool as PV / 2 x lipid fraction x 1 kg/L
+      (parameters_lipid.looh_charge_mmol_per_l, reached from engine.py) with no mass fraction of the carrier in the food,
+      so it charges the carrier as 100 % of the pot. Two scored sources print a diluted carrier: Trikusuma 2020
+      (secs. 2.1 - 2.2) disperses "pea protein isolate (PPI, 80% protein, 8% fat, 2% sugar w/w)" at "3% w/w", i.e. 0.24 %
+      w/w fat, 10.4x (1.02 dex) less than the 2.5 % lipid charged; Li 2026 (sec. 2.3) extrudes "soy protein isolate and
+      wheat gluten hydrolysates at a dry basis ratio of 6:4" at ~57 % moisture, i.e. SPI 0.43 x 0.6 = 0.258 w/w, plus a
+      gluten hydrolysate of unprinted lipid. With the printed compositions (first reader, MF-42, arithmetic on the
+      recorded predictions) Li's rows fall to 2-pentylfuran -2.93 to -3.15, hexanal -1.30 to -1.52, nonanal -0.86 to
+      -1.08 dex, and Trikusuma's (E,E)-2,4-decadienal flips +0.21 -> -0.81. First reader's confidence that the engine
+      applies no carrier mass fraction: P ~ 0.85 (code reading, no forward run). Second reader (2026-11-06) confirmed
+      the printed compositions in both PDFs; the engine claim is not re-verified.
+    explanations:
+      - "MF-42's under-prediction is larger than recorded once the carrier is diluted; its cause sits upstream of the matrix layer (the pool's PV, the yields, or volatiles carried in the raw isolates)."
+    tests: []
+    status: open
+    remedy: "Verify on the engine (a forward run with the lipid fraction scaled), then a schema field for the carrier mass fraction plus the engine change (separate PR). Re-derive MF-42's size before any lipid mechanism work."
+    affects:
+      - {file: src/kinetic_core/parameters_lipid.py, symbol: looh_charge_mmol_per_l}
+      - {file: data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json, symbol: Pea Protein Isolate}
+      - {file: data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json, symbol: Soy Protein Isolate}
+
+  - id: CF-131
+    kind: condition_error
+    scope: other_lane
+    sources: [ma2024]
+    quantity: "the frozen B3 acrylamide fit's objective row spi_extrusion_130C_acrylamide_ppb (bundle acrylamide_spi_extrusion_130C_ACSRef3)"
+    observation: >-
+      The B3 objective carries the extruded-SPI row (150 ug/kg, Ma 2024 Fig. 2D, sigma 1.0 dex) integrated at a charge
+      {SPI 50, L-Asn 42, D-Glc 42 mM}, pH 6.0 and a_w 0.35 that Ma 2024 does not print (secs. 3.1 - 3.2 and Table 1 give
+      soy protein isolate : corn starch 9:1, water, protein and total amino acids only; no asparagine or glucose is added,
+      and no free Asn, reducing sugar, pH or water activity appears). The charge was withdrawn from the bundle and the
+      panel row refused on 2026-11-06 (branch m0-data-corrections-batch1); the residual was -3.98 dex as keyed (first
+      reader brackets -3.86 / -3.69). The frozen B3 report is pinned by commit and was not regenerated, so it still
+      records the row with the withdrawn charge.
+    explanations:
+      - "The row tests a pot the paper does not describe; its weight in the B3 objective rests on an unsourced charge."
+    tests: []
+    status: open
+    remedy: "Decide whether B3 needs a refit without the row (an M0 item); the shipped acrylamide constants are unchanged until then. The bundle's other unprinted values were withdrawn too (2026-11-06): its 250 kJ/kg SME, and the intake record's 22.36 -> 62.62 ug/kg and 25 s (with its three wrong-venue citation aliases, now closed citations); the 112 ug/kg 'at 150 C' twin in safety_reference_payloads.json was deleted."
+    affects:
+      - {file: scripts/generators/generate_kinetic_core_b3_fit.py, symbol: spi_extrusion_130C_acrylamide_ppb}
+      - {file: data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json, symbol: value_withdrawal}
+
+  # M0 integrity batch 1, Strecker / sulfur half (results/validation/m0_integrity_batch1_strecker_sulfur.md, draft PR
+  # #86, branch m0-integrity-batch1-ss), filed 2026-11-06 by the register writer of branch m0-data-corrections-batch1.
+  # Numbers re-read against the sources where the entry says so.
+  # The record's proposed kinds `open_condition` and `engine_structure` are not in this register's vocabulary; they are
+  # filed as condition_error and code_mismatch, the nearest kinds.
+
+  - id: CF-132
+    kind: condition_error
+    scope: other_lane
+    sources: [hofmann2000b]
+    quantity: "phenylacetaldehyde + phenylacetic acid from fed ARP-Phe under argon (Hofmann & Schieberle 2000b Table 2, expt I: 1 mmol in 10 mL 0.5 mol/L phosphate pH 7.0, 100 C, 120 min, closed vial)"
+    observation: >-
+      Table 2 prints PA 0.6 and PAA 0.3 umol/mmol (PA + PAA 0.9 umol/mmol, i.e. 0.09 mmol/L at 100 mmol/L) under argon,
+      against 5.5 / 3.0 under air (expt II) and 13.8 / 7.6 with air + 0.05 mmol CuSO4 (expt III). Every M3 rival
+      over-predicts the argon arm ~5x: medians 0.39 - 0.48 mmol/L (+0.63 to +0.73 dex) at 256 draws per rival; in the
+      v2.1 draw sets (4 096 feasible draws) R1 0.48, R2 0.42 mmol/L, and only 5.7 % (R1) / 15 % (R2) of draws come within
+      2x (M3 prereg, PR #85, sec. 23; the diagnostic of PR #81, m3_argon_strecker_diagnostic). Integrity re-read (CK-01,
+      m0_integrity_batch1_strecker_sulfur, 2026-11-06): all 12 Table 2 cells, the umol/mmol basis and every condition
+      statement agree with the page, so integrity is ruled out. Three conditions bearing on the argon arm are not
+      printed: the deoxygenation method (residual O2 would RAISE the argon datum, so it cannot explain an
+      over-prediction), the vial headspace, and the reaction scale (1 mL in the Experimental, 10 mL in the footnotes).
+      Register writer's second read (2026-11-06, Table 2 and its footnotes only; Figs. 2 - 3 not read): ARP-Phe argon PA
+      0.6 / PAA 0.3, air 5.5 / 3.0, air + Cu 13.8 / 7.6 umol/mmol; footnote a "precursors (1 mmol each) were heated (100
+      C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0) for 120 min in a closed vial under an atmosphere of argon".
+    explanations:
+      - "The anoxic exits feeding route A (e1 / e3 / eF) are too fast."
+      - "The ARP-Phe decay constant k_d is mis-set (CF-121)."
+      - "1-DG's Strecker share s_DG1 is too high."
+      - "ARP-Phe purity (~90 % printed): at most 0.05 dex."
+    tests: []
+    status: open
+    remedy: "Decider: DM:strecker_routes (a), with the headspace and the deoxygenation stated (the W6 fed ARP-Phe pot of M3 prereg sec. 23, ARP-Phe measured under argon and air). M3 phase 1 is not frozen (PR #85); nothing ships from this entry."
+    affects:
+      - hofmann2000b_table2_arp_phe_oxygen
+
+  - id: CF-133
+    kind: code_mismatch
+    scope: other_lane
+    sources: [schibilsky2019]
+    quantity: "the pH dependence of HMF and DMHF in the Schibilsky 2019 glucose + L-alanine pots (0.25 M each, pH 5 / 8 unbuffered, 130 C, 2 h; bundles mp_holdout_glucose_alanine_130C_2h_pH50 / pH80_Schibilsky2019)"
+    observation: >-
+      The pots pass their pH to the engine, but L-alanine routes them to the acrylamide lane (engine._PRECURSOR_LANE,
+      "Ala": ACRYLAMIDE), whose pH factor acts only on k_asn_glc / k_acr_dp (no flux without asparagine). The trunk's
+      declared pH law -- the B12 Amadori-decay pH term and the B40 3-DG exit term (trunk_conditions.py) -- is applied only in the trunk lane (engine.py: the declarations under `if lane == TRUNK` near l. 1568, and
+      trunk_conditions.apply in the trunk branch of the per-segment integration near l. 2698); acrylamide.py says "No
+      pH dependence". DMHF and HMF are therefore identical at pH 5 and 8: 21.84 / 55409 ug/L (re-run by the register
+      writer 2026-11-06 on the shipped engine: DMHF 21.8406, HMF 55408.8 ug/L in both bundles). With glycine standing in
+      (trunk lane; a stand-in, not a prediction) the two pH pots differ x3.18 in DMHF (1621 / 5158 ug/L) and x2.06 in
+      HMF (20135 / 41390), against the measured x5.1 (1153 / 5894 ppb) and x1.76, and it makes 74x more DMHF than the
+      acrylamide lane (CK-06, m0_integrity_batch1_strecker_sulfur, MF-28). The Schibilsky thesis is NOT on disk: its
+      dossier (schibilsky2019_extraction.md) is a stub that records only the bundles' keyed values and their
+      provenance, second-hand, with the source re-read pending; the bundles' unit conversions reproduce from their
+      quotes. [Corrected 2026-11-06 (coordinator review of PR #88): this entry first named martins2003 as its source,
+      which is a misattribution -- Martins 2003 is the source of the trunk's pH law, not of this misfit.]
+    explanations:
+      - "Lane routing: an amine other than asparagine sends the pot to a lane that carries none of the trunk's measured pH terms."
+    tests: []
+    status: open
+    remedy: >-
+      A sec. 7 case for applying the trunk pH law in every lane (coordinator's choice, option a: run the trunk's declared
+      terms on the trunk steps inside the acrylamide lane), decided on a pH pair other than Schibilsky (spent: its
+      glycine stand-in was compared with the measured ratios at diagnosis). Shipped acrylamide-lane HMF / DMHF move, so
+      the owner decides before any engine change.
+    affects:
+      - {file: src/kinetic_core/engine.py, symbol: "if lane == TRUNK:"}
+      - {file: src/kinetic_core/trunk_conditions.py, symbol: PH_EXPONENT_DECADES_PER_UNIT}
+      - {file: data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json, symbol: Schibilsky}
