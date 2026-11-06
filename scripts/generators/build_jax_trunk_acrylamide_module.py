@@ -43,7 +43,8 @@ DEX_FLOOR = 1e-9
 OBSERVED = ("ACR", "HMF")
 #: the observable each scored species is reported in (the engine's unit: ppb for acrylamide, ug/L otherwise)
 OBSERVABLE_OF = {"ACR": "ppb:ACR", "HMF": "ug_per_L:HMF"}
-TIMING_POTS = (("short isothermal (extrusion, 0.42 min at 130 C)", "acrylamide_spi_extrusion_130C_ACSRef3"),
+#: 2026-11-06: the short-isothermal pot is the reference's SYNTHETIC numerics pot (the withdrawn SPI extrusion inputs).
+TIMING_POTS = (("short isothermal (synthetic, 0.42 min at 130 C)", "synthetic_short_isothermal_acrylamide_130C_25s"),
                ("isothermal hold (30 min at 180 C)", "mp_holdout_glucose_asparagine_180C_30min_Chang2021"),
                ("dense isothermal (200 mM, 30 min at 180 C)", "mp_holdout_glucose_asparagine_180C_Ye2024"),
                ("staircase profile (all 42 steps)", "synthetic_profile_acrylamide_all_steps_25_180_100"))
@@ -310,7 +311,7 @@ def stage_residuals(reference, net) -> Dict[str, Any]:
             rtol, atol = TOLERANCES[tol_name]
             run = jax.jit(lambda th, pot: network.integrate(net, th, pot, solver=solver, rtol=rtol, atol=atol).ys)
             worst, items = 0.0, []
-            for rec in (r for r in reference["pots"] if r["variant"] == "point" and r["panel"] != "synthetic"):
+            for rec in (r for r in reference["pots"] if r["variant"] == "point" and r["id"] in preds):
                 ys = np.asarray(run(theta_of(rec["theta"], net), pot_of(rec, net, segments_key="segments")))
                 for row in preds[rec["id"]]["rows"]:
                     if row["predicted"] is None or row["species"] not in OBSERVABLE_OF:
@@ -347,6 +348,8 @@ def stage_timing(reference, net) -> Dict[str, Any]:
         rec = next(r for r in reference["pots"] if r["id"] == pot_id and r["variant"] == "point")
         if pot_id in pots_by_id:
             process = pots_by_id[pot_id]["spec"].process
+        elif pot_id == refgen.SHORT["id"]:
+            process = refgen.short_process()
         else:
             program = engine.ThermalProgram.from_profile(refgen.PROFILE["points"])
             process = engine.ProcessSpec(thermal=program, ph=refgen.PROFILE["ph"],
@@ -558,7 +561,7 @@ FINDINGS: List[str] = [
     "smallest scored species here (acrylamide, ~1e-4 mmol/L at 10 ppb) licenses atol ~1e-10 for fits: a further "
     "2 - 3x on the solve and the Jacobian.",
     "5. **Cost (provisional, Kvaerno5, rtol 1e-8, atol 1e-14, one core, load ~4 - 5).**",
-    "   - One solve: 0.6 - 0.8x the engine's time on the short extrusion pot and the staircase profile, ~3x slower on the "
+    "   - One solve: 0.6 - 0.8x the engine's time on the short isothermal pot and the staircase profile, ~3x slower on the "
     "isothermal 30-min holds (LSODA is very good at one long stiff segment).",
     "   - The Jacobian in all 84 coordinates: 2.8 - 2.9x faster than the engine's forward differences on the holds, "
     "11x on the profile, 15x on the short pot. With atol 1e-10 and Kvaerno4 (findings 3 - 4) the holds should gain "
