@@ -151,8 +151,10 @@ Derived [Z] from Table 2 (linear interpolation; extrapolation beyond 185 min for
 1. **Karpinski 1990 (`karpinski1990_extraction.md`), the same L-arabinose ring (AThz).** Karpinski: cysteine
    release 1.8e-4 /min at pH 6.0 and 4.8e-5 /min at pH 7.4, 25 °C, argon, voltammetry. Belikov: sugar release
    4.0e-4 /min at pH 3.16 and 4.99, 50 °C [Z]. Taken at face value the two give an apparent Ea of ~25 kJ/mol over
-   25 -> 50 °C (pH 6.0 vs 4.99), or ~45 kJ/mol if Karpinski's PrThz pH shape (k(4.5) / k(6.0) = 0.29) is used to move
-   AThz to pH ~5 [Z]. Different observables (free sugar vs free cysteine), buffers, atmosphere; not a conflict of
+   25 -> 50 °C (pH 6.0 vs 4.99), or ~65 kJ/mol if Karpinski's PrThz pH shape (k(4.5) / k(6.0) = 0.29) is used to move
+   AThz to pH 4.5 (1.8e-4 x 0.29 = 5.2e-5 /min at 25 °C against 4.0e-4 at 50 °C) [Z]; ~40 - 47 kJ/mol needs the shape
+   interpolated to pH 4.99 - 5.2 (PrThz k(5.2) / k(6.0) = 0.64). (Corrected 2026-11-05: this item said "~45 kJ/mol"
+   with the 0.29 factor, which its own numbers do not give; CF-076, register pass.) Different observables (free sugar vs free cysteine), buffers, atmosphere; not a conflict of
    kind, recorded for whoever sets a release band.
 2. **CF-076's declared release band** (conflicts register: k_r(100 °C, pH 4.5) in [2e-4, 8e-4] /min; the 2026-11-01
    run's feasible k_r(100 °C, pH 4.5) 0.9-3.2e-4 /min). Belikov's pentose ring at **50 °C**, pH 4.99, releases sugar

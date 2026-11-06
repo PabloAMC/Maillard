@@ -60,7 +60,7 @@ from src.benchmark_metadata import (
     get_benchmark_metadata,
 )
 
-from . import engine
+from . import engine, thiol_relative_only
 from .fit_targets import core_evidence_role, fit_target_of, in_core_fit
 from .engine import (
     ACRYLAMIDE,
@@ -78,6 +78,7 @@ from .panel import (
     bundle_targets,
     core_native_value,
     core_spec,
+    data_refusal,
     limiting_precursor_molar,
     load_bundle,
     measured_value,
@@ -1591,7 +1592,10 @@ def propagate_panel(
             point_run = predict(spec, [compound])
             declaration = point_run.declaration
             reason = None
-            if not point_run.answered:
+            if data_refusal(target_spec) is not None:
+                # 2026-11-06 (M0 data corrections, batch 1): the bundle withdraws the row (panel.data_refusal)
+                reason = data_refusal(target_spec)
+            elif not point_run.answered:
                 reason = " | ".join(declaration.reasons) or "out of envelope"
             elif unit != "ppb" and unit not in RATIO_UNIT_FACTORS:
                 reason = f"target unit {unit!r} has no core conversion"
@@ -1601,6 +1605,9 @@ def propagate_panel(
                 reason = "NOT EVALUABLE: " + next(
                     w for w in declaration.warnings if w.startswith(engine.HEXOSE_ENTRY_UNIDENTIFIED)
                 )
+            elif thiol_relative_only.declared(declaration, compound):
+                # 2026-11-05 (H0 / EX-059, D2 branch (i)): no absolute level of a thiol-lane observable ships
+                reason = "NOT EVALUABLE: " + thiol_relative_only.short_reason()
             if reason is not None:
                 item = {
                     "benchmark_id": benchmark_id, "panel": panel_tag,

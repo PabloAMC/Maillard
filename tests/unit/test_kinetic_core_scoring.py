@@ -193,7 +193,12 @@ def test_refusals_use_the_engine_vocabulary_and_a_fully_refused_bundle_is_refuse
     # exercised directly instead, on a precursor no lane carries (thioacetamide, a WUR sample).
     by_id = {b["benchmark_id"]: b for b in small["benchmarks"]}
     h2s = by_id["hofmann1998_norfuraneol_h2s_145C_20min_pH5"]
-    assert h2s["compounds"] and h2s["overall_status"] != "refused"
+    # 2026-11-05 (H0 / EX-059): its MFT is answered by the engine and refused for its absolute level, with the
+    # numbers kept for the within-study contrast diagnostic
+    assert h2s["refused_compounds"] and all(r["absolute_refused"] for r in h2s["refused_compounds"])
+    # review m7: the panel keeps only the (study, compound)-centred log level, never a ppb level
+    assert all("predicted" not in r["relative_use_only"] and "log10_predicted" not in r["relative_use_only"]
+               and r["relative_use_only"]["log10_predicted_minus_study_mean"] is not None for r in h2s["refused_compounds"])
     from src.kinetic_core.engine import FormulationSpec, ProcessSpec, ThermalProgram, predict
 
     spec = FormulationSpec("tam", {"D-Ribose": 10.0, "Thioacetamide": 10.0},
@@ -218,9 +223,9 @@ def test_status_vocabulary_matches_the_legacy_harness(small):
 
 def test_shared_hofmann_rows_carry_shared_with(small):
     by_id = {b["benchmark_id"]: b for b in small["benchmarks"]}
-    rows = {r["compound"]: r for r in by_id["mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7"]["compounds"]}
-    assert rows[MFT]["shared_with"] == "hofmann_ribose_pH7_MFT"
-    assert small["summary"]["shared_with_holdout_panel"] >= 1
+    # 2026-11-05 (H0 / EX-059): the shared MFT row is refused for its absolute level; the link travels with it
+    rows = {r["compound"]: r for r in by_id["mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7"]["refused_compounds"]}
+    assert rows[MFT]["absolute_refused"] and rows[MFT]["relative_use_only"]["shared_with"] == "hofmann_ribose_pH7_MFT"
 
 
 def test_coverage_splits_are_consistent(small):
@@ -234,7 +239,11 @@ def test_coverage_splits_are_consistent(small):
     expected = sum(1 for b in small["benchmarks"]
                    if b["signal_origin"] == "external_literature" and b["evidence_role"] != "fit_recovery"
                    for r in b["compounds"] if fit_targets.in_core_fit(b["benchmark_id"], r["compound"]))
-    assert s["in_core_fit"]["rows"] == expected >= 1
+    # 2026-11-05 (H0 / EX-059): every row a core fit read is a thiol-lane absolute, so the in-fit split is empty
+    # and those rows are refused, carrying the in-fit flag for the contrast diagnostic
+    assert s["in_core_fit"]["rows"] == expected
+    assert any(r.get("relative_use_only", {}).get("in_core_fit") for b in small["benchmarks"]
+               for r in b["refused_compounds"])
 
 
 def test_markdown_renders(small):
@@ -257,5 +266,28 @@ def test_every_panel_bundle_is_scored_or_refused_with_a_reason(full):
         targets = set(panel.bundle_targets(panel.load_bundle(ROOT / b["bench_file"])))
         assert {r["compound"] for r in b["compounds"]} | {r["compound"] for r in b["refused_compounds"]} == targets
     assert set(full["summary"]["by_panel"]) == {"trust_loop", "maillard_path_holdout", "external_matrix"}
+
+
+# ---------------------------------------------------------------------------
+# 2026-11-06 (M0 data corrections, batch 1): rows the curated DATA refuses
+# ---------------------------------------------------------------------------
+
+
+def test_a_row_the_data_refuses_is_refused_with_its_reason_and_the_datum_kept():
+    """`scoring_refused` on a target entry refuses that row before any number is read (panel.data_refusal); the
+    measured value stays in the bundle, and the bundle's other rows are scored as before."""
+    lin = data_paths.MAILLARD_PATH_HOLDOUT_DIR / "mp_holdout_fructose_asparagine_180C_Lin2022.json"
+    b = scoring.score_benchmark(lin, "maillard_path_holdout")
+    refused = {r["compound"]: r for r in b["refused_compounds"]}
+    hmf = refused["5-Hydroxymethylfurfural (HMF)"]
+    assert hmf["data_refused"] and hmf["reason"].startswith(panel.DATA_REFUSAL_TAG + ": ") and "CF-127" in hmf["reason"]
+    assert [r["compound"] for r in b["compounds"]] == ["Acrylamide"]
+    assert panel.load_bundle(lin)["holdout_targets"]["5-Hydroxymethylfurfural (HMF)"]["target_value"] == 12280.0
+
+
+def test_a_data_refusal_must_explain_itself():
+    assert panel.data_refusal({}) is None
+    with pytest.raises(ValueError):
+        panel.data_refusal({panel.DATA_REFUSAL_FIELD: "no"})
 
 

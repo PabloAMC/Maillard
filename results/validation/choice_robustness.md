@@ -32,27 +32,32 @@ sweeps them. Writes results/validation/choice_robustness.{json,md}.
 | CR-15 | untested |
 | CR-16 | untested |
 | CR-17 | harmless |
+| CR-18 | not_applicable |
+| CR-19 | harmless |
+| CR-20 | untested |
+| CR-21 | untested |
+| CR-22 | untested |
 
 ## CR-05
 
 | alternative | out of sample within band | median fold | by lane | contrast median (dex) | contrast signs |
 | --- | --- | --- | --- | --- | --- |
-| twofold | 8/56 | 11.80x | acrylamide 2, lipid 2, sulfur 2, trunk 2 | 0.31 | 12/25 |
-| threefold | 14/56 | 11.80x | acrylamide 4, lipid 5, sulfur 3, trunk 2 | 0.31 | 12/25 |
-| fivefold | 18/56 | 11.80x | acrylamide 5, lipid 6, sulfur 5, trunk 2 | 0.31 | 12/25 |
+| twofold | 6/24 | 4.62x | acrylamide 2, lipid 2, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| threefold | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| fivefold | 13/24 | 4.62x | acrylamide 5, lipid 5, sulfur 0, trunk 3 | 0.31 | 12/25 |
 
 ## CR-06
 
 | alternative | out of sample within band | median fold | by lane | contrast median (dex) | contrast signs |
 | --- | --- | --- | --- | --- | --- |
-| one_cv | 14/56 | 11.80x | acrylamide 4, lipid 5, sulfur 3, trunk 2 | 0.31 | 13/29 |
-| two_cv | 14/56 | 11.80x | acrylamide 4, lipid 5, sulfur 3, trunk 2 | 0.31 | 12/25 |
-| twofold | 14/56 | 11.80x | acrylamide 4, lipid 5, sulfur 3, trunk 2 | 0.31 | 9/18 |
+| one_cv | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 13/29 |
+| two_cv | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| twofold | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 9/18 |
 
 ## CR-02
 
 | alternative | out of sample within band | median fold | by lane | contrast median (dex) | contrast signs |
 | --- | --- | --- | --- | --- | --- |
-| moist_matrix | 12/56 | 21.14x | acrylamide 4, lipid 3, sulfur 3, trunk 2 | 0.31 | 12/25 |
-| centre | 14/56 | 11.80x | acrylamide 4, lipid 5, sulfur 3, trunk 2 | 0.31 | 12/25 |
-| bulk_oil | 13/56 | 11.80x | acrylamide 4, lipid 4, sulfur 3, trunk 2 | 0.31 | 12/25 |
+| moist_matrix | 9/24 | 7.79x | acrylamide 4, lipid 3, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| centre | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| bulk_oil | 9/24 | 5.53x | acrylamide 4, lipid 3, sulfur 0, trunk 2 | 0.31 | 12/25 |

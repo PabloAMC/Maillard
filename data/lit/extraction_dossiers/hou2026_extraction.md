@@ -38,8 +38,11 @@ NOT on disk.
 **Answers, weighed.**
 1. **A diamine without a thiol reproduces the "cysteine trap" signature** (the strongest finding for B7; my
    confidence that the observation is real ~0.75, that it means signature (iii) is not thiol-specific ~0.6). Caveats:
-   one laboratory, one pH, triplicates; **5 mM L-cystine exceeds its room-temperature water solubility (~0.11 g/L, ~0.5
-   mM, my value, not in the paper) about tenfold** [!], so the pot starts as a suspension and the dissolved
+   one laboratory, one pH, triplicates; **5 mM L-cystine exceeds its room-temperature water solubility (0.168 g/L,
+   0.70 mM at 25 C, Carta 1996; not in the paper) about sevenfold** [!] [corrected 2026-11-05: this line read "~0.11
+   g/L, ~0.5 mM, my value ... about tenfold"; Carta 1996 Table 1 measures 0.69 - 0.71 mmol/L in water over initial pH
+   3.0 - 8.6 at 25 C only (carta1996 dossier, Arithmetic 1: 0.70 mmol/L x 240.3 g/mol = 0.168 g/L); 5 / 0.70 = 7.1x;
+   the solubility at 120 C is not measured], so the pot starts as a suspension and the dissolved
    concentration during heating is unknown; cystine can disproportionate or be reduced to cysteine during heating
    (not measured in the model pot). The cystine pot is less acidic (pH 6.07 vs 5.05 at 20 min), so the 3-DX loss is
    co-varying with pH, i.e. it could be the base-favoured sink of prereg sec. 19-20 acting through pH, or an amine

@@ -51,6 +51,11 @@ def test_the_two_stale_provenance_notes_are_corrected_and_their_claims_kept():
                       (BD / "external_validation"
                        / "external_validation_liu_2023_ppi_offnote_baseline.json", "buffer")):
         note = json.loads(path.read_text())["conditions"][key]["provenance_note"]
+        if note.startswith("M0 DATA CORRECTIONS, BATCH 1"):
+            # RE-PINNED 2026-11-06 (CF-128): Leitzen's vessel was read from sec. 4.2.1 (200 mL in a 225 mL PP
+            # bottle); the B35 note is superseded in turn and kept whole after the new one.
+            assert "SUPERSEDED AND RETAINED AS THE AUDIT RECORD: WAVE B35" in note
+            note = note[note.index("WAVE B35"):]
         assert note.startswith("WAVE B35") and "THE SOURCE IS ON DISK" in note
         assert "SUPERSEDED AND RETAINED AS THE AUDIT RECORD" in note
         assert note.index("THE SOURCE IS ON DISK") < note.index("SUPERSEDED")

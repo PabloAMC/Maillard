@@ -55,6 +55,11 @@ SOURCE_VERIFICATION: Path = LIT_DIR / "source_verification.yml"
 #: one file per sub-model or wave, so parallel readers never edit the same file (2026-10-29)
 SOURCE_VERIFICATION_DIR: Path = LIT_DIR / "source_verification"
 CONFLICTS_REGISTER: Path = DOCS_ROOT / "reference" / "conflicts_register.yml"
+EXPERIMENT_REGISTER: Path = DOCS_ROOT / "reference" / "experiment_register.yml"
+CHOICES_REGISTER: Path = DOCS_ROOT / "reference" / "choices_register.yml"
+#: 2026-11-05: hand-kept record of the structural questions the literature on disk cannot decide, and the
+#: measurement that would decide each (src/decisive_measurements.py; rendered as the wishlist's last section).
+DECISIVE_MEASUREMENTS: Path = DOCS_ROOT / "reference" / "decisive_measurements.yml"
 # LLM research dumps kept only so citation_gate can detect laundered citations. Not
 # provenance; nothing loads them as inputs.
 RESEARCH_CORPUS_DIR: Path = DATA_ROOT / "research_corpus"

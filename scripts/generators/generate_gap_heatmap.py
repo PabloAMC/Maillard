@@ -218,7 +218,7 @@ FAMILY_BOTTLENECK_REACTIONS = {
             "<strong>Amadori oxidative cleavage (CML/CEL)</strong>: Thermal degradation of lysine Schiff bases yielding N&epsilon;-(carboxymethyl)lysine (CML) and N&epsilon;-(carboxyethyl)lysine (CEL) (commercial PBMA range: 16&ndash;110 mg/kg; Foods 2023, PMC12451096).",
             "<strong>Extrusion lysine loss</strong>: Shearing and thermal degradation causing reactive lysine availability loss: 31.4% in SPI vs 15.4% in PPI under sterilization conditions (125.5&deg;C, 26 min) (ACS foodscitech.2c00242).",
             "<strong>Non-monotonic furosine crossover</strong>: Amadori acid hydrolysis marker peaking at 8.7 mg/100g protein at 140&deg;C, followed by degradation/crossover above 150&deg;C (Ram&iacute;rez-Jim&eacute;nez 2000).",
-            "<strong>Acrylamide extrusion kinetics</strong>: Fast-residence asparagine-glucose Schiff-base elimination increasing acrylamide from 22.36 to 62.62 &mu;g/kg in 25 seconds at 130&deg;C (ACS ResearchGate ref. 3)."
+            "<strong>Acrylamide in extrusion</strong>: twin-screw extruded SPI : corn starch (9:1, 30% moisture) carries the most acrylamide in the 130&deg;C arm (~150 &mu;g/kg, a Fig. 2D read-off; unextruded control ~38); the precursor charge and residence time are not printed (Ma et al. 2024, Int. J. Mol. Sci. 25:8668)."
         ]
     },
     "13": {

@@ -292,8 +292,13 @@ BUNDLE_BASELINES = {
     # RE-BASELINED BY WAVE B35 (2026-09-11), and the guard was RIGHT to fire: not a condition
     # completion. Bi 2020 Table 4 prints compounds this bundle never scored, and they were added
     # (pre-registered: results/validation/kinetic_core_b35_prereg.md). Previous: 201752690e3702ac2d87ab3d3380c1d7360408e160213b48cdfe0835d36ac198
+    # RE-BASELINED 2026-11-06 (M0 data corrections, batch 1; CF-129), and the guard was right to fire: the raw-pea
+    # levels Table 4 prints (hexanal 1260, nonanal 69.8) were declared as carried_volatiles and the hexanal row is
+    # REFUSED (scoring_refused: a net loss of a carried level). Measured values untouched. Previous: 430c4423a31594c63e3b7a579980f4fbfc82fd8256ca6453ea75e3e1b8548e8a
+    # RE-BASELINED AGAIN 2026-11-06 (PR #88 review): the raw column's "_" cells (furaneol, 2,5-dimethylpyrazine,
+    # furfural) recorded as carried_volatiles_not_reported_raw, and the anchor text says so. Previous: 90634ce8b50d9e105414a2a52b5a797543cdc4f93f30eb2bd7e3dbad6d904067
     "external_validation_bi_2020_roasted_pea_hexanal":
-        "430c4423a31594c63e3b7a579980f4fbfc82fd8256ca6453ea75e3e1b8548e8a",
+        "2553c90c3c0c2c06fde68ee762b56067ab38aa8bd4dd53cc71ef71ddd7f4676e",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     # re-pinned 2026-09-03: content_verification block from the PMC full text added
     # RE-BASELINED BY WAVE B36 (2026-09-11), and the guard was RIGHT to fire: not a condition
@@ -306,8 +311,11 @@ BUNDLE_BASELINES = {
     # re-pinned 2026-09-04: content_verification block from the full text added
     "external_validation_liu_2023_ppi_offnote_baseline":
         "d04c01abe7bba4a666fe94c023aa9a92aa77d8358c56673079ad6522b419c7cd",
+    # RE-BASELINED 2026-11-06 (M0 data corrections, batch 1; CF-127): the HMF target is DEMOTED (scoring_refused: the
+    # prose's 12.28 ppm contradicts Fig. 4A's ~5.0 ppm); target_value kept, the figure read-off recorded beside it.
+    # Previous: 85efa67b7c88adc2d8616d7ed601efe6f6f7763238b2aef237bc485c405d0505
     "mp_holdout_fructose_asparagine_180C_Lin2022":
-        "85efa67b7c88adc2d8616d7ed601efe6f6f7763238b2aef237bc485c405d0505",
+        "b30e2d0f4ccdfc5e7d84af7cf4ee90bb3b26ccbb36ce188459a3b3dcc4651ecb",
     "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019":
         "af74d73ebf7b3a0e5ab06a6a5979c1bedc631927b156322605576f4d5006dd67",
     "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019":
@@ -334,8 +342,12 @@ BUNDLE_BASELINES = {
     #     hold-out: they VALIDATE and may never be fitted, and the hold-out gate still passes.
     # The existing 5-HMF target is byte-identical, which the wave's T1 asserts separately.
     # Previous baseline: fd26c70a0d0020ebbe1fca8dfd63a8cd2668ac008c7aa35ea8e4b7bfc98b2f81
+    # RE-BASELINED 2026-11-06 (M0 data corrections, batch 1; CF-128), and the guard was right to fire: Table 6's
+    # unheated levels (GO 1000, MGO 900, glucosone 100, HMF 100 ppb) declared as carried_volatiles; conditions.ph
+    # 4.36 (Table 3's END pH) -> 4.98 (the start) with 4.36 kept as ph_end_measured; notes on F0 and the caveat.
+    # Targets untouched. Previous: fc15e012f6a5cd03f486c6fa3009c2cc50c7e3b43f53bc48a98bd15b531e99d9
     "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021":
-        "fc15e012f6a5cd03f486c6fa3009c2cc50c7e3b43f53bc48a98bd15b531e99d9",
+        "ba9f495112f18a6c448bcec7febdffcf454804a77f033412c4e3afd8b1e43aaf",
     "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3":
         "0d18247402d397ef1c35a328d80886b111d6fe42ac12454e0847a82b1cead79e",
     "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7":
@@ -361,8 +373,11 @@ BUNDLE_BASELINES = {
         "18303ba16cd36934e750b0ae95c7986f782fd54575740c41fba7d65e18750d69",
     # pinned 2026-10-28 (FIT_HOLDOUT_DECLARATION.md Amendment 45): five hold-outs added BLIND
     # (no prediction or score run before they were frozen). First pin, not a re-pin.
+    # RE-BASELINED 2026-11-06 (M0 integrity batch 1, CK-07; CF-009 note): the stale fit_holdout_status provenance
+    # string reworded (row-independent; same-pot intermediates seen at design; the ACTZ row spent). No value moved.
+    # Previous: 4069aa049e86df1cc404a0c6479287420d74dae6deb8e1c34587e5c15e22c44d
     "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b":
-        "4069aa049e86df1cc404a0c6479287420d74dae6deb8e1c34587e5c15e22c44d",
+        "59c7d06354f39d671fa398124559d2869aec3e88cadd0c5c472daa98084a7b02",
     "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c":
         "8695e8d48a1c84605cabc158433525a875a9d40f15c147dc7990c94eea0fa474",
     "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c":
