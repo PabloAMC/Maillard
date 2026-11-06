@@ -3,7 +3,7 @@
  "generated_by": "scripts/generators/build_jax_network_join.py",
  "env": "maillard-jax",
  "jax_version": "0.12.0.1",
- "uptime_start": "10:31  up 4 days, 17:40, 1 user, load averages: 6.57 8.03 18.77",
+ "uptime_start": "15:31  up 4 days, 22:40, 1 user, load averages: 12.85 22.36 18.83",
  "structure": {
   "modules": [
    {
@@ -143,13 +143,13 @@
   "ph_mode": "inline"
  },
  "stage_seconds": {
-  "structure": 2.8489321249653585,
+  "structure": 1.681581458018627,
   "rates": 2.1519217920140363,
   "composed": 282.2978244170081,
   "gradient": 187.44740020798054,
-  "fit_jacobian": 134.64499329199316,
-  "densities": 49.3205072080018,
-  "fit_column_diagnostic": 53.64039858302567
+  "fit_jacobian": 142.54681704199174,
+  "densities": 100.24472279200563,
+  "fit_column_diagnostic": 65.34355958295055
  },
  "rates": {
   "shipped": {
@@ -163,7 +163,7 @@
    "nonzero_where_engine_zero": 0
   }
  },
- "uptime_end": "10:32  up 4 days, 17:41, 1 user, load averages: 7.45 8.10 18.07",
+ "uptime_end": "15:36  up 4 days, 22:46, 1 user, load averages: 65.60 40.29 27.00",
  "composed": {
   "tolerance": {
    "rtol": 1e-08,
@@ -408,9 +408,9 @@
   ],
   "residual_equals_network_integrate": 0.0,
   "failed": [],
-  "jax_jacobian_s": 5.527211749984417,
-  "jax_jacobian_first_call_s": 19.206182040972635,
-  "jax_residual_s": 1.6858245829935186,
+  "jax_jacobian_s": 5.650774957961403,
+  "jax_jacobian_first_call_s": 20.530275083961897,
+  "jax_residual_s": 1.830582249967847,
   "fd_check_max_relative_column_error": 0.0008881782691281205,
   "fd_check_per_column": [
    0.0008881782691281205,
@@ -419,7 +419,13 @@
    2.264634063892094e-07,
    1.2972895980609254e-05
   ],
-  "engine_forward_fd_s": 59.47271941701183,
+  "fd_check_sweep_changes": {},
+  "sweeps_seen": [
+   [
+    7
+   ]
+  ],
+  "engine_forward_fd_s": 62.78487191599561,
   "engine_runs": 6,
   "engine_steps": [
    0.001,
@@ -443,14 +449,14 @@
    0.9999978680638645,
    0.0026052649034412996
   ],
-  "load": "7.31 9.08 22.20"
+  "load": "17.13 20.12 18.45"
  },
  "densities": {
   "draws": 3,
   "failed": 0,
   "batch_vs_single_max_dex": 6.683542608243442e-13,
-  "batch_s_first_call": 16.716072125011124,
-  "load": "6.16 10.37 25.76"
+  "batch_s_first_call": 32.379811083956156,
+  "load": "65.60 40.29 27.00"
  },
  "fit_column_diagnostic": {
   "coordinate": "sulfur_trunk.log10_k:k_fru_acids",

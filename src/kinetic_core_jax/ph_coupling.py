@@ -32,6 +32,7 @@ it is a jump no derivative sees (``PhRun.sweeps`` reports it; contract sec. 2.4)
 from __future__ import annotations
 
 import math
+import os
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Mapping, NamedTuple, Optional, Sequence, Tuple
 
@@ -56,12 +57,17 @@ FIXED_POINTS = ("relaxed_converged", "fixed_sweeps")
 #: integrate_sulfur's stopping threshold under "fixed_sweeps" (a literal in its loop; pinned through its AST)
 FIXED_SWEEPS_STOP = 1e-4
 #: the numeric pot keys an inline-pH network reads (``pot["mode"]``, "dynamic" | "clamped", is static)
-POT_KEYS = ("y0", "label_ph", "buffer", "durations", "node_s", "node_tc", "knot_s", "knot_tc", "label_nudge", "jump_s")
+POT_KEYS = ("y0", "label_ph", "buffer", "durations", "node_s", "node_tc", "knot_s", "knot_tc", "label_nudge", "jump_s",
+            "knot_jump_s")
 MODES = ("dynamic", "clamped")
 #: nodes closer than this (as a fraction of the segment) are one kink of the rate vector for the step controller
 JUMP_MERGE = 1e-12
 #: the closure check's tolerance on a centre movement (pool weights are shares, e.g. 0.5 + 0.5)
 CLOSURE_TOL = 1e-9
+#: debug mode (env MAILLARD_JAX_DEBUG_ROOT=1, read at import): every (pH, I) root is checked after its Newton budget,
+#: |charge residual| <= ROOT_TOL x (1 + |SID| + SUM conc) mmol/L and |I - I(u)| <= ROOT_TOL x (1 + I), else an error
+DEBUG_ROOT = os.environ.get("MAILLARD_JAX_DEBUG_ROOT", "") == "1"
+ROOT_TOL = 1e-9
 
 
 # --------------------------------------------------------------------------- the declarations
@@ -306,7 +312,17 @@ class PhSolver:
             step = jnp.linalg.solve(jac, f)
             return jnp.stack([u[0] - jnp.clip(step[0], -1.0, 1.0), jnp.maximum(u[1] - step[1], 0.1 * u[1])])
 
-        return jax.lax.fori_loop(0, NEWTON_STEPS, newton, u)
+        u = jax.lax.fori_loop(0, NEWTON_STEPS, newton, u)
+        if DEBUG_ROOT:
+            # the six clipped Newton steps are a fixed budget, not a convergence test: in debug mode a root whose
+            # residual is not small is an error at run time (equinox.error_if), not a silently wrong pH
+            import equinox as eqx
+
+            f = self._equations(u, tt, sid, conc)
+            scale = 1.0 + jnp.abs(sid) + jnp.sum(jnp.abs(conc))
+            bad = (jnp.abs(f[0]) > ROOT_TOL * scale) | (jnp.abs(f[1]) > ROOT_TOL * (1.0 + jnp.abs(u[1])))
+            u = eqx.error_if(u, bad, "ph_coupling: the (pH, I) root did not converge in the Newton budget")
+        return u
 
     def solve(self, t_k, sid, conc, pk25):
         """(pH, I) at ``t_k``."""
@@ -377,6 +393,11 @@ def closure(net, theta=None, *, ph: Optional[float] = None, t_c: float = 25.0, s
         out["problems"] += [f"{r}: declared in {o}'s centre_ledger, but the network titrates nothing"
                             for r, (o, _) in ledger.items()]
     else:
+        for r, (o, entry) in ledger.items():
+            unknown = sorted(k for k in entry if k != "basis" and k not in table.kinds)
+            if unknown:
+                out["problems"].append(f"{r}: {o} declares centre kinds {unknown}, which no pool of the table "
+                                       f"carries (kinds {list(table.kinds)})")
         species_centres = table.structural_weights().T @ table.centres.T          # (n, K)
         delta = net.stoichiometry.T @ species_centres                             # (R, K)
         out["kinds"] = table.kinds
@@ -490,7 +511,10 @@ def pot_from_program(net, y0: np.ndarray, label_ph: float, buffer: np.ndarray, *
             "knot_s": np.stack([pad(s[3] / s[0], k_width) for s in rows]),
             "knot_tc": np.stack([pad(s[4], k_width) for s in rows]),
             "label_nudge": np.zeros((len(rows), len(rows[0][1]))),
-            "jump_s": np.stack([jump_grid(s[1] / s[0]) for s in rows]), "node_minutes": [s[1] for s in rows]}
+            "jump_s": np.stack([jump_grid(s[1] / s[0]) for s in rows]),
+            # the inline coupling's jump_ts: the temperature knots, near-coincident ones merged like the nodes
+            "knot_jump_s": np.stack([jump_grid(pad(s[3] / s[0], k_width)) for s in rows]),
+            "node_minutes": [s[1] for s in rows]}
 
 
 def pot_arrays(pot: Mapping[str, Any]) -> Dict[str, Any]:
@@ -520,8 +544,11 @@ class PhRun(NamedTuple):
     sweeps: Any      # (S,): fixed-point sweeps (0 for inline / clamped)
     residual: Any    # (S,): the last sweep's max |fresh - node pH|
     num_steps: Any   # (S,): integrator steps in the segment (all sweeps)
-    failed: Any      # (S,)
+    failed: Any      # (S,): the integrator did not succeed
     sid: Any         # the strong-ion difference, mmol/L
+    #: (S,): the fixed point ended with its residual above ``PhModel.flag`` (the engine's
+    #: ``ph_fixed_point_converged = False`` / ``PhFixedPointNotConverged``); ``network.integrate`` reports it as failed
+    unconverged: Any = None
 
 
 def _interp_rows(s, grid, rows):
@@ -603,16 +630,18 @@ def integrate(net, theta, pot: Mapping[str, Any], *, rtol: float = 1e-8, atol: f
         min_sweeps = max_sweeps = int(force_sweeps)
 
     def segment(y_start, seg):
-        duration, node_s, node_tc, knot_s, knot_tc, nudge, jump_s = seg
+        duration, node_s, node_tc, knot_s, knot_tc, nudge, jump_s, knot_jump_s = seg
         node_tk = node_tc + CELSIUS
+        no = jnp.asarray(False)
         if mode == "clamped":
             t_k = knot_tc[0] + CELSIUS
-            k0 = rates(t_k, a["label_ph"], 0.0, jnp.nan)
+            # RateCtx.ph_label is the declared label pH here (the engine's clamped path reads it for both)
+            k0 = rates(t_k, a["label_ph"], 0.0, a["label_ph"])
             ys, steps, bad = _solve(net, lambda s, y, k: k, k0, y_start, duration, node_s, jump_s, **kw)
             ys = jnp.maximum(ys, 0.0)
             n = node_s.shape[0]
             return ys[-1], (ys, jnp.full(n, a["label_ph"]), jnp.zeros(n), jnp.full(n, a["label_ph"]),
-                            jnp.asarray(0), jnp.asarray(0.0), steps, bad)
+                            jnp.asarray(0), jnp.asarray(0.0), steps, bad, no)
         if st.coupling == "inline":
             def rhs_k(s, y, d):
                 theta_, sid_, buffer_, knot_s_, knot_tc_ = d
@@ -622,10 +651,10 @@ def integrate(net, theta, pot: Mapping[str, Any], *, rtol: float = 1e-8, atol: f
                                                           ionic_m=ionic))
 
             ys, steps, bad = _solve(net, rhs_k, (theta, sid, a["buffer"], knot_s, knot_tc), y_start, duration,
-                                    node_s, knot_s, **kw)
+                                    node_s, knot_jump_s, **kw)
             ys = jnp.maximum(ys, 0.0)
             ph, ionic, cool = node_states(ys, node_tk)
-            return ys[-1], (ys, ph, ionic, cool, jnp.asarray(0), jnp.asarray(0.0), steps, bad)
+            return ys[-1], (ys, ph, ionic, cool, jnp.asarray(0), jnp.asarray(0.0), steps, bad, no)
         # fixed_point_nodes (shipped): B64's per-node starts (identical at every node of an isothermal segment)
         p0, i0, c0 = node_states(jnp.broadcast_to(y_start, (node_s.shape[0],) + y_start.shape), node_tk)
 
@@ -672,9 +701,11 @@ def integrate(net, theta, pot: Mapping[str, Any], *, rtol: float = 1e-8, atol: f
             out, _ = eqxi.while_loop(lambda cd: ~cd[0][6], lambda cd: (sweep(cd[0], cd[1]), cd[1]), (init, data),
                                      max_steps=max_sweeps, kind="checkpointed", checkpoints=max_sweeps)
         count, node_ph, node_i, node_cool, ys, res, _, steps, bad = out
-        return ys[-1], (ys, node_ph, node_i, node_cool, count, res, steps, bad)
+        # the engine's ph_fixed_point_converged: the last residual at or below the flag
+        return ys[-1], (ys, node_ph, node_i, node_cool, count, res, steps, bad, res > st.flag)
 
-    segs = (a["durations"], a["node_s"], a["node_tc"], a["knot_s"], a["knot_tc"], a["label_nudge"], a["jump_s"])
-    _, (ys, ph, ionic, cool, count, res, steps, bad) = jax.lax.scan(segment, y0, segs)
+    segs = (a["durations"], a["node_s"], a["node_tc"], a["knot_s"], a["knot_tc"], a["label_nudge"], a["jump_s"],
+            a["knot_jump_s"])
+    _, (ys, ph, ionic, cool, count, res, steps, bad, unconverged) = jax.lax.scan(segment, y0, segs)
     return PhRun(ys=ys, ph=ph, ionic=ionic, ph_cool=cool, sweeps=count, residual=res, num_steps=steps,
-                 failed=bad, sid=sid)
+                 failed=bad, sid=sid, unconverged=unconverged)

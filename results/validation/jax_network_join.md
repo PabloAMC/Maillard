@@ -61,7 +61,7 @@ jax.grad: 35.4 s per call (61 s with its compile); forward mode first call 31 s.
 thiamine_cys_glucose_120C_Bolton1994: 16 log10 observables (four species at four pH nodes) x 5 coordinates (sulfur_trunk.log10_k:k_fru_acids, sulfur_trunk.ea:k_glc_tdg, sulfur_fed_3deoxy.log10_k:k_ddg_tdg, sulfur.log10_k:k_thi_hmp, sulfur.log10_k:k_hmf_cys), rtol 1e-08.
 
 - `fit.Compiled.residual` equals the residual of `network.integrate`'s states to 0.0e+00; failed pots none.
-- The exact Jacobian against `fit.fd_check`'s central differences of the same residual (column-scaled steps, at the fit tolerance, so solver noise / step bounds the agreement), per column: 8.9e-04, 5.6e-06, 7.9e-06, 2.3e-07, 1.3e-05.
+- The exact Jacobian against `fit.fd_check`'s central differences of the same residual (column-scaled steps, at the fit tolerance, so solver noise / step bounds the agreement), per column: 8.9e-04, 5.6e-06, 7.9e-06, 2.3e-07, 1.3e-05. Sweep counts seen over every evaluation (`Compiled.sweep_log`): [[7]]; pots whose count moved (`sweep_changes`): none.
 - Against the engine's own forward differences at steps [0.001, 0.1, 0.001, 0.001, 0.001] (one-sided: truncation O(step), plus LSODA's noise / step), per column: 7.9e-01, 2.2e-05, 1.0e-03, 2.6e-05, 1.9e-03; the columns' scale (max |d log10 / d coordinate|): 0.061, 0.0071, 0.15, 1, 0.0026.
 
 - The worst column, sulfur_trunk.log10_k:k_fru_acids at step 0.001, diagnosed (engine and composed network at -step / 0 / +step):
@@ -76,11 +76,11 @@ thiamine_cys_glucose_120C_Bolton1994: 16 log10 observables (four species at four
 
 | quantity | wall s |
 |---|---|
-| JAX residual (one solve) | 1.69 |
-| JAX exact Jacobian (forward mode) | 5.53 (first call with compile 19) |
-| engine forward-difference Jacobian (6 runs) | 59.47 |
+| JAX residual (one solve) | 1.83 |
+| JAX exact Jacobian (forward mode) | 5.65 (first call with compile 21) |
+| engine forward-difference Jacobian (6 runs) | 62.78 |
 
-JAX exact / engine forward FD: 0.09x. Load: 7.31 9.08 22.20.
+JAX exact / engine forward FD: 0.09x. Load: 17.13 20.12 18.45.
 
 ## The density bridge on the composed network
 
@@ -88,7 +88,7 @@ JAX exact / engine forward FD: 0.09x. Load: 7.31 9.08 22.20.
 
 ## What remains
 
-- **The sweep count is blind to its own jumps.** The fixed point stops on a discrete rule (residual < 1e-3 pH after at least the minimum sweeps); every derivative here is the derivative AT a fixed sweep count. Where a perturbation changes the count, the trajectory jumps (by up to ~the tolerance in pH) and no derivative sees it; a central difference that straddles the change does. The run reports the count (`PhRun.sweeps`), so a fit can flag pots whose count moved between evaluations; a smooth surrogate (a fixed sweep count per fit, or the implicit-function derivative of the converged fixed point) is a model change and needs its own key.
+- **The sweep count is blind to its own jumps.** The fixed point stops on a discrete rule (residual < 1e-3 pH after at least the minimum sweeps); every derivative here is the derivative AT a fixed sweep count. Where a perturbation changes the count, the trajectory jumps (by up to ~the tolerance in pH) and no derivative sees it; a central difference that straddles the change does. It is detected, not removed: the run reports the count (`PhRun.sweeps`), `fit.Compiled` logs every pot's counts per call and `JaxFit.sweep_changes` / `fd_check`'s `sweep_changes` name the pots whose count moved. A smooth surrogate (a fixed sweep count per fit, or the implicit-function derivative of the converged fixed point) is a model change and needs its own key. A fixed point left above `PhModel.flag` is a failed pot (`PhRun.unconverged`, the engine's `ph_fixed_point_converged = False`).
 - **Inline-pH table jumps** (Zheng & Ho's boundary at label pH 5.0, the thiamine floor at 6.25) are crossed at a time that depends on theta; the derivative misses the crossing term (contract sec. 2.4, unchanged).
 - **The cooled pH is not yet a Network observable** (it needs SID, theta and the buffer, not one state): fits read it from `Run.ph`; `fit.Observation` reads species only.
 - **Two pH conventions in one network** (a declared-pH trunk / acrylamide module beside the inline-pH sulfur lane) are refused; merging them, the trunk solutes in the balance and one titratable table across lanes are A2b (contract sec. 6.3), judged by evidence, not identity.
@@ -96,4 +96,4 @@ JAX exact / engine forward FD: 0.09x. Load: 7.31 9.08 22.20.
 - **Declared competition** is refused in the composed sulfur recipe; `compose`'s default stays "report" for the trunk-lane / acrylamide modules, which predate the declaration.
 - **The pH-root performance step** (a cheaper residual; one root per step) is untouched.
 
-Machine load: start 10:31  up 4 days, 17:40, 1 user, load averages: 6.57 8.03 18.77; end 10:32  up 4 days, 17:41, 1 user, load averages: 7.45 8.10 18.07.
+Machine load: start 15:31  up 4 days, 22:40, 1 user, load averages: 12.85 22.36 18.83; end 15:36  up 4 days, 22:46, 1 user, load averages: 65.60 40.29 27.00.

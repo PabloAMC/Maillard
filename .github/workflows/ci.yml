@@ -29,7 +29,10 @@ name: CI
 on:
   push:
     branches: [main]
+  # 2026-11-06: ready_for_review is listed so that marking a draft ready STARTS a run (without `types` it does
+  # not, and re-running the draft's run reuses its draft payload, so the draft-gated jobs skip again)
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
   schedule:
     # Weekly DOI liveness sample. Advisory only -- see the citation-liveness job.
@@ -275,8 +278,13 @@ jobs:
       - name: Build the maillard-jax environment
         run: conda env update -n maillard-jax --file environment-jax.yml
 
-      - name: JAX sulfur lane against the NumPy lane
-        run: python -m pytest tests/unit/test_jax_sulfur_structure.py tests/unit/test_jax_network_join.py tests/scientific/test_jax_sulfur_parity.py tests/scientific/test_jax_network_join.py -q
+      - name: Preflight (the JAX stack imports; a skip below would otherwise test nothing)
+        run: python -c "import jax, diffrax, equinox.internal; jax.config.update('jax_enable_x64', True); print(jax.__version__, diffrax.__version__)"
+
+      - name: Every JAX test (unit and scientific) against the NumPy lanes
+        env:
+          MAILLARD_REQUIRE_NO_SKIPS: "1"   # tests/conftest.py: a skip fails this job
+        run: python -m pytest tests/unit/test_jax_*.py tests/scientific/test_jax_*.py -q -rs
 
       - name: data/ untouched by the JAX parity tier
         if: always()

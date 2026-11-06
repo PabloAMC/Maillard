@@ -26,7 +26,7 @@ import jax.numpy as jnp
 import numpy as np
 
 from .fit import LOG_FLOOR, Observation
-from .network import Network, integrate, pot_arrays, pot_mode, theta_from_vector, theta_vector
+from .network import Network, integrate, n_rows, pot_arrays, pot_mode, theta_from_vector, theta_vector
 
 FAILED_POLICIES = ("refuse", "impossible")
 
@@ -69,7 +69,14 @@ class Predictor:
 
             return jax.jit(jax.vmap(one, in_axes=(0, None)))
 
-        # (v2.3) an inline-pH pot's static mode is a compile key; its numeric arrays are the argument
+        # (v2.3) an inline-pH pot's static mode is a compile key; its numeric arrays are the argument. A row is a
+        # segment end, or a pH node of an inline-pH pot; one outside the pot's output would be CLAMPED by JAX's
+        # indexing (a silently wrong prediction), so it is refused here
+        n_out = [n_rows(net, p) for p in self.pots]
+        stray = [(i, o.pot, o.row, n_out[o.pot]) for i, o in enumerate(self.observations)
+                 if not 0 <= int(o.row) < n_out[o.pot]]
+        if stray:
+            raise ValueError(f"observation rows outside their pot's output (observation, pot, row, n_rows): {stray[:5]}")
         self._modes = [pot_mode(net, p) for p in self.pots]
         self._arrays = [pot_arrays(net, p) for p in self.pots]
         self._batch = {mode: batch_for(mode) for mode in dict.fromkeys(self._modes)}

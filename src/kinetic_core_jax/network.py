@@ -48,7 +48,9 @@ class RateCtx(NamedTuple):
 
     In pH mode "prescribed" (contract v2 sec. 2.4) ``ph_label`` is the pot's DECLARED pH, read from the pot data
     (``pot["ph_label"]``) and constant over the programme -- the engine's declared-pH factors (trunk B12 / B40,
-    acrylamide B15) -- and ``ph`` stays None. ``aw`` is the pot's declared water activity (``pot["aw"]``). Both are
+    acrylamide B15) -- and ``ph`` stays None. (v2.3) In an inline-pH network ``ph`` is the in-situ pH of the current
+    state, ``ionic_m`` its ionic strength and ``ph_label`` its COOLED (25 C label-scale) pH; in a clamped pot both
+    ``ph`` and ``ph_label`` are the declared label pH and ``ionic_m`` is 0 (the engine's clamped path). ``aw`` is the pot's declared water activity (``pot["aw"]``). Both are
     NaN where the engine's value is None; a module reads them only if it lists them in ``Module.pot_inputs``."""
 
     t_c: Any
@@ -205,7 +207,7 @@ class Network:
 
 
 def compose(modules: Sequence[Module], *, layout: Optional[Sequence[str]] = None,
-            solver: str = "Kvaerno5", competition: str = "report") -> Network:
+            solver: str = "Kvaerno5", competition: str = "report", check_closure: bool = True) -> Network:
     """One Network from modules. Refuses (ValueError): a duplicate module name, a missing ``requires``, a species or
     reaction key defined twice, a reaction touching a species no module owns, and any reaction that does not balance
     C / N / S to 1e-9. ``layout`` pins a species order (a permutation of the owned species); ``solver`` names the
@@ -215,7 +217,12 @@ def compose(modules: Sequence[Module], *, layout: Optional[Sequence[str]] = None
     module that does not own it must be in that module's ``competes``. ``competition="report"`` (the default: the
     ported trunk-lane / acrylamide modules predate the declaration) lists the undeclared pairs on
     ``Network.undeclared_competition``; ``"refuse"`` raises. The merged titratable table refuses a pool declared twice
-    or by a module that neither owns nor requires its species."""
+    or by a module that neither owns nor requires its species.
+
+    (v2.3) A network that declares any titratable pool must close its charge ledger (``charge_closure(strict=True)``)
+    or is refused; ``check_closure=False`` is the declared escape, to build one in order to inspect what fails. An
+    inline-pH network refuses a declared-pH module, a module that reads ``aw``, and pools declared by a pH-free
+    module."""
     if solver not in ("Kvaerno3", "Kvaerno4", "Kvaerno5"):
         raise ValueError(f"solver {solver!r} is not a declared choice")
     if competition not in COMPETITION_MODES:
@@ -287,11 +294,18 @@ def compose(modules: Sequence[Module], *, layout: Optional[Sequence[str]] = None
     if undeclared and competition == "refuse":
         raise ValueError("undeclared shared consumption (declare it in Module.competes): "
                          + ", ".join(f"{m} consumes {s} (owned by {owner[s]})" for s, m in undeclared))
-    return Network(modules=tuple(modules), species=species, reactions=tuple(reactions), index=index,
-                   stoichiometry=stoich, reactant_index=r_idx, reactant_power=r_pow, element_matrix=elements,
-                   coordinates=coordinates, needs_ph=any(m.needs_ph for m in modules), solver=solver,
-                   titratables=titratables, competition=shared, undeclared_competition=undeclared,
-                   charge=build_table(modules, index), ph_model=ph_model)
+    net = Network(modules=tuple(modules), species=species, reactions=tuple(reactions), index=index,
+                  stoichiometry=stoich, reactant_index=r_idx, reactant_power=r_pow, element_matrix=elements,
+                  coordinates=coordinates, needs_ph=any(m.needs_ph for m in modules), solver=solver,
+                  titratables=titratables, competition=shared, undeclared_competition=undeclared,
+                  charge=build_table(modules, index), ph_model=ph_model)
+    if net.charge is not None and check_closure:
+        # (v2.3) a network that titrates anything closes its charge ledger, or is refused (``check_closure=False``
+        # is the declared escape, for building a network in order to inspect what does not close)
+        from .ph_coupling import closure
+
+        closure(net, strict=True)
+    return net
 
 
 def _competition(modules: Sequence[Module], owner: Mapping[str, str]):
@@ -364,12 +378,24 @@ def _merge_ph_models(modules: Sequence[Module]):
         raise ValueError("modules declare different PhModels: "
                          + ", ".join(m.name for m in modules if m.ph_model is not None))
     if any(m.needs_ph for m in modules):
+        inline = [m.name for m in modules if m.needs_ph]
         prescribed = [m.name for m in modules if "ph_label" in m.pot_inputs]
         if prescribed:
             raise UnsupportedConfiguration(
-                f"{prescribed} read the declared pH (pH mode 'prescribed') and "
-                f"{[m.name for m in modules if m.needs_ph]} solve it inline: RateCtx.ph_label would mean two things "
-                "(contract sec. 2.4; merging the conventions is A2b's, sec. 6.3)")
+                f"{prescribed} read the declared pH (pH mode 'prescribed') and {inline} solve it inline: "
+                "RateCtx.ph_label would mean two things (contract sec. 2.4; merging the conventions is A2b's, "
+                "sec. 6.3)")
+        reads_aw = [m.name for m in modules if "aw" in m.pot_inputs]
+        if reads_aw:
+            raise UnsupportedConfiguration(
+                f"{reads_aw} read the pot's a_w, which the inline-pH integrator does not carry (ph_coupling.POT_KEYS, "
+                "RateCtx.aw): not ported beside an inline pH")
+        foreign = [m.name for m in modules if m.titratables and not m.needs_ph]
+        if foreign:
+            raise UnsupportedConfiguration(
+                f"{foreign} declare titratable pools but solve no pH: putting a pH-free module's pools into an "
+                "inline balance changes the lanes' numbers (the trunk solutes in the balance), which is A2b's "
+                "(contract sec. 6.3)")
     return next(iter(models)) if models else None
 
 
@@ -469,6 +495,18 @@ def pot_mode(net: Network, pot: Mapping[str, Any]) -> Optional[str]:
     return ph_mode(pot)
 
 
+def n_rows(net: Network, pot: Mapping[str, Any]) -> int:
+    """How many rows ``integrate`` (or ``forcing.integrate_forced``) returns for this pot: S segment ends (a plain
+    pot's ``segments``; a forced pot's ``durations``), or S * N pH nodes (an inline-pH pot)."""
+    if net.needs_ph:
+        s, n = np.shape(pot["node_s"])
+        return int(s * n)
+    for key in ("segments", "durations"):
+        if key in pot:
+            return int(np.shape(pot[key])[0])
+    raise ValueError("a pot carries 'segments' (plain), 'durations' (forced) or 'node_s' (inline pH)")
+
+
 def segment_end_rows(net: Network, pot: Mapping[str, Any]) -> List[int]:
     """The rows of ``integrate(...).ys`` that hold each segment's end state (an Observation's ``row``)."""
     if not net.needs_ph:
@@ -508,7 +546,10 @@ def integrate(net: Network, theta, pot: Mapping[str, Any], *, solver=None, rtol:
                                     max_steps=200_000 if max_steps is None else max_steps, throw=throw, mode=mode,
                                     **ph_kw)
         s, n_nodes, n = run.ys.shape
-        return Run(ys=run.ys.reshape(s * n_nodes, n), num_steps=run.num_steps, failed=run.failed, ph=run)
+        # an unconverged fixed point (residual above PhModel.flag) is a failed pot, as the engine's guards treat
+        # ph_fixed_point_converged = False
+        return Run(ys=run.ys.reshape(s * n_nodes, n), num_steps=run.num_steps, failed=run.failed | run.unconverged,
+                   ph=run)
     if ph_kw or mode is not None:
         raise ValueError(f"{sorted(ph_kw) + (['mode'] if mode else [])} apply to an inline-pH network only")
     max_steps = 100_000 if max_steps is None else max_steps

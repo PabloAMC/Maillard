@@ -177,11 +177,15 @@ def test_declared_competition_and_the_titratable_table(env):
     with pytest.raises(ValueError, match="no module owns"):
         network.compose([mods[0], dataclasses.replace(mods[1], competes=("NOT_A_SPECIES",)), mods[2]])
     t = network.Titratable("Gly", (2.34, 9.6), (1, 0, -1), "test")
-    with_t = network.compose([dataclasses.replace(mods[0], titratables=(t,)), mods[1], mods[2]])
+    # (v2.3) a network that titrates glycine while no trunk step that moves it is declared does not compose ...
+    with pytest.raises(ValueError, match="charge closure fails"):
+        network.compose([dataclasses.replace(mods[0], titratables=(t,)), mods[1], mods[2]])
+    # ... unless the escape is declared, to inspect what does not close
+    with_t = network.compose([dataclasses.replace(mods[0], titratables=(t,)), mods[1], mods[2]], check_closure=False)
     assert with_t.titratables == (t,)
     with pytest.raises(ValueError, match="declared twice"):
         network.compose([dataclasses.replace(mods[0], titratables=(t,)), dataclasses.replace(mods[1], titratables=(t,)),
-                         mods[2]])
+                         mods[2]], check_closure=False)
     with pytest.raises(ValueError, match="charge states"):
         network.compose([dataclasses.replace(mods[0], titratables=(network.Titratable("Gly", (2.3,), (1,)),)),
                          mods[1], mods[2]])

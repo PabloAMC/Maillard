@@ -34,7 +34,7 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-from .network import Network, integrate, pot_arrays, pot_mode, theta_from_vector, theta_vector
+from .network import Network, integrate, n_rows, pot_arrays, pot_mode, theta_from_vector, theta_vector
 
 #: coordinate kinds: the engine's (``fitting.THRESHOLDS`` / ``EXTRA_THRESHOLDS``) plus "linear" (a k_ref the engine
 #: carries at zero, ``ArrheniusBlock(allow_zero=True)``; bounded below by 0) and "share" (a fraction in [0, 1])
@@ -69,8 +69,10 @@ def kind_of(coordinate: str) -> Optional[str]:
 @dataclass(frozen=True)
 class Observation:
     """One residual: observable ``observable`` (a Network observable name, e.g. "mmol_per_L:HMF") of pot ``pot`` at
-    output row ``row`` (a segment end), against ``value`` with ``sigma``, both in the residual's basis (log10 of the
-    observable when ``log10``)."""
+    output row ``row``, against ``value`` with ``sigma``, both in the residual's basis (log10 of the observable when
+    ``log10``). A row is a segment end for a plain or forced pot, and a pH NODE for an inline-pH pot (S * N rows,
+    segment-major; ``network.segment_end_rows`` gives the segment ends); ``network.n_rows`` bounds it, checked when the
+    problem compiles."""
 
     pot: int
     row: int
@@ -130,11 +132,16 @@ def _stack(pots: Sequence[Mapping[str, Any]]) -> Dict[str, Any]:
 
 
 class Compiled:
-    """A problem's residual and exact Jacobian. The SOLVE is compiled once per pot shape (and batch size): it returns
-    every segment-end state and, for the Jacobian, d state / d x (S, n, p) by forward mode; the observables (cheap
-    functions of one state) are applied after it with their exact gradients, so one compile serves every pot of a
-    shape whatever is observed on it. ``residual(x)`` -> (r, failed pots); ``jacobian(x)`` -> (r, J, failed pots).
-    Counts calls and records the first call's wall time (compile included)."""
+    """A problem's residual and exact Jacobian. The SOLVE is compiled once per pot shape, inline-pH mode and batch
+    size: it returns every output row's state (segment ends; every pH node of an inline-pH pot) and, for the
+    Jacobian, d state / d x (rows, n, p) by forward mode; the observables (cheap functions of one state) are applied
+    after it with their exact gradients, so one compile serves every pot of a shape whatever is observed on it.
+    ``residual(x)`` -> (r, failed pots); ``jacobian(x)`` -> (r, J, failed pots). Counts calls and records the first
+    call's wall time (compile included).
+
+    SWEEP COUNTS (inline pH). Every call records each pot's fixed-point sweep counts (``sweep_log``: pot -> one tuple
+    per call). A derivative is taken at a fixed count; where the count changes between evaluations the residual jumps
+    and the Jacobian does not see it, so ``sweep_changes()`` names those pots (``JaxFit.sweep_changes``)."""
 
     def __init__(self, problem: JaxProblem, **solve_override):
         import diffrax
@@ -151,6 +158,12 @@ class Compiled:
         # takes its numeric arrays, and the mode is part of the compile key
         arrays = [pot_arrays(net, p) for p in problem.pots]
         modes = [pot_mode(net, p) for p in problem.pots]
+        rows = [n_rows(net, p) for p in problem.pots]
+        stray = [(i, o.pot, o.row, rows[o.pot]) for i, o in enumerate(problem.observations)
+                 if not 0 <= int(o.row) < rows[o.pot]]
+        if stray:
+            raise ValueError("observation rows outside their pot's output (observation, pot, row, n_rows): "
+                             f"{stray[:5]}")
         groups: Dict[Tuple, List[int]] = {}
         for i, pot in enumerate(arrays):
             groups.setdefault((_signature(pot), modes[i]) if problem.batch == "vmap" else (i,), []).append(i)
@@ -168,6 +181,8 @@ class Compiled:
         forcing = problem.forcing
 
         def solve_one(x, pot, adjoint, mode):
+            """(ys, failed, sweeps): failed includes an unconverged pH fixed point (``network.integrate``); sweeps
+            are the fixed point's counts per segment (zeros for a pH-free network)."""
             theta = theta_from_vector(net, base.at[free].set(x))
             if forcing is None:
                 run = integrate(net, theta, pot, adjoint=adjoint, throw=False, mode=mode, **solve)
@@ -175,7 +190,8 @@ class Compiled:
                 from .forcing import integrate_forced
 
                 run = integrate_forced(net, theta, pot, forcing, adjoint=adjoint, throw=False, **solve)
-            return run.ys, jnp.any(run.failed)
+            sweeps = run.ph.sweeps if getattr(run, "ph", None) is not None else jnp.zeros(run.failed.shape, jnp.int32)
+            return run.ys, jnp.any(run.failed), sweeps
 
         def compile_for(mode):
             def states(x, pot):
@@ -183,11 +199,11 @@ class Compiled:
 
             def states_and_jac(x, pot):
                 def f(x_):
-                    ys, failed = solve_one(x_, pot, diffrax.ForwardMode(), mode)
-                    return ys, (ys, failed)
+                    ys, failed, sweeps = solve_one(x_, pot, diffrax.ForwardMode(), mode)
+                    return ys, (ys, failed, sweeps)
 
-                dys, (ys, failed) = jax.jacfwd(f, has_aux=True)(x)
-                return ys, dys, failed
+                dys, (ys, failed, sweeps) = jax.jacfwd(f, has_aux=True)(x)
+                return ys, dys, failed, sweeps
 
             if problem.batch == "vmap":
                 return jax.jit(jax.vmap(states, in_axes=(None, 0))), jax.jit(jax.vmap(states_and_jac,
@@ -197,23 +213,36 @@ class Compiled:
         self._compiled = {mode: compile_for(mode) for mode in dict.fromkeys(self.modes)}
         self.calls = {"residual": 0, "jacobian": 0}
         self.compile_seconds: Dict[str, Optional[float]] = {"residual": None, "jacobian": None}
+        self.sweep_log: Dict[int, List[Tuple[int, ...]]] = {i: [] for i in range(len(problem.pots))}
 
     def _per_pot(self, with_jac: bool, x):
-        """{pot: (ys, dys or None, failed)} for every pot."""
+        """{pot: (ys, dys or None, failed)} for every pot; logs each pot's sweep counts."""
         out = {}
         for g, d, mode in zip(self.groups, self.data, self.modes):
             states, states_jac = self._compiled[mode]
             if with_jac:
-                ys, dys, failed = states_jac(x, d)
+                ys, dys, failed, sweeps = states_jac(x, d)
             else:
-                (ys, failed), dys = states(x, d), None
-            ys, failed = np.asarray(ys), np.asarray(failed)
+                (ys, failed, sweeps), dys = states(x, d), None
+            ys, failed, sweeps = np.asarray(ys), np.asarray(failed), np.asarray(sweeps)
             dys = None if dys is None else np.asarray(dys)
             if self.problem.batch == "vmap":
                 for j, p in enumerate(g):
                     out[p] = (ys[j], None if dys is None else dys[j], bool(failed[j]))
+                    self.sweep_log[p].append(tuple(int(s) for s in sweeps[j]))
             else:
                 out[g[0]] = (ys, dys, bool(failed))
+                self.sweep_log[g[0]].append(tuple(int(s) for s in sweeps))
+        return out
+
+    def sweep_changes(self) -> Dict[int, List[Tuple[int, ...]]]:
+        """Pots whose fixed-point sweep counts differed between the calls so far -> the distinct counts in the order
+        seen (empty for pH-free networks): where a fit's residual jumped and its Jacobian could not see it."""
+        out = {}
+        for p, seen in self.sweep_log.items():
+            distinct = list(dict.fromkeys(seen))
+            if len(distinct) > 1:
+                out[p] = distinct
         return out
 
     def _assemble(self, states, with_jac: bool):
@@ -277,6 +306,9 @@ class JaxFit:
     jacobian: np.ndarray
     failed_pots: List[int]
     converged: Optional[bool] = None
+    #: (inline pH) pots whose fixed-point sweep counts changed between the fit's evaluations -> the distinct counts:
+    #: there the residual jumped and the exact Jacobian could not see it (``Compiled.sweep_changes``)
+    sweep_changes: Dict[int, List[Tuple[int, ...]]] = field(default_factory=dict)
 
     def as_dict(self, keys: Sequence[Tuple[str, str]]) -> Dict[str, Any]:
         names = [f"{m}.{k}" for m, k in keys]
@@ -284,7 +316,8 @@ class JaxFit:
                 "start": dict(zip(names, map(float, self.start))), "status": self.status, "message": self.message,
                 "nfev": self.nfev, "njev": self.njev, "budget": self.budget, "seconds": self.seconds,
                 "compile_seconds": self.compile_seconds, "failed_pots": self.failed_pots,
-                "converged": self.converged}
+                "converged": self.converged,
+                "sweep_changes": {str(k): [list(t) for t in v] for k, v in self.sweep_changes.items()}}
 
 
 def fit(problem: JaxProblem, start: Sequence[float], budget: int = 200, *, compiled: Optional[Compiled] = None,
@@ -327,7 +360,7 @@ def fit(problem: JaxProblem, start: Sequence[float], budget: int = 200, *, compi
                  start_cost=float(0.5 * r0 @ r0), status=int(result.status), message=str(result.message),
                  nfev=count["nfev"], njev=count["njev"], budget=int(budget),
                  seconds=round(time.perf_counter() - t0, 3), compile_seconds=dict(comp.compile_seconds),
-                 residuals=r, jacobian=j, failed_pots=failed)
+                 residuals=r, jacobian=j, failed_pots=failed, sweep_changes=comp.sweep_changes())
     if require_converged is not None:
         ok = out.status > 0 and not failed
         if require_converged == "raise" and not ok:
@@ -393,7 +426,8 @@ def fd_check(problem: JaxProblem, x: Sequence[float], compiled: Optional[Compile
         steps.append(h)
     scale = np.maximum(np.max(np.abs(jac), axis=0), 1e-300)
     col = np.max(np.abs(jac - fd), axis=0) / scale
-    return {"max_relative_column_error": float(col.max()), "per_column": col.tolist(), "steps": steps}
+    return {"max_relative_column_error": float(col.max()), "per_column": col.tolist(), "steps": steps,
+            "sweep_changes": comp.sweep_changes()}
 
 
 def residual_tolerance_check(problem: JaxProblem, x: Sequence[float], loose: float = 1e-6,

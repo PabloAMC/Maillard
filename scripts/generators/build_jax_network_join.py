@@ -319,7 +319,9 @@ def stage_fit_jacobian(j: Join) -> Dict[str, Any]:
             "residual_equals_network_integrate": float(np.max(np.abs(r - expect))), "failed": failed,
             "jax_jacobian_s": min(times), "jax_jacobian_first_call_s": first, "jax_residual_s": t_res,
             "fd_check_max_relative_column_error": check["max_relative_column_error"],
-            "fd_check_per_column": check["per_column"], "engine_forward_fd_s": t_eng,
+            "fd_check_per_column": check["per_column"],
+            "fd_check_sweep_changes": {str(k): [list(t) for t in v] for k, v in check["sweep_changes"].items()},
+            "sweeps_seen": [list(t) for t in dict.fromkeys(comp.sweep_log[0])], "engine_forward_fd_s": t_eng,
             "engine_runs": 1 + len(coords), "engine_steps": [10 * step_of(c) for c in coords],
             "max_col_rel_jax_vs_engine_forward_fd": float(np.max(np.max(np.abs(jac_dex - eng), axis=0) / col_scale)),
             "col_rel_jax_vs_engine_forward_fd": (np.max(np.abs(jac_dex - eng), axis=0) / col_scale).tolist(),
@@ -503,7 +505,9 @@ def markdown(r: Mapping[str, Any]) -> str:
               f"{f['residual_equals_network_integrate']:.1e}; failed pots {f['failed'] or 'none'}.",
               f"- The exact Jacobian against `fit.fd_check`'s central differences of the same residual (column-scaled "
               f"steps, at the fit tolerance, so solver noise / step bounds the agreement), per column: "
-              + ", ".join(f"{x:.1e}" for x in f["fd_check_per_column"]) + ".",
+              + ", ".join(f"{x:.1e}" for x in f["fd_check_per_column"]) + ". Sweep counts seen over every "
+              f"evaluation (`Compiled.sweep_log`): {f.get('sweeps_seen', '?')}; pots whose count moved "
+              f"(`sweep_changes`): {f.get('fd_check_sweep_changes') or 'none'}.",
               f"- Against the engine's own forward differences at steps {f['engine_steps']} (one-sided: truncation "
               "O(step), plus LSODA's noise / step), per column: "
               + ", ".join(f"{x:.1e}" for x in f.get("col_rel_jax_vs_engine_forward_fd", [])) + "; the columns' "
@@ -551,10 +555,12 @@ def markdown(r: Mapping[str, Any]) -> str:
           "- **The sweep count is blind to its own jumps.** The fixed point stops on a discrete rule (residual < "
           "1e-3 pH after at least the minimum sweeps); every derivative here is the derivative AT a fixed sweep count. "
           "Where a perturbation changes the count, the trajectory jumps (by up to ~the tolerance in pH) and no "
-          "derivative sees it; a central difference that straddles the change does. The run reports the count "
-          "(`PhRun.sweeps`), so a fit can flag pots whose count moved between evaluations; a smooth surrogate (a "
-          "fixed sweep count per fit, or the implicit-function derivative of the converged fixed point) is a model "
-          "change and needs its own key.",
+          "derivative sees it; a central difference that straddles the change does. It is detected, not removed: "
+          "the run reports the count (`PhRun.sweeps`), `fit.Compiled` logs every pot's counts per call and "
+          "`JaxFit.sweep_changes` / `fd_check`'s `sweep_changes` name the pots whose count moved. A smooth surrogate "
+          "(a fixed sweep count per fit, or the implicit-function derivative of the converged fixed point) is a "
+          "model change and needs its own key. A fixed point left above `PhModel.flag` is a failed pot "
+          "(`PhRun.unconverged`, the engine's `ph_fixed_point_converged = False`).",
           "- **Inline-pH table jumps** (Zheng & Ho's boundary at label pH 5.0, the thiamine floor at 6.25) are crossed "
           "at a time that depends on theta; the derivative misses the crossing term (contract sec. 2.4, unchanged).",
           "- **The cooled pH is not yet a Network observable** (it needs SID, theta and the buffer, not one state): "
