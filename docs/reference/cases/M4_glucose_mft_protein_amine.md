@@ -576,8 +576,24 @@ declared and are not changed after reading:
   - part A is structure only (FM7), so a met role feeds a later part-A case, not this one;
   - P ~0.5.
 
-The SI of each is read under the same role. A dossier for each records whether the role is MET (sec. 2.9 table
-below, once read).
+The SI of each is read under the same role. A dossier for each records whether the role is MET.
+
+**Outcomes (read 2026-11-06 after the confirmation above; first reader).**
+
+| paper | dossier | role | outcome |
+|---|---|---|---|
+| Lei et al. 2024, Food Res. Int. 188:114454 (Dalian Polytechnic University) | `lei2024_extraction.md` | decisive for D1 (fed form) only if NF and MFT from the fed Cys-glucose ARP with recovery, not a BTBU / CAAS lab; else evidence for D5 / arm 3 | **NOT MET.** Purified "ARP" (identity not secured: NMR anomalies), 0.01 mmol, **dry**, air, micro-chamber at 120 - 180 C for 120 min. Semi-quantified against one internal standard (RF 1), no recovery. MFT only at 150 / 160 C (4.00 ± 1.11 / 2.04 ± 0.03 ug/g), identified by RI / MS only, with RI 979 vs the cited LRI 869. **No norfuraneol.** No consumed-ARP denominator, no matched glucose + Cys pot. The SI is DFT rate constants only (excluded). Fallback: weak evidence for D5 (a fed pool gives sulfur volatiles and a library-matched MFT). It does not separate R4' from R1 / R5 |
+| Wang Y. et al. 2019, Food Res. Int. 123:403 (Nanchang University) | `wang2019_extraction.md` | part A: decisive for HMF only if an Asn + hexose pot carries HMF at >= 2 pH with lipid fixed | **MET IN FORM, CONFOUNDED.** The lipid-free Asn + glucose control at 180 C, 30 min gives HMF ~12 (water, initial pH 4.6) vs ~9 nmol/mL (0.4 M acetate, pH 6.0) (Fig. 2C, read by eye). But buffer and pH change together, and the cooled pH converges (5.7 vs 5.9; SI Table S7). Same pots: 3-DG 65.6 vs 24.6, MGO 65.7 vs 322 nmol/mL (Table 2). It goes to the later part-A case with a declared acetate term and an explicit pH scale; part A is structure only here |
+
+**Does either change the decision? No.**
+- Neither supplies a credited unit for part G: Lei misses NF and recovery, and under ruling 2 nothing read after the
+  freeze-ready text could credit a rival anyway.
+- Neither touches R1 vs R5 (no label, no O2 contrast), R4' (no arm-3 denominator) or R0's falsified route.
+- Wang 2019 is part-A evidence, and part A is an engine-structure requirement only (FM7).
+- So the status stays "READY TO FREEZE as development grade, decider W6, pending the reduced-model power check". The
+  plan stays: build only the W3 structure (part G's species and the part-A classes, at parity, off by default) and the
+  reduced forced-input mini-model.
+- Neither paper becomes a band source; neither enters a ledger or a fit table.
 
 **Held dossiers (2026-11-06 screen).** Open question 7 asked for a screen of every held dossier that names glucose
 with a thiol or a deoxyosone. That screen found 199 such files; 135 were not cited in the 2026-11-05 text. Each was
@@ -1320,3 +1336,16 @@ Still before any result of the change; no engine run on any pot. Started from th
   (M2's TEST; label arithmetic suffices). The odds are rewritten.
 - **The decisive-measurements proposal** is updated: R4', arm 3's matched pot, the label / OPD / standard fixes, and the
   second temperature. It is in the PR body too.
+
+### Changelog: 2026-11-06 (later still), two candidates obtained and read; status unchanged
+
+- The roles of Lei 2024 (10.1016/j.foodres.2024.114454) and Wang Y. 2019 (10.1016/j.foodres.2019.05.001) were
+  confirmed and committed (a29535db) before either paper or its SI was opened.
+- Dossiers `lei2024_extraction.md` and `wang2019_extraction.md` were added, and both SI files read under the same
+  roles.
+- Lei 2024: the decisive role is **NOT MET** (no NF, no recovery, dry; SI is DFT only, excluded). It is weak evidence
+  for D5.
+- Wang 2019: part A's role is **MET IN FORM, CONFOUNDED** (pH x 0.4 M acetate; the cooled pH converges). It goes to the
+  later part-A case.
+- Neither changes "freeze as development grade, decider W6" or "build only the W3 structure plus the reduced-model
+  power check".
