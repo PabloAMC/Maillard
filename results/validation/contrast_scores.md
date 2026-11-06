@@ -21,3 +21,5 @@ Pairs from one study share rows, so they are not independent; the study count is
 | out of sample | 37 (5) | 25 | 0.31 dex | 24 | 12/25 | 0.28 dex | 23 |
 | lane: acrylamide | 5 (2) | 5 | 0.71 dex | 2 | 0/5 | 0.71 dex | 2 |
 | lane: sulfur | 76 (3) | 60 | 0.55 dex | 37 | 45/60 | 0.60 dex | 33 |
+
+Mixed pairs skipped (one row with an absolute level, one relative-only; no ratio exists): 0.

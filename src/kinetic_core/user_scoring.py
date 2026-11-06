@@ -166,7 +166,7 @@ def score_system(spec: Mapping[str, Any], *, pass_band: float = PASS_BAND_LEVEL,
             # none is scored against yours. The measurement is kept in the record: a second laboratory's absolute
             # values are exactly what would lift the refusal (re-scored under H0's rule, not here).
             refused.append(
-                {"compound": compound, "measured_ppb": rec["value"], "reason": thiol_relative_only.refusal_text(),
+                {"compound": compound, "measured_ppb": rec["value"], "reason": thiol_relative_only.refusal_text(calibration, compound),
                  "lane": declaration.lane, "envelope_state": declaration.state, "absolute_refused": True}
             )
             continue
