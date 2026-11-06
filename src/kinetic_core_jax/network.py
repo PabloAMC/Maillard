@@ -383,7 +383,7 @@ def integrate(net: Network, theta, pot: Mapping[str, Any], *, solver=None, rtol:
     if net.needs_ph:
         raise UnsupportedConfiguration(
             "the composed network's pH coupling (charge balance inside the RHS, contract v2 sec. 2.4) is not ported "
-            "yet; the sulfur bake-off (lane.py / model.py) carries it standalone")
+            "yet; the sulfur lane's module carries it in its own driver (sulfur_lane.integrate)")
     missing = [x for x in net.pot_inputs if x not in pot]
     if missing:
         raise ValueError(f"the pot lacks {missing}, which the network's modules read (NaN stands for None)")
