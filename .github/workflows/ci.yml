@@ -122,6 +122,11 @@ jobs:
       # signature, diagnosis and probe record is in docs/reference/experiment_register.yml, well-formed.
       - name: Experiment register gate
         run: python scripts/ci/experiment_register_gate.py
+      # 2026-11-06 (plan sec. 7 S1). The evidence-tier record: every row tiered, inputs current, no fitted_identified
+      # without its profile, no tier change without its review. The engine's enumeration of the shipped coordinates
+      # needs numpy, so the full gate runs in the unit tier; this job runs the record-only checks.
+      - name: Evidence tier gate (record only)
+        run: python scripts/ci/evidence_tier_gate.py --record-only
 
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.
@@ -176,6 +181,11 @@ jobs:
       # dossier. It imports the engine (numpy), so it runs here, not in the dependency-light gates job.
       - name: Evidence anchor gate
         run: python scripts/ci/evidence_anchor_gate.py
+
+      # 2026-11-06 (plan sec. 7 S1): every shipped coordinate the engine reads has a tier in the evidence-tier record
+      # (plus the record-only checks the gates job runs). Imports the engine, so it runs here.
+      - name: Evidence tier gate
+        run: python scripts/ci/evidence_tier_gate.py
 
       # 2026-09-01: data/ is read-only at runtime. Fails if the tier above wrote,
       # rewrote or deleted anything under data/ (see scripts/ci/data_readonly_gate.py).
