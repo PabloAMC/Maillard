@@ -908,6 +908,12 @@ must not decide the verdict.)
   it exists): part (i) closed for shipping (sec. 18.1); one falsification-only re-reading of the stored draws with the
   +-omega corner term replaced by measurement noise (and a lab-repeat offset / shape form for the unbuffered Amadori
   class). Nothing above sec. 18 is edited; part (ii) is untouched by A1.
+- v3.8, 2026-11-06 (Amendment A2, sec. 21; written after A1's run, its confirmation fits and an independent
+  adversarial review of both (STANDS WITH FIXES), before any number under it exists): the buffered-pot noise term
+  derived from Meynier's own statement and read over its defensible range; the kill restated as "B0 + the shipped
+  cysteine sinks", the ledger contradiction resolved, one attribution fit; S3's posterior-predictive test; per-signature
+  false-kill rates; the commit-message correction; the shipped path written after the numbers. Nothing above sec. 21
+  is edited except this line.
 
 ## 20. Amendment A1 (v3.7, 2026-11-06): part (i), falsification only
 
@@ -1050,3 +1056,184 @@ An independent confirmer returned **CONFIRMED WITH EDITS (text only)**. Its thre
 - All three edits make kills harder or clearer, never easier.
 - With this, the single falsification run of sec. 20.5 has the coordinator's go, as does the sec. 3.8 confirmation fit
   if a would-be kill appears.
+
+## 21. Amendment A2 (v3.8, 2026-11-06): part (i), the falsification re-examined
+
+*Written by a new session on the coordinator's instruction of 2026-11-06, after an independent adversarial review of
+A1's run and its confirmation fits returned **STANDS WITH FIXES** (P ~ 0.80 that B0 cannot reproduce Meynier; P ~ 0.70
+on the attribution to the amine ledger). Committed before any number under it exists. Nothing above this section is
+edited except the revision-log line (sec. 19). Each step below runs once; its record stands whatever it says.*
+
+### 21.0 What the author has seen
+
+- Everything in sec. 20.0, and A1's records: `kinetic_core_m1b_part_i_falsification` (B0, B2, B3 would-be kills; B1,
+  B13 "not testable here"; false-kill rates 0.24 / 0.41 for B0 in the primary / offset-shape families) and the three
+  confirmation fits (`..._confirm_{B0,B2,B3}`: kills confirmed). At B0's confirmation fit the Meynier cysteine drifts
+  are -0.90 / -1.00 / -0.72 / -0.44 / -0.41 (labels 4.5 - 6.5), the lumped yield is ~2e-8, and the cost is 21.883.
+- The review's findings, including one number from its probe: with A1's shape term at s x 2 put on sigma-Mey (sd
+  sqrt(2 r^2 + 2 (2 s_shape)^2) = 0.458), **74 of B0's 1280 stored draws pass all four signatures, so B0 would read
+  "not falsified"**. The review's probe scripts were read; the output of two of them (the pyrophosphate pKa shift and
+  the k_cys_thermal scaling) was not.
+- The shipped code of the cysteine sinks (sec. 21.2), read for this amendment; no engine run.
+- **Foreseeable:** at B0's confirmation-fit point the smallest drift is -0.41, so any sigma-Mey sd near 0.1 kills that
+  point; a sd near 0.46 rescues some screen draws.
+
+### 21.1 The noise term of a buffered pot (replaces sec. 20.2's "Buffered pots get nothing more")
+
+**Stated openly.** Sec. 20.2 gave sigma-Mey only the meter term (sqrt 2 x r = 0.071) after the drifts were known (sec.
+20.0), while the unbuffered class got A1's offset / shape term. Put on Meynier at s x 2 (sd 0.458), the shape term
+rescues B0 on the screen's draws (sec. 21.0). The buffered-pot term is therefore derived here from measurement-level
+arguments, fixed before any number, and the verdict is read over its whole defensible range.
+
+1. **Meynier's own statement bounds it (N-bound).** "No change of more than 0.2 pH unit occurred after heating" covers
+   all 20 pots of the paper (glycine, lysine, cysteine and methionine, each at the five labels; meynier1995 dossier).
+   - Each reported drift is (true drift + e), e ~ N(0, sigma^2), independent across pots. sigma is everything that is
+     not the pot's chemistry: the two readings, the run-to-run spread, the buffer make-up.
+   - The most permissive case is a true drift of exactly 0 in every pot. **sigma_max** is the largest sigma with
+     P(all 20 |e_i| <= 0.2) >= 0.05, by Monte Carlo (10^6 sets per sigma on a 0.001 grid, seed 20261108), checked
+     against the closed form (2 Phi(0.2 / sigma) - 1)^20 = 0.05.
+   - A sd above sigma_max is contradicted at the 5 % level by the statement it would be applied to, even if no pot
+     drifted at all.
+   - **Read-resolution form.** If Meynier read pH to 0.1 unit, a drift up to 0.25 is reported as "0.2". So
+     sigma_max,0.25 is computed with edge 0.25, and that form also censors sigma-Mey at 0.25.
+2. **Buffer-capacity transfer of A1's shape term (N-beta), per label.** A pH deviation is a proton-count deviation
+   divided by the buffer capacity, so the shape term transfers as s_k = m x s_shape x beta_ref / beta_k, m in {0.5, 1,
+   2}, and sigma_k = sqrt(2 r^2 + 2 s_k^2).
+   - beta_k: Meynier's cysteine pot at label k at t = 0 (0.2 M pyrophosphate, its cysteine and ribose), cooled
+     (25 C), at the ionic strength the balance solves, Davies-corrected (sec. 21.6, item 3).
+   - beta_ref: Zhou's ARP-alone label-8 pot (the design whose repeat gave s_shape) at B0-pinned's 60-min state, the
+     same way. This is the incumbent's state, the only one on disk (declared).
+3. **The defensible range D.** sigma-Mey's sd is defensible if it lies in [0.071, sigma_max] at every label (edge 0.2),
+   or in [0.071, sigma_max,0.25] with edge 0.25.
+   - The verdict is computed at sigma = 0.071, 0.100 and sigma_max (edge 0.2), at sigma_max,0.25 (edge 0.25), and at
+     each N-beta set (m = 0.5, 1, 2) that lies in D.
+   - N-beta sets outside D and the review's unscaled shape forms (s x 1: sd 0.237; s x 2: sd 0.458) are computed and
+     printed, labelled "outside D (contradicted by Meynier's statement)". They do not enter the verdict.
+4. **Where it enters.** In every A1 form (sec. 20.3), sigma-Mey's sd is the A2 choice; the A1 form's r and s still
+   govern sigma-Hou-level and sigma-Hou-shape as written.
+   - A rival is falsified on the screen's draws only if it is killed in every (A1 form x A2 choice in D) cell.
+   - **If the kill holds for some choices in D and not for others, the rival is "conflicting / undecided", not
+     falsified**, and is carried with B1 and B13 as S3's union (sec. 21.6).
+5. The same choices replace sigma-Mey's synthetic noise in sec. 21.4.
+
+### 21.2 Attribution: "B0 + the shipped cysteine sinks"
+
+1. **The ledger contradiction, resolved from chemistry and the cited source (no number needed).**
+   - The conflict: `r_cys_thermal`'s docstring (`src/kinetic_core/sulfur.py`, B2.3 charge fix) says the lump's largest
+     member, cystine, "RETAINS both of cysteine's titratable centres", and that the pair "had to move TOGETHER". The
+     products and `CENTRE_LEDGER` (same commit, 7f65ccaa) carry the carboxyl into CBX, send the nitrogen to FRAG_N and
+     declare amine -1 on `AMINE_FATE_BASIS`.
+   - The source: Zhai 2023, re-published as Kang 2026 SI Fig. S4 (`KANG_CYS_ANCHOR`), measures the loss of FREE
+     cysteine, 10 mM, pH 7, sealed, sugar-free, 100 - 140 C. It names no product.
+   - The chemistry: of the lump's named members, cystine keeps both centres of each half (alpha-ammonium pKa ~8.0 /
+     8.7, carboxyl ~1.5 / 2.1); thioether self-condensation (lanthionine type) keeps both; a cyclic dipeptide would
+     bury both. None destroys the amine while carrying the carboxyl. `AMINE_FATE_BASIS` rests on the amine being
+     consumed by Maillard partners into pyrazines, N-heterocycles and melanoidins (Zhou's sugar pots), and the
+     measured system has no such partner.
+   - **Finding: the docstring is right; the shipped encoding is wrong for this step.** At pH 4.5 - 7 it releases ~1
+     proton per cysteine consumed where the step's own chemistry releases ~0. `ch_cys_ox` (autoxidation to cystine,
+     "routed exactly as r_cys_thermal") carries the same error. `r_cys_h2s` (H2S + NH3 + pyruvate) is not a ledger
+     error: its NH3 is a base that stays titratable unless consumed, and in a sugar pot that is B1's phi_cys question.
+2. **The fix, in its own commit.** Flipping the shipped encoding moves the dynamic pH of every cysteine pot, which is a
+   shipped output, and this PR moves none (sec. 21.6). So that commit:
+   - corrects the docstring and the ledger's basis text to state what the code does and that the chemistry
+     contradicts it;
+   - adds the chemically right encoding as an opt-in switch: `ph.amine_survival`'s `retained_steps`, whose named steps'
+     amine survives as ammonium at fraction 1 in B1's bookkeeping pool (inline coupling only; off by default and
+     bit-identical when off), with a test;
+   - and the default flip is listed in sec. 21.8 as a never-cased structural choice for S1 / S2.
+3. **The claim restated.** A1's kill, where it stands, is a kill of **"B0 + the shipped cysteine sinks"** (their
+   encodings and constants), not of B0's balance alone.
+4. **The attribution fit F-A** (one fit, run once).
+   - **Rival:** B0, with the shipped encodings.
+   - **Free:** the confirmation fit's set (R0's 17 + the lumped yield), with `k_cys_thermal`'s search bound replaced by
+     its band, plus mu_h2s, a log10 multiplier on Zheng & Ho's operative `r_cys_h2s` rate (every pH and temperature),
+     within its band. The other free constants keep the confirmation fit's bounds; they are not cysteine sinks.
+   - **Band of log10 k_cys_thermal** (log10 /min at the engine's 145 C reference; Ea 55.1 kJ/mol as shipped):
+     - upper end: Kang's measured total free-cysteine loss at pH 7, k = 8.0e4 exp(-55.1 kJ/mol / RT) /min (the shipped
+       anchor), at 145 C. A measurement of the whole of a pool's loss is an upper bound on any one of its channels (S1,
+       "bounded");
+     - lower end: that x rho, rho = the smallest, over Meynier's five labels, of Zheng & Ho's measured pH law
+       k(pH) / k(7) at 140 C (`cysteine_thermolysis_k`). It is the only measured pH law of a thermal cysteine loss (an
+       analogue, S1), and the pH-flat constant serves pH 4.5 - 7.
+   - **Band of mu_h2s:**
+     - upper end: min(0, log10[k_Kang(140 C) / k_Zheng(140 C, pH 7)]). Zheng's constants are flagged as an upper bound
+       on free-sulfide release, and their extrapolation cannot exceed Kang's measured total loss at pH 7;
+     - lower end: log10 of exp(-(Ea_Zheng,7 - Ea_min) / R x (1/383.15 - 1/413.15)), where Ea_min is the lowest
+       measured barrier of the sulfur class (`ea_class_prior`): Zheng's 110 C constant carried to 140 C with that
+       barrier instead of its own. This is the 30 C extrapolation past Zheng's data, bounded by the class.
+   - **Objective:** B60's 52 rows and prior (the confirmation fit's objective), plus Meynier's five cysteine pots,
+     each as a deviance residual sqrt(-2 ln P(|d_k + e| <= 0.2)), e ~ N(0, sigma_max^2) (the most permissive
+     defensible choice). The five pots run in-process with BDF at the screen's tolerances (V-solver: BDF and LSODA
+     agree to 8e-8 pH).
+   - **Start:** B0's converged confirmation-fit point; the two new coordinates at the points of their bands nearest the
+     shipped values. M1's optimiser settings and budget, with one continuation of a status-0 segment.
+     MAILLARD_WORKERS = 2, memory-gated (>= 35 % free).
+   - **Reported:** status; the five drifts; sigma-Mey under each choice of sec. 21.1; the B60 cost (52 rows + prior)
+     at F-A and its change from the confirmation fit's 21.883; which band edges are active.
+   - **Reading.** "B0 + the sinks meets Meynier" iff every drift has P(|d + e| <= 0.2) > 0.05 at sigma_max. A B60
+     cost increase that buys it is reported, not judged here (S2 / S4 would judge it).
+   - **Diagnostic only, no verdict:** the drifts at F-A's and at the confirmation fit's points with `retained_steps =
+     (r_cys_thermal, ch_cys_ox)`.
+
+### 21.3 S3's test at the converged fit
+
+S3 (STATUS_AND_PLAN sec. 7): a rival is falsified when its converged best fit is inadequate (posterior-predictive p <
+0.05 after Holm across the datasets tested). A1's sigma-Mey was a signature screen, not this test.
+
+- **Where.** B0 at F-A (decisive: the rival's best fit with the tested data in its objective) and at its confirmation
+  fit (reported). B2 and B3 at their confirmation fits (reported; they have no F-A).
+- **Predictive.** The Laplace covariance of the fit's free coordinates (`fitting.laplace` on that fit's objective),
+  propagated by a central-difference Jacobian to the control-pot predictions the signatures read (Meynier cysteine 5,
+  Hou forced 6, Zhou ARP alone 3).
+- **One p per signature.**
+  - sigma-Mey: P(all five read within the edge), by Monte Carlo (2 x 10^5 draws of d ~ N(d_hat, J Sigma J^T) plus e):
+    the probability of the observed outcome, which is the extreme one (all within).
+  - sigma-Hou-level: the two-sided normal p of 5.05 - pH20_hat, sd sqrt(meas^2 + var_pred [+ s_shape^2 + s_off^2]).
+  - sigma-Hou-shape: the two-sided normal p of the measured minus predicted 60 -> 120 min fall, sd sqrt(2 meas^2 +
+    var_pred [+ 2 s_shape^2]).
+  - sigma-Zhou: the two-sided normal p of the measured minus predicted label 6 -> 8 rise, sd sqrt(sd_6^2 + sd_8^2 +
+    var_pred [+ 2 (s_shape^2 + s_off^2)]). (The bracketed terms apply under the offset / shape forms.)
+- **Holm** across the four (`predictive_densities.holm`, alpha 0.05), in every (A1 form x A2 choice) cell.
+- **Reading.** Falsified under S3 iff some signature is rejected after Holm at F-A in every cell with an A2 choice in
+  D. If the reading differs across D: "conflicting / undecided".
+
+### 21.4 Per-signature false-kill rates and kill power, every rival
+
+On the stored draws, with A1's synthetic sets (R = 200 per truth and family, seed 20261108):
+- per rival and per signature, the fraction of sets from the rival's own best draw in which that signature alone fails
+  at every draw (the false-kill rate by signature), and the same from every other truth (kill power by signature),
+  with Wilson 95 % CIs;
+- the fraction of sets in which Meynier reads all five within;
+- under A1's sigma-Mey (sqrt 2 x r) and under sigma_max (the generating noise equals the reading's noise).
+
+### 21.5 The commit-message record
+
+Commit 8eda72ef's message calls the confirmer "the blind confirmer". Sec. 20.7 records a partial un-blinding: it read
+sec. 18.1 and sec. 20.0's v3.6 figures. The correct description is **"an independent, partially un-blinded
+confirmer"**. History is not rewritten; this line is the correction.
+
+### 21.6 The shipped path
+
+1. Written after the numbers, as sec. 21.8, for a separate PR. **No shipped output moves in this PR.**
+   - If B0 + the sinks stays falsified: decide between refusing the balance-dependent outputs and a B1 u B13 envelope
+     (S3: the union of the carried rivals' envelopes), and state whether B1 and B13 run in the engine today.
+   - If undecided: B0, B1 and B13 are carried as S3's union.
+   - Either way, list the outputs affected, and list the ledger's default flip (sec. 21.2) as a structural choice for
+     S1 / S2.
+2. Nothing else in parts (i) or (ii) changes.
+3. **Minor (the review's item 6).** `ph_state.buffer_capacity_mmol_per_ph` ignores ionic strength. It gains an
+   `ionic_strength_m` argument (default 0: every existing caller unchanged), and A2's betas use the solved ionic
+   strength (Davies). CF-084's beta = 5.4 mmol/L per pH at label 4.5 is an I = 0 number; A2's record prints the
+   Davies value beside it. Davies beyond ~0.5 M is an approximation (stated).
+
+### 21.7 Records
+
+- `kinetic_core_m1b_part_i_a2.{json,md}`: the noise derivation, the verdicts by choice, the per-signature rates and
+  the S3 p-values.
+- `kinetic_core_m1b_part_i_a2_attribution_fit.{json,md}`: F-A.
+- Each is written once; the generator refuses a second run.
+
+### 21.8 Results and the proposed S3 application
+
+*(appended after the run)*
