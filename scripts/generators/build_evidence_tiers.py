@@ -7,12 +7,18 @@ shipped parameters, the frozen fit reports, their Laplace covariances and slice 
 the sulfur flux evidence, the data wishlist and the registers). One row per coordinate (log10 k_ref and Ea separately,
 and every band-carried parameter); the summary lists the S2 candidates (fitted coordinates a direct measurement
 contradicts, with the conditions S2 needs to match) and the S4 constants (fitted, unidentified, high output
-sensitivity). Moves no constant and runs no engine integration.
+sensitivity). Moves no constant and runs no engine integration. Each row carries ``tier_changes``: its entries in
+``docs/reference/evidence_tier_changes.yml`` (the hand-kept register of changes since the frozen baseline).
 
-    python scripts/generators/build_evidence_tiers.py
+``--freeze-baseline`` also writes ``results/validation/incumbent_evidence_tiers_baseline.json`` (each row's tier at the
+audit), WRITE-ONCE: it refuses when the file exists. ``scripts/ci/evidence_tier_gate.py`` checks every later tier
+against it and the register.
+
+    python scripts/generators/build_evidence_tiers.py [--freeze-baseline]
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -24,6 +30,7 @@ if str(ROOT) not in sys.path:
 from src import data_paths, evidence_tiers, provenance  # noqa: E402
 
 OUT = data_paths.VALIDATION_DIR / "incumbent_evidence_tiers.json"
+BASELINE = data_paths.VALIDATION_DIR / "incumbent_evidence_tiers_baseline.json"
 PARAMETER_SOURCES = sorted((ROOT / "src" / "kinetic_core").glob("parameters*.py")) + [
     ROOT / "src" / "evidence_tiers.py", ROOT / "src" / "kinetic_core" / "acrylamide_conditions.py"]
 
@@ -177,6 +184,10 @@ def markdown(payload: dict) -> str:
           f"- analogue coordinates with no declared band ({len(s['analogue_without_a_declared_band'])}): "
           + ", ".join(f"`{x}`" for x in s["analogue_without_a_declared_band"]),
           f"- unclassified ({len(s['unclassified'])}): " + (", ".join(f"`{u['coordinate']}` ({u['basis']})" for u in s["unclassified"]) or "none"),
+          "- tier changes since the frozen baseline (`docs/reference/evidence_tier_changes.yml`; upgrades need an "
+          "artifact and a second reader, downgrades a citation; `scripts/ci/evidence_tier_gate.py`): "
+          + (", ".join(f"`{r['id']}` {c.get('from')} -> {c.get('to')}" for r in rows for c in r.get("tier_changes") or [])
+             or "none"),
           "", "## 10. Every coordinate", "",
           "| coordinate | lane | value | tier | band | basis | conflicts named | sensitivity |", "|---|---|---|---|---|---|---|---|"]
     for r in rows:
@@ -205,7 +216,26 @@ def build() -> dict:
             **record}
 
 
-def main() -> int:
+def baseline(payload: dict) -> dict:
+    """The tiers at the audit, frozen: what every later tier is checked against (sec. 7 S1)."""
+    return {"artifact": "incumbent_evidence_tiers_baseline",
+            "frozen": {"date": provenance.today_iso(), "git": provenance.git_head(),
+                       "from": data_paths.rel(OUT),
+                       "rule": "write-once. A row whose tier differs from this one needs its change(s) in "
+                               "docs/reference/evidence_tier_changes.yml: an upgrade with an artifact and a second "
+                               "reader, a downgrade with a citation (plan sec. 7 S1; scripts/ci/evidence_tier_gate.py)"},
+            "tiers": {r["id"]: r["tier"] for r in payload["rows"]}}
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
+    parser.add_argument("--freeze-baseline", action="store_true",
+                        help=f"also write {data_paths.rel(BASELINE)} (write-once)")
+    args = parser.parse_args(argv)
+    if args.freeze_baseline and BASELINE.exists():
+        print(f"{data_paths.rel(BASELINE)} exists and is write-once; a tier change goes in "
+              "docs/reference/evidence_tier_changes.yml", file=sys.stderr)
+        return 1
     payload = build()
     OUT.write_text(json.dumps(payload, indent=1, default=str) + "\n", encoding="utf-8")
     OUT.with_suffix(".md").write_text(markdown(payload), encoding="utf-8")
@@ -213,6 +243,9 @@ def main() -> int:
     print(f"wrote {data_paths.rel(OUT)}: {s['coordinates']} coordinates; {s['by_tier']}; "
           f"{len(s['s2_candidates'])} S2 candidates, {len(s['s4_sensitive_unidentified'])} S4, "
           f"{len(s['label_conflicts'])} label conflicts")
+    if args.freeze_baseline:
+        BASELINE.write_text(json.dumps(baseline(payload), indent=1) + "\n", encoding="utf-8")
+        print(f"froze {data_paths.rel(BASELINE)}: {len(payload['rows'])} tiers")
     return 0
 
 

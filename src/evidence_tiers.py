@@ -90,7 +90,58 @@ INPUTS = {
     "unpinned": REF / "unpinned_constants.yml",
     "conflicts": data_paths.CONFLICTS_REGISTER,
     "choices": REF / "choices_register.yml",
+    "tier_changes": REF / "evidence_tier_changes.yml",
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# What the record must cover, and how a tier may change (S1: "upgrades need an artifact and a second reader;
+# downgrades need a citation"). ``scripts/ci/evidence_tier_gate.py`` reads these; the generator reads the same ones.
+# ---------------------------------------------------------------------------------------------------------------------
+
+#: The two coordinates of every shipped rate constant, tiered separately.
+COORDINATES: Tuple[str, ...] = ("log10_k_ref", "ea_kj_mol")
+#: Tiers a change can raise a coordinate TO, ranked: a move down this ranking, or out of it, is a downgrade.
+UPGRADE_RANK: Dict[str, int] = {"measured": 3, "analogue": 2, "bounded": 1, "fitted_identified": 1}
+#: The hand-kept register of tier changes since the incumbent audit (the frozen baseline). Each entry: ``coordinate``
+#: (a row id), ``from`` (the tier before; null for a coordinate new since the baseline), ``to``, ``date``,
+#: ``citation``; an UPGRADE also needs ``artifact`` (a file under results/validation/) and ``second_reader`` (who
+#: re-read the evidence). The generator copies each entry onto its row as ``tier_changes``.
+TIER_CHANGES = INPUTS["tier_changes"]
+
+
+def is_upgrade(before: Optional[str], after: str) -> bool:
+    """True when ``after`` is a stronger-evidence tier than ``before`` (a coordinate new since the baseline counts
+    from no tier).
+
+    A move into measured / analogue / bounded / fitted_identified is an upgrade unless it moves DOWN their ranking
+    (measured -> analogue); a lateral move between equal ranks (bounded <-> fitted_identified) counts as an upgrade.
+    Every other move (into fitted_unidentified, structural, conflicting_measurements, withdrawn, ...) is a downgrade.
+    """
+    if after not in UPGRADE_RANK or before == after:
+        return False
+    return before not in UPGRADE_RANK or UPGRADE_RANK[after] >= UPGRADE_RANK[before]
+
+
+def tier_changes(path: Any = None) -> List[dict]:
+    """The register's entries (``docs/reference/evidence_tier_changes.yml``), in file order."""
+    return list((yaml.safe_load((path or TIER_CHANGES).read_text(encoding="utf-8")) or {}).get("entries") or [])
+
+
+def shipped_parameters() -> Dict[str, Tuple[str, Any]]:
+    """Every rate constant the engine reads, keyed by constant: (its first Maillard lane, the parameter object)."""
+    from src.kinetic_core import engine
+
+    parameters: Dict[str, Tuple[str, Any]] = {}
+    for lane in engine.MAILLARD_LANES:
+        for key, p in engine.core_parameters(lane).items():
+            parameters.setdefault(key, (lane, p))
+    return parameters
+
+
+def shipped_coordinate_ids(parameters: Optional[Mapping[str, Tuple[str, Any]]] = None) -> List[str]:
+    """The row id of every shipped coordinate (``<constant>.log10_k_ref`` and ``<constant>.ea_kj_mol``)."""
+    return [f"{key}.{c}" for key in (shipped_parameters() if parameters is None else parameters) for c in COORDINATES]
+
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Vocabularies the record replaces or maps
@@ -1172,8 +1223,6 @@ def _extra_rows(priors: List[dict], fits: _Fits, register: List[dict]) -> List[d
 
 def build_record() -> dict:
     """The full record: one row per coordinate, the summaries the S2 and S4 rules need."""
-    from src.kinetic_core import engine
-
     fits = _Fits()
     envelope = _json("envelope")
     register = _yaml("conflicts").get("entries") or []
@@ -1194,10 +1243,7 @@ def build_record() -> dict:
                 if c["key"].startswith("k_"):
                     b38_sens.setdefault(c["key"], c["sensitivity_norm"])
 
-    parameters: Dict[str, Tuple[str, Any]] = {}
-    for lane in engine.MAILLARD_LANES:
-        for key, p in engine.core_parameters(lane).items():
-            parameters.setdefault(key, (lane, p))
+    parameters = shipped_parameters()
     pobjs = {k: p for k, (_, p) in parameters.items()}
     priors: Dict[Tuple[str, str], dict] = {}
     unmapped_priors: List[dict] = []
@@ -1225,7 +1271,7 @@ def build_record() -> dict:
     for key, (lane, p) in parameters.items():
         hits = _conflict_hits(key, register)
         sens = _sensitivity(key, lane, sulfur_constants, b38_sens, wishlist)
-        for coordinate in ("log10_k_ref", "ea_kj_mol"):
+        for coordinate in COORDINATES:
             row = _coordinate(p, lane, coordinate, fits, priors)
             row["dossiers"] = _dossiers(p)
             row["conflicts_named"] = hits
@@ -1240,9 +1286,15 @@ def build_record() -> dict:
                 w for wave, ws in withdrawn_by_fit.items() for w in ws if fit == wave or fit.startswith(wave + " ")]
             rows.append(row)
     rows += _extra_rows(unmapped_priors, fits, register)
+    changes: Dict[str, List[dict]] = {}
+    for entry in tier_changes():
+        changes.setdefault(str(entry.get("coordinate")), []).append(dict(entry))
+    for row in rows:
+        row["tier_changes"] = changes.pop(row["id"], [])
     return {"rows": rows, "summary": _summary(rows, wishlist, unpinned, sulfur_constants),
             "vocabulary_map": VOCABULARY_MAP, "structural_choices": list(STRUCTURAL_CHOICES),
             "withdrawn_or_corrected_fit_rows": withdrawn,
+            "tier_changes_without_a_row": [e for es in changes.values() for e in es],
             "rules": {"tiers": list(TIERS), "edge_fraction": EDGE_FRACTION, "dex_per_kj_mol_100_145C": DEX_PER_KJ_100_145,
                       "comparison_interval": "sec. 7 S2 (b): 95 % interval of (measurement - fitted value) with the "
                                              "reported noise, the within-lab between-paper spread, the between-lab "

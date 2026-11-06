@@ -268,3 +268,26 @@ def test_every_panel_bundle_is_scored_or_refused_with_a_reason(full):
     assert set(full["summary"]["by_panel"]) == {"trust_loop", "maillard_path_holdout", "external_matrix"}
 
 
+# ---------------------------------------------------------------------------
+# 2026-11-06 (M0 data corrections, batch 1): rows the curated DATA refuses
+# ---------------------------------------------------------------------------
+
+
+def test_a_row_the_data_refuses_is_refused_with_its_reason_and_the_datum_kept():
+    """`scoring_refused` on a target entry refuses that row before any number is read (panel.data_refusal); the
+    measured value stays in the bundle, and the bundle's other rows are scored as before."""
+    lin = data_paths.MAILLARD_PATH_HOLDOUT_DIR / "mp_holdout_fructose_asparagine_180C_Lin2022.json"
+    b = scoring.score_benchmark(lin, "maillard_path_holdout")
+    refused = {r["compound"]: r for r in b["refused_compounds"]}
+    hmf = refused["5-Hydroxymethylfurfural (HMF)"]
+    assert hmf["data_refused"] and hmf["reason"].startswith(panel.DATA_REFUSAL_TAG + ": ") and "CF-127" in hmf["reason"]
+    assert [r["compound"] for r in b["compounds"]] == ["Acrylamide"]
+    assert panel.load_bundle(lin)["holdout_targets"]["5-Hydroxymethylfurfural (HMF)"]["target_value"] == 12280.0
+
+
+def test_a_data_refusal_must_explain_itself():
+    assert panel.data_refusal({}) is None
+    with pytest.raises(ValueError):
+        panel.data_refusal({panel.DATA_REFUSAL_FIELD: "no"})
+
+

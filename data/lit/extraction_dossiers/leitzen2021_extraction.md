@@ -41,3 +41,16 @@ Directional claim DIC-03: glucose alone, 121 C, 18 min, aqueous: 3-DG > glucoson
 (the four species the trunk carries), independent of the B7/B13 sources. The same check DIC-01 made from
 Zhang 2020 — whose absolute levels are unusable — now stands on credible numbers. Recorded also: the
 repo's `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` bundle cites this DOI for HMF.
+
+## 5. M0 data corrections, batch 1 (2026-11-06; CF-128)
+
+Second reader against the PDF: Table 3 prints the 10 % solution's pH as 4.98 non-autoclaved and 5.17 / 4.67 / 4.36
+after scheme-A autoclaving at 111 / 116 / 121 C, all measured at room temperature after cooling (sec. 2.2); no
+"4.4-5.2" range is printed. Table 6 (not heat-sterilised reference, n = 3, ug/mL): GO 1.0 +/- 0.5, MGO 0.9 +/- 0.1, 2-KDG
+0.1, 3-DG and 3,4-DGE n.d., 5-HMF 0.1. Sec. 4.2.1: 225 mL PP bottles (Kautex) filled with 200 mL; double-distilled
+water. Sec. 4.2.2: "The total F0 value of a process ... takes into account the heating and cooling phases of the cycle",
+so the 18 min is F0, not a hold. Applied to `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021`: start pH 4.98
+(bench_cooled; 4.36 kept as `ph_end_measured`), the four carried levels as `carried_volatiles`, the vessel, and an F0
+note. The cycle profile stays unprinted (CK-03 step 2).
+Buffer (coordinator review of PR #88): recorded as **none added** (sec. 4.2.1: glucose monohydrate in double-distilled
+water, nothing else), not `buffer_unknown`.

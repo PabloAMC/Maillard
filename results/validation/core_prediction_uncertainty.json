@@ -5,29 +5,8 @@
       "bench_file": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
       "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 1.11224856192222,
-          "compound": "acrylamide",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "acrylamide",
-          "measured": 150.0,
-          "measured_ppb": 150.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 0.03027279041568782,
-          "predicted_p5": 0.006559934930715203,
-          "predicted_p50": 0.019851625262403208,
-          "predicted_p95": 0.08494700930946424,
-          "predicted_point": 0.015573753616558966,
-          "predicted_std": 0.03062599870603972,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -35,12 +14,21 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+          "compound": "acrylamide",
+          "envelope_state": "out_of_envelope",
+          "lane": "acrylamide",
+          "panel": "trust_loop",
+          "reason": "REFUSED BY THE DATA: precursor charge not printed. Ma 2024 (secs. 3.1-3.2, Table 1) adds no asparagine or glucose and prints no free asparagine, reducing sugar, pH or water activity, so the pot the row was integrated at (SPI 50, Asn 42, Glc 42 mM, pH 6.0, a_w 0.35) is not the paper's. The charge was withdrawn 2026-11-06 (value_withdrawal; CF-131). The measured 150 ug/kg (Fig. 2D, 130 C arm) is kept as the datum."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -874,29 +862,9 @@
           "predicted_std": 184.10415862457117,
           "shared_with": null,
           "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 0.3949245021800988,
-          "compound": "5-Hydroxymethylfurfural (HMF)",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "acrylamide",
-          "measured": 12280.0,
-          "measured_ppb": 12280.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 1882.6065137482299,
-          "predicted_p5": 1097.7573646930566,
-          "predicted_p50": 1878.433280564985,
-          "predicted_p95": 2725.4038280445957,
-          "predicted_point": 1966.1162014102977,
-          "predicted_std": 510.2367496134554,
-          "shared_with": null,
-          "target_unit": "ppb"
         }
       ],
-      "coverage_rate": 1.0,
+      "coverage_rate": 0.5,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -904,12 +872,21 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 1,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+          "compound": "5-Hydroxymethylfurfural (HMF)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "acrylamide",
+          "panel": "maillard_path_holdout",
+          "reason": "REFUSED BY THE DATA: within-source conflict (CF-127): the prose prints 12.28 ppm citing Fig. 4A, but Fig. 4A's asparagine + fructose 30-min bar (water) reads ~5.0 ppm (SD to ~6) on an axis checked against the printed 91.56 ppm fructose-only bar; no bar is near 12.28. Demoted, not scored, until an author reply or a second source settles it. Acrylamide (1859 ppb) holds and stays scored."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -1248,7 +1225,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9704604244386704,
+          "ci_width_log10": 0.8962284233429623,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1258,17 +1235,17 @@
           "measured_ppb": 17400.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1705.020262557432,
-          "predicted_p5": 471.6576347670619,
-          "predicted_p50": 1317.1818699874407,
-          "predicted_p95": 4406.434239804037,
-          "predicted_point": 1869.446898195805,
-          "predicted_std": 1274.5800175370002,
+          "predicted_mean": 1793.5994907120255,
+          "predicted_p5": 568.4747176061419,
+          "predicted_p50": 1408.4107601097267,
+          "predicted_p95": 4476.51019535549,
+          "predicted_point": 1957.004962706679,
+          "predicted_std": 1265.9986581714265,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.9694950949501407,
+          "ci_width_log10": 0.9696304221207196,
           "compound": "3-deoxyglucosone",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1278,17 +1255,17 @@
           "measured_ppb": 52200.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 61345.05963465598,
-          "predicted_p5": 16801.917410023354,
-          "predicted_p50": 48506.157380715784,
-          "predicted_p95": 156622.42378936597,
-          "predicted_point": 66358.981544688,
-          "predicted_std": 43951.068410069834,
+          "predicted_mean": 60568.64535408719,
+          "predicted_p5": 16588.003357634836,
+          "predicted_p50": 47900.35489003763,
+          "predicted_p95": 154676.57136201594,
+          "predicted_point": 65518.15888731306,
+          "predicted_std": 43393.7591639022,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.9881699485579657,
+          "ci_width_log10": 0.9883309936452302,
           "compound": "3,4-dideoxyglucosone",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1298,17 +1275,17 @@
           "measured_ppb": 55500.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 7727.59286710167,
-          "predicted_p5": 2099.728855343834,
-          "predicted_p50": 5792.900518703623,
-          "predicted_p95": 20433.04846421486,
-          "predicted_point": 8373.284934196285,
-          "predicted_std": 5638.798021724334,
+          "predicted_mean": 7655.748814662129,
+          "predicted_p5": 2079.514037629123,
+          "predicted_p50": 5739.484131342593,
+          "predicted_p95": 20243.83785067483,
+          "predicted_point": 8295.50678885754,
+          "predicted_std": 5586.634681017974,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.0008070620894389917,
+          "ci_width_log10": 0.00043858953076284147,
           "compound": "glucosone",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1318,17 +1295,17 @@
           "measured_ppb": 7500.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 119.06657844756154,
-          "predicted_p5": 118.92018702858276,
-          "predicted_p50": 119.08596523227831,
-          "predicted_p95": 119.14138534300716,
-          "predicted_point": 119.05906453604986,
-          "predicted_std": 0.07017066344316993,
+          "predicted_mean": 219.06657851652028,
+          "predicted_p5": 218.92018784430755,
+          "predicted_p50": 219.08596522450725,
+          "predicted_p95": 219.14138476396963,
+          "predicted_point": 219.05906453604985,
+          "predicted_std": 0.0701706662714075,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.08542930965621058,
+          "ci_width_log10": 0.013400065184127778,
           "compound": "glyoxal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1338,17 +1315,17 @@
           "measured_ppb": 5600.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 195.15735929680795,
-          "predicted_p5": 168.42361169149427,
-          "predicted_p50": 200.18995830023027,
-          "predicted_p95": 205.03702218214053,
-          "predicted_point": 160.79393493253662,
-          "predicted_std": 11.097881683652487,
+          "predicted_mean": 1195.1573592752313,
+          "predicted_p5": 1168.423611716376,
+          "predicted_p50": 1200.1899583092638,
+          "predicted_p95": 1205.0370221604098,
+          "predicted_point": 1160.7939349325366,
+          "predicted_std": 11.097881649154198,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.953439901350585,
+          "ci_width_log10": 0.6279459396121461,
           "compound": "methylglyoxal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1358,12 +1335,12 @@
           "measured_ppb": 2600.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 2222.0439261380934,
-          "predicted_p5": 622.0493523232954,
-          "predicted_p50": 1717.0527115997538,
-          "predicted_p95": 5588.107389547857,
-          "predicted_point": 2573.819668627614,
-          "predicted_std": 1579.2716802599189,
+          "predicted_mean": 3102.2481891502553,
+          "predicted_p5": 1516.4876801513558,
+          "predicted_p50": 2601.5295296483846,
+          "predicted_p95": 6438.501868897256,
+          "predicted_point": 3451.2008290390036,
+          "predicted_std": 1565.2354076342003,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1839,29 +1816,8 @@
       "bench_file": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
       "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.213664646648351,
-          "compound": "hexanal",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "lipid",
-          "measured": 324.0,
-          "measured_ppb": 324.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 286.16377426313375,
-          "predicted_p5": 9.227638517281003,
-          "predicted_p50": 105.94214183945367,
-          "predicted_p95": 1509.229271723317,
-          "predicted_point": 109.48984853623236,
-          "predicted_std": 497.600272431418,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 0.25,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "matrix_only",
       "fit_target_of": {
@@ -1869,12 +1825,20 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "external_matrix",
       "protein_type": "pea_iso",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
       "refused_compounds": [
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "hexanal",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "REFUSED BY THE DATA: net loss of a carried level (CF-129): raw peas carry 1260 +/- 114 ug/kg hexanal and the roasted peas measure 324 +/- 34.3 (Bi 2020 Table 4), a 3.9x loss on roasting. The lipid lane adds a carried level and forms more; it has no loss term (volatilisation or consumption), so it cannot represent this row. Refused until it does."
+        },
         {
           "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
           "compound": "furaneol",
@@ -4251,12 +4215,12 @@
   "provenance": {
     "artifact": "core_prediction_uncertainty",
     "generated_by": "src/kinetic_core/uncertainty.py",
-    "generated_on": "2026-11-05",
+    "generated_on": "2026-11-06",
     "git": {
-      "branch": "h0-relative-only-thiols",
-      "commit": "8b28d03140bed4224f57749925ed49c019dd7bc3",
+      "branch": "m0-data-corrections-batch1",
+      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
       "dirty": true,
-      "short": "8b28d031"
+      "short": "56861a85"
     },
     "inputs": [
       {
@@ -4285,7 +4249,7 @@
       },
       {
         "path": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
-        "sha256": "6c7848dd940ff1d1f09d8c84b60ba99e4ecbed2427b17c9ea5ab752eda736696"
+        "sha256": "248186b982cb07c4cbac59a700448b1f0e0494c28a34a1e8340a824f7d0087c3"
       },
       {
         "path": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json",
@@ -4365,7 +4329,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
-        "sha256": "031a2e87d5c6a61452187898a349fe81146218ab944e8f094be00d9ae1823e68"
+        "sha256": "4da6c9427aeb2991b6de2b958317a812d97d63cca543b26a121bfc31f0149735"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json",
@@ -4393,7 +4357,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
-        "sha256": "1420cb0477cc0aecfb830b9bdefbe9cc7ae7160a4e3b74c7aff511c56bf5db73"
+        "sha256": "bd09e9c52c1835a4792091ba0ecf8184c26315552692391081cbd816de4670ea"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
@@ -4433,7 +4397,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json",
-        "sha256": "aa80c461e26a8827174d58ec29a219563bf7333b6c9af934730f7d0eeb52ecf6"
+        "sha256": "87458d0efe8e16ea90f1e6be4212d2b8a9b4fbc62dbc8835557c782a2fc37843"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
@@ -4441,7 +4405,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
-        "sha256": "0f754e041e6fe91216a0d2101b78cd5d34cbeccc77d88f5aea16d24862fc8d34"
+        "sha256": "c6acaeb58b92c03ab606647b20c77df1e009846fc0e982f785c150af3185e91a"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
@@ -4454,6 +4418,14 @@
     ]
   },
   "refused_compounds": [
+    {
+      "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+      "compound": "acrylamide",
+      "envelope_state": "out_of_envelope",
+      "lane": "acrylamide",
+      "panel": "trust_loop",
+      "reason": "REFUSED BY THE DATA: precursor charge not printed. Ma 2024 (secs. 3.1-3.2, Table 1) adds no asparagine or glucose and prints no free asparagine, reducing sugar, pH or water activity, so the pot the row was integrated at (SPI 50, Asn 42, Glc 42 mM, pH 6.0, a_w 0.35) is not the paper's. The charge was withdrawn 2026-11-06 (value_withdrawal; CF-131). The measured 150 ug/kg (Fig. 2D, 130 C arm) is kept as the datum."
+    },
     {
       "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
       "compound": "N\u03b5-(Carboxymethyl)lysine (CML)",
@@ -4735,6 +4707,14 @@
       "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
     },
     {
+      "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "acrylamide",
+      "panel": "maillard_path_holdout",
+      "reason": "REFUSED BY THE DATA: within-source conflict (CF-127): the prose prints 12.28 ppm citing Fig. 4A, but Fig. 4A's asparagine + fructose 30-min bar (water) reads ~5.0 ppm (SD to ~6) on an axis checked against the printed 91.56 ppm fructose-only bar; no bar is near 12.28. Demoted, not scored, until an author reply or a second source settles it. Acrylamide (1859 ppb) holds and stays scored."
+    },
+    {
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
       "compound": "Furfural",
       "envelope_state": "out_of_envelope",
@@ -4936,6 +4916,14 @@
     },
     {
       "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compound": "hexanal",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "REFUSED BY THE DATA: net loss of a carried level (CF-129): raw peas carry 1260 +/- 114 ug/kg hexanal and the roasted peas measure 324 +/- 34.3 (Bi 2020 Table 4), a 3.9x loss on roasting. The lipid lane adds a carried level and forms more; it has no loss term (volatilisation or consumption), so it cannot represent this row. Refused until it does."
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
       "compound": "furaneol",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
@@ -4998,27 +4986,27 @@
     }
   ],
   "summary": {
-    "benchmark_count": 13,
-    "ci_coverage_hits": 13,
-    "ci_coverage_rate": 0.48148148148148145,
+    "benchmark_count": 11,
+    "ci_coverage_hits": 12,
+    "ci_coverage_rate": 0.5,
     "ci_level_pct": 90,
     "fixed_prior_count": 45,
     "honest_literature_coverage": {
       "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator; computed identically across the trust-loop, maillard_path hold-out and external-matrix panels. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim. The SULFUR lane's identified coordinates are sampled jointly from the shipped wave's Laplace covariance (see priors[]); UNIDENTIFIED ones are drawn uniformly across their declared bands (2026-09-04), narrowed for an activation energy to the prefactor prior and skipped where the bound is definitional rather than measured. THIS DOES NOT CLOSE THE COVERAGE GAP and is not meant to: widening the parameter priors all the way to uncapped moves coverage from 19 % to 21 % against a nominal 90 %. What is left is model-structure error -- systematic per-lane offsets a draw around a wrong centre cannot reproduce -- not parameter uncertainty.",
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
-      "hits": 13,
-      "median_ci_width_log10": 1.0149547247229411,
+      "hits": 12,
+      "median_ci_width_log10": 0.9953630386243943,
       "not_evaluable": 1,
-      "rate": 0.5,
-      "total": 26
+      "rate": 0.5217391304347826,
+      "total": 23
     },
-    "matched_compound_count": 27,
+    "matched_compound_count": 24,
     "n_samples": 200,
     "observable_multiplier_policy": {
       "rows_by_family": {
-        "extraction": 18,
-        "headspace": 9,
+        "extraction": 16,
+        "headspace": 8,
         "undeclared": 0
       },
       "rule": "the K_aw (+/-0.5 dex) and HS-SPME same-sample dispersion bands multiply a ppb row only when the bundle's quantification_class is a headspace method, or is undeclared (then the core's own absolute_concentration convention is kept and the row says so); extraction-based quantification (SIDA, HPLC, LC-MS/MS) never passed through an air/water partition or a fibre.",
@@ -5026,37 +5014,37 @@
     },
     "out_of_sample_literature_coverage": {
       "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
-      "hits": 13,
+      "hits": 12,
       "not_evaluable": 1,
       "rows_the_core_fit_read": {
         "hits": 0,
         "not_evaluable": 0,
         "total": 0
       },
-      "total": 26
+      "total": 23
     },
     "panel_benchmark_count": 42,
     "panel_split": {
       "external_matrix": {
-        "ci_coverage_rate": 0.75,
-        "hits": 3,
+        "ci_coverage_rate": 0.6666666666666666,
+        "hits": 2,
         "median_ci_width_log10": 2.7429759675821193,
         "not_evaluable": 0,
-        "total": 4
+        "total": 3
       },
       "maillard_path_holdout": {
-        "ci_coverage_rate": 0.35294117647058826,
+        "ci_coverage_rate": 0.375,
         "hits": 6,
-        "median_ci_width_log10": 0.9704604244386704,
+        "median_ci_width_log10": 0.9789807078829749,
         "not_evaluable": 1,
-        "total": 17
+        "total": 16
       },
       "trust_loop": {
-        "ci_coverage_rate": 0.8,
+        "ci_coverage_rate": 1.0,
         "hits": 4,
-        "median_ci_width_log10": 1.5426162764006963,
+        "median_ci_width_log10": 1.705257927412047,
         "not_evaluable": 0,
-        "total": 5
+        "total": 4
       }
     },
     "parameter_sources": [
@@ -5081,7 +5069,7 @@
         "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
       }
     ],
-    "refused_compound_count": 66,
+    "refused_compound_count": 69,
     "sampled_prior_count": 99,
     "seed": 0,
     "shared_with_holdout_panel": {
@@ -5090,11 +5078,11 @@
     },
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.5,
-        "hits": 13,
-        "median_ci_width_log10": 1.0149547247229411,
+        "ci_coverage_rate": 0.5217391304347826,
+        "hits": 12,
+        "median_ci_width_log10": 0.9953630386243943,
         "not_evaluable": 1,
-        "total": 26
+        "total": 23
       },
       "fitted_row": {
         "ci_coverage_rate": null,
@@ -5136,7 +5124,7 @@
       "reduced_chi_square": 1.8711697851956615
     },
     "unsampled_lanes": [],
-    "wall_seconds": 461.9,
-    "workers": 5
+    "wall_seconds": 971.0,
+    "workers": 1
   }
 }

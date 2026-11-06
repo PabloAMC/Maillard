@@ -152,6 +152,14 @@ _STEINHAGEN_NOTE = (
     "different durations.' The quotation gives neither the vessel, the fill nor the closure; autoclaving "
     "implies a vented or loosely closed container but that is an inference, so everything is unstated."
 )
+#: M0 data corrections, batch 1 (2026-11-06; CF-128): the vessel read from Leitzen 2021 sec. 4.2.1.
+_STEINHAGEN_NOTE_M0 = (
+    "M0 DATA CORRECTIONS, BATCH 1 (2026-11-06; CF-128): Leitzen et al. 2021, sec. 4.2.1, read from the PDF: 'The "
+    "final containers to be sterilized were 225 mL PP bottles (Kautex), each filled with 200 mL glucose "
+    "solution'; 'Double distilled water and glucose monohydrate were used'. 25 mL of headspace; no gas is "
+    "named, so the atmosphere is air by default (about 0.21 mmol O2, ~1.1 mM if all of it dissolved). "
+    "||| PRIOR NOTE, SUPERSEDED AND RETAINED AS THE AUDIT RECORD: " + _STEINHAGEN_NOTE
+)
 _ACS_NOTE_PRIOR = (
     "Ma et al. 2024, Int. J. Mol. Sci. 25:8668, twin-screw extrusion of SPI + corn starch at 30 % moisture "
     "(die-zone 130 C; the bundle's 25 s is the residence time). NOT ON DISK as a PDF; the repo carries its "
@@ -320,7 +328,7 @@ BLOCKS: Dict[str, Dict[str, Any]] = {
     "mp_holdout_glucose_asparagine_180C_30min_Chang2021": _block(100.0, None, "not stated", "unstated", "distilled", None, "primary_source_pdf", _CHANG_NOTE),
     "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021": _block(100.0, None, "not stated", "unstated", "distilled", None, "primary_source_pdf", _CHANG_NOTE),
     "mp_holdout_glucose_asparagine_180C_Ye2024": _block(4.0, 25.0, "25 mL thick-walled pressurized glass tube, sealed, oil bath", "air_by_default", "unstated", None, "primary_source_pdf", _YE_NOTE),
-    "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021": _block(None, None, "not stated (autoclaved)", "unstated", "unstated", None, "repo_verbatim_methods_quote", _STEINHAGEN_NOTE),
+    "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021": _block(200.0, 225.0, "PP bottle (Kautex), closed, autoclaved", "air_by_default", "distilled", None, "primary_source_pdf", _STEINHAGEN_NOTE_M0),
     "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3": HOF100,
     "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7": HOF100,
     "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3": HOF100,
