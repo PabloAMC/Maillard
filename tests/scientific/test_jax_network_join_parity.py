@@ -82,5 +82,11 @@ def test_jax_grad_through_the_composed_network_needs_no_flag(join):
     assert out["finite"]
     fd = np.asarray(out["central_fd"])
     assert np.count_nonzero(np.abs(fd) > 1e-6) >= 3, out
-    assert np.all(np.asarray(out["rel_grad_vs_fd"]) < 1e-4), out
+    # A central difference's error is absolute (solver tolerance / step), the same on every coordinate, so a component
+    # ~1000x below the largest cannot be held to 1e-4 of itself (k_hmf_cys: |fd| 7e-4 against 0.98; its relative error
+    # moved 3e-5 -> 2e-4 between runners). Hold each to 1e-4 of max(|fd_i|, 1 % of the largest); the exact check
+    # against forward mode below stays per-component at 1e-8.
+    gv = np.asarray(out["grad"])
+    floor = np.maximum(np.abs(fd), 1e-2 * np.max(np.abs(fd)))
+    assert np.all(np.abs(gv - fd) / floor < 1e-4), out
     assert np.all(np.asarray(out["rel_grad_vs_jacfwd"]) < 1e-8), out
