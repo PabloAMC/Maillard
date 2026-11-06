@@ -42,22 +42,22 @@ sweeps them. Writes results/validation/choice_robustness.{json,md}.
 
 | alternative | out of sample within band | median fold | by lane | contrast median (dex) | contrast signs |
 | --- | --- | --- | --- | --- | --- |
-| twofold | 6/27 | 6.25x | acrylamide 2, lipid 2, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| threefold | 11/27 | 6.25x | acrylamide 4, lipid 5, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| fivefold | 13/27 | 6.25x | acrylamide 5, lipid 6, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| twofold | 6/24 | 4.62x | acrylamide 2, lipid 2, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| threefold | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| fivefold | 13/24 | 4.62x | acrylamide 5, lipid 5, sulfur 0, trunk 3 | 0.31 | 12/25 |
 
 ## CR-06
 
 | alternative | out of sample within band | median fold | by lane | contrast median (dex) | contrast signs |
 | --- | --- | --- | --- | --- | --- |
-| one_cv | 11/27 | 6.25x | acrylamide 4, lipid 5, sulfur 0, trunk 2 | 0.31 | 13/29 |
-| two_cv | 11/27 | 6.25x | acrylamide 4, lipid 5, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| twofold | 11/27 | 6.25x | acrylamide 4, lipid 5, sulfur 0, trunk 2 | 0.31 | 9/18 |
+| one_cv | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 13/29 |
+| two_cv | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| twofold | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 9/18 |
 
 ## CR-02
 
 | alternative | out of sample within band | median fold | by lane | contrast median (dex) | contrast signs |
 | --- | --- | --- | --- | --- | --- |
-| moist_matrix | 9/27 | 9.15x | acrylamide 4, lipid 3, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| centre | 11/27 | 6.25x | acrylamide 4, lipid 5, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| bulk_oil | 10/27 | 6.25x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| moist_matrix | 9/24 | 7.79x | acrylamide 4, lipid 3, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| centre | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| bulk_oil | 9/24 | 5.53x | acrylamide 4, lipid 3, sulfur 0, trunk 2 | 0.31 | 12/25 |

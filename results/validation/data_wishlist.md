@@ -121,14 +121,14 @@ Also refused, by the curated DATA rather than by a lane (`scoring_refused`; each
 |---|---|---|---|---|---|
 | 1 | `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | 10.09 | 1.57 | missing_positive_flavor_anchor |
 | 2 | `mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019` | DMHF | 6.00 | 1.99 | missing_absolute_anchor |
-| 3 | `acrylamide_spi_extrusion_130C_ACSRef3` | acrylamide | 4.58 | 3.25 | missing_absolute_anchor |
-| 4 | `mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b` | 2-Acetylthiazole | 4.00 | 2.40 | free_precursor_sulfur_yield |
-| 5 | `mp_holdout_glucose_asparagine_180C_10min_Chang2021` | Acrylamide | 3.03 | 1.74 | missing_absolute_anchor |
-| 6 | `mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019` | DMHF | 2.89 | 1.28 | missing_absolute_anchor |
-| 7 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | glucosone | 2.80 | 1.80 | missing_absolute_anchor |
-| 8 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | glyoxal | 2.46 | 1.44 | missing_absolute_anchor |
-| 9 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | 5-Hydroxymethylfurfural (HMF) | 1.89 | 0.60 | missing_absolute_anchor |
-| 10 | `mp_holdout_fructose_asparagine_180C_Lin2022` | Acrylamide | 1.77 | 0.48 | missing_absolute_anchor |
+| 3 | `mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b` | 2-Acetylthiazole | 4.00 | 2.40 | free_precursor_sulfur_yield |
+| 4 | `mp_holdout_glucose_asparagine_180C_10min_Chang2021` | Acrylamide | 3.03 | 1.74 | missing_absolute_anchor |
+| 5 | `mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019` | DMHF | 2.89 | 1.28 | missing_absolute_anchor |
+| 6 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | glucosone | 2.53 | 1.53 | missing_absolute_anchor |
+| 7 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | 5-Hydroxymethylfurfural (HMF) | 1.86 | 0.59 | missing_absolute_anchor |
+| 8 | `mp_holdout_fructose_asparagine_180C_Lin2022` | Acrylamide | 1.77 | 0.48 | missing_absolute_anchor |
+| 9 | `external_validation_li_2026_spi_wg_hme_control` | hexanal | 1.75 | 0.00 | missing_positive_flavor_anchor |
+| 10 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | 3,4-dideoxyglucosone | 1.73 | 0.44 | missing_absolute_anchor |
 
 ## 6. What you could predict if you had it
 
