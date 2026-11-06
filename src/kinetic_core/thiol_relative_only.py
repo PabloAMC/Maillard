@@ -160,9 +160,9 @@ def _refusal_text() -> str:
         "absolute levels is the conservative transfer. The concentration is computed and refused; between-condition "
         "ratios, ranks and time-course shapes from `compare` are answered, with the within-laboratory shape error "
         f"omega = {r.omega_dex:.2f} dex per arm (borrowed from R3En's scoring) in their interval. WHAT WOULD LIFT "
-        "IT: absolute measurements of these compounds from a second independent laboratory (for example the "
-        "pending WUR blind-test samples), re-scored under H0's rule (H0', "
-        "results/validation/kinetic_core_between_lab_tau_h0_prereg.md). A calibration made by `calibrate` from "
+        "IT: absolute measurements of these compounds from at least two new independent laboratories (H0's "
+        "pre-registered trigger; the pending WUR blind-test samples would be one), re-scored under H0's rule (H0', "
+        "results/validation/kinetic_core_between_lab_tau_h0_prereg.md sec. 9). A calibration made by `calibrate` from "
         "your own measured levels of the compound is answered: its level is then your laboratory's."
     )
 
@@ -172,8 +172,8 @@ def short_reason() -> str:
     r = ruling()
     return (
         f"{ABSOLUTE_REFUSED_TAG}: the thiol lane ships relative predictions only (D2 branch (i): tau_ABS "
-        f"{r.tau_abs_dex:.3f} dex, {r.upper_bound_text}; absolute thiol evidence from one laboratory). Lifted by a "
-        "second independent laboratory's absolute measurements re-scored under H0's rule."
+        f"{r.tau_abs_dex:.3f} dex, {r.upper_bound_text}; absolute thiol evidence from one laboratory). Lifted by "
+        "absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     )
 
 

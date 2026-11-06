@@ -98,7 +98,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -132,7 +132,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -166,7 +166,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -238,7 +238,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -310,7 +310,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -344,7 +344,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -378,7 +378,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
@@ -386,7 +386,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -581,7 +581,7 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -649,7 +649,7 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -679,7 +679,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
@@ -687,7 +687,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
@@ -695,7 +695,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -725,7 +725,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
@@ -733,7 +733,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
@@ -741,7 +741,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -771,7 +771,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
@@ -779,7 +779,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
@@ -787,7 +787,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -817,7 +817,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
@@ -825,7 +825,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
@@ -833,7 +833,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -1462,7 +1462,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
@@ -1470,7 +1470,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -1500,7 +1500,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -1508,7 +1508,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -1542,7 +1542,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -1550,7 +1550,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -1580,7 +1580,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -1588,7 +1588,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -1618,7 +1618,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
@@ -1626,7 +1626,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -1656,7 +1656,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
@@ -1664,7 +1664,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -1694,7 +1694,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
@@ -1702,7 +1702,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -1753,7 +1753,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -1761,7 +1761,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         },
         {
           "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -1769,7 +1769,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
         }
       ],
       "signal_origin": "external_literature"
@@ -4217,10 +4217,10 @@
     "generated_by": "src/kinetic_core/uncertainty.py",
     "generated_on": "2026-11-06",
     "git": {
-      "branch": "m0-data-corrections-batch1",
-      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
+      "branch": "register-pass-2026-11-06",
+      "commit": "06830fd78b48e16bd49dfec4a69c1e75028ddb36",
       "dirty": true,
-      "short": "56861a85"
+      "short": "06830fd7"
     },
     "inputs": [
       {
@@ -4381,19 +4381,19 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
-        "sha256": "5585d1fe4457ec13ae4d1e8c64a933c82c4deb5f0b0aefe6b185e851468a1b29"
+        "sha256": "84ed4c78e66a8f2072376d359eec431f960ffce5beb12e45eb1eefce955e85a9"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026.json",
-        "sha256": "ef2325e087b44e398ac5f997ef6b09ba4294040706908224d822fd3bc2c3c005"
+        "sha256": "3dfc8c23715ca1161cc08b66405e8ab31f4695cdeaa20cebc675d6c3eb948e09"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026.json",
-        "sha256": "fe7e97331a2ba871331fac9b6776678d7cb0f33efb34c502b7a95e48aea1bf47"
+        "sha256": "ccac06f3bda90ca73180a8eaced98d8f0e3d321b9ec93f81a26c3b1da2223318"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026.json",
-        "sha256": "83f849c1a202104e02c207c8fc4312fed65d48f796935d57bccef7335e46c0db"
+        "sha256": "526d8afc9be6eaa9b44e48d770d620cc169da289acdced1108fb12c913b573af"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json",
@@ -4448,7 +4448,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
@@ -4456,7 +4456,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
@@ -4464,7 +4464,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
@@ -4488,7 +4488,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
@@ -4512,7 +4512,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
@@ -4520,7 +4520,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
@@ -4528,7 +4528,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
@@ -4536,7 +4536,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -4584,7 +4584,7 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -4608,7 +4608,7 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
@@ -4616,7 +4616,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
@@ -4624,7 +4624,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
@@ -4632,7 +4632,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
@@ -4640,7 +4640,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
@@ -4648,7 +4648,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
@@ -4656,7 +4656,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
@@ -4664,7 +4664,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
@@ -4672,7 +4672,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
@@ -4680,7 +4680,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
@@ -4688,7 +4688,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
@@ -4696,7 +4696,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
@@ -4704,7 +4704,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
@@ -4768,7 +4768,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
@@ -4776,7 +4776,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -4784,7 +4784,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -4792,7 +4792,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -4800,7 +4800,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -4808,7 +4808,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -4816,7 +4816,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -4824,7 +4824,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
@@ -4832,7 +4832,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
@@ -4840,7 +4840,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
@@ -4848,7 +4848,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
@@ -4856,7 +4856,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
@@ -4864,7 +4864,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
@@ -4872,7 +4872,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -4880,7 +4880,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -4888,7 +4888,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -4896,7 +4896,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     },
     {
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
@@ -5124,7 +5124,7 @@
       "reduced_chi_square": 1.8711697851956615
     },
     "unsampled_lanes": [],
-    "wall_seconds": 971.0,
+    "wall_seconds": 1256.4,
     "workers": 1
   }
 }
