@@ -41,12 +41,12 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-11-05",
+    "generated_on": "2026-11-06",
     "git": {
-      "commit": "a4b2504b575e24a4e5b6793c78bc8f530ed586e1",
-      "short": "a4b2504b",
-      "branch": "h0-relative-only-thiols",
-      "dirty": true
+      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
+      "short": "56861a85",
+      "branch": "m0-data-corrections-batch1",
+      "dirty": false
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [
@@ -72,7 +72,7 @@
       },
       {
         "path": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
-        "sha256": "6c7848dd940ff1d1f09d8c84b60ba99e4ecbed2427b17c9ea5ab752eda736696"
+        "sha256": "248186b982cb07c4cbac59a700448b1f0e0494c28a34a1e8340a824f7d0087c3"
       },
       {
         "path": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json",
@@ -152,7 +152,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
-        "sha256": "031a2e87d5c6a61452187898a349fe81146218ab944e8f094be00d9ae1823e68"
+        "sha256": "4da6c9427aeb2991b6de2b958317a812d97d63cca543b26a121bfc31f0149735"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json",
@@ -180,7 +180,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
-        "sha256": "1420cb0477cc0aecfb830b9bdefbe9cc7ae7160a4e3b74c7aff511c56bf5db73"
+        "sha256": "bd09e9c52c1835a4792091ba0ecf8184c26315552692391081cbd816de4670ea"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
@@ -220,7 +220,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json",
-        "sha256": "aa80c461e26a8827174d58ec29a219563bf7333b6c9af934730f7d0eeb52ecf6"
+        "sha256": "87458d0efe8e16ea90f1e6be4212d2b8a9b4fbc62dbc8835557c782a2fc37843"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
@@ -228,7 +228,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
-        "sha256": "0f754e041e6fe91216a0d2101b78cd5d34cbeccc77d88f5aea16d24862fc8d34"
+        "sha256": "c6acaeb58b92c03ab606647b20c77df1e009846fc0e982f785c150af3185e91a"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
@@ -265,19 +265,19 @@
   ],
   "summary": {
     "panel_benchmark_count": 42,
-    "scored_benchmark_count": 13,
-    "refused_benchmark_count": 29,
-    "matched_compound_count": 27,
-    "refused_compound_count": 66,
-    "within_band_count": 11,
-    "within_band_rate": 0.4074074074074074,
+    "scored_benchmark_count": 11,
+    "refused_benchmark_count": 31,
+    "matched_compound_count": 24,
+    "refused_compound_count": 69,
+    "within_band_count": 10,
+    "within_band_rate": 0.4166666666666667,
     "fold_summary": {
-      "n": 27,
-      "median_fold_error": 6.245815985439488,
-      "worst_fold_error": 9631.58938385354,
-      "best_fold_error": 1.0101717815321325,
-      "median_abs_log10_error": 0.7955891848756942,
-      "geometric_mean_fold": 12.675447792870672
+      "n": 24,
+      "median_fold_error": 4.62361402798846,
+      "worst_fold_error": 1757.0440585888973,
+      "best_fold_error": 1.033300305581913,
+      "median_abs_log10_error": 0.6645721548625732,
+      "geometric_mean_fold": 9.534824272988061
     },
     "evidence_role_totals": {
       "external_holdout": 26,
@@ -288,118 +288,118 @@
     "by_panel": {
       "external_matrix": {
         "benchmarks": 4,
-        "rows": 4,
-        "within_band": 1,
+        "rows": 3,
+        "within_band": 0,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.25,
+        "within_band_rate": 0.0,
         "fold_summary": {
-          "n": 4,
-          "median_fold_error": 5.866306183415756,
+          "n": 3,
+          "median_fold_error": 8.618973956628114,
           "worst_fold_error": 365.6087699378835,
-          "best_fold_error": 2.9591784474227487,
-          "median_abs_log10_error": 0.7143618722817549,
-          "geometric_mean_fold": 13.053527129826229
+          "best_fold_error": 3.113638410203398,
+          "median_abs_log10_error": 0.9354555684352683,
+          "geometric_mean_fold": 21.40819817825918
         }
       },
       "maillard_path_holdout": {
         "benchmarks": 22,
-        "rows": 18,
+        "rows": 17,
         "within_band": 6,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.3333333333333333,
+        "within_band_rate": 0.35294117647058826,
         "fold_summary": {
-          "n": 18,
-          "median_fold_error": 7.888553607739514,
+          "n": 17,
+          "median_fold_error": 6.69036882406596,
           "worst_fold_error": 1757.0440585888973,
-          "best_fold_error": 1.0101717815321325,
-          "median_abs_log10_error": 0.8913826216192237,
-          "geometric_mean_fold": 13.235204922884202
+          "best_fold_error": 1.033300305581913,
+          "median_abs_log10_error": 0.8254500600460647,
+          "geometric_mean_fold": 12.038151082256187
         }
       },
       "trust_loop": {
         "benchmarks": 16,
-        "rows": 5,
+        "rows": 4,
         "within_band": 4,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.8,
+        "within_band_rate": 1.0,
         "fold_summary": {
-          "n": 5,
-          "median_fold_error": 2.209926978429618,
-          "worst_fold_error": 9631.58938385354,
+          "n": 4,
+          "median_fold_error": 1.9120191422757786,
+          "worst_fold_error": 2.5293915494522987,
           "best_fold_error": 1.5378727566967958,
-          "median_abs_log10_error": 0.3443779237353335,
-          "geometric_mean_fold": 10.597152054063088
+          "median_abs_log10_error": 0.2761557016479962,
+          "geometric_mean_fold": 1.9300207024852827
         }
       }
     },
     "by_evidence_role": {
       "external_holdout": {
         "benchmarks": 26,
-        "rows": 22,
-        "within_band": 7,
+        "rows": 20,
+        "within_band": 6,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.3181818181818182,
+        "within_band_rate": 0.3,
         "fold_summary": {
-          "n": 22,
-          "median_fold_error": 7.623598491069307,
+          "n": 20,
+          "median_fold_error": 7.654671390347037,
           "worst_fold_error": 1757.0440585888973,
-          "best_fold_error": 1.0101717815321325,
-          "median_abs_log10_error": 0.8784263407538495,
-          "geometric_mean_fold": 13.201985544482632
+          "best_fold_error": 1.033300305581913,
+          "median_abs_log10_error": 0.8804528142406665,
+          "geometric_mean_fold": 13.123897764903326
         }
       },
       "predictive": {
         "benchmarks": 16,
-        "rows": 5,
+        "rows": 4,
         "within_band": 4,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.8,
+        "within_band_rate": 1.0,
         "fold_summary": {
-          "n": 5,
-          "median_fold_error": 2.209926978429618,
-          "worst_fold_error": 9631.58938385354,
+          "n": 4,
+          "median_fold_error": 1.9120191422757786,
+          "worst_fold_error": 2.5293915494522987,
           "best_fold_error": 1.5378727566967958,
-          "median_abs_log10_error": 0.3443779237353335,
-          "geometric_mean_fold": 10.597152054063088
+          "median_abs_log10_error": 0.2761557016479962,
+          "geometric_mean_fold": 1.9300207024852827
         }
       }
     },
     "by_lane": {
       "acrylamide": {
         "benchmarks": null,
-        "rows": 12,
+        "rows": 10,
         "within_band": 4,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.3333333333333333,
+        "within_band_rate": 0.4,
         "fold_summary": {
-          "n": 12,
-          "median_fold_error": 7.697350087704006,
-          "worst_fold_error": 9631.58938385354,
+          "n": 10,
+          "median_fold_error": 6.7859139539470625,
+          "worst_fold_error": 269.8633193559217,
           "best_fold_error": 1.033300305581913,
-          "median_abs_log10_error": 0.8784786575208554,
-          "geometric_mean_fold": 20.300156124492016
+          "median_abs_log10_error": 0.803539771581075,
+          "geometric_mean_fold": 12.333051334062935
         }
       },
       "lipid": {
         "benchmarks": null,
-        "rows": 8,
-        "within_band": 5,
+        "rows": 7,
+        "within_band": 4,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.625,
+        "within_band_rate": 0.5714285714285714,
         "fold_summary": {
-          "n": 8,
-          "median_fold_error": 2.7442849984375237,
+          "n": 7,
+          "median_fold_error": 2.5293915494522987,
           "worst_fold_error": 365.6087699378835,
           "best_fold_error": 1.5378727566967958,
-          "median_abs_log10_error": 0.43709360924770346,
-          "geometric_mean_fold": 5.019320432191783
+          "median_abs_log10_error": 0.40301606327250333,
+          "geometric_mean_fold": 5.412861171293964
         }
       },
       "sulfur": {
@@ -427,45 +427,45 @@
         "within_band_rate": 0.3333333333333333,
         "fold_summary": {
           "n": 6,
-          "median_fold_error": 7.967894408860152,
-          "worst_fold_error": 62.99394362979458,
-          "best_fold_error": 1.0101717815321325,
-          "median_abs_log10_error": 0.895116613931346,
-          "geometric_mean_fold": 7.470433516942475
+          "median_fold_error": 5.75732658105864,
+          "worst_fold_error": 34.23734149456184,
+          "best_fold_error": 1.2551371434351162,
+          "median_abs_log10_error": 0.7544414783875389,
+          "geometric_mean_fold": 5.038926958690918
         }
       }
     },
     "honest_literature": {
-      "benchmarks": 13,
-      "rows": 27,
-      "within_band": 11,
+      "benchmarks": 11,
+      "rows": 24,
+      "within_band": 10,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.4074074074074074,
+      "within_band_rate": 0.4166666666666667,
       "fold_summary": {
-        "n": 27,
-        "median_fold_error": 6.245815985439488,
-        "worst_fold_error": 9631.58938385354,
-        "best_fold_error": 1.0101717815321325,
-        "median_abs_log10_error": 0.7955891848756942,
-        "geometric_mean_fold": 12.675447792870672
+        "n": 24,
+        "median_fold_error": 4.62361402798846,
+        "worst_fold_error": 1757.0440585888973,
+        "best_fold_error": 1.033300305581913,
+        "median_abs_log10_error": 0.6645721548625732,
+        "geometric_mean_fold": 9.534824272988061
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
     "out_of_sample": {
-      "benchmarks": 13,
-      "rows": 27,
-      "within_band": 11,
+      "benchmarks": 11,
+      "rows": 24,
+      "within_band": 10,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.4074074074074074,
+      "within_band_rate": 0.4166666666666667,
       "fold_summary": {
-        "n": 27,
-        "median_fold_error": 6.245815985439488,
-        "worst_fold_error": 9631.58938385354,
-        "best_fold_error": 1.0101717815321325,
-        "median_abs_log10_error": 0.7955891848756942,
-        "geometric_mean_fold": 12.675447792870672
+        "n": 24,
+        "median_fold_error": 4.62361402798846,
+        "worst_fold_error": 1757.0440585888973,
+        "best_fold_error": 1.033300305581913,
+        "median_abs_log10_error": 0.6645721548625732,
+        "geometric_mean_fold": 9.534824272988061
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -488,10 +488,10 @@
     },
     "holdout_within_band": {
       "hits": 6,
-      "total": 18
+      "total": 17
     },
     "shared_with_holdout_panel": 0,
-    "wall_seconds": 234.7
+    "wall_seconds": 201.6
   },
   "benchmarks": [
     {
@@ -506,7 +506,7 @@
         "temp_C": 130,
         "time_min": 0.4167,
         "ph": 6.0,
-        "water_activity": 0.35
+        "water_activity": null
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
@@ -532,61 +532,38 @@
         "mean_abs_log10_error": 0.2,
         "source": "bundle validation_contract"
       },
-      "compounds": [
+      "compounds": [],
+      "refused_compounds": [
         {
+          "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+          "panel": "trust_loop",
           "compound": "acrylamide",
           "target_unit": "ppb",
-          "measured": 150.0,
-          "measured_ppb": 150.0,
-          "predicted": 0.015573753616558966,
-          "fold_error": 9631.58938385354,
-          "abs_log10_error": 3.983697959365597,
-          "within_band": false,
-          "within_contract_ratio": false,
-          "interval_ug_per_L": [
-            0.002226687209198219,
-            0.10892495394385342
-          ],
-          "measured_within_interval": false,
+          "reason": "REFUSED BY THE DATA: precursor charge not printed. Ma 2024 (secs. 3.1-3.2, Table 1) adds no asparagine or glucose and prints no free asparagine, reducing sugar, pH or water activity, so the pot the row was integrated at (SPI 50, Asn 42, Glc 42 mM, pH 6.0, a_w 0.35) is not the paper's. The charge was withdrawn 2026-11-06 (value_withdrawal; CF-131). The measured 150 ug/kg (Fig. 2D, 130 C arm) is kept as the datum.",
+          "envelope_state": "out_of_envelope",
           "lane": "acrylamide",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 130.0 C: 10.5 decades of 10 C, a factor of 139-2.78e+05 on the rate.",
-            "'Soy protein isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (50) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
-            "WATER ACTIVITY (B14/B15): a_w 0.35 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.75 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
-            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
-            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
-          ],
-          "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "unidentified_route": false,
+          "absolute_refused": false,
+          "data_refused": true
         }
       ],
-      "refused_compounds": [],
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "total_compounds": 1,
-      "coverage": 1.0,
-      "max_ratio": 9631.58938385354,
-      "mean_abs_log10_error": 3.983697959365597,
+      "coverage": 0.0,
+      "max_ratio": null,
+      "mean_abs_log10_error": null,
       "pearson_r_log10": null,
-      "ranking_status": "n/a",
+      "ranking_status": "fail",
       "scale_status": "fail",
-      "overall_status": "scale-gap",
+      "overall_status": "refused",
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 9632 > 1.50",
-        "mean |log10 ratio| 3.984 > 0.200"
+        "every target refused: REFUSED BY THE DATA: precursor charge not printed. Ma 2024 (secs. 3.1-3.2, Table 1) adds no asparagine or glucose and prints no free asparagine, reducing sugar, pH or water activity, so the pot the row was integrated at (SPI 50, Asn 42, Glc 42 mM, pH 6.0, a_w 0.35) is not the paper's. The charge was withdrawn 2026-11-06 (value_withdrawal; CF-131). The measured 150 ug/kg (Fig. 2D, 130 C arm) is kept as the datum.",
+        "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
-      "lanes": [
-        "acrylamide"
-      ]
+      "lanes": []
     },
     {
       "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
@@ -637,7 +614,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "acrylamide",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
@@ -648,7 +626,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "acrylamide",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 0,
@@ -740,6 +719,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 310.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -838,6 +818,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 5362.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -936,6 +917,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 6230.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -1015,7 +997,8 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
@@ -1026,7 +1009,8 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 0,
@@ -1118,6 +1102,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 11016.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -1197,7 +1182,8 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
@@ -1208,7 +1194,8 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 0,
@@ -1300,6 +1287,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 1016.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -1398,6 +1386,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 4224.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -1500,6 +1489,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 121.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -1518,6 +1508,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 198.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -1594,7 +1585,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -1605,7 +1597,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 0,
@@ -1801,7 +1794,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -1812,7 +1806,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -1823,7 +1818,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 4,
@@ -1897,6 +1893,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 715.22,
             "study": "resconi_2023_pbma_beef_identity_benchmark",
@@ -1973,7 +1970,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -1984,7 +1982,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 0,
@@ -2058,6 +2057,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 11.7,
             "study": "hofmann_schieberle_grosch_1996",
@@ -2135,6 +2135,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 8.1,
             "study": "zhou2023c",
@@ -2153,6 +2154,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 116.0,
             "study": "zhou2023c",
@@ -2171,6 +2173,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 716.0,
             "study": "zhou2023c",
@@ -2248,6 +2251,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 59.1,
             "study": "zhou2023c",
@@ -2266,6 +2270,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 124.0,
             "study": "zhou2023c",
@@ -2284,6 +2289,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 113.0,
             "study": "zhou2023c",
@@ -2361,6 +2367,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 64.1,
             "study": "zhou2023c",
@@ -2379,6 +2386,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 383.0,
             "study": "zhou2023c",
@@ -2397,6 +2405,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 397.0,
             "study": "zhou2023c",
@@ -2474,6 +2483,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 57.1,
             "study": "zhou2023c",
@@ -2492,6 +2502,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 270.0,
             "study": "zhou2023c",
@@ -2510,6 +2521,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 575.0,
             "study": "zhou2023c",
@@ -2604,54 +2616,37 @@
           "formed_predicted": null,
           "formed_measured": null,
           "fold_error_formed_only": null
-        },
-        {
-          "compound": "5-Hydroxymethylfurfural (HMF)",
-          "target_unit": "ppb",
-          "measured": 12280.0,
-          "measured_ppb": 12280.0,
-          "predicted": 1966.1162014102977,
-          "fold_error": 6.245815985439488,
-          "abs_log10_error": 0.7955891848756942,
-          "within_band": false,
-          "within_contract_ratio": false,
-          "interval_ug_per_L": [
-            281.109224228565,
-            13751.28449824541
-          ],
-          "measured_within_interval": true,
-          "lane": "acrylamide",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
-            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
-          ],
-          "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
         }
       ],
-      "refused_compounds": [],
-      "matched_compounds": 2,
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+          "panel": "maillard_path_holdout",
+          "compound": "5-Hydroxymethylfurfural (HMF)",
+          "target_unit": "ppb",
+          "reason": "REFUSED BY THE DATA: within-source conflict (CF-127): the prose prints 12.28 ppm citing Fig. 4A, but Fig. 4A's asparagine + fructose 30-min bar (water) reads ~5.0 ppm (SD to ~6) on an axis checked against the printed 91.56 ppm fructose-only bar; no bar is near 12.28. Demoted, not scored, until an author reply or a second source settles it. Acrylamide (1859 ppb) holds and stays scored.",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "acrylamide",
+          "unidentified_route": false,
+          "absolute_refused": false,
+          "data_refused": true
+        }
+      ],
+      "matched_compounds": 1,
       "total_compounds": 2,
-      "coverage": 1.0,
+      "coverage": 0.5,
       "max_ratio": 9.148884189968525,
-      "mean_abs_log10_error": 0.8784786575208554,
+      "mean_abs_log10_error": 0.9613681301660167,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
-      "overall_status": "scale-gap",
+      "overall_status": "coverage-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
+        "coverage 50.0% < 100%",
         "max ratio 9.149 > 1.50",
-        "mean |log10 ratio| 0.878 > 0.100"
+        "mean |log10 ratio| 0.961 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -2772,7 +2767,8 @@
           "envelope_state": "out_of_envelope",
           "lane": null,
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 2,
@@ -2910,7 +2906,8 @@
           "envelope_state": "out_of_envelope",
           "lane": null,
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 2,
@@ -3336,7 +3333,7 @@
       "conditions": {
         "temp_C": 121.0,
         "time_min": 18.0,
-        "ph": 4.36,
+        "ph": 4.98,
         "water_activity": 0.99
       },
       "signal_origin": "external_literature",
@@ -3349,14 +3346,17 @@
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='lcmsms_external_calibration_curve'",
       "vessel_oxygen": {
-        "atmosphere": "unstated",
-        "water_source": "unstated",
-        "provenance_class": "repo_verbatim_methods_quote",
-        "fill_mL": null,
-        "vessel_mL": null,
-        "headspace_mL": null,
-        "status": "ambiguous",
-        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+        "atmosphere": "air_by_default",
+        "water_source": "distilled",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 200.0,
+        "vessel_mL": 225.0,
+        "headspace_mL": 25.0,
+        "status": "computed",
+        "o2_mmol": 0.2716996854773687,
+        "thiol_mmol": 0.0,
+        "o2_to_thiol": null,
+        "basis": "25.0 mL headspace of air at closure = 0.272 mmol O2; no free-thiol precursor charged (air by default; water: distilled)"
       },
       "scale_thresholds": {
         "max_ratio": 1.5,
@@ -3369,52 +3369,52 @@
           "target_unit": "ppb",
           "measured": 17400.0,
           "measured_ppb": 17400.0,
-          "predicted": 1869.446898195805,
-          "fold_error": 9.307565792209804,
-          "abs_log10_error": 0.9688361147902614,
+          "predicted": 1957.004962706679,
+          "fold_error": 8.891137391871785,
+          "abs_log10_error": 0.9489573213096302,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            267.28774571480795,
-            13075.166225176854
+            279.8065274490469,
+            13687.559253799016
           ],
           "measured_within_interval": false,
           "lane": "trunk",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
+            "pH TERM (B12): pH 4.98 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.21; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.98 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 121 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
           "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "carried_declared_ug_per_l": 100.0,
+          "declared_share_of_prediction": 0.051098490757883815,
+          "formed_predicted": 1857.004962706679,
+          "formed_measured": 17300.0,
+          "fold_error_formed_only": 9.316076341973998
         },
         {
           "compound": "3-deoxyglucosone",
           "target_unit": "ppb",
           "measured": 52200.0,
           "measured_ppb": 52200.0,
-          "predicted": 66358.981544688,
-          "fold_error": 1.271244857177931,
-          "abs_log10_error": 0.10422920899568688,
+          "predicted": 65518.15888731306,
+          "fold_error": 1.2551371434351162,
+          "abs_log10_error": 0.09869118189914014,
           "within_band": true,
           "within_contract_ratio": true,
           "interval_ug_per_L": [
-            9487.802302450016,
-            464123.75503557146
+            9367.5840748809,
+            458242.9268496078
           ],
           "measured_within_interval": true,
           "lane": "trunk",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+            "pH TERM (B12): pH 4.98 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.21; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.98 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
           "shared_with": null,
           "in_core_fit": false,
@@ -3429,21 +3429,21 @@
           "target_unit": "ppb",
           "measured": 55500.0,
           "measured_ppb": 55500.0,
-          "predicted": 8373.284934196285,
-          "fold_error": 6.6282230255105015,
-          "abs_log10_error": 0.8213971130724306,
+          "predicted": 8295.50678885754,
+          "fold_error": 6.69036882406596,
+          "abs_log10_error": 0.8254500600460647,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1197.186427947778,
-            58563.895273541144
+            1186.0659488619394,
+            58019.90433163661
           ],
           "measured_within_interval": true,
           "lane": "trunk",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+            "pH TERM (B12): pH 4.98 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.21; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.98 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
           "shared_with": null,
           "in_core_fit": false,
@@ -3458,107 +3458,107 @@
           "target_unit": "ppb",
           "measured": 7500.0,
           "measured_ppb": 7500.0,
-          "predicted": 119.05906453604986,
-          "fold_error": 62.99394362979458,
-          "abs_log10_error": 1.7992987974758783,
+          "predicted": 219.05906453604985,
+          "fold_error": 34.23734149456184,
+          "abs_log10_error": 1.534500034653869,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            17.022697460659018,
-            832.7153132433402
+            31.3203887175097,
+            1532.1289332715762
           ],
           "measured_within_interval": false,
           "lane": "trunk",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
+            "pH TERM (B12): pH 4.98 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.21; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.98 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
           "shared_with": null,
           "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "carried_declared_ug_per_l": 100.0,
+          "declared_share_of_prediction": 0.4564978865941579,
+          "formed_predicted": 119.05906453604985,
+          "formed_measured": 7400.0,
+          "fold_error_formed_only": 62.15402438139732
         },
         {
           "compound": "glyoxal",
           "target_unit": "ppb",
           "measured": 5600.0,
           "measured_ppb": 5600.0,
-          "predicted": 160.79393493253662,
-          "fold_error": 34.827184261331496,
-          "abs_log10_error": 1.5419183636572515,
+          "predicted": 1160.7939349325366,
+          "fold_error": 4.824284338051321,
+          "abs_log10_error": 0.6834328967290132,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            22.989820376395468,
-            1124.6146810975008
+            165.96673294490233,
+            8118.750881379862
           ],
-          "measured_within_interval": false,
+          "measured_within_interval": true,
           "lane": "trunk",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
+            "pH TERM (B12): pH 4.98 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.21; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.98 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
           "shared_with": null,
           "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "carried_declared_ug_per_l": 1000.0,
+          "declared_share_of_prediction": 0.861479346080593,
+          "formed_predicted": 160.79393493253656,
+          "formed_measured": 4600.0,
+          "fold_error_formed_only": 28.60804421466517
         },
         {
           "compound": "methylglyoxal",
           "target_unit": "ppb",
           "measured": 2600.0,
           "measured_ppb": 2600.0,
-          "predicted": 2573.819668627614,
-          "fold_error": 1.0101717815321325,
-          "abs_log10_error": 0.004395232622133203,
+          "predicted": 3451.2008290390036,
+          "fold_error": 1.3273849342457706,
+          "abs_log10_error": 0.12299688411282031,
           "within_band": true,
           "within_contract_ratio": true,
           "interval_ug_per_L": [
-            367.9967897284737,
-            18001.64531734715
+            493.442039189868,
+            24138.168652826193
           ],
           "measured_within_interval": true,
           "lane": "trunk",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+            "pH TERM (B12): pH 4.98 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.21; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.98 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
           "shared_with": null,
           "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "carried_declared_ug_per_l": 900.0,
+          "declared_share_of_prediction": 0.26077879688346256,
+          "formed_predicted": 2551.2008290390036,
+          "formed_measured": 1700.0,
+          "fold_error_formed_only": 1.5007063700229433
         }
       ],
       "refused_compounds": [],
       "matched_compounds": 6,
       "total_compounds": 6,
       "coverage": 1.0,
-      "max_ratio": 62.99394362979458,
-      "mean_abs_log10_error": 0.8733458051022737,
-      "pearson_r_log10": 0.6852842256694865,
+      "max_ratio": 34.23734149456184,
+      "mean_abs_log10_error": 0.7023380631250896,
+      "pearson_r_log10": 0.6399553616495822,
       "ranking_status": "fail",
       "scale_status": "fail",
       "overall_status": "ranking-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "ranking 0.685 < 0.85",
-        "max ratio 62.99 > 1.50",
-        "mean |log10 ratio| 0.873 > 0.100"
+        "ranking 0.640 < 0.85",
+        "max ratio 34.24 > 1.50",
+        "mean |log10 ratio| 0.702 > 0.100"
       ],
       "within_band_count": 2,
       "lanes": [
@@ -3617,7 +3617,8 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
@@ -3628,7 +3629,8 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 0,
@@ -3701,7 +3703,8 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
@@ -3712,7 +3715,8 @@
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 0,
@@ -3786,6 +3790,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 229.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -3804,6 +3809,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 553.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -3884,6 +3890,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 12.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -3902,6 +3909,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 25.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -4004,6 +4012,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 96.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -4022,6 +4031,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 143.0,
             "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -4102,6 +4112,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 6.88,
             "study": "yiltirak2026",
@@ -4120,6 +4131,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 1.28,
             "study": "yiltirak2026",
@@ -4200,6 +4212,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 3.29,
             "study": "yiltirak2026",
@@ -4218,6 +4231,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 1.46,
             "study": "yiltirak2026",
@@ -4298,6 +4312,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 2.4,
             "study": "yiltirak2026",
@@ -4316,6 +4331,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 1.68,
             "study": "yiltirak2026",
@@ -4396,6 +4412,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 1.71,
             "study": "yiltirak2026",
@@ -4414,6 +4431,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 1.62,
             "study": "yiltirak2026",
@@ -4521,6 +4539,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 22.63,
             "study": "zhang2025b",
@@ -4539,6 +4558,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 0.29,
             "study": "zhang2025b",
@@ -4557,6 +4577,7 @@
           "lane": "sulfur",
           "unidentified_route": false,
           "absolute_refused": true,
+          "data_refused": false,
           "relative_use_only": {
             "measured": 18.25,
             "study": "zhang2025b",
@@ -4636,7 +4657,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
@@ -4647,7 +4669,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 0,
@@ -4706,40 +4729,20 @@
         "mean_abs_log10_error": 0.12,
         "source": "global BenchmarkThresholds default"
       },
-      "compounds": [
+      "compounds": [],
+      "refused_compounds": [
         {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "panel": "external_matrix",
           "compound": "hexanal",
           "target_unit": "ppb",
-          "measured": 324.0,
-          "measured_ppb": 324.0,
-          "predicted": 109.48984853623236,
-          "fold_error": 2.9591784474227487,
-          "abs_log10_error": 0.4711711552229036,
-          "within_band": true,
-          "within_contract_ratio": false,
-          "interval_ug_per_L": [
-            4.568869494793319,
-            2623.8497173422556
-          ],
-          "measured_within_interval": true,
-          "lane": "lipid",
+          "reason": "REFUSED BY THE DATA: net loss of a carried level (CF-129): raw peas carry 1260 +/- 114 ug/kg hexanal and the roasted peas measure 324 +/- 34.3 (Bi 2020 Table 4), a 3.9x loss on roasting. The lipid lane adds a carried level and forms more; it has no loss term (volatilisation or consumption), so it cannot represent this row. Refused until it does.",
           "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its temperature dependence is measured only in OTHER matrices, and they disagree: Q10 1.6-3.3 in almond paste at 60-120 C, falling as the matrix gets wetter (Tazi 2009), and 113.8-122.2 kJ/mol for hexanal in bulk n-6 oils at 130-160 C (Frankel 1993). The band (1.6-3.3) spans both; the centre is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 2e2-9e5 across the band). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 570-1e+07 on the rate.",
-            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
-            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
-          ],
-          "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
-        }
-      ],
-      "refused_compounds": [
+          "lane": "lipid",
+          "unidentified_route": false,
+          "absolute_refused": false,
+          "data_refused": true
+        },
         {
           "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
           "panel": "external_matrix",
@@ -4749,7 +4752,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -4760,7 +4764,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -4771,29 +4776,27 @@
           "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "total_compounds": 4,
-      "coverage": 0.25,
-      "max_ratio": 2.9591784474227487,
-      "mean_abs_log10_error": 0.4711711552229036,
+      "coverage": 0.0,
+      "max_ratio": null,
+      "mean_abs_log10_error": null,
       "pearson_r_log10": null,
-      "ranking_status": "n/a",
+      "ranking_status": "fail",
       "scale_status": "fail",
-      "overall_status": "coverage-gap",
+      "overall_status": "refused",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "coverage 25.0% < 100%",
-        "max ratio 2.959 > 2.00",
-        "mean |log10 ratio| 0.471 > 0.120"
+        "every target refused: REFUSED BY THE DATA: net loss of a carried level (CF-129): raw peas carry 1260 +/- 114 ug/kg hexanal and the roasted peas measure 324 +/- 34.3 (Bi 2020 Table 4), a 3.9x loss on roasting. The lipid lane adds a carried level and forms more; it has no loss term (volatilisation or consumption), so it cannot represent this row. Refused until it does.; THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.; PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.; THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+        "ranking n/a < 0.85"
       ],
-      "within_band_count": 1,
-      "lanes": [
-        "lipid"
-      ]
+      "within_band_count": 0,
+      "lanes": []
     },
     {
       "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
@@ -4939,7 +4942,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 3,
@@ -5013,7 +5017,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         },
         {
           "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
@@ -5024,7 +5029,8 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false,
-          "absolute_refused": false
+          "absolute_refused": false,
+          "data_refused": false
         }
       ],
       "matched_compounds": 0,
@@ -5048,6 +5054,18 @@
   ],
   "refused_compounds": [
     {
+      "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+      "panel": "trust_loop",
+      "compound": "acrylamide",
+      "target_unit": "ppb",
+      "reason": "REFUSED BY THE DATA: precursor charge not printed. Ma 2024 (secs. 3.1-3.2, Table 1) adds no asparagine or glucose and prints no free asparagine, reducing sugar, pH or water activity, so the pot the row was integrated at (SPI 50, Asn 42, Glc 42 mM, pH 6.0, a_w 0.35) is not the paper's. The charge was withdrawn 2026-11-06 (value_withdrawal; CF-131). The measured 150 ug/kg (Fig. 2D, 130 C arm) is kept as the datum.",
+      "envelope_state": "out_of_envelope",
+      "lane": "acrylamide",
+      "unidentified_route": false,
+      "absolute_refused": false,
+      "data_refused": true
+    },
+    {
       "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
       "panel": "trust_loop",
       "compound": "N\u03b5-(Carboxymethyl)lysine (CML)",
@@ -5056,7 +5074,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "acrylamide",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
@@ -5067,7 +5086,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "acrylamide",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
@@ -5079,6 +5099,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 310.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5097,6 +5118,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 5362.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5115,6 +5137,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 6230.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5132,7 +5155,8 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
@@ -5143,7 +5167,8 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
@@ -5155,6 +5180,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 11016.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5172,7 +5198,8 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
@@ -5183,7 +5210,8 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
@@ -5195,6 +5223,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 1016.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5213,6 +5242,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 4224.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5231,6 +5261,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 121.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5249,6 +5280,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 198.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5266,7 +5298,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -5277,7 +5310,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -5288,7 +5322,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -5299,7 +5334,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -5310,7 +5346,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
@@ -5322,6 +5359,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 715.22,
         "study": "resconi_2023_pbma_beef_identity_benchmark",
@@ -5339,7 +5377,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -5350,7 +5389,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
@@ -5362,6 +5402,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 11.7,
         "study": "hofmann_schieberle_grosch_1996",
@@ -5380,6 +5421,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 8.1,
         "study": "zhou2023c",
@@ -5398,6 +5440,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 116.0,
         "study": "zhou2023c",
@@ -5416,6 +5459,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 716.0,
         "study": "zhou2023c",
@@ -5434,6 +5478,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 59.1,
         "study": "zhou2023c",
@@ -5452,6 +5497,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 124.0,
         "study": "zhou2023c",
@@ -5470,6 +5516,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 113.0,
         "study": "zhou2023c",
@@ -5488,6 +5535,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 64.1,
         "study": "zhou2023c",
@@ -5506,6 +5554,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 383.0,
         "study": "zhou2023c",
@@ -5524,6 +5573,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 397.0,
         "study": "zhou2023c",
@@ -5542,6 +5592,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 57.1,
         "study": "zhou2023c",
@@ -5560,6 +5611,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 270.0,
         "study": "zhou2023c",
@@ -5578,6 +5630,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 575.0,
         "study": "zhou2023c",
@@ -5585,6 +5638,18 @@
         "shared_with": null,
         "log10_predicted_minus_study_mean": 0.15876225686229573
       }
+    },
+    {
+      "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "panel": "maillard_path_holdout",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "target_unit": "ppb",
+      "reason": "REFUSED BY THE DATA: within-source conflict (CF-127): the prose prints 12.28 ppm citing Fig. 4A, but Fig. 4A's asparagine + fructose 30-min bar (water) reads ~5.0 ppm (SD to ~6) on an axis checked against the printed 91.56 ppm fructose-only bar; no bar is near 12.28. Demoted, not scored, until an author reply or a second source settles it. Acrylamide (1859 ppb) holds and stays scored.",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "acrylamide",
+      "unidentified_route": false,
+      "absolute_refused": false,
+      "data_refused": true
     },
     {
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
@@ -5595,7 +5660,8 @@
       "envelope_state": "out_of_envelope",
       "lane": null,
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
@@ -5606,7 +5672,8 @@
       "envelope_state": "out_of_envelope",
       "lane": null,
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
@@ -5617,7 +5684,8 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
@@ -5628,7 +5696,8 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
@@ -5639,7 +5708,8 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
@@ -5650,7 +5720,8 @@
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
@@ -5662,6 +5733,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 229.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5680,6 +5752,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 553.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5698,6 +5771,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 12.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5716,6 +5790,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 25.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5734,6 +5809,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 96.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5752,6 +5828,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 143.0,
         "study": "hofmann_schieberle_1998_free_mft_fft",
@@ -5770,6 +5847,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 6.88,
         "study": "yiltirak2026",
@@ -5788,6 +5866,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 1.28,
         "study": "yiltirak2026",
@@ -5806,6 +5885,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 3.29,
         "study": "yiltirak2026",
@@ -5824,6 +5904,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 1.46,
         "study": "yiltirak2026",
@@ -5842,6 +5923,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 2.4,
         "study": "yiltirak2026",
@@ -5860,6 +5942,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 1.68,
         "study": "yiltirak2026",
@@ -5878,6 +5961,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 1.71,
         "study": "yiltirak2026",
@@ -5896,6 +5980,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 1.62,
         "study": "yiltirak2026",
@@ -5914,6 +5999,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 22.63,
         "study": "zhang2025b",
@@ -5932,6 +6018,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 0.29,
         "study": "zhang2025b",
@@ -5950,6 +6037,7 @@
       "lane": "sulfur",
       "unidentified_route": false,
       "absolute_refused": true,
+      "data_refused": false,
       "relative_use_only": {
         "measured": 18.25,
         "study": "zhang2025b",
@@ -5967,7 +6055,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
@@ -5978,7 +6067,20 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "panel": "external_matrix",
+      "compound": "hexanal",
+      "target_unit": "ppb",
+      "reason": "REFUSED BY THE DATA: net loss of a carried level (CF-129): raw peas carry 1260 +/- 114 ug/kg hexanal and the roasted peas measure 324 +/- 34.3 (Bi 2020 Table 4), a 3.9x loss on roasting. The lipid lane adds a carried level and forms more; it has no loss term (volatilisation or consumption), so it cannot represent this row. Refused until it does.",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "lipid",
+      "unidentified_route": false,
+      "absolute_refused": false,
+      "data_refused": true
     },
     {
       "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -5989,7 +6091,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -6000,7 +6103,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -6011,7 +6115,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
@@ -6022,7 +6127,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
@@ -6033,7 +6139,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     },
     {
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
@@ -6044,7 +6151,8 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false,
-      "absolute_refused": false
+      "absolute_refused": false,
+      "data_refused": false
     }
   ],
   "skipped_bundles": [

@@ -2,18 +2,18 @@
   "artifact": "contrast_scores",
   "provenance": {
     "artifact": "contrast_scores",
-    "generated_on": "2026-11-05",
+    "generated_on": "2026-11-06",
     "git": {
-      "commit": "3b62dcd53c7ab2936436b1861dc8f4eef1b6f25b",
-      "short": "3b62dcd5",
-      "branch": "h0-followups",
+      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
+      "short": "56861a85",
+      "branch": "m0-data-corrections-batch1",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_contrast_scores.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "d444f932242d9853847d98d1eb9f2954e605044f11a3628a727566619690ed4b"
+        "sha256": "85d525b15fe7944c2405e9771d74a8decfdba39efd10a7d7f8a2209dfdb7c8ed"
       }
     ]
   },
