@@ -543,3 +543,24 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 ## 2026-11-06 — A job started with `&` inside a foreground call dies with it
 - **What happened:** I launched the records branch's regenerate-and-gates run with a trailing `&` in a normal Bash call. The harness ended the shell when the call returned, which killed the job after three steps. No notification came, so I found it only by reading the log.
 - **Rule:** start long jobs only with the tool's background mode (`run_in_background`), never with `&`.
+## 2026-11-06 — Scratch files in the shared scratchpad need unique names
+- **What happened:** several agents share one session scratchpad. One agent's `pr_body.md` overwrote another's, and
+  the wrong body was pushed into PR #88.
+- **Rule:** name every scratch file with your agent id (or another unique tag), e.g. `<agent-id>_pr_body.md`. Before
+  using a scratch file for a push, PR body or commit message, check it is yours (name and content).
+## 2026-11-06 — Never choose a noise model by the verdict it gives
+- **What happened:** in the M5 case the Zyzak noise was first taken as the SD, a choice that decided the verdict; the
+  confirmation ruled the choice circular and restored the SE with a studentized reference.
+- **Rule:** fix the noise model from the measurement's design before looking at what it does to the verdict. With
+  n = 3 replicates the variance estimate is itself uncertain: propagate it (a studentized reference, t with n - 1
+  degrees of freedom), do not swap SE for SD to widen the band.
+## 2026-11-06 — A pre-registered noise term comes from the measured quantity's own noise
+- **What happened:** M1b part (i) v3.6 applied omega (H0's between-pot scatter of thiol CONCENTRATIONS, 0.419 dex) as
+  +-omega corners on every titratable pool of a pH balance. That broke the pools' shared stoichiometry, used a joint
+  worst-case bound as a 1-sd scale, and gave delta-pH 0.4 - 3.8 against a pH meter's 0.05. The power check came out
+  0 for every pair; the review found the term flattened B1's and B13's predictive densities ~4x for structural reasons
+  (CF-084; PR #94, prereg secs. 18.1 and 20).
+- **Rule:** an error term in a pre-registration is built from the noise of the quantity being compared (its
+  replicates, meter repeatability, a same-design repeat), never transferred from another observable. Before freezing,
+  check that the term respects the model's conservation laws and that its size is comparable with the measurement's
+  noise.
