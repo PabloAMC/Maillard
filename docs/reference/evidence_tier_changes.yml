@@ -1,0 +1,24 @@
+# Evidence-tier changes since the incumbent audit (plan sec. 7, rule S1, owner 2026-11-06).
+#
+# The S1 record (results/validation/incumbent_evidence_tiers.json, built by scripts/generators/build_evidence_tiers.py
+# from src/evidence_tiers.py) assigns every shipped coordinate a tier by fixed rules. Its tiers at the audit are frozen
+# in results/validation/incumbent_evidence_tiers_baseline.json (write-once). Sec. 7 S1: "Upgrades need an artifact and
+# a second reader; downgrades need a citation." Every coordinate whose tier differs from the baseline must therefore be
+# explained here, one entry per change, in order; the generator copies each entry onto its row as `tier_changes`, and
+# scripts/ci/evidence_tier_gate.py fails when a row's tier is not the baseline tier carried through its entries.
+#
+# Fields:
+#   coordinate     the row id in the record (e.g. k_schiff.log10_k_ref; a band-carried parameter's key)
+#   from           the tier before the change (null for a coordinate new since the baseline)
+#   to             the tier after
+#   date           ISO date
+#   citation       the paper key, ledger row, fit report or case that justifies it (every change)
+#   artifact       UPGRADES only (into measured / analogue / bounded / fitted_identified): the file under
+#                  results/validation/ that shows it (for fitted_identified, the S1 profile: every other unidentified
+#                  coordinate profiled over its band; the row's identification.profile_artifact names it too)
+#   second_reader  UPGRADES only: who re-read the evidence, independently of the author of the change
+#   case           optional: the sec. 7 case / EX entry
+#
+# A downgrade that moves a shipped output ships as an S4 change, review included (sec. 7 S1).
+
+entries: []
