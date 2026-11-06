@@ -7388,17 +7388,13 @@
     "artifact": "s1_profiles",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "f0e9ff21d4c632f821a886466bc2c4a089275329",
-      "short": "f0e9ff21",
-      "branch": "s1-profile-run",
+      "commit": "0707cfd0e7424e17b4f4d7d0fcf13c96368b85b3",
+      "short": "0707cfd0",
+      "branch": "s1-second-reader-tmp",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_s1_profiles.py",
     "inputs": [
-      {
-        "path": "results/validation/incumbent_evidence_tiers.json",
-        "sha256": "a47b400b78c5a62a2886314aca9d0595e9c8821fbf371ef2abf42c21b7666a6a"
-      },
       {
         "path": "results/validation/kinetic_core_b18_fit_report.json",
         "sha256": "cc88208cc76d617340f00123c7f3cdd05cad979fc9b719f1e78aedc6f5eb0afe"
@@ -7437,7 +7433,7 @@
     "tiers": "no tier is changed here; proposed upgrades need a second reader before they enter docs/reference/evidence_tier_changes.yml"
   },
   "findings": [
-    "The S1 record attributes the fed 3-deoxy triangle (k_tdg_ddg, k_ddg_tdg, k_ddg_dgal, k_dgal_ddg, k_ddg_hmf) to B39 and reads B39's Laplace, but the shipped values are B41's optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT); B41 is profiled here.",
+    "The S1 record attributed the fed 3-deoxy triangle (k_tdg_ddg, k_ddg_tdg, k_ddg_dgal, k_dgal_ddg, k_ddg_hmf) to B39 and read B39's Laplace, but the shipped values are B41's optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT); B41 is profiled here. Fixed in src/evidence_tiers.py (the record now reads B41's report, asserted equal to FROZEN_B39) by the S1 second reading, 2026-11-06.",
     "B1: today's engine does NOT reproduce the fit's frozen objective (S = r . r at the frozen point 5025.874 now, 3979.877 in its report): the engine changed under its rows since it froze, so its coordinates need re-deriving (S1) and the profile is of today's objective.",
     "B18: today's engine does NOT reproduce the fit's frozen objective (S = r . r at the frozen point 295.068 now, 2.644 in its report): the engine changed under its rows since it froze, so its coordinates need re-deriving (S1) and the profile is of today's objective.",
     "B18: today's engine re-optimises the fit's objective below its frozen point (S at frozen 295.068, S_min 75.252; coordinates moved > 1e-3: log10_k_go_ak_100C, ea_go_ak_kj_mol, log10_k_mgo_ak_100C, ph_slope_above_7_decades_per_unit, ph_slope_below_7_decades_per_unit); the profile is around today's optimum."
@@ -7530,5 +7526,10 @@
       "measured": "one profile point (22 coordinates re-optimised at one value of k_arp_tdp, B60's quick setting, 2 pot workers) had not finished after 34 min of wall time and was stopped; B60's own fit spent 7601 s on 246 evaluations (31 s each), so one forward Jacobian (23 columns) costs about 12 min.",
       "projection": "about 18 points per coordinate x 11 coordinates = ~200 points at >= 34 min each: >= 110 h serial, >= 28 h wall on 4 chains, plus the full refit. Porting B60's objective to the JAX fit path (the network carries sulfur since A2 + H3) is the route to a feasible run."
     }
+  },
+  "selected_from": {
+    "record": "results/validation/incumbent_evidence_tiers.json",
+    "rows": "basis contains 'the profile requirement is unmet', or identification.profile_artifact names s1_profiles.json",
+    "why_not_an_input": "the record reads this artifact back (S1 upgrades cite it); a hash each way would be a cycle"
   }
 }

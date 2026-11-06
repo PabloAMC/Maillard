@@ -530,7 +530,9 @@ MIN_STEP = {"log10k": 0.02, "Ea": 1.0, "ph_slope": 0.01, "pka": 0.05, "acid_yiel
 
 def tier_rows() -> Dict[str, dict]:
     rows = json.loads(TIERS_JSON.read_text(encoding="utf-8"))["rows"]
-    sel = {r["id"]: r for r in rows if PROFILE_MISSING_TEXT in (r.get("basis") or "")}
+    # a coordinate this artifact has already upgraded (evidence_tiers reads it back) is still one of the 28
+    sel = {r["id"]: r for r in rows if PROFILE_MISSING_TEXT in (r.get("basis") or "")
+           or str((r.get("identification") or {}).get("profile_artifact") or "").endswith(OUT_JSON.name)}
     assert set(sel) == set(COORDINATES), (sorted(set(sel) ^ set(COORDINATES)))
     return sel
 
@@ -840,9 +842,17 @@ def load_payload() -> Dict[str, Any]:
 
 
 def finalize(p: Dict[str, Any]) -> Dict[str, Any]:
-    inputs = [TIERS_JSON] + sorted({ROOT / fb["report"].split(" ")[0] for fb in p["fits"].values()})
+    # The S1 record selects the coordinates and supplies their bands, but it is NOT a provenance input: the record
+    # reads this artifact back (an upgrade to fitted_identified cites it), so hashing it here would make the two
+    # artifacts stale against each other forever. The fit reports are the inputs the profiles are computed from.
+    inputs = sorted({ROOT / fb["report"].split(" ")[0] for fb in p["fits"].values()})
     p["provenance"] = provenance.provenance_block("s1_profiles", generated_by="scripts/generators/build_s1_profiles.py",
                                                   inputs=inputs)
+    p["selected_from"] = {"record": data_paths.rel(TIERS_JSON),
+                          "rows": f"basis contains {PROFILE_MISSING_TEXT!r}, or identification.profile_artifact names "
+                                  f"{OUT_JSON.name}",
+                          "why_not_an_input": "the record reads this artifact back (S1 upgrades cite it); a hash each "
+                                              "way would be a cycle"}
     p["rule"] = {"plan_sec7_S1": RULE_S1, "evidence_tiers": RULE_CODE}
     p["method"] = METHOD
     p["caveats"] = {"spent_data": SPENT_DATA, "sulfur_and_ph_drift": CONDITIONAL_B0,
@@ -852,9 +862,11 @@ def finalize(p: Dict[str, Any]) -> Dict[str, Any]:
                              "docs/reference/evidence_tier_changes.yml"}
     findings = []
     if "B41" in p["fits"]:
-        findings.append("The S1 record attributes the fed 3-deoxy triangle (k_tdg_ddg, k_ddg_tdg, k_ddg_dgal, "
-                        "k_dgal_ddg, k_ddg_hmf) to B39 and reads B39's Laplace, but the shipped values are B41's "
-                        "optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT); B41 is profiled here.")
+        findings.append("The S1 record attributed the fed 3-deoxy triangle (k_tdg_ddg, k_ddg_tdg, k_ddg_dgal, "
+                        "k_dgal_ddg, k_ddg_hmf) to B39 and read B39's Laplace, but the shipped values are B41's "
+                        "optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT); B41 is profiled here. Fixed in "
+                        "src/evidence_tiers.py (the record now reads B41's report, asserted equal to FROZEN_B39) by "
+                        "the S1 second reading, 2026-11-06.")
     for name, fb in p["fits"].items():
         if not fb["frozen_objective_reproduced"]:
             findings.append(f"{name}: today's engine does NOT reproduce the fit's frozen objective (S = r . r at the "

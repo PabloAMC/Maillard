@@ -4,10 +4,10 @@
   "artifact": "incumbent_evidence_tiers",
   "generated_on": "2026-11-06",
   "git": {
-   "commit": "44ce75dcc91e64ce64da59d3bee98b538f20b192",
-   "short": "44ce75dc",
-   "branch": "register-pass-2026-11-06",
-   "dirty": false
+   "commit": "0707cfd0e7424e17b4f4d7d0fcf13c96368b85b3",
+   "short": "0707cfd0",
+   "branch": "s1-second-reader-tmp",
+   "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
   "inputs": [
@@ -40,8 +40,12 @@
     "sha256": "30dea0576198068e76cbe231553faca460f319faa27f14c5ee009d2d2645dac6"
    },
    {
-    "path": "results/validation/kinetic_core_b39_fit_report.json",
-    "sha256": "e8c8f1b7fc95d6673f76e65ea0ce73a2e749c4aff7f34e2c49e59b30985cffd2"
+    "path": "results/validation/kinetic_core_b41_fit_report.json",
+    "sha256": "4d37ce110800d3faa4d9b3144958d8e9a6d78fc7c534ea2860d4b4ad38b1c939"
+   },
+   {
+    "path": "results/validation/s1_profiles.json",
+    "sha256": "b391093a03d3cd479c5d7b567820b472ff70f91e299338d2898820c651d7e500"
    },
    {
     "path": "results/validation/kinetic_core_b60_fit_report.json",
@@ -89,7 +93,7 @@
    },
    {
     "path": "docs/reference/evidence_tier_changes.yml",
-    "sha256": "0db7f09081d2afa1073b7b9bd35ceb62a2ce9eaf323b3f9808ca1dfe02faab28"
+    "sha256": "4e28068e6261e4bcb5b2e13668fd24ede023836e75f130ddfd1c5d3967d4a75f"
    },
    {
     "path": "src/kinetic_core/parameters.py",
@@ -141,7 +145,7 @@
    },
    {
     "path": "src/evidence_tiers.py",
-    "sha256": "c9a2a4ccac913ddfa437db091388acb7fdf65d5358f1b63f0609c9a329921b23"
+    "sha256": "24c67a1d1c182effe8799b9ef035dfd104f242df75e594d4b1e0f08d99cb682d"
    },
    {
     "path": "src/kinetic_core/acrylamide_conditions.py",
@@ -1817,24 +1821,30 @@
    "bounded_sides": null,
    "band_missing": false,
    "identification": {
-    "fit": "B39",
-    "artifact": "kinetic_core_b39_fit_report.json laplace; kinetic_core_b38_identifiability.json",
-    "value": -1.8619670908072206,
+    "fit": "B41",
+    "artifact": "kinetic_core_b41_fit_report.json laplace; kinetic_core_b38_identifiability.json",
+    "value": -1.9325002090039471,
     "bounds": [
      -4.4275872125713605,
      -0.4275872125713609
     ],
-    "ci95_halfwidth": 0.1650294740034768,
+    "ci95_halfwidth": 0.3992782768252551,
     "labels": {
-     "B39 Laplace": "identified",
+     "B41 Laplace": "identified",
      "B38": null
     },
     "criteria": [],
-    "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "status": "profile_pinned",
+    "profile_artifact": "results/validation/s1_profiles.json",
+    "profile_interval_95": [
+     -2.3700021081279368,
+     -1.5714455544774266
+    ],
+    "laplace_ci95_halfwidth": 0.12238242809078402,
+    "profile_calibration": "Wilks chi2_1 (asymptotic), the rows' stated sigmas inflated by max(1, chi2_red); not checked by simulation"
    },
-   "tier": "fitted_unidentified",
-   "basis": "B39: every local criterion passes; the profile requirement is unmet",
+   "tier": "fitted_identified",
+   "basis": "B41: S1 profile pinned on both sides, 95 % [-2.370, -1.571] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json)",
    "search_bounds_span_dex": 3.9999999999999996,
    "band_is_search_bound": true,
    "band": {
@@ -1862,7 +1872,18 @@
    "label_conflicts": [],
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [],
-   "tier_changes": []
+   "tier_changes": [
+    {
+     "coordinate": "k_tdg_ddg.log10_k_ref",
+     "from": "fitted_unidentified",
+     "to": "fitted_identified",
+     "date": "2026-11-06",
+     "citation": "B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value, parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed 3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates re-optimised at every grid value; 95 % [-2.370, -1.571] (Wilks chi2_1, chi2_red 0.11 so no inflation), closed on both sides inside the search bounds, every point converged, no failed pot",
+     "artifact": "results/validation/s1_profiles.json",
+     "second_reader": "S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed); optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected; identification only (fit rows, never credit); conditional on the declared barriers",
+     "case": "PR"
+    }
+   ]
   },
   {
    "id": "k_tdg_ddg.ea_kj_mol",
@@ -1923,24 +1944,30 @@
    "bounded_sides": null,
    "band_missing": false,
    "identification": {
-    "fit": "B39",
-    "artifact": "kinetic_core_b39_fit_report.json laplace; kinetic_core_b38_identifiability.json",
-    "value": -1.5249426444394498,
+    "fit": "B41",
+    "artifact": "kinetic_core_b41_fit_report.json laplace; kinetic_core_b38_identifiability.json",
+    "value": -1.4503764398702186,
     "bounds": [
      -2.924453038607469,
      1.0755469613925308
     ],
-    "ci95_halfwidth": 0.32639112869269565,
+    "ci95_halfwidth": 0.48840630994323486,
     "labels": {
-     "B39 Laplace": "identified",
+     "B41 Laplace": "identified",
      "B38": null
     },
     "criteria": [],
-    "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "status": "profile_pinned",
+    "profile_artifact": "results/validation/s1_profiles.json",
+    "profile_interval_95": [
+     -2.046976470432323,
+     -1.070163850545853
+    ],
+    "laplace_ci95_halfwidth": 0.12504236520033538,
+    "profile_calibration": "Wilks chi2_1 (asymptotic), the rows' stated sigmas inflated by max(1, chi2_red); not checked by simulation"
    },
-   "tier": "fitted_unidentified",
-   "basis": "B39: every local criterion passes; the profile requirement is unmet",
+   "tier": "fitted_identified",
+   "basis": "B41: S1 profile pinned on both sides, 95 % [-2.047, -1.070] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json)",
    "search_bounds_span_dex": 4.0,
    "band_is_search_bound": false,
    "band": {
@@ -1967,7 +1994,18 @@
    "label_conflicts": [],
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [],
-   "tier_changes": []
+   "tier_changes": [
+    {
+     "coordinate": "k_ddg_hmf.log10_k_ref",
+     "from": "fitted_unidentified",
+     "to": "fitted_identified",
+     "date": "2026-11-06",
+     "citation": "B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value, parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed 3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates re-optimised at every grid value; 95 % [-2.047, -1.070] (Wilks chi2_1, chi2_red 0.11 so no inflation), closed on both sides inside the search bounds, every point converged, no failed pot",
+     "artifact": "results/validation/s1_profiles.json",
+     "second_reader": "S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed); optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected; identification only (fit rows, never credit); conditional on the declared barriers",
+     "case": "PR"
+    }
+   ]
   },
   {
    "id": "k_ddg_hmf.ea_kj_mol",
@@ -5169,24 +5207,30 @@
    "bounded_sides": null,
    "band_missing": false,
    "identification": {
-    "fit": "B39",
-    "artifact": "kinetic_core_b39_fit_report.json laplace; kinetic_core_b38_identifiability.json",
-    "value": -1.7399459168992093,
+    "fit": "B41",
+    "artifact": "kinetic_core_b41_fit_report.json laplace; kinetic_core_b38_identifiability.json",
+    "value": -1.9647477052223088,
     "bounds": [
      -4.4275872125713605,
      -0.4275872125713609
     ],
-    "ci95_halfwidth": 0.2867090247941057,
+    "ci95_halfwidth": 0.4344866189153588,
     "labels": {
-     "B39 Laplace": "identified",
+     "B41 Laplace": "identified",
      "B38": null
     },
     "criteria": [],
-    "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "status": "profile_pinned",
+    "profile_artifact": "results/validation/s1_profiles.json",
+    "profile_interval_95": [
+     -2.414976516686369,
+     -1.5460032788556515
+    ],
+    "laplace_ci95_halfwidth": 0.3506817623802067,
+    "profile_calibration": "Wilks chi2_1 (asymptotic), the rows' stated sigmas inflated by max(1, chi2_red); not checked by simulation"
    },
-   "tier": "fitted_unidentified",
-   "basis": "B39: every local criterion passes; the profile requirement is unmet",
+   "tier": "fitted_identified",
+   "basis": "B41: S1 profile pinned on both sides, 95 % [-2.415, -1.546] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json)",
    "search_bounds_span_dex": 3.9999999999999996,
    "band_is_search_bound": true,
    "band": {
@@ -5214,7 +5258,18 @@
    "label_conflicts": [],
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [],
-   "tier_changes": []
+   "tier_changes": [
+    {
+     "coordinate": "k_ddg_tdg.log10_k_ref",
+     "from": "fitted_unidentified",
+     "to": "fitted_identified",
+     "date": "2026-11-06",
+     "citation": "B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value, parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed 3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates re-optimised at every grid value; 95 % [-2.415, -1.546] (Wilks chi2_1, chi2_red 0.11 so no inflation), closed on both sides inside the search bounds, every point converged, no failed pot",
+     "artifact": "results/validation/s1_profiles.json",
+     "second_reader": "S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed); optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected; identification only (fit rows, never credit); conditional on the declared barriers",
+     "case": "PR"
+    }
+   ]
   },
   {
    "id": "k_ddg_tdg.ea_kj_mol",
@@ -5269,24 +5324,30 @@
    "bounded_sides": null,
    "band_missing": false,
    "identification": {
-    "fit": "B39",
-    "artifact": "kinetic_core_b39_fit_report.json laplace; kinetic_core_b38_identifiability.json",
-    "value": -1.855913653444611,
+    "fit": "B41",
+    "artifact": "kinetic_core_b41_fit_report.json laplace; kinetic_core_b38_identifiability.json",
+    "value": -1.8115924725920176,
     "bounds": [
      -4.4275872125713605,
      -0.4275872125713609
     ],
-    "ci95_halfwidth": 0.32198655536289006,
+    "ci95_halfwidth": 0.5200370675204116,
     "labels": {
-     "B39 Laplace": "identified",
+     "B41 Laplace": "identified",
      "B38": null
     },
     "criteria": [],
-    "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "status": "profile_pinned",
+    "profile_artifact": "results/validation/s1_profiles.json",
+    "profile_interval_95": [
+     -2.3023345632289174,
+     -1.2622604281880943
+    ],
+    "laplace_ci95_halfwidth": 0.47541349155433477,
+    "profile_calibration": "Wilks chi2_1 (asymptotic), the rows' stated sigmas inflated by max(1, chi2_red); not checked by simulation"
    },
-   "tier": "fitted_unidentified",
-   "basis": "B39: every local criterion passes; the profile requirement is unmet",
+   "tier": "fitted_identified",
+   "basis": "B41: S1 profile pinned on both sides, 95 % [-2.302, -1.262] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json)",
    "search_bounds_span_dex": 3.9999999999999996,
    "band_is_search_bound": true,
    "band": {
@@ -5314,7 +5375,18 @@
    "label_conflicts": [],
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [],
-   "tier_changes": []
+   "tier_changes": [
+    {
+     "coordinate": "k_ddg_dgal.log10_k_ref",
+     "from": "fitted_unidentified",
+     "to": "fitted_identified",
+     "date": "2026-11-06",
+     "citation": "B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value, parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed 3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates re-optimised at every grid value; 95 % [-2.302, -1.262] (Wilks chi2_1, chi2_red 0.11 so no inflation), closed on both sides inside the search bounds, every point converged, no failed pot",
+     "artifact": "results/validation/s1_profiles.json",
+     "second_reader": "S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed); optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected; identification only (fit rows, never credit); conditional on the declared barriers",
+     "case": "PR"
+    }
+   ]
   },
   {
    "id": "k_ddg_dgal.ea_kj_mol",
@@ -5369,24 +5441,30 @@
    "bounded_sides": null,
    "band_missing": false,
    "identification": {
-    "fit": "B39",
-    "artifact": "kinetic_core_b39_fit_report.json laplace; kinetic_core_b38_identifiability.json",
-    "value": -1.6776288506025347,
+    "fit": "B41",
+    "artifact": "kinetic_core_b41_fit_report.json laplace; kinetic_core_b38_identifiability.json",
+    "value": -1.697993368507553,
     "bounds": [
      -4.4275872125713605,
      -0.4275872125713609
     ],
-    "ci95_halfwidth": 0.41907781171473785,
+    "ci95_halfwidth": 0.4950772900238173,
     "labels": {
-     "B39 Laplace": "identified",
+     "B41 Laplace": "identified",
      "B38": null
     },
     "criteria": [],
-    "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "status": "profile_pinned",
+    "profile_artifact": "results/validation/s1_profiles.json",
+    "profile_interval_95": [
+     -2.1542184312269486,
+     -1.164063851179314
+    ],
+    "laplace_ci95_halfwidth": 0.5056293364323006,
+    "profile_calibration": "Wilks chi2_1 (asymptotic), the rows' stated sigmas inflated by max(1, chi2_red); not checked by simulation"
    },
-   "tier": "fitted_unidentified",
-   "basis": "B39: every local criterion passes; the profile requirement is unmet",
+   "tier": "fitted_identified",
+   "basis": "B41: S1 profile pinned on both sides, 95 % [-2.154, -1.164] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json)",
    "search_bounds_span_dex": 3.9999999999999996,
    "band_is_search_bound": true,
    "band": {
@@ -5414,7 +5492,18 @@
    "label_conflicts": [],
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [],
-   "tier_changes": []
+   "tier_changes": [
+    {
+     "coordinate": "k_dgal_ddg.log10_k_ref",
+     "from": "fitted_unidentified",
+     "to": "fitted_identified",
+     "date": "2026-11-06",
+     "citation": "B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value, parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed 3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates re-optimised at every grid value; 95 % [-2.154, -1.164] (Wilks chi2_1, chi2_red 0.11 so no inflation), closed on both sides inside the search bounds, every point converged, no failed pot",
+     "artifact": "results/validation/s1_profiles.json",
+     "second_reader": "S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed); optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected; identification only (fit rows, never credit); conditional on the declared barriers",
+     "case": "PR"
+    }
+   ]
   },
   {
    "id": "k_dgal_ddg.ea_kj_mol",
@@ -16708,7 +16797,8 @@
    "measured": 61,
    "analogue": 45,
    "bounded": 4,
-   "fitted_unidentified": 124,
+   "fitted_identified": 5,
+   "fitted_unidentified": 119,
    "structural": 60,
    "physical_constant": 1,
    "conflicting_measurements": 9,
@@ -16748,7 +16838,8 @@
     "measured": 19,
     "analogue": 31,
     "bounded": 2,
-    "fitted_unidentified": 25,
+    "fitted_identified": 5,
+    "fitted_unidentified": 20,
     "structural": 33,
     "conflicting_measurements": 5
    }
@@ -16756,8 +16847,9 @@
   "by_coordinate_kind": {
    "log10_k_ref": {
     "measured": 19,
-    "fitted_unidentified": 68,
+    "fitted_unidentified": 63,
     "analogue": 11,
+    "fitted_identified": 5,
     "conflicting_measurements": 4,
     "structural": 21,
     "bounded": 2
@@ -16782,7 +16874,8 @@
   },
   "fitted_identification_status": {
    "unidentified": 96,
-   "locally_pinned_profile_missing": 28
+   "locally_pinned_profile_missing": 23,
+   "profile_pinned": 5
   },
   "s2_candidates": [],
   "s4_sources_contradicting_unidentified": [
