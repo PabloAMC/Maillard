@@ -313,6 +313,7 @@ Coordinates whose fit read such a row: 44 — `k_acr_ala.log10_k_ref`, `k_acr_dp
 
 - analogue coordinates with no declared band (26): `k_tdg_mgo.log10_k_ref`, `k_int_hmf.log10_k_ref`, `k_hmf_cys.log10_k_ref`, `k_hmf_cys.ea_kj_mol`, `k_odg_af.log10_k_ref`, `k_g_go.ea_kj_mol`, `k_go_sink.log10_k_ref`, `k_da_sink.ea_kj_mol`, `k_glyc.ea_kj_mol`, `k_flp_cml.ea_kj_mol`, `k_flp_cel.ea_kj_mol`, `k_flp_decay.ea_kj_mol`, `k_ama_g.log10_k_ref`, `k_ama_g.ea_kj_mol`, `k_ddg_tdg.ea_kj_mol`, `k_ddg_dgal.ea_kj_mol`, `k_dgal_ddg.ea_kj_mol`, `k_thioether.ea_kj_mol`, `k_arp_dpo.ea_kj_mol`, `k_arp_tdp.ea_kj_mol`, `k_dimer_mft.ea_kj_mol`, `k_dimer_fft.ea_kj_mol`, `k_cys_thermal.ea_kj_mol`, `k_acr_gln.ea_kj_mol`, `k_acr_lys.ea_kj_mol`, `k_acr_ala.ea_kj_mol`
 - unclassified (0): none
+- tier changes since the frozen baseline (`docs/reference/evidence_tier_changes.yml`; upgrades need an artifact and a second reader, downgrades a citation; `scripts/ci/evidence_tier_gate.py`): none
 
 ## 10. Every coordinate
 

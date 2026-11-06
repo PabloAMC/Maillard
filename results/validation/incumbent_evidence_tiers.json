@@ -4,10 +4,10 @@
   "artifact": "incumbent_evidence_tiers",
   "generated_on": "2026-11-06",
   "git": {
-   "commit": "9a67a098e0c934f52c87c85451fea945b2932565",
-   "short": "9a67a098",
-   "branch": "incumbent-evidence-tiers",
-   "dirty": false
+   "commit": "edaeef4f4a5ebeaeb93b89ab6ec62aa032cf030d",
+   "short": "edaeef4f",
+   "branch": "s1-tier-gate",
+   "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
   "inputs": [
@@ -88,6 +88,10 @@
     "sha256": "8ded34a30519cc18998baf1e833dd2d69d18a7c7a40fd961abb42d39fa0f0606"
    },
    {
+    "path": "docs/reference/evidence_tier_changes.yml",
+    "sha256": "0db7f09081d2afa1073b7b9bd35ceb62a2ce9eaf323b3f9808ca1dfe02faab28"
+   },
+   {
     "path": "src/kinetic_core/parameters.py",
     "sha256": "e19d346a4337e967543064d473651bb7b8450e32a29714046358b2ca249284e8"
    },
@@ -137,7 +141,7 @@
    },
    {
     "path": "src/evidence_tiers.py",
-    "sha256": "03d53d6d6b6f2aaa5c54192f238f5edecae4b89a5b4419eb8e392bd52c26ea1f"
+    "sha256": "c9a2a4ccac913ddfa437db091388acb7fdf65d5358f1b63f0609c9a329921b23"
    },
    {
     "path": "src/kinetic_core/acrylamide_conditions.py",
@@ -181,7 +185,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_schiff.ea_kj_mol",
@@ -224,7 +229,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_fru.log10_k_ref",
@@ -266,7 +272,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_fru.ea_kj_mol",
@@ -308,7 +315,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fru_glc.log10_k_ref",
@@ -350,7 +358,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fru_glc.ea_kj_mol",
@@ -392,7 +401,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ama_tdg.log10_k_ref",
@@ -435,7 +445,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ama_tdg.ea_kj_mol",
@@ -478,7 +489,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_tdg_fa.log10_k_ref",
@@ -520,7 +532,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_tdg_fa.ea_kj_mol",
@@ -562,7 +575,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ama_mgo.log10_k_ref",
@@ -605,7 +619,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ama_mgo.ea_kj_mol",
@@ -648,7 +663,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ama_odg.log10_k_ref",
@@ -691,7 +707,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ama_odg.ea_kj_mol",
@@ -734,7 +751,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_odg_aa.log10_k_ref",
@@ -776,7 +794,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_odg_aa.ea_kj_mol",
@@ -818,7 +837,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_tdg_mel.log10_k_ref",
@@ -860,7 +880,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_tdg_mel.ea_kj_mol",
@@ -902,7 +923,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fru_acids.log10_k_ref",
@@ -945,7 +967,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fru_acids.ea_kj_mol",
@@ -988,7 +1011,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_frag.log10_k_ref",
@@ -1048,7 +1072,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_frag.ea_kj_mol",
@@ -1107,7 +1132,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_mel.log10_k_ref",
@@ -1224,7 +1250,8 @@
      "s2_status": "consistent: the one-sided bound is satisfied"
     }
    ],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_mel.ea_kj_mol",
@@ -1360,7 +1387,8 @@
      "s2_status": "not S2 (the coordinate is fitted_unidentified: no point to contradict; carried under S4); an S4 rival source"
     }
    ],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fa_frag.log10_k_ref",
@@ -1419,7 +1447,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fa_frag.ea_kj_mol",
@@ -1479,7 +1508,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_aa_frag.log10_k_ref",
@@ -1600,7 +1630,8 @@
      "s2_status": "not S2 (the coordinate is fitted_unidentified: no point to contradict; carried under S4); an S4 band source"
     }
    ],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_aa_frag.ea_kj_mol",
@@ -1675,7 +1706,8 @@
     }
    ],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_tdg.log10_k_ref",
@@ -1720,7 +1752,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_tdg.ea_kj_mol",
@@ -1765,7 +1798,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_tdg_ddg.log10_k_ref",
@@ -1827,7 +1861,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_tdg_ddg.ea_kj_mol",
@@ -1869,7 +1904,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddg_hmf.log10_k_ref",
@@ -1930,7 +1966,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddg_hmf.ea_kj_mol",
@@ -1966,7 +2003,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_tdg_mgo.log10_k_ref",
@@ -2002,7 +2040,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_tdg_mgo.ea_kj_mol",
@@ -2044,7 +2083,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fru_int.log10_k_ref",
@@ -2089,7 +2129,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fru_int.ea_kj_mol",
@@ -2134,7 +2175,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_int_hmf.log10_k_ref",
@@ -2170,7 +2212,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_int_hmf.ea_kj_mol",
@@ -2212,7 +2255,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fru_odg.log10_k_ref",
@@ -2257,7 +2301,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fru_odg.ea_kj_mol",
@@ -2302,7 +2347,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_hmf_self.log10_k_ref",
@@ -2346,7 +2392,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_hmf_self.ea_kj_mol",
@@ -2381,7 +2428,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_hmf_cys.log10_k_ref",
@@ -2414,7 +2462,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_hmf_cys.ea_kj_mol",
@@ -2447,7 +2496,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_odg_af.log10_k_ref",
@@ -2481,7 +2531,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_odg_af.ea_kj_mol",
@@ -2515,7 +2566,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_af_dmhf.log10_k_ref",
@@ -2549,7 +2601,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_af_dmhf.ea_kj_mol",
@@ -2583,7 +2636,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_dmhf.log10_k_ref",
@@ -2619,7 +2673,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_dmhf.ea_kj_mol",
@@ -2655,7 +2710,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dmhf_h2s.log10_k_ref",
@@ -2689,7 +2745,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dmhf_h2s.ea_kj_mol",
@@ -2722,7 +2779,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_af.log10_k_ref",
@@ -2777,7 +2835,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_af.ea_kj_mol",
@@ -2810,7 +2869,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_g.log10_k_ref",
@@ -2855,7 +2915,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_g.ea_kj_mol",
@@ -2897,7 +2958,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_g_go.log10_k_ref",
@@ -2957,7 +3019,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_g_go.ea_kj_mol",
@@ -2994,7 +3057,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_odg_da.log10_k_ref",
@@ -3039,7 +3103,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_odg_da.ea_kj_mol",
@@ -3081,7 +3146,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_go_sink.log10_k_ref",
@@ -3116,7 +3182,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_go_sink.ea_kj_mol",
@@ -3160,7 +3227,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_da_sink.log10_k_ref",
@@ -3205,7 +3273,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_da_sink.ea_kj_mol",
@@ -3240,7 +3309,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_go_ak.log10_k_ref",
@@ -3320,7 +3390,8 @@
     }
    ],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_go_ak.ea_kj_mol",
@@ -3388,7 +3459,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_ak.log10_k_ref",
@@ -3458,7 +3530,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_ak.ea_kj_mol",
@@ -3532,7 +3605,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cond.log10_k_ref",
@@ -3577,7 +3651,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cond.ea_kj_mol",
@@ -3622,7 +3697,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glyc.log10_k_ref",
@@ -3693,7 +3769,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B20: every B20 row (Nguyen 2016 rate table) (fitted under a network the source contradicts; CF-072)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_glyc.ea_kj_mol",
@@ -3803,7 +3880,8 @@
      "s2_status": "contradicted, not fitted (the coordinate is analogue); S2 does not apply; an S4 band source and a CF entry"
     }
    ],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_flp_cml.log10_k_ref",
@@ -3858,7 +3936,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B20: every B20 row (Nguyen 2016 rate table) (fitted under a network the source contradicts; CF-072)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_flp_cml.ea_kj_mol",
@@ -3895,7 +3974,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_flp_cel.log10_k_ref",
@@ -3950,7 +4030,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B20: every B20 row (Nguyen 2016 rate table) (fitted under a network the source contradicts; CF-072)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_flp_cel.ea_kj_mol",
@@ -3987,7 +4068,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_flp_decay.log10_k_ref",
@@ -4053,7 +4135,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B20: every B20 row (Nguyen 2016 rate table) (fitted under a network the source contradicts; CF-072)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_flp_decay.ea_kj_mol",
@@ -4101,7 +4184,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cml_loss.log10_k_ref",
@@ -4155,7 +4239,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B20: every B20 row (Nguyen 2016 rate table) (fitted under a network the source contradicts; CF-072)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_cml_loss.ea_kj_mol",
@@ -4191,7 +4276,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ama_g.log10_k_ref",
@@ -4243,7 +4329,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ama_g.ea_kj_mol",
@@ -4281,7 +4368,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_go_met.log10_k_ref",
@@ -4321,7 +4409,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_go_met.ea_kj_mol",
@@ -4360,7 +4449,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_met.log10_k_ref",
@@ -4400,7 +4490,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_met.ea_kj_mol",
@@ -4439,7 +4530,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mtal_msh.log10_k_ref",
@@ -4477,7 +4569,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mtal_msh.ea_kj_mol",
@@ -4514,7 +4607,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_msh_dmds.log10_k_ref",
@@ -4552,7 +4646,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_msh_dmds.ea_kj_mol",
@@ -4589,7 +4684,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_marp_mtal.log10_k_ref",
@@ -4627,7 +4723,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_marp_mtal.ea_kj_mol",
@@ -4664,7 +4761,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_marp_loss.log10_k_ref",
@@ -4701,7 +4799,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_marp_loss.ea_kj_mol",
@@ -4737,7 +4836,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pyrl_ap.log10_k_ref",
@@ -4776,7 +4876,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pyrl_ap.ea_kj_mol",
@@ -4814,7 +4915,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_pro.log10_k_ref",
@@ -4854,7 +4956,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_pro.ea_kj_mol",
@@ -4893,7 +4996,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ha_athp.log10_k_ref",
@@ -4932,7 +5036,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ha_athp.ea_kj_mol",
@@ -4970,7 +5075,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pyrl_loss.log10_k_ref",
@@ -5007,7 +5113,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pyrl_loss.ea_kj_mol",
@@ -5043,7 +5150,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddg_tdg.log10_k_ref",
@@ -5105,7 +5213,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddg_tdg.ea_kj_mol",
@@ -5141,7 +5250,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddg_dgal.log10_k_ref",
@@ -5203,7 +5313,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddg_dgal.ea_kj_mol",
@@ -5239,7 +5350,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dgal_ddg.log10_k_ref",
@@ -5301,7 +5413,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dgal_ddg.ea_kj_mol",
@@ -5337,7 +5450,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ox_supply.log10_k_ref",
@@ -5381,7 +5495,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ox_supply.ea_kj_mol",
@@ -5424,7 +5539,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_ox.log10_k_ref",
@@ -5474,7 +5590,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_ox.ea_kj_mol",
@@ -5523,7 +5640,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_red_ox.log10_k_ref",
@@ -5569,7 +5687,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_red_ox.ea_kj_mol",
@@ -5614,7 +5733,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_thioether.log10_k_ref",
@@ -5672,7 +5792,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_thioether.ea_kj_mol",
@@ -5730,7 +5851,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_h2s.log10_k_ref",
@@ -5778,7 +5900,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_h2s.ea_kj_mol",
@@ -5826,7 +5949,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_protein_ss.log10_k_ref",
@@ -5871,7 +5995,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_protein_ss.ea_kj_mol",
@@ -5916,7 +6041,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dimer_release.log10_k_ref",
@@ -5964,7 +6090,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dimer_release.ea_kj_mol",
@@ -6011,7 +6138,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mele_site.log10_k_ref",
@@ -6065,7 +6193,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mele_site.ea_kj_mol",
@@ -6118,7 +6247,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_add.log10_k_ref",
@@ -6169,7 +6299,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_add.ea_kj_mol",
@@ -6219,7 +6350,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_redox_mp3p.log10_k_ref",
@@ -6265,7 +6397,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_redox_mp3p.ea_kj_mol",
@@ -6310,7 +6443,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_nf_shet.log10_k_ref",
@@ -6355,7 +6489,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_nf_shet.ea_kj_mol",
@@ -6399,7 +6534,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_gsh_h2s.log10_k_ref",
@@ -6441,7 +6577,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_gsh_h2s.ea_kj_mol",
@@ -6483,7 +6620,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pent_dpo.log10_k_ref",
@@ -6550,7 +6688,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pent_dpo.ea_kj_mol",
@@ -6617,7 +6756,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pent_tdp.log10_k_ref",
@@ -6684,7 +6824,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pent_tdp.ea_kj_mol",
@@ -6751,7 +6892,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_c2c3.log10_k_ref",
@@ -6818,7 +6960,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_c2c3.ea_kj_mol",
@@ -6885,7 +7028,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_arp_dpo.log10_k_ref",
@@ -6980,7 +7124,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_arp_dpo.ea_kj_mol",
@@ -7031,7 +7176,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_arp_tdp.log10_k_ref",
@@ -7101,7 +7247,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_arp_tdp.ea_kj_mol",
@@ -7143,7 +7290,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_nf.log10_k_ref",
@@ -7210,7 +7358,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_nf.ea_kj_mol",
@@ -7276,7 +7425,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_ptr.log10_k_ref",
@@ -7342,7 +7492,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_ptr.ea_kj_mol",
@@ -7408,7 +7559,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_ddp.log10_k_ref",
@@ -7475,7 +7627,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dpo_ddp.ea_kj_mol",
@@ -7542,7 +7695,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_tdp_fur.log10_k_ref",
@@ -7612,7 +7766,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_tdp_fur.ea_kj_mol",
@@ -7680,7 +7835,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddp_mft.log10_k_ref",
@@ -7747,7 +7903,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddp_mft.ea_kj_mol",
@@ -7814,7 +7971,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fur_fft.log10_k_ref",
@@ -7887,7 +8045,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_fur_fft.ea_kj_mol",
@@ -7956,7 +8115,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_nf_mft.log10_k_ref",
@@ -8038,7 +8198,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_nf_mft.ea_kj_mol",
@@ -8118,7 +8279,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_nf_mp3p.log10_k_ref",
@@ -8189,7 +8351,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_nf_mp3p.ea_kj_mol",
@@ -8258,7 +8421,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_mp.log10_k_ref",
@@ -8329,7 +8493,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_mgo_mp.ea_kj_mol",
@@ -8398,7 +8563,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ha_mp_mft.log10_k_ref",
@@ -8465,7 +8631,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ha_mp_mft.ea_kj_mol",
@@ -8532,7 +8699,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_ha.log10_k_ref",
@@ -8614,7 +8782,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_glc_ha.ea_kj_mol",
@@ -8691,7 +8860,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_thi_hmp.log10_k_ref",
@@ -8757,7 +8927,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_thi_hmp.ea_kj_mol",
@@ -8823,7 +8994,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_thi_mesh.log10_k_ref",
@@ -8889,7 +9061,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_thi_mesh.ea_kj_mol",
@@ -8955,7 +9128,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_hmp_mft.log10_k_ref",
@@ -9021,7 +9195,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_hmp_mft.ea_kj_mol",
@@ -9087,7 +9262,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_hmp_mp2p.log10_k_ref",
@@ -9153,7 +9329,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_hmp_mp2p.ea_kj_mol",
@@ -9219,7 +9396,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_actz.log10_k_ref",
@@ -9292,7 +9470,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_actz.ea_kj_mol",
@@ -9365,7 +9544,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dimer_mft.log10_k_ref",
@@ -9461,7 +9641,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_dimer_mft.ea_kj_mol",
@@ -9510,7 +9691,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_dimer_fft.log10_k_ref",
@@ -9589,7 +9771,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_dimer_fft.ea_kj_mol",
@@ -9638,7 +9821,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mmft.log10_k_ref",
@@ -9705,7 +9889,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mmft.ea_kj_mol",
@@ -9755,7 +9940,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mft_decay.log10_k_ref",
@@ -9890,7 +10076,8 @@
      "s2_status": "not S2 (the coordinate is fitted_unidentified: no point to contradict; carried under S4); an S4 rival source"
     }
    ],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_mft_decay.ea_kj_mol",
@@ -9987,7 +10174,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_fft_decay.log10_k_ref",
@@ -10062,7 +10250,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_fft_decay.ea_kj_mol",
@@ -10156,7 +10345,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_dimer_decay.log10_k_ref",
@@ -10239,7 +10429,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_dimer_decay.ea_kj_mol",
@@ -10318,7 +10509,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_nf_decay.log10_k_ref",
@@ -10449,7 +10641,8 @@
      "s2_status": "not S2 (the coordinate is fitted_unidentified: no point to contradict; carried under S4); an S4 band source"
     }
    ],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_nf_decay.ea_kj_mol",
@@ -10523,7 +10716,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_fur_decay.log10_k_ref",
@@ -10620,7 +10814,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_fur_decay.ea_kj_mol",
@@ -10757,7 +10952,8 @@
    ],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_h2s_loss.log10_k_ref",
@@ -10822,7 +11018,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_h2s_loss.ea_kj_mol",
@@ -10887,7 +11084,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_osone_decay.log10_k_ref",
@@ -10970,7 +11168,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_osone_decay.ea_kj_mol",
@@ -11054,7 +11253,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_thiol_decay.log10_k_ref",
@@ -11143,7 +11343,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_thiol_decay.ea_kj_mol",
@@ -11249,7 +11450,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_pent_caramel.log10_k_ref",
@@ -11325,7 +11527,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_pent_caramel.ea_kj_mol",
@@ -11399,7 +11602,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pent_thermal.log10_k_ref",
@@ -11465,7 +11669,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_pent_thermal.ea_kj_mol",
@@ -11531,7 +11736,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_fur.log10_k_ref",
@@ -11597,7 +11803,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_glc_fur.ea_kj_mol",
@@ -11663,7 +11870,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_arp_tdp_th.log10_k_ref",
@@ -11729,7 +11937,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_arp_tdp_th.ea_kj_mol",
@@ -11795,7 +12004,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_arp_dpo_th.log10_k_ref",
@@ -11861,7 +12071,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_arp_dpo_th.ea_kj_mol",
@@ -11927,7 +12138,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddp_mft_hs.log10_k_ref",
@@ -11994,7 +12206,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ddp_mft_hs.ea_kj_mol",
@@ -12061,7 +12274,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fur_fft_hs.log10_k_ref",
@@ -12134,7 +12348,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_fur_fft_hs.ea_kj_mol",
@@ -12207,7 +12422,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ttca_cys.log10_k_ref",
@@ -12285,7 +12501,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ttca_cys.ea_kj_mol",
@@ -12363,7 +12580,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_ttca_deg.log10_k_ref",
@@ -12533,7 +12751,8 @@
    ],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_ttca_deg.ea_kj_mol",
@@ -12631,7 +12850,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_thermal.log10_k_ref",
@@ -12700,7 +12920,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_cys_thermal.ea_kj_mol",
@@ -12741,7 +12962,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_thiolate_loss.log10_k_ref",
@@ -12812,7 +13034,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_thiolate_loss.ea_kj_mol",
@@ -12902,7 +13125,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B60: the two MFT-disulfide share rows (declared hold-out, in-sample since B60) (corrected target; results/validation/m0_integrity_batch1_strecker_sulfur.md)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_asn_glc.log10_k_ref",
@@ -12956,7 +13180,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_asn_glc.ea_kj_mol",
@@ -13013,7 +13238,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_int1_acr.log10_k_ref",
@@ -13066,7 +13292,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_int1_acr.ea_kj_mol",
@@ -13122,7 +13349,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_asn_asp.log10_k_ref",
@@ -13164,7 +13392,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_asn_asp.ea_kj_mol",
@@ -13206,7 +13435,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_acr_cys.log10_k_ref",
@@ -13249,7 +13479,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_acr_cys.ea_kj_mol",
@@ -13292,7 +13523,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_sink.log10_k_ref",
@@ -13333,7 +13565,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_sink.ea_kj_mol",
@@ -13374,7 +13607,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_glc.log10_k_ref",
@@ -13416,7 +13650,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_cys_glc.ea_kj_mol",
@@ -13458,7 +13693,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_asp_sink.log10_k_ref",
@@ -13499,7 +13735,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_asp_sink.ea_kj_mol",
@@ -13540,7 +13777,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_int1_mel.log10_k_ref",
@@ -13604,7 +13842,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_int1_mel.ea_kj_mol",
@@ -13670,7 +13909,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_acr_dp.log10_k_ref",
@@ -13737,7 +13977,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_acr_dp.ea_kj_mol",
@@ -13804,7 +14045,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_gln_glc.log10_k_ref",
@@ -13869,7 +14111,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_gln_glc.ea_kj_mol",
@@ -13936,7 +14179,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_lys_glc.log10_k_ref",
@@ -14001,7 +14245,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_lys_glc.ea_kj_mol",
@@ -14068,7 +14313,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_ala_glc.log10_k_ref",
@@ -14133,7 +14379,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_ala_glc.ea_kj_mol",
@@ -14200,7 +14447,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_acr_gln.log10_k_ref",
@@ -14264,7 +14512,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_acr_gln.ea_kj_mol",
@@ -14299,7 +14548,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_acr_lys.log10_k_ref",
@@ -14364,7 +14614,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_acr_lys.ea_kj_mol",
@@ -14399,7 +14650,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "k_acr_ala.log10_k_ref",
@@ -14465,7 +14717,8 @@
    "contradicted_by": [],
    "fit_rows_withdrawn_or_corrected": [
     "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
-   ]
+   ],
+   "tier_changes": []
   },
   {
    "id": "k_acr_ala.ea_kj_mol",
@@ -14500,7 +14753,8 @@
    },
    "label_conflicts": [],
    "contradicted_by": [],
-   "fit_rows_withdrawn_or_corrected": []
+   "fit_rows_withdrawn_or_corrected": [],
+   "tier_changes": []
   },
   {
    "id": "b8.ph_drift.acid_yield_per_sink_event",
@@ -14554,7 +14808,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "b8.ph_drift.arp_secondary_ammonium_pKa",
@@ -14605,7 +14860,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "b18.ph_slope_above_7_decades_per_unit",
@@ -14657,7 +14913,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "b18.ph_slope_below_7_decades_per_unit",
@@ -14709,7 +14966,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.q10",
@@ -14745,7 +15003,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.pea_protein_isolate.lipid_mass_fraction",
@@ -14781,7 +15040,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.pea_protein_isolate.peroxide_value_meq_per_kg",
@@ -14817,7 +15077,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.soy_protein_isolate.lipid_mass_fraction",
@@ -14853,7 +15114,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.soy_protein_isolate.peroxide_value_meq_per_kg",
@@ -14889,7 +15151,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.frankel_pure_hydroperoxide.lipid_mass_fraction",
@@ -14925,7 +15188,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.frankel_pure_hydroperoxide.peroxide_value_meq_per_kg",
@@ -14961,7 +15225,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "trunk.aw_multiplier_scale",
@@ -14997,7 +15262,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "trunk.amadori_ph_exponent_decades_per_unit",
@@ -15033,7 +15299,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "acrylamide.aw_multiplier",
@@ -15069,7 +15336,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "acrylamide.aw_elimination_deficit_scale",
@@ -15105,7 +15373,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "acrylamide.ph_exponent_formation_decades_per_unit",
@@ -15141,7 +15410,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "acrylamide.ph_exponent_elimination_decades_per_unit",
@@ -15177,7 +15447,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "sulfur.oxygen.k_cys_ox.log10_k",
@@ -15213,7 +15484,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "sulfur.oxygen.k_red_ox.log10_k",
@@ -15249,7 +15521,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "sulfur.oxygen.reservoir_scale",
@@ -15285,7 +15558,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "furanic.partition_ea_offset_kj_mol",
@@ -15321,7 +15595,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "observable.air_water_partition_constant",
@@ -15357,7 +15632,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "observable.hs_spme_same_sample_dispersion",
@@ -15393,7 +15669,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.k_hexanal_schroen",
@@ -15423,7 +15700,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.k_LOOH_decomp",
@@ -15453,7 +15731,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.propanal_over_hexanal",
@@ -15480,7 +15759,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.decadienal_breakage.k_loss_per_min_at_ref",
@@ -15507,7 +15787,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.decadienal_breakage.ea_loss_kj_mol",
@@ -15534,7 +15815,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.decadienal_breakage.share_hexanal",
@@ -15561,7 +15843,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.decadienal_breakage.share_octenal",
@@ -15588,7 +15871,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.branch_simplex.13_ct",
@@ -15633,7 +15917,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.branch_simplex.13_tt",
@@ -15678,7 +15963,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.branch_simplex.9_ct",
@@ -15723,7 +16009,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.branch_simplex.9_tt",
@@ -15768,7 +16055,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "lipid.oleate_molar_anchor",
@@ -15798,7 +16086,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_isoamyl_acetate_dairy",
@@ -15825,7 +16114,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_amyl_acetate_dairy",
@@ -15852,7 +16142,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_ethyl_pentanoate_dairy",
@@ -15879,7 +16170,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_hexanal_dairy",
@@ -15906,7 +16198,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_t_2_hexenal_dairy",
@@ -15933,7 +16226,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_diacetyl_caseinate",
@@ -15960,7 +16254,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_delta_decalactone_caseinate",
@@ -15987,7 +16282,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_furaneol_caseinate",
@@ -16014,7 +16310,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_2_heptanone_soy",
@@ -16041,7 +16338,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_2_octanone_soy",
@@ -16068,7 +16366,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_2_nonanone_soy",
@@ -16095,7 +16394,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_nonanal_soy",
@@ -16122,7 +16422,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_hexanal_soy_denatured",
@@ -16149,7 +16450,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_2_heptanone_blg",
@@ -16176,7 +16478,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_2_octanone_blg",
@@ -16203,7 +16506,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_2_nonanone_blg",
@@ -16230,7 +16534,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_hexanal_pea",
@@ -16257,7 +16562,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_z_2_penten_1_ol_pea",
@@ -16284,7 +16590,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.kg_t_2_octenal_pea",
@@ -16311,7 +16618,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.unsat_penalty_gelatin",
@@ -16338,7 +16646,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   },
   {
    "id": "matrix.unsat_penalty_dairy_headspace",
@@ -16365,7 +16674,8 @@
     "basis": [
      "no sensitivity artifact covers it"
     ]
-   }
+   },
+   "tier_changes": []
   }
  ],
  "summary": {
@@ -17976,6 +18286,7 @@
    "size_dex": 0.004
   }
  ],
+ "tier_changes_without_a_row": [],
  "rules": {
   "tiers": [
    "measured",
