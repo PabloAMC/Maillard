@@ -12,6 +12,7 @@ the default is the real engine under :func:`calibration.predict_calibrated`.
 """
 from __future__ import annotations
 
+import dataclasses
 import math
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Set, Tuple
@@ -338,8 +339,10 @@ def calibrate(document: Mapping[str, Any], lab: str, *, predict_fn: PredictFn = 
         prov = provenance.provenance_block("maillard_calibration", generated_by="src/kinetic_core/user_fit.py")
     except Exception:  # noqa: BLE001 - provenance is informative, never blocking
         prov = {"generated_by": "src/kinetic_core/user_fit.py"}   # what thiol_relative_only.calibration_rescues reads
-    cal = C.Calibration(lab, partial.base_wave, partial.created, partial.matrix, factors, tuple(overrides),
-                        partial.fit_records, partial.validate_records, tuple(notes), prov)
+    unsigned = C.Calibration(lab, partial.base_wave, partial.created, partial.matrix, factors, tuple(overrides),
+                             partial.fit_records, partial.validate_records, tuple(notes))
+    # 2026-11-05 (H0 follow-up): the content checksum the rescue rule verifies (thiol_relative_only.calibration_rescues)
+    cal = dataclasses.replace(unsigned, provenance={**prov, C.PAYLOAD_CHECKSUM_FIELD: unsigned.payload_checksum()})
     after = fitter.holdout_scores(cal) if validate else None
     card = {
         "artifact": "maillard_calibration_card",

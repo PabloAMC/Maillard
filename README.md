@@ -212,7 +212,7 @@ of this, and most of that fall is the refusals, not the fix.
 | rows refused rather than answered | **69**: 3 refused by the data itself (2026-11-06: a charge not printed, a source that contradicts itself, a carried level's net loss; CF-127 / 129 / 131), 39 thiol-lane absolute levels (H0 / EX-059; cure: a second independent laboratory's absolute measurements, re-scored under H0's rule), 8 in pots nobody heated, 8 that need the unidentified hexose entry, 2 lane conflicts, 2 compounds a pot has no precursor for, 7 targets a lane does not carry — every refusal names its cure |
 | strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 42**. The one that passed, `hofmann1998_norfuraneol_cysteine_145C_20min_pH5` (1.06x), was a row the sulfur fit read and is an absolute thiol level, refused since 2026-11-05 (H0 / EX-059). `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
 | literature rows inside the 90% Monte-Carlo interval | **12 of 23** (median width 1.00 dex); **12 of 23** out of sample; 1 row not evaluable. 13 of 26 (1.01 dex) until the three data refusals of 2026-11-06 (one of them, Bi 2020's hexanal, was inside its interval). Until 2026-11-05 this read 36 of 65 and 29 of 55; the 39 thiol-lane rows (Resconi's furfural, then the widest at 11.8 dex, among them) left the envelope with the H0 refusal, so the coverage and the median width (1.87 -> 1.01 dex) moved over a changed row set, not because any interval narrowed or any prediction improved |
-| direction / ranking skill (119-claim literature panel) | **20 of 33** strictly independent evaluable claims (61 %, not distinguishable from chance); **14 of 22** with pH and water activity set aside, **6 of 11** on pH and water activity; 42 independent claims not evaluable, five of them since the noise-aware rule (a claim whose measured contrast is within the source's noise cannot be scored); 27 claims added blind by Amendment 45; 17 retired against their papers on 2026-10-27 |
+| direction / ranking skill (119-claim literature panel) | **19 of 32** strictly independent evaluable claims (59 %, not distinguishable from chance); **14 of 22** with pH and water activity set aside, **5 of 10** on pH and water activity; 43 independent claims not evaluable, five of them since the noise-aware rule (a claim whose measured contrast is within the source's noise cannot be scored) and one (AW-03) since the trunk's water-activity window (a_w 0.33 to 1.00, 2026-11-05); 27 claims added blind by Amendment 45; 17 retired against their papers on 2026-10-27 |
 
 Three things a reader must know, all declared in code and printed on every row they touch:
 
@@ -251,21 +251,22 @@ Three things a reader must know, all declared in code and printed on every row t
   every panel bundle declares its class (`benchmark.schema.json` enum, `schema_gate`); eleven say
   `undeclared` with the reason in a `quantification_note`, get the bands by default, and say so.
 
-**Directional and ranking claims are the product, and the core scores 20 of 33 on them** (61 %, which is not
+**Directional and ranking claims are the product, and the core scores 19 of 32 on them** (59 %, which is not
 distinguishable from chance; 25 of 43 before the 2026-10-27 audit checked every claim against its paper: 15 retired,
 4 not independent, several arms reset to the paper's pot. Amendment 45 then added 27 claims blind on 2026-10-28).
 [`core_directional_scores.md`](results/validation/core_directional_scores.md) runs every claim of
 the 119-claim literature panel ([`directional_claims_panel.yml`](docs/validation/directional_claims_panel.yml))
-through the same front door a user calls. Of the 75 independent claims, 37 are not evaluable on the core:
+through the same front door a user calls. Of the 75 independent claims, 43 are not evaluable on the core:
 prose-only, a predicted concentration of zero, an arm refused (2,5-dimethylpyrazine off the trunk), or a verdict
 that flips with an input the paper does not state. Comparisons that move an
 axis the lane has no term for are refused too. **The engine refuses those comparisons outright** (water activity
-on the sulfur and lipid lanes and outside its measured window on the acrylamide lane; pH on the lipid
-lane and outside its window on the acrylamide lane; the trunk answers both with a declared, banded term) rather than returning two identical numbers,
-so they are not evaluable rather than misses. Of the rest: sugar identity 5 of 11, temperature 5 of 9,
-pH 5 of 10, time 2 of 3, sulfur donor 2 of 2, cysteine present-vs-absent 1 of 1, ranking 0 of 1, water activity on the
-trunk 1 of 1 (the peak at a_w 0.6-0.7 is reproduced; the monotone-fall claim AW-01 was retired by the
-2026-10-27 audit as a source mismatch).
+on the sulfur and lipid lanes, outside its window (a_w 0.34-0.99) on the acrylamide lane and below a_w 0.33 on the
+trunk; pH on the lipid lane and outside its window on the acrylamide lane; inside those windows the trunk answers both
+with a declared, banded term) rather than returning two identical numbers,
+so they are not evaluable rather than misses. Of the rest: sugar identity 4 of 8, temperature 5 of 8,
+pH 5 of 10, time 2 of 3, sulfur donor 2 of 2, cysteine present-vs-absent 1 of 1; no ranking claim and no water-activity
+claim is evaluable (AW-01 was retired by the 2026-10-27 audit as a source mismatch; AW-03, whose driest arm is a_w
+0.25, has been refused since the trunk's a_w window of 2026-11-05).
 **The sulfur lane's temperature behaviour was scored for the first time on 2026-09-06** (programme
 step R2(c), [`kinetic_core_b10_prereg.md`](results/validation/kinetic_core_b10_prereg.md)): the panel
 had no sulfur temperature claim. Yiltirak 2026's time-compensated ladder gives two evaluable
@@ -345,7 +346,7 @@ constant, which is what makes `rank` useful.
 | Direction / ranking on `lipid_lane` | protein matrix (lipid-derived aldehydes) | no evaluable independent claim on the core | **do-not-use** |
 | Direction / ranking on `matrix_identity` | protein matrix (pea vs soy) | no evaluable independent claim on the core | **do-not-use** |
 | Direction / ranking on `ph` | any (pH moved) | 5/10 on the directional panel (independent claims)<br/><sub>misses: PH-07, HOX-03, CER07-PH-01, CER07-PH-02, MOD08-PH-01</sub> | **do-not-use** |
-| Direction / ranking on `moisture_aw` | any (water activity moved) | 1/1 on the directional panel (independent claims) | caution |
+| Direction / ranking on `moisture_aw` | any (water activity moved) | no evaluable independent claim on the core | **do-not-use** |
 | Direction / ranking on `ranking` | several compounds ordered in one system | no evaluable independent claim on the core | **do-not-use** |
 | Direction / ranking on `process_heating` | processed vs raw | no evaluable independent claim on the core | **do-not-use** |
 | Any claim of benchmark-grade agreement | the union panel: trust loop + hold-outs + matrix bundles | 0/42 strict-ready (none); 10/24 rows within 3x, out-of-sample 10/24<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
@@ -369,7 +370,7 @@ Four networks that do *not* compose, each with its own integrator (`src/kinetic_
 
 | lane | steps | species it adds | pH and water terms | fitted to |
 | --- | ---: | --- | --- | --- |
-| trunk | 26 | glucose / fructose / glycine → Amadori, deoxyosones, melanoidins; HMF, DMHF, 3,4-dideoxyglucosone, acetylformoin; glucosone, glyoxal, diacetyl | declared Amadori-decay pH term; declared water-activity multiplier | Martins 2005 time series, Blank 1997 furanic yields, Kocadağlı 2016 dicarbonyl constants |
+| trunk | 26 | glucose / fructose / glycine → Amadori, deoxyosones, melanoidins; HMF, DMHF, 3,4-dideoxyglucosone, acetylformoin; glucosone, glyoxal, diacetyl | declared Amadori-decay pH term; declared water-activity multiplier (window a_w 0.33 to 1.00: the lower edge from Pereyra Gonzales 2010 Table 1, the upper the base constants' solution state) | Martins 2005 time series, Blank 1997 furanic yields, Kocadağlı 2016 dicarbonyl constants |
 | sulfur | 93 | pentoses, cysteine, thiamine → MFT, FFT, furfural, the MFT dimer | pH trajectory | Hofmann 1998 Tables 1/3/4/10, Kang 2026, Zhou 2023, Whitfield 1999, Cerny 2007, van Seeventer 2001 |
 | acrylamide | 42 | asparagine + reducing sugar → acrylamide, HMF | declared pH factor (pH 4 to 8) and water-activity term (0.34 to 0.99), De Vleeschouwer 2006 to 2008 | Claeys 2005, De Vleeschouwer 2009, Knol 2005 rate constants |
 | lipid | — | a linoleate hydroperoxide pool → Frankel 1989's six products (hexanal, pentane, decadienal, …) | none | branch distribution fitted; the **rate is a declared assumption** with a Q10 band |

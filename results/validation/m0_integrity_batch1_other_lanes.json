@@ -1,0 +1,183 @@
+{
+  "record": "M0 integrity batch 1 (trunk, acrylamide, pyrazine, lipid): source re-reads",
+  "date": "2026-11-06",
+  "base_commit": "4174ed8d",
+  "inventory": "docs/reference/misfit_inventory.md on branch misfit-inventory at 12d88121 (draft PR #82)",
+  "checks": ["CK-03", "CK-04", "CK-05", "CK-08 (Pan and Leahy halves)"],
+  "method": "PDF re-read against keyed rows; corrected residuals by arithmetic on the recorded prediction; no refit, no forward run, no data/ edit",
+  "not_read": ["Deng 2022 (M3 phase 2 reserved)", "E13/E14 TEST studies", "Lee 2024", "hofmann2000b Figs. 2-3", "B59b hold-outs", "WUR samples"],
+  "criteria_disclosure": "criteria fixed in working notes before each PDF was opened (from the inventory's CK pass rules plus the generic list); this file written after the reads",
+  "misfits": [
+    {
+      "id": "MF-31",
+      "scope": "Pan 2025 half only (B22 rows)",
+      "source_dossier": "pan2025_extraction.md",
+      "error_if": "unit of K (unprinted) mis-inferred by >= 3 dex; methionine (mg/L vs mg/mL) or sugar charge mis-keyed; keyed rates differ from Table 2; end-point levels on another basis",
+      "outcome": "integrity holds",
+      "evidence": [
+        "Table 2: all nine keyed rates = printed K x 60 (generate_kinetic_core_b22_fit.PAN_RATES_UMOL_L_MIN)",
+        "sec. 2.2: '40 mg/L methionine ... 20 mg/mL fructose, 15 mg/mL glucose, 15 mg/mL sucrose ... 50 mM citrate pH 6.2' = keyed pot (sucrose omitted, declared)",
+        "40 mg/mL rejected by the paper's own consumption figures: Met ~8 % vs Fru + Glc ~4 % (~8 mM) at 120 C / 4 min",
+        "sec. 3.1: methional 626.31 ug/L (6.01 umol/L) at 140 C / 600 s vs engine MTAL 1.18e-3 umol/L (B22 report diagnostic): -3.71 dex, independent of the unit of K; inside Table 1's 1-800 ug/L range"
+      ],
+      "proposed_correction": null,
+      "residual_recorded_dex": {"methional_rate": [-5.57, -4.53, -3.64], "methanethiol_rate": [-5.32, -3.37, -1.99]},
+      "residual_corrected_dex": {"methional_level_140C_600s_unit_free": -3.71},
+      "spent": ["Pan 2025 Table 2, sec. 3.1 text, Methods (SEEN)"]
+    },
+    {
+      "id": "MF-39",
+      "source_dossier": "ma2024_extraction.md",
+      "error_if": "150 ug/kg not the Fig. 2D 130 C bar; dry basis; precursor charge, pH, a_w or residence time not in the source",
+      "outcome": "integrity error (pot definition): unsourced precursor charge; the measured value holds",
+      "evidence": [
+        "Fig. 2D (rendered, p. 7): 130 C ~150, 150 C ~120, 170 C ~82, control ~38 ug/kg",
+        "Methods 3.1-3.2: SPI : corn starch 9:1; no asparagine or glucose added; Table 1 prints water, protein, TAA only",
+        "bundle precursors {SPI 50, L-Asn 42, D-Glc 42 mM}, pH 6.0, a_w 0.35 not in the paper; product water 25.0 % (Table 1)"
+      ],
+      "proposed_correction": {
+        "file": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
+        "changes": [
+          {"field": "precursors", "old": {"Soy protein isolate": 50.0, "L-Asparagine": 42.0, "D-Glucose": 42.0}, "new": "withdrawn (Ma 2024 sec. 3.1, Table 1: no free Asn, no reducing sugar printed)"},
+          {"field": "conditions.ph", "old": 6.0, "new": "withdrawn (unprinted)"},
+          {"field": "conditions.water_activity", "old": 0.35, "new": "withdrawn (unprinted; Table 1 product water 25.0 %)"},
+          {"field": "scoring", "old": "PRIMARY trust_loop predictive", "new": "refused: precursor charge not printed"}
+        ],
+        "shipped_outputs_moved": ["core_panel_scores", "core_prediction_uncertainty", "null_model_baselines", "data_wishlist", "jax_trunk_acrylamide_module reference", "gap_heatmap", "kinetic_core_b3_fit_report (frozen; stale; B3 objective row spi_extrusion_130C_acrylamide_ppb on any refit)"]
+      },
+      "residual_recorded_dex": -3.98,
+      "residual_corrected_dex": {"value": null, "reason": "no sourced charge", "brackets": {"formed_112": -3.86, "formed_112_and_37s": -3.69, "dry_basis_150": -3.86}},
+      "spent": ["Ma 2024 Fig. 2D, Table 1, secs. 3.1-3.2 (SEEN)"]
+    },
+    {
+      "id": "MF-37",
+      "source_dossier": "lin2021_extraction.md (bundles *_Chang2021); ye2024_extraction.md",
+      "error_if": "Lin 2021: 28 / 1459 / 832 ppb or HMF 7 ppm not the AG-arm values at the stated times and vehicles; charge, pH, acetate mis-keyed; ppb not of the reaction solution; rows from different arms. Ye 2024: 140.58 umol/mol not the control; denominator not Asn; buffer, vessel or time mis-keyed",
+      "outcome": "integrity holds (both sources)",
+      "evidence": [
+        "Lin 2021 sec. 3.3: AG in 1 % acetic acid 28 / 912 / 1459 ppb at 10 / 20 / 30 min; water 832 ppb at 30 min",
+        "Lin 2021 Fig. 4A (rendered): AG water 30 min ~7.2 ppm HMF = keyed 7000 ppb",
+        "Lin 2021 sec. 2.1-2.2: L-asparagine monohydrate 0.5 g + D-glucose 0.5 g / 100 mL, pH 6.0 = 33.3 / 27.75 mM; heating apparatus and vessel not printed",
+        "Ye 2024 sec. 3.1: control 140.58 +/- 13.92 umol/mol Asn; sec. 2.2: 0.1 M phosphate pH 6.86, 4 mL in 25 mL sealed tube, oil bath, 180 C, 30 min; molarity unprinted (0.2 M from Knol 2005 is a labelled inference)"
+      ],
+      "proposed_correction": null,
+      "residual_recorded_dex": {"lin2021_10min": 2.34, "lin2021_30min_acetate": 0.40, "lin2021_30min_water": 0.65, "lin2021_hmf_water": -0.44, "ye2024": 1.70},
+      "residual_corrected_dex": {"unchanged": true, "ye2024_molarity_dependence": "+1.70 + log10(c / 0.2 M), zero at c ~ 4 mM (bimolecular low-conversion approximation)"},
+      "lead": "come-up time unprinted (Lin 2021; the same group's Lin 2022 names a dry-bath incubator): step-2 candidate (a)",
+      "spent": ["Lin 2021 secs. 2-3, Fig. 3 prose, Fig. 4A/C; Ye 2024 secs. 2.2, 3.1, Table 3 control row (SEEN)"]
+    },
+    {
+      "id": "MF-38",
+      "source_dossier": "lin2022_extraction.md",
+      "error_if": "1859 ppb or 12.28 ppm not the AF-in-water 30-min values; charge or vehicle mis-keyed; prose vs figure disagree",
+      "outcome": "integrity error (prose vs figure) on HMF; acrylamide holds",
+      "evidence": [
+        "sec. 3.2: '1859 and 9401 ppb in water and acetic acid'; Fig. 3A AF 30 min ~1860 ppb (SD to ~2700)",
+        "prose: '(12.28 ppm (Figure 4A) and 5.13 ppm [18])'; Fig. 4A at 400 dpi, axis checked on the F bar (91.6 vs printed 91.56): AF 30 min = 5.0 ppm (SD ~1); Fig. 4B AF 30 min ~4.9; no bar near 12.28",
+        "the same sentence cites Lin 2021 as 5.13 ppm where Lin 2021 prints 7 ppm"
+      ],
+      "proposed_correction": {
+        "file": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
+        "changes": [
+          {"field": "holdout_targets.5-Hydroxymethylfurfural (HMF).target_value (and reference_volatiles conc_ppb)", "old": 12280.0, "new": "5000.0 (value_provenance figure_readoff, ~20 %), or keep 12280 with the conflict recorded and the row demoted; coordinator decides", "where": "Lin 2022 Fig. 4A, AF 30-min bar, p. 7"}
+        ],
+        "shipped_outputs_moved": ["core_panel_scores (HMF row)", "core_prediction_uncertainty", "contrast_scores"]
+      },
+      "residual_recorded_dex": {"acrylamide": -0.96, "hmf": -0.80},
+      "residual_corrected_dex": {"acrylamide": -0.96, "hmf": -0.41},
+      "spent": ["Lin 2022 sec. 2.2, sec. 3.2 prose, Figs. 3A/B, 4A/B (SEEN)"]
+    },
+    {
+      "id": "MF-42",
+      "source_dossier": "li2026_extraction.md, bi2020_extraction.md, trikusuma2020_extraction.md",
+      "error_if": "scored value on the wrong row or column; basis (wet / dry / per sample) or quantification class mis-keyed; unheated / carried level omitted; the pot's composition as the engine charges it differs from the print",
+      "outcome": "integrity errors (pot definition); every scored value holds",
+      "evidence": [
+        "Li 2026 Table 2 HMPE-0 min: hexanal 605.64, nonanal 74.37, 2-pentylfuran 5625.80 ug/kg (wet; ground after liquid-N2 freezing; semi-quantitative vs cyclohexanone)",
+        "Li 2026 sec. 2.3: SPI : wheat-gluten hydrolysate 6:4 dry basis, ~57 % moisture -> SPI 0.258 w/w; bundle charges SPI only; engine charges a carrier as the whole pot (parameters_lipid.looh_charge_mmol_per_l via engine.py ~L2410-2437: PV / 2 x lipid fraction x 1 kg/L, no carrier mass fraction); bundle a_w 0.35 contradicts 57 % moisture (lipid lane reads only T and t)",
+        "Trikusuma 2020 sec. 2.1-2.2: PPI 80 % protein, 8 % fat, at 3 % w/w -> 0.24 % fat vs engine 2.5 % at 100 % of pot (x10.4, 1.02 dex); Table 2 values match; carried levels already declared",
+        "Bi 2020 Table 4: raw peas hexanal 1260 +/- 114, roasted 324 +/- 34.3 ug/kg (net 3.9x loss; text 'heat-induced decrease'); nonanal raw 69.8, roasted not detected; no carried level declared"
+      ],
+      "proposed_correction": {
+        "items": [
+          {"file": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json", "field": "conditions.carried_volatiles", "old": null, "new": {"hexanal": 1260.0, "nonanal": 69.8}, "where": "Bi 2020 Table 4, raw-pea column", "alternative": "refuse the row as net loss of a carried level (no loss term in the lane)"},
+          {"file": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json", "field": "carrier mass fraction (new schema field)", "old": "implicitly 1.0 at the carrier's declared 2.5 % lipid", "new": "0.03 w/w isolate at 8 % fat", "where": "Trikusuma 2020 secs. 2.1-2.2"},
+          {"file": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json", "field": "carrier mass fraction (new schema field); precursors.Soy Protein Isolate.concentration_mM; conditions.water_activity", "old": "implicitly 1.0; 1000.0; 0.35", "new": "SPI 0.258 w/w plus a wheat-gluten-hydrolysate carrier (lipid unprinted); withdraw 1000 mM; withdraw a_w 0.35", "where": "Li 2026 sec. 2.3"}
+        ],
+        "note": "the carrier mass fraction needs a schema field and an engine change (coordinator; CF-P3)",
+        "shipped_outputs_moved": ["core_panel_scores (all lipid formation rows)", "core_prediction_uncertainty (lipid rows)", "null_model_baselines", "lane_offset_diagnostic", "W5.4 La cells"]
+      },
+      "residual_recorded_dex": {"li_2pentylfuran": -2.56, "li_hexanal": -0.94, "li_nonanal": -0.49, "bi_roasted_hexanal": -0.47, "trikusuma_hexanal": -0.34, "trikusuma_2pentylfuran": -0.40, "trikusuma_nonanal": -0.19, "trikusuma_decadienal": 0.21},
+      "residual_corrected_dex": {"li_2pentylfuran": [-2.93, -3.15], "li_hexanal": [-1.30, -1.52], "li_nonanal": [-0.86, -1.08], "li_range_note": "x0.43 (gluten lipid = SPI lipid) to x0.258 (gluten lipid 0)", "bi_roasted_hexanal": 0.63, "bi_note": "carried 1260 added, no loss in the lane; matching needs 17 % survival", "trikusuma_hexanal": -0.37, "trikusuma_2pentylfuran": -0.43, "trikusuma_nonanal": -0.43, "trikusuma_decadienal": -0.81, "trikusuma_note": "formed part x 0.096, carried kept"},
+      "confidence": "P ~ 0.85 that the engine applies no carrier mass fraction (code path read; not run)",
+      "spent": ["Li 2026 secs. 2.3, 2.8, Table 2 HMPE-0 min column; Trikusuma 2020 secs. 2.1-2.2, Table 2; Bi 2020 sample preparation, Table 4 raw and roasted (SEEN)"]
+    },
+    {
+      "id": "MF-34",
+      "source_dossier": "leahy1989_extraction.md",
+      "error_if": "13.1 ppm not the lysine-glucose 2 h / 95 C total; charge, pH or time mis-keyed; ppm on the 15 mL analysed volume; shares do not sum",
+      "outcome": "integrity holds",
+      "evidence": [
+        "text: 'lysine-glucose system yielded 13.1 ppm total pyrazines' = LEAHY_TABLE_III total; shares 55.8 / 41.5 / 2.4 %",
+        "Methods: 0.1 M amino acid + 0.1 M sugar, pH 9.0 0.1 M borate, 10 mL Teflon-capped tubes = engine pot (glycine for lysine, declared)",
+        "Table I: 3.596 ppm/h x 2 h + 0.06 = 7.25 ppm pyrazine vs Table III 7.31 ppm (consistent)",
+        "basis of ppm (15 mL sample vs 10 mL reaction) unprinted: x1.5 bracket"
+      ],
+      "proposed_correction": null,
+      "residual_recorded_dex": {"b18_T4": -2.88, "b21": -2.78},
+      "residual_corrected_dex": {"basis_15mL": [-3.06, -2.96], "lysine_two_amines_upper": "+0.30 at most"},
+      "spent": ["Leahy 1989 ch. 7 Methods, Tables I and III, Results text (SEEN; not an E13/E14 TEST study)"]
+    },
+    {
+      "id": "MF-23",
+      "source_dossier": "leitzen2021_extraction.md (bundle *_Steinhagen2021)",
+      "error_if": "six values not Table 4 scheme A 121 C; units not ug/mL of solution; 2-KDG not glucosone; unheated level omitted; pH, time, vessel or O2 mis-keyed; glucose monohydrate basis",
+      "outcome": "integrity errors (pot definition); every keyed value holds",
+      "evidence": [
+        "Table 4 scheme A 121 C: GO 5.6, MGO 2.6, 2-KDG 7.5, 3-DG/3-DGal 52.2, 3,4-DGE 55.5, 5-HMF 17.4 ug/mL (n = 27) = keyed",
+        "Table 6 (not heat sterilized): GO 1.0 +/- 0.5, MGO 0.9 +/- 0.1, 2-KDG 0.1, 3-DG n.d., 3,4-DGE n.d., 5-HMF 0.1 ug/mL; undeclared in the bundle",
+        "Table 3 / sec. 2.2: 4.36 = end pH after scheme A 121 C measured at room temperature; unheated 4.98; bundle keys 4.36 as conditions.ph with initial_ph_scale at_temperature, and its note wrongly says the paper prints 4.4-5.2",
+        "sec. 4.2.2: 18 min is F0 (z = 10 C, heating and cooling included), not a hold; cycle profile unprinted",
+        "sec. 4.2.1: 225 mL PP bottles filled with 200 mL; 25 mL air ~0.21 mmol O2 (~1.1 mM) vs ~0.14 mM needed by measured glucosone (42 uM) + glyoxal (97 uM)",
+        "sec. 4.2.1: glucose monohydrate; if 10 % w/v is of the monohydrate the charge is 505 mM (-0.04 dex)"
+      ],
+      "proposed_correction": {
+        "file": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
+        "changes": [
+          {"field": "conditions.carried_volatiles", "old": null, "new": {"glyoxal": 1000.0, "methylglyoxal": 900.0, "glucosone": 100.0, "5-Hydroxymethylfurfural (HMF)": 100.0}, "where": "Leitzen 2021 Table 6"},
+          {"field": "conditions.ph / initial_ph_scale", "old": "4.36 / at_temperature", "new": "4.98 / bench_cooled (start); record 4.36 as measured end pH", "where": "Leitzen 2021 Table 3; sec. 2.2"},
+          {"field": "conditions.buffer.provenance_note", "old": "claims a printed 4.4-5.2 range", "new": "Table 3 prints 5.17 / 4.67 / 4.36 (scheme A, 111 / 116 / 121 C), 4.98 unheated"},
+          {"field": "conditions.vessel", "old": "fill null, vessel null, atmosphere unstated", "new": "fill 200 mL, vessel 225 mL PP bottle (Kautex), air headspace", "where": "Leitzen 2021 sec. 4.2.1"},
+          {"field": "conditions.time_min note", "old": "18 min isothermal", "new": "18 min is F0 (z = 10 C) incl. heating and cooling; real cycle longer, profile unprinted", "where": "Leitzen 2021 sec. 4.2.2"}
+        ],
+        "shipped_outputs_moved": ["core_panel_scores (6 Steinhagen rows)", "core_prediction_uncertainty", "contrast_scores", "directional rows reading this pot", "null_model_baselines"],
+        "note": "REFERENCE hold-out: no fit moves; pH and cycle changes need a forward run"
+      },
+      "residual_recorded_dex": {"glucosone": -1.80, "glyoxal": -1.54, "hmf": -0.97, "dideoxyglucosone": -0.82, "3dg": 0.10, "mgo": 0.00},
+      "residual_corrected_dex": {"glucosone": -1.53, "glyoxal": -0.68, "glyoxal_if_carried_consumed": -1.46, "hmf": -0.95, "mgo": 0.13, "3dg": 0.10, "dideoxyglucosone": -0.82, "note": "unheated levels added to the recorded prediction, assumed to survive the cycle; start-pH and cycle effects not priced (forward run)"},
+      "spent": ["Leitzen 2021 Tables 1, 3, 4 (scheme A), 5, 6; secs. 2.2-2.3, 4.2-4.2.2 (SEEN)"]
+    },
+    {
+      "id": "MF-28",
+      "scope": "keyed values only (CK-06 pH passing is the other agent's)",
+      "source_dossier": "none; Schibilsky 2019 dissertation not on disk",
+      "error_if": "uM-to-ppb conversions or the Tabelle 17 rows mis-keyed",
+      "outcome": "not re-read (source not on disk); keyed conversions consistent with the quoted Tabelle 17",
+      "evidence": [
+        "Furaneol 9 / 46 uM x 128.13 = 1153.17 / 5893.98 ppb; HMF 454 / 798 uM x 126.11 = 57253.94 / 100635.78; furfural 17 / 25 uM x 96.08 = 1633.36 / 2402.0 (all = keyed)",
+        "recorded residuals reproduce: log10(21.841 / 1153.17) = -1.72; log10(21.841 / 5893.98) = -2.43"
+      ],
+      "proposed_correction": null,
+      "download_request": "Schibilsky S., 'Bildung fluechtiger Verbindungen und Carbonsaeuren in Modellsystemen unter Maillard-Bedingungen', Dissertation, TU Berlin 2019: Tabelle 17, sec. 5.1.6 / 5.1.6.2, vessel choice",
+      "residual_recorded_dex": {"dmhf_ph5": -1.72, "dmhf_ph8": -2.43},
+      "residual_corrected_dex": {"unchanged": true},
+      "spent": []
+    }
+  ],
+  "proposed_cf": [
+    {"id": "CF-P1", "kind": "conflict", "scope": "acrylamide lane", "sources": ["lin2022", "lin2021"], "quantity": "HMF, Asn + Fru (Glc) Maillard arm, water, pH 6, 180 C, 30 min", "observation": "Lin 2022 prose 12.28 ppm '(Figure 4A)' vs Fig. 4A bar 5.0 ppm (axis checked on F = 91.56); its citation of Lin 2021 (5.13 ppm) vs Lin 2021's printed 7 ppm (Fig. 4A ~7.2 at 30 min, ~5.4 at 20 min)", "explanations": ["prose transcription error", "different time or arm meant"], "remedy": "score the figure value or demote the row; ask the authors", "affects": ["mp_holdout_fructose_asparagine_180C_Lin2022"]},
+    {"id": "CF-P2", "kind": "conflict", "scope": "trunk", "sources": ["leitzen2021"], "quantity": "thermal history and starting state of the 121 C autoclave pot", "observation": "18 min is F0 (heating + cooling included), not a hold; unheated GO 1.0, MGO 0.9, glucosone 0.1, HMF 0.1 ug/mL; keyed pH 4.36 is the cooled end pH (start 4.98); 25 mL air over 200 mL", "explanations": ["MF-23's glyoxal deficit is ~0.9 dex pot-definition artefact; glucosone -1.5 stands"], "tests": ["forward runs with the start pH and a declared cycle band (CK-03 step 2)"], "affects": ["mp_holdout_glucose_only_autoclave_121C_Steinhagen2021"]},
+    {"id": "CF-P3", "kind": "choice/conflict", "scope": "lipid lane", "quantity": "hydroperoxide pool of a matrix pot", "observation": "the lane charges a lipid carrier as the whole pot; Trikusuma prints 3 % w/w isolate at 8 % fat (10.4x less fat than charged); Li 2026 prints SPI 0.258 w/w of a 57 %-moisture melt plus a gluten hydrolysate", "consequence": "Li rows fall to -0.9 to -3.2 dex; Trikusuma decadienal +0.21 -> -0.81; MF-42 is larger than recorded", "remedy": "carrier mass-fraction field in schema and engine; re-derive MF-42 before mechanism work", "affects": ["lipid rows of core_panel_scores"]},
+    {"id": "CF-P4", "kind": "conflict", "scope": "lipid lane", "sources": ["bi2020"], "quantity": "hexanal on roasting peas, 160 C / 30 min", "observation": "raw 1260 +/- 114 vs roasted 324 +/- 34.3 ug/kg (Table 4): net 3.9x loss, scored as formation from zero", "explanations": ["volatilisation in an open oven", "consumption of carried hexanal"], "remedy": "declare the carried level; refuse or score as loss once a loss term exists", "affects": ["external_validation_bi_2020_roasted_pea_hexanal"]}
+  ]
+}
