@@ -51,11 +51,18 @@ def test_a_missing_process_condition_is_refused_not_defaulted():
                                     "measured": {"furfural": 1.0}}]})
 
 
-def test_rows_are_scored_like_the_panel_scorecard(scored):
+def test_rows_are_scored_like_the_panel_scorecard():
+    # 2026-11-05 (H0 / EX-059): the template's two thiols are refused for their absolute level (measurement kept),
+    # so a 2-acetylthiazole row, which H0 did not score, carries the scoring half of this test.
+    document = yaml.safe_load(us.TEMPLATE)
+    document["systems"][0]["measured"]["2-acetylthiazole"] = {"value": 5.0, "unit": "ppb"}
+    scored = us.score_document(document)
     system = scored["systems"][0]
-    assert system["scored"] == 2 and not system["refused"]
+    assert system["scored"] == 1 and [r["compound"] for r in system["rows"]] == ["2-acetylthiazole"]
+    assert {r["compound"] for r in system["refused"]} == {"2-methyl-3-furanthiol", "2-furfurylthiol"}
+    assert all(r["absolute_refused"] and r["measured_ppb"] > 0 for r in system["refused"])
     from src.comparative_cli import spec_to_core
-    spec = us.systems_of(yaml.safe_load(us.TEMPLATE))[0]
+    spec = us.systems_of(document)[0]
     for row in system["rows"]:
         run = predict(spec_to_core(spec), [row["compound"]])
         assert row["predicted_ppb"] == pytest.approx(run.concentrations_ug_per_l[row["compound"]])
@@ -76,9 +83,10 @@ def test_an_unrepresented_compound_is_a_refusal_with_the_engines_reason():
     document["systems"][0]["measured"]["1-hexanol"] = {"value": 5.0, "unit": "ppb"}
     payload = us.score_document(document)
     system = payload["systems"][0]
-    assert [x["compound"] for x in system["refused"]] == ["1-hexanol"]
-    assert "UNREPRESENTED" in system["refused"][0]["reason"]
-    assert payload["summary"]["refused_rows"] == 1 and payload["summary"]["scored_rows"] == 2
+    refused = {x["compound"]: x for x in system["refused"]}
+    assert set(refused) == {"1-hexanol", "2-methyl-3-furanthiol", "2-furfurylthiol"}   # the thiols: H0 / EX-059
+    assert "UNREPRESENTED" in refused["1-hexanol"]["reason"] and not refused["1-hexanol"].get("absolute_refused")
+    assert payload["summary"]["refused_rows"] == 3 and payload["summary"]["scored_rows"] == 0
 
 
 def test_records_land_under_results_and_carry_what_a_wave_needs(scored, tmp_path):
