@@ -262,7 +262,7 @@
         "jacobian": "forward differences, absolute per-kind steps (fitting.STEPS / EXTRA_STEPS)",
         "central_polish_calls": 2,
         "budget_per_fit": 2000,
-        "workers": 1
+        "workers": 4
       },
       "refit": {
         "status": 2,
@@ -277,6 +277,7 @@
           "polished_cost": 37.62619026905555
         },
         "converged_profile": true,
+        "polish_skipped": null,
         "x": [
           -7.056037716311556,
           103.09884013248927,
@@ -287,7 +288,7 @@
         ],
         "S": 75.2523805381111,
         "failed_rows": 0,
-        "seconds": 35.92,
+        "seconds": 41.36,
         "x_frozen": [
           -6.5415452891122525,
           103.0999999999812,
@@ -309,7 +310,7 @@
         "scaled": 72.26973024908942,
         "F": 145.02351731194418
       },
-      "seconds": 510.8
+      "seconds": 587.1
     },
     "B41": {
       "fit": "B41",
@@ -3163,6 +3164,7 @@
             "polished_cost": 215.76122229237436
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.55876,
             "ea_go_ak_kj_mol": 103.1,
@@ -3188,6 +3190,7 @@
             "polished_cost": 139.40112419462778
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.498021,
             "ea_go_ak_kj_mol": 103.1,
@@ -3213,6 +3216,7 @@
             "polished_cost": 92.81185066979434
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.414,
             "ea_go_ak_kj_mol": 103.1,
@@ -3238,6 +3242,7 @@
             "polished_cost": 66.93851546956196
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.331532,
             "ea_go_ak_kj_mol": 103.1,
@@ -3263,6 +3268,7 @@
             "polished_cost": 54.14898076086069
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.269022,
             "ea_go_ak_kj_mol": 103.1,
@@ -3288,6 +3294,7 @@
             "polished_cost": 49.110384261380325
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.2359,
             "ea_go_ak_kj_mol": 103.1,
@@ -3313,6 +3320,7 @@
             "polished_cost": 44.981747635773516
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.201691,
             "ea_go_ak_kj_mol": 103.1,
@@ -3338,6 +3346,7 @@
             "polished_cost": 41.766488635324116
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.166505,
             "ea_go_ak_kj_mol": 103.1,
@@ -3363,6 +3372,7 @@
             "polished_cost": 39.46738907769553
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.130429,
             "ea_go_ak_kj_mol": 103.1,
@@ -3388,6 +3398,7 @@
             "polished_cost": 38.08669286311482
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.093589,
             "ea_go_ak_kj_mol": 103.1,
@@ -3424,6 +3435,7 @@
             "polished_cost": 38.0374808689967
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -7.007631,
             "ea_go_ak_kj_mol": 100.59,
@@ -3449,6 +3461,7 @@
             "polished_cost": 39.33510348637141
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -6.978213,
             "ea_go_ak_kj_mol": 100.59,
@@ -3474,6 +3487,7 @@
             "polished_cost": 41.48614732687919
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -6.939004,
             "ea_go_ak_kj_mol": 100.59,
@@ -3499,6 +3513,7 @@
             "polished_cost": 44.56118878331669
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -6.899357,
             "ea_go_ak_kj_mol": 100.59,
@@ -3524,6 +3539,7 @@
             "polished_cost": 48.56060716951957
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -6.859351,
             "ea_go_ak_kj_mol": 100.59,
@@ -3549,6 +3565,7 @@
             "polished_cost": 53.484602094101874
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -6.81903,
             "ea_go_ak_kj_mol": 100.59,
@@ -3574,6 +3591,7 @@
             "polished_cost": 66.10635317769764
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -6.737643,
             "ea_go_ak_kj_mol": 100.59,
@@ -3599,6 +3617,7 @@
             "polished_cost": 91.9699910469044
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -6.61438,
             "ea_go_ak_kj_mol": 100.59,
@@ -3624,6 +3643,7 @@
             "polished_cost": 139.37055468491337
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -6.449755,
             "ea_go_ak_kj_mol": 100.59,
@@ -3649,6 +3669,7 @@
             "polished_cost": 219.29044501948488
           },
           "retried": null,
+          "polish_skipped": null,
           "others": {
             "log10_k_go_ak_100C": -6.247879,
             "ea_go_ak_kj_mol": 100.59,
@@ -6021,14 +6042,1354 @@
         ]
       },
       "spent_data": "identification only, never credit: the profile is on the fit's own rows (item 2, spent data)"
+    },
+    "b18.ph_slope_above_7_decades_per_unit": {
+      "id": "b18.ph_slope_above_7_decades_per_unit",
+      "lane": "trunk",
+      "group": "b18",
+      "fit": "B18",
+      "fit_coordinate": "ph_slope_above_7_decades_per_unit",
+      "shipped_value": 0.19744840125387295,
+      "s1_fit_named": "B18",
+      "laplace_ci95_halfwidth": 0.07606929476731297,
+      "x_frozen": 0.19744840125387295,
+      "x_hat": 0.6568409973255597,
+      "h0": 0.030427717906925188,
+      "grid": [
+        0.0,
+        0.04828663918705589,
+        0.20042522872168184,
+        0.3221361003493826,
+        0.41341925407015817,
+        0.47427468988400856,
+        0.5047024077909337,
+        0.5351301256978589,
+        0.5655578436047841,
+        0.5959855615117093,
+        0.6264132794186344,
+        0.6568409973255597,
+        0.6872687152324849,
+        0.71769643313941,
+        0.7481241510463352,
+        0.7785518689532605,
+        0.8089795868601857,
+        0.8394073047671108,
+        0.9002627405809611,
+        0.9915458943017368,
+        1.1132567659294375,
+        1.2653953554640633,
+        1.4479616629056147,
+        1.5
+      ],
+      "profile": [
+        {
+          "value": 0.0,
+          "S": 207.9119510844618,
+          "delta": 132.65957054635072,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 69,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 103.96039714325337,
+            "polished_cost": 103.9559755422309
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.325451,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.654824,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 1.376916
+          }
+        },
+        {
+          "value": 0.04828663918705589,
+          "S": 188.7343746112643,
+          "delta": 113.48199407315319,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 74,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 94.3707527638411,
+            "polished_cost": 94.36718730563214
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.376462,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.685609,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 1.336914
+          }
+        },
+        {
+          "value": 0.20042522872168184,
+          "S": 138.32705465501462,
+          "delta": 63.07467411690352,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 70,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 69.16528449912809,
+            "polished_cost": 69.16352732750731
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.539229,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.780161,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 1.212003
+          }
+        },
+        {
+          "value": 0.3221361003493826,
+          "S": 108.76603132778864,
+          "delta": 33.51365078967754,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 61,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 54.38381373759828,
+            "polished_cost": 54.38301566389432
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.67187,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.853113,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 1.113584
+          }
+        },
+        {
+          "value": 0.41341925407015817,
+          "S": 92.75382448491023,
+          "delta": 17.501443946799128,
+          "converged": true,
+          "driver_converged": true,
+          "status": 3,
+          "evaluations": 56,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 46.3772614598212,
+            "polished_cost": 46.37691224245511
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.772851,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.906293,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 1.040826
+          }
+        },
+        {
+          "value": 0.47427468988400856,
+          "S": 84.96993235734377,
+          "delta": 9.717551819232668,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 61,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 42.485140570465425,
+            "polished_cost": 42.48496617867188
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.840844,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.940996,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 0.992871
+          }
+        },
+        {
+          "value": 0.5047024077909337,
+          "S": 81.93737765102564,
+          "delta": 6.6849971129145445,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 63,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 40.96880054058543,
+            "polished_cost": 40.96868882551282
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.875054,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.958161,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 0.969068
+          }
+        },
+        {
+          "value": 0.5351301256978589,
+          "S": 79.4744711642901,
+          "delta": 4.222090626178996,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 63,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 39.737301375099975,
+            "polished_cost": 39.73723558214505
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.909382,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.975185,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 0.94538
+          }
+        },
+        {
+          "value": 0.5655578436047841,
+          "S": 77.57890781204664,
+          "delta": 2.3265272739355396,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 38.78948809879221,
+            "polished_cost": 38.78945390602332
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.943833,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.992084,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 0.921808
+          }
+        },
+        {
+          "value": 0.5959855615117093,
+          "S": 76.2485289772335,
+          "delta": 0.9961484391224076,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 58,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 38.124278644687244,
+            "polished_cost": 38.12426448861675
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.978396,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -8.008861,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 0.898353
+          }
+        },
+        {
+          "value": 0.6264132794186344,
+          "S": 75.48134238542622,
+          "delta": 0.22896184731511937,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 72,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 37.740674730480535,
+            "polished_cost": 37.74067119271311
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.013066,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -8.025524,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 0.875014
+          }
+        },
+        {
+          "value": 0.6568409973255597,
+          "S": 75.2523805381111,
+          "delta": 0.0,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 99,
+          "failed_rows": 0,
+          "others": null
+        },
+        {
+          "value": 0.6872687152324849,
+          "S": 75.53160875129976,
+          "delta": 0.2792282131886594,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 58,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 37.765805920207804,
+            "polished_cost": 37.76580437564988
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.090925,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.060181,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 0.830868
+          }
+        },
+        {
+          "value": 0.71769643313941,
+          "S": 76.36882391883974,
+          "delta": 1.11644338072864,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 58,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 38.18441747551592,
+            "polished_cost": 38.18441195941987
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.125879,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.076534,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_below_7_decades_per_unit": 0.807921
+          }
+        },
+        {
+          "value": 0.7481241510463352,
+          "S": 77.75897672731388,
+          "delta": 2.5065961892027815,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 58,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 38.879500985763684,
+            "polished_cost": 38.87948836365694
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.160679,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.089751,
+            "ea_mgo_ak_kj_mol": 113.809225,
+            "ph_slope_below_7_decades_per_unit": 0.786611
+          }
+        },
+        {
+          "value": 0.7785518689532605,
+          "S": 79.6211404886902,
+          "delta": 4.368759950579104,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 65,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 39.8105832372039,
+            "polished_cost": 39.8105702443451
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.195325,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.09994,
+            "ea_mgo_ak_kj_mol": 111.66,
+            "ph_slope_below_7_decades_per_unit": 0.766948
+          }
+        },
+        {
+          "value": 0.8089795868601857,
+          "S": 82.02253315242955,
+          "delta": 6.770152614318448,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 41.01128322258869,
+            "polished_cost": 41.01126657621477
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.230432,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.11608,
+            "ea_mgo_ak_kj_mol": 111.66,
+            "ph_slope_below_7_decades_per_unit": 0.744344
+          }
+        },
+        {
+          "value": 0.8394073047671108,
+          "S": 84.97872273146703,
+          "delta": 9.726342193355933,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 42.48937998365905,
+            "polished_cost": 42.489361365733515
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.26555,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.132166,
+            "ea_mgo_ak_kj_mol": 111.66,
+            "ph_slope_below_7_decades_per_unit": 0.721822
+          }
+        },
+        {
+          "value": 0.9002627405809611,
+          "S": 92.55684876286237,
+          "delta": 17.304468224751275,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 46.27844077328367,
+            "polished_cost": 46.278424381431186
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.33576,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.16421,
+            "ea_mgo_ak_kj_mol": 111.66,
+            "ph_slope_below_7_decades_per_unit": 0.676994
+          }
+        },
+        {
+          "value": 0.9915458943017368,
+          "S": 108.10222430669631,
+          "delta": 32.84984376858522,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 54.05111519672013,
+            "polished_cost": 54.05111215334816
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.44077,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.212076,
+            "ea_mgo_ak_kj_mol": 111.66,
+            "ph_slope_below_7_decades_per_unit": 0.610179
+          }
+        },
+        {
+          "value": 1.1132567659294375,
+          "S": 136.7031252159509,
+          "delta": 61.45074467783981,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 68.35157866184795,
+            "polished_cost": 68.35156260797545
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.579545,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.275824,
+            "ea_mgo_ak_kj_mol": 111.66,
+            "ph_slope_below_7_decades_per_unit": 0.521546
+          }
+        },
+        {
+          "value": 1.2653953554640633,
+          "S": 185.37322303589676,
+          "delta": 110.12084249778566,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 68,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 92.68687011982246,
+            "polished_cost": 92.68661151794838
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.749666,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.355835,
+            "ea_mgo_ak_kj_mol": 111.66,
+            "ph_slope_below_7_decades_per_unit": 0.410768
+          }
+        },
+        {
+          "value": 1.4479616629056147,
+          "S": 263.4355583323229,
+          "delta": 188.18317779421182,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 68,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 131.71903203607894,
+            "polished_cost": 131.71777916616145
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.946655,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.452567,
+            "ea_mgo_ak_kj_mol": 111.66,
+            "ph_slope_below_7_decades_per_unit": 0.276727
+          }
+        },
+        {
+          "value": 1.5,
+          "S": 289.7644134484924,
+          "delta": 214.51203291038132,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 61,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 144.88393058091475,
+            "polished_cost": 144.8822067242462
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -8.001038,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.480223,
+            "ea_mgo_ak_kj_mol": 111.66,
+            "ph_slope_below_7_decades_per_unit": 0.238153
+          }
+        }
+      ],
+      "intervals": {
+        "raw": {
+          "threshold_delta": 3.841458820694124,
+          "lower": 0.5405785437316186,
+          "upper": 0.770737244275937,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 0.11507935027215921
+        },
+        "scaled": {
+          "threshold_delta": 72.26973024908942,
+          "lower": 0.16904136986040968,
+          "upper": 1.1512002469507472,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 0.4910794385451688
+        },
+        "F": {
+          "threshold_delta": 145.02351731194418,
+          "lower": 0.0,
+          "upper": 1.3530915214187262,
+          "closed_lower": false,
+          "closed_upper": true,
+          "half_width": 0.6765457607093631
+        }
+      },
+      "verdict": {
+        "shape": "pinned",
+        "pinned_both_sides_by_likelihood": true,
+        "inside_s4_band": null,
+        "s4_band": null,
+        "s4_band_note": "envelope prior b18.ph_slope_above_7_decades_per_unit: held fixed by the envelope (no band)",
+        "ci_spans_s4_band": null,
+        "refit_converged": true,
+        "shipped_value_inside_interval": true,
+        "converged_inside_interval": true,
+        "non_converged_points": [],
+        "driver_flagged_points_polish_raised_cost": [],
+        "points_with_failed_pots": [],
+        "meets_profile_requirement": true,
+        "conditional": null,
+        "fit_rows_flagged_in_s1_record": [],
+        "fit_objective_reproduced": false,
+        "proposed_upgrade": false,
+        "search_bounds": [
+          0.0,
+          1.5
+        ]
+      },
+      "spent_data": "identification only, never credit: the profile is on the fit's own rows (item 2, spent data)"
+    },
+    "b18.ph_slope_below_7_decades_per_unit": {
+      "id": "b18.ph_slope_below_7_decades_per_unit",
+      "lane": "trunk",
+      "group": "b18",
+      "fit": "B18",
+      "fit_coordinate": "ph_slope_below_7_decades_per_unit",
+      "shipped_value": 0.5795142879227316,
+      "s1_fit_named": "B18",
+      "laplace_ci95_halfwidth": 0.0900253887318035,
+      "x_frozen": 0.5795142879227316,
+      "x_hat": 0.8539205606760946,
+      "h0": 0.0360101554927214,
+      "grid": [
+        0.0,
+        0.13371745082166653,
+        0.3137682282852735,
+        0.45780885025615914,
+        0.5658393167343234,
+        0.6378596277197661,
+        0.6738697832124876,
+        0.7098799387052089,
+        0.7458900941979304,
+        0.7819002496906517,
+        0.8179104051833732,
+        0.8539205606760946,
+        0.8899307161688159,
+        0.9259408716615374,
+        0.9619510271542587,
+        0.9979611826469802,
+        1.0339713381397015,
+        1.069981493632423,
+        1.1420018046178657,
+        1.25003227109603,
+        1.3940728930669155,
+        1.5
+      ],
+      "profile": [
+        {
+          "value": 0.0,
+          "S": 193.97692549696225,
+          "delta": 118.72454495885115,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 61,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 96.98899784665214,
+            "polished_cost": 96.98846274848113
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.192661,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -8.226293,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.991915
+          }
+        },
+        {
+          "value": 0.13371745082166653,
+          "S": 161.11256242739216,
+          "delta": 85.86018188928107,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 82,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 80.55663246787135,
+            "polished_cost": 80.55628121369608
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.176702,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -8.201448,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.943539
+          }
+        },
+        {
+          "value": 0.3137682282852735,
+          "S": 124.87404927912687,
+          "delta": 49.62166874101577,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 82,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 62.437184631647185,
+            "polished_cost": 62.43702463956343
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.153447,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -8.166612,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.87707
+          }
+        },
+        {
+          "value": 0.45780885025615914,
+          "S": 102.6528058846163,
+          "delta": 27.4004253465052,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 61,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 51.326538049426574,
+            "polished_cost": 51.32640294230815
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.14307,
+            "ea_go_ak_kj_mol": 102.686795,
+            "log10_k_mgo_ak_100C": -8.140539,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.825487
+          }
+        },
+        {
+          "value": 0.5658393167343234,
+          "S": 90.07504725010841,
+          "delta": 14.822666711997314,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 48,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 45.03754227655802,
+            "polished_cost": 45.037523625054206
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.126823,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.117504,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.783342
+          }
+        },
+        {
+          "value": 0.6378596277197661,
+          "S": 83.7296860629573,
+          "delta": 8.477305524846201,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 48,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 41.864852455896745,
+            "polished_cost": 41.86484303147865
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.112707,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.100716,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.753702
+          }
+        },
+        {
+          "value": 0.6738697832124876,
+          "S": 81.19137494069321,
+          "delta": 5.938994402582111,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 47,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 40.59569321838795,
+            "polished_cost": 40.595687470346604
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.104928,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.09197,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.73847
+          }
+        },
+        {
+          "value": 0.7098799387052089,
+          "S": 79.088126810649,
+          "delta": 3.8357462725379037,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 47,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 39.54406685542388,
+            "polished_cost": 39.5440634053245
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.096583,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.082957,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.722921
+          }
+        },
+        {
+          "value": 0.7458900941979304,
+          "S": 77.4304043214406,
+          "delta": 2.1780237833295075,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 47,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 38.71520427750392,
+            "polished_cost": 38.7152021607203
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.087599,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.073653,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.70702
+          }
+        },
+        {
+          "value": 0.7819002496906517,
+          "S": 76.22981930452127,
+          "delta": 0.9774387664101738,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 38.11491093090627,
+            "polished_cost": 38.114909652260636
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.077899,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.064032,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.69073
+          }
+        },
+        {
+          "value": 0.8179104051833732,
+          "S": 75.499160201506,
+          "delta": 0.24677966339490354,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 37.74958076569747,
+            "polished_cost": 37.749580100753
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.067407,
+            "ea_go_ak_kj_mol": 103.1,
+            "log10_k_mgo_ak_100C": -8.054068,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.674016
+          }
+        },
+        {
+          "value": 0.8539205606760946,
+          "S": 75.2523805381111,
+          "delta": 0.0,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 99,
+          "failed_rows": 0,
+          "others": null
+        },
+        {
+          "value": 0.8899307161688159,
+          "S": 75.50197220378783,
+          "delta": 0.24959166567673208,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 30,
+          "failed_rows": 0,
+          "polish": null,
+          "retried": null,
+          "polish_skipped": "coordinate ea_go_ak_kj_mol: band narrower than its step 2.0",
+          "others": {
+            "log10_k_go_ak_100C": -7.038969,
+            "ea_go_ak_kj_mol": 102.125355,
+            "log10_k_mgo_ak_100C": -8.031637,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.637809
+          }
+        },
+        {
+          "value": 0.9259408716615374,
+          "S": 76.25611086388795,
+          "delta": 1.003730325776857,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 58,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 38.12806508830711,
+            "polished_cost": 38.12805543194398
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.01865,
+            "ea_go_ak_kj_mol": 100.683096,
+            "log10_k_mgo_ak_100C": -8.018647,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.617725
+          }
+        },
+        {
+          "value": 0.9619510271542587,
+          "S": 77.53194403024278,
+          "delta": 2.279563492131686,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 38.76597798995053,
+            "polished_cost": 38.76597201512139
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -7.004011,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -8.007092,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.598986
+          }
+        },
+        {
+          "value": 0.9979611826469802,
+          "S": 79.35275261484588,
+          "delta": 4.100372076734786,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 39.67638914908091,
+            "polished_cost": 39.67637630742294
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.988708,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.995238,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.579812
+          }
+        },
+        {
+          "value": 1.0339713381397015,
+          "S": 81.73641758704822,
+          "delta": 6.484037048937125,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 40.868233029725964,
+            "polished_cost": 40.86820879352411
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.972269,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.982954,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.56007
+          }
+        },
+        {
+          "value": 1.069981493632423,
+          "S": 84.70109019923555,
+          "delta": 9.448709661124454,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 51,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 42.35058650204217,
+            "polished_cost": 42.350545099617776
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.954672,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.970239,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.539754
+          }
+        },
+        {
+          "value": 1.1420018046178657,
+          "S": 92.4461733925563,
+          "delta": 17.193792854445206,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 64,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 46.22318187866156,
+            "polished_cost": 46.22308669627815
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.916023,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.943562,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.497427
+          }
+        },
+        {
+          "value": 1.25003227109603,
+          "S": 108.8681439325783,
+          "delta": 33.61576339446721,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 65,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 54.43430107122979,
+            "polished_cost": 54.43407196628915
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.849669,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.90056,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.429886
+          }
+        },
+        {
+          "value": 1.3940728930669155,
+          "S": 140.4113891033727,
+          "delta": 65.1590085652616,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 75,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 70.20622431736065,
+            "polished_cost": 70.20569455168635
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.747415,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.838444,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.333301
+          }
+        },
+        {
+          "value": 1.5,
+          "S": 171.11236435483752,
+          "delta": 95.85998381672643,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 68,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 85.5569629359525,
+            "polished_cost": 85.55618217741876
+          },
+          "retried": null,
+          "polish_skipped": null,
+          "others": {
+            "log10_k_go_ak_100C": -6.664104,
+            "ea_go_ak_kj_mol": 100.59,
+            "log10_k_mgo_ak_100C": -7.78995,
+            "ea_mgo_ak_kj_mol": 114.9,
+            "ph_slope_above_7_decades_per_unit": 0.258504
+          }
+        }
+      ],
+      "intervals": {
+        "raw": {
+          "threshold_delta": 3.841458820694124,
+          "lower": 0.709770225923752,
+          "upper": 0.9934190761354939,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 0.1418244251058709
+        },
+        "scaled": {
+          "threshold_delta": 72.26973024908942,
+          "lower": 0.19570460208298918,
+          "upper": 1.4205160241081383,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 0.6124057110125746
+        },
+        "F": {
+          "threshold_delta": 145.02351731194418,
+          "lower": 0.0,
+          "upper": 1.5,
+          "closed_lower": false,
+          "closed_upper": false,
+          "half_width": 0.75
+        }
+      },
+      "verdict": {
+        "shape": "pinned",
+        "pinned_both_sides_by_likelihood": true,
+        "inside_s4_band": null,
+        "s4_band": null,
+        "s4_band_note": "envelope prior b18.ph_slope_below_7_decades_per_unit: held fixed by the envelope (no band)",
+        "ci_spans_s4_band": null,
+        "refit_converged": true,
+        "shipped_value_inside_interval": true,
+        "converged_inside_interval": true,
+        "non_converged_points": [],
+        "driver_flagged_points_polish_raised_cost": [],
+        "points_with_failed_pots": [],
+        "meets_profile_requirement": true,
+        "conditional": null,
+        "fit_rows_flagged_in_s1_record": [],
+        "fit_objective_reproduced": false,
+        "proposed_upgrade": false,
+        "search_bounds": [
+          0.0,
+          1.5
+        ]
+      },
+      "spent_data": "identification only, never credit: the profile is on the fit's own rows (item 2, spent data)"
     }
   },
   "provenance": {
     "artifact": "s1_profiles",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "313af1677dcea823a0984ebc267aae09e6196cc4",
-      "short": "313af167",
+      "commit": "f0e9ff21d4c632f821a886466bc2c4a089275329",
+      "short": "f0e9ff21",
       "branch": "s1-profile-run",
       "dirty": true
     },
@@ -6115,13 +7476,13 @@
       },
       "b18": {
         "coordinates": 2,
-        "profiled": 0,
-        "meet_requirement": [],
-        "flat_or_one_sided": [],
-        "not_profiled": [
+        "profiled": 2,
+        "meet_requirement": [
           "b18.ph_slope_above_7_decades_per_unit",
           "b18.ph_slope_below_7_decades_per_unit"
-        ]
+        ],
+        "flat_or_one_sided": [],
+        "not_profiled": []
       },
       "sulfur": {
         "coordinates": 11,
@@ -6145,8 +7506,8 @@
     },
     "by_s1_lane": {
       "trunk": {
-        "profiled": 13,
-        "meet_requirement": 12
+        "profiled": 15,
+        "meet_requirement": 14
       },
       "acrylamide": {
         "profiled": 2,
@@ -6161,5 +7522,13 @@
       "k_ddg_hmf.log10_k_ref"
     ],
     "conditional_no_upgrade": []
+  },
+  "not_run": {
+    "B60": {
+      "coordinates": "the 10 sulfur rate constants and b8.ph_drift.arp_secondary_ammonium_pKa",
+      "reason": "the sulfur-lane profiles (conditional on B0 (falsified under S3: PR #94, M1b part (i), amendment A2); no upgrade proposed) would take far more than the ~6 h wall budget, so the run stopped after the trunk, acrylamide and b18 lanes.",
+      "measured": "one profile point (22 coordinates re-optimised at one value of k_arp_tdp, B60's quick setting, 2 pot workers) had not finished after 34 min of wall time and was stopped; B60's own fit spent 7601 s on 246 evaluations (31 s each), so one forward Jacobian (23 columns) costs about 12 min.",
+      "projection": "about 18 points per coordinate x 11 coordinates = ~200 points at >= 34 min each: >= 110 h serial, >= 28 h wall on 4 chains, plus the full refit. Porting B60's objective to the JAX fit path (the network carries sulfur since A2 + H3) is the route to a feasible run."
+    }
   }
 }

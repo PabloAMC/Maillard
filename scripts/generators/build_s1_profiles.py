@@ -192,9 +192,18 @@ def refit(spec: FitSpec, fixed: Mapping[int, float], start_full: np.ndarray) -> 
     for j, v in fixed.items():
         x[j] = v
     t0 = time.time()
+    polish_skipped = None
     if free:
-        f = fitting.fit(prob, x[free], budget=spec.budget, central_polish=spec.central_polish,
-                        polish_budget=spec.polish_budget, require_converged="flag")
+        try:
+            f = fitting.fit(prob, x[free], budget=spec.budget, central_polish=spec.central_polish,
+                            polish_budget=spec.polish_budget, require_converged="flag")
+        except ValueError as exc:
+            # the central polish cannot difference a coordinate whose band is narrower than its kind's step on both
+            # sides (B18's barriers: a 2.5 kJ/mol band, a 2 kJ/mol step): that point is fitted without the polish
+            if "narrower than its step" not in str(exc):
+                raise
+            polish_skipped = str(exc)
+            f = fitting.fit(prob, x[free], budget=spec.budget, central_polish=0, require_converged="flag")
         x[free] = f.theta
         r = np.asarray(f.residuals, dtype=float)
         pol = f.polish or {}
@@ -207,6 +216,7 @@ def refit(spec: FitSpec, fixed: Mapping[int, float], start_full: np.ndarray) -> 
         # tolerance, is carried (fitting.fit's rule) and the polish found nothing lower; the driver's own flag
         # ("converged") is reported beside it.
         rec["converged_profile"] = bool(f.status > 0 and not pol.get("exhausted", False))
+        rec["polish_skipped"] = polish_skipped
     else:
         r = np.asarray(spec.residuals(x), dtype=float)
         rec = {"status": 1, "converged": True, "converged_profile": True, "evaluations": 1, "polish_flagged": False}
@@ -633,7 +643,7 @@ def run_fit(fit: str, only: Optional[Sequence[str]], workers: int) -> Dict[str, 
                                          + [{"value": p["value"], "S": p["S"], "delta": p["delta"], "converged": p["converged_profile"], "driver_converged": p["converged"],
                                              "status": p["status"], "evaluations": p["evaluations"],
                                              "failed_rows": p["failed_rows"], "polish": p.get("polish"),
-                                             "retried": p.get("retried"),
+                                             "retried": p.get("retried"), "polish_skipped": p.get("polish_skipped"),
                                              "others": {k: round(v, 6) for j, (k, v) in enumerate(zip(spec.keys, p["x"]))
                                                         if j != idx[cid]}}
                                             for p in c["low_side"] + c["high_side"]], key=lambda q: q["value"]),

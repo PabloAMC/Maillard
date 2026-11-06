@@ -16,7 +16,7 @@ Judgement: meets the profile requirement = the scaled interval closes on BOTH si
 |---|---:|---:|---|---|---|
 | trunk | 13 | 13 | k_mgo_mel.log10_k_ref, k_tdg_ddg.log10_k_ref, k_ddg_tdg.log10_k_ref, k_ddg_dgal.log10_k_ref, k_dgal_ddg.log10_k_ref, k_ddg_hmf.log10_k_ref, k_mgo_ak.log10_k_ref, k_glyc.log10_k_ref, k_flp_cml.log10_k_ref, k_flp_cel.log10_k_ref, k_flp_decay.log10_k_ref, k_cml_loss.log10_k_ref | — | — |
 | acrylamide | 2 | 2 | k_acr_dp.log10_k_ref, k_acr_dp.ea_kj_mol | — | — |
-| b18 | 2 | 0 | — | — | b18.ph_slope_above_7_decades_per_unit, b18.ph_slope_below_7_decades_per_unit |
+| b18 | 2 | 2 | b18.ph_slope_above_7_decades_per_unit, b18.ph_slope_below_7_decades_per_unit | — | — |
 | sulfur | 11 | 0 | — | — | k_arp_tdp.log10_k_ref, k_tdp_fur.log10_k_ref, k_nf_mft.log10_k_ref, k_nf_mp3p.log10_k_ref, k_mgo_mp.log10_k_ref, k_fft_decay.log10_k_ref, k_osone_decay.log10_k_ref, k_pent_caramel.log10_k_ref, k_cys_thermal.log10_k_ref, k_thiolate_loss.log10_k_ref, b8.ph_drift.arp_secondary_ammonium_pKa |
 
 Proposed upgrades (each needs a second reader before it enters the register): k_tdg_ddg.log10_k_ref, k_ddg_tdg.log10_k_ref, k_ddg_dgal.log10_k_ref, k_dgal_ddg.log10_k_ref, k_ddg_hmf.log10_k_ref
@@ -25,6 +25,7 @@ Proposed upgrades (each needs a second reader before it enters the register): k_
 - **Finding.** B1: today's engine does NOT reproduce the fit's frozen objective (S = r . r at the frozen point 5025.874 now, 3979.877 in its report): the engine changed under its rows since it froze, so its coordinates need re-deriving (S1) and the profile is of today's objective.
 - **Finding.** B18: today's engine does NOT reproduce the fit's frozen objective (S = r . r at the frozen point 295.068 now, 2.644 in its report): the engine changed under its rows since it froze, so its coordinates need re-deriving (S1) and the profile is of today's objective.
 - **Finding.** B18: today's engine re-optimises the fit's objective below its frozen point (S at frozen 295.068, S_min 75.252; coordinates moved > 1e-3: log10_k_go_ak_100C, ea_go_ak_kj_mol, log10_k_mgo_ak_100C, ph_slope_above_7_decades_per_unit, ph_slope_below_7_decades_per_unit); the profile is around today's optimum.
+- **Not run: B60.** the sulfur-lane profiles (conditional on B0 (falsified under S3: PR #94, M1b part (i), amendment A2); no upgrade proposed) would take far more than the ~6 h wall budget, so the run stopped after the trunk, acrylamide and b18 lanes. Measured: one profile point (22 coordinates re-optimised at one value of k_arp_tdp, B60's quick setting, 2 pot workers) had not finished after 34 min of wall time and was stopped; B60's own fit spent 7601 s on 246 evaluations (31 s each), so one forward Jacobian (23 columns) costs about 12 min. Projection: about 18 points per coordinate x 11 coordinates = ~200 points at >= 34 min each: >= 110 h serial, >= 28 h wall on 4 chains, plus the full refit. Porting B60's objective to the JAX fit path (the network carries sulfur since A2 + H3) is the route to a feasible run.
 
 ## Fits
 
@@ -32,7 +33,7 @@ Proposed upgrades (each needs a second reader before it enters the register): k_
 |---|---:|---:|---:|---:|---:|---|---:|---:|---:|---|---|---:|
 | B20 | 10 | 5 | 5 | 17.206 | 17.206 | yes | 17.206 | 17.206 | 3.441 | yes | 3.84 / 13.22 / 22.74 | 1 |
 | B1 | 354 | 8 | 346 | 3979.877 | 5025.874 | no | 4943.031 | 4943.031 | 14.286 | yes | 3.84 / 54.88 / 55.27 | 189 |
-| B18 | 10 | 6 | 4 | 2.644 | 295.068 | no | 75.252 | 75.252 | 18.813 | yes | 3.84 / 72.27 / 145.02 | 511 |
+| B18 | 10 | 6 | 4 | 2.644 | 295.068 | no | 75.252 | 75.252 | 18.813 | yes | 3.84 / 72.27 / 145.02 | 587 |
 | B41 | 12 | 5 | 7 | 0.811 | 0.811 | yes | 0.764 | 0.764 | 0.109 | yes | 3.84 / 3.84 / — | 639 |
 | B3 | 30 | 11 | 19 | 105.302 | 105.416 | yes | 105.410 | 105.410 | 5.548 | yes | 3.84 / 21.31 / 24.30 | 2517 |
 
@@ -63,8 +64,8 @@ Held fixed by each fit (not profiled; for the second reader):
 | k_cml_loss.log10_k_ref | B20 | -0.983 | -0.983 | 0.495 | [-1.478, -0.488] | [-1.250, -0.716] | [-1.632, -0.333] | pinned | yes | — | yes | **yes** | fit rows flagged in the S1 record: B20: every B20 row (Nguyen 2016 rate table) (fitted under a network the source contradicts; CF-072) / no S4 band: no band on record / not proposed |
 | k_acr_dp.log10_k_ref | B3 | -0.898 | -0.898 | 0.445 | [-1.355, -0.472] | [-1.088, -0.715] | [-1.386, -0.443] | pinned | yes | — | yes | **yes** | fit rows flagged in the S1 record: B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131) / no S4 band: envelope prior b3.k_acr_dp.log10_k_ref_160C: sigma 0.2273 is the fit's own Laplace sigma (a fit output, not a measured or class band) / not proposed |
 | k_acr_dp.ea_kj_mol | B3 | 136.109 | 136.150 | 48.105 | [92.225, 182.422] | [116.953, 155.554] | [89.348, 185.686] | pinned | yes | — | yes | **yes** | fit rows flagged in the S1 record: B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131) / no S4 band: envelope prior b3.Ea_acr_dp: sigma 24.54 is the fit's own Laplace sigma (a fit output, not a measured or class band) / not proposed |
-| b18.ph_slope_above_7_decades_per_unit | B18 | | | | not profiled | | | | | | | | |
-| b18.ph_slope_below_7_decades_per_unit | B18 | | | | not profiled | | | | | | | | |
+| b18.ph_slope_above_7_decades_per_unit | B18 | 0.197 | 0.657 | 0.076 | [0.169, 1.151] | [0.541, 0.771] | [0.000 (open), 1.353] | pinned | yes | — | yes | **yes** | the fit's frozen objective is not reproduced by today's engine (re-derive first) / no S4 band: envelope prior b18.ph_slope_above_7_decades_per_unit: held fixed by the envelope (no band) / not proposed |
+| b18.ph_slope_below_7_decades_per_unit | B18 | 0.580 | 0.854 | 0.090 | [0.196, 1.421] | [0.710, 0.993] | [0.000 (open), 1.500 (open)] | pinned | yes | — | yes | **yes** | the fit's frozen objective is not reproduced by today's engine (re-derive first) / no S4 band: envelope prior b18.ph_slope_below_7_decades_per_unit: held fixed by the envelope (no band) / not proposed |
 | k_arp_tdp.log10_k_ref | B60 | | | | not profiled | | | | | | | | |
 | k_tdp_fur.log10_k_ref | B60 | | | | not profiled | | | | | | | | |
 | k_nf_mft.log10_k_ref | B60 | | | | not profiled | | | | | | | | |
@@ -96,3 +97,5 @@ Delta = S_p(psi) - S_min (S = r . r on the fit's own rows); c = the others' fit 
 - **k_cml_loss.log10_k_ref** (B20 `log10_k_cml_loss_100C`, search bounds [-2.983, 1.017]): -1.973: 52.88; -1.775: 33.84; -1.577: 19.04; -1.379: 8.46; -1.181: 2.12; -0.983: 0.00; -0.785: 2.12; -0.587: 8.46; -0.389: 19.04; -0.190: 33.84; 0.008: 52.88
 - **k_acr_dp.log10_k_ref** (B3 `k_acr_dp`, search bounds [-4.000, 1.000]): -1.610: 51.75; -1.432: 29.08; -1.254: 12.94; -1.076: 3.37; -0.898: 0.00; -0.720: 3.64; -0.541: 14.83; -0.363: 33.74; -0.185: 60.34
 - **k_acr_dp.ea_kj_mol** (B3 `Ea_acr_dp`, search bounds [20.000, 260.000]): 59.182: 64.01; 78.424: 37.45; 97.666: 16.19; 116.908: 3.86; 136.150: 0.00; 155.392: 3.78; 174.634: 14.97; 193.876: 32.68; 213.118: 56.45
+- **b18.ph_slope_above_7_decades_per_unit** (B18 `ph_slope_above_7_decades_per_unit`, search bounds [0.000, 1.500]): 0.000: 132.66; 0.048: 113.48; 0.200: 63.07; 0.322: 33.51; 0.413: 17.50; 0.474: 9.72; 0.505: 6.68; 0.535: 4.22; 0.566: 2.33; 0.596: 1.00; 0.626: 0.23; 0.657: 0.00; 0.687: 0.28; 0.718: 1.12; 0.748: 2.51; 0.779: 4.37; 0.809: 6.77; 0.839: 9.73; 0.900: 17.30; 0.992: 32.85; 1.113: 61.45; 1.265: 110.12; 1.448: 188.18; 1.500: 214.51
+- **b18.ph_slope_below_7_decades_per_unit** (B18 `ph_slope_below_7_decades_per_unit`, search bounds [0.000, 1.500]): 0.000: 118.72; 0.134: 85.86; 0.314: 49.62; 0.458: 27.40; 0.566: 14.82; 0.638: 8.48; 0.674: 5.94; 0.710: 3.84; 0.746: 2.18; 0.782: 0.98; 0.818: 0.25; 0.854: 0.00; 0.890: 0.25; 0.926: 1.00; 0.962: 2.28; 0.998: 4.10; 1.034: 6.48; 1.070: 9.45; 1.142: 17.19; 1.250: 33.62; 1.394: 65.16; 1.500: 95.86
