@@ -797,6 +797,26 @@ must not decide the verdict.)
 
 *(appended per part after its run; nothing above this line is edited after the first number of that part exists)*
 
+### 18.1 Part (i), 2026-11-06: built, screened, power-checked; CLOSED FOR SHIPPING
+
+- **Records** (branch `m1b-part-i-build`, PR #94): `kinetic_core_m1b_part_i_checks.{json,md}` (BIT, V1 - V7,
+  V-solver, V-density: all pass), `kinetic_core_m1b_part_i_screen.{json,md}` with its draws
+  `kinetic_core_m1b_part_i_screen_draws.json.gz` (0 failed pot runs; no would-be kill), and
+  `kinetic_core_m1b_part_i_power.{json,md}` (power 0.000 and false credit 0.000 for all five pairs: all demoted).
+  Part (i) was never frozen; no `--fit` or `--score` ran.
+- **Verdict (the coordinator's decision, 2026-11-06, after an independent review): "balance not identified; the
+  measured-trajectory operator stays".** Part (i) is closed for shipping. The reason is NOT "the data cannot decide":
+  1. **The +-omega corner error term (sec. 3.3, N3) was a mis-transfer.** omega (0.419 dex) is H0's between-pot
+     scatter of thiol CONCENTRATIONS. Scaling every produced titratable pool independently by 10^(+-omega), acids up
+     and bases down together, breaks the stoichiometry the pools share: Meynier's cysteine pots would carry ~98 mM of
+     cysteine carboxyl (37.6 mM x 2.62) from 50 mM of cysteine charged. The two corners are a joint worst-case bound,
+     and they were used as a 1-sd scale. The result was delta-pH of 0.4 - 3.8 pH, which (the review's finding)
+     flattens B1's and B13's predictive densities about 4x for structural reasons.
+  2. **CF-084's controls are spent.** They nominated every rival (sec. 3.2 was written from their signed residuals),
+     so under the plan's sec. 7 (item 2, as the coordinator's decision cites it) they can falsify a rival but never
+     credit one.
+- What remains is the one falsification-only amendment of sec. 20 (A1, v3.7). The v3.6 power record stands beside it.
+
 ## 19. Revision log
 
 - v1 DRAFT, 2026-11-05 (cdb94a29): first version, with the coordinator's corrections of the same day (Cao a descriptive
@@ -884,3 +904,129 @@ must not decide the verdict.)
   MGO and glycolaldehyde, roughly 0.012 - 0.16 /min from a 20 mM partner at pH 5: part of Bork's k may be second order and
   not transfer to Mikami's 1.7 mM or pot-level NF; one NF concentration, uncheckable). The joint refit's Bork band is
   scoped "at ~20 mM NF" with a concentration-transfer caveat (sec. 10).
+- v3.7, 2026-11-06 (Amendment A1, sec. 20; written after part (i)'s screen and power check, before any number under
+  it exists): part (i) closed for shipping (sec. 18.1); one falsification-only re-reading of the stored draws with the
+  +-omega corner term replaced by measurement noise (and a lab-repeat offset / shape form for the unbuffered Amadori
+  class). Nothing above sec. 18 is edited; part (ii) is untouched by A1.
+
+## 20. Amendment A1 (v3.7, 2026-11-06): part (i), falsification only
+
+*Written by the build's author on the coordinator's decision of 2026-11-06, after an independent review of the
+noise model. It is committed before any number under it exists, and no amended number is computed until an
+independent reviewer who has not seen the screen or the draws confirms this text. One amendment, one re-run; the
+result is accepted whatever it is.*
+
+### 20.0 What the author has seen
+
+The author built part (i) and has seen:
+- the screen record under v3.6's noise (signature pass fractions, coverage boxes, each rival's best-draw predictions
+  and the quantiles printed there);
+- the v3.6 power record, and a diagnostic of it (C-Hou's d under v3.6's noise, for three pairs).
+
+**Some amended readings are foreseeable from these predictions.** For example, B0-pinned's Meynier cysteine drifts
+(-0.39 to -0.88) stand against a 0.2 bound with a two-reading sd of 0.07. No likelihood, signature, kill or power
+number under the noise below has been computed.
+
+### 20.1 Scope
+
+- Part (i) is **closed for shipping** (sec. 18.1): "balance not identified; the measured-trajectory operator stays".
+- **Credit outcomes removed.** Outcome rows 1 and 2 of sec. 3.10 ("balance validated" for both classes or for one)
+  are removed for part (i) on the data on disk. No rival is favoured, credited, validated or shipped from CF-084's
+  controls. The comparison rule of sec. 3.7 items 1 - 2 does not run.
+- **The one question left:** does a rival survive CF-084's controls at all? Each rival is either "falsified on
+  CF-084's controls" or "not falsified". A rival that is not falsified gains nothing; it stays a candidate for a later
+  case on unspent data.
+- **Part (ii)** keeps its own text (sec. 4). A1 changes nothing in it. Its pH units must not use `ph_species_discrepancy`
+  as built (sec. 20.6).
+
+### 20.2 The error term (replaces sec. 3.3's delta-pH for part (i) only)
+
+- **Primary: per-point measurement noise only.**
+  - The sd is the printed replicate SD where one is readable; otherwise max(read error, meter repeatability r =
+    0.05 pH). This is sec. 3.3's measurement rule, unchanged.
+  - Meynier (C-Mey): the drift is the difference of two readings, so its sd is sqrt(2) x r. It is censored at 0.2, as
+    written: P(|d_pred + e| <= 0.2), e ~ N(0, 2 r^2).
+  - Buffered pots get nothing more.
+  - No model-discrepancy term enters; omega does not appear anywhere in part (i).
+- **Required-agreement form: a lab-repeat offset and shape, unbuffered Amadori class only** (C-Hou, C-Hou unforced,
+  C-Zhou-ARP, C-Zhou-Cys). Measurement noise as above, plus:
+  - a **run-level offset** with sd **s_off = 0.45 pH**, one per run. It is shared by every point of that run: Hou's six
+    times share one offset, while each Zhou label is its own run with its own offset.
+  - a **per-point shape term** with sd **s_shape = 0.16 pH**, independent per point.
+  - So Hou's covariance is diag(meas^2 + s_shape^2) + s_off^2 1 1^T, and each Zhou endpoint has variance meas^2 +
+    s_shape^2 + s_off^2.
+- **Where the two scales come from (arithmetic only).** They come from one laboratory's repeat of one design: the
+  unbuffered AX-ARP 20 mM pot at initial pH 8, 120 C, in Zhou 2024 (Fig. 3b) and Zhou 2025b (Fig. 3d), at 30 / 60 /
+  90 / 120 min (sec. 2, CF-060).
+  - Readings: 5.13 / 4.32 / 4.19 / 4.08 against 6.04 / 5.05 / 4.66 / 4.50.
+  - Differences: 0.91 / 0.73 / 0.47 / 0.42, with mean 0.6325 and sd (n - 1) 0.2296.
+  - For a difference of two runs, each run's offset sd is mean / sqrt(2) = 0.447, and the per-point shape sd is
+    sd / sqrt(2) = 0.162.
+  - **These are closer to upper bounds than to estimates.** There is one pair of runs, from two papers (so anything
+    that differs between the papers is included), and a single pair's mean difference is used as an offset scale.
+- **Sensitivities.** s_off and s_shape are scaled together by 0.5 and by 2; these replace omega x 0.5 / x 2. r = 0.02
+  is kept, as written. The omega = 0.390 sensitivity is dropped.
+
+### 20.3 The screen's kill rule and signatures (sec. 3.5), noise term only
+
+The signatures, the draws (the stored screen ensembles), the kill rule ("a rival is killed only if no draw reproduces
+all four") and the coverage rule are unchanged. Only the noise term inside each signature changes. The readings the
+build declared are adopted explicitly, with Z_90 = 1.645 (two-sided 90 %):
+
+| signature | reproduced when (primary) | under the offset / shape form |
+|---|---|---|
+| sigma-Hou-level | \|pH20_pred - 5.05\| <= Z_90 x meas | Z_90 x sqrt(meas^2 + s_shape^2 + s_off^2) |
+| sigma-Hou-shape | the 60 -> 120 min fall within Z_90 x sqrt(2 meas^2) of 0.75 | Z_90 x sqrt(2 meas^2 + 2 s_shape^2); the offset cancels within one run |
+| sigma-Mey | every cysteine pot has P(\|d + e\| <= 0.2) > 0.05, e ~ N(0, 2 r^2) | unchanged (a buffered class) |
+| sigma-Zhou | the label 6 -> 8 endpoint rise is below B0-pinned's re-printed rise (V6), i.e. toward the measured | unchanged (a sign) |
+
+All four are read on the decisive forced C-Hou run, with the unforced run printed beside it.
+
+**Falsification rule.**
+- A rival is **falsified on CF-084's controls** only if the kill holds under the primary term AND under every
+  required-agreement form: the offset / shape form at s, s x 0.5 and s x 2; r = 0.02; and the unforced C-Hou.
+- A kill that fails under any form reads "not falsified".
+- **Confirmation at one fit (sec. 3.8) is kept**, but it is an engine run, so it waits for the coordinator. Until it
+  runs, a kill reads "falsified on the screen's draws, confirmation pending".
+
+### 20.4 The power check, re-run as kill power against false-kill rate (replaces sec. 7 for part (i))
+
+- **Truths:** B0-pinned and each rival's best draw. The best draw maximises the summed primary log-likelihood of
+  C-Mey (Cys), C-Hou and C-Zhou-ARP under sec. 20.2's measurement noise, on the measured data.
+- **Synthetic data:** R = 200 sets per truth, from the truth's stored predictions plus the primary noise.
+  - pH points: y = f + e.
+  - Meynier: d_obs = d + e, e ~ N(0, 2 r^2), read "within" iff \|d_obs\| <= 0.2.
+  - The offset / shape form also gets its own synthetic sets, generated under that form.
+- **On each synthetic set** the signatures are re-read against the synthetic values in place of the measured ones.
+  sigma-Zhou passes iff the draw's rise minus B0-pinned's has the sign of the synthetic rise minus B0-pinned's. The
+  falsification rule of sec. 20.3 is applied to each rival's stored ensemble.
+- **Reported per rival k, with Wilson 95 % CIs:**
+  - the **false-kill rate**: the fraction of sets from k's own best draw in which k is falsified;
+  - the **kill power**: the fraction of sets from each other truth (B0-pinned and every other rival's best draw) in
+    which k is falsified; the maximum over truths is printed beside each one.
+- **Demotion.** A rival whose maximum kill power does not exceed its false-kill rate is **"unfalsifiable on disk"**.
+  Its verdict on the measured data is reported as "not testable here".
+- The confirmation fit of sec. 20.3 is not part of the power check.
+
+### 20.5 No new engine runs; records
+
+- **No new engine run is needed.** Checked on 2026-11-06 from the array shapes only; no value was read. The draws file
+  stores, for every draw of every rival, the predicted cooled pH at every scored time of every control pot:
+  - C-Mey (Cys) drift: 5 values;
+  - C-Hou forced and unforced: 6 each;
+  - C-Zhou-ARP and C-Zhou-Cys: 3 each;
+  - C-Mey (Gly) for B0, B3 and B13.
+  sec. 20.2 - 20.4 need only these and the measured data. The stored delta-pH columns are not read.
+- The confirmation fit of sec. 20.3 is the only engine step A1 can call for, and only with the coordinator's go.
+- **The re-run writes** `kinetic_core_m1b_part_i_falsification.{json,md}`: the falsification verdict per rival on the
+  measured data, and the kill-power table. The v3.6 records (`_screen`, `_power`) are kept unchanged beside it.
+- **Run once.** The generator refuses a second run, and refuses to run until this section's confirmation by an
+  independent reviewer is recorded in the record's inputs.
+
+### 20.6 `ph_species_discrepancy` (M1.1) before any later pH unit freezes
+
+The function that produced v3.6's delta-pH (`src/kinetic_core/predictive_densities.py`) must be fixed or retired
+before M1c's or part (ii)'s pH units freeze. If it is kept:
+- co-produced species are scaled together, by their source reaction;
+- every scaled amount is capped at the precursor charged;
+- the size comes from pH data, never from omega.
