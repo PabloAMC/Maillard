@@ -6262,16 +6262,16 @@
   "artifact": "frozen_fit_reproducibility",
   "generated_on": "2026-11-06",
   "git": {
-   "commit": "b99e34025e5c1f51e32c81325f8d9851a8c7fb59",
-   "short": "b99e3402",
+   "commit": "db493e5a340977ad1cd2a10d8b4883c19e78318a",
+   "short": "db493e5a",
    "branch": "frozen-fit-reproducibility",
-   "dirty": true
+   "dirty": false
   },
   "generated_by": "scripts/generators/build_frozen_fit_reproducibility.py",
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "a47b400b78c5a62a2886314aca9d0595e9c8821fbf371ef2abf42c21b7666a6a"
+    "sha256": "c69885c0ce3a91948917821a96dce65443d1defb0f2de630d7abf28b92ca9f6b"
    },
    {
     "path": "results/validation/kinetic_core_b1_fit_report.json",
