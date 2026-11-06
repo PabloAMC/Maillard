@@ -368,6 +368,47 @@ def test_the_power_check_gate_is_required_for_a_credit():
     assert v.outcome == "neither_credited_both_qualify"                          # no credit: the gate is not read
 
 
+@pytest.mark.parametrize("k, n", [(0, 1), (0, 20), (2, 60), (9, 99)])
+def test_a_power_check_too_small_to_fail_cannot_open_the_gate(k, n):
+    """Review of PR #105, D2 bypass: (0, 1) passed the gate. An n at which a false-credit rate of 2 alpha could not
+    fail the gate is refused; the bar derives from alpha (n >= 100 at alpha = 0.05)."""
+    assert pdn.power_check_min_n() == 100 and not pdn.power_check_n_adequate(n)
+    g = pdn.misspecified_false_credit_gate(k, n)
+    assert not g["n_adequate"] and not g["passes"]
+    v = pdn.judge_pair({"base": _obs({"full": 8.0})}, NULL_A, NULL_B, ONE_UNIT, ALL_INPUTS,
+                       misspecified_false_credit=(k, n))
+    assert v.outcome == "undecided" and v.credited is None and "could not fail the gate" in v.reasons[0]
+    assert pdn.misspecified_false_credit_gate(0, 100)["passes"]
+    assert pdn.misspecified_false_credit_gate(0, 1000, alpha=0.01)["n_adequate"]
+    assert not pdn.misspecified_false_credit_gate(0, 300, alpha=0.01)["n_adequate"]    # 2 alpha = 0.02 needs more
+
+
+@pytest.mark.parametrize("bad", [float("nan"), float("inf"), float("-inf")])
+@pytest.mark.parametrize("key", ["full", "u1", "-u2"])
+def test_a_non_finite_observed_t_is_not_computable(bad, key):
+    """Review of PR #105: a NaN observed T crossed on both sides (no null weight is >= NaN). A non-finite T, T_u or
+    T_-u is refused: "not computable", with the reason."""
+    units = {"u1": _within("u1"), "u2": _within("u2")}
+    T = {"full": 8.0, "-u1": 4.0, "-u2": 4.0, "u1": 4.0, "u2": 4.0}
+    T[key] = bad
+    na = _null("a", {k: RNG.normal(5, 1, 1000) for k in T})
+    nb = _null("b", {k: RNG.normal(-5, 1, 1000) for k in T})
+    v = pdn.judge_pair({"base": _obs(T, units=units)}, na, nb, units, ALL_INPUTS, **GATE)
+    assert v.outcome == "not_computable" and v.credited is None
+    assert any("non-finite observed T" in r and key in r for r in v.reasons), v.reasons
+    with pytest.raises(MeasurementModelRefusal, match="not finite"):
+        pdn.null_tail_test(RNG.normal(0, 1, 100), None, bad, 0.05, "upper")
+
+
+def test_the_verdict_records_whether_re_estimation_was_attempted():
+    v = pdn.judge_pair({"base": _obs({"full": 8.0})}, NULL_A, NULL_B, ONE_UNIT, ALL_INPUTS, **GATE)
+    assert "null under a: re-estimation: none" in v.reasons and "null under b: re-estimation: none" in v.reasons
+    nb = pdn.NullDistribution("b", NULL_B.stats, NULL_B.redrawn, True, np.ones(1000, bool), None,
+                              {"reestimation": "retry_draws", "n_retried": 7, "n_rescued_by_retry": 5})
+    v = pdn.judge_pair({"base": _obs({"full": 8.0})}, NULL_A, nb, ONE_UNIT, ALL_INPUTS, **GATE)
+    assert "null under b: re-estimation: 7 retried (5 rescued)" in v.reasons
+
+
 def test_required_agreement_needs_every_scored_form():
     forms = [pdn.FormDeclaration("f1", "modelling_choice"), pdn.FormDeclaration("f2", "modelling_choice"),
              pdn.FormDeclaration("hedge", "omega_hedge")]
@@ -464,14 +505,19 @@ def _build(design, draws, pool=POOL, seed=0, **pool_kw):
                              precision_ess=PREC, **pool_kw)
     pb = pdn.build_null_pool("b", {"base": tb}, design, ea, eb, pool, np.random.default_rng(5 + 100 * seed),
                              precision_ess=PREC, **pool_kw)
-    return {"design": design, "ea": ea, "eb": eb, "ta": ta, "tb": tb, "pa": pa, "pb": pb}
+    # the synthetic sets' truths: a third, independent prior sample (decoupled from the pools' held-out truths)
+    sa = draws("a", S_DRAWS, np.random.default_rng(6 + 100 * seed))
+    sb = draws("b", S_DRAWS, np.random.default_rng(7 + 100 * seed))
+    return {"design": design, "ea": ea, "eb": eb, "ta": ta, "tb": tb, "pa": pa, "pb": pb, "sa": sa, "sb": sb}
 
 
 def _tally(w, n_sets, seed=0, ppc_reps=100, spent=False):
-    """Verdicts on ``n_sets`` synthetic sets per truth (truth draw, then data at it), the review's seeds."""
+    """Verdicts on ``n_sets`` synthetic sets per truth (truth draw, then data at it), the review's set seeds. The
+    truths come from ``sa`` / ``sb``, a prior sample independent of the pools' truths (the review drew both from the
+    same held-out draws)."""
     design = w["design"]
     out = {}
-    for truth, td in (("a", w["ta"]), ("b", w["tb"])):
+    for truth, td in (("a", w["sa"]), ("b", w["sb"])):
         r = np.random.default_rng((10 if truth == "a" else 11) + 100 * seed)
         tally: dict = {}
         for _ in range(n_sets):
@@ -673,8 +719,8 @@ def _same_mean_world(seed):
 
 @pytest.mark.slow
 def test_same_mean_different_spread_with_a_spent_row_does_not_over_credit():
-    """(c) The exact one-sided binomial p of the false credits is >= 0.05 against a false-credit rate of 0.05, under
-    each truth (R = 300 per truth)."""
+    """(c) False credit not shown above 0.05: the exact one-sided binomial p is >= 0.05 under each truth (R = 300 per
+    truth; it rejects only at about 23 / 300, a guard against roughly a doubling, not a proof of <= 0.05)."""
     w = _same_mean_world(seed=6)
     rates = _tally(w, R_FALSE, seed=6)
     for truth, wrong in (("a", "b"), ("b", "a")):
@@ -688,11 +734,12 @@ def test_same_mean_different_spread_with_a_spent_row_does_not_over_credit():
 
 @pytest.mark.slow
 @pytest.mark.parametrize("nu", [2, 4, 9])
-def test_the_bound_keeps_false_credit_within_alpha_in_df_carrying_worlds(nu):
-    """(d) The review's df worlds (its seeds; a printed within-run SD with nu df on both shapes): the pools hold
+def test_the_bound_false_credit_is_not_shown_above_alpha_in_df_carrying_worlds(nu):
+    """(d) The review's df worlds (its pool seeds; a printed within-run SD with nu df on both shapes): the pools hold
     unresolved replicates (4 %, 2 %, 1 % at nu = 2, 4, 9), which before PR #105's bound made every pair "not
-    computable". Now every pair is computable, and the exact one-sided binomial p of the false credits is >= 0.05
-    against 0.05 (R = 300 per truth)."""
+    computable". Now every pair is computable, and false credit is NOT SHOWN above 0.05: the exact one-sided binomial
+    p is >= 0.05 (R = 300 per truth). This rejects only at about 23 / 300, so it guards against roughly a doubling of
+    false credit; it does not prove false credit <= 0.05."""
     w = _build(pdn.MeasurementDesign(_world_noise(df_shape=nu)), _world_draws)
     assert (~w["pa"].resolved).any() or (~w["pb"].resolved).any()
     rates = _tally(w, R_FALSE)

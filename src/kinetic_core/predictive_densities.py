@@ -638,6 +638,8 @@ def ph_species_discrepancy(resolve: Callable[[Mapping[str, float]], float], prod
 # - Adequacy family: every unit whose role is "credit" or "falsification_only" (an absolute level that cannot credit
 #   still tests adequacy, as in the prototype); posterior-predictive p of each under p(y_u | y_spent) (the plan's
 #   text: conditioned on the spent rows only), Holm across them, adequate iff every Holm-adjusted p >= 0.05.
+#   CAVEAT: the judge calibration's 0.70 - 0.90 power (PR #99 / #102) used the prototype's adequacy, conditioned on
+#   the spent AND decisive rows; this spent-only adequacy is uncalibrated except in synthetic worlds.
 # - Integration over an estimate's sampling uncertainty: a scaled inverse chi-square on the variance (estimate s, df
 #   nu), by a K-point quantile quadrature (K = 4, the prototype's); the bootstrap draws the true variance from it and
 #   re-draws the estimate a replicate would print (s_rep^2 = sigma^2 chi^2_nu / nu).
@@ -727,6 +729,8 @@ def null_tail_test(x: Any, w: Optional[Any], t_obs: float, alpha: float, side: s
                 "tail_weight_mc_se": float("nan"), "infinite_mass": float("nan"), "crosses": False}
     if np.any(np.isnan(x)):
         raise MeasurementModelRefusal("a null replicate is NaN: bound it (+-inf) or resolve it, never drop it")
+    if not math.isfinite(float(t_obs)):
+        raise MeasurementModelRefusal(f"the observed statistic is not finite ({t_obs!r}): it crosses nothing")
     w = w / w.sum()
     ess = float(1.0 / np.sum(w ** 2))
     s = 1.0 if side == "upper" else -1.0
@@ -781,10 +785,33 @@ def wilson_interval(k: int, n: int, z: float = 1.959963984540054) -> Tuple[float
 def misspecified_false_credit_gate(k: int, n: int, alpha: float = NOMINAL_ALPHA) -> Dict[str, Any]:
     """M1.1's power-check condition: false credit under the generator that adds the same-observable reproducibility
     term (else the lane's within-laboratory term); if the lower end of its Wilson 95 % interval exceeds ``alpha`` the
-    case cannot credit."""
-    lo, hi = wilson_interval(int(k), int(n))
-    return {"k": int(k), "n": int(n), "rate": (k / n) if n else float("nan"), "wilson95": [lo, hi],
-            "passes": bool(n > 0 and not (lo > alpha))}
+    case cannot credit.
+
+    The check must be able to fail: an n at which an observed false-credit rate of 2 alpha (k = floor(2 alpha n))
+    would still leave the Wilson lower end <= alpha is refused (``n_adequate`` False, ``passes`` False), so (0, 1)
+    cannot pass the gate. ``min_n`` is the smallest n from which every n is adequate (100 at alpha = 0.05)."""
+    k, n = int(k), int(n)
+    lo, hi = wilson_interval(k, n)
+    adequate = power_check_n_adequate(n, alpha)
+    return {"k": k, "n": n, "rate": (k / n) if n else float("nan"), "wilson95": [lo, hi], "n_adequate": adequate,
+            "min_n": power_check_min_n(alpha), "passes": bool(adequate and not (lo > alpha))}
+
+
+def power_check_n_adequate(n: int, alpha: float = NOMINAL_ALPHA) -> bool:
+    """Whether a power check of n sets could fail the gate at a false-credit rate of 2 alpha."""
+    n = int(n)
+    return bool(n > 0 and wilson_interval(int(math.floor(2.0 * alpha * n + 1e-9)), n)[0] > alpha)
+
+
+def power_check_min_n(alpha: float = NOMINAL_ALPHA, n_max: int = 100000) -> int:
+    """The smallest n from which every larger n is adequate (``power_check_n_adequate``)."""
+    last_bad = 0
+    for n in range(1, n_max + 1):
+        if not power_check_n_adequate(n, alpha):
+            last_bad = n
+        elif n - last_bad > 200:
+            break
+    return last_bad + 1
 
 
 # ---- the declared noise of a unit (item 5) ----------------------------------------------------------------------
@@ -1484,7 +1511,8 @@ def build_null_pool(truth: str, truths: Mapping[str, RivalDraws], design: Measur
     (also checked to lie outside the truths). Limitation: the draws are the caller's, so without ``retry_draws`` there
     is no re-estimation, and a replicate whose forced inputs were redrawn (``redraw_forced``) is not retried (its
     ensembles are the replicate's own). A replicate still unresolved stays ``resolved = False`` and the verdict bounds
-    it (``judge_pair``). ``extra`` records the counts."""
+    it (``judge_pair``). ``extra`` records the counts. Not enforced: ``retry_draws`` is checked against the truths but
+    not against the scoring draws, and "larger" is the caller's responsibility (its size is not checked)."""
     precision_ess = require_precision_ess(precision_ess)
     if truth not in ("a", "b"):
         raise MeasurementModelRefusal("truth must be 'a' or 'b'")
@@ -1700,8 +1728,10 @@ def judge_pair(observed: Mapping[str, FormObservation], null_a: Optional[NullDis
         raise MeasurementModelRefusal("incumbent must be 'a', 'b' or None")
     details["incumbent"] = incumbent
 
+    reestimation: List[str] = []          # filled once the nulls are read: every later verdict records it
+
     def verdict(outcome, credited=None, carried=(), reasons=()):
-        return RevisedVerdict(outcome, credited, tuple(carried), tuple(reasons), details)
+        return RevisedVerdict(outcome, credited, tuple(carried), tuple(reasons) + tuple(reestimation), details)
 
     # S3 falsification first (D1): a falsified rival is never returned as carried, whatever the units' roles
     if fals["a"] and fals["b"]:
@@ -1736,6 +1766,11 @@ def judge_pair(observed: Mapping[str, FormObservation], null_a: Optional[NullDis
                 problems.append(f"form {f!r}, rival {r}: no adequacy p for {miss}")
         dens_record[f] = {r: {k: ob.lppd[r][k].as_dict() for k in keys if k in ob.lppd.get(r, {})} for r in ("a", "b")}
     details["densities"] = dens_record
+    for f, ob in observed.items():                 # a non-finite T would cross both sides (no weight is >= NaN)
+        if not any("unresolved density" in pr or "no density" in pr for pr in problems if f"form {f!r}" in pr):
+            bad = sorted(k for k, v in ob.T().items() if k in keys and not math.isfinite(v))
+            if bad:
+                problems.append(f"form {f!r}: non-finite observed T for {bad} (never read as a crossing)")
     problems += _null_problems(null_a, "a", cls["scored_forms"], keys, case_inputs, min_replicates)
     problems += _null_problems(null_b, "b", cls["scored_forms"], keys, case_inputs, min_replicates)
     for nm_, nl in (("a", null_a), ("b", null_b)):
@@ -1748,6 +1783,12 @@ def judge_pair(observed: Mapping[str, FormObservation], null_a: Optional[NullDis
                 details[f"null_{nm_}"].update({
                     "unresolved_fraction": nl.unresolved_fraction,
                     "unresolved_count": int(np.sum(~nl.resolved_mask()))})
+            ex = nl.extra
+            if str(ex.get("reestimation", "none")).startswith("retry_draws"):
+                reestimation.append(f"null under {nm_}: re-estimation: {int(ex.get('n_retried', 0))} retried "
+                                    f"({int(ex.get('n_rescued_by_retry', 0))} rescued)")
+            else:
+                reestimation.append(f"null under {nm_}: re-estimation: none")
     if problems:
         return verdict("not_computable", carried=("a", "b"),
                        reasons=["a verdict needs resolved densities and a complete null"] + problems)
@@ -1821,6 +1862,11 @@ def judge_pair(observed: Mapping[str, FormObservation], null_a: Optional[NullDis
                            reasons=[f"{side} qualifies but the case cannot credit: a credit requires the power check "
                                     "(false credit under the reproducibility generator, misspecified_false_credit) "
                                     "supplied and passing; it was not supplied"])
+        if not gate["n_adequate"]:
+            return verdict("undecided", carried=("a", "b"),
+                           reasons=[f"{side} qualifies but the case cannot credit: the power check's n = {gate['n']} "
+                                    f"could not fail the gate at a false-credit rate of 2 x {alpha} (needs n >= "
+                                    f"{gate['min_n']})"])
         if not gate["passes"]:
             return verdict("undecided", carried=("a", "b"),
                            reasons=[f"{side} qualifies but the case cannot credit: the power check's false credit "
