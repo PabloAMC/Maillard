@@ -34,3 +34,11 @@ are not printed.
 | HMF 12 280 ppb | 12.28 ppm | matches |
 
 The charge (27.75 mM fructose, 33.3 mM asparagine) is the bundle's own arithmetic and is unchanged.
+
+## 4. M0 data corrections, batch 1 (2026-11-06; CF-127)
+
+**The HMF row above does NOT match the figure.** The prose's "12.28 ppm (Figure 4A)" belongs to no bar: Fig. 4A's
+asparagine + fructose 30-min bar (water) reads ~5.0 ppm (first reader, 400 dpi, axis checked on the fructose-only bar
+at 91.6 vs the printed 91.56; second reader 2026-11-06, 400 dpi: 5.1 ppm, whisker ~6). The same sentence quotes Lin 2021
+as 5.13 ppm where Lin 2021 prints 7 ppm. The HMF cell is demoted (`scoring_refused`; 12280 kept as printed, 5000
+recorded as `figure_4a_readoff_ppb`). Acrylamide 1859 ppb holds and stays scored.

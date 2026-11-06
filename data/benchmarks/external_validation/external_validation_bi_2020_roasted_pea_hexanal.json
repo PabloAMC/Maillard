@@ -24,6 +24,16 @@
       "stirred": null,
       "provenance_class": "primary_source_pdf",
       "provenance_note": "Bi et al. 2020, JAFC 68:2718, read from data/articles/bi2020.pdf on 2026-09-04; this bundle's content_verification.quoted_conditions, verbatim: 'The roasted peas (500 g) were prepared using an Isotemp forced-air oven at 160 C for 30 min.' An open forced-air oven: oxygen is not limited by a headspace (open). Water source not applicable to dry roasting."
+    },
+    "carried_volatiles": {
+      "hexanal": 1260.0,
+      "nonanal": 69.8
+    },
+    "carried_volatiles_anchor": "Bi 2020 Table 4, 'concentration (ug kg-1)', raw column (the unroasted peas the roasted samples were made from; means of three measurements): hexanal 1260 +/- 114, nonanal 69.8 +/- 7.39. Roasted: hexanal 324 +/- 34.3, nonanal not reported ('_'). Text: 'A heat-induced decrease in the content of hexanal'. Added 2026-11-06 (CF-129). Furaneol, 2,5-dimethylpyrazine and furfural print '_' in the raw column: not reported raw, so no carried level is declared for them (conditions.carried_volatiles_not_reported_raw); a '_' is not a zero, and a declared 0.0 would claim 'not detected'.",
+    "carried_volatiles_not_reported_raw": {
+      "furaneol": "_ in Table 4's raw column: not reported raw. No carried level is declared; NOT a declared zero.",
+      "2,5-dimethylpyrazine": "_ in Table 4's raw column: not reported raw. No carried level is declared; NOT a declared zero.",
+      "furfural": "_ in Table 4's raw column: not reported raw. No carried level is declared; NOT a declared zero."
     }
   },
   "denaturation_state": 0.2,
@@ -64,7 +74,8 @@
         "the_number_does_not_move": "OLD 1260.0 ppb -> NEW 1260.0 ppb. FOLD CHANGE 1.000x. This is a PROVENANCE correction and an UNCERTAINTY addition, not a value correction, and it is reported that way rather than dressed up as a fix. What changes is what the number is entitled to be called: it was 'a consistency check against our own threshold'; it is now an external measurement with a stated replicate spread.",
         "verdict": "THE WAVE I RED-TEAM POSED A TWO-BRANCH QUESTION AND THE PAPER ANSWERS IT: the concentration is the MEASURED quantity and the OAV is the DERIVED one, not the other way round. Table 4's footnote h defines the OAV as the 'ratio of concentration to odor threshold', and the concentration column carries a standard deviation (1260 +/- 114) while the OAV column carries none. So the repository's arithmetic (OAV 280 x 4.5 ppb = 1260) was running the paper's own calculation BACKWARDS and landing on the right number by construction.",
         "wave": "Wave W"
-      }
+      },
+      "scoring_refused": "net loss of a carried level (CF-129): raw peas carry 1260 +/- 114 ug/kg hexanal and the roasted peas measure 324 +/- 34.3 (Bi 2020 Table 4), a 3.9x loss on roasting. The lipid lane adds a carried level and forms more; it has no loss term (volatilisation or consumption), so it cannot represent this row. Refused until it does."
     },
     "furaneol": {
       "conc_ppb": 2780.0,

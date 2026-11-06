@@ -102,7 +102,10 @@
       "molar_basis": "ppm of the reaction solution, read off an HMF calibration curve built over 0.48-750 ppm; 12.28 ppm = 12280 ppb.",
       "value_provenance": "TEXT-QUOTED, FIGURE-SOURCED. The number is printed in the Results prose with an explicit pointer to Figure 4A; the paper publishes no HMF table. It is the asparagine-fructose (Maillard) arm, contrasted in the same sentence against the fructose-only (caramelization) arm at 91.56 ppm. Weaker than a table row and labelled as such - but it is a printed number in the paper, not a reconstruction.",
       "unit_commensurable": true,
-      "smiles": "O=Cc1ccc(CO)o1"
+      "smiles": "O=Cc1ccc(CO)o1",
+      "scoring_refused": "within-source conflict (CF-127): the prose prints 12.28 ppm citing Fig. 4A, but Fig. 4A's asparagine + fructose 30-min bar (water) reads ~5.0 ppm (SD to ~6) on an axis checked against the printed 91.56 ppm fructose-only bar; no bar is near 12.28. Demoted, not scored, until an author reply or a second source settles it. Acrylamide (1859 ppb) holds and stays scored.",
+      "figure_4a_readoff_ppb": 5000.0,
+      "value_conflict": "2026-11-06 (M0 data corrections, batch 1). First reader: results/validation/m0_integrity_batch1_other_lanes.md (draft PR #84), MF-38 (Fig. 4 at 400 dpi: AF 30-min bar 5.0 ppm, fructose-only bar 91.6 against the printed 91.56; Fig. 4B AF ~4.9). Second reader: Fig. 4A re-rendered at 400 dpi, AF 30-min bar 5.1 ppm, whisker ~6. The same sentence quotes Lin 2021 as 5.13 ppm where Lin 2021 prints 7 ppm, so its prose numbers are unreliable. target_value keeps the printed 12280; the figure value is recorded beside it and is not scored either."
     }
   },
   "ordinal_claim": {

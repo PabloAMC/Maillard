@@ -253,6 +253,11 @@
           },
           "unit_commensurable": {
             "type": "boolean"
+          },
+          "scoring_refused": {
+            "type": "string",
+            "minLength": 20,
+            "description": "M0 data corrections, batch 1 (2026-11-06). The CURATED DATA withdraws this row from scoring and says why (a within-source conflict, a charge the paper does not print, a measured net loss of a carried level the lanes cannot represent); the datum stays. Every scorer refuses the row with this reason before reading a number (src/kinetic_core/panel.data_refusal). The reason names its conflicts-register entry."
           }
         },
         "additionalProperties": true
@@ -367,6 +372,11 @@
             "type": "string",
             "minLength": 20,
             "description": "Why no concentration is given (e.g. the source reports a ratio, scored in holdout_targets). Replaces conc_ppb; must explain itself."
+          },
+          "scoring_refused": {
+            "type": "string",
+            "minLength": 20,
+            "description": "M0 data corrections, batch 1 (2026-11-06). The CURATED DATA withdraws this row from scoring and says why (a within-source conflict, a charge the paper does not print, a measured net loss of a carried level the lanes cannot represent); the datum stays. Every scorer refuses the row with this reason before reading a number (src/kinetic_core/panel.data_refusal). The reason names its conflicts-register entry."
           }
         },
         "additionalProperties": true,
