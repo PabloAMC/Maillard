@@ -3784,7 +3784,8 @@ entries:
       Applied 2026-11-06 (branch m0-data-corrections-batch1): conditions.carried_volatiles {glyoxal 1000, methylglyoxal
       900, glucosone 100, 5-HMF 100} ppb anchored to Table 6; conditions.ph 4.36 -> 4.98 (initial, bench_cooled) with
       4.36 recorded as the measured end pH; the wrong "4.4 - 5.2" note corrected; vessel 200 mL in 225 mL PP bottle, air
-      by default; a note that 18 min is F0, not a hold. Still open (CK-03 step 2): the unprinted cycle profile needs a
+      by default; a note that 18 min is F0, not a hold; the buffer recorded as none added (sec. 4.2.1: glucose
+      monohydrate in double-distilled water, nothing else), not buffer_unknown. Still open (CK-03 step 2): the unprinted cycle profile needs a
       declared heating / cooling band and a forward run under THERMAL_HISTORY as_recorded.
     affects:
       - {file: data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json, symbol: carried_volatiles}
@@ -3858,13 +3859,14 @@ entries:
       - "The row tests a pot the paper does not describe; its weight in the B3 objective rests on an unsourced charge."
     tests: []
     status: open
-    remedy: "Decide whether B3 needs a refit without the row (an M0 item); the shipped acrylamide constants are unchanged until then."
+    remedy: "Decide whether B3 needs a refit without the row (an M0 item); the shipped acrylamide constants are unchanged until then. The bundle's other unprinted values were withdrawn too (2026-11-06): its 250 kJ/kg SME, and the intake record's 22.36 -> 62.62 ug/kg and 25 s (with its three wrong-venue citation aliases, now closed citations); the 112 ug/kg 'at 150 C' twin in safety_reference_payloads.json was deleted."
     affects:
       - {file: scripts/generators/generate_kinetic_core_b3_fit.py, symbol: spi_extrusion_130C_acrylamide_ppb}
       - {file: data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json, symbol: value_withdrawal}
 
   # M0 integrity batch 1, Strecker / sulfur half (results/validation/m0_integrity_batch1_strecker_sulfur.md, draft PR
   # #86, branch m0-integrity-batch1-ss), filed 2026-11-06 by the register writer of branch m0-data-corrections-batch1.
+  # Numbers re-read against the sources where the entry says so.
   # The record's proposed kinds `open_condition` and `engine_structure` are not in this register's vocabulary; they are
   # filed as condition_error and code_mismatch, the nearest kinds.
 
@@ -3900,21 +3902,22 @@ entries:
   - id: CF-133
     kind: code_mismatch
     scope: other_lane
-    sources: [martins2003]
+    sources: [schibilsky2019]
     quantity: "the pH dependence of HMF and DMHF in the Schibilsky 2019 glucose + L-alanine pots (0.25 M each, pH 5 / 8 unbuffered, 130 C, 2 h; bundles mp_holdout_glucose_alanine_130C_2h_pH50 / pH80_Schibilsky2019)"
     observation: >-
       The pots pass their pH to the engine, but L-alanine routes them to the acrylamide lane (engine._PRECURSOR_LANE,
       "Ala": ACRYLAMIDE), whose pH factor acts only on k_asn_glc / k_acr_dp (no flux without asparagine). The trunk's
-      declared pH law -- the Amadori-decay steps of Martins & van Boekel 2003 Part II (B12) and the B40 3-DG exit term --
-      is applied only in the trunk lane (engine.py: the declarations under `if lane == TRUNK` near l. 1568, and
+      declared pH law -- the B12 Amadori-decay pH term and the B40 3-DG exit term (trunk_conditions.py) -- is applied only in the trunk lane (engine.py: the declarations under `if lane == TRUNK` near l. 1568, and
       trunk_conditions.apply in the trunk branch of the per-segment integration near l. 2698); acrylamide.py says "No
       pH dependence". DMHF and HMF are therefore identical at pH 5 and 8: 21.84 / 55409 ug/L (re-run by the register
       writer 2026-11-06 on the shipped engine: DMHF 21.8406, HMF 55408.8 ug/L in both bundles). With glycine standing in
       (trunk lane; a stand-in, not a prediction) the two pH pots differ x3.18 in DMHF (1621 / 5158 ug/L) and x2.06 in
       HMF (20135 / 41390), against the measured x5.1 (1153 / 5894 ppb) and x1.76, and it makes 74x more DMHF than the
-      acrylamide lane (CK-06, m0_integrity_batch1_strecker_sulfur, MF-28). The Schibilsky thesis is not on disk (no dossier: the bundles
-      quote it second-hand), so this entry is sourced to the pH law the lane omits; the bundles' unit conversions
-      reproduce from their quotes.
+      acrylamide lane (CK-06, m0_integrity_batch1_strecker_sulfur, MF-28). The Schibilsky thesis is NOT on disk: its
+      dossier (schibilsky2019_extraction.md) is a stub that records only the bundles' keyed values and their
+      provenance, second-hand, with the source re-read pending; the bundles' unit conversions reproduce from their
+      quotes. [Corrected 2026-11-06 (coordinator review of PR #88): this entry first named martins2003 as its source,
+      which is a misattribution -- Martins 2003 is the source of the trunk's pH law, not of this misfit.]
     explanations:
       - "Lane routing: an amine other than asparagine sends the pot to a lane that carries none of the trunk's measured pH terms."
     tests: []

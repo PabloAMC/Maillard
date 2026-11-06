@@ -52,3 +52,5 @@ water. Sec. 4.2.2: "The total F0 value of a process ... takes into account the h
 so the 18 min is F0, not a hold. Applied to `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021`: start pH 4.98
 (bench_cooled; 4.36 kept as `ph_end_measured`), the four carried levels as `carried_volatiles`, the vessel, and an F0
 note. The cycle profile stays unprinted (CK-03 step 2).
+Buffer (coordinator review of PR #88): recorded as **none added** (sec. 4.2.1: glucose monohydrate in double-distilled
+water, nothing else), not `buffer_unknown`.

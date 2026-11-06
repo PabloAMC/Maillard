@@ -29,7 +29,12 @@
       "hexanal": 1260.0,
       "nonanal": 69.8
     },
-    "carried_volatiles_anchor": "Bi 2020 Table 4, 'concentration (ug kg-1)', raw column (the unroasted peas the roasted samples were made from; means of three measurements): hexanal 1260 +/- 114, nonanal 69.8 +/- 7.39. Roasted: hexanal 324 +/- 34.3, nonanal not reported ('_'). Text: 'A heat-induced decrease in the content of hexanal'. Added 2026-11-06 (CF-129). Furaneol, 2,5-dimethylpyrazine and furfural print '_' in the raw column and are not declared."
+    "carried_volatiles_anchor": "Bi 2020 Table 4, 'concentration (ug kg-1)', raw column (the unroasted peas the roasted samples were made from; means of three measurements): hexanal 1260 +/- 114, nonanal 69.8 +/- 7.39. Roasted: hexanal 324 +/- 34.3, nonanal not reported ('_'). Text: 'A heat-induced decrease in the content of hexanal'. Added 2026-11-06 (CF-129). Furaneol, 2,5-dimethylpyrazine and furfural print '_' in the raw column: not reported raw, so no carried level is declared for them (conditions.carried_volatiles_not_reported_raw); a '_' is not a zero, and a declared 0.0 would claim 'not detected'.",
+    "carried_volatiles_not_reported_raw": {
+      "furaneol": "_ in Table 4's raw column: not reported raw. No carried level is declared; NOT a declared zero.",
+      "2,5-dimethylpyrazine": "_ in Table 4's raw column: not reported raw. No carried level is declared; NOT a declared zero.",
+      "furfural": "_ in Table 4's raw column: not reported raw. No carried level is declared; NOT a declared zero."
+    }
   },
   "denaturation_state": 0.2,
   "evidence_class": "external_validation_only",

@@ -984,6 +984,9 @@ def current_record(key: str, record: Dict[str, Any]) -> Dict[str, Any]:
     if key in _B45_TAP_WATER:
         out["provenance_note"] = out["provenance_note"] + _B45_TAP_WATER_FLOOR
     if key == _M0_BATCH1_STEINHAGEN:
+        # coordinator review of PR #88: sec. 4.2.1 states no buffer was added (double-distilled water only)
+        out["species"] = "none"
+        out["provenance_class"] = "primary_source_pdf"
         out["initial_ph_scale"] = "bench_cooled"
         out["provenance_note"] = _M0_BATCH1_PREFIX + out["provenance_note"]
         out["ph_disagreement"] = _M0_BATCH1_DISAGREEMENT

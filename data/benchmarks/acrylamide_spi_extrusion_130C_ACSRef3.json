@@ -36,7 +36,6 @@
     "water_activity_note": "WITHDRAWN 2026-11-06 (was 0.35): Ma 2024 prints no water activity. Table 1 gives the 130 C product's water as 25.0 % and the feed was 30 % moisture (sec. 3.2); a_w 0.35 follows from neither (value_withdrawal).",
     "ph_note": "NOT IN THE SOURCE (2026-11-06): Ma 2024 prints no pH of the extrusion material (the only pH values in the paper are the amino-acid hydrolysate's 6-8 and an assay buffer's 7). The 6.0 is unsourced and is NOT withdrawn only because the benchmark schema requires a number here (a nullable pH is a schema change, a separate decision). No prediction reads it: the charge is withdrawn and the row is refused."
   },
-  "sme_kj_per_kg": 250.0,
   "moisture_regime": "lme",
   "metadata": {
     "tier": "PRIMARY",
@@ -91,16 +90,17 @@
       "precursors.Soy protein isolate.concentration_mM 50.0",
       "precursors.L-Asparagine.concentration_mM 42.0",
       "precursors.D-Glucose.concentration_mM 42.0",
-      "conditions.water_activity 0.35"
+      "conditions.water_activity 0.35",
+      "sme_kj_per_kg 250.0 (withdrawn 2026-11-06 on the coordinator's review of PR #88: Ma 2024 prints no specific mechanical energy -- no kJ/kg value anywhere in the text, tables or figures; secs. 2-3 discuss SME only qualitatively)"
     ],
     "not_withdrawn_schema": "conditions.ph 6.0 is not printed either; the schema requires a number, so it stays with conditions.ph_note saying so. Withdrawing it needs a nullable pH (schema decision).",
     "also_unprinted_not_acted_on": [
-      "sme_kj_per_kg 250.0: Ma 2024 prints no specific mechanical energy (no kJ/kg value anywhere); outside this ruling, reported to the coordinator",
       "conditions.time_min 0.4167 (25 s): no residence time is printed; already labelled an assumption with the Unlu & Faller 2002 bracket (vessel provenance_note)"
     ],
     "kept": "measured_volatiles.acrylamide 150 ug/kg (Fig. 2D, 130 C bar, letter a), re-read by the second reader 2026-11-06 from the rendered figure",
     "origin": "the pre-DOI 'ACSRef3' intake (benchmark_intake_registry acs_ref3_spi_acrylamide_fast_kinetics), whose sister value 62.62 ppb already matched nothing in the paper",
     "basis": "First reader: results/validation/m0_integrity_batch1_other_lanes.md (draft PR #84), MF-39. Second reader (2026-11-06): Ma 2024 secs. 3.1 (materials), 3.2 (extrusion), 3.3 and Table 1 re-read from the PDF; 'water activity' and any free-Asn or reducing-sugar content occur nowhere in the text. Dossier: ma2024_extraction.md.",
-    "consequence": "the row is REFUSED on the panel (scoring_refused). The frozen B3 fit report still records it in its objective at the withdrawn charge: CF-131 (open)."
+    "consequence": "the row is REFUSED on the panel (scoring_refused). The frozen B3 fit report still records it in its objective at the withdrawn charge: CF-131 (open).",
+    "consumers_of_the_withdrawn_sme": "none on the core: panel.core_spec does not read sme_kj_per_kg, and the row is refused. The legacy src/extrusion.py SME surface read it until the SMILES lane retired; model_change_note below is that lane's audit record and still quotes the 250 kJ/kg."
   }
 }

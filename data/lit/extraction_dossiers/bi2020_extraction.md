@@ -574,3 +574,5 @@ peas; roasted hexanal 324 +/- 34.3, nonanal "_". The text: "A heat-induced decre
 scored roasted hexanal is a net 3.9x LOSS of a carried level. Applied to `external_validation_bi_2020_roasted_pea_hexanal`:
 `carried_volatiles` {hexanal 1260, nonanal 69.8} and the hexanal row REFUSED (`scoring_refused`): the lipid lane has
 no loss term. Furaneol, 2,5-dimethylpyrazine and furfural print "_" in the raw column and are not declared.
+The three "_" raw cells (furaneol, 2,5-dimethylpyrazine, furfural) are recorded in the bundle as **not reported raw**
+(`carried_volatiles_not_reported_raw`), not as a declared zero.

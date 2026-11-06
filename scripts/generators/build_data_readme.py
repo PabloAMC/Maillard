@@ -63,7 +63,7 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/lit/lipid_oxidation_calibration.json": "Lipid-oxidation kinetics, branching ratios and per-matrix lipid profiles; `src/lipid_oxidation.py`.",
     "data/lit/computational_priors.json": "22 prior tables in one file (accessibility windows, class profiles, per-family priors, DFT-era kinetic priors); read by 10 modules. Split planned (Phase 4).",
     "data/lit/flavor_reference_payloads.json": "59 odour-threshold / concentration anchors for character-impact compounds, by chemistry section.",
-    "data/lit/safety_reference_payloads.json": "41 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`.",
+    "data/lit/safety_reference_payloads.json": "40 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`.",
     "data/lit/extrusion_damage_reference_payloads.json": "4 damage-marker reference ranges (furosine, CML, CEL, LAL); `src/extrusion.py`. Merge into safety payloads planned.",
     "data/lit/retention_reference_payloads.json": "Volatile retention/release records per protein, incl. withdrawn (`unsourced_withdrawn`) rows; `src/headspace.py`, `literature_runtime`.",
     "data/lit/process_state_calibrations.json": "18 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`.",

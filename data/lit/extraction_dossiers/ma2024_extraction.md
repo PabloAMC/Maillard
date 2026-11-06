@@ -74,3 +74,10 @@ Applied: the charge and a_w withdrawn (nulls with notes, `value_withdrawal`), th
 (`scoring_refused`: "precursor charge not printed"). The pH stays as a number only because the schema requires one
 (`ph_note`). Fig. 2D re-read: 130 C bar ~150 ug/kg, kept as the datum. The frozen B3 report still carries the row
 (CF-131, open).
+
+**Added the same day (coordinator review of PR #88).** Also withdrawn as not in the paper: the bundle's
+`sme_kj_per_kg` 250 (no kJ/kg value is printed; SME is discussed only qualitatively); the intake record
+`acs_ref3_spi_acrylamide_fast_kinetics`'s 22.36 -> 62.62 ug/kg and 25 s (no such numbers; acrylamide appears only in
+Fig. 2), with its three citation aliases ("ACS Food Sci. Tech. 2022 (Ref. 3)", "ACS ResearchGate ...") closed; and its
+twin in `safety_reference_payloads.json` (112 ug/kg "in heated SPI at 150 C"; the 150 C bar reads ~120 and no number is
+printed), deleted. None of them was read by a scored row.
