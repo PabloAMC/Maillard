@@ -516,3 +516,9 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** before citing a record that is not on main, check which gates read that kind of citation (dossier paths:
   `dossier_coverage_gate`; register ids: the register gates). Either merge the PR that adds the record first, or keep
   the citation out of gated files until it lands.
+## 2026-11-05 — Never stop your own job with `pkill -f "<pattern>"` while other agents run
+- **What happened:** I stopped my gate run with `pkill -f "docker_maillard.sh gates"`. Five agents shared the machine
+  and several run the same command, so the pattern could kill theirs too; I had to warn each one to rerun.
+- **Rule:** stop a job by its own handle: its PID (`$!` at launch, or the PID the harness reports), or the harness's
+  stop tool for a background task. Never by a command pattern that other agents' jobs can share. A killed run
+  (exit 143 / 144) is neither a pass nor a failure: rerun it.
