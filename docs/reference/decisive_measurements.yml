@@ -603,7 +603,9 @@ entries:
           H0's prereg triggers H0' on the first batch that keys >= 2 NEW laboratories with ABS-class rows; the plan's
           W1.2 row, the engine's refusal text and the wishlist's section 6 say 'a second independent laboratory'. The
           pre-registered condition is the prereg's; read literally, the one-laboratory wording would trigger H0' a
-          laboratory early.
+          laboratory early. Aligned 2026-11-06 (register pass): the plan's W1.2 row, the engine's refusal text and
+          short reason, the model card and the wishlist's section 6 now say "at least two new laboratories", the
+          prereg's condition.
 
   - id: methylglyoxal_self_loss
     plan_step: "M4 (R3's MGO loss band); trunk k_mgo_mel"
@@ -666,6 +668,7 @@ entries:
           CF-122's decider (written before Kanzler 2021 was read) asks for three temperatures but no second laboratory;
           the M4 sweep sought one (Pfeifer 2013, which proved the same lineage), and Kanzler 2021 shows a 0.5 dex
           within-laboratory spread in the MGO-alone k2. PR #76 notes that CF-122 will be updated after PR #75 merges.
+          Resolved 2026-11-06 (register pass): CF-122's decider now reads "... pH held, in a second laboratory".
 
   - id: pyrazine_ring_aminoketone
     plan_step: M6

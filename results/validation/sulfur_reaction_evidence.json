@@ -4,9 +4,9 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
-      "short": "56861a85",
-      "branch": "m0-data-corrections-batch1",
+      "commit": "06830fd78b48e16bd49dfec4a69c1e75028ddb36",
+      "short": "06830fd7",
+      "branch": "register-pass-2026-11-06",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "b77f94272b0582b076024fd90f12db59738652b9b5c32910bfc2d705c680cdaf"
+        "sha256": "5c2c3c8b9c7dc8a772cce134952fb29a0a7fa7c59e25f47e234aa528ed9ad6c0"
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "c73bba8a2e7662626832421c40a58c70d5436658ed953a7ab0ac762a8cee3060"
+        "sha256": "c47a21dc25ae5d4018c29c97e2331f2b375d2499a200773d2eeef9662ee15f05"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
