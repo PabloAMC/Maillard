@@ -1,8 +1,9 @@
 # Case M0a: the trunk's pH law in every lane (CF-133)
 
-**Status: DRAFT, not frozen.** Items 1 - 5 of [STATUS_AND_PLAN sec. 7](../../guides/STATUS_AND_PLAN.md), written
-2026-11-06 before any result of the change exists. Items 6 - 9 are appended later and never edited into this part.
-Items 1 - 5 freeze only after the sweep's candidates (sec. 2.9) are read or excluded.
+**Status: PARKED (coordinator, 2026-11-06); draft, not frozen, never to be frozen as written.** The claim folds into
+M4 part A and the one JAX network (sec. 7). Items 1 - 5 of [STATUS_AND_PLAN sec. 7](../../guides/STATUS_AND_PLAN.md)
+were written 2026-11-06 before any result of the change existed; they stay as the record. **On disk this case is
+development-grade**: its two within-study series (Yu 2017, Cha 2019) are seen (sec. 2.8).
 
 *Prompted by M0 integrity batch 1, check CK-06 (misfit MF-28; record
 `results/validation/m0_integrity_batch1_strecker_sulfur.md`, draft PR #86, branch `m0-integrity-batch1-ss`) and its
@@ -103,8 +104,8 @@ None on disk at more than one pH for a non-glycine hexose pot.
 
 | source | pot (lane) | pH | factor -> result, as printed | status |
 |---|---|---|---|---|
-| **Yu 2017 Table 2** (10.1002/jsfa.8158) | Glc + Lys, Gly, Pro, Arg 40 + 40 mM, 0.2 M citrate-phosphate (held), 120 C, 0.5 h. **Lys: acrylamide lane; Gly, Pro: trunk lane; Arg: unmapped (refused)** | 5 / 6 / 7 / 7.4 / 8 | MGO rises with pH in every arm: 0.50 - 0.76 dec / pH (5 -> 7), 0.18 - 0.36 (7 -> 8); Lys / Gly 7.4 / 3.7 / 2.2 / 2.3 / 2.1 | **unseen by any engine run**; no split, no fit row; decisive (sec. 4) |
-| Cha 2019 Table 1 (10.1038/s41598-019-41824-8) | Glc + Lys 0.1 M, unbuffered, set pH only, 100 - 160 C, ~2 h (acrylamide lane) | 3 / 5 / 7 / 9 | MGO at 160 C 8.6 / 49 / 80 / 705 uM; U-shaped at 140 C; many cells below the lowest calibrator | measurement ledger entry (`trunk.yml`, `cha2019_table1_glc_lys_t_ph_grid`, not simulated); decisive, secondary |
+| **Yu 2017 Table 2** (10.1002/jsfa.8158) | Glc + Lys, Gly, Pro, Arg 40 + 40 mM, 0.2 M citrate-phosphate (held), 120 C, 0.5 h. **Lys: acrylamide lane; Gly, Pro: trunk lane; Arg: unmapped (refused)** | 5 / 6 / 7 / 7.4 / 8 | MGO rises with pH in every arm: 0.50 - 0.76 dec / pH (5 -> 7), 0.18 - 0.36 (7 -> 8); Lys / Gly 7.4 / 3.7 / 2.2 / 2.3 / 2.1 | no engine run, split or fit row, but **SEEN**: the M4 case read it to set R3's fragment pH band and part A's within-class spread. Development (sec. 2.8) |
+| Cha 2019 Table 1 (10.1038/s41598-019-41824-8) | Glc + Lys 0.1 M, unbuffered, set pH only, 100 - 160 C, ~2 h (acrylamide lane) | 3 / 5 / 7 / 9 | MGO at 160 C 8.6 / 49 / 80 / 705 uM; U-shaped at 140 C; many cells below the lowest calibrator | measurement ledger entry (`trunk.yml`, `cha2019_table1_glc_lys_t_ph_grid`, not simulated); secondary; development |
 | Schibilsky 2019 (bundles; thesis not on disk) | Glc + Ala 0.25 M, unbuffered, 130 C, 2 h (acrylamide lane) | 5 / 8 | DMHF x5.1, HMF x1.76, furfural x1.47, acetol x32, diacetyl x2.8 from pH 5 to 8 | **SPENT** (CK-06) |
 | De Vleeschouwer 2006 (`devleeschouwer2006_extraction.md`) | Asn + Glc 0.1 M, 0.05 M phosphate / citrate, 120 - 200 C (acrylamide lane) | 4 / 6 / 8 | acrylamide formation 0.235, elimination 0.149 dec / pH; **no HMF** | calibration input of the lane's own pH factor |
 | Martins 2005b (F06#13) | Glc + **Gly**, initial pH 4.8 -> 7.5 | ladder | k4 +0.35, k7 +0.60 dec / pH | DEV; EX-001 / 002 hold-out |
@@ -135,6 +136,9 @@ None on disk at more than one pH for a non-glycine hexose pot.
 - De Vleeschouwer 2006: the acrylamide lane's own pH factor (B15).
 - The Hofmann 1998 sulfur rows, Leitzen 2021 (B40's rejection), Meynier 1995 (W1.1 scored), sub-model 1's frozen hold-out
   (EX-003), Davidek acids (EX-013 fit rows): seen under the engine.
+- **Yu 2017** (coordinator ruling, 2026-11-06): seen. The M4 case agent read it to set R3's fragment pH band and part
+  A's within-class spread, so it cannot be blind-decisive here. Development.
+- **Cha 2019**: secondary (unbuffered, set-pH only, cells below the calibrator). Development.
 
 ### 2.9 The citation sweep (sec. 7 item 2), 2026-11-06
 
@@ -198,8 +202,10 @@ can combine.
 
 ## 4. The decisive data
 
-Two unseen, within-study pH series in pots that route outside the trunk exist on disk. **Neither measures HMF or DMHF:
-both are MGO.** For HMF / DMHF the only on-disk pair in such a pot is Schibilsky's, which is spent.
+Two within-study pH series in pots that route outside the trunk exist on disk. **Neither measures HMF or DMHF:
+both are MGO. Both are development (sec. 2.8), so no blind decisive data exist on disk; the table below records what
+each would separate, as development evidence.** For HMF / DMHF the only on-disk pair in such a pot is Schibilsky's,
+which is spent.
 
 | # | measurement | R0 | R1 | R2 / R2b | R3 | R5 | separates |
 |---|---|---|---|---|---|---|---|
@@ -221,10 +227,9 @@ not in the file): one laboratory, glucose 0.25 M + L-alanine 0.25 M, the same wi
 after heating), 130 C, 2 h, sealed with stated fill; HMF, DMHF, MGO, 3-DG / 1-DG (OPD), acrylamide (Asn arm), glucose;
 n = 3 independent heatings per cell (27 pots). A glucose-alone arm at the same three pH (9 pots) separates R3.
 
-**Reservation.** The M4 case (branch `m4-case-refresh`, sec. 2.9) lists Yu 2017 as part A evidence and as a band source
-"by amendment" for MGO supply vs pH. Data used as a band source in one change cannot also decide another. This case
-asks for D1 / D2 to be reserved as decisive here (they are the only unseen within-study contrast in an acrylamide-lane
-amine); the coordinator decides before either case freezes.
+**Yu 2017 and M4 (ruled 2026-11-06).** This case asked for D1 / D2 to be reserved here. The coordinator ruled Yu 2017
+seen (M4 used it for R3's fragment pH band and part A's within-class spread), so D1 - D3 are development evidence and
+the decider is the designed measurement above.
 
 ## 5. Tolerances from the data
 
@@ -251,17 +256,37 @@ non-trunk rows, `k_tdg_fa` live in every hexose row.
 The coordinator's note on CF-133 stands: shipped acrylamide-lane HMF / DMHF move, so the owner decides before any
 engine change.
 
-## Open questions for the build
+## 7. Disposition: parked, folded into M4 part A and the one network (coordinator, 2026-11-06)
 
-1. **Part A alone is nearly inert.** As written it reaches acrylamide-lane pots only through `k_tdg_fa`, and the
-   structure says that moves HMF / MGO opposite in sign to R2, R3 and R5 (sec. 4, D1). If the build ships the law, it
-   must say whether R2 (the competitor amine's Amadori chain) is part of the change; R1 alone cannot answer CF-133.
+**Why parked.** P1b (sec. 1.1, 1.3) makes CF-133 a structural gap, not a pH-law gap. The acrylamide lane's competitor
+amines have no Amadori chain, so the trunk's law has nothing to act on in their pots. Option (a) as written (R1) reaches
+those pots only through `k_tdg_fa`, and by structure it moves HMF and MGO opposite in sign to every rival that gives the
+amine a pH response. The fix is the amine's own chemistry:
+- **M4 part A:** amine classes as species, each with its Amadori chain and declared competition for the sugar.
+- **The one JAX network (W3):** one pH module and no lane routing, so no step can sit outside the pH law by the accident
+  of which lane a precursor selects.
+
+**Requirements this case hands to that work.** The bypass inventory P1 - P7 (sec. 1.1) is the checklist. When it is
+done, no path in it bypasses the pH terms, or each remaining one is declared:
+- P1 / P1b: the acrylamide lane's trunk steps without the law; Gln, Lys, Ala without an Amadori chain.
+- P2: the sulfur lane's hexose steps behind `ph.trunk_terms` (sub-model 1, EX-001 - EX-003).
+- P3: pentose + Asn / Gln / Lys / Ala refused as a lane conflict.
+- P4: lipid + acrylamide or sulfur inheriting P1 / P2.
+- P5: the envelope's trunk-only exponent band.
+- P6: the JAX trunk module's acrylamide context ("none").
+- P7: the final pH ignored outside the sulfur lane.
+
+**Open questions that go with it:**
+1. **R1 alone is nearly inert.** The law reaches acrylamide-lane pots only through `k_tdg_fa`. The amine's Amadori
+   chain (R2 / R2b) or a sugar-side law (R3) must be part of the change, or CF-133 is not answered.
 2. **Does asparagine get the trunk chain?** Asn has its own Schiff base / INT1 route (De Vleeschouwer). Giving it the
    trunk's Amadori decay as well would count the condensation twice.
-3. **Initial or in-situ pH.** The trunk lane reads the declared initial pH; the sulfur lane (part S) the in-situ pH.
-   One pH module (W3) needs one choice; Yu 2017 is held (no matter), Cha 2019 and Schibilsky drift.
-4. **Part S overlaps sub-model 1** (EX-001 - EX-003: acetic transfers, formic does not; the condensation slope rejected).
-   A case for part S needs its own unseen decisive data; none is on disk.
-5. **R5's per-amine slope** has no independent hexose source: if it is fitted on Yu 2017, Yu cannot decide it (a
-   leave-one-arm-out score at most).
-6. **The Yu 2017 reservation** against M4 (sec. 4).
+3. **Initial or in-situ pH.** The trunk lane reads the declared initial pH, the sulfur lane the in-situ pH. One pH
+   module needs one choice. Yu 2017 is held, so the choice does not matter there; Cha 2019 and Schibilsky drift.
+
+**Remaining notes:**
+- Part S overlaps sub-model 1 and has no unseen decisive data.
+- R5's per-amine slope has no independent hexose source.
+- The decider for HMF / DMHF outside glycine is the 36-pot designed measurement (sec. 4), proposed as a
+  `decisive_measurements.yml` entry in PR #91's body.
+- CF-133 stays open until M4 part A or the network answers it.
