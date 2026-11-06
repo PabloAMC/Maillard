@@ -312,57 +312,74 @@ Then:
 Items 1 - 9 make a change beat the current model, but the current model never had to pass the same test, so when the
 data could not decide, its errors persisted by default. Rules S1 - S4 close that gap. Order: S1's record must exist
 before S2 or S4 is applied to any constant. Every S-rule change is a case with its own adversarial review and
-confirmation (item 8), respects existing owner-first clauses, and never upgrades a prior without an artifact in
-`results/validation/` (AGENTS.md).
+confirmation (item 8), and never upgrades a prior without an artifact in `results/validation/` (AGENTS.md). The
+owner-first clauses that still apply are: amendments to H0's tau, E4 (the pyrazine pH band), W6 (outreach), numbers
+already sent outside, and deleting scripts; otherwise S-applications ship under item 9's authority ("the working session
+applies this rule and ships"). The lane's within-lab / between-lab terms below are, for the thiol lane, H0's omega
+(0.419 dex) / tau_ABS (0.964 dex); a lane without H0 uses the pooled between-laboratory spread of the reaction class in
+the S1 record, and its absolute outputs are refused as in the thiol lane until that lane has its own H0.
 
 - **S1. Evidence tiers, per coordinate** (log k_ref and Ea separately), in one hand-kept record with a citation per
   row (paper key, ledger row or fit report): measured (a direct measurement of the step: every channel the engine's
   constant lumps present in the measured system, at the engine's rate law and concentration regime, under comparable
   conditions); analogue (a same-class measurement transferred through a measured law, with its band); bounded
   (one- or two-sided, stated; a measurement of a SUBSET of a lumped step's channels is a one-sided bound, not a
-  value); fitted-identified (a converged fit whose marginal profile is pinned with every other unidentified coordinate
+  value: a lower bound on the lumped constant when the channels add); fitted-identified (a converged fit whose marginal profile is pinned with every other unidentified coordinate
   profiled over its band; any band-edge, flat-profile or band-spanning-CI criterion overrides a reported stderr;
-  re-derived after any structural change); fitted-unidentified; structural (a declared structural assumption);
+  re-derived for the coordinates whose rows a structural change moves); fitted-unidentified; structural (a declared structural assumption);
   physical constant; conflicting measurements; withdrawn. The record also lists the incumbent's structural choices
   that never had a case. The existing vocabularies (`provenance_tier`, the sulfur evidence `grade`) are mapped onto it
-  or retired. Upgrades need an artifact and a second reader; downgrades are free. A CI gate fails on a shipped
-  coordinate without a tier.
-- **S2. A direct measurement replaces a contradicted fitted constant, under strict conditions.** It applies only when
+  or retired. Upgrades need an artifact and a second reader; downgrades need a citation, and a downgrade that moves a
+  shipped output ships as an S4 change, review included. A CI gate fails on a shipped coordinate without a tier; the
+  record is complete (the gate green) before any S2 / S4 application, and the record file and the gate are named in the
+  PR that creates them. Each never-cased structural choice the record lists either gets a case scheduled in sec. 6 or a
+  named rival carried under S3.
+- **S2. A direct measurement replaces a contradicted fitted-identified constant, under strict conditions** (a
+  fitted-unidentified coordinate has no point to contradict: it is carried under S4). It applies only when
   (a) the measurement is "of the step" in S1's sense (all lumped channels; the engine's rate-law order and
   concentration range at the outputs it serves; otherwise the measurement defines a rival structure, items 1 - 9, or a
-  band, S4); (b) the contradiction exceeds a comparison band SET BY RULE, not declared: the largest of the reported
-  noise, the within-lab between-paper spread where one exists, and a between-lab term (the measured spread of that step
-  or its reaction class where >= 2 laboratories measured it, else a single-lab term with its source); a transfer
+  band, S4 — a rival when it implies a different rate law or species, a band when it only constrains the value);
+  (b) the 95 % interval of (measurement minus fitted value) excludes zero, with the reported noise, the within-lab
+  between-paper spread, the between-lab term and the fitted coordinate's own profile interval combined in quadrature;
+  the between-lab term is the measured spread of that step or its reaction class where >= 2 laboratories measured it,
+  else the lane's between-lab term (above); no other source; a transfer
   across T, pH, buffer, O2, concentration or matrix adds a term only through a measured law; if a condition the step
   depends on is unstated, the band is undefined and the measurement enters under S4, not S2; (c) the case lists EVERY
   measurement of the step, agreeing ones included, pooled with the between-lab term; one laboratory's contradiction
-  among agreeing laboratories does not trigger S2; contradictions found in one audit pass are judged together (Holm,
-  as in M1.1) and the number expected by chance is reported; (d) the measurement was read from the source by two
+  among agreeing laboratories does not trigger S2; an audit pass covers every coordinate tiered fitted-* in the S1
+  record for the lane, each contradiction's z is converted to a two-sided p, all are judged together (Holm, as in M1.1)
+  with the number expected by chance reported, and no coordinate enters S2 outside a full-lane pass; (d) the measurement was read from the source by two
   readers, passes OpenAlex `verify`, and is neither a quote of a quote nor an inferred bound (patents count as bounds
   only). S2 is an explicit exception to item 2's spent-data rule (a direct measurement of the parameter was not tuned
-  to it). Side effects: (e) the named compensating error is a specific step, and a forward run shows that moving it
+  to it). Side effects: (e) if any held-out row is lost beyond the lane's within-lab term, the named compensating error is a
+  specific step, and a forward run shows that moving it
   within its own tier band restores the lost rows' sign and rough size; if no such step exists, S2 waits; (f) rows
-  lost beyond omega that are decisive-type data (within-study ratios, shapes, label shares, multi-laboratory) DO
+  lost beyond the lane's within-lab term that are decisive-type data (within-study ratios, shapes, label shares, multi-laboratory) DO
   arbitrate and block; (g) every constant co-fitted with the replaced one drops to fitted-unidentified until
-  re-derived; (h) replacements in one lane ship in one batch case with one before / after. Conflicting measurements
-  of one step (e.g. Kanzler 2021 vs 2026) are carried as a band spanning both, with a CF entry.
+  re-derived; (h) replacements in one lane ship in one batch case with one before / after. If S2 waits under (e) or is
+  blocked under (f), the coordinate's tier becomes "conflicting", a CF entry is opened, and it is carried under S4 as
+  a band spanning the fitted value and the measurement's interval: it never ships at the fitted point alone.
+  Measurements of one step are "conflicting" when they disagree beyond (b)'s band among themselves (e.g. Kanzler 2021
+  vs 2026), else they are pooled under (c); a conflict band spans the measurements' own intervals, with a CF entry.
 - **S3. Undecided rivals are carried, not resolved by default.** A rival is carried if it was named in a case before
-  results and has a mechanism with at least one evidence kind from item 2's list; it is falsified when its converged
-  best fit is inadequate (posterior-predictive p < 0.05, M1.1) on any data, spent included. The envelope is the union
-  of the carried rivals' own envelopes, unweighted ("never credit"). Tolerance: omega for within-laboratory relative
-  outputs, tau for absolute ones. Rivals that disagree in sign make the lever's direction refused; rivals that agree
+  results and has a mechanism with at least one evidence kind from item 2's list above "fitted time courses", or uses
+  only measured / analogue-tier constants; it is falsified when its converged best fit is inadequate
+  (posterior-predictive p < 0.05 after Holm across the datasets tested, M1.1) on any data, spent included. The envelope is the union
+  of the carried rivals' own envelopes, unweighted ("never credit"). Tolerance: the lane's within-laboratory term for
+  relative outputs, its between-laboratory term for absolute ones. Rivals that disagree in sign make the lever's direction refused; rivals that agree
   in sign show its size with the spread. If the incumbent itself is falsified with no rival credited (e.g. C2 + C3
-  recombination as the hexose MFT route, M4), the outputs that depend on it are refused, never shown at the
-  incumbent's point. The reviewer (item 8) checks both missing and padded rivals. Carried rivals must be runnable for
+  recombination as the hexose MFT route, M4), the outputs that depend on it (those whose sensitivity to the
+  falsified structure's switch exceeds the lane's within-lab term) are refused, never shown at the incumbent's point. The reviewer (item 8) checks both missing and padded rivals. Carried rivals must be runnable for
   prediction: until W3 runs them in JAX, they run in the NumPy engine behind their switches, and the cost is stated.
 - **S4. Unidentified coordinates are bands, and fits may move them only on decisive-type evidence.** A band comes from
   measured bounds, a same-class analogue, or the reaction-class distribution of measured constants (as B55's
   `ea_class_prior`); a search bound is never a band; with no class, the output is refused rather than computed over an
   invented band. Bands are sampled jointly within the region the decisive-type data allow (common random numbers
   across the arms of a contrast); held-out coverage is reported before and after (over-coverage flags an inflated
-  band). A fit (the joint refit, M2, H4) may move a fitted-unidentified coordinate only if every other error its rows
-  also move is a free coordinate in the same fit (CF-107's logic) and the coordinate's prior-to-posterior contraction
-  survives profiling those coordinates and comes from decisive-type rows (item 4); every fit reports per-coordinate
+  band; an over-coverage flag sends the band back to its source for review). A fit (the joint refit, M2, H4) may move a fitted-unidentified coordinate only if every coordinate whose sensitivity
+  on those rows is not negligible next to the lane's within-lab term is free in the same fit (CF-107's logic), and
+  its contraction counts only if the profile interval from a refit on the decisive-type rows alone (item 4) lies
+  inside the band; M2 v2's held furfural barriers are checked against this before M2 freezes; every fit reports per-coordinate
   contraction, and a coordinate contracted only by level rows stays a band.
 
 For S3 / S4 changes, items 6 and 9 are replaced by: band sources verified; before / after listed; held-out coverage
