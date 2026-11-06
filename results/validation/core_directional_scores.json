@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-11-03",
+    "generated_on": "2026-11-06",
     "git": {
-      "commit": "54befe0ad7b4ddc37da3cabccacaa041aad0f755",
-      "short": "54befe0a",
-      "branch": "acrylamide-envelope-2026-11-03",
+      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
+      "short": "56861a85",
+      "branch": "m0-data-corrections-batch1",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/directional.py",
@@ -86,8 +86,8 @@
   },
   "summary": {
     "headline": [
-      20,
-      33
+      19,
+      32
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -125,12 +125,12 @@
           "rate": null
         },
         "moisture_aw": {
-          "agree": 1,
-          "evaluable": 1,
-          "not_evaluable": 3,
+          "agree": 0,
+          "evaluable": 0,
+          "not_evaluable": 4,
           "misses": [],
           "mechanism_absent": 0,
-          "rate": 1.0
+          "rate": null
         },
         "ph": {
           "agree": 5,
@@ -215,9 +215,9 @@
         }
       },
       "total": {
-        "agree": 20,
-        "evaluable": 33,
-        "not_evaluable": 42,
+        "agree": 19,
+        "evaluable": 32,
+        "not_evaluable": 43,
         "misses": [
           "SUG-03",
           "TEMP-01",
@@ -234,12 +234,12 @@
           "MOD08-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6060606060606061
+        "rate": 0.59375
       },
       "ph_aw": {
-        "agree": 6,
-        "evaluable": 11,
-        "not_evaluable": 8,
+        "agree": 5,
+        "evaluable": 10,
+        "not_evaluable": 9,
         "misses": [
           "PH-07",
           "HOX-03",
@@ -248,7 +248,7 @@
           "MOD08-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5454545454545454
+        "rate": 0.5
       },
       "excluding_ph_aw": {
         "agree": 14,
@@ -310,12 +310,12 @@
           "rate": 0.0
         },
         "moisture_aw": {
-          "agree": 1,
-          "evaluable": 1,
-          "not_evaluable": 6,
+          "agree": 0,
+          "evaluable": 0,
+          "not_evaluable": 7,
           "misses": [],
           "mechanism_absent": 0,
-          "rate": 1.0
+          "rate": null
         },
         "ph": {
           "agree": 10,
@@ -411,9 +411,9 @@
         }
       },
       "total": {
-        "agree": 30,
-        "evaluable": 56,
-        "not_evaluable": 63,
+        "agree": 29,
+        "evaluable": 55,
+        "not_evaluable": 64,
         "misses": [
           "SUG-02",
           "SUG-03",
@@ -443,12 +443,12 @@
           "MOD08-PH-01"
         ],
         "mechanism_absent": 3,
-        "rate": 0.5357142857142857
+        "rate": 0.5272727272727272
       },
       "ph_aw": {
-        "agree": 11,
-        "evaluable": 18,
-        "not_evaluable": 14,
+        "agree": 10,
+        "evaluable": 17,
+        "not_evaluable": 15,
         "misses": [
           "PH-03",
           "PH-07",
@@ -459,7 +459,7 @@
           "MOD08-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6111111111111112
+        "rate": 0.5882352941176471
       },
       "excluding_ph_aw": {
         "agree": 19,
@@ -493,7 +493,7 @@
     "not_evaluable_reasons": {
       "the claim carries no runnable conditions (prose-only)": 39,
       "a predicted concentration is zero; no direction is defined": 6,
-      "refused by the engine": 3,
+      "refused by the engine": 4,
       "the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos": 1,
       "arm 'hydrolysate + xylose (no cysteine), 120 C' refused": 1,
       "the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine ": 1,
@@ -510,7 +510,7 @@
       "arm 'egg PC alone' refused": 1,
       "arm 'methionine alone' refused": 1
     },
-    "wall_seconds": 338.9
+    "wall_seconds": 801.4
   },
   "claims": [
     {
@@ -2892,20 +2892,8 @@
       "fit_status": "independent",
       "statement": "Maillard rate is NON-MONOTONIC in water activity: it peaks around aw 0.6-0.7 and falls at both aw < 0.4 and aw > 0.9.",
       "source": "elhosry2025",
-      "status": "agree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "trunk",
-      "values_ug_per_l": [
-        1303.2487283819517,
-        1474.8571341012478,
-        760.0549178905505
-      ],
-      "log10_steps": [
-        0.053722643433879454,
-        -0.28790497984697316
-      ],
+      "status": "not_evaluable",
+      "reason": "refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.25 vs 0.65) and the trunk lane's a_w term is measured only inside 0.33-1.00 (lower edge: Pereyra Gonzales 2010 Table 1, row a_w 0.33 at 50 / 60 C (nominal salt a_w; the paper labels its samples up to 0.05 differently); upper edge: the base constants' own solution state, Martins 2005, a_w ~0.98-1.0 (B12)): below it the multiplier is held at the lowest measured point and the glass collapse is not sized, so the arms' difference would be an extrapolation (a single recipe there is still answered, with the held multiplier and a glass warning). Keep both arms inside the window, or bring a measurement.",
       "arms": [
         {
           "label": "aw 0.25",

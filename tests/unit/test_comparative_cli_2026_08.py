@@ -100,9 +100,11 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     assert dr.MIN_EVALUABLE_FOR_TRUST == 3
     # RE-PINNED 2026-10-27 (claim audit): AW-01 retired as a source mismatch, so the a_w axis is 1/1, not 1/2.
     # One agreeing claim is below MIN_EVALUABLE_FOR_TRUST: 'caution' under the standing rule, never 'trust'.
+    # RE-PINNED 2026-11-05 (the trunk's a_w window, 0.33-1.00; its lower edge from Pereyra Gonzales 2010 Table 1): AW-03's 0.25 arm is
+    # below it, so the engine refuses that comparison: 1/1 -> 0/0, and an axis with no evaluable claim is 'do-not-use'.
     aw = dr.reliability_for_axis("moisture_aw", counts)
-    assert (aw.agree, aw.evaluable) == (1, 1)
-    assert aw.verdict == dr.VERDICT_CAUTION != dr.VERDICT_TRUST
+    assert (aw.agree, aw.evaluable) == (0, 0)
+    assert aw.verdict == dr.VERDICT_DO_NOT_USE != dr.VERDICT_TRUST
     ph = dr.reliability_for_axis("ph", counts)
     # RE-PINNED 2026-09-07 (thiol pH reads: Cerny 2007, Mottram 2002 claims): 4/5 -> 7/9, still below 0.80: 'caution'.
     # RE-PINNED 2026-09-08 (B18: PH-06, 2,5-dimethylpyrazine rising with pH, now evaluable and agrees): 7/9 -> 8/10;

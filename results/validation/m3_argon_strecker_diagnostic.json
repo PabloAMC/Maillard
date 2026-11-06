@@ -1,0 +1,2599 @@
+{
+ "title": "M3 diagnostic: why every rival over-predicts the argon Strecker aldehyde (seen data only)",
+ "generated_by": "scripts/diagnostics/m3_argon_strecker_diagnostic.py",
+ "status": "DIAGNOSTIC: no fit, no band, prereg or shipped output changed",
+ "layer": {
+  "path_basename": "m3_strecker_layer.py",
+  "sha256": "9eb60ad5ad7dca59f637c65a20783a5dbfb8b675eb912010e306a532dec9b931",
+  "branch": "m3-phase1-build (unmerged; loaded by path)"
+ },
+ "draws_per_rival": 1024,
+ "sobol_seed": 3,
+ "rivals": [
+  "R1",
+  "R2",
+  "R3",
+  "R4"
+ ],
+ "form": "primary",
+ "pass_rule": "(declared before any hypothesis was computed; committed in this file before the run)\n=============================================================================================\nA hypothesis EXPLAINS the miss if, with constants taken only from cited measurements (no fitting to Table 2's argon\nvalue), for EVERY rival R1 - R4 whose feasible share is >= 5 %:\n  (a) the median predicted argon PA + PAA lies within +-2 s_Ar (dex) of the measured 0.09 mM, where\n      s_Ar^2 = s_read^2 + CV_hi^2 + sigma_run^2 is the layer's own noise for that total: s_read the Table 2 print\n      error with s_rep (``arp_t2_err`` (+) ``S_REP_DEX``, propagated to the sum on the linear scale), CV_hi the top of\n      the layer's analyser CV band (``CV_ARP_BAND[1]`` = 10 %, as dex), sigma_run the layer's ``SIGMA_RUN_DEX``\n      (omega, the model-discrepancy term, is NOT in the band: it would make a 5x miss look tolerable);\n  (b) the in-sample air arm is not moved outside its own band: the median air PA + PAA within +-2 s_air of the\n      measured air total, s_air built the same way.\nA partial reduction is reported as the fraction of the log gap closed: (log m_base - log m_hyp) / (log m_base -\nlog 0.09) per rival, m the median over that rival's feasible draws (the same Sobol draws in every scenario).",
+ "noise_bands": {
+  "argon": {
+   "measured_mM": 0.09,
+   "PA_mM": 0.06,
+   "PAA_mM": 0.03,
+   "s_read_dex": 0.0388851871254052,
+   "cv_hi_dex": 0.04342944819032518,
+   "sigma_run_dex": 0.075,
+   "s_dex": 0.09499039292420006,
+   "z": 2.0,
+   "lo_mM": 0.05811145153581498,
+   "hi_mM": 0.13938732876097312
+  },
+  "air": {
+   "measured_mM": 0.8500000000000001,
+   "PA_mM": 0.55,
+   "PAA_mM": 0.3,
+   "s_read_dex": 0.0187712186743171,
+   "cv_hi_dex": 0.04342944819032518,
+   "sigma_run_dex": 0.075,
+   "s_dex": 0.08867624045162927,
+   "z": 2.0,
+   "lo_mM": 0.5650234138617076,
+   "hi_mM": 1.2787080716921153
+  },
+  "air_cu5": {
+   "measured_mM": 2.1399999999999997,
+   "PA_mM": 1.38,
+   "PAA_mM": 0.76,
+   "s_read_dex": 0.01846227844527495,
+   "cv_hi_dex": 0.04342944819032518,
+   "sigma_run_dex": 0.075,
+   "s_dex": 0.08861135759882592,
+   "z": 2.0,
+   "lo_mM": 1.4229546465423208,
+   "hi_mM": 3.2183738330157623
+  }
+ },
+ "constants": {
+  "TDG_ghiron_0_60": {
+   "value": 0.0067,
+   "source": "Ghiron 1988 Fig. 2: fed 3-DG alone, 0.4 M, water (unbuffered), 100 C, 0-1 h; first-order [Z] (data/lit/extraction_dossiers/ghiron1988_extraction.md sec. 3)",
+   "kind": "fed"
+  },
+  "TDG_ghiron_60_120": {
+   "value": 0.0036,
+   "source": "Ghiron 1988 Fig. 2, 1-2 h (the dossier's 'safer' window)",
+   "kind": "fed"
+  },
+  "TDG_martins2005": {
+   "value": 0.0345,
+   "source": "Martins & van Boekel 2005 Table 2 step 5, 3-DG -> formic acid, 100 C, pH 6.8 (glucose / glycine; martins2005_extraction.md sec. 1)",
+   "kind": "fit"
+  },
+  "TDG_martins2003": {
+   "value": 0.11810000000000001,
+   "source": "Martins & van Boekel 2003 Table 3 col. C (fed DFG 10 mM, 0.1 M phosphate, 100 C, pH 6.8): k5 3-DG -> C_n 0.0907 + k6 3-DG -> FA 0.0274 (martins2003_extraction.md sec. 5.2)",
+   "kind": "fit"
+  },
+  "MGO_kanzler_0_120": {
+   "value": 0.0098,
+   "source": "Kanzler 2026: fed MGO alone 100 mM, pH 5, 100 C, first-order reading 0-120 min (kanzler2026_extraction.md sec. 4.7 item 1; the data are second order)",
+   "kind": "fed"
+  },
+  "MGO_kanzler_0_30": {
+   "value": 0.0144,
+   "source": "Kanzler 2026, first-order reading 0-30 min (fastest window)",
+   "kind": "fed"
+  },
+  "MGO_second_order": {
+   "value": 0.0,
+   "source": "Kanzler 2026 second-order reading k2 1.85e-4 /mM/min: at the ARP pot's sub-mM to few-mM MGO the first-order equivalent is <= ~1e-3 /min; taken as 0",
+   "kind": "fed"
+  },
+  "DG1_martins2005": {
+   "value": 1.45,
+   "source": "Martins 2005 Table 2 step 8, 1-DG -> acetic acid, 100 C, pH 6.8",
+   "kind": "fit"
+  },
+  "DG1_martins2003": {
+   "value": 1.9085,
+   "source": "Martins 2003 Table 3 col. C, k9 1-DG -> AA (k8 = 0)",
+   "kind": "fit"
+  }
+ },
+ "martins2003_exit_split": {
+  "a1_DG1": 0.39876724984121487,
+  "a3_TDG": 0.04672632813532444,
+  "aF_fragments": 0.421195652173913,
+  "inert_hexose_reversion": 0.13331076984954765,
+  "k_d_total_per_min": 0.0368
+ },
+ "calibration_with_k0_bit_exact_at_zero": true,
+ "scenarios": {
+  "base": {
+   "what": "the layer as built (primary form)",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9492,
+     "n_feasible": 972,
+     "argon_tot_q10_50_90_mM": [
+      0.2322,
+      0.4741,
+      0.7854
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9922,
+      1.2341,
+      1.5454
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1832,
+      0.3683,
+      0.6197
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0483,
+      0.1044,
+      0.181
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8002,
+      0.9874,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0085,
+      0.0215,
+      0.0988
+     ],
+     "argon_attribution_DG1_share_q10_50_90": [
+      0.0088,
+      0.1399,
+      0.6461
+     ],
+     "argon_attribution_TDG_share_q10_50_90": [
+      0.0703,
+      0.4302,
+      0.8535
+     ],
+     "argon_attribution_MGO_share_q10_50_90": [
+      0.0204,
+      0.2249,
+      0.7364
+     ],
+     "argon_within_2x_share": 0.0576,
+     "log_gap_closed": 0.0,
+     "argon_dev_dex": 0.722,
+     "air_dev_dex": 0.162,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1172,
+     "n_feasible": 120,
+     "argon_tot_q10_50_90_mM": [
+      0.0998,
+      0.4019,
+      0.7379
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8598,
+      1.1619,
+      1.4979
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.083,
+      0.3096,
+      0.584
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0196,
+      0.0876,
+      0.1726
+     ],
+     "argon_decayed_q10_50_90": [
+      0.5227,
+      0.93,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1742,
+      0.3414,
+      0.5304
+     ],
+     "argon_attribution_DG1_share_q10_50_90": [
+      0.0045,
+      0.0624,
+      0.3899
+     ],
+     "argon_attribution_TDG_share_q10_50_90": [
+      0.1596,
+      0.5512,
+      0.909
+     ],
+     "argon_attribution_MGO_share_q10_50_90": [
+      0.037,
+      0.245,
+      0.7221
+     ],
+     "argon_within_2x_share": 0.1667,
+     "log_gap_closed": 0.0,
+     "argon_dev_dex": 0.65,
+     "air_dev_dex": 0.136,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9551,
+     "n_feasible": 978,
+     "argon_tot_q10_50_90_mM": [
+      0.2305,
+      0.4791,
+      0.8056
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9905,
+      1.2391,
+      1.5656
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1762,
+      0.3675,
+      0.6371
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0476,
+      0.1044,
+      0.1881
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8034,
+      0.9874,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0084,
+      0.0214,
+      0.0927
+     ],
+     "argon_attribution_DG1_share_q10_50_90": [
+      0.01,
+      0.1282,
+      0.6539
+     ],
+     "argon_attribution_TDG_share_q10_50_90": [
+      0.0853,
+      0.4223,
+      0.8537
+     ],
+     "argon_attribution_MGO_share_q10_50_90": [
+      0.0198,
+      0.2284,
+      0.7205
+     ],
+     "argon_within_2x_share": 0.0491,
+     "log_gap_closed": 0.0,
+     "argon_dev_dex": 0.726,
+     "air_dev_dex": 0.164,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9619,
+     "n_feasible": 985,
+     "argon_tot_q10_50_90_mM": [
+      0.1778,
+      0.3893,
+      0.7078
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9378,
+      1.1493,
+      1.4678
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1392,
+      0.3032,
+      0.554
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0379,
+      0.0843,
+      0.1612
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6548,
+      0.8727,
+      0.9862
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0101,
+      0.0258,
+      0.1149
+     ],
+     "argon_attribution_DG1_share_q10_50_90": [
+      0.0097,
+      0.1292,
+      0.6577
+     ],
+     "argon_attribution_TDG_share_q10_50_90": [
+      0.085,
+      0.4293,
+      0.8623
+     ],
+     "argon_attribution_MGO_share_q10_50_90": [
+      0.0206,
+      0.2284,
+      0.7179
+     ],
+     "argon_within_2x_share": 0.0975,
+     "log_gap_closed": 0.0,
+     "argon_dev_dex": 0.636,
+     "air_dev_dex": 0.131,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.0,
+    0.0
+   ]
+  },
+  "H1_fed": {
+   "what": "H1, fed-donor decays: 3-DG Ghiron 0-1 h, MGO Kanzler first-order 0-120 min; 1-DG the layer's own k0 band",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9619,
+     "n_feasible": 985,
+     "argon_tot_q10_50_90_mM": [
+      0.2078,
+      0.4078,
+      0.7098
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9678,
+      1.1678,
+      1.4698
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1595,
+      0.3168,
+      0.5533
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0432,
+      0.0906,
+      0.1641
+     ],
+     "argon_decayed_q10_50_90": [
+      0.7999,
+      0.9879,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0091,
+      0.0227,
+      0.1049
+     ],
+     "log_gap_closed": 0.091,
+     "argon_dev_dex": 0.656,
+     "air_dev_dex": 0.138,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1211,
+     "n_feasible": 124,
+     "argon_tot_q10_50_90_mM": [
+      0.0917,
+      0.326,
+      0.6075
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8517,
+      1.086,
+      1.3675
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0754,
+      0.2647,
+      0.4904
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0174,
+      0.0725,
+      0.1343
+     ],
+     "argon_decayed_q10_50_90": [
+      0.5219,
+      0.9358,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1954,
+      0.3414,
+      0.5406
+     ],
+     "log_gap_closed": 0.14,
+     "argon_dev_dex": 0.559,
+     "air_dev_dex": 0.106,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9619,
+     "n_feasible": 985,
+     "argon_tot_q10_50_90_mM": [
+      0.1972,
+      0.4164,
+      0.7216
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9572,
+      1.1764,
+      1.4816
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1534,
+      0.3196,
+      0.5672
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0407,
+      0.0887,
+      0.1714
+     ],
+     "argon_decayed_q10_50_90": [
+      0.803,
+      0.9875,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0092,
+      0.0228,
+      0.1014
+     ],
+     "log_gap_closed": 0.084,
+     "argon_dev_dex": 0.665,
+     "air_dev_dex": 0.141,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9678,
+     "n_feasible": 991,
+     "argon_tot_q10_50_90_mM": [
+      0.1533,
+      0.3408,
+      0.6402
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9133,
+      1.1008,
+      1.4002
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1184,
+      0.2665,
+      0.5019
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0324,
+      0.0728,
+      0.1491
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6561,
+      0.873,
+      0.986
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0109,
+      0.0274,
+      0.1179
+     ],
+     "log_gap_closed": 0.091,
+     "argon_dev_dex": 0.578,
+     "air_dev_dex": 0.112,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.084,
+    0.14
+   ]
+  },
+  "H1_fed_low": {
+   "what": "H1 low bracket: 3-DG Ghiron 1-2 h, MGO second-order reading (0)",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9492,
+     "n_feasible": 972,
+     "argon_tot_q10_50_90_mM": [
+      0.2253,
+      0.4595,
+      0.7604
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9853,
+      1.2195,
+      1.5204
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1752,
+      0.3548,
+      0.5966
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0471,
+      0.1011,
+      0.1774
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8002,
+      0.9874,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0085,
+      0.0216,
+      0.0991
+     ],
+     "log_gap_closed": 0.019,
+     "argon_dev_dex": 0.708,
+     "air_dev_dex": 0.157,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1172,
+     "n_feasible": 120,
+     "argon_tot_q10_50_90_mM": [
+      0.0932,
+      0.3886,
+      0.702
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8532,
+      1.1486,
+      1.462
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0774,
+      0.2981,
+      0.5444
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0192,
+      0.084,
+      0.1713
+     ],
+     "argon_decayed_q10_50_90": [
+      0.524,
+      0.9311,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1737,
+      0.3352,
+      0.5258
+     ],
+     "log_gap_closed": 0.023,
+     "argon_dev_dex": 0.635,
+     "air_dev_dex": 0.131,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9551,
+     "n_feasible": 978,
+     "argon_tot_q10_50_90_mM": [
+      0.2187,
+      0.4603,
+      0.7818
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9787,
+      1.2203,
+      1.5418
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1702,
+      0.354,
+      0.606
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0458,
+      0.1013,
+      0.1866
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8034,
+      0.9874,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0084,
+      0.0214,
+      0.0928
+     ],
+     "log_gap_closed": 0.024,
+     "argon_dev_dex": 0.709,
+     "air_dev_dex": 0.157,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9639,
+     "n_feasible": 987,
+     "argon_tot_q10_50_90_mM": [
+      0.1754,
+      0.3778,
+      0.69
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9354,
+      1.1378,
+      1.45
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.131,
+      0.2923,
+      0.5347
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0366,
+      0.0814,
+      0.1614
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6553,
+      0.8727,
+      0.9861
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0101,
+      0.0258,
+      0.1145
+     ],
+     "log_gap_closed": 0.02,
+     "argon_dev_dex": 0.623,
+     "air_dev_dex": 0.127,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.019,
+    0.024
+   ]
+  },
+  "H1_martins2005": {
+   "what": "H1 with Martins 2005's 3-DG -> FA and 1-DG -> AA (fit), MGO Kanzler 0-120",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9775,
+     "n_feasible": 1001,
+     "argon_tot_q10_50_90_mM": [
+      0.1164,
+      0.2658,
+      0.4738
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8764,
+      1.0258,
+      1.2338
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.092,
+      0.2045,
+      0.3599
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.025,
+      0.059,
+      0.1187
+     ],
+     "argon_decayed_q10_50_90": [
+      0.7998,
+      0.9881,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0097,
+      0.0236,
+      0.1111
+     ],
+     "log_gap_closed": 0.348,
+     "argon_dev_dex": 0.47,
+     "air_dev_dex": 0.082,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1152,
+     "n_feasible": 118,
+     "argon_tot_q10_50_90_mM": [
+      0.0491,
+      0.2125,
+      0.4368
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8091,
+      0.9725,
+      1.1968
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0381,
+      0.1651,
+      0.3392
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0099,
+      0.0415,
+      0.1117
+     ],
+     "argon_decayed_q10_50_90": [
+      0.5126,
+      0.9422,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1905,
+      0.3116,
+      0.5413
+     ],
+     "log_gap_closed": 0.426,
+     "argon_dev_dex": 0.373,
+     "air_dev_dex": 0.058,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9727,
+     "n_feasible": 996,
+     "argon_tot_q10_50_90_mM": [
+      0.1141,
+      0.2637,
+      0.4678
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8741,
+      1.0237,
+      1.2278
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0887,
+      0.2056,
+      0.3534
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0251,
+      0.0587,
+      0.1187
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8035,
+      0.9875,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0097,
+      0.0235,
+      0.1023
+     ],
+     "log_gap_closed": 0.357,
+     "argon_dev_dex": 0.467,
+     "air_dev_dex": 0.081,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9756,
+     "n_feasible": 999,
+     "argon_tot_q10_50_90_mM": [
+      0.0913,
+      0.2165,
+      0.4148
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8513,
+      0.9765,
+      1.1748
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0694,
+      0.1658,
+      0.317
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0197,
+      0.0479,
+      0.1016
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6558,
+      0.8728,
+      0.9861
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0116,
+      0.0281,
+      0.119
+     ],
+     "log_gap_closed": 0.4,
+     "argon_dev_dex": 0.381,
+     "air_dev_dex": 0.06,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.348,
+    0.426
+   ]
+  },
+  "H1_max": {
+   "what": "H1 upper bracket: every largest sourced value (3-DG Martins 2003 k5 + k6; MGO Kanzler 0-30; 1-DG Martins 2003 k9), ARP-made donors only",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9775,
+     "n_feasible": 1001,
+     "argon_tot_q10_50_90_mM": [
+      0.074,
+      0.1805,
+      0.3704
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.834,
+      0.9405,
+      1.1304
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0564,
+      0.1367,
+      0.2685
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0162,
+      0.0424,
+      0.1027
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8009,
+      0.9881,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0102,
+      0.0243,
+      0.1113
+     ],
+     "log_gap_closed": 0.581,
+     "argon_dev_dex": 0.302,
+     "air_dev_dex": 0.044,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1143,
+     "n_feasible": 117,
+     "argon_tot_q10_50_90_mM": [
+      0.0283,
+      0.1204,
+      0.3304
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.7883,
+      0.8804,
+      1.0904
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0226,
+      0.0973,
+      0.2344
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.007,
+      0.0267,
+      0.0938
+     ],
+     "argon_decayed_q10_50_90": [
+      0.5121,
+      0.9437,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1864,
+      0.302,
+      0.5417
+     ],
+     "log_gap_closed": 0.806,
+     "argon_dev_dex": 0.126,
+     "air_dev_dex": 0.015,
+     "pass_argon": true,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9746,
+     "n_feasible": 998,
+     "argon_tot_q10_50_90_mM": [
+      0.0746,
+      0.1758,
+      0.3651
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8346,
+      0.9358,
+      1.1251
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0555,
+      0.1343,
+      0.2626
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0162,
+      0.0425,
+      0.1019
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8033,
+      0.9875,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0101,
+      0.0243,
+      0.1046
+     ],
+     "log_gap_closed": 0.6,
+     "argon_dev_dex": 0.291,
+     "air_dev_dex": 0.042,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9746,
+     "n_feasible": 998,
+     "argon_tot_q10_50_90_mM": [
+      0.059,
+      0.1417,
+      0.3168
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.819,
+      0.9017,
+      1.0768
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0437,
+      0.1085,
+      0.233
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0128,
+      0.0344,
+      0.0864
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6556,
+      0.8727,
+      0.986
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0119,
+      0.0287,
+      0.12
+     ],
+     "log_gap_closed": 0.69,
+     "argon_dev_dex": 0.197,
+     "air_dev_dex": 0.026,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.581,
+    0.806
+   ]
+  },
+  "H1_max_consistent": {
+   "what": "H1_max with the same 3-DG / MGO losses ALSO in the fed-donor calibration (Table 4 re-inverted)",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9707,
+     "n_feasible": 994,
+     "argon_tot_q10_50_90_mM": [
+      0.149,
+      0.3523,
+      0.6187
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.909,
+      1.1123,
+      1.3787
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1165,
+      0.2722,
+      0.4784
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0313,
+      0.0762,
+      0.1415
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8011,
+      0.9879,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0091,
+      0.0223,
+      0.1048
+     ],
+     "log_gap_closed": 0.179,
+     "argon_dev_dex": 0.593,
+     "air_dev_dex": 0.117,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1748,
+     "n_feasible": 179,
+     "argon_tot_q10_50_90_mM": [
+      0.0903,
+      0.3254,
+      0.6492
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8503,
+      1.0854,
+      1.4092
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0708,
+      0.2481,
+      0.4955
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0187,
+      0.0701,
+      0.1655
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6177,
+      0.9507,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1164,
+      0.2827,
+      0.4648
+     ],
+     "log_gap_closed": 0.141,
+     "argon_dev_dex": 0.558,
+     "air_dev_dex": 0.106,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9707,
+     "n_feasible": 994,
+     "argon_tot_q10_50_90_mM": [
+      0.1468,
+      0.3542,
+      0.6195
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9068,
+      1.1142,
+      1.3795
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1136,
+      0.2719,
+      0.481
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0304,
+      0.0769,
+      0.1436
+     ],
+     "argon_decayed_q10_50_90": [
+      0.803,
+      0.9875,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.009,
+      0.0223,
+      0.0951
+     ],
+     "log_gap_closed": 0.181,
+     "argon_dev_dex": 0.595,
+     "air_dev_dex": 0.118,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9717,
+     "n_feasible": 995,
+     "argon_tot_q10_50_90_mM": [
+      0.1135,
+      0.2887,
+      0.5394
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8735,
+      1.0487,
+      1.2994
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0873,
+      0.2243,
+      0.4178
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0244,
+      0.062,
+      0.1247
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6576,
+      0.8725,
+      0.9862
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0107,
+      0.027,
+      0.1158
+     ],
+     "log_gap_closed": 0.204,
+     "argon_dev_dex": 0.506,
+     "air_dev_dex": 0.091,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.141,
+    0.204
+   ]
+  },
+  "H2a_dg1_as_3dg": {
+   "what": "H2: the 1-DG donor carries 3-DG's calibrated Strecker share and phi (1-DG has no Table 4 arm)",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9658,
+     "n_feasible": 989,
+     "argon_tot_q10_50_90_mM": [
+      0.1905,
+      0.4165,
+      0.6887
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9505,
+      1.1765,
+      1.4487
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1513,
+      0.325,
+      0.5523
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0371,
+      0.0842,
+      0.1468
+     ],
+     "argon_decayed_q10_50_90": [
+      0.801,
+      0.9879,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0088,
+      0.022,
+      0.1053
+     ],
+     "log_gap_closed": 0.078,
+     "argon_dev_dex": 0.665,
+     "air_dev_dex": 0.141,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1143,
+     "n_feasible": 117,
+     "argon_tot_q10_50_90_mM": [
+      0.0783,
+      0.3534,
+      0.7096
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8383,
+      1.1134,
+      1.4696
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0653,
+      0.2721,
+      0.5707
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0171,
+      0.0645,
+      0.1645
+     ],
+     "argon_decayed_q10_50_90": [
+      0.5139,
+      0.9313,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1703,
+      0.3363,
+      0.5568
+     ],
+     "log_gap_closed": 0.086,
+     "argon_dev_dex": 0.594,
+     "air_dev_dex": 0.117,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9668,
+     "n_feasible": 990,
+     "argon_tot_q10_50_90_mM": [
+      0.189,
+      0.4151,
+      0.6903
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.949,
+      1.1751,
+      1.4503
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1479,
+      0.3263,
+      0.5465
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0373,
+      0.0848,
+      0.1472
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8037,
+      0.9875,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0086,
+      0.022,
+      0.0931
+     ],
+     "log_gap_closed": 0.086,
+     "argon_dev_dex": 0.664,
+     "air_dev_dex": 0.141,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9727,
+     "n_feasible": 996,
+     "argon_tot_q10_50_90_mM": [
+      0.1482,
+      0.3449,
+      0.5984
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9082,
+      1.1049,
+      1.3584
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1186,
+      0.271,
+      0.4726
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0294,
+      0.0688,
+      0.1259
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6564,
+      0.8726,
+      0.9861
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0104,
+      0.0266,
+      0.1148
+     ],
+     "log_gap_closed": 0.083,
+     "argon_dev_dex": 0.583,
+     "air_dev_dex": 0.114,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.078,
+    0.086
+   ]
+  },
+  "H2b_anoxic_as_3dg": {
+   "what": "H2: every anoxic-exit donor (1-DG and fragment MGO) carries 3-DG's share and phi",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9775,
+     "n_feasible": 1001,
+     "argon_tot_q10_50_90_mM": [
+      0.1366,
+      0.3548,
+      0.6513
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8966,
+      1.1148,
+      1.4113
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1154,
+      0.2967,
+      0.5514
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0214,
+      0.0562,
+      0.1016
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8,
+      0.9881,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0098,
+      0.0237,
+      0.1115
+     ],
+     "log_gap_closed": 0.174,
+     "argon_dev_dex": 0.596,
+     "air_dev_dex": 0.118,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1172,
+     "n_feasible": 120,
+     "argon_tot_q10_50_90_mM": [
+      0.064,
+      0.2324,
+      0.5528
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.824,
+      0.9924,
+      1.3128
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0543,
+      0.1965,
+      0.4647
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0097,
+      0.0355,
+      0.0862
+     ],
+     "argon_decayed_q10_50_90": [
+      0.4926,
+      0.9218,
+      0.9998
+     ],
+     "sigma_ox_q10_50_90": [
+      0.23,
+      0.3614,
+      0.5747
+     ],
+     "log_gap_closed": 0.366,
+     "argon_dev_dex": 0.412,
+     "air_dev_dex": 0.067,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9756,
+     "n_feasible": 999,
+     "argon_tot_q10_50_90_mM": [
+      0.1321,
+      0.3581,
+      0.6404
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8921,
+      1.1181,
+      1.4004
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1117,
+      0.2993,
+      0.539
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0207,
+      0.0555,
+      0.1002
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8032,
+      0.9876,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0099,
+      0.0237,
+      0.1041
+     ],
+     "log_gap_closed": 0.174,
+     "argon_dev_dex": 0.6,
+     "air_dev_dex": 0.119,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9756,
+     "n_feasible": 999,
+     "argon_tot_q10_50_90_mM": [
+      0.1088,
+      0.2959,
+      0.5592
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8688,
+      1.0559,
+      1.3192
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0919,
+      0.251,
+      0.4698
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0167,
+      0.0462,
+      0.0875
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6559,
+      0.8729,
+      0.9858
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0113,
+      0.0278,
+      0.1209
+     ],
+     "log_gap_closed": 0.187,
+     "argon_dev_dex": 0.517,
+     "air_dev_dex": 0.094,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.174,
+    0.366
+   ]
+  },
+  "H2_low_as_glucosone": {
+   "what": "H2 low bracket: 1-DG and fragment MGO carry glucosone's share and phi (the lowest measured)",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9795,
+     "n_feasible": 1003,
+     "argon_tot_q10_50_90_mM": [
+      0.1402,
+      0.3202,
+      0.5791
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9002,
+      1.0802,
+      1.3391
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1203,
+      0.2706,
+      0.4917
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.021,
+      0.0488,
+      0.0879
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8,
+      0.9879,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0103,
+      0.0247,
+      0.1133
+     ],
+     "log_gap_closed": 0.236,
+     "argon_dev_dex": 0.551,
+     "air_dev_dex": 0.104,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1172,
+     "n_feasible": 120,
+     "argon_tot_q10_50_90_mM": [
+      0.0804,
+      0.2678,
+      0.6011
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8404,
+      1.0278,
+      1.3611
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0682,
+      0.2275,
+      0.5116
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0117,
+      0.0392,
+      0.092
+     ],
+     "argon_decayed_q10_50_90": [
+      0.4999,
+      0.9237,
+      0.9998
+     ],
+     "sigma_ox_q10_50_90": [
+      0.2203,
+      0.3499,
+      0.5698
+     ],
+     "log_gap_closed": 0.271,
+     "argon_dev_dex": 0.474,
+     "air_dev_dex": 0.082,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9756,
+     "n_feasible": 999,
+     "argon_tot_q10_50_90_mM": [
+      0.1369,
+      0.3197,
+      0.5687
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8969,
+      1.0797,
+      1.3287
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1152,
+      0.2717,
+      0.4836
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.02,
+      0.0482,
+      0.0872
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8039,
+      0.9876,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0102,
+      0.0242,
+      0.1036
+     ],
+     "log_gap_closed": 0.242,
+     "argon_dev_dex": 0.551,
+     "air_dev_dex": 0.104,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9746,
+     "n_feasible": 998,
+     "argon_tot_q10_50_90_mM": [
+      0.1075,
+      0.2636,
+      0.4916
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8675,
+      1.0236,
+      1.2516
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.092,
+      0.2235,
+      0.4169
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0156,
+      0.04,
+      0.0749
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6552,
+      0.8724,
+      0.9859
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0121,
+      0.0283,
+      0.1206
+     ],
+     "log_gap_closed": 0.266,
+     "argon_dev_dex": 0.467,
+     "air_dev_dex": 0.081,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.236,
+    0.271
+   ]
+  },
+  "H12_max": {
+   "what": "H1_max + H2b: the most favourable combination of sourced constants",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9766,
+     "n_feasible": 1000,
+     "argon_tot_q10_50_90_mM": [
+      0.0432,
+      0.1241,
+      0.2851
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8032,
+      0.8841,
+      1.0451
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0362,
+      0.1048,
+      0.24
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0068,
+      0.0197,
+      0.0451
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8002,
+      0.988,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.011,
+      0.0253,
+      0.115
+     ],
+     "log_gap_closed": 0.807,
+     "argon_dev_dex": 0.14,
+     "air_dev_dex": 0.017,
+     "pass_argon": true,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1133,
+     "n_feasible": 116,
+     "argon_tot_q10_50_90_mM": [
+      0.0137,
+      0.0711,
+      0.1733
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.7737,
+      0.8311,
+      0.9333
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0116,
+      0.0603,
+      0.147
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0021,
+      0.0109,
+      0.0263
+     ],
+     "argon_decayed_q10_50_90": [
+      0.4998,
+      0.9356,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.2176,
+      0.3184,
+      0.5716
+     ],
+     "log_gap_closed": 1.157,
+     "argon_dev_dex": 0.102,
+     "air_dev_dex": 0.01,
+     "pass_argon": true,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9756,
+     "n_feasible": 999,
+     "argon_tot_q10_50_90_mM": [
+      0.0413,
+      0.1257,
+      0.2746
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8013,
+      0.8857,
+      1.0346
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0346,
+      0.1059,
+      0.2299
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0063,
+      0.0204,
+      0.043
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8024,
+      0.9874,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.011,
+      0.0254,
+      0.1085
+     ],
+     "log_gap_closed": 0.8,
+     "argon_dev_dex": 0.145,
+     "air_dev_dex": 0.018,
+     "pass_argon": true,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9727,
+     "n_feasible": 996,
+     "argon_tot_q10_50_90_mM": [
+      0.0311,
+      0.1042,
+      0.243
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.7911,
+      0.8642,
+      1.003
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0263,
+      0.0877,
+      0.2057
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0048,
+      0.0165,
+      0.0389
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6548,
+      0.8729,
+      0.9859
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0123,
+      0.0289,
+      0.1213
+     ],
+     "log_gap_closed": 0.9,
+     "argon_dev_dex": 0.064,
+     "air_dev_dex": 0.007,
+     "pass_argon": true,
+     "pass_air": true
+    }
+   },
+   "passes": true,
+   "log_gap_closed_range": [
+    0.8,
+    1.157
+   ]
+  },
+  "H3_kloss_top": {
+   "what": "H3: PA first-order loss at the top of EX-049's k_loss band (1e-2 /min; in-sample band, not a measurement), re-inverted consistently",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9395,
+     "n_feasible": 962,
+     "argon_tot_q10_50_90_mM": [
+      0.1963,
+      0.4082,
+      0.6747
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9563,
+      1.1682,
+      1.4347
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1384,
+      0.2972,
+      0.4787
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0532,
+      0.1121,
+      0.2092
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8001,
+      0.9872,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0112,
+      0.0293,
+      0.1201
+     ],
+     "log_gap_closed": 0.09,
+     "argon_dev_dex": 0.657,
+     "air_dev_dex": 0.138,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.0742,
+     "n_feasible": 76,
+     "argon_tot_q10_50_90_mM": [
+      0.1493,
+      0.3931,
+      0.6764
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9093,
+      1.1531,
+      1.4364
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1207,
+      0.2768,
+      0.4805
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0285,
+      0.1035,
+      0.1762
+     ],
+     "argon_decayed_q10_50_90": [
+      0.5481,
+      0.938,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1732,
+      0.2985,
+      0.5337
+     ],
+     "log_gap_closed": 0.015,
+     "argon_dev_dex": 0.64,
+     "air_dev_dex": 0.132,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9395,
+     "n_feasible": 962,
+     "argon_tot_q10_50_90_mM": [
+      0.1989,
+      0.413,
+      0.6748
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9589,
+      1.173,
+      1.4348
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1397,
+      0.2936,
+      0.489
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0505,
+      0.1108,
+      0.2113
+     ],
+     "argon_decayed_q10_50_90": [
+      0.798,
+      0.9867,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0112,
+      0.0283,
+      0.1169
+     ],
+     "log_gap_closed": 0.089,
+     "argon_dev_dex": 0.662,
+     "air_dev_dex": 0.14,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9453,
+     "n_feasible": 968,
+     "argon_tot_q10_50_90_mM": [
+      0.1573,
+      0.3369,
+      0.6047
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9173,
+      1.0969,
+      1.3647
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1164,
+      0.2476,
+      0.4305
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0393,
+      0.0892,
+      0.1797
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6531,
+      0.8713,
+      0.9856
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0135,
+      0.0351,
+      0.1388
+     ],
+     "log_gap_closed": 0.099,
+     "argon_dev_dex": 0.573,
+     "air_dev_dex": 0.111,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.015,
+    0.099
+   ]
+  },
+  "S1_martins2003_split": {
+   "what": "S1: the ARP's anoxic exit split set to Martins 2003's fed-DFG split (100 C, pH 6.8), renormalised over the three exits the layer has",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9502,
+     "n_feasible": 973,
+     "argon_tot_q10_50_90_mM": [
+      0.1625,
+      0.408,
+      0.7791
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9225,
+      1.168,
+      1.5391
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1182,
+      0.2944,
+      0.5694
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0411,
+      0.1108,
+      0.2121
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8025,
+      0.9877,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0066,
+      0.0185,
+      0.0887
+     ],
+     "log_gap_closed": 0.09,
+     "argon_dev_dex": 0.656,
+     "air_dev_dex": 0.138,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1133,
+     "n_feasible": 116,
+     "argon_tot_q10_50_90_mM": [
+      0.0686,
+      0.3588,
+      0.6873
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8286,
+      1.1188,
+      1.4473
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0514,
+      0.2548,
+      0.4842
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0179,
+      0.0927,
+      0.1851
+     ],
+     "argon_decayed_q10_50_90": [
+      0.5419,
+      0.9446,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1222,
+      0.2651,
+      0.5058
+     ],
+     "log_gap_closed": 0.076,
+     "argon_dev_dex": 0.601,
+     "air_dev_dex": 0.119,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9473,
+     "n_feasible": 970,
+     "argon_tot_q10_50_90_mM": [
+      0.1573,
+      0.4119,
+      0.7657
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.9173,
+      1.1719,
+      1.5257
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.1158,
+      0.299,
+      0.5606
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0393,
+      0.1105,
+      0.2119
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8028,
+      0.987,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0066,
+      0.019,
+      0.0846
+     ],
+     "log_gap_closed": 0.09,
+     "argon_dev_dex": 0.661,
+     "air_dev_dex": 0.139,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9678,
+     "n_feasible": 991,
+     "argon_tot_q10_50_90_mM": [
+      0.1335,
+      0.3331,
+      0.6891
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8935,
+      1.0931,
+      1.4491
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0991,
+      0.2433,
+      0.5181
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0316,
+      0.0874,
+      0.1915
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6615,
+      0.8731,
+      0.9861
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0086,
+      0.0241,
+      0.1039
+     ],
+     "log_gap_closed": 0.106,
+     "argon_dev_dex": 0.568,
+     "air_dev_dex": 0.109,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.076,
+    0.106
+   ]
+  },
+  "S1_plus_H1_max": {
+   "what": "S1 + H1_max",
+   "rivals": {
+    "R1": {
+     "feasible_share": 0.9775,
+     "n_feasible": 1001,
+     "argon_tot_q10_50_90_mM": [
+      0.0689,
+      0.2037,
+      0.4011
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8289,
+      0.9637,
+      1.1611
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0504,
+      0.1447,
+      0.2845
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0188,
+      0.0588,
+      0.1158
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8018,
+      0.9887,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0091,
+      0.0227,
+      0.1024
+     ],
+     "log_gap_closed": 0.509,
+     "argon_dev_dex": 0.355,
+     "air_dev_dex": 0.055,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R2": {
+     "feasible_share": 0.1133,
+     "n_feasible": 116,
+     "argon_tot_q10_50_90_mM": [
+      0.0184,
+      0.1561,
+      0.3505
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.7784,
+      0.9161,
+      1.1105
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0135,
+      0.1112,
+      0.2483
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0053,
+      0.0449,
+      0.1044
+     ],
+     "argon_decayed_q10_50_90": [
+      0.5075,
+      0.9475,
+      0.9999
+     ],
+     "sigma_ox_q10_50_90": [
+      0.1684,
+      0.2831,
+      0.5361
+     ],
+     "log_gap_closed": 0.632,
+     "argon_dev_dex": 0.239,
+     "air_dev_dex": 0.033,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R3": {
+     "feasible_share": 0.9746,
+     "n_feasible": 998,
+     "argon_tot_q10_50_90_mM": [
+      0.0689,
+      0.2033,
+      0.3943
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.8289,
+      0.9633,
+      1.1543
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0494,
+      0.1453,
+      0.2778
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0187,
+      0.0584,
+      0.1179
+     ],
+     "argon_decayed_q10_50_90": [
+      0.8036,
+      0.9878,
+      1.0
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0092,
+      0.0223,
+      0.0938
+     ],
+     "log_gap_closed": 0.513,
+     "argon_dev_dex": 0.354,
+     "air_dev_dex": 0.054,
+     "pass_argon": false,
+     "pass_air": true
+    },
+    "R4": {
+     "feasible_share": 0.9736,
+     "n_feasible": 997,
+     "argon_tot_q10_50_90_mM": [
+      0.052,
+      0.1641,
+      0.3479
+     ],
+     "air_tot_q10_50_90_mM": [
+      0.812,
+      0.9241,
+      1.1079
+     ],
+     "air_cu5_tot_q10_50_90_mM": [
+      2.14,
+      2.14,
+      2.14
+     ],
+     "argon_PA_q10_50_90_mM": [
+      0.0379,
+      0.1151,
+      0.2474
+     ],
+     "argon_PAA_q10_50_90_mM": [
+      0.0141,
+      0.0477,
+      0.1025
+     ],
+     "argon_decayed_q10_50_90": [
+      0.6584,
+      0.8727,
+      0.9865
+     ],
+     "sigma_ox_q10_50_90": [
+      0.0108,
+      0.0262,
+      0.1129
+     ],
+     "log_gap_closed": 0.59,
+     "argon_dev_dex": 0.261,
+     "air_dev_dex": 0.036,
+     "pass_argon": false,
+     "pass_air": true
+    }
+   },
+   "passes": false,
+   "log_gap_closed_range": [
+    0.509,
+    0.632
+   ]
+  }
+ },
+ "wall_s": 369.3,
+ "memory_free_pct_at_launch": 47
+}

@@ -205,11 +205,18 @@ def absolute_refused_rows(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
     return [{"benchmark_id": r["benchmark_id"], "compound": r["compound"], "panel": r["panel"]} for r in rows]
 
 
+def data_refused_rows(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
+    """Rows the curated DATA withdraws (2026-11-06, `scoring_refused`): not a lane gap, so kept out of section 3's table."""
+    rows = [r for r in scorecard.get("refused_compounds", []) if r.get("data_refused")]
+    return [{"benchmark_id": r["benchmark_id"], "compound": r["compound"], "panel": r["panel"],
+             "reason": str(r.get("reason", ""))} for r in rows]
+
+
 def refused_targets(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
     """What the panel asks for that no lane can represent, grouped by the engine's own reason."""
     groups: Dict[str, Dict[str, Any]] = {}
     for r in scorecard.get("refused_compounds", []):
-        if r.get("unidentified_route") or r.get("absolute_refused"):
+        if r.get("unidentified_route") or r.get("absolute_refused") or r.get("data_refused"):
             continue
         reason = str(r.get("reason", ""))
         head = reason.split(" -- ")[0][:120]
@@ -273,7 +280,8 @@ def thin_axes(directional: Mapping[str, Any]) -> List[Dict[str, Any]]:
             "wilson_lower_bound": round(wilson_lower(agree, evaluable), 3) if evaluable else None,
             "additional_agreeing_claims_to_trust": _claims_to_trust(agree, evaluable),
             "structural_block": (
-                "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); "
+                "only the trunk lane carries a water-activity term (a declared multiplier, wave B12), and only "
+                "inside a_w 0.33-1.00 (a comparison with an arm below 0.33 is refused; a single recipe there is still answered); "
                 "the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w "
                 "comparisons, so claims on those lanes cannot help until a moisture-dependent step is "
                 "measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
@@ -416,6 +424,7 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
         "not_evaluable_rows": nev,
         "absolute_refused_rows": abs_refused,
         "refused_targets": refused,
+        "data_refused_rows": data_refused_rows(scorecard),
         "thin_axes": axes,
         "largest_misses": misses,
         "what_you_could_predict": unlocked,
@@ -426,6 +435,7 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
             "not_evaluable_rows": len(nev),
             "absolute_refused_rows": len(abs_refused),
             "refused_row_count": sum(g["row_count"] for g in refused),
+            "data_refused_rows": len(data_refused_rows(scorecard)),
             "axes_below_trust": len(axes),
             "lanes_that_cannot_support_a_trend": len(design_gaps),
             "structural_questions": len(structural),
@@ -483,6 +493,11 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
     lines += ["", "## 3. What the panel asks for that no lane represents", "", "| what | rows | the engine's reason | the hypothesis layer |", "|---|---|---|---|"]
     for g in payload["refused_targets"]:
         lines.append(f"| {g['what']} | {g['row_count']} | {g['reason'][:260]} | {g.get('hypothesis_layer', '')} |")
+    if payload.get("data_refused_rows"):
+        lines += ["", "Also refused, by the curated DATA rather than by a lane (`scoring_refused`; each reason names its "
+                  "conflicts-register entry and says what would reinstate the row):", ""]
+        for r in payload["data_refused_rows"]:
+            lines.append(f"- `{r['benchmark_id']}` / {r['compound']}: {r['reason'][:260]}")
     lines += ["", "## 4. Directional axes below 'trust'", "", "| axis | agree / evaluable | not evaluable | verdict | Wilson lower | agreeing claims to reach trust |", "|---|---|---|---|---|---|"]
     for a in payload["thin_axes"]:
         need = "blocked: " + a["structural_block"] if a["structural_block"] else (str(a["additional_agreeing_claims_to_trust"]) if a["additional_agreeing_claims_to_trust"] is not None else "—")
