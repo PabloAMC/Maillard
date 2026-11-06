@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-11-05",
+    "generated_on": "2026-11-06",
     "git": {
-      "commit": "3dd7448d9c37a5ce3a17065b5e0396ece690f691",
-      "short": "3dd7448d",
-      "branch": "h0-followups",
+      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
+      "short": "56861a85",
+      "branch": "m0-data-corrections-batch1",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/directional.py",
@@ -510,7 +510,7 @@
       "arm 'egg PC alone' refused": 1,
       "arm 'methionine alone' refused": 1
     },
-    "wall_seconds": 863.6
+    "wall_seconds": 801.4
   },
   "claims": [
     {

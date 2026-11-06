@@ -18,18 +18,18 @@
 
 | solver | tolerance | pots | max dex, all species | worst (pot, species) | max dex, ACR and HMF | steps (all pots) | wall s after JIT | max abs below floor / max y0 | element drift |
 |---|---|---|---|---|---|---|---|---|---|
-| Kvaerno4 | tight_1e-10 | panel (18) | 1.4e-09 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.6e-11 | 65076 | 8.914 | 4.9e-18 | 5.5e-15 |
-| Kvaerno4 | tight_1e-10 | profile (1) | 1.4e-09 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 1.1e-12 | 8325 | 1.009 | 3.5e-18 | 3.2e-15 |
-| Kvaerno4 | fit_tol_1e-8 | panel (18) | 1.3e-07 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.6e-09 | 20030 | 2.513 | 4.5e-16 | 3.6e-15 |
-| Kvaerno4 | fit_tol_1e-8 | profile (1) | 1.3e-07 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 4.5e-11 | 2763 | 0.412 | 3.0e-16 | 2.4e-15 |
-| Kvaerno4 | loose_1e-6 | panel (18) | 1.4e-05 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.5e-07 | 6086 | 0.826 | 3.6e-14 | 1.7e-15 |
-| Kvaerno4 | loose_1e-6 | profile (1) | 1.2e-05 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 5.1e-09 | 1030 | 0.149 | 2.7e-14 | 9.9e-16 |
-| Kvaerno5 | tight_1e-10 | panel (18) | 2.2e-09 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.9e-11 | 89448 | 13.334 | 1.3e-17 | 3.0e-15 |
-| Kvaerno5 | tight_1e-10 | profile (1) | 3.3e-09 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 3.9e-13 | 5463 | 0.921 | 8.0e-18 | 2.6e-15 |
-| Kvaerno5 | fit_tol_1e-8 | panel (18) | 2.4e-07 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.5e-09 | 33368 | 5.365 | 9.4e-16 | 2.1e-15 |
-| Kvaerno5 | fit_tol_1e-8 | profile (1) | 2.9e-07 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 2.4e-11 | 2299 | 0.339 | 6.8e-16 | 3.3e-16 |
-| Kvaerno5 | loose_1e-6 | panel (18) | 2.2e-05 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 9.9e-08 | 11554 | 1.717 | 5.4e-14 | 1.3e-15 |
-| Kvaerno5 | loose_1e-6 | profile (1) | 2.1e-05 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 8.7e-10 | 1085 | 0.153 | 4.9e-14 | 2.2e-16 |
+| Kvaerno4 | tight_1e-10 | panel (18) | 1.4e-09 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.6e-11 | 65076 | 7.774 | 4.9e-18 | 5.5e-15 |
+| Kvaerno4 | tight_1e-10 | profile (1) | 1.4e-09 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 1.1e-12 | 8325 | 0.966 | 3.5e-18 | 3.2e-15 |
+| Kvaerno4 | fit_tol_1e-8 | panel (18) | 1.3e-07 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.6e-09 | 20030 | 2.294 | 4.5e-16 | 3.6e-15 |
+| Kvaerno4 | fit_tol_1e-8 | profile (1) | 1.3e-07 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 4.5e-11 | 2763 | 0.311 | 3.0e-16 | 2.4e-15 |
+| Kvaerno4 | loose_1e-6 | panel (18) | 1.4e-05 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.5e-07 | 6086 | 0.678 | 3.6e-14 | 1.7e-15 |
+| Kvaerno4 | loose_1e-6 | profile (1) | 1.2e-05 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 5.1e-09 | 1030 | 0.127 | 2.7e-14 | 9.9e-16 |
+| Kvaerno5 | tight_1e-10 | panel (18) | 2.2e-09 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.9e-11 | 89448 | 11.655 | 1.3e-17 | 3.0e-15 |
+| Kvaerno5 | tight_1e-10 | profile (1) | 3.3e-09 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 3.9e-13 | 5463 | 0.730 | 8.0e-18 | 2.6e-15 |
+| Kvaerno5 | fit_tol_1e-8 | panel (18) | 2.4e-07 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.5e-09 | 33368 | 4.530 | 9.4e-16 | 2.1e-15 |
+| Kvaerno5 | fit_tol_1e-8 | profile (1) | 2.9e-07 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 2.4e-11 | 2299 | 0.315 | 6.8e-16 | 3.3e-16 |
+| Kvaerno5 | loose_1e-6 | panel (18) | 2.2e-05 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 9.9e-08 | 11554 | 1.559 | 5.4e-14 | 1.3e-15 |
+| Kvaerno5 | loose_1e-6 | profile (1) | 2.1e-05 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 8.7e-10 | 1085 | 0.145 | 4.9e-14 | 2.2e-16 |
 
 Panel pots: the 6 bundles the engine routes to the acrylamide lane and answers, each at its point and at the low and high ends of every sampled condition band (18 records, one compile). Profile: a synthetic staircase (25 -> 180 -> 100 C, 2 K steps) with every competitor charged, at pH 5.0 and a_w 0.80, so all 42 steps and every condition term carry flux.
 
@@ -40,17 +40,17 @@ Worst column error = max over observables of |difference| / max |reference| in t
 | pot | observables x coordinates (relative columns) | vs engine central FD: rel (worst coordinate) / abs | vs JAX central FD: rel / abs | JAX FD vs engine FD: rel / abs | fit tol vs tight | rtol 1e-6 vs tight |
 |---|---|---|---|---|---|---|
 | mp_holdout_glucose_asparagine_180C_30min_Chang2021 | 8 x 84 (34) | 2.7e-05 (log10_k:k_glc_frag) / 4.2e-09 | 1.3e-06 / 3.8e-10 | 2.6e-05 / 4.2e-09 | 4.6e-10 | 4.6e-08 |
-| acrylamide_spi_extrusion_130C_ACSRef3 | 8 x 84 (24) | 8.1e-05 (ea:k_glc_fru) / 3.3e-07 | 3.9e-07 / 3.0e-10 | 8.1e-05 / 3.3e-07 | 1.8e-08 | 5.8e-07 |
+| synthetic_short_isothermal_acrylamide_130C_25s | 8 x 84 (24) | 8.1e-05 (ea:k_glc_fru) / 3.3e-07 | 3.9e-07 / 3.0e-10 | 8.1e-05 / 3.3e-07 | 1.8e-08 | 5.8e-07 |
 | synthetic_profile_acrylamide_all_steps_25_180_100 | 6 x 84 (50) | 5.8e-05 (ea:k_lys_glc) / 1.7e-07 | 3.6e-07 / 7.5e-10 | 5.8e-05 / 1.7e-07 | 2.0e-10 | 9.2e-09 |
 
 ## Panel predictions at fit tolerance vs `engine.predict` (log10 of each scored row's value)
 
 | solver | tolerance | rows | max abs difference, dex |
 |---|---|---|---|
-| Kvaerno4 | fit_tol_1e-8 | 8 | 3.0e-09 |
-| Kvaerno4 | loose_1e-6 | 8 | 5.8e-08 |
-| Kvaerno5 | fit_tol_1e-8 | 8 | 2.9e-09 |
-| Kvaerno5 | loose_1e-6 | 8 | 7.1e-09 |
+| Kvaerno4 | fit_tol_1e-8 | 7 | 3.0e-09 |
+| Kvaerno4 | loose_1e-6 | 7 | 1.6e-08 |
+| Kvaerno5 | fit_tol_1e-8 | 7 | 2.9e-09 |
+| Kvaerno5 | loose_1e-6 | 7 | 2.9e-09 |
 
 ## Timing (CPU, one core, niced; shared machine: load beside each row; provisional)
 
@@ -58,10 +58,10 @@ The engine's forward-difference Jacobian is (1 + 84) lane runs, from the median 
 
 | pot class | segments | engine run s | engine FD Jacobian s | JAX solve s (rtol 1e-8) | steps | compile s | JAX Jacobian s (rtol 1e-8) | compile s | JAX solve s (1e-6) | JAX Jacobian s (1e-6) | load |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| short isothermal (extrusion, 0.42 min at 130 C) | 1 | 2.9e-03 | 2.5e-01 | 1.8e-03 | 19 | 1.0 | 1.6e-02 | 2.5 | 1.1e-03 | 9.0e-03 | 4.59 5.16 6.41 |
-| isothermal hold (30 min at 180 C) | 1 | 7.0e-02 | 5.9e+00 | 2.2e-01 | 2248 | 1.5 | 2.1e+00 | 4.7 | 8.5e-02 | 7.4e-01 | 4.50 5.10 6.36 |
-| dense isothermal (200 mM, 30 min at 180 C) | 1 | 1.0e-01 | 8.8e+00 | 3.1e-01 | 3125 | 2.1 | 3.0e+00 | 5.4 | 1.1e-01 | 1.1e+00 | 4.86 5.14 6.32 |
-| staircase profile (all 42 steps) | 119 | 2.8e-01 | 2.4e+01 | 2.3e-01 | 2299 | 2.4 | 2.1e+00 | 4.7 | 9.2e-02 | 9.3e-01 | 4.21 4.96 6.23 |
+| short isothermal (synthetic, 0.42 min at 130 C) | 1 | 4.5e-03 | 3.8e-01 | 2.8e-03 | 19 | 1.7 | 2.9e-02 | 3.5 | 1.6e-03 | 1.6e-02 | 16.56 20.67 17.36 |
+| isothermal hold (30 min at 180 C) | 1 | 1.1e-01 | 9.6e+00 | 3.0e-01 | 2248 | 1.9 | 3.3e+00 | 6.9 | 1.1e-01 | 1.1e+00 | 17.73 20.53 17.42 |
+| dense isothermal (200 mM, 30 min at 180 C) | 1 | 1.4e-01 | 1.2e+01 | 4.1e-01 | 3125 | 2.2 | 4.4e+00 | 7.2 | 1.5e-01 | 1.6e+00 | 15.83 19.67 17.24 |
+| staircase profile (all 42 steps) | 119 | 4.0e-01 | 3.4e+01 | 2.9e-01 | 2299 | 2.3 | 3.3e+00 | 5.9 | 1.5e-01 | 1.6e+00 | 15.33 18.90 17.06 |
 
 ## Findings
 
@@ -74,7 +74,7 @@ The engine's forward-difference Jacobian is (1 + 84) lane runs, from the median 
 3. **Kvaerno4 vs Kvaerno5: Kvaerno4 here.** On this network Kvaerno4 takes ~0.6x the steps at every tolerance (20 030 vs 33 368 on the panel at rtol 1e-8) at equal or better accuracy. The timing below is Kvaerno5 (the contract default); the composed union decides on its own pots.
 4. **atol drives the step count.** On the 30-min Chang pot at rtol 1e-8, Kvaerno5 takes 2248 steps at atol 1e-14, 947 at 1e-10 and 410 at 1e-8, with acrylamide within 1.4e-10 / 5.9e-10 dex of the engine at the last two (Kvaerno4: 1328 / 709 / 462). Several pools stay at exactly zero or are depleted far below 1e-14. The smallest scored species here (acrylamide, ~1e-4 mmol/L at 10 ppb) licenses atol ~1e-10 for fits: a further 2 - 3x on the solve and the Jacobian.
 5. **Cost (provisional, Kvaerno5, rtol 1e-8, atol 1e-14, one core, load ~4 - 5).**
-   - One solve: 0.6 - 0.8x the engine's time on the short extrusion pot and the staircase profile, ~3x slower on the isothermal 30-min holds (LSODA is very good at one long stiff segment).
+   - One solve: 0.6 - 0.8x the engine's time on the short isothermal pot and the staircase profile, ~3x slower on the isothermal 30-min holds (LSODA is very good at one long stiff segment).
    - The Jacobian in all 84 coordinates: 2.8 - 2.9x faster than the engine's forward differences on the holds, 11x on the profile, 15x on the short pot. With atol 1e-10 and Kvaerno4 (findings 3 - 4) the holds should gain another ~3x.
    - Compile: 1 - 2.4 s per solve, 2.5 - 5.4 s per Jacobian, once per configuration and segment count.
 6. **What is and is not ported.**
