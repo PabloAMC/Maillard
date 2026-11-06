@@ -508,3 +508,11 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 ## 2026-11-05 — "Out of scope" must cite the envelope rule, or say it is a judgement
 - **Pattern:** an extraction agent called Bork 2024 / 2024b "outside the model's scope", and I relayed it. Asked why, the engine's envelope said otherwise for half the data: the phenolic arms are refused by rule (reactants not in any lane), but the single-compound dry controls are engine species that no rule refuses (the trunk's a_w term has no window). They were outside the validated domain, and are W5.2 (crust) data.
 - **Rule:** a scope claim names its basis: the `declare_envelope` rule that refuses it, or "judgement: outside the validated domain because …". Never drop data as "out of scope" without naming the plan step it could serve.
+
+## 2026-11-05 — A "pending" citation must pass every gate that reads citations, not only its own loader
+- **What happened:** PR #79's record let citations to unmerged records through as `pending_records`, and its own
+  loader accepted them. `dossier_coverage_gate` reads every dossier path cited anywhere and failed CI on three
+  dossiers that only existed on PR #76.
+- **Rule:** before citing a record that is not on main, check which gates read that kind of citation (dossier paths:
+  `dossier_coverage_gate`; register ids: the register gates). Either merge the PR that adds the record first, or keep
+  the citation out of gated files until it lands.

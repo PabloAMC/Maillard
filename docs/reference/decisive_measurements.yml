@@ -1,0 +1,630 @@
+# DECISIVE MEASUREMENTS (2026-11-05; owner: a durable record of WHICH measurement would decide each mechanism question
+# the literature on disk cannot, while designed experiments (plan W6) stay last).
+#
+# Hand-kept, like the registers. One entry per open STRUCTURAL question (which rival mechanism holds), not per fitted
+# coordinate: the generated data wishlist (src/data_wishlist.py) already derives "what to measure next" for
+# unidentified coordinates from the fit artifacts; this file is the curated half, rendered as the wishlist's last
+# section. Nothing here is a measurement, a fit or a forecast.
+#
+# Rules for an entry:
+#   - Every blocker cites its record: a CF- / EX- / CR- id (checked against its register) or a repo path (checked to
+#     exist). A record that is not on this branch yet is listed under `pending_records` with where it lives; the
+#     loader then accepts it and reports the mark as stale once the record lands.
+#   - `measurement` is taken from the case / prereg / register entry that names a design, never invented beyond what
+#     the records support. Where no record writes a design, the arm says `design_written: false` and states only what
+#     the record asks for ("design not yet written").
+#   - pH basis tags: cooled (read after cooling), label_25C (the solution as prepared, at room temperature), in_situ
+#     (at reaction temperature, or held there by a pH-stat), not_stated (the record does not say).
+#   - `status`: open (undecided on disk) | provisional (the governing design is a draft awaiting its pre-freeze step;
+#     needs `status_note`) | decided (needs `decided_by`).
+#   - Never cite a private file (the laptop-only article folder); cite the dossier.
+# Checked by src/decisive_measurements.py (tests/unit/test_decisive_measurements.py).
+
+pending_records:
+  docs/reference/cases/M1c_thiol_supply_structure.md: "branch m1c-case (items 1 - 5 FROZEN at bd641ae8), unmerged"
+  docs/reference/cases/M1c_amendment_A1_vauthey2000.md: "branch m1c-case (17710774), unmerged"
+  results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md: "branch m1b-prereg (v3.6 DRAFT, d7cd3ab4), unmerged"
+  results/validation/kinetic_core_m3_strecker_layer_prereg.md: "branch m3-phase1-build (v2.1 DRAFT, e3f22ebc; v2 at 8dda42e5 on m3-strecker-prereg), unmerged"
+
+entries:
+  - id: thiol_supply_structure
+    plan_step: M1c
+    added: "2026-11-05"
+    question: >-
+      Which thiol supply structure holds: is fed TTCA lost through a base-favoured exit, and does Zhang 2025b's missing
+      ~19 mM of each reactant sit in an unmeasured reversible pool, in destroyed material, or in an analytical loss?
+    rivals_from: [docs/reference/cases/M1c_thiol_supply_structure.md]
+    rivals:
+      - "R0: instant supply, the incumbent (B60)"
+      - "C1: M1's reservoir, release free, K(T) banded"
+      - "X (the claim): C1 + the exit (X-cama or X-deg) + reversible P1a, P1b, P2, P4a and irreversible P3, P4b"
+      - "X0: C1 + the exit, no pool"
+      - "R-rel: a base-favoured release, K flat"
+      - "R-cal: X0 + a time- or handling-dependent analytical loss of free Cys and Xyl after the quench"
+      - "R-sink: X0 + material destroyed (a 1 : 1 drain plus a cysteine-only sink)"
+      - "R-K: Kallen-shaped K(pH) + the exit (CF-076's former lead)"
+    why_not_on_disk:
+      - blocker: >-
+          The screen's pots (Cao 2017, Zhai 2021, Zhang 2025b) are seen under the engine, and Cao also fixes K and
+          anchors r_cama_form, so a verdict on them is development grade.
+        cites: [docs/reference/cases/M1c_thiol_supply_structure.md, results/validation/kinetic_core_supply_structure_signature_screen.md, EX-062]
+      - blocker: >-
+          No candidate structure has a TTCA exit that is faster at high pH: the screen's maximal pH 8 / 5.5 loss ratio is
+          1.00 - 1.36 against Zhai 2021's measured 9.60; only diagnostics with a declared, unsourced exit law reach it.
+        cites: [CF-110, EX-062, data/lit/extraction_dossiers/zhai2021_extraction.md]
+      - blocker: >-
+          Zhang 2025b's blank leaves ~19 mM of each reactant in no measured pool, inside no non-Zhang band; its printed
+          ELSD curve is identical for cysteine and xylose and has its zero-signal point at 0.223 mmol/L.
+        cites: [CF-109, data/lit/extraction_dossiers/zhang2025b_extraction.md]
+      - blocker: >-
+          K_app is flat in Cao 2017 but falls -0.29 dex / pH in Zhao 2017b (same laboratory, different pH scales), so the
+          K(pH) rival cannot be judged on either alone.
+        cites: [CF-111, data/lit/extraction_dossiers/cao2017_extraction.md, data/lit/extraction_dossiers/zhao2017b_extraction.md]
+      - blocker: >-
+          No unseen decisive data on disk (P ~0.85 after the 89-dossier screen); the three pre-declared candidates
+          (Belikov 1967, Wlodek 1993, Davidek 2003) and Vauthey 2000 (amendment A1) were read and none met its frozen
+          decisive criterion.
+        cites: [docs/reference/cases/M1c_thiol_supply_structure.md, docs/reference/cases/M1c_amendment_A1_vauthey2000.md, EX-066, data/lit/extraction_dossiers/belikov1967_extraction.md, data/lit/extraction_dossiers/wlodek1993_extraction.md, data/lit/extraction_dossiers/davidek2003_extraction.md, data/lit/extraction_dossiers/vauthey2000_extraction.md]
+      - blocker: >-
+          The whole-model refusals of earlier sink waves are one degenerate fit optimum at instant supply, so they are
+          not evidence for or against any supply structure.
+        cites: [CF-107, EX-061, results/validation/kinetic_core_m1_results_review.md]
+    measurement:
+      source: "case M1c sec. 4.4 (the designed experiment, W6), with CF-076's TTCA 10 vs 100 mM, +-phosphate, +-morpholine design folded into Arm 1"
+      summary: >-
+        One laboratory, three arms (n = 3 independent heatings per cell, sealed vessels with stated fill and headspace,
+        pH read cooled on every sample and in situ where an electrode allows, every assay's LOD / LOQ and spike recovery,
+        quench-to-injection time logged): fed TTCA at held pH; Zhang's 40 + 40 mM pot in a second laboratory with
+        independent assays; K(pH) and K(T) approached from both sides.
+      arms:
+        - name: "Arm 1: the exit's pH law at held pH"
+          design_written: true
+          conditions: >-
+            Purified TTCA (equilibrium epimer mixture, NMR-characterised) 10 mmol/L, +-10 mmol/L [13C5]xylose; pH held by
+            pH-stat or in phosphate at 0.05 and 0.2 M (buffer term extrapolated to zero); NEM-quench control on TTCA
+            standards at 0 / 10 / 30 / 60 min before injection; times 0, 2, 5, 10, 20, 40, 60, 90, 120 min.
+          species: [TTCA (each epimer), CAMA (each isomer), free cysteine (NEM-derivatised at the quench), free xylose (HPAEC-PAD), "[13C5]-TTCA", cystine, H2S (trap), 1-DX / 3-DX, A420, pH]
+          ph_values: "4.5, 5.5, 6.5, 7.5, 8.0"
+          ph_basis: [in_situ, label_25C, cooled]
+          temperatures_C: [100, 120, "90 at pH 4.5 (bridge to Cao 2017)"]
+          o2: "sealed, stated fill and headspace (no N2 / air contrast in this arm)"
+          replicates: "n = 3 independent heatings per cell"
+        - name: "Arm 2: Zhang's pool in a second laboratory"
+          design_written: true
+          conditions: >-
+            Cys + Xyl 40 + 40 mmol/L, 0.2 M phosphate pH 6.5, 5 mL in 15 mL (Zhang's design), with Cao's 0.4 M / 90 C
+            recipe as a bridge and a [13C5]xylose run; split samples by Zhang's own HPLC-ELSD with matrix-matched Cys and
+            Xyl calibrations over 0.2 - 40 mM; the 50-min sample diluted 20x at 120 C and followed 30 min; cold dilution vs
+            4 C storage at 0 / 4 / 24 h; times 0, 1, 2, 5, 10, 20, 30, 50 min.
+          species: [free cysteine, free xylose (HPAEC-PAD), TTCA (epimers resolved) and CAMA by labelled LC-MS/MS, total releasable cysteine, cystine in solution and pellet, "13C NMR at 10 and 50 min"]
+          ph_values: "6.5"
+          ph_basis: [label_25C, cooled, in_situ]
+          temperatures_C: [120, "90 (bridge)"]
+          o2: "N2 and air arms, sealed, stated headspace"
+          replicates: "n = 3 independent heatings per cell"
+        - name: "Arm 3: K(pH) and K(T)"
+          design_written: true
+          conditions: >-
+            Cys + Xyl equilibrated from both sides (from TTCA and from Cys + Xyl) to a plateau (two successive samples
+            agree); at pH >= 6.5 above 60 C K is fitted with the exit in the model or limited to <= 60 C; TTCA ring-N pKa
+            titrated at 25 and 90 C.
+          species: [cysteine, xylose, TTCA, CAMA, pH at temperature]
+          ph_values: "4.5, 5.5, 6.5, 7.5"
+          ph_basis: [in_situ]
+          temperatures_C: [25, 60, 90]
+          o2: "sealed, stated fill and headspace"
+          replicates: "n = 3 independent heatings per cell"
+    decides:
+      - outcome: "Arm 1: CAMA appears as TTCA is lost faster at higher held pH"
+        means: "X-cama (the exit runs through the cysteine Amadori compound)"
+      - outcome: "Arm 1: deoxyosones or browning appear without CAMA"
+        means: "X-deg"
+      - outcome: "Arm 1: free Cys and xylose rise transiently, the xylose recovered"
+        means: "R-rel (a base-favoured release)"
+      - outcome: "Arm 1: an induction at constant pH"
+        means: "a P1-type pool"
+      - outcome: "Arm 2: independent assays (HPAEC, labelled LC-MS/MS) close to ~100 %, with a deficit only in Zhang's ELSD method or one growing with quench-to-injection delay"
+        means: "R-cal (refuted if independent closure fails; confirmed only jointly with the delay trend or a method-specific deficit)"
+      - outcome: "Arm 2: closure < 100 %, closed by NMR or total releasable Cys; the 20x dilution returns Cys + Xyl beyond TTCA's own dissociation; NMR open-chain / xylosylamine / epimer signals of the gap's size"
+        means: "X with reversible members"
+      - outcome: "Arm 2: closure < 100 %, not closed by releasable Cys; adduct or cystine signals"
+        means: "X with irreversible members (R-sink if no pool signal at all)"
+      - outcome: "Arm 3: K flat in pH vs pH-dependent"
+        means: "C1 / X / R-cal (flat K) vs R-K and Zhao 2017b's drift; Arm 3 also fixes P1a's T-law and K(T)"
+    unlocks:
+      - "M1c's verdict beyond development grade; without it the stop rule's 'supply not identifiable on disk' stands and the R0 / C1 supply envelope is carried as uncertainty under H0's relative-only ruling"
+      - "a supply structure for the joint refit, which M2 needs (it must not run at instant supply: CF-107, EX-063)"
+      - "a measured fed-TTCA loss for section 1's k_ttca_deg, with its pH law"
+    existing_data_route: null
+    status: open
+    disagreements:
+      - about: "the scope of the decisive design"
+        cites: [docs/guides/STATUS_AND_PLAN.md, docs/reference/cases/M1c_thiol_supply_structure.md]
+        note: >-
+          The plan's W6 line summarises it as one cysteine + xylose time course (free cysteine, xylose, TTCA and pH,
+          cooled, at two or three pH values); the case's sec. 4.4, which the plan says names the design, has three arms,
+          five held pH values in Arm 1 and in-situ pH where an electrode allows. This record follows the case.
+
+  - id: pentose_split_vs_removal
+    plan_step: M1b(ii)
+    added: "2026-11-05"
+    question: >-
+      In pentose pots, does the 1-DX : 3-DX enolisation split itself move with pH (E2 carried to pentoses), or is 3-DX
+      removed by a base-favoured step after it forms?
+    rivals_from: [docs/reference/cases/M1b_sugar_step_ph_sulfur_lane.md, results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md]
+    rivals:
+      - "R2 (prereg P2): the enolisation split moves with pH, carried to the pentose steps"
+      - "R5 (prereg P4, screen only): a base-favoured 3-DX removal (EX-045, EX-046)"
+    why_not_on_disk:
+      - blocker: >-
+          No in-situ pentose trap across pH exists on disk; the only in-situ trapped split vs pH is hexose (Beck 1988,
+          Nedvidek 1992), one school, n = 1.
+        cites: [docs/reference/cases/M1b_sugar_step_ph_sulfur_lane.md, docs/reference/pathway_atlas/ENGINE_VS_LITERATURE.md, data/lit/extraction_dossiers/beck1988_extraction.md]
+      - blocker: >-
+          Standing 3-DX / 1-DX levels inside one study (Zhai 2021, Hou 2026) fall with pH under both R2 and R5, so they
+          cannot separate them; the tester's power is limited ("not found", not "not feasible").
+        cites: [EX-036, EX-046, EX-053, docs/reference/cases/M1b_sugar_step_ph_sulfur_lane.md]
+      - blocker: >-
+          The engine's standing 3-DX / 1-DX rises with pH where the data fall (wrong sign); a fast base-favoured 3-DX exit
+          passes time and pH jointly, but its MGO stand-in overshoots MGO and its cysteine-trap version fails.
+        cites: [EX-033, EX-046, EX-048]
+      - blocker: >-
+          E2's own hexose evidence is WEAKENED (P 0.55): one school, Wageningen's slopes overlap, Martins' slopes are
+          equal at 120 C.
+        cites: [docs/reference/pathway_atlas/ENGINE_VS_LITERATURE.md]
+      - blocker: >-
+          The M1b prereg carries the split (P2) as a fitted rival and the removal (P4) as screen only, and lists the
+          in-situ pentose trap across pH as the W6 candidate that would separate them.
+        cites: [results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md, EX-065]
+    measurement:
+      source: "DESIGNED_EXPERIMENT_BRIEF_2026-11 Part B (arms B1, B3), which merges protocol experiment E1 of DESIGNED_TIMECOURSE_PROTOCOL_DRAFT"
+      summary: >-
+        Xylose + glycine 50 + 50 mM at 100 C across pH, each pot trapped two ways: o-phenylenediamine added before heating
+        (in situ: a flux) and after cooling (ex situ: a standing level).
+      arms:
+        - name: "B1: the pentose hub ladder, in-situ vs ex-situ OPD"
+          design_written: true
+          conditions: >-
+            D-xylose 50 mM + glycine 50 mM, 0.2 M phosphate, sealed vials one per time point, air headspace, stated fill;
+            OPD in excess before heating (in situ) or after cooling (ex situ); times 15, 45, 120, 240 min.
+          species: [quinoxalines of 1-DX / 3-DX / glyoxal / methylglyoxal (with standards), xylose (HPAEC-PAD), free glycine, the Xyl-Gly Amadori compound, furfural, norfuraneol, pH after cooling]
+          ph_values: "5.5, 6.5, 7.5"
+          ph_basis: [label_25C, cooled]
+          temperatures_C: [100]
+          o2: "air headspace, sealed, stated fill"
+          replicates: "one vial per time point; 3 - 5 replicate vials at the centre point (pH 6.5, both OPD modes)"
+        - name: "B3: the cysteine trap of 3-DX"
+          design_written: true
+          conditions: "as B1 at pH 6.5, + cysteine 5 or 25 mM; ex situ at 3 times each, in situ at 25 mM at 3 times"
+          species: [as B1, free cysteine, TTCA, the Cys Amadori compound]
+          ph_values: "6.5"
+          ph_basis: [label_25C, cooled]
+          temperatures_C: [100]
+          o2: "air headspace, sealed, stated fill"
+          replicates: "one vial per time point"
+    decides:
+      - outcome: "the in-situ trapped 1-DX : 3-DX share moves with pH (Beck's hexose analogue: ~0.44 dec / pH)"
+        means: "R2: the split moves"
+      - outcome: "the in-situ trapped share is flat in pH while the ex-situ standing 3-DX falls"
+        means: "R5: the removal acts after the trap"
+      - outcome: "in-situ and ex-situ levels differ at one pH"
+        means: "published standing deoxyosone levels carry an OPD trapping artefact (the brief's method test)"
+    unlocks:
+      - "M1b part (ii)'s chosen rival for the joint refit (the split or the removal moves M2's decisive pot-D share), instead of 'deferred'"
+      - "a correct sign for the engine's standing 3-DX / 1-DX ratio vs pH (EX-033)"
+    existing_data_route: "W6: ask whether any group holds in-situ trapped deoxypentosones across pH (STATUS_AND_PLAN W6; ENGINE_VS_LITERATURE sec. 3.1, E2); none is on disk"
+    status: open
+    disagreements:
+      - about: "how the pH is set, and whether cysteine is crossed with pH"
+        cites: [docs/guides/DESIGNED_TIMECOURSE_PROTOCOL_DRAFT.md, docs/guides/DESIGNED_EXPERIMENT_BRIEF_2026-11.md]
+        note: >-
+          Protocol E1 holds pH 5.5 / 6.5 / 7.5 by pH-stat (in situ), crosses phosphate 0 / 0.2 M and cysteine 0 / 5 / 25 mM,
+          adds a 120 C corner and samples 9 times to 240 min; the brief's B1 sets the pH as a 0.2 M phosphate label with the
+          cooled pH read in every vial, samples 4 times, and traps in situ with cysteine at pH 6.5 only (B3). For the
+          cysteine (sulfur-lane) pots the split-vs-removal question across pH needs E1's crossing; the brief does not carry it.
+
+  - id: norfuraneol_decay_ph_law
+    plan_step: "E16 (M1b part (ii), rival P1)"
+    added: "2026-11-05"
+    question: >-
+      How does norfuraneol's own decay depend on pH, and on O2, at process temperature: pH-flat, hydroxide-only (B61), or a
+      partial order?
+    rivals_from: [results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md, docs/reference/cases/M1b_sugar_step_ph_sulfur_lane.md]
+    rivals:
+      - "(a) pH-flat at Mikami 2017's pH 8 value"
+      - "(b) hydroxide only (B61, NF_HYDROXIDE_DECAY, n = 1)"
+      - "(c) a partial order, or flat + hydroxide (0 < n < 1)"
+      - "P1': metal / O2-dependent autoxidation of the enolate (CF-117)"
+    why_not_on_disk:
+      - blocker: >-
+          Blocker 1, O2: Mikami's pH 8 loss is the aerobic, metal-dependent channel (Nakamura 2020 Fig. 7: suppressed by
+          DTPA and by degassing); Bork 2022 / 2023's ampoule headspace is unstated, so the two points may measure different
+          channels and the "pH" contrast may be an O2 contrast.
+        cites: [CF-117, results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md, data/lit/extraction_dossiers/nakamura2020_extraction.md, data/lit/extraction_dossiers/mikami2017_extraction.md, data/lit/extraction_dossiers/bork2022_extraction.md]
+      - blocker: >-
+          Blocker 2, no temperature series for norfuraneol alone: the 100 C (Mikami) to 130 C (Bork) gap is bridged only by
+          the carbohydrate class barrier band (30 - 237 kJ/mol), which by itself spans n = 0.37 - 1.07.
+        cites: [results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md, CF-112, EX-065]
+      - blocker: >-
+          Blocker 3, unbuffered pH drift: Bork's pots start at pH 5, are never re-measured, and norfuraneol breakdown makes
+          acid; no in-situ pH at 130 C is printed.
+        cites: [results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md, data/lit/extraction_dossiers/bork2022_extraction.md]
+      - blocker: >-
+          Blocker 4, self-reaction at 20 mM: MGO and glycolaldehyde, norfuraneol's own fragments, are strong sinks at pH 5,
+          so part of Bork's k may be second order; Bork ran one concentration, so this cannot be checked on disk.
+        cites: [results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md, data/lit/extraction_dossiers/bork2023_extraction.md, data/lit/extraction_dossiers/kanzler2026_extraction.md]
+      - blocker: >-
+          Bork's two papers differ x1.4 in k within one laboratory, and Bork 2024 / 2024b (dry, 220 C) carry no
+          norfuraneol at all.
+        cites: [CF-113, data/lit/extraction_dossiers/bork2024_extraction.md, data/lit/extraction_dossiers/bork2024b_extraction.md]
+    measurement:
+      source: "M1b prereg v3.6 sec. 4.2 ('a fed-NF temperature series at one pH, or fed NF at two pH in one laboratory with O2 controlled'); EX-065 follow-up; CF-112's and CF-117's deciders"
+      summary: >-
+        Norfuraneol fed alone in one laboratory: a temperature series at one pH, and two pH values, with O2 controlled
+        (argon vs air, +-DTPA) and the pH recorded at temperature. The records fix no concentrations, temperatures or
+        replicate counts.
+      arms:
+        - name: "fed norfuraneol, temperature series at one pH"
+          design_written: true
+          conditions: "norfuraneol alone, one pH, O2 controlled; the records fix neither the pH nor the temperatures (blocker 2 is the 100 - 130 C gap)"
+          species: [norfuraneol, pH]
+          ph_values: "one value, not fixed by the records"
+          ph_basis: [in_situ]
+          temperatures_C: ["at least two, values not stated in the records"]
+          o2: "controlled (argon vs air; +-DTPA per CF-117)"
+          replicates: "not stated in the records"
+        - name: "fed norfuraneol at two pH values"
+          design_written: true
+          conditions: "norfuraneol alone at two pH values in one laboratory, pH and O2 recorded (CF-112); at pH 8 with O2 and metals controlled, argon vs air, +-DTPA, quantified (CF-117)"
+          species: [norfuraneol, pH]
+          ph_values: "two values, one of them 8 (CF-117)"
+          ph_basis: [in_situ]
+          temperatures_C: ["one, not stated in the records"]
+          o2: "argon vs air, +-DTPA"
+          replicates: "not stated in the records"
+    decides:
+      - outcome: "the loss at fixed temperature and O2 does not move with pH"
+        means: "(a) pH-flat (already projects >= 13x above Bork at any positive barrier, so unlikely)"
+      - outcome: "the loss rises one decade per pH unit at fixed temperature and O2"
+        means: "(b) hydroxide only (B61)"
+      - outcome: "a slope between 0 and 1 dec / pH"
+        means: "(c) a partial order"
+      - outcome: "the loss falls under argon or with DTPA"
+        means: "P1': the O2 / metal channel, so B61's pH shape holds only at its anchor's O2 and metal level"
+      - outcome: "the temperature series' barrier"
+        means: "replaces the class band that today spans every law except pH-flat"
+    unlocks:
+      - "rival P1 of the joint refit (declared deferred) and its effect on Cerny pot D's fed-NF share"
+      - "the shipped pH-free r_nf_decay, 3.1 - 4.3x too slow at pH 5 / 130 C (CF-112)"
+      - "B61's NF_HYDROXIDE_DECAY, a switch that is off in the shipped engine"
+    existing_data_route: null
+    status: open
+    disagreements:
+      - about: "whether the earlier fed-NF arm would decide E16"
+        cites: [docs/guides/DESIGNED_TIMECOURSE_PROTOCOL_DRAFT.md, results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md]
+        note: >-
+          The protocol draft's fed arm B (norfuraneol 1.75 mM, 0.2 M phosphate pH 6 and 7, 120 C, 0 / 20 / 60 min, air
+          headspace) is one temperature with O2 uncontrolled, so by the prereg's blockers 1 and 2 it would not decide E16;
+          the brief leaves norfuraneol decay out. No record's design varies the norfuraneol concentration, which blocker 4
+          (self-reaction at 20 mM) would need.
+
+  - id: strecker_routes
+    plan_step: M3
+    added: "2026-11-05"
+    question: >-
+      Does phenylacetaldehyde form from the Phe Amadori product by an oxidative route B beside the dicarbonyl route A
+      (R1), or only by route A on osones O2 makes from the ARP (R2); and does one ARP-Phe decay serve both the fed and the
+      glucose pots (R1 vs R3)?
+    rivals_from: [docs/reference/cases/M3_strecker_aldehydes.md, results/validation/kinetic_core_m3_strecker_layer_prereg.md]
+    rivals:
+      - "R0: the current engine (refuses: no species)"
+      - "R1 (the claim): routes A + B, one shared k_d"
+      - "R2: route A only, with O2-made osones the forcing misses"
+      - "R3: routes A + B with a pot-specific k_d (EX-049's optima)"
+      - "R4: R1 with k_d moving with pH, buffer and order"
+    why_not_on_disk:
+      - blocker: >-
+          R1 vs R2 rests on one laboratory (DFA); the trapped-osone Figs. 2 - 3 of Hofmann 2000b are unkeyed and run at
+          85 C, 0.5 M, with an air + Cu arm rather than plain air.
+        cites: [docs/reference/cases/M3_strecker_aldehydes.md, data/lit/extraction_dossiers/hofmann2000b_extraction.md]
+      - blocker: >-
+          The PA / PAA fingerprint test (case D4) needs 1-DG fed with Phe, which has never been done, so 1-DG's
+          fingerprint is unknown.
+        cites: [docs/reference/cases/M3_strecker_aldehydes.md]
+      - blocker: >-
+          The glucose pot's ARP-Phe fall needs k_d >= 0.0126 - 0.0144 /min while both fed designs read slower (~0.006 -
+          0.010); the margin does not survive the analyser CV; Deng 2021's phosphate extrapolation reaches EX-049's
+          in-pot 0.058 - 0.069 /min only at Deng's pH 7.5 or through Martins' leg, not at Hofmann's pH 7.0.
+        cites: [CF-121, CF-120, EX-049, EX-051]
+      - blocker: >-
+          O2 also raises a dicarbonyl-route aldehyde (Voigt 2010), and Wietstock 2016 documents a third O2 / metal route
+          (free amino acid + O2 + trace metal) that M3's air + Cu arm may carry.
+        cites: [EX-067, data/lit/extraction_dossiers/wietstock2016_extraction.md]
+      - blocker: >-
+          At full dimension the v2 power check could not resolve a U3 density (every contrast power 0 under 'unresolved
+          reads as a tie'); amendment v2.1 adds U3a / U3b and an SMC estimator before its own power check.
+        cites: [results/validation/kinetic_core_m3_strecker_layer_prereg.md]
+    measurement:
+      source: "M3 prereg sec. 19 ('W6 candidates', coordinator: not requested now) and sec. 17; case M3 secs. 4 (D3, D4)"
+      summary: >-
+        Two fed pots, neither requested yet: ARP-Phe with the ARP itself measured under argon and under air with the
+        headspace stated; and 1-DG fed with Phe, whose design is not yet written.
+      arms:
+        - name: "fed ARP-Phe, the ARP measured per atmosphere"
+          design_written: true
+          conditions: >-
+            Fed ARP-Phe at the claim's conditions (100 C, label pH 7.0, 0.5 M phosphate: M3 prereg sec. 1.1, the class of
+            Hofmann 2000b Table 2's closed-vial pot); the ARP measured over time, headspace stated.
+          species: [ARP-Phe, phenylacetaldehyde, phenylacetic acid]
+          ph_values: "7.0"
+          ph_basis: [label_25C]
+          temperatures_C: [100]
+          o2: "argon vs air, headspace stated"
+          replicates: "not stated in the records"
+        - name: "fed 1-DG + Phe"
+          design_written: false
+          requirement: >-
+            design not yet written: the records name only 'a fed 1-DG + Phe pot' (prereg sec. 19); the comparison it
+            serves (case D4) is against Hofmann 2000 Table 4's fed donors (0.1 M donor + Phe, pH 7, 98 C, 60 min, argon /
+            air).
+    decides:
+      - outcome: "fed 1-DG's PA / PAA fingerprint differs from glucosone's"
+        means: "the ARP's atmosphere-free fingerprint (1.8 - 2.0 while its trapped donor switches 1-DG -> glucosone) is one route's: R1 over R2"
+      - outcome: "fed 1-DG's fingerprint equals glucosone's"
+        means: "D4 cannot separate R1 from R2"
+      - outcome: "the fed ARP's measured decay matches the glucose pot's in-pot floor (>= 0.0126 /min)"
+        means: "one constant serves both pots (R1)"
+      - outcome: "the fed decay stays at the fed designs' ~0.006 - 0.010 /min under air and argon"
+        means: "the decay does not transfer (R3), or is O2- / vessel-limited (EX-051's reading)"
+    unlocks:
+      - "a phase-1 Strecker layer for DFA's design class, relative within-laboratory only (no engine change)"
+      - "phase 2, which feeds the layer from the network and moves shipped pyrazines (owner sign-off)"
+      - "outcome row 4 ('dicarbonyl only'), for which the prereg names these pots"
+    existing_data_route: "W6 lists DFA's raw Table 4 and Quest's recovery (CF-073) as existing-data requests for M3; no record says either would separate R1 from R2"
+    status: provisional
+    status_note: >-
+      The M3 prereg is a v2.1 DRAFT awaiting its pre-freeze power check, and EX-067's freeze checklist (Wietstock 2016's
+      third O2 route) is open; the decisive pots may change with the freeze.
+
+  - id: glucose_mft_carbon_origin
+    plan_step: M4
+    added: "2026-11-05"
+    question: >-
+      Which glucose carbon does MFT lose (C-6, keeping C-1 as its methyl, as R1 and R2 both require; or C-1 through a
+      3-DG-side C5), and does glucose MFT pass through norfuraneol (R1) or bypass it (R2)?
+    rivals_from: [docs/reference/cases/M4_glucose_mft_protein_amine.md]
+    rivals:
+      - "R0: the current engine (~0 MFT, refused)"
+      - "R1 (the claim): Glc + Cys -> Cys-hexose Amadori -> 1-DG + Cys -> 1-DPO + C1 (C-6 lost) -> the pentose steps"
+      - "R2: the same supply entering below norfuraneol (1-DG + amino acid -> a 1,4-dideoxy C6 -> a 1,4-dideoxy C5 -> MFT)"
+      - "R3: C2 + C3 recombination (rejected by Du 2023 / Zhao 2019b's measured label share)"
+      - "R4: the hexose -> C5 entry alone on the amine-free 1-DG supply"
+      - "unlisted: a route through a C-1-lost C5 (no source on disk proposes it; the positional arm would expose it)"
+    why_not_on_disk:
+      - blocker: >-
+          No positional label on MFT itself: Tressl 1994's [1-13C]- / [6-13C]-glucose + Cys pots (pH 5, 160 C) report
+          neither MFT nor norfuraneol; its only documented hexose C5 loses C-1 via 3-DG and has no methyl.
+        cites: [data/lit/extraction_dossiers/tressl1994_extraction.md, docs/reference/cases/M4_glucose_mft_protein_amine.md]
+      - blocker: >-
+          Tressl & Rewicki 1999 (same laboratory) says MFT's glucose pathway 'was established' with no datum, and its
+          Fig. 14 (no conditions, no citation) has FFT and furfural from [1-13C]-glucose 50 % singly labelled, against
+          Tressl 1994's unlabelled furfuryl skeleton; unresolved, so neither share is used.
+        cites: [data/lit/extraction_dossiers/tressl1999_extraction.md, data/lit/extraction_dossiers/tressl1994_extraction.md]
+      - blocker: >-
+          No fed 1-DG + H2S and no fed Cys-hexose Amadori compound -> MFT exist on disk; R1 vs R2 has one decisive unit
+          (Hofmann 1998 Table 5's glucose NF / MFT, one laboratory, one temperature), which decides only if the power
+          check shows >= 1.16 dex between the rivals under omega.
+        cites: [docs/reference/cases/M4_glucose_mft_protein_amine.md]
+    measurement:
+      source: "case M4 sec. 4.4 (the designed experiment, W6), as refreshed 2026-11-05 on branch m4-case-refresh (8660c005, not frozen)"
+      summary: >-
+        One laboratory, three arms (n = 3 independent heatings per cell, sealed with stated fill and headspace, pH stated
+        cooled on every sample and in situ where possible, LOD / LOQ and recovery, SIDA for MFT, FFT and NF): Hofmann's
+        glucose + Cys pot with positional glucose labels; fed 1-DG; fed Cys-hexose Amadori compound.
+      arms:
+        - name: "Arm 1: which carbon"
+          design_written: true
+          conditions: "Hofmann's design: Cys 33 + glucose 100 mM, 0.5 M phosphate, 20 min; glucose as [1-13C], [6-13C], 1:1 [13C6] / [12C6] and unlabelled"
+          species: [MFT, norfuraneol, FFT, furfural, MP, each isotopologue-resolved]
+          ph_values: "3, 5, 7"
+          ph_basis: [label_25C, cooled, in_situ]
+          temperatures_C: [145]
+          o2: "sealed, stated fill and headspace"
+          replicates: "n = 3 independent heatings per cell"
+        - name: "Arm 2: fed 1-DG"
+          design_written: true
+          conditions: "synthetic 1-DG (Glomb 2000 route) 2 mM + Na2S or Cys 6 mM, +-glycine 33 mM, 0.5 M phosphate, 2 - 20 min"
+          species: [MFT, norfuraneol, DDP and 1-DPO (OPD quinoxalines), acetic acid, formic acid, residual 1-DG]
+          ph_values: "5, 7"
+          ph_basis: [label_25C, cooled, in_situ]
+          temperatures_C: [145]
+          o2: "N2 and air arms, stated headspace"
+          replicates: "n = 3 independent heatings per cell"
+        - name: "Arm 3: fed Cys-hexose Amadori compound"
+          design_written: true
+          conditions: "synthetic D-fructose-L-cysteine (de Roos's preparation) 10 mM, 0.5 M phosphate, 0 - 60 min"
+          species: [the Amadori compound, free cysteine, 1-DG and 3-DG (OPD), MFT, norfuraneol]
+          ph_values: "3, 5, 7"
+          ph_basis: [label_25C, cooled, in_situ]
+          temperatures_C: [100, 145]
+          o2: "sealed, stated fill and headspace"
+          replicates: "n = 3 independent heatings per cell"
+    decides:
+      - outcome: "Arm 1: MFT's methyl from C-1 with C-6 lost"
+        means: "R1 or R2 (both keep C-1); C-1 lost means an unlisted 3-DG-side route; a mixed pattern means R3"
+      - outcome: "Arm 1: norfuraneol's label pattern equals MFT's, or is independent of it"
+        means: "R1 (through norfuraneol) or R2 (bypass); also D1 and D2 in a second laboratory"
+      - outcome: "Arm 2: MFT forms without the amino acid, through 1-DPO and norfuraneol"
+        means: "R1; MFT needs the amino acid with a 1,4-dideoxy quinoxaline and no norfuraneol means R2; amine-free 1-DG only means R4"
+      - outcome: "Arm 3: the Amadori compound's decay, Cys return and 1-DG / 3-DG over pH"
+        means: "part G's supply constants and the mechanism of the glucose MFT pH maximum (D2)"
+    unlocks:
+      - "M4 part G beyond development grade ('R1 or R2, not R0, R3 or R4')"
+      - "the route behind section 2's hexose rows ('HEXOSE ENTRY UNIDENTIFIED'); their absolute levels would still fall under H0"
+    existing_data_route: "W6: the BTBU / CAAS MFT yields per glucose consumed would give D4 a second laboratory (case M4, open questions for the build, item 8); no record says they would settle which carbon is lost"
+    status: open
+    disagreements:
+      - about: "the positional evidence on disk"
+        cites: [data/lit/extraction_dossiers/tressl1994_extraction.md, data/lit/extraction_dossiers/tressl1999_extraction.md, docs/guides/STATUS_AND_PLAN.md]
+        note: >-
+          Tressl 1994 (C-1 lost, no equilibration, for the furfuryl skeleton) and Tressl & Rewicki 1999 Fig. 14 (C-1 / C-6
+          equilibrated, 50 % labelled) disagree within one laboratory. The plan's M4 row and the case on main say no
+          positional glucose label exists on disk; the refreshed case counts Tressl 1994 as one, but not on MFT. Neither
+          changes the decisive design (Arm 1 is Tressl's design with MFT and norfuraneol measured).
+
+  - id: thiol_absolute_second_lab
+    plan_step: "H0-lift (W1.2)"
+    added: "2026-11-05"
+    question: >-
+      Do the thiol lane's absolute MFT / FFT levels transfer to a laboratory the model has never seen, i.e. does
+      tau_ABS fall to 0.8 dex or below once new laboratories' absolute rows are scored?
+    rivals_from: [results/validation/kinetic_core_between_lab_tau_h0_prereg.md]
+    rivals:
+      - "D2 branch (i), shipped: tau_ABS > 0.8 dex, relative within-laboratory predictions only, absolute levels refused"
+      - "D2 branch (ii): tau_ABS <= 0.8 with U > 0.8, absolute predictions with tau-widened intervals, 'provisional; tau biased low'"
+      - "D2 branch (iii): U <= 0.8, absolute predictions with tau-widened intervals, provisional"
+    why_not_on_disk:
+      - blocker: >-
+          The thiol lane's absolute evidence comes from one laboratory (DFA Garching): tau_ABS(all) 0.964 dex with
+          U >= 1.60 (the grid top), branch (i).
+        cites: [EX-059, results/validation/kinetic_core_thiol_lolo_nested_tau.md, src/kinetic_core/thiol_relative_only.py]
+      - blocker: >-
+          The forward-citation sweep's two finds did not qualify: Vauthey 2000 (Cys + ribose MFT nd, FFT tr, recovery never
+          measured) and Lopez 2019 (a mushroom-protein matrix, per kg mushroom, no MFT, no replicate noise).
+        cites: [data/lit/extraction_dossiers/vauthey2000_extraction.md, docs/reference/cases/M1c_amendment_A1_vauthey2000.md, CF-125, data/lit/extraction_dossiers/lopez2019_extraction.md]
+      - blocker: >-
+          The P1 TEST tables keyed 2026-11-01 (three new laboratories) carry no ABS-class thiol-lane observable.
+        cites: [results/validation/kinetic_core_between_lab_tau_h0_prereg.md]
+    measurement:
+      source: "H0 prereg sec. 9 (the upgrade condition H0'); plan W1.2"
+      summary: >-
+        Absolute MFT / FFT from new laboratories, predicted by the frozen structure with no refit and scored under H0's
+        rule unchanged; the pots themselves are not designed by any record.
+      arms:
+        - name: "H0' re-score"
+          design_written: false
+          requirement: >-
+            design not yet written (any pot the engine can simulate): ABS-class thiol-lane rows (absolute MFT / FFT) from
+            new laboratories, their split hash frozen first, predicted from s042_r3en_fixed with no refit, and scored with
+            H0's tau_ABS(all), omega(all) and tau_FIG(all) unchanged. With two laboratories the coverage SE is ~0.21 and
+            the sign-flip test's minimum p is 1/4, so H0' is weak.
+    decides:
+      - outcome: "H0' leaves tau_ABS at or below 0.8 dex"
+        means: "branch (ii) or (iii): absolute thiol levels ship for a new laboratory with tau-widened intervals (owner sign-off: shipped outputs move)"
+      - outcome: "tau_ABS stays above 0.8 dex"
+        means: "branch (i) stands: relative within-laboratory predictions only"
+    unlocks:
+      - "absolute thiol levels for a new laboratory: the panel rows section 2 lists as refused for their absolute level (H0 / EX-059)"
+    existing_data_route: "W6 author replies and the pending WUR blind-test samples (plan W1.2; the engine's refusal text in thiol_relative_only)"
+    status: open
+    disagreements:
+      - about: "how many new laboratories lift the refusal"
+        cites: [results/validation/kinetic_core_between_lab_tau_h0_prereg.md, src/kinetic_core/thiol_relative_only.py, docs/guides/STATUS_AND_PLAN.md]
+        note: >-
+          H0's prereg triggers H0' on the first batch that keys >= 2 NEW laboratories with ABS-class rows; the plan's
+          W1.2 row, the engine's refusal text and the wishlist's section 6 say 'a second independent laboratory'. The
+          pre-registered condition is the prereg's; read literally, the one-laboratory wording would trigger H0' a
+          laboratory early.
+
+  - id: methylglyoxal_self_loss
+    plan_step: "M4 (R3's MGO loss band); trunk k_mgo_mel"
+    added: "2026-11-05"
+    question: >-
+      What are the order and the barrier of methylglyoxal's loss, alone and with an amino acid, at the trunk's dilute
+      concentrations?
+    rivals_from: [CF-122, docs/reference/cases/M4_glucose_mft_protein_amine.md]
+    rivals:
+      - "the trunk's k_mgo_mel: first order, pH-free, Ea 20 kJ/mol (B1 fit, at the FITTED_EA_BOUNDS floor; 95 % CI -42 to 82)"
+      - "Kanzler 2026's measured law: MGO alone second order (k2 ~1.8 - 1.9e-4 /mM/min, 'suggested, not identified'), amino acids adding [Ala]^0.75 - 0.84, apparent Ea 95 - 121 kJ/mol in the amino-acid pots"
+      - "the M4 case's band: Ea 95 - 121 kJ/mol, level at 100 C pinned to B60, order 1 (order ~2 a sensitivity)"
+    why_not_on_disk:
+      - blocker: >-
+          MGO alone has no temperature series: Kanzler 2026's 60 - 140 C series is MGO + amino acid, MGO alone is at
+          100 C (two time points) and Bork 2022 at 130 C, so its barrier exists only as a cross-paper estimate.
+        cites: [CF-122, data/lit/extraction_dossiers/kanzler2026_extraction.md, data/lit/extraction_dossiers/bork2022_extraction.md]
+      - blocker: >-
+          Every source is one laboratory lineage (TU Berlin: Kanzler / Rohn, Kroh, Bork); Pfeifer 2013 (MGO alone,
+          130 C) is the same lineage, not a second laboratory.
+        cites: [data/lit/extraction_dossiers/pfeifer2013_extraction.md, docs/reference/cases/M4_glucose_mft_protein_amine.md]
+      - blocker: >-
+          Within that laboratory Kanzler 2021's nominally identical MGO-alone pot loses MGO x3.2 faster (k2 5.9e-4 vs
+          1.85e-4 /mM/min, 0.5 dex); with its point the MGO-alone barrier against Bork becomes 47 - 66 kJ/mol, not
+          ~95 - 113.
+        cites: [data/lit/extraction_dossiers/kanzler2021_extraction.md]
+      - blocker: >-
+          Every pot is 100 mM MGO, pH 5 unbuffered, drift and O2 unstated, no come-up correction; the trunk's pots are
+          ~1000x more dilute, where a second-order channel would not dominate.
+        cites: [CF-122]
+    measurement:
+      source: "CF-122's decider"
+      summary: >-
+        MGO loss at <= 1 mM, with and without an amino acid, at three temperatures with the pH held.
+      arms:
+        - name: "dilute MGO loss, +-amino acid"
+          design_written: true
+          conditions: "MGO <= 1 mM, with and without an amino acid; the records fix neither the amino acid nor its level"
+          species: [methylglyoxal]
+          ph_values: "held, value not stated"
+          ph_basis: [not_stated]
+          temperatures_C: ["three, values not stated"]
+          o2: "not stated in the records"
+          replicates: "not stated in the records"
+    decides:
+      - outcome: "first vs second order in MGO at <= 1 mM"
+        means: "whether k_mgo_mel's first-order form holds at the trunk's dilution"
+      - outcome: "the barrier, alone and with the amino acid"
+        means: "against B1's 20 kJ/mol floor, Kanzler's 95 - 121 (amino-acid pots) and 47 - 113 kJ/mol (MGO alone, cross-paper)"
+      - outcome: "the excess over MGO alone vs amine level"
+        means: "whether the [amine]^0.75 - 0.84 catalysis transfers to dilute pots (M4 part A)"
+    unlocks:
+      - "k_mgo_mel's barrier (B1's 95 % CI spans zero) and M4's MGO loss band (R3 is the rival this law moves most; D4's x13 - 33 C3-pool sensitivity at 145 C)"
+    existing_data_route: null
+    status: open
+    disagreements:
+      - about: "whether a second laboratory is part of the decisive design"
+        cites: [CF-122, data/lit/extraction_dossiers/kanzler2021_extraction.md, data/lit/extraction_dossiers/pfeifer2013_extraction.md]
+        note: >-
+          CF-122's decider (written before Kanzler 2021 was read) asks for three temperatures but no second laboratory;
+          the M4 sweep sought one (Pfeifer 2013, which proved the same lineage), and Kanzler 2021 shows a 0.5 dex
+          within-laboratory spread in the MGO-alone k2. PR #76 notes that CF-122 will be updated after PR #75 merges.
+
+  - id: pyrazine_ring_aminoketone
+    plan_step: M6
+    added: "2026-11-05"
+    question: >-
+      Does the pyrazine ring form through free aminoketone, so that a finite condensation and a free-aminoketone pyrrole
+      sink set the yield (R1), or bypass it through a dicarbonyl - amino-acid imine (R3)?
+    rivals_from: [docs/reference/cases/M6_pyrazines.md]
+    rivals:
+      - "R1 (the claim): + the adduct sink + a finite k_cond from a measured class + aminoacetone + MGO -> pyrrole competing for the aminoketone"
+      - "R3: the ring does not pass through free aminoketone; the pyrrole is a separate MGO-excess product"
+    why_not_on_disk:
+      - blocker: >-
+          No aminoketone has ever been measured in a pot; Zhou 2024 traps GO / MGO with OPD (figure only) and measures no
+          aminoacetone.
+        cites: [docs/reference/cases/M6_pyrazines.md, data/lit/extraction_dossiers/zhou2024_extraction.md]
+      - blocker: >-
+          The only measured aminoketone condensation is an analogue (5-aminolevulinic acid, Elfsson 1999, 50 C), and
+          Zhou 2024's lag-free onset needs a constant ~5e4x that analogue, so the onset alone cannot tell a wrong constant
+          from a bypassed intermediate.
+        cites: [docs/reference/cases/M6_pyrazines.md, data/lit/extraction_dossiers/elfsson1999_extraction.md]
+      - blocker: >-
+          The other comparisons are cross-design, there is no dilution series, and the pyrrole sink rests on one laboratory
+          at ~0.85 M.
+        cites: [docs/reference/cases/M6_pyrazines.md]
+    measurement:
+      source: "case M6 sec. 4 ('needs an aminoketone measured in a pot') and its open questions for the build, item 7"
+      summary: "An aminoketone measured in a pot; design not yet written."
+      arms:
+        - name: "aminoketone in a pot"
+          design_written: false
+          requirement: "design not yet written: the case asks only for an aminoketone measured in a pot"
+    decides:
+      - outcome: "a free aminoketone pool present while pyrazines form"
+        means: "R1's route (its size then bounds k_cond and the pyrrole competition)"
+      - outcome: "no free aminoketone while pyrazines form"
+        means: "R3: the ring bypasses free aminoketone"
+    unlocks:
+      - "M6's sink structures (a finite k_cond and the free-aminoketone pyrrole sink), today a condensation 'declared fast'"
+    existing_data_route: "W6: 'any aminoketone measurement' from a group that holds one (case M6, open questions item 7); Zhou 2024's supplementary ion data are requested for EX-052's correction, not for this question"
+    status: open
