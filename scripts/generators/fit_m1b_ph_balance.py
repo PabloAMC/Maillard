@@ -1957,7 +1957,10 @@ def confirm_refusals(rival: str) -> List[str]:
     elif not (fal.get("verdict", {}).get(rival, {}).get("falsified_on_measured")):
         problems.append(f"{rival} is not a would-be kill in the falsification record: no confirmation fit")
     if confirm_path(rival).exists():
-        problems.append(f"{rival}'s confirmation fit has run (once): its record stands")
+        prev = json.loads(confirm_path(rival).read_text(encoding="utf-8"))
+        segments = 1 + len(prev.get("earlier_segments", []))
+        if int(prev.get("status", 0)) > 0 or segments >= M1.MAX_SEGMENTS:
+            problems.append(f"{rival}'s confirmation fit has run (once; {segments} segment(s)): its record stands")
     return problems
 
 
@@ -1974,6 +1977,13 @@ def run_confirm(rival: str, budget: int = M1.BUDGET) -> Dict[str, Any]:
     br = tuple(read_record("checks")["davidek_breakpoints_in_situ"])
     obj = ConfirmObjective(rival, numerics, fit_side, br)
     theta0 = obj.start0()
+    # M1's optimiser settings (sec. 3.8): a status-0 segment gets ONE continuation from its endpoint
+    earlier: List[Dict[str, Any]] = []
+    if confirm_path(rival).exists():
+        prev = json.loads(confirm_path(rival).read_text(encoding="utf-8"))
+        earlier = list(prev.get("earlier_segments", [])) + [{k: prev[k] for k in (
+            "status", "cost", "evaluations", "theta", "fit_failed_pot_runs", "seconds", "start_theta") if k in prev}]
+        theta0 = np.clip(np.array([prev["theta"][k] for k in obj.keys]), obj.lower, obj.upper)
     del M1.FAILURES[:]
     fit_ = fitting.fit(obj.problem(), theta0, budget=budget)
     fit_failures = list(M1.FAILURES)
@@ -1992,12 +2002,14 @@ def run_confirm(rival: str, budget: int = M1.BUDGET) -> Dict[str, Any]:
     pinned_rise = float(pinned.f["C-Zhou-ARP"][0, -1] - pinned.f["C-Zhou-ARP"][0, 0])
     reread = a1_falsified(ens, a1_measured(), pinned_rise) if not pot_failures else None
     converged = int(fit_.status) > 0
-    usable = converged and not fit_failures and not pot_failures
+    failed_all = len(fit_failures) + sum(int(s.get("fit_failed_pot_runs", 0)) for s in earlier)
+    usable = converged and failed_all == 0 and not pot_failures
     rec = {"artifact": confirm_path(rival).stem, "rival": rival, "prereg": data_paths.rel(PREREG),
-           "start": 0, "start_theta": dict(zip(obj.keys, map(float, theta0))),
+           "start": 0, "segment": 1 + len(earlier), "earlier_segments": earlier,
+           "start_theta": dict(zip(obj.keys, map(float, theta0))),
            "status": int(fit_.status), "converged": converged, "cost": float(fit_.cost),
            "evaluations": int(fit_.evaluations), "theta": dict(zip(obj.keys, map(float, theta))),
-           "rival_values_at_fit": values, "fit_failed_pot_runs": len(fit_failures),
+           "rival_values_at_fit": values, "fit_failed_pot_runs": len(fit_failures), "fit_failed_pot_runs_all_segments": failed_all,
            "control_pot_failed_runs": len(pot_failures), "failures_sample": (fit_failures + pot_failures)[:20],
            "predictions_at_fit": {u: a[0].tolist() for u, a in ens.f.items()},
            "solver_fallbacks": ens.fallbacks, "reread": reread,

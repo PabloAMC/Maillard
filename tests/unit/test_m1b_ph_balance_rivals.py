@@ -304,7 +304,11 @@ def test_the_confirmation_fit_refuses_a_non_kill_and_a_second_run(G, monkeypatch
     monkeypatch.setattr(G, "confirm_path", lambda rival: tmp_path / f"confirm_{rival}.json")
     assert any("not a would-be kill" in p for p in G.confirm_refusals("B1"))
     assert G.confirm_refusals("B3") == []
-    (tmp_path / "confirm_B3.json").write_text("{}")
+    (tmp_path / "confirm_B3.json").write_text('{"status": 1}')
+    assert any("has run" in p for p in G.confirm_refusals("B3"))
+    (tmp_path / "confirm_B3.json").write_text('{"status": 0}')          # M1's one continuation of a status-0 start
+    assert G.confirm_refusals("B3") == []
+    (tmp_path / "confirm_B3.json").write_text('{"status": 0, "earlier_segments": [{"status": 0}]}')
     assert any("has run" in p for p in G.confirm_refusals("B3"))
 
 
