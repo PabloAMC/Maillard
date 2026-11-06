@@ -1,12 +1,33 @@
 # Case M5: buffer, fat and water activity
 
-**READY TO FREEZE (items 1 - 5), not frozen** (2026-11-06). All three parts are **development grade on disk**: every
-decisive datum on disk is spent or seen, so on disk the data can falsify rivals but credit none. Items 1 - 5 freeze
-when the reduced power check of sec. 5.3 has run, its demotions are written in, and the review has answered "What
-should block the freeze" (end of file). No engine was run for this case, on any pot. The changelog is at the end.
+**FROZEN (items 1 - 5), 2026-11-06: development grade on disk.**
 
-**Independent premortem (2026-11-06): "freeze after fixes".** All ten fixes are applied in this revision; still not
-frozen. Every falsification is now a posterior-predictive p after Holm (sec. 4.0). Sec. 4.5 declares the S3
+**Freeze commit:** the commit on `m5-case-ready` that adds this header. A commit cannot carry its own sha, so the sha is
+recorded in PR #95's body. The content is that of `38cd7f61` plus this freeze edit.
+
+**Falsifications recorded** (spent data, falsify-only):
+- R0's "no buffer term" at pH 5 - 7, at 25 C (Bell) and 90 C (Davidek);
+- "lipid inert", in both directions;
+- partition alone;
+- R4 as written;
+- R8 pure;
+- R2 with K <= 0.3 M.
+
+**Credits none. Deciders: W6**, sized by the power check (sec. 5.3 - 5.4) as minimum designed experiments:
+- B: 10 conditions x 4 readouts, n = 3 reactions at CV <= 8 % = 30;
+- F: 6 arms, each phase read, n = 3 = 18 cooks;
+- W: >= 3 moistures x n = 3 = 9 cooks.
+
+These sizes are upper bounds, because the mini-models' rival structures are exact.
+
+**Item 5 tolerances follow sec. 7 item 5 as revised** (branch `judge-revision`, commit 455d8396; adoption pending its
+confirmation). Before any scoring, the case's measurement model (sec. 4.0) and the power check are re-checked under
+the adopted text. **No decisive data is read before then.**
+
+Items 6 - 9 are appended later and never edited into this part. No engine was run for this case, on any pot. The
+changelog is at the end.
+
+**Independent premortem (2026-11-06): "freeze after fixes".** All ten fixes are applied. Every falsification is now a posterior-predictive p after Holm (sec. 4.0). Sec. 4.5 declares the S3
 consequences for shipped outputs. **The late-November slot is scoped to the power check (sec. 5.3) and the S3
 consequence computation (sec. 4.5).** The two-phase and O2-per-phase network builds wait until a decider exists.
 
@@ -23,10 +44,10 @@ The reduced power check is **built and run** (sec. 5.3; record
 - **F:** 18 cooks;
 - **W:** 9 cooks for the basis question, 30 for the solubility cap.
 
-**Still not frozen:** the M1.1 measurement-model revision (judge calibration, in progress) must be checked against
-this case, and the power check re-run under it, before anything freezes.
+**Frozen with one condition (header):** the revised sec. 7 item 5 (branch `judge-revision`, 455d8396) is applied to the
+measurement model and the power check before any scoring; no decisive data is read before then.
 
-**Independent confirmation (2026-11-06): "CONFIRMED WITH EDITS".** All edits are applied; still not frozen. The
+**Independent confirmation (2026-11-06): "CONFIRMED WITH EDITS".** All edits are applied. The
 largest change is to the noise model. Replicate means now carry their SE with a studentized reference (sec. 4.0), and
 under it **the claim's own linear form R1 survives only narrowly** (Holm 0.07 - 0.17, falsified under pooled
 variance). Ruling 1 since decided its status: carried, fragile.
@@ -90,7 +111,7 @@ Three conditions that every lab constant carries silently, each turned into a te
 | part | step(s) | today (B60, read from the code) | M5 |
 |---|---|---|---|
 | B. buffer catalysis | Amadori decay (`k_ama_*`, `r_arp_*`, the Cys-Amadori steps if M1's C1 ships), the 2,3-enolisation branch, `r_schiff` (lumped), TTCA formation (CF-011) | no buffer term anywhere: the buffer is a titrant in the charge balance only ([ph_state.py](../../../src/kinetic_core/ph_state.py)); every constant carries its calibration pot's phosphate (Hofmann 0.5 M, Martins 0.1 M, Cao 0.2 M) | k_s = k_s,u (1 + sum_b kappa_{s,b} c_b) on steps the network resolves, **kappa by step and by buffer species** (H2PO4- vs HPO4 2-, carboxylate); a hyperbolic factor on a lumped step whose uncatalysed part can limit; carboxylates and free-sugar steps on their own bands (ENGINE_VS_LITERATURE sec. 7) |
-| F. fat | MFT, FFT (and their disulfides), Cys and H2S against the lipid lane's carbonyls and the oil phase | lanes integrate as a direct sum (`lipid.lane_coupling_verdict`, [lipid.py](../../../src/kinetic_core/lipid.py) ~784 - 830); no oil phase, no thiol partition anywhere in `src/`; the lipid lane's aldehyde-protein `COVALENT_SINK` is disabled by its measured Ea ([parameters_lipid.py](../../../src/kinetic_core/parameters_lipid.py) ~551 - 589); the lane charges a lipid carrier as 100 % of the pot (CF-130, pending on PR #88) | the plan's oil-water partition of the thiols, against the rivals the register names: lipid-electrophile capture of the MFT pool (CF-031), oil-phase oxidation (M0 group G9), and both |
+| F. fat | MFT, FFT (and their disulfides), Cys and H2S against the lipid lane's carbonyls and the oil phase | lanes integrate as a direct sum (`lipid.lane_coupling_verdict`, [lipid.py](../../../src/kinetic_core/lipid.py) ~784 - 830); no oil phase, no thiol partition anywhere in `src/`; the lipid lane's aldehyde-protein `COVALENT_SINK` is disabled by its measured Ea ([parameters_lipid.py](../../../src/kinetic_core/parameters_lipid.py) ~551 - 589); the lane charges a lipid carrier as 100 % of the pot (CF-130, merged with PR #88) | the plan's oil-water partition of the thiols, against the rivals the register names: lipid-electrophile capture of the MFT pool (CF-031), oil-phase oxidation (M0 group G9), and both |
 | W. water activity | `k_schiff` (trunk), the sulfur lane's steps | trunk: Pereyra Gonzales's multiplier table on `k_schiff` only (`AW_STEPS`, [trunk_conditions.py](../../../src/kinetic_core/trunk_conditions.py) ~60 - 100), **inside the window a_w 0.33 - 1.00** (PR #77): a comparison with an arm below 0.33 is refused, a single pot below it is answered with the multiplier held at the 0.33 value and a glass warning; acrylamide: a flat band (CF-104); sulfur, lipid and pyrazine observables refuse every a_w comparison (`engine.axis_refusal`) | B54's design: concentration per whole phase, the trunk table re-derived as a residual, a Gordon-Taylor Tg gate; a step-specific term in the sulfur lane only where a sign contrast demands it |
 
 **Earlier waves on these structures** (cited, none re-run):
@@ -108,7 +129,7 @@ Three conditions that every lab constant carries silently, each turned into a te
 | lipid x sulfur | CF-031 cluster 4 (2026-11-01) | a partition operator explains at most 0.1 - 0.4 dex of the 0.5 - 2.2 dex falls (P 0.55) | arithmetic |
 | lipid x sulfur | resolve2_sulfur (CF-031) | the pre-registered speciation rule FAILED; partition not excluded | arithmetic |
 | aldehyde-protein covalent sink | B8 / K6b | disabled by a measured Ea (15 - 23 kJ/mol) | measured constant |
-| lipid matrix pots | M0 integrity batch 1 (MF-42), filed as CF-129 / CF-130 on PR #88 | carrier charged undiluted (Trikusuma x10.4 too much fat; Li SPI 0.258 w/w); Bi 2020's roasted hexanal is a net 3.9x loss of a carried level, now refused | integrity |
+| lipid matrix pots | M0 integrity batch 1 (MF-42), filed as CF-129 / CF-130 (PR #88, merged) | carrier charged undiluted (Trikusuma x10.4 too much fat; Li SPI 0.258 w/w); Bi 2020's roasted hexanal is a net 3.9x loss of a carried level, now refused | integrity |
 
 **Errors stack (CF-107).** No whole-model fit has ever tested a buffer, fat or a_w term, so no refusal needs
 discounting. The converse risk is real: every sulfur constant was fitted in 0.5 M phosphate, so adding part B
@@ -184,7 +205,7 @@ The *spent* column says why a datum cannot credit a rival (sec. 2.10 has the rul
 | Farmer 1990 (F25#14) | four lipids: FFT x0.62 - 0.72, furfural x0.49 - 0.80 | FFT side | DEV | CF-031 |
 | Du 2025 (F30#7) | GSH + glucose 200 / 200 mM, 145 C, +- 10 mM free C18 acids: MFT +19 - 30 % | the small opposite sign (CF-031) | DEV(E7) | CF-031 |
 | Xu 2011 (F30#5, F28#20) | fresh / oxidised lard: MFT x1/21 / x1/143, FFT x1/3 / x1/6.4 | oxidation dose | item 7 only (E12 TEST) | -- |
-| Trikusuma 2020, Li 2026, Bi 2020 (MF-42; CF-129, CF-130 on PR #88) | matrix lipid-aldehyde rows: carriers 3 % w/w PPI at 8 % fat (Trikusuma) and SPI 0.258 w/w (Li) are charged as 100 % of the pot; Bi's roasted hexanal is a net 3.9x loss of the raw level | the oil volume and the carbonyl load in food pots (F); no thiol measured | DEV | MF-42 (CK-05) |
+| Trikusuma 2020, Li 2026, Bi 2020 (MF-42; CF-129, CF-130, PR #88 merged) | matrix lipid-aldehyde rows: carriers 3 % w/w PPI at 8 % fat (Trikusuma) and SPI 0.258 w/w (Li) are charged as 100 % of the pot; Bi's roasted hexanal is a net 3.9x loss of the raw level | the oil volume and the carbonyl load in food pots (F); no thiol measured | DEV | MF-42 (CK-05) |
 | Hofmann 1998 Table 2 dry arm (F25#11 - #12, F23#18) | dry 180 C / 6 min vs aqueous 145 C / 20 min: ribose FFT x8.0, glucose and rhamnose FFT x0.50; MFT x1.3 / 2.2 / 3.9 | **a_w sign contrast across sugars** (D8); T, t, buffer confounded but shared by the sugars | DEV | atlas F25 |
 | US 10,076,126 (F25#13) | glycerol vs buffer, 110 C: FFT up to x56 | a low-water solvent on FFT | DEV | atlas F25; its MFT shape is a B59b hold-out |
 | Granvogl 2006 (F16#8) | silica, 10 % water: Leu / Ile aldehyde x2 - 3; Strecker amine 19 - 27 % | a low-water exit (M3) | DEV | atlas F16 |
@@ -628,6 +649,10 @@ network builds (sec. 6) are **deferred until a decider exists** (a candidate rea
 
 ### 5.1 Tolerances from the data
 
+**Item 5 as revised.** These tolerances follow sec. 7 item 5 as revised (branch `judge-revision`, commit 455d8396;
+adoption pending its confirmation). Before any scoring, the case's measurement model (sec. 4.0) and this power check
+are re-checked under the adopted text. No decisive data is read before then.
+
 | comparison | noise as the source states it | where stated |
 |---|---|---|
 | FU-B1 Davidek 2002 | "All samples analyzed in duplicate", no error bars; CV < 10 % above 1.5 mmol/L (analytical); one reaction run per cell, so the run-to-run CV is not printed. It is **sourced from Zyzak's same-class replicate reactions (Amadori decay): ~6 %, range 2 - 12 %**, with 20 % as a sensitivity. The method band (min-max of the dossier's fitting methods (a) - (c)) is reported beside it. Breakpoints: pH 7 falsified for CV <= ~20.5 %; pH 8 falsified only for CV <= ~8 % | davidek2002 dossier secs. 4.3 - 4.4 |
@@ -716,6 +741,16 @@ The spec as written:
 
 ### 5.4 P(the decisive data separate the rivals)
 
+**The minimum designed experiments (W6), frozen.** Sizes are from the power check, as upper bounds (the rivals'
+structures are exact in the mini-models).
+
+| part | design | P(separated) | every-arm-necessary variants | type I (truth falsified), worst cell |
+|---|---|---|---|---|
+| B | 10 conditions (phosphate inert zero / 5 mM / 50 mM / 0.2 M / 0.5 M x pH 5.5, 7.0) x 4 readouts (Amadori formation, decay, 2,3-enolisation, furfural branch), n = 3 reactions at run-to-run CV <= 8 % = **30 reactions** (60 at CV 15 %) | >= 0.96, every pair | no 0.5 M: R1 vs R2c 0.25 / 0.56; no 5 mM and no inert zero: R7 vs R1 0.00; one pH: species vs total 0.00; no furfural readout: R1 vs R4' 0.00 | 0.04 (full, CV 8 %); <= 0.12 in the variants |
+| F | 6 arms (buffer; fresh oil under air and N2; enal without oil; PV-spiked oil under N2; enal in oil under N2), each phase read (free + disulfide MFT, FFT), n = 3 = **18 cooks** | >= 0.88 (>= 0.75 at CV 25 %) | arm (a) alone: R2 / R3 / R6 not separated (0.00 - 0.25), and R2's own type I 0.44 - 0.69 (ill-posed); arms (a) + (b): >= 0.81 at n = 3 | <= 0.12 (CV 15 %), <= 0.19 (25 %) |
+| W | >= 3 moistures (10 - 70 % wb) x n = 3 = **9 cooks** at CV <= 20 % (n = 4 at 30 %); 5 x 6 = 30 cooks for the solubility cap | basis and wet-end slowdown >= 0.89; cap 0.82 - 0.94 | 3 vs 5 moistures: within 0.05 on the basis rows, 0.05 - 0.1 lower on the cap | <= 0.06 |
+
+
 The on-disk columns are calibrated by judgement. The designed-decider column comes from the power check (sec. 5.3). It
 is an upper bound: the mini-models' rival structures are exact, and real data are misspecified.
 
@@ -779,7 +814,7 @@ the buffer switch of sec. 4.5 is built now, in the NumPy engine.
    cannot run without them.
 9. **"Roos" in the plan row** means Lievonen & Roos 2002 and Miao & Roos 2004 (on disk); neither gives a step rate.
 
-## What should block the freeze (for the review and the coordinator)
+## Freeze record: what blocked the freeze, and how each was settled (frozen 2026-11-06)
 
 1. **The reduced power check (sec. 5.3): BUILT AND RUN** (record `results/validation/m5_power_check.md`). Its
    demotions are written into sec. 5.4. The freeze still waits on the M1.1 re-check (blocker 5).
@@ -791,7 +826,7 @@ the buffer switch of sec. 4.5 is built now, in the NumPy engine.
    Not a blocker any more.
 3. **How a refusing R0 is scored: DECIDED** (coordinator ruling 2, consistent with sec. 7 S3). Where R0 refuses, it is
    not a rival on that unit; the other rivals are scored there.
-4. **PR #88 (CF-129, CF-130) and PR #96 (S1 - S4) are not merged.** This case cites them as pending. Sec. 4.5 depends
+4. **PR #88 (CF-129, CF-130) is merged. PR #96 (S1 - S4) is not.** Sec. 4.5 depends
    on S3 / S4. Sec. 2.11's load rule depends on CF-130.
 5. **R1's fragility: RULED** (coordinator ruling 1). R1 is NOT falsified, because the forms disagree: form P 0.163 vs
    form Q 0.010. It is carried, marked fragile, with both p values printed.
@@ -937,3 +972,21 @@ The edits:
   - B: 30 reactions at CV <= 8 %, 60 at 15 %; every arm load-bearing;
   - F: 18 cooks, P >= 0.88; arm (a) alone insufficient;
   - W: 9 cooks for the basis and the wet-end slowdown, 30 for the solubility cap.
+
+### Changelog: 2026-11-06, FROZEN (items 1 - 5), development grade on disk
+
+- **Frozen** (coordinator, 2026-11-06). The freeze commit's sha is recorded in PR #95's body, because a commit cannot
+  carry its own. The content is `38cd7f61` plus this edit.
+- The header records:
+  - the falsifications;
+  - "credits none";
+  - deciders W6;
+  - the minimum designed experiments (B 30 reactions, F 18 cooks, W 9 cooks).
+- Sec. 5.4 gains the frozen design table, with the every-arm-necessary variants and the type I rates, stated as upper
+  bounds.
+- **Item 5 clause added** (header and sec. 5.1):
+  - tolerances follow sec. 7 item 5 as revised (branch `judge-revision`, 455d8396; adoption pending its confirmation);
+  - the measurement model and the power check are re-checked under the adopted text before any scoring;
+  - no decisive data is read before then.
+- PR #88 is recorded as merged (CF-129 / CF-130 on main). PR #96 (S1 - S4) is still pending.
+- The proposed decisive-measurements entries, with the minimum designs, are in PR #95's body for that record's writer.
