@@ -207,6 +207,7 @@ def build(cfg=None) -> Module:
         stoichiometry=stoich, reactants=reactants, params=params, bands=bands, basis=basis,
         rate_constants=rate_constants, observables=observables, requires=(), needs_ph=False,
         config_digest=values["digest"],
+        breakpoints={"t_c": (window,)} if brk.enabled else {},     # k_brk jumps from 0 at the window (a jump)
         notes=(f"breakage={'on' if brk.enabled else 'off'} (window {window:g} C)",
                f"composition={ {k: round(float(v), 6) for k, v in weights.items()} }",
                "covalent sink off (required)"))
