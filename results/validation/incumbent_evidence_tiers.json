@@ -4,8 +4,8 @@
   "artifact": "incumbent_evidence_tiers",
   "generated_on": "2026-11-06",
   "git": {
-   "commit": "9a67a098e0c934f52c87c85451fea945b2932565",
-   "short": "9a67a098",
+   "commit": "edaeef4f4a5ebeaeb93b89ab6ec62aa032cf030d",
+   "short": "edaeef4f",
    "branch": "s1-tier-gate",
    "dirty": true
   },
